@@ -1,4 +1,4 @@
-"""Zero-shot count/event-time stress adapter for frozen G5 checkpoints.
+"""Beyond-declared-count stress adapter for frozen G5 checkpoints.
 
 This module changes only the open-roster membership profile.  Generic-SHORT
 waves, reward, observations, primitive actions and the G5 count feature remain
@@ -30,32 +30,38 @@ from ha_ctse_process.open_roster_direct_mvp import (
 )
 
 
-COUNT_SCALE_CAPACITY = 20
-EVENT_TIME_CAPACITY = 12
-JOINT_CAPACITY = 20
+MODERATE_BEYOND_CAPACITY = 32
+FAR_BEYOND_CAPACITY = 48
+JOINT_CAPACITY = 48
+MAXIMUM_ACTIVE_COUNT = 40
 
 
 @dataclass(frozen=True)
-class ZeroShotStressProfile:
+class BeyondCountProfile:
     name: str
     phase_counts: tuple[int, int, int, int]
     membership_event_times: tuple[int, int, int]
 
     def validate(self, *, capacity: int) -> None:
         if len(self.phase_counts) != 4:
-            raise ValueError("G6 stress profile requires four phase counts")
+            raise ValueError("G7 stress profile requires four phase counts")
         initial, reduced, expanded, final = self.phase_counts
         if not (2 <= reduced < initial < expanded <= int(capacity)):
-            raise ValueError("G6 stress profile must reduce then expand")
+            raise ValueError("G7 stress profile must reduce then expand")
         if not (2 <= final < expanded):
-            raise ValueError("G6 final phase must be a nonempty reduction")
-        if expanded > OPEN_ROSTER_COUNT_LIMIT:
-            raise ValueError("G6 profile exceeds the frozen count-feature limit")
+            raise ValueError("G7 final phase must be a nonempty reduction")
+        if expanded > MAXIMUM_ACTIVE_COUNT:
+            raise ValueError("G7 profile exceeds the registered active-count range")
+        count_features = np.log1p(np.asarray(self.phase_counts, dtype=np.float64)) / np.log1p(
+            OPEN_ROSTER_COUNT_LIMIT
+        )
+        if not np.all(np.isfinite(count_features)):
+            raise ValueError("G7 profile count feature is non-finite")
         if len(self.membership_event_times) != 3:
-            raise ValueError("G6 stress profile requires three membership events")
+            raise ValueError("G7 stress profile requires three membership events")
         temporary, expansion, terminal = self.membership_event_times
         if not (0 < temporary < expansion < terminal < HORIZON):
-            raise ValueError("G6 membership event times are invalid")
+            raise ValueError("G7 membership event times are invalid")
 
     def active_count_at(self, time: int) -> int:
         temporary, expansion, terminal = self.membership_event_times
@@ -68,23 +74,22 @@ class ZeroShotStressProfile:
         return self.phase_counts[3]
 
 
-COUNT_SCALE_PROFILES = (
-    ZeroShotStressProfile("count_scale_8_4_12_6", (8, 4, 12, 6), (20, 40, 60)),
-    ZeroShotStressProfile("count_scale_10_6_14_8", (10, 6, 14, 8), (20, 40, 60)),
-    ZeroShotStressProfile("count_scale_12_8_16_10", (12, 8, 16, 10), (20, 40, 60)),
+MODERATE_BEYOND_PROFILES = (
+    BeyondCountProfile("moderate_beyond_14_8_20_12", (14, 8, 20, 12), (20, 40, 60)),
+    BeyondCountProfile("moderate_beyond_16_10_24_14", (16, 10, 24, 14), (20, 40, 60)),
 )
-EVENT_TIME_PROFILES = (
-    ZeroShotStressProfile("event_time_6_2_8_4_t15_38_58", (6, 2, 8, 4), (15, 38, 58)),
-    ZeroShotStressProfile("event_time_7_4_9_6_t18_46_62", (7, 4, 9, 6), (18, 46, 62)),
+FAR_BEYOND_PROFILES = (
+    BeyondCountProfile("far_beyond_18_10_28_16", (18, 10, 28, 16), (20, 40, 60)),
+    BeyondCountProfile("far_beyond_24_12_40_20", (24, 12, 40, 20), (20, 40, 60)),
 )
 JOINT_PROFILES = (
-    ZeroShotStressProfile("joint_8_4_12_6_t15_38_58", (8, 4, 12, 6), (15, 38, 58)),
-    ZeroShotStressProfile("joint_10_6_14_8_t18_46_62", (10, 6, 14, 8), (18, 46, 62)),
-    ZeroShotStressProfile("joint_12_8_16_10_t21_45_70", (12, 8, 16, 10), (21, 45, 70)),
+    BeyondCountProfile("joint_14_8_20_12_t15_38_58", (14, 8, 20, 12), (15, 38, 58)),
+    BeyondCountProfile("joint_18_10_28_16_t18_46_62", (18, 10, 28, 16), (18, 46, 62)),
+    BeyondCountProfile("joint_24_12_40_20_t21_45_70", (24, 12, 40, 20), (21, 45, 70)),
 )
 DOMAIN_PROFILES = {
-    "count_scale": COUNT_SCALE_PROFILES,
-    "event_time": EVENT_TIME_PROFILES,
+    "moderate_beyond": MODERATE_BEYOND_PROFILES,
+    "far_beyond": FAR_BEYOND_PROFILES,
     "joint": JOINT_PROFILES,
 }
 
@@ -96,12 +101,12 @@ def _rng(master_seed: int, episode_id: int, stream: int) -> np.random.Generator:
 
 
 @dataclass(frozen=True)
-class ZeroShotStressLedger:
+class BeyondCountLedger:
     """Duck-compatible direct-policy ledger with profile-owned event times."""
 
     episode_id: int
     master_seed: int
-    profile: ZeroShotStressProfile
+    profile: BeyondCountProfile
     capacity: int
     temporary_leave: tuple[int, ...]
     genuine_join: tuple[int, ...]
@@ -126,20 +131,20 @@ class ZeroShotStressLedger:
         self.profile.validate(capacity=int(self.capacity))
         initial, reduced, expanded, final = self.profile.phase_counts
         if self.temporary_leave != tuple(range(reduced, initial)):
-            raise ValueError("G6 temporary-leave set mismatch")
+            raise ValueError("G7 temporary-leave set mismatch")
         if self.genuine_join != tuple(range(initial, expanded)):
-            raise ValueError("G6 genuine-join set mismatch")
+            raise ValueError("G7 genuine-join set mismatch")
         if (
             len(self.terminal_leave) != expanded - final
             or len(set(self.terminal_leave)) != len(self.terminal_leave)
             or not set(self.terminal_leave).issubset(set(range(expanded)))
         ):
-            raise ValueError("G6 terminal-leave set mismatch")
+            raise ValueError("G7 terminal-leave set mismatch")
         if len(self.wave_arrivals) != len(WAVE_CANDIDATES) or any(
             int(value) not in candidates
             for value, candidates in zip(self.wave_arrivals, WAVE_CANDIDATES)
         ):
-            raise ValueError("G6 wave arrival lies outside its frozen window")
+            raise ValueError("G7 wave arrival lies outside its frozen window")
         shape = (HORIZON, int(self.capacity))
         for name in (
             "owner_priorities",
@@ -148,24 +153,24 @@ class ZeroShotStressLedger:
         ):
             values = np.asarray(getattr(self, name))
             if values.shape != shape or not np.all(np.isfinite(values)):
-                raise ValueError(f"G6 {name} is invalid")
+                raise ValueError(f"G7 {name} is invalid")
         expected = sum(
             self.profile.active_count_at(arrival) - 1
             for arrival in self.wave_arrivals
         )
         if self.expected_short_requirement != expected or expected <= 0:
-            raise ValueError("G6 actual-wave short requirement is invalid")
+            raise ValueError("G7 actual-wave short requirement is invalid")
 
 
-def make_stress_ledger(
+def make_beyond_count_ledger(
     episode_id: int,
     *,
     master_seed: int,
-    profiles: tuple[ZeroShotStressProfile, ...],
+    profiles: tuple[BeyondCountProfile, ...],
     capacity: int,
-) -> ZeroShotStressLedger:
+) -> BeyondCountLedger:
     if not profiles:
-        raise ValueError("G6 ledger requires at least one profile")
+        raise ValueError("G7 ledger requires at least one profile")
     profile = profiles[int(episode_id) % len(profiles)]
     profile.validate(capacity=int(capacity))
     initial, reduced, expanded, final = profile.phase_counts
@@ -174,7 +179,7 @@ def make_stress_ledger(
     owner_rng = _rng(master_seed, episode_id, 2)
     presentation_rng = _rng(master_seed, episode_id, 3)
     frontier_rng = _rng(master_seed, episode_id, 4)
-    ledger = ZeroShotStressLedger(
+    ledger = BeyondCountLedger(
         episode_id=int(episode_id),
         master_seed=int(master_seed),
         profile=profile,
@@ -201,32 +206,32 @@ def make_stress_ledger(
     return ledger
 
 
-def make_count_scale_ledger(
-    episode_id: int, *, master_seed: int = 1_061_000
-) -> ZeroShotStressLedger:
-    return make_stress_ledger(
+def make_moderate_beyond_ledger(
+    episode_id: int, *, master_seed: int = 1_071_000
+) -> BeyondCountLedger:
+    return make_beyond_count_ledger(
         episode_id,
         master_seed=master_seed,
-        profiles=COUNT_SCALE_PROFILES,
-        capacity=COUNT_SCALE_CAPACITY,
+        profiles=MODERATE_BEYOND_PROFILES,
+        capacity=MODERATE_BEYOND_CAPACITY,
     )
 
 
-def make_event_time_ledger(
-    episode_id: int, *, master_seed: int = 1_061_100
-) -> ZeroShotStressLedger:
-    return make_stress_ledger(
+def make_far_beyond_ledger(
+    episode_id: int, *, master_seed: int = 1_071_100
+) -> BeyondCountLedger:
+    return make_beyond_count_ledger(
         episode_id,
         master_seed=master_seed,
-        profiles=EVENT_TIME_PROFILES,
-        capacity=EVENT_TIME_CAPACITY,
+        profiles=FAR_BEYOND_PROFILES,
+        capacity=FAR_BEYOND_CAPACITY,
     )
 
 
 def make_joint_ledger(
-    episode_id: int, *, master_seed: int = 1_061_200
-) -> ZeroShotStressLedger:
-    return make_stress_ledger(
+    episode_id: int, *, master_seed: int = 1_071_200
+) -> BeyondCountLedger:
+    return make_beyond_count_ledger(
         episode_id,
         master_seed=master_seed,
         profiles=JOINT_PROFILES,
@@ -234,19 +239,19 @@ def make_joint_ledger(
     )
 
 
-LEDGER_FACTORIES: dict[str, Callable[..., ZeroShotStressLedger]] = {
-    "count_scale": make_count_scale_ledger,
-    "event_time": make_event_time_ledger,
+LEDGER_FACTORIES: dict[str, Callable[..., BeyondCountLedger]] = {
+    "moderate_beyond": make_moderate_beyond_ledger,
+    "far_beyond": make_far_beyond_ledger,
     "joint": make_joint_ledger,
 }
 
 
-class ZeroShotStressEnv(OpenRosterDynamicEnv):
+class BeyondCountEnv(OpenRosterDynamicEnv):
     """G5 Generic-SHORT environment with profile-owned membership times."""
 
-    ledger: ZeroShotStressLedger
+    ledger: BeyondCountLedger
 
-    def __init__(self, ledger: ZeroShotStressLedger):
+    def __init__(self, ledger: BeyondCountLedger):
         ledger.validate()
         self.ledger = ledger
         self.lifecycles = {
@@ -280,7 +285,7 @@ class ZeroShotStressEnv(OpenRosterDynamicEnv):
             for key in joined:
                 state = self.lifecycles[key]
                 if state.status != NOT_JOINED:
-                    raise RuntimeError("G6 initial join attempted lifecycle reuse")
+                    raise RuntimeError("G7 initial join attempted lifecycle reuse")
                 state.status = ACTIVE
                 state.previous_action = IDLE
                 state.active_steps = 0
@@ -289,7 +294,7 @@ class ZeroShotStressEnv(OpenRosterDynamicEnv):
             for key in temporarily_left:
                 state = self.lifecycles[key]
                 if state.status != ACTIVE:
-                    raise RuntimeError("G6 temporary leave selected inactive lifecycle")
+                    raise RuntimeError("G7 temporary leave selected inactive lifecycle")
                 state.status = TEMPORARILY_ABSENT
                 state.short_streak = 0
                 state.contributed_current_wave = False
@@ -301,13 +306,13 @@ class ZeroShotStressEnv(OpenRosterDynamicEnv):
             for key in rejoined:
                 state = self.lifecycles[key]
                 if state.status != TEMPORARILY_ABSENT:
-                    raise RuntimeError("G6 rejoin selected non-absent lifecycle")
+                    raise RuntimeError("G7 rejoin selected non-absent lifecycle")
                 state.status = ACTIVE
                 state.membership_epoch += 1
             for key in joined:
                 state = self.lifecycles[key]
                 if state.status != NOT_JOINED:
-                    raise RuntimeError("G6 genuine join attempted lifecycle reuse")
+                    raise RuntimeError("G7 genuine join attempted lifecycle reuse")
                 state.status = ACTIVE
                 state.previous_action = IDLE
                 state.active_steps = 0
@@ -316,7 +321,7 @@ class ZeroShotStressEnv(OpenRosterDynamicEnv):
             for key in terminally_left:
                 state = self.lifecycles[key]
                 if state.status != ACTIVE:
-                    raise RuntimeError("G6 terminal leave selected inactive lifecycle")
+                    raise RuntimeError("G7 terminal leave selected inactive lifecycle")
                 state.status = TERMINAL
                 state.short_streak = 0
                 state.contributed_current_wave = False
@@ -330,11 +335,11 @@ class ZeroShotStressEnv(OpenRosterDynamicEnv):
         )
 
 
-def stress_lifecycle_contract_valid(
+def beyond_count_lifecycle_contract_valid(
     trajectory: DirectTrajectory,
     *,
     ledger_seed: int,
-    ledger_factory: Callable[..., ZeroShotStressLedger],
+    ledger_factory: Callable[..., BeyondCountLedger],
 ) -> bool:
     """Check freeze/restore, zero-join and permanent terminal removal."""
 
@@ -374,5 +379,5 @@ def stress_lifecycle_contract_valid(
     return True
 
 
-def profile_names(ledgers: Iterable[ZeroShotStressLedger]) -> tuple[str, ...]:
+def profile_names(ledgers: Iterable[BeyondCountLedger]) -> tuple[str, ...]:
     return tuple(ledger.profile.name for ledger in ledgers)

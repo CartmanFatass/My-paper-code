@@ -1,85 +1,70 @@
-# Open-roster zero-shot scale G6 implementation plan
+# Beyond-declared-count G7 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
-> Generic Superpowers execution, compatibility work and workflow hash handoffs
-> are disabled.
+> Generic Superpowers execution, compatibility work and workflow hashes are
+> disabled.
 
 ```text
-active_implementation=OPEN_ROSTER_ZERO_SHOT_SCALE_G6
-implementation_status=FORMAL_COMPLETE_CLOSED_SUCCESS
-design=docs/research/designs/OPEN_ROSTER_ZERO_SHOT_SCALE_G6.md
+active_implementation=BEYOND_DECLARED_COUNT_G7
+implementation_status=PM_ACCEPTED_FORMAL_READY
+design=docs/research/designs/BEYOND_DECLARED_COUNT_G7.md
 backend=cpu
 torch_threads=1
 training_operation=none_frozen_g5_checkpoint_import
-asynchronous_skill_lifetime=frozen
-formal_iteration=7
-chain_iterations_remaining_after_run=10
+active_line_policy=replace_archived_g6_runner_with_g7
+formal_iteration=8
+chain_iterations_remaining_before_run=10
 ```
 
 ## Goal
 
-Measure the zero-shot boundary of the successful G5 checkpoint before changing
-the algorithm. Separate far-count transport, unseen membership-event-time
-transport and their joint composition. Preserve all G5 scientific and result
-semantics.
+Measure the frozen G5 checkpoint beyond its declared N=16 observation range
+before introducing any scale-free algorithm repair. Separate moderate, far and
+joint scale failure.
 
-## Task 1 - Add an evaluation-only stress ledger
+## Task 1 - Replace the closed G6 active runner
 
-Create a new ledger/environment adapter with profile-owned membership times and
-capacities through 20, while active count remains at most 16. Reuse the exact
-G5 count feature, horizon, wave windows, observations, actions, lifecycle and
-utility. Expected demand follows actual wave arrival membership.
+Git history and the G6 source commit archive its exact implementation. Remove
+the G6-specific module, runner and test from the active line and replace them
+with G7 equivalents. Reuse the direct evaluator and Generic-SHORT core; do not
+add compatibility imports or readers.
 
-Focused proof: every profile validates, exact roster traces occur, constructive
-utility is one, configured lifecycle transitions preserve hidden-state
-ownership, and extra inactive padding cannot change active outputs.
+Focused proof: no G6 code path remains active, G5 source files are unchanged,
+and the new profile validator admits exactly the registered range through 40
+without modifying the inherited count feature.
 
-## Task 2 - Add zero-training checkpoint intake
+## Task 2 - Preserve zero-training provenance
 
-The runner's ordered `train` phase creates a fresh G6 root, validates the exact
-closed G5 manifests/checkpoints and materializes only the three final models.
-It records zero optimizer steps and never calls an update. Any source, branch,
-runtime, count, checkpoint or authorization mismatch fails closed.
+Carry forward the repaired exact G5 intake: source, formal authorization token,
+result, runtime, counts, manifest seeds, checkpoint-embedded RNG constants and
+strict final loads. Materialize three finals into a fresh root and record zero
+optimizer steps.
 
-Focused proof: exact intake succeeds; one-field provenance tampering fails;
-strict load succeeds at update 250; model state is finite and unchanged.
+Focused proof: exact intake succeeds; missing/wrong token and one independent
+source/checkpoint field fail; model state is finite and unchanged.
 
-## Task 3 - Evaluate and analyze
+## Task 3 - Evaluate the three beyond-limit domains
 
-Evaluate 18 cells covering three replicates, three domains and deterministic/
-stochastic action selection. Serialize full episode arrays and profile names.
-The analyzer validates inventory, source controls, runtime, model immutability
-and the registered first-match gates.
+Produce 18 final-checkpoint cells with full 128-episode arrays in formal mode.
+Source controls reconstruct actual-wave demand and lifecycle changes. Analyzer
+validates exact inventory, CPU one-thread runtime, finite domains, model
+immutability and first-match boundaries.
 
-Focused proof: a reduced nonformal full path closes operationally, formal
-analysis rejects nonformal artifacts, exact 0.90 boundaries pass and the next
-representable value below fails.
+Focused proof: constructive controls and padding invariance pass through N=40;
+the reduced full-path exercise is operationally valid but rejected as formal;
+exact thresholds pass and `nextafter` below each threshold fails.
 
 ## Acceptance and launch
 
-Run only the new focused test file plus one bounded nonformal exercise using the
-registered CPU interpreter and one thread. After Project Manager accepts the
-package and integrates it in Git, assign one exact foreground
-`train(import) -> evaluate -> analyze` pipeline to the fixed Luna-low experiment
-operator. A valid result consumes iteration 7 and leaves ten rounds.
+Run the new focused test plus one bounded nonformal exercise. One advisory
+review is permitted only if a conclusion-bearing risk appears. After PM
+acceptance and Git integration, assign one exact formal foreground pipeline to
+the fixed Luna-low operator. A valid result consumes iteration 8 and leaves
+nine rounds.
 
-Acceptance is complete: the G6-specific suite passes `7/7`, the combined G6/G5
-focused suite passes `12/12`, and the post-repair nonformal path at
-`logs/nonformal_open_roster_zero_shot_g6_20260723_pm2` is operationally valid
-with zero optimizer steps and exact model immutability. One advisory review
-found a missing G5 authorization-token provenance check; the repaired intake,
-record, analyzer and two tamper cases were accepted by the same reviewer. The
-package is formal-ready after Git integration.
-
-## Formal disposition
-
-Formal iteration 7 is operationally valid and returns
-`ROBUST_ZERO_SHOT_OPEN_ROSTER_G6`. Count-scale, event-time and joint
-deterministic CI95 lower bounds are respectively `0.9294811`, `0.9854642` and
-`0.9358802`; the minimum joint replicate is `0.9358802` and joint stochastic
-mean is `0.9501188`. All gates pass with zero optimizer exposure and exact model
-immutability.
-
-G6 is closed. The next active boundary is a zero-compute derivation for frozen-
-checkpoint transport beyond the declared N=16 count-feature limit. Ten
-conclusion-bearing iterations remain.
+Acceptance is complete. The G7-specific suite passes `7/7`, the combined G7/G5
+suite passes `12/12`, and the nonformal full path at
+`logs/nonformal_open_roster_beyond_count_g7_20260723_g7impl_r1` is operationally
+valid with zero optimizer steps, exact model immutability and finite count
+features through N=40. Old G6 active files are absent and G7 replacements are
+present. The package is formal-ready after Git integration.

@@ -1,4 +1,4 @@
-"""Import, evaluate and analyze frozen G5 checkpoints under G6 stress."""
+"""Import, evaluate and analyze frozen G5 checkpoints beyond declared count."""
 
 from __future__ import annotations
 
@@ -41,19 +41,16 @@ from ha_ctse_process.dynamic_roster_testbed import (
     TERMINAL,
     constructive_actions,
 )
-from ha_ctse_process.open_roster_zero_shot_g6 import (
-    COUNT_SCALE_PROFILES,
+from ha_ctse_process.open_roster_beyond_count_g7 import (
     DOMAIN_PROFILES,
-    EVENT_TIME_PROFILES,
-    JOINT_PROFILES,
     LEDGER_FACTORIES,
-    ZeroShotStressEnv,
+    BeyondCountEnv,
 )
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "OPEN_ROSTER_ZERO_SHOT_SCALE_G6"
-AUTHORIZATION_TOKEN = "AUTHORIZE_OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_CPU_V1"
+ALGORITHM_ID = "BEYOND_DECLARED_COUNT_G7"
+AUTHORIZATION_TOKEN = "AUTHORIZE_BEYOND_DECLARED_COUNT_G7_FORMAL_CPU_V1"
 G5_ALGORITHM_ID = "OPEN_ROSTER_DIRECT_MVP_G5"
 G5_SOURCE_COMMIT = "4b38eae5abbaeccbab6d53e3eb8f50bd28b957a9"
 G5_BRANCH = "USABLE_OPEN_ROSTER_DIRECT_G5"
@@ -68,18 +65,18 @@ FORMAL_EVAL_EPISODES = 128
 FORMAL_BOOTSTRAP_REPETITIONS = 10_000
 EXERCISE_EVAL_EPISODES = 4
 EXERCISE_BOOTSTRAP_REPETITIONS = 200
-COUNT_SCALE_LEDGER_SEED = 1_061_000
-EVENT_TIME_LEDGER_SEED = 1_061_100
-JOINT_LEDGER_SEED = 1_061_200
+MODERATE_BEYOND_LEDGER_SEED = 1_071_000
+FAR_BEYOND_LEDGER_SEED = 1_071_100
+JOINT_LEDGER_SEED = 1_071_200
 DOMAIN_LEDGER_SEEDS = {
-    "count_scale": COUNT_SCALE_LEDGER_SEED,
-    "event_time": EVENT_TIME_LEDGER_SEED,
+    "moderate_beyond": MODERATE_BEYOND_LEDGER_SEED,
+    "far_beyond": FAR_BEYOND_LEDGER_SEED,
     "joint": JOINT_LEDGER_SEED,
 }
-ACTION_SEED_BASE = 1_161_000
-BOOTSTRAP_SEED = 1_261_006
-COUNT_SCALE_FLOOR = 0.90
-EVENT_TIME_FLOOR = 0.90
+ACTION_SEED_BASE = 1_171_000
+BOOTSTRAP_SEED = 1_271_007
+MODERATE_BEYOND_FLOOR = 0.90
+FAR_BEYOND_FLOOR = 0.90
 JOINT_FLOOR = 0.90
 MINIMUM_JOINT_REPLICATE_FLOOR = 0.85
 JOINT_STOCHASTIC_MEAN_FLOOR = 0.80
@@ -135,21 +132,27 @@ def _embedded_rng_constants(bundle: dict[str, Any]) -> dict[str, int]:
     }
 
 
-def _strict_load_final_checkpoint(path: Path) -> tuple[dict[str, Any], dict[str, torch.Tensor]]:
+def _strict_load_checkpoint(
+    path: Path, *, expected_updates: int
+) -> tuple[dict[str, Any], dict[str, torch.Tensor]]:
     configure_runtime(MODEL_INITIALIZATION_SEED)
     model = DirectPrimitiveARPolicy()
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
     bundle = load_checkpoint(path, model=model, optimizer=optimizer)
     state = model_state_copy(model)
-    if int(bundle.get("completed_updates", -1)) != G5_COMPLETED_UPDATES:
+    if int(bundle.get("completed_updates", -1)) != int(expected_updates):
         raise ValueError("G5 provenance checkpoint completed_updates mismatch")
     if not state_dict_finite(state):
         raise ValueError("G5 provenance checkpoint model is non-finite")
     return bundle, state
 
 
+def _strict_load_final_checkpoint(path: Path) -> tuple[dict[str, Any], dict[str, torch.Tensor]]:
+    return _strict_load_checkpoint(path, expected_updates=G5_COMPLETED_UPDATES)
+
+
 def _validate_g5_provenance(g5_run_root: Path) -> dict[str, Any]:
-    """Validate the entire closed G5 package before materializing any G6 file."""
+    """Validate the entire closed G5 package before materializing any G7 file."""
 
     try:
         training_path = g5_run_root / "train_manifest.json"
@@ -208,7 +211,17 @@ def _validate_g5_provenance(g5_run_root: Path) -> dict[str, Any]:
             ):
                 raise ValueError(f"replicate {replicate} manifest mismatch")
             source_checkpoint = g5_run_root / Path(expected_relative)
-            bundle, _ = _strict_load_final_checkpoint(source_checkpoint)
+            bundle, final_state = _strict_load_final_checkpoint(source_checkpoint)
+            expected_zero_relative = f"checkpoints\\replicate_{replicate}_zero.pt"
+            if row.get("zero_checkpoint") != expected_zero_relative:
+                raise ValueError(f"replicate {replicate} zero-checkpoint mismatch")
+            _, zero_state = _strict_load_checkpoint(
+                g5_run_root / Path(expected_zero_relative), expected_updates=0
+            )
+            if maximum_state_difference(zero_state, final_state) != row.get(
+                "parameter_drift"
+            ):
+                raise ValueError(f"replicate {replicate} parameter-drift mismatch")
             embedded = _embedded_rng_constants(bundle)
             expected_embedded = {
                 "model_initialization_seed": MODEL_INITIALIZATION_SEED,
@@ -258,22 +271,22 @@ def train(
     """Strictly import frozen G5 finals; this function performs zero training."""
 
     if formal and authorization_token != AUTHORIZATION_TOKEN:
-        raise ValueError("formal G6 authorization token mismatch")
+        raise ValueError("formal G7 authorization token mismatch")
     if not _source_commit_valid(str(source_commit), formal=bool(formal)):
-        raise ValueError("G6 source commit must be valid and distinct from G5 training source")
+        raise ValueError("G7 source commit must be valid and distinct from G5 training source")
     if formal and int(eval_episodes) != FORMAL_EVAL_EPISODES:
-        raise ValueError("formal G6 eval episodes differ from the frozen contract")
+        raise ValueError("formal G7 eval episodes differ from the frozen contract")
     if int(eval_episodes) <= 0:
-        raise ValueError("G6 eval episodes must be positive")
+        raise ValueError("G7 eval episodes must be positive")
     requested_replicates = (
         FORMAL_REPLICATES if formal else 1
     ) if replicate_count is None else int(replicate_count)
     if requested_replicates <= 0 or requested_replicates > FORMAL_REPLICATES:
-        raise ValueError("G6 imported replicate count is invalid")
+        raise ValueError("G7 imported replicate count is invalid")
     if formal and requested_replicates != FORMAL_REPLICATES:
-        raise ValueError("formal G6 requires all three G5 replicates")
+        raise ValueError("formal G7 requires all three G5 replicates")
     if formal and g5_run_root.resolve() != DEFAULT_G5_RUN_ROOT.resolve():
-        raise ValueError("formal G6 requires the exact registered G5 run root")
+        raise ValueError("formal G7 requires the exact registered G5 run root")
 
     provenance = _validate_g5_provenance(g5_run_root)
     run_root.mkdir(parents=True, exist_ok=False)
@@ -288,7 +301,7 @@ def train(
         bundle, state = _strict_load_final_checkpoint(destination)
         source_bundle, _ = _strict_load_final_checkpoint(checked["source_checkpoint"])
         if nested_state_maximum_difference(source_bundle, bundle) != 0.0:
-            raise RuntimeError("G6 checkpoint materialization differs from G5 source")
+            raise RuntimeError("G7 checkpoint materialization differs from G5 source")
         replicate_rows.append(
             {
                 "replicate": replicate,
@@ -366,7 +379,7 @@ def _source_controls() -> dict[str, Any]:
         ledger_seed = DOMAIN_LEDGER_SEEDS[domain]
         for episode_id, profile in enumerate(profiles):
             ledger = factory(episode_id, master_seed=ledger_seed)
-            environment = ZeroShotStressEnv(ledger)
+            environment = BeyondCountEnv(ledger)
             observed_events: dict[int, dict[str, list[int]]] = {}
             lifecycle_states_exact = True
             while environment.time < HORIZON:
@@ -457,6 +470,10 @@ def _source_controls() -> dict[str, Any]:
                     "expected_short_requirement_from_actual_waves": int(
                         expected_requirement
                     ),
+                    "count_features": [
+                        BeyondCountEnv._count_feature(count)
+                        for count in profile.phase_counts
+                    ],
                     "membership_events_exact": bool(events_exact),
                     "lifecycle_states_exact": bool(lifecycle_states_exact),
                     "terminal_lifecycle_destruction_valid": all(
@@ -475,6 +492,9 @@ def _source_controls() -> dict[str, Any]:
             row["short_required_total"]
             == row["expected_short_requirement_from_actual_waves"]
             for row in rows
+        ),
+        "all_count_features_finite": all(
+            np.all(np.isfinite(row["count_features"])) for row in rows
         ),
         "all_membership_events_exact": all(
             row["membership_events_exact"] for row in rows
@@ -558,7 +578,7 @@ def _training_errors(training: dict[str, Any], run_root: Path) -> list[str]:
     if not isinstance(training.get("source_commit"), str) or not _source_commit_valid(
         training["source_commit"], formal=formal
     ):
-        errors.append("G6 source identity is invalid or conflated with G5")
+        errors.append("G7 source identity is invalid or conflated with G5")
     runtime = training.get("runtime", {})
     if not (
         runtime.get("backend") == "cpu"
@@ -604,7 +624,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
     training = _read_json(run_root / "train_manifest.json")
     errors = _training_errors(training, run_root)
     if errors:
-        raise ValueError("G6 evaluation rejected invalid import: " + "; ".join(errors))
+        raise ValueError("G7 evaluation rejected invalid import: " + "; ".join(errors))
     configure_runtime(ACTION_SEED_BASE)
     episode_count = int(training["counts"]["eval_episodes"])
     episode_ids = tuple(range(episode_count))
@@ -618,8 +638,8 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
             run_root / imported["checkpoint"], model=model, optimizer=optimizer
         )
         if int(bundle["completed_updates"]) != G5_COMPLETED_UPDATES:
-            raise ValueError("G6 evaluation loaded non-final G5 checkpoint")
-        for domain in ("count_scale", "event_time", "joint"):
+            raise ValueError("G7 evaluation loaded non-final G5 checkpoint")
+        for domain in ("moderate_beyond", "far_beyond", "joint"):
             factory = LEDGER_FACTORIES[domain]
             profiles = DOMAIN_PROFILES[domain]
             for deterministic in (True, False):
@@ -632,7 +652,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                     ledger_seed=DOMAIN_LEDGER_SEEDS[domain],
                     action_seed=ACTION_SEED_BASE + replicate,
                     ledger_factory=factory,
-                    environment_factory=ZeroShotStressEnv,
+                    environment_factory=BeyondCountEnv,
                 )
                 after = model_state_copy(model)
                 state_difference = maximum_state_difference(before, after)
@@ -701,6 +721,7 @@ def _evaluation_errors(
         "all_constructive_utility_one",
         "all_roster_schedules_exact",
         "all_actual_wave_requirements_exact",
+        "all_count_features_finite",
         "all_membership_events_exact",
         "all_lifecycle_states_exact",
         "all_terminal_lifecycles_destroyed",
@@ -719,6 +740,32 @@ def _evaluation_errors(
         if isinstance(row, dict)
     } != expected_labels:
         errors.append("source control profile inventory mismatch")
+    if isinstance(rows, list):
+        registered = {
+            (domain, profile.name): profile
+            for domain, profiles in DOMAIN_PROFILES.items()
+            for profile in profiles
+        }
+        for index, row in enumerate(rows):
+            if not isinstance(row, dict):
+                errors.append(f"source control row {index} is not an object")
+                continue
+            profile = registered.get((row.get("domain"), row.get("profile")))
+            expected_features = (
+                None
+                if profile is None
+                else [
+                    BeyondCountEnv._count_feature(count)
+                    for count in profile.phase_counts
+                ]
+            )
+            features = row.get("count_features")
+            if (
+                expected_features is None
+                or features != expected_features
+                or not np.all(np.isfinite(np.asarray(features)))
+            ):
+                errors.append(f"source control row {index} count feature mismatch")
 
     replicate_count = int(training.get("counts", {}).get("replicates", -1))
     episode_count = int(training.get("counts", {}).get("eval_episodes", -1))
@@ -726,7 +773,7 @@ def _evaluation_errors(
     expected_cells = {
         (replicate, domain, deterministic)
         for replicate in range(replicate_count)
-        for domain in ("count_scale", "event_time", "joint")
+        for domain in ("moderate_beyond", "far_beyond", "joint")
         for deterministic in (True, False)
     }
     if not isinstance(cells, list):
@@ -802,22 +849,28 @@ def _bootstrap_replicate_ci(
 
 
 def select_result_branch(metrics: dict[str, Any]) -> str:
-    """Apply the frozen first-match absolute-usability G6 gates."""
+    """Apply the frozen first-match absolute-usability G7 gates."""
 
-    if float(metrics["count_scale_deterministic_utility_ci95"][0]) < COUNT_SCALE_FLOOR:
-        return "NO_COUNT_SCALE_TRANSPORT_G6"
-    if float(metrics["event_time_deterministic_utility_ci95"][0]) < EVENT_TIME_FLOOR:
-        return "NO_EVENT_TIME_TRANSPORT_G6"
+    if (
+        float(metrics["moderate_beyond_deterministic_utility_ci95"][0])
+        < MODERATE_BEYOND_FLOOR
+    ):
+        return "NO_MODERATE_BEYOND_COUNT_G7"
+    if (
+        float(metrics["far_beyond_deterministic_utility_ci95"][0])
+        < FAR_BEYOND_FLOOR
+    ):
+        return "NO_FAR_BEYOND_COUNT_G7"
     if float(metrics["joint_deterministic_utility_ci95"][0]) < JOINT_FLOOR:
-        return "NO_JOINT_SCALE_TIME_TRANSPORT_G6"
+        return "NO_JOINT_BEYOND_COUNT_G7"
     if (
         float(metrics["joint_min_replicate_mean"])
         < MINIMUM_JOINT_REPLICATE_FLOOR
         or float(metrics["joint_stochastic_mean"])
         < JOINT_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_ZERO_SHOT_TRANSPORT_G6"
-    return "ROBUST_ZERO_SHOT_OPEN_ROSTER_G6"
+        return "UNSTABLE_BEYOND_COUNT_G7"
+    return "ROBUST_BEYOND_DECLARED_COUNT_G7"
 
 
 def analyze(*, run_root: Path) -> dict[str, Any]:
@@ -830,7 +883,7 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
         cells = evaluation["cells"]
         repetitions = int(training["counts"]["bootstrap_repetitions"])
         deterministic_means: dict[str, list[float]] = {}
-        for domain in ("count_scale", "event_time", "joint"):
+        for domain in ("moderate_beyond", "far_beyond", "joint"):
             deterministic_means[domain] = [
                 float(row["utility_mean"])
                 for row in cells
@@ -843,11 +896,11 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
         ]
         joint_means = deterministic_means["joint"]
         metrics = {
-            "count_scale_deterministic_utility_ci95": _bootstrap_replicate_ci(
-                deterministic_means["count_scale"], repetitions=repetitions
+            "moderate_beyond_deterministic_utility_ci95": _bootstrap_replicate_ci(
+                deterministic_means["moderate_beyond"], repetitions=repetitions
             ),
-            "event_time_deterministic_utility_ci95": _bootstrap_replicate_ci(
-                deterministic_means["event_time"], repetitions=repetitions
+            "far_beyond_deterministic_utility_ci95": _bootstrap_replicate_ci(
+                deterministic_means["far_beyond"], repetitions=repetitions
             ),
             "joint_deterministic_utility_ci95": _bootstrap_replicate_ci(
                 joint_means, repetitions=repetitions
@@ -859,9 +912,9 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
     operational_valid = not errors
     formal = training.get("formal") is True
     if not operational_valid:
-        branch = "INVALID_OPEN_ROSTER_ZERO_SHOT_G6"
+        branch = "INVALID_BEYOND_DECLARED_COUNT_G7"
     elif not formal:
-        branch = "NONFORMAL_OPEN_ROSTER_G6_EXERCISE_COMPLETE"
+        branch = "NONFORMAL_BEYOND_DECLARED_COUNT_G7_EXERCISE_COMPLETE"
     else:
         branch = select_result_branch(metrics)
     result = {
@@ -876,8 +929,8 @@ def analyze(*, run_root: Path) -> dict[str, Any]:
         "branch": branch,
         "metrics": metrics,
         "thresholds": {
-            "count_scale_deterministic_lcb_floor": COUNT_SCALE_FLOOR,
-            "event_time_deterministic_lcb_floor": EVENT_TIME_FLOOR,
+            "moderate_beyond_deterministic_lcb_floor": MODERATE_BEYOND_FLOOR,
+            "far_beyond_deterministic_lcb_floor": FAR_BEYOND_FLOOR,
             "joint_deterministic_lcb_floor": JOINT_FLOOR,
             "minimum_joint_replicate_mean_floor": MINIMUM_JOINT_REPLICATE_FLOOR,
             "joint_stochastic_mean_floor": JOINT_STOCHASTIC_MEAN_FLOOR,
