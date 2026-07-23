@@ -5,7 +5,9 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live, scheduled for minimally corrected causal measurement.
+- Status: live; the exact G0 source is closed at its access boundary and the
+  next evidence action is an independent access-positive, mechanism-matched
+  source.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
@@ -27,6 +29,15 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
   are adequate.
 - Separating evidence: matched capacity and information with held-out dynamic
   membership/lifetime evaluation.
+
+## C-BASE — The shared base policy class is insufficient
+
+- Status: live after the G0 no-access result.
+- Claim: the shared recurrent actor, critic, primitive distribution or state
+  representation may be unable to express or stabilize the required policy;
+  the EHC adapter cannot repair every common base limitation.
+- Separating evidence: an information-matched stronger policy accesses the
+  same benchmark under the same credit estimator and information contract.
 
 ## C-CREDIT — Temporal credit is the bottleneck
 
@@ -52,9 +63,19 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 - Separating evidence: joint intervention and natural coordination consequences
   that individual persistence cannot explain.
 
+## C-LINK-NULL — Commitment is not load-bearing for the source family
+
+- Status: live; not selected by the G0 no-access result.
+- Claim: ordinary recurrence may represent the useful behavior, or the task's
+  temporal structure may be mismatched to KEEP/RENEW event-held commitment.
+- Separating evidence: an access-positive mechanism-matched source with
+  `UCB(G)<=0.10`, or repeated confident failure of executable and natural
+  consequence gates after access.
+
 ## C-MEASURE — Current behavior metrics do not identify commitment
 
-- Status: partially confirmed; smallest refuted unit isolated.
+- Status: corrected measurement contract retained; the G0 source did not reach
+  the first-match branch where its predicates have disposition authority.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
 - Separating evidence: same-state exact-snapshot forced KEEP/RENEW effects,

@@ -6,14 +6,17 @@ embeds only the standing constraints required by that role.
 
 ## Execution environment
 
-- Run Python with `C:/Users/wu/.conda/envs/SB3/python.exe` directly
-  (`torch 2.7.0+cu118`, RTX 4070). The default `python` on PATH is a CPU-only
-  build and will fail.
-- Never use `conda run -n SB3`. It raises `UnicodeDecodeError` from a non-UTF-8
-  `.pth` during `site.py`.
-- For scripts outside the repository root, set `PYTHONPATH=C:/project/HMASD`.
-- The focused suite requires CUDA and **fails closed** by design. Never add a
-  CPU fallback, and never weaken a test so it passes without a GPU.
+- Run Python directly with
+  `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`
+  (`torch 2.7.0+cpu`) on the registered CPU backend.
+- Use CPU with torch threads 1 for every arm and paired replicate. Never mix
+  backends or thread configurations, and never resume a checkpoint across
+  backends.
+- Do not use `conda run`; invoke the registered interpreter directly.
+- For scripts outside the repository root, set `PYTHONPATH` to this workspace.
+- The focused suite and formal-path exercise use the registered CPU/one-thread
+  contract and fail closed on backend or thread mismatch. Never add a fallback
+  or infer CPU/CUDA trajectory equivalence.
 - Collections run at 16 parallel environments (`FORMAL_NUM_ENVS`). Never write a
   test at width 1 or 2; behavior at those widths is not representative and
   reconstruction drift is width-sensitive.

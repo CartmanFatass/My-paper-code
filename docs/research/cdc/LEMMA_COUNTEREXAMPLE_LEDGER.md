@@ -12,6 +12,7 @@
 | L-BAT | Usage, exogenous lifetime variation and logit magnitude can admit trivial passing constructions. | The current EHC behavioral battery. | Event-held state is useless. |
 | L-FORCED-EVENT | At an eligible naturally reached decision state, exact-snapshot CRN forcing identifies the local consequence of KEEP versus RENEW; comparing naturally occurring event groups does not. | The corrected EHC continuation estimand. | General learned hierarchy, skills or variable-lifetime capability. |
 | L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
+| L-EHC-G0-NO-ACCESS | A valid first-match no-access result closes the exact benchmark-comparator pair and prevents lower-precedence diagnostics from relabeling it. | `EVENT_HELD_COMMITMENT_LINK_G0` at its frozen source, backend, learner, budget and threshold. | EHC is useless, stronger MARL is inaccessible, or any live conjecture is uniquely selected. |
 
 ## Counterexamples
 
@@ -53,3 +54,11 @@ timing.
 Natural KEEP and RENEW rows need not be exchangeable. Their unpaired future
 returns can differ because the policy selects different contexts, so only the
 same-state forced alternative is a causal continuation estimand.
+
+### CE-FIRST-MATCH-DIAGNOSTIC-RESCUE
+
+The completed G0 run passed operational and support checks but failed the
+earlier access branch. Its later `G`, K-bin, `I_TV` and `C_total` diagnostics
+therefore cannot promote, retire or relabel the EHC mechanism. This refutes
+post-result diagnostic rescue, not the registered battery on an access-positive
+source.

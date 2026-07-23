@@ -21,8 +21,9 @@ Updated: 2026-07-22
 
 The bounded autonomous research chain has completed iteration 1 and retains
 four conclusion-bearing iterations. Its implementation and monitoring surfaces
-are native Codex. The completed result is accepted for intake; the next boundary
-is external-Pro review before any iteration-2 action.
+are native Codex. The external-Pro review is complete and its Controller
+disposition is accepted. The next boundary is the bounded executable definition
+for `ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`; no iteration-2 formal compute is authorized yet.
 
 The obsolete external WIP is not an execution surface. Its useful symbols were
 audited and adapted into the accepted native package; no formal experiment was
@@ -42,7 +43,9 @@ registered Open-Pro Exchange is task `019f8a2f-22be-7db3-aa74-7fdeb9c03772`
 and remains the sole external-review transport.
 
 `EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
-through `fb9909711a2ca8628f3d534936b771885e53b26d`. Nothing is currently running.
+through `fb9909711a2ca8628f3d534936b771885e53b26d`; workflow hardening is
+integrated through `0bf04cae1be118cee9feaf9beeb3e389679eb6a6`. Nothing is
+currently running.
 The focused external-Pro clarification returned
 `BATTERY_REQUIRES_MINIMAL_CORRECTION`: keep `G` and the three arms, but separate
 same-state forced-event timing effects, mark effects, representation influence
@@ -54,7 +57,7 @@ Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 scientific authority, that session implemented and verified, and GPT-5.6 Pro
 reviewed science through the GitHub connector. The first formal
 `EVENT_HELD_COMMITMENT_LINK_G0` run has now completed and is recorded below;
-external-Pro review is required before iteration 2.
+external-Pro review confirmed its narrow `NO_ACCESS_THIS_BENCHMARK` meaning.
 
 ## Execution Flow (historical — Claude Code session, 2026-07-21/22)
 
@@ -170,12 +173,13 @@ that defect is closed by `31aad0df`. The completed replacement is a valid
 
 ## Resume Point
 
-Iteration 1 is accepted for direct evidence intake. Its raw run is
-`logs/formal_event_held_cpu_20260722_fb99097_r2`; the next action is the neutral
-external-Pro result review recorded in
-`docs/external-review/rounds/20260722_ehc_formal_result_review/`. No iteration 2
-formal compute is authorized until that review and Controller disposition are
-archived.
+Iteration 1 and its external review are accepted. The raw run is
+`logs/formal_event_held_cpu_20260722_fb99097_r2`; the complete review and
+Controller disposition are recorded in
+`docs/external-review/rounds/20260722_ehc_formal_result_review/`. The next action
+is a Project Manager executable-definition package for
+`ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1`. No iteration-2 formal compute is authorized until that package is verified, integrated and given an exact
+Controller run authorization.
 
 ## BATTERY_CONTRACT_RECONCILED
 
@@ -222,7 +226,8 @@ historical evidence only.
 **ACTIVE_AUTONOMOUS_RESEARCH_CHAIN** with four conclusion-bearing iterations
 remaining after the valid iteration-1 result on 2026-07-22. Each later iteration
 must follow the registered external-Pro, native Codex, Git and evidence gates;
-iteration 2 is held at the external result-review boundary.
+iteration 2 is at the executable-definition boundary selected by the completed
+external review.
 
 ## Durable Constraints
 
@@ -243,11 +248,10 @@ iteration 2 is held at the external result-review boundary.
 - `docs/project/ALGORITHM_PRINCIPLES.md` — durable scientific constraints.
 - `docs/project/IMPLEMENTATION_PLAN.md` — current frozen executable design, or
   explicit `NONE` when no implementation is authorized.
-- `docs/project/ExpRecord.md` — formal experiment history and dispositions. It
-  carries no `EVENT_HELD_COMMITMENT_LINK_G0` row, correctly, because no formal
-  experiment has been authorized or run.
-- `docs/external-review/gpt5_6_pro/20260721_event_held_commitment_link_g0_code_review/`
-  — active implementation review package awaiting `RESPONSE_RAW.md`.
+- `docs/project/ExpRecord.md` — formal experiment history and dispositions,
+  including the completed `EVENT_HELD_COMMITMENT_LINK_G0` CPU result.
+- `docs/external-review/rounds/20260722_ehc_formal_result_review/` — complete
+  GPT-5.6 Pro result review, reconciliation and Controller disposition.
 - `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md` — current adopted
   scientific and executable source.
 - `docs/external-review/rounds/20260719_clean_process_access_portfolio/`

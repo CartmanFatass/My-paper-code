@@ -58,4 +58,50 @@ foreach ($relative in $batteryDocuments.Keys) {
 if ($current.Contains('One unresolved question stands against the result contract')) {
     throw 'Retired behavioral-battery question remains active in CURRENT_WORK'
 }
+$agentContext = Get-Content (Join-Path $repo 'docs/project/AGENT_CONTEXT.md') -Raw
+foreach ($required in @('C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
+    'torch 2.7.0+cpu', 'CPU', 'torch threads 1')) {
+    if (-not $agentContext.Contains($required)) { throw "Agent context missing CPU contract: $required" }
+}
+$portfolio = Get-Content (Join-Path $repo 'docs/research/cdc/IDEA_PORTFOLIO.md') -Raw
+foreach ($required in @('ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1', 'C-BASE', 'C-LINK-NULL')) {
+    if (-not $portfolio.Contains($required)) { throw "Portfolio missing Pro intake: $required" }
+}
+$conjectures = Get-Content (Join-Path $repo 'docs/research/cdc/CONJECTURES.md') -Raw
+foreach ($content in @($conjectures, $portfolio)) {
+    foreach ($required in @('same benchmark', 'information-matched stronger')) {
+        if (-not $content.Contains($required)) { throw "C-BASE authority drift: missing $required" }
+    }
+}
+$roundRoot = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_formal_result_review'
+$rawHash = (Get-FileHash (Join-Path $roundRoot '21_PRO_OPEN_RAW.md') -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($rawHash -ne 'd63427fb0fab5ffb1f393eb62370358cda449e6f1dfc8d57bc937ba46493942e') {
+    throw "External Pro raw hash mismatch: $rawHash"
+}
+foreach ($relative in @(
+    'docs/external-review/rounds/20260722_ehc_formal_result_review/30_EVIDENCE_RECONCILIATION.md',
+    'docs/external-review/rounds/20260722_ehc_formal_result_review/50_DISPOSITION.md')) {
+    if (-not (Test-Path (Join-Path $repo $relative) -PathType Leaf)) {
+        throw "Missing completed Pro intake file: $relative"
+    }
+}
+foreach ($required in @('external-Pro review is complete',
+    'ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1',
+    'no iteration-2 formal compute is authorized yet',
+    'No iteration-2 formal compute is authorized until')) {
+    if (-not $current.Contains($required)) { throw "Current boundary missing Pro intake: $required" }
+}
+$reconciliation = Get-Content (Join-Path $roundRoot '30_EVIDENCE_RECONCILIATION.md') -Raw
+foreach ($required in @('exact G0', 'first-match', 'Lower-precedence `G`', 'K-bin',
+    '`I_TV`', '`C_total`', 'cannot relabel', 'no disposition authority')) {
+    if (-not $reconciliation.Contains($required)) { throw "Reconciliation authority gap: $required" }
+}
+$disposition = Get-Content (Join-Path $roundRoot '50_DISPOSITION.md') -Raw
+foreach ($required in @('Formal iteration-2 compute remains unauthorized',
+    'There is no threshold, budget, seed, backend, diagnostic or branch rescue')) {
+    if (-not $disposition.Contains($required)) { throw "Disposition authority gap: $required" }
+}
+if ($current.Contains('iteration 2 is held at the external result-review boundary')) {
+    throw 'CURRENT_WORK still holds iteration 2 at the completed review boundary'
+}
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=native_codex'
