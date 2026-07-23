@@ -50,6 +50,9 @@ data/
 !AGENTS.md
 # Repository-scoped skill instructions and references are durable workflow source.
 !.agents/skills/**/*.md
+# Stable role charters are durable workflow authority.
+!.agents/roles/
+!.agents/roles/*.md
 # Canonical project memory + plan docs are load-bearing collaboration state — track them
 # (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
 !memory/*.md
@@ -58,6 +61,8 @@ data/
 !docs/plans/*.md
 !docs/superpowers/plans/*.md
 !docs/superpowers/specs/*.md
+# CDC records are durable algorithm-research state.
+!docs/research/cdc/**/*.md
 # Custom subagent definitions are durable project tooling.
 !.claude/agents/*.md
 # Visual brainstorming and runtime capability probes are local scratch.

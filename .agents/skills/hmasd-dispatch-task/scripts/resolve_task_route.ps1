@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('controller', 'project_manager', 'experiment_monitor')]
+    [ValidateSet('controller', 'project_manager')]
     [string]$Role,
     [string]$RegistryPath = (Join-Path $PSScriptRoot '..\references\session-roles.json'),
     [string]$StateDb = (Join-Path $env:USERPROFILE '.codex\state_5.sqlite')
@@ -14,7 +14,7 @@ if (-not (Test-Path -LiteralPath $RegistryPath -PathType Leaf)) {
 $registry = Get-Content -LiteralPath $RegistryPath -Raw | ConvertFrom-Json
 $entry = $registry.roles.PSObject.Properties[$Role].Value
 if ($null -eq $entry) { throw "Unregistered Codex role: $Role" }
-if ($Role -ne 'controller' -and [string]$entry.registration_status -ne 'ACTIVE') {
+if ([string]$entry.registration_status -ne 'ACTIVE') {
     throw "Codex role is not ACTIVE: $Role"
 }
 $ThreadId = [string]$entry.thread_id

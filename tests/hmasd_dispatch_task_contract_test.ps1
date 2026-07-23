@@ -9,19 +9,47 @@ $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
 $agents = Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md') -Raw
 $review = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 $monitor = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
+$roleRoot = Join-Path $repo '.agents/roles'
+$controllerRolePath = Join-Path $roleRoot 'CONTROLLER.md'
+$projectManagerRolePath = Join-Path $roleRoot 'PROJECT_MANAGER.md'
+$monitorRolePath = Join-Path $roleRoot 'EXPERIMENT_MONITOR.md'
+$externalProRolePath = Join-Path $roleRoot 'EXTERNAL_PRO.md'
 
-$expected = @('controller', 'project_manager', 'experiment_monitor')
+foreach ($path in @($controllerRolePath, $projectManagerRolePath,
+        $monitorRolePath, $externalProRolePath)) {
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "Missing normative role contract: $path"
+    }
+}
+$controllerRole = Get-Content -LiteralPath $controllerRolePath -Raw
+$projectManagerRole = Get-Content -LiteralPath $projectManagerRolePath -Raw
+$monitorRole = Get-Content -LiteralPath $monitorRolePath -Raw
+$externalProRole = Get-Content -LiteralPath $externalProRolePath -Raw
+
+$expected = @('controller', 'project_manager')
 $actual = @($roles.roles.PSObject.Properties.Name)
-if ($roles.schema_version -ne 12 -or (Compare-Object $expected $actual)) {
-    throw 'Persistent role graph must contain only controller, project_manager and experiment_monitor at schema 12'
+if ($roles.schema_version -ne 13 -or (Compare-Object $expected $actual)) {
+    throw 'Persistent role graph must contain only controller and project_manager at schema 13'
 }
 if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
+    $roles.roles.controller.contract -ne '.agents/roles/CONTROLLER.md' -or
     $roles.roles.project_manager.thread_id -ne '019f8a2e-ed73-7a02-9bb9-4a57b2054cf3' -or
     $roles.roles.project_manager.registration_status -ne 'ACTIVE' -or
-    $roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
-    $roles.roles.experiment_monitor.registration_status -ne 'ACTIVE' -or
-    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
-    throw 'Persistent controller/manager/monitor binding mismatch'
+    $roles.roles.project_manager.contract -ne '.agents/roles/PROJECT_MANAGER.md') {
+    throw 'Persistent controller/manager binding mismatch'
+}
+if ($roles.interfaces.experiment_monitor.persistent_task -ne $false -or
+    $roles.interfaces.experiment_monitor.operator -ne 'controller' -or
+    $roles.interfaces.experiment_monitor.contract -ne '.agents/roles/EXPERIMENT_MONITOR.md' -or
+    $roles.interfaces.experiment_monitor.procedure -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
+    throw 'Controller-direct monitor interface mismatch'
+}
+if ($roles.policy.update_owner -ne 'project_manager' -or
+    $roles.policy.integration_executor -ne 'controller_mechanical' -or
+    $roles.policy.concurrency_policy -ne 'file_ownership_only' -or
+    $roles.policy.global_write_lease -ne 'disabled' -or
+    $roles.policy.preserve_live_execution_profile -ne $true) {
+    throw 'Role registry does not make PM the workflow semantic owner and Controller the mechanical integrator'
 }
 foreach ($entry in $roles.roles.PSObject.Properties.Value) {
     foreach ($field in @('hostId', 'model', 'thinking')) {
@@ -29,14 +57,15 @@ foreach ($entry in $roles.roles.PSObject.Properties.Value) {
     }
 }
 foreach ($required in @(
-    'The Controller owns routing',
-    'Use `project_manager`',
-    'controller <-> project_manager',
-    'controller <-> experiment_monitor',
+    'Role contracts are normative',
+    '.agents/roles/',
     'resolve_task_route.ps1 -Role <role>',
+    'cross_thread_model_effort_preservation=required',
+    'live_target_profile_is_authoritative=true',
+    'resolved_model_effort_copy=exact',
+    'static_profile_expectation=forbidden',
     'experiment_monitor',
     'hmasd-experiment-monitor',
-    'gpt-5.3-codex-spark',
     'Controller-direct external review',
     '$hmasd-review-round',
     '$browser:control-in-app-browser',
@@ -58,32 +87,87 @@ foreach ($forbidden in @(
     '$hmasd-review-exchange',
     'REVIEW_STAGE_COMPLETE',
     'REVIEW_STAGE_BLOCKED',
+    'pm_acceptance_authority=exclusive',
+    'controller_validation_authority=none',
+    'External GPT-5.6 Pro owns',
+    'Project Manager owns',
+    'The Controller owns routing',
     'agent://',
     'history://')) {
-    if ($skill.Contains($forbidden)) { throw "Retired persistent edge remains: $forbidden" }
+    if ($skill.Contains($forbidden)) { throw "Dispatcher contains retired or normative role policy: $forbidden" }
 }
 if ($skill.Contains('direct evidence intake')) {
     throw 'Dispatcher still assigns semantic evidence intake to Controller'
 }
 foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-round',
-    '$browser:control-in-app-browser', '$hmasd-experiment-monitor',
-    'bounded self-recovery', 'recovery attempts')) {
-    if (-not $agents.Contains($required)) { throw "Controller contract missing: $required" }
-    if (-not $skill.Contains($required)) { throw "Dispatcher recovery contract missing: $required" }
+    '$browser:control-in-app-browser', '$hmasd-experiment-monitor')) {
+    if (-not $controllerRole.Contains($required)) { throw "Controller role missing operation trigger: $required" }
 }
 foreach ($required in @(
-    'semantic_author=project_manager',
-    'artifact_scope=reviewer_visible_code_side',
-    'repair_owner=project_manager',
-    'exact PM-accepted files unchanged',
+    '# HMASD Role Constitution',
+    'Mandatory role bootstrap',
+    'project_manager_project_authority=primary',
+    'project_manager_research_workflow_authority=exclusive',
     'pm_acceptance_authority=exclusive',
-    'controller_validation_authority=none')) {
-    if (-not $agents.Contains($required)) { throw "Controller semantic-ownership contract missing: $required" }
-    if (-not $skill.Contains($required)) { throw "Dispatcher semantic-ownership contract missing: $required" }
+    'controller_role=mechanical_operator',
+    'controller_validation_authority=none',
+    'controller_research_authority=none',
+    'controller_workflow_decision_authority=none',
+    'one_artifact_one_acceptance_owner=true',
+    'concurrency_policy=file_ownership_only',
+    'global_write_lease=disabled',
+    'same_file_concurrent_writes=forbidden',
+    'disjoint_file_parallelism=allowed',
+    'cross_thread_model_effort_preservation=required',
+    'live_target_profile_is_authoritative=true',
+    'resolved_model_effort_copy=exact',
+    'static_profile_expectation=forbidden',
+    'sender_profile_override=forbidden',
+    'at most one independent advisory code-side review',
+    'does not create a repository-wide write lease')) {
+    if (-not $agents.Contains($required)) { throw "Global role constitution missing: $required" }
+}
+foreach ($required in @(
+    'role=project_manager',
+    'project_authority=primary',
+    'research_workflow_authority=exclusive',
+    'technical_acceptance_authority=exclusive',
+    'external_review_need_authority=project_manager',
+    'formal_compute_authority=user_only',
+    'git_execution=controller_mechanical',
+    'one_artifact_one_acceptance_owner=true',
+    'file_ownership_required=true')) {
+    if (-not $projectManagerRole.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'role=controller',
+    'role_class=mechanical_operator',
+    'scientific_authority=none',
+    'technical_validation_authority=none',
+    'workflow_decision_authority=none',
+    'external_review_transport=mechanical_exact',
+    'git_execution=mechanical_exact',
+    'experiment_operations=authorized_commands_and_direct_monitoring_only',
+    'cross_thread_model_effort_preservation=required',
+    'live_target_profile_is_authoritative=true',
+    'resolved_model_effort_copy=exact',
+    'static_profile_expectation=forbidden',
+    'sender_profile_override=forbidden')) {
+    if (-not $controllerRole.Contains($required)) { throw "Controller role missing: $required" }
+}
+foreach ($required in @('role=experiment_monitor',
+    'authority=read_only_observation', 'scientific_interpretation=forbidden')) {
+    if (-not $monitorRole.Contains($required)) { throw "Monitor role missing: $required" }
+}
+foreach ($required in @('role=external_pro',
+    'role_kind=external_question_scoped_scientific_authority',
+    'transport_owner=controller_mechanical', 'workflow_authority=none',
+    'code_authority=none')) {
+    if (-not $externalProRole.Contains($required)) { throw "External Pro interface missing: $required" }
 }
 foreach ($required in @(
     'inspect the registered conversation before submission',
-    'never classifies scientific completeness',
+    'Role contracts are normative',
     'late output from a retired role has no authority')) {
     if (-not $review.Contains($required)) { throw "Direct review contract missing: $required" }
 }
@@ -98,14 +182,54 @@ if ($sourceBoundary.source_boundary -ne 'local_and_remote_aggressive_tip' -or
     $sourceBoundary.source_commit -notmatch '^[0-9a-f]{40}$') {
     throw 'Source-boundary resolver did not return a canonical aggressive tip'
 }
-$resolver = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1') -Raw
-foreach ($required in @("ValidateSet('controller', 'project_manager', 'experiment_monitor')", 'Unregistered Codex role', 'role = $Role')) {
+$resolverPath = Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1'
+$resolver = Get-Content -LiteralPath $resolverPath -Raw
+foreach ($required in @("ValidateSet('controller', 'project_manager')", 'Unregistered Codex role',
+    "if ([string]`$entry.registration_status -ne 'ACTIVE')", 'role = $Role')) {
     if (-not $resolver.Contains($required)) { throw "Role resolver missing: $required" }
 }
+if ($resolver.Contains("`$Role -ne 'controller'")) {
+    throw 'Role resolver exempts Controller from ACTIVE-status validation'
+}
 if ($resolver.Contains('open_divergent_exchange')) { throw 'Role resolver retains retired Exchange route' }
+foreach ($role in @('project_manager', 'controller')) {
+    $liveRoute = & $resolverPath -Role $role | ConvertFrom-Json
+    if ($liveRoute.threadId -ne $roles.roles.$role.thread_id -or
+        [string]::IsNullOrWhiteSpace([string]$liveRoute.model) -or
+        [string]::IsNullOrWhiteSpace([string]$liveRoute.thinking)) {
+        throw "Live route does not expose the current target model/effort: $role"
+    }
+}
+$inactiveRegistryPath = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-inactive-controller-$([Guid]::NewGuid().ToString('N')).json")
+try {
+    $inactiveRegistry = Get-Content -Raw -LiteralPath $rolesPath | ConvertFrom-Json
+    $inactiveRegistry.roles.controller.registration_status = 'INACTIVE'
+    $inactiveRegistry | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $inactiveRegistryPath -Encoding utf8
+    try {
+        & $resolverPath -Role controller -RegistryPath $inactiveRegistryPath | Out-Null
+        throw 'Resolver unexpectedly accepted an inactive Controller'
+    }
+    catch {
+        if ([string]$_ -notmatch 'Codex role is not ACTIVE: controller') {
+            throw "Resolver failed closed for the wrong reason: $_"
+        }
+    }
+}
+finally {
+    if (Test-Path -LiteralPath $inactiveRegistryPath) {
+        Remove-Item -LiteralPath $inactiveRegistryPath -Force
+    }
+}
+foreach ($forbidden in @('gpt-5.3-codex-spark', 'expected_target_model',
+    'expected_target_effort', 'expected profile')) {
+    if ($skill.Contains($forbidden) -or
+        ($roles | ConvertTo-Json -Depth 10).Contains($forbidden)) {
+        throw "Dispatcher retains a fixed target execution-profile expectation: $forbidden"
+    }
+}
 $currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 if (-not $currentWork.Contains($roles.roles.project_manager.thread_id) -or
-    -not $currentWork.Contains($roles.roles.experiment_monitor.thread_id) -or
+    -not $currentWork.Contains('No persistent Experiment Monitor task is active') -or
     -not $currentWork.Contains('Controller-direct external-Pro transport')) {
     throw 'Current boundary does not name the active direct-transport topology'
 }

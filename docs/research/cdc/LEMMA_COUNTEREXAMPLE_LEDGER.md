@@ -12,26 +12,37 @@
 | L-BAT | Usage, exogenous lifetime variation and logit magnitude can admit trivial passing constructions. | The current EHC behavioral battery. | Event-held state is useless. |
 | L-FORCED-EVENT | At an eligible naturally reached decision state, exact-snapshot CRN forcing identifies the local consequence of KEEP versus RENEW; comparing naturally occurring event groups does not. | The corrected EHC continuation estimand. | General learned hierarchy, skills or variable-lifetime capability. |
 | L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
+| L-EHC-MEASUREMENT-NECESSITY | Event-held commitment support must establish policy-dependent persistence, sequence-level intervention, natural mediation, simpler-explanation resistance and held-out robustness; surface use/lifetime/logit/value predicates do not identify it. | The corrected G1 measurement implication. | That these conditions are sufficient, or that EHC is useful, useless or uniquely necessary. |
 | L-EHC-G0-NO-ACCESS | A valid first-match no-access result closes the exact benchmark-comparator pair and prevents lower-precedence diagnostics from relabeling it. | `EVENT_HELD_COMMITMENT_LINK_G0` at its frozen source, backend, learner, budget and threshold. | EHC is useless, stronger MARL is inaccessible, or any live conjecture is uniquely selected. |
 
 ## Counterexamples
 
 ### CE-RANDOM-USE
 
-A random KEEP/RENEW policy can satisfy nondegenerate usage rates without
-demand-responsive commitment. It refutes usage-as-semantics, not event-held
-state as a mechanism.
+A random KEEP/RENEW policy can satisfy nondegenerate usage rates, admit lifetime
+spread and combine with a useful mark/capacity path without demand-responsive
+commitment. **Preserves:** surface natural support, lifetime diversity, mark
+sensitivity and possibly value. **Violates:** policy-dependent persistence and
+event-to-sequence-to-value organization. It refutes usage-as-semantics, not
+event-held state as a mechanism.
 
 ### CE-EXOGENOUS-LIFETIME
 
-Random opportunity spacing can generate lifetime diversity even when policy
-behavior carries no lifetime decision. It refutes realized-duration diversity
-as sufficient evidence of learned lifetime.
+Random opportunity spacing, temporary absence or a fixed schedule can generate
+lifetime diversity even when policy behavior carries no lifetime decision.
+**Preserves:** realized diversity, natural use, mark sensitivity and possibly
+value. **Violates:** learned policy control of persistence and its held-out
+transport. It refutes realized-duration diversity as sufficient evidence of
+learned lifetime.
 
 ### CE-LOGIT-WITHOUT-BEHAVIOR
 
-An uninformative latent with a large adapter can perturb logits without useful
-sequence behavior. It refutes logit magnitude as sufficient behavioral evidence.
+An uninformative latent with a large adapter can perturb logits and improve an
+immediate action/capacity path without useful sequence behavior. **Preserves:**
+same-state logit/action sensitivity, natural support and possibly value.
+**Violates:** sequence-level and terminal consequence, natural mediation and
+simpler-explanation resistance. It refutes logit magnitude as sufficient
+behavioral evidence.
 
 ### CE-NO-ACCESS-ADMISSION
 

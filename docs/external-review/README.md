@@ -1,47 +1,37 @@
 # HMASD External Review Workflow
 
-External GPT-5.6 Pro owns scientific CDC direction. The active Controller owns
-round sequencing, mechanical provenance, direct browser transport, exact raw
-archival, heartbeat lifecycle, resource authorization and every Git-visible
-boundary. The native Codex Project Manager owns every reviewer-visible
-code-side package, reconciliation and executable algorithm realization. It does
-not select protected science; external Pro remains the only scientific
-authority.
-
-```text
-pm_acceptance_authority=exclusive
-controller_validation_authority=none
-```
-
-Project Manager self-validates technical content and package readiness.
-Controller performs no technical or algorithmic validation; it checks only
-route/source identity, exact hashes/paths and Git transport.
+This file describes the external-review artifact sequence, browser transport
+and round layout. Canonical role authority, package acceptance and validation
+boundaries are defined only in root `AGENTS.md` and the applicable
+`.agents/roles/*.md` contracts. This README is not a role constitution.
 
 ## Scientific sequence
 
-1. GPT-5.6 Pro performs CDC scientific review of the Git-visible evidence under
-   `OPEN_REVIEW_PRINCIPLES.md`, preserving plural conjectures while selecting
-   one scheduled research action.
-2. Project Manager authors, reviews, repairs and accepts the reviewer-visible
-   brief, manifest and question. Controller transmits those accepted files
-   unchanged after non-discretionary identity/hash/path checks.
-3. Controller archives the exact natural response, writes mechanical intake,
-   deletes its heartbeat, and returns the raw to Project Manager without a
+1. GPT-5.6 Pro returns question-scoped scientific analysis and recommendations
+   from the Git-visible evidence under `OPEN_REVIEW_PRINCIPLES.md`, preserving
+   plural conjectures inside the submitted question.
+2. Project Manager selects and schedules the next workflow action after exact
+   raw intake and reconciliation.
+3. An accepted Project-Manager-authored brief, manifest and question are
+   transmitted unchanged after the canonical mechanical identity, hash and path
+   checks.
+4. The exact natural response is archived, mechanical intake is written, the
+   heartbeat is deleted, and the raw returns to Project Manager without a
    scientific quality classification.
-4. Project Manager reconciles exact Pro content with its code-side gap and
-   authors any focused follow-up or executable package.
-5. Controller integrates the exact PM/Pro artifacts and updates project control
-   once; it does not write a second intake record.
+5. Exact Pro content is reconciled with the code-side gap, producing any needed
+   focused follow-up or executable package under the canonical role contracts.
+6. The exact accepted PM/Pro artifacts are integrated and project control is
+   updated once; no second intake record is written.
 
-Review and mechanical intake do not authorize code or training. Pro owns
-science; Project Manager owns code-side semantics; Controller owns transport,
-workflow and the resource gate. The target remains a stronger MARL algorithm,
-while hierarchy, skills, variable lifetime, ordinary-MARL controls and causal
-diagnostics are mechanisms or evidence, not universal prerequisites.
+Review and mechanical intake do not authorize code or training. The target
+remains a stronger MARL algorithm, while hierarchy, skills, variable lifetime,
+ordinary-MARL controls and causal diagnostics are mechanisms or evidence, not
+universal prerequisites.
 
 `docs/project/ALGORITHM_PRINCIPLES.md` is the common scientific contract and
-`OPEN_REVIEW_PRINCIPLES.md` specializes the external Pro role. Direct intake
-guidance lives in the Controller `hmasd-review-round` Skill.
+`OPEN_REVIEW_PRINCIPLES.md` structures the scientific response; neither defines
+role authority. Direct intake guidance lives in the Controller
+`hmasd-review-round` Skill.
 
 ## Controller-direct interface
 
@@ -112,6 +102,7 @@ rounds/YYYYMMDD_topic/
 Raw responses are byte-preserved and precede downstream use. Controller round
 behavior lives in `$hmasd-review-round`; algorithm realization, package repair
 and code-side reconciliation live with the registered `project_manager` role.
-Persistent task IDs contain only Controller, Project Manager and Experiment
-Monitor in the dispatcher's role registry. External reviewer conversation IDs
-and URLs live only in `REVIEWER_CONVERSATIONS.json`.
+Persistent task IDs contain only Controller and Project Manager in the
+dispatcher's role registry. Experiment monitoring is a nonpersistent Controller
+procedure. External reviewer conversation IDs and URLs live only in
+`REVIEWER_CONVERSATIONS.json`.

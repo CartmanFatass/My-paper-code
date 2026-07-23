@@ -1,25 +1,28 @@
 # HMASD Conjectures
 
-These are scientific possibilities, not implementation authority. External
-GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
+These are scientific possibilities, not implementation authority. Active role
+authority is defined by `AGENTS.md` and `.agents/roles/`; this ledger records
+the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live; the exact G0 source is closed at its access boundary and the
-  next evidence action is an independent access-positive, mechanism-matched
-  source.
+- Status: live; the exact G0 source is closed at its access boundary. The G1
+  source concept is retained, while its measurement implication has been
+  corrected before any prototype or run.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
-- Intervention consequence: changing the held state changes primitive behavior,
-  and a same-state forced event changes later external utility beyond natural
-  event-selection correlation.
-- Natural consequence: renewal and persistence respond to policy context rather
-  than a random head or exogenous opportunity spacing alone.
-- Held-out consequence: benefit survives unseen membership and lifetime
-  patterns.
-- Strongest simpler explanation: ordinary recurrence or added capacity carries
-  the same information.
+- Necessary measurement consequences: policy-dependent persistence;
+  sequence-level intervention from an exact snapshot; natural mediation from
+  event through persistence and future behavior to value; simpler-explanation
+  resistance against matched recurrence/capacity plus random-event,
+  exogenous-lifetime and uninformative-mark nulls; and held-out robustness to
+  unseen membership/lifetime patterns.
+- Instantaneous mark/logit sensitivity, natural use, realized lifetime diversity
+  and external value remain separate diagnostics and are not sufficient support.
+- Strongest simpler explanation: ordinary recurrence, added capacity, random
+  event timing, exogenous opportunity spacing, or a useful mark with arbitrary
+  renewal timing carries the observed effect.
 
 ## C-REC — Ordinary recurrence is sufficient
 
@@ -78,6 +81,9 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
   the first-match branch where its predicates have disposition authority.
 - Claim: usage, realized lifetime diversity or logit perturbation can be passed
   without demand-responsive persistent semantics.
-- Separating evidence: same-state exact-snapshot forced KEEP/RENEW effects,
-  separated from mark intervention, representation influence and natural
-  selection/support statistics.
+- Counterexamples: `CE-RANDOM-USE`, `CE-EXOGENOUS-LIFETIME`, and
+  `CE-LOGIT-WITHOUT-BEHAVIOR` jointly invalidate the old surface implication.
+- Separating evidence: policy-dependent persistence, sequence-level
+  intervention, natural mediation, simpler-explanation resistance, and
+  held-out robustness, with event forcing separated from mark intervention,
+  representation influence and natural selection/support statistics.

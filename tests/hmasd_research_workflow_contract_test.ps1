@@ -13,19 +13,24 @@ $current = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 $legacyToken = 'O' + 'MP'
 if ($current -match "(?i)\b$legacyToken\b|\.omp") { throw 'Current control plane retains a legacy execution route' }
 $roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
-foreach ($role in @('project_manager', 'experiment_monitor')) {
+foreach ($role in @('project_manager')) {
     if ($roles.roles.$role.registration_status -ne 'ACTIVE') { throw "Inactive registered role: $role" }
 }
-if ($roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
-    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
-    throw 'Native Spark Monitor registry mismatch'
+if ($roles.interfaces.experiment_monitor.persistent_task -ne $false -or
+    $roles.interfaces.experiment_monitor.operator -ne 'controller' -or
+    $roles.interfaces.experiment_monitor.procedure -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
+    throw 'Controller-direct monitor interface mismatch'
 }
 
 $dispatcher = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
-foreach ($required in @('controller <-> project_manager', 'controller <-> experiment_monitor',
+foreach ($required in @('Role contracts are normative', '.agents/roles/',
     'Controller-direct external review', '$hmasd-review-round',
+    'cross_thread_model_effort_preservation=required',
+    'live_target_profile_is_authoritative=true',
+    'resolved_model_effort_copy=exact',
+    'static_profile_expectation=forbidden',
     'source_boundary=local_and_remote_aggressive_tip',
-    'gpt-5.3-codex-spark', 'PROJECT_MANAGER_DELIVERY_BLOCKED')) {
+    'PROJECT_MANAGER_DELIVERY_BLOCKED')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 if ($dispatcher -match '(?i)\bOMP\b|agent://|history://') { throw 'Dispatcher retains a legacy task-delivery path' }
@@ -68,21 +73,49 @@ foreach ($required in @('C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     if (-not $agentContext.Contains($required)) { throw "Agent context missing CPU contract: $required" }
 }
 $agents = Get-Content (Join-Path $repo 'AGENTS.md') -Raw
-foreach ($required in @('semantic_author=project_manager',
-    'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
-    'exact PM-accepted files unchanged', 'pm_acceptance_authority=exclusive',
+$projectManagerRole = Get-Content (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md') -Raw
+$controllerRole = Get-Content (Join-Path $repo '.agents/roles/CONTROLLER.md') -Raw
+foreach ($required in @('project_manager_project_authority=primary',
+    'project_manager_research_workflow_authority=exclusive',
+    'pm_acceptance_authority=exclusive', 'controller_role=mechanical_operator',
     'controller_validation_authority=none')) {
-    if (-not $agents.Contains($required)) { throw "Controller/PM ownership boundary missing: $required" }
-    if (-not $agentContext.Contains($required)) { throw "Agent context ownership boundary missing: $required" }
+    if (-not $agents.Contains($required)) { throw "Global role constitution missing: $required" }
 }
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 $reviewReadme = Get-Content (Join-Path $repo 'docs/external-review/README.md') -Raw
 $principles = Get-Content (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md') -Raw
-foreach ($content in @($agents, $agentContext, $dispatcher, $reviewRound, $reviewReadme, $principles)) {
-    foreach ($required in @('pm_acceptance_authority=exclusive',
-        'controller_validation_authority=none')) {
-        if (-not $content.Contains($required)) { throw "PM exclusive acceptance boundary missing: $required" }
+if (-not $reviewReadme.Contains('Persistent task IDs contain only Controller and Project Manager') -or
+    $reviewReadme.Contains('Persistent task IDs contain only Controller, Project Manager and Experiment Monitor')) {
+    throw 'External-review README retains the retired persistent Monitor topology'
+}
+foreach ($required in @('question-scoped scientific analysis and recommendations',
+    'Project Manager selects and schedules the next workflow action',
+    'structures the scientific response')) {
+    if (-not $reviewReadme.Contains($required)) {
+        throw "External-review README missing question-scoped boundary: $required"
     }
+}
+foreach ($forbidden in @('selecting one scheduled research action',
+    'specializes the external Pro role')) {
+    if ($reviewReadme.Contains($forbidden)) {
+        throw "External-review README gives Pro workflow authority: $forbidden"
+    }
+}
+foreach ($content in @($agentContext, $dispatcher, $reviewRound, $reviewReadme, $principles)) {
+    foreach ($forbidden in @('pm_acceptance_authority=exclusive',
+        'controller_validation_authority=none',
+        'project_manager_project_authority=primary')) {
+        if ($content.Contains($forbidden)) { throw "Normative role policy is duplicated outside AGENTS/role contracts: $forbidden" }
+    }
+}
+foreach ($required in @('role=project_manager', 'project_authority=primary',
+    'research_workflow_authority=exclusive',
+    'technical_acceptance_authority=exclusive')) {
+    if (-not $projectManagerRole.Contains($required)) { throw "PM role contract missing: $required" }
+}
+foreach ($required in @('role=controller', 'role_class=mechanical_operator',
+    'scientific_authority=none', 'workflow_decision_authority=none')) {
+    if (-not $controllerRole.Contains($required)) { throw "Controller role contract missing: $required" }
 }
 foreach ($forbidden in @('Controller verifies it independently',
     'Controller mechanically verifies author markers, required fields',
@@ -118,26 +151,34 @@ foreach ($relative in @(
         throw "Missing completed Pro intake file: $relative"
     }
 }
-foreach ($required in @('external-Pro result review is complete',
-    'ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1',
-    'cannot authorize code, science, a successor, or iteration-2',
-    'Formal compute remains unauthorized')) {
-    if (-not $current.Contains($required)) { throw "Current boundary missing Pro intake: $required" }
-}
-foreach ($required in @('Controller-authored G1 clarification is transport-only',
-    'cannot be adopted', 'PM-owned G1 external-Pro raw is archived',
-    'PM-authored focused Pro package was transported',
-    'exact raw and mechanical intake are archived',
-    'exclusively accepted the code-side disposition',
-    'ALGORITHM_SCOPE_RECONCILED_EXECUTION_CONTRACT_DEFERRED',
+foreach ($required in @(
+    'assignment_id=EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
     'EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
-    'Formal compute remains unauthorized')) {
-    if (-not $current.Contains($required)) { throw "Current ownership correction missing: $required" }
+    'accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28',
+    'iterations_remaining=4',
+    'formal_compute_status=unauthorized',
+    'implementation_status=unauthorized',
+    'derivation_status=complete',
+    'next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'prototype_authorization_status=requested_not_authorized',
+    'Project Manager completed the zero-compute CDC action',
+    'consumes no conclusion-bearing iteration',
+    'global_write_lease=disabled',
+    'Different ownership sets may proceed concurrently')) {
+    if (-not $current.Contains($required)) { throw "Current active boundary missing: $required" }
 }
 foreach ($required in @('Controller-direct external-Pro transport',
-    'persistent Open-Pro Exchange is retired',
-    'Any late Exchange')) {
+    'primary research/workflow/algorithm/engineering authority',
+    'ACTIVE mechanical operator',
+    'No persistent Experiment Monitor task is active')) {
     if (-not $current.Contains($required)) { throw "Current direct-review topology missing: $required" }
+}
+foreach ($forbidden in @('pm_acceptance_authority=exclusive',
+    'controller_validation_authority=none',
+    'controller_workflow_decision_authority=none')) {
+    if ($current.Contains($forbidden)) {
+        throw "CURRENT_WORK duplicates normative role policy: $forbidden"
+    }
 }
 $g1Mechanical = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_source_contract_pm_owned/50_MECHANICAL_INTAKE_RECORD.md'
 if (-not (Test-Path -LiteralPath $g1Mechanical -PathType Leaf)) {
@@ -176,5 +217,44 @@ foreach ($match in $listedEvidence) {
 }
 if ($current.Contains('iteration 2 is held at the external result-review boundary')) {
     throw 'CURRENT_WORK still holds iteration 2 at the completed review boundary'
+}
+$derivationNotePath = Join-Path $repo 'docs/research/cdc/EVIDENCE_NOTES/20260722_EHC_MEASUREMENT_COUNTEREXAMPLES.md'
+if (-not (Test-Path -LiteralPath $derivationNotePath -PathType Leaf)) {
+    throw 'Missing EHC measurement-counterexample derivation note'
+}
+$derivationNote = Get-Content -Raw -LiteralPath $derivationNotePath
+foreach ($required in @('CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME',
+    'CE-LOGIT-WITHOUT-BEHAVIOR', 'policy-dependent persistence',
+    'sequence-level intervention', 'natural mediation',
+    'simpler-explanation resistance', 'held-out robustness',
+    'prototype_selected=true',
+    'next_boundary=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    '`{6,14}` only in fitting cells',
+    '`{10,18}` only in held-out cells',
+    'conclusion_bearing_iterations_consumed=0',
+    'iterations_remaining=4')) {
+    if (-not $derivationNote.Contains($required)) {
+        throw "EHC derivation note missing: $required"
+    }
+}
+foreach ($required in @('policy-dependent persistence',
+    'sequence-level intervention', 'natural mediation',
+    'simpler-explanation resistance', 'held-out robustness',
+    'CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME',
+    'CE-LOGIT-WITHOUT-BEHAVIOR')) {
+    if (-not $conjectures.Contains($required)) {
+        throw "Corrected conjecture/measurement contract missing: $required"
+    }
+}
+$ledger = Get-Content (Join-Path $repo 'docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md') -Raw
+foreach ($required in @('L-EHC-MEASUREMENT-NECESSITY',
+    'CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME',
+    'CE-LOGIT-WITHOUT-BEHAVIOR', 'Preserves:', 'Violates:')) {
+    if (-not $ledger.Contains($required)) { throw "CDC ledger missing derivation delta: $required" }
+}
+foreach ($required in @('EHC_MEASUREMENT_COUNTEREXAMPLE_DERIVATION',
+    'EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
+    'authorization_status=requested_not_authorized')) {
+    if (-not $portfolio.Contains($required)) { throw "Portfolio missing derivation delta: $required" }
 }
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=native_codex'

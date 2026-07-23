@@ -31,13 +31,12 @@ if ($registry.schema_version -ne 27 -or @($registry.reviewers.PSObject.Propertie
 }
 if (Test-Path -LiteralPath $retiredExchange) { throw 'Retired Exchange Skill remains active' }
 foreach ($required in @(
-    'External GPT-5.6 Pro is the scientific decision source',
-    'one scheduled research action',
-    'Controller mechanical intake',
-    'Project Manager',
-    '30_PM_CODE_SIDE_RECONCILIATION.md',
-    '50_MECHANICAL_INTAKE_RECORD.md',
-    'only scientific disposition authority',
+    'Role contracts are normative',
+    '.agents/roles/CONTROLLER.md',
+    '.agents/roles/PROJECT_MANAGER.md',
+    '.agents/roles/EXTERNAL_PRO.md',
+    'This Skill grants no authority',
+    'must not decide the need for review or scientific completeness',
     'Controller-direct transport',
     'Deterministic browser state machine',
     'RESOLVE_REGISTERED_CONVERSATION',
@@ -46,10 +45,10 @@ foreach ($required in @(
     'RECOVER_EVIDENCE_ACCESS',
     'ARCHIVE_AND_RETURN',
     '$browser:control-in-app-browser',
+    'verify_pro_review_boundary.ps1',
     'inspect the registered conversation before submission',
     'An accepted matching fence is never resubmitted',
-    'never classifies scientific completeness',
-    'exact raw -> Controller mechanical intake -> heartbeat deletion -> Project Manager reconciliation',
+    'exact raw -> Controller mechanical intake -> heartbeat deletion -> exact raw return to Project Manager',
     'late output from a retired role has no authority',
     'A redirect to the ChatGPT home page is not a blocker',
     'Conversation discovery ladder',
@@ -72,29 +71,24 @@ foreach ($required in @(
     'repository-relative paths preserved',
     'Do not submit another freshness fence',
     'latest Controller transport-repair message',
-    'pm_acceptance_authority=exclusive',
-    'controller_validation_authority=none',
-    'Project Manager self-validates',
-    'no technical or algorithmic validation',
     'recovery_exhausted=true')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
-foreach ($required in @('semantic_author=project_manager',
+foreach ($forbidden in @('semantic_author=project_manager',
     'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
-    'exact PM-accepted files unchanged')) {
-    if (-not $round.Contains($required)) { throw "Review round semantic ownership missing: $required" }
+    'pm_acceptance_authority=exclusive', 'controller_validation_authority=none',
+    'External GPT-5.6 Pro owns', 'Project Manager owns')) {
+    if ($round.Contains($forbidden)) { throw "Review Skill duplicates normative role policy: $forbidden" }
 }
-foreach ($required in @('Project Manager authors code-side reconciliation',
-    'Controller owns only exact raw archival and mechanical intake',
+foreach ($required in @('Role contracts are normative',
+    'docs/project/ALGORITHM_PRINCIPLES.md', '.agents/roles/')) {
+    if (-not $cdc.Contains($required)) { throw "CDC reference boundary missing: $required" }
+}
+foreach ($forbidden in @('External Pro chooses one scheduled action',
+    'Controller has separately authorized the resource action',
     'External Pro owns the scientific content',
-    'Controller may mechanically apply only an exact Pro-authored target-file delta',
     'Project Manager does not author these scientific records')) {
-    if (-not $cdc.Contains($required)) { throw "CDC reference ownership missing: $required" }
-}
-foreach ($forbidden in @('Controller preserves the decision, writes factual reconciliation',
-    'The Controller owns:',
-    'Project Manager authors proposed changes to:')) {
-    if ($cdc.Contains($forbidden)) { throw "CDC reference retains Controller semantic authorship: $forbidden" }
+    if ($cdc.Contains($forbidden)) { throw "CDC reference retains duplicated role authority: $forbidden" }
 }
 foreach ($forbidden in @(
     'open_divergent_exchange',

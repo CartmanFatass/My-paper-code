@@ -1,8 +1,11 @@
 # HMASD CDC Research Principles
 
+Role contracts are normative. Resolve authority from `AGENTS.md` and
+`.agents/roles/`; this reference grants none. Scientific principles are
+normative in `docs/project/ALGORITHM_PRINCIPLES.md`.
+
 The scientific outer loop is Conjecture -> Derivation -> Counterexample or
-Disproof -> Correction. External GPT-5.6 Pro owns scientific decisions in this
-loop. Project Manager authors code-side reconciliation only. Controller owns only exact raw archival and mechanical intake. External Pro owns the scientific content and remains the scientific authority.
+Disproof -> Correction.
 
 ## Research objects
 
@@ -22,17 +25,16 @@ loop. Project Manager authors code-side reconciliation only. Controller owns onl
 
 ## Action selection
 
-External Pro chooses one scheduled action by information gain, cost and
-reversibility, using this default order: derivation, counterexample, reanalysis
-of accepted evidence, constructive toy, bounded prototype, formal experiment.
-An action is a resource decision, not an epistemic declaration. Unscheduled
-ideas retain explicit reactivation conditions.
+Select a scheduled action by information gain, cost and reversibility, using
+this default order: derivation, counterexample, reanalysis of accepted evidence,
+constructive toy, bounded prototype, formal experiment. An action is a resource
+decision, not an epistemic declaration. Unscheduled ideas retain explicit
+reactivation conditions. The active Project Manager role contract determines
+who performs this selection.
 
-Create a Project Manager assignment only when implementation is the cheapest
-necessary action, external Pro has defined the scientific direction and
-estimand, and the Controller has separately authorized the resource action. The
-Project Manager—not the Controller—then chooses the complete executable
-algorithm realization.
+Create an implementation assignment only when implementation is the cheapest
+necessary action and its required authority already exists. Role contracts,
+not this reference, determine who selects, authorizes, or executes it.
 
 ## Evidence discipline
 
@@ -53,19 +55,12 @@ algorithm objective and does not automatically select a successor.
 
 ## Durable records
 
-External Pro owns the scientific content of:
+The durable scientific records are:
 
 - `docs/research/cdc/CONJECTURES.md`;
 - `docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md`;
 - `docs/research/cdc/IDEA_PORTFOLIO.md`;
 - `docs/research/cdc/EVIDENCE_NOTES/<id>.md`.
 
-Controller may mechanically apply only an exact Pro-authored target-file delta.
-If Pro does not supply one, leave these records unchanged; Project Manager may
-author a focused question requesting exact scientific clarification, but
-Project Manager does not author these scientific records.
-
-External Pro review may be a full plural round or focused continuation. It
-selects scientific direction without writing an implementation plan. Direct
-Controller intake is mechanical and must not insert a local scientific decision
-between Pro and Project Manager.
+Authorship, review, transport, and adoption authority are defined only in the
+current role contracts. This reference does not allocate them.

@@ -1,8 +1,11 @@
 # HMASD Agent Context
 
-Normative source for designing HMASD task profiles and assignment briefs. Task
-agents do not load this document automatically: each profile and assignment
-embeds only the standing constraints required by that role.
+Supporting reference for HMASD execution-environment facts and lightweight task
+practice. Canonical role authority, routing, acceptance and validation
+boundaries are defined only in the repository-root `AGENTS.md` and the
+applicable `.agents/roles/*.md` contract. Do not use this file as a role
+constitution. Task profiles and assignments embed the standing execution
+constraints they need.
 
 ## Execution environment
 
@@ -26,47 +29,21 @@ embeds only the standing constraints required by that role.
 You do not commit. Leave your work in the working tree.
 
 No `git add`, `commit`, `push`, `stash`, `reset`, `checkout` of tracked files, or
-branch manipulation. The Project Manager integrates, self-validates and accepts
-its assigned package; the Controller owns every commit but performs no technical
-or algorithmic validation. Read-only Git
-inspection is allowed only when the assignment needs it.
+branch manipulation. Git ownership and integration routing follow the canonical
+role contracts. Read-only Git inspection is allowed only when the assignment
+needs it.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.
 Report it rather than working around it.
 
-## Code-side semantic ownership
+## Role-contract boundary
 
-Project Manager owns every concrete code-side artifact from executable
-definition through implementation, tests, acceptance evidence and code-side
-reconciliation. If external Pro must freeze a protected choice before that work
-can continue, PM also authors and repairs the reviewer-visible brief, evidence
-manifest and question. Those files declare:
-
-```text
-semantic_author=project_manager
-artifact_scope=reviewer_visible_code_side
-scientific_authority=external_pro
-```
-
-This does not let PM choose science or operate external-review transport.
-Project Manager owns required-field validation, technical review, tests and
-package acceptance. Controller checks only route/source identity, exact declared
-paths and hashes, and Git visibility, then commits, pushes and transmits the
-exact PM-accepted files unchanged through
-`$hmasd-review-round` and `$browser:control-in-app-browser`. Controller owns the
-registered conversation, exact raw archive and heartbeat mechanically; it never
-classifies response completeness, interprets science or authors a follow-up.
-Internal PM audits are never converted by Controller into reviewer prose. Exact
-raw returns to PM before code-side reconciliation or a focused package. PM
-repairs its own findings before readiness; Controller does not approve or reject
-the package.
-
-```text
-pm_acceptance_authority=exclusive
-controller_validation_authority=none
-repair_owner=project_manager
-```
+Role-specific semantic ownership, reviewer-package authorship, acceptance,
+repair, transport and archival responsibilities live in root `AGENTS.md` and
+the applicable `.agents/roles/*.md` contracts. Consult those sources directly
+when constructing an assignment; do not copy their authority markers or turn
+this environment reference into a parallel policy source.
 
 ## Active-line development
 

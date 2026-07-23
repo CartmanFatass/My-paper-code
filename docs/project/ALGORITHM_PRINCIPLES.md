@@ -7,10 +7,9 @@ specification, experiment dashboard, or research history.
 Current ownership and the scheduled action belong in
 `docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
 counterexamples, idea status and evidence notes live under
-`docs/research/cdc/`. External GPT-5.6 Pro owns scientific CDC decisions. The
-Controller archives and adopts those decisions and maintains the research
-records. The Project Manager translates an adopted implementation action
-into executable design.
+`docs/research/cdc/`. Canonical role authority for scientific decisions,
+adoption, realization and acceptance is defined only in root `AGENTS.md` and
+the applicable `.agents/roles/*.md` contracts; this file does not restate it.
 Formal experiment contracts and dispositions belong in
 `docs/project/ExpRecord.md`. Git history preserves removed research history.
 
@@ -91,10 +90,10 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 ## 3. CDC Open Research Loop
 
 Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-External GPT-5.6 Pro owns scientific decisions in this loop. It may use a full
-plural review or a focused continuation in the same registered conversation.
-The Controller preserves and adopts that judgment; the Project Manager
-realizes the adopted algorithm without replacing the scientific direction.
+Operate this loop under the canonical role contracts. Scientific review may use
+a full plural review or a focused continuation in the same registered
+conversation; downstream realization must preserve the adopted scientific
+direction.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -195,18 +194,10 @@ counterexample, a corrected definition, a retained lemma, a benchmark
 identification result or a portfolio update. Documentation and workflow status
 alone are support work.
 
-External GPT-5.6 Pro generates and corrects conjectures, derives consequences,
-constructs counterexamples, extracts lemmas and chooses one scheduled action
-while retaining plural explanations. The Project Manager owns algorithmic and
-technical feasibility, realization, independent review, tests and acceptance.
-The Controller checks only mechanical provenance, maintains records and owns
-resources, Git, claim ceilings and user communication; it does not validate PM
-work.
-
-```text
-pm_acceptance_authority=exclusive
-controller_validation_authority=none
-```
+Role-specific responsibilities for scientific review, adoption, implementation,
+acceptance, provenance, resources and communication are defined only in root
+`AGENTS.md` and `.agents/roles/*.md`. This principles file specifies the
+scientific result and evidence semantics those roles must preserve.
 
 Review output never authorizes code or compute by itself.
 

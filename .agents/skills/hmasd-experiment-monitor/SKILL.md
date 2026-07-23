@@ -1,45 +1,78 @@
 ---
 name: hmasd-experiment-monitor
-description: Observe one already-authorized HMASD experiment run in the registered persistent Codex Spark monitor session. Use for assigning a run, bounded progress checks, ETA-based heartbeat adjustment, terminal evidence collection, or monitor-error reporting. Do not use to launch, repair, extend, interpret, or authorize experiments.
+description: Observe one already-authorized HMASD experiment with bounded read-only polling, ETA reporting, heartbeat control, recovery, and exact terminal return.
 ---
 
-# HMASD Experiment Monitor
+# HMASD Experiment Monitor Procedure
 
-Operate only as the registered `experiment_monitor` session. The Controller
-assigns a named, already-authorized run; this Skill grants no experiment,
-scientific, Git, or file-write authority.
+## Contract boundary
 
-## Assignment
+Role contracts are normative. Read the root `AGENTS.md` and these relevant role
+documents before operating:
 
-Accept assignments beginning with `$hmasd-experiment-monitor`. Before accepting
-`MONITOR_ASSIGNMENT`, confirm that it names the `run_id`,
-`run_root`, authoritative status/progress/result paths, and the Controller's
-registered role. Inspect only that run. Do not modify repository files,
-launch/restart a process, repair a failure, extend a budget, or interpret
-scientific meaning.
+- `.agents/roles/EXPERIMENT_MONITOR.md`
+- `.agents/roles/CONTROLLER.md`
 
-## Observation and heartbeat
+This Skill grants no authority. It contains only the mechanics for observing
+and reporting one assigned run.
 
-Make one bounded status read per wake-up. Report meaningful progress, phase,
-and the main available quantity (update/step, shard generation, or evaluation
-cell count). Estimate ETA from observed completed work and the assigned
-contract. Own the heartbeat: create it after assignment, never use a cadence
-shorter than 10 minutes, and retarget it only when ETA or phase changes
-materially. Do not poll with sleeps or open/close unrelated tasks.
+## Assignment intake
 
-At a terminal state or monitor error, delete the heartbeat before delivery.
+Accept only an assignment beginning with `$hmasd-experiment-monitor`. Before
+accepting `MONITOR_ASSIGNMENT`, require:
+
+- `run_id` and `run_root`;
+- exact authoritative status, progress, and result or failure paths;
+- mechanically defined terminal criteria and the authorized budget boundary;
+- the reporting cadence or initial wake time; and
+- the Project Manager return requirement, if any; Controller remains the local
+  operator of this procedure.
+
+Reject an incomplete or identity-ambiguous assignment without inspecting a
+different run. Do not modify repository files.
+
+## Bounded observation and ETA
+
+On each assignment or scheduled wake-up:
+
+1. Read only the assigned process state and exact assigned paths.
+2. Capture observed time, state, phase, liveness, and the main progress quantity
+   named by the assignment, such as update/step, shard generation, or evaluation
+   cell count.
+3. Compare with the preceding snapshot. Estimate ETA only from observed deltas
+   and the assigned contract; otherwise report ETA as unavailable with the
+   direct reason.
+4. Send a status update only for meaningful progress, phase change, terminal
+   state, failure signal, or a requested scheduled report.
+
+Make one bounded status read per wake-up. Do not poll with blocking sleeps,
+inspect unrelated runs, or open and close unrelated tasks.
+
+## Heartbeat mechanics
+
+Create one Controller-owned monitoring heartbeat after accepting the assignment. Never use a
+cadence shorter than 10 minutes. Retarget it only when the ETA or phase changes
+materially, and keep at most one heartbeat for the run.
+
+Each heartbeat wakes the same assignment for one bounded observation; it does
+not launch, restart, repair, extend, configure, or terminate a process. At a
+terminal state or terminal monitor error, delete the heartbeat and confirm it
+is absent before terminal return.
 
 ## Recovery before monitor error
 
-No progress delta, unavailable ETA, a transient read failure, missing path,
-route lookup failure or delivery failure is not immediately `MONITOR_ERROR`.
-Keep the same run assignment active and perform bounded self-recovery within the
-read-only authority: inspect the direct error, revalidate the exact assigned
-paths and run state, retry after an observable state change or scheduled wake,
-and re-resolve the Controller route before delivery. Never launch, restart,
-repair or mutate the experiment, and never switch to another task or route.
+No progress delta, unavailable ETA, a transient read failure, missing path, or
+local return failure is immediately `MONITOR_ERROR`.
+Keep the same assignment and perform bounded read-only recovery:
 
-Report each attempt in commentary:
+1. Inspect the direct error and latest observable run state.
+2. Revalidate the exact assigned paths and run identity.
+3. Retry only after an observable state change or scheduled wake, or use a
+   materially distinct read-only check.
+4. Revalidate the active Controller task and the exact assigned run identity.
+
+Never switch runs, invent a cross-task route, or repeat an identical failed
+action without changed state. Report every attempt:
 
 ```text
 RECOVERY_ATTEMPT
@@ -49,18 +82,16 @@ action=<read-only diagnostic or recovery action>
 outcome=<observed result>
 ```
 
-Only emit terminal `MONITOR_ERROR` when no safe read-only recovery remains. The
-payload then includes `recovery_attempts=<count>`, a concise attempt summary and
-`recovery_exhausted=true`.
+Emit terminal `MONITOR_ERROR` only when no safe read-only recovery remains. Its
+payload includes the direct cause, `recovery_attempts=<count>`, a concise attempt
+summary, and `recovery_exhausted=true`.
 
-## Terminal delivery
+## Terminal return
 
-Resolve the active Controller with
-`hmasd-dispatch-task/scripts/resolve_task_route.ps1 -Role controller`
-immediately before delivery. Require nonempty `hostId`, `threadId`, `model`,
-and `thinking`; send exactly one real cross-thread message with those values
-copied unchanged. Never guess a target, reuse stale metadata, change model or
-thinking, or start a successor.
+Return the terminal payload locally to the active Controller task. This
+procedure performs no cross-task send. If the assignment requires Project
+Manager delivery, Controller uses `$hmasd-dispatch-task` afterward and copies
+the payload unchanged; that dispatcher resolves the live target profile.
 
 ```text
 EXPERIMENT_MONITOR
@@ -77,8 +108,7 @@ recovery_attempts=<count or 0>
 recovery_exhausted=<true only for MONITOR_ERROR; otherwise false>
 ```
 
-If route resolution or delivery fails, apply the recovery contract and retry
-only the same payload to the newly re-resolved registered Controller after
-proving no accepted delivery exists. If recovery is exhausted, return the same
-payload locally with `terminal=MONITOR_ERROR`, the direct error and the recovery
-summary. Do not retry through another task.
+If local return fails, apply the recovery procedure. If recovery is exhausted,
+return that payload with `terminal=MONITOR_ERROR`, the direct error, attempt
+summary, and `recovery_exhausted=true`. Do not route through another task from
+inside this procedure.
