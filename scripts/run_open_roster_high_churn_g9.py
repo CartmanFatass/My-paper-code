@@ -214,6 +214,7 @@ def train(
             raise ValueError("formal G9 source commit must be full lowercase SHA-1")
     if replicates <= 0 or replicates > FORMAL_REPLICATES or eval_episodes <= 0:
         raise ValueError("G9 counts are invalid")
+    configure_runtime(ACTION_SEED_BASE)
     provenance = _validate_g8_provenance(g8_run_root)
     run_root.mkdir(parents=True, exist_ok=False)
     checkpoint_root = run_root / "checkpoints"
