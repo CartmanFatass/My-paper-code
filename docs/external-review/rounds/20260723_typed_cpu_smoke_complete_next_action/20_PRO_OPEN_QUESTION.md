@@ -7,7 +7,6 @@ Evidence commit: `1cc6552a00c06bc7389235a4474ca0005c4ca9b6`
 You are the external GPT-5.6 Pro scientific decision authority for the next HMASD CDC step. Two of five authorized conclusion-bearing iterations are consumed; three remain. Use the GitHub connector to read the exact evidence commit and cite the commit and paths actually used. Begin with the canonical manifest:
 
 - `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/01_SHARED_SOURCE_MANIFEST.md`
-- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/02_TYPED_SMOKE_TERMINAL_SUMMARY.json`
 - `docs/project/CURRENT_WORK.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/project/IMPLEMENTATION_PLAN.md`

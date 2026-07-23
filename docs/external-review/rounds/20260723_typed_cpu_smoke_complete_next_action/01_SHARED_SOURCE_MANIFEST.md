@@ -18,11 +18,10 @@ Read these exact files at the evidence commit through the GitHub connector:
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/30_EVIDENCE_RECONCILIATION.md`
 - `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/50_DISPOSITION.md`
-- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/02_TYPED_SMOKE_TERMINAL_SUMMARY.json`
 - `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md`
 - `ha_ctse_process/event_held_commitment_link.py`
 - `ha_ctse_process/noncalendar_commitment_testbed.py`
 - `scripts/run_noncalendar_commitment_benchmark_g0.py`
 - `tests/ha_ctse_process_noncalendar_commitment_benchmark_g0_test.py`
 
-The 299,713,914-byte local terminal manifest is intentionally not uploaded. Its exact SHA-256 and Controller-extracted terminal fields are recorded in `02_TYPED_SMOKE_TERMINAL_SUMMARY.json`. Local files, ignored runtime files and later working-tree changes are outside this evidence boundary.
+The 299,713,914-byte local terminal manifest is intentionally not uploaded. Controller-extracted terminal fields and the local artifact path are recorded in `docs/research/cdc/EVIDENCE_NOTES/20260723_CPU_NATURAL_BRANCH_TYPED_CONTRACT.md`. Local files, ignored runtime files and later working-tree changes are outside this evidence boundary.
