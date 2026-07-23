@@ -1,4 +1,4 @@
-HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_causal_audit_quota_shortfall_semantics body_sha256=841922e7aa04b445c905872c78995dfc5c9bd2e3889b0159480dc89c82a9f610
+HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_causal_audit_quota_shortfall_semantics body_sha256=0988a600a4f2e3da450f7cb2b91bf182b0e42a9e3717be4c98d485084e0efcb0
 
 # GPT-5.6 Pro Focused CDC Continuation — Causal-Audit Quota Shortfall
 
@@ -34,8 +34,8 @@ Your accepted prior ruling scientifically selected one preregistered formal OR/D
 
 The collective preregistration Verifier passed every other executable fact. The independent Reviewer found one HIGH end-to-end contradiction at the frozen source:
 
-1. `ha_ctse_process/noncalendar_commitment_testbed.py::select_result_branch` returns `BENCHMARK_NON_IDENTIFIABLE` when any per-replicate KEEP or RENEW causal-audit count is below 32.
-2. `scripts/run_noncalendar_commitment_benchmark_g0.py::_collect_causal_audit_evidence` instead raises `RuntimeError("INVALID_OPERATIONAL causal audit selected-row quota shortfall")` before publishing a causal-audit artifact.
+1. `select_result_branch` in `ha_ctse_process/noncalendar_commitment_testbed.py` returns `BENCHMARK_NON_IDENTIFIABLE` when any per-replicate KEEP or RENEW causal-audit count is below 32.
+2. `_collect_causal_audit_evidence` in `scripts/run_noncalendar_commitment_benchmark_g0.py` instead raises `RuntimeError("INVALID_OPERATIONAL causal audit selected-row quota shortfall")` before publishing a causal-audit artifact.
 3. `_causal_audit_valid` rejects any shortfall artifact.
 4. `formal_evaluate` catches the exception and `_publish_operational_failure` publishes terminal `INVALID_OPERATIONAL`.
 5. The existing quota test exercises only the isolated selector, so the direct formal path cannot produce the preregistered non-identifiable result.
