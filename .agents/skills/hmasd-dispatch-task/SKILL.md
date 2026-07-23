@@ -16,10 +16,43 @@ controller <-> experiment_monitor
 controller <-> open_divergent_exchange
 ```
 
+## Skill trigger contract
+
+The Controller activates this dispatcher as `$hmasd-dispatch-task`. When a
+receiving role depends on a Skill, begin the assignment with its exact
+catalog trigger in `$skill-name` form. Use `$hmasd-review-exchange` and
+`$hmasd-experiment-monitor`; never send a `SKILL.md` path or a path-valued
+`role_skill` field as a loading instruction. Registry paths identify installed
+assets only and are not dispatch syntax.
+
 The Controller owns routing, continuation, Git, formal-compute authority, and
 direct evidence intake. Under an active autonomous grant, an accepted callback
 wakes the Controller to route the next already-authorized action. Stop only on
-a paused/exhausted grant, genuine blocker, or protected-scope expansion.
+a paused/exhausted grant, genuine blocker, or protected-scope expansion. A
+reported failure is not a genuine blocker until the role has completed bounded self-recovery
+and reported its recovery attempts.
+
+## Recovery before blocked
+
+On timeout, approval wait, missing state, route failure, delivery failure or
+tool/runtime error, keep the current handoff active. The owning role inspects
+the direct error and current state, tries safe materially distinct recovery
+paths within its authority, and reports each attempt in commentary as:
+
+```text
+RECOVERY_ATTEMPT
+attempt=<positive integer>
+boundary=<failed operation>
+action=<diagnostic or recovery action>
+outcome=<observed result>
+```
+
+Do not repeat an identical failed action without changed state, switch to an
+unregistered task, or widen scientific/compute authority. `waitingOnApproval`
+is an actionable wait, not blocked. Only after no safe in-scope recovery remains
+may a role emit `*_BLOCKED` or `MONITOR_ERROR`; that terminal payload includes
+`recovery_attempts=<count>`, a concise attempt summary, the direct remaining
+cause, and `recovery_exhausted=true`.
 
 ## Resolve before every send
 
@@ -57,8 +90,10 @@ authority.
 Before `IMPLEMENTATION_READY` or `RESEARCH_MANAGER_BLOCKED`, the Manager resolves
 `controller` and calls `codex_app__send_message_to_thread` once with one complete
 terminal payload to that exact route. A
-failed delivery is `PROJECT_MANAGER_DELIVERY_BLOCKED`; it never authorizes a
-guessed retry or successor.
+failed delivery enters the shared recovery contract. Retry the same handoff only
+after re-resolving the route and proving no accepted delivery exists. Only an
+exhausted recovery becomes `PROJECT_MANAGER_DELIVERY_BLOCKED`; it never
+authorizes a guessed route or successor.
 
 ## Experiment Monitor
 
@@ -67,7 +102,8 @@ Before its first assignment, confirm the live route is `gpt-5.3-codex-spark` at
 `medium`; do not silently fallback. Send `MONITOR_ASSIGNMENT` with run ID, root,
 authoritative status/progress/result paths, expected terminal condition, and ETA.
 
-The monitor uses `hmasd-experiment-monitor`, owns ETA-based heartbeats, and
+Begin the assignment with `$hmasd-experiment-monitor`. The monitor owns
+ETA-based heartbeats and
 returns one terminal `EXPERIMENT_MONITOR` payload to the resolved Controller. It
 never launches, restarts, repairs, extends, edits, or interprets the run.
 
@@ -76,10 +112,15 @@ never launches, restarts, repairs, extends, edits, or interprets the run.
 Use `open_divergent_exchange` only for registered external-Pro transport. The
 role owns one neutral handoff, natural-response capture, exact raw archival, and
 its heartbeat. It never chooses science, code, compute, Git, or a successor.
+Begin every review assignment or recovery continuation with
+`$hmasd-review-exchange`.
 
 Accept a callback only after matching its registered source role, round,
 handoff ID, and raw path. `REVIEW_STAGE_COMPLETE` or `REVIEW_STAGE_BLOCKED`
-wakes the Controller for direct evidence intake and next-action routing.
+wakes the Controller for direct evidence intake and next-action routing. A
+blocked callback is accepted only when it also reports recovery attempts and
+`recovery_exhausted=true`; otherwise continue the same handoff under the shared
+recovery contract.
 
 ## Authority boundary
 

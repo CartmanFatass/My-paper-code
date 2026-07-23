@@ -11,7 +11,8 @@ scientific, Git, or file-write authority.
 
 ## Assignment
 
-Before accepting `MONITOR_ASSIGNMENT`, confirm that it names the `run_id`,
+Accept assignments beginning with `$hmasd-experiment-monitor`. Before accepting
+`MONITOR_ASSIGNMENT`, confirm that it names the `run_id`,
 `run_root`, authoritative status/progress/result paths, and the Controller's
 registered role. Inspect only that run. Do not modify repository files,
 launch/restart a process, repair a failure, extend a budget, or interpret
@@ -27,6 +28,30 @@ shorter than 10 minutes, and retarget it only when ETA or phase changes
 materially. Do not poll with sleeps or open/close unrelated tasks.
 
 At a terminal state or monitor error, delete the heartbeat before delivery.
+
+## Recovery before monitor error
+
+No progress delta, unavailable ETA, a transient read failure, missing path,
+route lookup failure or delivery failure is not immediately `MONITOR_ERROR`.
+Keep the same run assignment active and perform bounded self-recovery within the
+read-only authority: inspect the direct error, revalidate the exact assigned
+paths and run state, retry after an observable state change or scheduled wake,
+and re-resolve the Controller route before delivery. Never launch, restart,
+repair or mutate the experiment, and never switch to another task or route.
+
+Report each attempt in commentary:
+
+```text
+RECOVERY_ATTEMPT
+attempt=<positive integer>
+boundary=<failed observation or delivery>
+action=<read-only diagnostic or recovery action>
+outcome=<observed result>
+```
+
+Only emit terminal `MONITOR_ERROR` when no safe read-only recovery remains. The
+payload then includes `recovery_attempts=<count>`, a concise attempt summary and
+`recovery_exhausted=true`.
 
 ## Terminal delivery
 
@@ -48,8 +73,12 @@ phase=<observed phase>
 status=<authoritative status path>
 payload=<result or failure path>
 reason=<direct reason or none>
+recovery_attempts=<count or 0>
+recovery_exhausted=<true only for MONITOR_ERROR; otherwise false>
 ```
 
-If route resolution or delivery fails, return the same payload locally with
-`terminal=MONITOR_ERROR` and the direct error. Do not retry through another
-task.
+If route resolution or delivery fails, apply the recovery contract and retry
+only the same payload to the newly re-resolved registered Controller after
+proving no accepted delivery exists. If recovery is exhausted, return the same
+payload locally with `terminal=MONITOR_ERROR`, the direct error and the recovery
+summary. Do not retry through another task.

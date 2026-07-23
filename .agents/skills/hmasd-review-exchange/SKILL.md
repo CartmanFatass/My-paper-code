@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-exchange
-description: Use inside the registered HMASD Open-Pro Exchange session when receiving REVIEW_STAGE, REVIEW_STAGE_COMPLETE, REVIEW_STAGE_BLOCKED, an assigned Pro review question/raw path, a review heartbeat wake, or a retry/callback for the registered OPEN_DIVERGENT external-review conversation.
+description: Use inside the registered HMASD Open-Pro Exchange session when receiving REVIEW_STAGE, an assigned Pro review question/raw path, a review heartbeat wake, a browser transport failure or approval wait, or a retry/callback for the registered OPEN_DIVERGENT external-review conversation.
 ---
 
 # HMASD Open-Pro Exchange
@@ -10,8 +10,9 @@ description: Use inside the registered HMASD Open-Pro Exchange session when rece
 Accept only:
 
 ```text
+$hmasd-review-exchange
 REVIEW_STAGE
-role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+skill=$hmasd-review-exchange
 reviewer_role=OPEN_DIVERGENT
 round=<id>
 stage_commit=<40-character pushed SHA>
@@ -67,6 +68,33 @@ the response is pending and avoid duplicate tabs or needless reloads. Choose
 the inspection and recovery method with model judgment; one failed locator or
 DOM assumption is not a blocker.
 
+## Recovery before blocked
+
+Any browser, runtime, navigation, approval, route, archive or callback failure
+starts bounded self-recovery for the same handoff. First inspect the direct tool
+error and current page or delivery state. Then try safe materially distinct
+methods available to this Exchange, such as reconnecting the registered runtime,
+reusing an existing registered tab, opening the registered conversation after
+approval, or re-resolving the live route. Before retrying assignment submission,
+prove that no visible accepted freshness fence exists. Never repeat an identical
+failed action without changed state and never create a duplicate assignment.
+
+Report each attempt in commentary:
+
+```text
+RECOVERY_ATTEMPT
+attempt=<positive integer>
+boundary=<failed operation>
+action=<diagnostic or recovery action>
+outcome=<observed result>
+```
+
+`waitingOnApproval` is a live recoverable state, not a blocker. A timeout or two
+failed initializations alone are not terminal while another safe in-scope
+recovery remains. Emit `REVIEW_STAGE_BLOCKED` only when the registered
+conversation, pushed boundary, raw archive, callback route or authority remains
+unavailable after all safe in-scope recovery is exhausted.
+
 When the current response stops naturally and is stable, archive it to the
 assigned raw, reread it and require exact text equality. Preserve every complete
 response even when content is incomplete or references the wrong evidence.
@@ -81,9 +109,10 @@ needed.
 ## Heartbeat
 
 After Pro visibly accepts the assignment, create one 5-minute heartbeat owned
-by this Exchange session. Each wake explicitly reloads both Skills and performs
-one bounded inspection. Do not sleep, poll continuously, send waiting messages
-or create a second heartbeat.
+by this Exchange session. Each wake explicitly invokes
+`$hmasd-review-exchange` and `$hmasd-dispatch-task`, then performs one bounded
+inspection. Do not sleep, poll continuously, send waiting messages or create a
+second heartbeat.
 
 Terminal success requires tool evidence for all three facts:
 
@@ -102,7 +131,7 @@ route fields and send once:
 ```text
 REVIEW_STAGE_COMPLETE
 source_thread_id=<registered open_divergent_exchange thread ID>
-role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+skill=$hmasd-review-exchange
 role=OPEN_DIVERGENT
 handoff_id=<round>:OPEN_DIVERGENT:complete:<question>
 round=<id>
@@ -114,7 +143,9 @@ quality_notes=<concise semantic observation or none>
 ```
 
 For a genuine operational boundary send `REVIEW_STAGE_BLOCKED` with the same
-`source_thread_id`, `role_skill`, role and round,
+`source_thread_id`, `skill`, role and round,
 `handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>` and the direct reason.
-Diagnose and attempt reasonable in-scope recovery before blocking; do not ask the
-Controller for selectors, browser commands or click sequences.
+It also includes `recovery_attempts=<count>`, a concise attempt summary and
+`recovery_exhausted=true`. Do not ask the Controller for selectors, browser
+commands or click sequences; request user action only when the application
+itself exposes a required approval.

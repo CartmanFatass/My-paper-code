@@ -14,9 +14,14 @@ if ($registry.schema_version -ne 25 -or @($registry.reviewers.PSObject.Propertie
 foreach ($required in @('External GPT-5.6 Pro is the scientific decision source','one scheduled research action','Controller direct evidence intake','Project Manager','50_DISPOSITION.md')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
-foreach ($required in @('reviewer_role=OPEN_DIVERGENT','ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY','COMPLETE_WITH_GAPS','callback delivery','heartbeat was deleted','source_thread_id=<registered open_divergent_exchange thread ID>','handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>')) {
+foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-exchange', 'recovery_exhausted=true')) {
+    if (-not $round.Contains($required)) { throw "Review round dispatch contract missing: $required" }
+}
+if ($round.Contains('role_skill=.agents/skills/')) { throw 'Review round still sends a Skill path trigger' }
+foreach ($required in @('$hmasd-review-exchange','skill=$hmasd-review-exchange','reviewer_role=OPEN_DIVERGENT','ARCHIVE_NATURAL_RESPONSE_AND_REPORT_QUALITY','COMPLETE_WITH_GAPS','callback delivery','heartbeat was deleted','RECOVERY_ATTEMPT','recovery_exhausted=true','source_thread_id=<registered open_divergent_exchange thread ID>','handoff_id=<round>:OPEN_DIVERGENT:blocked:<question>')) {
     if (-not $exchange.Contains($required)) { throw "Exchange missing: $required" }
 }
+if ($exchange.Contains('role_skill=.agents/skills/')) { throw 'Exchange transport still relies on a Skill path trigger' }
 if (-not $heartbeat.Contains('[ValidateSet("OPEN_DIVERGENT")]') -or
     ([regex]::Matches($heartbeat, 'ValidateSet\(').Count -ne 1)) { throw 'Heartbeat role set is not singular' }
 try {

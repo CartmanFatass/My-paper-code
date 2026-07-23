@@ -6,6 +6,9 @@ $skillPath = Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md'
 $rolesPath = Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json'
 $skill = Get-Content -LiteralPath $skillPath -Raw
 $roles = Get-Content -LiteralPath $rolesPath -Raw | ConvertFrom-Json
+$agents = Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md') -Raw
+$exchange = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-review-exchange/SKILL.md') -Raw
+$monitor = Get-Content -LiteralPath (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 
 $expected = @('controller', 'project_manager', 'experiment_monitor', 'open_divergent_exchange')
 $actual = @($roles.roles.PSObject.Properties.Name)
@@ -54,6 +57,20 @@ foreach ($required in @(
 }
 foreach ($forbidden in @('controller <-> research_project_manager', 'agent://', 'history://')) {
     if ($skill.Contains($forbidden)) { throw "Retired persistent edge remains: $forbidden" }
+}
+foreach ($required in @('$hmasd-dispatch-task', '$hmasd-review-exchange', '$hmasd-experiment-monitor',
+    'bounded self-recovery', 'recovery attempts')) {
+    if (-not $agents.Contains($required)) { throw "Controller contract missing: $required" }
+    if (-not $skill.Contains($required)) { throw "Dispatcher recovery contract missing: $required" }
+}
+if ($exchange.Contains('role_skill=.agents/skills/')) {
+    throw 'Exchange still sends a Skill path instead of a $skill_name trigger'
+}
+foreach ($required in @('$hmasd-review-exchange', 'RECOVERY_ATTEMPT', 'recovery_exhausted=true')) {
+    if (-not $exchange.Contains($required)) { throw "Exchange recovery contract missing: $required" }
+}
+foreach ($required in @('$hmasd-experiment-monitor', 'RECOVERY_ATTEMPT', 'recovery_exhausted=true')) {
+    if (-not $monitor.Contains($required)) { throw "Monitor recovery contract missing: $required" }
 }
 $sourceResolver = Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_source_boundary.ps1'
 if (-not (Test-Path -LiteralPath $sourceResolver -PathType Leaf)) { throw 'Missing source-boundary resolver' }

@@ -31,7 +31,8 @@ if ($dispatcher -match '(?i)\bOMP\b|agent://|history://') { throw 'Dispatcher re
 
 $monitor = Get-Content (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 foreach ($required in @('ETA', '10 minutes', 'delete the heartbeat', 'EXPERIMENT_MONITOR',
-    'Do not modify repository files', 'Do not retry')) {
+    'Do not modify repository files', '$hmasd-experiment-monitor', 'RECOVERY_ATTEMPT',
+    'recovery_exhausted=true')) {
     if (-not $monitor.Contains($required)) { throw "Monitor Skill missing: $required" }
 }
 

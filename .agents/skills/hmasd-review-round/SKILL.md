@@ -81,7 +81,7 @@ $hmasd-dispatch-task
 $hmasd-review-exchange
 
 REVIEW_STAGE
-role_skill=.agents/skills/hmasd-review-exchange/SKILL.md
+skill=$hmasd-review-exchange
 reviewer_role=OPEN_DIVERGENT
 round=<id>
 stage_commit=<40-character pushed SHA>
@@ -118,3 +118,11 @@ Pro one focused question; if it is algorithm-realization-only, the later
 Project Manager resolves it inside its assignment. Never prescribe selectors,
 clicks or browser commands. Review and direct evidence intake never authorize
 implementation or compute by themselves.
+
+Treat a transient transport failure, timeout or `waitingOnApproval` as an active
+handoff. The Exchange owns bounded self-recovery and reports each
+`RECOVERY_ATTEMPT`; the Controller continues the same handoff while a safe
+in-scope recovery remains. Accept `REVIEW_STAGE_BLOCKED` only when it records
+the attempted recoveries, the remaining direct cause and
+`recovery_exhausted=true`. A non-exhausted failure report is a recovery update,
+not a terminal review disposition.

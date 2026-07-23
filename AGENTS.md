@@ -41,9 +41,15 @@ realization and code-side decisions.
 
 ## Task dispatch
 
-Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever work
+Automatically use `$hmasd-dispatch-task` whenever work
 may require Project Manager or Monitor dispatch, persistent Open-Pro
 communication, external review or a role callback.
+
+Every cross-task assignment that requires a Skill starts with the exact catalog
+trigger `$skill-name`. Send `$hmasd-review-exchange` and
+`$hmasd-experiment-monitor` as triggers; never send a `SKILL.md` path or use a
+path-valued `role_skill` field to request loading. Filesystem paths may remain
+registry metadata, but they are not Skill invocation syntax.
 
 The active surfaces are:
 
@@ -67,8 +73,8 @@ registry section identifiers, not callable `agent_type` values. An
 registered custom agent with an unnamed/default child.
 
 Persistent roles receive a complete assignment through live route resolution.
-Only Open-Pro Exchange uses a registered event such as `REVIEW_STAGE`, its role
-Skill and live route verification.
+Only Open-Pro Exchange uses a registered event such as `REVIEW_STAGE`, the
+`$hmasd-review-exchange` trigger and live route verification.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -79,6 +85,16 @@ focused external follow-up, CDC intake, implementation handoff and monitor
 assignment do not require repeated approval when they remain inside that grant.
 Stop only when the grant is exhausted or paused, a genuine blocker remains, or
 the next action would expand protected scientific or formal-compute authority.
+
+A transient timeout, missing ETA, approval wait, failed locator, unavailable
+runtime, route lookup error or delivery error is not yet a genuine blocker.
+The owning role first performs bounded self-recovery inside its existing
+authority: inspect the direct error, verify current state, try safe materially
+distinct recovery paths, and report recovery attempts as they occur. Do not
+repeat an identical failed action without changed state. A terminal
+`*_BLOCKED` or `MONITOR_ERROR` is admissible only after no safe in-scope recovery
+remains; its payload includes the direct cause, attempted recoveries and
+`recovery_exhausted=true`.
 
 ## Authority and write ownership
 
@@ -135,8 +151,12 @@ message, not an assumption about the task UI. Before returning
 Controller through the dispatch registry and send the complete terminal payload
 with `codex_app__send_message_to_thread`, copying that resolved target's
 `hostId`, `threadId`, model and thinking unchanged. A failed delivery is itself
+an operational failure to diagnose, not an immediate terminal result. Re-resolve
+the route, inspect actual delivery state and retry the same handoff only when no
+accepted delivery exists. After bounded self-recovery is exhausted it becomes
 `PROJECT_MANAGER_DELIVERY_BLOCKED`; it never authorizes a default-route retry
-or a successor task.
+or a successor task. The terminal payload records the recovery attempts and
+`recovery_exhausted=true`.
 
 ## Protected changes
 
