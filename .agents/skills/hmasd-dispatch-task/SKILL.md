@@ -103,11 +103,14 @@ request_identity=<assignment, package, review, or run identity>
 operation=<mechanical operation>
 operation_status=<COMPLETE or BLOCKED>
 source_commit=<accepted source identity>
-result_identity=<commit, raw hash, artifact root, or route receipt>
-path_hash_source_status=<exact mechanical outcome>
+result_identity=<commit, raw path, artifact root, or route receipt>
+path_source_status=<exact mechanical outcome>
 remaining_authority=<unchanged authorization state>
 blockers=<none or exact mechanical blocker>
 ```
+
+Do not add per-file hashes to an assignment or receipt. For code integration,
+the exact path set, staged diff check, and resulting Git commit are sufficient.
 
 Before stopping or making a user-only completion report, run
 `scripts/resolve_task_route.ps1 -Role project_manager`, send that receipt once

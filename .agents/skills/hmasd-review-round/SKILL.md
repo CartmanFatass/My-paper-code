@@ -26,9 +26,9 @@ task or Monitor.
 
 Require the assigned round path, pushed 40-character `stage_commit`, exact
 question path, exact raw path, mechanical-intake path, registered reviewer
-conversation, and declared input paths and hashes. Before browser submission:
+conversation, and declared input paths. Before browser submission:
 
-1. Confirm the supplied files, paths, hashes, and source identity match the
+1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
 2. Run
    `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
@@ -53,7 +53,7 @@ visible or the page title looks familiar.
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
 | `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes or `Stop generating`/`Stop answering` is active, remain pending. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, retry, error or continue control. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_RETURN` | Candidate passes stable completion checks | Write exact visible text to raw, reread/hash for equality, write mechanical intake, confirm heartbeat absence and route raw to PM. | Project Manager receives exact raw; Controller performs no semantic or technical validation. |
+| `ARCHIVE_AND_RETURN` | Candidate passes stable completion checks | Write exact visible text to raw, reread for exact equality, write mechanical intake, confirm heartbeat absence and route raw to PM. | Project Manager receives exact raw; Controller performs no semantic or technical validation. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
 completion evidence, not a substitute for message identity and inactive
@@ -196,12 +196,16 @@ After stable completion:
 
 1. Copy the complete visible response text to the assigned raw path without
    rewriting, normalization, filtering, or summary.
-2. Reread it and require exact text equality; record its hash, source commit,
-   paths, completion evidence, and any transport recovery in the mechanical
+2. Reread it and require exact text equality; record its source commit, paths,
+   completion evidence, and any transport recovery in the mechanical
    intake. Record no scientific quality classification.
 3. Delete the Controller-owned heartbeat and confirm it is absent.
 4. Resolve the registered Project Manager route and return the exact raw to
    Project Manager with the mechanical identity receipt unchanged.
+
+Do not compute or require input-file or raw-response hashes. The pushed Git
+commit identifies reviewer inputs; exact reread equality plus the later Git
+commit identifies archived raw.
 
 The required order is:
 

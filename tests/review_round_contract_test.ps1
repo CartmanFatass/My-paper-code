@@ -74,6 +74,14 @@ foreach ($required in @(
     'recovery_exhausted=true')) {
     if (-not $round.Contains($required)) { throw "Review round missing: $required" }
 }
+foreach ($forbidden in @('declared input paths and hashes',
+    'reread/hash for equality', 'record its hash')) {
+    if ($round.Contains($forbidden)) { throw "Review round retains hash handoff: $forbidden" }
+}
+$archiveBuilder = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1') -Raw
+if ($archiveBuilder.Contains('Get-FileHash')) {
+    throw 'Review evidence archive still emits a workflow hash'
+}
 foreach ($forbidden in @('semantic_author=project_manager',
     'artifact_scope=reviewer_visible_code_side', 'repair_owner=project_manager',
     'pm_acceptance_authority=exclusive', 'controller_validation_authority=none',
@@ -166,10 +174,6 @@ else {
         'operational transport diagnostic',
         'heartbeat_terminal_status=absent_confirmed_by_delete_not_found')) {
         if (-not $activeIntake.Contains($required)) { throw "Mechanical intake missing: $required" }
-    }
-    $rawHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $activeRound '21_PRO_OPEN_RAW.md')).Hash.ToLowerInvariant()
-    if (-not $activeIntake.Contains("raw_sha256=$rawHash")) {
-        throw 'Mechanical intake raw hash does not match completed raw'
     }
 }
 try {

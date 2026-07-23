@@ -109,5 +109,4 @@ $item = Get-Item -LiteralPath $output
     file_count = $expected.Count
     files = $expected
     bytes = $item.Length
-    sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $output).Hash.ToLowerInvariant()
 } | ConvertTo-Json -Depth 4 -Compress

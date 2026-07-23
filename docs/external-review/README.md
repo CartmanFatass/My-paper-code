@@ -13,8 +13,7 @@ boundaries are defined only in root `AGENTS.md` and the applicable
 2. Project Manager selects and schedules the next workflow action after exact
    raw intake and reconciliation.
 3. An accepted Project-Manager-authored brief, manifest and question are
-   transmitted unchanged after the canonical mechanical identity, hash and path
-   checks.
+   transmitted unchanged from the declared Git commit and exact paths.
 4. The exact natural response is archived, mechanical intake is written, the
    heartbeat is deleted, and the raw returns to Project Manager without a
    scientific quality classification.

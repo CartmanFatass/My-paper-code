@@ -17,6 +17,8 @@ resolved_model_effort_copy=exact
 static_profile_expectation=forbidden
 sender_profile_override=forbidden
 mechanical_completion_callback=required
+workflow_hash_validation=disabled
+per_file_hash_handoff=forbidden
 ```
 
 The root `AGENTS.md` is the global constitution. This charter narrows the Controller to mechanical execution; it grants no acceptance authority.
@@ -24,7 +26,7 @@ The root `AGENTS.md` is the global constitution. This charter narrows the Contro
 ## Owns
 
 - Exact role routing and delivery to the registered destination.
-- Mechanical verification and reporting of declared paths, hashes, source boundaries, and artifact identity.
+- Mechanical verification and reporting of the declared path set, Git source boundary, and artifact location.
 - Git commands explicitly authorized by the user or an accepted Project Manager handoff.
 - Exact, unchanged transport of Project Manager-authored external-review questions and packages, and exact return of the response.
 - Execution of user-authorized run commands and direct bounded read-only monitoring.
@@ -46,10 +48,10 @@ The root `AGENTS.md` is the global constitution. This charter narrows the Contro
 
 ## Inputs
 
-- A registered route; Project Manager-accepted exact files, paths, hashes, source identity, question, package, or command request; and any required user formal-compute authorization.
+- A registered route; Project Manager-accepted exact paths, Git source identity, question, package, or command request; and any required user formal-compute authorization.
 - A task declaration listing every file it owns for writes. There is no global write lease. Disjoint owned files may be written in parallel; concurrent writes to the same file are forbidden.
 
 ## Outputs and stop
 
-- Exact delivery, Git, source-identity, hash/path, command, and monitor-coordination receipts, or a mechanical failure report that preserves the received content unchanged. A Project Manager-requested operation returns as `CONTROLLER_OPERATION_RECEIPT` with `return_role=project_manager`, request identity, `operation_status`, `result_identity`, source/path/hash facts, `remaining_authority`, and blockers.
+- Exact delivery, Git, source/path, command, and monitor-coordination receipts, or a mechanical failure report that preserves the received content unchanged. A Project Manager-requested operation returns as `CONTROLLER_OPERATION_RECEIPT` with `return_role=project_manager`, request identity, `operation_status`, `result_identity`, source/path facts, `remaining_authority`, and blockers.
 - Stop only after that required callback is confirmed, or after callback recovery is exhausted and `CONTROLLER_CALLBACK_BLOCKED` has been reported. Required authority or exact identity absence remains a mechanical blocked result; scientific, technical-validation, workflow, package-rewrite, or successor decisions remain forbidden. One artifact has one declared acceptance owner; the Controller never substitutes itself for that owner.

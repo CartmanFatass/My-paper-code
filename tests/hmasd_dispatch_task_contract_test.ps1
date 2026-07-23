@@ -79,6 +79,7 @@ foreach ($required in @(
     'return_role=project_manager',
     'operation_status',
     'result_identity',
+    'path_source_status',
     'remaining_authority',
     'resolve_task_route.ps1 -Role project_manager',
     'CONTROLLER_CALLBACK_BLOCKED',
@@ -87,6 +88,9 @@ foreach ($required in @(
     'source_boundary=local_and_remote_aggressive_tip',
     'SOURCE_BOUNDARY_DIVERGED')) {
     if (-not $skill.Contains($required)) { throw "Dispatcher missing: $required" }
+}
+if ($skill.Contains('path_hash_source_status')) {
+    throw 'Dispatcher retains the workflow hash receipt field'
 }
 foreach ($forbidden in @(
     'controller <-> research_project_manager',

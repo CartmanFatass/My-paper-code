@@ -4,13 +4,8 @@
 assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1
 action_kind=bounded_nonformal_measurement_prototype
 source_commit=37d6556a3a4b5bf4ed70a15834e946005354f91f
+implementation_commit=1a4fb630d8c3075380cc3c6562199ee3ea28e9de
 artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3
-manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608
-analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316
-analysis_content_sha256=58ab15a1b59f2ac3d1de98143fa12469b1613b48803653c18e24f6fe69f6e890
-records_sha256=95e3ba31c7feb78ea1bf1298cc42657a306619a40f86a85c795cd40c6f2d3889
-source_bundle_sha256=078bb62e4bfb9aabd1d2b3d167235475e06de0c1eef8b563084d15031b3b8ca7
-measurement_tuple_sha256=673db4684404f1ac45f0bb797a0c0570f4fa0f5739757e0bb774ab56f1029f45
 formal=false
 conclusion_bearing=false
 disposition=MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT
@@ -23,8 +18,8 @@ next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINIT
 
 The registered CPU-only, one-thread `pm3` run completed 192/192 natural episodes,
 384 exact-snapshot event pairs and 384 mark pairs. The two emitted JSON files
-reload through the fail-closed validator with trusted exact byte hashes,
-`status=COMPLETE`, exact source, design, seed, cell and hash identity, exact
+reload through the fail-closed validator with `status=COMPLETE`, exact source,
+design, seed and cell identity, exact
 nested measurement schemas/domains, held-out cross-field equality, and finite
 measurements. The final integrated focused suite passed 92 tests.
 
@@ -32,7 +27,7 @@ The first `pm1` artifact exposed an order-sensitive reloaded-dictionary check;
 `pm2` then exposed an insufficiently deep disk-validation boundary during the
 single integrated advisory review. Both are retained only as diagnostics and
 are not evidence. The final `pm3` artifact was regenerated after exact nested
-schema/domain, held-out equality, and trusted file-hash validation. Its
+schema/domain and held-out equality validation. Its
 measurement tuple is exactly equal to `pm2`, proving the repair changed evidence
 validation rather than scientific values.
 

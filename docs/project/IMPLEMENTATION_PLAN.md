@@ -168,7 +168,7 @@ python scripts/run_ehc_sequence_mediation_prototype_g1.py --output-dir <path>
   `OMP_NUM_THREADS=1`, `MKL_NUM_THREADS=1`.
 - [x] Run one prototype into a new `logs/nonformal_ehc_sequence_mediation_g1_*`
   directory.
-- [x] Verify manifest/analysis hashes, `formal=false`, complete cells, finite
+- [x] Verify exact manifest/analysis schemas, `formal=false`, complete cells, finite
   metrics, reward identity, snapshot/CRN validity, `status=COMPLETE`, controller
   provenance and the validated measurement tuple.
 - [x] Inspect the path for hidden actor fields, G0 coupling, serial per-row

@@ -16,6 +16,8 @@ development_mode=agile_algorithm_research
 backward_compatibility=not_required
 test_scope=proof_sized
 codebase_policy=small_active_line_only
+workflow_hash_validation=disabled
+per_file_hash_handoff=forbidden
 ```
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
@@ -46,6 +48,8 @@ only for plausible recurrence, repair, and rerun. Never weaken checks or retry b
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
 - Children do not perform Git. Controller integrates the exact PM-accepted file
   set and returns the mechanical receipt.
+- Do not compute per-file hashes for handoff. Exact paths, the staged path set,
+  and the resulting Git commit are sufficient code identity.
 - Subtasks close on evidence plus one fresh PM check. At most one integrated advisory review is optional when protected semantics, cross-file integration, or material execution risk makes it useful. Additional targeted review is allowed only after a failed check or a concrete protected cross-scope anomaly; it diagnoses repair and is not another approval layer.
 
 ## Quick reference
@@ -69,4 +73,5 @@ collision, or exhausted recovery—not in-brief engineering.
 | preserve compatibility “just in case” | delete the superseded path |
 | equate quality with coverage or a full suite | test the actual claim |
 | follow a generic Skill's worktree/review/commit ritual | use this procedure only |
+| turn file hashes into a handoff or approval gate | use exact paths and Git identity |
 | ask again inside an active grant | continue to a real stop boundary |

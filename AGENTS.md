@@ -49,6 +49,10 @@ development_mode=agile_algorithm_research
 backward_compatibility=not_required
 test_scope=proof_sized
 codebase_policy=small_active_line_only
+workflow_hash_validation=disabled
+per_file_hash_handoff=forbidden
+code_identity=git_commit_and_exact_path_set
+artifact_checksums=local_diagnostic_only
 ```
 
 The user owns project intent and every expansion of protected scope or formal
@@ -67,8 +71,8 @@ scientific disposition for that question. It does not choose the project
 workflow, decide whether it should be consulted, implement code, authorize
 compute, operate transport, or start a successor.
 
-The Controller is a mechanical operator. It may resolve routes, check exact
-identity/path/hash/source facts, execute exact Git operations, transport an
+The Controller is a mechanical operator. It may resolve routes, check the exact
+path set and Git source identity, execute exact Git operations, transport an
 accepted review package unchanged, archive exact raw, execute an already
 authorized run command, perform bounded observation, and report operational status.
 It may not select research actions, decide that review is needed, interpret
@@ -166,11 +170,18 @@ mechanically blocked, Controller must resolve the live Project Manager route and
 send exactly one `CONTROLLER_OPERATION_RECEIPT` before stopping or making a
 user-only completion report. That receipt is a wake-up event, not a semantic
 review or successor authorization. It carries the request identity, operation
-status, exact result identity, source/path/hash facts, unchanged remaining
+status, exact result identity, source/path facts, unchanged remaining
 authority, and blockers. Project Manager then selects the next admissible action
 inside existing user authority. If callback delivery cannot be recovered,
 Controller reports `CONTROLLER_CALLBACK_BLOCKED`; it does not silently close the
 handoff.
+
+Do not compute, transmit, or compare per-file hashes for role handoffs. Exact
+paths, the staged path set, `git diff --cached --check`, and the resulting Git
+commit are the code identity. External raw is reread for exact text and then
+tracked by Git; it has no separate hash handshake. Checksums generated inside a
+runner may diagnose file corruption locally, but never grant authority, decide
+acceptance, or become cross-task inputs.
 
 ## File-level concurrency
 

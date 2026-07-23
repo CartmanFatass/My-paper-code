@@ -36,6 +36,7 @@ foreach ($required in @('Role contracts are normative', '.agents/roles/',
     'live_target_profile_is_authoritative=true',
     'resolved_model_effort_copy=exact',
     'static_profile_expectation=forbidden',
+    'path_source_status=<exact mechanical outcome>',
     'source_boundary=local_and_remote_aggressive_tip',
     'PROJECT_MANAGER_DELIVERY_BLOCKED')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
@@ -105,6 +106,8 @@ foreach ($required in @(
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
     'codebase_policy=small_active_line_only',
+    'workflow_hash_validation=disabled',
+    'per_file_hash_handoff=forbidden',
     'No backward compatibility',
     'Proof proportional to the claim',
     'This procedure grants no science, formal compute, Git, transport, or acceptance authority',
@@ -127,12 +130,27 @@ foreach ($required in @('superpowers_plugin=reference_only',
     'development_mode=agile_algorithm_research',
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
-    'codebase_policy=small_active_line_only')) {
+    'codebase_policy=small_active_line_only',
+    'workflow_hash_validation=disabled',
+    'per_file_hash_handoff=forbidden',
+    'code_identity=git_commit_and_exact_path_set',
+    'artifact_checksums=local_diagnostic_only')) {
     if (-not $agents.Contains($required)) { throw "Global Skill isolation missing: $required" }
 }
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
+$reviewArchiveBuilder = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1') -Raw
 $reviewReadme = Get-Content (Join-Path $repo 'docs/external-review/README.md') -Raw
 $principles = Get-Content (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md') -Raw
+foreach ($forbidden in @('path_hash_source_status', 'declared input paths and hashes',
+    'reread/hash for equality', 'record its hash')) {
+    if ($dispatcher.Contains($forbidden) -or $reviewRound.Contains($forbidden) -or
+        $controllerRole.Contains($forbidden) -or $agents.Contains($forbidden)) {
+        throw "Workflow retains a hash handoff: $forbidden"
+    }
+}
+if ($reviewArchiveBuilder.Contains('Get-FileHash')) {
+    throw 'External-review archive builder still creates a workflow hash'
+}
 if (-not $reviewReadme.Contains('Persistent task IDs contain only Controller and Project Manager') -or
     $reviewReadme.Contains('Persistent task IDs contain only Controller, Project Manager and Experiment Monitor')) {
     throw 'External-review README retains the retired persistent Monitor topology'
@@ -200,10 +218,6 @@ foreach ($content in @($conjectures, $portfolio)) {
     }
 }
 $roundRoot = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_formal_result_review'
-$rawHash = (Get-FileHash (Join-Path $roundRoot '21_PRO_OPEN_RAW.md') -Algorithm SHA256).Hash.ToLowerInvariant()
-if ($rawHash -ne 'd63427fb0fab5ffb1f393eb62370358cda449e6f1dfc8d57bc937ba46493942e') {
-    throw "External Pro raw hash mismatch: $rawHash"
-}
 foreach ($relative in @(
     'docs/external-review/rounds/20260722_ehc_formal_result_review/30_EVIDENCE_RECONCILIATION.md',
     'docs/external-review/rounds/20260722_ehc_formal_result_review/50_DISPOSITION.md')) {
@@ -214,7 +228,6 @@ foreach ($relative in @(
 foreach ($required in @(
     'last_completed_assignment_id=EHC_MINIMAL_SEQUENCE_MEDIATION_PROTOTYPE_G1',
     'active_assignment_id=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
-    'accepted_reconciliation_sha256=700ca469ca131c58186a872dc3d8149dbb35f100910a632de0a81689d43d1a28',
     'iterations_remaining=4',
     'autonomous_research_grant=ACTIVE',
     'grant_scope=remaining_four_conclusion_bearing_iterations',
@@ -229,14 +242,18 @@ foreach ($required in @(
     'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
     'prototype_authorization_status=authorized_under_autonomous_grant',
     'prototype_artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3',
-    'prototype_manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608',
-    'prototype_analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316',
     'prototype_measurement_disposition=measurement_path_valid_recurrence_remains_sufficient',
     'formal_evidence_contract_status=not_yet_frozen',
+    'controller_integration_receipt_status=complete_1a4fb630d8c3075380cc3c6562199ee3ea28e9de',
+    'workflow_hash_validation=disabled',
+    'code_handoff_identity=git_commit_and_exact_path_set',
     'prototype_conclusion_bearing_iterations_consumed=0',
     'global_write_lease=disabled',
     'Different ownership sets may proceed concurrently')) {
     if (-not $current.Contains($required)) { throw "Current active boundary missing: $required" }
+}
+if ($current -match '(?m)^\w+_sha256=') {
+    throw 'Current control plane still carries a hash handoff field'
 }
 $prototypeNotePath = Join-Path $repo 'docs/research/cdc/EVIDENCE_NOTES/20260723_EHC_SEQUENCE_MEDIATION_PROTOTYPE_G1.md'
 if (-not (Test-Path -LiteralPath $prototypeNotePath -PathType Leaf)) {
@@ -245,9 +262,8 @@ if (-not (Test-Path -LiteralPath $prototypeNotePath -PathType Leaf)) {
 $prototypeNote = Get-Content -Raw -LiteralPath $prototypeNotePath
 foreach ($required in @(
     'disposition=MEASUREMENT_PATH_VALID_RECURRENCE_REMAINS_SUFFICIENT',
-    'manifest_sha256=40ac6659d4c8ef67a35aafc6b40bc2529b9c131c2c2888851bda4335c9324608',
-    'analysis_sha256=d40b3849679bada56cbfffb5c06f6ec1b1d19757b7adc55d6c386578f6cff316',
-    'measurement_tuple_sha256=673db4684404f1ac45f0bb797a0c0570f4fa0f5739757e0bb774ab56f1029f45',
+    'implementation_commit=1a4fb630d8c3075380cc3c6562199ee3ea28e9de',
+    'artifact=logs/nonformal_ehc_sequence_mediation_g1_20260723_pm3',
     'CE-RANDOM-USE', 'CE-EXOGENOUS-LIFETIME', 'CE-LOGIT-WITHOUT-BEHAVIOR',
     'RECURRENT_CONTROL',
     'next_boundary=ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1_FORMAL_EXECUTABLE_DEFINITION',
@@ -286,9 +302,7 @@ if (-not (Test-Path -LiteralPath $g1Mechanical -PathType Leaf)) {
 $g1MechanicalText = Get-Content -Raw -LiteralPath $g1Mechanical
 foreach ($required in @('record_author=controller_mechanical',
     'adoption_authority=external_pro_raw_only',
-    '1ba6bdd5a8f776c1840462037a6303d587d9dc7777bf064ef2d360d36bc2781f',
     'pm_reconciliation_status=PROTECTED_SOURCE_CONTRACT_INCOMPLETE',
-    'eba2160e813b13df5cbe0b819104e83a2c7750882dc4427dbad686f85ef420ae',
     'formal_compute_status=unauthorized')) {
     if (-not $g1MechanicalText.Contains($required)) { throw "G1 mechanical intake missing: $required" }
 }
