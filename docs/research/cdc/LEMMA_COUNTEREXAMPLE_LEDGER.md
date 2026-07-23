@@ -12,6 +12,10 @@
 | L-BAT | Usage, exogenous lifetime variation and logit magnitude can admit trivial passing constructions. | The current EHC behavioral battery. | Event-held state is useless. |
 | L-FORCED-EVENT | At an eligible naturally reached decision state, exact-snapshot CRN forcing identifies the local consequence of KEEP versus RENEW; comparing naturally occurring event groups does not. | The corrected EHC continuation estimand. | General learned hierarchy, skills or variable-lifetime capability. |
 | L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
+| L-TYPED-CAUSAL | Exact actions, segments and outcomes are necessary but insufficient for causal identity; executed CDFs, uniforms, causal state/payloads, RNG and pair binding must also be exact. | The typed natural-branch audit. | CPU-wide fork capability or formal evidence. |
+| L-DERIVED-RECORD | After causal identity is established, bounded post-decision critic or likelihood drift is derived-record fidelity, not causal-state drift. | Fields accepted by the frozen replay validators. | A derived-fidelity failure may be ignored; it remains operational invalidity. |
+| L-FIXTURE-LOCAL | A passing real-path fixture establishes capability only at its exercised coordinates. | One registered-CPU non-formal smoke. | Future trained coordinates, CUDA or held-out utility. |
+| L-PROVENANCE-INVALID | Missing or inconsistent binding, RNG, donor, schema or instrumentation evidence is operational invalidity, not fork unavailability. | Typed partial-evidence quarantine. | A malformed record can preserve natural or causal claims. |
 
 ## Counterexamples
 
@@ -53,3 +57,15 @@ timing.
 Natural KEEP and RENEW rows need not be exchangeable. Their unpaired future
 returns can differ because the policy selects different contexts, so only the
 same-state forced alternative is a causal continuation estimand.
+
+### CE-HETEROGENEOUS-SCALAR-GATE
+
+At evidence commit `6e47623bd534cfad88f2f5481e98eadec6e64991`, one
+source-natural fork record had exact discrete actions, segment and outcome
+identity. Its only nonzero leaves were the post-decision
+`event_old_mark_component_logp` at four float32 ULPs and the derived
+`event_old_joint_logp` at one ULP, producing
+`continuous_error=4.76837158203125e-07`. Those records do not feed the
+installed mark, primitive action or environment continuation. This refutes a
+maximum over heterogeneous continuous fields as a classifier of causal
+identity; it does not prove complete CPU fork capability.

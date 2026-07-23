@@ -55,6 +55,8 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
+# CDC evidence notes are reviewer-visible scientific state.
+!docs/research/cdc/EVIDENCE_NOTES/*.md
 # Claude Code local residue is not an execution surface.
 .claude/
 # OMP project task-agent profiles are durable workflow source.

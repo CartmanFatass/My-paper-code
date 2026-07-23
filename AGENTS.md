@@ -65,9 +65,13 @@ The active surfaces are:
   formal run; external review and local OMP work do not route through it.
 
 The exact case-sensitive OMP `agent` values exposed under `.omp/agents/` are
-`hmasd-code-scout`, `hmasd-implementer`, `hmasd-verifier`,
-`hmasd-reviewer`, `hmasd-exp-manager`, `hmasd-pro-monitor` and
-`hmasd-pro-monitor-luna`. The Controller dispatches them directly. No child may
+`hmasd-code-scout`, `hmasd-implementer`, `hmasd-frontier-implementer`,
+`hmasd-verifier`, `hmasd-reviewer`, `hmasd-exp-manager`,
+`hmasd-pro-monitor` and `hmasd-pro-monitor-luna`. The Controller dispatches
+them directly. `hmasd-frontier-implementer` is reserved for one bounded
+reproduced bug, runs Sol at `max`, follows the systematic debugging loop and
+stops after at most five repair attempts with either verified evidence or a
+structured unresolved-error report. No child may
 spawn a successor. An `unknown agent` response is a workflow blocker; never
 silently replace a registered project agent with an unnamed or bundled default
 child.
@@ -103,6 +107,25 @@ lifecycle, replay, RNG, checkpoint meaning, batching, replacement and
 implementation structure. It freezes `IMPLEMENTATION_PLAN.md`, selects and
 manages the local agent task graph, integrates one package and performs one
 bounded repair cycle.
+
+The Controller/main conversation is the sole implementation-plan author. Before
+one code implementation round it performs a scaled Superpowers-style design
+pass itself: inspect current context, make requirements and success criteria
+explicit, compare 2-3 viable approaches, select the smallest sound design, and
+write exact files, interfaces, invariants, red/green checks and expected outputs
+into `IMPLEMENTATION_PLAN.md`. Inside an active autonomous grant the Controller
+automatically selects the recommended engineering approach; it asks the user or
+Pro only when the choice changes protected authority or scientific meaning.
+Planning is never delegated to an Implementer, Frontier Implementer, Reviewer or
+Verifier.
+
+Review is one collective gate per complete code implementation round, not one
+gate per child task, file, repair attempt or intermediate failure. After every
+planned implementation task and bounded repair is integrated and the
+Controller's focused checks are green, dispatch exactly one Reviewer and one
+Verifier in parallel over the same stable package. A second collective review
+is required only if the resulting repair materially changes protected semantics
+or the frozen plan contract.
 
 Before implementation, the Controller records the current branch, `HEAD` and
 inherited working-tree state in the assignment. Local agents work on that exact

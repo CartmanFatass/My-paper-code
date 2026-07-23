@@ -5,7 +5,9 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
 
 ## C-EHC — Event-held temporal state
 
-- Status: live, scheduled for minimally corrected causal measurement.
+- Status: live; the typed registered-CPU capability gate passed for one
+  exercised non-formal fixture, while formal measurement remains separately
+  unauthorized.
 - Claim: under genuinely asynchronous decisions, an event-held per-member state
   can create intervention-sensitive sequence behavior and improve held-out
   variable-membership/lifetime capability.
@@ -18,6 +20,27 @@ GPT-5.6 Pro owns scientific changes; the controller records adopted updates.
   patterns.
 - Strongest simpler explanation: ordinary recurrence or added capacity carries
   the same information.
+
+## C-FORK-TYPED — Typed natural-branch causal identity
+
+- Status: locally supported for the 64 actual pairs in one registered-CPU
+  non-formal smoke; broader CPU, future trained and formal coordinates remain
+  unresolved.
+- Claim: at the exercised registered-CPU coordinates, the source and natural
+  branches can preserve exact causal state, intervention payloads, RNG,
+  executed event/primitive decision kernels and source-natural binding while
+  allowing only separately validated post-decision record drift.
+- Still-legal alternatives: actual event/primitive CDF divergence; causal
+  state or intervention-payload drift; or an evidence-provenance/pairing defect.
+- Intervention consequence: counterfactual C rows are admissible only after the
+  typed causal predicate and the separate derived-record validator both pass.
+- Natural consequence: a typed causal mismatch may quarantine fork evidence
+  while retaining independently valid natural evidence; malformed provenance,
+  RNG, schema, outcome or derived evidence remains operational invalidity.
+- Held-out consequence: a passing smoke licenses only the exercised fixture
+  coordinates, not held-out utility, a formal row or a CPU-wide theorem.
+- Strongest simpler explanation: the observed scalar failures are confined to
+  post-decision likelihood arithmetic and do not alter generated behavior.
 
 ## C-REC — Ordinary recurrence is sufficient
 

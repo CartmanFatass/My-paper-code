@@ -1,5 +1,5 @@
 {
-  "schema_version": 18,
+  "schema_version": 19,
   "updated": "2026-07-23",
   "roles": {
     "controller": {
@@ -45,6 +45,7 @@
     "types": [
       "hmasd-code-scout",
       "hmasd-implementer",
+      "hmasd-frontier-implementer",
       "hmasd-verifier",
       "hmasd-reviewer",
       "hmasd-exp-manager",

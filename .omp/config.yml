@@ -27,6 +27,7 @@ task:
   agentModelOverrides:
     hmasd-code-scout: openai-codex/gpt-5.6-luna:high
     hmasd-implementer: openai-codex/gpt-5.6-sol:high
+    hmasd-frontier-implementer: openai-codex/gpt-5.6-sol:max
     hmasd-verifier: openai-codex/gpt-5.6-luna:high
     hmasd-reviewer: openai-codex/gpt-5.6-sol:xhigh
     hmasd-exp-manager: openai-codex/gpt-5.3-codex-spark:high

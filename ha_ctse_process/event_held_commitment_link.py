@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from copy import deepcopy
 from dataclasses import dataclass, field, replace
+import binascii
 import base64
 import hashlib
 import json
@@ -23,6 +25,7 @@ import torch.nn.functional as F
 
 from ha_ctse_process.dynamic_roster_direct import (
     DirectPrimitiveARPolicy,
+    DirectPrimitiveAuditCapture,
     ENTROPY_COEFFICIENT,
     GAE_LAMBDA,
     GAMMA,
@@ -96,6 +99,24 @@ AUDIT_BRANCHES = (
     "KEEP_HELD_MARK",
     "RENEW_DERANGED_MARK",
     "RENEW_CANDIDATE_MARK",
+)
+
+
+TYPED_CAUSAL_AUDIT_SCHEMA = "event_held_commitment_link_g0.causal_audit.v2"
+
+CAUSAL_STRUCTURAL_FIELDS = (
+    "actions", "active_mask", "orders", "terminal", "event_kind",
+    "event_categorical_actions", "event_cat_mask", "event_mark_mask",
+    "q_before", "membership_epoch", "segment_id",
+)
+CAUSAL_FLOAT_FIELDS = (
+    "observations", "rewards", "hidden_before", "hidden_after",
+    "prefix_counts", "primitive_z", "event_inputs", "event_u",
+    "event_z_pre", "event_new_z", "candidate_u", "candidate_z",
+)
+DERIVED_RECORD_FIELDS = (
+    "old_values", "old_log_probs", "event_old_cat_logp",
+    "event_old_mark_component_logp", "event_old_joint_logp",
 )
 
 
@@ -175,6 +196,7 @@ class EventTrajectory:
     segment_id: torch.Tensor
     q_before: torch.Tensor
     raw_event_trace: tuple[dict[str, Any], ...]
+    causal_audit_calls: tuple[dict[str, Any], ...]
     outcomes: tuple[TrackingOutcome, ...]
     segments: tuple[tuple[SegmentRecord, ...], ...]
     ledger_ids: tuple[int, ...]
@@ -421,6 +443,7 @@ def _canonical_json_digest(value: Any) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+
 def _float32_payload(value: np.ndarray) -> dict[str, Any]:
     """Canonical exact binary32 payload without any outcome information."""
 
@@ -433,6 +456,139 @@ def _float32_payload(value: np.ndarray) -> dict[str, Any]:
         "bytes_b64": base64.b64encode(encoded).decode("ascii"),
         "sha256": hashlib.sha256(encoded).hexdigest(),
     }
+
+def _native_payload(value: np.ndarray) -> dict[str, Any]:
+    """Exact native tensor payload, including signed zero and NaN payload bits."""
+
+    array = np.ascontiguousarray(value)
+    encoded = array.tobytes(order="C")
+    return {
+        "dtype": array.dtype.str,
+        "shape": [int(size) for size in array.shape],
+        "bytes_b64": base64.b64encode(encoded).decode("ascii"),
+        "sha256": hashlib.sha256(encoded).hexdigest(),
+    }
+
+
+def _decode_native_payload(value: Mapping[str, Any]) -> np.ndarray:
+    if set(value) != {"dtype", "shape", "bytes_b64", "sha256"}:
+        raise ValueError("native payload keys mismatch")
+    dtype = np.dtype(str(value["dtype"]))
+    shape = tuple(int(size) for size in value["shape"])
+    encoded = base64.b64decode(str(value["bytes_b64"]), validate=True)
+    if hashlib.sha256(encoded).hexdigest() != value["sha256"]:
+        raise ValueError("native payload digest mismatch")
+    expected = int(np.prod(shape, dtype=np.int64)) * dtype.itemsize
+    if len(encoded) != expected:
+        raise ValueError("native payload byte count mismatch")
+    return np.frombuffer(encoded, dtype=dtype).reshape(shape)
+
+
+def native_bitwise_finite_comparison(
+    left: Mapping[str, Any], right: Mapping[str, Any], *, field: str
+) -> dict[str, Any]:
+    """Compare exact native bytes and reject every non-finite float leaf."""
+
+    try:
+        left_array = _decode_native_payload(left)
+        right_array = _decode_native_payload(right)
+    except (TypeError, ValueError, KeyError) as exc:
+        return {
+            "field": field, "passed": False, "malformed": True,
+            "finite": False, "dtype_shape_equal": False, "bytes_equal": False,
+            "first_coordinate": None, "magnitude": None, "ulp_distance": None,
+            "detail": str(exc),
+            "source_payload": deepcopy(dict(left)),
+            "natural_payload": deepcopy(dict(right)),
+        }
+    dtype_shape_equal = (
+        left_array.dtype == right_array.dtype
+        and left_array.shape == right_array.shape
+    )
+    left_finite = (
+        bool(np.isfinite(left_array).all())
+        if np.issubdtype(left_array.dtype, np.floating) else True
+    )
+    right_finite = (
+        bool(np.isfinite(right_array).all())
+        if np.issubdtype(right_array.dtype, np.floating) else True
+    )
+    finite = left_finite and right_finite
+    bytes_equal = dtype_shape_equal and left["bytes_b64"] == right["bytes_b64"]
+    coordinate: list[int] | None = None
+    magnitude: float | None = None
+    ulp_distance: int | None = None
+    if dtype_shape_equal and left_array.size and not finite:
+        nonfinite = np.zeros(left_array.shape, dtype=np.bool_)
+        if np.issubdtype(left_array.dtype, np.floating):
+            nonfinite |= ~np.isfinite(left_array)
+            nonfinite |= ~np.isfinite(right_array)
+        flat = int(np.flatnonzero(nonfinite.reshape(-1))[0])
+        coordinate = [
+            int(v) for v in np.unravel_index(flat, left_array.shape)
+        ]
+    if dtype_shape_equal and left_array.size and not bytes_equal and coordinate is None:
+        item_bytes = left_array.dtype.itemsize
+        left_items = left_array.reshape(-1).view(np.uint8).reshape(-1, item_bytes)
+        right_items = right_array.reshape(-1).view(np.uint8).reshape(-1, item_bytes)
+        flat = int(np.flatnonzero(np.any(left_items != right_items, axis=1))[0])
+        coordinate = [int(v) for v in np.unravel_index(flat, left_array.shape)]
+        if np.issubdtype(left_array.dtype, np.floating):
+            left_value = float(left_array.reshape(-1)[flat])
+            right_value = float(right_array.reshape(-1)[flat])
+            magnitude = abs(left_value - right_value)
+            unsigned = np.dtype(f"u{item_bytes}")
+            left_bits = int(left_array.reshape(-1)[flat:flat + 1].view(unsigned)[0])
+            right_bits = int(right_array.reshape(-1)[flat:flat + 1].view(unsigned)[0])
+            sign = 1 << (8 * item_bytes - 1)
+            left_ordered = (~left_bits & (2 * sign - 1)) if left_bits & sign else left_bits | sign
+            right_ordered = (~right_bits & (2 * sign - 1)) if right_bits & sign else right_bits | sign
+            ulp_distance = abs(left_ordered - right_ordered)
+    return {
+        "field": field,
+        "passed": bool(finite and dtype_shape_equal and bytes_equal),
+        "malformed": False,
+        "finite": bool(finite),
+        "dtype_shape_equal": bool(dtype_shape_equal),
+        "bytes_equal": bool(bytes_equal),
+        "first_coordinate": coordinate,
+        "magnitude": magnitude,
+        "ulp_distance": ulp_distance,
+        "detail": None,
+        "source_payload": deepcopy(dict(left)),
+        "natural_payload": deepcopy(dict(right)),
+    }
+
+
+def _parameter_payload_digest(payloads: Iterable[Mapping[str, Any]]) -> str:
+    digest = hashlib.sha256(b"HMASD_EXECUTED_KERNEL_PARAMETERS_V2\0")
+    for payload in payloads:
+        array = _decode_native_payload(payload)
+        digest.update(array.dtype.str.encode("ascii"))
+        digest.update(np.asarray(array.shape, dtype=np.int64).tobytes())
+        digest.update(array.tobytes(order="C"))
+    return digest.hexdigest()
+
+
+def _parameter_payload_evidence(arm: CommitmentArm) -> dict[str, Any]:
+    modules = {
+        "event": (arm.event_head,),
+        "mark": (arm.mark_head,),
+        "primitive": (arm.base.action_head, arm.W_z),
+    }
+    families: dict[str, Any] = {}
+    for family, family_modules in modules.items():
+        payloads = [
+            _native_payload(parameter.detach().cpu().contiguous().numpy())
+            for module in family_modules
+            if module is not None
+            for parameter in module.parameters()
+        ]
+        families[family] = {
+            "parameters": payloads,
+            "digest": _parameter_payload_digest(payloads),
+        }
+    return families
 
 
 def _raw_event_trace_digest(row_without_digest: Mapping[str, Any]) -> str:
@@ -750,6 +906,232 @@ def _row_stable_event_heads(
     return evaluate(event_head), evaluate(mark_head)
 
 
+def _materialize_executed_calls(
+    arm: CommitmentArm,
+    event_records: list[dict[str, Any]],
+    primitive_records: list[dict[str, Any]],
+) -> tuple[dict[str, Any], ...]:
+    """Materialize canonical family-specific records from the executed calls."""
+
+    calls: list[dict[str, Any]] = []
+    parameters = _parameter_payload_evidence(arm)
+
+    def append_call(
+        *, family: str, call_site: str, call_id: int, packed_width: int,
+        row: int, coordinate: dict[str, Any], physical_rows: list[Any],
+        input_payload: Any, payload: dict[str, Any],
+    ) -> None:
+        identity = {
+            "sampler_family": family,
+            "call_site": call_site,
+            "call_id": int(call_id),
+            "packed_width": int(packed_width),
+            "row": int(row),
+            "scientific_coordinate": coordinate,
+            "input_digest": _canonical_json_digest(input_payload),
+            "parameter_digest": parameters[family]["digest"],
+            "payload_digest": _canonical_json_digest(payload),
+        }
+        calls.append({
+            "identity": identity,
+            "input": input_payload,
+            "payload": payload,
+            "physical_rows": physical_rows,
+            "identity_digest": _canonical_json_digest(identity),
+        })
+
+    for record in event_records:
+        names = (
+            "inputs", "logits", "probabilities", "cdf", "converted_uniform",
+            "mu", "sigma", "noise", "u", "tanh_u", "candidate_mark", "z_pre",
+        )
+        host = {
+            name: record[name].detach().cpu().contiguous().numpy()
+            for name in names
+        }
+        actions = torch.stack(
+            (record["pre_force_action"], record["final_action"]), dim=-1
+        ).detach().cpu().contiguous().numpy()
+        for request_row, raw_coordinate in enumerate(record["request_coordinates"]):
+            env_index, key, request_kind = (int(value) for value in raw_coordinate)
+            coordinate = {
+                "time": int(record["time"]),
+                "episode_id": int(record["episode_ids"][env_index]),
+                "environment_row": env_index,
+                "lifecycle_key": key,
+                "membership_epoch": int(record["membership_epoch"][request_row]),
+                "segment_id": int(record["segment_id"][request_row]),
+                "request_kind": request_kind,
+            }
+            input_payload = _native_payload(host["inputs"][request_row])
+            if request_kind != CREATE:
+                append_call(
+                    family="event",
+                    call_site="collect_trajectory.event_categorical",
+                    call_id=int(record["event_call_id"]),
+                    packed_width=int(record["packed_width"]),
+                    row=request_row,
+                    coordinate=deepcopy(coordinate),
+                    physical_rows=deepcopy(record["request_coordinates"]),
+                    input_payload=deepcopy(input_payload),
+                    payload={
+                        "logits": _native_payload(host["logits"][request_row]),
+                        "probabilities": _native_payload(
+                            host["probabilities"][request_row]
+                        ),
+                        "cdf": _native_payload(host["cdf"][request_row]),
+                        "converted_uniform": _native_payload(
+                            host["converted_uniform"][request_row:request_row + 1]
+                        ),
+                        "pre_force_action": int(actions[request_row, 0]),
+                        "final_action": int(actions[request_row, 1]),
+                    },
+                )
+            append_call(
+                family="mark",
+                call_site="collect_trajectory.candidate_mark",
+                call_id=int(record["mark_call_id"]),
+                packed_width=int(record["packed_width"]),
+                row=request_row,
+                coordinate=deepcopy(coordinate),
+                physical_rows=deepcopy(record["request_coordinates"]),
+                input_payload=deepcopy(input_payload),
+                payload={
+                    "mu": _native_payload(host["mu"][request_row]),
+                    "sigma": _native_payload(host["sigma"][request_row]),
+                    "noise": _native_payload(host["noise"][request_row]),
+                    "u": _native_payload(host["u"][request_row]),
+                    "tanh_u": _native_payload(host["tanh_u"][request_row]),
+                    "candidate_mark": _native_payload(
+                        host["candidate_mark"][request_row]
+                    ),
+                    "installed_z_pre": _native_payload(host["z_pre"][request_row]),
+                },
+            )
+
+    for record in primitive_records:
+        context = record["call_identity"]
+        rows = record["row"].detach().cpu().contiguous().numpy()
+        focal_keys = record["focal_key"].detach().cpu().contiguous().numpy()
+        epochs = context["membership_epoch"].detach().cpu().numpy()
+        segments = context["segment_id"].detach().cpu().numpy()
+        host = {
+            name: record[name].detach().cpu().contiguous().numpy()
+            for name in (
+                "action_input", "logits", "probabilities", "cdf",
+                "converted_uniform", "selected_action",
+            )
+        }
+        bias = (
+            None if record["primitive_bias"] is None
+            else record["primitive_bias"].detach().cpu().contiguous().numpy()
+        )
+        for index, (raw_row, raw_key) in enumerate(
+            zip(rows, focal_keys, strict=True)
+        ):
+            env_row, key = int(raw_row), int(raw_key)
+            input_payload = {
+                "action_input": _native_payload(host["action_input"][index]),
+                "primitive_bias": (
+                    None if bias is None else _native_payload(bias[index])
+                ),
+            }
+            append_call(
+                family="primitive",
+                call_site=str(context["call_site"]),
+                call_id=int(context["call_id"]),
+                packed_width=int(record["packed_width"]),
+                row=env_row,
+                coordinate={
+                    "time": int(context["time"]),
+                    "episode_id": int(context["episode_ids"][env_row]),
+                    "environment_row": env_row,
+                    "lifecycle_key": key,
+                    "membership_epoch": int(epochs[env_row, key]),
+                    "segment_id": int(segments[env_row, key]),
+                    "autoregressive_position": int(
+                        record["autoregressive_position"]
+                    ),
+                },
+                physical_rows=list(range(int(record["packed_width"]))),
+                input_payload=input_payload,
+                payload={
+                    "logits": _native_payload(host["logits"][index]),
+                    "probabilities": _native_payload(host["probabilities"][index]),
+                    "cdf": _native_payload(host["cdf"][index]),
+                    "converted_uniform": _native_payload(
+                        host["converted_uniform"][index:index + 1]
+                    ),
+                    "selected_action": int(host["selected_action"][index]),
+                },
+            )
+    calls.sort(key=lambda call: (
+        int(call["identity"]["call_id"]),
+        int(call["identity"]["row"]),
+        str(call["identity"]["sampler_family"]),
+    ))
+    return tuple(calls)
+
+
+def _raw_trace_from_executed_calls(
+    calls: tuple[dict[str, Any], ...],
+    *,
+    arm: CommitmentArm,
+    profile: str,
+    replicate: int,
+    ledger_evidence: tuple[dict[str, Any], ...],
+) -> tuple[dict[str, Any], ...]:
+    rows: list[dict[str, Any]] = []
+    marks = {
+        _decision_coordinate_key(call): call
+        for call in calls
+        if call["identity"]["sampler_family"] == "mark"
+    }
+    for call in calls:
+        identity = call["identity"]
+        if identity["sampler_family"] != "event":
+            continue
+        final_action = int(call["payload"]["final_action"])
+        if final_action not in (KEEP, RENEW):
+            continue
+        scientific = identity["scientific_coordinate"]
+        env_index = int(scientific["environment_row"])
+        mark = marks[_decision_coordinate_key(call)]
+        origin = {
+            "domain": "HMASD_RAW_EVENT_TRACE_V1",
+            "arm": arm.arm,
+            "profile": profile,
+            "replicate": int(replicate),
+            "episode_id": int(scientific["episode_id"]),
+            "ledger_digest": ledger_evidence[env_index]["ledger_digest"],
+        }
+        trace_row = {
+            "coordinate": {
+                "time": int(scientific["time"]),
+                "env_index": env_index,
+                "key": int(scientific["lifecycle_key"]),
+                "membership_epoch": int(scientific["membership_epoch"]),
+                "segment_id": int(scientific["segment_id"]),
+            },
+            "natural_kind": final_action,
+            "installed_z": _float32_payload(
+                _decode_native_payload(mark["payload"]["installed_z_pre"])
+            ),
+            "candidate_u": _float32_payload(
+                _decode_native_payload(mark["payload"]["u"])
+            ),
+            "candidate_z": _float32_payload(
+                _decode_native_payload(mark["payload"]["candidate_mark"])
+            ),
+            "origin_binding": origin,
+        }
+        trace_row["origin_binding"] = origin | {
+            "binding_digest": _raw_event_trace_digest(trace_row)
+        }
+        rows.append(trace_row)
+    return tuple(rows)
+
+
 def collect_trajectory(
     arm: CommitmentArm,
     state: TrainingState,
@@ -763,14 +1145,25 @@ def collect_trajectory(
     forced_event: tuple[int, int, int, int, torch.Tensor] | None = None,
     forced_events: Mapping[tuple[int, int, int], tuple[int, torch.Tensor]] | None = None,
     row_rngs: list[Mapping[str, _AuditRowStream]] | None = None,
+    causal_audit_evidence: bool = False,
 ) -> EventTrajectory:
     if state.arm != arm.arm or set(state.rngs) != set(RNG_NAMES):
         raise ValueError("collector arm or owned-RNG key set mismatch")
+    if causal_audit_evidence and deterministic:
+        raise ValueError("causal audit evidence requires executed stochastic samplers")
+    audit_event_records: list[dict[str, Any]] | None = (
+        [] if causal_audit_evidence else None
+    )
+    primitive_audit_records: list[dict[str, Any]] | None = (
+        [] if causal_audit_evidence else None
+    )
+    causal_call_id = 0
     rng_trace: dict[str, list[dict[str, Any]]] = {
         name: [] for name in RNG_NAMES
     }
     request_evidence: list[dict[str, Any]] = []
-    raw_event_trace: list[dict[str, Any]] = []
+    raw_event_trace: tuple[dict[str, Any], ...] = ()
+    causal_audit_calls: tuple[dict[str, Any], ...] = ()
     if cursor is None:
         ids = tuple(int(v) for v in episode_ids) if episode_ids is not None else tuple(
             range(state.next_episode_id, state.next_episode_id + FORMAL_NUM_ENVS)
@@ -919,8 +1312,12 @@ def collect_trajectory(
 
             selected_kind_grid = torch.zeros_like(kind)
             request_q = np.empty(len(requests), dtype=np.int64)
-            trace_payload_values: np.ndarray | None = None
+            event_call_id: int | None = None
+            mark_call_id: int | None = None
             if requests:
+                event_call_id = causal_call_id
+                mark_call_id = causal_call_id + 1
+                causal_call_id += 2
                 assert arm.event_head is not None and arm.mark_head is not None
                 packed_inputs = torch.stack([value[3] for value in requests])
                 packed_z_pre = torch.stack([value[4] for value in requests])
@@ -936,6 +1333,10 @@ def collect_trajectory(
                 if deterministic:
                     selected_cat = torch.argmax(logits, dim=-1)
                     u = mu
+                    event_uniforms = torch.zeros(
+                        len(requests), dtype=logits.dtype, device=device
+                    )
+                    mark_eps = torch.zeros_like(mu)
                 else:
                     rng_trace["event"].append({
                         "stream": "event", "operation": "random",
@@ -954,8 +1355,10 @@ def collect_trajectory(
                         dtype=logits.dtype,
                         device=device,
                     )
+                    event_probability = torch.softmax(logits, -1)
+                    event_cdf = torch.cumsum(event_probability, -1)
                     selected_cat = torch.sum(
-                        event_uniforms.unsqueeze(-1) > torch.cumsum(torch.softmax(logits, -1), -1),
+                        event_uniforms.unsqueeze(-1) > event_cdf,
                         dim=-1,
                     ).clamp(max=1)
                     rng_trace["mark"].append({
@@ -980,6 +1383,8 @@ def collect_trajectory(
                         device=device,
                     )
                     u = mu + sigma * mark_eps
+                if audit_event_records is not None:
+                    pre_force_selected_cat = selected_cat
                 selected_kind = torch.where(create_mask, torch.full_like(selected_cat, CREATE), selected_cat + KEEP)
                 active_forced: dict[tuple[int, int], tuple[int, torch.Tensor]] = {}
                 if forced_event is not None and time == int(forced_event[0]):
@@ -1041,13 +1446,38 @@ def collect_trajectory(
                 )
                 candidate_u[env_indices, key_indices] = u.detach()
                 candidate_z[env_indices, key_indices] = candidate_tanh_u
-                # One packed transfer captures every raw mark field at this
-                # physical row.  Individual trace records are then assembled
-                # from host binary32 arrays before any environment step can
-                # consume reward or terminal outcome information.
-                trace_payload_values = torch.stack(
-                    (packed_z_pre, u.detach(), candidate_tanh_u), dim=1
-                ).cpu().numpy()
+                if audit_event_records is not None:
+                    assert event_call_id is not None and mark_call_id is not None
+                    audit_event_records.append({
+                        "event_call_id": int(event_call_id),
+                        "mark_call_id": int(mark_call_id),
+                        "time": int(time),
+                        "packed_width": len(requests),
+                        "request_coordinates": deepcopy(request_coordinates),
+                        "episode_ids": tuple(int(v) for v in cursor.episode_ids),
+                        "membership_epoch": tuple(
+                            int(cursor.lifecycles[env][key].membership_epoch)
+                            for env, key, _kind, _inp, _z in requests
+                        ),
+                        "segment_id": tuple(
+                            int(cursor.lifecycles[env][key].segment_id)
+                            for env, key, _kind, _inp, _z in requests
+                        ),
+                        "inputs": packed_inputs.detach(),
+                        "logits": logits.detach(),
+                        "probabilities": event_probability.detach(),
+                        "cdf": event_cdf.detach(),
+                        "converted_uniform": event_uniforms.detach(),
+                        "pre_force_action": pre_force_selected_cat.detach(),
+                        "final_action": selected_kind.detach(),
+                        "mu": mu.detach(),
+                        "sigma": sigma.detach(),
+                        "noise": mark_eps.detach(),
+                        "u": u.detach(),
+                        "tanh_u": candidate_tanh_u.detach(),
+                        "candidate_mark": candidate_tanh_u.detach(),
+                        "z_pre": packed_z_pre.detach(),
+                    })
                 event_z_pre[env_indices, key_indices] = packed_z_pre
                 event_new_z[env_indices, key_indices] = packed_new_z
                 cat_mask[env_indices, key_indices] = derived_cat_mask
@@ -1106,13 +1536,29 @@ def collect_trajectory(
                     device=device,
                 )
                 primitive_kwargs = {"sampling_uniforms": uniforms}
+            primitive_bias = arm.primitive_bias(primitive_z)
+            primitive_capture: DirectPrimitiveAuditCapture | None = None
+            if primitive_audit_records is not None:
+                primitive_capture = DirectPrimitiveAuditCapture(
+                    call_identity={
+                        "call_site": "collect_trajectory.primitive",
+                        "call_id": int(causal_call_id),
+                        "time": int(time),
+                        "episode_ids": tuple(int(v) for v in cursor.episode_ids),
+                        "membership_epoch": epochs.detach(),
+                        "segment_id": segments.detach(),
+                    },
+                    records=primitive_audit_records,
+                )
+                causal_call_id += 1
             output = arm.base.forward_step(
                 observations=observations,
                 active_mask=active,
                 order=order,
                 hidden=cursor.hidden,
-                primitive_logit_bias=arm.primitive_bias(primitive_z),
+                primitive_logit_bias=primitive_bias,
                 prepared=prepared,
+                audit_capture=primitive_capture,
                 validated=True,
                 **primitive_kwargs,
             )
@@ -1126,41 +1572,6 @@ def collect_trajectory(
                     raise RuntimeError("CREATE support drift")
                 if request_kind != CREATE and selected_kind not in (KEEP, RENEW):
                     raise RuntimeError("opportunity support drift")
-                if selected_kind in (KEEP, RENEW):
-                    if trace_payload_values is None:
-                        raise RuntimeError("eligible event lacks raw trace payload")
-                    origin = {
-                        "domain": "HMASD_RAW_EVENT_TRACE_V1",
-                        "arm": arm.arm,
-                        "profile": profile,
-                        "replicate": int(state.replicate),
-                        "episode_id": int(cursor.episode_ids[env_index]),
-                        "ledger_digest": ledger_evidence[env_index]["ledger_digest"],
-                    }
-                    trace_row = {
-                        "coordinate": {
-                            "time": int(time),
-                            "env_index": int(env_index),
-                            "key": int(key),
-                            "membership_epoch": int(life.membership_epoch),
-                            "segment_id": int(life.segment_id),
-                        },
-                        "natural_kind": int(selected_kind),
-                        "installed_z": _float32_payload(
-                            trace_payload_values[index, 0]
-                        ),
-                        "candidate_u": _float32_payload(
-                            trace_payload_values[index, 1]
-                        ),
-                        "candidate_z": _float32_payload(
-                            trace_payload_values[index, 2]
-                        ),
-                        "origin_binding": origin,
-                    }
-                    trace_row["origin_binding"] = origin | {
-                        "binding_digest": _raw_event_trace_digest(trace_row)
-                    }
-                    raw_event_trace.append(trace_row)
                 if selected_kind != CREATE:
                     life.spell_opportunity_count += 1
                 if selected_kind == RENEW:
@@ -1260,6 +1671,17 @@ def collect_trajectory(
         ).value.detach()
         next_cursor = cursor
     stacked = {name: torch.stack(rows[name]) for name in names}
+    if audit_event_records is not None and primitive_audit_records is not None:
+        causal_audit_calls = _materialize_executed_calls(
+            arm, audit_event_records, primitive_audit_records
+        )
+        raw_event_trace = _raw_trace_from_executed_calls(
+            causal_audit_calls,
+            arm=arm,
+            profile=profile,
+            replicate=int(state.replicate),
+            ledger_evidence=ledger_evidence,
+        )
     return EventTrajectory(
         observations=stacked["observations"],
         active_mask=stacked["active"],
@@ -1290,6 +1712,7 @@ def collect_trajectory(
         segment_id=stacked["segment"],
         q_before=stacked["q"],
         raw_event_trace=tuple(raw_event_trace),
+        causal_audit_calls=causal_audit_calls,
         outcomes=outcomes,
         segments=tuple(tuple(value) for value in cursor.segments),
         ledger_ids=cursor.episode_ids,
@@ -1972,16 +2395,15 @@ def replay_report(
             and float(record["ratio_drift"]) <= REPLAY_LOG_RATIO_DRIFT_CAP
         )
     )
-    has_event_rows = bool(
-        (trajectory.event_kind.eq(CREATE)
-         | trajectory.event_kind.eq(KEEP)
-         | trajectory.event_kind.eq(RENEW)).any()
-    )
+    required_support = {
+        "primitive_component": True,
+        "categorical_component": bool(trajectory.event_cat_mask.any()),
+        "mark_component": bool(trajectory.event_mark_mask.any()),
+    }
     failures.extend(
         f"empty_support:{name}"
         for name, record in likelihood_components.items()
-        if record["coordinate"] is None
-        and (name == "primitive_component" or has_event_rows)
+        if record["coordinate"] is None and required_support[name]
     )
     failures.extend(
         name for name in REPLAY_JOINT_FIELDS if not joints[name]["excess"] <= 0.0
@@ -2714,41 +3136,1574 @@ def _audit_row_scripts(
     )
 
 
-def _audit_row_errors(
+def _tensor_payload(value: torch.Tensor) -> dict[str, Any]:
+    return _native_payload(value.detach().cpu().contiguous().numpy())
+
+
+def _call_coordinate_key(call: Mapping[str, Any]) -> tuple[Any, ...]:
+    identity = call["identity"]
+    coordinate = identity["scientific_coordinate"]
+    family = str(identity["sampler_family"])
+    base = (
+        family,
+        int(coordinate["time"]),
+        int(coordinate["episode_id"]),
+        int(coordinate["lifecycle_key"]),
+        int(coordinate["membership_epoch"]),
+        int(coordinate["segment_id"]),
+    )
+    if family in ("event", "mark"):
+        return base + (int(coordinate["request_kind"]),)
+    if family == "primitive":
+        return base + (int(coordinate["autoregressive_position"]),)
+    raise ValueError("unknown sampler family")
+
+
+def _decision_coordinate_key(call: Mapping[str, Any]) -> tuple[int, ...]:
+    coordinate = call["identity"]["scientific_coordinate"]
+    return (
+        int(coordinate["time"]),
+        int(coordinate["episode_id"]),
+        int(coordinate["lifecycle_key"]),
+        int(coordinate["membership_epoch"]),
+        int(coordinate["segment_id"]),
+        int(coordinate["request_kind"]),
+    )
+
+
+def _selected_executed_calls(
+    trajectory: EventTrajectory, *, row: int, start: int,
+) -> list[dict[str, Any]]:
+    return [
+        call for call in trajectory.causal_audit_calls
+        if int(
+            call["identity"]["scientific_coordinate"]["environment_row"]
+        ) == int(row)
+        and int(call["identity"]["scientific_coordinate"]["time"]) >= int(start)
+    ]
+
+
+def _comparison_failure(
+    comparisons: Iterable[Mapping[str, Any]], *, evidence_class: str
+) -> dict[str, Any] | None:
+    for comparison in comparisons:
+        if not bool(comparison.get("passed")):
+            return {
+                "class": evidence_class,
+                "field": comparison.get("field"),
+                "coordinate": comparison.get("first_coordinate"),
+                "magnitude": comparison.get("magnitude"),
+                "ulp_distance": comparison.get("ulp_distance"),
+                "detail": comparison.get("detail"),
+            }
+    return None
+
+
+_REPLAY_RECORD_KEYS = frozenset({
+    "schema_version", "errors", "likelihood_components", "joints",
+    "event_joint_ratio", "log_component_atol", "log_component_rtol",
+    "ratio_drift_cap", "state_atol", "failures", "passed",
+})
+_RECORD_CONSISTENCY_RELATIVE = 1e-9
+_RECORD_CONSISTENCY_ABSOLUTE = 1e-15
+
+
+def _finite_numeric_leaves(value: Any) -> bool:
+    if isinstance(value, Mapping):
+        return all(_finite_numeric_leaves(item) for item in value.values())
+    if isinstance(value, (list, tuple)):
+        return all(_finite_numeric_leaves(item) for item in value)
+    if isinstance(value, (int, float, np.integer, np.floating)):
+        return math.isfinite(float(value))
+    return True
+
+
+def _record_consistent(left: float, right: float) -> bool:
+    return abs(left - right) <= (
+        _RECORD_CONSISTENCY_ABSOLUTE
+        + _RECORD_CONSISTENCY_RELATIVE * max(abs(left), abs(right))
+    )
+
+
+def _replay_joint_factor_error_cap(
+    name: str, errors: Mapping[str, Any], joint: Mapping[str, float],
+) -> float:
+    if name == "event_joint":
+        return float(errors["categorical_component"]) + float(
+            EVENT_JOINT_FACTOR_COUNT - 1
+        ) * float(errors["mark_component"])
+    return float(joint["factor_count"]) * float(errors["primitive_component"])
+
+
+def _serialized_likelihood_record_valid(
+    record: Any, *, dimensions: int, empty_allowed: bool,
+) -> bool:
+    if not isinstance(record, Mapping) or set(record) != set(REPLAY_WORST_RECORD_FIELDS):
+        return False
+    coordinate = record["coordinate"]
+    if coordinate is None:
+        return bool(
+            empty_allowed
+            and all(
+                float(record[name]) == 0.0
+                for name in (
+                    "stored_value", "replayed_value", "absolute_error",
+                    "mixed_bound", "ratio_drift",
+                    "float32_ulp_at_max_magnitude", "ulp_distance",
+                )
+            )
+            and float(record["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+        )
+    if not (
+        isinstance(coordinate, list)
+        and len(coordinate) == dimensions
+        and all(type(index) is int and index >= 0 for index in coordinate)
+    ):
+        return False
+    stored = float(record["stored_value"])
+    replayed = float(record["replayed_value"])
+    absolute_error = abs(replayed - stored)
+    mixed_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * max(
+        abs(stored), abs(replayed)
+    )
+    ratio_drift = abs(math.expm1(replayed - stored))
+    spacing, distance = _float32_ulp_evidence(stored, replayed)
+    return bool(
+        _record_consistent(float(record["absolute_error"]), absolute_error)
+        and _record_consistent(float(record["mixed_bound"]), mixed_bound)
+        and _record_consistent(float(record["ratio_drift"]), ratio_drift)
+        and float(record["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+        and float(record["float32_ulp_at_max_magnitude"]) == spacing
+        and int(record["ulp_distance"]) == distance
+        and absolute_error <= mixed_bound
+        and ratio_drift <= REPLAY_LOG_RATIO_DRIFT_CAP
+    )
+
+
+def validate_serialized_replay_report(
+    report: Any, *, event_rows_required: bool = True,
+    categorical_rows_required: bool | None = None,
+    mark_rows_required: bool | None = None,
+) -> bool:
+    """Authoritative fail-closed validator for serialized replay evidence."""
+    categorical_required = (
+        event_rows_required
+        if categorical_rows_required is None else categorical_rows_required
+    )
+    mark_required = (
+        event_rows_required if mark_rows_required is None else mark_rows_required
+    )
+
+    if not isinstance(report, Mapping) or set(report) != _REPLAY_RECORD_KEYS:
+        return False
+    errors = report.get("errors")
+    components = report.get("likelihood_components")
+    joints = report.get("joints")
+    ratio = report.get("event_joint_ratio")
+    if not (
+        isinstance(errors, Mapping)
+        and set(errors)
+        == set(REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS)
+        and isinstance(components, Mapping)
+        and set(components) == set(REPLAY_LOG_COMPONENT_FIELDS)
+        and isinstance(joints, Mapping)
+        and set(joints) == set(REPLAY_JOINT_FIELDS)
+        and all(
+            isinstance(joints[name], Mapping)
+            and set(joints[name]) == set(REPLAY_JOINT_RECORD_FIELDS)
+            for name in REPLAY_JOINT_FIELDS
+        )
+        and isinstance(ratio, Mapping)
+        and set(ratio) == set(REPLAY_EVENT_JOINT_RATIO_FIELDS)
+        and _finite_numeric_leaves(report)
+    ):
+        return False
+    if (
+        report["schema_version"] != REPLAY_RECORD_SCHEMA_VERSION
+        or float(report["log_component_atol"]) != REPLAY_LOG_COMPONENT_ATOL
+        or float(report["log_component_rtol"]) != REPLAY_LOG_COMPONENT_RTOL
+        or float(report["ratio_drift_cap"]) != REPLAY_LOG_RATIO_DRIFT_CAP
+        or float(report["state_atol"]) != REPLAY_STATE_ATOL
+        or report["passed"] is not True
+        or report["failures"] != []
+        or any(float(errors[name]) != 0.0 for name in REPLAY_EXACT_FIELDS)
+        or any(float(errors[name]) > REPLAY_STATE_ATOL for name in REPLAY_STATE_FIELDS)
+    ):
+        return False
+    if not _serialized_likelihood_record_valid(
+        components["primitive_component"], dimensions=3, empty_allowed=False,
+    ):
+        return False
+    for name, dimensions, required in (
+        ("categorical_component", 3, categorical_required),
+        ("mark_component", 4, mark_required),
+    ):
+        if not _serialized_likelihood_record_valid(
+            components[name], dimensions=dimensions,
+            empty_allowed=not required,
+        ):
+            return False
+    coordinate = ratio["coordinate"]
+    if coordinate is None:
+        if (
+            event_rows_required
+            or any(
+                float(ratio[name]) != 0.0
+                for name in ("stored_value", "replayed_value", "ratio_drift")
+            )
+            or float(ratio["ratio_cap"]) != REPLAY_LOG_RATIO_DRIFT_CAP
+        ):
+            return False
+    elif not (
+        isinstance(coordinate, list)
+        and len(coordinate) == 3
+        and all(type(index) is int and index >= 0 for index in coordinate)
+    ):
+        return False
+    else:
+        recomputed_ratio = abs(math.expm1(
+            float(ratio["replayed_value"]) - float(ratio["stored_value"])
+        ))
+        if not (
+            _record_consistent(float(ratio["ratio_drift"]), recomputed_ratio)
+            and float(ratio["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+            and recomputed_ratio <= REPLAY_LOG_RATIO_DRIFT_CAP
+        ):
+            return False
+    for name in REPLAY_JOINT_FIELDS:
+        joint = {key: float(value) for key, value in joints[name].items()}
+        if any(
+            joint[key] < 0.0
+            for key in (
+                "error", "component_sum", "allowance", "bound", "factor_count",
+                "float64_error", "assembly_residual", "assembly_allowance", "rows",
+            )
+        ):
+            return False
+        if (
+            joint["excess"] > 0.0
+            or joint["assembly_excess"] > 0.0
+            or float(errors[name]) > joint["bound"]
+            or not _record_consistent(
+                joint["bound"], joint["component_sum"] + joint["allowance"]
+            )
+            or joint["excess"] < joint["error"] - joint["bound"] - (
+                _RECORD_CONSISTENCY_ABSOLUTE
+                + _RECORD_CONSISTENCY_RELATIVE * abs(joint["bound"])
+            )
+            or not _record_consistent(
+                joint["assembly_excess"],
+                joint["assembly_residual"] - joint["assembly_allowance"],
+            )
+        ):
+            return False
+        cap = _replay_joint_factor_error_cap(name, errors, joint)
+        if joint["component_sum"] > cap + (
+            _RECORD_CONSISTENCY_ABSOLUTE
+            + _RECORD_CONSISTENCY_RELATIVE * abs(cap)
+        ):
+            return False
+        if joint["rows"] <= 0.0:
+            if (
+                name != "event_joint"
+                or event_rows_required
+                or any(value != 0.0 for value in joint.values())
+            ):
+                return False
+        elif (
+            name == "event_joint"
+            and joint["factor_count"] != float(EVENT_JOINT_FACTOR_COUNT)
+        ):
+            return False
+    return True
+
+def _validate_replay_report_evidence(
+    report: Mapping[str, Any], *, event_rows_required: bool = True,
+    categorical_rows_required: bool | None = None,
+    mark_rows_required: bool | None = None,
+) -> tuple[bool, bool, bool]:
+    valid = validate_serialized_replay_report(
+        report,
+        event_rows_required=event_rows_required,
+        categorical_rows_required=categorical_rows_required,
+        mark_rows_required=mark_rows_required,
+    )
+    return valid, valid, valid
+
+
+def _trajectory_environment_slice(
+    trajectory: EventTrajectory, env_index: int
+) -> EventTrajectory:
+    """Isolate one replay row so counterfactual packed neighbors cannot gate it."""
+
+    tensor_replacements: dict[str, torch.Tensor] = {}
+    env_count = len(trajectory.ledger_ids)
+    for name in trajectory.__dataclass_fields__:
+        value = getattr(trajectory, name)
+        if not isinstance(value, torch.Tensor):
+            continue
+        if name == "bootstrap_values":
+            tensor_replacements[name] = value[env_index:env_index + 1]
+        elif value.ndim >= 2 and int(value.shape[1]) == env_count:
+            tensor_replacements[name] = value[:, env_index:env_index + 1]
+    return replace(
+        trajectory,
+        **tensor_replacements,
+        raw_event_trace=(),
+        causal_audit_calls=(),
+        outcomes=(trajectory.outcomes[env_index],),
+        segments=(trajectory.segments[env_index],),
+        ledger_ids=(trajectory.ledger_ids[env_index],),
+        cursor=None,
+    )
+
+
+def _derived_reference_trajectory(
     branch: EventTrajectory,
     branch_index: int,
     original: EventTrajectory,
     original_env: int,
     *,
     start: int,
-) -> dict[str, Any]:
-    device = branch.rewards.device
-    discrete_flags = [
-        torch.any(
-            getattr(branch, name)[:, branch_index]
-            != getattr(original, name)[start:, original_env].to(device)
-        ).to(torch.float32)
-        for name in _AUDIT_DISCRETE_FIELDS
-    ]
-    continuous_maxima = []
-    for name in _AUDIT_CONTINUOUS_FIELDS:
-        left = getattr(branch, name)[:, branch_index]
-        right = getattr(original, name)[start:, original_env].to(device)
-        continuous_maxima.append(
-            torch.max(torch.abs(left - right))
-            if left.numel() else torch.zeros((), device=device)
+) -> EventTrajectory:
+    replacements: dict[str, torch.Tensor] = {}
+    for name in DERIVED_RECORD_FIELDS:
+        target = getattr(branch, name).clone()
+        target[:, branch_index] = getattr(original, name)[
+            start:, original_env
+        ].to(target.device)
+        replacements[name] = target
+    return replace(branch, **replacements)
+
+
+_CALL_KEYS = frozenset({
+    "identity", "physical_rows", "input", "payload", "identity_digest",
+})
+_CALL_IDENTITY_KEYS = frozenset({
+    "sampler_family", "call_site", "call_id", "packed_width", "row",
+    "scientific_coordinate", "input_digest", "parameter_digest",
+    "payload_digest",
+})
+_CALL_PAYLOAD_KEYS = {
+    "event": frozenset({
+        "logits", "probabilities", "cdf", "converted_uniform",
+        "pre_force_action", "final_action",
+    }),
+    "mark": frozenset({
+        "mu", "sigma", "noise", "u", "tanh_u", "candidate_mark",
+        "installed_z_pre",
+    }),
+    "primitive": frozenset({
+        "logits", "probabilities", "cdf", "converted_uniform",
+        "selected_action",
+    }),
+}
+_CALL_SITES = {
+    "event": "collect_trajectory.event_categorical",
+    "mark": "collect_trajectory.candidate_mark",
+    "primitive": "collect_trajectory.primitive",
+}
+
+
+def _native_payload_tree_valid(value: Any) -> bool:
+    if isinstance(value, Mapping):
+        if set(value) == {"dtype", "shape", "bytes_b64", "sha256"}:
+            try:
+                _decode_native_payload(value)
+            except (KeyError, TypeError, ValueError):
+                return False
+            return True
+        return all(_native_payload_tree_valid(item) for item in value.values())
+    if isinstance(value, (list, tuple)):
+        return all(_native_payload_tree_valid(item) for item in value)
+    return isinstance(value, (str, int, float, bool, type(None)))
+
+
+def _parameter_evidence_valid(parameters: Any) -> bool:
+    if not isinstance(parameters, Mapping) or set(parameters) != {
+        "event", "mark", "primitive",
+    }:
+        return False
+    for family in ("event", "mark", "primitive"):
+        record = parameters[family]
+        if (
+            not isinstance(record, Mapping)
+            or set(record) != {"parameters", "digest"}
+            or not isinstance(record["parameters"], list)
+            or not all(_native_payload_tree_valid(row) for row in record["parameters"])
+        ):
+            return False
+        try:
+            digest = _parameter_payload_digest(record["parameters"])
+        except (KeyError, TypeError, ValueError):
+            return False
+        if record["digest"] != digest:
+            return False
+    return True
+
+
+def _canonical_call_valid(
+    call: Any, *, parameter_evidence: Mapping[str, Any],
+) -> bool:
+    if not isinstance(call, Mapping) or set(call) != _CALL_KEYS:
+        return False
+    identity = call["identity"]
+    if not isinstance(identity, Mapping) or set(identity) != _CALL_IDENTITY_KEYS:
+        return False
+    family = identity["sampler_family"]
+    coordinate = identity["scientific_coordinate"]
+    if family not in _CALL_PAYLOAD_KEYS or not isinstance(coordinate, Mapping):
+        return False
+    coordinate_keys = {
+        "time", "episode_id", "environment_row", "lifecycle_key",
+        "membership_epoch", "segment_id",
+        "autoregressive_position" if family == "primitive" else "request_kind",
+    }
+    payload = call["payload"]
+    physical_rows = call["physical_rows"]
+    if (
+        set(coordinate) != coordinate_keys
+        or not isinstance(physical_rows, list)
+        or len(physical_rows) != int(identity["packed_width"])
+        or not isinstance(payload, Mapping)
+        or set(payload) != _CALL_PAYLOAD_KEYS[family]
+        or identity["call_site"] != _CALL_SITES[family]
+        or type(identity["call_id"]) is not int
+        or int(identity["call_id"]) < 0
+        or type(identity["packed_width"]) is not int
+        or int(identity["packed_width"]) <= 0
+        or type(identity["row"]) is not int
+        or not 0 <= int(identity["row"]) < int(identity["packed_width"])
+        or not _native_payload_tree_valid(call["input"])
+        or not _native_payload_tree_valid(payload)
+        or identity["input_digest"] != _canonical_json_digest(call["input"])
+        or identity["payload_digest"] != _canonical_json_digest(payload)
+        or identity["parameter_digest"]
+        != parameter_evidence[family]["digest"]
+        or call["identity_digest"] != _canonical_json_digest(identity)
+    ):
+        return False
+    if family == "primitive":
+        return bool(
+            int(identity["packed_width"]) == FORMAL_NUM_ENVS
+            and physical_rows == list(range(FORMAL_NUM_ENVS))
+            and int(physical_rows[int(identity["row"])])
+            == int(coordinate["environment_row"])
         )
-    packed = torch.stack((
-        torch.stack(discrete_flags).sum(),
-        torch.stack(continuous_maxima).max(),
-    )).detach().cpu().tolist()
+    request_kind = int(coordinate["request_kind"])
+    try:
+        physical_coordinate = [
+            int(value) for value in physical_rows[int(identity["row"])]
+        ]
+    except (TypeError, ValueError):
+        return False
+    return bool(
+        request_kind in (CREATE, KEEP)
+        and physical_coordinate == [
+            int(coordinate["environment_row"]),
+            int(coordinate["lifecycle_key"]),
+            request_kind,
+        ]
+        and (family != "event" or request_kind != CREATE)
+    )
+
+
+def _paired_comparison(
+    source: Mapping[str, Any], natural: Mapping[str, Any], *,
+    field: str, pair_coordinate: list[Any],
+) -> dict[str, Any]:
+    return native_bitwise_finite_comparison(
+        source, natural, field=field,
+    ) | {"pair_coordinate": deepcopy(pair_coordinate)}
+
+
+def _call_input_comparisons(
+    source: Mapping[str, Any], natural: Mapping[str, Any], *,
+    family: str, pair_coordinate: list[Any],
+) -> list[dict[str, Any]]:
+    if family != "primitive":
+        return [_paired_comparison(
+            source, natural, field=f"{family}.input",
+            pair_coordinate=pair_coordinate,
+        )]
+    names = ("action_input", "primitive_bias")
+    if any(source[name] is None or natural[name] is None for name in names):
+        raise ValueError("primitive typed input requires action input and bias")
+    return [
+        _paired_comparison(
+            source[name], natural[name],
+            field=f"primitive.input.{name}",
+            pair_coordinate=pair_coordinate,
+        )
+        for name in names
+    ]
+
+
+def _runtime_provenance() -> dict[str, Any]:
+    execution = registered_contract()["execution"]
     return {
-        "discrete_mismatch": int(packed[0]),
-        "continuous_error": float(packed[1]),
-        "segment_equal": branch.segments[branch_index] == original.segments[original_env],
-        "outcome_equal": branch.outcomes[branch_index] == original.outcomes[original_env],
+        "registered_backend": execution["backend"],
+        "torch_version": str(torch.__version__),
+        "thread_count": int(torch.get_num_threads()),
+        "contract_version": TYPED_CAUSAL_AUDIT_SCHEMA,
     }
 
+
+def _typed_rng_provenance(
+    material: Mapping[str, Mapping[str, Any]],
+    streams: Mapping[str, _AuditRowStream],
+    *, replicate: int, source_environment: int,
+) -> dict[str, Any]:
+    seeds = authoritative_seed_map("held_out", replicate)
+    records: dict[str, Any] = {}
+    for name in RNG_NAMES:
+        stream = streams.get(name)
+        consumed = (
+            np.empty(0, dtype=np.uint8)
+            if stream is None
+            else np.ascontiguousarray(
+                stream.values.reshape(-1)[:stream.position]
+            )
+        )
+        payload = _native_payload(consumed)
+        records[name] = {
+            "seed": int(seeds[name]),
+            "start_state": deepcopy(material[name]["start_state"]),
+            "schedule": deepcopy(material[name]["draw_schedule"]),
+            "consumption_position": 0 if stream is None else int(stream.position),
+            "consumed_payload": payload,
+            "consumed_payload_digest": payload["sha256"],
+            "end_state": deepcopy(material[name]["end_state"]),
+        }
+    evidence = {
+        "source_environment": int(source_environment),
+        "streams": records,
+        "realized_variates_exact": True,
+        "passed": True,
+    }
+    return evidence
+
+
+def _expected_row_consumption(
+    *, stream: str, arrays: list[np.ndarray],
+    schedule: list[Mapping[str, Any]], environment: int,
+) -> np.ndarray:
+    selected: list[np.ndarray] = []
+    for array, entry in zip(arrays, schedule, strict=True):
+        if stream in ("event", "mark", "opportunity"):
+            requests = entry["coordinates"]["requests"]
+            mask = np.asarray(
+                [int(request[0]) == int(environment) for request in requests],
+                dtype=np.bool_,
+            )
+            selected.append(np.asarray(array)[mask].reshape(-1))
+        elif stream == "primitive":
+            selected.append(np.asarray(array)[int(environment)].reshape(-1))
+    if selected:
+        return np.ascontiguousarray(np.concatenate(selected))
+    return np.empty(0, dtype=np.uint8)
+
+
+def _typed_rng_evidence_valid(evidence: Any) -> bool:
+    if not isinstance(evidence, Mapping) or set(evidence) != {
+        "source_environment", "streams", "realized_variates_exact", "passed",
+    }:
+        return False
+    streams = evidence["streams"]
+    if not isinstance(streams, Mapping) or tuple(streams) != RNG_NAMES:
+        return False
+    environment = int(evidence["source_environment"])
+    valid = True
+    for name in RNG_NAMES:
+        row = streams[name]
+        if not isinstance(row, Mapping) or set(row) != {
+            "seed", "start_state", "schedule", "consumption_position",
+            "consumed_payload", "consumed_payload_digest", "end_state",
+        }:
+            return False
+        try:
+            _digest, end_state, arrays = _replay_rng_schedule(
+                row["start_state"], row["schedule"], seed=int(row["seed"]),
+            )
+            consumed = _decode_native_payload(row["consumed_payload"])
+            expected = _expected_row_consumption(
+                stream=name, arrays=arrays, schedule=row["schedule"],
+                environment=environment,
+            )
+        except (KeyError, TypeError, ValueError, IndexError):
+            return False
+        valid = valid and bool(
+            end_state == row["end_state"]
+            and int(row["consumption_position"]) == int(expected.size)
+            and consumed.dtype == expected.dtype
+            and consumed.shape == expected.shape
+            and consumed.tobytes(order="C") == expected.tobytes(order="C")
+            and row["consumed_payload_digest"]
+            == hashlib.sha256(consumed.tobytes(order="C")).hexdigest()
+        )
+    return bool(valid)
+
+
+def _first_typed_failure(
+    evidence_order: Iterable[tuple[str, Mapping[str, Any]]], *,
+    report: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    for evidence_class, evidence in evidence_order:
+        if bool(evidence["passed"]):
+            continue
+        comparisons = evidence.get("fields", evidence.get("comparisons", ()))
+        failure = _comparison_failure(
+            comparisons, evidence_class=evidence_class,
+        )
+        if failure is not None:
+            comparison = next(
+                row for row in comparisons if not bool(row.get("passed"))
+            )
+            if "pair_coordinate" in comparison:
+                failure["coordinate"] = {
+                    "pair": deepcopy(comparison["pair_coordinate"]),
+                    "payload": comparison.get("first_coordinate"),
+                }
+            return failure
+        return {
+            "class": evidence_class,
+            "field": None,
+            "coordinate": None,
+            "magnitude": None,
+            "ulp_distance": None,
+            "detail": (
+                {
+                    "critic_record_valid": False,
+                    "likelihood_components_valid": False,
+                    "joint_record_valid": False,
+                    "replay_failures": deepcopy(report.get("failures")),
+                }
+                if evidence_class == "derived" else None
+            ),
+        }
+    return None
+def _typed_natural_audit(
+    arm: CommitmentArm,
+    branch: EventTrajectory,
+    branch_index: int,
+    original: EventTrajectory,
+    original_env: int,
+    *,
+    start: int,
+    audit_id: str,
+    replicate: int,
+    batch_index: int,
+    focal_key: int,
+    natural_action: str,
+    natural_branch: str,
+    rng_binding_material: Mapping[str, Mapping[str, Any]],
+    consumed_streams: Mapping[str, _AuditRowStream],
+) -> dict[str, Any]:
+    structural_comparisons = [
+        native_bitwise_finite_comparison(
+            _tensor_payload(getattr(original, name)[start:, original_env]),
+            _tensor_payload(getattr(branch, name)[:, branch_index]),
+            field=name,
+        )
+        for name in CAUSAL_STRUCTURAL_FIELDS
+    ]
+    causal_comparisons = [
+        native_bitwise_finite_comparison(
+            _tensor_payload(getattr(original, name)[start:, original_env]),
+            _tensor_payload(getattr(branch, name)[:, branch_index]),
+            field=name,
+        )
+        for name in CAUSAL_FLOAT_FIELDS
+    ]
+    structural_evidence = {
+        "fields": structural_comparisons,
+        "passed": all(row["passed"] for row in structural_comparisons),
+    }
+
+    source_segments = [vars(value) for value in original.segments[original_env]]
+    natural_segments = [vars(value) for value in branch.segments[branch_index]]
+    segment_evidence = {
+        "source": source_segments,
+        "natural": natural_segments,
+        "passed": source_segments == natural_segments,
+    }
+    reward_comparison = native_bitwise_finite_comparison(
+        _tensor_payload(original.rewards[start:, original_env]),
+        _tensor_payload(branch.rewards[:, branch_index]),
+        field="rewards",
+    )
+    source_outcome = vars(original.outcomes[original_env])
+    natural_outcome = vars(branch.outcomes[branch_index])
+    outcome_evidence = {
+        "source": source_outcome,
+        "natural": natural_outcome,
+        "reward_comparison": reward_comparison,
+        "passed": source_outcome == natural_outcome and reward_comparison["passed"],
+    }
+
+    source_calls = _selected_executed_calls(
+        original, row=original_env, start=start,
+    )
+    natural_calls = _selected_executed_calls(
+        branch, row=branch_index, start=start,
+    )
+    focal_source_coordinates = [
+        call["identity"]["scientific_coordinate"]
+        for call in source_calls
+        if (
+            call["identity"]["sampler_family"] == "event"
+            and int(call["identity"]["scientific_coordinate"]["time"])
+            == int(start)
+            and int(
+                call["identity"]["scientific_coordinate"]["lifecycle_key"]
+            ) == int(focal_key)
+        )
+    ]
+    focal_source_coordinate = (
+        focal_source_coordinates[0]
+        if len(focal_source_coordinates) == 1
+        else {
+            "membership_epoch": int(
+                original.membership_epoch[start, original_env, focal_key]
+            ),
+            "segment_id": int(
+                original.segment_id[start, original_env, focal_key]
+            ),
+        }
+    )
+    source_by_key = {_call_coordinate_key(call): call for call in source_calls}
+    natural_by_key = {_call_coordinate_key(call): call for call in natural_calls}
+    duplicate_source = len(source_by_key) != len(source_calls)
+    duplicate_natural = len(natural_by_key) != len(natural_calls)
+    expected_keys = sorted(set(source_by_key) | set(natural_by_key))
+    parameter_evidence = _parameter_payload_evidence(arm)
+    pair_records: list[dict[str, Any]] = []
+    event_comparisons: list[dict[str, Any]] = []
+    mark_comparisons: list[dict[str, Any]] = []
+    primitive_comparisons: list[dict[str, Any]] = []
+    event_actions_exact = True
+    primitive_actions_exact = True
+    realized_variates_exact = True
+    expected_final = KEEP if natural_action == "KEEP" else RENEW
+
+    for key in expected_keys:
+        source = source_by_key.get(key)
+        natural = natural_by_key.get(key)
+        coordinate = list(key)
+        pair_passed = source is not None and natural is not None
+        pair: dict[str, Any] = {
+            "coordinate": coordinate,
+            "continuation_offset": int(key[1]) - int(start),
+            "source_call": deepcopy(source),
+            "natural_call": deepcopy(natural),
+            "pair_digest": None,
+            "passed": False,
+        }
+        if pair_passed:
+            assert source is not None and natural is not None
+            source_identity = source["identity"]
+            natural_identity = natural["identity"]
+            source_scientific = dict(source_identity["scientific_coordinate"])
+            natural_scientific = dict(natural_identity["scientific_coordinate"])
+            source_scientific.pop("environment_row")
+            natural_scientific.pop("environment_row")
+            pair_passed = bool(
+                source_identity["sampler_family"]
+                == natural_identity["sampler_family"]
+                and source_identity["call_site"] == natural_identity["call_site"]
+                and source_scientific == natural_scientific
+                and source_identity["parameter_digest"]
+                == natural_identity["parameter_digest"]
+            )
+            family = str(source_identity["sampler_family"])
+            causal_comparisons.extend(_call_input_comparisons(
+                source["input"], natural["input"], family=family,
+                pair_coordinate=coordinate,
+            ))
+            source_payload = source["payload"]
+            natural_payload = natural["payload"]
+            if family == "event":
+                for name in ("cdf", "converted_uniform"):
+                    comparison = _paired_comparison(
+                        source_payload[name], natural_payload[name],
+                        field=f"event.{name}", pair_coordinate=coordinate,
+                    )
+                    event_comparisons.append(comparison)
+                    if name == "converted_uniform":
+                        realized_variates_exact &= bool(comparison["passed"])
+                scientific = source_identity["scientific_coordinate"]
+                focal = (
+                    int(scientific["time"]) == int(start)
+                    and int(scientific["lifecycle_key"]) == int(focal_key)
+                )
+                actions_pass = (
+                    int(source_payload["pre_force_action"])
+                    == int(natural_payload["pre_force_action"])
+                    and int(source_payload["final_action"])
+                    == int(natural_payload["final_action"])
+                    and (
+                        not focal
+                        or int(source_payload["final_action"]) == expected_final
+                    )
+                )
+                event_actions_exact &= bool(actions_pass)
+            elif family == "mark":
+                for name in (
+                    "mu", "sigma", "noise", "u", "tanh_u", "candidate_mark",
+                ):
+                    comparison = _paired_comparison(
+                        source_payload[name], natural_payload[name],
+                        field=f"mark.{name}", pair_coordinate=coordinate,
+                    )
+                    mark_comparisons.append(comparison)
+                    if name == "noise":
+                        realized_variates_exact &= bool(comparison["passed"])
+            elif family == "primitive":
+                for name in ("cdf", "converted_uniform"):
+                    comparison = _paired_comparison(
+                        source_payload[name], natural_payload[name],
+                        field=f"primitive.{name}", pair_coordinate=coordinate,
+                    )
+                    primitive_comparisons.append(comparison)
+                    if name == "converted_uniform":
+                        realized_variates_exact &= bool(comparison["passed"])
+                primitive_actions_exact &= bool(
+                    int(source_payload["selected_action"])
+                    == int(natural_payload["selected_action"])
+                )
+            pair_digest_material = {
+                "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+                "audit_id": audit_id,
+                "replicate": int(replicate),
+                "batch_index": int(batch_index),
+                "source_episode": int(original.ledger_ids[original_env]),
+                "source_environment": int(original_env),
+                "focal_time": int(start),
+                "focal_key": int(focal_key),
+                "natural_action": natural_action,
+                "natural_branch": natural_branch,
+                "continuation_offset": int(key[1]) - int(start),
+                "coordinate": coordinate,
+                "source_call": source,
+                "natural_call": natural,
+            }
+            pair["pair_digest"] = _canonical_json_digest(pair_digest_material)
+        pair["passed"] = bool(pair_passed)
+        pair_records.append(pair)
+
+    source_family_counts = Counter(
+        call["identity"]["sampler_family"] for call in source_calls
+    )
+    natural_family_counts = Counter(
+        call["identity"]["sampler_family"] for call in natural_calls
+    )
+    expected_family_counts = {
+        "event": int(original.event_cat_mask[start:, original_env].sum()),
+        "mark": int(original.event_kind[start:, original_env].ne(0).sum()),
+        "primitive": int(original.active_mask[start:, original_env].sum()),
+    }
+    binding_passed = bool(
+        source_calls
+        and len(focal_source_coordinates) == 1
+        and not duplicate_source
+        and not duplicate_natural
+        and len(source_calls) == len(natural_calls)
+        and all(pair["passed"] for pair in pair_records)
+        and dict(source_family_counts) == expected_family_counts
+        and dict(natural_family_counts) == expected_family_counts
+    )
+    binding_evidence = {
+        "audit_id": audit_id,
+        "replicate": int(replicate),
+        "batch_index": int(batch_index),
+        "source_episode": int(original.ledger_ids[original_env]),
+        "focal_time": int(start),
+        "source_environment": int(original_env),
+        "focal_key": int(focal_key),
+        "membership_epoch": int(focal_source_coordinate["membership_epoch"]),
+        "segment_id": int(focal_source_coordinate["segment_id"]),
+        "natural_action": natural_action,
+        "natural_branch": natural_branch,
+        "parameter_evidence": parameter_evidence,
+        "expected_family_counts": expected_family_counts,
+        "expected_pairs": len(expected_keys),
+        "source_call_count": len(source_calls),
+        "natural_call_count": len(natural_calls),
+        "duplicate_source": duplicate_source,
+        "duplicate_natural": duplicate_natural,
+        "pairs": pair_records,
+        "passed": binding_passed,
+    }
+
+    event_expected = expected_family_counts["event"]
+    mark_expected = expected_family_counts["mark"]
+    primitive_expected = expected_family_counts["primitive"]
+    event_kernel = {
+        "expected_call_count": event_expected,
+        "comparisons": event_comparisons,
+        "selected_actions_exact": bool(event_actions_exact),
+        "parameter_exact": all(
+            pair["source_call"]["identity"]["parameter_digest"]
+            == pair["natural_call"]["identity"]["parameter_digest"]
+            for pair in pair_records
+            if pair["source_call"] is not None
+            and pair["source_call"]["identity"]["sampler_family"] == "event"
+        ),
+    }
+    event_kernel["passed"] = bool(
+        len(event_comparisons) == 2 * event_expected
+        and all(row["passed"] for row in event_comparisons)
+        and event_kernel["selected_actions_exact"]
+        and event_kernel["parameter_exact"]
+    )
+    mark_kernel = {
+        "expected_call_count": mark_expected,
+        "comparisons": mark_comparisons,
+    }
+    mark_kernel["passed"] = bool(
+        len(mark_comparisons) == 6 * mark_expected
+        and all(row["passed"] for row in mark_comparisons)
+    )
+    primitive_kernel = {
+        "expected_call_count": primitive_expected,
+        "comparisons": primitive_comparisons,
+        "selected_actions_exact": bool(primitive_actions_exact),
+        "parameter_exact": all(
+            pair["source_call"]["identity"]["parameter_digest"]
+            == pair["natural_call"]["identity"]["parameter_digest"]
+            for pair in pair_records
+            if pair["source_call"] is not None
+            and pair["source_call"]["identity"]["sampler_family"] == "primitive"
+        ),
+    }
+    primitive_kernel["passed"] = bool(
+        len(primitive_comparisons) == 2 * primitive_expected
+        and all(row["passed"] for row in primitive_comparisons)
+        and primitive_kernel["selected_actions_exact"]
+        and primitive_kernel["parameter_exact"]
+    )
+    kernel_evidence = {
+        "event": event_kernel,
+        "mark": mark_kernel,
+        "primitive": primitive_kernel,
+    }
+    causal_field_evidence = {
+        "fields": causal_comparisons,
+        "passed": all(row["passed"] for row in causal_comparisons),
+    }
+    rng_evidence = _typed_rng_provenance(
+        rng_binding_material, consumed_streams,
+        replicate=replicate, source_environment=original_env,
+    )
+    rng_evidence["realized_variates_exact"] = bool(realized_variates_exact)
+    rng_evidence["passed"] = bool(
+        realized_variates_exact and _typed_rng_evidence_valid(rng_evidence)
+    )
+
+    natural_replay_trajectory = _trajectory_environment_slice(
+        branch, branch_index
+    )
+    derived_reference = _derived_reference_trajectory(
+        natural_replay_trajectory, 0, original, original_env, start=start
+    )
+    replay = replay_trajectory(
+        arm, natural_replay_trajectory, device=branch.rewards.device
+    )
+    report = replay_report(replay, derived_reference)
+    categorical_rows_required = bool(
+        natural_replay_trajectory.event_cat_mask.any()
+    )
+    mark_rows_required = bool(
+        natural_replay_trajectory.event_mark_mask.any()
+    )
+    critic_valid, likelihood_valid, joint_valid = (
+        _validate_replay_report_evidence(
+            report,
+            event_rows_required=(
+                categorical_rows_required or mark_rows_required
+            ),
+            categorical_rows_required=categorical_rows_required,
+            mark_rows_required=mark_rows_required,
+        )
+    )
+    derived_passed = critic_valid and likelihood_valid and joint_valid
+    derived_evidence = {
+        "replay_report": report,
+        "critic_record_valid": critic_valid,
+        "likelihood_components_valid": likelihood_valid,
+        "joint_record_valid": joint_valid,
+        "passed": derived_passed,
+    }
+    causal_identity_passed = bool(
+        binding_evidence["passed"]
+        and structural_evidence["passed"]
+        and causal_field_evidence["passed"]
+        and segment_evidence["passed"]
+        and outcome_evidence["passed"]
+        and rng_evidence["passed"]
+        and event_kernel["passed"]
+        and mark_kernel["passed"]
+        and primitive_kernel["passed"]
+    )
+    evidence_order = (
+        ("binding", binding_evidence),
+        ("structural", structural_evidence),
+        ("causal_field", causal_field_evidence),
+        ("segment", segment_evidence),
+        ("outcome", outcome_evidence),
+        ("rng", rng_evidence),
+        ("event_kernel", event_kernel),
+        ("mark_kernel", mark_kernel),
+        ("primitive_kernel", primitive_kernel),
+        ("derived", derived_evidence),
+    )
+    first_failure = _first_typed_failure(evidence_order, report=report)
+    comparison_rows = [
+        *causal_comparisons, *event_comparisons, *mark_comparisons,
+        *primitive_comparisons,
+    ]
+    finite_comparison_failure = bool(
+        comparison_rows
+        and all(not row["malformed"] and row["finite"] for row in comparison_rows)
+        and any(not row["passed"] for row in comparison_rows)
+    )
+    unavailable = bool(
+        binding_evidence["passed"]
+        and structural_evidence["passed"]
+        and segment_evidence["passed"]
+        and outcome_evidence["passed"]
+        and rng_evidence["passed"]
+        and derived_evidence["passed"]
+        and event_kernel["selected_actions_exact"]
+        and event_kernel["parameter_exact"]
+        and primitive_kernel["selected_actions_exact"]
+        and primitive_kernel["parameter_exact"]
+        and finite_comparison_failure
+    )
+    if causal_identity_passed and derived_passed:
+        status, reason_code = "complete", None
+    elif unavailable:
+        status = "unavailable"
+        reason_code = "natural_branch_causal_identity_failed"
+    else:
+        raise RuntimeError(
+            f"INVALID_OPERATIONAL typed natural audit {first_failure}"
+        )
+    record = {
+        "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+        "status": status,
+        "reason_code": reason_code,
+        "causal_identity_passed": causal_identity_passed,
+        "derived_record_fidelity_passed": derived_passed,
+        "runtime_provenance": _runtime_provenance(),
+        "binding_evidence": binding_evidence,
+        "structural_evidence": structural_evidence,
+        "causal_field_evidence": causal_field_evidence,
+        "segment_evidence": segment_evidence,
+        "outcome_evidence": outcome_evidence,
+        "rng_evidence": rng_evidence,
+        "kernel_evidence": kernel_evidence,
+        "derived_evidence": derived_evidence,
+        "first_failure": first_failure,
+        "attempted_rows": 1,
+        "completed_rows": int(status == "complete"),
+    }
+    if not validate_typed_natural_audit(record):
+        raise RuntimeError(
+            "INVALID_OPERATIONAL typed natural audit self-validation failed"
+        )
+    return record
+
+
+_TYPED_NATURAL_AUDIT_KEYS = frozenset({
+    "schema", "status", "reason_code", "causal_identity_passed",
+    "derived_record_fidelity_passed", "runtime_provenance",
+    "binding_evidence", "structural_evidence", "causal_field_evidence",
+    "segment_evidence", "outcome_evidence", "rng_evidence",
+    "kernel_evidence", "derived_evidence", "first_failure",
+    "attempted_rows", "completed_rows",
+})
+
+
+def validate_typed_natural_audit(record: Mapping[str, Any]) -> bool:
+    """Recompute the complete typed contract from serialized natural evidence."""
+
+    try:
+        if (
+            not isinstance(record, Mapping)
+            or set(record) != _TYPED_NATURAL_AUDIT_KEYS
+            or record["schema"] != TYPED_CAUSAL_AUDIT_SCHEMA
+            or record["status"] not in ("complete", "unavailable")
+            or type(record["attempted_rows"]) is not int
+            or int(record["attempted_rows"]) != 1
+            or record["runtime_provenance"] != _runtime_provenance()
+        ):
+            return False
+
+        def comparison_valid(row: Mapping[str, Any]) -> bool:
+            expected = native_bitwise_finite_comparison(
+                row["source_payload"], row["natural_payload"],
+                field=str(row["field"]),
+            )
+            if "pair_coordinate" in row:
+                expected["pair_coordinate"] = deepcopy(row["pair_coordinate"])
+            return dict(row) == expected
+
+        binding = record["binding_evidence"]
+        binding_keys = {
+            "audit_id", "replicate", "batch_index", "source_episode",
+            "focal_time", "source_environment", "focal_key",
+            "membership_epoch", "segment_id", "natural_action",
+            "natural_branch", "parameter_evidence",
+            "expected_family_counts", "expected_pairs",
+            "source_call_count", "natural_call_count", "duplicate_source",
+            "duplicate_natural", "pairs", "passed",
+        }
+        if (
+            not isinstance(binding, Mapping)
+            or set(binding) != binding_keys
+            or binding["natural_action"] not in ("KEEP", "RENEW")
+            or binding["natural_branch"] != (
+                AUDIT_BRANCHES[0]
+                if binding["natural_action"] == "KEEP"
+                else AUDIT_BRANCHES[2]
+            )
+            or not _parameter_evidence_valid(binding["parameter_evidence"])
+            or not isinstance(binding["pairs"], list)
+        ):
+            return False
+        parameters = binding["parameter_evidence"]
+        pairs = binding["pairs"]
+        source_calls: list[Mapping[str, Any]] = []
+        natural_calls: list[Mapping[str, Any]] = []
+        pair_valid = True
+        for pair in pairs:
+            if not isinstance(pair, Mapping) or set(pair) != {
+                "coordinate", "continuation_offset", "source_call",
+                "natural_call", "pair_digest", "passed",
+            }:
+                return False
+            source = pair["source_call"]
+            natural = pair["natural_call"]
+            if not (
+                _canonical_call_valid(source, parameter_evidence=parameters)
+                and _canonical_call_valid(natural, parameter_evidence=parameters)
+            ):
+                return False
+            source_calls.append(source)
+            natural_calls.append(natural)
+            source_identity = source["identity"]
+            natural_identity = natural["identity"]
+            source_scientific = dict(source_identity["scientific_coordinate"])
+            natural_scientific = dict(natural_identity["scientific_coordinate"])
+            source_environment = int(source_scientific.pop("environment_row"))
+            natural_scientific.pop("environment_row")
+            coordinate = list(_call_coordinate_key(source))
+            expected_digest = _canonical_json_digest({
+                "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+                "audit_id": binding["audit_id"],
+                "replicate": int(binding["replicate"]),
+                "batch_index": int(binding["batch_index"]),
+                "source_episode": int(binding["source_episode"]),
+                "source_environment": int(binding["source_environment"]),
+                "focal_time": int(binding["focal_time"]),
+                "focal_key": int(binding["focal_key"]),
+                "natural_action": binding["natural_action"],
+                "natural_branch": binding["natural_branch"],
+                "continuation_offset": int(pair["continuation_offset"]),
+                "coordinate": coordinate,
+                "source_call": source,
+                "natural_call": natural,
+            })
+            actual = bool(
+                pair["coordinate"] == coordinate
+                and tuple(coordinate) == _call_coordinate_key(natural)
+                and source_identity["sampler_family"]
+                == natural_identity["sampler_family"]
+                and source_identity["call_site"] == natural_identity["call_site"]
+                and source_identity["parameter_digest"]
+                == natural_identity["parameter_digest"]
+                and source_scientific == natural_scientific
+                and source_environment == int(binding["source_environment"])
+                and int(source_scientific["episode_id"])
+                == int(binding["source_episode"])
+                and int(pair["continuation_offset"])
+                == int(source_scientific["time"]) - int(binding["focal_time"])
+                and pair["pair_digest"] == expected_digest
+            )
+            pair_valid &= actual and bool(pair["passed"]) == actual
+
+        if [pair["coordinate"] for pair in pairs] != sorted(
+            pair["coordinate"] for pair in pairs
+        ):
+            return False
+        focal_source_coordinates = [
+            call["identity"]["scientific_coordinate"]
+            for call in source_calls
+            if (
+                call["identity"]["sampler_family"] == "event"
+                and int(call["identity"]["scientific_coordinate"]["time"])
+                == int(binding["focal_time"])
+                and int(
+                    call["identity"]["scientific_coordinate"]["lifecycle_key"]
+                ) == int(binding["focal_key"])
+            )
+        ]
+        focal_coordinate_valid = bool(
+            len(focal_source_coordinates) == 1
+            and int(focal_source_coordinates[0]["membership_epoch"])
+            == int(binding["membership_epoch"])
+            and int(focal_source_coordinates[0]["segment_id"])
+            == int(binding["segment_id"])
+        )
+
+        def call_ids_valid(calls: list[Mapping[str, Any]]) -> bool:
+            signatures: dict[int, tuple[Any, ...]] = {}
+            times: dict[int, set[int]] = {}
+            for call in calls:
+                identity = call["identity"]
+                call_id = int(identity["call_id"])
+                signature = (
+                    identity["sampler_family"], identity["call_site"],
+                    int(identity["packed_width"]),
+                    _canonical_json_digest(call["physical_rows"]),
+                    int(identity["scientific_coordinate"]["time"]),
+                )
+                if call_id in signatures and signatures[call_id] != signature:
+                    return False
+                signatures[call_id] = signature
+                times.setdefault(
+                    int(identity["scientific_coordinate"]["time"]), set()
+                ).add(call_id)
+            previous = -1
+            for time in sorted(times):
+                current = sorted(times[time])
+                if current[0] <= previous:
+                    return False
+                previous = current[-1]
+            return True
+
+        structural_rows = record["structural_evidence"]["fields"]
+        if (
+            tuple(row["field"] for row in structural_rows)
+            != CAUSAL_STRUCTURAL_FIELDS
+            or not all(comparison_valid(row) for row in structural_rows)
+        ):
+            return False
+        structural_passed = all(bool(row["passed"]) for row in structural_rows)
+        structural_sources = {
+            row["field"]: _decode_native_payload(row["source_payload"])
+            for row in structural_rows
+        }
+        expected_family_counts = {
+            "event": int(np.asarray(structural_sources["event_cat_mask"]).sum()),
+            "mark": int(
+                (
+                    np.asarray(structural_sources["event_kind"]).astype(np.int64)
+                    != 0
+                ).sum()
+            ),
+            "primitive": int(
+                np.asarray(structural_sources["active_mask"]).sum()
+            ),
+        }
+        source_family_counts = dict(Counter(
+            call["identity"]["sampler_family"] for call in source_calls
+        ))
+        natural_family_counts = dict(Counter(
+            call["identity"]["sampler_family"] for call in natural_calls
+        ))
+        binding_passed = bool(
+            pairs
+            and pair_valid
+            and focal_coordinate_valid
+            and not bool(binding["duplicate_source"])
+            and not bool(binding["duplicate_natural"])
+            and int(binding["expected_pairs"]) == len(pairs)
+            and int(binding["source_call_count"]) == len(source_calls)
+            and int(binding["natural_call_count"]) == len(natural_calls)
+            and binding["expected_family_counts"] == expected_family_counts
+            and source_family_counts == expected_family_counts
+            and natural_family_counts == expected_family_counts
+            and call_ids_valid(source_calls)
+            and call_ids_valid(natural_calls)
+        )
+
+        expected_input_rows = [
+            comparison
+            for pair in pairs
+            for comparison in _call_input_comparisons(
+                pair["source_call"]["input"],
+                pair["natural_call"]["input"],
+                family=pair["source_call"]["identity"]["sampler_family"],
+                pair_coordinate=pair["coordinate"],
+            )
+        ]
+        causal_rows = record["causal_field_evidence"]["fields"]
+        if (
+            tuple(row["field"] for row in causal_rows[:len(CAUSAL_FLOAT_FIELDS)])
+            != CAUSAL_FLOAT_FIELDS
+            or causal_rows[len(CAUSAL_FLOAT_FIELDS):] != expected_input_rows
+            or not all(comparison_valid(row) for row in causal_rows)
+        ):
+            return False
+        causal_passed = all(bool(row["passed"]) for row in causal_rows)
+        segment_passed = (
+            record["segment_evidence"]["source"]
+            == record["segment_evidence"]["natural"]
+        )
+        outcome = record["outcome_evidence"]
+        reward_comparison = native_bitwise_finite_comparison(
+            outcome["reward_comparison"]["source_payload"],
+            outcome["reward_comparison"]["natural_payload"],
+            field="rewards",
+        )
+        if reward_comparison != outcome["reward_comparison"]:
+            return False
+        outcome_passed = bool(
+            outcome["source"] == outcome["natural"]
+            and reward_comparison["passed"]
+        )
+
+        family_pairs = {
+            family: [
+                pair for pair in pairs
+                if pair["source_call"]["identity"]["sampler_family"] == family
+            ]
+            for family in ("event", "mark", "primitive")
+        }
+        expected_comparisons: dict[str, list[dict[str, Any]]] = {
+            "event": [],
+            "mark": [],
+            "primitive": [],
+        }
+        event_actions_exact = True
+        primitive_actions_exact = True
+        expected_final = (
+            KEEP if binding["natural_action"] == "KEEP" else RENEW
+        )
+        for family, rows in family_pairs.items():
+            names = (
+                ("cdf", "converted_uniform") if family != "mark"
+                else ("mu", "sigma", "noise", "u", "tanh_u", "candidate_mark")
+            )
+            for pair in rows:
+                source = pair["source_call"]
+                natural = pair["natural_call"]
+                for name in names:
+                    expected_comparisons[family].append(_paired_comparison(
+                        source["payload"][name], natural["payload"][name],
+                        field=f"{family}.{name}",
+                        pair_coordinate=pair["coordinate"],
+                    ))
+                if family == "event":
+                    coordinate = source["identity"]["scientific_coordinate"]
+                    focal = (
+                        int(coordinate["time"]) == int(binding["focal_time"])
+                        and int(coordinate["lifecycle_key"])
+                        == int(binding["focal_key"])
+                    )
+                    event_actions_exact &= bool(
+                        int(source["payload"]["pre_force_action"])
+                        == int(natural["payload"]["pre_force_action"])
+                        and int(source["payload"]["final_action"])
+                        == int(natural["payload"]["final_action"])
+                        and (
+                            not focal
+                            or int(source["payload"]["final_action"])
+                            == expected_final
+                        )
+                    )
+                elif family == "primitive":
+                    primitive_actions_exact &= bool(
+                        int(source["payload"]["selected_action"])
+                        == int(natural["payload"]["selected_action"])
+                    )
+
+        kernels = record["kernel_evidence"]
+        if not isinstance(kernels, Mapping) or set(kernels) != {
+            "event", "mark", "primitive",
+        }:
+            return False
+        event_parameter_exact = all(
+            pair["source_call"]["identity"]["parameter_digest"]
+            == pair["natural_call"]["identity"]["parameter_digest"]
+            for pair in family_pairs["event"]
+        )
+        primitive_parameter_exact = all(
+            pair["source_call"]["identity"]["parameter_digest"]
+            == pair["natural_call"]["identity"]["parameter_digest"]
+            for pair in family_pairs["primitive"]
+        )
+        family_passed: dict[str, bool] = {}
+        for family in ("event", "mark", "primitive"):
+            kernel = kernels[family]
+            expected_keys = (
+                {"expected_call_count", "comparisons", "passed"}
+                if family == "mark"
+                else {
+                    "expected_call_count", "comparisons",
+                    "selected_actions_exact", "parameter_exact", "passed",
+                }
+            )
+            if (
+                not isinstance(kernel, Mapping)
+                or set(kernel) != expected_keys
+                or int(kernel["expected_call_count"])
+                != expected_family_counts[family]
+                or kernel["comparisons"] != expected_comparisons[family]
+                or not all(comparison_valid(row) for row in kernel["comparisons"])
+            ):
+                return False
+            actual = all(
+                bool(row["passed"]) for row in expected_comparisons[family]
+            )
+            if family == "event":
+                actual &= event_actions_exact and event_parameter_exact
+                if (
+                    bool(kernel["selected_actions_exact"]) != event_actions_exact
+                    or bool(kernel["parameter_exact"]) != event_parameter_exact
+                ):
+                    return False
+            elif family == "primitive":
+                actual &= primitive_actions_exact and primitive_parameter_exact
+                if (
+                    bool(kernel["selected_actions_exact"])
+                    != primitive_actions_exact
+                    or bool(kernel["parameter_exact"])
+                    != primitive_parameter_exact
+                ):
+                    return False
+            family_passed[family] = bool(actual)
+
+        realized_rows = [
+            row
+            for family in ("event", "mark", "primitive")
+            for row in expected_comparisons[family]
+            if row["field"].endswith("converted_uniform")
+            or row["field"] == "mark.noise"
+        ]
+        realized_exact = all(bool(row["passed"]) for row in realized_rows)
+        rng_passed = _typed_rng_evidence_valid(record["rng_evidence"])
+        if (
+            bool(record["rng_evidence"]["realized_variates_exact"])
+            != realized_exact
+        ):
+            return False
+        rng_passed &= realized_exact
+        categorical_rows_required = bool(
+            np.asarray(structural_sources["event_cat_mask"]).any()
+        )
+        mark_rows_required = bool(
+            np.asarray(structural_sources["event_mark_mask"]).any()
+        )
+        critic, likelihood, joint = _validate_replay_report_evidence(
+            record["derived_evidence"]["replay_report"],
+            event_rows_required=(
+                categorical_rows_required or mark_rows_required
+            ),
+            categorical_rows_required=categorical_rows_required,
+            mark_rows_required=mark_rows_required,
+        )
+        derived_passed = critic and likelihood and joint
+        summaries = (
+            (binding["passed"], binding_passed),
+            (record["structural_evidence"]["passed"], structural_passed),
+            (record["causal_field_evidence"]["passed"], causal_passed),
+            (record["segment_evidence"]["passed"], segment_passed),
+            (record["outcome_evidence"]["passed"], outcome_passed),
+            (record["rng_evidence"]["passed"], rng_passed),
+            (kernels["event"]["passed"], family_passed["event"]),
+            (kernels["mark"]["passed"], family_passed["mark"]),
+            (kernels["primitive"]["passed"], family_passed["primitive"]),
+            (record["derived_evidence"]["critic_record_valid"], critic),
+            (record["derived_evidence"]["likelihood_components_valid"], likelihood),
+            (record["derived_evidence"]["joint_record_valid"], joint),
+            (record["derived_evidence"]["passed"], derived_passed),
+        )
+        if any(bool(stored) != bool(actual) for stored, actual in summaries):
+            return False
+        causal_identity = bool(
+            binding_passed and structural_passed and causal_passed
+            and segment_passed and outcome_passed and rng_passed
+            and all(family_passed.values())
+        )
+        if (
+            bool(record["causal_identity_passed"]) != causal_identity
+            or bool(record["derived_record_fidelity_passed"]) != derived_passed
+        ):
+            return False
+        actual_evidence_order = (
+            ("binding", {"passed": binding_passed}),
+            ("structural", {
+                "passed": structural_passed, "fields": structural_rows,
+            }),
+            ("causal_field", {
+                "passed": causal_passed, "fields": causal_rows,
+            }),
+            ("segment", {"passed": segment_passed}),
+            ("outcome", {"passed": outcome_passed}),
+            ("rng", {"passed": rng_passed}),
+            ("event_kernel", {
+                "passed": family_passed["event"],
+                "comparisons": expected_comparisons["event"],
+            }),
+            ("mark_kernel", {
+                "passed": family_passed["mark"],
+                "comparisons": expected_comparisons["mark"],
+            }),
+            ("primitive_kernel", {
+                "passed": family_passed["primitive"],
+                "comparisons": expected_comparisons["primitive"],
+            }),
+            ("derived", {"passed": derived_passed}),
+        )
+        expected_first_failure = _first_typed_failure(
+            actual_evidence_order,
+            report=record["derived_evidence"]["replay_report"],
+        )
+        if record["first_failure"] != expected_first_failure:
+            return False
+        if record["status"] == "complete":
+            return bool(
+                causal_identity
+                and derived_passed
+                and record["reason_code"] is None
+                and expected_first_failure is None
+                and int(record["completed_rows"]) == 1
+            )
+        comparison_rows = [
+            *causal_rows,
+            *expected_comparisons["event"],
+            *expected_comparisons["mark"],
+            *expected_comparisons["primitive"],
+        ]
+        finite_comparison_failure = bool(
+            comparison_rows
+            and all(
+                comparison_valid(row)
+                and not bool(row["malformed"])
+                and bool(row["finite"])
+                for row in comparison_rows
+            )
+            and any(not bool(row["passed"]) for row in comparison_rows)
+        )
+        return bool(
+            binding_passed and structural_passed and segment_passed
+            and outcome_passed and rng_passed and derived_passed
+            and finite_comparison_failure
+            and event_actions_exact and event_parameter_exact
+            and primitive_actions_exact and primitive_parameter_exact
+            and not causal_identity
+            and record["reason_code"]
+            == "natural_branch_causal_identity_failed"
+            and int(record["completed_rows"]) == 0
+        )
+    except (
+        KeyError, TypeError, ValueError, OverflowError, IndexError,
+        binascii.Error,
+    ):
+        return False
 
 def _audit_payload_tensor(
     value: Any, *, name: str, device: torch.device
@@ -2801,245 +4756,281 @@ def audit_opportunities_batched(
     device: torch.device,
     debug: bool = False,
 ) -> list[dict[str, Any]]:
-    """Execute the frozen three-branch causal audit at registered width 16."""
+    """Audit selected rows lazily in deterministic order at physical width 16."""
 
     if arm.arm == "OR" or not selected_states:
         return []
     total_started = perf_counter()
-    prefix_started = total_started
-    prepared: list[dict[str, Any]] = []
-    by_batch: dict[int, list[dict[str, Any]]] = {}
-    prefix_cache: dict[tuple[int, int], CollectionCursor] = {}
-    row_script_cache: dict[tuple[int, int, int], tuple[Any, ...]] = {}
+    prefix_seconds = 0.0
+    branch_seconds = 0.0
     prefix_collector_calls = 0
-    for value in selected_states:
-        by_batch.setdefault(int(value["batch_index"]), []).append(value)
-    for batch_index, records in by_batch.items():
-        origin = records[0]["origin_state"]
-        trajectory = records[0]["trajectory"]
-        replay_state = deepcopy(origin)
-        cursor: CollectionCursor | None = None
-        current_time = 0
-        for time in sorted({int(value["time"]) for value in records}):
-            delta = time - current_time
-            if delta <= 0:
-                raise ValueError("batched audit opportunities must follow CREATE")
+    branch_collector_calls = 0
+    physical_selected_state_count = 0
+    padding_row_count = 0
+    prefix_cache: dict[tuple[int, int], tuple[CollectionCursor, TrainingState]] = {}
+    ordered_results: list[dict[str, Any]] = []
+    selected_index = 0
+    stop = False
+    while selected_index < len(selected_states) and not stop:
+        first = selected_states[selected_index]
+        cell = (int(first["batch_index"]), int(first["time"]))
+        chunk: list[dict[str, Any]] = []
+        while (
+            selected_index < len(selected_states)
+            and len(chunk) < 5
+            and (
+                int(selected_states[selected_index]["batch_index"]),
+                int(selected_states[selected_index]["time"]),
+            ) == cell
+        ):
+            chunk.append(selected_states[selected_index])
+            selected_index += 1
+
+        prefix_started = perf_counter()
+        cached = prefix_cache.get(cell)
+        if cached is None:
+            origin = deepcopy(chunk[0]["origin_state"])
+            trajectory = chunk[0]["trajectory"]
             prefix = collect_trajectory(
                 arm,
-                replay_state,
+                origin,
                 device=device,
-                episode_ids=trajectory.ledger_ids if cursor is None else None,
-                cursor=cursor,
-                max_steps=delta,
+                episode_ids=trajectory.ledger_ids,
+                max_steps=cell[1],
                 deterministic=False,
                 profile=origin.profile,
             )
-            cursor = prefix.cursor
-            prefix_collector_calls += 1
-            if cursor is None:
+            if prefix.cursor is None:
                 raise RuntimeError("batched audit prefix unexpectedly terminated")
-            current_time = time
-            prefix_cache[(batch_index, time)] = cursor
-            for record in records:
-                if int(record["time"]) != time:
-                    continue
-                env_index = int(record["env_index"])
-                script_key = (batch_index, time, env_index)
-                cached = row_script_cache.get(script_key)
-                if cached is None:
-                    cached = _audit_row_scripts(
-                        trajectory, replay_state.rngs,
-                        time=time, env_index=env_index,
-                    )
-                    row_script_cache[script_key] = cached
-                streams, end_rng_states, rng_binding_material = deepcopy(cached)
-                expected_end_rng_states = record.get("expected_end_rng_states")
-                if (
-                    expected_end_rng_states is not None
-                    and end_rng_states != expected_end_rng_states
-                ):
-                    raise RuntimeError("audit row script final RNG state mismatch")
-                donor_u, donor_u_payload = _audit_payload_tensor(
-                    record["donor_candidate_u"],
-                    name="donor_candidate_u", device=device,
-                )
-                donor_z, donor_z_payload = _audit_payload_tensor(
-                    record["donor_candidate_z"],
-                    name="donor_candidate_z", device=device,
-                )
-                prepared.append({
-                    **record,
-                    "cursor": _isolate_audit_cursor(
-                        prefix_cache[(batch_index, time)], env_index
-                    ),
-                    "streams": streams,
-                    "end_rng_states": end_rng_states,
-                    "rng_binding_material": rng_binding_material,
-                    "donor_u_tensor": donor_u,
-                    "donor_z_tensor": donor_z,
-                    "donor_candidate_u_payload": donor_u_payload,
-                    "donor_candidate_z_payload": donor_z_payload,
-                })
+            cached = (prefix.cursor, origin)
+            prefix_cache[cell] = cached
+            prefix_collector_calls += 1
+        prefix_seconds += perf_counter() - prefix_started
+        prefix_cursor, prefix_state = cached
 
-    results: dict[str, dict[str, Any]] = {}
-    prefix_seconds = perf_counter() - prefix_started
-    branch_started = perf_counter()
-    branch_collector_calls = 0
-    cells = sorted({
-        (int(value["batch_index"]), int(value["time"])) for value in prepared
-    })
-    for batch_index, time in cells:
-        group = [
-            value for value in prepared
-            if int(value["batch_index"]) == batch_index
-            and int(value["time"]) == time
-        ]
-        for offset in range(0, len(group), 5):
-            pairs = group[offset:offset + 5]
-            branches: list[dict[str, Any]] = []
-            for pair in pairs:
-                for branch_name, kind, new_z in (
-                    (AUDIT_BRANCHES[0], KEEP, pair["trajectory"].event_z_pre[
-                        time, int(pair["env_index"]), int(pair["key"])
-                    ]),
-                    (AUDIT_BRANCHES[1], RENEW, pair["donor_z_tensor"]),
-                    (AUDIT_BRANCHES[2], RENEW, pair["trajectory"].candidate_z[
-                        time, int(pair["env_index"]), int(pair["key"])
-                    ]),
-                ):
-                    branches.append({
-                        "pair": pair,
-                        "branch_name": branch_name,
-                        "kind": kind,
-                        "new_z": new_z,
-                        "cursor": _clone_audit_cursor(pair["cursor"]),
-                        "streams": deepcopy(pair["streams"]),
-                        "padding": False,
-                    })
-            while len(branches) < FORMAL_NUM_ENVS:
-                duplicate = deepcopy(branches[0])
-                duplicate["padding"] = True
-                branches.append(duplicate)
-            combined = _combine_audit_cursors([value["cursor"] for value in branches])
-            forced = {
-                (time, index, int(value["pair"]["key"])): (
-                    int(value["kind"]), value["new_z"]
-                )
-                for index, value in enumerate(branches)
-            }
-            state = make_training_state(
-                arm.arm, int(pairs[0]["replicate"]), profile="held_out"
+        prepared: list[dict[str, Any]] = []
+        for record in chunk:
+            trajectory = record["trajectory"]
+            env_index = int(record["env_index"])
+            streams, end_rng_states, rng_material = _audit_row_scripts(
+                trajectory, prefix_state.rngs,
+                time=int(record["time"]), env_index=env_index,
             )
-            branch_trajectory = collect_trajectory(
-                arm,
-                state,
-                device=device,
-                cursor=combined,
-                deterministic=False,
-                forced_events=forced,
-                row_rngs=[value["streams"] for value in branches],
+            expected_end_rng_states = record.get("expected_end_rng_states")
+            if (
+                expected_end_rng_states is not None
+                and end_rng_states != expected_end_rng_states
+            ):
+                raise RuntimeError("audit row script final RNG state mismatch")
+            donor_u, donor_u_payload = _audit_payload_tensor(
+                record["donor_candidate_u"],
+                name="donor_candidate_u", device=device,
             )
-            branch_collector_calls += 1
-            for index, value in enumerate(branches):
-                if value["padding"]:
-                    continue
-                pair = value["pair"]
-                audit_id = str(pair["audit_id"])
-                natural_kind = int(pair["trajectory"].event_kind[
-                    time, int(pair["env_index"]), int(pair["key"])
-                ])
-                natural_branch = (
-                    AUDIT_BRANCHES[0] if natural_kind == KEEP
-                    else AUDIT_BRANCHES[2]
+            donor_z, donor_z_payload = _audit_payload_tensor(
+                record["donor_candidate_z"],
+                name="donor_candidate_z", device=device,
+            )
+            prepared.append({
+                **record,
+                "cursor": _isolate_audit_cursor(prefix_cursor, env_index),
+                "streams": streams,
+                "end_rng_states": end_rng_states,
+                "rng_binding_material": rng_material,
+                "donor_u_tensor": donor_u,
+                "donor_z_tensor": donor_z,
+                "donor_candidate_u_payload": donor_u_payload,
+                "donor_candidate_z_payload": donor_z_payload,
+            })
+
+        branches: list[dict[str, Any]] = []
+        for pair in prepared:
+            time = int(pair["time"])
+            env_index = int(pair["env_index"])
+            key = int(pair["key"])
+            for branch_name, kind, new_z in (
+                (
+                    AUDIT_BRANCHES[0], KEEP,
+                    pair["trajectory"].event_z_pre[time, env_index, key],
+                ),
+                (AUDIT_BRANCHES[1], RENEW, pair["donor_z_tensor"]),
+                (
+                    AUDIT_BRANCHES[2], RENEW,
+                    pair["trajectory"].candidate_z[time, env_index, key],
+                ),
+            ):
+                branches.append({
+                    "pair": pair,
+                    "branch_name": branch_name,
+                    "kind": kind,
+                    "new_z": new_z,
+                    "cursor": _clone_audit_cursor(pair["cursor"]),
+                    "streams": deepcopy(pair["streams"]),
+                    "padding": False,
+                })
+        while len(branches) < FORMAL_NUM_ENVS:
+            duplicate = deepcopy(branches[0])
+            duplicate["padding"] = True
+            branches.append(duplicate)
+        physical_selected_state_count += len(prepared)
+        padding_row_count += FORMAL_NUM_ENVS - 3 * len(prepared)
+        combined = _combine_audit_cursors([
+            value["cursor"] for value in branches
+        ])
+        forced = {
+            (cell[1], index, int(value["pair"]["key"])): (
+                int(value["kind"]), value["new_z"],
+            )
+            for index, value in enumerate(branches)
+        }
+        state = make_training_state(
+            arm.arm, int(prepared[0]["replicate"]), profile="held_out"
+        )
+        branch_started = perf_counter()
+        branch_trajectory = collect_trajectory(
+            arm,
+            state,
+            device=device,
+            cursor=combined,
+            deterministic=False,
+            forced_events=forced,
+            row_rngs=[value["streams"] for value in branches],
+            causal_audit_evidence=True,
+        )
+        branch_seconds += perf_counter() - branch_started
+        branch_collector_calls += 1
+
+        chunk_results: dict[str, dict[str, Any]] = {}
+        for index, value in enumerate(branches):
+            if value["padding"]:
+                continue
+            pair = value["pair"]
+            audit_id = str(pair["audit_id"])
+            time = int(pair["time"])
+            env_index = int(pair["env_index"])
+            key = int(pair["key"])
+            natural_kind = int(
+                pair["trajectory"].event_kind[time, env_index, key]
+            )
+            natural_branch = (
+                AUDIT_BRANCHES[0] if natural_kind == KEEP else AUDIT_BRANCHES[2]
+            )
+            supplied_natural = pair.get("natural_action", natural_branch)
+            if supplied_natural not in (
+                natural_branch,
+                "KEEP" if natural_kind == KEEP else "RENEW",
+            ):
+                raise ValueError(
+                    "selected-state natural action contradicts trace"
                 )
-                supplied_natural = pair.get("natural_action", natural_branch)
-                if supplied_natural not in (natural_branch, "KEEP" if natural_kind == KEEP else "RENEW"):
-                    raise ValueError("selected-state natural action contradicts trace")
-                result = results.setdefault(audit_id, {
-                    "audit_id": audit_id,
-                    "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
-                    "natural_branch": natural_branch,
-                    "end_rng_states": pair["end_rng_states"],
-                    "rng_binding_material": pair["rng_binding_material"],
-                    "donor_binding_material": {
-                        "recipient_key": deepcopy(pair.get("recipient_key")),
-                        "donor_key": deepcopy(pair.get("donor_key")),
-                        "mapping_position": deepcopy(pair.get("mapping_position")),
+            result = chunk_results.setdefault(audit_id, {
+                "audit_id": audit_id,
+                "natural_action": (
+                    "KEEP" if natural_kind == KEEP else "RENEW"
+                ),
+                "natural_branch": natural_branch,
+                "end_rng_states": pair["end_rng_states"],
+                "rng_binding_material": pair["rng_binding_material"],
+                "donor_binding_material": {
+                    "recipient_key": deepcopy(pair.get("recipient_key")),
+                    "donor_key": deepcopy(pair.get("donor_key")),
+                    "mapping_position": deepcopy(pair.get("mapping_position")),
+                    "candidate_u": pair["donor_candidate_u_payload"],
+                    "candidate_z": pair["donor_candidate_z_payload"],
+                    "candidate_digest": _canonical_json_digest({
                         "candidate_u": pair["donor_candidate_u_payload"],
                         "candidate_z": pair["donor_candidate_z_payload"],
-                        "candidate_digest": _canonical_json_digest({
-                            "candidate_u": pair["donor_candidate_u_payload"],
-                            "candidate_z": pair["donor_candidate_z_payload"],
-                        }),
-                        "binding": deepcopy(pair.get("donor_binding")),
-                    },
-                    "selected_state": deepcopy(pair.get("selected_state", {
-                        "batch_index": int(pair["batch_index"]),
-                        "time": time,
-                        "env_index": int(pair["env_index"]),
-                        "key": int(pair["key"]),
-                    })),
-                    "branches": {},
-                })
-                stream_positions = {
-                    name: int(stream.position)
-                    for name, stream in value["streams"].items()
-                }
-                outcome = branch_trajectory.outcomes[index]
-                result["branches"][value["branch_name"]] = {
-                    "outcome": outcome,
-                    "utility": float(outcome.utility),
-                    "stream_positions": stream_positions,
-                    "stream_consumption": {
-                        name: stream.consumption_record(
-                            pair["end_rng_states"][name]
-                        )
-                        for name, stream in value["streams"].items()
-                    },
-                }
-                if debug:
-                    result["branches"][value["branch_name"]]["trajectory"] = branch_trajectory
-                    result["branches"][value["branch_name"]]["branch_index"] = index
-                if value["branch_name"] == natural_branch:
-                    natural_errors = _audit_row_errors(
-                        branch_trajectory,
-                        index,
-                        pair["trajectory"],
-                        int(pair["env_index"]),
-                        start=time,
+                    }),
+                    "binding": deepcopy(pair.get("donor_binding")),
+                },
+                "selected_state": deepcopy(pair.get("selected_state", {
+                    "batch_index": int(pair["batch_index"]),
+                    "time": time,
+                    "env_index": env_index,
+                    "key": key,
+                })),
+                "branches": {},
+            })
+            stream_positions = {
+                name: int(stream.position)
+                for name, stream in value["streams"].items()
+            }
+            outcome = branch_trajectory.outcomes[index]
+            result["branches"][value["branch_name"]] = {
+                "outcome": outcome,
+                "utility": float(outcome.utility),
+                "stream_positions": stream_positions,
+                "stream_consumption": {
+                    name: stream.consumption_record(
+                        pair["end_rng_states"][name]
                     )
-                    if not (
-                        natural_errors["discrete_mismatch"] == 0
-                        and natural_errors["continuous_error"] == 0.0
-                        and natural_errors["segment_equal"]
-                        and natural_errors["outcome_equal"]
-                    ):
-                        raise RuntimeError(
-                            f"batched audit natural branch mismatch {natural_errors}"
-                        )
-                    result["natural_errors"] = natural_errors
-    branch_seconds = perf_counter() - branch_started
-    ordered_results: list[dict[str, Any]] = []
-    for selected in selected_states:
-        result = results[str(selected["audit_id"])]
-        branch_rows = [result["branches"][name] for name in AUDIT_BRANCHES]
-        positions = [row["stream_positions"] for row in branch_rows]
-        consumptions = [row["stream_consumption"] for row in branch_rows]
-        if positions[1:] != positions[:-1] or consumptions[1:] != consumptions[:-1]:
-            raise RuntimeError("batched audit branch RNG contract diverged")
-        result["branch_outcomes"] = {
-            name: result["branches"][name]["outcome"] for name in AUDIT_BRANCHES
-        }
-        result["rng_contract_equal"] = True
-        result["telemetry"] = {
-            "prefix_seconds": float(prefix_seconds),
-            "branch_seconds": float(branch_seconds),
-            "total_seconds": float(perf_counter() - total_started),
-            "selected_state_count": len(selected_states),
-            "collector_call_count": prefix_collector_calls + branch_collector_calls,
-        }
-        result["telemetry"]["serialized_size_bytes"] = _audit_serialized_size(result)
-        ordered_results.append(result)
+                    for name, stream in value["streams"].items()
+                },
+            }
+            if debug:
+                result["branches"][value["branch_name"]][
+                    "trajectory"
+                ] = branch_trajectory
+                result["branches"][value["branch_name"]][
+                    "branch_index"
+                ] = index
+            if value["branch_name"] == natural_branch:
+                result["natural_audit"] = _typed_natural_audit(
+                    arm,
+                    branch_trajectory,
+                    index,
+                    pair["trajectory"],
+                    env_index,
+                    start=time,
+                    audit_id=audit_id,
+                    replicate=int(pair["replicate"]),
+                    batch_index=int(pair["batch_index"]),
+                    focal_key=key,
+                    natural_action=(
+                        "KEEP" if natural_kind == KEEP else "RENEW"
+                    ),
+                    natural_branch=natural_branch,
+                    rng_binding_material=pair["rng_binding_material"],
+                    consumed_streams=value["streams"],
+                )
+
+        for pair in prepared:
+            result = chunk_results[str(pair["audit_id"])]
+            branch_rows = [
+                result["branches"][name] for name in AUDIT_BRANCHES
+            ]
+            positions = [row["stream_positions"] for row in branch_rows]
+            consumptions = [row["stream_consumption"] for row in branch_rows]
+            if (
+                positions[1:] != positions[:-1]
+                or consumptions[1:] != consumptions[:-1]
+            ):
+                raise RuntimeError("batched audit branch RNG contract diverged")
+            result["branch_outcomes"] = {
+                name: result["branches"][name]["outcome"]
+                for name in AUDIT_BRANCHES
+            }
+            result["rng_contract_equal"] = True
+            ordered_results.append(result)
+            if result["natural_audit"]["status"] == "unavailable":
+                stop = True
+                break
+
+    telemetry = {
+        "prefix_seconds": float(prefix_seconds),
+        "branch_seconds": float(branch_seconds),
+        "total_seconds": float(perf_counter() - total_started),
+        "selected_state_count": len(ordered_results),
+        "physical_selected_state_count": physical_selected_state_count,
+        "padding_row_count": padding_row_count,
+        "collector_call_count": (
+            prefix_collector_calls + branch_collector_calls
+        ),
+    }
+    for result in ordered_results:
+        result["telemetry"] = deepcopy(telemetry)
+        result["telemetry"]["serialized_size_bytes"] = _audit_serialized_size(
+            result
+        )
     return ordered_results
 
 
@@ -3087,9 +5078,16 @@ def _audit_stochastic_opportunity(
         deterministic=False,
         profile=state.profile,
     )
-    prefix_errors = _audit_window_errors(prefix, trajectory, start=0)
-    if prefix_errors["discrete_mismatch"] != 0.0 or prefix_errors["continuous"] != 0.0:
-        raise RuntimeError(f"stochastic fork prefix mismatch {prefix_errors}")
+    prefix_support = _typed_support_window(
+        arm, prefix, trajectory, start=0
+    )
+    if not all((
+        prefix_support["structural_exact"],
+        prefix_support["causal_float_exact"],
+        prefix_support["segment_exact"],
+        prefix_support["derived_record_fidelity_passed"],
+    )):
+        raise RuntimeError(f"stochastic fork prefix mismatch {prefix_support}")
     if prefix_state.pending_cursor is None:
         raise RuntimeError("stochastic fork prefix unexpectedly terminated")
     prefix_seconds = perf_counter() - started
@@ -3127,20 +5125,22 @@ def _audit_stochastic_opportunity(
         branches[name] = branch
         branch_states[name] = branch_state
 
-    natural_errors = _audit_window_errors(
-        branches[natural_action], trajectory, start=time
+    natural_support = _typed_support_window(
+        arm, branches[natural_action], trajectory, start=time
     )
     natural_outcome_mismatch = (
         branches[natural_action].outcomes[env_index]
         != trajectory.outcomes[env_index]
     )
-    if (
-        natural_outcome_mismatch
-        or natural_errors["discrete_mismatch"] != 0.0
-        or natural_errors["continuous"] != 0.0
-    ):
+    if natural_outcome_mismatch or not all((
+        natural_support["structural_exact"],
+        natural_support["causal_float_exact"],
+        natural_support["segment_exact"],
+        natural_support["derived_record_fidelity_passed"],
+    )):
         raise RuntimeError(
-            f"stochastic fork natural branch continuation mismatch {natural_errors}"
+            "stochastic fork natural branch continuation mismatch "
+            f"{natural_support}"
         )
     rng_states = [_rng_states(branch_states[name]) for name in AUDIT_BRANCHES]
     if any(not _nested_equal(rng_states[0], value) for value in rng_states[1:]):
@@ -3151,8 +5151,8 @@ def _audit_stochastic_opportunity(
             "coordinate": {"time": time, "env_index": env_index, "key": key},
             "episode_id": int(trajectory.ledger_ids[env_index]),
             "natural_action": natural_action,
-            "prefix_errors": prefix_errors,
-            "natural_branch_errors": natural_errors,
+            "prefix_support": prefix_support,
+            "natural_branch_support": natural_support,
             "branch_rng_equal": True,
             "branch_trajectories": branches,
             "branch_rng_states": {
@@ -3173,6 +5173,7 @@ def _audit_stochastic_opportunity(
         "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
         "natural_branch": natural_action,
         "rng_contract_equal": True,
+        "natural_support_evidence": natural_support,
         "donor_binding_material": {
             "candidate_u": donor_u_payload,
             "candidate_z": donor_z_payload,
@@ -3342,30 +5343,20 @@ def audit_single_opportunity(
         )
         if prefix_view.positions["opportunity"] != prefix_position:
             raise RuntimeError("reconstructed prefix consumed an unexpected schedule")
-        prefix_errors = _audit_window_errors(prefix, trajectory, start=0)
-        if prefix_errors["discrete_mismatch"] != 0.0:
+        prefix_support = _typed_support_window(
+            arm, prefix, trajectory, start=0
+        )
+        if not all((
+            prefix_support["structural_exact"],
+            prefix_support["causal_float_exact"],
+            prefix_support["segment_exact"],
+            prefix_support["derived_record_fidelity_passed"],
+        )):
             if diagnostics is not None:
-                diagnostics["prefix_errors"] = prefix_errors
+                diagnostics["prefix_support"] = prefix_support
             raise RuntimeError(
-                f"fork prefix reconstruction mismatch {prefix_errors} at "
+                f"fork prefix reconstruction mismatch {prefix_support} at "
                 f"(time={time}, env_index={env_index}, key={key})"
-            )
-        # Exactness, not tolerance. Reconstructing at the collected width
-        # exists precisely to remove the float32 reduction-order drift class
-        # rather than bound it, so any non-zero residual here is the drift
-        # this design eliminated and must fail. Deliberately not expressed
-        # against the replay contract: the replay component gates and the
-        # derived-joint compositional bound cover the replay of a collected
-        # batch under a different code path and are owned elsewhere; a
-        # fork's acceptance criterion must not move with them, and the
-        # relaxed joint rule must never admit a reconstruction that can be
-        # made bitwise exact.
-        if prefix_errors["continuous"] != 0.0:
-            if diagnostics is not None:
-                diagnostics["prefix_errors"] = prefix_errors
-            raise RuntimeError(
-                f"fork prefix reconstruction is not bitwise exact {prefix_errors} "
-                f"at (time={time}, env_index={env_index}, key={key})"
             )
         prefix_seconds = perf_counter() - started
         branch_started = perf_counter()
@@ -3460,11 +5451,14 @@ def audit_single_opportunity(
     # silently corrupted advantage.
     branch_seconds = perf_counter() - branch_started
     natural_action = AUDIT_BRANCHES[0] if natural_kind == KEEP else AUDIT_BRANCHES[2]
-    natural_errors = _audit_window_errors(
-        branch_trajectories[natural_action], trajectory, start=time,
+    natural_support = _typed_support_window(
+        arm,
+        branch_trajectories[natural_action],
+        trajectory,
+        start=time,
         excluded=(env_index, key),
     )
-    natural_errors["outcome_mismatch"] = float(
+    natural_outcome_mismatch = (
         results[natural_action] != trajectory.outcomes[env_index]
     )
 
@@ -3476,8 +5470,8 @@ def audit_single_opportunity(
                 "episode_id": episode_id,
                 "assigned_q": assigned_q,
                 "segment_id": segment_id,
-                "prefix_errors": prefix_errors,
-                "natural_branch_errors": natural_errors,
+                "prefix_support": prefix_support,
+                "natural_branch_support": natural_support,
                 # The natural branch's own segment sequence, so a caller can
                 # assert the order-sensitive reproduction directly against
                 # `trajectory.segments` instead of reading back the engine's
@@ -3522,19 +5516,15 @@ def audit_single_opportunity(
                 "elapsed_seconds": perf_counter() - started,
             }
         )
-    if natural_errors["outcome_mismatch"] != 0.0 or natural_errors["discrete_mismatch"] != 0.0:
+    if natural_outcome_mismatch or not all((
+        natural_support["structural_exact"],
+        natural_support["causal_float_exact"],
+        natural_support["segment_exact"],
+        natural_support["derived_record_fidelity_passed"],
+    )):
         raise RuntimeError(
-            f"fork natural branch continuation mismatch {natural_errors} at "
+            f"fork natural branch continuation mismatch {natural_support} at "
             f"(time={time}, env_index={env_index}, key={key})"
-        )
-    # Exactness, not tolerance -- see the prefix guard above. A fork-owned
-    # constant would be required before any non-zero allowance is admitted
-    # here; neither the replay component gates nor the derived-joint
-    # compositional bound is that constant.
-    if natural_errors["continuous"] != 0.0:
-        raise RuntimeError(
-            f"fork natural branch continuation is not bitwise exact {natural_errors} "
-            f"at (time={time}, env_index={env_index}, key={key})"
         )
     positions = [views[name].positions for name in AUDIT_BRANCHES]
     consumed = [views[name].consumed for name in AUDIT_BRANCHES]
@@ -3548,7 +5538,7 @@ def audit_single_opportunity(
         "branch_outcomes": {name: results[name] for name in AUDIT_BRANCHES},
         "natural_action": "KEEP" if natural_kind == KEEP else "RENEW",
         "natural_branch": natural_action,
-        "natural_errors": natural_errors,
+        "natural_support_evidence": natural_support,
         "rng_contract_equal": True,
         "donor_binding_material": {
             "candidate_u": donor_u_payload,
@@ -3570,18 +5560,6 @@ def audit_single_opportunity(
     return result
 
 
-_AUDIT_DISCRETE_FIELDS = (
-    "actions", "active_mask", "orders", "terminal", "event_kind",
-    "event_categorical_actions", "event_cat_mask", "event_mark_mask",
-    "q_before", "membership_epoch", "segment_id",
-)
-_AUDIT_CONTINUOUS_FIELDS = (
-    "observations", "old_log_probs", "old_values", "rewards", "hidden_before",
-    "hidden_after", "prefix_counts", "primitive_z", "event_inputs", "event_u",
-    "event_z_pre", "event_new_z", "candidate_u", "candidate_z",
-    "event_old_cat_logp", "event_old_mark_component_logp",
-    "event_old_joint_logp",
-)
 _AUDIT_EVENT_FIELDS = frozenset(
     {
         "event_kind", "event_categorical_actions", "event_cat_mask",
@@ -3631,74 +5609,77 @@ def _audit_segment_mismatches(
     return tuple(failures)
 
 
-def _audit_window_errors(
+def _typed_support_window(
+    arm: CommitmentArm,
     reconstruction: EventTrajectory,
     trajectory: EventTrajectory,
     *,
     start: int,
     excluded: tuple[int, int] | None = None,
 ) -> dict[str, Any]:
-    """Compare a reconstructed window against the collected record.
-
-    Covers every recorded per-step field over the whole collected width:
-    the discrete ones exactly, and *all* recorded continuous ones under one
-    maximum-absolute-error metric. The continuous set is deliberately not a
-    subset -- a subset understates the reconstruction error by whichever
-    field it omits, and the derived joint log-probability drifts furthest.
-    The non-per-step `segments` sequence is compared too, per environment
-    and order sensitively; it carries the `K` accounting and epoch
-    attribution that no per-step tensor reaches.
-
-    `excluded` names one `(env_index, key)` coordinate whose event-request
-    fields are skipped on the first compared row. A branch tail starts at
-    the forked step with the focal event already applied, so the collector
-    does not re-request there; that one coordinate legitimately differs and
-    nothing else does. It does *not* exempt that coordinate's segment
-    record, which the branch is required to reproduce.
-    """
+    """Typed non-evidence support check shared by both sequential oracles."""
 
     steps = int(reconstruction.time_steps)
     stop = start + steps
-    mismatched: list[str] = []
-    error = 0.0
-    worst = ""
 
     def window(name: str) -> tuple[torch.Tensor, torch.Tensor]:
-        left = getattr(reconstruction, name).detach().cpu()
-        right = getattr(trajectory, name)[start:stop].detach().cpu()
+        natural = getattr(reconstruction, name)
+        source = getattr(trajectory, name)[start:stop].to(natural.device)
         if excluded is not None and name in _AUDIT_EVENT_FIELDS:
             env_index, key = excluded
-            left, right = left.clone(), right.clone()
-            left[0, env_index, key] = 0
-            right[0, env_index, key] = 0
-        return left, right
+            natural, source = natural.clone(), source.clone()
+            natural[0, env_index, key] = 0
+            source[0, env_index, key] = 0
+        return source, natural
 
-    for name in _AUDIT_DISCRETE_FIELDS:
-        left, right = window(name)
-        if left.shape != right.shape or not torch.equal(left, right):
-            mismatched.append(name)
-    for name in _AUDIT_CONTINUOUS_FIELDS:
-        left, right = window(name)
-        if left.shape != right.shape:
-            mismatched.append(name)
-            continue
-        value = (
-            float(torch.max(torch.abs(left - right))) if left.numel() else 0.0
+    structural = [
+        native_bitwise_finite_comparison(
+            _tensor_payload(window(name)[0]),
+            _tensor_payload(window(name)[1]),
+            field=name,
         )
-        if value > error:
-            error, worst = value, name
+        for name in CAUSAL_STRUCTURAL_FIELDS
+    ]
+    causal = [
+        native_bitwise_finite_comparison(
+            _tensor_payload(window(name)[0]),
+            _tensor_payload(window(name)[1]),
+            field=name,
+        )
+        for name in CAUSAL_FLOAT_FIELDS
+    ]
     segment_failures = _audit_segment_mismatches(
         reconstruction, trajectory, complete=stop >= int(trajectory.time_steps)
     )
-    if segment_failures:
-        mismatched.append("segments")
+    derived_replacements: dict[str, torch.Tensor] = {}
+    for name in DERIVED_RECORD_FIELDS:
+        source, natural = window(name)
+        derived_replacements[name] = source
+    expected = replace(reconstruction, **derived_replacements)
+    replay = replay_trajectory(
+        arm, reconstruction, device=reconstruction.rewards.device
+    )
+    derived_report = replay_report(replay, expected)
+    critic, likelihood, joint = _validate_replay_report_evidence(
+        derived_report,
+        event_rows_required=bool(reconstruction.event_kind.ne(0).any()),
+        categorical_rows_required=bool(
+            reconstruction.event_cat_mask.any()
+        ),
+        mark_rows_required=bool(reconstruction.event_mark_mask.any()),
+    )
     return {
-        "discrete_mismatch": float(bool(mismatched)),
-        "mismatched_fields": tuple(mismatched),
-        "continuous": error,
-        "continuous_field": worst,
-        "segment_mismatch": float(bool(segment_failures)),
-        "segment_environments": segment_failures,
+        "structural_fields": structural,
+        "causal_fields": causal,
+        "segment_environments": list(segment_failures),
+        "derived_report": derived_report,
+        "structural_exact": all(row["passed"] for row in structural),
+        "causal_float_exact": all(row["passed"] for row in causal),
+        "segment_exact": not segment_failures,
+        "derived_record_fidelity_passed": bool(
+            critic and likelihood and joint
+        ),
+        "real_path_binding_claimed": False,
     }
 
 

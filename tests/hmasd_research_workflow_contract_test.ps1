@@ -90,7 +90,11 @@ foreach ($required in @('controller -> local OMP task agents',
     'controller -> BrowserMCP Pro submission/capture',
     'controller -> one Pro completion monitor -> BrowserMCP wait/snapshot',
     'controller <-> experiment_monitor', 'gpt-5.3-codex-spark',
-    'hmasd-exp-manager', 'hmasd-pro-monitor', 'hmasd-pro-monitor-luna',
+    'hmasd-exp-manager', 'hmasd-frontier-implementer', 'BUG_UNRESOLVED',
+    'at most five repair attempts', 'hmasd-pro-monitor',
+    'hmasd-pro-monitor-luna', 'openai-codex/gpt-5.6-sol:max',
+    'Controller/main conversation alone', 'compare 2-3 approaches',
+    'FINAL_IMPLEMENTATION_ROUND_REVIEW', 'complete planned package',
     'openai-codex/gpt-5.6-luna:low')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
 }

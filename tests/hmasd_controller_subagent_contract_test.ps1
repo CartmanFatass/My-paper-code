@@ -15,6 +15,7 @@ foreach ($required in @(
     'enableLsp: true',
     'hmasd-code-scout: openai-codex/gpt-5.6-luna:high',
     'hmasd-implementer: openai-codex/gpt-5.6-sol:high',
+    'hmasd-frontier-implementer: openai-codex/gpt-5.6-sol:max',
     'hmasd-verifier: openai-codex/gpt-5.6-luna:high',
     'hmasd-reviewer: openai-codex/gpt-5.6-sol:xhigh',
     'hmasd-exp-manager: openai-codex/gpt-5.3-codex-spark:high',
@@ -29,6 +30,7 @@ foreach ($required in @(
 $profiles = @{
     'hmasd-code-scout.md' = @('hmasd-code-scout', 'openai-codex/gpt-5.6-luna', 'high')
     'hmasd-implementer.md' = @('hmasd-implementer', 'openai-codex/gpt-5.6-sol', 'high')
+    'hmasd-frontier-implementer.md' = @('hmasd-frontier-implementer', 'openai-codex/gpt-5.6-sol', 'max')
     'hmasd-verifier.md' = @('hmasd-verifier', 'openai-codex/gpt-5.6-luna', 'high')
     'hmasd-reviewer.md' = @('hmasd-reviewer', 'openai-codex/gpt-5.6-sol', 'xhigh')
     'hmasd-exp-manager.md' = @('hmasd-exp-manager', 'openai-codex/gpt-5.3-codex-spark', 'high')
@@ -88,7 +90,7 @@ foreach ($monitorFile in @('hmasd-pro-monitor.md', 'hmasd-pro-monitor-luna.md'))
     }
 }
 
-foreach ($file in @('hmasd-implementer.md', 'hmasd-verifier.md')) {
+foreach ($file in @('hmasd-implementer.md', 'hmasd-frontier-implementer.md', 'hmasd-verifier.md')) {
     $text = Get-Content -LiteralPath (Join-Path $repo ".omp/agents/$file") -Raw
     foreach ($required in @('C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
             'has no CUDA', 'FORMAL_NUM_ENVS=16')) {
@@ -96,7 +98,41 @@ foreach ($file in @('hmasd-implementer.md', 'hmasd-verifier.md')) {
     }
 }
 
+$frontier = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-frontier-implementer.md') -Raw
+foreach ($required in @('systematic Superpowers debugging discipline',
+        'at most five repair attempts', 'BUG_UNRESOLVED', 'BUG_FIXED',
+        'BLOCKED_SCIENTIFIC_DECISION', '3-5 ranked falsifiable hypotheses',
+        '1. 问题来源', '2. 问题类型', '3. 问题大致规模',
+        '4. 推荐解决方案（自动采纳）', 'CODE_ENGINEERING',
+        'SCIENTIFIC_DECISION', 'apply it automatically')) {
+    if (-not $frontier.Contains($required)) { throw "Frontier profile missing: $required" }
+}
+
+$implementer = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-implementer.md') -Raw
+$reviewer = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-reviewer.md') -Raw
+$verifier = Get-Content -LiteralPath (Join-Path $repo '.omp/agents/hmasd-verifier.md') -Raw
+foreach ($required in @('Controller/main conversation is the sole plan author',
+        'do not brainstorm', 'author or revise the plan')) {
+    if (-not $implementer.Contains($required)) { throw "Implementer planning boundary missing: $required" }
+}
+if (-not $frontier.Contains('Controller/main conversation is the sole plan author') -or
+    -not $frontier.Contains('do not redesign or expand it')) {
+    throw 'Frontier planning boundary is missing'
+}
+foreach ($profile in @($reviewer, $verifier)) {
+    foreach ($required in @('FINAL_IMPLEMENTATION_ROUND_REVIEW',
+            'complete stable package', 'Never')) {
+        if (-not $profile.Contains($required)) { throw "Collective review profile missing: $required" }
+    }
+}
+
 $controller = Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md') -Raw
+foreach ($required in @('sole implementation-plan author',
+        'compare 2-3 viable approaches', 'one collective gate per complete code',
+        'dispatch exactly one Reviewer and one', 'Verifier in parallel')) {
+    if (-not $controller.Contains($required)) { throw "Controller plan/review contract missing: $required" }
+}
+
 foreach ($callable in $profiles.Values | ForEach-Object { $_[0] }) {
     if (-not $controller.Contains($callable)) { throw "AGENTS.md omits callable profile: $callable" }
 }

@@ -34,14 +34,21 @@ launched from it.
 
 The project-local OMP child registry lives under `.omp/agents/`. Its exact
 callable types are `hmasd-code-scout`, `hmasd-implementer`,
-`hmasd-verifier`, `hmasd-reviewer`, `hmasd-exp-manager`,
-`hmasd-pro-monitor` and `hmasd-pro-monitor-luna`; bundled/default fallback is
-forbidden. Children are depth one and cannot spawn successors.
+`hmasd-frontier-implementer`, `hmasd-verifier`, `hmasd-reviewer`,
+`hmasd-exp-manager`, `hmasd-pro-monitor` and `hmasd-pro-monitor-luna`;
+bundled/default fallback is forbidden. Children are depth one and cannot spawn
+successors.
 
 ## Role configuration
 
 Mechanical exploration and verification use GPT-5.6 Luna at high reasoning.
-Core implementation uses GPT-5.6 Sol at high reasoning and independent core
+Core implementation uses GPT-5.6 Sol at high reasoning. A reproduced bug that
+needs bounded systematic diagnosis uses the Frontier Implementer on GPT-5.6
+Sol at max reasoning for at most five repair attempts. Every checkpoint names
+the problem source, classifies it as code engineering or scientific decision,
+states its approximate scale and automatically adopts one recommended solution
+inside the current grant. The terminal result is a verified fix or a structured
+unresolved-error report with next actions. Independent core
 review uses Sol at xhigh. Experiment monitoring uses GPT-5.3 Codex Spark at
 medium; experiment evidence and record work uses Spark at high. Pro response
 completion observation uses either Spark at medium or Luna at low with
@@ -53,26 +60,43 @@ registered in `REVIEWER_CONVERSATIONS.json`. The evidence repository is
 The restarted long-lived OMP Controller exposes BrowserMCP tools. A read-only
 snapshot verified the exact registered conversation URL, authenticated Pro
 account and visible `Pro` model; connection state is `CONNECTED_PREFLIGHT_OK`.
-The first resumed round is in flight and uses the exact registered-CPU
-formal-path smoke failure and accepted Pro raw as scientific inputs. The
-Controller submitted the Git-visible question; exactly one registered Pro
-completion monitor may observe only natural completion and response stability.
-No headless, CDP or former Codex-Exchange fallback is authorized.
+The first resumed external-Pro round completed in the registered conversation.
+The Controller archived the complete visible response at
+`docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/21_PRO_OPEN_RAW.md`,
+performed direct CDC intake and accepted `50_DISPOSITION.md`. No headless, CDP
+or former Codex-Exchange fallback was used.
 
-`EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work is accepted and integrated
-through `31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. Nothing is currently running.
-The focused external-Pro clarification returned
-`BATTERY_REQUIRES_MINIMAL_CORRECTION`: keep `G` and the three arms, but separate
-same-state forced-event timing effects, mark effects, representation influence
-and natural selection/support. This coordination consumes no iteration; an
-iteration is consumed only by a conclusion-bearing evidence action.
+`EVENT_HELD_COMMITMENT_LINK_G0` launch-readiness work remains accepted through
+`31aad0df80d637fd095655bf8c0b112e4bf1cdfd`. The startup registered-CPU smoke
+reached the real training/evaluation cores and failed in the production
+natural-branch scalar gate with `continuous_error=9.5367431640625e-07`, while
+discrete action, segment and outcome equality remained exact.
 
-The startup smoke reached the real registered-CPU training/evaluation cores and
-failed closed in the production natural-branch audit with
-`continuous_error=9.5367431640625e-07`, while discrete action, segment and
-outcome equality remained exact. This is operational prelaunch evidence, not a
-scientific result or permission to weaken exact causal identity. The synthetic
-dense-layer probe and its vacuous permanent test were deleted.
+External GPT-5.6 Pro accepted a narrower conclusion: the heterogeneous scalar
+classifier is refuted, but typed CPU natural-branch causal identity remains
+unresolved because actual causal fields, executed event/primitive kernels and
+source-natural binding were not recorded. The first resumed conclusion-bearing
+action is accepted and one of five autonomous slots is consumed.
+
+The `CPU_NATURAL_BRANCH_TYPED_CONTRACT` implementation action is complete. The
+single collective review, Controller-owned repairs and direct verification are
+closed. The one authorized unchanged non-formal registered-CPU
+`formal_path_exercise` exited 0 after 12m34s and produced
+`FORMAL_PATH_EXERCISE_COMPLETE`.
+
+The terminal typed audit is `complete`: 64/64 actual selected rows, registered
+width 16, 192 branch rows, 672 padding rows and 72 independently rederived
+collector calls. Controller direct intake revalidated all 64 serialized typed
+records; causal identity, RNG and derived fidelity passed on every row; event
+and primitive evidence were nonvacuous; KEEP/RENEW mapped only to their exact
+natural branches; no scalar natural-audit field remained. The conclusion is
+only typed fork capability for this exercised non-formal fixture. It is not
+`G`, `V`, `C`, held-out utility, a CPU-wide theorem or formal evidence.
+
+No experiment is running. Formal training, evaluation, analysis, the formal
+authorization token and Monitor assignment remain unauthorized. The next action
+is one external GPT-5.6 Pro CDC decision over the pushed terminal evidence.
+No resource-consuming successor is scheduled locally.
 
 Between 2026-07-21 and 2026-07-22 a Claude Code session held implementation and
 `docs/project/` at the user's direction, under a different model: the user held
@@ -82,15 +106,22 @@ no scientific disposition was produced.
 
 ## Active Execution Flow
 
-- Controller: receives the scientific decision, freezes the executable plan,
-  writes every bounded child assignment, integrates returned work, independently
-  verifies it, owns Git and updates project control.
+- Controller/main conversation: owns the Superpowers-style design pass, compares
+  2-3 implementation approaches, selects the recommended approach inside the
+  active grant, freezes exact files/interfaces/invariants/red-green checks in
+  `IMPLEMENTATION_PLAN.md`, writes every bounded child assignment, integrates
+  returned work, independently verifies it, owns Git and updates project
+  control. Planning is never delegated.
 - Scout: one bounded read-only interface map when immediate code boundaries are
   genuinely unknown.
-- Implementer: one frozen write scope; no science, Git, project-control or
-  successor authority.
-- Verifier and Reviewer: independent evidence and audit over one stable
-  integrated package; they may run in parallel because neither edits source.
+- Implementer: executes one Controller-frozen write scope; no planning, science,
+  Git, project-control or successor authority.
+- Frontier Implementer: executes one Controller-planned, already-reproduced bug
+  with one fast red-capable loop, at most five hypothesis/probe/repair attempts
+  and either verified `BUG_FIXED` evidence or a `BUG_UNRESOLVED` ledger.
+- Verifier and Reviewer: exactly one parallel collective gate over the stable
+  complete code implementation round after all tasks, repairs and focused checks
+  finish; no per-task or per-attempt review.
 - Exp Manager: applies only Controller-frozen factual experiment transitions and
   record deltas; it never interprets results, changes science or starts runs.
 - Experiment Monitor: observes one already-authorized run and returns its
@@ -278,11 +309,14 @@ Store stub. Never use `conda run`.
 
 ## Autonomous Boundary
 
-**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN.** Exactly five conclusion-bearing iteration
-slots are authorized and unconsumed. The Controller automatically continues
-between external-Pro decisions, direct evidence intake, bounded local OMP work,
-Git integration and the next already-authorized action without asking for
-intermediate approval. Stop only after five conclusion-bearing iterations, a
+**ACTIVE_AUTONOMOUS_RESEARCH_CHAIN.** Exactly five conclusion-bearing iterations
+were authorized. Two slots are consumed: the accepted typed-contract
+reanalysis/scalar-gate counterexample, and the valid complete typed
+registered-CPU non-formal smoke. Three slots remain. The Controller
+automatically continues between external-Pro decisions, direct evidence intake,
+bounded local OMP work, Git integration and the next already-authorized action
+without asking for intermediate approval. The next event is external Pro review,
+not formal compute. Stop only after five conclusion-bearing iterations, a
 genuine blocker, or a requested expansion of protected scientific or formal
 compute authority. Formal execution and Monitor assignment still require one
 specific Controller-authorized run.
@@ -329,3 +363,6 @@ specific Controller-authorized run.
 - `docs/external-review/rounds/20260720_event_held_commitment_replay_statistical_finalization/`
   — final focused raw and controller non-adoption record; no code or experiment
   handoff.
+- `docs/external-review/rounds/20260723_cpu_natural_branch_typed_contract_resume/`
+  — accepted typed-contract decision, factual reconciliation and implementation
+  authorization for one non-formal real-path smoke.

@@ -3,7 +3,8 @@ from __future__ import annotations
 from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
-from typing import Any
+from types import SimpleNamespace
+from typing import Any, Mapping
 import base64
 import functools
 import hashlib
@@ -31,6 +32,7 @@ from ha_ctse_process.event_held_commitment_link import (
     OPPORTUNITY_SUPPORT,
     RENEW,
     RNG_NAMES,
+    TYPED_CAUSAL_AUDIT_SCHEMA,
     _nested_equal,
     _normal_parameters,
     _rng_states,
@@ -41,6 +43,7 @@ from ha_ctse_process.event_held_commitment_link import (
     compare_continuations,
     factor_counts,
     audit_opportunities_batched,
+    native_bitwise_finite_comparison,
     audit_single_opportunity,
     initialize_arms,
     load_checkpoint,
@@ -56,6 +59,7 @@ from ha_ctse_process.event_held_commitment_link import (
     save_checkpoint,
     transformed_mark_component_logp,
     validate_replay,
+    validate_typed_natural_audit,
 )
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
@@ -972,6 +976,7 @@ def causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
             arm, state, device=device,
             episode_ids=tuple(range(batch_index * 16, (batch_index + 1) * 16)),
             deterministic=False, profile="held_out",
+            causal_audit_evidence=True,
         ))
         end_states.append(event_held_commitment_link.owned_rng_states(state))
     inventory: dict[tuple[int, ...], dict[str, Any]] = {}
@@ -1060,10 +1065,9 @@ def test_three_branch_width16_batched_audit_matches_sequential_oracle(
         )
         assert set(packed["branches"]) == set(CAUSAL_AUDIT_BRANCHES)
         assert packed["rng_contract_equal"] is True
-        assert packed["natural_errors"] == {
-            "discrete_mismatch": 0, "continuous_error": 0.0,
-            "segment_equal": True, "outcome_equal": True,
-        }
+        assert validate_typed_natural_audit(packed["natural_audit"])
+        assert packed["natural_audit"]["schema"] == TYPED_CAUSAL_AUDIT_SCHEMA
+        assert packed["natural_audit"]["status"] in {"complete", "unavailable"}
         for branch in CAUSAL_AUDIT_BRANCHES:
             assert packed["branch_outcomes"][branch] == sequential["branch_outcomes"][branch]
             assert packed["branches"][branch]["trajectory"].rewards.shape[1] == 16
@@ -1074,6 +1078,932 @@ def test_three_branch_width16_batched_audit_matches_sequential_oracle(
         assert 0.0 <= telemetry["prefix_seconds"] <= telemetry["total_seconds"]
         assert 0.0 <= telemetry["branch_seconds"] <= telemetry["total_seconds"]
         assert packed["selected_state"] == row["selected_state"]
+
+def _first_complete_natural_audit(bundle: dict[str, Any]) -> dict[str, Any]:
+    for result in bundle["batched"]:
+        audit = result["natural_audit"]
+        if audit["status"] == "complete":
+            assert validate_typed_natural_audit(audit)
+            return deepcopy(audit)
+    pytest.fail("typed discriminator requires one complete natural recurrence")
+
+
+
+def _flip_first_payload_bit(payload: dict[str, Any]) -> None:
+    encoded = bytearray(base64.b64decode(payload["bytes_b64"], validate=True))
+    encoded[0] ^= 1
+    raw = bytes(encoded)
+    payload["bytes_b64"] = base64.b64encode(raw).decode("ascii")
+    payload["sha256"] = hashlib.sha256(raw).hexdigest()
+
+
+def _resign_typed_pair(audit: dict[str, Any], pair: dict[str, Any]) -> None:
+    binding = audit["binding_evidence"]
+    pair["pair_digest"] = event_held_commitment_link._canonical_json_digest({
+        "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+        "audit_id": binding["audit_id"],
+        "replicate": int(binding["replicate"]),
+        "batch_index": int(binding["batch_index"]),
+        "source_episode": int(binding["source_episode"]),
+        "source_environment": int(binding["source_environment"]),
+        "focal_time": int(binding["focal_time"]),
+        "focal_key": int(binding["focal_key"]),
+        "natural_action": binding["natural_action"],
+        "natural_branch": binding["natural_branch"],
+        "continuation_offset": int(pair["continuation_offset"]),
+        "coordinate": pair["coordinate"],
+        "source_call": pair["source_call"],
+        "natural_call": pair["natural_call"],
+    })
+
+
+def _patch_lightweight_typed_validator_dependencies(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        event_held_commitment_link,
+        "_typed_rng_evidence_valid",
+        lambda _evidence: True,
+    )
+    monkeypatch.setattr(
+        event_held_commitment_link,
+        "_validate_replay_report_evidence",
+        lambda _report, **_kwargs: (True, True, True),
+    )
+
+
+def _lightweight_typed_natural_audit(
+    natural_action: str,
+    *,
+    audit_id: str,
+    source_episode: int,
+    source_environment: int = 0,
+    batch_index: int = 0,
+    focal_time: int = 0,
+    focal_key: int = 0,
+    membership_epoch: int = 0,
+    segment_id: int = 0,
+) -> dict[str, Any]:
+    assert natural_action in {"KEEP", "RENEW"}
+    natural_branch = (
+        "KEEP_HELD_MARK"
+        if natural_action == "KEEP"
+        else "RENEW_CANDIDATE_MARK"
+    )
+    native_payload = event_held_commitment_link._native_payload
+    empty_parameter_digest = (
+        event_held_commitment_link._parameter_payload_digest(())
+    )
+    parameter_evidence = {
+        family: {"parameters": [], "digest": empty_parameter_digest}
+        for family in ("event", "mark", "primitive")
+    }
+    final_action = KEEP if natural_action == "KEEP" else RENEW
+    base_coordinate = {
+        "time": focal_time,
+        "episode_id": source_episode,
+        "environment_row": source_environment,
+        "lifecycle_key": focal_key,
+        "membership_epoch": membership_epoch,
+        "segment_id": segment_id,
+    }
+
+    def canonical_call(
+        family: str,
+        call_id: int,
+        call_input: Mapping[str, Any],
+        payload: Mapping[str, Any],
+        *,
+        coordinate: Mapping[str, Any],
+        packed_width: int,
+        row: int,
+        physical_rows: list[Any],
+    ) -> dict[str, Any]:
+        identity = {
+            "sampler_family": family,
+            "call_site": event_held_commitment_link._CALL_SITES[family],
+            "call_id": call_id,
+            "packed_width": packed_width,
+            "row": row,
+            "scientific_coordinate": dict(coordinate),
+            "input_digest": (
+                event_held_commitment_link._canonical_json_digest(call_input)
+            ),
+            "parameter_digest": parameter_evidence[family]["digest"],
+            "payload_digest": (
+                event_held_commitment_link._canonical_json_digest(payload)
+            ),
+        }
+        return {
+            "identity": identity,
+            "physical_rows": physical_rows,
+            "input": dict(call_input),
+            "payload": dict(payload),
+            "identity_digest": (
+                event_held_commitment_link._canonical_json_digest(identity)
+            ),
+        }
+
+    scalar_input = native_payload(np.asarray([0.0], dtype=np.float32))
+    event_payload = {
+        "logits": native_payload(
+            np.asarray([0.0, 0.0], dtype=np.float32)
+        ),
+        "probabilities": native_payload(
+            np.asarray([0.5, 0.5], dtype=np.float32)
+        ),
+        "cdf": native_payload(np.asarray([0.5, 1.0], dtype=np.float32)),
+        "converted_uniform": native_payload(
+            np.asarray([0.25], dtype=np.float32)
+        ),
+        "pre_force_action": final_action,
+        "final_action": final_action,
+    }
+    mark_payload = {
+        name: native_payload(np.asarray([0.0], dtype=np.float32))
+        for name in (
+            "mu", "sigma", "noise", "u", "tanh_u", "candidate_mark",
+            "installed_z_pre",
+        )
+    }
+    primitive_input = {
+        "action_input": native_payload(
+            np.asarray([0.0], dtype=np.float32)
+        ),
+        "primitive_bias": native_payload(
+            np.asarray([0.0], dtype=np.float32)
+        ),
+    }
+    primitive_payload = {
+        "logits": native_payload(
+            np.asarray([0.0, 0.0, 0.0], dtype=np.float32)
+        ),
+        "probabilities": native_payload(
+            np.asarray([0.25, 0.25, 0.5], dtype=np.float32)
+        ),
+        "cdf": native_payload(
+            np.asarray([0.25, 0.5, 1.0], dtype=np.float32)
+        ),
+        "converted_uniform": native_payload(
+            np.asarray([0.125], dtype=np.float32)
+        ),
+        "selected_action": 0,
+    }
+    event_coordinate = base_coordinate | {"request_kind": KEEP}
+    primitive_coordinate = base_coordinate | {"autoregressive_position": 0}
+    source_calls = [
+        canonical_call(
+            "event", 0, scalar_input, event_payload,
+            coordinate=event_coordinate,
+            packed_width=1,
+            row=0,
+            physical_rows=[[source_environment, focal_key, KEEP]],
+        ),
+        canonical_call(
+            "mark", 1, scalar_input, mark_payload,
+            coordinate=event_coordinate,
+            packed_width=1,
+            row=0,
+            physical_rows=[[source_environment, focal_key, KEEP]],
+        ),
+        canonical_call(
+            "primitive", 2, primitive_input, primitive_payload,
+            coordinate=primitive_coordinate,
+            packed_width=16,
+            row=source_environment,
+            physical_rows=list(range(16)),
+        ),
+    ]
+    pairs = []
+    for source_call in source_calls:
+        natural_call = deepcopy(source_call)
+        pair_coordinate = list(
+            event_held_commitment_link._call_coordinate_key(source_call)
+        )
+        pairs.append({
+            "coordinate": pair_coordinate,
+            "continuation_offset": 0,
+            "source_call": source_call,
+            "natural_call": natural_call,
+            "pair_digest": None,
+            "passed": True,
+        })
+    expected_family_counts = {"event": 1, "mark": 1, "primitive": 1}
+    binding = {
+        "audit_id": audit_id,
+        "replicate": 0,
+        "batch_index": batch_index,
+        "source_episode": source_episode,
+        "focal_time": focal_time,
+        "source_environment": source_environment,
+        "focal_key": focal_key,
+        "membership_epoch": membership_epoch,
+        "segment_id": segment_id,
+        "natural_action": natural_action,
+        "natural_branch": natural_branch,
+        "parameter_evidence": parameter_evidence,
+        "expected_family_counts": expected_family_counts,
+        "expected_pairs": len(pairs),
+        "source_call_count": len(pairs),
+        "natural_call_count": len(pairs),
+        "duplicate_source": False,
+        "duplicate_natural": False,
+        "pairs": pairs,
+        "passed": True,
+    }
+    boolean_fields = {
+        "active_mask", "terminal", "event_cat_mask", "event_mark_mask",
+    }
+    true_boolean_fields = {
+        "active_mask", "event_cat_mask", "event_mark_mask",
+    }
+    structural_fields = []
+    for field in event_held_commitment_link.CAUSAL_STRUCTURAL_FIELDS:
+        if field in boolean_fields:
+            array = np.asarray(
+                [field in true_boolean_fields], dtype=np.bool_,
+            )
+        else:
+            array = np.asarray(
+                [KEEP if field == "event_kind" else 0], dtype=np.int64,
+            )
+        payload = native_payload(array)
+        structural_fields.append(
+            native_bitwise_finite_comparison(payload, payload, field=field)
+        )
+    causal_fields = []
+    for field in event_held_commitment_link.CAUSAL_FLOAT_FIELDS:
+        payload = native_payload(np.asarray([0.0], dtype=np.float32))
+        causal_fields.append(
+            native_bitwise_finite_comparison(payload, payload, field=field)
+        )
+    for pair in pairs:
+        family = pair["source_call"]["identity"]["sampler_family"]
+        causal_fields.extend(
+            event_held_commitment_link._call_input_comparisons(
+                pair["source_call"]["input"],
+                pair["natural_call"]["input"],
+                family=family,
+                pair_coordinate=pair["coordinate"],
+            )
+        )
+    comparison_names = {
+        "event": ("cdf", "converted_uniform"),
+        "mark": (
+            "mu", "sigma", "noise", "u", "tanh_u", "candidate_mark",
+        ),
+        "primitive": ("cdf", "converted_uniform"),
+    }
+    kernel_comparisons = {}
+    for pair in pairs:
+        family = pair["source_call"]["identity"]["sampler_family"]
+        kernel_comparisons[family] = [
+            event_held_commitment_link._paired_comparison(
+                pair["source_call"]["payload"][field],
+                pair["natural_call"]["payload"][field],
+                field=f"{family}.{field}",
+                pair_coordinate=pair["coordinate"],
+            )
+            for field in comparison_names[family]
+        ]
+    reward_payload = native_payload(np.asarray([0.0], dtype=np.float32))
+    reward_comparison = native_bitwise_finite_comparison(
+        reward_payload, reward_payload, field="rewards",
+    )
+    record = {
+        "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+        "status": "complete",
+        "reason_code": None,
+        "causal_identity_passed": True,
+        "derived_record_fidelity_passed": True,
+        "runtime_provenance": event_held_commitment_link._runtime_provenance(),
+        "binding_evidence": binding,
+        "structural_evidence": {
+            "fields": structural_fields,
+            "passed": True,
+        },
+        "causal_field_evidence": {
+            "fields": causal_fields,
+            "passed": True,
+        },
+        "segment_evidence": {"source": [], "natural": [], "passed": True},
+        "outcome_evidence": {
+            "source": {},
+            "natural": {},
+            "reward_comparison": reward_comparison,
+            "passed": True,
+        },
+        "rng_evidence": {
+            "realized_variates_exact": True,
+            "passed": True,
+        },
+        "kernel_evidence": {
+            "event": {
+                "expected_call_count": 1,
+                "comparisons": kernel_comparisons["event"],
+                "selected_actions_exact": True,
+                "parameter_exact": True,
+                "passed": True,
+            },
+            "mark": {
+                "expected_call_count": 1,
+                "comparisons": kernel_comparisons["mark"],
+                "passed": True,
+            },
+            "primitive": {
+                "expected_call_count": 1,
+                "comparisons": kernel_comparisons["primitive"],
+                "selected_actions_exact": True,
+                "parameter_exact": True,
+                "passed": True,
+            },
+        },
+        "derived_evidence": {
+            "replay_report": {},
+            "critic_record_valid": True,
+            "likelihood_components_valid": True,
+            "joint_record_valid": True,
+            "passed": True,
+        },
+        "first_failure": None,
+        "attempted_rows": 1,
+        "completed_rows": 1,
+    }
+    for pair in pairs:
+        _resign_typed_pair(record, pair)
+    return record
+
+
+def _typed_outer_row(audit: Mapping[str, Any]) -> dict[str, Any]:
+    binding = audit["binding_evidence"]
+    return {
+        "audit_id": binding["audit_id"],
+        "replicate": binding["replicate"],
+        "batch_index": binding["batch_index"],
+        "episode_id": binding["source_episode"],
+        "time": binding["focal_time"],
+        "env_index": binding["source_environment"],
+        "key": binding["focal_key"],
+        "membership_epoch": binding["membership_epoch"],
+        "segment_id": binding["segment_id"],
+        "natural_action": binding["natural_action"],
+    }
+
+
+def test_typed_validator_requires_natural_action_branch_bijection(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _patch_lightweight_typed_validator_dependencies(monkeypatch)
+    clean_keep = _lightweight_typed_natural_audit(
+        "KEEP", audit_id="keep-audit", source_episode=0,
+    )
+    clean_renew = _lightweight_typed_natural_audit(
+        "RENEW", audit_id="renew-audit", source_episode=2,
+    )
+    assert validate_typed_natural_audit(clean_keep)
+    assert validate_typed_natural_audit(clean_renew)
+
+    wrong_legal_label = deepcopy(clean_renew)
+    wrong_legal_label["binding_evidence"][
+        "natural_branch"
+    ] = "RENEW_DERANGED_MARK"
+    for pair in wrong_legal_label["binding_evidence"]["pairs"]:
+        _resign_typed_pair(wrong_legal_label, pair)
+    assert not validate_typed_natural_audit(wrong_legal_label)
+
+
+def test_runner_outer_binding_requires_row_derived_natural_branch(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _patch_lightweight_typed_validator_dependencies(monkeypatch)
+    clean = _lightweight_typed_natural_audit(
+        "RENEW", audit_id="renew-audit", source_episode=2,
+    )
+    outer_row = _typed_outer_row(clean)
+    assert benchmark_runner._typed_binding_matches_causal_row(
+        clean, outer_row, replicate=0,
+    )
+
+    wrong_legal_label = deepcopy(clean)
+    wrong_legal_label["binding_evidence"][
+        "natural_branch"
+    ] = "RENEW_DERANGED_MARK"
+    for pair in wrong_legal_label["binding_evidence"]["pairs"]:
+        _resign_typed_pair(wrong_legal_label, pair)
+    assert not benchmark_runner._typed_binding_matches_causal_row(
+        wrong_legal_label, outer_row, replicate=0,
+    )
+
+
+@pytest.mark.parametrize(
+    ("result_action", "result_branch"),
+    (
+        ("RENEW", "KEEP_HELD_MARK"),
+        ("KEEP", "RENEW_CANDIDATE_MARK"),
+    ),
+)
+def test_live_collection_rejects_engine_natural_action_branch_mismatch(
+    monkeypatch: pytest.MonkeyPatch,
+    result_action: str,
+    result_branch: str,
+) -> None:
+    _patch_lightweight_typed_validator_dependencies(monkeypatch)
+    monkeypatch.setattr(
+        benchmark_runner, "CAUSAL_AUDIT_QUOTA_PER_ACTION", 1,
+    )
+    mark_payload = benchmark_runner._float32_payload(
+        np.zeros(MARK_DIM, dtype=np.float32)
+    )
+    raw_event_trace = [
+        {
+            "coordinate": {
+                "time": 0,
+                "env_index": env_index,
+                "key": 0,
+                "membership_epoch": 0,
+                "segment_id": 0,
+            },
+            "natural_kind": natural_kind,
+            "origin_binding": {"episode_id": episode_id},
+            "installed_z": deepcopy(mark_payload),
+            "candidate_u": deepcopy(mark_payload),
+            "candidate_z": deepcopy(mark_payload),
+        }
+        for env_index, natural_kind, episode_id in (
+            (0, KEEP, 0),
+            (1, RENEW, 2),
+        )
+    ]
+    trajectory = SimpleNamespace(
+        raw_event_trace=raw_event_trace,
+        event_z_pre=torch.zeros((1, 2, 1, MARK_DIM), dtype=torch.float32),
+        candidate_u=torch.zeros((1, 2, 1, MARK_DIM), dtype=torch.float32),
+        candidate_z=torch.zeros((1, 2, 1, MARK_DIM), dtype=torch.float32),
+    )
+    first_key = (0, 0, 0, 0, 0, 0, 0, "KEEP")
+    audit_id = benchmark_runner._digest_json(list(first_key))
+    natural_audit = _lightweight_typed_natural_audit(
+        "KEEP", audit_id=audit_id, source_episode=0,
+    )
+
+    def mismatched_engine(
+        _arm: Any,
+        selected: list[dict[str, Any]],
+        *,
+        device: torch.device,
+    ) -> list[dict[str, Any]]:
+        assert len(selected) == 2
+        assert device.type == "cpu"
+        return [{
+            "audit_id": audit_id,
+            "natural_action": result_action,
+            "natural_branch": result_branch,
+            "natural_audit": natural_audit,
+        }]
+
+    monkeypatch.setattr(
+        benchmark_runner, "audit_opportunities_batched", mismatched_engine,
+    )
+    with pytest.raises(
+        RuntimeError,
+        match="INVALID_OPERATIONAL engine natural action/branch mismatch",
+    ):
+        benchmark_runner._collect_causal_audit_evidence(
+            object(),
+            replicate=0,
+            batches=[(trajectory, object(), {})],
+            episode_rows=[
+                {"episode_id": 0, "outcome": {}},
+                {"episode_id": 2, "outcome": {}},
+            ],
+            device=torch.device("cpu"),
+            formal=False,
+            mode="formal_path_exercise_evaluate",
+        )
+
+
+def _structured_unavailable_audit(clean: dict[str, Any]) -> dict[str, Any]:
+    unavailable = deepcopy(clean)
+    comparison = unavailable["causal_field_evidence"]["fields"][0]
+    _flip_first_payload_bit(comparison["source_payload"])
+    replacement = native_bitwise_finite_comparison(
+        comparison["source_payload"],
+        comparison["natural_payload"],
+        field=comparison["field"],
+    )
+    unavailable["causal_field_evidence"]["fields"][0] = replacement
+    unavailable["causal_field_evidence"]["passed"] = False
+    unavailable["causal_identity_passed"] = False
+    unavailable["status"] = "unavailable"
+    unavailable["reason_code"] = "natural_branch_causal_identity_failed"
+    unavailable["first_failure"] = {
+        "class": "causal_field",
+        "field": replacement["field"],
+        "coordinate": replacement["first_coordinate"],
+        "magnitude": replacement["magnitude"],
+        "ulp_distance": replacement["ulp_distance"],
+        "detail": replacement["detail"],
+    }
+    unavailable["completed_rows"] = 0
+    assert validate_typed_natural_audit(unavailable)
+    return unavailable
+
+
+class TestTypedDerivedOnlyUlpDiscriminator:
+    def test_one_to_four_ulp_mark_drift_is_derived_only(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        clean = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        causal_evidence = {
+            name: deepcopy(clean[name])
+            for name in (
+                "binding_evidence", "structural_evidence",
+                "causal_field_evidence", "segment_evidence",
+                "outcome_evidence", "rng_evidence", "kernel_evidence",
+            )
+        }
+        for ulps in range(1, 5):
+            mutated = deepcopy(clean)
+            mark = mutated["derived_evidence"]["replay_report"][
+                "likelihood_components"
+            ]["mark_component"]
+            replayed = np.float32(mark["replayed_value"])
+            for _ in range(ulps):
+                replayed = np.nextafter(
+                    replayed, np.float32(np.inf), dtype=np.float32,
+                )
+            mark["replayed_value"] = float(replayed)
+            stale = deepcopy(mutated)
+            assert not validate_typed_natural_audit(stale), ulps
+            stored = float(mark["stored_value"])
+            replayed_value = float(mark["replayed_value"])
+            mark["absolute_error"] = abs(replayed_value - stored)
+            mark["mixed_bound"] = (
+                REPLAY_LOG_COMPONENT_ATOL
+                + REPLAY_LOG_COMPONENT_RTOL
+                * max(abs(stored), abs(replayed_value))
+            )
+            mark["ratio_drift"] = abs(math.expm1(replayed_value - stored))
+            spacing, distance = (
+                event_held_commitment_link._float32_ulp_evidence(
+                    stored, replayed_value,
+                )
+            )
+            mark["float32_ulp_at_max_magnitude"] = spacing
+            mark["ulp_distance"] = distance
+            assert mutated["causal_identity_passed"] is True
+            assert {
+                name: mutated[name] for name in causal_evidence
+            } == causal_evidence
+            assert validate_typed_natural_audit(mutated), ulps
+
+    def test_derived_stale_arithmetic_fails_closed(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        mutated = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        mark = mutated["derived_evidence"]["replay_report"][
+            "likelihood_components"
+        ]["mark_component"]
+        mark["replayed_value"] = float(
+            np.nextafter(
+                np.float32(mark["replayed_value"]),
+                np.float32(np.inf),
+                dtype=np.float32,
+            )
+        )
+        assert not validate_typed_natural_audit(mutated)
+
+
+class TestTypedOneBitKeyInvariants:
+    @pytest.mark.parametrize(
+        "evidence_class",
+        (
+            "causal_leaf", "event_cdf", "primitive_cdf",
+            "compared_uniform", "pair_binding",
+        ),
+    )
+    def test_one_bit_mutation_fails_named_evidence_class(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+        evidence_class: str,
+    ) -> None:
+        mutated = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        if evidence_class == "pair_binding":
+            identity = mutated["binding_evidence"]["pairs"][0][
+                "source_call"
+            ]["identity"]
+            digest = identity["parameter_digest"]
+            identity["parameter_digest"] = (
+                ("0" if digest[0] != "0" else "1") + digest[1:]
+            )
+        else:
+            if evidence_class == "causal_leaf":
+                target = mutated["causal_field_evidence"]["fields"][0]
+            else:
+                family = (
+                    "primitive"
+                    if evidence_class == "primitive_cdf" else "event"
+                )
+                field = (
+                    "primitive.cdf"
+                    if evidence_class == "primitive_cdf"
+                    else "event.converted_uniform"
+                    if evidence_class == "compared_uniform"
+                    else "event.cdf"
+                )
+                target = next(
+                    row
+                    for row in mutated["kernel_evidence"][family]["comparisons"]
+                    if row["field"] == field
+                )
+            _flip_first_payload_bit(target["source_payload"])
+        assert not validate_typed_natural_audit(mutated), evidence_class
+
+    def test_coherent_payload_and_identity_staleness_fail_closed(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        clean = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        payload_stale = deepcopy(clean)
+        pair = next(
+            row for row in payload_stale["binding_evidence"]["pairs"]
+            if row["source_call"]["identity"]["sampler_family"] == "event"
+        )
+        for side in ("source_call", "natural_call"):
+            _flip_first_payload_bit(pair[side]["payload"]["cdf"])
+        replacement = native_bitwise_finite_comparison(
+            pair["source_call"]["payload"]["cdf"],
+            pair["natural_call"]["payload"]["cdf"],
+            field="event.cdf",
+        ) | {"pair_coordinate": deepcopy(pair["coordinate"])}
+        comparisons = payload_stale["kernel_evidence"]["event"]["comparisons"]
+        comparisons[comparisons.index(next(
+            row for row in comparisons
+            if row["field"] == "event.cdf"
+            and row["pair_coordinate"] == pair["coordinate"]
+        ))] = replacement
+        assert not validate_typed_natural_audit(payload_stale)
+
+        identity_stale = deepcopy(clean)
+        pair = next(
+            row for row in identity_stale["binding_evidence"]["pairs"]
+            if row["source_call"]["identity"]["sampler_family"] == "event"
+        )
+        for side in ("source_call", "natural_call"):
+            call = pair[side]
+            digest = call["identity"]["payload_digest"]
+            call["identity"]["payload_digest"] = (
+                ("0" if digest[0] != "0" else "1") + digest[1:]
+            )
+            call["identity_digest"] = (
+                event_held_commitment_link._canonical_json_digest(
+                    call["identity"]
+                )
+            )
+        _resign_typed_pair(identity_stale, pair)
+        assert not validate_typed_natural_audit(identity_stale)
+
+    def test_outer_row_swap_fails_binding(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        first = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        second = next(
+            deepcopy(result["natural_audit"])
+            for result in causal_audit_oracle_bundle["batched"]
+            if result["natural_audit"]["binding_evidence"]["source_episode"]
+            != first["binding_evidence"]["source_episode"]
+        )
+        binding = first["binding_evidence"]
+        row = {
+            "audit_id": binding["audit_id"],
+            "replicate": binding["replicate"],
+            "batch_index": binding["batch_index"],
+            "episode_id": binding["source_episode"],
+            "time": binding["focal_time"],
+            "env_index": binding["source_environment"],
+            "key": binding["focal_key"],
+            "membership_epoch": binding["membership_epoch"],
+            "segment_id": binding["segment_id"],
+            "natural_action": binding["natural_action"],
+        }
+        assert benchmark_runner._typed_binding_matches_causal_row(
+            first, row, replicate=0,
+        )
+        swapped = deepcopy(row)
+        swapped["episode_id"] = second["binding_evidence"]["source_episode"]
+        assert not benchmark_runner._typed_binding_matches_causal_row(
+            first, swapped, replicate=0,
+        )
+
+    def test_actual_width_row_and_family_inventory(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        audit = _first_complete_natural_audit(causal_audit_oracle_bundle)
+        binding = audit["binding_evidence"]
+        families = Counter(
+            pair["source_call"]["identity"]["sampler_family"]
+            for pair in binding["pairs"]
+        )
+        assert dict(families) == binding["expected_family_counts"]
+        assert families["event"] > 0
+        assert families["mark"] >= families["event"]
+        for pair in binding["pairs"]:
+            for side in ("source_call", "natural_call"):
+                call = pair[side]
+                identity = call["identity"]
+                assert identity["packed_width"] == len(call["physical_rows"])
+                assert 0 <= identity["row"] < identity["packed_width"]
+                if identity["sampler_family"] == "primitive":
+                    assert identity["packed_width"] == 16
+                else:
+                    physical = call["physical_rows"][identity["row"]]
+                    scientific = identity["scientific_coordinate"]
+                    assert physical == [
+                        scientific["environment_row"],
+                        scientific["lifecycle_key"],
+                        scientific["request_kind"],
+                    ]
+                    if identity["sampler_family"] == "event":
+                        assert scientific["request_kind"] != CREATE
+
+
+class TestTypedRealPathRecurrence:
+    def test_registered_width_is_complete_or_structured_unavailable(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+    ) -> None:
+        results = causal_audit_oracle_bundle["batched"]
+        assert results
+        for result in results:
+            audit = result["natural_audit"]
+            serialized_audit = json.loads(json.dumps(audit))
+            assert validate_typed_natural_audit(audit)
+            assert validate_typed_natural_audit(serialized_audit)
+            assert audit["schema"] == TYPED_CAUSAL_AUDIT_SCHEMA
+            if audit["status"] == "complete":
+                assert audit["reason_code"] is None
+                assert audit["causal_identity_passed"] is True
+                assert audit["derived_record_fidelity_passed"] is True
+                assert audit["completed_rows"] == 1
+            else:
+                assert audit["status"] == "unavailable"
+                assert audit["reason_code"] == (
+                    "natural_branch_causal_identity_failed"
+                )
+                assert audit["causal_identity_passed"] is False
+                assert audit["derived_record_fidelity_passed"] is True
+                assert audit["first_failure"] is not None
+                assert audit["completed_rows"] == 0
+            assert audit["attempted_rows"] == 1
+
+    def test_categorical_only_replay_accepts_empty_mark_support(self) -> None:
+        report = _synthetic_replay_record()
+        report["likelihood_components"]["mark_component"] = {
+            "stored_value": 0.0,
+            "replayed_value": 0.0,
+            "absolute_error": 0.0,
+            "mixed_bound": 0.0,
+            "ratio_drift": 0.0,
+            "ratio_cap": REPLAY_LOG_RATIO_DRIFT_CAP,
+            "float32_ulp_at_max_magnitude": 0.0,
+            "ulp_distance": 0,
+            "coordinate": None,
+        }
+        support = {
+            "event_rows_required": True,
+            "categorical_rows_required": True,
+            "mark_rows_required": False,
+        }
+
+        assert report["passed"] is True and report["failures"] == []
+        assert event_held_commitment_link.validate_serialized_replay_report(
+            report, **support,
+        )
+        assert event_held_commitment_link._validate_replay_report_evidence(
+            report, **support,
+        ) == (True, True, True)
+
+        assert not event_held_commitment_link.validate_serialized_replay_report(
+            report,
+            event_rows_required=True,
+            categorical_rows_required=True,
+            mark_rows_required=True,
+        )
+
+        unsupported_payload = deepcopy(report)
+        unsupported_payload["likelihood_components"]["mark_component"][
+            "stored_value"
+        ] = 1.0
+        assert not event_held_commitment_link.validate_serialized_replay_report(
+            unsupported_payload, **support,
+        )
+
+    def test_first_unavailable_stops_later_chunks(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+        monkeypatch: pytest.MonkeyPatch, device: torch.device,
+    ) -> None:
+        original = event_held_commitment_link._typed_natural_audit
+        calls = 0
+
+        def first_unavailable(*args: Any, **kwargs: Any) -> dict[str, Any]:
+            nonlocal calls
+            calls += 1
+            audit = original(*args, **kwargs)
+            return _structured_unavailable_audit(audit) if calls == 1 else audit
+
+        monkeypatch.setattr(
+            event_held_commitment_link,
+            "_typed_natural_audit",
+            first_unavailable,
+        )
+        results = audit_opportunities_batched(
+            causal_audit_oracle_bundle["arm"],
+            causal_audit_oracle_bundle["selected"],
+            device=device,
+        )
+        assert len(results) == 1
+        assert calls >= 1
+        assert results[0]["natural_audit"]["status"] == "unavailable"
+        telemetry = results[0]["telemetry"]
+        assert telemetry["selected_state_count"] == 1
+        assert (
+            telemetry["physical_selected_state_count"]
+            < len(causal_audit_oracle_bundle["selected"])
+        )
+
+    def test_quota_shortfall_is_invalid_before_artifact(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+        device: torch.device,
+    ) -> None:
+        with pytest.raises(RuntimeError, match="INVALID_OPERATIONAL.*quota"):
+            benchmark_runner._collect_causal_audit_evidence(
+                causal_audit_oracle_bundle["arm"],
+                replicate=0,
+                batches=[],
+                episode_rows=[],
+                device=device,
+                formal=False,
+                mode="formal_path_exercise_evaluate",
+            )
+
+    def test_unavailable_analysis_bypasses_c_rows_and_selector(
+        self, causal_audit_oracle_bundle: dict[str, Any],
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        unavailable = _structured_unavailable_audit(
+            _first_complete_natural_audit(causal_audit_oracle_bundle)
+        )
+        natural_evidence = {
+            "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+            "status": "unavailable",
+            "reason_code": "natural_branch_causal_identity_failed",
+            "replicate": 0,
+            "attempted_rows": 1,
+            "completed_rows": 0,
+            "failed_selected_coordinate": [0, 0, 0, 0, 0, 0, 0, "KEEP"],
+            "natural_rows": [{
+                "natural_outcome": {"utility": 1.0},
+                "natural_audit": unavailable,
+            }],
+        }
+        compact = {
+            "episodes": {},
+            "audit_rows": {},
+            "causal_audits": {0: natural_evidence},
+            "evidence_status": "unavailable",
+        }
+        published: list[tuple[Path, dict[str, Any]]] = []
+        monkeypatch.setattr(
+            benchmark_runner, "_load_json_file",
+            lambda _path: {"formal": True},
+        )
+        monkeypatch.setattr(
+            benchmark_runner, "_write_json",
+            lambda path, value: published.append((path, deepcopy(value))),
+        )
+        monkeypatch.setattr(
+            benchmark_runner, "_validate_streamed_operational_records",
+            lambda _root: (True, [], compact),
+        )
+
+        def forbidden_selector(**_kwargs: Any) -> str:
+            raise AssertionError("unavailable evidence must bypass result selection")
+
+        monkeypatch.setattr(
+            benchmark_runner, "select_result_branch", forbidden_selector,
+        )
+        result = _aggregate_analysis_core(
+            Path("unused"), authorization=FORMAL_AUTHORIZATION,
+        )
+        assert published == [(Path("unused/analysis_result.json"), result)]
+        assert result["status"] == "COMPLETE_PARTIAL_EVIDENCE"
+        assert result["branch"] == "FORK_EVIDENCE_UNAVAILABLE"
+        assert result["artifact_schema"].endswith(".formal_analysis.v6")
+        assert result["natural_evidence"] == [natural_evidence]
+        encoded = json.dumps(result)
+        assert '"predicate_inputs"' not in encoded
+        assert '"diagnostics"' not in encoded
+        assert '"c_total_' not in encoded
+        assert '"causal_keep_rows_by_replicate"' not in encoded
+        assert '"causal_renew_rows_by_replicate"' not in encoded
+
 
 
 def test_cyclic_donors_preserve_float32_multisets_and_frozen_additivity(
@@ -1153,11 +2083,19 @@ def test_no_active_legacy_or_scalar_audit_cuda_path() -> None:
         swept = source.replace('"' + legacy_schema + '_selection"', "")
         assert legacy_prefix not in swept, path
         assert legacy_schema not in swept, path
+        assert "natural_errors" not in source, path
     assert "audit_single_opportunity(" not in Path(benchmark_runner.__file__).read_text(encoding="utf-8")
     import ast
     tree = ast.parse(Path(event_held_commitment_link.__file__).read_text(encoding="utf-8"))
     function = next(node for node in tree.body if isinstance(node, ast.FunctionDef)
                     and node.name == "audit_opportunities_batched")
+    assert all(
+        not (
+            isinstance(node, ast.Constant)
+            and node.value in {"natural_errors", "continuous_error"}
+        )
+        for node in ast.walk(function)
+    )
     for loop in (node for node in ast.walk(function) if isinstance(node, (ast.For, ast.While))):
         for call in (node for node in ast.walk(loop) if isinstance(node, ast.Call)):
             if isinstance(call.func, ast.Attribute):
@@ -2012,6 +2950,7 @@ def _synthetic_operational_records(
                 "causal_audit": None,
                 "operational": True,
                 "episodes": deepcopy(episodes),
+                "status": "COMPLETE",
             }
     return training, cells
 
@@ -2872,6 +3811,28 @@ def test_registered_contract_carries_execution_and_replacement_c() -> None:
     assert execution["registered_backends"] == list(REGISTERED_EXECUTION_BACKENDS)
     assert execution["torch_threads"] == REGISTERED_TORCH_THREADS
     assert execution["torch_threads"] == torch.get_num_threads()
+    streaming = contract["evidence_streaming"]
+    assert streaming["train_manifest_schema"] == 6
+    assert streaming["train_index_schema"] == 3
+    assert streaming["train_update_schema"] == 2
+    assert streaming["evaluation_manifest_schema"] == 6
+    assert streaming["evaluation_cell_schema"] == EVALUATION_CELL_SCHEMA == 9
+    assert benchmark_runner.FORMAL_EVALUATION_MANIFEST_SCHEMA.endswith(
+        ".formal_evaluation_manifest.v6"
+    )
+    assert FORMAL_EVALUATION_ARTIFACT_SCHEMA.endswith(".formal_evaluation.v9")
+    assert benchmark_runner.FORMAL_ANALYSIS_ARTIFACT_SCHEMA.endswith(
+        ".formal_analysis.v6"
+    )
+    assert benchmark_runner.EXERCISE_EVALUATION_MANIFEST_SCHEMA.endswith(
+        ".formal_path_exercise.evaluation_manifest.v5"
+    )
+    assert benchmark_runner.EXERCISE_EVALUATION_ARTIFACT_SCHEMA.endswith(
+        ".formal_path_exercise.evaluation.v7"
+    )
+    assert benchmark_runner.EXERCISE_MANIFEST_SCHEMA.endswith(
+        ".formal_path_exercise.manifest.v4"
+    )
 
     thresholds = contract["thresholds"]
     assert thresholds["c_total_keep_lcb"] == C_TOTAL_KEEP_LCB_FLOOR == 0.0
@@ -3151,6 +4112,622 @@ def _trace_inventory_inputs(bundle: dict[str, Any]) -> tuple[list[Any], list[Any
     return raw, batches
 
 
+def _refresh_lightweight_causal_provenance_size(
+    artifact: dict[str, Any],
+) -> None:
+    artifact["telemetry"]["serialized_size_bytes"] = len(json.dumps(
+        {
+            "raw_event_trace": artifact["raw_event_trace"],
+            "audit_rows": artifact["audit_rows"],
+        },
+        sort_keys=True, separators=(",", ":"), ensure_ascii=True,
+    ).encode("utf-8"))
+
+
+def _lightweight_causal_provenance_bundle(
+    monkeypatch: pytest.MonkeyPatch, *, status: str,
+) -> dict[str, Any]:
+    assert status in {"complete", "unavailable"}
+    monkeypatch.setattr(
+        benchmark_runner, "CAUSAL_AUDIT_QUOTA_PER_ACTION", 2,
+    )
+    inventory: dict[str, list[dict[str, Any]]] = {
+        action: [] for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+    }
+    for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
+        for offset in range(2):
+            episode_id = action_index * 2 + offset
+            payload_offset = float(1 + episode_id)
+            inventory[action].append({
+                "replicate": 0,
+                "base_episode_id": episode_id // 2,
+                "episode_id": episode_id,
+                "sign_parity": episode_id & 1,
+                "time": 0,
+                "key": 0,
+                "membership_epoch": 0,
+                "segment_id": 0,
+                "natural_action": action,
+                "batch_index": 0,
+                "env_index": episode_id,
+                "installed_z": benchmark_runner._float32_payload(
+                    np.full(MARK_DIM, payload_offset, dtype=np.float32),
+                ),
+                "candidate_u": benchmark_runner._float32_payload(
+                    np.full(MARK_DIM, payload_offset + 0.25, dtype=np.float32),
+                ),
+                "candidate_z": benchmark_runner._float32_payload(
+                    np.full(MARK_DIM, payload_offset + 0.5, dtype=np.float32),
+                ),
+            })
+        inventory[action].sort(key=benchmark_runner._causal_audit_key)
+    monkeypatch.setattr(
+        benchmark_runner,
+        "_causal_audit_trace_inventory",
+        lambda *_args, **_kwargs: deepcopy(inventory),
+    )
+    monkeypatch.setattr(
+        benchmark_runner,
+        "_tracking_outcome_valid",
+        lambda outcome: (
+            isinstance(outcome, dict)
+            and set(outcome) == {"utility"}
+            and type(outcome["utility"]) in (int, float)
+            and math.isfinite(float(outcome["utility"]))
+        ),
+    )
+    monkeypatch.setattr(
+        benchmark_runner,
+        "validate_typed_natural_audit",
+        lambda audit: (
+            isinstance(audit, dict)
+            and set(audit) == {"status", "binding_evidence"}
+            and audit["status"] in {"complete", "unavailable"}
+        ),
+    )
+
+    selected_keys = {
+        action: [
+            list(benchmark_runner._causal_audit_key(row))
+            for row in inventory[action]
+        ]
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+    }
+    selected_order = sorted(
+        tuple(key) for keys in selected_keys.values() for key in keys
+    )
+    records = {
+        benchmark_runner._causal_audit_key(row): row
+        for rows in inventory.values() for row in rows
+    }
+    donors: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
+    for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
+        rows = inventory[action]
+        for position, recipient in enumerate(rows):
+            donors[benchmark_runner._causal_audit_key(recipient)] = (
+                position, rows[(position + 1) % len(rows)],
+            )
+
+    seed_map = authoritative_seed_map("held_out", 0)
+    start_states = {
+        name: deepcopy(
+            np.random.default_rng(int(seed_map[name])).bit_generator.state
+        )
+        for name in RNG_NAMES
+    }
+    cell_batches = [{
+        "rng_bindings": {
+            name: {
+                "start_state": deepcopy(start_states[name]),
+                "draw_schedule": [],
+            }
+            for name in RNG_NAMES
+        },
+    }]
+    episode_outcomes = {
+        row["episode_id"]: {"utility": float(10 + row["episode_id"])}
+        for row in records.values()
+    }
+    attempted_keys = (
+        selected_order if status == "complete" else selected_order[:1]
+    )
+    audit_rows = []
+    for key_index, key in enumerate(attempted_keys):
+        record = records[key]
+        mapping_position, donor = donors[key]
+        audit_id = _digest_json(list(key))
+        expected_branch_evidence = (
+            benchmark_runner._causal_audit_branch_evidence(
+                record, donor, mapping_position,
+            )
+        )
+        natural_status = (
+            "unavailable"
+            if status == "unavailable" and key_index == len(attempted_keys) - 1
+            else "complete"
+        )
+        natural_branch = (
+            "KEEP_HELD_MARK"
+            if record["natural_action"] == "KEEP"
+            else "RENEW_CANDIDATE_MARK"
+        )
+        natural_audit = {
+            "status": natural_status,
+            "binding_evidence": {
+                "audit_id": audit_id,
+                "replicate": 0,
+                "batch_index": 0,
+                "source_episode": record["episode_id"],
+                "focal_time": record["time"],
+                "source_environment": record["env_index"],
+                "focal_key": record["key"],
+                "membership_epoch": record["membership_epoch"],
+                "segment_id": record["segment_id"],
+                "natural_action": record["natural_action"],
+                "natural_branch": natural_branch,
+            },
+        }
+        rng_bindings: dict[str, dict[str, Any]] = {}
+        for branch in CAUSAL_AUDIT_BRANCHES:
+            context = benchmark_runner._causal_audit_bound_context(
+                {
+                    "domain": "stage2",
+                    "mode": "formal_path_exercise_evaluate",
+                    "formal": False,
+                    "replicate": 0,
+                    "arm": "EHC",
+                    "cell": "held_out_stochastic",
+                    "batch": 0,
+                    "audit_id": audit_id,
+                    "episode_id": record["episode_id"],
+                    "time": record["time"],
+                    "key": record["key"],
+                    "membership_epoch": record["membership_epoch"],
+                    "segment_id": record["segment_id"],
+                    "natural_action": record["natural_action"],
+                    "branch": branch,
+                },
+                key=key,
+                donor_key=benchmark_runner._causal_audit_key(donor),
+                branch_evidence=expected_branch_evidence,
+            )
+            rng_bindings[branch] = {
+                name: benchmark_runner.make_rng_binding(
+                    context=context,
+                    stream=name,
+                    seed=int(seed_map[name]),
+                    start_state=start_states[name],
+                    draw_schedule=[],
+                    expected_end_state=start_states[name],
+                )
+                for name in RNG_NAMES
+            }
+        donor_material = benchmark_runner._causal_audit_donor_material(
+            record, donor, mapping_position,
+        )
+        row = {
+            **{name: record[name] for name in (
+                "replicate", "base_episode_id", "episode_id", "sign_parity",
+                "time", "key", "membership_epoch", "segment_id",
+                "natural_action", "batch_index", "env_index",
+            )},
+            "audit_id": audit_id,
+            "natural_outcome": deepcopy(
+                episode_outcomes[record["episode_id"]]
+            ),
+            "natural_audit": natural_audit,
+            "donor": {
+                "mapping_position": mapping_position,
+                "donor_key": donor_material["donor_key"],
+                "candidate_u": donor_material["candidate_u"],
+                "candidate_z": donor_material["candidate_z"],
+                "candidate_digest": donor_material["candidate_digest"],
+            },
+            "executed_branch_evidence": expected_branch_evidence,
+            "rng_bindings": rng_bindings,
+            "stream_consumption": {
+                branch: {
+                    name: benchmark_runner._expected_audit_stream_consumption(
+                        stream=name,
+                        start_state=start_states[name],
+                        schedule=[],
+                        seed=int(seed_map[name]),
+                        env_index=record["env_index"],
+                    )
+                    for name in benchmark_runner.CAUSAL_AUDIT_STREAM_NAMES
+                }
+                for branch in CAUSAL_AUDIT_BRANCHES
+            },
+            "end_rng_digests": {
+                name: _digest_json(start_states[name]) for name in RNG_NAMES
+            },
+        }
+        if status == "complete":
+            outcomes = {
+                branch: {"utility": float(20 + branch_index)}
+                for branch_index, branch in enumerate(CAUSAL_AUDIT_BRANCHES)
+            }
+            outcomes[natural_branch] = deepcopy(row["natural_outcome"])
+            contrasts = benchmark_runner._causal_contrasts(
+                record["natural_action"], outcomes,
+            )
+            row |= {
+                "outcomes": outcomes,
+                "contrasts": contrasts,
+                "contrast_additivity": (
+                    benchmark_runner._contrast_additivity_evidence(
+                        contrasts, outcomes,
+                    )
+                ),
+            }
+        audit_rows.append(row)
+
+    attempted = len(attempted_keys)
+    schedule_position = 0
+    physical_rows = 0
+    branch_calls = 0
+    prefix_cells: set[tuple[int, int]] = set()
+    while schedule_position < attempted:
+        selected_record = records[selected_order[schedule_position]]
+        cell = (
+            int(selected_record["batch_index"]),
+            int(selected_record["time"]),
+        )
+        chunk_stop = schedule_position
+        while (
+            chunk_stop < len(selected_order)
+            and chunk_stop - schedule_position < 5
+            and (
+                int(records[selected_order[chunk_stop]]["batch_index"]),
+                int(records[selected_order[chunk_stop]]["time"]),
+            ) == cell
+        ):
+            chunk_stop += 1
+        physical_rows += chunk_stop - schedule_position
+        branch_calls += 1
+        prefix_cells.add(cell)
+        schedule_position = chunk_stop
+    branch_rows = physical_rows * len(CAUSAL_AUDIT_BRANCHES)
+    collector_calls = len(prefix_cells) + branch_calls
+    artifact = {
+        "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
+        "status": status,
+        "reason_code": (
+            "natural_branch_causal_identity_failed"
+            if status == "unavailable" else None
+        ),
+        "replicate": 0,
+        "quota_per_action": 2,
+        "attempted_rows": attempted,
+        "completed_rows": attempted if status == "complete" else attempted - 1,
+        "failed_selected_coordinate": (
+            None if status == "complete" else list(attempted_keys[-1])
+        ),
+        "raw_event_trace": [],
+        "selected_keys": selected_keys,
+        "execution": {
+            "engine": "registered_width_batched_causal_audit_v1",
+            "registered_width": benchmark_runner.FORMAL_NUM_ENVS,
+            "selected_state_count": physical_rows,
+            "branch_row_count": branch_rows,
+            "padding_row_count": (
+                branch_calls * benchmark_runner.FORMAL_NUM_ENVS - branch_rows
+            ),
+            "collector_call_count": collector_calls,
+        },
+        "telemetry": {
+            "prefix_seconds": 0.0,
+            "branch_seconds": 0.0,
+            "total_seconds": 0.0,
+            "selected_state_count": attempted,
+            "collector_call_count": collector_calls,
+            "serialized_size_bytes": 0,
+        },
+        "audit_rows": audit_rows,
+    }
+    _refresh_lightweight_causal_provenance_size(artifact)
+    return {
+        "artifact": artifact,
+        "episodes": [
+            {"episode_id": episode_id, "outcome": deepcopy(outcome)}
+            for episode_id, outcome in episode_outcomes.items()
+        ],
+        "cell_batches": cell_batches,
+    }
+
+
+def _lightweight_causal_provenance_valid(bundle: dict[str, Any]) -> bool:
+    return benchmark_runner._causal_audit_valid(
+        bundle["artifact"],
+        replicate=0,
+        episodes=bundle["episodes"],
+        cell_batches=bundle["cell_batches"],
+        formal=False,
+        mode="formal_path_exercise_evaluate",
+    )
+
+
+def test_fixture_light_causal_provenance_complete_path_stays_valid(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    bundle = _lightweight_causal_provenance_bundle(
+        monkeypatch, status="complete",
+    )
+    assert _lightweight_causal_provenance_valid(bundle)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        "missing_donor",
+        "mutated_donor",
+        "selected_state_binding",
+        "executed_branch_binding",
+        "rng_branch_binding",
+        "rng_schedule",
+        "stream_consumption",
+        "end_rng_digest",
+        "end_rng_schema",
+    ),
+)
+def test_fixture_light_causal_provenance_unavailable_common_mutations_fail(
+    monkeypatch: pytest.MonkeyPatch, mutation: str,
+) -> None:
+    bundle = _lightweight_causal_provenance_bundle(
+        monkeypatch, status="unavailable",
+    )
+    assert _lightweight_causal_provenance_valid(bundle)
+    row = bundle["artifact"]["audit_rows"][0]
+    if mutation == "missing_donor":
+        row.pop("donor")
+    elif mutation == "mutated_donor":
+        row["donor"]["mapping_position"] += 1
+    elif mutation == "selected_state_binding":
+        row["executed_branch_evidence"]["selected_state"]["key"] += 1
+    elif mutation == "executed_branch_binding":
+        row["executed_branch_evidence"]["branch_payload_sha256"][
+            "KEEP_HELD_MARK"
+        ] = row["executed_branch_evidence"]["branch_payload_sha256"][
+            "RENEW_CANDIDATE_MARK"
+        ]
+    elif mutation == "rng_branch_binding":
+        row["rng_bindings"].pop(CAUSAL_AUDIT_BRANCHES[-1])
+    elif mutation == "rng_schedule":
+        row["rng_bindings"][CAUSAL_AUDIT_BRANCHES[0]][
+            RNG_NAMES[0]
+        ]["draw_schedule"] = [{"stream": RNG_NAMES[0]}]
+    elif mutation == "stream_consumption":
+        row["stream_consumption"][CAUSAL_AUDIT_BRANCHES[0]][
+            benchmark_runner.CAUSAL_AUDIT_STREAM_NAMES[0]
+        ]["position"] += 1
+    elif mutation == "end_rng_digest":
+        row["end_rng_digests"][RNG_NAMES[0]] = "0" * 64
+    else:
+        assert mutation == "end_rng_schema"
+        row["end_rng_digests"] = []
+    _refresh_lightweight_causal_provenance_size(bundle["artifact"])
+    assert not _lightweight_causal_provenance_valid(bundle), mutation
+
+
+@pytest.mark.parametrize(
+    "forbidden_key",
+    (
+        "outcomes",
+        "contrasts",
+        "contrast_additivity",
+        "c_total",
+        "c_total_ci",
+        "causal_row_count",
+        "selector_inputs",
+    ),
+)
+def test_fixture_light_causal_provenance_unavailable_rejects_leakage(
+    monkeypatch: pytest.MonkeyPatch, forbidden_key: str,
+) -> None:
+    bundle = _lightweight_causal_provenance_bundle(
+        monkeypatch, status="unavailable",
+    )
+    assert _lightweight_causal_provenance_valid(bundle)
+    bundle["artifact"]["audit_rows"][0][forbidden_key] = {}
+    _refresh_lightweight_causal_provenance_size(bundle["artifact"])
+    assert not _lightweight_causal_provenance_valid(bundle), forbidden_key
+
+
+def test_fixture_light_live_unavailable_persists_common_provenance(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        benchmark_runner, "CAUSAL_AUDIT_QUOTA_PER_ACTION", 2,
+    )
+    installed = np.zeros(
+        (1, benchmark_runner.FORMAL_NUM_ENVS, 1, MARK_DIM),
+        dtype=np.float32,
+    )
+    candidate_u = np.zeros_like(installed)
+    candidate_z = np.zeros_like(installed)
+    raw_event_trace = []
+    for episode_id in range(4):
+        installed[0, episode_id, 0] = float(1 + episode_id)
+        candidate_u[0, episode_id, 0] = float(5 + episode_id)
+        candidate_z[0, episode_id, 0] = float(9 + episode_id)
+        raw_event_trace.append({
+            "coordinate": {
+                "time": 0,
+                "env_index": episode_id,
+                "key": 0,
+                "membership_epoch": 0,
+                "segment_id": 0,
+            },
+            "natural_kind": KEEP if episode_id < 2 else RENEW,
+            "origin_binding": {"episode_id": episode_id},
+            "installed_z": benchmark_runner._float32_payload(
+                installed[0, episode_id, 0],
+            ),
+            "candidate_u": benchmark_runner._float32_payload(
+                candidate_u[0, episode_id, 0],
+            ),
+            "candidate_z": benchmark_runner._float32_payload(
+                candidate_z[0, episode_id, 0],
+            ),
+        })
+    trajectory = SimpleNamespace(
+        raw_event_trace=raw_event_trace,
+        event_z_pre=torch.from_numpy(installed),
+        candidate_u=torch.from_numpy(candidate_u),
+        candidate_z=torch.from_numpy(candidate_z),
+        rng_audit={"streams": {name: [] for name in RNG_NAMES}},
+    )
+    seed_map = authoritative_seed_map("held_out", 0)
+    origin = SimpleNamespace(
+        rngs={
+            name: np.random.default_rng(int(seed_map[name]))
+            for name in RNG_NAMES
+        },
+    )
+    end_states = benchmark_runner.owned_rng_states(origin)
+    episode_rows = [
+        {"episode_id": episode_id, "outcome": {"utility": float(10 + episode_id)}}
+        for episode_id in range(4)
+    ]
+    captured_selected: list[dict[str, Any]] = []
+
+    def unavailable_engine(
+        _arm: Any,
+        selected: list[dict[str, Any]],
+        *,
+        device: torch.device,
+    ) -> list[dict[str, Any]]:
+        assert device.type == "cpu"
+        assert len(selected) == 4
+        captured_selected.extend(deepcopy(selected))
+        first = selected[0]
+        audit_id = str(first["audit_id"])
+        natural_outcome = deepcopy(episode_rows[first["episode_id"]]["outcome"])
+        natural_audit = {
+            "status": "unavailable",
+            "binding_evidence": {
+                "audit_id": audit_id,
+                "replicate": 0,
+                "batch_index": first["batch_index"],
+                "source_episode": first["episode_id"],
+                "focal_time": first["time"],
+                "source_environment": first["env_index"],
+                "focal_key": first["key"],
+                "membership_epoch": first["membership_epoch"],
+                "segment_id": first["segment_id"],
+                "natural_action": first["natural_action"],
+                "natural_branch": "KEEP_HELD_MARK",
+            },
+        }
+        rng_material = {
+            name: {
+                "start_state": deepcopy(end_states[name]),
+                "draw_schedule": [],
+                "end_state": deepcopy(end_states[name]),
+            }
+            for name in RNG_NAMES
+        }
+        stream_consumption = {
+            name: benchmark_runner._expected_audit_stream_consumption(
+                stream=name,
+                start_state=end_states[name],
+                schedule=[],
+                seed=int(seed_map[name]),
+                env_index=first["env_index"],
+            )
+            for name in benchmark_runner.CAUSAL_AUDIT_STREAM_NAMES
+        }
+        donor_binding_material = {
+            "recipient_key": deepcopy(first["recipient_key"]),
+            "donor_key": deepcopy(first["donor_key"]),
+            "mapping_position": first["mapping_position"],
+            "candidate_u": deepcopy(first["donor_candidate_u"]),
+            "candidate_z": deepcopy(first["donor_candidate_z"]),
+            "candidate_digest": _digest_json({
+                "candidate_u": first["donor_candidate_u"],
+                "candidate_z": first["donor_candidate_z"],
+            }),
+            "binding": deepcopy(first["donor_binding"]),
+        }
+        return [{
+            "audit_id": audit_id,
+            "natural_action": first["natural_action"],
+            "natural_branch": "KEEP_HELD_MARK",
+            "natural_audit": natural_audit,
+            "branch_outcomes": {
+                branch: deepcopy(natural_outcome)
+                for branch in CAUSAL_AUDIT_BRANCHES
+            },
+            "donor_binding_material": donor_binding_material,
+            "selected_state": deepcopy(first["selected_state"]),
+            "rng_binding_material": rng_material,
+            "end_rng_states": deepcopy(end_states),
+            "branches": {
+                branch: {
+                    "stream_consumption": deepcopy(stream_consumption),
+                }
+                for branch in CAUSAL_AUDIT_BRANCHES
+            },
+            "telemetry": {
+                "prefix_seconds": 0.0,
+                "branch_seconds": 0.0,
+                "total_seconds": 0.0,
+                "selected_state_count": 1,
+                "physical_selected_state_count": len(selected),
+                "padding_row_count": (
+                    benchmark_runner.FORMAL_NUM_ENVS
+                    - len(selected) * len(CAUSAL_AUDIT_BRANCHES)
+                ),
+                "collector_call_count": 2,
+            },
+        }]
+
+    monkeypatch.setattr(
+        benchmark_runner, "audit_opportunities_batched", unavailable_engine,
+    )
+    monkeypatch.setattr(
+        benchmark_runner,
+        "validate_typed_natural_audit",
+        lambda audit: audit.get("status") == "unavailable",
+    )
+    monkeypatch.setattr(
+        benchmark_runner,
+        "_tracking_outcome_record",
+        lambda outcome: deepcopy(outcome),
+    )
+    artifact = benchmark_runner._collect_causal_audit_evidence(
+        object(),
+        replicate=0,
+        batches=[(trajectory, origin, end_states)],
+        episode_rows=episode_rows,
+        device=torch.device("cpu"),
+        formal=False,
+        mode="formal_path_exercise_evaluate",
+    )
+
+    assert artifact["status"] == "unavailable"
+    assert artifact["attempted_rows"] == 1
+    assert artifact["completed_rows"] == 0
+    assert len(captured_selected) == 4
+    assert len(artifact["audit_rows"]) == 1
+    row = artifact["audit_rows"][0]
+    assert set(row) == set(benchmark_runner._CAUSAL_AUDIT_COMMON_ROW_KEYS)
+    assert benchmark_runner._CAUSAL_AUDIT_COMPLETE_ONLY_ROW_KEYS.isdisjoint(row)
+    assert {
+        "c_total", "c_total_ci", "causal_row_count", "selector_inputs",
+    }.isdisjoint(row)
+    assert row["natural_outcome"] == episode_rows[0]["outcome"]
+    assert row["natural_audit"]["status"] == "unavailable"
+    assert row["donor"]["donor_key"] == captured_selected[0]["donor_key"]
+    assert (
+        row["executed_branch_evidence"]["selected_state"]
+        == captured_selected[0]["selected_state"]
+    )
+    assert tuple(row["rng_bindings"]) == CAUSAL_AUDIT_BRANCHES
+    assert tuple(row["stream_consumption"]) == CAUSAL_AUDIT_BRANCHES
+    assert set(row["end_rng_digests"]) == set(RNG_NAMES)
+
+
 @pytest.fixture(scope="module")
 def causal_audit_artifact_bundle(
     causal_audit_oracle_bundle: dict[str, Any],
@@ -3425,6 +5002,40 @@ def test_coherent_selected_and_donor_payload_redigests_retain_old_rng_and_fail(
         cell_batches=cell_batches, formal=False,
         mode="formal_path_exercise_evaluate",
     )
+
+
+def test_runner_collector_call_telemetry_is_rederived_for_lazy_recurrence() -> None:
+    selected_cells = (
+        [(0, 4)] * 6
+        + [(1, 2)] * 3
+        + [(0, 4)] * 2
+        + [(2, 1)]
+    )
+    selected_rows = [
+        {"batch_index": batch_index, "time": time}
+        for batch_index, time in selected_cells
+    ]
+    expected_collector_calls = 6
+    clean = [
+        {"telemetry": {"collector_call_count": expected_collector_calls}}
+        for _ in range(10)
+    ]
+    assert benchmark_runner._validated_causal_audit_collector_call_count(
+        selected_rows, clean,
+    ) == expected_collector_calls
+
+    forged = deepcopy(clean)
+    for result in forged:
+        result["telemetry"]["collector_call_count"] += 1
+    disagreeing = deepcopy(clean)
+    disagreeing[-1]["telemetry"]["collector_call_count"] += 1
+    for mutated in (forged, disagreeing):
+        with pytest.raises(
+            RuntimeError, match="collector-call telemetry mismatch",
+        ):
+            benchmark_runner._validated_causal_audit_collector_call_count(
+                selected_rows, mutated,
+            )
 
 
 def test_engine_reported_collector_count_mismatch_fails_before_publication(
@@ -4437,7 +6048,7 @@ def test_worst_coordinate_and_ulp_evidence_is_strict() -> None:
     mixed_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * max(
         abs(float(stored)), abs(float(replayed))
     )
-    spacing, distance = benchmark_runner._recompute_ulp(
+    spacing, distance = event_held_commitment_link._float32_ulp_evidence(
         float(stored), float(replayed)
     )
     component_failure["errors"]["mark_component"] = absolute_error

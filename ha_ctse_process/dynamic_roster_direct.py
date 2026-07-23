@@ -12,7 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import math
 from pathlib import Path
-from typing import Any, Callable, Iterable, TypeVar, cast
+from typing import Any, Callable, Iterable, Mapping, TypeVar, cast
 
 import numpy as np
 import torch
@@ -102,6 +102,19 @@ class DirectPreparedStep:
     value: torch.Tensor
 
 
+@dataclass
+class DirectPrimitiveAuditCapture:
+    """Audit-only device records for primitive decisions actually executed.
+
+    The collector owns the context and the eventual host transfer.  Keeping
+    tensors here preserves their native dtype and bytes without introducing
+    synchronization or payload allocation on ordinary calls.
+    """
+
+    call_identity: Mapping[str, Any]
+    records: list[dict[str, Any]]
+
+
 class DirectPrimitiveARPolicy(nn.Module):
     """Anonymous per-lifecycle recurrent actor with an active-set critic."""
 
@@ -185,6 +198,7 @@ class DirectPrimitiveARPolicy(nn.Module):
         deterministic: bool = False,
         primitive_logit_bias: torch.Tensor | None = None,
         prepared: DirectPreparedStep | None = None,
+        audit_capture: DirectPrimitiveAuditCapture | None = None,
         validated: bool = False,
     ) -> DirectStepOutput:
         batch, members, observation_dim = observations.shape
@@ -217,6 +231,8 @@ class DirectPrimitiveARPolicy(nn.Module):
             ACTION_COUNT,
         ):
             raise ValueError("direct actor primitive-logit-bias shape mismatch")
+        if audit_capture is not None and sampling_uniforms is None:
+            raise ValueError("primitive audit capture requires executed sampling uniforms")
 
         active_count = active_mask.sum(dim=1)
         if not validated and bool((active_count <= 0).any()):
@@ -278,20 +294,23 @@ class DirectPrimitiveARPolicy(nn.Module):
                 torch.cat((local_embedding, context, prefix), dim=-1),
                 local_hidden,
             )
-            logits = self.action_head(
-                torch.cat((candidate_hidden, prefix), dim=-1)
-            )
+            action_input = torch.cat((candidate_hidden, prefix), dim=-1)
+            logits = self.action_head(action_input)
             if primitive_logit_bias is not None:
                 logits = logits + primitive_logit_bias[batch_index, focal]
             log_probability = F.log_softmax(logits, dim=-1)
             probability = torch.exp(log_probability)
+            cumulative = (
+                torch.cumsum(probability, dim=-1)
+                if sampling_uniforms is not None or audit_capture is not None
+                else None
+            )
             if teacher_actions is not None:
                 selected = teacher_actions[batch_index, focal]
             elif deterministic:
                 selected = torch.argmax(logits, dim=-1)
             else:
-                assert sampling_uniforms is not None
-                cumulative = torch.cumsum(probability, dim=-1)
+                assert sampling_uniforms is not None and cumulative is not None
                 selected = torch.sum(
                     sampling_uniforms[:, position].unsqueeze(-1) > cumulative,
                     dim=-1,
@@ -299,6 +318,26 @@ class DirectPrimitiveARPolicy(nn.Module):
             if not validated and bool(((selected < 0) | (selected >= ACTION_COUNT))[valid].any()):
                 raise ValueError("direct actor selected an invalid primitive action")
             safe_selected = selected.clamp(min=0, max=ACTION_COUNT - 1)
+            if audit_capture is not None:
+                assert sampling_uniforms is not None and cumulative is not None
+                audit_capture.records.append({
+                    "call_identity": dict(audit_capture.call_identity),
+                    "autoregressive_position": int(position),
+                    "packed_width": int(batch),
+                    "row": batch_index[valid].detach(),
+                    "focal_key": focal[valid].detach(),
+                    "action_input": action_input[valid].detach(),
+                    "primitive_bias": (
+                        None
+                        if primitive_logit_bias is None
+                        else primitive_logit_bias[batch_index, focal][valid].detach()
+                    ),
+                    "logits": logits[valid].detach(),
+                    "probabilities": probability[valid].detach(),
+                    "cdf": cumulative[valid].detach(),
+                    "converted_uniform": sampling_uniforms[:, position][valid].detach(),
+                    "selected_action": safe_selected[valid].detach(),
+                })
 
             selected_logp = torch.gather(
                 log_probability, 1, safe_selected.unsqueeze(-1)

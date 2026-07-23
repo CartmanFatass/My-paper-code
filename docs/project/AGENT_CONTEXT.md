@@ -52,11 +52,15 @@ superseded path cleanly in the same change. Git history is the archive.
 
 This project optimizes conclusion-bearing iteration, not process artifacts.
 
-- Start from one bounded brief with outcome, authority, scope, exclusions and an
-  observable completion condition. Ordinary work does not require a separate
-  brainstorm, spec, plan or worktree. Any protected-semantics change, multiple
-  writers or a real isolation boundary requires its frozen plan before
-  implementation begins.
+- Every code implementation round starts in the Controller/main conversation
+  with a scaled Superpowers-style design pass: inspect current context, make
+  requirements and success criteria explicit, compare 2-3 viable approaches,
+  select the smallest sound design and write exact files, interfaces,
+  invariants, red/green commands and expected outputs into
+  `docs/project/IMPLEMENTATION_PLAN.md`. The Controller is the sole plan author;
+  no child plans or redesigns the round. Within an active autonomous grant the
+  recommended engineering approach is adopted automatically; user or Pro input
+  is required only for an authority or scientific-meaning change.
 - Build the shortest discriminator that separates the live hypotheses. Do not
   scaffold a platform, preserve a superseded path, or generalize beyond the
   active question.
@@ -66,10 +70,51 @@ This project optimizes conclusion-bearing iteration, not process artifacts.
   observed recurrence.
 - Parallelize only genuinely independent scopes. One writer owns a path at a
   time; dependent steps remain serial.
-- Use an independent reviewer for protected semantics, cross-scope integration
-  or a concrete high-risk boundary—not as ceremony for every edit.
+- Do not review individual files, child tasks, debug attempts or intermediate
+  failures. Run one collective review gate only after the complete planned code
+  package, all bounded repairs and Controller-focused checks are stable: exactly
+  one Reviewer and one Verifier in parallel. Re-review only if a resulting
+  repair materially changes protected semantics or the frozen plan contract.
 - On failure, identify the first causal boundary. Do not replace diagnosis with
   retries, weakened checks, fallbacks or extra abstraction.
+
+## Frontier bug repair
+
+Use `hmasd-frontier-implementer` only after a concrete bug is reproduced. It
+runs `openai-codex/gpt-5.6-sol:max` and follows the Superpowers systematic
+debugging sequence: first establish one deterministic, agent-runnable,
+red-capable command that exercises the exact symptom in seconds; reproduce and
+minimise; rank 3-5 falsifiable hypotheses; instrument one prediction at a time;
+then fix and rerun the original reproducer.
+
+One repair attempt is one hypothesis, discriminating probe, candidate change
+when indicated, and focused verdict. The agent may make at most five attempts.
+It must not repeat an unchanged slow fixture, weaken a gate, or substitute a
+broad test for a tight feedback loop. On attempt five without a green exact
+reproducer, it stops and returns `BUG_UNRESOLVED`: first causal boundary, exact
+command and output, minimal reproducer, five-entry attempt ledger, changed
+files, remaining risks, 2-3 ranked next actions and whether the next decision
+belongs to Controller engineering or external-Pro scientific authority.
+
+`BUG_FIXED` requires red-to-green evidence from the minimal loop, one green run
+of the original reproducer, removal of tagged instrumentation and the focused
+checks named by the Controller. A discovered ambiguity in evidence meaning,
+estimand or protected scientific semantics returns
+`BLOCKED_SCIENTIFIC_DECISION` immediately; attempts are never spent inventing
+science locally.
+
+Every Frontier checkpoint and final result begins with four decision fields:
+
+1. `问题来源` — exact path, symbol, failing predicate and provenance.
+2. `问题类型` — exactly `CODE_ENGINEERING` or `SCIENTIFIC_DECISION`, with why.
+3. `问题大致规模` — affected files and interfaces, semantic blast radius and
+   whether expensive execution is implicated.
+4. `推荐解决方案（自动采纳）` — one concrete recommendation. Apply it
+   automatically when it is inside the frozen assignment and current grant;
+   otherwise stop at the exact authority boundary.
+
+Detailed evidence and the attempt ledger follow these four fields; they never
+replace them.
 
 ## Working discipline
 

@@ -32,6 +32,7 @@ Controller dispatches only these project profiles:
 ```text
 hmasd-code-scout   openai-codex/gpt-5.6-luna:high
 hmasd-implementer  openai-codex/gpt-5.6-sol:high
+hmasd-frontier-implementer  openai-codex/gpt-5.6-sol:max
 hmasd-verifier     openai-codex/gpt-5.6-luna:high
 hmasd-reviewer     openai-codex/gpt-5.6-sol:xhigh
 hmasd-exp-manager  openai-codex/gpt-5.3-codex-spark:high
@@ -48,6 +49,40 @@ scope, protected semantics, exclusions, checks and return semantics. One writer
 owns a file scope. Children do not reconstruct Controller history, invoke
 unrelated Skills, mutate Git or spawn successors. An unknown project agent is a
 workflow blocker; never fall back to a bundled/default agent.
+
+The Controller/main conversation alone performs the implementation design and
+writes the frozen plan. It uses a scaled Superpowers-style sequence: inspect
+context, state requirements and success criteria, compare 2-3 approaches,
+select the smallest sound option, then record exact files, interfaces,
+invariants, red/green commands and expected outputs in
+`docs/project/IMPLEMENTATION_PLAN.md`. Local agents execute that plan and may
+report a blocker; they never author, broaden or redesign it.
+
+Do not dispatch review after individual child tasks, files, Frontier attempts or
+intermediate failures. Once the complete planned package and bounded repairs are
+integrated and Controller-focused checks are green, dispatch exactly one
+`hmasd-reviewer` and one `hmasd-verifier` in parallel with assignment marker
+`FINAL_IMPLEMENTATION_ROUND_REVIEW` as the round's collective review gate.
+Re-review only when a resulting repair materially changes protected semantics
+or the frozen plan contract.
+
+Use `hmasd-frontier-implementer` only for one bounded reproduced bug after an
+ordinary implementation or verification path exposes a concrete failure. It
+follows the Superpowers systematic-debugging sequence: establish a fast
+red-capable loop, minimise, rank falsifiable hypotheses, instrument one
+prediction at a time, and make at most five repair attempts. One attempt is one
+hypothesis/probe/candidate-change/focused-verdict cycle. Success requires the
+minimal loop and original reproducer to become green. After five unsuccessful
+attempts it stops and returns `BUG_UNRESOLVED` with the attempt ledger, exact
+failure evidence and ranked next actions; it never retries a slow fixture as a
+substitute for diagnosis or changes scientific evidence meaning.
+Every Frontier checkpoint and final report starts with four decision fields:
+problem source; problem type as exactly `CODE_ENGINEERING` or
+`SCIENTIFIC_DECISION`; approximate scale across files, interfaces, semantics
+and expensive execution; and one recommended solution marked for automatic
+adoption. A recommendation inside the frozen assignment and active grant is
+applied automatically. Anything that changes scientific meaning stops at the
+authority boundary.
 
 ## Resolve before every persistent send
 
