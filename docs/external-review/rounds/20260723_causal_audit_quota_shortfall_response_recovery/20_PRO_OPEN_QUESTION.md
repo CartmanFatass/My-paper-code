@@ -1,4 +1,4 @@
-HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_causal_audit_quota_shortfall_response_recovery body_sha256=1273ca29c769c46e4b7c345a37e932c7a0a35218435665a36d974bdcff5cb470
+HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_causal_audit_quota_shortfall_response_recovery body_sha256=c7651f0ae882662b42dcb0459610480a777c9c8dc87bc0919057d900ba592f8a
 
 # GPT-5.6 Pro Focused CDC Continuation — Quota-Shortfall Response Recovery
 
@@ -15,6 +15,29 @@ substantive evidence at the exact evidence and formal-source commits above.
 Begin with this round's canonical manifest:
 
 - `docs/external-review/rounds/20260723_causal_audit_quota_shortfall_response_recovery/01_SHARED_SOURCE_MANIFEST.md`
+
+Read this exact evidence set:
+
+- `docs/external-review/rounds/20260723_causal_audit_quota_shortfall_semantics/20_PRO_OPEN_QUESTION.md`
+- `docs/external-review/rounds/20260723_causal_audit_quota_shortfall_semantics/19_BROWSER_PRO_SUBMISSION.json`
+- `docs/external-review/rounds/20260723_causal_audit_quota_shortfall_semantics/22_TRANSPORT_FAILURE.md`
+- `docs/project/CURRENT_WORK.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/IMPLEMENTATION_PLAN.md`
+- `docs/project/ExpRecord.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_TYPED_CPU_SMOKE_FORMAL_SELECTION.md`
+- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/30_EVIDENCE_RECONCILIATION.md`
+- `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/50_DISPOSITION.md`
+- `docs/research/designs/EVENT_HELD_COMMITMENT_LINK_G0.md`
+- `ha_ctse_process/event_held_commitment_link.py`
+- `ha_ctse_process/noncalendar_commitment_testbed.py`
+- `scripts/run_noncalendar_commitment_benchmark_g0.py`
+- `tests/ha_ctse_process_noncalendar_commitment_benchmark_g0_test.py`
 
 ## Recovery boundary
 
