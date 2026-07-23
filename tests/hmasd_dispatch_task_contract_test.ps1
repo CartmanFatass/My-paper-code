@@ -49,8 +49,8 @@ foreach ($validatorPath in $validatorPaths) {
 
 $expected = @('controller', 'experiment_monitor')
 $actual = @($roles.roles.PSObject.Properties.Name)
-if ($roles.schema_version -ne 17 -or (Compare-Object $expected $actual)) {
-    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 17'
+if ($roles.schema_version -ne 18 -or (Compare-Object $expected $actual)) {
+    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 18'
 }
 if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
     $roles.roles.controller.kind -ne 'active_unified_omp_controller' -or
@@ -67,13 +67,16 @@ if ($roles.external_review_transport.kind -ne 'controller_owned_browsermcp_with_
     $roles.external_review_transport.repository -ne 'CartmanFatass/My-paper-code' -or
     $roles.external_review_transport.review_branch -ne (& git.exe -C $repo branch --show-current).Trim() -or
     -not $roles.external_review_transport.long_lived_controller_required -or
-    $roles.external_review_transport.completion_monitor_agent -ne 'hmasd-pro-monitor' -or
+    $roles.external_review_transport.completion_monitor_agents.primary -ne 'hmasd-pro-monitor' -or
+    $roles.external_review_transport.completion_monitor_agents.backup -ne 'hmasd-pro-monitor-luna' -or
+    $roles.external_review_transport.completion_monitor_agents.selection -ne 'exactly_one' -or
     $roles.external_review_transport.completion_monitor_mode -ne 'one_shot_wait_snapshot_only' -or
     $roles.external_review_transport.fallback -ne 'none') {
     throw 'BrowserMCP external-review transport mismatch'
 }
 $expectedLocal = @('hmasd-code-scout', 'hmasd-exp-manager', 'hmasd-implementer',
-    'hmasd-pro-monitor', 'hmasd-reviewer', 'hmasd-verifier') | Sort-Object
+    'hmasd-pro-monitor', 'hmasd-pro-monitor-luna', 'hmasd-reviewer',
+    'hmasd-verifier') | Sort-Object
 $actualLocal = @($roles.local_agents.types) | Sort-Object
 if ($roles.local_agents.root -ne '.omp/agents' -or
     $roles.local_agents.controller_dispatch_only -ne $true -or
@@ -90,7 +93,7 @@ foreach ($required in @(
     'The Controller owns scientific-to-code translation',
     'controller -> local OMP task agents',
     'controller -> BrowserMCP Pro submission/capture',
-    'controller -> hmasd-pro-monitor -> BrowserMCP wait/snapshot',
+    'controller -> one Pro completion monitor -> BrowserMCP wait/snapshot',
     'resolve_task_route.ps1 -Role <role>',
     'hmasd-code-scout',
     'hmasd-implementer',
@@ -98,11 +101,13 @@ foreach ($required in @(
     'hmasd-reviewer',
     'hmasd-exp-manager',
     'hmasd-pro-monitor',
+    'hmasd-pro-monitor-luna',
     'openai-codex/gpt-5.6-luna:high',
     'openai-codex/gpt-5.6-sol:high',
     'openai-codex/gpt-5.6-sol:xhigh',
     'openai-codex/gpt-5.3-codex-spark:high',
     'openai-codex/gpt-5.3-codex-spark:medium',
+    'openai-codex/gpt-5.6-luna:low',
     'experiment_monitor',
     'hmasd-experiment-monitor',
     'gpt-5.3-codex-spark',
@@ -128,6 +133,7 @@ $currentWork = Get-Content -LiteralPath (Join-Path $repo 'docs/project/CURRENT_W
 if (-not $currentWork.Contains($roles.roles.experiment_monitor.thread_id) -or
     -not $currentWork.Contains('.omp/agents/') -or
     -not $currentWork.Contains('hmasd-pro-monitor') -or
+    -not $currentWork.Contains('hmasd-pro-monitor-luna') -or
     -not $currentWork.Contains('CONNECTED_PREFLIGHT_OK')) {
     throw 'Current boundary does not name the unified local, BrowserMCP and Monitor surfaces'
 }

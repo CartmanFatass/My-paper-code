@@ -13,7 +13,7 @@ manually copied task ID.
 ```text
 controller -> local OMP task agents
 controller -> BrowserMCP Pro submission/capture
-controller -> hmasd-pro-monitor -> BrowserMCP wait/snapshot
+controller -> one Pro completion monitor -> BrowserMCP wait/snapshot
 controller <-> experiment_monitor
 ```
 
@@ -36,6 +36,7 @@ hmasd-verifier     openai-codex/gpt-5.6-luna:high
 hmasd-reviewer     openai-codex/gpt-5.6-sol:xhigh
 hmasd-exp-manager  openai-codex/gpt-5.3-codex-spark:high
 hmasd-pro-monitor   openai-codex/gpt-5.3-codex-spark:medium
+hmasd-pro-monitor-luna  openai-codex/gpt-5.6-luna:low
 ```
 
 Before implementation, record the current branch, `HEAD` and inherited
@@ -79,9 +80,11 @@ External scientific review is not a persistent dispatch role. The long-lived
 Controller starts the pinned `browsermcp-pro` server, then the user connects the
 registered Pro tab. The Controller uses `hmasd-browser-pro-exchange` on the
 current pushed branch and owns submission, capture, archival and intake. After
-submission it may dispatch one `hmasd-pro-monitor`; that local Spark task
-receives only BrowserMCP wait/snapshot tools and returns one stability callback.
-A disconnected extension or ephemeral OMP process is a blocker, never
+submission it may dispatch exactly one Pro completion observer:
+`hmasd-pro-monitor` on Spark-medium or `hmasd-pro-monitor-luna` on Luna-low.
+Either local task receives only BrowserMCP wait/snapshot tools and returns one
+stability callback. A disconnected extension or ephemeral OMP process is a
+blocker, never
 permission to route through a former Exchange session.
 
 ## Authority boundary
@@ -89,8 +92,9 @@ permission to route through a former Exchange session.
 External GPT-5.6 Pro owns scientific direction and evidence meaning. The
 Controller owns executable realization inside that direction and every
 resource-consuming action. Local agents execute bounded work; BrowserMCP
-submission and capture stay in the Controller session; `hmasd-pro-monitor`
-observes completion read-only; the persistent Monitor only observes an
+submission and capture stay in the Controller session; exactly one registered
+Pro completion observer may watch read-only; the persistent Monitor only
+observes an
 authorized experiment. No local or persistent role starts a successor. A
 topology change updates `CURRENT_WORK.md`, this Skill, the role registry, local
 profiles, external transport configuration and their contract tests in one Git

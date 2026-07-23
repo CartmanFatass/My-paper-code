@@ -73,7 +73,8 @@ object and estimand; the Controller later freezes executable architecture.
 1. Activate `hmasd-browser-pro-exchange`, run its round-path validator and
    complete the BrowserMCP fail-closed preflight on the user-connected Pro tab.
 2. Submit one exact question, optionally delegate only wait/snapshot stability
-   observation to `hmasd-pro-monitor`, and accept a naturally completed raw only
+   observation to exactly one of `hmasd-pro-monitor` or
+   `hmasd-pro-monitor-luna`, and accept a naturally completed raw only
    after Controller capture and exact reread equality. Preserve semantic quality
    notes separately from transport validity.
 3. Write factual `30_EVIDENCE_RECONCILIATION.md` without changing Pro science.
@@ -112,8 +113,9 @@ completion_policy=ARCHIVE_NATURAL_RESPONSE_EXACTLY
 The Controller uses the pinned `browsermcp-pro` server in the same long-lived
 OMP session. Require direct preflight and exclusive no-clobber archival. There
 is no persistent Exchange role, live route resolution, heartbeat or alternate
-browser fallback. One `hmasd-pro-monitor` task callback may report stable
-completion; it has no interaction, capture, archival or scientific authority.
+browser fallback. Exactly one callback from `hmasd-pro-monitor` or
+`hmasd-pro-monitor-luna` may report stable completion; it has no interaction,
+capture, archival or scientific authority.
 
 ## Controller direct evidence intake
 

@@ -1,5 +1,5 @@
 {
-  "schema_version": 29,
+  "schema_version": 30,
   "updated": "2026-07-23",
   "round_controller": {
     "kind": "active_controller_owned_browsermcp_with_readonly_task_monitor",
@@ -17,9 +17,13 @@
     "review_branch": "Claude",
     "controller_contact": "same_session_submission_capture_and_intake",
     "completion_monitor": {
-      "agent": "hmasd-pro-monitor",
-      "model": "openai-codex/gpt-5.3-codex-spark",
-      "thinking": "medium",
+      "primary_agent": "hmasd-pro-monitor",
+      "primary_model": "openai-codex/gpt-5.3-codex-spark",
+      "primary_thinking": "medium",
+      "backup_agent": "hmasd-pro-monitor-luna",
+      "backup_model": "openai-codex/gpt-5.6-luna",
+      "backup_thinking": "low",
+      "selection": "exactly_one",
       "lifecycle": "one_shot_task_callback",
       "tools": ["mcp__browsermcp_pro_browser_snapshot", "mcp__browsermcp_pro_browser_wait"],
       "forbidden_actions": ["click", "type", "navigate", "stop", "retry", "archive", "interpret"]

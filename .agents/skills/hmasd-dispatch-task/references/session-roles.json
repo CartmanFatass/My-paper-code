@@ -1,5 +1,5 @@
 {
-  "schema_version": 17,
+  "schema_version": 18,
   "updated": "2026-07-23",
   "roles": {
     "controller": {
@@ -29,7 +29,11 @@
     "review_branch": "Claude",
     "long_lived_controller_required": true,
     "user_connected_tab_required": true,
-    "completion_monitor_agent": "hmasd-pro-monitor",
+    "completion_monitor_agents": {
+      "primary": "hmasd-pro-monitor",
+      "backup": "hmasd-pro-monitor-luna",
+      "selection": "exactly_one"
+    },
     "completion_monitor_mode": "one_shot_wait_snapshot_only",
     "controller_only_actions": ["click", "type", "navigate", "capture", "archive", "interpret", "intake"],
     "fallback": "none"
@@ -44,7 +48,8 @@
       "hmasd-verifier",
       "hmasd-reviewer",
       "hmasd-exp-manager",
-      "hmasd-pro-monitor"
+      "hmasd-pro-monitor",
+      "hmasd-pro-monitor-luna"
     ]
   },
   "policy": {

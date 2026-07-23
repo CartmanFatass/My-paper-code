@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD Browser Pro Exchange"
   short_description: "Exchange one tracked review through BrowserMCP"
-  default_prompt: "Use $hmasd-browser-pro-exchange as the active long-lived Controller to start the pinned BrowserMCP server before user connection, validate and submit one exact staged question, optionally delegate wait/snapshot stability observation to hmasd-pro-monitor, capture and archive the natural response without clobbering, and fail closed without another transport."
+  default_prompt: "Use $hmasd-browser-pro-exchange as the active long-lived Controller to start the pinned BrowserMCP server before user connection, validate and submit one exact staged question, optionally delegate wait/snapshot stability observation to exactly one Spark-medium or Luna-low Pro completion monitor, capture and archive the natural response without clobbering, and fail closed without another transport."
 policy:
   allow_implicit_invocation: false
