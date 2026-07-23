@@ -6,7 +6,7 @@ from collections import Counter
 import pytest
 import torch
 
-from ha_ctse_process.useful_effect_roster_g3 import (
+from ha_ctse_process.count_preserving_roster_g4 import (
     ARM_NAMES,
     PASS_SOURCE_CONTROL,
     SeedRegistry,
@@ -19,6 +19,7 @@ from ha_ctse_process.useful_effect_roster_g3 import (
     optimize_arm_batch,
     pack_specs,
     replay_errors,
+    roster_effect_counts,
     save_arm_checkpoint,
 )
 
@@ -96,6 +97,29 @@ def test_roster_attention_is_token_order_invariant() -> None:
         original = state.model.edit_logits("ROSTER_ATTN", packed)
         reversed_packed = packed.with_reversed_roster_tokens()
         reversed_logits = state.model.edit_logits("ROSTER_ATTN", reversed_packed)
+    torch.testing.assert_close(original, reversed_logits, rtol=0, atol=1e-7)
+
+
+def test_count_preserving_roster_is_exact_and_token_order_invariant() -> None:
+    specs = [make_episode_spec("heldout_joint", base_id=value) for value in range(32)]
+    packed = pack_specs(specs)
+    expected = torch.tensor(
+        [spec.standing_counts for spec in specs], dtype=packed.query.dtype
+    )
+    torch.testing.assert_close(roster_effect_counts(packed), expected, rtol=0, atol=0)
+    reversed_packed = packed.with_reversed_roster_tokens()
+    torch.testing.assert_close(
+        roster_effect_counts(reversed_packed), expected, rtol=0, atol=0
+    )
+
+    state = initialize_matched_arms(
+        replicate=0,
+        source_commit="8" * 40,
+        seed_registry=SeedRegistry(),
+    )["ROSTER_SUM"]
+    with torch.no_grad():
+        original = state.model.edit_logits("ROSTER_SUM", packed)
+        reversed_logits = state.model.edit_logits("ROSTER_SUM", reversed_packed)
     torch.testing.assert_close(original, reversed_logits, rtol=0, atol=1e-7)
 
 

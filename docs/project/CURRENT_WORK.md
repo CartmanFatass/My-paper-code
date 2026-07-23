@@ -20,18 +20,18 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=USEFUL_EFFECT_ROSTER_G3_FORMAL_ITERATION_4
-active_assignment_id=COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION
-next_boundary=COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION
+last_completed_assignment_id=COUNT_PRESERVING_ROSTER_G4_IMPLEMENTATION
+active_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
+next_boundary=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
 autonomous_research_grant=ACTIVE
 grant_scope=remaining_one_conclusion_bearing_iteration
 intermediate_authorization_prompts=forbidden
 iterations_remaining=1
 conclusion_bearing_iterations_consumed=4
-implementation_status=G3_USEFUL_EFFECT_PM_ACCEPTED
+implementation_status=G4_COUNT_PRESERVING_PM_ACCEPTED
 nonformal_compute_status=complete
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=not_launchable_until_g4_evidence_contract
+formal_compute_status=launchable_after_integrated_source_commit
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=zero_compute_algorithmic_derivation
+next_action_class=conclusion_bearing_final_formal_cpu_run
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -80,6 +80,20 @@ g3_roster_utility_ci95=[0.86337890625,0.91630859375]
 g3_g_team_ci95=[0.02265625,0.069921875]
 g3_g_null_ci95=[0.00966796875,0.06513671875]
 g3_scientific_disposition=closed_no_rerun_tuning_threshold_or_budget_rescue
+g4_derivation=docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_DERIVATION.md
+g4_formal_contract=docs/research/designs/COUNT_PRESERVING_ROSTER_G4.md
+g4_primary_arm=ROSTER_SUM
+g4_primary_comparator=ROSTER_ATTN
+g4_mission_comparator=TEAM_REC
+g4_primary_estimand=U_ROSTER_SUM_minus_U_ROSTER_ATTN
+g4_access_floor=0.90
+g4_gain_margin=0.10
+g4_formal_authorization_token=AUTHORIZE_COUNT_PRESERVING_ROSTER_G4_FORMAL_CPU_V1
+g4_implementation_tests=12_passed
+g4_nonformal_exercise=logs/nonformal_count_preserving_roster_g4_20260723_pm1
+g4_nonformal_result=SOURCE_NON_IDENTIFIABLE_COUNT_ROSTER_G4
+g4_nonformal_operational_valid=true
+g4_nonformal_formal_validator_rejection=true
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -118,6 +132,10 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
 - ROSTER_ATTN has the highest mean and responds to roster intervention, but its
   access interval crosses 0.90. Between-seed training instability, not
   evaluation-row scarcity, motivates a count-preserving roster derivation.
+- The count-preserving G4 correction is implemented and PM-accepted under the
+  unchanged source, reward, budget and thresholds. `ROSTER_SUM` exposes current
+  commitment multiplicity through a permutation-invariant count skip and is
+  ready for the integrated-source final formal iteration.
 
 ## Runtime and protected semantics
 
@@ -158,6 +176,12 @@ callback receipts are forbidden.
   — bounded nonformal acceptance and formal launch boundary.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_USEFUL_EFFECT_ROSTER_G3_FORMAL_RESULT.md`
   — iteration-4 formal closure and next correction.
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_DERIVATION.md`
+  — algorithmic counterexamples and count-preserving correction.
+- `docs/research/designs/COUNT_PRESERVING_ROSTER_G4.md` — frozen final evidence
+  contract.
+- `docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_PRELAUNCH.md`
+  — focused implementation acceptance and launch boundary.
 - `docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md` — frozen learned/formal
   evidence contract.
 - `docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md` — frozen gate.

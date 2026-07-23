@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.run_useful_effect_roster_g3 import (
+from scripts.run_count_preserving_roster_g4 import (
     EXERCISE_CONFIG,
     run_exercise,
     select_result_branch,
@@ -18,12 +18,12 @@ def _predicates(**overrides: object) -> dict[str, object]:
     values: dict[str, object] = {
         "operational_valid": True,
         "source_identifiable": True,
-        "max_arm_lcb": 0.95,
-        "max_arm_ucb": 0.97,
+        "sum_lcb": 0.95,
+        "sum_ucb": 0.97,
+        "g_attn_lcb": 0.12,
+        "g_attn_ucb": 0.16,
         "g_team_lcb": 0.12,
         "g_team_ucb": 0.16,
-        "g_null_lcb": 0.20,
-        "g_null_ucb": 0.24,
         "battery_pass": True,
         "battery_confident_fail": False,
     }
@@ -34,45 +34,45 @@ def _predicates(**overrides: object) -> dict[str, object]:
 def test_first_match_selector_precedence_and_boundaries() -> None:
     assert (
         select_result_branch(_predicates(operational_valid=False))
-        == "INVALID_OPERATIONAL_USEFUL_ROSTER_G3"
+        == "INVALID_OPERATIONAL_COUNT_ROSTER_G4"
     )
     assert (
         select_result_branch(_predicates(source_identifiable=False))
-        == "SOURCE_NON_IDENTIFIABLE_USEFUL_ROSTER_G3"
+        == "SOURCE_NON_IDENTIFIABLE_COUNT_ROSTER_G4"
     )
     assert (
-        select_result_branch(_predicates(max_arm_lcb=0.2, max_arm_ucb=0.89))
-        == "NO_ACCESS_USEFUL_ROSTER_G3"
+        select_result_branch(_predicates(sum_lcb=0.2, sum_ucb=0.89))
+        == "NO_ACCESS_COUNT_ROSTER_G4"
     )
     assert (
-        select_result_branch(_predicates(max_arm_lcb=0.89, max_arm_ucb=0.90))
-        == "UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3"
+        select_result_branch(_predicates(sum_lcb=0.89, sum_ucb=0.90))
+        == "UNDERPOWERED_ACCESS_COUNT_ROSTER_G4"
     )
     assert (
         select_result_branch(_predicates())
-        == "ROSTER_GENERALIZATION_SUPPORTED_G3"
+        == "COUNT_PRESERVING_ROSTER_SUPPORTED_G4"
     )
     assert (
-        select_result_branch(_predicates(g_team_lcb=-0.1, g_team_ucb=0.10))
-        == "TEAM_REC_SUFFICIENT_USEFUL_ROSTER_G3"
+        select_result_branch(_predicates(g_attn_lcb=-0.1, g_attn_ucb=0.10))
+        == "ROSTER_ATTN_SUFFICIENT_COUNT_ROSTER_G4"
     )
     assert (
         select_result_branch(
             _predicates(
-                g_team_lcb=0.11,
-                g_team_ucb=0.14,
-                g_null_lcb=-0.1,
-                g_null_ucb=0.10,
+                g_attn_lcb=0.11,
+                g_attn_ucb=0.14,
+                g_team_lcb=-0.1,
+                g_team_ucb=0.10,
                 battery_pass=False,
             )
         )
-        == "NO_ROSTER_SUFFICIENT_USEFUL_ROSTER_G3"
+        == "TEAM_REC_SUFFICIENT_COUNT_ROSTER_G4"
     )
     assert (
         select_result_branch(
             _predicates(battery_pass=False, battery_confident_fail=True)
         )
-        == "ROSTER_REPRESENTATION_ONLY_G3"
+        == "COUNT_ROSTER_REPRESENTATION_ONLY_G4"
     )
 
 
@@ -101,7 +101,7 @@ def test_bounded_exercise_closes_shared_path_and_is_nonformal(tmp_path: Path) ->
             "episodes_completed": EXERCISE_CONFIG.updates
             * EXERCISE_CONFIG.episodes_per_update,
         }
-        for arm in ("NO_ROSTER", "TEAM_REC", "ROSTER_ATTN")
+        for arm in ("TEAM_REC", "ROSTER_ATTN", "ROSTER_SUM")
     }
     validate_run_artifacts(root, require_formal=False)
     with pytest.raises(ValueError, match="formal=true"):
@@ -129,6 +129,15 @@ def test_reference_tamper_is_rejected(tmp_path: Path) -> None:
     audit_path = root / evaluation["audit_reference"]
     audit_rows = audit_path.read_text(encoding="utf-8").splitlines()
     audit_payload = json.loads(audit_rows[0])
+    original_audit = audit_rows[0]
+    audit_payload["arm"] = "ROSTER_ATTN"
+    audit_rows[0] = json.dumps(audit_payload, sort_keys=True)
+    audit_path.write_text("\n".join(audit_rows) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="audit schema/formal"):
+        validate_run_artifacts(root, require_formal=False)
+
+    audit_rows[0] = original_audit
+    audit_payload = json.loads(original_audit)
     audit_payload["adapted_utility"] = 0.123
     audit_rows[0] = json.dumps(audit_payload, sort_keys=True)
     audit_path.write_text("\n".join(audit_rows) + "\n", encoding="utf-8")

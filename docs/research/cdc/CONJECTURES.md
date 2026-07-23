@@ -6,10 +6,10 @@ the Project Manager-accepted CDC state.
 
 ## C-EHC — Event-held temporal state
 
-- Status: formal G3 is validly underpowered on access. ROSTER_ATTN has the
-  highest mean utility and responds to roster intervention, but its access CI
-  crosses 0.90, both gain UCBs are below 0.10, and one of five training seeds
-  fails markedly. No learned advantage is established.
+- Status: formal G3 is validly underpowered on access and establishes no learned
+  advantage. The independent G4 correction is launch-ready: it preserves the
+  source and makes absolute roster multiplicity a direct additive policy path,
+  with ROSTER_ATTN and TEAM_REC retained as matched comparators.
 - Claim: under genuinely asynchronous partial edits, an unordered roster of
   lifecycle-owned commitments may improve learning and held-out transport when
   value depends on complementarity among retained and newly selected records.
@@ -92,9 +92,9 @@ the Project Manager-accepted CDC state.
   editor's demand-served effect and value, followed by natural and held-out
   transport beyond matched TEAM_REC and NO_ROSTER explanations. Duplicate-
   optimal demand prevents label diversity from satisfying the claim.
-- Next correction: derive a permutation-invariant, count-preserving multiset
-  roster encoder and reject any proposal that only increases evaluation support
-  or rescues the closed G3 budget.
+- Next correction: the permutation-invariant, count-preserving multiset encoder
+  is implemented under the unchanged budget. Formal evidence must establish its
+  own access before any gain or mediation interpretation.
 
 ## C-LINK-NULL — Commitment is not load-bearing for the source family
 

@@ -1,4 +1,4 @@
-"""Useful-effect roster G3 source, matched editors, and event-level PPO."""
+"""Count-preserving roster G4 source, matched editors, and event-level PPO."""
 
 from __future__ import annotations
 
@@ -17,13 +17,13 @@ import torch
 from torch import Tensor, nn
 
 
-SOURCE_FAMILY = "USEFUL_EFFECT_ROSTER_G3"
-SOURCE_CONTROL_SCHEMA = "useful_effect_roster_g3_source_controls_v1"
-CHECKPOINT_SCHEMA = "useful_effect_roster_g3_checkpoint_v1"
-PASS_SOURCE_CONTROL = "PASS_USEFUL_EFFECT_ROSTER_G3_SOURCE_CONTROL"
-FAIL_SOURCE_CONTROL = "FAIL_USEFUL_EFFECT_ROSTER_G3_SOURCE_CONTROL"
+SOURCE_FAMILY = "COUNT_PRESERVING_ROSTER_G4"
+SOURCE_CONTROL_SCHEMA = "count_preserving_roster_g4_source_controls_v1"
+CHECKPOINT_SCHEMA = "count_preserving_roster_g4_checkpoint_v1"
+PASS_SOURCE_CONTROL = "PASS_COUNT_PRESERVING_ROSTER_G4_SOURCE_CONTROL"
+FAIL_SOURCE_CONTROL = "FAIL_COUNT_PRESERVING_ROSTER_G4_SOURCE_CONTROL"
 
-ARM_NAMES = ("NO_ROSTER", "TEAM_REC", "ROSTER_ATTN")
+ARM_NAMES = ("TEAM_REC", "ROSTER_ATTN", "ROSTER_SUM")
 EFFECTS = (0, 1, 2, 3)
 EVENT_KINDS = ("JOIN", "RENEW", "TERMINAL_REPLACE")
 PROFILES = (
@@ -95,14 +95,14 @@ PROFILE_CONTRACTS = {
 
 @dataclass(frozen=True, slots=True)
 class SeedRegistry:
-    model: int = 375101
-    source: int = 375201
-    membership: int = 375301
-    nuisance: int = 375401
-    action: int = 375501
-    evaluation: int = 375601
-    audit: int = 375701
-    bootstrap: int = 375801
+    model: int = 485101
+    source: int = 485201
+    membership: int = 485301
+    nuisance: int = 485401
+    action: int = 485501
+    evaluation: int = 485601
+    audit: int = 485701
+    bootstrap: int = 485801
     replicate_offset: int = 1000
 
 
@@ -603,6 +603,15 @@ def pack_specs(specs: Sequence[UsefulEffectEpisodeSpec]) -> PackedSpecs:
     )
 
 
+def roster_effect_counts(packed: PackedSpecs) -> Tensor:
+    """Exact permutation-invariant standing-effect multiplicities."""
+
+    if packed.roster_tokens.shape[-1] != ROSTER_TOKEN_WIDTH:
+        raise ValueError("roster tokens have the wrong width")
+    mask = packed.roster_mask.unsqueeze(-1)
+    return (packed.roster_tokens[..., : len(EFFECTS)] * mask).sum(dim=1)
+
+
 class UsefulEffectRosterPolicy(nn.Module):
     """Same complete module inventory for every learned arm."""
 
@@ -637,6 +646,24 @@ class UsefulEffectRosterPolicy(nn.Module):
         weights = torch.softmax(scores, dim=-1)
         return (weights.unsqueeze(-1) * tokens).sum(dim=1)
 
+    def _count_preserving_roster_context(self, packed: PackedSpecs) -> Tensor:
+        """Retain learned token features while exposing absolute effect counts."""
+
+        if packed.roster_tokens.shape[-1] != ROSTER_TOKEN_WIDTH:
+            raise ValueError("roster tokens have the wrong width")
+        mask = packed.roster_mask.unsqueeze(-1)
+        encoded = torch.tanh(self.token_encoder(packed.roster_tokens))
+        accumulation_mask = mask.to(dtype=torch.float64)
+        denominator = accumulation_mask.sum(dim=1).clamp_min(1)
+        learned_mean = (
+            (encoded.to(dtype=torch.float64) * accumulation_mask).sum(dim=1)
+            / denominator
+        ).to(dtype=encoded.dtype)
+        effect_counts = roster_effect_counts(packed)
+        context = learned_mean.clone()
+        context[:, : len(EFFECTS)] = context[:, : len(EFFECTS)] + effect_counts
+        return context
+
     def _team_context(self, packed: PackedSpecs) -> Tensor:
         if packed.history.shape[-1] != HISTORY_WIDTH:
             raise ValueError("history tokens have the wrong width")
@@ -662,7 +689,9 @@ class UsefulEffectRosterPolicy(nn.Module):
             return base + self.team_treatment(self._team_context(packed))
         if arm == "ROSTER_ATTN":
             return base + self.roster_treatment(self._roster_context(query, packed))
-        return base
+        return base + self.roster_treatment(
+            self._count_preserving_roster_context(packed)
+        )
 
     def values(self, packed: PackedSpecs) -> Tensor:
         if packed.critic.shape[-1] != CRITIC_WIDTH:
@@ -804,15 +833,9 @@ def optimize_arm_batch(
     if max(errors.values()) > 1e-6:
         raise ValueError(f"stored-draw replay mismatch: {errors}")
     forbidden_prefixes = {
-        "NO_ROSTER": (
-            "token_encoder",
-            "roster_query",
-            "roster_treatment",
-            "team_recurrent",
-            "team_treatment",
-        ),
         "TEAM_REC": ("token_encoder", "roster_query", "roster_treatment"),
         "ROSTER_ATTN": ("team_recurrent", "team_treatment"),
+        "ROSTER_SUM": ("roster_query", "team_recurrent", "team_treatment"),
     }[state.arm]
     maximum_gradient = 0.0
     maximum_forbidden = 0.0

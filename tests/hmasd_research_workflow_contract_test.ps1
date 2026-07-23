@@ -42,11 +42,11 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'active_assignment_id=COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION',
+    'active_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5',
     'iterations_remaining=1',
     'conclusion_bearing_iterations_consumed=4',
     'intermediate_authorization_prompts=forbidden',
-    'formal_compute_status=not_launchable_until_g4_evidence_contract',
+    'formal_compute_status=launchable_after_integrated_source_commit',
     'g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2',
     'g2_g_team_ci95=[0.0,0.0]',
     'g2_g_link_ci95=[0.5,0.5]',
@@ -60,15 +60,20 @@ foreach ($required in @(
     'iteration_report_status=iterations_1_to_4_complete',
     'latest_iteration_report=docs/report/ITERATION_4.md',
     'g3_formal_result=UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3',
+    'g4_formal_contract=docs/research/designs/COUNT_PRESERVING_ROSTER_G4.md',
+    'g4_primary_arm=ROSTER_SUM',
+    'g4_primary_comparator=ROSTER_ATTN',
+    'g4_implementation_tests=12_passed',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 foreach ($required in @(
-    'formal_run_status=completed_underpowered_access',
-    'active_implementation=USEFUL_EFFECT_ROSTER_G3',
-    'ROSTER_ATTN/TEAM_REC/NO_ROSTER',
-    'primary_comparator=TEAM_REC',
-    'Implementation and exercise consume zero iterations')) {
+    'formal_run_status=launchable_from_integrated_source',
+    'active_implementation=COUNT_PRESERVING_ROSTER_G4',
+    'primary_comparator=ROSTER_ATTN',
+    'mission_comparator=TEAM_REC',
+    'focused_tests=12_passed',
+    'AUTHORIZE_COUNT_PRESERVING_ROSTER_G4_FORMAL_CPU_V1')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
 foreach ($required in @(
@@ -150,7 +155,11 @@ foreach ($retired in @(
     'scripts/run_cross_lifecycle_handoff_g2.py',
     'tests/ha_ctse_process_cross_lifecycle_handoff_g2_test.py',
     'tests/ha_ctse_process_ehc_handoff_g2_test.py',
-    'tests/run_cross_lifecycle_handoff_g2_test.py')) {
+    'tests/run_cross_lifecycle_handoff_g2_test.py',
+    'ha_ctse_process/useful_effect_roster_g3.py',
+    'scripts/run_useful_effect_roster_g3.py',
+    'tests/ha_ctse_process_useful_effect_roster_g3_test.py',
+    'tests/run_useful_effect_roster_g3_test.py')) {
     if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
         throw "Closed G1 executable remains on the active line: $retired"
     }

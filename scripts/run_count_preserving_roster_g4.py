@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Train, evaluate, and analyze the frozen useful-effect roster G3."""
+"""Train, evaluate, and analyze count-preserving roster G4."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from ha_ctse_process.useful_effect_roster_g3 import (
+from ha_ctse_process.count_preserving_roster_g4 import (
     ARM_NAMES,
     DEMAND_SUPPORT,
     EFFECTS,
@@ -30,6 +30,7 @@ from ha_ctse_process.useful_effect_roster_g3 import (
     PASS_SOURCE_CONTROL,
     PROFILE_CONTRACTS,
     PROFILES,
+    SOURCE_CONTROL_SCHEMA,
     SOURCE_FAMILY,
     ArmState,
     PackedSpecs,
@@ -50,22 +51,22 @@ from ha_ctse_process.async_commitment_roster_g3 import (
 )
 
 
-RUNNER_SCHEMA = "useful_effect_roster_g3_runner_v1"
-EVALUATION_SCHEMA = "useful_effect_roster_g3_evaluation_manifest_v1"
-EVALUATION_ROW_SCHEMA = "useful_effect_roster_g3_evaluation_row_v1"
-AUDIT_ROW_SCHEMA = "useful_effect_roster_g3_audit_row_v1"
-ANALYSIS_SCHEMA = "useful_effect_roster_g3_analysis_v1"
-FORMAL_AUTHORIZATION_TOKEN = "AUTHORIZE_USEFUL_EFFECT_ROSTER_G3_FORMAL_CPU_V1"
+RUNNER_SCHEMA = "count_preserving_roster_g4_runner_v1"
+EVALUATION_SCHEMA = "count_preserving_roster_g4_evaluation_manifest_v1"
+EVALUATION_ROW_SCHEMA = "count_preserving_roster_g4_evaluation_row_v1"
+AUDIT_ROW_SCHEMA = "count_preserving_roster_g4_audit_row_v1"
+ANALYSIS_SCHEMA = "count_preserving_roster_g4_analysis_v1"
+FORMAL_AUTHORIZATION_TOKEN = "AUTHORIZE_COUNT_PRESERVING_ROSTER_G4_FORMAL_CPU_V1"
 
-INVALID_RESULT = "INVALID_OPERATIONAL_USEFUL_ROSTER_G3"
-SOURCE_INVALID_RESULT = "SOURCE_NON_IDENTIFIABLE_USEFUL_ROSTER_G3"
-NO_ACCESS_RESULT = "NO_ACCESS_USEFUL_ROSTER_G3"
-UNDERPOWERED_RESULT = "UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3"
-SUPPORTED_RESULT = "ROSTER_GENERALIZATION_SUPPORTED_G3"
-TEAM_SUFFICIENT_RESULT = "TEAM_REC_SUFFICIENT_USEFUL_ROSTER_G3"
-NO_ROSTER_SUFFICIENT_RESULT = "NO_ROSTER_SUFFICIENT_USEFUL_ROSTER_G3"
-REPRESENTATION_ONLY_RESULT = "ROSTER_REPRESENTATION_ONLY_G3"
-MIXED_RESULT = "MIXED_UNDERPOWERED_USEFUL_ROSTER_G3"
+INVALID_RESULT = "INVALID_OPERATIONAL_COUNT_ROSTER_G4"
+SOURCE_INVALID_RESULT = "SOURCE_NON_IDENTIFIABLE_COUNT_ROSTER_G4"
+NO_ACCESS_RESULT = "NO_ACCESS_COUNT_ROSTER_G4"
+UNDERPOWERED_RESULT = "UNDERPOWERED_ACCESS_COUNT_ROSTER_G4"
+SUPPORTED_RESULT = "COUNT_PRESERVING_ROSTER_SUPPORTED_G4"
+ATTENTION_SUFFICIENT_RESULT = "ROSTER_ATTN_SUFFICIENT_COUNT_ROSTER_G4"
+TEAM_SUFFICIENT_RESULT = "TEAM_REC_SUFFICIENT_COUNT_ROSTER_G4"
+REPRESENTATION_ONLY_RESULT = "COUNT_ROSTER_REPRESENTATION_ONLY_G4"
+MIXED_RESULT = "MIXED_UNDERPOWERED_COUNT_ROSTER_G4"
 
 ACCESS_FLOOR = 0.90
 GAIN_MARGIN = 0.10
@@ -443,8 +444,8 @@ def _audit_rows(
     formal: bool,
     seed_registry: SeedRegistry,
 ) -> list[dict[str, Any]]:
-    if state.arm != "ROSTER_ATTN":
-        raise ValueError("causal audit is defined only for ROSTER_ATTN")
+    if state.arm != "ROSTER_SUM":
+        raise ValueError("causal audit is defined only for ROSTER_SUM")
     base_start = 3_000_000_000 + state.replicate * 10_000_000
     rows: list[dict[str, Any]] = []
     for index in range(count):
@@ -541,7 +542,7 @@ def evaluate_run(root: Path) -> Path:
                     )
                     _write_jsonl(path, rows)
                     references.append(_relative(path, root))
-            if arm == "ROSTER_ATTN":
+            if arm == "ROSTER_SUM":
                 audit_rows.extend(
                     _audit_rows(
                         state,
@@ -593,35 +594,35 @@ def select_result_branch(predicate_inputs: Mapping[str, object]) -> str:
     numeric = {
         name: _finite_number(name, predicate_inputs.get(name))
         for name in (
-            "max_arm_lcb",
-            "max_arm_ucb",
+            "sum_lcb",
+            "sum_ucb",
+            "g_attn_lcb",
+            "g_attn_ucb",
             "g_team_lcb",
             "g_team_ucb",
-            "g_null_lcb",
-            "g_null_ucb",
         )
     }
     if not predicate_inputs["operational_valid"]:
         return INVALID_RESULT
     if not predicate_inputs["source_identifiable"]:
         return SOURCE_INVALID_RESULT
-    if numeric["max_arm_ucb"] < ACCESS_FLOOR:
+    if numeric["sum_ucb"] < ACCESS_FLOOR:
         return NO_ACCESS_RESULT
-    if numeric["max_arm_lcb"] < ACCESS_FLOOR <= numeric["max_arm_ucb"]:
+    if numeric["sum_lcb"] < ACCESS_FLOOR <= numeric["sum_ucb"]:
         return UNDERPOWERED_RESULT
     if (
-        numeric["g_team_lcb"] > GAIN_MARGIN
-        and numeric["g_null_lcb"] > GAIN_MARGIN
+        numeric["g_attn_lcb"] > GAIN_MARGIN
+        and numeric["g_team_lcb"] > GAIN_MARGIN
         and predicate_inputs["battery_pass"]
     ):
         return SUPPORTED_RESULT
+    if numeric["g_attn_ucb"] <= GAIN_MARGIN:
+        return ATTENTION_SUFFICIENT_RESULT
     if numeric["g_team_ucb"] <= GAIN_MARGIN:
         return TEAM_SUFFICIENT_RESULT
-    if numeric["g_null_ucb"] <= GAIN_MARGIN:
-        return NO_ROSTER_SUFFICIENT_RESULT
     if (
-        numeric["g_team_lcb"] > GAIN_MARGIN
-        and numeric["g_null_lcb"] > GAIN_MARGIN
+        numeric["g_attn_lcb"] > GAIN_MARGIN
+        and numeric["g_team_lcb"] > GAIN_MARGIN
         and predicate_inputs["battery_confident_fail"]
     ):
         return REPRESENTATION_ONLY_RESULT
@@ -706,8 +707,8 @@ def _primary_arrays(
         ]
         if any(cluster != clusters[0] for cluster in clusters[1:]):
             raise ValueError("primary arms do not share paired source clusters")
-    arrays["g_team"] = arrays["ROSTER_ATTN"] - arrays["TEAM_REC"]
-    arrays["g_null"] = arrays["ROSTER_ATTN"] - arrays["NO_ROSTER"]
+    arrays["g_attn"] = arrays["ROSTER_SUM"] - arrays["ROSTER_ATTN"]
+    arrays["g_team"] = arrays["ROSTER_SUM"] - arrays["TEAM_REC"]
     return arrays
 
 
@@ -824,9 +825,8 @@ def analyze_run(root: Path) -> Path:
         seed=int(manifest["seed_registry"]["bootstrap"]) + 1,
     )
 
-    arm_names = ("NO_ROSTER", "TEAM_REC", "ROSTER_ATTN")
-    maximum_arm = max(arm_names, key=lambda arm: primary_intervals[arm]["mean"])
-    maximum_interval = primary_intervals[maximum_arm]
+    arm_names = ("TEAM_REC", "ROSTER_ATTN", "ROSTER_SUM")
+    sum_interval = primary_intervals["ROSTER_SUM"]
     source_identification = {
         "source_control_pass": controls.get("result") == PASS_SOURCE_CONTROL
         and controls.get("all_source_checks") is True
@@ -887,12 +887,12 @@ def analyze_run(root: Path) -> Path:
     predicate_inputs = {
         "operational_valid": operational_valid,
         "source_identifiable": source_identifiable,
-        "max_arm_lcb": maximum_interval["lcb95"],
-        "max_arm_ucb": maximum_interval["ucb95"],
+        "sum_lcb": sum_interval["lcb95"],
+        "sum_ucb": sum_interval["ucb95"],
+        "g_attn_lcb": primary_intervals["g_attn"]["lcb95"],
+        "g_attn_ucb": primary_intervals["g_attn"]["ucb95"],
         "g_team_lcb": primary_intervals["g_team"]["lcb95"],
         "g_team_ucb": primary_intervals["g_team"]["ucb95"],
-        "g_null_lcb": primary_intervals["g_null"]["lcb95"],
-        "g_null_ucb": primary_intervals["g_null"]["ucb95"],
         "battery_pass": battery_pass,
         "battery_confident_fail": confident_fail,
     }
@@ -917,13 +917,13 @@ def analyze_run(root: Path) -> Path:
         "operational_errors": operational_errors,
         "source_identifiable": source_identifiable,
         "source_identification": source_identification,
-        "maximum_arm": maximum_arm,
+        "tested_arm": "ROSTER_SUM",
         "metrics": {
             "arm_utility": {
                 arm: primary_intervals[arm] for arm in arm_names
             },
+            "g_attn": primary_intervals["g_attn"],
             "g_team": primary_intervals["g_team"],
-            "g_null": primary_intervals["g_null"],
             "battery": audit_intervals,
         },
         "predicate_inputs": predicate_inputs,
@@ -994,6 +994,11 @@ def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
         raise ValueError("evaluation manifest schema mismatch")
     if analysis.get("schema") != ANALYSIS_SCHEMA:
         raise ValueError("analysis schema mismatch")
+    if any(
+        artifact.get("source_family") != SOURCE_FAMILY
+        for artifact in (manifest, evaluation, analysis)
+    ):
+        raise ValueError("artifact source family mismatch")
     source_commit = manifest.get("source_commit")
     if type(source_commit) is not str:
         raise ValueError("source commit is missing")
@@ -1024,6 +1029,10 @@ def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
     expected_config = FORMAL_CONFIG if require_formal else _config_for_formal(formal)
     if manifest.get("config") != asdict(expected_config):
         raise ValueError("run config does not match registered budget")
+    if evaluation.get("config") != manifest.get("config"):
+        raise ValueError("evaluation config does not match training manifest")
+    if manifest.get("seed_registry") != asdict(SeedRegistry()):
+        raise ValueError("run seed registry does not match G4 contract")
     config = RunConfig(**manifest["config"])
     expected_checkpoints = config.replicates * len(ARM_NAMES)
     references = manifest.get("checkpoint_references")
@@ -1054,13 +1063,15 @@ def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
         raise ValueError("evaluation reference inventory mismatch")
     for reference in evaluation_references:
         match = re.fullmatch(
-            r"evaluation/(NO_ROSTER|TEAM_REC|ROSTER_ATTN)/replicate_(\d+)/(iid|heldout_cardinality|heldout_gap|heldout_joint)_(deterministic|stochastic)\.jsonl",
+            r"evaluation/(TEAM_REC|ROSTER_ATTN|ROSTER_SUM)/replicate_(\d+)/(iid|heldout_cardinality|heldout_gap|heldout_joint)_(deterministic|stochastic)\.jsonl",
             reference,
         )
         if match is None:
             raise ValueError("evaluation reference path is malformed")
         arm, replicate_text, profile, mode = match.groups()
         replicate = int(replicate_text)
+        if not 0 <= replicate < config.replicates:
+            raise ValueError("evaluation replicate is outside the registered range")
         rows = _read_jsonl(root / reference)
         if len(rows) != config.evaluation_episodes:
             raise ValueError("evaluation row count mismatch")
@@ -1087,7 +1098,14 @@ def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
     for row in audit_rows:
         if row.get("source_commit") != source_commit:
             raise ValueError("audit source commit mismatch")
-        if row.get("formal") is not formal or row.get("schema") != AUDIT_ROW_SCHEMA:
+        if (
+            row.get("formal") is not formal
+            or row.get("schema") != AUDIT_ROW_SCHEMA
+            or row.get("source_family") != SOURCE_FAMILY
+            or row.get("arm") != "ROSTER_SUM"
+            or type(row.get("replicate")) is not int
+            or not 0 <= int(row["replicate"]) < config.replicates
+        ):
             raise ValueError("audit schema/formal mismatch")
         for name in (
             "natural_optimal_probability",
@@ -1155,11 +1173,26 @@ def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
     controls = _read_json(root / str(evaluation.get("source_control_reference")))
     if (
         controls.get("source_commit") != source_commit
+        or controls.get("source_family") != SOURCE_FAMILY
+        or controls.get("schema") != SOURCE_CONTROL_SCHEMA
+        or controls.get("run_formal") is not formal
         or controls.get("result") != PASS_SOURCE_CONTROL
         or controls.get("structural_gate_pass") is not True
         or controls.get("structural_gate_result") != STRUCTURAL_GATE_PASS
     ):
         raise ValueError("source-control evidence mismatch")
+    exposure = manifest.get("training_exposure")
+    if type(exposure) is not dict:
+        raise ValueError("training exposure is missing")
+    for replicate in range(config.replicates):
+        for arm in ARM_NAMES:
+            expected = {
+                "updates": config.updates,
+                "optimizer_steps": config.updates * config.ppo_passes,
+                "episodes_completed": config.updates * config.episodes_per_update,
+            }
+            if exposure.get(f"{arm}:replicate_{replicate}") != expected:
+                raise ValueError("training exposure mismatch")
     if analysis.get("status") != "COMPLETE" or analysis.get("operational_errors") != []:
         raise ValueError("analysis is not operationally complete")
     predicates = analysis.get("predicate_inputs")
