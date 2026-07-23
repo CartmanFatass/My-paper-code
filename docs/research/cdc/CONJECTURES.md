@@ -6,21 +6,26 @@ the Project Manager-accepted CDC state.
 
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
-- Status: selected as the primary eight-iteration research direction.
+- Status: supported at usable-MVP scope by formal G5; selected for scale and
+  schedule robustness refinement.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
   rejoin, genuine join and terminal leave, including held-out active counts.
-- Retained evidence: Stage-B and clean-carrier direct access reached
-  deterministic utility about `0.9991`; R49 proved active-only permutation,
-  padding, replay and membership correctness through `N=16`; the old fixed
-  six-slot collection path is therefore an operational limitation, not a
-  required model parameterization.
-- Strongest counterexample: a policy can succeed only because training and
-  evaluation share one `4 -> 2 -> 6 -> 4` schedule or one padding capacity.
-- Separating evidence: one checkpoint trained on several dynamic schedules,
-  evaluated on unseen counts and a different operational capacity, with
-  exact lifecycle state ownership and an absolute utility floor.
+- Retained evidence: formal G5 reaches IID deterministic utility CI95
+  `[0.9985352, 0.9994303, 1.0]` and held-out CI95
+  `[0.9828880, 0.9939927, 1.0]`; the worst held-out replicate is `0.9828880`.
+  One checkpoint transfers from training counts through seven to held-out
+  counts through nine and from capacity 10 to 12. R49 independently proves
+  active-only permutation, padding, replay and membership mechanics through
+  `N=16`.
+- Strongest remaining counterexample: G5 can succeed because its held-out
+  counts are near the training range and all membership events occur at the
+  same phase times. Active-embedding sums may also become ill-conditioned at
+  substantially larger unseen N.
+- Separating evidence: freeze the successful G5 checkpoints and independently
+  stress unseen count scale and unseen event times before introducing a
+  count-normalized correction.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

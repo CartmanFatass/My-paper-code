@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
-active_assignment_id=OPEN_ROSTER_DIRECT_MVP_G5_PRELAUNCH
-next_boundary=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
+last_completed_assignment_id=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
+active_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
+next_boundary=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_EXECUTABLE_DEFINITION
 autonomous_research_grant=ACTIVE_EIGHT_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=8
-conclusion_bearing_iterations_consumed=5
-implementation_status=G5_OPEN_ROSTER_DIRECT_PM_ACCEPTED
+iterations_remaining=7
+conclusion_bearing_iterations_consumed=6
+implementation_status=G5_CLOSED_SUCCESS_G6_DERIVATION_ACTIVE
 nonformal_compute_status=complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_ready_after_git_integration
+formal_compute_status=authorized_after_next_evidence_contract_freeze
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_5_complete
-latest_iteration_report=docs/report/ITERATION_5.md
+iteration_report_status=iterations_1_to_6_complete
+latest_iteration_report=docs/report/ITERATION_6.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=terminal_project_disposition
+next_action_class=zero_compute_algorithmic_derivation
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -123,6 +123,17 @@ g5_formal_replicates=3
 g5_formal_updates_per_replicate=250
 g5_formal_num_envs=8
 g5_formal_eval_episodes=128
+g5_formal_source_commit=4b38eae5abbaeccbab6d53e3eb8f50bd28b957a9
+g5_formal_run=logs/formal_open_roster_direct_g5_cpu_20260723_4b38eae_r1
+g5_formal_result=USABLE_OPEN_ROSTER_DIRECT_G5
+g5_operational_valid=true
+g5_iid_deterministic_utility_ci95=[0.99853515625,0.9994303385416666,1.0]
+g5_heldout_deterministic_utility_ci95=[0.9828879616477272,0.9939926609848483,1.0]
+g5_heldout_min_replicate_mean=0.9828879616477272
+g5_heldout_stochastic_mean=0.9737067945075756
+g5_heldout_final_minus_zero_ci95=[0.48288796164772724,0.5434274384469696,0.6483043323863636]
+g5_scientific_disposition=closed_success_no_rerun_tuning_or_threshold_change
+g6_candidate_question=zero_shot_count_scale_and_membership_event_time_transport
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -176,6 +187,11 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   and the R49 `N`-independent interface lemma. Its first goal is absolute task
   usability across within-episode membership changes and unseen counts, not
   superiority over a comparator.
+- Formal G5 establishes that first goal: one parameter-shape-independent
+  checkpoint reaches held-out deterministic utility CI95
+  `[0.98288796, 0.99399266, 1.0]` on unseen counts through nine and a larger
+  padding capacity. This is a usable dynamic-roster MVP, not evidence of
+  arbitrary-count scaling, event-time robustness or skill/lifetime competence.
 
 ## Runtime and protected semantics
 

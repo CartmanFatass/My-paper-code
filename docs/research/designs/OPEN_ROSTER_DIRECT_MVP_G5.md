@@ -1,7 +1,6 @@
 # Open-roster direct MVP G5
 
-Status: executable definition and formal evidence contract frozen after bounded
-nonformal acceptance.
+Status: formally complete and closed as `USABLE_OPEN_ROSTER_DIRECT_G5`.
 
 ## Question and scope
 
@@ -107,3 +106,17 @@ First match after operational validity:
 An invalid operational package consumes no iteration. A valid outcome consumes
 iteration 6, preserves its observation and selects the smallest next dynamic-N
 correction within the remaining seven-round grant.
+
+## Formal disposition
+
+The exact CPU one-thread run at source
+`4b38eae5abbaeccbab6d53e3eb8f50bd28b957a9` is operationally valid. IID
+deterministic utility CI95 is `[0.9985352, 0.9994303, 1.0]` and held-out
+deterministic utility CI95 is `[0.9828880, 0.9939927, 1.0]`. The minimum
+held-out replicate mean is `0.9828880`, stochastic held-out mean is `0.9737068`
+and final-minus-zero CI95 lower bound is `0.4828880`. Independent first-match
+recomputation returns `USABLE_OPEN_ROSTER_DIRECT_G5`.
+
+This exact package is closed without rerun, tuning or threshold changes. The
+success establishes a usable dynamic-roster MVP only. Count-scale extrapolation
+and event-time robustness move to independent G6 evidence.

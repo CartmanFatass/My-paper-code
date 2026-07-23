@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=OPEN_ROSTER_DIRECT_MVP_G5
-implementation_status=PM_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_COMPLETE_CLOSED_SUCCESS
 design=docs/research/designs/OPEN_ROSTER_DIRECT_MVP_G5.md
 backend=cpu
 torch_threads=1
@@ -15,7 +15,7 @@ comparative_advantage_requirement=none
 asynchronous_skill_lifetime=frozen
 skill_controller=absent
 formal_iteration=6
-new_chain_iterations_remaining=8
+new_chain_iterations_remaining=7
 ```
 
 ## Goal
@@ -65,9 +65,15 @@ is exercised. The formal G5 budget and first-match outcomes are now frozen in
 the design. Assign the exact foreground `train -> evaluate -> analyze` pipeline
 to the registered silent experiment operator after Git integration.
 
-## Iteration semantics
+## Formal disposition and next boundary
 
-A valid G5 formal result consumes report/iteration 6 and leaves seven rounds.
-Success means a usable open-roster base, not EHC, skill, lifetime or algorithmic
-superiority. Failure selects the smallest observed access, state, aggregation
-or optimization correction without changing the frozen skill scope.
+Formal iteration 6 is operationally valid and returns
+`USABLE_OPEN_ROSTER_DIRECT_G5`. IID deterministic utility CI95 is
+`[0.9985352, 0.9994303, 1.0]`; held-out deterministic utility CI95 is
+`[0.9828880, 0.9939927, 1.0]`; every stability and gain gate passes. G5 is now
+closed as the usable open-roster base. It does not establish EHC, skill,
+lifetime, arbitrary-count scaling or algorithmic superiority.
+
+The next active work is a zero-compute G6 derivation that isolates zero-shot
+count-scale transport from membership-event-time transport while reusing the
+frozen G5 checkpoints without tuning. Seven conclusion-bearing rounds remain.

@@ -7,7 +7,7 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-OPEN-ROSTER-DIRECT | selected primary direction | Direct recurrent control already accesses the dynamic-roster carrier, while R49 establishes `N`-independent active-set mechanics. | Establish absolute held-out-count usability before adding mechanisms or comparative claims. |
+| C-OPEN-ROSTER-DIRECT | supported usable MVP; scale refinement selected | Formal G5 reaches held-out deterministic CI95 `[0.9828880, 0.9939927, 1.0]` across unseen counts through nine and capacity 12. | Stress frozen checkpoints on farther counts and unseen membership-event times before changing aggregation. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
@@ -20,16 +20,17 @@ compute authority.
 ## Scheduled action
 
 ```text
-completed_action=COUNT_PRESERVING_ROSTER_G4_FORMAL_ITERATION_5
-source_family=OPEN_ROSTER_DIRECT_MVP_G5
-formal_disposition=pending
-next_action=OPEN_ROSTER_DIRECT_MVP_G5_REALIZATION_AND_NONFORMAL_ACCEPTANCE
+completed_action=OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_ITERATION_6
+source_family=OPEN_ROSTER_ZERO_SHOT_SCALE_G6
+formal_disposition=USABLE_OPEN_ROSTER_DIRECT_G5
+next_action=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_DERIVATION
 authorization_status=eight_iteration_dynamic_roster_grant_active
-conclusion_bearing_iterations_consumed=5
-iterations_remaining=8
+conclusion_bearing_iterations_consumed=6
+iterations_remaining=7
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
 chain freezes asynchronous skill lifetime and targets a usable dynamic-agent
-algorithm. It starts with a direct recurrent open-roster MVP and uses absolute
-competence plus held-out-count transport rather than an advantage gate.
+algorithm. G5 has now established that usable direct recurrent open-roster MVP.
+The next bounded question is how far its frozen checkpoint transports in count
+scale and membership-event timing before any algorithmic correction is made.
