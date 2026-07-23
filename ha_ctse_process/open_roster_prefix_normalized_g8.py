@@ -1,8 +1,8 @@
-"""Beyond-declared-count stress adapter for frozen G5 checkpoints.
+"""Open-roster prefix-normalization G8 and beyond-count stress profiles.
 
-This module changes only the open-roster membership profile.  Generic-SHORT
-waves, reward, observations, primitive actions and the G5 count feature remain
-unchanged.  Padding capacity is operational storage, never model input.
+G8 retains the exact Generic-SHORT task, G5 count coordinate, active embedding
+sum and G7 stress profiles. Only the policy's autoregressive action prefix is
+normalized; padding remains operational storage and never a model parameter.
 """
 
 from __future__ import annotations

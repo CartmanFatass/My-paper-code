@@ -21,17 +21,17 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ```text
 last_completed_assignment_id=BEYOND_DECLARED_COUNT_G7_FORMAL_ITERATION_8
-active_assignment_id=SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION
-next_boundary=SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION
+active_assignment_id=PREFIX_NORMALIZED_OPEN_ROSTER_G8_PRELAUNCH_GIT_INTEGRATION
+next_boundary=PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_ITERATION_9
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
 iterations_remaining=9
 conclusion_bearing_iterations_consumed=8
-implementation_status=G7_CLOSED_NO_MODERATE_BEYOND_COUNT
-nonformal_compute_status=g7_complete_operational_valid
+implementation_status=G8_PM_ACCEPTED_FORMAL_READY
+nonformal_compute_status=g8_screen_and_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g7_complete_next_formal_not_yet_frozen
+formal_compute_status=authorized_after_g8_implementation_git_integration
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
@@ -111,8 +111,8 @@ primary_research_axis=dynamic_agent_count
 asynchronous_skill_lifetime_status=frozen_out_of_active_scope
 skill_controller_status=removed_from_mvp
 initial_objective=absolute_usability_not_comparative_advantage
-active_algorithm=OPEN_ROSTER_DIRECT_MVP_G5
-active_design=docs/research/designs/OPEN_ROSTER_DIRECT_MVP_G5.md
+active_algorithm=PREFIX_NORMALIZED_OPEN_ROSTER_G8
+active_design=docs/research/designs/PREFIX_NORMALIZED_OPEN_ROSTER_G8.md
 g5_authorization_token=AUTHORIZE_OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_CPU_V1
 g5_focused_tests=6_passed
 g5_nonformal_exercise=logs/nonformal_open_roster_direct_g5_20260723_pm1
@@ -187,7 +187,30 @@ g7_joint_min_replicate_mean=0.8377266256981895
 g7_joint_stochastic_mean=0.8873765641551907
 g7_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_BEYOND_DECLARED_COUNT_G7_FORMAL_RESULT.md
 g7_scientific_disposition=closed_failure_no_rerun_tuning_or_relabeling
-g8_candidate_question=scale_normalized_active_context_above_n16
+g8_candidate_question=prefix_fraction_repair_above_n16
+g8_derivation=docs/research/cdc/EVIDENCE_NOTES/20260723_SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION.md
+g8_screen=logs/nonformal_scale_normalized_g8_screen_20260723_pm1
+g8_screen_result=NONFORMAL_SCALE_NORMALIZATION_SCREEN_COMPLETE
+g8_screen_variants=8
+g8_screen_selected=active_sum_log1p_count_active_fraction_prefix
+g8_screen_minimum_domain_mean=0.831787109375
+g8_screen_winner_margin=0.056396484375
+g8_formal_contract=docs/research/designs/PREFIX_NORMALIZED_OPEN_ROSTER_G8.md
+g8_authorization_token=AUTHORIZE_PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_CPU_V1
+g8_formal_replicates=3
+g8_formal_updates=250
+g8_formal_num_envs=8
+g8_formal_eval_episodes=128
+g8_formal_eval_cells=33
+g8_focused_tests=8_passed
+g8_combined_g5_tests=13_passed
+g8_nonformal_exercise=logs/nonformal_open_roster_prefix_g8_20260723_pm1
+g8_nonformal_result=NONFORMAL_PREFIX_NORMALIZED_G8_EXERCISE_COMPLETE
+g8_nonformal_operational_valid=true
+g8_nonformal_replay_max_error=0.0
+g8_nonformal_model_state_unchanged_exact=true
+g8_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_PREFIX_NORMALIZED_OPEN_ROSTER_G8_PRELAUNCH.md
+g8_review_status=no_new_review_no_anomaly
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -255,6 +278,11 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   1 degrades further as N grows while persistent duty remains perfect and only
   short allocation falls. G5/G6 remain closed successes. The next correction
   is a scale-normalized active context, not a threshold or checkpoint rescue.
+- The registered eight-variant G8 screen selects the smaller prefix-only
+  correction by a `0.0563965` minimum-domain margin. The active algorithm keeps
+  the G5 embedding sum and log-count coordinate but feeds action-prefix
+  fractions to the actor. Its focused and shared regressions plus bounded
+  nonformal full path are accepted; iteration-9 formal execution is next.
 
 ## Runtime and protected semantics
 

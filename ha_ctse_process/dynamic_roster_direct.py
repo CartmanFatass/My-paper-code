@@ -124,9 +124,17 @@ class DirectPreparedStep:
 class DirectPrimitiveARPolicy(nn.Module):
     """Anonymous per-lifecycle recurrent actor with an active-set critic."""
 
-    def __init__(self, hidden_dim: int = HIDDEN_DIM) -> None:
+    def __init__(
+        self,
+        hidden_dim: int = HIDDEN_DIM,
+        *,
+        autoregressive_prefix: str = "raw_count",
+    ) -> None:
         super().__init__()
         self.hidden_dim = int(hidden_dim)
+        if autoregressive_prefix not in {"raw_count", "active_fraction"}:
+            raise ValueError("unknown direct autoregressive prefix")
+        self.autoregressive_prefix = autoregressive_prefix
         self.member_encoder = nn.Sequential(
             nn.Linear(OBSERVATION_DIM, self.hidden_dim),
             nn.Tanh(),
@@ -155,6 +163,12 @@ class DirectPrimitiveARPolicy(nn.Module):
     @property
     def parameter_count(self) -> int:
         return int(sum(parameter.numel() for parameter in self.parameters()))
+
+    @property
+    def roster_representation(self) -> dict[str, str]:
+        return {
+            "autoregressive_prefix": self.autoregressive_prefix,
+        }
 
     def prepare_step(
         self,
@@ -289,6 +303,7 @@ class DirectPrimitiveARPolicy(nn.Module):
         prefix_rows = torch.zeros(
             (batch, members, ACTION_COUNT), dtype=dtype, device=device
         )
+        prefix_denominator = active_count.to(dtype).unsqueeze(-1)
 
         for position in range(members):
             valid = position_mask[:, position]
@@ -297,12 +312,17 @@ class DirectPrimitiveARPolicy(nn.Module):
             focal = order[:, position].clamp(min=0)
             local_embedding = member_embeddings[batch_index, focal]
             local_hidden = next_hidden[batch_index, focal]
+            prefix_input = (
+                prefix / prefix_denominator
+                if self.autoregressive_prefix == "active_fraction"
+                else prefix
+            )
             candidate_hidden = self.actor_rnn(
-                torch.cat((local_embedding, context, prefix), dim=-1),
+                torch.cat((local_embedding, context, prefix_input), dim=-1),
                 local_hidden,
             )
             logits = self.action_head(
-                torch.cat((candidate_hidden, prefix), dim=-1)
+                torch.cat((candidate_hidden, prefix_input), dim=-1)
             )
             if primitive_logit_bias is not None:
                 logits = logits + primitive_logit_bias[batch_index, focal]

@@ -1,81 +1,63 @@
-# Beyond-declared-count G7 implementation plan
+# Prefix-normalized open-roster G8 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution, compatibility work and workflow hashes are
 > disabled.
 
 ```text
-active_implementation=BEYOND_DECLARED_COUNT_G7
-implementation_status=FORMAL_CLOSED_NO_MODERATE_BEYOND_COUNT_G7
-design=docs/research/designs/BEYOND_DECLARED_COUNT_G7.md
+active_implementation=PREFIX_NORMALIZED_OPEN_ROSTER_G8
+implementation_status=PM_ACCEPTED_FORMAL_READY
+design=docs/research/designs/PREFIX_NORMALIZED_OPEN_ROSTER_G8.md
 backend=cpu
 torch_threads=1
-training_operation=none_frozen_g5_checkpoint_import
-active_line_policy=replace_archived_g6_runner_with_g7
-formal_iteration=8
-chain_iterations_remaining_after_run=9
+formal_iteration=9
+chain_iterations_remaining_before_run=9
 ```
 
 ## Goal
 
-Measure the frozen G5 checkpoint beyond its declared N=16 observation range
-before introducing any scale-free algorithm repair. Separate moderate, far and
-joint scale failure.
+Test the smallest representation repair selected after G7: normalize only the
+autoregressive action prefix by active N, train from fresh seeds, and require
+absolute usability from IID through the unchanged N=40 G7 stress domains.
 
-## Task 1 - Replace the closed G6 active runner
+## Task 1 - Keep only the selected algorithm
 
-Git history and the G6 source commit archive its exact implementation. Remove
-the G6-specific module, runner and test from the active line and replace them
-with G7 equivalents. Reuse the direct evaluator and Generic-SHORT core; do not
-add compatibility imports or readers.
+Parameterize the shared direct policy with `raw_count` and `active_fraction`
+prefix modes. Preserve `raw_count` as the exact G5 default. The G8 active line
+uses only `active_fraction`; remove the mean-aggregation and bounded-count
+prototype branches after the nonformal screen.
 
-Focused proof: no G6 code path remains active, G5 source files are unchanged,
-and the new profile validator admits exactly the registered range through 40
-without modifying the inherited count feature.
+Focused proof: default parameters and outputs retain G5 semantics; G8 keeps the
+same parameter count; raw prefixes remain exact replay evidence while later
+autoregressive inputs differ under fraction normalization.
 
-## Task 2 - Preserve zero-training provenance
+## Task 2 - Replace G7 with one fresh-training G8 path
 
-Carry forward the repaired exact G5 intake: source, formal authorization token,
-result, runtime, counts, manifest seeds, checkpoint-embedded RNG constants and
-strict final loads. Materialize three finals into a fresh root and record zero
-optimizer steps.
+Replace the G7 module, runner and test rather than keeping adapters. Reuse its
+seven stress profiles and the G5 training/held-out task. Train three fresh
+replicates for 250 updates, with no G5 checkpoint resume. Evaluate zero joint
+baselines and final deterministic/stochastic outcomes across five domains.
 
-Focused proof: exact intake succeeds; missing/wrong token and one independent
-source/checkpoint field fail; model state is finite and unchanged.
+Focused proof: source controls cover 12 profiles; formal inventory is exactly
+33 cells; checkpoints, representations, runtime, replay, lifecycle, outcome
+arrays and evaluation immutability fail closed.
 
-## Task 3 - Evaluate the three beyond-limit domains
+## Task 3 - Freeze result semantics
 
-Produce 18 final-checkpoint cells with full 128-episode arrays in formal mode.
-Source controls reconstruct actual-wave demand and lifecycle changes. Analyzer
-validates exact inventory, CPU one-thread runtime, finite domains, model
-immutability and first-match boundaries.
-
-Focused proof: constructive controls and padding invariance pass through N=40;
-the reduced full-path exercise is operationally valid but rejected as formal;
-exact thresholds pass and `nextafter` below each threshold fails.
+Use the first-match branch in the design: IID, held-out, moderate, far, joint,
+learning gain, stability, then usable success. Each deterministic LCB floor is
+0.90; joint minimum replicate is 0.85 and stochastic mean is 0.80. Threshold
+boundary values pass and `nextafter` below fails.
 
 ## Acceptance and launch
 
-Run the new focused test plus one bounded nonformal exercise. One advisory
-review is permitted only if a conclusion-bearing risk appears. After PM
-acceptance and Git integration, assign one exact formal foreground pipeline to
-the fixed Luna-low operator. A valid result consumes iteration 8 and leaves
-nine rounds.
+Acceptance is complete. The G8 focused suite passes `8/8`; combined G8/G5
+passes `13/13`. The nonformal full path at
+`logs/nonformal_open_roster_prefix_g8_20260723_pm1` is operationally valid with
+replay error zero, exact lifecycle/source controls, evaluation model drift zero
+and the required nonformal branch. The earlier eight-variant screen selected
+prefix-only normalization by a `0.0563965` minimum-domain margin.
 
-Acceptance is complete. The G7-specific suite passes `7/7`, the combined G7/G5
-suite passes `12/12`, and the nonformal full path at
-`logs/nonformal_open_roster_beyond_count_g7_20260723_g7impl_r1` is operationally
-valid with zero optimizer steps, exact model immutability and finite count
-features through N=40. Old G6 active files are absent and G7 replacements are
-present. The package is formal-ready after Git integration.
-
-## Formal closure and successor
-
-The exact source `19ea4d915ee4bdd03e81c913570d66f0ad00974d`
-completed all 18 formal cells with zero parameter drift and returned
-`NO_MODERATE_BEYOND_COUNT_G7`. The moderate deterministic CI95 lower bound is
-`0.8590299`, below the frozen `0.90` floor. G7 is closed without rescue.
-
-The active implementation boundary is now zero-compute
-`SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION`. No G8 formal contract or run is
-frozen by this G7 plan.
+After exact-path Git integration, assign one fresh formal
+`train -> evaluate -> analyze` pipeline to the fixed Luna-low operator. A valid
+result consumes iteration 9 and leaves eight authorized iterations.

@@ -8,7 +8,7 @@ the Project Manager-accepted CDC state.
 
 - Status: supported as a robust zero-shot dynamic-roster MVP through N=16 by
   formal G5/G6; exact G5 representation rejected for robust N>16 transport by
-  formal G7; scale-normalized repair selected.
+  formal G7; prefix-normalized repair selected for formal testing.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -27,9 +27,12 @@ the Project Manager-accepted CDC state.
   `[0.8089696, 0.8922767, 0.9669230]` and joint CI95
   `[0.8377266, 0.9154998, 0.9789795]`. Persistent duty remains perfect; short
   allocation degrades across seeds as scale grows.
-- Separating evidence: screen the active-embedding aggregation and bounded
-  count coordinate as components, then train one frozen scale-normalized
-  interface on the unchanged dynamic-roster task.
+- Prototype separation: the registered eight-variant screen selects raw active
+  sum, original log-count and action-prefix fractions with minimum-domain mean
+  `0.8317871`, a `0.0563965` lead over the runner-up. This is candidate
+  selection, not formal evidence or unique causal attribution.
+- Separating evidence: freshly train the prefix-normalized interface and require
+  one model family to pass IID, held-out and all N=40 G7 domains.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.
