@@ -111,3 +111,15 @@ through N=40; it is not arbitrary-N proof or comparative advantage. Failure
 does not rescue or relabel G7 and does not imply all prefix-normalized policies
 fail. Asynchronous skill lifetime, skill selection, EHC and intrinsic reward
 remain frozen.
+
+## Formal disposition
+
+The exact CPU one-thread source
+`fcce714c296c55f3dcb5a0c0ee11090b393c26ba` is operationally valid and returns
+`USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8`. IID, held-out, moderate, far and
+joint deterministic CI95 lower bounds are respectively `0.9432373`,
+`0.9469604`, `0.9321289`, `0.9302979` and `0.9299927`. Joint stochastic utility
+is `0.8994221` and final-minus-zero LCB is `0.1707176`.
+
+G8 is closed without rerun, tuning or relabeling. The next independent boundary
+is `HIGH_FREQUENCY_ROSTER_CHURN_G9_DERIVATION`.

@@ -6,9 +6,8 @@ the Project Manager-accepted CDC state.
 
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
-- Status: supported as a robust zero-shot dynamic-roster MVP through N=16 by
-  formal G5/G6; exact G5 representation rejected for robust N>16 transport by
-  formal G7; prefix-normalized repair selected for formal testing.
+- Status: supported as a usable prefix-normalized dynamic-roster algorithm
+  through N=40 by formal G8; high-frequency churn robustness remains open.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -31,8 +30,15 @@ the Project Manager-accepted CDC state.
   sum, original log-count and action-prefix fractions with minimum-domain mean
   `0.8317871`, a `0.0563965` lead over the runner-up. This is candidate
   selection, not formal evidence or unique causal attribution.
-- Separating evidence: freshly train the prefix-normalized interface and require
-  one model family to pass IID, held-out and all N=40 G7 domains.
+- Formal repair evidence: freshly trained G8 reaches deterministic CI95 LCBs
+  `0.9432373` IID, `0.9469604` held-out, `0.9321289` moderate, `0.9302979` far
+  and `0.9299927` joint, with joint stochastic mean `0.8994221` and positive
+  learned-gain LCB. G7 remains the valid frozen raw-prefix failure.
+- Strongest remaining counterexample: training and current evaluation contain
+  only three membership edits; repeated leave/rejoin/join operations near task
+  load may break lifecycle-state composition despite count-scale success.
+- Separating evidence: freeze G8 finals and evaluate load-proximal high-frequency
+  churn with zero optimizer steps before another algorithm change.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=BEYOND_DECLARED_COUNT_G7_FORMAL_ITERATION_8
-active_assignment_id=PREFIX_NORMALIZED_OPEN_ROSTER_G8_PRELAUNCH_GIT_INTEGRATION
-next_boundary=PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_ITERATION_9
+last_completed_assignment_id=PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_ITERATION_9
+active_assignment_id=HIGH_FREQUENCY_ROSTER_CHURN_G9_DERIVATION
+next_boundary=HIGH_FREQUENCY_ROSTER_CHURN_G9_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=9
-conclusion_bearing_iterations_consumed=8
-implementation_status=G8_PM_ACCEPTED_FORMAL_READY
+iterations_remaining=8
+conclusion_bearing_iterations_consumed=9
+implementation_status=G8_CLOSED_USABLE_PREFIX_NORMALIZED
 nonformal_compute_status=g8_screen_and_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_after_g8_implementation_git_integration
+formal_compute_status=g8_complete_next_formal_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_8_complete
-latest_iteration_report=docs/report/ITERATION_8.md
+iteration_report_status=iterations_1_to_9_complete
+latest_iteration_report=docs/report/ITERATION_9.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -211,6 +211,21 @@ g8_nonformal_replay_max_error=0.0
 g8_nonformal_model_state_unchanged_exact=true
 g8_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_PREFIX_NORMALIZED_OPEN_ROSTER_G8_PRELAUNCH.md
 g8_review_status=no_new_review_no_anomaly
+g8_formal_source_commit=fcce714c296c55f3dcb5a0c0ee11090b393c26ba
+g8_formal_run=logs/formal_open_roster_prefix_g8_cpu_20260723_fcce714_r1
+g8_formal_result=USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8
+g8_operational_valid=true
+g8_iid_utility_ci95=[0.9432373046875,0.9705810546875,1.0]
+g8_heldout_utility_ci95=[0.94696044921875,0.9669189453125,1.0]
+g8_moderate_utility_ci95=[0.93212890625,0.9544278971354166,0.99896484375]
+g8_far_utility_ci95=[0.9302978515625,0.9531218259637414,0.9987087396099744]
+g8_joint_utility_ci95=[0.92999267578125,0.9534098307291666,1.0]
+g8_joint_min_replicate_mean=0.92999267578125
+g8_joint_stochastic_mean=0.8994220951905175
+g8_joint_gain_ci95=[0.17071761544202624,0.44298910884533904,0.6406480184358148]
+g8_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_PREFIX_NORMALIZED_OPEN_ROSTER_G8_FORMAL_RESULT.md
+g8_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
+g9_candidate_question=zero_training_high_frequency_membership_churn_and_load_proximity
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -283,6 +298,11 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   the G5 embedding sum and log-count coordinate but feeds action-prefix
   fractions to the actor. Its focused and shared regressions plus bounded
   nonformal full path are accepted; iteration-9 formal execution is next.
+- Formal G8 now closes as `USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8`. All five
+  deterministic CI95 lower bounds exceed `0.929`; the minimum joint replicate
+  is `0.92999` and stochastic joint utility is `0.89942`. This is the current
+  usable N<=40 algorithm test version. The next independent question is
+  repeated membership churn, not another scale increase.
 
 ## Runtime and protected semantics
 

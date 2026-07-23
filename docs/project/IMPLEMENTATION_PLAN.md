@@ -6,12 +6,12 @@
 
 ```text
 active_implementation=PREFIX_NORMALIZED_OPEN_ROSTER_G8
-implementation_status=PM_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8
 design=docs/research/designs/PREFIX_NORMALIZED_OPEN_ROSTER_G8.md
 backend=cpu
 torch_threads=1
 formal_iteration=9
-chain_iterations_remaining_before_run=9
+chain_iterations_remaining_after_run=8
 ```
 
 ## Goal
@@ -61,3 +61,14 @@ prefix-only normalization by a `0.0563965` minimum-domain margin.
 After exact-path Git integration, assign one fresh formal
 `train -> evaluate -> analyze` pipeline to the fixed Luna-low operator. A valid
 result consumes iteration 9 and leaves eight authorized iterations.
+
+## Formal closure and successor
+
+Source `fcce714c296c55f3dcb5a0c0ee11090b393c26ba` completes all 33 cells and
+returns `USABLE_PREFIX_NORMALIZED_OPEN_ROSTER_G8`. The lowest deterministic
+domain LCB is `0.9299927`, evaluation model drift is zero and joint learned-gain
+LCB is `0.1707176`. G8 is closed without rerun or tuning.
+
+The next active boundary is zero-compute
+`HIGH_FREQUENCY_ROSTER_CHURN_G9_DERIVATION`; this G8 plan does not freeze its
+event schedule or formal gates.
