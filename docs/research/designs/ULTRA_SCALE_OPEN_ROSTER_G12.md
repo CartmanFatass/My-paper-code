@@ -1,7 +1,8 @@
 # Ultra-scale open-roster G12
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 13 ready.
+Status: formal iteration 13 closed as
+`ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12`; no rerun, tuning, threshold change or
+relabeling is admissible.
 
 ## Frozen policy and source semantics
 
@@ -108,3 +109,21 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_ULTRA_SCALE_OPEN_ROSTER_G12` and consumes no
 iteration. Nonformal evidence returns
 `NONFORMAL_ULTRA_SCALE_G12_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `21046fcf9a67cd7503266284c02896ae85dafd62`
+completed at `logs/formal_ultra_scale_g12_cpu_20260723_21046fc_r1`.
+
+```text
+branch=ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12
+operational_valid=true
+edge_ultra_scale_deterministic_utility_ci95=[0.9251708984375,0.9513818884408604,0.9996534778225806]
+far_ultra_scale_deterministic_utility_ci95=[0.923095703125,0.949975157620614,0.9987291837993421]
+mixed_churn_deterministic_utility_ci95=[0.927001953125,0.952321846707433,0.999787805747299]
+mixed_churn_min_replicate_mean=0.927001953125
+mixed_churn_stochastic_mean=0.8973560290001418
+```
+
+This closes the registered zero-training N<=80 question. It does not establish
+arbitrary scale or robustness to an episode-random membership process.

@@ -50,7 +50,13 @@ the Project Manager-accepted CDC state.
   may still lose allocation quality when active count exceeds 40.
 - Separating evidence: G12 now freezes the G8 finals and crosses the observed
   N=40 boundary at maxima 48, 64 and 80 without retraining, threshold changes
-  or task-semantic changes; its formal result is pending.
+  or task-semantic changes. Formal deterministic LCBs are `0.9251709`,
+  `0.9230957` and `0.9270020`, and N=80 stochastic mean is `0.8973560`.
+- Strongest remaining counterexample: each registered domain still uses one
+  hand-authored membership schedule, so process-level schedule memorization is
+  not excluded.
+- Separating evidence: draw valid event time, type, magnitude and active-count
+  trajectories independently per evaluation episode under frozen checkpoints.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

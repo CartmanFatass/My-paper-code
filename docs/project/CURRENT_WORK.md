@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=SLOT_LAYOUT_INVARIANCE_G11_FORMAL_ITERATION_12
-active_assignment_id=ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_ITERATION_13
-next_boundary=ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_ITERATION_13
+last_completed_assignment_id=ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_ITERATION_13
+active_assignment_id=RANDOMIZED_ROSTER_PROCESS_G13_DERIVATION
+next_boundary=RANDOMIZED_ROSTER_PROCESS_G13_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=5
-conclusion_bearing_iterations_consumed=12
-implementation_status=G12_PRELAUNCH_ACCEPTED
+iterations_remaining=4
+conclusion_bearing_iterations_consumed=13
+implementation_status=G12_CLOSED_ROBUST_N80
 nonformal_compute_status=g12_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g12_prelaunch_accepted_ready_for_fixed_operator
+formal_compute_status=g12_complete_g13_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_12_complete
-latest_iteration_report=docs/report/ITERATION_12.md
+iteration_report_status=iterations_1_to_13_complete
+latest_iteration_report=docs/report/ITERATION_13.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -325,6 +325,17 @@ g12_nonformal_checkpoint_copy_maximum_difference=0.0
 g12_nonformal_model_state_unchanged_exact=true
 g12_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_ULTRA_SCALE_OPEN_ROSTER_G12_PRELAUNCH.md
 g12_review_status=no_new_review_no_anomaly
+g12_formal_source_commit=21046fcf9a67cd7503266284c02896ae85dafd62
+g12_formal_run=logs/formal_ultra_scale_g12_cpu_20260723_21046fc_r1
+g12_formal_result=ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12
+g12_operational_valid=true
+g12_edge_n48_utility_ci95=[0.9251708984375,0.9513818884408604,0.9996534778225806]
+g12_far_n64_utility_ci95=[0.923095703125,0.949975157620614,0.9987291837993421]
+g12_ultra_n80_utility_ci95=[0.927001953125,0.952321846707433,0.999787805747299]
+g12_ultra_min_replicate_mean=0.927001953125
+g12_ultra_stochastic_mean=0.8973560290001418
+g12_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_RESULT.md
+g12_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -416,6 +427,10 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   utility mismatch against dense-48; the common deterministic LCB is
   `0.92529`. The nearest remaining dynamic-count question is transport above
   N=40, not a slot-layout repair.
+- Formal G12 closes as `ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12`. The frozen G8
+  policy passes N=48, 64 and 80 profiles; all deterministic LCBs exceed 0.923,
+  the N=80 minimum replicate mean is 0.9270 and stochastic mean is 0.8974. The
+  nearest remaining counterexample is process-level schedule memorization.
 
 ## Runtime and protected semantics
 

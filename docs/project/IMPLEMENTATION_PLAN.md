@@ -6,12 +6,12 @@
 
 ```text
 active_implementation=ULTRA_SCALE_OPEN_ROSTER_G12
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_ROBUST_ULTRA_SCALE
 design=docs/research/designs/ULTRA_SCALE_OPEN_ROSTER_G12.md
 backend=cpu
 torch_threads=1
 formal_iteration=13
-chain_iterations_remaining_before_run=5
+chain_iterations_remaining_after_run=4
 ```
 
 ## Goal
@@ -55,8 +55,10 @@ cells, 24 utility values, zero optimizer steps, exact checkpoint copy, immutable
 model state and all source/lifecycle controls true. Nonformal evidence is not a
 scientific result.
 
-No additional review is selected because the new code is a thin profile and
+No additional review was selected because the new code is a thin profile and
 contract specialization over the already accepted frozen-checkpoint core, and
-focused evidence found no anomaly. Integrate, launch the exact formal commands
-from the prelaunch note through the fixed operator, then independently close
-the first-match branch.
+focused evidence found no anomaly. The exact formal run closes as
+`ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12`; all three deterministic LCBs exceed 0.923,
+the N=80 minimum replicate mean is 0.9270 and stochastic mean is 0.8974.
+Iteration 13 is closed with four iterations remaining. The next active boundary
+is `RANDOMIZED_ROSTER_PROCESS_G13`.
