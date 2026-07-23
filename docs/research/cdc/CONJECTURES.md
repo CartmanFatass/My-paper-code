@@ -48,8 +48,9 @@ the Project Manager-accepted CDC state.
   `[0.9252930, 0.9513707, 0.9991316]`; stochastic mean is `0.8969246`.
 - Strongest remaining counterexample: the same slot-invariant representation
   may still lose allocation quality when active count exceeds 40.
-- Separating evidence: freeze the G8 finals and cross the observed N=40 boundary
-  without retraining, threshold changes or task-semantic changes.
+- Separating evidence: G12 now freezes the G8 finals and crosses the observed
+  N=40 boundary at maxima 48, 64 and 80 without retraining, threshold changes
+  or task-semantic changes; its formal result is pending.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

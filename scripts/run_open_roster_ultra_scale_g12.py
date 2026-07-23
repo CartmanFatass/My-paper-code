@@ -1,4 +1,4 @@
-"""Configure the frozen-G8 evaluation core for scale-by-churn G10."""
+"""Configure the frozen-G8 evaluation core for N=48--80 G12."""
 
 from __future__ import annotations
 
@@ -16,30 +16,30 @@ from ha_ctse_process.open_roster_high_churn_g9 import (
     expected_roster_schedule,
     high_churn_lifecycle_contract_valid,
 )
-from ha_ctse_process.open_roster_scale_churn_g10 import (
+from ha_ctse_process.open_roster_ultra_scale_g12 import (
     DOMAIN_PROFILES,
     LEDGER_FACTORIES,
 )
 from scripts import run_open_roster_high_churn_g9 as core
 
 
-ALGORITHM_ID = "SCALE_CHURN_COMPOSITION_G10"
-AUTHORIZATION_TOKEN = "AUTHORIZE_SCALE_CHURN_COMPOSITION_G10_FORMAL_CPU_V1"
-INVALID_BRANCH = "INVALID_SCALE_CHURN_COMPOSITION_G10"
-NONFORMAL_BRANCH = "NONFORMAL_SCALE_CHURN_G10_EXERCISE_COMPLETE"
+ALGORITHM_ID = "ULTRA_SCALE_OPEN_ROSTER_G12"
+AUTHORIZATION_TOKEN = "AUTHORIZE_ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_ULTRA_SCALE_OPEN_ROSTER_G12"
+NONFORMAL_BRANCH = "NONFORMAL_ULTRA_SCALE_G12_EXERCISE_COMPLETE"
 FORMAL_REPLICATES = core.FORMAL_REPLICATES
-FORMAL_EVAL_EPISODES = core.FORMAL_EVAL_EPISODES
+FORMAL_EVAL_EPISODES = 64
 FORMAL_BOOTSTRAP_REPETITIONS = core.FORMAL_BOOTSTRAP_REPETITIONS
 DOMAIN_LEDGER_SEEDS = {
-    "moderate_scale_churn": 2_381_000,
-    "far_scale_churn": 2_381_100,
-    "mixed_churn": 2_381_200,
+    "edge_ultra_scale": 3_081_000,
+    "far_ultra_scale": 3_081_100,
+    "mixed_churn": 3_081_200,
 }
-ACTION_SEED_BASE = 2_481_000
-BOOTSTRAP_SEED = 2_581_010
+ACTION_SEED_BASE = 3_181_000
+BOOTSTRAP_SEED = 3_281_012
 DOMAIN_FLOORS = {
-    "moderate_scale_churn": 0.90,
-    "far_scale_churn": 0.90,
+    "edge_ultra_scale": 0.90,
+    "far_ultra_scale": 0.90,
     "mixed_churn": 0.90,
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
@@ -49,28 +49,28 @@ DEFAULT_G8_RUN_ROOT = core.DEFAULT_G8_RUN_ROOT
 
 def select_result_branch(metrics: dict[str, object]) -> str:
     if (
-        float(metrics["moderate_scale_churn_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["moderate_scale_churn"]
+        float(metrics["edge_ultra_scale_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["edge_ultra_scale"]
     ):
-        return "NO_MODERATE_SCALE_CHURN_ACCESS_G10"
+        return "NO_EDGE_SCALE_ACCESS_G12"
     if (
-        float(metrics["far_scale_churn_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["far_scale_churn"]
+        float(metrics["far_ultra_scale_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["far_ultra_scale"]
     ):
-        return "NO_FAR_SCALE_CHURN_ACCESS_G10"
+        return "NO_FAR_SCALE_ACCESS_G12"
     if (
         float(metrics["mixed_churn_deterministic_utility_ci95"][0])
         < DOMAIN_FLOORS["mixed_churn"]
     ):
-        return "NO_MIXED_SCALE_CHURN_ACCESS_G10"
+        return "NO_ULTRA_SCALE_ACCESS_G12"
     if (
         float(metrics["mixed_churn_min_replicate_mean"])
         < MINIMUM_MIXED_REPLICATE_FLOOR
         or float(metrics["mixed_churn_stochastic_mean"])
         < MIXED_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_SCALE_CHURN_COMPOSITION_G10"
-    return "ROBUST_SCALE_CHURN_COMPOSITION_G10"
+        return "UNSTABLE_ULTRA_SCALE_G12"
+    return "ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12"
 
 
 def _activate_contract() -> None:
@@ -78,6 +78,7 @@ def _activate_contract() -> None:
     core.AUTHORIZATION_TOKEN = AUTHORIZATION_TOKEN
     core.INVALID_BRANCH = INVALID_BRANCH
     core.NONFORMAL_BRANCH = NONFORMAL_BRANCH
+    core.FORMAL_EVAL_EPISODES = FORMAL_EVAL_EPISODES
     core.DOMAIN_PROFILES = DOMAIN_PROFILES
     core.LEDGER_FACTORIES = LEDGER_FACTORIES
     core.HighChurnEnv = HighChurnEnv

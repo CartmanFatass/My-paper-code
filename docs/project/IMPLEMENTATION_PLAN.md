@@ -1,63 +1,62 @@
-# Slot-layout invariance G11 implementation plan
+# Ultra-scale open-roster G12 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution, compatibility work and workflow hashes are
 > disabled.
 
 ```text
-active_implementation=SLOT_LAYOUT_INVARIANCE_G11
-implementation_status=FORMAL_CLOSED_SLOT_LAYOUT_INVARIANT
-design=docs/research/designs/SLOT_LAYOUT_INVARIANCE_G11.md
+active_implementation=ULTRA_SCALE_OPEN_ROSTER_G12
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+design=docs/research/designs/ULTRA_SCALE_OPEN_ROSTER_G12.md
 backend=cpu
 torch_threads=1
-formal_iteration=12
-chain_iterations_remaining_after_run=5
+formal_iteration=13
+chain_iterations_remaining_before_run=5
 ```
 
 ## Goal
 
-Separate true active-set behavior from dependence on dense lifecycle keys or a
-nearby fixed padding capacity, using paired isomorphic episodes at N<=40.
+Determine whether the same frozen prefix-normalized G8 policy remains usable
+when active roster size crosses the N=40 evidence boundary and reaches 48, 64
+and 80 under the already established eight-edit churn mechanics.
 
-## Task 1 - Build exact layout isomorphisms
+## Task 1 - Define above-range profiles
 
-Map the G10 oscillating logical ledger into dense, reversed, sparse-96 and
-affine-scattered-128 layouts. Remap every membership key and every priority
-column; provide the same transform for stochastic uniform tables.
+Use capacities 64, 80 and 96 with maxima 48, 64 and 80. Retain the horizon,
+wave source, membership-event transaction semantics and lifecycle ownership.
+Each profile must be transition-valid and constructively attain utility one.
 
-Focused proof: mappings are injective and in range; wave arrivals, logical
-priority columns, roster schedules, demand, constructive utility and lifecycle
-state are exact in all layouts.
+Focused proof: exact count schedules, eight events, expected/actual wave demand,
+finite observations, lifecycle freeze/restore and constructive outcomes.
 
-## Task 2 - Pair frozen-checkpoint evaluations
+## Task 2 - Pair with frozen G8 finals
 
-Import the exact three G8 finals with zero optimizer steps. For each replicate,
-evaluate all four layouts under deterministic and matched-stochastic modes.
-Record strict episode/profile inventories and immutable model state.
+Import the exact three G8 terminal checkpoints with zero optimizer steps. Run
+all three domains under deterministic and stochastic actions without modifying
+policy state. Preserve the 128-episode G8 provenance while using 64 episodes per
+new G12 cell.
 
-The shared frozen-checkpoint validator now distinguishes the source G8
-128-episode provenance from a successor's own evaluation count. This is a
-validator field separation only; G8 source evidence is unchanged.
+Focused proof: checkpoint inventory, copy difference zero, immutable model,
+complete 18-cell inventory and exact serialized arrays.
 
-## Task 3 - Freeze paired outcomes
+## Task 3 - Freeze conclusion semantics
 
-Count an episode mismatch when any persistent, short or utility value differs
-from its dense pair. Require zero mismatches per transformed layout and retain
-the absolute access/stability floors from the design. Threshold equality passes
-and the immediately lower value fails.
+Keep the absolute deterministic floor 0.90, minimum ultra replicate floor 0.85
+and ultra stochastic floor 0.80. Apply the edge -> far -> ultra -> stability ->
+success first-match order. Equality passes; the immediately lower float fails.
+Formal token, counts, source commit and CPU runtime fail closed.
 
-## Acceptance and formal launch
+## Acceptance and launch
 
-The G11 focused suite passes `6/6`; G11 plus shared G5 regression passes
-`11/11`. The official bounded nonformal full path at
-`logs/nonformal_slot_layout_g11_20260723_pm2` is operationally valid. It records
-zero optimizer steps, eight immutable cells, exact source controls and zero
-paired mismatch for every transformed layout.
+The G12 focused suite passes 5/5 and the G12 plus shared G5 suite passes 10/10.
+The official bounded nonformal pipeline at
+`logs/nonformal_ultra_scale_g12_20260723_pm1` is operationally valid with six
+cells, 24 utility values, zero optimizer steps, exact checkpoint copy, immutable
+model state and all source/lifecycle controls true. Nonformal evidence is not a
+scientific result.
 
-No additional advisory review was triggered. The exact formal pipeline closed
-as `SLOT_LAYOUT_INVARIANT_G11`: all three transformed layouts have zero paired
-outcome mismatches, the deterministic LCB is `0.92529296875`, the minimum
-layout/replicate mean is `0.92529296875`, and stochastic mean is
-`0.8969245793269232`. Iteration 12 is closed and five authorized iterations
-remain. The next active implementation boundary is the zero-training
-`ULTRA_SCALE_OPEN_ROSTER_G12` derivation.
+No additional review is selected because the new code is a thin profile and
+contract specialization over the already accepted frozen-checkpoint core, and
+focused evidence found no anomaly. Integrate, launch the exact formal commands
+from the prelaunch note through the fixed operator, then independently close
+the first-match branch.
