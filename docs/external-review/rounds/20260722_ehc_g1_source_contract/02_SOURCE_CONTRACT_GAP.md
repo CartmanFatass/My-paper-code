@@ -1,6 +1,9 @@
-# Project Manager source-contract audit
+# Controller source-contract gap
 
-Disposition: `PROTECTED_SCIENTIFIC_SOURCE_CONTRACT_REQUIRED`
+`authority=controller_owned_reviewer_visible_fact`
+
+This reviewer-visible note records repository facts and the exact protected
+choice left open by the accepted predecessor review. It is not scientific authority and does not select an option.
 
 ## Frozen executable skeleton
 
@@ -21,8 +24,8 @@ Disposition: `PROTECTED_SCIENTIFIC_SOURCE_CONTRACT_REQUIRED`
 No accepted input determines the G1 task transition and membership/lifecycle
 distribution, actor/critic observations, external reward and terminal utility,
 train/held-out schedule-roster-duty distributions, absolute access floor,
-source-identifiability floors, formal budget or new seeds. The Project Manager
-is not authorized to select them.
+source-identifiability floors, formal budget or new seeds. These are scientific
+objects and cannot be selected by the Controller or implementation roles.
 
 ## Existing sources
 
@@ -32,7 +35,7 @@ load-bearing there. The noncalendar G0 task and its 0.78 floor are closed and
 cannot be reused as a rescue. Historical source-family ideas were unranked and
 never frozen as an executable benchmark.
 
-## Focused option set
+## Neutral focused option set
 
 - Option A: reuse only accepted clean anonymous membership/lifecycle and
   snapshot infrastructure, with a new temporal-duty task whose unpredictable
@@ -47,7 +50,7 @@ never frozen as an executable benchmark.
 Rejected: unchanged clean carrier, unchanged Stage-B carrier, any G0
 modification/relabel, and any threshold, budget, backend or diagnostic rescue.
 
-Recovery evidence: four bounded audits covered the current Pro raw and control
-plane, existing access-positive sources, historical load-bearing derivations,
-and the separable PM-owned mechanism skeleton. No authoritative unique source
-contract was found.
+Four bounded repository audits covered the current Pro raw and control plane,
+existing access-positive sources, historical load-bearing derivations and the
+separable executable skeleton. No authoritative unique source contract was
+found.

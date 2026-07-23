@@ -17,7 +17,7 @@ protected source-definition gap below.
 - `docs/external-review/rounds/20260722_ehc_formal_result_review/50_DISPOSITION.md`
 - `docs/external-review/rounds/20260722_ehc_g1_source_contract/00_REVIEW_BRIEF.md`
 - `docs/external-review/rounds/20260722_ehc_g1_source_contract/01_SHARED_SOURCE_MANIFEST.md`
-- `docs/external-review/rounds/20260722_ehc_g1_source_contract/10_PM_SOURCE_CONTRACT_AUDIT.md`
+- `docs/external-review/rounds/20260722_ehc_g1_source_contract/02_SOURCE_CONTRACT_GAP.md`
 
 ## Fixed constraints
 

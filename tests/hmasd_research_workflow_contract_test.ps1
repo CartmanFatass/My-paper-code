@@ -101,6 +101,27 @@ foreach ($required in @('Formal iteration-2 compute remains unauthorized',
     'There is no threshold, budget, seed, backend, diagnostic or branch rescue')) {
     if (-not $disposition.Contains($required)) { throw "Disposition authority gap: $required" }
 }
+$g1RoundRoot = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_source_contract'
+$g1Question = Get-Content (Join-Path $g1RoundRoot '20_PRO_OPEN_QUESTION.md') -Raw
+$listedEvidence = [regex]::Matches($g1Question, '(?m)^- `([^`]+)`\s*$')
+foreach ($match in $listedEvidence) {
+    $listedPath = $match.Groups[1].Value
+    if ($listedPath -match '(?i)(^|[/_.-])(pm|project[_ -]?manager|internal[_ -]?manager|manager)([/_.-]|$)') {
+        throw "G1 Pro question exposes internal manager evidence: $listedPath"
+    }
+    if (-not (Test-Path (Join-Path $repo $listedPath) -PathType Leaf)) {
+        throw "G1 Pro question lists missing evidence: $listedPath"
+    }
+}
+if (-not $g1Question.Contains('02_SOURCE_CONTRACT_GAP.md') -or
+    -not (Test-Path (Join-Path $g1RoundRoot '02_SOURCE_CONTRACT_GAP.md') -PathType Leaf)) {
+    throw 'G1 Pro question is missing the Controller-owned source-contract gap'
+}
+$g1Gap = Get-Content (Join-Path $g1RoundRoot '02_SOURCE_CONTRACT_GAP.md') -Raw
+foreach ($required in @('authority=controller_owned_reviewer_visible_fact',
+    'not scientific authority', 'cannot be selected by the Controller or implementation roles')) {
+    if (-not $g1Gap.Contains($required)) { throw "G1 source gap authority missing: $required" }
+}
 if ($current.Contains('iteration 2 is held at the external result-review boundary')) {
     throw 'CURRENT_WORK still holds iteration 2 at the completed review boundary'
 }
