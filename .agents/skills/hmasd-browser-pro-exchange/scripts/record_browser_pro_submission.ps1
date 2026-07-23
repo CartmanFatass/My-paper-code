@@ -81,6 +81,19 @@ function Get-ComposerText {
     if ($values.Count -eq 0) { return '' }
     return ($values -join "`n") + "`n"
 }
+function Get-SubmittedComposerText {
+    param([string]$Snapshot)
+    $composer = Get-ComposerText $Snapshot
+    if ($composer -cne "Follow up`n" -and $composer -cne "Ask ChatGPT`n") {
+        return $composer
+    }
+    foreach ($line in ($Snapshot -split "`n", -1)) {
+        if ($line -cmatch '^\s*-\s+button\s+["'']Send prompt["''](?:\s+\[[^\]]+\])*\s*:?\s*$') {
+            return $composer
+        }
+    }
+    return ''
+}
 function Get-StructuralTurns {
     param([string[]]$Lines)
     $candidates = @()
@@ -97,14 +110,18 @@ function Get-StructuralTurns {
 }
 function Get-UserTurnText {
     param([string[]]$Lines, [int]$Start, [int]$End)
+    $turnIndent = Get-Indent $Lines[$Start]
     $values = @()
     for ($i = $Start + 1; $i -lt $End; $i++) {
         if ($Lines[$i] -match '^\s*-\s+paragraph(?:\s+\[[^\]]+\])?\s*(?::(.*))?\s*$') {
             $scalar = if ($null -eq $Matches[1]) { '' } else { [string]$Matches[1] }
             $values += Convert-ParagraphScalar $scalar
+        } elseif ((Get-Indent $Lines[$i]) -eq $turnIndent -and
+            $Lines[$i] -match '^\s*-\s+text(?:\s+\[[^\]]+\])?\s*:(.*)\s*$') {
+            $values += Convert-ParagraphScalar ([string]$Matches[1])
         }
     }
-    if ($values.Count -eq 0) { throw 'BrowserMCP submitted user turn has no paragraph text' }
+    if ($values.Count -eq 0) { throw 'BrowserMCP submitted user turn has no paragraph or direct text' }
     return $values -join "`n"
 }
 
@@ -141,7 +158,7 @@ try {
         [Convert]::ToBase64String($utf8.GetBytes($expectedComposer))) {
         throw 'BrowserMCP draft composer does not byte-match the deterministic dispatch'
     }
-    if ((Get-ComposerText $submitted).Length -ne 0) {
+    if ((Get-SubmittedComposerText $submitted).Length -ne 0) {
         throw 'BrowserMCP submitted composer is not empty'
     }
 
@@ -153,6 +170,12 @@ try {
     $segmentEnd = $lines.Count
     foreach ($turn in $turns) {
         if ($turn.Index -gt $lastUser) { $segmentEnd = $turn.Index; break }
+    }
+    for ($i = $lastUser + 1; $i -lt $segmentEnd; $i++) {
+        if ($lines[$i] -match '^\s*-\s+textbox\b.*:\s*$') {
+            $segmentEnd = $i
+            break
+        }
     }
     $lastUserText = Get-UserTurnText $lines $lastUser $segmentEnd
     if ([Convert]::ToBase64String($utf8.GetBytes($lastUserText)) -cne

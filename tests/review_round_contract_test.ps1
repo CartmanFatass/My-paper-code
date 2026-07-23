@@ -81,6 +81,8 @@ foreach ($required in @('30-second timeout', '20-second', 'browser_type', 'brows
     'substantive fenced plaintext block', 'live preflight', 'HMASD_BP_D1', '352 UTF-16',
     'fresh BrowserMCP process/extension connection', '-ExpectedStageCommit',
     'complete trusted expected identity tuple', 'mandatory `StageCommit`',
+    'Do not put any triple-backtick sequence or nested fenced block between the response markers.',
+    'plain or indented text',
     'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
     if (-not $exchange.Contains($required)) { throw "Browser exchange missing state-machine rule: $required" }
 }
@@ -89,6 +91,8 @@ foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json', 'HMASD_BROWSER_PRO_QUE
     'record_browser_pro_submission.ps1', 'archive_browser_pro_raw.ps1',
     'requires a live', 'no completion observer', '-ExpectedStageCommit',
     'without receipt compatibility execution', 'mandatory `StageCommit`',
+    'Do not put any triple-backtick sequence or nested fenced block between the response markers.',
+    'plain or indented text',
     'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
     if (-not $reviewRound.Contains($required)) { throw "Review round missing: $required" }
 }
@@ -113,6 +117,7 @@ $evidence = '2222222222222222222222222222222222222222'
 $conversation = 'https://chatgpt.com/c/fixture-conversation'
 $repository = 'fixture-owner/fixture-repo'
 $branch = 'Claude'
+$requiredNoNestedFenceInstruction = 'Do not put any triple-backtick sequence or nested fenced block between the response markers.'
 function Assert-Removed { param([string[]]$Paths, [string]$Label)
     foreach ($path in $Paths) { if (Test-Path -LiteralPath $path) { throw "$Label did not delete accepted snapshot: $path" } }
 }
@@ -123,10 +128,21 @@ try {
     $bodyLines = @(
         'Read the pushed fixture evidence through the GitHub connector.',
         'Return no substantive text outside exactly one fenced text block.',
+        $requiredNoNestedFenceInstruction,
         'The first and last block lines must be the supplied response markers.')
     $body = ($bodyLines -join "`n") + "`n"
     $digest = Get-Sha256 $body
     $marker = "HMASD_BROWSER_PRO_QUESTION_V1 round=$roundId body_sha256=$digest"
+    Write-Utf8 (Join-Path $roundPath $questionName) "$marker`n`n$body"
+    $bodyWithoutRequiredInstruction = (@($bodyLines | Where-Object {
+        -not $_.Equals($requiredNoNestedFenceInstruction, [StringComparison]::Ordinal)
+    }) -join "`n") + "`n"
+    $digestWithoutRequiredInstruction = Get-Sha256 $bodyWithoutRequiredInstruction
+    $markerWithoutRequiredInstruction = "HMASD_BROWSER_PRO_QUESTION_V1 round=$roundId body_sha256=$digestWithoutRequiredInstruction"
+    Write-Utf8 (Join-Path $roundPath $questionName) "$markerWithoutRequiredInstruction`n`n$bodyWithoutRequiredInstruction"
+    Assert-Failure { & $validator -RoundPath $roundRelative -QuestionPath $questionName `
+        -ReceiptPath $receiptName -RawPath $rawName -RepoRoot $fixtureRepo } `
+        'exact required no-nested-fence instruction' 'Digest-correct question missing required no-nested-fence instruction'
     Write-Utf8 (Join-Path $roundPath $questionName) "$marker`n`n$body"
     $rendered = (& $renderer -RoundPath $roundRelative -QuestionPath $questionName `
         -ReceiptPath $receiptName -RawPath $rawName -StageCommit $stage -EvidenceCommit $evidence `
@@ -145,11 +161,27 @@ try {
         $scalar = $value | ConvertTo-Json -Compress
         Write-Utf8 $Path "- main [ref=draft]:`n  - textbox `"Message ChatGPT`" [ref=composer]:`n    - paragraph: $scalar`n"
     }
-    function New-SubmittedSnapshot { param([string]$Path, [bool]$Stale = $false)
+    function New-SubmittedSnapshot {
+        param(
+            [string]$Path,
+            [bool]$Stale = $false,
+            [string]$ComposerText = '',
+            [bool]$SendPrompt = $false,
+            [bool]$DirectText = $false)
+        $userTurn = if ($DirectText) {
+            "- main [ref=submitted]:`n  - heading `"You said:`" [level=4] [ref=user-heading]`n  - text: $dispatch"
+        } else {
+            "- main [ref=submitted]:`n  - article [ref=user]:`n    - heading `"You said:`"`n    - paragraph: $dispatchScalar"
+        }
         $later = if ($Stale) {
             "`n  - article [ref=later]:`n    - heading `"You said:`"`n    - paragraph: Later unrelated question"
         } else { '' }
-        Write-Utf8 $Path "- main [ref=submitted]:`n  - article [ref=user]:`n    - heading `"You said:`"`n    - paragraph: $dispatchScalar$later`n  - textbox `"Message ChatGPT`" [ref=composer]:`n"
+        $composerParagraph = if ($ComposerText.Length -gt 0) {
+            $composerScalar = $ComposerText | ConvertTo-Json -Compress
+            "`n    - paragraph: $composerScalar"
+        } else { '' }
+        $sendButton = if ($SendPrompt) { "`n  - button `"Send prompt`" [ref=send]" } else { '' }
+        Write-Utf8 $Path "$userTurn$later`n  - textbox `"Message ChatGPT`" [ref=composer]:$composerParagraph$sendButton`n"
     }
     function Invoke-Recorder { param([string]$Draft, [string]$Submitted)
         & $recorder -RoundPath $roundRelative -QuestionPath $questionName -ReceiptPath $receiptName `
@@ -196,10 +228,17 @@ try {
         -SnapshotPaths @($repoDraft,$safeSubmitted) } 'beneath RepoRoot' 'Repository snapshot privacy'
     Remove-Item $repoDraft,$safeSubmitted -Force
 
+    $draft = Join-Path $captureRoot 'draft-literal-follow-up.yml'
+    $submitted = Join-Path $captureRoot 'submitted-literal-follow-up.yml'
+    New-DraftSnapshot $draft
+    New-SubmittedSnapshot -Path $submitted -ComposerText 'Follow up' -SendPrompt $true
+    Assert-Failure { Invoke-Recorder $draft $submitted } 'submitted composer is not empty' 'Literal Follow up draft'
+    Assert-Removed @($draft,$submitted) 'Literal Follow up draft'
+
     $draft = Join-Path $captureRoot 'draft-success.yml'
     $submitted = Join-Path $captureRoot 'submitted-success.yml'
     New-DraftSnapshot $draft
-    New-SubmittedSnapshot $submitted
+    New-SubmittedSnapshot -Path $submitted -ComposerText 'Follow up' -DirectText $true
     $recorded = (Invoke-Recorder $draft $submitted) | ConvertFrom-Json
     Assert-Removed @($draft,$submitted) 'Successful recorder'
     if ($recorded.status -ne 'SUBMISSION_CONFIRMED' -or $recorded.question_sha256 -ne $digest -or

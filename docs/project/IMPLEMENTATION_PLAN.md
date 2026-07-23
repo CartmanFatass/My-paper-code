@@ -336,6 +336,15 @@ the canonical receipt path so reparse ancestors are rejected. Retain this
 verified handle through the existing action. Add deterministic junction,
 delete/rename denial and exception-release regressions.
 
+The first live response exposed a separate envelope defect: the question
+required one outer fenced `text` block but did not prohibit a nested
+triple-backtick fence. Pro used an inner schema fence, producing multiple
+rendered substantive nodes; the archiver correctly failed closed. Require one
+exact no-nested-fence instruction line in every canonical question, validate it
+before `READY_TO_SUBMIT`, and reissue the scientific content through a distinct
+focused recovery round. Never weaken the raw parser or mutate the first
+round's immutable receipt.
+
 Update the BrowserMCP exchange Skill, review-round Skill, dispatch role
 registry, conversation registry and focused contract tests atomically. Preserve
 the pinned server, registered conversation, Controller ownership, live
@@ -350,6 +359,9 @@ closed; receipt bytes remain locked and digest-stable through raw publication;
 final and ancestor reparse paths are rejected from the held-handle identity;
 and all focused BrowserMCP, dispatch-topology and research-workflow contract
 checks pass.
+Canonical questions that omit the exact no-nested-fence instruction fail before
+submission, while compliant questions retain the existing restart-safe state
+machine and stable-response parser.
 
 ## Bounded-message package acceptance
 

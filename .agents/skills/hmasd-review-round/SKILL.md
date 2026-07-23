@@ -77,6 +77,10 @@ Every future question's first line is exactly
 followed by one blank line and a nonempty body. Compute the digest over the
 UTF-8/no-BOM bytes of that remaining body after CRLF/CR normalization to LF,
 preserving its trailing LF.
+Every canonical V1 question body must contain this exact case-sensitive
+instruction as its own line:
+
+    Do not put any triple-backtick sequence or nested fenced block between the response markers.
 
 Every body must instruct Pro to put its complete substantive answer in exactly
 one fenced `text` block and put no substantive response outside it. The block
@@ -87,8 +91,12 @@ HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN round=<round> question_sha256=<digest>
 HMASD_BROWSER_PRO_RESPONSE_V1_END round=<round> question_sha256=<digest>
 ```
 
-The answer belongs strictly between those markers. The scientific question asks
-for plural live conjectures and scopes; derived intervention, natural, and
+The answer belongs strictly between those markers. Any schemas or examples
+requested inside that one outer response block must use plain or indented text,
+never another fenced block. No triple-backtick sequence may occur between the
+response markers.
+
+The scientific question asks for plural live conjectures and scopes; derived intervention, natural, and
 held-out consequences; concrete counterexamples and retained lemmas; the
 smallest refuted unit; one scheduled action selected by information gain, cost,
 and reversibility; evidence semantics to freeze; reactivation conditions for

@@ -1,0 +1,13 @@
+{
+    "schema":  "hmasd.browser_pro_submission.v2",
+    "status":  "SUBMISSION_CONFIRMED",
+    "round":  "20260723_causal_audit_quota_shortfall_semantics",
+    "question_sha256":  "0988a600a4f2e3da450f7cb2b91bf182b0e42a9e3717be4c98d485084e0efcb0",
+    "dispatch_sha256":  "cc3be42a4550daa543ad943daa2be41a79b74c82b1017016df4a49b2336c00b0",
+    "stage_commit":  "0eb29c108be054fc060e6f0e97e42b3d80c00e40",
+    "evidence_commit":  "240b2065a83fad6844d15f18715c70c5dd9e3215",
+    "repository":  "CartmanFatass/My-paper-code",
+    "review_branch":  "Claude",
+    "conversation_url":  "https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207",
+    "expected_model":  "Pro"
+}

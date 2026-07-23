@@ -92,9 +92,14 @@ HMASD_BROWSER_PRO_QUESTION_V1 round=<round> body_sha256=<64 lowercase hex>
 ```
 
 The digest is over the UTF-8/no-BOM bytes of the remaining nonempty body after
-CRLF and CR normalization to LF, preserving the body's trailing LF. The body
-must instruct Pro to emit no substantive response outside exactly one fenced
-`text` block. That block's first and last lines must be:
+CRLF and CR normalization to LF, preserving the body's trailing LF. Every
+canonical V1 question body must contain this exact case-sensitive instruction
+as its own line:
+
+    Do not put any triple-backtick sequence or nested fenced block between the response markers.
+
+The body must instruct Pro to emit no substantive response outside exactly one
+fenced `text` block. That block's first and last lines must be:
 
 ```text
 HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN round=<round> question_sha256=<digest>
@@ -103,6 +108,10 @@ HMASD_BROWSER_PRO_RESPONSE_V1_END round=<round> question_sha256=<digest>
 ```
 
 The markers are exact own lines. The response body sits strictly between them.
+Any schemas or examples requested inside that one outer response block must use
+plain or indented text, never another fenced block. No triple-backtick sequence
+may occur between the response markers.
+
 
 ## Restart-safe state machine
 

@@ -43,11 +43,12 @@ $evidence = '2222222222222222222222222222222222222222'
 $repository = 'fixture-owner/fixture-repo'
 $branch = 'Claude'
 $conversation = 'https://chatgpt.com/c/fixture-dispatch'
+$requiredNoNestedFenceInstruction = 'Do not put any triple-backtick sequence or nested fenced block between the response markers.'
 try {
     [IO.Directory]::CreateDirectory($roundPath) | Out-Null
     [IO.Directory]::CreateDirectory($capture) | Out-Null
     Write-Utf8 (Join-Path $roundPath '01_SHARED_SOURCE_MANIFEST.md') "# Fixture manifest`n"
-    $body = ('Long canonical scientific question. ' + ('X' * 4096) + "`n")
+    $body = ('Long canonical scientific question. ' + ('X' * 4096) + "`n$requiredNoNestedFenceInstruction`n")
     $questionSha = Get-Sha256 $utf8.GetBytes($body)
     $questionMarker = "HMASD_BROWSER_PRO_QUESTION_V1 round=$roundId body_sha256=$questionSha"
     $questionText = "$questionMarker`n`n$body"

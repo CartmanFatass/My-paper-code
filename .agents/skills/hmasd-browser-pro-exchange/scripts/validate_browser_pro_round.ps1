@@ -16,6 +16,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $utf8 = [Text.UTF8Encoding]::new($false, $true)
+Set-Variable -Name CanonicalNoNestedFenceInstruction -Option Constant -Value 'Do not put any triple-backtick sequence or nested fenced block between the response markers.'
 $dispatchModule = Join-Path $PSScriptRoot 'browser_pro_dispatch.psm1'
 Import-Module $dispatchModule -Force
 
@@ -159,6 +160,16 @@ if ($markerMatch.Groups[1].Value -cne $roundId) {
 $questionSha256 = Get-Sha256 $utf8.GetBytes($body)
 if ($markerMatch.Groups[2].Value -cne $questionSha256) {
     throw 'Browser Pro question marker body digest mismatch'
+}
+$hasRequiredNoNestedFenceInstruction = $false
+foreach ($line in $body.Split([char]"`n")) {
+    if ($line.Equals($CanonicalNoNestedFenceInstruction, [StringComparison]::Ordinal)) {
+        $hasRequiredNoNestedFenceInstruction = $true
+        break
+    }
+}
+if (-not $hasRequiredNoNestedFenceInstruction) {
+    throw 'Malformed Browser Pro question: missing the exact required no-nested-fence instruction as its own line'
 }
 
 $receiptSha256 = $null
