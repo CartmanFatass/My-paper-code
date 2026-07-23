@@ -7,7 +7,8 @@ the Project Manager-accepted CDC state.
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
 - Status: supported as a robust zero-shot dynamic-roster MVP through N=16 by
-  formal G5/G6; selected for beyond-declared-count refinement.
+  formal G5/G6; exact G5 representation rejected for robust N>16 transport by
+  formal G7; scale-normalized repair selected.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -21,11 +22,14 @@ the Project Manager-accepted CDC state.
   and joint CI95 `[0.9358802, 0.9763486, 0.9999524]` through N=16 with unseen
   event times. R49 independently proves active-only permutation, padding,
   replay and membership mechanics through `N=16`.
-- Strongest remaining counterexample: success stops at the exact declared
-  count-feature limit; active-embedding sums and out-of-range count features may
-  become ill-conditioned above N=16.
-- Separating evidence: keep the successful checkpoints frozen and test bands
-  above N=16 before introducing a count-normalized correction.
+- Formal counterexample: G7 keeps the successful checkpoints frozen but obtains
+  moderate CI95 `[0.8590299, 0.9346962, 0.9864063]`, far CI95
+  `[0.8089696, 0.8922767, 0.9669230]` and joint CI95
+  `[0.8377266, 0.9154998, 0.9789795]`. Persistent duty remains perfect; short
+  allocation degrades across seeds as scale grows.
+- Separating evidence: screen the active-embedding aggregation and bounded
+  count coordinate as components, then train one frozen scale-normalized
+  interface on the unchanged dynamic-roster task.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

@@ -105,3 +105,16 @@ Success supports only the exact range through N=40; it is not arbitrary-N
 proof. Failure does not relabel G5/G6 and cannot be rescued by threshold or
 checkpoint changes. Skill selection, asynchronous skill lifetime, EHC,
 intrinsic reward and comparative advantage remain frozen.
+
+## Formal disposition
+
+The exact CPU one-thread source
+`19ea4d915ee4bdd03e81c913570d66f0ad00974d` is operationally valid and returns
+`NO_MODERATE_BEYOND_COUNT_G7`. Moderate deterministic utility CI95 is
+`[0.8590299, 0.9346962, 0.9864063]`; far is
+`[0.8089696, 0.8922767, 0.9669230]`; joint is
+`[0.8377266, 0.9154998, 0.9789795]`. All models remain bitwise unchanged.
+
+G7 is closed without rerun, tuning or relabeling. The retained G5/G6 success
+through N=16 is unchanged. The next independent boundary is
+`SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION`.

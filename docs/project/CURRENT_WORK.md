@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=OPEN_ROSTER_ZERO_SHOT_SCALE_G6_FORMAL_ITERATION_7
-active_assignment_id=BEYOND_DECLARED_COUNT_G7_PRELAUNCH_GIT_INTEGRATION
-next_boundary=BEYOND_DECLARED_COUNT_G7_FORMAL_ITERATION_8
+last_completed_assignment_id=BEYOND_DECLARED_COUNT_G7_FORMAL_ITERATION_8
+active_assignment_id=SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION
+next_boundary=SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=10
-conclusion_bearing_iterations_consumed=7
-implementation_status=G7_PM_ACCEPTED_FORMAL_READY
+iterations_remaining=9
+conclusion_bearing_iterations_consumed=8
+implementation_status=G7_CLOSED_NO_MODERATE_BEYOND_COUNT
 nonformal_compute_status=g7_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=authorized_after_g7_implementation_git_integration
+formal_compute_status=g7_complete_next_formal_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_7_complete
-latest_iteration_report=docs/report/ITERATION_7.md
+iteration_report_status=iterations_1_to_8_complete
+latest_iteration_report=docs/report/ITERATION_8.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -176,6 +176,18 @@ g7_nonformal_max_count_feature=1.3107280023564027
 g7_nonformal_model_state_unchanged_exact=true
 g7_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_BEYOND_DECLARED_COUNT_G7_PRELAUNCH.md
 g7_review_status=no_new_review_no_anomaly
+g7_formal_source_commit=19ea4d915ee4bdd03e81c913570d66f0ad00974d
+g7_formal_run=logs/formal_beyond_declared_count_g7_cpu_20260723_19ea4d9_r1
+g7_formal_result=NO_MODERATE_BEYOND_COUNT_G7
+g7_operational_valid=true
+g7_moderate_utility_ci95=[0.8590299479166669,0.9346961805555556,0.9864062499999999]
+g7_far_utility_ci95=[0.8089696391464193,0.8922767476555841,0.9669230039162406]
+g7_joint_utility_ci95=[0.8377266256981896,0.9154997773016178,0.9789795147582819]
+g7_joint_min_replicate_mean=0.8377266256981895
+g7_joint_stochastic_mean=0.8873765641551907
+g7_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_BEYOND_DECLARED_COUNT_G7_FORMAL_RESULT.md
+g7_scientific_disposition=closed_failure_no_rerun_tuning_or_relabeling
+g8_candidate_question=scale_normalized_active_context_above_n16
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -238,6 +250,11 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   unseen safe membership-event times and their composition. The remaining
   scale question begins beyond the declared count-feature limit rather than by
   modifying the already successful checkpoint.
+- Formal G7 validly rejects robust zero-training transport beyond that declared
+  range. The moderate deterministic CI95 lower bound is `0.8590299`; replicate
+  1 degrades further as N grows while persistent duty remains perfect and only
+  short allocation falls. G5/G6 remain closed successes. The next correction
+  is a scale-normalized active context, not a threshold or checkpoint rescue.
 
 ## Runtime and protected semantics
 

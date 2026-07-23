@@ -6,14 +6,14 @@
 
 ```text
 active_implementation=BEYOND_DECLARED_COUNT_G7
-implementation_status=PM_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_NO_MODERATE_BEYOND_COUNT_G7
 design=docs/research/designs/BEYOND_DECLARED_COUNT_G7.md
 backend=cpu
 torch_threads=1
 training_operation=none_frozen_g5_checkpoint_import
 active_line_policy=replace_archived_g6_runner_with_g7
 formal_iteration=8
-chain_iterations_remaining_before_run=10
+chain_iterations_remaining_after_run=9
 ```
 
 ## Goal
@@ -68,3 +68,14 @@ suite passes `12/12`, and the nonformal full path at
 valid with zero optimizer steps, exact model immutability and finite count
 features through N=40. Old G6 active files are absent and G7 replacements are
 present. The package is formal-ready after Git integration.
+
+## Formal closure and successor
+
+The exact source `19ea4d915ee4bdd03e81c913570d66f0ad00974d`
+completed all 18 formal cells with zero parameter drift and returned
+`NO_MODERATE_BEYOND_COUNT_G7`. The moderate deterministic CI95 lower bound is
+`0.8590299`, below the frozen `0.90` floor. G7 is closed without rescue.
+
+The active implementation boundary is now zero-compute
+`SCALE_NORMALIZED_OPEN_ROSTER_G8_DERIVATION`. No G8 formal contract or run is
+frozen by this G7 plan.
