@@ -8,14 +8,14 @@ last_nonformal=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26
 last_nonformal_result=NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_PROTOTYPE
+active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g27
-algebra_status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+algebra_status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27.md
 ```
 
@@ -229,3 +229,15 @@ average. Keep state-only critics separate and every residual exact zero.
 Implement one thin optimizer module, rename the active runner/test, and close
 actor inventory, projection algebra, replay/lifecycle and first-match proofs
 before one paired nonformal screen. No formal or UAV run is scheduled.
+
+The G27 implementation is accepted for that screen. The tangent phase owns the
+complete environment-neutral actor and a separate Adam optimizer; the slow
+value and two state-only baselines use their disjoint critic optimizer, while
+the old core critic and delayed residual remain frozen. Six focused tests prove
+the exact inventory, aligned/conflicting projection formula, exact applied
+gradient identity, critic isolation, actor-only movement, zero residual,
+G17/G18 replay and first-match precedence. Together with retained G17/G18/G19
+proofs, 36 tests pass on CPU with one thread. The G26 module, runner, test and
+now-unused routed-hook arguments are removed from the active line. The only
+next action is the integrated paired G27 screen; formal and UAV compute remain
+unscheduled unless its promising branch is selected.
