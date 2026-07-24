@@ -6,12 +6,12 @@
 
 ```text
 active_implementation=RANDOMIZED_ROSTER_PROCESS_G13
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_ROBUST_RANDOM_PROCESS
 design=docs/research/designs/RANDOMIZED_ROSTER_PROCESS_G13.md
 backend=cpu
 torch_threads=1
 formal_iteration=14
-chain_iterations_remaining_before_run=4
+chain_iterations_remaining_after_run=3
 ```
 
 ## Goal
@@ -57,5 +57,7 @@ immutable model state and every source/lifecycle control true.
 
 The first failing probe localized an invalid mid-wave removal support and was
 repaired at the source generator; it neither changed policy nor weakened a
-gate. No further review is selected. Integrate and launch the exact formal
-commands through the fixed operator.
+gate. The exact formal result is `ROBUST_RANDOMIZED_ROSTER_PROCESS_G13`: every
+deterministic LCB exceeds 0.9249, random-ultra minimum replicate mean is 0.9284
+and stochastic mean is 0.8893. Iteration 14 is closed with three iterations
+remaining. The next boundary is `ATOMIC_COHORT_REPLACEMENT_G14`.

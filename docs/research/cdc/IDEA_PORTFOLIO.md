@@ -7,7 +7,7 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-OPEN-ROSTER-DIRECT | usable through N=80 and slot-layout invariant through N=40 | Formal G12 passes frozen-policy N=48/64/80 scale-churn with all deterministic LCBs above `0.923` and N=80 stochastic mean `0.8974`. | Test episode-random membership processes rather than another fixed schedule. |
+| C-OPEN-ROSTER-DIRECT | usable under random roster processes through declared N=80 | Formal G13 passes 144 unique episode processes; all deterministic LCBs exceed `0.9249` and random-ultra stochastic mean is `0.8893`. | Test atomic same-transaction cohort replacement. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
@@ -20,13 +20,13 @@ compute authority.
 ## Scheduled action
 
 ```text
-completed_action=ULTRA_SCALE_OPEN_ROSTER_G12_FORMAL_ITERATION_13
-source_family=RANDOMIZED_ROSTER_PROCESS_G13
-formal_disposition=ROBUST_ULTRA_SCALE_OPEN_ROSTER_G12
-next_action=RANDOMIZED_ROSTER_PROCESS_G13_FORMAL_ITERATION_14
+completed_action=RANDOMIZED_ROSTER_PROCESS_G13_FORMAL_ITERATION_14
+source_family=ATOMIC_COHORT_REPLACEMENT_G14
+formal_disposition=ROBUST_RANDOMIZED_ROSTER_PROCESS_G13
+next_action=ATOMIC_COHORT_REPLACEMENT_G14_DERIVATION
 authorization_status=twelve_iteration_dynamic_roster_grant_active
-conclusion_bearing_iterations_consumed=13
-iterations_remaining=4
+conclusion_bearing_iterations_consumed=14
+iterations_remaining=3
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -38,5 +38,6 @@ G8 screen selects action-prefix fractions, and formal G8 establishes a usable
 algorithm through N=40 without rescuing G7. Formal G9 establishes eight-edit
 churn through N=16, formal G10 establishes their cross-product through N=40,
 and formal G11 shows exact behavioral invariance under three transformed slot
-layouts. Formal G12 extends the same frozen policy through N=80. The next
-bounded question is whether it survives episode-random membership processes.
+layouts. Formal G12 extends the same frozen policy through N=80, and formal G13
+passes episode-random membership processes. The next bounded question is atomic
+same-transaction cohort replacement.

@@ -57,8 +57,13 @@ the Project Manager-accepted CDC state.
   not excluded.
 - Separating evidence: G13 now draws valid event time, type, magnitude, member
   keys and active-count trajectories independently per episode under frozen
-  checkpoints; every source instance is recomputed and its formal result is
-  pending.
+  checkpoints. Formal random-process LCBs are `0.9249674`, `0.9270833` and
+  `0.9283854`; the random-ultra stochastic mean is `0.8892955`.
+- Strongest remaining counterexample: G13 serializes cohort termination and
+  replacement into separate transactions, leaving atomic cold-start roster
+  replacement untested.
+- Separating evidence: terminate and join matched random cohorts in the same
+  transaction while holding active count and task demand fixed.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

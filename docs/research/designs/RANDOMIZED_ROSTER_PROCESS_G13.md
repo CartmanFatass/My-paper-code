@@ -1,7 +1,8 @@
 # Randomized roster-process G13
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 14 ready.
+Status: formal iteration 14 closed as
+`ROBUST_RANDOMIZED_ROSTER_PROCESS_G13`; no rerun, tuning, threshold change or
+relabeling is admissible.
 
 ## Frozen algorithm
 
@@ -89,3 +90,21 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_RANDOMIZED_ROSTER_PROCESS_G13` and consumes
 no iteration. Nonformal evidence returns
 `NONFORMAL_RANDOMIZED_ROSTER_G13_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `e3ffabb5e7d6207546c035552f7ed678af841e17`
+completed at `logs/formal_random_roster_g13_cpu_20260723_e3ffabb_r1`.
+
+```text
+branch=ROBUST_RANDOMIZED_ROSTER_PROCESS_G13
+operational_valid=true
+random_moderate_deterministic_utility_ci95=[0.9249674479166666,0.9501330344342881,0.9994876449695314]
+random_wide_deterministic_utility_ci95=[0.9270833333333334,0.9518953772001645,0.9995663399338266]
+random_ultra_deterministic_utility_ci95=[0.9283854166666666,0.9527839583842549,0.9996279168194316]
+random_ultra_min_replicate_mean=0.9283854166666666
+random_ultra_stochastic_mean=0.8892955279616425
+```
+
+This closes process-level schedule memorization for the registered random
+distribution. Atomic same-transaction cohort replacement remains untested.
