@@ -1,7 +1,7 @@
 # Prefix-contextual residual expressivity G26
 
 ```text
-status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -39,3 +39,18 @@ active implementation of the hook.
    outcomes.
 
 After focused acceptance, run exactly one integrated bounded CPU diagnostic.
+
+## Implementation acceptance
+
+The active source-neutral representation is
+`ha_ctse_process/prefix_contextual_residual_g26.py`. The generic routed hook now
+passes direct actor fields and the current prefix to the active policy; the base
+path ignores them. The diagnostic runner/test are renamed from G25, so no
+duplicate executable line remains.
+
+Nine focused and 30 focused-plus-retained G17/G18/G19 tests pass on the
+registered CPU one-thread runtime. They prove exact zero-output behavior in all
+execution modes, independent sensitivity to direct context and live prefix,
+full routed permutation plus proposal/padding behavior within `1e-7`, inactive exact zero,
+residual-only mutation, bitwise frozen state, exact dataset coverage and
+fail-closed precedence. This accepts only the paired G26 bounded probe.

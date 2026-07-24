@@ -48,11 +48,17 @@ class ResidualContinuousRosterPolicy(ContinuousRosterPolicy):
         candidate: torch.Tensor,
         prefix_fraction: torch.Tensor,
         observation: torch.Tensor,
+        encoded_member: torch.Tensor,
+        context: torch.Tensor,
+        hidden: torch.Tensor,
     ) -> torch.Tensor:
         anchor = super()._action_mean_for_member(
             candidate=candidate,
             prefix_fraction=prefix_fraction,
             observation=observation,
+            encoded_member=encoded_member,
+            context=context,
+            hidden=hidden,
         )
         features = torch.cat(
             (

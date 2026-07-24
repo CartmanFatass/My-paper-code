@@ -102,6 +102,9 @@ class ContinuousRosterPolicy(nn.Module):
         candidate: torch.Tensor,
         prefix_fraction: torch.Tensor,
         observation: torch.Tensor,
+        encoded_member: torch.Tensor,
+        context: torch.Tensor,
+        hidden: torch.Tensor,
     ) -> torch.Tensor:
         """Return one routed member's pre-squash action mean.
 
@@ -212,6 +215,7 @@ class ContinuousRosterPolicy(nn.Module):
                 break
             owner = order[:, position]
             prefix_fraction = prefix_sum / denominator
+            owner_hidden = next_hidden[batch_index, owner]
             candidate = self.actor_rnn(
                 torch.cat(
                     (
@@ -221,12 +225,15 @@ class ContinuousRosterPolicy(nn.Module):
                     ),
                     dim=-1,
                 ),
-                next_hidden[batch_index, owner],
+                owner_hidden,
             )
             mean = self._action_mean_for_member(
                 candidate=candidate,
                 prefix_fraction=prefix_fraction,
                 observation=observations[batch_index, owner],
+                encoded_member=encoded[batch_index, owner],
+                context=context,
+                hidden=owner_hidden,
             )
             distribution = torch.distributions.Normal(mean, std.expand_as(mean))
             if teacher_pre_tanh is not None:

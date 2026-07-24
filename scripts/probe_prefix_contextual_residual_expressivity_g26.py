@@ -1,4 +1,4 @@
-"""Run the diagnostic-only G25 frozen-anchor residual expressivity gate."""
+"""Run the paired G26 prefix-contextual residual expressivity gate."""
 
 from __future__ import annotations
 
@@ -22,6 +22,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
+from ha_ctse_process.prefix_contextual_residual_g26 import (
+    PrefixContextualResidualPolicy,
+)
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
     evaluate_battery_policy,
@@ -31,7 +34,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25"
+ALGORITHM_ID = "PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26"
 MODEL_SEED = 3_619_000
 ACTION_SEED = 3_639_000
 MINIBATCH_SEED = 3_659_000
@@ -45,10 +48,10 @@ GRADIENT_CLIP = 1.0
 ABSOLUTE_MSE_CEILING = 1e-3
 RELATIVE_MSE_CEILING = 0.10
 
-INVALID_BRANCH = "INVALID_FROZEN_ANCHOR_RESIDUAL_EXPRESSIVITY_G25"
-NO_POINTWISE_BRANCH = "NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25"
-NO_CLOSED_LOOP_BRANCH = "NO_CLOSED_LOOP_LOCAL_RESIDUAL_REALIZATION_G25"
-PASS_BRANCH = "PASS_FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25"
+INVALID_BRANCH = "INVALID_PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26"
+NO_POINTWISE_BRANCH = "NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26"
+NO_CLOSED_LOOP_BRANCH = "NO_CLOSED_LOOP_PREFIX_CONTEXTUAL_REALIZATION_G26"
+PASS_BRANCH = "PASS_PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -67,8 +70,8 @@ def _runtime_identity() -> dict[str, Any]:
     }
 
 
-def make_model() -> FastAnchoredResidualPolicy:
-    model = FastAnchoredResidualPolicy(
+def make_model() -> PrefixContextualResidualPolicy:
+    model = PrefixContextualResidualPolicy(
         source.OBSERVATION_DIM,
         source.CRITIC_STATE_DIM,
         member_capacity=source.CAPACITY,
@@ -205,9 +208,9 @@ def fit_residual(
     batch_size: int = FIT_BATCH_SIZE,
 ) -> dict[str, Any]:
     if min(int(steps), int(batch_size)) <= 0:
-        raise ValueError("G25 fit counts must be positive")
+        raise ValueError("G26 fit counts must be positive")
     if model.phase != "delayed":
-        raise RuntimeError("G25 fit requires a frozen delayed phase")
+        raise RuntimeError("G26 fit requires a frozen delayed phase")
     optimizer = residual_optimizer(model)
     owner_exact = optimizer_owns_only_residual(model, optimizer)
     anchor = frozen_state(model)
@@ -307,7 +310,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_probe(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G25 probe requires an integrated source commit")
+        raise ValueError("G26 probe requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     runtime.configure_runtime(MODEL_SEED)
     started = time.perf_counter()

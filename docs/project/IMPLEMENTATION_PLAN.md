@@ -8,14 +8,14 @@ last_nonformal=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25
 last_nonformal_result=NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26_PROTOTYPE
+active_implementation=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26_BOUNDED_PROBE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g26
-algebra_status=DIAGNOSTIC_DESIGN_FROZEN_IMPLEMENTATION_NEXT
+algebra_status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
 screen_contract=docs/research/designs/PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26.md
 ```
 
@@ -198,3 +198,12 @@ gates. Rename the active diagnostic runner/test rather than retain duplicate
 execution lines. Prove zero-output equivalence, live-prefix sensitivity,
 permutation/padding/inactive behavior, residual-only ownership and precedence
 before one paired bounded CPU diagnostic. No PPO or formal run is scheduled.
+
+The G26 prototype is accepted for the paired probe. The source-neutral routed
+head reads direct member/set/hidden fields plus the live prefix, while the base
+hook ignores those extra arguments. Nine focused tests close exact zero-output
+execution, independent context/prefix sensitivity, permutation/padding within
+`1e-7`, inactive exact zero, residual-only mutation, bitwise anchor identity,
+dataset semantics and precedence. With retained G17/G18/G19 proofs, 30 tests
+pass on CPU with one thread. The only next action is the integrated paired G26
+diagnostic; no delayed PPO or formal compute is scheduled.
