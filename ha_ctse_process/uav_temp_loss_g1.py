@@ -875,6 +875,21 @@ class MatchedContinuousRecurrentPolicy(ContinuousRosterPolicy):
         )
         self.routing_mode = routing_mode
 
+    def _routing_order(
+        self, active_mask: torch.Tensor, observations: torch.Tensor
+    ) -> torch.Tensor:
+        if self.routing_mode == PREFIX_NORMALIZED_OPEN_ROSTER:
+            return super()._routing_order(active_mask, observations)
+        physical = torch.arange(
+            self.member_capacity, device=active_mask.device
+        ).expand(active_mask.shape[0], -1)
+        priority = torch.where(
+            active_mask,
+            physical,
+            physical + self.member_capacity,
+        )
+        return torch.argsort(priority, dim=1, stable=True)
+
 
 @dataclass
 class UAVTrajectory:

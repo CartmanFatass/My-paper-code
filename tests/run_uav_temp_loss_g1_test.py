@@ -564,7 +564,7 @@ def test_checkpoint_inventory_and_references_fail_closed(
     shutil.copytree(exercise_root, duplicate)
     manifest = runner._read_json(duplicate / "train_manifest.json")
     manifest["training_results"][1] = dict(manifest["training_results"][0])
-    runner._write_json(duplicate / "train_manifest.json", manifest)
+    runner._write_training_terminal(duplicate, manifest)
     with pytest.raises(ValueError, match="duplicate or misdirected"):
         runner.validate_run_artifacts(duplicate, require_formal=False)
 
@@ -581,7 +581,7 @@ def test_checkpoint_inventory_and_references_fail_closed(
     shutil.copytree(exercise_root, escaping)
     manifest = runner._read_json(escaping / "train_manifest.json")
     manifest["training_results"][0]["checkpoint"] = "../outside.pt"
-    runner._write_json(escaping / "train_manifest.json", manifest)
+    runner._write_training_terminal(escaping, manifest)
     with pytest.raises(ValueError, match="canonical registered path"):
         runner.validate_run_artifacts(escaping, require_formal=False)
 

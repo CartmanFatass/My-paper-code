@@ -316,3 +316,20 @@ decision=KEEP
 
 该证据只验收执行去重，不改变 PPO、梯度、RNG、生命周期、replay tolerance
 或任何科学结果。
+
+## 第五批 Scout 复用收口（2026-07-24）
+
+在 G31 toy 结果准备向 UAV 提升时，三个只读 Scout 复核了 UAV 通信前端、G1
+控制/runner、以及跨 toy/UAV 的训练基础设施。没有发现新的高收益、低语义风险
+复用点：严格 MCS/FDMA SINR 与 relaxed graph capacity 不是同一个物理量，合并会
+改变通信模型；跨 run 的 metric、bootstrap 和 serialization 缓存收益低，却会扩大
+RNG、resume 和失效证明面。它们均不实现。
+
+本轮唯一源码修复是 G1 的 routing 实现：`FIXED_MASK_REC` 原先仅是 metadata，
+与 OPEN 走同一个 anonymous-content order。现在 FIXED 使用 active-first 的物理槽位
+顺序，OPEN 保持原有内容顺序。该项用于保证实验比较真实存在，不宣称性能收益。
+UAV G1 core/runner 共 41 项测试通过。
+
+因此性能优化在当前 profile 证据下收口：继续保留定向 A2A/A2G/G2A 路损快照
+（增量中位改善 `7.554426%`）以及共享 PPO 首次梯度 replay（中位改善
+`20.307434%`）；没有新 profile 前不继续堆叠 cache 或 worker 协议。

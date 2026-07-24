@@ -1,6 +1,6 @@
 # UAV temporary service loss G1
 
-Status: frozen executable definition, implementation complete; prelaunch acceptance pending
+Status: frozen executable definition; prelaunch accepted for a fresh control-first formal run
 
 Scientific authority:
 `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
@@ -244,3 +244,18 @@ formal analyzer. It is operational evidence only.
 Formal authorization token after accepted implementation:
 
 `AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1`
+
+## 2026-07-24 prelaunch closure
+
+The source-control audit found no defect in the frozen ledger, QoS extraction,
+pairing or first-match pruning. It also found that the learned routing labels
+had been metadata-only because both inherited the anonymous-content routing
+order. The executable realization now keeps OPEN on that order and gives FIXED
+an active-first physical-slot order. This makes the registered comparator
+distinct without adding an observation, changing parameters or changing any
+source/result contract.
+
+The complete UAV G1 core/runner proof set passes (`41 passed`) on the registered
+CPU, one-thread runtime. The next action is a fresh formal control-first run.
+G31 UAV adaptation is deferred until this source has a valid registered
+disposition; no learned algorithm may rescue a failed source predicate.

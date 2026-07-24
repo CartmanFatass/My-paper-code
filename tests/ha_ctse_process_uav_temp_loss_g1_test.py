@@ -273,7 +273,7 @@ def test_constructive_static_layout_certifies_representative_s7_s1_qos(seed: int
         env.close()
 
 
-def test_matched_arms_have_exact_parameters_and_current_information():
+def test_matched_arms_have_exact_parameters_and_distinct_frozen_routing():
     torch.manual_seed(23)
     fixed = MatchedContinuousRecurrentPolicy(
         5, 7, hidden_dim=8, routing_mode=FIXED_MASK_REC
@@ -304,8 +304,18 @@ def test_matched_arms_have_exact_parameters_and_current_information():
         hidden=hidden,
         deterministic=True,
     )
-    torch.testing.assert_close(fixed_out.actions, open_out.actions, rtol=0, atol=0)
+    assert not torch.equal(fixed_out.actions, open_out.actions)
     torch.testing.assert_close(fixed_out.value, open_out.value, rtol=0, atol=0)
+    torch.testing.assert_close(
+        fixed_out.likelihood_mask, open_out.likelihood_mask, rtol=0, atol=0
+    )
+
+    fixed_order = fixed._routing_order(active, observations)
+    for row in range(active.shape[0]):
+        expected = torch.nonzero(active[row], as_tuple=False).flatten()
+        torch.testing.assert_close(
+            fixed_order[row, : expected.numel()], expected, rtol=0, atol=0
+        )
 
 
 def test_actor_rows_are_permutation_equivariant_and_hide_inactive_physics():

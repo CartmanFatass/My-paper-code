@@ -1,4 +1,4 @@
-# G31 formal result and UAV promotion plan
+# G31 formal result and UAV source-closure plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -6,18 +6,18 @@
 ```text
 last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=PAIRED_G17_G18_TOY_CLOSED_UAV_PROMOTION_NEXT
-source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=RETURN_TO_GO_DIRECTION_BALANCED_G31
+active_source=UAV_TEMPORARY_SERVICE_LOSS_G1_CONTROL_FIRST
+source_gate=FROZEN_UAV_G1_SOURCE_IDENTIFICATION
+active_implementation=RETURN_TO_GO_DIRECTION_BALANCED_G31_PLUS_UAV_G1_ROUTING_REALIZATION
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=21_complete
 iterations_remaining=6
-formal_compute=complete_no_live_run
+formal_compute=UAV_G1_ITERATION_22_AUTHORIZED_PENDING_INTEGRATED_SOURCE
 algebra_status=FORMAL_USABLE_PAIRED_TOY
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=RETURN_TO_GO_DIRECTION_BALANCED_G31_UAV_PROMOTION_DEFINITION
+next_boundary=UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_SOURCE_CLOSURE_ITERATION_22
 ```
 
 ## Accepted active line
@@ -434,3 +434,16 @@ spike-utility LCB of `0.95969`. Close the paired toy package. The next boundary
 is a proof-sized UAV promotion definition that preserves the exact G31
 environment-neutral credit and direction geometry; no heavy formal UAV run is
 scheduled until its bounded path passes.
+
+The UAV promotion audit selects an earlier prerequisite: close the already
+frozen G1 source predicate before writing a G31-UAV adapter. Read-only Scouts
+found no control-ledger or paired-execution defect, but the representative
+no-reallocation controller leaves at most `0.032166` headroom, well below the
+frozen `0.10` source margin. The learned G1 modes also exposed one operational
+defect: both routing labels used the same anonymous-content order. FIXED now
+uses active-first physical-slot order while OPEN retains anonymous-content
+order; parameters, observations, reward, source, budget, seeds and gates are
+unchanged. Forty-one focused core/runner checks pass. Launch one fresh
+control-first formal iteration 22; if source identification fails, accept the
+registered second branch with zero learned training and do not use G31 to
+rescue it.
