@@ -1,22 +1,22 @@
-# G24 contextual dual-channel residual implementation plan
+# G25 frozen-anchor residual expressivity implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23
+last_nonformal=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24_BOUNDED_SCREEN
+active_implementation=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g24
-algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24.md
+formal_compute=not_scheduled_for_g25
+algebra_status=DIAGNOSTIC_DESIGN_FROZEN_IMPLEMENTATION_NEXT
+screen_contract=docs/research/designs/FROZEN_ANCHOR_RESIDUAL_EXPRESSIVITY_G25.md
 ```
 
 ## Accepted active line
@@ -160,3 +160,19 @@ permutation/padding error at most `1e-7`, inactive exact zero, dual-channel loss
 residual-only Adam, replay and anchor identity. Together with retained proofs,
 37 tests pass on CPU with one thread. The only next action is the integrated
 paired screen.
+
+That screen is now closed as
+`NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24`. It is operationally
+valid and preserves G17, but G18 returns to utility `0.58333`, gain `0.06322`
+and zero spike service. This is a strict regression from G23, so direct
+actor-set contextual widening is retired without rescue.
+
+G25 is a diagnostic-only expressivity gate on the better G23 local residual.
+Reuse the unchanged G18 fast-anchor phase, build the exact 36-row constructive
+dataset, optimize only the local residual for the frozen 200-step active-action
+MSE fit, and separately evaluate deterministic closed-loop realization. Add
+one focused runner test covering dataset semantics, residual-only ownership,
+bitwise anchor preservation and first-match precedence. Remove the closed G24
+module/runner/test and its now-unused generic contextual hook in the same
+accepted implementation boundary. One integrated bounded CPU probe follows;
+no formal iteration or UAV run is scheduled.

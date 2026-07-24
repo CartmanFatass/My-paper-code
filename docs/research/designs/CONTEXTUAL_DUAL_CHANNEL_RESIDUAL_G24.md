@@ -1,7 +1,7 @@
 # Contextual dual-channel residual G24
 
 ```text
-status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -82,3 +82,19 @@ one-thread runtime. They close exact zero-output/common-mode behavior,
 permutation and padding error at most `1e-7`, inactive exact zero, dual-channel
 loss identity, residual-only Adam, replay and bitwise anchor preservation. This
 accepts only the bounded screen, not formal compute or delayed access.
+
+## Bounded screen disposition
+
+The integrated screen is operationally valid with exact anchor and replay,
+finite residual-only updates, maximum channel-loss identity error
+`2.91e-11`, and the G17/G18 source controls closed. G17 remains compatible,
+but G18 reaches only utility `0.58333`, gain `0.06322`, rotating-effort share
+`0.50503`, and spike utility `0.0`. The registered first-match branch is
+`NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24`.
+
+This is a strict regression from G23's local residual (`0.95111` utility and
+`0.85332` spike utility). Direct actor-side set context is therefore not an
+accepted repair under the frozen dual-channel learning rule. G24 is closed
+without threshold, optimizer, budget, seed, or UAV rescue. The next action is
+a diagnostic-only supervised expressivity gate on the better G23 local
+residual, not another representation expansion.
