@@ -8,14 +8,14 @@ last_nonformal=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24_PROTOTYPE
+active_implementation=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g24
-algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24.md
 ```
 
@@ -151,3 +151,12 @@ evaluation remain unchanged with fresh seeds. Reintroduce the proven optional
 step hook, use the injectable anchor core, rename the active module/runner/test,
 and close permutation/padding/inactive plus retained loss/ownership proofs
 before one paired screen.
+
+The G24 prototype is accepted for that screen. The prior proven step-residual
+hook is restored with `None` as the base path; the G24 policy computes an
+unrestricted actor-contextual proposal and masks inactive rows exactly. Seven
+focused tests close zero-output equivalence, common-mode freedom,
+permutation/padding error at most `1e-7`, inactive exact zero, dual-channel loss,
+residual-only Adam, replay and anchor identity. Together with retained proofs,
+37 tests pass on CPU with one thread. The only next action is the integrated
+paired screen.

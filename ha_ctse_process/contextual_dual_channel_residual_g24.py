@@ -1,8 +1,11 @@
-"""Frozen-anchor dual-channel delayed residual for G23."""
+"""Actor-contextual frozen-anchor dual-channel residual for G24."""
 
 from __future__ import annotations
 
+from typing import Any
+
 import torch
+from torch import nn
 from torch.nn import functional as F
 
 from ha_ctse_process.anchored_residual_g19 import (
@@ -15,14 +18,80 @@ from ha_ctse_process.anchored_residual_g19 import (
     replay_errors,
     replay_trajectory,
 )
+from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 
 
-class AnchoredDualChannelResidualPolicy(FastAnchoredResidualPolicy):
-    """Frozen fast actor plus an unrestricted dual-channel residual head."""
+class ContextualResidualContinuousRosterPolicy(ContinuousRosterPolicy):
+    """Base actor plus an unrestricted current-set delayed proposal."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.delayed_residual = nn.Sequential(
+            nn.Linear(
+                3 * self.hidden_dim + self.observation_dim,
+                self.hidden_dim,
+            ),
+            nn.Tanh(),
+            nn.Linear(self.hidden_dim, self.action_dim),
+        )
+        final = self.delayed_residual[-1]
+        assert isinstance(final, nn.Linear)
+        nn.init.zeros_(final.weight)
+        nn.init.zeros_(final.bias)
+        for parameter in self.delayed_residual.parameters():
+            parameter.requires_grad_(False)
+
+    def _step_action_mean_residuals(
+        self,
+        *,
+        encoded: torch.Tensor,
+        context: torch.Tensor,
+        observations: torch.Tensor,
+        active_mask: torch.Tensor,
+        hidden: torch.Tensor,
+    ) -> torch.Tensor:
+        expanded_context = context.unsqueeze(1).expand(
+            -1, self.member_capacity, -1
+        )
+        features = torch.cat(
+            (
+                encoded.detach(),
+                expanded_context.detach(),
+                hidden.detach(),
+                observations.detach(),
+            ),
+            dim=-1,
+        )
+        proposals = self.delayed_residual(features)
+        return proposals * active_mask.to(proposals.dtype).unsqueeze(-1)
 
 
-def optimize_dual_channel_delayed_update(
-    model: AnchoredDualChannelResidualPolicy,
+class ContextualDualChannelResidualPolicy(FastAnchoredResidualPolicy):
+    """Frozen fast actor plus a direct actor-contextual residual head."""
+
+    def __init__(
+        self,
+        observation_dim: int,
+        critic_state_dim: int,
+        *,
+        member_capacity: int,
+        action_dim: int,
+        hidden_dim: int = 32,
+        current_observation_residual: bool = True,
+    ) -> None:
+        super().__init__(
+            observation_dim,
+            critic_state_dim,
+            member_capacity=member_capacity,
+            action_dim=action_dim,
+            hidden_dim=hidden_dim,
+            current_observation_residual=current_observation_residual,
+            policy_type=ContextualResidualContinuousRosterPolicy,
+        )
+
+
+def optimize_contextual_dual_channel_update(
+    model: ContextualDualChannelResidualPolicy,
     residual_optimizer: torch.optim.Optimizer,
     critic_optimizer: torch.optim.Optimizer,
     trajectory: AnchoredRosterTrajectory,
@@ -34,7 +103,7 @@ def optimize_dual_channel_delayed_update(
     """Update only the residual with equal immediate/successor PPO credit."""
 
     if model.phase != "delayed":
-        raise RuntimeError("G23 delayed update requires delayed phase")
+        raise RuntimeError("G24 delayed update requires delayed phase")
     terminals = torch.zeros_like(
         trajectory.rewards, dtype=torch.bool, device=device
     )

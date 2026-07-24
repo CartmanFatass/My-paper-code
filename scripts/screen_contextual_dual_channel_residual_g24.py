@@ -1,4 +1,4 @@
-"""Run the bounded paired G23 anchored dual-channel residual screen."""
+"""Run the bounded paired G24 contextual dual-channel residual screen."""
 
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.dual_channel_residual_g23 import (
-    AnchoredDualChannelResidualPolicy,
-    optimize_dual_channel_delayed_update,
+from ha_ctse_process.contextual_dual_channel_residual_g24 import (
+    ContextualDualChannelResidualPolicy,
+    optimize_contextual_dual_channel_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
@@ -36,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "ANCHORED_DUAL_CHANNEL_RESIDUAL_G23"
+ALGORITHM_ID = "CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24"
 GAMMA = g19.GAMMA
 HIDDEN_DIM = g19.HIDDEN_DIM
 LEARNING_RATE = g19.LEARNING_RATE
@@ -51,20 +51,20 @@ G17_EVAL_EPISODES = g19.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 3_219_000,
-        "ledger": 3_229_000,
-        "action": 3_239_000,
-        "evaluation_ledger": 3_249_000,
-        "evaluation_action": 3_259_000,
+        "model": 3_419_000,
+        "ledger": 3_429_000,
+        "action": 3_439_000,
+        "evaluation_ledger": 3_449_000,
+        "evaluation_action": 3_459_000,
     },
-    "g18": {"model": 3_319_000, "action": 3_339_000},
+    "g18": {"model": 3_519_000, "action": 3_539_000},
 }
 
-INVALID_BRANCH = "INVALID_ANCHORED_DUAL_CHANNEL_RESIDUAL_G23"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_DUAL_CHANNEL_RESIDUAL_G23"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_DUAL_CHANNEL_RESIDUAL_G23"
-PROMISING_BRANCH = "NONFORMAL_ANCHORED_DUAL_CHANNEL_RESIDUAL_PROMISING_G23"
+INVALID_BRANCH = "INVALID_CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_CONTEXTUAL_RESIDUAL_G24"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_CONTEXTUAL_RESIDUAL_G24"
+PROMISING_BRANCH = "NONFORMAL_CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_PROMISING_G24"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -104,7 +104,13 @@ def _configuration() -> dict[str, Any]:
         "delayed_residual_amsgrad": False,
         "critic_optimizer": "adam",
         "delayed_residual_initialization": "exact_zero_output",
-        "delayed_residual_geometry": "unconstrained_pre_squash_mean",
+        "delayed_residual_geometry": "actor_set_contextual_unconstrained_pre_squash_mean",
+        "delayed_residual_inputs": [
+            "member_encoding",
+            "active_set_context",
+            "current_hidden",
+            "current_observation",
+        ],
         "delayed_gradient_rule": "equal_normalized_immediate_successor",
         "immediate_channel_weight": 0.5,
         "successor_channel_weight": 0.5,
@@ -127,12 +133,12 @@ def _dimensions(source: str) -> tuple[int, int, int, int]:
             battery_source.CAPACITY,
             battery_source.ACTION_DIM,
         )
-    raise ValueError(f"unknown G23 source: {source}")
+    raise ValueError(f"unknown G24 source: {source}")
 
 
-def make_model(source: str) -> AnchoredDualChannelResidualPolicy:
+def make_model(source: str) -> ContextualDualChannelResidualPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = _dimensions(source)
-    model = AnchoredDualChannelResidualPolicy(
+    model = ContextualDualChannelResidualPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -146,7 +152,7 @@ def make_model(source: str) -> AnchoredDualChannelResidualPolicy:
 
 
 def make_residual_optimizer(
-    model: AnchoredDualChannelResidualPolicy,
+    model: ContextualDualChannelResidualPolicy,
 ) -> torch.optim.Adam:
     return torch.optim.Adam(
         model.residual_parameters(),
@@ -160,7 +166,7 @@ def make_residual_optimizer(
 
 def _collect(
     source: str,
-    model: AnchoredDualChannelResidualPolicy,
+    model: ContextualDualChannelResidualPolicy,
     *,
     episode_ids: tuple[int, ...],
 ) -> Any:
@@ -186,7 +192,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: AnchoredDualChannelResidualPolicy, domain: str
+    model: ContextualDualChannelResidualPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -210,7 +216,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: AnchoredDualChannelResidualPolicy
+    source: str, model: ContextualDualChannelResidualPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -288,7 +294,7 @@ def _train_source(source: str) -> dict[str, Any]:
         lifecycle_valid = lifecycle_valid and g19._trajectory_contract_valid(
             source, trajectory
         )
-        metrics = optimize_dual_channel_delayed_update(
+        metrics = optimize_contextual_dual_channel_update(
             model,
             residual_optimizer,
             critic_optimizer,
@@ -471,7 +477,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G23 screen requires an integrated source commit")
+        raise ValueError("G24 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()

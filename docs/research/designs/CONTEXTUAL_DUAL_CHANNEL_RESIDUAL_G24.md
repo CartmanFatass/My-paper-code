@@ -1,7 +1,7 @@
 # Contextual dual-channel residual G24
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -56,7 +56,7 @@ First-match outcomes retain the exact G19--G23 thresholds:
 5. `NONFORMAL_CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_PROMISING_G24`.
 
 Operational validity additionally requires residual permutation/padding
-invariance, inactive exact zero, dual-channel loss identity, residual-only
+error at most `1e-7`, inactive exact zero, dual-channel loss identity, residual-only
 ownership, finite updates, exact anchor, replay at most `1e-6` and
 source/lifecycle controls. Only branch 5 licenses formal design; no branch
 supports UAV promotion.
@@ -68,3 +68,17 @@ supports UAV promotion.
 - permutation/padding invariance and inactive exact zero;
 - exact dual-channel composition and residual-only Adam;
 - bitwise anchor, replay/lifecycle/source and precedence retention.
+
+## Implementation acceptance
+
+The active implementation is
+`ha_ctse_process/contextual_dual_channel_residual_g24.py`; the generic hook
+returns `None` for all prior policies. G24 alone supplies one contextual
+proposal tensor per step and masks inactive rows exactly before the base actor
+consumes it.
+
+Seven focused and 37 focused-plus-retained tests pass on the registered CPU
+one-thread runtime. They close exact zero-output/common-mode behavior,
+permutation and padding error at most `1e-7`, inactive exact zero, dual-channel
+loss identity, residual-only Adam, replay and bitwise anchor preservation. This
+accepts only the bounded screen, not formal compute or delayed access.

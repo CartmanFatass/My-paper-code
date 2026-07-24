@@ -1,4 +1,4 @@
-"""Focused acceptance for the G23 anchored dual-channel residual."""
+"""Focused acceptance for the G24 contextual dual-channel residual."""
 
 from __future__ import annotations
 
@@ -16,17 +16,18 @@ from ha_ctse_process.anchored_residual_g19 import (
 )
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from ha_ctse_process.dual_channel_residual_g23 import (
-    AnchoredDualChannelResidualPolicy,
-    optimize_dual_channel_delayed_update,
+from ha_ctse_process.contextual_dual_channel_residual_g24 import (
+    ContextualDualChannelResidualPolicy,
+    ContextualResidualContinuousRosterPolicy,
+    optimize_contextual_dual_channel_update,
 )
-from scripts import screen_anchored_dual_channel_residual_g23 as screen
+from scripts import screen_contextual_dual_channel_residual_g24 as screen
 
 
 def _model(
     observation_dim: int, critic_state_dim: int, capacity: int, action_dim: int
-) -> AnchoredDualChannelResidualPolicy:
-    model = AnchoredDualChannelResidualPolicy(
+) -> ContextualDualChannelResidualPolicy:
+    model = ContextualDualChannelResidualPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -55,7 +56,7 @@ def _assert_step_equal(left: object, right: object) -> None:
 
 
 def _generic_pair() -> tuple[
-    ContinuousRosterPolicy, AnchoredDualChannelResidualPolicy, dict[str, torch.Tensor]
+    ContinuousRosterPolicy, ContextualDualChannelResidualPolicy, dict[str, torch.Tensor]
 ]:
     torch.manual_seed(2120000)
     base = ContinuousRosterPolicy(
@@ -66,7 +67,7 @@ def _generic_pair() -> tuple[
         hidden_dim=8,
         current_observation_residual=True,
     )
-    residual = AnchoredDualChannelResidualPolicy(
+    residual = ContextualDualChannelResidualPolicy(
         5,
         4,
         member_capacity=3,
@@ -140,7 +141,74 @@ def test_residual_retains_active_common_mode_and_inactive_zero() -> None:
     assert bool(torch.all(delta.sum(dim=1) > 0))
 
 
-def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
+def test_contextual_proposal_is_permutation_equivariant_and_padding_independent() -> None:
+    torch.manual_seed(2120003)
+    core = ContextualResidualContinuousRosterPolicy(
+        3,
+        2,
+        member_capacity=3,
+        action_dim=2,
+        hidden_dim=4,
+    )
+    final = core.delayed_residual[-1]
+    assert isinstance(final, torch.nn.Linear)
+    with torch.no_grad():
+        torch.nn.init.normal_(final.weight, std=0.1)
+        torch.nn.init.normal_(final.bias, std=0.1)
+    encoded = torch.randn(2, 3, 4)
+    context = torch.randn(2, 4)
+    observations = torch.randn(2, 3, 3)
+    hidden = torch.randn(2, 3, 4)
+    mask = torch.tensor([[True, True, False], [True, False, True]])
+    direct = core._step_action_mean_residuals(
+        encoded=encoded,
+        context=context,
+        observations=observations,
+        active_mask=mask,
+        hidden=hidden,
+    )
+    permutation = torch.tensor([2, 0, 1])
+    permuted = core._step_action_mean_residuals(
+        encoded=encoded[:, permutation],
+        context=context,
+        observations=observations[:, permutation],
+        active_mask=mask[:, permutation],
+        hidden=hidden[:, permutation],
+    )
+    torch.testing.assert_close(
+        permuted, direct[:, permutation], rtol=0, atol=1e-7
+    )
+
+    padded = ContextualResidualContinuousRosterPolicy(
+        3,
+        2,
+        member_capacity=5,
+        action_dim=2,
+        hidden_dim=4,
+    )
+    padded.delayed_residual.load_state_dict(core.delayed_residual.state_dict())
+    padded_encoded = torch.cat((encoded, torch.randn(2, 2, 4)), dim=1)
+    padded_observations = torch.cat(
+        (observations, torch.randn(2, 2, 3)), dim=1
+    )
+    padded_hidden = torch.cat((hidden, torch.randn(2, 2, 4)), dim=1)
+    padded_mask = torch.cat(
+        (mask, torch.zeros(2, 2, dtype=torch.bool)), dim=1
+    )
+    padded_output = padded._step_action_mean_residuals(
+        encoded=padded_encoded,
+        context=context,
+        observations=padded_observations,
+        active_mask=padded_mask,
+        hidden=padded_hidden,
+    )
+    torch.testing.assert_close(
+        padded_output[:, :3], direct, rtol=0, atol=1e-7
+    )
+    assert torch.count_nonzero(padded_output[:, 3:]) == 0
+
+
+def test_battery_dual_channel_update_keeps_anchor_and_exercises_residual() -> None:
     torch.manual_seed(2120001)
     model = _model(
         battery_source.OBSERVATION_DIM,
@@ -173,7 +241,7 @@ def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
         action_seed=2130002,
         device=torch.device("cpu"),
     )
-    metrics = optimize_dual_channel_delayed_update(
+    metrics = optimize_contextual_dual_channel_update(
         model,
         screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -203,7 +271,7 @@ def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
     )
 
 
-def test_g17_successor_update_replays_and_preserves_anchor() -> None:
+def test_g17_dual_channel_update_replays_and_preserves_anchor() -> None:
     torch.manual_seed(2120002)
     model = _model(
         g17_source.OBSERVATION_DIM,
@@ -246,7 +314,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
         device=torch.device("cpu"),
     )
     delayed = attach_credit_baselines(model, raw, device=torch.device("cpu"))
-    metrics = optimize_dual_channel_delayed_update(
+    metrics = optimize_contextual_dual_channel_update(
         model,
         screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -259,7 +327,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
 
 
-def test_g23_result_precedence_and_configuration_are_frozen() -> None:
+def test_g24_result_precedence_and_configuration_are_frozen() -> None:
     passing = {
         "operational_valid": True,
         "g17_final_iid_utility": 0.93,
@@ -298,7 +366,16 @@ def test_g23_result_precedence_and_configuration_are_frozen() -> None:
     assert configuration["delayed_residual_adam_eps"] == 1e-8
     assert configuration["delayed_residual_weight_decay"] == 0.0
     assert configuration["delayed_residual_amsgrad"] is False
-    assert configuration["delayed_residual_geometry"] == "unconstrained_pre_squash_mean"
+    assert (
+        configuration["delayed_residual_geometry"]
+        == "actor_set_contextual_unconstrained_pre_squash_mean"
+    )
+    assert configuration["delayed_residual_inputs"] == [
+        "member_encoding",
+        "active_set_context",
+        "current_hidden",
+        "current_observation",
+    ]
     assert (
         configuration["delayed_gradient_rule"]
         == "equal_normalized_immediate_successor"
@@ -308,7 +385,7 @@ def test_g23_result_precedence_and_configuration_are_frozen() -> None:
     assert configuration["delayed_residual_entropy_coefficient"] == 0.0
 
 
-def test_g23_adam_owns_only_residual_parameters_with_fresh_state() -> None:
+def test_g24_adam_owns_only_residual_parameters_with_fresh_state() -> None:
     model = _model(
         battery_source.OBSERVATION_DIM,
         battery_source.CRITIC_STATE_DIM,
