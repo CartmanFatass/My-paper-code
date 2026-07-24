@@ -6,12 +6,12 @@ import shutil
 import pytest
 import torch
 
-from scripts import run_direction_balanced_full_actor_g30 as runner
+from scripts import run_return_to_go_direction_balanced_full_actor_g31 as runner
 
 
 @pytest.fixture(scope="module")
 def exercise_root(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    root = tmp_path_factory.mktemp("g30_formal_path") / "exercise"
+    root = tmp_path_factory.mktemp("g31_formal_path") / "exercise"
     runner.train(
         run_root=root,
         source_commit="0" * 40,
@@ -51,13 +51,17 @@ def test_formal_configuration_token_seeds_and_precedence_are_frozen(
     configuration = runner._configuration(formal=True)
     assert configuration["replicates"] == 3
     assert configuration["g17_fast_updates"] == 100
-    assert configuration["g17_direction_updates"] == 100
+    assert configuration["g17_return_to_go_updates"] == 100
     assert configuration["g18_fast_updates"] == 100
-    assert configuration["g18_direction_updates"] == 300
+    assert configuration["g18_return_to_go_updates"] == 300
     assert configuration["eval_episodes"] == 128
     assert configuration["bootstrap_repetitions"] == 10_000
-    assert runner._seeds("g17", 2, formal=True)["model"] == 7_119_002
-    assert runner._seeds("g18", 2, formal=True)["action"] == 7_239_002
+    assert runner._seeds("g17", 2, formal=True)["model"] == 10_119_002
+    assert runner._seeds("g18", 2, formal=True)["action"] == 10_239_002
+    assert configuration["successor_actor_target"] == (
+        "detached_discounted_realized_future_tail_excluding_current"
+    )
+    assert configuration["future_actor_input"] == "none_training_target_only"
 
     passing = _passing_metrics()
     assert runner.select_result_branch(passing) == runner.USABLE_BRANCH
@@ -100,8 +104,40 @@ def test_nonformal_exercise_closes_and_formal_analyzer_rejects(
         row["minimum_actor_optimizer_step_increment"] == 1.0
         for row in training["source_results"]
     )
-    with pytest.raises(ValueError, match="requires formal G30 artifacts"):
+    assert all(
+        row["maximum_return_to_go_target_absolute_value"] > 0.0
+        and row["maximum_terminal_return_to_go_error"] == 0.0
+        for row in training["source_results"]
+    )
+    with pytest.raises(ValueError, match="requires formal G31 artifacts"):
         runner.analyze(run_root=exercise_root, require_formal=True)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    (
+        ("maximum_return_to_go_target_absolute_value", 0.0),
+        ("maximum_terminal_return_to_go_error", 1e-7),
+    ),
+)
+def test_return_to_go_training_telemetry_tamper_fails_closed(
+    exercise_root: Path,
+    tmp_path: Path,
+    field: str,
+    value: float,
+) -> None:
+    tampered = tmp_path / field
+    shutil.copytree(exercise_root, tampered)
+    manifest_path = tampered / "train_manifest.json"
+    manifest = runner._read_json(manifest_path)
+    manifest["source_results"][0][field] = value
+    runner._write_json(manifest_path, manifest)
+
+    result = runner.analyze(run_root=tampered)
+
+    assert result["status"] == "INVALID"
+    assert result["branch"] == runner.INVALID_BRANCH
+    assert "training invariant mismatch" in result["operational_errors"]
 
 
 def test_checkpoint_identity_tamper_fails_closed(

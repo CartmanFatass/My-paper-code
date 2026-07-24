@@ -411,3 +411,10 @@ Freeze a three-replicate formal runner with fresh seeds and the unchanged G30
 budgets, bootstrap, behavioral gates and first-match order. Replace the closed
 G30 formal runner/test in the active line, close a one-update nonformal path
 exercise, then launch conclusion-bearing iteration 21.
+
+The G31 formal runner is PM-accepted without duplicating the closed G30 active
+line. It binds fresh G31 identity, seeds, return-to-go exposure, checkpoints,
+exact evaluation inventory and all inherited first-match gates; it additionally
+fails closed on non-finite/zero future-tail support or any nonzero terminal
+tail. Twelve focused and 60 relevant shared checks pass on CPU with one thread.
+The next action is one integrated nonformal formal-path exercise.

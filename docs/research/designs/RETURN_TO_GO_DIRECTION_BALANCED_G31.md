@@ -1,7 +1,7 @@
 # Return-to-go direction-balanced full actor G31
 
 ```text
-status=BOUNDED_SCREEN_PROMISING_FORMAL_CONTRACT_FROZEN
+status=FORMAL_RUNNER_ACCEPTED_PATH_EXERCISE_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -103,6 +103,13 @@ replicate, phase exposure and configuration. Evaluation closes the exact cell
 inventory and the analyzer recomputes all intervals. A one-update-per-phase
 nonformal exercise must close this path and be rejected by formal-required
 analysis before launch. No G30 checkpoint or screen artifact can be resumed.
+
+The active G30 formal runner/test were migrated rather than duplicated. The
+G31 runner records return-to-go phase exposure and aggregates finite target and
+exact terminal-tail telemetry into the final analyzer. Six formal-runner checks
+plus six G31 algorithm checks pass; the complete relevant G17/G18/G19/G30/G31
+set passes `60` checks on CPU with one thread. The next action is the integrated
+nonformal path exercise only.
 
 ## Proof-sized acceptance
 

@@ -1,4 +1,4 @@
-"""Train, evaluate, and analyze formal G30 paired-toy evidence."""
+"""Train, evaluate, and analyze formal G31 paired-toy evidence."""
 
 from __future__ import annotations
 
@@ -24,21 +24,23 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.direction_balanced_full_actor_g30 import (
-    DirectionBalancedFullActorPolicy,
-    optimize_direction_balanced_update,
+from ha_ctse_process.return_to_go_direction_balanced_full_actor_g31 import (
+    ReturnToGoDirectionBalancedFullActorPolicy,
+    optimize_return_to_go_direction_balanced_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
     evaluate_battery_policy,
 )
 from scripts import run_continuous_service_roster_proxy_g17 as g17_runner
-from scripts import screen_direction_balanced_full_actor_g30 as screen
+from scripts import screen_return_to_go_direction_balanced_full_actor_g31 as screen
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "DIRECTION_BALANCED_FULL_ACTOR_G30"
-AUTHORIZATION_TOKEN = "AUTHORIZE_DIRECTION_BALANCED_FULL_ACTOR_G30_FORMAL_CPU_V1"
+ALGORITHM_ID = "RETURN_TO_GO_DIRECTION_BALANCED_G31"
+AUTHORIZATION_TOKEN = (
+    "AUTHORIZE_RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_CPU_V1"
+)
 
 GAMMA = 0.99
 HIDDEN_DIM = 32
@@ -48,9 +50,9 @@ FORMAL_REPLICATES = 3
 FORMAL_NUM_ENVS = 8
 FORMAL_PPO_PASSES = 2
 FORMAL_G17_FAST_UPDATES = 100
-FORMAL_G17_DIRECTION_UPDATES = 100
+FORMAL_G17_RETURN_TO_GO_UPDATES = 100
 FORMAL_G18_FAST_UPDATES = 100
-FORMAL_G18_DIRECTION_UPDATES = 300
+FORMAL_G18_RETURN_TO_GO_UPDATES = 300
 FORMAL_EVAL_EPISODES = 128
 FORMAL_BOOTSTRAP_REPETITIONS = 10_000
 
@@ -58,20 +60,20 @@ EXERCISE_REPLICATES = 1
 EXERCISE_NUM_ENVS = 2
 EXERCISE_PPO_PASSES = 1
 EXERCISE_FAST_UPDATES = 1
-EXERCISE_DIRECTION_UPDATES = 1
+EXERCISE_RETURN_TO_GO_UPDATES = 1
 EXERCISE_EVAL_EPISODES = 4
 
 SEED_BASES = {
     "g17": {
-        "model": 7_119_000,
-        "ledger": 7_129_000,
-        "action": 7_139_000,
-        "evaluation_ledger": 7_149_000,
-        "evaluation_action": 7_159_000,
+        "model": 10_119_000,
+        "ledger": 10_129_000,
+        "action": 10_139_000,
+        "evaluation_ledger": 10_149_000,
+        "evaluation_action": 10_159_000,
     },
-    "g18": {"model": 7_219_000, "action": 7_239_000},
+    "g18": {"model": 10_219_000, "action": 10_239_000},
 }
-BOOTSTRAP_SEED = 7_260_030
+BOOTSTRAP_SEED = 10_260_031
 
 REPLAY_TOLERANCE = 1e-6
 DIRECTION_DOT_TOLERANCE = 1e-7
@@ -87,13 +89,13 @@ G18_SPIKE_UTILITY_FLOOR = 0.90
 G18_ROTATING_EFFORT_SHARE_FLOOR = 0.75
 G18_REPLICATE_STABILITY_FLOOR = 0.90
 
-INVALID_BRANCH = "INVALID_DIRECTION_BALANCED_FULL_ACTOR_G30"
-NO_G17_BRANCH = "NO_G17_COMPATIBILITY_DIRECTION_BALANCED_G30"
-NO_G18_ACCESS_BRANCH = "NO_DELAYED_ACCESS_DIRECTION_BALANCED_G30"
-NO_G18_MECHANISM_BRANCH = "NO_DELAYED_MECHANISM_DIRECTION_BALANCED_G30"
-UNSTABLE_BRANCH = "UNSTABLE_DIRECTION_BALANCED_FULL_ACTOR_G30"
-USABLE_BRANCH = "USABLE_DIRECTION_BALANCED_FULL_ACTOR_G30"
-NONFORMAL_BRANCH = "NONFORMAL_DIRECTION_BALANCED_FORMAL_PATH_EXERCISE_COMPLETE"
+INVALID_BRANCH = "INVALID_RETURN_TO_GO_DIRECTION_BALANCED_G31"
+NO_G17_BRANCH = "NO_G17_COMPATIBILITY_RETURN_TO_GO_G31"
+NO_G18_ACCESS_BRANCH = "NO_DELAYED_ACCESS_RETURN_TO_GO_G31"
+NO_G18_MECHANISM_BRANCH = "NO_DELAYED_MECHANISM_RETURN_TO_GO_G31"
+UNSTABLE_BRANCH = "UNSTABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31"
+USABLE_BRANCH = "USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31"
+NONFORMAL_BRANCH = "NONFORMAL_RETURN_TO_GO_FORMAL_PATH_EXERCISE_COMPLETE"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -127,9 +129,9 @@ def _counts(*, formal: bool) -> dict[str, int]:
             "num_envs": FORMAL_NUM_ENVS,
             "ppo_passes": FORMAL_PPO_PASSES,
             "g17_fast_updates": FORMAL_G17_FAST_UPDATES,
-            "g17_direction_updates": FORMAL_G17_DIRECTION_UPDATES,
+            "g17_return_to_go_updates": FORMAL_G17_RETURN_TO_GO_UPDATES,
             "g18_fast_updates": FORMAL_G18_FAST_UPDATES,
-            "g18_direction_updates": FORMAL_G18_DIRECTION_UPDATES,
+            "g18_return_to_go_updates": FORMAL_G18_RETURN_TO_GO_UPDATES,
             "eval_episodes": FORMAL_EVAL_EPISODES,
             "bootstrap_repetitions": FORMAL_BOOTSTRAP_REPETITIONS,
         }
@@ -138,9 +140,9 @@ def _counts(*, formal: bool) -> dict[str, int]:
         "num_envs": EXERCISE_NUM_ENVS,
         "ppo_passes": EXERCISE_PPO_PASSES,
         "g17_fast_updates": EXERCISE_FAST_UPDATES,
-        "g17_direction_updates": EXERCISE_DIRECTION_UPDATES,
+        "g17_return_to_go_updates": EXERCISE_RETURN_TO_GO_UPDATES,
         "g18_fast_updates": EXERCISE_FAST_UPDATES,
-        "g18_direction_updates": EXERCISE_DIRECTION_UPDATES,
+        "g18_return_to_go_updates": EXERCISE_RETURN_TO_GO_UPDATES,
         "eval_episodes": EXERCISE_EVAL_EPISODES,
         "bootstrap_repetitions": 0,
     }
@@ -153,17 +155,22 @@ def _configuration(*, formal: bool) -> dict[str, Any]:
         "hidden_dim": HIDDEN_DIM,
         "learning_rate": LEARNING_RATE,
         "initial_log_std": INITIAL_LOG_STD,
+        "successor_actor_target": (
+            "detached_discounted_realized_future_tail_excluding_current"
+        ),
+        "slow_critic_target": "full_discounted_return_including_current",
         "actor_gradient_rule": "equal_global_unit_gradient_directions",
         "actor_global_rescale": "none_existing_gradient_clip_only",
         "actor_optimizer_state_rule": "ordinary_adam_on_applied_direction",
-        "checkpoint_identity": "fresh_no_g28_g29_g30_screen_resume",
+        "future_actor_input": "none_training_target_only",
+        "checkpoint_identity": "fresh_no_g30_or_g31_screen_resume",
         "residual": "exact_zero_frozen",
     }
 
 
 def _seeds(source: str, replicate: int, *, formal: bool) -> dict[str, int]:
     if source not in SEED_BASES:
-        raise ValueError(f"unknown G30 source: {source}")
+        raise ValueError(f"unknown G31 source: {source}")
     offset = int(replicate) + (0 if formal else 900_000)
     return {
         name: int(value) + offset
@@ -190,9 +197,9 @@ def _save_checkpoint(
     formal: bool,
     replicate: int,
     fast_updates: int,
-    direction_updates: int,
+    return_to_go_updates: int,
     configuration: dict[str, Any],
-    model: DirectionBalancedFullActorPolicy,
+    model: ReturnToGoDirectionBalancedFullActorPolicy,
 ) -> None:
     torch.save(
         {
@@ -203,7 +210,7 @@ def _save_checkpoint(
             "source_commit": source_commit,
             "replicate": int(replicate),
             "completed_fast_updates": int(fast_updates),
-            "completed_direction_updates": int(direction_updates),
+            "completed_return_to_go_updates": int(return_to_go_updates),
             "configuration": configuration,
             "model_state": model.state_dict(),
         },
@@ -219,10 +226,10 @@ def _load_checkpoint(
     formal: bool,
     replicate: int,
     fast_updates: int,
-    direction_updates: int,
+    return_to_go_updates: int,
     configuration: dict[str, Any],
     seeds: dict[str, int],
-) -> DirectionBalancedFullActorPolicy:
+) -> ReturnToGoDirectionBalancedFullActorPolicy:
     payload = torch.load(path, map_location="cpu", weights_only=False)
     expected = {
         "schema_version": SCHEMA_VERSION,
@@ -232,16 +239,16 @@ def _load_checkpoint(
         "source_commit": source_commit,
         "replicate": int(replicate),
         "completed_fast_updates": int(fast_updates),
-        "completed_direction_updates": int(direction_updates),
+        "completed_return_to_go_updates": int(return_to_go_updates),
         "configuration": configuration,
     }
     if not isinstance(payload, dict):
-        raise ValueError("G30 checkpoint is not a dictionary")
+        raise ValueError("G31 checkpoint is not a dictionary")
     for name, value in expected.items():
         if payload.get(name) != value:
-            raise ValueError(f"G30 checkpoint {name} mismatch")
+            raise ValueError(f"G31 checkpoint {name} mismatch")
     if not isinstance(payload.get("model_state"), dict):
-        raise ValueError("G30 checkpoint model state is missing")
+        raise ValueError("G31 checkpoint model state is missing")
     g17_runner.configure_runtime(seeds["model"])
     model = screen.make_model(source)
     model.load_state_dict(payload["model_state"])
@@ -250,7 +257,7 @@ def _load_checkpoint(
 
 def _collect(
     source: str,
-    model: DirectionBalancedFullActorPolicy,
+    model: ReturnToGoDirectionBalancedFullActorPolicy,
     *,
     episode_ids: tuple[int, ...],
     seeds: dict[str, int],
@@ -297,12 +304,14 @@ def _train_source(
         formal=formal,
         replicate=replicate,
         fast_updates=0,
-        direction_updates=0,
+        return_to_go_updates=0,
         configuration=configuration,
         model=model,
     )
     fast_updates = int(configuration[f"{source}_fast_updates"])
-    direction_updates = int(configuration[f"{source}_direction_updates"])
+    return_to_go_updates = int(
+        configuration[f"{source}_return_to_go_updates"]
+    )
     num_envs = int(configuration["num_envs"])
     ppo_passes = int(configuration["ppo_passes"])
     fast_optimizer = torch.optim.Adam(
@@ -326,7 +335,7 @@ def _train_source(
         )
         lifecycle_valid = (
             lifecycle_valid
-            and screen.g19_screen._trajectory_contract_valid(
+            and screen.g30_screen.g19_screen._trajectory_contract_valid(
                 source, trajectory
             )
         )
@@ -347,7 +356,7 @@ def _train_source(
 
     direction_start = screen._actor_state(model)
     model.begin_direction_balanced_phase()
-    ownership_valid = screen._optimizer_ownership_valid(model)
+    ownership_valid = screen.g30_screen._optimizer_ownership_valid(model)
     actor_optimizer = torch.optim.Adam(
         model.full_actor_parameters(), lr=LEARNING_RATE
     )
@@ -357,7 +366,9 @@ def _train_source(
     minimum_direction_dot = float("inf")
     maximum_identity_error = 0.0
     minimum_step_increment = float("inf")
-    for update in range(direction_updates):
+    maximum_return_to_go_target = 0.0
+    maximum_terminal_return_to_go_error = 0.0
+    for update in range(return_to_go_updates):
         first_episode = (fast_updates + update) * num_envs
         trajectory = _collect(
             source,
@@ -369,11 +380,11 @@ def _train_source(
         )
         lifecycle_valid = (
             lifecycle_valid
-            and screen.g19_screen._trajectory_contract_valid(
+            and screen.g30_screen.g19_screen._trajectory_contract_valid(
                 source, trajectory
             )
         )
-        metrics = optimize_direction_balanced_update(
+        metrics = optimize_return_to_go_direction_balanced_update(
             model,
             actor_optimizer,
             critic_optimizer,
@@ -395,6 +406,14 @@ def _train_source(
             minimum_step_increment,
             float(metrics["minimum_actor_optimizer_step_increment"]),
         )
+        maximum_return_to_go_target = max(
+            maximum_return_to_go_target,
+            float(metrics["maximum_return_to_go_target_absolute_value"]),
+        )
+        maximum_terminal_return_to_go_error = max(
+            maximum_terminal_return_to_go_error,
+            float(metrics["terminal_return_to_go_error"]),
+        )
         for name, value in metrics.items():
             if name.endswith("_error") or name.endswith("_max_abs"):
                 maximum_replay_errors[name] = max(
@@ -409,7 +428,7 @@ def _train_source(
         formal=formal,
         replicate=replicate,
         fast_updates=fast_updates,
-        direction_updates=direction_updates,
+        return_to_go_updates=return_to_go_updates,
         configuration=configuration,
         model=model,
     )
@@ -418,9 +437,9 @@ def _train_source(
         "replicate": replicate,
         "seeds": seeds,
         "fast_updates": fast_updates,
-        "direction_updates": direction_updates,
+        "return_to_go_updates": return_to_go_updates,
         "optimizer_steps": 2
-        * (fast_updates + 2 * direction_updates),
+        * (fast_updates + 2 * return_to_go_updates),
         "active_rows": int(active_rows),
         "finite_updates": bool(finite),
         "lifecycle_contract_valid": bool(lifecycle_valid),
@@ -442,6 +461,12 @@ def _train_source(
         "minimum_actor_optimizer_step_increment": float(
             minimum_step_increment
         ),
+        "maximum_return_to_go_target_absolute_value": float(
+            maximum_return_to_go_target
+        ),
+        "maximum_terminal_return_to_go_error": float(
+            maximum_terminal_return_to_go_error
+        ),
         "zero_checkpoint": zero_reference,
         "final_checkpoint": final_reference,
     }
@@ -455,11 +480,11 @@ def train(
     authorization_token: str | None,
 ) -> dict[str, Any]:
     if re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
-        raise ValueError("G30 run requires an integrated 40-hex source commit")
+        raise ValueError("G31 run requires an integrated 40-hex source commit")
     if formal and authorization_token != AUTHORIZATION_TOKEN:
-        raise ValueError("formal G30 authorization token mismatch")
+        raise ValueError("formal G31 authorization token mismatch")
     if not formal and authorization_token is not None:
-        raise ValueError("nonformal G30 exercise cannot carry formal authority")
+        raise ValueError("nonformal G31 exercise cannot carry formal authority")
     run_root.mkdir(parents=True, exist_ok=False)
     (run_root / "checkpoints").mkdir()
     configuration = _configuration(formal=formal)
@@ -496,7 +521,7 @@ def train(
 
 
 def _g17_cell(
-    model: DirectionBalancedFullActorPolicy,
+    model: ReturnToGoDirectionBalancedFullActorPolicy,
     *,
     domain: str,
     seeds: dict[str, int],
@@ -530,11 +555,11 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
         training.get("algorithm") != ALGORITHM_ID
         or training.get("status") != "COMPLETE"
     ):
-        raise ValueError("G30 evaluation requires complete training")
+        raise ValueError("G31 evaluation requires complete training")
     formal = bool(training.get("formal"))
     configuration = _configuration(formal=formal)
     if training.get("configuration") != configuration:
-        raise ValueError("G30 evaluation configuration mismatch")
+        raise ValueError("G31 evaluation configuration mismatch")
     source_commit = str(training["source_commit"])
     cells: list[dict[str, Any]] = []
     for row in training["source_results"]:
@@ -543,8 +568,8 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
         seeds = {name: int(value) for name, value in row["seeds"].items()}
         for kind in ("zero", "final"):
             fast_updates = 0 if kind == "zero" else int(row["fast_updates"])
-            direction_updates = (
-                0 if kind == "zero" else int(row["direction_updates"])
+            return_to_go_updates = (
+                0 if kind == "zero" else int(row["return_to_go_updates"])
             )
             model = _load_checkpoint(
                 run_root / row[f"{kind}_checkpoint"],
@@ -553,7 +578,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                 formal=formal,
                 replicate=replicate,
                 fast_updates=fast_updates,
-                direction_updates=direction_updates,
+                return_to_go_updates=return_to_go_updates,
                 configuration=configuration,
                 seeds=seeds,
             )
@@ -671,7 +696,7 @@ def _ordered_cells(
     ]
     selected.sort(key=lambda row: int(row["replicate"]))
     if len(selected) != replicate_count:
-        raise ValueError(f"G30 cell inventory mismatch: {criteria}")
+        raise ValueError(f"G31 cell inventory mismatch: {criteria}")
     return selected
 
 
@@ -736,12 +761,12 @@ def _validate_artifacts(
             if row.get("seeds") != seeds:
                 raise ValueError("training seeds mismatch")
             fast_updates = int(configuration[f"{source}_fast_updates"])
-            direction_updates = int(
-                configuration[f"{source}_direction_updates"]
+            return_to_go_updates = int(
+                configuration[f"{source}_return_to_go_updates"]
             )
             if (
                 row.get("fast_updates") != fast_updates
-                or row.get("direction_updates") != direction_updates
+                or row.get("return_to_go_updates") != return_to_go_updates
             ):
                 raise ValueError("training exposure mismatch")
             replay_errors = row.get("maximum_replay_errors", {})
@@ -780,11 +805,32 @@ def _validate_artifacts(
                     )
                 )
                 != 1.0
+                or not np.isfinite(
+                    float(
+                        row.get(
+                            "maximum_return_to_go_target_absolute_value",
+                            float("nan"),
+                        )
+                    )
+                )
+                or float(
+                    row.get(
+                        "maximum_return_to_go_target_absolute_value", 0.0
+                    )
+                )
+                <= 0.0
+                or float(
+                    row.get(
+                        "maximum_terminal_return_to_go_error",
+                        float("inf"),
+                    )
+                )
+                != 0.0
             ):
                 raise ValueError("training invariant mismatch")
-            for kind, completed_fast, completed_direction in (
+            for kind, completed_fast, completed_return_to_go in (
                 ("zero", 0, 0),
-                ("final", fast_updates, direction_updates),
+                ("final", fast_updates, return_to_go_updates),
             ):
                 reference = row.get(f"{kind}_checkpoint")
                 expected = _checkpoint_reference(source, replicate, kind)
@@ -798,7 +844,7 @@ def _validate_artifacts(
                     formal=formal,
                     replicate=replicate,
                     fast_updates=completed_fast,
-                    direction_updates=completed_direction,
+                    return_to_go_updates=completed_return_to_go,
                     configuration=configuration,
                     seeds=seeds,
                 )
@@ -889,7 +935,7 @@ def analyze(
     evaluation = _read_json(run_root / "evaluation_manifest.json")
     formal = bool(training.get("formal"))
     if require_formal and not formal:
-        raise ValueError("formal analysis requires formal G30 artifacts")
+        raise ValueError("formal analysis requires formal G31 artifacts")
     errors = _validate_artifacts(run_root, training, evaluation)
     configuration = _configuration(formal=formal)
     metrics: dict[str, Any] = {
@@ -899,6 +945,22 @@ def analyze(
                 float(value)
                 for row in training.get("source_results", [])
                 for value in row.get("maximum_replay_errors", {}).values()
+            )
+            if training.get("source_results")
+            else float("inf")
+        ),
+        "maximum_return_to_go_target_absolute_value": (
+            max(
+                float(row["maximum_return_to_go_target_absolute_value"])
+                for row in training.get("source_results", [])
+            )
+            if training.get("source_results")
+            else float("nan")
+        ),
+        "maximum_terminal_return_to_go_error": (
+            max(
+                float(row["maximum_terminal_return_to_go_error"])
+                for row in training.get("source_results", [])
             )
             if training.get("source_results")
             else float("inf")
@@ -1051,6 +1113,12 @@ def analyze(
             metrics = {
                 "operational_valid": False,
                 "maximum_replay_error": metrics["maximum_replay_error"],
+                "maximum_return_to_go_target_absolute_value": metrics[
+                    "maximum_return_to_go_target_absolute_value"
+                ],
+                "maximum_terminal_return_to_go_error": metrics[
+                    "maximum_terminal_return_to_go_error"
+                ],
             }
     branch = (
         select_result_branch(metrics)
@@ -1086,7 +1154,7 @@ def analyze(
             "identity_tolerance": IDENTITY_TOLERANCE,
         },
         "interpretation": (
-            "formal paired-toy direction-balanced evidence; no UAV claim"
+            "formal paired-toy return-to-go direction-balanced evidence; no UAV claim"
             if formal
             else "bounded formal-path exercise only; no scientific evidence"
         ),
