@@ -38,6 +38,7 @@ class ContinuousRosterPolicy(nn.Module):
         member_capacity: int,
         action_dim: int,
         hidden_dim: int = 64,
+        current_observation_residual: bool = False,
     ) -> None:
         super().__init__()
         self.observation_dim = int(observation_dim)
@@ -72,6 +73,11 @@ class ContinuousRosterPolicy(nn.Module):
             nn.Linear(self.hidden_dim + self.action_dim, self.hidden_dim),
             nn.Tanh(),
             nn.Linear(self.hidden_dim, self.action_dim),
+        )
+        self.current_observation_residual = (
+            nn.Linear(self.observation_dim, self.action_dim)
+            if current_observation_residual
+            else None
         )
         self.log_std = nn.Parameter(torch.zeros(self.action_dim))
         self.critic = nn.Sequential(
@@ -199,6 +205,10 @@ class ContinuousRosterPolicy(nn.Module):
             mean = self.action_mean(
                 torch.cat((candidate, prefix_fraction), dim=-1)
             )
+            if self.current_observation_residual is not None:
+                mean = mean + self.current_observation_residual(
+                    observations[batch_index, owner]
+                )
             distribution = torch.distributions.Normal(mean, std.expand_as(mean))
             if teacher_pre_tanh is not None:
                 raw = teacher_pre_tanh[batch_index, owner]

@@ -6,7 +6,7 @@
 ```text
 active_implementation=CONTINUOUS_SERVICE_ROSTER_PROXY_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=BOUNDED_PROTOTYPE_PPO_SCREEN_CLOSED_REPRESENTATION_PROBE_ACTIVE
+status=BASE_REPRESENTATION_PROBE_MISSED_GATE_OBSERVATION_RESIDUAL_PROBE_ACTIVE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -47,10 +47,13 @@ variant is admissible.
 
 ## Current discriminator
 
-Run the representation-only constructive mapping probe for 200 optimization
-steps. If final full-dataset MSE is at most `10%` of initial MSE and at most
-`1e-3`, accept representation sufficiency and derive one shared-team-credit
-algorithm correction. Otherwise retire this continuous roster representation.
+The base representation probe returned `0.00100230` and is not accepted against
+the exact `<=1e-3` gate. Add the optional current-observation linear residual
+to the action mean and rerun the same representation-only constructive mapping
+probe for 200 optimization steps. If final full-dataset MSE is at most `10%` of
+initial MSE and at most `1e-3`, run one RL screen with the residual,
+`initial_log_std=-1.0`, learning rate `1e-3`, 100 updates, eight environments
+and two PPO passes. Otherwise retire the continuous policy realization.
 
 ## After the screen
 

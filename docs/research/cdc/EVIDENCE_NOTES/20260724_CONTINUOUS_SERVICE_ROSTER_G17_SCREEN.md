@@ -49,3 +49,15 @@ action is a supervised constructive-action representation-fit probe using the
 same model and observations. A successful fit isolates shared-reward PPO/credit
 as the failed component; a failed fit retires the policy representation itself.
 The probe is diagnostic only and does not select a scientific result.
+
+The exact 200-step probe reduced full-dataset MSE from `0.0785263` to
+`0.00100230`. It passed the relative reduction condition but missed the frozen
+absolute `<=1e-3` condition. It is therefore
+`BORDERLINE_REPRESENTATION_FIT_NOT_ACCEPTED_G17_V1`; no extra steps or threshold
+rounding are used to rescue it.
+
+The next bounded delta adds one environment-neutral current-observation linear
+residual to the action mean. This adds only `observation_dim * action_dim +
+action_dim` parameters, leaves the recurrent active-set/prefix path intact and
+is disabled for the existing UAV wrapper. It must first pass the same exact
+representation probe before any RL screen.

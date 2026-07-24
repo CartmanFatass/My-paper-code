@@ -62,13 +62,16 @@ def configure_runtime(seed: int) -> None:
     torch.use_deterministic_algorithms(True)
 
 
-def _model(*, initial_log_std: float) -> ContinuousRosterPolicy:
+def _model(
+    *, initial_log_std: float, current_observation_residual: bool = False
+) -> ContinuousRosterPolicy:
     model = ContinuousRosterPolicy(
         OBSERVATION_DIM,
         CRITIC_STATE_DIM,
         member_capacity=CAPACITY,
         action_dim=ACTION_DIM,
         hidden_dim=HIDDEN_DIM,
+        current_observation_residual=current_observation_residual,
     )
     with torch.no_grad():
         model.log_std.fill_(float(initial_log_std))
@@ -217,6 +220,7 @@ def representation_probe(
     steps: int,
     batch_size: int,
     learning_rate: float,
+    current_observation_residual: bool = False,
 ) -> dict[str, Any]:
     """Separate policy representation capacity from shared-reward PPO access."""
 
@@ -225,7 +229,10 @@ def representation_probe(
     run_root.mkdir(parents=True, exist_ok=False)
     configure_runtime(MODEL_SEED + 17)
     dataset = _constructive_dataset()
-    model = _model(initial_log_std=-1.0)
+    model = _model(
+        initial_log_std=-1.0,
+        current_observation_residual=current_observation_residual,
+    )
     optimizer = torch.optim.Adam(model.parameters(), lr=float(learning_rate))
     generator = torch.Generator().manual_seed(MODEL_SEED + 18)
 
@@ -264,13 +271,18 @@ def representation_probe(
         final_loss = float(loss_for(all_indices).detach())
     result = {
         "schema": "continuous_service_roster_proxy_g17_representation_probe_v1",
-        "algorithm": ALGORITHM,
+        "algorithm": (
+            f"{ALGORITHM}_CURRENT_OBSERVATION_RESIDUAL"
+            if current_observation_residual
+            else ALGORITHM
+        ),
         "formal": False,
         "status": "NONFORMAL_G17_REPRESENTATION_PROBE_COMPLETE",
         "dataset_steps": int(len(all_indices)),
         "optimization_steps": int(steps),
         "batch_size": int(batch_size),
         "learning_rate": float(learning_rate),
+        "current_observation_residual": bool(current_observation_residual),
         "initial_loss": initial_loss,
         "final_loss": final_loss,
         "runtime": {
@@ -293,13 +305,17 @@ def screen(
     ppo_passes: int,
     learning_rate: float = LEARNING_RATE,
     initial_log_std: float = 0.0,
+    current_observation_residual: bool = False,
 ) -> dict[str, Any]:
     if min(updates, num_envs, eval_episodes, ppo_passes) <= 0:
         raise ValueError("G17 screen counts must be positive")
     run_root.mkdir(parents=True, exist_ok=False)
     configure_runtime(MODEL_SEED)
     started = time.perf_counter()
-    model = _model(initial_log_std=initial_log_std)
+    model = _model(
+        initial_log_std=initial_log_std,
+        current_observation_residual=current_observation_residual,
+    )
     optimizer = torch.optim.Adam(model.parameters(), lr=float(learning_rate))
     zero_iid = _evaluate(model, profiles=TRAIN_PROFILES, eval_episodes=eval_episodes)
     zero_heldout = _evaluate(
@@ -361,7 +377,11 @@ def screen(
     )
     result = {
         "schema": SCHEMA,
-        "algorithm": ALGORITHM,
+        "algorithm": (
+            f"{ALGORITHM}_CURRENT_OBSERVATION_RESIDUAL"
+            if current_observation_residual
+            else ALGORITHM
+        ),
         "formal": False,
         "status": (
             "NONFORMAL_G17_PROMISING"
@@ -382,6 +402,7 @@ def screen(
             "elapsed_seconds": float(time.perf_counter() - started),
         },
         "parameter_count": model.parameter_count,
+        "current_observation_residual": bool(current_observation_residual),
         "optimizer": {
             "learning_rate": float(learning_rate),
             "initial_log_std": float(initial_log_std),
@@ -432,6 +453,7 @@ def main() -> None:
     parser.add_argument("--ppo-passes", type=int, default=2)
     parser.add_argument("--learning-rate", type=float, default=LEARNING_RATE)
     parser.add_argument("--initial-log-std", type=float, default=0.0)
+    parser.add_argument("--current-observation-residual", action="store_true")
     parser.add_argument("--probe-steps", type=int, default=200)
     parser.add_argument("--probe-batch-size", type=int, default=64)
     arguments = parser.parse_args()
@@ -441,6 +463,7 @@ def main() -> None:
             steps=arguments.probe_steps,
             batch_size=arguments.probe_batch_size,
             learning_rate=arguments.learning_rate,
+            current_observation_residual=arguments.current_observation_residual,
         )
         print(json.dumps(result, sort_keys=True))
         return
@@ -452,6 +475,7 @@ def main() -> None:
         ppo_passes=arguments.ppo_passes,
         learning_rate=arguments.learning_rate,
         initial_log_std=arguments.initial_log_std,
+        current_observation_residual=arguments.current_observation_residual,
     )
     print(json.dumps(result, sort_keys=True))
 

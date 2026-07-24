@@ -86,7 +86,14 @@ Fit the same network directly to the constructive current-action mapping while
 holding observations, active masks and architecture fixed. This non-RL probe
 answers only whether the representation can express and optimize the mapping.
 It cannot establish task access. Passing isolates shared team-reward PPO/credit
-as the next algorithm boundary; failing retires the representation.
+as the next algorithm boundary; failing retires the representation. The base
+path returned `0.00100230` against the exact `1e-3` absolute gate and is not
+accepted.
+
+The active bounded correction adds a learned current-observation linear
+residual to the action mean. It is environment-neutral, optional, and disabled
+for UAV G1, so the accepted shared recurrent mechanics remain unchanged. The
+same 200-step probe and thresholds apply without modification.
 
 ## Protected interpretation
 

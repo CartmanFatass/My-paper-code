@@ -52,6 +52,29 @@ def test_continuous_roster_policy_is_capacity_generic_and_masks_inactive_rows() 
     torch.testing.assert_close(output.next_hidden[~active], hidden[~active], rtol=0, atol=0)
 
 
+def test_optional_current_observation_residual_is_a_real_bounded_delta() -> None:
+    torch.manual_seed(19)
+    base = ContinuousRosterPolicy(
+        observation_dim=7,
+        critic_state_dim=5,
+        member_capacity=6,
+        action_dim=2,
+        hidden_dim=8,
+    )
+    torch.manual_seed(19)
+    residual = ContinuousRosterPolicy(
+        observation_dim=7,
+        critic_state_dim=5,
+        member_capacity=6,
+        action_dim=2,
+        hidden_dim=8,
+        current_observation_residual=True,
+    )
+    assert residual.parameter_count == base.parameter_count + 16
+    assert residual.current_observation_residual is not None
+    assert base.current_observation_residual is None
+
+
 def test_new_source_has_exact_dynamic_roster_and_constructive_access() -> None:
     ledger = make_ledger(2, master_seed=170_001)
     same = make_ledger(2, master_seed=170_001)
