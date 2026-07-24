@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-import torch
-import numpy as np
 import json
+
+import numpy as np
+import pytest
+import torch
 
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     ACTION_DIM,
     CAPACITY,
-    CURRICULUM_SINGLETON_PROFILES,
     HORIZON,
     ContinuousServiceRosterEnv,
     collect_trajectory,
@@ -22,7 +23,7 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
 from scripts import run_continuous_service_roster_proxy_g17 as runner
 
 
-def test_continuous_roster_policy_is_capacity_generic_and_masks_inactive_rows() -> None:
+def test_continuous_policy_masks_inactive_rows_and_bounds_actions() -> None:
     torch.manual_seed(17)
     model = ContinuousRosterPolicy(
         observation_dim=7,
@@ -35,38 +36,28 @@ def test_continuous_roster_policy_is_capacity_generic_and_masks_inactive_rows() 
     active = torch.tensor(
         [[True, True, False, True, False, True], [True, False, True, True, True, False]]
     )
-    critic_state = torch.randn(2, 5)
     hidden = torch.randn(2, 6, 8)
     output = model.forward_step(
         observations=observations,
         active_mask=active,
-        critic_state=critic_state,
+        critic_state=torch.randn(2, 5),
         hidden=hidden,
         deterministic=True,
     )
-
     assert output.actions.shape == (2, 6, 2)
-    assert output.prefix_action_sums.shape == (2, 6, 2)
-    assert torch.isfinite(output.actions).all()
     assert bool((output.actions.abs() <= 1.0).all())
     assert torch.count_nonzero(output.actions[~active]) == 0
     assert torch.count_nonzero(output.token_log_probs[~active]) == 0
     torch.testing.assert_close(output.next_hidden[~active], hidden[~active], rtol=0, atol=0)
 
 
-def test_optional_current_observation_residual_is_a_real_bounded_delta() -> None:
+def test_current_observation_residual_is_the_only_parameter_delta() -> None:
     torch.manual_seed(19)
-    base = ContinuousRosterPolicy(
-        observation_dim=7,
-        critic_state_dim=5,
-        member_capacity=6,
-        action_dim=2,
-        hidden_dim=8,
-    )
+    base = ContinuousRosterPolicy(7, 5, member_capacity=6, action_dim=2, hidden_dim=8)
     torch.manual_seed(19)
     residual = ContinuousRosterPolicy(
-        observation_dim=7,
-        critic_state_dim=5,
+        7,
+        5,
         member_capacity=6,
         action_dim=2,
         hidden_dim=8,
@@ -77,49 +68,31 @@ def test_optional_current_observation_residual_is_a_real_bounded_delta() -> None
     assert base.current_observation_residual is None
 
 
-def test_new_source_has_exact_dynamic_roster_and_constructive_access() -> None:
+def test_source_schedule_and_constructive_access_are_exact() -> None:
     ledger = make_ledger(2, master_seed=170_001)
     same = make_ledger(2, master_seed=170_001)
     np.testing.assert_array_equal(ledger.capacities, same.capacities)
     np.testing.assert_array_equal(ledger.load, same.load)
     np.testing.assert_array_equal(ledger.target_mix, same.target_mix)
-
-    env = ContinuousServiceRosterEnv(ledger)
+    environment = ContinuousServiceRosterEnv(ledger)
     roster_sizes = []
     utilities = []
     for _ in range(HORIZON):
-        view = env.observe()
+        view = environment.observe()
         roster_sizes.append(int(view.active_mask.sum()))
-        actions = constructive_actions(view)
-        assert actions.shape == (CAPACITY, ACTION_DIM)
-        reward, terminal, info = env.step(actions)
+        reward, terminal, info = environment.step(constructive_actions(view))
         utilities.append(reward)
         assert info["service_utility"] == reward
-    outcome = env.outcome()
-
+    outcome = environment.outcome()
     assert terminal
     assert tuple(roster_sizes) == ledger.expected_roster_sizes
     np.testing.assert_allclose(utilities, np.ones(HORIZON), rtol=0, atol=2e-7)
-    assert outcome.utility == np.mean(utilities)
     assert outcome.minimum_step_utility >= 1.0 - 2e-7
 
-    singleton = make_ledger(
-        0,
-        master_seed=170_002,
-        profiles=CURRICULUM_SINGLETON_PROFILES,
-    )
-    assert singleton.expected_roster_sizes == (1,) * HORIZON
 
-
-def test_collection_replay_lifecycle_and_one_update_are_exact_and_finite() -> None:
+def test_replay_lifecycle_and_one_step_credit_are_exact() -> None:
     torch.manual_seed(170_017)
-    model = ContinuousRosterPolicy(
-        observation_dim=10,
-        critic_state_dim=6,
-        member_capacity=CAPACITY,
-        action_dim=ACTION_DIM,
-        hidden_dim=16,
-    )
+    model = runner.make_model()
     trajectory = collect_trajectory(
         model,
         episode_ids=(0, 1, 2),
@@ -128,11 +101,9 @@ def test_collection_replay_lifecycle_and_one_update_are_exact_and_finite() -> No
         device=torch.device("cpu"),
     )
     errors = replay_errors(
-        replay_trajectory(model, trajectory, device=torch.device("cpu")),
-        trajectory,
+        replay_trajectory(model, trajectory, device=torch.device("cpu")), trajectory
     )
     assert max(errors.values()) == 0.0
-
     for env_index in range(3):
         absent = ~trajectory.active_mask[:, env_index]
         for key in range(CAPACITY):
@@ -144,68 +115,65 @@ def test_collection_replay_lifecycle_and_one_update_are_exact_and_finite() -> No
                         rtol=0,
                         atol=0,
                     )
-
-    optimizer = torch.optim.Adam(model.parameters(), lr=3e-4)
+    rewards = torch.tensor([[0.2, 0.7], [0.4, 0.5]])
+    values = torch.tensor([[0.1, 0.3], [0.2, 0.1]])
+    advantages, returns = compute_gae(rewards, values, gamma=0.0)
+    torch.testing.assert_close(advantages, rewards - values, rtol=0, atol=0)
+    torch.testing.assert_close(returns, rewards, rtol=0, atol=0)
+    optimizer = torch.optim.Adam(model.parameters(), lr=runner.LEARNING_RATE)
     metrics = optimize_update(
         model,
         optimizer,
         trajectory,
         device=torch.device("cpu"),
         ppo_passes=1,
+        gamma=0.0,
     )
     assert metrics["finite_update"] == 1.0
-    assert metrics["optimizer_steps"] == 1.0
 
 
-def test_one_step_credit_matches_the_registered_mean_step_utility() -> None:
-    rewards = torch.tensor([[0.2, 0.7], [0.4, 0.5]], dtype=torch.float32)
-    values = torch.tensor([[0.1, 0.3], [0.2, 0.1]], dtype=torch.float32)
-    advantages, returns = compute_gae(rewards, values, gamma=0.0)
-    torch.testing.assert_close(advantages, rewards - values, rtol=0, atol=0)
-    torch.testing.assert_close(returns, rewards, rtol=0, atol=0)
-
-
-def test_nonformal_screen_closes_one_small_artifact(tmp_path) -> None:
-    result = runner.screen(
-        run_root=tmp_path / "g17_screen",
-        updates=1,
-        num_envs=2,
-        eval_episodes=3,
-        ppo_passes=1,
-    )
-    stored = json.loads((tmp_path / "g17_screen" / "screen_result.json").read_text())
-    assert stored == result
-    assert result["formal"] is False
-    assert result["status"] in {
-        "NONFORMAL_G17_PROMISING",
-        "NONFORMAL_G17_NOT_PROMISING",
+def test_first_match_branch_precedence() -> None:
+    passing = {
+        "operational_valid": True,
+        "formal": True,
+        "iid_lcb": 0.94,
+        "heldout_lcb": 0.93,
+        "minimum_effort_correlation": 0.97,
+        "minimum_mix_correlation": 0.96,
+        "maximum_effort_mae": 0.02,
+        "maximum_mix_mae": 0.02,
+        "gain_lcb": 0.20,
+        "minimum_heldout_replicate": 0.91,
     }
-    assert result["source_control"]["minimum_utility"] >= 1.0 - 2e-7
-    assert result["runtime"]["backend"] == "cpu"
-    assert result["runtime"]["torch_threads"] == 1
-
-    curriculum = runner.screen(
-        run_root=tmp_path / "g17_curriculum_screen",
-        updates=3,
-        num_envs=2,
-        eval_episodes=2,
-        ppo_passes=1,
-        learning_rate=1e-3,
-        initial_log_std=-1.0,
-        current_observation_residual=True,
-        active_count_curriculum=True,
-    )
-    assert curriculum["active_count_curriculum"] is True
-    assert sum(curriculum["training_stages"].values()) == 3
+    assert runner.select_result_branch(passing) == runner.USABLE_BRANCH
+    assert runner.select_result_branch(passing | {"iid_lcb": 0.89}) == runner.NO_IID_BRANCH
+    assert runner.select_result_branch(
+        passing | {"heldout_lcb": 0.89, "gain_lcb": -1.0}
+    ) == runner.NO_HELDOUT_BRANCH
+    assert runner.select_result_branch(
+        passing | {"minimum_effort_correlation": 0.89, "gain_lcb": -1.0}
+    ) == runner.NO_CONDITIONAL_BRANCH
+    assert runner.select_result_branch(passing | {"gain_lcb": 0.10}) == runner.NO_GAIN_BRANCH
+    assert runner.select_result_branch(
+        passing | {"minimum_heldout_replicate": 0.84}
+    ) == runner.UNSTABLE_BRANCH
+    assert runner.select_result_branch(passing | {"operational_valid": False}) == runner.INVALID_BRANCH
 
 
-def test_representation_probe_reduces_constructive_mapping_error(tmp_path) -> None:
-    result = runner.representation_probe(
-        run_root=tmp_path / "g17_representation",
-        steps=8,
-        batch_size=32,
-        learning_rate=1e-3,
-    )
+def test_nonformal_exercise_closes_and_formal_analysis_rejects_it(tmp_path) -> None:
+    run_root = tmp_path / "g17_exercise"
+    result = runner.exercise(run_root=run_root)
     assert result["formal"] is False
-    assert result["final_loss"] < result["initial_loss"]
-    assert result["status"] == "NONFORMAL_G17_REPRESENTATION_PROBE_COMPLETE"
+    assert result["operational_valid"] is True
+    assert result["branch"] == runner.NONFORMAL_BRANCH
+    for name in ("train_manifest.json", "evaluation_manifest.json", "analysis_result.json"):
+        assert (run_root / name).is_file()
+    with pytest.raises(ValueError, match="formal analysis requires formal artifacts"):
+        runner.analyze(run_root=run_root, require_formal=True)
+
+    evaluation = json.loads((run_root / "evaluation_manifest.json").read_text())
+    evaluation["source_commit"] = "tampered"
+    (run_root / "evaluation_manifest.json").write_text(json.dumps(evaluation))
+    invalid = runner.analyze(run_root=run_root)
+    assert invalid["operational_valid"] is False
+    assert invalid["branch"] == runner.INVALID_BRANCH

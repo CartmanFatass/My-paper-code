@@ -85,3 +85,26 @@ feature as a weak future consequence, while inherited `gamma=0.99` GAE mixes
 independently resampled future demands into every current score. The smallest
 algorithmic correction keeps the full source and budget fixed and sets the
 credit horizon to the registered immediate objective (`gamma=0`).
+
+That sole screen is positive:
+
+```text
+status=NONFORMAL_G17_PROMISING
+iid_mean=0.9442281974
+heldout_mean=0.9369134714
+joint_mean=0.9405708344
+minimum_episode=0.8938110751
+final_minus_zero_joint=0.2900622120
+effort_correlation=0.9885653366
+mix_correlation=0.9914139414
+effort_mae=0.0189066442
+mix_mae=0.0185533911
+maximum_replay_error=0.0
+formal_iteration_consumed=false
+```
+
+This separates credit alignment from exposure, exploration scale,
+representation fit and active-count curriculum. It licenses the frozen
+`CURRENT_OBSERVATION_RESIDUAL_ONE_STEP_CREDIT_G17` formal contract. It does not
+establish a formal result, comparative advantage, long-horizon credit or UAV
+transport.

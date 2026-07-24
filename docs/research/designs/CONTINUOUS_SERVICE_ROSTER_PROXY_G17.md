@@ -1,136 +1,125 @@
 # Continuous service roster proxy G17
 
-Status: bounded prototype implemented; exploration-scale discriminator active;
-formal evidence contract not yet frozen.
+Status: formal executable definition frozen for Iteration 18; formal result not
+yet run.
 
 ## Scientific question
 
-Can the accepted active-set sum, `log1p(active_count)`, lifecycle-owned
-recurrence and active-fraction autoregressive prefix support a freshly trained
-continuous primitive controller under within-episode roster changes?
+Can one freshly trained, capacity-generic recurrent policy learn a
+demand-conditioned continuous service allocation while the active roster
+changes inside an episode, when policy credit is aligned to the source's
+immediate service objective?
 
-G17 is an absolute-usability probe. It does not compare against another
-algorithm and does not claim UAV efficacy. A positive result only licenses a
-later physical promotion candidate.
+This is an absolute-usability question. It does not compare algorithms and does
+not establish UAV, S7-S1, arbitrary-N, skill-lifetime or intrinsic-reward
+performance.
 
 ## Independent source boundary
 
 G17 is not a rerun or repair of the retired Iteration-5 spatial carrier:
 
-- the action is a continuous two-coordinate service allocation, not
-  left/stay/right;
-- the observation has ten freshly named current-service fields, not the old
-  fifteen-channel spatial/Generic-SHORT layout;
-- the reward is dense two-service target error, not persistent/short terminal
-  utility;
-- the horizon is 48 with roster counts changing at steps 12, 24 and 36;
-- every checkpoint is trained from scratch; G8 and spatial checkpoints are
-  forbidden imports.
+- two continuous service coordinates replace left/stay/right;
+- ten fresh current-service observation fields replace the old spatial layout;
+- dense mean step utility replaces terminal persistent/short utility;
+- the horizon is 48 with roster edits at steps 12, 24 and 36;
+- all checkpoints are fresh; spatial, G8 and UAV checkpoint import is forbidden.
 
-The source uses three training schedules (`4->3->6->5`, `5->3->7->6`,
-`6->4->8->6`) and two held-out schedules (`3->2->5->4`, `6->3->8->5`). A
-temporary leave freezes the same lifecycle row, rejoin restores it, fresh join
-starts a zero row, and terminal leave ends its physical action exposure.
+Training profiles are `4->3->6->5`, `5->3->7->6` and `6->4->8->6`.
+Held-out profiles are `3->2->5->4` and `6->3->8->5`. Temporary leave freezes
+the lifecycle row, rejoin restores it, fresh join starts a zero row, and
+terminal leave ends physical action exposure. Current load and service mix are
+observed; future demand, membership keys and event times are not.
 
-Each step exposes the current load, service mix, active count, lifecycle age,
-previous executed allocation and anonymous current capability. It never
-exposes future membership keys, event times or future demand. The registered
-constructive action maps current load and mix directly into the continuous
-support and reaches utility one up to float32 arithmetic.
+The constructive current action is
+`effort=2*load-1, mix=2*target_mix-1`. It must retain per-step utility at least
+`1-2e-7` and exact registered roster schedules.
 
-## Algorithm and implementation boundary
-
-The environment-neutral shared core is
-`ha_ctse_process/continuous_roster_policy.py`. It computes member embeddings,
-active-set context and critic input once per step, then retains the causal
-autoregressive loop only for focal lifecycle state and normalized action
-prefix. Inactive rows receive zero action/log-probability and no hidden-state
-update.
-
-The G17 carrier, collection, exact teacher replay, GAE and PPO are isolated in
-`ha_ctse_process/continuous_service_roster_proxy_g17.py`. UAV physics, workers,
-communication calculations and scenario rewards are absent.
-
-The first two nonformal runs used `initial_log_std=0`, learning rate `3e-4`,
-eight environments and two PPO passes. Sixty and 180 updates both plateaued at
-joint deterministic utility about `0.666`, despite a zero-to-final gain about
-`0.174`, exact replay and constructive utility about one. Increasing exposure
-alone is therefore rejected.
-
-## Completed exploration-scale discriminator
-
-Two fresh variants held the source, representation, network, reward, seeds,
-screen gates and evaluation fixed. Neither crossed access. Their conditional
-effort correlations were `0.0166` and `0.0228`; mix correlations were `0.1131`
-and `0.1748`. Both learned near-constant actions. More budget and additional
-exploration-scale tuning are closed for this prototype.
-
-This screen consumes zero conclusion-bearing iterations. A formal contract may
-be frozen only if one bounded variant passes all of:
+## Frozen algorithm
 
 ```text
-source_control_minimum_utility >= 1 - 2e-7
-maximum_replay_error <= 1e-6
-finite_updates = true
-iid_mean >= 0.80
-heldout_mean >= 0.75
-final_minus_zero_joint >= 0.08
-```
-
-Screen thresholds are selection diagnostics, not formal result gates. The
-current continuous-PPO realization is `NO_CONDITIONAL_PPO_ACCESS_G17_V1`.
-
-## Active representation discriminator
-
-Fit the same network directly to the constructive current-action mapping while
-holding observations, active masks and architecture fixed. This non-RL probe
-answers only whether the representation can express and optimize the mapping.
-It cannot establish task access. Passing isolates shared team-reward PPO/credit
-as the next algorithm boundary; failing retires the representation. The base
-path returned `0.00100230` against the exact `1e-3` absolute gate and is not
-accepted.
-
-The active bounded correction adds a learned current-observation linear
-residual to the action mean. It is environment-neutral, optional, and disabled
-for UAV G1, so the accepted shared recurrent mechanics remain unchanged. The
-same 200-step probe and thresholds apply without modification.
-
-The residual passes representation fit but fails its sole PPO screen, so it is
-not a formal candidate. The active correction is a fixed active-count
-curriculum using the same residual policy and total 100 updates:
-
-```text
-singleton_static_updates=25
-small_dynamic_2_to_1_to_3_to_2_updates=25
-registered_dynamic_updates=50
-```
-
-Training reward, observation, action distribution, model, seeds, final IID and
-held-out evaluation and every screen threshold remain unchanged. Curriculum
-success would support a staged learning-path hypothesis only; it would not
-establish comparative advantage or UAV transport.
-
-The curriculum fails its sole screen and is closed. The active credit
-correction aligns GAE with the registered mean-step objective:
-
-```text
+algorithm=CURRENT_OBSERVATION_RESIDUAL_ONE_STEP_CREDIT_G17
+shared_representation=active_set_sum_plus_log1p_count
+lifecycle_state=per_member_GRU_row
+autoregressive_context=active_fraction_action_prefix
+continuous_distribution=tanh_Gaussian
+current_observation_residual=true
 credit_gamma=0.0
 gae_lambda=0.95_irrelevant_when_gamma_zero
-current_observation_residual=true
+hidden_dim=32
+learning_rate=1e-3
+initial_log_std=-1.0
 active_count_curriculum=false
-updates=100
 ```
 
-This changes neither environment reward nor evaluation return. It prevents
-independent future demand from being assigned to the current continuous action.
-It is source-scoped credit evidence and cannot by itself justify use on a
-long-horizon UAV control source.
+The linear residual exposes the already-observed current demand directly to the
+action mean. `gamma=0` makes the PPO advantage equal current reward minus
+current value. This is an algorithm/source credit choice: independent future
+demand is no longer assigned to the current action. It changes neither source
+reward nor evaluation return and is not automatically transferable to a
+long-horizon UAV objective.
 
-## Protected interpretation
+Inactive rows retain hidden state and receive exactly zero action and
+likelihood. Teacher replay must retain every log probability, joint log
+probability, value, hidden row and autoregressive prefix within `1e-6`.
 
-- G8-G16 and the retired spatial carrier remain closed exactly as recorded.
-- G17 cannot be called UAV, S7-S1, arbitrary-N, advantage, skill-lifetime or
-  intrinsic-reward evidence.
-- CPU-only, one thread; no CUDA comparison or mixed-backend resume.
-- The two completed nonformal screens are diagnostic artifacts and consume no
-  iteration.
+## Formal evidence contract
+
+```text
+authorization_token=AUTHORIZE_CONTINUOUS_SERVICE_ROSTER_G17_FORMAL_CPU_V1
+backend=cpu
+torch=2.7.0+cpu
+torch_threads=1
+replicates=3
+updates_per_replicate=100
+environments_per_update=8
+ppo_passes=2
+evaluation_episodes_per_domain=128
+bootstrap_repetitions=10000
+model_seed_base=1817000
+train_ledger_seed_base=1827000
+action_seed_base=1837000
+evaluation_ledger_seed_base=1847000
+evaluation_action_seed_base=1857000
+bootstrap_seed=1867017
+```
+
+Each replicate evaluates paired zero/final checkpoints deterministically on IID
+and held-out profiles. Final held-out stochastic utility is diagnostic. The
+formal estimands are hierarchical-bootstrap 95% intervals over replicate and
+episode for final IID utility, final held-out utility, and paired held-out
+`final-zero` gain; held-out replicate minimum; and per-replicate deterministic
+effort/mix correlations and mean absolute errors.
+
+The registered first-match branches are:
+
+1. any artifact, source, runtime, schedule, replay, finite-update, checkpoint or
+   inventory failure -> `INVALID_CONTINUOUS_SERVICE_ROSTER_G17`;
+2. IID utility CI lower bound `<0.90` ->
+   `NO_IID_ACCESS_CONTINUOUS_SERVICE_G17`;
+3. held-out utility CI lower bound `<0.90` ->
+   `NO_HELDOUT_ACCESS_CONTINUOUS_SERVICE_G17`;
+4. minimum effort or mix correlation `<0.90`, or maximum effort or mix MAE
+   `>0.05` -> `NO_CONDITIONAL_MAPPING_CONTINUOUS_SERVICE_G17`;
+5. paired held-out gain CI lower bound `<=0.10` ->
+   `NO_LEARNING_GAIN_CONTINUOUS_SERVICE_G17`;
+6. minimum held-out replicate mean `<0.85` ->
+   `UNSTABLE_CONTINUOUS_SERVICE_ROSTER_G17`;
+7. otherwise -> `USABLE_ONE_STEP_CONTINUOUS_ROSTER_G17`.
+
+Lower-precedence diagnostics never rescue or relabel an earlier branch.
+Nonformal exercise artifacts always return
+`NONFORMAL_CONTINUOUS_SERVICE_G17_EXERCISE_COMPLETE` and the formal analyzer
+must reject them.
+
+## Selection evidence and interpretation guard
+
+The sole `gamma=0` screen reached IID `0.944228`, held-out `0.936913`, joint
+`0.940571`, minimum episode `0.893811`, gain `0.290062`, effort correlation
+`0.988565`, mix correlation `0.991414`, and both MAEs below `0.019`. Replay
+errors were exactly zero and constructive access remained effectively one.
+This licenses the formal contract; it is not itself conclusion-bearing.
+
+A positive formal branch supports a usable conditional controller only for the
+registered immediate-service toy source. UAV promotion remains a separate PM
+decision based on this evidence and the physical source mismatch. Every earlier
+G0-G16 result remains closed and unchanged.

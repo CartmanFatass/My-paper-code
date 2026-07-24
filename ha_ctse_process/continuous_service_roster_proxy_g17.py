@@ -44,13 +44,14 @@ class RosterProfile:
     terminal_leave_count: int
 
     def validate(self) -> None:
-        optional_values = (
+        values = (
+            self.initial_count,
             self.temporary_leave_count,
             self.fresh_join_count,
             self.terminal_leave_count,
         )
-        if self.initial_count <= 0 or min(optional_values) < 0:
-            raise ValueError("G17 profile counts are outside nonnegative support")
+        if min(values) <= 0:
+            raise ValueError("G17 profile counts must be positive")
         if self.temporary_leave_count >= self.initial_count:
             raise ValueError("G17 temporary leave would empty or exceed the roster")
         if self.initial_count + self.fresh_join_count > CAPACITY:
@@ -76,12 +77,6 @@ TRAIN_PROFILES = (
 HELDOUT_PROFILES = (
     RosterProfile("heldout_3_2_5_4", 3, 1, 2, 1),
     RosterProfile("heldout_6_3_8_5", 6, 3, 2, 3),
-)
-CURRICULUM_SINGLETON_PROFILES = (
-    RosterProfile("curriculum_singleton_1_1_1_1", 1, 0, 0, 0),
-)
-CURRICULUM_SMALL_DYNAMIC_PROFILES = (
-    RosterProfile("curriculum_small_2_1_3_2", 2, 1, 1, 1),
 )
 
 
