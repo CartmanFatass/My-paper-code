@@ -12,6 +12,7 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     HORIZON,
     ContinuousServiceRosterEnv,
     collect_trajectory,
+    compute_gae,
     constructive_actions,
     make_ledger,
     optimize_update,
@@ -154,6 +155,14 @@ def test_collection_replay_lifecycle_and_one_update_are_exact_and_finite() -> No
     )
     assert metrics["finite_update"] == 1.0
     assert metrics["optimizer_steps"] == 1.0
+
+
+def test_one_step_credit_matches_the_registered_mean_step_utility() -> None:
+    rewards = torch.tensor([[0.2, 0.7], [0.4, 0.5]], dtype=torch.float32)
+    values = torch.tensor([[0.1, 0.3], [0.2, 0.1]], dtype=torch.float32)
+    advantages, returns = compute_gae(rewards, values, gamma=0.0)
+    torch.testing.assert_close(advantages, rewards - values, rtol=0, atol=0)
+    torch.testing.assert_close(returns, rewards, rtol=0, atol=0)
 
 
 def test_nonformal_screen_closes_one_small_artifact(tmp_path) -> None:

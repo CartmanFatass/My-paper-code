@@ -110,6 +110,22 @@ held-out evaluation and every screen threshold remain unchanged. Curriculum
 success would support a staged learning-path hypothesis only; it would not
 establish comparative advantage or UAV transport.
 
+The curriculum fails its sole screen and is closed. The active credit
+correction aligns GAE with the registered mean-step objective:
+
+```text
+credit_gamma=0.0
+gae_lambda=0.95_irrelevant_when_gamma_zero
+current_observation_residual=true
+active_count_curriculum=false
+updates=100
+```
+
+This changes neither environment reward nor evaluation return. It prevents
+independent future demand from being assigned to the current continuous action.
+It is source-scoped credit evidence and cannot by itself justify use on a
+long-horizon UAV control source.
+
 ## Protected interpretation
 
 - G8-G16 and the retired spatial carrier remain closed exactly as recorded.

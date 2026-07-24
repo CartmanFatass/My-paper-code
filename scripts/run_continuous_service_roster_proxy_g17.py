@@ -309,11 +309,14 @@ def screen(
     initial_log_std: float = 0.0,
     current_observation_residual: bool = False,
     active_count_curriculum: bool = False,
+    credit_gamma: float = 0.99,
 ) -> dict[str, Any]:
     if min(updates, num_envs, eval_episodes, ppo_passes) <= 0:
         raise ValueError("G17 screen counts must be positive")
     if active_count_curriculum and updates < 3:
         raise ValueError("G17 active-count curriculum requires at least three updates")
+    if not 0.0 <= float(credit_gamma) <= 1.0:
+        raise ValueError("G17 credit gamma must lie in [0, 1]")
     run_root.mkdir(parents=True, exist_ok=False)
     configure_runtime(MODEL_SEED)
     started = time.perf_counter()
@@ -373,6 +376,7 @@ def screen(
             trajectory,
             device=torch.device("cpu"),
             ppo_passes=int(ppo_passes),
+            gamma=float(credit_gamma),
         )
         finite = finite and bool(metrics["finite_update"])
         for name in maximum_errors:
@@ -430,6 +434,7 @@ def screen(
         "current_observation_residual": bool(current_observation_residual),
         "active_count_curriculum": bool(active_count_curriculum),
         "training_stages": training_stages,
+        "credit_gamma": float(credit_gamma),
         "optimizer": {
             "learning_rate": float(learning_rate),
             "initial_log_std": float(initial_log_std),
@@ -464,6 +469,7 @@ def screen(
             "optimizer_state": optimizer.state_dict(),
             "completed_updates": int(updates),
             "active_count_curriculum": bool(active_count_curriculum),
+            "credit_gamma": float(credit_gamma),
         },
         run_root / "final_checkpoint.pt",
     )
@@ -483,6 +489,7 @@ def main() -> None:
     parser.add_argument("--initial-log-std", type=float, default=0.0)
     parser.add_argument("--current-observation-residual", action="store_true")
     parser.add_argument("--active-count-curriculum", action="store_true")
+    parser.add_argument("--credit-gamma", type=float, default=0.99)
     parser.add_argument("--probe-steps", type=int, default=200)
     parser.add_argument("--probe-batch-size", type=int, default=64)
     arguments = parser.parse_args()
@@ -506,6 +513,7 @@ def main() -> None:
         initial_log_std=arguments.initial_log_std,
         current_observation_residual=arguments.current_observation_residual,
         active_count_curriculum=arguments.active_count_curriculum,
+        credit_gamma=arguments.credit_gamma,
     )
     print(json.dumps(result, sort_keys=True))
 

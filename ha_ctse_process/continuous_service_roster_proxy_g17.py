@@ -662,17 +662,25 @@ def replay_errors(
 
 
 def compute_gae(
-    rewards: torch.Tensor, values: torch.Tensor
+    rewards: torch.Tensor,
+    values: torch.Tensor,
+    *,
+    gamma: float = GAMMA,
+    gae_lambda: float = GAE_LAMBDA,
 ) -> tuple[torch.Tensor, torch.Tensor]:
     if rewards.shape != values.shape or rewards.ndim != 2:
         raise ValueError("G17 GAE expects matching [time, batch] tensors")
     advantages = torch.zeros_like(rewards)
     running = torch.zeros(rewards.shape[1], dtype=rewards.dtype, device=rewards.device)
     next_value = torch.zeros_like(running)
-    for time in range(HORIZON - 1, -1, -1):
-        continuation = 0.0 if time == HORIZON - 1 else 1.0
-        delta = rewards[time] + GAMMA * next_value * continuation - values[time]
-        running = delta + GAMMA * GAE_LAMBDA * continuation * running
+    time_count = int(rewards.shape[0])
+    for time in range(time_count - 1, -1, -1):
+        continuation = 0.0 if time == time_count - 1 else 1.0
+        delta = rewards[time] + float(gamma) * next_value * continuation - values[time]
+        running = (
+            delta
+            + float(gamma) * float(gae_lambda) * continuation * running
+        )
         advantages[time] = running
         next_value = values[time]
     return advantages, advantages + values
@@ -731,9 +739,12 @@ def optimize_update(
     *,
     device: torch.device,
     ppo_passes: int,
+    gamma: float = GAMMA,
 ) -> dict[str, float]:
     advantages, returns = compute_gae(
-        trajectory.rewards.to(device), trajectory.old_values.to(device)
+        trajectory.rewards.to(device),
+        trajectory.old_values.to(device),
+        gamma=float(gamma),
     )
     model.train()
     with torch.no_grad():

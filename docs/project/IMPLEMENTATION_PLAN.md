@@ -6,7 +6,7 @@
 ```text
 active_implementation=CONTINUOUS_SERVICE_ROSTER_PROXY_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=RESIDUAL_REPRESENTATION_PASS_PPO_FAIL_ACTIVE_COUNT_CURRICULUM_ACTIVE
+status=ACTIVE_COUNT_CURRICULUM_FAIL_ONE_STEP_CREDIT_SCREEN_ACTIVE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -61,6 +61,12 @@ closed. Run exactly one active-count curriculum screen with the same total 100
 updates: 25 singleton, 25 small-dynamic and 50 registered-dynamic updates. Keep
 the residual, `initial_log_std=-1.0`, learning rate `1e-3`, eight environments,
 two PPO passes and the existing screen gates.
+
+The curriculum closes as not promising (`0.6626998` joint, `0.0121912` gain).
+Run one objective-aligned credit screen with curriculum disabled and
+`credit_gamma=0.0`; retain the residual, 100 updates, eight environments, two
+PPO passes, learning rate `1e-3`, initial log standard deviation `-1.0`, source,
+seeds, evaluation and screen gates.
 
 ## After the screen
 

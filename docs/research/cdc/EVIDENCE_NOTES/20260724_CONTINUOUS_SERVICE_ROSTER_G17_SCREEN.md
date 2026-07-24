@@ -74,3 +74,14 @@ same total 100 updates: 25 singleton updates, 25 small-dynamic updates and 50
 registered-dynamic updates. It changes the learning path, not reward,
 evaluation, gates, model or total exposure. It tests whether the conditional
 continuous mapping is learnable before multi-agent credit dilution appears.
+
+The curriculum screen also fails: joint utility `0.662700`, gain `0.012191`,
+effort correlation `-0.248618` and mix correlation `-0.070239`. It does not
+retain a demand-conditioned controller and is closed without a longer warmup.
+
+The next discrepancy is objective-to-credit alignment. G17 evaluates mean
+per-step service utility and actions have only the recorded previous-action
+feature as a weak future consequence, while inherited `gamma=0.99` GAE mixes
+independently resampled future demands into every current score. The smallest
+algorithmic correction keeps the full source and budget fixed and sets the
+credit horizon to the registered immediate objective (`gamma=0`).
