@@ -1,7 +1,7 @@
 # Active-set-centered delayed residual G20
 
 ```text
-status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -85,3 +85,12 @@ sampled, deterministic and teacher modes, active-only centering, inactive exact
 zero, permutation/padding invariance, replay at collection time, residual
 exercise and bitwise anchor preservation. This accepts only the bounded screen;
 it is not evidence of delayed access and does not authorize formal compute.
+
+## Bounded screen disposition
+
+The integrated screen is operationally valid with maximum replay and centering
+error `2.91e-10` and exact anchor identity. G17 held-out utility remains
+`0.94428`, but G18 anchor and final utility are both `0.58333`, gain and spike
+utility are zero, and the first-match branch is
+`NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20`. The exact centered
+candidate is closed without tuning or formal/UAV promotion.

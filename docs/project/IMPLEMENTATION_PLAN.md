@@ -1,22 +1,22 @@
-# G20 active-set-centered delayed-residual implementation plan
+# G21 unconstrained anchored delayed-residual implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19
+last_nonformal=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_BOUNDED_SCREEN
+active_implementation=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g20
-algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20.md
+formal_compute=not_scheduled_for_g21
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21.md
 ```
 
 ## Accepted active line
@@ -76,3 +76,15 @@ thread. Zero-output sampled, deterministic and teacher replay are exact;
 inactive rows are exact zero; centering is permutation equivariant and padding
 independent; delayed updates leave the anchor bitwise unchanged. The only next
 action is the already-frozen paired nonformal screen from an integrated commit.
+
+That screen is now closed as
+`NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20`. It is operationally valid,
+keeps G17 above every gate and exercises a numerically centered residual, but
+G18 gain and spike service remain zero. The exact G20 candidate is retired.
+
+G21 changes one algorithmic axis: remove active-set centering and use the
+ordinary source-neutral delayed residual without G19's gradient projection.
+Keep SGD, successor credit, frozen anchor, budgets, thresholds and evaluation
+unchanged with fresh seeds. Implement only the thin optimizer/runner boundary,
+reuse existing trajectory and policy mechanics, and run the proof-sized tests
+before one integrated paired nonformal screen.
