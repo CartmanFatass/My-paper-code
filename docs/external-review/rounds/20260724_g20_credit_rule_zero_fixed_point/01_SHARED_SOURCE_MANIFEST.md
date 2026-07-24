@@ -1,7 +1,6 @@
 # Shared source manifest
 
-All paths are read from the remote at
-`stage_commit=77c2804d4cb9c93e1f00a0faed006940324a2ccc` through the GitHub
+All paths are read from the remote at `stage_commit` through the GitHub
 connector. Nothing is uploaded; the repository is the evidence.
 
 ## Read first — the finding and the design it applies to

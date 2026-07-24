@@ -4,7 +4,6 @@
 round=20260724_g20_credit_rule_zero_fixed_point
 branch=untied-k
 repository=CartmanFatass/My-paper-code
-stage_commit=77c2804d4cb9c93e1f00a0faed006940324a2ccc
 semantic_author=project_manager
 scientific_authority=external_pro
 code_design_authority=project_manager_orchestrator
