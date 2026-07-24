@@ -14,9 +14,11 @@ This file records active state only. Durable authority is in `AGENTS.md`.
   operator topology are not activated here.
 - All pre-existing and imported Agent, Skill and profile assets are retained.
   Only the Controller registry named by `AGENTS.md` is active on `Claude`.
-- The user revoked automatic continuation. BrowserMCP submission, successor
-  dispatch, implementation and all compute remain paused until a new explicit
-  user instruction.
+- The user authorized one bounded ten-iteration autonomous chain on `Claude`
+  for decoupling individual skill lifetime from the shared global cycle `k`.
+  Inside that scope the Controller continues without intermediate approval
+  through the registered Pro conversation, executable planning, local OMP
+  agents, proof-sized CPU evidence, successor selection and iteration reports.
 - Git pushes are authorized only to `Claude`. Mutating `aggressive` or any
   other branch is forbidden.
 
@@ -24,15 +26,15 @@ This file records active state only. Durable authority is in `AGENTS.md`.
 
 ```text
 last_completed_assignment_id=IMPORTED_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
-active_assignment_id=CLAUDE_DECOUPLED_SKILL_CYCLE_K_DIRECTION_SET
-next_boundary=STRUCTURALLY_NEW_K_DECOUPLING_DESIGN_REQUIRES_EXPLICIT_USER_INSTRUCTION
-autonomous_research_grant=REVOKED_BY_USER
-grant_scope=none
-intermediate_authorization_prompts=required_for_every_new_protected_action
-iterations_remaining=0_authorized
-conclusion_bearing_iterations_consumed=17_imported_aggressive_history
-uav_chain_iterations_consumed=0
-uav_chain_iterations_remaining=0_authorized
+active_assignment_id=CLAUDE_DECOUPLED_SKILL_LIFETIME_TEN_ITERATION_CHAIN
+next_boundary=INITIAL_EXTERNAL_PRO_SCIENTIFIC_DIRECTION_INTAKE
+autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLED_SKILL_LIFETIME_CHAIN
+grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor
+intermediate_authorization_prompts=forbidden_within_grant
+iterations_remaining=10_authorized
+conclusion_bearing_iterations_consumed=0_on_claude
+skill_lifetime_chain_iterations_consumed=0
+skill_lifetime_chain_iterations_remaining=10
 uav_chain_report_range=not_active_on_claude
 imported_source_branch=origin/aggressive
 imported_source_commit=770fa45100134e887c50ab34b36c57f68ded5516
@@ -44,7 +46,7 @@ tracked_algorithm_match=exact_against_origin_aggressive_770fa45100134e887c50ab34
 focused_algorithm_merge_tests=10_passed_1_runtime_artifact_blocked
 runtime_artifact_blocker=logs/formal_open_roster_prefix_g8_cpu_20260723_fcce714_r1/train_manifest.json_absent
 runtime_evidence_import=git_tracked_records_only_logs_not_present_in_workspace
-implementation_status=K_DECOUPLING_DIRECTION_SET_EVIDENCE_ASSESSED_NO_CODE_AUTHORIZED
+implementation_status=AWAITING_EXTERNAL_PRO_SCIENTIFIC_DIRECTION
 k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM
 k_fixed_anchor=R41B_PASS_WIN_0.89_KEY0_0.97_KEY1_0.92
 k_r42=VALID_FAIL_SERVICE_DELTA_WIN_CI_MINUS_0.17_TO_MINUS_0.03
@@ -53,16 +55,16 @@ k_r44=VALID_FAIL_NO_DECOUPLING_DISCORDANCE_0_FULL_SYNC_RENEW_1
 k_r45=VALID_FAIL_IDENTIFIABILITY_PREDICTION_LEARNABLE_SIGN_HETEROGENEITY_ABSENT
 k_r48=VALID_FAIL_SKILL_BOUNDARY_RESET
 k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE
-nonformal_compute_status=not_authorized
-formal_compute_authority=none_without_new_explicit_user_instruction
-formal_compute_status=not_authorized
+nonformal_compute_status=authorized_proof_sized_cpu_after_plan_freeze
+formal_compute_authority=ten_simple_scene_cpu_iterations_user_authorized_after_pro_intake
+formal_compute_status=not_started_review_pending
 git_integration_status=Claude_only
 aggressive_branch_mutation=forbidden
-external_review_transport_status=paused
-experiment_monitor_status=unassigned
-iteration_report_requirement=historical_import_complete
-iteration_report_status=iterations_1_to_17_imported
-latest_iteration_report=docs/report/ITERATION_17.md
+external_review_transport_status=authorized_same_registered_conversation_live_preflight_required
+experiment_monitor_status=unassigned_not_required_for_local_proof_size
+iteration_report_requirement=one_chinese_report_per_conclusion_bearing_iteration
+iteration_report_status=none_completed_on_claude
+latest_iteration_report=none_on_claude
 uav_user_scope=imported_history_only_not_authorized_on_claude
 uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster
 uav_active_design=none_on_claude
@@ -85,7 +87,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=user_directed_independent_exploration
+next_action_class=external_pro_full_plural_k_decoupling_review
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC

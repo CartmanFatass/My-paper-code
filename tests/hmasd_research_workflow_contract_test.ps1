@@ -12,7 +12,10 @@ if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected retained Skill asset set: $($skills -join ',')"
 }
 $currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
-foreach ($required in @('autonomous_research_grant=REVOKED_BY_USER',
+foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLED_SKILL_LIFETIME_CHAIN',
+    'grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor',
+    'iterations_remaining=10_authorized',
+    'formal_compute_authority=ten_simple_scene_cpu_iterations_user_authorized_after_pro_intake',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
     'agent_assets=all_retained_active_routing_controller_registry_only',
