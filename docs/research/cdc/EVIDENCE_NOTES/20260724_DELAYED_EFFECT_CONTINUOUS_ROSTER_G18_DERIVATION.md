@@ -172,3 +172,17 @@ residual as the proven G17 actor channel and add a separately centered
 successor-value residual for delayed state consequences. It may not use battery
 fields in the credit rule, tune the retired TD(0) screen or launch formal
 compute before a new evidence contract is frozen.
+
+## Fast/slow algebra disposition
+
+The environment-neutral algebra passed ten focused tests. It preserves a
+detached immediate reward residual and adds a separately centered detached
+one-step successor-value residual. Terminal bootstrap, discounted slow returns,
+inactive likelihood zero, G17/G18 replay and gradients to all three critic heads
+closed exactly. No source-specific field enters the credit rule.
+
+The smallest next action is now the frozen nonformal dual-source screen in
+`docs/research/designs/FAST_SLOW_SEPARATED_CREDIT_G18.md`. It must demonstrate
+both preservation of G17 conditional access and acquisition of the G18 delayed
+battery mechanism before any formal contract is prepared. This algebra action
+and its bounded screen consume zero conclusion-bearing iterations.

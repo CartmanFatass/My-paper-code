@@ -65,7 +65,7 @@ Focused proof: `tests/ha_ctse_process_delayed_battery_roster_g18_test.py`.
 
 ## Next algorithm boundary
 
-`FAST_SLOW_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE` must be environment-neutral.
-It retains the proven immediate reward residual and adds a separately centered
-one-step successor-value residual. The exact TD(0) candidate is closed and may
-appear only as a frozen comparator.
+`FAST_SLOW_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE` passed its focused algebra,
+gradient, replay, lifecycle and dual-source interface tests. Its exact bounded
+screen is frozen in `FAST_SLOW_SEPARATED_CREDIT_G18.md`. The exact TD(0)
+candidate is closed and may appear only as a frozen comparator.

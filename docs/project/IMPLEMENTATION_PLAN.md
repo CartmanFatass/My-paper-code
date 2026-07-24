@@ -8,13 +8,15 @@ last_screen=ONE_STEP_TD_BOOTSTRAP_G18
 last_screen_result=NONFORMAL_TD0_NOT_COMPATIBLE_G18
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=FAST_SLOW_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE
+active_implementation=BOUNDED_DUAL_SOURCE_G17_G18_NONFORMAL_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=none
 iterations_remaining=9
 formal_compute=not_running
+algebra_status=PASS_10_FOCUSED_TESTS
+screen_contract=docs/research/designs/FAST_SLOW_SEPARATED_CREDIT_G18.md
 ```
 
 ## Accepted active line
@@ -31,6 +33,6 @@ formal_compute=not_running
    centered successor-value residual. The credit rule may read generic reward,
    state/value, terminal and active masks only; it may not read battery, demand
    phase or lifecycle role directly.
-5. First verify the algebra and inactive-row masking. Only then run a bounded
-   nonformal screen on both the closed G17 immediate source and the new G18
-   delayed source. A formal evidence contract is not yet frozen.
+5. The algebra and inactive-row masking passed ten focused tests. Run the one
+   frozen bounded nonformal screen on both the closed G17 immediate source and
+   the new G18 delayed source. A formal evidence contract is not yet frozen.
