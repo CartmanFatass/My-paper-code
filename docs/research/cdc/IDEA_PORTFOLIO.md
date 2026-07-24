@@ -12,7 +12,7 @@ compute authority.
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | active-set-centered residual selected | G19 exactly preserves the G17 fast anchor but yields zero delayed gain. G20 removes common-mode residual output and exposes anonymous member redistribution while retaining G17 as the first behavioral gate. | Implement the centered residual and run the same G17-first/G18-second screen with fresh seeds. |
+| C-CREDIT | net-immediate-descent full actor selected | Formal G18 learns G18 but is unstable on G17; frozen residuals G19--G26 are too restrictive; G27 preserves G17 but strict successor non-conflict removes delayed access. | Test the parameter-free condition that only the equal combined gradient must remain an immediate descent direction. |
 | C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,10 +21,11 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=ACTOR_CRITIC_ISOLATED_G18_FORMAL_ITERATION_19
+completed_action=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_BOUNDED_SCREEN
 source_family=paired_immediate_and_delayed_dynamic_roster_toys
 formal_disposition=NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18
-next_action=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_PROTOTYPE
+latest_nonformal_disposition=NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27
+next_action=NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28_PROTOTYPE
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
 conclusion_bearing_iterations_consumed=19
 iterations_remaining=8
@@ -50,6 +51,8 @@ immediate-service controller across within-episode roster changes. Its one-step
 credit is deliberately not treated as a UAV or long-horizon solution; the
 formal G18 establishes strong delayed-source learning but rejects the shared
 actor as a stable dual-source algorithm because the accepted immediate mapping
-degrades across fresh seeds. The active successor is a zero-compute derivation
-of a protected fast-policy anchor and additive delayed residual, not a tuned
-retry or UAV promotion.
+degrades across fresh seeds. G19--G26 close frozen additive residual variants;
+G27 restores full capacity and preserves G17, but its strict successor
+non-conflict removes delayed access. The active successor protects net
+immediate descent instead of forbidding all successor conflict. No candidate is
+yet promoted to UAV.

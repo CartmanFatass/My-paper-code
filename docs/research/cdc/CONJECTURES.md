@@ -159,6 +159,13 @@ the Project Manager-accepted CDC state.
   delayed consequences to asynchronous events.
 - Separating evidence: representation held fixed while only a well-defined
   temporal-credit estimator changes.
+- Current paired evidence: formal G18 shows that independently normalized
+  immediate/successor credit can learn the delayed G18 source but is not stable
+  on G17 across fresh seeds. G19--G26 show that exact frozen-anchor additive
+  residual families are too weak. G27 restores full actor capacity and keeps
+  G17 strong under strict successor/immediate non-conflict, but G18 returns to
+  zero spike service. The active discriminator protects only the equal combined
+  gradient's immediate descent, allowing conflict cancelled by `g_i` itself.
 
 ## C-BENCH — The benchmark is not identifying
 

@@ -4,19 +4,19 @@
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26
-last_nonformal_result=NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26
+last_nonformal=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_REPAIRED_BOUNDED_SCREEN
+active_implementation=NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g27
-algebra_status=OPERATIONAL_REPAIR_ACCEPTED_RERUN_NEXT
-screen_contract=docs/research/designs/IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27.md
+formal_compute=not_scheduled_for_g28
+algebra_status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+screen_contract=docs/research/designs/NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28.md
 ```
 
 ## Accepted active line
@@ -259,3 +259,16 @@ returns to the closed half-space with a positive, minimal lattice correction.
 Seven focused and 37 combined G17/G18/G19/G27 tests pass on CPU with one thread.
 The exact next action is one fresh integrated rerun; no gate or scientific
 parameter changed.
+
+The repaired G27 screen is operationally valid and closes as
+`NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27`. G17 passes all gates, but
+G18 gain is only `0.02515` and spike utility is zero. Strictly requiring the
+successor gradient itself to be non-conflicting is therefore retired.
+
+G28 changes only that excessive constraint. Preserve the full actor, equal
+channel weights and all screen semantics, but allow successor conflict while
+the equal combined gradient remains an immediate-loss descent direction. The
+closed-form boundary has no tunable coefficient. Implement the projection,
+rename the active runner/test, retain the accepted float-lattice realization,
+and run proof-sized tests before one integrated bounded screen. No formal or
+UAV compute is scheduled.
