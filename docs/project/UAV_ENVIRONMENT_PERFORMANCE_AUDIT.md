@@ -9,6 +9,8 @@ reviewed_s7_core_commit=a2908ba578b27f5b5ce783a659ea3cfedb0c8f09
 formal_result_semantics_change=false
 communication_snapshot_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 communication_snapshot_benchmark_improvement_pct=20.3186
+observation_view_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+combined_wrapper_benchmark_improvement_pct=32.3707
 ```
 
 ## 结论
@@ -103,9 +105,13 @@ position 的试探计算。试探位置只能走原标量 fallback，不能污�
 
 ## 实现与验收（2026-07-23）
 
-本轮只实现 B 类整步通信快照，A 类 observation/control fast path 暂不扩张。实现位于隔离分支
+本轮实现 A 类 observation/control 复用和 B 类整步通信快照。实现位于隔离分支
 `codex/uav-env-fastpath`，不会改变正在运行的 G1 正式实验所绑定的源码。
 
+- `uav_temp_loss_g1.py` 在 service mask 不变时直接复用 `scenario7.step()` 已生成的 raw
+  observations 与 `next_state`，只执行匿名 owner repack；onset/rejoin 强制完整重建。
+- controller worker 直接读取当前 active mask 与物理位置来生成动作，不再在动作前构造一个未使用的
+  actor/critic view；step 后仍返回原有完整 view，因此不改变进程协议或估计量。
 - `scenario_base.py` 为每次权威 `_update_channel_state()` 建立精确状态快照，复用 UAV-user
   路损、定向 link SINR 与 capacity；干扰半径和噪声线性值按其参数签名复用。
 - 快照逐项校验 UAV/user/ground-BS 坐标、不可用 mask 和通信配置。位置试探、配置变化、
@@ -113,7 +119,10 @@ position 的试探计算。试探位置只能走原标量 fallback，不能污�
 - 原标量公式、干扰源遍历与 `np.sum` 顺序保持不变；没有批量化或浮点归约重排。
 - `scenario7_energy_aware_test.py` 的 37 项聚焦测试全部通过；其中包含五步缓存/未缓存结构化
   证据与 RNG 完全一致、精确位置/配置/不可用 mask 失效，以及试探不污染检查。
-- 临时离队环境的 leave-before-action、S7-S1 保护配置和持久 vector worker 三项聚焦测试通过。
+- 临时离队环境聚焦测试文件的 16 项测试全部通过，包括 leave-before-action、S7-S1 保护配置、
+  持久 vector worker 以及新增的 step/view 精确对照。
+- 新增的四阶段稳态/onset/rejoin/稳态对照逐元素验证 observation、critic state、位置、reward、
+  QoS 和 executed mask；复用版只在无 lifecycle 变化的阶段读取 step 已生成输入。
 
 低优先级、CPU 单线程、单环境 S7-S1 短基准对缓存与显式禁用缓存各运行三组，每组 3 step，
 交替运行顺序并逐组核对最终 SINR、connections 和 routing paths 完全一致：
@@ -129,6 +138,18 @@ decision=KEEP
 ```
 
 该门槛只决定是否保留性能实现，不产生或改变任何科学结论。
+
+在通信快照已启用的条件下，单独开启 observation/view 复用的三组 3-step 中位耗时从
+`0.6674345s` 降至 `0.6077971s`，额外改善 `8.9353%`。最终默认 fast path 与同时禁用两项
+优化的标量路径进行三组配对，逐组核对完整 transition 证据完全一致：
+
+```text
+fast_seconds=[0.5265045, 0.5715126, 0.6938764]
+scalar_seconds=[0.8957733, 0.8450665, 0.7667238]
+fast_median_seconds=0.5715126
+scalar_median_seconds=0.8450665
+combined_median_improvement=32.3707%
+```
 
 ## 调度
 

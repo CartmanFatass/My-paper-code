@@ -362,10 +362,10 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
         self.uav_failure_timers[:] = 0
         self.uav_failed[:] = False
 
-    def _synchronize_service_mask(self, *, force: bool = False) -> None:
+    def _synchronize_service_mask(self, *, force: bool = False) -> bool:
         step = int(getattr(self, "current_step", 0))
         if not force and step == self._last_mask_step:
-            return
+            return False
         new_mask = self.loss_ledger.active_mask(step)
         changed = not np.array_equal(new_mask, self._service_active_mask)
         self._service_active_mask = new_mask
@@ -374,24 +374,29 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
             self._update_channel_state()
             self._update_uav_connections()
             self._compute_routing_paths()
+        return changed
 
     def reset(self, seed: int | None = None, options: Any = None):
         actual_seed = self.environment_seed if seed is None else int(seed)
         self._reset_namespace_rngs(actual_seed)
         observations, infos = super().reset(seed=actual_seed, options=options)
         self._last_mask_step = -1
-        self._synchronize_service_mask(force=True)
-        observations = {agent: self._get_observation(agent) for agent in self.agents}
-        observations = self._update_observations_dict(observations)
+        mask_changed = self._synchronize_service_mask(force=True)
+        if mask_changed or bool(getattr(self, "_disable_step_view_reuse", False)):
+            observations = {agent: self._get_observation(agent) for agent in self.agents}
+            observations = self._update_observations_dict(observations)
         return observations, infos
 
-    def _actor_observation(self, owner: int) -> np.ndarray:
+    def _actor_observation(
+        self, owner: int, raw_observation: np.ndarray | None = None
+    ) -> np.ndarray:
         """Faithful S7-S1 local observation with only owner leakage removed."""
 
-        raw = np.asarray(
-            self._get_observation(self.possible_agents[int(owner)])["obs"],
-            dtype=np.float32,
-        ).copy()
+        if raw_observation is None:
+            raw_observation = self._get_observation(
+                self.possible_agents[int(owner)]
+            )["obs"]
+        raw = np.asarray(raw_observation, dtype=np.float32).copy()
         if raw.shape != (self.obs_dim,):
             raise RuntimeError("raw S7-S1 actor observation width drifted")
         own = np.asarray(self.uav_positions[owner], dtype=np.float64)
@@ -461,18 +466,31 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
         raw[energy_start:energy_stop] = anonymous.reshape(-1)
         return raw
 
-    def current_view(self) -> UAVCurrentView:
-        self._synchronize_service_mask()
+    def _build_current_view(
+        self,
+        *,
+        raw_observations: Mapping[str, Mapping[str, np.ndarray]] | None = None,
+        critic_state: np.ndarray | None = None,
+    ) -> UAVCurrentView:
         observations = np.zeros((PHYSICAL_UAVS, self.obs_dim), dtype=np.float32)
         for owner in np.flatnonzero(self._service_active_mask):
-            observations[owner] = self._actor_observation(int(owner))
+            raw = None
+            if raw_observations is not None:
+                raw = raw_observations[self.possible_agents[int(owner)]]["obs"]
+            observations[owner] = self._actor_observation(int(owner), raw)
+        if critic_state is None:
+            critic_state = self._get_state()
         return UAVCurrentView(
             observations=observations,
             active_mask=self._service_active_mask.copy(),
-            critic_state=np.asarray(self._get_state(), dtype=np.float32),
+            critic_state=np.asarray(critic_state, dtype=np.float32).copy(),
             physical_positions=np.asarray(self.uav_positions, dtype=np.float64).copy(),
             physical_step=int(self.current_step),
         )
+
+    def current_view(self) -> UAVCurrentView:
+        self._synchronize_service_mask()
+        return self._build_current_view()
 
     def step(self, actions: np.ndarray) -> UAVTransition:
         self._synchronize_service_mask()
@@ -488,7 +506,9 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
             for index, agent in enumerate(self.possible_agents)
             if executed_mask[index]
         }
-        _observations, rewards, terminations, truncations, infos = super().step(action_dict)
+        raw_observations, rewards, terminations, truncations, infos = super().step(
+            action_dict
+        )
         if not np.array_equal(self.uav_positions[~executed_mask], before[~executed_mask]):
             raise RuntimeError("inactive UAV position changed during service loss")
         if not np.array_equal(
@@ -502,9 +522,16 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
         qos = float(reward_info.get("qos_satisfaction_ratio", 0.0))
         terminated = bool(all(terminations.values())) if terminations else False
         truncated = bool(all(truncations.values())) if truncations else False
-        self._synchronize_service_mask(force=True)
+        mask_changed = self._synchronize_service_mask(force=True)
+        reuse_step_outputs = not mask_changed and not bool(
+            getattr(self, "_disable_step_view_reuse", False)
+        )
+        next_state = first_info.get("next_state") if reuse_step_outputs else None
         return UAVTransition(
-            view=self.current_view(),
+            view=self._build_current_view(
+                raw_observations=raw_observations if reuse_step_outputs else None,
+                critic_state=next_state,
+            ),
             reward=reward,
             qos_satisfaction_ratio=qos,
             terminated=terminated,
@@ -570,16 +597,19 @@ def _worker_main(connection: Connection) -> None:
             elif command == "controller_step":
                 if environment is None:
                     raise RuntimeError("worker controller step requested before reset")
-                view = environment.current_view()
+                active_mask = environment.service_active_mask
+                physical_positions = np.asarray(
+                    environment.uav_positions, dtype=np.float64
+                ).copy()
                 kind = request["kind"]
                 if kind == "constructive":
                     if constructive_controller is None:
                         raise RuntimeError("constructive controller was not reset")
                     actions = constructive_controller.act(
-                        physical_positions=view.physical_positions,
+                        physical_positions=physical_positions,
                         user_positions=environment.user_positions,
                         ground_bs_positions=environment.ground_bs_positions,
-                        active_mask=view.active_mask,
+                        active_mask=active_mask,
                         max_speed=environment.max_speed,
                         max_vertical_speed=environment.max_vertical_speed_mps,
                         time_step=environment.time_step,
@@ -590,16 +620,16 @@ def _worker_main(connection: Connection) -> None:
                     # the same current mask and physical state as an ordinary
                     # evaluation controller.
                     candidate_targets = constructive_target_layout(
-                        physical_positions=view.physical_positions,
+                        physical_positions=physical_positions,
                         user_positions=environment.user_positions,
                         ground_bs_positions=environment.ground_bs_positions,
-                        active_mask=view.active_mask,
+                        active_mask=active_mask,
                         height_range=environment.height_range,
                     )
                     actions = no_reallocation.act_for_layout(
                         candidate_targets=candidate_targets,
-                        physical_positions=view.physical_positions,
-                        active_mask=view.active_mask,
+                        physical_positions=physical_positions,
+                        active_mask=active_mask,
                         max_speed=environment.max_speed,
                         max_vertical_speed=environment.max_vertical_speed_mps,
                         time_step=environment.time_step,
