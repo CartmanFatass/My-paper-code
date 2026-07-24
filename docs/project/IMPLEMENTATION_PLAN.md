@@ -331,3 +331,13 @@ critic, residual and core-critic ownership remain disjoint; G17/G18 replay and
 lifecycle behavior are unchanged. Eight focused and 55 combined tests pass on
 CPU with one thread. The only next evidence action is one integrated bounded
 G29 screen from a fresh source commit.
+
+The first G29 attempt reached result aggregation but emitted no `result.json`:
+the inherited G19 metric reducer still requires its internal
+`minimum_projection_post_dot` input, while the G29 source row exposes only the
+new realized-displacement name. This is an operational schema-adapter failure,
+not a scientific branch, and consumes no iteration. Supply the legacy name only
+in a temporary copy passed to the shared reducer, then delete the reducer's
+legacy output before building the G29 artifact. Keep the G29 source rows,
+external telemetry, gates and algorithm free of the old projection label. Add
+one regression and rerun once from a fresh integrated source.

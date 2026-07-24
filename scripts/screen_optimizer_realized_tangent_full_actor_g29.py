@@ -372,8 +372,18 @@ def _train_source(source: str) -> dict[str, Any]:
 
 
 def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    metrics = g19_screen._metrics(rows)
+    shared_rows = [
+        row
+        | {
+            "minimum_projection_post_dot": row[
+                "minimum_realized_displacement_post_dot"
+            ]
+        }
+        for row in rows
+    ]
+    metrics = g19_screen._metrics(shared_rows)
     metrics.pop("maximum_anchor_difference")
+    metrics.pop("minimum_projection_post_dot")
     replay_maximum = max(
         value
         for row in rows

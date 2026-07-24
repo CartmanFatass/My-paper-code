@@ -359,3 +359,35 @@ def test_g29_result_precedence_and_configuration_are_frozen() -> None:
         configuration["actor_optimizer_state_rule"]
         == "unprojected_combined_gradient_state_projected_parameters"
     )
+
+
+def test_g29_metrics_adapt_shared_projection_name_without_persisting_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: list[list[dict[str, object]]] = []
+
+    def shared_metrics(rows):
+        captured.append(rows)
+        return {
+            "maximum_anchor_difference": 1.0,
+            "minimum_projection_post_dot": 0.25,
+        }
+
+    monkeypatch.setattr(screen.g19_screen, "_metrics", shared_metrics)
+    row = {
+        "maximum_replay_errors": {"logp_max_error": 0.0},
+        "actor_maximum_difference": 1.0,
+        "finite_updates": True,
+        "lifecycle_contract_valid": True,
+        "optimizer_ownership_valid": True,
+        "residual_output_layer_maximum_absolute_value": 0.0,
+        "minimum_realized_displacement_post_dot": 0.25,
+        "maximum_applied_parameter_identity_error": 0.0,
+        "minimum_actor_optimizer_step_increment": 1.0,
+    }
+
+    metrics = screen._metrics([row])
+
+    assert captured[0][0]["minimum_projection_post_dot"] == 0.25
+    assert "minimum_projection_post_dot" not in metrics
+    assert metrics["operational_valid"] is True
