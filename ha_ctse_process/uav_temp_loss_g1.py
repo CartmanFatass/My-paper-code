@@ -24,6 +24,10 @@ from scipy.optimize import linear_sum_assignment
 import torch
 from torch import nn
 
+from ha_ctse_process.continuous_roster_policy import (
+    ContinuousRosterPolicy,
+    ContinuousStepOutput,
+)
 from config_1 import Config
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
 
@@ -843,19 +847,7 @@ class PersistentUAVVectorEnv:
         self.close()
 
 
-@dataclass
-class ContinuousStepOutput:
-    actions: torch.Tensor
-    pre_tanh_actions: torch.Tensor
-    token_log_probs: torch.Tensor
-    token_entropies: torch.Tensor
-    value: torch.Tensor
-    next_hidden: torch.Tensor
-    prefix_action_sums: torch.Tensor
-    likelihood_mask: torch.Tensor
-
-
-class MatchedContinuousRecurrentPolicy(nn.Module):
+class MatchedContinuousRecurrentPolicy(ContinuousRosterPolicy):
     """One matched tanh-Gaussian actor-critic with selectable row routing."""
 
     def __init__(
@@ -866,175 +858,16 @@ class MatchedContinuousRecurrentPolicy(nn.Module):
         hidden_dim: int = 64,
         routing_mode: str,
     ) -> None:
-        super().__init__()
         if routing_mode not in ROUTING_MODES:
             raise ValueError("unknown UAV G1 routing mode")
-        self.observation_dim = int(observation_dim)
-        self.critic_state_dim = int(critic_state_dim)
-        self.hidden_dim = int(hidden_dim)
+        super().__init__(
+            observation_dim,
+            critic_state_dim,
+            member_capacity=PHYSICAL_UAVS,
+            action_dim=ACTION_DIM,
+            hidden_dim=hidden_dim,
+        )
         self.routing_mode = routing_mode
-        self.member_encoder = nn.Sequential(
-            nn.Linear(self.observation_dim, self.hidden_dim),
-            nn.Tanh(),
-            nn.Linear(self.hidden_dim, self.hidden_dim),
-            nn.Tanh(),
-        )
-        self.context_encoder = nn.Sequential(
-            nn.Linear(self.hidden_dim + 1, self.hidden_dim), nn.Tanh()
-        )
-        self.actor_rnn = nn.GRUCell(
-            2 * self.hidden_dim + ACTION_DIM, self.hidden_dim
-        )
-        self.action_mean = nn.Sequential(
-            nn.Linear(self.hidden_dim + ACTION_DIM, self.hidden_dim),
-            nn.Tanh(),
-            nn.Linear(self.hidden_dim, ACTION_DIM),
-        )
-        self.log_std = nn.Parameter(torch.zeros(ACTION_DIM))
-        self.critic = nn.Sequential(
-            nn.Linear(
-                self.hidden_dim + 1 + self.critic_state_dim + PHYSICAL_UAVS,
-                self.hidden_dim,
-            ),
-            nn.Tanh(),
-            nn.Linear(self.hidden_dim, 1),
-        )
-    @property
-    def parameter_count(self) -> int:
-        return int(sum(parameter.numel() for parameter in self.parameters()))
-
-    def _routing_order(
-        self, active_mask: torch.Tensor, observations: torch.Tensor
-    ) -> torch.Tensor:
-        # Presentation is a deterministic function of current anonymous
-        # physical content, never the storage slot.  Permuting physical rows
-        # therefore permutes outputs equivariantly while preserving paired arm
-        # order and exact teacher replay.
-        priority = (
-            observations[:, :, 0]
-            + math.sqrt(2.0) * observations[:, :, 1]
-            + math.sqrt(3.0) * observations[:, :, 2]
-        )
-        priority = torch.where(
-            active_mask, priority, torch.full_like(priority, float("inf"))
-        )
-        return torch.argsort(priority, dim=1, stable=True)
-
-    def forward_step(
-        self,
-        *,
-        observations: torch.Tensor,
-        active_mask: torch.Tensor,
-        critic_state: torch.Tensor,
-        hidden: torch.Tensor,
-        sampling_noise: torch.Tensor | None = None,
-        teacher_pre_tanh: torch.Tensor | None = None,
-        deterministic: bool = False,
-    ) -> ContinuousStepOutput:
-        if observations.ndim != 3 or observations.shape[1:] != (
-            PHYSICAL_UAVS,
-            self.observation_dim,
-        ):
-            raise ValueError("UAV actor observation shape mismatch")
-        batch = observations.shape[0]
-        if active_mask.shape != (batch, PHYSICAL_UAVS) or active_mask.dtype != torch.bool:
-            raise ValueError("UAV active mask shape/dtype mismatch")
-        if critic_state.shape != (batch, self.critic_state_dim):
-            raise ValueError("UAV critic state shape mismatch")
-        if hidden.shape != (batch, PHYSICAL_UAVS, self.hidden_dim):
-            raise ValueError("UAV hidden shape mismatch")
-        modes = int(sampling_noise is not None) + int(teacher_pre_tanh is not None) + int(deterministic)
-        if modes != 1:
-            raise ValueError("choose exactly one sampling, replay, or deterministic mode")
-        expected_action_shape = (batch, PHYSICAL_UAVS, ACTION_DIM)
-        if sampling_noise is not None and sampling_noise.shape != expected_action_shape:
-            raise ValueError("UAV sampling-noise shape mismatch")
-        if teacher_pre_tanh is not None and teacher_pre_tanh.shape != expected_action_shape:
-            raise ValueError("UAV teacher latent shape mismatch")
-        active_count = active_mask.sum(dim=1)
-        if bool((active_count <= 0).any()):
-            raise ValueError("UAV policy requires at least one active lifecycle")
-
-        dtype = observations.dtype
-        batch_index = torch.arange(batch, device=observations.device)
-        encoded = self.member_encoder(observations)
-        float_mask = active_mask.to(dtype).unsqueeze(-1)
-        member_sum = (encoded * float_mask).sum(dim=1)
-        count_coordinate = torch.log1p(active_count.to(dtype)).unsqueeze(-1)
-        context_input = torch.cat((member_sum, count_coordinate), dim=-1)
-        context = self.context_encoder(context_input)
-        value = self.critic(
-            torch.cat(
-                (context_input, critic_state, active_mask.to(dtype)), dim=-1
-            )
-        ).squeeze(-1)
-
-        order = self._routing_order(active_mask, observations)
-        positions = torch.arange(PHYSICAL_UAVS, device=observations.device).unsqueeze(0)
-        valid_positions = positions < active_count.unsqueeze(1)
-        next_hidden = hidden.clone()
-        actions = torch.zeros(expected_action_shape, dtype=dtype, device=observations.device)
-        pre_tanh_actions = torch.zeros_like(actions)
-        log_probs = torch.zeros((batch, PHYSICAL_UAVS), dtype=dtype, device=observations.device)
-        entropies = torch.zeros_like(log_probs)
-        prefix_rows = torch.zeros(expected_action_shape, dtype=dtype, device=observations.device)
-        prefix_sum = torch.zeros((batch, ACTION_DIM), dtype=dtype, device=observations.device)
-        denominator = active_count.to(dtype).unsqueeze(-1)
-        log_std = self.log_std.clamp(-5.0, 2.0)
-        std = torch.exp(log_std)
-
-        for position in range(PHYSICAL_UAVS):
-            valid = valid_positions[:, position]
-            if not bool(valid.any()):
-                break
-            owner = order[:, position].clamp(max=PHYSICAL_UAVS - 1)
-            prefix_fraction = prefix_sum / denominator
-            local_hidden = next_hidden[batch_index, owner]
-            candidate = self.actor_rnn(
-                torch.cat((encoded[batch_index, owner], context, prefix_fraction), dim=-1),
-                local_hidden,
-            )
-            mean = self.action_mean(torch.cat((candidate, prefix_fraction), dim=-1))
-            distribution = torch.distributions.Normal(mean, std.expand_as(mean))
-            if teacher_pre_tanh is not None:
-                raw = teacher_pre_tanh[batch_index, owner]
-                chosen = torch.tanh(raw)
-            elif deterministic:
-                raw = mean
-                chosen = torch.tanh(raw)
-            else:
-                assert sampling_noise is not None
-                raw = mean + std * sampling_noise[batch_index, owner]
-                chosen = torch.tanh(raw)
-            log_jacobian = 2.0 * (
-                math.log(2.0) - raw - torch.nn.functional.softplus(-2.0 * raw)
-            )
-            chosen_logp = (distribution.log_prob(raw) - log_jacobian).sum(dim=-1)
-            # Analytic raw-Gaussian entropy is a stable PPO exploration proxy;
-            # inactive rows have no entropy or likelihood exposure.
-            entropy = distribution.entropy().sum(dim=-1)
-            valid_batch = batch_index[valid]
-            valid_owner = owner[valid]
-            next_hidden[valid_batch, valid_owner] = candidate[valid]
-            actions[valid_batch, valid_owner] = chosen[valid]
-            pre_tanh_actions[valid_batch, valid_owner] = raw[valid]
-            log_probs[valid_batch, valid_owner] = chosen_logp[valid]
-            entropies[valid_batch, valid_owner] = entropy[valid]
-            prefix_rows[:, position] = prefix_sum
-            prefix_sum = prefix_sum + torch.where(
-                valid.unsqueeze(-1), chosen, torch.zeros_like(chosen)
-            )
-
-        return ContinuousStepOutput(
-            actions=actions,
-            pre_tanh_actions=pre_tanh_actions,
-            token_log_probs=log_probs,
-            token_entropies=entropies,
-            value=value,
-            next_hidden=next_hidden,
-            prefix_action_sums=prefix_rows,
-            likelihood_mask=active_mask,
-        )
 
 
 @dataclass
