@@ -77,7 +77,7 @@ DOMAIN_FLOORS = {
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
-EXPECTED_EVENT_COUNT = 8
+EXPECTED_EVENT_COUNTS = (8,)
 REQUIRE_UNIQUE_PROFILES = False
 REQUIRED_EVENT_OPERATIONS = (
     "temporarily_left",
@@ -355,7 +355,7 @@ def _source_controls(*, episode_ids: tuple[int, ...]) -> dict[str, Any]:
             for row in rows
         ),
         "all_event_counts_exact": all(
-            row["event_count"] == EXPECTED_EVENT_COUNT for row in rows
+            row["event_count"] in EXPECTED_EVENT_COUNTS for row in rows
         ),
         "all_lifecycle_states_exact": all(row["valid"] for row in lifecycle_rows),
         "all_profile_names_unique": (

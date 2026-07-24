@@ -1,4 +1,4 @@
-"""Configure frozen-G8 evaluation for atomic active-count shocks G15."""
+"""Configure final frozen-G8 dynamic-roster deployment mixture G16."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from ha_ctse_process.open_roster_atomic_count_shock_g15 import (
+from ha_ctse_process.open_roster_deployment_mixture_g16 import (
     DOMAIN_PROFILES,
     LEDGER_FACTORIES,
 )
@@ -23,55 +23,55 @@ from ha_ctse_process.open_roster_high_churn_g9 import (
 from scripts import run_open_roster_high_churn_g9 as core
 
 
-ALGORITHM_ID = "ATOMIC_COUNT_SHOCK_G15"
-AUTHORIZATION_TOKEN = "AUTHORIZE_ATOMIC_COUNT_SHOCK_G15_FORMAL_CPU_V1"
-INVALID_BRANCH = "INVALID_ATOMIC_COUNT_SHOCK_G15"
-NONFORMAL_BRANCH = "NONFORMAL_ATOMIC_COUNT_SHOCK_G15_EXERCISE_COMPLETE"
+ALGORITHM_ID = "DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16"
+AUTHORIZATION_TOKEN = "AUTHORIZE_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16"
+NONFORMAL_BRANCH = "NONFORMAL_DEPLOYMENT_MIXTURE_G16_EXERCISE_COMPLETE"
 FORMAL_REPLICATES = core.FORMAL_REPLICATES
-FORMAL_EVAL_EPISODES = 24
+FORMAL_EVAL_EPISODES = 36
 FORMAL_BOOTSTRAP_REPETITIONS = core.FORMAL_BOOTSTRAP_REPETITIONS
 DOMAIN_LEDGER_SEEDS = {
-    "shock_moderate": 4_181_000,
-    "shock_wide": 4_181_100,
-    "mixed_churn": 4_181_200,
+    "deployment_moderate": 4_481_000,
+    "deployment_wide": 4_481_100,
+    "mixed_churn": 4_481_200,
 }
-ACTION_SEED_BASE = 4_281_000
-BOOTSTRAP_SEED = 4_381_015
+ACTION_SEED_BASE = 4_581_000
+BOOTSTRAP_SEED = 4_681_016
 DOMAIN_FLOORS = {
-    "shock_moderate": 0.90,
-    "shock_wide": 0.90,
+    "deployment_moderate": 0.90,
+    "deployment_wide": 0.90,
     "mixed_churn": 0.90,
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
-EXPECTED_EVENT_COUNT = 6
+EXPECTED_EVENT_COUNTS = (6, 12)
 DEFAULT_G8_RUN_ROOT = core.DEFAULT_G8_RUN_ROOT
 
 
 def select_result_branch(metrics: dict[str, object]) -> str:
     if (
-        float(metrics["shock_moderate_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["shock_moderate"]
+        float(metrics["deployment_moderate_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["deployment_moderate"]
     ):
-        return "NO_ATOMIC_SHOCK_MODERATE_ACCESS_G15"
+        return "NO_DEPLOYMENT_MODERATE_ACCESS_G16"
     if (
-        float(metrics["shock_wide_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["shock_wide"]
+        float(metrics["deployment_wide_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["deployment_wide"]
     ):
-        return "NO_ATOMIC_SHOCK_WIDE_ACCESS_G15"
+        return "NO_DEPLOYMENT_WIDE_ACCESS_G16"
     if (
         float(metrics["mixed_churn_deterministic_utility_ci95"][0])
         < DOMAIN_FLOORS["mixed_churn"]
     ):
-        return "NO_ATOMIC_SHOCK_ULTRA_ACCESS_G15"
+        return "NO_DEPLOYMENT_ULTRA_ACCESS_G16"
     if (
         float(metrics["mixed_churn_min_replicate_mean"])
         < MINIMUM_MIXED_REPLICATE_FLOOR
         or float(metrics["mixed_churn_stochastic_mean"])
         < MIXED_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_ATOMIC_COUNT_SHOCK_G15"
-    return "ROBUST_ATOMIC_COUNT_SHOCK_G15"
+        return "UNSTABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16"
+    return "USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16"
 
 
 def _activate_contract() -> None:
@@ -91,9 +91,14 @@ def _activate_contract() -> None:
     core.DOMAIN_FLOORS = DOMAIN_FLOORS
     core.MINIMUM_MIXED_REPLICATE_FLOOR = MINIMUM_MIXED_REPLICATE_FLOOR
     core.MIXED_STOCHASTIC_MEAN_FLOOR = MIXED_STOCHASTIC_MEAN_FLOOR
-    core.EXPECTED_EVENT_COUNT = EXPECTED_EVENT_COUNT
+    core.EXPECTED_EVENT_COUNTS = EXPECTED_EVENT_COUNTS
     core.REQUIRE_UNIQUE_PROFILES = True
-    core.REQUIRED_EVENT_OPERATIONS = ("joined", "terminally_left")
+    core.REQUIRED_EVENT_OPERATIONS = (
+        "temporarily_left",
+        "rejoined",
+        "joined",
+        "terminally_left",
+    )
     core.select_result_branch = select_result_branch
 
 
