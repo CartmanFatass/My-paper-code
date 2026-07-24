@@ -1,80 +1,133 @@
-# Codex restart handoff
+# Handoff
 
-Date: 2026-07-23
+Date: 2026-07-24
+Branch: `untied-k`
+Successor orchestrator: Fable, fresh conversation
+Reason: seam handoff after the Codex to Claude Code migration
 
-Reason: user-requested Codex update
+Read `AGENTS.md`, then this file, then `docs/project/CURRENT_WORK.md`. Nothing
+else is needed to start.
 
-## Safe terminal state
+## Terminal state
 
-The Project Manager stopped the formal experiment operator and the read-only G2
-scout. It then explicitly terminated the exact formal process tree: one parent
-and sixteen `hmasd-amd-cpu` Python workers started at 22:28 local time. A final
-process check found no Python process.
+No process is running. No formal or nonformal compute was launched. The working
+tree is clean and everything is pushed to `origin/untied-k`. `aggressive` was
+not touched and stays at `4af01cd`.
 
-Git-tracked G1 implementation and prelaunch evidence were already accepted,
-committed and pushed before the pause:
+## What this branch is for
 
-```text
-formal_source_commit=b125efd205e302666aea78b286d6857f8ecf9286
-branch=aggressive
-local_and_remote_matched=true
-implementation_review=ACCEPT
-focused_tests=38_passed_plus_1_final_delta_passed
-nonformal_run=logs/nonformal_uav_temp_loss_g1_20260723_pm2
-nonformal_result=NONFORMAL_UAV_TEMP_LOSS_G1_EXERCISE_COMPLETE
-```
+`untied-k` explores making the skill period of an **individual agent** variable,
+where today every agent shares one global period. Skill cardinality (`n_Z = 6`,
+`n_z = 6`) and variable agent count are not the subject — the round question
+states those exclusions explicitly.
 
-The later handoff commit changes only active project-control documentation. It
-does not replace the frozen formal source identity above.
-
-## Interrupted formal run
+## Your first action
 
 ```text
-iteration=18
-run_root=logs/formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1
-formal=true
-backend=cpu
-torch_threads=1
-authorization_token=AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1
-conclusion_bearing_iteration_consumed=false
-scientific_result=none
+docs/external-review/rounds/20260724_untied_k_direction_bootstrap/21_PRO_OPEN_RAW.md
 ```
 
-The run root contains only:
+711 lines, archived verbatim with byte equality confirmed, **not reconciled**.
+Read it and reconcile it code-side into
+`30_PM_CODE_SIDE_RECONCILIATION.md`. Nothing downstream has started: no design
+frozen, no plan written, no implementation.
 
-- `launch_identity.json`
-- `source_screen_launch_identity.json`
+The round asked whether per-agent variable period resolves the fast/slow credit
+impasse that G17, G18 and G19 all ran into, or is a distraction from a different
+root cause. The question marks its own provenance — the impasse framing is
+Project Manager inference, not an established result, and the round invited the
+reviewer to discard it.
 
-There is no completed control-batch journal, train manifest, evaluation
-manifest or analysis result. No conclusion was available or interpreted. The
-existing identity files are valid and the same train command may safely resume;
-because zero batches completed, it will begin the first exact control batch.
+Remember the authority split when you read it: **the scientific decision is
+Pro's, not yours.** You turn it into code.
 
-## Exact restart action
+## Execution mode
 
-After the user returns from the Codex update and asks to continue, read
-`AGENTS.md`, `docs/project/CURRENT_WORK.md`, this handoff and the G1 design.
-Then spawn exactly one registered `hmasd-experiment-operator` with the same
-source, root, CPU/thread contract, token and commands below. Do not create a
-Controller or monitor session and do not delete the existing run root.
+```text
+execution_mode=authorized
+autonomous_research_grant=ACTIVE_TEN_ITERATION_TOY_FIRST_UAV_PROMOTION_CHAIN
+grant_unit=completed_workflow_cycle
+intermediate_authorization_prompts=forbidden
+iterations_remaining=8
+```
+
+Run unattended. Asking for an approval this grant already covers is a defect,
+not caution. You stop only at an exhausted grant, a user pause, an unrecoverable
+blocker, or a real expansion of protected authority.
+
+`formal_compute_authority` is `user_only`, and this grant is that authorization
+for eight completed cycles.
+
+## The three control points, which are different things
+
+- **Checkpoint** — where the loop waits for the user. In this mode there are
+  two, neither per-iteration: the grant reaching zero, and a change needing
+  authority the grant does not carry.
+- **Boundary crossing** — a scientific decision you cannot make. Do not guess
+  and do not stall. Open a round and converge with Pro until both sides state
+  the same thing, archiving every turn to `22_PRO_CONVERGENCE.md`, then resume
+  where you stopped. Convergence turns are not fences; the fence is one per
+  round and never resubmitted.
+- **Compaction seam** — between iterations only. Write this file, compact,
+  resume, continue into the next iteration. It is a context boundary, not a
+  control boundary: it asks nothing and waits for no one.
+
+## Setup a fresh clone needs
 
 ```powershell
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py train --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1' --source-commit b125efd205e302666aea78b286d6857f8ecf9286 --formal --authorization-token AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1
-
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py evaluate --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1'
-
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py analyze --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1'
+git config core.hooksPath .githooks
 ```
 
-The operator remains silent and returns once at `COMPLETE` or `ERROR`. The
-train phase first runs exact source-identifiability controls. If they fail, it
-performs zero learned training and returns the registered branch 2 after
-evaluation/analyze; if they pass, it continues the frozen learned budget.
+Without it the drift guard is inert. Nothing else requires setup.
 
-## Iteration and successor state
+## What is proven and what is not
 
-Ten conclusion-bearing UAV iterations remain (`ITERATION_18` through
-`ITERATION_27`). `docs/report/ITERATION_18.md` does not exist and must be written
-only after a valid formal result. The read-only G2 charging scout was stopped
-before returning a report; restart it only if useful after the formal operator
-is safely resumed. No G2 file or scientific choice was created.
+Exercised: `hmasd-scout`, and `hmasd-review-exchanger` through one complete
+unattended 13-minute round — fence submitted, generation watched to stable
+completion, raw archived with byte equality, intake written, no Git touched. The
+GitHub connector reached all 12 evidence paths at `stage_commit`, so
+pointer-only submission works end to end.
+
+Not yet exercised: `hmasd-implementer`, `hmasd-reviewer`, `hmasd-verifier`,
+`hmasd-code-scout`, `hmasd-patcher`, `hmasd-monitor`, `hmasd-exp-recorder`,
+`hmasd-experiment-operator`. Stages 2, 4 and 5 of the cycle have never run.
+Authorized mode is the user's decision made in full knowledge of this.
+
+Watch the first lap. A subagent that returns something structurally wrong is
+more likely on its first invocation than later.
+
+## The drift guard
+
+A pre-commit hook runs the three workflow contracts whenever a commit touches
+`AGENTS.md`, `CLAUDE.md`, the role charters, the subagent definitions, the hmasd
+Skills, `docs/project/`, the reviewer registry, or the contract tests.
+
+It has already caught two real errors, both mine. If it blocks you, repair the
+contract — do not weaken the assertion. A weakened check reads as covered
+forever after.
+
+## Known open items
+
+1. **`docs/workflows/research-iteration-cycle.md`** carries a build list. Items
+   1–4 are done; item 5, the grant-renewal checkpoint brief
+   (`docs/report/GRANT_<id>_BRIEF.md`), does not exist and will be needed when
+   `iterations_remaining` reaches zero.
+2. **The third-party skill pack under `.claude/skills/` is untracked.**
+   `.gitignore` negates only `hmasd-*`. Deliberate, but a fresh clone will not
+   have the rest.
+3. **A UAV G1 formal run on `aggressive` remains deferred** —
+   `logs/formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1`, source
+   `b125efd205e302666aea78b286d6857f8ecf9286`, token
+   `AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1`, zero batches
+   completed, no iteration consumed. The exact three-phase command block is in
+   the previous version of this file: `git log -p -- docs/project/RESTART_HANDOFF.md`.
+   It is an `aggressive`-branch decision needing fresh authorization; nothing on
+   `untied-k` depends on it.
+
+## Continuity
+
+There is no persistent task. Continuity lives in the repository:
+`CURRENT_WORK.md` for the boundary, `ExpRecord.md` for results,
+`docs/research/cdc/` for the portfolio, this file for the seam, Git for the
+rest. Those must be accurate before a context ends, not after — that is the
+whole reason the compaction seam is ordered the way it is.
