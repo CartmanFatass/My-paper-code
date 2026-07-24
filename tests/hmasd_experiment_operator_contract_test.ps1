@@ -69,10 +69,25 @@ foreach ($required in @(
 foreach ($required in @(
     'project_manager_experiment_orchestration=direct_via_registered_child',
     'experiment_operator_authority=one_exact_authorized_run',
-    'subagent_runtime=claude_code',
-    'subagent_definitions=.claude/agents/*.md',
     'There is no dispatch or experiment-monitor Skill')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
+}
+
+# Runtime detail belongs to CLAUDE.md; the constitution stays runtime-agnostic.
+$claude = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
+foreach ($required in @(
+    'subagent_runtime=claude_code',
+    'subagent_definitions=.claude/agents/*.md',
+    'implementer_tier=sonnet_high',
+    'reviewer_tier=opus_high',
+    'mechanical_tier=haiku_low',
+    'hmasd-experiment-operator')) {
+    if (-not $claude.Contains($required)) { throw "CLAUDE runtime contract missing: $required" }
+}
+foreach ($leaked in @('_tier=', 'subagent_runtime=', '| Subagent | Tier |')) {
+    if ($agents.Contains($leaked)) {
+        throw "Runtime detail leaked into the constitution: $leaked"
+    }
 }
 
 foreach ($required in @(

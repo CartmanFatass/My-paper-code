@@ -1,7 +1,10 @@
 # HMASD Role Constitution
 
-This file is automatically discovered by every HMASD task. Stable authority
-lives here and in `.agents/roles/`; Skills contain mechanics only.
+This file is automatically discovered by every HMASD task. It carries project
+authority only — science, acceptance, Git, protected semantics — and is
+runtime-agnostic. Role detail lives in `.agents/roles/`, agent-runtime detail in
+`CLAUDE.md` and `.claude/agents/`, and mechanics in Skills. Do not duplicate one
+into another.
 
 ## Bootstrap and precedence
 
@@ -32,11 +35,6 @@ project_manager_technical_acceptance_authority=exclusive
 project_manager_git_authority=direct
 project_manager_external_review_transport=direct
 project_manager_experiment_orchestration=direct_via_registered_child
-subagent_runtime=claude_code
-subagent_definitions=.claude/agents/*.md
-implementer_tier=sonnet_high
-reviewer_tier=opus_high
-mechanical_tier=haiku_low
 formal_compute_authority=user_only
 external_pro_scientific_authority=question_scoped
 experiment_operator_authority=one_exact_authorized_run
@@ -77,58 +75,16 @@ External GPT-5.6 Pro owns only the scientific answer to the exact question that
 the Project Manager submits. It does not set workflow, implement code, authorize
 compute, or accept engineering.
 
-## Registered subagents
-
-Every child is a Claude Code subagent defined in `.claude/agents/<name>.md`,
-which carries its own model, effort and tool grant. The Project Manager spawns
-one with an exact assignment; the definition supplies the standing boundary.
-
-| Subagent | Tier | Owns |
-|---|---|---|
-| `hmasd-implementer` | sonnet / high | one bounded frozen implementation task |
-| `hmasd-reviewer` | opus / high | adversarial read-only audit of one diff |
-| `hmasd-scout` | haiku / low | mechanical lookup — inventories, symbol sweeps, locations |
-| `hmasd-verifier` | haiku / low | executes assigned checks, returns bounded runtime evidence |
-| `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
-| `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
-| `hmasd-review-exchanger` | haiku / low | byte-exact external review transport and archival |
-| `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
-| `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
-
-The tier is chosen by the work, not by importance: judgment about protected
-semantics goes to opus, bounded construction to sonnet, and mechanical lookup,
-transcription and execution to haiku. A haiku child that meets a real judgment
-call hands back rather than deciding.
-
-No child commits, spawns a successor, or accepts its own work.
-
 ## Fixed experiment operator
 
-Formal and bounded run execution uses only the registered subagent:
+Formal and bounded run execution uses only `hmasd-experiment-operator`, whose
+authority is `.agents/roles/EXPERIMENT_OPERATOR.md` and whose standing boundary
+is its subagent definition. It is deliberately pinned to a mechanical tier; that
+pin does not constrain the Project Manager's own model or effort.
 
-```text
-callable_agent_type=hmasd-experiment-operator
-definition=.claude/agents/hmasd-experiment-operator.md
-model=haiku
-effort=low
-role=.agents/roles/EXPERIMENT_OPERATOR.md
-```
-
-This fixed profile is an explicit user choice for a mechanical task. It is not
-a static expectation for a persistent conversation and does not override the
-user-selected model or effort of this Project Manager task.
-
-The operator receives exactly one already-authorized run with a source commit,
-fresh run root, interpreter/backend/thread contract, authorization token, exact
-train/evaluate/analyze commands, terminal artifacts, and restart policy. It
-keeps the command in the foreground and silently waits on the owned process
-handle. It sends no progress, ETA, heartbeat, or phase messages. It returns to
-the Project Manager exactly once, only at `COMPLETE` or `ERROR`.
-
-The operator cannot edit source, change parameters, run Git, interpret science,
-repair or restart unless explicitly assigned, contact external review, spawn a
-child, or choose a successor. An `unknown agent_type` response is a blocker;
-never substitute `default`, an unnamed child, or an ad hoc worker.
+It receives one already-authorized run, executes it silently, and returns
+exactly once at `COMPLETE` or `ERROR`. It accepts nothing and interprets
+nothing.
 
 ## Research and execution loop
 
@@ -224,19 +180,6 @@ counterexample construction, reanalysis of existing data, toy, prototype,
 formal compute. Implement or train only when nothing cheaper can answer the
 question.
 
-## Tool batching
-
-Issue already-known, independent tool calls together in one message so they run
-concurrently — read-only inspections especially. Inspect every result; one
-failed call does not invalidate the others returned alongside it.
-
-Keep sequential: dependencies, waits or resumes, approval-sensitive calls,
-conflicting or interdependent mutations, and adaptive investigations whose next
-step depends on the previous result. Do not batch merely to expand scope, and do
-not split otherwise batchable read-only inspections across separate messages.
-These instructions govern tool orchestration only and do not relax file
-ownership, compute authority, or protected scientific semantics.
-
 ## File concurrency and Git
 
 ```text
@@ -256,8 +199,8 @@ forbidden; the resulting Git commit is the source identity.
 If a cross-task send is ever explicitly requested, resolve that target's live
 model and effort immediately before sending and copy them unchanged. Never keep
 a fixed expected profile table for user-managed conversations and never replace
-the target's profile with the sender's. This does not apply to the deliberately
-fixed `hmasd-experiment-operator` profile above.
+the target's profile with the sender's. Registered subagent definitions are the
+exception; their pinned profiles are deliberate.
 
 ## Skills and active-line development
 
@@ -295,5 +238,6 @@ precedence change only at an explicitly accepted scientific boundary.
 - `docs/research/cdc/` contains durable research state.
 - `docs/external-review/` contains exact external evidence.
 - `.agents/roles/` contains role authority.
-- `.claude/skills/hmasd-*/` contains only reusable operating mechanics.
+- `CLAUDE.md` contains the Claude Code runtime: subagent roster and tiers.
 - `.claude/agents/` contains the registered subagent definitions.
+- `.claude/skills/hmasd-*/` contains only reusable operating mechanics.
