@@ -1,7 +1,7 @@
 # Prefix-contextual residual expressivity G26
 
 ```text
-status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
+status=NONFORMAL_CLOSED_NO_POINTWISE_FIT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -63,3 +63,16 @@ with G25. That artifact is operationally invalid for this question. The repair
 constructs the G25 local reference from the same incoming RNG state, copies
 every non-residual tensor bitwise, restores the exact G25 post-construction RNG
 state, and adds a regression proving both identities before a fresh-root rerun.
+
+## Repaired probe disposition
+
+The fresh-root repair exactly reproduces G25's fast-anchor utility `0.666788`
+and retains zero replay and frozen-state error. Pointwise MSE falls from
+`1.43119` to `0.34146`, a ratio of `0.23859`; both gates still fail. Closed-loop
+utility `0.92811`, spike utility `0.88163`, gain `0.26132` and rotating share
+`0.85982` show useful partial structure but cannot bypass the pointwise branch.
+The exact valid result is `NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26`.
+
+G25 and G26 jointly retire the frozen-anchor additive residual representation
+family under this measurement. No further input stacking, fit-budget increase,
+optimizer change, threshold rescue, formal run or UAV promotion is selected.

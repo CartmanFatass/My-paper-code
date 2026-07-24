@@ -1,22 +1,22 @@
-# G26 prefix-contextual residual expressivity implementation plan
+# G27 immediate-tangent protected full actor implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25
-last_nonformal_result=NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25
+last_nonformal=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26
+last_nonformal_result=NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26_BOUNDED_PROBE
+active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g26
-algebra_status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
-screen_contract=docs/research/designs/PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26.md
+formal_compute=not_scheduled_for_g27
+algebra_status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+screen_contract=docs/research/designs/IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27.md
 ```
 
 ## Accepted active line
@@ -215,3 +215,17 @@ repair constructs the G25 reference from the same incoming RNG state, copies
 every non-residual tensor, restores the exact G25 post-construction RNG state,
 and proves both identities. Rerun once from a fresh root after focused tests;
 the invalid artifact consumes no iteration and cannot select a branch.
+
+The repaired G26 probe exactly pairs the G25 anchor but still closes as
+`NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26`: MSE `1.43119 -> 0.34146` misses both
+gates, while closed-loop utility/spike reach only `0.92811`/`0.88163`. The
+frozen-anchor additive residual family is retired without more inputs or fit.
+
+G27 restores full actor capacity and changes one optimization rule relative to
+the closed formal G18 path. After the fast phase, compute immediate and
+successor actor gradients separately, project only a conflicting successor
+gradient into the immediate tangent half-space, and apply their exact equal
+average. Keep state-only critics separate and every residual exact zero.
+Implement one thin optimizer module, rename the active runner/test, and close
+actor inventory, projection algebra, replay/lifecycle and first-match proofs
+before one paired nonformal screen. No formal or UAV run is scheduled.
