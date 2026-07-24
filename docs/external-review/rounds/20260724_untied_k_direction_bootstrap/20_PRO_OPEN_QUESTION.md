@@ -67,6 +67,22 @@ delayed access, but so far not both in one shared actor.** Sharing gets the
 delayed source and breaks the fast one; isolating preserves the fast one and
 gets nothing delayed.
 
+## Provenance of the framing below
+
+**Repository fact:** the G17/G18/G19 results above, the closed candidate list,
+the two coexisting duration mechanisms, and the G20 derivation in flight. All of
+it is readable at `stage_commit`.
+
+**Project Manager inference, not established:** that per-agent variable skill
+period is a candidate resolution to the fast/slow credit impasse. Nobody
+concluded this. It was constructed by noticing that three iterations failed on a
+timescale conflict and that the skill period is the algorithm's existing
+timescale object. It has no evidence behind it and is offered for you to
+adjudicate, not to inherit.
+
+**Named by the user, not derived:** that this branch explores per-agent variable
+skill period at all. That is the direction to be judged, not a result.
+
 ## The question
 
 This branch exists to explore making the skill period of an **individual agent**
