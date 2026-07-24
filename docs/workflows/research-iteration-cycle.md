@@ -174,18 +174,22 @@ Integration is Fable-direct at stage 6, after the reviewer verdict and after the
 run is recorded. No child commits. Fable stages only accepted paths, checks the
 staged path set and `git diff --cached --check`, commits, and pushes.
 
-## Closing the iteration
+## The seam between iterations
 
-The cycle ends at a fixed compaction point, and the order is not optional:
+The cycle does not stop here. Stage 6 rolls into stage 1 of the next iteration
+across a fixed compaction seam, and the order is not optional:
 
 ```text
-write docs/project/RESTART_HANDOFF.md -> compact -> resume from the handoff
+write docs/project/RESTART_HANDOFF.md -> compact -> resume -> next iteration
 ```
+
+This is a context boundary, not a control boundary. It is not a checkpoint,
+asks nothing, and waits for no one — an unauthorized-mode loop crosses it on
+its own and pauses only at that mode's two checkpoints.
 
 The handoff records the active boundary, execution mode, what is committed and
 pushed, the one open deliverable, and the exact next action. Written anywhere
-but the end of a complete iteration it is a snapshot of an unfinished thought,
-not a resume point.
+but this seam it is a snapshot of an unfinished thought, not a resume point.
 
 ## How stage 1 actually works
 

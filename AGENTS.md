@@ -166,8 +166,13 @@ freeze evidence semantics, not theory.
 
 ## Context compaction
 
-Compaction happens at one fixed point: the **end of a complete iteration**.
-Never mid-iteration.
+Compaction is a **context boundary, not a control boundary**. It exists so the
+loop survives losing its context, not so a human can inspect it. It never
+pauses the loop, never ends the work, and is never a checkpoint — the only
+points where the loop waits for the user are the ones the execution mode names.
+
+It happens at one place: the seam between iterations, once the current one has
+closed out. Never mid-iteration.
 
 The sequence is fixed and ordered:
 
@@ -175,15 +180,19 @@ The sequence is fixed and ordered:
    execution mode, what is committed and pushed, the one open deliverable, and
    the exact next action;
 2. compact;
-3. resume from the handoff.
+3. resume from the handoff and **continue straight into the next iteration**.
 
-A handoff written at any other moment is a snapshot of an unfinished thought,
-not a resume point. If context runs short before an iteration can close, finish
-the smallest step that makes the state describable, then follow the sequence —
-do not compact in the middle and do not carry an undescribed state across.
+Step 3 is automatic in both modes. Nothing is asked here and nothing waits for
+an answer; an unauthorized-mode loop still crosses this seam on its own and
+pauses only at that mode's two checkpoints.
 
-The handoff is the seam. Everything else a successor needs is already in
-`CURRENT_WORK.md`, `ExpRecord.md`, `docs/research/cdc/` and Git.
+A handoff written mid-iteration is a snapshot of an unfinished thought, not a
+resume point. If context runs short first, finish the smallest step that makes
+the state describable, then follow the sequence — do not compact in the middle
+and do not carry an undescribed state across.
+
+The handoff is the seam and nothing more. Everything else a successor needs is
+already in `CURRENT_WORK.md`, `ExpRecord.md`, `docs/research/cdc/` and Git.
 
 ## Environment tiering
 

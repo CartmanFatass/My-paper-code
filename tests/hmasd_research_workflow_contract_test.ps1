@@ -68,7 +68,8 @@ foreach ($required in @(
     '### Crossing the boundary',
     'converge with External Pro',
     '## Context compaction',
-    'end of a complete iteration')) {
+    'context boundary, not a control boundary',
+    'continue straight into the next iteration')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 
