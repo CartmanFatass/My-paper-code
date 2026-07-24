@@ -1,6 +1,7 @@
 # Dynamic-roster deployment mixture G16
 
-Status: frozen executable contract for formal iteration 17.
+Status: formal iteration 17 closed as `USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16`;
+the twelve-iteration dynamic-roster chain is complete.
 
 ## Frozen algorithm and scope
 
@@ -87,3 +88,22 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16` and
 consumes no iteration. Nonformal evidence returns
 `NONFORMAL_DEPLOYMENT_MIXTURE_G16_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `1745ab9c155e7a58ba0689380f3a77866b3503b5` completed at
+`logs/formal_deployment_mixture_g16_cpu_20260723_1745ab9_r1`.
+
+```text
+branch=USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16
+operational_valid=true
+deployment_moderate_deterministic_utility_ci95=[0.9253537984006734,0.9520621491424793,0.9998430656934308]
+deployment_wide_deterministic_utility_ci95=[0.9231770833333334,0.9513158464536385,0.9995638588053599]
+deployment_ultra_deterministic_utility_ci95=[0.9251302083333334,0.9525272346732843,0.9997258012420754]
+deployment_ultra_min_replicate_mean=0.9251302083333334
+deployment_ultra_stochastic_mean=0.8928563785629661
+```
+
+All 108 profiles are unique and each domain contains exactly 12 profiles of
+each process mode. This closes the registered usable dynamic-roster baseline;
+it does not claim arbitrary-process universality or comparative advantage.

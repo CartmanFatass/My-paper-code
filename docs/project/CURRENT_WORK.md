@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=ATOMIC_COUNT_SHOCK_G15_FORMAL_ITERATION_16
-active_assignment_id=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
-next_boundary=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
-autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
+last_completed_assignment_id=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
+active_assignment_id=TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN_COMPLETE
+next_boundary=AWAIT_NEW_USER_RESEARCH_DIRECTION
+autonomous_research_grant=EXHAUSTED_COMPLETE
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=1
-conclusion_bearing_iterations_consumed=16
-implementation_status=G16_PRELAUNCH_ACCEPTED
+iterations_remaining=0
+conclusion_bearing_iterations_consumed=17
+implementation_status=G16_FORMAL_CLOSED_CHAIN_COMPLETE
 nonformal_compute_status=g16_exercise_complete_operational_valid
-formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g16_prelaunch_accepted_ready_for_fixed_operator
+formal_compute_authority=current_grant_exhausted
+formal_compute_status=g16_complete_no_active_formal_run
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_16_complete
-latest_iteration_report=docs/report/ITERATION_16.md
+iteration_report_status=iterations_1_to_17_complete
+latest_iteration_report=docs/report/ITERATION_17.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -58,7 +58,7 @@ g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3
 g3_gate_cases=18400
 g3_gate_tests=5_passed
 g3_gate_iteration_cost=0
-next_action_class=implementation_and_bounded_nonformal_acceptance
+next_action_class=grant_complete_no_active_action
 g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md
 g3_primary_arm=ROSTER_ATTN
 g3_primary_comparator=TEAM_REC
@@ -446,6 +446,18 @@ g16_nonformal_model_state_unchanged_exact=true
 g16_nonformal_mode_counts=serial_random_4_atomic_equal_4_atomic_shock_4
 g16_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_PRELAUNCH.md
 g16_review_status=no_new_review_no_anomaly
+g16_formal_source_commit=1745ab9c155e7a58ba0689380f3a77866b3503b5
+g16_formal_run=logs/formal_deployment_mixture_g16_cpu_20260723_1745ab9_r1
+g16_formal_result=USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16
+g16_operational_valid=true
+g16_deployment_moderate_utility_ci95=[0.9253537984006734,0.9520621491424793,0.9998430656934308]
+g16_deployment_wide_utility_ci95=[0.9231770833333334,0.9513158464536385,0.9995638588053599]
+g16_deployment_ultra_utility_ci95=[0.9251302083333334,0.9525272346732843,0.9997258012420754]
+g16_deployment_ultra_min_replicate_mean=0.9251302083333334
+g16_deployment_ultra_stochastic_mean=0.8928563785629661
+g16_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_RESULT.md
+g16_final_disposition=docs/research/cdc/EVIDENCE_NOTES/20260723_DYNAMIC_ROSTER_CHAIN_FINAL_DISPOSITION.md
+g16_scientific_disposition=closed_success_chain_complete
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -556,6 +568,12 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   controls. Deterministic LCBs exceed 0.9166, the ultra minimum replicate is
   0.9225 and stochastic mean is 0.8936. The final boundary is fresh-seed
   heterogeneous deployment confirmation, not another mechanism expansion.
+- Formal G16 closes as `USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16`. Every scale
+  domain contains exactly 12 fresh-seed profiles of each supported process
+  mode; all deterministic LCBs exceed 0.9231 and ultra stochastic mean is
+  0.8929. The twelve-iteration dynamic-roster chain is complete. The accepted
+  algorithm test version is the G8 prefix-normalized direct recurrent policy
+  for the registered family through N=80.
 
 ## Runtime and protected semantics
 

@@ -6,12 +6,12 @@
 
 ```text
 active_implementation=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+implementation_status=FORMAL_CLOSED_CHAIN_COMPLETE
 design=docs/research/designs/DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16.md
 backend=cpu
 torch_threads=1
 formal_iteration=17
-chain_iterations_remaining_before_run=1
+chain_iterations_remaining=0
 ```
 
 ## Goal
@@ -56,3 +56,16 @@ copy and immutable model state.
 No review is selected because the shared-core event-count change and composed
 generators have direct positive and tamper evidence with no remaining anomaly.
 Integrate and launch the exact formal commands through the fixed operator.
+
+## Formal closure
+
+Formal iteration 17 completed from source
+`1745ab9c155e7a58ba0689380f3a77866b3503b5` as
+`USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16`. All 108 unique profiles, exact 12/12/12
+mode quotas per scale, 648 utility values, source/lifecycle controls, CPU
+identity, zero optimizer steps and model immutability close. The independent
+first-match result agrees with the analyzer.
+
+The accepted test version is `PREFIX_NORMALIZED_OPEN_ROSTER_G8`, evaluated by
+the terminal G16 deployment mixture. No implementation, experiment or successor
+remains under the exhausted twelve-iteration grant.
