@@ -143,6 +143,59 @@ def test_float32_projection_closes_the_registered_half_space() -> None:
     assert projection.lattice_correction > 0.0
 
 
+def test_high_dimensional_float32_projection_repeats_residual_closure() -> None:
+    torch.manual_seed(73)
+    immediate = torch.randn(1000)
+    successor = -2.0 * immediate + torch.randn(1000)
+    parameter = torch.nn.Parameter(torch.zeros(1000))
+    norm = (immediate.to(torch.float64) ** 2).sum()
+    dot = (
+        successor.to(torch.float64) * immediate.to(torch.float64)
+    ).sum()
+    coefficient = (-norm - dot) / norm
+    raw_successor = (
+        successor.to(torch.float64)
+        + coefficient * immediate.to(torch.float64)
+    ).to(torch.float32)
+    raw_combined = 0.5 * (immediate + raw_successor)
+    raw_post = (
+        raw_combined.to(torch.float64) * immediate.to(torch.float64)
+    ).sum()
+    coordinate = int(immediate.abs().argmax())
+    one_shot = raw_successor.clone()
+    one_shot[coordinate] = one_shot[coordinate] + (
+        -2.0 * raw_post / immediate[coordinate].to(torch.float64)
+    ).to(torch.float32)
+    one_shot_post = (
+        (0.5 * (immediate + one_shot)).to(torch.float64)
+        * immediate.to(torch.float64)
+    ).sum()
+    if float(one_shot_post) < 0.0:
+        direction = torch.full_like(
+            one_shot[coordinate],
+            (
+                float("inf")
+                if float(immediate[coordinate]) > 0.0
+                else -float("inf")
+            ),
+        )
+        one_shot[coordinate] = torch.nextafter(
+            one_shot[coordinate], direction
+        )
+        one_shot_post = (
+            (0.5 * (immediate + one_shot)).to(torch.float64)
+            * immediate.to(torch.float64)
+        ).sum()
+    assert float(one_shot_post) < 0.0
+
+    projection = project_successor_for_net_immediate_descent(
+        (successor,), (immediate,), (parameter,)
+    )
+    assert projection.conflict is True
+    assert projection.post_dot >= 0.0
+    assert projection.lattice_correction > 0.0
+
+
 def test_net_descent_update_moves_actor_but_not_residual_or_core_critic() -> None:
     torch.manual_seed(2719000)
     model = _battery_model()

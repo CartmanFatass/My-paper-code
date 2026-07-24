@@ -281,3 +281,15 @@ minimum representable closure. Actor/critic/residual ownership, G17/G18 replay,
 zero residual and first-match precedence remain intact. Seven focused and 37
 combined tests pass on CPU with one thread. The only next action is the fresh
 integrated paired screen; formal and UAV compute remain unscheduled.
+
+The first G28 screen terminated before producing `result.json`: one
+high-dimensional actor update remained outside the closed half-space after the
+single analytical float64 correction and one float32 `nextafter`. This is an
+operational realization failure, not a scientific branch, and consumes no
+iteration. Seed 73 with 1,000 coordinates reproduces the same two-step
+undershoot. Keep the frozen zero boundary and equal channel weights; repeatedly
+apply the exact float64 residual on the same maximum-magnitude immediate
+coordinate, then walk back to the first closed float32 lattice point. Eight
+focused and 38 combined tests now pass. Run the same bounded G28 screen once
+from a fresh integrated source; no other restart, formal run or UAV promotion
+is scheduled.

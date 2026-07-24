@@ -125,10 +125,6 @@ def project_successor_for_net_immediate_descent(
         repaired_flat = repaired.reshape(-1)
         immediate_value = immediate_rows[row_index].reshape(-1)[flat_index]
         original_value = repaired_flat[flat_index].clone()
-        required_delta = (
-            -2.0 * post / immediate_value.to(torch.float64)
-        ).to(repaired.dtype)
-        repaired_flat[flat_index] = original_value + required_delta
         direction = torch.full_like(
             repaired_flat[flat_index],
             (
@@ -137,24 +133,81 @@ def project_successor_for_net_immediate_descent(
                 else -float("inf")
             ),
         )
+        reverse_direction = torch.full_like(
+            repaired_flat[flat_index],
+            (
+                -float("inf")
+                if float(immediate_value.detach().cpu()) > 0.0
+                else float("inf")
+            ),
+        )
         repaired_rows[row_index] = repaired
         applied = tuple(repaired_rows)
-        combined = tuple(
-            0.5 * (left + right)
-            for left, right in zip(immediate_rows, applied)
-        )
-        post = _gradient_dot(combined, immediate_rows)
-        if bool(post.detach() < 0.0):
-            repaired_flat[flat_index] = torch.nextafter(
-                repaired_flat[flat_index], direction
+
+        # A single float64 residual correction can still undershoot after the
+        # successor and the equal average are each rounded to float32. Walk the
+        # same coordinate to the first closed lattice point; this changes no
+        # gradient weight or tolerance.
+        for _ in range(64):
+            current_value = repaired_flat[flat_index].clone()
+            required_delta = (
+                -2.0 * post / immediate_value.to(torch.float64)
             )
+            candidate = (
+                current_value.to(torch.float64) + required_delta
+            ).to(repaired.dtype)
+            if bool(
+                candidate.detach() == current_value.detach()
+            ) or bool(
+                (
+                    (candidate - current_value)
+                    * immediate_value
+                ).detach()
+                <= 0.0
+            ):
+                candidate = torch.nextafter(current_value, direction)
+            repaired_flat[flat_index] = candidate
             combined = tuple(
                 0.5 * (left + right)
                 for left, right in zip(immediate_rows, applied)
             )
             post = _gradient_dot(combined, immediate_rows)
-        if bool(post.detach() < 0.0):
+            if bool(post.detach() >= 0.0):
+                break
+        else:
             raise RuntimeError("G28 could not close the float gradient half-space")
+
+        # The analytical step may round one lattice point past the boundary.
+        # Walk back while the predecessor remains closed, then retain the first
+        # representable value whose predecessor violates the invariant.
+        for _ in range(64):
+            current_value = repaired_flat[flat_index].clone()
+            predecessor = torch.nextafter(current_value, reverse_direction)
+            if bool(
+                (
+                    (predecessor - original_value)
+                    * immediate_value
+                ).detach()
+                < 0.0
+            ):
+                break
+            repaired_flat[flat_index] = predecessor
+            predecessor_combined = tuple(
+                0.5 * (left + right)
+                for left, right in zip(immediate_rows, applied)
+            )
+            predecessor_post = _gradient_dot(
+                predecessor_combined, immediate_rows
+            )
+            if bool(predecessor_post.detach() < 0.0):
+                repaired_flat[flat_index] = current_value
+                break
+            combined = predecessor_combined
+            post = predecessor_post
+        else:
+            raise RuntimeError(
+                "G28 could not certify the minimum float gradient closure"
+            )
         lattice_correction = float(
             (repaired_flat[flat_index] - original_value)
             .detach()

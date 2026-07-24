@@ -1,7 +1,7 @@
 # Net-immediate-descent full actor G28
 
 ```text
-status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
+status=OPERATIONAL_FLOAT_LATTICE_REPAIR_ACCEPTED_RERUN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -49,3 +49,12 @@ formal mode or UAV promotion.
    ownership is unchanged from G27.
 4. One G17 and one G18 trajectory retain exact replay/lifecycle behavior.
 5. One integrated bounded screen is the only conclusion-bearing next action.
+
+The first integrated attempt ended before a result because a high-dimensional
+float32 projection remained infinitesimally outside the closed half-space after
+one residual correction plus one ULP. The accepted operational repair repeats
+the exact float64 residual on the same coordinate until closed and walks back
+to the first closed float32 lattice point. It does not change the zero boundary,
+weights, optimizer, seeds, budgets, result gates or iteration accounting. The
+failed artifact is operational only; one fresh bounded rerun remains the next
+action.
