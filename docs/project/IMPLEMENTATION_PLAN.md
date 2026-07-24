@@ -1,12 +1,14 @@
-# G18 one-step TD compatibility implementation plan
+# G18 delayed-source and separated-credit implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-active_implementation=ONE_STEP_TD_BOOTSTRAP_G18_COMPATIBILITY_SCREEN
-derivation=docs/research/cdc/EVIDENCE_NOTES/20260724_DELAYED_EFFECT_CONTINUOUS_ROSTER_G18_DERIVATION.md
-status=IMPLEMENTED_9_FOCUSED_TESTS_PASS_SCREEN_READY
+last_screen=ONE_STEP_TD_BOOTSTRAP_G18
+last_screen_result=NONFORMAL_TD0_NOT_COMPATIBLE_G18
+active_source=DELAYED_BATTERY_ROSTER_G18
+source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
+active_implementation=FAST_SLOW_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -15,20 +17,20 @@ iterations_remaining=9
 formal_compute=not_running
 ```
 
-## Minimal code delta
+## Accepted active line
 
-1. `gae_lambda` is exposed in the existing continuous-roster PPO update; its
-   default remains unchanged and G17's integrated formal source is preserved by
-   Git identity.
-2. A standalone tensor proof verifies that `lambda=0, gamma>0` uses exactly the
-   next-state value and no later TD carry.
-3. The small G18 screen analyzer imports only the accepted G17 policy/source
-   and generic training functions, uses fresh G18 seeds, trains one fresh model,
-   and writes one nonformal result plus checkpoint.
-4. Nine focused tests pass, including custom credit/checkpoint round-trip and
-   candidate selection. The next action is exactly one bounded CPU screen
-   through the fixed experiment operator.
-
-No UAV environment, radio, motion, charging-station, reward, checkpoint or
-formal artifact is imported. A passing screen advances to a fresh delayed
-battery/charging toy definition. A failing screen retires TD(0) without tuning.
+1. The exact TD(0) compatibility screen is closed without tuning. Its code may
+   remain only as the frozen negative-evidence reproducer/comparator.
+2. The fresh 12-step battery roster source contains only lifecycle masks,
+   continuous effort, battery transition, inactive charging and served-demand
+   utility. It imports no UAV code.
+3. Four focused tests close constructive access, myopic resistance,
+   same-service sequence mediation, lifecycle ownership, inactive-action zero
+   and slot permutation.
+4. The next prototype keeps the immediate actor residual separate from a
+   centered successor-value residual. The credit rule may read generic reward,
+   state/value, terminal and active masks only; it may not read battery, demand
+   phase or lifecycle role directly.
+5. First verify the algebra and inactive-row masking. Only then run a bounded
+   nonformal screen on both the closed G17 immediate source and the new G18
+   delayed source. A formal evidence contract is not yet frozen.

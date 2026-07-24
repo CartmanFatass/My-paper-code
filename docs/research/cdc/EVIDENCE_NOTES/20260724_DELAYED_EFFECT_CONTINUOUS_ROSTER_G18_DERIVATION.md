@@ -110,3 +110,65 @@ means at least `0.90`, joint gain at least `0.10`, minimum episode at least
 `0.05`. Passing licenses only a fresh delayed battery/charging toy prototype.
 Failure retires this exact TD(0) candidate without seed, budget, threshold or
 hyperparameter tuning. The screen consumes zero conclusion-bearing iterations.
+
+## TD(0) compatibility disposition
+
+The exact bounded screen completed operationally on CPU with one thread and
+selected `NONFORMAL_TD0_NOT_COMPATIBLE_G18`. Replay error was exactly zero and
+the lifecycle/finite checks closed, but the candidate reached only:
+
+```text
+iid_mean=0.7116935448
+heldout_mean=0.7110608015
+gain_mean=0.1252746248
+minimum_episode=0.5713264087
+minimum_effort_correlation=0.2095120069
+minimum_mix_correlation=0.6283625645
+maximum_effort_mae=0.1169463049
+maximum_mix_mae=0.1099299892
+```
+
+Thus next-state bootstrap alone does not preserve the already identified
+immediate conditional mapping. `ONE_STEP_TD_BOOTSTRAP_G18` is retired without
+retry, tuning or formal iteration cost. The earlier “smallest algorithm
+correction” is retained as a tested counterexample, not an active candidate.
+
+## Delayed-source information gate
+
+A fresh twelve-step toy now isolates the missing causal structure without UAV
+physics. Four members serve low demand for six steps. Two announced rotation
+members then leave to charge exactly when demand doubles for four steps; they
+rejoin with one fresh lifecycle while one persistent lifecycle leaves
+terminally. Battery is persisted by lifecycle, inactive rows receive no action,
+and external utility is only served-demand fraction.
+
+The structural gate passes across three slot permutations:
+
+```text
+branch=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
+constructive_minimum_utility=1.0
+myopic_maximum_utility=0.8333333333
+minimum_constructive_minus_myopic=0.1666666667
+immediate_service_equal=true
+next_persistent_battery_delta=0.25
+natural_utility=1.0
+intervened_utility=0.9583333333
+intervened_future_service_deficit=0.5
+slot_permutation_invariant=true
+formal=false
+iteration_consumed=false
+```
+
+The current reward at the intervention is identical, but allocating the same
+service to a persistent instead of soon-charging lifecycle changes the next
+battery state and later spike service under the same continuation. This closes
+action-dependent transition, sequence intervention, natural mediation,
+simpler-myopic resistance and anonymous slot-transport requirements at the toy
+information boundary.
+
+The next bounded algorithm action is
+`FAST_SLOW_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE`: retain an immediate reward
+residual as the proven G17 actor channel and add a separately centered
+successor-value residual for delayed state consequences. It may not use battery
+fields in the credit rule, tune the retired TD(0) screen or launch formal
+compute before a new evidence contract is frozen.
