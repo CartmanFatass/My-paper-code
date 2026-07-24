@@ -12,30 +12,37 @@
 | L-BAT | Usage, exogenous lifetime variation and logit magnitude can admit trivial passing constructions. | The current EHC behavioral battery. | Event-held state is useless. |
 | L-FORCED-EVENT | At an eligible naturally reached decision state, exact-snapshot CRN forcing identifies the local consequence of KEEP versus RENEW; comparing naturally occurring event groups does not. | The corrected EHC continuation estimand. | General learned hierarchy, skills or variable-lifetime capability. |
 | L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
-| L-TYPED-CAUSAL | Exact actions, segments and outcomes are necessary but insufficient for causal identity; executed CDFs, uniforms, causal state/payloads, RNG and pair binding must also be exact. | The typed natural-branch audit. | CPU-wide fork capability or formal evidence. |
-| L-DERIVED-RECORD | After causal identity is established, bounded post-decision critic or likelihood drift is derived-record fidelity, not causal-state drift. | Fields accepted by the frozen replay validators. | A derived-fidelity failure may be ignored; it remains operational invalidity. |
-| L-FIXTURE-LOCAL | A passing real-path fixture establishes capability only at its exercised coordinates. | One registered-CPU non-formal smoke. | Future trained coordinates, CUDA or held-out utility. |
-| L-PROVENANCE-INVALID | Missing or inconsistent binding, RNG, donor, schema or instrumentation evidence is operational invalidity, not fork unavailability. | Typed partial-evidence quarantine. | A malformed record can preserve natural or causal claims. |
-| L-TYPED-64 | Every one of the 64 actual selected source-natural pairs in the single registered-CPU non-formal exercise passed typed causal identity, executed event/mark/primitive binding, RNG validity and separate derived-record fidelity. | Exactly those fixture coordinates at width 16. | Formal or CPU-wide fork capability, access, utility, `G`, `V`, `C` or learned commitment. |
+| L-EHC-MEASUREMENT-NECESSITY | Event-held commitment support must establish policy-dependent persistence, sequence-level intervention, natural mediation, simpler-explanation resistance and held-out robustness; surface use/lifetime/logit/value predicates do not identify it. | The corrected G1 measurement implication. | That these conditions are sufficient, or that EHC is useful, useless or uniquely necessary. |
+| L-EHC-G0-NO-ACCESS | A valid first-match no-access result closes the exact benchmark-comparator pair and prevents lower-precedence diagnostics from relabeling it. | `EVENT_HELD_COMMITMENT_LINK_G0` at its frozen source, backend, learner, budget and threshold. | EHC is useless, stronger MARL is inaccessible, or any live conjecture is uniquely selected. |
 
 ## Counterexamples
 
 ### CE-RANDOM-USE
 
-A random KEEP/RENEW policy can satisfy nondegenerate usage rates without
-demand-responsive commitment. It refutes usage-as-semantics, not event-held
-state as a mechanism.
+A random KEEP/RENEW policy can satisfy nondegenerate usage rates, admit lifetime
+spread and combine with a useful mark/capacity path without demand-responsive
+commitment. **Preserves:** surface natural support, lifetime diversity, mark
+sensitivity and possibly value. **Violates:** policy-dependent persistence and
+event-to-sequence-to-value organization. It refutes usage-as-semantics, not
+event-held state as a mechanism.
 
 ### CE-EXOGENOUS-LIFETIME
 
-Random opportunity spacing can generate lifetime diversity even when policy
-behavior carries no lifetime decision. It refutes realized-duration diversity
-as sufficient evidence of learned lifetime.
+Random opportunity spacing, temporary absence or a fixed schedule can generate
+lifetime diversity even when policy behavior carries no lifetime decision.
+**Preserves:** realized diversity, natural use, mark sensitivity and possibly
+value. **Violates:** learned policy control of persistence and its held-out
+transport. It refutes realized-duration diversity as sufficient evidence of
+learned lifetime.
 
 ### CE-LOGIT-WITHOUT-BEHAVIOR
 
-An uninformative latent with a large adapter can perturb logits without useful
-sequence behavior. It refutes logit magnitude as sufficient behavioral evidence.
+An uninformative latent with a large adapter can perturb logits and improve an
+immediate action/capacity path without useful sequence behavior. **Preserves:**
+same-state logit/action sensitivity, natural support and possibly value.
+**Violates:** sequence-level and terminal consequence, natural mediation and
+simpler-explanation resistance. It refutes logit magnitude as sufficient
+behavioral evidence.
 
 ### CE-NO-ACCESS-ADMISSION
 
@@ -59,14 +66,10 @@ Natural KEEP and RENEW rows need not be exchangeable. Their unpaired future
 returns can differ because the policy selects different contexts, so only the
 same-state forced alternative is a causal continuation estimand.
 
-### CE-HETEROGENEOUS-SCALAR-GATE
+### CE-FIRST-MATCH-DIAGNOSTIC-RESCUE
 
-At evidence commit `6e47623bd534cfad88f2f5481e98eadec6e64991`, one
-source-natural fork record had exact discrete actions, segment and outcome
-identity. Its only nonzero leaves were the post-decision
-`event_old_mark_component_logp` at four float32 ULPs and the derived
-`event_old_joint_logp` at one ULP, producing
-`continuous_error=4.76837158203125e-07`. Those records do not feed the
-installed mark, primitive action or environment continuation. This refutes a
-maximum over heterogeneous continuous fields as a classifier of causal
-identity; it does not prove complete CPU fork capability.
+The completed G0 run passed operational and support checks but failed the
+earlier access branch. Its later `G`, K-bin, `I_TV` and `C_total` diagnostics
+therefore cannot promote, retire or relabel the EHC mechanism. This refutes
+post-result diagnostic rescue, not the registered battery on an access-positive
+source.

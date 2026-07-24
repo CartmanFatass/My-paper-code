@@ -5,9 +5,21 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @('hmasd-browser-pro-exchange','hmasd-dispatch-task',
+$expectedSkills = @('hmasd-agile-research-development',
+    'hmasd-browser-pro-exchange','hmasd-dispatch-task',
     'hmasd-experiment-monitor','hmasd-review-round') | Sort-Object
-if (Compare-Object $expectedSkills $skills) { throw "Unexpected active Skill set: $($skills -join ',')" }
+if (Compare-Object $expectedSkills $skills) {
+    throw "Unexpected retained Skill asset set: $($skills -join ',')"
+}
+$currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
+foreach ($required in @('autonomous_research_grant=REVOKED_BY_USER',
+    'git_integration_status=Claude_only',
+    'aggressive_branch_mutation=forbidden',
+    'agent_assets=all_retained_active_routing_controller_registry_only')) {
+    if (-not $currentWork.Contains($required)) {
+        throw "Claude inactive-import boundary missing: $required"
+    }
+}
 
 $reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
 foreach ($path in @(

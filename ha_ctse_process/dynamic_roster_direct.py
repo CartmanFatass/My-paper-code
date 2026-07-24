@@ -12,7 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import math
 from pathlib import Path
-from typing import Any, Callable, Iterable, Mapping, TypeVar, cast
+from typing import Any, Callable, Iterable, Protocol, TypeVar, cast
 
 import numpy as np
 import torch
@@ -52,7 +52,26 @@ BOOTSTRAP_SEED = 107_057
 REPLAY_TOLERANCE = 1e-6
 
 
-_LedgerT = TypeVar("_LedgerT", bound=DynamicRosterLedger)
+class DirectRosterLedger(Protocol):
+    """Minimum ledger surface consumed by the direct active-set learner."""
+
+    direct_frontier_priorities: np.ndarray
+
+
+_LedgerT = TypeVar("_LedgerT")
+
+
+def _shared_lifecycle_capacity(ledgers: Iterable[DirectRosterLedger]) -> int:
+    capacities = {
+        int(np.asarray(ledger.direct_frontier_priorities).shape[1])
+        for ledger in ledgers
+    }
+    if len(capacities) != 1:
+        raise ValueError("direct collection requires one shared operational capacity")
+    capacity = capacities.pop()
+    if capacity <= 0:
+        raise ValueError("direct collection requires positive operational capacity")
+    return capacity
 
 
 def _make_direct_environments(
@@ -102,25 +121,20 @@ class DirectPreparedStep:
     value: torch.Tensor
 
 
-@dataclass
-class DirectPrimitiveAuditCapture:
-    """Audit-only device records for primitive decisions actually executed.
-
-    The collector owns the context and the eventual host transfer.  Keeping
-    tensors here preserves their native dtype and bytes without introducing
-    synchronization or payload allocation on ordinary calls.
-    """
-
-    call_identity: Mapping[str, Any]
-    records: list[dict[str, Any]]
-
-
 class DirectPrimitiveARPolicy(nn.Module):
     """Anonymous per-lifecycle recurrent actor with an active-set critic."""
 
-    def __init__(self, hidden_dim: int = HIDDEN_DIM) -> None:
+    def __init__(
+        self,
+        hidden_dim: int = HIDDEN_DIM,
+        *,
+        autoregressive_prefix: str = "raw_count",
+    ) -> None:
         super().__init__()
         self.hidden_dim = int(hidden_dim)
+        if autoregressive_prefix not in {"raw_count", "active_fraction"}:
+            raise ValueError("unknown direct autoregressive prefix")
+        self.autoregressive_prefix = autoregressive_prefix
         self.member_encoder = nn.Sequential(
             nn.Linear(OBSERVATION_DIM, self.hidden_dim),
             nn.Tanh(),
@@ -150,6 +164,12 @@ class DirectPrimitiveARPolicy(nn.Module):
     def parameter_count(self) -> int:
         return int(sum(parameter.numel() for parameter in self.parameters()))
 
+    @property
+    def roster_representation(self) -> dict[str, str]:
+        return {
+            "autoregressive_prefix": self.autoregressive_prefix,
+        }
+
     def prepare_step(
         self,
         *,
@@ -159,8 +179,10 @@ class DirectPrimitiveARPolicy(nn.Module):
     ) -> DirectPreparedStep:
         """Encode the ordinary observation and critic inputs exactly once."""
 
+        if observations.ndim != 3:
+            raise ValueError("direct actor observations must be [batch, members, fields]")
         batch, members, observation_dim = observations.shape
-        if not validated and (members != MAX_LIFECYCLES or observation_dim != OBSERVATION_DIM):
+        if not validated and (members <= 0 or observation_dim != OBSERVATION_DIM):
             raise ValueError("direct actor observation shape mismatch")
         if not validated and tuple(active_mask.shape) != (batch, members):
             raise ValueError("direct actor active mask shape mismatch")
@@ -198,11 +220,12 @@ class DirectPrimitiveARPolicy(nn.Module):
         deterministic: bool = False,
         primitive_logit_bias: torch.Tensor | None = None,
         prepared: DirectPreparedStep | None = None,
-        audit_capture: DirectPrimitiveAuditCapture | None = None,
         validated: bool = False,
     ) -> DirectStepOutput:
+        if observations.ndim != 3:
+            raise ValueError("direct actor observations must be [batch, members, fields]")
         batch, members, observation_dim = observations.shape
-        if not validated and (members != MAX_LIFECYCLES or observation_dim != OBSERVATION_DIM):
+        if not validated and (members <= 0 or observation_dim != OBSERVATION_DIM):
             raise ValueError("direct actor observation shape mismatch")
         if not validated and tuple(active_mask.shape) != (batch, members):
             raise ValueError("direct actor active mask shape mismatch")
@@ -231,8 +254,6 @@ class DirectPrimitiveARPolicy(nn.Module):
             ACTION_COUNT,
         ):
             raise ValueError("direct actor primitive-logit-bias shape mismatch")
-        if audit_capture is not None and sampling_uniforms is None:
-            raise ValueError("primitive audit capture requires executed sampling uniforms")
 
         active_count = active_mask.sum(dim=1)
         if not validated and bool((active_count <= 0).any()):
@@ -282,6 +303,7 @@ class DirectPrimitiveARPolicy(nn.Module):
         prefix_rows = torch.zeros(
             (batch, members, ACTION_COUNT), dtype=dtype, device=device
         )
+        prefix_denominator = active_count.to(dtype).unsqueeze(-1)
 
         for position in range(members):
             valid = position_mask[:, position]
@@ -290,27 +312,29 @@ class DirectPrimitiveARPolicy(nn.Module):
             focal = order[:, position].clamp(min=0)
             local_embedding = member_embeddings[batch_index, focal]
             local_hidden = next_hidden[batch_index, focal]
+            prefix_input = (
+                prefix / prefix_denominator
+                if self.autoregressive_prefix == "active_fraction"
+                else prefix
+            )
             candidate_hidden = self.actor_rnn(
-                torch.cat((local_embedding, context, prefix), dim=-1),
+                torch.cat((local_embedding, context, prefix_input), dim=-1),
                 local_hidden,
             )
-            action_input = torch.cat((candidate_hidden, prefix), dim=-1)
-            logits = self.action_head(action_input)
+            logits = self.action_head(
+                torch.cat((candidate_hidden, prefix_input), dim=-1)
+            )
             if primitive_logit_bias is not None:
                 logits = logits + primitive_logit_bias[batch_index, focal]
             log_probability = F.log_softmax(logits, dim=-1)
             probability = torch.exp(log_probability)
-            cumulative = (
-                torch.cumsum(probability, dim=-1)
-                if sampling_uniforms is not None or audit_capture is not None
-                else None
-            )
             if teacher_actions is not None:
                 selected = teacher_actions[batch_index, focal]
             elif deterministic:
                 selected = torch.argmax(logits, dim=-1)
             else:
-                assert sampling_uniforms is not None and cumulative is not None
+                assert sampling_uniforms is not None
+                cumulative = torch.cumsum(probability, dim=-1)
                 selected = torch.sum(
                     sampling_uniforms[:, position].unsqueeze(-1) > cumulative,
                     dim=-1,
@@ -318,26 +342,6 @@ class DirectPrimitiveARPolicy(nn.Module):
             if not validated and bool(((selected < 0) | (selected >= ACTION_COUNT))[valid].any()):
                 raise ValueError("direct actor selected an invalid primitive action")
             safe_selected = selected.clamp(min=0, max=ACTION_COUNT - 1)
-            if audit_capture is not None:
-                assert sampling_uniforms is not None and cumulative is not None
-                audit_capture.records.append({
-                    "call_identity": dict(audit_capture.call_identity),
-                    "autoregressive_position": int(position),
-                    "packed_width": int(batch),
-                    "row": batch_index[valid].detach(),
-                    "focal_key": focal[valid].detach(),
-                    "action_input": action_input[valid].detach(),
-                    "primitive_bias": (
-                        None
-                        if primitive_logit_bias is None
-                        else primitive_logit_bias[batch_index, focal][valid].detach()
-                    ),
-                    "logits": logits[valid].detach(),
-                    "probabilities": probability[valid].detach(),
-                    "cdf": cumulative[valid].detach(),
-                    "converted_uniform": sampling_uniforms[:, position][valid].detach(),
-                    "selected_action": safe_selected[valid].detach(),
-                })
 
             selected_logp = torch.gather(
                 log_probability, 1, safe_selected.unsqueeze(-1)
@@ -391,17 +395,21 @@ class DirectTrajectory:
 
 
 def _frontier_order(
-    ledgers: Iterable[DynamicRosterLedger],
+    ledgers: Iterable[DirectRosterLedger],
     active_masks: np.ndarray,
     time: int,
 ) -> np.ndarray:
+    capacity = int(active_masks.shape[1])
     rows: list[np.ndarray] = []
     for ledger, mask in zip(ledgers, active_masks):
+        priorities = np.asarray(ledger.direct_frontier_priorities)
+        if tuple(priorities.shape) != (HORIZON, capacity):
+            raise ValueError("direct frontier priority shape mismatch")
         active = np.flatnonzero(mask)
         sorted_keys = active[
-            np.argsort(ledger.direct_frontier_priorities[time, active])
+            np.argsort(priorities[time, active])
         ]
-        row = np.full(MAX_LIFECYCLES, -1, dtype=np.int64)
+        row = np.full(capacity, -1, dtype=np.int64)
         row[: len(sorted_keys)] = sorted_keys
         rows.append(row)
     return np.stack(rows, axis=0)
@@ -412,6 +420,7 @@ def collect_direct_trajectory(
     *,
     ledger_ids: Iterable[int],
     ledger_seed: int,
+    action_seed: int = POLICY_ACTION_SEED,
     device: torch.device,
     ledger_factory: Callable[..., _LedgerT] | None = None,
     environment_factory: Callable[
@@ -427,10 +436,15 @@ def collect_direct_trajectory(
         ledger_factory=ledger_factory,
         environment_factory=environment_factory,
     )
-    action_uniforms = make_action_uniforms(ids)
+    capacity = _shared_lifecycle_capacity(ledgers)
+    action_uniforms = make_action_uniforms(
+        ids,
+        lifecycle_capacity=capacity,
+        action_seed=action_seed,
+    )
     env_count = len(environments)
     hidden = torch.zeros(
-        (env_count, MAX_LIFECYCLES, model.hidden_dim),
+        (env_count, capacity, model.hidden_dim),
         dtype=torch.float32,
         device=device,
     )
@@ -450,10 +464,10 @@ def collect_direct_trajectory(
     with torch.no_grad():
         for time in range(HORIZON):
             obs_np = np.zeros(
-                (env_count, MAX_LIFECYCLES, OBSERVATION_DIM), dtype=np.float32
+                (env_count, capacity, OBSERVATION_DIM), dtype=np.float32
             )
             active_np = np.zeros(
-                (env_count, MAX_LIFECYCLES), dtype=np.bool_
+                (env_count, capacity), dtype=np.bool_
             )
             views = []
             for env_index, environment in enumerate(environments):
@@ -602,13 +616,14 @@ def _pack_direct_trajectory(
     device: torch.device,
     hidden_dim: int,
 ) -> DirectPackedTrajectory:
+    lifecycle_capacity = int(trajectory.observations.shape[2])
     return DirectPackedTrajectory(
         observations=_chunk_time_env(trajectory.observations).to(device),
         active_mask=_chunk_time_env(trajectory.active_mask).to(device),
         orders=_chunk_time_env(trajectory.orders).to(device),
         actions=_chunk_time_env(trajectory.actions).to(device),
         initial_hidden=trajectory.hidden_before[::MAX_RECURRENT_CHUNK]
-        .reshape(-1, MAX_LIFECYCLES, hidden_dim)
+        .reshape(-1, lifecycle_capacity, hidden_dim)
         .to(device),
         old_log_probs=_chunk_time_env(trajectory.old_log_probs).to(device),
         old_values=_chunk_time_env(trajectory.old_values).to(device),
@@ -708,7 +723,7 @@ def _replay_errors_packed(
     old_prefix = packed.old_prefix_counts
     mask = replay.active_mask
     position_mask = (
-        torch.arange(MAX_LIFECYCLES, device=mask.device)
+        torch.arange(mask.shape[-1], device=mask.device)
         .view(1, 1, -1)
         .lt(mask.sum(dim=-1, keepdim=True))
     )
@@ -854,15 +869,23 @@ def optimize_direct_update(
     return totals
 
 
-def make_action_uniforms(episode_ids: Iterable[int]) -> np.ndarray:
+def make_action_uniforms(
+    episode_ids: Iterable[int],
+    *,
+    lifecycle_capacity: int = MAX_LIFECYCLES,
+    action_seed: int = POLICY_ACTION_SEED,
+) -> np.ndarray:
     ids = tuple(int(value) for value in episode_ids)
+    capacity = int(lifecycle_capacity)
+    if capacity <= 0:
+        raise ValueError("action-uniform capacity must be positive")
     rows = []
     for episode_id in ids:
         rng = np.random.default_rng(
-            np.random.SeedSequence([POLICY_ACTION_SEED, episode_id, 0])
+            np.random.SeedSequence([int(action_seed), episode_id, 0])
         )
         rows.append(
-            rng.random((HORIZON, MAX_LIFECYCLES), dtype=np.float32)
+            rng.random((HORIZON, capacity), dtype=np.float32)
         )
     return np.stack(rows, axis=1)
 
@@ -873,6 +896,8 @@ def evaluate_direct_policy(
     episode_ids: Iterable[int],
     deterministic: bool,
     device: torch.device,
+    ledger_seed: int = EVAL_LEDGER_SEED,
+    action_seed: int = POLICY_ACTION_SEED,
     uniforms: np.ndarray | None = None,
     ledger_factory: Callable[..., _LedgerT] | None = None,
     environment_factory: Callable[
@@ -882,22 +907,27 @@ def evaluate_direct_policy(
     ids = tuple(int(value) for value in episode_ids)
     ledgers, environments = _make_direct_environments(
         ids,
-        master_seed=EVAL_LEDGER_SEED,
+        master_seed=ledger_seed,
         ledger_factory=ledger_factory,
         environment_factory=environment_factory,
     )
+    capacity = _shared_lifecycle_capacity(ledgers)
     env_count = len(environments)
     if not deterministic:
         if uniforms is None:
-            uniforms = make_action_uniforms(ids)
+            uniforms = make_action_uniforms(
+                ids,
+                lifecycle_capacity=capacity,
+                action_seed=action_seed,
+            )
         if tuple(uniforms.shape) != (
             HORIZON,
             env_count,
-            MAX_LIFECYCLES,
+            capacity,
         ):
             raise ValueError("evaluation uniform table shape mismatch")
     hidden = torch.zeros(
-        (env_count, MAX_LIFECYCLES, model.hidden_dim),
+        (env_count, capacity, model.hidden_dim),
         dtype=torch.float32,
         device=device,
     )
@@ -905,10 +935,10 @@ def evaluate_direct_policy(
     with torch.no_grad():
         for time in range(HORIZON):
             obs_np = np.zeros(
-                (env_count, MAX_LIFECYCLES, OBSERVATION_DIM), dtype=np.float32
+                (env_count, capacity, OBSERVATION_DIM), dtype=np.float32
             )
             active_np = np.zeros(
-                (env_count, MAX_LIFECYCLES), dtype=np.bool_
+                (env_count, capacity), dtype=np.bool_
             )
             views = []
             for env_index, environment in enumerate(environments):

@@ -3,7 +3,7 @@
 Updated: 2026-07-23
 
 Purpose: compact factual state for current experiments and standing evidence.
-The controller records a meaningful launch/result transition here before acting;
+The Project Manager records a meaningful launch/result transition here before acting;
 completed detail stays in frozen designs, raw run artifacts, or
 `docs/archive/legacy-memory/EXPERIMENT_ARCHIVE.md`.
 
@@ -27,7 +27,13 @@ explicitly approves the exception.
 
 | ID | Status | Stage | Location | Next Read | Key Evidence | Decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| EXP-20260723-event-held-commitment-link-g0-formal-cpu | blocked -- `BLOCKED_CDC_CAUSAL_AUDIT_QUOTA_BRANCH` + `BLOCKED_RESOURCE_MONITOR_QUOTA`; `NOT_AUTHORIZED` | preregistered formal OR/DUM/EHC comparison under typed-v2 contract | source `1cc6552a00c06bc7389235a4474ca0005c4ca9b6` is not launch-ready; clean worktree preserved; fresh root absent | focused external Pro continuation on 32/32 shortfall semantics; separately rebuild exact Spark-medium Monitor after quota availability | Reviewer proved formal evaluator publishes a causal-audit quota shortfall as `INVALID_OPERATIONAL` although selector/design require `BENCHMARK_NON_IDENTIFIABLE`; Verifier otherwise passed exact contract/resource checks | Do not change code or compute before Pro; then require new exact source, repeated gate, Monitor registration and separate authorization |
+| EXP-20260723-count-preserving-roster-g4 | completed — valid `NO_ACCESS_COUNT_ROSTER_G4` | count-preserving ROSTER_SUM versus normalized ROSTER_ATTN and TEAM_REC | source `64a04fafd5abd4e2955382063a97bff290548513`; run `logs/formal_count_preserving_roster_g4_cpu_20260723_64a04fa_r1`; evidence `docs/research/cdc/EVIDENCE_NOTES/20260723_COUNT_PRESERVING_ROSTER_G4_FORMAL_RESULT.md`; Chinese report `docs/report/ITERATION_5.md` | chain complete; new user boundary required | CPU one-thread; 15 checkpoints, 120 files/61,440 evaluation rows and 640 audits closed; source identified; ROSTER_SUM CI `[0.85801,0.88750]`; `G_attn` CI `[-0.02432,0.01191]`; `G_team` CI `[0.00303,0.04111]` | ROSTER_SUM UCB is below 0.90 and does not improve attention. Close exact G4; all five iterations consumed; do not launch a successor. |
+| EXP-20260723-useful-effect-roster-g3 | completed — valid `UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3` | learned ROSTER_ATTN/TEAM_REC/NO_ROSTER asynchronous demand-served comparison | source `3f636aa7ad43b406734f2f34472ba12ee4e0cd77`; run `logs/formal_useful_effect_roster_g3_cpu_20260723_3f636aa_r1`; evidence `docs/research/cdc/EVIDENCE_NOTES/20260723_USEFUL_EFFECT_ROSTER_G3_FORMAL_RESULT.md`; Chinese report `docs/report/ITERATION_4.md` | `COUNT_PRESERVING_ROSTER_ENCODER_G4_DERIVATION` | CPU one-thread; 15 checkpoints, 120 files/61,440 evaluation rows and 640 audits closed; source identified; ROSTER_ATTN CI `[0.86338,0.91631]`; `G_team` CI `[0.02266,0.06992]`; one seed at 0.83594 | First-match access interval crosses 0.90. Close exact G3 without rerun/tuning/budget rescue; derive a count-preserving roster encoder before deciding the final iteration. |
+| EXP-20260723-async-commitment-roster-g3-gate | completed — nonformal `PASS_ASYNC_ROSTER_INFORMATION_GATE_G3` | zero-training asynchronous multi-record roster source gate | source `b5b67853a2012dd6957e30ad1a6d05d16dff02fe`; artifact `logs/nonformal_async_commitment_roster_g3_20260723_pm1/result.json`; evidence note `docs/research/cdc/EVIDENCE_NOTES/20260723_ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE.md` | `USEFUL_EFFECT_ROSTER_G3_IMPLEMENTATION` | 18,400 exhaustive cases; five variants each 3,680; ROSTER/TEAM_REC 1.0; independent 0.875/0.8333/0.8125; every roster intervention changes choice and restores 1.0; five focused tests | Accept structural source only. The successor contract now uses demand-weighted realized effects; zero iterations consumed. |
+| EXP-20260723-cross-lifecycle-handoff-g2-formal | completed — valid `TEAM_REC_SUFFICIENT_HANDOFF_G2` | trainable TEAM_REC/DUM/EHC anonymous handoff comparison | source `9a72dc6a0f776aa3e6dfa96d86f5265f12717ace`; run `logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1`; evidence note `docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md`; Chinese report `docs/report/ITERATION_3.md` | `ASYNC_COMMITMENT_ROSTER_G3_INFORMATION_GATE` | CPU one-thread; all phases exit zero; 15 checkpoints, 60 files/15,360 evaluation rows and 640 audits closed; TEAM_REC/EHC utility 1.0, DUM 0.5; `G_team=0`, `G_link=0.5`; mark intervention action-TV/drop 1.0 | Permanently close exact G2 without rescue. The link is load-bearing but TEAM_REC is sufficient for one global bit; iteration 3 consumed, two remain. |
+| EXP-20260723-cross-lifecycle-handoff-g2-information-gate | completed -- nonformal `PASS_HANDOFF_INFORMATION_GATE_G2` | zero-training anonymous handoff information gate | implementation base `849b1e9ca3b0f619ecb1076c12a3eb1146f37209`; artifact `logs/nonformal_cross_lifecycle_handoff_g2_20260723_pm2/result.json`; evidence note `docs/research/cdc/EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_INFORMATION_GATE.md` | trainable implementation under frozen TEAM_REC/DUM/EHC contract | 96 exhaustive cases; exact bit mates; per-member/DUM/random utility `0.5`; TEAM_REC/EHC `1.0`; mark-flip action change and utility drop `1.0`; creator state deleted and successor reset | Accept the handoff source only; TEAM_REC remains a complete simpler explanation and is mandatory as the primary comparator; zero iterations consumed. |
+| EXP-20260723-access-positive-ehc-g1-formal-r2 | completed -- valid `ORDINARY_EXPLANATION_G1` | access-positive mechanism-matched EHC G1 formal CPU comparison | source `de9a315b4969ee6920be08a3d911d559fe362f03`; run `logs/formal_access_positive_ehc_g1_cpu_20260723_de9a315_r2`; evidence note `docs/research/cdc/EVIDENCE_NOTES/20260723_ACCESS_POSITIVE_EHC_G1_FORMAL_RESULT.md` | `CROSS_LIFECYCLE_COMMITMENT_HANDOFF_G2_EXECUTABLE_DEFINITION` | CPU one-thread; train/evaluate/analyze exit zero; 15 final checkpoints and 60 evaluation cells closed; operational/source-identification predicates pass; max utility CI `[0.9293551,0.9420615]`; both gain CIs `[-0.0014028,0.0026465]` | Permanently close exact G1 source/comparator without tuning or rerun; select recurrence and link-null for this source; iteration 2 consumed, three remain. |
+| EXP-20260722-ehc-formal-cpu-r1 | completed -- valid `NO_ACCESS_THIS_BENCHMARK`; Pro-confirmed | EVENT_HELD_COMMITMENT_LINK_G0 formal CPU comparison | source `fb9909711a2ca8628f3d534936b771885e53b26d`; raw `logs/formal_event_held_cpu_20260722_fb99097_r2`; accepted review `docs/external-review/rounds/20260722_ehc_formal_result_review/` | `ACCESS_POSITIVE_MECHANISM_MATCHED_EHC_G1` executable definition; no formal compute yet | formal CPU/one-thread; 1250/1250 updates, 5/5 replicates, 60/60 evaluation cells; train/eval/analysis SHA-256 closure; 1,330/1,330 references valid; operational_valid=true, operational_errors=[]; Pro raw exact-text verified | `NO_ACCESS_THIS_BENCHMARK`: OR/DUM max utility UCB `0.6897088860 < 0.78`; permanently closes this frozen benchmark comparison only; four conclusion-bearing iterations remain. |
 | EXP-20260720-benchmark-identifiability-ordinary-access-g0 | completed -- valid `NO_ACCESS_BENCHMARK_ORDINARY_CONTROL`; successor retracted | independent non-calendar heterogeneous-commitment benchmark qualification | implementation `47275d1a0c7bc7f6d674fbe745a0239c78001994`; result `logs/noncalendar_heterogeneous_tracking_g0_20260720_130453/result/noncalendar_heterogeneous_tracking_g0.json`; review `docs/external-review/rounds/20260720_noncalendar_g0_no_access_portfolio/`; clarification `docs/external-review/rounds/20260720_noncalendar_g0_direct_access_clarification/` | mission-aligned Convergent correction | all M0 pass; H `0.796129/1/0.892259`, C `0.5/0.432827/0.463613`, S `0.680944/0.706959/0.693185`; D held-out deterministic `0.614936/0.618980/0.616348`, gain LCB `0.101414`; zero replay/checkpoint error | Preserve valid H/C/S and D no-access; do not rerun or tune G0. `D0_D1_CAUSAL_OBSERVATION_REFACTOR_G0` was retracted before implementation/compute because it made ordinary access a prerequisite and inverted the stronger-MARL objective. Ordinary MARL remains comparator/diagnostic; next route requires Project Manager alignment and focused Convergent correction. |
 | EXP-20260720-clean-supplied-executor-opportunity-audit | completed -- accepted `HINDSIGHT_REACHABLE_PREPOSITIONING_REDUCTION` | read-only opportunity authority and behavior-use audit | `logs/clean_supplied_executor_opportunity_authority_audit_20260720_092154/result/clean_supplied_executor_opportunity_authority_audit.json`; implementation `74779fa81d4cf563ddaa6a649f8881ba18151225`; disposition `docs/external-review/rounds/20260720_opportunity_audit_prepositioning_result/50_DISPOSITION.md` | independent benchmark-identifiability G0 | all audit items true, exact three-arm reproduction, zero optimizer steps; `G_H=1`, decisive PREWAVE excess `+10.613281`, multi-owner-later `-1.898438`, associated working-prefix mean `-0.039538`; wall `454.97s` | Permanently stop Generic-SHORT supplied-executor F1 expansion; retain runtime/credit/checkpoint infrastructure and the broader variable-N plus variable-lifetime target; proceed only to the independent benchmark qualification |
 | EXP-20260720-clean-supplied-executor-high-path-g0 | invalid -- `INVALID_CLEAN_SUPPLIED_EXECUTOR_OPPORTUNITY_CONTRACT` | supplied-executor high/event-path G0 qualification | `logs/clean_supplied_executor_high_path_g0_20260720_054300/result/clean_supplied_executor_high_path_g0.json`; implementation `2d66d253`; accepted review `docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/50_DISPOSITION.md` | selected read-only authority/use audit | M0 pass; oracle `P/S/U=0.978699/0.660807/0.819753` misses the registered floor; learned `P/S/U=0.942383/0.938639/0.940511`, learned-minus-frozen utility CI95 `[0.435689,0.440511,0.445251]` | Preserve INVALID; accept learned gain only as task-local secondary evidence; do not rerun or repair G0; proceed only to the selected zero-training audit |
@@ -84,131 +90,6 @@ explicitly approves the exception.
 | EXP-20260710-r25-qa-verification-1m | standing-reference | 1M HA-CTSE verification | cloud CUDA, 64 env, arm0/arm2 | none | `dist/logs_cloud_r25_qa_verification_1m/`; `gate_read_r25_seed1.md` | arm0 outperformed q_A arm2 late; q_A reward remains default-off. Single-seed parity remains open; do not rerun these arms. |
 | EXP-20260709-r24-frozen-qd-null-probes | completed — accepted FAIL 2026-07-09 | frozen `q_d` diagnostic-null probes | cloud archive plus local analysis | none | `dist/logs_cloud_r24_frozen_qd_overnight_20260709_005624/` | Under tested policies/setup, 3/4 collapsed. Old `q_d/q_D` reward line remains blocked; no target/coefficient sweep. |
 | REF-20260617-hmasd-baseline-s7s1-seed1 | standing-reference | HMASD S7-S1 reference | local 32 env; stopped cleanly at 2.112M/3.2M steps | none | `logs/hmasd_baseline_read_20260709/metric_extract.md` | Coverage first reached 0.7 at 480k and 0.9 at 800k; late mean 0.9639. Reference-only because env/update exposure differs; do not rerun. |
-
-## EXP-20260723-event-held-commitment-link-g0-formal-cpu — Preregistration Contract
-
-- Authority state: external GPT-5.6 Pro scientifically selected
-  `SCHEDULE_ONE_PREREGISTERED_FORMAL_OR_DUM_EHC_COMPARISON`; execution remains
-  `NOT_AUTHORIZED`. The accepted source is
-  `docs/external-review/rounds/20260723_typed_cpu_smoke_complete_next_action/`.
-- Iteration class: one valid conclusion-bearing terminal result would consume
-  the third of the user's five authorized iterations. Review, preregistration,
-  resource assessment and `INVALID_OPERATIONAL` do not.
-- Scientific object: exact `EVENT_HELD_COMMITMENT_LINK_G0` at branch `Claude`,
-  commit `1cc6552a00c06bc7389235a4474ca0005c4ca9b6`. OR is the complete
-  ordinary-recurrent comparator/access diagnostic; DUM is the
-  mechanism-matched `m=0` arm; EHC differs only by `m=1`.
-- Source/runtime: clean worktree
-  `C:\Projects\My-paper-code-formal-1cc6552`; registered CPU backend, one Torch
-  intra-op thread, Python 3.10.20 and Torch `2.7.0+cpu`. Backend or thread
-  substitution is prohibited.
-- Fresh output root:
-  `C:\Projects\My-paper-code\logs\20260723_event_held_commitment_link_g0_formal_cpu_registered`.
-  It must not exist before authorization and cannot reuse an aborted run or
-  checkpoint.
-- Training: paired replicates `r=0..4`; OR/DUM/EHC; 16 environments; horizon
-  80; 250 updates; 320,000 transitions, 4,000 episodes and 1,000 base optimizer
-  steps per arm/replicate; 1,000 event optimizer steps for each DUM/EHC
-  replicate and zero for OR. Evaluate only all 15 `update_250.pt` checkpoints.
-- Training aggregate: 4,800,000 transitions, 60,000 episodes, 15,000 base
-  optimizer steps, 10,000 event optimizer steps and 1,250 immutable update
-  evidence shards.
-- Evaluation: IID deterministic, IID stochastic, held-out deterministic and
-  held-out stochastic; 256 episodes per cell; all 60 cells and 15,360 episodes
-  must validate, totaling 1,228,800 primitive transitions.
-- Causal audit: exactly 32 naturally selected KEEP and 32 RENEW rows per
-  replicate; 320 selected rows and 960 three-branch continuation rows total.
-  No quota reduction, cross-replicate pooling, top-up or selective retention.
-- Statistics: held-out stochastic conclusion cell; primary
-  `G=E[U_EHC-U_DUM]`; secondary `V=E[U_EHC-U_OR]`; 10,000 paired hierarchical
-  bootstrap repetitions, strict percentile 95% intervals and seed `108058`.
-- Evidence semantics: the canonical executable selector and typed-v2 validators
-  govern. Raw use and physical-lifetime CV/bins are diagnostics. Complete
-  evidence uses KEEP/RENEW support, complete-spell opportunity-count `K` bins,
-  primitive-action TV, separately gated natural-action `C_total`, diagnostic
-  `C_timing`/`C_mark`, and row-wise typed causal identity plus derived fidelity.
-  `FORK_EVIDENCE_UNAVAILABLE` exposes no zero-filled C and bypasses the complete
-  selector.
-- Minimum conclusion-bearing evidence: all five replicates at update 250; all
-  15 strict checkpoint restores; all 60 cells; paired episode/RNG identities;
-  all five 32/32 EHC audits; every selected complete row typed-valid; 10,000
-  bootstrap repetitions; one terminal branch with every predicate input
-  preserved.
-- Resource evidence: the accepted non-formal exercise occupied `691,821,312`
-  bytes (`0.6443 GiB`) across 25 files. Its update shard was `8,366,447` bytes
-  and typed audit increment `357,404,103` bytes. Projection is `9.74 GiB`
-  training plus `3.57 GiB` evaluation, `13.31 GiB` core total. Current measured
-  availability was `831.7 GiB`.
-- Hard resources: at least `64 GiB` free before authorization and each phase;
-  output root at most `32 GiB`; complete elapsed time at most `18 h`, with train
-  `10 h`, evaluate `6 h`, analyze `2 h`. Any shortfall is
-  `BLOCKED_RESOURCE`, never a smaller experiment.
-- Retention: keep the complete no-clobber root through accepted external
-  disposition and for 30 calendar days afterward, never beyond `32 GiB`.
-  Tracked terminal summaries, hashes, reconciliation and disposition are
-  permanent.
-- Monitor: rebuild and atomically register the exact native Codex
-  Spark-medium `experiment_monitor` before assignment. No alternate role,
-  default agent or model is legal.
-- Authorization: only a later explicit Controller transition naming this run,
-  root, resource boundary and registered Monitor may permit
-  `AUTHORIZE_EVENT_HELD_COMMITMENT_LINK_G0_FORMAL`. Formal train, evaluate and
-  analyze independently reject absence of that exact token.
-- Stop at the first valid branch:
-  `FORK_EVIDENCE_UNAVAILABLE`, `BENCHMARK_NON_IDENTIFIABLE`,
-  `NO_ACCESS_THIS_BENCHMARK`, `UNDERPOWERED_ACCESS`,
-  `COMMITMENT_SUPPORTED`, `REPRESENTATION_ONLY`,
-  `ORDINARY_OR_CAPACITY_EXPLANATION_SUPPORTED` or `MIXED_UNDERPOWERED`.
-- Repair/closure: the first `INVALID_OPERATIONAL` permits one bounded repair
-  under the identical contract; a second blocks and returns to CDC. A valid
-  negative, no-access, underpowered, mixed or fork-unavailable result receives
-  no pilot, extra seed, top-up, threshold change or rerun.
-- Interpretation ceiling: a positive result supports only the explicit EHC link
-  on this benchmark. A timing-specific claim additionally requires positive
-  two-sided `C_timing` evidence in both natural-action strata. No result here
-  proves general hierarchy, semantic skill, complementary coordination,
-  CPU-wide fork capability or automatic integration.
-
-### Collective preregistration review
-
-- Verifier: `PASS`. It reproduced source HEAD/cleanliness, every registered
-  count/schema/gate, no-token rejection, output-root absence, disk arithmetic,
-  the archived exact Spark-medium zero-token task and unavailable registry
-  route.
-- Reviewer: `FAIL`, one HIGH finding. In
-  `scripts/run_noncalendar_commitment_benchmark_g0.py`,
-  `_collect_causal_audit_evidence` raises `INVALID_OPERATIONAL` when either
-  natural-action inventory has fewer than 32 rows; `_causal_audit_valid` rejects
-  a shortfall artifact; `formal_evaluate` publishes the exception as
-  `INVALID_OPERATIONAL`.
-- Conflict: `select_result_branch` and the accepted design classify the same
-  per-replicate shortfall as `BENCHMARK_NON_IDENTIFIABLE`. The direct formal path
-  cannot reach that registered branch, while the existing unit test exercises
-  only the isolated selector.
-- Disposition: `BLOCKED_CDC_CAUSAL_AUDIT_QUOTA_BRANCH`. The documentation-only
-  preregistration boundary forbids local code or semantic correction. Ask one
-  focused external GPT-5.6 Pro continuation; do not authorize source
-  `1cc6552...`.
-
-### Preauthorization resource disposition
-
-- On 2026-07-23 the Controller attempted the required native Codex Monitor
-  rebuild with `gpt-5.3-codex-spark`, `reasoning_effort=medium` and a read-only
-  sandbox.
-- Codex created task `019f8ffe-197e-7fb1-8cc0-0b55c830ff5e` but failed its
-  first turn before any assistant output or tool use: `You've hit your usage
-  limit for GPT-5.3-Codex-Spark. Switch to another model now, or try again at
-  Jul 28th, 2026 10:31 AM.`
-- Live task metadata recorded the exact model and effort with `tokens_used=0`.
-  The Controller archived this unusable task and did not change
-  `session-roles.json`; the prior registered task remains
-  `ARCHIVED_REBUILD_REQUIRED`.
-- Disposition: `BLOCKED_RESOURCE_MONITOR_QUOTA`. No alternate model, local task
-  agent or role is legal. No formal output root, token use, launch, Monitor
-  assignment or conclusion-bearing iteration occurred.
-- Resume only after quota availability: create one fresh exact Spark-medium
-  Monitor, receive its registration acknowledgement, atomically register it,
-  rerun the route check, then consider the separate Controller authorization.
 
 ## EXP-20260719-clean-process-direct-access — Launch Contract
 

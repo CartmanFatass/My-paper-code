@@ -100,6 +100,9 @@ CAUSAL_AUDIT_SELECTED_ROWS = (
     * CAUSAL_AUDIT_REPLICATES
 )
 CAUSAL_AUDIT_BRANCH_ROWS = CAUSAL_AUDIT_SELECTED_ROWS * len(CAUSAL_AUDIT_BRANCHES)
+# Sole natural-continuation continuous authority for Stage 2. Discrete, RNG,
+# lifecycle, segment, outcome and utility evidence remains exact.
+CAUSAL_AUDIT_CONTINUOUS_ATOL = 1e-7
 # Dedicated deterministic selection stream. It is derived from the registered
 # bootstrap seed under its own namespace coordinate, so it is distinct from the
 # bootstrap resample stream (`default_rng(BOOTSTRAP_SEED)`, i.e.
@@ -1185,8 +1188,8 @@ def registered_contract() -> dict[str, Any]:
             "train_manifest_schema": 6,
             "train_index_schema": 3,
             "train_update_schema": 2,
-            "evaluation_manifest_schema": 6,
-            "evaluation_cell_schema": 9,
+            "evaluation_manifest_schema": 5,
+            "evaluation_cell_schema": 8,
             "digest": "sha256",
             "path_rule": "strict_root_relative_contained",
             "publication": "same_directory_fsync_atomic_replace",
@@ -1249,6 +1252,7 @@ def registered_contract() -> dict[str, Any]:
         "causal_audit": {
             "natural_actions": list(CAUSAL_AUDIT_NATURAL_ACTIONS),
             "branches": list(CAUSAL_AUDIT_BRANCHES),
+            "continuous_atol": CAUSAL_AUDIT_CONTINUOUS_ATOL,
             "quota_per_action_per_replicate": CAUSAL_AUDIT_QUOTA_PER_ACTION,
             "replicates": CAUSAL_AUDIT_REPLICATES,
             "selected_rows": CAUSAL_AUDIT_SELECTED_ROWS,

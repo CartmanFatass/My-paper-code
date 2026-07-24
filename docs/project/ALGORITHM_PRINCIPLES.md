@@ -7,10 +7,9 @@ specification, experiment dashboard, or research history.
 Current ownership and the scheduled action belong in
 `docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
 counterexamples, idea status and evidence notes live under
-`docs/research/cdc/`. External GPT-5.6 Pro owns scientific CDC decisions. The
-unified Controller archives and adopts those decisions, maintains the research
-records, and owns their executable realization. No separate implementation
-relay owns scientific-to-code translation.
+`docs/research/cdc/`. Canonical role authority for scientific decisions,
+adoption, realization and acceptance is defined only in root `AGENTS.md` and
+the applicable `.agents/roles/*.md` contracts; this file does not restate it.
 Formal experiment contracts and dispositions belong in
 `docs/project/ExpRecord.md`. Git history preserves removed research history.
 
@@ -26,6 +25,14 @@ The final target is one general MARL algorithm that can learn under both:
 The method must remain useful beyond one UAV benchmark. A toy, diagnostic, or
 mechanism is relevant only when it tests a capability consumed by this final
 target.
+
+Development may stage these two dimensions instead of forcing both into every
+early experiment. A user-authorized variable-membership stage may freeze skill
+lifetime and remove the skill controller entirely. The first objective of such
+a stage is an absolutely usable shared policy under changing membership; it
+does not have to establish superiority over a fixed-`N` or hierarchical
+algorithm. Comparative advantage and the frozen lifetime dimension are added
+only after the shared dynamic-roster path is reliable.
 
 HMASD and OPT are sources of functional ideas, evidence, and baselines. They are
 not compatibility contracts. New work may retain useful functions while
@@ -91,10 +98,10 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 ## 3. CDC Open Research Loop
 
 Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-External GPT-5.6 Pro owns scientific decisions in this loop. It may use a full
-plural review or a focused continuation in the same registered conversation.
-The unified Controller preserves and adopts that judgment and realizes the
-adopted algorithm without replacing the scientific direction.
+Operate this loop under the canonical role contracts. Scientific review may use
+a full plural review or a focused continuation in the same registered
+conversation; downstream realization must preserve the adopted scientific
+direction.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -195,12 +202,12 @@ counterexample, a corrected definition, a retained lemma, a benchmark
 identification result or a portfolio update. Documentation and workflow status
 alone are support work.
 
-External GPT-5.6 Pro generates and corrects conjectures, derives consequences,
-constructs counterexamples, extracts lemmas and chooses one scheduled action
-while retaining plural explanations. The unified Controller checks provenance
-and feasibility, maintains records and owns adoption, executable realization,
-implementation, resources, Git, claim ceilings and user communication. Review
-output never authorizes code or compute by itself.
+Role-specific responsibilities for scientific review, adoption, implementation,
+acceptance, provenance, resources and communication are defined only in root
+`AGENTS.md` and `.agents/roles/*.md`. This principles file specifies the
+scientific result and evidence semantics those roles must preserve.
+
+Review output never authorizes code or compute by itself.
 
 Integration is a separate late decision. Require natural use, intervention-
 sensitive sequential behavior, external value, held-out transport, resistance

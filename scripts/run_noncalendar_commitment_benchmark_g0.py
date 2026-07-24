@@ -33,7 +33,6 @@ from ha_ctse_process.event_held_commitment_link import (
     MARK_DIM,
     RENEW,
     RNG_NAMES,
-    TYPED_CAUSAL_AUDIT_SCHEMA,
     authoritative_seed_map,
     collect_trajectory,
     collection_rng_schedules,
@@ -58,8 +57,6 @@ from ha_ctse_process.event_held_commitment_link import (
     save_checkpoint,
     validate_replay,
     validate_rng_binding,
-    validate_typed_natural_audit,
-    validate_serialized_replay_report,
 )
 from ha_ctse_process.noncalendar_commitment_testbed import (
     BOOTSTRAP_REPETITIONS,
@@ -74,6 +71,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     HORIZON,
     MAX_LIFECYCLES,
     CAUSAL_AUDIT_BRANCHES,
+    CAUSAL_AUDIT_CONTINUOUS_ATOL,
     CAUSAL_AUDIT_NATURAL_ACTIONS,
     CAUSAL_AUDIT_QUOTA_PER_ACTION,
     CAUSAL_AUDIT_REPLICATES,
@@ -119,20 +117,20 @@ TRAIN_UPDATE_SCHEMA = 2
 # 2: the replay record is the named per-factor error dictionary plus the
 # derived joint bounds actually applied and a normalized pass result, not a
 # single `maximum_error` scalar. Collapsing them hid which factor moved.
-EVALUATION_MANIFEST_SCHEMA = 6
-EVALUATION_CELL_SCHEMA = 9
+EVALUATION_MANIFEST_SCHEMA = 5
+EVALUATION_CELL_SCHEMA = 8
 FORMAL_TRAIN_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_train.v6"
 FORMAL_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_train.index.v3"
 FORMAL_TRAIN_UPDATE_SCHEMA = "event_held_commitment_link_g0.formal_train.update.v2"
-FORMAL_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_evaluation_manifest.v6"
-FORMAL_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_evaluation.v9"
-FORMAL_ANALYSIS_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_analysis.v6"
+FORMAL_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_evaluation_manifest.v5"
+FORMAL_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_evaluation.v8"
+FORMAL_ANALYSIS_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_analysis.v5"
 EXERCISE_TRAIN_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.v5"
 EXERCISE_TRAIN_INDEX_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.index.v3"
 EXERCISE_TRAIN_UPDATE_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.train.update.v2"
-EXERCISE_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation_manifest.v5"
-EXERCISE_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation.v7"
-EXERCISE_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.manifest.v4"
+EXERCISE_EVALUATION_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation_manifest.v4"
+EXERCISE_EVALUATION_ARTIFACT_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.evaluation.v6"
+EXERCISE_MANIFEST_SCHEMA = "event_held_commitment_link_g0.formal_path_exercise.manifest.v3"
 ARMS: tuple[ArmName, ...] = ("OR", "DUM", "EHC")
 CAUSAL_AUDIT_STREAM_NAMES = ("opportunity", "event", "mark", "primitive")
 EVALUATION_CELLS = (
@@ -256,6 +254,8 @@ REPLAY_RECORD_KEYS = frozenset(
 # Relative slack for the record's own internal algebra. The reported numbers
 # are float64 selections of float64 quantities, so the equalities below hold
 # to a few ulps; this is a rounding allowance, never a tolerance on evidence.
+RECORD_CONSISTENCY_RELATIVE = 1e-9
+RECORD_CONSISTENCY_ABSOLUTE = 1e-15
 
 
 def _finite_leaves(record: Any) -> bool:
@@ -379,13 +379,240 @@ def merge_replay_records(records: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _consistent(left: float, right: float) -> bool:
+    """`left == right` up to the record's own float64 rounding."""
+
+    return abs(left - right) <= (
+        RECORD_CONSISTENCY_ABSOLUTE
+        + RECORD_CONSISTENCY_RELATIVE * max(abs(left), abs(right))
+    )
+
+
+def _joint_factor_error_cap(name: str, errors: dict[str, Any], joint: dict[str, Any]) -> float:
+    """Largest `component_sum` the recorded per-factor errors can support.
+
+    `component_sum` is a per-row sum of per-factor replay differences, and
+    every factor of both joints is covered by a recorded per-factor maximum
+    -- the event joint's out-of-support factors only because
+    `categorical_support_leak`/`mark_support_leak` force them to be exactly
+    zero on both sides. Without this link a record could declare an
+    arbitrarily wide `bound` (`component_sum + allowance`) and validate any
+    error beneath it.
+    """
+
+    if name == "event_joint":
+        return float(errors["categorical_component"]) + float(
+            EVENT_JOINT_FACTOR_COUNT - 1
+        ) * float(errors["mark_component"])
+    return float(joint["factor_count"]) * float(errors["primitive_component"])
+
+
+def _ordered_float32_encoding(value: np.float32) -> int:
+    bits = int(value.view(np.uint32))
+    return bits ^ (0xFFFFFFFF if bits & 0x80000000 else 0x80000000)
+
+
+def _recompute_ulp(stored: float, replayed: float) -> tuple[float, int]:
+    stored32, replayed32 = np.float32(stored), np.float32(replayed)
+    reference = stored32 if abs(float(stored32)) >= abs(float(replayed32)) else replayed32
+    direction = np.float32(np.inf if not np.signbit(reference) else -np.inf)
+    neighbor = np.nextafter(reference, direction, dtype=np.float32)
+    return (
+        abs(float(np.float64(neighbor) - np.float64(reference))),
+        abs(_ordered_float32_encoding(stored32) - _ordered_float32_encoding(replayed32)),
+    )
+
+
+def _likelihood_record_valid(
+    record: Any, *, dimensions: int, empty_allowed: bool
+) -> bool:
+    if not isinstance(record, dict) or set(record) != set(REPLAY_WORST_RECORD_FIELDS):
+        return False
+    coordinate = record.get("coordinate")
+    if coordinate is None:
+        return empty_allowed and all(
+            float(record[name]) == 0.0
+            for name in (
+                "stored_value", "replayed_value", "absolute_error",
+                "mixed_bound", "ratio_drift", "float32_ulp_at_max_magnitude",
+                "ulp_distance",
+            )
+        ) and float(record["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+    if not (
+        isinstance(coordinate, list)
+        and len(coordinate) == dimensions
+        and all(type(index) is int and index >= 0 for index in coordinate)
+    ):
+        return False
+    stored = float(record["stored_value"])
+    replayed = float(record["replayed_value"])
+    absolute_error = abs(replayed - stored)
+    mixed_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * max(
+        abs(stored), abs(replayed)
+    )
+    ratio_drift = abs(math.expm1(replayed - stored))
+    spacing, distance = _recompute_ulp(stored, replayed)
+    return bool(
+        _consistent(float(record["absolute_error"]), absolute_error)
+        and _consistent(float(record["mixed_bound"]), mixed_bound)
+        and _consistent(float(record["ratio_drift"]), ratio_drift)
+        and float(record["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+        and float(record["float32_ulp_at_max_magnitude"]) == spacing
+        and int(record["ulp_distance"]) == distance
+        and absolute_error <= mixed_bound
+        and ratio_drift <= REPLAY_LOG_RATIO_DRIFT_CAP
+    )
+
 
 def _replay_record_valid(record: Any, *, event_rows_required: bool = True) -> bool:
-    """Delegate serialized replay validation to the shared core contract."""
+    """Fail-closed check of one serialized replay record.
 
-    return validate_serialized_replay_report(
-        record, event_rows_required=event_rows_required,
-    )
+    Re-derives acceptance from the record itself rather than trusting its
+    `passed` flag: every numeric leaf must be finite, exact fields must be
+    exactly zero, ordinary continuous components must sit at or below the
+    registered component tolerance, and each derived joint must sit at or
+    below its own compositional bound and match its float64 assembly. A
+    record missing any named factor, or any named key of a joint, fails.
+
+    The joint block must also be internally consistent -- `bound` really the
+    sum of its own `component_sum` and `allowance`, `excess` dominating
+    `error - bound`, the assembly triple self-consistent, and
+    `component_sum` no larger than the recorded per-factor errors allow --
+    and must have examined a positive number of rows. `event_rows_required`
+    is false only for the ordinary source arm, which carries no event head
+    and therefore legitimately produces an all-zero event joint.
+    """
+
+    if not isinstance(record, dict) or set(record) != REPLAY_RECORD_KEYS:
+        return False
+    errors = record.get("errors")
+    joints = record.get("joints")
+    if not isinstance(errors, dict) or not isinstance(joints, dict):
+        return False
+    if set(errors) != set(
+        REPLAY_EXACT_FIELDS + REPLAY_COMPONENT_FIELDS + REPLAY_JOINT_FIELDS
+    ):
+        return False
+    if set(joints) != set(REPLAY_JOINT_FIELDS):
+        return False
+    if any(
+        not isinstance(joints[name], dict)
+        or set(joints[name]) != set(REPLAY_JOINT_RECORD_FIELDS)
+        for name in REPLAY_JOINT_FIELDS
+    ):
+        return False
+    try:
+        if not _finite_leaves(record):
+            return False
+    except (TypeError, ValueError):
+        return False
+    if (
+        record.get("schema_version") != REPLAY_RECORD_SCHEMA_VERSION
+        or float(record.get("log_component_atol", float("nan"))) != REPLAY_LOG_COMPONENT_ATOL
+        or float(record.get("log_component_rtol", float("nan"))) != REPLAY_LOG_COMPONENT_RTOL
+        or float(record.get("ratio_drift_cap", float("nan"))) != REPLAY_LOG_RATIO_DRIFT_CAP
+        or float(record.get("state_atol", float("nan"))) != REPLAY_STATE_ATOL
+    ):
+        return False
+    if record.get("passed") is not True or record.get("failures"):
+        return False
+    if any(float(errors[name]) != 0.0 for name in REPLAY_EXACT_FIELDS):
+        return False
+    if any(not float(errors[name]) <= REPLAY_STATE_ATOL for name in REPLAY_STATE_FIELDS):
+        return False
+    likelihood_components = record.get("likelihood_components")
+    if not isinstance(likelihood_components, dict) or set(likelihood_components) != set(
+        REPLAY_LOG_COMPONENT_FIELDS
+    ):
+        return False
+    if not _likelihood_record_valid(
+        likelihood_components["primitive_component"], dimensions=3,
+        empty_allowed=False,
+    ):
+        return False
+    for name, dimensions in (("categorical_component", 3), ("mark_component", 4)):
+        if not _likelihood_record_valid(
+            likelihood_components[name], dimensions=dimensions,
+            empty_allowed=not event_rows_required,
+        ):
+            return False
+    event_ratio = record.get("event_joint_ratio")
+    if not isinstance(event_ratio, dict) or set(event_ratio) != set(
+        REPLAY_EVENT_JOINT_RATIO_FIELDS
+    ):
+        return False
+    coordinate = event_ratio.get("coordinate")
+    if coordinate is None:
+        if event_rows_required or any(
+            float(event_ratio[name]) != 0.0
+            for name in ("stored_value", "replayed_value", "ratio_drift")
+        ):
+            return False
+    elif not (
+        isinstance(coordinate, list) and len(coordinate) == 3
+        and all(type(index) is int and index >= 0 for index in coordinate)
+    ):
+        return False
+    else:
+        recomputed_ratio = abs(math.expm1(
+            float(event_ratio["replayed_value"]) - float(event_ratio["stored_value"])
+        ))
+        if not (
+            _consistent(float(event_ratio["ratio_drift"]), recomputed_ratio)
+            and float(event_ratio["ratio_cap"]) == REPLAY_LOG_RATIO_DRIFT_CAP
+            and recomputed_ratio <= REPLAY_LOG_RATIO_DRIFT_CAP
+        ):
+            return False
+    if coordinate is None and float(event_ratio["ratio_cap"]) != REPLAY_LOG_RATIO_DRIFT_CAP:
+        return False
+    for name in REPLAY_JOINT_FIELDS:
+        joint = {key: float(value) for key, value in joints[name].items()}
+        if any(
+            joint[key] < 0.0
+            for key in (
+                "error", "component_sum", "allowance", "bound", "factor_count",
+                "float64_error", "assembly_residual", "assembly_allowance",
+                "rows",
+            )
+        ):
+            return False
+        if not joint["excess"] <= 0.0 or not joint["assembly_excess"] <= 0.0:
+            return False
+        if not float(errors[name]) <= joint["bound"]:
+            return False
+        if not _consistent(joint["bound"], joint["component_sum"] + joint["allowance"]):
+            return False
+        # `excess` is the per-row maximum of `error - bound` while `error`
+        # and `bound` are read at the largest-error row, so it dominates
+        # rather than equals their difference.
+        if joint["excess"] < joint["error"] - joint["bound"] - (
+            RECORD_CONSISTENCY_ABSOLUTE
+            + RECORD_CONSISTENCY_RELATIVE * abs(joint["bound"])
+        ):
+            return False
+        if not _consistent(
+            joint["assembly_excess"],
+            joint["assembly_residual"] - joint["assembly_allowance"],
+        ):
+            return False
+        cap = _joint_factor_error_cap(name, errors, joint)
+        if joint["component_sum"] > cap + (
+            RECORD_CONSISTENCY_ABSOLUTE + RECORD_CONSISTENCY_RELATIVE * abs(cap)
+        ):
+            return False
+        if joint["rows"] <= 0.0:
+            # An all-zero joint proves nothing was examined. The one lawful
+            # case is the event joint of an arm with no event head, which
+            # must then be all-zero rather than merely row-less.
+            if name != "event_joint" or event_rows_required:
+                return False
+            if any(value != 0.0 for value in joint.values()):
+                return False
+        elif name == "event_joint" and joint["factor_count"] != float(
+            EVENT_JOINT_FACTOR_COUNT
+        ):
+            return False
+    return True
 
 
 def _digest_json(value: Any) -> str:
@@ -1673,76 +1900,138 @@ def _contrast_additivity_evidence(
     return {"residual": residual, "bound": bound}
 
 
-def _typed_binding_matches_causal_row(
-    natural_audit: Mapping[str, Any], row: Mapping[str, Any], *,
-    replicate: int,
+def _causal_audit_valid(
+    record: Any, *, replicate: int, episodes: list[dict[str, Any]],
+    cell_batches: list[dict[str, Any]], formal: bool = True,
+    mode: str = "formal_evaluate",
 ) -> bool:
-    try:
-        binding = natural_audit["binding_evidence"]
-        expected_natural_branch = (
-            CAUSAL_AUDIT_BRANCHES[0]
-            if row["natural_action"] == "KEEP"
-            else CAUSAL_AUDIT_BRANCHES[2]
-            if row["natural_action"] == "RENEW"
-            else None
-        )
-        return bool(
-            expected_natural_branch is not None
-            and binding["audit_id"] == row["audit_id"]
-            and int(binding["replicate"]) == int(row["replicate"]) == replicate
-            and int(binding["batch_index"]) == int(row["batch_index"])
-            and int(binding["source_episode"]) == int(row["episode_id"])
-            and int(binding["focal_time"]) == int(row["time"])
-            and int(binding["source_environment"]) == int(row["env_index"])
-            and int(binding["focal_key"]) == int(row["key"])
-            and int(binding["membership_epoch"]) == int(row["membership_epoch"])
-            and int(binding["segment_id"]) == int(row["segment_id"])
-            and binding["natural_action"] == row["natural_action"]
-            and binding["natural_branch"] == expected_natural_branch
-        )
-    except (KeyError, TypeError, ValueError):
+    required_keys = {
+        "schema", "replicate", "quota_per_action", "raw_event_trace",
+        "selected_keys", "execution", "telemetry", "audit_rows",
+    }
+    if not isinstance(record, dict) or set(record) != required_keys:
         return False
-
-_CAUSAL_AUDIT_COMMON_ROW_KEYS = frozenset({
-    "replicate", "base_episode_id", "episode_id", "sign_parity", "time",
-    "key", "membership_epoch", "segment_id", "natural_action",
-    "batch_index", "env_index", "audit_id", "natural_outcome",
-    "natural_audit", "donor", "executed_branch_evidence", "rng_bindings",
-    "stream_consumption", "end_rng_digests",
-})
-_CAUSAL_AUDIT_COMPLETE_ONLY_ROW_KEYS = frozenset({
-    "outcomes", "contrasts", "contrast_additivity",
-})
-
-
-def _causal_audit_common_provenance_valid(
-    row: Mapping[str, Any],
-    *,
-    expected_key: tuple[Any, ...],
-    expected_recipient: Mapping[str, Any],
-    expected_donor: Mapping[str, Any],
-    mapping_position: int,
-    episode_outcomes: Mapping[int, Any],
-    cell_batches: list[dict[str, Any]],
-    replicate: int,
-    formal: bool,
-    mode: str,
-) -> bool:
-    """Validate status-independent donor, branch-binding and CRN provenance."""
-
-    try:
-        if (
-            not _exact_int_fields(row, (
-                "replicate", "base_episode_id", "episode_id", "sign_parity",
-                "time", "key", "membership_epoch", "segment_id",
-                "batch_index", "env_index",
-            ))
-            or _causal_audit_key(row) != expected_key
+    if not (
+        record["schema"] == "event_held_commitment_link_g0.causal_audit.v2"
+        and _is_exact_int(record["replicate"])
+        and record["replicate"] == replicate
+        and _is_exact_int(record["quota_per_action"])
+        and record["quota_per_action"] == CAUSAL_AUDIT_QUOTA_PER_ACTION
+        and set(record["selected_keys"]) == set(CAUSAL_AUDIT_NATURAL_ACTIONS)
+        and isinstance(record["audit_rows"], list)
+    ):
+        return False
+    inventory = _causal_audit_trace_inventory(
+        record["raw_event_trace"], replicate=replicate, cell_batches=cell_batches
+    )
+    if inventory is None:
+        return False
+    execution = record["execution"]
+    if not isinstance(execution, dict) or set(execution) != {
+        "engine", "registered_width", "selected_state_count",
+        "branch_row_count", "natural_control_layer_count",
+        "counterfactual_layer_count", "physical_row_count", "peer_row_count",
+        "collector_call_count",
+    } or not _exact_int_fields(
+        execution, (
+            "registered_width", "selected_state_count", "branch_row_count",
+            "natural_control_layer_count", "counterfactual_layer_count",
+            "physical_row_count", "peer_row_count", "collector_call_count",
+        )
+    ):
+        return False
+    telemetry = record["telemetry"]
+    if not isinstance(telemetry, dict) or set(telemetry) != {
+        "prefix_seconds", "branch_seconds", "total_seconds",
+        "selected_state_count", "collector_call_count", "serialized_size_bytes",
+    } or not _exact_int_fields(
+        telemetry, ("selected_state_count", "collector_call_count", "serialized_size_bytes")
+    ) or telemetry["serialized_size_bytes"] < 0 or any(
+        type(telemetry[name]) not in (int, float)
+        or not math.isfinite(float(telemetry[name]))
+        or float(telemetry[name]) < 0.0
+        for name in ("prefix_seconds", "branch_seconds", "total_seconds")
+    ):
+        return False
+    selected_flat: list[tuple[Any, ...]] = []
+    quota_shortfall = any(
+        len(inventory[action]) < CAUSAL_AUDIT_QUOTA_PER_ACTION
+        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
+    )
+    selected_records: dict[tuple[Any, ...], dict[str, Any]] = {}
+    donor_by_key: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
+    for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
+        try:
+            selected = [tuple(value) for value in record["selected_keys"][action]]
+        except TypeError:
+            return False
+        eligible_rows = inventory[action]
+        eligible = [_causal_audit_key(value) for value in eligible_rows]
+        if any(
+            len(value) != 8 or value[-1] != action
+            or any(not _is_exact_int(coordinate) for coordinate in value[:-1])
+            for value in selected
         ):
             return False
+        expected: list[tuple[Any, ...]] = []
+        if not quota_shortfall:
+            rng = make_rng(
+                BOOTSTRAP_SEED,
+                CAUSAL_AUDIT_SELECTION_COORDINATE,
+                replicate,
+                action_index,
+            )
+            expected = [
+                eligible[index] for index in sorted(
+                    int(value) for value in rng.choice(
+                        len(eligible), size=CAUSAL_AUDIT_QUOTA_PER_ACTION,
+                        replace=False,
+                    )
+                )
+            ]
+        if selected != expected:
+            return False
+        selected_flat.extend(selected)
+        row_lookup = {_causal_audit_key(value): value for value in eligible_rows}
+        ordered_selected = [row_lookup[key] for key in sorted(selected)]
+        for position, recipient in enumerate(ordered_selected):
+            recipient_key = _causal_audit_key(recipient)
+            donor = ordered_selected[(position + 1) % len(ordered_selected)]
+            if recipient_key == _causal_audit_key(donor):
+                return False
+            selected_records[recipient_key] = recipient
+            donor_by_key[recipient_key] = (position, donor)
+    if any(
+        not isinstance(row, dict) or not _is_exact_int(row.get("episode_id"))
+        for row in episodes
+    ):
+        return False
+    episode_outcomes = {row["episode_id"]: row.get("outcome") for row in episodes}
+    rows_by_key: dict[tuple[Any, ...], dict[str, Any]] = {}
+    required = {
+        "replicate", "base_episode_id", "episode_id", "sign_parity", "time",
+        "key", "membership_epoch", "segment_id", "natural_action",
+        "batch_index", "env_index",
+        "audit_id", "donor", "executed_branch_evidence", "outcomes",
+        "natural_outcome", "contrasts",
+        "contrast_additivity",
+        "natural_errors", "rng_bindings", "stream_consumption", "end_rng_digests",
+    }
+    for row in record["audit_rows"]:
+        if not isinstance(row, dict) or set(row) != required:
+            return False
+        if not _exact_int_fields(row, (
+            "replicate", "base_episode_id", "episode_id", "sign_parity", "time",
+            "key", "membership_epoch", "segment_id", "batch_index", "env_index",
+        )):
+            return False
+        key = _causal_audit_key(row)
+        if key in rows_by_key or key not in selected_flat:
+            return False
         donor = row["donor"]
+        expected_position, expected_donor = donor_by_key[key]
         expected_branch_evidence = _causal_audit_branch_evidence(
-            expected_recipient, expected_donor, mapping_position,
+            selected_records[key], expected_donor, expected_position,
         )
         if not isinstance(donor, dict) or set(donor) != {
             "mapping_position", "donor_key", "candidate_u", "candidate_z",
@@ -1753,27 +2042,57 @@ def _causal_audit_common_provenance_valid(
         donor_z = _float32_payload_bytes(donor["candidate_z"])
         if not (
             _is_exact_int(donor["mapping_position"])
-            and donor["mapping_position"] == mapping_position
+            and donor["mapping_position"] == expected_position
             and tuple(donor["donor_key"]) == _causal_audit_key(expected_donor)
-            and donor_u
-            == _float32_payload_bytes(expected_donor["candidate_u"])
-            and donor_z
-            == _float32_payload_bytes(expected_donor["candidate_z"])
+            and donor_u == _float32_payload_bytes(expected_donor["candidate_u"])
+            and donor_z == _float32_payload_bytes(expected_donor["candidate_z"])
             and donor["candidate_digest"] == _digest_json({
                 "candidate_u": donor["candidate_u"],
                 "candidate_z": donor["candidate_z"],
             })
             and row["executed_branch_evidence"] == expected_branch_evidence
-            and _tracking_outcome_valid(row["natural_outcome"])
-            and row["natural_outcome"]
-            == episode_outcomes.get(int(row["episode_id"]))
-            and validate_typed_natural_audit(row["natural_audit"])
-            and _typed_binding_matches_causal_row(
-                row["natural_audit"], row, replicate=replicate,
-            )
         ):
             return False
-
+        outcomes = row["outcomes"]
+        if not isinstance(outcomes, dict) or tuple(outcomes) != CAUSAL_AUDIT_BRANCHES:
+            return False
+        if not all(_tracking_outcome_valid(value) for value in outcomes.values()):
+            return False
+        expected_natural_branch = (
+            "KEEP_HELD_MARK" if row["natural_action"] == "KEEP"
+            else "RENEW_CANDIDATE_MARK"
+        )
+        expected_natural = episode_outcomes.get(int(row["episode_id"]))
+        expected_contrasts = _causal_contrasts(row["natural_action"], outcomes)
+        expected_additivity = _contrast_additivity_evidence(
+            expected_contrasts, outcomes
+        )
+        additivity = row["contrast_additivity"]
+        if not (
+            _tracking_outcome_valid(row["natural_outcome"])
+            and row["natural_outcome"] == expected_natural
+            and outcomes[expected_natural_branch] == expected_natural
+            and isinstance(row["contrasts"], dict)
+            and set(row["contrasts"]) == {"total", "timing", "mark"}
+            and all(
+                type(row["contrasts"][name]) in (int, float)
+                and math.isfinite(float(row["contrasts"][name]))
+                and float(row["contrasts"][name]) == expected_contrasts[name]
+                for name in expected_contrasts
+            )
+            and isinstance(additivity, dict)
+            and set(additivity) == {"residual", "bound"}
+            and all(
+                type(additivity[name]) in (int, float)
+                and math.isfinite(float(additivity[name]))
+                and float(additivity[name]) >= 0.0
+                and float(additivity[name]) == expected_additivity[name]
+                for name in ("residual", "bound")
+            )
+            and float(additivity["residual"]) <= float(additivity["bound"])
+        ):
+            return False
+        natural_errors = row["natural_errors"]
         rng_digests = row["end_rng_digests"]
         batch_index = row["batch_index"]
         env_index = row["env_index"]
@@ -1782,7 +2101,6 @@ def _causal_audit_common_provenance_valid(
             0 <= batch_index < len(cell_batches)
             and env_index == int(row["episode_id"]) % FORMAL_NUM_ENVS
             and batch_index == int(row["episode_id"]) // FORMAL_NUM_ENVS
-            and isinstance(rng_digests, dict)
             and isinstance(binding_families, dict)
             and tuple(binding_families) == CAUSAL_AUDIT_BRANCHES
         )
@@ -1829,8 +2147,7 @@ def _causal_audit_common_provenance_valid(
                     "segment_id": int(row["segment_id"]),
                     "natural_action": str(row["natural_action"]),
                     "branch": branch,
-                }, key=expected_key,
-                    donor_key=_causal_audit_key(expected_donor),
+                }, key=key, donor_key=_causal_audit_key(expected_donor),
                     branch_evidence=expected_branch_evidence)
                 valid, ends = _rng_bindings_valid(
                     binding_families[branch], expected_context=context,
@@ -1861,330 +2178,86 @@ def _causal_audit_common_provenance_valid(
                 except (KeyError, TypeError, ValueError, IndexError):
                     rng_binding_valid = False
             rng_binding_valid = rng_binding_valid and (
-                len({_digest_json(value) for value in branch_ends.values()})
-                == 1
-                and len({
-                    _digest_json(value) for value in branch_schedules.values()
-                }) == 1
+                len({_digest_json(value) for value in branch_ends.values()}) == 1
+                and len({_digest_json(value) for value in branch_schedules.values()}) == 1
                 and isinstance(row["stream_consumption"], dict)
                 and tuple(row["stream_consumption"]) == CAUSAL_AUDIT_BRANCHES
                 and row["stream_consumption"] == branch_consumption
-                and len({
-                    _digest_json(value) for value in branch_consumption.values()
-                }) == 1
+                and len({_digest_json(value) for value in branch_consumption.values()}) == 1
                 and all(
                     rng_digests.get(name)
-                    == _digest_json(
-                        branch_ends[CAUSAL_AUDIT_BRANCHES[0]][name]
-                    )
+                    == _digest_json(branch_ends[CAUSAL_AUDIT_BRANCHES[0]][name])
                     for name in RNG_NAMES
                 )
             )
-        return bool(
+        if not (
             row["episode_id"]
             == 2 * row["base_episode_id"] + row["sign_parity"]
             and isinstance(row["audit_id"], str) and bool(row["audit_id"])
-            and row["audit_id"] == _digest_json(list(expected_key))
-            and isinstance(rng_digests, dict)
+            and row["audit_id"] == _digest_json(list(key))
+            and set(natural_errors) == {
+                "discrete_mismatch", "continuous_error", "segment_equal",
+                "outcome_equal",
+            }
+            and type(natural_errors["discrete_mismatch"]) is int
+            and natural_errors["discrete_mismatch"] == 0
+            and type(natural_errors["continuous_error"]) in (int, float)
+            and math.isfinite(float(natural_errors["continuous_error"]))
+            and 0.0 <= float(natural_errors["continuous_error"])
+            <= CAUSAL_AUDIT_CONTINUOUS_ATOL
+            and natural_errors["segment_equal"] is True
+            and natural_errors["outcome_equal"] is True
             and set(rng_digests) == set(RNG_NAMES)
             and rng_binding_valid
-        )
-    except (KeyError, TypeError, ValueError, IndexError):
-        return False
-
-
-def _causal_audit_complete_projection_valid(
-    row: Mapping[str, Any], *, episode_outcomes: Mapping[int, Any],
-) -> bool:
-    """Validate outcome-derived evidence that unavailable rows quarantine."""
-
-    try:
-        outcomes = row["outcomes"]
-        if (
-            not isinstance(outcomes, dict)
-            or tuple(outcomes) != CAUSAL_AUDIT_BRANCHES
-            or not all(
-                _tracking_outcome_valid(value) for value in outcomes.values()
-            )
         ):
             return False
-        expected_natural_branch = (
-            "KEEP_HELD_MARK" if row["natural_action"] == "KEEP"
-            else "RENEW_CANDIDATE_MARK"
-            if row["natural_action"] == "RENEW"
-            else None
-        )
-        expected_natural = episode_outcomes.get(int(row["episode_id"]))
-        expected_contrasts = _causal_contrasts(
-            row["natural_action"], outcomes,
-        )
-        expected_additivity = _contrast_additivity_evidence(
-            expected_contrasts, outcomes,
-        )
-        additivity = row["contrast_additivity"]
-        return bool(
-            expected_natural_branch is not None
-            and outcomes[expected_natural_branch] == expected_natural
-            and isinstance(row["contrasts"], dict)
-            and set(row["contrasts"]) == {"total", "timing", "mark"}
-            and all(
-                type(row["contrasts"][name]) in (int, float)
-                and math.isfinite(float(row["contrasts"][name]))
-                and float(row["contrasts"][name]) == expected_contrasts[name]
-                for name in expected_contrasts
-            )
-            and isinstance(additivity, dict)
-            and set(additivity) == {"residual", "bound"}
-            and all(
-                type(additivity[name]) in (int, float)
-                and math.isfinite(float(additivity[name]))
-                and float(additivity[name]) >= 0.0
-                and float(additivity[name]) == expected_additivity[name]
-                for name in ("residual", "bound")
-            )
-            and float(additivity["residual"]) <= float(additivity["bound"])
-        )
-    except (KeyError, TypeError, ValueError):
-        return False
-
-
-
-
-def _causal_audit_valid(
-    record: Any, *, replicate: int, episodes: list[dict[str, Any]],
-    cell_batches: list[dict[str, Any]], formal: bool = True,
-    mode: str = "formal_evaluate",
-) -> bool:
-    required_keys = {
-        "schema", "status", "reason_code", "replicate", "quota_per_action",
-        "attempted_rows", "completed_rows", "failed_selected_coordinate",
-        "raw_event_trace", "selected_keys", "execution", "telemetry",
-        "audit_rows",
-    }
-    if not isinstance(record, dict) or set(record) != required_keys:
-        return False
-    if not (
-        record["schema"] == TYPED_CAUSAL_AUDIT_SCHEMA
-        and _is_exact_int(record["replicate"])
-        and record["replicate"] == replicate
-        and _is_exact_int(record["quota_per_action"])
-        and record["quota_per_action"] == CAUSAL_AUDIT_QUOTA_PER_ACTION
-        and set(record["selected_keys"]) == set(CAUSAL_AUDIT_NATURAL_ACTIONS)
-        and isinstance(record["audit_rows"], list)
-        and record["status"] in ("complete", "unavailable")
-        and _is_exact_int(record["attempted_rows"])
-        and _is_exact_int(record["completed_rows"])
-    ):
-        return False
-    inventory = _causal_audit_trace_inventory(
-        record["raw_event_trace"], replicate=replicate, cell_batches=cell_batches
-    )
-    if inventory is None:
-        return False
-    execution = record["execution"]
-    if not isinstance(execution, dict) or set(execution) != {
-        "engine", "registered_width", "selected_state_count",
-        "branch_row_count", "padding_row_count", "collector_call_count",
-    } or not _exact_int_fields(
-        execution, (
-            "registered_width", "selected_state_count", "branch_row_count",
-            "padding_row_count", "collector_call_count",
-        )
-    ):
-        return False
-    telemetry = record["telemetry"]
-    if not isinstance(telemetry, dict) or set(telemetry) != {
-        "prefix_seconds", "branch_seconds", "total_seconds",
-        "selected_state_count", "collector_call_count", "serialized_size_bytes",
-    } or not _exact_int_fields(
-        telemetry, ("selected_state_count", "collector_call_count", "serialized_size_bytes")
-    ) or telemetry["serialized_size_bytes"] < 0 or any(
-        type(telemetry[name]) not in (int, float)
-        or not math.isfinite(float(telemetry[name]))
-        or float(telemetry[name]) < 0.0
-        for name in ("prefix_seconds", "branch_seconds", "total_seconds")
-    ):
-        return False
-    selected_flat: list[tuple[Any, ...]] = []
-    quota_shortfall = any(
-        len(inventory[action]) < CAUSAL_AUDIT_QUOTA_PER_ACTION
-        for action in CAUSAL_AUDIT_NATURAL_ACTIONS
-    )
-    if quota_shortfall:
-        return False
-    selected_records: dict[tuple[Any, ...], dict[str, Any]] = {}
-    donor_by_key: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
-    for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
-        try:
-            selected = [tuple(value) for value in record["selected_keys"][action]]
-        except TypeError:
-            return False
-        eligible_rows = inventory[action]
-        eligible = [_causal_audit_key(value) for value in eligible_rows]
-        if any(
-            len(value) != 8 or value[-1] != action
-            or any(not _is_exact_int(coordinate) for coordinate in value[:-1])
-            for value in selected
-        ):
-            return False
-        rng = make_rng(
-            BOOTSTRAP_SEED,
-            CAUSAL_AUDIT_SELECTION_COORDINATE,
-            replicate,
-            action_index,
-        )
-        expected = [
-            eligible[index] for index in sorted(
-                int(value) for value in rng.choice(
-                    len(eligible), size=CAUSAL_AUDIT_QUOTA_PER_ACTION,
-                    replace=False,
-                )
-            )
-        ]
-        if selected != expected:
-            return False
-        selected_flat.extend(selected)
-        row_lookup = {_causal_audit_key(value): value for value in eligible_rows}
-        ordered_selected = [row_lookup[key] for key in sorted(selected)]
-        for position, recipient in enumerate(ordered_selected):
-            recipient_key = _causal_audit_key(recipient)
-            donor = ordered_selected[(position + 1) % len(ordered_selected)]
-            if recipient_key == _causal_audit_key(donor):
-                return False
-            selected_records[recipient_key] = recipient
-            donor_by_key[recipient_key] = (position, donor)
-    if any(
-        not isinstance(row, dict) or not _is_exact_int(row.get("episode_id"))
-        for row in episodes
-    ):
-        return False
-    episode_outcomes = {
-        row["episode_id"]: row.get("outcome") for row in episodes
-    }
-    selected_order = sorted(selected_flat)
-
-    def schedule_counts(attempted: int) -> tuple[int, int, int]:
-        position = 0
-        physical = 0
-        chunks = 0
-        cells: set[tuple[int, int]] = set()
-        while position < attempted:
-            key = selected_order[position]
-            selected_record = selected_records[key]
-            cell = (
-                int(selected_record["batch_index"]),
-                int(selected_record["time"]),
-            )
-            stop = position
-            while (
-                stop < len(selected_order)
-                and stop - position < 5
-                and (
-                    int(selected_records[selected_order[stop]]["batch_index"]),
-                    int(selected_records[selected_order[stop]]["time"]),
-                ) == cell
-            ):
-                stop += 1
-            physical += stop - position
-            chunks += 1
-            cells.add(cell)
-            position = stop
-        return physical, chunks, len(cells) + chunks
-
-    common_required = set(_CAUSAL_AUDIT_COMMON_ROW_KEYS)
-    required = (
-        common_required
-        if record["status"] == "unavailable"
-        else common_required | set(_CAUSAL_AUDIT_COMPLETE_ONLY_ROW_KEYS)
-    )
-    selected_count = len(selected_flat)
-    if record["status"] == "unavailable":
-        attempted = int(record["attempted_rows"])
-        completed = int(record["completed_rows"])
-        if not (
-            1 <= attempted <= selected_count
-            and completed == attempted - 1
-            and len(record["audit_rows"]) == attempted
-            and record["reason_code"]
-            == "natural_branch_causal_identity_failed"
-            and record["failed_selected_coordinate"]
-            == list(selected_order[attempted - 1])
-        ):
-            return False
-        expected_keys = selected_order[:attempted]
-        expected_audit_statuses = ["complete"] * completed + ["unavailable"]
-    else:
-        attempted = selected_count
-        completed = selected_count
-        if not (
-            len(record["audit_rows"]) == selected_count
-            and record["reason_code"] is None
-            and int(record["attempted_rows"]) == selected_count
-            and int(record["completed_rows"]) == selected_count
-            and record["failed_selected_coordinate"] is None
-        ):
-            return False
-        expected_keys = selected_order
-        expected_audit_statuses = ["complete"] * selected_count
-
-    rows_by_key: dict[tuple[Any, ...], dict[str, Any]] = {}
-    natural_audit_statuses: list[str] = []
-    for expected_key, row in zip(
-        expected_keys, record["audit_rows"], strict=True,
-    ):
-        if not isinstance(row, dict) or set(row) != required:
-            return False
-        key = _causal_audit_key(row)
-        if key != expected_key or key in rows_by_key:
-            return False
-        mapping_position, expected_donor = donor_by_key[key]
-        if not _causal_audit_common_provenance_valid(
-            row,
-            expected_key=key,
-            expected_recipient=selected_records[key],
-            expected_donor=expected_donor,
-            mapping_position=mapping_position,
-            episode_outcomes=episode_outcomes,
-            cell_batches=cell_batches,
-            replicate=replicate,
-            formal=formal,
-            mode=mode,
-        ):
-            return False
-        if (
-            record["status"] == "complete"
-            and not _causal_audit_complete_projection_valid(
-                row, episode_outcomes=episode_outcomes,
-            )
-        ):
-            return False
-        natural_audit_statuses.append(row["natural_audit"]["status"])
         rows_by_key[key] = row
-
-    physical_count, expected_branch_calls, expected_calls = schedule_counts(
-        attempted
+    selected_count = len(selected_flat)
+    selected_cells = [
+        (int(selected_records[key]["batch_index"]), int(selected_records[key]["time"]))
+        for key in selected_flat
+    ]
+    expected_natural_layers = len(set(selected_cells))
+    selected_cell_envs = Counter(
+        (
+            int(selected_records[key]["batch_index"]),
+            int(selected_records[key]["time"]),
+            int(selected_records[key]["env_index"]),
+        )
+        for key in selected_flat
     )
-    expected_branch_rows = physical_count * len(CAUSAL_AUDIT_BRANCHES)
-    expected_padding_rows = (
-        expected_branch_calls * FORMAL_NUM_ENVS - expected_branch_rows
+    expected_counterfactual_layers = sum(
+        2 * max(
+            count for (row_batch, row_time, _env), count
+            in selected_cell_envs.items()
+            if (row_batch, row_time) == cell
+        )
+        for cell in set(selected_cells)
     )
+    expected_branch_calls = (
+        expected_natural_layers + expected_counterfactual_layers
+    )
+    expected_calls = expected_natural_layers + expected_branch_calls
+    expected_branch_rows = selected_count * len(CAUSAL_AUDIT_BRANCHES)
+    expected_physical_rows = expected_branch_calls * FORMAL_NUM_ENVS
+    expected_peer_rows = expected_physical_rows - expected_branch_rows
     serialized_size = len(json.dumps(
-        {
-            "raw_event_trace": record["raw_event_trace"],
-            "audit_rows": record["audit_rows"],
-        },
+        {"raw_event_trace": record["raw_event_trace"], "audit_rows": record["audit_rows"]},
         sort_keys=True, separators=(",", ":"), ensure_ascii=True,
     ).encode("utf-8"))
     return bool(
-        [key for key in rows_by_key] == expected_keys
-        and natural_audit_statuses == expected_audit_statuses
-        and execution["engine"] == "registered_width_batched_causal_audit_v1"
+        set(rows_by_key) == set(selected_flat)
+        and execution["engine"] == "canonical_width16_causal_audit_v2"
         and execution["registered_width"] == FORMAL_NUM_ENVS
-        and execution["selected_state_count"] == physical_count
+        and execution["selected_state_count"] == selected_count
         and execution["branch_row_count"] == expected_branch_rows
-        and execution["padding_row_count"] == expected_padding_rows
+        and execution["natural_control_layer_count"] == expected_natural_layers
+        and execution["counterfactual_layer_count"]
+        == expected_counterfactual_layers
+        and execution["physical_row_count"] == expected_physical_rows
+        and execution["peer_row_count"] == expected_peer_rows
         and execution["collector_call_count"] == expected_calls
-        and telemetry["selected_state_count"] == attempted
+        and telemetry["selected_state_count"] == selected_count
         and telemetry["collector_call_count"] == expected_calls
         and telemetry["serialized_size_bytes"] == serialized_size
     )
@@ -2211,7 +2284,7 @@ def _evaluation_cell_valid(
         "artifact_schema", "schema_version", "formal", "contract", "arm",
         "replicate", "cell", "profile", "mode", "checkpoint",
         "checkpoint_origin", "counts", "batches", "operational", "episodes",
-        "causal_audit", "status",
+        "causal_audit",
     }
     if not isinstance(payload, dict) or set(payload) != required:
         return False, (), []
@@ -2265,14 +2338,7 @@ def _evaluation_cell_valid(
             cell_batches=batches, formal=formal, mode=mode,
         ):
             return False, (), []
-        audit_status = payload["causal_audit"]["status"]
-        expected_status = (
-            "COMPLETE" if audit_status == "complete"
-            else "COMPLETE_PARTIAL_EVIDENCE"
-        )
-        if payload["status"] != expected_status:
-            return False, (), []
-    elif payload["causal_audit"] is not None or payload["status"] != "COMPLETE":
+    elif payload["causal_audit"] is not None:
         return False, (), []
     expected_rng_states = _initial_rng_states(
         authoritative_seed_map(profile, replicate)
@@ -2374,31 +2440,6 @@ def _compact_episode(row: Mapping[str, Any]) -> dict[str, Any]:
         )
     }
 
-def _natural_evidence_only(causal_audit: Mapping[str, Any]) -> dict[str, Any]:
-    """Retain natural metrics and typed evidence without exposing any C row."""
-
-    natural_fields = (
-        "replicate", "base_episode_id", "episode_id", "sign_parity", "time",
-        "key", "membership_epoch", "segment_id", "natural_action",
-        "batch_index", "env_index", "audit_id", "natural_outcome",
-        "natural_audit",
-    )
-    return {
-        "schema": causal_audit["schema"],
-        "status": causal_audit["status"],
-        "reason_code": causal_audit["reason_code"],
-        "replicate": causal_audit["replicate"],
-        "attempted_rows": causal_audit["attempted_rows"],
-        "completed_rows": causal_audit["completed_rows"],
-        "failed_selected_coordinate": deepcopy(
-            causal_audit["failed_selected_coordinate"]
-        ),
-        "natural_rows": [
-            {name: deepcopy(row[name]) for name in natural_fields}
-            for row in causal_audit["audit_rows"]
-        ],
-    }
-
 
 def _validate_streamed_operational_records(
     output_root: Path, *, expected_replicates: tuple[int, ...] = tuple(range(5)),
@@ -2409,10 +2450,7 @@ def _validate_streamed_operational_records(
     """Validate indexed evidence one verbose artifact at a time."""
 
     errors: list[str] = []
-    compact: dict[str, Any] = {
-        "episodes": {}, "audit_rows": {}, "causal_audits": {},
-        "evidence_status": None,
-    }
+    compact: dict[str, Any] = {"episodes": {}, "audit_rows": {}}
     train_path = output_root / "train_manifest.json"
     evaluation_path = output_root / "evaluation_manifest.json"
     try:
@@ -2672,16 +2710,8 @@ def _validate_streamed_operational_records(
         and evaluation_root["formal"] is formal
         and evaluation_root["contract"] == registered_contract()
         and evaluation_root["mode"] == expected_evaluation_mode
-        and (
-            (
-                evaluation_root["status"] == "COMPLETE"
-                and evaluation_root["branch"] == expected_evaluation_branch
-            )
-            or (
-                evaluation_root["status"] == "COMPLETE_PARTIAL_EVIDENCE"
-                and evaluation_root["branch"] == "FORK_EVIDENCE_UNAVAILABLE"
-            )
-        )
+        and evaluation_root["status"] == "COMPLETE"
+        and evaluation_root["branch"] == expected_evaluation_branch
         and evaluation_root["progress"] == {
             "completed_cells": len(expected_cells), "total_cells": len(expected_cells),
         }
@@ -2717,7 +2747,6 @@ def _validate_streamed_operational_records(
     paired_ids: dict[tuple[int, str], tuple[int, ...]] = {}
     cell_rng: dict[tuple[int, str, str], list[dict[str, str]]] = {}
     cell_spec = {name: (profile, deterministic) for profile, deterministic, name in EVALUATION_CELLS}
-    partial_cells = 0
     checkpoint_origin = f"update_{expected_updates}.pt"
     for expected, reference in zip(expected_cells, cell_references, strict=True):
         replicate, arm, cell = expected
@@ -2767,22 +2796,14 @@ def _validate_streamed_operational_records(
                 _compact_episode(row) for row in payload["episodes"]
             ]
             if arm == "EHC":
-                causal_audit = payload["causal_audit"]
-                compact["causal_audits"][replicate] = _natural_evidence_only(
-                    causal_audit
-                )
-                if causal_audit["status"] == "complete":
-                    compact["audit_rows"][replicate] = [
-                        {
-                            "base_episode_id": row["base_episode_id"],
-                            "natural_action": row["natural_action"],
-                            "contrasts": deepcopy(row["contrasts"]),
-                        }
-                        for row in causal_audit["audit_rows"]
-                    ]
-                else:
-                    partial_cells += 1
-                    compact["audit_rows"].clear()
+                compact["audit_rows"][replicate] = [
+                    {
+                        "base_episode_id": row["base_episode_id"],
+                        "natural_action": row["natural_action"],
+                        "contrasts": deepcopy(row["contrasts"]),
+                    }
+                    for row in payload["causal_audit"]["audit_rows"]
+                ]
         del payload
         if artifact_observer is not None:
             artifact_observer("released", cell_path)
@@ -2808,12 +2829,6 @@ def _validate_streamed_operational_records(
                     for name in RNG_NAMES
                 ):
                     errors.append(f"evaluation_dum_ehc_rng:{replicate}:{cell}:{batch_index}")
-    root_partial = evaluation_root["status"] == "COMPLETE_PARTIAL_EVIDENCE"
-    if root_partial != (partial_cells > 0):
-        errors.append("evaluation_partial_evidence_status")
-    compact["evidence_status"] = "unavailable" if root_partial else "complete"
-    if root_partial:
-        compact["audit_rows"].clear()
     if any(output_root.rglob("*.tmp")):
         errors.append("temporary_artifact_residue")
     return not errors, errors, compact
@@ -3641,43 +3656,6 @@ def _trajectory_episode_rows(
     return rows, reduction_counts
 
 
-def _validated_causal_audit_collector_call_count(
-    selected_rows: list[Mapping[str, Any]],
-    results: list[Mapping[str, Any]],
-) -> int:
-    """Rederive and validate collector calls from the executed row schedule."""
-
-    attempted_rows = len(results)
-    position = 0
-    branch_calls = 0
-    prefix_cells: set[tuple[int, int]] = set()
-    while position < attempted_rows:
-        cell = (
-            int(selected_rows[position]["batch_index"]),
-            int(selected_rows[position]["time"]),
-        )
-        chunk_stop = position
-        while (
-            chunk_stop < len(selected_rows)
-            and chunk_stop - position < 5
-            and (
-                int(selected_rows[chunk_stop]["batch_index"]),
-                int(selected_rows[chunk_stop]["time"]),
-            ) == cell
-        ):
-            chunk_stop += 1
-        prefix_cells.add(cell)
-        branch_calls += 1
-        position = chunk_stop
-    expected = len(prefix_cells) + branch_calls
-    if any(
-        int(result["telemetry"]["collector_call_count"]) != expected
-        for result in results
-    ):
-        raise RuntimeError("collector-call telemetry mismatch")
-    return expected
-
-
 def _collect_causal_audit_evidence(
     arm: Any,
     *,
@@ -3731,17 +3709,12 @@ def _collect_causal_audit_evidence(
         len(ordered_by_action[action]) < CAUSAL_AUDIT_QUOTA_PER_ACTION
         for action in CAUSAL_AUDIT_NATURAL_ACTIONS
     )
-    if quota_shortfall:
-        raise RuntimeError(
-            "INVALID_OPERATIONAL causal audit selected-row quota shortfall"
-        )
     donor_for: dict[tuple[Any, ...], tuple[int, dict[str, Any]]] = {}
     for action_index, action in enumerate(CAUSAL_AUDIT_NATURAL_ACTIONS):
         ordered = ordered_by_action[action]
-        if not ordered:
-            raise RuntimeError(
-                "INVALID_OPERATIONAL causal audit missing selected inventory"
-            )
+        if quota_shortfall:
+            selected_keys[action] = []
+            continue
         selection_rng = make_rng(
             BOOTSTRAP_SEED,
             CAUSAL_AUDIT_SELECTION_COORDINATE,
@@ -3826,97 +3799,20 @@ def _collect_causal_audit_evidence(
                     ("installed_z", "candidate_u", "candidate_z")
                 )
             }
-    if not results or len(results) > len(selected_for_execution):
-        raise RuntimeError("INVALID_OPERATIONAL causal audit returned row count")
-    statuses: list[str] = []
-    for position, (selected_row, result) in enumerate(
-        zip(selected_for_execution, results)
-    ):
-        natural_audit = result.get("natural_audit")
-        if not validate_typed_natural_audit(natural_audit):
-            raise RuntimeError("causal audit typed natural evidence is invalid")
-        binding = natural_audit["binding_evidence"]
-        expected_natural_branch = (
-            CAUSAL_AUDIT_BRANCHES[0]
-            if selected_row["natural_action"] == "KEEP"
-            else CAUSAL_AUDIT_BRANCHES[2]
-            if selected_row["natural_action"] == "RENEW"
-            else None
+    for record, result in zip(selected_for_execution, results, strict=True):
+        mapping_position, donor = donor_for[_causal_audit_key(record)]
+        selected_payloads = selected_payloads_by_key[_causal_audit_key(record)]
+        executed_branch_evidence = _causal_audit_branch_evidence(
+            record, donor, mapping_position,
+            selected_payloads=selected_payloads,
+            donor_material=result.get("donor_binding_material", {}),
+            selected_state=result.get("selected_state", {}),
         )
-        if not (
-            expected_natural_branch is not None
-            and result["natural_action"] == binding["natural_action"]
-            == selected_row["natural_action"]
-            and result["natural_branch"] == binding["natural_branch"]
-            == expected_natural_branch
-        ):
-            raise RuntimeError(
-                "INVALID_OPERATIONAL engine natural action/branch mismatch"
-            )
-        expected_audit_id = _digest_json(list(_causal_audit_key(selected_row)))
-        if not (
-            binding["audit_id"] == expected_audit_id == result["audit_id"]
-            and int(binding["replicate"]) == int(replicate)
-            and int(binding["batch_index"]) == int(selected_row["batch_index"])
-            and int(binding["source_episode"]) == int(selected_row["episode_id"])
-            and int(binding["focal_time"]) == int(selected_row["time"])
-            and int(binding["source_environment"]) == int(selected_row["env_index"])
-            and int(binding["focal_key"]) == int(selected_row["key"])
-            and int(binding["membership_epoch"])
-            == int(selected_row["membership_epoch"])
-            and int(binding["segment_id"]) == int(selected_row["segment_id"])
-            and binding["natural_action"] == selected_row["natural_action"]
-        ):
-            raise RuntimeError(
-                "INVALID_OPERATIONAL typed binding does not match outer row"
-            )
-        statuses.append(str(natural_audit["status"]))
-        if statuses[-1] == "unavailable" and position != len(results) - 1:
-            raise RuntimeError(
-                "INVALID_OPERATIONAL causal audit continued after first failure"
-            )
-    unavailable_positions = [
-        index for index, status in enumerate(statuses)
-        if status == "unavailable"
-    ]
-    if unavailable_positions:
-        if unavailable_positions != [len(results) - 1]:
-            raise RuntimeError(
-                "INVALID_OPERATIONAL unavailable row is not terminal prefix"
-            )
-        audit_status = "unavailable"
-    else:
-        if len(results) != len(selected_for_execution):
-            raise RuntimeError(
-                "INVALID_OPERATIONAL complete causal audit missing selected rows"
-            )
-        audit_status = "complete"
-    attempted_rows = len(results)
-    completed_rows = (
-        attempted_rows if audit_status == "complete" else attempted_rows - 1
-    )
-    failed_selected_coordinate = (
-        None if audit_status == "complete"
-        else list(_causal_audit_key(selected_for_execution[attempted_rows - 1]))
-    )
-
-    batch_rng_sources: dict[
-        int, tuple[dict[str, list[dict[str, Any]]], dict[str, Any]]
-    ] = {}
-    for record in selected_for_execution[:attempted_rows]:
-        batch_index = int(record["batch_index"])
-        if batch_index not in batch_rng_sources:
-            batch_rng_sources[batch_index] = (
-                collection_rng_schedules(
-                    record["trajectory"], deterministic=False,
-                ),
-                owned_rng_states(record["origin_state"]),
-            )
-
-    for record, result in zip(
-        selected_for_execution[:attempted_rows], results, strict=True
-    ):
-        natural_audit = deepcopy(result["natural_audit"])
+        expected_branch_evidence = _causal_audit_branch_evidence(
+            record, donor, mapping_position,
+        )
+        if executed_branch_evidence != expected_branch_evidence:
+            raise RuntimeError("causal audit executed payload binding mismatch")
         outcomes = {
             branch: _tracking_outcome_record(result["branch_outcomes"][branch])
             for branch in CAUSAL_AUDIT_BRANCHES
@@ -3928,7 +3824,37 @@ def _collect_causal_audit_evidence(
         )
         if outcomes[natural_branch] != natural_outcome:
             raise RuntimeError("causal audit failed full natural-outcome equality")
-        natural_row = {
+        contrasts = _causal_contrasts(record["natural_action"], outcomes)
+        contrast_additivity = _contrast_additivity_evidence(contrasts, outcomes)
+        if contrast_additivity["residual"] > contrast_additivity["bound"]:
+            raise RuntimeError("causal audit binary64 additivity bound failed")
+        branch_bindings: dict[str, dict[str, Any]] = {}
+        for branch in CAUSAL_AUDIT_BRANCHES:
+            context = _causal_audit_bound_context({
+                "domain": "stage2", "mode": mode, "formal": bool(formal),
+                "replicate": int(replicate), "arm": "EHC",
+                "cell": "held_out_stochastic",
+                "batch": int(record["batch_index"]),
+                "audit_id": str(result["audit_id"]),
+                "episode_id": int(record["episode_id"]),
+                "time": int(record["time"]), "key": int(record["key"]),
+                "membership_epoch": int(record["membership_epoch"]),
+                "segment_id": int(record["segment_id"]),
+                "natural_action": str(record["natural_action"]),
+                "branch": branch,
+            }, key=_causal_audit_key(record), donor_key=_causal_audit_key(donor),
+                branch_evidence=executed_branch_evidence)
+            branch_bindings[branch] = {
+                name: make_rng_binding(
+                    context=context, stream=name,
+                    seed=authoritative_seed_map("held_out", replicate)[name],
+                    start_state=result["rng_binding_material"][name]["start_state"],
+                    draw_schedule=result["rng_binding_material"][name]["draw_schedule"],
+                    expected_end_state=result["rng_binding_material"][name]["end_state"],
+                )
+                for name in RNG_NAMES
+            }
+        audit_rows.append({
             **{name: record[name] for name in (
                 "replicate", "base_episode_id", "episode_id", "sign_parity",
                 "time", "key", "membership_epoch", "segment_id",
@@ -3937,206 +3863,85 @@ def _collect_causal_audit_evidence(
             "batch_index": int(record["batch_index"]),
             "env_index": int(record["env_index"]),
             "audit_id": str(result["audit_id"]),
-            "natural_outcome": natural_outcome,
-            "natural_audit": natural_audit,
-        }
-
-        key = _causal_audit_key(record)
-        mapping_position, donor = donor_for[key]
-        selected_payloads = selected_payloads_by_key[key]
-        executed_branch_evidence = _causal_audit_branch_evidence(
-            record, donor, mapping_position,
-            selected_payloads=selected_payloads,
-            donor_material=result.get("donor_binding_material", {}),
-            selected_state=result.get("selected_state", {}),
-        )
-        expected_branch_evidence = _causal_audit_branch_evidence(
-            record, donor, mapping_position,
-        )
-        if executed_branch_evidence != expected_branch_evidence:
-            raise RuntimeError(
-                "INVALID_OPERATIONAL causal audit executed payload binding mismatch"
-            )
-
-        seed_map = authoritative_seed_map("held_out", replicate)
-        full_schedules, origin_rng_states = batch_rng_sources[
-            int(record["batch_index"])
-        ]
-        expected_starts: dict[str, Any] = {}
-        expected_tails: dict[str, list[dict[str, Any]]] = {}
-        expected_ends: dict[str, Any] = {}
-        try:
-            rng_material = result["rng_binding_material"]
-            end_rng_states = result["end_rng_states"]
-            branch_results = result["branches"]
-            if not (
-                isinstance(rng_material, dict)
-                and set(rng_material) == set(RNG_NAMES)
-                and isinstance(end_rng_states, dict)
-                and set(end_rng_states) == set(RNG_NAMES)
-                and isinstance(branch_results, dict)
-                and tuple(branch_results) == CAUSAL_AUDIT_BRANCHES
-            ):
-                raise ValueError("causal audit common RNG schema mismatch")
-            for name in RNG_NAMES:
-                prefix_schedule = [
-                    entry for entry in full_schedules[name]
-                    if int(entry.get("coordinates", {}).get("time", -1))
-                    < int(record["time"])
-                ]
-                expected_tails[name] = [
-                    entry for entry in full_schedules[name]
-                    if int(entry.get("coordinates", {}).get("time", -1))
-                    >= int(record["time"])
-                ]
-                expected_starts[name] = replay_rng_schedule_end_state(
-                    origin_rng_states[name], prefix_schedule,
-                    seed=int(seed_map[name]),
-                )
-                expected_ends[name] = replay_rng_schedule_end_state(
-                    expected_starts[name], expected_tails[name],
-                    seed=int(seed_map[name]),
-                )
-                material = rng_material[name]
-                if not (
-                    isinstance(material, dict)
-                    and material.get("start_state") == expected_starts[name]
-                    and material.get("draw_schedule") == expected_tails[name]
-                    and material.get("end_state") == expected_ends[name]
-                    and end_rng_states[name] == expected_ends[name]
-                ):
-                    raise ValueError(
-                        f"causal audit {name} RNG material mismatch"
-                    )
-
-            expected_consumption = {
-                name: _expected_audit_stream_consumption(
-                    stream=name,
-                    start_state=expected_starts[name],
-                    schedule=expected_tails[name],
-                    seed=int(seed_map[name]),
-                    env_index=int(record["env_index"]),
-                )
-                for name in CAUSAL_AUDIT_STREAM_NAMES
-            }
-            stream_consumption = {
-                branch: deepcopy(
-                    branch_results[branch]["stream_consumption"]
-                )
-                for branch in CAUSAL_AUDIT_BRANCHES
-            }
-            if any(
-                consumption != expected_consumption
-                for consumption in stream_consumption.values()
-            ):
-                raise ValueError(
-                    "causal audit branch RNG consumption mismatch"
-                )
-
-            branch_bindings: dict[str, dict[str, Any]] = {}
-            for branch in CAUSAL_AUDIT_BRANCHES:
-                context = _causal_audit_bound_context({
-                    "domain": "stage2", "mode": mode,
-                    "formal": bool(formal), "replicate": int(replicate),
-                    "arm": "EHC", "cell": "held_out_stochastic",
-                    "batch": int(record["batch_index"]),
-                    "audit_id": str(result["audit_id"]),
-                    "episode_id": int(record["episode_id"]),
-                    "time": int(record["time"]), "key": int(record["key"]),
-                    "membership_epoch": int(record["membership_epoch"]),
-                    "segment_id": int(record["segment_id"]),
-                    "natural_action": str(record["natural_action"]),
-                    "branch": branch,
-                }, key=key, donor_key=_causal_audit_key(donor),
-                    branch_evidence=executed_branch_evidence)
-                branch_bindings[branch] = {
-                    name: make_rng_binding(
-                        context=context,
-                        stream=name,
-                        seed=int(seed_map[name]),
-                        start_state=expected_starts[name],
-                        draw_schedule=expected_tails[name],
-                        expected_end_state=expected_ends[name],
-                    )
-                    for name in RNG_NAMES
-                }
-        except (
-            KeyError, TypeError, ValueError, IndexError, RuntimeError,
-        ) as error:
-            raise RuntimeError(
-                "INVALID_OPERATIONAL causal audit common RNG provenance mismatch"
-            ) from error
-
-        donor_material = _causal_audit_donor_material(
-            record, donor, mapping_position,
-        )
-        common_row = natural_row | {
             "donor": {
                 "mapping_position": mapping_position,
-                "donor_key": donor_material["donor_key"],
-                "candidate_u": donor_material["candidate_u"],
-                "candidate_z": donor_material["candidate_z"],
-                "candidate_digest": donor_material["candidate_digest"],
+                "donor_key": list(_causal_audit_key(donor)),
+                "candidate_u": deepcopy(donor["candidate_u"]),
+                "candidate_z": deepcopy(donor["candidate_z"]),
+                "candidate_digest": _digest_json({
+                    "candidate_u": donor["candidate_u"],
+                    "candidate_z": donor["candidate_z"],
+                }),
             },
             "executed_branch_evidence": executed_branch_evidence,
-            "rng_bindings": branch_bindings,
-            "stream_consumption": stream_consumption,
-            "end_rng_digests": {
-                name: _digest_json(expected_ends[name]) for name in RNG_NAMES
-            },
-        }
-        if audit_status == "unavailable":
-            audit_rows.append(common_row)
-            continue
-
-        contrasts = _causal_contrasts(record["natural_action"], outcomes)
-        contrast_additivity = _contrast_additivity_evidence(contrasts, outcomes)
-        if contrast_additivity["residual"] > contrast_additivity["bound"]:
-            raise RuntimeError("causal audit binary64 additivity bound failed")
-        audit_rows.append(common_row | {
             "outcomes": outcomes,
+            "natural_outcome": natural_outcome,
             "contrasts": contrasts,
             "contrast_additivity": contrast_additivity,
+            "natural_errors": dict(result["natural_errors"]),
+            "rng_bindings": branch_bindings,
+            "stream_consumption": {
+                branch: deepcopy(result["branches"][branch]["stream_consumption"])
+                for branch in CAUSAL_AUDIT_BRANCHES
+            },
+            "end_rng_digests": {
+                name: _digest_json(result["end_rng_states"][name])
+                for name in RNG_NAMES
+            },
         })
-
-    telemetry_source = results[0]["telemetry"]
-    collector_call_count = _validated_causal_audit_collector_call_count(
-        selected_for_execution, results,
+    selected_cells = {
+        (int(value["batch_index"]), int(value["time"]))
+        for value in selected_for_execution
+    }
+    natural_control_layers = len(selected_cells)
+    selected_cell_envs = Counter(
+        (
+            int(value["batch_index"]), int(value["time"]),
+            int(value["env_index"]),
+        )
+        for value in selected_for_execution
     )
-    if int(telemetry_source["selected_state_count"]) != attempted_rows:
-        raise RuntimeError("causal audit lazy telemetry mismatch")
+    counterfactual_layers = sum(
+        2 * max(
+            count for (row_batch, row_time, _env), count
+            in selected_cell_envs.items()
+            if (row_batch, row_time) == cell
+        )
+        for cell in selected_cells
+    )
+    branch_calls = natural_control_layers + counterfactual_layers
+    prefix_calls = natural_control_layers
+    collector_calls = prefix_calls + branch_calls
+    telemetry_source = results[0]["telemetry"] if results else {
+        "prefix_seconds": 0.0, "branch_seconds": 0.0, "total_seconds": 0.0,
+            "selected_state_count": 0, "collector_call_count": 0,
+            "natural_control_layer_count": 0,
+            "counterfactual_layer_count": 0, "physical_row_count": 0,
+    }
     artifact = {
-        "schema": TYPED_CAUSAL_AUDIT_SCHEMA,
-        "status": audit_status,
-        "reason_code": (
-            "natural_branch_causal_identity_failed"
-            if audit_status == "unavailable" else None
-        ),
+        "schema": "event_held_commitment_link_g0.causal_audit.v2",
         "replicate": int(replicate),
         "quota_per_action": CAUSAL_AUDIT_QUOTA_PER_ACTION,
-        "attempted_rows": attempted_rows,
-        "completed_rows": completed_rows,
-        "failed_selected_coordinate": failed_selected_coordinate,
         "raw_event_trace": raw_event_trace,
         "selected_keys": selected_keys,
         "execution": {
-            "engine": "registered_width_batched_causal_audit_v1",
+            "engine": "canonical_width16_causal_audit_v2",
             "registered_width": FORMAL_NUM_ENVS,
-            "selected_state_count": int(
-                telemetry_source["physical_selected_state_count"]
-            ),
-            "branch_row_count": int(
-                telemetry_source["physical_selected_state_count"]
-            ) * len(CAUSAL_AUDIT_BRANCHES),
-            "padding_row_count": int(telemetry_source["padding_row_count"]),
-            "collector_call_count": collector_call_count,
+            "selected_state_count": len(selected_for_execution),
+            "branch_row_count": len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
+            "natural_control_layer_count": natural_control_layers,
+            "counterfactual_layer_count": counterfactual_layers,
+            "physical_row_count": branch_calls * FORMAL_NUM_ENVS,
+            "peer_row_count": branch_calls * FORMAL_NUM_ENVS
+            - len(selected_for_execution) * len(CAUSAL_AUDIT_BRANCHES),
+            "collector_call_count": collector_calls,
         },
         "telemetry": {
             "prefix_seconds": float(telemetry_source["prefix_seconds"]),
             "branch_seconds": float(telemetry_source["branch_seconds"]),
             "total_seconds": float(telemetry_source["total_seconds"]),
-            "selected_state_count": attempted_rows,
-            "collector_call_count": collector_call_count,
+            "selected_state_count": len(selected_for_execution),
+            "collector_call_count": collector_calls,
             "serialized_size_bytes": 0,
         },
         "audit_rows": audit_rows,
@@ -4145,6 +3950,19 @@ def _collect_causal_audit_evidence(
         {"raw_event_trace": raw_event_trace, "audit_rows": audit_rows},
         sort_keys=True, separators=(",", ":"), ensure_ascii=True,
     ).encode("utf-8"))
+    if int(telemetry_source["selected_state_count"]) != len(selected_for_execution):
+        raise RuntimeError("causal audit selected-state telemetry mismatch")
+    if int(telemetry_source["collector_call_count"]) != collector_calls:
+        raise RuntimeError("causal audit collector-call telemetry mismatch")
+    if not (
+        int(telemetry_source["natural_control_layer_count"])
+        == natural_control_layers
+        and int(telemetry_source["counterfactual_layer_count"])
+        == counterfactual_layers
+        and int(telemetry_source["physical_row_count"])
+        == branch_calls * FORMAL_NUM_ENVS
+    ):
+        raise RuntimeError("causal audit canonical-layer telemetry mismatch")
     return artifact
 
 
@@ -4170,7 +3988,6 @@ def _evaluation_core(
         },
         "cells": [],
     }
-    partial_evidence = False
     _write_json(manifest_path, manifest)
     publication_ledger_cache: dict[
         tuple[Any, ...], tuple[dict[str, Any], list[Any]]
@@ -4207,10 +4024,6 @@ def _evaluation_core(
                     trajectory = collect_trajectory(
                         arm, state, device=device, episode_ids=episode_ids,
                         deterministic=deterministic, profile=profile,
-                        causal_audit_evidence=(
-                            arm_name == "EHC"
-                            and cell == "held_out_stochastic"
-                        ),
                     )
                     _replay, replay_evidence = validate_replay(
                         arm, trajectory, device=device
@@ -4281,15 +4094,6 @@ def _evaluation_core(
                     if arm_name == "EHC" and cell == "held_out_stochastic"
                     else None
                 )
-                cell_status = (
-                    "COMPLETE_PARTIAL_EVIDENCE"
-                    if causal_audit is not None
-                    and causal_audit["status"] == "unavailable"
-                    else "COMPLETE"
-                )
-                partial_evidence = partial_evidence or (
-                    cell_status == "COMPLETE_PARTIAL_EVIDENCE"
-                )
                 payload = {
                     "artifact_schema": artifact_schema,
                     "schema_version": EVALUATION_CELL_SCHEMA,
@@ -4308,7 +4112,6 @@ def _evaluation_core(
                     "causal_audit": causal_audit,
                     "operational": True,
                     "episodes": episode_rows,
-                    "status": cell_status,
                 }
                 cell_valid, _episode_ids, _rng_digests = _evaluation_cell_valid(
                     payload, replicate=replicate, arm=arm_name, profile=profile,
@@ -4334,15 +4137,11 @@ def _evaluation_core(
                 completed_paths.append(reference["path"])
                 last_evidence.clear(); last_evidence.update(reference)
                 del payload, batches, episode_rows, causal_audit
-    if partial_evidence:
-        manifest["status"] = "COMPLETE_PARTIAL_EVIDENCE"
-        manifest["branch"] = "FORK_EVIDENCE_UNAVAILABLE"
-    else:
-        manifest["status"] = "COMPLETE"
-        manifest["branch"] = (
-            "FORMAL_EVALUATION_COMPLETE" if formal
-            else "FORMAL_PATH_EXERCISE_EVALUATION_COMPLETE"
-        )
+    manifest["status"] = "COMPLETE"
+    manifest["branch"] = (
+        "FORMAL_EVALUATION_COMPLETE" if formal
+        else "FORMAL_PATH_EXERCISE_EVALUATION_COMPLETE"
+    )
     _write_json(manifest_path, manifest)
     return manifest
 
@@ -4380,7 +4179,7 @@ def formal_evaluate(
 
 
 def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, Any]:
-    """Bounded non-formal exercise over the exact formal cores."""
+    """Bounded non-formal exercise over the exact registered formal cores."""
 
     device = require_registered_backend(device_name)
     exercise_root = output_root / "formal_path_exercise"
@@ -4417,11 +4216,9 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
             exercise_root, stage2_reference["path"]
         )
         with stage2_path.open("r", encoding="utf-8") as handle:
-            stage2_payload = json.load(handle)
-        causal_audit = stage2_payload["causal_audit"]
-        stage2 = causal_audit["execution"]
+            stage2 = json.load(handle)["causal_audit"]["execution"]
         if not (
-            stage2["engine"] == "registered_width_batched_causal_audit_v1"
+            stage2["engine"] == "canonical_width16_causal_audit_v2"
             and int(stage2["selected_state_count"]) > 0
             and int(stage2["collector_call_count"]) > 0
         ):
@@ -4441,17 +4238,8 @@ def formal_path_exercise(output_root: Path, *, device_name: str) -> dict[str, An
             "episodes_per_cell": FORMAL_NUM_ENVS,
             "checkpoint_origin": "update_1.pt",
             "stage2": stage2,
-            "natural_evidence": _natural_evidence_only(causal_audit),
-            "status": (
-                "COMPLETE_PARTIAL_EVIDENCE"
-                if evaluation["status"] == "COMPLETE_PARTIAL_EVIDENCE"
-                else "FORMAL_PATH_EXERCISE_COMPLETE"
-            ),
-            "branch": (
-                "FORK_EVIDENCE_UNAVAILABLE"
-                if evaluation["status"] == "COMPLETE_PARTIAL_EVIDENCE"
-                else "FORMAL_PATH_EXERCISE_COMPLETE"
-            ),
+            "status": "FORMAL_PATH_EXERCISE_COMPLETE",
+            "branch": "FORMAL_PATH_EXERCISE_COMPLETE",
             "training_manifest": str(train_path),
             "evaluation_manifest": str(evaluation_path),
         }
@@ -4517,22 +4305,6 @@ def _aggregate_analysis_core(
             "branch": select_result_branch(**inputs),
             "predicate_inputs": inputs,
             "operational_errors": operational_errors,
-            "registered_contract": REGISTERED_CONTRACT,
-        }
-        _write_json(output_root / "analysis_result.json", result)
-        return result
-
-    if compact["evidence_status"] == "unavailable":
-        result = {
-            "artifact_schema": FORMAL_ANALYSIS_ARTIFACT_SCHEMA,
-            "formal": True,
-            "status": "COMPLETE_PARTIAL_EVIDENCE",
-            "branch": "FORK_EVIDENCE_UNAVAILABLE",
-            "natural_evidence": [
-                compact["causal_audits"][replicate]
-                for replicate in sorted(compact["causal_audits"])
-            ],
-            "operational_errors": [],
             "registered_contract": REGISTERED_CONTRACT,
         }
         _write_json(output_root / "analysis_result.json", result)
