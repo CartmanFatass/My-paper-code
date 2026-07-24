@@ -1,6 +1,0 @@
-interface:
-  display_name: "HMASD Browser Pro Exchange"
-  short_description: "Run the restart-safe BrowserMCP Pro exchange"
-  default_prompt: "Use $hmasd-browser-pro-exchange only as the active unified Controller. Live-preflight the registered Pro tab, render and type exactly one no-newline HMASD_BP_D1 dispatch of at most 352 UTF-16 code units, submit with a separate Enter action, follow VALIDATED -> RECONCILED_IDLE -> DRAFT_CONFIRMED -> SUBMISSION_CONFIRMED -> GENERATING -> STABLE_TWICE -> ARCHIVED, publish the immutable v2 receipt, and archive only identical marked content from two temporary snapshots. Never upload or attach a file, type the full question, or retry/retype/submit after a browser_type timeout on the same live connection, even if a snapshot looks empty; require a fresh BrowserMCP process/extension connection. Fail closed without a completion agent or alternate transport."
-policy:
-  allow_implicit_invocation: false

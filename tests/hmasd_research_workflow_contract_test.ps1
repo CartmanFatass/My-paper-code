@@ -5,11 +5,16 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.omp/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @('hmasd-agile-research-development',
-    'hmasd-browser-pro-exchange','hmasd-dispatch-task',
+$expectedSkills = @('hmasd-agile-research-development','hmasd-dispatch-task',
     'hmasd-experiment-monitor','hmasd-review-round') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected retained Skill asset set: $($skills -join ',')"
+}
+if (Test-Path (Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/SKILL.md') -PathType Leaf) {
+    throw 'Disabled BrowserMCP automation Skill remains in active discovery'
+}
+if (-not (Test-Path (Join-Path $repo '.omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md') -PathType Leaf)) {
+    throw 'Disabled BrowserMCP automation contract is missing from legacy evidence'
 }
 $currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLED_SKILL_LIFETIME_CHAIN',
@@ -24,7 +29,10 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
     'k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM',
-    'k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE')) {
+    'k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE',
+    'external_review_transport_status=CONTROLLER_DIRECT_EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL',
+    'external_review_skill_abstraction_gate=MULTIPLE_STABLE_AUTOMATED_CYCLES_THEN_EXPLICIT_USER_APPROVAL',
+    'review_scout_status=ACTIVE_LOCAL_EXPERIENCE_RECORDER')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -47,14 +55,21 @@ $roles = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/reference
 if (Compare-Object @('controller','experiment_monitor') @($roles.roles.PSObject.Properties.Name)) {
     throw 'Unexpected persistent role graph'
 }
-if ($roles.schema_version -ne 22 -or
+if ($roles.schema_version -ne 25 -or
+    -not $roles.external_review_transport.transport_exploration_enabled -or
+    $roles.external_review_transport.status -ne 'EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL' -or
+    $roles.external_review_transport.automation_skill_enabled -or
+    $roles.external_review_transport.automation_skill_archive -ne '.omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md' -or
+    $roles.external_review_transport.connection_state -ne 'EXPLORATION_LIVE_PREFLIGHT_REQUIRED' -or
+    $roles.external_review_transport.authenticated_registered_tab_prerequisite -ne 'ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP' -or
+    $roles.external_review_transport.routine_human_interaction_allowed -or
+    $roles.external_review_transport.experience_recorder -ne 'hmasd-review-scout' -or
     $roles.external_review_transport.dispatch_marker -ne 'HMASD_BP_D1' -or
     $roles.external_review_transport.dispatch_max_utf16_code_units -ne 352 -or
     $roles.external_review_transport.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
-    $roles.external_review_transport.browser_type_actions -ne 1 -or
     $roles.external_review_transport.file_upload_allowed -or
     $roles.external_review_transport.full_question_browser_type_allowed) {
-    throw 'Bounded Browser Pro transport registry changed'
+    throw 'Controller-direct Browser Pro exploration registry changed'
 }
 if ($roles.roles.experiment_monitor.registration_status -ne 'ARCHIVED_REBUILD_REQUIRED' -or
     $roles.roles.experiment_monitor.last_route_check -ne 'ARCHIVED_TASK' -or
@@ -64,24 +79,46 @@ if ($roles.roles.experiment_monitor.registration_status -ne 'ARCHIVED_REBUILD_RE
 }
 $dispatcher = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/SKILL.md') -Raw
 foreach ($required in @('controller -> local OMP task agents',
-    'controller -> BrowserMCP Pro submission/observation/capture',
+    'controller -> direct BrowserMCP exploration -> hmasd-review-scout record',
     'controller <-> experiment_monitor', 'gpt-5.3-codex-spark',
-    'hmasd-exp-manager', 'hmasd-frontier-implementer', 'BUG_UNRESOLVED',
-    'five repair attempts', 'openai-codex/gpt-5.6-sol:max',
+    'hmasd-exp-manager', 'hmasd-review-scout', 'hmasd-frontier-implementer',
+    'BUG_UNRESOLVED', 'five repair attempts', 'openai-codex/gpt-5.6-sol:max',
     'Controller/main conversation alone', 'compares 2-3 approaches',
     'FINAL_IMPLEMENTATION_ROUND_REVIEW', 'complete planned package',
-    'no local observer', 'live preflight')) {
+    'External review transport exploration', 'explicitly approves')) {
     if (-not $dispatcher.Contains($required)) { throw "Dispatcher missing: $required" }
 }
 $controller = Get-Content (Join-Path $repo 'AGENTS.md') -Raw
-foreach ($required in @('one Controller-owned state machine',
-    'No local or persistent role may', 'no-clobber submission receipt',
-    'two stable snapshots', 'hmasd-exp-manager')) {
-    if (-not $controller.Contains($required)) { throw "Controller does not expose frozen topology: $required" }
+foreach ($required in @('No external-review transport Skill is active',
+    'hmasd-review-scout', 'one-time environmental prerequisite',
+    'no-clobber receipt', 'BrowserMCP automation Skill is disabled',
+    'explicit user approval')) {
+    if (-not $controller.Contains($required)) { throw "Controller does not expose exploration topology: $required" }
 }
 foreach ($removed in @('hmasd-pro-monitor','hmasd-pro-monitor-luna')) {
     if ($dispatcher.Contains($removed) -or $reviewRound.Contains($removed)) { throw "Removed route remains: $removed" }
     if (Test-Path (Join-Path $repo ".omp/agents/$removed.md")) { throw "Removed profile remains: $removed" }
+}
+$reviewScout = Get-Content (Join-Path $repo '.omp/agents/hmasd-review-scout.md') -Raw
+foreach ($required in @('tools: [read, grep, glob, edit, write]',
+    'never operate a browser', 'explicit user approval')) {
+    if (-not $reviewScout.Contains($required)) { throw "review_scout profile missing: $required" }
+}
+if (-not (Test-Path (Join-Path $repo '.omp/review_scout/EXPERIENCE.md') -PathType Leaf)) {
+    throw 'review_scout experience record is missing'
+}
+$experience = Get-Content (Join-Path $repo '.omp/review_scout/EXPERIENCE.md') -Raw
+if (-not $experience.Contains('Stable automated end-to-end cycles: 0')) {
+    throw 'review_scout stable-cycle count changed before one qualifying end-to-end cycle'
+}
+$activeRound = Join-Path $repo 'docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction'
+foreach ($absent in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md')) {
+    if (Test-Path (Join-Path $activeRound $absent) -PathType Leaf) {
+        throw "Active READY_TO_SUBMIT round unexpectedly contains $absent"
+    }
+}
+if (-not $currentWork.Contains('browser_pro_round_state=READY_TO_SUBMIT_RECEIPT_ABSENT_RAW_ABSENT_DIRECT_EXPLORATION')) {
+    throw 'CURRENT_WORK active Browser Pro round state changed'
 }
 $monitor = Get-Content (Join-Path $repo '.omp/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 foreach ($required in @('ETA','10 minutes','delete the heartbeat','EXPERIMENT_MONITOR',

@@ -1,5 +1,5 @@
 {
-  "schema_version": 22,
+  "schema_version": 25,
   "updated": "2026-07-23",
   "asset_root": {
     "root": ".omp",
@@ -14,7 +14,7 @@
       "kind": "active_unified_omp_controller",
       "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
       "contract": "AGENTS.md",
-      "responsibility": "scientific intake, complete BrowserMCP exchange state machine, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
+      "responsibility": "scientific intake, Controller-direct external-transport exploration, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
     },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
@@ -26,36 +26,29 @@
     }
   },
   "external_review_transport": {
-    "kind": "controller_owned_browsermcp_state_machine",
+    "kind": "controller_direct_browsermcp_exploration",
+    "transport_exploration_enabled": true,
+    "status": "EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL",
+    "automation_skill_enabled": false,
+    "automation_skill_archive": ".omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md",
+    "skill_abstraction_gate": "multiple_stable_automated_cycles_then_explicit_user_approval",
+    "experience_recorder": "hmasd-review-scout",
+    "experience_path": ".omp/review_scout/EXPERIENCE.md",
     "server": "browsermcp-pro",
     "config": ".omp/mcp.json",
-    "skill": ".omp/skills/hmasd-browser-pro-exchange/SKILL.md",
     "package": "@browsermcp/mcp@0.1.3",
-    "connection_state": "LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND",
+    "connection_state": "EXPLORATION_LIVE_PREFLIGHT_REQUIRED",
+    "authenticated_registered_tab_prerequisite": "ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP",
+    "routine_human_interaction_allowed": false,
     "evidence_transport": "github_connector",
     "repository": "CartmanFatass/My-paper-code",
     "review_branch": "Claude",
     "dispatch_marker": "HMASD_BP_D1",
     "dispatch_max_utf16_code_units": 352,
     "dispatch_line_breaks_allowed": false,
-    "browser_type_actions": 1,
-    "enter_action": "separate_browser_press_key",
     "file_upload_allowed": false,
     "full_question_browser_type_allowed": false,
-    "type_timeout_policy": "fresh_process_extension_connection_required_no_retry_retype_submit_even_empty_snapshot",
-    "long_lived_controller_required": true,
-    "user_connected_tab_required": true,
-    "state_machine": [
-      "VALIDATED",
-      "RECONCILED_IDLE",
-      "DRAFT_CONFIRMED",
-      "SUBMISSION_CONFIRMED",
-      "GENERATING",
-      "STABLE_TWICE",
-      "ARCHIVED"
-    ],
     "receipt_schema": "hmasd.browser_pro_submission.v2",
-    "wait_chunk_seconds": 20,
     "controller_only": true,
     "fallback": "none"
   },
@@ -65,6 +58,7 @@
     "max_depth": 1,
     "types": [
       "hmasd-code-scout",
+      "hmasd-review-scout",
       "hmasd-implementer",
       "hmasd-frontier-implementer",
       "hmasd-verifier",

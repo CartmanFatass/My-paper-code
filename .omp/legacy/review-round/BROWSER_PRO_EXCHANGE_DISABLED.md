@@ -1,9 +1,21 @@
 ---
 name: hmasd-browser-pro-exchange
-description: Use only by the active HMASD Controller to exchange one tracked scientific review through the pinned BrowserMCP server and registered user-connected ChatGPT Pro tab. This Skill owns the restart-safe state machine, submission receipt, and snapshot-derived capture; never use a headless, CDP, relay, completion-agent, credential-copy, or alternate-browser fallback.
+description: Disabled external-review transport retained only for provenance and integrity-script recovery. Never invoke while CURRENT_WORK records DISABLED_USER_DIRECTIVE.
 ---
 
 # HMASD Browser Pro Exchange
+
+## Disabled by user directive
+
+Status: `DISABLED_USER_DIRECTIVE`.
+
+Do not invoke this Skill and perform no BrowserMCP action. Its scripts are
+retained only to validate the identity and no-clobber state of the existing
+`READY_TO_SUBMIT` round. Multiple stable, fully automated Controller-direct
+cycles are required before a replacement may be proposed, and explicit user
+approval is required before any replacement is abstracted into a Skill.
+External GPT-5.6 Pro authority remains unchanged; no local scientific
+substitution is permitted.
 
 ## Ownership and fixed transport
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Task Dispatch"
   short_description: "Route the persistent HMASD experiment Monitor safely"
-  default_prompt: "Use $hmasd-dispatch-task only for the registered Experiment Monitor contract. Dispatch the six local code-agent profiles directly. Keep BrowserMCP submission, observation, receipt, capture, archival, and intake inside the active unified Controller; no Pro completion-agent route exists."
+  default_prompt: "Use $hmasd-dispatch-task only for the registered Experiment Monitor contract. Dispatch the seven local OMP profiles directly. BrowserMCP transport exploration stays inside the Controller while the automation Skill is disabled; hmasd-review-scout records each trial and never operates transport. No Skill abstraction occurs before multiple stable cycles and explicit user approval."

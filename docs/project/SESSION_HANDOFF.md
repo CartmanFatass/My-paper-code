@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-23
-Status: `RESTART_REQUIRED_BEFORE_BROWSER_PRO_SUBMISSION`
+Status: `CONTROLLER_DIRECT_TRANSPORT_EXPLORATION_BROWSER_SKILL_DISABLED`
 
 ## Resume authority
 
@@ -80,41 +80,34 @@ Treat these as transport facts only. Do not create a failure disposition, alter
 Pro science, paste the full question into ChatGPT, use another browser, or infer
 that submission occurred.
 
-## Exact restart procedure
+## Current transport exploration boundary
 
-1. Start one fresh long-lived OMP Controller session in this repository. The
-   restart is required so native `.omp/skills/` discovery and the pinned MCP
-   process both begin cleanly; this old session began before the `.omp`
-   migration and retained stale Skill/MCP runtime state.
-2. Read `AGENTS.md`, `docs/project/CURRENT_WORK.md`, this file,
-   `.omp/skills/hmasd-review-round/SKILL.md`, and
-   `.omp/skills/hmasd-browser-pro-exchange/SKILL.md`.
-3. Before any browser action, run the canonical round validator. Branch only on
-   its real state:
-   - `ALREADY_ARCHIVED`: perform no browser or receipt work;
-   - `RESUME_SUBMITTED`: verify the complete trusted identity tuple and observe
-     without resubmitting;
-   - `READY_TO_SUBMIT`: continue the steps below.
-4. Verify the pushed boundary using stage
-   `7ff4d216e2ce23415c2b3b9ca671c7a76dde7801`, evidence
-   `f073d8e77a006515c7800f04e616d5b62a5e4e26`, repository
-   `CartmanFatass/My-paper-code`, remote `origin`, branch `Claude`, and the
-   canonical question path. The later handoff commit may be the remote tip; the
-   stage need only remain reachable with byte-identical question and manifest.
-5. Re-render the dispatch and require `DISPATCH_READY`, question hash and
-   dispatch hash to match the values above.
-6. Only after the fresh OMP MCP server is live, have the user connect exactly
-   one fully loaded registered Pro tab. Require correct URL, authenticated
-   account, visible model `Pro`, empty composer and no active generation.
-7. Follow the Browser Pro Skill state machine exactly: one `browser_type`, save
-   a temporary pre-submit snapshot, separate `browser_press_key Enter`, save a
-   distinct post-submit snapshot, record the immutable v2 receipt, observe in
-   20-second chunks, capture two stable snapshots at least ten seconds apart,
-   and archive the natural marked response. Never blind retry an indeterminate
-   action.
-8. Perform direct factual reconciliation and CDC intake. Only then freeze the
-   Controller-owned executable algorithm plan for iteration 1. No algorithm
-   implementation or compute has yet been authorized by a Pro decision.
+The restart procedure previously recorded here is superseded by the user's
+2026-07-23 directive. Do not invoke `hmasd-browser-pro-exchange`, do not require
+routine human interaction, and do not abstract a replacement into a Skill
+without later explicit user approval.
+
+The Controller may explore the pinned BrowserMCP server and registered Pro page
+directly. `hmasd-review-scout` records each bounded trial in
+`.omp/review_scout/EXPERIENCE.md`; it never operates the browser or chooses
+science. Trials T01-T04 currently establish:
+
+1. two `browser_type` calls left the exact dispatch in the composer but returned
+   the upstream 30-second WebSocket timeout;
+2. server respawn did not restore a manually cleared extension tab selection;
+3. an isolated managed browser reached an unauthenticated ChatGPT page and is
+   not a valid substitute;
+4. installed source shows that the extension reconnects while
+   `local:selectedTabId` names a live tab, whereas the upstream server waits for
+   the type action and then unconditionally captures a full ARIA snapshot.
+
+These are transport facts and one explicitly labelled inference in the
+experience record, not scientific evidence. The canonical round remains
+`READY_TO_SUBMIT`; receipt and raw response remain absent. Multiple stable,
+fully automated end-to-end cycles are required before a replacement may be
+proposed, and explicit user approval is required before any Skill abstraction.
+Until a valid Pro response is archived and reconciled, no iteration-1 algorithm
+plan or compute is authorized.
 
 ## Remaining chain
 

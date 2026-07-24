@@ -13,7 +13,7 @@ if (-not (Test-Path -LiteralPath $receiptLockModule -PathType Leaf)) {
 }
 Import-Module $receiptLockModule -Force
 $boundaryVerifier = Join-Path $repo '.omp/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
-$exchange = Get-Content (Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
+$exchangeArchive = Get-Content (Join-Path $repo '.omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md') -Raw
 $reviewRound = Get-Content (Join-Path $repo '.omp/skills/hmasd-review-round/SKILL.md') -Raw
 $registryRaw = Get-Content (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') -Raw
 $registry = $registryRaw | ConvertFrom-Json
@@ -49,56 +49,68 @@ if ((Compare-Object @('browsermcp-pro') $serverKeys) -or $server.type -ne 'stdio
     $server.args[0] -ne '-y' -or $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
     $server.timeout -ne 120000) { throw 'Pinned singular BrowserMCP server changed' }
 if (-not (Test-Path $boundaryVerifier -PathType Leaf)) { throw 'Pushed-boundary verifier was removed' }
-if ($registry.schema_version -ne 33 -or
-    $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_state_machine' -or
-    $registry.exchange_contract.role_skill -ne '.omp/skills/hmasd-browser-pro-exchange/SKILL.md' -or
+if ($registry.schema_version -ne 36 -or
+    $registry.round_controller.kind -ne 'controller_direct_transport_exploration' -or
+    -not $registry.exchange_contract.transport_exploration_enabled -or
+    $registry.exchange_contract.status -ne 'EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL' -or
+    $registry.exchange_contract.automation_skill_enabled -or
+    $registry.exchange_contract.automation_skill_archive -ne '.omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md' -or
+    $registry.exchange_contract.skill_abstraction_gate -ne 'multiple_stable_automated_cycles_then_explicit_user_approval' -or
+    $registry.exchange_contract.experience_recorder -ne 'hmasd-review-scout' -or
+    $registry.exchange_contract.experience_path -ne '.omp/review_scout/EXPERIENCE.md' -or
     $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
     $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
     $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or
     $registry.exchange_contract.review_branch -ne 'Claude' -or
-    $registry.exchange_contract.connection_state -ne 'LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND' -or
+    $registry.exchange_contract.connection_state -ne 'EXPLORATION_LIVE_PREFLIGHT_REQUIRED' -or
+    $registry.exchange_contract.authenticated_registered_tab_prerequisite -ne 'ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP' -or
+    $registry.exchange_contract.routine_human_interaction_allowed -or
     $registry.exchange_contract.dispatch_marker -ne 'HMASD_BP_D1' -or
     $registry.exchange_contract.dispatch_max_utf16_code_units -ne 352 -or
     $registry.exchange_contract.dispatch_line_breaks_allowed -or
-    $registry.exchange_contract.browser_type_actions -ne 1 -or
-    $registry.exchange_contract.enter_action -ne 'separate_browser_press_key' -or
     $registry.exchange_contract.file_upload_allowed -or
     $registry.exchange_contract.full_question_browser_type_allowed -or
-    $registry.exchange_contract.type_timeout_policy -ne 'fresh_process_extension_connection_required_no_retry_retype_submit_even_empty_snapshot' -or
     $registry.exchange_contract.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
-    $registry.exchange_contract.wait_chunk_seconds -ne 20 -or
+    $registry.exchange_contract.exploration_order -ne 'validate_identity_then_verify_pushed_boundary_then_require_existing_authenticated_attachment_then_one_bounded_controller_probe_then_reconcile_postcondition_then_review_scout_record' -or
     $registry.exchange_contract.fallback -ne 'none' -or
     $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
     $registry.reviewers.open_divergent.expected_model_ui -ne 'Pro' -or
     $null -ne $registry.exchange_contract.PSObject.Properties['completion_monitor']) {
-    throw 'BrowserMCP review registry mismatch'
+    throw 'Controller-direct BrowserMCP exploration registry mismatch'
 }
-$states = @('VALIDATED','RECONCILED_IDLE','DRAFT_CONFIRMED','SUBMISSION_CONFIRMED','GENERATING','STABLE_TWICE','ARCHIVED')
-if (Compare-Object $states @($registry.exchange_contract.state_machine)) { throw 'Registry state machine mismatch' }
-foreach ($required in @('30-second timeout', '20-second', 'browser_type', 'browser_press_key',
-    '`Enter`', 'immediately preceding fresh snapshot', 'Never blind retry', '`Send`',
-    '`Stop answering`', '`Answer now`', '`Copy response`', 'render_browser_pro_dispatch.ps1',
-    'record_browser_pro_submission.ps1', 'two distinct temporary BrowserMCP',
-    'substantive fenced plaintext block', 'live preflight', 'HMASD_BP_D1', '352 UTF-16',
-    'fresh BrowserMCP process/extension connection', '-ExpectedStageCommit',
-    'complete trusted expected identity tuple', 'mandatory `StageCommit`',
-    'Do not put any triple-backtick sequence or nested fenced block between the response markers.',
-    'plain or indented text',
-    'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
-    if (-not $exchange.Contains($required)) { throw "Browser exchange missing state-machine rule: $required" }
+foreach ($removedField in @('enabled','role_skill','skill_enabled','state_machine',
+    'browser_type_actions','enter_action','type_timeout_policy','wait_chunk_seconds',
+    'terminal_order')) {
+    if ($null -ne $registry.exchange_contract.PSObject.Properties[$removedField]) {
+        throw "Removed exchange-contract field remains: $removedField"
+    }
 }
-foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json', 'HMASD_BROWSER_PRO_QUESTION_V1',
-    'HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN', 'fenced `text` block',
-    'record_browser_pro_submission.ps1', 'archive_browser_pro_raw.ps1',
-    'requires a live', 'no completion observer', '-ExpectedStageCommit',
-    'without receipt compatibility execution', 'mandatory `StageCommit`',
+foreach ($required in @('Disabled by user directive', 'explicit user',
+    'Multiple stable, fully automated')) {
+    if (-not $exchangeArchive.Contains($required)) { throw "Legacy browser exchange marker missing: $required" }
+}
+foreach ($required in @('Transport exploration boundary',
+    'hmasd-review-scout', 'Routine human recovery is forbidden',
+    'explicit user', 'owns no browser action',
+    'one-time environmental prerequisite')) {
+    if (-not $reviewRound.Contains($required)) { throw "Review-round exploration boundary missing: $required" }
+}
+foreach ($forbidden in @('$hmasd-browser-pro-exchange','browser_type',
+    'browser_press_key','then_user_connect','Skill-owned validate',
+    'runs the exchange Skill')) {
+    if ($reviewRound.Contains($forbidden)) { throw "Active review-round reactivates transport: $forbidden" }
+}
+foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json',
+    'HMASD_BROWSER_PRO_QUESTION_V1', 'HMASD_BROWSER_PRO_RESPONSE_V1_BEGIN',
+    'fenced `text` block', 'validate_browser_pro_round.ps1',
+    'render_browser_pro_dispatch.ps1', 'record_browser_pro_submission.ps1',
+    'archive_browser_pro_raw.ps1', 'verify_pro_review_boundary.ps1',
     'Do not put any triple-backtick sequence or nested fenced block between the response markers.',
-    'plain or indented text',
-    'receipt_sha256', 'writer/delete-capable handle', 'digest-stable')) {
+    'plain or indented text', 'no-clobber')) {
     if (-not $reviewRound.Contains($required)) { throw "Review round missing: $required" }
 }
 foreach ($forbidden in @('hmasd-pro-monitor', 'hmasd-pro-monitor-luna')) {
-    if ($exchange.Contains($forbidden) -or $reviewRound.Contains($forbidden) -or $registryRaw.Contains($forbidden)) {
+    if ($exchangeArchive.Contains($forbidden) -or $reviewRound.Contains($forbidden) -or $registryRaw.Contains($forbidden)) {
         throw "Removed completion-agent route remains: $forbidden"
     }
     if (Test-Path (Join-Path $repo ".omp/agents/$forbidden.md")) { throw "Removed profile remains: $forbidden" }

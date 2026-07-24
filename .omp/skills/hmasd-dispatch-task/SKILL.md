@@ -1,6 +1,6 @@
 ---
 name: hmasd-dispatch-task
-description: Route HMASD work to the registered experiment monitor. Use for experiment-monitor delivery or its role callback. Local OMP code agents are dispatched directly; external review remains entirely inside the active Controller's BrowserMCP state machine.
+description: Route HMASD work to the registered experiment monitor. Local OMP agents are dispatched directly; external review uses Controller-direct BrowserMCP exploration while the automation Skill is disabled.
 ---
 
 # HMASD Task Dispatch
@@ -11,7 +11,7 @@ from a title, old callback, history, or manually copied task ID.
 
 ```text
 controller -> local OMP task agents
-controller -> BrowserMCP Pro submission/observation/capture
+controller -> direct BrowserMCP exploration -> hmasd-review-scout record
 controller <-> experiment_monitor
 ```
 
@@ -23,23 +23,24 @@ only transition owner between stages.
 
 The Controller owns scientific-to-code translation, executable planning, local
 agent decomposition, integration, verification, routing, continuation, Git,
-formal-compute authority, the complete BrowserMCP state machine, and direct
-evidence intake. Under an active autonomous grant, an accepted result wakes the
-Controller to route the next already-authorized action. Stop only on a
-paused/exhausted grant, genuine blocker, or protected-scope expansion.
+formal-compute authority, direct BrowserMCP transport exploration, and direct
+evidence intake. External scientific authority remains with GPT-5.6 Pro. Failed
+transport must not be substituted locally, and no automation Skill may be
+abstracted before multiple stable cycles plus explicit user approval.
 
 ## Local OMP task agents
 
 Local code and record work does not use persistent route resolution. The
-Controller dispatches only these six project profiles:
+Controller dispatches only these seven project profiles:
 
 ```text
-hmasd-code-scout   openai-codex/gpt-5.6-luna:high
-hmasd-implementer  openai-codex/gpt-5.6-sol:high
+hmasd-code-scout    openai-codex/gpt-5.6-luna:high
+hmasd-review-scout  openai-codex/gpt-5.6-luna:high
+hmasd-implementer   openai-codex/gpt-5.6-sol:high
 hmasd-frontier-implementer  openai-codex/gpt-5.6-sol:max
-hmasd-verifier     openai-codex/gpt-5.6-luna:high
-hmasd-reviewer     openai-codex/gpt-5.6-sol:xhigh
-hmasd-exp-manager  openai-codex/gpt-5.3-codex-spark:high
+hmasd-verifier      openai-codex/gpt-5.6-luna:high
+hmasd-reviewer      openai-codex/gpt-5.6-sol:xhigh
+hmasd-exp-manager   openai-codex/gpt-5.3-codex-spark:high
 ```
 
 Before implementation, record the current branch, `HEAD`, and inherited
@@ -111,16 +112,21 @@ The monitor uses `hmasd-experiment-monitor`, owns ETA-based heartbeats, and
 returns one terminal `EXPERIMENT_MONITOR` payload to the resolved Controller. It
 never launches, restarts, repairs, extends, edits, or interprets the run.
 
-## External review is not dispatch
+## External review transport exploration
 
-External scientific review is not a persistent role and has no local observer
-profile. The long-lived Controller starts the singular pinned `browsermcp-pro`
-server, the user connects the registered Pro tab, and the Controller executes
-`hmasd-browser-pro-exchange` inline from validation through immutable receipt,
-20-second wait observation, two-snapshot capture, archival, and intake. Each
-round requires a live preflight; the registry never claims a durable live
-connection. A disconnected extension or indeterminate page state is a blocker,
-never permission to dispatch a child or use a former Exchange session.
+The BrowserMCP automation Skill `hmasd-browser-pro-exchange` is disabled. The
+Controller may explore the pinned MCP server and registered Pro page directly,
+without routine human steps and without treating a timeout as scientific
+evidence. Each bounded trial is handed to `hmasd-review-scout`, which records
+exact preconditions, action, observation, side effect, classification, and
+candidate lesson in `.omp/review_scout/EXPERIENCE.md`. The scout never operates
+the browser, submits a review, chooses science, or invokes a Skill.
+
+The canonical round remains `READY_TO_SUBMIT` until a direct trial safely
+publishes its immutable receipt. Do not substitute a local model, persistent
+role or observer fallback, or alternate scientific authority. After multiple
+stable fully automated cycles, prepare a proposed transport abstraction, but
+do not create or rewrite a Skill until the user explicitly approves it.
 
 ## Authority boundary
 

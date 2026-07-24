@@ -52,6 +52,7 @@ data/
 !.omp/skills/**/*.md
 !.omp/legacy/roles/
 !.omp/legacy/roles/*.md
+!.omp/legacy/review-round/*.md
 # Canonical project memory + plan docs are load-bearing collaboration state — track them
 # (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
 !memory/*.md
@@ -65,8 +66,10 @@ data/
 !docs/research/cdc/**/*.md
 # PM-accepted active research designs are durable algorithm source.
 !docs/research/designs/*.md
-# Custom subagent definitions are durable project tooling.
+# Custom agent definitions and review-scout experience are durable project tooling.
 !.claude/agents/*.md
+!.omp/agents/*.md
+!.omp/review_scout/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 # Exact R27-G2 design/review evidence is durable project state.
