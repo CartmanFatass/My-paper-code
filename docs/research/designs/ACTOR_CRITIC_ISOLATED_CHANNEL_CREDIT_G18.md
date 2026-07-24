@@ -121,3 +121,7 @@ one replicate, one update per source, two environments, four G17 evaluation
 episodes and one PPO pass. Its only valid branch is
 `NONFORMAL_CRITIC_ISOLATED_FORMAL_PATH_EXERCISE_COMPLETE`, and formal analysis
 must reject it.
+
+The exercise completed operationally with exact replay and the registered
+nonformal branch; the explicit formal-analysis attempt rejected it. Formal
+iteration 19 is therefore prelaunch-ready without any contract change.
