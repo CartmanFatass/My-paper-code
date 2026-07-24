@@ -2498,11 +2498,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         重写父类方法，使用场景4的精确信道模型计算SINR
         """
-        uav_pos = self.uav_positions[uav_idx]
-        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
-        
         # 使用精确的A2G路径损耗模型
-        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+        path_loss = self._cached_user_path_loss(uav_idx, user_idx)
         
         # 计算接收功率
         rx_power = self.tx_power - path_loss
@@ -2592,6 +2589,110 @@ class UAVForcedRelayEnv(ParallelEnv):
                           outage_penalty)
         return handover_reward
     
+    def _communication_config_signature(self):
+        """Return the exact configuration fields used by cached radio calculations."""
+        return (
+            float(self.tx_power),
+            float(self.ground_bs_tx_power),
+            float(self.noise_power),
+            float(self.carrier_frequency),
+            bool(self.use_fdma),
+            float(self.bandwidth),
+            float(self.aclr_linear),
+            float(self.min_sinr),
+            int(self.n_uavs),
+            int(self.n_users),
+            int(self.n_ground_bs),
+            str(getattr(self, "environment_type", "urban")),
+            tuple(
+                (float(threshold), float(efficiency))
+                for threshold, efficiency in self.mcs_table
+            ),
+        )
+
+    def _communication_unavailable_mask(self):
+        unavailable = getattr(self, "_is_uav_unavailable", None)
+        if unavailable is None:
+            return np.zeros(self.n_uavs, dtype=bool)
+        return np.asarray(
+            [unavailable(index) for index in range(self.n_uavs)], dtype=bool
+        )
+
+    def _refresh_step_communication_cache(self):
+        """Start an exact-state cache for deterministic communication calculations."""
+        if bool(getattr(self, "_disable_step_communication_cache", False)):
+            self._step_communication_cache = None
+            return None
+        cache = {
+            "uav_positions": np.asarray(self.uav_positions).copy(),
+            "user_positions": np.asarray(self.user_positions).copy(),
+            "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
+            "unavailable": self._communication_unavailable_mask(),
+            "config": self._communication_config_signature(),
+            "user_path_loss": {},
+            "link_sinr": {},
+            "link_capacity": {},
+        }
+        self._step_communication_cache = cache
+        return cache
+
+    def _current_step_communication_cache(self):
+        """Return the cache only when every result-bearing input is unchanged."""
+        if bool(getattr(self, "_disable_step_communication_cache", False)):
+            return None
+        cache = getattr(self, "_step_communication_cache", None)
+        if cache is None:
+            return None
+        if bool(getattr(self, "_channel_update_cache_active", False)):
+            return cache
+        if cache["config"] != self._communication_config_signature():
+            return None
+        if not np.array_equal(cache["uav_positions"], self.uav_positions):
+            return None
+        if not np.array_equal(cache["user_positions"], self.user_positions):
+            return None
+        if not np.array_equal(cache["ground_bs_positions"], self.ground_bs_positions):
+            return None
+        if not np.array_equal(cache["unavailable"], self._communication_unavailable_mask()):
+            return None
+        return cache
+
+    def _cached_user_path_loss(self, uav_idx, user_idx):
+        cache = self._current_step_communication_cache()
+        key = (int(uav_idx), int(user_idx))
+        if cache is not None and key in cache["user_path_loss"]:
+            return cache["user_path_loss"][key]
+        path_loss = self._compute_air_to_ground_path_loss(
+            self.uav_positions[uav_idx], self.user_positions[user_idx]
+        )
+        if cache is not None:
+            cache["user_path_loss"][key] = path_loss
+        return path_loss
+
+    def _cached_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
+        cache = self._current_step_communication_cache()
+        key = (
+            str(tx_type),
+            int(tx_idx),
+            str(rx_type),
+            int(rx_idx),
+            float(rx_power),
+        )
+        if cache is not None and key in cache["link_sinr"]:
+            return cache["link_sinr"][key]
+        sinr = self._compute_link_sinr(tx_type, tx_idx, rx_type, rx_idx, rx_power)
+        if cache is not None:
+            cache["link_sinr"][key] = sinr
+        return sinr
+
+    def _noise_power_linear_mw(self):
+        signature = float(self.noise_power)
+        cached = getattr(self, "_noise_power_linear_cache", None)
+        if cached is None or cached[0] != signature:
+            cached = (signature, 10 ** (self.noise_power / 10))
+            self._noise_power_linear_cache = cached
+        return cached[1]
+
     def _compute_interference_radius(self):
         """
         基于信道条件动态计算干扰半径（移除上限，增强干扰）
@@ -2606,6 +2707,15 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         # 定义最小有意义干扰功率阈值（相对于噪声功率）
         # 例如：干扰功率至少要比噪声功率高3dB才被认为是"有意义的"
+        signature = (
+            float(self.tx_power),
+            float(self.noise_power),
+            float(self.carrier_frequency),
+        )
+        cached = getattr(self, "_interference_radius_cache", None)
+        if cached is not None and cached[0] == signature:
+            return cached[1]
+
         min_interference_margin_db = 3.0
         min_interference_power_dbm = self.noise_power + min_interference_margin_db
         
@@ -2628,6 +2738,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         interference_radius = max(max_interference_distance, min_radius)
         
+        self._interference_radius_cache = (signature, interference_radius)
         return interference_radius
 
     def _update_channel_state(self):
@@ -2636,9 +2747,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         同时在此函数中计算发现奖励，确保使用最新的信道状态
         """
         # 计算所有UAV-用户对的SINR
-        for i in range(self.n_uavs):
-            for j in range(self.n_users):
-                self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+        self._refresh_step_communication_cache()
+        self._channel_update_cache_active = True
+        try:
+            for i in range(self.n_uavs):
+                for j in range(self.n_users):
+                    self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+        finally:
+            self._channel_update_cache_active = False
 
         # 记录旧的连接状态，用于切换统计
         old_connections = self.connections.copy()
@@ -2897,7 +3013,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         rx_power = self.tx_power - path_loss
         
         # 使用精确的链路SINR计算（考虑干扰）
-        sinr_db = self._compute_link_sinr("uav", sender_idx, "uav", receiver_idx, rx_power)
+        sinr_db = self._cached_link_sinr(
+            "uav", sender_idx, "uav", receiver_idx, rx_power
+        )
         
         return sinr_db
 
@@ -4083,8 +4201,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             capacity: 链路容量 (bps)，如果无法建立连接则返回0
         """
-        cache = getattr(self, "_routing_link_capacity_cache", None)
         cache_key = (node1_type, int(node1_idx), node2_type, int(node2_idx))
+        step_cache = self._current_step_communication_cache()
+        if step_cache is not None and cache_key in step_cache["link_capacity"]:
+            return step_cache["link_capacity"][cache_key]
+        cache = getattr(self, "_routing_link_capacity_cache", None)
         if cache is not None and cache_key in cache:
             return cache[cache_key]
 
@@ -4127,11 +4248,15 @@ class UAVForcedRelayEnv(ParallelEnv):
         rx_power = tx_power - path_loss
         
         # 计算SINR (dB) - 考虑实际干扰情况
-        sinr_db = self._compute_link_sinr(node1_type, node1_idx, node2_type, node2_idx, rx_power)
+        sinr_db = self._cached_link_sinr(
+            node1_type, node1_idx, node2_type, node2_idx, rx_power
+        )
         
         # 检查SINR是否满足最小阈值
         if sinr_db < self.min_sinr:
             capacity = 0
+            if step_cache is not None:
+                step_cache["link_capacity"][cache_key] = capacity
             if cache is not None:
                 cache[cache_key] = capacity
             return capacity
@@ -4149,6 +4274,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
         capacity = link_bandwidth * spectral_efficiency
 
+        if step_cache is not None:
+            step_cache["link_capacity"][cache_key] = capacity
         if cache is not None:
             cache[cache_key] = capacity
         return capacity
@@ -4334,7 +4461,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)
-        noise_power_linear = 10 ** (self.noise_power / 10)  # dBm to mW
+        noise_power_linear = self._noise_power_linear_mw()
         interference_plus_noise_linear = noise_power_linear + total_interference_linear
         interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
         
@@ -4963,7 +5090,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                     continue  # 干扰源太远，忽略
                 
                 # 原则3：使用精确的A2G路径损耗模型计算干扰
-                interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
+                interferer_path_loss = self._cached_user_path_loss(i, user_idx)
                 interferer_rx_power_dbm = self.tx_power - interferer_path_loss
                 interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
                 
@@ -4979,7 +5106,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)
-        noise_power_linear = 10 ** (self.noise_power / 10)  # dBm to mW
+        noise_power_linear = self._noise_power_linear_mw()
         interference_plus_noise_linear = noise_power_linear + total_interference_linear
         interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
         

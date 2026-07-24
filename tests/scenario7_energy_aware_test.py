@@ -331,6 +331,7 @@ def test_widest_path_capacity_cache_is_exactly_equivalent():
     )
     uncached.env._disable_routing_link_capacity_cache = True
     uncached.env._disable_sinr_matrix_reuse = True
+    uncached.env._disable_step_communication_cache = True
     try:
         cached_reset = cached.reset(seed=47)
         uncached_reset = uncached.reset(seed=47)
@@ -383,6 +384,76 @@ def test_widest_path_capacity_cache_is_exactly_equivalent():
     finally:
         cached.close()
         uncached.close()
+
+
+def test_step_communication_cache_reuses_user_geometry_exactly():
+    cached = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=49)
+    uncached = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=49)
+    uncached._disable_step_communication_cache = True
+    try:
+        cached.reset(seed=49)
+        uncached.reset(seed=49)
+        cached._compute_air_to_ground_path_loss = Mock(
+            wraps=cached._compute_air_to_ground_path_loss
+        )
+        uncached._compute_air_to_ground_path_loss = Mock(
+            wraps=uncached._compute_air_to_ground_path_loss
+        )
+
+        cached._update_channel_state()
+        uncached._update_channel_state()
+
+        np.testing.assert_array_equal(cached.sinr_matrix, uncached.sinr_matrix)
+        np.testing.assert_array_equal(cached.connections, uncached.connections)
+        assert (
+            cached._compute_air_to_ground_path_loss.call_count
+            < uncached._compute_air_to_ground_path_loss.call_count
+        )
+    finally:
+        cached.close()
+        uncached.close()
+
+
+def test_step_link_cache_reuses_exact_state_and_bypasses_trial_inputs():
+    env = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=53)
+    try:
+        env.reset(seed=53)
+        env._compute_link_sinr = Mock(wraps=env._compute_link_sinr)
+        original_positions = env.uav_positions.copy()
+
+        baseline = env._get_link_capacity("uav", 0, "uav", 1)
+        calls_after_baseline = env._compute_link_sinr.call_count
+        repeated = env._get_link_capacity("uav", 0, "uav", 1)
+        assert repeated == baseline
+        assert env._compute_link_sinr.call_count == calls_after_baseline
+
+        env.uav_positions[0, 0] += 1.0
+        env._get_link_capacity("uav", 0, "uav", 1)
+        assert env._compute_link_sinr.call_count > calls_after_baseline
+        calls_after_trial = env._compute_link_sinr.call_count
+
+        env.uav_positions[:] = original_positions
+        restored = env._get_link_capacity("uav", 0, "uav", 1)
+        assert restored == baseline
+        assert env._compute_link_sinr.call_count == calls_after_trial
+
+        env.noise_power += 1.0
+        env._get_link_capacity("uav", 0, "uav", 1)
+        assert env._compute_link_sinr.call_count > calls_after_trial
+        calls_after_config_change = env._compute_link_sinr.call_count
+        env.noise_power -= 1.0
+        assert env._get_link_capacity("uav", 0, "uav", 1) == baseline
+        assert env._compute_link_sinr.call_count == calls_after_config_change
+
+        env.uav_failed[2] = True
+        env._get_link_capacity("uav", 0, "uav", 1)
+        assert env._compute_link_sinr.call_count > calls_after_config_change
+        calls_after_unavailable_change = env._compute_link_sinr.call_count
+        env.uav_failed[2] = False
+        assert env._get_link_capacity("uav", 0, "uav", 1) == baseline
+        assert env._compute_link_sinr.call_count == calls_after_unavailable_change
+    finally:
+        env.close()
 
 
 def test_constrained_safety_reward_metrics_are_exposed():

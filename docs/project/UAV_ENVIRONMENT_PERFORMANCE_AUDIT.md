@@ -7,6 +7,8 @@ uav_environment_role=promoted_candidate_validation_only
 reviewed_uav_wrapper_commit=b125efd205e302666aea78b286d6857f8ecf9286
 reviewed_s7_core_commit=a2908ba578b27f5b5ce783a659ea3cfedb0c8f09
 formal_result_semantics_change=false
+communication_snapshot_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+communication_snapshot_benchmark_improvement_pct=20.3186
 ```
 
 ## 结论
@@ -98,6 +100,35 @@ position 的试探计算。试探位置只能走原标量 fallback，不能污�
    至少改善 20% 才保留跨文件通信缓存；该性能门槛不是科学 result gate。
 4. 只运行 UAV 环境聚焦测试和一个 bounded nonformal exercise；不启动正式
    训练，不运行广泛兼容套件。
+
+## 实现与验收（2026-07-23）
+
+本轮只实现 B 类整步通信快照，A 类 observation/control fast path 暂不扩张。实现位于隔离分支
+`codex/uav-env-fastpath`，不会改变正在运行的 G1 正式实验所绑定的源码。
+
+- `scenario_base.py` 为每次权威 `_update_channel_state()` 建立精确状态快照，复用 UAV-user
+  路损、定向 link SINR 与 capacity；干扰半径和噪声线性值按其参数签名复用。
+- 快照逐项校验 UAV/user/ground-BS 坐标、不可用 mask 和通信配置。位置试探、配置变化、
+  服务退出或恢复均走原标量路径；试探结果不写入快照，恢复原状态后仍可命中原快照。
+- 原标量公式、干扰源遍历与 `np.sum` 顺序保持不变；没有批量化或浮点归约重排。
+- `scenario7_energy_aware_test.py` 的 37 项聚焦测试全部通过；其中包含五步缓存/未缓存结构化
+  证据与 RNG 完全一致、精确位置/配置/不可用 mask 失效，以及试探不污染检查。
+- 临时离队环境的 leave-before-action、S7-S1 保护配置和持久 vector worker 三项聚焦测试通过。
+
+低优先级、CPU 单线程、单环境 S7-S1 短基准对缓存与显式禁用缓存各运行三组，每组 3 step，
+交替运行顺序并逐组核对最终 SINR、connections 和 routing paths 完全一致：
+
+```text
+cached_seconds=[0.5609561, 0.5128088, 0.5559196]
+uncached_seconds=[0.6888934, 0.7572745, 0.6976778]
+cached_median_seconds=0.5559196
+uncached_median_seconds=0.6976778
+median_improvement=20.3186%
+engineering_keep_threshold=20%
+decision=KEEP
+```
+
+该门槛只决定是否保留性能实现，不产生或改变任何科学结论。
 
 ## 调度
 
