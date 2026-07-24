@@ -1,18 +1,21 @@
 # HMASD Current Work
 
 Updated: 2026-07-24
-Status: `AUTONOMOUS_RESEARCH_PAUSED_BY_USER`
+Status: `AUTONOMOUS_TEN_ITERATION_ALGORITHM_CHAIN_ACTIVE`
 
 ## Authority
 
 - Workspace: `C:\Projects\My-paper-code`; branch: `Claude`.
 - Push only `Claude`. Do not mutate `aggressive` or another branch.
-- The user paused the former autonomous ten-iteration chain and every pending
-  external submission, implementation and experiment.
-- Workflow optimization is authorized during the pause. Research resumes only
-  after a new explicit user instruction.
+- On 2026-07-24 the user formally authorized ten new conclusion-bearing
+  algorithm iterations on `Claude`.
+- The Controller may continue without intermediate approval through bounded
+  research waves, executable planning, implementation, proof-sized CPU
+  evidence, repair/review cycles, Git integration and Chinese iteration reports.
+- External Pro review remains optional. A formal run still requires one exact
+  frozen `ExpRecord.md` contract before launch.
 
-## Scientific position at pause
+## Starting scientific position
 
 - Last completed research action:
   `S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION`.
@@ -23,8 +26,8 @@ Status: `AUTONOMOUS_RESEARCH_PAUSED_BY_USER`
   behavior can remain unchanged while next-active predictive phase changes;
   therefore a monolithic predictive-state transition is not generally a
   behavioral skill-lifetime boundary.
-- Five former conclusion-bearing iterations were consumed; iteration 6 was not
-  selected.
+- The earlier five-iteration chain is complete historical evidence. The new
+  grant starts at iteration 1 of 10.
 - The pushed but unsubmitted S5 review stage at
   `e9f932f8a69f568b54bc857b3fb83c692c3e4fe0` is obsolete. Do not submit it.
 - No algorithm code, prototype, training or experiment was authorized or run by
@@ -42,4 +45,12 @@ Status: `AUTONOMOUS_RESEARCH_PAUSED_BY_USER`
 - The single durable approach registry is
   `docs/research/cdc/IDEA_PORTFOLIO.md`.
 - It preserves every legal route and its reactivation or advancement condition.
-- No next action is selected while research remains user-paused.
+- Iteration 1 result:
+  `NON_IDENTIFYING_EXPLICIT_FACTOR_ARCHITECTURE`.
+- Evidence:
+  `docs/research/cdc/EVIDENCE_NOTES/20260724_BEHAVIOR_PHASE_ARCHITECTURE_NONIDENTIFIABILITY_I1.md`.
+- Report: `docs/report/ALGORITHM_ITERATION_1.md`.
+- New-chain progress: 1/10 conclusion-bearing iterations; 9 remain.
+- Iteration 2 action:
+  `I2_RANDOMIZED_SUPPORT_LEARNER_IDENTIFIABILITY_DERIVATION`.
+- No code, prototype, training or experiment is selected yet.

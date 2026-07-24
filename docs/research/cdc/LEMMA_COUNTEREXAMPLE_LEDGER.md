@@ -33,6 +33,7 @@
 | L-SEQUENTIAL-CLOSURE-REQUIRES-FUTURE-KERNELS | Equality of immediate controlled observations need not imply equality of delayed controlled futures. | Exact S4 source with fair `Y1` and regime-dependent `Y2`. | Horizon two is sufficient for every environment. |
 | L-UPDATE-CONGRUENCE | A predictive quotient is an admissible persistent lifecycle state only if one common online update maps current quotient class and legal current observation to the next class. | Sequential controlled predictive-state definitions. | Every update-congruent state is useful or uniquely learnable. |
 | L-PREDICTIVE-PHASE-NOT-SKILL-BOUNDARY | A predictive-state update caused only by new transition-phase information need not be a current behavioral skill boundary. | Exact S5 age-1 versus script-32 age-2 no-cue witness. | A learned factorization, optimal architecture or policy benefit. |
+| L-FACTOR-PUSHFORWARD-RECURRENCE | Any reachable finite behavior/phase factorization can be bijectively encoded by one recurrent state with the same legal online transition and decoder laws. | Iteration 1 representational comparison on the accepted S5 source. | Factorization cannot improve learning, intervention addressability or transport under a stronger contract. |
 
 
 ## Counterexamples

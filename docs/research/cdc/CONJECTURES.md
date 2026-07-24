@@ -178,24 +178,25 @@ is optional and may inform, but does not own, a Controller decision.
 
 ## C-ALBPF — Agent-local behavioral / predictive-phase factorization
 
-- Status: exact S5 phase/lifetime-confound derivation PASS; implementation and
-  compute remain unauthorized. The unsubmitted S5 review is obsolete, and no
-  successor is selected while research is user-paused.
-- Supported claim: current action-relevant behavior and generic transition
-  phase require distinct scientific roles on the frozen source because an
-  information-only phase update occurs inside a constant behavioral segment.
-- Exact witness: age 1 and the legal script-32 age-2 no-cue history have
-  identical current controlled behavior (`TV_behavior=0`) but next-active cue
-  laws separated by `TV_phase=1/2`; the witness has probability `1/2`.
-- Refuted proposition: every monolithic predictive-state class change is a
-  current behavioral skill-lifetime boundary.
-- Valid online projection: predictive phase updates from script-uncertain to
-  script-32-next-cue-certain while behavioral state remains `B`.
-- Strongest simpler explanation: G8 recurrence stores both objects without an
-  explicit factorization.
-- Natural consequence: a legal no-cue may update phase while behavior persists.
-- Held-out, learned, architectural, policy, value and transport consequences:
-  not established; any successor requires a new Controller-selected contract.
+- Status: S5 semantic separation retained; iteration 1 establishes
+  `NON_IDENTIFYING_EXPLICIT_FACTOR_ARCHITECTURE`. No implementation or compute
+  was selected.
+- Supported claim: behavioral lifetime belongs to the quotient of complete
+  current controlled-behavior kernels; predictive phase may update inside one
+  behavioral segment.
+- Architectural counterexample: any reachable finite `(behavior, phase)` state
+  and its decoders can be pushed through a bijection into one ordinary recurrent
+  state with the same online path law and outputs.
+- Strongest simpler explanation: matched lifecycle recurrence stores the joint
+  sufficient statistic and defines behavior through a decoder quotient.
+- Retained discriminator: randomized action support may identify the semantic
+  behavior quotient only with history visitation, action and censoring support.
+- Downstream boundary: a primitive-policy link is not identified before a
+  learned behavior/phase representation is accepted.
+- Evidence:
+  `EVIDENCE_NOTES/20260724_BEHAVIOR_PHASE_ARCHITECTURE_NONIDENTIFIABILITY_I1.md`.
+- Next action: iteration 2 derives the exact C-RSCSL learner-identification
+  boundary before any implementation or compute.
 
 
 ## C-JRDM — Jointly rate-coded dual memory
