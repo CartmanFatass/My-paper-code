@@ -43,10 +43,10 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'browsermcp_direct_launcher=.omp/browsermcp-direct/start_browsermcp_direct.ps1',
     'browsermcp_direct_timeout_ms=120000',
     'browsermcp_direct_implicit_type_snapshot=removed',
-    'browsermcp_direct_live_status=CLICK_HOVER_TYPE_IMPLICIT_SNAPSHOTS_REMOVED_S3_ARCHIVE_COMPLETE',
+    'browsermcp_direct_live_status=S4_RECEIPT_VALID_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED',
     'active_assignment_id=S4_ALSCPS_RESULT_EXTERNAL_REVIEW',
-    'next_boundary=COMMIT_PUSH_S4_RESULT_THEN_RETURN_TO_REGISTERED_PRO',
-    'next_action_class=external_review_controller_direct_transport',
+    'next_boundary=RECOVER_EXISTING_S4_RECEIPT_RESPONSE_IDENTITY_NO_RESUBMIT',
+    'next_action_class=resume_existing_browser_pro_response_identity_then_copy_archive',
     'active_scientific_direction=C_ALSCPS_RESULT_AWAITING_EXTERNAL_PRO',
     's2_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
     's3_result_status=PASS_ALCPS_CONTROLLED_STATE_DERIVATION',
@@ -55,7 +55,10 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     's4_one_step_tv=0',
     's4_horizon2_tv_each_plan=1_over_2',
     's4_write_rate=2_over_7',
-    's4_decoder_kernel_cardinality=2')) {
+    's4_decoder_kernel_cardinality=2',
+    's4_result_review_status=SUBMISSION_CONFIRMED_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED',
+    's4_result_review_raw=absent',
+    's4_result_review_resubmission=forbidden')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -158,8 +161,13 @@ foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
         throw "Accepted S3 result round is missing $required"
     }
 }
-if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED_S3_RESULT')) {
-    throw 'CURRENT_WORK accepted S3 result round state changed'
+$submittedS4Round = Join-Path $repo 'docs/external-review/rounds/20260724_alscps_s4_result_review'
+if (-not (Test-Path (Join-Path $submittedS4Round '19_BROWSER_PRO_SUBMISSION.json') -PathType Leaf) -or
+    (Test-Path (Join-Path $submittedS4Round '21_PRO_OPEN_RAW.md') -PathType Leaf)) {
+    throw 'Submitted S4 result round receipt/raw state changed'
+}
+if (-not $currentWork.Contains('browser_pro_round_state=RESUME_SUBMITTED_S4_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED')) {
+    throw 'CURRENT_WORK submitted S4 result round state changed'
 }
 foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md',

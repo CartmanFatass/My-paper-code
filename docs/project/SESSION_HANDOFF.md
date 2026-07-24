@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S4_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
+Status: `S4_PRO_RECEIPT_VALID_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED`
 
 ## Resume authority
 
@@ -20,14 +20,12 @@ Status: `S4_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Git and working-tree boundary
 
-- Pushed S3 intake commit:
-  `a6b7f679da75353c2e278109a329c5ef22c58a27`.
-- Immutable S3 review stage/evidence commits remain
-  `1293f58b8960a60b8a2be2d9d25b8b441ae61948` and
-  `7cf10a01497176e4079c29c9f95fcb09fd60f660`.
-- The current working tree intentionally contains the S4 exact derivation,
-  Chinese iteration-4 report, terminal CDC deltas and control-plane result
-  transition. No code, runtime or experiment artifact exists.
+- Pushed S4 result-review stage:
+  `de15c718733d0641d857a1e3bfbdc90493f96005`.
+- Immutable S4 evidence commit:
+  `e619437c78b856ea6f24929a359853ac6de30d4e`.
+- The current working tree intentionally contains the immutable S4 submission
+  receipt and this exact transport-blocker transition. The S4 raw is absent.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
 
@@ -153,13 +151,30 @@ exact horizon-2 sequential controlled-state and active-lifetime identification
 on the frozen source. Iteration 4 is consumed; six remain and iteration 5 is
 unselected.
 
+## S4 external-review blocker
+
+The canonical S4 receipt is `SUBMISSION_CONFIRMED`, SHA-256
+`183d6b8dae856b351d4e7b516e691c6db19ff92bc83227d0cb3fab2240de4c59`.
+It forbids resubmission.
+
+The S4 user turn was visible immediately after the one Enter-only submission
+and the Pro turn generated for more than twenty minutes. Subsequent fresh
+snapshots and one same-URL reload exposed only older persisted S2/S3 turns:
+neither the canonical S4 user dispatch nor a completed S4 assistant response
+with matching markers was present. No stale `Copy response` control was clicked
+and no raw was archived.
+
+Resume only from the existing receipt. Reconcile the same registered URL after
+the service restores the S4 turn; require the exact canonical S4 user turn and
+completed marked assistant response before stable capture/copy/archive. No new
+round, composer action or resubmission is allowed.
+
 ## Remaining chain
 
-- Commit and push the exact S4 result only to `Claude`, then return it through
-  one new no-clobber result-review round in the same registered Pro
-  conversation.
-- Archive and reconcile exactly one Pro-selected iteration-5 action. The S4
-  PASS itself authorizes no implementation or compute.
+- Recover only the existing S4 receipted response identity on the same
+  registered conversation. If it reappears, archive and reconcile it without
+  resubmission.
+- Only a valid archived Pro decision may select iteration 5.
 - Continue evidence-dependent iterations 5--10 serially. Rebuild and assign the
   registered Spark-medium Experiment Monitor only if a later Pro-selected
   action actually authorizes a run.
