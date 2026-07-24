@@ -7,8 +7,7 @@ the Project Manager-accepted CDC state.
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
 - Status: supported as a usable prefix-normalized dynamic-roster algorithm
-  through N=40 with eight-edit churn by formal G10; slot-layout invariance
-  remains open.
+  through N=80, randomized processes and count-invisible atomic replacement.
 - Claim: a parameter-shape-`N`-independent direct recurrent policy with
   lifecycle-owned hidden state and active-set aggregation can learn one task
   policy that remains usable under within-episode JOIN, temporary leave,
@@ -59,12 +58,17 @@ the Project Manager-accepted CDC state.
   keys and active-count trajectories independently per episode under frozen
   checkpoints. Formal random-process LCBs are `0.9249674`, `0.9270833` and
   `0.9283854`; the random-ultra stochastic mean is `0.8892955`.
-- Strongest remaining counterexample: G13 serializes cohort termination and
-  replacement into separate transactions, leaving atomic cold-start roster
-  replacement untested.
-- Separating evidence: G14 now terminates and joins matched random cohorts in
-  the same transaction while holding active count and task demand fixed; its
-  formal result is pending.
+- Formal atomic evidence: G14 terminates and joins matched random cohorts in
+  the same transaction while holding active count fixed. Its deterministic
+  LCBs are `0.9230957`, `0.9257813` and `0.9291992`; the ultra stochastic mean
+  is `0.8951629`.
+- Strongest remaining counterexample: equal cohort sizes make the G14 atomic
+  transaction invisible to count features. It does not establish stability
+  when the same transaction combines cold-start identity turnover with a large
+  low/high count shock.
+- Separating evidence: G15 must use unequal positive terminal/fresh-join
+  cohorts in every atomic event, with exact count-trajectory and lifecycle
+  closure under frozen G8 checkpoints.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.

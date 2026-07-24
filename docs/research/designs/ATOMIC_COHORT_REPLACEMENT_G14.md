@@ -1,7 +1,8 @@
 # Atomic cohort-replacement G14
 
-Status: executable definition and implementation accepted; bounded nonformal
-exercise operationally valid; formal iteration 15 ready.
+Status: formal iteration 15 closed as
+`ROBUST_ATOMIC_COHORT_REPLACEMENT_G14`; no rerun, tuning, threshold change or
+relabeling is admissible.
 
 ## Frozen algorithm
 
@@ -85,3 +86,22 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_ATOMIC_COHORT_REPLACEMENT_G14` and consumes
 no iteration. Nonformal evidence returns
 `NONFORMAL_ATOMIC_REPLACEMENT_G14_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `b709fd5fc9cb423110d5edc24067e0030e05cbab`
+completed at `logs/formal_atomic_replacement_g14_cpu_20260723_b709fd5_r1`.
+
+```text
+branch=ROBUST_ATOMIC_COHORT_REPLACEMENT_G14
+operational_valid=true
+atomic_moderate_deterministic_utility_ci95=[0.923095703125,0.95166015625,1.0]
+atomic_wide_deterministic_utility_ci95=[0.92578125,0.9525405421401515,0.9999556107954546]
+atomic_ultra_deterministic_utility_ci95=[0.92919921875,0.9541193627781976,0.9998092602095928]
+atomic_ultra_min_replicate_mean=0.92919921875
+atomic_ultra_stochastic_mean=0.8951629449054547
+```
+
+This closes count-invisible atomic cohort replacement for the registered
+distribution. Atomic identity turnover combined with large count shocks remains
+untested.

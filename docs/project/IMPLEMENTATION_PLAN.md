@@ -5,13 +5,13 @@
 > disabled.
 
 ```text
-active_implementation=ATOMIC_COHORT_REPLACEMENT_G14
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+active_implementation=ATOMIC_COUNT_SHOCK_G15_DERIVATION
+implementation_status=G14_FORMAL_CLOSED_G15_NOT_YET_FROZEN
 design=docs/research/designs/ATOMIC_COHORT_REPLACEMENT_G14.md
 backend=cpu
 torch_threads=1
-formal_iteration=15
-chain_iterations_remaining_before_run=3
+formal_iteration=16
+chain_iterations_remaining_before_run=2
 ```
 
 ## Goal
@@ -55,3 +55,16 @@ copy, immutable model state and every source/lifecycle control true.
 No additional review is selected because focused evidence closes the only new
 shared-core switch and no anomaly remains. Integrate and launch the exact formal
 commands through the fixed operator.
+
+## Formal closure and next boundary
+
+Formal iteration 15 completed from source
+`b709fd5fc9cb423110d5edc24067e0030e05cbab` as
+`ROBUST_ATOMIC_COHORT_REPLACEMENT_G14`. All registered gates passed with exact
+source and lifecycle closure, zero optimizer steps and unchanged G8 model
+state. G14 is closed without rerun, tuning or relabeling.
+
+The next bounded action is `ATOMIC_COUNT_SHOCK_G15_DERIVATION`: define atomic
+transactions whose terminal and fresh-join cohort sizes differ, so identity
+turnover and an abrupt low/high active-count transition occur together. No G15
+source, budget or result contract is frozen by this closure paragraph.
