@@ -5,6 +5,7 @@ import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
 from ha_ctse_process import delayed_battery_roster_g18 as battery_source
+from ha_ctse_process import separated_credit_g18 as separated_source
 from ha_ctse_process.separated_credit_g18 import (
     SeparatedCreditPolicy,
     attach_credit_baselines,
@@ -173,7 +174,9 @@ def test_battery_collection_replays_exactly_and_keeps_inactive_rows_zero() -> No
     )
 
 
-def test_one_separated_update_is_finite_and_moves_parameters() -> None:
+def test_one_separated_update_is_finite_and_moves_parameters(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     torch.manual_seed(1818001)
     model = _battery_model()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
@@ -186,6 +189,16 @@ def test_one_separated_update_is_finite_and_moves_parameters() -> None:
     before = {
         name: value.detach().clone() for name, value in model.state_dict().items()
     }
+    replay_calls = [0]
+    original_replay = separated_source.replay_separated_trajectory
+
+    def counted_replay(*args, **kwargs):
+        replay_calls[0] += 1
+        return original_replay(*args, **kwargs)
+
+    monkeypatch.setattr(
+        separated_source, "replay_separated_trajectory", counted_replay
+    )
 
     metrics = optimize_separated_update(
         model,
@@ -198,6 +211,7 @@ def test_one_separated_update_is_finite_and_moves_parameters() -> None:
 
     assert metrics["finite_update"] == 1.0
     assert metrics["optimizer_steps"] == 2.0
+    assert replay_calls[0] == 2
     assert max(
         float(torch.max(torch.abs(before[name] - value)).item())
         for name, value in model.state_dict().items()

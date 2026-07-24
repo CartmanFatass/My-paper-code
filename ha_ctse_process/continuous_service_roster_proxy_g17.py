@@ -744,8 +744,9 @@ def optimize_update(
         gae_lambda=float(gae_lambda),
     )
     model.train()
+    replay = replay_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = replay_errors(replay_trajectory(model, trajectory, device=device), trajectory)
+        errors = replay_errors(replay, trajectory)
     totals = {
         name: 0.0
         for name in (
@@ -757,8 +758,9 @@ def optimize_update(
         )
     }
     finite = True
-    for _ in range(int(ppo_passes)):
-        replay = replay_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_trajectory(model, trajectory, device=device)
         loss, metrics = ppo_loss(replay, trajectory, advantages, returns)
         optimizer.zero_grad(set_to_none=True)
         loss.backward()

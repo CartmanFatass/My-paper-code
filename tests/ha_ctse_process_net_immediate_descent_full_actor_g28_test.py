@@ -4,6 +4,7 @@ import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
 from ha_ctse_process import delayed_battery_roster_g18 as battery_source
+from ha_ctse_process import net_immediate_descent_full_actor_g28 as g28_source
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     maximum_state_difference,
@@ -196,7 +197,9 @@ def test_high_dimensional_float32_projection_repeats_residual_closure() -> None:
     assert projection.lattice_correction > 0.0
 
 
-def test_net_descent_update_moves_actor_but_not_residual_or_core_critic() -> None:
+def test_net_descent_update_moves_actor_but_not_residual_or_core_critic(
+    monkeypatch,
+) -> None:
     torch.manual_seed(2719000)
     model = _battery_model()
     trajectory = collect_battery_trajectory(
@@ -223,6 +226,14 @@ def test_net_descent_update_moves_actor_but_not_residual_or_core_critic() -> Non
         allow_unused=True,
     )
     assert all(row is None for row in critic_to_actor)
+    replay_calls = [0]
+    original_replay = g28_source.replay_trajectory
+
+    def counted_replay(*args, **kwargs):
+        replay_calls[0] += 1
+        return original_replay(*args, **kwargs)
+
+    monkeypatch.setattr(g28_source, "replay_trajectory", counted_replay)
 
     metrics = optimize_net_immediate_descent_update(
         model,
@@ -235,6 +246,7 @@ def test_net_descent_update_moves_actor_but_not_residual_or_core_critic() -> Non
     )
 
     assert metrics["finite_update"] == 1.0
+    assert replay_calls[0] == 2
     assert metrics["minimum_projection_post_dot"] >= -1e-7
     assert metrics["maximum_applied_gradient_identity_error"] <= 1e-7
     assert maximum_state_difference(

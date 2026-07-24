@@ -1,7 +1,7 @@
 # Net-immediate-descent full actor G28
 
 ```text
-status=OPERATIONAL_FLOAT_LATTICE_REPAIR_ACCEPTED_RERUN_NEXT
+status=SCREEN_COMPLETE_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -56,5 +56,12 @@ one residual correction plus one ULP. The accepted operational repair repeats
 the exact float64 residual on the same coordinate until closed and walks back
 to the first closed float32 lattice point. It does not change the zero boundary,
 weights, optimizer, seeds, budgets, result gates or iteration accounting. The
-failed artifact is operational only; one fresh bounded rerun remains the next
-action.
+failed artifact is operational only; its one fresh bounded rerun is the
+registered result below.
+
+The repaired run at source `0ac8fa605b4ee82b96600220c8e960b174e4b843`
+is operationally valid but closes as
+`NONFORMAL_NO_DELAYED_ACCESS_NET_DESCENT_G28`: spike utility is `0.8898338`
+against the frozen `0.90` floor. G28 is closed. The successor changes the
+constraint owner from the raw pre-Adam gradient to the realized Adam parameter
+displacement; it does not retune this package.

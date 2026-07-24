@@ -1220,12 +1220,14 @@ def optimize_uav_update(
         trajectory.rewards.to(device), trajectory.old_values.to(device), trajectory.dones.to(device)
     )
     model.train()
+    replay = replay_uav_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = replay_errors(replay_uav_trajectory(model, trajectory, device=device), trajectory)
+        errors = replay_errors(replay, trajectory)
     totals = {name: 0.0 for name in ("policy_loss", "value_loss", "entropy", "clip_fraction", "gradient_norm")}
     finite = True
-    for _ in range(int(ppo_passes)):
-        replay = replay_uav_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_uav_trajectory(model, trajectory, device=device)
         loss, metrics = ppo_loss(replay, trajectory, advantages, returns)
         optimizer.zero_grad(set_to_none=True)
         loss.backward()

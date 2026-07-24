@@ -164,8 +164,11 @@ the Project Manager-accepted CDC state.
   on G17 across fresh seeds. G19--G26 show that exact frozen-anchor additive
   residual families are too weak. G27 restores full actor capacity and keeps
   G17 strong under strict successor/immediate non-conflict, but G18 returns to
-  zero spike service. The active discriminator protects only the equal combined
-  gradient's immediate descent, allowing conflict cancelled by `g_i` itself.
+  zero spike service. G28 protects only the equal combined raw gradient and
+  raises G18 spike utility to `0.88983` while retaining G17, narrowly missing
+  the frozen `0.90` access floor. Because Adam's transformed parameter movement
+  need not share the raw gradient direction, the active discriminator protects
+  only realized Adam displacement and leaves admissible raw conflict intact.
 
 ## C-BENCH — The benchmark is not identifying
 

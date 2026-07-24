@@ -281,3 +281,38 @@ decision=KEEP
 此前 `20%` 保留线针对需要跨文件扩大通信缓存接口的实现。本批是现有单文件 snapshot 的小型 payload
 补全，在已经高度优化的基线上仍稳定减少约 `7.55%`，且没有增加 schema、持久遥测或兼容分支，因此
 按研究仓库的敏捷小代码原则保留。批量距离矩阵、浮点归约重排与 worker 池跨 arm 复用继续冻结。
+
+## 第四批共享 PPO 首次回放复用（2026-07-24）
+
+第二轮 Scout 复核后拒绝继续合并 UAV frontend SINR 与 relaxed graph
+capacity：前者使用严格 MCS/FDMA，后者是连续近似，合并会改变通信语义。
+跨运行 ledger、metric mask 和 bootstrap 也没有足够收益，且会扩大 RNG、
+resume 与失效证明面。
+
+保留的唯一改动位于 toy/UAV 共用训练热路：一次 PPO update 原先先以
+`no_grad` 完整 replay 做一致性审计，然后在任何参数变化前为第一个 PPO
+pass 再做完全相同的 replay。现在第一次 replay 保留梯度图，同时在
+`no_grad` 下从同一输出读取审计指标，并直接供第一个 pass 使用；第一次
+`optimizer.step()` 后缓存立即失效，后续 pass、actor 后 critic、下一条轨迹
+仍重新 replay。没有跨 step、episode、run 的状态缓存。
+
+该规则应用于 G17、G18、G19、G28 与 UAV 的活跃优化器。调用计数测试证明
+普通两-pass update 从 3 次 replay 降到 2 次；G19/G28 双优化器路径只删除
+更新前的重复 replay，参数变化后的 critic replay 完整保留。五组聚焦测试
+共 55 项通过。
+
+CPU 单线程、10 对交替顺序的 G17 两-pass 微基准，以“额外执行一次无状态
+preflight replay”精确模拟旧路径：
+
+```text
+old_median_seconds=1.117076900
+optimized_median_seconds=0.890227250
+median_improvement=20.307434%
+metrics_exact_equal=true
+maximum_parameter_error=0.0
+artifact=logs/nonformal_shared_first_replay_reuse_20260724_pm1/result.json
+decision=KEEP
+```
+
+该证据只验收执行去重，不改变 PPO、梯度、RNG、生命周期、replay tolerance
+或任何科学结果。

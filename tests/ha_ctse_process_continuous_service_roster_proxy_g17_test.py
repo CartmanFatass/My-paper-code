@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 import torch
 
+from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     ACTION_DIM,
@@ -91,7 +92,9 @@ def test_source_schedule_and_constructive_access_are_exact() -> None:
     assert outcome.minimum_step_utility >= 1.0 - 2e-7
 
 
-def test_replay_lifecycle_and_one_step_credit_are_exact() -> None:
+def test_replay_lifecycle_and_one_step_credit_are_exact(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     torch.manual_seed(170_017)
     model = runner.make_model()
     trajectory = collect_trajectory(
@@ -121,6 +124,14 @@ def test_replay_lifecycle_and_one_step_credit_are_exact() -> None:
     advantages, returns = compute_gae(rewards, values, gamma=0.0)
     torch.testing.assert_close(advantages, rewards - values, rtol=0, atol=0)
     torch.testing.assert_close(returns, rewards, rtol=0, atol=0)
+    replay_calls = [0]
+    original_replay = g17_source.replay_trajectory
+
+    def counted_replay(*args, **kwargs):
+        replay_calls[0] += 1
+        return original_replay(*args, **kwargs)
+
+    monkeypatch.setattr(g17_source, "replay_trajectory", counted_replay)
     optimizer = torch.optim.Adam(model.parameters(), lr=runner.LEARNING_RATE)
     metrics = optimize_update(
         model,
@@ -131,6 +142,7 @@ def test_replay_lifecycle_and_one_step_credit_are_exact() -> None:
         gamma=0.0,
     )
     assert metrics["finite_update"] == 1.0
+    assert replay_calls[0] == 1
 
 
 def test_td_zero_uses_next_value_without_later_error_carry() -> None:

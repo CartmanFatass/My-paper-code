@@ -681,10 +681,9 @@ def optimize_separated_update(
         gamma=float(gamma),
     )
     model.train()
+    replay = replay_separated_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = separated_replay_errors(
-            replay_separated_trajectory(model, trajectory, device=device), trajectory
-        )
+        errors = separated_replay_errors(replay, trajectory)
     metric_names = (
         "policy_loss",
         "fast_policy_loss",
@@ -698,8 +697,9 @@ def optimize_separated_update(
     )
     totals = {name: 0.0 for name in metric_names}
     finite = True
-    for _ in range(int(ppo_passes)):
-        replay = replay_separated_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_separated_trajectory(model, trajectory, device=device)
         loss, metrics = separated_ppo_loss(replay, trajectory, credit)
         optimizer.zero_grad(set_to_none=True)
         loss.backward()

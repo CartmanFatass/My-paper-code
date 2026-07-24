@@ -4,6 +4,7 @@ import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
 from ha_ctse_process import delayed_battery_roster_g18 as battery_source
+from ha_ctse_process import anchored_residual_g19 as anchored_source
 from ha_ctse_process.anchored_residual_g19 import (
     FastAnchoredResidualPolicy,
     attach_credit_baselines,
@@ -129,7 +130,9 @@ def test_conflicting_delayed_gradient_is_projected_to_fast_tangent() -> None:
     )
 
 
-def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual() -> None:
+def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual(
+    monkeypatch,
+) -> None:
     torch.manual_seed(1919001)
     model = _battery_model()
     fast_trajectory = collect_battery_trajectory(
@@ -143,6 +146,14 @@ def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual() -> Non
         + tuple(model.credit_baselines.parameters()),
         lr=1e-3,
     )
+    replay_calls = [0]
+    original_replay = anchored_source.replay_trajectory
+
+    def counted_replay(*args, **kwargs):
+        replay_calls[0] += 1
+        return original_replay(*args, **kwargs)
+
+    monkeypatch.setattr(anchored_source, "replay_trajectory", counted_replay)
     fast_metrics = optimize_fast_anchor_update(
         model,
         fast_optimizer,
@@ -151,6 +162,7 @@ def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual() -> Non
         ppo_passes=1,
     )
     assert fast_metrics["finite_update"] == 1.0
+    assert replay_calls[0] == 1
     assert model.residual_output_layer_maximum_absolute_value() == 0.0
 
     anchor = model.anchor_state()
@@ -165,6 +177,7 @@ def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual() -> Non
     )
     residual_optimizer = torch.optim.SGD(model.residual_parameters(), lr=1e-3)
     critic_optimizer = torch.optim.Adam(model.critic_parameters(), lr=1e-3)
+    replay_calls[0] = 0
     delayed_metrics = optimize_delayed_residual_update(
         model,
         residual_optimizer,
@@ -176,6 +189,7 @@ def test_fast_then_delayed_update_keeps_anchor_exact_and_moves_residual() -> Non
     )
 
     assert delayed_metrics["finite_update"] == 1.0
+    assert replay_calls[0] == 4
     assert delayed_metrics["projection_post_dot"] >= -1e-7
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
     assert model.residual_output_layer_maximum_absolute_value() > 0.0

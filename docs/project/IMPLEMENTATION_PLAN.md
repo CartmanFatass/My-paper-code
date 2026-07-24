@@ -293,3 +293,29 @@ coordinate, then walk back to the first closed float32 lattice point. Eight
 focused and 38 combined tests now pass. Run the same bounded G28 screen once
 from a fresh integrated source; no other restart, formal run or UAV promotion
 is scheduled.
+
+The repaired G28 screen is operationally valid and closes as
+`NONFORMAL_NO_DELAYED_ACCESS_NET_DESCENT_G28`. G17 held-out utility remains
+`0.95179`; G18 reaches `0.96328` utility, `0.37994` gain and `0.86963` rotating
+share, but spike utility `0.88983` remains below the frozen `0.90` access floor.
+The first-match result is not rescued by the stronger lower-precedence metrics.
+
+G29 changes one geometric owner. Remove the raw-gradient projection, send the
+clipped equal combined gradient through Adam once, and constrain only the
+realized actor displacement against the immediate gradient. Non-conflicting
+Adam steps remain bitwise ordinary Adam; conflicting parameter displacement is
+projected to the closest tangent boundary with float64/float-lattice closure.
+Adam moments record the unprojected combined gradient and advance exactly once,
+while projected parameters plus those moments are the explicit new checkpoint
+semantics. Rename the closed G28 active module/runner/test, add displacement and
+optimizer-state proofs, then run one paired bounded screen. Formal and UAV
+compute remain unscheduled.
+
+Independently, the shared trainer no longer computes a no-grad replay and then
+immediately repeats it for the first PPO pass before any mutation. G17, G18,
+G19, G28 and UAV now reuse the first gradient-bearing replay for both audit and
+first loss, invalidating it at the first optimizer step. Fifty-five focused
+tests pass; a ten-pair alternating CPU benchmark reduces median G17 two-pass
+update time from `1.11708s` to `0.89023s` (`20.3074%`) with exact metrics and
+zero parameter difference. This is execution-only and changes no scientific
+contract.

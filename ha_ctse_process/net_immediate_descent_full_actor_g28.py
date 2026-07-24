@@ -324,10 +324,10 @@ def optimize_net_immediate_descent_update(
         terminals=terminals,
         gamma=float(gamma),
     )
+    model.train()
+    replay = replay_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = replay_errors(
-            replay_trajectory(model, trajectory, device=device), trajectory
-        )
+        errors = replay_errors(replay, trajectory)
     actor_parameters = model.full_actor_parameters()
     critic_parameters = model.critic_parameters()
     if not actor_parameters or not critic_parameters:
@@ -353,9 +353,9 @@ def optimize_net_immediate_descent_update(
     maximum_lattice_correction = 0.0
     minimum_projection_post_dot = float("inf")
     finite = True
-    model.train()
-    for _ in range(int(ppo_passes)):
-        replay = replay_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_trajectory(model, trajectory, device=device)
         immediate_policy_loss = _channel_policy_loss(
             replay, trajectory, credit.immediate_residual
         )

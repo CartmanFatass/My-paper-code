@@ -10,6 +10,7 @@ import torch
 
 from config_1 import Config
 from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from ha_ctse_process import uav_temp_loss_g1 as uav_source
 from ha_ctse_process.uav_temp_loss_g1 import (
     ACTION_DIM,
     FIXED_MASK_REC,
@@ -36,6 +37,7 @@ from ha_ctse_process.uav_temp_loss_g1 import (
     load_uav_checkpoint,
     make_uav_environment,
     make_uav_loss_ledger,
+    optimize_uav_update,
     ppo_loss,
     replay_errors,
     replay_uav_trajectory,
@@ -550,6 +552,33 @@ def test_bounded_action_replay_and_inactive_ppo_exclusion():
     )
     changed, _ = ppo_loss(perturbed, trajectory, advantages, returns)
     torch.testing.assert_close(baseline, changed, rtol=0, atol=0)
+
+
+def test_uav_update_reuses_preflight_replay_for_first_pass(
+    monkeypatch: pytest.MonkeyPatch,
+):
+    model = MatchedContinuousRecurrentPolicy(
+        5, 7, hidden_dim=8, routing_mode=FIXED_MASK_REC
+    )
+    trajectory = _synthetic_trajectory(model)
+    replay_calls = [0]
+    original_replay = uav_source.replay_uav_trajectory
+
+    def counted_replay(*args, **kwargs):
+        replay_calls[0] += 1
+        return original_replay(*args, **kwargs)
+
+    monkeypatch.setattr(uav_source, "replay_uav_trajectory", counted_replay)
+    metrics = optimize_uav_update(
+        model,
+        torch.optim.Adam(model.parameters(), lr=1e-3),
+        trajectory,
+        device=torch.device("cpu"),
+        ppo_passes=2,
+    )
+
+    assert metrics["finite_update"] == 1.0
+    assert replay_calls[0] == 2
 
 
 def test_extreme_tanh_latents_execute_and_replay_exact_finite_density():

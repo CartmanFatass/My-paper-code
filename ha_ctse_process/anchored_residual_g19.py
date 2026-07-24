@@ -451,10 +451,10 @@ def optimize_fast_anchor_update(
 ) -> dict[str, float]:
     if model.phase != "fast":
         raise RuntimeError("G19 fast update requires fast phase")
+    model.train()
+    replay = replay_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = replay_errors(
-            replay_trajectory(model, trajectory, device=device), trajectory
-        )
+        errors = replay_errors(replay, trajectory)
     advantage = (
         trajectory.rewards.to(device)
         - trajectory.old_immediate_baselines.to(device)
@@ -472,9 +472,9 @@ def optimize_fast_anchor_update(
         )
     }
     finite = True
-    model.train()
-    for _ in range(int(ppo_passes)):
-        replay = replay_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_trajectory(model, trajectory, device=device)
         policy_loss = _channel_policy_loss(replay, trajectory, advantage)
         immediate_loss = F.mse_loss(
             replay.immediate_baselines,
@@ -590,10 +590,10 @@ def optimize_delayed_residual_update(
         terminals=terminals,
         gamma=float(gamma),
     )
+    model.train()
+    replay = replay_trajectory(model, trajectory, device=device)
     with torch.no_grad():
-        errors = replay_errors(
-            replay_trajectory(model, trajectory, device=device), trajectory
-        )
+        errors = replay_errors(replay, trajectory)
     residual_parameters = model.residual_parameters()
     critic_parameters = model.critic_parameters()
     totals = {
@@ -613,9 +613,9 @@ def optimize_delayed_residual_update(
     }
     finite = True
     minimum_projection_post_dot = float("inf")
-    model.train()
-    for _ in range(int(ppo_passes)):
-        replay = replay_trajectory(model, trajectory, device=device)
+    for pass_index in range(int(ppo_passes)):
+        if pass_index:
+            replay = replay_trajectory(model, trajectory, device=device)
         fast_loss = _channel_policy_loss(
             replay, trajectory, credit.immediate_residual
         )
