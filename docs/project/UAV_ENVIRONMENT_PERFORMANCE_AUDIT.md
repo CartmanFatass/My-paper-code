@@ -182,6 +182,24 @@ graph potential 从约 `0.096s` 降至约 `0.025s`。这些剖析值只说明下
 
 ## 调度
 
-当前正在执行的 G1 正式流水线继续使用其冻结源码，终态前不得修改它会加载的
-环境或 runner。之后算法循环回到 toy env。A/B fast path 在下一次 PM 决定将
-toy-supported 候选晋升到 heavy UAV 环境之前实现并验收即可。
+原 G1 正式流水线已在两次前台两小时超时后以操作性 `ERROR` 终止，没有有效结果，
+也未消耗结论性迭代。三项已验收 fast path 已集成到 `aggressive`；算法循环回到 toy env。
+G1 不自动重跑，只有新的 toy 证据再次达到 PM promotion 边界时才考虑 heavy UAV 计算。
+
+### 被拒绝的 worker 整段控制器 rollout
+
+第二个 Scout 提议把 source-screen 控制器的逐步 pipe 往返融合到 worker 内。PM 实现了短暂
+原型，并对 `constructive` 与 `no_reallocation` 都以逐步 worker 作为独立 oracle，QoS 轨迹和
+最终 observation/state/位置逐元素一致。但交替顺序、四组、单环境 20-step 基准为：
+
+```text
+fused_median_seconds=1.065169700
+sequential_median_seconds=1.074079000
+median_improvement=0.829483%
+exact_qos_and_final_view_match=true
+decision=REJECT_AND_REMOVE
+artifact=logs/nonformal_uav_controller_rollout_fastpath_20260724_pm1/benchmark.py
+```
+
+环境计算而非 pipe 往返仍占主导。该原型增加约百行 worker 协议却只改善 `0.83%`，因此未
+进入源码或 Git。后续不要在没有新 profile 证据时重复这条优化。
