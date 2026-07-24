@@ -8,15 +8,15 @@ last_nonformal=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_DERIVATION
+active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g19
-algebra_status=ZERO_COMPUTE_DERIVATION_REQUIRED
-screen_contract=none_until_g20_derivation
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20.md
 ```
 
 ## Accepted active line
@@ -60,3 +60,8 @@ but G18 remains at utility `0.66667` with zero spike service and zero gain over
 the anchor. G19 is retired without tuning. The next action is a zero-compute
 derivation of an active-set-centered residual that exposes per-step anonymous
 redistribution directions before any implementation or compute.
+
+The G20 derivation now freezes that single delta. Implement one optional
+step-level mean-residual hook, active-only centering, residual-only successor
+optimization and the focused invariants. Then run one bounded paired screen
+from an integrated source; no formal compute is scheduled.
