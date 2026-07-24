@@ -10,7 +10,7 @@ compute authority.
 | C-OPEN-ROSTER-DIRECT | accepted base/comparator through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. It establishes no asynchronous skill lifetime. | Mandatory complete comparator for any successor selected by Pro; future expansion remains a separate scientific action. |
 | C-ALPSW | exact formulation rejected before implementation | S1 proves no open beta interval: an unrestricted unpenalized fast recurrence matches or improves predictive NLL with zero slow-state writes, so the registered objective cannot uniquely identify `z`. | No local rescue. Only a new Pro-selected scientific contract may add a fast-state bottleneck, complexity cost, decoder-filtration change or different causal objective. |
 | C-ALPSC | exact S2 contract rejected before implementation | The admissible never-write decoder fits `P(Y=z|z)=4/7` and crosses the cue writer at an interior `beta_star`, then wins on the upper part of the frozen interval despite complete side-channel exclusion. | No local rescue. External Pro must select any interval, decoder, objective or source correction. |
-| C-ALCPS | live; selected for S3 exact derivation | Controlled minimal sufficiency may define a canonical active-step state lifetime without beta scalarization; the full intervention-kernel vector separates regimes while the action marginal does not. | Complete the exact no-code S3 proof, including query independence, nuisance quotienting, minimum-write uniqueness, all nulls and G8 equivalence. |
+| C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | The full external intervention-kernel vector identifies two regime classes; the candidate uniquely attains minimum sufficient write rate `2/7` and quotient cardinality `2`, with nuisance removed and lifetimes `{2,3}`. | Return the exact S3 result to Pro. Any learned mechanism, optimization, mediation, natural-value or transport claim needs a new selected contract retaining G8 and a mechanism-matched comparator. |
 | C-JRDM | parked | Jointly charging `h,z` is sensitive to coding units, state dimension and invertible mixing. | Supply a representation-invariant joint codelength or mutual-information contract. |
 | C-ALH | parked | A categorical per-step hazard can reduce to the existing opportunity mechanism with `k=1` and revive R43--R45. | Evidence that explicit task-directed termination is necessary on a new identified source. |
 | C-ATS | parked | Continuous adaptive timescale recurrence lacks a threshold-free lifetime and can be absorbed into or reparameterized as ordinary recurrence. | Supply a threshold-invariant survival or causal-persistence estimand plus explicit accounting for alternative memory channels. |
@@ -27,14 +27,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=S2_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_DERIVATION
-valid_terminal=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL
-active_direction=C_ALCPS
+completed_action=S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION
+valid_terminal=PASS_ALCPS_CONTROLLED_STATE_DERIVATION
+active_direction=C_ALCPS_RESULT_AWAITING_PRO
 formal_disposition=NOT_APPLICABLE_DERIVATION_ONLY
-next_action=S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION
-authorization_status=derivation_selected_no_code_or_compute
-conclusion_bearing_iterations_consumed_on_claude=2
-iterations_remaining_on_claude=8
+next_action=RETURN_S3_EXACT_RESULT_TO_REGISTERED_PRO
+authorization_status=no_code_or_compute_iteration_4_unselected
+conclusion_bearing_iterations_consumed_on_claude=3
+iterations_remaining_on_claude=7
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -89,3 +89,12 @@ it must separate the full externally indexed action-kernel vector from its
 uninformative action marginal, reject natural-action memory leaks and nuisance
 subdivisions, retain G8 as complete comparator and decide one ordered terminal.
 No code, compute, Monitor or iteration 4 action is selected.
+
+S3 validly identifies a controlled predictive state on the frozen finite source.
+The complete external query-kernel vector separates regimes by total variation
+`1/2` for each query, while uniform action marginalization has zero separation.
+Strict controlled sufficiency followed by minimum writes and quotient
+cardinality yields the unique tuple `(E_ctrl,q,K)=(0,2/7,2)` up to null events
+and relabeling; nuisance subdivisions merge. G8 remains equally capable in the
+constructive utility audit. The result consumes iteration 3 but authorizes no
+implementation or compute; iteration 4 remains unselected pending Pro review.

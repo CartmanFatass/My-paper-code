@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION_ACTIVE`
+Status: `S3_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Resume authority
 
@@ -20,14 +20,14 @@ Status: `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION_ACTIVE`
 
 ## Git and working-tree boundary
 
-- Pushed controller tip before S2 raw/intake:
-  `be7ea717e3a68c3e2e970ef5f4d39f7b1dab33b4`.
+- Pushed S2 intake commit:
+  `a05732871ecd9cf8ea19f1d41a64b0deb466f9cf`.
 - Immutable S2 review stage/evidence commits remain
   `bcbf74d2598af034b728b586d641dfce67bcbc9d` and
   `60cd2d68a54e4c86f5bc0084ff627c779f1c7cb4`.
-- The current working tree intentionally contains the newly archived S2 raw,
-  factual reconciliation, durable CDC intake and S3 control-plane transition.
-  These artifacts are not runtime evidence.
+- The current working tree intentionally contains the S3 exact derivation,
+  Chinese iteration-3 report, terminal CDC deltas and control-plane result
+  transition. No code, runtime or experiment artifact exists.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
 
@@ -99,16 +99,35 @@ subdivisions and non-unique schedules while retaining G8 as the complete
 constructive comparator. No code, compute, prototype, experiment, Monitor or
 iteration-4 action is authorized.
 
+## S3 result boundary
+
+The exact S3 artifact is
+`docs/research/cdc/EVIDENCE_NOTES/20260724_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_S3.md`.
+Its first valid terminal is `PASS_ALCPS_CONTROLLED_STATE_DERIVATION`.
+
+Each externally indexed query separates the two regime kernels by total
+variation `1/2`; uniform query marginalization has separation zero. Strict
+controlled sufficiency plus lexicographic minimum writes/cardinality proves
+`(E_ctrl,q,K)=(0,2/7,2)`. Every sufficient model writes on both actual
+post-join regime changes; equality writes only there, and nuisance subdivisions
+merge. Boundary precision/recall are one, lifetimes are `{2,3}`, and both
+C-ALCPS and G8 constructive controls have utility one.
+
+The Chinese report is
+`docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_3.md`. This PASS establishes only
+controlled-state and active-lifetime identifiability on the frozen source. It
+does not establish a skill, recurrence insufficiency, optimization, causal use,
+natural value, robustness or transport. Iteration 3 is consumed; seven remain
+and iteration 4 is unselected.
+
 ## Remaining chain
 
-- Complete the exact S3 derivation in
-  `docs/research/cdc/EVIDENCE_NOTES/20260724_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_S3.md`.
-  Stop on the first valid ordered terminal; one identical-contract proof-only
-  correction is the maximum recovery.
-- Write the Chinese iteration-3 report, push the exact result only to `Claude`,
-  and return it to the same registered Pro conversation before selecting
-  iteration 4.
-- Continue evidence-dependent iterations 3--10 serially. Rebuild and assign the
+- Commit and push the exact S3 result only to `Claude`, then return it through
+  one new no-clobber result-review round in the same registered Pro
+  conversation.
+- Archive and reconcile exactly one Pro-selected iteration-4 action. No
+  implementation or compute is authorized by the S3 PASS itself.
+- Continue evidence-dependent iterations 4--10 serially. Rebuild and assign the
   registered Spark-medium Experiment Monitor only if a later Pro-selected
   action actually authorizes a run.
 - After ten valid conclusion-bearing terminals, complete one independent

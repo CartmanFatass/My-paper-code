@@ -135,22 +135,23 @@ the Project Manager-accepted CDC state.
 
 ## C-ALCPS — Agent-local controlled predictive state lifetime
 
-- Status: live and selected for
-  `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`; no code or compute
-  is selected.
-- Claim: a task-blind lifecycle state may have a canonical active-step lifetime
-  when it is the coarsest minimum-transition state sufficient for the full
-  vector of primitive-action-interventional observation laws.
-- Strongest simpler explanation: G8 recurrence can store the same controlled
-  statistic and may realize the same external policy; C-ALCPS has not shown an
+- Status: exact S3 derivation PASS; implementation and compute remain
+  unauthorized pending a new external Pro decision.
+- Supported claim: on the frozen finite source, the coarsest minimum-transition
+  state sufficient for the full vector of primitive-action-interventional
+  observation laws has a canonical active-step lifetime `{2,3}`.
+- Exact result: the candidate reaches `(E_ctrl,q,K)=(0,2/7,2)`. Every
+  controlled-sufficient online model has `q>=2/7`; equality writes exactly on
+  the two post-join cue rows, and decoder-equivalent nuisance subdivisions
+  merge to two kernels.
+- Strongest simpler explanation: G8 recurrence stores the same controlled
+  statistic and attains the same external utility. The result establishes no
   optimization, causal-use, sample-efficiency, robustness or transport benefit.
-- Intervention consequence: decoder-controlled kernels differ under the same
-  externally indexed primitive query when `z` differs.
-- Natural and held-out consequences: not established. Any future evidence must
-  retain G8 and a mechanism-matched masked-`z` comparator.
-- S3 boundary: prove or refute exact controlled-state identifiability,
-  minimum-write uniqueness, nuisance quotienting and action-query validity on
-  the frozen finite source before any learned implementation.
+- Intervention consequence: the full external query-kernel vector distinguishes
+  regimes while the uniformly marginalized action law does not.
+- Natural and held-out consequences: not established. Any implementation or
+  behavioral action requires another Pro selection and must retain G8 plus a
+  mechanism-matched comparator.
 
 ## C-JRDM — Jointly rate-coded dual memory
 

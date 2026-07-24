@@ -26,6 +26,8 @@
 | L-EXCLUSIVE-CHANNEL-NOT-SUFFICIENT | Removing every alternative temporal side channel does not by itself make a sparse cue writer globally identifiable under a predictive-loss plus write-rate objective; an optimized coarse decoder may trade prediction for fewer writes. | Exact C-ALPSC S2 source, decoder family and frozen beta interval. | Every exclusive-channel or rate--distortion formulation fails. |
 | L-S2-VALID-NEGATIVE | The exact S2 source and proof validly reject complete-interval global identification for the C-ALPSC scalar objective. | `S2_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_DERIVATION` and its frozen interval. | Every exclusive or controlled predictive-state definition fails. |
 | L-RATE-DISTORTION-COARSENING | An optimized decoder for a coarser persistent state can trade finite predictive excess for fewer state changes and defeat a finer boundary under scalarization. | Predictive-loss/write-rate objectives such as exact S2. | Lexicographic exact-sufficiency criteria or controlled predictive states fail. |
+| L-CONTROLLED-QUERY-SEPARATION | Externally enumerated intervention queries with complete support may condition a predictive decoder without carrying temporal memory; uniform action marginalization can erase a regime distinction present in the full controlled-kernel vector. | Exact C-ALCPS S3 query table and independence contract. | Natural policy actions are valid intervention queries or the controlled state improves behavior. |
+| L-ALCPS-MINIMUM-WRITE-QUOTIENT | On the exact S3 source, every controlled-sufficient online model changes decoder class on both post-join regime changes, so `q>=2/7`; equality writes only on those cues and has quotient cardinality two. | `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. | C-ALCPS is necessary, easier to learn or superior to recurrence. |
 
 ## Counterexamples
 
@@ -157,10 +159,10 @@ optimal decoder fits `P(Y=z|z)=4/7`, not the stricter regime-conditional
 `beta_star` and wins on the upper part of the frozen interval without using any
 temporal side channel.
 
-## Registered S3 counterexample candidates
+## Accepted S3 counterexamples
 
-These are frozen S3 obligations, not accepted counterexamples until a valid S3
-artifact proves them.
+The valid S3 artifact proves the following counterexamples at the frozen
+controlled-predictive-state scope.
 
 ### CE-ACTION-MARGINAL-HIDES-CONTROLLED-STATE
 
