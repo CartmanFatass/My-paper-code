@@ -77,11 +77,12 @@ class FastAnchoredResidualPolicy(nn.Module):
         action_dim: int,
         hidden_dim: int = 32,
         current_observation_residual: bool = True,
+        policy_type: type[ContinuousRosterPolicy] = ResidualContinuousRosterPolicy,
     ) -> None:
         super().__init__()
         self.member_capacity = int(member_capacity)
         self.critic_state_dim = int(critic_state_dim)
-        self.policy = ResidualContinuousRosterPolicy(
+        self.policy = policy_type(
             observation_dim,
             critic_state_dim,
             member_capacity=member_capacity,

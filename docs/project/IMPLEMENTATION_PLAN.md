@@ -8,14 +8,14 @@ last_nonformal=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_PROTOTYPE
+active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g19
-algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+formal_compute=not_scheduled_for_g20
+algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20.md
 ```
 
@@ -65,3 +65,14 @@ The G20 derivation now freezes that single delta. Implement one optional
 step-level mean-residual hook, active-only centering, residual-only successor
 optimization and the focused invariants. Then run one bounded paired screen
 from an integrated source; no formal compute is scheduled.
+
+The G20 prototype is accepted for that screen. The optional hook is `None` on
+every prior policy, while the G20 core computes one proposal tensor per step,
+centers only active rows and adds it before the existing tanh-Gaussian path.
+The G19 wrapper now accepts a policy class so G20 reuses the frozen-anchor
+mechanics without a discarded initialization or extra RNG draws. Six focused
+tests and the retained G17/G18/G19 proofs total 36 passing tests on CPU with one
+thread. Zero-output sampled, deterministic and teacher replay are exact;
+inactive rows are exact zero; centering is permutation equivariant and padding
+independent; delayed updates leave the anchor bitwise unchanged. The only next
+action is the already-frozen paired nonformal screen from an integrated commit.

@@ -1,7 +1,7 @@
 # Active-set-centered delayed residual G20
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -69,3 +69,19 @@ no branch supports UAV promotion.
 - residual-only successor actor gradients and isolated critic gradients;
 - exact G17/G18 replay/lifecycle behavior;
 - first-match precedence and frozen configuration.
+
+## Implementation acceptance
+
+The source-neutral implementation is
+`ha_ctse_process/centered_residual_g20.py`; the paired runner is
+`scripts/screen_active_set_centered_residual_g20.py`. The generic policy hook
+returns `None` by default, so retained policies keep their exact path. G20
+reuses the G19 anchor wrapper through an injected policy class and therefore
+does not construct and discard a second actor or consume additional RNG draws.
+
+On the registered CPU one-thread runtime, six focused tests and the retained
+G17/G18/G19 proofs pass (36 total). They close exact zero-output execution in
+sampled, deterministic and teacher modes, active-only centering, inactive exact
+zero, permutation/padding invariance, replay at collection time, residual
+exercise and bitwise anchor preservation. This accepts only the bounded screen;
+it is not evidence of delayed access and does not authorize formal compute.
