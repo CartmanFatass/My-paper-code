@@ -12,7 +12,7 @@ compute authority.
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | delayed access supported; unified actor rejected | Formal G18 strongly learns rotation-directed delayed service, but the shared actor fails the first-match G17 compatibility gate on fresh seeds despite critic isolation. | Derive a protected fast-policy anchor with a zero-initialized delayed residual; do not tune or rescue G18. |
+| C-CREDIT | anchored residual prototype selected | Formal G18 strongly learns delayed service but rejects the shared actor. G19 freezes a fast anchor, zero residual and source-neutral conflict projection so delayed gradients cannot overwrite the fast parameters or oppose the immediate objective to first order. | Implement the proof-sized paired screen; only a full G17-first/G18-second pass licenses formal evidence. |
 | C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -24,7 +24,7 @@ compute authority.
 completed_action=ACTOR_CRITIC_ISOLATED_G18_FORMAL_ITERATION_19
 source_family=paired_immediate_and_delayed_dynamic_roster_toys
 formal_disposition=NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18
-next_action=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_DERIVATION
+next_action=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_PROTOTYPE
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
 conclusion_bearing_iterations_consumed=19
 iterations_remaining=8

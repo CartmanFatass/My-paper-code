@@ -8,15 +8,15 @@ last_formal=ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18
 last_formal_result=NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_DERIVATION
+active_implementation=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g19
-algebra_status=ZERO_COMPUTE_DERIVATION_REQUIRED
-screen_contract=docs/research/designs/ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18.md
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19.md
 ```
 
 ## Accepted active line
@@ -34,5 +34,7 @@ screen_contract=docs/research/designs/ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18.m
    explicit fast-policy anchor plus a zero-initialized delayed residual whose
    optimization cannot overwrite the fast path. It must remain environment
    neutral and may not read battery, demand phase or lifecycle role directly.
-5. No G19 implementation or compute is scheduled until the derivation freezes
-   the smallest separating invariant and proof-sized acceptance boundary.
+5. The G19 derivation now freezes that boundary. Implement one generic mean
+   hook, an exactly zero residual, phase-specific parameter ownership and the
+   parameter-space conflict projection. Then run the proof-sized tests and one
+   bounded paired nonformal screen; no formal compute is scheduled.
