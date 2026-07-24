@@ -6,14 +6,14 @@
 ```text
 active_implementation=CURRENT_OBSERVATION_RESIDUAL_ONE_STEP_CREDIT_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=PRELAUNCH_ACCEPTED_FORMAL_ITERATION_18_READY
+status=FORMAL_ITERATION_18_COMPLETE_SUCCESS_NEXT_DERIVATION_ACTIVE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=18
-iterations_remaining=10
+iterations_remaining=9
 formal_contract=frozen
-formal_compute=authorized_not_running
+formal_compute=not_running
 ```
 
 ## Accepted active line
@@ -53,9 +53,10 @@ python scripts/run_continuous_service_roster_proxy_g17.py evaluate --run-root <r
 python scripts/run_continuous_service_roster_proxy_g17.py analyze --run-root <root> --require-formal
 ```
 
-The next action is step 4. Only a valid formal analysis consumes Iteration 18.
-The Project Manager then
-writes `docs/report/ITERATION_18.md` in Chinese, integrates the closure, and
-selects the next in-grant toy-first boundary. Heavy UAV execution remains
-forbidden unless the formal evidence justifies promotion or a later question is
-intrinsically physical.
+Step 4 completed validly at source `91f6cbb5` with branch
+`USABLE_ONE_STEP_CONTINUOUS_ROSTER_G17`. Iteration 18 and its Chinese report are
+closed. The next action is the zero-compute
+`DELAYED_EFFECT_CONTINUOUS_ROSTER_G18_CREDIT_DERIVATION`; it must derive a
+minimal policy-dependent future-service counterexample before any new code or
+run. Heavy UAV execution remains deferred until a toy-supported candidate also
+has a defensible temporal-credit path.

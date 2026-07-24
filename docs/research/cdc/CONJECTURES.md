@@ -78,6 +78,25 @@ the Project Manager-accepted CDC state.
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.
 
+## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
+
+- Status: supported for the registered immediate-service source.
+- Claim: a capacity-generic active-set/lifecycle recurrent policy with
+  active-fraction autoregressive prefixes can learn continuous service control
+  across within-episode roster changes when current demand has a direct actor
+  path and actor credit matches the causal reward window.
+- Formal evidence: G17 reaches IID utility LCB `0.94869`, held-out utility LCB
+  `0.93726`, held-out learned-gain LCB `0.30171`, minimum held-out replicate
+  `0.93662`, minimum demand correlation `0.96377`, and exact replay.
+- Necessary scope correction: `gamma=0` establishes only immediate action
+  consequences. It is not evidence for energy, position, backlog or other
+  policy-dependent future state.
+- Strongest next counterexample: current service effort changes later service
+  availability under roster leave/rejoin or charging, so immediate credit omits
+  a load-bearing consequence while long GAE may again mix unrelated demand.
+- Separating evidence: hold the accepted representation fixed and derive the
+  smallest one-step state-value credit path before any UAV promotion.
+
 ## C-EHC — Event-held temporal state
 
 - Status: unsupported after the five-iteration chain. G2 proves an event-held

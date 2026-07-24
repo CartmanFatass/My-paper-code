@@ -7,6 +7,7 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
+| C-CONTINUOUS-ROSTER | supported for immediate service | Formal G17 passes IID/held-out access, conditional demand mapping, gain and stability with a current-observation residual and `gamma=0`. | Derive and test policy-dependent delayed service availability before UAV promotion; do not transfer `gamma=0` by default. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
@@ -20,13 +21,13 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
-source_family=none_chain_complete
-formal_disposition=USABLE_DYNAMIC_ROSTER_DEPLOYMENT_G16
-next_action=none_without_new_user_direction
-authorization_status=twelve_iteration_dynamic_roster_grant_exhausted_complete
-conclusion_bearing_iterations_consumed=17
-iterations_remaining=0
+completed_action=CONTINUOUS_SERVICE_ROSTER_PROXY_G17_FORMAL_ITERATION_18
+source_family=continuous_service_dynamic_roster_toy
+formal_disposition=USABLE_ONE_STEP_CONTINUOUS_ROSTER_G17
+next_action=DELAYED_EFFECT_CONTINUOUS_ROSTER_G18_CREDIT_DERIVATION
+authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
+conclusion_bearing_iterations_consumed=18
+iterations_remaining=9
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -42,5 +43,9 @@ layouts. Formal G12 extends the same frozen policy through N=80, formal G13
 passes episode-random membership processes, formal G14 passes large
 same-transaction cold-start replacement at fixed N, formal G15 passes its
 composition with abrupt count shocks, and formal G16 closes a fresh-seed
-heterogeneous deployment mixture. The chain is complete with the G8
-prefix-normalized direct recurrent policy accepted as the usable test version.
+heterogeneous deployment mixture. That chain is complete with the G8
+prefix-normalized direct recurrent policy accepted as the usable discrete test
+version. Under the new toy-first grant, formal G17 adds a usable continuous
+immediate-service controller across within-episode roster changes. Its one-step
+credit is deliberately not treated as a UAV or long-horizon solution; the
+active successor is a delayed-effect credit derivation.
