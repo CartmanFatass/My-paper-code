@@ -1,7 +1,7 @@
 # Frozen-anchor local residual expressivity G25
 
 ```text
-status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
+status=NONFORMAL_CLOSED_NO_POINTWISE_FIT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -61,3 +61,18 @@ semantics, exact residual optimizer ownership, a moving residual with bitwise
 frozen non-residual state, and fail-closed result precedence. Closed G24 code
 and its now-unused generic contextual hook are removed from the active line.
 This accepts only the single bounded diagnostic run.
+
+## Bounded probe disposition
+
+The integrated probe is operationally valid and closes all dataset, source,
+runtime, optimizer-ownership, inactive-row, replay and anchor invariants. Active
+action MSE falls from `1.43119` to `0.37358`, a ratio of `0.26103`, so it misses
+both frozen pointwise gates. Deterministic closed-loop utility also changes from
+the fast anchor's `0.66679` to `0.64357`; spike utility reaches `0.82401` but
+does not compensate for the first-match pointwise failure. The exact branch is
+`NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25`.
+
+The G23 local residual representation is closed under this accepted probe. No
+extra fit steps, optimizer change, threshold relaxation or UAV promotion is
+permitted. The next paired diagnostic adds direct actor-set context while
+retaining the autoregressive prefix; it does not rerun or rescue G25.

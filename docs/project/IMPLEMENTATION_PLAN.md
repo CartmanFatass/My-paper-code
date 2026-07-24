@@ -1,22 +1,22 @@
-# G25 frozen-anchor residual expressivity implementation plan
+# G26 prefix-contextual residual expressivity implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24
+last_nonformal=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25
+last_nonformal_result=NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25_BOUNDED_PROBE
+active_implementation=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g25
-algebra_status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
-screen_contract=docs/research/designs/FROZEN_ANCHOR_RESIDUAL_EXPRESSIVITY_G25.md
+formal_compute=not_scheduled_for_g26
+algebra_status=DIAGNOSTIC_DESIGN_FROZEN_IMPLEMENTATION_NEXT
+screen_contract=docs/research/designs/PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26.md
 ```
 
 ## Accepted active line
@@ -185,3 +185,16 @@ bitwise frozen state and first-match precedence. Together with retained
 G17/G18/G19 proofs, 25 tests pass on CPU with one thread. G24's module, runner,
 test and contextual hook are deleted from the active line. The only next
 action is the integrated bounded G25 diagnostic.
+
+That diagnostic is now closed as `NO_POINTWISE_LOCAL_RESIDUAL_FIT_G25`. It is
+operationally valid, but MSE `1.43119 -> 0.37358` misses both frozen gates and
+closed-loop utility falls below the anchor. The local residual receives no
+retry, extra steps, optimizer change or threshold rescue.
+
+G26 changes one representation axis. Add a routed residual hook that combines
+G24's direct actor-set context with G23's live autoregressive prefix, while
+retaining G25's exact fast anchor, dataset, optimizer, fit budget, seeds and
+gates. Rename the active diagnostic runner/test rather than retain duplicate
+execution lines. Prove zero-output equivalence, live-prefix sensitivity,
+permutation/padding/inactive behavior, residual-only ownership and precedence
+before one paired bounded CPU diagnostic. No PPO or formal run is scheduled.
