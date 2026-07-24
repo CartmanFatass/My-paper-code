@@ -1,70 +1,90 @@
-# UAV dynamic-service-roster research plan
+# UAV temporary service loss G1 implementation plan
 
-> **Current procedure:** external scientific review through
-> `$hmasd-review-round`. Implementation later uses
-> `$hmasd-agile-research-development`. Generic Superpowers execution,
-> compatibility work and workflow hashes remain disabled.
+> **Required procedure:** use `$hmasd-agile-research-development` for the
+> active implementation. Generic Superpowers execution, compatibility work and
+> workflow hashes remain disabled.
 
 ```text
-active_boundary=UAV_DYNAMIC_SERVICE_ROSTER_EXTERNAL_PRO_REVIEW
-implementation_status=NOT_STARTED_REVIEW_PENDING
-design=docs/research/designs/UAV_DYNAMIC_SERVICE_ROSTER_RESEARCH_BRIEF.md
+active_implementation=UAV_TEMPORARY_SERVICE_LOSS_G1
+implementation_status=RECONCILED_NOT_IMPLEMENTED
+scientific_raw=docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md
+reconciliation=docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/30_PM_SCIENTIFIC_RECONCILIATION.md
+design=docs/research/designs/UAV_TEMPORARY_SERVICE_LOSS_G1.md
 backend=cpu
 torch_threads=1
-new_chain_iterations_remaining=10
-iteration_report_range=ITERATION_18_to_ITERATION_27
+formal_iteration=18
+uav_chain_iterations_remaining=10
 ```
 
 ## Goal
 
-Turn the accepted synthetic runtime-variable-roster algorithm into an
-algorithmically meaningful UAV test line based on Scenario 7. The line must
-separate a fixed physical fleet from the service-active roster and test:
+Test whether explicit compact service-lifecycle ownership improves S7-S1
+temporary-loss service and rejoin continuity beyond the strongest correctly
+masked fixed-slot recurrent controller. A mask-sufficient result is admissible
+and must not be rescued.
 
-1. temporary coverage under a localized communication-demand burst;
-2. service-roster contraction and re-entry caused by charging rotation; and
-3. robustness to a small temporary UAV detachment or failure.
+## Active-line implementation
 
-The initial goal is a usable algorithm in this task family, not a universal or
-comparative-advantage claim.
+### 1. Source overlay and ledger
 
-## Repository facts that constrain the review
+Add one small Scenario-7 temporary-service-loss source that samples the exact
+IID and held-out laws, applies service LEAVE before action collection, holds the
+absent UAV position at zero velocity, disables its communication links and
+restores the same lifecycle after the frozen duration.
 
-- `S7-S1` has eight UAVs, thirty users, a 500-step episode and a constant
-  per-user QoS target. Batteries, charging and failures are disabled.
-- S7-S2/S3 add battery and two single-capacity chargers. S7-S4 adds temporary
-  failures while retaining at least six active UAVs.
-- The environment and adapter expose a fixed `possible_agents` array. Charging
-  and failure are currently physical availability masks, not registered
-  dynamic service-membership events.
-- The accepted G8 algorithm is supported only in its synthetic dynamic-roster
-  family. UAV integration and UAV advantage remain untested.
+Expose current service-active state to both arms but never expose the future
+owner, onset, duration or rejoin time. Keep underlying S7-S1 physical and reward
+semantics unchanged.
 
-## Review boundary
+Focused proof: exact distribution boundaries, deterministic reconstruction,
+one/two-owner overlap, no future leakage and complete recovery windows.
 
-External Pro is asked to freeze only choices that change the scientific
-object: service-membership semantics, disturbance/source laws, observability,
-estimands, matched reductions, admission gates and held-out claims. Seeds,
-serialization, class layout and other bounded realization choices remain PM
-implementation authority unless they alter one of those objects.
+### 2. Matched continuous recurrent arms
 
-No UAV source code is changed before exact raw intake and PM reconciliation.
-The first post-review action will be the smallest one-source executable
-definition that separates dynamic-service-roster behavior from a fixed-agent
-masking reduction. Scenario composition follows only after isolated sources
-are individually identifiable.
+Implement one shared continuous four-action recurrent policy core with two
+routing modes:
 
-## Ten-iteration loop
+- `FIXED_MASK_REC` keeps eight physical state slots and excludes inactive rows
+  from action/log-probability/PPO loss while freezing/restoring their hidden
+  state;
+- `PREFIX_NORMALIZED_OPEN_ROSTER` compacts service-active lifecycle rows and
+  routes hidden state by lifecycle ownership.
 
-For each valid conclusion-bearing iteration the Project Manager will:
+Both modes use the same active-set sum, `log1p(active_count)`, active-fraction
+autoregressive prefix, tanh-Gaussian action support and exact trainable
+parameter count. The critic receives identical current centralized state.
 
-1. freeze one bounded evidence contract inside the external scientific scope;
-2. implement and run proof-sized nonformal acceptance;
-3. commit the accepted source and launch the registered CPU-only formal run;
-4. validate the first-match result without threshold or budget rescue;
-5. write the Chinese `docs/report/ITERATION_<n>.md`; and
-6. select the smallest supported successor without another authorization
-   prompt while the ten-iteration grant remains active.
+Focused proof: inactive likelihood exclusion, exact hidden freeze/restore,
+survivor continuity, row/slot permutation behavior, parameter/action/exposure
+matching and checkpoint continuation.
 
-External review is requested again only for a new protected scientific choice
-or a real anomaly, not as a routine review stack.
+### 3. Controls, metrics and analyzer
+
+Implement the evaluation-only constructive and no-reallocation controls,
+`J_event`, `J_rejoin`, `Q_ordinary`, worst-cell access, paired hierarchical
+bootstrap and the exact seven first-match branches. Treat the no-disturbance
+empty event union as `J_event=1.0`.
+
+Focused proof: metric boundary arithmetic, strict/equality comparisons,
+source-identifiability precedence, tampered provenance rejection and formal
+analyzer rejection of nonformal artifacts.
+
+### 4. Bounded nonformal acceptance
+
+Run focused CPU one-thread tests and one small nonformal train/evaluate/analyze
+exercise using reduced implementation-only exposure. It must prove operational
+closure, not produce or preview a scientific result. Artifacts remain under
+`logs/` and outside tracked source.
+
+### 5. Formal iteration 18
+
+After PM accepts the implementation and freezes the exact executable evidence
+contract, commit and push the source, then assign exactly one foreground
+CPU-only `train -> evaluate -> analyze` run to the registered
+`hmasd-experiment-operator`.
+
+Formal exposure per learned arm and paired replicate is 16 environments × 500
+steps × 200 updates = 1,600,000 transitions, four PPO passes per update. Use
+three paired replicates and final checkpoints only. Evaluate four cells under
+deterministic and stochastic action with 128 episodes each. Write
+`docs/report/ITERATION_18.md` only after a valid terminal result.
