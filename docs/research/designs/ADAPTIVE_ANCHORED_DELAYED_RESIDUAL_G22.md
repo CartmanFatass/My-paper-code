@@ -1,7 +1,7 @@
 # Adaptive anchored delayed residual G22
 
 ```text
-status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -76,3 +76,11 @@ one-thread runtime. They retain exact zero-output/common-mode behavior, replay,
 inactive rows and bitwise anchor preservation while proving optimizer identity
 and empty initial state. This accepts only the bounded screen and does not
 authorize formal compute or claim delayed access.
+
+## Bounded screen disposition
+
+The integrated screen is operationally valid with exact replay and anchor
+identity. G17 remains compatible, but G18 utility collapses from `0.66667` to
+`0.01025` while the residual moves to `0.16184`. The first-match branch is
+`NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22`. The exact
+successor-only Adam candidate is closed without tuning or formal/UAV promotion.

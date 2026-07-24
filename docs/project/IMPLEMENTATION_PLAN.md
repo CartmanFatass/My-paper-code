@@ -1,22 +1,22 @@
-# G22 adaptive anchored delayed-residual implementation plan
+# G23 anchored dual-channel residual implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21
+last_nonformal=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22_BOUNDED_SCREEN
+active_implementation=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g22
-algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22.md
+formal_compute=not_scheduled_for_g23
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/ANCHORED_DUAL_CHANNEL_RESIDUAL_G23.md
 ```
 
 ## Accepted active line
@@ -117,3 +117,15 @@ state, exact residual-only ownership, zero-output/common-mode policy behavior,
 replay, anchor identity and precedence; 36 focused-plus-retained tests pass on
 CPU with one thread. The only next action is the frozen paired screen from an
 integrated commit.
+
+That screen is now closed as
+`NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22`. Adam strongly exercises
+the residual but collapses G18 utility to `0.01025`; G17 and the frozen anchor
+remain valid. Optimizer conditioning is therefore closed without a sweep.
+
+G23 changes only the residual actor objective to the exact equal average of
+independently normalized immediate and successor PPO channels. Adam remains
+residual-only; the fast anchor, critics, budgets, gates and evaluation are
+unchanged with fresh seeds. Replace the active optimizer function, rename the
+runner/test, prove channel weights and gradient ownership, then run one paired
+nonformal screen.
