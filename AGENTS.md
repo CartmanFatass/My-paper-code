@@ -44,6 +44,10 @@ superpowers_plugin=reference_only
 superpowers_execution=disabled
 project_development_skill=hmasd-agile-research-development
 development_mode=agile_algorithm_research
+algorithm_iteration_environment=toy_default
+uav_environment_role=promoted_candidate_validation_only
+uav_promotion_authority=project_manager
+heavy_uav_every_iteration=forbidden
 backward_compatibility=not_required
 test_scope=proof_sized
 codebase_policy=small_active_line_only
@@ -123,6 +127,22 @@ never substitute `default`, an unnamed child, or an ad hoc worker.
 No child launches a successor. Automatic continuation belongs only to Project
 Manager. One scheduled action is not the only legal scientific explanation;
 freeze evidence semantics, not theory.
+
+## Environment tiering
+
+Algorithm discovery and routine conclusion-bearing iteration use the existing
+toy environments by default. They are the fast mechanism-separation surface for
+architecture, credit assignment, lifecycle, roster and optimization questions.
+The Project Manager promotes a direction to a heavy S7/S1-like UAV environment
+only after toy evidence makes it scientifically promising or a UAV-specific
+transport question is itself the accepted target.
+
+A UAV run tests transport, physical feasibility and robustness under the
+registered communication, energy and service-roster mechanics. It does not
+replace the toy discovery loop, retroactively relabel toy evidence, or become a
+mandatory stage of every iteration. Heavy-UAV formal runs without a recorded PM
+promotion decision are forbidden. UAV runtime optimization is an engineering
+track and must not block bounded toy algorithm progress.
 
 ## Acceptance, tests, and review
 

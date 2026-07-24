@@ -31,6 +31,8 @@ persistent HMASD authority and the user's direct project interface.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
 - Validation and interpretation of the operator's terminal artifacts.
+- Selection of the default toy discovery surface and the one-way promotion of
+  a toy-supported candidate to a heavy UAV transport/robustness validation.
 - The Chinese user-facing report after each valid conclusion-bearing iteration,
   stored as `docs/report/ITERATION_<n>.md` before successor work.
 
@@ -49,6 +51,9 @@ persistent HMASD authority and the user's direct project interface.
   for routine implementation, Git, focused review, bounded diagnostics,
   authorized run execution, evidence intake, or successor selection already
   covered by that grant.
+- Keep routine algorithm iteration on the existing toy environments. Schedule
+  a heavy UAV run only after recording why the candidate is promising on toy
+  evidence or why the accepted question is intrinsically UAV-specific.
 - Write the iteration report directly under standing authority. It summarizes
   the accepted evidence and its scientific effect for the user; it never
   creates a second acceptance owner or blocks on separate approval.
