@@ -1,7 +1,7 @@
 # Return-to-go direction-balanced full actor G31
 
 ```text
-status=FORMAL_RUNNER_ACCEPTED_PATH_EXERCISE_NEXT
+status=PRELAUNCH_READY_FORMAL_ITERATION_21_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -110,6 +110,11 @@ exact terminal-tail telemetry into the final analyzer. Six formal-runner checks
 plus six G31 algorithm checks pass; the complete relevant G17/G18/G19/G30/G31
 set passes `60` checks on CPU with one thread. The next action is the integrated
 nonformal path exercise only.
+
+That exercise completed with exact two-row/seven-cell/four-checkpoint closure,
+zero replay and terminal-tail error, and explicit rejection under
+formal-required analysis. The frozen formal iteration 21 is now the only next
+action.
 
 ## Proof-sized acceptance
 

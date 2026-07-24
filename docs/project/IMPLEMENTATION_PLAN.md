@@ -418,3 +418,10 @@ exact evaluation inventory and all inherited first-match gates; it additionally
 fails closed on non-finite/zero future-tail support or any nonzero terminal
 tail. Twelve focused and 60 relevant shared checks pass on CPU with one thread.
 The next action is one integrated nonformal formal-path exercise.
+
+The integrated G31 formal-path exercise completes train/evaluate/analyze with
+two exact training rows, seven evaluation cells, four checkpoints, zero replay
+and terminal-tail error, and the registered nonformal branch. Formal-required
+analysis rejects it. The next action is one frozen three-replicate formal CPU
+iteration 21; no parameter, seed, threshold, budget or source selection remains
+open.
