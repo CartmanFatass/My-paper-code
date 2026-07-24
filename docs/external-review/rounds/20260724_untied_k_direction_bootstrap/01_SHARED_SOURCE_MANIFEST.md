@@ -36,12 +36,16 @@ same constant: `chunk_length=self.config.k` (`hmasd/agent.py:4945`). A structura
 assumption follows it: `episode_length` must be divisible by `k`
 (`config_1.py:719`).
 
-**Variable duration, HA-CTSE.** `H_min`/`H_max` bounds and a discrete
+**Per-agent variable duration, HA-CTSE.** `H_min`/`H_max` bounds and a discrete
 `skill_lifetime_candidates` tuple, sampled per agent at assignment
 (`hmasd/ha_ctse.py:287-301`), with termination masked by skill age
 (`hmasd/ha_ctse.py:611-631`). Process-core records realized `segment_length`
 rather than assuming one (`ha_ctse_process/config.py`,
 `ha_ctse_process/train.py`).
+
+**Not the subject.** Skill cardinality is fixed: `n_Z = 6` team codes and
+`n_z = 6` individual codes (`config_1.py:132-133`, `ha_ctse_process/config.py`).
+This round is about period, not count.
 
 Tests that pin the current semantics: `tests/ha_ctse_test.py` asserts both the
 `k`-boundary closure conditions and the variable-lifetime configuration.

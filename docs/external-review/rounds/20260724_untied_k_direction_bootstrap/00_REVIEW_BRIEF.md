@@ -22,9 +22,15 @@ so the freshness fence it carries also fixes the branch identity for every later
 round.
 
 **Second, it asks the branch's opening scientific question.** `untied-k` exists
-to explore unbinding the skill period `k`. That direction has not been chosen —
-only named. Choosing it is a scientific decision, and scientific decisions are
-now yours.
+to explore making the skill period of an **individual agent** variable, where
+today every agent shares one global period. That direction has been named, not
+chosen. Choosing it is a scientific decision, and scientific decisions are now
+yours.
+
+The number of skills and the number of agents are **not** the subject. Skill
+cardinality is fixed at six team and six individual codes, and runtime-variable
+membership is existing background carried by the G-generation line. The question
+states this exclusion explicitly.
 
 ## What changed in the authority contract
 
