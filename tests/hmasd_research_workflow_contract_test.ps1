@@ -64,8 +64,23 @@ foreach ($required in @(
     'iteration_report_path=docs/report/ITERATION_<n>.md',
     'not another review, approval or scientific evidence source',
     'per_file_hash_handoff=forbidden',
-    'same_file_concurrent_writes=forbidden')) {
+    'same_file_concurrent_writes=forbidden',
+    '### Crossing the boundary',
+    'converge with External Pro',
+    '## Context compaction',
+    'end of a complete iteration')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
+}
+
+# Convergence must stay distinguishable from a fence, or the single-fence rule
+# quietly becomes "resubmit whenever the answer is unsatisfying".
+$reviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-review-round/SKILL.md')
+foreach ($required in @(
+    '## Convergence turns',
+    'A convergence turn is not a fence',
+    '22_PRO_CONVERGENCE.md',
+    'exactly one per round, never resubmitted')) {
+    if (-not $reviewSkill.Contains($required)) { throw "Review Skill missing: $required" }
 }
 
 foreach ($required in @(

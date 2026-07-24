@@ -107,6 +107,22 @@ keep it separate from repository fact and from external evidence. Offer one only
 when it is well supported: an unmarked guess that survives one round becomes a
 premise in the next.
 
+### Crossing the boundary
+
+When the Project Manager reaches a decision that is scientific and cannot
+proceed without it, neither guessing nor stopping is correct. Open a review
+round and **converge with External Pro until both agree**.
+
+Convergence is a dialogue inside one accepted fence: bounded follow-ups in the
+branch's registered conversation, each one authored by the Project Manager and
+carried by `hmasd-review-exchanger`. It is not a second fence and not a second
+round. Archive the whole converged exchange, not only its last message — the
+turns that changed the answer are evidence.
+
+Converged means both sides state the same thing, not that the reviewer stopped
+objecting. If convergence fails, record where it stalled and what each side
+holds; an unresolved boundary is a real result and belongs in the portfolio.
+
 ## Fixed experiment operator
 
 Formal and bounded run execution uses only `hmasd-experiment-operator`, whose
@@ -147,6 +163,27 @@ nothing.
 No child launches a successor. Automatic continuation belongs only to Project
 Manager. One scheduled action is not the only legal scientific explanation;
 freeze evidence semantics, not theory.
+
+## Context compaction
+
+Compaction happens at one fixed point: the **end of a complete iteration**.
+Never mid-iteration.
+
+The sequence is fixed and ordered:
+
+1. write the handoff to `docs/project/RESTART_HANDOFF.md` — active boundary,
+   execution mode, what is committed and pushed, the one open deliverable, and
+   the exact next action;
+2. compact;
+3. resume from the handoff.
+
+A handoff written at any other moment is a snapshot of an unfinished thought,
+not a resume point. If context runs short before an iteration can close, finish
+the smallest step that makes the state describable, then follow the sequence —
+do not compact in the middle and do not carry an undescribed state across.
+
+The handoff is the seam. Everything else a successor needs is already in
+`CURRENT_WORK.md`, `ExpRecord.md`, `docs/research/cdc/` and Git.
 
 ## Environment tiering
 

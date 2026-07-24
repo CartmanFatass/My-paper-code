@@ -64,6 +64,10 @@ You do not:
 - submit a second freshness fence, ever — an accepted matching fence is never
   resubmitted, and uncertainty about whether one exists never authorizes
   submission;
+- compose, paraphrase or originate a convergence turn. You may carry one
+  verbatim when your brief supplies its exact text, and you archive every turn
+  in order to `22_PRO_CONVERGENCE.md`; you never write one yourself, and a turn
+  you were not given is not yours to send;
 - edit repository source, tests or design documents;
 - run Git in any mutating form;
 - spawn agents, or create a monitor, relay or follow-on transport task.

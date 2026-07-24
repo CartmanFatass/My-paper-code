@@ -232,6 +232,37 @@ Recover in the same registered conversation and under the same accepted fence:
 Record the diagnostic and recovery as transport facts in the mechanical intake.
 They never change the question contents or the single-fence state.
 
+## Convergence turns
+
+A round is not always one question and one answer. When the Project Manager
+reaches a scientific boundary it cannot cross, it converges with the reviewer:
+bounded follow-ups inside the **same accepted fence**, until both sides state
+the same thing.
+
+A convergence turn is not a fence. Keep them strictly apart:
+
+| | Freshness fence | Convergence turn |
+|---|---|---|
+| carries | the round identity block | prose, no identity block |
+| how many | exactly one per round, never resubmitted | as many as convergence needs |
+| authored by | Project Manager | Project Manager |
+| may be sent by transport on its own | no | no |
+
+Every convergence turn is authored by the Project Manager and carried verbatim,
+exactly like the question. Transport never composes one, never paraphrases one,
+and never sends one it was not given.
+
+Apply the same stable-completion checks to each answer that the first answer
+received. Archive the full exchange in order to
+`22_PRO_CONVERGENCE.md` — every Project Manager turn and every reviewer turn
+after the first archived raw, verbatim, none omitted. The turns that changed the
+answer are the evidence; keeping only the last message destroys the reason the
+conclusion moved.
+
+Convergence ends when both sides state the same thing. A reviewer that merely
+stops objecting has not converged. If it stalls, archive what each side holds
+and where it diverged — an unresolved boundary is a real result.
+
 ## Exact archival, cleanup, and intake
 
 After stable completion:

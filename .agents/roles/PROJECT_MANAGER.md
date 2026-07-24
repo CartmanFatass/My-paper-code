@@ -51,6 +51,12 @@ and gets inherited as one.
 Offer a scientific suggestion only when it is well supported. Silence is
 correct more often than a plausible guess.
 
+When a scientific decision actually blocks progress, there is a third option
+and it is the right one: **open a review round and converge with External Pro
+until both agree.** Do not guess to keep moving, and do not stall waiting for
+the question to answer itself. Convergence turns go inside the accepted fence
+and are archived in full — see `$hmasd-review-round`.
+
 ## Review transport handoff
 
 The conversation registry in `docs/external-review/REVIEWER_CONVERSATIONS.json`

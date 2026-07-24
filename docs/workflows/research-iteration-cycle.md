@@ -157,11 +157,35 @@ docs/report/GRANT_<id>_BRIEF.md
 Never the raw output. Every claim links down to its `ExpRecord.md` row, its
 evidence note, or its iteration report.
 
+## Boundary crossing is not a stage
+
+At any point in the cycle the orchestrator may reach a decision that is
+scientific and that blocks it. That is not a failure of the stage it happens in
+and it does not restart the loop. It opens a review round and converges with Pro
+until both agree, then resumes where it stopped.
+
+Convergence turns live inside the accepted fence and are archived in full to
+`22_PRO_CONVERGENCE.md`. Guessing to keep moving is the failure mode this
+replaces.
+
 ## Git
 
 Integration is Fable-direct at stage 6, after the reviewer verdict and after the
 run is recorded. No child commits. Fable stages only accepted paths, checks the
 staged path set and `git diff --cached --check`, commits, and pushes.
+
+## Closing the iteration
+
+The cycle ends at a fixed compaction point, and the order is not optional:
+
+```text
+write docs/project/RESTART_HANDOFF.md -> compact -> resume from the handoff
+```
+
+The handoff records the active boundary, execution mode, what is committed and
+pushed, the one open deliverable, and the exact next action. Written anywhere
+but the end of a complete iteration it is a snapshot of an unfinished thought,
+not a resume point.
 
 ## How stage 1 actually works
 
