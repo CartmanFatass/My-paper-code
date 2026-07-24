@@ -3,6 +3,8 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
+# Stable workflow surfaces only. Scientific assignments and result labels are
+# deliberately not hard-coded here because CURRENT_WORK is the active line.
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
@@ -41,43 +43,41 @@ foreach ($required in @(
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
+
 foreach ($required in @(
-    'active_assignment_id=FIVE_ITERATION_CHAIN_COMPLETE',
-    'iterations_remaining=0',
-    'conclusion_bearing_iterations_consumed=5',
+    'active_assignment_id=',
+    'next_boundary=',
+    'autonomous_research_grant=',
+    'iterations_remaining=',
+    'conclusion_bearing_iterations_consumed=',
     'intermediate_authorization_prompts=forbidden',
-    'formal_compute_status=complete_no_remaining_authority',
-    'g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2',
-    'g2_g_team_ci95=[0.0,0.0]',
-    'g2_g_link_ci95=[0.5,0.5]',
-    'g3_gate_contract=docs/research/designs/ASYNC_COMMITMENT_ROSTER_G3.md',
-    'g3_gate_result=PASS_ASYNC_ROSTER_INFORMATION_GATE_G3',
-    'g3_gate_cases=18400',
-    'g3_gate_tests=5_passed',
-    'g3_formal_contract=docs/research/designs/USEFUL_EFFECT_ROSTER_G3.md',
-    'g3_primary_arm=ROSTER_ATTN',
-    'g3_primary_comparator=TEAM_REC',
-    'iteration_report_status=iterations_1_to_5_complete',
-    'latest_iteration_report=docs/report/ITERATION_5.md',
-    'g3_formal_result=UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3',
-    'g4_formal_contract=docs/research/designs/COUNT_PRESERVING_ROSTER_G4.md',
-    'g4_primary_arm=ROSTER_SUM',
-    'g4_primary_comparator=ROSTER_ATTN',
-    'g4_implementation_tests=12_passed',
-    'g4_formal_result=NO_ACCESS_COUNT_ROSTER_G4',
-    'terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE',
+    'git_integration_status=project_manager_direct_authorized',
+    'experiment_operator_fallback=forbidden',
+    'iteration_report_requirement=required_before_successor',
+    'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
+    'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
+
+$remainingMatch = [regex]::Match($current, '(?m)^iterations_remaining=(\d+)\s*$')
+$consumedMatch = [regex]::Match($current, '(?m)^conclusion_bearing_iterations_consumed=(\d+)\s*$')
+if (-not $remainingMatch.Success -or -not $consumedMatch.Success) {
+    throw 'CURRENT_WORK iteration accounting is not a nonnegative integer contract'
+}
+if ($current.Contains('autonomous_research_grant=ACTIVE_') -and
+    [int]$remainingMatch.Groups[1].Value -le 0) {
+    throw 'An active autonomous grant has no remaining conclusion-bearing iterations'
+}
+
 foreach ($required in @(
-    'formal_run_status=completed_no_access',
-    'active_implementation=COUNT_PRESERVING_ROSTER_G4',
-    'primary_comparator=ROSTER_ATTN',
-    'mission_comparator=TEAM_REC',
-    'focused_tests=12_passed',
-    'AUTHORIZE_COUNT_PRESERVING_ROSTER_G4_FORMAL_CPU_V1')) {
+    'backend=cpu',
+    'torch_threads=1',
+    'docs/research/designs/',
+    'Generic Superpowers execution')) {
     if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
 }
+
 foreach ($required in @(
     'root Project Manager directly stages, commits, and pushes',
     'Native children never run Git',
@@ -119,30 +119,15 @@ foreach ($required in @(
     if (-not $readme.Contains($required)) { throw "Iteration-report contract missing: $required" }
 }
 
-$reportResults = @(
-    @{ Name = 'ITERATION_1.md'; Result = 'NO_ACCESS_THIS_BENCHMARK' },
-    @{ Name = 'ITERATION_2.md'; Result = 'ORDINARY_EXPLANATION_G1' },
-    @{ Name = 'ITERATION_3.md'; Result = 'TEAM_REC_SUFFICIENT_HANDOFF_G2' },
-    @{ Name = 'ITERATION_4.md'; Result = 'UNDERPOWERED_ACCESS_USEFUL_ROSTER_G3' },
-    @{ Name = 'ITERATION_5.md'; Result = 'NO_ACCESS_COUNT_ROSTER_G4' }
-)
-foreach ($item in $reportResults) {
-    $path = Join-Path $repo (Join-Path 'docs/report' $item.Name)
+$consumed = [int]$consumedMatch.Groups[1].Value
+for ($iteration = 1; $iteration -le $consumed; $iteration++) {
+    $path = Join-Path $repo "docs/report/ITERATION_$iteration.md"
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-        throw "Missing Chinese iteration report: $($item.Name)"
+        throw "Missing Chinese iteration report: ITERATION_$iteration.md"
     }
     $report = Get-Content -Raw -Encoding UTF8 -LiteralPath $path
     if (-not [regex]::IsMatch($report, '[\p{IsCJKUnifiedIdeographs}]')) {
-        throw "$($item.Name) is not a Chinese report"
-    }
-    foreach ($required in @(
-        'source_commit=',
-        'backend=cpu',
-        'formal=true',
-        $item.Result)) {
-        if (-not $report.Contains($required)) {
-            throw "$($item.Name) missing: $required"
-        }
+        throw "ITERATION_$iteration.md is not a Chinese report"
     }
 }
 
@@ -164,7 +149,7 @@ foreach ($retired in @(
     'tests/ha_ctse_process_useful_effect_roster_g3_test.py',
     'tests/run_useful_effect_roster_g3_test.py')) {
     if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
-        throw "Closed G1 executable remains on the active line: $retired"
+        throw "Closed executable remains on the active line: $retired"
     }
 }
 
