@@ -363,3 +363,17 @@ checks close the algebraic edge cases, float32 near-opposite bound, ordinary
 Adam state transition, ownership and first-match contract; the 48-test
 G17/G18/G19/G30 shared-core set passes. The bounded paired screen is the next
 action and consumes no conclusion-bearing iteration.
+
+The bounded G30 screen is operationally valid and selects the sole promising
+branch. G17 compatibility remains strong while G18 reaches `0.98515` utility,
+`0.40181` anchor gain, `0.95544` spike utility and `0.95311` rotating share.
+Freeze a three-replicate paired formal runner with fresh seeds, the same two
+phase budgets and the inherited CI/first-match gates. First close a one-update
+per phase nonformal path exercise and reject it under formal-required analysis;
+then the integrated source may launch conclusion-bearing iteration 20.
+
+The G30 formal runner is PM-accepted after 18 focused and 52 shared-core tests.
+It binds zero/final checkpoints to phase counts, configuration, source and
+replicate; closes exact training/evaluation inventories; recomputes the frozen
+hierarchical intervals; and fails closed on token, checkpoint and cell tamper.
+The next action is its bounded nonformal exercise from an integrated source.
