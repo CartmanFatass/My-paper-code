@@ -143,3 +143,15 @@ def test_nonformal_screen_closes_one_small_artifact(tmp_path) -> None:
     assert result["source_control"]["minimum_utility"] >= 1.0 - 2e-7
     assert result["runtime"]["backend"] == "cpu"
     assert result["runtime"]["torch_threads"] == 1
+
+
+def test_representation_probe_reduces_constructive_mapping_error(tmp_path) -> None:
+    result = runner.representation_probe(
+        run_root=tmp_path / "g17_representation",
+        steps=8,
+        batch_size=32,
+        learning_rate=1e-3,
+    )
+    assert result["formal"] is False
+    assert result["final_loss"] < result["initial_loss"]
+    assert result["status"] == "NONFORMAL_G17_REPRESENTATION_PROBE_COMPLETE"

@@ -57,13 +57,13 @@ joint deterministic utility about `0.666`, despite a zero-to-final gain about
 `0.174`, exact replay and constructive utility about one. Increasing exposure
 alone is therefore rejected.
 
-## Active bounded discriminator
+## Completed exploration-scale discriminator
 
-The smallest next action holds the source, representation, network, reward,
-seeds, screen gates and evaluation fixed while varying only the initial
-continuous exploration scale and learning rate. It records conditional
-effort/mix MAE and correlation so a constant-action plateau cannot be mistaken
-for access.
+Two fresh variants held the source, representation, network, reward, seeds,
+screen gates and evaluation fixed. Neither crossed access. Their conditional
+effort correlations were `0.0166` and `0.0228`; mix correlations were `0.1131`
+and `0.1748`. Both learned near-constant actions. More budget and additional
+exploration-scale tuning are closed for this prototype.
 
 This screen consumes zero conclusion-bearing iterations. A formal contract may
 be frozen only if one bounded variant passes all of:
@@ -77,9 +77,16 @@ heldout_mean >= 0.75
 final_minus_zero_joint >= 0.08
 ```
 
-Screen thresholds are selection diagnostics, not formal result gates. Failure
-retires the current continuous-PPO realization without changing G8-G16 or the
-deferred UAV result.
+Screen thresholds are selection diagnostics, not formal result gates. The
+current continuous-PPO realization is `NO_CONDITIONAL_PPO_ACCESS_G17_V1`.
+
+## Active representation discriminator
+
+Fit the same network directly to the constructive current-action mapping while
+holding observations, active masks and architecture fixed. This non-RL probe
+answers only whether the representation can express and optimize the mapping.
+It cannot establish task access. Passing isolates shared team-reward PPO/credit
+as the next algorithm boundary; failing retires the representation.
 
 ## Protected interpretation
 

@@ -185,6 +185,105 @@ def _mapping_diagnostic(
     }
 
 
+def _constructive_dataset() -> dict[str, torch.Tensor]:
+    rows: dict[str, list[np.ndarray]] = {
+        name: [] for name in ("observations", "active_mask", "critic_state", "actions")
+    }
+    profiles: Sequence[RosterProfile] = TRAIN_PROFILES + HELDOUT_PROFILES
+    for episode_id in range(12):
+        environment = ContinuousServiceRosterEnv(
+            make_ledger(
+                episode_id,
+                master_seed=EVALUATION_LEDGER_SEED,
+                profiles=profiles,
+            )
+        )
+        for _ in range(HORIZON):
+            view = environment.observe()
+            actions = constructive_actions(view)
+            rows["observations"].append(view.observations)
+            rows["active_mask"].append(view.active_mask)
+            rows["critic_state"].append(view.critic_state)
+            rows["actions"].append(actions)
+            environment.step(actions)
+    return {
+        name: torch.as_tensor(np.stack(values)) for name, values in rows.items()
+    }
+
+
+def representation_probe(
+    *,
+    run_root: Path,
+    steps: int,
+    batch_size: int,
+    learning_rate: float,
+) -> dict[str, Any]:
+    """Separate policy representation capacity from shared-reward PPO access."""
+
+    if min(steps, batch_size) <= 0 or learning_rate <= 0:
+        raise ValueError("G17 representation probe arguments must be positive")
+    run_root.mkdir(parents=True, exist_ok=False)
+    configure_runtime(MODEL_SEED + 17)
+    dataset = _constructive_dataset()
+    model = _model(initial_log_std=-1.0)
+    optimizer = torch.optim.Adam(model.parameters(), lr=float(learning_rate))
+    generator = torch.Generator().manual_seed(MODEL_SEED + 18)
+
+    def loss_for(indices: torch.Tensor) -> torch.Tensor:
+        observations = dataset["observations"][indices]
+        active_mask = dataset["active_mask"][indices]
+        output = model.forward_step(
+            observations=observations,
+            active_mask=active_mask,
+            critic_state=dataset["critic_state"][indices],
+            hidden=torch.zeros(
+                (len(indices), CAPACITY, model.hidden_dim), dtype=torch.float32
+            ),
+            deterministic=True,
+        )
+        squared = torch.square(output.actions - dataset["actions"][indices]).mean(dim=-1)
+        return squared[active_mask].mean()
+
+    all_indices = torch.arange(len(dataset["observations"]))
+    with torch.no_grad():
+        initial_loss = float(loss_for(all_indices).detach())
+    model.train()
+    for _ in range(int(steps)):
+        indices = torch.randint(
+            len(all_indices),
+            (min(int(batch_size), len(all_indices)),),
+            generator=generator,
+        )
+        loss = loss_for(indices)
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        optimizer.step()
+    model.eval()
+    with torch.no_grad():
+        final_loss = float(loss_for(all_indices).detach())
+    result = {
+        "schema": "continuous_service_roster_proxy_g17_representation_probe_v1",
+        "algorithm": ALGORITHM,
+        "formal": False,
+        "status": "NONFORMAL_G17_REPRESENTATION_PROBE_COMPLETE",
+        "dataset_steps": int(len(all_indices)),
+        "optimization_steps": int(steps),
+        "batch_size": int(batch_size),
+        "learning_rate": float(learning_rate),
+        "initial_loss": initial_loss,
+        "final_loss": final_loss,
+        "runtime": {
+            "backend": "cpu",
+            "torch_threads": int(torch.get_num_threads()),
+            "python": str(Path(sys.executable).resolve()),
+        },
+        "interpretation": "representation-only diagnostic; not RL or formal evidence",
+    }
+    _write_json(run_root / "representation_probe.json", result)
+    return result
+
+
 def screen(
     *,
     run_root: Path,
@@ -326,13 +425,25 @@ def screen(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run-root", type=Path, required=True)
+    parser.add_argument("--representation-probe", action="store_true")
     parser.add_argument("--updates", type=int, default=60)
     parser.add_argument("--num-envs", type=int, default=8)
     parser.add_argument("--eval-episodes", type=int, default=48)
     parser.add_argument("--ppo-passes", type=int, default=2)
     parser.add_argument("--learning-rate", type=float, default=LEARNING_RATE)
     parser.add_argument("--initial-log-std", type=float, default=0.0)
+    parser.add_argument("--probe-steps", type=int, default=200)
+    parser.add_argument("--probe-batch-size", type=int, default=64)
     arguments = parser.parse_args()
+    if arguments.representation_probe:
+        result = representation_probe(
+            run_root=arguments.run_root,
+            steps=arguments.probe_steps,
+            batch_size=arguments.probe_batch_size,
+            learning_rate=arguments.learning_rate,
+        )
+        print(json.dumps(result, sort_keys=True))
+        return
     result = screen(
         run_root=arguments.run_root,
         updates=arguments.updates,

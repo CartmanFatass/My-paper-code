@@ -6,7 +6,7 @@
 ```text
 active_implementation=CONTINUOUS_SERVICE_ROSTER_PROXY_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=BOUNDED_PROTOTYPE_IMPLEMENTED_EXPLORATION_SCALE_SCREEN_ACTIVE
+status=BOUNDED_PROTOTYPE_PPO_SCREEN_CLOSED_REPRESENTATION_PROBE_ACTIVE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -32,26 +32,31 @@ formal_compute=not_running
    deterministic source reconstruction, exact roster schedule, constructive
    access, exact replay, lifecycle freeze and one finite update.
 
-## Current discriminator
+## Closed PPO discriminator
 
 The source and implementation close operationally, but `initial_log_std=0`
-plateaus after both 60 and 180 updates. Do not increase budget again. Run a
-small fixed exploration-scale screen using fresh roots and the same code
-identity:
+plateaus after both 60 and 180 updates. Two fixed exploration-scale variants
+also fail conditional access:
 
 - candidate A: `initial_log_std=-1.0`, `learning_rate=3e-4`;
 - candidate B: `initial_log_std=-1.5`, `learning_rate=1e-3`.
 
-Use 100 updates, eight environments, two PPO passes and 48 episodes per domain.
-The registered experiment operator may execute each exact nonformal command in
-parallel. The PM selects at most one passing candidate by held-out utility,
-then mapping MAE/correlation; a tie selects the smaller learning-rate change.
+Each used 100 updates, eight environments, two PPO passes and 48 episodes per
+domain. Both return `NONFORMAL_G17_NOT_PROMISING`; no third hyperparameter
+variant is admissible.
+
+## Current discriminator
+
+Run the representation-only constructive mapping probe for 200 optimization
+steps. If final full-dataset MSE is at most `10%` of initial MSE and at most
+`1e-3`, accept representation sufficiency and derive one shared-team-credit
+algorithm correction. Otherwise retire this continuous roster representation.
 
 ## After the screen
 
-- If no candidate passes, record `NO_BOUNDED_CONTINUOUS_ACCESS_G17` as a
-  nonformal prototype disposition and derive a new algorithmic correction.
-- If one candidate passes, freeze its complete train/evaluate/analyze evidence
+- If the representation probe passes, derive and screen exactly one
+  team-credit correction; do not freeze the failed token-wise PPO path.
+- If a later bounded RL candidate passes, freeze its complete train/evaluate/analyze evidence
   contract, implement only the missing formal runner/analyzer surface, run one
   bounded nonformal closure exercise, commit/push, then assign formal iteration
   18 to the fixed experiment operator.
