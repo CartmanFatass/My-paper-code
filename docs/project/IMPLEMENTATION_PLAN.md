@@ -6,14 +6,14 @@
 ```text
 active_implementation=CURRENT_OBSERVATION_RESIDUAL_ONE_STEP_CREDIT_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=FORMAL_RUNNER_IMPLEMENTED_FOCUSED_TESTS_PASS
+status=PRELAUNCH_ACCEPTED_FORMAL_ITERATION_18_READY
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=18
 iterations_remaining=10
 formal_contract=frozen
-formal_compute=not_running
+formal_compute=authorized_not_running
 ```
 
 ## Accepted active line
@@ -35,13 +35,15 @@ formal_compute=not_running
 
 ## Prelaunch sequence
 
-1. Commit and push the frozen implementation and contract.
-2. Through the fixed `hmasd-experiment-operator`, run one fresh bounded
-   `exercise` from that commit. Accept only three complete manifests,
-   operational validity and the nonformal branch; then confirm the formal
-   analyzer rejects it.
-3. Record the prelaunch evidence and integrate it. No scientific iteration is
+1. The frozen implementation and contract are integrated at `8efedec5`.
+2. The fixed `hmasd-experiment-operator` completed the fresh bounded exercise
+   at
+   `logs/nonformal_continuous_service_roster_g17_formal_path_20260724_8efedec_pm1`.
+   All three manifests close, the branch is the registered nonformal branch,
+   and formal analysis rejects the artifact. No scientific iteration is
    consumed.
+3. The prelaunch evidence is recorded in
+   `docs/research/cdc/EVIDENCE_NOTES/20260724_CONTINUOUS_SERVICE_ROSTER_G17_PRELAUNCH.md`.
 4. Assign formal Iteration 18 to one fixed experiment operator with the exact
    integrated source, fresh run root and these commands in order:
 
@@ -51,7 +53,8 @@ python scripts/run_continuous_service_roster_proxy_g17.py evaluate --run-root <r
 python scripts/run_continuous_service_roster_proxy_g17.py analyze --run-root <root> --require-formal
 ```
 
-Only a valid formal analysis consumes Iteration 18. The Project Manager then
+The next action is step 4. Only a valid formal analysis consumes Iteration 18.
+The Project Manager then
 writes `docs/report/ITERATION_18.md` in Chinese, integrates the closure, and
 selects the next in-grant toy-first boundary. Heavy UAV execution remains
 forbidden unless the formal evidence justifies promotion or a later question is
