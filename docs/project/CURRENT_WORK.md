@@ -21,9 +21,9 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=TIMING_CREDIT_IDENTIFIABILITY_G20_DERIVATION
-active_assignment_id=ACTIVE_SET_CENTERED_RESIDUAL_P2_IMPLEMENTATION_PROPOSAL
-next_boundary=ACTIVE_SET_CENTERED_RESIDUAL_P2_IMPLEMENTATION_PROPOSAL
+last_completed_assignment_id=ACTIVE_SET_CENTERED_RESIDUAL_P2_IMPLEMENTATION
+active_assignment_id=G20_CREDIT_RULE_REPAIR_REVIEW_ROUND
+next_boundary=G20_CREDIT_RULE_REPAIR_REVIEW_ROUND
 execution_mode=authorized
 autonomous_research_grant=ACTIVE_TEN_ITERATION_TOY_FIRST_UAV_PROMOTION_CHAIN
 grant_unit=completed_workflow_cycle
@@ -52,7 +52,7 @@ uav_performance_audit=docs/project/UAV_ENVIRONMENT_PERFORMANCE_AUDIT.md
 uav_performance_status=second_reuse_batch_pm_accepted_incremental_15.953851pct_fused_worker_rejected
 uav_performance_latest_scope=deferred_base_views_plus_fdma_sinr_reuse_plus_single_intra_sinr_cache_validation
 uav_performance_latest_tests=42_scenario7_plus_16_uav_wrapper_pass
-implementation_status=G19_SCREEN_CLOSED_NEXT_ZERO_COMPUTE_DERIVATION
+implementation_status=G20_BUILT_AND_ACCEPTED_CREDIT_RULE_INERT_SCREEN_WITHHELD
 nonformal_compute_status=g19_complete_operational_valid_no_delayed_access
 formal_compute_authority=standing_user_grant_cpu_only_after_pm_evidence_contract
 formal_compute_status=g18_iteration19_complete_no_live_run
@@ -267,7 +267,24 @@ g19_screen_g18_spike_utility=0.0
 g19_screen_result_note=docs/research/cdc/EVIDENCE_NOTES/20260724_FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_SCREEN.md
 g19_disposition=retired_without_tuning_retry_formal_or_iteration_cost
 g20_candidate_question=active_set_centered_residual_for_member_redistribution
-g20_active_action=ACTIVE_SET_CENTERED_RESIDUAL_P2_IMPLEMENTATION_PROPOSAL
+g20_active_action=G20_CREDIT_RULE_REPAIR_REVIEW_ROUND
+g20_design=docs/research/designs/ACTIVE_SET_CENTERED_COUNTERFACTUAL_RESIDUAL_G20.md
+g20_implementation=ha_ctse_process/centered_residual_g20.py
+g20_screen_runner=scripts/screen_centered_counterfactual_residual_g20.py
+g20_tests=tests/ha_ctse_process_centered_residual_g20_test.py
+g20_focused_and_shared_tests=18_passed
+g20_implementation_status=complete_faithful_to_frozen_design_pm_accepted
+g20_centering_status=proven_exact_by_focused_suite
+g20_credit_rule_status=INERT_ZERO_FIXED_POINT_AT_MANDATED_ENTRY_STATE
+g20_fixed_point_note=docs/research/cdc/EVIDENCE_NOTES/20260724_CENTERED_COUNTERFACTUAL_RESIDUAL_G20_ZERO_FIXED_POINT.md
+g20_fixed_point_established_by=pm_derivation_plus_numerical_confirmation
+g20_screen_executed=false
+g20_screen_withheld_reason=cannot_measure_declared_object_not_capacity
+g20_screen_would_report=branch_3_no_delayed_access_deterministically_as_artifact
+g20_retires=frozen_credit_rule_implementation_only_no_science
+g20_p2_candidate_status=untested_not_retired
+g20_iteration_consumed=false
+g20_compute_spent=zero
 g20_scope=pro_broadened_four_questions_plus_timing_credit_identifiability
 g20_outcome_mapping=pre_registered_by_pro_in_untied_k_round_raw_section_9
 g20_derivation=docs/research/cdc/EVIDENCE_NOTES/20260724_TIMING_CREDIT_IDENTIFIABILITY_G20_DERIVATION.md
@@ -801,6 +818,16 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   transport and robustness evidence. The already-running UAV G1 completes as
   one in-flight promoted validation, while the frozen charge-rotation G2
   contract is deferred and is not the automatic next iteration.
+- The G20 P2 package is built to the frozen design and PM-accepted code-side
+  (18 focused plus shared-surface tests pass), but its credit rule is inert.
+  Because the design mandates an exactly zero residual at delayed entry, the
+  leave-one-out contrast evaluates `Q_slow` twice on identical inputs and is
+  exactly zero for every member and every `Q_slow`, so the residual head gets
+  exactly zero gradient and never leaves zero. The bounded screen is withheld:
+  it would report branch 3 deterministically as an artifact. This retires that
+  credit-rule implementation and no science — P2, the centering result, the
+  declared estimator class and Pro's pre-registered mapping are all untested
+  and intact. The repair is protected semantics and goes to a review round.
 - Formal G18 closes as `NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18`. All delayed
   battery-roster gates pass strongly, but the shared actor fails the earlier
   G17 compatibility gate across fresh seeds. The exact package is closed and
