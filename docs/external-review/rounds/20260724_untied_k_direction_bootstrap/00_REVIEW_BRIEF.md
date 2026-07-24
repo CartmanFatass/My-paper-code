@@ -27,11 +27,14 @@ today every agent shares one global period. That direction has been named, not
 chosen. Choosing it is a scientific decision, and scientific decisions are now
 yours.
 
-The team skill is in scope as a **consequence**, not fixed by premise. `Z` was
-conceived as an information set compressed out of the OPT module rather than a
-state the algorithm must carry, so whether it needs a period at all is open.
-Several strategies already exist downstream; the question does not ask for the
-current form to be preserved.
+The team skill is in scope and nothing about it is fixed. `Z` was conceived as
+an information set compressed out of the OPT module rather than a state the
+algorithm must carry — and that origin is itself open to redesign if per-agent
+variable period calls for something else.
+
+This is an **opening exploratory round**. The framings in the question are
+disposable scaffolding, not a design to defend. Discarding them is a legitimate
+answer.
 
 The number of skills and the number of agents are **not** the subject. Skill
 cardinality is fixed at six team and six individual codes, and runtime-variable
@@ -60,11 +63,10 @@ them.
 ## Boundary of this round
 
 You are asked for a scientific direction and its separating evidence. You are
-not asked for, and must not supply:
+not asked for:
 
 - an implementation plan, file list, function signature, or task decomposition;
 - authorization for any nonformal or formal compute;
-- a workflow, role, or process change;
 - a unique legal successor that forecloses the portfolio.
 
 Read `docs/external-review/OPEN_REVIEW_PRINCIPLES.md` for how to explore inside

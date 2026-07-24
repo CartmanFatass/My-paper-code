@@ -27,13 +27,17 @@ lifecycle ownership, RNG, replay, credit, checkpoint meaning — you decide
 every agent shares one global skill period. This branch exists to explore
 letting each agent hold a skill for its own length of time.
 
-**The team side is in scope too, as a consequence rather than a premise.** Do
-not assume the team skill period is fixed. The team skill `Z` was originally
-conceived as an **information set compressed out of the OPT module** — not as a
-state the algorithm is required to carry. Whether `Z` needs a period at all,
-whether it needs to be a persistent state, and what it should mean once agents
-desynchronize are open. Several strategies are already available downstream, so
-treat this as a live design space, not a fixed constraint to preserve.
+**The team side is in scope too, and nothing about it is fixed.** The team skill
+`Z` was originally conceived as an information set compressed out of the OPT
+module rather than a state the algorithm must carry — but that origin is itself
+**open to redesign** if per-agent variable period calls for something else.
+Whether `Z` needs a period, whether it persists, what it is compressed from, and
+whether it should exist in this form at all are all live.
+
+**This is an opening exploratory round, not a field-completion continuation.**
+Treat every framing below as disposable scaffolding. If the useful answer
+requires discarding the structure of the question, discard it and say why. The
+project is exploring, not defending an existing design.
 
 **Out of scope for this round — do not answer about these:**
 
@@ -107,20 +111,19 @@ per-agent periods they do not. State what that costs — in the high-level value
 estimate, in advantage computation, and in replay.
 
 **C2. What should the team skill `Z` become?**
-`Z` was conceived as an information set compressed out of OPT rather than a
-required state. Once no two agents share a boundary, say which of these is
-right, or name a better one:
+Once no two agents share a boundary, `Z`'s current form may not survive. Its
+origin as an OPT-compressed information set is context, not a requirement — you
+may redesign what it is compressed from, when it exists, or whether it exists.
 
-- `Z` keeps a period of its own, decoupled from every agent's;
-- `Z` stops being a periodic state and becomes a function evaluated whenever it
-  is read;
-- `Z` is re-derived at each agent's own boundary, so different agents condition
-  on different vintages of it;
-- `Z` is unnecessary and its information should be carried some other way.
+A few directions, offered only to show the range and not as a menu: `Z` keeps a
+period of its own; `Z` stops being a periodic state and becomes a function
+evaluated when read; `Z` is re-derived at each agent's own boundary so different
+agents condition on different vintages; `Z` is unnecessary and its information
+travels another way. A better answer that is none of these is preferred over the
+best of these.
 
-State what each choice does to the probability factorization, to what a team
-commitment can still mean, and to the environment-agnostic intrinsic-reward
-contract.
+Whatever you propose, state what it does to the probability factorization and to
+the environment-agnostic intrinsic-reward contract.
 
 **D. What is the strongest information-matched reduction?**
 Give the ordinary-MARL or simpler-controller comparator that would explain any
@@ -150,15 +153,16 @@ evidence semantics must be frozen before it is collected?
    remains open, and an explicit statement that neither implementation nor
    formal compute is authorized by this response.
 
-## Prohibited outcomes
+## The few real limits
 
-- Do not answer about skill count, agent count, or membership lifetime.
-- Do not write an implementation plan, file list, function signature, or task
-  decomposition. That is the orchestrator's, not yours.
-- Do not authorize nonformal or formal compute, a run, or a successor dispatch.
-- Do not propose a workflow, role, or process change.
-- Do not reinterpret or reopen a closed G18/G19 result, and do not resurrect a
-  retired estimand by renaming it.
-- Do not declare a single legal successor that forecloses the portfolio.
-- Do not claim learned skills from labels, supplied executors, forced branches,
-  entropy, classifier accuracy, or task-specific shaping alone.
+Everything else is open. These are not:
+
+- **Stay on period, not cardinality or membership.** Skill count and agent count
+  are different questions with their own evidence.
+- **No implementation.** No plan, file list, signature, or task split — that is
+  the orchestrator's half of the split, and answering it there wastes your turn.
+- **No compute authorization.** A recommendation is not a run.
+- **Keep the portfolio plural.** Do not collapse to a single legal successor.
+- **No skill claims from weak evidence.** Labels, supplied executors, forced
+  branches, entropy, or classifier accuracy alone do not demonstrate a learned
+  skill.
