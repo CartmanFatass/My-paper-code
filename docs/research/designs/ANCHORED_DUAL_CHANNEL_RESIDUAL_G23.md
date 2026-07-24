@@ -1,7 +1,7 @@
 # Anchored dual-channel residual G23
 
 ```text
-status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -77,3 +77,12 @@ one-thread runtime. They prove residual-only Adam/gradient ownership, separate
 channel composition, exact frozen anchor, zero-output/common-mode behavior and
 retained replay/lifecycle/source semantics. This accepts only the bounded
 screen, not formal compute or delayed access.
+
+## Bounded screen disposition
+
+The integrated screen is operationally valid with exact channel identity,
+replay and anchor preservation. G17 passes. G18 utility `0.95111`, gain
+`0.25083` and rotating share `0.84993` pass, but spike utility `0.85332` misses
+the frozen `0.90` floor. The first-match branch is
+`NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23`. The exact local
+residual representation is closed without tuning or formal/UAV promotion.

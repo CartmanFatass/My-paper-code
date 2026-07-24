@@ -1,22 +1,22 @@
-# G23 anchored dual-channel residual implementation plan
+# G24 contextual dual-channel residual implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22
+last_nonformal=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23_BOUNDED_SCREEN
+active_implementation=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g23
-algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/ANCHORED_DUAL_CHANNEL_RESIDUAL_G23.md
+formal_compute=not_scheduled_for_g24
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24.md
 ```
 
 ## Accepted active line
@@ -138,3 +138,16 @@ focused and 36 focused-plus-retained tests close loss identity, optimizer and
 gradient ownership, zero-output/common-mode behavior, replay, anchor identity
 and precedence on CPU with one thread. The only next action is the integrated
 paired screen.
+
+That screen is now closed as
+`NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23`. G17 passes and G18
+utility, gain and rotating share pass, but spike utility `0.85332` misses the
+frozen `0.90` floor. The exact local residual is retired without rescue.
+
+G24 changes only residual representation: compute an unrestricted proposal
+directly from actor-side member encoding, active-set context, current hidden
+state and observation. Dual-channel Adam, frozen fast actor, budgets, gates and
+evaluation remain unchanged with fresh seeds. Reintroduce the proven optional
+step hook, use the injectable anchor core, rename the active module/runner/test,
+and close permutation/padding/inactive plus retained loss/ownership proofs
+before one paired screen.
