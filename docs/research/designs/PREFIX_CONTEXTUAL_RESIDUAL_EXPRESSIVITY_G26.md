@@ -19,7 +19,9 @@ active implementation of the hook.
 ## Preserved contract
 
 - unchanged G18 source, constructive dataset and fast-anchor training;
-- identical G25 seeds, fit budget, optimizer, loss, gates and branch order;
+- bitwise identical G25 non-residual initialization and post-construction RNG
+  state, plus identical seeds, fit budget, optimizer, loss, gates and branch
+  order;
 - residual-only mutation and bitwise frozen non-residual state;
 - inactive exact zero, finite CPU execution and exact source/lifecycle rows;
 - no critic/source/future/slot input and no PPO delayed update;
@@ -48,9 +50,16 @@ passes direct actor fields and the current prefix to the active policy; the base
 path ignores them. The diagnostic runner/test are renamed from G25, so no
 duplicate executable line remains.
 
-Nine focused and 30 focused-plus-retained G17/G18/G19 tests pass on the
+Ten focused and 31 focused-plus-retained G17/G18/G19 tests pass on the
 registered CPU one-thread runtime. They prove exact zero-output behavior in all
 execution modes, independent sensitivity to direct context and live prefix,
 full routed permutation plus proposal/padding behavior within `1e-7`, inactive exact zero,
 residual-only mutation, bitwise frozen state, exact dataset coverage and
 fail-closed precedence. This accepts only the paired G26 bounded probe.
+
+The first integrated attempt exposed that the larger residual consumed extra
+constructor RNG before the credit baselines, so its fast anchor was not paired
+with G25. That artifact is operationally invalid for this question. The repair
+constructs the G25 local reference from the same incoming RNG state, copies
+every non-residual tensor bitwise, restores the exact G25 post-construction RNG
+state, and adds a regression proving both identities before a fresh-root rerun.

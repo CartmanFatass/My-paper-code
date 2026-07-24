@@ -267,6 +267,17 @@ def test_constructive_dataset_closes_exact_source_rows() -> None:
     assert source.run_information_gate()["branch"] == source.PASS_BRANCH
 
 
+def test_model_construction_preserves_g25_anchor_and_rng_exactly() -> None:
+    probe.runtime.configure_runtime(probe.MODEL_SEED)
+    reference = probe._local_reference_model()
+    reference_state = probe.frozen_state(reference)
+    reference_rng_after = torch.random.get_rng_state().clone()
+    probe.runtime.configure_runtime(probe.MODEL_SEED)
+    model = probe.make_model()
+    assert maximum_state_difference(reference_state, probe.frozen_state(model)) == 0.0
+    assert torch.equal(reference_rng_after, torch.random.get_rng_state())
+
+
 def test_fit_step_owns_only_residual_and_preserves_anchor() -> None:
     probe.runtime.configure_runtime(probe.MODEL_SEED)
     model = probe.make_model()

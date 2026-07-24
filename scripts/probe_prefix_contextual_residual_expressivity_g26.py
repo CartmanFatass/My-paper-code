@@ -70,17 +70,49 @@ def _runtime_identity() -> dict[str, Any]:
     }
 
 
-def make_model() -> PrefixContextualResidualPolicy:
-    model = PrefixContextualResidualPolicy(
+def _model_arguments() -> dict[str, Any]:
+    return {
+        "member_capacity": source.CAPACITY,
+        "action_dim": source.ACTION_DIM,
+        "hidden_dim": g19.HIDDEN_DIM,
+        "current_observation_residual": True,
+    }
+
+
+def _local_reference_model() -> FastAnchoredResidualPolicy:
+    model = FastAnchoredResidualPolicy(
         source.OBSERVATION_DIM,
         source.CRITIC_STATE_DIM,
-        member_capacity=source.CAPACITY,
-        action_dim=source.ACTION_DIM,
-        hidden_dim=g19.HIDDEN_DIM,
-        current_observation_residual=True,
+        **_model_arguments(),
     )
     with torch.no_grad():
         model.log_std.fill_(g19.INITIAL_LOG_STD)
+    return model
+
+
+def make_model() -> PrefixContextualResidualPolicy:
+    """Construct G26 without changing any G25 non-residual draw or RNG state."""
+
+    initial_rng = torch.random.get_rng_state()
+    reference = _local_reference_model()
+    reference_rng_after = torch.random.get_rng_state()
+    torch.random.set_rng_state(initial_rng)
+    model = PrefixContextualResidualPolicy(
+        source.OBSERVATION_DIM,
+        source.CRITIC_STATE_DIM,
+        **_model_arguments(),
+    )
+    with torch.no_grad():
+        model.log_std.fill_(g19.INITIAL_LOG_STD)
+        target = model.state_dict()
+        for name, value in reference.state_dict().items():
+            if name.startswith("policy.delayed_residual."):
+                continue
+            if name not in target or target[name].shape != value.shape:
+                raise RuntimeError(f"G26 paired anchor state mismatch: {name}")
+            target[name].copy_(value)
+        model.load_state_dict(target)
+    torch.random.set_rng_state(reference_rng_after)
     return model
 
 

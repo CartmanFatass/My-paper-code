@@ -207,3 +207,11 @@ execution, independent context/prefix sensitivity, permutation/padding within
 dataset semantics and precedence. With retained G17/G18/G19 proofs, 30 tests
 pass on CPU with one thread. The only next action is the integrated paired G26
 diagnostic; no delayed PPO or formal compute is scheduled.
+
+The first integrated G26 artifact is not accepted scientifically: changing the
+residual parameter count advanced the global RNG before credit-baseline
+construction, and the resulting fast anchor differed from G25. The bounded
+repair constructs the G25 reference from the same incoming RNG state, copies
+every non-residual tensor, restores the exact G25 post-construction RNG state,
+and proves both identities. Rerun once from a fresh root after focused tests;
+the invalid artifact consumes no iteration and cannot select a branch.
