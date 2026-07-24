@@ -27,6 +27,15 @@ today every agent shares one global period. That direction has been named, not
 chosen. Choosing it is a scientific decision, and scientific decisions are now
 yours.
 
+It is asked now for a reason. Three consecutive iterations have circled a
+fast/slow credit conflict: G17 is accepted only because its credit window was
+aligned to a one-step causal window; G18 showed a shared actor cannot hold both
+that controller and delayed access; G19's fast anchor preserved the controller
+and gained nothing delayed. That is a timescale problem, and the skill period is
+the algorithm's existing timescale object. The question asks whether unbinding
+it is the resolution or a distraction — and says explicitly that naming a
+different root cause is a legitimate answer.
+
 The team skill is in scope and nothing about it is fixed. `Z` was conceived as
 an information set compressed out of the OPT module rather than a state the
 algorithm must carry — and that origin is itself open to redesign if per-agent
