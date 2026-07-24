@@ -12,7 +12,7 @@ compute authority.
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | live elsewhere; unsupported for G1 | High utility in every G1 arm and confidently null EHC gain give no credit-bottleneck rescue. | A representation-fixed causal credit comparison on an independently identified source. |
+| C-CREDIT | active delayed-effect search | G18 rejects both plain TD(0) and an unscaled fast/slow residual sum: the latter destroys G17 conditional mapping and remains myopic on delayed battery allocation. | Test channel-normalized credit composition without source, budget or threshold changes. |
 | C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -24,7 +24,7 @@ compute authority.
 completed_action=CONTINUOUS_SERVICE_ROSTER_PROXY_G17_FORMAL_ITERATION_18
 source_family=continuous_service_dynamic_roster_toy
 formal_disposition=USABLE_ONE_STEP_CONTINUOUS_ROSTER_G17
-next_action=DELAYED_EFFECT_CONTINUOUS_ROSTER_G18_CREDIT_DERIVATION
+next_action=CHANNEL_NORMALIZED_SEPARATED_CREDIT_G18_ALGEBRA_PROTOTYPE
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
 conclusion_bearing_iterations_consumed=18
 iterations_remaining=9
@@ -48,4 +48,5 @@ prefix-normalized direct recurrent policy accepted as the usable discrete test
 version. Under the new toy-first grant, formal G17 adds a usable continuous
 immediate-service controller across within-episode roster changes. Its one-step
 credit is deliberately not treated as a UAV or long-horizon solution; the
-active successor is a delayed-effect credit derivation.
+active successor is a channel-normalized delayed-effect credit prototype after
+the exact raw fast/slow sum failed its bounded dual-source screen.

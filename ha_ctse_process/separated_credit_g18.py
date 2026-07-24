@@ -563,21 +563,24 @@ def separated_ppo_loss(
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     device = replay.log_probs.device
     mask = replay.active_mask
-    advantage = credit.actor_advantage.to(device)
-    normalized = (advantage - advantage.mean()) / (
-        advantage.std(unbiased=False) + 1e-8
-    )
     old_log_probs = trajectory.old_log_probs.to(device)
     ratio = torch.exp(replay.log_probs - old_log_probs)
-    expanded = normalized.unsqueeze(-1)
-    surrogate = torch.minimum(
-        ratio * expanded,
-        torch.clamp(ratio, 1.0 - PPO_CLIP, 1.0 + PPO_CLIP) * expanded,
-    )
     active_count = mask.sum(dim=-1).clamp_min(1)
-    policy_loss = -(
-        torch.where(mask, surrogate, 0.0).sum(dim=-1) / active_count
-    ).mean()
+
+    def channel_policy_loss(advantage: torch.Tensor) -> torch.Tensor:
+        normalized = normalize_advantage_channel(advantage.to(device))
+        expanded = normalized.unsqueeze(-1)
+        surrogate = torch.minimum(
+            ratio * expanded,
+            torch.clamp(ratio, 1.0 - PPO_CLIP, 1.0 + PPO_CLIP) * expanded,
+        )
+        return -(
+            torch.where(mask, surrogate, 0.0).sum(dim=-1) / active_count
+        ).mean()
+
+    fast_policy_loss = channel_policy_loss(credit.immediate_residual)
+    successor_policy_loss = channel_policy_loss(credit.successor_residual)
+    policy_loss = 0.5 * (fast_policy_loss + successor_policy_loss)
     entropy = (
         torch.where(mask, replay.entropies, 0.0).sum(dim=-1) / active_count
     ).mean()
@@ -612,12 +615,24 @@ def separated_ppo_loss(
     )
     return total, {
         "policy_loss": policy_loss,
+        "fast_policy_loss": fast_policy_loss,
+        "successor_policy_loss": successor_policy_loss,
         "slow_value_loss": slow_value_loss,
         "immediate_baseline_loss": immediate_loss,
         "successor_baseline_loss": successor_loss,
         "entropy": entropy,
         "clip_fraction": clip_fraction,
     }
+
+
+def normalize_advantage_channel(advantage: torch.Tensor) -> torch.Tensor:
+    """Normalize one actor-credit channel without mixing it with another."""
+
+    if advantage.ndim != 2 or not bool(torch.isfinite(advantage).all()):
+        raise ValueError("G18 advantage channel must be finite [time,batch]")
+    return (advantage - advantage.mean()) / (
+        advantage.std(unbiased=False) + 1e-8
+    )
 
 
 def optimize_separated_update(
@@ -650,6 +665,8 @@ def optimize_separated_update(
         )
     metric_names = (
         "policy_loss",
+        "fast_policy_loss",
+        "successor_policy_loss",
         "slow_value_loss",
         "immediate_baseline_loss",
         "successor_baseline_loss",

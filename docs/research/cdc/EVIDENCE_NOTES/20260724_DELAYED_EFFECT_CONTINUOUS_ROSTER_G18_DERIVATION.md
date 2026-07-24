@@ -186,3 +186,21 @@ The smallest next action is now the frozen nonformal dual-source screen in
 both preservation of G17 conditional access and acquisition of the G18 delayed
 battery mechanism before any formal contract is prepared. This algebra action
 and its bounded screen consume zero conclusion-bearing iterations.
+
+## Dual-source screen disposition
+
+The exact raw-sum screen completed operationally but selected
+`NONFORMAL_NO_G17_COMPATIBILITY_SEPARATED_CREDIT_G18`. G17 held-out utility was
+`0.63199`; effort and mix correlations were `-0.23714` and `0.04159`. G18
+utility was `0.83639`, spike utility `0.50446`, and rotating low-phase effort
+share `0.43389`. The candidate is retired without tuning.
+
+The next smallest correction keeps the same two residuals but normalizes their
+actor losses separately before fixed equal-weight composition. This directly
+tests channel-scale interference without changing the source, credit inputs,
+seeds, budget, thresholds or UAV boundary.
+
+The channel-normalized algebra passed eleven focused tests, including exact
+invariance to independent positive rescaling of either advantage channel. Its
+bounded paired screen is frozen in
+`docs/research/designs/CHANNEL_NORMALIZED_SEPARATED_CREDIT_G18.md`.

@@ -10,6 +10,7 @@ from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
     compute_separated_credit,
     evaluate_battery_policy,
+    normalize_advantage_channel,
     optimize_separated_update,
     replay_separated_trajectory,
     separated_replay_errors,
@@ -282,6 +283,24 @@ def test_dual_source_result_precedence_is_first_match() -> None:
     assert screen.select_result_branch(
         passing | {"operational_valid": False}
     ) == screen.INVALID_BRANCH
+
+
+def test_credit_channels_are_normalized_independently_of_their_scale() -> None:
+    immediate = torch.tensor([[1.0, 4.0], [2.0, -3.0], [8.0, 0.5]])
+    successor = torch.tensor([[0.2, -0.4], [1.5, 0.1], [-0.2, 0.8]])
+
+    torch.testing.assert_close(
+        normalize_advantage_channel(immediate),
+        normalize_advantage_channel(1000.0 * immediate),
+        rtol=1e-6,
+        atol=1e-6,
+    )
+    torch.testing.assert_close(
+        normalize_advantage_channel(successor),
+        normalize_advantage_channel(0.01 * successor),
+        rtol=1e-6,
+        atol=1e-6,
+    )
 
 
 def test_one_update_training_helper_closes_checkpoint_and_contract(tmp_path) -> None:

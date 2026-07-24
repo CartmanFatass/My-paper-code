@@ -100,3 +100,11 @@ hyperparameter rescue. The screen is not conclusion-bearing and consumes no
 iteration.
 
 Runner: `scripts/screen_fast_slow_separated_credit_g18.py`.
+
+## Screen disposition
+
+The exact screen at source commit `963ac812fe856d08c9865b04c4a4c7af03f1783a`
+completed operationally with zero replay error and selected
+`NONFORMAL_NO_G17_COMPATIBILITY_SEPARATED_CREDIT_G18`. The raw-sum candidate is
+retired without tuning. Its durable result is recorded in
+`20260724_FAST_SLOW_SEPARATED_CREDIT_G18_SCREEN.md`.
