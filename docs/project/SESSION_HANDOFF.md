@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S4_PRO_RECEIPT_VALID_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED`
+Status: `S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION_ACTIVE`
 
 ## Resume authority
 
@@ -24,8 +24,9 @@ Status: `S4_PRO_RECEIPT_VALID_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED`
   `de15c718733d0641d857a1e3bfbdc90493f96005`.
 - Immutable S4 evidence commit:
   `e619437c78b856ea6f24929a359853ac6de30d4e`.
-- The current working tree intentionally contains the immutable S4 submission
-  receipt and this exact transport-blocker transition. The S4 raw is absent.
+- The S4 receipt and raw are archived; validator state is `ALREADY_ARCHIVED`.
+- The current working tree intentionally contains the factual S4 intake and
+  Controller-frozen S5 derivation contract.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
 
@@ -148,26 +149,31 @@ equally capable constructive comparator.
 The Chinese report is
 `docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_4.md`. The PASS establishes only
 exact horizon-2 sequential controlled-state and active-lifetime identification
-on the frozen source. Iteration 4 is consumed; six remain and iteration 5 is
-unselected.
+on the frozen source. External Pro accepted the PASS; iteration 4 is consumed,
+six remain, and exactly one derivation-only iteration-5 action is selected.
 
-## S4 external-review blocker
+## S4 result review and S5 direction
 
-The canonical S4 receipt is `SUBMISSION_CONFIRMED`, SHA-256
+The immutable S4 receipt SHA-256 is
 `183d6b8dae856b351d4e7b516e691c6db19ff92bc83227d0cb3fab2240de4c59`.
-It forbids resubmission.
+The archived raw SHA-256 is
+`dcd4fe41dbb0bcacb14c47d1d4f8c5160600fe95f2ff5103102ecd9d0c5c8add`.
+The normalized stable marked-response SHA-256 is
+`26105d7a135ae27dd8691e755ab3da77983c256cc6d005beaeae6d494e954da9`.
+The round validates `ALREADY_ARCHIVED`; no resubmission or further browser work
+belongs to S4.
 
-The S4 user turn was visible immediately after the one Enter-only submission
-and the Pro turn generated for more than twenty minutes. Subsequent fresh
-snapshots and one same-URL reload exposed only older persisted S2/S3 turns:
-neither the canonical S4 user dispatch nor a completed S4 assistant response
-with matching markers was present. No stale `Copy response` control was clicked
-and no raw was archived.
+The accepted external decision retains `PASS_ALSCPS_FUTURE_CLOSED_DERIVATION`
+strictly at the frozen horizon-2 scope. It selects exactly
+`S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION`, with no code, compute,
+prototype, experiment, Monitor or resource authorization.
 
-Resume only from the existing receipt. Reconcile the same registered URL after
-the service restores the S4 turn; require the exact canonical S4 user turn and
-completed marked assistant response before stable capture/copy/archive. No new
-round, composer action or resubmission is allowed.
+S5 retains the S1–S4 source and current controlled behavior `b=R`, then adds the
+next-active cue target `D_n=C_{n+1}`. At age 1 the next-cue probability is
+`1/2`; after the legal script-32 age-2 no-cue observation it is `1`, while
+current behavior remains unchanged. The required signature is
+`TV_behavior=0`, `TV_phase=1/2`, with a legal online projection that updates
+predictive phase without resetting behavioral lifetime.
 
 ## Remaining chain
 

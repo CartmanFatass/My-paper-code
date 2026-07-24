@@ -33,6 +33,13 @@
 | L-SEQUENTIAL-CLOSURE-REQUIRES-FUTURE-KERNELS | Equality of immediate controlled observations need not imply equality of delayed controlled futures. | Exact S4 source with fair `Y1` and regime-dependent `Y2`. | Horizon two is sufficient for every environment. |
 | L-UPDATE-CONGRUENCE | A predictive quotient is an admissible persistent lifecycle state only if one common online update maps current quotient class and legal current observation to the next class. | Sequential controlled predictive-state definitions. | Every update-congruent state is useful or uniquely learnable. |
 
+### Pending S5 proposition — L-PREDICTIVE-PHASE-NOT-SKILL-BOUNDARY
+
+A predictive-state update caused only by new transition-phase information need
+not be a current behavioral skill boundary. This is registered for
+`S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION` and is not a retained
+lemma before a valid S5 terminal.
+
 ## Counterexamples
 
 ### CE-RANDOM-USE
@@ -210,3 +217,24 @@ uses future information and cannot support an online lifetime claim.
 A partition may summarize current predictions yet fail to admit one common
 online update under the same legal observation, so it is not a persistent
 lifecycle state.
+
+## Registered S5 counterexample candidates
+
+These candidates are selected for the exact S5 derivation and are not accepted
+results before its first valid terminal.
+
+### CE-NO-CUE-INFORMATIONAL-STATE-UPDATE
+
+A legally observed absence of a cue can resolve hidden transition phase and
+change the next-active prediction law while leaving current controlled behavior
+unchanged.
+
+### CE-MONOLITHIC-PREDICTIVE-STATE-OVERSEGMENTATION
+
+Defining every predictive-state class change as a skill boundary can split one
+constant behavioral segment into multiple apparent lifetimes.
+
+### CE-PHASE-AS-SKILL
+
+A state useful for predicting when a future transition occurs is not
+automatically the current executable behavioral skill state.

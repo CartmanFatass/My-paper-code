@@ -25,7 +25,7 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor',
     'iterations_remaining=6_authorized',
     'conclusion_bearing_iterations_consumed=4_on_claude',
-    'formal_compute_status=not_started_no_iteration_5_compute_selected',
+    'formal_compute_status=not_started_s5_no_compute_selected',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
     'agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive',
@@ -34,7 +34,7 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
     'k_decoupling_current_result=PASS_ALSCPS_FUTURE_CLOSED_DERIVATION',
-    'k_next_legal_route=RETURN_S4_EXACT_RESULT_TO_REGISTERED_PRO',
+    'k_next_legal_route=COMPLETE_S5_PHASE_LIFETIME_CONFOUND_DERIVATION',
     's2_result_status=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
     'external_review_transport_status=ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT',
     'external_review_operator_agent=hmasd-exchange-review',
@@ -43,11 +43,11 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'browsermcp_direct_launcher=.omp/browsermcp-direct/start_browsermcp_direct.ps1',
     'browsermcp_direct_timeout_ms=120000',
     'browsermcp_direct_implicit_type_snapshot=removed',
-    'browsermcp_direct_live_status=S4_RECEIPT_VALID_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED',
-    'active_assignment_id=S4_ALSCPS_RESULT_EXTERNAL_REVIEW',
-    'next_boundary=RECOVER_EXISTING_S4_RECEIPT_RESPONSE_IDENTITY_NO_RESUBMIT',
-    'next_action_class=resume_existing_browser_pro_response_identity_then_copy_archive',
-    'active_scientific_direction=C_ALSCPS_RESULT_AWAITING_EXTERNAL_PRO',
+    'browsermcp_direct_live_status=S4_ARCHIVE_COMPLETE_CONTROLLER_INTAKE_ACCEPTED',
+    'active_assignment_id=S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION',
+    'next_boundary=COMPLETE_EXACT_S5_DERIVATION_THEN_RETURN_TO_PRO',
+    'next_action_class=exact_derivation_and_counterexample',
+    'active_scientific_direction=C_ALBPF_PHASE_CONFOUND_TEST',
     's2_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
     's3_result_status=PASS_ALCPS_CONTROLLED_STATE_DERIVATION',
     's3_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
@@ -56,9 +56,10 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     's4_horizon2_tv_each_plan=1_over_2',
     's4_write_rate=2_over_7',
     's4_decoder_kernel_cardinality=2',
-    's4_result_review_status=SUBMISSION_CONFIRMED_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED',
-    's4_result_review_raw=absent',
-    's4_result_review_resubmission=forbidden')) {
+    's4_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
+    's4_result_review_raw_sha256=dcd4fe41dbb0bcacb14c47d1d4f8c5160600fe95f2ff5103102ecd9d0c5c8add',
+    's5_code_required=false',
+    's5_compute_required=false')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -161,13 +162,15 @@ foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
         throw "Accepted S3 result round is missing $required"
     }
 }
-$submittedS4Round = Join-Path $repo 'docs/external-review/rounds/20260724_alscps_s4_result_review'
-if (-not (Test-Path (Join-Path $submittedS4Round '19_BROWSER_PRO_SUBMISSION.json') -PathType Leaf) -or
-    (Test-Path (Join-Path $submittedS4Round '21_PRO_OPEN_RAW.md') -PathType Leaf)) {
-    throw 'Submitted S4 result round receipt/raw state changed'
+$acceptedS4Round = Join-Path $repo 'docs/external-review/rounds/20260724_alscps_s4_result_review'
+foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
+    '30_EVIDENCE_RECONCILIATION.md')) {
+    if (-not (Test-Path (Join-Path $acceptedS4Round $required) -PathType Leaf)) {
+        throw "Accepted S4 result round is missing $required"
+    }
 }
-if (-not $currentWork.Contains('browser_pro_round_state=RESUME_SUBMITTED_S4_RESPONSE_IDENTITY_NOT_PERSISTED_BLOCKED')) {
-    throw 'CURRENT_WORK submitted S4 result round state changed'
+if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED_S4_RESULT')) {
+    throw 'CURRENT_WORK accepted S4 result round state changed'
 }
 foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md',
@@ -179,7 +182,8 @@ foreach ($required in @(
     'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_3.md',
     'docs/research/cdc/EVIDENCE_NOTES/20260724_ALCPS_S3_RESULT_AND_ALSCPS_S4_DIRECTION.md',
     'docs/research/cdc/EVIDENCE_NOTES/20260724_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_S4.md',
-    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_4.md')) {
+    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_4.md',
+    'docs/research/cdc/EVIDENCE_NOTES/20260724_ALSCPS_S4_RESULT_AND_PHASE_CONFOUND_S5_DIRECTION.md')) {
     if (-not (Test-Path (Join-Path $repo $required) -PathType Leaf)) {
         throw "Conclusion boundary is missing $required"
     }

@@ -157,8 +157,8 @@ the Project Manager-accepted CDC state.
 
 ## C-ALSCPS — Agent-local sequential controlled predictive state
 
-- Status: exact S4 horizon-2 derivation PASS; implementation and compute remain
-  unauthorized pending external Pro review.
+- Status: accepted exact S4 derivation PASS at the registered horizon-2 scope;
+  implementation and compute remain unauthorized.
 - Supported claim: on the frozen source, the coarsest minimum-transition
   quotient sufficient for all four horizon-2 controlled sequence kernels is
   update-congruent and has active-step lifetimes `{2,3}`.
@@ -170,8 +170,30 @@ the Project Manager-accepted CDC state.
   natural-value or transport benefit is established.
 - Refuted proposition: equality of immediate controlled observations is
   sufficient for equality of delayed controlled futures.
-- Natural, learned and held-out consequences: not established. Any successor
-  requires a new Pro-selected contract.
+- Scope ceiling: `FUTURE_CLOSED` means only the frozen horizon-2 query family;
+  arbitrary-horizon, natural-future, learned and held-out consequences remain
+  unestablished.
+- Main unresolved counterexample: a generic predictive-phase update may occur
+  inside a constant current-behavior segment.
+
+## C-ALBPF — Agent-local behavioral / predictive-phase factorization
+
+- Status: live correction candidate selected only for the exact S5 predictive-
+  phase/skill-lifetime confound derivation; no implementation or compute is
+  authorized.
+- Claim: current action-relevant behavior and generic transition phase may
+  require separate lifecycle projections so an information-only phase update
+  does not reset behavioral skill lifetime.
+- Exact selected witness: age 1 and the legal script-32 age-2 no-cue history
+  have identical current controlled behavior (`TV_behavior=0`) but next-active
+  cue laws separated by `TV_phase=1/2`.
+- Strongest simpler explanation: G8 recurrence stores both objects without an
+  explicit factorization.
+- Intervention consequence: changing predictive phase alone changes the
+  transition law but not the current controlled action kernel; changing
+  behavioral state changes current behavior.
+- Natural consequence: a legal no-cue may update phase while behavior persists.
+- Held-out, learned, architectural and policy consequences: not established.
 
 
 ## C-JRDM — Jointly rate-coded dual memory
