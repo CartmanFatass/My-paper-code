@@ -8,14 +8,14 @@ last_nonformal=PREFIX_CONTEXTUAL_RESIDUAL_EXPRESSIVITY_G26
 last_nonformal_result=NO_POINTWISE_PREFIX_CONTEXTUAL_FIT_G26
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_BOUNDED_SCREEN
+active_implementation=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27_REPAIRED_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g27
-algebra_status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
+algebra_status=OPERATIONAL_REPAIR_ACCEPTED_RERUN_NEXT
 screen_contract=docs/research/designs/IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27.md
 ```
 
@@ -241,3 +241,21 @@ proofs, 36 tests pass on CPU with one thread. The G26 module, runner, test and
 now-unused routed-hook arguments are removed from the active line. The only
 next action is the integrated paired G27 screen; formal and UAV compute remain
 unscheduled unless its promising branch is selected.
+
+The first integrated screen produced no admissible scientific branch because
+float32 casting left the mathematically zero conflict-projection dot at
+`-1.64565e-6`, below the frozen `-1e-7` runtime bound. Finite updates, replay,
+lifecycle, optimizer ownership and zero residual all passed. Repair only the
+CPU numerical realization: form the projection in float64, cast to actor dtype,
+then use the minimum one-coordinate float-lattice correction if casting lands
+outside the closed half-space. Keep the bound, gradient weights, budgets,
+seeds, gates and branch order unchanged; add the exact reproducer and rerun the
+same bounded screen from a fresh integrated source. The invalid artifact costs
+zero conclusion-bearing iterations.
+
+The fixed-seed 100-coordinate reproducer confirms that the old float32
+realization leaves a negative dot below `-1e-7`, while the repaired projection
+returns to the closed half-space with a positive, minimal lattice correction.
+Seven focused and 37 combined G17/G18/G19/G27 tests pass on CPU with one thread.
+The exact next action is one fresh integrated rerun; no gate or scientific
+parameter changed.

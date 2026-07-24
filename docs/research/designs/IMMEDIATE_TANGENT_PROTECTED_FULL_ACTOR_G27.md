@@ -1,7 +1,7 @@
 # Immediate-tangent protected full actor G27
 
 ```text
-status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
+status=OPERATIONAL_REPAIR_ACCEPTED_RERUN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -41,6 +41,13 @@ one-way full-actor gradient projection is a new optimization rule.
    not reach actor tensors.
 4. Residual output remains exact zero while full actor parameters move.
 5. Replay/lifecycle/inactive and first-match result semantics are retained.
+
+The CPU realization evaluates projection dot products and norms in float64.
+After casting the mathematically projected rows to the actor gradient dtype, a
+negative rounding remnant receives the minimum one-coordinate representable
+correction needed to re-enter the closed tangent half-space. This is an
+execution-only realization of the same projection; it does not relax the
+`-1e-7` acceptance bound or change either channel's scientific weight.
 
 After focused acceptance, run one integrated paired nonformal screen. Formal
 compute remains unscheduled unless the promising branch is selected.

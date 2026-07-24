@@ -269,6 +269,7 @@ def _train_source(source: str) -> dict[str, Any]:
     )
     minimum_projection_dot = float("inf")
     maximum_identity_error = 0.0
+    maximum_lattice_correction = 0.0
     projection_conflict_passes = 0.0
     for update in range(tangent_updates):
         first_episode = (fast_updates + update) * NUM_ENVS
@@ -297,6 +298,10 @@ def _train_source(source: str) -> dict[str, Any]:
         maximum_identity_error = max(
             maximum_identity_error,
             float(metrics["maximum_applied_gradient_identity_error"]),
+        )
+        maximum_lattice_correction = max(
+            maximum_lattice_correction,
+            float(metrics["maximum_projection_lattice_correction"]),
         )
         projection_conflict_passes += (
             float(metrics["projection_conflict"]) * PPO_PASSES
@@ -337,6 +342,9 @@ def _train_source(source: str) -> dict[str, Any]:
         "minimum_projection_post_dot": float(minimum_projection_dot),
         "maximum_applied_gradient_identity_error": float(
             maximum_identity_error
+        ),
+        "maximum_projection_lattice_correction": float(
+            maximum_lattice_correction
         ),
         "projection_conflict_passes": float(projection_conflict_passes),
         "zero_evaluation": zero_evaluation,

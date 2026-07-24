@@ -14,6 +14,7 @@ from ha_ctse_process.immediate_tangent_full_actor_g27 import (
     ImmediateTangentProtectedFullActorPolicy,
     compose_tangent_protected_gradients,
     optimize_tangent_protected_update,
+    project_successor_to_immediate_tangent,
 )
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
 from scripts import screen_immediate_tangent_full_actor_g27 as screen
@@ -113,6 +114,24 @@ def test_tangent_composition_preserves_aligned_and_projects_conflict() -> None:
         rtol=0,
         atol=0,
     )
+
+
+def test_float32_projection_closes_the_registered_half_space() -> None:
+    torch.manual_seed(0)
+    immediate = torch.randn(100)
+    successor = -0.3 * immediate + torch.randn(100)
+    parameter = torch.nn.Parameter(torch.zeros(100))
+    from ha_ctse_process.anchored_residual_g19 import project_delayed_gradients
+
+    assert project_delayed_gradients(
+        (successor,), (immediate,), (parameter,)
+    ).post_dot < -1e-7
+    projection = project_successor_to_immediate_tangent(
+        (successor,), (immediate,), (parameter,)
+    )
+    assert projection.conflict is True
+    assert projection.post_dot >= 0.0
+    assert projection.lattice_correction > 0.0
 
 
 def test_tangent_update_moves_actor_but_not_residual_or_core_critic() -> None:

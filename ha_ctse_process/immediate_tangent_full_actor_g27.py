@@ -15,7 +15,6 @@ from ha_ctse_process.anchored_residual_g19 import (
     FastAnchoredResidualPolicy,
     _channel_policy_loss,
     compute_anchored_credit,
-    project_delayed_gradients,
     replay_errors,
     replay_trajectory,
 )
@@ -29,6 +28,125 @@ class TangentGradientComposition:
     post_dot: float
     conflict: bool
     identity_error: float
+    lattice_correction: float
+
+
+@dataclass(frozen=True)
+class TangentProjection:
+    gradients: tuple[torch.Tensor, ...]
+    pre_dot: float
+    post_dot: float
+    conflict: bool
+    lattice_correction: float
+
+
+def _gradient_dot(
+    left: tuple[torch.Tensor, ...], right: tuple[torch.Tensor, ...]
+) -> torch.Tensor:
+    return sum(
+        (left_row.to(torch.float64) * right_row.to(torch.float64)).sum()
+        for left_row, right_row in zip(left, right)
+    )
+
+
+def project_successor_to_immediate_tangent(
+    successor: tuple[torch.Tensor | None, ...],
+    immediate: tuple[torch.Tensor | None, ...],
+    parameters: tuple[nn.Parameter, ...],
+) -> TangentProjection:
+    """Return the nearest representable one-way tangent projection.
+
+    The algebra is evaluated in float64, then converted to each parameter's
+    gradient dtype. If that conversion lands just outside the closed
+    half-space, one coordinate receives the minimum float32-lattice repair.
+    """
+
+    if not (
+        len(successor) == len(immediate) == len(parameters)
+    ) or not parameters:
+        raise ValueError("G27 gradient projection inventory mismatch")
+    successor_rows = tuple(
+        torch.zeros_like(parameter) if row is None else row
+        for row, parameter in zip(successor, parameters)
+    )
+    immediate_rows = tuple(
+        torch.zeros_like(parameter) if row is None else row
+        for row, parameter in zip(immediate, parameters)
+    )
+    if any(
+        row.shape != parameter.shape or not bool(torch.isfinite(row).all())
+        for rows in (successor_rows, immediate_rows)
+        for row, parameter in zip(rows, parameters)
+    ):
+        raise ValueError("G27 gradient projection received invalid rows")
+    dot = _gradient_dot(successor_rows, immediate_rows)
+    immediate_norm = _gradient_dot(immediate_rows, immediate_rows)
+    conflict = bool(dot.detach() < 0.0 and immediate_norm.detach() > 0.0)
+    if conflict:
+        coefficient = dot / immediate_norm
+        applied = tuple(
+            (
+                left.to(torch.float64)
+                - coefficient * right.to(torch.float64)
+            ).to(left.dtype)
+            for left, right in zip(successor_rows, immediate_rows)
+        )
+    else:
+        applied = successor_rows
+    post = _gradient_dot(applied, immediate_rows)
+    lattice_correction = 0.0
+    if conflict and bool(post.detach() < 0.0):
+        row_index, flat_index = max(
+            (
+                (
+                    row_index,
+                    int(row.detach().abs().reshape(-1).argmax().cpu()),
+                )
+                for row_index, row in enumerate(immediate_rows)
+                if row.numel()
+            ),
+            key=lambda item: float(
+                immediate_rows[item[0]].detach().abs().reshape(-1)[
+                    item[1]
+                ].cpu()
+            ),
+        )
+        repaired_rows = list(applied)
+        repaired = repaired_rows[row_index].clone()
+        repaired_flat = repaired.reshape(-1)
+        immediate_value = immediate_rows[row_index].reshape(-1)[flat_index]
+        original_value = repaired_flat[flat_index].clone()
+        required_delta = (-post / immediate_value.to(torch.float64)).to(
+            repaired.dtype
+        )
+        repaired_flat[flat_index] = original_value + required_delta
+        direction = torch.full_like(
+            repaired_flat[flat_index],
+            float("inf") if float(immediate_value.detach().cpu()) > 0.0 else -float("inf"),
+        )
+        repaired_rows[row_index] = repaired
+        applied = tuple(repaired_rows)
+        post = _gradient_dot(applied, immediate_rows)
+        if bool(post.detach() < 0.0):
+            repaired_flat[flat_index] = torch.nextafter(
+                repaired_flat[flat_index], direction
+            )
+            post = _gradient_dot(applied, immediate_rows)
+        if bool(post.detach() < 0.0):
+            raise RuntimeError("G27 could not close the float gradient half-space")
+        lattice_correction = float(
+            (repaired_flat[flat_index] - original_value)
+            .detach()
+            .abs()
+            .cpu()
+        )
+    return TangentProjection(
+        gradients=applied,
+        pre_dot=float(dot.detach().cpu()),
+        post_dot=float(post.detach().cpu()),
+        conflict=conflict,
+        lattice_correction=lattice_correction,
+    )
 
 
 def compose_tangent_protected_gradients(
@@ -38,7 +156,9 @@ def compose_tangent_protected_gradients(
 ) -> TangentGradientComposition:
     """Average immediate credit with successor credit after one-way projection."""
 
-    projection = project_delayed_gradients(successor, immediate, parameters)
+    projection = project_successor_to_immediate_tangent(
+        successor, immediate, parameters
+    )
     immediate_rows = tuple(
         torch.zeros_like(parameter) if row is None else row
         for row, parameter in zip(immediate, parameters)
@@ -64,6 +184,7 @@ def compose_tangent_protected_gradients(
         post_dot=projection.post_dot,
         conflict=projection.conflict,
         identity_error=identity_error,
+        lattice_correction=projection.lattice_correction,
     )
 
 
@@ -151,9 +272,11 @@ def optimize_tangent_protected_update(
             "projection_pre_dot",
             "projection_post_dot",
             "projection_conflict",
+            "projection_lattice_correction",
         )
     }
     maximum_identity_error = 0.0
+    maximum_lattice_correction = 0.0
     minimum_projection_post_dot = float("inf")
     finite = True
     model.train()
@@ -240,6 +363,9 @@ def optimize_tangent_protected_update(
         maximum_identity_error = max(
             maximum_identity_error, composition.identity_error
         )
+        maximum_lattice_correction = max(
+            maximum_lattice_correction, composition.lattice_correction
+        )
         totals["policy_loss"] += float(policy_loss.detach().cpu())
         totals["immediate_policy_loss"] += float(
             immediate_policy_loss.detach().cpu()
@@ -263,6 +389,9 @@ def optimize_tangent_protected_update(
         totals["projection_pre_dot"] += composition.pre_dot
         totals["projection_post_dot"] += composition.post_dot
         totals["projection_conflict"] += float(composition.conflict)
+        totals["projection_lattice_correction"] += (
+            composition.lattice_correction
+        )
     for name in totals:
         totals[name] /= float(ppo_passes)
     totals.update(errors)
@@ -273,6 +402,9 @@ def optimize_tangent_protected_update(
     )
     totals["maximum_applied_gradient_identity_error"] = float(
         maximum_identity_error
+    )
+    totals["maximum_projection_lattice_correction"] = float(
+        maximum_lattice_correction
     )
     totals["finite_update"] = float(finite)
     totals["optimizer_steps"] = float(2 * ppo_passes)
