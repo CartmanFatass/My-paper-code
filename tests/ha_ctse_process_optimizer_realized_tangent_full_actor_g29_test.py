@@ -1,28 +1,30 @@
 from __future__ import annotations
 
+import pytest
 import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
 from ha_ctse_process import delayed_battery_roster_g18 as battery_source
-from ha_ctse_process import net_immediate_descent_full_actor_g28 as g28_source
+from ha_ctse_process import optimizer_realized_tangent_full_actor_g29 as g29_source
 from ha_ctse_process.anchored_residual_g19 import (
+    GRADIENT_CLIP,
     attach_credit_baselines,
     maximum_state_difference,
     replay_errors,
     replay_trajectory,
 )
-from ha_ctse_process.net_immediate_descent_full_actor_g28 import (
-    NetImmediateDescentFullActorPolicy,
-    compose_net_immediate_descent_gradients,
-    optimize_net_immediate_descent_update,
-    project_successor_for_net_immediate_descent,
+from ha_ctse_process.optimizer_realized_tangent_full_actor_g29 import (
+    OptimizerRealizedTangentFullActorPolicy,
+    apply_optimizer_realized_tangent_step,
+    optimize_optimizer_realized_tangent_update,
+    project_realized_parameters,
 )
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from scripts import screen_net_immediate_descent_full_actor_g28 as screen
+from scripts import screen_optimizer_realized_tangent_full_actor_g29 as screen
 
 
-def _battery_model() -> NetImmediateDescentFullActorPolicy:
-    model = NetImmediateDescentFullActorPolicy(
+def _battery_model() -> OptimizerRealizedTangentFullActorPolicy:
+    model = OptimizerRealizedTangentFullActorPolicy(
         battery_source.OBSERVATION_DIM,
         battery_source.CRITIC_STATE_DIM,
         member_capacity=battery_source.CAPACITY,
@@ -38,6 +40,19 @@ def _state(parameters: tuple[torch.nn.Parameter, ...]) -> dict[str, torch.Tensor
     return {
         str(index): parameter.detach().clone()
         for index, parameter in enumerate(parameters)
+    }
+
+
+def _adam_state(
+    optimizer: torch.optim.Adam, parameter: torch.nn.Parameter
+) -> dict[str, torch.Tensor | float]:
+    return {
+        name: (
+            value.detach().clone()
+            if isinstance(value, torch.Tensor)
+            else float(value)
+        )
+        for name, value in optimizer.state[parameter].items()
     }
 
 
@@ -61,7 +76,7 @@ def test_full_actor_inventory_is_exact_and_disjoint() -> None:
     ):
         assert any(name.startswith(prefix) for name in names)
 
-    model.begin_net_descent_phase()
+    model.begin_realized_tangent_phase()
     actor = {id(row) for row in model.full_actor_parameters()}
     critic = {id(row) for row in model.critic_parameters()}
     residual = {id(row) for row in model.residual_parameters()}
@@ -73,146 +88,133 @@ def test_full_actor_inventory_is_exact_and_disjoint() -> None:
     assert all(not row.requires_grad for row in model.policy.critic.parameters())
 
 
-def test_net_descent_retains_tolerable_conflict_and_projects_excess() -> None:
-    parameter = torch.nn.Parameter(torch.zeros(2))
-    conflict = compose_net_immediate_descent_gradients(
-        (torch.tensor([1.0, 0.0]),),
-        (torch.tensor([-2.0, 3.0]),),
-        (parameter,),
-    )
-    assert conflict.conflict is True
-    torch.testing.assert_close(
-        conflict.successor_gradients[0],
-        torch.tensor([-1.0, 3.0]),
-        rtol=0,
-        atol=0,
-    )
-    torch.testing.assert_close(
-        conflict.gradients[0],
-        torch.tensor([0.0, 1.5]),
-        rtol=0,
-        atol=0,
-    )
-    assert conflict.pre_dot == -0.5
-    assert conflict.post_dot == 0.0
-    assert conflict.identity_error == 0.0
+def test_realized_projection_closes_at_first_float_lattice_point() -> None:
+    torch.manual_seed(0)
+    before = torch.randn(1000)
+    immediate = torch.randn(1000)
+    displacement = -2.0 * immediate + torch.randn(1000)
+    proposed_after = before - displacement
+    parameter = torch.nn.Parameter(before.clone())
 
-    tolerable = compose_net_immediate_descent_gradients(
-        (torch.tensor([1.0, 0.0]),),
-        (torch.tensor([-0.5, 3.0]),),
-        (parameter,),
-    )
-    assert tolerable.conflict is False
-    torch.testing.assert_close(
-        tolerable.successor_gradients[0],
-        torch.tensor([-0.5, 3.0]),
-        rtol=0,
-        atol=0,
-    )
-    torch.testing.assert_close(
-        tolerable.gradients[0],
-        torch.tensor([0.25, 1.5]),
-        rtol=0,
-        atol=0,
+    projection = project_realized_parameters(
+        (before,), (proposed_after,), (immediate,), (parameter,)
     )
 
-
-def test_float32_projection_closes_the_registered_half_space() -> None:
-    torch.manual_seed(3)
-    immediate = torch.randn(100)
-    successor = -2.0 * immediate + torch.randn(100)
-    parameter = torch.nn.Parameter(torch.zeros(100))
-    norm = (immediate.to(torch.float64) ** 2).sum()
-    dot = (
-        successor.to(torch.float64) * immediate.to(torch.float64)
-    ).sum()
-    coefficient = (-norm - dot) / norm
-    raw_successor = (
-        successor.to(torch.float64)
-        + coefficient * immediate.to(torch.float64)
-    ).to(torch.float32)
-    raw_post = (
-        (0.5 * (immediate + raw_successor)).to(torch.float64)
-        * immediate.to(torch.float64)
-    ).sum()
-    assert float(raw_post) < -1e-7
-    projection = project_successor_for_net_immediate_descent(
-        (successor,), (immediate,), (parameter,)
-    )
     assert projection.conflict is True
+    assert projection.pre_dot < 0.0
     assert projection.post_dot >= 0.0
     assert projection.lattice_correction > 0.0
-
-
-def test_high_dimensional_float32_projection_repeats_residual_closure() -> None:
-    torch.manual_seed(73)
-    immediate = torch.randn(1000)
-    successor = -2.0 * immediate + torch.randn(1000)
-    parameter = torch.nn.Parameter(torch.zeros(1000))
-    norm = (immediate.to(torch.float64) ** 2).sum()
-    dot = (
-        successor.to(torch.float64) * immediate.to(torch.float64)
-    ).sum()
-    coefficient = (-norm - dot) / norm
-    raw_successor = (
-        successor.to(torch.float64)
-        + coefficient * immediate.to(torch.float64)
-    ).to(torch.float32)
-    raw_combined = 0.5 * (immediate + raw_successor)
-    raw_post = (
-        raw_combined.to(torch.float64) * immediate.to(torch.float64)
-    ).sum()
     coordinate = int(immediate.abs().argmax())
-    one_shot = raw_successor.clone()
-    one_shot[coordinate] = one_shot[coordinate] + (
-        -2.0 * raw_post / immediate[coordinate].to(torch.float64)
-    ).to(torch.float32)
-    one_shot_post = (
-        (0.5 * (immediate + one_shot)).to(torch.float64)
-        * immediate.to(torch.float64)
-    ).sum()
-    if float(one_shot_post) < 0.0:
-        direction = torch.full_like(
-            one_shot[coordinate],
+    predecessor = projection.parameters[0].clone()
+    predecessor[coordinate] = torch.nextafter(
+        predecessor[coordinate],
+        torch.full_like(
+            predecessor[coordinate],
             (
                 float("inf")
                 if float(immediate[coordinate]) > 0.0
                 else -float("inf")
             ),
-        )
-        one_shot[coordinate] = torch.nextafter(
-            one_shot[coordinate], direction
-        )
-        one_shot_post = (
-            (0.5 * (immediate + one_shot)).to(torch.float64)
-            * immediate.to(torch.float64)
-        ).sum()
-    assert float(one_shot_post) < 0.0
-
-    projection = project_successor_for_net_immediate_descent(
-        (successor,), (immediate,), (parameter,)
+        ),
     )
-    assert projection.conflict is True
-    assert projection.post_dot >= 0.0
-    assert projection.lattice_correction > 0.0
+    predecessor_dot = (
+        (before - predecessor).to(torch.float64)
+        * immediate.to(torch.float64)
+    ).sum()
+    assert float(predecessor_dot) < 0.0
+
+    invalid = immediate.clone()
+    invalid[0] = float("nan")
+    with pytest.raises(ValueError, match="invalid actor gradients"):
+        project_realized_parameters(
+            (before,), (proposed_after,), (invalid,), (parameter,)
+        )
 
 
-def test_net_descent_update_moves_actor_but_not_residual_or_core_critic(
-    monkeypatch,
+def test_nonconflicting_step_is_bitwise_ordinary_adam() -> None:
+    realized_parameter = torch.nn.Parameter(torch.zeros(2))
+    ordinary_parameter = torch.nn.Parameter(torch.zeros(2))
+    realized_optimizer = torch.optim.Adam((realized_parameter,), lr=1e-2)
+    ordinary_optimizer = torch.optim.Adam((ordinary_parameter,), lr=1e-2)
+    immediate = (torch.tensor([1.0, 1.0]),)
+    successor = (torch.tensor([1.0, 1.0]),)
+
+    step = apply_optimizer_realized_tangent_step(
+        realized_optimizer,
+        (realized_parameter,),
+        immediate,
+        successor,
+    )
+    ordinary_optimizer.zero_grad(set_to_none=True)
+    ordinary_parameter.grad = torch.tensor([1.0, 1.0])
+    torch.nn.utils.clip_grad_norm_((ordinary_parameter,), GRADIENT_CLIP)
+    ordinary_optimizer.step()
+
+    assert step.conflict is False
+    assert step.pre_dot > 0.0
+    assert step.post_dot == step.pre_dot
+    assert step.parameter_identity_error == 0.0
+    torch.testing.assert_close(
+        realized_parameter, ordinary_parameter, rtol=0, atol=0
+    )
+    realized_state = _adam_state(realized_optimizer, realized_parameter)
+    ordinary_state = _adam_state(ordinary_optimizer, ordinary_parameter)
+    assert realized_state.keys() == ordinary_state.keys()
+    for name in realized_state:
+        left = realized_state[name]
+        right = ordinary_state[name]
+        if isinstance(left, torch.Tensor):
+            assert isinstance(right, torch.Tensor)
+            torch.testing.assert_close(left, right, rtol=0, atol=0)
+        else:
+            assert left == right
+
+
+def test_momentum_counterexample_projects_actual_step_once() -> None:
+    parameter = torch.nn.Parameter(torch.zeros(2))
+    optimizer = torch.optim.Adam((parameter,), lr=0.1)
+    for _ in range(5):
+        optimizer.zero_grad(set_to_none=True)
+        parameter.grad = torch.tensor([-10.0, 0.0])
+        optimizer.step()
+    before = parameter.detach().clone()
+    step_before = float(optimizer.state[parameter]["step"])
+    immediate = (torch.tensor([1.0, 0.0]),)
+    successor = (torch.tensor([1.0, 0.0]),)
+    raw_combined_dot = float((immediate[0] * immediate[0]).sum())
+
+    step = apply_optimizer_realized_tangent_step(
+        optimizer, (parameter,), immediate, successor
+    )
+
+    assert raw_combined_dot > 0.0
+    assert step.pre_dot < 0.0
+    assert step.conflict is True
+    assert step.post_dot >= 0.0
+    assert float(optimizer.state[parameter]["step"]) == step_before + 1.0
+    actual_dot = float(
+        ((before - parameter).to(torch.float64) * immediate[0]).sum()
+    )
+    assert actual_dot >= 0.0
+    assert step.optimizer_step_increment == 1.0
+
+
+def test_realized_tangent_update_moves_only_owned_parameters(
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    torch.manual_seed(2719000)
+    torch.manual_seed(2919000)
     model = _battery_model()
     trajectory = collect_battery_trajectory(
         model,
         episode_ids=(0, 1),
-        action_seed=2739000,
+        action_seed=2939000,
         device=torch.device("cpu"),
     )
     actor_before = _state(model.full_actor_parameters())
     residual_before = _state(model.residual_parameters())
     core_critic_before = _state(tuple(model.policy.critic.parameters()))
     critic_before = _state(model.critic_parameters())
-    model.begin_net_descent_phase()
+    model.begin_realized_tangent_phase()
 
     replay = replay_trajectory(model, trajectory, device=torch.device("cpu"))
     critic_only = (
@@ -227,15 +229,14 @@ def test_net_descent_update_moves_actor_but_not_residual_or_core_critic(
     )
     assert all(row is None for row in critic_to_actor)
     replay_calls = [0]
-    original_replay = g28_source.replay_trajectory
+    original_replay = g29_source.replay_trajectory
 
     def counted_replay(*args, **kwargs):
         replay_calls[0] += 1
         return original_replay(*args, **kwargs)
 
-    monkeypatch.setattr(g28_source, "replay_trajectory", counted_replay)
-
-    metrics = optimize_net_immediate_descent_update(
+    monkeypatch.setattr(g29_source, "replay_trajectory", counted_replay)
+    metrics = optimize_optimizer_realized_tangent_update(
         model,
         torch.optim.Adam(model.full_actor_parameters(), lr=1e-3),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -247,8 +248,9 @@ def test_net_descent_update_moves_actor_but_not_residual_or_core_critic(
 
     assert metrics["finite_update"] == 1.0
     assert replay_calls[0] == 2
-    assert metrics["minimum_projection_post_dot"] >= -1e-7
-    assert metrics["maximum_applied_gradient_identity_error"] <= 1e-7
+    assert metrics["minimum_realized_displacement_post_dot"] >= -1e-7
+    assert metrics["maximum_applied_parameter_identity_error"] <= 1e-7
+    assert metrics["minimum_actor_optimizer_step_increment"] == 1.0
     assert maximum_state_difference(
         actor_before, _state(model.full_actor_parameters())
     ) > 0.0
@@ -265,13 +267,13 @@ def test_net_descent_update_moves_actor_but_not_residual_or_core_critic(
     assert all(
         value == 0.0
         for name, value in metrics.items()
-        if name.endswith("_error") and name != "maximum_applied_gradient_identity_error"
+        if name.endswith("_error")
     )
 
 
 def test_g17_collection_retains_exact_generic_replay() -> None:
-    torch.manual_seed(2719001)
-    model = NetImmediateDescentFullActorPolicy(
+    torch.manual_seed(2919001)
+    model = OptimizerRealizedTangentFullActorPolicy(
         g17_source.OBSERVATION_DIM,
         g17_source.CRITIC_STATE_DIM,
         member_capacity=g17_source.CAPACITY,
@@ -281,8 +283,8 @@ def test_g17_collection_retains_exact_generic_replay() -> None:
     raw = g17_source.collect_trajectory(
         model,
         episode_ids=(0, 1),
-        ledger_seed=2729001,
-        action_seed=2739001,
+        ledger_seed=2929001,
+        action_seed=2939001,
         device=torch.device("cpu"),
     )
     trajectory = attach_credit_baselines(
@@ -298,30 +300,22 @@ def test_g17_collection_retains_exact_generic_replay() -> None:
     )
 
 
-def test_net_descent_phase_rejects_nonzero_residual_and_reentry() -> None:
+def test_realized_tangent_phase_rejects_nonzero_residual_and_reentry() -> None:
     model = _battery_model()
     final = model.policy.delayed_residual[-1]
     assert isinstance(final, torch.nn.Linear)
     with torch.no_grad():
         final.bias.fill_(0.1)
-    try:
-        model.begin_net_descent_phase()
-    except RuntimeError as error:
-        assert "exact zero" in str(error)
-    else:
-        raise AssertionError("nonzero residual output was accepted")
+    with pytest.raises(RuntimeError, match="exact zero"):
+        model.begin_realized_tangent_phase()
     with torch.no_grad():
         final.bias.zero_()
-    model.begin_net_descent_phase()
-    try:
-        model.begin_net_descent_phase()
-    except RuntimeError as error:
-        assert "exactly once" in str(error)
-    else:
-        raise AssertionError("net-descent phase reentry was accepted")
+    model.begin_realized_tangent_phase()
+    with pytest.raises(RuntimeError, match="exactly once"):
+        model.begin_realized_tangent_phase()
 
 
-def test_g27_result_precedence_and_configuration_are_frozen() -> None:
+def test_g29_result_precedence_and_configuration_are_frozen() -> None:
     passing = {
         "operational_valid": True,
         "g17_final_iid_utility": 0.93,
@@ -353,11 +347,15 @@ def test_g27_result_precedence_and_configuration_are_frozen() -> None:
 
     configuration = screen._configuration()
     assert configuration["g17_fast_updates"] == 100
-    assert configuration["g17_net_descent_updates"] == 100
+    assert configuration["g17_realized_tangent_updates"] == 100
     assert configuration["g18_fast_updates"] == 100
-    assert configuration["g18_net_descent_updates"] == 300
+    assert configuration["g18_realized_tangent_updates"] == 300
     assert configuration["residual"] == "exact_zero_frozen"
     assert (
         configuration["actor_gradient_rule"]
-        == "equal_combined_immediate_descent_projection"
+        == "equal_combined_then_realized_adam_displacement_tangent"
+    )
+    assert (
+        configuration["actor_optimizer_state_rule"]
+        == "unprojected_combined_gradient_state_projected_parameters"
     )

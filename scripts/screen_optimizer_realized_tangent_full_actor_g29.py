@@ -1,4 +1,4 @@
-"""Run the bounded paired G28 net-immediate-descent full-actor screen."""
+"""Run the bounded paired G29 optimizer-realized-tangent screen."""
 
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.net_immediate_descent_full_actor_g28 import (
-    NetImmediateDescentFullActorPolicy,
-    optimize_net_immediate_descent_update,
+from ha_ctse_process.optimizer_realized_tangent_full_actor_g29 import (
+    OptimizerRealizedTangentFullActorPolicy,
+    optimize_optimizer_realized_tangent_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
@@ -36,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19_screen
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28"
+ALGORITHM_ID = "OPTIMIZER_REALIZED_TANGENT_FULL_ACTOR_G29"
 GAMMA = g19_screen.GAMMA
 HIDDEN_DIM = g19_screen.HIDDEN_DIM
 LEARNING_RATE = g19_screen.LEARNING_RATE
@@ -44,31 +44,31 @@ INITIAL_LOG_STD = g19_screen.INITIAL_LOG_STD
 PPO_PASSES = g19_screen.PPO_PASSES
 NUM_ENVS = g19_screen.NUM_ENVS
 G17_FAST_UPDATES = g19_screen.G17_FAST_UPDATES
-G17_NET_UPDATES = g19_screen.G17_DELAYED_UPDATES
+G17_TANGENT_UPDATES = g19_screen.G17_DELAYED_UPDATES
 G18_FAST_UPDATES = g19_screen.G18_FAST_UPDATES
-G18_NET_UPDATES = g19_screen.G18_DELAYED_UPDATES
+G18_TANGENT_UPDATES = g19_screen.G18_DELAYED_UPDATES
 G17_EVAL_EPISODES = g19_screen.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 4_119_000,
-        "ledger": 4_129_000,
-        "action": 4_139_000,
-        "evaluation_ledger": 4_149_000,
-        "evaluation_action": 4_159_000,
+        "model": 5_119_000,
+        "ledger": 5_129_000,
+        "action": 5_139_000,
+        "evaluation_ledger": 5_149_000,
+        "evaluation_action": 5_159_000,
     },
-    "g18": {"model": 4_219_000, "action": 4_239_000},
+    "g18": {"model": 5_219_000, "action": 5_239_000},
 }
 
 REPLAY_TOLERANCE = g19_screen.REPLAY_TOLERANCE
-PROJECTION_TOLERANCE = 1e-7
+DISPLACEMENT_TOLERANCE = 1e-7
 IDENTITY_TOLERANCE = 1e-7
 
-INVALID_BRANCH = "INVALID_NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_NET_DESCENT_G28"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_NET_DESCENT_G28"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_NET_DESCENT_G28"
-PROMISING_BRANCH = "NONFORMAL_NET_IMMEDIATE_DESCENT_PROMISING_G28"
+INVALID_BRANCH = "INVALID_OPTIMIZER_REALIZED_TANGENT_FULL_ACTOR_G29"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_REALIZED_TANGENT_G29"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_REALIZED_TANGENT_G29"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_REALIZED_TANGENT_G29"
+PROMISING_BRANCH = "NONFORMAL_OPTIMIZER_REALIZED_TANGENT_PROMISING_G29"
 
 
 def _configuration() -> dict[str, Any]:
@@ -80,23 +80,24 @@ def _configuration() -> dict[str, Any]:
         "ppo_passes": PPO_PASSES,
         "num_envs": NUM_ENVS,
         "g17_fast_updates": G17_FAST_UPDATES,
-        "g17_net_descent_updates": G17_NET_UPDATES,
+        "g17_realized_tangent_updates": G17_TANGENT_UPDATES,
         "g18_fast_updates": G18_FAST_UPDATES,
-        "g18_net_descent_updates": G18_NET_UPDATES,
+        "g18_realized_tangent_updates": G18_TANGENT_UPDATES,
         "g17_eval_episodes": G17_EVAL_EPISODES,
         "fast_optimizer": "adam",
-        "net_descent_actor_optimizer": "adam",
+        "realized_tangent_actor_optimizer": "adam_single_state_step",
         "critic_optimizer": "adam",
         "residual": "exact_zero_frozen",
-        "actor_gradient_rule": "equal_combined_immediate_descent_projection",
+        "actor_gradient_rule": "equal_combined_then_realized_adam_displacement_tangent",
+        "actor_optimizer_state_rule": "unprojected_combined_gradient_state_projected_parameters",
     }
 
 
-def make_model(source: str) -> NetImmediateDescentFullActorPolicy:
+def make_model(source: str) -> OptimizerRealizedTangentFullActorPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = (
         g19_screen._dimensions(source)
     )
-    model = NetImmediateDescentFullActorPolicy(
+    model = OptimizerRealizedTangentFullActorPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -111,7 +112,7 @@ def make_model(source: str) -> NetImmediateDescentFullActorPolicy:
 
 def _collect(
     source: str,
-    model: NetImmediateDescentFullActorPolicy,
+    model: OptimizerRealizedTangentFullActorPolicy,
     *,
     episode_ids: tuple[int, ...],
 ) -> Any:
@@ -137,7 +138,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: NetImmediateDescentFullActorPolicy, domain: str
+    model: OptimizerRealizedTangentFullActorPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -161,7 +162,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: NetImmediateDescentFullActorPolicy
+    source: str, model: OptimizerRealizedTangentFullActorPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -177,12 +178,12 @@ def _evaluate_phase(
 
 def _phase_updates(source: str) -> tuple[int, int]:
     if source == "g17":
-        return G17_FAST_UPDATES, G17_NET_UPDATES
-    return G18_FAST_UPDATES, G18_NET_UPDATES
+        return G17_FAST_UPDATES, G17_TANGENT_UPDATES
+    return G18_FAST_UPDATES, G18_TANGENT_UPDATES
 
 
 def _actor_state(
-    model: NetImmediateDescentFullActorPolicy,
+    model: OptimizerRealizedTangentFullActorPolicy,
 ) -> dict[str, torch.Tensor]:
     names = set(model.full_actor_parameter_names())
     return {
@@ -193,7 +194,7 @@ def _actor_state(
 
 
 def _optimizer_ownership_valid(
-    model: NetImmediateDescentFullActorPolicy,
+    model: OptimizerRealizedTangentFullActorPolicy,
 ) -> bool:
     actor = {id(row) for row in model.full_actor_parameters()}
     critic = {id(row) for row in model.critic_parameters()}
@@ -228,7 +229,7 @@ def _train_source(source: str) -> dict[str, Any]:
         + tuple(model.credit_baselines.parameters()),
         lr=LEARNING_RATE,
     )
-    fast_updates, net_updates = _phase_updates(source)
+    fast_updates, tangent_updates = _phase_updates(source)
     maximum_replay_errors: dict[str, float] = {}
     lifecycle_valid = True
     finite = True
@@ -258,8 +259,8 @@ def _train_source(source: str) -> dict[str, Any]:
                 )
         active_rows += trajectory.active_token_count
     anchor_evaluation = _evaluate_phase(source, model)
-    net_start = _actor_state(model)
-    model.begin_net_descent_phase()
+    tangent_start = _actor_state(model)
+    model.begin_realized_tangent_phase()
     optimizer_ownership_valid = _optimizer_ownership_valid(model)
     actor_optimizer = torch.optim.Adam(
         model.full_actor_parameters(), lr=LEARNING_RATE
@@ -267,11 +268,12 @@ def _train_source(source: str) -> dict[str, Any]:
     critic_optimizer = torch.optim.Adam(
         model.critic_parameters(), lr=LEARNING_RATE
     )
-    minimum_projection_dot = float("inf")
+    minimum_displacement_dot = float("inf")
     maximum_identity_error = 0.0
     maximum_lattice_correction = 0.0
-    projection_conflict_passes = 0.0
-    for update in range(net_updates):
+    displacement_conflict_passes = 0.0
+    minimum_optimizer_step_increment = float("inf")
+    for update in range(tangent_updates):
         first_episode = (fast_updates + update) * NUM_ENVS
         trajectory = _collect(
             source,
@@ -281,7 +283,7 @@ def _train_source(source: str) -> dict[str, Any]:
         lifecycle_valid = lifecycle_valid and g19_screen._trajectory_contract_valid(
             source, trajectory
         )
-        metrics = optimize_net_immediate_descent_update(
+        metrics = optimize_optimizer_realized_tangent_update(
             model,
             actor_optimizer,
             critic_optimizer,
@@ -291,20 +293,28 @@ def _train_source(source: str) -> dict[str, Any]:
             gamma=GAMMA,
         )
         finite = finite and bool(metrics["finite_update"])
-        minimum_projection_dot = min(
-            minimum_projection_dot,
-            float(metrics["minimum_projection_post_dot"]),
+        minimum_displacement_dot = min(
+            minimum_displacement_dot,
+            float(metrics["minimum_realized_displacement_post_dot"]),
         )
         maximum_identity_error = max(
             maximum_identity_error,
-            float(metrics["maximum_applied_gradient_identity_error"]),
+            float(metrics["maximum_applied_parameter_identity_error"]),
         )
         maximum_lattice_correction = max(
             maximum_lattice_correction,
-            float(metrics["maximum_projection_lattice_correction"]),
+            float(
+                metrics[
+                    "maximum_realized_displacement_lattice_correction"
+                ]
+            ),
         )
-        projection_conflict_passes += (
-            float(metrics["projection_conflict"]) * PPO_PASSES
+        displacement_conflict_passes += (
+            float(metrics["realized_displacement_conflict"]) * PPO_PASSES
+        )
+        minimum_optimizer_step_increment = min(
+            minimum_optimizer_step_increment,
+            float(metrics["minimum_actor_optimizer_step_increment"]),
         )
         for name, value in metrics.items():
             if name.endswith("_error") or name.endswith("_max_abs"):
@@ -321,14 +331,14 @@ def _train_source(source: str) -> dict[str, Any]:
             ledger_seed=seeds["evaluation_ledger"],
         )
     actor_difference = maximum_state_difference(
-        net_start, _actor_state(model)
+        tangent_start, _actor_state(model)
     )
     return {
         "source": source,
         "seeds": seeds,
         "fast_updates": fast_updates,
-        "net_descent_updates": net_updates,
-        "optimizer_steps": 2 * (fast_updates + 2 * net_updates),
+        "realized_tangent_updates": tangent_updates,
+        "optimizer_steps": 2 * (fast_updates + 2 * tangent_updates),
         "active_rows": int(active_rows),
         "finite_updates": bool(finite),
         "lifecycle_contract_valid": bool(lifecycle_valid),
@@ -339,14 +349,21 @@ def _train_source(source: str) -> dict[str, Any]:
         "residual_output_layer_maximum_absolute_value": (
             model.residual_output_layer_maximum_absolute_value()
         ),
-        "minimum_projection_post_dot": float(minimum_projection_dot),
-        "maximum_applied_gradient_identity_error": float(
+        "minimum_realized_displacement_post_dot": float(
+            minimum_displacement_dot
+        ),
+        "maximum_applied_parameter_identity_error": float(
             maximum_identity_error
         ),
-        "maximum_projection_lattice_correction": float(
+        "maximum_realized_displacement_lattice_correction": float(
             maximum_lattice_correction
         ),
-        "projection_conflict_passes": float(projection_conflict_passes),
+        "realized_displacement_conflict_passes": float(
+            displacement_conflict_passes
+        ),
+        "minimum_actor_optimizer_step_increment": float(
+            minimum_optimizer_step_increment
+        ),
         "zero_evaluation": zero_evaluation,
         "anchor_evaluation": anchor_evaluation,
         "final_evaluation": final_evaluation,
@@ -370,9 +387,9 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "minimum_actor_difference": float(
                 min(row["actor_maximum_difference"] for row in rows)
             ),
-            "maximum_applied_gradient_identity_error": float(
+            "maximum_applied_parameter_identity_error": float(
                 max(
-                    row["maximum_applied_gradient_identity_error"]
+                    row["maximum_applied_parameter_identity_error"]
                     for row in rows
                 )
             ),
@@ -389,12 +406,17 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
             for row in rows
         )
         and all(
-            row["minimum_projection_post_dot"] >= -PROJECTION_TOLERANCE
+            row["minimum_realized_displacement_post_dot"]
+            >= -DISPLACEMENT_TOLERANCE
             for row in rows
         )
         and all(
-            row["maximum_applied_gradient_identity_error"]
+            row["maximum_applied_parameter_identity_error"]
             <= IDENTITY_TOLERANCE
+            for row in rows
+        )
+        and all(
+            row["minimum_actor_optimizer_step_increment"] == 1.0
             for row in rows
         )
     )
@@ -414,7 +436,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G28 screen requires an integrated source commit")
+        raise ValueError("G29 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()

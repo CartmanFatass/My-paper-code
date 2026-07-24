@@ -319,3 +319,15 @@ tests pass; a ten-pair alternating CPU benchmark reduces median G17 two-pass
 update time from `1.11708s` to `0.89023s` (`20.3074%`) with exact metrics and
 zero parameter difference. This is execution-only and changes no scientific
 contract.
+
+The G29 implementation is accepted for its paired screen. The closed G28
+module, runner and test were renamed rather than retained as a parallel active
+line. A momentum counterexample proves that a positive raw combined-gradient
+dot can still produce a conflicting Adam displacement. The new helper advances
+Adam exactly once, leaves non-conflicting parameters and complete optimizer
+state bitwise identical to ordinary Adam, and moves only a conflicting realized
+parameter displacement to the first closed float32 lattice point. Actor,
+critic, residual and core-critic ownership remain disjoint; G17/G18 replay and
+lifecycle behavior are unchanged. Eight focused and 55 combined tests pass on
+CPU with one thread. The only next evidence action is one integrated bounded
+G29 screen from a fresh source commit.
