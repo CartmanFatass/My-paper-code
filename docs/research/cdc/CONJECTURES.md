@@ -169,9 +169,11 @@ the Project Manager-accepted CDC state.
   the frozen `0.90` access floor. G29's realized Adam constraint triggers much
   more often and removes G18 access entirely. G30's equal global gradient
   directions preserve G17 and learn high broad delayed utility across fresh
-  seeds, but the spike-utility LCB remains below access. The active discriminator
-  isolates spike-time credit/allocation stability rather than general delayed
-  representation or broad utility.
+  seeds, but the spike-utility LCB remains below access. G31's bounded screen
+  replaces the one-step learned successor bootstrap with an environment-neutral
+  realized future tail and passes both paired sources strongly. Fresh-seed
+  formal evidence is now required to distinguish a stable credit correction
+  from another favorable bounded seed.
 
 ## C-BENCH — The benchmark is not identifying
 

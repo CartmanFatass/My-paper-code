@@ -12,7 +12,7 @@ compute authority.
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | spike-allocation derivation selected | Formal G30 preserves G17 and passes G18 total utility/gain/rotation, but spike utility LCB is `0.87611`. | Isolate a parameter-free credit/allocation mechanism for the load-bearing spike without reopening thresholds or budgets. |
+| C-CREDIT | G31 formal confirmation selected | A parameter-free realized future-tail target passes the bounded G17/G18 pair strongly after G30's one-step bootstrap missed fresh-seed spike access. | Run one frozen fresh-seed formal pair; close on any registered non-usable branch without rescue. |
 | C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,11 +21,11 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=DIRECTION_BALANCED_FULL_ACTOR_G30_FORMAL_ITERATION_20
+completed_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 source_family=paired_immediate_and_delayed_dynamic_roster_toys
 formal_disposition=NO_DELAYED_ACCESS_DIRECTION_BALANCED_G30
-latest_nonformal_disposition=NONFORMAL_DIRECTION_BALANCED_FULL_ACTOR_PROMISING_G30
-next_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_IMPLEMENTATION
+latest_nonformal_disposition=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
+next_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_EXECUTABLE_PATH
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
 conclusion_bearing_iterations_consumed=20
 iterations_remaining=7

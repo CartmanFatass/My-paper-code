@@ -402,3 +402,12 @@ the G30 refactor regression and 58 shared-core checks. Exact tail algebra,
 mid-trajectory terminal reset, detached targets, unchanged checkpoint shape,
 first-replay reuse, actor/critic/residual ownership and first-match precedence
 close. The next action is the one frozen bounded paired screen.
+
+The G31 screen is operationally valid and selects
+`NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31`. It preserves G17
+while reaching G18 utility `0.994996`, spike utility `0.997803` and rotating
+share `0.998296`, with exact replay, composition and terminal-tail closure.
+Freeze a three-replicate formal runner with fresh seeds and the unchanged G30
+budgets, bootstrap, behavioral gates and first-match order. Replace the closed
+G30 formal runner/test in the active line, close a one-update nonformal path
+exercise, then launch conclusion-bearing iteration 21.

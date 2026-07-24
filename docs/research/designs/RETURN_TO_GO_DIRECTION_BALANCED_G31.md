@@ -1,7 +1,7 @@
 # Return-to-go direction-balanced full actor G31
 
 ```text
-status=IMPLEMENTATION_ACCEPTED_BOUNDED_SCREEN_NEXT
+status=BOUNDED_SCREEN_PROMISING_FORMAL_CONTRACT_FROZEN
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -51,6 +51,58 @@ Behavioral thresholds and first-match precedence remain unchanged:
 
 Only branch 5 can license a later formal definition. This screen consumes no
 conclusion-bearing iteration and cannot support a UAV claim.
+
+The integrated screen selected branch 5 with G17 held-out utility `0.94742`
+and G18 utility/spike/rotation `0.994996/0.997803/0.998296`. This is sufficient
+only to freeze the following formal paired-toy definition.
+
+## Formal executable definition
+
+```text
+algorithm=RETURN_TO_GO_DIRECTION_BALANCED_G31
+authorization_token=AUTHORIZE_RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_CPU_V1
+replicates=3
+num_envs=8
+ppo_passes=2
+g17_fast_updates=100
+g17_return_to_go_updates=100
+g18_fast_updates=100
+g18_return_to_go_updates=300
+g17_eval_episodes_per_domain_per_replicate=128
+g18_slot_layouts_per_checkpoint_per_replicate=3
+bootstrap_repetitions=10000
+backend=cpu
+torch_threads=1
+```
+
+Fresh formal seed bases are frozen as G17 model/ledger/action/evaluation
+ledger/evaluation action `10119000/10129000/10139000/10149000/10159000`, G18
+model/action `10219000/10239000`, and bootstrap `10260031`; replicate index is
+added exactly once. Exercise seeds add `900000` and cannot become formal.
+
+The first-match formal branches are:
+
+1. `INVALID_RETURN_TO_GO_DIRECTION_BALANCED_G31`;
+2. `NO_G17_COMPATIBILITY_RETURN_TO_GO_G31`;
+3. `NO_DELAYED_ACCESS_RETURN_TO_GO_G31`;
+4. `NO_DELAYED_MECHANISM_RETURN_TO_GO_G31`;
+5. `UNSTABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31`; or
+6. `USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31`.
+
+Behavioral gates remain exactly those of G30: G17 IID and held-out utility LCB
+`>=0.90`, gain LCB `>=0.10`, minimum episode `>=0.80`, effort/mix correlation
+`>=0.90`, and MAE `<=0.05`; G18 utility/gain/spike LCB
+`>=0.95/0.10/0.90`, rotating-share LCB `>=0.75`, and minimum replicate utility
+`>=0.90`. Operational validity additionally requires finite updates and
+targets, exact lifecycle/ownership/inactive-row/terminal-tail/residual closure,
+replay `<=1e-6`, raw immediate-direction dot `>=-1e-7`, composition identity
+`<=1e-7`, and exactly one actor optimizer step per pass.
+
+Zero/final checkpoints bind algorithm, source commit, formal identity,
+replicate, phase exposure and configuration. Evaluation closes the exact cell
+inventory and the analyzer recomputes all intervals. A one-update-per-phase
+nonformal exercise must close this path and be rejected by formal-required
+analysis before launch. No G30 checkpoint or screen artifact can be resumed.
 
 ## Proof-sized acceptance
 
