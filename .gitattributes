@@ -1,0 +1,5 @@
+# Git runs hooks through sh. A CRLF shebang line makes sh fail with
+# "bad interpreter: /bin/sh^M" and the hook silently stops guarding anything,
+# so these must stay LF regardless of the checkout platform.
+.githooks/* text eol=lf
+*.sh text eol=lf

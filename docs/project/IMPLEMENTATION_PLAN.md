@@ -19,6 +19,25 @@ algebra_status=ZERO_COMPUTE_DERIVATION_REQUIRED
 screen_contract=none_until_g20_derivation
 ```
 
+## Frozen designs this line rests on
+
+The G20 derivation has no design document of its own yet; `algebra_status` is
+`ZERO_COMPUTE_DERIVATION_REQUIRED` and writing one is the next action. These are
+the frozen designs the accepted line descends from:
+
+- `docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md` — the accepted
+  immediate-service controller this line must not break.
+- `docs/research/designs/DELAYED_BATTERY_ROSTER_G18.md` — the delayed source.
+- `docs/research/designs/FAST_SLOW_SEPARATED_CREDIT_G18.md`,
+  `docs/research/designs/CHANNEL_NORMALIZED_SEPARATED_CREDIT_G18.md`,
+  `docs/research/designs/ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18.md` — the
+  closed candidates, retained as frozen evidence and regression surfaces.
+- `docs/research/designs/FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19.md` — the
+  retired anchor, whose screen returned `NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19`.
+
+A G20 design must be frozen under `docs/research/designs/` before any G20
+implementation begins.
+
 ## Accepted active line
 
 1. The exact TD(0), raw-sum, channel-normalized and actor/critic-isolated G18

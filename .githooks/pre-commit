@@ -1,0 +1,31 @@
+#!/bin/sh
+# Workflow drift guard.
+#
+# The runtime migration silently broke three contract tests, five paths and a
+# whole Skill route, and none of it surfaced until the tests were run by hand.
+# This runs them whenever a commit touches a path the contracts describe.
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+guarded=$(printf '%s\n' "$staged" | grep -E '^(AGENTS\.md|CLAUDE\.md|\.agents/roles/|\.claude/agents/|\.claude/skills/hmasd-|docs/project/|docs/external-review/REVIEWER_CONVERSATIONS\.json|tests/.*contract.*|tests/run_workflow_contracts\.ps1)')
+[ -z "$guarded" ] && exit 0
+
+echo "workflow drift guard: guarded paths staged"
+printf '%s\n' "$guarded" | sed 's/^/  /'
+echo ""
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "tests/run_workflow_contracts.ps1"
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "BLOCKED: this commit touches a guarded workflow path and the contracts"
+  echo "do not hold. Repair the contract, not the assertion — a weakened check"
+  echo "reads as covered forever after."
+  echo ""
+  echo "Deliberate bypass: git commit --no-verify"
+  exit 1
+fi
+
+exit 0
