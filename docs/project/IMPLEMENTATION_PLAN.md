@@ -8,14 +8,14 @@ last_nonformal=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23_PROTOTYPE
+active_implementation=ANCHORED_DUAL_CHANNEL_RESIDUAL_G23_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g23
-algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/ANCHORED_DUAL_CHANNEL_RESIDUAL_G23.md
 ```
 
@@ -129,3 +129,12 @@ residual-only; the fast anchor, critics, budgets, gates and evaluation are
 unchanged with fresh seeds. Replace the active optimizer function, rename the
 runner/test, prove channel weights and gradient ownership, then run one paired
 nonformal screen.
+
+The G23 prototype is accepted for that screen. The active module, runner and
+test were renamed rather than duplicated. The delayed residual loss records and
+checks the exact equal average of separately normalized immediate and successor
+channels; Adam remains residual-only and delayed entropy remains zero. Six
+focused and 36 focused-plus-retained tests close loss identity, optimizer and
+gradient ownership, zero-output/common-mode behavior, replay, anchor identity
+and precedence on CPU with one thread. The only next action is the integrated
+paired screen.

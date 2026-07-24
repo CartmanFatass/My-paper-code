@@ -1,4 +1,4 @@
-"""Run the bounded paired G22 adaptive anchored-residual screen."""
+"""Run the bounded paired G23 anchored dual-channel residual screen."""
 
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.unconstrained_residual_g21 import (
-    UnconstrainedAnchoredResidualPolicy,
-    optimize_unconstrained_delayed_update,
+from ha_ctse_process.dual_channel_residual_g23 import (
+    AnchoredDualChannelResidualPolicy,
+    optimize_dual_channel_delayed_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
@@ -36,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22"
+ALGORITHM_ID = "ANCHORED_DUAL_CHANNEL_RESIDUAL_G23"
 GAMMA = g19.GAMMA
 HIDDEN_DIM = g19.HIDDEN_DIM
 LEARNING_RATE = g19.LEARNING_RATE
@@ -51,20 +51,20 @@ G17_EVAL_EPISODES = g19.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 3_019_000,
-        "ledger": 3_029_000,
-        "action": 3_039_000,
-        "evaluation_ledger": 3_049_000,
-        "evaluation_action": 3_059_000,
+        "model": 3_219_000,
+        "ledger": 3_229_000,
+        "action": 3_239_000,
+        "evaluation_ledger": 3_249_000,
+        "evaluation_action": 3_259_000,
     },
-    "g18": {"model": 3_119_000, "action": 3_139_000},
+    "g18": {"model": 3_319_000, "action": 3_339_000},
 }
 
-INVALID_BRANCH = "INVALID_ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_ADAPTIVE_RESIDUAL_G22"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_ADAPTIVE_RESIDUAL_G22"
-PROMISING_BRANCH = "NONFORMAL_ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_PROMISING_G22"
+INVALID_BRANCH = "INVALID_ANCHORED_DUAL_CHANNEL_RESIDUAL_G23"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_DUAL_CHANNEL_RESIDUAL_G23"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_DUAL_CHANNEL_RESIDUAL_G23"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_DUAL_CHANNEL_RESIDUAL_G23"
+PROMISING_BRANCH = "NONFORMAL_ANCHORED_DUAL_CHANNEL_RESIDUAL_PROMISING_G23"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -105,7 +105,10 @@ def _configuration() -> dict[str, Any]:
         "critic_optimizer": "adam",
         "delayed_residual_initialization": "exact_zero_output",
         "delayed_residual_geometry": "unconstrained_pre_squash_mean",
-        "delayed_gradient_rule": "successor_only_unprojected",
+        "delayed_gradient_rule": "equal_normalized_immediate_successor",
+        "immediate_channel_weight": 0.5,
+        "successor_channel_weight": 0.5,
+        "delayed_residual_entropy_coefficient": 0.0,
     }
 
 
@@ -124,12 +127,12 @@ def _dimensions(source: str) -> tuple[int, int, int, int]:
             battery_source.CAPACITY,
             battery_source.ACTION_DIM,
         )
-    raise ValueError(f"unknown G22 source: {source}")
+    raise ValueError(f"unknown G23 source: {source}")
 
 
-def make_model(source: str) -> UnconstrainedAnchoredResidualPolicy:
+def make_model(source: str) -> AnchoredDualChannelResidualPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = _dimensions(source)
-    model = UnconstrainedAnchoredResidualPolicy(
+    model = AnchoredDualChannelResidualPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -143,7 +146,7 @@ def make_model(source: str) -> UnconstrainedAnchoredResidualPolicy:
 
 
 def make_residual_optimizer(
-    model: UnconstrainedAnchoredResidualPolicy,
+    model: AnchoredDualChannelResidualPolicy,
 ) -> torch.optim.Adam:
     return torch.optim.Adam(
         model.residual_parameters(),
@@ -157,7 +160,7 @@ def make_residual_optimizer(
 
 def _collect(
     source: str,
-    model: UnconstrainedAnchoredResidualPolicy,
+    model: AnchoredDualChannelResidualPolicy,
     *,
     episode_ids: tuple[int, ...],
 ) -> Any:
@@ -183,7 +186,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: UnconstrainedAnchoredResidualPolicy, domain: str
+    model: AnchoredDualChannelResidualPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -207,7 +210,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: UnconstrainedAnchoredResidualPolicy
+    source: str, model: AnchoredDualChannelResidualPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -239,6 +242,8 @@ def _train_source(source: str) -> dict[str, Any]:
     )
     fast_updates, delayed_updates = _phase_updates(source)
     maximum_replay_errors: dict[str, float] = {}
+    maximum_channel_loss_identity_error = 0.0
+    channel_weights_valid = True
     lifecycle_valid = True
     finite = True
     active_rows = 0
@@ -283,7 +288,7 @@ def _train_source(source: str) -> dict[str, Any]:
         lifecycle_valid = lifecycle_valid and g19._trajectory_contract_valid(
             source, trajectory
         )
-        metrics = optimize_unconstrained_delayed_update(
+        metrics = optimize_dual_channel_delayed_update(
             model,
             residual_optimizer,
             critic_optimizer,
@@ -293,6 +298,21 @@ def _train_source(source: str) -> dict[str, Any]:
             gamma=GAMMA,
         )
         finite = finite and bool(metrics["finite_update"])
+        channel_weights_valid = channel_weights_valid and (
+            metrics["immediate_channel_weight"] == 0.5
+            and metrics["successor_channel_weight"] == 0.5
+        )
+        maximum_channel_loss_identity_error = max(
+            maximum_channel_loss_identity_error,
+            abs(
+                metrics["policy_loss"]
+                - 0.5
+                * (
+                    metrics["immediate_policy_loss"]
+                    + metrics["successor_policy_loss"]
+                )
+            ),
+        )
         for name, value in metrics.items():
             if name.endswith("_error") or name.endswith("_max_abs"):
                 maximum_replay_errors[name] = max(
@@ -316,6 +336,10 @@ def _train_source(source: str) -> dict[str, Any]:
         "active_rows": int(active_rows),
         "finite_updates": bool(finite),
         "lifecycle_contract_valid": bool(lifecycle_valid),
+        "channel_weights_valid": bool(channel_weights_valid),
+        "maximum_channel_loss_identity_error": float(
+            maximum_channel_loss_identity_error
+        ),
         "maximum_replay_errors": maximum_replay_errors,
         "anchor_maximum_difference": maximum_state_difference(
             anchor_state, model.anchor_state()
@@ -349,6 +373,11 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
     operational_valid = (
         all(row["finite_updates"] for row in rows)
         and all(row["lifecycle_contract_valid"] for row in rows)
+        and all(row["channel_weights_valid"] for row in rows)
+        and all(
+            row["maximum_channel_loss_identity_error"] <= 1e-7
+            for row in rows
+        )
         and replay_maximum <= g19.REPLAY_TOLERANCE
         and all(row["anchor_maximum_difference"] == 0.0 for row in rows)
         and all(
@@ -361,6 +390,9 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "maximum_replay_error": float(replay_maximum),
         "maximum_anchor_difference": float(
             max(row["anchor_maximum_difference"] for row in rows)
+        ),
+        "maximum_channel_loss_identity_error": float(
+            max(row["maximum_channel_loss_identity_error"] for row in rows)
         ),
         "g17_zero_iid_utility": float(g17_zero["iid"]["utility_mean"]),
         "g17_zero_heldout_utility": float(
@@ -439,7 +471,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G22 screen requires an integrated source commit")
+        raise ValueError("G23 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()

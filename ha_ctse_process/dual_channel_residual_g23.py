@@ -1,4 +1,4 @@
-"""Unprojected source-neutral delayed residual for G21."""
+"""Frozen-anchor dual-channel delayed residual for G23."""
 
 from __future__ import annotations
 
@@ -17,12 +17,12 @@ from ha_ctse_process.anchored_residual_g19 import (
 )
 
 
-class UnconstrainedAnchoredResidualPolicy(FastAnchoredResidualPolicy):
-    """Frozen fast actor plus the ordinary unprojected G19 residual head."""
+class AnchoredDualChannelResidualPolicy(FastAnchoredResidualPolicy):
+    """Frozen fast actor plus an unrestricted dual-channel residual head."""
 
 
-def optimize_unconstrained_delayed_update(
-    model: UnconstrainedAnchoredResidualPolicy,
+def optimize_dual_channel_delayed_update(
+    model: AnchoredDualChannelResidualPolicy,
     residual_optimizer: torch.optim.Optimizer,
     critic_optimizer: torch.optim.Optimizer,
     trajectory: AnchoredRosterTrajectory,
@@ -31,10 +31,10 @@ def optimize_unconstrained_delayed_update(
     ppo_passes: int,
     gamma: float,
 ) -> dict[str, float]:
-    """Update only the unrestricted residual with successor-value credit."""
+    """Update only the residual with equal immediate/successor PPO credit."""
 
     if model.phase != "delayed":
-        raise RuntimeError("G21 delayed update requires delayed phase")
+        raise RuntimeError("G23 delayed update requires delayed phase")
     terminals = torch.zeros_like(
         trajectory.rewards, dtype=torch.bool, device=device
     )
@@ -56,7 +56,8 @@ def optimize_unconstrained_delayed_update(
     totals = {
         name: 0.0
         for name in (
-            "fast_policy_loss",
+            "policy_loss",
+            "immediate_policy_loss",
             "successor_policy_loss",
             "slow_value_loss",
             "immediate_baseline_loss",
@@ -69,14 +70,17 @@ def optimize_unconstrained_delayed_update(
     model.train()
     for _ in range(int(ppo_passes)):
         replay = replay_trajectory(model, trajectory, device=device)
-        fast_loss = _channel_policy_loss(
+        immediate_policy_loss = _channel_policy_loss(
             replay, trajectory, credit.immediate_residual
         )
-        successor_loss = _channel_policy_loss(
+        successor_policy_loss = _channel_policy_loss(
             replay, trajectory, credit.successor_residual
         )
+        policy_loss = 0.5 * (
+            immediate_policy_loss + successor_policy_loss
+        )
         residual_optimizer.zero_grad(set_to_none=True)
-        successor_loss.backward()
+        policy_loss.backward()
         residual_gradient_norm = torch.nn.utils.clip_grad_norm_(
             residual_parameters, GRADIENT_CLIP
         )
@@ -93,7 +97,7 @@ def optimize_unconstrained_delayed_update(
                 clipped_values - credit.slow_return_targets.to(device)
             ),
         ).mean()
-        immediate_loss = F.mse_loss(
+        immediate_baseline_loss = F.mse_loss(
             replay.immediate_baselines,
             trajectory.rewards.to(device).detach(),
         )
@@ -101,7 +105,11 @@ def optimize_unconstrained_delayed_update(
             replay.successor_baselines,
             credit.successor_targets.to(device),
         )
-        critic_loss = slow_value_loss + immediate_loss + successor_baseline_loss
+        critic_loss = (
+            slow_value_loss
+            + immediate_baseline_loss
+            + successor_baseline_loss
+        )
         critic_optimizer.zero_grad(set_to_none=True)
         critic_loss.backward()
         critic_gradient_norm = torch.nn.utils.clip_grad_norm_(
@@ -111,20 +119,24 @@ def optimize_unconstrained_delayed_update(
         finite = finite and all(
             bool(torch.isfinite(value))
             for value in (
-                fast_loss,
-                successor_loss,
+                policy_loss,
+                immediate_policy_loss,
+                successor_policy_loss,
                 critic_loss,
                 residual_gradient_norm,
                 critic_gradient_norm,
             )
         )
-        totals["fast_policy_loss"] += float(fast_loss.detach().cpu())
+        totals["policy_loss"] += float(policy_loss.detach().cpu())
+        totals["immediate_policy_loss"] += float(
+            immediate_policy_loss.detach().cpu()
+        )
         totals["successor_policy_loss"] += float(
-            successor_loss.detach().cpu()
+            successor_policy_loss.detach().cpu()
         )
         totals["slow_value_loss"] += float(slow_value_loss.detach().cpu())
         totals["immediate_baseline_loss"] += float(
-            immediate_loss.detach().cpu()
+            immediate_baseline_loss.detach().cpu()
         )
         totals["successor_baseline_loss"] += float(
             successor_baseline_loss.detach().cpu()
@@ -138,6 +150,8 @@ def optimize_unconstrained_delayed_update(
     for name in totals:
         totals[name] /= float(ppo_passes)
     totals.update(errors)
+    totals["immediate_channel_weight"] = 0.5
+    totals["successor_channel_weight"] = 0.5
     totals["finite_update"] = float(finite)
     totals["optimizer_steps"] = float(2 * ppo_passes)
     return totals

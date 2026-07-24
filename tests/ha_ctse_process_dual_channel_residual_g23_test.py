@@ -1,7 +1,8 @@
-"""Focused acceptance for the G22 adaptive anchored residual."""
+"""Focused acceptance for the G23 anchored dual-channel residual."""
 
 from __future__ import annotations
 
+import pytest
 import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
@@ -15,17 +16,17 @@ from ha_ctse_process.anchored_residual_g19 import (
 )
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from ha_ctse_process.unconstrained_residual_g21 import (
-    UnconstrainedAnchoredResidualPolicy,
-    optimize_unconstrained_delayed_update,
+from ha_ctse_process.dual_channel_residual_g23 import (
+    AnchoredDualChannelResidualPolicy,
+    optimize_dual_channel_delayed_update,
 )
-from scripts import screen_adaptive_anchored_residual_g22 as screen
+from scripts import screen_anchored_dual_channel_residual_g23 as screen
 
 
 def _model(
     observation_dim: int, critic_state_dim: int, capacity: int, action_dim: int
-) -> UnconstrainedAnchoredResidualPolicy:
-    model = UnconstrainedAnchoredResidualPolicy(
+) -> AnchoredDualChannelResidualPolicy:
+    model = AnchoredDualChannelResidualPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -54,7 +55,7 @@ def _assert_step_equal(left: object, right: object) -> None:
 
 
 def _generic_pair() -> tuple[
-    ContinuousRosterPolicy, UnconstrainedAnchoredResidualPolicy, dict[str, torch.Tensor]
+    ContinuousRosterPolicy, AnchoredDualChannelResidualPolicy, dict[str, torch.Tensor]
 ]:
     torch.manual_seed(2120000)
     base = ContinuousRosterPolicy(
@@ -65,7 +66,7 @@ def _generic_pair() -> tuple[
         hidden_dim=8,
         current_observation_residual=True,
     )
-    residual = UnconstrainedAnchoredResidualPolicy(
+    residual = AnchoredDualChannelResidualPolicy(
         5,
         4,
         member_capacity=3,
@@ -172,7 +173,7 @@ def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
         action_seed=2130002,
         device=torch.device("cpu"),
     )
-    metrics = optimize_unconstrained_delayed_update(
+    metrics = optimize_dual_channel_delayed_update(
         model,
         screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -190,6 +191,16 @@ def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
         if name.endswith("_error") or name.endswith("_max_abs")
     )
     assert not any("projection" in name or "centering" in name for name in metrics)
+    assert metrics["immediate_channel_weight"] == 0.5
+    assert metrics["successor_channel_weight"] == 0.5
+    assert metrics["policy_loss"] == pytest.approx(
+        0.5
+        * (
+            metrics["immediate_policy_loss"]
+            + metrics["successor_policy_loss"]
+        ),
+        abs=1e-7,
+    )
 
 
 def test_g17_successor_update_replays_and_preserves_anchor() -> None:
@@ -235,7 +246,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
         device=torch.device("cpu"),
     )
     delayed = attach_credit_baselines(model, raw, device=torch.device("cpu"))
-    metrics = optimize_unconstrained_delayed_update(
+    metrics = optimize_dual_channel_delayed_update(
         model,
         screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -248,7 +259,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
 
 
-def test_g22_result_precedence_and_configuration_are_frozen() -> None:
+def test_g23_result_precedence_and_configuration_are_frozen() -> None:
     passing = {
         "operational_valid": True,
         "g17_final_iid_utility": 0.93,
@@ -288,10 +299,16 @@ def test_g22_result_precedence_and_configuration_are_frozen() -> None:
     assert configuration["delayed_residual_weight_decay"] == 0.0
     assert configuration["delayed_residual_amsgrad"] is False
     assert configuration["delayed_residual_geometry"] == "unconstrained_pre_squash_mean"
-    assert configuration["delayed_gradient_rule"] == "successor_only_unprojected"
+    assert (
+        configuration["delayed_gradient_rule"]
+        == "equal_normalized_immediate_successor"
+    )
+    assert configuration["immediate_channel_weight"] == 0.5
+    assert configuration["successor_channel_weight"] == 0.5
+    assert configuration["delayed_residual_entropy_coefficient"] == 0.0
 
 
-def test_g22_adam_owns_only_residual_parameters_with_fresh_state() -> None:
+def test_g23_adam_owns_only_residual_parameters_with_fresh_state() -> None:
     model = _model(
         battery_source.OBSERVATION_DIM,
         battery_source.CRITIC_STATE_DIM,

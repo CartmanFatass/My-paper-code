@@ -1,7 +1,7 @@
 # Anchored dual-channel residual G23
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -63,3 +63,17 @@ branch 5 licenses formal design; no branch supports UAV promotion.
 - bitwise fast-anchor/exploration preservation;
 - retained policy/replay/lifecycle/source proofs;
 - frozen configuration and first-match precedence.
+
+## Implementation acceptance
+
+The active implementation is `ha_ctse_process/dual_channel_residual_g23.py`
+with paired runner `scripts/screen_anchored_dual_channel_residual_g23.py`.
+Every delayed update reports both channel losses, their exact `0.5` weights and
+the combined loss; the runner fails closed if the averaged-loss identity drifts
+above `1e-7`.
+
+Six focused and 36 focused-plus-retained tests pass on the registered CPU
+one-thread runtime. They prove residual-only Adam/gradient ownership, separate
+channel composition, exact frozen anchor, zero-output/common-mode behavior and
+retained replay/lifecycle/source semantics. This accepts only the bounded
+screen, not formal compute or delayed access.
