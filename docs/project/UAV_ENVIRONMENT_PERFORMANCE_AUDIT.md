@@ -14,6 +14,10 @@ combined_wrapper_benchmark_improvement_pct=32.3707
 graph_radio_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 topology_copy_removal_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 final_three_fast_paths_benchmark_improvement_pct=36.6627
+discarded_base_view_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+fdma_frontend_sinr_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+intra_sinr_cache_validation_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+latest_incremental_benchmark_improvement_pct=15.953851
 ```
 
 ## 结论
@@ -203,3 +207,41 @@ artifact=logs/nonformal_uav_controller_rollout_fastpath_20260724_pm1/benchmark.p
 
 环境计算而非 pipe 往返仍占主导。该原型增加约百行 worker 协议却只改善 `0.83%`，因此未
 进入源码或 Git。后续不要在没有新 profile 证据时重复这条优化。
+
+## 第二批高复用优化（2026-07-24）
+
+三个只读 Scout 分别检查了通信/物理热路径、跨 runner 重复基础设施和现有性能验收入口。
+交叉证据选出了三个不改变模型或浮点归约顺序的执行修复：
+
+1. Scenario 7 的 `reset()` / `step()` 以前先由父环境构造完整 observation/state，能量状态更新后又
+   立即丢弃并重建。现在只对 Scenario 7 延迟父层 view materialization；最终公开 observation、state、
+   info 字段顺序和 RNG 保持逐字节一致。普通父环境仍走原路径。
+2. `_compute_uav_frontend_capacity()` 的 FDMA 分支以前对每个已连接用户重复计算同一 path loss、SINR
+   和谱效率。现在保存首次计算的谱效率，只重新缩放分配带宽；每个用户每次容量计算只请求一次
+   path loss/SINR。
+3. 单次 `_compute_uav_to_user_sinr()` 内的 UAV/user/config/unavailable cache identity 原本会随每个
+   干扰源重新全量验证。现在函数入口仍严格验证一次，然后只在该无状态突变的标量计算内部传递已验证
+   cache；下一次顶层计算仍重新 fail-closed 验证，因此直接位置试探、配置变化和 service mask 变化的
+   旧失效语义不变。
+
+CPU 单线程、8 个独立 seed、每个 5 step、交替先后顺序的 S7-S1 对照，将这三项新实现与“保留此前
+三项 fast path、仅恢复本批旧行为”的基线比较。每步完整 transition 和环境 RNG 逐项相同：
+
+```text
+fast_seconds=[0.414171600,0.328924000,0.378398300,0.361600600,0.348457300,0.322271000,0.342698300,0.349769700]
+baseline_seconds=[0.425212100,0.412071300,0.421199600,0.392997500,0.418694900,0.393569900,0.406771100,0.431950600]
+fast_median_seconds=0.349113500
+baseline_median_seconds=0.415383100
+incremental_median_improvement=15.953851%
+exact_transition_and_rng_match=true
+```
+
+聚焦验收：`scenario7_energy_aware_test.py` 42 项全部通过；
+`ha_ctse_process_uav_temp_loss_g1_test.py` 16 项全部通过。共享 runner 套件的 24 项中 23 项通过；唯一失败
+发生在未修改的 checkpoint 篡改测试，其构造同时触发两个既有错误，当前实现先报
+`terminal training completion marker conflicts`，而测试只接受更低优先级的
+`duplicate or misdirected`。该错误优先级与本批环境数值路径无关，本批不改 runner 合同。
+
+Scout 还识别了充电站最近邻、energy observation 矩阵和全局 generation token 候选。前两项主要影响
+S2--S4，后者必须覆盖代码与测试中的直接数组写入；它们没有本批同等级的低风险证据，暂不实现。尤其
+不以 generation token 取代现有跨顶层调用的 exact array/mask validation。

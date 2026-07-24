@@ -318,6 +318,92 @@ def test_startup_validation_accepts_parallel_array_adapter():
         adapter.close()
 
 
+def test_scenario7_skips_discarded_base_views_without_changing_transitions():
+    fast = make_env("S7-S1", seed=45)
+    reference = make_env("S7-S1", seed=45)
+    assert getattr(fast, "_defer_base_view_materialization", False)
+    reference._defer_base_view_materialization = False
+
+    fast._get_observation = Mock(wraps=fast._get_observation)
+    reference._get_observation = Mock(wraps=reference._get_observation)
+    fast._get_state = Mock(wraps=fast._get_state)
+    reference._get_state = Mock(wraps=reference._get_state)
+    try:
+        fast_reset = fast.reset(seed=45)
+        reference_reset = reference.reset(seed=45)
+        assert capture_structured_evidence(fast_reset) == capture_structured_evidence(
+            reference_reset
+        )
+        assert fast._get_observation.call_count == fast.n_uavs
+        assert reference._get_observation.call_count == 2 * reference.n_uavs
+        assert fast._get_state.call_count == 1
+        assert reference._get_state.call_count == 2
+
+        fast._get_observation.reset_mock()
+        reference._get_observation.reset_mock()
+        fast._get_state.reset_mock()
+        reference._get_state.reset_mock()
+        actions = zero_actions(fast)
+        fast_step = fast.step(actions)
+        reference_step = reference.step(zero_actions(reference))
+
+        assert capture_structured_evidence(fast_step) == capture_structured_evidence(
+            reference_step
+        )
+        assert fast._get_observation.call_count == fast.n_uavs
+        assert reference._get_observation.call_count == 2 * reference.n_uavs
+        assert fast._get_state.call_count == 1
+        assert reference._get_state.call_count == 2
+        assert rng_states_equal(
+            capture_structured_evidence(fast.np_random.get_state()),
+            capture_structured_evidence(reference.np_random.get_state()),
+        )
+    finally:
+        fast.close()
+        reference.close()
+
+
+def test_fdma_frontend_capacity_reuses_each_users_sinr_once():
+    env = make_env("S7-S1", seed=46)
+    try:
+        env.reset(seed=46)
+        connected_users = np.array([0, 1, 2], dtype=int)
+        sinr_db = float(env.min_sinr + 10.0)
+        env._compute_air_to_ground_path_loss = Mock(return_value=100.0)
+        env._compute_uav_to_user_sinr = Mock(return_value=sinr_db)
+
+        spectral_efficiency = env._get_spectral_efficiency_from_sinr(sinr_db)
+        bandwidth_per_user = env.bandwidth / env.n_uavs / len(connected_users)
+        expected = sum(
+            bandwidth_per_user * spectral_efficiency for _ in connected_users
+        )
+
+        actual = env._compute_uav_frontend_capacity(0, connected_users)
+
+        assert actual == expected
+        assert env._compute_air_to_ground_path_loss.call_count == len(connected_users)
+        assert env._compute_uav_to_user_sinr.call_count == len(connected_users)
+    finally:
+        env.close()
+
+
+def test_user_sinr_validates_the_step_cache_once_per_calculation():
+    env = make_env("S7-S1", seed=48)
+    try:
+        env.reset(seed=48)
+        env.uav_positions[:] = env.user_positions[0]
+        env._refresh_step_communication_cache()
+        env._current_step_communication_cache = Mock(
+            wraps=env._current_step_communication_cache
+        )
+
+        env._compute_uav_to_user_sinr(0, 0, env.tx_power)
+
+        assert env._current_step_communication_cache.call_count == 1
+    finally:
+        env.close()
+
+
 def test_widest_path_capacity_cache_is_exactly_equivalent():
     config_cached = Config("S7-S1")
     config_cached.max_steps = 8

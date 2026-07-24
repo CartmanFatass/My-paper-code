@@ -320,9 +320,13 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
         )
         return rx_power - 10 * np.log10(interference_plus_noise)
 
-    def _compute_uav_to_user_sinr(self, uav_idx, user_idx, rx_power):
+    def _compute_uav_to_user_sinr(
+        self, uav_idx, user_idx, rx_power, step_cache=None
+    ):
         """S7-S1 access-link SINR with no emission from lost service rows."""
 
+        if step_cache is None:
+            step_cache = self._current_step_communication_cache()
         interference_radius = self._compute_interference_radius()
         user_pos = self.user_positions[user_idx]
         interference_powers_linear: list[float] = []
@@ -332,7 +336,9 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
             interferer_pos = self.uav_positions[interferer]
             if self._compute_distance(interferer_pos, user_pos) > interference_radius:
                 continue
-            path_loss = self._cached_user_path_loss(interferer, user_idx)
+            path_loss = self._cached_user_path_loss(
+                interferer, user_idx, step_cache=step_cache
+            )
             received_linear = 10 ** ((self.tx_power - path_loss) / 10)
             interference_powers_linear.append(
                 received_linear * self.aclr_linear if self.use_fdma else received_linear

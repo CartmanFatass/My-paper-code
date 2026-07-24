@@ -6,6 +6,8 @@ from pettingzoo import ParallelEnv
 from gymnasium.spaces import Box, Dict, Discrete
 from scipy.spatial.distance import cdist
 
+_STEP_CACHE_UNSET = object()
+
 # 尝试导入路由协议
 try:
     from routing_protocols import (
@@ -2185,22 +2187,30 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 5. 获取观测值
         observations = {}
         infos = {}
+        defer_base_views = bool(
+            getattr(self, "_defer_base_view_materialization", False)
+        )
         for agent in self.agents:
             # 注意：这里需要调用父类的_get_observation和_update_observations_dict
             # 为了简化，我们先获取基础观测，再在循环外统一更新
-            observations[agent] = self._get_observation(agent)
+            if not defer_base_views:
+                observations[agent] = self._get_observation(agent)
             infos[agent] = {}
-            
+
         # 6. 更新包含连接和跳数信息的观测
-        observations = self._update_observations_dict(observations)
-        
-        # 7. Calculate initial potential and set state
-        current_state = self._get_state()
-        self.state = current_state
+        if not defer_base_views:
+            observations = self._update_observations_dict(observations)
+            current_state = self._get_state()
+            self.state = current_state
         
         # 为每个智能体的info添加正确的state
         for agent in self.agents:
-            infos[agent]['state'] = current_state.copy()
+            if not defer_base_views:
+                infos[agent]['state'] = current_state.copy()
+            else:
+                # The wrapping environment replaces this value before return;
+                # retain the public insertion order of the info mapping.
+                infos[agent]['state'] = None
             infos[agent]['handover_count'] = self.handover_count
             infos[agent]['ping_pong_count'] = self.ping_pong_count
             
@@ -2498,13 +2508,18 @@ class UAVForcedRelayEnv(ParallelEnv):
         重写父类方法，使用场景4的精确信道模型计算SINR
         """
         # 使用精确的A2G路径损耗模型
-        path_loss = self._cached_user_path_loss(uav_idx, user_idx)
+        step_cache = self._current_step_communication_cache()
+        path_loss = self._cached_user_path_loss(
+            uav_idx, user_idx, step_cache=step_cache
+        )
         
         # 计算接收功率
         rx_power = self.tx_power - path_loss
         
         # 使用精确的UAV-User SINR计算
-        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+        sinr_db = self._compute_uav_to_user_sinr(
+            uav_idx, user_idx, rx_power, step_cache=step_cache
+        )
         
         return sinr_db
 
@@ -2656,8 +2671,14 @@ class UAVForcedRelayEnv(ParallelEnv):
             return None
         return cache
 
-    def _cached_user_path_loss(self, uav_idx, user_idx):
-        cache = self._current_step_communication_cache()
+    def _cached_user_path_loss(
+        self, uav_idx, user_idx, step_cache=_STEP_CACHE_UNSET
+    ):
+        cache = (
+            self._current_step_communication_cache()
+            if step_cache is _STEP_CACHE_UNSET
+            else step_cache
+        )
         key = (int(uav_idx), int(user_idx))
         if cache is not None and key in cache["user_path_loss"]:
             return cache["user_path_loss"][key]
@@ -3472,10 +3493,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         # instead of copying the full topology once for every agent.
         connections_snapshot = self.connections.copy()
         routing_paths_snapshot = dict(self.routing_paths)
+        defer_base_views = bool(
+            getattr(self, "_defer_base_view_materialization", False)
+        )
 
         # 13. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
-            observations[agent] = self._get_observation(agent)
+            if not defer_base_views:
+                observations[agent] = self._get_observation(agent)
 
             # 【核心修正】正确设置 termination 和 truncation
             terminations[agent] = is_terminated
@@ -3510,13 +3535,14 @@ class UAVForcedRelayEnv(ParallelEnv):
             }
         
         # 7. 更新观测值（在循环外一次性完成）
-        observations = self._update_observations_dict(observations)
+        if not defer_base_views:
+            observations = self._update_observations_dict(observations)
 
-        # 8. 计算并添加 next_state 到 infos
-        next_state = self._get_state()
-        self.state = next_state
-        for agent in self.agents:
-            infos[agent]['next_state'] = next_state.copy()
+            # 8. 计算并添加 next_state 到 infos
+            next_state = self._get_state()
+            self.state = next_state
+            for agent in self.agents:
+                infos[agent]['next_state'] = next_state.copy()
             
         return observations, rewards, terminations, truncations, infos
 
@@ -4987,6 +5013,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 使用我们自定义的精确SINR计算，而不是依赖父类的sinr_matrix
         user_capacities = []
+        user_spectral_efficiencies = []
         
         for user_idx in connected_users:
             # 计算UAV到用户的精确SINR
@@ -5008,9 +5035,11 @@ class UAVForcedRelayEnv(ParallelEnv):
                 spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
                 user_capacity = self.bandwidth * spectral_efficiency
                 user_capacities.append(user_capacity)
+                user_spectral_efficiencies.append(spectral_efficiency)
             else:
                 # SINR不满足阈值，该用户无法获得服务
                 user_capacities.append(0)
+                user_spectral_efficiencies.append(0)
         
         # 在FDMA模式下，每个用户分配独立的频率资源
         if self.use_fdma:
@@ -5024,18 +5053,11 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 # 重新计算基于分配带宽的容量
                 adjusted_capacities = []
-                for i, user_idx in enumerate(connected_users):
+                for i, _user_idx in enumerate(connected_users):
                     if user_capacities[i] > 0:
-                        # 使用分配的带宽重新计算容量
-                        uav_pos = self.uav_positions[uav_idx]
-                        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
-                        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
-                        rx_power = self.tx_power - path_loss
-                        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
-                        
-                        # 使用AMC模型
-                        spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
-                        adjusted_capacity = bandwidth_per_user * spectral_efficiency
+                        adjusted_capacity = (
+                            bandwidth_per_user * user_spectral_efficiencies[i]
+                        )
                         adjusted_capacities.append(adjusted_capacity)
                     else:
                         adjusted_capacities.append(0)
@@ -5058,7 +5080,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return frontend_capacity
     
-    def _compute_uav_to_user_sinr(self, uav_idx, user_idx, rx_power):
+    def _compute_uav_to_user_sinr(
+        self, uav_idx, user_idx, rx_power, step_cache=_STEP_CACHE_UNSET
+    ):
         """
         计算UAV到用户通信的精确SINR，使用确定性的干扰模型（移除随机性，增强干扰）
         
@@ -5084,6 +5108,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         interference_powers_linear = []
         user_pos_3d = self.user_positions[user_idx]  # 用户位置已经是三维的
+        if step_cache is _STEP_CACHE_UNSET:
+            step_cache = self._current_step_communication_cache()
         
         # 计算来自其他UAV的干扰
         for i in range(self.n_uavs):
@@ -5096,7 +5122,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                     continue  # 干扰源太远，忽略
                 
                 # 原则3：使用精确的A2G路径损耗模型计算干扰
-                interferer_path_loss = self._cached_user_path_loss(i, user_idx)
+                interferer_path_loss = self._cached_user_path_loss(
+                    i, user_idx, step_cache=step_cache
+                )
                 interferer_rx_power_dbm = self.tx_power - interferer_path_loss
                 interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
                 

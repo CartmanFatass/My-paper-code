@@ -58,6 +58,9 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             getattr(config, "energy_reward_type", getattr(config, "reward_type", "load_balance")) if config else "load_balance",
         )
 
+        # Scenario 7 adds energy state after the base transition, so the base
+        # observations/state would be immediately discarded and rebuilt.
+        self._defer_base_view_materialization = True
         proxy = _EnergyAwareConfigProxy(config, base_overrides)
         super().__init__(config=proxy, render_mode=kwargs.get("render_mode", None), seed=kwargs.get("seed", None))
         if self.action_space_type != "continuous":
