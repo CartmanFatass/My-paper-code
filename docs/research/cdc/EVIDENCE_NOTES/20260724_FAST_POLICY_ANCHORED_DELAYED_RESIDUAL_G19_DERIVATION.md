@@ -122,3 +122,16 @@ formal_compute=not_scheduled
 conclusion_bearing_iteration_cost=0
 iterations_remaining=8
 ```
+
+## Prototype disposition
+
+The source-neutral implementation and runner now close the derivation. A
+single hook avoids copying the autoregressive policy loop; zero residual output
+is exact under sampled, deterministic and teacher-replay execution. The fast
+anchor is bitwise unchanged after delayed updates on both toy sources, while
+the residual output layer moves. Projected-gradient post-dots are nonnegative
+within `1e-7`, replay remains exact and all lifecycle/inactive-row checks pass.
+
+Eight focused G19 tests and 22 retained G17/G18 shared proofs pass. The next
+action is the frozen one-seed paired screen from the integrated source. No
+formal or conclusion-bearing claim is licensed yet.

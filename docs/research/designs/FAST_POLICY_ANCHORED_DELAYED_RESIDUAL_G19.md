@@ -1,7 +1,7 @@
 # Fast-policy-anchored delayed residual G19
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_BOUNDED_SCREEN_READY
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -81,3 +81,17 @@ is no same-package retry or hyperparameter sweep.
 Implementation may add one generic hook to `ContinuousRosterPolicy`, one active
 G19 module, one bounded runner and focused tests. Closed G17/G18 runners remain
 unchanged evidence at their Git commits; no compatibility adapter is required.
+
+## Implementation acceptance
+
+The bounded implementation uses Adam for the fast anchor and state-only
+critics, and unpreconditioned SGD for the residual. SGD is required because a
+positive scalar step preserves the projection's first-order sign; an Adam
+preconditioner could rotate a projected gradient back into conflict.
+
+Thirty focused and shared tests pass on the registered CPU runtime. The zero
+residual exactly matches the base policy in all three execution modes. Fast
+parameters remain bitwise fixed across delayed updates, both sources retain
+exact replay/lifecycle behavior, and every tested projected gradient closes the
+registered dot-product invariant. The full bounded paired screen is now the
+only active action.

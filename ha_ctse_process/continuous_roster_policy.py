@@ -96,6 +96,27 @@ class ContinuousRosterPolicy(nn.Module):
     def parameter_count(self) -> int:
         return int(sum(parameter.numel() for parameter in self.parameters()))
 
+    def _action_mean_for_member(
+        self,
+        *,
+        candidate: torch.Tensor,
+        prefix_fraction: torch.Tensor,
+        observation: torch.Tensor,
+    ) -> torch.Tensor:
+        """Return one routed member's pre-squash action mean.
+
+        The hook keeps the base policy behavior unchanged while allowing an
+        active research policy to add a source-neutral mean residual without
+        copying the autoregressive routing loop.
+        """
+
+        mean = self.action_mean(
+            torch.cat((candidate, prefix_fraction), dim=-1)
+        )
+        if self.current_observation_residual is not None:
+            mean = mean + self.current_observation_residual(observation)
+        return mean
+
     def _routing_order(
         self, active_mask: torch.Tensor, observations: torch.Tensor
     ) -> torch.Tensor:
@@ -202,13 +223,11 @@ class ContinuousRosterPolicy(nn.Module):
                 ),
                 next_hidden[batch_index, owner],
             )
-            mean = self.action_mean(
-                torch.cat((candidate, prefix_fraction), dim=-1)
+            mean = self._action_mean_for_member(
+                candidate=candidate,
+                prefix_fraction=prefix_fraction,
+                observation=observations[batch_index, owner],
             )
-            if self.current_observation_residual is not None:
-                mean = mean + self.current_observation_residual(
-                    observations[batch_index, owner]
-                )
             distribution = torch.distributions.Normal(mean, std.expand_as(mean))
             if teacher_pre_tanh is not None:
                 raw = teacher_pre_tanh[batch_index, owner]
