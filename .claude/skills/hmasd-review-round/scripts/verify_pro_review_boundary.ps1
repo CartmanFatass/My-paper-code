@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory = $true)][string]$Commit,
     [Parameter(Mandatory = $true)][string]$QuestionPath,
     [string]$Remote = 'My-paper-code',
-    [string]$Branch = 'aggressive',
+    # No default: each branch has its own Pro conversation, so the branch under
+    # review must be stated, never inherited from a stale constant.
+    [Parameter(Mandatory = $true)][string]$Branch,
     [string]$RepoRoot = (Get-Location).Path
 )
 

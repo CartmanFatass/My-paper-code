@@ -3,42 +3,60 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
-$configPath = Join-Path $repo '.codex/config.toml'
-$profilePath = Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml'
+$definitionPath = Join-Path $repo '.claude/agents/hmasd-experiment-operator.md'
 $rolePath = Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md'
-$config = Get-Content -Raw -LiteralPath $configPath
-$profile = Get-Content -Raw -LiteralPath $profilePath
+if (-not (Test-Path -LiteralPath $definitionPath -PathType Leaf)) {
+    throw 'The experiment operator has no registered subagent definition'
+}
+$operatorDef = Get-Content -Raw -LiteralPath $definitionPath
 $role = Get-Content -Raw -LiteralPath $rolePath
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 
-if (-not $config.Contains('[agents."HMASDExperimentOperator"]') -or
-    -not $config.Contains('config_file = "./agents/hmasd-experiment-operator.toml"')) {
-    throw 'Experiment operator is not registered as a fixed native child'
-}
+# The operator is deliberately pinned to the mechanical tier.
 foreach ($required in @(
-    'name = "hmasd-experiment-operator"',
-    'model = "gpt-5.6-luna"',
-    'model_reasoning_effort = "low"',
-    'sandbox_mode = "workspace-write"',
-    'approval_policy = "never"',
-    'exactly one already-authorized run',
-    'Monitoring is silent',
-    'Do not emit commentary, progress updates, ETA messages',
-    'exactly once, through your final response',
-    'only at COMPLETE or ERROR',
-    'Do not detach with',
-    'do not repeatedly open its',
-    'progress file',
-    'Do not repair, restart, resume, extend, or retry',
-    'Do not spawn',
-    'agents.')) {
-    if (-not $profile.Contains($required)) { throw "Operator profile missing: $required" }
+    'name: hmasd-experiment-operator',
+    'model: haiku',
+    'effort: low')) {
+    if (-not $operatorDef.Contains($required)) { throw "Operator definition missing: $required" }
 }
+# No source-write authority: the tool grant must expose no editing tool.
+$toolLine = [regex]::Match($operatorDef, '(?m)^tools:\s*(.+)$')
+if (-not $toolLine.Success) { throw 'Operator definition does not declare an explicit tool grant' }
+foreach ($forbidden in @('Edit', 'Write', 'MultiEdit', 'NotebookEdit')) {
+    if ($toolLine.Groups[1].Value -match "\b$forbidden\b") {
+        throw "Operator tool grant exposes a source-write tool: $forbidden"
+    }
+}
+# Git authority is none, enforced rather than merely stated.
+if ($operatorDef -notmatch '(?m)^hooks:' -or $operatorDef -notmatch 'PreToolUse') {
+    throw 'Operator definition does not enforce its no-Git boundary with a hook'
+}
+
+foreach ($required in @(
+    'one already-authorized run',
+    'fails closed',
+    'foreground',
+    'run_in_background',
+    'Start-Process',
+    'repeatedly open its progress file',
+    'Send nothing while the run is healthy',
+    'No progress, ETA, phase, heartbeat',
+    'exactly once',
+    'EXPERIMENT_OPERATOR_TERMINAL',
+    'terminal=<COMPLETE|ERROR>',
+    'never launch a second run',
+    'resume a checkpoint',
+    'spawn an agent',
+    'You never run Git')) {
+    if (-not $operatorDef.Contains($required)) { throw "Operator definition missing: $required" }
+}
+
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',
-    'model=gpt-5.6-luna',
-    'reasoning_effort=low',
+    'definition=.claude/agents/hmasd-experiment-operator.md',
+    'model=haiku',
+    'effort=low',
     'progress_notifications=forbidden',
     'terminal_notification_count=exactly_one',
     'terminal_values=COMPLETE|ERROR',
@@ -47,37 +65,31 @@ foreach ($required in @(
     'No progress, ETA, phase, heartbeat')) {
     if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
 }
+
 foreach ($required in @(
     'project_manager_experiment_orchestration=direct_via_registered_child',
     'experiment_operator_authority=one_exact_authorized_run',
+    'subagent_runtime=claude_code',
+    'subagent_definitions=.claude/agents/*.md',
     'There is no dispatch or experiment-monitor Skill')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
+
 foreach ($required in @(
     'hmasd-experiment-operator',
-    '`gpt-5.6-luna` with `low` reasoning',
+    '`haiku` with `low` effort',
     'returns exactly one `COMPLETE` or',
     'No Controller, persistent Monitor, dispatcher')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK operator state missing: $required" }
 }
 
-$catalogMatch = [regex]::Match($config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
-if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
-$catalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'
-if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
-    throw "Configured model catalog is unavailable: $catalogPath"
-}
-$catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
-$luna = @($catalog.models | Where-Object { $_.slug -eq 'gpt-5.6-luna' })
-if ($luna.Count -ne 1) { throw 'Configured catalog does not expose exactly one gpt-5.6-luna model' }
-$efforts = @($luna[0].supported_reasoning_levels | ForEach-Object { $_.effort })
-if ($efforts -notcontains 'low') { throw 'Configured gpt-5.6-luna model does not support low effort' }
-
 foreach ($retired in @(
     '.agents/roles/CONTROLLER.md',
     '.agents/roles/EXPERIMENT_MONITOR.md',
     '.agents/skills/hmasd-dispatch-task/SKILL.md',
-    '.agents/skills/hmasd-experiment-monitor/SKILL.md')) {
+    '.agents/skills/hmasd-experiment-monitor/SKILL.md',
+    '.codex/config.toml',
+    '.codex/agents/hmasd-experiment-operator.toml')) {
     if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
         throw "Retired execution surface remains: $retired"
     }

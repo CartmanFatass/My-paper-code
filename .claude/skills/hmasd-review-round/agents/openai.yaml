@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Review Round"
-  short_description: "Recover the Pro session and archive its exact reply"
-  default_prompt: "Use $hmasd-review-round and $browser:control-in-app-browser directly in Project Manager for every HMASD external GPT-5.6 Pro review. Follow the deterministic home-page redirect and registered-session recovery ladder, exact single-fence rule, stable response-completion detection, evidence-access recovery, provenance intake, and exact raw archival before Project Manager reconciliation."

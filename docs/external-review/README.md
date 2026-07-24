@@ -8,9 +8,10 @@ the compact artifact and transport sequence only.
 1. Project Manager decides whether a question-scoped External Pro judgment is
    useful and authors the reviewer-visible brief, allow-list, and question.
 2. Project Manager commits and pushes that exact boundary.
-3. In the same Project Manager task, `$hmasd-review-round` and
-   `$browser:control-in-app-browser` reuse the registered Pro conversation and
-   submit one freshness-fenced question.
+3. `$hmasd-review-round` drives the transport, with browser work through the
+   `claude-in-chrome` skill. It runs in the Project Manager directly or in the
+   registered `hmasd-review-exchanger` subagent. Either way it reuses the
+   registered Pro conversation and submits one freshness-fenced question.
 4. The exact natural response is archived, reread for equality, and accompanied
    by a provenance-only intake record. No semantic relay or second reviewer is
    created.
@@ -24,13 +25,14 @@ code or compute.
 
 ## Transport identity
 
-The registered conversation lives in `REVIEWER_CONVERSATIONS.json`. Every new
-submission carries:
+The registered conversation lives in `REVIEWER_CONVERSATIONS.json`. A reviewer
+whose `registration_status` is not `registered` blocks transport; a
+`retired_registrations` entry is never a fallback. Every new submission carries:
 
 ```text
 CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
-branch=aggressive
+branch=<branch under review; each branch has its own conversation>
 round=<round-id>
 stage_commit=<40-character pushed SHA>
 question=docs/external-review/rounds/<round-id>/20_PRO_OPEN_QUESTION.md

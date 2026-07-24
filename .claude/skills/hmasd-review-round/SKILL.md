@@ -17,9 +17,29 @@ This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
-Activate `$hmasd-review-round` in the active Project Manager and use
-`$browser:control-in-app-browser` for browser work. Do not create a transport
-task, relay, or Monitor.
+Activate `$hmasd-review-round` in the active Project Manager. Browser work uses
+the `claude-in-chrome` skill and its `mcp__claude-in-chrome__*` tools; load that
+skill before the first browser call.
+
+Transport runs either in the active Project Manager directly or in the
+registered `hmasd-review-exchanger` subagent, which carries this same procedure
+and returns transport facts only. Create no other relay, dispatcher, or Monitor.
+
+### Browser tool mapping
+
+| Transport operation | Tool |
+|---|---|
+| enumerate existing tabs before opening anything | `tabs_context_mcp` |
+| open the registered conversation | `tabs_create_mcp`, then `navigate` |
+| snapshot message-role containers and generation controls | `read_page`, `get_page_text` |
+| locate a specific control or conversation link | `find` |
+| compose the fence or a continuation | `form_input` |
+| submit, scroll, or operate a control | `computer` |
+| attach the evidence archive during transport recovery | `file_upload` |
+
+Never reuse a tab id from an earlier session; call `tabs_context_mcp` first and
+re-resolve. Do not trigger a JavaScript dialog — a modal blocks every subsequent
+browser call and requires the user to clear it by hand.
 
 ## Required inputs
 
@@ -30,10 +50,15 @@ conversation, and declared input paths. Before browser submission:
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
 2. Run
-   `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
-   with that commit and question path.
+   `.claude/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
+   with that commit, question path, and `-Branch` set to the registered
+   reviewer's branch. `-Branch` is mandatory and has no default — it proves the
+   commit is actually reachable on the branch this conversation serves.
 3. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and select only its
-   registered conversation.
+   registered conversation. A reviewer whose `registration_status` is not
+   `registered`, or whose `conversation_id` or `url` is null, blocks transport:
+   report it and stop. Never fall back to a `retired_registrations` entry, and
+   never register a conversation yourself.
 
 An identity mismatch stops transport for correction; it does not authorize
 editing, paraphrasing, or validating the package.
@@ -66,12 +91,21 @@ Search visible user turns for this exact fence identity:
 ```text
 CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
-branch=aggressive
+branch=<branch>
 round=<round>
 stage_commit=<stage_commit>
 question=<question>
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
 ```
+
+`branch` is the branch under review, taken from the registered reviewer's
+`branch` field. Each branch has its own dedicated conversation, so a fence whose
+branch does not match the registry is a registration error, not a fence to
+adopt. Never hard-code a branch name here.
+
+The reviewer reads the repository itself through the web GitHub connector at
+`stage_commit`; the question carries exact paths, not file contents. Anything
+unpushed is invisible to it — verify the push before submitting.
 
 - If a matching fence is visible, adopt its browser state and continue.
   An accepted matching fence is never resubmitted.
@@ -166,7 +200,7 @@ Recover in the same registered conversation and under the same accepted fence:
    than assembling paths manually:
 
    ```powershell
-   & .agents/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1 `
+   & .claude/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1 `
      -Commit <stage_commit> `
      -QuestionPath <repository-relative-question-path> `
      -OutputPath <new-absolute-zip-path>

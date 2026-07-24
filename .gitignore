@@ -61,6 +61,8 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
+# Workflow specs are the source of truth for how the project runs.
+!docs/workflows/*.md
 !docs/report/*.md
 !docs/plans/*.md
 !docs/superpowers/plans/*.md

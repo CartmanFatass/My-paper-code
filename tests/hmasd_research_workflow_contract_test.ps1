@@ -5,12 +5,31 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 # Stable workflow surfaces only. Scientific assignments and result labels are
 # deliberately not hard-coded here because CURRENT_WORK is the active line.
-$skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
+# Project Skills live under .claude/skills/ so Claude Code resolves them. Only
+# the hmasd-* namespace is project workflow; third-party packs are ignored here.
+$skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 'hmasd-*' |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedSkills = @('hmasd-agile-research-development', 'hmasd-review-round') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
+}
+if (Test-Path (Join-Path $repo '.agents/skills/hmasd-agile-research-development')) {
+    throw 'A project Skill remains at its pre-migration .agents/skills location'
+}
+
+# Every bounded role is a Claude Code subagent definition.
+$agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'hmasd-*.md' |
+    Select-Object -ExpandProperty Name | Sort-Object)
+$expectedAgents = @(
+    'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md', 'hmasd-implementer.md',
+    'hmasd-monitor.md', 'hmasd-patcher.md', 'hmasd-review-exchanger.md',
+    'hmasd-reviewer.md', 'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
+if (Compare-Object $expectedAgents $agentDefs) {
+    throw "Unexpected subagent roster: $($agentDefs -join ',')"
+}
+if (Test-Path (Join-Path $repo '.codex')) {
+    throw 'The retired Codex agent runtime remains on the active line'
 }
 
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
@@ -24,7 +43,7 @@ $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
 $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
-$agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
+$agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 
 foreach ($required in @(
@@ -80,8 +99,10 @@ foreach ($required in @(
 
 foreach ($required in @(
     'root Project Manager directly stages, commits, and pushes',
-    'Native children never run Git',
-    'fixed native child, not a persistent task')) {
+    'Subagents never run Git',
+    'fixed subagent, not a persistent task',
+    '.claude/skills/hmasd-agile-research-development/SKILL.md',
+    '.claude/agents/*.md')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
 foreach ($required in @(

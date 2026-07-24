@@ -27,7 +27,7 @@ if (-not (Test-Path -LiteralPath $question -PathType Leaf)) {
 $roundId = Split-Path -Leaf $round
 @"
 `$hmasd-review-round
-`$browser:control-in-app-browser
+claude-in-chrome
 
 HMASD PROJECT-MANAGER-DIRECT PRO REVIEW HEARTBEAT
 This wake belongs to the active Project Manager. Read the current review Skill and

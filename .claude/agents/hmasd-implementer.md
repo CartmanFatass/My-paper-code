@@ -21,7 +21,7 @@ Read first:
 
 1. `docs/project/AGENT_CONTEXT.md` — standing environment, git, discipline and
    reporting rules. All of it binds you.
-2. `.agents/skills/hmasd-agile-research-development/SKILL.md` — the project-native
+2. `.claude/skills/hmasd-agile-research-development/SKILL.md` — the project-native
    implementation and verification procedure that binds your work.
 
 Then read the spec section your brief names.
