@@ -2644,6 +2644,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "unavailable": self._communication_unavailable_mask(),
             "config": self._communication_config_signature(),
             "user_path_loss": {},
+            "link_path_loss": {},
             "link_sinr": {},
             "link_capacity": {},
         }
@@ -2687,6 +2688,56 @@ class UAVForcedRelayEnv(ParallelEnv):
         )
         if cache is not None:
             cache["user_path_loss"][key] = path_loss
+        return path_loss
+
+    def _cached_directional_path_loss(
+        self,
+        tx_type,
+        tx_idx,
+        rx_type,
+        rx_idx,
+        step_cache=_STEP_CACHE_UNSET,
+    ):
+        cache = (
+            self._current_step_communication_cache()
+            if step_cache is _STEP_CACHE_UNSET
+            else step_cache
+        )
+        if bool(getattr(self, "_disable_directional_path_loss_cache", False)):
+            cache = None
+        key = (str(tx_type), int(tx_idx), str(rx_type), int(rx_idx))
+        if cache is not None and key in cache["link_path_loss"]:
+            return cache["link_path_loss"][key]
+        if tx_type == "uav":
+            tx_position = self.uav_positions[tx_idx]
+        elif tx_type == "ground_bs":
+            tx_position = self.ground_bs_positions[tx_idx]
+        else:
+            raise ValueError(f"unsupported path-loss transmitter: {tx_type}")
+        if rx_type == "uav":
+            rx_position = self.uav_positions[rx_idx]
+        elif rx_type == "ground_bs":
+            rx_position = self.ground_bs_positions[rx_idx]
+        else:
+            raise ValueError(f"unsupported path-loss receiver: {rx_type}")
+        if tx_type == "uav" and rx_type == "uav":
+            path_loss = self._compute_air_to_air_path_loss(
+                tx_position, rx_position
+            )
+        elif tx_type == "uav" and rx_type == "ground_bs":
+            path_loss = self._compute_air_to_ground_path_loss(
+                tx_position, rx_position
+            )
+        elif tx_type == "ground_bs" and rx_type == "uav":
+            path_loss = self._compute_ground_to_air_path_loss(
+                tx_position, rx_position
+            )
+        else:
+            raise ValueError(
+                f"unsupported path-loss direction: {tx_type}->{rx_type}"
+            )
+        if cache is not None:
+            cache["link_path_loss"][key] = path_loss
         return path_loss
 
     def _cached_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
@@ -3023,11 +3074,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         使用场景4的精确信道模型计算UAV到UAV的SINR
         """
-        sender_pos = self.uav_positions[sender_idx]
-        receiver_pos = self.uav_positions[receiver_idx]
-        
-        # 使用精确的A2A路径损耗模型
-        path_loss = self._compute_air_to_air_path_loss(sender_pos, receiver_pos)
+        step_cache = self._current_step_communication_cache()
+        path_loss = self._cached_directional_path_loss(
+            "uav",
+            sender_idx,
+            "uav",
+            receiver_idx,
+            step_cache=step_cache,
+        )
         
         # 计算接收功率
         rx_power = self.tx_power - path_loss
@@ -4256,25 +4310,25 @@ class UAVForcedRelayEnv(ParallelEnv):
         else:
             return 0
         
-        # 计算距离
-        distance = self._compute_distance(pos1, pos2)
-        safe_distance = max(distance, 1e-6)
-        
         # 根据链路类型选择正确的路径损耗计算和发射功率
         if node1_type == "uav" and node2_type == "uav":
             # 空对空通信：UAV到UAV - 使用精确的A2A自由空间模型
-            path_loss = self._compute_air_to_air_path_loss(pos1, pos2)
             tx_power = self.tx_power  # 使用UAV发射功率
         elif node1_type == "uav" and node2_type == "ground_bs":
             # 上行链路：UAV到地面基站 - 使用A2G模型
-            path_loss = self._compute_air_to_ground_path_loss(pos1, pos2)
             tx_power = self.tx_power  # 使用UAV发射功率
         elif node1_type == "ground_bs" and node2_type == "uav":
             # 下行链路：地面基站到UAV - 使用G2A模型
-            path_loss = self._compute_ground_to_air_path_loss(pos1, pos2)
             tx_power = self.ground_bs_tx_power  # 使用基站发射功率
         else:
             return 0  # 不支持的连接类型
+        path_loss = self._cached_directional_path_loss(
+            node1_type,
+            node1_idx,
+            node2_type,
+            node2_idx,
+            step_cache=step_cache,
+        )
         
         # 计算接收功率 (dBm)
         rx_power = tx_power - path_loss
@@ -4455,6 +4509,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             rx_pos = None
         
         if rx_pos is not None:
+            step_cache = self._current_step_communication_cache()
             # 计算来自其他UAV的干扰
             for i in range(self.n_uavs):
                 # 排除发送方和接收方自身
@@ -4471,9 +4526,17 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 # 原则3：为干扰链路计算正确的路径损耗
                 if rx_type == "uav":
-                    interferer_path_loss = self._compute_air_to_air_path_loss(interferer_pos, rx_pos)
+                    interferer_path_loss = self._cached_directional_path_loss(
+                        "uav", i, "uav", rx_idx, step_cache=step_cache
+                    )
                 elif rx_type == "ground_bs":
-                    interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, rx_pos)
+                    interferer_path_loss = self._cached_directional_path_loss(
+                        "uav",
+                        i,
+                        "ground_bs",
+                        rx_idx,
+                        step_cache=step_cache,
+                    )
                 else:
                     continue
                 

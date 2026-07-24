@@ -18,6 +18,9 @@ discarded_base_view_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 fdma_frontend_sinr_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 intra_sinr_cache_validation_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 latest_incremental_benchmark_improvement_pct=15.953851
+directional_path_loss_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+directional_path_loss_reuse_benchmark_improvement_pct=7.554426
+directional_path_loss_reuse_exact_transition_and_rng=true
 ```
 
 ## 结论
@@ -245,3 +248,36 @@ exact_transition_and_rng_match=true
 Scout 还识别了充电站最近邻、energy observation 矩阵和全局 generation token 候选。前两项主要影响
 S2--S4，后者必须覆盖代码与测试中的直接数组写入；它们没有本批同等级的低风险证据，暂不实现。尤其
 不以 generation token 取代现有跨顶层调用的 exact array/mask validation。
+
+## 第三批定向路损复用（2026-07-24）
+
+三个只读 Scout 分别检查了 UAV 通信、toy rollout/PPO 和跨 runner 基础设施。toy 轨迹在 CPU 上的
+多数 `.to(cpu)` 本身不复制；autoregressive prefix、hidden recurrence 和逐步环境转移是真因果循环。
+跨 arm 复用 persistent UAV worker 则会扩大 reset、RNG、cache 与生命周期证明面。两者均不在没有
+新 profile 的情况下实现。
+
+保留的单一改动扩展现有 exact-state communication snapshot，新增有向
+`(tx_type, tx_idx, rx_type, rx_idx)` 路损 payload。`_compute_uav_to_uav_sinr()`、
+`_get_link_capacity()` 和 backhaul 干扰链路现在共享同一步的 A2A/A2G/G2A 标量结果。所有路损公式、
+发射功率、干扰源遍历与 `np.sum` 顺序保持不变；位置、配置、不可用 mask 和 reset 仍由原 snapshot
+identity 失效。proposed-position guard 不调用索引式 helper，因此继续走原始标量路径且不会污染快照。
+
+一条聚焦 spy 测试证明有向 link 序列结果逐元素相同且三类底层路损调用总数下降。Scenario 7 的 43
+项测试与临时离队 UAV wrapper 的 16 项测试全部通过，其中原有五步 cached/scalar transition、state、
+routing 和 RNG 精确对照继续通过。
+
+CPU 单线程基准使用 8 个 seed、每 seed 5 step、3 次重复并交替先后顺序，只关闭本批新增缓存：
+
+```text
+samples_per_side=24
+fast_median_seconds=0.344788850
+scalar_median_seconds=0.372964150
+incremental_median_improvement=7.554426%
+exact_transition_and_rng_match=true
+artifact=logs/nonformal_uav_directional_path_loss_cache_20260724_pm1/result.json
+decision=KEEP
+```
+
+此前 `20%` 保留线针对需要跨文件扩大通信缓存接口的实现。本批是现有单文件 snapshot 的小型 payload
+补全，在已经高度优化的基线上仍稳定减少约 `7.55%`，且没有增加 schema、持久遥测或兼容分支，因此
+按研究仓库的敏捷小代码原则保留。批量距离矩阵、浮点归约重排与 worker 池跨 arm 复用继续冻结。

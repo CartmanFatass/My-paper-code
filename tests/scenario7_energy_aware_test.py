@@ -500,6 +500,60 @@ def test_step_communication_cache_reuses_user_geometry_exactly():
         uncached.close()
 
 
+def test_directional_path_loss_cache_reuses_exact_link_geometry():
+    cached = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=58)
+    scalar = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=58)
+    scalar._disable_directional_path_loss_cache = True
+    try:
+        cached.reset(seed=58)
+        scalar.reset(seed=58)
+        cached._refresh_step_communication_cache()
+        scalar._refresh_step_communication_cache()
+        for env in (cached, scalar):
+            env._compute_air_to_air_path_loss = Mock(
+                wraps=env._compute_air_to_air_path_loss
+            )
+            env._compute_air_to_ground_path_loss = Mock(
+                wraps=env._compute_air_to_ground_path_loss
+            )
+            env._compute_ground_to_air_path_loss = Mock(
+                wraps=env._compute_ground_to_air_path_loss
+            )
+
+        def link_rows(env):
+            return np.asarray(
+                [
+                    env._compute_uav_to_uav_sinr(0, 1),
+                    env._get_link_capacity("uav", 0, "uav", 1),
+                    env._get_link_capacity("uav", 1, "ground_bs", 0),
+                    env._get_link_capacity("uav", 0, "ground_bs", 0),
+                    env._get_link_capacity("ground_bs", 0, "uav", 0),
+                ]
+            )
+
+        np.testing.assert_array_equal(link_rows(cached), link_rows(scalar))
+        cached_calls = sum(
+            row.call_count
+            for row in (
+                cached._compute_air_to_air_path_loss,
+                cached._compute_air_to_ground_path_loss,
+                cached._compute_ground_to_air_path_loss,
+            )
+        )
+        scalar_calls = sum(
+            row.call_count
+            for row in (
+                scalar._compute_air_to_air_path_loss,
+                scalar._compute_air_to_ground_path_loss,
+                scalar._compute_ground_to_air_path_loss,
+            )
+        )
+        assert cached_calls < scalar_calls
+    finally:
+        cached.close()
+        scalar.close()
+
+
 def test_step_link_cache_reuses_exact_state_and_bypasses_trial_inputs():
     env = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=53)
     try:
