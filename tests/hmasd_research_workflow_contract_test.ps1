@@ -42,7 +42,12 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'review_scout_status=ACTIVE_LOCAL_EXPERIENCE_RECORDER',
     'browsermcp_direct_launcher=.omp/browsermcp-direct/start_browsermcp_direct.ps1',
     'browsermcp_direct_timeout_ms=120000',
-    'browsermcp_direct_implicit_type_snapshot=removed')) {
+    'browsermcp_direct_implicit_type_snapshot=removed',
+    'browsermcp_direct_live_status=CLICK_HOVER_TYPE_IMPLICIT_SNAPSHOTS_REMOVED_EXTENSION_RECONNECT_REQUIRED',
+    'next_boundary=RECONNECT_SAME_PRO_TAB_THEN_RESUME_EXISTING_S2_RESPONSE_ARCHIVE',
+    'next_action_class=resume_existing_browser_pro_response_copy_archive_then_controller_intake',
+    's2_result_review_status=SUBMISSION_CONFIRMED_RESPONSE_COMPLETE_COPY_ARCHIVE_BLOCKED',
+    's2_result_review_raw=absent')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -131,8 +136,13 @@ foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
         throw "Accepted S1 result round is missing $required"
     }
 }
-if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED_S1_RESULT')) {
-    throw 'CURRENT_WORK accepted S1 result round state changed'
+$submittedS2Round = Join-Path $repo 'docs/external-review/rounds/20260724_alpsc_s2_result_review'
+if (-not (Test-Path (Join-Path $submittedS2Round '19_BROWSER_PRO_SUBMISSION.json') -PathType Leaf) -or
+    (Test-Path (Join-Path $submittedS2Round '21_PRO_OPEN_RAW.md') -PathType Leaf)) {
+    throw 'Submitted S2 result round receipt/raw state changed'
+}
+if (-not $currentWork.Contains('browser_pro_round_state=RESUME_SUBMITTED_RESPONSE_COMPLETE_COPY_BLOCKED_EXTENSION_RECONNECT_REQUIRED')) {
+    throw 'CURRENT_WORK submitted S2 result round state changed'
 }
 foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md',

@@ -43,6 +43,64 @@ if (($bundle.Split([string[]]@($timeoutOld), [StringSplitOptions]::None).Count -
 }
 $bundle = $bundle.Replace($timeoutOld, 'options = { timeoutMs: 12e4 }')
 
+$clickOld = @(
+    '    await context.sendSocketMessage("browser_click", validatedParams);',
+    '    const snapshot2 = await captureAriaSnapshot(context);',
+    '    return {',
+    '      content: [',
+    '        {',
+    '          type: "text",',
+    '          text: `Clicked "${validatedParams.element}"`',
+    '        },',
+    '        ...snapshot2.content',
+    '      ]',
+    '    };'
+) -join "`n"
+$clickNew = @(
+    '    await context.sendSocketMessage("browser_click", validatedParams);',
+    '    return {',
+    '      content: [',
+    '        {',
+    '          type: "text",',
+    '          text: `Clicked "${validatedParams.element}"; postcondition snapshot required`',
+    '        }',
+    '      ]',
+    '    };'
+) -join "`n"
+if (($bundle.Split([string[]]@($clickOld), [StringSplitOptions]::None).Count - 1) -ne 1) {
+    throw 'BrowserMCP click-handler anchor changed; refusing to patch unknown upstream code.'
+}
+$bundle = $bundle.Replace($clickOld, $clickNew)
+
+$hoverOld = @(
+    '    await context.sendSocketMessage("browser_hover", validatedParams);',
+    '    const snapshot2 = await captureAriaSnapshot(context);',
+    '    return {',
+    '      content: [',
+    '        {',
+    '          type: "text",',
+    '          text: `Hovered over "${validatedParams.element}"`',
+    '        },',
+    '        ...snapshot2.content',
+    '      ]',
+    '    };'
+) -join "`n"
+$hoverNew = @(
+    '    await context.sendSocketMessage("browser_hover", validatedParams);',
+    '    return {',
+    '      content: [',
+    '        {',
+    '          type: "text",',
+    '          text: `Hovered over "${validatedParams.element}"; postcondition snapshot required`',
+    '        }',
+    '      ]',
+    '    };'
+) -join "`n"
+if (($bundle.Split([string[]]@($hoverOld), [StringSplitOptions]::None).Count - 1) -ne 1) {
+    throw 'BrowserMCP hover-handler anchor changed; refusing to patch unknown upstream code.'
+}
+$bundle = $bundle.Replace($hoverOld, $hoverNew)
+
 $typeOld = @(
     '    await context.sendSocketMessage("browser_type", validatedParams);',
     '    const snapshot2 = await captureAriaSnapshot(context);',
@@ -76,6 +134,9 @@ if ([string]::IsNullOrWhiteSpace($OutputPath)) {
     $OutputPath = Join-Path (Split-Path $source -Parent) 'index.hmasd-direct.js'
 }
 $output = [IO.Path]::GetFullPath($OutputPath)
+if ([IO.Path]::GetFullPath($source).Equals($output, [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'BrowserMCP patched output must not overwrite the immutable upstream bundle.'
+}
 [IO.File]::WriteAllText($output, $bundle, $utf8)
 
 if ($PatchOnly) { exit 0 }
