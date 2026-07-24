@@ -24,8 +24,8 @@ This file records active state only. Durable authority is in `AGENTS.md`.
 
 ```text
 last_completed_assignment_id=IMPORTED_DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_FORMAL_ITERATION_17
-active_assignment_id=CLAUDE_INDEPENDENT_EXPLORATION_PAUSED
-next_boundary=USER_DIRECTED_CLAUDE_INDEPENDENT_EXPLORATION
+active_assignment_id=CLAUDE_DECOUPLED_SKILL_CYCLE_K_DIRECTION_SET
+next_boundary=STRUCTURALLY_NEW_K_DECOUPLING_DESIGN_REQUIRES_EXPLICIT_USER_INSTRUCTION
 autonomous_research_grant=REVOKED_BY_USER
 grant_scope=none
 intermediate_authorization_prompts=required_for_every_new_protected_action
@@ -44,7 +44,15 @@ tracked_algorithm_match=exact_against_origin_aggressive_770fa45100134e887c50ab34
 focused_algorithm_merge_tests=10_passed_1_runtime_artifact_blocked
 runtime_artifact_blocker=logs/formal_open_roster_prefix_g8_cpu_20260723_fcce714_r1/train_manifest.json_absent
 runtime_evidence_import=git_tracked_records_only_logs_not_present_in_workspace
-implementation_status=AGGRESSIVE_G16_VERSION_IMPORTED_CLAUDE_INDEPENDENT_PAUSED
+implementation_status=K_DECOUPLING_DIRECTION_SET_EVIDENCE_ASSESSED_NO_CODE_AUTHORIZED
+k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM
+k_fixed_anchor=R41B_PASS_WIN_0.89_KEY0_0.97_KEY1_0.92
+k_r42=VALID_FAIL_SERVICE_DELTA_WIN_CI_MINUS_0.17_TO_MINUS_0.03
+k_r43=INVALID_FIXED_ANCHOR_LOST
+k_r44=VALID_FAIL_NO_DECOUPLING_DISCORDANCE_0_FULL_SYNC_RENEW_1
+k_r45=VALID_FAIL_IDENTIFIABILITY_PREDICTION_LEARNABLE_SIGN_HETEROGENEITY_ABSENT
+k_r48=VALID_FAIL_SKILL_BOUNDARY_RESET
+k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE
 nonformal_compute_status=not_authorized
 formal_compute_authority=none_without_new_explicit_user_instruction
 formal_compute_status=not_authorized
@@ -126,12 +134,12 @@ previous_chain_terminal_disposition=FIVE_ITERATION_CHAIN_COMPLETE
 imported_dynamic_roster_chain_status=COMPLETE_ON_AGGRESSIVE_NO_CLAUDE_AUTHORITY
 imported_chain_iterations=12
 imported_chain_report_range=ITERATION_6_to_ITERATION_17
-primary_research_axis=dynamic_agent_count
-asynchronous_skill_lifetime_status=frozen_out_of_active_scope
-skill_controller_status=removed_from_mvp
-initial_objective=absolute_usability_not_comparative_advantage
-active_algorithm=PREFIX_NORMALIZED_OPEN_ROSTER_G8
-active_design=docs/research/designs/DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16.md
+primary_research_axis=decoupled_individual_skill_lifetime_from_global_k
+asynchronous_skill_lifetime_status=primary_axis_no_positive_algorithm_yet
+skill_controller_status=absent_from_G8_base_structurally_new_design_required
+initial_objective=learned_per_agent_renewal_without_shared_duration_or_task_specific_reward
+active_algorithm=PREFIX_NORMALIZED_OPEN_ROSTER_G8_imported_base
+active_design=none_k_decoupling_design_not_frozen
 g5_authorization_token=AUTHORIZE_OPEN_ROSTER_DIRECT_MVP_G5_FORMAL_CPU_V1
 g5_focused_tests=6_passed
 g5_nonformal_exercise=logs/nonformal_open_roster_direct_g5_20260723_pm1
@@ -523,9 +531,13 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   causal state sensitivity in G2-G4 but no robust EHC/roster advantage over
   ordinary recurrence under the tested sources and frozen PPO budgets.
 - The imported aggressive history contains a completed twelve-iteration chain
-  whose primary axis is dynamic agent count. It grants no current authority on
-  `Claude`. Asynchronous skill lifetime remains frozen, not rejected; no active
-  skill controller or skill-advantage claim is carried into the MVP.
+  whose primary axis was dynamic agent count. It grants no current authority
+  on `Claude`.
+- `Claude` now uses decoupling individual skill lifetime from the shared global
+  cycle `k` as its primary research axis, with G8 retained only as the
+  variable-membership base. This direction selection authorizes no code,
+  BrowserMCP action or compute. Exact R42--R48 routes remain retired or invalid;
+  any later design must be structurally new rather than a rescue.
 - The imported chain began from the access-valid direct recurrent active-set
   path and the R49 `N`-independent interface lemma. Its first goal was absolute
   task usability across within-episode membership changes and unseen counts,

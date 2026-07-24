@@ -15,7 +15,10 @@ $currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 foreach ($required in @('autonomous_research_grant=REVOKED_BY_USER',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
-    'agent_assets=all_retained_active_routing_controller_registry_only')) {
+    'agent_assets=all_retained_active_routing_controller_registry_only',
+    'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
+    'k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM',
+    'k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
