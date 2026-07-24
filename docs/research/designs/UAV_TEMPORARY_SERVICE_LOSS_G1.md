@@ -1,6 +1,6 @@
 # UAV temporary service loss G1
 
-Status: frozen executable definition, implementation pending
+Status: frozen executable definition, implementation complete; prelaunch acceptance pending
 
 Scientific authority:
 `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
@@ -72,7 +72,16 @@ ppo_and_checkpoint_rule=identical
 The fixed arm routes recurrence through eight stable physical storage slots and
 uses the current service mask. The open arm compacts only active lifecycle rows
 and routes recurrence by lifecycle ownership. Physical-slot identity is never
-an actor input. A mathematically equivalent or mask-sufficient result is valid.
+an actor input. The implementation retains the existing S7-S1 local physical,
+user, SINR, connection, service and base-station information, filters inactive
+peers, and anonymously repacks the original owner-indexed UAV records; it does
+not add a global observation or future clock. Autoregressive presentation order
+is a function of anonymous current physical content rather than storage slot.
+A mathematically equivalent or mask-sufficient result is valid.
+
+The executed action is the exact `tanh` transform of its stored pre-transform
+Gaussian latent. Replay scores that latent with the stable transform Jacobian;
+there is no post-transform clipping or collapsed tail probability.
 
 ## Controls
 
@@ -82,6 +91,16 @@ evaluation and receive no optimizer exposure. The constructive controller may
 read the complete loss ledger and current physical state only to certify source
 feasibility. The no-reallocation control preserves the pre-loss action/layout
 target.
+
+The constructive implementation uses two deterministic relay slots, survivor
+targets contracted only as much as required by the pre-onset physical travel
+budget, and ordinary service targets for affected owners so that physical hold
+during loss also preserves their rejoin location. A bounded one-versus-two
+relay diagnostic selected two relays. The representative diagnostic is
+prelaunch evidence only: it obtained `J_event=0.943997` for constructive and
+`J_event=0.967834` for ledger-blind no-reallocation, so the formal
+load-bearing predicate is at substantial risk of failing. This risk is not an
+implementation defect and must not be tuned away.
 
 Source identification requires:
 
@@ -114,6 +133,11 @@ G_svc = mean(J_event_open - J_event_mask)
 G_rejoin = mean(J_rejoin_open - J_rejoin_mask)
 G_ordinary = mean(Q_ordinary_open - Q_ordinary_mask)
 ```
+
+Here `c` is exactly one of the four named evaluation cells. Deterministic and
+stochastic action evaluations remain paired and separately reported, but their
+episode metrics are averaged within each cell before the minimum over the four
+cells. They are not eight independent access cells.
 
 The no-disturbance cell has no `J_rejoin`; it contributes only its access
 guardrail and is excluded from `G_rejoin`.
@@ -183,7 +207,30 @@ bootstrap_seed=182800
 ```
 
 Replicate IDs add `0`, `1000`, and `2000`; namespaces never share generator
-state. There is no train/evaluation reuse or cross-backend resume.
+state. Learned training trajectories are never reused as evaluation data, and
+there is no cross-backend resume. The formal control rows produced by the
+first-match source screen are already evaluation evidence and are therefore
+reused byte-for-byte rather than recomputed.
+
+### First-match compute pruning and interruption safety
+
+Formal execution evaluates the exact constructive and no-reallocation support
+before creating or optimizing a learned model. It applies the registered
+source-identifiability predicates with the same 10,000-sample paired bootstrap.
+If either predicate fails, training is skipped, zero learned checkpoints are
+accepted, and analysis returns the already registered second branch
+`SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1`. If both pass, the unchanged learned
+budget proceeds and later evaluation reuses the already committed control
+rows. A source-screen pass alone is not a scientific conclusion.
+
+Training commits a validated continuation state after each completed update;
+evaluation commits each completed registered batch. Repeating the same command
+may resume only when source, runtime, configuration, seeds, episode coordinate,
+model, optimizer, RNG and cumulative audit identity match exactly. Incomplete
+fragments are ignored and a mismatched fragment fails closed. Only the final
+registered learned checkpoint is conclusion-bearing. Content digests are used
+only inside this runtime journal and for final-checkpoint integrity; they are
+not workflow, Git, review or handoff hashes.
 
 ## Acceptance before formal launch
 

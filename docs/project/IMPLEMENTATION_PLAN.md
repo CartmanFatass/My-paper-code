@@ -6,7 +6,7 @@
 
 ```text
 active_implementation=UAV_TEMPORARY_SERVICE_LOSS_G1
-implementation_status=RECONCILED_NOT_IMPLEMENTED
+implementation_status=IMPLEMENTED_AND_ACCEPTED_FORMAL_READY
 scientific_raw=docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md
 reconciliation=docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/30_PM_SCIENTIFIC_RECONCILIATION.md
 design=docs/research/designs/UAV_TEMPORARY_SERVICE_LOSS_G1.md
@@ -14,6 +14,9 @@ backend=cpu
 torch_threads=1
 formal_iteration=18
 uav_chain_iterations_remaining=10
+focused_acceptance=38_passed_plus_1_final_delta_passed
+nonformal_artifact=logs/nonformal_uav_temp_loss_g1_20260723_pm2
+independent_review=ACCEPT
 ```
 
 ## Goal
@@ -81,7 +84,28 @@ closure, not produce or preview a scientific result. Artifacts remain under
 After PM accepts the implementation and freezes the exact executable evidence
 contract, commit and push the source, then assign exactly one foreground
 CPU-only `train -> evaluate -> analyze` run to the registered
-`hmasd-experiment-operator`.
+`hmasd-experiment-operator`. The same immutable command may resume only through
+the validated update/batch journal; it may not change source, seeds, exposure
+or parameters.
+
+The `train` phase first evaluates the exact formal constructive and
+no-reallocation controls. This is first-match compute pruning, not a new gate:
+
+- if `mean_constructive_J_event < 0.90` or the paired 95% lower bound of
+  `constructive - no_reallocation` is `<= 0.10`, perform zero learned training
+  and return the registered `SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1` after
+  exact artifact validation;
+- otherwise continue the unchanged learned budget and reuse those exact
+  control rows in evaluation.
+
+The representative prelaunch control result (`0.943997` constructive versus
+`0.967834` no-reallocation) makes source failure plausible but is not itself a
+formal conclusion.
+
+The accepted runner persists source-screen, update and evaluation-batch
+progress with direct immutable writes and same-command recovery. This is an
+operational safeguard for the multi-hour CPU path and does not change final-only
+checkpoint selection or any scientific gate.
 
 Formal exposure per learned arm and paired replicate is 16 environments × 500
 steps × 200 updates = 1,600,000 transitions, four PPO passes per update. Use
