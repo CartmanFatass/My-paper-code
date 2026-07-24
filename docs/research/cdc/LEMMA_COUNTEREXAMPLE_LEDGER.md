@@ -14,6 +14,11 @@
 | L-MARK-TV | Same-state mark intervention identifies a causal path from the held mark to primitive behavior. | The EHC mark adapter and intervention population. | Utility, persistence or semantic usefulness. |
 | L-EHC-MEASUREMENT-NECESSITY | Event-held commitment support must establish policy-dependent persistence, sequence-level intervention, natural mediation, simpler-explanation resistance and held-out robustness; surface use/lifetime/logit/value predicates do not identify it. | The corrected G1 measurement implication. | That these conditions are sufficient, or that EHC is useful, useless or uniquely necessary. |
 | L-EHC-G0-NO-ACCESS | A valid first-match no-access result closes the exact benchmark-comparator pair and prevents lower-precedence diagnostics from relabeling it. | `EVENT_HELD_COMMITMENT_LINK_G0` at its frozen source, backend, learner, budget and threshold. | EHC is useless, stronger MARL is inaccessible, or any live conjecture is uniquely selected. |
+| L-R43-ANCHOR-QUARANTINE | A treatment paired with a failed positive fixed-source anchor has no scientific success or failure interpretation. | R43 and future matched-control experiments whose registered positive control fails. | Renewal or another treatment mechanism is supported or retired. |
+| L-RECURRENT-NESTING | A sufficiently expressive lifecycle recurrent controller can encode a finite slow state; S1 further proves that an unrestricted unpenalized recurrence supplied to the predictive decoder prevents the registered write-cost objective from uniquely identifying slow-state ownership. | Finite slow-state constructions and the exact C-ALPSW S1 factorization. | Matched recurrence has equal optimization, sample efficiency, causal mediation or held-out transport under a future corrected contract. |
+| L-PREDICTIVE-STATE-NOT-SKILL | Predictive accuracy and persistence alone do not establish a skill; causal primitive-action mediation and natural held-out value are also required. | Predictive latent-state mechanisms including C-ALPSW. | A predictively useful state is behaviorally useful or constitutes a skill. |
+| L-LIFETIME-ACTIVE-CLOCK | Individual lifetime is measured on the lifecycle active-step clock: temporary absence freezes it, rejoin resumes it, terminal leave censors and deletes it, and update boundaries do not end it. | Runtime-variable membership with lifecycle-owned state. | Every long-lived state is learned or behaviorally useful. |
+| L-STRUCTURAL-JOIN-WRITE | A genuine join may structurally initialize a slow state without classifying initialization as a learned renewal decision. | Lifecycle creation under C-ALPSW. | Later writes are identifiable, sparse or useful. |
 
 ## Counterexamples
 
@@ -73,3 +78,33 @@ earlier access branch. Its later `G`, K-bin, `I_TV` and `C_total` diagnostics
 therefore cannot promote, retire or relabel the EHC mechanism. This refutes
 post-result diagnostic rescue, not the registered battery on an access-positive
 source.
+
+### CE-HAZARD-AS-K1-RENAMING
+
+A per-agent categorical KEEP/RENEW hazard evaluated every active step can be
+rewritten as the existing shared opportunity mechanism with `k=1`. Changing
+only opportunity frequency is not a structurally new lifetime mechanism.
+
+### CE-ALWAYS-WRITE-PREDICTOR
+
+A predictor can obtain low one-step error by rewriting every active step while
+producing no meaningful persistence. Predictive fit alone cannot identify
+variable individual lifetime.
+
+### CE-NEVER-WRITE-PERSISTENCE
+
+A state can persist indefinitely because it never changes while remaining
+unresponsive and behaviorally useless. Long realized duration alone cannot
+identify learned lifetime.
+
+### CE-MEMBERSHIP-GAP-AS-LIFETIME
+
+Temporary absence, rejoin cadence or genuine joins can create apparent lifetime
+variation without learned process segmentation. Membership events and inactive
+time must not substitute for endogenous active-step writes.
+
+### CE-RECURRENCE-ABSORPTION
+
+An ordinary recurrent hidden state can emulate a finite slow state. This
+refutes a pure representational-necessity claim, but not an optimization,
+sample-efficiency, causal-mediation or held-out-transport claim.

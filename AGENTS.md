@@ -39,28 +39,27 @@ Reviewer/Verifier gate -> authorized run observed by the registered
 `experiment_monitor` -> Controller result intake -> external GPT-5.6 Pro result
 review. Consolidating assets never removes or substitutes a stage.
 
-Persistent roles are resolved only from the dispatch Skill registry. Local code
-agents are resolved only from `.omp/agents/`; external transport exploration is
-resolved from `.omp/mcp.json` plus the external-review registry, never from an
-active transport Skill. Never infer a current role from a task title, old
-callback or conversation search. Unregistered former relay sessions and removed
-profile roots are obsolete execution surfaces.
+Persistent roles are resolved only from the dispatch Skill registry. Local task
+agents, including the bounded external-review transport worker, are resolved
+only from `.omp/agents/`; BrowserMCP identity remains fixed by `.omp/mcp.json`
+plus the external-review registry. Never infer a current role from a task title,
+old callback or conversation search. Unregistered former relay sessions and
+removed profile roots are obsolete execution surfaces.
 
 An execution-surface change is one atomic control boundary: update
 `CURRENT_WORK.md`, the dispatch Skill, its role registry, local agent profiles
 and the corresponding contract tests together. Do not activate a topology when
 those sources disagree.
 
-The BrowserMCP automation Skill is disabled by the user's 2026-07-23
-directive. The Controller may explore the pinned MCP server and registered Pro
-page directly without invoking `hmasd-browser-pro-exchange`; routine human
-interaction is forbidden. `hmasd-review-round` may define the scientific
-question and intake envelope, but it does not own exploratory browser actions.
-The local `hmasd-review-scout` records exact transport trials and lessons
-without operating the browser or choosing science. External GPT-5.6 Pro retains
-scientific authority, so failed transport never authorizes local substitution,
-algorithm work, or compute. A replacement transport may be abstracted into a
-Skill only after multiple stable automated cycles and explicit user approval.
+The BrowserMCP automation Skill remains disabled by the user's 2026-07-23
+directive. After the Controller stabilized one no-human-step exchange, the user
+explicitly approved a dedicated Luna-high `hmasd-exchange-review` task agent on
+2026-07-24. That agent alone performs the frozen mechanical submit, observe,
+page `Copy response`, and immutable archive sequence through the pinned MCP
+server; it never chooses science or performs intake. `hmasd-review-scout`
+retains factual trial history without operating transport. External GPT-5.6 Pro
+retains scientific authority, so failed transport never authorizes local
+substitution, algorithm work, or compute. No transport Skill is reactivated.
 
 The controller alone owns workflow and role-topology design, routing, direct
 evidence intake, executable algorithm realization, resource and
@@ -72,27 +71,27 @@ direction.
 
 Automatically use `.omp/skills/hmasd-dispatch-task/SKILL.md` whenever work
 may require Monitor dispatch or a persistent role callback. External-review
-transport is currently Controller-direct exploration: never invoke the disabled
-BrowserMCP automation Skill, and record each trial through
-`hmasd-review-scout`. Local code-agent work uses the project OMP task profiles
-directly.
+transport is one bounded local OMP assignment to `hmasd-exchange-review`; never
+invoke the disabled BrowserMCP automation Skill. Controller intake remains
+direct. Other local code-agent work uses the project OMP task profiles directly.
 
 The active surfaces are:
 
 - the unified Controller for workflow design, executable planning, direct local
-  agent coordination, direct BrowserMCP transport exploration, integration,
-  verification, Git, direct evidence intake, project control, evidence
-  integration and user communication;
-- the pinned `browsermcp-pro` server in Controller-direct exploration mode,
-  without an active transport Skill or routine human steps;
+  agent coordination, integration, verification, Git, direct evidence intake,
+  project control, evidence integration and user communication;
+- the Luna-high `hmasd-exchange-review` local agent for one frozen mechanical
+  BrowserMCP submission, observation, page-copy capture and no-clobber archive;
+- the pinned `browsermcp-pro` server, without an active transport Skill or
+  routine human steps;
 - the registered native Codex `experiment_monitor` slot for one
   already-authorized run. Its archived task is rebuild-required before the next
   formal run; external review and local OMP work do not route through it.
 
 The exact case-sensitive OMP `agent` values exposed under `.omp/agents/` are
-`hmasd-code-scout`, `hmasd-review-scout`, `hmasd-implementer`,
-`hmasd-frontier-implementer`, `hmasd-verifier`, `hmasd-reviewer` and
-`hmasd-exp-manager`. The Controller dispatches them directly.
+`hmasd-code-scout`, `hmasd-review-scout`, `hmasd-exchange-review`,
+`hmasd-implementer`, `hmasd-frontier-implementer`, `hmasd-verifier`,
+`hmasd-reviewer` and `hmasd-exp-manager`. The Controller dispatches them directly.
 `hmasd-frontier-implementer` is reserved for one bounded
 reproduced bug, runs Sol at `max`, follows the systematic debugging loop and
 stops after at most five repair attempts with either verified evidence or a
@@ -102,10 +101,10 @@ silently replace a registered project agent with an unnamed or bundled default
 child.
 
 The persistent Monitor receives a complete assignment through live route
-resolution. BrowserMCP remains a Controller-owned connection and external
-review is one Controller-owned state machine. No local or persistent role may
-observe, submit, retry, capture or archive a Pro response. Local agents receive
-one complete bounded assignment through the OMP task tool.
+resolution. `hmasd-exchange-review` receives one complete bounded transport
+assignment through the OMP task tool and alone operates BrowserMCP mechanically.
+It may submit, observe, click the page `Copy response` control and archive, but
+never interprets science, performs intake or starts a successor.
 
 The active controller owns automatic continuation. When `CURRENT_WORK.md`
 records an active bounded autonomous grant, every accepted role callback is a
@@ -163,19 +162,20 @@ repair, extend or scientifically interpret it.
 
 ## Context isolation
 
-No external-review transport Skill is active. The pinned BrowserMCP server may
-be explored only by the Controller under the external-review registry, with
-each bounded trial recorded by `hmasd-review-scout`. The authenticated
-registered Pro page is a one-time environmental prerequisite, not a per-round
-human action. If it is absent, transport fails closed; no routine reconnect,
-tab-selection, draft-recovery, submission, or capture step is delegated to the
-user.
+No external-review transport Skill is active. The pinned BrowserMCP server is
+operated only by the user-approved Luna-high `hmasd-exchange-review` local task
+agent under the external-review registry. The authenticated registered Pro page
+is a one-time environmental prerequisite, not a per-round human action. If it
+is absent, transport fails closed; no routine reconnect, tab-selection,
+draft-recovery, submission or capture step is delegated to the user.
 
 Pro reads pushed result and evidence files plus named reference-code paths
-through its GitHub connector; transport does not upload local source. Retained
-validator, boundary, receipt and archive scripts are integrity interfaces, not
-a browser workflow or Skill. A no-clobber receipt prevents replay and an
-accepted raw response remains immutable.
+through its GitHub connector; transport does not upload local source. The
+exchange agent alone runs the retained validators, deterministic dispatch,
+receipt and archive interfaces, uses the page-provided `Copy response` button,
+and returns immutable transport evidence. A no-clobber receipt prevents replay;
+an accepted raw response remains immutable. The Controller alone performs
+factual reconciliation, scientific intake and every successor transition.
 
 Local task agents receive exactly one project profile and one complete
 assignment. They do not reconstruct Controller history, change their model,

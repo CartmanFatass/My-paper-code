@@ -74,9 +74,61 @@ the Project Manager-accepted CDC state.
 - Remaining limitations, not active counterexamples: arbitrary process laws,
   N above 80, asynchronous skill lifetime, intrinsic-reward benefit and
   comparative advantage are outside the completed grant.
+- Current role: G8 remains the accepted dynamic-roster base and complete
+  comparator for the C-ALPSW direction; it supplies no skill-lifetime claim.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.
+
+## C-ALPSW — Agent-local predictive sparse-write slow state
+
+- Status: exact registered formulation rejected before implementation by
+  `NO_ONLINE_IDENTIFIABLE_SLOW_STATE` in S1. Predictive-state and sparse-
+  segmentation families remain broader than this result; no local correction
+  is selected.
+- Refuted claim at exact scope: the registered predictive NLL plus learned-write
+  cost can uniquely identify a lifecycle-owned slow state while an unrestricted,
+  unpenalized fast recurrent state reads the same online history and is also
+  supplied to the predictive decoder.
+- Exact evidence: a finite anonymous 21-transition construction has independent
+  lifecycle scripts, complete active-step lifetimes 2 and 3, exact boundary
+  precision/recall 1, `U_star_ALPSW=U_star_G8=1` and zero invariance mismatch.
+  Nevertheless a one-bit never-write recurrence attains the entropy lower bound
+  with zero learned-write cost.
+- General disproof: on any finite discrete source the recurrent state can encode
+  legal history or its predictive sufficient statistic and marginalize the
+  writer's internal randomness. Its expected predictive NLL is no greater.
+  Thus `beta>0` favors no-write, `beta=0` is non-unique and `beta<0` favors
+  always-write; the required open beta interval is empty.
+- Smallest retained proposition: finite lifecycle recurrence can absorb the
+  registered slow state and match prediction. This does not imply equal
+  optimization, sample efficiency, causal mediation or held-out transport.
+- Next boundary: return the exact S1 artifact to the registered Pro conversation.
+  Any fast-state bottleneck, complexity penalty, decoder-filtration change or
+  new causal objective changes the scientific contract and cannot be selected
+  locally.
+
+## C-ALH — Explicit categorical agent-local hazard
+
+- Status: parked. Reactivate only if an identified predictive boundary later
+  requires task-directed termination without reviving R43--R45.
+- Strongest counterexample: per-agent categorical KEEP/RENEW evaluated every
+  active step is the existing opportunity mechanism with `k=1`, not a
+  structurally new lifetime mechanism.
+
+## C-ATS — Continuous adaptive-timescale recurrence
+
+- Status: parked pending a threshold-free survival or causal-persistence
+  estimand.
+- Strongest counterexample: a continuous leak supplies no objective segment
+  boundary, so a claimed lifetime depends on a post-hoc threshold.
+
+## C-SEPM — Set-equivariant persistent population memory
+
+- Status: parked pending an identified complementary-allocation source.
+- Strongest counterexample: TEAM_REC or an ordinary set encoder may carry the
+  same information, while adding population coordination and individual
+  lifetime together prevents clean attribution.
 
 ## C-EHC — Event-held temporal state
 
@@ -120,6 +172,11 @@ the Project Manager-accepted CDC state.
   terminal handoff, but team recurrence carries one global bit exactly. Future
   evidence must target structured variable-cardinality factorization and
   held-out transport, not claim finite-network representational impossibility.
+- Current comparison role: recurrence is the mandatory strongest simpler
+  explanation and complete comparator for C-ALPSW, but never a universal
+  admission gate. A finite recurrent controller can encode a finite slow state;
+  any future claim must concern optimization, mediation, sample efficiency or
+  held-out transport rather than representational impossibility.
 
 ## C-BASE — The shared base policy class is insufficient
 

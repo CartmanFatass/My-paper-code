@@ -45,24 +45,30 @@ function Assert-Failure { param([scriptblock]$Action, [string]$Pattern, [string]
 $serverKeys = @($mcp.mcpServers.PSObject.Properties.Name)
 $server = $mcp.mcpServers.'browsermcp-pro'
 if ((Compare-Object @('browsermcp-pro') $serverKeys) -or $server.type -ne 'stdio' -or
-    $server.command -ne 'npx' -or @($server.args).Count -ne 2 -or
-    $server.args[0] -ne '-y' -or $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
-    $server.timeout -ne 120000) { throw 'Pinned singular BrowserMCP server changed' }
+    $server.command -ne 'powershell.exe' -or @($server.args).Count -ne 5 -or
+    $server.args[0] -ne '-NoProfile' -or $server.args[1] -ne '-ExecutionPolicy' -or
+    $server.args[2] -ne 'Bypass' -or $server.args[3] -ne '-File' -or
+    $server.args[4] -ne '.omp/browsermcp-direct/start_browsermcp_direct.ps1' -or
+    $server.timeout -ne 120000) { throw 'Controller-direct BrowserMCP server changed' }
 if (-not (Test-Path $boundaryVerifier -PathType Leaf)) { throw 'Pushed-boundary verifier was removed' }
-if ($registry.schema_version -ne 36 -or
-    $registry.round_controller.kind -ne 'controller_direct_transport_exploration' -or
-    -not $registry.exchange_contract.transport_exploration_enabled -or
-    $registry.exchange_contract.status -ne 'EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL' -or
+if ($registry.schema_version -ne 37 -or
+    $registry.round_controller.kind -ne 'controller_intake_with_local_exchange_review' -or
+    $registry.exchange_contract.transport_exploration_enabled -or
+    $registry.exchange_contract.status -ne 'ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT' -or
     $registry.exchange_contract.automation_skill_enabled -or
     $registry.exchange_contract.automation_skill_archive -ne '.omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md' -or
-    $registry.exchange_contract.skill_abstraction_gate -ne 'multiple_stable_automated_cycles_then_explicit_user_approval' -or
+    $registry.exchange_contract.operator_agent -ne 'hmasd-exchange-review' -or
+    $registry.exchange_contract.operator_profile -ne '.omp/agents/hmasd-exchange-review.md' -or
     $registry.exchange_contract.experience_recorder -ne 'hmasd-review-scout' -or
     $registry.exchange_contract.experience_path -ne '.omp/review_scout/EXPERIENCE.md' -or
     $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
     $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
     $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or
     $registry.exchange_contract.review_branch -ne 'Claude' -or
-    $registry.exchange_contract.connection_state -ne 'EXPLORATION_LIVE_PREFLIGHT_REQUIRED' -or
+    $registry.exchange_contract.response_capture -ne 'page_copy_response_button' -or
+    $registry.exchange_contract.keyboard_copy_allowed -or
+    $registry.exchange_contract.controller_contact -ne 'assignment_then_direct_controller_intake' -or
+    $registry.exchange_contract.connection_state -ne 'REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT' -or
     $registry.exchange_contract.authenticated_registered_tab_prerequisite -ne 'ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP' -or
     $registry.exchange_contract.routine_human_interaction_allowed -or
     $registry.exchange_contract.dispatch_marker -ne 'HMASD_BP_D1' -or
@@ -71,12 +77,13 @@ if ($registry.schema_version -ne 36 -or
     $registry.exchange_contract.file_upload_allowed -or
     $registry.exchange_contract.full_question_browser_type_allowed -or
     $registry.exchange_contract.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
-    $registry.exchange_contract.exploration_order -ne 'validate_identity_then_verify_pushed_boundary_then_require_existing_authenticated_attachment_then_one_bounded_controller_probe_then_reconcile_postcondition_then_review_scout_record' -or
+    $registry.exchange_contract.execution_order -ne 'validate_identity_then_verify_pushed_boundary_then_preflight_then_clipboard_paste_dispatch_then_separate_enter_then_receipt_then_bounded_observe_then_two_stable_snapshots_then_click_copy_response_then_archive_no_clobber' -or
     $registry.exchange_contract.fallback -ne 'none' -or
     $registry.reviewers.open_divergent.url -ne 'https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207' -or
     $registry.reviewers.open_divergent.expected_model_ui -ne 'Pro' -or
-    $null -ne $registry.exchange_contract.PSObject.Properties['completion_monitor']) {
-    throw 'Controller-direct BrowserMCP exploration registry mismatch'
+    $registry.reviewers.open_divergent.transport -ne 'hmasd-exchange-review' -or
+    $registry.reviewers.open_divergent.connection_state -ne 'REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT') {
+    throw 'Controller-direct BrowserMCP exchange-review registry mismatch'
 }
 foreach ($removedField in @('enabled','role_skill','skill_enabled','state_machine',
     'browser_type_actions','enter_action','type_timeout_policy','wait_chunk_seconds',
@@ -89,11 +96,10 @@ foreach ($required in @('Disabled by user directive', 'explicit user',
     'Multiple stable, fully automated')) {
     if (-not $exchangeArchive.Contains($required)) { throw "Legacy browser exchange marker missing: $required" }
 }
-foreach ($required in @('Transport exploration boundary',
-    'hmasd-review-scout', 'Routine human recovery is forbidden',
-    'explicit user', 'owns no browser action',
-    'one-time environmental prerequisite')) {
-    if (-not $reviewRound.Contains($required)) { throw "Review-round exploration boundary missing: $required" }
+foreach ($required in @('Transport execution boundary', 'hmasd-exchange-review',
+    'hmasd-review-scout', 'Routine human recovery', 'Luna-high',
+    'Copy response', 'one-time environmental prerequisite')) {
+    if (-not $reviewRound.Contains($required)) { throw "Review-round exchange boundary missing: $required" }
 }
 foreach ($forbidden in @('$hmasd-browser-pro-exchange','browser_type',
     'browser_press_key','then_user_connect','Skill-owned validate',
@@ -132,7 +138,7 @@ $repository = 'fixture-owner/fixture-repo'
 $branch = 'Claude'
 $requiredNoNestedFenceInstruction = 'Do not put any triple-backtick sequence or nested fenced block between the response markers.'
 function Assert-Removed { param([string[]]$Paths, [string]$Label)
-    foreach ($path in $Paths) { if (Test-Path -LiteralPath $path) { throw "$Label did not delete accepted snapshot: $path" } }
+    foreach ($path in $Paths) { if (Test-Path -LiteralPath $path) { throw "$Label did not delete accepted temporary input: $path" } }
 }
 try {
     [IO.Directory]::CreateDirectory($roundPath) | Out-Null
@@ -358,7 +364,28 @@ try {
     $end = "HMASD_BROWSER_PRO_RESPONSE_V1_END round=$roundId question_sha256=$digest"
     function New-ResponseSnapshot {
         param([string]$Path, [string]$Ref, [string]$Content = 'Natural Pro response',
-            [string]$EndMarker = $end, [string]$Extra = '', [bool]$SecondBlock = $false)
+            [string]$EndMarker = $end, [string]$Extra = '', [bool]$SecondBlock = $false,
+            [bool]$Flattened = $false)
+        if ($Flattened) {
+            $flatContent = ([regex]::Replace($Content, '\s+', ' ')).Trim()
+            Write-Utf8 $Path @"
+- main [ref=page-$Ref]:
+  - article [ref=user-$Ref]:
+    - heading "You said:"
+    - paragraph: $dispatchScalar
+  - article [ref=assistant-$Ref]:
+    - heading "ChatGPT said:"
+    - group [ref=group-$Ref]:
+      - button "Worked for 1m 2s" [ref=worked-$Ref]
+      - button "Copy code" [ref=copy-$Ref]
+      - code [ref=code-$Ref]: $begin $flatContent $EndMarker
+    - group "Response actions" [ref=actions-$Ref]:
+      - button "Good response" [ref=good-$Ref]
+  - paragraph: ChatGPT can make mistakes. Check important info.
+  - textbox "Message ChatGPT" [ref=composer-$Ref]:
+"@
+            return
+        }
         $second = if ($SecondBlock) { "`n      - code [ref=second-$Ref]: 'another substantive block'" } else { '' }
         Write-Utf8 $Path @"
 - main [ref=page-$Ref]:
@@ -382,47 +409,66 @@ $Extra
   - textbox "Message ChatGPT" [ref=composer-$Ref]:
 "@
     }
+    function New-CopiedResponse {
+        param([string]$Path, [string]$Content = 'Natural Pro response',
+            [string]$BeginMarker = $begin, [string]$EndMarker = $end,
+            [string]$OpeningFence = '```text', [string]$ClosingFence = '```')
+        Write-Utf8 $Path "$OpeningFence`n$BeginMarker`n$Content`n$EndMarker`n$ClosingFence"
+    }
     function Set-StableTimes { param([string]$One, [string]$Two, [int]$Seconds = 10)
         $start = [DateTime]::UtcNow.AddMinutes(-1)
         [IO.File]::SetLastWriteTimeUtc($One, $start)
         [IO.File]::SetLastWriteTimeUtc($Two, $start.AddSeconds($Seconds))
     }
-    function Invoke-Archive { param([string]$One, [string]$Two)
+    function Invoke-Archive { param([string]$One, [string]$Two, [string]$Copy)
         & $archiver -RoundPath $roundRelative -ReceiptPath $receiptName -RawPath $rawName `
-            -SnapshotPathOne $One -SnapshotPathTwo $Two -StageCommit $stage `
-            -EvidenceCommit $evidence -Repository $repository -ReviewBranch $branch `
-            -ConversationUrl $conversation -ExpectedModel 'Pro' -RepoRoot $fixtureRepo
+            -SnapshotPathOne $One -SnapshotPathTwo $Two -CopiedResponsePath $Copy `
+            -StageCommit $stage -EvidenceCommit $evidence -Repository $repository `
+            -ReviewBranch $branch -ConversationUrl $conversation -ExpectedModel 'Pro' -RepoRoot $fixtureRepo
     }
     function Invoke-ArchiveNegative {
         param([string]$Name, [string]$Pattern, [string]$Extra = '', [string]$ContentOne = 'Natural Pro response',
             [string]$ContentTwo = 'Natural Pro response', [string]$EndOne = $end, [string]$EndTwo = $end,
-            [bool]$SecondBlock = $false)
+            [bool]$SecondBlock = $false, [string]$CopyContent = 'Natural Pro response',
+            [string]$CopyBegin = $begin, [string]$CopyEnd = $end,
+            [string]$CopyOpening = '```text', [string]$CopyClosing = '```')
         $one = Join-Path $captureRoot "$Name-one.yml"
         $two = Join-Path $captureRoot "$Name-two.yml"
+        $copy = Join-Path $captureRoot "$Name-copy.md"
         New-ResponseSnapshot $one "$Name-1" $ContentOne $EndOne $Extra $SecondBlock
         New-ResponseSnapshot $two "$Name-2" $ContentTwo $EndTwo $Extra $SecondBlock
+        New-CopiedResponse $copy $CopyContent $CopyBegin $CopyEnd $CopyOpening $CopyClosing
         Set-StableTimes $one $two
-        Assert-Failure { Invoke-Archive $one $two } $Pattern $Name
-        Assert-Removed @($one,$two) $Name
+        Assert-Failure { Invoke-Archive $one $two $copy } $Pattern $Name
+        Assert-Removed @($one,$two,$copy) $Name
     }
 
     $same = Join-Path $captureRoot 'same.yml'
+    $sameCopy = Join-Path $captureRoot 'same-copy.md'
     New-ResponseSnapshot $same 'same'
-    Assert-Failure { Invoke-Archive $same $same } 'distinct files' 'Same stable snapshot'
-    Remove-Item $same -Force
+    New-CopiedResponse $sameCopy
+    Assert-Failure { Invoke-Archive $same $same $sameCopy } 'distinct files' 'Same stable snapshot'
+    Remove-Item $same,$sameCopy -Force
     $hardSource = Join-Path $captureRoot 'hard-source.yml'
     $hardLink = Join-Path $captureRoot 'hard-link.yml'
+    $hardCopy = Join-Path $captureRoot 'hard-copy.md'
     New-ResponseSnapshot $hardSource 'hard'
+    New-CopiedResponse $hardCopy
     New-Item -ItemType HardLink -Path $hardLink -Target $hardSource | Out-Null
-    Assert-Failure { Invoke-Archive $hardSource $hardLink } 'distinct file identities' 'Hard-link snapshot identity'
-    Remove-Item $hardSource,$hardLink -Force
-    $closeOne = Join-Path $captureRoot 'close-one.yml'; $closeTwo = Join-Path $captureRoot 'close-two.yml'
-    New-ResponseSnapshot $closeOne 'close-1'; New-ResponseSnapshot $closeTwo 'close-2'; Set-StableTimes $closeOne $closeTwo 9
-    Assert-Failure { Invoke-Archive $closeOne $closeTwo } 'at least ten seconds' 'Too-close snapshots'
-    Assert-Removed @($closeOne,$closeTwo) 'Too-close snapshots'
+    Assert-Failure { Invoke-Archive $hardSource $hardLink $hardCopy } 'distinct file identities' 'Hard-link snapshot identity'
+    Remove-Item $hardSource,$hardLink,$hardCopy -Force
+    $closeOne = Join-Path $captureRoot 'close-one.yml'
+    $closeTwo = Join-Path $captureRoot 'close-two.yml'
+    $closeCopy = Join-Path $captureRoot 'close-copy.md'
+    New-ResponseSnapshot $closeOne 'close-1'
+    New-ResponseSnapshot $closeTwo 'close-2'
+    New-CopiedResponse $closeCopy
+    Set-StableTimes $closeOne $closeTwo 9
+    Assert-Failure { Invoke-Archive $closeOne $closeTwo $closeCopy } 'at least ten seconds' 'Too-close snapshots'
+    Assert-Removed @($closeOne,$closeTwo,$closeCopy) 'Too-close snapshots'
 
     Invoke-ArchiveNegative 'truncated' 'wrong, missing, or truncated' '' 'Natural Pro response' 'Natural Pro response' 'TRUNCATED' 'TRUNCATED'
-    Invoke-ArchiveNegative 'mismatch' 'differs across' '' 'First response' 'Different response'
+    Invoke-ArchiveNegative 'mismatch' 'differs from the exact copied response' '' 'First response' 'Different response'
     Invoke-ArchiveNegative 'extra-heading' 'forbidden extra ARIA node' '    - heading "Unexpected response heading"'
     Invoke-ArchiveNegative 'second-block' 'exactly one substantive code block' '' 'Natural Pro response' 'Natural Pro response' $end $end $true
     Invoke-ArchiveNegative 'wrong-marker' 'wrong, missing, or truncated' '' 'Natural Pro response' 'Natural Pro response' `
@@ -431,38 +477,63 @@ $Extra
     Invoke-ArchiveNegative 'arbitrary-button' 'forbidden extra ARIA node' '      - button "Read aloud" [ref=bad]'
     Invoke-ArchiveNegative 'named-group' 'forbidden extra ARIA node' '    - group "Injected group" [ref=bad]'
     Invoke-ArchiveNegative 'named-img' 'forbidden extra ARIA node' '    - img "Injected image" [ref=bad]'
+    Invoke-ArchiveNegative -Name 'copy-malformed-fence' -Pattern 'exact outer' -CopyOpening '~~~text'
+    Invoke-ArchiveNegative -Name 'copy-missing-fence' -Pattern 'exact outer' -CopyClosing ''
+    Invoke-ArchiveNegative -Name 'copy-marker-mismatch' -Pattern 'wrong, missing, or misplaced' `
+        -CopyEnd "HMASD_BROWSER_PRO_RESPONSE_V1_END round=wrong question_sha256=$digest"
+    Invoke-ArchiveNegative -Name 'copy-nested-fence' -Pattern 'nested triple-backtick' `
+        -CopyContent 'Natural Pro response with ``` nested fence'
+    Invoke-ArchiveNegative -Name 'copy-snapshot-mismatch' -Pattern 'differs from the exact copied response' `
+        -CopyContent 'Different exact copied response'
+    Invoke-ArchiveNegative -Name 'copy-empty-body' -Pattern 'content is empty' -CopyContent '   '
+    $bomOne = Join-Path $captureRoot 'copy-bom-one.yml'
+    $bomTwo = Join-Path $captureRoot 'copy-bom-two.yml'
+    $bomCopy = Join-Path $captureRoot 'copy-bom.md'
+    New-ResponseSnapshot $bomOne 'copy-bom-1'
+    New-ResponseSnapshot $bomTwo 'copy-bom-2'
+    $bomDocument = '```text' + "`n$begin`nNatural Pro response`n$end`n" + '```'
+    [IO.File]::WriteAllText($bomCopy, $bomDocument, [Text.UTF8Encoding]::new($true))
+    Set-StableTimes $bomOne $bomTwo
+    Assert-Failure { Invoke-Archive $bomOne $bomTwo $bomCopy } 'UTF-8 without a BOM' 'Copied response BOM'
+    Assert-Removed @($bomOne,$bomTwo,$bomCopy) 'Copied response BOM'
     $lockOne = Join-Path $captureRoot 'lock-failure-one.yml'
     $lockTwo = Join-Path $captureRoot 'lock-failure-two.yml'
+    $lockCopy = Join-Path $captureRoot 'lock-failure-copy.md'
     New-ResponseSnapshot $lockOne 'lock-failure-1'
     New-ResponseSnapshot $lockTwo 'lock-failure-2'
+    New-CopiedResponse $lockCopy
     Set-StableTimes $lockOne $lockTwo
     $openWriter = [IO.FileStream]::new(
         $receiptFile, [IO.FileMode]::Open, [IO.FileAccess]::Write, [IO.FileShare]::ReadWrite)
     try {
-        Assert-Failure { Invoke-Archive $lockOne $lockTwo } 'lock/open failed' 'Receipt writer exclusion'
+        Assert-Failure { Invoke-Archive $lockOne $lockTwo $lockCopy } 'lock/open failed' 'Receipt writer exclusion'
     } finally {
         $openWriter.Dispose()
     }
-    Assert-Removed @($lockOne,$lockTwo) 'Receipt writer exclusion'
+    Assert-Removed @($lockOne,$lockTwo,$lockCopy) 'Receipt writer exclusion'
     if (Test-Path -LiteralPath (Join-Path $roundPath $rawName)) {
         throw 'Receipt writer exclusion published raw before acquiring the held receipt lock'
     }
 
     $one = Join-Path $captureRoot 'response-one.yml'
     $two = Join-Path $captureRoot 'response-two.yml'
+    $copy = Join-Path $captureRoot 'response-copy.md'
     $ariaLookingContent = "Natural Pro response`n            - heading `"ChatGPT said:`" [level=4]`n            - group `"Response actions`""
+    $exactCopiedContent = "Natural Pro response`n- heading `"ChatGPT said:`" [level=4]`n- group `"Response actions`""
     New-ResponseSnapshot $one '101' $ariaLookingContent
-    New-ResponseSnapshot $two '909' $ariaLookingContent
+    New-ResponseSnapshot -Path $two -Ref '909' -Content $ariaLookingContent -Flattened $true
+    $copiedDocument = '```text' + "`n$begin`n$exactCopiedContent`n$end`n" + '```'
+    Write-Utf8 $copy ($copiedDocument -replace "`n", "`r`n")
     Set-StableTimes $one $two
-    $archived = (Invoke-Archive $one $two) | ConvertFrom-Json
-    Assert-Removed @($one,$two) 'Successful archiver'
+    $archived = (Invoke-Archive $one $two $copy) | ConvertFrom-Json
+    Assert-Removed @($one,$two,$copy) 'Successful archiver'
     $expectedRaw = "Natural Pro response`n- heading `"ChatGPT said:`" [level=4]`n- group `"Response actions`"`n"
     if ($archived.status -ne 'ARCHIVED' -or
         [IO.File]::ReadAllText((Join-Path $roundPath $rawName), $utf8) -cne $expectedRaw -or
         $archived.snapshot_one_sha256 -cne $archived.snapshot_two_sha256) { throw 'Exact two-snapshot raw archival failed' }
     $rawFile = Join-Path $roundPath $rawName
     $rawBytes = [IO.File]::ReadAllBytes($rawFile)
-    Assert-Failure { Invoke-Archive 'missing-one' 'missing-two' } 'cannot be archived from state ALREADY_ARCHIVED' 'Immutable raw'
+    Assert-Failure { Invoke-Archive 'missing-one' 'missing-two' 'missing-copy' } 'cannot be archived from state ALREADY_ARCHIVED' 'Immutable raw'
     if ([Convert]::ToBase64String([IO.File]::ReadAllBytes($rawFile)) -cne [Convert]::ToBase64String($rawBytes)) {
         throw 'Immutable raw changed after rejected overwrite'
     }

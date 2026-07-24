@@ -1,6 +1,6 @@
 {
-  "schema_version": 25,
-  "updated": "2026-07-23",
+  "schema_version": 26,
+  "updated": "2026-07-24",
   "asset_root": {
     "root": ".omp",
     "active_skills": ".omp/skills",
@@ -14,7 +14,7 @@
       "kind": "active_unified_omp_controller",
       "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
       "contract": "AGENTS.md",
-      "responsibility": "scientific intake, Controller-direct external-transport exploration, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
+      "responsibility": "scientific intake, external-transport assignment and evidence acceptance, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
     },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
@@ -26,18 +26,20 @@
     }
   },
   "external_review_transport": {
-    "kind": "controller_direct_browsermcp_exploration",
-    "transport_exploration_enabled": true,
-    "status": "EXPLORATION_NO_ACTIVE_TRANSPORT_SKILL",
+    "kind": "local_omp_exchange_review_transport",
+    "transport_exploration_enabled": false,
+    "status": "ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT",
     "automation_skill_enabled": false,
     "automation_skill_archive": ".omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md",
-    "skill_abstraction_gate": "multiple_stable_automated_cycles_then_explicit_user_approval",
+    "agent_abstraction_authorized_by_user": "2026-07-24",
+    "operator_agent": "hmasd-exchange-review",
+    "operator_profile": ".omp/agents/hmasd-exchange-review.md",
     "experience_recorder": "hmasd-review-scout",
     "experience_path": ".omp/review_scout/EXPERIENCE.md",
     "server": "browsermcp-pro",
     "config": ".omp/mcp.json",
     "package": "@browsermcp/mcp@0.1.3",
-    "connection_state": "EXPLORATION_LIVE_PREFLIGHT_REQUIRED",
+    "connection_state": "REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT",
     "authenticated_registered_tab_prerequisite": "ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP",
     "routine_human_interaction_allowed": false,
     "evidence_transport": "github_connector",
@@ -48,8 +50,11 @@
     "dispatch_line_breaks_allowed": false,
     "file_upload_allowed": false,
     "full_question_browser_type_allowed": false,
+    "response_capture": "page_copy_response_button",
+    "keyboard_copy_allowed": false,
     "receipt_schema": "hmasd.browser_pro_submission.v2",
-    "controller_only": true,
+    "controller_only": false,
+    "controller_intake_only": true,
     "fallback": "none"
   },
   "local_agents": {
@@ -59,6 +64,7 @@
     "types": [
       "hmasd-code-scout",
       "hmasd-review-scout",
+      "hmasd-exchange-review",
       "hmasd-implementer",
       "hmasd-frontier-implementer",
       "hmasd-verifier",

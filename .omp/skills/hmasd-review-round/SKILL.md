@@ -23,21 +23,22 @@ benchmark-identification disputes, repeated ambiguity, or full-algorithm
 integration. Use a focused continuation in the same registered Pro conversation
 for one local scientific ambiguity or correction.
 
-## Transport exploration boundary
+## Transport execution boundary
 
 `hmasd-browser-pro-exchange` is not an active Skill and must not be invoked.
-Transport interaction is Controller-direct exploration under the active
-registry. `hmasd-review-scout` records every bounded trial in
-`.omp/review_scout/EXPERIENCE.md` but never operates transport or chooses
-science. Routine human recovery is forbidden.
+The user-approved Luna-high `hmasd-exchange-review` local task agent performs one
+Controller-frozen mechanical BrowserMCP exchange. It may validate, submit the
+deterministic dispatch, publish the receipt, observe, click the page-provided
+`Copy response` button and archive the exact response. It never defines the
+question, chooses science, performs factual reconciliation or starts a
+successor. `hmasd-review-scout` retains factual transport experience only.
 
-This Skill owns no browser action, timeout recovery, connection lifecycle,
-submission state machine, observation cadence, or capture procedure. The
-authenticated registered Pro page is a one-time environmental prerequisite,
+The authenticated registered Pro page is a one-time environmental prerequisite,
 not a per-round user action. If that prerequisite is absent, transport fails
-closed. A replacement transport may be proposed only after multiple stable
-automated cycles and may be abstracted into a Skill only after explicit user
-approval.
+closed. Routine human recovery, another browser, keyboard-copy shortcuts and
+local scientific substitution are forbidden. The Controller alone owns
+question preparation, direct evidence intake and every transition after the
+agent returns immutable receipt/raw evidence.
 
 ## Round boundary
 
@@ -65,8 +66,8 @@ as the stage commit.
 
 ## Integrity interfaces
 
-These retained scripts validate identity and no-clobber artifacts; they do not
-constitute or activate a browser workflow:
+These retained scripts validate identity, receipt and no-clobber archival. They
+are invoked only by the bounded exchange agent or by focused contract tests:
 
 - `.omp/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1`
 - `.omp/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1`
@@ -116,11 +117,12 @@ scientific object and estimand; the Controller later freezes architecture.
 ## Response acceptance and intake
 
 A raw response is acceptable only when it is bound to the verified identity,
-contains exactly one correct marked substantive block, and was published by the
-retained no-clobber archive interface from stable identical captures. A valid
-receipt forbids resubmission. An existing raw response forbids browser work.
-Transport gaps are classified separately and never repaired by rewriting raw
-text.
+contains exactly one correct marked substantive block, appears identically in
+two stable BrowserMCP snapshots and is captured by clicking the latest
+page-provided `Copy response` button. The retained no-clobber archive interface
+validates the copied outer fence and markers before publishing only the exact
+body. A valid receipt forbids resubmission. An existing raw response forbids
+browser work. Transport gaps never authorize rewriting raw text.
 
 After accepted archival, write factual `30_EVIDENCE_RECONCILIATION.md` without
 changing Pro science. Read `references/cdc-principles.md`, distinguish Pro

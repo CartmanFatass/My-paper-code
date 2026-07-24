@@ -1,6 +1,6 @@
 ---
 name: hmasd-dispatch-task
-description: Route HMASD work to the registered experiment monitor. Local OMP agents are dispatched directly; external review uses Controller-direct BrowserMCP exploration while the automation Skill is disabled.
+description: Route HMASD work to the registered experiment monitor. Local OMP agents are dispatched directly; Luna-high hmasd-exchange-review owns one bounded mechanical BrowserMCP exchange.
 ---
 
 # HMASD Task Dispatch
@@ -11,7 +11,7 @@ from a title, old callback, history, or manually copied task ID.
 
 ```text
 controller -> local OMP task agents
-controller -> direct BrowserMCP exploration -> hmasd-review-scout record
+controller -> hmasd-exchange-review -> BrowserMCP Pro exchange
 controller <-> experiment_monitor
 ```
 
@@ -23,24 +23,25 @@ only transition owner between stages.
 
 The Controller owns scientific-to-code translation, executable planning, local
 agent decomposition, integration, verification, routing, continuation, Git,
-formal-compute authority, direct BrowserMCP transport exploration, and direct
-evidence intake. External scientific authority remains with GPT-5.6 Pro. Failed
-transport must not be substituted locally, and no automation Skill may be
-abstracted before multiple stable cycles plus explicit user approval.
+formal-compute authority, and direct evidence intake. The Luna-high
+`hmasd-exchange-review` agent owns only frozen BrowserMCP mechanics. External
+scientific authority remains with GPT-5.6 Pro. Failed transport must not be
+substituted locally, and no automation Skill is active.
 
 ## Local OMP task agents
 
-Local code and record work does not use persistent route resolution. The
-Controller dispatches only these seven project profiles:
+Local code, record and external-exchange work does not use persistent route
+resolution. The Controller dispatches only these eight project profiles:
 
 ```text
-hmasd-code-scout    openai-codex/gpt-5.6-luna:high
-hmasd-review-scout  openai-codex/gpt-5.6-luna:high
-hmasd-implementer   openai-codex/gpt-5.6-sol:high
+hmasd-code-scout       openai-codex/gpt-5.6-luna:high
+hmasd-review-scout     openai-codex/gpt-5.6-luna:high
+hmasd-exchange-review  openai-codex/gpt-5.6-luna:high
+hmasd-implementer      openai-codex/gpt-5.6-sol:high
 hmasd-frontier-implementer  openai-codex/gpt-5.6-sol:max
-hmasd-verifier      openai-codex/gpt-5.6-luna:high
-hmasd-reviewer      openai-codex/gpt-5.6-sol:xhigh
-hmasd-exp-manager   openai-codex/gpt-5.3-codex-spark:high
+hmasd-verifier         openai-codex/gpt-5.6-luna:high
+hmasd-reviewer         openai-codex/gpt-5.6-sol:xhigh
+hmasd-exp-manager      openai-codex/gpt-5.3-codex-spark:high
 ```
 
 Before implementation, record the current branch, `HEAD`, and inherited
@@ -112,29 +113,31 @@ The monitor uses `hmasd-experiment-monitor`, owns ETA-based heartbeats, and
 returns one terminal `EXPERIMENT_MONITOR` payload to the resolved Controller. It
 never launches, restarts, repairs, extends, edits, or interprets the run.
 
-## External review transport exploration
+## External review transport
 
-The BrowserMCP automation Skill `hmasd-browser-pro-exchange` is disabled. The
-Controller may explore the pinned MCP server and registered Pro page directly,
-without routine human steps and without treating a timeout as scientific
-evidence. Each bounded trial is handed to `hmasd-review-scout`, which records
-exact preconditions, action, observation, side effect, classification, and
-candidate lesson in `.omp/review_scout/EXPERIENCE.md`. The scout never operates
-the browser, submits a review, chooses science, or invokes a Skill.
+The BrowserMCP automation Skill `hmasd-browser-pro-exchange` remains disabled.
+The user-approved Luna-high `hmasd-exchange-review` project agent executes one
+Controller-frozen mechanical exchange assignment without routine human steps.
+It verifies identity and the pushed boundary, submits only the deterministic
+one-line dispatch, publishes the no-clobber receipt, observes in bounded waits,
+captures two stable snapshots, clicks the latest page-provided `Copy response`
+button and atomically archives the exact copied marked response. It never uses
+`browser_type`, keyboard-copy shortcuts, another conversation, a local reviewer,
+or an alternate scientific authority.
 
-The canonical round remains `READY_TO_SUBMIT` until a direct trial safely
-publishes its immutable receipt. Do not substitute a local model, persistent
-role or observer fallback, or alternate scientific authority. After multiple
-stable fully automated cycles, prepare a proposed transport abstraction, but
-do not create or rewrite a Skill until the user explicitly approves it.
+`hmasd-review-scout` retains factual transport experience but does not operate
+the browser. The Controller alone writes questions, reconciles facts, performs
+scientific intake, updates CDC records and starts successors. A receipt forbids
+resubmission; a raw response forbids all browser work.
 
 ## Authority boundary
 
 External GPT-5.6 Pro owns scientific direction and evidence meaning. The
 Controller owns executable realization inside that direction and every
-resource-consuming action. Local agents execute bounded work; BrowserMCP
-submission, observation, capture, archival, and intake remain in the Controller
-session; the persistent experiment Monitor only observes an authorized run. No
-local or persistent role starts a successor. A topology change updates the
-Controller control plane, this Skill, the role registry, local profiles,
-external transport registry, and focused contract tests in one Git boundary.
+resource-consuming action. Local agents execute bounded work; only
+`hmasd-exchange-review` may perform BrowserMCP submission, observation,
+page-copy capture and archival. It returns evidence to the Controller, which
+alone performs intake and successor routing. The persistent experiment Monitor
+only observes an authorized run. A topology change updates the Controller
+control plane, this Skill, the role registry, local profiles, external transport
+registry and focused contract tests in one Git boundary.

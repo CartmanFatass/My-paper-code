@@ -3,8 +3,14 @@
   "mcpServers": {
     "browsermcp-pro": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@browsermcp/mcp@0.1.3"],
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".omp/browsermcp-direct/start_browsermcp_direct.ps1"
+      ],
       "timeout": 120000
     }
   }

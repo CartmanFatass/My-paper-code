@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
-Updated: 2026-07-23
-Status: `CONTROLLER_DIRECT_TRANSPORT_EXPLORATION_BROWSER_SKILL_DISABLED`
+Updated: 2026-07-24
+Status: `S1_VALID_NEGATIVE_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Resume authority
 
@@ -32,92 +32,60 @@ Status: `CONTROLLER_DIRECT_TRANSPORT_EXPLORATION_BROWSER_SKILL_DISABLED`
   That external advance was not made by this Controller. Do not mutate or merge
   `aggressive`.
 
-## Active Pro round
+## Accepted Pro direction
 
 - Round: `20260723_decoupled_skill_lifetime_direction`.
-- Round path:
-  `docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction/`.
-- Canonical question:
-  `docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction/20_PRO_OPEN_QUESTION.md`.
-- Question body SHA-256:
-  `bb358220131cf87077be68aa29be8d7cbdfc1400b00fcf41c3cd113e13551d43`.
-- Deterministic dispatch SHA-256:
-  `b509ff783a76f381a4aeef4098a098e5e2253d2b29e0ce5fcee2fa67b84305cb`.
-- Dispatch length: 311 UTF-16 code units, no CR/LF.
+- Stage commit: `7ff4d216e2ce23415c2b3b9ca671c7a76dde7801`.
+- Evidence commit: `f073d8e77a006515c7800f04e616d5b62a5e4e26`.
 - Registered conversation:
   `https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207`.
-- Expected model UI: `Pro`.
-- `19_BROWSER_PRO_SUBMISSION.json` is absent.
-- `21_PRO_OPEN_RAW.md` is absent.
-- No review message was submitted and no submission receipt was created.
-  Therefore the durable round state is still `READY_TO_SUBMIT`.
+- `19_BROWSER_PRO_SUBMISSION.json` is immutable and
+  `21_PRO_OPEN_RAW.md` is archived. Raw SHA-256:
+  `a9da64eae8f8ec838dbf316adcc36b535831197116ba5e9bb92fe4339617a925`.
+- The external response selected C-ALPSW: an agent-local, lifecycle-owned,
+  continuous predictive slow state with sparse endogenous writes. It omits
+  categorical skills, the shared global cycle `k`, reward-trained KEEP/RENEW
+  and an explicit high-level coordinator.
+- Factual reconciliation is accepted at
+  `docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction/30_EVIDENCE_RECONCILIATION.md`.
+- Durable scientific intake is
+  `docs/research/cdc/EVIDENCE_NOTES/20260723_DECOUPLED_SKILL_LIFETIME_DIRECTION.md`.
+- The direction review consumes zero iterations and authorizes no code,
+  prototype or compute.
 
-Exact dispatch after deterministic re-rendering:
+## S1 result boundary
 
-    HMASD_BP_D1 repo=CartmanFatass/My-paper-code b=Claude stage=7ff4d216e2ce23415c2b3b9ca671c7a76dde7801 q=bb358220131cf87077be68aa29be8d7cbdfc1400b00fcf41c3cd113e13551d43 round=20260723_decoupled_skill_lifetime_direction file=20_PRO_OPEN_QUESTION.md Read via GitHub connector; follow fully; no upload/code/compute.
+The exact S1 artifact is:
 
-## BrowserMCP failure facts
+`docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md`.
 
-1. The first and only `browser_type` action on the original live connection
-   timed out after the upstream 30-second WebSocket deadline. A later read-only
-   snapshot showed that the exact dispatch had reached the old composer.
-2. The Controller did not press Enter, click Send, clear the composer, publish
-   a receipt or retry on that indeterminate connection.
-3. The user disconnected, moved to a new tab, closed the old tab and fully
-   restarted Chrome. The old unsent draft was never submitted.
-4. Subsequent fresh-page snapshots showed the registered URL, authenticated Pro
-   account, visible `Pro` model and empty composer. Interaction calls nevertheless
-   failed before acting with `No tab with given id 507029451`; no new draft or
-   user turn was created.
-5. After the user requested a task/session restart, the Controller verified the
-   stale BrowserMCP process tree as a direct child of the current `omp.exe` and
-   terminated only that tree. `taskkill` reported all four stale descendants
-   terminated successfully. OMP automatically spawned a replacement
-   `@browsermcp/mcp@0.1.3` process, but the current pre-migration session is not a
-   valid continuation surface.
+Its first-match valid terminal is `NO_ONLINE_IDENTIFIABLE_SLOW_STATE`. The
+registered objective cannot uniquely identify slow-state ownership because its
+unrestricted, unpenalized fast recurrent state reads the same online history
+and is supplied to the predictive decoder. A zero-write recurrence reaches the
+same entropy lower bound; positive beta favors it, beta zero is non-unique and
+negative beta favors always-write.
 
-Treat these as transport facts only. Do not create a failure disposition, alter
-Pro science, paste the full question into ChatGPT, use another browser, or infer
-that submission occurred.
+The finite exact source contains independent anonymous lifecycle scripts,
+temporary leave/rejoin, genuine join, complete active-step lifetimes 2 and 3,
+boundary precision/recall 1, `U_star_ALPSW=U_star_G8=1` and zero invariance
+mismatch. No code, prototype, CPU/GPU compute, Monitor assignment or experiment
+occurred.
 
-## Current transport exploration boundary
-
-The restart procedure previously recorded here is superseded by the user's
-2026-07-23 directive. Do not invoke `hmasd-browser-pro-exchange`, do not require
-routine human interaction, and do not abstract a replacement into a Skill
-without later explicit user approval.
-
-The Controller may explore the pinned BrowserMCP server and registered Pro page
-directly. `hmasd-review-scout` records each bounded trial in
-`.omp/review_scout/EXPERIENCE.md`; it never operates the browser or chooses
-science. Trials T01-T04 currently establish:
-
-1. two `browser_type` calls left the exact dispatch in the composer but returned
-   the upstream 30-second WebSocket timeout;
-2. server respawn did not restore a manually cleared extension tab selection;
-3. an isolated managed browser reached an unauthenticated ChatGPT page and is
-   not a valid substitute;
-4. installed source shows that the extension reconnects while
-   `local:selectedTabId` names a live tab, whereas the upstream server waits for
-   the type action and then unconditionally captures a full ARIA snapshot.
-
-These are transport facts and one explicitly labelled inference in the
-experience record, not scientific evidence. The canonical round remains
-`READY_TO_SUBMIT`; receipt and raw response remain absent. Multiple stable,
-fully automated end-to-end cycles are required before a replacement may be
-proposed, and explicit user approval is required before any Skill abstraction.
-Until a valid Pro response is archived and reconciled, no iteration-1 algorithm
-plan or compute is authorized.
+This valid terminal consumes iteration 1. The Chinese report is
+`docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_1.md`; nine iterations remain.
+No successor is selected. Any fast-state bottleneck, complexity cost, changed
+decoder filtration or causal objective changes the scientific contract and
+must be selected by external Pro.
 
 ## Remaining chain
 
-- Archive and reconcile the initial Pro scientific direction.
-- Freeze the exact iteration-1 executable plan.
-- Run the ten evidence-dependent conclusion-bearing iterations serially, using
-  local OMP implementation/review/verification and the registered Monitor as
-  required.
-- Write one Chinese user report per conclusion-bearing iteration.
-- Return each result to the same Pro conversation and schedule only one next
-  action at a time.
-- Close with one independent evidence review, update the control plane, and
-  push only `Claude`.
+- Commit and push the exact S1 result boundary only to `Claude`, then return it
+  to the same registered Pro conversation through a new no-clobber review round.
+- Archive and reconcile the Pro correction, which may select exactly one next
+  action. Do not locally revive or modify C-ALPSW.
+- Continue evidence-dependent iterations 2--10 serially. Rebuild and assign the
+  registered Spark-medium Experiment Monitor only when a later selected action
+  actually authorizes a run.
+- After ten valid conclusion-bearing terminals, complete one independent
+  evidence review, update the control plane and push only `Claude`.
