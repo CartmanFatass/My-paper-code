@@ -216,3 +216,9 @@ The actor/critic-isolation algebra passed twelve focused tests. In particular,
 the slow value loss has finite gradients on the independent critic and exactly
 no gradient on actor representation or heads. The unchanged paired screen is
 frozen in `ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18.md`.
+
+That paired screen selected
+`NONFORMAL_ACTOR_CRITIC_ISOLATED_CREDIT_PROMISING_G18`: G17 held-out utility was
+`0.92512`, G18 utility `0.97256`, spike utility `0.91657`, and rotating effort
+share `0.91285`, with exact replay. The candidate advances to the frozen formal
+dual-source contract; no UAV or usable-algorithm conclusion is drawn yet.

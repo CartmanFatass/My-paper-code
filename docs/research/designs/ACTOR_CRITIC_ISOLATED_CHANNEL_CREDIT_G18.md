@@ -47,3 +47,77 @@ iterations.
 
 Implementation: `ha_ctse_process/separated_credit_g18.py`.
 Runner: `scripts/screen_fast_slow_separated_credit_g18.py`.
+
+## Nonformal screen disposition
+
+The exact screen at source commit `95c5d1266cb2ecc0e9de8993e8e60cc55e35ff5f`
+completed with zero replay error and selected
+`NONFORMAL_ACTOR_CRITIC_ISOLATED_CREDIT_PROMISING_G18`. It passed every frozen
+G17 and G18 threshold and therefore licenses this formal definition without
+changing the algorithm.
+
+## Formal executable definition
+
+```text
+authorization_token=AUTHORIZE_ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18_FORMAL_CPU_V1
+formal_replicates=3
+g17_updates_per_replicate=100
+g18_updates_per_replicate=300
+num_envs=8
+ppo_passes=2
+g17_eval_episodes_per_domain_per_replicate=128
+g18_slot_permutations_per_replicate=3
+bootstrap_repetitions=10000
+total_g17_environment_steps=115200
+total_g18_environment_steps=86400
+backend=cpu
+torch_threads=1
+```
+
+Formal seeds are fresh and replicate-indexed from these bases:
+
+```text
+g17_model=2218000
+g17_train_ledger=2228000
+g17_action=2238000
+g17_evaluation_ledger=2248000
+g17_evaluation_action=2258000
+g18_model=2318000
+g18_action=2338000
+bootstrap=2368018
+```
+
+Replicate `r` adds `r` to every source seed. Checkpoints bind algorithm,
+formal identity, source commit, replicate, completed updates and the complete
+configuration. Training must be finite, move parameters, retain exact replay
+within `1e-6`, preserve lifecycle schedules and keep inactive actions exact
+zero.
+
+G17 IID/held-out utility and held-out gain use hierarchical 95% CIs over
+replicate and episode. G18 utility, paired zero-checkpoint gain, spike utility
+and rotating-member effort share use the same registered bootstrap over
+replicate and slot layout. First-match outcomes are:
+
+1. `INVALID_ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18` on operational failure;
+2. `NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18` unless G17 IID/held-out LCBs are
+   at least `0.90`, gain LCB at least `0.10`, every episode at least `0.80`,
+   both minimum mapping correlations at least `0.90`, and both maximum MAEs at
+   most `0.05`;
+3. `NO_DELAYED_ACCESS_CRITIC_ISOLATED_G18` unless G18 utility LCB is at least
+   `0.95`, paired gain LCB at least `0.10`, and spike-utility LCB at least
+   `0.90`;
+4. `NO_DELAYED_MECHANISM_CRITIC_ISOLATED_G18` unless rotating-effort-share LCB
+   is at least `0.75`;
+5. `UNSTABLE_ACTOR_CRITIC_ISOLATED_CREDIT_G18` unless every replicate's mean
+   G18 utility is at least `0.90`; or
+6. `USABLE_DELAYED_DYNAMIC_ROSTER_CREDIT_G18`.
+
+Only branch 6 supports a usable delayed-effect toy algorithm. No result here
+supports UAV radio, motion, charging-station geometry or deployment claims.
+One valid formal analysis consumes conclusion-bearing iteration 19.
+
+Before launch, the same runner must close a bounded nonformal path exercise:
+one replicate, one update per source, two environments, four G17 evaluation
+episodes and one PPO pass. Its only valid branch is
+`NONFORMAL_CRITIC_ISOLATED_FORMAL_PATH_EXERCISE_COMPLETE`, and formal analysis
+must reject it.

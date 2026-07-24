@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pytest
 import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
@@ -256,30 +257,37 @@ def test_closed_g17_source_uses_the_same_exact_replay_and_update_path() -> None:
 def test_dual_source_result_precedence_is_first_match() -> None:
     passing = {
         "operational_valid": True,
-        "g17_iid_mean": 0.95,
-        "g17_heldout_mean": 0.94,
-        "g17_gain_mean": 0.20,
+        "g17_iid_utility_ci95": [0.92, 0.95, 0.97],
+        "g17_heldout_utility_ci95": [0.91, 0.94, 0.96],
+        "g17_gain_ci95": [0.15, 0.20, 0.25],
         "g17_minimum_episode": 0.90,
-        "g17_effort_correlation": 0.96,
-        "g17_mix_correlation": 0.97,
-        "g17_effort_mae": 0.02,
-        "g17_mix_mae": 0.02,
-        "g18_utility_mean": 0.98,
-        "g18_minimum_slot_utility": 0.97,
-        "g18_gain_mean": 0.18,
-        "g18_minimum_spike_utility": 0.95,
-        "g18_minimum_rotating_effort_share": 0.82,
+        "g17_minimum_effort_correlation": 0.96,
+        "g17_minimum_mix_correlation": 0.97,
+        "g17_maximum_effort_mae": 0.02,
+        "g17_maximum_mix_mae": 0.02,
+        "g18_utility_ci95": [0.96, 0.98, 0.99],
+        "g18_gain_ci95": [0.15, 0.18, 0.21],
+        "g18_spike_utility_ci95": [0.92, 0.95, 0.98],
+        "g18_rotating_effort_share_ci95": [0.78, 0.82, 0.86],
+        "g18_minimum_replicate_utility": 0.95,
     }
-    assert screen.select_result_branch(passing) == screen.PROMISING_BRANCH
+    assert screen.select_result_branch(passing) == screen.USABLE_BRANCH
     assert screen.select_result_branch(
-        passing | {"g17_mix_correlation": 0.89, "g18_utility_mean": 0.1}
+        passing
+        | {
+            "g17_minimum_mix_correlation": 0.89,
+            "g18_utility_ci95": [0.1, 0.2, 0.3],
+        }
     ) == screen.NO_G17_BRANCH
     assert screen.select_result_branch(
-        passing | {"g18_minimum_slot_utility": 0.94}
+        passing | {"g18_utility_ci95": [0.94, 0.97, 0.99]}
     ) == screen.NO_G18_ACCESS_BRANCH
     assert screen.select_result_branch(
-        passing | {"g18_minimum_rotating_effort_share": 0.74}
+        passing | {"g18_rotating_effort_share_ci95": [0.74, 0.82, 0.88]}
     ) == screen.NO_G18_MECHANISM_BRANCH
+    assert screen.select_result_branch(
+        passing | {"g18_minimum_replicate_utility": 0.89}
+    ) == screen.UNSTABLE_BRANCH
     assert screen.select_result_branch(
         passing | {"operational_valid": False}
     ) == screen.INVALID_BRANCH
@@ -343,10 +351,16 @@ def test_one_update_training_helper_closes_checkpoint_and_contract(tmp_path) -> 
     run_root.mkdir()
     (run_root / "checkpoints").mkdir()
 
+    configuration = screen._configuration(formal=False)
+    seeds = screen._seeds("g18", 0, formal=False)
     row = screen._train_source(
         run_root=run_root,
         source="g18",
         source_commit="TEST_SOURCE",
+        formal=False,
+        replicate=0,
+        configuration=configuration,
+        seeds=seeds,
         updates=1,
     )
 
@@ -358,6 +372,28 @@ def test_one_update_training_helper_closes_checkpoint_and_contract(tmp_path) -> 
         run_root / row["final_checkpoint"],
         source="g18",
         source_commit="TEST_SOURCE",
+        formal=False,
+        replicate=0,
         completed_updates=1,
+        configuration=configuration,
+        seeds=seeds,
     )
     assert restored.parameter_count == row["parameter_count"]
+
+
+def test_nonformal_formal_path_exercise_closes_and_formal_rejects(tmp_path) -> None:
+    run_root = tmp_path / "critic_isolated_exercise"
+    training = screen.train(
+        run_root=run_root,
+        source_commit="TEST_SOURCE",
+        formal=False,
+        authorization_token=None,
+    )
+    assert training["formal"] is False
+    assert len(training["source_results"]) == 2
+    screen.evaluate(run_root=run_root)
+    result = screen.analyze(run_root=run_root)
+    assert result["operational_valid"] is True
+    assert result["branch"] == screen.NONFORMAL_BRANCH
+    with pytest.raises(ValueError, match="formal analysis requires formal artifacts"):
+        screen.analyze(run_root=run_root, require_formal=True)
