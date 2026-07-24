@@ -100,23 +100,41 @@ The reviewer never edits; the implementer never accepts its own work.
 
 ## Checkpoints
 
-External review is **not** a checkpoint. It is an external dependency with
-human-operated transport. A checkpoint is where *the user* decides.
+External review is **not** a checkpoint. It is an external dependency driven by
+a subagent. A checkpoint is where *the user* decides.
 
-The user is asked at exactly two points, neither of them per-iteration:
+Where the loop pauses depends on the execution mode, which the user sets and
+`CURRENT_WORK.md` records.
+
+### Authorized mode
+
+The user grants a fixed number of conclusion-bearing iterations. Inside the
+grant the loop runs unattended; asking for an approval the grant already covers
+is a defect. The user is asked at exactly two points, neither per-iteration:
 
 | Checkpoint | Fires when | Decision |
 |---|---|---|
 | Grant renewal | `iterations_remaining` reaches 0 | continue, redirect, or stop |
 | Protected-scope expansion | a change needs authority the grant does not carry | grant it or refuse |
 
-`intermediate_authorization_prompts=forbidden` holds everywhere else.
+### Unauthorized mode
+
+The default when no grant is active. Two additional checkpoints, both
+per-iteration:
+
+| Checkpoint | Fires after | Blocks |
+|---|---|---|
+| Plan review | stage 2 — review reconciled, plan and task split drafted | any implementation |
+| Result review | stage 5 — experiment run and artifacts validated | advancing to the next iteration |
+
+The mode changes only where the loop pauses, never what it does.
 
 ### Push right
 
-Already satisfied by construction. `formal_compute_authority=user_only`, but an
-active grant pre-authorizes a fixed run of iterations, so the user is asked once
-per grant rather than once per run.
+In authorized mode this is satisfied by construction: `formal_compute_authority`
+is `user_only`, but the grant pre-authorizes a fixed run, so the user is asked
+once per grant rather than once per run. In unauthorized mode the two pauses are
+deliberate and are not to be optimized away.
 
 ### Brief
 

@@ -30,13 +30,15 @@ and completed review artifacts are evidence, not active authority.
 ```text
 project_manager_project_authority=exclusive
 project_manager_research_workflow_authority=exclusive
-project_manager_scientific_reconciliation_authority=exclusive
+project_manager_code_design_authority=exclusive
 project_manager_technical_acceptance_authority=exclusive
+scientific_decision_authority=external_pro
+local_conversation_scientific_authority=none
 project_manager_git_authority=direct
 project_manager_external_review_transport=direct
 project_manager_experiment_orchestration=direct_via_registered_child
 formal_compute_authority=user_only
-external_pro_scientific_authority=question_scoped
+external_pro_scientific_authority=scientific_direction_and_disposition
 experiment_operator_authority=one_exact_authorized_run
 iteration_report_owner=project_manager
 iteration_report_language=zh-CN
@@ -60,20 +62,45 @@ code_identity=git_commit_and_exact_path_set
 ```
 
 The user owns project intent and every expansion of protected scientific scope
-or formal-compute authority. When `CURRENT_WORK.md` records an active autonomous
-grant, the Project Manager continues all already-authorized intermediate work
-without requesting approval again. It stops only at an exhausted grant, a user
-pause, an unrecoverable blocker, or a real expansion of protected authority.
+or formal-compute authority.
 
-The Project Manager owns research convergence, CDC sequencing, review need and
-question content, exact evidence intake, scientific reconciliation, executable
-sufficiency, architecture, implementation, tests, repairs, acceptance, Git,
-external-review transport, experiment assignment, result interpretation, and
-successor selection.
+## Execution modes
 
-External GPT-5.6 Pro owns only the scientific answer to the exact question that
-the Project Manager submits. It does not set workflow, implement code, authorize
-compute, or accept engineering.
+Two modes. The user sets which is active and `CURRENT_WORK.md` records it.
+
+**Authorized.** The user grants a fixed number of conclusion-bearing
+iterations. Inside that grant the loop runs unattended — every approval the
+grant covers is already given, and asking again is a defect rather than
+caution. It stops only at an exhausted grant, a user pause, an unrecoverable
+blocker, or a real expansion of protected authority.
+
+**Unauthorized.** The default whenever no grant is active. The loop reports and
+waits for approval twice per iteration:
+
+1. after the external review is reconciled and the plan and task split are
+   drafted, before any implementation begins; and
+2. after the experiment has run and its artifacts are validated, before
+   anything advances.
+
+The mode changes only where the loop pauses, never what it does. Neither mode
+lets a child approve its own work or lets the loop widen protected authority.
+
+External Pro owns the science: which mechanism is right, which route is
+excluded, whether evidence closes, and what the next scientific direction is.
+It does not set workflow, implement code, authorize compute, or accept
+engineering.
+
+The Project Manager — this local conversation — owns everything code-side and
+procedural: review need and question content, exact evidence intake, executable
+sufficiency, architecture, implementation, tests, repairs, technical
+acceptance, Git, external-review transport, experiment assignment, and artifact
+validation. **It does not choose the scientific route.**
+
+A scientific opinion from this conversation is inference, never a result. Mark
+it as such wherever it appears — in a submission, a report, or a document — and
+keep it separate from repository fact and from external evidence. Offer one only
+when it is well supported: an unmarked guess that survives one round becomes a
+premise in the next.
 
 ## Fixed experiment operator
 

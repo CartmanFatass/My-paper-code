@@ -21,9 +21,18 @@ Activate `$hmasd-review-round` in the active Project Manager. Browser work uses
 the `claude-in-chrome` skill and its `mcp__claude-in-chrome__*` tools; load that
 skill before the first browser call.
 
-Transport runs either in the active Project Manager directly or in the
-registered `hmasd-review-exchanger` subagent, which carries this same procedure
-and returns transport facts only. Create no other relay, dispatcher, or Monitor.
+**Transport belongs to `hmasd-review-exchanger`, not to the Project Manager.**
+The Project Manager authors the question, freezes and pushes the boundary, and
+owns registration; the exchanger drives the browser and returns transport facts
+only.
+
+The one exception is bootstrap. When the branch has no registered conversation,
+the Project Manager opens it, submits the first fence, records the exact id and
+url, and hands the round to the exchanger from that point — the exchanger never
+registers a conversation itself. Every later round on a registered branch goes
+to the exchanger whole.
+
+Create no other relay, dispatcher, or Monitor.
 
 ### Browser tool mapping
 
