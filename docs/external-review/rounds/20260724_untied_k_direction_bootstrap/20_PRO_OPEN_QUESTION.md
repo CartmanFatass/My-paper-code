@@ -21,19 +21,26 @@ probability factorization, gradients and detach, recurrent state, masks, clocks,
 lifecycle ownership, RNG, replay, credit, checkpoint meaning — you decide
 **whether** one changes; the orchestrator decides **how**.
 
-## Exact topic, and what is out of scope
+## Exact topic
 
-**In scope: the skill period of an individual agent becomes variable.**
-
-Today every agent shares one global skill period. This branch exists to explore
+**In scope: the skill period of an individual agent becomes variable.** Today
+every agent shares one global skill period. This branch exists to explore
 letting each agent hold a skill for its own length of time.
+
+**The team side is in scope too, as a consequence rather than a premise.** Do
+not assume the team skill period is fixed. The team skill `Z` was originally
+conceived as an **information set compressed out of the OPT module** — not as a
+state the algorithm is required to carry. Whether `Z` needs a period at all,
+whether it needs to be a persistent state, and what it should mean once agents
+desynchronize are open. Several strategies are already available downstream, so
+treat this as a live design space, not a fixed constraint to preserve.
 
 **Out of scope for this round — do not answer about these:**
 
 - The **number** of skills. `n_Z = 6` team codes and `n_z = 6` individual codes
   are fixed and are not the subject. This round is about period, not cardinality.
 - Variable **agent count** and membership lifetime. Runtime-variable team
-  membership is the repository's existing mission and is already carried by the
+  membership is the repository's existing mission, already carried by the
   G-generation line. It is background, not the question.
 - Any implementation route, file, or task split.
 
@@ -97,8 +104,23 @@ is load-bearing or inherited convenience once the period varies per agent:
 **C. What breaks in credit assignment when agents desynchronize?**
 With a shared period, all agents' skill segments start and end together. With
 per-agent periods they do not. State what that costs — in the high-level value
-estimate, in advantage computation, in replay, and in what a team-level
-commitment can still mean when no two agents share a boundary.
+estimate, in advantage computation, and in replay.
+
+**C2. What should the team skill `Z` become?**
+`Z` was conceived as an information set compressed out of OPT rather than a
+required state. Once no two agents share a boundary, say which of these is
+right, or name a better one:
+
+- `Z` keeps a period of its own, decoupled from every agent's;
+- `Z` stops being a periodic state and becomes a function evaluated whenever it
+  is read;
+- `Z` is re-derived at each agent's own boundary, so different agents condition
+  on different vintages of it;
+- `Z` is unnecessary and its information should be carried some other way.
+
+State what each choice does to the probability factorization, to what a team
+commitment can still mean, and to the environment-agnostic intrinsic-reward
+contract.
 
 **D. What is the strongest information-matched reduction?**
 Give the ordinary-MARL or simpler-controller comparator that would explain any
@@ -114,15 +136,17 @@ evidence semantics must be frozen before it is collected?
 2. **Coupling audit.** Your answer to B, one line per coupling: scientific
    content, or convenience.
 3. **Desynchronization cost.** Your answer to C.
-4. **Plural candidates.** Two to four structurally distinct mechanisms for
+4. **Team skill disposition.** Your answer to C2, including what it does to the
+   probability factorization and the intrinsic-reward contract.
+5. **Plural candidates.** Two to four structurally distinct mechanisms for
    per-agent variable period, each with its causal story, what it replaces or
    deletes, the evidence it explains, and its strongest contradiction.
-5. **Matched reduction.** Your answer to D.
-6. **Separating evidence.** Your answer to E, plus the smallest refuted unit for
+6. **Matched reduction.** Your answer to D.
+7. **Separating evidence.** Your answer to E, plus the smallest refuted unit for
    each candidate.
-7. **One scheduled evidence action and reactivation conditions.** A
+8. **One scheduled evidence action and reactivation conditions.** A
    recommendation only — it authorizes neither implementation nor compute.
-8. **Concise Chinese user brief.** What was decided, what was excluded, what
+9. **Concise Chinese user brief.** What was decided, what was excluded, what
    remains open, and an explicit statement that neither implementation nor
    formal compute is authorized by this response.
 

@@ -43,6 +43,13 @@ assumption follows it: `episode_length` must be divisible by `k`
 rather than assuming one (`ha_ctse_process/config.py`,
 `ha_ctse_process/train.py`).
 
+**Where the team skill comes from.** `Z` originates as an information set
+compressed out of the OPT module, not as a mandatory state. Read `OPT`,
+`StateEncoder`, `SkillCoordinator` and `SkillDecoder` in `hmasd/networks.py`,
+and `OPTCompactExtractor`, `CompactTeamBridge` and `CompactTeamDiscriminator` in
+`hmasd/ha_ctse.py`. Whether `Z` needs a period, or needs to persist at all, is
+part of this question rather than a constraint on it.
+
 **Not the subject.** Skill cardinality is fixed: `n_Z = 6` team codes and
 `n_z = 6` individual codes (`config_1.py:132-133`, `ha_ctse_process/config.py`).
 This round is about period, not count.
