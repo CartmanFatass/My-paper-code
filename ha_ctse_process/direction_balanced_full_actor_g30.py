@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 
 import torch
@@ -11,6 +12,7 @@ from torch.nn import functional as F
 from ha_ctse_process.anchored_residual_g19 import (
     GRADIENT_CLIP,
     VALUE_CLIP,
+    AnchoredCredit,
     AnchoredRosterTrajectory,
     FastAnchoredResidualPolicy,
     _channel_policy_loss,
@@ -228,7 +230,7 @@ class DirectionBalancedFullActorPolicy(FastAnchoredResidualPolicy):
         self.phase = "direction_balanced"
 
 
-def optimize_direction_balanced_update(
+def optimize_direction_balanced_credit_update(
     model: DirectionBalancedFullActorPolicy,
     actor_optimizer: torch.optim.Optimizer,
     critic_optimizer: torch.optim.Optimizer,
@@ -237,8 +239,9 @@ def optimize_direction_balanced_update(
     device: torch.device,
     ppo_passes: int,
     gamma: float,
+    credit_function: Callable[..., AnchoredCredit],
 ) -> dict[str, float]:
-    """Update the full actor with equal global gradient directions."""
+    """Update the full actor using one explicit detached credit builder."""
 
     if model.phase != "direction_balanced":
         raise RuntimeError("G30 update requires direction-balanced phase")
@@ -246,7 +249,7 @@ def optimize_direction_balanced_update(
         trajectory.rewards, dtype=torch.bool, device=device
     )
     terminals[-1] = True
-    credit = compute_anchored_credit(
+    credit = credit_function(
         rewards=trajectory.rewards.to(device),
         slow_values=trajectory.old_values.to(device),
         immediate_baselines=trajectory.old_immediate_baselines.to(device),
@@ -414,3 +417,27 @@ def optimize_direction_balanced_update(
     totals["finite_update"] = float(finite)
     totals["optimizer_steps"] = float(2 * ppo_passes)
     return totals
+
+
+def optimize_direction_balanced_update(
+    model: DirectionBalancedFullActorPolicy,
+    actor_optimizer: torch.optim.Optimizer,
+    critic_optimizer: torch.optim.Optimizer,
+    trajectory: AnchoredRosterTrajectory,
+    *,
+    device: torch.device,
+    ppo_passes: int,
+    gamma: float,
+) -> dict[str, float]:
+    """Retain the frozen G30 one-step successor-value target."""
+
+    return optimize_direction_balanced_credit_update(
+        model,
+        actor_optimizer,
+        critic_optimizer,
+        trajectory,
+        device=device,
+        ppo_passes=ppo_passes,
+        gamma=gamma,
+        credit_function=compute_anchored_credit,
+    )

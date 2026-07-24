@@ -389,3 +389,16 @@ stability pass, but spike-utility CI95 lower bound is `0.87611`, below `0.90`.
 Do not rerun or tune G30. The next zero-compute boundary isolates why broad
 delayed utility is learned while load-bearing spike allocation remains
 seed-unstable, then freezes at most one proof-sized G31 discriminator.
+
+G31 freezes the smallest environment-neutral target correction. Keep G30's
+actor geometry, but replace `gamma*V(s_(t+1))` in the successor actor/baseline
+channel with the detached realized discounted future tail excluding `r_t`.
+Retain the full-return slow critic, exact terminal zero, current active mask and
+all paired screen budgets/gates. Implement a shared direction-update entrypoint,
+prove tail algebra and run one fresh-seed nonformal screen only.
+
+The G31 active implementation is PM-accepted after 20 focused checks including
+the G30 refactor regression and 58 shared-core checks. Exact tail algebra,
+mid-trajectory terminal reset, detached targets, unchanged checkpoint shape,
+first-replay reuse, actor/critic/residual ownership and first-match precedence
+close. The next action is the one frozen bounded paired screen.
