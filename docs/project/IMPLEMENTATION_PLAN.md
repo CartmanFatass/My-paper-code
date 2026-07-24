@@ -6,7 +6,7 @@
 ```text
 active_implementation=CONTINUOUS_SERVICE_ROSTER_PROXY_G17
 design=docs/research/designs/CONTINUOUS_SERVICE_ROSTER_PROXY_G17.md
-status=BASE_REPRESENTATION_PROBE_MISSED_GATE_OBSERVATION_RESIDUAL_PROBE_ACTIVE
+status=RESIDUAL_REPRESENTATION_PASS_PPO_FAIL_ACTIVE_COUNT_CURRICULUM_ACTIVE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -54,6 +54,13 @@ probe for 200 optimization steps. If final full-dataset MSE is at most `10%` of
 initial MSE and at most `1e-3`, run one RL screen with the residual,
 `initial_log_std=-1.0`, learning rate `1e-3`, 100 updates, eight environments
 and two PPO passes. Otherwise retire the continuous policy realization.
+
+The residual probe passes, but that exact RL screen returns only `0.6583888`
+joint utility and `0.0078801` gain with negative demand correlations. It is
+closed. Run exactly one active-count curriculum screen with the same total 100
+updates: 25 singleton, 25 small-dynamic and 50 registered-dynamic updates. Keep
+the residual, `initial_log_std=-1.0`, learning rate `1e-3`, eight environments,
+two PPO passes and the existing screen gates.
 
 ## After the screen
 

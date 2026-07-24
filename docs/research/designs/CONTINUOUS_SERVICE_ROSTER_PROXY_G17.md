@@ -95,6 +95,21 @@ residual to the action mean. It is environment-neutral, optional, and disabled
 for UAV G1, so the accepted shared recurrent mechanics remain unchanged. The
 same 200-step probe and thresholds apply without modification.
 
+The residual passes representation fit but fails its sole PPO screen, so it is
+not a formal candidate. The active correction is a fixed active-count
+curriculum using the same residual policy and total 100 updates:
+
+```text
+singleton_static_updates=25
+small_dynamic_2_to_1_to_3_to_2_updates=25
+registered_dynamic_updates=50
+```
+
+Training reward, observation, action distribution, model, seeds, final IID and
+held-out evaluation and every screen threshold remain unchanged. Curriculum
+success would support a staged learning-path hypothesis only; it would not
+establish comparative advantage or UAV transport.
+
 ## Protected interpretation
 
 - G8-G16 and the retired spatial carrier remain closed exactly as recorded.

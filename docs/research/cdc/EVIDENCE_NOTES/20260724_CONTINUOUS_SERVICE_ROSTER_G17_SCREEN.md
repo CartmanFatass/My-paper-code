@@ -61,3 +61,16 @@ residual to the action mean. This adds only `observation_dim * action_dim +
 action_dim` parameters, leaves the recurrent active-set/prefix path intact and
 is disabled for the existing UAV wrapper. It must first pass the same exact
 representation probe before any RL screen.
+
+The residual probe passes exactly: MSE `0.1159971 -> 0.000958548`, below both
+the absolute and relative gates. Its one registered PPO screen nevertheless
+fails: final IID/held-out means are `0.658150`/`0.658628`, joint gain is only
+`0.007880`, and effort/mix correlations are `-0.226284`/`-0.027281`.
+Consequently the observation residual is representationally sufficient but
+does not repair shared-team-reward PPO access.
+
+The next algorithmic discriminator is an active-count curriculum under the
+same total 100 updates: 25 singleton updates, 25 small-dynamic updates and 50
+registered-dynamic updates. It changes the learning path, not reward,
+evaluation, gates, model or total exposure. It tests whether the conditional
+continuous mapping is learnable before multi-agent credit dilution appears.

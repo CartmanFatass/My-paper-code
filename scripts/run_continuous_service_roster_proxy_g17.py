@@ -22,6 +22,8 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     ACTION_DIM,
     CAPACITY,
     CRITIC_STATE_DIM,
+    CURRICULUM_SINGLETON_PROFILES,
+    CURRICULUM_SMALL_DYNAMIC_PROFILES,
     HELDOUT_PROFILES,
     HORIZON,
     OBSERVATION_DIM,
@@ -306,9 +308,12 @@ def screen(
     learning_rate: float = LEARNING_RATE,
     initial_log_std: float = 0.0,
     current_observation_residual: bool = False,
+    active_count_curriculum: bool = False,
 ) -> dict[str, Any]:
     if min(updates, num_envs, eval_episodes, ppo_passes) <= 0:
         raise ValueError("G17 screen counts must be positive")
+    if active_count_curriculum and updates < 3:
+        raise ValueError("G17 active-count curriculum requires at least three updates")
     run_root.mkdir(parents=True, exist_ok=False)
     configure_runtime(MODEL_SEED)
     started = time.perf_counter()
@@ -333,7 +338,26 @@ def screen(
         )
     }
     finite = True
+    if active_count_curriculum:
+        singleton_updates = max(1, int(updates) // 4)
+        small_updates = max(1, int(updates) // 4)
+        dynamic_updates = int(updates) - singleton_updates - small_updates
+    else:
+        singleton_updates = 0
+        small_updates = 0
+        dynamic_updates = int(updates)
+    training_stages = {
+        "singleton": singleton_updates,
+        "small_dynamic": small_updates,
+        "registered_dynamic": dynamic_updates,
+    }
     for update in range(int(updates)):
+        if update < singleton_updates:
+            training_profiles = CURRICULUM_SINGLETON_PROFILES
+        elif update < singleton_updates + small_updates:
+            training_profiles = CURRICULUM_SMALL_DYNAMIC_PROFILES
+        else:
+            training_profiles = TRAIN_PROFILES
         first = update * int(num_envs)
         trajectory = collect_trajectory(
             model,
@@ -341,6 +365,7 @@ def screen(
             ledger_seed=TRAIN_LEDGER_SEED,
             action_seed=ACTION_SEED,
             device=torch.device("cpu"),
+            profiles=training_profiles,
         )
         metrics = optimize_update(
             model,
@@ -378,9 +403,9 @@ def screen(
     result = {
         "schema": SCHEMA,
         "algorithm": (
-            f"{ALGORITHM}_CURRENT_OBSERVATION_RESIDUAL"
-            if current_observation_residual
-            else ALGORITHM
+            ALGORITHM
+            + ("_CURRENT_OBSERVATION_RESIDUAL" if current_observation_residual else "")
+            + ("_ACTIVE_COUNT_CURRICULUM" if active_count_curriculum else "")
         ),
         "formal": False,
         "status": (
@@ -403,6 +428,8 @@ def screen(
         },
         "parameter_count": model.parameter_count,
         "current_observation_residual": bool(current_observation_residual),
+        "active_count_curriculum": bool(active_count_curriculum),
+        "training_stages": training_stages,
         "optimizer": {
             "learning_rate": float(learning_rate),
             "initial_log_std": float(initial_log_std),
@@ -436,6 +463,7 @@ def screen(
             "model_state": model.state_dict(),
             "optimizer_state": optimizer.state_dict(),
             "completed_updates": int(updates),
+            "active_count_curriculum": bool(active_count_curriculum),
         },
         run_root / "final_checkpoint.pt",
     )
@@ -454,6 +482,7 @@ def main() -> None:
     parser.add_argument("--learning-rate", type=float, default=LEARNING_RATE)
     parser.add_argument("--initial-log-std", type=float, default=0.0)
     parser.add_argument("--current-observation-residual", action="store_true")
+    parser.add_argument("--active-count-curriculum", action="store_true")
     parser.add_argument("--probe-steps", type=int, default=200)
     parser.add_argument("--probe-batch-size", type=int, default=64)
     arguments = parser.parse_args()
@@ -476,6 +505,7 @@ def main() -> None:
         learning_rate=arguments.learning_rate,
         initial_log_std=arguments.initial_log_std,
         current_observation_residual=arguments.current_observation_residual,
+        active_count_curriculum=arguments.active_count_curriculum,
     )
     print(json.dumps(result, sort_keys=True))
 

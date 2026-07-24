@@ -8,6 +8,7 @@ from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     ACTION_DIM,
     CAPACITY,
+    CURRICULUM_SINGLETON_PROFILES,
     HORIZON,
     ContinuousServiceRosterEnv,
     collect_trajectory,
@@ -101,6 +102,13 @@ def test_new_source_has_exact_dynamic_roster_and_constructive_access() -> None:
     assert outcome.utility == np.mean(utilities)
     assert outcome.minimum_step_utility >= 1.0 - 2e-7
 
+    singleton = make_ledger(
+        0,
+        master_seed=170_002,
+        profiles=CURRICULUM_SINGLETON_PROFILES,
+    )
+    assert singleton.expected_roster_sizes == (1,) * HORIZON
+
 
 def test_collection_replay_lifecycle_and_one_update_are_exact_and_finite() -> None:
     torch.manual_seed(170_017)
@@ -166,6 +174,20 @@ def test_nonformal_screen_closes_one_small_artifact(tmp_path) -> None:
     assert result["source_control"]["minimum_utility"] >= 1.0 - 2e-7
     assert result["runtime"]["backend"] == "cpu"
     assert result["runtime"]["torch_threads"] == 1
+
+    curriculum = runner.screen(
+        run_root=tmp_path / "g17_curriculum_screen",
+        updates=3,
+        num_envs=2,
+        eval_episodes=2,
+        ppo_passes=1,
+        learning_rate=1e-3,
+        initial_log_std=-1.0,
+        current_observation_residual=True,
+        active_count_curriculum=True,
+    )
+    assert curriculum["active_count_curriculum"] is True
+    assert sum(curriculum["training_stages"].values()) == 3
 
 
 def test_representation_probe_reduces_constructive_mapping_error(tmp_path) -> None:
