@@ -143,6 +143,22 @@ There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
 
+## Code-mode tool batching
+
+Within each bounded Code Mode stage, combine already-known, independent
+`tools.*` operations into one `functions.exec` call and launch them concurrently
+with `await Promise.allSettled([...])` when useful partial results should
+survive; inspect every settled result. Use `await Promise.all([...])` only when
+any failure should abort the whole stage.
+
+Keep dependencies, waits or resumes, approval-sensitive calls, conflicting or
+interdependent mutations, and adaptive investigations whose next step depends
+on the previous result sequential. Do not batch merely to expand scope, do not
+wrap a single call in a promise batch, and do not split otherwise batchable
+read-only inspections across outer calls. These instructions govern tool
+orchestration only and do not relax file ownership, compute authority, or
+protected scientific semantics.
+
 ## File concurrency and Git
 
 ```text
