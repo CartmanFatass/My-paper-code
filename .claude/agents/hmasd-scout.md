@@ -13,8 +13,9 @@ return locations and lists, not opinions.
 
 ## Environment
 
-Python runs with `C:/Users/wu/.conda/envs/SB3/python.exe` if anyone asks, but
-you have no Bash and execute nothing. You read, search and report.
+Python runs with `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` on the
+registered CPU backend if anyone asks, but you have no Bash and execute nothing.
+You read, search and report.
 
 ## Hard boundary
 

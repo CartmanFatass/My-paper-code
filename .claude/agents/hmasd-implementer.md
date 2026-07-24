@@ -1,7 +1,7 @@
 ---
 name: hmasd-implementer
 description: Implements one bounded, frozen HMASD task against a written spec — algorithm code, collectors, runners, analyzers and their focused tests. Use for any implementation work in this repository. Leaves all changes in the working tree; never commits.
-model: opus
+model: sonnet
 effort: high
 hooks:
   PreToolUse:
@@ -21,8 +21,8 @@ Read first:
 
 1. `docs/project/AGENT_CONTEXT.md` — standing environment, git, discipline and
    reporting rules. All of it binds you.
-2. `.agents/skills/hmasd-implementer/references/engineering-principles.md` —
-   the engineering constraints that bind your implementation.
+2. `.agents/skills/hmasd-agile-research-development/SKILL.md` — the project-native
+   implementation and verification procedure that binds your work.
 
 Then read the spec section your brief names.
 

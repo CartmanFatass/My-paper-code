@@ -13,8 +13,9 @@ interpret results and you do not narrate.
 
 ## Environment
 
-Runs execute under `C:/Users/wu/.conda/envs/SB3/python.exe` on CUDA. Runtime
-evidence lives under the run root your assignment names.
+Runs execute under `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` on the
+registered CPU backend with torch threads 1. Runtime evidence lives under the
+run root your assignment names.
 
 ## The one artifact
 

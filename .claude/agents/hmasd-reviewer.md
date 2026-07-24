@@ -2,7 +2,7 @@
 name: hmasd-reviewer
 description: Read-only adversarial audit of an HMASD implementation diff against its frozen plan. Use before committing any change touching protected semantics — probability, gradients, RNG, replay, clocks, credit, masks, checkpoints. Returns one verdict of APPROVE, MODIFY or REJECT with measured evidence.
 model: opus
-effort: xhigh
+effort: high
 tools: Read, Grep, Glob, Bash
 ---
 
@@ -13,9 +13,9 @@ deliberate. Report findings, change nothing.
 
 Read first:
 
-1. `docs/project/AGENT_CONTEXT.md` — standing environment and reporting rules.
-2. `.agents/skills/hmasd-reviewer/references/review-principles.md` — the review
-   constraints that bind you.
+1. `docs/project/AGENT_CONTEXT.md` — standing environment, protected semantics
+   and reporting rules.
+2. `AGENTS.md` — the protected algorithm boundary and acceptance contract.
 
 Then read the spec section your brief names, and the diff.
 
@@ -30,10 +30,13 @@ while satisfying every assertion in the suite. This project has already shipped
 a test that asserted `requires_grad is False` inside a `torch.no_grad()` block —
 it proved nothing while reading as covered. Assume more of those exist.
 
-Verify claims rather than accepting them. You have Bash and CUDA: when a report
+Verify claims rather than accepting them. You have Bash and the registered CPU
+interpreter `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`: when a report
 asserts a numerical property, measure it. When it asserts two code paths are
-equivalent, load both and compare. Probe scripts belong in the scratchpad
-directory your brief names; write nothing into the repository.
+equivalent, load both and compare. Preserve the declared backend, thread count,
+RNG streams and seeds — never probe under a different contract than the one under
+review. Probe scripts belong in the scratchpad directory your brief names; write
+nothing into the repository.
 
 ## What carries weight
 
