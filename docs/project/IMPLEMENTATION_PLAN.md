@@ -341,3 +341,25 @@ in a temporary copy passed to the shared reducer, then delete the reducer's
 legacy output before building the G29 artifact. Keep the G29 source rows,
 external telemetry, gates and algorithm free of the old projection label. Add
 one regression and rerun once from a fresh integrated source.
+
+The repaired G29 screen is operationally valid and closes as
+`NONFORMAL_NO_DELAYED_ACCESS_REALIZED_TANGENT_G29`. G17 remains strong, but G18
+falls below its anchor (`0.51679` final, `-0.06654` gain, zero spike). The
+realized constraint fires on 234/600 G18 actor passes and limits actor movement
+to `0.08077`, so it is retired as more restrictive in practice than G28.
+
+G30 returns to a pre-Adam algebraic guarantee while changing one different
+axis: discard the two raw global gradient magnitudes and equally combine their
+unit directions. The unit half-sum always has nonnegative raw immediate dot by
+Cauchy--Schwarz and preserves the complete successor direction. Define exact
+zero-channel branches, use float64 norms without epsilon, retain the existing
+`0.5` gradient clip, and introduce no global rescale or projection. Rename the
+closed G29 module/runner/test, prove direction/zero/opposite/Adam ownership and
+run one paired bounded screen. Formal and UAV compute remain unscheduled.
+
+The active-line G30 implementation is now PM-accepted. It replaces the retired
+G29 module, runner and tests rather than retaining an adapter. Fourteen focused
+checks close the algebraic edge cases, float32 near-opposite bound, ordinary
+Adam state transition, ownership and first-match contract; the 48-test
+G17/G18/G19/G30 shared-core set passes. The bounded paired screen is the next
+action and consumes no conclusion-bearing iteration.

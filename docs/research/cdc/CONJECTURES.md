@@ -166,9 +166,10 @@ the Project Manager-accepted CDC state.
   G17 strong under strict successor/immediate non-conflict, but G18 returns to
   zero spike service. G28 protects only the equal combined raw gradient and
   raises G18 spike utility to `0.88983` while retaining G17, narrowly missing
-  the frozen `0.90` access floor. Because Adam's transformed parameter movement
-  need not share the raw gradient direction, the active discriminator protects
-  only realized Adam displacement and leaves admissible raw conflict intact.
+  the frozen `0.90` access floor. G29's realized Adam constraint triggers much
+  more often and removes G18 access entirely. The active discriminator tests
+  whether equal global gradient directions can preserve the full successor
+  direction without either raw magnitude dominance or a post-Adam constraint.
 
 ## C-BENCH — The benchmark is not identifying
 

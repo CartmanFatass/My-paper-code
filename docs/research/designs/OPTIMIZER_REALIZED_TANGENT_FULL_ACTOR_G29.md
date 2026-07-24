@@ -1,7 +1,7 @@
 # Optimizer-realized tangent full actor G29
 
 ```text
-status=OPERATIONAL_METRIC_ADAPTER_REPAIR_ACCEPTED_RERUN_NEXT
+status=SCREEN_COMPLETE_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
