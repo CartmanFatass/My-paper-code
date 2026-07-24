@@ -27,7 +27,7 @@ constraints they need.
 ## Git
 
 The root Project Manager directly stages, commits, and pushes accepted work.
-Native children never run Git and leave their exact owned paths in the shared
+Subagents never run Git and leave their exact owned paths in the shared
 working tree. Git authority follows the applicable role charter; there is no
 Controller handoff, per-file hash exchange, or callback receipt.
 
@@ -40,7 +40,7 @@ Report it rather than working around it.
 Role-specific semantic ownership, reviewer-package authorship, acceptance,
 repair, transport and archival responsibilities live in root `AGENTS.md` and
 the applicable `.agents/roles/*.md` contracts. The experiment operator is a
-fixed native child, not a persistent task or Skill-driven monitor. Consult those
+fixed subagent, not a persistent task or Skill-driven monitor. Consult those
 sources directly when constructing an assignment; do not turn this environment
 reference into a parallel policy source.
 
@@ -69,5 +69,7 @@ and flag it rather than proceeding.
 
 - `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract.
 - `docs/project/CURRENT_WORK.md` — live state and binding constraints.
-- `.agents/skills/hmasd-agile-research-development/SKILL.md` — project-native
+- `.claude/skills/hmasd-agile-research-development/SKILL.md` — project-native
   implementation and verification procedure.
+- `.claude/agents/*.md` — the registered subagent roster and its standing
+  boundaries; `AGENTS.md` records the model tier of each.

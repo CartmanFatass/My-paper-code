@@ -4,11 +4,13 @@
 Do not maintain a second algorithm, experiment, review, Git, or memory workflow
 in this file.
 
-Read `AGENTS.md` and `.agents/skills/hmasd-task-router/SKILL.md` first, then use
-the exact role routing defined there. Controller work uses the active files in
-`docs/project/`; executable implementation assignments use
-`$hmasd-implementer`; external review and monitoring use only their dedicated
-role Skills.
+Read `AGENTS.md` first, then use the exact role routing defined there.
+Controller work uses the active files in `docs/project/`. Every bounded role is
+a subagent defined under `.claude/agents/`; executable implementation
+assignments go to `hmasd-implementer`, and `AGENTS.md` holds the full roster
+with its model tiers. Project implementation procedure is
+`$hmasd-agile-research-development`; external review transport is
+`$hmasd-review-round`.
 
 If `CURRENT_WORK.md` names another active controller, remain read-only unless
 an explicit handoff changes ownership. Treat Git-tracked current code as the

@@ -49,6 +49,9 @@ data/
 !CLAUDE.md
 !AGENTS.md
 # Repository-scoped skill instructions and references are durable workflow source.
+# HMASD project skills live under .claude/skills/ so Claude Code can resolve them.
+# Scoped to hmasd-* only; third-party skill packs stay local.
+!.claude/skills/hmasd-*/**/*.md
 !.agents/skills/**/*.md
 # Stable role charters are durable workflow authority.
 !.agents/roles/

@@ -12,7 +12,7 @@ This file records active state only. Durable authority is in `AGENTS.md` and
   implementation acceptance, Git, review transport, experiment orchestration,
   result intake and successor selection.
 - Formal and bounded runs use only the registered nonpersistent
-  `hmasd-experiment-operator`, fixed to `gpt-5.6-luna` with `low` reasoning. It
+  `hmasd-experiment-operator` subagent, fixed to `haiku` with `low` effort. It
   remains silent and returns exactly one `COMPLETE` or `ERROR` terminal payload.
 - No Controller, persistent Monitor, dispatcher, callback route, global write
   lease, workflow hash handoff or compatibility line is active.

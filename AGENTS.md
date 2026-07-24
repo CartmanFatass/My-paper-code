@@ -13,8 +13,8 @@ action it reads:
 3. only the algorithm, implementation, experiment, or review document required
    at that boundary.
 
-A native child reads its exact assignment, its registered `.codex/agents/*.toml`
-profile, and the named `.agents/roles/*.md` charter. A child does not reconstruct
+A subagent reads its exact assignment, its registered `.claude/agents/*.md`
+definition, and the named `.agents/roles/*.md` charter. A child does not reconstruct
 task history. There is no Controller, persistent Monitor, role-session registry,
 dispatcher, or callback chain.
 
@@ -32,6 +32,11 @@ project_manager_technical_acceptance_authority=exclusive
 project_manager_git_authority=direct
 project_manager_external_review_transport=direct
 project_manager_experiment_orchestration=direct_via_registered_child
+subagent_runtime=claude_code
+subagent_definitions=.claude/agents/*.md
+implementer_tier=sonnet_high
+reviewer_tier=opus_high
+mechanical_tier=haiku_low
 formal_compute_authority=user_only
 external_pro_scientific_authority=question_scoped
 experiment_operator_authority=one_exact_authorized_run
@@ -72,14 +77,40 @@ External GPT-5.6 Pro owns only the scientific answer to the exact question that
 the Project Manager submits. It does not set workflow, implement code, authorize
 compute, or accept engineering.
 
+## Registered subagents
+
+Every child is a Claude Code subagent defined in `.claude/agents/<name>.md`,
+which carries its own model, effort and tool grant. The Project Manager spawns
+one with an exact assignment; the definition supplies the standing boundary.
+
+| Subagent | Tier | Owns |
+|---|---|---|
+| `hmasd-implementer` | sonnet / high | one bounded frozen implementation task |
+| `hmasd-reviewer` | opus / high | adversarial read-only audit of one diff |
+| `hmasd-scout` | haiku / low | mechanical lookup — inventories, symbol sweeps, locations |
+| `hmasd-verifier` | haiku / low | executes assigned checks, returns bounded runtime evidence |
+| `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
+| `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
+| `hmasd-review-exchanger` | haiku / low | byte-exact external review transport and archival |
+| `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
+| `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
+
+The tier is chosen by the work, not by importance: judgment about protected
+semantics goes to opus, bounded construction to sonnet, and mechanical lookup,
+transcription and execution to haiku. A haiku child that meets a real judgment
+call hands back rather than deciding.
+
+No child commits, spawns a successor, or accepts its own work.
+
 ## Fixed experiment operator
 
-Formal and bounded run execution uses only the registered native child:
+Formal and bounded run execution uses only the registered subagent:
 
 ```text
 callable_agent_type=hmasd-experiment-operator
-model=gpt-5.6-luna
-reasoning_effort=low
+definition=.claude/agents/hmasd-experiment-operator.md
+model=haiku
+effort=low
 role=.agents/roles/EXPERIMENT_OPERATOR.md
 ```
 
@@ -163,21 +194,18 @@ There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
 
-## Code-mode tool batching
+## Tool batching
 
-Within each bounded Code Mode stage, combine already-known, independent
-`tools.*` operations into one `functions.exec` call and launch them concurrently
-with `await Promise.allSettled([...])` when useful partial results should
-survive; inspect every settled result. Use `await Promise.all([...])` only when
-any failure should abort the whole stage.
+Issue already-known, independent tool calls together in one message so they run
+concurrently — read-only inspections especially. Inspect every result; one
+failed call does not invalidate the others returned alongside it.
 
-Keep dependencies, waits or resumes, approval-sensitive calls, conflicting or
-interdependent mutations, and adaptive investigations whose next step depends
-on the previous result sequential. Do not batch merely to expand scope, do not
-wrap a single call in a promise batch, and do not split otherwise batchable
-read-only inspections across outer calls. These instructions govern tool
-orchestration only and do not relax file ownership, compute authority, or
-protected scientific semantics.
+Keep sequential: dependencies, waits or resumes, approval-sensitive calls,
+conflicting or interdependent mutations, and adaptive investigations whose next
+step depends on the previous result. Do not batch merely to expand scope, and do
+not split otherwise batchable read-only inspections across separate messages.
+These instructions govern tool orchestration only and do not relax file
+ownership, compute authority, or protected scientific semantics.
 
 ## File concurrency and Git
 
@@ -199,7 +227,7 @@ If a cross-task send is ever explicitly requested, resolve that target's live
 model and effort immediately before sending and copy them unchanged. Never keep
 a fixed expected profile table for user-managed conversations and never replace
 the target's profile with the sender's. This does not apply to the deliberately
-fixed native `hmasd-experiment-operator` profile above.
+fixed `hmasd-experiment-operator` profile above.
 
 ## Skills and active-line development
 
@@ -211,7 +239,7 @@ Active project Skills are deliberately small:
   external raw archival.
 
 There is no dispatch or experiment-monitor Skill. Experiment behavior is fixed
-by its native agent profile and role charter. Generic Superpowers Skills are
+by its subagent definition and role charter. Generic Superpowers Skills are
 reference-only and disabled for HMASD execution, including their worktree,
 planning, TDD, review-stack, and completion rituals.
 
@@ -237,5 +265,5 @@ precedence change only at an explicitly accepted scientific boundary.
 - `docs/research/cdc/` contains durable research state.
 - `docs/external-review/` contains exact external evidence.
 - `.agents/roles/` contains role authority.
-- `.agents/skills/` contains only reusable operating mechanics.
-- `.codex/agents/` contains fixed native child profiles.
+- `.claude/skills/hmasd-*/` contains only reusable operating mechanics.
+- `.claude/agents/` contains the registered subagent definitions.

@@ -5,10 +5,11 @@
 ```text
 role=experiment_operator
 callable_agent_type=hmasd-experiment-operator
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_nonpersistent_subagent
+definition=.claude/agents/hmasd-experiment-operator.md
 parent=project_manager
-model=gpt-5.6-luna
-reasoning_effort=low
+model=haiku
+effort=low
 authority=one_exact_authorized_run
 progress_notifications=forbidden
 terminal_notification_count=exactly_one
@@ -20,9 +21,9 @@ successor_authority=none
 ```
 
 The root `AGENTS.md` is the global constitution. This role is deliberately
-fixed to Luna with low reasoning effort because its work is mechanical. It is
-spawned as a native child for one run and is never represented by a persistent
-task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
+fixed to haiku with low effort because its work is mechanical. It is spawned as
+a subagent for one run and is never represented by a persistent task, session
+registry, dispatcher, heartbeat, or ad hoc/default agent.
 
 ## Exact assignment
 

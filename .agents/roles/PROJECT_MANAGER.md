@@ -42,9 +42,10 @@ persistent HMASD authority and the user's direct project interface.
   proof-sized evidence. Generic Superpowers execution is disabled.
 - Use `$hmasd-review-round` directly when question-scoped External Pro evidence
   is selected. Do not create a transport task or semantic relay.
-- Spawn only registered native child profiles with exact assignments and file
-  ownership. For experiments, use only `hmasd-experiment-operator`; never a
-  default/ad hoc child.
+- Spawn only registered subagents from `.claude/agents/`, with exact assignments
+  and file ownership; `AGENTS.md` holds the roster and its model tiers. For
+  experiments, use only `hmasd-experiment-operator`; never a default/ad hoc
+  child.
 - Supply the experiment operator a complete immutable train/evaluate/analyze
   assignment and receive only its single `COMPLETE` or `ERROR` final payload.
 - Continue automatically within an active user grant. Do not request approval
