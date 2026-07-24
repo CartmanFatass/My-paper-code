@@ -1,6 +1,7 @@
 # Atomic count-shock G15
 
-Status: frozen executable contract for formal iteration 16.
+Status: formal iteration 16 closed as `ROBUST_ATOMIC_COUNT_SHOCK_G15`; no
+rerun, tuning, threshold change or relabeling is admissible.
 
 ## Frozen algorithm
 
@@ -89,3 +90,23 @@ After operational validity, first match is:
 Invalid evidence returns `INVALID_ATOMIC_COUNT_SHOCK_G15` and consumes no
 iteration. Nonformal evidence returns
 `NONFORMAL_ATOMIC_COUNT_SHOCK_G15_EXERCISE_COMPLETE`.
+
+## Closed formal result
+
+The exact source `68fa0d6e3f45596e108d858fb7c7a4d1df8e95fe` completed at
+`logs/formal_atomic_count_shock_g15_cpu_20260723_68fa0d6_r1`.
+
+```text
+branch=ROBUST_ATOMIC_COUNT_SHOCK_G15
+operational_valid=true
+shock_moderate_deterministic_utility_ci95=[0.9188948796948356,0.9496082486464861,0.9992658037446224]
+shock_wide_deterministic_utility_ci95=[0.9166666666666666,0.9487374207165274,0.9995325746495825]
+shock_ultra_deterministic_utility_ci95=[0.9225260416666666,0.951754607967718,0.9994695530698207]
+shock_ultra_min_replicate_mean=0.9225260416666666
+shock_ultra_stochastic_mean=0.8936154854921216
+```
+
+This closes the registered composition of large count transport and atomic
+cold-start identity turnover. A fresh-seed heterogeneous deployment mixture is
+the final confirmation boundary; arbitrary roster processes remain outside the
+claim.

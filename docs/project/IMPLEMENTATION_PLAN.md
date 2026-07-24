@@ -5,13 +5,13 @@
 > disabled.
 
 ```text
-active_implementation=ATOMIC_COUNT_SHOCK_G15
-implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+active_implementation=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_DERIVATION
+implementation_status=G15_FORMAL_CLOSED_G16_NOT_YET_FROZEN
 design=docs/research/designs/ATOMIC_COUNT_SHOCK_G15.md
 backend=cpu
 torch_threads=1
-formal_iteration=16
-chain_iterations_remaining_before_run=2
+formal_iteration=17
+chain_iterations_remaining_before_run=1
 ```
 
 ## Goal
@@ -57,3 +57,16 @@ immutable model state.
 No review is selected because the accepted shared source-control/lifecycle path
 is unchanged and no concrete anomaly remains. Integrate and launch the exact
 formal commands through the fixed operator.
+
+## Formal closure and final boundary
+
+Formal iteration 16 completed from source
+`68fa0d6e3f45596e108d858fb7c7a4d1df8e95fe` as
+`ROBUST_ATOMIC_COUNT_SHOCK_G15`. All registered gates passed with 72 unique
+profiles, 432 positive unequal transactions, exact source/lifecycle controls,
+zero optimizer steps and unchanged G8 model state. G15 is closed.
+
+The final action is `DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_DERIVATION`: use
+fresh seeds to mix already supported serial random, count-preserving atomic and
+atomic count-shock processes in one evaluation package. This closure does not
+yet freeze its exact generator or budget.

@@ -20,26 +20,26 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 ## Active boundary
 
 ```text
-last_completed_assignment_id=ATOMIC_COHORT_REPLACEMENT_G14_FORMAL_ITERATION_15
-active_assignment_id=ATOMIC_COUNT_SHOCK_G15_FORMAL_ITERATION_16
-next_boundary=ATOMIC_COUNT_SHOCK_G15_FORMAL_ITERATION_16
+last_completed_assignment_id=ATOMIC_COUNT_SHOCK_G15_FORMAL_ITERATION_16
+active_assignment_id=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_DERIVATION
+next_boundary=DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16_DERIVATION
 autonomous_research_grant=ACTIVE_TWELVE_ITERATION_DYNAMIC_ROSTER_CHAIN
 grant_scope=dynamic_agent_count_usable_algorithm_design_implementation_cpu_formal_evidence_and_successors
 intermediate_authorization_prompts=forbidden
-iterations_remaining=2
-conclusion_bearing_iterations_consumed=15
-implementation_status=G15_PRELAUNCH_ACCEPTED
+iterations_remaining=1
+conclusion_bearing_iterations_consumed=16
+implementation_status=G15_FORMAL_CLOSED_G16_NOT_YET_FROZEN
 nonformal_compute_status=g15_exercise_complete_operational_valid
 formal_compute_authority=standing_user_grant_cpu_only
-formal_compute_status=g15_prelaunch_accepted_ready_for_fixed_operator
+formal_compute_status=g15_complete_g16_contract_not_yet_frozen
 git_integration_status=project_manager_direct_authorized
 external_review_transport_status=project_manager_direct_authorized_when_selected
 experiment_operator_status=registered_available_idle
 experiment_operator_last_terminal=COMPLETE
 experiment_operator_fallback=forbidden
 iteration_report_requirement=required_before_successor
-iteration_report_status=iterations_1_to_15_complete
-latest_iteration_report=docs/report/ITERATION_15.md
+iteration_report_status=iterations_1_to_16_complete
+latest_iteration_report=docs/report/ITERATION_16.md
 g2_source_commit=9a72dc6a0f776aa3e6dfa96d86f5265f12717ace
 g2_formal_run=logs/formal_cross_lifecycle_handoff_g2_cpu_20260723_9a72dc6_r1
 g2_formal_result=TEAM_REC_SUFFICIENT_HANDOFF_G2
@@ -415,6 +415,18 @@ g15_nonformal_model_state_unchanged_exact=true
 g15_nonformal_unequal_positive_events=72_of_72
 g15_prelaunch=docs/research/cdc/EVIDENCE_NOTES/20260723_ATOMIC_COUNT_SHOCK_G15_PRELAUNCH.md
 g15_review_status=no_new_review_no_anomaly
+g15_formal_source_commit=68fa0d6e3f45596e108d858fb7c7a4d1df8e95fe
+g15_formal_run=logs/formal_atomic_count_shock_g15_cpu_20260723_68fa0d6_r1
+g15_formal_result=ROBUST_ATOMIC_COUNT_SHOCK_G15
+g15_operational_valid=true
+g15_shock_moderate_utility_ci95=[0.9188948796948356,0.9496082486464861,0.9992658037446224]
+g15_shock_wide_utility_ci95=[0.9166666666666666,0.9487374207165274,0.9995325746495825]
+g15_shock_ultra_utility_ci95=[0.9225260416666666,0.951754607967718,0.9994695530698207]
+g15_shock_ultra_min_replicate_mean=0.9225260416666666
+g15_shock_ultra_stochastic_mean=0.8936154854921216
+g15_formal_result_note=docs/research/cdc/EVIDENCE_NOTES/20260723_ATOMIC_COUNT_SHOCK_G15_FORMAL_RESULT.md
+g15_scientific_disposition=closed_success_no_rerun_tuning_or_relabeling
+g16_candidate_question=fresh_seed_heterogeneous_deployment_mixture_confirmation
 workflow_hash_validation=disabled
 backward_compatibility=not_required
 ```
@@ -519,7 +531,12 @@ label-permutation invariant; raw `P(m=b)` is not reused as a gate.
   profiles contain six equal-size terminal/fresh-join transactions with a
   constant active-count schedule. All deterministic LCBs exceed 0.9230, the
   ultra minimum replicate is 0.9292 and stochastic mean is 0.8952. The next
-  question composes atomic identity replacement with a large count shock.
+  question composed atomic identity replacement with a large count shock.
+- Formal G15 closes as `ROBUST_ATOMIC_COUNT_SHOCK_G15`. All 72 profiles and
+  432 unequal positive atomic transactions close exact count/lifecycle source
+  controls. Deterministic LCBs exceed 0.9166, the ultra minimum replicate is
+  0.9225 and stochastic mean is 0.8936. The final boundary is fresh-seed
+  heterogeneous deployment confirmation, not another mechanism expansion.
 
 ## Runtime and protected semantics
 
