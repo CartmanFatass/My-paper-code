@@ -1,7 +1,7 @@
 # Direction-balanced full actor G30
 
 ```text
-status=FORMAL_PRELAUNCH_READY
+status=FORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=true
 iteration_consumed=false
 backend=cpu
@@ -119,3 +119,12 @@ replicate, one fast and one direction-balanced update per source, two
 environments, one PPO pass and four G17 evaluation episodes. Its only valid
 branch is `NONFORMAL_DIRECTION_BALANCED_FORMAL_PATH_EXERCISE_COMPLETE`; a
 formal-required analyzer must reject those exercise artifacts.
+
+## Formal disposition
+
+The exact formal run at source `1e4fbb735107b2a924bb3fd4f682c251ab62fb72`
+is operationally valid and selects
+`NO_DELAYED_ACCESS_DIRECTION_BALANCED_G30`. G17 and every lower-precedence G18
+gate except spike access pass. Spike-utility CI95 is
+`[0.87611, 0.89346, 0.92093]`, whose lower bound misses the frozen `0.90`
+floor. G30 is closed without rerun, threshold, budget, seed or UAV rescue.

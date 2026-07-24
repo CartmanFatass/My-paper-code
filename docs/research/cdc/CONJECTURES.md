@@ -167,9 +167,11 @@ the Project Manager-accepted CDC state.
   zero spike service. G28 protects only the equal combined raw gradient and
   raises G18 spike utility to `0.88983` while retaining G17, narrowly missing
   the frozen `0.90` access floor. G29's realized Adam constraint triggers much
-  more often and removes G18 access entirely. The active discriminator tests
-  whether equal global gradient directions can preserve the full successor
-  direction without either raw magnitude dominance or a post-Adam constraint.
+  more often and removes G18 access entirely. G30's equal global gradient
+  directions preserve G17 and learn high broad delayed utility across fresh
+  seeds, but the spike-utility LCB remains below access. The active discriminator
+  isolates spike-time credit/allocation stability rather than general delayed
+  representation or broad utility.
 
 ## C-BENCH — The benchmark is not identifying
 

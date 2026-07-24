@@ -382,3 +382,10 @@ The integrated formal-path exercise closes with the registered nonformal
 branch, exact checkpoint/cell inventories, zero replay error and explicit
 formal-required rejection. No result gate changed. G30 is prelaunch-ready for
 one three-replicate conclusion-bearing CPU run under its frozen token.
+
+Formal G30 is operationally valid and closes at the delayed-access branch. G17
+compatibility, G18 total utility/gain, rotating mechanism and replicate utility
+stability pass, but spike-utility CI95 lower bound is `0.87611`, below `0.90`.
+Do not rerun or tune G30. The next zero-compute boundary isolates why broad
+delayed utility is learned while load-bearing spike allocation remains
+seed-unstable, then freezes at most one proof-sized G31 discriminator.
