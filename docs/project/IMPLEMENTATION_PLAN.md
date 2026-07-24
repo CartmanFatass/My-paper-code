@@ -377,3 +377,8 @@ It binds zero/final checkpoints to phase counts, configuration, source and
 replicate; closes exact training/evaluation inventories; recomputes the frozen
 hierarchical intervals; and fails closed on token, checkpoint and cell tamper.
 The next action is its bounded nonformal exercise from an integrated source.
+
+The integrated formal-path exercise closes with the registered nonformal
+branch, exact checkpoint/cell inventories, zero replay error and explicit
+formal-required rejection. No result gate changed. G30 is prelaunch-ready for
+one three-replicate conclusion-bearing CPU run under its frozen token.

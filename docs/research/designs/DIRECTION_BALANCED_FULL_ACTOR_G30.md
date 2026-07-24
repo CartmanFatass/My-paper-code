@@ -1,7 +1,7 @@
 # Direction-balanced full actor G30
 
 ```text
-status=FORMAL_RUNNER_ACCEPTED_EXERCISE_NEXT
+status=FORMAL_PRELAUNCH_READY
 formal=true
 iteration_consumed=false
 backend=cpu
