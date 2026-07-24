@@ -133,6 +133,25 @@ the Project Manager-accepted CDC state.
   sparse segmentation or variable lifetime generally. Any beta-interval,
   decoder-family, objective or source correction requires external Pro.
 
+## C-ALCPS — Agent-local controlled predictive state lifetime
+
+- Status: live and selected for
+  `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`; no code or compute
+  is selected.
+- Claim: a task-blind lifecycle state may have a canonical active-step lifetime
+  when it is the coarsest minimum-transition state sufficient for the full
+  vector of primitive-action-interventional observation laws.
+- Strongest simpler explanation: G8 recurrence can store the same controlled
+  statistic and may realize the same external policy; C-ALCPS has not shown an
+  optimization, causal-use, sample-efficiency, robustness or transport benefit.
+- Intervention consequence: decoder-controlled kernels differ under the same
+  externally indexed primitive query when `z` differs.
+- Natural and held-out consequences: not established. Any future evidence must
+  retain G8 and a mechanism-matched masked-`z` comparator.
+- S3 boundary: prove or refute exact controlled-state identifiability,
+  minimum-write uniqueness, nuisance quotienting and action-query validity on
+  the frozen finite source before any learned implementation.
+
 ## C-JRDM — Jointly rate-coded dual memory
 
 - Status: parked pending a representation-invariant joint codelength or mutual-

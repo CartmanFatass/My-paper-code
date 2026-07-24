@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S2_PRO_RESPONSE_COMPLETE_COPY_ARCHIVE_RECONNECT_REQUIRED`
+Status: `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION_ACTIVE`
 
 ## Resume authority
 
@@ -20,16 +20,14 @@ Status: `S2_PRO_RESPONSE_COMPLETE_COPY_ARCHIVE_RECONNECT_REQUIRED`
 
 ## Git and working-tree boundary
 
-- Pushed S2 review stage commit:
-  `bcbf74d2598af034b728b586d641dfce67bcbc9d`.
-- S2 review evidence commit:
+- Pushed controller tip before S2 raw/intake:
+  `be7ea717e3a68c3e2e970ef5f4d39f7b1dab33b4`.
+- Immutable S2 review stage/evidence commits remain
+  `bcbf74d2598af034b728b586d641dfce67bcbc9d` and
   `60cd2d68a54e4c86f5bc0084ff627c779f1c7cb4`.
-- The S2 submission receipt is the intended inherited untracked transport
-  artifact until this blocker handoff is committed. Its immutable identity
-  matches the stage/evidence commits above.
-- The current working tree intentionally contains the BrowserMCP launcher
-  repair, its focused contract update, this control-plane blocker update and
-  the S2 receipt. No S2 raw exists.
+- The current working tree intentionally contains the newly archived S2 raw,
+  factual reconciliation, durable CDC intake and S3 control-plane transition.
+  These artifacts are not runtime evidence.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
 
@@ -79,32 +77,37 @@ channel.
 The Chinese report is
 `docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_2.md`. No code, prototype,
 compute, Monitor or experiment occurred. This terminal consumes iteration 2;
-eight remain and iteration 3 is unselected.
+eight remain. External Pro selected iteration 3 as the proof-only C-ALCPS action.
 
-The S2 Pro response is visibly complete and stable in the registered
-conversation. Immutable receipt SHA-256 is
+The S2 result review is terminal and validates `ALREADY_ARCHIVED`. Receipt
+SHA-256 is
 `6356ed1abf259b47f00a19ad19cf69c4cb592138efc5dc7e07fac0af6e4b85a7`;
-resubmission is forbidden and the raw remains absent. The page `Copy response`
-control repeatedly timed out because upstream click/hover handlers performed
-implicit full snapshots. The bounded repair now removes implicit snapshots from
-click, hover and type with exact fail-closed anchors; focused contract output is
-`BROWSERMCP_DIRECT_LAUNCHER_CONTRACT_OK`.
+raw SHA-256 is
+`065dcf47e8536bcb6fb20c54c7197e9df960506954249a53cb0d97aa7aaa87e5`.
+There was one canonical visible S2 user turn and no resubmission.
 
-Reloading the patched current-session MCP server disconnected the browser
-extension. Resume requires the user to reconnect the same registered Pro tab
-once through the Browser MCP extension. After reconnection, dispatch
-`hmasd-exchange-review` in resume-only mode: validate `RESUME_SUBMITTED`,
-capture two stable snapshots, click the latest page `Copy response` once,
-archive copied text and never resubmit.
+External Pro accepted S2 without a terminal defect and selected exactly
+`S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. The durable intake is
+`docs/research/cdc/EVIDENCE_NOTES/20260724_ALPSC_S2_RESULT_AND_ALCPS_S3_DIRECTION.md`;
+factual reconciliation is the S2 round's `30_EVIDENCE_RECONCILIATION.md`.
+
+S3 defines lifecycle state by the complete externally indexed intervention-
+kernel vector, then orders models lexicographically by controlled predictive
+excess, learned-write rate and decoder-kernel cardinality. It must reject the
+uninformative action marginal, natural-action memory leak, nuisance
+subdivisions and non-unique schedules while retaining G8 as the complete
+constructive comparator. No code, compute, prototype, experiment, Monitor or
+iteration-4 action is authorized.
 
 ## Remaining chain
 
-- Reconnect the same registered Pro tab once through the Browser MCP extension.
-  Resume the existing S2 receipt only: validate `RESUME_SUBMITTED`, capture two
-  stable snapshots, click the latest `Copy response` once, archive the immutable
-  raw and reconcile it. No composer/submit action and no new round are allowed.
-- Archive and reconcile one Pro-selected iteration-3 action without locally
-  narrowing beta, fixing the decoder or restricting the decisive null.
+- Complete the exact S3 derivation in
+  `docs/research/cdc/EVIDENCE_NOTES/20260724_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_S3.md`.
+  Stop on the first valid ordered terminal; one identical-contract proof-only
+  correction is the maximum recovery.
+- Write the Chinese iteration-3 report, push the exact result only to `Claude`,
+  and return it to the same registered Pro conversation before selecting
+  iteration 4.
 - Continue evidence-dependent iterations 3--10 serially. Rebuild and assign the
   registered Spark-medium Experiment Monitor only if a later Pro-selected
   action actually authorizes a run.

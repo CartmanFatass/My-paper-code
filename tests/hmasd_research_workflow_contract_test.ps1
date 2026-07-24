@@ -25,7 +25,7 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor',
     'iterations_remaining=8_authorized',
     'conclusion_bearing_iterations_consumed=2_on_claude',
-    'formal_compute_status=not_started_no_iteration_3_compute_selected',
+    'formal_compute_status=not_started_s3_no_compute',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
     'agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive',
@@ -34,7 +34,7 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
     'k_decoupling_current_result=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
-    'k_next_legal_route=EXTERNAL_PRO_CDC_CORRECTION_AFTER_S2',
+    'k_next_legal_route=COMPLETE_EXACT_ALCPS_S3_DERIVATION',
     's2_result_status=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
     'external_review_transport_status=ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT',
     'external_review_operator_agent=hmasd-exchange-review',
@@ -43,11 +43,14 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'browsermcp_direct_launcher=.omp/browsermcp-direct/start_browsermcp_direct.ps1',
     'browsermcp_direct_timeout_ms=120000',
     'browsermcp_direct_implicit_type_snapshot=removed',
-    'browsermcp_direct_live_status=CLICK_HOVER_TYPE_IMPLICIT_SNAPSHOTS_REMOVED_EXTENSION_RECONNECT_REQUIRED',
-    'next_boundary=RECONNECT_SAME_PRO_TAB_THEN_RESUME_EXISTING_S2_RESPONSE_ARCHIVE',
-    'next_action_class=resume_existing_browser_pro_response_copy_archive_then_controller_intake',
-    's2_result_review_status=SUBMISSION_CONFIRMED_RESPONSE_COMPLETE_COPY_ARCHIVE_BLOCKED',
-    's2_result_review_raw=absent')) {
+    'browsermcp_direct_live_status=CLICK_HOVER_TYPE_IMPLICIT_SNAPSHOTS_REMOVED_S2_ARCHIVE_COMPLETE',
+    'active_assignment_id=S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION',
+    'next_boundary=COMPLETE_EXACT_S3_DERIVATION_THEN_RETURN_TO_PRO',
+    'next_action_class=exact_derivation_and_counterexample',
+    'active_scientific_direction=C_ALCPS',
+    's2_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
+    's3_code_required=false',
+    's3_compute_required=false')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -136,19 +139,22 @@ foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
         throw "Accepted S1 result round is missing $required"
     }
 }
-$submittedS2Round = Join-Path $repo 'docs/external-review/rounds/20260724_alpsc_s2_result_review'
-if (-not (Test-Path (Join-Path $submittedS2Round '19_BROWSER_PRO_SUBMISSION.json') -PathType Leaf) -or
-    (Test-Path (Join-Path $submittedS2Round '21_PRO_OPEN_RAW.md') -PathType Leaf)) {
-    throw 'Submitted S2 result round receipt/raw state changed'
+$acceptedS2Round = Join-Path $repo 'docs/external-review/rounds/20260724_alpsc_s2_result_review'
+foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
+    '30_EVIDENCE_RECONCILIATION.md')) {
+    if (-not (Test-Path (Join-Path $acceptedS2Round $required) -PathType Leaf)) {
+        throw "Accepted S2 result round is missing $required"
+    }
 }
-if (-not $currentWork.Contains('browser_pro_round_state=RESUME_SUBMITTED_RESPONSE_COMPLETE_COPY_BLOCKED_EXTENSION_RECONNECT_REQUIRED')) {
-    throw 'CURRENT_WORK submitted S2 result round state changed'
+if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED_S2_RESULT')) {
+    throw 'CURRENT_WORK accepted S2 result round state changed'
 }
 foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md',
     'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_1.md',
     'docs/research/cdc/EVIDENCE_NOTES/20260724_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_S2.md',
-    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_2.md')) {
+    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_2.md',
+    'docs/research/cdc/EVIDENCE_NOTES/20260724_ALPSC_S2_RESULT_AND_ALCPS_S3_DIRECTION.md')) {
     if (-not (Test-Path (Join-Path $repo $required) -PathType Leaf)) {
         throw "Conclusion boundary is missing $required"
     }

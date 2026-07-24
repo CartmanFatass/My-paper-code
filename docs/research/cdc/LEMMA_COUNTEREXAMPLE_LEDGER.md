@@ -24,6 +24,8 @@
 | L-UNPENALIZED-CHANNEL-DOMINANCE | Penalizing writes to `z` cannot identify `z` when an unpenalized decoder-visible temporal channel carries the same predictive sufficient statistic. | C-ALPSW S1 and analogous write-only penalties. | Every corrected exclusive or joint-cost formulation fails. |
 | L-CONTROL-PREDICTION-SEPARATION | A recurrent G8 policy may remain the complete external-behavior comparator while `h` is excluded from a separately defined slow self-supervised predictive channel. | C-ALPSC S2 information partition. | The separated slow channel improves behavior or is necessary. |
 | L-EXCLUSIVE-CHANNEL-NOT-SUFFICIENT | Removing every alternative temporal side channel does not by itself make a sparse cue writer globally identifiable under a predictive-loss plus write-rate objective; an optimized coarse decoder may trade prediction for fewer writes. | Exact C-ALPSC S2 source, decoder family and frozen beta interval. | Every exclusive-channel or rate--distortion formulation fails. |
+| L-S2-VALID-NEGATIVE | The exact S2 source and proof validly reject complete-interval global identification for the C-ALPSC scalar objective. | `S2_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_DERIVATION` and its frozen interval. | Every exclusive or controlled predictive-state definition fails. |
+| L-RATE-DISTORTION-COARSENING | An optimized decoder for a coarser persistent state can trade finite predictive excess for fewer state changes and defeat a finer boundary under scalarization. | Predictive-loss/write-rate objectives such as exact S2. | Lexicographic exact-sufficiency criteria or controlled predictive states fail. |
 
 ## Counterexamples
 
@@ -154,3 +156,25 @@ optimal decoder fits `P(Y=z|z)=4/7`, not the stricter regime-conditional
 `3/4`. The resulting NLL crosses the two-write cue writer at an interior
 `beta_star` and wins on the upper part of the frozen interval without using any
 temporal side channel.
+
+## Registered S3 counterexample candidates
+
+These are frozen S3 obligations, not accepted counterexamples until a valid S3
+artifact proves them.
+
+### CE-ACTION-MARGINAL-HIDES-CONTROLLED-STATE
+
+Uniformly marginalizing the external action query makes both regime target laws
+identical even though their complete controlled-kernel vectors differ.
+
+### CE-NATURAL-ACTION-AS-QUERY-LEAK
+
+An action selected by a policy with access to fast recurrence can reveal the
+regime to a decoder and cannot substitute for an externally indexed
+intervention query with complete support.
+
+### CE-PREDICTIVE-NUISANCE-SUBDIVISION
+
+A latent may encode an observed nuisance that changes no controlled kernel.
+Decoder-equivalent nuisance subdivisions do not define additional states,
+skills or lifetimes.
