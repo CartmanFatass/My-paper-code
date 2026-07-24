@@ -8,14 +8,14 @@ last_nonformal=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21_PROTOTYPE
+active_implementation=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g21
-algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21.md
 ```
 
@@ -88,3 +88,13 @@ Keep SGD, successor credit, frozen anchor, budgets, thresholds and evaluation
 unchanged with fresh seeds. Implement only the thin optimizer/runner boundary,
 reuse existing trajectory and policy mechanics, and run the proof-sized tests
 before one integrated paired nonformal screen.
+
+The G21 prototype is accepted for that screen. It reuses the frozen-anchor
+policy and adds a successor-only, unprojected SGD update; no centering or
+immediate-gradient projection remains. Five focused tests prove exact
+zero-output equivalence, available common-mode control, inactive exact zero,
+source-pair replay, residual exercise, anchor identity and first-match order.
+Together with retained G17/G18/G19 proofs, 35 tests pass on CPU with one thread.
+The closed G20 module, runner, test and now-unused generic mean hook are removed
+from the active line; their integrated commit remains the reproduction source.
+The only next action is the frozen paired nonformal G21 screen.

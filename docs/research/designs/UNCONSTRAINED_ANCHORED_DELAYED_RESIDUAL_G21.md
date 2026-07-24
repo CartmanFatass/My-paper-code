@@ -1,7 +1,7 @@
 # Unconstrained anchored delayed residual G21
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -65,3 +65,20 @@ supports UAV promotion.
 - exact inactive rows and registered replay/lifecycle controls;
 - no centering or immediate-gradient projection in the delayed path;
 - first-match precedence and frozen configuration.
+
+## Implementation acceptance
+
+`ha_ctse_process/unconstrained_residual_g21.py` supplies the thin successor-only
+update over the retained frozen-anchor policy. The paired runner is
+`scripts/screen_unconstrained_anchored_residual_g21.py`. There is no centering,
+immediate-gradient projection, source-specific actor input or fast-parameter
+update in the delayed path.
+
+Five focused and 35 focused-plus-retained tests pass on the registered CPU
+one-thread runtime. Exact zero-output equivalence closes sampled,
+deterministic and teacher modes; an injected residual bias proves active
+common-mode freedom while inactive rows remain exact zero; both sources close
+replay and bitwise anchor identity after successor updates. The closed G20
+execution code and unused generic hook are removed under the active-line-only
+policy. This accepts only the bounded screen, not formal compute or a delayed
+access conclusion.

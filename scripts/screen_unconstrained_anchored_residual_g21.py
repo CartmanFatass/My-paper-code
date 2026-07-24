@@ -1,4 +1,4 @@
-"""Run the bounded paired G20 active-set-centered residual screen."""
+"""Run the bounded paired G21 unconstrained anchored-residual screen."""
 
 from __future__ import annotations
 
@@ -23,10 +23,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.centered_residual_g20 import (
-    CENTERING_TOLERANCE,
-    ActiveSetCenteredResidualPolicy,
-    optimize_centered_delayed_update,
+from ha_ctse_process.unconstrained_residual_g21 import (
+    UnconstrainedAnchoredResidualPolicy,
+    optimize_unconstrained_delayed_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
@@ -37,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20"
+ALGORITHM_ID = "UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21"
 GAMMA = g19.GAMMA
 HIDDEN_DIM = g19.HIDDEN_DIM
 LEARNING_RATE = g19.LEARNING_RATE
@@ -52,20 +51,20 @@ G17_EVAL_EPISODES = g19.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 2_619_000,
-        "ledger": 2_629_000,
-        "action": 2_639_000,
-        "evaluation_ledger": 2_649_000,
-        "evaluation_action": 2_659_000,
+        "model": 2_819_000,
+        "ledger": 2_829_000,
+        "action": 2_839_000,
+        "evaluation_ledger": 2_849_000,
+        "evaluation_action": 2_859_000,
     },
-    "g18": {"model": 2_719_000, "action": 2_739_000},
+    "g18": {"model": 2_919_000, "action": 2_939_000},
 }
 
-INVALID_BRANCH = "INVALID_ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_CENTERED_RESIDUAL_G20"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_CENTERED_RESIDUAL_G20"
-PROMISING_BRANCH = "NONFORMAL_ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_PROMISING_G20"
+INVALID_BRANCH = "INVALID_UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_UNCONSTRAINED_RESIDUAL_G21"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_UNCONSTRAINED_RESIDUAL_G21"
+PROMISING_BRANCH = "NONFORMAL_UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_PROMISING_G21"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -101,8 +100,8 @@ def _configuration() -> dict[str, Any]:
         "delayed_residual_optimizer": "sgd",
         "critic_optimizer": "adam",
         "delayed_residual_initialization": "exact_zero_output",
-        "delayed_residual_geometry": "active_set_centered_pre_squash_mean",
-        "centering_tolerance": CENTERING_TOLERANCE,
+        "delayed_residual_geometry": "unconstrained_pre_squash_mean",
+        "delayed_gradient_rule": "successor_only_unprojected",
     }
 
 
@@ -121,12 +120,12 @@ def _dimensions(source: str) -> tuple[int, int, int, int]:
             battery_source.CAPACITY,
             battery_source.ACTION_DIM,
         )
-    raise ValueError(f"unknown G20 source: {source}")
+    raise ValueError(f"unknown G21 source: {source}")
 
 
-def make_model(source: str) -> ActiveSetCenteredResidualPolicy:
+def make_model(source: str) -> UnconstrainedAnchoredResidualPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = _dimensions(source)
-    model = ActiveSetCenteredResidualPolicy(
+    model = UnconstrainedAnchoredResidualPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -141,7 +140,7 @@ def make_model(source: str) -> ActiveSetCenteredResidualPolicy:
 
 def _collect(
     source: str,
-    model: ActiveSetCenteredResidualPolicy,
+    model: UnconstrainedAnchoredResidualPolicy,
     *,
     episode_ids: tuple[int, ...],
 ) -> Any:
@@ -167,7 +166,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: ActiveSetCenteredResidualPolicy, domain: str
+    model: UnconstrainedAnchoredResidualPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -191,7 +190,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: ActiveSetCenteredResidualPolicy
+    source: str, model: UnconstrainedAnchoredResidualPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -269,7 +268,7 @@ def _train_source(source: str) -> dict[str, Any]:
         lifecycle_valid = lifecycle_valid and g19._trajectory_contract_valid(
             source, trajectory
         )
-        metrics = optimize_centered_delayed_update(
+        metrics = optimize_unconstrained_delayed_update(
             model,
             residual_optimizer,
             critic_optimizer,
@@ -309,7 +308,6 @@ def _train_source(source: str) -> dict[str, Any]:
         "residual_output_layer_maximum_absolute_value": (
             model.residual_output_layer_maximum_absolute_value()
         ),
-        "maximum_centering_error": model.maximum_centering_error,
         "zero_evaluation": zero_evaluation,
         "anchor_evaluation": anchor_evaluation,
         "final_evaluation": final_evaluation,
@@ -342,19 +340,12 @@ def _metrics(rows: list[dict[str, Any]]) -> dict[str, Any]:
             row["residual_output_layer_maximum_absolute_value"] > 0.0
             for row in rows
         )
-        and all(
-            row["maximum_centering_error"] <= CENTERING_TOLERANCE
-            for row in rows
-        )
     )
     return {
         "operational_valid": bool(operational_valid),
         "maximum_replay_error": float(replay_maximum),
         "maximum_anchor_difference": float(
             max(row["anchor_maximum_difference"] for row in rows)
-        ),
-        "maximum_centering_error": float(
-            max(row["maximum_centering_error"] for row in rows)
         ),
         "g17_zero_iid_utility": float(g17_zero["iid"]["utility_mean"]),
         "g17_zero_heldout_utility": float(
@@ -433,7 +424,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G20 screen requires an integrated source commit")
+        raise ValueError("G21 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()

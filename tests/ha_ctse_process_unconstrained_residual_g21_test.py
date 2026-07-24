@@ -1,3 +1,5 @@
+"""Focused acceptance for the G21 unconstrained anchored residual."""
+
 from __future__ import annotations
 
 import torch
@@ -11,22 +13,23 @@ from ha_ctse_process.anchored_residual_g19 import (
     replay_errors,
     replay_trajectory,
 )
-from ha_ctse_process.centered_residual_g20 import (
-    ActiveSetCenteredResidualPolicy,
-    center_active_residuals,
-    optimize_centered_delayed_update,
-)
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 from ha_ctse_process.separated_credit_g18 import collect_battery_trajectory
-from scripts import screen_active_set_centered_residual_g20 as screen
+from ha_ctse_process.unconstrained_residual_g21 import (
+    UnconstrainedAnchoredResidualPolicy,
+    optimize_unconstrained_delayed_update,
+)
+from scripts import screen_unconstrained_anchored_residual_g21 as screen
 
 
-def _battery_model() -> ActiveSetCenteredResidualPolicy:
-    model = ActiveSetCenteredResidualPolicy(
-        battery_source.OBSERVATION_DIM,
-        battery_source.CRITIC_STATE_DIM,
-        member_capacity=battery_source.CAPACITY,
-        action_dim=battery_source.ACTION_DIM,
+def _model(
+    observation_dim: int, critic_state_dim: int, capacity: int, action_dim: int
+) -> UnconstrainedAnchoredResidualPolicy:
+    model = UnconstrainedAnchoredResidualPolicy(
+        observation_dim,
+        critic_state_dim,
+        member_capacity=capacity,
+        action_dim=action_dim,
         hidden_dim=16,
     )
     with torch.no_grad():
@@ -50,41 +53,10 @@ def _assert_step_equal(left: object, right: object) -> None:
         )
 
 
-def test_centering_is_active_only_permutation_equivariant_and_padding_independent() -> None:
-    proposals = torch.tensor(
-        [
-            [[1.0, 5.0], [3.0, 1.0], [8.0, 7.0], [2.0, 0.0]],
-            [[4.0, 1.0], [6.0, 3.0], [2.0, 8.0], [9.0, 9.0]],
-        ]
-    )
-    mask = torch.tensor(
-        [[True, True, False, True], [False, True, True, False]]
-    )
-    centered = center_active_residuals(proposals, mask)
-    torch.testing.assert_close(
-        centered.sum(dim=1), torch.zeros(2, 2), rtol=0, atol=1e-7
-    )
-    assert torch.count_nonzero(centered[~mask]) == 0
-
-    permutation = torch.tensor([2, 0, 3, 1])
-    permuted = center_active_residuals(
-        proposals[:, permutation], mask[:, permutation]
-    )
-    torch.testing.assert_close(
-        permuted, centered[:, permutation], rtol=0, atol=0
-    )
-
-    padded_proposals = torch.cat((proposals, torch.randn(2, 3, 2)), dim=1)
-    padded_mask = torch.cat(
-        (mask, torch.zeros(2, 3, dtype=torch.bool)), dim=1
-    )
-    padded = center_active_residuals(padded_proposals, padded_mask)
-    torch.testing.assert_close(padded[:, :4], centered, rtol=0, atol=0)
-    assert torch.count_nonzero(padded[:, 4:]) == 0
-
-
-def test_zero_centered_residual_exactly_matches_base_policy_in_all_modes() -> None:
-    torch.manual_seed(2020000)
+def _generic_pair() -> tuple[
+    ContinuousRosterPolicy, UnconstrainedAnchoredResidualPolicy, dict[str, torch.Tensor]
+]:
+    torch.manual_seed(2120000)
     base = ContinuousRosterPolicy(
         5,
         4,
@@ -93,7 +65,7 @@ def test_zero_centered_residual_exactly_matches_base_policy_in_all_modes() -> No
         hidden_dim=8,
         current_observation_residual=True,
     )
-    centered = ActiveSetCenteredResidualPolicy(
+    residual = UnconstrainedAnchoredResidualPolicy(
         5,
         4,
         member_capacity=3,
@@ -101,7 +73,7 @@ def test_zero_centered_residual_exactly_matches_base_policy_in_all_modes() -> No
         hidden_dim=8,
         current_observation_residual=True,
     )
-    missing, unexpected = centered.policy.load_state_dict(
+    missing, unexpected = residual.policy.load_state_dict(
         base.state_dict(), strict=False
     )
     assert unexpected == []
@@ -114,44 +86,80 @@ def test_zero_centered_residual_exactly_matches_base_policy_in_all_modes() -> No
         "critic_state": torch.randn(2, 4),
         "hidden": torch.randn(2, 3, 8),
     }
+    return base, residual, arguments
+
+
+def test_zero_residual_exactly_matches_base_policy_in_all_modes() -> None:
+    base, residual, arguments = _generic_pair()
     noise = torch.randn(2, 3, 2)
     base_sample = base.forward_step(**arguments, sampling_noise=noise)
-    centered_sample = centered.policy.forward_step(
+    residual_sample = residual.policy.forward_step(
         **arguments, sampling_noise=noise
     )
-    _assert_step_equal(base_sample, centered_sample)
+    _assert_step_equal(base_sample, residual_sample)
     _assert_step_equal(
         base.forward_step(**arguments, deterministic=True),
-        centered.policy.forward_step(**arguments, deterministic=True),
+        residual.policy.forward_step(**arguments, deterministic=True),
     )
     _assert_step_equal(
         base.forward_step(
             **arguments, teacher_pre_tanh=base_sample.pre_tanh_actions
         ),
-        centered.policy.forward_step(
+        residual.policy.forward_step(
             **arguments, teacher_pre_tanh=base_sample.pre_tanh_actions
         ),
     )
-    assert centered.maximum_centering_error == 0.0
 
 
-def test_battery_updates_keep_anchor_exact_and_center_residual() -> None:
-    torch.manual_seed(2020001)
-    model = _battery_model()
+def test_residual_retains_active_common_mode_and_inactive_zero() -> None:
+    base, residual, arguments = _generic_pair()
+    final = residual.policy.delayed_residual[-1]
+    assert isinstance(final, torch.nn.Linear)
+    with torch.no_grad():
+        final.bias.fill_(0.25)
+    base_step = base.forward_step(**arguments, deterministic=True)
+    residual_step = residual.policy.forward_step(
+        **arguments, deterministic=True
+    )
+    active = arguments["active_mask"].unsqueeze(-1).expand_as(
+        residual_step.pre_tanh_actions
+    )
+    delta = residual_step.pre_tanh_actions - base_step.pre_tanh_actions
+    first_owner = base._routing_order(
+        arguments["active_mask"], arguments["observations"]
+    )[:, 0]
+    batch = torch.arange(first_owner.shape[0])
+    torch.testing.assert_close(
+        delta[batch, first_owner],
+        torch.full_like(delta[batch, first_owner], 0.25),
+        rtol=0,
+        atol=1e-7,
+    )
+    assert torch.count_nonzero(residual_step.pre_tanh_actions[~active]) == 0
+    assert bool(torch.all(delta.sum(dim=1) > 0))
+
+
+def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
+    torch.manual_seed(2120001)
+    model = _model(
+        battery_source.OBSERVATION_DIM,
+        battery_source.CRITIC_STATE_DIM,
+        battery_source.CAPACITY,
+        battery_source.ACTION_DIM,
+    )
     fast = collect_battery_trajectory(
         model,
         episode_ids=(0, 1),
-        action_seed=2030001,
+        action_seed=2130001,
         device=torch.device("cpu"),
-    )
-    fast_optimizer = torch.optim.Adam(
-        model.fast_actor_parameters()
-        + tuple(model.credit_baselines.parameters()),
-        lr=1e-3,
     )
     assert optimize_fast_anchor_update(
         model,
-        fast_optimizer,
+        torch.optim.Adam(
+            model.fast_actor_parameters()
+            + tuple(model.credit_baselines.parameters()),
+            lr=1e-3,
+        ),
         fast,
         device=torch.device("cpu"),
         ppo_passes=1,
@@ -161,10 +169,10 @@ def test_battery_updates_keep_anchor_exact_and_center_residual() -> None:
     delayed = collect_battery_trajectory(
         model,
         episode_ids=(2, 3),
-        action_seed=2030002,
+        action_seed=2130002,
         device=torch.device("cpu"),
     )
-    metrics = optimize_centered_delayed_update(
+    metrics = optimize_unconstrained_delayed_update(
         model,
         torch.optim.SGD(model.residual_parameters(), lr=1e-3),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -174,31 +182,29 @@ def test_battery_updates_keep_anchor_exact_and_center_residual() -> None:
         gamma=0.99,
     )
     assert metrics["finite_update"] == 1.0
-    assert metrics["maximum_centering_error"] <= 1e-6
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
     assert model.residual_output_layer_maximum_absolute_value() > 0.0
     assert all(
         value == 0.0
         for name, value in metrics.items()
-        if (name.endswith("_error") or name.endswith("_max_abs"))
-        and name != "maximum_centering_error"
+        if name.endswith("_error") or name.endswith("_max_abs")
     )
+    assert not any("projection" in name or "centering" in name for name in metrics)
 
 
-def test_g17_fast_and_centered_updates_replay_and_preserve_anchor() -> None:
-    torch.manual_seed(2020002)
-    model = ActiveSetCenteredResidualPolicy(
+def test_g17_successor_update_replays_and_preserves_anchor() -> None:
+    torch.manual_seed(2120002)
+    model = _model(
         g17_source.OBSERVATION_DIM,
         g17_source.CRITIC_STATE_DIM,
-        member_capacity=g17_source.CAPACITY,
-        action_dim=g17_source.ACTION_DIM,
-        hidden_dim=16,
+        g17_source.CAPACITY,
+        g17_source.ACTION_DIM,
     )
     raw = g17_source.collect_trajectory(
         model,
         episode_ids=(0, 1),
-        ledger_seed=2029002,
-        action_seed=2039002,
+        ledger_seed=2129002,
+        action_seed=2139002,
         device=torch.device("cpu"),
     )
     fast = attach_credit_baselines(model, raw, device=torch.device("cpu"))
@@ -224,12 +230,12 @@ def test_g17_fast_and_centered_updates_replay_and_preserve_anchor() -> None:
     raw = g17_source.collect_trajectory(
         model,
         episode_ids=(2, 3),
-        ledger_seed=2029002,
-        action_seed=2039002,
+        ledger_seed=2129002,
+        action_seed=2139002,
         device=torch.device("cpu"),
     )
     delayed = attach_credit_baselines(model, raw, device=torch.device("cpu"))
-    metrics = optimize_centered_delayed_update(
+    metrics = optimize_unconstrained_delayed_update(
         model,
         torch.optim.SGD(model.residual_parameters(), lr=1e-3),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
@@ -239,11 +245,10 @@ def test_g17_fast_and_centered_updates_replay_and_preserve_anchor() -> None:
         gamma=0.99,
     )
     assert metrics["finite_update"] == 1.0
-    assert metrics["maximum_centering_error"] <= 1e-6
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
 
 
-def test_g20_result_precedence_is_first_match() -> None:
+def test_g21_result_precedence_and_configuration_are_frozen() -> None:
     passing = {
         "operational_valid": True,
         "g17_final_iid_utility": 0.93,
@@ -261,11 +266,7 @@ def test_g20_result_precedence_is_first_match() -> None:
     }
     assert screen.select_result_branch(passing) == screen.PROMISING_BRANCH
     assert screen.select_result_branch(
-        passing
-        | {
-            "g17_mix_correlation": 0.89,
-            "g18_final_utility": 0.1,
-        }
+        passing | {"g17_mix_correlation": 0.89, "g18_final_utility": 0.1}
     ) == screen.NO_G17_BRANCH
     assert screen.select_result_branch(
         passing | {"g18_gain_over_anchor": 0.09}
@@ -276,16 +277,11 @@ def test_g20_result_precedence_is_first_match() -> None:
     assert screen.select_result_branch(
         passing | {"operational_valid": False}
     ) == screen.INVALID_BRANCH
-
-
-def test_g20_screen_configuration_is_frozen() -> None:
     configuration = screen._configuration()
     assert configuration["g17_fast_updates"] == 100
     assert configuration["g17_delayed_updates"] == 100
     assert configuration["g18_fast_updates"] == 100
     assert configuration["g18_delayed_updates"] == 300
     assert configuration["delayed_residual_optimizer"] == "sgd"
-    assert (
-        configuration["delayed_residual_geometry"]
-        == "active_set_centered_pre_squash_mean"
-    )
+    assert configuration["delayed_residual_geometry"] == "unconstrained_pre_squash_mean"
+    assert configuration["delayed_gradient_rule"] == "successor_only_unprojected"
