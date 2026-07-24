@@ -311,7 +311,7 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
                     received_linear * self.aclr_linear if self.use_fdma else received_linear
                 )
 
-        interference_plus_noise = 10 ** (self.noise_power / 10) + np.sum(
+        interference_plus_noise = self._noise_power_linear_mw() + np.sum(
             interference_powers_linear
         )
         return rx_power - 10 * np.log10(interference_plus_noise)
@@ -328,13 +328,13 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
             interferer_pos = self.uav_positions[interferer]
             if self._compute_distance(interferer_pos, user_pos) > interference_radius:
                 continue
-            path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos)
+            path_loss = self._cached_user_path_loss(interferer, user_idx)
             received_linear = 10 ** ((self.tx_power - path_loss) / 10)
             interference_powers_linear.append(
                 received_linear * self.aclr_linear if self.use_fdma else received_linear
             )
 
-        interference_plus_noise = 10 ** (self.noise_power / 10) + np.sum(
+        interference_plus_noise = self._noise_power_linear_mw() + np.sum(
             interference_powers_linear
         )
         return rx_power - 10 * np.log10(interference_plus_noise)
