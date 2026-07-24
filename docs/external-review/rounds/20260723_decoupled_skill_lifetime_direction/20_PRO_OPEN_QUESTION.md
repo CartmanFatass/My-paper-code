@@ -1,4 +1,4 @@
-HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_decoupled_skill_lifetime_direction body_sha256=169b1496475159711d8625c8f4ae83e536142c51bead6c589258e167c442d8d5
+HMASD_BROWSER_PRO_QUESTION_V1 round=20260723_decoupled_skill_lifetime_direction body_sha256=bb358220131cf87077be68aa29be8d7cbdfc1400b00fcf41c3cd113e13551d43
 
 # GPT-5.6 Pro Scientific Direction — Decoupled Individual Skill Lifetime
 
@@ -13,13 +13,49 @@ pushed stage boundary and the exact Git evidence listed below as authoritative.
 Do not use browser snapshots, local files, agent transcripts or unlisted prior
 chat claims as evidence.
 
-Begin with this round's canonical files:
+Begin with this round's canonical manifest at the pushed stage commit:
 
-- `docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction/00_REVIEW_BRIEF.md`
 - `docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction/01_SHARED_SOURCE_MANIFEST.md`
 
-Then inspect every evidence and source path in the manifest at exact evidence
-commit `f073d8e77a006515c7800f04e616d5b62a5e4e26` through the GitHub connector.
+The stage commit also contains the round brief and this marked question. Read
+the exact substantive evidence below at evidence commit
+`f073d8e77a006515c7800f04e616d5b62a5e4e26` through the GitHub connector:
+
+- `docs/project/CURRENT_WORK.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/ExpRecord.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/cdc/LEMMA_COUNTEREXAMPLE_LEDGER.md`
+- `docs/research/designs/DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16.md`
+- `ha_ctse_process/open_roster_direct_mvp.py`
+- `tests/ha_ctse_process_open_roster_direct_mvp_test.py`
+- `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/r42_irr_native_roster_residual.json`
+- `docs/external-review/gpt5_6_pro/20260716_r42_irr_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/r43_native_renewal.json`
+- `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/fixed_anchor_cross_eval.json`
+- `docs/external-review/gpt5_6_pro/20260716_r43_nrc_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r44_fsnrc_result/r44_frozen_source_nrc_compact.json`
+- `docs/external-review/gpt5_6_pro/20260716_r44_fsnrc_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r45_sdra_result/r45_sdra_identifiability.json`
+- `docs/external-review/gpt5_6_pro/20260716_r45_sdra_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r46_hmrv_result/r46_hmrv_identifiability.json`
+- `docs/external-review/gpt5_6_pro/20260716_r46_hmrv_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r47_nsopm_result/r47_nsopm.json`
+- `docs/external-review/gpt5_6_pro/20260716_r47_nsopm_result/DISPOSITION.md`
+- `docs/external-review/gpt5_6_pro/20260716_r48_sbrs_result/r48_sbrs.json`
+- `docs/external-review/gpt5_6_pro/20260716_r48_sbrs_result/DISPOSITION.md`
+- `scripts/r42_native_roster_residual.py`
+- `scripts/r43_native_renewal.py`
+- `scripts/r44_frozen_source_nrc.py`
+- `scripts/r45_sdra.py`
+- `scripts/r46_hmrv.py`
+- `scripts/r47_nsopm.py`
+- `scripts/r48_sbrs.py`
+
+Also inspect the three `hmasd/` implementation paths named by the manifest for
+mechanism-level context. Do not infer untracked runtime evidence.
 
 ## Frozen mission and boundary
 
