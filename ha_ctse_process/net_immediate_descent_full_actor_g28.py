@@ -1,4 +1,4 @@
-"""Immediate-tangent protected full-actor optimization for G27."""
+"""Net-immediate-descent full-actor optimization for G28."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from ha_ctse_process.anchored_residual_g19 import (
 
 
 @dataclass(frozen=True)
-class TangentGradientComposition:
+class NetDescentGradientComposition:
     gradients: tuple[torch.Tensor, ...]
     successor_gradients: tuple[torch.Tensor, ...]
     pre_dot: float
@@ -32,7 +32,7 @@ class TangentGradientComposition:
 
 
 @dataclass(frozen=True)
-class TangentProjection:
+class NetDescentProjection:
     gradients: tuple[torch.Tensor, ...]
     pre_dot: float
     post_dot: float
@@ -49,22 +49,23 @@ def _gradient_dot(
     )
 
 
-def project_successor_to_immediate_tangent(
+def project_successor_for_net_immediate_descent(
     successor: tuple[torch.Tensor | None, ...],
     immediate: tuple[torch.Tensor | None, ...],
     parameters: tuple[nn.Parameter, ...],
-) -> TangentProjection:
-    """Return the nearest representable one-way tangent projection.
+) -> NetDescentProjection:
+    """Protect immediate descent of the equal combined actor gradient.
 
-    The algebra is evaluated in float64, then converted to each parameter's
-    gradient dtype. If that conversion lands just outside the closed
-    half-space, one coordinate receives the minimum float32-lattice repair.
+    Successor conflict is retained while ``dot(g_i, g_s) >= -||g_i||^2``.
+    Larger conflict is moved to that boundary. Algebra is evaluated in
+    float64; one coordinate receives the minimum representable repair only if
+    the actor dtype conversion lands outside the closed combined half-space.
     """
 
     if not (
         len(successor) == len(immediate) == len(parameters)
     ) or not parameters:
-        raise ValueError("G27 gradient projection inventory mismatch")
+        raise ValueError("G28 gradient projection inventory mismatch")
     successor_rows = tuple(
         torch.zeros_like(parameter) if row is None else row
         for row, parameter in zip(successor, parameters)
@@ -78,24 +79,32 @@ def project_successor_to_immediate_tangent(
         for rows in (successor_rows, immediate_rows)
         for row, parameter in zip(rows, parameters)
     ):
-        raise ValueError("G27 gradient projection received invalid rows")
-    dot = _gradient_dot(successor_rows, immediate_rows)
+        raise ValueError("G28 gradient projection received invalid rows")
+    successor_dot = _gradient_dot(successor_rows, immediate_rows)
     immediate_norm = _gradient_dot(immediate_rows, immediate_rows)
-    conflict = bool(dot.detach() < 0.0 and immediate_norm.detach() > 0.0)
+    conflict = bool(
+        immediate_norm.detach() > 0.0
+        and successor_dot.detach() < -immediate_norm.detach()
+    )
     if conflict:
-        coefficient = dot / immediate_norm
+        coefficient = (-immediate_norm - successor_dot) / immediate_norm
         applied = tuple(
             (
                 left.to(torch.float64)
-                - coefficient * right.to(torch.float64)
+                + coefficient * right.to(torch.float64)
             ).to(left.dtype)
             for left, right in zip(successor_rows, immediate_rows)
         )
     else:
         applied = successor_rows
-    post = _gradient_dot(applied, immediate_rows)
+    combined = tuple(
+        0.5 * (left + right)
+        for left, right in zip(immediate_rows, applied)
+    )
+    pre = 0.5 * (immediate_norm + successor_dot)
+    post = _gradient_dot(combined, immediate_rows)
     lattice_correction = 0.0
-    if conflict and bool(post.detach() < 0.0):
+    if bool(post.detach() < 0.0):
         row_index, flat_index = max(
             (
                 (
@@ -116,47 +125,59 @@ def project_successor_to_immediate_tangent(
         repaired_flat = repaired.reshape(-1)
         immediate_value = immediate_rows[row_index].reshape(-1)[flat_index]
         original_value = repaired_flat[flat_index].clone()
-        required_delta = (-post / immediate_value.to(torch.float64)).to(
-            repaired.dtype
-        )
+        required_delta = (
+            -2.0 * post / immediate_value.to(torch.float64)
+        ).to(repaired.dtype)
         repaired_flat[flat_index] = original_value + required_delta
         direction = torch.full_like(
             repaired_flat[flat_index],
-            float("inf") if float(immediate_value.detach().cpu()) > 0.0 else -float("inf"),
+            (
+                float("inf")
+                if float(immediate_value.detach().cpu()) > 0.0
+                else -float("inf")
+            ),
         )
         repaired_rows[row_index] = repaired
         applied = tuple(repaired_rows)
-        post = _gradient_dot(applied, immediate_rows)
+        combined = tuple(
+            0.5 * (left + right)
+            for left, right in zip(immediate_rows, applied)
+        )
+        post = _gradient_dot(combined, immediate_rows)
         if bool(post.detach() < 0.0):
             repaired_flat[flat_index] = torch.nextafter(
                 repaired_flat[flat_index], direction
             )
-            post = _gradient_dot(applied, immediate_rows)
+            combined = tuple(
+                0.5 * (left + right)
+                for left, right in zip(immediate_rows, applied)
+            )
+            post = _gradient_dot(combined, immediate_rows)
         if bool(post.detach() < 0.0):
-            raise RuntimeError("G27 could not close the float gradient half-space")
+            raise RuntimeError("G28 could not close the float gradient half-space")
         lattice_correction = float(
             (repaired_flat[flat_index] - original_value)
             .detach()
             .abs()
             .cpu()
         )
-    return TangentProjection(
+    return NetDescentProjection(
         gradients=applied,
-        pre_dot=float(dot.detach().cpu()),
+        pre_dot=float(pre.detach().cpu()),
         post_dot=float(post.detach().cpu()),
         conflict=conflict,
         lattice_correction=lattice_correction,
     )
 
 
-def compose_tangent_protected_gradients(
+def compose_net_immediate_descent_gradients(
     immediate: tuple[torch.Tensor | None, ...],
     successor: tuple[torch.Tensor | None, ...],
     parameters: tuple[nn.Parameter, ...],
-) -> TangentGradientComposition:
-    """Average immediate credit with successor credit after one-way projection."""
+) -> NetDescentGradientComposition:
+    """Average immediate credit with net-descent-protected successor credit."""
 
-    projection = project_successor_to_immediate_tangent(
+    projection = project_successor_for_net_immediate_descent(
         successor, immediate, parameters
     )
     immediate_rows = tuple(
@@ -177,7 +198,7 @@ def compose_tangent_protected_gradients(
             applied, immediate_rows, projection.gradients
         )
     )
-    return TangentGradientComposition(
+    return NetDescentGradientComposition(
         gradients=applied,
         successor_gradients=projection.gradients,
         pre_dot=projection.pre_dot,
@@ -188,8 +209,8 @@ def compose_tangent_protected_gradients(
     )
 
 
-class ImmediateTangentProtectedFullActorPolicy(FastAnchoredResidualPolicy):
-    """G19 wrapper with a zero residual and a trainable full delayed actor."""
+class NetImmediateDescentFullActorPolicy(FastAnchoredResidualPolicy):
+    """G28 wrapper with a zero residual and a trainable full delayed actor."""
 
     def full_actor_parameters(self) -> tuple[nn.Parameter, ...]:
         return tuple(
@@ -207,11 +228,11 @@ class ImmediateTangentProtectedFullActorPolicy(FastAnchoredResidualPolicy):
             and not name.startswith("critic.")
         )
 
-    def begin_tangent_phase(self) -> None:
+    def begin_net_descent_phase(self) -> None:
         if self.phase != "fast":
-            raise RuntimeError("G27 tangent phase may begin exactly once")
+            raise RuntimeError("G28 net-descent phase may begin exactly once")
         if self.residual_output_layer_maximum_absolute_value() != 0.0:
-            raise RuntimeError("G27 residual must remain exact zero")
+            raise RuntimeError("G28 residual must remain exact zero")
         for name, parameter in self.policy.named_parameters():
             parameter.requires_grad_(
                 not name.startswith("delayed_residual.")
@@ -221,11 +242,11 @@ class ImmediateTangentProtectedFullActorPolicy(FastAnchoredResidualPolicy):
             parameter.requires_grad_(True)
         for parameter in self.credit_baselines.parameters():
             parameter.requires_grad_(True)
-        self.phase = "tangent"
+        self.phase = "net_descent"
 
 
-def optimize_tangent_protected_update(
-    model: ImmediateTangentProtectedFullActorPolicy,
+def optimize_net_immediate_descent_update(
+    model: NetImmediateDescentFullActorPolicy,
     actor_optimizer: torch.optim.Optimizer,
     critic_optimizer: torch.optim.Optimizer,
     trajectory: AnchoredRosterTrajectory,
@@ -234,10 +255,10 @@ def optimize_tangent_protected_update(
     ppo_passes: int,
     gamma: float,
 ) -> dict[str, float]:
-    """Update the full actor while projecting successor/immediate conflicts."""
+    """Update the full actor while protecting net immediate descent."""
 
-    if model.phase != "tangent":
-        raise RuntimeError("G27 update requires tangent phase")
+    if model.phase != "net_descent":
+        raise RuntimeError("G28 update requires net-descent phase")
     terminals = torch.zeros_like(
         trajectory.rewards, dtype=torch.bool, device=device
     )
@@ -257,7 +278,7 @@ def optimize_tangent_protected_update(
     actor_parameters = model.full_actor_parameters()
     critic_parameters = model.critic_parameters()
     if not actor_parameters or not critic_parameters:
-        raise RuntimeError("G27 optimizer inventory is empty")
+        raise RuntimeError("G28 optimizer inventory is empty")
     totals = {
         name: 0.0
         for name in (
@@ -300,7 +321,7 @@ def optimize_tangent_protected_update(
             actor_parameters,
             allow_unused=True,
         )
-        composition = compose_tangent_protected_gradients(
+        composition = compose_net_immediate_descent_gradients(
             immediate_gradients, successor_gradients, actor_parameters
         )
         for parameter, gradient in zip(

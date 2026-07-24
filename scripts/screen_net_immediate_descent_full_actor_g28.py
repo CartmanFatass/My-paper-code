@@ -1,4 +1,4 @@
-"""Run the bounded paired G27 immediate-tangent full-actor screen."""
+"""Run the bounded paired G28 net-immediate-descent full-actor screen."""
 
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ from ha_ctse_process.anchored_residual_g19 import (
     maximum_state_difference,
     optimize_fast_anchor_update,
 )
-from ha_ctse_process.immediate_tangent_full_actor_g27 import (
-    ImmediateTangentProtectedFullActorPolicy,
-    optimize_tangent_protected_update,
+from ha_ctse_process.net_immediate_descent_full_actor_g28 import (
+    NetImmediateDescentFullActorPolicy,
+    optimize_net_immediate_descent_update,
 )
 from ha_ctse_process.separated_credit_g18 import (
     collect_battery_trajectory,
@@ -36,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19_screen
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27"
+ALGORITHM_ID = "NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28"
 GAMMA = g19_screen.GAMMA
 HIDDEN_DIM = g19_screen.HIDDEN_DIM
 LEARNING_RATE = g19_screen.LEARNING_RATE
@@ -44,31 +44,31 @@ INITIAL_LOG_STD = g19_screen.INITIAL_LOG_STD
 PPO_PASSES = g19_screen.PPO_PASSES
 NUM_ENVS = g19_screen.NUM_ENVS
 G17_FAST_UPDATES = g19_screen.G17_FAST_UPDATES
-G17_TANGENT_UPDATES = g19_screen.G17_DELAYED_UPDATES
+G17_NET_UPDATES = g19_screen.G17_DELAYED_UPDATES
 G18_FAST_UPDATES = g19_screen.G18_FAST_UPDATES
-G18_TANGENT_UPDATES = g19_screen.G18_DELAYED_UPDATES
+G18_NET_UPDATES = g19_screen.G18_DELAYED_UPDATES
 G17_EVAL_EPISODES = g19_screen.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 3_919_000,
-        "ledger": 3_929_000,
-        "action": 3_939_000,
-        "evaluation_ledger": 3_949_000,
-        "evaluation_action": 3_959_000,
+        "model": 4_119_000,
+        "ledger": 4_129_000,
+        "action": 4_139_000,
+        "evaluation_ledger": 4_149_000,
+        "evaluation_action": 4_159_000,
     },
-    "g18": {"model": 4_019_000, "action": 4_039_000},
+    "g18": {"model": 4_219_000, "action": 4_239_000},
 }
 
 REPLAY_TOLERANCE = g19_screen.REPLAY_TOLERANCE
 PROJECTION_TOLERANCE = 1e-7
 IDENTITY_TOLERANCE = 1e-7
 
-INVALID_BRANCH = "INVALID_IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_TANGENT_FULL_ACTOR_G27"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_TANGENT_FULL_ACTOR_G27"
-PROMISING_BRANCH = "NONFORMAL_IMMEDIATE_TANGENT_FULL_ACTOR_PROMISING_G27"
+INVALID_BRANCH = "INVALID_NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_NET_DESCENT_G28"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_NET_DESCENT_G28"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_NET_DESCENT_G28"
+PROMISING_BRANCH = "NONFORMAL_NET_IMMEDIATE_DESCENT_PROMISING_G28"
 
 
 def _configuration() -> dict[str, Any]:
@@ -80,23 +80,23 @@ def _configuration() -> dict[str, Any]:
         "ppo_passes": PPO_PASSES,
         "num_envs": NUM_ENVS,
         "g17_fast_updates": G17_FAST_UPDATES,
-        "g17_tangent_updates": G17_TANGENT_UPDATES,
+        "g17_net_descent_updates": G17_NET_UPDATES,
         "g18_fast_updates": G18_FAST_UPDATES,
-        "g18_tangent_updates": G18_TANGENT_UPDATES,
+        "g18_net_descent_updates": G18_NET_UPDATES,
         "g17_eval_episodes": G17_EVAL_EPISODES,
         "fast_optimizer": "adam",
-        "tangent_actor_optimizer": "adam",
+        "net_descent_actor_optimizer": "adam",
         "critic_optimizer": "adam",
         "residual": "exact_zero_frozen",
-        "actor_gradient_rule": "half_immediate_plus_projected_successor",
+        "actor_gradient_rule": "equal_combined_immediate_descent_projection",
     }
 
 
-def make_model(source: str) -> ImmediateTangentProtectedFullActorPolicy:
+def make_model(source: str) -> NetImmediateDescentFullActorPolicy:
     observation_dim, critic_state_dim, capacity, action_dim = (
         g19_screen._dimensions(source)
     )
-    model = ImmediateTangentProtectedFullActorPolicy(
+    model = NetImmediateDescentFullActorPolicy(
         observation_dim,
         critic_state_dim,
         member_capacity=capacity,
@@ -111,7 +111,7 @@ def make_model(source: str) -> ImmediateTangentProtectedFullActorPolicy:
 
 def _collect(
     source: str,
-    model: ImmediateTangentProtectedFullActorPolicy,
+    model: NetImmediateDescentFullActorPolicy,
     *,
     episode_ids: tuple[int, ...],
 ) -> Any:
@@ -137,7 +137,7 @@ def _collect(
 
 
 def _g17_evaluate(
-    model: ImmediateTangentProtectedFullActorPolicy, domain: str
+    model: NetImmediateDescentFullActorPolicy, domain: str
 ) -> dict[str, float]:
     profiles = (
         g17_source.TRAIN_PROFILES
@@ -161,7 +161,7 @@ def _g17_evaluate(
 
 
 def _evaluate_phase(
-    source: str, model: ImmediateTangentProtectedFullActorPolicy
+    source: str, model: NetImmediateDescentFullActorPolicy
 ) -> dict[str, Any]:
     if source == "g17":
         return {
@@ -177,12 +177,12 @@ def _evaluate_phase(
 
 def _phase_updates(source: str) -> tuple[int, int]:
     if source == "g17":
-        return G17_FAST_UPDATES, G17_TANGENT_UPDATES
-    return G18_FAST_UPDATES, G18_TANGENT_UPDATES
+        return G17_FAST_UPDATES, G17_NET_UPDATES
+    return G18_FAST_UPDATES, G18_NET_UPDATES
 
 
 def _actor_state(
-    model: ImmediateTangentProtectedFullActorPolicy,
+    model: NetImmediateDescentFullActorPolicy,
 ) -> dict[str, torch.Tensor]:
     names = set(model.full_actor_parameter_names())
     return {
@@ -193,7 +193,7 @@ def _actor_state(
 
 
 def _optimizer_ownership_valid(
-    model: ImmediateTangentProtectedFullActorPolicy,
+    model: NetImmediateDescentFullActorPolicy,
 ) -> bool:
     actor = {id(row) for row in model.full_actor_parameters()}
     critic = {id(row) for row in model.critic_parameters()}
@@ -228,7 +228,7 @@ def _train_source(source: str) -> dict[str, Any]:
         + tuple(model.credit_baselines.parameters()),
         lr=LEARNING_RATE,
     )
-    fast_updates, tangent_updates = _phase_updates(source)
+    fast_updates, net_updates = _phase_updates(source)
     maximum_replay_errors: dict[str, float] = {}
     lifecycle_valid = True
     finite = True
@@ -258,8 +258,8 @@ def _train_source(source: str) -> dict[str, Any]:
                 )
         active_rows += trajectory.active_token_count
     anchor_evaluation = _evaluate_phase(source, model)
-    tangent_start = _actor_state(model)
-    model.begin_tangent_phase()
+    net_start = _actor_state(model)
+    model.begin_net_descent_phase()
     optimizer_ownership_valid = _optimizer_ownership_valid(model)
     actor_optimizer = torch.optim.Adam(
         model.full_actor_parameters(), lr=LEARNING_RATE
@@ -271,7 +271,7 @@ def _train_source(source: str) -> dict[str, Any]:
     maximum_identity_error = 0.0
     maximum_lattice_correction = 0.0
     projection_conflict_passes = 0.0
-    for update in range(tangent_updates):
+    for update in range(net_updates):
         first_episode = (fast_updates + update) * NUM_ENVS
         trajectory = _collect(
             source,
@@ -281,7 +281,7 @@ def _train_source(source: str) -> dict[str, Any]:
         lifecycle_valid = lifecycle_valid and g19_screen._trajectory_contract_valid(
             source, trajectory
         )
-        metrics = optimize_tangent_protected_update(
+        metrics = optimize_net_immediate_descent_update(
             model,
             actor_optimizer,
             critic_optimizer,
@@ -321,14 +321,14 @@ def _train_source(source: str) -> dict[str, Any]:
             ledger_seed=seeds["evaluation_ledger"],
         )
     actor_difference = maximum_state_difference(
-        tangent_start, _actor_state(model)
+        net_start, _actor_state(model)
     )
     return {
         "source": source,
         "seeds": seeds,
         "fast_updates": fast_updates,
-        "tangent_updates": tangent_updates,
-        "optimizer_steps": 2 * (fast_updates + 2 * tangent_updates),
+        "net_descent_updates": net_updates,
+        "optimizer_steps": 2 * (fast_updates + 2 * net_updates),
         "active_rows": int(active_rows),
         "finite_updates": bool(finite),
         "lifecycle_contract_valid": bool(lifecycle_valid),
@@ -414,7 +414,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G27 screen requires an integrated source commit")
+        raise ValueError("G28 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()

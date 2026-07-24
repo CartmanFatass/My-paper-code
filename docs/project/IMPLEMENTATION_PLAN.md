@@ -8,14 +8,14 @@ last_nonformal=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28_PROTOTYPE
+active_implementation=NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g28
-algebra_status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+algebra_status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28.md
 ```
 
@@ -272,3 +272,12 @@ closed-form boundary has no tunable coefficient. Implement the projection,
 rename the active runner/test, retain the accepted float-lattice realization,
 and run proof-sized tests before one integrated bounded screen. No formal or
 UAV compute is scheduled.
+
+The G28 implementation is accepted for that screen. The active G27
+module/runner/test were renamed instead of duplicated. Algebra tests prove that
+tolerable successor conflict is unchanged, excess conflict reaches the exact
+combined-descent boundary, and a fixed float32 counterexample receives only the
+minimum representable closure. Actor/critic/residual ownership, G17/G18 replay,
+zero residual and first-match precedence remain intact. Seven focused and 37
+combined tests pass on CPU with one thread. The only next action is the fresh
+integrated paired screen; formal and UAV compute remain unscheduled.

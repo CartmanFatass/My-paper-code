@@ -1,7 +1,7 @@
 # Net-immediate-descent full actor G28
 
 ```text
-status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
