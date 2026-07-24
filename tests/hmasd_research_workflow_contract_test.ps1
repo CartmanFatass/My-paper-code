@@ -48,7 +48,8 @@ $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-ag
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 
 foreach ($required in @(
-    'sole persistent project task',
+    'single project owner at any moment',
+    'has no persistent task',
     'There is no Controller, persistent Monitor',
     'project_manager_git_authority=direct',
     'project_manager_external_review_transport=registration_then_exchanger',

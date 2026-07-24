@@ -69,8 +69,9 @@ Registration is this task's; transport is not.
 
 - Use `$hmasd-agile-research-development` for active-line code work and
   proof-sized evidence. Generic Superpowers execution is disabled.
-- Use `$hmasd-review-round` directly when question-scoped External Pro evidence
-  is selected. Do not create a transport task or semantic relay.
+- When External Pro evidence is selected, author the question and freeze the
+  boundary, then hand the round to `hmasd-review-exchanger`. Do not drive the
+  browser and do not create any other relay.
 - Spawn only registered subagents from `.claude/agents/`, with exact assignments
   and file ownership; `AGENTS.md` holds the roster and its model tiers. For
   experiments, use only `hmasd-experiment-operator`; never a default/ad hoc

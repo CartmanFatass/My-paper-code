@@ -7,10 +7,11 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ## Active execution surface
 
-- Project Manager task `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3` is the sole
-  persistent project task and owns workflow, scientific reconciliation,
-  implementation acceptance, Git, review transport, experiment orchestration,
-  result intake and successor selection.
+- The active Claude Code conversation is the Project Manager. It owns workflow,
+  code design, implementation acceptance, Git, experiment orchestration, result
+  intake and successor selection. Scientific decisions belong to External Pro.
+  Review transport belongs to `hmasd-review-exchanger` once this branch's
+  conversation is registered.
 - Formal and bounded runs use only the registered nonpersistent
   `hmasd-experiment-operator` subagent, fixed to `haiku` with `low` effort. It
   remains silent and returns exactly one `COMPLETE` or `ERROR` terminal payload.

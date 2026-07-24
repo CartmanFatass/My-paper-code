@@ -8,8 +8,13 @@ into another.
 
 ## Bootstrap and precedence
 
-The active Project Manager is the sole persistent project task. Before project
-action it reads:
+The active Project Manager is the single project owner at any moment. Claude
+Code has no persistent task, so continuity lives in the repository rather than
+in a session: `CURRENT_WORK.md` for the boundary, `ExpRecord.md` for results,
+`docs/research/cdc/` for the portfolio, Git for the rest. Those must be accurate
+*before* a session ends, not after.
+
+Before project action it reads:
 
 1. `docs/project/CURRENT_WORK.md` for the active boundary;
 2. `.agents/roles/PROJECT_MANAGER.md` for its authority; and
@@ -117,9 +122,10 @@ nothing.
 
 1. The user sets the goal and protected/formal authority.
 2. Project Manager selects the smallest bounded CDC or engineering action.
-3. If external science is needed, Project Manager authors, commits, pushes,
-   transports, and archives the exact review boundary with
-   `$hmasd-review-round`, then performs reconciliation.
+3. If external science is needed, Project Manager authors the question, commits
+   and pushes the exact boundary, then hands the round to
+   `hmasd-review-exchanger`, which transports and archives it. Project Manager
+   reconciles the archived raw code-side.
 4. Project Manager designs, implements, verifies, repairs, and accepts code-side
    work directly or through bounded registered code children.
 5. Before a conclusion-bearing run, Project Manager freezes the evidence
@@ -235,8 +241,8 @@ Active project Skills are deliberately small:
 
 - `hmasd-agile-research-development` for implementation, debugging, proof-sized
   testing, bounded repair, and inspection;
-- `hmasd-review-round` for direct Project Manager browser transport and exact
-  external raw archival.
+- `hmasd-review-round` for external review transport and exact raw archival,
+  executed by `hmasd-review-exchanger`.
 
 There is no dispatch or experiment-monitor Skill. Experiment behavior is fixed
 by its subagent definition and role charter. Generic Superpowers Skills are
