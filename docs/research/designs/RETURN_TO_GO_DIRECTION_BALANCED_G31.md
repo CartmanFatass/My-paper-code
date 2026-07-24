@@ -1,7 +1,7 @@
 # Return-to-go direction-balanced full actor G31
 
 ```text
-status=PRELAUNCH_READY_FORMAL_ITERATION_21_NEXT
+status=FORMAL_USABLE_TOY_PAIR_CLOSED_UAV_PROMOTION_ELIGIBLE
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -115,6 +115,12 @@ That exercise completed with exact two-row/seven-cell/four-checkpoint closure,
 zero replay and terminal-tail error, and explicit rejection under
 formal-required analysis. The frozen formal iteration 21 is now the only next
 action.
+
+Formal iteration 21 completes as
+`USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31`. Every G17 and G18 behavioral,
+mechanism, stability and operational gate passes across three fresh
+replicates. The exact paired-toy package is closed without rerun or tuning.
+This licenses a new UAV transport definition but is not itself UAV evidence.
 
 ## Proof-sized acceptance
 

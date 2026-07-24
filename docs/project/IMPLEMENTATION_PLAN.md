@@ -1,22 +1,23 @@
-# G27 immediate-tangent protected full actor implementation plan
+# G31 formal result and UAV promotion plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=IMMEDIATE_TANGENT_PROTECTED_FULL_ACTOR_G27
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_TANGENT_FULL_ACTOR_G27
-active_source=DELAYED_BATTERY_ROSTER_G18
+last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
+last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
+active_source=PAIRED_G17_G18_TOY_CLOSED_UAV_PROMOTION_NEXT
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28_BOUNDED_SCREEN
+active_implementation=RETURN_TO_GO_DIRECTION_BALANCED_G31
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
-formal_iteration=19_complete
-iterations_remaining=8
-formal_compute=not_scheduled_for_g28
-algebra_status=IMPLEMENTATION_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/NET_IMMEDIATE_DESCENT_FULL_ACTOR_G28.md
+formal_iteration=21_complete
+iterations_remaining=6
+formal_compute=complete_no_live_run
+algebra_status=FORMAL_USABLE_PAIRED_TOY
+screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
+next_boundary=RETURN_TO_GO_DIRECTION_BALANCED_G31_UAV_PROMOTION_DEFINITION
 ```
 
 ## Accepted active line
@@ -425,3 +426,11 @@ and terminal-tail error, and the registered nonformal branch. Formal-required
 analysis rejects it. The next action is one frozen three-replicate formal CPU
 iteration 21; no parameter, seed, threshold, budget or source selection remains
 open.
+
+Formal G31 is operationally valid and selects
+`USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31`. All G17 compatibility and G18
+delayed access/mechanism/stability gates pass across fresh seeds, including a
+spike-utility LCB of `0.95969`. Close the paired toy package. The next boundary
+is a proof-sized UAV promotion definition that preserves the exact G31
+environment-neutral credit and direction geometry; no heavy formal UAV run is
+scheduled until its bounded path passes.

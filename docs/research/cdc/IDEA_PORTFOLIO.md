@@ -7,12 +7,12 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | supported for immediate service | Formal G17 passes IID/held-out access, conditional demand mapping, gain and stability with a current-observation residual and `gamma=0`. | Derive and test policy-dependent delayed service availability before UAV promotion; do not transfer `gamma=0` by default. |
+| C-CONTINUOUS-ROSTER | usable paired-toy test version | Formal G31 preserves G17 and passes G18 delayed utility, spike allocation, rotation and stability across fresh seeds. | Promote the frozen G31 rule to one proof-sized UAV package; do not claim physical transport yet. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | G31 formal confirmation selected | A parameter-free realized future-tail target passes the bounded G17/G18 pair strongly after G30's one-step bootstrap missed fresh-seed spike access. | Run one frozen fresh-seed formal pair; close on any registered non-usable branch without rescue. |
+| C-CREDIT | supported on paired toys | Formal G31 passes every frozen G17/G18 gate; spike utility LCB is `0.95969` with exact replay and terminal tails. | Test transport under UAV channel/motion/charging/loss dynamics without environment-specific credit inputs. |
 | C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
+completed_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_ITERATION_21
 source_family=paired_immediate_and_delayed_dynamic_roster_toys
-formal_disposition=NO_DELAYED_ACCESS_DIRECTION_BALANCED_G30
+formal_disposition=USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31
 latest_nonformal_disposition=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-next_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_EXECUTABLE_PATH
+next_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_UAV_PROMOTION_DEFINITION
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=20
-iterations_remaining=7
+conclusion_bearing_iterations_consumed=21
+iterations_remaining=6
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -57,5 +57,7 @@ non-conflict removes delayed access. G28 permits immediate-cancelled successor
 conflict and nearly closes both sources, yet spike utility `0.88983` remains
 below the frozen `0.90` gate. G29's actual-step tangent is more restrictive and
 collapses delayed access. Formal G30 preserves G17 and broad G18 utility, but
-does not stabilize spike allocation across seeds. No candidate is yet promoted
-to UAV.
+does not stabilize spike allocation across seeds. Formal G31 replaces the
+learned one-step successor bootstrap with a realized future tail and passes the
+complete paired toy contract across fresh seeds. It is the first candidate in
+this chain eligible for proof-sized UAV promotion; no UAV result exists yet.

@@ -80,7 +80,7 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported for the registered immediate-service source.
+- Status: supported for the registered paired immediate and delayed toy sources.
 - Claim: a capacity-generic active-set/lifecycle recurrent policy with
   active-fraction autoregressive prefixes can learn continuous service control
   across within-episode roster changes when current demand has a direct actor
@@ -88,14 +88,17 @@ the Project Manager-accepted CDC state.
 - Formal evidence: G17 reaches IID utility LCB `0.94869`, held-out utility LCB
   `0.93726`, held-out learned-gain LCB `0.30171`, minimum held-out replicate
   `0.93662`, minimum demand correlation `0.96377`, and exact replay.
-- Necessary scope correction: `gamma=0` establishes only immediate action
-  consequences. It is not evidence for energy, position, backlog or other
-  policy-dependent future state.
-- Strongest next counterexample: current service effort changes later service
-  availability under roster leave/rejoin or charging, so immediate credit omits
-  a load-bearing consequence while long GAE may again mix unrelated demand.
-- Separating evidence: hold the accepted representation fixed and derive the
-  smallest one-step state-value credit path before any UAV promotion.
+- Delayed evidence: formal G31 preserves G17 while passing G18 utility, gain,
+  spike allocation, rotation and replicate stability with a detached realized
+  future-tail target and direction-balanced actor updates.
+- Necessary scope correction: this establishes one paired toy family, not UAV
+  physics, arbitrary stochastic horizons or individual causal attribution of
+  later team reward.
+- Strongest next counterexample: the same credit rule may become too noisy or
+  misattribute outcomes when UAV channel, motion, charging and temporary loss
+  dynamics jointly determine the future reward.
+- Separating evidence: one proof-sized UAV promotion package using the frozen
+  G31 rule, without adding environment fields to intrinsic credit.
 
 ## C-EHC — Event-held temporal state
 
@@ -153,8 +156,8 @@ the Project Manager-accepted CDC state.
 
 ## C-CREDIT — Temporal credit is the bottleneck
 
-- Status: live generally but not selected for the one-step G4 decision, where
-  delayed temporal credit is absent. It remains unsupported as a rescue of G1.
+- Status: supported for the registered G17/G18 paired toy family; still open
+  for UAV transport and unrelated source families.
 - Claim: representation is adequate but primitive-step credit cannot assign
   delayed consequences to asynchronous events.
 - Separating evidence: representation held fixed while only a well-defined
@@ -171,9 +174,10 @@ the Project Manager-accepted CDC state.
   directions preserve G17 and learn high broad delayed utility across fresh
   seeds, but the spike-utility LCB remains below access. G31's bounded screen
   replaces the one-step learned successor bootstrap with an environment-neutral
-  realized future tail and passes both paired sources strongly. Fresh-seed
-  formal evidence is now required to distinguish a stable credit correction
-  from another favorable bounded seed.
+  realized future tail and passes both paired sources strongly. Formal G31
+  confirms this across fresh seeds: every G17 and G18 gate passes, including
+  spike utility LCB `0.95969`. The remaining discriminator is UAV transport,
+  not another paired-toy seed or threshold change.
 
 ## C-BENCH — The benchmark is not identifying
 
