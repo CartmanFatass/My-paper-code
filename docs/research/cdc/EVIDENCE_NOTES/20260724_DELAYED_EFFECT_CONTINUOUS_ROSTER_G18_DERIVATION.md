@@ -222,3 +222,19 @@ That paired screen selected
 `0.92512`, G18 utility `0.97256`, spike utility `0.91657`, and rotating effort
 share `0.91285`, with exact replay. The candidate advances to the frozen formal
 dual-source contract; no UAV or usable-algorithm conclusion is drawn yet.
+
+## Formal dual-source disposition
+
+Formal iteration 19 completed operationally and selected
+`NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18`. The G18 delayed-source gates all
+passed with utility LCB `0.98807`, spike-utility LCB `0.96421` and
+rotating-effort-share LCB `0.96242`. The earlier nonformal delayed mechanism was
+therefore real rather than a single-seed artifact.
+
+However, G17 IID and held-out LCBs were `0.88129` and `0.87025`; minimum effort
+correlation was `0.84290` and maximum effort MAE was `0.05746`. The isolated
+critic is insufficient because successor-channel actor gradients can still
+overwrite the immediate controller. This exact G18 family is closed without
+tuning. The smallest new question is whether the G17 policy can be retained as
+an explicit fast anchor while a zero-initialized residual alone receives
+delayed actor credit.

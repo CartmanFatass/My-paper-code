@@ -1,9 +1,9 @@
 # Actor/critic-isolated channel credit G18
 
 ```text
-status=ALGEBRA_ACCEPTED_NONFORMAL_SCREEN_FROZEN
-formal=false
-iteration_consumed=false
+status=FORMAL_CLOSED_NO_G17_COMPATIBILITY
+formal=true
+iteration_consumed=true
 backend=cpu
 torch_threads=1
 ```
@@ -125,3 +125,19 @@ must reject it.
 The exercise completed operationally with exact replay and the registered
 nonformal branch; the explicit formal-analysis attempt rejected it. Formal
 iteration 19 is therefore prelaunch-ready without any contract change.
+
+## Formal disposition
+
+The exact three-replicate CPU run at source
+`3bf6a2efa6b18219448147abe55683181582a4de` completed operationally and selected
+`NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18`. Project Manager independently
+closed 12 checkpoint references, six training source results, 21 evaluation
+cells, both source controls, exact lifecycle/replay invariants and the frozen
+first-match branch.
+
+G18 delayed utility, gain, spike utility, rotating-member effort share and
+replicate stability all passed their lower-precedence gates. The first G17 gate
+failed on IID/held-out LCBs, minimum episode, effort correlation and effort
+MAE. The package is closed without rescue and does not advance to UAV. The next
+algorithmic boundary protects the accepted fast policy and adds delayed control
+through a new residual path; it is not a modification of this formal result.
