@@ -1,6 +1,5 @@
 import numpy as np
 import heapq
-import copy
 import matplotlib
 matplotlib.use('Agg')
 from pettingzoo import ParallelEnv
@@ -3145,7 +3144,9 @@ class UAVForcedRelayEnv(ParallelEnv):
             infos: 所有智能体的信息字典
         """
         # 1. Move users and update their state predictions
-        self.previous_routing_paths_snapshot = copy.deepcopy(self.routing_paths)
+        # Routing builders replace the outer dict and path records; they do not
+        # mutate records retained from the previous authoritative topology.
+        self.previous_routing_paths_snapshot = dict(self.routing_paths)
         self.previous_connections_snapshot = self.connections.copy()
         self._move_users()
         
@@ -3466,6 +3467,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         for agent in self.agents:
             rewards[agent] = shared_reward
 
+        # Visualization consumes these snapshots from every agent's reward_info.
+        # Build them once per step and share the same read-only-by-contract values
+        # instead of copying the full topology once for every agent.
+        connections_snapshot = self.connections.copy()
+        routing_paths_snapshot = dict(self.routing_paths)
+
         # 13. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
             observations[agent] = self._get_observation(agent)
@@ -3486,9 +3493,8 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "uavs_with_backhaul": len(self.routing_paths),
                 "system_throughput_mbps": system_throughput_mbps,
                 "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
-                # 【新增】将连接数据移入reward_info以便稳定传递
-                "connections": self.connections.copy(),
-                "routing_paths": copy.deepcopy(self.routing_paths),
+                "connections": connections_snapshot,
+                "routing_paths": routing_paths_snapshot,
             })
             
             # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化

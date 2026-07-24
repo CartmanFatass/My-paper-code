@@ -11,6 +11,9 @@ communication_snapshot_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 communication_snapshot_benchmark_improvement_pct=20.3186
 observation_view_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
 combined_wrapper_benchmark_improvement_pct=32.3707
+graph_radio_reuse_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+topology_copy_removal_status=PM_ACCEPTED_ISOLATED_IMPLEMENTATION
+final_three_fast_paths_benchmark_improvement_pct=36.6627
 ```
 
 ## 结论
@@ -117,7 +120,13 @@ position 的试探计算。试探位置只能走原标量 fallback，不能污�
 - 快照逐项校验 UAV/user/ground-BS 坐标、不可用 mask 和通信配置。位置试探、配置变化、
   服务退出或恢复均走原标量路径；试探结果不写入快照，恢复原状态后仍可命中原快照。
 - 原标量公式、干扰源遍历与 `np.sum` 顺序保持不变；没有批量化或浮点归约重排。
-- `scenario7_energy_aware_test.py` 的 37 项聚焦测试全部通过；其中包含五步缓存/未缓存结构化
+- Scenario 7 的 graph potential、widest backhaul 与 end-to-end rate 复用同一步已经验证的
+  不可用 mask、access SINR 和定向 backhaul SINR；保留原有标量 fallback 作为精确对照。
+- 每步只保留一个只读的上一时刻 routing 外层快照；route records 由现有构造器整体替换，
+  因此不再深拷贝其不可变旧值。训练/评估可视化仍消费每个 agent 的 `reward_info` topology，
+  所以接口被保留，但 connections/routing snapshots 每步只构造一次并由所有 agent 共享；
+  adapter 对权威 `state_info` 的输出也保持不变。
+- `scenario7_energy_aware_test.py` 的 39 项聚焦测试全部通过；其中包含五步缓存/未缓存结构化
   证据与 RNG 完全一致、精确位置/配置/不可用 mask 失效，以及试探不污染检查。
 - 临时离队环境聚焦测试文件的 16 项测试全部通过，包括 leave-before-action、S7-S1 保护配置、
   持久 vector worker 以及新增的 step/view 精确对照。
@@ -150,6 +159,26 @@ fast_median_seconds=0.5715126
 scalar_median_seconds=0.8450665
 combined_median_improvement=32.3707%
 ```
+
+第三组以六个独立 seed 各执行 3 step，并交替先后顺序，对默认 fast path 与同时禁用
+communication snapshot、observation/view reuse、graph radio reuse 的同版本标量路径配对。
+两侧仍共享安全的拓扑复制移除，所以该数字不把删除深拷贝的收益混入对照；每一步完整
+transition 逐元素完全一致：
+
+```text
+fast_seconds=[0.1458677, 0.1832531, 0.1710015, 0.1837777, 0.1890255, 0.1469248]
+scalar_seconds=[0.2414106, 0.3011241, 0.2428631, 0.2844198, 0.2975021, 0.2748946]
+fast_median_seconds=0.177127300
+scalar_median_seconds=0.279657200
+combined_median_improvement=36.662707%
+exact_transition_match=true
+focused_tests=55_passed
+```
+
+同一 warmed steady step 的定向剖析用于定位而非 gate：Python 调用数从 `238374` 降至
+`157745`，观测耗时从约 `0.260s` 降至约 `0.150s`；其中 `copy.deepcopy` 已从热点中消失，
+graph potential 从约 `0.096s` 降至约 `0.025s`。这些剖析值只说明下一热点位置，验收仍由
+上述 exact transition 对照和聚焦测试承担。
 
 ## 调度
 

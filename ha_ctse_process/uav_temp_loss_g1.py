@@ -350,6 +350,13 @@ class UAVTemporaryServiceLossEnv(UAVEnergyAwareRelayEnv):
             return True
         return super()._is_uav_unavailable(uav_idx)
 
+    def _communication_unavailable_mask(self) -> np.ndarray:
+        unavailable = super()._communication_unavailable_mask()
+        service = getattr(self, "_service_active_mask", None)
+        if service is not None:
+            unavailable |= ~np.asarray(service, dtype=bool)
+        return unavailable
+
     def _is_uav_motion_disabled(self, uav_idx: int) -> bool:
         service = getattr(self, "_service_active_mask", None)
         if service is not None and not bool(service[int(uav_idx)]):

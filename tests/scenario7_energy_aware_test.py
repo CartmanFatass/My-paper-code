@@ -456,6 +456,72 @@ def test_step_link_cache_reuses_exact_state_and_bypasses_trial_inputs():
         env.close()
 
 
+def test_graph_radio_reuse_is_exact_and_avoids_revalidation():
+    fast = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=57)
+    scalar = UAVEnergyAwareRelayEnv(config=Config("S7-S1"), seed=57)
+    scalar._disable_graph_radio_reuse = True
+    try:
+        fast.reset(seed=57)
+        scalar.reset(seed=57)
+        fast._is_uav_unavailable = Mock(wraps=fast._is_uav_unavailable)
+        scalar._is_uav_unavailable = Mock(wraps=scalar._is_uav_unavailable)
+        fast._compute_link_sinr = Mock(wraps=fast._compute_link_sinr)
+        scalar._compute_link_sinr = Mock(wraps=scalar._compute_link_sinr)
+
+        fast_potential = fast._graph_service_potential()
+        scalar_potential = scalar._graph_service_potential()
+
+        assert fast_potential == scalar_potential
+        np.testing.assert_array_equal(
+            fast.last_widest_backhaul_capacities_bps,
+            scalar.last_widest_backhaul_capacities_bps,
+        )
+        assert (
+            fast._is_uav_unavailable.call_count
+            < scalar._is_uav_unavailable.call_count
+        )
+        assert fast._compute_link_sinr.call_count < scalar._compute_link_sinr.call_count
+    finally:
+        fast.close()
+        scalar.close()
+
+
+def test_step_keeps_one_read_only_previous_route_snapshot_and_no_agent_copies():
+    env = make_env("S7-S1", seed=59)
+    try:
+        env.reset(seed=59)
+        previous_routes = env.routing_paths
+        previous_values = {
+            owner: (tuple(path), capacity)
+            for owner, (path, capacity) in previous_routes.items()
+        }
+
+        _, _, _, _, infos = env.step(zero_actions(env))
+
+        assert env.previous_routing_paths_snapshot is not previous_routes
+        assert env.previous_routing_paths_snapshot.keys() == previous_values.keys()
+        for owner, (path, capacity) in previous_values.items():
+            stored_path, stored_capacity = env.previous_routing_paths_snapshot[owner]
+            assert tuple(stored_path) == path
+            assert stored_capacity == capacity
+
+        reward_infos = [info["reward_info"] for info in infos.values()]
+        connections_snapshot = reward_infos[0]["connections"]
+        routing_paths_snapshot = reward_infos[0]["routing_paths"]
+        assert connections_snapshot is not env.connections
+        np.testing.assert_array_equal(connections_snapshot, env.connections)
+        assert routing_paths_snapshot is not env.routing_paths
+        assert routing_paths_snapshot == env.routing_paths
+        assert all(
+            info["connections"] is connections_snapshot for info in reward_infos
+        )
+        assert all(
+            info["routing_paths"] is routing_paths_snapshot for info in reward_infos
+        )
+    finally:
+        env.close()
+
+
 def test_constrained_safety_reward_metrics_are_exposed():
     env = make_env("S7-S3", seed=5)
     env.reset(seed=5)
@@ -494,7 +560,7 @@ def test_end_to_end_rate_respects_access_and_backhaul_and_avoids_soft_handover_d
         1: ([("uav", 1), ("ground_bs", 0)], 2e6),
     }
 
-    def fixed_access(uav_idx, user_idx, bandwidth_hz, relaxed):
+    def fixed_access(uav_idx, user_idx, bandwidth_hz, relaxed, **_reuse_context):
         capacities = {
             (0, 0): 4e6,
             (0, 1): 4e6,
@@ -539,7 +605,7 @@ def test_graph_potential_increases_when_relay_moves_toward_reachable_backhaul(mo
 
     bs_xy = env.ground_bs_positions[0, :2].copy()
 
-    def position_based_backhaul():
+    def position_based_backhaul(**_reuse_context):
         distances = np.linalg.norm(env.uav_positions[:, :2] - bs_xy, axis=1)
         return np.clip(1.0 - distances / (env.area_size * np.sqrt(2.0)), 0.0, 1.0) * qos_bps
 
