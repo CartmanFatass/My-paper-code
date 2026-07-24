@@ -178,22 +178,23 @@ the Project Manager-accepted CDC state.
 
 ## C-ALBPF — Agent-local behavioral / predictive-phase factorization
 
-- Status: live correction candidate selected only for the exact S5 predictive-
-  phase/skill-lifetime confound derivation; no implementation or compute is
-  authorized.
-- Claim: current action-relevant behavior and generic transition phase may
-  require separate lifecycle projections so an information-only phase update
-  does not reset behavioral skill lifetime.
-- Exact selected witness: age 1 and the legal script-32 age-2 no-cue history
-  have identical current controlled behavior (`TV_behavior=0`) but next-active
-  cue laws separated by `TV_phase=1/2`.
+- Status: exact S5 phase/lifetime-confound derivation PASS; implementation and
+  compute remain unauthorized pending external Pro review.
+- Supported claim: current action-relevant behavior and generic transition
+  phase require distinct scientific roles on the frozen source because an
+  information-only phase update occurs inside a constant behavioral segment.
+- Exact witness: age 1 and the legal script-32 age-2 no-cue history have
+  identical current controlled behavior (`TV_behavior=0`) but next-active cue
+  laws separated by `TV_phase=1/2`; the witness has probability `1/2`.
+- Refuted proposition: every monolithic predictive-state class change is a
+  current behavioral skill-lifetime boundary.
+- Valid online projection: predictive phase updates from script-uncertain to
+  script-32-next-cue-certain while behavioral state remains `B`.
 - Strongest simpler explanation: G8 recurrence stores both objects without an
   explicit factorization.
-- Intervention consequence: changing predictive phase alone changes the
-  transition law but not the current controlled action kernel; changing
-  behavioral state changes current behavior.
 - Natural consequence: a legal no-cue may update phase while behavior persists.
-- Held-out, learned, architectural and policy consequences: not established.
+- Held-out, learned, architectural, policy, value and transport consequences:
+  not established; any successor requires a new Pro-selected contract.
 
 
 ## C-JRDM — Jointly rate-coded dual memory

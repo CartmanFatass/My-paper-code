@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION_ACTIVE`
+Status: `S5_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Resume authority
 
@@ -20,13 +20,13 @@ Status: `S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION_ACTIVE`
 
 ## Git and working-tree boundary
 
-- Pushed S4 result-review stage:
-  `de15c718733d0641d857a1e3bfbdc90493f96005`.
+- Pushed S4 factual-intake commit:
+  `3dd9cadb83400c9385397f5aeb2d7e0503c03bd6`.
 - Immutable S4 evidence commit:
   `e619437c78b856ea6f24929a359853ac6de30d4e`.
 - The S4 receipt and raw are archived; validator state is `ALREADY_ARCHIVED`.
-- The current working tree intentionally contains the factual S4 intake and
-  Controller-frozen S5 derivation contract.
+- The current working tree intentionally contains the exact S5 derivation,
+  iteration report, promoted evidence and result-boundary transition.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
 
@@ -175,13 +175,32 @@ current behavior remains unchanged. The required signature is
 `TV_behavior=0`, `TV_phase=1/2`, with a legal online projection that updates
 predictive phase without resetting behavioral lifetime.
 
+## S5 result boundary
+
+The exact artifact is
+`docs/research/cdc/EVIDENCE_NOTES/20260724_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_S5.md`.
+Its first valid terminal is `PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND`.
+
+The age-1 and script-32 age-2 histories have identical complete current
+controlled behavior (`TV_behavior=0`) but next-active cue laws `Bernoulli(1/2)`
+and `Bernoulli(1)` (`TV_phase=1/2`). Every jointly sufficient monolithic state
+therefore adds a positive-probability class transition inside a constant
+length-three behavior segment. A legal online projection updates predictive
+phase while preserving behavioral state.
+
+The Chinese report is
+`docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_5.md`. No code, prototype,
+compute, experiment or Monitor action occurred. Iteration 5 is consumed; five
+remain and iteration 6 is unselected.
+
 ## Remaining chain
 
-- Recover only the existing S4 receipted response identity on the same
-  registered conversation. If it reappears, archive and reconcile it without
-  resubmission.
-- Only a valid archived Pro decision may select iteration 5.
-- Continue evidence-dependent iterations 5--10 serially. Rebuild and assign the
+- Commit and push the exact S5 result only to `Claude`.
+- Return it through one new no-clobber result-review round in the same
+  registered Pro conversation.
+- Archive and reconcile exactly one Pro-selected iteration-6 action; no
+  implementation or compute is authorized by the S5 PASS itself.
+- Continue evidence-dependent iterations 6–10 serially. Rebuild and assign the
   registered Spark-medium Experiment Monitor only if a later Pro-selected
   action actually authorizes a run.
 - After ten valid conclusion-bearing terminals, complete one independent

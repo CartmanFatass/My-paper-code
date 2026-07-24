@@ -12,7 +12,7 @@ compute authority.
 | C-ALPSC | exact S2 contract rejected before implementation | The admissible never-write decoder fits `P(Y=z|z)=4/7` and crosses the cue writer at an interior `beta_star`, then wins on the upper part of the frozen interval despite complete side-channel exclusion. | No local rescue. External Pro must select any interval, decoder, objective or source correction. |
 | C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | The full external intervention-kernel vector identifies two regime classes; the candidate uniquely attains minimum sufficient write rate `2/7` and quotient cardinality `2`, with nuisance removed and lifetimes `{2,3}`. | Retain its exact one-step scope. S4 now supplies the delayed-future correction; any learned mechanism, optimization, mediation, natural-value or transport claim still needs Pro selection. |
 | C-ALSCPS | accepted exact S4 horizon-2 derivation PASS; no implementation authorized | Immediate controlled kernels collapse, but every complete plan separates regimes by TV `1/2`; the unique minimum sufficient tuple is `(E_2,q,K_2)=(0,2/7,2)` and the quotient is update-congruent. | Retain the exact horizon-2 scope. Generic transition prediction may add phase-only updates inside constant behavior; arbitrary-horizon, learned, policy-link, optimization, value and transport claims remain unselected. |
-| C-ALBPF | live; selected for exact S5 confound derivation only | Age 1 and the script-32 age-2 no-cue history preserve the same current behavior while next-cue laws change from `1/2` to `1`, potentially forcing monolithic predictive-state oversegmentation. | Prove or refute `TV_behavior=0`, `TV_phase=1/2` and a legal online behavior/phase projection before any factorized learner or run. |
+| C-ALBPF | exact S5 phase/lifetime-confound derivation PASS; no implementation authorized | A legal script-32 age-2 no-cue update gives `TV_behavior=0`, `TV_phase=1/2` and forces a phase-only monolithic transition inside a constant length-three behavior segment; an online projection updates phase without resetting behavior. | Return the exact S5 result to Pro. Any factorized learner, architecture, optimization, policy, value or transport claim needs a new selected contract. |
 | C-JRDM | parked | Jointly charging `h,z` is sensitive to coding units, state dimension and invertible mixing. | Supply a representation-invariant joint codelength or mutual-information contract. |
 | C-ALH | parked | A categorical per-step hazard can reduce to the existing opportunity mechanism with `k=1` and revive R43--R45. | Evidence that explicit task-directed termination is necessary on a new identified source. |
 | C-ATS | parked | Continuous adaptive timescale recurrence lacks a threshold-free lifetime and can be absorbed into or reparameterized as ordinary recurrence. | Supply a threshold-invariant survival or causal-persistence estimand plus explicit accounting for alternative memory channels. |
@@ -29,14 +29,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION
-valid_terminal=PASS_ALSCPS_FUTURE_CLOSED_DERIVATION
-active_direction=C_ALBPF_PHASE_CONFOUND_TEST
+completed_action=S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION
+valid_terminal=PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND
+active_direction=C_ALBPF_RESULT_AWAITING_PRO
 formal_disposition=NOT_APPLICABLE_DERIVATION_ONLY
-next_action=S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION
-authorization_status=derivation_only_no_code_or_compute_iterations_6_to_10_unselected
-conclusion_bearing_iterations_consumed_on_claude=4
-iterations_remaining_on_claude=6
+next_action=RETURN_S5_EXACT_RESULT_TO_REGISTERED_PRO
+authorization_status=no_code_or_compute_iteration_6_unselected
+conclusion_bearing_iterations_consumed_on_claude=5
+iterations_remaining_on_claude=5
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized

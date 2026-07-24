@@ -23,9 +23,9 @@ if (-not (Test-Path (Join-Path $repo '.omp/browsermcp-direct/start_browsermcp_di
 $currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLED_SKILL_LIFETIME_CHAIN',
     'grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor',
-    'iterations_remaining=6_authorized',
-    'conclusion_bearing_iterations_consumed=4_on_claude',
-    'formal_compute_status=not_started_s5_no_compute_selected',
+    'iterations_remaining=5_authorized',
+    'conclusion_bearing_iterations_consumed=5_on_claude',
+    'formal_compute_status=not_started_no_iteration_6_compute_selected',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
     'agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive',
@@ -33,8 +33,8 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'end_to_end_research_loop=PRO_REVIEW_TO_CONTROLLER_PLAN_TO_LOCAL_OMP_IMPLEMENTATION_AND_REVIEW_TO_MONITORED_RUN_TO_PRO_RESULT_REVIEW',
     'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
-    'k_decoupling_current_result=PASS_ALSCPS_FUTURE_CLOSED_DERIVATION',
-    'k_next_legal_route=COMPLETE_S5_PHASE_LIFETIME_CONFOUND_DERIVATION',
+    'k_decoupling_current_result=PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND',
+    'k_next_legal_route=RETURN_S5_EXACT_RESULT_TO_REGISTERED_PRO',
     's2_result_status=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
     'external_review_transport_status=ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT',
     'external_review_operator_agent=hmasd-exchange-review',
@@ -43,11 +43,11 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'browsermcp_direct_launcher=.omp/browsermcp-direct/start_browsermcp_direct.ps1',
     'browsermcp_direct_timeout_ms=120000',
     'browsermcp_direct_implicit_type_snapshot=removed',
-    'browsermcp_direct_live_status=S4_ARCHIVE_COMPLETE_CONTROLLER_INTAKE_ACCEPTED',
-    'active_assignment_id=S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION',
-    'next_boundary=COMPLETE_EXACT_S5_DERIVATION_THEN_RETURN_TO_PRO',
-    'next_action_class=exact_derivation_and_counterexample',
-    'active_scientific_direction=C_ALBPF_PHASE_CONFOUND_TEST',
+    'browsermcp_direct_live_status=S4_ARCHIVE_COMPLETE_S5_RESULT_READY_FOR_NEW_REVIEW',
+    'active_assignment_id=S5_ALBPF_RESULT_EXTERNAL_REVIEW',
+    'next_boundary=COMMIT_PUSH_S5_RESULT_THEN_RETURN_TO_REGISTERED_PRO',
+    'next_action_class=external_review_controller_direct_transport',
+    'active_scientific_direction=C_ALBPF_RESULT_AWAITING_EXTERNAL_PRO',
     's2_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
     's3_result_status=PASS_ALCPS_CONTROLLED_STATE_DERIVATION',
     's3_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
@@ -59,7 +59,11 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     's4_result_review_status=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED',
     's4_result_review_raw_sha256=dcd4fe41dbb0bcacb14c47d1d4f8c5160600fe95f2ff5103102ecd9d0c5c8add',
     's5_code_required=false',
-    's5_compute_required=false')) {
+    's5_compute_required=false',
+    's5_result_status=PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND',
+    's5_current_behavior_tv=0',
+    's5_predictive_phase_tv=1_over_2',
+    's5_phase_only_boundary_count=at_least_1')) {
     if (-not $currentWork.Contains($required)) {
         throw "Claude inactive-import boundary missing: $required"
     }
@@ -183,9 +187,26 @@ foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260724_ALCPS_S3_RESULT_AND_ALSCPS_S4_DIRECTION.md',
     'docs/research/cdc/EVIDENCE_NOTES/20260724_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_S4.md',
     'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_4.md',
-    'docs/research/cdc/EVIDENCE_NOTES/20260724_ALSCPS_S4_RESULT_AND_PHASE_CONFOUND_S5_DIRECTION.md')) {
+    'docs/research/cdc/EVIDENCE_NOTES/20260724_ALSCPS_S4_RESULT_AND_PHASE_CONFOUND_S5_DIRECTION.md',
+    'docs/research/cdc/EVIDENCE_NOTES/20260724_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_S5.md',
+    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_5.md')) {
     if (-not (Test-Path (Join-Path $repo $required) -PathType Leaf)) {
         throw "Conclusion boundary is missing $required"
+    }
+}
+$s5Artifact = Get-Content (Join-Path $repo 'docs/research/cdc/EVIDENCE_NOTES/20260724_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_S5.md') -Raw
+foreach ($required in @(
+    'PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND',
+    'TV_behavior=0',
+    'TV_phase=1/2',
+    'phase_only_boundary_count>=1',
+    'P(S=32)=1/2',
+    'p: script_uncertain -> script32_next_cue_certain',
+    'b: B -> B',
+    'code_executed=false',
+    'compute_executed=false')) {
+    if (-not $s5Artifact.Contains($required)) {
+        throw "S5 phase/lifetime derivation missing: $required"
     }
 }
 $monitor = Get-Content (Join-Path $repo '.omp/skills/hmasd-experiment-monitor/SKILL.md') -Raw

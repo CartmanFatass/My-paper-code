@@ -32,13 +32,8 @@
 | L-S4-VALID-PASS | The exact S4 derivation validly identifies a coarsest minimum-write, update-congruent horizon-2 controlled state and active-step lifetime on its frozen source. | `S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION`. | Arbitrary-horizon closure, learned recovery, skill semantics or behavioral benefit. |
 | L-SEQUENTIAL-CLOSURE-REQUIRES-FUTURE-KERNELS | Equality of immediate controlled observations need not imply equality of delayed controlled futures. | Exact S4 source with fair `Y1` and regime-dependent `Y2`. | Horizon two is sufficient for every environment. |
 | L-UPDATE-CONGRUENCE | A predictive quotient is an admissible persistent lifecycle state only if one common online update maps current quotient class and legal current observation to the next class. | Sequential controlled predictive-state definitions. | Every update-congruent state is useful or uniquely learnable. |
+| L-PREDICTIVE-PHASE-NOT-SKILL-BOUNDARY | A predictive-state update caused only by new transition-phase information need not be a current behavioral skill boundary. | Exact S5 age-1 versus script-32 age-2 no-cue witness. | A learned factorization, optimal architecture or policy benefit. |
 
-### Pending S5 proposition — L-PREDICTIVE-PHASE-NOT-SKILL-BOUNDARY
-
-A predictive-state update caused only by new transition-phase information need
-not be a current behavioral skill boundary. This is registered for
-`S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION` and is not a retained
-lemma before a valid S5 terminal.
 
 ## Counterexamples
 
@@ -218,10 +213,10 @@ A partition may summarize current predictions yet fail to admit one common
 online update under the same legal observation, so it is not a persistent
 lifecycle state.
 
-## Registered S5 counterexample candidates
+## Accepted S5 counterexamples
 
-These candidates are selected for the exact S5 derivation and are not accepted
-results before its first valid terminal.
+The valid S5 artifact proves these counterexamples on the frozen predictive-
+phase/current-behavior source.
 
 ### CE-NO-CUE-INFORMATIONAL-STATE-UPDATE
 
