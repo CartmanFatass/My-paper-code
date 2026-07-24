@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S3_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
+Status: `S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION_ACTIVE`
 
 ## Resume authority
 
@@ -20,13 +20,12 @@ Status: `S3_VALID_PASS_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Git and working-tree boundary
 
-- Pushed S2 intake commit:
-  `a05732871ecd9cf8ea19f1d41a64b0deb466f9cf`.
-- Immutable S2 review stage/evidence commits remain
-  `bcbf74d2598af034b728b586d641dfce67bcbc9d` and
-  `60cd2d68a54e4c86f5bc0084ff627c779f1c7cb4`.
-- The current working tree intentionally contains the S3 exact derivation,
-  Chinese iteration-3 report, terminal CDC deltas and control-plane result
+- Pushed S3 result-review stage:
+  `1293f58b8960a60b8a2be2d9d25b8b441ae61948`.
+- Immutable S3 evidence commit:
+  `7cf10a01497176e4079c29c9f95fcb09fd60f660`.
+- The current working tree intentionally contains the archived S3 receipt/raw,
+  factual reconciliation, durable S4 direction intake and control-plane
   transition. No code, runtime or experiment artifact exists.
 - Do not mutate, push or merge `aggressive`; no current `aggressive` tip is
   asserted by this handoff.
@@ -117,17 +116,34 @@ The Chinese report is
 `docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_3.md`. This PASS establishes only
 controlled-state and active-lifetime identifiability on the frozen source. It
 does not establish a skill, recurrence insufficiency, optimization, causal use,
-natural value, robustness or transport. Iteration 3 is consumed; seven remain
-and iteration 4 is unselected.
+natural value, robustness, delayed sequential sufficiency or transport.
+Iteration 3 is consumed; seven remain.
+
+The S3 result review validates `ALREADY_ARCHIVED`. Receipt SHA-256 is
+`a3233223ba80b8740eb6a4bd767369be4d045c54e8504cc6483108919b748b43`;
+raw SHA-256 is
+`44aa4cd0f186b7cb9bdd0985da101f955f73eff4ebb7bec5d9da24ae849c24e6`.
+External Pro accepted the PASS and selected exactly
+`S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION`.
+
+S4 makes every immediate branch observation regime-uninformative and places
+the distinction in a delayed second observation under all four external
+binary plans. It requires `one_step_TV=0`, `horizon2_TV=1/2`, an
+update-congruent quotient and the unique minimum tuple `(E_2,q,K_2)=(0,2/7,2)`.
+The durable direction is
+`docs/research/cdc/EVIDENCE_NOTES/20260724_ALCPS_S3_RESULT_AND_ALSCPS_S4_DIRECTION.md`.
+No code, compute, prototype, experiment or Monitor is authorized.
 
 ## Remaining chain
 
-- Commit and push the exact S3 result only to `Claude`, then return it through
-  one new no-clobber result-review round in the same registered Pro
-  conversation.
-- Archive and reconcile exactly one Pro-selected iteration-4 action. No
-  implementation or compute is authorized by the S3 PASS itself.
-- Continue evidence-dependent iterations 4--10 serially. Rebuild and assign the
+- Complete the exact S4 derivation in
+  `docs/research/cdc/EVIDENCE_NOTES/20260724_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_S4.md`.
+  Stop on the first valid ordered terminal; one identical-contract proof-only
+  correction is the maximum recovery.
+- Write the Chinese iteration-4 report, push the exact result only to `Claude`,
+  and return it to the same registered Pro conversation before selecting
+  iteration 5.
+- Continue evidence-dependent iterations 5--10 serially. Rebuild and assign the
   registered Spark-medium Experiment Monitor only if a later Pro-selected
   action actually authorizes a run.
 - After ten valid conclusion-bearing terminals, complete one independent

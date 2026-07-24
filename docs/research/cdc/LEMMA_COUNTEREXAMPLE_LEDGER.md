@@ -28,6 +28,7 @@
 | L-RATE-DISTORTION-COARSENING | An optimized decoder for a coarser persistent state can trade finite predictive excess for fewer state changes and defeat a finer boundary under scalarization. | Predictive-loss/write-rate objectives such as exact S2. | Lexicographic exact-sufficiency criteria or controlled predictive states fail. |
 | L-CONTROLLED-QUERY-SEPARATION | Externally enumerated intervention queries with complete support may condition a predictive decoder without carrying temporal memory; uniform action marginalization can erase a regime distinction present in the full controlled-kernel vector. | Exact C-ALCPS S3 query table and independence contract. | Natural policy actions are valid intervention queries or the controlled state improves behavior. |
 | L-ALCPS-MINIMUM-WRITE-QUOTIENT | On the exact S3 source, every controlled-sufficient online model changes decoder class on both post-join regime changes, so `q>=2/7`; equality writes only on those cues and has quotient cardinality two. | `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. | C-ALCPS is necessary, easier to learn or superior to recurrence. |
+| L-S3-VALID-PASS | The exact S3 derivation validly identifies a coarsest minimum-write one-step controlled state and active-step lifetime on its frozen source. | `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. | Skill learning, sequential closure, optimization benefit or transport. |
 
 ## Counterexamples
 
@@ -180,3 +181,32 @@ intervention query with complete support.
 A latent may encode an observed nuisance that changes no controlled kernel.
 Decoder-equivalent nuisance subdivisions do not define additional states,
 skills or lifetimes.
+
+## Registered S4 counterexample candidates
+
+These are frozen S4 obligations, not retained counterexamples before a valid S4
+terminal.
+
+### CE-ONE-STEP-CONTROLLED-MYOPIA
+
+Two regimes may induce identical immediate controlled observations while
+producing different delayed controlled observation sequences.
+
+### CE-NATURAL-PLAN-AS-MEMORY
+
+An action plan selected by fast recurrence can encode hidden state and is not an
+external intervention plan with complete support.
+
+### CE-FUTURE-OUTCOME-WRITER-LEAK
+
+A writer that sees a delayed branch outcome before its current installation
+uses future information and cannot support an online lifetime claim.
+
+### CE-NONCONGRUENT-PREDICTIVE-PARTITION
+
+A partition may summarize current predictions yet fail to admit one common
+online update under the same legal observation, so it is not a persistent
+lifecycle state.
+
+Pending proposition: one-step controlled equivalence need not imply equality of
+delayed controlled futures. Promote it only after a valid S4 terminal.

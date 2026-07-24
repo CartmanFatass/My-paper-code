@@ -152,6 +152,26 @@ the Project Manager-accepted CDC state.
 - Natural and held-out consequences: not established. Any implementation or
   behavioral action requires another Pro selection and must retain G8 plus a
   mechanism-matched comparator.
+- Main unresolved counterexample: one-step controlled equivalence may merge
+  histories whose delayed controlled futures differ.
+
+## C-ALSCPS — Agent-local sequential controlled predictive state
+
+- Status: live and selected for
+  `S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION`; no code or compute is
+  selected.
+- Claim: a canonical lifecycle state and lifetime may be identified by the
+  coarsest minimum-transition, update-congruent quotient sufficient for delayed
+  controlled observation sequences.
+- Strongest simpler explanation: G8 recurrence stores the same delayed
+  statistic and may realize the same external policy; the explicit quotient
+  supplies no established optimization, mediation or transport benefit.
+- Intervention consequence: histories merged by the immediate controlled
+  projection may have different externally indexed horizon-2 futures.
+- Natural and held-out consequences: not established.
+- S4 boundary: prove exact one-step collapse, horizon-2 separation, recursive
+  update congruence and unique minimum-write lifetime on the frozen source.
+
 
 ## C-JRDM — Jointly rate-coded dual memory
 
