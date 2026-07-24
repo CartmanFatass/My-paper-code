@@ -1,22 +1,22 @@
-# G19 fast-policy-anchored delayed-residual implementation plan
+# G20 active-set-centered delayed-residual implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_formal=ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18
-last_formal_result=NO_G17_COMPATIBILITY_CRITIC_ISOLATED_G18
+last_nonformal=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19_BOUNDED_SCREEN
+active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_DERIVATION
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g19
-algebra_status=PROTOTYPE_ACCEPTED_30_FOCUSED_AND_SHARED_TESTS_PASS
-screen_contract=docs/research/designs/FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19.md
+algebra_status=ZERO_COMPUTE_DERIVATION_REQUIRED
+screen_contract=none_until_g20_derivation
 ```
 
 ## Accepted active line
@@ -55,6 +55,8 @@ screen_contract=docs/research/designs/FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19.
 - Eight G19-focused tests plus the retained G17/G18 shared proofs total 30
   passing tests on CPU with one thread.
 
-The next action is exactly one integrated-source bounded paired screen through
-`scripts/screen_fast_policy_anchored_residual_g19.py`. It is nonformal and
-consumes no conclusion-bearing iteration.
+The integrated G19 screen closed operationally and preserves every G17 gate,
+but G18 remains at utility `0.66667` with zero spike service and zero gain over
+the anchor. G19 is retired without tuning. The next action is a zero-compute
+derivation of an active-set-centered residual that exposes per-step anonymous
+redistribution directions before any implementation or compute.

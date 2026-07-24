@@ -135,3 +135,13 @@ within `1e-7`, replay remains exact and all lifecycle/inactive-row checks pass.
 Eight focused G19 tests and 22 retained G17/G18 shared proofs pass. The next
 action is the frozen one-seed paired screen from the integrated source. No
 formal or conclusion-bearing claim is licensed yet.
+
+## Screen disposition
+
+The exact screen selected `NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19`.
+G17 remained above every gate and fast parameters were exact, but G18 final
+utility equaled its `0.66667` anchor with zero spike service. The global
+projection therefore retains its fast-preservation lemma but is insufficient
+for delayed anonymous member redistribution. G19 is retired without tuning;
+the next derivation moves the constraint from global parameter gradients to an
+active-set-centered action residual.

@@ -1,7 +1,7 @@
 # Fast-policy-anchored delayed residual G19
 
 ```text
-status=PROTOTYPE_ACCEPTED_BOUNDED_SCREEN_READY
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -93,5 +93,17 @@ Thirty focused and shared tests pass on the registered CPU runtime. The zero
 residual exactly matches the base policy in all three execution modes. Fast
 parameters remain bitwise fixed across delayed updates, both sources retain
 exact replay/lifecycle behavior, and every tested projected gradient closes the
-registered dot-product invariant. The full bounded paired screen is now the
-only active action.
+registered dot-product invariant. These checks licensed the bounded paired
+screen recorded below.
+
+## Bounded screen disposition
+
+The integrated screen completed with exact replay, exact fast-anchor identity
+and valid source controls. It preserved G17 held-out utility from `0.94473` to
+`0.94641`, but G18 anchor and final utility were both `0.66667`, spike utility
+was zero and delayed gain was zero. The frozen first-match branch is
+`NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19`.
+
+The residual moved, but the batch-global projection did not expose the
+member-redistribution direction required by the delayed source. This exact
+candidate is closed without formal promotion or same-package repair.
