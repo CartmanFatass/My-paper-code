@@ -1,4 +1,4 @@
-"""Configure frozen-G8 evaluation for episode-random roster processes."""
+"""Configure frozen-G8 evaluation for atomic cohort replacement G14."""
 
 from __future__ import annotations
 
@@ -11,67 +11,67 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+from ha_ctse_process.open_roster_atomic_replacement_g14 import (
+    DOMAIN_PROFILES,
+    LEDGER_FACTORIES,
+)
 from ha_ctse_process.open_roster_high_churn_g9 import (
     HighChurnEnv,
     expected_roster_schedule,
     high_churn_lifecycle_contract_valid,
 )
-from ha_ctse_process.open_roster_random_process_g13 import (
-    DOMAIN_PROFILES,
-    LEDGER_FACTORIES,
-)
 from scripts import run_open_roster_high_churn_g9 as core
 
 
-ALGORITHM_ID = "RANDOMIZED_ROSTER_PROCESS_G13"
-AUTHORIZATION_TOKEN = "AUTHORIZE_RANDOMIZED_ROSTER_PROCESS_G13_FORMAL_CPU_V1"
-INVALID_BRANCH = "INVALID_RANDOMIZED_ROSTER_PROCESS_G13"
-NONFORMAL_BRANCH = "NONFORMAL_RANDOMIZED_ROSTER_G13_EXERCISE_COMPLETE"
+ALGORITHM_ID = "ATOMIC_COHORT_REPLACEMENT_G14"
+AUTHORIZATION_TOKEN = "AUTHORIZE_ATOMIC_COHORT_REPLACEMENT_G14_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_ATOMIC_COHORT_REPLACEMENT_G14"
+NONFORMAL_BRANCH = "NONFORMAL_ATOMIC_REPLACEMENT_G14_EXERCISE_COMPLETE"
 FORMAL_REPLICATES = core.FORMAL_REPLICATES
-FORMAL_EVAL_EPISODES = 48
+FORMAL_EVAL_EPISODES = 32
 FORMAL_BOOTSTRAP_REPETITIONS = core.FORMAL_BOOTSTRAP_REPETITIONS
 DOMAIN_LEDGER_SEEDS = {
-    "random_moderate": 3_481_000,
-    "random_wide": 3_481_100,
-    "mixed_churn": 3_481_200,
+    "atomic_moderate": 3_881_000,
+    "atomic_wide": 3_881_100,
+    "mixed_churn": 3_881_200,
 }
-ACTION_SEED_BASE = 3_581_000
-BOOTSTRAP_SEED = 3_681_013
+ACTION_SEED_BASE = 3_981_000
+BOOTSTRAP_SEED = 4_081_014
 DOMAIN_FLOORS = {
-    "random_moderate": 0.90,
-    "random_wide": 0.90,
+    "atomic_moderate": 0.90,
+    "atomic_wide": 0.90,
     "mixed_churn": 0.90,
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
-EXPECTED_EVENT_COUNT = 12
+EXPECTED_EVENT_COUNT = 6
 DEFAULT_G8_RUN_ROOT = core.DEFAULT_G8_RUN_ROOT
 
 
 def select_result_branch(metrics: dict[str, object]) -> str:
     if (
-        float(metrics["random_moderate_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["random_moderate"]
+        float(metrics["atomic_moderate_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["atomic_moderate"]
     ):
-        return "NO_RANDOM_MODERATE_ACCESS_G13"
+        return "NO_ATOMIC_MODERATE_ACCESS_G14"
     if (
-        float(metrics["random_wide_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["random_wide"]
+        float(metrics["atomic_wide_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["atomic_wide"]
     ):
-        return "NO_RANDOM_WIDE_ACCESS_G13"
+        return "NO_ATOMIC_WIDE_ACCESS_G14"
     if (
         float(metrics["mixed_churn_deterministic_utility_ci95"][0])
         < DOMAIN_FLOORS["mixed_churn"]
     ):
-        return "NO_RANDOM_ULTRA_ACCESS_G13"
+        return "NO_ATOMIC_ULTRA_ACCESS_G14"
     if (
         float(metrics["mixed_churn_min_replicate_mean"])
         < MINIMUM_MIXED_REPLICATE_FLOOR
         or float(metrics["mixed_churn_stochastic_mean"])
         < MIXED_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_RANDOM_ROSTER_G13"
-    return "ROBUST_RANDOMIZED_ROSTER_PROCESS_G13"
+        return "UNSTABLE_ATOMIC_REPLACEMENT_G14"
+    return "ROBUST_ATOMIC_COHORT_REPLACEMENT_G14"
 
 
 def _activate_contract() -> None:
@@ -93,6 +93,7 @@ def _activate_contract() -> None:
     core.MIXED_STOCHASTIC_MEAN_FLOOR = MIXED_STOCHASTIC_MEAN_FLOOR
     core.EXPECTED_EVENT_COUNT = EXPECTED_EVENT_COUNT
     core.REQUIRE_UNIQUE_PROFILES = True
+    core.REQUIRED_EVENT_OPERATIONS = ("joined", "terminally_left")
     core.select_result_branch = select_result_branch
 
 

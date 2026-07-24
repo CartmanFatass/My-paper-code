@@ -79,6 +79,12 @@ MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
 MIXED_STOCHASTIC_MEAN_FLOOR = 0.80
 EXPECTED_EVENT_COUNT = 8
 REQUIRE_UNIQUE_PROFILES = False
+REQUIRED_EVENT_OPERATIONS = (
+    "temporarily_left",
+    "rejoined",
+    "joined",
+    "terminally_left",
+)
 EXPECTED_TORCH = "2.7.0+cpu"
 
 
@@ -358,12 +364,7 @@ def _source_controls(*, episode_ids: tuple[int, ...]) -> dict[str, Any]:
         ),
         "all_event_operation_types_present": all(
             any(event[name] for row in rows for event in row["event_signature"])
-            for name in (
-                "temporarily_left",
-                "rejoined",
-                "joined",
-                "terminally_left",
-            )
+            for name in REQUIRED_EVENT_OPERATIONS
         ),
     }
 

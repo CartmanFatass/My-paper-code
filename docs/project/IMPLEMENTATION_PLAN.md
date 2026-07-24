@@ -1,63 +1,57 @@
-# Randomized roster-process G13 implementation plan
+# Atomic cohort-replacement G14 implementation plan
 
 > **Required project procedure:** use `$hmasd-agile-research-development`.
 > Generic Superpowers execution, compatibility work and workflow hashes are
 > disabled.
 
 ```text
-active_implementation=RANDOMIZED_ROSTER_PROCESS_G13
-implementation_status=FORMAL_CLOSED_ROBUST_RANDOM_PROCESS
-design=docs/research/designs/RANDOMIZED_ROSTER_PROCESS_G13.md
+active_implementation=ATOMIC_COHORT_REPLACEMENT_G14
+implementation_status=PRELAUNCH_ACCEPTED_FORMAL_READY
+design=docs/research/designs/ATOMIC_COHORT_REPLACEMENT_G14.md
 backend=cpu
 torch_threads=1
-formal_iteration=14
-chain_iterations_remaining_after_run=3
+formal_iteration=15
+chain_iterations_remaining_before_run=3
 ```
 
 ## Goal
 
-Separate genuine roster-process robustness from success on a few fixed count
-schedules by drawing a fresh, fully recorded valid membership process for every
-evaluation episode.
+Test count-invisible identity turnover: terminate a large active cohort and join
+an equal cold-start cohort in one transaction while holding active N constant.
 
-## Task 1 - Generate identifiable random processes
+## Task 1 - Generate atomic replacement ledgers
 
-Sample initial count/keys, safe event times, affected keys and positive batch
-magnitudes from an episode-owned seed. Use 12 operations containing three
-leave/rejoin and terminal/join motifs. Keep declared count bounds and prohibit
-lifecycle reuse.
+Sample one constant N and random initial physical keys per episode. At six
+registered wave boundaries, sample a positive active cohort and an equal-size
+never-seen cohort, then encode both terminal leave and join in the same event.
 
-Focused proof: reproducibility, profile uniqueness, schedule diversity, all
-operation types, transition validity and exact count bounds.
+Focused proof: deterministic diversity, no key reuse, exact equal cohort sizes,
+constant roster schedules and bounded capacity/count support.
 
-## Task 2 - Close every source instance
+## Task 2 - Validate cold-start semantics
 
-Generalize the active frozen-checkpoint evaluator from one source-control row
-per domain to one row per domain/episode. Record exact event signatures,
-schedules, wave demand and constructive outcomes. Recompute every row during
-analysis and retain one shared lifecycle-state proof per domain.
+Require terminal members to remain inactive with frozen hidden state and every
+new member to begin from zero hidden state at the atomic transaction. Recompute
+every event signature, schedule, wave demand and constructive outcome.
 
-Focused proof: tampered event signatures fail closed; nonformal records cannot
-be promoted to formal; all generated source rows attain utility one.
+Focused proof: lifecycle trajectory, constructive utility one, tamper rejection
+and complete per-episode source-control inventory.
 
-## Task 3 - Evaluate the frozen algorithm
+## Task 3 - Evaluate frozen G8 finals
 
-Import the exact three G8 finals with zero optimizer steps. Evaluate all three
-random-process domains under deterministic and stochastic action modes for 48
-episodes per cell. Preserve exact model state, CPU runtime, G8 provenance and
-the predeclared first-match access/stability gates.
+Import three exact G8 finals with no optimizer. Evaluate moderate, wide and
+ultra atomic replacement distributions under deterministic and stochastic
+actions for 32 episodes per cell. Preserve CPU-only runtime, model immutability,
+absolute gates and first-match precedence.
 
 ## Acceptance and launch
 
-The focused suite passes 6/6 and the G13 plus shared G5 suite passes 11/11. The
+The focused suite passes 6/6 and the G14 plus shared G5 suite passes 11/11. The
 official bounded nonformal pipeline at
-`logs/nonformal_random_roster_g13_20260723_pm1` is operationally valid with 12
-unique source rows, six cells, zero optimizer steps, exact checkpoint copy,
-immutable model state and every source/lifecycle control true.
+`logs/nonformal_atomic_replacement_g14_20260723_pm1` is operationally valid with
+12 unique atomic source rows, six cells, zero optimizer steps, exact checkpoint
+copy, immutable model state and every source/lifecycle control true.
 
-The first failing probe localized an invalid mid-wave removal support and was
-repaired at the source generator; it neither changed policy nor weakened a
-gate. The exact formal result is `ROBUST_RANDOMIZED_ROSTER_PROCESS_G13`: every
-deterministic LCB exceeds 0.9249, random-ultra minimum replicate mean is 0.9284
-and stochastic mean is 0.8893. Iteration 14 is closed with three iterations
-remaining. The next boundary is `ATOMIC_COHORT_REPLACEMENT_G14`.
+No additional review is selected because focused evidence closes the only new
+shared-core switch and no anomaly remains. Integrate and launch the exact formal
+commands through the fixed operator.

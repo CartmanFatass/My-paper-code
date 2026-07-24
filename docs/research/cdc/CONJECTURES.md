@@ -62,8 +62,9 @@ the Project Manager-accepted CDC state.
 - Strongest remaining counterexample: G13 serializes cohort termination and
   replacement into separate transactions, leaving atomic cold-start roster
   replacement untested.
-- Separating evidence: terminate and join matched random cohorts in the same
-  transaction while holding active count and task demand fixed.
+- Separating evidence: G14 now terminates and joins matched random cohorts in
+  the same transaction while holding active count and task demand fixed; its
+  formal result is pending.
 - Scope: skill selection, skill lifetime, EHC, intrinsic reward and comparative
   advantage are frozen out. Success establishes a usable dynamic-roster base,
   not the final two-axis HMASD algorithm.
