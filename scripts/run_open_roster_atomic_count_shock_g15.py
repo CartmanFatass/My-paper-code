@@ -1,4 +1,4 @@
-"""Configure frozen-G8 evaluation for atomic cohort replacement G14."""
+"""Configure frozen-G8 evaluation for atomic active-count shocks G15."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from ha_ctse_process.open_roster_atomic_replacement_g14 import (
+from ha_ctse_process.open_roster_atomic_count_shock_g15 import (
     DOMAIN_PROFILES,
     LEDGER_FACTORIES,
 )
@@ -23,23 +23,23 @@ from ha_ctse_process.open_roster_high_churn_g9 import (
 from scripts import run_open_roster_high_churn_g9 as core
 
 
-ALGORITHM_ID = "ATOMIC_COHORT_REPLACEMENT_G14"
-AUTHORIZATION_TOKEN = "AUTHORIZE_ATOMIC_COHORT_REPLACEMENT_G14_FORMAL_CPU_V1"
-INVALID_BRANCH = "INVALID_ATOMIC_COHORT_REPLACEMENT_G14"
-NONFORMAL_BRANCH = "NONFORMAL_ATOMIC_REPLACEMENT_G14_EXERCISE_COMPLETE"
+ALGORITHM_ID = "ATOMIC_COUNT_SHOCK_G15"
+AUTHORIZATION_TOKEN = "AUTHORIZE_ATOMIC_COUNT_SHOCK_G15_FORMAL_CPU_V1"
+INVALID_BRANCH = "INVALID_ATOMIC_COUNT_SHOCK_G15"
+NONFORMAL_BRANCH = "NONFORMAL_ATOMIC_COUNT_SHOCK_G15_EXERCISE_COMPLETE"
 FORMAL_REPLICATES = core.FORMAL_REPLICATES
-FORMAL_EVAL_EPISODES = 32
+FORMAL_EVAL_EPISODES = 24
 FORMAL_BOOTSTRAP_REPETITIONS = core.FORMAL_BOOTSTRAP_REPETITIONS
 DOMAIN_LEDGER_SEEDS = {
-    "atomic_moderate": 3_881_000,
-    "atomic_wide": 3_881_100,
-    "mixed_churn": 3_881_200,
+    "shock_moderate": 4_181_000,
+    "shock_wide": 4_181_100,
+    "mixed_churn": 4_181_200,
 }
-ACTION_SEED_BASE = 3_981_000
-BOOTSTRAP_SEED = 4_081_014
+ACTION_SEED_BASE = 4_281_000
+BOOTSTRAP_SEED = 4_381_015
 DOMAIN_FLOORS = {
-    "atomic_moderate": 0.90,
-    "atomic_wide": 0.90,
+    "shock_moderate": 0.90,
+    "shock_wide": 0.90,
     "mixed_churn": 0.90,
 }
 MINIMUM_MIXED_REPLICATE_FLOOR = 0.85
@@ -50,28 +50,28 @@ DEFAULT_G8_RUN_ROOT = core.DEFAULT_G8_RUN_ROOT
 
 def select_result_branch(metrics: dict[str, object]) -> str:
     if (
-        float(metrics["atomic_moderate_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["atomic_moderate"]
+        float(metrics["shock_moderate_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["shock_moderate"]
     ):
-        return "NO_ATOMIC_MODERATE_ACCESS_G14"
+        return "NO_ATOMIC_SHOCK_MODERATE_ACCESS_G15"
     if (
-        float(metrics["atomic_wide_deterministic_utility_ci95"][0])
-        < DOMAIN_FLOORS["atomic_wide"]
+        float(metrics["shock_wide_deterministic_utility_ci95"][0])
+        < DOMAIN_FLOORS["shock_wide"]
     ):
-        return "NO_ATOMIC_WIDE_ACCESS_G14"
+        return "NO_ATOMIC_SHOCK_WIDE_ACCESS_G15"
     if (
         float(metrics["mixed_churn_deterministic_utility_ci95"][0])
         < DOMAIN_FLOORS["mixed_churn"]
     ):
-        return "NO_ATOMIC_ULTRA_ACCESS_G14"
+        return "NO_ATOMIC_SHOCK_ULTRA_ACCESS_G15"
     if (
         float(metrics["mixed_churn_min_replicate_mean"])
         < MINIMUM_MIXED_REPLICATE_FLOOR
         or float(metrics["mixed_churn_stochastic_mean"])
         < MIXED_STOCHASTIC_MEAN_FLOOR
     ):
-        return "UNSTABLE_ATOMIC_REPLACEMENT_G14"
-    return "ROBUST_ATOMIC_COHORT_REPLACEMENT_G14"
+        return "UNSTABLE_ATOMIC_COUNT_SHOCK_G15"
+    return "ROBUST_ATOMIC_COUNT_SHOCK_G15"
 
 
 def _activate_contract() -> None:
