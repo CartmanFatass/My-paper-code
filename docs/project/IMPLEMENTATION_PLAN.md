@@ -8,14 +8,14 @@ last_nonformal=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22_PROTOTYPE
+active_implementation=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22_BOUNDED_SCREEN
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g22
-algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 screen_contract=docs/research/designs/ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22.md
 ```
 
@@ -109,3 +109,11 @@ learning rate and registered defaults. The policy, credit, fast anchor, critics,
 budgets, gates and evaluation remain unchanged with fresh seeds. Mechanically
 rename the active runner/test, prove exact residual-only optimizer ownership,
 then run one integrated paired nonformal screen.
+
+The G22 prototype is accepted for that screen. The active G21 runner/test were
+renamed rather than duplicated, and the only algorithmic edit is the delayed
+residual optimizer constructor. Six focused tests close Adam defaults, fresh
+state, exact residual-only ownership, zero-output/common-mode policy behavior,
+replay, anchor identity and precedence; 36 focused-plus-retained tests pass on
+CPU with one thread. The only next action is the frozen paired screen from an
+integrated commit.

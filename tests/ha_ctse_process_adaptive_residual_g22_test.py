@@ -1,4 +1,4 @@
-"""Focused acceptance for the G21 unconstrained anchored residual."""
+"""Focused acceptance for the G22 adaptive anchored residual."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from ha_ctse_process.unconstrained_residual_g21 import (
     UnconstrainedAnchoredResidualPolicy,
     optimize_unconstrained_delayed_update,
 )
-from scripts import screen_unconstrained_anchored_residual_g21 as screen
+from scripts import screen_adaptive_anchored_residual_g22 as screen
 
 
 def _model(
@@ -174,7 +174,7 @@ def test_battery_successor_update_keeps_anchor_and_exercises_residual() -> None:
     )
     metrics = optimize_unconstrained_delayed_update(
         model,
-        torch.optim.SGD(model.residual_parameters(), lr=1e-3),
+        screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
         delayed,
         device=torch.device("cpu"),
@@ -237,7 +237,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
     delayed = attach_credit_baselines(model, raw, device=torch.device("cpu"))
     metrics = optimize_unconstrained_delayed_update(
         model,
-        torch.optim.SGD(model.residual_parameters(), lr=1e-3),
+        screen.make_residual_optimizer(model),
         torch.optim.Adam(model.critic_parameters(), lr=1e-3),
         delayed,
         device=torch.device("cpu"),
@@ -248,7 +248,7 @@ def test_g17_successor_update_replays_and_preserves_anchor() -> None:
     assert maximum_state_difference(anchor, model.anchor_state()) == 0.0
 
 
-def test_g21_result_precedence_and_configuration_are_frozen() -> None:
+def test_g22_result_precedence_and_configuration_are_frozen() -> None:
     passing = {
         "operational_valid": True,
         "g17_final_iid_utility": 0.93,
@@ -282,6 +282,41 @@ def test_g21_result_precedence_and_configuration_are_frozen() -> None:
     assert configuration["g17_delayed_updates"] == 100
     assert configuration["g18_fast_updates"] == 100
     assert configuration["g18_delayed_updates"] == 300
-    assert configuration["delayed_residual_optimizer"] == "sgd"
+    assert configuration["delayed_residual_optimizer"] == "adam"
+    assert configuration["delayed_residual_adam_betas"] == [0.9, 0.999]
+    assert configuration["delayed_residual_adam_eps"] == 1e-8
+    assert configuration["delayed_residual_weight_decay"] == 0.0
+    assert configuration["delayed_residual_amsgrad"] is False
     assert configuration["delayed_residual_geometry"] == "unconstrained_pre_squash_mean"
     assert configuration["delayed_gradient_rule"] == "successor_only_unprojected"
+
+
+def test_g22_adam_owns_only_residual_parameters_with_fresh_state() -> None:
+    model = _model(
+        battery_source.OBSERVATION_DIM,
+        battery_source.CRITIC_STATE_DIM,
+        battery_source.CAPACITY,
+        battery_source.ACTION_DIM,
+    )
+    model.begin_delayed_phase()
+    optimizer = screen.make_residual_optimizer(model)
+    owned = {
+        id(parameter)
+        for group in optimizer.param_groups
+        for parameter in group["params"]
+    }
+    assert owned == {id(parameter) for parameter in model.residual_parameters()}
+    assert owned.isdisjoint(
+        id(parameter) for parameter in model.critic_parameters()
+    )
+    assert owned.isdisjoint(
+        id(parameter) for parameter in model.policy.parameters()
+        if not parameter.requires_grad
+    )
+    assert optimizer.state == {}
+    group = optimizer.param_groups[0]
+    assert group["lr"] == 1e-3
+    assert group["betas"] == (0.9, 0.999)
+    assert group["eps"] == 1e-8
+    assert group["weight_decay"] == 0.0
+    assert group["amsgrad"] is False

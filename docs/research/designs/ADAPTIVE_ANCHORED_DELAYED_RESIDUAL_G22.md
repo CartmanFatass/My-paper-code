@@ -1,7 +1,7 @@
 # Adaptive anchored delayed residual G22
 
 ```text
-status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -63,3 +63,16 @@ licenses formal design; no branch supports UAV promotion.
 - fresh optimizer state and bitwise anchor preservation;
 - retained G17/G18 replay/lifecycle controls;
 - frozen first-match precedence and configuration.
+
+## Implementation acceptance
+
+The active runner is `scripts/screen_adaptive_anchored_residual_g22.py` and
+reuses the source-neutral residual implementation without duplication. Its
+constructor registers exactly `model.residual_parameters()` in a fresh Adam
+instance with the frozen defaults; critic and fast parameters are disjoint.
+
+Six focused and 36 focused-plus-retained tests pass on the registered CPU
+one-thread runtime. They retain exact zero-output/common-mode behavior, replay,
+inactive rows and bitwise anchor preservation while proving optimizer identity
+and empty initial state. This accepts only the bounded screen and does not
+authorize formal compute or claim delayed access.

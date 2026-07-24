@@ -1,4 +1,4 @@
-"""Run the bounded paired G21 unconstrained anchored-residual screen."""
+"""Run the bounded paired G22 adaptive anchored-residual screen."""
 
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ from scripts import screen_fast_policy_anchored_residual_g19 as g19
 
 
 SCHEMA_VERSION = 1
-ALGORITHM_ID = "UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21"
+ALGORITHM_ID = "ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22"
 GAMMA = g19.GAMMA
 HIDDEN_DIM = g19.HIDDEN_DIM
 LEARNING_RATE = g19.LEARNING_RATE
@@ -51,20 +51,20 @@ G17_EVAL_EPISODES = g19.G17_EVAL_EPISODES
 
 SEEDS = {
     "g17": {
-        "model": 2_819_000,
-        "ledger": 2_829_000,
-        "action": 2_839_000,
-        "evaluation_ledger": 2_849_000,
-        "evaluation_action": 2_859_000,
+        "model": 3_019_000,
+        "ledger": 3_029_000,
+        "action": 3_039_000,
+        "evaluation_ledger": 3_049_000,
+        "evaluation_action": 3_059_000,
     },
-    "g18": {"model": 2_919_000, "action": 2_939_000},
+    "g18": {"model": 3_119_000, "action": 3_139_000},
 }
 
-INVALID_BRANCH = "INVALID_UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21"
-NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_UNCONSTRAINED_RESIDUAL_G21"
-NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21"
-NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_UNCONSTRAINED_RESIDUAL_G21"
-PROMISING_BRANCH = "NONFORMAL_UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_PROMISING_G21"
+INVALID_BRANCH = "INVALID_ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22"
+NO_G17_BRANCH = "NONFORMAL_NO_G17_COMPATIBILITY_ADAPTIVE_RESIDUAL_G22"
+NO_G18_ACCESS_BRANCH = "NONFORMAL_NO_DELAYED_ACCESS_ADAPTIVE_RESIDUAL_G22"
+NO_G18_MECHANISM_BRANCH = "NONFORMAL_NO_DELAYED_MECHANISM_ADAPTIVE_RESIDUAL_G22"
+PROMISING_BRANCH = "NONFORMAL_ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_PROMISING_G22"
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
@@ -97,7 +97,11 @@ def _configuration() -> dict[str, Any]:
         "g18_delayed_updates": G18_DELAYED_UPDATES,
         "g17_eval_episodes": G17_EVAL_EPISODES,
         "fast_optimizer": "adam",
-        "delayed_residual_optimizer": "sgd",
+        "delayed_residual_optimizer": "adam",
+        "delayed_residual_adam_betas": [0.9, 0.999],
+        "delayed_residual_adam_eps": 1e-8,
+        "delayed_residual_weight_decay": 0.0,
+        "delayed_residual_amsgrad": False,
         "critic_optimizer": "adam",
         "delayed_residual_initialization": "exact_zero_output",
         "delayed_residual_geometry": "unconstrained_pre_squash_mean",
@@ -120,7 +124,7 @@ def _dimensions(source: str) -> tuple[int, int, int, int]:
             battery_source.CAPACITY,
             battery_source.ACTION_DIM,
         )
-    raise ValueError(f"unknown G21 source: {source}")
+    raise ValueError(f"unknown G22 source: {source}")
 
 
 def make_model(source: str) -> UnconstrainedAnchoredResidualPolicy:
@@ -136,6 +140,19 @@ def make_model(source: str) -> UnconstrainedAnchoredResidualPolicy:
     with torch.no_grad():
         model.log_std.fill_(INITIAL_LOG_STD)
     return model
+
+
+def make_residual_optimizer(
+    model: UnconstrainedAnchoredResidualPolicy,
+) -> torch.optim.Adam:
+    return torch.optim.Adam(
+        model.residual_parameters(),
+        lr=LEARNING_RATE,
+        betas=(0.9, 0.999),
+        eps=1e-8,
+        weight_decay=0.0,
+        amsgrad=False,
+    )
 
 
 def _collect(
@@ -252,9 +269,7 @@ def _train_source(source: str) -> dict[str, Any]:
     anchor_evaluation = _evaluate_phase(source, model)
     anchor_state = model.anchor_state()
     model.begin_delayed_phase()
-    residual_optimizer = torch.optim.SGD(
-        model.residual_parameters(), lr=LEARNING_RATE
-    )
+    residual_optimizer = make_residual_optimizer(model)
     critic_optimizer = torch.optim.Adam(
         model.critic_parameters(), lr=LEARNING_RATE
     )
@@ -424,7 +439,7 @@ def select_result_branch(metrics: dict[str, Any]) -> str:
 
 def run_screen(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not source_commit or source_commit == "NONFORMAL_WORKTREE":
-        raise ValueError("G21 screen requires an integrated source commit")
+        raise ValueError("G22 screen requires an integrated source commit")
     run_root.mkdir(parents=True, exist_ok=False)
     g17_runner.configure_runtime(SEEDS["g17"]["model"])
     started = time.perf_counter()
