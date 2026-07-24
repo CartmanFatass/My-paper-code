@@ -1,5 +1,3 @@
-import copy
-
 import numpy as np
 from gymnasium.spaces import Box, Dict
 
@@ -615,8 +613,6 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
                 infos[agent] = {}
             reward_info = infos[agent].setdefault("reward_info", {})
             reward_info.update(metrics)
-            reward_info["connections"] = self.connections.copy()
-            reward_info["routing_paths"] = copy.deepcopy(self.routing_paths)
             infos[agent]["next_state"] = next_state.copy()
             infos[agent]["energy_stage"] = self.energy_stage
             infos[agent]["scale_mode"] = self.scale_mode
@@ -901,9 +897,13 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
     def _calculate_end_to_end_user_rates(self):
         access_capacities = np.zeros((self.n_uavs, self.n_users), dtype=float)
         backhaul_capacities = np.zeros(self.n_uavs, dtype=float)
+        current_unavailable = self._communication_unavailable_mask()
+        can_reuse_sinr = self._sinr_matrix_matches_current_state(
+            current_unavailable
+        )
 
         for uav_idx in range(self.n_uavs):
-            if self._is_uav_unavailable(uav_idx):
+            if current_unavailable[uav_idx]:
                 continue
             connected_users = np.flatnonzero(self.connections[uav_idx])
             if connected_users.size == 0:
@@ -921,6 +921,8 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
                     int(user_idx),
                     bandwidth_per_user,
                     relaxed=False,
+                    current_unavailable=current_unavailable,
+                    can_reuse_sinr=can_reuse_sinr,
                 )
 
             path_record = self.routing_paths.get(uav_idx)
@@ -942,20 +944,39 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         )
         return user_rates, access_capacities, backhaul_capacities
 
-    def _access_capacity_bps(self, uav_idx, user_idx, bandwidth_hz, relaxed):
-        if self._is_uav_unavailable(uav_idx) or bandwidth_hz <= 0.0:
-            return 0.0
-        current_unavailable = np.asarray(
-            [self._is_uav_unavailable(index) for index in range(self.n_uavs)],
-            dtype=bool,
-        )
-        can_reuse_sinr = (
+    def _sinr_matrix_matches_current_state(self, current_unavailable):
+        return (
             not bool(getattr(self, "_disable_sinr_matrix_reuse", False))
             and hasattr(self, "_sinr_uav_positions")
             and np.array_equal(self.uav_positions, self._sinr_uav_positions)
             and np.array_equal(self.user_positions, self._sinr_user_positions)
             and np.array_equal(current_unavailable, self._sinr_unavailable)
         )
+
+    def _access_capacity_bps(
+        self,
+        uav_idx,
+        user_idx,
+        bandwidth_hz,
+        relaxed,
+        *,
+        current_unavailable=None,
+        can_reuse_sinr=None,
+    ):
+        if current_unavailable is None:
+            if bool(getattr(self, "_disable_graph_radio_reuse", False)):
+                current_unavailable = np.asarray(
+                    [self._is_uav_unavailable(index) for index in range(self.n_uavs)],
+                    dtype=bool,
+                )
+            else:
+                current_unavailable = self._communication_unavailable_mask()
+        if current_unavailable[uav_idx] or bandwidth_hz <= 0.0:
+            return 0.0
+        if can_reuse_sinr is None:
+            can_reuse_sinr = self._sinr_matrix_matches_current_state(
+                current_unavailable
+            )
         if can_reuse_sinr:
             sinr_db = float(self.sinr_matrix[uav_idx, user_idx])
         else:
@@ -979,12 +1000,27 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         max_efficiency = max(float(entry[1]) for entry in self.mcs_table)
         return float(np.clip(shannon_efficiency, 0.0, max_efficiency))
 
-    def _relaxed_backhaul_capacity_bps(self, sender_idx, receiver_type, receiver_idx):
-        if self._is_uav_unavailable(sender_idx):
+    def _relaxed_backhaul_capacity_bps(
+        self, sender_idx, receiver_type, receiver_idx, *, current_unavailable=None
+    ):
+        disable_reuse = bool(getattr(self, "_disable_graph_radio_reuse", False))
+        if current_unavailable is None and not disable_reuse:
+            current_unavailable = self._communication_unavailable_mask()
+        sender_unavailable = (
+            self._is_uav_unavailable(sender_idx)
+            if current_unavailable is None
+            else bool(current_unavailable[sender_idx])
+        )
+        if sender_unavailable:
             return 0.0
         pos1 = self.uav_positions[sender_idx]
         if receiver_type == "uav":
-            if sender_idx == receiver_idx or self._is_uav_unavailable(receiver_idx):
+            receiver_unavailable = (
+                self._is_uav_unavailable(receiver_idx)
+                if current_unavailable is None
+                else bool(current_unavailable[receiver_idx])
+            )
+            if sender_idx == receiver_idx or receiver_unavailable:
                 return 0.0
             pos2 = self.uav_positions[receiver_idx]
             path_loss = self._compute_air_to_air_path_loss(pos1, pos2)
@@ -994,12 +1030,17 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             path_loss = self._compute_air_to_ground_path_loss(pos1, pos2)
             rx_power = self.tx_power - path_loss
 
-        sinr_db = self._compute_link_sinr(
+        sinr_args = (
             "uav",
             sender_idx,
             receiver_type,
             receiver_idx,
             rx_power,
+        )
+        sinr_db = (
+            self._compute_link_sinr(*sinr_args)
+            if disable_reuse
+            else self._cached_link_sinr(*sinr_args)
         )
         link_bandwidth = (
             self.bandwidth / max(self.n_uavs, 1)
@@ -1008,9 +1049,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         )
         return link_bandwidth * self._spectral_efficiency(sinr_db, relaxed=True)
 
-    def _widest_backhaul_capacities(self):
+    def _widest_backhaul_capacities(self, *, current_unavailable=None):
         if self.n_uavs <= 0 or self.n_ground_bs <= 0:
             return np.zeros(self.n_uavs, dtype=float)
+        if (
+            current_unavailable is None
+            and not bool(getattr(self, "_disable_graph_radio_reuse", False))
+        ):
+            current_unavailable = self._communication_unavailable_mask()
 
         uav_edges = np.zeros((self.n_uavs, self.n_uavs), dtype=float)
         bs_edges = np.zeros((self.n_uavs, self.n_ground_bs), dtype=float)
@@ -1021,12 +1067,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
                         sender_idx,
                         "uav",
                         receiver_idx,
+                        current_unavailable=current_unavailable,
                     )
             for bs_idx in range(self.n_ground_bs):
                 bs_edges[sender_idx, bs_idx] = self._relaxed_backhaul_capacity_bps(
                     sender_idx,
                     "ground_bs",
                     bs_idx,
+                    current_unavailable=current_unavailable,
                 )
 
         widest = np.max(bs_edges, axis=1)
@@ -1044,7 +1092,18 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
     def _graph_service_potential(self):
         if self.n_users <= 0 or self.n_uavs <= 0:
             return 0.0
-        widest_backhaul = self._widest_backhaul_capacities()
+        disable_reuse = bool(getattr(self, "_disable_graph_radio_reuse", False))
+        current_unavailable = (
+            None if disable_reuse else self._communication_unavailable_mask()
+        )
+        can_reuse_sinr = (
+            None
+            if current_unavailable is None
+            else self._sinr_matrix_matches_current_state(current_unavailable)
+        )
+        widest_backhaul = self._widest_backhaul_capacities(
+            current_unavailable=current_unavailable
+        )
         self.last_widest_backhaul_capacities_bps = widest_backhaul
         nominal_users_per_uav = max(1, int(np.ceil(self.n_users / max(self.n_uavs, 1))))
         access_bandwidth = (
@@ -1064,6 +1123,8 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
                     user_idx,
                     candidate_bandwidth,
                     relaxed=True,
+                    current_unavailable=current_unavailable,
+                    can_reuse_sinr=can_reuse_sinr,
                 )
                 end_to_end_capacity = min(access_capacity, widest_backhaul[uav_idx])
                 best_capacity = max(best_capacity, end_to_end_capacity)
@@ -2024,6 +2085,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             return False
         battery = getattr(self, "uav_battery_ratios", np.ones(self.n_uavs, dtype=float))[uav_idx]
         return bool(battery <= self.service_cutoff_threshold)
+
+    def _communication_unavailable_mask(self):
+        failed = np.asarray(self.uav_failed, dtype=bool)
+        if not self.battery_enabled:
+            return failed.copy()
+        return failed | (
+            np.asarray(self.uav_battery_ratios) <= self.service_cutoff_threshold
+        )
 
     def _apply_backhaul_action_guard(self, uav_idx, velocity):
         # An explicit dock/return request is a deliberate topology transition.
