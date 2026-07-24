@@ -65,6 +65,21 @@ original term by term regardless of whether the tests pass. Silent divergence
 between a copy and its source has been the most dangerous pattern in this
 codebase.
 
+## When the evidence is insufficient
+
+If you cannot reach a verdict because something you need does not exist, do not
+guess and do not approve by default. Return:
+
+```text
+BLOCKED
+missing=<the smallest artifact that would unblock you>
+why_needed=<which claim you cannot check without it>
+```
+
+Ask for the smallest thing that resolves it, not a full re-run. This is a
+mechanical signal your caller keys off, distinct from `REJECT` — `REJECT` means
+you found a defect, `BLOCKED` means you could not look.
+
 ## Report
 
 - **Verdict** — `APPROVE`, `MODIFY` or `REJECT`, on its own line.

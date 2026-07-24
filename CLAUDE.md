@@ -39,7 +39,8 @@ with an exact assignment.
 | `hmasd-implementer` | sonnet / high | one bounded frozen implementation task |
 | `hmasd-reviewer` | opus / high | adversarial read-only audit of one diff |
 | `hmasd-scout` | haiku / low | mechanical lookup — inventories, symbol sweeps, locations |
-| `hmasd-verifier` | haiku / low | executes assigned checks, returns bounded runtime evidence |
+| `hmasd-code-scout` | sonnet / medium | design map — coupling, writer partitions, real vs accidental dependency |
+| `hmasd-verifier` | haiku / high | executes assigned checks, returns bounded runtime evidence |
 | `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
 | `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
 | `hmasd-review-exchanger` | haiku / low | byte-exact external review transport and archival |
@@ -47,9 +48,17 @@ with an exact assignment.
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
 
 Tier follows the work, not importance: judgment about protected semantics goes
-to opus, bounded construction to sonnet, and mechanical lookup, transcription
-and execution to haiku. A haiku child that meets a real judgment call hands back
-rather than deciding.
+to opus, bounded construction and design mapping to sonnet, and mechanical
+lookup, transcription and execution to haiku. A haiku child that meets a real
+judgment call hands back rather than deciding.
+
+Effort is set separately from model. `hmasd-verifier` runs haiku at **high**
+because deciding that an observed contract does not match the declared one is a
+real judgment — getting it wrong turns an invalid run into apparent evidence.
+
+Claude Code has no per-agent approval policy. A definition can withhold a tool,
+and a `PreToolUse` hook can block a command, but "never ask for approval" is a
+session-level setting the roster cannot express.
 
 No child commits, spawns a successor, or accepts its own work. An unknown
 `agent_type` is a blocker — never substitute a default or ad hoc worker.

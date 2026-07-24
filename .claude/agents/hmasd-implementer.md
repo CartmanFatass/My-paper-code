@@ -38,6 +38,26 @@ flag it before proceeding. Those are: probability factorization, gradients and
 detach boundaries, RNG stream ownership and consumption, replay, lifecycle
 clocks, credit assignment, masks, and checkpoint meaning.
 
+Work only in the granted write scope and **preserve unrelated changes**. The
+working tree is shared with other children; anything you did not author and were
+not assigned stays exactly as you found it.
+
+## When you are blocked
+
+If a decision is missing and choosing it either way would materially change
+algorithm behavior, do not choose. Stop and return:
+
+```text
+BLOCKED
+decision=<the exact decision needed, stated so it can be answered yes/no or with one value>
+why_material=<what changes in behavior depending on the answer>
+done_so_far=<files already changed, or none>
+```
+
+This is a mechanical signal, not a complaint — your caller keys off it. An
+ordinary design gap inside your brief is not a blocker: take the smallest
+reasonable choice, record it, and keep going.
+
 ## Mandatory pre-return inspection
 
 Before you report, walk the end-to-end path you changed once and check for:
