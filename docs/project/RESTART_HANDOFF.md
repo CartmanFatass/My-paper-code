@@ -3,131 +3,71 @@
 Date: 2026-07-24
 Branch: `untied-k`
 Successor orchestrator: Fable, fresh conversation
-Reason: seam handoff after the Codex to Claude Code migration
+Reason: user pause immediately before the first `hmasd-implementer` spawn
 
-Read `AGENTS.md`, then this file, then `docs/project/CURRENT_WORK.md`. Nothing
-else is needed to start.
+Read `AGENTS.md`, then this file, then `docs/project/CURRENT_WORK.md`.
 
 ## Terminal state
 
-No process is running. No formal or nonformal compute was launched. The working
-tree is clean and everything is pushed to `origin/untied-k`. `aggressive` was
-not touched and stays at `4af01cd`.
+No process is running. No formal or nonformal compute was launched. Everything
+is committed and pushed to `origin/untied-k`; `aggressive` stays untouched at
+`4af01cd`.
 
-## What this branch is for
+## What this session completed
 
-`untied-k` explores making the skill period of an **individual agent** variable,
-where today every agent shares one global period. Skill cardinality (`n_Z = 6`,
-`n_z = 6`) and variable agent count are not the subject — the round question
-states those exclusions explicitly.
+1. **Bootstrap round reconciled** — `8a7a2a6`. Pro's verdict is adopted in
+   `docs/external-review/rounds/20260724_untied_k_direction_bootstrap/30_PM_CODE_SIDE_RECONCILIATION.md`:
+   per-agent variable period is a conditional P1 candidate only; the root
+   cause is action authority and credit factorization; periodic sampled `Z`
+   is replaced by deterministic read-time context `C` in the primary
+   candidate; G20 continues, broadened.
+2. **Timing–credit identifiability derivation** — `36ed97f`, at
+   `docs/research/cdc/EVIDENCE_NOTES/20260724_TIMING_CREDIT_IDENTIFIABILITY_G20_DERIVATION.md`.
+   Branch `NO_SCHEDULE_INFORMATION_CHANGE`: schedules only rescale one shared
+   scalar contrast, so `k -> k_i` alone is formally excluded per Pro's
+   pre-registered mapping. P2 is eligible for an implementation proposal;
+   P1 stays gated on heterogeneous tempo.
+3. **P2 design frozen** —
+   `docs/research/designs/ACTIVE_SET_CENTERED_COUNTERFACTUAL_RESIDUAL_G20.md`:
+   exactly centered observation-only pre-tanh residual over the active set,
+   plus member-resolved leave-one-out counterfactual advantage
+   `[time,batch,member]` from a slow action-critic. Screen mirrors the G19
+   protocol and thresholds with fresh seeds (2619000–2739000 block). No
+   projection, Adam everywhere, base policy file untouched.
 
-## Your first action
+## Exact next action
 
-```text
-docs/external-review/rounds/20260724_untied_k_direction_bootstrap/21_PRO_OPEN_RAW.md
-```
-
-711 lines, archived verbatim with byte equality confirmed, **not reconciled**.
-Read it and reconcile it code-side into
-`30_PM_CODE_SIDE_RECONCILIATION.md`. Nothing downstream has started: no design
-frozen, no plan written, no implementation.
-
-The round asked whether per-agent variable period resolves the fast/slow credit
-impasse that G17, G18 and G19 all ran into, or is a distraction from a different
-root cause. The question marks its own provenance — the impasse framing is
-Project Manager inference, not an established result, and the round invited the
-reviewer to discard it.
-
-Remember the authority split when you read it: **the scientific decision is
-Pro's, not yours.** You turn it into code.
+Spawn `hmasd-implementer` (synchronous, watch the first lap) with the bounded
+assignment: build exactly
+`ha_ctse_process/centered_residual_g20.py`,
+`scripts/screen_centered_counterfactual_residual_g20.py`,
+`tests/ha_ctse_process_centered_residual_g20_test.py`
+against the frozen design, template `anchored_residual_g19.py`, focused tests
+plus the G19 suite as shared-surface guard, no Git, no screen execution. The
+spawn was fully prepared this session but interrupted by the user pause — it
+has NOT run. After it: `hmasd-verifier` fresh check, one `hmasd-reviewer`
+advisory (new protected credit semantics), PM acceptance and commit, then
+`hmasd-experiment-operator` executes the bounded screen. Stages 2, 4 and 5 of
+the cycle are still unexercised.
 
 ## Execution mode
 
 ```text
 execution_mode=authorized
 autonomous_research_grant=ACTIVE_TEN_ITERATION_TOY_FIRST_UAV_PROMOTION_CHAIN
+grant_extension_20260724=user_plus_12_iterations
+iterations_remaining=20
 grant_unit=completed_workflow_cycle
 intermediate_authorization_prompts=forbidden
-iterations_remaining=8
 ```
 
-Run unattended. Asking for an approval this grant already covers is a defect,
-not caution. You stop only at an exhausted grant, a user pause, an unrecoverable
-blocker, or a real expansion of protected authority.
-
-`formal_compute_authority` is `user_only`, and this grant is that authorization
-for eight completed cycles.
-
-## The three control points, which are different things
-
-- **Checkpoint** — where the loop waits for the user. In this mode there are
-  two, neither per-iteration: the grant reaching zero, and a change needing
-  authority the grant does not carry.
-- **Boundary crossing** — a scientific decision you cannot make. Do not guess
-  and do not stall. Open a round and converge with Pro until both sides state
-  the same thing, archiving every turn to `22_PRO_CONVERGENCE.md`, then resume
-  where you stopped. Convergence turns are not fences; the fence is one per
-  round and never resubmitted.
-- **Compaction seam** — between iterations only. Write this file, compact,
-  resume, continue into the next iteration. It is a context boundary, not a
-  control boundary: it asks nothing and waits for no one.
-
-## Setup a fresh clone needs
-
-```powershell
-git config core.hooksPath .githooks
-```
-
-Without it the drift guard is inert. Nothing else requires setup.
-
-## What is proven and what is not
-
-Exercised: `hmasd-scout`, and `hmasd-review-exchanger` through one complete
-unattended 13-minute round — fence submitted, generation watched to stable
-completion, raw archived with byte equality, intake written, no Git touched. The
-GitHub connector reached all 12 evidence paths at `stage_commit`, so
-pointer-only submission works end to end.
-
-Not yet exercised: `hmasd-implementer`, `hmasd-reviewer`, `hmasd-verifier`,
-`hmasd-code-scout`, `hmasd-patcher`, `hmasd-monitor`, `hmasd-exp-recorder`,
-`hmasd-experiment-operator`. Stages 2, 4 and 5 of the cycle have never run.
-Authorized mode is the user's decision made in full knowledge of this.
-
-Watch the first lap. A subagent that returns something structurally wrong is
-more likely on its first invocation than later.
-
-## The drift guard
-
-A pre-commit hook runs the three workflow contracts whenever a commit touches
-`AGENTS.md`, `CLAUDE.md`, the role charters, the subagent definitions, the hmasd
-Skills, `docs/project/`, the reviewer registry, or the contract tests.
-
-It has already caught two real errors, both mine. If it blocks you, repair the
-contract — do not weaken the assertion. A weakened check reads as covered
-forever after.
-
-## Known open items
-
-1. **`docs/workflows/research-iteration-cycle.md`** carries a build list. Items
-   1–4 are done; item 5, the grant-renewal checkpoint brief
-   (`docs/report/GRANT_<id>_BRIEF.md`), does not exist and will be needed when
-   `iterations_remaining` reaches zero.
-2. **The third-party skill pack under `.claude/skills/` is untracked.**
-   `.gitignore` negates only `hmasd-*`. Deliberate, but a fresh clone will not
-   have the rest.
-3. **A UAV G1 formal run on `aggressive` remains deferred** —
-   `logs/formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1`, source
-   `b125efd205e302666aea78b286d6857f8ecf9286`, token
-   `AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1`, zero batches
-   completed, no iteration consumed. The exact three-phase command block is in
-   the previous version of this file: `git log -p -- docs/project/RESTART_HANDOFF.md`.
-   It is an `aggressive`-branch decision needing fresh authorization; nothing on
-   `untied-k` depends on it.
+Reconciliation, derivation and design consumed zero iterations; the bounded
+screen consumes zero as well. Only a formal run consumes one.
 
 ## Continuity
 
-There is no persistent task. Continuity lives in the repository:
-`CURRENT_WORK.md` for the boundary, `ExpRecord.md` for results,
-`docs/research/cdc/` for the portfolio, this file for the seam, Git for the
-rest. Those must be accurate before a context ends, not after — that is the
-whole reason the compaction seam is ordered the way it is.
+`CURRENT_WORK.md` carries the full boundary keys (`untied_k_*`, `g20_*`).
+Setup for a fresh clone: `git config core.hooksPath .githooks`. Known open
+items 1–3 from the previous handoff (grant-renewal brief template, untracked
+third-party skill pack, deferred UAV G1 formal run on `aggressive`) are
+unchanged and still open.
