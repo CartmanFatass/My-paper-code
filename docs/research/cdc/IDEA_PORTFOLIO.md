@@ -10,8 +10,8 @@ compute authority.
 | C-OPEN-ROSTER-DIRECT | accepted base/comparator through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. It establishes no asynchronous skill lifetime. | Mandatory complete comparator for any successor selected by Pro; future expansion remains a separate scientific action. |
 | C-ALPSW | exact formulation rejected before implementation | S1 proves no open beta interval: an unrestricted unpenalized fast recurrence matches or improves predictive NLL with zero slow-state writes, so the registered objective cannot uniquely identify `z`. | No local rescue. Only a new Pro-selected scientific contract may add a fast-state bottleneck, complexity cost, decoder-filtration change or different causal objective. |
 | C-ALPSC | exact S2 contract rejected before implementation | The admissible never-write decoder fits `P(Y=z|z)=4/7` and crosses the cue writer at an interior `beta_star`, then wins on the upper part of the frozen interval despite complete side-channel exclusion. | No local rescue. External Pro must select any interval, decoder, objective or source correction. |
-| C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | The full external intervention-kernel vector identifies two regime classes; the candidate uniquely attains minimum sufficient write rate `2/7` and quotient cardinality `2`, with nuisance removed and lifetimes `{2,3}`. | Return the exact S3 result to Pro. Any learned mechanism, optimization, mediation, natural-value or transport claim needs a new selected contract retaining G8 and a mechanism-matched comparator. |
-| C-ALSCPS | live; selected for S4 horizon-2 exact derivation | One-step controlled equivalence may merge histories with different delayed controlled futures; a future-closed quotient must also admit one common online update. | Complete the proof-only S4 contract: one-step collapse, horizon-2 separation, update congruence, minimum-write uniqueness, all nulls and G8 equivalence. |
+| C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | The full external intervention-kernel vector identifies two regime classes; the candidate uniquely attains minimum sufficient write rate `2/7` and quotient cardinality `2`, with nuisance removed and lifetimes `{2,3}`. | Retain its exact one-step scope. S4 now supplies the delayed-future correction; any learned mechanism, optimization, mediation, natural-value or transport claim still needs Pro selection. |
+| C-ALSCPS | exact S4 horizon-2 derivation PASS; no implementation authorized | Immediate controlled kernels collapse, but every complete plan separates regimes by TV `1/2`; the unique minimum sufficient tuple is `(E_2,q,K_2)=(0,2/7,2)` and the quotient is update-congruent. | Return the exact S4 result to Pro. Any arbitrary-horizon, learned, policy-link, optimization, natural-value or transport claim needs a new selected contract. |
 | C-JRDM | parked | Jointly charging `h,z` is sensitive to coding units, state dimension and invertible mixing. | Supply a representation-invariant joint codelength or mutual-information contract. |
 | C-ALH | parked | A categorical per-step hazard can reduce to the existing opportunity mechanism with `k=1` and revive R43--R45. | Evidence that explicit task-directed termination is necessary on a new identified source. |
 | C-ATS | parked | Continuous adaptive timescale recurrence lacks a threshold-free lifetime and can be absorbed into or reparameterized as ordinary recurrence. | Supply a threshold-invariant survival or causal-persistence estimand plus explicit accounting for alternative memory channels. |
@@ -28,14 +28,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION
-valid_terminal=PASS_ALCPS_CONTROLLED_STATE_DERIVATION
-active_direction=C_ALSCPS
+completed_action=S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION
+valid_terminal=PASS_ALSCPS_FUTURE_CLOSED_DERIVATION
+active_direction=C_ALSCPS_RESULT_AWAITING_PRO
 formal_disposition=NOT_APPLICABLE_DERIVATION_ONLY
-next_action=S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION
-authorization_status=derivation_selected_no_code_or_compute
-conclusion_bearing_iterations_consumed_on_claude=3
-iterations_remaining_on_claude=7
+next_action=RETURN_S4_EXACT_RESULT_TO_REGISTERED_PRO
+authorization_status=no_code_or_compute_iteration_5_unselected
+conclusion_bearing_iterations_consumed_on_claude=4
+iterations_remaining_on_claude=6
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -106,3 +106,11 @@ criterion but makes the immediate branch observation regime-uninformative,
 places the distinction in a delayed second observation under all four external
 plans, and requires the sequential quotient to be recursively update-congruent.
 Iterations 5–10 remain unselected.
+
+S4 validly establishes exact horizon-2 future closure on the frozen source. The
+fair immediate projection has `TV=0,K_1=1`, while all four complete plans have
+regime TV `1/2`. Strict sequence sufficiency, minimum writes and quotient
+cardinality yield `(E_2,q,K_2)=(0,2/7,2)`; the common cue update is congruent and
+nuisance subdivisions merge. G8 remains equally capable in the constructive
+utility audit. Iteration 4 is consumed, six remain, and no implementation or
+iteration-5 action is authorized before Pro review.

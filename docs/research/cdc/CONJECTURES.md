@@ -157,20 +157,21 @@ the Project Manager-accepted CDC state.
 
 ## C-ALSCPS — Agent-local sequential controlled predictive state
 
-- Status: live and selected for
-  `S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION`; no code or compute is
-  selected.
-- Claim: a canonical lifecycle state and lifetime may be identified by the
-  coarsest minimum-transition, update-congruent quotient sufficient for delayed
-  controlled observation sequences.
+- Status: exact S4 horizon-2 derivation PASS; implementation and compute remain
+  unauthorized pending external Pro review.
+- Supported claim: on the frozen source, the coarsest minimum-transition
+  quotient sufficient for all four horizon-2 controlled sequence kernels is
+  update-congruent and has active-step lifetimes `{2,3}`.
+- Exact result: `one_step_TV=0,K_1=1`; every complete plan has
+  `horizon2_TV=1/2`; the candidate uniquely attains
+  `(E_2,q,K_2)=(0,2/7,2)` up to null events and relabeling.
 - Strongest simpler explanation: G8 recurrence stores the same delayed
-  statistic and may realize the same external policy; the explicit quotient
-  supplies no established optimization, mediation or transport benefit.
-- Intervention consequence: histories merged by the immediate controlled
-  projection may have different externally indexed horizon-2 futures.
-- Natural and held-out consequences: not established.
-- S4 boundary: prove exact one-step collapse, horizon-2 separation, recursive
-  update congruence and unique minimum-write lifetime on the frozen source.
+  statistic and attains the same external utility. No optimization, mediation,
+  natural-value or transport benefit is established.
+- Refuted proposition: equality of immediate controlled observations is
+  sufficient for equality of delayed controlled futures.
+- Natural, learned and held-out consequences: not established. Any successor
+  requires a new Pro-selected contract.
 
 
 ## C-JRDM — Jointly rate-coded dual memory

@@ -29,6 +29,9 @@
 | L-CONTROLLED-QUERY-SEPARATION | Externally enumerated intervention queries with complete support may condition a predictive decoder without carrying temporal memory; uniform action marginalization can erase a regime distinction present in the full controlled-kernel vector. | Exact C-ALCPS S3 query table and independence contract. | Natural policy actions are valid intervention queries or the controlled state improves behavior. |
 | L-ALCPS-MINIMUM-WRITE-QUOTIENT | On the exact S3 source, every controlled-sufficient online model changes decoder class on both post-join regime changes, so `q>=2/7`; equality writes only on those cues and has quotient cardinality two. | `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. | C-ALCPS is necessary, easier to learn or superior to recurrence. |
 | L-S3-VALID-PASS | The exact S3 derivation validly identifies a coarsest minimum-write one-step controlled state and active-step lifetime on its frozen source. | `S3_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_DERIVATION`. | Skill learning, sequential closure, optimization benefit or transport. |
+| L-S4-VALID-PASS | The exact S4 derivation validly identifies a coarsest minimum-write, update-congruent horizon-2 controlled state and active-step lifetime on its frozen source. | `S4_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_DERIVATION`. | Arbitrary-horizon closure, learned recovery, skill semantics or behavioral benefit. |
+| L-SEQUENTIAL-CLOSURE-REQUIRES-FUTURE-KERNELS | Equality of immediate controlled observations need not imply equality of delayed controlled futures. | Exact S4 source with fair `Y1` and regime-dependent `Y2`. | Horizon two is sufficient for every environment. |
+| L-UPDATE-CONGRUENCE | A predictive quotient is an admissible persistent lifecycle state only if one common online update maps current quotient class and legal current observation to the next class. | Sequential controlled predictive-state definitions. | Every update-congruent state is useful or uniquely learnable. |
 
 ## Counterexamples
 
@@ -182,10 +185,10 @@ A latent may encode an observed nuisance that changes no controlled kernel.
 Decoder-equivalent nuisance subdivisions do not define additional states,
 skills or lifetimes.
 
-## Registered S4 counterexample candidates
+## Accepted S4 counterexamples
 
-These are frozen S4 obligations, not retained counterexamples before a valid S4
-terminal.
+The valid S4 artifact proves the following counterexamples at the frozen
+horizon-2 sequential controlled-state scope.
 
 ### CE-ONE-STEP-CONTROLLED-MYOPIA
 
@@ -207,6 +210,3 @@ uses future information and cannot support an online lifetime claim.
 A partition may summarize current predictions yet fail to admit one common
 online update under the same legal observation, so it is not a persistent
 lifecycle state.
-
-Pending proposition: one-step controlled equivalence need not imply equality of
-delayed controlled futures. Promote it only after a valid S4 terminal.
