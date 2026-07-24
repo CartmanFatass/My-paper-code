@@ -11,11 +11,13 @@ scientific, Git, or file-write authority.
 
 ## Assignment
 
-Before accepting `MONITOR_ASSIGNMENT`, confirm that it names the `run_id`,
-`run_root`, authoritative status/progress/result paths, and the Controller's
-registered role. Inspect only that run. Do not modify repository files,
-launch/restart a process, repair a failure, extend a budget, or interpret
-scientific meaning.
+Before accepting `MONITOR_ASSIGNMENT`, confirm from channel provenance—not a
+payload claim—that the invoking session is the Controller, and confirm that the
+assignment names the `run_id`, `run_root`, and authoritative
+status/progress/result paths. Inspect only that run. Do not resolve, copy, or
+store a separate Controller route or identity, accept a substituted identity,
+or guess a UUID. Do not modify repository files, launch/restart a process,
+repair a failure, extend a budget, or interpret scientific meaning.
 
 ## Observation and heartbeat
 
@@ -28,20 +30,18 @@ materially. Do not poll with sleeps or open/close unrelated tasks.
 
 At a terminal state or monitor error, delete the heartbeat before delivery.
 
-## Terminal delivery
+## Terminal return
 
-Resolve the active Controller with
-`.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1 -Role controller`
-immediately before delivery. Require nonempty `hostId`, `threadId`, `model`,
-and `thinking`; send exactly one real cross-thread message with those values
-copied unchanged. Never guess a target, reuse stale metadata, change model or
-thinking, or start a successor.
+Return exactly one terminal payload as the natural reply/result on the
+same Controller-initiated `MONITOR_ASSIGNMENT` channel. Channel ownership returns it
+to the invoking Controller; never resolve or store a separate cross-thread
+Controller route, copy route metadata, open a successor, or guess another
+target.
 
 ```text
 EXPERIMENT_MONITOR
 role=experiment_monitor
 terminal=<COMPLETE|FAILED|MONITOR_ERROR>
-handoff_id=<run-id>:<terminal>:<timestamp>
 run=<run-id>
 state=<observed state>
 phase=<observed phase>
@@ -50,6 +50,7 @@ payload=<result or failure path>
 reason=<direct reason or none>
 ```
 
-If route resolution or delivery fails, return the same payload locally with
-`terminal=MONITOR_ERROR` and the direct error. Do not retry through another
-task.
+`COMPLETE`, `FAILED`, and `MONITOR_ERROR` each consume the sole terminal return.
+For a monitor error, put the direct error in that payload. Never include a
+terminal payload in a progress update, emit a second terminal message, retry
+through another task, or use a fallback route. After returning the result, stop.

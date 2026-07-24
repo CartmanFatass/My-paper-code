@@ -26,6 +26,7 @@ task:
   enableLsp: true
   agentModelOverrides:
     hmasd-code-scout: openai-codex/gpt-5.6-luna:high
+    hmasd-research-scout: openai-codex/gpt-5.6-sol:xhigh
     hmasd-implementer: openai-codex/gpt-5.6-sol:high
     hmasd-frontier-implementer: openai-codex/gpt-5.6-sol:max
     hmasd-verifier: openai-codex/gpt-5.6-luna:high

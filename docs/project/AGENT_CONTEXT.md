@@ -50,33 +50,24 @@ superseded path cleanly in the same change. Git history is the archive.
 
 ## Lightweight execution
 
-This project optimizes conclusion-bearing iteration, not process artifacts.
+This project optimizes scientific iteration speed, not process artifacts.
 
-- Every code implementation round starts in the Controller/main conversation
-  with a scaled Superpowers-style design pass: inspect current context, make
-  requirements and success criteria explicit, compare 2-3 viable approaches,
-  select the smallest sound design and write exact files, interfaces,
-  invariants, red/green commands and expected outputs into
-  `docs/project/IMPLEMENTATION_PLAN.md`. The Controller is the sole plan author;
-  no child plans or redesigns the round. Within an active autonomous grant the
-  recommended engineering approach is adopted automatically; user or Pro input
-  is required only for an authority or scientific-meaning change.
-- Build the shortest discriminator that separates the live hypotheses. Do not
-  scaffold a platform, preserve a superseded path, or generalize beyond the
-  active question.
-- Match proof to the claim: reproduce and close a bug, run the investigation, or
-  exercise the changed path. Add or retain a permanent test only when it
-  separates hypotheses, protects a key algorithm invariant, or covers a real
-  observed recurrence.
-- Parallelize only genuinely independent scopes. One writer owns a path at a
-  time; dependent steps remain serial.
-- Do not review individual files, child tasks, debug attempts or intermediate
-  failures. Run one collective review gate only after the complete planned code
-  package, all bounded repairs and Controller-focused checks are stable: exactly
-  one Reviewer and one Verifier in parallel. Re-review only if a resulting
-  repair materially changes protected semantics or the frozen plan contract.
-- On failure, identify the first causal boundary. Do not replace diagnosis with
-  retries, weakened checks, fallbacks or extra abstraction.
+- Use `docs/project/RESEARCH_WORKFLOW.md` without repeating it in assignments.
+- Select the smallest action that can change the scientific portfolio. Do not
+  scaffold a platform or prebuild later gates.
+- Git branch and commit are the only file identity. Do not compute file hashes,
+  write handoff receipts, build document validators or test workflow topology.
+- Do not create tests for workflow documents. For code or experiments, exercise
+  only the actual changed path or scientific measurement needed by the current
+  claim.
+- Parallelize only genuinely independent approaches or file scopes. Preserve
+  early scientific independence and redirect crowded approaches.
+- Review and repair use the single-gate rule in
+  `docs/project/RESEARCH_WORKFLOW.md`.
+- A promising but unscheduled route is recorded with its reactivation condition;
+  it is not forced through the current action and is not treated as rejected.
+- On failure, identify the first causal boundary. Do not retry unchanged work,
+  weaken evidence or add abstraction.
 
 ## Frontier bug repair
 
@@ -151,9 +142,3 @@ meaning.
 
 If your task appears to touch any of them and your brief did not say so, stop
 and flag it rather than proceeding.
-
-## Pointers
-
-- `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract and
-  its evidence requirements.
-- `docs/project/PROBLEM_CACHE.md` — parked problems and what each one blocks.

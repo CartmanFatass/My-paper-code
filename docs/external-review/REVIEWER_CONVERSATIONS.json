@@ -1,55 +1,15 @@
 {
-  "schema_version": 37,
+  "schema_version": 38,
   "updated": "2026-07-24",
-  "round_controller": {
-    "kind": "controller_intake_with_local_exchange_review",
-    "external_scientific_decision": "open_divergent",
-    "decision_intake": "active_controller_direct",
-    "git_boundary_owner": "active_controller"
-  },
-  "exchange_contract": {
-    "transport_exploration_enabled": false,
-    "status": "ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT",
-    "automation_skill_enabled": false,
-    "automation_skill_archive": ".omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md",
-    "agent_abstraction_authorized_by_user": "2026-07-24",
-    "operator_agent": "hmasd-exchange-review",
-    "operator_profile": ".omp/agents/hmasd-exchange-review.md",
-    "experience_recorder": "hmasd-review-scout",
-    "experience_path": ".omp/review_scout/EXPERIENCE.md",
-    "transport_server": "browsermcp-pro",
-    "transport_config": ".omp/mcp.json",
-    "server_package": "@browsermcp/mcp@0.1.3",
-    "evidence_transport": "github_connector",
-    "repository": "CartmanFatass/My-paper-code",
-    "review_branch": "Claude",
-    "dispatch_marker": "HMASD_BP_D1",
-    "dispatch_max_utf16_code_units": 352,
-    "dispatch_line_breaks_allowed": false,
-    "file_upload_allowed": false,
-    "full_question_browser_type_allowed": false,
-    "response_capture": "page_copy_response_button",
-    "keyboard_copy_allowed": false,
-    "controller_contact": "assignment_then_direct_controller_intake",
-    "connection_state": "REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT",
-    "authenticated_registered_tab_prerequisite": "ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP",
-    "routine_human_interaction_allowed": false,
-    "receipt_file": "19_BROWSER_PRO_SUBMISSION.json",
-    "receipt_schema": "hmasd.browser_pro_submission.v2",
-    "execution_order": "validate_identity_then_verify_pushed_boundary_then_preflight_then_clipboard_paste_dispatch_then_separate_enter_then_receipt_then_bounded_observe_then_two_stable_snapshots_then_click_copy_response_then_archive_no_clobber",
-    "fallback": "none"
-  },
+  "mode": "optional_controller_direct",
+  "evidence_identity": "git_branch_and_commit",
   "reviewers": {
     "open_divergent": {
       "role": "OPEN_DIVERGENT",
       "conversation_id": "6a61d27c-9278-83e8-ae96-c65c1b52d207",
       "url": "https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207",
       "expected_model_ui": "Pro",
-      "transport": "hmasd-exchange-review",
-      "connection_state": "REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT",
-      "receipt_file": "19_BROWSER_PRO_SUBMISSION.json",
-      "question_file": "20_PRO_OPEN_QUESTION.md",
-      "raw_file": "21_PRO_OPEN_RAW.md"
+      "transport": "controller_direct_browsermcp"
     }
   }
 }

@@ -32,20 +32,19 @@ A user-named one may be inspected only as reference.
 1. **Bound.** Use the brief. Only the Controller acting within direct user
    authority may define outcome, semantics, files, exclusions and completion.
    Add no brainstorm, worktree, extra ledger or approval when those are known.
-2. **Probe.** Observe the smallest failing test for new behavior or plausible
-   regression. For throwaway measurement/configuration, use a diagnostic.
+2. **Probe.** Observe the smallest reproducible failure or scientific
+   discriminator. Do not create a test suite for the workflow.
 3. **Implement.** No backward compatibility. Make the smallest active-line
-   discriminator; remove replaced interfaces, adapters, migrations, fallbacks,
-   state, and tests. Git history is the archive.
-4. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
-   Add one bounded end-to-end exercise for material integration. Use a broad
-   suite only for a changed shared surface.
+   discriminator; remove replaced interfaces, adapters, migrations, fallbacks
+   and obsolete state. Git history is the archive.
+4. **Verify.** Rerun the exact reproducer or actual changed path fresh. Add one
+   bounded end-to-end exercise only for material integration.
 5. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files.
 
-On failure, reproduce once, locate the first violated invariant, add a regression
-only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
+On failure, reproduce once, locate the first violated invariant, repair, and
+rerun. Never weaken checks or retry blindly.
 
 ## Concurrency and review
 
@@ -54,15 +53,15 @@ only for plausible recurrence, repair, and rerun. Never weaken checks or retry b
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
-- After the complete planned package and bounded repairs are stable, run exactly one parallel `hmasd-reviewer` and `hmasd-verifier` collective gate. Additional review is allowed only when a resulting repair materially changes protected semantics or the frozen plan.
+- Review and repair follow `docs/project/RESEARCH_WORKFLOW.md`.
 
 ## Quick reference
 
 | Change | Smallest sufficient evidence |
 |---|---|
 | helper or schema | one focused check |
-| bug or invariant repair | reproduction, regression if durable, focused rerun |
-| runner/analyzer integration | focused suite plus one bounded exercise |
+| bug or invariant repair | exact reproducer and focused rerun |
+| runner/analyzer integration | one bounded actual exercise |
 | protected cross-file path | frozen contract, focused evidence, one collective review |
 
 ## Stop only for a real boundary

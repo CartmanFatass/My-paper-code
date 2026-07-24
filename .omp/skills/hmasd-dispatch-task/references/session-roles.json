@@ -1,60 +1,29 @@
 {
-  "schema_version": 26,
+  "schema_version": 28,
   "updated": "2026-07-24",
   "asset_root": {
     "root": ".omp",
     "active_skills": ".omp/skills",
     "active_agents": ".omp/agents",
-    "mcp": ".omp/mcp.json",
-    "legacy": ".omp/legacy",
-    "legacy_active": false
+    "mcp": ".omp/mcp.json"
   },
   "roles": {
-    "controller": {
-      "kind": "active_unified_omp_controller",
-      "thread_id": "019f8995-7550-7c82-8f31-ad08a3d381d4",
-      "contract": "AGENTS.md",
-      "responsibility": "scientific intake, external-transport assignment and evidence acceptance, executable realization, local-agent coordination, integration, Git, project control, and resource authorization"
-    },
     "experiment_monitor": {
       "kind": "persistent_codex_experiment_monitor",
       "thread_id": "019f8a2f-08a2-73e1-b539-2dc5a6db0fc1",
       "registration_status": "ARCHIVED_REBUILD_REQUIRED",
       "role_skill": ".omp/skills/hmasd-experiment-monitor/SKILL.md",
-      "last_route_check": "ARCHIVED_TASK",
-      "responsibility": "rebuild before any formal run; then bounded read-only run observation, ETA-aware heartbeat ownership, and terminal delivery"
+      "responsibility": "bounded read-only observation of one already-authorized run"
     }
   },
-  "external_review_transport": {
-    "kind": "local_omp_exchange_review_transport",
-    "transport_exploration_enabled": false,
-    "status": "ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT",
-    "automation_skill_enabled": false,
-    "automation_skill_archive": ".omp/legacy/review-round/BROWSER_PRO_EXCHANGE_DISABLED.md",
-    "agent_abstraction_authorized_by_user": "2026-07-24",
-    "operator_agent": "hmasd-exchange-review",
-    "operator_profile": ".omp/agents/hmasd-exchange-review.md",
-    "experience_recorder": "hmasd-review-scout",
-    "experience_path": ".omp/review_scout/EXPERIENCE.md",
+  "external_review": {
+    "status": "OPTIONAL_CONTROLLER_DIRECT",
     "server": "browsermcp-pro",
     "config": ".omp/mcp.json",
-    "package": "@browsermcp/mcp@0.1.3",
-    "connection_state": "REGISTERED_TAB_PREFLIGHT_REQUIRED_EVERY_ASSIGNMENT",
-    "authenticated_registered_tab_prerequisite": "ONE_TIME_ENVIRONMENTAL_NOT_ROUTINE_STEP",
-    "routine_human_interaction_allowed": false,
-    "evidence_transport": "github_connector",
-    "repository": "CartmanFatass/My-paper-code",
-    "review_branch": "Claude",
-    "dispatch_marker": "HMASD_BP_D1",
-    "dispatch_max_utf16_code_units": 352,
-    "dispatch_line_breaks_allowed": false,
-    "file_upload_allowed": false,
-    "full_question_browser_type_allowed": false,
-    "response_capture": "page_copy_response_button",
-    "keyboard_copy_allowed": false,
-    "receipt_schema": "hmasd.browser_pro_submission.v2",
-    "controller_only": false,
-    "controller_intake_only": true,
+    "evidence_identity": "git_branch_and_commit",
+    "operator": "controller",
+    "transport_agent": null,
+    "validation_workflow": null,
     "fallback": "none"
   },
   "local_agents": {
@@ -63,37 +32,19 @@
     "max_depth": 1,
     "types": [
       "hmasd-code-scout",
-      "hmasd-review-scout",
-      "hmasd-exchange-review",
+      "hmasd-research-scout",
       "hmasd-implementer",
       "hmasd-frontier-implementer",
-      "hmasd-verifier",
       "hmasd-reviewer",
+      "hmasd-verifier",
       "hmasd-exp-manager"
     ]
   },
-  "workflow_sequence": [
-    "external_pro_scientific_review",
-    "controller_intake_and_frozen_plan",
-    "local_omp_implementation_and_collective_review",
-    "authorized_run_with_experiment_monitor",
-    "controller_result_intake",
-    "external_pro_result_review"
-  ],
-  "policy": {
-    "one_session_one_persistent_role": true,
-    "registered_persistent_roles_only": true,
-    "forbid_title_or_history_based_role_inference": true,
-    "role_keyed_resolution_only": true,
-    "live_route_source": ".omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1",
-    "stored_fields": [
-      "role",
-      "thread_id",
-      "role_skill_or_contract",
-      "registration_status"
-    ],
-    "forbidden_fields": ["hostId", "model", "thinking"],
-    "update_owner": "active_controller",
-    "update_condition": "atomic update of Controller control plane, dispatcher, registry, BrowserMCP transport, local OMP profiles, and contract tests"
+  "workflow": {
+    "research_method": "docs/project/RESEARCH_WORKFLOW.md",
+    "active_control": "docs/project/CURRENT_WORK.md",
+    "evidence_identity": "git_branch_and_commit",
+    "backward_compatibility": false,
+    "autonomous_research_status": "PAUSED_BY_USER"
   }
 }

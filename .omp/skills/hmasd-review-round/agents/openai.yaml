@@ -1,6 +1,6 @@
 interface:
-  display_name: "HMASD Review Round"
-  short_description: "Obtain an external-Pro CDC decision"
-  default_prompt: "Use $hmasd-review-round and $hmasd-browser-pro-exchange as Controller to obtain one external GPT-5.6 Pro CDC decision through BrowserMCP and GitHub Connector evidence, perform direct intake, and prepare any separately authorized implementation action."
+  display_name: "HMASD Open Scientific Review"
+  short_description: "Optional Pro review for a genuinely open scientific boundary"
+  default_prompt: "Use $hmasd-review-round only when the active boundary warrants optional Open Pro review. The Controller operates BrowserMCP directly and uses the pushed Git commit as evidence identity."
 policy:
   allow_implicit_invocation: false

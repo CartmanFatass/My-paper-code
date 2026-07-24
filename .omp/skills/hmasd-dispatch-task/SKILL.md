@@ -1,143 +1,96 @@
 ---
 name: hmasd-dispatch-task
-description: Route HMASD work to the registered experiment monitor. Local OMP agents are dispatched directly; Luna-high hmasd-exchange-review owns one bounded mechanical BrowserMCP exchange.
+description: Route HMASD local research/code agents dynamically and resolve the registered experiment monitor when an authorized run exists.
 ---
 
 # HMASD Task Dispatch
 
-Read `docs/project/CURRENT_WORK.md` and `references/session-roles.json` before
-sending persistent work. Use only ACTIVE registered roles; never infer a role
-from a title, old callback, history, or manually copied task ID.
+## Active topology
 
 ```text
-controller -> local OMP task agents
-controller -> hmasd-exchange-review -> BrowserMCP Pro exchange
-controller <-> experiment_monitor
+Controller -> local OMP research/code agents
+Controller -> BrowserMCP Pro directly when optional open review is justified
+Controller -> registered experiment_monitor for one authorized run
+experiment_monitor -> invoking Controller on the same assignment channel
 ```
 
-The preserved end-to-end loop is external Pro scientific review -> Controller
-intake and frozen plan -> local OMP implementation plus the collective
-Reviewer/Verifier gate -> authorized run observed by `experiment_monitor` ->
-Controller result intake -> external Pro result review. The Controller is the
-only transition owner between stages.
+The Controller owns research synthesis, next-action selection, executable
+planning, integration, Git and resource authority. External Pro is an optional
+open scientific reviewer, not a mandatory approval hop. Browser transport is
+never delegated.
 
-The Controller owns scientific-to-code translation, executable planning, local
-agent decomposition, integration, verification, routing, continuation, Git,
-formal-compute authority, and direct evidence intake. The Luna-high
-`hmasd-exchange-review` agent owns only frozen BrowserMCP mechanics. External
-scientific authority remains with GPT-5.6 Pro. Failed transport must not be
-substituted locally, and no automation Skill is active.
-
-## Local OMP task agents
-
-Local code, record and external-exchange work does not use persistent route
-resolution. The Controller dispatches only these eight project profiles:
+Active local profiles:
 
 ```text
-hmasd-code-scout       openai-codex/gpt-5.6-luna:high
-hmasd-review-scout     openai-codex/gpt-5.6-luna:high
-hmasd-exchange-review  openai-codex/gpt-5.6-luna:high
-hmasd-implementer      openai-codex/gpt-5.6-sol:high
-hmasd-frontier-implementer  openai-codex/gpt-5.6-sol:max
-hmasd-verifier         openai-codex/gpt-5.6-luna:high
-hmasd-reviewer         openai-codex/gpt-5.6-sol:xhigh
-hmasd-exp-manager      openai-codex/gpt-5.3-codex-spark:high
+hmasd-code-scout
+hmasd-research-scout
+hmasd-implementer
+hmasd-frontier-implementer
+hmasd-reviewer
+hmasd-verifier
+hmasd-exp-manager
 ```
 
-Before implementation, record the current branch, `HEAD`, and inherited
-working-tree changes in the assignment. Local agents operate on that exact
-visible source, preserve unrelated work, and never perform Git operations.
+Children do not spawn successors and never perform Git operations.
 
-Every assignment contains outcome, scientific authority, exact inputs and
-scope, protected semantics, exclusions, checks, and return semantics. One writer
-owns a file scope. Children do not reconstruct Controller history, invoke
-unrelated Skills, mutate Git, or spawn successors. An unknown project agent is a
-workflow blocker; never fall back to a bundled/default agent.
+## Research waves
 
-The Controller/main conversation alone performs implementation design and
-writes the frozen plan. It inspects context, states requirements and success
-criteria, compares 2-3 approaches, selects the smallest sound option, and
-records exact files, interfaces, invariants, red/green commands, and expected
-outputs in `docs/project/IMPLEMENTATION_PLAN.md`. Local agents execute that plan
-and may report a blocker; they never author, broaden, or redesign it.
+When a scientific question has several independent approaches, dispatch a
+single wave spanning genuinely different mechanism families. Do not allocate a
+fixed number of agents to one favored route and do not tell most early agents
+which route is favored.
 
-Do not dispatch review after individual child tasks, files, Frontier attempts,
-or intermediate failures. Once the complete planned package and bounded repairs
-are integrated and Controller-focused checks are green, dispatch exactly one
-`hmasd-reviewer` and one `hmasd-verifier` in parallel with assignment marker
-`FINAL_IMPLEMENTATION_ROUND_REVIEW`. Re-review only when a resulting repair
-materially changes protected semantics or the frozen plan contract.
+Each assignment names:
 
-Use `hmasd-frontier-implementer` only for one bounded reproduced bug after an
-ordinary implementation or verification path exposes a concrete failure. It
-follows systematic debugging: establish a fast red-capable loop, minimise, rank
-falsifiable hypotheses, instrument one prediction at a time, and make at most
-five repair attempts. One attempt is one hypothesis/probe/candidate-change/
-focused-verdict cycle. Success requires the minimal loop and original reproducer
-to become green. After five unsuccessful attempts it returns `BUG_UNRESOLVED`
-with the attempt ledger, exact failure evidence, and ranked next actions. It
-never substitutes a slow retry for diagnosis or changes scientific evidence
-meaning.
+- the exact conjecture or implication under attack;
+- one approach family;
+- frozen evidence semantics and prohibited information;
+- the concrete required output: lemma, equation, construction,
+  counterexample, minimal implementation or measurement;
+- the exact condition for `SUPPORTED`, `REFUTED`, `BLOCKED` or
+  `NON_IDENTIFYING`.
 
-Every Frontier checkpoint and final report starts with four decision fields:
-problem source; problem type exactly `CODE_ENGINEERING` or
-`SCIENTIFIC_DECISION`; approximate scale across files, interfaces, semantics,
-and expensive execution; and one recommended solution marked for automatic
-adoption. Apply a recommendation automatically only inside the frozen assignment
-and active grant. Anything that changes scientific meaning stops at the
-external-Pro authority boundary.
+Route open-exploration derivation, literature and counterexample work to
+`hmasd-research-scout` only when the Controller assigns exactly one approach
+family and one bounded question. Require a concrete conjecture, lemma, equation,
+construction or counterexample, or an explicit `NON_IDENTIFYING` finding. The
+scout remains read-only: it does not implement, compute, select or accept
+science, schedule successors, mutate Git or spawn agents. Assignment diversity,
+not route-specific profiles or fixed agent counts, supplies the wave's
+independence.
 
-## Resolve before every persistent send
+After the wave, the Controller groups results by scientific idea, attacks the
+strongest claims, redirects capacity toward underexplored families and launches
+another wave only when a new mechanism or unresolved family warrants it.
+Status-only reports are rejected.
 
-Run `scripts/resolve_task_route.ps1 -Role <role>` immediately before a persistent
-send. Require nonempty `hostId`, `threadId`, `model`, and `thinking`, then copy
-all four resolved values unchanged into exactly one send. Resolve again
-afterward; if identity, model, or thinking changed, report route corruption and
-do not resend. Static registry data never stores route metadata.
+Use `hmasd-code-scout` for bounded read-only interface mapping,
+`hmasd-implementer` for one frozen implementation slice and
+`hmasd-exp-manager` for factual experiment records. Review and repair follow
+`docs/project/RESEARCH_WORKFLOW.md`.
 
-On this Windows workspace, the resolver may use the project Conda environment's
-bundled `sqlite3.exe` when no `sqlite3` command is on `PATH`. That fallback reads
-only live route metadata and never adds static route fields to the registry.
+## Experiment monitor
 
-## Experiment Monitor
+Use the one registered route only for an already-authorized run. The Controller
+resolves `experiment_monitor` through
+`.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1` and
+`references/session-roles.json`. An archived monitor must be rebuilt under the
+current user authority before assignment; `ARCHIVED_REBUILD_REQUIRED` permits
+neither rebuild nor assignment by this Skill.
 
-Use `experiment_monitor` only after a run is already authorized or launched.
-The currently registered task is `ARCHIVED_REBUILD_REQUIRED`. Before any formal
-run, rebuild exactly one Monitor, require `gpt-5.3-codex-spark` at `medium`, and
-atomically update the registry and Controller-owned control plane. Never
-substitute another model, role, or local task agent. Only then send
-`MONITOR_ASSIGNMENT` with run ID, root, authoritative status/progress/result
-paths, expected terminal condition, and ETA.
+The Controller initiates one complete `MONITOR_ASSIGNMENT` on that resolved
+monitor route. Progress and terminal return stay on that assignment. The
+Monitor emits exactly one terminal payload as the natural reply/result on the
+same Controller-initiated `MONITOR_ASSIGNMENT` channel. This same-assignment
+result return targets the invoking Controller through channel ownership; the
+Monitor never resolves or stores a separate Controller route. There is one
+monitor route and no fallback.
 
-The monitor uses `hmasd-experiment-monitor`, owns ETA-based heartbeats, and
-returns one terminal `EXPERIMENT_MONITOR` payload to the resolved Controller. It
-never launches, restarts, repairs, extends, edits, or interprets the run.
+The Monitor may report progress and ETA before its one terminal result. It does
+not launch, restart, repair, extend or scientifically interpret a run.
 
-## External review transport
+## Git and evidence
 
-The BrowserMCP automation Skill `hmasd-browser-pro-exchange` remains disabled.
-The user-approved Luna-high `hmasd-exchange-review` project agent executes one
-Controller-frozen mechanical exchange assignment without routine human steps.
-It verifies identity and the pushed boundary, submits only the deterministic
-one-line dispatch, publishes the no-clobber receipt, observes in bounded waits,
-captures two stable snapshots, clicks the latest page-provided `Copy response`
-button and atomically archives the exact copied marked response. It never uses
-`browser_type`, keyboard-copy shortcuts, another conversation, a local reviewer,
-or an alternate scientific authority.
-
-`hmasd-review-scout` retains factual transport experience but does not operate
-the browser. The Controller alone writes questions, reconciles facts, performs
-scientific intake, updates CDC records and starts successors. A receipt forbids
-resubmission; a raw response forbids all browser work.
-
-## Authority boundary
-
-External GPT-5.6 Pro owns scientific direction and evidence meaning. The
-Controller owns executable realization inside that direction and every
-resource-consuming action. Local agents execute bounded work; only
-`hmasd-exchange-review` may perform BrowserMCP submission, observation,
-page-copy capture and archival. It returns evidence to the Controller, which
-alone performs intake and successor routing. The persistent experiment Monitor
-only observes an authorized run. A topology change updates the Controller
-control plane, this Skill, the role registry, local profiles, external transport
-registry and focused contract tests in one Git boundary.
+Git branch and commit identify source and evidence. Do not compute per-file
+hashes or create handoff receipts, manifest validators or topology contract
+tests. Exact paths and the resulting Controller commit are sufficient.

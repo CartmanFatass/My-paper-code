@@ -1,8 +1,8 @@
 # HMASD Conjectures
 
-These are scientific possibilities, not implementation authority. Active role
-authority is defined by `AGENTS.md` and `.agents/roles/`; this ledger records
-the Project Manager-accepted CDC state.
+These are scientific possibilities, not implementation authority. The sole
+Controller owns current control and accepts this CDC state. External Pro review
+is optional and may inform, but does not own, a Controller decision.
 
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N
 
@@ -105,7 +105,7 @@ the Project Manager-accepted CDC state.
   optimization, sample efficiency, causal mediation or held-out transport.
 - Disposition: closed at the exact S1 formulation with no local rescue.
   Broader predictive state and sparse segmentation remain unresolved; only a
-  new external-Pro scientific contract may change the information partition or
+  new Controller-selected scientific contract may change the information partition or
   complexity accounting.
 
 ## C-ALPSC — Agent-local predictive slow channel
@@ -131,12 +131,12 @@ the Project Manager-accepted CDC state.
   precision and write rate.
 - Scope ceiling: this result does not reject exclusive predictive channels,
   sparse segmentation or variable lifetime generally. Any beta-interval,
-  decoder-family, objective or source correction requires external Pro.
+  decoder-family, objective or source correction requires Controller selection.
 
 ## C-ALCPS — Agent-local controlled predictive state lifetime
 
 - Status: exact S3 derivation PASS; implementation and compute remain
-  unauthorized pending a new external Pro decision.
+  unauthorized pending a new Controller decision.
 - Supported claim: on the frozen finite source, the coarsest minimum-transition
   state sufficient for the full vector of primitive-action-interventional
   observation laws has a canonical active-step lifetime `{2,3}`.
@@ -150,7 +150,7 @@ the Project Manager-accepted CDC state.
 - Intervention consequence: the full external query-kernel vector distinguishes
   regimes while the uniformly marginalized action law does not.
 - Natural and held-out consequences: not established. Any implementation or
-  behavioral action requires another Pro selection and must retain G8 plus a
+  behavioral action requires another Controller selection and must retain G8 plus a
   mechanism-matched comparator.
 - Main unresolved counterexample: one-step controlled equivalence may merge
   histories whose delayed controlled futures differ.
@@ -179,7 +179,8 @@ the Project Manager-accepted CDC state.
 ## C-ALBPF — Agent-local behavioral / predictive-phase factorization
 
 - Status: exact S5 phase/lifetime-confound derivation PASS; implementation and
-  compute remain unauthorized pending external Pro review.
+  compute remain unauthorized. The unsubmitted S5 review is obsolete, and no
+  successor is selected while research is user-paused.
 - Supported claim: current action-relevant behavior and generic transition
   phase require distinct scientific roles on the frozen source because an
   information-only phase update occurs inside a constant behavioral segment.
@@ -194,7 +195,7 @@ the Project Manager-accepted CDC state.
   explicit factorization.
 - Natural consequence: a legal no-cue may update phase while behavior persists.
 - Held-out, learned, architectural, policy, value and transport consequences:
-  not established; any successor requires a new Pro-selected contract.
+  not established; any successor requires a new Controller-selected contract.
 
 
 ## C-JRDM — Jointly rate-coded dual memory

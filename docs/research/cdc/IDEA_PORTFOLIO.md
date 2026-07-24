@@ -1,18 +1,21 @@
 # HMASD Idea Portfolio
 
-The portfolio preserves legal scientific explanations. Active role authority is
-defined by `AGENTS.md` and `.agents/roles/`; Project Manager schedules the next
-bounded action inside user authority. Status never grants implementation or
+The portfolio preserves legal scientific explanations. The sole Controller owns
+active control and schedules the next bounded action inside user authority.
+External Pro review is optional and may inform a Controller decision, but it is
+not required and does not own selection. Status never grants implementation or
 compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-OPEN-ROSTER-DIRECT | accepted base/comparator through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. It establishes no asynchronous skill lifetime. | Mandatory complete comparator for any successor selected by Pro; future expansion remains a separate scientific action. |
-| C-ALPSW | exact formulation rejected before implementation | S1 proves no open beta interval: an unrestricted unpenalized fast recurrence matches or improves predictive NLL with zero slow-state writes, so the registered objective cannot uniquely identify `z`. | No local rescue. Only a new Pro-selected scientific contract may add a fast-state bottleneck, complexity cost, decoder-filtration change or different causal objective. |
-| C-ALPSC | exact S2 contract rejected before implementation | The admissible never-write decoder fits `P(Y=z|z)=4/7` and crosses the cue writer at an interior `beta_star`, then wins on the upper part of the frozen interval despite complete side-channel exclusion. | No local rescue. External Pro must select any interval, decoder, objective or source correction. |
-| C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | The full external intervention-kernel vector identifies two regime classes; the candidate uniquely attains minimum sufficient write rate `2/7` and quotient cardinality `2`, with nuisance removed and lifetimes `{2,3}`. | Retain its exact one-step scope. S4 now supplies the delayed-future correction; any learned mechanism, optimization, mediation, natural-value or transport claim still needs Pro selection. |
-| C-ALSCPS | accepted exact S4 horizon-2 derivation PASS; no implementation authorized | Immediate controlled kernels collapse, but every complete plan separates regimes by TV `1/2`; the unique minimum sufficient tuple is `(E_2,q,K_2)=(0,2/7,2)` and the quotient is update-congruent. | Retain the exact horizon-2 scope. Generic transition prediction may add phase-only updates inside constant behavior; arbitrary-horizon, learned, policy-link, optimization, value and transport claims remain unselected. |
-| C-ALBPF | exact S5 phase/lifetime-confound derivation PASS; no implementation authorized | A legal script-32 age-2 no-cue update gives `TV_behavior=0`, `TV_phase=1/2` and forces a phase-only monolithic transition inside a constant length-three behavior segment; an online projection updates phase without resetting behavior. | Return the exact S5 result to Pro. Any factorized learner, architecture, optimization, policy, value or transport claim needs a new selected contract. |
+| C-OPEN-ROSTER-DIRECT | accepted base/comparator through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. It establishes no asynchronous skill lifetime. | Mandatory complete comparator for any successor selected by the Controller; future expansion remains a separate scientific action. |
+| C-ALPSW | exact formulation rejected before implementation | Rejected: S1 does not identify the predictive slow-writer state over unrestricted recurrence. Evidence: [S1 derivation](EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md). | No local rescue. Only a new Controller-selected scientific contract may add a fast-state bottleneck, complexity cost, decoder-filtration change or different causal objective. |
+| C-ALPSC | exact S2 contract rejected before implementation | Rejected: S2's exclusive-channel scalarization does not identify the cue writer over the admissible never-write decoder. Evidence: [S2 derivation](EVIDENCE_NOTES/20260724_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_S2.md). | No local rescue. The Controller must select any interval, decoder, objective or source correction; optional external Pro review may inform that decision. |
+| C-ALCPS | exact S3 controlled-state derivation PASS; no implementation authorized | Retained: S3 supports the exact one-step controlled predictive-state family; G8 recurrence remains equally capable. Evidence: [S3 derivation](EVIDENCE_NOTES/20260724_AGENT_LOCAL_CONTROLLED_PREDICTIVE_STATE_S3.md). | Retain its exact one-step scope. S4 now supplies the delayed-future correction; any learned mechanism, optimization, mediation, natural-value or transport claim still needs Controller selection. |
+| C-ALSCPS | accepted exact S4 horizon-2 derivation PASS; no implementation authorized | Retained: S4 supports the exact horizon-two future-closed controlled-state family; G8 recurrence remains equally capable. Evidence: [S4 derivation](EVIDENCE_NOTES/20260724_HORIZON2_SEQUENTIAL_CONTROLLED_STATE_S4.md). | Retain the exact horizon-2 scope. Generic transition prediction may add phase-only updates inside constant behavior; arbitrary-horizon, learned, policy-link, optimization, value and transport claims remain unselected. |
+| C-ALBPF | exact S5 phase/lifetime-confound derivation PASS; no implementation authorized | Retained: S5 supports separating behavioral lifetime from predictive phase; G8 recurrence remains the complete simpler comparator. Evidence: [S5 derivation](EVIDENCE_NOTES/20260724_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_S5.md). | Retain the exact S5 result; its unsubmitted review is obsolete and must not be submitted. Any factorized learner, architecture, optimization, policy, value or transport claim needs a new Controller-selected contract. |
+| C-RSCSL | parked/retained | A task-blind randomized behavior process with known complete action support could estimate the accepted controlled kernels without same-history oracle enumeration. Finite natural data may lack history-level support; an action selected by `h` can be a memory label, so the learner may recover cue shortcuts rather than the intended state. S5 shows predictive phase can change while behavior does not, so phase does not by itself identify behavioral skill lifetime. | Resolve whether the scientific lifetime is attached to a monolithic predictive state or a behavioral projection first. |
+| C-CSPL | parked/retained | A learned primitive policy consuming a detached controlled state may improve optimization, mediation or held-out transport over a matched state-masked arm. G8 recurrence contains the same useful information. Extra capacity, direct cue access or unequal optimizer exposure could explain an apparent gain. | First obtain a learned state under an accepted lifetime semantics. |
 | C-JRDM | parked | Jointly charging `h,z` is sensitive to coding units, state dimension and invertible mixing. | Supply a representation-invariant joint codelength or mutual-information contract. |
 | C-ALH | parked | A categorical per-step hazard can reduce to the existing opportunity mechanism with `k=1` and revive R43--R45. | Evidence that explicit task-directed termination is necessary on a new identified source. |
 | C-ATS | parked | Continuous adaptive timescale recurrence lacks a threshold-free lifetime and can be absorbed into or reparameterized as ordinary recurrence. | Supply a threshold-invariant survival or causal-persistence estimand plus explicit accounting for alternative memory channels. |
@@ -25,93 +28,3 @@ compute authority.
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
 | C-MEASURE | retained with label correction | Two G2 replicates used inverted mark labels while every behavioral consequence remained perfect. | Use within-replicate permutation-invariant mark mediation; never raw signed accuracy as a future gate. |
-
-## Terminal disposition
-
-```text
-completed_action=S5_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND_DERIVATION
-valid_terminal=PASS_PREDICTIVE_PHASE_SKILL_LIFETIME_CONFOUND
-active_direction=C_ALBPF_RESULT_AWAITING_PRO
-formal_disposition=NOT_APPLICABLE_DERIVATION_ONLY
-next_action=RETURN_S5_EXACT_RESULT_TO_REGISTERED_PRO
-authorization_status=no_code_or_compute_iteration_6_unselected
-conclusion_bearing_iterations_consumed_on_claude=5
-iterations_remaining_on_claude=5
-```
-
-The former five-iteration EHC chain remains closed. The new user-authorized
-chain freezes asynchronous skill lifetime and targets a usable dynamic-agent
-algorithm. G5 established the usable direct recurrent open-roster MVP and G6
-established robust zero-shot count/time transport through N=16. G7 validly
-rejects robust transport of the exact representation above N=16. The bounded
-G8 screen selects action-prefix fractions, and formal G8 establishes a usable
-algorithm through N=40 without rescuing G7. Formal G9 establishes eight-edit
-churn through N=16, formal G10 establishes their cross-product through N=40,
-and formal G11 shows exact behavioral invariance under three transformed slot
-layouts. Formal G12 extends the same frozen policy through N=80, formal G13
-passes episode-random membership processes, formal G14 passes large
-same-transaction cold-start replacement at fixed N, formal G15 passes its
-composition with abrupt count shocks, and formal G16 closes a fresh-seed
-heterogeneous deployment mixture. The chain is complete with the G8
-prefix-normalized direct recurrent policy accepted as the usable test version.
-
-The current user-authorized chain targets individual skill lifetime decoupled
-from the global cycle `k`. External GPT-5.6 Pro selected C-ALPSW and the finite
-S1 identifiability derivation against always-write, never-write, fixed-age,
-membership-event-only and post-hoc nulls while retaining a constructive optimal
-G8 recurrent comparator. The direction selection consumed no iteration and
-authorized no code or compute; the now-complete valid S1 terminal consumes
-iteration 1.
-
-S1 validly rejects only the exact C-ALPSW objective. Its finite source has exact
-online and membership semantics, two complete active-step lifetimes, perfect
-boundary audit and constructive ALPSW/G8 policies, but the same unpenalized fast
-recurrence supplied to the predictive decoder attains equal predictive NLL with
-zero writes. External Pro accepted this first-match result without a terminal
-defect and kept broader predictive-state families unresolved.
-
-External Pro accepted S1 without a terminal defect and selected only the exact
-S2 exclusive-channel derivation. S2 reuses the immutable finite source and asks
-whether `z` becomes uniquely identifiable when the slow writer/decoder have no
-other temporal channel. The frozen interval is
-`0 < beta < (1/2) ln 3`. The completed derivation covers all deterministic and
-stochastic structural nulls and six explicit leak counterexamples. It used no
-code or compute and selected no iteration beyond S2.
-
-S2 removes all registered temporal side channels but still fails the complete
-objective interval. The optimized never-write decoder uses only structural
-`z=B`, predicts `Y=z` with probability `4/7`, ties at the exact interior
-`beta_star` and wins above it. External Pro accepted this as the valid S2
-terminal and closed only the exact C-ALPSC scalarized contract.
-
-The selected S3 direction is C-ALCPS. It replaces beta scalarization with exact
-controlled predictive sufficiency and lexicographic minimization of predictive
-excess, learned writes and decoder-kernel cardinality. S3 is a proof-only action:
-it must separate the full externally indexed action-kernel vector from its
-uninformative action marginal, reject natural-action memory leaks and nuisance
-subdivisions, retain G8 as complete comparator and decide one ordered terminal.
-No code, compute, Monitor or iteration 4 action is selected.
-
-S3 validly identifies a controlled predictive state on the frozen finite source.
-The complete external query-kernel vector separates regimes by total variation
-`1/2` for each query, while uniform action marginalization has zero separation.
-Strict controlled sufficiency followed by minimum writes and quotient
-cardinality yields the unique tuple `(E_ctrl,q,K)=(0,2/7,2)` up to null events
-and relabeling; nuisance subdivisions merge. G8 remains equally capable in the
-constructive utility audit. The result consumes iteration 3 but authorizes no
-implementation or compute; iteration 4 remains unselected pending Pro review.
-
-External Pro accepted the S3 PASS without a terminal defect and selected only
-the proof-only S4 horizon-2 action. S4 preserves the source and minimum-write
-criterion but makes the immediate branch observation regime-uninformative,
-places the distinction in a delayed second observation under all four external
-plans, and requires the sequential quotient to be recursively update-congruent.
-Iterations 5–10 remain unselected.
-
-S4 validly establishes exact horizon-2 future closure on the frozen source. The
-fair immediate projection has `TV=0,K_1=1`, while all four complete plans have
-regime TV `1/2`. Strict sequence sufficiency, minimum writes and quotient
-cardinality yield `(E_2,q,K_2)=(0,2/7,2)`; the common cue update is congruent and
-nuisance subdivisions merge. G8 remains equally capable in the constructive
-utility audit. Iteration 4 is consumed, six remain, and no implementation or
-iteration-5 action is authorized before Pro review.

@@ -3,7 +3,7 @@
 Updated: 2026-07-23
 
 Purpose: compact factual state for current experiments and standing evidence.
-The Project Manager records a meaningful launch/result transition here before acting;
+The sole Controller records a meaningful launch/result transition here before acting;
 completed detail stays in frozen designs, raw run artifacts, or
 `docs/archive/legacy-memory/EXPERIMENT_ARCHIVE.md`.
 

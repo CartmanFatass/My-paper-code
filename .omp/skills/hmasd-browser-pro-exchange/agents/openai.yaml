@@ -1,0 +1,6 @@
+interface:
+  display_name: "HMASD Direct Pro Exchange"
+  short_description: "Optional Controller-direct scientific review"
+  default_prompt: "Use $hmasd-browser-pro-exchange only as the active Controller for one optional direct BrowserMCP scientific exchange. Git commit identity is sufficient; do not create hashes, manifests, receipts or validation workflows."
+policy:
+  allow_implicit_invocation: false

@@ -1,4 +1,6 @@
 interface:
   display_name: "HMASD Task Dispatch"
-  short_description: "Route the persistent HMASD experiment Monitor safely"
-  default_prompt: "Use $hmasd-dispatch-task only for the registered Experiment Monitor contract. Dispatch the eight local OMP profiles directly. Use Luna-high hmasd-exchange-review for one frozen mechanical BrowserMCP submission, bounded observation, page Copy response capture, and no-clobber archive. The Controller alone performs scientific intake and successor routing; no BrowserMCP automation Skill is active."
+  short_description: "Route dynamic research/code agents and the authorized run monitor"
+  default_prompt: "Use $hmasd-dispatch-task for dynamic independent research/code slices or for the registered experiment monitor. External BrowserMCP review is Controller-direct. Git branch and commit are sufficient evidence identity."
+policy:
+  allow_implicit_invocation: false
