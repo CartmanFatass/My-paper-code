@@ -23,9 +23,9 @@ if (-not (Test-Path (Join-Path $repo '.omp/browsermcp-direct/start_browsermcp_di
 $currentWork = Get-Content (Join-Path $repo 'docs/project/CURRENT_WORK.md') -Raw
 foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLED_SKILL_LIFETIME_CHAIN',
     'grant_scope=s1_to_s10_simple_scene_cpu_review_design_implementation_evidence_successor',
-    'iterations_remaining=9_authorized',
-    'conclusion_bearing_iterations_consumed=1_on_claude',
-    'formal_compute_status=not_started_no_successor_compute_selected',
+    'iterations_remaining=8_authorized',
+    'conclusion_bearing_iterations_consumed=2_on_claude',
+    'formal_compute_status=not_started_no_iteration_3_compute_selected',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
     'agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive',
@@ -33,9 +33,9 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'end_to_end_research_loop=PRO_REVIEW_TO_CONTROLLER_PLAN_TO_LOCAL_OMP_IMPLEMENTATION_AND_REVIEW_TO_MONITORED_RUN_TO_PRO_RESULT_REVIEW',
     'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
-    'k_decoupling_current_result=NO_ONLINE_IDENTIFIABLE_SLOW_STATE',
-    'k_next_legal_route=EXTERNAL_PRO_CDC_CORRECTION_AFTER_S1',
-    's1_valid_terminal=NO_ONLINE_IDENTIFIABLE_SLOW_STATE',
+    'k_decoupling_current_result=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
+    'k_next_legal_route=EXTERNAL_PRO_CDC_CORRECTION_AFTER_S2',
+    's2_result_status=NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL',
     'external_review_transport_status=ACTIVE_LUNA_HIGH_EXCHANGE_REVIEW_AGENT',
     'external_review_operator_agent=hmasd-exchange-review',
     'external_review_response_capture=PAGE_COPY_RESPONSE_BUTTON',
@@ -124,21 +124,23 @@ $experience = Get-Content (Join-Path $repo '.omp/review_scout/EXPERIENCE.md') -R
 if (-not $experience.Contains('Stable automated end-to-end cycles: 0')) {
     throw 'review_scout stable-cycle count changed before one qualifying end-to-end cycle'
 }
-$acceptedRound = Join-Path $repo 'docs/external-review/rounds/20260723_decoupled_skill_lifetime_direction'
+$acceptedRound = Join-Path $repo 'docs/external-review/rounds/20260724_alpsw_s1_result_review'
 foreach ($required in @('19_BROWSER_PRO_SUBMISSION.json','21_PRO_OPEN_RAW.md',
     '30_EVIDENCE_RECONCILIATION.md')) {
     if (-not (Test-Path (Join-Path $acceptedRound $required) -PathType Leaf)) {
-        throw "Accepted direction round is missing $required"
+        throw "Accepted S1 result round is missing $required"
     }
 }
-if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED')) {
-    throw 'CURRENT_WORK accepted Browser Pro round state changed'
+if (-not $currentWork.Contains('browser_pro_round_state=ALREADY_ARCHIVED_CONTROLLER_INTAKE_ACCEPTED_S1_RESULT')) {
+    throw 'CURRENT_WORK accepted S1 result round state changed'
 }
 foreach ($required in @(
     'docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md',
-    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_1.md')) {
+    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_1.md',
+    'docs/research/cdc/EVIDENCE_NOTES/20260724_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_S2.md',
+    'docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_2.md')) {
     if (-not (Test-Path (Join-Path $repo $required) -PathType Leaf)) {
-        throw "S1 conclusion boundary is missing $required"
+        throw "Conclusion boundary is missing $required"
     }
 }
 $monitor = Get-Content (Join-Path $repo '.omp/skills/hmasd-experiment-monitor/SKILL.md') -Raw

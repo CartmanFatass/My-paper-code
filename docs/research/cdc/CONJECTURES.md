@@ -103,10 +103,43 @@ the Project Manager-accepted CDC state.
 - Smallest retained proposition: finite lifecycle recurrence can absorb the
   registered slow state and match prediction. This does not imply equal
   optimization, sample efficiency, causal mediation or held-out transport.
-- Next boundary: return the exact S1 artifact to the registered Pro conversation.
-  Any fast-state bottleneck, complexity penalty, decoder-filtration change or
-  new causal objective changes the scientific contract and cannot be selected
-  locally.
+- Disposition: closed at the exact S1 formulation with no local rescue.
+  Broader predictive state and sparse segmentation remain unresolved; only a
+  new external-Pro scientific contract may change the information partition or
+  complexity accounting.
+
+## C-ALPSC — Agent-local predictive slow channel
+
+- Status: exact S2 contract rejected before implementation by
+  `NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL`; no local interval, decoder or null
+  restriction is selected.
+- Refuted claim at exact scope: exclusive temporal ownership makes the cue
+  writer uniquely optimal throughout `0 < beta < (1/2) ln 3`.
+- Decisive evidence: the admissible never-write null preserves structural
+  `z=B` and fits `P(Y=z|z)=4/7`, giving
+  `L_NW=ln 7-(4/7)ln 4-(3/7)ln 3`. It ties the cue writer at
+  `beta_star=(7/2)ln 7-(11/2)ln 4+(9/8)ln 3`, which lies strictly inside the
+  frozen interval, and wins above it.
+- Contract validity: the exclusive writer/decoder contains no fast-state,
+  clock, action, direct-cue, active-set-history or auxiliary-memory channel.
+  All deterministic schedules, candidate maps, periodic and membership
+  policies, post-hoc null and stochastic mixtures have an exact finite
+  enumeration; the decisive never-write null itself uses no side channel.
+- Smallest retained proposition: excluding alternative temporal channels is
+  necessary for ownership identification but not sufficient; an optimized
+  decoder still creates a rate--distortion tradeoff between predictive
+  precision and write rate.
+- Scope ceiling: this result does not reject exclusive predictive channels,
+  sparse segmentation or variable lifetime generally. Any beta-interval,
+  decoder-family, objective or source correction requires external Pro.
+
+## C-JRDM — Jointly rate-coded dual memory
+
+- Status: parked pending a representation-invariant joint codelength or mutual-
+  information contract for `h` and `z`.
+- Strongest counterexample: activation, dimension or parameter penalties depend
+  on arbitrary coding units and invertible mixing, so they need not identify
+  temporal ownership.
 
 ## C-ALH — Explicit categorical agent-local hazard
 
@@ -119,9 +152,10 @@ the Project Manager-accepted CDC state.
 ## C-ATS — Continuous adaptive-timescale recurrence
 
 - Status: parked pending a threshold-free survival or causal-persistence
-  estimand.
+  estimand and explicit accounting for alternative recurrent memory channels.
 - Strongest counterexample: a continuous leak supplies no objective segment
-  boundary, so a claimed lifetime depends on a post-hoc threshold.
+  boundary, can be absorbed into ordinary recurrence, and leaves any claimed
+  lifetime dependent on a post-hoc threshold.
 
 ## C-SEPM — Set-equivariant persistent population memory
 
@@ -173,10 +207,10 @@ the Project Manager-accepted CDC state.
   evidence must target structured variable-cardinality factorization and
   held-out transport, not claim finite-network representational impossibility.
 - Current comparison role: recurrence is the mandatory strongest simpler
-  explanation and complete comparator for C-ALPSW, but never a universal
-  admission gate. A finite recurrent controller can encode a finite slow state;
-  any future claim must concern optimization, mediation, sample efficiency or
-  held-out transport rather than representational impossibility.
+  explanation, exact S1 absorption witness and complete external-policy
+  comparator for C-ALPSC, but never a universal admission gate. Future claims
+  must concern optimization, mediation, sample efficiency, robustness,
+  complexity or held-out transport rather than representational impossibility.
 
 ## C-BASE — The shared base policy class is insufficient
 

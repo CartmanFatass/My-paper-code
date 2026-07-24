@@ -1,7 +1,7 @@
 # HMASD Session Restart Handoff
 
 Updated: 2026-07-24
-Status: `S1_VALID_NEGATIVE_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
+Status: `S2_VALID_NEGATIVE_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 
 ## Resume authority
 
@@ -53,39 +53,41 @@ Status: `S1_VALID_NEGATIVE_READY_FOR_EXTERNAL_PRO_RESULT_REVIEW`
 - The direction review consumes zero iterations and authorizes no code,
   prototype or compute.
 
-## S1 result boundary
+## S2 result boundary
 
-The exact S1 artifact is:
+The exact S2 artifact is:
 
-`docs/research/cdc/EVIDENCE_NOTES/20260723_ALPSW_IDENTIFIABILITY_DERIVATION_S1.md`.
+`docs/research/cdc/EVIDENCE_NOTES/20260724_EXCLUSIVE_SLOW_CHANNEL_IDENTIFIABILITY_S2.md`.
 
-Its first-match valid terminal is `NO_ONLINE_IDENTIFIABLE_SLOW_STATE`. The
-registered objective cannot uniquely identify slow-state ownership because its
-unrestricted, unpenalized fast recurrent state reads the same online history
-and is supplied to the predictive decoder. A zero-write recurrence reaches the
-same entropy lower bound; positive beta favors it, beta zero is non-unique and
-negative beta favors always-write.
+Its first-match valid terminal is
+`NO_IDENTIFIABLE_EXCLUSIVE_SLOW_CHANNEL`. The exclusive filtration is valid and
+contains no fast-state, clock, action, direct-cue, active-set-history or
+auxiliary-memory leak. All 64 fixed-age subsets, candidate maps, periodic and
+membership schedules, post-hoc null and stochastic mixtures have an exact
+finite enumeration.
 
-The finite exact source contains independent anonymous lifecycle scripts,
-temporary leave/rejoin, genuine join, complete active-step lifetimes 2 and 3,
-boundary precision/recall 1, `U_star_ALPSW=U_star_G8=1` and zero invariance
-mismatch. No code, prototype, CPU/GPU compute, Monitor assignment or experiment
-occurred.
+The decisive admissible never-write null preserves structural `z=B` and fits
+`P(Y=z|z)=4/7`. Its exact NLL crosses the two-write cue writer at
 
-This valid terminal consumes iteration 1. The Chinese report is
-`docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_1.md`; nine iterations remain.
-No successor is selected. Any fast-state bottleneck, complexity cost, changed
-decoder filtration or causal objective changes the scientific contract and
-must be selected by external Pro.
+`beta_star=(7/2)ln7-(11/2)ln4+(9/8)ln3`,
+
+strictly inside `0 < beta < (1/2)ln3`, then wins above the crossover. The full-
+interval uniqueness and strict-Delta obligations therefore fail without a side
+channel.
+
+The Chinese report is
+`docs/report/DECOUPLED_SKILL_LIFETIME_ITERATION_2.md`. No code, prototype,
+compute, Monitor or experiment occurred. This terminal consumes iteration 2;
+eight remain and iteration 3 is unselected.
 
 ## Remaining chain
 
-- Commit and push the exact S1 result boundary only to `Claude`, then return it
-  to the same registered Pro conversation through a new no-clobber review round.
-- Archive and reconcile the Pro correction, which may select exactly one next
-  action. Do not locally revive or modify C-ALPSW.
-- Continue evidence-dependent iterations 2--10 serially. Rebuild and assign the
-  registered Spark-medium Experiment Monitor only when a later selected action
-  actually authorizes a run.
+- Commit and push the exact S2 result only to `Claude`, then return it to the
+  same registered Pro conversation through a new no-clobber review round.
+- Archive and reconcile one Pro-selected iteration-3 action without locally
+  narrowing beta, fixing the decoder or restricting the decisive null.
+- Continue evidence-dependent iterations 3--10 serially. Rebuild and assign the
+  registered Spark-medium Experiment Monitor only if a later Pro-selected
+  action actually authorizes a run.
 - After ten valid conclusion-bearing terminals, complete one independent
   evidence review, update the control plane and push only `Claude`.

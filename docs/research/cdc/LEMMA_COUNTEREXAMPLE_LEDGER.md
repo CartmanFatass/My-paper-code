@@ -19,6 +19,11 @@
 | L-PREDICTIVE-STATE-NOT-SKILL | Predictive accuracy and persistence alone do not establish a skill; causal primitive-action mediation and natural held-out value are also required. | Predictive latent-state mechanisms including C-ALPSW. | A predictively useful state is behaviorally useful or constitutes a skill. |
 | L-LIFETIME-ACTIVE-CLOCK | Individual lifetime is measured on the lifecycle active-step clock: temporary absence freezes it, rejoin resumes it, terminal leave censors and deletes it, and update boundaries do not end it. | Runtime-variable membership with lifecycle-owned state. | Every long-lived state is learned or behaviorally useful. |
 | L-STRUCTURAL-JOIN-WRITE | A genuine join may structurally initialize a slow state without classifying initialization as a learned renewal decision. | Lifecycle creation under C-ALPSW. | Later writes are identifiable, sparse or useful. |
+| L-S1-VALID-NEGATIVE | The exact finite S1 source and proof validly reject the registered C-ALPSW objective before implementation. | `S1_ALPSW_IDENTIFIABILITY_DERIVATION` and its frozen factorization. | Predictive state, sparse segmentation or variable lifetime mechanisms are generally impossible. |
+| L-OWNERSHIP-RELATIVE-TO-FILTRATION | Memory ownership is identifiable only relative to an explicit information filtration or joint complexity accounting over every alternative temporal channel. | Predictive-state ownership claims. | Exclusive ownership yields behavioral use or advantage. |
+| L-UNPENALIZED-CHANNEL-DOMINANCE | Penalizing writes to `z` cannot identify `z` when an unpenalized decoder-visible temporal channel carries the same predictive sufficient statistic. | C-ALPSW S1 and analogous write-only penalties. | Every corrected exclusive or joint-cost formulation fails. |
+| L-CONTROL-PREDICTION-SEPARATION | A recurrent G8 policy may remain the complete external-behavior comparator while `h` is excluded from a separately defined slow self-supervised predictive channel. | C-ALPSC S2 information partition. | The separated slow channel improves behavior or is necessary. |
+| L-EXCLUSIVE-CHANNEL-NOT-SUFFICIENT | Removing every alternative temporal side channel does not by itself make a sparse cue writer globally identifiable under a predictive-loss plus write-rate objective; an optimized coarse decoder may trade prediction for fewer writes. | Exact C-ALPSC S2 source, decoder family and frozen beta interval. | Every exclusive-channel or rate--distortion formulation fails. |
 
 ## Counterexamples
 
@@ -108,3 +113,44 @@ time must not substitute for endogenous active-step writes.
 An ordinary recurrent hidden state can emulate a finite slow state. This
 refutes a pure representational-necessity claim, but not an optimization,
 sample-efficiency, causal-mediation or held-out-transport claim.
+
+### CE-FAST-STATE-PREDICTIVE-ABSORPTION
+
+A free fast recurrent state visible to the predictive decoder absorbs `z`,
+matches or improves predictive NLL and eliminates learned-write cost.
+
+### CE-AGE-CLOCK-AS-SLOW-STATE
+
+Active age, local/global time or an equivalent phase feature can encode regime
+position and counterfeit predictive lifetime without an endogenous slow-state
+write.
+
+### CE-ACTION-AS-PREDICTIVE-MEMORY
+
+An action selected from fast recurrent memory can transfer the same persistent
+bit into a predictive decoder that observes the action.
+
+### CE-AUXILIARY-WRITER-RECURRENCE
+
+A persistent writer or decoder hidden state is an undeclared second slow state
+and restores the memory-ownership ambiguity.
+
+### CE-DIRECT-CUE-DELAYED-WRITE
+
+Direct cue access by the predictive decoder can let a delayed fixed-age writer
+match predictive NLL without matching the true boundary; on the immutable S1
+source the critical delayed schedule uses post-join active ages 3 and 6.
+
+### CE-ACTIVE-SET-CLOCK-LEAK
+
+A deterministic roster, active-set or membership-history sequence can reveal
+global or lifecycle time and substitute for learned slow memory. It is a clock
+leak, not legitimate slow-state evidence.
+
+### CE-SOFTENED-NEVER-WRITE-DECODER
+
+On the immutable S1/S2 source, never-write preserves structural `z=B`. Its
+optimal decoder fits `P(Y=z|z)=4/7`, not the stricter regime-conditional
+`3/4`. The resulting NLL crosses the two-write cue writer at an interior
+`beta_star` and wins on the upper part of the frozen interval without using any
+temporal side channel.

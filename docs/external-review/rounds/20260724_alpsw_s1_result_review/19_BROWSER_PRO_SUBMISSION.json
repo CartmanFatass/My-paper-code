@@ -1,0 +1,13 @@
+{
+    "schema":  "hmasd.browser_pro_submission.v2",
+    "status":  "SUBMISSION_CONFIRMED",
+    "round":  "20260724_alpsw_s1_result_review",
+    "question_sha256":  "f3f3f4becb248fef67ab935025b53de6990c2928208da2a087d8d271ffdd58a6",
+    "dispatch_sha256":  "145eaa5afb872365daad6d954a20e15b0ccb62e51004e07cdf1b3b569792c3fe",
+    "stage_commit":  "a373d6becd08067d866d9a64252d4a163bde4fdb",
+    "evidence_commit":  "b0a5c6b4c32121228c6449cd140b756ae9a17173",
+    "repository":  "CartmanFatass/My-paper-code",
+    "review_branch":  "Claude",
+    "conversation_url":  "https://chatgpt.com/c/6a61d27c-9278-83e8-ae96-c65c1b52d207",
+    "expected_model":  "Pro"
+}
