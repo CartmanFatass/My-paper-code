@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import fields
 from pathlib import Path
+from unittest.mock import Mock
 
 import numpy as np
 import pytest
@@ -132,6 +133,44 @@ def test_environment_applies_leave_before_action_and_exposes_current_only():
     finally:
         env_a.close()
         env_b.close()
+
+
+def test_step_reuses_raw_view_inputs_without_crossing_lifecycle_boundaries():
+    ledger = _ledger(owner=2, onset=120, duration=30)
+    fast = make_uav_environment(ledger, 181601)
+    scalar = make_uav_environment(ledger, 181601)
+    scalar._disable_step_view_reuse = True
+    try:
+        fast.reset()
+        scalar.reset()
+        fast._get_observation = Mock(wraps=fast._get_observation)
+        scalar._get_observation = Mock(wraps=scalar._get_observation)
+        actions = np.zeros((PHYSICAL_UAVS, ACTION_DIM), dtype=np.float32)
+
+        for physical_step in (118, 119, 149, 150):
+            fast.current_step = physical_step
+            scalar.current_step = physical_step
+            left = fast.step(actions)
+            right = scalar.step(actions)
+            np.testing.assert_array_equal(left.view.observations, right.view.observations)
+            np.testing.assert_array_equal(left.view.active_mask, right.view.active_mask)
+            np.testing.assert_array_equal(left.view.critic_state, right.view.critic_state)
+            np.testing.assert_array_equal(
+                left.view.physical_positions, right.view.physical_positions
+            )
+            np.testing.assert_array_equal(
+                left.executed_action_mask, right.executed_action_mask
+            )
+            assert left.view.physical_step == right.view.physical_step
+            assert left.reward == right.reward
+            assert left.qos_satisfaction_ratio == right.qos_satisfaction_ratio
+            assert left.terminated == right.terminated
+            assert left.truncated == right.truncated
+
+        assert fast._get_observation.call_count < scalar._get_observation.call_count
+    finally:
+        fast.close()
+        scalar.close()
 
 
 def test_wrapper_preserves_protected_s7_s1_configuration():
