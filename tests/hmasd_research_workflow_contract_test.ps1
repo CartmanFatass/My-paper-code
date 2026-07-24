@@ -72,7 +72,7 @@ foreach ($required in @(
     'autonomous_research_grant=',
     'iterations_remaining=',
     'conclusion_bearing_iterations_consumed=',
-    'intermediate_authorization_prompts=forbidden',
+    'execution_mode=',
     'git_integration_status=project_manager_direct_authorized',
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
@@ -90,6 +90,30 @@ if (-not $remainingMatch.Success -or -not $consumedMatch.Success) {
 if ($current.Contains('autonomous_research_grant=ACTIVE_') -and
     [int]$remainingMatch.Groups[1].Value -le 0) {
     throw 'An active autonomous grant has no remaining conclusion-bearing iterations'
+}
+
+# The declared mode and the pause contract it implies must agree. Left
+# unchecked these drift apart and the loop pauses in the wrong places.
+$modeMatch = [regex]::Match($current, '(?m)^execution_mode=(authorized|unauthorized)\s*$')
+if (-not $modeMatch.Success) {
+    throw 'CURRENT_WORK does not declare execution_mode as authorized or unauthorized'
+}
+$grantActive = $current.Contains('autonomous_research_grant=ACTIVE_')
+if ($modeMatch.Groups[1].Value -eq 'authorized') {
+    if (-not $grantActive) {
+        throw 'Authorized mode declared without an ACTIVE_ autonomous grant'
+    }
+    if (-not $current.Contains('intermediate_authorization_prompts=forbidden')) {
+        throw 'Authorized mode must record intermediate_authorization_prompts=forbidden'
+    }
+}
+else {
+    if ($grantActive) {
+        throw 'Unauthorized mode declared while an ACTIVE_ grant is still recorded'
+    }
+    if (-not $current.Contains('intermediate_authorization_prompts=required_at_plan_and_result')) {
+        throw 'Unauthorized mode must record the plan and result checkpoints'
+    }
 }
 
 foreach ($required in @(
