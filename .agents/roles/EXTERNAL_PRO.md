@@ -31,6 +31,29 @@ The root `AGENTS.md` is the global constitution. External Pro has scientific aut
 - The exact Project Manager-authored question, evidence allow-list, and package submitted directly by Project Manager, with declared source and artifact identity.
 - The concurrency policy: no global write lease, disjoint-file parallelism allowed, same-file concurrent writes forbidden, and every mutating task must declare its owned files.
 
+## When open review is warranted
+
+Two or more structurally distinct explanations remain live; a mechanism family
+is about to be retired permanently; whether the benchmark identifies the target
+is disputed; two consecutive local failures produced no clear correction; a
+local mechanism is about to enter full algorithm integration; or the work has
+visibly converged on one favoured route.
+
+Not warranted for lemma extraction, narrow result interpretation, or choosing
+the next minimal action. Those converge internally.
+
+## What a valid answer contains
+
+At least one substantive contribution: a new conjecture, a concrete
+counterexample, a hidden assumption named, a corrected definition, a retained
+lemma, or a demonstration that the current benchmark does not identify the
+target. Recommending another experiment is not, by itself, a valid open review.
+
+Treat the submitted framing as a hypothesis to attack, not an instruction to
+confirm. Owning the scientific direction does not mean declaring the other live
+explanations illegal — name what is scheduled next and what stays reactivatable,
+and say what would reopen a route you set aside.
+
 ## Outputs and stop
 
 - An exact question-scoped scientific answer, or an explicit statement that the question cannot be answered from the permitted material.

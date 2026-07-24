@@ -194,6 +194,36 @@ There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
 
+## Result interpretation
+
+A failure retires the smallest unit it actually refutes. These categories are
+orthogonal, never a chain:
+
+| Observation | What it retires |
+|---|---|
+| engineering fault, no complete interpretable observation | nothing scientific |
+| the studied object was not instantiated as declared | that implementation |
+| the estimand cannot identify the target proposition | that estimand or measurement |
+| the benchmark gives no access, or cannot separate candidates | that benchmark-comparator pair |
+| a derived necessary consequence fails under identifying conditions | that conjecture, or its scope |
+
+Retiring a whole mechanism family needs a structural contradiction, an
+equivalence proof, or independent counterexamples across several identifying
+environments. One benchmark no-access is never enough.
+
+Ordinary recurrent MARL is a comparator and an access diagnostic, never an
+admission gate. A superiority claim must be matched against it; its failure on
+one benchmark does not bar research into a stronger mechanism.
+
+A gate measures; it is not the research goal. Progress means a new capability,
+counterexample, corrected definition, retained lemma or portfolio delta — never
+the count of gates passed.
+
+Prefer the cheapest discriminating action, in this order: derivation,
+counterexample construction, reanalysis of existing data, toy, prototype,
+formal compute. Implement or train only when nothing cheaper can answer the
+question.
+
 ## Tool batching
 
 Issue already-known, independent tool calls together in one message so they run
