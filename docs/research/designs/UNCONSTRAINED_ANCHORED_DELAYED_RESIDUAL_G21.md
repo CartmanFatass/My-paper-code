@@ -1,7 +1,7 @@
 # Unconstrained anchored delayed residual G21
 
 ```text
-status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
+status=NONFORMAL_CLOSED_NO_DELAYED_ACCESS
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -82,3 +82,11 @@ replay and bitwise anchor identity after successor updates. The closed G20
 execution code and unused generic hook are removed under the active-line-only
 policy. This accepts only the bounded screen, not formal compute or a delayed
 access conclusion.
+
+## Bounded screen disposition
+
+The integrated screen is operationally valid with exact replay and anchor
+identity. G17 held-out utility remains `0.95253`; G18 changes from `0.57933` to
+only `0.58333`, with gain `0.004` and zero spike utility. The first-match branch
+is `NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21`. The exact
+unrestricted-SGD candidate is closed without tuning or formal/UAV promotion.

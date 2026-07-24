@@ -1,22 +1,22 @@
-# G21 unconstrained anchored delayed-residual implementation plan
+# G22 adaptive anchored delayed-residual implementation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20
-last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CENTERED_RESIDUAL_G20
+last_nonformal=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21
+last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21_BOUNDED_SCREEN
+active_implementation=ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22_PROTOTYPE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
-formal_compute=not_scheduled_for_g21
-algebra_status=PROTOTYPE_ACCEPTED_SCREEN_NEXT
-screen_contract=docs/research/designs/UNCONSTRAINED_ANCHORED_DELAYED_RESIDUAL_G21.md
+formal_compute=not_scheduled_for_g22
+algebra_status=DERIVATION_FROZEN_IMPLEMENTATION_PENDING
+screen_contract=docs/research/designs/ADAPTIVE_ANCHORED_DELAYED_RESIDUAL_G22.md
 ```
 
 ## Accepted active line
@@ -98,3 +98,14 @@ Together with retained G17/G18/G19 proofs, 35 tests pass on CPU with one thread.
 The closed G20 module, runner, test and now-unused generic mean hook are removed
 from the active line; their integrated commit remains the reproduction source.
 The only next action is the frozen paired nonformal G21 screen.
+
+That screen is now closed as
+`NONFORMAL_NO_DELAYED_ACCESS_UNCONSTRAINED_RESIDUAL_G21`: G17 remains strong,
+but G18 gains only `0.004` and spike utility remains zero despite exercised
+common-mode residuals. The exact SGD candidate is retired.
+
+G22 changes only the delayed residual optimizer to Adam with the same `1e-3`
+learning rate and registered defaults. The policy, credit, fast anchor, critics,
+budgets, gates and evaluation remain unchanged with fresh seeds. Mechanically
+rename the active runner/test, prove exact residual-only optimizer ownership,
+then run one integrated paired nonformal screen.
