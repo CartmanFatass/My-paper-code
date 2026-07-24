@@ -48,3 +48,11 @@ iteration.
 
 Implementation: `ha_ctse_process/separated_credit_g18.py`.
 Runner: `scripts/screen_fast_slow_separated_credit_g18.py`.
+
+## Screen disposition
+
+The exact screen at source commit `f704d4d9a7410b367271b9afeee864cad8f639fe`
+completed operationally with zero replay error and selected
+`NONFORMAL_NO_G17_COMPATIBILITY_CHANNEL_NORMALIZED_G18`. It improved both source
+scores but did not cross the frozen gates, so this shared-critic candidate is
+retired without tuning.

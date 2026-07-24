@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from types import SimpleNamespace
 from typing import Any, Iterable, Sequence
 
@@ -188,6 +188,7 @@ class SeparatedCreditPolicy(nn.Module):
         current_observation_residual: bool = True,
     ) -> None:
         super().__init__()
+        self.member_capacity = int(member_capacity)
         self.policy = ContinuousRosterPolicy(
             observation_dim,
             critic_state_dim,
@@ -197,6 +198,13 @@ class SeparatedCreditPolicy(nn.Module):
             current_observation_residual=current_observation_residual,
         )
         self.critic_state_dim = int(critic_state_dim)
+        for parameter in self.policy.critic.parameters():
+            parameter.requires_grad_(False)
+        self.slow_critic = nn.Sequential(
+            nn.Linear(self.critic_state_dim + self.member_capacity, hidden_dim),
+            nn.Tanh(),
+            nn.Linear(hidden_dim, 1),
+        )
         self.credit_baselines = nn.Sequential(
             nn.Linear(self.critic_state_dim, hidden_dim),
             nn.Tanh(),
@@ -209,14 +217,28 @@ class SeparatedCreditPolicy(nn.Module):
 
     @property
     def parameter_count(self) -> int:
-        return int(sum(parameter.numel() for parameter in self.parameters()))
+        return int(
+            sum(
+                parameter.numel()
+                for parameter in self.parameters()
+                if parameter.requires_grad
+            )
+        )
 
     @property
     def log_std(self) -> nn.Parameter:
         return self.policy.log_std
 
     def forward_step(self, **arguments: Any) -> ContinuousStepOutput:
-        return self.policy.forward_step(**arguments)
+        output = self.policy.forward_step(**arguments)
+        critic_state = arguments["critic_state"]
+        active_mask = arguments["active_mask"]
+        slow_value = self.slow_critic(
+            torch.cat(
+                (critic_state, active_mask.to(critic_state.dtype)), dim=-1
+            )
+        ).squeeze(-1)
+        return replace(output, value=slow_value)
 
     def baseline_values(
         self, critic_states: torch.Tensor

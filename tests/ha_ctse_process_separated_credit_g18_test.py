@@ -303,6 +303,41 @@ def test_credit_channels_are_normalized_independently_of_their_scale() -> None:
     )
 
 
+def test_slow_value_gradient_is_isolated_from_actor_representation() -> None:
+    torch.manual_seed(1818004)
+    model = _battery_model()
+    observations = torch.zeros(
+        (2, battery_source.CAPACITY, battery_source.OBSERVATION_DIM)
+    )
+    active_mask = torch.tensor(
+        [[True, True, True, True, False, False]] * 2
+    )
+    critic_state = torch.randn(2, battery_source.CRITIC_STATE_DIM)
+    output = model.forward_step(
+        observations=observations,
+        active_mask=active_mask,
+        critic_state=critic_state,
+        hidden=torch.zeros(2, battery_source.CAPACITY, model.hidden_dim),
+        deterministic=True,
+    )
+
+    output.value.sum().backward()
+
+    assert all(
+        parameter.grad is None
+        for name, parameter in model.policy.named_parameters()
+        if not name.startswith("critic.")
+    )
+    assert all(
+        parameter.requires_grad is False
+        for parameter in model.policy.critic.parameters()
+    )
+    assert all(
+        parameter.grad is not None and torch.isfinite(parameter.grad).all()
+        for parameter in model.slow_critic.parameters()
+    )
+
+
 def test_one_update_training_helper_closes_checkpoint_and_contract(tmp_path) -> None:
     run_root = tmp_path / "g18_one_update"
     run_root.mkdir()

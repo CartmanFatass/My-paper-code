@@ -204,3 +204,15 @@ The channel-normalized algebra passed eleven focused tests, including exact
 invariance to independent positive rescaling of either advantage channel. Its
 bounded paired screen is frozen in
 `docs/research/designs/CHANNEL_NORMALIZED_SEPARATED_CREDIT_G18.md`.
+
+The screen validly selected
+`NONFORMAL_NO_G17_COMPATIBILITY_CHANNEL_NORMALIZED_G18`. It improved G17
+held-out utility from `0.63199` to `0.74175` and mix correlation from `0.04159`
+to `0.83400`, but did not preserve the accepted immediate mapping. The next
+smallest discriminator isolates the slow value critic from actor representation
+parameters while preserving the normalized credit channels and full protocol.
+
+The actor/critic-isolation algebra passed twelve focused tests. In particular,
+the slow value loss has finite gradients on the independent critic and exactly
+no gradient on actor representation or heads. The unchanged paired screen is
+frozen in `ACTOR_CRITIC_ISOLATED_CHANNEL_CREDIT_G18.md`.
