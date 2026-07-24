@@ -1,70 +1,104 @@
-# UAV dynamic-service-roster research plan
-
-> **Current procedure:** external scientific review through
-> `$hmasd-review-round`. Implementation later uses
-> `$hmasd-agile-research-development`. Generic Superpowers execution,
-> compatibility work and workflow hashes remain disabled.
+# OMP workflow-asset consolidation plan
 
 ```text
-active_boundary=UAV_DYNAMIC_SERVICE_ROSTER_EXTERNAL_PRO_REVIEW
-implementation_status=NOT_STARTED_REVIEW_PENDING
-design=docs/research/designs/UAV_DYNAMIC_SERVICE_ROSTER_RESEARCH_BRIEF.md
-backend=cpu
-torch_threads=1
-new_chain_iterations_remaining=10
-iteration_report_range=ITERATION_18_to_ITERATION_27
+active_boundary=OMP_WORKFLOW_ASSET_CONSOLIDATION
+implementation_status=ACCEPTED
+branch=Claude
+root_bootstrap=AGENTS.md
+active_asset_root=.omp
+scientific_compute=none
+external_submission=ready_after_commit_push
 ```
 
-## Goal
+## Goal and success criteria
 
-Turn the accepted synthetic runtime-variable-roster algorithm into an
-algorithmically meaningful UAV test line based on Scenario 7. The line must
-separate a fixed physical fleet from the service-active roster and test:
+Consolidate every live HMASD orchestration asset under `.omp/` so the workflow
+can be migrated as one directory while root `AGENTS.md` remains the only
+standalone bootstrap contract.
 
-1. temporary coverage under a localized communication-demand burst;
-2. service-roster contraction and re-entry caused by charging rotation; and
-3. robustness to a small temporary UAV detachment or failure.
+Success requires:
 
-The initial goal is a usable algorithm in this task family, not a universal or
-comparative-advantage claim.
+1. active Skills exist only under `.omp/skills/`;
+2. project-local task agents remain under `.omp/agents/`;
+3. OMP configuration and BrowserMCP configuration remain under `.omp/`;
+4. retained pre-OMP Codex profiles and role charters move under
+   `.omp/legacy/` and are explicitly non-active;
+5. `.agents/` and `.codex/` no longer exist;
+6. the active external-review -> Controller plan -> local implementation and
+   collective review -> registered experiment Monitor -> external result-review
+   loop remains explicit and contract-tested; and
+7. no historical external-review round, scientific evidence record, algorithm
+   source or runtime result is moved or rewritten.
 
-## Repository facts that constrain the review
+## Scope decision
 
-- `S7-S1` has eight UAVs, thirty users, a 500-step episode and a constant
-  per-user QoS target. Batteries, charging and failures are disabled.
-- S7-S2/S3 add battery and two single-capacity chargers. S7-S4 adds temporary
-  failures while retaining at least six active UAVs.
-- The environment and adapter expose a fixed `possible_agents` array. Charging
-  and failure are currently physical availability masks, not registered
-  dynamic service-membership events.
-- The accepted G8 algorithm is supported only in its synthetic dynamic-roster
-  family. UAV integration and UAV advantage remain untested.
+Three approaches were considered.
 
-## Review boundary
+1. Move the entire repository below `.omp/`. Rejected: source code, scientific
+   evidence and immutable review rounds are project payload, not OMP runtime
+   assets, and their Git-visible paths carry evidence meaning.
+2. Keep `.agents/` and `.codex/` adapters that forward into `.omp/`. Rejected:
+   duplicate discovery roots undermine portability and violate clean cutover.
+3. Move only orchestration assets into native OMP roots and preserve historical
+   scientific paths. Selected: it gives one portable workflow directory
+   without mutating evidence identity.
 
-External Pro is asked to freeze only choices that change the scientific
-object: service-membership semantics, disturbance/source laws, observability,
-estimands, matched reductions, admission gates and held-out claims. Seeds,
-serialization, class layout and other bounded realization choices remain PM
-implementation authority unless they alter one of those objects.
+## Exact moves
 
-No UAV source code is changed before exact raw intake and PM reconciliation.
-The first post-review action will be the smallest one-source executable
-definition that separates dynamic-service-roster behavior from a fixed-agent
-masking reduction. Scenario composition follows only after isolated sources
-are individually identifiable.
+- `.agents/skills/**` -> `.omp/skills/**` as the sole active Skill tree.
+- `.agents/roles/**` -> `.omp/legacy/roles/**` as retained, non-active
+  pre-unification charters.
+- `.codex/**` -> `.omp/legacy/codex/**` as retained, non-active pre-OMP
+  profiles and utilities.
+- Keep `.omp/agents/*.md`, `.omp/config.yml` and `.omp/mcp.json` in place.
 
-## Ten-iteration loop
+## Reference cutover
 
-For each valid conclusion-bearing iteration the Project Manager will:
+Update the active bootstrap and contracts to use `.omp/skills/`:
 
-1. freeze one bounded evidence contract inside the external scientific scope;
-2. implement and run proof-sized nonformal acceptance;
-3. commit the accepted source and launch the registered CPU-only formal run;
-4. validate the first-match result without threshold or budget rescue;
-5. write the Chinese `docs/report/ITERATION_<n>.md`; and
-6. select the smallest supported successor without another authorization
-   prompt while the ten-iteration grant remains active.
+- `AGENTS.md`;
+- `docs/project/ALGORITHM_PRINCIPLES.md`;
+- `docs/project/CURRENT_WORK.md`;
+- `docs/project/AGENT_CONTEXT.md`;
+- `docs/external-review/README.md`;
+- `docs/external-review/REVIEWER_CONVERSATIONS.json`;
+- all focused PowerShell workflow-contract tests.
 
-External review is requested again only for a new protected scientific choice
-or a real anomaly, not as a routine review stack.
+Historical files beneath `docs/external-review/rounds/` and durable CDC evidence
+are immutable and remain unchanged even when they mention the former path that
+was valid at their evidence commit.
+
+## Invariants
+
+- Native OMP discovers exactly five `hmasd-*` Skills and six local task-agent
+  profiles.
+- External Pro transport remains Controller-owned through the pinned
+  `browsermcp-pro` server, exact V1 question/response envelope, immutable v2
+  receipt and stable-twice archival.
+- The Controller remains the sole executable-plan author and Git integrator.
+- A complete implementation package receives exactly one parallel Reviewer and
+  Verifier collective gate.
+- `experiment_monitor` remains the only persistent experiment observer and must
+  be rebuilt as Spark-medium before the first authorized conclusion-bearing
+  run.
+- Retained legacy files have no active discovery, routing or authority role.
+- No compatibility shim, duplicate Skill, symlink or fallback path remains.
+
+## Red/green checks
+
+Run:
+
+```text
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_dispatch_task_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_controller_subagent_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/review_round_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/browser_pro_dispatch_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_research_workflow_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_project_manager_contract_test.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_experiment_operator_contract_test.ps1
+```
+
+The checks must prove the native `.omp` paths, exact end-to-end research loop,
+five-Skill/six-agent inventory, BrowserMCP state machine, registered Monitor
+route, absence of active `.agents`/`.codex` roots and no stale active path
+references. Then run `git diff --check`.

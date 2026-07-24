@@ -16,8 +16,8 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
 $alwaysInspect = @(
     'AGENTS.md',
     'docs/project/CURRENT_WORK.md',
-    '.agents/skills/hmasd-dispatch-task/SKILL.md',
-    '.agents/skills/hmasd-dispatch-task/references/session-roles.json',
+    '.omp/skills/hmasd-dispatch-task/SKILL.md',
+    '.omp/skills/hmasd-dispatch-task/references/session-roles.json',
     'docs/external-review/REVIEWER_CONVERSATIONS.json',
     'docs/external-review/README.md',
     'tests/hmasd_dispatch_task_contract_test.ps1',
@@ -30,7 +30,7 @@ foreach ($relative in $alwaysInspect) {
     $path = Join-Path $RepoRoot $relative
     if (Test-Path -LiteralPath $path -PathType Leaf) { $files.Add($path) }
 }
-$skillRoot = Join-Path $RepoRoot '.agents/skills'
+$skillRoot = Join-Path $RepoRoot '.omp/skills'
 if (Test-Path -LiteralPath $skillRoot -PathType Container) {
     Get-ChildItem -LiteralPath $skillRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.md', '.json', '.yaml', '.yml', '.ps1', '.py') } |

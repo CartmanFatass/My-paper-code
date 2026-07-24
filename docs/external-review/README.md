@@ -104,9 +104,9 @@ rounds/YYYYMMDD_topic/
 ```
 
 Raw responses are preserved before downstream use. Controller round behavior
-lives in `.agents/skills/hmasd-review-round/SKILL.md`; BrowserMCP transport
+lives in `.omp/skills/hmasd-review-round/SKILL.md`; BrowserMCP transport
 behavior lives in
-`.agents/skills/hmasd-browser-pro-exchange/SKILL.md`. Direct scientific
+`.omp/skills/hmasd-browser-pro-exchange/SKILL.md`. Direct scientific
 evidence intake lives in the Controller round Skill. Algorithm realization and
 implementation behavior live in the unified Controller's project-local OMP
 task tree. Persistent task IDs in the dispatcher's `session-roles.json` are

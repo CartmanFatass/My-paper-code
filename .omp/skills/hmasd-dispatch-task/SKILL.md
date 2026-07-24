@@ -15,6 +15,12 @@ controller -> BrowserMCP Pro submission/observation/capture
 controller <-> experiment_monitor
 ```
 
+The preserved end-to-end loop is external Pro scientific review -> Controller
+intake and frozen plan -> local OMP implementation plus the collective
+Reviewer/Verifier gate -> authorized run observed by `experiment_monitor` ->
+Controller result intake -> external Pro result review. The Controller is the
+only transition owner between stages.
+
 The Controller owns scientific-to-code translation, executable planning, local
 agent decomposition, integration, verification, routing, continuation, Git,
 formal-compute authority, the complete BrowserMCP state machine, and direct

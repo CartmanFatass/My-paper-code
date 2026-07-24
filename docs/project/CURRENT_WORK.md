@@ -41,12 +41,12 @@ imported_source_commit=770fa45100134e887c50ab34b36c57f68ded5516
 imported_algorithm=PREFIX_NORMALIZED_OPEN_ROSTER_G8
 imported_terminal_design=docs/research/designs/DYNAMIC_ROSTER_DEPLOYMENT_MIXTURE_G16.md
 imported_evidence_status=G5_TO_G16_FORMAL_CHAIN_COMPLETE
-agent_assets=all_retained_active_routing_controller_registry_only
+agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive
 tracked_algorithm_match=exact_against_origin_aggressive_770fa45100134e887c50ab34b36c57f68ded5516
 focused_algorithm_merge_tests=10_passed_1_runtime_artifact_blocked
 runtime_artifact_blocker=logs/formal_open_roster_prefix_g8_cpu_20260723_fcce714_r1/train_manifest.json_absent
 runtime_evidence_import=git_tracked_records_only_logs_not_present_in_workspace
-implementation_status=AWAITING_EXTERNAL_PRO_SCIENTIFIC_DIRECTION
+implementation_status=OMP_WORKFLOW_ASSET_MIGRATION_ACCEPTED_AWAITING_PRO_DIRECTION
 k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM
 k_fixed_anchor=R41B_PASS_WIN_0.89_KEY0_0.97_KEY1_0.92
 k_r42=VALID_FAIL_SERVICE_DELTA_WIN_CI_MINUS_0.17_TO_MINUS_0.03
@@ -61,10 +61,14 @@ formal_compute_status=not_started_review_pending
 git_integration_status=Claude_only
 aggressive_branch_mutation=forbidden
 external_review_transport_status=authorized_same_registered_conversation_live_preflight_required
-experiment_monitor_status=unassigned_not_required_for_local_proof_size
+experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN
 iteration_report_requirement=one_chinese_report_per_conclusion_bearing_iteration
 iteration_report_status=none_completed_on_claude
 latest_iteration_report=none_on_claude
+orchestration_asset_root=.omp
+end_to_end_research_loop=PRO_REVIEW_TO_CONTROLLER_PLAN_TO_LOCAL_OMP_IMPLEMENTATION_AND_REVIEW_TO_MONITORED_RUN_TO_PRO_RESULT_REVIEW
+omp_asset_migration_status=ACCEPTED_NATIVE_OMP_7_CONTRACTS_AND_DISCOVERY_SMOKE_GREEN
+omp_asset_migration_review=COLLECTIVE_REVIEW_FINDINGS_REPAIRED_VERIFIER_PASS
 uav_user_scope=imported_history_only_not_authorized_on_claude
 uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster
 uav_active_design=none_on_claude
@@ -630,19 +634,20 @@ concurrency_policy=file_ownership_only
 global_write_lease=disabled
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
-active_file_writers=project_manager_exact_active_path_set
+active_file_writers=controller_exact_active_path_set
 ```
 
-Project Manager directly stages accepted paths, checks the staged path set and
-`git diff --cached --check`, commits and pushes `aggressive`. Per-file hash and
-callback receipts are forbidden.
+The unified Controller stages accepted paths, checks the staged path set and
+`git diff --cached --check`, commits and pushes only `Claude`. Local agents and
+the persistent Monitor never perform Git.
 
 ## Pointers
 
-- `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — authority.
-- `.agents/roles/EXPERIMENT_OPERATOR.md` — silent single-run contract.
-- `docs/project/IMPLEMENTATION_PLAN.md` — accepted useful-effect implementation
-  and prelaunch evidence.
+- `AGENTS.md` and `.omp/skills/hmasd-dispatch-task/references/session-roles.json`
+  — active authority and routing.
+- `.omp/skills/hmasd-experiment-monitor/SKILL.md` — read-only run observation.
+- `docs/project/IMPLEMENTATION_PLAN.md` — frozen OMP workflow-asset
+  consolidation contract.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_USEFUL_EFFECT_ROSTER_G3_PRELAUNCH.md`
   — bounded nonformal acceptance and formal launch boundary.
 - `docs/research/cdc/EVIDENCE_NOTES/20260723_USEFUL_EFFECT_ROSTER_G3_FORMAL_RESULT.md`

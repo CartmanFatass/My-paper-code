@@ -53,9 +53,9 @@ hash, so the artifacts name the evidence commit while the Controller records
 the stage commit that contains them.
 
 An initial no-receipt READY check may run
-`.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1`
+`.omp/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1`
 without expected identity. Verify the pushed boundary with
-`.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`.
+`.omp/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`.
 When raw is absent and a receipt exists, invoke the validator with the complete
 trusted `-ExpectedStageCommit`, `-ExpectedEvidenceCommit`,
 `-ExpectedRepository`, `-ExpectedReviewBranch`, `-ExpectedConversationUrl`, and
@@ -65,7 +65,7 @@ return the same canonical question and source manifest, and retain validator
 `receipt_sha256` as the exact active receipt identity for archival. Raw-first
 `ALREADY_ARCHIVED` remains terminal without receipt compatibility execution.
 For `READY_TO_SUBMIT`, run
-`.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1`
+`.omp/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1`
 to obtain the deterministic compact dispatch before touching the browser.
 Local, ignored, or unpushed files are not reviewer evidence. Preserve the
 pushed-boundary verifier unchanged.
@@ -141,13 +141,13 @@ click Send, Stop answering, Answer now, or Copy response. A `browser_type`
 timeout is permanently indeterminate even if a later snapshot looks empty:
 never retry, retype, or submit on that live connection; fail closed and require
 a fresh BrowserMCP process/extension connection and live preflight. Run
-`.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1`
+`.omp/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1`
 with distinct pre-submit draft and post-submit snapshots and the Controller's
 already-owned boundary/registry identity; the recorder threads that tuple
 through validation. Its reconstructed draft composer must byte-match the
 dispatch plus snapshot normalization LF, and the final user turn must byte-match
 the exact no-LF dispatch before an empty submitted composer proves submission.
-Run `.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1`
+Run `.omp/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1`
 with the receipt, two stable snapshots, and mandatory `StageCommit`,
 `EvidenceCommit`, `Repository`, `ReviewBranch`, `ConversationUrl`, and
 `ExpectedModel` values from pushed-boundary verification and the registered

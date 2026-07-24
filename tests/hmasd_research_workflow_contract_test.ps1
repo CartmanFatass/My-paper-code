@@ -2,7 +2,7 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
+$skills = @(Get-ChildItem (Join-Path $repo '.omp/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedSkills = @('hmasd-agile-research-development',
@@ -18,7 +18,10 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     'formal_compute_authority=ten_simple_scene_cpu_iterations_user_authorized_after_pro_intake',
     'git_integration_status=Claude_only',
     'aggressive_branch_mutation=forbidden',
-    'agent_assets=all_retained_active_routing_controller_registry_only',
+    'agent_assets=active_orchestration_consolidated_under_dot_omp_legacy_nonactive',
+    'orchestration_asset_root=.omp',
+    'end_to_end_research_loop=PRO_REVIEW_TO_CONTROLLER_PLAN_TO_LOCAL_OMP_IMPLEMENTATION_AND_REVIEW_TO_MONITORED_RUN_TO_PRO_RESULT_REVIEW',
+    'experiment_monitor_status=ARCHIVED_REBUILD_REQUIRED_BEFORE_FIRST_CONCLUSION_BEARING_RUN',
     'primary_research_axis=decoupled_individual_skill_lifetime_from_global_k',
     'k_decoupling_current_result=NO_ACCEPTED_POSITIVE_DECOUPLED_K_ALGORITHM',
     'k_next_legal_route=STRUCTURALLY_NEW_NOT_R42_TO_R48_RESCUE')) {
@@ -27,24 +30,24 @@ foreach ($required in @('autonomous_research_grant=ACTIVE_TEN_ITERATION_DECOUPLE
     }
 }
 
-$reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
+$reviewRound = Get-Content (Join-Path $repo '.omp/skills/hmasd-review-round/SKILL.md') -Raw
 foreach ($path in @(
-    '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1',
-    '.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1',
-    '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1',
-    '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1',
-    '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1')) {
+    '.omp/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1',
+    '.omp/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1',
+    '.omp/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1',
+    '.omp/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1',
+    '.omp/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1')) {
     if (-not $reviewRound.Contains($path)) { throw "Review workflow omits executable interface: $path" }
     if (-not (Test-Path (Join-Path $repo $path) -PathType Leaf)) { throw "Missing workflow interface: $path" }
 }
-if (-not (Test-Path (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/browser_pro_dispatch.psm1') -PathType Leaf)) {
+if (-not (Test-Path (Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/browser_pro_dispatch.psm1') -PathType Leaf)) {
     throw 'Missing shared Browser Pro dispatch constructor'
 }
-$roles = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
+$roles = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/references/session-roles.json') -Raw | ConvertFrom-Json
 if (Compare-Object @('controller','experiment_monitor') @($roles.roles.PSObject.Properties.Name)) {
     throw 'Unexpected persistent role graph'
 }
-if ($roles.schema_version -ne 21 -or
+if ($roles.schema_version -ne 22 -or
     $roles.external_review_transport.dispatch_marker -ne 'HMASD_BP_D1' -or
     $roles.external_review_transport.dispatch_max_utf16_code_units -ne 352 -or
     $roles.external_review_transport.receipt_schema -ne 'hmasd.browser_pro_submission.v2' -or
@@ -56,10 +59,10 @@ if ($roles.schema_version -ne 21 -or
 if ($roles.roles.experiment_monitor.registration_status -ne 'ARCHIVED_REBUILD_REQUIRED' -or
     $roles.roles.experiment_monitor.last_route_check -ne 'ARCHIVED_TASK' -or
     $roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
-    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
+    $roles.roles.experiment_monitor.role_skill -ne '.omp/skills/hmasd-experiment-monitor/SKILL.md') {
     throw 'Archived experiment Monitor route changed'
 }
-$dispatcher = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
+$dispatcher = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/SKILL.md') -Raw
 foreach ($required in @('controller -> local OMP task agents',
     'controller -> BrowserMCP Pro submission/observation/capture',
     'controller <-> experiment_monitor', 'gpt-5.3-codex-spark',
@@ -80,15 +83,44 @@ foreach ($removed in @('hmasd-pro-monitor','hmasd-pro-monitor-luna')) {
     if ($dispatcher.Contains($removed) -or $reviewRound.Contains($removed)) { throw "Removed route remains: $removed" }
     if (Test-Path (Join-Path $repo ".omp/agents/$removed.md")) { throw "Removed profile remains: $removed" }
 }
-$monitor = Get-Content (Join-Path $repo '.agents/skills/hmasd-experiment-monitor/SKILL.md') -Raw
+$monitor = Get-Content (Join-Path $repo '.omp/skills/hmasd-experiment-monitor/SKILL.md') -Raw
 foreach ($required in @('ETA','10 minutes','delete the heartbeat','EXPERIMENT_MONITOR',
     'Do not modify repository files','Do not retry')) {
     if (-not $monitor.Contains($required)) { throw "Experiment Monitor Skill missing: $required" }
+}
+$resolverPath = Join-Path $repo '.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1'
+if (-not (Test-Path $resolverPath -PathType Leaf) -or
+    -not $monitor.Contains('`.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1 -Role controller`')) {
+    throw 'Experiment Monitor terminal route does not resolve through the native OMP Skill root'
+}
+$activeSkillText = @(Get-ChildItem (Join-Path $repo '.omp/skills') -Recurse -File |
+    ForEach-Object { Get-Content $_.FullName -Raw }) -join "`n"
+foreach ($forbiddenSurface in @('$browser:control-in-app-browser',
+    'HMASD PROJECT-MANAGER-DIRECT PRO REVIEW HEARTBEAT',
+    'This wake belongs to the active Project Manager')) {
+    if ($activeSkillText.Contains($forbiddenSurface)) {
+        throw "Retired review surface remains active: $forbiddenSurface"
+    }
 }
 if (-not (Test-Path (Join-Path $repo '.omp/config.yml') -PathType Leaf) -or
     -not (Test-Path (Join-Path $repo '.omp/mcp.json') -PathType Leaf) -or
     -not (Test-Path (Join-Path $repo '.omp/agents') -PathType Container)) {
     throw 'Unified OMP and BrowserMCP execution surface is incomplete'
 }
-if (Test-Path (Join-Path $repo '.agents/skills/hmasd-review-exchange')) { throw 'Superseded review Exchange remains' }
-Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=unified_controller_browser_state_machine'
+if (Test-Path (Join-Path $repo '.agents')) { throw 'Active legacy .agents root remains' }
+if (Test-Path (Join-Path $repo '.codex')) { throw 'Active legacy .codex root remains' }
+foreach ($legacy in @('.omp/legacy/roles/PROJECT_MANAGER.md',
+    '.omp/legacy/roles/EXPERIMENT_OPERATOR.md',
+    '.omp/legacy/codex/config.toml')) {
+    if (-not (Test-Path (Join-Path $repo $legacy) -PathType Leaf)) {
+        throw "Migrated legacy asset is missing: $legacy"
+    }
+}
+$expectedWorkflow = @('external_pro_scientific_review','controller_intake_and_frozen_plan',
+    'local_omp_implementation_and_collective_review','authorized_run_with_experiment_monitor',
+    'controller_result_intake','external_pro_result_review')
+if ($roles.asset_root.root -ne '.omp' -or $roles.asset_root.legacy_active -or
+    (Compare-Object $expectedWorkflow @($roles.workflow_sequence))) {
+    throw 'Portable OMP asset root or end-to-end research loop changed'
+}
+Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK mode=pro_code_monitor_pro asset_root=.omp'

@@ -3,9 +3,9 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $utf8 = [Text.UTF8Encoding]::new($false)
-$renderer = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1'
-$recorder = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
-$validator = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
+$renderer = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1'
+$recorder = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
+$validator = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
 
 function Write-Utf8 { param([string]$Path, [string]$Content)
     [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($Path)) | Out-Null

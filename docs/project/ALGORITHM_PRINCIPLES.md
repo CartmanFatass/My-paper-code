@@ -7,9 +7,9 @@ specification, experiment dashboard, or research history.
 Current ownership and the scheduled action belong in
 `docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
 counterexamples, idea status and evidence notes live under
-`docs/research/cdc/`. Canonical role authority for scientific decisions,
-adoption, realization and acceptance is defined only in root `AGENTS.md` and
-the applicable `.agents/roles/*.md` contracts; this file does not restate it.
+`docs/research/cdc/`. Canonical authority for scientific decisions, adoption,
+realization and acceptance is defined only in root `AGENTS.md` and the active
+registry/Skills beneath `.omp/`; this file does not restate it.
 Formal experiment contracts and dispositions belong in
 `docs/project/ExpRecord.md`. Git history preserves removed research history.
 
@@ -204,8 +204,8 @@ alone are support work.
 
 Role-specific responsibilities for scientific review, adoption, implementation,
 acceptance, provenance, resources and communication are defined only in root
-`AGENTS.md` and `.agents/roles/*.md`. This principles file specifies the
-scientific result and evidence semantics those roles must preserve.
+`AGENTS.md` and the active registry/Skills beneath `.omp/`. This principles
+file specifies the scientific result and evidence semantics they preserve.
 
 Review output never authorizes code or compute by itself.
 

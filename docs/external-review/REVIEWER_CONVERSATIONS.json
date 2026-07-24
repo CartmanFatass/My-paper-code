@@ -1,5 +1,5 @@
 {
-  "schema_version": 32,
+  "schema_version": 33,
   "updated": "2026-07-23",
   "round_controller": {
     "kind": "active_controller_owned_browsermcp_state_machine",
@@ -8,7 +8,7 @@
     "git_boundary_owner": "active_controller"
   },
   "exchange_contract": {
-    "role_skill": ".agents/skills/hmasd-browser-pro-exchange/SKILL.md",
+    "role_skill": ".omp/skills/hmasd-browser-pro-exchange/SKILL.md",
     "transport_server": "browsermcp-pro",
     "transport_config": ".omp/mcp.json",
     "server_package": "@browsermcp/mcp@0.1.3",

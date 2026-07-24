@@ -4,6 +4,9 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $configPath = Join-Path $repo '.omp/config.yml'
 if (-not (Test-Path $configPath -PathType Leaf)) { throw 'Missing project OMP config' }
+if (-not (Test-Path (Join-Path $repo '.omp/skills') -PathType Container)) {
+    throw 'Missing native project OMP Skill root'
+}
 $config = Get-Content $configPath -Raw
 foreach ($required in @('default: openai-codex/gpt-5.6-sol:high',
     'smol: openai-codex/gpt-5.6-luna:high', 'slow: openai-codex/gpt-5.6-sol:xhigh',
@@ -81,4 +84,6 @@ foreach ($required in @('sole implementation-plan author','compare 2-3 viable ap
     'one Controller-owned state machine','No local or persistent role may')) {
     if (-not $controller.Contains($required)) { throw "Controller contract missing: $required" }
 }
-Write-Output 'HMASD_CONTROLLER_SUBAGENT_CONTRACT_OK profiles=six pro_monitor_routes=removed'
+if (Test-Path (Join-Path $repo '.agents')) { throw 'Legacy active .agents root remains' }
+if (Test-Path (Join-Path $repo '.codex')) { throw 'Legacy active .codex root remains' }
+Write-Output 'HMASD_CONTROLLER_SUBAGENT_CONTRACT_OK profiles=six skills=native-omp'

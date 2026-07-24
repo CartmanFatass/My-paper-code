@@ -18,11 +18,26 @@ document needed at the current boundary:
 The durable research objects live under `docs/research/cdc/`. Load only the
 conjecture, ledger, portfolio or evidence note required at the current boundary.
 
+All live orchestration assets other than this root bootstrap contract live
+under `.omp/`: native Skills in `.omp/skills/`, task profiles in
+`.omp/agents/`, routing state beside its owning Skill, and OMP/BrowserMCP
+configuration at the `.omp/` root. `.omp/legacy/` retains pre-unification
+profiles only as non-active migration evidence. Scientific records, immutable
+review rounds, algorithm source and runtime evidence remain project payload
+outside the OMP asset bundle.
+
 `CURRENT_WORK.md` selects the active execution surface. The Controller is one
 unified scientific-to-code orchestrator: it performs direct evidence intake,
 freezes executable plans inside the accepted scientific direction, dispatches
 project-local OMP task agents, and operates the user-connected ChatGPT Pro tab
 through BrowserMCP. Experiment monitoring remains separately registered.
+
+The intact end-to-end loop is:
+external GPT-5.6 Pro scientific review -> Controller evidence intake and frozen
+executable plan -> local OMP implementation plus one collective
+Reviewer/Verifier gate -> authorized run observed by the registered
+`experiment_monitor` -> Controller result intake -> external GPT-5.6 Pro result
+review. Consolidating assets never removes or substitutes a stage.
 
 Persistent roles are resolved only from the dispatch Skill registry. Local code
 agents are resolved only from `.omp/agents/`; external scientific transport is
@@ -44,7 +59,7 @@ direction.
 
 ## Task dispatch
 
-Automatically use `.agents/skills/hmasd-dispatch-task/SKILL.md` whenever work
+Automatically use `.omp/skills/hmasd-dispatch-task/SKILL.md` whenever work
 may require Monitor dispatch or a persistent role callback. Use
 `hmasd-browser-pro-exchange` for external review transport. Local code-agent
 work uses the project OMP task profiles directly.
@@ -168,7 +183,7 @@ Strict authorization applies to:
 
 - reward, credit, probability factorization, gradients and detach paths;
 - recurrent state, masks, clocks, RNG, replay and checkpoint meaning;
-- `AGENTS.md`, `.agents/skills/`, `docs/project/`, registered experiment
+- `AGENTS.md`, `.omp/skills/`, `docs/project/`, registered experiment
   contracts and active external-review state.
 
 Within an authorized working scope, ordinary helper code, runners, analyzers,

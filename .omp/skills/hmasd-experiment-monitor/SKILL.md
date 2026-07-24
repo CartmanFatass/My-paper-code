@@ -31,7 +31,7 @@ At a terminal state or monitor error, delete the heartbeat before delivery.
 ## Terminal delivery
 
 Resolve the active Controller with
-`hmasd-dispatch-task/scripts/resolve_task_route.ps1 -Role controller`
+`.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1 -Role controller`
 immediately before delivery. Require nonempty `hostId`, `threadId`, `model`,
 and `thinking`; send exactly one real cross-thread message with those values
 copied unchanged. Never guess a target, reuse stale metadata, change model or

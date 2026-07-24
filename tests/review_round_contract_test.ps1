@@ -3,18 +3,18 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $utf8 = [Text.UTF8Encoding]::new($false)
-$validator = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
-$recorder = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
-$renderer = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1'
-$archiver = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1'
-$receiptLockModule = Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/scripts/browser_pro_receipt_lock.psm1'
+$validator = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/validate_browser_pro_round.ps1'
+$recorder = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/record_browser_pro_submission.ps1'
+$renderer = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/render_browser_pro_dispatch.ps1'
+$archiver = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/archive_browser_pro_raw.ps1'
+$receiptLockModule = Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/scripts/browser_pro_receipt_lock.psm1'
 if (-not (Test-Path -LiteralPath $receiptLockModule -PathType Leaf)) {
     throw 'Browser Pro receipt lock module is missing; validated receipt bytes can change before raw publication'
 }
 Import-Module $receiptLockModule -Force
-$boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
-$exchange = Get-Content (Join-Path $repo '.agents/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
-$reviewRound = Get-Content (Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md') -Raw
+$boundaryVerifier = Join-Path $repo '.omp/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
+$exchange = Get-Content (Join-Path $repo '.omp/skills/hmasd-browser-pro-exchange/SKILL.md') -Raw
+$reviewRound = Get-Content (Join-Path $repo '.omp/skills/hmasd-review-round/SKILL.md') -Raw
 $registryRaw = Get-Content (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') -Raw
 $registry = $registryRaw | ConvertFrom-Json
 $mcp = Get-Content (Join-Path $repo '.omp/mcp.json') -Raw | ConvertFrom-Json
@@ -49,8 +49,9 @@ if ((Compare-Object @('browsermcp-pro') $serverKeys) -or $server.type -ne 'stdio
     $server.args[0] -ne '-y' -or $server.args[1] -ne '@browsermcp/mcp@0.1.3' -or
     $server.timeout -ne 120000) { throw 'Pinned singular BrowserMCP server changed' }
 if (-not (Test-Path $boundaryVerifier -PathType Leaf)) { throw 'Pushed-boundary verifier was removed' }
-if ($registry.schema_version -ne 32 -or
+if ($registry.schema_version -ne 33 -or
     $registry.round_controller.kind -ne 'active_controller_owned_browsermcp_state_machine' -or
+    $registry.exchange_contract.role_skill -ne '.omp/skills/hmasd-browser-pro-exchange/SKILL.md' -or
     $registry.exchange_contract.server_package -ne '@browsermcp/mcp@0.1.3' -or
     $registry.exchange_contract.evidence_transport -ne 'github_connector' -or
     $registry.exchange_contract.repository -ne 'CartmanFatass/My-paper-code' -or

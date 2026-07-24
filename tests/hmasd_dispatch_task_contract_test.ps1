@@ -2,25 +2,35 @@
 param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$skill = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/SKILL.md') -Raw
-$metadata = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/agents/openai.yaml') -Raw
-$rolesRaw = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/references/session-roles.json') -Raw
+$skill = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/SKILL.md') -Raw
+$metadata = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/agents/openai.yaml') -Raw
+$rolesRaw = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/references/session-roles.json') -Raw
 $roles = $rolesRaw | ConvertFrom-Json
 
 $expectedRoles = @('controller', 'experiment_monitor')
-if ($roles.schema_version -ne 21 -or (Compare-Object $expectedRoles @($roles.roles.PSObject.Properties.Name))) {
-    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 21'
+if ($roles.schema_version -ne 22 -or (Compare-Object $expectedRoles @($roles.roles.PSObject.Properties.Name))) {
+    throw 'Persistent role graph must contain only controller and experiment_monitor at schema 22'
+}
+$expectedWorkflow = @('external_pro_scientific_review','controller_intake_and_frozen_plan',
+    'local_omp_implementation_and_collective_review','authorized_run_with_experiment_monitor',
+    'controller_result_intake','external_pro_result_review')
+if ($roles.asset_root.root -ne '.omp' -or $roles.asset_root.active_skills -ne '.omp/skills' -or
+    $roles.asset_root.active_agents -ne '.omp/agents' -or $roles.asset_root.legacy_active -or
+    (Compare-Object $expectedWorkflow @($roles.workflow_sequence))) {
+    throw 'OMP asset root or end-to-end workflow sequence changed'
 }
 if ($roles.roles.controller.thread_id -ne '019f8995-7550-7c82-8f31-ad08a3d381d4' -or
     $roles.roles.controller.kind -ne 'active_unified_omp_controller' -or
     $roles.roles.experiment_monitor.thread_id -ne '019f8a2f-08a2-73e1-b539-2dc5a6db0fc1' -or
     $roles.roles.experiment_monitor.registration_status -ne 'ARCHIVED_REBUILD_REQUIRED' -or
-    $roles.roles.experiment_monitor.role_skill -ne '.agents/skills/hmasd-experiment-monitor/SKILL.md') {
+    $roles.roles.experiment_monitor.role_skill -ne '.omp/skills/hmasd-experiment-monitor/SKILL.md') {
     throw 'Persistent controller/experiment Monitor binding changed'
 }
 $transport = $roles.external_review_transport
 $states = @('VALIDATED','RECONCILED_IDLE','DRAFT_CONFIRMED','SUBMISSION_CONFIRMED','GENERATING','STABLE_TWICE','ARCHIVED')
 if ($transport.kind -ne 'controller_owned_browsermcp_state_machine' -or
+    $transport.config -ne '.omp/mcp.json' -or
+    $transport.skill -ne '.omp/skills/hmasd-browser-pro-exchange/SKILL.md' -or
     $transport.server -ne 'browsermcp-pro' -or
     $transport.package -ne '@browsermcp/mcp@0.1.3' -or
     $transport.connection_state -ne 'LIVE_PREFLIGHT_REQUIRED_EVERY_ROUND' -or
@@ -74,8 +84,8 @@ foreach ($forbidden in @('hmasd-pro-monitor','hmasd-pro-monitor-luna','completio
         throw "Removed Pro monitor route remains: $forbidden"
     }
 }
-$resolver = Get-Content (Join-Path $repo '.agents/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1') -Raw
+$resolver = Get-Content (Join-Path $repo '.omp/skills/hmasd-dispatch-task/scripts/resolve_task_route.ps1') -Raw
 foreach ($required in @("ValidateSet('controller', 'experiment_monitor')", 'Unregistered Codex role', 'role = $Role')) {
     if (-not $resolver.Contains($required)) { throw "Role resolver missing: $required" }
 }
-Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK topology=controller_inline_browser six_local_agents=true'
+Write-Output 'HMASD_DISPATCH_TASK_CONTRACT_OK topology=pro-code-monitor-pro asset_root=.omp'
