@@ -21,6 +21,7 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     replay_trajectory,
 )
 from scripts import run_continuous_service_roster_proxy_g17 as runner
+from scripts import screen_continuous_roster_td0_g18 as td0_screen
 
 
 def test_continuous_policy_masks_inactive_rows_and_bounds_actions() -> None:
@@ -132,6 +133,21 @@ def test_replay_lifecycle_and_one_step_credit_are_exact() -> None:
     assert metrics["finite_update"] == 1.0
 
 
+def test_td_zero_uses_next_value_without_later_error_carry() -> None:
+    rewards = torch.tensor([[0.2], [0.4], [0.7]])
+    values = torch.tensor([[0.1], [0.3], [0.5]])
+    advantages, returns = compute_gae(
+        rewards, values, gamma=0.9, gae_lambda=0.0
+    )
+    expected_advantages = torch.tensor(
+        [[0.2 + 0.9 * 0.3 - 0.1], [0.4 + 0.9 * 0.5 - 0.3], [0.7 - 0.5]]
+    )
+    torch.testing.assert_close(advantages, expected_advantages, rtol=0, atol=1e-7)
+    torch.testing.assert_close(
+        returns, expected_advantages + values, rtol=0, atol=1e-7
+    )
+
+
 def test_first_match_branch_precedence() -> None:
     passing = {
         "operational_valid": True,
@@ -160,6 +176,27 @@ def test_first_match_branch_precedence() -> None:
     assert runner.select_result_branch(passing | {"operational_valid": False}) == runner.INVALID_BRANCH
 
 
+def test_g18_td_zero_screen_requires_conditional_access() -> None:
+    passing = {
+        "operational_valid": True,
+        "iid_mean": 0.94,
+        "heldout_mean": 0.93,
+        "gain_mean": 0.2,
+        "minimum_episode": 0.86,
+        "minimum_effort_correlation": 0.96,
+        "minimum_mix_correlation": 0.97,
+        "maximum_effort_mae": 0.02,
+        "maximum_mix_mae": 0.02,
+    }
+    assert td0_screen.select_candidate(passing) == td0_screen.COMPATIBLE_BRANCH
+    assert td0_screen.select_candidate(
+        passing | {"minimum_mix_correlation": 0.89}
+    ) == td0_screen.NOT_COMPATIBLE_BRANCH
+    assert td0_screen.select_candidate(
+        passing | {"operational_valid": False}
+    ) == td0_screen.INVALID_BRANCH
+
+
 def test_nonformal_exercise_closes_and_formal_analysis_rejects_it(tmp_path) -> None:
     run_root = tmp_path / "g17_exercise"
     result = runner.exercise(run_root=run_root)
@@ -177,3 +214,27 @@ def test_nonformal_exercise_closes_and_formal_analysis_rejects_it(tmp_path) -> N
     invalid = runner.analyze(run_root=run_root)
     assert invalid["operational_valid"] is False
     assert invalid["branch"] == runner.INVALID_BRANCH
+
+
+def test_nonformal_td_zero_configuration_round_trips(tmp_path) -> None:
+    run_root = tmp_path / "td0_round_trip"
+    training = runner.train(
+        run_root=run_root,
+        source_commit="TEST_SOURCE",
+        formal=False,
+        authorization_token=None,
+        replicates=1,
+        updates=1,
+        num_envs=2,
+        eval_episodes=3,
+        ppo_passes=1,
+        credit_gamma=td0_screen.CREDIT_GAMMA,
+        gae_lambda=td0_screen.GAE_LAMBDA,
+        seed_offset=td0_screen.SEED_OFFSET,
+    )
+    assert training["configuration"]["gae_lambda"] == 0.0
+    assert training["replicate_results"][0]["seeds"]["model"] == 1_918_000
+    runner.evaluate(run_root=run_root)
+    analysis = runner.analyze(run_root=run_root)
+    assert analysis["operational_valid"] is True
+    assert analysis["branch"] == runner.NONFORMAL_BRANCH

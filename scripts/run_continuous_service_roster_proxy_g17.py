@@ -23,6 +23,7 @@ from ha_ctse_process.continuous_service_roster_proxy_g17 import (
     ACTION_DIM,
     CAPACITY,
     CRITIC_STATE_DIM,
+    GAE_LAMBDA,
     HELDOUT_PROFILES,
     HORIZON,
     OBSERVATION_DIM,
@@ -127,14 +128,15 @@ def make_model() -> ContinuousRosterPolicy:
     return model
 
 
-def _replicate_seeds(replicate: int) -> dict[str, int]:
+def _replicate_seeds(replicate: int, *, seed_offset: int = 0) -> dict[str, int]:
     index = int(replicate)
+    offset = int(seed_offset)
     return {
-        "model": MODEL_SEED_BASE + index,
-        "train_ledger": TRAIN_LEDGER_SEED_BASE + index,
-        "action": ACTION_SEED_BASE + index,
-        "evaluation_ledger": EVALUATION_LEDGER_SEED_BASE + index,
-        "evaluation_action": EVALUATION_ACTION_SEED_BASE + index,
+        "model": MODEL_SEED_BASE + offset + index,
+        "train_ledger": TRAIN_LEDGER_SEED_BASE + offset + index,
+        "action": ACTION_SEED_BASE + offset + index,
+        "evaluation_ledger": EVALUATION_LEDGER_SEED_BASE + offset + index,
+        "evaluation_action": EVALUATION_ACTION_SEED_BASE + offset + index,
     }
 
 
@@ -175,7 +177,8 @@ def _maximum_state_difference(
 def _checkpoint_payload(
     *, model: ContinuousRosterPolicy, optimizer: torch.optim.Optimizer,
     formal: bool, source_commit: str, replicate: int, seeds: dict[str, int],
-    completed_updates: int,
+    completed_updates: int, credit_gamma: float, gae_lambda: float,
+    seed_offset: int,
 ) -> dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
@@ -189,8 +192,11 @@ def _checkpoint_payload(
             "hidden_dim": HIDDEN_DIM,
             "learning_rate": LEARNING_RATE,
             "initial_log_std": INITIAL_LOG_STD,
-            "credit_gamma": CREDIT_GAMMA,
+            "credit_gamma": float(credit_gamma),
+            "gae_lambda": float(gae_lambda),
+            "seed_offset": int(seed_offset),
             "current_observation_residual": True,
+            "active_count_curriculum": False,
         },
         "model_state": model.state_dict(),
         "optimizer_state": optimizer.state_dict(),
@@ -231,6 +237,8 @@ def _load_checkpoint(
     for name, expected in checks.items():
         if payload.get(name) != expected:
             raise ValueError(f"G17 checkpoint {name} mismatch")
+    if payload.get("configuration") != training.get("configuration"):
+        raise ValueError("G17 checkpoint configuration mismatch")
     model.load_state_dict(payload["model_state"])
     optimizer.load_state_dict(payload["optimizer_state"])
     return payload
@@ -264,6 +272,8 @@ def train(
     *, run_root: Path, source_commit: str, formal: bool,
     authorization_token: str | None, replicates: int, updates: int,
     num_envs: int, eval_episodes: int, ppo_passes: int = FORMAL_PPO_PASSES,
+    credit_gamma: float = CREDIT_GAMMA, gae_lambda: float = GAE_LAMBDA,
+    seed_offset: int = 0,
 ) -> dict[str, Any]:
     if formal:
         if authorization_token != AUTHORIZATION_TOKEN:
@@ -278,16 +288,28 @@ def train(
             raise ValueError("formal G17 counts differ from the frozen contract")
         if not source_commit or source_commit == "NONFORMAL_WORKTREE":
             raise ValueError("formal G17 training requires an integrated source commit")
+        if (
+            float(credit_gamma) != CREDIT_GAMMA
+            or float(gae_lambda) != GAE_LAMBDA
+            or int(seed_offset) != 0
+        ):
+            raise ValueError("formal G17 credit or seed contract mismatch")
     if min(replicates, updates, num_envs, eval_episodes, ppo_passes) <= 0:
         raise ValueError("G17 counts must be positive")
+    if not 0.0 <= float(credit_gamma) <= 1.0:
+        raise ValueError("G17 credit gamma must lie in [0, 1]")
+    if not 0.0 <= float(gae_lambda) <= 1.0:
+        raise ValueError("G17 GAE lambda must lie in [0, 1]")
+    if int(seed_offset) < 0:
+        raise ValueError("G17 seed offset must be nonnegative")
     run_root.mkdir(parents=True, exist_ok=False)
     checkpoint_root = run_root / "checkpoints"
     checkpoint_root.mkdir()
-    configure_runtime(MODEL_SEED_BASE)
+    configure_runtime(MODEL_SEED_BASE + int(seed_offset))
     started = time.perf_counter()
     replicate_rows: list[dict[str, Any]] = []
     for replicate in range(int(replicates)):
-        seeds = _replicate_seeds(replicate)
+        seeds = _replicate_seeds(replicate, seed_offset=int(seed_offset))
         configure_runtime(seeds["model"])
         model = make_model()
         optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
@@ -303,6 +325,9 @@ def train(
                 replicate=replicate,
                 seeds=seeds,
                 completed_updates=0,
+                credit_gamma=float(credit_gamma),
+                gae_lambda=float(gae_lambda),
+                seed_offset=int(seed_offset),
             ),
             zero_path,
         )
@@ -339,7 +364,8 @@ def train(
                 trajectory,
                 device=torch.device("cpu"),
                 ppo_passes=int(ppo_passes),
-                gamma=CREDIT_GAMMA,
+                gamma=float(credit_gamma),
+                gae_lambda=float(gae_lambda),
             )
             finite = finite and bool(metrics["finite_update"])
             for name in maximum_errors:
@@ -365,6 +391,9 @@ def train(
                 replicate=replicate,
                 seeds=seeds,
                 completed_updates=int(updates),
+                credit_gamma=float(credit_gamma),
+                gae_lambda=float(gae_lambda),
+                seed_offset=int(seed_offset),
             ),
             final_path,
         )
@@ -404,7 +433,9 @@ def train(
             "hidden_dim": HIDDEN_DIM,
             "learning_rate": LEARNING_RATE,
             "initial_log_std": INITIAL_LOG_STD,
-            "credit_gamma": CREDIT_GAMMA,
+            "credit_gamma": float(credit_gamma),
+            "gae_lambda": float(gae_lambda),
+            "seed_offset": int(seed_offset),
             "current_observation_residual": True,
             "active_count_curriculum": False,
         },
@@ -712,6 +743,13 @@ def _artifact_errors(
             counts_valid = False
         if not counts_valid:
             errors.append("formal count contract mismatch")
+        configuration = training.get("configuration", {})
+        if (
+            configuration.get("credit_gamma") != CREDIT_GAMMA
+            or configuration.get("gae_lambda") != GAE_LAMBDA
+            or configuration.get("seed_offset") != 0
+        ):
+            errors.append("formal credit or seed contract mismatch")
     controls = evaluation.get("source_controls", {})
     if not controls.get("all_schedules_exact") or not controls.get("constructive_access_valid"):
         errors.append("constructive source control failed")
@@ -895,6 +933,9 @@ def exercise(*, run_root: Path) -> dict[str, Any]:
         num_envs=2,
         eval_episodes=3,
         ppo_passes=1,
+        credit_gamma=CREDIT_GAMMA,
+        gae_lambda=GAE_LAMBDA,
+        seed_offset=0,
     )
     evaluate(run_root=run_root)
     return analyze(run_root=run_root)
@@ -913,6 +954,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--num-envs", type=int, default=FORMAL_NUM_ENVS)
     parser.add_argument("--eval-episodes", type=int, default=FORMAL_EVAL_EPISODES)
     parser.add_argument("--ppo-passes", type=int, default=FORMAL_PPO_PASSES)
+    parser.add_argument("--credit-gamma", type=float, default=CREDIT_GAMMA)
+    parser.add_argument("--gae-lambda", type=float, default=GAE_LAMBDA)
+    parser.add_argument("--seed-offset", type=int, default=0)
     return parser.parse_args()
 
 
@@ -931,6 +975,9 @@ def main() -> None:
             num_envs=arguments.num_envs,
             eval_episodes=arguments.eval_episodes,
             ppo_passes=arguments.ppo_passes,
+            credit_gamma=arguments.credit_gamma,
+            gae_lambda=arguments.gae_lambda,
+            seed_offset=arguments.seed_offset,
         )
     elif arguments.mode == "evaluate":
         value = evaluate(run_root=arguments.run_root)

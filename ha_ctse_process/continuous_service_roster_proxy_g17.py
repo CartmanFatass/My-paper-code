@@ -735,11 +735,13 @@ def optimize_update(
     device: torch.device,
     ppo_passes: int,
     gamma: float = GAMMA,
+    gae_lambda: float = GAE_LAMBDA,
 ) -> dict[str, float]:
     advantages, returns = compute_gae(
         trajectory.rewards.to(device),
         trajectory.old_values.to(device),
         gamma=float(gamma),
+        gae_lambda=float(gae_lambda),
     )
     model.train()
     with torch.no_grad():
