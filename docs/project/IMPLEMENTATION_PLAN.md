@@ -8,14 +8,14 @@ last_nonformal=CONTEXTUAL_DUAL_CHANNEL_RESIDUAL_G24
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_CONTEXTUAL_RESIDUAL_G24
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25_PROTOTYPE
+active_implementation=FROZEN_ANCHOR_LOCAL_RESIDUAL_EXPRESSIVITY_G25_BOUNDED_PROBE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
 iterations_remaining=8
 formal_compute=not_scheduled_for_g25
-algebra_status=DIAGNOSTIC_DESIGN_FROZEN_IMPLEMENTATION_NEXT
+algebra_status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
 screen_contract=docs/research/designs/FROZEN_ANCHOR_RESIDUAL_EXPRESSIVITY_G25.md
 ```
 
@@ -176,3 +176,12 @@ bitwise anchor preservation and first-match precedence. Remove the closed G24
 module/runner/test and its now-unused generic contextual hook in the same
 accepted implementation boundary. One integrated bounded CPU probe follows;
 no formal iteration or UAV run is scheduled.
+
+The G25 implementation is accepted for that one probe. The runner keeps the
+constructive teacher diagnostic-only, reuses the source-neutral local residual,
+and exposes no formal mode. Four focused tests close all 36 source rows,
+inactive targets/actions, residual-only Adam ownership, residual movement,
+bitwise frozen state and first-match precedence. Together with retained
+G17/G18/G19 proofs, 25 tests pass on CPU with one thread. G24's module, runner,
+test and contextual hook are deleted from the active line. The only next
+action is the integrated bounded G25 diagnostic.

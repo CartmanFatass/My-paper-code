@@ -117,19 +117,6 @@ class ContinuousRosterPolicy(nn.Module):
             mean = mean + self.current_observation_residual(observation)
         return mean
 
-    def _step_action_mean_residuals(
-        self,
-        *,
-        encoded: torch.Tensor,
-        context: torch.Tensor,
-        observations: torch.Tensor,
-        active_mask: torch.Tensor,
-        hidden: torch.Tensor,
-    ) -> torch.Tensor | None:
-        """Optionally provide one precomputed mean residual per member."""
-
-        return None
-
     def _routing_order(
         self, active_mask: torch.Tensor, observations: torch.Tensor
     ) -> torch.Tensor:
@@ -195,30 +182,6 @@ class ContinuousRosterPolicy(nn.Module):
         count_coordinate = torch.log1p(active_count.to(dtype)).unsqueeze(-1)
         context_input = torch.cat((member_sum, count_coordinate), dim=-1)
         context = self.context_encoder(context_input)
-        step_mean_residuals = self._step_action_mean_residuals(
-            encoded=encoded,
-            context=context,
-            observations=observations,
-            active_mask=active_mask,
-            hidden=hidden,
-        )
-        if step_mean_residuals is not None:
-            if (
-                step_mean_residuals.shape
-                != (batch, self.member_capacity, self.action_dim)
-                or not bool(torch.isfinite(step_mean_residuals).all())
-            ):
-                raise ValueError("continuous roster mean residual shape/finite mismatch")
-            if int(
-                torch.count_nonzero(
-                    torch.where(
-                        active_mask.unsqueeze(-1),
-                        torch.zeros_like(step_mean_residuals),
-                        step_mean_residuals,
-                    )
-                )
-            ) != 0:
-                raise ValueError("continuous roster inactive mean residual must be zero")
         value = self.critic(
             torch.cat((context_input, critic_state, active_mask.to(dtype)), dim=-1)
         ).squeeze(-1)
@@ -265,8 +228,6 @@ class ContinuousRosterPolicy(nn.Module):
                 prefix_fraction=prefix_fraction,
                 observation=observations[batch_index, owner],
             )
-            if step_mean_residuals is not None:
-                mean = mean + step_mean_residuals[batch_index, owner]
             distribution = torch.distributions.Normal(mean, std.expand_as(mean))
             if teacher_pre_tanh is not None:
                 raw = teacher_pre_tanh[batch_index, owner]

@@ -1,7 +1,7 @@
 # Frozen-anchor local residual expressivity G25
 
 ```text
-status=DESIGN_FROZEN_IMPLEMENTATION_NEXT
+status=PROTOTYPE_ACCEPTED_BOUNDED_PROBE_NEXT
 formal=false
 iteration_consumed=false
 backend=cpu
@@ -45,3 +45,19 @@ or claim held-out generalization from the three slot permutations.
 5. A formal analyzer or formal claim cannot consume the diagnostic artifact.
 
 Only one integrated bounded CPU run is permitted after focused acceptance.
+
+## Implementation acceptance
+
+The active runner is
+`scripts/probe_frozen_anchor_residual_expressivity_g25.py`. Constructive labels
+remain in that diagnostic boundary; the policy is the existing source-neutral
+`FastAnchoredResidualPolicy`. The runner closes the exact 36-row dataset,
+trains the unchanged fast anchor, enables only the local residual, records
+pointwise and closed-loop evidence separately, and has no formal mode.
+
+Four focused tests and 25 focused-plus-retained G17/G18/G19 tests pass on the
+registered CPU one-thread runtime. They prove dataset coverage and inactive
+semantics, exact residual optimizer ownership, a moving residual with bitwise
+frozen non-residual state, and fail-closed result precedence. Closed G24 code
+and its now-unused generic contextual hook are removed from the active line.
+This accepts only the single bounded diagnostic run.
