@@ -27,8 +27,19 @@ availability at `Jul 28th, 2026 10:31 AM`; no substitute model or role is legal.
 
 ## Active boundary
 
-The user's 2026-07-23 bounded autonomous grant remains active for exactly five
-conclusion-bearing iterations. Two are consumed:
+The user revoked the 2026-07-23 bounded autonomous grant. Automatic
+continuation is paused immediately. No BrowserMCP submission, scientific
+successor dispatch, implementation, Monitor assignment, experiment
+authorization or formal compute may begin without a new explicit user
+instruction.
+
+Git authority is restricted to pushing only branch `Claude`. The Controller may
+fetch and merge `origin/aggressive` into `Claude`, but must not push,
+force-push or otherwise mutate `aggressive` or any other branch. `Claude`
+remains an independent exploration line.
+
+At revocation, two of the former five conclusion-bearing iterations had been
+consumed:
 
 1. refutation of the heterogeneous natural-branch scalar classifier and
    adoption of the typed discriminator;

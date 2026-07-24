@@ -246,6 +246,7 @@ Update project control only at an accepted implementation, pre-launch boundary,
 terminal experiment disposition, accepted external disposition, autonomy-state
 change or explicit controller handoff. Report only the domain that changed.
 
-The controller may push `aggressive` with `git push My-paper-code aggressive`
-under the user's standing authorization. Local agents and persistent roles do
-not commit or push.
+The Controller may push only `Claude` to `origin` under the user's current
+authorization. It must not push, force-push, merge into or otherwise mutate
+`aggressive` or any other branch. Fetching and merging `origin/aggressive` into
+`Claude` is permitted. Local agents and persistent roles do not commit or push.
