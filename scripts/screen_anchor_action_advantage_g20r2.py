@@ -18,6 +18,7 @@ nothing writes under ``logs/``.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -105,29 +106,6 @@ SEEDS = {
     },
 }
 BASELINE_SAMPLES_K_CONFIGURED = BASELINE_SAMPLES_K  # design section 11: 8
-
-# Design section 11 ("`epsilon_audit` is not yet registered -- the screen is
-# withheld"): `epsilon_audit` is a measured property of the audit estimator
-# per source, registered here only after
-# `scripts/calibrate_epsilon_audit_g20r2.py` (the frozen replicate-split null
-# calibration) has produced it. This block is intentionally empty until a
-# Project Manager writes a measured value in -- an unregistered source must
-# raise, never fall back to a placeholder, so the screen fails closed rather
-# than silently gating identification on an unregistered number.
-EPSILON_AUDIT_REGISTERED: dict[str, float] = {}
-
-
-def _registered_epsilon_audit(source: str) -> float:
-    if source not in EPSILON_AUDIT_REGISTERED:
-        raise RuntimeError(
-            f"G20R2 epsilon_audit is not registered for source={source!r} "
-            "(design section 11, 'epsilon_audit is not yet registered -- the "
-            "screen is withheld'). Run scripts/calibrate_epsilon_audit_g20r2.py "
-            "at the configured audit scale and register its per-source result "
-            "in EPSILON_AUDIT_REGISTERED before running this screen."
-        )
-    return float(EPSILON_AUDIT_REGISTERED[source])
-
 
 REPLAY_TOLERANCE = 1e-6
 G17_UTILITY_FLOOR = 0.90
@@ -987,20 +965,103 @@ def _replay_decision_history(
 
 
 # ---------------------------------------------------------------------------
+# `epsilon_audit` in-situ null calibration (design section 11, "`epsilon_audit`
+# cannot be a pre-registered constant"). Measured at the exact fast anchor
+# snapshot, immediately before Stage A, sharing one implementation of the
+# replicate-split null procedure with `scripts/calibrate_epsilon_audit_g20r2.
+# py` -- not a second copy that can drift out of sync with it.
+# ---------------------------------------------------------------------------
+
+
+def _policy_snapshot_fingerprint(state: dict[str, torch.Tensor]) -> str:
+    """Stable content fingerprint of a policy snapshot (design section 7,
+    "The snapshot version is part of the evidence record").
+
+    Hashes every named parameter's raw bytes in name-sorted order, so the
+    fingerprint depends only on tensor content -- two `anchor_state()` calls
+    at the same weights fingerprint identically, and any weight drift
+    (even bit-level) changes it. Used to prove `epsilon_audit` was actually
+    measured under the same policy snapshot Stage A audits, rather than
+    trusting that no code path between the two calls silently moved a
+    weight.
+    """
+
+    hasher = hashlib.sha256()
+    for name in sorted(state):
+        hasher.update(name.encode("utf-8"))
+        hasher.update(state[name].detach().cpu().contiguous().numpy().tobytes())
+    return hasher.hexdigest()
+
+
+def _require_matching_snapshot(expected: str, observed: str, *, context: str) -> None:
+    """Fail closed if two policy-snapshot fingerprints diverge.
+
+    Design section 11's fourth condition and section 7's snapshot-ownership
+    rule both forbid pairing a measurement with a different policy version
+    than the one it describes. This makes that pairing an assertion in code
+    (raised, not merely documented) rather than a hope that no future edit
+    inserts a weight-mutating step between the two measurements it compares.
+    """
+
+    if observed != expected:
+        raise RuntimeError(
+            f"G20R2 {context} ran under a different policy snapshot than "
+            "expected (design section 11 / section 7) -- a measurement must "
+            f"never be paired with a different policy version: expected="
+            f"{expected} observed={observed}"
+        )
+
+
+def _measure_epsilon_audit(
+    source: str,
+    model: FastAnchorActionAdvantagePolicy,
+    *,
+    episode_id_offset: int,
+) -> dict[str, Any]:
+    """In-situ `epsilon_audit` null calibration at the current model state.
+
+    Imported lazily (rather than at this module's top level) because
+    `scripts/calibrate_epsilon_audit_g20r2.py` imports several constants and
+    helpers from this module at ITS OWN top level -- importing it back here
+    at module load time would be a circular import. By the time this
+    function is actually called (after both modules have finished loading),
+    the lazy import simply fetches the already-initialized module.
+    """
+
+    from scripts.calibrate_epsilon_audit_g20r2 import calibrate_source
+
+    return calibrate_source(source, model=model, episode_id_offset=episode_id_offset)
+
+
+# ---------------------------------------------------------------------------
 # Identification-stage wiring (design sections 2-4).
 # ---------------------------------------------------------------------------
 
 
 def run_identification_stages(
-    source: str, clusters: dict[str, list[torch.Tensor]], *, seed: int
+    source: str,
+    clusters: dict[str, list[torch.Tensor]],
+    *,
+    seed: int,
+    epsilon_audit_measurement: dict[str, Any],
 ) -> dict[str, Any]:
+    """Run Stages A, P2, B1 and B2 on one source's audit clusters.
+
+    ``epsilon_audit_measurement`` is the in-situ null calibration's own
+    result dict (``_measure_epsilon_audit`` / ``calibrate_source``) --
+    required, with no default, so Stage A is structurally unreachable
+    without a measured floor from this run (design section 11): the
+    now-removed ``EPSILON_AUDIT_REGISTERED`` registry is gone, and there is
+    no fallback constant here to silently gate on instead.
+    """
+
     generator = torch.Generator()
     generator.manual_seed(int(seed))
 
     stage_a = stage_a_source_effect(
         clusters["oracle"],
         generator=generator,
-        epsilon_audit=_registered_epsilon_audit(source),
+        epsilon_audit=float(epsilon_audit_measurement["epsilon_audit"]),
     )
     p2 = stage_a_p2_authority_check(clusters["oracle"], clusters["score"])
 
@@ -1041,6 +1102,7 @@ def run_identification_stages(
         generator=generator,
     )
     return {
+        "epsilon_audit_measurement": epsilon_audit_measurement,
         "stage_a": stage_a,
         "stage_a_passed": bool(stage_a["passed"]),
         "p2_authority": p2,
@@ -1239,6 +1301,7 @@ def _train_source(source: str) -> dict[str, Any]:
         active_rows += trajectory.active_token_count
     anchor_evaluation = _evaluate_phase(source, model)
     anchor_state = model.anchor_state()
+    anchor_snapshot_id = _policy_snapshot_fingerprint(anchor_state)
 
     # --- qualification phase (design section 6: critic-only, D_fit) --------
     model.begin_qualification_phase()
@@ -1263,17 +1326,52 @@ def _train_source(source: str) -> dict[str, Any]:
             )
         active_rows += trajectory.active_token_count
 
+    # --- epsilon_audit in-situ null calibration (design section 11,
+    # "`epsilon_audit` cannot be a pre-registered constant"): measured at the
+    # exact fast anchor snapshot (the actor is frozen throughout the
+    # qualification phase above, so the model's actor weights here are
+    # bit-identical to `anchor_state` -- only `prefix_critic` moved), drawn
+    # from a calibration episode block disjoint from Stage A's own audit
+    # block, immediately before Stage A reads anything. -----------------
+    calibration_episode_offset = (
+        (fast_updates + qualification_updates) * NUM_ENVS + 30_000
+    )
+    epsilon_audit_measurement = {
+        **_measure_epsilon_audit(
+            source, model, episode_id_offset=calibration_episode_offset
+        ),
+        # Design section 7: "The snapshot version is part of the evidence
+        # record." Recorded here so a floor can never be silently paired
+        # with a different policy version than the one it was measured
+        # under -- see also `_require_matching_snapshot` immediately below.
+        "policy_snapshot_id": anchor_snapshot_id,
+    }
+    calibration_episode_ids = tuple(
+        int(value) for value in epsilon_audit_measurement["episode_ids"]
+    )
+    _require_matching_snapshot(
+        anchor_snapshot_id,
+        _policy_snapshot_fingerprint(model.anchor_state()),
+        context="epsilon_audit calibration",
+    )
+
     # --- identification audit (design sections 2-4, D_audit) ---------------
     audit_episode_ids = tuple(
         (fast_updates + qualification_updates) * NUM_ENVS + 10_000 + index
         for index in range(AUDIT_EPISODES)
     )
     validate_disjoint_roles(
-        qualification_episode_ids, [], audit_episode_ids
+        qualification_episode_ids, calibration_episode_ids, audit_episode_ids
     )
     audit_clusters = collect_audit_clusters(source, model, episode_ids=audit_episode_ids)
+    _require_matching_snapshot(
+        anchor_snapshot_id,
+        _policy_snapshot_fingerprint(model.anchor_state()),
+        context="Stage A audit",
+    )
     identification = run_identification_stages(
-        source, audit_clusters, seed=seeds["audit"]
+        source, audit_clusters, seed=seeds["audit"],
+        epsilon_audit_measurement=epsilon_audit_measurement,
     )
     stage_b_passed = bool(
         identification["stage_a_passed"]

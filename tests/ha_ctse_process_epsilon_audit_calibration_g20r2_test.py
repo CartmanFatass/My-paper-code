@@ -1,15 +1,21 @@
 """Tests for the `epsilon_audit` fail-closed contract and its null calibration.
 
-Covers design section 11's three requirements: the module default must be
-unreachable (`ha_ctse_process/anchor_action_advantage_g20r2.py`), the screen
-must fail closed while `epsilon_audit` is unregistered
-(`scripts/screen_anchor_action_advantage_g20r2.py`), and the replicate-split
-null calibration's own statistic
-(`scripts/calibrate_epsilon_audit_g20r2.py`) must convert observed deltas to
-`epsilon_audit` correctly and must not silently accept a degenerate
-self-vs-self measurement. No test here runs the calibration at the full
-registered audit scale -- that is a bounded diagnostic measurement executed
-separately, not a proof obligation of this suite.
+Covers design section 11's requirements: the module default must be
+unreachable (`ha_ctse_process/anchor_action_advantage_g20r2.py`); the screen's
+`run_identification_stages` must fail closed without a measured
+`epsilon_audit_measurement` from THIS run
+(`scripts/screen_anchor_action_advantage_g20r2.py`) -- the retired
+`EPSILON_AUDIT_REGISTERED` registry and its lookup are gone entirely, not
+just unused; the in-situ calibration must run at the exact fast anchor
+snapshot with its own episode block verifiably disjoint from Stage A's audit
+block (decision 1); the recorded measurement must carry the policy-snapshot
+identity it was measured under (section 7); and the replicate-split null
+calibration's own statistic (`scripts/calibrate_epsilon_audit_g20r2.py`) must
+convert observed deltas to `epsilon_audit` correctly and must not silently
+accept a degenerate self-vs-self measurement. No test here runs the
+calibration at the full registered audit scale -- that is a bounded
+diagnostic measurement executed separately, not a proof obligation of this
+suite.
 """
 
 from __future__ import annotations
@@ -63,31 +69,211 @@ def test_stage_a_source_effect_still_works_with_epsilon_audit_supplied() -> None
 
 
 # ---------------------------------------------------------------------------
-# The screen's registered-constants block fails closed while unregistered.
+# The screen's `run_identification_stages` fails closed without a measured
+# `epsilon_audit_measurement` from this run. The retired `EPSILON_AUDIT_
+# REGISTERED` module-level registry and its `_registered_epsilon_audit`
+# lookup are gone entirely (not merely unused): there is no longer a
+# pre-registered-constant path for Stage A to fall back to.
 # ---------------------------------------------------------------------------
 
 
-def test_screen_epsilon_audit_lookup_raises_while_unregistered() -> None:
-    for source in ("g17", "g18"):
-        assert source not in screen_module.EPSILON_AUDIT_REGISTERED, (
-            "this task measures epsilon_audit but does not register it -- "
-            "the design's Project Manager registers constants, not this task"
+def test_screen_no_longer_exposes_the_retired_epsilon_audit_registry() -> None:
+    assert not hasattr(screen_module, "EPSILON_AUDIT_REGISTERED")
+    assert not hasattr(screen_module, "_registered_epsilon_audit")
+
+
+def _tiny_identification_clusters() -> dict[str, list[torch.Tensor]]:
+    generator = torch.Generator()
+    generator.manual_seed(4242)
+    return {
+        "oracle": [torch.randn(4, 1, generator=generator) for _ in range(6)],
+        "critic": [torch.randn(4, 1, generator=generator) for _ in range(6)],
+        "score": [torch.randn(4, 2, generator=generator) for _ in range(6)],
+    }
+
+
+def test_run_identification_stages_requires_epsilon_audit_measurement_explicitly() -> None:
+    """Stage A must be structurally unreachable without a measured floor
+    from this run -- exercised directly, not merely inferred from reading
+    the signature."""
+
+    clusters = _tiny_identification_clusters()
+    with pytest.raises(TypeError):
+        screen_module.run_identification_stages("g18", clusters, seed=1)  # type: ignore[call-arg]
+
+
+def test_run_identification_stages_fails_closed_on_a_measurement_missing_epsilon_audit() -> None:
+    """A measurement dict that forgot to carry its own `epsilon_audit` key
+    (e.g. a caller that passed the wrong dict) must raise, not silently
+    substitute a default."""
+
+    clusters = _tiny_identification_clusters()
+    with pytest.raises(KeyError):
+        screen_module.run_identification_stages(
+            "g18", clusters, seed=1, epsilon_audit_measurement={}
         )
-        with pytest.raises(RuntimeError):
-            screen_module._registered_epsilon_audit(source)
 
 
-def test_screen_epsilon_audit_lookup_succeeds_once_registered() -> None:
-    """Proves the raise is really about the *registration state*, not a
-    permanently broken lookup -- a lookup that always raises regardless of
-    registration would pass the test above for the wrong reason."""
+def test_run_identification_stages_actually_gates_on_the_supplied_epsilon_audit() -> None:
+    """The supplied value must reach Stage A's gate itself, not just get
+    echoed back in the recorded metadata -- proven by flipping the pass/fail
+    outcome with the floor alone, same clusters, same seed."""
 
-    assert "unregistered_test_source" not in screen_module.EPSILON_AUDIT_REGISTERED
-    screen_module.EPSILON_AUDIT_REGISTERED["unregistered_test_source"] = 0.25
-    try:
-        assert screen_module._registered_epsilon_audit("unregistered_test_source") == 0.25
-    finally:
-        del screen_module.EPSILON_AUDIT_REGISTERED["unregistered_test_source"]
+    clusters = _tiny_identification_clusters()
+    loose = screen_module.run_identification_stages(
+        "g18", clusters, seed=1, epsilon_audit_measurement={"epsilon_audit": 1e-6}
+    )
+    strict = screen_module.run_identification_stages(
+        "g18", clusters, seed=1, epsilon_audit_measurement={"epsilon_audit": 10.0}
+    )
+    assert loose["stage_a"]["epsilon_audit_squared"] == pytest.approx((1e-6) ** 2)
+    assert strict["stage_a"]["epsilon_audit_squared"] == pytest.approx(100.0)
+    assert loose["epsilon_audit_measurement"]["epsilon_audit"] == 1e-6
+    assert strict["epsilon_audit_measurement"]["epsilon_audit"] == 10.0
+    assert loose["stage_a_passed"] is True
+    assert strict["stage_a_passed"] is False
+
+
+# ---------------------------------------------------------------------------
+# Policy-snapshot identity: a floor can never be silently paired with a
+# different policy version than the one it was measured under (design
+# sections 7 and 11).
+# ---------------------------------------------------------------------------
+
+
+def test_policy_snapshot_fingerprint_is_stable_at_fixed_weights_and_sensitive_to_drift() -> None:
+    model = screen_module.make_model("g18")
+    first = screen_module._policy_snapshot_fingerprint(model.anchor_state())
+    second = screen_module._policy_snapshot_fingerprint(model.anchor_state())
+    assert first == second, "the same weights must fingerprint identically"
+
+    with torch.no_grad():
+        model.log_std.add_(1e-3)
+    drifted = screen_module._policy_snapshot_fingerprint(model.anchor_state())
+    assert drifted != first, "even a small weight drift must change the fingerprint"
+
+
+def test_require_matching_snapshot_passes_when_equal_and_raises_when_not() -> None:
+    screen_module._require_matching_snapshot("abc", "abc", context="test")  # must not raise
+    with pytest.raises(RuntimeError):
+        screen_module._require_matching_snapshot("abc", "def", context="test")
+
+
+# ---------------------------------------------------------------------------
+# The in-situ path: `_measure_epsilon_audit` / `calibrate_source(model=...)`
+# must reuse the caller's own trained model rather than silently rebuilding
+# an untrained one (design section 11's decisive fourth condition), and its
+# episode block must be verifiably disjoint from Stage A's own audit block
+# (decision 1).
+# ---------------------------------------------------------------------------
+
+
+def test_calibrate_source_with_explicit_model_skips_configure_runtime_and_make_model(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The load-bearing wiring claim: supplying `model=` must reuse that
+    exact object, never rebuild a fresh one. Proven by building the model
+    with the real functions first, then breaking both rebuild paths and
+    confirming they are never called."""
+
+    model = calibration_module.make_model("g18")
+
+    def _must_not_be_called(*args: object, **kwargs: object) -> None:
+        raise AssertionError("must not run when model= is provided explicitly")
+
+    monkeypatch.setattr(calibration_module, "make_model", _must_not_be_called)
+    monkeypatch.setattr(calibration_module.g17_runner, "configure_runtime", _must_not_be_called)
+
+    result = calibration_module.calibrate_source(
+        "g18",
+        model=model,
+        episode_id_offset=1_000,
+        audit_episodes=2,
+        points_per_episode=1,
+        suffix_replicates=2,
+        k=2,
+    )
+    assert result["episode_ids"] == [1_000, 1_001]
+
+
+def test_measure_epsilon_audit_forwards_model_and_offset_to_calibrate_source(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """`screen._measure_epsilon_audit` is the screen's own lazily-imported
+    call site into the shared calibration -- prove it actually forwards the
+    live model and offset rather than reconstructing its own."""
+
+    captured: dict[str, object] = {}
+
+    def _stub_calibrate_source(source: str, *, model: object, episode_id_offset: int) -> dict:
+        captured["source"] = source
+        captured["model"] = model
+        captured["episode_id_offset"] = episode_id_offset
+        return {"epsilon_audit": 0.5, "episode_ids": [episode_id_offset]}
+
+    monkeypatch.setattr(calibration_module, "calibrate_source", _stub_calibrate_source)
+
+    sentinel_model = object()
+    result = screen_module._measure_epsilon_audit(
+        "g18", sentinel_model, episode_id_offset=77_000
+    )
+    assert captured == {
+        "source": "g18",
+        "model": sentinel_model,
+        "episode_id_offset": 77_000,
+    }
+    assert result["episode_ids"] == [77_000]
+
+
+def test_calibration_and_audit_episode_blocks_are_disjoint_under_the_real_configuration() -> None:
+    """Replicates `_train_source`'s own episode-block arithmetic for both
+    registered sources at their configured phase-update counts and proves
+    the calibration block never collides with Stage A's audit block --
+    design section 11, decision 1, asserted in code rather than trusted from
+    the offset constants alone."""
+
+    for source, qualification_updates, fast_updates in (
+        (
+            "g17",
+            screen_module.G17_QUALIFICATION_UPDATES,
+            screen_module.G17_FAST_UPDATES,
+        ),
+        (
+            "g18",
+            screen_module.G18_QUALIFICATION_UPDATES,
+            screen_module.G18_FAST_UPDATES,
+        ),
+    ):
+        base = (fast_updates + qualification_updates) * screen_module.NUM_ENVS
+        qualification_episode_ids = tuple(
+            fast_updates * screen_module.NUM_ENVS + index
+            for update in range(qualification_updates)
+            for index in screen_module._qualification_episode_block(source, update)
+        )
+        audit_episode_ids = tuple(
+            base + 10_000 + index for index in range(screen_module.AUDIT_EPISODES)
+        )
+        calibration_offset = base + 30_000
+        calibration_episode_ids = tuple(
+            calibration_offset + index
+            for index in range(calibration_module.CALIBRATION_AUDIT_EPISODES)
+        )
+        credit_module.validate_disjoint_roles(
+            qualification_episode_ids, calibration_episode_ids, audit_episode_ids
+        )  # must not raise
+
+
+def test_calibration_and_audit_episode_blocks_can_actually_be_caught_colliding() -> None:
+    """Proves the guard above has teeth: a deliberately colliding
+    calibration block must be rejected, not silently accepted -- otherwise
+    the passing test above would be evidence of nothing."""
+
+    audit_episode_ids = (10_000, 10_001, 10_002)
+    colliding_calibration_ids = (10_001, 20_000)
+    with pytest.raises(ValueError):
+        credit_module.validate_disjoint_roles(
+            [], colliding_calibration_ids, audit_episode_ids
+        )
 
 
 # ---------------------------------------------------------------------------

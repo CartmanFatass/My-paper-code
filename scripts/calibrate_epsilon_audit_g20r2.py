@@ -37,21 +37,43 @@ concretely the larger of the raw 95th-percentile point estimate and a
 clustered-bootstrap 95th-percentile upper bound, so a small audit sample does
 not undershoot the floor.
 
-Three conditions the design requires for the number to be meaningful, all
-honored here by using this module's own configured constants as defaults:
-run at the configured audit scale (``AUDIT_EPISODES``, ``K=8``, the registered
-``AUDIT_SUFFIX_REPLICATES``); measure per source (G17 and G18 have different
-return scales); and never write the result back into the design document --
-this script only measures and reports.
+Four conditions the design requires for the number to be meaningful, all
+honored here: run at the configured per-estimate Monte Carlo budget (``K=8``,
+the registered ``AUDIT_SUFFIX_REPLICATES``) while raising only the *point
+count* (``CALIBRATION_AUDIT_EPISODES``, well above the screen's own
+``AUDIT_EPISODES``); draw only from the C1 action support; measure per source
+(G17 and G18 have different return scales); and measure under the policy
+snapshot Stage A actually audits -- section 11's fourth, decisive condition.
+That condition is the one an earlier draft of this rule missed: measuring
+under a freshly initialized model instead returned the wrong order of
+magnitude (``0.050631``/``0.034566`` for G17/G18, against the trained
+screen's own ``0.005004``/``0.042009`` identification quantities).
 
-No training of any kind happens here, and nothing in this module calls
-``run_screen``. The declared suffix policy this calibration probes is the same
-freshly constructed, untrained anchor model
-``scripts.screen_anchor_action_advantage_g20r2.make_model`` would build at the
-start of ``_train_source`` (identical seeding via ``configure_runtime``) --
-Stage A's floor is a property of the environment's own suffix-noise
-resolution under a fixed policy, not of a trained critic or actor, and no
-training compute is authorized by this task.
+No training of any kind happens in this module either way, and nothing here
+calls ``run_screen``. ``calibrate_source`` runs in one of two modes:
+
+- **Standalone (``model=None``, the default).** Builds a fresh, freshly
+  initialized anchor model via ``configure_runtime`` +
+  ``scripts.screen_anchor_action_advantage_g20r2.make_model``, exactly as
+  this script always has. This reproduces the module's own original
+  diagnostic measurement and stays useful for a parity check on this shared
+  implementation and for quick smoke testing, but per the paragraph above it
+  is **not** representative of the registrable floor -- an untrained model
+  is the wrong policy snapshot.
+- **In situ (``model=<the caller's own trained policy>``).** The screen
+  (``scripts/screen_anchor_action_advantage_g20r2.py``) calls this mode with
+  its own already-fast-trained model, immediately before Stage A, at the
+  exact fast anchor snapshot -- ``configure_runtime``/``make_model`` are
+  skipped entirely so the caller's trained weights and global RNG state are
+  left untouched. This is the one procedure both call sites share; there is
+  no second copy of the replicate-split null to drift out of sync with this
+  one.
+
+``episode_id_offset`` lets a caller (again, the screen) place this
+calibration's own episode-ledger block in a range disjoint from its own
+Stage A audit block -- design section 11, decision 1: "Calibration episodes
+are disjoint from Stage A's audit episodes," since the floor and the
+statistic it gates must never share data.
 """
 
 from __future__ import annotations
@@ -422,6 +444,8 @@ def _epsilon_audit_from_deltas(
 def calibrate_source(
     source: str,
     *,
+    model: FastAnchorActionAdvantagePolicy | None = None,
+    episode_id_offset: int = 0,
     audit_episodes: int = CALIBRATION_AUDIT_EPISODES,
     points_per_episode: int = AUDIT_PROBE_POINTS_PER_EPISODE,
     suffix_replicates: int = AUDIT_SUFFIX_REPLICATES,
@@ -439,14 +463,38 @@ def calibrate_source(
     ~24 points is too few to estimate a stable 95th-percentile tail. Smaller
     overrides exist only for tests exercising the wiring at trivial scale; a
     value intended for registration must use the defaults.
+
+    ``model``: when ``None`` (the standalone default), builds a fresh,
+    untrained anchor model exactly as this function always has --
+    reproduces this module's own original diagnostic measurement. When the
+    screen calls this in situ it passes its own already-fast-trained model,
+    so this null probes the *same* declared suffix policy Stage A will
+    audit (design section 11 -- a floor measured under any other policy,
+    in particular a freshly initialized one, does not describe the
+    resolution the screen will actually face). Supplying a model skips
+    ``configure_runtime``/``make_model`` entirely: rebuilding a fresh model
+    here would silently discard the caller's trained weights and reseed
+    global RNG streams mid-run.
+
+    ``episode_id_offset``: shifts every calibration episode id by this
+    amount, so a caller can place this calibration's own episode-ledger
+    block in a range disjoint from its own audit block (design section 11,
+    decision 1). Defaults to 0, reproducing this function's original
+    numbering for standalone use. The exact episode ids used are returned
+    under ``"episode_ids"`` so a caller can assert that disjointness in
+    code rather than trusting the offset arithmetic alone.
     """
 
-    g17_runner.configure_runtime(int(SEEDS[source]["model"]))
-    model = make_model(source)
+    if model is None:
+        g17_runner.configure_runtime(int(SEEDS[source]["model"]))
+        model = make_model(source)
     horizon, capacity, action_dim = _source_geometry(source)
 
     rows_by_episode: dict[int, list[ProbePointDelta]] = {}
-    for episode_id in range(int(audit_episodes)):
+    episode_ids: list[int] = []
+    for offset in range(int(audit_episodes)):
+        episode_id = int(episode_id_offset) + offset
+        episode_ids.append(episode_id)
         ledger = _make_ledger(source, episode_id)
         active_counts = _episode_active_counts(
             horizon=horizon,
@@ -496,6 +544,8 @@ def calibrate_source(
         "points_per_episode": int(points_per_episode),
         "suffix_replicates": int(suffix_replicates),
         "k": int(k),
+        "episode_id_offset": int(episode_id_offset),
+        "episode_ids": episode_ids,
         **statistic,
     }
 
