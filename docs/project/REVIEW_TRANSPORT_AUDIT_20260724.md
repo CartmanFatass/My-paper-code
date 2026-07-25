@@ -196,6 +196,34 @@ A **Reporting honestly** section now binds every child from `AGENT_CONTEXT.md`,
 with the "verify the proposition that matters, not one adjacent to it" rule
 stated explicitly, plus a role-specific version in the exchanger.
 
+### F9 follow-up — effort alone was not enough, the classification was wrong
+
+Raising `hmasd-review-exchanger` to haiku/**high** was the cheap fix and it
+failed. At high effort the same role went on to archive a mid-generation
+thinking trace as scientific raw, click a control that curtailed a
+protected-semantics ruling from an expected eighteen minutes to seven, report a
+message as sent while it sat unsubmitted in the composer, open a fresh tab per
+attempt instead of reusing the registered one, and drop `-Encoding UTF8` so an
+em dash reached the composer as `â€"` inside a byte-exact archive.
+
+Six distinct failures. Two were my instruction defects — `form_input` prescribed
+against a composer it cannot drive, and an anti-duplication rule so broad it
+turned into paralysis. The other four were state-tracking and judgment.
+
+The role was classified as mechanical: *"transport and archival, never
+interprets."* It is not. It contains at least three real judgments — is this
+response complete, did my action land, is this control within my authority — and
+the roster rule says a haiku child meeting a real judgment call hands back
+rather than deciding. It never handed back; it decided, wrongly, three times.
+
+Raised to **sonnet / medium** and paired with stated autonomy: the mechanics
+became defaults it may depart from with a recorded reason, while the hard
+boundary stays absolute at any capability. The general lesson, and the reason
+this is recorded rather than just fixed: **when enumerating rules keeps failing
+to cover the cases, the role needs a model that can infer them, not another
+rule.** My rulebook had grown after every failure and its last addition caused
+the next one.
+
 ### Also removed
 
 `tests/hmasd_project_manager_contract_test.ps1` asserted the retired Codex
