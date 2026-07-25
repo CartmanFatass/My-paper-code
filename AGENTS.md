@@ -375,3 +375,31 @@ precedence change only at an explicitly accepted scientific boundary.
 - `CLAUDE.md` contains the Claude Code runtime: subagent roster and tiers.
 - `.claude/agents/` contains the registered subagent definitions.
 - `.claude/skills/hmasd-*/` contains only reusable operating mechanics.
+
+## Document ownership and update triggers
+
+A document with no live owner drifts, and an owner with no triggering event
+drifts almost as fast. `IMPLEMENTATION_PLAN.md` sat twelve hours stale on
+2026-07-24 — naming a superseded design and an iteration budget of 8 against a
+real 20 — while `AGENT_CONTEXT.md` pointed every child at it as the frozen
+executable contract. Its recorded owner was "Fable", an actor in no roster and
+no charter.
+
+**An owner must be a live role.** Naming a retired actor is the same as naming
+nobody.
+
+| Document | Updated by | Must move when |
+|---|---|---|
+| `docs/project/CURRENT_WORK.md` | Project Manager | any boundary change: active assignment, accepted result, grant or authority change |
+| `docs/project/IMPLEMENTATION_PLAN.md` | Project Manager | the active design, its status, or the iteration budget changes |
+| `docs/research/designs/*.md` | Project Manager, recording Pro's decision | at freeze only — never edited afterwards; supersede with a new file |
+| `docs/research/cdc/EVIDENCE_NOTES/*.md` | Project Manager | a result closes or a derivation completes; append-only |
+| `docs/project/ExpRecord.md` | `hmasd-exp-recorder`, on a PM classification | a run reaches a terminal status |
+| `docs/report/ITERATION_<n>.md` | Project Manager | after every valid conclusion-bearing iteration |
+| `docs/project/RESTART_HANDOFF.md` | Project Manager | at a compaction seam, and nowhere else |
+| `AGENTS.md`, `CLAUDE.md`, `.agents/roles/*`, `.claude/agents/*` | Project Manager; user-authorized where authority itself changes | a rule actually changes — not to restate one |
+| `docs/external-review/rounds/<round>/*` | Project Manager authors; `hmasd-review-exchanger` writes only the raw and intake | during that round; sealed once reconciled |
+
+When a boundary moves, the documents whose trigger fired move **in the same
+accepted Git boundary** as the change. A commit that advances the boundary and
+leaves a triggered document behind is incomplete, not merely untidy.

@@ -12,7 +12,7 @@ One conclusion-bearing research iteration, as stated by the user 2026-07-24:
      -> verifier/reviewer 统一审阅 -> exp 实验 -> 外审
 ```
 
-19 iterations have run. 8 remain under the current grant.
+19 iterations have run. 20 remain under the current grant.
 
 ## Trigger
 
@@ -28,23 +28,26 @@ sets the next direction.
 
 ## Orchestrator
 
-From the project's formal start the main conversation runs on **Fable**
-(`claude-fable-5`) and is the orchestrator, replacing the current opus main
-conversation. `AGENTS.md` records subagent tiers but names no orchestrator
-model; that must be added.
+The orchestrator is **the active Project Manager conversation**, whatever model
+it happens to run on. The seat is defined by its authority, not by its model —
+naming a specific model here is what left this document, and
+`IMPLEMENTATION_PLAN.md`, pointing at an owner that no longer existed.
+
+`CLAUDE.md` records the subagent roster and tiers. It deliberately names no
+orchestrator model, and should not.
 
 ## Authority split
 
 ```text
 scientific_decision_authority=external_pro
-code_design_authority=fable_orchestrator
+code_design_authority=project_manager
 ```
 
 **External Pro owns the science** — which mechanism is right, which route is
 excluded, whether a result closes, what the next scientific direction is.
 
-**Fable owns the code** — module shape, interfaces, task decomposition, and what
-each `hmasd-implementer` brief contains. Fable never chooses the scientific
+**The Project Manager owns the code** — module shape, interfaces, task decomposition, and what
+each `hmasd-implementer` brief contains. The Project Manager never chooses the scientific
 route.
 
 ### Protected semantics — the overlap zone
@@ -55,7 +58,7 @@ algorithm definition and code. The split runs through them:
 
 - **Pro decides whether one changes** — "should credit assignment move to a
   delayed residual" is a scientific call.
-- **Fable decides how** — signatures, files, tensor layout, task boundaries.
+- **The Project Manager decides how** — signatures, files, tensor layout, task boundaries.
 
 `hmasd-reviewer` keeps its job unchanged: it audits whether anything **not**
 authorized to change was changed anyway.
@@ -65,11 +68,11 @@ authorized to change was changed anyway.
 | # | Stage | Owner | Produces |
 |---|---|---|---|
 | 1 | External scientific review | External Pro, transported by `hmasd-review-exchanger` | exact raw under `docs/external-review/rounds/<round-id>/21_PRO_OPEN_RAW.md` |
-| 2 | Design freeze + code plan | Fable | two artifacts, below |
+| 2 | Design freeze + code plan | Project Manager | two artifacts, below |
 | 3 | Build | `hmasd-implementer` × N, disjoint path sets | working-tree changes, no commits |
 | 4 | Unified review | `hmasd-verifier` **then** `hmasd-reviewer` | one verdict |
 | 5 | Experiment | `hmasd-experiment-operator` | `logs/<run-id>/` + one terminal payload |
-| 6 | Record and advance | Fable | `ExpRecord.md` row, `ITERATION_<n>.md`, commit |
+| 6 | Record and advance | Project Manager | `ExpRecord.md` row, `ITERATION_<n>.md`, commit |
 
 ### Stage 2 artifacts
 
@@ -78,7 +81,7 @@ Two files, one owner each — the file boundary is the authority boundary.
 | Artifact | Holds | Owner |
 |---|---|---|
 | `docs/research/designs/<G>_DESIGN.md` | the frozen scientific decision: mechanism, estimand, exclusions | Pro's decision, recorded |
-| `docs/project/IMPLEMENTATION_PLAN.md` | the executable code plan, **referencing** the design | Fable |
+| `docs/project/IMPLEMENTATION_PLAN.md` | the executable code plan, **referencing** the design | Project Manager |
 
 `hmasd-implementer` reads the plan and follows the reference into the design
 only when it needs the scientific rationale. This cross-authority link is what
@@ -170,8 +173,8 @@ replaces.
 
 ## Git
 
-Integration is Fable-direct at stage 6, after the reviewer verdict and after the
-run is recorded. No child commits. Fable stages only accepted paths, checks the
+Integration is Project-Manager-direct at stage 6, after the reviewer verdict and after the
+run is recorded. No child commits. The Project Manager stages only accepted paths, checks the
 staged path set and `git diff --cached --check`, commits, and pushes.
 
 ## The seam between iterations
@@ -204,7 +207,7 @@ payload**:
    completes and a stable answer exists.
 4. It copies the answer down verbatim and archives it by round to
    `21_PRO_OPEN_RAW.md`.
-5. Fable picks up from the archived raw.
+5. The Project Manager picks up from the archived raw.
 
 Building and uploading an evidence archive is the **fallback**, not the primary
 path — it exists only for when Pro reports it could not reach a listed path.
@@ -228,9 +231,9 @@ to it. That makes the push in stage 2 load-bearing, not bookkeeping.
 
 Not questions — work. An implementer can start from here.
 
-1. **`AGENTS.md` authority map** — add `orchestrator_model=fable`,
+1. **`AGENTS.md` authority map** — add
    `scientific_decision_authority=external_pro`,
-   `code_design_authority=fable_orchestrator`. Change
+   `code_design_authority=project_manager`. Change
    `project_manager_scientific_reconciliation_authority=exclusive` and
    `external_pro_scientific_authority=question_scoped`, and rewrite the
    paragraph beginning "External GPT-5.6 Pro owns only the scientific answer".
