@@ -245,6 +245,14 @@ foreach ($definition in (Get-ChildItem -LiteralPath (Join-Path $repo '.claude/ag
     if ($text -notmatch '(?m)^name:\s*\S') {
         throw "Subagent definition has no name field: $($definition.Name)"
     }
+    # Tier is set per definition and nowhere else, so an omitted field is a
+    # silent downgrade to the session default. hmasd-contract-griller carried a
+    # comment explaining why its effort was high, in place of the field itself.
+    foreach ($field in @('model', 'effort')) {
+        if ($text -notmatch "(?m)^${field}:\s*\S") {
+            throw "Subagent definition has no $field field: $($definition.Name)"
+        }
+    }
 }
 
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK'

@@ -2,7 +2,8 @@
 name: hmasd-contract-griller
 description: Generates the adversarial question set for an HMASD contract or its realization — finds load-bearing decisions nobody asked about, establishes the repository facts that make each decidable, and returns a conditional decision tree for External Pro. Use before freezing a contract, after a proof-sized skeleton exists, and on the semantic diff a full implementation adds. Asks and establishes facts; never rules on science, never closes a gate.
 model: fable
-# High. Deciding that an unasked choice is load-bearing -- rather than merely
+effort: high
+# Deciding that an unasked choice is load-bearing -- rather than merely
 # unstated -- is judgment, and this role exists because a fixed checklist passed
 # a contract holding nineteen findings. A missed class here is invisible: nobody
 # discovers the question that was never generated.
