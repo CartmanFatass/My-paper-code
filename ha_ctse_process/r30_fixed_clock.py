@@ -15,12 +15,13 @@ from torch.distributions import Categorical
 KEEP_TOKEN = 0
 SET_TOKEN = 1
 INVALID_SKILL = -1
-HIGH_BUFFER_VERSION = 1
+HIGH_BUFFER_VERSION = 2
 
 
 @dataclass(frozen=True)
 class EditSequenceSample:
     token_kind: torch.Tensor
+    keep_prob: torch.Tensor
     set_skill: torch.Tensor
     token_logp: torch.Tensor
     token_valid: torch.Tensor
@@ -226,6 +227,7 @@ class FixedClockAREditPolicy(nn.Module):
         working_ages = prev_ages.long().clone().reshape(-1)
         working_active = prev_active.bool().clone().reshape(-1)
         kinds: list[torch.Tensor] = []
+        keep_probs: list[torch.Tensor] = []
         set_skills: list[torch.Tensor] = []
         logps: list[torch.Tensor] = []
         entropies: list[torch.Tensor] = []
@@ -243,6 +245,23 @@ class FixedClockAREditPolicy(nn.Module):
                 agent_relevance,
             )
             active = bool(working_active[agent_id].item())
+            # D7 diagnostic capture only: sigmoid(keep_logit) is a real renewal
+            # probability solely on the learned-keep branch with an incumbent
+            # to keep. Every other branch never lets keep_logit reach `kind` or
+            # `logp` (native-categorical relabels a skill collision post hoc,
+            # full-refresh and no-incumbent force SET), so recording a number
+            # there would fabricate a decision that did not happen -- record
+            # NaN instead of a plausible-looking value. This does not read
+            # `kind`/`logp` and does not participate in their computation.
+            if (
+                self.native_categorical_edit
+                or self.force_refresh_every_check
+                or not active
+                or self.keep_head is None
+            ):
+                keep_prob = torch.full_like(keep_logit, float("nan"))
+            else:
+                keep_prob = torch.sigmoid(keep_logit).detach()
             skill_dist = Categorical(logits=skill_logits)
             if self.native_categorical_edit:
                 skill = (
@@ -305,15 +324,18 @@ class FixedClockAREditPolicy(nn.Module):
             else:
                 set_value = torch.full_like(skill, INVALID_SKILL)
             kinds.append(kind.squeeze(0))
+            keep_probs.append(keep_prob.squeeze(0))
             set_skills.append(set_value.squeeze(0))
             logps.append(logp.squeeze(0))
             entropies.append(entropy.squeeze(0))
         token_kind = torch.stack(kinds)
+        keep_prob_seq = torch.stack(keep_probs)
         set_skill = torch.stack(set_skills)
         token_logp = torch.stack(logps)
         skill_entropy = torch.stack(entropies)
         return EditSequenceSample(
             token_kind=token_kind,
+            keep_prob=keep_prob_seq,
             set_skill=set_skill,
             token_logp=token_logp,
             token_valid=torch.ones_like(token_kind, dtype=torch.bool),
@@ -507,6 +529,7 @@ class HighCheckRow:
     set_skill: np.ndarray
     token_valid: np.ndarray
     old_token_logp: np.ndarray
+    keep_prob: np.ndarray
     old_value: float
     old_next_value: float = 0.0
     block_reward: float = 0.0
@@ -546,6 +569,7 @@ class HighCheckBuffer:
         set_skill=None,
         token_valid=None,
         old_token_logp=None,
+        keep_prob=None,
     ) -> HighCheckRow:
         env_id = int(env_id)
         if self.pending[env_id] is not None:
@@ -586,6 +610,11 @@ class HighCheckBuffer:
                 np.zeros(self.n_agents, dtype=np.float32)
                 if old_token_logp is None
                 else np.asarray(old_token_logp, dtype=np.float32).copy()
+            ),
+            keep_prob=(
+                np.full(self.n_agents, np.nan, dtype=np.float32)
+                if keep_prob is None
+                else np.asarray(keep_prob, dtype=np.float32).copy()
             ),
             old_value=float(old_value),
         )

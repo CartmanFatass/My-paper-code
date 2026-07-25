@@ -1875,6 +1875,16 @@ class StandaloneProcessAgent:
         self.r30_high_buffer_version = int(
             getattr(config, "r30_high_buffer_version", HIGH_BUFFER_VERSION)
         )
+        if self.r30_high_buffer_version != HIGH_BUFFER_VERSION:
+            raise ValueError(
+                "r30_high_buffer_version mismatch: config/checkpoint pinned "
+                f"{self.r30_high_buffer_version}, but the module constant "
+                f"HIGH_BUFFER_VERSION is {HIGH_BUFFER_VERSION}. The manifest and "
+                "checkpoint read agent.r30_high_buffer_version while "
+                "HighCheckBuffer.version reads the module constant directly; a "
+                "stale config value would silently diverge from what the buffer "
+                "actually writes."
+            )
         self.high_gae_lambda = float(
             getattr(config, "r30_high_gae_lambda", getattr(config, "gae_lambda", 0.95))
         )
@@ -4070,6 +4080,7 @@ class StandaloneProcessAgent:
                 set_skill=sample.set_skill.detach().cpu().numpy(),
                 token_valid=sample.token_valid.detach().cpu().numpy(),
                 old_token_logp=sample.token_logp.detach().cpu().numpy(),
+                keep_prob=sample.keep_prob.detach().cpu().numpy(),
             )
 
             self.active_skills[env_id] = sample.final_skills.detach().cpu().numpy()

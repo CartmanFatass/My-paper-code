@@ -615,7 +615,7 @@ def export_run_manifest(
             "k0": int(getattr(agent, "skill_interval", 10)),
             "r30_keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
             "r30_high_buffer_version": int(
-                getattr(agent, "r30_high_buffer_version", 1)
+                getattr(agent, "r30_high_buffer_version", 2)
             ),
             "r30_high_ppo_epochs": int(
                 getattr(agent, "high_ppo_epochs", 1)
@@ -1696,7 +1696,7 @@ def checkpoint_payload(
                 "k0": int(getattr(agent, "skill_interval", 10)),
                 "keep_init": float(getattr(agent, "r30_keep_init", 0.6)),
                 "bridge_context_mode": "deterministic_expected",
-                "high_buffer_version": int(getattr(agent, "r30_high_buffer_version", 1)),
+                "high_buffer_version": int(getattr(agent, "r30_high_buffer_version", 2)),
             }
             if bool(getattr(agent, "r30_enabled", False))
             else None
@@ -2805,7 +2805,7 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         config.team_bridge_type = "deterministic_expected"
         config.r30_bridge_context_mode = "deterministic_expected"
     config.r30_keep_init = 0.6
-    config.r30_high_buffer_version = 1
+    config.r30_high_buffer_version = 2
     config.high_keep_entropy_coef = 0.0
     config.edit_penalty_alpha = 0.0
     config.switch_penalty_beta = 0.0

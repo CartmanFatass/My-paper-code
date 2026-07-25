@@ -25,7 +25,7 @@ class Config(EnvConfig):
     high_controller = "legacy_duration"  # legacy_duration, r30_fixed_clock_ar_edit
     r30_keep_init = 0.6
     r30_bridge_context_mode = "deterministic_expected"
-    r30_high_buffer_version = 1
+    r30_high_buffer_version = 2
     r30_high_gae_lambda = 0.95
     r30_high_ppo_epochs = 1
     r30_high_actor_advantage_mode = "smdp_gae"
