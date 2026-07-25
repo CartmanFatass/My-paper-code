@@ -333,3 +333,20 @@ UAV G1 core/runner 共 41 项测试通过。
 因此性能优化在当前 profile 证据下收口：继续保留定向 A2A/A2G/G2A 路损快照
 （增量中位改善 `7.554426%`）以及共享 PPO 首次梯度 replay（中位改善
 `20.307434%`）；没有新 profile 前不继续堆叠 cache 或 worker 协议。
+
+## C++ 批量环境后端边界（2026-07-25）
+
+用户将长期 UAV 基础设施方向升级为 C++ 重构。只读 Scout 证明，最高收益边界不是把 Python
+环境逐行翻译，而是一次调用处理完整 batch/step 的无状态 C++ 核心：融合位置积分、定向
+A2A/A2G/G2A 路损、SINR/capacity 与连接矩阵，最终替换逐环境 Python step 和 Pipe 往返。
+
+Python 继续唯一持有 RNG namespace/draw order、energy ledger、生命周期事件、reward/observation、
+source evidence、PPO/checkpoint 和 analyzer。C++ 不创建 RNG、不持久化环境状态、不写 artifact。
+逐步 Python oracle 必须验证生命周期、mask/event、通信、奖励、观测和 RNG；默认目标是 bitwise
+一致，不能用放宽 tolerance 换速度。交替单线程微基准至少达到 `20%` 中位改善才保留首个跨文件
+native slice。
+
+完整边界位于 `docs/research/designs/UAV_CPP_BATCH_ENV_BACKEND.md`。本机当前缺少 MSVC、CMake、
+Ninja 与独立 pybind11；PyTorch CPU 的 `cpp_extension` 可用。工具链安装等待当前正式 Python
+进程终态后执行，避免安装器资源与重启行为干扰 iteration 23。该决策不修改在途源、不产生实验
+证据，也不消耗结论性迭代。
