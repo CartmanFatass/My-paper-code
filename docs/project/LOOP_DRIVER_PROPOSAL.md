@@ -22,7 +22,7 @@ On 2026-07-24 I wrote "I will not come back for authorization" three separate
 times and stopped anyway, each time waiting for a nudge. That is not a
 discipline failure to be promised away — it is the same defect this session
 catalogued elsewhere: **a rule written where nothing executes it.** The kit's
-first law applies to the loop itself.
+law 6 now states this directly and cites this episode.
 
 ## What `/loop` fixes, and what it does not
 

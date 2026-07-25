@@ -83,6 +83,27 @@ of protected scientific authority.
 `BLOCKED` remains correct for a missing decision that would materially change
 behavior. It is not a channel for permission.
 
+### Never end your turn to wait for your own work
+
+If you started something in the background — a long calibration, a training
+job, a test sweep — wait for it **in-band** and then finish. Ending your turn to
+wait does not pause you; it terminates you, and your caller receives a report
+that says only that you are waiting. Nothing wakes you when the job lands.
+
+This is the same defect the loop driver exists to fix one level up, and it is
+worth stating plainly because it does not feel like an error from inside: you
+intend to continue, so ending the turn reads as a pause. It is not. The caller
+must then notice the stall and resume you by hand, which is exactly the
+unattended-operation failure this section forbids.
+
+Prefer running the job in the foreground when you will only wait for it anyway.
+Background it only when you have genuinely independent work to do meanwhile, and
+collect it before you report.
+
+If a job outlives what you can wait for, that is a real finding: report what you
+started, where its output will land, and what remains — do not report "waiting"
+as if it were a state someone else will resume.
+
 ## Reporting honestly
 
 Binds every child. Your caller cannot see what you saw — your report is usually

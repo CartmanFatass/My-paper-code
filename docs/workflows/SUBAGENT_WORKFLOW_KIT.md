@@ -10,7 +10,7 @@ in fill-in-the-blank form.
 
 ---
 
-## The five laws
+## The six laws
 
 ### 1. Standing rules go in a file every child is told to read
 
@@ -81,6 +81,32 @@ versions of the same rule is a latent outage.
 > so it went unnoticed — while the gate already encoded the exact requirement the
 > failing work violated. Separately, two scripts disagreed on what an "evidence
 > declaration" was, so work could clear the first and be refused by the second.
+
+### 6. Nothing wakes an agent that ends its turn to wait
+
+An agent — parent or child — that stops emitting tool calls is finished, not
+paused. This is the single defect that recurs at every level of an unattended
+workflow, because from the inside it never feels like an error: you intend to
+continue, so ending the turn reads as waiting.
+
+Two consequences, and both need a mechanism rather than a resolution:
+
+- **A parent needs an external re-entry driver.** Intent in a constitution is
+  not a driver. A document saying the loop continues automatically describes a
+  policy; something outside the turn has to re-invoke it.
+- **A child must collect its own background work in-band.** If it backgrounds a
+  job and ends the turn, the caller receives a report whose entire content is
+  that the child is waiting, and the work sits until a human notices.
+
+> The orchestrator wrote "I will not come back for authorization" three times in
+> one day and stopped anyway each time, until `/loop` was attached. Weeks of
+> discipline had not fixed what one mechanism did. Later, an implementer ended
+> its turn to wait on a calibration it had backgrounded, and returned a report
+> that said only that it was waiting — the same defect, one level down.
+
+The generalization: when a rule keeps being violated by someone who sincerely
+intends to follow it, stop rewriting the rule and go find the thing that
+executes it.
 
 ---
 
