@@ -62,6 +62,10 @@ code inside that bounded change.
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
+- Isolated worktrees use `scripts/hmasd_workspace_ticket.py`: PM creates one
+  ticket from the actual Git worktree and base commit, the child resolves that
+  ticket before editing, and PM verifies it after return. Never transcribe,
+  infer or repair an absolute worktree path in prose.
 - Children do not perform Git. Project Manager integrates the exact accepted
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,

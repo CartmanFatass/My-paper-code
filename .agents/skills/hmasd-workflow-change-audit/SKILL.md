@@ -37,6 +37,10 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    exactly one of `modify`, `add`, `delete`, `unchanged-valid` or
    `historical-exempt`. Declare the exact owned path set and preserve any
    pre-existing dirty changes outside the task.
+   If any child uses an isolated worktree, create its identity and path scope
+   with `scripts/hmasd_workspace_ticket.py`; pass only the ticket path, require
+   child-side `resolve`, and run PM-side `verify`. Never transcribe a UUID-heavy
+   worktree path into an assignment.
 3. **Probe.** Run the smallest existing contract that should expose the change.
    If it passes despite a known missing relation, add one negative regression
    for that relation rather than expanding a coverage suite.

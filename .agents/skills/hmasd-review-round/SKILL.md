@@ -20,8 +20,9 @@ response, or what work follows it.
 Activate `$hmasd-review-round` in the active Project Manager and use
 `$browser:control-in-app-browser` for submission and archival. After one exact
 fence is visibly submitted, assign the registered nonpersistent
-`hmasd-pro-response-monitor` to observe that turn. Do not create a transport
-task, relay, ad hoc monitor or PM polling loop.
+`hmasd-pro-response-monitor` to observe the PM-brokered metadata sentinel for
+that turn. The child never opens the browser. Do not create a transport task,
+relay, ad hoc monitor or PM polling loop.
 
 ## Required inputs
 
@@ -62,7 +63,7 @@ visible or the page title looks familiar.
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Spawn exactly one `hmasd-pro-response-monitor` with the registered conversation/fence identity. It silently observes; PM does not poll the page. | Monitor returns one `COMPLETE` or `ERROR` terminal payload. |
+| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | PM initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations while doing other in-scope work. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, PM confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake, and confirms monitor absence. | Project Manager holds exact raw and mechanically realizes the role-defined Pro scientific disposition or sends one focused alignment clarification. |
 
@@ -93,11 +94,26 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
 - If presence or absence cannot be established, recover the same conversation;
   uncertainty never authorizes submission.
 
-Keep one registered page and exactly one registered Pro-response monitor while
-pending. Do not create a PM heartbeat, automation poller, second monitor or
-transport task. On monitor `COMPLETE`, PM resumes browser ownership and performs
-its own archival snapshots. On `ERROR`, PM handles transport recovery without
-allowing the monitor to submit or retry.
+Keep one registered page, one append-only sentinel and exactly one registered
+Pro-response monitor while pending. Do not create a PM heartbeat, automation
+poller, second monitor or transport task. PM owns all browser access because a
+native child does not inherit the in-app-browser binding. At unrelated in-scope
+work milestones or ordinary task wakeups, PM takes one bounded read-only page
+snapshot and calls `scripts/hmasd_pro_response_sentinel.py record`; it does not
+run a timer loop or emit pending progress messages. The response text remains
+in the browser and is represented in the sentinel only by a content
+fingerprint, assistant-message identity and control state.
+
+The monitor runs only bounded `watch` calls against that sentinel. Pending
+produces no terminal payload. Two matching inactive PM observations at least
+three seconds apart cause the sentinel tool to emit `COMPLETE`; a browser,
+identity or response-control error emits `ERROR`. On `COMPLETE`, PM already owns
+the browser and performs exact archival snapshots. On `ERROR`, PM handles
+transport recovery without allowing the monitor to browse, submit or retry.
+The JSONL ledger is append-only rather than atomically replaced, avoiding the
+Windows file-replacement race previously seen in long runs. Its content
+fingerprint is a local stability discriminator, not a workflow artifact hash,
+handoff identity or scientific evidence.
 
 Never activate `Answer now`; the monitor is bound by the same prohibition.
 

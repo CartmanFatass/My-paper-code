@@ -48,8 +48,9 @@ one_artifact_one_acceptance_owner=true
 
 There is no Controller, persistent project Monitor, dispatcher, callback chain,
 role-session registry or global write lease. One registered nonpersistent
-`hmasd-pro-response-monitor` is the explicit exception for silently observing a
-single already-submitted long Pro turn; it owns no transport or science.
+`hmasd-pro-response-monitor` is the explicit exception for silently observing
+the metadata-only PM broker for a single already-submitted long Pro turn; it
+owns no browser, transport or science.
 External Pro owns scientific
 designs, result interpretation, CDC changes and scientific successor choice
 inside the user-authorized review boundary. Project Manager owns code,
@@ -78,6 +79,7 @@ per_file_hash_handoff=forbidden
 concurrency_policy=file_ownership_only
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
+isolated_worktree_identity=workspace_ticket_only
 ```
 
 Generic Superpowers Skills are not executed in HMASD. Use the project-native
@@ -87,6 +89,9 @@ create another approval owner.
 
 Each mutating assignment owns an exact path set. Disjoint writers may work in
 parallel; overlapping writes are serialized. Native children never run Git.
+For an isolated worktree, PM creates one machine-readable workspace ticket;
+the child resolves it before editing and never copies, guesses or substitutes
+an absolute path. PM verifies the same ticket after the child returns.
 Project Manager stages accepted paths, checks the staged path set and
 `git diff --cached --check`, then commits and pushes `aggressive`. Git commit
 plus exact path set is code identity; per-file hashes and handoff receipts are
@@ -113,6 +118,8 @@ forbidden.
   `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review transport mechanics:
   `.agents/skills/hmasd-review-round/SKILL.md`.
+- Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
+- Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
 
 No role reads every routed document. The active assignment or role charter
 names the smallest necessary subset.

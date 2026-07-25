@@ -80,41 +80,44 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: registered G32 branch is usable across configured capacities 6, 8 and
-  12; External Pro scientific disposition is pending before this ledger adopts
-  the broader claim or selects a successor.
-- Claim: a capacity-generic active-set/lifecycle recurrent policy with
-  active-fraction autoregressive prefixes can learn continuous service control
-  across within-episode roster changes when current demand has a direct actor
-  path and actor credit matches the causal reward window.
-- Formal evidence: G17 reaches IID utility LCB `0.94869`, held-out utility LCB
-  `0.93726`, held-out learned-gain LCB `0.30171`, minimum held-out replicate
-  `0.93662`, minimum demand correlation `0.96377`, and exact replay.
-- Delayed evidence: formal G31 preserves G17 while passing G18 utility, gain,
-  spike allocation, rotation and replicate stability with a detached realized
-  future-tail target and direction-balanced actor updates.
-- Cross-capacity evidence: formal G32 strict-loads the same capacity-8-trained
-  checkpoint at capacities 6, 8 and 12 with zero evaluation optimizer steps.
-  Utility LCBs are `0.95025`, `0.93757` and `0.94832`; held-out gain LCB is
-  `0.36581`, minimum held-out replicate is `0.94284`, held-out stochastic mean
-  is `0.87591`, and the exact cap8/cap12 padding oracle passes every field.
-- Necessary scope correction: this establishes one paired toy family, not UAV
-  physics, arbitrary stochastic horizons or individual causal attribution of
-  later team reward.
-- UAV evidence: temporary-service-loss G1 and charge-rotation G2 both close
-  before learned training as source non-identifiable. G2 proves proactive
-  rotation is load-bearing relative to no rotation, but its constructive
-  controller is far below the frozen absolute feasibility floor. Neither run
-  confirms nor rejects G31 transport.
-- PM-observed uncovered boundary: G32 changes active roster size inside an
-  episode and reuses one checkpoint across separate fixed-capacity environment
-  instances, but it does not resize the runtime tensor capacity while one
-  trajectory and lifecycle-owned recurrent state are in flight.
-- Candidate separating evidence, not yet selected: a live capacity-rebinding
-  state/packing contract that carries common member hidden state across a width
-  change without checkpoint reload, optimizer steps, key reassignment or
-  task-specific fields. External Pro decides whether this is the next scientific
-  action.
+- Status: supported and retained as a usable configured-capacity continuous
+  dynamic-roster algorithm test version for the registered 48-step capacity
+  6/8/12 toy family. A finite runtime packing capacity is selected before each
+  trajectory.
+- Claim: a G31 realized-future-tail and direction-balanced recurrent policy whose
+  learned parameter shapes exclude maximum capacity can use one
+  capacity-8-trained checkpoint at configured capacities 6, 8 and 12 while
+  retaining within-episode temporary leave, rejoin, fresh join and terminal
+  leave.
+- Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
+  spike-allocation, rotation, gain and fresh-seed stability gates.
+- Formal configured-capacity evidence: G32 strict-loads the same final
+  capacity-8 checkpoints at capacities 6, 8 and 12 with zero evaluation
+  optimizer steps. Utility LCBs are 0.95025, 0.93757 and 0.94832; held-out gain
+  LCB is 0.36581, the minimum held-out replicate is 0.94284 and held-out
+  stochastic mean is 0.87591.
+- Exact padding lemma: under the registered cap8/cap12 common-active process,
+  observations, values, deterministic actions, rewards, hidden state and
+  lifecycle transitions are exactly equal and added inactive rows remain zero.
+- Retired alternative: within the registered family, usable deployment at a new
+  configured capacity does not require capacity-shaped learned parameters,
+  retraining, checkpoint adapters, tensor slicing or key remapping.
+- Scope: configured packing capacity remains fixed within each trajectory and
+  belongs to the registered 6/8/12 family. Runtime metadata may change between
+  environment instances without changing the learned state dictionary.
+- Strongest scientific counterexample: a capacity change that also changes the
+  distribution of real active members, process law, horizon or allocation
+  difficulty outside the registered family may still break the policy.
+- Code-only boundary: live in-trajectory tensor-width rebinding is unimplemented,
+  but under the current claim it is a packing/state-migration coverage gap rather
+  than an unresolved learning mechanism. It becomes scientific only if a future
+  scope requires no pre-trajectory capacity bound.
+- UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
+  non-identifiable. They neither confirm nor reject G31/G32 transport.
+- Exclusions: arbitrary capacity, arbitrary process laws, UAV usability,
+  asynchronous skill lifetime, intrinsic-reward advantage, comparative
+  superiority and causal necessity of the inherited credit mechanism remain
+  unsupported.
 
 ## C-EHC — Event-held temporal state
 

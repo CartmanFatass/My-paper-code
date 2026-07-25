@@ -1,5 +1,5 @@
 {
-  "schema_version": 29,
+  "schema_version": 30,
   "updated": "2026-07-25",
   "round_operator": {
     "kind": "project_manager_direct_transport",
@@ -16,6 +16,8 @@
     "response_monitor_effort": "low",
     "response_monitor_owner": "active_project_manager",
     "response_monitor_uniqueness": "one_per_submitted_turn",
+    "response_monitor_observation": "project_manager_brokered_jsonl_sentinel",
+    "response_monitor_sentinel_tool": "scripts/hmasd_pro_response_sentinel.py",
     "response_monitor_progress_notifications": "forbidden",
     "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_realize_pro_disposition",
     "retired_task_output_authority": "none"

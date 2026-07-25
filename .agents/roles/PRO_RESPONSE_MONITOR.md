@@ -10,6 +10,9 @@ parent=project_manager
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_already_submitted_pro_turn
+observation_mode=pm_brokered_jsonl_sentinel
+browser_authority=none
+sentinel_write_authority=none
 progress_notifications=forbidden
 terminal_notification_count=exactly_one
 terminal_values=COMPLETE|ERROR
@@ -17,32 +20,43 @@ scientific_interpretation=forbidden
 repository_write_authority=none
 ```
 
-This is the dedicated low-cost observer for a long External Pro answer. It is
-not a persistent project task, transport owner, reviewer or heartbeat. It owns
-only observation of one exact already-submitted turn in the registered browser
-conversation.
+This is the dedicated low-cost terminal observer for a long External Pro
+answer. It is not a persistent project task, browser owner, transport owner,
+reviewer or heartbeat. The native child does not inherit the Project Manager's
+in-app-browser binding, so it observes one metadata-only append ledger written
+by PM for one exact already-submitted turn.
 
 ## Exact assignment
 
-Project Manager supplies the registered conversation ID/URL, exact freshness
-fence, visible user-turn identity, expected assistant-turn relationship,
-browser binding, completion rules and error boundary. Missing or contradictory
-identity fails closed before observation.
+Project Manager supplies the registered conversation ID, exact freshness fence,
+absolute sentinel path, `observation_mode=pm_brokered_jsonl_sentinel`, and this
+read-only command boundary:
+
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --conversation-id <exact-id> --fence-identity <exact-fence> --max-wait-seconds 45
+```
+
+Missing or contradictory identity fails closed before observation. The monitor
+never substitutes a conversation, fence or path and never attempts to acquire
+the browser as recovery.
 
 ## Observation contract
 
+- Never open or control the browser; never read Pro response text.
 - Never submit, resubmit, edit or continue a question; never attach evidence.
 - Never click, invoke, script or keyboard-activate `Answer now` or a localized
   equivalent. Its presence or absence is neutral.
 - Never click Retry/Continue, stop generation, copy/archive text, interpret the
   response, edit files, run Git, spawn children or contact the user.
-- While text changes or a stop-generation control is active, remain silent and
-  wait. Do not send progress, ETA, heartbeat or phase messages.
-- At apparent natural completion, require the same assistant message identity
-  and text in two snapshots at least three seconds apart, with no active stop,
-  error, Retry or Continue control. A stale Thinking label alone is neutral.
-- Browser/authentication loss or ambiguous identity is `ERROR` after bounded
-  read-only reacquisition is exhausted; never recover by submission.
+- Repeatedly run only the registered terminal-only `watch` command. Empty output
+  means pending: remain silent and run another bounded watch. Do not send
+  progress, ETA, heartbeat or phase messages.
+- Trust only a terminal record emitted by the sentinel tool. PM-side `record`
+  requires the same assistant identity and response fingerprint in two
+  snapshots at least three seconds apart with inactive generation/error
+  controls. The monitor cannot weaken or bypass that rule.
+- Sentinel absence, malformed identity or an explicit sentinel `ERROR` is
+  terminal `ERROR`; never recover by browser access, submission or path guess.
 
 Return exactly once:
 
@@ -53,11 +67,12 @@ conversation_id=<exact id>
 fence_identity=<exact fence>
 assistant_message_identity=<identity or unavailable>
 stable_snapshots=<count>
-generation_controls=<inactive|active|unavailable>
+generation_controls=<inactive|active|error|unavailable>
 answer_now_activated=false
 candidate_available=<true|false>
 reason=<none or exact direct error>
 ```
 
-On `COMPLETE`, Project Manager resumes browser ownership and performs exact raw
-archival. The monitor never supplies scientific evidence itself.
+On `COMPLETE`, Project Manager retains browser ownership and performs exact raw
+archival. The monitor and sentinel never supply scientific evidence itself;
+only the archived visible response does.

@@ -93,6 +93,7 @@ def test_live_repository_harness_is_closed() -> None:
     ("orphan_profile", "unregistered profile"),
     ("orphan_role", "unrouted role charter"),
     ("forbidden_marker", "forbidden active marker"),
+    ("broken_script", "broken active path reference"),
     ("benchmark_drift", "developer_instructions differ byte-for-byte"),
 ])
 def test_checker_fails_closed_on_cross_surface_omissions(
@@ -108,6 +109,9 @@ def test_checker_fails_closed_on_cross_surface_omissions(
     elif breakage == "forbidden_marker":
         with (repo / "AGENTS.md").open("a", encoding="utf-8") as handle:
             handle.write("superpowers_execution=enabled\n")
+    elif breakage == "broken_script":
+        with (repo / "AGENTS.md").open("a", encoding="utf-8") as handle:
+            handle.write("Use `scripts/missing_harness.py`.\n")
     else:
         _add_benchmark_group(repo, drift=True)
 

@@ -23,6 +23,9 @@ need the most expensive worker profile.
 - Launch the three implementers concurrently from one exact base commit in
   separate isolated worktrees with the same assignment, named interfaces,
   write scope, runtime and focused-check budget.
+- Every future isolated-worktree launch uses a PM-created workspace ticket.
+  Assignments carry the ticket path, not a hand-written absolute worktree path;
+  child `resolve` and PM `verify` are mandatory harness checks.
 - The three implementer profile `developer_instructions` blocks must be byte
   identical. Only profile name/description, model and reasoning effort differ.
 - Launch the three reviewers concurrently against the same anonymous candidate
@@ -109,6 +112,26 @@ Among eligible profiles, select the lowest measured cost separately for
 implementer and reviewer. Use platform-reported token/compute usage when
 available; otherwise record that it is unavailable and use elapsed wall time
 plus the declared model tier only as an explicit proxy, never as exact currency.
+
+### Completion and rework accounting
+
+- A failed attempt is evidence, not a global blocker. Other variants and later
+  benchmark stages continue.
+- A variant may receive multiple bounded repair turns until the same frozen
+  acceptance contract passes. Do not lower a gate, change the fixture or give a
+  failed variant gold evidence.
+- Compare the accumulated end-to-end cost required to reach acceptance, not
+  the price or latency of the first response. Record every model turn, test and
+  review/repair cycle.
+- Separate harness failures from model failures. A bad worktree path, missing
+  browser binding or orchestration defect is repaired and recorded under
+  `harness_cost`; it is not silently charged to model quality.
+- Record wall time and actual monetary/token/compute cost when the platform
+  exposes them. If it does not, write `monetary_cost_unavailable` or
+  `token_usage_unavailable`; never invent a dollar estimate.
+- A variant that never reaches acceptance after actionable repairs are
+  exhausted remains a valid failed end-to-end sample. It does not prevent a
+  winner from being selected among accepted variants.
 
 Record raw outputs, PM gold scoring and the selection in
 `docs/project/AGENT_PROFILE_BENCHMARK_RESULT.md`. After selection, update the

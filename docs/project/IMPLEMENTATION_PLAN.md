@@ -1,4 +1,4 @@
-# G32 formal result and Pro-assisted assertion-safety workflow transition
+# Supported G32 disposition and G33 UAV burst design-audit transition
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -6,7 +6,7 @@
 ```text
 last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=USABLE_RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
+active_source=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_CONTINUOUS_ROSTER_G32
 source_gate=FORMAL_CAPACITY_6_8_12_USABLE
 active_implementation=G32_FORMAL_ACCEPTED
 backend=cpu
@@ -14,11 +14,30 @@ torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=24_complete
 iterations_remaining=13
-formal_compute=NONE_PENDING_G32_EXTERNAL_PRO_SCIENTIFIC_DISPOSITION
+formal_compute=NONE_G33_DESIGN_ASSERTION_AUDIT_IS_ZERO_COMPUTE
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=SESSION_RESTART_THEN_PARALLEL_AGENT_PROFILE_BENCHMARK_AND_G32_PRO_RESULT_DISPOSITION
+next_boundary=SESSION_RESTART_THEN_UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT
 ```
+
+## Current transition
+
+External Pro accepts G31/G32 as a usable configured-capacity continuous
+dynamic-roster toy test version for the registered capacity 6/8/12 family. A
+finite packing capacity is chosen before each trajectory; live tensor-width
+rebinding is code coverage, not the next scientific iteration.
+
+The sole next scientific action is a zero-compute design assertion audit for a
+localized temporary per-user demand burst under unchanged S7-S1 physics,
+external reward and constant service roster 8. The audit must freeze exact
+burst/train/held-out laws, current demand fields, burst/recovery utility,
+ordinary-service guardrail, source controls, access/contrast thresholds,
+confidence/sample unit and first-match outcomes. It must prove future-ledger and
+desired-UAV-assignment absence plus target-behavior necessity before any code
+or compute. The three allowed audit outcomes are
+`IDENTIFIABLE_UAV_BURST_G33_DESIGN`,
+`NON_IDENTIFIABLE_UAV_BURST_G33_DESIGN` and
+`UNRESOLVED_UAV_BURST_G33_DESIGN`.
 
 ## Accepted active line
 
@@ -534,12 +553,18 @@ and hidden mismatch is exactly zero, inactive padding is zero, and the mapping
 and lifecycle gate passes. This consumes iteration 24 and leaves 13 authorized
 conclusion-bearing iterations.
 
-The registered G32 result mechanically proves within-episode active-count change
-and cross-configuration checkpoint transport under its frozen branch. Each
-environment instance still has one fixed tensor capacity, but whether live
-capacity rebinding is the next scientific question belongs to External Pro, not
-PM. After the session restart, PM will package G32 artifacts for
-`FORMAL_RESULT_SCIENTIFIC_DISPOSITION` while the model-profile benchmark runs on
-disjoint code-only fixtures. Pro will set the scientific meaning and successor.
-Any new conclusion-bearing design then receives Pro's design audit, PM code
-acceptance and Pro's code-science alignment audit before formal compute.
+External Pro accepts G31/G32 as a usable configured-capacity continuous-roster
+toy test version for capacities 6/8/12 and selects
+`UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT` as the next zero-compute
+scientific action. G33 must keep physical/service roster 8, unchanged S7-S1
+physics and reward, a hidden future burst ledger, visible current per-user
+demand without desired-UAV assignment, and the registered constructive/null/
+feasibility checks before implementation.
+
+The code-worker benchmark selects Terra-high implementer and Luna-max reviewer.
+Before those changed registrations are used, integrate and restart. The same
+boundary also installs two mechanical stability guards: machine-resolved
+workspace tickets for isolated worktrees and a PM-brokered metadata sentinel
+for the Luna-low Pro monitor, which cannot inherit the PM browser binding.
+These operational changes consume no conclusion-bearing iteration. After the
+restart, continue the G33 design audit under the remaining 13-iteration grant.

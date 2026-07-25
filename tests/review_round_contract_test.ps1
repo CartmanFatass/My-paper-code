@@ -4,7 +4,7 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $registry = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') | ConvertFrom-Json
-if ($registry.schema_version -ne 29 -or
+if ($registry.schema_version -ne 30 -or
     $registry.round_operator.kind -ne 'project_manager_direct_transport' -or
     $registry.round_operator.external_scientific_decision -ne 'external_pro_binding_within_user_boundary' -or
     $registry.round_operator.decision_intake -ne 'project_manager_mechanical_realization' -or
@@ -13,6 +13,8 @@ if ($registry.schema_version -ne 29 -or
     $registry.direct_transport_contract.response_monitor_agent_type -ne 'hmasd-pro-response-monitor' -or
     $registry.direct_transport_contract.response_monitor_model -ne 'gpt-5.6-luna' -or
     $registry.direct_transport_contract.response_monitor_effort -ne 'low' -or
+    $registry.direct_transport_contract.response_monitor_observation -ne 'project_manager_brokered_jsonl_sentinel' -or
+    $registry.direct_transport_contract.response_monitor_sentinel_tool -ne 'scripts/hmasd_pro_response_sentinel.py' -or
     $registry.reviewers.open_divergent.transport -ne 'project_manager_in_app_browser') {
     throw 'Project-Manager-direct review registry mismatch'
 }
@@ -28,7 +30,11 @@ foreach ($required in @(
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
     'hmasd-pro-response-monitor',
-    'PM does not poll the page',
+    'metadata-only JSONL sentinel',
+    'scripts/hmasd_pro_response_sentinel.py record',
+    'native child does not inherit the in-app-browser binding',
+    'ordinary task wakeups',
+    'timer loop or emit pending progress messages',
     '$browser:control-in-app-browser',
     'VERIFY_FRESHNESS_FENCE',
     'An accepted matching fence is never resubmitted',
@@ -48,11 +54,18 @@ if ($skill -match '(?i)\bcontroller\b|hmasd-dispatch-task|hmasd-experiment-monit
 }
 foreach ($required in @(
     'hmasd-pro-response-monitor',
-    'never activate Answer now',
+    'Never activate Answer now',
+    'PM-brokered JSONL sentinel',
+    'child never opens the browser',
     'without PM reinterpretation')) {
     if (-not $skillAgent.Contains($required)) {
         throw "Review Skill agent prompt missing: $required"
     }
+}
+
+$sentinel = Join-Path $repo 'scripts/hmasd_pro_response_sentinel.py'
+if (-not (Test-Path -LiteralPath $sentinel -PathType Leaf)) {
+    throw 'Pro-response sentinel harness is missing'
 }
 
 if (Test-Path -LiteralPath (Join-Path $repo '.agents/skills/hmasd-review-round/scripts/render_review_heartbeat.ps1')) {

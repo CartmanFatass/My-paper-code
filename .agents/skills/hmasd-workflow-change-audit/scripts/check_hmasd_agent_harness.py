@@ -64,7 +64,7 @@ def _repo_refs(text: str) -> set[str]:
     refs: set[str] = set()
     for value in BACKTICK.findall(text):
         value = value.replace("\\", "/")
-        if not value.startswith((".agents/", ".codex/", "docs/")):
+        if not value.startswith((".agents/", ".codex/", "docs/", "scripts/")):
             continue
         if any(char in value for char in "*<>|") or " " in value:
             continue

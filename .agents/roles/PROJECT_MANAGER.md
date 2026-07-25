@@ -29,9 +29,11 @@ design, result interpretation, CDC change and scientific successor selection.
   sufficiency.
 - Mechanical evidence closure, neutral Pro question packaging, exact allow-list,
   direct browser transport and raw archival. For a submitted long response, PM
-  assigns exactly one `hmasd-pro-response-monitor` and receives only its terminal
-  completion/error notice. If scientific content is missing or non-unique, PM
-  asks Pro rather than filling it.
+  initializes a metadata-only sentinel, assigns exactly one
+  `hmasd-pro-response-monitor`, and receives only its terminal completion/error
+  notice. PM alone owns the browser and records bounded page observations; the
+  child never reads response text. If scientific content is missing or
+  non-unique, PM asks Pro rather than filling it.
 - Direct Git staging, commit, and push of accepted work.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
@@ -79,6 +81,11 @@ scientific scope, escalate that expansion to the user.
 - Spawn only registered native child profiles with exact assignments and file
   ownership. For experiments, use only `hmasd-experiment-operator`; never a
   default/ad hoc child.
+- For every isolated-worktree assignment, create a workspace ticket with
+  `scripts/hmasd_workspace_ticket.py`, pass the ticket path instead of a
+  manually written worktree path, require child-side `resolve` before any edit,
+  and run PM-side `verify` on return. A path mismatch is repaired from the same
+  ticket and is a harness defect, not a model-quality failure.
 - Supply the experiment operator a complete immutable train/evaluate/analyze
   assignment and receive only its single `COMPLETE` or `ERROR` final payload.
 - Continue automatically within an active user grant. Execute exact

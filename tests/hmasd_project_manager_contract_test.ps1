@@ -6,9 +6,9 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $profiles = @{
     'HMASDCodeScout' = @('hmasd-code-scout.toml', 'hmasd-code-scout', 'gpt-5.6-luna', 'medium', 'read-only')
-    'HMASDImplementer' = @('hmasd-implementer.toml', 'hmasd-implementer', 'gpt-5.6-sol', 'high', 'workspace-write')
+    'HMASDImplementer' = @('hmasd-implementer.toml', 'hmasd-implementer', 'gpt-5.6-terra', 'high', 'workspace-write')
     'HMASDVerifier' = @('hmasd-verifier.toml', 'hmasd-verifier', 'gpt-5.6-luna', 'high', 'workspace-write')
-    'HMASDReviewer' = @('hmasd-reviewer.toml', 'hmasd-reviewer', 'gpt-5.6-sol', 'xhigh', 'read-only')
+    'HMASDReviewer' = @('hmasd-reviewer.toml', 'hmasd-reviewer', 'gpt-5.6-luna', 'max', 'read-only')
     'HMASDExperimentOperator' = @('hmasd-experiment-operator.toml', 'hmasd-experiment-operator', 'gpt-5.6-luna', 'low', 'workspace-write')
 }
 foreach ($entry in $profiles.GetEnumerator()) {
@@ -43,9 +43,15 @@ foreach ($required in @(
     'external_review_transport=direct',
     'experiment_orchestration=registered_native_child',
     'hmasd-workflow-change-audit',
+    'scripts/hmasd_workspace_ticket.py',
     'Spawn only registered native child profiles',
     'Continue automatically within an active user grant')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+
+$ticket = Join-Path $repo 'scripts/hmasd_workspace_ticket.py'
+if (-not (Test-Path -LiteralPath $ticket -PathType Leaf)) {
+    throw 'Workspace-ticket harness is missing'
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',

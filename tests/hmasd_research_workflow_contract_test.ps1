@@ -19,8 +19,6 @@ if (Compare-Object $expectedSkills $skills) {
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedRoles = @(
-    'BENCHMARK_IMPLEMENTER.md',
-    'BENCHMARK_REVIEWER.md',
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
     'EXTERNAL_PRO.md',
@@ -61,6 +59,9 @@ foreach ($required in @(
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
     'per_file_hash_handoff=forbidden',
+    'isolated_worktree_identity=workspace_ticket_only',
+    'scripts/hmasd_workspace_ticket.py',
+    'scripts/hmasd_pro_response_sentinel.py',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -152,6 +153,8 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',
+    'observation_mode=pm_brokered_jsonl_sentinel',
+    'browser_authority=none',
     'progress_notifications=forbidden',
     'answer_now_activated=false')) {
     if (-not $monitorRole.Contains($required)) { throw "Monitor role missing: $required" }
