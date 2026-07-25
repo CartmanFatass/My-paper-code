@@ -181,13 +181,30 @@ firing decision 1.
 A full 2x2 over five tasks is twenty runs and a false precision at this n. Staged
 instead, each stage able to end the test.
 
-### Stage 1 — tier, at fixed brief density (6 runs)
+### Stage 1 — tier, at fixed brief density
 
 T1, T2, T3 x {sonnet+brief, opus+brief}. Answers question A at the two known
 misses plus the calibration item.
 
 **Stop rules.** Fire decision 1 (invalid) or decision 4 (keep sonnet, fix the
 sentence) and stop — do not spend Stage 2. Otherwise continue.
+
+#### Scoped to one round on user instruction (2026-07-25)
+
+The user elected to run **T1 only** for now. What that can and cannot support,
+stated before the result is read:
+
+| A single round **can** show | A single round **cannot** show |
+|---|---|
+| both arms miss → evidence the two known misses are an **instruction** defect, not a capability limit, since the tier that should fix it did not | that opus is worth the default. The pre-registered rule needs more than a one-item difference and one item is all this produces |
+| treatment surfaces where control misses → a **directional** signal for tier, worth spending T2/T3 on | that sonnet is adequate. One task cannot separate tier from task-specific luck |
+| gross problems with the harness — contamination, brief ambiguity, parity break | anything about Factor B, which is untouched at this scale |
+
+So T1 alone resolves **no** decision in the rule below except possibly (1),
+invalid. Its honest output is *whether to spend the rest of Stage 1*, plus one
+genuinely decisive case: if the frontier arm also fails to surface a defect this
+project already knows is there, the instruction hypothesis gains real weight and
+outcome 4 becomes the cheap thing to try next.
 
 ### Stage 2 — can planning substitute for tier? (6 runs, +2 conditional)
 
@@ -313,6 +330,43 @@ Stage 1's stop rules exist to make the common case cheap.
 - **Instruction parity can break silently.** Enforced by the contract test, which
   asserts the two implementer bodies are identical and was validated in both
   directions.
+
+## Phase 2 — which skill pack, once the tier/planning combination is chosen
+
+Requested 2026-07-25, to run **after** a combination is selected. The question:
+for this project's plan-then-implement work, is the **matt-pocock** series or
+**superpowers** the better fit?
+
+### Prerequisite, and it is not satisfied
+
+`superpowers` is **not installed** in this environment. The matt series is, and
+extensively — `grill-with-docs`, `to-spec`, `to-tickets`, `implement`, `tdd`,
+`code-review`, `wayfinder`, `codebase-design` and others under
+`.claude/skills/`.
+
+A comparison against a pack that is not present would be a comparison against my
+description of it, which is worth nothing. **Installing superpowers is a
+precondition for Phase 2**, and the Factor B definition in this plan — written
+from the same description — must be re-derived from the real `writing-plans`
+skill once it is available, and re-run if it differs materially from what was
+tested.
+
+### What Phase 2 must not repeat
+
+The matt series is **already installed and already in this repo's skill
+directory**, so any arm using it has home advantage: its vocabulary matches
+files already committed here. Superpowers arrives cold. That asymmetry has to be
+handled or the result is predetermined — most cheaply by running both packs on
+the **synthetic-contract tasks** (T3/T4/T5), which are new to both.
+
+### Shape
+
+Same discipline as this test: known-answer tasks, blind grading, the same
+P1/P2/P3 outcomes, and a pre-registered decision rule. The deliverable is one of
+*matt* / *superpowers* / *neither — the project's own
+`hmasd-agile-research-development` already fits better*, and the third option is
+a real candidate rather than a courtesy: that skill was written against this
+repository's actual failure modes, which neither general-purpose pack has seen.
 
 ## Retirement
 
