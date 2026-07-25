@@ -1948,24 +1948,33 @@ class StandaloneProcessAgent:
                     "R39 direct-state high context is restricted to the "
                     "fixed-primitive two-timescale R30 toy"
                 )
-        # The credit machinery stays pinned to the lane it was validated on.
-        # Widening the information contract above must not silently hand the
-        # learned-keep lane a multi-epoch or block-return high actor as well.
-        native_direct_state_lane = (
-            self.r39_toy_direct_state_context and self.r39_native_categorical_edit
-        )
-        if self.high_ppo_epochs != 1 and not native_direct_state_lane:
+        # These stay keyed to the direct-state toy, as they were. An earlier
+        # revision of this change also required native-categorical edit here, on
+        # the theory that widening the information contract must not hand the
+        # learned-keep lane an unvalidated credit mode. Measurement retired that:
+        # the number of PPO passes over one batch is an optimizer knob, not a
+        # credit definition, and one epoch gave the D7.2B high actor only 200
+        # optimizer steps at lr 1e-4 -- after 150 updates keep_prob was still
+        # 0.599 against its 0.6 init and the skill distribution was at entropy
+        # 1.096 against a ln(3) = 1.0986 maximum. The tightening was blocking
+        # competence, not protecting credit.
+        #
+        # What protects the carrier is structural and sits just below: block-return
+        # requires force_refresh_every_check, which is the branch where every check
+        # is a forced SET and KEEP is not a decision at all. So block-return
+        # remains unreachable from the learned-keep lane whatever this gate says.
+        if self.high_ppo_epochs != 1 and not self.r39_toy_direct_state_context:
             raise ValueError(
                 "multiple R30 high PPO epochs are currently restricted to the "
-                "R39 direct-state native-categorical fixed-primitive toy"
+                "R39 direct-state fixed-primitive toy"
             )
         if (
             self.high_actor_advantage_mode != "smdp_gae"
-            and not native_direct_state_lane
+            and not self.r39_toy_direct_state_context
         ):
             raise ValueError(
                 "block-return high actor credit is restricted to the R39 "
-                "direct-state native-categorical fixed-primitive toy"
+                "direct-state fixed-primitive toy"
             )
         if self.high_actor_advantage_mode == "block_return" and (
             not self.r30_force_refresh_every_check or self.high_ppo_epochs != 3

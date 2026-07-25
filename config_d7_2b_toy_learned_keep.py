@@ -67,7 +67,16 @@ class Config(StandaloneConfig):
     r30_bridge_context_mode = "direct_state_zero_team"
     team_bridge_type = "none"
     r30_high_buffer_version = 2
-    r30_high_ppo_epochs = 1
+    # Optimizer budget, not a credit choice. The first screen ran one epoch at
+    # lr_coordinator = 1e-4 for 200 updates -- 200 optimizer steps -- and the high
+    # actor did not move: at update 150 keep_prob was 0.599 against its 0.6 init
+    # and the skill distribution sat at entropy 1.096 against a ln(3) = 1.0986
+    # maximum, uniform to three decimals across every target-sign combination.
+    # Three passes over each batch and a ten-times learning rate give 3,000 steps
+    # for the same wall-clock shape. block_return stays out of reach: it requires
+    # force_refresh_every_check, where KEEP is not a decision.
+    r30_high_ppo_epochs = 3
+    lr_coordinator = 1e-3
     r30_high_actor_advantage_mode = "smdp_gae"
     r30_high_gae_lambda = 0.95
     high_keep_entropy_coef = 0.0
@@ -135,9 +144,11 @@ class Config(StandaloneConfig):
     r29_action_info_mode = "off"
     r31_effect_mode = "off"
 
-    # Screen scale. Short by design: the control asks whether the carrier can
-    # form the behaviour at all, not how fast it gets there.
+    # The competence attempt, not a screen. The contract's routing rule is that a
+    # flat condition A at screen scale buys a larger budget rather than a
+    # conclusion, because neither a screen nor the 20-update prior art can license
+    # one. 640k steps at 640 steps per update is 1,000 updates.
     num_envs = 16
     rollout_length = 40
-    total_timesteps = 128_000
+    total_timesteps = 640_000
     eval_episodes = 64

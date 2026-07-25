@@ -250,20 +250,32 @@ def test_direct_state_context_still_pinned_to_the_fixed_primitive_toy(overrides)
         _build(_toy_config(r39_toy_direct_state_context=True, **overrides))
 
 
-@pytest.mark.parametrize(
-    "overrides",
-    [
-        {"r30_high_ppo_epochs": 3},
-        {"r30_high_actor_advantage_mode": "block_return"},
-    ],
-)
-def test_credit_machinery_stays_pinned_to_the_native_lane(overrides):
-    """Widening the information contract must not hand the learned-keep lane a
-    multi-epoch or block-return high actor as a side effect. Those were validated
-    on the native-categorical direct-state lane and nothing here revalidates
-    them."""
-    with pytest.raises(ValueError, match="native-categorical"):
-        _build(_toy_config(r39_toy_direct_state_context=True, **overrides))
+def test_multiple_high_ppo_epochs_are_permitted_on_the_direct_state_toy():
+    """The number of PPO passes over one batch is an optimizer knob, not a credit
+    definition. One epoch gave the D7.2B high actor 200 optimizer steps at lr 1e-4
+    and it did not move at all, so pinning this was blocking competence rather
+    than protecting credit."""
+    agent = _build(
+        _toy_config(r39_toy_direct_state_context=True, r30_high_ppo_epochs=3)
+    )
+    assert agent.high_ppo_epochs == 3
+    with pytest.raises(ValueError, match="direct-state"):
+        _build(_toy_config(r30_high_ppo_epochs=3))
+
+
+def test_block_return_credit_stays_unreachable_from_learned_keep():
+    """The protection that matters is structural, not a lane label: block-return
+    requires force_refresh_every_check, which is the branch where every check is a
+    forced SET and KEEP is not a decision. So the learned-keep carrier cannot
+    inherit it however the direct-state gate is keyed."""
+    with pytest.raises(ValueError, match="full-refresh"):
+        _build(
+            _toy_config(
+                r39_toy_direct_state_context=True,
+                r30_high_actor_advantage_mode="block_return",
+                r30_high_ppo_epochs=3,
+            )
+        )
 
 
 def test_contract_keys_the_toy_check_interval_to_the_scenario():
