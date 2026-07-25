@@ -41,7 +41,8 @@ it is a staged diagnostic that runs its cheapest qualifying stage first.
 | **0** | **D0** | Carrier and estimand derivation — clocks, `U_opp` vs `U_pi`, `Δ`, `H`, continuation semantics, normalization, censoring | small | **none** | 0 | **Complete.** What "variable `k`" means, and what any later number is a number *of* |
 | ~~1~~ | ~~D7.1~~ | Qualified-checkpoint preflight | none | none | 0 | **Done 2026-07-25 — negative.** No R30 checkpoint exists in either tree; zero `.pt` files in the external HMASD `logs/` at all |
 | ~~2~~ | ~~D7.2A~~ | Frozen-policy audit | — | — | — | **Unavailable.** Closed by D7.1 |
-| **1** | **D7.2B** | **Toy positive control** on `two_timescale_role_free_actions`, learned-keep branch | medium — new config + instrumentation | one short run | 0 | Whether the learned-keep carrier can express urgency where it provably exists |
+| ~~1~~ | ~~D7.2B~~ | ~~Toy positive control on `two_timescale_role_free_actions`~~ | built | spent | 0 | **Source retired 2026-07-25.** It admits a full-sync swap optimum, so persistence is optional and a null is uninformative. `EVIDENCE_NOTES/20260725_D7_2B_TOY_SWAP_DEGENERACY_DERIVATION.md` |
+| **1** | **D7.2B′** | **Replacement positive control** on a source where persistence is *necessary* | small — the audit, hook and ledger all transfer | one short run | **1** — the source contract is a scientific selection | Whether the learned-keep carrier can express urgency where it provably exists |
 | **4** | **D7.3** | Main-scenario urgency audit, unless 2A settled it | medium | evaluation or run | 0–1 | Label-free, intervention-identified source heterogeneity |
 | 5 | **D8-coadaptive** | Two-regime renewal gate, jointly trained, constraining only the renewal-regime representation | medium | paired run | 1 | Whether the simplest constrained realization carries the contribution. **Build only if D7.3 establishes predictable low-cardinality urgency** |
 | 6 | D3′ | Richer state-dependent KEEP/SET over the same primitive | large | several | 1 | Whether richer conditioning beats the simple gate. Only if D8 is insufficient |
@@ -97,6 +98,7 @@ contract*, not frozen weights. Read as frozen weights it is R44 again.
 | D2 | Compute role stability from existing logs, zero compute | No per-step traces are persisted; run logs hold only a small result json |
 | D6 | Grill mechanism V1/V2 validation | Not science. It answers no variable-`k` question and does not compete for scientific ordering. Governance lane, may proceed operationally in parallel |
 | D8-frozen | Renewal gate on a frozen skill controller | Already run as R44 with a live gradient path: actor drift `0.353` across 3,000/3,000 finite nonzero exposures, behaviour still full-sync RENEW at zero minimum per-agent marginal. Retired without rescue; `D8-coadaptive` is the survivor |
+| D7.2B | Toy positive control on `two_timescale_role_free_actions` | The source cannot make persistence necessary. Its reward is the better of the two agent-to-duty assignments, so from any optimal pair a **full-sync swap** reaches the next optimal pair — both agents SET, every commitment lives exactly one check interval. Two distinct optima, one of which never persists, so a null says nothing about the carrier. Measured at competence: `A = 1.0/1.0`, `P(SET|flex) = 1.0`, `P(KEEP|stable) = 0.0`, full-sync SET `1.0`, `U~_flex 0.214` against `U~_stable 0.232`. Retires the benchmark pair only; carrier, estimands and machinery intact and reusable |
 
 ## Retained candidate portfolio
 
