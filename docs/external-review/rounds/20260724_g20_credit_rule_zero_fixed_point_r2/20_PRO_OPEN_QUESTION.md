@@ -14,6 +14,7 @@ iteration_consumed=false
 
 ## Evidence to read
 
+- `docs/external-review/rounds/20260724_g20_credit_rule_zero_fixed_point_r2/20_PRO_OPEN_QUESTION.md`
 - `docs/research/cdc/EVIDENCE_NOTES/20260724_CENTERED_COUNTERFACTUAL_RESIDUAL_G20_ZERO_FIXED_POINT.md`
 - `docs/research/designs/ACTIVE_SET_CENTERED_COUNTERFACTUAL_RESIDUAL_G20.md`
 - `docs/research/cdc/EVIDENCE_NOTES/20260724_TIMING_CREDIT_IDENTIFIABILITY_G20_DERIVATION.md`
