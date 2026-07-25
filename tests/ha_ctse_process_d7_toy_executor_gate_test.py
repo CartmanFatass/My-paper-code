@@ -213,6 +213,46 @@ def test_native_categorical_is_still_restricted_to_the_toy():
         )
 
 
+def test_d7_2b_config_yields_the_intended_lane():
+    """The config is the run's identity, so assert the four properties D7.2B's
+    validity rests on rather than trusting the file to keep saying so:
+    learned-keep carrier live, supplied executor in place, the check interval
+    equal to the source's own fast period, and external reward only."""
+    from config_d7_2b_toy_learned_keep import Config
+
+    cfg = Config()
+    assert cfg.scenario == TOY
+    assert cfg.high_controller == "r30_fixed_clock_ar_edit"
+    assert cfg.r39_native_categorical_edit is False
+    # Full refresh is the other branch where KEEP is not a decision.
+    assert cfg.r30_force_refresh_every_check is False
+    assert cfg.r39_toy_fixed_skill_primitives is True
+    assert cfg.r39_toy_fixed_skill_action_schema == "axis4_xy_v1"
+    assert cfg.r39_toy_direct_state_context is False
+    assert cfg.skill_interval == cfg.r39_toy_k0 == 5
+    assert cfg.r39_toy_slow_period_blocks == 6
+    assert cfg.n_z == 4
+    assert cfg.process_reward_injection == "none"
+    assert cfg.use_process_reward_for_discoverer is False
+
+    agent = StandaloneProcessAgent(
+        obs_dim=4,
+        action_dim=2,
+        n_agents=2,
+        config=cfg,
+        device="cpu",
+        action_space_type="continuous",
+        num_envs=2,
+    )
+    assert agent.r30_enabled
+    assert isinstance(agent.low, FixedSkillPrimitivePolicy)
+    assert agent.high.keep_head is not None
+    assert agent.skill_interval == 5
+    # The executor is frozen, so nothing can train it into the answer.
+    assert not list(agent.low.parameters())
+    assert agent.low_opt is None
+
+
 def test_cpu_is_permitted_on_the_toy_lane_only(monkeypatch):
     """The toy is a self-contained diagnostic whose pass conditions are read
     inside the run that produces them, so CPU is its own lane rather than a
