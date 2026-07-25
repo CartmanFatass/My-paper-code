@@ -98,7 +98,14 @@ audit too noisy to decide.
 
 ### P2 authority check
 
-Let `s_res(h,a)` be the score seen by the centered residual parameters, and
+Let `s_res(h,a)` be **the score or Jacobian** seen by the centered residual
+parameters — Pro's disjunction, restored verbatim; the first registration of
+this contract dropped "or Jacobian" and thereby narrowed a choice Pro left
+open. Either limb is contract-legal. The realized package takes the
+action-space limb, `s_res = (raw_action - mean) / std^2`
+(`residual_action_space_score`), so alignment in section 4 is measured in
+action space rather than in residual parameter space. Any future switch to the
+parameter-space Jacobian is a re-registration of this line, not a bug fix.
 
 ```text
 g*_res = E[ s_res(h,a) * A*(h,a) ]
@@ -287,4 +294,38 @@ g18_audit=3149000
 baseline_samples_K=8
 ```
 
-No run is authorized by this document.
+### `epsilon_audit` is not yet registered — the screen is withheld
+
+Section 2 gates Stage A on `LCB95(S_source) > epsilon_audit^2` and this section
+froze no value for it. That is a defect in the first registration, not in the
+implementation. The built package exposes `EPSILON_AUDIT = 1e-4` as a module
+default and `scripts/screen_anchor_action_advantage_g20r2.py:887` calls
+`stage_a_source_effect` without an explicit argument, so a run today would gate
+identification on a number no document registers, and its Stage A branch would
+not be interpretable.
+
+**Derivation rule, registered here.** `epsilon_audit` is a measured property of
+the audit estimator, never a chosen effect size. It is obtained by a **null
+calibration**: drive the paired-replay pipeline with an intervention whose true
+within-history action advantage is exactly zero — the factual action probed
+against itself — so every nonzero output is pure numerical and suffix
+Monte Carlo resolution noise. `epsilon_audit` is then set from the upper tail of
+`|Ahat*|` under that null.
+
+Three conditions make the number meaningful:
+
+- the null must run at the **configured audit scale** (`AUDIT_EPISODES`, `K=8`,
+  the registered suffix replicate count), because resolution is sample-count
+  dependent and a value measured at another scale does not transfer;
+- it is measured **per source**, since G17 and G18 have different return scales;
+- the resulting value is written back into this section as a frozen constant
+  before any screen run, and the screen must pass it **explicitly** — the module
+  default must be made unreachable, so a missing registration fails closed
+  rather than silently substituting `1e-4`.
+
+The null calibration is a bounded measurement of estimator resolution, not the
+screen, and it consumes no iteration. It produces one number per source and no
+scientific reading whatsoever.
+
+No run is authorized by this document. The screen stays withheld until
+`epsilon_audit` is registered above by that calibration.
