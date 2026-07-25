@@ -14,10 +14,12 @@ separately, not a proof obligation of this suite.
 
 from __future__ import annotations
 
+import inspect
 import math
 import sys
 from pathlib import Path
 
+import numpy as np
 import pytest
 import torch
 
@@ -205,3 +207,129 @@ def test_calibrate_source_runs_end_to_end_at_trivial_scale_on_g18() -> None:
     # against -- at least one observed decision point must show nonzero
     # suffix-noise resolution under a stochastic environment.
     assert result["max_abs_d_over_sqrt2"] > 0.0
+
+
+# ---------------------------------------------------------------------------
+# Support fix: the calibration draws only from the C1 action support, and
+# the calibration point count is raised well above the screen's own ~24
+# (design section 11: "the number of calibration points ... must be raised
+# well above the screen's own audit point count").
+# ---------------------------------------------------------------------------
+
+
+def test_calibration_audit_episodes_is_well_above_the_screens_own_count() -> None:
+    """A regression that reverted `CALIBRATION_AUDIT_EPISODES` back down to
+    the screen's own `AUDIT_EPISODES` (or anything close to it) fails here."""
+
+    assert calibration_module.CALIBRATION_AUDIT_EPISODES > screen_module.AUDIT_EPISODES
+    screen_total_points = (
+        screen_module.AUDIT_EPISODES * screen_module.AUDIT_PROBE_POINTS_PER_EPISODE
+    )
+    calibration_total_points = (
+        calibration_module.CALIBRATION_AUDIT_EPISODES
+        * screen_module.AUDIT_PROBE_POINTS_PER_EPISODE
+    )
+    assert calibration_total_points >= 5 * screen_total_points
+
+
+def test_calibrate_source_default_audit_episodes_matches_the_raised_constant() -> None:
+    signature = inspect.signature(calibration_module.calibrate_source)
+    assert (
+        signature.parameters["audit_episodes"].default
+        == calibration_module.CALIBRATION_AUDIT_EPISODES
+    )
+
+
+def test_probe_point_delta_never_intervenes_on_an_inactive_g18_position() -> None:
+    """Direct regression at the level the calibration itself uses: every
+    (time, position) the fixed `_audit_probe_points` draws for a real G18
+    ledger must be active at that time. G18's rotation window (t in [6, 10))
+    drops active_count from 4 to 2 out of capacity 6, so a sampler that
+    ignored activity (the retired defect) would violate this quickly."""
+
+    ledger = calibration_module._make_ledger("g18", 0)
+    horizon, capacity, action_dim = calibration_module._source_geometry("g18")
+    active_counts = screen_module._episode_active_counts(
+        horizon=horizon,
+        capacity=capacity,
+        action_dim=action_dim,
+        env_factory=calibration_module._env_factory("g18", ledger),
+    )
+    generator = np.random.default_rng(7)
+    for _ in range(100):
+        for time_index, position in screen_module._audit_probe_points(
+            "g18", generator, active_counts
+        ):
+            assert position < active_counts[time_index]
+
+
+def test_calibrate_source_at_raised_scale_reduces_exact_zero_fraction_relative_to_uniform_grid() -> None:
+    """The concrete prediction design section 2 makes about the retired
+    defect: restricting probes to the C1 action support must substantially
+    reduce the fraction of exact-zero contrasts relative to drawing from the
+    full, unrestricted (horizon, capacity) grid -- because an inactive
+    intervention is a structural no-op (the environment forces its executed
+    action to zero regardless of the probe), so `delta_set_a` is bit-exact
+    zero there, while an active intervention generically is not.
+
+    This reimplements only the retired grid-uniform point selection (not the
+    rest of the pipeline) to measure what the old code would have drawn, and
+    feeds both point sets through the same, unmodified `_probe_point_delta`
+    used at every registered scale."""
+
+    def uniform_grid_points(generator: np.random.Generator, horizon: int, capacity: int):
+        return [
+            (int(generator.integers(0, horizon)), int(generator.integers(0, capacity)))
+            for _ in range(3)
+        ]
+
+    horizon, capacity, action_dim = calibration_module._source_geometry("g18")
+    model = calibration_module.make_model("g18")
+
+    def zero_fraction(use_active_support: bool) -> float:
+        total = 0
+        zero = 0
+        for episode_id in range(6):
+            ledger = calibration_module._make_ledger("g18", episode_id)
+            point_generator = np.random.default_rng(
+                np.random.SeedSequence(
+                    [int(calibration_module.SEEDS["g18"]["audit"]), episode_id, 700]
+                )
+            )
+            if use_active_support:
+                active_counts = screen_module._episode_active_counts(
+                    horizon=horizon,
+                    capacity=capacity,
+                    action_dim=action_dim,
+                    env_factory=calibration_module._env_factory("g18", ledger),
+                )
+                points = screen_module._audit_probe_points(
+                    "g18", point_generator, active_counts
+                )
+            else:
+                points = uniform_grid_points(point_generator, horizon, capacity)
+            for point_index, (intervention_time, intervention_position) in enumerate(points):
+                row = calibration_module._probe_point_delta(
+                    model,
+                    "g18",
+                    ledger,
+                    episode_id=episode_id,
+                    point_index=point_index,
+                    intervention_time=intervention_time,
+                    intervention_position=intervention_position,
+                    k=2,
+                    suffix_replicates=2,
+                )
+                total += 1
+                if row.delta_set_a == 0.0:
+                    zero += 1
+        return zero / total
+
+    uniform_zero_fraction = zero_fraction(use_active_support=False)
+    restricted_zero_fraction = zero_fraction(use_active_support=True)
+
+    assert uniform_zero_fraction > 0.0, (
+        "fixture must actually exercise the inactive window under the "
+        "unrestricted grid or this comparison proves nothing"
+    )
+    assert restricted_zero_fraction < uniform_zero_fraction

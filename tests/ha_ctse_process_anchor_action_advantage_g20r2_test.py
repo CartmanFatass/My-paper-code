@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
+import numpy as np
+import pytest
 import torch
 
 from ha_ctse_process import continuous_service_roster_proxy_g17 as g17_source
@@ -1384,3 +1386,120 @@ def test_screen_seeds_match_frozen_design_section_11() -> None:
     }
     new_values = {value for source in screen.SEEDS.values() for value in source.values()}
     assert retired_values.isdisjoint(new_values)
+
+
+# ---------------------------------------------------------------------------
+# G20R2 defect repair: audit probes must be drawn only from the C1 action
+# support (design section 2, "The probe distribution is the C1 action
+# support, not the full grid"). An inactive routing position carries no
+# action into the environment, so `A*(h,a) = 0` there structurally, and the
+# retired uniform-grid sampler mixed those structural zeros into Stage A's
+# estimate of `S_source`.
+# ---------------------------------------------------------------------------
+
+
+def test_episode_active_counts_matches_g18s_documented_temporary_leave_window() -> None:
+    """Design section 2: G18 is capacity 6 over horizon 12 with a
+    temporary-leave window at t in [6, 10). The active-count table this
+    function derives (independent of any model, since membership is
+    exogenous to actions) must show the roster drop from 4 to 2 exactly
+    there and nowhere else."""
+
+    ledger = battery_source.make_ledger(battery_source.GATE_SLOT_ORDERS[0])
+    counts = screen._episode_active_counts(
+        horizon=battery_source.HORIZON,
+        capacity=battery_source.CAPACITY,
+        action_dim=battery_source.ACTION_DIM,
+        env_factory=lambda: battery_source.BatteryRosterEnv(ledger),
+    )
+    assert counts == [4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4, 4]
+
+
+def test_audit_probe_points_never_draws_an_inactive_position() -> None:
+    """Every returned (time, position) must satisfy `position <
+    active_counts[time]`. A fixture much sparser than G18's own window
+    (only 2 of 6 slots ever active, and only at even timesteps) makes a bug
+    show up on the first violating draw rather than needing many trials.
+
+    This is the direct regression for the repaired defect: the retired
+    sampler drew `position` uniformly over the full `capacity` range with no
+    activity check at all, so it would violate this assertion immediately
+    on this fixture (verified by running this test against the pre-fix
+    `_audit_probe_points`, which does not even accept an `active_counts`
+    argument and raises `TypeError` before the assertion is reached -- the
+    fix is exactly adding the capability this test requires)."""
+
+    generator = np.random.default_rng(0)
+    active_counts = [2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0]
+    for _ in range(50):
+        points = screen._audit_probe_points("g18", generator, active_counts)
+        assert len(points) == screen.AUDIT_PROBE_POINTS_PER_EPISODE
+        for time_index, position in points:
+            assert position < active_counts[time_index]
+
+
+def test_audit_probe_points_never_selects_g18s_inactive_rotation_slots() -> None:
+    """Integration version of the above against the real G18 source: across
+    many draws, no probe point ever lands on routing positions 2-5 during
+    the t in [6, 10) rotation window, where only 2 of 6 slots are active."""
+
+    ledger = battery_source.make_ledger(battery_source.GATE_SLOT_ORDERS[0])
+    active_counts = screen._episode_active_counts(
+        horizon=battery_source.HORIZON,
+        capacity=battery_source.CAPACITY,
+        action_dim=battery_source.ACTION_DIM,
+        env_factory=lambda: battery_source.BatteryRosterEnv(ledger),
+    )
+    generator = np.random.default_rng(4)
+    saw_a_rotation_window_draw = False
+    for _ in range(200):
+        for time_index, position in screen._audit_probe_points(
+            "g18", generator, active_counts
+        ):
+            if 6 <= time_index < 10:
+                saw_a_rotation_window_draw = True
+                assert position < 2
+    # Vacuity guard: the rotation window must actually have been sampled at
+    # least once across 200 draws, or the assertion above proves nothing.
+    assert saw_a_rotation_window_draw
+
+
+def test_audit_probe_points_includes_g18_pivotal_point_when_active() -> None:
+    generator = np.random.default_rng(1)
+    active_counts = [3] * battery_source.HORIZON
+    points = screen._audit_probe_points("g18", generator, active_counts)
+    assert (0, 0) in points
+
+
+def test_audit_probe_points_raises_if_g18_pivotal_point_is_inactive() -> None:
+    """Design brief: whether G18's hardcoded pivotal point (0, 0) is active
+    at t=0 is a finding to surface, not silently drop. For the registered
+    ledger it is always active (checked by the test above); this test
+    proves the *other* branch is not silently swallowed if it were ever not."""
+
+    generator = np.random.default_rng(2)
+    active_counts = [0] + [3] * (battery_source.HORIZON - 1)
+    with pytest.raises(ValueError):
+        screen._audit_probe_points("g18", generator, active_counts)
+
+
+def test_audit_probe_points_raises_on_fully_inactive_episode() -> None:
+    generator = np.random.default_rng(3)
+    active_counts = [0] * g17_source.HORIZON
+    with pytest.raises(ValueError):
+        screen._audit_probe_points("g17", generator, active_counts)
+
+
+def test_audit_probe_points_samples_with_replacement_when_support_is_small() -> None:
+    """Design brief: when an episode has fewer active (time, position) pairs
+    than AUDIT_PROBE_POINTS_PER_EPISODE, the function must not silently
+    return a short list. With a single active pair and
+    AUDIT_PROBE_POINTS_PER_EPISODE=3, every returned point must be that one
+    pair, repeated -- exactly AUDIT_PROBE_POINTS_PER_EPISODE times, never
+    fewer."""
+
+    generator = np.random.default_rng(5)
+    active_counts = [1] + [0] * (g17_source.HORIZON - 1)
+    points = screen._audit_probe_points("g17", generator, active_counts)
+    assert len(points) == screen.AUDIT_PROBE_POINTS_PER_EPISODE
+    assert points == [(0, 0)] * screen.AUDIT_PROBE_POINTS_PER_EPISODE

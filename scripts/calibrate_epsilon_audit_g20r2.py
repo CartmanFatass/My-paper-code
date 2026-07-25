@@ -83,9 +83,28 @@ from scripts.screen_anchor_action_advantage_g20r2 import (
     GAMMA,
     SEEDS,
     _audit_probe_points,
+    _episode_active_counts,
     make_model,
     paired_replay_return,
 )
+
+# Design section 11: "Raise the number of calibration points well above the
+# screen's ~24" (``AUDIT_EPISODES * AUDIT_PROBE_POINTS_PER_EPISODE`` = 8 * 3).
+# The per-estimate Monte Carlo budget (K, AUDIT_SUFFIX_REPLICATES) stays at
+# its configured value -- only ``audit_episodes`` is raised here, since
+# ``_audit_probe_points`` always returns exactly ``AUDIT_PROBE_POINTS_PER_
+# EPISODE`` points per episode (the screen's own per-episode budget is not a
+# calibration knob); more episodes is the only lever that raises the total
+# point count without touching resolution. 40 episodes * 3 points/episode =
+# 120 points per source, five times the screen's own count.
+CALIBRATION_AUDIT_EPISODES = 40
+
+if CALIBRATION_AUDIT_EPISODES <= AUDIT_EPISODES:
+    raise ValueError(
+        "G20R2 epsilon_audit calibration must sample well above the screen's "
+        f"own audit_episodes={AUDIT_EPISODES} (design section 11); "
+        f"CALIBRATION_AUDIT_EPISODES={CALIBRATION_AUDIT_EPISODES} does not"
+    )
 
 
 def _source_geometry(source: str) -> tuple[int, int, int]:
@@ -403,37 +422,52 @@ def _epsilon_audit_from_deltas(
 def calibrate_source(
     source: str,
     *,
-    audit_episodes: int = AUDIT_EPISODES,
+    audit_episodes: int = CALIBRATION_AUDIT_EPISODES,
     points_per_episode: int = AUDIT_PROBE_POINTS_PER_EPISODE,
     suffix_replicates: int = AUDIT_SUFFIX_REPLICATES,
     k: int = BASELINE_SAMPLES_K_CONFIGURED,
 ) -> dict[str, Any]:
     """Run the replicate-split null calibration for one source.
 
-    Defaults are the module's own configured audit scale, matching design
-    section 11's "the null must run at the configured audit scale" condition.
-    Smaller overrides exist only for tests exercising the wiring at trivial
-    scale; a value intended for registration must use the defaults.
+    ``suffix_replicates`` and ``k`` default to the module's own configured
+    per-estimate Monte Carlo budget, matching design section 11's "the null
+    must run at the configured audit scale" condition for the number that
+    *sets resolution*. ``audit_episodes`` defaults to
+    ``CALIBRATION_AUDIT_EPISODES`` (well above the screen's own
+    ``AUDIT_EPISODES``), because the number of calibration *points* is a
+    separate knob from that budget (design section 11) and the screen's own
+    ~24 points is too few to estimate a stable 95th-percentile tail. Smaller
+    overrides exist only for tests exercising the wiring at trivial scale; a
+    value intended for registration must use the defaults.
     """
 
     g17_runner.configure_runtime(int(SEEDS[source]["model"]))
     model = make_model(source)
+    horizon, capacity, action_dim = _source_geometry(source)
 
     rows_by_episode: dict[int, list[ProbePointDelta]] = {}
     for episode_id in range(int(audit_episodes)):
         ledger = _make_ledger(source, episode_id)
+        active_counts = _episode_active_counts(
+            horizon=horizon,
+            capacity=capacity,
+            action_dim=action_dim,
+            env_factory=_env_factory(source, ledger),
+        )
         point_generator = np.random.default_rng(
             np.random.SeedSequence(
                 [int(SEEDS[source]["audit"]), int(episode_id), 700]
             )
         )
         # `_audit_probe_points` always returns the module's full configured
-        # list (length AUDIT_PROBE_POINTS_PER_EPISODE); slicing to
-        # `points_per_episode` reuses that exact, unmodified point-selection
-        # function -- including G18's forced t=0 pivotal point -- rather than
-        # reimplementing it, and only ever narrows the set a real Stage A
-        # audit would also visit.
-        points = _audit_probe_points(source, point_generator)[: int(points_per_episode)]
+        # list (length AUDIT_PROBE_POINTS_PER_EPISODE), restricted to the C1
+        # action support; slicing to `points_per_episode` reuses that exact,
+        # unmodified point-selection function -- including G18's forced t=0
+        # pivotal point -- rather than reimplementing it, and only ever
+        # narrows the set a real Stage A audit would also visit.
+        points = _audit_probe_points(source, point_generator, active_counts)[
+            : int(points_per_episode)
+        ]
         rows: list[ProbePointDelta] = []
         for point_index, (intervention_time, intervention_position) in enumerate(
             points

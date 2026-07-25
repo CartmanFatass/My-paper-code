@@ -583,23 +583,107 @@ def paired_replay_return(
     return running, raw_probe, mean_at_intervention, std, active_count_at_intervention
 
 
-def _audit_probe_points(source: str, generator: np.random.Generator) -> list[tuple[int, int]]:
-    """Deterministically choose (time, routing-position) audit points.
+def _episode_active_counts(
+    *,
+    horizon: int,
+    capacity: int,
+    action_dim: int,
+    env_factory: Callable[[], Any],
+) -> list[int]:
+    """Per-timestep active routing-position count for one episode's ledger.
 
-    One is always t=0 for G18 (the pivotal decision point the source's own
-    information gate audits, external ruling section 3); the rest are drawn
-    uniformly at random from the source's (horizon, capacity) grid.
+    Roster membership in both sources is a pure function of elapsed time and
+    the ledger -- G18's rotation window and G17's temporary-absence/fresh-join
+    events are all keyed off ``self.time``, never off the action taken (see
+    ``BatteryRosterEnv._prepare_membership`` / ``ContinuousServiceRosterEnv.
+    _prepare_membership``) -- so a zero-action rollout reproduces the exact
+    ``active_mask`` sequence a real policy rollout would see. Zero actions are
+    always contract-legal (finite, within ``[-1, 1]``, and zero at every
+    inactive row), so no model forward pass is needed to obtain this table.
+
+    ``_routing_order`` sorts active members into the first ``active_count``
+    positions and inactive ones after them (design section 2's active-token
+    routing), so "routing position ``p`` is active at time ``t``" is exactly
+    ``p < active_counts[t]``.
     """
 
-    horizon = battery_source.HORIZON if source == "g18" else g17_source.HORIZON
-    capacity = battery_source.CAPACITY if source == "g18" else g17_source.CAPACITY
+    env = env_factory()
+    zero_actions = np.zeros((capacity, action_dim), dtype=np.float32)
+    counts: list[int] = []
+    for _ in range(horizon):
+        view = env.observe()
+        counts.append(int(np.asarray(view.active_mask).sum()))
+        env.step(zero_actions)
+    return counts
+
+
+def _audit_probe_points(
+    source: str,
+    generator: np.random.Generator,
+    active_counts: Sequence[int],
+) -> list[tuple[int, int]]:
+    """Deterministically choose (time, routing-position) audit points on the
+    C1 action support (design section 2, "The probe distribution is the C1
+    action support, not the full grid").
+
+    A routing position is only in the support at time ``t`` when it is
+    *active* there -- ``position < active_counts[t]``, since ``_routing_order``
+    always sorts active members into the first ``active_counts[t]`` positions.
+    Drawing from the unrestricted ``(horizon, capacity)`` grid mixes in
+    structural zeros (an inactive position carries no action into the
+    environment, so its true ``A*(h,a)`` is exactly zero by masking, not by
+    any property of the source) and is exactly the contract violation this
+    function repairs.
+
+    One point is always ``(0, 0)`` for G18 (the pivotal decision point the
+    source's own information gate audits, external ruling section 3) *when
+    that position is active at t=0* -- true for every registered G18 ledger,
+    since the source's own ``observe()`` raises on an empty active roster, so
+    ``active_counts[0] > 0`` always holds and position 0 is therefore always
+    filled. This is verified from the passed-in ``active_counts`` rather than
+    assumed, so a ledger that ever violated it would surface here, not
+    silently keep an inactive pivotal point.
+
+    The remaining points are drawn **uniformly at random, with replacement**,
+    from the active ``(t, position)`` support -- the same with-replacement
+    style the retired uniform-grid sampler already used (it never
+    deduplicated draws either). This is a deliberate choice for the case
+    where the active support is smaller than
+    ``AUDIT_PROBE_POINTS_PER_EPISODE``: sampling with replacement always
+    returns exactly ``AUDIT_PROBE_POINTS_PER_EPISODE`` points (never a
+    silently short list), at the cost of possible duplicate points when the
+    support is small relative to the requested count. For both registered
+    sources at the registered budget the active support is far larger than
+    ``AUDIT_PROBE_POINTS_PER_EPISODE`` (G18: 40 active pairs across the
+    episode; G17 has a larger capacity/horizon grid still), so duplication is
+    not expected in practice, but the with-replacement contract holds
+    regardless.
+    """
+
+    candidates = [
+        (time_index, position)
+        for time_index, count in enumerate(active_counts)
+        for position in range(int(count))
+    ]
+    if not candidates:
+        raise ValueError(
+            f"G20R2 audit source={source!r} has no active (time, position) "
+            "pairs in this episode -- the C1 action support is empty"
+        )
     points: list[tuple[int, int]] = []
     if source == "g18":
-        points.append((0, 0))
+        if int(active_counts[0]) > 0:
+            points.append((0, 0))
+        else:
+            raise ValueError(
+                "G20R2 G18 pivotal audit point (0, 0) is not active at t=0 "
+                "for this ledger -- design section 11's hardcoded pivotal "
+                "point assumption does not hold here and must be revisited, "
+                "not silently dropped"
+            )
     while len(points) < AUDIT_PROBE_POINTS_PER_EPISODE:
-        points.append(
-            (int(generator.integers(0, horizon)), int(generator.integers(0, capacity)))
-        )
+        index = int(generator.integers(0, len(candidates)))
+        points.append(candidates[index])
     return points[:AUDIT_PROBE_POINTS_PER_EPISODE]
 
 
@@ -656,6 +740,12 @@ def collect_audit_clusters(
 
     for episode_id in episode_ids:
         ledger = make_ledger(int(episode_id))
+        active_counts = _episode_active_counts(
+            horizon=horizon,
+            capacity=capacity,
+            action_dim=action_dim,
+            env_factory=lambda ledger=ledger: env_factory_for(ledger),
+        )
         point_generator = np.random.default_rng(
             np.random.SeedSequence(
                 [int(SEEDS[source]["audit"]), int(episode_id), 700]
@@ -676,7 +766,7 @@ def collect_audit_clusters(
         score_rows: list[list[float]] = []
 
         for point_index, (intervention_time, intervention_position) in enumerate(
-            _audit_probe_points(source, point_generator)
+            _audit_probe_points(source, point_generator, active_counts)
         ):
             # Determine the anchor mean at this decision point via one
             # reference rollout (factual probe = the anchor mean itself,
