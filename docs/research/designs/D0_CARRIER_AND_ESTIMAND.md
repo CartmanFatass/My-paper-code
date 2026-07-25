@@ -153,22 +153,41 @@ The utility level must be registered before D7 runs, not chosen after.
 
 Matched across arms: information, action support, optimizer exposure.
 
-## 6. Censoring — six ways a commitment stops that are not a renewal decision
+## 6. Censoring — how a commitment stops without a renewal decision
 
-Any one of these, unseparated, turns a policy measurement into an environment
-measurement.
+**Corrected 2026-07-25.** An earlier revision listed six sources for the carrier.
+Four of them are legacy-only: `standalone_agent.py:4151` reads
+`if self.r30_enabled: return self._r30_maybe_assign_skills(...)`, and every path
+from `:4162` onward — team-intent Z boundary, the active-mask expiry test,
+`situation_hazard_forced_renewal`, and duration exhaustion — is in the branch
+below that return. Under the R30 carrier they are unreachable, and attributing an
+R30 commitment end to them would be a category error.
 
-| # | Source | Anchor |
-|---|---|---|
-| 1 | Episode end | `standalone_agent.py:3104`, `terminal=True` |
-| 2 | Team-intent / Z boundary | `team_intent_boundary_trunc_by_duration`, `standalone_agent.py:4164-4190` |
-| 3 | Active-mask change — leave / rejoin | `has_active_skill` false ⇒ segment ends |
-| 4 | **Forced renewal** | `situation_hazard_forced_renewal_rate`, `standalone_agent.py:4287` |
-| 5 | **Policy-update boundary** | `policy_truncated=True`, `standalone_agent.py:3131-3136` — cuts the **credit window**, splits the **record**, does **not** cut the commitment |
-| 6 | Duration exhaustion | Legacy only — `duration_remaining <= 0` |
+For the carrier, the list is short:
 
-Sources 4 and 5 were not in the ruling's list. Source 4 means renewals occur that
-the policy did not choose. Source 5 is the fragmentation trap of §1.
+| # | Source | Anchor | Real decision? |
+|---|---|---|---|
+| 1 | **Genuine SET** | `segments.renew(...)` under `token_kind == SET_TOKEN`, `standalone_agent.py:4103`; sets `completion_reason="renewal"` | Yes — the only one |
+| 2 | Episode end | `segments.flush(reason="episode")`, `train.py:7465` | No |
+| 3 | **Policy-update boundary** | `segments.flush(reason="update")`, `train.py:7488`, preceded by `policy_truncated=True` at `:3131` | No — the fragmentation trap of §1 |
+| 4 | **Synthetic continuation reopen** | `segments.renew(...)` in `start_high_continuations_after_update`, `:3166` | No — a bookkeeping row |
+
+Sources 2 and 3 carry distinct `completion_reason` strings, so they are directly
+attributable. Source 4 is **not** marked by any single flag: it is inferable only
+from a constellation — `switched=False`, `initial_assignment=False`,
+`duration_target=0`, `high_logp=0.0`.
+
+That every `completion_reason == "renewal"` really is a genuine SET holds only
+because the update-boundary `flush` nulls the slot before
+`start_high_continuations_after_update` calls `renew`, so the reopen never takes
+`renew`'s `old is not None` retag branch. **This is a real invariant resting on
+call ordering in two different files.** D7 must assert it explicitly rather than
+build attribution on it silently, and an explicit synthetic-continuation flag
+would retire the dependency altogether.
+
+Fewer contamination sources is a further point for the carrier. It also raises
+the relative weight of source 3, now one of only two non-decision ways a record
+ends.
 
 **Right-censoring is mandatory reporting, not a footnote.** A commitment still
 running when its observation window ends is censored, not short. Long lifetimes
@@ -217,6 +236,34 @@ The existing R30 metrics are counts and rates (`r30_switch_count`,
 `r30_spell_gt_4k0_frac`, `r30_full_sync_set_rate`). **No age-conditioned hazard is
 emitted today**, and no per-step trace is persisted, so D7's instrumentation is new
 work rather than a logging flag.
+
+### Two things are not recoverable without a schema change
+
+1. **`sigmoid(keep_logit)` is never captured.** It is computed in `_token_context`
+   (`r30_fixed_clock.py:199-203`), consumed locally, and never returned;
+   `EditSequenceSample` has no field for it, and `HighCheckRow.old_token_logp`
+   holds the *combined* log-prob — `log_keep` for KEEP but `log_switch + skill_logp`
+   for SET, which conflates the renewal decision with the skill categorical.
+
+   Reconstructing it by replay is **not equivalent**: the weights have moved by
+   the time `update_high_from_checks` runs. So the decision probability must be
+   threaded live at decision time — `_token_context -> EditSequenceSample ->
+   HighCheckRow` — or it is not measurable. This is the one unavoidable schema
+   change in D7, and it is on the quantity the whole primitive rests on.
+
+2. **`skill_age` does not advance during evaluation rollouts.** It is incremented
+   inside `record_environment_step` (`:3102`), and `export_substrate_gate.py`
+   never calls that method. Ages observed on the eval host are therefore
+   *check-boundary values*, not elapsed steps.
+
+   This is decisive for the cheap route of D7 §3: an age-conditioned hazard
+   computed there would be conditioned on a quantity that does not move. Either
+   the eval host gains an increment call, or the measurement is defined purely on
+   `prev_ages` — which is check-synchronised in both hosts — and documented as
+   check-opportunity age rather than primitive-step age.
+
+Both were found by mapping the two hosts before writing anything, which is what
+D0 exists to do.
 
 ## 9. Open, and not resolvable here
 
