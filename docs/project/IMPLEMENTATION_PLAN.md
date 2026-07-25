@@ -1,4 +1,10 @@
-# G20 active-set-centered delayed-residual implementation plan
+# G20R anchor-policy action-advantage implementation plan
+
+> This header is the executable boundary and **must be updated whenever
+> `CURRENT_WORK.md`'s boundary moves**. It sat twelve hours stale on
+> 2026-07-24 — naming a superseded implementation and an iteration budget of 8
+> when the real figure was 20 — while `AGENT_CONTEXT.md` was pointing every
+> child here as "the frozen executable contract".
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -8,15 +14,19 @@ last_nonformal=FAST_POLICY_ANCHORED_DELAYED_RESIDUAL_G19
 last_nonformal_result=NONFORMAL_NO_DELAYED_ACCESS_FAST_ANCHOR_G19
 active_source=DELAYED_BATTERY_ROSTER_G18
 source_gate=PASS_DELAYED_BATTERY_ROSTER_INFORMATION_GATE_G18
-active_implementation=ACTIVE_SET_CENTERED_DELAYED_RESIDUAL_G20_DERIVATION
+active_implementation=ANCHOR_POLICY_ACTION_ADVANTAGE_G20R
+active_design=docs/research/designs/ANCHOR_POLICY_ACTION_ADVANTAGE_G20R.md
+superseded_implementation=ACTIVE_SET_CENTERED_COUNTERFACTUAL_RESIDUAL_G20
+superseded_reason=credit_rule_inert_zero_fixed_point_at_mandated_entry_state
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=19_complete
-iterations_remaining=8
-formal_compute=not_scheduled_for_g19
-algebra_status=ZERO_COMPUTE_DERIVATION_REQUIRED
-screen_contract=none_until_g20_derivation
+iterations_remaining=20
+formal_compute=not_scheduled_for_g20r
+algebra_status=PRE_FREEZE_DESIGN_CHECK_PASSED
+screen_contract=docs/research/designs/ANCHOR_POLICY_ACTION_ADVANTAGE_G20R.md_section_8_and_9
+screen_status=built_and_accepted_not_yet_executed
 ```
 
 ## Frozen designs this line rests on
