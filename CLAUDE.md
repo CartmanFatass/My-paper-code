@@ -43,9 +43,15 @@ primary_wake=task notifications from background children
 fallback_wake=/loop wakeup, for the gap notifications cannot cover
 ```
 
-1. **A turn ending is not the loop ending.** Before the last tool call of a turn,
-   confirm a driver is attached. Nothing in flight and the next step yours to
-   start is the stall gap — arm the wakeup.
+1. **The loop is a backstop, not a scheduler.** It exists to cover an *empty
+   gap* — no work in hand, nothing in flight, nothing to answer. If there is a
+   next step and it is yours, **take it now**; deferring ready work to a wakeup
+   is the failure this mechanism was built to prevent, not an instance of it.
+   Arm the wakeup only when the turn would otherwise end with the loop dead and
+   nothing left to do.
+
+   A turn ending is still not the loop ending: check before the last tool call
+   that either work is in flight or a driver is attached.
 2. **Compaction never pauses it.** Handoff, compact, resume into the next
    iteration. Nothing waits for an answer at that seam.
 3. **Compute is a script, not a question.** `scripts/check_compute_free.ps1`.
