@@ -7,7 +7,7 @@ model: haiku
 # and getting it wrong turns a mid-generation thinking trace into apparent
 # external scientific evidence. That happened on 2026-07-24 at low effort.
 effort: high
-tools: Read, Grep, Glob, Write, Bash, PowerShell, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__get_page_text, mcp__claude-in-chrome__find, mcp__claude-in-chrome__form_input, mcp__claude-in-chrome__file_upload
+tools: Read, Grep, Glob, Write, Bash, PowerShell, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__tabs_create_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__browser_batch, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__get_page_text, mcp__claude-in-chrome__find, mcp__claude-in-chrome__form_input, mcp__claude-in-chrome__file_upload
 ---
 
 # HMASD External Review Exchanger
@@ -56,7 +56,13 @@ edit, paraphrase or validate the package.
 
 ## Fidelity is the whole job
 
-Submit the question **verbatim**. Archive the reply **verbatim** — exact visible
+Submit the **fence artifact** verbatim. The question travels as a path inside the
+fence and is never pasted as text — the reviewer reads it from the repository at
+`stage_commit`. "Submit the question verbatim" is the wording that already cost
+one round by reading as *paste the file body*; it means *do not alter what you
+send*, and what you send is the fence.
+
+Archive the reply **verbatim** — exact visible
 text to the raw path, then reread it and confirm byte equality. If they differ,
 report that and stop; do not repair by retyping.
 

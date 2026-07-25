@@ -1,6 +1,9 @@
 # HMASD Role Constitution
 
-This file is automatically discovered by every HMASD task. It carries project
+Only `CLAUDE.md` is injected automatically. This file is **not** — a child sees
+it only if its definition says to read it, so any rule here that must bind a
+child belongs in that child's read-first list, or in
+`docs/project/AGENT_CONTEXT.md`, which every definition names. It carries project
 authority only — science, acceptance, Git, protected semantics — and is
 runtime-agnostic. Role detail lives in `.agents/roles/`, agent-runtime detail in
 `CLAUDE.md` and `.claude/agents/`, and mechanics in Skills. Do not duplicate one

@@ -117,15 +117,21 @@ if ($configuredRemotes -notcontains $defaultRemote.Groups['r'].Value) {
 # A gate that cannot fail is decoration. The retired round is the fixture: it
 # carried no '## Evidence to read' allow-list and must be rejected.
 $retired = 'docs/external-review/rounds/20260724_g20_credit_rule_zero_fixed_point'
-if (Test-Path (Join-Path $repo "$retired/20_PRO_OPEN_QUESTION.md")) {
-    $rejected = & $preflight `
-        -Commit (& git.exe -C $repo rev-parse HEAD).Trim() `
-        -RoundPath $retired `
-        -Branch (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim() `
-        -RepoRoot $repo 2>$null | ConvertFrom-Json
-    if ($rejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
-        throw 'Round preflight accepted a question with no evidence allow-list'
-    }
+# Do NOT wrap this in a Test-Path guard. Repository policy encourages deleting
+# superseded rounds, so a skip-if-absent probe would silently vacate itself and
+# leave the suite green over an unexercised gate -- the exact defect this probe
+# exists to prevent. If the fixture is ever removed, replace it with another
+# question carrying no '## Evidence to read' allow-list in the same commit.
+if (-not (Test-Path (Join-Path $repo "$retired/20_PRO_OPEN_QUESTION.md"))) {
+    throw "Preflight rejection fixture is missing: $retired. Point the probe at another allow-list-free question rather than deleting the check."
+}
+$rejected = & $preflight `
+    -Commit (& git.exe -C $repo rev-parse HEAD).Trim() `
+    -RoundPath $retired `
+    -Branch (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim() `
+    -RepoRoot $repo 2>$null | ConvertFrom-Json
+if ($rejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
+    throw 'Round preflight accepted a question with no evidence allow-list'
 }
 
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'

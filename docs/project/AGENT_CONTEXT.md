@@ -147,4 +147,4 @@ and flag it rather than proceeding.
 - `.claude/skills/hmasd-agile-research-development/SKILL.md` — project-native
   implementation and verification procedure.
 - `.claude/agents/*.md` — the registered subagent roster and its standing
-  boundaries; `AGENTS.md` records the model tier of each.
+  boundaries; `CLAUDE.md` records the model tier of each.

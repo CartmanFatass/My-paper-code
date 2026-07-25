@@ -79,7 +79,7 @@ Registration is this task's; transport is not.
   boundary, then hand the round to `hmasd-review-exchanger`. Do not drive the
   browser and do not create any other relay.
 - Spawn only registered subagents from `.claude/agents/`, with exact assignments
-  and file ownership; `AGENTS.md` holds the roster and its model tiers. For
+  and file ownership; `CLAUDE.md` holds the roster and its model tiers. For
   experiments, use only `hmasd-experiment-operator`; never a default/ad hoc
   child.
 - Supply the experiment operator a complete immutable train/evaluate/analyze

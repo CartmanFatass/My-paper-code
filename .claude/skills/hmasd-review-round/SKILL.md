@@ -42,7 +42,8 @@ Create no other relay, dispatcher, or Monitor.
 | open the registered conversation | `tabs_create_mcp`, then `navigate` |
 | snapshot message-role containers and generation controls | `read_page`, `get_page_text` |
 | locate a specific control or conversation link | `find` |
-| compose the fence or a continuation | `form_input` |
+| compose the fence or a continuation | clipboard paste via `computer` — **not** `form_input`, which fails on this composer (see below) |
+| run an ordered multi-step page sequence | `browser_batch` |
 | submit, scroll, or operate a control | `computer` |
 | attach the evidence archive during transport recovery | `file_upload` |
 

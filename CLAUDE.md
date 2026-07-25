@@ -10,12 +10,12 @@ document your task actually names.
 
 ## Routing
 
-Controller work uses the active files in `docs/project/`. Every bounded role is
+Project Manager work uses the active files in `docs/project/`. Every bounded role is
 a subagent below. Implementation procedure is
 `$hmasd-agile-research-development`; external review transport is
 `$hmasd-review-round`.
 
-If `CURRENT_WORK.md` names another active controller, remain read-only unless an
+If `CURRENT_WORK.md` names another active Project Manager, remain read-only unless an
 explicit handoff changes ownership. Git-tracked code is the implementation
 source and `logs/<run-id>/` is runtime evidence. Historical modules, commands,
 rounds and archived artifacts are not active instructions.
