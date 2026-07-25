@@ -48,7 +48,13 @@ Create no other relay, dispatcher, or Monitor.
 | attach the evidence archive during transport recovery | `file_upload` |
 
 Never reuse a tab id from an earlier session; call `tabs_context_mcp` first and
-re-resolve. Do not trigger a JavaScript dialog — a modal blocks every subsequent
+re-resolve. **Re-resolving means reusing the tab already on the registered
+conversation, not opening another one.** If `tabs_context_mcp` returns a tab
+whose URL contains the registered `conversation_id`, that is your tab — do not
+call `tabs_create_mcp` or `navigate` to a fresh one. Opening a new tab per
+attempt churns tab ids, discards page state, and makes the send-verification
+count below unreliable because the turn history has to be re-read each time.
+Create a tab only when no existing tab holds that conversation. Do not trigger a JavaScript dialog — a modal blocks every subsequent
 browser call and requires the user to clear it by hand.
 
 ### Composing multi-line text — a newline is a send
@@ -82,7 +88,31 @@ the round directory first, then paste it in one operation:
    once and generates no Enter keypress;
 4. screenshot and read the composer back, confirming the whole message is
    present exactly once and not doubled;
-5. submit **once**, then confirm exactly one new user turn appeared.
+5. submit **once**, then confirm it landed by the mechanical test below.
+
+**Deciding whether you sent — do not reason about this, measure it.** Before
+pasting, count the user turns in the conversation. After clicking send, wait,
+then check two things: the composer is **empty**, and the user-turn count has
+gone up by exactly one. Both true means sent. **Composer still holding your text
+means it did not send — click send.**
+
+"I am not sure whether it sent" is not a terminal state and never a reason to
+stop. On 2026-07-24 a transport pass pasted a convergence turn, could not
+convince itself it had sent, never clicked send, and then reported the message
+as successfully sent while it sat unsubmitted in the composer. An
+over-broad reading of the no-duplicate rule caused it.
+
+The no-duplicate rule scopes to **re-sending**: never send content that already
+appears as a user turn. It does not license leaving a first send unmade. If the
+composer holds your text and no matching user turn exists, the send has not
+happened and finishing it is required, not optional.
+
+**Artifacts are ASCII-only.** Write fence and continuation files in plain ASCII —
+use `--` rather than an em dash. The clipboard path silently corrupts non-ASCII
+when a reader drops `-Encoding UTF8` (PowerShell 5.1 defaults to ANSI), and the
+damage appears as mojibake like `â€"` inside an archive that is supposed to be
+byte-exact. Always pass `-Encoding UTF8`, and keep the artifact ASCII so the flag
+being dropped cannot corrupt anything.
 
 This is more stable than typing and it makes the sent text an auditable
 byte-exact artifact rather than a reconstruction, which is what "submit

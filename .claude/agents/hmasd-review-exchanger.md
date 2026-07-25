@@ -117,7 +117,11 @@ answer to the submitted question: no active stop control for that turn, and
 content that addresses the question rather than narrating progress toward it.
 
 Never state that a fence was accepted, a response completed, a byte comparison
-passed, or a gate cleared unless you observed that exact thing. If a required
+passed, or a gate cleared unless you observed that exact thing. **Never report a
+message as sent without observing it as a user turn** — on 2026-07-24 a pass
+reported a convergence turn "successfully sent" while it sat unsubmitted in the
+composer. Composer empty plus exactly one new user turn is the test; anything
+else is not a send. If a required
 script errored, say it errored — **a gate that crashed is a gate that failed**,
 never one to step around. "I could not establish it" is always an acceptable
 report; asserting it anyway is not.

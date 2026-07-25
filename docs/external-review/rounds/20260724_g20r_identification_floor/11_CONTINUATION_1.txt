@@ -1,6 +1,6 @@
 Transport fault on our side, not yours: our operator clicked "Answer now" at roughly four minutes and curtailed your extended thinking. Your previous round on this conversation reasoned for 18m14s; this one was cut to 7m19s. That was not authorized, it is now explicitly forbidden in our transport procedure, and it is the sole reason for this follow-up.
 
-We are not disputing your answer. It is structurally complete, internally consistent, and we have already acted on part of it. We are asking you to re-examine the same three questions with the reasoning time you would have taken, because we cannot establish after the fact what the curtailment cost — and this is a protected-semantics ruling that a screen will be re-registered against.
+We are not disputing your answer. It is structurally complete, internally consistent, and we have already acted on part of it. We are asking you to re-examine the same three questions with the reasoning time you would have taken, because we cannot establish after the fact what the curtailment cost -- and this is a protected-semantics ruling that a screen will be re-registered against.
 
 Same fence, same round, same evidence at the same stage_commit. Nothing in the question has changed.
 
@@ -24,6 +24,6 @@ c. The ordering and coupling defects. Are cross-fitting and a held-out critic va
 
 d. Whether Stage A and Stage B should gate the screen jointly or in sequence, and what each failure classifies as in the re-registered result system.
 
-e. Anything you would add, sharpen or retract on fuller reflection — including on your own three-way failure taxonomy, and including telling us that your previous answer stands unchanged.
+e. Anything you would add, sharpen or retract on fuller reflection -- including on your own three-way failure taxonomy, and including telling us that your previous answer stands unchanged.
 
 If your considered position is that the earlier answer needs no revision, saying so plainly is a complete and useful reply.
