@@ -82,7 +82,17 @@ you found a defect, `BLOCKED` means you could not look.
 
 ## Report
 
-- **Verdict** — `APPROVE`, `MODIFY` or `REJECT`, on its own line.
+- **Verdict** — **two**, each on its own line, each `APPROVE`, `MODIFY` or
+  `REJECT`:
+  - `conformance=` does the implementation do what the frozen contract says?
+  - `semantics=` is it safe on the protected list, whatever the contract says?
+
+  **Never collapse these into one.** A change can conform exactly and still
+  break a detach boundary, and it can be semantically clean while implementing
+  the wrong quantity. A single verdict lets the louder finding hide the quieter
+  one, and this project has already paid for that masking one layer up, where a
+  global identification Boolean let one source's failure hide another source's
+  result. Do not rank the two axes against each other either.
 - **Blocking defects** — file, anchor, invariant violated, minimal correction,
   with your measured evidence. Empty if none.
 - **Non-blocking findings** — same form.

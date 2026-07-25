@@ -91,6 +91,16 @@ covering an invariant, ask what wrong implementation it would catch. If the
 answer is "none", the test is worse than absent — it reads as covered forever
 after. Say so rather than shipping it.
 
+Two specific ways a test passes while testing nothing, both seen here:
+
+- **Tautological** — the assertion recomputes the expected value the way the
+  code does, so it can never disagree with the code. Expected values must come
+  from an **independent source of truth**: a known-good literal, a worked
+  example, or the frozen spec.
+- **Satisfied by the fixture** — the property holds because the input already
+  had it, not because the code enforced it. Plant an input that violates the
+  property and confirm the code is what rejects it.
+
 The existing suite must stay green. If an existing test breaks, that is a
 finding about your change, not an obstacle to route around.
 
