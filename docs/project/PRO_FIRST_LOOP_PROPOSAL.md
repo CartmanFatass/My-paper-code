@@ -1,11 +1,27 @@
 # Proposal: a Pro-first research loop
 
 ```text
-status=PROPOSED_AWAITING_USER_REVIEW
-date=2026-07-25
-replaces=AGENTS.md section "Research and execution loop" (steps 1-9)
-reason=external review is the scarce resource, not implementation capacity
+status=RETIRED
+retired=2026-07-25
+retired_by=user
+superseded_by=docs/project/WORKFLOW_SIMPLIFICATION.md
 ```
+
+**Retired without ever being adopted.** The user replaced it with a two-point
+model: review the scientific idea, and confirm implementation detail choices with
+External Pro before building. Nothing else.
+
+What survives from this document is its one correct observation — that external
+review is the scarce resource and the loop should be arranged around it. What is
+retired is the apparatus it proposed for that: three gates, certificates,
+validation tiers. Those measured the mechanism rather than the science.
+
+Kept as a record of what was tried, so it is not re-proposed. Read
+`WORKFLOW_SIMPLIFICATION.md` instead.
+
+---
+
+*Original proposal follows.*
 
 On acceptance this **replaces** that section rather than joining it. Two
 descriptions of one loop is the failure this project has already paid for.

@@ -11,37 +11,45 @@ this project's defects have consistently originated in what nobody thought to
 ask.
 
 ```text
-status=ADVISORY_EXPERIMENTAL until V2 validation passes
-authority=none -- this skill cannot close a gate or license implementation
-ruling=docs/external-review/rounds/20260725_contract_grill_design/21_PRO_OPEN_RAW.md
-reconciliation=docs/external-review/rounds/20260725_contract_grill_design/30_PM_RECONCILIATION.md
+status=IN_FORCE as a pre-implementation checklist -- not a gate
+authority=none -- this skill closes nothing and licenses nothing
+scope=docs/project/WORKFLOW_SIMPLIFICATION.md
+casebook_source=docs/external-review/rounds/20260725_contract_grill_design/21_PRO_OPEN_RAW.md
 ```
 
-**Advisory means advisory.** Finding nothing licenses nothing. Silence from this
-skill is not a pass, does not reduce Pro's independent read, and never closes a
-gate. The gate-closing machinery the ruling specifies — mechanical predicate,
-finding-disposition manifest, certificate dependency closure — is deliberately
-not built yet, because a mechanism that cannot close a gate does not need it.
+## What this is for
 
-## Why this exists
+One job, from the project's two-point review model: **which implementation detail
+choices and key algorithms must External Pro confirm before we build?**
 
-A fixed five-question pre-freeze checklist **passed** the G20R2 contract while
-that contract held nineteen findings later produced by two independent readers.
-A checklist asks what its author thought to ask. The author was making the errors.
+That is the whole of it. This skill does not gate, certify, or approve. It
+produces a question set; Pro answers it; then implementation starts.
 
-## Three modes
+## Why the questions come *before* the code
 
-| Mode | Runs | Reads | Prevents |
-|---|---|---|---|
-| **Gate A** — contract semantics | before any implementation | contract, sources, predecessor code, proposed branch mapping | a wrong contract entering implementation |
-| **Gate B-core** — realization conformance | after a proof-sized skeleton | the actual skeleton code | a right contract wrongly instantiated |
-| **Gate B-delta** — semantic increment | after full implementation | only the diff beyond the certified skeleton | a right skeleton drifting as the shell grows |
+Every expensive failure on this line was an implementation choice that decided
+whether a result meant anything — not a science error, not a coding error:
 
-Gate B-delta is **not** the assembled-path exercise. That exercise proves
-reachability. A shell can change evaluation weighting, requalification cadence,
-optimizer exposure, branch precedence, data reuse, comparator information or
-censoring with every path still reachable and the conclusion-bearing quantity
-changed. B-delta is diff-scoped.
+- a suffix-noise slice that clobbered positions before `j`, so the audit's
+  conditioning history was never held fixed;
+- a pairwise contrast null gating a K-action centered energy — two different
+  mathematical objects;
+- a `1e-8` tolerance against ~`1e-3` sampling noise, a branch that could never fire;
+- audit probes drawn over a grid including inactive positions, deflating the very
+  quantity being gated.
+
+Each was answerable **before writing the code**, by asking *"how exactly will this
+hold `h_j` fixed?"* or *"is this null the same object as the statistic?"*
+
+That is why there is no post-implementation conformance mode here. The questions
+such a mode would catch are answerable earlier and far more cheaply. **Move the
+question; do not add a gate.**
+
+A fixed five-question pre-freeze checklist once **passed** a contract that held
+nineteen findings later produced by two independent readers. A checklist asks
+what its author thought to ask, and the author was making the errors — which is
+why the content below is a casebook of real failures rather than a list of
+principles.
 
 ## The archetypes
 
@@ -105,55 +113,44 @@ for intervention, natural-use or transport claims.
 A skipped conditional archetype is marked `NOT_APPLICABLE` **with a falsifiable
 reason**. It may not silently disappear.
 
-## Which gate answers which archetype
+## Two questions per archetype, both asked before building
 
-Most archetypes have a **design limb and a realization limb**. Assigning one
-exclusively to a single gate recreates the gap between a correct sentence and an
-incorrect executable meaning.
+Each archetype has a **decision** limb and an **observable** limb, and both go to
+Pro in the same round. The decision is what will be done; the observable is how
+anyone will later be able to tell it was done. Asking only the first is how a
+correct sentence becomes an incorrect executable meaning.
 
-| # | Gate A | Gate B-core | Gate B-delta |
-|---|---|---|---|
-| 1 | define exact history and intervention | show counterfactual execution preserves it | recheck shell replay, batching, suffix logic |
-| 2 | freeze the mathematical relationship | compare actual estimator and null inputs/outputs | recheck added calibration or aggregation |
-| 3 | freeze inferential states and branch meanings | exercise each state in selector and serialization | verify shell preserves confidence information |
-| 4 | freeze the claim space | measure actual gradient/update in that space | recheck optimizer-state or preconditioning additions |
-| 5 | freeze snapshot and requalification rule | bind snapshot identity and transition guards | verify full cadence and all update blocks |
-| 6 | inspect the proposed branch graph | exercise core success and failure paths | exercise source-local termination and serialization |
-| 7 | required | verify no executable default substitutes | recheck every new shell constant or option |
-| 8 | freeze both | verify the sampler realizes them | recheck evaluation weights, censoring, aggregation |
-| 9 | freeze planned equivalence | trace runtime provenance and code binding | trace every new shell-level binding |
-| 10 | derive or probe before freeze | measure under the real estimator | recheck if scale, width or budget changes |
-| 11 | freeze randomization and inferential units | inspect identifiers and resampling units | verify collection does not reuse hidden units |
-| 12 | freeze fit/credit/audit ownership | verify separation and no leakage | verify episode ranges and runtime data reuse |
-| 13 | algebraic derivation or probe | demonstrate the live intended update path | recheck resets, optimizer state, phase transitions |
-| 14 | freeze decision-time information | inspect actual inputs and gradient paths | recheck config, evaluation, runtime shortcuts |
-| 15 | freeze information/support/exposure | verify core if a comparator exists there | load-bearing in the full training/evaluation shell |
-| 16 | freeze the claim boundary | usually diagnostic only | verify natural execution and evaluation path |
-| 17 | freeze branch propositions | verify the branch payload is correct | verify aggregation preserves the proposition |
+| # | Decide before building | Observable that will show it |
+|---|---|---|
+| 1 | the exact history and intervention | changing the focal action leaves declared history variables bit-identical |
+| 2 | the mathematical relationship between null and statistic | null and statistic take the same inputs and produce the same object |
+| 3 | the inferential states and what each branch claims | each state is reachable and serializes its own label |
+| 4 | the space the claim lives in | the gradient or update is measured in that space |
+| 5 | the snapshot and requalification rule | a qualification result is bound to the snapshot it describes |
+| 6 | the branch graph | every branch, including unresolved and invalid, terminates normally |
+| 7 | every constant, and where it is registered | no executable default can substitute for a registered value |
+| 8 | the support **and** the measure over it | the sampler reaches only that support with that weighting |
+| 9 | what supplies each symbol, and the equivalence if a subset | runtime provenance traces to the registered source |
+| 10 | the threshold, against the estimator's own noise scale | the threshold is reachable in both directions |
+| 11 | the randomization and inferential unit | claimed clusters are independent randomization units |
+| 12 | fit / credit / audit ownership | the splits are structurally disjoint |
+| 13 | initialization, detach boundaries, update rule | the intended surface has a live path at entry and moves |
+| 14 | what information exists at decision time | no next state, future reward, identity shortcut or side channel enters |
+| 15 | comparator information, support and exposure | comparators match on all three |
+| 16 | the claim boundary between intervention and natural use | natural execution is evaluated separately |
+| 17 | the proposition each branch licenses | the branch payload carries that proposition and no more |
 
-### Gate A universal core
+### The universal set
 
-A contract does not proceed without resolving: conditioning history;
-estimator/null correspondence; FAIL versus UNRESOLVED; validity window; branch
-semantics and proposed reachability; registration completeness; support and
-measure; symbol and provenance plan; data-role ownership; initial-state
-reachability; information availability and leakage; source identifiability and
-branch proposition.
+Nothing proceeds without deciding: conditioning history; null/statistic
+correspondence; FAIL versus UNRESOLVED; validity window; branch semantics and
+reachability; registration completeness; support **and** measure; symbol
+provenance; data-role ownership; initial-state reachability; decision-time
+information and leakage; and the proposition each branch licenses.
 
-If burden is too high, reduce the depth of irrelevant **triggered** modules —
-never the core.
-
-### Gate B-core observables
-
-State these as propositions the code must let you observe, not as module
-requirements, so refactoring can neither satisfy nor violate them by renaming:
-
-runtime provenance · history invariance under the focal intervention · support
-and measure as actually sampled · signal value at initialization · gradient
-ownership for every intended and prohibited surface · data-role separation ·
-inferential-unit identity · branch reachability including unresolved and invalid
-· snapshot ownership · estimator identity across null, statistic and confidence
-procedure · leakage · certificate traceability to a ledger entry and binding.
+The conditional ones — 4, 10, 11, 15, 16 — are skipped only with a falsifiable
+reason recorded. If the round is too long, cut the depth of an irrelevant
+conditional, never the universal set.
 
 ## Coverage matrix — fourteen rows
 

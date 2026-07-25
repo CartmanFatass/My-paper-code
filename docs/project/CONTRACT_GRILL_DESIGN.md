@@ -1,14 +1,32 @@
 # Contract grill: proposed archetype set and gate structure
 
 ```text
-status=RULED_CHANGES_REQUIRED
+status=RETIRED_AS_A_MECHANISM -- casebook content survives
+retired=2026-07-25
+retired_by=user
+superseded_by=docs/project/WORKFLOW_SIMPLIFICATION.md
 ruling=docs/external-review/rounds/20260725_contract_grill_design/21_PRO_OPEN_RAW.md
-reconciliation=docs/external-review/rounds/20260725_contract_grill_design/30_PM_RECONCILIATION.md
-date=2026-07-25
-purpose=governance mechanism, not science
-adoption=ADVISORY_EXPERIMENTAL_READER -- may not close a gate
-compute_authorized=none
 ```
+
+**The mechanism described below is retired.** Gates, certificates, validation
+tiers and blinded grading are gone, replaced by a two-point model: review the
+scientific idea, and confirm implementation detail choices with External Pro
+before building.
+
+Pro ruled `CHANGES_REQUIRED` on this design and listed ten required changes.
+That ruling is **not disputed** — the thing it ruled on was retired instead,
+which is the user's call since this is workflow rather than protected scientific
+semantics.
+
+What survives is the **casebook**: the seventeen archetypes, the separate
+Technique class, and each one's real failure. Those live in
+`.claude/skills/hmasd-contract-grill/SKILL.md`, now framed as the checklist for
+*which implementation choices must Pro confirm before we build* rather than as a
+gate. Pro's substantive contributions — archetype 17, the Technique class, and
+the correction that a reviewer's own read cannot be replaced by a reader — are
+all in there.
+
+Kept as a record of what was tried and why it was too heavy.
 
 **This document is superseded in part.** The external ruling is
 `CHANGES_REQUIRED`: the direction, the division of labour and the three-gate
