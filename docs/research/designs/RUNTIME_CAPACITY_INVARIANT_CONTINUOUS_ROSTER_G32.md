@@ -158,6 +158,10 @@ so a finite natural padding mismatch reaches the registered `NO_PADDING`
 branch, while malformed diagnostics, nonfinite values, duplicate inventory,
 state drift and checkpoint tampering remain operationally invalid.
 
-The focused test exercise is not the retained bounded evidence artifact. One
-fresh nonformal pipeline must run after the implementation has an integrated
-source commit. Formal iteration 24 remains unlaunched.
+The retained bounded evidence artifact is
+`logs/nonformal_runtime_capacity_g32_cpu_20260725_fc0ca9d_pm1`, produced from
+integrated source `fc0ca9dfb2a04e1a16ba7129b09914e6a4b8e676`. Train,
+evaluate and analyze all completed on CPU with one thread; the analyzer reports
+`formal=false`, `operational_valid=true`, no errors and the registered
+`NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE` branch. Formal iteration 24
+is authorized after this prelaunch record is integrated.
