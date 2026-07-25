@@ -84,8 +84,7 @@ class ContinuousRosterPolicy(nn.Module):
             nn.Linear(
                 self.hidden_dim
                 + 1
-                + self.critic_state_dim
-                + self.member_capacity,
+                + self.critic_state_dim,
                 self.hidden_dim,
             ),
             nn.Tanh(),
@@ -183,7 +182,7 @@ class ContinuousRosterPolicy(nn.Module):
         context_input = torch.cat((member_sum, count_coordinate), dim=-1)
         context = self.context_encoder(context_input)
         value = self.critic(
-            torch.cat((context_input, critic_state, active_mask.to(dtype)), dim=-1)
+            torch.cat((context_input, critic_state), dim=-1)
         ).squeeze(-1)
 
         order = self._routing_order(active_mask, observations)

@@ -80,7 +80,9 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported for the registered paired immediate and delayed toy sources.
+- Status: supported for the registered paired immediate and delayed toy sources;
+  within-capacity roster variation is proved, cross-capacity checkpoint
+  transport is unresolved.
 - Claim: a capacity-generic active-set/lifecycle recurrent policy with
   active-fraction autoregressive prefixes can learn continuous service control
   across within-episode roster changes when current demand has a direct actor
@@ -94,16 +96,19 @@ the Project Manager-accepted CDC state.
 - Necessary scope correction: this establishes one paired toy family, not UAV
   physics, arbitrary stochastic horizons or individual causal attribution of
   later team reward.
-- UAV G1 evidence: the temporary-service-loss source closes before learned
-  training as `SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1`; constructive utility
-  is below feasibility and its advantage interval is entirely negative. This
-  neither confirms nor rejects G31 transport.
-- Strongest next counterexample: the same credit rule may become too noisy or
-  misattribute outcomes when UAV channel, motion and endogenous charging
-  dynamics jointly determine future reward.
-- Separating evidence: the independently frozen charge-rotation G2 source must
-  first pass its controls, then a proof-sized UAV package may use the frozen
-  G31 rule without environment fields in intrinsic credit.
+- UAV evidence: temporary-service-loss G1 and charge-rotation G2 both close
+  before learned training as source non-identifiable. G2 proves proactive
+  rotation is load-bearing relative to no rotation, but its constructive
+  controller is far below the frozen absolute feasibility floor. Neither run
+  confirms nor rejects G31 transport.
+- Strongest next counterexample: the current continuous policy handles changing
+  active count only inside a configured capacity. A raw padded mask in the
+  critic and capacity-normalized environment coordinates may bind checkpoint
+  shape or behavior to that maximum slot count.
+- Separating evidence: first derive and, only if necessary, implement one
+  capacity-invariant critic/input boundary; then use the same checkpoint across
+  different maximum capacities and within-episode roster processes in a toy
+  source without UAV fields.
 
 ## C-EHC — Event-held temporal state
 

@@ -1,4 +1,4 @@
-# G31 formal result and UAV charge-rotation realization plan
+# G31 formal result, UAV source closure and G32 derivation plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -6,18 +6,18 @@
 ```text
 last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=UAV_CHARGE_ROTATION_ROSTER_G2
-source_gate=FROZEN_G2_CHARGE_ROTATION_IDENTIFICATION
-active_implementation=UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_PRELAUNCH
+active_source=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
+source_gate=CAPACITY_INDEPENDENT_CONTINUOUS_SERVICE_TOY
+active_implementation=G32_PM_ACCEPTED_PENDING_INTEGRATED_NONFORMAL
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
-formal_iteration=22_complete
-iterations_remaining=5
-formal_compute=G2_AUTHORIZED_AFTER_PM_ACCEPTANCE_PENDING_SOURCE_COMMIT
-algebra_status=G31_PAIRED_TOY_USABLE_UAV_G1_SOURCE_NON_IDENTIFIABLE
+formal_iteration=23_complete
+iterations_remaining=14
+formal_compute=NONE_PENDING_G32_NONFORMAL_ACCEPTANCE
+algebra_status=G31_PAIRED_TOY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_ITERATION_23
+next_boundary=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_BOUNDED_NONFORMAL_EXERCISE
 ```
 
 ## Accepted active line
@@ -480,3 +480,40 @@ closed G1 runtime and tests are deleted rather than retained behind adapters.
 This consumes zero conclusion-bearing iterations. After exact-path Git
 integration, launch the frozen formal CPU iteration 23 without changing any
 source, budget, seed, threshold or result precedence.
+
+Formal UAV G2 closes at the registered source-first branch
+`SOURCE_NON_IDENTIFIABLE_UAV_CHARGE_ROTATION_G2`. The complete 2,304-row
+control screen is operationally valid. Proactive rotation is strongly
+load-bearing relative to no rotation, but constructive `Phi` means are only
+`0.24667`, `0.09827` and `0.11206`, all below the frozen `0.90` feasibility
+floor; support also fails. Training is therefore skipped with zero learned
+rows and checkpoints. Close the exact G2 source without rescue. Return to the
+toy discovery tier and derive whether G31's actor/critic/checkpoint identity is
+truly independent of configured maximum capacity, distinct from its already
+proved within-capacity active-count changes.
+
+The zero-compute G32 derivation finds one exact architectural counterexample:
+both the base critic and G31 slow critic serialize the entire padded active
+mask, so state-dict shapes depend on maximum capacity even though the actor is
+already capacity-independent. G17 also divides count and capability summaries
+by maximum capacity. Freeze one correction: fixed-width active-set critic
+summaries plus capacity-independent source coordinates. Train only at capacity
+8, then strict-load the same fresh checkpoint with zero evaluation optimizer
+steps at capacities 6 and 12. The paired cap8/cap12 process must be bitwise
+identical on all common active evidence. Implement the new active source,
+runner and proof-sized tests before any bounded or formal run.
+
+The G32 executable realization is PM-accepted. The base and slow critics now
+have fixed-width parameter shapes; runtime capacities 6/8/12 strict-load the
+same state dict. The new source owns member-key RNG streams and never divides
+inputs by maximum capacity. Its runner trains only at capacity 8, evaluates at
+6/8/12 with zero optimizer steps, checks exact cap8/cap12 padding evidence and
+fails closed on checkpoint, runtime, seed, cell, lifecycle, replay and state
+tampering. PM review found and repaired one first-match reachability defect:
+finite natural padding mismatches now remain operationally valid and select
+`NO_PADDING_CAPACITY_INVARIANCE_G32`, while malformed/nonfinite diagnostics and
+state drift remain `INVALID`. Thirteen G32 checks and 56 related G17/G19/G30/
+G31/G32 checks pass on CPU with one thread. After Git integration, retain one
+fresh bounded nonformal pipeline artifact before scheduling formal iteration
+24. The implementation and test work consumes zero conclusion-bearing
+iterations.

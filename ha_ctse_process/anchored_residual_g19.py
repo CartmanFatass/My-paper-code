@@ -93,7 +93,7 @@ class FastAnchoredResidualPolicy(nn.Module):
         for parameter in self.policy.critic.parameters():
             parameter.requires_grad_(False)
         self.slow_critic = nn.Sequential(
-            nn.Linear(self.critic_state_dim + self.member_capacity, hidden_dim),
+            nn.Linear(self.critic_state_dim + 1, hidden_dim),
             nn.Tanh(),
             nn.Linear(hidden_dim, 1),
         )
@@ -122,9 +122,10 @@ class FastAnchoredResidualPolicy(nn.Module):
         output = self.policy.forward_step(**arguments)
         critic_state = arguments["critic_state"]
         active_mask = arguments["active_mask"]
+        active_count = active_mask.sum(dim=-1).to(critic_state.dtype)
         slow_value = self.slow_critic(
             torch.cat(
-                (critic_state, active_mask.to(critic_state.dtype)), dim=-1
+                (critic_state, torch.log1p(active_count).unsqueeze(-1)), dim=-1
             )
         ).squeeze(-1)
         return replace(output, value=slow_value)
@@ -206,6 +207,7 @@ class AnchoredRosterTrajectory:
     prefix_action_sums: torch.Tensor
     outcomes: tuple[Any, ...]
     ledgers: tuple[Any, ...]
+    terminal_hidden_reset_mask: torch.Tensor | None = None
 
     @property
     def active_token_count(self) -> int:
@@ -238,6 +240,9 @@ def attach_credit_baselines(
         prefix_action_sums=trajectory.prefix_action_sums,
         outcomes=tuple(trajectory.outcomes),
         ledgers=tuple(trajectory.ledgers),
+        terminal_hidden_reset_mask=getattr(
+            trajectory, "terminal_hidden_reset_mask", None
+        ),
     )
 
 
@@ -261,7 +266,13 @@ def replay_trajectory(
 ) -> AnchoredRosterReplay:
     hidden = trajectory.hidden_before[0].to(device)
     outputs: list[ContinuousStepOutput] = []
+    terminal_hidden_reset_mask = getattr(
+        trajectory, "terminal_hidden_reset_mask", None
+    )
     for time in range(trajectory.rewards.shape[0]):
+        if terminal_hidden_reset_mask is not None:
+            reset = terminal_hidden_reset_mask[time].to(device)
+            hidden = torch.where(reset.unsqueeze(-1), 0.0, hidden)
         output = model.forward_step(
             observations=trajectory.observations[time].to(device),
             active_mask=trajectory.active_mask[time].to(device),
