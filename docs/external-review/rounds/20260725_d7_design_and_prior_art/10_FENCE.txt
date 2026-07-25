@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260725_d7_design_and_prior_art
+stage_commit=9c63bea797142d2882a99699666532a46c2984b1
+question=docs/external-review/rounds/20260725_d7_design_and_prior_art/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit. Answer every question in one reply; the follow-ups are conditional on your own rulings.
