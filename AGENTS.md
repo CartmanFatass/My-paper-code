@@ -143,7 +143,9 @@ nothing.
    `hmasd-review-exchanger`, which transports and archives it. Project Manager
    reconciles the archived raw code-side.
 4. Project Manager designs, implements, verifies, repairs, and accepts code-side
-   work directly or through bounded registered code children.
+   work directly or through bounded registered code children. A design that
+   changes a learning signal is adversarially checked **before it is frozen**,
+   per *Pre-freeze design check* below.
 5. Before a conclusion-bearing run, Project Manager freezes the evidence
    contract and confirms it is inside current user authority.
 6. Project Manager spawns one `hmasd-experiment-operator` with the complete
@@ -228,6 +230,35 @@ Use the smallest proof that can change the decision:
 There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
+
+### Pre-freeze design check
+
+Reviewing a diff against a frozen plan cannot catch a defect in the plan: a
+faithful implementation of a broken design passes. On 2026-07-24 the G20 credit
+rule was built correctly, passed eighteen tests, and was still inert — its
+leave-one-out contrast was identically zero at the entry state the design itself
+mandated. The screen would have reported that as behavioral no-access.
+
+So before freezing a design, answer these against it:
+
+1. at the mandated initial state, what is each learning signal numerically?
+2. does every trainable parameter have a live gradient path at entry?
+3. is any required invariant satisfied *trivially*, in a way that makes the
+   measurement vacuous?
+4. can any first-match result branch fire for a non-scientific reason?
+5. do the frozen initialization and the credit definition cancel each other?
+
+**Triggered only** by a design that introduces or changes a credit or advantage
+definition, a gradient path, an initialization some signal depends on, or a
+result branch. Analysis scripts, evaluation-only work, mechanical refactors and
+source additions that do not touch learning skip it.
+
+**Bounded by decidability.** It answers only what a derivation or a small probe
+settles without training — the probe is throwaway, writes nothing under
+`logs/`, and costs no iteration. A question needing a run is out of scope and
+belongs to the screen. The check does not certify a design as sound; it retires
+the class of defect that is provable on paper, and identification failures still
+require data.
 
 ## Result interpretation
 
