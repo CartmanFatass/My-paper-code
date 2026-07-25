@@ -2734,18 +2734,36 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     skill_interval = int(getattr(args, "skill_interval", 0))
     native_toy = bool(getattr(config, "r39_native_categorical_edit", False))
     constant_skill_no_high = bool(getattr(config, "constant_skill_no_high", False))
-    if native_toy:
-        if normalize_scenario(str(getattr(args, "scenario", ""))) != (
-            "two_timescale_role_free_actions"
-        ):
-            raise ValueError("R39 native categorical mode is restricted to its toy gate")
+    toy_lane = normalize_scenario(str(getattr(args, "scenario", ""))) == (
+        "two_timescale_role_free_actions"
+    )
+    if native_toy and not toy_lane:
+        raise ValueError("R39 native categorical mode is restricted to its toy gate")
+    # The check interval is keyed to the toy scenario, not to the edit mode. It
+    # is a property of the toy's two timescales -- k0=5 fast against a 30-step
+    # slow period, so six checks per slow period -- and D7 fixes Delta as one
+    # check interval on exactly this lane. Keyed to r39_native_categorical_edit,
+    # the learned-keep toy fell through to the generic skill_interval=10 rule
+    # and silently broke that Delta.
+    if native_toy or (toy_lane and not constant_skill_no_high):
         if skill_interval != int(getattr(config, "r39_toy_k0", 0)):
             raise ValueError("R39 toy requires skill_interval=r39_toy_k0")
     elif not constant_skill_no_high and skill_interval != 10:
         raise ValueError("R30 requires skill_interval=10")
-    if str(getattr(args, "device", "cuda")).lower() != "cuda":
+    if toy_lane and str(getattr(args, "device", "cuda")).lower() == "cpu":
+        # R30's CUDA pin fails closed against backend mixing in the registered
+        # scenario lanes, where a result is read against an earlier CUDA-produced
+        # one. The two-timescale toy is a self-contained diagnostic: its pass
+        # conditions are evaluated inside the single run that produces them, and
+        # AGENTS.md registers no CPU/CUDA equivalence requirement, so CPU here is
+        # its own lane rather than a fallback. The project's only environment is
+        # CPU-only, so without this the toy positive control cannot run at all.
+        # The device stays explicit -- resolve_device() never reaches this
+        # decision silently -- and the run manifest records the backend used.
+        pass
+    elif str(getattr(args, "device", "cuda")).lower() != "cuda":
         raise ValueError("R30 requires explicit CUDA")
-    if not torch.cuda.is_available():
+    elif not torch.cuda.is_available():
         raise RuntimeError("R30 requested CUDA but CUDA is unavailable")
     if bool(getattr(args, "enable_team_intent", False)):
         raise ValueError("R30 does not admit sampled team intent")

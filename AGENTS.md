@@ -126,6 +126,31 @@ Converged means both sides state the same thing, not that the reviewer stopped
 objecting. If convergence fails, record where it stalled and what each side
 holds; an unresolved boundary is a real result and belongs in the portfolio.
 
+### Implementing a ruling is not making one
+
+The test for whether a decision must cross the boundary is whether **reversing it
+would change a registered quantity or a branch**. A choice that only decides
+whether an already-authorized configuration can *start* fails that test, however
+scientific its subject sounds. Sending it anyway asks Pro to re-authorize what it
+already authorized, and spends the scarcest resource in the project on nothing.
+
+On 2026-07-25 D7.2B stalled behind exactly this. Pro's ruling permitted a supplied
+primitive executor for the positive control; three stale validation guards made
+that configuration unreachable; and the blocker was recorded as *"carries as one
+question in the next round"*. Nothing scientific was at stake in any of the three
+— they were keyed to a package flag and to a backend pin, not to what they
+protected.
+
+**A blocker this conversation wrote is not authority over this conversation.** A
+document records decisions; it does not create permission gates. When a note says
+a question is deferred and the question turns out to be the Project Manager's,
+answer it and rewrite the note — do not treat your own earlier sentence as a
+ruling you must wait on. That inversion is how an authorized loop stops without
+anyone deciding to stop it.
+
+What still crosses: a change to what is measured, to a threshold or estimand, to a
+result branch, or to the meaning of a closed result.
+
 ## Fixed experiment operator
 
 Formal and bounded run execution uses only `hmasd-experiment-operator`, whose

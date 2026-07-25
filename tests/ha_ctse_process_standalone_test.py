@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 import torch
 
 from ha_ctse_process import train as process_train
@@ -337,7 +338,22 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
 
 
 def test_process_update_injects_reward_into_matching_rollout_agent():
-    cfg = make_process_config(process_reward_coef=1.0)
+    # This test used to fail about two runs in three, and the cause was not just
+    # an unseeded RNG. `process_reward_injection` defaults to "none", so the
+    # process reward this test is named for never reached the rollout at all:
+    # the only thing making `rollout.rewards[*][1]` nonzero was the per-step
+    # skill-effect micro path, whose per-step gain is clipped at zero and whose
+    # sign is decided by a randomly initialized predictor. `!= 0.0` was a coin
+    # flip on each of the two steps -- and it read as a regression from the D7
+    # diff once. So inject the process reward explicitly, and assert the routing
+    # property: the whole segment reward is split per step across exactly that
+    # segment's rollout indices, credited to its own agent and to no other.
+    torch.manual_seed(20260725)
+    np.random.seed(20260725)
+    cfg = make_process_config(
+        process_reward_coef=1.0,
+        process_reward_injection="low_only",
+    )
     agent = make_agent(cfg)
     segment = Segment(
         env_id=0,
@@ -381,8 +397,14 @@ def test_process_update_injects_reward_into_matching_rollout_agent():
     assert metrics["process_segments"] == 1.0
     assert rollout.rewards[0][0] == 0.0
     assert rollout.rewards[1][0] == 0.0
-    assert rollout.rewards[0][1] != 0.0
-    assert rollout.rewards[1][1] != 0.0
+    # `mi_outcome` preserves sign, so the routed share is nonzero by
+    # construction rather than by seed luck -- assert that, so the equality
+    # below cannot be satisfied by an all-zero injection. The tolerance absorbs
+    # the independent per-step micro path, which contributes at most ~1e-3.
+    expected_per_step = metrics["process_reward_mean"] / 2.0
+    assert abs(expected_per_step) > 0.1
+    assert rollout.rewards[0][1] == pytest.approx(expected_per_step, abs=1e-3)
+    assert rollout.rewards[1][1] == pytest.approx(expected_per_step, abs=1e-3)
 
 
 def test_topology_potential_rewards_disconnect_recovery():

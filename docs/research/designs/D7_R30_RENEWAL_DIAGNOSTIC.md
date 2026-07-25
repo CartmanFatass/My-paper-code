@@ -168,35 +168,40 @@ Ground truth is used **in the evaluator only**. "Fast" and "slow" are never fed 
 the policy. Evaluate primarily at checks where the fast target changes and the
 slow one does not.
 
-### Blocker — the supplied executor is gated to the wrong branch
+### Runnability — three gates unbundled, 2026-07-25
 
 The ruling permits *"a supplied or verified primitive executor"* for this positive
 control, precisely so the competence prerequisite can be met before renewal
-behaviour is read. The only supplied-executor implementation in the tree is
-`r39_toy_fixed_skill_primitives` with schema `axis4_xy_v1` — and it **hard-raises
-unless `r39_native_categorical_edit` is true** (`standalone_agent.py:1904-1917`),
-which is the branch where KEEP is not a decision at all.
+behaviour is read. Three separate gates made that unreachable. All three were
+keyed to something other than what they protect, and none of them was scientific:
 
-```text
-supplied executor  requires  native-categorical edit
-native-categorical edit  =>  KEEP is a post-hoc collision label, not a decision
-therefore  supplied executor  XOR  learned-keep carrier
-```
+| Gate | Was keyed to | Is keyed to |
+|---|---|---|
+| supplied executor (`standalone_agent.py`) | `r39_native_categorical_edit` | the action table's own domain — the toy, 4 skills, 2D continuous |
+| toy check interval (`enforce_r30_contract`) | `r39_native_categorical_edit` | the toy scenario |
+| backend (`enforce_r30_contract`) | CUDA, unconditionally | CUDA off the toy lane; CPU permitted on it |
 
-So D7.2B cannot currently have both the access floor and the carrier. Two ways out:
+The first made the executor and the carrier mutually exclusive — native-categorical
+edit is the branch where KEEP is a post-hoc collision label, so D7.2B could have
+its access floor or the thing it measures, never both. The second silently forced
+the learned-keep toy to `skill_interval=10`, breaking `Δ` = one check interval. The
+third made the run impossible in this project's only environment, which is CPU-only.
 
-1. **Unbundle the gate** so fixed primitives are permitted under learned-keep. In
-   substance the two are orthogonal — fixed primitives constrain the *low-level*
-   executor, the keep branch is a *high-level* decision structure — and the gate
-   bundles them only because the R39 toy lane was built and validated as one
-   package. This is the smaller change and does not touch protected semantics.
-2. **Run without supplied primitives**, and accept that failing the competence
-   floor returns `NO_ACCESS_D7_TOY_POSITIVE_CONTROL`, which by the ruling's own
-   branch table says nothing about renewal capacity — an expensive null.
+**Why no review round.** Pro's ruling already authorized the supplied executor
+here; widening a stale validation guard so that an authorized configuration can
+run is implementing that ruling, not deciding it. Reversing any of the three
+changes no registered quantity — it only decides whether the run can start.
+`AGENTS.md`, *Implementing a ruling is not making one*.
 
-Option 1 is preferred, but it changes which configurations are *permitted to run*,
-and the positive control's validity depends on it. It carries as one question in
-the next round rather than justifying a round of its own.
+What stayed pinned, because it protects something real: the fixed table is still
+restricted to its own domain; `r39_toy_direct_state_context` and its joint-credit
+diagnostic still require native-categorical edit, the lane they were validated
+against; and off the toy lane the CUDA pin still fails closed. CPU is admissible
+here because the toy is self-contained — its pass conditions are read inside the
+run that produces them, `AGENTS.md` registers no CPU/CUDA equivalence requirement,
+and the manifest records the backend used.
+
+Gates: `tests/ha_ctse_process_d7_toy_executor_gate_test.py`.
 
 ### Pass conditions, fixed before the run
 

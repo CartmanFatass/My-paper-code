@@ -1902,16 +1902,27 @@ class StandaloneProcessAgent:
         if self.r30_enabled and self.n_skills < 2:
             raise ValueError("R30 requires at least two skills")
         if self.r39_toy_fixed_skill_primitives:
+            # The executor gate deliberately does not mention
+            # r39_native_categorical_edit. Fixed primitives replace the
+            # *low-level* policy with a constant skill->action table
+            # (FixedSkillPrimitivePolicy, zero parameters, no optimizer, no
+            # random draws); the edit mode is a *high-level* decision structure
+            # that only decides whether R30HighController owns a keep_head. The
+            # two were bundled because the R39 toy lane was validated as one
+            # package, and that bundling made the D7.2B positive control
+            # impossible: it needs the supplied executor its ruling permits
+            # *and* the learned-keep carrier it measures. What the gate must
+            # still pin is the table's own domain -- four skills and 2D
+            # continuous actions on the toy it was tabulated for.
             if (
                 str(getattr(config, "scenario", "")) != "two_timescale_role_free_actions"
-                or not self.r39_native_categorical_edit
                 or self.n_skills != 4
                 or self.action_space_type != "continuous"
                 or self.action_dim != 2
             ):
                 raise ValueError(
-                    "R39 fixed primitives are restricted to the native-categorical "
-                    "two-timescale 4-skill toy"
+                    "R39 fixed primitives are restricted to the two-timescale "
+                    "4-skill toy with 2D continuous actions"
                 )
             if self.r39_toy_fixed_skill_action_schema != "axis4_xy_v1":
                 raise ValueError("unsupported R39 fixed primitive schema")

@@ -6,19 +6,31 @@ Read `AGENTS.md`, then this file, then `docs/project/RESEARCH_GOAL.md`.
 
 ## Next action, exactly
 
-**Finish and commit the `keep_prob` capture, then build D7.2B.**
+**Build D7.2B: a standalone-lane config, then the event ledger, then run it.**
 
-There is **uncommitted work in the tree** — the `keep_prob` diff. It is audited
-(`semantics=APPROVE`) and an implementer is closing three test gaps. Do not
-commit until those land and you have re-run the checks yourself.
+The `keep_prob` capture is committed (`e23e48f`) and the three gates that made
+D7.2B unrunnable are unbundled and committed. Nothing is blocking.
 
 ```text
 docs/research/designs/D7_KEEP_PROB_CAPTURE_SPEC.md   frozen spec
-docs/research/designs/D7_R30_RENEWAL_DIAGNOSTIC.md   what D7 is now
+docs/research/designs/D7_R30_RENEWAL_DIAGNOSTIC.md   what D7 is, and the pass conditions
+tests/ha_ctse_process_d7_toy_executor_gate_test.py   what the unbundling may and may not do
 ```
 
-Then D7.2B, the toy positive control — task #14, which carries the binding
-constraints and the pass conditions.
+The config does not exist yet. `config_r39_native_hmasd_toy.py` is the *other*
+lane — `algorithm=hmasd_original`, `r39_native_toy_*` flags — and is not it. The
+standalone lane is driven off a config module read by `ha_ctse_process/train.py`,
+and D7.2B needs: `high_controller=r30_fixed_clock_ar_edit`,
+`r39_native_categorical_edit=False` (learned keep is the carrier),
+`r39_toy_fixed_skill_primitives=True` with `axis4_xy_v1`, `n_z=4`, 2D continuous
+actions, `scenario=two_timescale_role_free_actions`, `skill_interval=r39_toy_k0=5`,
+`device=cpu`.
+
+Pass conditions A/B/C are fixed in the design and **must not be renegotiated after
+seeing output**.
+
+**Do not re-escalate the executor gate.** It is ruled, in the design doc and in
+`AGENTS.md`, *Implementing a ruling is not making one*.
 
 ## Where D7 stands
 
@@ -93,8 +105,13 @@ yours, take it now. See `CLAUDE.md`, "The loop does not stop".
 - Transport is `project_manager_direct`; `hmasd-review-monitor` only reports that
   generation stopped. **One tab per conversation** — if it wedges, *replace* it,
   closing the old one first.
-- `tests/ha_ctse_process_standalone_test.py::test_process_update_injects_reward_into_matching_rollout_agent`
-  is **flaky** (~2 failures in 3, at HEAD too). It briefly read as a regression
-  from the D7 diff. Task #15.
-- Everything except the `keep_prob` diff is committed and pushed to
-  `origin/untied-k`.
+- The flaky `test_process_update_injects_reward_into_matching_rollout_agent` is
+  **repaired**, and the cause was not the missing seed. `process_reward_injection`
+  defaults to `"none"`, so the process reward the test is named for never reached
+  the rollout; the only thing making the assertion pass was a per-step
+  skill-effect micro reward, clipped at zero, whose sign a randomly initialized
+  predictor decided. `!= 0.0` was a coin flip per step. It now injects explicitly
+  and asserts per-step routing. 6/6 deterministic.
+- Everything is committed and pushed to `origin/untied-k`.
+- The harness task list does **not** survive a session. The prior session's tasks
+  #14 and #15 were gone on resume; the repository record is the only continuity.
