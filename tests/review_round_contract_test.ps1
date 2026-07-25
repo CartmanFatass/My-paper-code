@@ -4,8 +4,8 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $registry = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') | ConvertFrom-Json
-if ($registry.schema_version -ne 30 -or
-    $registry.direct_transport_contract.conversation_binding -ne 'one_dedicated_conversation_per_branch' -or
+if ($registry.schema_version -ne 31 -or
+    $registry.direct_transport_contract.conversation_binding -ne 'one_dedicated_conversation_per_branch_per_reviewer_role' -or
     $registry.round_operator.kind -ne 'project_manager_direct_transport' -or
     $registry.round_operator.decision_intake -ne 'project_manager_direct' -or
     $registry.round_operator.git_boundary_owner -ne 'project_manager' -or
@@ -17,24 +17,64 @@ if ($registry.schema_version -ne 30 -or
     throw 'Project-Manager-direct review registry mismatch'
 }
 # A reviewer must fail closed until the Project Manager registers its exact
-# conversation. A retired registration is never a fallback.
-$openReviewer = $registry.reviewers.open_divergent
-if ($openReviewer.registration_status -eq 'registered') {
-    if ([string]::IsNullOrWhiteSpace($openReviewer.conversation_id) -or
-        [string]::IsNullOrWhiteSpace($openReviewer.url)) {
-        throw 'A registered reviewer must carry an exact conversation_id and url'
+# conversation. A retired registration is never a fallback. This loops over every
+# reviewer rather than checking open_divergent alone -- when a second reviewer was
+# registered on 2026-07-25 its registration integrity was entirely unguarded,
+# because the original check named one key.
+$reviewerNames = @($registry.reviewers.PSObject.Properties.Name)
+if ($reviewerNames.Count -lt 1) { throw 'Registry declares no reviewers' }
+$conversationIds = @()
+foreach ($name in $reviewerNames) {
+    $reviewer = $registry.reviewers.$name
+    if ($reviewer.registration_status -eq 'registered') {
+        if ([string]::IsNullOrWhiteSpace($reviewer.conversation_id) -or
+            [string]::IsNullOrWhiteSpace($reviewer.url)) {
+            throw "Registered reviewer '$name' must carry an exact conversation_id and url"
+        }
+        if ($reviewer.url -notlike "*$($reviewer.conversation_id)*") {
+            throw "Reviewer '$name' has a url that does not contain its conversation_id"
+        }
+        $conversationIds += $reviewer.conversation_id
+    } elseif ($null -ne $reviewer.conversation_id -or $null -ne $reviewer.url) {
+        throw "Unregistered reviewer '$name' must not carry a conversation_id or url"
     }
-} elseif ($null -ne $openReviewer.conversation_id -or $null -ne $openReviewer.url) {
-    throw 'An unregistered reviewer must not carry a conversation_id or url'
+    if ([string]::IsNullOrWhiteSpace($reviewer.role)) {
+        throw "Reviewer '$name' must declare a role; role targeting is explicit, never inferred"
+    }
+}
+# Two reviewer roles may share a branch, but never a conversation -- that would
+# silently merge a blinded reviewer's context with an unblinded one.
+$duplicateConversations = @($conversationIds | Group-Object | Where-Object { $_.Count -gt 1 })
+if ($duplicateConversations.Count -gt 0) {
+    throw "Two reviewers share conversation_id $($duplicateConversations[0].Name); roles must not share a conversation"
+}
+# Any reviewer that declares blinding must say what it may never receive, or the
+# blinding is an assertion with nothing behind it.
+foreach ($name in $reviewerNames) {
+    $blinding = $registry.reviewers.$name.blinding
+    if ($null -ne $blinding -and $blinding.required -eq $true) {
+        if (-not $blinding.must_never_receive -or @($blinding.must_never_receive).Count -lt 1) {
+            throw "Blinded reviewer '$name' declares no must_never_receive list"
+        }
+        if ([string]::IsNullOrWhiteSpace($blinding.reason)) {
+            throw "Blinded reviewer '$name' declares no reason for blinding"
+        }
+    }
 }
 if (-not $registry.registration_rule) { throw 'Registry is missing its registration rule' }
-# One conversation per branch: the reviewer must say which branch it serves.
-if ([string]::IsNullOrWhiteSpace($openReviewer.branch)) {
-    throw 'Reviewer does not declare the branch its conversation is bound to'
-}
-foreach ($retired in @($registry.retired_registrations)) {
-    if ($retired.conversation_id -eq $openReviewer.conversation_id) {
-        throw "Active reviewer reuses a retired conversation: $($retired.conversation_id)"
+if (-not $registry.role_targeting_rule) { throw 'Registry is missing its role targeting rule' }
+# Every reviewer must say which branch it serves, and none may resurrect a
+# retired conversation. Both checks now cover all reviewers; they previously
+# named open_divergent alone.
+foreach ($name in $reviewerNames) {
+    $reviewer = $registry.reviewers.$name
+    if ([string]::IsNullOrWhiteSpace($reviewer.branch)) {
+        throw "Reviewer '$name' does not declare the branch its conversation is bound to"
+    }
+    foreach ($retired in @($registry.retired_registrations)) {
+        if ($retired.conversation_id -and $retired.conversation_id -eq $reviewer.conversation_id) {
+            throw "Reviewer '$name' reuses a retired conversation: $($retired.conversation_id)"
+        }
     }
 }
 
