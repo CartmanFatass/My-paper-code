@@ -27,7 +27,7 @@ $expectedAgents = @(
     'hmasd-code-scout.md', 'hmasd-contract-griller.md', 'hmasd-doc-auditor.md',
     'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md',
     'hmasd-implementer.md', 'hmasd-monitor.md',
-    'hmasd-patcher.md', 'hmasd-review-exchanger.md', 'hmasd-reviewer.md',
+    'hmasd-patcher.md', 'hmasd-review-monitor.md', 'hmasd-reviewer.md',
     'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
 if (Compare-Object $expectedAgents $agentDefs) {
     throw "Unexpected subagent roster: $($agentDefs -join ',')"
@@ -61,7 +61,7 @@ foreach ($required in @(
     'has no persistent task',
     'There is no Controller, persistent Monitor',
     'project_manager_git_authority=direct',
-    'project_manager_external_review_transport=registration_then_exchanger',
+    'project_manager_external_review_transport=project_manager_direct',
     'scientific_decision_authority=external_pro',
     'local_conversation_scientific_authority=none',
     '## Execution modes',

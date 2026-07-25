@@ -10,7 +10,7 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 - The active Claude Code conversation is the Project Manager. It owns workflow,
   code design, implementation acceptance, Git, experiment orchestration, result
   intake and successor selection. Scientific decisions belong to External Pro.
-  Review transport belongs to `hmasd-review-exchanger` once this branch's
+  Review transport belongs to the Project Manager directly once this branch's
   conversation is registered.
 - Formal and bounded runs use only the registered nonpersistent
   `hmasd-experiment-operator` subagent, fixed to `haiku` with `low` effort. It

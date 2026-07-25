@@ -21,16 +21,21 @@ Activate `$hmasd-review-round` in the active Project Manager. Browser work uses
 the `claude-in-chrome` skill and its `mcp__claude-in-chrome__*` tools; load that
 skill before the first browser call.
 
-**Transport belongs to `hmasd-review-exchanger`, not to the Project Manager.**
-The Project Manager authors the question, freezes and pushes the boundary, and
-owns registration; the exchanger drives the browser and returns transport facts
-only.
+**Transport is `project_manager_direct`.** The active Project Manager authors the
+question, freezes and pushes the boundary, owns registration, submits the fence,
+captures the reply and archives it. There is no transport delegate.
 
-The one exception is bootstrap. When the branch has no registered conversation,
-the Project Manager opens it, submits the first fence, records the exact id and
-url, and hands the round to the exchanger from that point — the exchanger never
-registers a conversation itself. Every later round on a registered branch goes
-to the exchanger whole.
+This replaced a delegated exchanger on 2026-07-25. The split that failed was
+handing one role both a long mechanical wait and a precise capture: the wait was
+abandoned twice mid-round, and one archive lost every markdown marker because the
+capture fell back to rendered page text. Waiting and capturing are now separated
+by who does them.
+
+**`hmasd-review-monitor` (haiku) does the waiting and nothing else.** Dispatch it
+after the fence lands; it polls the conversation and reports when generation has
+stopped. It holds no click, type or write tools, so it structurally cannot submit,
+capture or curtail — it reports one observation and the Project Manager acts on
+it. A wrong report from it is cheap: an early wake costs one page read.
 
 Create no other relay, dispatcher, or Monitor.
 

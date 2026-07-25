@@ -58,7 +58,7 @@ with an exact assignment.
 | `hmasd-verifier` | haiku / high | executes assigned checks, returns bounded runtime evidence |
 | `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
 | `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
-| `hmasd-review-exchanger` | sonnet / medium | byte-exact external review transport and archival |
+| `hmasd-review-monitor` | haiku / low | reports when the external reviewer has finished generating; no send, capture or archive |
 | `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
 | `hmasd-doc-auditor` | fable / high | adversarial audit of the governance surface itself |
@@ -70,12 +70,12 @@ judgment call hands back rather than deciding.
 
 Effort is set separately from model. A role whose work includes deciding whether
 an observation matches a declared contract carries that judgment even when its
-title sounds mechanical, and is tiered for the judgment — `hmasd-verifier` and
-`hmasd-review-exchanger` are both raised above their apparent class for exactly
-that reason. When enumerating rules keeps failing to cover the cases, a role
-needs a model that can infer them, not another rule. Each definition states its
-own reason in a comment; the case history is in
-`docs/project/REVIEW_TRANSPORT_AUDIT_20260724.md`.
+title sounds mechanical, and is tiered for the judgment — `hmasd-verifier` is
+raised above its apparent class for exactly that reason. The converse also
+applies: when the judgment is removed from a role rather than merely simplified,
+the tier drops with it, which is why `hmasd-review-monitor` sits at haiku/low
+after transport moved to the Project Manager. Each definition states its own
+reason in a comment.
 
 Every definition points at `docs/project/AGENT_CONTEXT.md`, whose **Unattended
 operation** and **Reporting honestly** sections bind all children. Standing

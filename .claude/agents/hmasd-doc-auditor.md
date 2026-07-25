@@ -5,7 +5,7 @@ model: fable
 # High. Deciding that two documents actually contradict -- rather than merely
 # reading differently -- is judgment, and a false contradiction sends the caller
 # to rewrite a correct rule. Same reason hmasd-verifier and
-# hmasd-review-exchanger are high.
+# the review transport surface are high.
 effort: high
 tools: Read, Grep, Glob, Bash
 ---

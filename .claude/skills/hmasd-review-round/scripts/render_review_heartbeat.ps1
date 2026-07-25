@@ -50,7 +50,7 @@ treat it as a transport diagnostic and do not archive it as scientific raw.
 Leave the round active for Project Manager evidence-access recovery under the same
 fence. If the response is naturally complete and is not a transport diagnostic,
 this wake does NOT archive it. A heartbeat inspects and reports; archival belongs
-to hmasd-review-exchanger, which runs at high effort precisely because deciding
+to the active Project Manager, which owns transport precisely because deciding
 that a response is the completed answer is the judgment that once archived a
 mid-generation thinking trace as scientific raw. Dispatch the exchanger to
 archive, then delete this heartbeat and confirm absence, then reconcile the exact

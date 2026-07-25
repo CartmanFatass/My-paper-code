@@ -43,7 +43,7 @@ project_manager_technical_acceptance_authority=exclusive
 scientific_decision_authority=external_pro
 local_conversation_scientific_authority=none
 project_manager_git_authority=direct
-project_manager_external_review_transport=registration_then_exchanger
+project_manager_external_review_transport=project_manager_direct
 project_manager_experiment_orchestration=direct_via_registered_child
 formal_compute_authority=user_only
 external_pro_scientific_authority=scientific_direction_and_disposition
@@ -118,7 +118,7 @@ round and **converge with External Pro until both agree**.
 
 Convergence is a dialogue inside one accepted fence: bounded follow-ups in the
 branch's registered conversation, each one authored by the Project Manager and
-carried by `hmasd-review-exchanger`. It is not a second fence and not a second
+carried by the Project Manager. It is not a second fence and not a second
 round. Archive the whole converged exchange, not only its last message — the
 turns that changed the answer are evidence.
 
@@ -143,7 +143,8 @@ nothing.
 2. Project Manager selects the smallest bounded CDC or engineering action.
 3. If external science is needed, Project Manager authors the question, commits
    and pushes the exact boundary, then hands the round to
-   `hmasd-review-exchanger`, which transports and archives it. Project Manager
+   transports and archives it directly, dispatching `hmasd-review-monitor` only to
+   report when generation stops. Project Manager
    reconciles the archived raw code-side.
 4. Project Manager designs, implements, verifies, repairs, and accepts code-side
    work directly or through bounded registered code children. A design that
@@ -430,7 +431,7 @@ Active project Skills are deliberately small:
 - `hmasd-agile-research-development` for implementation, debugging, proof-sized
   testing, bounded repair, and inspection;
 - `hmasd-review-round` for external review transport and exact raw archival,
-  executed by `hmasd-review-exchanger`.
+  executed by the Project Manager directly.
 
 There is no dispatch or experiment-monitor Skill. Experiment behavior is fixed
 by its subagent definition and role charter. Generic Superpowers Skills are
@@ -485,7 +486,7 @@ nobody.
 | `docs/report/ITERATION_<n>.md` | Project Manager | after every valid conclusion-bearing iteration |
 | `docs/project/RESTART_HANDOFF.md` | Project Manager | at a compaction seam, and nowhere else |
 | `AGENTS.md`, `CLAUDE.md`, `.agents/roles/*`, `.claude/agents/*` | Project Manager; user-authorized where authority itself changes | a rule actually changes — not to restate one |
-| `docs/external-review/rounds/<round>/*` | Project Manager authors; `hmasd-review-exchanger` writes only the raw and intake | during that round; sealed once reconciled |
+| `docs/external-review/rounds/<round>/*` | Project Manager authors, transports and archives | during that round; sealed once reconciled |
 
 When a boundary moves, the documents whose trigger fired move **in the same
 accepted Git boundary** as the change. A commit that advances the boundary and

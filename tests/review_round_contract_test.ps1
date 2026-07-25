@@ -12,7 +12,7 @@ if ($registry.schema_version -ne 31 -or
     $registry.direct_transport_contract.transport_owner -ne 'active_project_manager' -or
     $registry.direct_transport_contract.heartbeat_owner -ne 'active_project_manager' -or
     $registry.direct_transport_contract.browser_skill -ne 'claude-in-chrome' -or
-    $registry.direct_transport_contract.transport_agent -ne 'hmasd-review-exchanger' -or
+    $registry.direct_transport_contract.transport_agent -ne 'project_manager_direct' -or
     $registry.reviewers.open_divergent.transport -ne 'claude_in_chrome') {
     throw 'Project-Manager-direct review registry mismatch'
 }
@@ -86,7 +86,7 @@ foreach ($required in @(
     'claude-in-chrome',
     'mcp__claude-in-chrome__',
     'file_upload',
-    'hmasd-review-exchanger',
+    'project_manager_direct',
     'registration_status',
     'VERIFY_FRESHNESS_FENCE',
     'An accepted matching fence is never resubmitted',

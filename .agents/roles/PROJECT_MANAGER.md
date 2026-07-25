@@ -26,7 +26,7 @@ persistent HMASD authority and the user's direct project interface.
 - Executable definitions, architecture, implementation, tests, repairs,
   technical acceptance, and control-plane content.
 - Whether external review is needed, and the exact question and allow-list.
-  Transport itself belongs to `hmasd-review-exchanger` once the conversation is
+  Transport itself belongs to the Project Manager directly once the conversation is
   registered.
 - Direct Git staging, commit, and push of accepted work.
 - Freezing a formal evidence contract and assigning one authorized run to the
@@ -62,7 +62,7 @@ and are archived in full — see `$hmasd-review-round`.
 The conversation registry in `docs/external-review/REVIEWER_CONVERSATIONS.json`
 binds one dedicated conversation per branch.
 
-- **Registered branch.** Hand the whole round to `hmasd-review-exchanger`. This
+- **Registered branch.** Drive the whole round directly. This
   task authors the question and freezes the boundary; it does not drive the
   browser by default. Driving it directly — submitting the fence, or archiving —
   is a **recorded fallback**, legitimate only when the exchanger is blocked or
@@ -79,7 +79,7 @@ Registration is this task's; transport is not.
 - Use `$hmasd-agile-research-development` for active-line code work and
   proof-sized evidence. Generic Superpowers execution is disabled.
 - When External Pro evidence is selected, author the question and freeze the
-  boundary, then hand the round to `hmasd-review-exchanger`. Do not drive the
+  boundary, then drive the round directly. Do not delegate the
   browser and do not create any other relay.
 - Spawn only registered subagents from `.claude/agents/`, with exact assignments
   and file ownership; `CLAUDE.md` holds the roster and its model tiers. For
