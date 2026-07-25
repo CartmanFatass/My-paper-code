@@ -168,6 +168,36 @@ Ground truth is used **in the evaluator only**. "Fast" and "slow" are never fed 
 the policy. Evaluate primarily at checks where the fast target changes and the
 slow one does not.
 
+### Blocker — the supplied executor is gated to the wrong branch
+
+The ruling permits *"a supplied or verified primitive executor"* for this positive
+control, precisely so the competence prerequisite can be met before renewal
+behaviour is read. The only supplied-executor implementation in the tree is
+`r39_toy_fixed_skill_primitives` with schema `axis4_xy_v1` — and it **hard-raises
+unless `r39_native_categorical_edit` is true** (`standalone_agent.py:1904-1917`),
+which is the branch where KEEP is not a decision at all.
+
+```text
+supplied executor  requires  native-categorical edit
+native-categorical edit  =>  KEEP is a post-hoc collision label, not a decision
+therefore  supplied executor  XOR  learned-keep carrier
+```
+
+So D7.2B cannot currently have both the access floor and the carrier. Two ways out:
+
+1. **Unbundle the gate** so fixed primitives are permitted under learned-keep. In
+   substance the two are orthogonal — fixed primitives constrain the *low-level*
+   executor, the keep branch is a *high-level* decision structure — and the gate
+   bundles them only because the R39 toy lane was built and validated as one
+   package. This is the smaller change and does not touch protected semantics.
+2. **Run without supplied primitives**, and accept that failing the competence
+   floor returns `NO_ACCESS_D7_TOY_POSITIVE_CONTROL`, which by the ruling's own
+   branch table says nothing about renewal capacity — an expensive null.
+
+Option 1 is preferred, but it changes which configurations are *permitted to run*,
+and the positive control's validity depends on it. It carries as one question in
+the next round rather than justifying a round of its own.
+
 ### Pass conditions, fixed before the run
 
 **A — competence prerequisite**, read before any renewal behaviour:
