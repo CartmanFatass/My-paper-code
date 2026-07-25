@@ -95,7 +95,7 @@ Registration is this task's; transport is not.
   the accepted evidence and its scientific effect for the user; it never
   creates a second acceptance owner or blocks on separate approval.
 - Stage only accepted files, inspect the staged path set, run
-  `git diff --cached --check`, commit, and push `aggressive`. Children do not
+  `git diff --cached --check`, commit, and push **the working branch**. Children do not
   perform Git.
 
 ## Must not

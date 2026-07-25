@@ -5,11 +5,13 @@ model: sonnet
 effort: high
 hooks:
   PreToolUse:
-    - matcher: "Bash"
+    - matcher: "Bash|PowerShell"
       hooks:
         - type: command
           command: |-
-            cmd=$(cat | jq -r '.tool_input.command // ""'); if printf '%s' "$cmd" | grep -Eq '(^|[;&|`(])[[:space:]]*git[[:space:]]+(add|commit|push|stash|reset|checkout|restore|rebase|merge|cherry-pick|revert|clean)([[:space:]]|$)'; then echo "BLOCKED: git mutations belong to the orchestrator, which verifies your work independently before committing. Leave your changes in the working tree. Read-only git (status, diff, log, show) is allowed and encouraged." >&2; exit 2; fi
+            payload=$(cat)
+            if command -v jq >/dev/null 2>&1; then cmd=$(printf '%s' "$payload" | jq -r '.tool_input.command // ""'); else cmd=$payload; fi
+            if printf '%s' "$cmd" | grep -Eiq 'git([[:space:]]+-[cC][[:space:]]+[^[:space:]]+)*[[:space:]]+(add|commit|push|stash|reset|checkout|restore|rebase|merge|cherry-pick|revert|clean)([[:space:]]|"|$)'; then echo "BLOCKED: git mutations belong to the orchestrator, which verifies your work independently before committing. Leave your changes in the working tree. Read-only git (status, diff, log, show) is allowed and encouraged." >&2; exit 2; fi
 ---
 
 # HMASD Implementer

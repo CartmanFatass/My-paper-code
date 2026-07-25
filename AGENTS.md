@@ -323,7 +323,7 @@ disjoint_file_parallelism=allowed
 Every mutating task owns an exact path set. Disjoint writers may proceed in
 parallel; overlapping paths are serialized. Children never run Git. Project
 Manager stages only accepted paths, checks the staged path set and
-`git diff --cached --check`, commits, and pushes `aggressive` under the user's
+`git diff --cached --check`, commits, and pushes **the working branch** under the user's
 standing authorization. Per-file hash handshakes and callback receipts are
 forbidden; the resulting Git commit is the source identity.
 

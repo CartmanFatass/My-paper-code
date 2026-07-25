@@ -6,11 +6,13 @@ effort: low
 tools: Read, Grep, Glob, Bash, PowerShell
 hooks:
   PreToolUse:
-    - matcher: "Bash"
+    - matcher: "Bash|PowerShell"
       hooks:
         - type: command
           command: |-
-            cmd=$(cat | jq -r '.tool_input.command // ""'); if printf '%s' "$cmd" | grep -Eq '(^|[;&|`(])[[:space:]]*git[[:space:]]+(add|commit|push|stash|reset|checkout|restore|rebase|merge|cherry-pick|revert|clean)([[:space:]]|$)'; then echo "BLOCKED: the experiment operator has no Git authority. Leave the working tree alone and report your terminal payload; the Project Manager owns integration." >&2; exit 2; fi
+            payload=$(cat)
+            if command -v jq >/dev/null 2>&1; then cmd=$(printf '%s' "$payload" | jq -r '.tool_input.command // ""'); else cmd=$payload; fi
+            if printf '%s' "$cmd" | grep -Eiq 'git([[:space:]]+-[cC][[:space:]]+[^[:space:]]+)*[[:space:]]+(add|commit|push|stash|reset|checkout|restore|rebase|merge|cherry-pick|revert|clean)([[:space:]]|"|$)'; then echo "BLOCKED: the experiment operator has no Git authority. Leave the working tree alone and report your terminal payload; the Project Manager owns integration." >&2; exit 2; fi
 ---
 
 # HMASD Experiment Operator

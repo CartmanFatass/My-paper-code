@@ -62,6 +62,9 @@ nonformal_compute_status=g19_complete_operational_valid_no_delayed_access
 formal_compute_authority=standing_user_grant_cpu_only_after_pm_evidence_contract
 formal_compute_status=g18_iteration19_complete_no_live_run
 git_integration_status=project_manager_direct_authorized
+working_branch=untied-k
+aggressive_branch_ownership=independent_line_not_claude_owned_never_push
+aggressive_branch_observed_live=aab6006_20260724_2110
 external_review_transport_status=complete_exact_raw_archived_and_reconciled
 experiment_operator_status=terminal_complete_no_live_process
 experiment_operator_last_terminal=ACTOR_CRITIC_ISOLATED_G18_FORMAL_ITERATION_19_COMPLETE
@@ -895,7 +898,10 @@ active_file_writers=project_manager_exact_active_path_set
 ```
 
 Project Manager directly stages accepted paths, checks the staged path set and
-`git diff --cached --check`, commits and pushes `aggressive`. Per-file hash and
+`git diff --cached --check`, commits and pushes **the working branch**, which is
+`untied-k`. The `aggressive` branch is a separate line that advances
+independently and is **not** Claude's to touch — it was still committing
+(`aab6006`, 2026-07-24 21:10) while this session ran. Per-file hash and
 callback receipts are forbidden.
 
 ## Pointers

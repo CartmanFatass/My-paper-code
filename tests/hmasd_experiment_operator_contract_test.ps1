@@ -32,6 +32,51 @@ foreach ($forbidden in @('Edit', 'Write', 'MultiEdit', 'NotebookEdit')) {
 if ($operatorDef -notmatch '(?m)^hooks:' -or $operatorDef -notmatch 'PreToolUse') {
     throw 'Operator definition does not enforce its no-Git boundary with a hook'
 }
+# Asserting the hook TEXT exists is a guard on a guard: it stayed green while the
+# hook itself failed open, because the hook piped through jq and jq is not
+# installed here -- an empty command matched nothing and it exited 0 = allow.
+# Extract the real hook body and execute it, so the check fails when the hook does.
+$shell = (Get-Command bash -ErrorAction SilentlyContinue).Source
+if (-not $shell) {
+    $gitExe = (Get-Command git -ErrorAction SilentlyContinue).Source
+    if ($gitExe) { $shell = Join-Path (Split-Path (Split-Path $gitExe)) 'bin\bash.exe' }
+}
+# No skip-if-absent: an unrunnable guard check is a failed guard check, which is
+# how the previous text-only assertion stayed green over an inert hook.
+if (-not $shell -or -not (Test-Path $shell)) {
+    throw 'No POSIX shell available to execute the child git hooks; the no-Git boundary cannot be proven'
+}
+foreach ($definition in @('hmasd-experiment-operator', 'hmasd-implementer')) {
+    $text = Get-Content -Raw -LiteralPath (Join-Path $repo ".claude/agents/$definition.md")
+    $matcherMatch = [regex]::Match($text, '(?m)^\s*- matcher:\s*"([^"]*)"')
+    if (-not $matcherMatch.Success) { throw "$definition hook has no matcher" }
+    # Capture before comparing -- a further -match would clobber $Matches.
+    $matcher = $matcherMatch.Groups[1].Value
+    if ($matcher -notmatch 'Bash' -or $matcher -notmatch 'PowerShell') {
+        throw "$definition hook matcher misses a shell tool: $matcher"
+    }
+    $body = [regex]::Match($text, '(?ms)^          command: \|-\r?\n(.*?)(?=\r?\n---|\r?\n\w)').Groups[1].Value
+    if (-not $body.Trim()) { throw "$definition hook body not found" }
+    $script = Join-Path ([IO.Path]::GetTempPath()) "hookcheck_$definition.sh"
+    [IO.File]::WriteAllText($script, ($body -replace '^\s{12}', '' -replace "(?m)^\s{12}", '') + "`nexit 0`n")
+    foreach ($case in @(
+        @{ cmd = 'git commit -m wip';    expect = 2 },
+        @{ cmd = 'git -C /repo push';    expect = 2 },
+        @{ cmd = 'ls && git add -A';     expect = 2 },
+        @{ cmd = 'git status --short';   expect = 0 })) {
+        $json = '{"tool_input":{"command":"' + $case.cmd + '"}}'
+        # A blocking hook writes its reason to stderr, and PowerShell 5.1 wraps a
+        # native command's stderr in an ErrorRecord that trips ErrorActionPreference
+        # 'Stop'. The exit code is the contract here, so judge on that alone.
+        $previous = $ErrorActionPreference
+        $ErrorActionPreference = 'SilentlyContinue'
+        $json | & $shell $script 2>&1 | Out-Null
+        $ErrorActionPreference = $previous
+        if ($LASTEXITCODE -ne $case.expect) {
+            throw "$definition hook returned $LASTEXITCODE for '$($case.cmd)', expected $($case.expect)"
+        }
+    }
+}
 
 foreach ($required in @(
     'one already-authorized run',
