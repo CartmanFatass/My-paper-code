@@ -70,6 +70,8 @@ data/
 !.claude/agents/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
+# User-requested isolated Git worktrees for parallel HMASD implementation.
+.worktrees/
 # Generated from the account-visible Codex model cache; never commit account
 # catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
 runtime/model-catalog-v2-workaround.json
