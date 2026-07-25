@@ -20,6 +20,18 @@ explicit handoff changes ownership. Git-tracked code is the implementation
 source and `logs/<run-id>/` is runtime evidence. Historical modules, commands,
 rounds and archived artifacts are not active instructions.
 
+## Retiring a direction
+
+Research code iterates fast and most directions die. A direction verified as
+hopeless gets **the scientific record of its failure and nothing else** — what
+was tried, what it returned, why it is dead. That is enough to stop the mistake
+recurring years later, and it is the only part worth carrying.
+
+Do not maintain long documents for abandoned work, and do not narrate a
+retirement in a document, a commit message or a reply. Retired material competes
+for attention with live material on every read. Replace the body with a pointer;
+keep the failure, drop the apparatus.
+
 ## Registered subagents
 
 Default tiers for a **new** role, by class. The table below is authoritative per
