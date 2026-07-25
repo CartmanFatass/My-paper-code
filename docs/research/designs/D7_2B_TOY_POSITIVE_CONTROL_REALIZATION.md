@@ -186,6 +186,58 @@ no renewal value, so nothing downstream is measurable. Report
 
 Secondary localization uses `H = 5` with `B_5`, per D0.
 
+**Measured, 2026-07-25**, against the analytic prediction above:
+
+```text
+B_30 = 10.0    predicted ~7.5    constructive 30.0, null 20.0, 9 windows/episode
+B_5  = 1.875   predicted ~1.25   constructive  5.0, null  3.125, 24 windows
+```
+
+Both come out larger than the within-one-slow-period arithmetic predicted, because
+windows that straddle a slow flip also penalize the null on the x-axis. The
+conclusion is unchanged and stronger: a one-interval effect normalizes to
+`2.5 / 10.0 = 0.25` against B's `0.10` floor, where the rejected feasible-range
+form would have given `0.083`.
+
+**The window start matters and nearly went wrong.** Measuring `B_H` from step 0
+only gives `B_5 = 0` exactly: the fast target does not flip until the first check
+elapses, so a no-renewal null is trivially optimal over the first block. The
+normalizer is therefore averaged over windows starting at **every check boundary**
+— the positions the estimand's own focal checks occupy. A step-0 normalizer would
+have divided condition B's secondary horizon by zero.
+
+## 4a. The credit mode the carrier cannot inherit
+
+Recorded **before** the run, because it bounds what an A failure means.
+
+The R39 native lane carries two credit allowances that exist because this toy
+needed them: three high PPO epochs and `block_return` high-actor advantage. They
+are not available to D7.2B, and the reason is structural rather than a bundling:
+
+```text
+standalone_agent.py:1970-1976
+block_return  requires  r30_force_refresh_every_check = True  and  3 epochs
+force_refresh_every_check  =>  every check is a forced SET
+                           =>  KEEP is not a decision  (D0 section 2)
+```
+
+So the credit configuration known to make this source learnable is **structurally
+incompatible with the carrier being measured**. D7.2B therefore runs `smdp_gae`
+with one epoch — the registered default — and that is the only credit mode the
+learned-keep branch can have here.
+
+Consequence for reading the result, and it is not a small one: **an A failure may
+be a credit failure rather than an architecture or carrier failure.** D7's branch
+table already refuses to draw a renewal conclusion from an A failure, and this is
+a second, independent reason not to. It would route to the ledger's D5 entry
+("credit becomes the blocker — reactivate only the minimum fragment") or to a
+source whose competence is reachable under registered credit, and it would retire
+nothing.
+
+The measured `B_H` and the state-liveness check together mean an A failure could
+not be blamed on the normalizer or on a dead information path. That leaves credit
+and training budget, in that order, as the candidates to rule out next.
+
 ## 5. Paired replay protocol
 
 D0 §3 continuation semantics, mapped onto this source. Per focal check and focal

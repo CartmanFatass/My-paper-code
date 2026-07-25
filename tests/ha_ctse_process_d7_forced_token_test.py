@@ -155,6 +155,30 @@ def test_forced_token_logp_follows_the_policy_factorization():
     assert float(switched.token_logp[0]) < 0.0
 
 
+def test_forced_set_with_invalid_skill_takes_the_policys_own_choice():
+    """D0 splits the estimand in two because a SET excludes the incumbent, so the
+    return depends on *which* replacement is chosen. Forcing SET while leaving the
+    skill to the policy is U_pi's inner expectation; naming a skill is U_opp.
+    Both must be expressible, and the U_pi form must reproduce the skill the
+    unforced sampler would have drawn from the masked distribution."""
+    policy = _policy()
+    ctx = _context()
+    base, _ = _run(policy, ctx)
+    forced, _ = _run(policy, ctx, forced_tokens={0: (SET_TOKEN, INVALID_SKILL)})
+
+    assert int(forced.token_kind[0]) == SET_TOKEN
+    chosen = int(forced.set_skill[0])
+    assert chosen != INVALID_SKILL
+    # Never the incumbent: it is masked out of the SET distribution.
+    assert chosen != int(ctx["prev_skills"][0].item())
+    assert int(forced.final_skills[0]) == chosen
+    assert int(forced.final_ages[0]) == 0
+    # The draw is the sampler's own, so when the unforced token was already a SET
+    # the forced one lands on the same skill.
+    if int(base.token_kind[0]) == SET_TOKEN:
+        assert chosen == int(base.set_skill[0])
+
+
 def test_later_agents_react_to_the_forced_prefix():
     """D0's continuation semantics. Holding later factual tokens fixed would
     estimate a direct effect the deployed autoregressive policy never exhibits,

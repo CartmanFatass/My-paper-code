@@ -219,6 +219,7 @@ class FixedClockAREditPolicy(nn.Module):
         current_skill: int,
         keep_logit: torch.Tensor,
         skill_logits: torch.Tensor,
+        sampled_skill: torch.Tensor,
         like: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """Replace one realized token with a forced one, after its draws.
@@ -247,6 +248,13 @@ class FixedClockAREditPolicy(nn.Module):
             logp = F.logsigmoid(keep_logit)
             return kind, skill, logp
 
+        if forced_skill == INVALID_SKILL:
+            # Force the renewal *decision* and leave the replacement skill to the
+            # policy. `sampled_skill` was already drawn from the masked SET
+            # distribution, so this is a draw from pi_SET(.|h) -- which is exactly
+            # the inner expectation of D0's U_pi. U_opp instead names a specific
+            # skill, which is why both forms are needed.
+            forced_skill = int(sampled_skill.reshape(-1)[0].item())
         n_skills = int(skill_logits.shape[-1])
         if not 0 <= forced_skill < n_skills:
             raise ValueError(f"forced SET skill {forced_skill} is out of range")
@@ -295,8 +303,11 @@ class FixedClockAREditPolicy(nn.Module):
         ``forced_tokens`` is the D7 interventional hook and is **evaluation-only**:
         it maps ``agent_id -> (token_kind, set_skill)`` and replaces that agent's
         realized token after its distributions and its random draws have already
-        been taken. Three properties make it a valid intervention rather than a
-        different policy, and each is asserted in
+        been taken. ``set_skill = INVALID_SKILL`` on a forced SET means *force the
+        renewal decision and let the policy pick the replacement*, which is D0's
+        ``U_pi``; naming a specific skill is D0's ``U_opp``. Three properties make
+        this a valid intervention rather than a different policy, and each is
+        asserted in
         ``tests/ha_ctse_process_d7_forced_token_test.py``:
 
         * with ``forced_tokens=None`` every result is byte-identical to the
@@ -415,6 +426,7 @@ class FixedClockAREditPolicy(nn.Module):
                     current_skill=int(working_skills[agent_id].item()),
                     keep_logit=keep_logit,
                     skill_logits=skill_logits,
+                    sampled_skill=skill,
                     like=kind,
                 )
             if int(kind.item()) == SET_TOKEN:

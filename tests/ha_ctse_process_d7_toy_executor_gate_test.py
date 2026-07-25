@@ -180,6 +180,64 @@ def test_direct_state_context_is_permitted_under_learned_keep():
     assert not any(p.requires_grad for p in agent.compact.parameters())
 
 
+def test_direct_state_context_actually_reaches_the_skill_logits():
+    """The information contract must be *live*, not merely declared -- the class of
+    defect that made the G20 credit rule inert. `_high_context_batch` sets
+    `compact = pad(state)` under direct state, so the high actor's skill logits
+    must move when the target signs flip.
+
+    Note what cannot be used as the probe: `keep_head.weight` is zero-initialized,
+    so `keep_logit` is a constant bias and both agents deterministically KEEP at
+    entry. Comparing realized *tokens* therefore shows no difference even when the
+    state is wired through correctly. The skill logits are the observable.
+    """
+    import torch
+
+    import numpy as np
+
+    agent = _build(_toy_config(r39_toy_direct_state_context=True))
+    obs = np.zeros((2, 4), dtype=np.float32)
+
+    def skill_logits(slow_sign, fast_sign):
+        state = np.array(
+            [slow_sign, 0.0, 0.0, fast_sign, 0.0, 0.0], dtype=np.float32
+        )
+        joint_obs = agent._joint_obs_array(obs)
+        state_arr = agent._state_array(state, joint_obs)
+        # The deployed context builder, so the input widths are the real ones.
+        (
+            _state_t,
+            joint_t,
+            compact,
+            _team_code,
+            team_vector,
+            *_rest,
+            weights,
+            agent_relevance,
+        ) = agent._r30_context_tensors(state_arr, joint_obs)
+        _h, _keep, logits, _e = agent.high._token_context(
+            joint_t.squeeze(0),
+            compact,
+            team_vector,
+            torch.tensor([0, 2], dtype=torch.long),
+            torch.tensor([3, 3], dtype=torch.long),
+            torch.tensor([True, True]),
+            0,
+            weights if agent.high_condition_on_omega else None,
+            agent_relevance if agent.use_agent_prototype_relevance else None,
+        )
+        return logits.detach()
+
+    positive = skill_logits(1.0, 1.0)
+    negative = skill_logits(-1.0, -1.0)
+    assert not torch.allclose(positive, negative), (
+        "target signs do not move the high actor's skill logits; the direct-state "
+        "context is not live and condition A would be unreachable"
+    )
+    # The incumbent stays masked out regardless of the state.
+    assert float(positive[0, 0]) <= torch.finfo(positive.dtype).min
+
+
 @pytest.mark.parametrize(
     "overrides",
     [
