@@ -364,14 +364,45 @@ Four conditions make the number meaningful:
   rather than estimator resolution, and a calibration set half-full of such
   zeros collapses the tail onto a single extreme point;
 - it is measured **per source**, since G17 and G18 have different return scales;
-- the resulting value is written back into this section as a frozen constant
-  before any screen run, and the screen must pass it **explicitly** — the module
-  default must be made unreachable, so a missing registration fails closed
-  rather than silently substituting `1e-4`.
+- it is measured **under the policy snapshot Stage A actually audits**, for the
+  reason section 7 already gives. This is the condition the first two statements
+  of this rule missed, and it is decisive rather than pedantic — see below.
 
 The null calibration is a bounded measurement of estimator resolution, not the
 screen, and it consumes no iteration. It produces one number per source and no
 scientific reading whatsoever.
 
-No run is authorized by this document. The screen stays withheld until
-`epsilon_audit` is registered above by that calibration.
+### `epsilon_audit` cannot be a pre-registered constant
+
+The resolution of `Ahat*` is driven by suffix-return variance under the declared
+suffix policy. Section 7 already forbids pooling quantities across policy
+versions as though they shared one stationary `Q^pi`, and `epsilon_audit` is a
+property of the audit estimator, so it inherits that rule. Section 6 runs Stage A
+at the **exact fast anchor**, after fast training. A floor measured under any
+other policy — in particular under a freshly initialized model — does not
+describe the resolution the screen will actually face.
+
+This is load-bearing, not a technicality. The calibration run under an untrained
+anchor returned `0.050631` for G17 and `0.034566` for G18, and the retired G20R
+screen's identification quantities were `0.005004` and `0.042009`. The floor is
+the same order as the quantity it gates, so getting its policy wrong decides
+Stage A's branch by itself.
+
+Therefore the null calibration is **run in situ inside the screen**, at the fast
+anchor snapshot, immediately before Stage A, and its per-source result is
+recorded in the evidence record with the snapshot version. What this section
+freezes is the **procedure**, not a number.
+
+Pre-registration discipline is preserved because the null cannot be tuned toward
+a wanted answer: its true value is exactly zero by construction, it never reads
+`S_source`, and the procedure is frozen here in advance of any run. That is the
+ordinary treatment of a numerical-resolution floor, and it is what makes the
+otherwise circular pre-registration of a policy-dependent constant unnecessary.
+
+The two numbers above are retained only as an **order-of-magnitude expectation**.
+An in-situ result departing from them by more than an order of magnitude is a
+signal to stop and investigate the audit, not a value to use.
+
+No run is authorized by this document. The screen stays withheld until the
+in-situ calibration is implemented and the screen's Stage A call site draws
+`epsilon_audit` from it rather than from an empty registry.
