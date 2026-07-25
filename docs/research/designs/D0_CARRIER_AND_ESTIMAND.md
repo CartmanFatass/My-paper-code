@@ -112,6 +112,55 @@ Two incidental properties of the learned-keep branch, both useful:
 underspecified in three ways: "re-decide" did not say which replacement skill,
 `Δ` was not fixed, and `H` did not exist.
 
+### Corrected 2026-07-25 — two was not enough, and one was misnamed
+
+**Ruling: `docs/external-review/rounds/20260725_d7_2b_source_persistence_necessity/21_PRO_OPEN_RAW.md`.**
+Order 0 of that ruling's revised sequence is this reconciliation. The two
+estimands below are both correct and both **policy-conditional**; naming one of
+them a *source* property was the defect that let D7.2B spend a run on a source
+that could not identify its own proposition.
+
+**`U_opp` is renamed.** Its maximization runs under the frozen learned joint
+policy — later agents and future decisions still follow that policy — so it is the
+**best focal SET under policy continuation**, written `U_max_pi` below. It is not
+an oracle property of the source and must never again be described as "does the
+source *contain* a valuable renewal".
+
+**A third, source-level estimand is required**, with the other agents and later
+decisions **reoptimized or supplied by a constructive oracle in both terms**:
+
+```text
+U*_{i,src}(h; H) =   max_{z != z_i, joint continuation} E[ G_H | SET_i(z) ]
+                   - max_{joint continuation}           E[ G_H | KEEP_i ]
+```
+
+A history is **persistence-essential** only with a material margin on both sides:
+
+```text
+U*_stable,src / B_H  <=  -0.10          U*_flex,src / B_H  >=  +0.10
+```
+
+Equivalently: the best all-SET continuation must sit materially below the optimal
+mixed KEEP/SET continuation.
+
+**Why this matters more than a definition tidy-up.** On
+`two_timescale_role_free_actions`, `U*_stable,src = 0` exactly, because persistence
+and full-sync swapping both reach the ceiling. That one number is decidable on
+paper and is the whole reason the source fails as a positive control — a source
+gate computing it would have cost nothing and saved the run.
+
+So there are **three layers, never fewer**, and D7.2B is the case that shows why:
+
+| Layer | Quantity | Question it answers |
+|---|---|---|
+| source necessity | `U*_{i,src}` | does *this source* require an individual to persist? |
+| policy-conditional effect | `U_pi`, `U_max_pi` | does renewal help *under this policy's* coordination convention? |
+| natural behaviour | KEEP/SET hazard, realized individual lifetime | does the policy actually do it? |
+
+The retired toy had a slow-timescale duty, did **not** require one individual to
+carry it, and the learned policy coordinated by swapping. Only the first layer
+separates those.
+
 ### Two estimands, never one number
 
 Under learned-keep R30 a SET **excludes the incumbent** — the skill head is masked
@@ -119,22 +168,30 @@ Under learned-keep R30 a SET **excludes the incumbent** — the skill head is ma
 question in two:
 
 ```text
-U_opp(h; H) = max_{z != z_i} Q_H(h, SET(z))            - Q_H(h, KEEP)
-U_pi (h; H) = E_{z ~ pi_SET(.|h)} [ Q_H(h, SET(z)) ]   - Q_H(h, KEEP)
+U_max_pi(h; H) = max_{z != z_i} Q^pi_H(h, SET(z))          - Q^pi_H(h, KEEP)
+U_pi    (h; H) = E_{z ~ pi_SET(.|h)} [ Q^pi_H(h, SET(z)) ] - Q^pi_H(h, KEEP)
 ```
 
-- **`U_opp`** — does the source and the available skill support *contain* a
-  valuable renewal at this history?
+Both carry `Q^pi` deliberately: the continuation is the frozen learned joint
+policy in both, which is the whole reason neither is a source property.
+
+- **`U_max_pi`**, written `U_opp` before 2026-07-25 — the **best focal SET under
+  policy continuation**. Superseded framing: this was described as asking whether
+  the source *contains* a valuable renewal. It does not. Its continuation is the
+  frozen learned joint policy, so it is policy-conditional like `U_pi`, and the
+  source-level question belongs to `U*_{i,src}` above.
 - **`U_pi`** — can the **current** conditional SET policy actually exploit it?
 
 These are different claims and must not be collapsed. A source can be rich in
-renewal opportunity while the policy is incompetent to use it, and only `U_opp`
-separates "no heterogeneity" from "no competence".
+renewal opportunity while the policy is incompetent to use it — but note that
+neither of these two separates "no heterogeneity" from "no competence" on its own,
+because both condition on the same policy's coordination convention. That
+separation needs `U*_{i,src}`.
 
-**`U_opp` requires a split sample.** The maximizing skill is selected on one
+**`U_max_pi` requires a split sample.** The maximizing skill is selected on one
 replicate set and evaluated on an **independent** one. Maximizing over noisy
-returns on the same sample manufactures an optimistic source effect — the
-selection is itself an estimate.
+returns on the same sample manufactures an optimistic effect — the selection is
+itself an estimate. `U*_{i,src}` needs the same discipline for the same reason.
 
 ### Δ and H, frozen
 

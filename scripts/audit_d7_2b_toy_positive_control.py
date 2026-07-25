@@ -638,10 +638,21 @@ def _focal_state_matches(
 def _split_sample_u_opp(
     opp_returns: dict[int, list[float]], keep_mean: float, b_value: float
 ) -> float | None:
-    """D0 section 3: the maximizing skill is selected on one replicate set and
-    valued on an independent one. Maximizing and valuing on the same sample
-    manufactures an optimistic source effect, because the selection is itself an
-    estimate."""
+    """Best focal SET under policy continuation, split-sample. D0 section 3.
+
+    **Renamed in meaning 2026-07-25**, per
+    `rounds/20260725_d7_2b_source_persistence_necessity/21_PRO_OPEN_RAW.md`. This
+    was called `U_opp` and described as a *source* opportunity. It is not: the
+    maximization runs while later agents and future decisions still follow the
+    frozen learned joint policy, so it is policy-conditional exactly like `U_pi`.
+    The source-level question is `U*_{i,src}`, which reoptimizes or oracle-supplies
+    the joint continuation in **both** terms and is not computed here.
+
+    The split sample is still required: the maximizing skill is selected on one
+    replicate set and valued on an independent one, because maximizing and valuing
+    on the same sample manufactures an optimistic effect — the selection is itself
+    an estimate.
+    """
     usable = {z: v for z, v in opp_returns.items() if len(v) >= 2}
     if not usable:
         return None

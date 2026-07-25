@@ -189,7 +189,27 @@ free. Either changes the source contract and must be ruled, not chosen here.
 ## Standing check
 
 From `RESEARCH_GOAL.md` — *what does this let us say about variable `k` that we
-could not say before?* That a permutation-invariant multi-agent source cannot
-establish heterogeneous renewal urgency, because role exchange substitutes for
-persistence at no cost. That is a constraint on every future source built for the
-variable-`k` claim, and it was cheap to learn.
+could not say before?*
+
+**My first answer here was too broad and was ruled so.** I wrote that a
+permutation-invariant multi-agent source cannot establish heterogeneous renewal
+urgency because role exchange substitutes for persistence at no cost. That is
+false as stated: position, energy, queue state, internal memory, transition
+latency and non-transferable service state all make persistence necessary under an
+anonymous reward. The corrected statement is narrow, and the extra conditions are
+where the content is:
+
+> At a supported mixed-urgency history, if reward **and transition** are equivariant
+> under agent permutation, the relevant agent states and capabilities are
+> exchangeable at zero cost, the joint action support is closed under that
+> permutation, and every optimal post-check allocation is reachable by a full-sync
+> permutation **with the same future state and return**, then individual persistence
+> is not necessary — and such a source cannot be a positive control for individual
+> renewal urgency.
+
+So what this bought is a **reusable source gate** rather than a sweeping exclusion:
+four questions answerable on paper before any source consumes a carrier run
+(`AGENTS.md`, *A positive control must make its target behaviour necessary*), and a
+source-level estimand `U*_{i,src}` that would have returned exactly `0` here for
+free. An anonymous source remains perfectly usable when assignment history is
+non-transferable — which is precisely what the proposed tenure replacement is.

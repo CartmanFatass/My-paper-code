@@ -358,6 +358,50 @@ belongs to the screen. The check does not certify a design as sound; it retires
 the class of defect that is provable on paper, and identification failures still
 require data.
 
+#### A positive control must make its target behaviour necessary
+
+**Added 2026-07-25 from the D7.2B ruling.** A control built to show that a
+mechanism *can* do X must make X **necessary for optimality**, not merely
+permitted. If some optimal policy reaches the ceiling without X, a negative result
+cannot separate mechanism incapacity from rational selection of an equally optimal
+alternative — and that is not a weak result, it is no result.
+
+`two_timescale_role_free_actions` failed exactly here. Its reward is the better of
+the two agent-to-duty assignments, so from any optimal pair the next optimal pair
+is reachable by a **full-sync swap** in which both agents SET and no commitment
+ever persists. Two distinct optima, one without the target behaviour. The policy
+took it: perfect competence, `KEEP` never used once in 384 ledger rows, every
+realized lifetime pinned at one check interval.
+
+Four questions, answered **before** a source consumes a carrier run, analytically
+or by constructive controls:
+
+1. does an optimal all-SET (target-behaviour-free) continuation exist?
+2. does role exchange preserve not only immediate reward but the **complete future
+   state relevant over `H`**?
+3. is any agent-local or assignment-local state lost on exchange?
+4. is the best full-sync SET return **materially below** the optimal mixed
+   KEEP/SET return?
+
+The margin is the source-level estimand of `D0_CARRIER_AND_ESTIMAND.md`:
+`U*_stable,src / B_H <= -0.10` and `U*_flex,src / B_H >= +0.10`. On the retired toy
+`U*_stable,src = 0` exactly — decidable on paper, for free.
+
+**The tempting general statement is false.** "A permutation-invariant reward means
+role exchange substitutes for persistence at zero cost" is too broad, and was
+ruled so. Position, energy, queue state, internal memory, transition latency and
+non-transferable service state all make persistence necessary under an anonymous
+reward. The valid statement is narrow:
+
+> At a supported mixed-urgency history, if reward **and transition** are equivariant
+> under agent permutation, the relevant agent states and capabilities are
+> exchangeable at zero cost, the joint action support is closed under that
+> permutation, and every optimal post-check allocation is reachable by a full-sync
+> permutation **with the same future state and return**, then individual persistence
+> is not necessary.
+
+An anonymous source stays usable when assignment history is non-transferable.
+
 #### Grill the contract past the checklist, and grill Pro
 
 These five questions are a checklist, and a checklist asks what its author

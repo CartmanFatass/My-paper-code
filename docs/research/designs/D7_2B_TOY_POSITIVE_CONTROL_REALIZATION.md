@@ -314,14 +314,26 @@ A pair failing any check is dropped and **counted**, not repaired.
 ## 6. Estimands computed
 
 ```text
-U_pi (h;H)  =  E_{z ~ pi_SET(.|h)} [ G_H(SET z) ]  -  G_H(KEEP)
-U_opp(h;H)  =  max_{z != incumbent} G_H(SET z)     -  G_H(KEEP)
-U~          =  U / B_H
+U_pi    (h;H)  =  E_{z ~ pi_SET(.|h)} [ G_H(SET z) ]  -  G_H(KEEP)
+U_max_pi(h;H)  =  max_{z != incumbent} G_H(SET z)     -  G_H(KEEP)
+U~             =  U / B_H
 ```
 
-`U_opp` uses a **split sample**: the maximizing `z` is selected on one replicate
+**Renamed 2026-07-25 by the D7.2B′ ruling.** `U_max_pi` was called `U_opp` and
+described as asking whether the source *contains* a valuable renewal. It does not:
+its maximization runs while later agents and future decisions still follow the
+frozen learned joint policy, so it is policy-conditional exactly like `U_pi`. The
+source-level estimand is `U*_{i,src}` (D0 §3), which reoptimizes or oracle-supplies
+the joint continuation in **both** terms — this script does not compute it, and its
+absence is why this control could not detect its own source's degeneracy in advance.
+
+`U_max_pi` uses a **split sample**: the maximizing `z` is selected on one replicate
 set and its value taken from an independent set. Maximizing and evaluating on one
-sample manufactures an optimistic source effect (D0 §3).
+sample manufactures an optimistic effect (D0 §3).
+
+The result JSON still emits the key `u_opp_flex_split_sample`, so the archived
+result at `c4c1417` stays readable against its own schema. The name is superseded;
+the quantity is unchanged.
 
 `G` is external task return only. Both regimes are estimated at mixed-urgency
 checks; CIs are clustered by episode, since checks within an episode share the
