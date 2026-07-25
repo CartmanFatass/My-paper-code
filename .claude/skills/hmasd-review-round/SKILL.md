@@ -62,6 +62,41 @@ count below unreliable because the turn history has to be re-read each time.
 Create a tab only when no existing tab holds that conversation. Do not trigger a JavaScript dialog — a modal blocks every subsequent
 browser call and requires the user to clear it by hand.
 
+#### When the tab is wedged — replace it, never add to it
+
+A tab can stop being usable. The symptom is specific: **every** script-injecting
+operation — `screenshot`, `read_page`, `find` — times out, the page never reaches
+`document_idle`, and this survives a reload. It is not the same as slow, and it is
+not an empty content pane, which the discovery ladder already handles with one
+wait and one reload.
+
+This is a real state. On 2026-07-25 a conversation holding two very large reviewer
+answers wedged permanently: six reloads of the same tab produced one usable render,
+while a newly created tab on the same conversation rendered immediately. The
+accumulated renderer state was the problem, not the conversation.
+
+The recovery is **replacement, and it is bounded**:
+
+1. try reload-and-wait twice first — that fixes the ordinary hydration case;
+2. **close the wedged tab**, then create one and navigate to the registered URL;
+3. **exactly one tab holds the conversation when you are done.** Verify with
+   `tabs_context_mcp` and close any duplicate.
+
+Two tabs on one conversation is the state this rule exists to prevent, and it is
+just as forbidden when reached by recovery as by carelessness.
+
+A replacement tab **grants nothing**. It does not license a second fence, and it
+resets no state you had established: re-verify fence presence on the new tab
+before any submission, exactly as on a first visit.
+
+**Why this is written down rather than left to judgement.** Before this paragraph
+existed, the prohibition had no escape hatch for a wedged tab, so a transport pass
+that genuinely needed one reasoned its way around the rule — arguing the
+send-verification rationale did not apply because the send was already
+verified — and left two tabs open. The rule was right and unfollowable at the same
+time. A prohibition without an affordance gets argued with; give it the affordance
+and the argument stops.
+
 ### Composing multi-line text — a newline is a send
 
 **In this composer, Enter submits.** The `computer` `type` action delivers every
@@ -327,7 +362,20 @@ unspecified and three separate passes improvised three different broken captures
    proceeding. **Never** substitute a different capture method because the click
    is being awkward — that substitution is how the structure-stripped archive
    below happened.
-4. **Write it to the raw path with `.NET WriteAllText`** from the clipboard
+5. **Expect to click more than once, and read the button, not the tool result.**
+   *Hitting the control* and *writing the clipboard* are separate facts. The tool
+   reports success for the click either way.
+
+   A screenshot distinguishes them. If the `Copy response` tooltip is showing and
+   the button is highlighted, the coordinates are right and the clipboard write is
+   what failed — usually because the window lacks OS-level focus. Do not go
+   hunting for better coordinates; click the same place again. On 2026-07-25 the
+   third click on an already-hovered button succeeded after two silent failures,
+   with the sentinel unchanged through both.
+
+   If the icon never flips to its copied state, the write did not happen no matter
+   how many times the click reported success.
+6. **Write it to the raw path with `.NET WriteAllText`** from the clipboard
    directly. Then do the byte-equality reread.
 
 Three capture methods are **prohibited**, each having produced a corrupt archive
