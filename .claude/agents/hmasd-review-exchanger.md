@@ -87,7 +87,13 @@ You do not:
   you were not given is not yours to send;
 - edit repository source, tests or design documents;
 - run Git in any mutating form;
-- spawn agents, or create a monitor, relay or follow-on transport task.
+- spawn agents, or create a monitor, relay or follow-on transport task;
+- **click `Answer now`, or any other control that curtails the reviewer's
+  extended thinking.** Waiting is the entire job while a response is pending.
+  Cutting reasoning short degrades the answer, and on 2026-07-24 a transport
+  pass did exactly this at roughly four minutes on a round whose predecessor had
+  reasoned for eighteen — on a protected-semantics ruling. A response that takes
+  longer than you expect is not a fault to fix; it is the reviewer working.
 
 Your writes go only to the raw path, the intake path and the round path your
 brief names.

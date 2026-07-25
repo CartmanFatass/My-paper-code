@@ -247,6 +247,15 @@ or collapsed thinking label cannot keep the round pending. Conversely,
 changing response text or an active stop control proves generation is still in
 progress.
 
+**Never click `Answer now`, and never operate any other control that curtails
+extended thinking.** Waiting is the whole job while a response is pending. On
+2026-07-24 a transport pass clicked it at roughly four minutes on a round whose
+predecessor had reasoned for eighteen, on a protected-semantics ruling — the
+archived answer is usable but its depth is not guaranteed, and that cannot be
+undone after the fact. A reviewer taking longer than expected is working, not
+stuck. Extend your waiting instead, and if you genuinely believe generation has
+hung, report it as a blocker rather than forcing an early answer.
+
 An active `Stop answering` or `Stop generating` control **anywhere for the
 current turn** ends the question: generation is in progress and nothing may be
 archived, no matter how stable two snapshots look. Extended reasoning emits a
