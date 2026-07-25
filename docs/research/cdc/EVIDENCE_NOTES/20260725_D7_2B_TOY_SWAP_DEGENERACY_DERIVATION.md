@@ -76,6 +76,43 @@ correctly regenerated under the modified prefix, per D0's continuation semantics
 does not compensate. So renewal has value for both regimes and the contrast
 vanishes.
 
+## The carrier-side observation, found by a pre-send adversarial pass
+
+Both optima score `1.0`, and the policy chose the one without persistence. The
+carrier's own initialization makes that the cheaper route:
+
+```text
+keep_head.weight is zero-initialized, bias = logit(keep_init = 0.6)
+  => keep_logit starts state-INDEPENDENT
+
+swap    needs: keep bias down (a scalar) + skill-head alternation,
+               and the skill head is already state-dependent through `hidden`
+persist needs: keep_head to acquire state-DEPENDENT WEIGHTS, to KEEP for the
+               x-holder and SET for the y-holder
+```
+
+Measured, not argued. At competence `keep_prob` is uniformly collapsed and carries
+no regime information — the between-regime difference is smaller than the
+within-regime spread:
+
+```text
+all mixed-urgency rows:  min 0.000416   max 0.009945
+    flex     n=14   mean 0.002853   std 0.00267
+    stable   n=14   mean 0.003998   std 0.00305
+    between-regime difference 0.00115  <  within-regime std ~0.003
+```
+
+`keep_head` never acquired state dependence; it lowered its bias and stopped. The
+toy was solved entirely through the skill head, leaving the renewal decision — the
+primitive this line exists to study — **degenerate and unused**.
+
+This is about the carrier, not the source, and it does not refute anything: a
+source with two optima cannot support a claim about which one a good carrier
+*should* pick. It is registered as an open observation, and whether "optimum
+selection" is a legitimate pre-registered reading is one of the questions in the
+round below. It is recorded here because it was nearly omitted, and an unmarked
+omission becomes a premise.
+
 ## What this does to the design's reasoning
 
 D7 anticipated the shared-reward objection and dismissed it:
