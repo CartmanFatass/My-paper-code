@@ -295,6 +295,39 @@ alone will happily certify it. On 2026-07-24 an archival pass captured 794 bytes
 of exactly that trace as scientific raw and asserted byte equality while the stop
 control was visible. Two stable snapshots are necessary, never sufficient.
 
+### How to capture the response — one click, never transcription
+
+Use the page's own **`Copy response`** control. It is in the `Response actions`
+group attached to the assistant turn, it copies the full message verbatim
+including markdown, and it is the only capture path that cannot introduce a
+transcription error. Everything below exists because this was previously left
+unspecified and three separate passes improvised three different broken captures.
+
+1. **Mark the clipboard first.** Set it to a known sentinel before clicking, so
+   a click that silently does nothing is detectable. A failed click leaves the
+   *previous* clipboard content in place, which reads exactly like a successful
+   capture of the wrong thing.
+2. **Click by `ref`, not by coordinate.** `read_page` exposes the control as
+   `button "Copy response" [ref_N]`. A coordinate click has already silently
+   failed here once; a `ref` click resolves the element itself.
+3. **Verify the clipboard actually changed** from the sentinel, and that its
+   length and its first and last lines match what is on screen.
+4. **Write it to the raw path with `.NET WriteAllText`** from the clipboard
+   directly. Then do the byte-equality reread.
+
+Three capture methods are **prohibited**, each having produced a corrupt archive
+that only the byte-equality check caught:
+
+- **retyping the text through a file-write tool** — differed at byte 47;
+- **`get_page_text` or `read_page` output as the archive** — that is rendered
+  text, not the message source, and loses markdown structure;
+- **round-tripping through `ConvertFrom-Json` without explicit UTF-8** — silently
+  turned em dashes into `â€"`.
+
+If `Copy response` is genuinely unavailable — the control absent from the
+accessibility tree, not merely awkward to reach — that is a transport fault.
+Report it; do not fall back to transcription.
+
 Before writing the raw, sanity-check the captured text against the question:
 
 - it is not a bare progress trace of the labels above;
