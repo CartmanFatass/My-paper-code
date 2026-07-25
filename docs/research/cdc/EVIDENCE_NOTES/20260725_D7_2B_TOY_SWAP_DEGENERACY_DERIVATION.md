@@ -2,8 +2,10 @@
 
 ```text
 id=D7.2B-SWAP-DEGENERACY
-status=derivation complete; final-checkpoint audit pending
-cost=zero compute for the derivation; observed on the competence run's update-100 checkpoint
+status=closed -- derivation complete, final-checkpoint audit registered,
+       ACCEPTED by External Pro 2026-07-25 with a broadened correction
+ruling=docs/external-review/rounds/20260725_d7_2b_source_persistence_necessity/21_PRO_OPEN_RAW.md
+cost=zero compute for the derivation; one toy competence run for the audit
 source=envs/pettingzoo/two_timescale_role_free_actions.py
 contract=docs/research/designs/D7_2B_TOY_POSITIVE_CONTROL_REALIZATION.md
 parent=docs/research/designs/D7_R30_RENEWAL_DIAGNOSTIC.md
