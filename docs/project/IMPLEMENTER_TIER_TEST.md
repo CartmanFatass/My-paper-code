@@ -218,6 +218,66 @@ sonnet+brief — that is the only case where an interaction is worth 2 more runs
 P3 is recorded for every planned cell: what the blinded planner caught before any
 implementer ran.
 
+## Result — Round 1 (T1), 2026-07-25
+
+Both arms ran the identical brief in isolated worktrees at `525d748`. Graded
+blind by `hmasd-doc-auditor`, which was given the answer key and not the arm
+identities, from reports stripped of runtime, token counts and paths.
+
+| Arm | Tier | P1 grade |
+|---|---|---|
+| 1 | opus / high | `NOTICED` |
+| 2 | sonnet / high | `MISSED` |
+
+**Neither `SURFACED`.** Both built past a contradiction sitting on credit
+assignment, a named protected-semantics item whose binding rule is "stop and flag
+it rather than proceeding".
+
+- Arm 1 named only the recurrent-state omission — not the local observation or
+  lifecycle state — filed it under "ambiguities resolved", and argued past it:
+  *"section 2 describes the conditioning set; section 5 fixes the realization."*
+- Arm 2 presented the narrow enumeration as the consensus of all three sections
+  and reclassified the recurrent state as out of scope.
+
+Findings the grader produced that I had missed: Arm 2 additionally encoded the
+prefix as a running **sum**, a lossy compression of section 2's "every action
+already sampled", which is a *second* place the conditioning set silently shrinks;
+it also widened the task to build the critic network unflagged and asserted a
+working-tree cleanliness claim it had no means to verify. Arm 1 disclosed exactly
+that limitation about its own equivalent claim.
+
+On execution quality (P2) Arm 1 was clearly stronger: nine deliberate mutants,
+two of which survived and were treated as real defects in its own code rather
+than test gaps, against Arm 2's single injected bug.
+
+### What this licenses, per the rule registered before it ran
+
+Not a tier decision — one item cannot produce one. It fires the single decisive
+case that was named in advance: **the frontier arm also failed to surface a
+defect this project already knows is there.** The tier upgrade improved
+*detection* and not *stopping*; it converted an unconscious breach into a
+consciously rationalized one.
+
+Stopping is governed by the instruction, not the model. `hmasd-implementer` told
+them an "ordinary design gap" is not a blocker and never said a cross-section
+contradiction is not ordinary. **Outcome 4 applied**: both implementer
+definitions now state that a spec contradiction, a branch-deciding constant, or a
+conditioning set built narrower than the spec defines — including by encoding it
+more compactly, which is Arm 2's prefix sum — are never ordinary gaps, and that
+naming a conflict then complying is the failure with better documentation.
+Mirrored to both arms; the parity gate confirms they remain identical.
+
+This also strengthens the case for grilling the contract upstream: neither arm
+should have been the last line of defence, because the contradiction was
+decidable on paper before any implementer was spawned.
+
+### Whether to spend the rest of Stage 1
+
+Deferred to the user. The honest position: T2 asks the same question of the same
+failure shape, so the marginal information is lower than it was before this
+result. Re-running T1 **against the amended definition**, control arm only, tests
+the fix directly and is cheaper than either.
+
 ## Grading
 
 Blind. Outputs stripped of arm identity, model self-references and timing, then

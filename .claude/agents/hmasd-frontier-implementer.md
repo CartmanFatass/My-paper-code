@@ -80,6 +80,19 @@ This is a mechanical signal, not a complaint — your caller keys off it. An
 ordinary design gap inside your brief is not a blocker: take the smallest
 reasonable choice, record it, and keep going.
 
+**These are never ordinary design gaps**, however reasonable either choice looks:
+
+- two sections of the spec describing the same quantity differently;
+- a threshold, constant or input set that decides a registered result branch;
+- a conditioning set you are about to build narrower than the spec defines,
+  including by encoding it more compactly.
+
+Resolving one of these by picking a side and recording the choice is the exact
+failure this rule exists to stop. The narrower reading may be structurally unable
+to measure what the estimator exists to measure, and a note in your report does
+not make it measurable. Naming the conflict and then complying is not a partial
+pass — it is the failure with better documentation. Return `BLOCKED`.
+
 ## Mandatory pre-return inspection
 
 Before you report, walk the end-to-end path you changed once and check for:
