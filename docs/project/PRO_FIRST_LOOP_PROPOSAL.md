@@ -7,17 +7,8 @@ retired_by=user
 superseded_by=docs/project/WORKFLOW_SIMPLIFICATION.md
 ```
 
-**Retired without ever being adopted.** The user replaced it with a two-point
-model: review the scientific idea, and confirm implementation detail choices with
-External Pro before building. Nothing else.
-
-What survives from this document is its one correct observation — that external
-review is the scarce resource and the loop should be arranged around it. What is
-retired is the apparatus it proposed for that: three gates, certificates,
-validation tiers. Those measured the mechanism rather than the science.
-
-Kept as a record of what was tried, so it is not re-proposed. Read
-`WORKFLOW_SIMPLIFICATION.md` instead.
+**Retired, never adopted.** See `WORKFLOW_SIMPLIFICATION.md`. Kept only so it is
+not re-proposed.
 
 ---
 
