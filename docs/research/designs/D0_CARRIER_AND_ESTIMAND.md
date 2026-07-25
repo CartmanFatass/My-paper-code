@@ -83,8 +83,9 @@ mutually exclusive regimes:
 | Regime | Condition | Is KEEP a decision? |
 |---|---|---|
 | Native categorical | `native_categorical_edit` | **No.** KEEP is a post-hoc *label* applied when the sampled skill happens to equal the current skill (`skill == working_skills[agent_id]`). `keep_head` is bypassed; `logp` is the skill log-prob alone |
+| **No incumbent** | `not active`, `:263-267` | **No.** Forced SET; `keep_logit` reaches neither `kind` nor `logp`. There is nothing to keep |
 | Full refresh | `force_refresh_every_check` | **No.** Always SET |
-| **Learned keep** | neither flag | **Yes.** `keep_logit -> sigmoid`, with `log_keep` / `log_switch` factorization |
+| **Learned keep** | neither flag, **and an incumbent exists** | **Yes.** `keep_logit -> sigmoid`, with `log_keep` / `log_switch` factorization |
 
 Both flags default `False` (`getattr(config, ..., False)`, `standalone_agent.py:1850-1854`),
 so the live main lane is the learned-keep branch. The carrier is eligible.

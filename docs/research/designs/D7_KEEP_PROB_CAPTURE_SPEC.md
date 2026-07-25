@@ -92,12 +92,29 @@ policy.
 
 Record **`NaN`**, not `0.5`, whenever the value is not a real renewal decision:
 
+**The principle governs the table.** Where they disagree, record `NaN` — the
+table enumerates known cases and is not exhaustive.
+
 | Regime | `keep_prob` |
 |---|---|
-| Learned keep — neither flag set | `sigmoid(keep_logit).detach()` |
+| Learned keep — neither flag set, **and the agent has an incumbent** | `sigmoid(keep_logit).detach()` |
 | `native_categorical_edit` | `NaN` — KEEP is a post-hoc label on a skill collision, not a decision |
 | `force_refresh_every_check` | `NaN` — always SET |
+| **`not active` — no incumbent commitment** (`r30_fixed_clock.py:263-267`) | **`NaN`** |
 | `keep_head is None` | `NaN` |
+
+The `not active` row was missing from the first revision and is **not an edge
+case**. `has_active_skill[env_id, :] = False` at every episode reset
+(`standalone_agent.py:3681`), so **every agent's first check of every episode**
+takes that branch. There `kind` is forced to `SET_TOKEN`, `logp` is the skill
+log-prob alone, and `keep_logit` never reaches either — KEEP is structurally
+impossible because there is nothing to keep.
+
+Recording a real `sigmoid(keep_logit)` there would stamp a plausible renewal
+probability onto a token that had no renewal decision, at a fixed nontrivial rate
+on the live lane. That is the same defect this spec already names for
+`keep_head is None`, with a nonzero logit instead of a zero one — and it would be
+harder to spot, because the number would not be a suspicious `0.5`.
 
 `NaN` propagates through any careless aggregation and shows up as `NaN`, which is
 the desired behaviour: a mean renewal probability pooled across a
