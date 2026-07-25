@@ -410,7 +410,9 @@ def test_failed_source_screen_skips_all_learning_and_closes_registered_branch(
     writes_before_evaluation = counters["chunks_written"]
 
     runner.evaluate_run(root)
+    torch.set_num_threads(2)
     analysis = runner._read_json(runner.analyze_run(root))
+    assert torch.get_num_threads() == 1
     assert counters["chunks_written"] == writes_before_evaluation
     assert analysis["result"] == runner.SOURCE_NON_IDENTIFIABLE_RESULT
     assert analysis["source_identifiable"] is False
@@ -425,7 +427,9 @@ def test_failed_source_screen_skips_all_learning_and_closes_registered_branch(
         * len(runner.ACTION_MODES)
         * config.evaluation_episodes
     )
+    torch.set_num_threads(2)
     runner.validate_formal_result(root)
+    assert torch.get_num_threads() == 1
 
     tampered = tmp_path / "source_screen_tamper"
     shutil.copytree(root, tampered)

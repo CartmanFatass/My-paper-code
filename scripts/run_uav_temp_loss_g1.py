@@ -2778,6 +2778,7 @@ def _source_skipped_analysis_payload(
 
 def analyze_run(root: Path) -> Path:
     root = Path(root)
+    configure_runtime(SeedRegistry().model_initialization)
     manifest = _read_json(root / "train_manifest.json")
     evaluation = _read_json(root / "evaluation_manifest.json")
     if not manifest.get("formal"):
@@ -3037,6 +3038,7 @@ def _exercise_analysis_payload(
 
 def validate_run_artifacts(root: Path, *, require_formal: bool) -> None:
     root = Path(root)
+    configure_runtime(SeedRegistry().model_initialization)
     manifest = _read_json(root / "train_manifest.json")
     evaluation = _read_json(root / "evaluation_manifest.json")
     analysis = _read_json(root / "analysis_result.json")
