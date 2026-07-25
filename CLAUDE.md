@@ -43,7 +43,7 @@ with an exact assignment.
 | `hmasd-verifier` | haiku / high | executes assigned checks, returns bounded runtime evidence |
 | `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
 | `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
-| `hmasd-review-exchanger` | haiku / low | byte-exact external review transport and archival |
+| `hmasd-review-exchanger` | haiku / high | byte-exact external review transport and archival |
 | `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
 
@@ -55,6 +55,20 @@ judgment call hands back rather than deciding.
 Effort is set separately from model. `hmasd-verifier` runs haiku at **high**
 because deciding that an observed contract does not match the declared one is a
 real judgment — getting it wrong turns an invalid run into apparent evidence.
+
+`hmasd-review-exchanger` runs haiku at **high** for exactly that reason, applied
+to a second surface: deciding that an observed reply is the completed answer to
+the submitted question is the same kind of judgment, and getting it wrong turns
+a mid-generation thinking trace into apparent external scientific evidence. It
+sat at low effort until 2026-07-24, when it did precisely that. When a role's
+work includes deciding whether an observation matches a declared contract, the
+tier follows the judgment, not the mechanical framing of the role.
+
+Every definition points at `docs/project/AGENT_CONTEXT.md`, whose **Unattended
+operation** and **Reporting honestly** sections bind all children. Standing
+constraints belong there rather than in each brief — relying on briefs to carry
+them made correctness depend on the caller remembering, which is exactly what
+failed.
 
 Claude Code has no per-agent approval policy. A definition can withhold a tool,
 and a `PreToolUse` hook can block a command, but "never ask for approval" is a

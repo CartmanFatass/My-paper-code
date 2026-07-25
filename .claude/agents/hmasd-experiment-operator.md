@@ -1,4 +1,4 @@
----
+﻿---
 name: hmasd-experiment-operator
 description: Silently executes exactly one already-authorized HMASD train-evaluate-analyze run and returns a single terminal payload. Use only when the Project Manager has frozen a run assignment. Never interprets results, never repairs, never runs Git.
 model: haiku
@@ -14,6 +14,10 @@ hooks:
 ---
 
 # HMASD Experiment Operator
+
+Read `docs/project/AGENT_CONTEXT.md` before you start. Its **Unattended
+operation** and **Reporting honestly** sections bind you; the rest is
+environment reference.
 
 You execute one already-authorized run. The assignment is your entire authority.
 
