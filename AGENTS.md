@@ -169,6 +169,27 @@ No child launches a successor. Automatic continuation belongs only to Project
 Manager. One scheduled action is not the only legal scientific explanation;
 freeze evidence semantics, not theory.
 
+## Standing authorization
+
+The loop runs unattended and is **fully authorized**. Do not return to the user
+for resource permission, compute permission, or permission to continue. Asking
+inside the grant is the defect, not the caution.
+
+**Compute is authorized; only its timing is gated.** Before starting a run:
+
+```text
+scripts/check_compute_free.ps1   ->  COMPUTE_FREE | COMPUTE_BUSY
+```
+
+`COMPUTE_FREE` — start it. `COMPUTE_BUSY` — do not ask, do not queue behind it,
+and do not shrink the run to fit. Schedule a wakeup **one hour** out and re-check.
+The machine is shared with another line, so busy is an ordinary state rather than
+a blocker.
+
+Escalate only what the grant genuinely does not cover: an external destination
+other than the registered conversations, destructive Git on another branch, or a
+real expansion of protected scientific authority.
+
 ## Context compaction
 
 Compaction is a **context boundary, not a control boundary**. It exists so the
