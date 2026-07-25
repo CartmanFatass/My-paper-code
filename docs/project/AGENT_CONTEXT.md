@@ -100,6 +100,20 @@ Prefer running the job in the foreground when you will only wait for it anyway.
 Background it only when you have genuinely independent work to do meanwhile, and
 collect it before you report.
 
+**How to wait, since you have no blocking sleep.** This is the part the rule
+originally left out, and its absence made the rule unfollowable: told only "wait
+in-band", a child reaches for the one waiting primitive it can see — a background
+timer — which ends the turn and is exactly the prohibited thing. There is no
+`sleep` available to you. Waiting therefore means **issuing repeated checks in
+sequence within the same turn**: check, evaluate, check again, and keep going.
+Each tool call extends the turn; the turn ends only when you stop making them.
+Do not pause between checks to announce that you will check again.
+
+If the wait genuinely exceeds what you can stay in-band for, say so as a
+measurement — how many checks over how long, and the exact state at the last one.
+"Still generating after 40 checks over 18 minutes" is actionable. "I will check
+again shortly" is not, because for you there is no later.
+
 If a job outlives what you can wait for, that is a real finding: report what you
 started, where its output will land, and what remains — do not report "waiting"
 as if it were a state someone else will resume.

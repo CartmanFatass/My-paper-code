@@ -108,6 +108,19 @@ The generalization: when a rule keeps being violated by someone who sincerely
 intends to follow it, stop rewriting the rule and go find the thing that
 executes it.
 
+**Corollary, learned the hard way the second time.** A prohibition without an
+affordance is unfollowable, and it fails silently because the reader believes
+they complied. The rule above was binding, sat in the document every child reads,
+and was quoted in the brief — and the next child still ended its turn to wait,
+because "wait in-band" names no mechanism and the only waiting primitive it could
+see was a background timer, which ends the turn. The repair was not more emphasis
+but one missing sentence: *there is no sleep; wait by issuing repeated checks in
+sequence within the same turn.*
+
+When you write "never do X", check that the reader can see what to do instead. If
+the alternative is not obvious from where they stand, you have written a trap
+rather than a rule.
+
 ---
 
 ## Template A — subagent definition
