@@ -64,7 +64,10 @@ binds one dedicated conversation per branch.
 
 - **Registered branch.** Hand the whole round to `hmasd-review-exchanger`. This
   task authors the question and freezes the boundary; it does not drive the
-  browser.
+  browser by default. Driving it directly — submitting the fence, or archiving —
+  is a **recorded fallback**, legitimate only when the exchanger is blocked or
+  has already failed that round. The mechanical intake must state which happened
+  and why. A heartbeat wake never archives; it inspects and dispatches.
 - **Unregistered branch.** Bootstrap only: this task opens the conversation,
   submits the first fence, records the exact id and url, and then hands the
   round to the exchanger from that point on.

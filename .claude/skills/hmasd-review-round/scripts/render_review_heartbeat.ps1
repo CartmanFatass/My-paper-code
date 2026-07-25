@@ -49,8 +49,13 @@ If a completed message explicitly reports missing question-listed evidence,
 treat it as a transport diagnostic and do not archive it as scientific raw.
 Leave the round active for Project Manager evidence-access recovery under the same
 fence. If the response is naturally complete and is not a transport diagnostic,
-archive it exactly and reread for equality. Write the provenance intake; delete
-this heartbeat and confirm absence; then reconcile the exact raw in Project Manager.
+this wake does NOT archive it. A heartbeat inspects and reports; archival belongs
+to hmasd-review-exchanger, which runs at high effort precisely because deciding
+that a response is the completed answer is the judgment that once archived a
+mid-generation thinking trace as scientific raw. Dispatch the exchanger to
+archive, then delete this heartbeat and confirm absence, then reconcile the exact
+raw in Project Manager. Archiving directly is a recorded fallback for when the
+exchanger is blocked or has already failed this round, and the intake must say so.
 Do not interpret scientific completeness, repair the package,
 authorize code, or start compute.
 "@
