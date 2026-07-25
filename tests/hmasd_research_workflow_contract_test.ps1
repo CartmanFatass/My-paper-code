@@ -23,7 +23,7 @@ $agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'h
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedAgents = @(
     'hmasd-code-scout.md', 'hmasd-doc-auditor.md', 'hmasd-exp-recorder.md',
-    'hmasd-experiment-operator.md', 'hmasd-frontier-implementer.md',
+    'hmasd-experiment-operator.md',
     'hmasd-implementer.md', 'hmasd-monitor.md',
     'hmasd-patcher.md', 'hmasd-review-exchanger.md', 'hmasd-reviewer.md',
     'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
@@ -31,25 +31,11 @@ if (Compare-Object $expectedAgents $agentDefs) {
     throw "Unexpected subagent roster: $($agentDefs -join ',')"
 }
 
-# hmasd-frontier-implementer is the treatment arm of the tier comparison in
-# docs/project/IMPLEMENTER_TIER_TEST.md. That comparison is only valid while its
-# instructions are identical to the control's, and an edit to either side would
-# break it with no visible symptom -- so the parity is asserted here rather than
-# left as a note in the plan. If this fires, either mirror the edit or retire the
-# test arm; do not relax the assertion.
-$implLines = Get-Content -LiteralPath (Join-Path $repo '.claude/agents/hmasd-implementer.md')
-$frontierLines = Get-Content -LiteralPath (Join-Path $repo '.claude/agents/hmasd-frontier-implementer.md')
-$bodyHeading = '# HMASD Implementer'
-$implStart = [Array]::IndexOf($implLines, $bodyHeading)
-$frontierStart = [Array]::IndexOf($frontierLines, $bodyHeading)
-if ($implStart -lt 0 -or $frontierStart -lt 0) {
-    throw "Cannot locate '$bodyHeading' in both implementer definitions; parity is unverifiable"
-}
-$implBody = ($implLines[$implStart..($implLines.Count - 1)]) -join "`n"
-$frontierBody = ($frontierLines[$frontierStart..($frontierLines.Count - 1)]) -join "`n"
-if ($implBody -ne $frontierBody) {
-    throw 'hmasd-frontier-implementer instructions have drifted from hmasd-implementer; the tier comparison is invalid (docs/project/IMPLEMENTER_TIER_TEST.md)'
-}
+# The tier comparison is suspended and hmasd-frontier-implementer is retired
+# (docs/project/IMPLEMENTER_TIER_TEST.md). The body-parity assertion that guarded
+# it was removed together with the arm it guarded: it resolved the deleted file,
+# so leaving it would turn a passing gate into a hard failure. If the tier
+# experiment is ever reactivated, restore the arm and the assertion in one change.
 if (Test-Path (Join-Path $repo '.codex')) {
     throw 'The retired Codex agent runtime remains on the active line'
 }

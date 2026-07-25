@@ -1,17 +1,49 @@
 # What model, and how much planning, does this project's implementation need?
 
 ```text
-status=ACCEPTED
-accepted=2026-07-25
-accepted_by=user
-factor_a=model tier -- sonnet/high vs opus/high
-factor_b=brief density -- bounded brief vs detailed plan
-control=hmasd-implementer (sonnet / high)
-treatment=hmasd-frontier-implementer (opus / high)
-instructions=byte-identical below the frontmatter, asserted by contract test
-deliverable=one of all-sonnet | routed | all-opus, plus a routing predicate if routed
-compute_authorized=stage_1_pilot_only
+status=SUSPENDED
+suspended=2026-07-25
+suspended_by=user
+rounds_run=T1 only
+rounds_not_run=T2, T3, and all of Factor B
+outcome=default stays sonnet_high; budget moved to front-loaded contract grilling
+treatment_arm=RETIRED (hmasd-frontier-implementer deleted from the roster)
+evidence=docs/project/tier_test_evidence/
 ```
+
+## Suspension — read this before anything below
+
+The test ran **T1 only** and is suspended, not completed and not refuted.
+
+**Conclusion, deliberately narrow:**
+
+> On the observed contract-semantics failures there is no evidence that raising
+> the implementer tier substitutes for a front-loaded scientific grill. The
+> default stays `sonnet_high`.
+
+That is **not** "tier does not matter" and **not** "frontier implementers have no
+value". One task cannot support either. What T1 showed is narrower and more
+useful: both tiers built past the seeded contradiction, so the lever on *stopping*
+was the instruction rather than the model — and that instruction is now fixed and
+mirrored in `hmasd-implementer`.
+
+**Why T2, T3 and Factor B were not run.** T1 fired the case pre-registered as
+decisive, the instruction fix that followed is cheap and already applied, and the
+user redirected the budget to the contract grill, which addresses the stage where
+every defect in this project has actually originated. Running them would mostly
+buy confidence in a conclusion already acted on.
+
+**Reactivation conditions**, written down so suspension stays reversible:
+
+- contracts still producing implementation deviations after both grill gates;
+- failures dominated by complex code reasoning, cross-file work or test
+  construction rather than protected-semantics omission;
+- a repeatable tier difference observed on one frozen contract.
+
+**Retained evidence.** The two anonymized arm reports are in
+`docs/project/tier_test_evidence/`, moved into the repository from an ephemeral
+scratchpad so the conclusion stays auditable. The treatment arm's definition and
+its worktrees are deleted; the reports are the record.
 
 Pre-registered for the same reason the G20R2 contract is: a comparison whose
 outcome measure is chosen after seeing the outputs measures nothing. If we hold
