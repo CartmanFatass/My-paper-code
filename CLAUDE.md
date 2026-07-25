@@ -46,6 +46,7 @@ with an exact assignment.
 | `hmasd-review-exchanger` | haiku / high | byte-exact external review transport and archival |
 | `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
+| `hmasd-doc-auditor` | fable / high | adversarial audit of the governance surface itself |
 
 Tier follows the work, not importance: judgment about protected semantics goes
 to opus, bounded construction and design mapping to sonnet, and mechanical

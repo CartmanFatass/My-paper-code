@@ -22,10 +22,10 @@ if (Test-Path (Join-Path $repo '.agents/skills/hmasd-agile-research-development'
 $agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'hmasd-*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedAgents = @(
-    'hmasd-code-scout.md', 'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md',
-    'hmasd-implementer.md', 'hmasd-monitor.md', 'hmasd-patcher.md',
-    'hmasd-review-exchanger.md', 'hmasd-reviewer.md', 'hmasd-scout.md',
-    'hmasd-verifier.md') | Sort-Object
+    'hmasd-code-scout.md', 'hmasd-doc-auditor.md', 'hmasd-exp-recorder.md',
+    'hmasd-experiment-operator.md', 'hmasd-implementer.md', 'hmasd-monitor.md',
+    'hmasd-patcher.md', 'hmasd-review-exchanger.md', 'hmasd-reviewer.md',
+    'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
 if (Compare-Object $expectedAgents $agentDefs) {
     throw "Unexpected subagent roster: $($agentDefs -join ',')"
 }
