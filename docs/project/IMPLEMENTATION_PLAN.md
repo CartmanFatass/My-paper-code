@@ -1,4 +1,4 @@
-# G31 formal result, UAV source closure and G32 derivation plan
+# G32 formal result and Pro-assisted assertion-safety workflow transition
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -6,18 +6,18 @@
 ```text
 last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
-source_gate=CAPACITY_INDEPENDENT_CONTINUOUS_SERVICE_TOY
-active_implementation=G32_PM_ACCEPTED_FORMAL_READY
+active_source=USABLE_RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
+source_gate=FORMAL_CAPACITY_6_8_12_USABLE
+active_implementation=G32_FORMAL_ACCEPTED
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
-formal_iteration=23_complete
-iterations_remaining=14
-formal_compute=ITERATION_24_AUTHORIZED_PENDING_INTEGRATED_PRELAUNCH_RECORD
-algebra_status=G31_PAIRED_TOY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
+formal_iteration=24_complete
+iterations_remaining=13
+formal_compute=NONE_PENDING_WORKFLOW_REPLAN_AND_G33_EVIDENCE_CONTRACT
+algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_ITERATION_24
+next_boundary=PRO_ASSISTED_SCIENTIFIC_ASSERTION_DUAL_AUDIT_WORKFLOW_REPLAN
 ```
 
 ## Accepted active line
@@ -522,3 +522,22 @@ and mapping diagnostics, `operational_valid=true`, and the registered
 `NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE` branch. This accepts the
 formal path without consuming a conclusion-bearing iteration. Once this
 prelaunch record is integrated, formal iteration 24 is the only next action.
+
+Formal iteration 24 completed from source
+`fbce3609b11353634d1b4acb20cb27372de40bf2` and returns the registered
+`USABLE_RUNTIME_CAPACITY_G32` branch. All three stages are complete and
+operationally valid. The capacity-8 utility LCB is `0.95025`, capacity-6 LCB is
+`0.93757`, capacity-12 LCB is `0.94832`, held-out gain LCB is `0.36581`, the
+minimum held-out replicate is `0.94284`, and held-out stochastic mean is
+`0.87591`. Every cap8/cap12 common-active observation, value, action, reward
+and hidden mismatch is exactly zero, inactive padding is zero, and the mapping
+and lifecycle gate passes. This consumes iteration 24 and leaves 13 authorized
+conclusion-bearing iterations.
+
+G32 proves within-episode active-count change and cross-configuration
+checkpoint transport, but each environment instance still has one fixed tensor
+capacity. After the user-requested workflow replan, the smallest algorithmic
+counterexample is a zero-compute derivation for live capacity rebinding while a
+trajectory and lifecycle-owned recurrent state remain active. That G33 design
+will be the first candidate to use the new Pro-assisted design audit and, if
+implemented, the Pro code-to-science alignment audit before formal compute.

@@ -7,7 +7,7 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | usable paired-toy test version; cross-capacity and UAV transport unresolved | Formal G31 passes G17/G18. Both promoted UAV sources fail source identification before any learned model exists. | Separate same-capacity active-count support from same-checkpoint cross-capacity transport in a toy source. |
+| C-CONTINUOUS-ROSTER | usable paired-toy and cross-capacity test version; live width rebinding and UAV transport unresolved | Formal G31 passes G17/G18; formal G32 passes one-checkpoint capacity 6/8/12 transport. Both promoted UAV sources fail source identification before any learned model exists. | Derive live runtime-capacity rebinding inside one active trajectory, then promote only a source-identified candidate. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_ITERATION_23
-source_family=UAV_CHARGE_ROTATION_ROSTER_G2
-formal_disposition=SOURCE_NON_IDENTIFIABLE_UAV_CHARGE_ROTATION_G2
-latest_nonformal_disposition=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-next_action=CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_DERIVATION
+completed_action=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_ITERATION_24
+source_family=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
+formal_disposition=USABLE_RUNTIME_CAPACITY_G32
+latest_nonformal_disposition=NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE
+next_action=PRO_ASSISTED_SCIENTIFIC_ASSERTION_DUAL_AUDIT_WORKFLOW_REPLAN_THEN_LIVE_RUNTIME_CAPACITY_REBIND_G33_DERIVATION
 authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=23
-iterations_remaining=14
+conclusion_bearing_iterations_consumed=24
+iterations_remaining=13
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -68,3 +68,11 @@ but constructive absolute utility is far below feasibility and support fails.
 G31 UAV transport therefore remains unresolved. The active boundary returns to
 toy-first discovery and isolates same-checkpoint transport across configured
 maximum capacities from the already-proved within-capacity active-count changes.
+Formal G32 now closes that exact cross-capacity gap: one capacity-8-trained
+checkpoint remains usable at capacities 6 and 12 with exact common-active
+padding invariance and no evaluation optimizer steps. The remaining runtime
+counterexample is narrower: changing tensor capacity while the same trajectory
+and lifecycle state remain active. Before G33 is frozen or implemented, the
+workflow is being revised to use External Pro for a scientific design audit and
+a later code-to-science alignment audit, while Project Manager remains the only
+acceptance owner.

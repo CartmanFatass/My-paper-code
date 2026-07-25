@@ -80,9 +80,9 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported for the registered paired immediate and delayed toy sources;
-  within-capacity roster variation is proved, cross-capacity checkpoint
-  transport is unresolved.
+- Status: supported for the registered paired immediate and delayed toy sources,
+  within-capacity roster variation, and same-checkpoint transport across
+  configured capacities 6, 8 and 12.
 - Claim: a capacity-generic active-set/lifecycle recurrent policy with
   active-fraction autoregressive prefixes can learn continuous service control
   across within-episode roster changes when current demand has a direct actor
@@ -93,6 +93,11 @@ the Project Manager-accepted CDC state.
 - Delayed evidence: formal G31 preserves G17 while passing G18 utility, gain,
   spike allocation, rotation and replicate stability with a detached realized
   future-tail target and direction-balanced actor updates.
+- Cross-capacity evidence: formal G32 strict-loads the same capacity-8-trained
+  checkpoint at capacities 6, 8 and 12 with zero evaluation optimizer steps.
+  Utility LCBs are `0.95025`, `0.93757` and `0.94832`; held-out gain LCB is
+  `0.36581`, minimum held-out replicate is `0.94284`, held-out stochastic mean
+  is `0.87591`, and the exact cap8/cap12 padding oracle passes every field.
 - Necessary scope correction: this establishes one paired toy family, not UAV
   physics, arbitrary stochastic horizons or individual causal attribution of
   later team reward.
@@ -101,14 +106,13 @@ the Project Manager-accepted CDC state.
   rotation is load-bearing relative to no rotation, but its constructive
   controller is far below the frozen absolute feasibility floor. Neither run
   confirms nor rejects G31 transport.
-- Strongest next counterexample: the current continuous policy handles changing
-  active count only inside a configured capacity. A raw padded mask in the
-  critic and capacity-normalized environment coordinates may bind checkpoint
-  shape or behavior to that maximum slot count.
-- Separating evidence: first derive and, only if necessary, implement one
-  capacity-invariant critic/input boundary; then use the same checkpoint across
-  different maximum capacities and within-episode roster processes in a toy
-  source without UAV fields.
+- Strongest next counterexample: G32 changes active roster size inside an
+  episode and reuses one checkpoint across separate fixed-capacity environment
+  instances, but it does not resize the runtime tensor capacity while one
+  trajectory and lifecycle-owned recurrent state are in flight.
+- Separating evidence: derive a live capacity-rebinding state/packing contract
+  that carries common member hidden state across a width change without
+  checkpoint reload, optimizer steps, key reassignment or task-specific fields.
 
 ## C-EHC — Event-held temporal state
 
