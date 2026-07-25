@@ -95,6 +95,9 @@ runtime/model-catalog-v2-workaround.json
 !memory/LTM/external_reviews/DIALOGUE_ARCHIVE.md
 *.txt
 !/requirements_server.txt
+# Byte-exact paste artifacts carried to the reviewer (fence, continuation turns).
+# Must follow the bare *.txt rule above -- the last matching pattern wins.
+!docs/external-review/rounds/**/*.txt
 !/requirements_sb3.txt
 !scripts/r27_g2_runtime_package_manifest.txt
 *.tar

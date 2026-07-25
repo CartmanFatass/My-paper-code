@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260724_g20_credit_rule_zero_fixed_point_r2
+stage_commit=3ec4a6500a26d5141715861f4b1f191ac141b6fb
+question=docs/external-review/rounds/20260724_g20_credit_rule_zero_fixed_point_r2/20_PRO_OPEN_QUESTION.md
+instruction=The preceding truncated CURRENT_REVIEW_ASSIGNMENT fragments were a transport fault on our side, not assignments; disregard them entirely. This message is the complete and only assignment for this round. Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit.

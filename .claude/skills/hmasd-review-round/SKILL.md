@@ -62,17 +62,41 @@ assignment, and cost a round.
 contenteditable `DIV`, not a form control, and returns
 `Element type "DIV" is not a supported form input`.
 
-The mechanism that works:
+#### Primary mechanism — paste from a committed artifact
 
-1. click the composer;
-2. `type` one line at a time, with **no `\n` anywhere in the text**;
-3. between lines, press `shift+Return` — a soft line break that does not submit;
-4. screenshot and read the composer back before sending, confirming the whole
-   message is present exactly once;
+Never compose a multi-line message keystroke by keystroke. Write it to a file in
+the round directory first, then paste it in one operation:
+
+1. author the exact message as a round artifact — `10_FENCE.txt` for the fence,
+   `11_CONTINUATION_<n>.txt` for a convergence or transport-repair turn;
+2. load it onto the clipboard verbatim:
+
+   ```powershell
+   $src = Get-Content -Raw -Encoding UTF8 <artifact-path>
+   Set-Clipboard -Value $src
+   ($src -ceq (Get-Clipboard -Raw))   # must print True before continuing
+   ```
+
+3. click the composer and press `ctrl+v` — a paste inserts the whole text at
+   once and generates no Enter keypress;
+4. screenshot and read the composer back, confirming the whole message is
+   present exactly once and not doubled;
 5. submit **once**, then confirm exactly one new user turn appeared.
 
-Batch the type/`shift+Return` sequence through `browser_batch` so ordering is
-deterministic; concurrent single calls can interleave and scramble the text.
+This is more stable than typing and it makes the sent text an auditable
+byte-exact artifact rather than a reconstruction, which is what "submit
+verbatim" actually requires. The artifact is committed with the round, so what
+was sent is recoverable from Git instead of from a browser transcript.
+
+Note that `Set-Clipboard` overwrites the user's clipboard.
+
+#### Fallback — soft line breaks
+
+If the clipboard is unavailable, `type` one line at a time with **no `\n`
+anywhere in the text**, pressing `shift+Return` between lines — a soft line break
+that does not submit — then verify and submit as above. Drive the sequence
+through `browser_batch` so ordering is deterministic; concurrent single calls can
+interleave and scramble the text.
 
 If a submission appears not to have landed, snapshot before retyping. The text is
 usually already there and the UI simply has not repainted — retyping on an
