@@ -1,6 +1,6 @@
 # UAV temporary service loss G1
 
-Status: frozen executable definition; prelaunch accepted for a fresh control-first formal run
+Status: closed formal source non-identifiable; zero learned training
 
 Scientific authority:
 `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
@@ -259,3 +259,15 @@ The complete UAV G1 core/runner proof set passes (`41 passed`) on the registered
 CPU, one-thread runtime. The next action is a fresh formal control-first run.
 G31 UAV adaptation is deferred until this source has a valid registered
 disposition; no learned algorithm may rescue a failed source predicate.
+
+## Formal disposition
+
+The complete formal source screen selects
+`SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1`. Constructive `J_event` CI95 is
+`[0.8481144,0.8566158,0.8652401]`, below the `0.90` feasibility floor.
+Constructive-minus-no-reallocation CI95 is
+`[-0.1181600,-0.1058924,-0.0920913]`, entirely opposite the required
+strictly-positive `0.10` margin. Source law and pairing pass, but both
+behavioral source predicates fail. No model, optimizer update or checkpoint
+exists. This exact source is closed without rerun, tuning, renaming or rescue;
+it provides no evidence for or against G31 UAV transport.

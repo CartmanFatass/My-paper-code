@@ -7,13 +7,13 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | usable paired-toy test version | Formal G31 preserves G17 and passes G18 delayed utility, spike allocation, rotation and stability across fresh seeds. | Promote the frozen G31 rule to one proof-sized UAV package; do not claim physical transport yet. |
+| C-CONTINUOUS-ROSTER | usable paired-toy test version; UAV transport unresolved | Formal G31 passes G17/G18. UAV temporary-loss G1 fails source identification before any learned model exists. | Use an independently identifiable UAV source; charge-rotation G2 is next. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
 | C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | supported on paired toys | Formal G31 passes every frozen G17/G18 gate; spike utility LCB is `0.95969` with exact replay and terminal tails. | Test transport under UAV channel/motion/charging/loss dynamics without environment-specific credit inputs. |
-| C-BENCH | useful-effect source identified | G3 and G4 controls, demand ledgers, constructive oracle and audits pass; the source is not the registered validity blocker. | Preserve as a reference; do not rerun closed G3/G4 packages. |
+| C-CREDIT | supported on paired toys; UAV unresolved | Formal G31 passes every frozen G17/G18 gate; UAV G1 cannot test it because the source fails before training. | Test only after charge-rotation G2 passes its independent source controls. |
+| C-BENCH | source-family dependent | Useful-effect G3/G4 is identified, while UAV temporary-loss G1 has infeasible constructive control and a negative load-bearing interval. | Close exact G1; require source-first pruning for G2 and later UAV sources. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
 | C-MEASURE | retained with label correction | Two G2 replicates used inverted mark labels while every behavioral consequence remained perfect. | Use within-replicate permutation-invariant mark mediation; never raw signed accuracy as a future gate. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_ITERATION_21
-source_family=paired_immediate_and_delayed_dynamic_roster_toys
-formal_disposition=USABLE_RETURN_TO_GO_DIRECTION_BALANCED_G31
+completed_action=UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_ITERATION_22
+source_family=UAV_TEMPORARY_SERVICE_LOSS_G1
+formal_disposition=SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1
 latest_nonformal_disposition=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-next_action=RETURN_TO_GO_DIRECTION_BALANCED_G31_UAV_PROMOTION_DEFINITION
+next_action=UAV_CHARGE_ROTATION_ROSTER_G2_EXECUTABLE_REALIZATION
 authorization_status=active_ten_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=21
-iterations_remaining=6
+conclusion_bearing_iterations_consumed=22
+iterations_remaining=5
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -60,4 +60,7 @@ collapses delayed access. Formal G30 preserves G17 and broad G18 utility, but
 does not stabilize spike allocation across seeds. Formal G31 replaces the
 learned one-step successor bootstrap with a realized future tail and passes the
 complete paired toy contract across fresh seeds. It is the first candidate in
-this chain eligible for proof-sized UAV promotion; no UAV result exists yet.
+this chain eligible for proof-sized UAV promotion. UAV temporary-loss G1 then
+closes before learned training because its constructive control is infeasible
+and worse than no reallocation. This leaves G31 UAV transport unresolved and
+moves the active boundary to the independently frozen charge-rotation G2 source.

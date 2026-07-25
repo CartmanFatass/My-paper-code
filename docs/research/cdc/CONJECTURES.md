@@ -94,11 +94,16 @@ the Project Manager-accepted CDC state.
 - Necessary scope correction: this establishes one paired toy family, not UAV
   physics, arbitrary stochastic horizons or individual causal attribution of
   later team reward.
+- UAV G1 evidence: the temporary-service-loss source closes before learned
+  training as `SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1`; constructive utility
+  is below feasibility and its advantage interval is entirely negative. This
+  neither confirms nor rejects G31 transport.
 - Strongest next counterexample: the same credit rule may become too noisy or
-  misattribute outcomes when UAV channel, motion, charging and temporary loss
-  dynamics jointly determine the future reward.
-- Separating evidence: one proof-sized UAV promotion package using the frozen
-  G31 rule, without adding environment fields to intrinsic credit.
+  misattribute outcomes when UAV channel, motion and endogenous charging
+  dynamics jointly determine future reward.
+- Separating evidence: the independently frozen charge-rotation G2 source must
+  first pass its controls, then a proof-sized UAV package may use the frozen
+  G31 rule without environment fields in intrinsic credit.
 
 ## C-EHC — Event-held temporal state
 
@@ -191,6 +196,10 @@ the Project Manager-accepted CDC state.
 - Current correction: G3 now uses demand-served realized effects and passes its
   source controls. The remaining ambiguity is algorithmic access stability, not
   source identifiability or label-diversity reward.
+- UAV correction: temporary-service-loss G1 fails both constructive feasibility
+  and load-bearing separation with zero learned training. It is a benchmark
+  failure, not an algorithm failure, and cannot be rescued by lower-precedence
+  learner diagnostics.
 
 ## C-COORD — Complementary coordination is the load-bearing capability
 

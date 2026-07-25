@@ -1,4 +1,4 @@
-# G31 formal result and UAV source-closure plan
+# G31 formal result and UAV charge-rotation realization plan
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
@@ -6,18 +6,18 @@
 ```text
 last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=UAV_TEMPORARY_SERVICE_LOSS_G1_CONTROL_FIRST
-source_gate=FROZEN_UAV_G1_SOURCE_IDENTIFICATION
-active_implementation=RETURN_TO_GO_DIRECTION_BALANCED_G31_PLUS_UAV_G1_ROUTING_REALIZATION
+active_source=UAV_CHARGE_ROTATION_ROSTER_G2
+source_gate=FROZEN_G2_CHARGE_ROTATION_IDENTIFICATION
+active_implementation=UAV_CHARGE_ROTATION_ROSTER_G2_EXECUTABLE_REALIZATION
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
-formal_iteration=21_complete
-iterations_remaining=6
-formal_compute=UAV_G1_ITERATION_22_AUTHORIZED_PENDING_INTEGRATED_SOURCE
-algebra_status=FORMAL_USABLE_PAIRED_TOY
+formal_iteration=22_complete
+iterations_remaining=5
+formal_compute=G2_UNAUTHORIZED_UNTIL_PM_NONFORMAL_ACCEPTANCE
+algebra_status=G31_PAIRED_TOY_USABLE_UAV_G1_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_SOURCE_CLOSURE_ITERATION_22
+next_boundary=UAV_CHARGE_ROTATION_ROSTER_G2_EXECUTABLE_REALIZATION
 ```
 
 ## Accepted active line
@@ -447,3 +447,14 @@ unchanged. Forty-one focused core/runner checks pass. Launch one fresh
 control-first formal iteration 22; if source identification fails, accept the
 registered second branch with zero learned training and do not use G31 to
 rescue it.
+
+Formal UAV G1 closes exactly at that registered second branch. The complete
+three-replicate control screen has constructive `J_event` CI95
+`[0.84811,0.85662,0.86524]` and constructive-minus-no-reallocation CI95
+`[-0.11816,-0.10589,-0.09209]`; both source predicates fail. The validator and
+independent first-match recomputation pass with 192 chunks, 6,144 rows, zero
+training rows and zero checkpoints. Close G1 without rescue. The valid
+non-`INVALID` terminal satisfies the frozen prerequisite for UAV charge-rotation
+G2. Implement that design as the next active line, retain source-first pruning,
+and require focused tests plus one bounded nonformal CPU exercise before any
+formal G2 launch.

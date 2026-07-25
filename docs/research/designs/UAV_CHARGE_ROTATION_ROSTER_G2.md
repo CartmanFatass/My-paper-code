@@ -1,5 +1,7 @@
 # UAV charge-rotation roster G2 executable design
 
+Status: frozen source contract; executable realization active after valid G1 terminal
+
 ## Scientific question
 
 Can explicit service-lifecycle ownership improve safe charging rotation and
@@ -134,7 +136,7 @@ required absent a concrete shared-surface failure.
 ## Admission boundary
 
 ```text
-implementation_prerequisite=valid_non_INVALID_G1_terminal
+implementation_prerequisite=satisfied_by_SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G1
 formal_prerequisite=accepted_G2_implementation_and_nonformal_evidence
 iteration_cost_before_valid_formal_result=0
 ```
