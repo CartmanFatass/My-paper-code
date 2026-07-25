@@ -24,6 +24,8 @@ foreach ($required in @(
     'An accepted matching fence is never resubmitted',
     'two stable snapshots',
     'at least three seconds',
+    'Never activate `Answer now`',
+    'Only Pro''s natural completion is admissible',
     'transport diagnostic',
     'materialize them from `stage_commit`',
     'not from the current working tree',
@@ -47,6 +49,8 @@ foreach ($required in @(
     'PROJECT-MANAGER-DIRECT',
     'active Project Manager',
     'Never submit or resubmit',
+    'Never click, invoke, or script Answer now',
+    'Pro has not naturally completed',
     'contract-test-heartbeat',
     'delete',
     'heartbeat and confirm absence')) {

@@ -45,6 +45,8 @@ leave this single heartbeat active. A home-page redirect triggers registered
 conversation discovery, not blocking. Identify the assistant message after the
 matching fence and use two stable text snapshots plus generation-control state;
 a Thinking label alone is not pending, while an active Stop answering control is.
+Never click, invoke, or script Answer now (or a localized equivalent); its
+presence means Pro has not naturally completed and the heartbeat must keep waiting.
 If a completed message explicitly reports missing question-listed evidence,
 treat it as a transport diagnostic and do not archive it as scientific raw.
 Leave the round active for Project Manager evidence-access recovery under the same
