@@ -25,6 +25,7 @@ foreach ($required in @(
     'two stable snapshots',
     'at least three seconds',
     'Never activate `Answer now`',
+    'its presence or absence is neutral',
     'Only Pro''s natural completion is admissible',
     'transport diagnostic',
     'materialize them from `stage_commit`',
@@ -50,7 +51,7 @@ foreach ($required in @(
     'active Project Manager',
     'Never submit or resubmit',
     'Never click, invoke, or script Answer now',
-    'Pro has not naturally completed',
+    'presence or absence is neutral',
     'contract-test-heartbeat',
     'delete',
     'heartbeat and confirm absence')) {

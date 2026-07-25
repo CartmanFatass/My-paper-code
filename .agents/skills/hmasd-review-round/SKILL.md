@@ -50,7 +50,7 @@ visible or the page title looks familiar.
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes, `Stop generating`/`Stop answering` is active, or `Answer now` (including a localized equivalent) is offered, remain pending. Never activate `Answer now`. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, `Answer now`, retry, error or continue control. |
+| `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes or `Stop generating`/`Stop answering` is active, remain pending. Never activate `Answer now` (including a localized equivalent), but do not use its presence or absence as response state. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, retry, error or continue control. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | Write exact visible text to raw, reread for exact equality, write provenance intake, and confirm heartbeat absence. | Project Manager holds exact raw and proceeds to its separate scientific reconciliation. |
 
@@ -87,9 +87,10 @@ Do not create a Monitor or another transport task.
 
 `Answer now` is not a completion or recovery control. Never click it, invoke it
 through keyboard or script, or use a localized equivalent to satisfy a timeout.
-It asks Pro to stop extended reasoning and answer from the partial state. Its
-presence therefore keeps the round pending even when the currently visible
-assistant text is unchanged. Only Pro's natural completion is admissible.
+It asks Pro to stop extended reasoning and answer from the partial state.
+Because the UI may offer it throughout normal reasoning, its presence or absence is neutral:
+neither makes a response pending nor proves completion.
+Only Pro's natural completion is admissible.
 
 ### Conversation discovery ladder
 
@@ -133,9 +134,8 @@ Require two stable snapshots from distinct inspections separated by at least thr
   stable snapshots from distinct inspections;
 - the second snapshot adds no text and exposes no active `Stop generating` or
   `Stop answering` or cancel-generation control for that turn;
-- no `Answer now` control, including a localized equivalent, is present; it is
-  never activated and its presence proves that natural completion has not yet
-  been observed;
+- `Answer now`, including a localized equivalent, is never activated; its
+  presence or absence is ignored rather than used as completion evidence;
 - no response error, `Retry`, or continue-generation control exists for the
   current turn; partial assistant text plus such a control is not complete; and
 - the response belongs to the exact matching fence rather than an earlier
@@ -150,7 +150,8 @@ progress.
 Elapsed time, a heartbeat deadline, a long thinking phase or partial readable
 text never authorizes `Answer now`. Continue waiting for natural completion or,
 after safe recovery is exhausted, report a transport blocker without forcing a
-shortened answer.
+shortened answer. Do not keep a naturally completed response pending merely
+because `Answer now` remains visible.
 
 When the UI is ambiguous, inspect button labels, disabled state, message roles
 and one more stable snapshot before deciding. If an explicit response error has
