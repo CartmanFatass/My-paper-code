@@ -96,6 +96,25 @@ Stage A separates three cases: a source locally action-insensitive on the
 audited support; a source with a small but estimable marginal effect; and an
 audit too noisy to decide.
 
+### The probe distribution is the C1 action support, not the full grid
+
+`E_{h,a}` is taken over the **C1 action support**, which is the *active* token
+set — the same set the residual is centered over. An inactive routing position
+carries no action into the environment, so `A*(h,a) = 0` there structurally, by
+masking rather than by any property of the source.
+
+Audit probe points must therefore be drawn only from `(t, position)` pairs where
+that routing position is **active at that time**. Drawing uniformly from the
+full `(horizon, capacity)` grid is a contract violation with a known sign: it
+mixes structural zeros into the expectation, deflates `S_source`, and biases
+Stage A toward `SOURCE_LOCAL_ACTION_EFFECT_NOT_IDENTIFIED` — a false negative on
+identification, reported as a property of the source.
+
+This is not hypothetical for the registered pair. G18 has `CAPACITY = 6` and
+`HORIZON = 12` with a temporary-leave window at `t in [6, 10)`, so a large
+fraction of the 72 grid cells hold no active member. A uniform-grid probe
+distribution spends much of its budget measuring masking.
+
 ### P2 authority check
 
 Let `s_res(h,a)` be **the score or Jacobian** seen by the centered residual
@@ -329,11 +348,21 @@ epsilon_audit = upper tail of |d| / sqrt(2)
 
 converts that difference back to the resolution of a single full-size estimate.
 
-Three conditions make the number meaningful:
+Four conditions make the number meaningful:
 
-- the null must run at the **configured audit scale** (`AUDIT_EPISODES`, `K=8`,
-  the registered suffix replicate count), because resolution is sample-count
-  dependent and a value measured at another scale does not transfer;
+- the null must run at the **configured per-estimate Monte Carlo budget**
+  (`K = 8` and the registered suffix replicate count), because that budget is
+  what sets the resolution of a single `Ahat*` and a value measured under a
+  different budget does not transfer. The **number of calibration points is not
+  part of that budget** and must be raised well above the screen's own audit
+  point count: those points do not change the resolution, they are draws *from*
+  the resolution distribution, and estimating a 95th-percentile tail from the
+  screen's ~24 points registers noise rather than a floor. This distinction was
+  missed in the first statement of this rule, which conflated the two;
+- the null must be drawn on the **C1 action support** defined above, since a
+  probe on an inactive position returns an exact zero that describes masking
+  rather than estimator resolution, and a calibration set half-full of such
+  zeros collapses the tail onto a single extreme point;
 - it is measured **per source**, since G17 and G18 have different return scales;
 - the resulting value is written back into this section as a frozen constant
   before any screen run, and the screen must pass it **explicitly** — the module

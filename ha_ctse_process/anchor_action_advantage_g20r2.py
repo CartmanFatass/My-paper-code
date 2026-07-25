@@ -62,24 +62,20 @@ BASELINE_SAMPLES_K = 8
 
 # Design section 2 defines `epsilon_audit` as "only the numerical /
 # paired-rollout resolution floor" -- explicitly *not* an effect-size
-# threshold -- but section 11's screen-constants block does not freeze a
-# concrete number for it (unlike `baseline_samples_K`). That is a real gap in
-# the frozen contract: section 11 says "Identification constants ... are new"
-# but only enumerates seeds and K. Resolved here as the smallest reasonable
-# default, analogous to G20R's own `REPLAY_TOLERANCE = 1e-6` pattern but
-# scaled up because Stage A's quantity is a *discounted, horizon-summed*
-# return contrast (not a single raw float), so float32 accumulation error is
-# larger than a single-op epsilon. A real screen registration would need to
-# derive this from measured replay precision before any run; no run is
-# authorized by this task, so this default is exercised only by this module's
-# own unit tests on synthetic fixtures, never against real screen data.
-EPSILON_AUDIT = 1e-4
+# threshold. Section 11 ("`epsilon_audit` is not yet registered -- the screen
+# is withheld") freezes no module default for it and requires that a missing
+# registration fail closed rather than silently substitute one: `epsilon_audit`
+# is a measured property of the audit estimator (via the registered
+# replicate-split null calibration, `scripts/calibrate_epsilon_audit_g20r2.py`),
+# never a chosen constant, so `stage_a_source_effect` below takes it as a
+# required keyword argument with no default -- omitting it is a `TypeError`.
 
 # Numeric tolerance for the P2 authority check's literal "|g*_res| = 0" test
 # (design section 2). Floating point can never produce an exact zero from a
 # nonzero-but-tiny true value and vice versa, so a tolerance is required; this
-# one is deliberately much tighter than EPSILON_AUDIT because it is testing
-# exact cancellation (centering orthogonality), not measurement resolution.
+# one is deliberately much tighter than any registered `epsilon_audit` value
+# because it is testing exact cancellation (centering orthogonality), not
+# measurement resolution.
 P2_AUTHORITY_ZERO_TOLERANCE = 1e-8
 
 
@@ -1332,7 +1328,7 @@ def stage_a_source_effect(
     oracle_advantage_clusters: Sequence[torch.Tensor],
     *,
     generator: torch.Generator,
-    epsilon_audit: float = EPSILON_AUDIT,
+    epsilon_audit: float,
     num_resamples: int = 2000,
 ) -> dict[str, Any]:
     """``S_source = E[(A*(h,a))^2]``; pass iff ``LCB95(S_source) > epsilon_audit^2``.

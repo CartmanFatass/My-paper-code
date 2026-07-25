@@ -106,6 +106,29 @@ SEEDS = {
 }
 BASELINE_SAMPLES_K_CONFIGURED = BASELINE_SAMPLES_K  # design section 11: 8
 
+# Design section 11 ("`epsilon_audit` is not yet registered -- the screen is
+# withheld"): `epsilon_audit` is a measured property of the audit estimator
+# per source, registered here only after
+# `scripts/calibrate_epsilon_audit_g20r2.py` (the frozen replicate-split null
+# calibration) has produced it. This block is intentionally empty until a
+# Project Manager writes a measured value in -- an unregistered source must
+# raise, never fall back to a placeholder, so the screen fails closed rather
+# than silently gating identification on an unregistered number.
+EPSILON_AUDIT_REGISTERED: dict[str, float] = {}
+
+
+def _registered_epsilon_audit(source: str) -> float:
+    if source not in EPSILON_AUDIT_REGISTERED:
+        raise RuntimeError(
+            f"G20R2 epsilon_audit is not registered for source={source!r} "
+            "(design section 11, 'epsilon_audit is not yet registered -- the "
+            "screen is withheld'). Run scripts/calibrate_epsilon_audit_g20r2.py "
+            "at the configured audit scale and register its per-source result "
+            "in EPSILON_AUDIT_REGISTERED before running this screen."
+        )
+    return float(EPSILON_AUDIT_REGISTERED[source])
+
+
 REPLAY_TOLERANCE = 1e-6
 G17_UTILITY_FLOOR = 0.90
 G17_GAIN_FLOOR = 0.10
@@ -884,7 +907,11 @@ def run_identification_stages(
     generator = torch.Generator()
     generator.manual_seed(int(seed))
 
-    stage_a = stage_a_source_effect(clusters["oracle"], generator=generator)
+    stage_a = stage_a_source_effect(
+        clusters["oracle"],
+        generator=generator,
+        epsilon_audit=_registered_epsilon_audit(source),
+    )
     p2 = stage_a_p2_authority_check(clusters["oracle"], clusters["score"])
 
     n = len(clusters["oracle"])
