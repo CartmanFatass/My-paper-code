@@ -91,3 +91,73 @@ The prohibition is now explicit in `.claude/agents/hmasd-review-exchanger.md`
 and in the skill's completion-detection section. If reconciliation finds a gap
 attributable to the curtailment, the remedy is a convergence turn inside this
 same accepted fence, never a second fence.
+
+## Convergence turn archival — 11_CONTINUATION_1.txt
+
+**Nature of this turn**: A convergence turn inside the already-accepted fence
+for this round (same repository, branch, round, stage_commit, question as the
+original fence; no fence identity block, no resubmission of the fence). The
+Project Manager authored `11_CONTINUATION_1.txt` and sent it directly as a
+transport-repair/convergence follow-up after the round's earlier transport
+curtailed the reviewer's extended thinking via `Answer now`. This exchanger
+task did not send it; it was already a submitted user turn on arrival and
+archival-only was in scope.
+
+**Reviewer turn found**: The assistant turn immediately following the
+continuation, headed "Reconsidered scientific ruling — G20R identification
+floor", stage line `52d89863f02c9a86520952d086a26b58ce8caf3d`, generation
+label `Worked for 15m 46s` (compare: the original curtailed answer for this
+round ran `7m 19s`; its own predecessor round ran `18m 14s`). This is longer
+than the curtailed answer and is not itself evidence of a second curtailment.
+
+**Completion evidence observed**:
+- Two snapshots of the fully scrolled-to-bottom conversation, taken
+  approximately 4 seconds apart, showed identical stable text ending in
+  "This ruling authorizes neither implementation nor nonformal or formal
+  compute." followed by a `Sources` control and the standard response-action
+  row (copy / good / bad / share / retry / more).
+- No active `Stop answering` / `Stop generating` control, no `Retry` control,
+  no continuation-generation control was present for this turn at either
+  snapshot.
+- No curtailment control (`Answer now` or equivalent) was clicked at any point
+  during this task's observation of this turn.
+- The captured text substantively engages the continuation's five lettered
+  asks (a-e) plus the original three questions, and is not a bare progress
+  trace; its size (~34.6 KB) is consistent with a scoped scientific answer on
+  this line, not a trace.
+
+**Capture method**: The ChatGPT "Copy response" control for this specific
+assistant turn was used to place its exact text on the clipboard (a first
+click attempt did not update the clipboard — the clipboard still held
+`11_CONTINUATION_1.txt` content, apparently unwritten by that click; a second,
+coordinate-targeted click on the same control produced a 34636-character
+clipboard payload beginning "# Reconsidered scientific ruling — G20R
+identification floor" and ending "**This ruling authorizes neither
+implementation nor nonformal or formal compute.**", matching the on-screen
+start and end of the turn).
+
+**Archive path**: `docs/external-review/rounds/20260724_g20r_identification_floor/22_PRO_CONVERGENCE.md`
+- Content: exactly the clipboard capture described above (this task's first
+  archival write to this path; it did not previously exist).
+- Reread/byte-equality: `cmp` between the scratch clipboard-capture file and
+  the archived file reported no differences (`BYTE_EQUAL`). This confirms the
+  archived file matches the bytes captured from the clipboard; it does not by
+  itself prove the clipboard capture matched every rendered glyph on screen
+  (e.g. LaTeX-rendered math is reproduced by ChatGPT's copy control in a
+  markdown/plain-text rendering, not as a pixel-identical transcript). The
+  visible prose start and end, and the section structure visible during
+  on-screen scrolling, were manually cross-checked against this capture and
+  matched.
+- No convergence turn prior to `11_CONTINUATION_1.txt` existed in this file
+  before this task; only the one exchange (Project-Manager continuation +
+  reviewer's reconsidered ruling) is archived here.
+
+**Evidence-access repair continuation**: None was sent by this task. The
+reviewer's turn did not report missing evidence or repository access; no
+`RECOVER_EVIDENCE_ACCESS` action was needed or taken.
+
+**Not archived / not acted on**: The reviewer's answer's content (its
+scientific conclusions, mathematical definitions, and stated retractions/
+sharpenings) was read only to the extent necessary to confirm it was a
+complete answer rather than a progress trace; this task did not summarize,
+characterize, or act on that content beyond archival.
