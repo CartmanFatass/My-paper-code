@@ -6,31 +6,53 @@ Read `AGENTS.md`, then this file, then `docs/project/RESEARCH_GOAL.md`.
 
 ## Next action, exactly
 
-**Build D7.2B: a standalone-lane config, then the event ledger, then run it.**
-
-The `keep_prob` capture is committed (`e23e48f`) and the three gates that made
-D7.2B unrunnable are unbundled and committed. Nothing is blocking.
+**Wait on the D7.2B competence run, then audit its checkpoint.**
 
 ```text
-docs/research/designs/D7_KEEP_PROB_CAPTURE_SPEC.md   frozen spec
-docs/research/designs/D7_R30_RENEWAL_DIAGNOSTIC.md   what D7 is, and the pass conditions
-tests/ha_ctse_process_d7_toy_executor_gate_test.py   what the unbundling may and may not do
+run    logs/nonformal_d7_2b_toy_competence_20260725_0931948_pm1
+audit  C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/audit_d7_2b_toy_positive_control.py \
+         --checkpoint <run>/standalone_process_core_final.pt --out <run>/audit
 ```
 
-The config does not exist yet. `config_r39_native_hmasd_toy.py` is the *other*
-lane — `algorithm=hmasd_original`, `r39_native_toy_*` flags — and is not it. The
-standalone lane is driven off a config module read by `ha_ctse_process/train.py`,
-and D7.2B needs: `high_controller=r30_fixed_clock_ar_edit`,
-`r39_native_categorical_edit=False` (learned keep is the carrier),
-`r39_toy_fixed_skill_primitives=True` with `axis4_xy_v1`, `n_z=4`, 2D continuous
-actions, `scenario=two_timescale_role_free_actions`, `skill_interval=r39_toy_k0=5`,
-`device=cpu`.
+1,000 updates, 3 epochs, lr 1e-3 — 3,000 high-level optimizer steps against the
+200 the screen had. **Read condition A first.** If A passes, B and C are the
+scientific readings and their thresholds are frozen. If A is still flat, the
+policy has had a fair budget and the next candidate is credit, not budget — that
+is a scientific direction question and belongs to a Pro round, not to another
+tuning pass.
 
-Pass conditions A/B/C are fixed in the design and **must not be renegotiated after
-seeing output**.
+```text
+docs/research/designs/D7_2B_TOY_POSITIVE_CONTROL_REALIZATION.md   the frozen realization
+docs/research/designs/D7_R30_RENEWAL_DIAGNOSTIC.md               D7, and pass conditions A/B/C
+docs/research/designs/D0_CARRIER_AND_ESTIMAND.md                 estimands, clocks, normalization
+```
 
-**Do not re-escalate the executor gate.** It is ruled, in the design doc and in
-`AGENTS.md`, *Implementing a ruling is not making one*.
+Pass conditions A/B/C **must not be renegotiated after seeing output**. Optimizer
+budget is not a pass condition and may be raised; thresholds may not.
+
+**Do not re-escalate the four unbundled gates.** They are ruled, in the design doc
+and in `AGENTS.md`, *Implementing a ruling is not making one*. Do not re-pin
+multi-epoch high PPO either — that pin was mine, it was measured to be blocking
+competence rather than protecting credit, and the protection that matters is
+structural: `block_return` requires `force_refresh_every_check`, where KEEP is not
+a decision.
+
+## What is settled, so it is not re-litigated
+
+- **No-state-access control** — complete, `NO_ACCESS` by derivation. Team reward
+  plateaued at `0.475`; reward is `0.5*(slow+fast)`, so the matches sum to `0.95`
+  where A needs `1.5`.
+- **Direct-state screen** — complete and flat, `0.443 -> 0.449` over 200 updates.
+  The policy never left its initialization: at update 150 `keep_prob` was `0.599`
+  against a `0.6` init and skill entropy `1.096` against a `ln 3 = 1.0986`
+  maximum, with `high_grad_norm` between `0.26` and `0.48`. Nonzero gradient, no
+  behaviour. Not a credit or information failure.
+- **`B_H`** — measured before the audit, `B_30 = 10.0`, `B_5 = 1.875`. Must be
+  averaged over windows starting at every check boundary; a step-0 window gives
+  `B_5 = 0` exactly and divides condition B by zero.
+- **State liveness** — verified in the skill logits. Do not probe it by comparing
+  realized tokens: `keep_head.weight` is zero-initialized, so both agents
+  deterministically KEEP at entry and tokens look identical either way.
 
 ## Where D7 stands
 
