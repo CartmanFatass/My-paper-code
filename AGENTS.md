@@ -212,6 +212,19 @@ and do not shrink the run to fit. Schedule a wakeup **one hour** out and re-chec
 The machine is shared with another line, so busy is an ordinary state rather than
 a blocker.
 
+**First check whose load it is.** The script counts heavy Python processes and
+cannot tell another line's run from one this conversation just launched, so it
+reports `COMPUTE_BUSY` for our own in-flight work too. Read the reported
+`heavy_pids` before acting:
+
+- **another line's** — the rule above applies; wake in an hour and re-check.
+- **our own run** — the wakeup is wrong. That run already reports completion, and
+  sleeping an hour beside a job that will notify is a stall dressed as
+  compliance. Wait on its completion and do documentation-only work meanwhile.
+
+`cpu_avg_pct` well under `cpu_ceiling` with `heavy_python = 1` is the signature of
+the second case.
+
 Escalate only what the grant genuinely does not cover: an external destination
 other than the registered conversations, destructive Git on another branch, or a
 real expansion of protected scientific authority.

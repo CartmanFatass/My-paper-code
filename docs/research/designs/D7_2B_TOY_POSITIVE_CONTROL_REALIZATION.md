@@ -146,6 +146,19 @@ demonstration that this source needs decision-time state access, and it cost onl
 idle CPU. Cited as the no-state-access control, and it licenses no renewal
 conclusion.
 
+**Control result, 200 updates, complete.** `logs/nonformal_d7_2b_toy_learned_keep_20260725_17dbb6b_pm1`.
+Mean `env_reward_mean` over the first twenty updates `0.442187`, over the last
+twenty `0.475195` — a real but small rise toward the state-blind ceiling of about
+`0.5`, against the `0.44` random baseline.
+
+No audit was run on it, because arithmetic closes it more tightly than a screen
+could. The team reward is `0.5 * (slow_match + fast_match)`, so a plateau at
+`0.475` puts `mean(slow_match) + mean(fast_match) ≈ 0.95`, while condition A
+requires both at or above `0.75` — a sum of at least `1.5`. A therefore cannot
+pass here, and the branch is `NO_ACCESS_D7_TOY_POSITIVE_CONTROL` by derivation.
+That is the whole point of the control: it fixes the access failure to the missing
+information channel rather than to the carrier.
+
 ## 4. `B_H` — the normalizer, frozen before the audit
 
 D0 permits two forms and forbids estimating `B_H` from the treatment outcome. The
