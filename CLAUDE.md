@@ -43,7 +43,7 @@ with an exact assignment.
 | `hmasd-verifier` | haiku / high | executes assigned checks, returns bounded runtime evidence |
 | `hmasd-patcher` | haiku / low | applies pre-decided exact file edits |
 | `hmasd-monitor` | haiku / low | maintains `PROGRESS.md` under one run root |
-| `hmasd-review-exchanger` | haiku / high | byte-exact external review transport and archival |
+| `hmasd-review-exchanger` | sonnet / medium | byte-exact external review transport and archival |
 | `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
 | `hmasd-doc-auditor` | fable / high | adversarial audit of the governance surface itself |
@@ -57,13 +57,24 @@ Effort is set separately from model. `hmasd-verifier` runs haiku at **high**
 because deciding that an observed contract does not match the declared one is a
 real judgment — getting it wrong turns an invalid run into apparent evidence.
 
-`hmasd-review-exchanger` runs haiku at **high** for exactly that reason, applied
-to a second surface: deciding that an observed reply is the completed answer to
-the submitted question is the same kind of judgment, and getting it wrong turns
-a mid-generation thinking trace into apparent external scientific evidence. It
-sat at low effort until 2026-07-24, when it did precisely that. When a role's
-work includes deciding whether an observation matches a declared contract, the
-tier follows the judgment, not the mechanical framing of the role.
+`hmasd-review-exchanger` runs **sonnet / medium**, and its history is the
+clearest case that tier follows judgment rather than a role's framing. It reads
+mechanical — "transport and archival, never interprets" — and sat at haiku/low
+until 2026-07-24, when it archived a mid-generation thinking trace as scientific
+raw. Raising effort to haiku/high was the cheap fix; it then failed the same
+judgment again, plus clicked a control that curtailed a protected-semantics
+ruling, and reported a message as sent while it sat unsubmitted in the composer.
+
+Effort alone did not close the gap because the role is not mechanical: it
+contains at least three real judgments — is this response complete, did my
+action land, is this control within my authority. The roster rule says a haiku
+child meeting a real judgment call hands back rather than deciding; it never
+handed back. **When enumerating rules keeps failing to cover the cases, the role
+needed a model that can infer them, not another rule.**
+
+Its definition pairs the raise with stated autonomy: the mechanics are defaults
+it may depart from with a recorded reason, while the hard boundary stays
+absolute at any capability — confidence is not authority.
 
 Every definition points at `docs/project/AGENT_CONTEXT.md`, whose **Unattended
 operation** and **Reporting honestly** sections bind all children. Standing
