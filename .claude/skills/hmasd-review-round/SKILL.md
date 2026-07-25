@@ -307,11 +307,21 @@ unspecified and three separate passes improvised three different broken captures
    a click that silently does nothing is detectable. A failed click leaves the
    *previous* clipboard content in place, which reads exactly like a successful
    capture of the wrong thing.
-2. **Click by `ref`, not by coordinate.** `read_page` exposes the control as
-   `button "Copy response" [ref_N]`. A coordinate click has already silently
-   failed here once; a `ref` click resolves the element itself.
-3. **Verify the clipboard actually changed** from the sentinel, and that its
-   length and its first and last lines match what is on screen.
+2. **Scroll to the true end of the response first.** `Response actions` sits at
+   the end of *its own* message, and several assistant turns carry one. `find`
+   will happily return the control for whichever turn is rendered, so a control
+   located before reaching the bottom may belong to an earlier answer entirely.
+   Confirm the last visible text is the end of the answer you are archiving.
+3. **Click by coordinate from a screenshot.** A `ref` click has been observed to
+   report success while writing nothing to the clipboard — twice, verified
+   against a sentinel — because the clipboard write needs a real user gesture on
+   a focused document. The capture that did work used a coordinate click.
+4. **Verify the clipboard actually changed** from the sentinel, and that its
+   length and its first and last lines match what is on screen. If it did not
+   change, the click did nothing: re-locate and click again rather than
+   proceeding. **Never** substitute a different capture method because the click
+   is being awkward — that substitution is how the structure-stripped archive
+   below happened.
 4. **Write it to the raw path with `.NET WriteAllText`** from the clipboard
    directly. Then do the byte-equality reread.
 
