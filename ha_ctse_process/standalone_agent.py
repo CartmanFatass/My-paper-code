@@ -1927,29 +1927,45 @@ class StandaloneProcessAgent:
             if self.r39_toy_fixed_skill_action_schema != "axis4_xy_v1":
                 raise ValueError("unsupported R39 fixed primitive schema")
         if self.r39_toy_direct_state_context:
+            # Not keyed to the edit mode either, and this one is an *information
+            # contract* rather than a validation guard: it replaces the compact
+            # vector with the centralized state (see the compact_dim >= state_dim
+            # check below). On this toy the local observations are identically
+            # zero and the initial target signs are drawn per episode, so without
+            # it the high actor cannot know which target is which -- both match
+            # rates cap near 0.5 and D7's competence floor of 0.75 is
+            # architecturally unreachable. The environment's own docstring names
+            # the centralized state as the route by which task context selects
+            # skills. What is still pinned is the source: fixed primitives, the
+            # R30 carrier, and this toy.
             if (
                 not self.r39_toy_fixed_skill_primitives
-                or not self.r39_native_categorical_edit
                 or not self.r30_enabled
                 or str(getattr(config, "scenario", ""))
                 != "two_timescale_role_free_actions"
             ):
                 raise ValueError(
-                    "R39 direct-state high context is restricted to the fixed-primitive "
-                    "native-categorical two-timescale toy"
+                    "R39 direct-state high context is restricted to the "
+                    "fixed-primitive two-timescale R30 toy"
                 )
-        if self.high_ppo_epochs != 1 and not self.r39_toy_direct_state_context:
+        # The credit machinery stays pinned to the lane it was validated on.
+        # Widening the information contract above must not silently hand the
+        # learned-keep lane a multi-epoch or block-return high actor as well.
+        native_direct_state_lane = (
+            self.r39_toy_direct_state_context and self.r39_native_categorical_edit
+        )
+        if self.high_ppo_epochs != 1 and not native_direct_state_lane:
             raise ValueError(
                 "multiple R30 high PPO epochs are currently restricted to the "
-                "R39 direct-state fixed-primitive toy"
+                "R39 direct-state native-categorical fixed-primitive toy"
             )
         if (
             self.high_actor_advantage_mode != "smdp_gae"
-            and not self.r39_toy_direct_state_context
+            and not native_direct_state_lane
         ):
             raise ValueError(
                 "block-return high actor credit is restricted to the R39 "
-                "direct-state fixed-primitive toy"
+                "direct-state native-categorical fixed-primitive toy"
             )
         if self.high_actor_advantage_mode == "block_return" and (
             not self.r30_force_refresh_every_check or self.high_ppo_epochs != 3
@@ -3972,6 +3988,7 @@ class StandaloneProcessAgent:
         rollout_index: int,
         effect_view,
         collect_r31: bool,
+        forced_tokens: dict[int, tuple[int, int]] | None = None,
     ) -> None:
         if self.high_check_buffer is None or not isinstance(
             self.high, FixedClockAREditPolicy
@@ -4075,6 +4092,7 @@ class StandaloneProcessAgent:
                 omega=omega,
                 agent_relevance=relevance,
                 deterministic=deterministic,
+                forced_tokens=forced_tokens,
             )
             self.high_check_buffer.start_decision(
                 env_id=env_id,
@@ -4160,8 +4178,15 @@ class StandaloneProcessAgent:
         policy_update: int = 0,
         effect_view=None,
         collect_r31: bool = True,
+        forced_tokens: dict[int, tuple[int, int]] | None = None,
     ):
+        """``forced_tokens`` is the D7 evaluation-only interventional hook; see
+        ``FixedClockAREditPolicy.act_sequence``. It is accepted only under the R30
+        carrier, because it forces a renewal decision and no other controller has
+        one to force."""
         env_id = int(env_id)
+        if forced_tokens and not self.r30_enabled:
+            raise ValueError("forced tokens require the R30 fixed-clock carrier")
         if self.constant_skill_no_high:
             self.active_skills[env_id, :] = 0
             self.active_duration_indices[env_id, :] = 0
@@ -4180,6 +4205,7 @@ class StandaloneProcessAgent:
                 rollout_index=int(step),
                 effect_view=effect_view,
                 collect_r31=bool(collect_r31),
+                forced_tokens=forced_tokens,
             )
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)

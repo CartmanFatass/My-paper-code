@@ -210,6 +210,72 @@ class FixedClockAREditPolicy(nn.Module):
         )
         return hidden, keep_logit, skill_logits, entropy_logits
 
+    def _force_token(
+        self,
+        *,
+        agent_id: int,
+        forced: tuple[int, int],
+        active: bool,
+        current_skill: int,
+        keep_logit: torch.Tensor,
+        skill_logits: torch.Tensor,
+        like: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """Replace one realized token with a forced one, after its draws.
+
+        `logp` is recomputed under the same factorization the sampler uses, so a
+        forced token reports the log-probability the policy would have assigned
+        to the branch actually taken -- not the one it happened to sample.
+        """
+        forced_kind, forced_skill = int(forced[0]), int(forced[1])
+        if forced_kind not in {KEEP_TOKEN, SET_TOKEN}:
+            raise ValueError(f"forced token kind {forced_kind} is not KEEP or SET")
+        if self.native_categorical_edit or self.force_refresh_every_check:
+            raise ValueError(
+                "forced tokens are defined only on the learned-keep branch; "
+                "KEEP is not a decision under native-categorical edit or full refresh"
+            )
+        if forced_kind == KEEP_TOKEN:
+            if not active:
+                # D0 section 2: with no incumbent there is nothing to keep, and
+                # the sampler itself forces SET there.
+                raise ValueError(
+                    f"cannot force KEEP for agent {agent_id} with no incumbent"
+                )
+            kind = torch.full_like(like, KEEP_TOKEN)
+            skill = torch.full_like(like, INVALID_SKILL)
+            logp = F.logsigmoid(keep_logit)
+            return kind, skill, logp
+
+        n_skills = int(skill_logits.shape[-1])
+        if not 0 <= forced_skill < n_skills:
+            raise ValueError(f"forced SET skill {forced_skill} is out of range")
+        # The incumbent is masked out of the SET distribution under learned keep,
+        # so forcing SET to it is not an intervention the policy can express --
+        # a same-label renewal is structurally excluded rather than unlikely.
+        # Checked semantically *and* against the mask sentinel, because
+        # `_masked_skill_logits` writes `finfo.min` rather than `-inf`: that stays
+        # finite through `log_softmax`, so an `isfinite` test would pass a forced
+        # same-label renewal straight through and silently report it as a real
+        # branch with a log-probability near -3.4e38.
+        if active and forced_skill == current_skill:
+            raise ValueError(
+                f"cannot force SET to the incumbent skill {forced_skill} for agent "
+                f"{agent_id}; same-label renewal is structurally excluded"
+            )
+        masked_floor = torch.finfo(skill_logits.dtype).min
+        if bool((skill_logits[..., forced_skill] <= masked_floor).all()):
+            raise ValueError(
+                f"forced SET skill {forced_skill} has no support for agent "
+                f"{agent_id}; it is masked out of the SET distribution"
+            )
+        skill_log_probs = F.log_softmax(skill_logits, dim=-1)
+        forced_logp = skill_log_probs[..., forced_skill]
+        kind = torch.full_like(like, SET_TOKEN)
+        skill = torch.full_like(like, forced_skill)
+        logp = F.logsigmoid(-keep_logit) + forced_logp
+        return kind, skill, logp
+
     def act_sequence(
         self,
         joint_obs: torch.Tensor,
@@ -222,7 +288,32 @@ class FixedClockAREditPolicy(nn.Module):
         omega: torch.Tensor | None = None,
         agent_relevance: torch.Tensor | None = None,
         deterministic: bool = False,
+        forced_tokens: dict[int, tuple[int, int]] | None = None,
     ) -> EditSequenceSample:
+        """Sample one autoregressive edit sequence.
+
+        ``forced_tokens`` is the D7 interventional hook and is **evaluation-only**:
+        it maps ``agent_id -> (token_kind, set_skill)`` and replaces that agent's
+        realized token after its distributions and its random draws have already
+        been taken. Three properties make it a valid intervention rather than a
+        different policy, and each is asserted in
+        ``tests/ha_ctse_process_d7_forced_token_test.py``:
+
+        * with ``forced_tokens=None`` every result is byte-identical to the
+          unhooked sampler, so no training path changes;
+        * the forced branch consumes exactly the same base draws, because the
+          learned-keep branch draws both the keep uniform and the skill
+          categorical unconditionally before either is used -- so paired KEEP and
+          SET branches under common random numbers stay aligned downstream;
+        * **later agents in the same check are not forced and see the modified
+          prefix**, because the loop below reads ``working_*`` as it goes. D0's
+          continuation semantics require exactly that: holding later factual
+          tokens fixed would estimate a direct effect the deployed
+          autoregressive policy never exhibits.
+
+        ``keep_prob`` continues to record the *policy's* probability, never the
+        forced outcome.
+        """
         working_skills = prev_skills.long().clone().reshape(-1)
         working_ages = prev_ages.long().clone().reshape(-1)
         working_active = prev_active.bool().clone().reshape(-1)
@@ -316,6 +407,16 @@ class FixedClockAREditPolicy(nn.Module):
                 logp = torch.where(choose_keep, log_keep, set_logp)
                 entropy_weight = (1.0 - torch.sigmoid(keep_logit)).detach()
             entropy = Categorical(logits=entropy_logits).entropy() * entropy_weight
+            if forced_tokens is not None and agent_id in forced_tokens:
+                kind, skill, logp = self._force_token(
+                    agent_id=agent_id,
+                    forced=forced_tokens[agent_id],
+                    active=active,
+                    current_skill=int(working_skills[agent_id].item()),
+                    keep_logit=keep_logit,
+                    skill_logits=skill_logits,
+                    like=kind,
+                )
             if int(kind.item()) == SET_TOKEN:
                 working_skills[agent_id] = int(skill.item())
                 working_ages[agent_id] = 0

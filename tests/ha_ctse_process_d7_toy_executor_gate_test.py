@@ -164,17 +164,48 @@ def test_executor_gate_still_pinned_to_the_table_domain(overrides, build_kwargs)
         _build(_toy_config(**overrides), **build_kwargs)
 
 
-def test_direct_state_context_still_requires_native_categorical():
-    """The one coupling that is real stays: the direct-state high context and
-    its joint-credit diagnostic were built and validated against the
-    native-categorical lane, and nothing here revalidates them."""
+def test_direct_state_context_is_permitted_under_learned_keep():
+    """The information contract D7.2B cannot do without. The toy's observations
+    are identically zero and the initial target signs are redrawn per episode, so
+    a high actor without the centralized state cannot tell which target is which:
+    both match rates cap near 0.5 and the 0.75 competence floor is unreachable
+    architecturally. Keyed to the edit mode, that made the positive control
+    unmeasurable rather than negative."""
+    agent = _build(_toy_config(r39_toy_direct_state_context=True))
+    assert agent.r39_toy_direct_state_context
+    assert agent.high.keep_head is not None
+    # The compact vector is replaced by the state, so it must be wide enough to
+    # carry it and must not be trained through.
+    assert agent.state_dim <= 16
+    assert not any(p.requires_grad for p in agent.compact.parameters())
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"r39_toy_fixed_skill_primitives": False},
+        {"scenario": "alice_bob_asymmetric_cycles"},
+    ],
+)
+def test_direct_state_context_still_pinned_to_the_fixed_primitive_toy(overrides):
     with pytest.raises(ValueError):
-        _build(
-            _toy_config(
-                r39_toy_direct_state_context=True,
-                r39_native_categorical_edit=False,
-            )
-        )
+        _build(_toy_config(r39_toy_direct_state_context=True, **overrides))
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"r30_high_ppo_epochs": 3},
+        {"r30_high_actor_advantage_mode": "block_return"},
+    ],
+)
+def test_credit_machinery_stays_pinned_to_the_native_lane(overrides):
+    """Widening the information contract must not hand the learned-keep lane a
+    multi-epoch or block-return high actor as a side effect. Those were validated
+    on the native-categorical direct-state lane and nothing here revalidates
+    them."""
+    with pytest.raises(ValueError, match="native-categorical"):
+        _build(_toy_config(r39_toy_direct_state_context=True, **overrides))
 
 
 def test_contract_keys_the_toy_check_interval_to_the_scenario():
@@ -228,7 +259,9 @@ def test_d7_2b_config_yields_the_intended_lane():
     assert cfg.r30_force_refresh_every_check is False
     assert cfg.r39_toy_fixed_skill_primitives is True
     assert cfg.r39_toy_fixed_skill_action_schema == "axis4_xy_v1"
-    assert cfg.r39_toy_direct_state_context is False
+    # The declared information contract: centralized state at decision time.
+    assert cfg.r39_toy_direct_state_context is True
+    assert cfg.opt_compact_dim >= cfg.state_dim
     assert cfg.skill_interval == cfg.r39_toy_k0 == 5
     assert cfg.r39_toy_slow_period_blocks == 6
     assert cfg.n_z == 4

@@ -101,6 +101,51 @@ is `{0,1}` and `0.75` is a 75%-correct floor instead of a halfway one. The
 threshold stands exactly as frozen; only its interpretation is narrower than the
 sentence that set it.
 
+## 3a. Information contract — centralized state at decision time
+
+**Added 2026-07-25 after the first launch measured its own necessity.** The first
+D7.2B training run was configured without direct-state high context and sat at
+chance — `env_reward_mean ≈ 0.42–0.48` across 65 updates, against a random
+baseline of about `0.44`. That is not slow learning, it is an architectural
+ceiling:
+
+- the toy's local observations are **identically zero** for both agents;
+- the initial slow and fast signs are **redrawn every episode**;
+- so the optimal state-blind policy can learn the *alternation* (the fast target
+  flips every check, deterministically) but not the *phase*, and guesses each
+  sign at episode start.
+
+Both match rates therefore cap near `0.5`, and condition A's `LCB95 >= 0.75` is
+unreachable **for a reason that has nothing to do with the carrier**. The run
+would have reported `NO_ACCESS_D7_TOY_POSITIVE_CONTROL`, which by the ruling's own
+branch table says nothing about renewal capacity — the expensive null, arrived at
+by a route nobody had checked.
+
+So D7.2B declares its information contract: `r39_toy_direct_state_context = True`,
+which replaces the compact vector with the centralized state and freezes that
+encoder. Three reasons this is the intended channel rather than a leak:
+
+1. the environment's own docstring says the centralized state exposes the two
+   targets **so that** "the high-level roster is the only route by which task
+   context can select different low-level skills";
+2. D7 forbids feeding *role labels* — "fast" and "slow" are never fed to the
+   policy, and are not. The state carries the two target signs and never says
+   which agent should serve which. The permutation-invariant reward means the
+   assignment remains the policy's to discover;
+3. `U_pi` is policy-conditional, so the estimand is defined against whatever
+   information set is declared. What must not happen is an *undeclared* one.
+
+That flag was gated to native-categorical edit as well, and the gate was the same
+bundling as the other three. The credit machinery it also unlocked — multi-epoch
+high PPO and block-return advantage — stays pinned to the native lane, because
+widening an information contract is not a licence to pick up an unvalidated credit
+mode. D7.2B runs one high PPO epoch with `smdp_gae`.
+
+**The state-blind run is kept as a control**, not discarded: it is the measured
+demonstration that this source needs decision-time state access, and it cost only
+idle CPU. Cited as the no-state-access control, and it licenses no renewal
+conclusion.
+
 ## 4. `B_H` — the normalizer, frozen before the audit
 
 D0 permits two forms and forbids estimating `B_H` from the treatment outcome. The

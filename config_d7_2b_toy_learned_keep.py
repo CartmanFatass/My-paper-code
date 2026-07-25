@@ -53,8 +53,19 @@ class Config(StandaloneConfig):
     r39_native_categorical_edit = False
     r30_force_refresh_every_check = False
     r30_keep_init = 0.6
-    r30_bridge_context_mode = "deterministic_expected"
-    team_bridge_type = "deterministic_expected"
+    # Direct-state high context. This is the run's *information contract*, not a
+    # tuning knob: the toy's local observations are identically zero and the
+    # initial target signs are redrawn every episode, so a high actor without the
+    # centralized state cannot tell which target is which. Both match rates then
+    # cap near 0.5 and D7's competence floor of 0.75 is unreachable for an
+    # architectural reason rather than a carrier one -- measured, see the
+    # no-state-access control in CURRENT_WORK.md. Role labels are still never
+    # fed to any policy; the centralized state carries the two targets, which the
+    # environment docstring names as the route by which task context selects
+    # skills, and never says which agent should serve which.
+    r39_toy_direct_state_context = True
+    r30_bridge_context_mode = "direct_state_zero_team"
+    team_bridge_type = "none"
     r30_high_buffer_version = 2
     r30_high_ppo_epochs = 1
     r30_high_actor_advantage_mode = "smdp_gae"
@@ -65,8 +76,6 @@ class Config(StandaloneConfig):
     # prerequisite is met by construction so a null can only be about the carrier.
     r39_toy_fixed_skill_primitives = True
     r39_toy_fixed_skill_action_schema = "axis4_xy_v1"
-    # Requires native-categorical edit, which this lane deliberately does not use.
-    r39_toy_direct_state_context = False
 
     # A constant skill->action table is stateless, so there is no recurrent
     # low-level policy to thread hidden state through. This is not a tuning
