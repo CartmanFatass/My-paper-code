@@ -455,56 +455,63 @@ def condition_b(
     host: ToyAuditHost,
     traces: list[EpisodeTrace],
     b_h: dict,
-    horizon: int,
+    horizons: list[int],
     replicates: int,
     base_policy_seed: int,
 ) -> dict:
-    """Paired KEEP-versus-SET at every mixed-urgency check."""
+    """Paired KEEP-versus-SET at every mixed-urgency check, for every horizon.
+
+    All horizons are read off the **same** rollouts. Generating them per horizon
+    would double the audit's most expensive stage for numbers that would be
+    perfectly correlated anyway -- the seeds are identical, and the horizon only
+    changes which window of an already-generated episode is summed. It would also
+    invite the two readings to drift apart for purely incidental reasons.
+
+    Returns one entry per horizon, keyed by `str(horizon)`.
+    """
     n_skills = int(host.agent.n_skills)
-    b_value = float(b_h[str(horizon)]["b_h"])
-    if not np.isfinite(b_value) or abs(b_value) < 1e-9:
-        # No renewal headroom over this horizon: U~ is not defined, and dividing
-        # anyway would report an arbitrary number as an effect size.
-        return {
-            "horizon": horizon,
-            "b_h": b_value,
-            "measurable": False,
-            "reason": "no renewal headroom over this horizon; U~ is undefined",
-            "passed": False,
-        }
-    flex_clusters: list[list[float]] = []
-    stable_clusters: list[list[float]] = []
-    diff_clusters: list[list[float]] = []
-    opp_flex_clusters: list[list[float]] = []
+    horizons = [int(h) for h in horizons]
+    b_values = {h: float(b_h[str(h)]["b_h"]) for h in horizons}
+
+    def live(h: int) -> bool:
+        return bool(np.isfinite(b_values[h])) and abs(b_values[h]) >= 1e-9
+
+    def empty_acc():
+        return {"flex": [], "stable": [], "diff": [], "opp": []}
+
+    acc = {h: empty_acc() for h in horizons}
     dropped = 0
     pairs = 0
 
     for trace in traces:
-        flex_c, stable_c, diff_c, opp_c = [], [], [], []
+        local = {h: empty_acc() for h in horizons}
         by_check: dict[int, list[CheckRow]] = {}
         for row in trace.rows:
             if row.mixed_urgency_check:
                 by_check.setdefault(row.check_index, []).append(row)
         for check_index, rows in sorted(by_check.items()):
             focal_step = trace.check_steps[check_index]
-            per_regime: dict[str, float] = {}
+            per_regime: dict[int, dict[str, float]] = {h: {} for h in horizons}
             for row in rows:
                 if row.urgency_regime not in {"flex", "stable"}:
                     continue
                 if not (0 <= row.incumbent_skill < n_skills):
                     dropped += 1
                     continue
-                keep_returns, pi_returns = [], []
-                opp_returns: dict[int, list[float]] = {
-                    z: [] for z in range(n_skills) if z != row.incumbent_skill
+                keep_returns = {h: [] for h in horizons}
+                pi_returns = {h: [] for h in horizons}
+                opp_returns = {
+                    z: {h: [] for h in horizons}
+                    for z in range(n_skills)
+                    if z != row.incumbent_skill
                 }
 
-                def branch(forced, post):
+                def branch(forced, post, _row=row, _check=check_index):
                     return host.rollout(
                         episode_seed=trace.episode_id,
                         policy_seed=trace.policy_seed,
-                        forced_at_check=check_index,
-                        forced_tokens={row.agent_id: forced},
+                        forced_at_check=_check,
+                        forced_tokens={_row.agent_id: forced},
                         post_seed=post,
                     )
 
@@ -520,62 +527,85 @@ def condition_b(
                     if not admissible:
                         dropped += 1
                         continue
-                    keep_returns.append(window_return(keep, focal_step, horizon))
-                    pi_returns.append(window_return(pi, focal_step, horizon))
+                    for h in horizons:
+                        keep_returns[h].append(window_return(keep, focal_step, h))
+                        pi_returns[h].append(window_return(pi, focal_step, h))
                     for z in opp_returns:
                         arm = branch((SET_TOKEN, z), post)
                         if not _focal_state_matches(arm, trace, check_index):
                             dropped += 1
                             continue
-                        opp_returns[z].append(window_return(arm, focal_step, horizon))
-                if not keep_returns or not pi_returns:
+                        for h in horizons:
+                            opp_returns[z][h].append(
+                                window_return(arm, focal_step, h)
+                            )
+                if not keep_returns[horizons[0]] or not pi_returns[horizons[0]]:
                     continue
                 pairs += 1
-                keep_mean = float(np.mean(keep_returns))
-                u_pi = (float(np.mean(pi_returns)) - keep_mean) / b_value
-                per_regime[row.urgency_regime] = u_pi
-                if row.urgency_regime == "flex":
-                    flex_c.append(u_pi)
-                    u_opp = _split_sample_u_opp(opp_returns, keep_mean, b_value)
-                    if u_opp is not None:
-                        opp_c.append(u_opp)
-                else:
-                    stable_c.append(u_pi)
-            if "flex" in per_regime and "stable" in per_regime:
-                diff_c.append(per_regime["flex"] - per_regime["stable"])
-        for src, dest in (
-            (flex_c, flex_clusters),
-            (stable_c, stable_clusters),
-            (diff_c, diff_clusters),
-            (opp_c, opp_flex_clusters),
-        ):
-            dest.append(src)
+                for h in horizons:
+                    if not live(h):
+                        continue
+                    keep_mean = float(np.mean(keep_returns[h]))
+                    u_pi = (float(np.mean(pi_returns[h])) - keep_mean) / b_values[h]
+                    per_regime[h][row.urgency_regime] = u_pi
+                    if row.urgency_regime == "flex":
+                        local[h]["flex"].append(u_pi)
+                        u_opp = _split_sample_u_opp(
+                            {z: v[h] for z, v in opp_returns.items()},
+                            keep_mean,
+                            b_values[h],
+                        )
+                        if u_opp is not None:
+                            local[h]["opp"].append(u_opp)
+                    else:
+                        local[h]["stable"].append(u_pi)
+            for h in horizons:
+                regimes = per_regime[h]
+                if "flex" in regimes and "stable" in regimes:
+                    local[h]["diff"].append(regimes["flex"] - regimes["stable"])
+        for h in horizons:
+            for key in ("flex", "stable", "diff", "opp"):
+                acc[h][key].append(local[h][key])
 
-    u_flex = clustered_mean_ci(flex_clusters)
-    u_stable = clustered_mean_ci(stable_clusters)
-    u_diff = clustered_mean_ci(diff_clusters)
-    u_opp_flex = clustered_mean_ci(opp_flex_clusters)
-    passed = (
-        u_diff["lcb95"] >= B_DIFF_FLOOR
-        and u_flex["lcb95"] >= B_FLEX_FLOOR
-        and u_stable["ucb95"] <= B_STABLE_CEIL
-    )
-    return {
-        "horizon": horizon,
-        "b_h": b_value,
-        "u_pi_flex": u_flex,
-        "u_pi_stable": u_stable,
-        "u_pi_difference": u_diff,
-        "u_opp_flex_split_sample": u_opp_flex,
-        "pairs": pairs,
-        "dropped_pairs": dropped,
-        "thresholds": {
-            "difference_floor": B_DIFF_FLOOR,
-            "flex_floor": B_FLEX_FLOOR,
-            "stable_ceiling": B_STABLE_CEIL,
-        },
-        "passed": bool(passed),
-    }
+    out: dict[str, dict] = {}
+    for h in horizons:
+        if not live(h):
+            # No renewal headroom over this horizon: U~ is not defined, and
+            # dividing anyway would report an arbitrary number as an effect size.
+            out[str(h)] = {
+                "horizon": h,
+                "b_h": b_values[h],
+                "measurable": False,
+                "reason": "no renewal headroom over this horizon; U~ is undefined",
+                "passed": False,
+            }
+            continue
+        u_flex = clustered_mean_ci(acc[h]["flex"])
+        u_stable = clustered_mean_ci(acc[h]["stable"])
+        u_diff = clustered_mean_ci(acc[h]["diff"])
+        u_opp_flex = clustered_mean_ci(acc[h]["opp"])
+        out[str(h)] = {
+            "horizon": h,
+            "b_h": b_values[h],
+            "measurable": True,
+            "u_pi_flex": u_flex,
+            "u_pi_stable": u_stable,
+            "u_pi_difference": u_diff,
+            "u_opp_flex_split_sample": u_opp_flex,
+            "pairs": pairs,
+            "dropped_pairs": dropped,
+            "thresholds": {
+                "difference_floor": B_DIFF_FLOOR,
+                "flex_floor": B_FLEX_FLOOR,
+                "stable_ceiling": B_STABLE_CEIL,
+            },
+            "passed": bool(
+                u_diff["lcb95"] >= B_DIFF_FLOOR
+                and u_flex["lcb95"] >= B_FLEX_FLOOR
+                and u_stable["ucb95"] <= B_STABLE_CEIL
+            ),
+        }
+    return out
 
 
 def _prefix_matches(a: EpisodeTrace, b: EpisodeTrace, focal_step: int) -> bool:
@@ -707,17 +737,11 @@ def main() -> None:
 
     a = condition_a(traces)
     c = condition_c(traces)
-    b = condition_b(
-        host, traces, b_h, int(args.horizon), int(args.replicates), int(args.seed)
+    by_horizon = condition_b(
+        host, traces, b_h, horizons, int(args.replicates), int(args.seed)
     )
-    b_secondary = condition_b(
-        host,
-        traces,
-        b_h,
-        int(args.horizon_secondary),
-        int(args.replicates),
-        int(args.seed),
-    )
+    b = by_horizon[str(int(args.horizon))]
+    b_secondary = by_horizon[str(int(args.horizon_secondary))]
 
     branch, reason = verdict(a, b, c, b_h, int(args.horizon))
     out = Path(args.out)
