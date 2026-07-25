@@ -37,8 +37,9 @@ three hops further, not to compute anything new.
 
 1. **`EditSequenceSample`** (`r30_fixed_clock.py:21-30`, `@dataclass(frozen=True)`)
    gains one field, `keep_prob: torch.Tensor`, shaped like `token_kind`.
-   Every construction site must supply it — the dataclass is frozen, so a missed
-   site is a construction error rather than a silent `None`.
+   It has **exactly one construction site**, `r30_fixed_clock.py:315` — checked,
+   not assumed. The dataclass is frozen, so omitting the field there is a
+   construction error rather than a silent `None`.
 
 2. **`act_sequence`** accumulates it in the existing per-token loop alongside
    `kinds` / `logps` / `entropies`, and stacks it at `:311-314`.
@@ -47,9 +48,20 @@ three hops further, not to compute anything new.
    where `token_kind` and `old_token_logp` already are
    (`standalone_agent.py:4058-4073`).
 
-4. **`HIGH_BUFFER_VERSION`** (`:18`) goes `1 -> 2`. `HighCheckBuffer.version`
-   carries it, and a row schema change that leaves the version alone is how a
-   stale buffer gets read as a current one.
+4. **The buffer version bump is four sites, not one.** `HIGH_BUFFER_VERSION`
+   (`r30_fixed_clock.py:18`) is only a *fallback default* — the live value is
+   pinned elsewhere, and changing the constant alone silently does nothing:
+
+   | Site | What it does |
+   |---|---|
+   | `r30_fixed_clock.py:18` | the constant; `HighCheckBuffer.version` reads it (`:521`) |
+   | `config.py:28` | `r30_high_buffer_version = 1` — pins it |
+   | **`train.py:2808`** | `config.r30_high_buffer_version = 1` — **hard-assigns, overriding whatever the config said** |
+   | `train.py:617-618`, `:1699` | default `1` when writing checkpoint metadata |
+
+   `train.py:2808` is the one that defeats a naive bump. The value also lands in
+   checkpoint metadata as `high_buffer_version`, so it is a real compatibility
+   field and a stale pin would mark new-schema rows as old-schema.
 
 ## Three constraints that make this safe, and are the whole risk
 
