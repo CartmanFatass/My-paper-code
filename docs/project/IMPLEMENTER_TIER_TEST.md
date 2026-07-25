@@ -331,42 +331,101 @@ Stage 1's stop rules exist to make the common case cheap.
   asserts the two implementer bodies are identical and was validated in both
   directions.
 
+## Factor B redefined — the user has already tested superpowers
+
+**2026-07-25, user finding:** superpowers was tried on this project and its
+fixed pipeline is **too heavy**; the matt series is much more flexible.
+
+This is direct evidence, not a preference, and it invalidates Factor B as first
+written. That definition was operationalized from the superpowers
+`writing-plans` *description* — an exhaustive, fully-specified plan — so as
+registered, Factor B would spend six runs testing a treatment we already have
+reason to believe fails here. Testing it anyway would be going through the
+motions.
+
+### The redefinition, and why it is a better experiment
+
+The original Factor B asked the wrong question: *can a heavier brief make the
+implementer compensate for a defective spec?* But **the implementers were rarely
+the problem.** Every defect on the G20R2 contract originated in my
+specifications:
+
+| Defect | Would a relentless interview of the contract have caught it? |
+|---|---|
+| §2/§5 contradiction in the `Q_j` input list | yes — two sections listing different inputs is the first thing an interview reconciles |
+| `epsilon_audit` required in §2, never frozen in §11 | yes — "what is its value?" is question one |
+| null calibration degenerate under exact CRN | yes — "what does this return when the two arms are identical?" |
+| MC budget conflated with the sample estimating it | yes — "which of these sets the resolution and which estimates it?" |
+| missing policy-snapshot condition | yes — §7 already said it; an interview cross-checks sections |
+| probe distribution off the C1 action support | yes — "what is the support of this expectation?" |
+
+All six are **upstream** of any implementer. So Factor B becomes:
+
+> **B2' — grill the contract before any implementer sees it.** An adversarial
+> interview pass over the frozen design, in the matt `grilling` style — walk each
+> branch of the decision tree, resolve dependencies one at a time, demand a value
+> for every quantity the contract compares against — run *before* the brief is
+> written.
+
+Control B1 is unchanged: today's bounded brief against today's contract.
+
+### Why the existing pre-freeze check is not already this
+
+`AGENTS.md` has a pre-freeze design check, and it **passed** on the G20R2
+contract — while all six defects above were in it. A fixed five-question
+checklist asks what its author thought to ask. An interview follows the specific
+document in front of it. That gap is the thing worth measuring, and it explains
+why the current gate underperforms without anyone having been careless.
+
+### The unattended problem, stated
+
+`grilling` interviews *the user*. In an unattended loop there is nobody to
+interview. So B2' is realized as an adversarial agent grilling the contract and
+returning its questions — the role `hmasd-doc-auditor` already plays for the
+governance surface, pointed at design contracts instead. Whether an agent
+interviewing a document is a real substitute for an interview with the author is
+itself uncertain, and is part of what B2' measures.
+
 ## Phase 2 — which skill pack, once the tier/planning combination is chosen
 
-Requested 2026-07-25, to run **after** a combination is selected. The question:
-for this project's plan-then-implement work, is the **matt-pocock** series or
-**superpowers** the better fit?
+Requested 2026-07-25 as a matt-vs-superpowers comparison. **Superpowers is out**
+on the user's own prior testing — its fixed pipeline is too heavy for this
+project — and it is not installed here. Running a comparison to re-derive a
+conclusion the user already reached by using both would be ceremony.
 
-### Prerequisite, and it is not satisfied
+Phase 2 is therefore narrower and more useful: **which matt skills earn a place
+alongside the project's own `hmasd-agile-research-development`, and where?**
 
-`superpowers` is **not installed** in this environment. The matt series is, and
-extensively — `grill-with-docs`, `to-spec`, `to-tickets`, `implement`, `tdd`,
-`code-review`, `wayfinder`, `codebase-design` and others under
-`.claude/skills/`.
+### The overlap has to be named first
 
-A comparison against a pack that is not present would be a comparison against my
-description of it, which is worth nothing. **Installing superpowers is a
-precondition for Phase 2**, and the Factor B definition in this plan — written
-from the same description — must be re-derived from the real `writing-plans`
-skill once it is available, and re-run if it differs materially from what was
-tested.
+The matt series and this project's procedure already cover some of the same
+ground, and adopting wholesale would duplicate rather than add:
 
-### What Phase 2 must not repeat
+| matt skill | Project already has | Verdict |
+|---|---|---|
+| `/implement` driving `/tdd`, closing with `/code-review` | `hmasd-agile-research-development` + `hmasd-reviewer` | overlap — adopting both means two procedures for one job |
+| `/to-tickets` | briefs authored per `AGENT_CONTEXT.md` | overlap |
+| `/code-review` | `hmasd-reviewer`, tuned to protected semantics | project's is more specific |
+| `/grill-with-docs`, `/grilling` | pre-freeze design check — a fixed checklist | **gap**, see Factor B above |
+| `/wayfinder` | nothing | possible gap for foggy multi-session work |
+| `/codebase-design` | `hmasd-code-scout` | partial overlap |
 
-The matt series is **already installed and already in this repo's skill
-directory**, so any arm using it has home advantage: its vocabulary matches
-files already committed here. Superpowers arrives cold. That asymmetry has to be
-handled or the result is predetermined — most cheaply by running both packs on
-the **synthetic-contract tasks** (T3/T4/T5), which are new to both.
+The candidate worth real evaluation is the **grilling family**, because it maps
+onto the one failure mode this project keeps paying for — my own contracts
+being underspecified — and because the existing countermeasure there is a
+checklist that demonstrably passed a contract containing six defects.
 
 ### Shape
 
-Same discipline as this test: known-answer tasks, blind grading, the same
-P1/P2/P3 outcomes, and a pre-registered decision rule. The deliverable is one of
-*matt* / *superpowers* / *neither — the project's own
-`hmasd-agile-research-development` already fits better*, and the third option is
-a real candidate rather than a courtesy: that skill was written against this
-repository's actual failure modes, which neither general-purpose pack has seen.
+Same discipline as this test: known-answer tasks drawn from the synthetic
+contracts, blind grading, pre-registered decision rule. The deliverable is a
+**list of specific skills to adopt and at which point in the loop**, not a pack
+endorsement — with "adopt none, the project's own procedure plus a stronger
+pre-freeze interview is enough" as a genuine outcome.
+
+Phase 2 largely collapses into Factor B if B2' is run, since B2' *is* the
+grilling family evaluated on this project's real defects. If B2' settles it,
+Phase 2 should be closed rather than run for completeness.
 
 ## Retirement
 
