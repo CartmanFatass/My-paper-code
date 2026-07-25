@@ -262,6 +262,29 @@ The measured `B_H` and the state-liveness check together mean an A failure canno
 be blamed on the normalizer or on a dead information path. That leaves training
 budget and then credit, in that order, as the candidates to rule out.
 
+## 4b. Which checkpoint is the audited object — declared before the audit
+
+**Fixed 2026-07-25, while the competence run was still training and before any
+audit had been run against it.** Recorded here because the moment competence is
+reached, checkpoint choice becomes an outcome-relevant knob, and picking it
+afterwards is indistinguishable from fitting.
+
+```text
+audited object = the run's final checkpoint, standalone_process_core_final.pt
+```
+
+Interim checkpoints exist at every hundredth update and may be reported **only**
+as a training-trajectory note — when competence appeared, how the renewal
+statistics moved on the way. They are never the result, and A/B/C are never read
+off whichever one reads best.
+
+This matters in a specific way here. Competence arrived early — `env_reward_mean`
+`0.984375` at update 100, against about `0.44` at chance — so the remaining 900
+updates sharpen the policy rather than teach it the task. Sharpening can move
+condition C in either direction: toward clean separation, or toward a collapse
+that trips its full-sync ceiling. **Both are real readings of the final policy**
+and neither is a reason to reach for an earlier checkpoint.
+
 ## 5. Paired replay protocol
 
 D0 §3 continuation semantics, mapped onto this source. Per focal check and focal
