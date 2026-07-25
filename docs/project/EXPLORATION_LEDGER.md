@@ -33,31 +33,44 @@ policy said so, and the ordering did not follow it.
 
 ## Active directions
 
+Reordered again on 2026-07-25 by the D7 ruling. D7 is no longer one paired run;
+it is a staged diagnostic that runs its cheapest qualifying stage first.
+
 | Order | id | Direction | Build | Compute | Review | Settles |
 |---:|---|---|---|---|---|---|
-| **0** | **D0** | **Carrier and estimand derivation** — freeze check clock vs realized lifetime, define renewal urgency, define the search-cost estimand, state how R30 / fixed-`k` / legacy each instantiate the claim, fix censoring and exposure semantics | small | **none** | 0 | What "variable `k`" means, and what any later number is a number *of* |
-| **1** | **D7** | **Instrumented R30 renewal-process diagnostic**, reward-pure, paired against the strongest shared fixed-lifetime control under matched exposure | medium — new logging | one paired run | 0–1 | Whether the source contains heterogeneous renewal urgency at all; natural hazard and lifetime behaviour; whether truncation/exposure/reward artefacts explain it |
-| **2** | **D8** | **Learned two-regime renewal gate** — a decision-time gate between a stable and a flexible renewal regime, primitive skill policy unchanged, no duration catalogue | medium | paired run | 1 | Whether the simplest constrained realization already carries the contribution |
-| 3 | D3′ | Role-conditioned renewal on R30 — richer state-dependent KEEP/SET over the same primitive | large | several | 1 | Whether richer conditioning beats the simple gate. **Only if D7 finds heterogeneity and D8 is insufficient** |
-| 4 | D1′ | Legacy sampled-duration bias diagnostic | small | one run | 0 | Whether legacy's duration behaviour is short-segment sampling geometry or candidate truncation. **Comparator only** |
-| 5 | D4 | Self-learned low-cardinality convergence | large | several | 1–2 | Whether periods can be learned rather than specified. **Parked** — without a causal stability condition it reproduces collapse and calls it convergence |
-| 6 | D5 | G20R3 identification fragment | large | several | 2+ | Whether member-resolved delayed credit is identifiable. **Parked, infrastructure** |
+| **0** | **D0** | Carrier and estimand derivation — clocks, `U_opp` vs `U_pi`, `Δ`, `H`, continuation semantics, normalization, censoring | small | **none** | 0 | **Complete.** What "variable `k`" means, and what any later number is a number *of* |
+| ~~1~~ | ~~D7.1~~ | Qualified-checkpoint preflight | none | none | 0 | **Done 2026-07-25 — negative.** No R30 checkpoint exists in either tree; zero `.pt` files in the external HMASD `logs/` at all |
+| ~~2~~ | ~~D7.2A~~ | Frozen-policy audit | — | — | — | **Unavailable.** Closed by D7.1 |
+| **1** | **D7.2B** | **Toy positive control** on `two_timescale_role_free_actions`, learned-keep branch | medium — new config + instrumentation | one short run | 0 | Whether the learned-keep carrier can express urgency where it provably exists |
+| **4** | **D7.3** | Main-scenario urgency audit, unless 2A settled it | medium | evaluation or run | 0–1 | Label-free, intervention-identified source heterogeneity |
+| 5 | **D8-coadaptive** | Two-regime renewal gate, jointly trained, constraining only the renewal-regime representation | medium | paired run | 1 | Whether the simplest constrained realization carries the contribution. **Build only if D7.3 establishes predictable low-cardinality urgency** |
+| 6 | D3′ | Richer state-dependent KEEP/SET over the same primitive | large | several | 1 | Whether richer conditioning beats the simple gate. Only if D8 is insufficient |
+| 7 | D1′ | Legacy sampled-duration bias diagnostic | small | one run | 0 | Legacy's own update geometry. **Off the critical path** unless legacy behaviour must be explained |
+| 8 | D4 | Self-learned low-cardinality convergence | large | several | 1–2 | **Parked** behind a causal non-collapse criterion |
+| 9 | D5 | G20R3 identification fragment | large | several | 2+ | **Parked.** Reactivate only if identified source opportunity and policy capacity exist but renewal learning stays credit-limited |
 
-D8 is new and did not exist in the previous ordering. It is the strongest simple
-reduction: if a two-regime gate delivers the full benefit, a duration head and a
-richer KEEP/SET model are unnecessary — and if a complex controller only matches
-it, the complexity has no demonstrated value.
+### Why the order changed
 
-### Why D0 is first
+The cheapest stage that can settle the question is a **frozen-policy evaluation**,
+not a training run. A checkpoint's missing commitment state blocks reconstructing
+past training trajectories, but not a fresh rollout — and the interventional
+estimand is policy-conditional, so freezing the policy is desirable rather than a
+compromise: both branches then refer to one snapshot.
 
-It consumes nothing and it changes the question. Until check clock, realized
-lifetime, renewal urgency and search cost are frozen, every later measurement is
-a number without an estimand — which is how D1 came to claim it settled two
-premises it could not reach.
+That makes D7.1, a pure repository check costing nothing, the gate on whether
+anything needs to be trained at all.
 
-D0 also has to be done before D7 rather than alongside it: D7's whole purpose is
-to separate natural renewal from four other ways a segment can end, and that
-separation is a definition, not an observation.
+**A negative at D7.2A does not retire the carrier.** It cannot separate absent
+source heterogeneity from an insufficient checkpoint, a bad skill policy, or
+renewal-credit failure. It routes to the toy positive control.
+
+### D8 split in two, and one half is dead
+
+`D8-frozen` — freeze the skill controller, train only a renewal gate — **is
+retired**. R44 ran that mechanism with a live gradient path and it collapsed to
+full-sync renewal at zero minimum per-agent marginal. `D8-coadaptive` survives:
+"primitive skill policy unchanged" means unchanged *architecture and information
+contract*, not frozen weights. Read as frozen weights it is R44 again.
 
 ### What would change the ordering
 
@@ -83,6 +96,7 @@ separation is a definition, not an observation.
 | D1 | "One instrumented legacy run settles both collapse and role separability" | Rests on three false premises — legacy as live default, collapse unobserved, a completed arm proving the current candidate set trains. Legacy's own sampling geometry can manufacture the reading it was meant to interpret. Survives only as the narrow comparator D1′ |
 | D2 | Compute role stability from existing logs, zero compute | No per-step traces are persisted; run logs hold only a small result json |
 | D6 | Grill mechanism V1/V2 validation | Not science. It answers no variable-`k` question and does not compete for scientific ordering. Governance lane, may proceed operationally in parallel |
+| D8-frozen | Renewal gate on a frozen skill controller | Already run as R44 with a live gradient path: actor drift `0.353` across 3,000/3,000 finite nonzero exposures, behaviour still full-sync RENEW at zero minimum per-agent marginal. Retired without rescue; `D8-coadaptive` is the survivor |
 
 ## Retained candidate portfolio
 
