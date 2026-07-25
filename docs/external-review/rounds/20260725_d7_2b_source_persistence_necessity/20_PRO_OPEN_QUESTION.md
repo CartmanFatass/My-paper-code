@@ -254,6 +254,8 @@ Nothing is built for the replacement. Changing the ordering now is free.
 - `docs/research/designs/D0_CARRIER_AND_ESTIMAND.md`
 - `docs/project/RESEARCH_GOAL.md`
 - `docs/project/EXPLORATION_LEDGER.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `envs/pettingzoo/two_timescale_role_free_actions.py`
 - `ha_ctse_process/r30_fixed_clock.py`
 - `scripts/audit_d7_2b_toy_positive_control.py`
