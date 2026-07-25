@@ -1,0 +1,29 @@
+Transport fault on our side, not yours: our operator clicked "Answer now" at roughly four minutes and curtailed your extended thinking. Your previous round on this conversation reasoned for 18m14s; this one was cut to 7m19s. That was not authorized, it is now explicitly forbidden in our transport procedure, and it is the sole reason for this follow-up.
+
+We are not disputing your answer. It is structurally complete, internally consistent, and we have already acted on part of it. We are asking you to re-examine the same three questions with the reasoning time you would have taken, because we cannot establish after the fact what the curtailment cost — and this is a protected-semantics ruling that a screen will be re-registered against.
+
+Same fence, same round, same evidence at the same stage_commit. Nothing in the question has changed.
+
+Please take the time you need. There is no deadline and nothing is waiting on latency.
+
+Your previous answer held, in summary:
+
+1. The current floor is invalid because it compares an action-sensitivity quantity against a state-variance quantity. Replace it with a two-stage definition: Stage A, source-level action effect identified via a common-random-number contrast dG = G(h,a,x) - G(h,a',x) with criterion LCB95(E[dG^2]) > 0, else SOURCE_ACTION_EFFECT_NOT_IDENTIFIED; Stage B, critic identification via NMSE = E[(dQ - dG)^2] / E[dG^2] with UCB95(NMSE) < 1, and directional alignment Align = E[dQ.dG] / sqrt(E[dQ^2] E[dG^2]) with LCB95(Align) > 0.
+
+2. Fixing the floor is not sufficient. The root problem is that the prefix critic receives (critic_state, active_mask, position, action_prefix) while the G18 delayed effect depends on rotating_mask and individual battery, which live in the observation and never reach the critic. You classed this as structural non-identifiability and as an invalid implementation of C1 rather than a threshold problem. You also noted the advantage is computed before the critic update, that critic and actor update synchronously with no cross-fitting or held-out validation, and that the actor can therefore be driven by a random early critic.
+
+3. P2 is unchanged and untested. C1 moves from preferred candidate to at-risk but is not formally refuted; the weakened proposition is that C1 as currently implemented can stably provide correct member-resolved credit.
+
+Specifically, where the curtailment is most likely to have cost depth:
+
+a. Stage A's estimator. Does the common-random-number contrast require a source that can be reset to an exact state, and is that satisfiable on the registered G18 and G17 sources as they are implemented? If it is not, what is the fallback that preserves the state-variance cancellation?
+
+b. The critic input set. You named rotating_mask and individual battery. Is that the complete set the delayed effect depends on, or the two you reached first? What is the exact input contract you would freeze for Q_j, and does adding observation to the critic create any leakage into the protected fast path that we should guard?
+
+c. The ordering and coupling defects. Are cross-fitting and a held-out critic validation set requirements for the re-registered screen, or improvements you would accept as optional? If required, state the split.
+
+d. Whether Stage A and Stage B should gate the screen jointly or in sequence, and what each failure classifies as in the re-registered result system.
+
+e. Anything you would add, sharpen or retract on fuller reflection — including on your own three-way failure taxonomy, and including telling us that your previous answer stands unchanged.
+
+If your considered position is that the earlier answer needs no revision, saying so plainly is a complete and useful reply.
