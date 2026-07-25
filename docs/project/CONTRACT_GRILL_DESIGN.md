@@ -1,14 +1,32 @@
 # Contract grill: proposed archetype set and gate structure
 
 ```text
-status=PROPOSED_AWAITING_EXTERNAL_RULING
+status=RULED_CHANGES_REQUIRED
+ruling=docs/external-review/rounds/20260725_contract_grill_design/21_PRO_OPEN_RAW.md
+reconciliation=docs/external-review/rounds/20260725_contract_grill_design/30_PM_RECONCILIATION.md
 date=2026-07-25
 purpose=governance mechanism, not science
-adoption=EXPERIMENTAL_WORKFLOW_GATE until out-of-distribution validation passes
+adoption=ADVISORY_EXPERIMENTAL_READER -- may not close a gate
 compute_authorized=none
 ```
 
-Nothing here authorizes a run. This document exists to be ruled on.
+**This document is superseded in part.** The external ruling is
+`CHANGES_REQUIRED`: the direction, the division of labour and the three-gate
+split are all confirmed, but the mechanism may not close a gate or issue an
+authoritative certificate until ten protected changes are incorporated and V2
+passes.
+
+Read the reconciliation before treating anything below as current. In particular
+the archetype set gains a seventeenth entry and a separate Technique class, the
+coverage matrix gains a row and broadens another, the decision ledger's single
+ruling field is split three ways, gate closure becomes a mechanical predicate,
+reader findings must reach the reviewer losslessly, and the reviewer retains a
+mandatory unmediated read that this document wrongly treated as replaceable.
+
+Until V2 passes the reader is **advisory**: it may generate questions, establish
+facts, produce a coverage matrix and help assemble the review package. It may not
+close Gate A, reduce the reviewer's independent read, issue a durable
+certificate, or license implementation by having found nothing.
 
 ## Why this exists
 
