@@ -8,16 +8,16 @@ last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
 last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
 active_source=UAV_CHARGE_ROTATION_ROSTER_G2
 source_gate=FROZEN_G2_CHARGE_ROTATION_IDENTIFICATION
-active_implementation=UAV_CHARGE_ROTATION_ROSTER_G2_EXECUTABLE_REALIZATION
+active_implementation=UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_PRELAUNCH
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=22_complete
 iterations_remaining=5
-formal_compute=G2_UNAUTHORIZED_UNTIL_PM_NONFORMAL_ACCEPTANCE
+formal_compute=G2_AUTHORIZED_AFTER_PM_ACCEPTANCE_PENDING_SOURCE_COMMIT
 algebra_status=G31_PAIRED_TOY_USABLE_UAV_G1_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=UAV_CHARGE_ROTATION_ROSTER_G2_EXECUTABLE_REALIZATION
+next_boundary=UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_ITERATION_23
 ```
 
 ## Accepted active line
@@ -458,3 +458,25 @@ non-`INVALID` terminal satisfies the frozen prerequisite for UAV charge-rotation
 G2. Implement that design as the next active line, retain source-first pruning,
 and require focused tests plus one bounded nonformal CPU exercise before any
 formal G2 launch.
+
+The G2 executable realization is now PM-accepted. The active core implements
+the frozen IID/LOW_ENERGY/SYNCHRONIZED_PRESSURE ledgers, dynamic
+ACTIVE/CHARGE_ABSENT/TERMINAL roster, anonymous current-only actor and full
+current critic, matched FIXED/OPEN policy arms, replay/GAE/PPO, constructive
+and no-proactive source controls, source-first pruning, seven-branch analysis,
+and identity-bound resumable journals. RESET and every REJOIN retain an
+immutable projection audit; initial pressure is taken only from RESET, every
+audit must pass, and existing absent station commitments survive replanning.
+Parse-truncated authority records are recoverable, while valid-but-wrong or
+tampered evidence remains fail-closed.
+
+Twenty-two core and twenty runner tests pass together as 42 focused CPU
+one-thread checks. A fresh bounded run at
+`logs/nonformal_uav_charge_rotation_g2_cpu_20260724_pm2` completed
+train/evaluate/analyze/validate as
+`NONFORMAL_UAV_CHARGE_ROTATION_G2_EXERCISE_COMPLETE`, with
+`operational_valid=true`, `formal=false` and `conclusion_bearing=false`. The
+closed G1 runtime and tests are deleted rather than retained behind adapters.
+This consumes zero conclusion-bearing iterations. After exact-path Git
+integration, launch the frozen formal CPU iteration 23 without changing any
+source, budget, seed, threshold or result precedence.

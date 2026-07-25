@@ -140,3 +140,28 @@ implementation_prerequisite=satisfied_by_SOURCE_NON_IDENTIFIABLE_UAV_TEMP_LOSS_G
 formal_prerequisite=accepted_G2_implementation_and_nonformal_evidence
 iteration_cost_before_valid_formal_result=0
 ```
+
+## Accepted executable realization
+
+The Project Manager accepts the active implementation in
+`ha_ctse_process/uav_charge_rotation_g2.py` and
+`scripts/run_uav_charge_rotation_g2.py` against this contract. The realization
+adds no compatibility reader or G1 rescue path. Its source evidence records the
+initial RESET projection separately from all later REJOIN projections, retains
+already-absent station commitments during replanning, and fails closed unless
+every projection, lifecycle plan, physical transition and source predicate is
+consistent. Terminal owners lose recurrent state before the next learned
+evaluation step.
+
+Interruption recovery is limited to parse-truncated uncommitted bindings and
+markers. A valid but conflicting identity, digest, payload or committed pair is
+never rewritten. The same-root path therefore remains resumable without
+weakening artifact authority.
+
+Acceptance evidence is 42 focused CPU one-thread tests plus the fresh bounded
+nonformal pipeline
+`logs/nonformal_uav_charge_rotation_g2_cpu_20260724_pm2`. Its registered result
+is `NONFORMAL_UAV_CHARGE_ROTATION_G2_EXERCISE_COMPLETE` with
+`operational_valid=true`, `formal=false` and `conclusion_bearing=false`.
+Formal iteration 23 uses the already frozen schedule and consumes no iteration
+until a valid conclusion-bearing analysis exists.
