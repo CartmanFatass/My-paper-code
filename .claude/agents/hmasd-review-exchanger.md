@@ -33,8 +33,11 @@ Before submission:
 
 1. Confirm the supplied paths and Git source identity match the assignment and
    are Git-visible at `stage_commit`.
-2. Run `.claude/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
-   with that commit and question path.
+2. Run `.claude/skills/hmasd-review-round/scripts/preflight_review_round.ps1`
+   with that commit, the round path and the registered reviewer's branch. It
+   must print `ROUND_PREFLIGHT_READY`. Anything else — including the script
+   erroring — is a blocker to report, never a gate to step around. A crashed
+   gate is a failed gate.
 3. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and use only its
    registered conversation. `registration_status` other than `registered`, or a
    null `conversation_id` or `url`, blocks transport — report it and stop. Never

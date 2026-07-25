@@ -94,18 +94,40 @@ if ($prompt -match '(?i)\bcontroller\b|hmasd-dispatch-task') {
     throw 'Rendered heartbeat retains a retired Controller route'
 }
 
-$boundaryVerifier = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1'
-$head = (& git.exe -C $repo rev-parse HEAD).Trim()
-# Verify against the branch actually under review, not a hard-coded one.
-$branch = (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim()
-$boundary = & $boundaryVerifier `
-    -Commit $head `
-    -QuestionPath 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/20_PRO_OPEN_QUESTION.md' `
-    -Remote $repo `
-    -Branch $branch `
-    -RepoRoot $repo | ConvertFrom-Json
-if ($boundary.status -ne 'REMOTE_EVIDENCE_READY' -or $boundary.commit -ne $head) {
-    throw 'Review boundary verifier failed a reachable exact commit'
+$preflight = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/preflight_review_round.ps1'
+if (-not (Test-Path $preflight)) { throw 'Round preflight gate is missing' }
+
+# The superseded verifier accepted any backticked path anywhere in a question and
+# so passed rounds the archive builder refused. It must not come back.
+if (Test-Path (Join-Path $repo '.claude/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1')) {
+    throw 'Superseded verify_pro_review_boundary.ps1 is present; preflight_review_round.ps1 is the single gate'
+}
+
+# The gate previously defaulted -Remote to the GitHub slug rather than a git
+# remote name and crashed on every production call, while this test passed
+# because it supplied its own remote. Assert the default is real.
+$preflightText = Get-Content -Raw $preflight
+$defaultRemote = [regex]::Match($preflightText, '\[string\]\$Remote\s*=\s*''(?<r>[^'']+)''')
+if (-not $defaultRemote.Success) { throw 'Round preflight has no default -Remote to validate' }
+$configuredRemotes = @(& git.exe -C $repo remote)
+if ($configuredRemotes -notcontains $defaultRemote.Groups['r'].Value) {
+    throw "Round preflight default -Remote '$($defaultRemote.Groups['r'].Value)' is not a configured git remote"
+}
+
+# A gate that cannot fail is decoration. The retired round is the fixture: it
+# carried no '## Evidence to read' allow-list and must be rejected.
+$retired = 'docs/external-review/rounds/20260724_g20_credit_rule_zero_fixed_point'
+if (Test-Path (Join-Path $repo "$retired/20_PRO_OPEN_QUESTION.md")) {
+    $rejected = & $preflight `
+        -Commit (& git.exe -C $repo rev-parse HEAD).Trim() `
+        -RoundPath $retired `
+        -Branch (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim() `
+        -RepoRoot $repo 2>$null | ConvertFrom-Json
+    if ($rejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
+        throw 'Round preflight accepted a question with no evidence allow-list'
+    }
 }
 
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'
+# The deliberate rejection probe above exits 1 by design; do not inherit it.
+exit 0

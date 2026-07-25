@@ -112,10 +112,22 @@ conversation, and declared input paths. Before browser submission:
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
 2. Run
-   `.claude/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
-   with that commit, question path, and `-Branch` set to the registered
+   `.claude/skills/hmasd-review-round/scripts/preflight_review_round.ps1`
+   with that commit, `-RoundPath`, and `-Branch` set to the registered
    reviewer's branch. `-Branch` is mandatory and has no default — it proves the
-   commit is actually reachable on the branch this conversation serves.
+   commit is actually reachable on the branch this conversation serves. It must
+   print `ROUND_PREFLIGHT_READY`; any other status, or an error from the script
+   itself, blocks transport. **A gate that crashed is a gate that failed** —
+   round `20260724_g20_credit_rule_zero_fixed_point` was dispatched past a
+   crashed boundary check and had to be retired.
+
+   This one script is the whole pre-dispatch contract: commit pushed and
+   reachable, question present, `## Evidence to read` allow-list non-empty with
+   every path present, standing contracts allow-listed, fence artifact fields
+   matching the round, and the recovery archive actually building. It replaces
+   the former `verify_pro_review_boundary.ps1`, which accepted any backticked
+   path anywhere in the question and so passed questions the archive builder
+   would refuse.
 3. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and select only its
    registered conversation. A reviewer whose `registration_status` is not
    `registered`, or whose `conversation_id` or `url` is null, blocks transport:
@@ -233,6 +245,25 @@ stable assistant response exists and generation controls are inactive, a stale
 or collapsed thinking label cannot keep the round pending. Conversely,
 changing response text or an active stop control proves generation is still in
 progress.
+
+An active `Stop answering` or `Stop generating` control **anywhere for the
+current turn** ends the question: generation is in progress and nothing may be
+archived, no matter how stable two snapshots look. Extended reasoning emits a
+progress trace — `Answer now`, `Clarifying file search`, `Fetched …`, `Formulated
+the response` — that sits still for many seconds at a time, so a stability check
+alone will happily certify it. On 2026-07-24 an archival pass captured 794 bytes
+of exactly that trace as scientific raw and asserted byte equality while the stop
+control was visible. Two stable snapshots are necessary, never sufficient.
+
+Before writing the raw, sanity-check the captured text against the question:
+
+- it is not a bare progress trace of the labels above;
+- it addresses the question's numbered asks rather than announcing intent to;
+- its size is plausible for the round — a scoped scientific answer on this line
+  runs to kilobytes, and a few hundred bytes is a trace, not an answer.
+
+A capture failing any of these is a transport fault. Report it and re-enter the
+wait; never archive it and never let it reach reconciliation.
 
 When the UI is ambiguous, inspect button labels, disabled state, message roles
 and one more stable snapshot before deciding. If an explicit response error has
