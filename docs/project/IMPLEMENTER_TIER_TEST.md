@@ -377,14 +377,36 @@ checklist asks what its author thought to ask. An interview follows the specific
 document in front of it. That gap is the thing worth measuring, and it explains
 why the current gate underperforms without anyone having been careless.
 
-### The unattended problem, stated
+### Who gets interviewed — resolved
 
-`grilling` interviews *the user*. In an unattended loop there is nobody to
-interview. So B2' is realized as an adversarial agent grilling the contract and
-returning its questions — the role `hmasd-doc-auditor` already plays for the
-governance surface, pointed at design contracts instead. Whether an agent
-interviewing a document is a real substitute for an interview with the author is
-itself uncertain, and is part of what B2' measures.
+I had this wrong. `grilling` interviews *the user*, and with nobody present I
+proposed an internal agent grilling the document, while noting that whether that
+substitutes for interviewing the author was uncertain.
+
+**User ruling, 2026-07-25: the interviewee is External Pro.** Unattended, Pro is
+what actually makes the scientific decisions, so the questions belong to whoever
+owns the answers — and it is reasonable for Pro's code-level preferences to
+follow from its own scientific decisions. An internal agent grilling a document
+has no authority to answer; Pro does. This removes the uncertainty rather than
+measuring it.
+
+Three consequences, now in `AGENTS.md` under the pre-freeze check:
+
+1. **One shot, written as a conditional tree.** The transport carries one
+   question and returns one answer, so the whole batch goes in a single turn. A
+   flat list discards what makes an interview work — that question seven only
+   arises from the answer to question three — so the branches are pre-walked:
+   *if you rule A on Q3, also answer Q3a and Q3b; if B, answer Q3c.*
+2. **Paths, never contents.** Pro reads the repository at `stage_commit` through
+   its connector, so the grill names exact files and sections in its
+   `## Evidence to read` allow-list. Free depth.
+3. **Authority, bounded.** Where a code choice is entailed by a scientific
+   decision, Pro's preference governs. Layout, factoring, naming and test
+   construction stay with Project Manager. The test is whether reversing the
+   choice would change a registered quantity or a branch.
+
+B2' is therefore no longer a hypothetical treatment to schedule — it is the
+mechanism, and the pending G20R2 questions are its first instance.
 
 ## Phase 2 — which skill pack, once the tier/planning combination is chosen
 

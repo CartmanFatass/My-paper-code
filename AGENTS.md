@@ -298,6 +298,40 @@ belongs to the screen. The check does not certify a design as sound; it retires
 the class of defect that is provable on paper, and identification failures still
 require data.
 
+#### Grill the contract past the checklist, and grill Pro
+
+These five questions are a checklist, and a checklist asks what its author
+thought to ask. On 2026-07-25 this check **passed** the G20R2 contract while that
+contract contained six defects — a section 2 / section 5 contradiction in the
+`Q_j` input list, a threshold required in one section and never frozen in
+another, a degenerate null, a Monte Carlo budget conflated with the sample
+estimating it, a missing policy-snapshot condition, and an expectation taken off
+its own declared support. Every one was decidable on paper. None was asked about.
+
+So a contract that will gate a screen also gets **grilled**, and the interviewee
+is **External Pro**, not the user and not an internal agent. Unattended, Pro is
+what actually makes the scientific decisions, so the questions belong to whoever
+owns the answers.
+
+**One shot, as a conditional tree.** The transport carries one question and
+returns one answer, so every question goes in a single turn. A flat list would
+throw away exactly what makes an interview work — that question seven only
+arises from the answer to question three. Write the batch as a **decision tree
+with the branches pre-walked**: *if you rule A on Q3, also answer Q3a and Q3b; if
+B, answer Q3c instead.* One reply then traverses the dependencies that an
+iterative interview would have discovered turn by turn.
+
+**Carry paths, never contents.** Pro reads the repository at `stage_commit`
+through its connector, so the grill names exact files and sections in its
+`## Evidence to read` allow-list and lets Pro read them. This costs nothing and
+puts the whole frozen contract in front of the decision.
+
+**Authority.** Where a code choice is *entailed by* a scientific decision, Pro's
+preference governs and Project Manager implements it. This does not hand Pro the
+implementation: file layout, factoring, naming, test construction and every
+choice that does not change what is measured stay with Project Manager. The test
+is whether reversing the choice would change a registered quantity or a branch.
+
 ## Result interpretation
 
 A failure retires the smallest unit it actually refutes. These categories are
