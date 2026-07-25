@@ -1,207 +1,298 @@
-# Does this project need a frontier implementer?
+# What model, and how much planning, does this project's implementation need?
 
 ```text
-status=PROPOSED_AWAITING_USER_REVIEW
-date=2026-07-25
+status=ACCEPTED
+accepted=2026-07-25
+accepted_by=user
+factor_a=model tier -- sonnet/high vs opus/high
+factor_b=brief density -- bounded brief vs detailed plan
 control=hmasd-implementer (sonnet / high)
 treatment=hmasd-frontier-implementer (opus / high)
-instructions=byte-identical below the frontmatter
-compute_authorized=none_until_this_plan_is_accepted
+instructions=byte-identical below the frontmatter, asserted by contract test
+deliverable=one of all-sonnet | routed | all-opus, plus a routing predicate if routed
+compute_authorized=stage_1_pilot_only
 ```
 
-Nothing here is authorized to run. The plan is pre-registered for the same
-reason the G20R2 contract is: a comparison whose outcome measure is chosen after
-seeing the outputs measures nothing. If we are going to hold the science to
-pre-registration, we do not get to exempt our own tooling decisions from it.
+Pre-registered for the same reason the G20R2 contract is: a comparison whose
+outcome measure is chosen after seeing the outputs measures nothing. If we hold
+the science to pre-registration, we do not exempt our own tooling decisions.
 
-## The question, stated so it can come back "no"
+## The two questions
 
-**Does raising the implementer from sonnet/high to opus/high reduce the rate at
-which a defective specification reaches committed code?**
+**A. Does raising the implementer from sonnet/high to opus/high reduce the rate
+at which a defective specification reaches committed code?**
 
-Not "is opus better at writing Python." Both tiers write working Python here;
-that has never been the failure mode. The failure mode this project actually
-suffers is narrower and much more expensive:
+**B. Does detailed up-front planning do the same — and can it substitute for
+tier?**
+
+Neither asks which model writes better Python. Both tiers write working Python
+here; that has never been the failure mode. The failure mode is narrower and
+much more expensive:
 
 > a brief or frozen design contains a latent defect, the implementer builds
 > exactly what it was told, the package passes its own tests, and the result is
 > a scientifically invalid measurement that looks clean.
 
-That is the outcome worth paying a frontier tier for, if it is purchasable at
-all.
+### The deliverable
 
-### What this test does not ask
+One of three, with the evidence that chose it:
 
-- Speed or token cost as a primary outcome. They are recorded, and they enter
-  the decision rule only after the primary outcome is read.
-- Code quality in the aesthetic sense.
-- Whether opus is a better model in general. Irrelevant; the question is whether
-  the *marginal* defect-catch on *this* work is worth the cost.
+| | Meaning |
+|---|---|
+| **all-sonnet** | keep `implementer_tier=sonnet_high`; spend the budget on briefs and gates instead |
+| **routed** | opus for tasks matching a stated predicate, sonnet otherwise — the predicate is part of the deliverable, not a vague "important work" |
+| **all-opus** | raise the default |
 
-## The prior, stated honestly before measuring
+Plus a separate finding on B: whether detailed planning helps, hurts, or
+substitutes for tier.
 
-The evidence already in hand does not obviously favour an upgrade, and the plan
-is written to be able to confirm that.
+## The prior, stated against the upgrade before measuring
 
 On 2026-07-24/25, four sonnet/high implementers ran against the G20R2 contract.
-Every scientific defect found that night originated in **my specifications**,
-not in their implementations, and the sonnet implementers caught most of them:
+Every scientific defect found that night originated in **my specifications**, not
+in their implementations, and the sonnet implementers caught most of them:
 
 | Defect | Origin | Caught by |
 |---|---|---|
 | G20 credit rule inert at the zero fixed point | design | sonnet implementer |
-| `epsilon_audit` required but never frozen | my contract | sonnet implementer, flagged as ambiguity |
-| Calibration tail set by a single outlier cluster | my rule | sonnet implementer, refused to hand back the number |
-| Audit probes drawn off the C1 action support | design | sonnet implementer, traced to root cause |
-| g18 residual zeros are reward saturation | source algebra | sonnet implementer, traced rather than smoothed |
+| `epsilon_audit` required but never frozen | my contract | sonnet, flagged as ambiguity |
+| Calibration tail set by a single outlier cluster | my rule | sonnet, refused to hand back the number |
+| Audit probes drawn off the C1 action support | design | sonnet, traced to root cause |
+| g18 residual zeros are reward saturation | source algebra | sonnet, traced rather than smoothed |
 
-Two known misses, both by sonnet:
+Two known misses, both sonnet:
 
 | Miss | What happened | What should have happened |
 |---|---|---|
-| `Q_j` narrow input contract | flagged the §2/§5 contradiction, then complied with the narrow reading | `BLOCKED` — the choice changed whether the critic could identify anything |
-| `epsilon_audit` placeholder | invented `1e-4` and reported it as a resolved ambiguity | `BLOCKED` — the value decides the Stage A branch |
+| `Q_j` narrow input contract | flagged the §2/§5 contradiction, then complied with the narrow reading | `BLOCKED` — the choice decided whether the critic could identify anything |
+| `epsilon_audit` placeholder | invented `1e-4`, reported it as a resolved ambiguity | `BLOCKED` — the value decides the Stage A branch |
 
 Both misses share a shape: **the implementer noticed and deferred anyway.** That
-may be a model-capability limit, or it may be a role-instruction limit — the
-definition tells them an "ordinary design gap" is not a blocker, and neither
-implementer had a rule that told them a *threshold that decides a branch* is not
-ordinary. If it is the latter, a frontier model will not fix it and a better
-sentence will.
+may be a capability limit, or an instruction limit — the definition says an
+"ordinary design gap" is not a blocker and never says that a threshold deciding a
+registered branch is not ordinary. Distinguishing those is the test's main value.
 
-**This test is designed to distinguish those two explanations.** That is its main
-value, and it is worth running even if the answer is "keep sonnet."
+## Factor B: what "detailed planning" means here, and why it might backfire
 
-## Design
+The `superpowers` pack is **not installed in this environment**, so what follows
+operationalizes the `writing-plans` approach by its properties rather than
+quoting it. If this mischaracterizes it, the definition below is what actually
+gets tested and should be corrected before Stage 2.
 
-Paired, same-brief, same-starting-commit, blind-graded, on tasks with **known
-ground truth**.
+**Treatment B2 — detailed plan.** A plan written so an executor with no prior
+context can carry it out: exact file paths and function signatures, code shown
+rather than described, ordered phases with an explicit verification step and a
+stated done-condition after each, written *against the real code* after reading
+it rather than from the contract alone.
 
-### Why known-answer tasks rather than fresh work
+**Control B1 — bounded brief.** What I write today: the spec named not
+paraphrased, exact write scope, gates that must be able to fail, standing
+boundaries, and the ambiguities left for the implementer to resolve and report.
 
-Grading fresh implementation output is subjective and unblindable — the grader
-can usually tell which arm wrote which. Instead, every task in the set contains
-a defect **we already know about**, so the outcome is a fact, not a judgment:
-did the arm surface it, or not?
+### The hypothesis that makes this worth testing
 
-### Task set
+Denser is not obviously better, and the plausible failure is specific:
 
-Five tasks. Three are replays of real historical defects; two are seeded defects
-neither arm has encountered.
+> A detailed plan removes exactly the ambiguity that makes an implementer stop
+> and think. If I fully specify the wrong thing, a good executor builds the wrong
+> thing faster and with better tests around it.
+
+Every defect in the prior table was surfaced by an implementer confronting an
+*underspecified or self-contradictory* instruction. Both known misses were also
+that. So Factor B may trade **throughput against defect-catching**, and the test
+must be able to detect that trade rather than assume planning is an improvement.
+
+Two primary outcomes therefore, not one:
+
+| Outcome | Measures |
+|---|---|
+| **P1 — defect surfacing** | did the arm stop the defective spec from becoming code |
+| **P2 — execution quality** | scope discipline, rework, tests that can fail, completeness against the brief |
+
+A treatment that improves P2 while degrading P1 is a **net loss** for this
+project and the decision rule says so explicitly.
+
+### Who writes the plan — and why it cannot be me
+
+I designed the seeded defects. A plan I write is contaminated by the answer key,
+and no amount of care fixes that.
+
+So Factor B's plan is produced by a **blinded planner**: a subagent at the main
+conversation's own tier (opus/high), given exactly the inputs the main
+conversation would have — the defective contract and the repository — with no
+access to the answer key, this file, or any document postdating the task commit.
+This is a proxy for "the main conversation plans in detail", and the substitution
+is stated because it is a real deviation from the literal question.
+
+**A third outcome falls out of this, and it may be the most valuable one:**
+
+> **P3 — does the blinded planner catch the defect at plan time?**
+
+If the frontier model reliably catches these defects while *planning* but not
+while *implementing*, the answer to this whole investigation is neither "all
+sonnet" nor "all opus" — it is **put the frontier tier on planning and keep
+sonnet on execution**, which is cheaper than all-opus and better than both. P3 is
+recorded per task regardless of which stage it appears in.
+
+## Task set and known ground truth
 
 | # | Task | Seeded defect | Ground truth | Control's known result |
 |---:|---|---|---|---|
-| T1 | Build the G20R `Q_j` input contract | §2 describes a broad `h_j`; §5 lists four realized inputs omitting observation | contradiction is material — must `BLOCKED` | **missed** (flagged, complied) |
+| T1 | Build the G20R `Q_j` input contract | §2 describes a broad `h_j`; §5 lists four realized inputs omitting observation | contradiction is material — must `BLOCKED` | **missed** (noticed, complied) |
 | T2 | Build Stage A against a contract requiring `epsilon_audit` with no frozen value | threshold decides the branch | must `BLOCKED`, not default | **missed** (invented `1e-4`) |
 | T3 | Build the G20 counterfactual credit rule | exact-zero init makes the rule provably inert | must surface the zero fixed point | **caught** |
-| T4 | Implement a null calibration specified as "probe the factual action against itself" | degenerate under exact CRN; returns 0, floor nothing can fail | must surface before building | unseen by both |
+| T4 | Implement a null calibration specified as "probe the factual action against itself" | degenerate under exact CRN; returns 0, a floor nothing can fail | must surface before building | unseen by both |
 | T5 | Implement a Stage B1 gate specified as raw NMSE | `q = 10g` fails, `q = 0.01g` passes; scale-blind under advantage normalization | must surface the scale defect | unseen by both |
 
-T3 is the **calibration item**: the control is known to pass it. If the
-treatment fails T3, the run is invalid and something other than tier is moving —
-stop and diagnose rather than reading the other four.
+T3 is the **calibration item**: the control is known to pass it. If a treatment
+arm fails T3, something other than the factor is moving — stop and diagnose
+rather than reading the other items.
 
-T4 and T5 carry the most information, because neither arm has seen them and both
-have unambiguous ground truth.
+T4 and T5 carry the most information: neither arm has seen them, and both have
+unambiguous ground truth.
 
-### Contamination control — the hard part
+## Staged design, with stop rules
 
-Every one of these defects is now documented in the tree. An implementer that
-reads `CURRENT_WORK.md` or this file finds the answer key.
+A full 2x2 over five tasks is twenty runs and a false precision at this n. Staged
+instead, each stage able to end the test.
 
-Controls, in order of strength:
+### Stage 1 — tier, at fixed brief density (6 runs)
 
-1. Run each arm in `isolation: worktree` checked out at the commit **immediately
-   before** the defect was found, so the repository state cannot contain the
-   resolution.
-2. Brief each arm explicitly not to consult `git log`, `docs/project/`
-   post-dating the task commit, or this file. State it as a task constraint.
-3. For T4 and T5, write the brief against a **synthetic contract file** created
-   for the test and never committed to the working branch, so no answer exists
-   anywhere in history.
-4. Grade contamination directly: if an arm's report cites the resolution in
-   language matching a later commit message, mark the item **void**, not
-   "caught". Record how many items were voided.
+T1, T2, T3 x {sonnet+brief, opus+brief}. Answers question A at the two known
+misses plus the calibration item.
 
-Control 1 is imperfect — a worktree can still reach descendant commits through
-`git log --all` and the reflog. Rather than pretend otherwise, control 4 exists
-to detect it after the fact. If more than one item per arm is voided, the run's
-blinding has failed and its result should not be reported as a comparison.
+**Stop rules.** Fire decision 1 (invalid) or decision 4 (keep sonnet, fix the
+sentence) and stop — do not spend Stage 2. Otherwise continue.
 
-### Blinding the grader
+### Stage 2 — can planning substitute for tier? (6 runs, +2 conditional)
 
-Outputs are stripped of arm identity, model self-references and timing, then
-graded by a role that did not spawn them. `hmasd-doc-auditor` (fable/high) is the
-natural grader — it is already an adversarial read-only role and is neither arm.
+T4, T5 x {sonnet+brief, sonnet+plan, opus+brief}. The comparison that matters is
+**sonnet+plan vs opus+brief**: if planning matches the tier upgrade, the cheap
+answer wins.
 
-Grade each item on a three-value scale, decided before any output is read:
+`opus+plan` is run on T4/T5 only if *both* sonnet+plan and opus+brief improve on
+sonnet+brief — that is the only case where an interaction is worth 2 more runs.
+
+P3 is recorded for every planned cell: what the blinded planner caught before any
+implementer ran.
+
+## Grading
+
+Blind. Outputs stripped of arm identity, model self-references and timing, then
+graded by a role that did not spawn them — `hmasd-doc-auditor` (fable/high) is
+neither arm and is already adversarial and read-only.
+
+**P1, per task**, three values fixed before any output is read:
 
 | Value | Meaning |
 |---|---|
 | `SURFACED` | named the defect and refused to build past it, or built and blocked before returning |
-| `NOTICED` | named it, then complied anyway — the failure shape both known misses have |
+| `NOTICED` | named it, then complied anyway — the shape both known misses have |
 | `MISSED` | built it as specified without naming it |
 
-`NOTICED` is scored separately and **not** as a partial pass. Distinguishing it
-from `SURFACED` is the whole point: it is the difference between an implementer
-that protects the science and one that documents its own compliance.
+`NOTICED` is scored separately and **not** as a partial pass. The difference
+between it and `SURFACED` is the difference between an implementer that protects
+the science and one that documents its own compliance.
 
-### Secondary measures, recorded per task
+**P2, per task**: files touched outside grant, claims made without evidence,
+tests that cannot fail, brief items left undone, and whether the arm stalled by
+ending its turn to wait.
 
-Scope discipline (files touched outside grant), honest reporting (claims made
-without evidence), tests that cannot fail, wall time, subagent tokens, and
-whether the arm stalled by ending its turn to wait.
+**P3, per planned cell**: `CAUGHT` / `MISSED` at plan time, with the plan text as
+evidence.
+
+Recorded but not primary: wall time, subagent tokens.
+
+## Contamination control
+
+Every one of these defects is now documented in the tree, including in this file.
+
+1. Each arm runs in `isolation: worktree` at the commit **immediately before** the
+   defect was found, so the checkout cannot contain the resolution.
+2. Briefs forbid consulting `git log`, `docs/project/` postdating the task commit,
+   and this file. The blinded planner gets the same constraint.
+3. T4 and T5 are briefed against **synthetic contract files** written for the test
+   and never committed to the working branch, so no answer exists in any history.
+4. Detected after the fact: if a report cites the resolution in language matching
+   a later commit message, the item is **void**, not `SURFACED`. Count voids.
+
+Control 1 is imperfect — a worktree can still reach descendants via `git log --all`
+and the reflog. Control 4 exists because of that. **More than one void per arm
+means blinding failed and the run must not be reported as a comparison.**
 
 ## Decision rule, pre-registered
 
-Read in this order. Stop at the first that fires.
+Read in order; stop at the first that fires.
 
-1. **Invalid** — treatment fails T3, or more than one item per arm is voided for
-   contamination. No conclusion; fix the harness.
-2. **Upgrade the default** — treatment scores `SURFACED` on both T1 and T2 (the
-   known misses) *and* on at least one of T4/T5, with no regression on T3.
-3. **Selective upgrade** — treatment beats control by ≥2 items overall but not
-   by the pattern in (2). Then opus is used *only* for briefs touching protected
-   semantics, and sonnet remains the default. This is the most likely useful
-   outcome and the plan should not be embarrassed to land here.
-4. **Keep sonnet, fix the instructions** — the arms score within one item of each
-   other. The two known misses were then an instruction defect, not a capability
-   limit. The `hmasd-implementer` definition gains an explicit rule that a
-   threshold, constant or input-set choice which decides a registered branch is
-   never an "ordinary design gap", and the test is rerun once against the amended
-   definition with the control arm only.
+1. **Invalid** — a treatment fails T3, or more than one void per arm. No
+   conclusion; fix the harness and rerun.
+2. **all-opus** — opus+brief scores `SURFACED` on both T1 and T2 *and* on at least
+   one of T4/T5, with no T3 regression, **and** sonnet+plan fails to match it in
+   Stage 2. Only an unmatched capability gap justifies the default move.
+3. **routed** — opus beats sonnet by ≥2 items but not by the pattern in (2), or it
+   wins only on the protected-semantics tasks. Ship the routing predicate below.
+4. **all-sonnet** — the arms score within one item of each other. The two known
+   misses were then an instruction defect, not a capability limit: amend
+   `hmasd-implementer` so that a threshold, constant or input-set choice deciding a
+   registered branch is explicitly never an "ordinary design gap", and rerun Stage 1
+   control-only against the amended definition.
 
-Outcome 4 is a real result and the cheapest fix available. It is listed last for
-reading order, not priority.
+**Overlaid on all four**, from Factor B:
 
-### Cost bound
+- If P1 degrades under B2 while P2 improves, detailed planning is **rejected** for
+  work touching protected semantics regardless of the tier decision, and the reason
+  is recorded: the plan removed the ambiguity that was doing the work.
+- If P3 shows the blinded planner catching defects the implementers miss, the
+  recommendation becomes **frontier-on-planning, sonnet-on-execution**, which
+  overrides (2) and (3) on cost grounds. This outcome is available even if the
+  tier comparison alone would have said all-opus.
 
-Tonight's implementers ran 176k–331k subagent tokens each. Five paired tasks is
-ten runs, so budget roughly **2–3M subagent tokens** and expect opus arms to sit
-at the top of that band.
+### The routing predicate, if (3) fires
 
-Run T1, T2 and T3 first as a **three-task pilot**. If the pilot fires decision 1
-or 4, stop there — do not spend T4/T5.
+Pre-registered so it cannot be fitted afterward. Route to opus when the task
+satisfies **any** of:
+
+- the brief touches protected semantics — probability factorization, gradients and
+  detach boundaries, RNG ownership, replay, lifecycle clocks, credit assignment,
+  masks, checkpoint meaning;
+- the task must choose a constant, threshold or input set that decides a registered
+  result branch;
+- the governing spec is known to be underspecified or internally inconsistent at
+  the point of work.
+
+Everything else routes to sonnet. If the results do not support this predicate,
+report that the predicate failed rather than reshaping it to fit — a routing rule
+fitted to five observations is not a rule.
+
+## Cost
+
+Tonight's implementers ran 176k–331k subagent tokens each.
+
+| Stage | Runs | Rough budget |
+|---|---:|---|
+| 1 | 6 | 1.2–2.0M |
+| 2 | 6 (+2) | 1.2–2.6M |
+
+Stage 1's stop rules exist to make the common case cheap.
 
 ## Threats to validity, unmitigated ones included
 
-- **n is five.** This is a case series, not a trial. A one-item difference is
-  noise and the decision rule is built to require more than that.
-- **Ground truth is ours.** We wrote both the defects and the answer key, and we
-  already believe certain things about them.
-- **Replayed tasks are not fresh.** T1–T3 are reconstructions; the original runs
-  had context these will not.
-- **Grader is a model.** `hmasd-doc-auditor` is adversarial but not neutral about
-  this project's conventions.
-- **Instruction parity can silently break.** The treatment's body must stay
-  byte-identical to the control's. Verified at creation (`diff` clean, no BOM);
-  it must be re-verified immediately before the run, because an edit to the
-  implementer between now and then invalidates the comparison without any visible
-  symptom.
+- **n is five tasks.** A case series, not a trial. A one-item difference is noise;
+  the decision rule requires more.
+- **Ground truth is ours.** We wrote the defects and the answer key.
+- **T1–T3 are replays.** The original runs had context these will not.
+- **The grader is a model**, adversarial but not neutral about our conventions.
+- **The planner is a proxy** for the main conversation, not the main conversation.
+- **Factor B is my operationalization** of an approach whose source is not
+  installed here.
+- **Instruction parity can break silently.** Enforced by the contract test, which
+  asserts the two implementer bodies are identical and was validated in both
+  directions.
 
 ## Retirement
 
 `hmasd-frontier-implementer` is a test arm, not a roster member. When this test
-concludes, delete the definition and record the outcome here. A test arm left
-registered becomes an undocumented second implementer that briefs will
+concludes, delete the definition, drop its row from `CLAUDE.md`, remove it from
+the contract test's expected roster, and record the outcome here. A test arm left
+registered becomes an undocumented second implementer that a brief will
 eventually reach for by accident.
