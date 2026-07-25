@@ -3,7 +3,8 @@
 Date: 2026-07-25
 
 ```text
-status=FROZEN_ENGINEERING_BOUNDARY
+status=PM_ACCEPTED_ISOLATED_NATIVE_SLICE
+implementation_state=COMPILED_BITWISE_ORACLE_AND_SPEED_GATE_PASS
 owner=project_manager
 purpose=accelerate_reused_uav_environment_without_changing_science
 active_formal_run_backend=python_frozen_source_unchanged
@@ -12,6 +13,8 @@ python_rng_owner=true
 python_lifecycle_owner=true
 python_evidence_owner=true
 compatibility_layer=forbidden
+active_environment_integration=false
+semantic_oracle_scope=first_native_kernel_boundary
 ```
 
 ## Decision
@@ -23,10 +26,10 @@ removes Python scalar loops and per-row process/Pipe traffic together; porting
 small helpers while retaining the same call count would not achieve the
 requested best-speed boundary.
 
-The in-flight formal charge-rotation G2 run remains bound to source commit
+The completed formal charge-rotation G2 run remains bound to source commit
 `8350263ef73b15f10b6d2bcac2583687aad7cade` and the existing Python backend.
-Native work is isolated in new paths until its oracle and benchmark pass. It
-cannot relabel, resume with, or modify that formal evidence.
+The native slice was compiled only after that process was terminal. It cannot
+relabel, resume with, or modify the formal evidence.
 
 ## Ownership boundary
 
@@ -41,7 +44,7 @@ Python remains the sole owner of:
   authority and registered result selection.
 
 C++ is a pure deterministic transform. It owns no persistent environment state,
-RNG, worker, file, cache authority or lifecycle event. Its first accepted
+RNG, worker, file, cache authority or lifecycle event. Its target accepted
 surface is a fused batch kernel over already-materialized inputs:
 
 ```text
@@ -49,7 +52,7 @@ step_physics_communication_batch(
     uav_positions: float64[B,8,3],
     user_positions: float64[B,30,3],
     ground_bs_positions: float64[B,G,3],
-    actions: float32[B,8,4],
+    guarded_velocities: float32[B,8,3],
     active_or_unavailable_masks: bool[B,8],
     channel_draws_and_config: explicit contiguous arrays/scalars
 ) -> {
@@ -73,19 +76,28 @@ the new material bottleneck and a separate exact oracle can cover them.
 
 ## Toolchain and loading
 
-The active CPU environment contains Python 3.10.20 and PyTorch 2.7.0+cpu with
-`torch.utils.cpp_extension`, but currently has no C++ compiler, CMake, Ninja or
-standalone pybind11 installation. The smallest maintained route is a CPU-only
-PyTorch C++ extension built with MSVC and loaded from an explicit ignored cache
-outside tracked sources. Compiled binaries are never committed or reused across
-Python, torch, compiler or CPU-ABI changes.
+The active CPU environment contains Python 3.10.20 and PyTorch 2.7.0+cpu. The
+accepted toolchain is Visual Studio Build Tools 17.14.37, MSVC 14.44.35207 and
+Ninja 1.12.1. The CPU-only PyTorch extension loads from an explicit ignored
+cache outside tracked sources. Its short directory key is a digest of the full
+Python, torch, compiler, CPU, flags and native-source identity. Compiled
+binaries are never committed or reused across an identity change.
 
-Before environment code is written, the toolchain proof must compile and import
-one tiny CPU op with the registered interpreter, `torch_threads=1`, verify exact
-dtype/shape/value behavior, and verify a second import reuses the explicit
-build cache. A compiler install is delayed until the in-flight formal process is
-terminal so installer CPU, disk activity or restart behavior cannot interfere
-with that evidence.
+The focused suite compiled and imported the first CPU op with the registered
+interpreter and `torch_threads=1`; all 10 tests passed. It covers exact
+shape/dtype/value behavior, non-binary float32 movement and clipping order,
+inactive-action mutation, fail-closed payload validation, and reuse of the same
+compiled module from a second Python process. Unicode repository paths are kept
+out of Ninja files by copying the content-identified native source into the
+ASCII build cache before compilation.
+
+The first implemented input is the already-prepared, backhaul-guarded velocity
+`float32[B,U,3]`, after Python has applied lifecycle, failure, limp-home,
+docking, charge and backhaul-guard decisions with the existing float32 action
+rounding. This makes the ownership boundary executable: the fourth policy/dock
+coordinate and every lifecycle/topology decision stay in Python, while one C++
+call updates the whole batch and generates UAV-user, UAV-UAV and UAV-base
+path-loss matrices from the resulting positions.
 
 ## Proof-sized semantic oracle
 
@@ -105,9 +117,13 @@ equality by preserving dtype and reduction order. A numeric tolerance is not a
 default escape hatch; any unavoidable difference requires a separate protected
 scientific decision before the native backend can become active.
 
-The oracle includes steady flight, movement boundaries, LEAVE, queue
-contention, CHARGE, REJOIN, terminal/depletion, inactive-action mutation,
-position/config/mask invalidation and trial-position non-persistence.
+The accepted first-slice oracle is deliberately limited to the native ownership
+boundary: batched position updates, movement boundaries, inactive-action
+mutation, three directional path-loss matrices, input/output layout and cache
+identity. Lifecycle, charge, queue, reward, observation and RNG remain Python
+owners and therefore cannot be claimed by this isolated kernel test. A later
+active-environment integration must compare those full transition surfaces
+before it may replace the Python path.
 
 ## Performance acceptance
 
@@ -120,16 +136,23 @@ slice; do not keep a compatibility backend with negligible value.
 
 The final target is to replace `PersistentG2VectorEnv` process/Pipe stepping
 with one batched native call while keeping the public G2 transition ABI. The
-Python implementation is removed after native acceptance; Git history is the
-archive.
+The superseded Python implementation is removed only after active-environment
+integration passes its full transition oracle; Git history is the archive.
+
+The retained benchmark artifact is
+`logs/nonformal_uav_cpp_backend_benchmark_20260725_pm1/result.json`. With
+`B=8`, eight UAVs, 30 users, two bases, seven alternating repeats and five calls
+per repeat, the Python scalar median is `0.04657848 s`, the C++ median is
+`0.00070086 s`, and the single-thread speedup is `66.459x`. All benchmark
+outputs are bitwise equal and the frozen `1.20x` retention threshold passes.
 
 ## Ordered realization
 
-1. Finish the in-flight Python formal run without source changes.
-2. Provision MSVC/Ninja and pass the tiny extension build/import/cache proof.
-3. Implement fused batched movement and directional communication in new
+1. Completed: finish the Python formal run without source changes.
+2. Completed: provision MSVC/Ninja and pass build/import/cache proof.
+3. Completed: implement batched movement and directional path loss in new
    native/loader/test paths.
-4. Pass the stepwise Python oracle and mutation negatives.
-5. Benchmark; retain only at the frozen speed threshold.
-6. Expand fusion only from measured residual hotspots, then replace and delete
+4. Completed: pass the kernel Python oracle and mutation negatives.
+5. Completed: pass the frozen performance-retention threshold.
+6. Pending: expand fusion only from measured residual hotspots, then replace and delete
    the superseded Python active line in one accepted Git boundary.
