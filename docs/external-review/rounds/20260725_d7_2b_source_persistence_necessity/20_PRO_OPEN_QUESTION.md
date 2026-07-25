@@ -53,24 +53,44 @@ both agents move to a skill they do not currently hold. So there are **two disti
 optima and one of them never persists**, with every realized commitment lifetime
 pinned at exactly one check interval.
 
-**Measured at competence** (small-scale machinery validation; the fully powered
-audit of the run's final checkpoint is in the evidence):
+**Measured** — full-power audit of the run's final checkpoint, 24 episodes ×
+4 replicates, 336 pairs, 0 dropped, `act_sequence` branch `learned_keep`. The
+audited object was declared to be the final checkpoint while the run was still
+training and before any audit had been run, because competence arriving early makes
+checkpoint choice an outcome-relevant knob.
+
+`B_H` measured from two source controls before the audit: `B_30 = 10.000`
+(constructive `30.000`, null `20.000`, 72 windows); `B_5 = 1.875`.
 
 ```text
-A   slow_match 1.0   fast_match 1.0                 competence met
-C   P(SET | flex)    1.0
-    P(KEEP | stable) 0.0                            KEEP never used
-    full-sync SET    1.0   on mixed-urgency checks   your ceiling is 0.25
-B   U~_flex   0.214
-    U~_stable 0.232                                  no separation
-    difference -0.018
+branch  NONFORMAL_NO_URGENCY_SEPARATION_D7_2B
+
+A  slow_match  1.0000  LCB 1.0000     fast_match 1.0000  LCB 1.0000  PASS (floor 0.75)
+B  U~_flex     0.43006 LCB 0.40828                                   pass (floor 0.10)
+   U~_stable   0.25186 UCB 0.27496                                   FAIL (ceiling 0.05)
+   difference  0.17820 LCB 0.15908                                   FAIL (floor 0.20)
+   U~_opp,flex 0.43006 LCB 0.40828   split-sample
+C  P(SET | flex)    1.0000                                           pass
+   P(KEEP | stable) 0.0000                                           FAIL (floor 0.75)
+   gap              0.0000                                           FAIL (floor 0.50)
+   full-sync SET    1.0000  mixed-urgency                            FAIL (ceiling 0.25)
 ```
 
-`U~_stable ≈ U~_flex` is coherent rather than anomalous. Under a swap-coordinated
-policy **both** agents' renewals are load-bearing: forcing the low-urgency agent to
-KEEP breaks the coordination its partner has learned to expect, and the partner —
-regenerated under the modified prefix, per your continuation semantics — does not
-compensate.
+**`U~_stable = 0.252` is the load-bearing number, not `U~_flex`.** Renewing the
+holder of the *low-urgency* duty is still worth a quarter of the whole renewal
+headroom. That is the swap signature: under swap coordination **both** agents'
+renewals are load-bearing, because forcing the low-urgency agent to KEEP breaks the
+coordination its partner has learned to expect, and the partner — regenerated under
+the modified prefix, per your continuation semantics — does not compensate. B fails
+twice: `U~_stable` at five times its ceiling, and the difference short of its floor.
+
+C is exact `0` or `1` with zero variance across 24 episodes.
+
+One correction I am volunteering because it bears on how much weight to give small
+checks: a 2-episode machinery validation earlier gave `flex 0.214 / stable 0.232 /
+difference -0.018`, which read as *no separation at all*. At full power the
+difference is positive but insufficient. The negative sign was a small-sample
+artifact, and no conclusion was drawn from it.
 
 ## B. What this did to the reasoning, including mine
 
@@ -112,15 +132,19 @@ persist optimum needs: keep_head to acquire state-DEPENDENT WEIGHTS,
 So the swap is reachable with strictly less learning than persistence, and the
 policy walked to it **despite starting biased toward KEEP at 0.6**.
 
-**The ledger confirms this rather than merely suggesting it.** At competence
-`keep_prob` is uniformly collapsed and carries no regime information — the
-difference between regimes is smaller than the spread within them:
+**The full-power ledger confirms this rather than merely suggesting it** — 384 rows
+across 24 episodes:
 
 ```text
-keep_prob over all mixed-urgency rows:  min 0.000416   max 0.009945
-    flex     n=14   mean 0.002853   std 0.00267
-    stable   n=14   mean 0.003998   std 0.00305
-    between-regime difference 0.00115  <  within-regime std ~0.003
+token_kind        takes exactly one value in the entire ledger: SET
+                  KEEP never occurs, not once
+skill_age         exactly 5 at every check past the first
+                  every commitment lives precisely one check interval
+
+keep_prob         min 0.000000   max 0.000168   mean 0.000017
+    flex     n=168   mean 0.000011   std 1.71e-05
+    stable   n=168   mean 0.000023   std 3.34e-05
+    between-regime difference 1.2e-05  <  within-regime std 3.3e-05
 ```
 
 So `keep_head` never acquired state dependence. It lowered its bias and stopped.

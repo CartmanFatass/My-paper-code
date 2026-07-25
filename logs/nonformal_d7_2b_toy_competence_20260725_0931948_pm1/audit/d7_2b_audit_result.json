@@ -1,0 +1,164 @@
+{
+  "branch": "NONFORMAL_NO_URGENCY_SEPARATION_D7_2B",
+  "reason": "access held but the interventional contrast did not separate the regimes; the learned skill support or this source does not expose urgency as registered",
+  "act_sequence_branch": "learned_keep",
+  "checkpoint": "logs/nonformal_d7_2b_toy_competence_20260725_0931948_pm1/standalone_process_core_final.pt",
+  "config": "config_d7_2b_toy_learned_keep",
+  "episodes": 24,
+  "replicates": 4,
+  "b_h_measured": {
+    "5": {
+      "constructive_mean": 5.0,
+      "null_mean": 3.125,
+      "windows": 192,
+      "window_starts": "every check boundary with a full horizon",
+      "b_h": 1.875
+    },
+    "30": {
+      "constructive_mean": 30.0,
+      "null_mean": 20.0,
+      "windows": 72,
+      "window_starts": "every check boundary with a full horizon",
+      "b_h": 10.0
+    }
+  },
+  "condition_a_competence": {
+    "slow_match": {
+      "mean": 1.0,
+      "lcb95": 1.0,
+      "ucb95": 1.0,
+      "clusters": 24,
+      "points": 960
+    },
+    "fast_match": {
+      "mean": 1.0,
+      "lcb95": 1.0,
+      "ucb95": 1.0,
+      "clusters": 24,
+      "points": 960
+    },
+    "floor": 0.75,
+    "passed": true
+  },
+  "condition_b_interventional": {
+    "horizon": 30,
+    "b_h": 10.0,
+    "measurable": true,
+    "u_pi_flex": {
+      "mean": 0.4300595238095238,
+      "lcb95": 0.40827599530811376,
+      "ucb95": 0.4518430523109338,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_pi_stable": {
+      "mean": 0.251860119047619,
+      "lcb95": 0.22875869988586822,
+      "ucb95": 0.2749615382093698,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_pi_difference": {
+      "mean": 0.17819940476190477,
+      "lcb95": 0.1590793334882484,
+      "ucb95": 0.19731947603556113,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_opp_flex_split_sample": {
+      "mean": 0.4300595238095238,
+      "lcb95": 0.40827599530811376,
+      "ucb95": 0.4518430523109338,
+      "clusters": 24,
+      "points": 168
+    },
+    "pairs": 336,
+    "dropped_pairs": 0,
+    "thresholds": {
+      "difference_floor": 0.2,
+      "flex_floor": 0.1,
+      "stable_ceiling": 0.05
+    },
+    "passed": false
+  },
+  "condition_b_secondary_horizon": {
+    "horizon": 5,
+    "b_h": 1.875,
+    "measurable": true,
+    "u_pi_flex": {
+      "mean": 1.3333333333333333,
+      "lcb95": 1.3333333333333333,
+      "ucb95": 1.3333333333333333,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_pi_stable": {
+      "mean": 0.6825396825396824,
+      "lcb95": 0.6441620972233687,
+      "ucb95": 0.7209172678559962,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_pi_difference": {
+      "mean": 0.6507936507936507,
+      "lcb95": 0.612416065477337,
+      "ucb95": 0.6891712361099644,
+      "clusters": 24,
+      "points": 168
+    },
+    "u_opp_flex_split_sample": {
+      "mean": 1.3333333333333333,
+      "lcb95": 1.3333333333333333,
+      "ucb95": 1.3333333333333333,
+      "clusters": 24,
+      "points": 168
+    },
+    "pairs": 336,
+    "dropped_pairs": 0,
+    "thresholds": {
+      "difference_floor": 0.2,
+      "flex_floor": 0.1,
+      "stable_ceiling": 0.05
+    },
+    "passed": false
+  },
+  "condition_c_natural_alignment": {
+    "p_set_given_flex": {
+      "mean": 1.0,
+      "lcb95": 1.0,
+      "ucb95": 1.0,
+      "clusters": 24,
+      "points": 168
+    },
+    "p_keep_given_stable": {
+      "mean": 0.0,
+      "lcb95": 0.0,
+      "ucb95": 0.0,
+      "clusters": 24,
+      "points": 168
+    },
+    "p_set_gap": {
+      "mean": 0.0,
+      "lcb95": 0.0,
+      "ucb95": 0.0,
+      "clusters": 24,
+      "points": 168
+    },
+    "p_full_sync_set_mixed": {
+      "mean": 1.0,
+      "lcb95": 1.0,
+      "ucb95": 1.0,
+      "clusters": 24,
+      "points": 168
+    },
+    "same_label_renewal": "NOT_APPLICABLE_STRUCTURALLY_EXCLUDED",
+    "thresholds": {
+      "gap_floor": 0.5,
+      "set_flex_floor": 0.75,
+      "keep_stable_floor": 0.75,
+      "full_sync_ceiling": 0.25
+    },
+    "passed": false
+  },
+  "contract": "docs/research/designs/D7_2B_TOY_POSITIVE_CONTROL_REALIZATION.md"
+}

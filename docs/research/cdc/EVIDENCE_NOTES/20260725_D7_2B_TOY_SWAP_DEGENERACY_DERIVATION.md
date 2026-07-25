@@ -46,19 +46,46 @@ nothing about whether the carrier *can* express urgency.
 
 ## What was observed
 
-The competence run's update-100 checkpoint, `env_reward_mean = 0.984375` rising to
-`1.000000` by update 218, audited at small scale — machinery validation, not the
-registered result, which is reserved for the final checkpoint per the contract:
+**Registered result — full-power audit of the run's final checkpoint**, 24 episodes
+× 4 replicates, 336 pairs, 0 dropped, `act_sequence` branch `learned_keep`. The run
+completed 1,000 updates with its last twenty all at exactly `1.0`.
+
+`B_H` measured from the two source controls before the audit: `B_30 = 10.000`
+(constructive `30.000`, null `20.000`, 72 windows); `B_5 = 1.875`.
 
 ```text
-condition A   slow_match 1.0   fast_match 1.0        competence fully met
-condition C   P(SET|flex)      1.0
-              P(KEEP|stable)   0.0                   KEEP is never used at all
-              full-sync SET    1.0   (mixed-urgency) ceiling is 0.25
-condition B   U~_flex          0.214
-              U~_stable        0.232                 no separation
-              difference      -0.018
+branch  NONFORMAL_NO_URGENCY_SEPARATION_D7_2B
+
+A  slow_match  1.0000  LCB 1.0000        fast_match 1.0000  LCB 1.0000   PASS (floor 0.75)
+B  U~_flex     0.43006 LCB 0.40828                                       pass (floor 0.10)
+   U~_stable   0.25186 UCB 0.27496                                       FAIL (ceiling 0.05)
+   difference  0.17820 LCB 0.15908                                       FAIL (floor 0.20)
+   U~_opp,flex 0.43006 LCB 0.40828   (split-sample)
+C  P(SET|flex)      1.0000                                               pass
+   P(KEEP|stable)   0.0000                                               FAIL (floor 0.75)
+   gap              0.0000                                               FAIL (floor 0.50)
+   full-sync SET    1.0000  (mixed-urgency)                              FAIL (ceiling 0.25)
 ```
+
+**`U~_stable = 0.252` is the load-bearing number, not `U~_flex`.** Renewing the
+holder of the *low-urgency* duty is still worth a quarter of the entire renewal
+headroom. That is the swap signature: under swap coordination both agents'
+renewals matter, so B fails twice over — `U~_stable` is five times its ceiling and
+the difference misses its floor.
+
+**A 2-episode machinery validation earlier gave `flex 0.214 / stable 0.232 /
+difference -0.018`**, which read as no separation whatsoever. At full power the
+difference is positive (`0.430` against `0.252`) but insufficient. The small-sample
+sign was an artifact, and it is recorded because it is the reason machinery-check
+numbers must never be used as a result.
+
+`U~_opp,flex` equals `U~_pi,flex` to five decimals. The split-sample maximum over
+non-incumbent skills recovers exactly the policy's own choice, which is what a
+deterministic optimal skill selection should give — a consistency check on the
+estimator rather than a separate finding.
+
+C is exact `0` or `1` with **zero variance across 24 episodes**: the policy SETs
+both agents at every check.
 
 The event ledger shows the mechanism directly — both agents SET at every check, in
 anti-phase, with `skill_age = 5` at every one:
@@ -91,16 +118,21 @@ persist needs: keep_head to acquire state-DEPENDENT WEIGHTS, to KEEP for the
                x-holder and SET for the y-holder
 ```
 
-Measured, not argued. At competence `keep_prob` is uniformly collapsed and carries
-no regime information — the between-regime difference is smaller than the
-within-regime spread:
+Measured, not argued. The full-power ledger, 384 rows across 24 episodes:
 
 ```text
-all mixed-urgency rows:  min 0.000416   max 0.009945
-    flex     n=14   mean 0.002853   std 0.00267
-    stable   n=14   mean 0.003998   std 0.00305
-    between-regime difference 0.00115  <  within-regime std ~0.003
+token_kind   takes exactly one value in the whole ledger: SET -- KEEP never occurs
+skill_age    exactly 5 at every check past the first: every commitment lives
+             precisely one check interval
+
+keep_prob    min 0.000000   max 0.000168   mean 0.000017
+    flex     n=168   mean 0.000011   std 1.71e-05
+    stable   n=168   mean 0.000023   std 3.34e-05
+    between-regime difference 1.2e-05  <  within-regime std 3.3e-05
 ```
+
+`token_kind ∈ {SET}` and `skill_age ≡ 5` are the derivation's two predictions,
+observed exactly and without exception.
 
 `keep_head` never acquired state dependence; it lowered its bias and stopped. The
 toy was solved entirely through the skill head, leaving the renewal decision — the
