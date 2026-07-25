@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260725_research_direction_and_ledger
+stage_commit=01fd085bbe1197aa89aeb1b61a7e0ae150025b5d
+question=docs/external-review/rounds/20260725_research_direction_and_ledger/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit. Answer every question in one reply; the follow-ups are conditional on your own rulings.
