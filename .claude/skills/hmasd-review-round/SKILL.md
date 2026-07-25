@@ -50,6 +50,35 @@ Never reuse a tab id from an earlier session; call `tabs_context_mcp` first and
 re-resolve. Do not trigger a JavaScript dialog — a modal blocks every subsequent
 browser call and requires the user to clear it by hand.
 
+### Composing multi-line text — a newline is a send
+
+**In this composer, Enter submits.** The `computer` `type` action delivers every
+`\n` in its text as an Enter keypress, so typing a multi-line fence submits it
+one fragment at a time. On 2026-07-24 this chopped a single fence into several
+truncated `CURRENT_REVIEW_ASSIGNMENT` messages, left the reviewer with no usable
+assignment, and cost a round.
+
+`form_input` is listed above but **fails on this composer** — it is a
+contenteditable `DIV`, not a form control, and returns
+`Element type "DIV" is not a supported form input`.
+
+The mechanism that works:
+
+1. click the composer;
+2. `type` one line at a time, with **no `\n` anywhere in the text**;
+3. between lines, press `shift+Return` — a soft line break that does not submit;
+4. screenshot and read the composer back before sending, confirming the whole
+   message is present exactly once;
+5. submit **once**, then confirm exactly one new user turn appeared.
+
+Batch the type/`shift+Return` sequence through `browser_batch` so ordering is
+deterministic; concurrent single calls can interleave and scramble the text.
+
+If a submission appears not to have landed, snapshot before retyping. The text is
+usually already there and the UI simply has not repainted — retyping on an
+unconfirmed snapshot is what produces duplicates. Uncertainty resolves toward not
+sending, exactly as it does for a second fence.
+
 ## Required inputs
 
 Require the assigned round path, pushed 40-character `stage_commit`, exact
