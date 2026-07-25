@@ -41,8 +41,21 @@ it is a staged diagnostic that runs its cheapest qualifying stage first.
 | **0** | **D0** | Carrier and estimand derivation — clocks, `U_opp` vs `U_pi`, `Δ`, `H`, continuation semantics, normalization, censoring | small | **none** | 0 | **Complete.** What "variable `k`" means, and what any later number is a number *of* |
 | ~~1~~ | ~~D7.1~~ | Qualified-checkpoint preflight | none | none | 0 | **Done 2026-07-25 — negative.** No R30 checkpoint exists in either tree; zero `.pt` files in the external HMASD `logs/` at all |
 | ~~2~~ | ~~D7.2A~~ | Frozen-policy audit | — | — | — | **Unavailable.** Closed by D7.1 |
-| ~~1~~ | ~~D7.2B~~ | ~~Toy positive control on `two_timescale_role_free_actions`~~ | built | spent | 0 | **Source retired 2026-07-25.** It admits a full-sync swap optimum, so persistence is optional and a null is uninformative. `EVIDENCE_NOTES/20260725_D7_2B_TOY_SWAP_DEGENERACY_DERIVATION.md` |
-| **1** | **D7.2B′** | **Replacement positive control** on a source where persistence is *necessary* | small — the audit, hook and ledger all transfer | one short run | **1** — the source contract is a scientific selection | Whether the learned-keep carrier can express urgency where it provably exists |
+| ~~1~~ | ~~D7.2B~~ | ~~Toy positive control on `two_timescale_role_free_actions`~~ | built | spent | 0 | **Source retired 2026-07-25, ruled ACCEPT.** It admits a full-sync swap optimum, so persistence is optional and a null is uninformative. `EVIDENCE_NOTES/20260725_D7_2B_TOY_SWAP_DEGENERACY_DERIVATION.md` |
+
+**Reordered again 2026-07-25 by the D7.2B′ ruling.** The successor is not a
+replacement toy. Order 0 is a zero-compute semantics reconciliation, order 1 is a
+zero-compute audit of the *main* scenario, and **D8 is blocked in every branch**
+until the paper-level source is qualified — a positive toy cannot rescue a main
+benchmark that does not require individual persistence.
+
+| Order | id | Direction | Build | Compute | Review | Settles |
+|---:|---|---|---|---|---|---|
+| **0** | **D0′** | Result-semantics reconciliation — add `U*_src`, relabel `U_opp` as focal-best SET under policy continuation, add the persistence-necessity source gate | small | **none** | 0 | What any later renewal number is a number *of* |
+| **1** | **D7.S** | **Main-scenario persistence-necessity audit** — is there a material agent-level margin under optimal joint continuation? | small | **none**, or constructive controls only | 0 | Whether the paper's intended source requires individual persistence at all |
+| **2A** | **D7.3** | Main-scenario urgency audit, *if* D7.S passes and access is established | medium | evaluation or run | 0–1 | Label-free, intervention-identified source heterogeneity. **Skips the replacement control entirely** |
+| **2B** | **D7.2B′** | Tenure-based replacement positive control, *if* D7.S fails or is unresolved | medium — audit, hook, ledger and `B_H` all transfer | one short run | 1 | Carrier capacity where persistence is *provably* necessary |
+| **3** | **Main-source requalification** | Redesign or select a main source with non-transferable assignment state, *if* D7.S failed | large | — | 1+ | Whether the paper has an identifying benchmark at all |
 | **4** | **D7.3** | Main-scenario urgency audit, unless 2A settled it | medium | evaluation or run | 0–1 | Label-free, intervention-identified source heterogeneity |
 | 5 | **D8-coadaptive** | Two-regime renewal gate, jointly trained, constraining only the renewal-regime representation | medium | paired run | 1 | Whether the simplest constrained realization carries the contribution. **Build only if D7.3 establishes predictable low-cardinality urgency** |
 | 6 | D3′ | Richer state-dependent KEEP/SET over the same primitive | large | several | 1 | Whether richer conditioning beats the simple gate. Only if D8 is insufficient |
