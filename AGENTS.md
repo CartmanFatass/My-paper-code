@@ -182,6 +182,11 @@ so the next one restarts colder than it needs to. Carrying one full iteration
 across the seam makes the handoff smoother, because the successor inherits the
 thinking behind the boundary and not only the boundary.
 
+The count must survive the thing it governs, so `CURRENT_WORK.md` carries
+`iterations_since_last_compaction`. Increment it when an iteration closes; reset
+it to `0` immediately after compacting. Without that key the cadence is
+unexecutable across the very boundary it describes.
+
 Context pressure overrides the cadence **downward, never upward**. If the window
 runs short before the second seam, compact at the first seam available rather
 than pushing on degraded — and never defer a compaction the context actually
