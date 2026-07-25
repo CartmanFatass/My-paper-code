@@ -24,6 +24,8 @@ pre_send_adversarial_pass=applied_eight_findings_incorporated
 - `docs/project/AGENT_CONTEXT.md`
 - `docs/project/PRO_FIRST_LOOP_PROPOSAL.md`
 - `docs/project/IMPLEMENTER_TIER_TEST.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `.claude/agents/hmasd-implementer.md`
 - `.claude/agents/hmasd-reviewer.md`
 
