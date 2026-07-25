@@ -64,25 +64,51 @@ stable versus flexible role, not long versus short `k`.** Identify which agents
 hold persisting roles; the period is a consequence. That also splits the claim in
 two, and the first half stands alone even if the second fails.
 
-## What the code already has, checked rather than assumed
+## What the code already has — corrected
 
-- `high_controller = "legacy_duration"` is the **variable-duration mode and the
-  live default**; the alternative `r30_fixed_clock_ar_edit` is the fixed-clock
-  challenger.
-- The high policy already emits `duration_logits` beside `skill_logits`.
-- The space is already discretised: `skill_lifetime_candidates = (3, 7, 13, 24)`,
-  in high-level intervals, so the primitive horizon is `candidate * k`.
-- The config comment on those candidates already reads *"UAV service/relay
-  formation is a long-horizon task"* — the role split, written down and unused.
-- `EXP-20260714-r30-fixed-clock-paired-320k` is recorded **stopped, superseded
-  before completion**: the legacy arm completed, the treatment was stopped, and
-  **no M1–M4 outcome exists**. The fixed-clock challenger never won.
+An earlier draft of this section stated several of these facts wrongly in the
+direction that favoured my preferred plan. An adversarial pre-send pass caught it
+and the corrections are given here rather than quietly fixed, because the
+original framing would have foreclosed the alternative in Q6.
 
-And one gap that decides the paper's shape:
+Verified true:
 
-- `duration_entropy_floor_*` exists, default-off, described in-code as *"a
-  one-variable guard for duration collapse"* — so collapse is **anticipated by the
-  engineering and observed nowhere in `ExpRecord`.**
+- The high policy emits `duration_logits` beside `skill_logits`.
+- The space is discretised: `skill_lifetime_candidates = (3, 7, 13, 24)`, in
+  high-level intervals, so the primitive horizon is `candidate * k`.
+- The config comment on those candidates reads *"UAV service/relay formation is a
+  long-horizon task"* — the role split, written down and unused.
+
+Corrected:
+
+- **`legacy_duration` is not "the live default" in any research sense.** It is the
+  assigned value, but the comment two lines above it reads *"Legacy duration
+  editing remains available only as the **frozen comparator**; R30 must be
+  selected explicitly."*
+- **The fixed-clock challenger did not simply fail.** Only the 320k pairing was
+  stopped without an M1–M4 outcome. An adaptive R30 arm completed and anchored
+  R31/R32/R33, where its lifetime-breadth and SET-safety gates passed. My claim
+  that legacy was "the only controller with a completed arm" was false.
+- **R30 exists because of a recorded structural defect of legacy.** The fixed
+  clock was designed to *"permit lifetimes beyond the old four-block cap without
+  short-segment high-sample bias"* — a bias of exactly the mechanism I was
+  proposing to build on.
+- **Duration collapse has been observed, not merely anticipated.** `config.py`
+  records that *"R16.5 showed 0.1 intrinsic pressure can induce duration-collapse
+  pathology, while 0.05 was the cleaner stabilized base"*, and the entropy floor
+  sits under an "R16.5 stabilization" heading. It is absent from `ExpRecord`
+  because R16.5 predates it, which is not the same as unobserved.
+- **The completed legacy arm is not the configuration D1 would run.** It used
+  frozen duration choices `(1,2,3,4)` at `k0=10`. The current candidate set
+  `(3,7,13,24)` has no completed run anywhere, so "the path trains" is unverified
+  for the path D1 actually exercises.
+
+And two mechanisms that can **fabricate** a collapse reading on this path:
+
+- short-segment high-sample bias in legacy duration editing;
+- Z-boundary atomic reassignment, where `config.py` warns that if `team_intent_k`
+  does not exceed the longest lifetime candidate it *"structurally truncates long
+  duration choices and fabricates collapse."*
 
 ---
 
@@ -133,11 +159,20 @@ to settle both premises at once.
 **Q4. Is that the correct first experiment, or is there something cheaper that
 settles more?**
 
-- **Q4a.** What must that run log for its result to be interpretable — and what
-  would make a "no collapse" reading a genuine refutation of the premise rather
-  than an artefact of budget, seed, or scenario?
-- **Q4b.** If duration does **not** collapse, is the contribution dead, or does it
-  re-form around something else?
+- **Q4a.** What must that run log for its result to be interpretable — in **both**
+  directions? An earlier draft asked only what would make a *no-collapse* reading
+  genuine, which is asymmetric in favour of the paper's preferred answer. So:
+  what would make a **collapse** reading a genuine property of the mechanism
+  rather than an artefact of short-segment high-sample bias or Z-boundary
+  truncation; and what would make a **no-collapse** reading a genuine refutation
+  rather than an artefact of budget, seed or scenario?
+- **Q4b.** Given that collapse was already observed at R16.5 under `0.1` intrinsic
+  pressure and that `0.05` was adopted as the stabilized base, is the open
+  question now *whether* collapse occurs, or *whether it recurs under the current
+  reward-pure defaults without intrinsic pressure*? If the latter, D1's framing
+  needs restating.
+- **Q4c.** If duration does not collapse under current defaults, is the
+  contribution dead, or does it re-form around something else?
 
 ## Q5. Is holding the identification line right?
 
@@ -150,6 +185,30 @@ resolved first?**
 
 If it is required, say what minimum part of it is required — I would rather build
 the blocking fragment than the programme.
+
+## Q6. Which mechanism should carry the variable-`k` line?
+
+This is the question the earlier draft silently answered by assumption, and it may
+be the most consequential one here. Every ledger direction presumes the **legacy
+duration head**: D1 instruments it, D3 and D4 build constraints on it.
+
+But legacy carries the recorded short-segment high-sample bias that R30 was
+designed to remove, and **R30's `KEEP/SET` clock is itself a variable-effective-`k`
+mechanism** — a lifetime emerges from repeated KEEP decisions rather than from a
+sampled duration. That arguably makes it a third candidate constraint alongside
+the two in `RESEARCH_GOAL.md`, and a missing sixth ledger entry.
+
+**Q6. Should the variable-`k` line run on the legacy duration head, or on the
+R30 KEEP/SET clock?**
+
+- **Q6a.** If R30, does the emergent-lifetime formulation change what "role
+  stability" means, or is it the same quantity measured differently?
+- **Q6b.** If legacy, does the short-segment high-sample bias contaminate a
+  duration-usage measurement taken on it — and if so, what correction is required
+  before D1's reading means anything?
+- **Q6c.** You previously ruled `MODIFY R30` and accepted its corrections. Does
+  that ruling bear on this choice, and did it settle anything I should not be
+  reopening?
 
 ## Boundary
 
