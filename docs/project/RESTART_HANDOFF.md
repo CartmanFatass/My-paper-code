@@ -1,73 +1,82 @@
-# Handoff
+# Restart handoff
 
-Date: 2026-07-24
-Branch: `untied-k`
-Successor orchestrator: Fable, fresh conversation
-Reason: user pause immediately before the first `hmasd-implementer` spawn
+Updated: 2026-07-25, before a context compaction. Branch `untied-k`.
 
-Read `AGENTS.md`, then this file, then `docs/project/CURRENT_WORK.md`.
+Read `AGENTS.md`, then this file, then `docs/project/RESEARCH_GOAL.md`.
 
-## Terminal state
+## Next action, exactly
 
-No process is running. No formal or nonformal compute was launched. Everything
-is committed and pushed to `origin/untied-k`; `aggressive` stays untouched at
-`4af01cd`.
-
-## What this session completed
-
-1. **Bootstrap round reconciled** — `8a7a2a6`. Pro's verdict is adopted in
-   `docs/external-review/rounds/20260724_untied_k_direction_bootstrap/30_PM_CODE_SIDE_RECONCILIATION.md`:
-   per-agent variable period is a conditional P1 candidate only; the root
-   cause is action authority and credit factorization; periodic sampled `Z`
-   is replaced by deterministic read-time context `C` in the primary
-   candidate; G20 continues, broadened.
-2. **Timing–credit identifiability derivation** — `36ed97f`, at
-   `docs/research/cdc/EVIDENCE_NOTES/20260724_TIMING_CREDIT_IDENTIFIABILITY_G20_DERIVATION.md`.
-   Branch `NO_SCHEDULE_INFORMATION_CHANGE`: schedules only rescale one shared
-   scalar contrast, so `k -> k_i` alone is formally excluded per Pro's
-   pre-registered mapping. P2 is eligible for an implementation proposal;
-   P1 stays gated on heterogeneous tempo.
-3. **P2 design frozen** —
-   `docs/research/designs/ACTIVE_SET_CENTERED_COUNTERFACTUAL_RESIDUAL_G20.md`:
-   exactly centered observation-only pre-tanh residual over the active set,
-   plus member-resolved leave-one-out counterfactual advantage
-   `[time,batch,member]` from a slow action-critic. Screen mirrors the G19
-   protocol and thresholds with fresh seeds (2619000–2739000 block). No
-   projection, Adam everywhere, base policy file untouched.
-
-## Exact next action
-
-Spawn `hmasd-implementer` (synchronous, watch the first lap) with the bounded
-assignment: build exactly
-`ha_ctse_process/centered_residual_g20.py`,
-`scripts/screen_centered_counterfactual_residual_g20.py`,
-`tests/ha_ctse_process_centered_residual_g20_test.py`
-against the frozen design, template `anchored_residual_g19.py`, focused tests
-plus the G19 suite as shared-surface guard, no Git, no screen execution. The
-spawn was fully prepared this session but interrupted by the user pause — it
-has NOT run. After it: `hmasd-verifier` fresh check, one `hmasd-reviewer`
-advisory (new protected credit semantics), PM acceptance and commit, then
-`hmasd-experiment-operator` executes the bounded screen. Stages 2, 4 and 5 of
-the cycle are still unexercised.
-
-## Execution mode
+**Reconcile the direction ruling.** It arrived and has not been read:
 
 ```text
-execution_mode=authorized
-autonomous_research_grant=ACTIVE_TEN_ITERATION_TOY_FIRST_UAV_PROMOTION_CHAIN
-grant_extension_20260724=user_plus_12_iterations
-iterations_remaining=20
-grant_unit=completed_workflow_cycle
-intermediate_authorization_prompts=forbidden
+docs/external-review/rounds/20260725_research_direction_and_ledger/21_PRO_OPEN_RAW.md
 ```
 
-Reconciliation, derivation and design consumed zero iterations; the bounded
-screen consumes zero as well. Only a formal run consumes one.
+35,630 characters, captured with `Copy response`, byte-equality verified. Six
+questions: is the framing a contribution (Q1), is role stability the right
+primitive (Q2), **how to order the exploration ledger** (Q3), is measuring first
+right (Q4), is holding the identification line right (Q5), and **which mechanism
+carries the variable-`k` line — legacy duration head or R30's KEEP/SET clock
+(Q6)**.
 
-## Continuity
+Q3 and Q6 decide what gets built. Implement nothing before reading them.
 
-`CURRENT_WORK.md` carries the full boundary keys (`untied_k_*`, `g20_*`).
-Setup for a fresh clone: `git config core.hooksPath .githooks`. Known open
-items 1–3 from the previous handoff (grant-renewal brief template, untracked
-third-party skill pack, deferred UAV G1 formal run on `aggressive`) are
-unchanged and still open.
+Then: order the ledger per the ruling, run the compute gate, proceed.
+
+## What this project is
+
+`docs/project/RESEARCH_GOAL.md` — read before judging whether work is on path.
+
+HMASD fixes the skill period `k`. Unbinding it explodes the action space; the
+contribution is a constraint collapsing it onto a few periods for a payable
+search cost, accepting suboptimality. The primitive is **stable versus flexible
+role**, period following. Goal is a paper.
+
+Standing check: *what does this let us say about variable `k` that we could not
+say before?* More than a sentence to answer means it is off the path.
+
+## How work is reviewed
+
+`docs/project/WORKFLOW_SIMPLIFICATION.md`. Two things get external review: the
+scientific idea, and implementation detail choices confirmed **before** building.
+Nothing else. One cheap pre-send pass before each Pro round.
+
+## Authorization
+
+**Full and unattended.** Never return to the user for resource or compute
+permission. Compute is authorized; only timing is gated:
+
+```text
+scripts/check_compute_free.ps1  ->  COMPUTE_FREE run | COMPUTE_BUSY wait 1h, recheck
+```
+
+Last reading `COMPUTE_BUSY`. The machine is shared with another line, so busy is
+ordinary, not a blocker.
+
+## Live state
+
+- **Ledger**: `docs/project/EXPLORATION_LEDGER.md`. D1 leads — one instrumented
+  run settling both premises. Its collapse metrics turned out already wired and
+  already present in a completed run.
+- **Preliminary, zero compute**: duration-policy entropy falls `0.82 -> 0.60` and
+  **plateaus**; `max_frac` rises to `0.70`. That is **concentration, not
+  collapse**, and both arms track each other so it is not reward-driven. Caveats:
+  candidates were `(1,2,3,4)`, one seed, ~41 updates.
+- **G20R3** (`docs/research/designs/ANCHOR_POLICY_ACTION_ADVANTAGE_G20R3.md`) is
+  drafted against Pro's nine blockers and **on hold** — infrastructure, promoted
+  only if it blocks a variable-`k` result.
+- **Transport is `project_manager_direct`.** Dispatch `hmasd-review-monitor`
+  (haiku, read-only) only to report when generation stops; send, capture and
+  archive yourself. Capture with `Copy response` per the skill — a rendered-text
+  fallback silently strips markdown, which has already corrupted one archive.
+- Two registered reviewers: `open_divergent` for science, `adjudicator` blinded
+  and idle. Never cross-post between them.
+
+## Constraints that bite
+
+- `aggressive` is not ours. Never push to it; it is excluded from discussion.
+- Children never run Git.
+- Contract tests are pinned allow-lists. Adding or removing an agent or skill
+  needs the test edited in the same commit or the tree is red in between.
+- `run_screen` for G20R2 has never executed end to end at any scale.
+- Everything is committed and pushed to `origin/untied-k`.
