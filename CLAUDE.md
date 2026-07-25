@@ -50,6 +50,7 @@ with an exact assignment.
 | `hmasd-exp-recorder` | haiku / low | transcribes a classified run into `ExpRecord.md` |
 | `hmasd-experiment-operator` | haiku / low | one authorized `train -> evaluate -> analyze` run |
 | `hmasd-doc-auditor` | fable / high | adversarial audit of the governance surface itself |
+| `hmasd-frontier-implementer` | opus / high | **test role** — the treatment arm measuring whether implementation here needs a frontier tier; instructions byte-identical to `hmasd-implementer`. Protocol and retirement condition: `docs/project/IMPLEMENTER_TIER_TEST.md`. Never the default implementer. |
 
 Tier follows the work, not importance: judgment about protected semantics goes
 to opus, bounded construction and design mapping to sonnet, and mechanical
