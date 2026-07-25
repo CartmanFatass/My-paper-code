@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260725_contract_grill_design
-stage_commit=ad150d6ba2c7277dc3683d6e86017ae649920c47
+stage_commit=a859bc4ac535fc91d5e618b2934d83e189051336
 question=docs/external-review/rounds/20260725_contract_grill_design/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit. Answer every question in one reply; the follow-ups are conditional on your own rulings.
