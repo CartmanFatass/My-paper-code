@@ -176,6 +176,22 @@ points where the loop waits for the user are the ones the execution mode names.
 It happens at one place: the seam between iterations, once the current one has
 closed out. Never mid-iteration.
 
+**Cadence: every second iteration seam, not every one.** Compacting at every
+seam throws away the live reasoning of an iteration that has only just closed,
+so the next one restarts colder than it needs to. Carrying one full iteration
+across the seam makes the handoff smoother, because the successor inherits the
+thinking behind the boundary and not only the boundary.
+
+Context pressure overrides the cadence **downward, never upward**. If the window
+runs short before the second seam, compact at the first seam available rather
+than pushing on degraded — and never defer a compaction the context actually
+needs in order to hit the cadence. The cadence is a default, not a quota.
+
+The handoff is written as step 1 of the sequence below, so it too lands every
+second seam. That is safe: `CURRENT_WORK.md` is updated every iteration and is
+the real continuity record, so a handoff one iteration behind still resumes
+correctly.
+
 The sequence is fixed and ordered:
 
 1. write the handoff to `docs/project/RESTART_HANDOFF.md` — active boundary,
