@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260725_g20r2_prefreeze_grill
+stage_commit=c2c99b642bdc6601d73dbf340438327bebecddaf
+question=docs/external-review/rounds/20260725_g20r2_prefreeze_grill/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit. Answer every question in one reply; the follow-ups are conditional on your own rulings.
