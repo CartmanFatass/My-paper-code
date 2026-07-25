@@ -8,7 +8,10 @@ conversation_id=6a63979e-35d8-83e8-8da7-10de59a5fdeb
 branch=untied-k
 stage_commit=9c63bea797142d2882a99699666532a46c2984b1
 transport=project_manager_direct
-status=RESPONSE_COMPLETE_ARCHIVE_PENDING
+status=ARCHIVED
+raw=21_PRO_OPEN_RAW.md
+raw_bytes=26428
+raw_headings=43
 ```
 
 ## Submission
@@ -69,12 +72,32 @@ The three prohibited capture paths were not used. In particular the response was
 substituted — that substitution is what produced a structure-stripped archive on
 a previous round.
 
-## Resume condition
+## Resolution
 
-`21_PRO_OPEN_RAW.md` is written only when `Copy response` succeeds against a
-verified-changed clipboard, with the byte-equality reread. Nothing is lost: the
-response persists server-side under the accepted fence, and no second fence may
-be submitted.
+Recovered on a later attempt. What worked, recorded because the same wedge will
+recur as this conversation grows:
 
-`recovery_exhausted=false` — the render succeeds intermittently, so a later
-attempt on a less loaded page is the expected resolution.
+1. **A fresh tab, not another reload.** Six reloads of the original tab rendered
+   once; a newly created tab on the same conversation rendered immediately. The
+   accumulated renderer state, not the conversation size alone, was the problem.
+2. **The clipboard write needs the button genuinely active, and the first click
+   is unreliable.** Clicks landed on the right control — the screenshot showed
+   the `Copy response` tooltip and the button highlighted — while the icon never
+   flipped to its copied state and the clipboard stayed at the sentinel through
+   two attempts. A third click on the already-hovered button succeeded.
+
+Capture verified: clipboard changed from the sentinel, 26,428 chars, 43 markdown
+headings. Written with `.NET WriteAllText` in UTF-8 without BOM; reread compares
+byte-equal. Title and `Stage reviewed` field in the raw match this round's
+`stage_commit`, so the archived answer is attributable to this fence and not an
+earlier turn.
+
+Three prohibited capture paths were not used at any point: no transcription from
+the screenshot, no `get_page_text` substitution, no JSON round-trip. The 43
+headings confirm markdown structure survived — the corrupted archive this
+procedure exists to prevent had zero.
+
+No heartbeat was created for this round; `hmasd-review-monitor` served that role
+and has exited. Nothing to delete.
+
+`recovery_exhausted=false` was the correct call — the block was transient.
