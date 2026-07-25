@@ -49,6 +49,45 @@ policy beats fixed `k` at a search cost far below unconstrained variable `k`.
 Both are constraints on the same explosion. Either can carry the paper; the second
 is cheaper to state and to defend.
 
+## Current state of the codebase — checked 2026-07-25, not assumed
+
+Four findings that make the remaining work much smaller than the drifted line
+suggested. All from reading configuration, objective code and `ExpRecord`.
+
+**Variable `k` is already built and is the default.** `high_controller =
+"legacy_duration"` is the variable-duration mode; the high policy already emits
+`duration_logits` alongside `skill_logits`; and the search space is already
+discretised as `skill_lifetime_candidates = (3, 7, 13, 24)`, in high-level
+intervals so the primitive horizon is `candidate * k`.
+
+**The config already names the role distinction.** The comment on those
+candidates reads *"UAV service/relay formation is a long-horizon task"* — the
+stable-versus-flexible split, written down and unexploited.
+
+**The fixed-clock challenger never won.**
+`EXP-20260714-r30-fixed-clock-paired-320k` is recorded as *stopped — superseded
+before completion*: the legacy arm completed, the R30 treatment retry was stopped
+when a faster screen was chosen, and **no M1–M4 scientific outcome exists**. So
+`legacy_duration` is not a retired path — it is the live default and the only
+controller with a completed arm. That also answers whether it trains: a 320k arm
+completed.
+
+**But the paper's premise is not yet evidenced.** `duration_entropy_floor_*`
+exists, default-off, described in-code as *"a one-variable guard for duration
+collapse, not a new task-specific reward"* — so collapse is **anticipated by the
+engineering and nowhere observed in `ExpRecord`**.
+
+That last point sets the first real experiment. Before designing a constraint,
+**measure whether unconstrained duration selection actually collapses** on the
+existing `legacy_duration` path. It is cheap, the machinery exists, and it
+decides the shape of the paper:
+
+- if duration collapses, that is the motivating figure and the constraint is the
+  contribution;
+- if it does not collapse, the problem statement is wrong and the contribution
+  has to be re-argued — better to learn that from one run than after building a
+  constraint for a problem that is not there.
+
 ## What this means for scope
 
 **On the critical path**: anything that varies `k`, constrains the resulting
