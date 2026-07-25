@@ -221,22 +221,33 @@ force_refresh_every_check  =>  every check is a forced SET
                            =>  KEEP is not a decision  (D0 section 2)
 ```
 
-So the credit configuration known to make this source learnable is **structurally
-incompatible with the carrier being measured**. D7.2B therefore runs `smdp_gae`
-with one epoch — the registered default — and that is the only credit mode the
-learned-keep branch can have here.
+So that credit mode is **structurally unavailable to the carrier being measured**.
+D7.2B runs `smdp_gae` with one epoch — the registered default — and that is the
+only credit mode the learned-keep branch can have here.
 
-Consequence for reading the result, and it is not a small one: **an A failure may
-be a credit failure rather than an architecture or carrier failure.** D7's branch
-table already refuses to draw a renewal conclusion from an A failure, and this is
-a second, independent reason not to. It would route to the ledger's D5 entry
-("credit becomes the blocker — reactivate only the minimum fragment") or to a
-source whose competence is reachable under registered credit, and it would retire
-nothing.
+**What is not claimed.** It would be convenient to say block-return is the credit
+mode that makes this source learnable. Nothing is known to make it learnable. The
+one prior run on this toy, `EXP-20260715-r39-native-hmasd-toy-credit`, recorded
+`VALID_FAIL_R39_NATIVE_TOY_CREDIT_ANCHOR` at `match = 0.455` against its own
+`0.7` threshold — but its archived contract shows **20 outer updates and 12,800
+timesteps**, a tenth of D7.2B's screen budget, under `hmasd_original` with
+`high_full_refresh_every_k = True`. That is evidence the toy was not learned in 20
+updates, not evidence it cannot be. Treating it as a settled credit failure would
+repeat the error the prior-art section of D7 was written to stop.
 
-The measured `B_H` and the state-liveness check together mean an A failure could
-not be blamed on the normalizer or on a dead information path. That leaves credit
-and training budget, in that order, as the candidates to rule out next.
+Consequence for reading the result, in order:
+
+1. **A flat condition A at screen scale routes to a larger budget, not to a
+   conclusion.** The prior art is too short to license one, and so is a screen.
+2. Only after an adequate-budget attempt does an A failure become informative, and
+   even then D7's branch table refuses to draw a renewal conclusion from it. It
+   would route to the ledger's D5 entry ("credit becomes the blocker — reactivate
+   only the minimum fragment") or to a source whose competence is reachable, and
+   would retire nothing about the carrier.
+
+The measured `B_H` and the state-liveness check together mean an A failure cannot
+be blamed on the normalizer or on a dead information path. That leaves training
+budget and then credit, in that order, as the candidates to rule out.
 
 ## 5. Paired replay protocol
 
