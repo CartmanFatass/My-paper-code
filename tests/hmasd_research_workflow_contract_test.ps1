@@ -10,7 +10,9 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 'hmasd-*' |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @('hmasd-agile-research-development', 'hmasd-review-round') | Sort-Object
+$expectedSkills = @(
+    'hmasd-agile-research-development', 'hmasd-contract-grill',
+    'hmasd-review-round') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
 }
@@ -22,8 +24,8 @@ if (Test-Path (Join-Path $repo '.agents/skills/hmasd-agile-research-development'
 $agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'hmasd-*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedAgents = @(
-    'hmasd-code-scout.md', 'hmasd-doc-auditor.md', 'hmasd-exp-recorder.md',
-    'hmasd-experiment-operator.md',
+    'hmasd-code-scout.md', 'hmasd-contract-griller.md', 'hmasd-doc-auditor.md',
+    'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md',
     'hmasd-implementer.md', 'hmasd-monitor.md',
     'hmasd-patcher.md', 'hmasd-review-exchanger.md', 'hmasd-reviewer.md',
     'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
