@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260725_d7_2b_source_persistence_necessity
+stage_commit=c4c14175184f7fc31d7f15fae4e9d6e97e078bd2
+question=docs/external-review/rounds/20260725_d7_2b_source_persistence_necessity/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit. Answer every question in one reply; the follow-ups are conditional on your own rulings, so traverse the branches your own answers open. Q0 can make Q2 unnecessary -- say so if it does.
