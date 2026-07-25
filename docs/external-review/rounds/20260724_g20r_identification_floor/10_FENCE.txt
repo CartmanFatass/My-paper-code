@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260724_g20r_identification_floor
+stage_commit=52d89863f02c9a86520952d086a26b58ce8caf3d
+question=docs/external-review/rounds/20260724_g20r_identification_floor/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and the evidence paths listed under its "## Evidence to read" heading, all at stage_commit.
