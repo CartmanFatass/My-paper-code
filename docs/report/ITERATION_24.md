@@ -44,16 +44,16 @@ PM 使用冻结的 first-match 函数重新计算 predicate inputs，所得分�
 
 三个 mapping diagnostic 的相关系数均高于 `0.9898`，MAE 均低于 `0.0166`。容量 8/12 padding 配对中，observation、value、action、reward 和 hidden 的最大误差全部为精确 `0.0`，生命周期完全相等，inactive padding 也为精确零。
 
-## 对科学决策的影响
+## 对科学决策的事实输入
 
 本轮把“动态 agent 数量”分成了两个层次，并对其中两个已完成层次给出正式支持：
 
 1. G31：在固定最大容量内，active agent 数量可在运行中变化；
 2. G32：同一 checkpoint 可跨不同最大容量 6/8/12 使用，无需重训或评估期优化。
 
-因此，当前算法已经有一个较稳定的、与固定 agent 数量和固定 checkpoint 容量解绑的 toy 测试版。成功来自结构性解绑：critic 参数不接收 raw padded mask，环境输入不再除以最大容量，生命周期状态按成员所有权管理；不是通过扩大模型、改变奖励或调低阈值获得。
+因此，注册结果提供了一个较稳定的、与固定 agent 数量和固定 checkpoint 容量解绑的 toy 测试版。成功来自结构性解绑：critic 参数不接收 raw padded mask，环境输入不再除以最大容量，生命周期状态按成员所有权管理；不是通过扩大模型、改变奖励或调低阈值获得。
 
-但 G32 的每个环境实例在一条 trajectory 内仍使用固定 tensor 宽度。它没有证明运行到一半时把容器从容量 6 扩到 12、再缩到 8，同时继续携带共同成员的 recurrent hidden state。这个更窄的边界是下一项最有信息量的算法问题。
+但 G32 的每个环境实例在一条 trajectory 内仍使用固定 tensor 宽度。它没有证明运行到一半时把容器从容量 6 扩到 12、再缩到 8，同时继续携带共同成员的 recurrent hidden state。这是 PM 从代码侧识别出的未覆盖边界，不是 PM 有权选择的下一科学问题；最终科学解释和后继由 External Pro 裁决。
 
 ## 本轮不支持的结论
 
@@ -65,8 +65,8 @@ PM 使用冻结的 first-match 函数重新计算 predicate inputs，所得分�
 
 ## 下一边界
 
-用户已要求将另一科研项目中的“双审计”经验吸收进 HMASD。下一步先重规划为 Pro 辅助、PM 单一验收的两阶段断言安全流程：冻结前由 Pro 审科学设计是否可判别、是否遗漏承载性决定；实现集成后由同一类 Pro 直接读取远程固定提交，审代码是否实例化科学契约以及是否引入替代解释。它们不是两个审批人，也不审风格、覆盖率或兼容性。
+用户已要求将另一科研项目中的“双审计”经验吸收进 HMASD，并纠正权责：External Pro 是科学裁决者，PM 只拥有代码侧决策。冻结前由 Pro 裁决科学设计是否可判别、是否遗漏承载性决定；PM 实现并技术验收；实现集成后由 Pro 直接读取远程固定提交，裁决代码是否实例化科学契约以及是否引入替代解释。PM 若有代码侧异议可提出对齐澄清，但不能自行改变科学语义。
 
-新流程落地后的第一个候选为 `LIVE_RUNTIME_CAPACITY_REBIND_CONTINUOUS_ROSTER_G33_DERIVATION`：先零计算推导单条 trajectory 内 runtime tensor 容量扩缩时，member-key、hidden state、RNG、packing 与 action factorization 必须满足的条件，再决定是否值得原型和正式迭代。
+下一科学边界是把本轮完整证据提交 External Pro 的 `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`。`LIVE_RUNTIME_CAPACITY_REBIND_CONTINUOUS_ROSTER_G33` 仅作为 PM 报告的代码覆盖缺口候选；是否选择、如何定义以及是否进入原型由 Pro 决定。
 
 第 24 轮消耗 1 次有效结论性迭代；二十轮自动研究链剩余 13 次。

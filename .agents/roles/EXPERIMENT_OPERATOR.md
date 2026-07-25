@@ -19,8 +19,9 @@ source_write_authority=none
 successor_authority=none
 ```
 
-The root `AGENTS.md` is the global constitution. This role is deliberately
-fixed to Luna with low reasoning effort because its work is mechanical. It is
+The root `AGENTS.md` is the auto-loaded role router. Read this charter and only
+the assignment-named design after it. This role is deliberately fixed to Luna
+with low reasoning effort because its work is mechanical. It is
 spawned as a native child for one run and is never represented by a persistent
 task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
 

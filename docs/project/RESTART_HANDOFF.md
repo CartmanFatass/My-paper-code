@@ -1,80 +1,94 @@
 # Codex restart handoff
 
-Date: 2026-07-23
+```text
+date=2026-07-25
+reason=new_registered_native_profiles_require_session_restart
+restart_boundary=HEAD_and_My-paper-code/aggressive_commit_containing_this_file
+live_experiment_operator=none
+live_pro_response_monitor=none
+formal_compute=none
+iterations_remaining=13
+```
 
-Reason: user-requested Codex update
+## Safe state
 
-## Safe terminal state
+Formal iteration 24 completed naturally from source
+`fbce3609b11353634d1b4acb20cb27372de40bf2`. Train, evaluate and analyze all
+exited zero; the mechanically valid registered branch is
+`USABLE_RUNTIME_CAPACITY_G32`. Its run is
+`logs/formal_runtime_capacity_g32_cpu_20260725_fbce360_r1` and its Chinese
+factual report is `docs/report/ITERATION_24.md`.
 
-The Project Manager stopped the formal experiment operator and the read-only G2
-scout. It then explicitly terminated the exact formal process tree: one parent
-and sixteen `hmasd-amd-cpu` Python workers started at 22:28 local time. A final
-process check found no Python process.
+No experiment process or response monitor remains live. No formal run is
+authorized until External Pro supplies the next scientific disposition/design
+and the new design/code-science audit sequence completes.
 
-Git-tracked G1 implementation and prelaunch evidence were already accepted,
-committed and pushed before the pause:
+## Authority after restart
+
+- External Pro owns scientific design, result interpretation, CDC/portfolio
+  change and scientific successor selection inside the user boundary.
+- Project Manager owns code architecture/implementation/tests/repair, Git,
+  review transport, experiment orchestration and mechanical artifact closure.
+- PM may raise an implementation-alignment objection to Pro before coding, but
+  Pro resolves science. PM cannot choose a scientific alternative locally.
+- The root `AGENTS.md` is now a short auto-loaded role router. Role-specific
+  instructions load only from the assigned role charter and named files.
+
+The completed G32 result still needs External Pro
+`FORMAL_RESULT_SCIENTIFIC_DISPOSITION`. Live runtime-capacity rebinding is only
+a PM-reported uncovered code boundary, not an adopted G33 successor.
+
+## Newly registered native profiles
+
+The session restart is required before these agent types become callable:
 
 ```text
-formal_source_commit=b125efd205e302666aea78b286d6857f8ecf9286
-branch=aggressive
-local_and_remote_matched=true
-implementation_review=ACCEPT
-focused_tests=38_passed_plus_1_final_delta_passed
-nonformal_run=logs/nonformal_uav_temp_loss_g1_20260723_pm2
-nonformal_result=NONFORMAL_UAV_TEMP_LOSS_G1_EXERCISE_COMPLETE
+hmasd-pro-response-monitor=gpt-5.6-luna/low
+hmasd-benchmark-implementer-sol-high=gpt-5.6-sol/high
+hmasd-benchmark-implementer-terra-high=gpt-5.6-terra/high
+hmasd-benchmark-implementer-luna-max=gpt-5.6-luna/max
+hmasd-benchmark-reviewer-sol-high=gpt-5.6-sol/high
+hmasd-benchmark-reviewer-terra-high=gpt-5.6-terra/high
+hmasd-benchmark-reviewer-luna-max=gpt-5.6-luna/max
 ```
 
-The later handoff commit changes only active project-control documentation. It
-does not replace the frozen formal source identity above.
+The three implementer instruction bodies are byte-identical. The three reviewer
+instruction bodies are byte-identical. The contract test
+`tests/hmasd_agent_profile_benchmark_contract_test.ps1` enforces this.
 
-## Interrupted formal run
+The Pro response monitor observes one already-submitted registered Pro turn,
+stays silent and returns exactly once at natural `COMPLETE` or `ERROR`. It never
+activates `Answer now`; that control's presence or absence is neutral. PM owns
+submission and exact raw archival.
 
-```text
-iteration=18
-run_root=logs/formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1
-formal=true
-backend=cpu
-torch_threads=1
-authorization_token=AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1
-conclusion_bearing_iteration_consumed=false
-scientific_result=none
-```
+## Exact restart sequence
 
-The run root contains only:
+1. Read `AGENTS.md`, `docs/project/CURRENT_WORK.md`,
+   `.agents/roles/PROJECT_MANAGER.md`, this handoff,
+   `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`, and
+   `docs/project/AGENT_PROFILE_BENCHMARK.md` only.
+2. Confirm local `HEAD` and `My-paper-code/aggressive` match the commit
+   containing this handoff and that the worktree is clean.
+3. Confirm all seven new agent types are visible. Unknown agent type is a
+   blocker; never substitute `default` or change model/effort.
+4. In parallel where files/browser ownership are disjoint:
+   - create one exact G32 formal-result Pro review package, push it, submit it
+     directly, then assign one `hmasd-pro-response-monitor`;
+   - create three isolated benchmark worktrees from the same base commit and
+     launch the three implementer variants with the exact same assignment.
+5. Run the PM-held implementer oracle after all three terminal returns. Freeze
+   one anonymous review fixture and private defect manifest before launching the
+   three reviewer variants against the same task.
+6. Score quality before cost. Select implementer and reviewer independently;
+   do not select a cheaper profile if it loses any critical quality gate.
+7. Record `docs/project/AGENT_PROFILE_BENCHMARK_RESULT.md`, update the normal
+   implementer/reviewer profiles to winners, delete losing benchmark profiles
+   and temporary worktrees/fixtures, commit/push, then restart once more before
+   using the selected profiles.
+8. When Pro naturally completes, archive exact raw and mechanically record its
+   G32 scientific disposition. Update iteration 24 report/CDC from that exact
+   disposition and execute only the Pro-selected successor.
 
-- `launch_identity.json`
-- `source_screen_launch_identity.json`
-
-There is no completed control-batch journal, train manifest, evaluation
-manifest or analysis result. No conclusion was available or interpreted. The
-existing identity files are valid and the same train command may safely resume;
-because zero batches completed, it will begin the first exact control batch.
-
-## Exact restart action
-
-After the user returns from the Codex update and asks to continue, read
-`AGENTS.md`, `docs/project/CURRENT_WORK.md`, this handoff and the G1 design.
-Then spawn exactly one registered `hmasd-experiment-operator` with the same
-source, root, CPU/thread contract, token and commands below. Do not create a
-Controller or monitor session and do not delete the existing run root.
-
-```powershell
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py train --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1' --source-commit b125efd205e302666aea78b286d6857f8ecf9286 --formal --authorization-token AUTHORIZE_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_CPU_V1
-
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py evaluate --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1'
-
-& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' scripts\run_uav_temp_loss_g1.py analyze --run-root 'logs\formal_uav_temp_loss_g1_cpu_20260723_b125efd_r1'
-```
-
-The operator remains silent and returns once at `COMPLETE` or `ERROR`. The
-train phase first runs exact source-identifiability controls. If they fail, it
-performs zero learned training and returns the registered branch 2 after
-evaluation/analyze; if they pass, it continues the frozen learned budget.
-
-## Iteration and successor state
-
-Ten conclusion-bearing UAV iterations remain (`ITERATION_18` through
-`ITERATION_27`). `docs/report/ITERATION_18.md` does not exist and must be written
-only after a valid formal result. The read-only G2 charging scout was stopped
-before returning a report; restart it only if useful after the formal operator
-is safely resumed. No G2 file or scientific choice was created.
+The profile benchmark is code-only, nonformal and consumes zero scientific
+iterations. The active autonomous chain retains 13 conclusion-bearing
+iterations.

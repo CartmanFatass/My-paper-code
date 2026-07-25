@@ -1,20 +1,23 @@
 {
-  "schema_version": 28,
-  "updated": "2026-07-23",
+  "schema_version": 29,
+  "updated": "2026-07-25",
   "round_operator": {
     "kind": "project_manager_direct_transport",
-    "external_scientific_decision": "open_divergent",
-    "decision_intake": "project_manager_direct",
+    "external_scientific_decision": "external_pro_binding_within_user_boundary",
+    "decision_intake": "project_manager_mechanical_realization",
     "git_boundary_owner": "project_manager"
   },
   "direct_transport_contract": {
     "skill": "$hmasd-review-round",
     "browser_skill": "$browser:control-in-app-browser",
     "transport_owner": "active_project_manager",
-    "heartbeat_owner": "active_project_manager",
-    "heartbeat_uniqueness": "one_per_round",
-    "heartbeat_minutes": 5,
-    "terminal_order": "archive_exact_raw_then_provenance_intake_then_delete_heartbeat_then_pm_reconciliation",
+    "response_monitor_agent_type": "hmasd-pro-response-monitor",
+    "response_monitor_model": "gpt-5.6-luna",
+    "response_monitor_effort": "low",
+    "response_monitor_owner": "active_project_manager",
+    "response_monitor_uniqueness": "one_per_submitted_turn",
+    "response_monitor_progress_notifications": "forbidden",
+    "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_realize_pro_disposition",
     "retired_task_output_authority": "none"
   },
   "reviewers": {

@@ -98,10 +98,11 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 ## 3. CDC Open Research Loop
 
 Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-Operate this loop under the canonical role contracts. Scientific review may use
-a full plural review or a focused continuation in the same registered
-conversation; downstream realization must preserve the adopted scientific
-direction.
+Operate this loop under the canonical role contracts. External Pro owns
+scientific design, result interpretation and successor selection; Project
+Manager owns code realization and technical acceptance. New conclusion-bearing
+designs use the triggered design and code-science audits in
+`docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` before formal compute.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -150,6 +151,14 @@ focused operational check for a concrete corruption risk the evidence-bearing
 run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
 concrete contradiction.
 
+Before design freeze, evaluate claimed learning signals at the forced initial
+state, prove that a positive control makes the target behavior necessary rather
+than merely permitted, construct witnesses for result gates, check threshold
+arithmetic and zero denominators, and freeze result-sensitive choices. Before a
+formal run, External Pro reads the pushed implementation commit and decides
+whether code and scientific contract align. These are scientific assertion
+checks, not generic review layers.
+
 ## 5. Toys, Access, and Transfer
 
 A toy environment must expose the target capability rather than merely make the
@@ -157,6 +166,11 @@ current mechanism easy to pass. For variable membership and lifetime research,
 the same toy should make membership changes and heterogeneous temporal duties
 causally relevant while keeping task-specific reward shaping out of the
 algorithm.
+
+For a positive control, write the relevant optimal-policy set. If any optimal
+solution avoids the target behavior—for example, a permutation-invariant role
+swap replacing temporal persistence—the control cannot support a negative
+claim about that behavior.
 
 Separate four questions:
 

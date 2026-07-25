@@ -14,10 +14,10 @@ torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=24_complete
 iterations_remaining=13
-formal_compute=NONE_PENDING_WORKFLOW_REPLAN_AND_G33_EVIDENCE_CONTRACT
+formal_compute=NONE_PENDING_G32_EXTERNAL_PRO_SCIENTIFIC_DISPOSITION
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=PRO_ASSISTED_SCIENTIFIC_ASSERTION_DUAL_AUDIT_WORKFLOW_REPLAN
+next_boundary=SESSION_RESTART_THEN_PARALLEL_AGENT_PROFILE_BENCHMARK_AND_G32_PRO_RESULT_DISPOSITION
 ```
 
 ## Accepted active line
@@ -534,10 +534,12 @@ and hidden mismatch is exactly zero, inactive padding is zero, and the mapping
 and lifecycle gate passes. This consumes iteration 24 and leaves 13 authorized
 conclusion-bearing iterations.
 
-G32 proves within-episode active-count change and cross-configuration
-checkpoint transport, but each environment instance still has one fixed tensor
-capacity. After the user-requested workflow replan, the smallest algorithmic
-counterexample is a zero-compute derivation for live capacity rebinding while a
-trajectory and lifecycle-owned recurrent state remain active. That G33 design
-will be the first candidate to use the new Pro-assisted design audit and, if
-implemented, the Pro code-to-science alignment audit before formal compute.
+The registered G32 result mechanically proves within-episode active-count change
+and cross-configuration checkpoint transport under its frozen branch. Each
+environment instance still has one fixed tensor capacity, but whether live
+capacity rebinding is the next scientific question belongs to External Pro, not
+PM. After the session restart, PM will package G32 artifacts for
+`FORMAL_RESULT_SCIENTIFIC_DISPOSITION` while the model-profile benchmark runs on
+disjoint code-only fixtures. Pro will set the scientific meaning and successor.
+Any new conclusion-bearing design then receives Pro's design audit, PM code
+acceptance and Pro's code-science alignment audit before formal compute.

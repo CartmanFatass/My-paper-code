@@ -48,16 +48,17 @@ foreach ($required in @(
     if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
 }
 foreach ($required in @(
-    'project_manager_experiment_orchestration=direct_via_registered_child',
-    'experiment_operator_authority=one_exact_authorized_run',
-    'There is no dispatch or experiment-monitor Skill')) {
+    'native_child_authority=exact_assignment_only',
+    'registered native child',
+    '.agents/roles/EXPERIMENT_OPERATOR.md',
+    'No role reads every routed document')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
 foreach ($required in @(
     'hmasd-experiment-operator',
     '`gpt-5.6-luna` with `low` reasoning',
     'returns exactly one `COMPLETE` or',
-    'No Controller, persistent Monitor, dispatcher')) {
+    'No Controller, persistent project Monitor, dispatcher')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK operator state missing: $required" }
 }
 

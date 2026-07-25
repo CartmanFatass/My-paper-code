@@ -80,9 +80,9 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported for the registered paired immediate and delayed toy sources,
-  within-capacity roster variation, and same-checkpoint transport across
-  configured capacities 6, 8 and 12.
+- Status: registered G32 branch is usable across configured capacities 6, 8 and
+  12; External Pro scientific disposition is pending before this ledger adopts
+  the broader claim or selects a successor.
 - Claim: a capacity-generic active-set/lifecycle recurrent policy with
   active-fraction autoregressive prefixes can learn continuous service control
   across within-episode roster changes when current demand has a direct actor
@@ -106,13 +106,15 @@ the Project Manager-accepted CDC state.
   rotation is load-bearing relative to no rotation, but its constructive
   controller is far below the frozen absolute feasibility floor. Neither run
   confirms nor rejects G31 transport.
-- Strongest next counterexample: G32 changes active roster size inside an
+- PM-observed uncovered boundary: G32 changes active roster size inside an
   episode and reuses one checkpoint across separate fixed-capacity environment
   instances, but it does not resize the runtime tensor capacity while one
   trajectory and lifecycle-owned recurrent state are in flight.
-- Separating evidence: derive a live capacity-rebinding state/packing contract
-  that carries common member hidden state across a width change without
-  checkpoint reload, optimizer steps, key reassignment or task-specific fields.
+- Candidate separating evidence, not yet selected: a live capacity-rebinding
+  state/packing contract that carries common member hidden state across a width
+  change without checkpoint reload, optimizer steps, key reassignment or
+  task-specific fields. External Pro decides whether this is the next scientific
+  action.
 
 ## C-EHC — Event-held temporal state
 

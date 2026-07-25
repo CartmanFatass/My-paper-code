@@ -7,7 +7,11 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 ## Contract boundary
 
-Read `AGENTS.md`, the role contract, and brief. This procedure grants no science, formal compute, transport, or acceptance authority. Project Manager alone accepts or directs repair and owns direct Git integration under its role charter. A bounded child requires an exact assignment and never scopes, accepts, or commits its work.
+Read the root router, the role contract, and brief. This procedure grants no
+science, formal compute, transport, or acceptance authority. External Pro owns
+scientific decisions; Project Manager alone accepts code, directs engineering
+repair and owns direct Git integration. A bounded child requires an exact
+assignment and never scopes, accepts, or commits its work.
 
 ```text
 superpowers_plugin=reference_only
@@ -26,22 +30,34 @@ A user-named one may be inspected only as reference.
 
 ## Operating loop
 
-1. **Bound.** Use the brief. Only Project Manager acting within direct user authority may define a fallback outcome, semantics, files, exclusions, and
-   completion. Add no brainstorm, plan, worktree, ledger, or approval when known.
-2. **Probe.** Observe the smallest failing test for new behavior or plausible
+1. **Align.** For conclusion-bearing work, require an exact Pro scientific
+   disposition and its design-audit status. PM may raise a code-side
+   `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`; do not fill scientific ambiguity
+   locally. Pure operational work records why the audit is not triggered.
+2. **Bound.** Use the brief. Project Manager defines code files, engineering
+   choices, exclusions and completion inside the Pro-frozen semantics. Add no
+   brainstorm, plan, worktree, ledger or approval when known.
+3. **Probe.** Observe the smallest failing test for new behavior or plausible
    regression. For throwaway measurement/configuration, use a diagnostic.
-3. **Implement.** No backward compatibility. Make the smallest active-line
+4. **Implement.** No backward compatibility. Make the smallest active-line
    discriminator; remove replaced interfaces, adapters, migrations, fallbacks,
    state, and tests. Git history is the archive.
-4. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
+5. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
    Add one bounded end-to-end exercise for material integration. Use a broad
    suite only for a changed shared surface.
-5. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
+6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
-   evaluation. Report commands, results, limits, and files.
+   evaluation. Report commands, results, limits, and files. For new or materially
+   changed claim-bearing code, PM pushes the accepted implementation and routes
+   the exact commit to Pro's `CODE_SCIENCE_ALIGNMENT_AUDIT` before formal run.
 
 On failure, reproduce once, locate the first violated invariant, add a regression
 only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
+
+Router, role, Skill, native-profile, registry and active workflow-contract
+changes first use `hmasd-workflow-change-audit` for impact classification and
+structural closure. This Skill remains the implementation loop for any source
+code inside that bounded change.
 
 ## Concurrency and review
 
@@ -50,7 +66,10 @@ only for plausible recurrence, repair, and rerun. Never weaken checks or retry b
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
-- Subtasks close on evidence plus one fresh PM check. At most one integrated advisory review is optional when protected semantics, cross-file integration, or material execution risk makes it useful. Additional targeted review is allowed only after a failed check or a concrete protected cross-scope anomaly; it diagnoses repair and is not another approval layer.
+- Subtasks close on evidence plus one fresh PM code check. The required Pro
+  code-science audit owns scientific alignment, not code acceptance. Additional
+  code review is allowed only after a failed check or concrete engineering
+  anomaly; it diagnoses repair and is not another approval layer.
 
 ## Quick reference
 

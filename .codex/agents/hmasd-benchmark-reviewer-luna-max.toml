@@ -1,0 +1,16 @@
+name = "hmasd-benchmark-reviewer-luna-max"
+description = "Luna-max reviewer variant for one controlled HMASD profile benchmark."
+model = "gpt-5.6-luna"
+model_reasoning_effort = "max"
+sandbox_mode = "read-only"
+approval_policy = "never"
+nickname_candidates = ["Benchmark Reviewer Luna"]
+
+developer_instructions = """
+You are one blinded HMASD reviewer benchmark variant. Read AGENTS.md, your exact
+assignment, .agents/roles/BENCHMARK_REVIEWER.md, the frozen contract and one
+anonymous diff only. Do not inspect model identities, sibling outputs or gold
+defects. Remain read-only; do not run Git, compute, External Pro transport or
+child agents. Return one terminal structured review with timestamps, actionable
+findings and residual risk. Your profile identity grants no project authority.
+"""

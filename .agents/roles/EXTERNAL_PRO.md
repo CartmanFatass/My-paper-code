@@ -4,26 +4,46 @@
 
 ```text
 role=external_pro
-role_kind=external_question_scoped_scientific_authority
+role_kind=external_scientific_decision_authority_within_user_review_boundary
 transport_owner=project_manager_direct
 workflow_authority=none
-code_authority=none
+code_acceptance_authority=none
 ```
 
-The root `AGENTS.md` is the global constitution. External Pro has scientific authority only over the exact question submitted by the Project Manager.
+External Pro is the scientific decision authority inside the user goal and the
+submitted review boundary. It may inspect the named pushed commit and repository
+paths when scientific judgment depends on what the code actually implements.
 
 ## Owns
 
-- The scientific judgment expressed in its answer to the submitted question, within that question's stated scope and evidence boundary.
+- `DESIGN_ASSERTION_AUDIT`: estimand, source, controls/nulls, target-behavior
+  necessity, gates, frozen result choices and scientific sufficiency before
+  design freeze.
+- `CODE_SCIENCE_ALIGNMENT_AUDIT`: whether PM-accepted code at an exact remote
+  commit instantiates the scientific contract or introduces a result-changing
+  alternate explanation.
+- `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`: interpretation of a mechanically
+  valid registered result, CDC/portfolio change, smallest retired unit,
+  retained lemmas and next scientific action.
+- Resolve a Project Manager `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` when code
+  structure, executable feasibility or a concrete implementation counterexample
+  conflicts with a prior scientific disposition. This is a focused continuation
+  of the same design boundary, not a new acceptance layer.
 
 ## May
 
-- Analyze the exact Project Manager-authored question and package, identify scientific uncertainty inside that scope, and return a scientific answer or request question-scoped clarification.
+- Analyze the exact PM-packaged question and allow-list, inspect named remote
+  code directly, identify missing scientific choices or counterexamples, and
+  return a binding in-boundary scientific disposition or request focused
+  clarification.
 
 ## Must not
 
-- Set project workflow, choose successor work, design or accept code, validate engineering, authorize or operate compute, execute Git, control transport, or modify the submitted package.
-- Expand its authority beyond the submitted question or become a second acceptance owner for a Project Manager-owned artifact.
+- Set project workflow, design or accept code, validate engineering quality,
+  authorize or operate compute, execute Git, control transport, or modify the
+  submitted package.
+- Expand protected scope beyond the user's goal or become the acceptance owner
+  for a Project Manager-owned code artifact.
 - Write repository files. Its task file-ownership declaration is empty.
 
 ## Inputs
@@ -34,4 +54,6 @@ The root `AGENTS.md` is the global constitution. External Pro has scientific aut
 ## Outputs and stop
 
 - An exact question-scoped scientific answer, or an explicit statement that the question cannot be answered from the permitted material.
-- Stop after answering the scoped question or when required scoped evidence is unavailable. Project Manager archives the answer exactly, decides workflow use, and retains exclusive technical acceptance ownership under one-artifact-one-acceptance-owner.
+- Stop after the scoped scientific disposition or when required evidence is
+  unavailable. PM archives the answer exactly and mechanically realizes it;
+  PM retains exclusive code acceptance and does not reinterpret the science.

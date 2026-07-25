@@ -1,0 +1,17 @@
+name = "hmasd-benchmark-implementer-sol-high"
+description = "Sol-high implementer variant for one controlled HMASD profile benchmark."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+nickname_candidates = ["Benchmark Implementer Sol"]
+
+developer_instructions = """
+You are one blinded HMASD implementer benchmark variant. Read AGENTS.md, your
+exact assignment, .agents/roles/BENCHMARK_IMPLEMENTER.md and only named files.
+Work only in the assigned worktree/path set. Do not inspect sibling variants or
+gold answers. Implement and run exact focused checks; never run Git, formal
+compute, External Pro transport or child agents. Return one terminal structured
+payload with timestamps and evidence. Your profile identity is experimental and
+grants no project authority.
+"""

@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use for direct Project Manager transport to HMASD external GPT-5.6 Pro, including registered-conversation recovery, freshness-fence handling, stable completion detection, evidence-access recovery, heartbeat cleanup, and exact raw archival.
+description: Use for direct Project Manager transport to HMASD external GPT-5.6 Pro, including registered-conversation recovery, freshness-fence handling, registered response-monitor handoff, evidence-access recovery, and exact raw archival.
 ---
 
 # HMASD External Pro Review Transport
@@ -18,14 +18,26 @@ It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
 Activate `$hmasd-review-round` in the active Project Manager and use
-`$browser:control-in-app-browser` for browser work. Do not create a transport
-task, relay, or Monitor.
+`$browser:control-in-app-browser` for submission and archival. After one exact
+fence is visibly submitted, assign the registered nonpersistent
+`hmasd-pro-response-monitor` to observe that turn. Do not create a transport
+task, relay, ad hoc monitor or PM polling loop.
 
 ## Required inputs
 
-Require the assigned round path, pushed 40-character `stage_commit`, exact
-question path, exact raw path, mechanical-intake path, registered reviewer
-conversation, and declared input paths. Before browser submission:
+Require the assigned review mode, round path, pushed 40-character
+`stage_commit`, exact question path, exact raw path, mechanical-intake path,
+registered reviewer conversation, and declared input paths. The question must
+declare exactly one of:
+
+```text
+DESIGN_ASSERTION_AUDIT
+IMPLEMENTATION_ALIGNMENT_CLARIFICATION
+CODE_SCIENCE_ALIGNMENT_AUDIT
+FORMAL_RESULT_SCIENTIFIC_DISPOSITION
+```
+
+Before browser submission:
 
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
@@ -50,9 +62,9 @@ visible or the page title looks familiar.
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes or `Stop generating`/`Stop answering` is active, remain pending. Never activate `Answer now` (including a localized equivalent), but do not use its presence or absence as response state. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, retry, error or continue control. |
+| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Spawn exactly one `hmasd-pro-response-monitor` with the registered conversation/fence identity. It silently observes; PM does not poll the page. | Monitor returns one `COMPLETE` or `ERROR` terminal payload. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | Write exact visible text to raw, reread for exact equality, write provenance intake, and confirm heartbeat absence. | Project Manager holds exact raw and proceeds to its separate scientific reconciliation. |
+| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, PM confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake, and confirms monitor absence. | Project Manager holds exact raw and mechanically realizes the role-defined Pro scientific disposition or sends one focused alignment clarification. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
 completion evidence, not a substitute for message identity and inactive
@@ -81,9 +93,13 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
 - If presence or absence cannot be established, recover the same conversation;
   uncertainty never authorizes submission.
 
-Keep one registered page and at most one Project-Manager-owned five-minute heartbeat
-while pending. A heartbeat performs one bounded inspection and never submits.
-Do not create a Monitor or another transport task.
+Keep one registered page and exactly one registered Pro-response monitor while
+pending. Do not create a PM heartbeat, automation poller, second monitor or
+transport task. On monitor `COMPLETE`, PM resumes browser ownership and performs
+its own archival snapshots. On `ERROR`, PM handles transport recovery without
+allowing the monitor to submit or retry.
+
+Never activate `Answer now`; the monitor is bound by the same prohibition.
 
 `Answer now` is not a completion or recovery control. Never click it, invoke it
 through keyboard or script, or use a localized equivalent to satisfy a timeout.
@@ -147,7 +163,7 @@ or collapsed thinking label cannot keep the round pending. Conversely,
 changing response text or an active stop control proves generation is still in
 progress.
 
-Elapsed time, a heartbeat deadline, a long thinking phase or partial readable
+Elapsed time, a monitor deadline, a long thinking phase or partial readable
 text never authorizes `Answer now`. Continue waiting for natural completion or,
 after safe recovery is exhausted, report a transport blocker without forcing a
 shortened answer. Do not keep a naturally completed response pending merely
@@ -213,9 +229,11 @@ After stable completion:
 2. Reread it and require exact text equality; record its source commit, paths,
    completion evidence, and any transport recovery in the mechanical
    intake. Record no scientific quality classification.
-3. Delete the Project-Manager-owned heartbeat and confirm it is absent.
-4. Keep transport facts separate from the subsequent Project Manager scientific
-   reconciliation; no callback or routing step exists.
+3. Confirm the registered response monitor is terminal and no second monitor or
+   heartbeat exists.
+4. Keep transport facts separate from scientific content. External Pro owns the
+   in-boundary scientific disposition; Project Manager records and realizes it
+   without reinterpretation. No callback or relay step exists.
 
 Do not compute or require input-file or raw-response hashes. The pushed Git
 commit identifies reviewer inputs; exact reread equality plus the later Git
@@ -224,12 +242,12 @@ commit identifies archived raw.
 The required order is:
 
 ```text
-exact raw -> provenance intake -> heartbeat deletion -> Project Manager reconciliation
+monitor terminal -> exact raw -> provenance intake -> monitor absence -> role-defined disposition realization
 ```
 
 ## Recovery and retirement
 
-A browser, runtime, navigation, archive, approval, or heartbeat failure keeps
+A browser, runtime, navigation, archive, approval, or response-monitor failure keeps
 the same round active while a safe in-scope recovery
 remains. Inspect the direct error and current state, then try materially distinct
 recoveries such as reconnecting the registered runtime, reusing its tab,
@@ -249,7 +267,6 @@ Before any submission retry, prove the matching fence absent. Report
 include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.
 
-At terminal success or terminal block, delete the Project-Manager-owned
-heartbeat and confirm absence. A stale response from another round has no
-authority and never replaces the exact current-round raw or launches a
-successor.
+At terminal success or terminal block, confirm the response monitor is no longer
+live. A stale response from another round has no authority and never replaces
+the exact current-round raw or launches a successor.

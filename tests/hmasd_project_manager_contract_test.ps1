@@ -30,13 +30,11 @@ foreach ($entry in $profiles.GetEnumerator()) {
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
 foreach ($required in @(
     'project_manager_project_authority=exclusive',
     'project_manager_git_authority=direct',
-    'project_manager_external_review_transport=direct',
-    'callable_agent_type=hmasd-experiment-operator',
-    'unknown agent_type',
-    'never substitute `default`')) {
+    'project_manager_external_review_transport=direct')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
@@ -44,8 +42,16 @@ foreach ($required in @(
     'git_execution=direct',
     'external_review_transport=direct',
     'experiment_orchestration=registered_native_child',
+    'hmasd-workflow-change-audit',
+    'Spawn only registered native child profiles',
     'Continue automatically within an active user grant')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'callable_agent_type=hmasd-experiment-operator',
+    'role_kind=registered_nonpersistent_native_child',
+    'ad hoc/default agent')) {
+    if (-not $operator.Contains($required)) { throw "Experiment Operator role missing: $required" }
 }
 
 Write-Output 'HMASD_PROJECT_MANAGER_CONTRACT_OK'

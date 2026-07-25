@@ -1,11 +1,9 @@
 # HMASD Agent Context
 
-Supporting reference for HMASD execution-environment facts and lightweight task
-practice. Canonical role authority, routing, acceptance and validation
-boundaries are defined only in the repository-root `AGENTS.md` and the
-applicable `.agents/roles/*.md` contract. Do not use this file as a role
-constitution. Task profiles and assignments embed the standing execution
-constraints they need.
+Supporting reference for HMASD execution-environment facts. The root
+`AGENTS.md` is a small role router; authority lives in the applicable role
+charter. Read this file only when an assignment needs runtime facts. Do not use
+it as a role constitution or preload it into unrelated children.
 
 ## Execution environment
 
@@ -20,9 +18,9 @@ constraints they need.
 - The focused suite and formal-path exercise use the registered CPU/one-thread
   contract and fail closed on backend or thread mismatch. Never add a fallback
   or infer CPU/CUDA trajectory equivalence.
-- Collections run at 16 parallel environments (`FORMAL_NUM_ENVS`). Never write a
-  test at width 1 or 2; behavior at those widths is not representative and
-  reconstruction drift is width-sensitive.
+- Experiment-specific environment widths, budgets and minimum representative
+  test batch sizes come only from the assignment-named design. This reference
+  never supplies a default scientific value.
 
 ## Git
 
@@ -38,10 +36,9 @@ Report it rather than working around it.
 ## Role-contract boundary
 
 Role-specific semantic ownership, reviewer-package authorship, acceptance,
-repair, transport and archival responsibilities live in root `AGENTS.md` and
-the applicable `.agents/roles/*.md` contracts. The experiment operator is a
-fixed native child, not a persistent task or Skill-driven monitor. Consult those
-sources directly when constructing an assignment; do not turn this environment
+repair, transport and archival responsibilities live in the applicable
+`.agents/roles/*.md` contract. The experiment operator is a fixed native child,
+not a persistent task or Skill-driven monitor. Do not turn this environment
 reference into a parallel policy source.
 
 ## Development procedure
@@ -51,8 +48,10 @@ debugging, proof-sized testing, file-safe parallelism, review and honest
 completion evidence. It is the project-native procedure; generic Superpowers
 Skills are reference-only and disabled for HMASD execution.
 
-For an ordinary design gap inside an accepted brief, Project Manager takes the
-smallest reasonable implementation choice and keeps moving. This rule does not apply to protected scientific choices; isolate those at their authority boundary.
+For an ordinary code gap inside a Pro-frozen scientific brief, Project Manager
+takes the smallest reasonable implementation choice and keeps moving. A
+scientific ambiguity returns to External Pro; PM may raise an implementation
+alignment objection but cannot choose the scientific value.
 
 ## Protected semantics
 

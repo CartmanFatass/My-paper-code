@@ -50,15 +50,18 @@ The mapping correlations are all above `0.9898`, mapping MAEs are all below
 maximum observation, value, action, reward and hidden mismatches are all exactly
 zero; lifecycle equality and inactive-padding-zero also pass.
 
-## Scientific disposition
+## Mechanical disposition and scientific-review boundary
 
-Accept G32 as a usable toy test version for a checkpoint whose parameters and
-behavior do not depend on configured maximum capacity across the registered
-6/8/12 family. Together with G31, this supports both within-episode active roster
-changes and cross-configuration checkpoint reuse.
+The registered analyzer branch is validly
+`USABLE_RUNTIME_CAPACITY_G32`: under the frozen contract, the checkpoint's
+parameters and behavior do not depend on configured maximum capacity across the
+registered 6/8/12 family. This mechanical branch and its evidence cannot be
+relabelled.
 
 The result does not establish UAV transport, arbitrary capacities, or live
 tensor-width changes inside one active trajectory. It does not retroactively
-repair either source-non-identifiable UAV run. The smallest next algorithmic
-counterexample is live runtime-capacity rebinding with recurrent lifecycle state
-preserved across the width change.
+repair either source-non-identifiable UAV run. External Pro now owns the
+scientific interpretation, CDC/portfolio update and next scientific action via
+`FORMAL_RESULT_SCIENTIFIC_DISPOSITION`. Live runtime-capacity rebinding is a PM
+code-side observation/candidate question, not an adopted successor unless Pro
+selects it.
