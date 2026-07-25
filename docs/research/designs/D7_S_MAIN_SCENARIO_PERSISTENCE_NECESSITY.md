@@ -33,21 +33,38 @@ Pro's instruction was to test explicitly whether a full-sync role permutation
 preserves external return, physical state, energy, position, queue/service state,
 communication or topology state, and anything else carried across the horizon.
 
-**It preserves none of them.** The main scenario carries per-UAV state that
-relabelling cannot move:
+**It preserves none of them** — but the list below is **stage-gated**, and the
+correction matters enough to state before the evidence rather than after.
+
+`_build_profile_overrides` sets `battery_enabled: False` and
+`charging_enabled: False` in the base profile, and the default stage is **S1**
+(`scenario7:42`), where `w_energy_failure` is also `0.0`. So **at S1 the energy
+state does not bind at all**, and every battery, charging, docking and failure term
+below is inert. They become symmetry breakers only at the stages that enable them.
+
+Independently: the endurance numbers say energy would not bind at S1 even if
+enabled. Hover power is `P0 + Pi = 79.86 + 88.63 = 168.49 W`
+(`scenario_base.py:504-529`, parasitic and vertical vanish at rest), against
+`battery_capacity_wh = 160.0` and `time_step = 1.0 s` — about **3,419 steps of
+hover endurance against a 500-step episode**.
+
+**What survives at every stage is position**, and it is sufficient on its own:
 
 ```text
+ALWAYS ACTIVE
 uav_positions[n_uavs, 3]        uav_env.py:188 init, :250 written per agent from
                                 that agent's own action; persists across steps
+last_actual_velocities[n_uavs,3] per-UAV kinematic state
+
+ONLY WHEN battery_enabled / charging_enabled  (not at the default stage S1)
 uav_battery_ratios[n_uavs]      scenario7:156, reset per UAV from a random range
                                 (:472), depletes with that UAV's own motion
 last_motion_energy_wh[n_uavs]   per-UAV motion cost
 uav_charging[n_uavs]            per-UAV charging state
 charging_wait_steps[n_uavs]     per-UAV queue wait at a station
 uav_target_stations[n_uavs]     per-UAV docking commitment
-uav_failure_timers / uav_failed  per-UAV failure state
-uav_return_energy_margins        per-UAV return feasibility
-last_actual_velocities[n_uavs,3] per-UAV kinematic state
+uav_failure_timers / uav_failed per-UAV failure state
+uav_return_energy_margins       per-UAV return feasibility
 ```
 
 And the external return depends on position through the physics, not through a
@@ -58,10 +75,22 @@ scenario7:1147   user_positions - uav_positions   -> access SINR -> capacity -> 
 scenario7:1156   uav_positions - ground_bs_positions -> backhaul capacity
 ```
 
-So for two UAVs `i` at `(p_i, b_i)` and `j` at `(p_j, b_j)`, having `i` take over
-`j`'s duty is **not** the same joint state as `j` continuing it. Reaching `j`'s
-position costs motion energy and elapsed steps, during which service degrades and
-both battery margins move. The exchange is lossy in return, in energy, and in time.
+So for two UAVs `i` at `p_i` and `j` at `p_j`, having `i` take over `j`'s duty is
+**not** the same joint state as `j` continuing it. Reaching `j`'s position takes
+elapsed steps at a bounded speed, and during those steps the served rate is
+whatever the *in-transit* geometry gives, not the settled one. The exchange is
+lossy in return and in time at every stage, and additionally in energy wherever the
+battery is enabled.
+
+**And the flexible duty is real.** Users are **not** static: `_move_users()` runs
+every step (`scenario_base.py:3172`) as RPGM cluster mobility or random walk, with
+cluster pause times. So the source genuinely contains the two timescales the paper
+describes — a backhaul/relay geometry that wants to persist, and a service
+assignment that wants to re-decide as users move. That is the mixed-urgency
+structure the toy was supposed to stand in for, present here in the source itself.
+
+*(A previous note in this line stated users were static. That was wrong — it came
+from grepping only `uav_env.py`, where the mobility update does not live.)*
 
 **Consequence.** The specific failure that retired the toy —
 `ZERO_COST_ROLE_EXCHANGE_SOURCE` — is **structurally absent here**. The toy's
