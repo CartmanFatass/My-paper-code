@@ -1,12 +1,15 @@
 # Proposal: drive the unattended loop with `/loop`
 
 ```text
-status=PROPOSAL_AWAITING_USER_REVIEW
-not_active=true
+status=ACCEPTED_AND_IN_FORCE
+accepted=2026-07-24
+accepted_by=user
 date=2026-07-24
 ```
 
-Not yet in force. Nothing changes until the user accepts.
+In force. The user accepted `/loop` as the fallback driver for the autonomous
+workflow and started it. `AGENTS.md` carries the mechanism note under **Context
+compaction**; `CURRENT_WORK.md` carries `loop_driver`.
 
 ## The problem, stated honestly
 

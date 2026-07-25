@@ -176,6 +176,20 @@ loop survives losing its context, not so a human can inspect it. It never
 pauses the loop, never ends the work, and is never a checkpoint — the only
 points where the loop waits for the user are the ones the execution mode names.
 
+**Re-entry is driven by `/loop`, not by this document.** A turn ends when the
+orchestrator stops emitting tool calls, and no policy sentence re-invokes it —
+the language here about continuing automatically states *intent*, and `/loop`
+supplies the *mechanism*. Without a driver attached the loop stalls between
+delegations, in the gap where nothing is in flight and the next step is the
+orchestrator's to start; that is where it stalled repeatedly on 2026-07-24
+despite this section already saying it would not.
+
+Event notifications from background children are the primary driver and cover
+most of the loop; the `/loop` wakeup is the fallback for the gap they cannot
+cover. It is session-bound and does not survive session death —
+`CURRENT_WORK.md` does, which is why the boundary, not the driver, is the
+continuity record. `CURRENT_WORK.md` records whether a driver is attached.
+
 It happens at one place: the seam between iterations, once the current one has
 closed out. Never mid-iteration.
 
