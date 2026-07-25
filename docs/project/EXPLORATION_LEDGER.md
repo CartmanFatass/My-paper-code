@@ -59,6 +59,26 @@ unevidenced.** `duration_entropy_floor_*` exists default-off, described in-code
 as a guard for duration collapse, and `ExpRecord` records no observed collapse
 anywhere.
 
+### Preliminary reading, zero compute — 2026-07-25
+
+The collapse metrics already exist and are already wired
+(`Collapse/DurationUsageEntropy`, `DurationUsageMaxFrac`, `DurationPolicyEntropy`),
+and a completed paired run carries them:
+`logs/r29_t10_paired_320k_20260714_010026/runs/{real_reward,probe_only}/seed29031/metrics/train_updates.csv`.
+
+Normalised duration-policy entropy falls `0.82 -> 0.60` and **plateaus**;
+`max_frac` rises `0.55 -> 0.70`. Both arms track each other closely, so it is not
+reward-driven.
+
+**That is concentration, not collapse** — roughly 70/30 onto a dominant choice,
+stable rather than degenerate. Caveats: candidates were `(1,2,3,4)` rather than
+the current `(3,7,13,24)`, one seed, ~41 updates.
+
+Consequence for D1: its build cost is near zero, and its framing needs a sharper
+question than "does it collapse". Concentration that plateaus at 70/30 is itself
+the structure a role-conditioned constraint would exploit — but it is not the
+pathology the premise assumed.
+
 ### Why D1 absorbed a separate entry
 
 Role-stability measurement was going to be its own direction, and was briefly the
