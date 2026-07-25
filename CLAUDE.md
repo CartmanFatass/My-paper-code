@@ -20,6 +20,41 @@ explicit handoff changes ownership. Git-tracked code is the implementation
 source and `logs/<run-id>/` is runtime evidence. Historical modules, commands,
 rounds and archived artifacts are not active instructions.
 
+## The loop does not stop
+
+Runtime mechanism only. Authorization semantics — what is granted, where a mode
+pauses, what must still be escalated — live in `AGENTS.md`, **Standing
+authorization** and **Execution modes**. Read them once per session; do not
+restate them here.
+
+The mechanism matters because intent alone has already failed. `AGENTS.md` said
+the loop continues automatically, and it still stalled repeatedly, because a turn
+ends when the orchestrator stops emitting tool calls and **no sentence in any
+document re-invokes it**.
+
+```text
+loop_driver=/loop          # dynamic pacing, ScheduleWakeup
+primary_wake=task notifications from background children
+fallback_wake=/loop wakeup, for the gap notifications cannot cover
+```
+
+Four rules, all mechanical:
+
+1. **A turn ending is not the loop ending.** Before the last tool call of a turn,
+   confirm a driver is attached. If nothing is in flight and the next step is
+   yours to start, that is the stall gap — arm the wakeup.
+2. **Compaction never pauses it.** Write the handoff, compact, resume straight
+   into the next iteration. Nothing waits for an answer at that seam.
+3. **Compute is a script, not a question.** `scripts/check_compute_free.ps1`.
+   `COMPUTE_BUSY` schedules a one-hour recheck; it never returns to the user.
+4. **Waiting is done in-band.** No blocking sleep exists, so a child that ends its
+   turn to wait has stalled. Poll with repeated checks inside the turn, or hand
+   back. A prohibition without an affordance is unfollowable.
+
+The driver is session-bound and does not survive session death.
+`CURRENT_WORK.md` does, and records whether one is attached — the boundary is the
+continuity record, not the driver.
+
 ## Retiring a direction
 
 Research code iterates fast and most directions die. A direction verified as

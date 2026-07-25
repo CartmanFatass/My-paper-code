@@ -4,12 +4,16 @@
 owner=user
 authority=user_intent -- not derivable from code, and not a Project Manager decision
 restated=2026-07-25
-supersedes_silence=this document did not exist until 2026-07-25
+claim_and_carrier=external_ruling_20260725_research_direction_and_ledger
 ```
 
 Read this before any design, any round, and any judgement about whether work is
 on the critical path. Every other document in `docs/project/` describes *how* we
 work. This one is the only statement of *what for*.
+
+The problem and the goal below are the user's. The paper claim, the primitive and
+the carrier were set by the external ruling of 2026-07-25 and are recorded here
+because a thesis split across two documents is how the last drift started.
 
 ## The problem
 
@@ -25,81 +29,149 @@ least one of them.
 ## The difficulty, which is the actual contribution
 
 Unbinding `k` is trivial to state and expensive to do. **Letting each agent choose
-its own period massively expands the action space**, and exploration becomes
+its own period expands the temporal search space**, and exploration becomes
 prohibitive. A method that merely allows variable `k` and then fails to explore it
 has not solved anything.
 
+The claim is *not* "an unrestricted action space is expensive, so we constrain
+it" — that is a standard design principle, instantiated already by discretised
+duration candidates and by termination policies. It only becomes a contribution
+if the constraint is **learned, label-free, dynamically applicable, and shown to
+improve a registered search-efficiency tradeoff**.
+
 So the paper's shape is:
 
-> Unbinding `k` produces an action space too costly to explore. We reintroduce
-> tractability with an assumption or constraint that collapses it onto a small set
-> of periods, and we accept a **suboptimal** result in exchange for a search cost
-> that is actually payable.
+> On anonymous cooperative MARL tasks with heterogeneous per-agent renewal
+> urgency, a decision-time-learned, low-cardinality renewal-class policy attains
+> higher held-out external return than the best shared fixed renewal period, and
+> reaches a registered utility level with fewer environment interactions or
+> high-level decision samples than an unrestricted per-agent renewal policy —
+> under matched information, action support and optimizer exposure.
 
-The claim is explicitly not optimality. It is that a constrained variable-`k`
-policy beats fixed `k` at a search cost far below unconstrained variable `k`.
+The framing is **structured approximation trading unrestricted temporal
+expressivity for finite-budget learnability**. It is not "we accept a suboptimal
+result": suboptimality relative to an unknown optimum cannot be established
+merely by constraining the controller.
 
-## Two candidate constraints
+It is also not an anti-collapse contribution. Collapse is one possible failure
+mode of unrestricted lifetime learning, not the thesis. The framing has to
+survive the case where collapse never occurs.
 
-1. **Self-learned convergence** — let the period be learned and converge onto a
-   small number of values, rather than fixing them by hand.
-2. **Role-conditioned period classes** — distinguish only long-term and
-   short-term `k`, tied to what the agent is doing (relay versus service).
+### Qualifiers the claim carries
 
-Both are constraints on the same explosion. Either can carry the paper; the second
-is cheaper to state and to defend.
+- no hand-coded relay/service labels, no role-specific reward;
+- no claim of global or asymptotic optimality;
+- search cost measured as **interaction and optimizer exposure**, not wall time
+  and not nominal action-space size;
+- role and membership permutations included in held-out evaluation;
+- fixed-`k`, unrestricted, and constrained arms each matched to their own claim.
 
-## Current state of the codebase — checked 2026-07-25, not assumed
+### What would make it non-obvious
 
-Four findings that make the remaining work much smaller than the drifted line
-suggested. All from reading configuration, objective code and `ExpRecord`.
+At least one of: the stability class is *inferred* from generic decision-time
+state and changes as an agent's function changes; the structure transports across
+anonymous slot permutation, join/leave/rejoin and held-out team sizes; strong
+matched reductions fail; the search benefit is measured rather than argued;
+forcing an agent into the wrong regime moves persistence and utility in the
+predicted direction; or the method helps **even when unrestricted lifetime usage
+stays broad**, which would prove the contribution is search structure rather than
+regularisation.
 
-**Variable `k` is already built and is the default.** `high_controller =
-"legacy_duration"` is the variable-duration mode; the high policy already emits
-`duration_logits` alongside `skill_logits`; and the search space is already
-discretised as `skill_lifetime_candidates = (3, 7, 13, 24)`, in high-level
-intervals so the primitive horizon is `candidate * k`.
+A hard-coded "relay gets long, service gets short" is a UAV heuristic, not a MARL
+contribution.
 
-**The config already names the role distinction.** The comment on those
-candidates reads *"UAV service/relay formation is a long-horizon task"* — the
-stable-versus-flexible split, written down and unexploited.
+## The primitive: renewal urgency, not role
 
-**The fixed-clock challenger never won.**
-`EXP-20260714-r30-fixed-clock-paired-320k` is recorded as *stopped — superseded
-before completion*: the legacy arm completed, the R30 treatment retry was stopped
-when a faster screen was chosen, and **no M1–M4 scientific outcome exists**. So
-`legacy_duration` is not a retired path — it is the live default and the only
-controller with a completed arm. That also answers whether it trains: a 320k arm
-completed.
+The reusable quantity is **per-agent, state-dependent renewal urgency** — how much
+value is lost by withholding a re-decision:
 
-**But the paper's premise is not yet evidenced.** `duration_entropy_floor_*`
-exists, default-off, described in-code as *"a one-variable guard for duration
-collapse, not a new task-specific reward"* — so collapse is **anticipated by the
-engineering and nowhere observed in `ExpRecord`**.
+```text
+U_i(t, Δ) = E[G_t | agent i re-decides now] - E[G_t | agent i keeps its commitment for Δ]
+```
 
-That last point sets the first real experiment. Before designing a constraint,
-**measure whether unconstrained duration selection actually collapses** on the
-existing `legacy_duration` path. It is cheap, the machinery exists, and it
-decides the shape of the paper:
+Both expectations start from the same pre-decision history and use the same
+continuation semantics. Equivalently, a hazard `λ_i(t) = Pr(renewal is beneficial | h_{i,t})`.
 
-- if duration collapses, that is the motivating figure and the constraint is the
-  contribution;
-- if it does not collapse, the problem statement is wrong and the contribution
-  has to be re-argued — better to learn that from one run than after building a
-  constraint for a problem that is not there.
+- **stable commitment** — withholding re-decision costs almost nothing;
+- **flexible commitment** — an immediate re-decision has material expected value;
+- the same agent may move between regimes within one lifecycle;
+- **realized lifetime is a consequence of this quantity, not its definition.**
+
+"Stable role" is the right intuition and the wrong primitive: naming agents relay
+or service supplies the semantics the method is supposed to discover. Churn and
+dwell time are **outcomes** — using either to define the property the controller
+must learn is circular, and churn additionally conflates true flexibility with
+exploration noise and skill-label symmetry.
+
+## The carrier: R30 KEEP/SET
+
+`high_controller = "r30_fixed_clock_ar_edit"` is the primary carrier and the
+unrestricted comparator. `legacy_duration` is retained as a **frozen
+sampled-duration comparator and bias diagnostic**, not as a candidate mechanism.
+
+R30 is preferred because lifetime emerges from repeated local KEEP decisions
+rather than a sampled catalogue value, so it is not capped by the candidate set,
+it aligns directly with renewal urgency, and it avoids the legacy path's
+short-segment high-sample bias at the carrier level.
+
+### Claim boundary — recorded, not resolved
+
+**R30 does not untie the observation/check clock.** `steps_to_check` is indexed
+per environment (`standalone_agent.py:3103`), one shared clock; what R30 unties is
+the *realized renewal interval*. So:
+
+- if the target is that relay-like commitments persist while service-like ones
+  renew often — R30 carries it;
+- if the target literally requires different agents to be *offered* decisions at
+  different physical clock times — R30 is a comparator, not the final mechanism.
+
+The relay/service examples above describe persistence and re-decision frequency,
+so we proceed on the **functional realized-lifetime** reading. This is the one
+place where the ruling interpreted user intent rather than reading it; overturning
+it changes the carrier.
+
+## Current state of the codebase — checked 2026-07-25
+
+The previous revision of this section stated three things that are false. They are
+recorded here because each one was load-bearing for an ordering that has now been
+dropped:
+
+| Was claimed | Actually |
+|---|---|
+| `legacy_duration` is the live research default | It is the **frozen comparator**; R30 must be selected explicitly |
+| The fixed-clock challenger never completed | The stopped 320k pairing is one run; **adaptive R30 arms completed and anchored R31–R33**, with R33 recording R30 safety PASS |
+| Collapse has never been observed | Collapse was recorded at **R16.5** under `0.1` intrinsic pressure; `0.05` was adopted as the cleaner base |
+
+What is true and useful:
+
+- The variable-lifetime machinery exists on both paths. Legacy emits
+  `duration_logits` over `skill_lifetime_candidates = (3, 7, 13, 24)`; R30 emits a
+  single `keep_logit` with `KEEP_TOKEN`/`SET_TOKEN` (`r30_fixed_clock.py:278`).
+- SMDP high-level discount and bootstrap are implemented and on
+  (`use_smdp_discounted_high_return`, `use_smdp_bootstrap`).
+- **Four ways a segment ends other than by its own choice**: episode end, team-intent
+  Z boundary (`team_intent_boundary_trunc_by_duration`), active-mask change, and a
+  **forced** renewal path (`situation_hazard_forced_renewal_rate`). Any hazard
+  reading that does not separate these measures the environment, not the policy.
+- **No per-step trace is persisted.** Metrics are aggregated per update. Age-conditioned
+  renewal hazard — the quantity the primitive needs — is not currently measurable
+  from any existing artifact.
+- The completed legacy arm used `(1,2,3,4)` at `k0=10`. The current `(3,7,13,24)`
+  configuration has **no completed run**.
 
 ## What this means for scope
 
-**On the critical path**: anything that varies `k`, constrains the resulting
-search, or measures a constrained variable-`k` policy against fixed `k`.
+**On the critical path**: establishing that heterogeneous renewal urgency exists
+in the source, and that conditioning renewal on a learned low-cardinality regime
+improves external value or search efficiency against both fixed `k` and
+unrestricted R30.
 
-**Infrastructure, only if it blocks the above**: delayed credit assignment across
-periods of unequal length is a real dependency, because a variable period changes
-what a credit signal is attached to. It earns its place only while it is blocking
-a variable-`k` result — not as a research programme of its own.
+**Infrastructure, only if it blocks the above**: member-resolved delayed-credit
+identification. It earns promotion only when the selected controller has verified
+source access and capacity and *still* cannot orient its renewal policy — and then
+only the blocking fragment, not the programme.
 
-**Off the path**: refining an identification protocol beyond what a variable-`k`
-claim needs.
+**Off the path**: refining an identification protocol beyond what the claim needs.
 
 ## The drift this document exists to prevent
 
