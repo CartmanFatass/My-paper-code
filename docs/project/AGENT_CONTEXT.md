@@ -54,6 +54,50 @@ Skills are reference-only and disabled for HMASD execution.
 For an ordinary design gap inside an accepted brief, Project Manager takes the
 smallest reasonable implementation choice and keeps moving. This rule does not apply to protected scientific choices; isolate those at their authority boundary.
 
+## Unattended operation
+
+This loop is expected to run overnight with nobody watching. A pause is not a
+safe default here — it is a stall that costs the whole run.
+
+The user granted standing permission on 2026-07-24 for every action inside an
+iteration round: external review transport to the registered per-branch
+conversation, bounded and nonformal screens, subagent spawns, and direct Git on
+the working branch. `CURRENT_WORK.md` carries it as
+`in_loop_permission_grant_20260724`. Inside that scope, asking for authorization
+is the defect, not the caution.
+
+This binds children too. Do not stop to ask the caller whether an in-scope action
+is permitted, and do not treat a tool-level warning about an in-scope action as a
+reason to hand the decision back. Act, then report what you did. Escalate only
+what the grant genuinely does not cover: an external destination other than the
+registered conversation, destructive Git on another branch, or a real expansion
+of protected scientific authority.
+
+`BLOCKED` remains correct for a missing decision that would materially change
+behavior. It is not a channel for permission.
+
+## Authoring a child brief
+
+A brief that contradicts the procedure governing the child is worse than no
+brief: the child will follow the brief. This has already cost one retired review
+round.
+
+When a Skill or role charter governs the child's work, read that document before
+writing the brief and quote its constraints. Never paraphrase a procedure from
+memory, and never restate a step in words that admit a reading the procedure
+forbids. If the brief and the procedure disagree, the procedure is right and the
+brief is a defect to fix.
+
+Two specific traps already hit:
+
+- "Submit the question verbatim" reads as *paste the file body*. The review
+  transport contract is the opposite — the question carries exact paths, not file
+  contents, and the reviewer reads the repository itself.
+- Declaring evidence paths in the brief or a side manifest does not put them in
+  front of the reviewer. The freshness fence names only the question, so the
+  allow-list has to live inside the question under a literal `## Evidence to read`
+  heading.
+
 ## Protected semantics
 
 These carry experiment validity and are reviewed before any commit: reward and
