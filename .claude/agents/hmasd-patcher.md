@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-patcher
 description: Applies exact, pre-decided mechanical file edits — renames, path and constant updates, docstring and comment text, import reordering, dead-branch deletion, formatting. Use when the change is already specified down to the literal text. Never for algorithm, numerical or design decisions.
 model: haiku

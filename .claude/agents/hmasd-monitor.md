@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-monitor
 description: Watches a running HMASD experiment and maintains a self-refreshing PROGRESS.md under the run root. Reports to chat only at completion or failure, never mid-run. Use when a formal training or evaluation run has been launched.
 model: haiku

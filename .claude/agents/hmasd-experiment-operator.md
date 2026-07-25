@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-experiment-operator
 description: Silently executes exactly one already-authorized HMASD train-evaluate-analyze run and returns a single terminal payload. Use only when the Project Manager has frozen a run assignment. Never interprets results, never repairs, never runs Git.
 model: haiku

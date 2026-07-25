@@ -219,4 +219,23 @@ foreach ($retired in @(
     }
 }
 
+# A UTF-8 BOM ahead of the opening '---' makes the runtime fail to parse a
+# subagent definition, and the agent silently disappears from the roster --
+# no error, just an agent_type that no longer exists. PowerShell 5.1's
+# Set-Content -Encoding utf8 writes a BOM, which de-registered eight of ten
+# definitions on 2026-07-24. Every definition must also declare a name.
+foreach ($definition in (Get-ChildItem -LiteralPath (Join-Path $repo '.claude/agents') -Filter '*.md')) {
+    $bytes = [IO.File]::ReadAllBytes($definition.FullName)
+    if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
+        throw "Subagent definition has a UTF-8 BOM and will not register: $($definition.Name)"
+    }
+    $text = [Text.Encoding]::UTF8.GetString($bytes)
+    if ($text -notmatch '\A---\r?\n') {
+        throw "Subagent definition does not open with frontmatter: $($definition.Name)"
+    }
+    if ($text -notmatch '(?m)^name:\s*\S') {
+        throw "Subagent definition has no name field: $($definition.Name)"
+    }
+}
+
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK'

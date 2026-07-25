@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-review-exchanger
 description: Carries one already-authored external review round to the registered GPT-5.6 Pro conversation and archives the reply byte-exact. Mechanical transport and archival only — never authors the question, never interprets the answer, never decides that a review is needed.
 model: haiku

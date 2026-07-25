@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-scout
 description: Fast read-only reconnaissance of the HMASD repository — file inventories, symbol and pattern sweeps, directory structure, log and artifact tabulation. Use for mechanical lookup where the answer is a list or a location, never for judgment about algorithm behavior.
 model: haiku

@@ -1,4 +1,4 @@
-﻿---
+---
 name: hmasd-code-scout
 description: Maps a bounded region of the codebase for design and partitioning — symbols, callers, data ownership, tensor shapes, mutation points, writer scopes and coupled boundaries. Use before splitting one implementation across parallel workers. Read-only; produces a map and the decisions the caller must freeze, never the plan itself.
 model: sonnet
