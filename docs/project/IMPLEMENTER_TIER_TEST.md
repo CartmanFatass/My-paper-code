@@ -151,6 +151,31 @@ rather than reading the other items.
 T4 and T5 carry the most information: neither arm has seen them, and both have
 unambiguous ground truth.
 
+### Verified replay bases
+
+Each replay task runs in a worktree at the parent of the commit that first
+contained the resolution, checked so the design is present and the package is
+absent:
+
+| Task | Base commit | Design at base | Package at base |
+|---|---|---|---|
+| T1 | `525d748` | present | absent |
+| T2 | `8281577` | present | absent |
+
+**T3 cannot be replayed and is converted to a synthetic contract.** On
+`untied-k` the G20 package and the evidence note recording the zero fixed point
+landed in the *same* commit (`77c2804`), so no commit exists where the spec is
+present and the resolution is not. The separate G20 design file that appeared in
+an earlier search lives on `aggressive`, which this project line does not own and
+which is not a legitimate base for our tooling.
+
+T3 therefore joins T4 and T5 as a synthetic-contract task: the credit rule is
+restated in a contract written for the test and never committed to the working
+branch. This **weakens T3 as a calibration item** — the control's known pass was
+against the original framing, not this restatement — so a T3 failure now
+warrants diagnosis before it is read as invalidating, rather than automatically
+firing decision 1.
+
 ## Staged design, with stop rules
 
 A full 2x2 over five tasks is twenty runs and a false precision at this n. Staged
