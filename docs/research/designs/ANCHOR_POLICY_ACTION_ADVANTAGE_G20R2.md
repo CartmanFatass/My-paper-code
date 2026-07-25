@@ -305,12 +305,29 @@ identification on a number no document registers, and its Stage A branch would
 not be interpretable.
 
 **Derivation rule, registered here.** `epsilon_audit` is a measured property of
-the audit estimator, never a chosen effect size. It is obtained by a **null
-calibration**: drive the paired-replay pipeline with an intervention whose true
-within-history action advantage is exactly zero — the factual action probed
-against itself — so every nonzero output is pure numerical and suffix
-Monte Carlo resolution noise. `epsilon_audit` is then set from the upper tail of
-`|Ahat*|` under that null.
+the audit estimator, never a chosen effect size.
+
+The obvious null is wrong and is recorded here so it is not re-proposed.
+Probing the factual action against itself under exact common random numbers
+makes both arms bit-identical, returns exactly zero, and would register
+`epsilon_audit = 0` — a floor no source could fail, which is precisely the
+trivially-satisfied invariant section 9 question 3 forbids. Exact replay is a
+strength of the pipeline here, not a measurement.
+
+The registered null is a **replicate-split calibration**, because the noise
+Stage A is actually exposed to is suffix Monte Carlo over the `K=8` anchor
+resamples and the finite replicate count, not replay error. For a fixed
+history and a fixed pair of distinct probe actions — the same pairing Stage A
+uses, common random numbers intact — estimate `A*(h,a)` twice from **disjoint
+suffix replicate sets**. The true difference between the two estimates is
+exactly zero, so the observed difference is pure estimator resolution. With
+`d` the observed difference between two half-sized estimates,
+
+```text
+epsilon_audit = upper tail of |d| / sqrt(2)
+```
+
+converts that difference back to the resolution of a single full-size estimate.
 
 Three conditions make the number meaningful:
 
