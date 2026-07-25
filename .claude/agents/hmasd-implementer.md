@@ -85,6 +85,13 @@ build a separate performance gate or start a speculative optimization loop.
 
 ## Tests
 
+These are not specifications of behavior and this is not TDD. The package exists
+to produce a number someone will believe, so its tests are **calibration of an
+instrument**. A test earns its place if failing it would mean that number is
+wrong — replay reproduces bit-exactly, the credit rule has a nonzero gradient at
+the mandated entry state, a probe at position `j` never reaches `j`'s own
+history. Coverage of plumbing earns nothing and costs review attention.
+
 Your brief names the tests you must add. Beyond satisfying it, hold yourself to
 one standard: **a test must be able to fail.** Before you report a test as
 covering an invariant, ask what wrong implementation it would catch. If the

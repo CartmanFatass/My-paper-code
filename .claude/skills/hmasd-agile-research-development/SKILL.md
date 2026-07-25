@@ -24,6 +24,15 @@ The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the marker
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.
 
+**Maintainability is not the requirement here; reproducibility is.** These
+packages are not extended — they are built, produce evidence, and are superseded
+(G20 by G20R by G20R2), so extensibility, adapters and backward compatibility are
+dead weight and the policy above deletes them. But a package *is* the evidence
+for a claim, so it must still produce the same number from the same commit in six
+months: frozen seeds, the registered interpreter and thread count, declared RNG
+stream ownership, exact replay. Trade maintainability away freely; never trade
+reproducibility.
+
 ## Operating loop
 
 1. **Bound.** Use the brief. Only Project Manager acting within direct user authority may define a fallback outcome, semantics, files, exclusions, and

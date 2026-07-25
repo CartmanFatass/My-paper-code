@@ -332,6 +332,24 @@ implementation: file layout, factoring, naming, test construction and every
 choice that does not change what is measured stay with Project Manager. The test
 is whether reversing the choice would change a registered quantity or a branch.
 
+**Grill the grill, before it is sent.** Leaning on Pro moves the bottleneck onto
+whoever authors the questions, and it moves there silently. Every one of the six
+G20R2 defects existed because Project Manager did not ask — Pro can only rule on
+what is put in front of it, so an unasked question fails exactly like an
+unexecuted rule.
+
+So one adversarial read-only pass over the question precedes every send, asking
+the one thing the preflight gate cannot: **which decision in this contract is
+being made without being asked about?** The preflight script checks structure —
+reachability, a non-empty allow-list, fence fields. It cannot check whether the
+question covers the decisions. Those are different failures and only one of them
+has a gate.
+
+Pro's answer is authoritative **after full reasoning, not before**. The curtailed
+round on 2026-07-24 produced two load-bearing conclusions that Pro itself
+retracted once allowed to finish. Leverage Pro heavily; never leverage a Pro that
+was cut off.
+
 ## Result interpretation
 
 A failure retires the smallest unit it actually refutes. These categories are
