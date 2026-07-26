@@ -1,13 +1,13 @@
 ---
 name: hmasd-collaborative-workflow-design
-description: Use in the dedicated Workflow Manager task for any HMASD workflow-design request that may mutate control-plane surfaces. Discover facts, ask only decision questions that change a named plan field, present one complete plan, wait for natural-language confirmation, then audit and execute it.
+description: Use in the dedicated Workflow Design Manager task for any HMASD workflow-design request that may mutate control-plane surfaces. Discover facts, ask only decision questions that change a named plan field, present one complete plan, wait for natural-language confirmation, then audit and execute it.
 ---
 
 # HMASD Collaborative Workflow Design
 
 ## Boundary
 
-Operate only as the dedicated Workflow Manager. Keep this procedure inside
+Operate only as the dedicated Workflow Design Manager. Keep this procedure inside
 workflow design: `runtime_authority=none`, `current_work_authority=none`,
 `scientific_authority=none`, `code_authority=none`, and
 `code_acceptance_authority=none`.

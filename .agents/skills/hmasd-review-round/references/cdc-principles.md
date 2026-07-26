@@ -30,7 +30,7 @@ this default order: derivation, counterexample, reanalysis of accepted evidence,
 constructive toy, bounded prototype, formal experiment. An action is a resource
 decision, not an epistemic declaration. Unscheduled ideas retain explicit
 reactivation conditions. The active Project Manager and External Pro role
-contracts determine who performs this selection. Workflow Manager has no
+contracts determine who performs this selection. Workflow Design Manager has no
 active research-selection role.
 
 Create an implementation assignment only when implementation is the cheapest

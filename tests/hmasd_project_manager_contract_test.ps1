@@ -31,17 +31,17 @@ foreach ($entry in $profiles.GetEnumerator()) {
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
-$workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_MANAGER.md')
+$workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
 $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 foreach ($required in @(
-    'workflow_manager_persistent_task=one',
-    'workflow_manager_workflow_design_authority=exclusive',
-    'workflow_manager_workflow_runtime_authority=none',
-    'workflow_manager_current_work_authority=none',
-    'workflow_manager_git_authority=direct_for_workflow_design_surfaces',
-    'workflow_manager_remote_repository_authority=permanent_user_grant',
-    'workflow_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
+    'workflow_design_manager_persistent_task=one',
+    'workflow_design_manager_workflow_design_authority=exclusive',
+    'workflow_design_manager_workflow_runtime_authority=none',
+    'workflow_design_manager_current_work_authority=none',
+    'workflow_design_manager_git_authority=direct_for_workflow_design_surfaces',
+    'workflow_design_manager_remote_repository_authority=permanent_user_grant',
+    'workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_code_authority=exclusive',
     'project_manager_runtime_authority=exclusive',
     'project_manager_current_work_authority=exclusive',
@@ -65,9 +65,9 @@ foreach ($required in @(
     'git_execution=direct_for_code_runtime_evidence_and_state',
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
-    'workflow_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'workflow_manager_target_model=gpt-5.6-sol',
-    'workflow_manager_target_effort=high',
+    'workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'workflow_design_manager_target_model=gpt-5.6-sol',
+    'workflow_design_manager_target_effort=high',
     'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'external_review_operator_target_model=gpt-5.6-luna',
     'external_review_operator_target_effort=high',
@@ -79,7 +79,7 @@ foreach ($required in @(
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
-    'role=workflow_manager',
+    'role=workflow_design_manager',
     'role_kind=dedicated_persistent_workflow_design_authority_task',
     'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'model=gpt-5.6-sol',
@@ -97,12 +97,12 @@ foreach ($required in @(
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'CODE_SCIENCE_INDEX.md')) {
-    if (-not $workflow.Contains($required)) { throw "Workflow Manager role missing: $required" }
+    if (-not $workflow.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
 if ($workflow.Contains('current_work_owner=exclusive') -or
     $workflow.Contains('external_review_dispatch_and_result_routing=exclusive') -or
     $workflow.Contains('experiment_dispatch_and_result_routing=exclusive')) {
-    throw 'Workflow Manager retains project-runtime authority'
+    throw 'Workflow Design Manager retains project-runtime authority'
 }
 if ($pm.Contains('current_work_access=forbidden_by_default') -or
     $pm.Contains('experiment_orchestration=none')) {

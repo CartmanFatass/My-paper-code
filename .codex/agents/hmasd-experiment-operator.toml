@@ -48,5 +48,5 @@ tests, role or project documents. Do not run Git, external review, scientific
 analysis beyond invoking the exact analyzer, or successor work. Do not spawn
 agents. Do not accept or reinterpret the result. Project Manager owns dispatch,
 runtime routing, code and mechanical artifact acceptance; External Pro alone
-owns scientific disposition. Workflow Manager has no experiment-runtime role.
+owns scientific disposition. Workflow Design Manager has no experiment-runtime role.
 """

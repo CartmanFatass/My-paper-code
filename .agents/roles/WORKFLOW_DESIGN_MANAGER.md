@@ -1,9 +1,9 @@
-# HMASD Workflow Manager Role Charter
+# HMASD Workflow Design Manager Role Charter
 
 ## Identity and bootstrap
 
 ```text
-role=workflow_manager
+role=workflow_design_manager
 role_kind=dedicated_persistent_workflow_design_authority_task
 session=019f9d2f-e0ea-7411-9fd7-386f45f76909
 model=gpt-5.6-sol

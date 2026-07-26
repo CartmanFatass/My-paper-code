@@ -1,15 +1,15 @@
 ---
 name: hmasd-workflow-change-audit
-description: Use in the dedicated Workflow Manager task when designing or changing HMASD routers, role charters, procedural Skills, native-agent profiles, registry, stable workflow contracts, or their tests.
+description: Use in the dedicated Workflow Design Manager task when designing or changing HMASD routers, role charters, procedural Skills, native-agent profiles, registry, stable workflow contracts, or their tests.
 ---
 
 # HMASD Workflow Change Audit
 
 ## Contract boundary
 
-This is a Workflow Manager workflow-design procedure. It grants no scientific,
+This is a Workflow Design Manager workflow-design procedure. It grants no scientific,
 formal-compute, code-acceptance or runtime authority. External Pro owns science,
-Project Manager owns code and runtime, and Workflow Manager alone accepts
+Project Manager owns code and runtime, and Workflow Design Manager alone accepts
 workflow-design changes.
 Generic planning, ticket, TDD and review-stack Skills remain disabled.
 
@@ -22,8 +22,8 @@ Use this Skill when a mutation touches any of these coupled surfaces:
 - tests that enforce those surfaces.
 
 `docs/project/CURRENT_WORK.md`, runtime review instances, run artifacts, reports
-and ledgers are PM-owned runtime state, not Workflow Manager design surfaces.
-Workflow Manager never reads or edits them. `docs/project/RESTART_HANDOFF.md`
+and ledgers are PM-owned runtime state, not Workflow Design Manager design surfaces.
+Workflow Design Manager never reads or edits them. `docs/project/RESTART_HANDOFF.md`
 also remains outside this procedure and is written only on explicit user request.
 
 Ordinary algorithm implementation stays on
@@ -54,7 +54,7 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    exactly once; every role and Skill is routed. Remove superseded live paths
    instead of keeping compatibility aliases. Use
    a separate exact PM assignment with `hmasd-agile-research-development` for
-   any source-code slice; Workflow Manager never edits source.
+   any source-code slice; Workflow Design Manager never edits source.
 5. **Verify closure.** Run the bundled checker, the affected focused contract
    tests and targeted negative searches from the impact matrix. Inspect the
    actual diff path set and `git diff --check`. The checker is structural; it
@@ -62,7 +62,7 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    If and only if the change adds or expands a workflow step, assign one
    registered `hmasd-workflow-cost-reviewer` with `fork_turns=none` to test that
    the avoided implementation/experiment cost exceeds total process cost. Its
-   return is evidence for Workflow Manager, not a new acceptance owner or recurring gate.
+   return is evidence for Workflow Design Manager, not a new acceptance owner or recurring gate.
 6. **Reload smoke.** If router, registry or profiles changed, start a fresh
    Codex task before relying on discovery. Smoke every changed callable profile
    against its exact fail-closed boundary. Do not substitute a default child

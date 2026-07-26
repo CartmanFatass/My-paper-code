@@ -51,8 +51,8 @@ foreach ($required in @(
     'No progress, ETA, phase, heartbeat')) {
     if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
 }
-if ($profile.Contains('active Workflow Manager') -or $role.Contains('parent=workflow_manager')) {
-    throw 'Experiment runtime is still assigned to Workflow Manager'
+if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('parent=workflow_design_manager')) {
+    throw 'Experiment runtime is still assigned to Workflow Design Manager'
 }
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',

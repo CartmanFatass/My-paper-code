@@ -29,7 +29,7 @@ $expectedRoles = @(
     'PRO_RESPONSE_MONITOR.md',
     'REVIEWER.md',
     'VERIFIER.md',
-    'WORKFLOW_MANAGER.md',
+    'WORKFLOW_DESIGN_MANAGER.md',
     'WORKFLOW_COST_REVIEWER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
@@ -41,7 +41,7 @@ $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CO
 $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
-$workflowManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_MANAGER.md')
+$workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
 $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
@@ -60,16 +60,16 @@ foreach ($required in @(
     'document_kind=role_router',
     'all_workspace_agents_auto_load_this_file=true',
     'project_history_in_router=forbidden',
-    'dedicated Workflow Manager task',
+    'dedicated Workflow Design Manager task',
     'Project Manager task',
     'registered native child',
     'docs/project/CURRENT_WORK.md` is PM-only code attention and runtime state',
-    'workflow_manager_workflow_design_authority=exclusive',
-    'workflow_manager_workflow_runtime_authority=none',
-    'workflow_manager_current_work_authority=none',
-    'workflow_manager_git_authority=direct_for_workflow_design_surfaces',
-    'workflow_manager_external_review_runtime_authority=none',
-    'workflow_manager_experiment_runtime_authority=none',
+    'workflow_design_manager_workflow_design_authority=exclusive',
+    'workflow_design_manager_workflow_runtime_authority=none',
+    'workflow_design_manager_current_work_authority=none',
+    'workflow_design_manager_git_authority=direct_for_workflow_design_surfaces',
+    'workflow_design_manager_external_review_runtime_authority=none',
+    'workflow_design_manager_experiment_runtime_authority=none',
     'project_manager_code_authority=exclusive',
     'project_manager_runtime_authority=exclusive',
     'project_manager_current_work_authority=exclusive',
@@ -111,9 +111,9 @@ foreach ($required in @(
     'git_integration_status=',
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
-    'workflow_manager_task=',
-    'workflow_manager_fixed_model=gpt-5.6-sol',
-    'workflow_manager_fixed_effort=high',
+    'workflow_design_manager_task=',
+    'workflow_design_manager_fixed_model=gpt-5.6-sol',
+    'workflow_design_manager_fixed_effort=high',
     'external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'external_review_operator_fixed_model=gpt-5.6-luna',
     'external_review_operator_fixed_effort=high',
@@ -188,8 +188,8 @@ foreach ($required in @(
     'current_work_owner=exclusive',
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
-    'workflow_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'workflow_manager_target_effort=high',
+    'workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'workflow_design_manager_target_effort=high',
     'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'external_review_operator_target_effort=high',
     'DESIGN_ASSERTION_AUDIT',
@@ -200,7 +200,7 @@ foreach ($required in @(
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
-    'role=workflow_manager',
+    'role=workflow_design_manager',
     'role_kind=dedicated_persistent_workflow_design_authority_task',
     'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'model=gpt-5.6-sol',
@@ -230,12 +230,12 @@ foreach ($required in @(
     'code_science_alignment_compute_budget=zero',
     'CODE_SCIENCE_INDEX.md',
     'hmasd-workflow-cost-reviewer')) {
-    if (-not $workflowManagerRole.Contains($required)) { throw "Workflow Manager role missing: $required" }
+    if (-not $workflowDesignManagerRole.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
-if ($workflowManagerRole.Contains('current_work_owner=exclusive') -or
-    $workflowManagerRole.Contains('external_review_dispatch_and_result_routing=exclusive') -or
-    $workflowManagerRole.Contains('experiment_dispatch_and_result_routing=exclusive')) {
-    throw 'Workflow Manager retains runtime ownership'
+if ($workflowDesignManagerRole.Contains('current_work_owner=exclusive') -or
+    $workflowDesignManagerRole.Contains('external_review_dispatch_and_result_routing=exclusive') -or
+    $workflowDesignManagerRole.Contains('experiment_dispatch_and_result_routing=exclusive')) {
+    throw 'Workflow Design Manager retains runtime ownership'
 }
 foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
@@ -253,7 +253,7 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-workflow-cost-reviewer',
-    'parent=workflow_manager',
+    'parent=workflow_design_manager',
     'model=gpt-5.6-sol',
     'reasoning_effort=xhigh',
     'fork_turns=none_required',
@@ -308,9 +308,9 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
-    'Workflow Manager workflow-design procedure',
-    'Workflow Manager alone accepts',
-    'Workflow Manager never reads or edits them',
+    'Workflow Design Manager workflow-design procedure',
+    'Workflow Design Manager alone accepts',
+    'Workflow Design Manager never reads or edits them',
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
@@ -357,7 +357,7 @@ foreach ($required in @(
     'scientific_acceptance_owner=external_pro',
     'code_acceptance_owner=project_manager',
     'runtime_owner=project_manager',
-    'workflow_design_owner=workflow_manager',
+    'workflow_design_owner=workflow_design_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction',
@@ -404,7 +404,7 @@ if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELI
     throw 'Stale multi-review pipeline remains on the active line'
 }
 
-foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $workflowManagerRole, $reviewOperatorRole, $proRole, $assertion)) {
+foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $workflowDesignManagerRole, $reviewOperatorRole, $proRole, $assertion)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

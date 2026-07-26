@@ -93,7 +93,7 @@ pairwise path. Any sparse or approximate physical model is a new scientific
 choice and requires its own design audit.
 
 Router, role, Skill, native-profile, registry and active workflow-contract
-changes belong to Workflow Manager under `hmasd-workflow-change-audit`. This
+changes belong to Workflow Design Manager under `hmasd-workflow-change-audit`. This
 Skill remains PM's implementation loop for any separately assigned source-code
 slice.
 

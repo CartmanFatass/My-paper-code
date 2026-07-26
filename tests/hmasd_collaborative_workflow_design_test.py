@@ -4,7 +4,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 SKILL_PATH = REPO / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
 UI_PATH = SKILL_PATH.parent / "agents/openai.yaml"
-ROLE_PATH = REPO / ".agents/roles/WORKFLOW_MANAGER.md"
+ROLE_PATH = REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md"
 
 
 def test_collaborative_skill_is_the_only_design_collaboration_skill() -> None:

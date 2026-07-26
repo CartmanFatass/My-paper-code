@@ -21,7 +21,7 @@ Use exactly one route:
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
 | Project Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/PROJECT_MANAGER.md`, then only current-boundary code, design/review and tests | completed rounds, workflow-design history, unrelated roles |
-| dedicated Workflow Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
+| dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
 | dedicated External Review Operator task | its exact inter-task assignment, `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-review-round/SKILL.md`, then only assignment-named round files | `CURRENT_WORK.md`, project history, scientific interpretation, implementation files outside the review allow-list |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, PM history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
@@ -32,17 +32,17 @@ completion condition fails closed instead of triggering a project-state search.
 ## Universal authority boundary
 
 ```text
-workflow_manager_persistent_task=one
-workflow_manager_workflow_design_authority=exclusive
-workflow_manager_workflow_runtime_authority=none
-workflow_manager_current_work_authority=none
-workflow_manager_scientific_authority=none
-workflow_manager_code_acceptance_authority=none
-workflow_manager_git_authority=direct_for_workflow_design_surfaces
-workflow_manager_remote_repository_authority=permanent_user_grant
-workflow_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-workflow_manager_external_review_runtime_authority=none
-workflow_manager_experiment_runtime_authority=none
+workflow_design_manager_persistent_task=one
+workflow_design_manager_workflow_design_authority=exclusive
+workflow_design_manager_workflow_runtime_authority=none
+workflow_design_manager_current_work_authority=none
+workflow_design_manager_scientific_authority=none
+workflow_design_manager_code_acceptance_authority=none
+workflow_design_manager_git_authority=direct_for_workflow_design_surfaces
+workflow_design_manager_remote_repository_authority=permanent_user_grant
+workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
+workflow_design_manager_external_review_runtime_authority=none
+workflow_design_manager_experiment_runtime_authority=none
 project_manager_persistent_task=one
 project_manager_code_authority=exclusive
 project_manager_runtime_authority=exclusive
@@ -66,11 +66,11 @@ cross_task_routing=fixed_session_id_plus_fixed_model_effort
 cross_task_silent_model_effort_override=forbidden
 ```
 
-The user permanently authorizes Workflow Manager and Project Manager to fetch and
+The user permanently authorizes Workflow Design Manager and Project Manager to fetch and
 push accepted nonoverlapping path sets there. No other remote or egress is covered.
 
 There is no Controller, persistent Monitor, dispatcher, semantic relay, role
-registry or global lease. Workflow Manager owns workflow design only. External
+registry or global lease. Workflow Design Manager owns workflow design only. External
 Review Operator alone controls the browser and returns exact raw files to PM;
 `hmasd-pro-response-monitor` sees only its metadata sentinel. External Pro owns
 science; PM owns code and its mechanical runtime.
@@ -117,7 +117,7 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
-- Workflow-design changes: `.agents/roles/WORKFLOW_MANAGER.md`.
+- Workflow-design changes: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - PM code authority and mechanical research runtime: `.agents/roles/PROJECT_MANAGER.md`.
 - Mechanical Pro transport and callback: `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.

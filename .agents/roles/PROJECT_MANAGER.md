@@ -23,9 +23,9 @@ one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
-workflow_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909
-workflow_manager_target_model=gpt-5.6-sol
-workflow_manager_target_effort=high
+workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909
+workflow_design_manager_target_model=gpt-5.6-sol
+workflow_design_manager_target_effort=high
 external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b
 external_review_operator_target_model=gpt-5.6-luna
 external_review_operator_target_effort=high
@@ -36,7 +36,7 @@ cross_task_silent_override=forbidden
 After the router, read `docs/project/CURRENT_WORK.md`, this charter and only the
 files named by the active code boundary. `CURRENT_WORK.md` is PM's attention
 pointer for code and its mechanical research runtime, and PM alone maintains it.
-External Pro owns science. Workflow Manager owns only workflow-design changes
+External Pro owns science. Workflow Design Manager owns only workflow-design changes
 and never manages the active loop.
 
 ## Owns
@@ -72,7 +72,7 @@ and never manages the active loop.
 ## Does not own
 
 - Workflow-design changes to routers, roles, Skills, native profiles, registry
-  or stable process contracts; those go to Workflow Manager.
+  or stable process contracts; those go to Workflow Design Manager.
 - Browser interaction, Pro-page monitoring or experiment-process polling; the
   dedicated External Review Operator and low-cost Experiment Operator isolate
   those mechanics.
@@ -93,7 +93,7 @@ Use `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` for every triggered boundary.
 4. PM dispatches authorized runs and review rounds while their dedicated
    operators own interaction and monitoring mechanics. PM validates terminal
    artifacts; External Pro owns scientific interpretation and successor choice.
-5. Workflow Manager changes only workflow design and never participates in the
+5. Workflow Design Manager changes only workflow design and never participates in the
    runtime sequence above.
 
 PM has no scientific authority. Before implementation it performs only a local
@@ -156,7 +156,7 @@ pre-implementation review. Pro resolves scientific content.
   successor decision; those belong to External Pro inside the user boundary.
 - Delegate code acceptance to a child or External Pro.
 - Change workflow-design surfaces without an exact user instruction or accepted
-  Workflow Manager design; let Workflow Manager edit `CURRENT_WORK.md` or run
+  Workflow Design Manager design; let Workflow Design Manager edit `CURRENT_WORK.md` or run
   the active research sequence.
 - Control the Pro browser, monitor its page, poll experiment progress, or create
   another relay/monitor layer around either dedicated operator.
@@ -172,5 +172,5 @@ pre-implementation review. Pro resolves scientific content.
 Project Manager returns accepted code plus its critical-point index, exact raw
 review-file intake, mechanically validated run artifacts, the exact
 External-Pro-selected next action, or the smallest blocker. A terminal operator
-notification wakes PM. Workflow Manager is contacted only for a workflow-design
+notification wakes PM. Workflow Design Manager is contacted only for a workflow-design
 change, never for runtime continuation.
