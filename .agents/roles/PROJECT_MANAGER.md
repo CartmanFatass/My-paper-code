@@ -16,6 +16,11 @@ external_review_dispatch_and_result_routing=exclusive
 external_review_operator=dedicated_persistent_task
 experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
+operational_recovery_authority=within_existing_user_authorized_scientific_boundary
+operational_recovery_reauthorization=not_required_per_attempt
+operational_recovery_fixed_attempt_limit=none
+operational_recovery_scientific_iteration_cost=zero
+operational_recovery_scientific_disposition=none
 one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -48,6 +53,10 @@ and never manages the active loop.
   registered low-cost `hmasd-experiment-operator`. That child holds the
   train/evaluate/analyze process and silent monitoring; PM receives one terminal
   payload and does not poll it.
+- Classifying a failed execution as purely operational only when its recovery
+  can preserve the complete authorized scientific boundary. PM may then assign
+  the exact `retry`, `resume` or `restart` operation without new per-attempt user
+  authorization or a fixed attempt count.
 - Direct Git staging, commit and push of accepted code, tests, runtime evidence,
   individual review packages, reports, ledgers and active state.
 - Enforcing the user-owned evidence-complexity ceiling before writing or
@@ -123,6 +132,15 @@ pre-implementation review. Pro resolves scientific content.
 - Supply the Experiment Operator one immutable authorized run assignment. It
   holds execution and silent monitoring and returns exactly once at
   `COMPLETE|ERROR`; PM never polls its progress files.
+- After an operational `ERROR`, PM may dispatch another exact recovery assignment
+  while the original user-authorized boundary and cumulative budget remain
+  unchanged. Each assignment names `fresh|retry|resume|restart` and binds the
+  same scientific contract, estimator, source, seed law, budgets, thresholds,
+  backend constraints and branch semantics. PM must not use recovery to select
+  among scientific outcomes. Operational recovery costs zero scientific
+  iterations, creates no scientific disposition and is not scientific
+  abandonment. Assignments already launched retain their assigned run identity
+  and semantics; this rule applies to later recovery decisions only.
 - Before accepting a Pro-selected evidence action, record its asymptotic search
   cost, fixed candidate count and hypothetical-transition upper bound. Enforce
   `O(H*K_search)`, `K_search<=16`, at most `16*H` hypothetical transitions per

@@ -51,6 +51,14 @@ foreach ($required in @(
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
+    'formal_compute_authority=user_only',
+    'operational_recovery_owner=project_manager',
+    'operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization',
+    'operational_recovery_fixed_attempt_limit=none',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'operational_recovery_scientific_disposition=none',
+    'operational_recovery_frozen_scientific_contract_mutation=forbidden',
+    'operational_recovery_scientific_outcome_selection=forbidden',
     'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'cross_task_routing=fixed_role_triples_from_router',
     'cross_task_routing_skill=hmasd-cross-task-routing',
@@ -67,6 +75,12 @@ foreach ($required in @(
     'git_execution=direct_for_code_runtime_evidence_and_state',
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
+    'formal_compute_authority=user_only',
+    'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
+    'operational_recovery_reauthorization=not_required_per_attempt',
+    'operational_recovery_fixed_attempt_limit=none',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'operational_recovery_scientific_disposition=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_triple',
     'cross_task_route_cache=forbidden',
@@ -74,7 +88,10 @@ foreach ($required in @(
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
     'CURRENT_WORK.md',
-    'PM receives one terminal')) {
+    'PM receives one terminal',
+    'retry`, `resume` or `restart` operation without new per-attempt user',
+    'must not use recovery to select',
+    'Assignments already launched retain their assigned run identity')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($retired in @(

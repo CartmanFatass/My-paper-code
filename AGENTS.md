@@ -59,6 +59,13 @@ external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
 external_review_operator_git_authority=none
 formal_compute_authority=user_only
+operational_recovery_owner=project_manager
+operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization
+operational_recovery_fixed_attempt_limit=none
+operational_recovery_scientific_iteration_cost=zero
+operational_recovery_scientific_disposition=none
+operational_recovery_frozen_scientific_contract_mutation=forbidden
+operational_recovery_scientific_outcome_selection=forbidden
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
@@ -81,6 +88,16 @@ With an active grant, PM follows the exact Pro-selected sequence, dispatches
 reviews and authorized runs, and maintains its code attention state. Workflow
 Manager is invoked only to change workflow design. Only the user expands science
 or compute authority.
+
+Within an already user-authorized scientific boundary, PM may automatically
+retry, resume or restart a low-cost purely operational failure without new
+per-attempt authorization or a fixed attempt count. Recovery remains inside the
+original cumulative budget and cannot change the frozen scientific contract,
+estimator, source, seed law, thresholds, backend constraints, branch semantics
+or select among scientific outcomes. It costs zero scientific iterations,
+creates no scientific disposition and is not scientific abandonment. A launched
+assignment keeps its assigned run identity and semantics; this policy governs
+only later recovery decisions.
 
 ## Universal project constraints
 

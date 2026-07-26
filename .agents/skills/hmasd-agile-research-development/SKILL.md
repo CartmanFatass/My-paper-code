@@ -67,8 +67,15 @@ A user-named one may be inspected only as reference.
    formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
-On failure, reproduce once, locate the first violated invariant, add a regression
-only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
+On failure, locate the first violated invariant and distinguish scientific
+failure from a purely operational failure. Within the unchanged user-authorized
+scientific boundary, PM may arrange low-cost retry, resume or restart without
+per-attempt reauthorization or a fixed attempt count. Preserve the estimator,
+source, seed law, budgets, thresholds, backend constraints and branch semantics;
+never weaken checks, retry blindly or use recovery to select among scientific
+outcomes. Operational recovery costs zero scientific iterations and produces no
+scientific disposition or abandonment. Add a regression only for plausible
+recurrence of a code defect.
 
 ## Complexity gate
 

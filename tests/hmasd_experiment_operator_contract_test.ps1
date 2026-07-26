@@ -10,7 +10,6 @@ $config = Get-Content -Raw -LiteralPath $configPath
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
-$current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 
 if (-not $config.Contains('[agents."HMASDExperimentOperator"]') -or
     -not $config.Contains('config_file = "./agents/hmasd-experiment-operator.toml"')) {
@@ -23,7 +22,7 @@ foreach ($required in @(
     'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
     'active Project Manager',
-    'exactly one already-authorized run',
+    'already-authorized scientific boundary',
     'Monitoring is silent',
     'Do not emit commentary, progress updates, ETA messages',
     'exactly once, through your final response',
@@ -31,7 +30,11 @@ foreach ($required in @(
     'Do not detach with',
     'do not repeatedly open its',
     'progress file',
-    'Do not repair, restart, resume, extend, or retry',
+    'fresh|retry|resume|restart execution mode',
+    'do not choose a recovery action',
+    'zero scientific iterations',
+    'no scientific disposition',
+    'not scientific abandonment',
     'Do not spawn',
     'agents.')) {
     if (-not $profile.Contains($required)) { throw "Operator profile missing: $required" }
@@ -46,7 +49,11 @@ foreach ($required in @(
     'terminal_values=COMPLETE|ERROR',
     'cross_session_send=forbidden_native_final_return_only',
     'Project Manager supplies',
-    'restart policy, whose default is `forbidden`',
+    'execution mode from `fresh|retry|resume|restart`',
+    'unchanged authorized-boundary binding',
+    'selects among scientific outcomes',
+    'costs zero scientific iterations',
+    'no scientific disposition or abandonment',
     'train -> evaluate -> analyze',
     'No progress, ETA, phase, heartbeat')) {
     if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
@@ -56,19 +63,18 @@ if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('pare
 }
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',
+    'operational_recovery_owner=project_manager',
+    'operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization',
+    'operational_recovery_fixed_attempt_limit=none',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'operational_recovery_scientific_disposition=none',
+    'operational_recovery_frozen_scientific_contract_mutation=forbidden',
+    'operational_recovery_scientific_outcome_selection=forbidden',
     'registered native child',
     '.agents/roles/EXPERIMENT_OPERATOR.md',
     'No role reads every routed document')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
-foreach ($required in @(
-    'hmasd-experiment-operator',
-    '`gpt-5.6-luna` with `low` reasoning',
-    'returns exactly one `COMPLETE` or',
-    'No Controller, persistent project Monitor, dispatcher')) {
-    if (-not $current.Contains($required)) { throw "CURRENT_WORK operator state missing: $required" }
-}
-
 $catalogMatch = [regex]::Match($config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
 if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
 $catalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'

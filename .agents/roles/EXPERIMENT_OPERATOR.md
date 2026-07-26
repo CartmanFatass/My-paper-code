@@ -31,13 +31,15 @@ task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
 Project Manager supplies all of the following before spawn from its exact
 accepted source package:
 
-- one source commit and one fresh run root;
+- one source commit, one exact run identity, and its assigned run root;
 - the registered interpreter, CPU backend, and thread count;
 - the exact authorization token and immutable run arguments;
 - the ordered train, evaluate, and analyze commands;
 - authoritative progress, status, manifest, result, and error paths;
 - mechanically defined COMPLETE and ERROR conditions; and
-- an explicit restart policy, whose default is `forbidden`.
+- an exact execution mode from `fresh|retry|resume|restart`; and
+- for a recovery mode, the unchanged authorized-boundary binding and the exact
+  mechanical state or run-root relationship to recover.
 
 Missing or contradictory fields fail closed before launch. The operator never
 fills a value from convention, history, another run, or scientific judgment.
@@ -77,8 +79,14 @@ mechanical facts only; it is not result acceptance or scientific disposition.
 ## Forbidden actions
 
 The operator never changes source, tests, configuration, documentation, Git,
-experiment parameters, evidence gates, or artifact schemas. It never launches
-another run, silently falls back across backends, resumes a checkpoint, retries
-or repairs a failure unless the exact assignment explicitly authorizes that
-single operation. It never contacts External Pro, spawns a child, sends a
-progress message, chooses a successor, or interprets scientific meaning.
+experiment parameters, evidence gates, artifact schemas, estimator, source,
+seed law, budgets, thresholds, backend constraints or branch semantics. It
+executes only the assignment's exact `fresh|retry|resume|restart` mode and never
+chooses a recovery action or launches a successor on its own. It never contacts
+External Pro, spawns a child, sends a progress message, selects among scientific outcomes,
+or interprets scientific meaning.
+
+An operational `ERROR` costs zero scientific iterations and carries
+no scientific disposition or abandonment. The operator reports the mechanical
+failure once; Project Manager alone decides whether a later recovery assignment
+still fits the existing user-authorized scientific boundary.
