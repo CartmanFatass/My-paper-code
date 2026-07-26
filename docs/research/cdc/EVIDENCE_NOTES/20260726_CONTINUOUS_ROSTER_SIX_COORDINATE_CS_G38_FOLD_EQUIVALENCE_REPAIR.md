@@ -8,7 +8,8 @@ technical_acceptance_owner=project_manager
 technical_acceptance=ACCEPTED
 formal_retry_resume_restart=none
 code_science_alignment_correction_recheck=ALIGNED
-next_boundary=ONE_REPAIRED_SOURCE_BOUNDED_NONFORMAL_PREFLIGHT
+repaired_source_nonformal_preflight=COMPLETE_operational_valid
+next_boundary=EXACT_USER_AUTHORIZATION_REQUIRED_FOR_ONE_FRESH_FORMAL_ATTEMPT
 ```
 
 ## Root cause and exact repair
@@ -80,3 +81,43 @@ single naturally completed correction-recheck round. The transport used zero
 recovery submissions, no Answer Now action, one completed monitor and two
 stable exact raw snapshots. This authorizes only one bounded nonformal
 preflight from the repaired source; it does not authorize a formal retry.
+
+## Repaired-source bounded preflight
+
+The registered Experiment Operator executed exactly one bounded nonformal
+exercise from repair commit `ea93b15eabf68c35ba8e459ca8527e56d2988db8`:
+
+`logs/nonformal_continuous_roster_six_coordinate_cs_g38_cpu_20260726_ea93b15_r1`
+
+```text
+exit_code=0
+formal=false
+operational_valid=true
+operational_errors=[]
+branch=NONFORMAL_CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_EXERCISE_COMPLETE
+replicates=1
+arms=2
+evaluation_cells=30
+evaluation_episodes_per_cell=8
+real_transitions=26880
+optimizer_steps=120
+bootstrap_resamples=250
+K_search=0
+train_seconds=61.2549091999972
+evaluate_seconds=10.290152500005206
+analyze_seconds=0.16526929999963613
+total_seconds=71.71033100000204
+formal_projection_seconds=2922.731710000189
+formal_projection_executable=true
+```
+
+PM independently ran the complete read-only preflight validator. Source,
+configuration, inventory, artifact digests, analysis branch and the exact
+projection formula passed. All 15 FOLD6 cells passed their fold audit, and the
+maximum pre-tanh, action, prefix, log-probability, reward-trace and summary
+errors were each exactly `0.0`.
+
+This closes the repaired-source technical prerequisites. It does not inherit
+or revive the already consumed formal token: the prior formal attempt ended
+operational invalid, and its assignment explicitly prohibited retry, resume or
+restart. One fresh formal attempt therefore requires exact user authorization.
