@@ -234,40 +234,46 @@ which window any re-run uses.
 
 ## Evidence to read
 
-Repository at the stage commit, paths only:
+Repository at the stage commit, paths only. The annotation under each path
+says why it is listed.
 
-- `docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md` — the
-  frozen design; §arm table around line 215.
-- `docs/research/designs/D0_CARRIER_AND_ESTIMAND.md` — margins (line ~140),
-  `Δ` (line ~198), per-mechanism `H` (line ~211), `B_H` independence
-  (lines ~248–250).
-- `scripts/audit_d7_s_persistence_margin.py` — the instrument: arms,
-  fresh-env-per-arm, topology pinning, unclipped return, saturation probe,
-  provenance echo, bootstrap.
-- `scripts/pool_d7_s_persistence_shards.py` — loss-free pooling: identity
-  assertions, seed tiling, monolithic-equivalent recomputation.
+- `docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md`
+  the frozen design; arm table around line 215, freeze sections 114-197,
+  183-185 (B_H window), 117-131 (history class).
+- `docs/research/designs/D0_CARRIER_AND_ESTIMAND.md`
+  margins (~140), Delta (~198), per-mechanism H (~211), B_H independence
+  (~248-250), max-over-z and split-sample (~133-135, 191-194).
+- `scripts/audit_d7_s_persistence_margin.py`
+  the instrument: arms, fresh-env-per-arm, topology pinning, unclipped
+  return, saturation probe, focal selection, provenance echo, bootstrap.
+- `scripts/pool_d7_s_persistence_shards.py`
+  loss-free pooling: identity assertions, seed tiling, monolithic-equivalent
+  recomputation.
 - `logs/nonformal_d7_s_persistence_margin_20260726_ci_h1500_ep64/d7_s_persistence_margin.json`
-  — the pooled ep64 result, including `per_episode` and `pooled_from`.
+  the pooled ep64 result, including per_episode and pooled_from.
 - `logs/nonformal_d7_s_persistence_margin_20260726_ci_h1500_ep64_shard0/d7_s_persistence_margin.json`
-  — one shard, for the provenance echo and shard-level structure.
+  one shard, for the provenance echo and shard-level structure.
 - `logs/nonformal_d7_s_persistence_margin_20260725_g2_s3_repro_h1500/d7_s_persistence_margin.json`
-  — the ep4 point the ep64 run reproduces bit-exactly on its first four
-  episodes.
+  the ep4 point whose arm_means the ep64 run's first four episodes reproduce
+  exactly.
 - `logs/nonformal_d7_s_persistence_margin_20260726_ci_h139_ep4/d7_s_persistence_margin.json`
-  and `logs/nonformal_d7_s_persistence_margin_20260726_ci_h450_ep4/d7_s_persistence_margin.json`
-  — the short-horizon `B_H` degeneracy with intervals. These two predate the
-  provenance echo and carry no `seed`/`topology_seed` fields; their topology
-  identity rests on this chain: their `arm_means` equal the 2026-07-25 repro
-  runs' exactly, and those ran at `--topology-seed 20260725`.
+  short-horizon B_H degeneracy with intervals, H=139. Predates the provenance
+  echo (no seed/topology_seed fields); topology identity rests on arm_means
+  equality with the 2026-07-25 repro run below, which ran at topology-seed
+  20260725.
+- `logs/nonformal_d7_s_persistence_margin_20260726_ci_h450_ep4/d7_s_persistence_margin.json`
+  same, H=450.
 - `logs/nonformal_d7_s_persistence_margin_20260725_g2_s3_repro_h139/d7_s_persistence_margin.json`
-  and `logs/nonformal_d7_s_persistence_margin_20260725_g2_s3_repro_h450/d7_s_persistence_margin.json`
-  — the chain's anchor points.
-- `docs/research/designs/UAV_CHARGE_ROTATION_ROSTER_G2.md` — the registration
-  source of H=1500, stage S7-S3 and the energy multiset the run applied
-  (bears on Q3).
-- `docs/project/ALGORITHM_PRINCIPLES.md` and
-  `docs/external-review/OPEN_REVIEW_PRINCIPLES.md` — standing context the
-  transport contract requires in every round.
+  the H=139 chain anchor.
+- `logs/nonformal_d7_s_persistence_margin_20260725_g2_s3_repro_h450/d7_s_persistence_margin.json`
+  the H=450 chain anchor.
+- `docs/research/designs/UAV_CHARGE_ROTATION_ROSTER_G2.md`
+  the registration source of H=1500, stage S7-S3 and the energy multiset the
+  run applied (bears on Q3).
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+  standing contract, required in every round.
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+  standing contract, required in every round.
 - `envs/pettingzoo/scenario_base.py` (lines ~650–666) and
   `envs/pettingzoo/scenario7_energy_aware.py` (line ~313) — the
   construction-time topology draw.
