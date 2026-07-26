@@ -7,7 +7,7 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_HISTORY_PROXY_SUBSTITUTION_G36_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=pm_accepted_proof_sized_tests_pending_commit
+implementation_status=pm_accepted_integrated_nonformal_preflight_complete
 formal_compute_status=not_started
 training=none
 ```
@@ -86,6 +86,12 @@ Proof evidence at acceptance is 10 focused G36 tests plus a 58-test aggregate
 G32/G34/G35/G36 regression, all passing on the registered CPU interpreter. A
 direct read-only validation of the accepted formal G35 package reproduced its
 source commit, terminal branch and CS access predicate.
+
+The accepted implementation code is commit
+`e96f0be154afcf778780bad6266458e211b4b047`. Its single bounded nonformal CPU
+exercise completed operationally valid with 4,608 transitions, zero optimizer
+steps and a 1,847.869361-second formal projection. This is prelaunch evidence
+only and carries no scientific interpretation.
 
 ## Evidence and complexity inventory
 
