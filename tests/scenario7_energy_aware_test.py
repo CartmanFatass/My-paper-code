@@ -688,6 +688,44 @@ def test_constrained_safety_reward_metrics_are_exposed():
     assert np.isfinite(np.mean(list(rewards.values())))
 
 
+def test_scalar_qos_demand_seam_is_backwards_equivalent(monkeypatch):
+    env = make_env("S7-S1", seed=83)
+    try:
+        env.reset(seed=83)
+        qos_bps = env.user_qos_rate_mbps * 1e6
+        raw_rates = np.linspace(0.0, 2.0 * qos_bps, env.n_users)
+        monkeypatch.setattr(
+            env,
+            "_calculate_end_to_end_user_rates",
+            lambda: (
+                raw_rates.copy(),
+                np.zeros((env.n_uavs, env.n_users)),
+                np.zeros(env.n_uavs),
+            ),
+        )
+        monkeypatch.setattr(env, "_normalized_step_energy", lambda: (0.0, 0.0))
+        monkeypatch.setattr(env, "_raw_return_energy_margins", lambda: np.ones(env.n_uavs))
+
+        metrics = env._calculate_constrained_safety_reward(
+            0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+        )
+
+        np.testing.assert_array_equal(
+            env._current_user_qos_demand_bps(),
+            np.full(env.n_users, qos_bps),
+        )
+        assert np.isclose(
+            metrics["task_utility"],
+            np.mean(np.clip(raw_rates / qos_bps, 0.0, 1.0)),
+        )
+        np.testing.assert_array_equal(
+            env.last_delivered_traffic_bps,
+            np.minimum(raw_rates, qos_bps),
+        )
+    finally:
+        env.close()
+
+
 def test_end_to_end_rate_respects_access_and_backhaul_and_avoids_soft_handover_double_count(monkeypatch):
     env = make_env("S7-S3", seed=47)
     env.reset(seed=47)

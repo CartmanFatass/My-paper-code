@@ -196,6 +196,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         self.current_graph_potential = 0.0
         self.current_euclidean_potential = 0.0
         self.last_user_rates_mbps = np.zeros(self.n_users, dtype=float)
+        self.last_user_demand_bps = np.full(
+            self.n_users,
+            max(self.user_qos_rate_mbps * 1e6, 1e-8),
+            dtype=float,
+        )
+        self.last_delivered_traffic_bps = np.zeros(self.n_users, dtype=float)
+        self.last_reward_demand_bps = self.last_user_demand_bps.copy()
+        self.last_graph_potential_demand_bps = self.last_user_demand_bps.copy()
         self.last_access_capacity_bps = np.zeros((self.n_uavs, self.n_users), dtype=float)
         self.last_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
         self.last_widest_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
@@ -522,6 +530,10 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         )
         self.current_euclidean_potential = 0.0
         self.last_user_rates_mbps = np.zeros(self.n_users, dtype=float)
+        self.last_user_demand_bps = self._current_user_qos_demand_bps().copy()
+        self.last_delivered_traffic_bps = np.zeros(self.n_users, dtype=float)
+        self.last_reward_demand_bps = self.last_user_demand_bps.copy()
+        self.last_graph_potential_demand_bps = self.last_user_demand_bps.copy()
         self.last_access_capacity_bps = np.zeros((self.n_uavs, self.n_users), dtype=float)
         self.last_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
         self.last_widest_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
@@ -741,10 +753,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         user_rates_bps, access_capacities_bps, backhaul_capacities_bps = (
             self._calculate_end_to_end_user_rates()
         )
-        qos_rate_bps = max(self.user_qos_rate_mbps * 1e6, 1e-8)
-        qos_satisfaction = np.clip(user_rates_bps / qos_rate_bps, 0.0, 1.0)
+        user_demand_bps = self._current_user_qos_demand_bps()
+        self.last_reward_demand_bps = user_demand_bps.copy()
+        delivered_traffic_bps = np.minimum(user_rates_bps, user_demand_bps)
+        qos_satisfaction = delivered_traffic_bps / user_demand_bps
         qos_satisfaction_ratio = float(np.mean(qos_satisfaction)) if self.n_users > 0 else 0.0
-        qos_met_fraction = float(np.mean(user_rates_bps >= qos_rate_bps)) if self.n_users > 0 else 0.0
+        qos_met_fraction = float(
+            np.mean(delivered_traffic_bps >= user_demand_bps)
+        ) if self.n_users > 0 else 0.0
 
         normalized_energy, consumed_wh = self._normalized_step_energy()
         return_margins = self._raw_return_energy_margins()
@@ -822,6 +838,8 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         )
 
         self.last_user_rates_mbps = user_rates_bps / 1e6
+        self.last_user_demand_bps = user_demand_bps.copy()
+        self.last_delivered_traffic_bps = delivered_traffic_bps.copy()
         self.last_access_capacity_bps = access_capacities_bps
         self.last_backhaul_capacities_bps = backhaul_capacities_bps
 
@@ -842,6 +860,12 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             "p90_user_rate_mbps": float(np.percentile(self.last_user_rates_mbps, 90)) if self.n_users else 0.0,
             "max_user_rate_mbps": float(np.max(self.last_user_rates_mbps)) if self.n_users else 0.0,
             "effective_end_to_end_throughput_mbps": total_rate_bps / 1e6,
+            "delivered_end_to_end_throughput_mbps": float(
+                np.sum(delivered_traffic_bps) / 1e6
+            ),
+            "mean_user_demand_mbps": float(
+                np.mean(user_demand_bps) / 1e6
+            ) if self.n_users else 0.0,
             "normalized_propulsion_energy": float(normalized_energy),
             "step_propulsion_energy_wh": float(consumed_wh),
             "instantaneous_bits_per_joule": float(bits_per_joule),
@@ -895,6 +919,18 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         potential_next = 0.0 if terminal else float(potential_after)
         return float(
             self.reward_discount_gamma * potential_next - float(potential_before)
+        )
+
+    def _current_user_qos_demand_bps(self):
+        """Current per-user task demand; the base path remains scalar-equivalent.
+
+        Source-specific environments override this one seam.  Raw radio rates,
+        association, bandwidth allocation and routing never consume it.
+        """
+        return np.full(
+            self.n_users,
+            max(self.user_qos_rate_mbps * 1e6, 1e-8),
+            dtype=float,
         )
 
     def _calculate_end_to_end_user_rates(self):
@@ -1115,7 +1151,8 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             else self.bandwidth
         )
         candidate_bandwidth = access_bandwidth / nominal_users_per_uav
-        qos_rate_bps = max(self.user_qos_rate_mbps * 1e6, 1e-8)
+        user_demand_bps = self._current_user_qos_demand_bps()
+        self.last_graph_potential_demand_bps = user_demand_bps.copy()
 
         relaxed_service = np.zeros(self.n_users, dtype=float)
         for user_idx in range(self.n_users):
@@ -1131,7 +1168,9 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
                 )
                 end_to_end_capacity = min(access_capacity, widest_backhaul[uav_idx])
                 best_capacity = max(best_capacity, end_to_end_capacity)
-            relaxed_service[user_idx] = np.clip(best_capacity / qos_rate_bps, 0.0, 1.0)
+            relaxed_service[user_idx] = np.clip(
+                best_capacity / user_demand_bps[user_idx], 0.0, 1.0
+            )
         return float(np.mean(relaxed_service))
 
     def _euclidean_service_potential(self):

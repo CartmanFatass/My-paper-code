@@ -1,24 +1,42 @@
-# Supported G32 disposition and G33 UAV burst design-audit transition
+# G33 UAV localized-demand-burst source-witness transition
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.
 
 ```text
-last_nonformal=RETURN_TO_GO_DIRECTION_BALANCED_G31_BOUNDED_SCREEN
-last_nonformal_result=NONFORMAL_RETURN_TO_GO_DIRECTION_BALANCED_PROMISING_G31
-active_source=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_CONTINUOUS_ROSTER_G32
-source_gate=FORMAL_CAPACITY_6_8_12_USABLE
-active_implementation=G32_FORMAL_ACCEPTED
+last_nonformal=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_PATH_EXERCISE
+last_nonformal_result=NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE
+active_source=UAV_LOCALIZED_DEMAND_BURST_G33_P0_NOT_YET_ADMITTED
+source_gate=SOURCE_WITNESS_AND_STATIC_UPPER_BOUND_AUDIT
+active_implementation=G33_SOURCE_ENVIRONMENT_SLICE_PM_ACCEPTED
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=24_complete
 iterations_remaining=13
-formal_compute=NONE_G33_DESIGN_ASSERTION_AUDIT_IS_ZERO_COMPUTE
+formal_compute=NONE_UNTIL_G33_SOURCE_WITNESS_EXECUTABLE_CONTRACT_IS_PM_ACCEPTED
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=SESSION_RESTART_THEN_UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT
+next_boundary=G33_CONTROL_REALIZATION_CLARIFICATION_PLUS_SOURCE_ENVIRONMENT_SLICE
 ```
+
+## Current G33 transition
+
+External Pro returned `UNRESOLVED_UAV_BURST_G33_DESIGN`, not a source
+rejection. Candidate `UAV_LOCALIZED_DEMAND_BURST_G33_P0` is the sole object of
+the next zero-learner source witness. Demand, profiles, information, metrics,
+confidence and source outcomes are closed in
+`docs/research/designs/UAV_LOCALIZED_DEMAND_BURST_G33_P0.md`.
+
+PM found one result-bearing implementation gap in the layout controls and has
+dispatched the smallest same-lineage Pro clarification. The disjoint source
+environment slice is now accepted: its demand fields use independent
+episode-addressed namespaces, reward and graph potential share one per-user
+demand seam, actor/critic views remove physical time, and direct structural
+probes preserve raw physics. Fifty-three focused tests pass on CPU with one
+thread. Do not build a source analyzer or run source evidence until the
+clarified control semantics are archived and translated into the executable
+contract.
 
 ## Current transition
 
