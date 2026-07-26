@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=docs/external-review/rounds/20260726_d7_s_part_b_flex_arm_and_instrument
-stage_commit=410d6d9f138fa418be32623422a053240774a9d9
+stage_commit=53fb74cdfbf1d6c04daa5efc2b7f8057a652210e
 question=docs/external-review/rounds/20260726_d7_s_part_b_flex_arm_and_instrument/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
