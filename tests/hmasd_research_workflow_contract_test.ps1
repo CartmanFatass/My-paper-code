@@ -12,6 +12,7 @@ $expectedSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
+    'hmasd-pm-round-metrics',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {

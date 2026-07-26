@@ -54,6 +54,7 @@ project_manager_remote_repository_authority=permanent_user_grant
 project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 project_manager_external_review_dispatch_and_result_routing=exclusive
 project_manager_experiment_dispatch_and_result_routing=exclusive
+project_manager_round_metrics_skill=hmasd-pm-round-metrics
 external_review_operator_transport_authority=exclusive
 external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
@@ -67,8 +68,7 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_model_thinking_override=omitted
 ```
 
-The user permanently authorizes Workflow Design Manager and Project Manager to fetch and
-push accepted nonoverlapping path sets there. No other remote or egress is covered.
+The user permanently authorizes Workflow Design Manager and Project Manager to fetch and push accepted nonoverlapping path sets there. No other remote or egress is covered.
 
 There is no Controller, persistent Monitor, dispatcher, semantic relay, role
 registry or global lease. Workflow Design Manager owns workflow design only. External
@@ -126,6 +126,7 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
+- PM complete-workflow metrics: `.agents/skills/hmasd-pm-round-metrics/SKILL.md`.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
@@ -133,8 +134,7 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
 
-No role reads every routed document. The active assignment or role charter
-names the smallest necessary subset.
+No role reads every routed document. The active assignment or role charter names the smallest necessary subset.
 ## Repository surfaces
 
 - Git-tracked code is implementation truth.
