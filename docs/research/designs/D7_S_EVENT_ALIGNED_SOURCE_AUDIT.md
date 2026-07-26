@@ -126,8 +126,12 @@ topology-population contrasts; per-topology margins are mandatory diagnostics.
 CRN and fresh-environment-per-arm are retained: every arm starts from an
 identical pre-intervention history, topology, energy assignment, user-motion
 stream and random state, and the complete pre-intervention state is
-**checked, not assumed**. Topology remains pinned per instance via the
-construction-time seed.
+**checked, not assumed**. Topology is pinned per instance by the mechanism
+that actually works in this repository: construction, then
+`reset(seed=topology_seed)`, then explicit `_init_ground_bs()` and
+`_init_charging_stations()` — construction-time draws alone are NOT
+seed-determined (defect 4a). The conformance derivation (evidence action 1)
+must prove seed-to-coordinates determinism under this mechanism.
 
 ## 8. Result branches — all reachable or explicitly owned
 
@@ -154,6 +158,8 @@ branch: Part A owns that certificate, and its failure mode surfaces as
 - standing provenance rule (repository-wide): any Scenario-7 result reused as
   a causal comparator or paper-level premise must establish shared topology
   or scope its claim to its realized/unknown topology; audited on reuse.
+  This section records the rule's origin; its standing home is `AGENTS.md`
+  (*Result interpretation*), which the reuse path actually reads.
 
 ## 10. Pre-freeze check (AGENTS.md), answered against this draft
 

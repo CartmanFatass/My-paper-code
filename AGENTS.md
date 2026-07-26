@@ -471,6 +471,16 @@ Retiring a whole mechanism family needs a structural contradiction, an
 equivalence proof, or independent counterexamples across several identifying
 environments. One benchmark no-access is never enough.
 
+**Scenario-7 topology provenance (Pro ruling 2026-07-26).** The environment
+draws its ground-BS and charging-station layout at construction from an
+unseeded RNG, so two runs share a topology only if that was explicitly
+arranged. Any Scenario-7 result reused as a causal comparator or paper-level
+premise must first establish whether its compared arms shared one topology;
+when that is unprovable, the artifact is preserved but its conclusion is
+scoped to its realized/unknown topology and it is never used as a matched
+causal control. Audited on reuse — no global invalidation, no blocking of
+unrelated lines.
+
 Ordinary recurrent MARL is a comparator and an access diagnostic, never an
 admission gate. A superiority claim must be matched against it; its failure on
 one benchmark does not bar research into a stronger mechanism.
