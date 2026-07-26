@@ -7,12 +7,12 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | supported retained: fully informed current-state configured-capacity bounded-random-process continuous-roster test version | G31 closes the paired immediate/delayed toy contract; G32 adds strict-loadable capacity-6/8/12 transport; G34 adds bounded random-process transport; G35 shows that a fresh no-carry current-state arm accesses the same fixed/random capacity-6/8/12 family and is noninferior to REC by the 0.05 margin. | Next action: test whether the accepted CS checkpoints depend on retained history-proxy inputs. Arbitrary processes, horizons, history-proxy-free robustness, UAV transport and G31-credit necessity remain open. |
+| C-CONTINUOUS-ROSTER | supported retained: bounded actual-history-sensor-substituted configured-capacity random-process continuous-roster test version | G31 closes the paired immediate/delayed toy contract; G32 adds capacity-6/8/12 transport; G34 adds bounded random-process transport; G35 removes learned actor carry; G36 shows that the exact G35 CS finals retain all registered access and noninferiority gates when actual actor time, age and previous actions are replaced by the frozen source-valid donor generator. | Next action: separate dependence on the G36 donor's joint time/age/action coherence from dependence on marginal in-support filler values. Architectural deletion, arbitrary filler robustness, UAV transport and G31-credit necessity remain open. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
-| C-REC | sufficient in exact memory sources; learned actor carry closed as load-bearing in G35-P0 | Both G35 arms access. REC-minus-CS pooled CI95 is [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB is <=0.0054082. | Reactivate actor carry only on an identified source with task-relevant information absent from current observations and a matched material advantage; do not rescue G35-P0. |
+| C-REC | sufficient in exact memory sources; learned carry and actual target-history acquisition closed as load-bearing in G35/G36-P0 | G35 closes a >0.05 REC advantage. G36 primary registered-minus-substitution CI95 is [-0.0024790, 0.0001048, 0.0035749], and the largest component UCB is 0.0075287. | Reactivate recurrence only on an identified source containing task-relevant information absent from current observations. G36 does not support global memorylessness or deletion of the four model coordinates. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | supported on paired toys; necessity unresolved outside them | G35 holds G31 credit fixed in both arms, so its current-state result isolates representation and does not compare credit estimators. | Reactivate only through a representation-, information- and exposure-matched credit-only comparison. |
+| C-CREDIT | supported on paired toys; necessity unresolved outside them | G36 performs zero optimization on checkpoints trained with G31 credit and therefore isolates only execution-time actor inputs. | Reactivate only through a representation-, information- and exposure-matched credit-only comparison. |
 | C-BENCH | source-family dependent | Useful-effect G3/G4 is identified. UAV G1 has infeasible and negative-advantage control evidence; UAV G2 is load-bearing but its constructive control remains absolutely infeasible. | Close exact G1/G2; retain source-first pruning for every later UAV source. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_FORMAL_ITERATION_26
-source_family=CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_P0
-formal_disposition=CURRENT_STATE_REDUCTION_SUFFICIENT_G35
-scientific_disposition=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35
-next_action=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT
+completed_action=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_FORMAL_ITERATION_27
+source_family=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
+formal_disposition=HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36
+scientific_disposition=SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36
+next_action=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT
 authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=26
-iterations_remaining=11
+conclusion_bearing_iterations_consumed=27
+iterations_remaining=10
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -68,15 +68,17 @@ but constructive absolute utility is far below feasibility and support fails.
 G31 UAV transport therefore remains unresolved. The active boundary returns to
 toy-first discovery and isolates same-checkpoint transport across configured
 maximum capacities from the already-proved within-capacity active-count changes.
-Formal G32 supports one capacity-8-trained recurrent checkpoint at configured
-capacities 6, 8 and 12 with exact padding invariance. Formal G34 transports
-those checkpoints without retraining from the fixed 12/24/36 process to the
-registered four-event random-process family. Formal G35 then freshly trains
-parameter-, information-, credit- and exposure-matched REC and CS arms and
-selects `CURRENT_STATE_REDUCTION_SUFFICIENT_G35`: both access, while every
-pooled and capacity-specific REC-minus-CS upper bound is below 0.00541 against
-the 0.05 materiality margin. Learned actor carry is therefore closed as
-load-bearing in G35-P0, but true time, lifecycle age, previous actions and G31
-credit remain retained, unseparated inputs or training mechanisms. The next
-scientific action is
-`CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT`.
+Formal G32 supports capacity-6/8/12 strict-load and padding invariance. Formal
+G34 transports the checkpoints from the fixed 12/24/36 process to the bounded
+four-event random-process family. Formal G35 freshly compares matched REC and
+CS arms and closes learned actor carry as required or materially advantageous
+inside P0. Formal G36 then freezes the exact G35 CS final checkpoints and
+selects `HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36`: actual actor time,
+lifecycle age and previous actions can be replaced by the frozen independent
+source-valid donor bundle while all fixed/random capacity-6/8/12 access gates
+pass. The primary registered-minus-substitution CI95 is
+[-0.0024790, 0.0001048, 0.0035749], and every component UCB is below 0.00753
+against the 0.05 margin. This closes acquisition of the target's actual coherent
+history bundle, but retains the four model coordinates, donor-law coherence,
+critic true time and G31 training provenance. The next scientific action is
+`CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT`.

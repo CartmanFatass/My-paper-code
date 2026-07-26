@@ -80,57 +80,67 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained as a usable fully informed current-state,
+- Status: supported and retained as a usable actual-history-sensor-substituted,
   configured-capacity, bounded-random-process continuous dynamic-roster test
   version for the registered 48-step capacity-6/8/12 toy family. A finite
   packing capacity is selected before each trajectory.
-- Claim: a capacity-shape-independent actor can be trained only at capacity 8
-  and remain usable at configured capacities 6, 8 and 12 across the fixed G32
-  process and bounded held-out G34-P0 random process without carrying learned
-  neural state across primitive steps or lifecycle boundaries.
-- Retained actor information: current capability, anonymous priority, current
-  load and target mix, raw log1p(active_count), lifecycle age, two previous
-  actions, true normalized time and the active-fraction autoregressive prefix.
+- Claim: a capacity-shape-independent no-carry actor trained only at capacity 8
+  remains usable at configured capacities 6, 8 and 12 across the fixed G32
+  process and bounded G34-P0 random process. For its exact formal G35 CS final
+  checkpoints, the actor's actual true-time, lifecycle-age and previous-action
+  sensor bundle may be replaced by the frozen G36 active-count-conditioned,
+  source-valid donor generator.
+- Retained actual actor information: capability, anonymous priority, current
+  load and target mix, raw log1p(active_count), active mask and active-fraction
+  autoregressive prefix.
+- Retained surrogate interface: the four actor coordinates for age, two previous
+  actions and time remain present and are populated by the exact G36 donor law.
+  This is sensor substitution, not ten-to-six-dimensional architectural
+  deletion.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
   spike-allocation, rotation, gain and fresh-seed stability gates.
-- Formal configured-capacity evidence: G32 strict-loads the same capacity-8
-  recurrent checkpoints at capacities 6, 8 and 12 and establishes exact
+- Formal configured-capacity evidence: G32 strict-loads one capacity-8-trained
+  recurrent checkpoint family at capacities 6, 8 and 12 and establishes exact
   common-active padding invariance.
 - Formal bounded-process evidence: G34 transports those checkpoints without
   retraining from the fixed 12/24/36 process to one each of L/R/J/T at random
-  held-out times and orders, with all registered access, event-window, segment,
-  learned-gain and stochastic gates passing.
-- Formal current-state reduction evidence: G35 freshly trains parameter-,
-  information-, credit- and exposure-matched REC and CS arms. Both access the
-  fixed and random capacity-6/8/12 cells. REC-minus-CS pooled CI95 is
-  [-0.0173505, -0.0081213, 0.0007130]; capacity-6/8/12 upper bounds are
-  -0.0066404, 0.0030353 and 0.0054082, all below the frozen 0.05 margin.
-  Current-state reduction is therefore sufficient in G35-P0.
-- Retired alternatives: within the registered family, usable deployment at a
-  new configured capacity does not require capacity-shaped learned parameters,
-  capacity-specific retraining, checkpoint adapters, the exact fixed 12/24/36
-  schedule, atomic R+J, or learned per-lifecycle actor hidden-state carry. The
-  exact claim that carry supplies a material >0.05 finite-budget advantage in
-  G35-P0 is closed.
-- Lifecycle boundary: active masks, likelihood ownership, fresh initialization,
-  temporary freeze/rejoin, terminal deletion, lifecycle age, previous-action
-  state and survivor continuity remain part of the environment/runtime
-  contract. G35 removes only learned actor carry.
+  held-out times and orders.
+- Formal current-state reduction evidence: G35 freshly trains matched REC and CS
+  arms. Both access; pooled REC-minus-CS CI95 is
+  [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB is at
+  most 0.0054082 against the 0.05 margin.
+- Formal actual-history substitution evidence: G36 freezes the exact G35 CS
+  finals and replaces actor time, age and two previous-action fields with an
+  independent source-valid donor bundle. Fixed/random capacity-6/8/12 utility,
+  stochastic, event-window, process-segment, transport and replicate-stability
+  gates all pass. The primary registered-minus-substitution CI95 is
+  [-0.0024790, 0.0001048, 0.0035749]; the largest conclusion-bearing component
+  UCB is 0.0075287 against the 0.05 margin.
+- Retired alternatives: within the registered family, usable deployment does
+  not require capacity-shaped learned parameters, capacity-specific retraining,
+  checkpoint adapters, the exact fixed 12/24/36 schedule, atomic R+J, learned
+  per-lifecycle actor carry, or acquisition of the target episode's actual
+  time/age/previous-action sensor bundle for the exact G35 CS checkpoints.
+- Lifecycle boundary: active masks, likelihood ownership, environment lifecycle
+  state, fresh initialization, temporary leave/rejoin, terminal deletion and
+  survivor continuity remain part of the runtime contract.
 - Scope: H=48; configured capacity is fixed within a trajectory and belongs to
-  6/8/12; G34-P0 contains one each of L/R/J/T, three legal event orders and the
-  registered cohort magnitudes. This is not arbitrary process-law transport.
-- Strongest remaining explanation: current load and target mix directly define
-  an access-level action. The retained true-time, age and previous-action fields
-  may also act as history or schedule proxies; their necessity is unresolved.
-- Credit boundary: both G35 arms use identical G31 realized-future-tail credit,
-  so G35 does not establish that estimator's necessity or redundancy.
+  6/8/12; G34-P0 contains one each of L/R/J/T and three legal event orders; G36
+  uses the exact frozen donor distribution. This is not arbitrary process or
+  arbitrary filler robustness.
+- Strongest remaining explanation: the checkpoints may need only a plausible
+  active-count-conditioned history-shaped nuisance bundle. G36 removes target
+  history but preserves donor-internal time/age/action coherence.
+- Critic and credit boundary: the critic retains true time, and all checkpoints
+  retain G31 training provenance. G36 performs no training and supplies no
+  credit-comparator evidence.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
   non-identifiable. G33 and all derivatives remain abandoned by user
   instruction.
-- Exclusions: arbitrary capacity, repeated or arbitrary membership processes,
-  random horizon, history-proxy-free robustness, UAV usability, asynchronous
-  skill lifetime, intrinsic-reward advantage, complete-algorithm superiority
-  and general recurrence or G31-credit redundancy remain unsupported.
+- Exclusions: arbitrary capacity/process/horizon, donor-law invariance,
+  architectural coordinate deletion, globally memoryless control, UAV
+  usability, asynchronous skill lifetime, intrinsic-reward advantage,
+  complete-algorithm superiority and G31-credit redundancy remain unsupported.
 
 ## C-EHC — Event-held temporal state
 
@@ -163,27 +173,32 @@ the Project Manager-accepted CDC state.
 ## C-REC — Ordinary recurrence is sufficient
 
 - Status: selected as a sufficient capability in the exact G1/G2 memory
-  sources, but learned actor-state carry is rejected as load-bearing in the
-  fully informed G35-P0 continuous-roster source.
+  sources, while learned actor carry is rejected as load-bearing in G35-P0 and
+  target-coherent actor history sensors are replaceable for the exact G35 CS
+  checkpoints under the frozen G36 donor law.
 - Memory-source claim: a matched recurrent MARL controller can represent useful
-  persistence without an explicit event-held commitment when access and
-  training are adequate.
-- Continuous-roster result: G35 freshly compares parameter-identical REC and CS
-  arms under identical current information, G31 credit, source, capacity,
-  interactions and optimizer exposure. Both access; the pooled REC-minus-CS
-  CI95 is [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB
-  is at most 0.0054082 against the 0.05 materiality margin.
-- Smallest retired unit: learned cross-step actor carry is neither required for
-  access nor materially advantageous in G35-P0. This does not retire recurrence
-  on sources containing task-relevant information absent from current
-  observations.
-- Retained lifecycle distinction: zero learned carry does not delete active
-  masks, lifecycle age, previous-action state, temporary freeze/rejoin,
-  fresh-state initialization, terminal deletion or survivor continuity.
-- Reactivation condition: an identified source in which a fully informed
-  current-state policy lacks relevant sequential information, followed by a
-  matched comparison showing a material recurrent advantage. More seeds,
-  budget or threshold changes on G35-P0 are not reactivation evidence.
+  persistence without explicit event-held commitment when task-relevant
+  information is absent from the current observation.
+- Continuous-roster carry result: G35 compares parameter-identical REC and CS
+  arms under identical current information, G31 credit, source, interactions
+  and optimizer exposure. Both access; every REC-minus-CS UCB is at most
+  0.0054082 against the 0.05 margin.
+- Continuous-roster sensor result: G36 replaces the exact CS checkpoints'
+  actual time, age and previous-action bundle with a target-history-independent,
+  source-valid donor bundle. All access gates pass and the primary
+  registered-minus-substitution UCB is 0.0035749.
+- Smallest retired units: learned cross-step actor carry is not required or
+  materially advantageous in G35-P0; the target episode's actual coherent
+  history bundle is not required or materially advantageous for those exact
+  CS checkpoints under G36-P0.
+- Retained distinction: G36 preserves four history-shaped model coordinates, a
+  source-valid donor generator, active masks, lifecycle ownership and the
+  centralized critic. It does not establish that the task or all policy classes
+  are memoryless.
+- Reactivation condition: an identified source with task-relevant sequential
+  information absent from current observations, followed by a matched material
+  recurrent advantage. More seeds, budget or threshold changes on G35/G36-P0
+  are not reactivation evidence.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -230,6 +245,11 @@ the Project Manager-accepted CDC state.
   sufficiency therefore isolates actor carry only; it supplies no evidence that
   G31 credit is necessary or replaceable in this source. The G31 credit claim
   remains supported only by its registered paired G17/G18 evidence.
+- G36 update: G36 freezes the G35 CS final checkpoints and performs zero
+  optimization. Actual-history sensor substitution therefore adds no evidence
+  about whether G31 realized-future-tail credit was necessary for learning the
+  checkpoints or can be replaced. C-CREDIT remains supported only by its
+  registered paired G17/G18 evidence.
 
 ## C-BENCH — The benchmark is not identifying
 

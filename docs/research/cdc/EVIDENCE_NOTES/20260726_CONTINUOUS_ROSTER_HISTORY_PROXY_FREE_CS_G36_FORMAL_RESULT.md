@@ -16,7 +16,7 @@ status=COMPLETE
 operational_valid=true
 operational_errors=[]
 registered_branch=HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36
-scientific_interpretation=pending_external_pro
+scientific_interpretation=SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36
 iteration_consumed=true
 iterations_remaining=10
 ```
@@ -86,6 +86,19 @@ Replaying the frozen selector reproduces:
 HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36
 ```
 
-This note supplies mechanical evidence only. External Pro must provide the
-scientific interpretation, exact retained/retired unit, CDC edits and one next
-action before successor work.
+## External Pro scientific disposition
+
+External Pro accepted the registered branch without modification as
+`SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36`.
+For the exact formal G35 CS final checkpoints and registered G32/G34-P0 family,
+the actor's actual true-time, lifecycle-age and two previous-action sensors may
+be replaced by the frozen active-count-conditioned source-valid donor bundle
+while retaining all access gates and noninferiority by the frozen 0.05 margin.
+
+This is sensor substitution, not architectural deletion: four history-shaped
+coordinates, the exact donor law and its internal joint coherence, active masks,
+lifecycle ownership, critic true time and G31 training provenance remain. The
+smallest retired unit is the necessity or >0.05 material benefit of acquiring
+the target episode's actual coherent four-field history bundle for those exact
+checkpoints. The unique successor is
+`CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT`.

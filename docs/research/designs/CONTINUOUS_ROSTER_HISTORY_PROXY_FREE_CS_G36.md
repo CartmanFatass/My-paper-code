@@ -7,8 +7,8 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_HISTORY_PROXY_SUBSTITUTION_G36_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=alignment_correction_recheck_ALIGNED_formal_complete
-formal_compute_status=complete_operational_valid_pending_external_pro_disposition
+implementation_status=alignment_correction_recheck_ALIGNED_formal_and_scientific_closure_complete
+formal_compute_status=complete_operational_valid_scientific_disposition_accepted
 training=none
 ```
 
@@ -120,8 +120,13 @@ interpretation and does not itself consume an iteration.
 The single authorized formal CPU execution then completed with 221,184 real
 transitions, zero optimizer steps and no operational errors. PM independently
 reproduced all artifact validation, 10,000 bootstrap calculations and the
-first-match branch `HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36`. Scientific
-interpretation and successor selection remain pending External Pro.
+first-match branch `HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36`. External Pro
+accepted it as
+`SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36`.
+The result closes acquisition of the target episode's actual coherent four-field
+history bundle for the exact G35 CS finals, while retaining the four model
+coordinates and G36 donor-law coherence. The unique successor is the zero-compute
+`CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT`.
 
 ## Evidence and complexity inventory
 

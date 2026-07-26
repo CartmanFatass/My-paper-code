@@ -55,8 +55,25 @@ HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36
 
 ## External Pro 科学裁决
 
-待正式结果科学审查。机械分支不可被救援、降级或改名；PM 不在此预先解释 checkpoint-level
-sensor substitution 的科学含义，也不选择后继动作。
+External Pro 原样接受机械分支，并裁决：
+
+```text
+SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36
+```
+
+在精确 G35 CS final checkpoints、`H=48`、容量 6/8/12 以及 G32 fixed / G34-P0
+bounded-random source 内，actor 不需要取得目标 episode 的真实 time、lifecycle age
+和两个 previous-action 字段；冻结的 active-count-conditioned、source-valid donor bundle
+足以保持全部 access 门槛，并在 0.05 margin 下对注册执行非劣。最小关闭单元是该真实一致
+四字段 bundle 对这些 checkpoint 的必要性或大于 0.05 的 material benefit。
+
+该结论是传感替代，不是把十维架构删除成六维，也不支持 zeros、常数、任意噪声、全局
+memoryless、移除 active mask/lifecycle state、移除 critic true time 或否定 G31 credit。
+四个 history-shaped 坐标和 G36 donor 的内部 joint coherence 仍被保留。唯一下一动作是：
+
+```text
+CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT
+```
 
 本轮是有效结论性第 27 轮；自动研究链剩余 10 轮。G33 及其衍生线仍保持用户放弃状态，
 禁止复活。
