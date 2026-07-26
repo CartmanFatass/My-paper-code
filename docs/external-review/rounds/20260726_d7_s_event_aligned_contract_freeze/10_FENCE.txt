@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260726_d7_s_event_aligned_contract_freeze
+stage_commit=9ecbc5588baf0f33be79fc37d083aae6b00193ba
+question=docs/external-review/rounds/20260726_d7_s_event_aligned_contract_freeze/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
