@@ -80,60 +80,57 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained as a usable configured-capacity,
-  bounded-random-process continuous dynamic-roster algorithm test version for
-  the registered 48-step capacity-6/8/12 toy family. A finite packing capacity
-  is selected before each trajectory.
-- Claim: a G31 realized-future-tail and direction-balanced recurrent policy
-  whose learned parameter shapes exclude maximum capacity can use one
-  capacity-8-trained checkpoint at configured capacities 6, 8 and 12 while
-  retaining within-episode temporary leave, rejoin, fresh join and terminal
-  leave across both the fixed G32 process and the bounded held-out G34-P0
-  random-process family.
+- Status: supported and retained as a usable fully informed current-state,
+  configured-capacity, bounded-random-process continuous dynamic-roster test
+  version for the registered 48-step capacity-6/8/12 toy family. A finite
+  packing capacity is selected before each trajectory.
+- Claim: a capacity-shape-independent actor can be trained only at capacity 8
+  and remain usable at configured capacities 6, 8 and 12 across the fixed G32
+  process and bounded held-out G34-P0 random process without carrying learned
+  neural state across primitive steps or lifecycle boundaries.
+- Retained actor information: current capability, anonymous priority, current
+  load and target mix, raw log1p(active_count), lifecycle age, two previous
+  actions, true normalized time and the active-fraction autoregressive prefix.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
   spike-allocation, rotation, gain and fresh-seed stability gates.
-- Formal configured-capacity evidence: G32 strict-loads the same final
-  capacity-8 checkpoints at capacities 6, 8 and 12 with zero evaluation
-  optimizer steps. Utility LCBs are 0.95025, 0.93757 and 0.94832; the held-out
-  gain LCB is 0.36581, the minimum held-out replicate is 0.94284 and held-out
-  stochastic mean is 0.87591.
-- Formal bounded-process evidence: G34 evaluates those exact checkpoints with
-  zero optimizer steps on one each of L/R/J/T, random event times in steps
-  5--43, minimum five-step separation, no event at a four-step demand boundary,
-  and orders LRJT/LJRT/JLRT. Capacity-6/8/12 deterministic utility LCBs are
-  0.94248/0.94938/0.94379; minimum event-window and process-segment LCBs are
-  0.91131 and 0.91275; the worst random-minus-fixed LCB is -0.00507 against the
-  -0.05 noninferiority margin; learned-gain LCB is 0.34837; pooled stochastic
-  LCB is 0.88315.
-- Exact padding lemma: under the registered cap8/cap12 common-active process,
-  observations, values, deterministic actions, rewards, hidden state and
-  lifecycle transitions are exactly equal and added inactive rows remain zero.
+- Formal configured-capacity evidence: G32 strict-loads the same capacity-8
+  recurrent checkpoints at capacities 6, 8 and 12 and establishes exact
+  common-active padding invariance.
+- Formal bounded-process evidence: G34 transports those checkpoints without
+  retraining from the fixed 12/24/36 process to one each of L/R/J/T at random
+  held-out times and orders, with all registered access, event-window, segment,
+  learned-gain and stochastic gates passing.
+- Formal current-state reduction evidence: G35 freshly trains parameter-,
+  information-, credit- and exposure-matched REC and CS arms. Both access the
+  fixed and random capacity-6/8/12 cells. REC-minus-CS pooled CI95 is
+  [-0.0173505, -0.0081213, 0.0007130]; capacity-6/8/12 upper bounds are
+  -0.0066404, 0.0030353 and 0.0054082, all below the frozen 0.05 margin.
+  Current-state reduction is therefore sufficient in G35-P0.
 - Retired alternatives: within the registered family, usable deployment at a
   new configured capacity does not require capacity-shaped learned parameters,
-  retraining, checkpoint adapters, tensor slicing or key remapping; and usable
-  behavior does not require the exact fixed 12/24/36 schedule or atomic R+J
-  event of G32.
-- Scope: horizon is 48; configured capacity is fixed within a trajectory and is
-  one of 6/8/12; G34 covers exactly one each of L/R/J/T, the registered cohort
-  magnitudes and three registered legal event orders. It is not an arbitrary
-  process-law result.
-- Strongest simpler explanation: current load and target mix directly determine
-  the required action, and the exact checkpoint also depends materially on the
-  correct absolute-time coordinate. Bounded process transport may therefore be
-  largely reactive rather than recurrence- or delayed-credit-dependent.
-- Diagnostic boundary: G34 time rotation is LOAD_BEARING for the exact
-  checkpoint, while the reactive ablation is UNDERPOWERED. Neither diagnostic
-  selects recurrence or G31-credit necessity.
-- Code-only boundary: live in-trajectory tensor-width rebinding is unimplemented,
-  but under the current claim it is a packing/state-migration coverage gap rather
-  than an unresolved learning mechanism. It becomes scientific only if a future
-  scope requires no pre-trajectory capacity bound.
+  capacity-specific retraining, checkpoint adapters, the exact fixed 12/24/36
+  schedule, atomic R+J, or learned per-lifecycle actor hidden-state carry. The
+  exact claim that carry supplies a material >0.05 finite-budget advantage in
+  G35-P0 is closed.
+- Lifecycle boundary: active masks, likelihood ownership, fresh initialization,
+  temporary freeze/rejoin, terminal deletion, lifecycle age, previous-action
+  state and survivor continuity remain part of the environment/runtime
+  contract. G35 removes only learned actor carry.
+- Scope: H=48; configured capacity is fixed within a trajectory and belongs to
+  6/8/12; G34-P0 contains one each of L/R/J/T, three legal event orders and the
+  registered cohort magnitudes. This is not arbitrary process-law transport.
+- Strongest remaining explanation: current load and target mix directly define
+  an access-level action. The retained true-time, age and previous-action fields
+  may also act as history or schedule proxies; their necessity is unresolved.
+- Credit boundary: both G35 arms use identical G31 realized-future-tail credit,
+  so G35 does not establish that estimator's necessity or redundancy.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
-  non-identifiable. G33 and its derivatives are abandoned by user instruction.
-- Exclusions: arbitrary capacity, arbitrary or repeated membership processes,
-  random horizon, time-free robustness, UAV usability, asynchronous skill
-  lifetime, intrinsic-reward advantage, comparative superiority and causal
-  necessity of either recurrence or G31 credit remain unsupported.
+  non-identifiable. G33 and all derivatives remain abandoned by user
+  instruction.
+- Exclusions: arbitrary capacity, repeated or arbitrary membership processes,
+  random horizon, history-proxy-free robustness, UAV usability, asynchronous
+  skill lifetime, intrinsic-reward advantage, complete-algorithm superiority
+  and general recurrence or G31-credit redundancy remain unsupported.
 
 ## C-EHC — Event-held temporal state
 
@@ -165,24 +162,28 @@ the Project Manager-accepted CDC state.
 
 ## C-REC — Ordinary recurrence is sufficient
 
-- Status: selected for both exact formal memory sources. In G1, OR and DUM
-  reached the same `0.9344202` mean utility and both EHC gain UCBs were
-  `0.0026465`. In G2, TEAM_REC and EHC both reached 1.0 and `G_team=0`.
-- Claim: a matched recurrent MARL controller can represent the required
-  persistence without an explicit commitment object when access and training
-  are adequate.
-- Separating evidence: matched capacity and information with held-out dynamic
-  membership/lifetime evaluation.
-- Scope correction: per-member recurrence loses creator-only information at a
-  terminal handoff, but team recurrence carries one global bit exactly. Future
-  evidence must target structured variable-cardinality factorization and
-  held-out transport, not claim finite-network representational impossibility.
-- Continuous-roster update: G34 does not select recurrence necessity. The
-  zero-history reactive ablation is UNDERPOWERED, while rotation of the true
-  time coordinate is LOAD_BEARING for the exact checkpoint. A freshly trained,
-  information-, capacity-, credit- and exposure-matched current-state
-  feedforward null is required to distinguish learned recurrent-state value
-  from direct current-state mapping.
+- Status: selected as a sufficient capability in the exact G1/G2 memory
+  sources, but learned actor-state carry is rejected as load-bearing in the
+  fully informed G35-P0 continuous-roster source.
+- Memory-source claim: a matched recurrent MARL controller can represent useful
+  persistence without an explicit event-held commitment when access and
+  training are adequate.
+- Continuous-roster result: G35 freshly compares parameter-identical REC and CS
+  arms under identical current information, G31 credit, source, capacity,
+  interactions and optimizer exposure. Both access; the pooled REC-minus-CS
+  CI95 is [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB
+  is at most 0.0054082 against the 0.05 materiality margin.
+- Smallest retired unit: learned cross-step actor carry is neither required for
+  access nor materially advantageous in G35-P0. This does not retire recurrence
+  on sources containing task-relevant information absent from current
+  observations.
+- Retained lifecycle distinction: zero learned carry does not delete active
+  masks, lifecycle age, previous-action state, temporary freeze/rejoin,
+  fresh-state initialization, terminal deletion or survivor continuity.
+- Reactivation condition: an identified source in which a fully informed
+  current-state policy lacks relevant sequential information, followed by a
+  matched comparison showing a material recurrent advantage. More seeds,
+  budget or threshold changes on G35-P0 are not reactivation evidence.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -224,6 +225,11 @@ the Project Manager-accepted CDC state.
   matched credit comparator. It therefore adds checkpoint-usability evidence,
   not causal evidence that realized-future-tail credit is necessary. C-CREDIT
   remains supported only inside the registered G17/G18 paired toy family.
+- G35 update: both REC and CS use identical G31 realized-future-tail targets,
+  direction-balanced actor updates, critics and optimizer exposure. Current-state
+  sufficiency therefore isolates actor carry only; it supplies no evidence that
+  G31 credit is necessary or replaceable in this source. The G31 credit claim
+  remains supported only by its registered paired G17/G18 evidence.
 
 ## C-BENCH — The benchmark is not identifying
 

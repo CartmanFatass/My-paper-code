@@ -10,7 +10,10 @@ implementation_authority=project_manager
 implementation_status=pm_technically_accepted_alignment_correction
 implementation_code_commit=f626dfd8a345ef670e08e601344b67e28ffb3563
 superseded_implementation_code_commit=42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56
-formal_compute_status=complete_operational_valid_pending_external_pro_scientific_disposition
+formal_compute_status=complete_operational_valid_external_pro_scientific_disposition_accepted
+formal_registered_branch=CURRENT_STATE_REDUCTION_SUFFICIENT_G35
+scientific_disposition=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35
+selected_successor=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT
 ```
 
 ## Frozen contract
@@ -108,5 +111,22 @@ independently revalidated all three artifacts and recomputed the conservative
 formal projection as 3,873.24 seconds, below the 28,800-second cap. PM
 technically accepts the correction. The one correction-only alignment recheck
 returned `ALIGNED`; the authorized formal CPU run then completed once with an
-operationally valid registered branch. Scientific interpretation remains
-pending External Pro.
+operationally valid `CURRENT_STATE_REDUCTION_SUFFICIENT_G35` branch. External
+Pro accepted the branch and closed only learned actor carry's necessity or
+greater-than-0.05 material advantage inside G35-P0. General recurrence,
+history-proxy independence and G31-credit redundancy remain unsupported.
+
+## Formal result disposition
+
+The exact scientific disposition is
+`SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35`.
+The paired result supports a fully informed current-state continuous-roster
+test version at configured capacities 6/8/12 on the registered fixed and
+bounded-random processes. It does not establish overall CS superiority because
+the pooled REC-minus-CS interval crosses zero.
+
+The binding successor is the zero-compute
+`CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT`. It must
+decide whether a zero-training paired evaluation of the exact G35 CS final
+checkpoints can identify dependence on the retained true-time, lifecycle-age
+and previous-action bundle. This document grants no such evaluation authority.

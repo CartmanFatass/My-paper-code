@@ -51,10 +51,34 @@ CURRENT_STATE_REDUCTION_SUFFICIENT_G35
 | `current_state_sufficient` | `true` | CS-sufficient 先匹配 |
 | `recurrent_advantage` | `false` | 未触发 |
 
-## External Pro 边界
+## External Pro 科学裁决
 
-上述名称只是不可改写的注册机械分支。PM 不把它自行扩展成“全局不需要
-recurrence”，也不自行修改 CDC、选择 successor 或授权新计算。External Pro 将决定
-精确科学含义、保留/退休单元、最强剩余替代解释、CDC/组合/台账编辑以及唯一下一
-科研动作。本轮是有效结论性第 26 轮，自动研究链剩余 11 轮。G33 依然被用户放弃，
-不得复活。
+External Pro 保持机械分支不变，并给出绑定科学裁决：
+
+```text
+SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35
+```
+
+在精确 G35-P0 中，完整保留 current load/mix、capability、active count、true
+time、lifecycle age、previous actions、active-set、prefix、centralized critic 与 G31
+credit 的 CS arm，即使不跨 primitive step 或 lifecycle boundary 携带 learned
+hidden state，也足以通过固定/随机 process 与 capacity 6/8/12 的注册 access，并且
+对 REC 在 0.05 margin 下非劣。
+
+被关闭的最小单元只是：在该 source、架构和有限预算内，learned actor carry 是
+access 所必需，或可提供 `>0.05` material advantage。pooled interval 仍跨过零，
+所以不能声称 CS 在总体上 95% 显著优于 REC；只有 capacity 6 的区间全为负。
+
+不得外推为“所有任务都不需要 recurrence”、“true time/age/previous actions 不需要”、
+“G31 credit 冗余”或任意 capacity/process/horizon/UAV 已解决。
+
+## 唯一下一科研动作
+
+```text
+CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT
+```
+
+该动作是零计算设计审计：检查已成功的 G35 CS final checkpoints 是否仍依赖
+true time、lifecycle age 和 previous actions，还是仅凭即时 load/mix 与 active-set 信息
+就能工作。审计本身不授权实现或评估。本轮是有效结论性第 26 轮，自动
+研究链剩余 11 轮。G33 及其衍生线保持用户放弃，禁止复活。

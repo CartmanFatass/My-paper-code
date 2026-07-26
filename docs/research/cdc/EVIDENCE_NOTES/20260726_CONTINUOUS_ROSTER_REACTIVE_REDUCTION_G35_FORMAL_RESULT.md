@@ -16,7 +16,7 @@ status=COMPLETE
 operational_valid=true
 operational_errors=[]
 registered_branch=CURRENT_STATE_REDUCTION_SUFFICIENT_G35
-scientific_interpretation=pending_external_pro
+scientific_interpretation=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35
 iteration_consumed=true
 iterations_remaining=11
 ```
@@ -73,11 +73,40 @@ branch exactly:
 CURRENT_STATE_REDUCTION_SUFFICIENT_G35
 ```
 
-## Scientific-review boundary
+## External Pro scientific disposition
 
-The registered branch is immutable and consumes conclusion-bearing iteration
-26. Project Manager does not interpret it as global recurrence redundancy,
-change CDC state or choose a successor. External Pro must decide the exact
-supported claim, retained and retired units, strongest remaining alternative,
-CDC/portfolio/ledger edits and one next scientific action inside the remaining
-11-iteration grant. G33 remains abandoned and cannot be reactivated.
+External Pro accepted the registered branch unchanged and supplied the binding
+scientific disposition:
+
+```text
+SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CURRENT_STATE_CONTINUOUS_ROSTER_G35
+```
+
+Inside exact G35-P0, a freshly trained fully informed actor with zero learned
+cross-step or cross-lifecycle carry is sufficient under the registered access
+contract and noninferior to the matched REC arm by the frozen 0.05 margin. This
+retires only the proposition that learned per-lifecycle actor carry is required
+for access or supplies a material finite-budget advantage greater than 0.05 in
+this source. The pooled interval still crosses zero, so it does not establish
+overall CS superiority at 95% confidence; only capacity 6 has an entirely
+negative interval.
+
+The result does not retire recurrence globally. G35 retains true normalized
+time, lifecycle age, previous actions, current load and target mix, active-set
+aggregation, the autoregressive prefix, centralized critic and G31 credit. It
+does not identify whether those history proxies or the credit estimator are
+necessary, and it supplies no arbitrary-capacity, process, horizon or UAV
+claim.
+
+The binding next action is the zero-compute design audit:
+
+```text
+CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_DESIGN_ASSERTION_AUDIT
+```
+
+It must freeze a zero-training paired evaluation of the exact formal G35 CS
+final checkpoints under registered execution versus an actor-only intervention
+that destroys the history information in true time, lifecycle age and both
+previous-action coordinates while retaining all current load/mix, capability,
+active-set, prefix, critic, source, checkpoint and action-stream facts. G33
+remains abandoned and cannot be reactivated.
