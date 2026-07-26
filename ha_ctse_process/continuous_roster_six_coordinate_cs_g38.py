@@ -64,6 +64,72 @@ def _constant(*, like: torch.Tensor) -> torch.Tensor:
     return like.new_tensor(CONSTANT_COORDINATES)
 
 
+def _last_four_linear(
+    coordinates: torch.Tensor, weight: torch.Tensor
+) -> torch.Tensor:
+    """Evaluate the four-coordinate term with one shape-independent reduction."""
+
+    if coordinates.shape[-1] != 4 or weight.ndim != 2 or weight.shape[-1] != 4:
+        raise ValueError("G38 last-four affine shape mismatch")
+    products = coordinates.unsqueeze(-2) * weight
+    return (products[..., 0] + products[..., 1]) + (
+        products[..., 2] + products[..., 3]
+    )
+
+
+def _fold6_effective_bias(affine: nn.Linear) -> torch.Tensor:
+    """Combine the registered constants with removable trainable columns."""
+
+    if affine.bias is None or affine.in_features != FULL_OBSERVATION_DIM:
+        raise ValueError("G38 effective bias requires a biased ten-input affine")
+    return affine.bias + _last_four_linear(
+        _constant(like=affine.weight),
+        affine.weight[:, RETAINED_OBSERVATION_DIM:],
+    )
+
+
+class _G38RawInputAffine(nn.Linear):
+    """Shared factorized raw-input affine for pre-fold and folded actors."""
+
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        if input.shape[-1] != self.in_features:
+            raise ValueError("G38 raw-input affine width mismatch")
+        if self.bias is None:
+            raise ValueError("G38 raw-input affine requires a bias")
+        if self.in_features == RETAINED_OBSERVATION_DIM:
+            return F.linear(input, self.weight, None) + self.bias
+        if self.in_features != FULL_OBSERVATION_DIM:
+            raise ValueError("G38 raw-input affine has unregistered width")
+        retained_term = F.linear(
+            input[..., :RETAINED_OBSERVATION_DIM],
+            self.weight[:, :RETAINED_OBSERVATION_DIM],
+        )
+        effective_bias = self.bias + _last_four_linear(
+            input[..., RETAINED_OBSERVATION_DIM:],
+            self.weight[:, RETAINED_OBSERVATION_DIM:],
+        )
+        return retained_term + effective_bias
+
+
+def _g38_raw_input_affine(source: nn.Linear) -> _G38RawInputAffine:
+    """Retain initialized parameters while installing the G38 execution kernel."""
+
+    rng_state = torch.random.get_rng_state()
+    try:
+        affine = _G38RawInputAffine(
+            source.in_features,
+            source.out_features,
+            bias=source.bias is not None,
+            device=source.weight.device,
+            dtype=source.weight.dtype,
+        )
+    finally:
+        torch.random.set_rng_state(rng_state)
+    affine.weight = source.weight
+    affine.bias = source.bias
+    return affine
+
+
 def build_g38_full10_actor_input(
     source_observations: torch.Tensor, active_mask: torch.Tensor
 ) -> torch.Tensor:
@@ -373,6 +439,10 @@ class G38FoldableMatchedCSActor(g35.G35MatchedStateCarryActor):
         )
         nn.init.zeros_(self.delayed_residual[-1].weight)
         nn.init.zeros_(self.delayed_residual[-1].bias)
+        self.member_encoder[0] = _g38_raw_input_affine(self.member_input)
+        self.current_observation_residual = _g38_raw_input_affine(
+            self.current_readout
+        )
 
     @property
     def member_input(self) -> nn.Linear:
@@ -698,7 +768,6 @@ def fold_g38_constant_actor_checkpoint(
     target_state = folded.state_dict()
     member_weight = model.member_input.weight.detach()
     readout_weight = model.current_readout.weight.detach()
-    constants = _constant(like=member_weight)
     member_weight_key = "policy.member_encoder.0.weight"
     member_bias_key = "policy.member_encoder.0.bias"
     readout_weight_key = "policy.current_observation_residual.weight"
@@ -708,11 +777,11 @@ def fold_g38_constant_actor_checkpoint(
         if name == member_weight_key:
             value = member_weight[:, :RETAINED_OBSERVATION_DIM]
         elif name == member_bias_key:
-            value = source_state[name] + member_weight[:, RETAINED_OBSERVATION_DIM:] @ constants
+            value = _fold6_effective_bias(model.member_input)
         elif name == readout_weight_key:
             value = readout_weight[:, :RETAINED_OBSERVATION_DIM]
         elif name == readout_bias_key:
-            value = source_state[name] + readout_weight[:, RETAINED_OBSERVATION_DIM:] @ constants
+            value = _fold6_effective_bias(model.current_readout)
         else:
             value = source_state[name]
         if value.shape != target.shape:

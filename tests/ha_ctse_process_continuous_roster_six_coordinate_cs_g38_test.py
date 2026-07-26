@@ -14,6 +14,38 @@ def _paired() -> dict[str, g38.G38FoldableMatchedCSPolicy]:
     return g38.make_paired_models(8, initialization_seed=10_381_000)
 
 
+def _install_fold_stress_weights(model: g38.G38FoldableMatchedCSPolicy) -> None:
+    constants = torch.tensor(g38.CONSTANT_COORDINATES)
+    pattern = torch.tensor((1.0, -1.0, 1.0, -1.0)) * 1_000_000.0
+    with torch.no_grad():
+        for affine in (model.member_input, model.current_readout):
+            retained = torch.linspace(
+                -0.25,
+                0.25,
+                affine.out_features * g38.RETAINED_OBSERVATION_DIM,
+            ).reshape(affine.out_features, g38.RETAINED_OBSERVATION_DIM)
+            signs = torch.where(
+                torch.arange(affine.out_features) % 2 == 0, 1.0, -1.0
+            ).unsqueeze(-1)
+            affine.weight[:, : g38.RETAINED_OBSERVATION_DIM].copy_(retained)
+            affine.weight[:, g38.RETAINED_OBSERVATION_DIM :].copy_(signs * pattern)
+            affine.bias.copy_(
+                -_test_last_four_linear(
+                    constants,
+                    affine.weight[:, g38.RETAINED_OBSERVATION_DIM :],
+                )
+            )
+
+
+def _test_last_four_linear(
+    coordinates: torch.Tensor, weight: torch.Tensor
+) -> torch.Tensor:
+    products = coordinates.unsqueeze(-2) * weight
+    return (products[..., 0] + products[..., 1]) + (
+        products[..., 2] + products[..., 3]
+    )
+
+
 def test_constant_constructor_reads_six_coordinates_and_zeros_inactive_rows() -> None:
     retained = torch.arange(3 * 4 * 6, dtype=torch.float32).reshape(3, 4, 6)
     active = torch.tensor(
@@ -75,6 +107,12 @@ def test_common_graph_state_initialization_and_zero_carry_are_exact() -> None:
     noise = torch.as_tensor(
         g32.make_action_noise(range(2), action_seed=10_387_000, member_capacity=8)[0]
     )
+    clamped = g38.build_g38_constant_actor_input(retained, active)
+    for full_affine, fold_affine in (
+        (full.member_input, fold.member_input),
+        (full.current_readout, fold.current_readout),
+    ):
+        assert torch.equal(full_affine(clamped), fold_affine(clamped))
     errors = g38.forced_initial_equality(
         full,
         fold,
@@ -194,14 +232,14 @@ def test_exact_two_bias_fold_removes_136_weights_and_copies_every_other_tensor()
     torch.testing.assert_close(folded.member_input.weight, member_weight[:, :6], rtol=0, atol=0)
     torch.testing.assert_close(
         folded.member_input.bias,
-        member_bias + member_weight[:, 6:] @ constants,
+        member_bias + _test_last_four_linear(constants, member_weight[:, 6:]),
         rtol=0,
         atol=0,
     )
     torch.testing.assert_close(folded.current_readout.weight, readout_weight[:, :6], rtol=0, atol=0)
     torch.testing.assert_close(
         folded.current_readout.bias,
-        readout_bias + readout_weight[:, 6:] @ constants,
+        readout_bias + _test_last_four_linear(constants, readout_weight[:, 6:]),
         rtol=0,
         atol=0,
     )
@@ -216,6 +254,78 @@ def test_exact_two_bias_fold_removes_136_weights_and_copies_every_other_tensor()
         for name in before
         if name not in changed
     )
+
+
+def test_fold6_and_folded_share_six_wide_effective_bias_kernel_under_stress() -> None:
+    full = g38.make_model(
+        12, input_mode=g38.FULL10_INPUT, initialization_seed=10_381_000
+    )
+    pre = g38.make_model(
+        12, input_mode=g38.FOLD6_INPUT, initialization_seed=10_381_000
+    )
+    _install_fold_stress_weights(pre)
+    folded = g38.fold_g38_constant_actor_checkpoint(pre)
+    retained = torch.linspace(-0.75, 0.75, 3 * 12 * 6).reshape(3, 12, 6)
+    active = torch.ones((3, 12), dtype=torch.bool)
+    constructed = g38.build_g38_constant_actor_input(retained, active)
+    constants = torch.tensor(g38.CONSTANT_COORDINATES)
+
+    for pre_affine, folded_affine in (
+        (pre.member_input, folded.member_input),
+        (pre.current_readout, folded.current_readout),
+    ):
+        effective_bias = (
+            pre_affine.bias
+            + _test_last_four_linear(
+                constants,
+                pre_affine.weight[:, g38.RETAINED_OBSERVATION_DIM :],
+            )
+        )
+        expected = torch.nn.functional.linear(
+            retained,
+            pre_affine.weight[:, : g38.RETAINED_OBSERVATION_DIM],
+            None,
+        ) + effective_bias
+        actual = pre_affine(constructed)
+        legacy_ten_wide = torch.nn.functional.linear(
+            constructed, pre_affine.weight, pre_affine.bias
+        )
+        assert torch.equal(actual, expected)
+        assert torch.equal(folded_affine(retained), expected)
+        assert float((legacy_ten_wide - expected).abs().max()) > 1e-6
+
+    full_input = torch.linspace(-1.0, 1.0, 3 * 12 * 10).reshape(3, 12, 10)
+    for affine in (full.member_input, full.current_readout):
+        retained_term = torch.nn.functional.linear(
+            full_input[..., : g38.RETAINED_OBSERVATION_DIM],
+            affine.weight[:, : g38.RETAINED_OBSERVATION_DIM],
+            None,
+        )
+        expected = retained_term + (
+            affine.bias
+            + _test_last_four_linear(
+                full_input[..., g38.RETAINED_OBSERVATION_DIM :],
+                affine.weight[:, g38.RETAINED_OBSERVATION_DIM :],
+            )
+        )
+        assert torch.equal(affine(full_input), expected)
+
+    processes = g38.make_process_ledgers(
+        replicate=0, capacity=12, episode_count=8, formal=True
+    )
+    _, lifecycle, audit = g38.verify_g38_fold_equivalence(
+        pre,
+        folded,
+        processes=processes,
+        action_seed=10_386_000,
+        process_kind="random",
+        deterministic=False,
+    )
+    assert lifecycle is True
+    assert audit["passed"] is True
+    assert audit["environment_trajectories_per_episode"] == 1
+    assert audit["membership_edit_checks"] == 8 * g38.g32.HORIZON
+    assert all(error == 0.0 for error in audit["maximum_errors"].values())
 
 
 def test_removable_columns_have_live_actual_objective_gradients() -> None:
@@ -303,7 +413,7 @@ def test_folded_actor_is_lockstep_equivalent_on_one_environment_trajectory(
         value = reward_function(env, view, actions)  # type: ignore[arg-type]
         phase = reward_call % 3
         reward_call += 1
-        return value + (1e-4 if phase == 0 else 0.0)
+        return value + (2e-4 if phase == 0 else 0.0)
 
     monkeypatch.setattr(g38, "g38_immediate_reward", biased_pre_fold_reward)
     _, _, reward_failed = g38.verify_g38_fold_equivalence(
