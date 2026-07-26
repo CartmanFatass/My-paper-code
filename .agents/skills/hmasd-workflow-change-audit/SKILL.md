@@ -69,7 +69,8 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    when a registered type is unavailable.
 
 Run the structural checker with the Python interpreter registered in the
-assignment or `docs/project/AGENT_CONTEXT.md`:
+assignment. A missing interpreter is a smallest-boundary blocker; do not load a
+runtime document to discover one:
 
 ```powershell
 & '<registered-python>' .agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py --repo .

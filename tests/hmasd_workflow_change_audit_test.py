@@ -88,6 +88,11 @@ def test_live_repository_harness_is_closed() -> None:
     assert CHECKER.audit_repo(REPO) == []
 
 
+def test_default_scan_stays_inside_workflow_design_surfaces() -> None:
+    assert "docs/project/CURRENT_WORK.md" not in CHECKER.DEFAULT_ACTIVE_PATHS
+    assert "docs/project/AGENT_CONTEXT.md" not in CHECKER.DEFAULT_ACTIVE_PATHS
+
+
 @pytest.mark.parametrize("breakage, expected", [
     ("missing_role", "references missing role"),
     ("orphan_profile", "unregistered profile"),

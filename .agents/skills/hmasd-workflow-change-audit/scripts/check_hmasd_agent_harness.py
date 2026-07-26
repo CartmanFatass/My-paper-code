@@ -20,8 +20,6 @@ DEFAULT_ACTIVE_PATHS = (
     ".agents/skills",
     ".codex/config.toml",
     ".codex/agents",
-    "docs/project/CURRENT_WORK.md",
-    "docs/project/AGENT_CONTEXT.md",
 )
 DEFAULT_FORBIDDEN = (
     "superpowers_execution=enabled",
