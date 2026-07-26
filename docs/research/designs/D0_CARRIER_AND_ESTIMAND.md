@@ -214,7 +214,14 @@ itself an estimate. `U*_{i,src}` needs the same discipline for the same reason.
   | Mechanism | Duty window | Derivation |
   |---|---|---|
   | Relay/role exchange | **~139 steps** | mean separation `0.5214 x 8000 = 4171 m` at max speed `30` per `1.0 s` step |
-  | Energy-driven roster change | **~400-500 steps** | charging `0.10 -> 0.80` is `112 Wh` at `1000 W` = `403 s`, plus transit |
+  | Energy-driven roster change | **~1500 steps** | time to first dock dominates: ~1071 steps to fall from `0.55` to the dock trigger, *then* ~403 s of charging plus transit |
+
+  The energy row was first written as `~400-500 steps` from the charge duration
+  alone. That was wrong, and measurement caught it: `charge_steps` is exactly
+  `0.0` in every arm at both `H = 139` and `H = 450`, and only becomes non-zero
+  (`678.5`) at `H = 1500`. A duty window must span **time-to-first-event plus the
+  event**, not the event alone — otherwise the horizon excludes the very mechanism
+  it was derived for, which is the mispricing this rule exists to prevent.
 
   An `H` set to the exchange window truncates the energy consequence before it can
   occur, so renewal measures as worthless for a reason that is an artifact of the
