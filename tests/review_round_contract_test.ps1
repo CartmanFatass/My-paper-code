@@ -4,20 +4,18 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $registry = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') | ConvertFrom-Json
-if ($registry.schema_version -ne 35 -or
+if ($registry.schema_version -ne 36 -or
     $registry.round_operator.kind -ne 'dedicated_external_review_operator_task' -or
     $registry.round_operator.external_scientific_decision -ne 'external_pro_binding_within_user_boundary' -or
     $registry.round_operator.decision_intake -ne 'project_manager_exact_raw_file_routing' -or
     $registry.round_operator.git_boundary_owner -ne 'project_manager' -or
     $registry.intertask_transport_contract.transport_owner -ne 'dedicated_external_review_operator' -or
     $registry.intertask_transport_contract.cross_task_routing_skill -ne '$hmasd-cross-task-routing' -or
-    $registry.intertask_transport_contract.target_identity -ne 'probe_confirmed_live_role_session' -or
-    $registry.intertask_transport_contract.route_cache -ne 'conversation_local_only' -or
-    $registry.intertask_transport_contract.model_thinking_preservation -ne 'live_state_probe_explicit_echo' -or
-    $registry.intertask_transport_contract.live_settings_source -ne 'read_only_local_codex_state' -or
-    $registry.intertask_transport_contract.live_settings_cache -ne 'forbidden' -or
-    $registry.intertask_transport_contract.routine_postcheck -ne 'forbidden' -or
-    $registry.intertask_transport_contract.settings_drift_action -ne 'diagnose_once_after_send_error_or_observed_anomaly_no_resend' -or
+    $registry.intertask_transport_contract.target_identity -ne 'fixed_role_triple_from_AGENTS.md' -or
+    $registry.intertask_transport_contract.route_cache -ne 'forbidden' -or
+    $registry.intertask_transport_contract.model_thinking_source -ne 'fixed_role_triple_from_AGENTS.md' -or
+    $registry.intertask_transport_contract.payload_route_settings -ne 'forbidden' -or
+    $registry.intertask_transport_contract.route_replacement -ne 'explicit_user_direction_then_workflow_design_commit' -or
     $registry.intertask_transport_contract.response_monitor_agent_type -ne 'hmasd-pro-response-monitor' -or
     $registry.intertask_transport_contract.response_monitor_model -ne 'gpt-5.6-luna' -or
     $registry.intertask_transport_contract.response_monitor_effort -ne 'low' -or
@@ -67,8 +65,7 @@ foreach ($required in @(
     'Never activate Answer now',
     'operator-brokered JSONL sentinel',
     'child never opens the browser',
-    'confirm the live Project Manager session',
-    'live model and thinking explicitly echoed')) {
+    'fixed Project Manager triple')) {
     if (-not $skillAgent.Contains($required)) {
         throw "Review Skill agent prompt missing: $required"
     }

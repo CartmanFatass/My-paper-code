@@ -46,7 +46,7 @@ Present one compact but explicit plan with these information groups:
 - **Intended changes:** state the material change in each path, including affected
   Skills, roles and route names instead of compressing them into a slogan.
 - **Verification and risks:** name focused checks, Git integration, protected
-  dirty paths and any workflow-step cost audit triggered by the plan.
+  dirty paths and any workflow cost audit explicitly requested by the user.
 
 Keep the plan detailed enough for the user to see its actual scope without
 creating a separate design document. If the user corrects it, continue the

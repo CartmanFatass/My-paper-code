@@ -21,9 +21,9 @@ project_development_skill=hmasd-agile-research-development
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=probe_confirmed_live_role_session
-cross_task_route_cache=conversation_local_only
-cross_task_model_thinking_preservation=live_state_probe_explicit_echo
+cross_task_target_identity=fixed_router_role_triple
+cross_task_route_cache=forbidden
+cross_task_model_thinking_source=fixed_router_role_triple
 ```
 
 After the router, read `docs/project/CURRENT_WORK.md`, this charter and only the
@@ -111,13 +111,13 @@ pre-implementation review. Pro resolves scientific content.
   Closed or abandoned candidates are not active assignments; detailed evidence
   remains in Git history, review rounds, reports and ledgers.
 - For workflow-design changes, use `$hmasd-cross-task-routing` to confirm the
-  live Workflow Design Manager session, then send an exact bounded request with
-  its live model and thinking explicitly echoed. PM does not
+  fixed Workflow Design Manager triple, then send an exact bounded request with
+  that model and thinking supplied only as tool parameters. PM does not
   locally reinterpret its accepted design, and Workflow Design Manager does not
   take over runtime execution.
 - For each Pro boundary, use `$hmasd-cross-task-routing` to confirm the live
-  External Review Operator session, then send the exact pushed review files and
-  return role with its live model and thinking explicitly echoed.
+  fixed External Review Operator triple, then send the exact pushed review files
+  and return role without any route model or effort fields in the payload.
   Receive only its exact-raw file path and terminal notification; do not load
   browser steps into PM context.
 - Supply the Experiment Operator one immutable authorized run assignment. It

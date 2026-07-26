@@ -14,9 +14,9 @@ browser_authority=registered_external_pro_conversation_only
 answer_now_activation=forbidden
 completion_notification=required_once
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=probe_confirmed_live_role_session
-cross_task_route_cache=conversation_local_only
-cross_task_model_thinking_preservation=live_state_probe_explicit_echo
+cross_task_target_identity=fixed_router_role_triple
+cross_task_route_cache=forbidden
+cross_task_model_thinking_source=fixed_router_role_triple
 ```
 
 This task removes browser-control pressure from Project Manager without adding
@@ -57,9 +57,8 @@ browsing or editing.
   exact stage commit.
 - Verbatim replacement of the assigned raw placeholder and mechanical facts in
   the assigned intake file. No other repository path may be written.
-- Exactly one inter-task terminal notification to the probe-confirmed live
-  Project Manager session. The send explicitly echoes that session's live
-  model and thinking.
+- Exactly one inter-task terminal notification to the fixed Project Manager
+  triple. Model and thinking are tool parameters only and never payload fields.
 
 ## Must not
 
@@ -75,8 +74,8 @@ browsing or editing.
 ## Terminal delivery
 
 On success, use `$hmasd-cross-task-routing` and send exactly one cross-task
-message to the confirmed Project Manager session with its live model and
-thinking explicitly echoed:
+message to the fixed Project Manager triple without route settings in the
+payload:
 
 ```text
 EXTERNAL_REVIEW_OPERATOR_COMPLETE

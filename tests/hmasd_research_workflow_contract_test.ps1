@@ -97,10 +97,12 @@ foreach ($required in @(
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_pro_response_sentinel.py',
-    'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
+    'cross_task_routing=fixed_role_triples_from_router',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
-    'Settings are never stored in Git or cached',
+    'workflow_design_manager_route=019f9d2f-e0ea-7411-9fd7-386f45f76909|gpt-5.6-sol|high',
+    'project_manager_route=019f9e4f-f4d0-7fe0-b214-c47fd034e84d|gpt-5.6-sol|xhigh',
+    'external_review_operator_route=019f9c6a-9401-7ae0-ace5-dd827dccba2b|gpt-5.6-luna|medium',
+    'Persistent Codex roles send only with the fixed router triples',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -183,9 +185,9 @@ foreach ($required in @(
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=probe_confirmed_live_role_session',
-    'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
+    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_route_cache=forbidden',
+    'cross_task_model_thinking_source=fixed_router_role_triple',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_INDEX.md',
@@ -206,9 +208,10 @@ foreach ($required in @(
     'code_authority=none',
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=probe_confirmed_live_role_session',
-    'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
+    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_route_cache=forbidden',
+    'cross_task_model_thinking_source=fixed_router_role_triple',
+    'never an automatic acceptance gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_mutating_workflow_design',
     'workflow_zero_question_path=fully_specified_mutations',
@@ -263,9 +266,9 @@ foreach ($required in @(
     'completion_notification=required_once',
     'Project Manager',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=probe_confirmed_live_role_session',
-    'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo')) {
+    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_route_cache=forbidden',
+    'cross_task_model_thinking_source=fixed_router_role_triple')) {
     if (-not $reviewOperatorRole.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }
@@ -306,7 +309,7 @@ foreach ($required in @(
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
-    'registered `hmasd-workflow-cost-reviewer` with `fork_turns=none`',
+    'Only when the user explicitly requests a workflow cost audit',
     'fresh-task profile smoke',
     'check_hmasd_agent_harness.py')) {
     if (-not $workflowAudit.Contains($required)) { throw "Workflow audit Skill missing: $required" }
@@ -321,11 +324,15 @@ foreach ($required in @(
     'Perform no mutation',
     'confirms the complete plan in natural language',
     'Complete a read-only inspection',
+    'workflow cost audit explicitly requested by the user',
     'present a revised complete plan')) {
     if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing: $required" }
 }
 if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {
     throw 'Workflow collaboration Skill permits implicit invocation'
+}
+if ($workflowAudit.Contains('If and only if the change adds or expands a workflow step')) {
+    throw 'Workflow cost audit remains an automatic acceptance gate'
 }
 
 foreach ($required in @(
