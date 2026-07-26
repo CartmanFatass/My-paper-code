@@ -12,6 +12,10 @@ evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 code_science_audit_mode=contract_diff_only
 code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 code_science_audit_new_algorithm_or_evidence_search=forbidden
+active_grant_valid_result_adjudication=required
+active_grant_out_of_scope_proposal=require_in_scope_alternative
+active_grant_no_in_scope_successor=terminal_authorized_chain_closure
+active_grant_user_permission_request=forbidden
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
@@ -30,6 +34,10 @@ paths when scientific judgment depends on what the code actually implements.
 - `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`: interpretation of a mechanically
   valid registered result, CDC/portfolio change, smallest retired unit,
   retained lemmas and next scientific action.
+- For every valid success, failure, mixed or underpowered result inside the
+  active grant, return exactly one in-scope successor action that fits the
+  supplied remaining conclusion-bearing balance, or state that no in-scope
+  successor exists and close the authorized research chain.
 - Resolve one Project-Manager-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
   when PM reports a concrete scientific ambiguity, executable impossibility or
   code counterexample. This exceptional clarification is not a routine review
@@ -52,6 +60,11 @@ paths when scientific judgment depends on what the code actually implements.
   submitted package.
 - Expand protected scope beyond the user's goal or become the acceptance owner
   for a Project Manager-owned code artifact.
+- Return any permission or selection question during the active grant. If a
+  contemplated action is outside the grant,
+  exceeds the supplied balance, or needs repository-external destructive or
+  egress authority, defer it and select an available in-scope alternative. If
+  none exists, return terminal authorized-chain closure.
 - During `CODE_SCIENCE_ALIGNMENT_AUDIT`, introduce a new algorithm, controller,
   solver, evidence search, threshold, evidence volume or experiment. Return
   only `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`; a mismatch cites the
@@ -72,15 +85,20 @@ paths when scientific judgment depends on what the code actually implements.
 - The exact Project-Manager-authored question and allow-list submitted without
   rewriting by the dedicated External Review Operator. A code-science audit
   includes PM's exact commit-bound critical-point index and source identity.
+- For a valid formal result, its exact archived evidence, active grant boundary,
+  result class and remaining conclusion-bearing iteration balance.
 - The concurrency policy: no global write lease, disjoint-file parallelism allowed, same-file concurrent writes forbidden, and every mutating task must declare its owned files.
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`, including its agent-count
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
 
 ## Outputs and stop
 
-- An exact question-scoped scientific answer, or an explicit statement that the question cannot be answered from the permitted material.
-- Stop after the scoped scientific disposition or when required evidence is
-  unavailable. The External Review Operator archives the answer exactly and
-  notifies Project Manager with the exact archived file paths. PM retains
-  exclusive code acceptance and does not reinterpret the science or load the
-  browser mechanics.
+- An exact question-scoped scientific answer. For a valid formal result this
+  includes one exact in-scope successor action or terminal authorized-chain
+  closure; it never returns a permission question.
+- Stop after the scoped scientific disposition or when required evidence
+  remains unavailable after applicable automatic recovery. The latter is an
+  external technical blocker, not a scientific choice or permission question.
+  The External Review Operator archives the answer exactly and notifies Project
+  Manager with the exact archived file paths. PM retains exclusive code
+  acceptance and does not reinterpret the science or load the browser mechanics.

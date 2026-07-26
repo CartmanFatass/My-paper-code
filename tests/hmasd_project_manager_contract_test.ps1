@@ -34,6 +34,8 @@ $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANA
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
 $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
+$pro = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
+$agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $reviewOperatorNormalized = $reviewOperator -replace '\s+', ' '
 foreach ($required in @(
     'workflow_design_manager_persistent_task=one',
@@ -52,6 +54,18 @@ foreach ($required in @(
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
     'formal_compute_authority=user_only',
+    'active_unattended_grant_valid_iteration_limit=9',
+    'active_unattended_grant_permission_prompts=forbidden',
+    'valid_scientific_result_classes=success|failure|mixed|underpowered',
+    'valid_scientific_result_route=exact_archive_then_external_pro',
+    'external_pro_successor_adjudication=required_after_every_valid_result',
+    'project_manager_in_scope_successor_execution=automatic',
+    'out_of_scope_proposal_action=require_in_scope_alternative_without_execution_or_user_prompt',
+    'no_in_scope_successor_action=terminal_authorized_chain_closure',
+    'grant_balance_exhaustion_action=terminal_completion_without_user_prompt',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
+    'external_authority_expansion_action=defer_without_interrupting_available_in_scope_route',
+    'unfavorable_scientific_result_route=external_pro_adjudication',
     'operational_recovery_owner=project_manager',
     'operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization',
     'operational_recovery_fixed_attempt_limit=none',
@@ -76,6 +90,14 @@ foreach ($required in @(
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
     'formal_compute_authority=user_only',
+    'active_unattended_grant_valid_iteration_limit=9',
+    'active_unattended_grant_permission_prompts=forbidden',
+    'valid_result_external_pro_adjudication=required',
+    'in_scope_successor_execution=automatic',
+    'out_of_scope_proposal_action=require_in_scope_alternative',
+    'no_in_scope_successor_action=terminal_authorized_chain_closure',
+    'grant_balance_exhaustion_action=terminal_completion',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
     'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
     'operational_recovery_reauthorization=not_required_per_attempt',
     'operational_recovery_fixed_attempt_limit=none',
@@ -93,6 +115,37 @@ foreach ($required in @(
     'must not use recovery to select',
     'Assignments already launched retain their assigned run identity')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'Every mechanically valid success, failure, mixed or underpowered result',
+    'automatically follows that in-scope',
+    'never asks for',
+    'every result, including an',
+    'unfavorable one, is routed to Pro adjudication',
+    'requires the same review to',
+    'does not turn that rejection into a user',
+    'all nine valid iterations are',
+    'unavailable required credential,',
+    'defer them and continue an available in-scope',
+    'None is a prompt for permission')) {
+    if (-not $pm.Contains($required)) { throw "Project Manager unattended grant contract missing: $required" }
+}
+foreach ($required in @(
+    'active_grant_valid_result_adjudication=required',
+    'active_grant_out_of_scope_proposal=require_in_scope_alternative',
+    'active_grant_no_in_scope_successor=terminal_authorized_chain_closure',
+    'active_grant_user_permission_request=forbidden',
+    'valid success, failure, mixed or underpowered result',
+    'one exact in-scope successor action or terminal authorized-chain',
+    'remains unavailable after applicable automatic recovery')) {
+    if (-not $pro.Contains($required)) { throw "External Pro unattended grant contract missing: $required" }
+}
+foreach ($required in @(
+    'do not stop for user',
+    'Archive every valid success, failure, mixed or',
+    'Complete after nine valid iterations',
+    'unrecoverable external technical impossibility')) {
+    if (-not $agile.Contains($required)) { throw "Agile unattended grant contract missing: $required" }
 }
 foreach ($retired in @(
     'project_manager_round_metrics_skill=',

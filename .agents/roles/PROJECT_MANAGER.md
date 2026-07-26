@@ -16,6 +16,14 @@ external_review_dispatch_and_result_routing=exclusive
 external_review_operator=dedicated_persistent_task
 experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
+active_unattended_grant_valid_iteration_limit=9
+active_unattended_grant_permission_prompts=forbidden
+valid_result_external_pro_adjudication=required
+in_scope_successor_execution=automatic
+out_of_scope_proposal_action=require_in_scope_alternative
+no_in_scope_successor_action=terminal_authorized_chain_closure
+grant_balance_exhaustion_action=terminal_completion
+early_termination_boundary=unrecoverable_external_technical_impossibility_only
 operational_recovery_authority=within_existing_user_authorized_scientific_boundary
 operational_recovery_reauthorization=not_required_per_attempt
 operational_recovery_fixed_attempt_limit=none
@@ -97,6 +105,32 @@ Use `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` for every triggered boundary.
    artifacts; External Pro owns scientific interpretation and successor choice.
 5. Workflow Design Manager changes only workflow design and never participates in the
    runtime sequence above.
+
+## Unattended nine-round grant
+
+The active grant authorizes up to nine valid conclusion-bearing iterations.
+Every mechanically valid success, failure, mixed or underpowered result is
+archived exactly and routed to External Pro for scientific interpretation and
+one exact successor adjudication. PM then automatically follows that in-scope
+action through design audit, implementation, code-science alignment, bounded
+preflight, formal execution, result review and successor work. It never asks for
+user input or permission inside the active grant; every result, including an
+unfavorable one, is routed to Pro adjudication.
+
+PM rejects without execution any proposal outside the active project/grant or
+beyond the remaining conclusion-bearing balance and requires the same review to
+select an in-scope alternative. PM does not turn that rejection into a user
+question. If Pro identifies no in-scope successor, PM closes the authorized
+research chain and reports terminal closure. When all nine valid iterations are
+consumed, PM reports terminal completion without asking for another grant.
+
+A workflow may terminate earlier only for a hard technical impossibility
+external to scientific choice, such as an unavailable required credential,
+route or service after applicable automatic recovery cannot make progress. PM
+reports the exact technical blocker without asking a permission question.
+Repository-external destructive or egress authority and any future grant remain
+outside scope: defer them and continue an available in-scope Pro-selected
+alternative; if none exists, close the current chain.
 
 PM has no scientific authority. Before implementation it performs only a local
 code-feasibility read. A concrete scientific ambiguity, executable
@@ -186,3 +220,7 @@ review-file intake, mechanically validated run artifacts, the exact
 External-Pro-selected next action, or the smallest blocker. A terminal operator
 notification wakes PM. Workflow Design Manager is contacted only for a workflow-design
 change, never for runtime continuation.
+
+Inside the active grant, `stop` means terminal completion after nine valid
+iterations, terminal closure because Pro found no in-scope successor, or an
+unrecoverable external technical blocker. None is a prompt for permission.

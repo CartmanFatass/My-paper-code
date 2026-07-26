@@ -59,6 +59,18 @@ external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
 external_review_operator_git_authority=none
 formal_compute_authority=user_only
+active_unattended_grant_valid_iteration_limit=9
+active_unattended_grant_permission_prompts=forbidden
+valid_scientific_result_classes=success|failure|mixed|underpowered
+valid_scientific_result_route=exact_archive_then_external_pro
+external_pro_successor_adjudication=required_after_every_valid_result
+project_manager_in_scope_successor_execution=automatic
+out_of_scope_proposal_action=require_in_scope_alternative_without_execution_or_user_prompt
+no_in_scope_successor_action=terminal_authorized_chain_closure
+grant_balance_exhaustion_action=terminal_completion_without_user_prompt
+early_termination_boundary=unrecoverable_external_technical_impossibility_only
+external_authority_expansion_action=defer_without_interrupting_available_in_scope_route
+unfavorable_scientific_result_route=external_pro_adjudication
 operational_recovery_owner=project_manager
 operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization
 operational_recovery_fixed_attempt_limit=none
@@ -84,10 +96,25 @@ Review Operator alone controls the browser and returns exact raw files to PM;
 `hmasd-pro-response-monitor` sees only its metadata sentinel. External Pro owns
 science; PM owns code and its mechanical runtime.
 
-With an active grant, PM follows the exact Pro-selected sequence, dispatches
-reviews and authorized runs, and maintains its code attention state. Workflow
-Manager is invoked only to change workflow design. Only the user expands science
-or compute authority.
+With the active user-authorized nine-valid-iteration grant, every valid success,
+failure, mixed or underpowered result is archived exactly and routed to External
+Pro. Pro returns the exact next in-scope scientific action, and PM automatically
+continues its design audit, implementation, code-science alignment, bounded
+preflight, formal execution, result review and successor sequence. No user
+question or permission prompt is issued inside the grant. The grant itself
+satisfies `formal_compute_authority=user_only`
+for each in-scope run within its remaining conclusion-bearing balance.
+
+An out-of-scope or over-balance Pro proposal is not executed and does not create
+a user question; the review must select an in-scope alternative. If none exists,
+PM closes the authorized research chain and reports terminal closure. Exhausting
+all nine valid conclusion-bearing iterations likewise completes and reports the
+grant without a permission question. Earlier termination is allowed only for a
+hard technical impossibility external to scientific choice after applicable
+automatic recovery cannot make progress. Repository-external destructive or
+egress expansion and any future grant are deferred; they cannot interrupt an
+available in-scope Pro-selected route. Workflow Manager is invoked only to
+change workflow design. Only the user creates or expands a future grant.
 
 Within an already user-authorized scientific boundary, PM may automatically
 retry, resume or restart a low-cost purely operational failure without new

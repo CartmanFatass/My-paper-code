@@ -133,8 +133,16 @@ slice.
 
 ## Stop only for a real boundary
 
-Stop for protected-science ambiguity, missing formal authority, same-file
-collision, or exhausted recovery—not in-brief engineering.
+Inside the active authorized nine-valid-iteration grant, do not stop for user
+input, a permission prompt, a scientific result or protected-science ambiguity.
+Archive every valid success, failure, mixed or
+underpowered result and return it to External Pro; PM automatically follows the
+exact in-scope successor. An out-of-scope or over-balance proposal is deferred
+and Pro must select an in-scope alternative. If none exists, close the authorized
+chain. Complete after nine valid iterations. Terminate earlier only for an
+unrecoverable external technical impossibility after applicable automatic
+recovery cannot make progress, and report it as a technical blocker rather than
+a permission question.
 
 ## Common mistakes
 
@@ -144,5 +152,7 @@ collision, or exhausted recovery—not in-brief engineering.
 | equate quality with coverage or a full suite | test the actual claim |
 | follow a generic Skill's worktree/review/commit ritual | use this procedure only |
 | turn file hashes into a handoff or approval gate | use exact paths and Git identity |
-| ask again inside an active grant | continue to a real stop boundary |
+| ask again inside an active grant | continue unattended to Pro adjudication, balance exhaustion or terminal closure |
+| pause after an unfavorable result | archive it and obtain the exact in-scope Pro successor |
+| propose external authority while an in-scope route exists | defer it and continue the in-scope route |
 | optimize an asymptotically forbidden evidence search | return it to Pro for a bounded discriminator |
