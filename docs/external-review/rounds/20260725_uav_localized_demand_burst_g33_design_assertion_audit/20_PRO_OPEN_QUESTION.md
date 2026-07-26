@@ -20,6 +20,29 @@ Read exactly the paths in this round's `01_SHARED_SOURCE_MANIFEST.md` from the
 freshness-fence stage commit. Inspect the named remote code where needed. Do
 not use unlisted history or earlier chat turns.
 
+## Exact evidence allow-list
+
+- `docs/external-review/rounds/20260725_uav_localized_demand_burst_g33_design_assertion_audit/00_REVIEW_BRIEF.md`
+- `docs/external-review/rounds/20260725_uav_localized_demand_burst_g33_design_assertion_audit/01_SHARED_SOURCE_MANIFEST.md`
+- `docs/external-review/rounds/20260725_runtime_capacity_g32_formal_result_review/21_PRO_OPEN_RAW.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md`
+- `docs/research/designs/RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32.md`
+- `docs/research/designs/UAV_TEMPORARY_SERVICE_LOSS_G1.md`
+- `docs/research/designs/UAV_CHARGE_ROTATION_ROSTER_G2.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260724_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_RESULT.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260725_UAV_CHARGE_ROTATION_ROSTER_G2_FORMAL_RESULT.md`
+- `config_1.py`
+- `envs/pettingzoo/scenario7_energy_aware.py`
+- `envs/pettingzoo/scenario_base.py`
+- `ha_ctse_process/continuous_roster_policy.py`
+- `ha_ctse_process/return_to_go_direction_balanced_full_actor_g31.py`
+- `ha_ctse_process/uav_charge_rotation_g2.py`
+- `tests/scenario7_energy_aware_test.py`
+- `tests/ha_ctse_process_uav_charge_rotation_g2_test.py`
+
 Perform the exact
 `UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT` selected in the G32 raw.
 This is a zero-compute source-identifiability decision. Do not write code,
