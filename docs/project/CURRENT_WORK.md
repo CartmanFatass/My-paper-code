@@ -7,10 +7,10 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ## Active execution surface
 
-- Workflow Manager task is pending creation as the sole persistent workflow
-  authority, fixed to `gpt-5.6-sol/high`; it owns this active state, review and
-  experiment orchestration, workflow Git and exact routing. Project Manager task
-  `019f8a2e-ed73-7a02-9bb9-4a57b2054cf3` owns only code decisions,
+- Workflow Manager task `019f9d2f-e0ea-7411-9fd7-386f45f76909` is the sole
+  persistent workflow authority, fixed to `gpt-5.6-sol/high`; it owns this active
+  state, review and experiment orchestration, workflow Git and exact routing.
+  Project Manager task `019f9d04-8b21-7512-acc7-ffe02d262c82` owns only code decisions,
   implementation acceptance and code Git. Dedicated External Review Operator task
   `019f9c6a-9401-7ae0-ace5-dd827dccba2b` owns only Pro browser transport,
   natural completion, exact raw archival and terminal notification to Workflow Manager.
@@ -81,15 +81,18 @@ implementation_status=g33_source_environment_retained_nested_control_prototype_u
 nonformal_compute_status=g33_current_only_microbenchmark_complete_no_source_evidence
 formal_compute_authority=standing_user_grant_cpu_only_after_pm_evidence_contract
 formal_compute_status=forbidden_g33_nested_search_contract_exceeds_user_complexity_ceiling
-git_integration_status=workflow_scope_repair_integrated_at_current_head_g33_nested_prototype_unstaged
+git_integration_status=workflow_manager_role_split_and_task_registration_integrated_at_current_head_g33_nested_prototype_unstaged
 external_review_transport_status=no_active_round_g33_solver_design_package_withdrawn_before_transport
 external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b
 external_review_operator_current_model=gpt-5.6-luna
 external_review_operator_current_effort=high
-workflow_manager_task=PENDING_DEDICATED_TASK_CREATION
+workflow_manager_task=019f9d2f-e0ea-7411-9fd7-386f45f76909
 workflow_manager_current_model=gpt-5.6-sol
 workflow_manager_current_effort=high
-workflow_manager_status=role_split_validated_pending_task_creation
+workflow_manager_status=active_smoke_validated_waiting
+workflow_manager_smoke_commit=9d7663499678ae203ff26bf66076b6be4b706e46
+workflow_manager_workspace=shared_project_directory_exact_path_ownership
+project_manager_task=019f9d04-8b21-7512-acc7-ffe02d262c82
 project_manager_current_model=gpt-5.6-sol
 project_manager_current_effort=max
 cross_task_send_requires_explicit_model_effort=true
@@ -288,7 +291,7 @@ g32_result_review_raw=docs/external-review/rounds/20260725_runtime_capacity_g32_
 g32_result_review_intake=docs/external-review/rounds/20260725_runtime_capacity_g32_formal_result_review/50_MECHANICAL_INTAKE_RECORD.md
 g32_result_review_status=complete_exact_raw_archived_and_scientific_records_reconciled
 post_workflow_algorithm_boundary=UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT
-session_restart_required=true_workflow_manager_role_and_dedicated_task_creation
+session_restart_required=false_workflow_manager_task_smoke_complete
 handoff_document_write_policy=user_explicit_only
 automatic_handoff_document_write=forbidden
 uav_g1_active_runtime_status=removed_after_durable_iteration22_closure
