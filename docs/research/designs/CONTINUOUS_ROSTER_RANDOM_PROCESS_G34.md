@@ -7,7 +7,8 @@ source_id=CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_RANDOM_PROCESS_G34_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=candidate_requires_commit_bound_nonformal_exercise
+implementation_status=pm_technically_accepted_after_commit_bound_nonformal_exercise
+implementation_code_commit=c2489d43d9eaa3a48a4ea18ae55f570ec3e06e63
 training_change=none
 optimizer_steps=0
 formal_compute_status=not_started
@@ -70,9 +71,11 @@ formal_total_real_episode_transitions=368640
 episode_exclusions=none
 ```
 
-No search, candidate rollout or simulated counterfactual is present. A formal
-run remains prohibited until the candidate commit completes one bounded CPU
-nonformal exercise, PM accepts the implementation, and the required
+No search, candidate rollout or simulated counterfactual is present. The
+commit-bound CPU nonformal exercise completed in 7.3 seconds with 20 cells,
+3,840 real transitions, zero optimizer steps, unchanged checkpoint state and
+`operational_valid=true`. PM therefore technically accepts the implementation.
+A formal run remains prohibited until the required
 implementation-post `CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_CODE_SCIENCE_ALIGNMENT_AUDIT`
 returns aligned.
 
@@ -100,3 +103,9 @@ time/reactive intervention coordinates, checkpoint immutability, exact G32
 source restriction, cell and episode fail-closed validation, whole-episode
 paired differences, first-match precedence, formal authority and the frozen
 complexity inventory. They are code evidence, not a scientific result.
+
+The bounded integration evidence is archived at
+`logs/nonformal_continuous_roster_random_process_g34_cpu_20260726_c2489d4_pm1/`.
+Its evaluation and analysis artifacts both bind the full implementation commit,
+record `formal=false`, and terminate at
+`NONFORMAL_CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_EXERCISE_COMPLETE`.
