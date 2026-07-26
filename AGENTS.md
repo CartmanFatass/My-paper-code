@@ -40,6 +40,8 @@ project_manager_project_authority=exclusive
 project_manager_scientific_authority=none
 project_manager_technical_acceptance_authority=exclusive
 project_manager_git_authority=direct
+project_manager_remote_repository_authority=permanent_user_grant
+project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 project_manager_external_review_transport=question_dispatch_and_result_intake_only
 external_review_operator_transport_authority=exclusive
 external_review_operator_scientific_authority=none
@@ -51,8 +53,9 @@ native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
 ```
 
-There is no Controller, persistent project Monitor, dispatcher, relay chain,
-role-session registry or global write lease. One dedicated persistent External
+The user permanently authorizes Project Manager to fetch and push accepted HMASD work to that exact repository without another per-operation prompt; this grant does not cover any other remote, repository or non-Git egress.
+
+There is no Controller, persistent project Monitor, dispatcher, relay chain, role-session registry or global write lease. One dedicated persistent External
 Review Operator is the mechanical browser boundary: PM sends it an exact pushed
 question assignment and receives its exact-raw completion notification. One registered nonpersistent
 `hmasd-pro-response-monitor` is the explicit exception for silently observing

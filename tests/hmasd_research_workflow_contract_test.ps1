@@ -54,6 +54,8 @@ foreach ($required in @(
     'docs/project/CURRENT_WORK.md` is PM-only active state',
     'project_manager_scientific_authority=none',
     'project_manager_git_authority=direct',
+    'project_manager_remote_repository_authority=permanent_user_grant',
+    'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
     'external_review_operator_transport_authority=exclusive',
     'External Review Operator task',

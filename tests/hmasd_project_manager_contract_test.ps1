@@ -35,6 +35,8 @@ $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/
 foreach ($required in @(
     'project_manager_project_authority=exclusive',
     'project_manager_git_authority=direct',
+    'project_manager_remote_repository_authority=permanent_user_grant',
+    'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
