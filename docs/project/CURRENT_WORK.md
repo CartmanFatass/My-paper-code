@@ -7,7 +7,7 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ## Active execution surface
 
-- Project Manager task `019f9d04-8b21-7512-acc7-ffe02d262c82` solely maintains
+- Project Manager task `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` solely maintains
   this code-attention pointer and owns code decisions, technical acceptance,
   review/run dispatch, runtime intake and PM-owned Git. Workflow Manager task
   `019f9d2f-e0ea-7411-9fd7-386f45f76909`, fixed to `gpt-5.6-sol/high`, changes
@@ -108,9 +108,9 @@ workflow_manager_smoke_commit=7e5c2f3
 external_review_operator_smoke_commit=7e5c2f3
 experiment_operator_profile_smoke=passed_parent_pm_luna_low_no_run_no_writes
 workflow_manager_workspace=shared_project_directory_exact_path_ownership
-project_manager_task=019f9d04-8b21-7512-acc7-ffe02d262c82
+project_manager_task=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 project_manager_fixed_model=gpt-5.6-sol
-project_manager_fixed_effort=max
+project_manager_fixed_effort=xhigh
 cross_task_send_requires_explicit_model_effort=true
 cross_task_routing=fixed_session_id_plus_fixed_model_effort
 cross_task_silent_model_effort_override=forbidden
