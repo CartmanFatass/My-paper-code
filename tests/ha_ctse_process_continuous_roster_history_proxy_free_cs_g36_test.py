@@ -4,6 +4,7 @@ import numpy as np
 import pytest
 
 from ha_ctse_process import continuous_roster_history_proxy_free_cs_g36 as g36
+from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 
 
 def test_donor_bank_is_source_valid_and_complete_for_registered_counts() -> None:
@@ -76,6 +77,48 @@ def test_actor_transform_does_not_read_poisoned_active_history_coordinates() -> 
     assert np.array_equal(transformed_first, transformed_second)
     assert np.isfinite(transformed_first).all()
     assert audit_first == audit_second
+
+
+def test_evaluator_never_copies_source_history_before_substitution(
+    monkeypatch,
+) -> None:
+    original = g36.apply_g36_actor_history_proxy_transform
+    calls = 0
+
+    def guarded_transform(observations, active_mask, bundles):
+        nonlocal calls
+        calls += 1
+        assert np.count_nonzero(observations[:, :, 6:10]) == 0
+        return original(observations, active_mask, bundles)
+
+    monkeypatch.setattr(
+        g36, "apply_g36_actor_history_proxy_transform", guarded_transform
+    )
+    model = g35.make_paired_models(6, initialization_seed=10_351_000)[g35.CS_ARM]
+    processes = g35.make_process_ledgers(
+        replicate=0, capacity=6, episode_count=1, formal=True
+    )
+    tape = g36.G36HistoryProxyTape(
+        g36.G36HistoryProxyDonorBank.build(),
+        replicate=0,
+        capacity=6,
+        formal=True,
+    )
+
+    episodes, audit = g36.evaluate_g36_history_proxy(
+        model,
+        processes=processes,
+        action_seed=g35.seed_block(0, formal=True)["evaluation_action"],
+        process_kind="random",
+        deterministic=True,
+        tape=tape,
+    )
+
+    assert calls == 48
+    assert len(episodes) == 1
+    assert audit["actual_age_read_count"] == 0
+    assert audit["actual_previous_action_read_count"] == 0
+    assert audit["actual_actor_time_read_count"] == 0
 
 
 def test_actor_transform_rejects_inactive_or_nonfinite_proxy_rows() -> None:

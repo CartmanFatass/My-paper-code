@@ -237,6 +237,29 @@ def apply_g36_actor_history_proxy_transform(
     }
 
 
+def build_g36_actor_input_without_history(
+    source_observations: Sequence[np.ndarray],
+    active_mask: np.ndarray,
+    bundles: np.ndarray,
+) -> tuple[np.ndarray, dict[str, int]]:
+    """Construct actor input while never materializing source coordinates 6:10."""
+    mask = np.asarray(active_mask, dtype=bool)
+    proxy = np.asarray(bundles, dtype=np.float32)
+    if not source_observations:
+        raise ValueError("G36 actor input source inventory mismatch")
+    public = np.stack(
+        [np.asarray(row[:, :6], dtype=np.float32) for row in source_observations]
+    )
+    if (
+        public.shape != (*mask.shape, 6)
+        or proxy.shape != (*mask.shape, BUNDLE_WIDTH)
+    ):
+        raise ValueError("G36 actor input public-prefix shape mismatch")
+    actor = np.zeros((*mask.shape, g32.OBSERVATION_DIM), dtype=np.float32)
+    actor[:, :, :6] = public
+    return apply_g36_actor_history_proxy_transform(actor, mask, proxy)
+
+
 def evaluate_g36_history_proxy(
     model: ContinuousRosterPolicy, *, processes: Sequence[g34.RandomProcessLedger], action_seed: int,
     process_kind: str, deterministic: bool, tape: G36HistoryProxyTape,
@@ -251,7 +274,7 @@ def evaluate_g36_history_proxy(
     envs = tuple(g34.RandomProcessRosterEnv(row) if process_kind == "random" else g32.RuntimeCapacityRosterEnv(row.base) for row in rows)
     noise = g32.make_action_noise((row.episode_id for row in rows), action_seed=action_seed, member_capacity=model.member_capacity)
     hidden = torch.zeros((len(rows), model.member_capacity, model.hidden_dim), device=device)
-    audit = {"actual_age_read_count": 0, "actual_previous_action_read_count": 0, "actual_actor_time_read_count": 0, "critic_transform_count": 0}
+    audit: dict[str, int] | None = None
     lifecycle_valid = True
     proxy_hashes = [hashlib.sha256() for _ in rows]
     action_noise_digest = hashlib.sha256(
@@ -263,14 +286,17 @@ def evaluate_g36_history_proxy(
             views = tuple(env.observe() for env in envs)
             g32._delete_terminal_hidden(hidden, views)
             active_mask = np.stack([view.active_mask for view in views])
-            observations = np.stack([view.observations for view in views])
             bundles = np.stack([tape.bundle_for(episode_id=row.episode_id, physical_call_position=time, active_mask=view.active_mask) for row, view in zip(rows, views)])
             for episode_index, bundle in enumerate(bundles):
                 proxy_hashes[episode_index].update(
                     np.ascontiguousarray(bundle[active_mask[episode_index]]).tobytes()
                 )
-            transformed, step_audit = apply_g36_actor_history_proxy_transform(observations, active_mask, bundles)
-            if step_audit != audit:
+            transformed, step_audit = build_g36_actor_input_without_history(
+                tuple(view.observations for view in views), active_mask, bundles
+            )
+            if audit is None:
+                audit = step_audit
+            elif step_audit != audit:
                 raise ValueError("G36 actor transform audit mismatch")
             active = torch.as_tensor(active_mask, device=device)
             arguments: dict[str, Any] = {
@@ -282,8 +308,11 @@ def evaluate_g36_history_proxy(
             lifecycle_valid &= bool(
                 torch.equal(output.next_hidden[~active], hidden[~active])
                 and torch.count_nonzero(output.next_hidden).item() == 0
-                and np.array_equal(
-                    transformed[:, :, :6], observations[:, :, :6]
+                and all(
+                    np.array_equal(
+                        transformed[index, :, :6], view.observations[:, :6]
+                    )
+                    for index, view in enumerate(views)
                 )
                 and not np.any(transformed[~active_mask])
             )
@@ -291,6 +320,8 @@ def evaluate_g36_history_proxy(
                 env.step(output.actions[index].detach().cpu().numpy())
             hidden = output.next_hidden
     metrics = tuple(g34._episode_metrics(row, env.outcome(), expected_roster_sizes=(row.expected_roster_sizes if process_kind == "random" else row.base.expected_roster_sizes)) for row, env in zip(rows, envs))
+    if audit is None:
+        raise ValueError("G36 actor transform audit was not exercised")
     return metrics, {
         **audit,
         "checkpoint_update_count": 0,

@@ -7,7 +7,7 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_HISTORY_PROXY_SUBSTITUTION_G36_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=pm_accepted_integrated_nonformal_preflight_complete
+implementation_status=alignment_mismatch_smallest_correction_accepted_pending_commit_and_new_preflight
 formal_compute_status=not_started
 training=none
 ```
@@ -92,6 +92,17 @@ The accepted implementation code is commit
 exercise completed operationally valid with 4,608 transitions, zero optimizer
 steps and a 1,847.869361-second formal projection. This is prelaunch evidence
 only and carries no scientific interpretation.
+
+The first code-science alignment audit returned `MISMATCH`: although the actor
+transform itself did not inspect active source coordinates 6:10, the evaluator
+had already materialized all ten coordinates with a full-width `np.stack`.
+The exact in-contract correction allocates a zero actor buffer, copies only each
+source observation's `:6` prefix, and then writes the donor bundle into active
+rows 6:10. Read counters now flow from that construction path. An end-to-end
+48-step evaluator test fails if protected source coordinates reach the
+pre-substitution actor buffer. The correction changes no scientific field,
+donor law, critic, checkpoint, source, action stream, inventory, estimand,
+threshold, confidence procedure or branch.
 
 ## Evidence and complexity inventory
 
