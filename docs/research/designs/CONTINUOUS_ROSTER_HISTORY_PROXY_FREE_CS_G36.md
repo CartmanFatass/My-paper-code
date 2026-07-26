@@ -7,8 +7,8 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_HISTORY_PROXY_SUBSTITUTION_G36_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=alignment_correction_recheck_ALIGNED_formal_ready
-formal_compute_status=not_started
+implementation_status=alignment_correction_recheck_ALIGNED_formal_complete
+formal_compute_status=complete_operational_valid_pending_external_pro_disposition
 training=none
 ```
 
@@ -116,6 +116,12 @@ repair commit `8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04`. The exact same-commit
 preflight, dedicated G36 formal token and standing CPU grant now satisfy the
 registered formal admission boundary. This acceptance changes no scientific
 interpretation and does not itself consume an iteration.
+
+The single authorized formal CPU execution then completed with 221,184 real
+transitions, zero optimizer steps and no operational errors. PM independently
+reproduced all artifact validation, 10,000 bootstrap calculations and the
+first-match branch `HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36`. Scientific
+interpretation and successor selection remain pending External Pro.
 
 ## Evidence and complexity inventory
 
