@@ -203,6 +203,25 @@ itself an estimate. `U*_{i,src}` needs the same discipline for the same reason.
   check — retained as a secondary temporal localization. The source itself sets
   those two clocks. For the main scenario `H` is frozen from its causal duty
   window *before* the audit runs.
+- **`H` is named per mechanism, not per source.** One source can carry more than
+  one renewal-creating mechanism, and each has its own causal duty window. The
+  toy's `30` and `5` are the *same* mechanism localized at two resolutions, which
+  is why a single `H` looked sufficient; two mechanisms are a different case and a
+  single `H` misprices whichever one it was not derived from. An audit must state
+  which mechanism its `H` serves and report the margin against the `B_H` measured
+  over that same `H`. Scenario 7 has two:
+
+  | Mechanism | Duty window | Derivation |
+  |---|---|---|
+  | Relay/role exchange | **~139 steps** | mean separation `0.5214 x 8000 = 4171 m` at max speed `30` per `1.0 s` step |
+  | Energy-driven roster change | **~400-500 steps** | charging `0.10 -> 0.80` is `112 Wh` at `1000 W` = `403 s`, plus transit |
+
+  An `H` set to the exchange window truncates the energy consequence before it can
+  occur, so renewal measures as worthless for a reason that is an artifact of the
+  horizon. That is distinct from — and can co-occur with — the energy mechanism
+  being **absent**, which is what stage `S1` does by disabling battery and
+  charging outright. Both produce a non-positive `B_H`; only the second is fixed
+  by changing stage.
 
 ### Continuation semantics — total policy-mediated effect
 
