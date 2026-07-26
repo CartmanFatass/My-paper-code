@@ -594,6 +594,11 @@ def main() -> None:
         "normalized": {"stable": norm_stable, "flex": norm_flex},
         "intervals": intervals,
         "intervals_note": ci_note,
+        # Per-episode returns, so variance and required-n can be recomputed from a
+        # finished run instead of re-running it. Added after the 4-episode CIs came
+        # back straddling zero: the episode budget turned out to be the binding
+        # constraint, and estimating it from summary means alone is not possible.
+        "per_episode": {a: [float(x) for x in v] for a, v in acc.items()},
         "thresholds": {"stable_ceiling": MARGIN_STABLE_CEIL,
                        "flex_floor": MARGIN_FLEX_FLOOR},
         "contract": "docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md",

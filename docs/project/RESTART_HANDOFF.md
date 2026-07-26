@@ -4,6 +4,24 @@ Updated: 2026-07-25. Branch `untied-k`. Everything is committed and pushed.
 
 Read `AGENTS.md`, then this file, then `docs/project/RESEARCH_GOAL.md`.
 
+## Paused on compute, 2026-07-26
+
+**Part B is blocked on episode budget, not on any decision.** The user ruled the
+local CPU insufficient and will run the deciding job elsewhere. The instrument is
+repaired and verified; what remains is arithmetic.
+
+Read **`docs/project/REMOTE_COMPUTE_HANDOFF.md`** — it carries the exact command,
+the read order, and why 64 episodes. Do not start a local H=1500 run; that is the
+job that was killed.
+
+At four episodes `B_H` is statistically indistinguishable from zero at both short
+horizons (`H=139`: −1.514, CI −3.76..+1.79; `H=450`: +10.149, CI −26.6..+46.9), so
+every normalized margin there is uninformative. Back-solved, `H=450` needs ~52
+episodes for `B_H` alone to exclude zero.
+
+No loop driver is attached: the user cancelled it and the session-only cron has
+expired.
+
 ## Next action, exactly
 
 **D7.S part B — re-run the horizon sweep on the repaired instrument, then one
