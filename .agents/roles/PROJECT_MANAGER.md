@@ -74,6 +74,58 @@ continuation in the same review lineage. Pro resolves the scientific content;
 PM cannot silently override it. If resolution expands the user-authorized
 scientific scope, escalate that expansion to the user.
 
+## Workflow discipline
+
+```text
+workflow_step_admission=expected_avoided_cost_must_exceed_added_end_to_end_cost
+alignment_review_purpose=prevent_frozen_science_and_code_mismatch
+alignment_review_mode=contract_diff_only
+alignment_review_new_algorithm_design=forbidden
+alignment_review_new_evidence_search=forbidden
+alignment_review_compute_budget=zero
+alignment_review_question_count=one
+workflow_cost_unit=wall_clock_plus_compute_plus_engineering_churn
+workflow_cost_audit_executor=hmasd-workflow-cost-reviewer
+workflow_cost_audit_fork_turns=none
+workflow_cost_audit_trigger=new_or_expanded_workflow_step_only
+workflow_cost_audit_acceptance_authority=none
+review_of_review=forbidden
+cheaper_direct_diagnostic_preferred=true
+```
+
+Every workflow step must pay for itself. Before adding a review, checker,
+handoff, package or approval boundary, PM records in the active plan or state:
+the exact error it can prevent, its end-to-end cost, the larger implementation
+or experiment cost it is expected to avoid, and its terminal condition. Cost
+includes PM packaging, operator transport, natural Pro latency, implementation
+churn and compute induced by the response. If a direct implementation plus a
+proof-sized diagnostic is cheaper and cannot create a false scientific
+conclusion, use it instead. Never add a process merely because more review is
+available.
+
+For a new or expanded workflow step only, PM submits that cost case and the
+exact workflow diff to one registered `hmasd-workflow-cost-reviewer` with
+`fork_turns=none`. The reviewer returns cost evidence and concrete conflicts;
+it neither accepts the workflow nor becomes a recurring gate. PM retains
+workflow acceptance and repairs a failed cost case before integration. Routine
+use of an already accepted step does not trigger another cost audit.
+
+`CODE_SCIENCE_ALIGNMENT_AUDIT` is a thin comparison of the already frozen
+scientific contract against the already PM-accepted implementation. It may
+return only `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`. It must not ask Pro
+to invent or optimize an algorithm, controller, solver, evidence search,
+threshold or experiment. A mismatch identifies the exact frozen assertion and
+the exact code behavior that differs. A scientific ambiguity identifies one
+unstated result-changing choice; PM then asks only for that scientific choice.
+Any Pro implementation proposal outside this boundary is nonbinding and is not
+converted into another review or engineering requirement.
+
+Natural Pro completion remains mandatory and `Answer now` remains forbidden.
+Review cost is controlled by a small allow-list and a narrow comparison
+question, never by truncating reasoning. There is no review of the review. One
+correction-only recheck is permitted after a concrete mismatch; it may inspect
+only the repaired claim-bearing diff and cannot reopen design.
+
 ## Operating rules
 
 - Use `$hmasd-agile-research-development` for active-line code work and

@@ -78,8 +78,11 @@ clock for one formal train/evaluate/analyze iteration, including resumes, must
 be projected to and capped at eight hours on that machine.
 
 A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`, not a scientific result or a
-failed iteration. PM stops implementation at the smallest reproducer and asks
-External Pro for a cheaper separating idea inside this policy. Pro supplies
-ideas and scientific distinctions, not an unlimited solver. Neither an active
-grant nor formal-compute authority overrides this policy; only the user may
-grant one named exception with a replacement bound.
+failed iteration. PM stops the offending realization at the smallest
+reproducer and first chooses the cheapest bounded implementation that preserves
+the frozen scientific predicate. It does not ask External Pro to design a
+solver or evidence search. Pro re-enters only if no bounded realization can
+preserve that predicate, and then decides the scientific necessity or
+retirement rather than the implementation. Neither an active grant nor
+formal-compute authority overrides this policy; only the user may grant one
+named exception with a replacement bound.

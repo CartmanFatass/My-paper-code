@@ -27,7 +27,8 @@ $expectedRoles = @(
     'PROJECT_MANAGER.md',
     'PRO_RESPONSE_MONITOR.md',
     'REVIEWER.md',
-    'VERIFIER.md') | Sort-Object
+    'VERIFIER.md',
+    'WORKFLOW_COST_REVIEWER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
 }
@@ -40,6 +41,7 @@ $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-ag
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
+$costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
 $reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
@@ -152,7 +154,19 @@ foreach ($required in @(
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
-    'alignment-objection right')) {
+    'alignment-objection right',
+    'workflow_step_admission=expected_avoided_cost_must_exceed_added_end_to_end_cost',
+    'alignment_review_mode=contract_diff_only',
+    'alignment_review_new_algorithm_design=forbidden',
+    'alignment_review_new_evidence_search=forbidden',
+    'alignment_review_compute_budget=zero',
+    'alignment_review_question_count=one',
+    'workflow_cost_unit=wall_clock_plus_compute_plus_engineering_churn',
+    'workflow_cost_audit_executor=hmasd-workflow-cost-reviewer',
+    'workflow_cost_audit_fork_turns=none',
+    'workflow_cost_audit_trigger=new_or_expanded_workflow_step_only',
+    'workflow_cost_audit_acceptance_authority=none',
+    'review_of_review=forbidden')) {
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -168,6 +182,16 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
         'NON_EXECUTABLE_EVIDENCE_DESIGN')) {
         if (-not $roleText.Contains($required)) { throw "Native code role missing complexity rule: $required" }
     }
+}
+foreach ($required in @(
+    'callable_agent_type=hmasd-workflow-cost-reviewer',
+    'model=gpt-5.6-sol',
+    'reasoning_effort=xhigh',
+    'fork_turns=none_required',
+    'workflow_acceptance_authority=none',
+    'COST_AUDIT_ACCEPT',
+    'COST_AUDIT_REJECT')) {
+    if (-not $costReviewerRole.Contains($required)) { throw "Cost Reviewer role missing: $required" }
 }
 foreach ($required in @(
     'role=external_review_operator',
@@ -212,6 +236,7 @@ foreach ($required in @(
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
+    'registered `hmasd-workflow-cost-reviewer` with `fork_turns=none`',
     'fresh-task profile smoke',
     'check_hmasd_agent_harness.py')) {
     if (-not $workflowAudit.Contains($required)) { throw "Workflow audit Skill missing: $required" }
@@ -221,7 +246,10 @@ foreach ($required in @(
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
-    'implementation counterexample')) {
+    'implementation counterexample',
+    'code_science_audit_mode=contract_diff_only',
+    'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
+    'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
     if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
 }
 foreach ($required in @(
@@ -236,7 +264,12 @@ foreach ($required in @(
     'code_acceptance_owner=project_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
-    'first-match branch reproduction')) {
+    'first-match branch reproduction',
+    'code_science_audit_mode=contract_diff_only',
+    'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
+    'new_algorithm_design_during_code_audit=forbidden',
+    'new_evidence_search_during_code_audit=forbidden',
+    'there is no review of the review')) {
     if (-not $assertion.Contains($required)) { throw "Assertion audit missing: $required" }
 }
 foreach ($required in @(

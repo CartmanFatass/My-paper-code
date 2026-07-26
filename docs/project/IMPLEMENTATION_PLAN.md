@@ -8,7 +8,7 @@ last_nonformal=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_PATH_EXER
 last_nonformal_result=NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE
 active_source=UAV_LOCALIZED_DEMAND_BURST_G33_P0_NOT_YET_ADMITTED
 source_gate=SOURCE_WITNESS_AND_STATIC_UPPER_BOUND_AUDIT
-active_implementation=G33_SOURCE_ENVIRONMENT_RETAINED_NESTED_CONTROL_NONEXECUTABLE
+active_implementation=G33_SOURCE_ENVIRONMENT_RETAINED_PM_BOUNDED_EVIDENCE_REALIZATION_NEXT
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
@@ -17,7 +17,7 @@ iterations_remaining=13
 formal_compute=FORBIDDEN_FOR_CURRENT_G33_NESTED_SEARCH_CONTRACT
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=G33_BOUNDED_CONTROL_IMPLEMENTATION_ALIGNMENT
+next_boundary=G33_PM_BOUNDED_EVIDENCE_REALIZATION
 ```
 
 ## Current G33 transition
@@ -53,12 +53,15 @@ control or formal sample grid. This is `NON_EXECUTABLE_EVIDENCE_DESIGN`, not a
 G33 scientific result, and consumes zero iterations.
 
 Do not implement, optimize in C++, exercise or formally run that nested search.
-Preserve the exact Pro raw, retain only reusable bounded source/scorer work, and
-request the smallest scientifically separating G33 control satisfying
-`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`: `O(H*K_search)`, fixed
-`K_search<=16`, at most `16*H` hypothetical transitions, no nested replanning,
-20-minute nonformal and eight-hour formal caps. A fixed-small-N exact
-`O(N^2)` communication simulator may remain a reference; a scalable
+Preserve the exact Pro raw and its claim-level predicates, but treat the search
+procedure as rejected implementation detail. PM now owns the smallest bounded
+constructive witness satisfying `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`:
+`O(H*K_search)`, fixed `K_search<=16`, at most `16*H` hypothetical transitions,
+no nested replanning, and the 20-minute/eight-hour caps. Failure of a bounded
+witness establishes only insufficient access evidence; it does not reject the
+scientific idea. The post-implementation Pro audit compares code to the frozen
+predicates and may not design another controller or search. A fixed-small-N
+exact `O(N^2)` communication simulator may remain a reference; a scalable
 dynamic-agent algorithm must instead target `O(N*k_neighbor)` or `O(N*logN)`.
 
 ## Current transition

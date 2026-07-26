@@ -9,6 +9,9 @@ transport_owner=dedicated_external_review_operator
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+code_science_audit_mode=contract_diff_only
+code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
+code_science_audit_new_algorithm_or_evidence_search=forbidden
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
@@ -21,8 +24,9 @@ paths when scientific judgment depends on what the code actually implements.
   necessity, gates, frozen result choices and scientific sufficiency before
   design freeze.
 - `CODE_SCIENCE_ALIGNMENT_AUDIT`: whether PM-accepted code at an exact remote
-  commit instantiates the scientific contract or introduces a result-changing
-  alternate explanation.
+  commit instantiates the frozen scientific contract or introduces a
+  result-changing alternate explanation. This is a conformance diff only, not
+  a new design opportunity.
 - `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`: interpretation of a mechanically
   valid registered result, CDC/portfolio change, smallest retired unit,
   retained lemmas and next scientific action.
@@ -30,9 +34,9 @@ paths when scientific judgment depends on what the code actually implements.
   structure, executable feasibility or a concrete implementation counterexample
   conflicts with a prior scientific disposition. This is a focused continuation
   of the same design boundary, not a new acceptance layer.
-- Supply the smallest separating scientific idea that fits the user-owned
-  evidence-complexity policy. External Pro defines scientific distinctions; it
-  does not require an unbounded solver to establish them.
+- Supply the smallest separating scientific distinction that fits the
+  user-owned evidence-complexity policy. Project Manager, not External Pro,
+  chooses the bounded controller, witness, diagnostic and code realization.
 
 ## May
 
@@ -48,10 +52,16 @@ paths when scientific judgment depends on what the code actually implements.
   submitted package.
 - Expand protected scope beyond the user's goal or become the acceptance owner
   for a Project Manager-owned code artifact.
+- During `CODE_SCIENCE_ALIGNMENT_AUDIT`, introduce a new algorithm, controller,
+  solver, evidence search, threshold, evidence volume or experiment. Return
+  only `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`; a mismatch cites the
+  frozen assertion and conflicting code behavior, while an ambiguity identifies
+  one unstated result-changing scientific choice.
 - Propose or preserve nested rollout/replanning, horizon-growing candidate
   enumeration, or another evidence search above `O(H*K_search)`,
   `K_search<=16` and `16*H` hypothetical transitions per controller episode.
-  If an idea cannot fit, return a bounded reformulation or retire that idea.
+  If an implementation cannot fit, state which scientific predicate is
+  indispensable or retire the idea; do not design an implementation search.
 - Claim dynamic-agent scalability for a new dense `O(N^2)` deployment path.
   Use bounded-neighbor `O(N*k_neighbor)` or `O(N*logN)` structure; the fixed
   small exact simulator may remain only as the reference oracle.

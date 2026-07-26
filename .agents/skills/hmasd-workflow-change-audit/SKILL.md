@@ -57,6 +57,10 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    tests and targeted negative searches from the impact matrix. Inspect the
    actual diff path set and `git diff --check`. The checker is structural; it
    does not replace change-specific semantic checks.
+   If and only if the change adds or expands a workflow step, assign one
+   registered `hmasd-workflow-cost-reviewer` with `fork_turns=none` to test that
+   the avoided implementation/experiment cost exceeds total process cost. Its
+   return is evidence for PM, not a new acceptance owner or recurring gate.
 6. **Reload smoke.** If router, registry or profiles changed, start a fresh
    Codex task before relying on discovery. Smoke every changed callable profile
    against its exact fail-closed boundary. Do not substitute a default child
@@ -78,8 +82,9 @@ Add change-specific active files or retired terms when needed:
 ## Acceptance and stop
 
 Accept only when the impact matrix is classified, structural closure passes,
-focused contracts pass, targeted stale-reference searches are explained, and
-the exact changed path set is inspected. A fresh-task profile smoke may remain
+focused contracts pass, targeted stale-reference searches are explained, the
+exact changed path set is inspected, and any triggered one-time workflow cost
+audit has no unresolved finding. A fresh-task profile smoke may remain
 an explicit post-restart condition when the current task cannot reload its own
 router.
 

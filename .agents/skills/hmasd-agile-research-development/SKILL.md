@@ -59,7 +59,9 @@ A user-named one may be inspected only as reference.
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
    changed claim-bearing code, PM pushes the accepted implementation and routes
-   the exact commit to Pro's `CODE_SCIENCE_ALIGNMENT_AUDIT` before formal run.
+   the exact commit to Pro's comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT`
+   before formal run. That audit may identify a concrete contract mismatch but
+   cannot design an algorithm, controller, solver or new evidence search.
 
 On failure, reproduce once, locate the first violated invariant, add a regression
 only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
@@ -73,8 +75,11 @@ episode. Nested remaining-horizon rollout at every real step, recursive rollout
 inside a candidate rollout, tree/beam/MCTS search and horizon-growing candidate
 sets are forbidden regardless of C++ speed or parallel hardware. A nonformal
 exercise is capped at 20 minutes and a formal iteration at eight cumulative
-hours. Exceeding the bound returns `NON_EXECUTABLE_EVIDENCE_DESIGN` to Pro for a
-cheaper discriminator and consumes no conclusion-bearing iteration.
+hours. Exceeding the bound returns `NON_EXECUTABLE_EVIDENCE_DESIGN` to PM, which
+first chooses a cheaper technical realization of the same frozen scientific
+predicate. Pro is asked only when the predicate itself cannot survive the
+bound, and is never asked to design a solver. No conclusion-bearing iteration
+is consumed.
 
 Do not confuse evidence-search complexity with simulator physics. C++ and
 batching remain preferred for a valid fixed-small-N exact reference. A
@@ -100,7 +105,8 @@ code inside that bounded change.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
 - Subtasks close on evidence plus one fresh PM code check. The required Pro
-  code-science audit owns scientific alignment, not code acceptance. Additional
+  code-science audit is a contract diff and owns scientific alignment, not code
+  acceptance or implementation design. Additional
   code review is allowed only after a failed check or concrete engineering
   anomaly; it diagnoses repair and is not another approval layer.
 

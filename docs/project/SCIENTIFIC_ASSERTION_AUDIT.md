@@ -9,6 +9,10 @@ audit_model=two_stage_triggered
 review_stack=false
 backward_compatibility=false
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+code_science_audit_mode=contract_diff_only
+code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
+new_algorithm_design_during_code_audit=forbidden
+new_evidence_search_during_code_audit=forbidden
 ```
 
 This workflow protects conclusions, not engineering completeness. External Pro
@@ -16,6 +20,13 @@ owns scientific decisions; Project Manager owns code decisions. The two stages
 inspect different objects and do not duplicate acceptance: Pro accepts the
 scientific contract and its code-science correspondence, while PM accepts
 implementation correctness and operability.
+
+Each stage must pass the PM workflow value test: name the false scientific
+assertion it can prevent and confirm that its complete packaging, waiting,
+repair and compute cost is smaller than the implementation or experiment waste
+it avoids. When a direct proof-sized diagnostic is cheaper and preserves the
+same scientific safety, use the diagnostic. Review availability is not itself
+a reason to add a review.
 
 ## When it triggers
 
@@ -65,7 +76,9 @@ Project Manager first tries to falsify the draft without training:
 Then Project Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
 the draft design, current scientific principles, relevant evidence and exact
 repository paths. Ask Pro to seek counterexamples and missing decisions, not to
-confirm the plan, and require the smallest discriminator inside
+confirm the plan. Pro freezes the scientific distinction and required
+properties; PM owns the cheapest bounded controller, witness, diagnostic and
+other implementation realization inside
 `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. PM archives the raw answer and
 implements its exact scientific disposition. PM may ask a focused clarification
 or report a code-side
@@ -78,7 +91,8 @@ If the Pro disposition is ambiguous in code, structurally unreachable,
 internally inconsistent with the named implementation surface, or contradicted
 by a concrete code-level counterexample, PM sends one
 `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` in the same review lineage. State the
-exact objection and smallest executable option set; do not select a scientific
+exact objection and the one scientific invariant that needs clarification; do
+not ask Pro to design a solver or evidence search and do not select a scientific
 option locally. Pro clarifies or corrects the scientific disposition. A real
 scope expansion returns to the user.
 
@@ -99,11 +113,21 @@ After PM implementation acceptance:
    test/probe could pass through the wrong mechanism, and whether an alternate
    implementation explanation could change the registered conclusion.
 
+This is a read-only conformance diff, not another design stage. Pro returns
+exactly one of `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`. `MISMATCH` must
+name the exact frozen assertion and exact conflicting code path or behavior.
+`SCIENTIFIC_AMBIGUITY` must name one previously unstated result-changing choice.
+Neither output may introduce an algorithm, controller, solver, search,
+threshold, evidence volume or experiment that was absent from the frozen
+contract.
+
 Do not ask for style, architecture taste, broad refactoring, coverage,
 compatibility or generic bug hunting. PM remains the code acceptance owner;
 Pro owns only whether that accepted code is scientifically aligned. PM executes
-the exact repair implied by the Pro disposition and reruns the smallest affected
-evidence. An unchanged reviewed commit is never resubmitted.
+the smallest repair implied by an in-scope mismatch and reruns the smallest
+affected evidence. At most one correction-only recheck may inspect the repaired
+claim-bearing diff; it cannot reopen design. An unchanged reviewed commit is
+never resubmitted and there is no review of the review.
 
 ## Result intake
 
