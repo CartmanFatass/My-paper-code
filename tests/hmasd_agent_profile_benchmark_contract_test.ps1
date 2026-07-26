@@ -14,7 +14,7 @@ $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 
 foreach ($required in @(
-    'model = "gpt-5.6-terra"',
+    'model = "gpt-5.6-sol"',
     'model_reasoning_effort = "high"',
     'Use only the assignment-named runtime')) {
     if (-not $implementer.Contains($required)) {
@@ -125,7 +125,7 @@ if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
 $catalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'
 $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
 foreach ($selected in @(
-    @{ Model='gpt-5.6-terra'; Effort='high' },
+    @{ Model='gpt-5.6-sol'; Effort='high' },
     @{ Model='gpt-5.6-luna'; Effort='max' })) {
     $model = @($catalog.models | Where-Object { $_.slug -eq $selected.Model })
     if ($model.Count -ne 1) { throw "Missing model catalog entry: $($selected.Model)" }
