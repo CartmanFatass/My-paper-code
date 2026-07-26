@@ -221,6 +221,23 @@ def _donor_bank_digest(bank: g36.G36HistoryProxyDonorBank) -> str:
     return digest.hexdigest()
 
 
+def _expected_action_noise_digest(
+    *, replicate: int, capacity: int, episode_count: int
+) -> str:
+    processes = g35.make_process_ledgers(
+        replicate=replicate,
+        capacity=capacity,
+        episode_count=episode_count,
+        formal=True,
+    )
+    noise = g32.make_action_noise(
+        (row.episode_id for row in processes),
+        action_seed=g35.seed_block(replicate, formal=True)["evaluation_action"],
+        member_capacity=capacity,
+    )
+    return hashlib.sha256(np.ascontiguousarray(noise).tobytes()).hexdigest()
+
+
 def _g36_reference(
     g36_root: Path, g35_root: Path
 ) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -948,8 +965,19 @@ def _evaluation_errors(
                     raise ValueError("G37 trace evidence mismatch")
                 traces.append(trace["roster_size_trace"])
             joint = joint_cells[(key[0], key[1], JOINT_CELL[key[2]])]
-            if action_digest != joint["audit"]["action_noise_digest"]:
+            expected_action_digest = _expected_action_noise_digest(
+                replicate=key[0],
+                capacity=key[1],
+                episode_count=int(configuration["evaluation_episodes_per_cell"]),
+            )
+            if action_digest != expected_action_digest:
                 raise ValueError("G37 G36 action-noise pairing mismatch")
+            if (
+                int(configuration["evaluation_episodes_per_cell"])
+                == FORMAL_EPISODES
+                and action_digest != joint["audit"]["action_noise_digest"]
+            ):
+                raise ValueError("G37 formal G36 action-noise digest mismatch")
             proxy_digests[key] = tuple(str(value) for value in episode_proxy)
             action_digests[key] = str(action_digest)
             roster_traces[key] = tuple(traces)

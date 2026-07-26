@@ -7,7 +7,7 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_FACTORIZED_HISTORY_PROXY_COHERENCE_G37_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=pm_candidate_accepted_after_6_focused_and_17_G36_G37_tests_nonformal_pending
+implementation_status=action_noise_subset_validation_repair_accepted_after_7_focused_and_18_G36_G37_tests_nonformal_rerun_pending
 formal_compute_status=not_authorized_before_alignment_and_same_commit_preflight
 training=none
 ```
@@ -98,3 +98,12 @@ critical-point index are pushed before the single read-only
 `CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_CODE_SCIENCE_ALIGNMENT_AUDIT`.
 Formal execution remains blocked until that audit returns `ALIGNED` and the
 same-commit preflight validates under the dedicated G37 token.
+
+The first nonformal dispatch terminated before source reading because its
+executed command omitted the source-commit value; it produced no artifacts or
+transitions. The corrected dispatch evaluated all 4,608 transitions but the
+analyzer rejected all cells because validation compared an eight-episode
+nonformal action-noise digest with the complete 128-episode G36 digest. The
+repair recomputes the exact G35 action stream for the current episode subset and
+retains the complete stored-digest equality for formal 128-episode cells. This
+changes no action tensor, pairing unit, factorization law, source or threshold.
