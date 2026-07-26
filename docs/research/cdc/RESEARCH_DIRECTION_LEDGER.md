@@ -30,7 +30,7 @@
 | 动态成员直接循环策略 | `SUPPORTED_RETAINED` | G8 的 prefix-normalized direct recurrent policy 在已登记离散 toy family 中，经 G9--G16 覆盖高频 churn、N=12--40 组合、slot layout、N=80、随机 roster process、原子替换、count shock 与 fresh-seed mixture。 | 不能推出任意 N、任意过程律、异步技能生命周期、内在奖励优势或 UAV 可用性。 | [G16 最终链裁决](EVIDENCE_NOTES/20260723_DYNAMIC_ROSTER_CHAIN_FINAL_DISPOSITION.md)；[命题账本](CONJECTURES.md) |
 | 连续动态 roster 的即时服务控制 | `SUPPORTED_RETAINED` | G17 支持在已登记 continuous-service toy family 中，成员生命周期状态、active-set 聚合与直接 demand path 可形成可用控制器。 | 不能推出长延迟信用、真实 UAV 物理运输或任意随机 horizon。 | [G17 正式结果](EVIDENCE_NOTES/20260724_CONTINUOUS_SERVICE_ROSTER_G17_FORMAL_RESULT.md) |
 | realized-return-to-go 的延迟信用修正 | `SUPPORTED_RETAINED` | G31 在配对 G17/G18 toy family 与 fresh seeds 上同时保留即时任务并通过延迟 spike、rotation 和稳定性门槛。 | 不能单独推出 UAV transport、普适信用分配或对其他 source family 的优势。 | [G31 正式结果](EVIDENCE_NOTES/20260724_RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_RESULT.md) |
-| 连续动态 roster 的跨配置容量复用 | `SUPPORTED_RETAINED` | G31/G32 在已登记 48-step continuous-service toy family 中形成可用测试版：同一 capacity-8 训练 checkpoint 可无适配 strict-load 到配置容量 6/8/12，并保留 episode 内 leave/rejoin/fresh-join/terminal-leave；cap8/cap12 公共 active 过程精确 padding-invariant。容量须在 trajectory 前选定。 | 不能推出 trajectory 中 live tensor-width rebinding、任意容量/过程律/UAV transport、技能生命周期、内在奖励增益、比较优势或 G31 credit 的独立必要性。 | [G32 正式结果](EVIDENCE_NOTES/20260725_RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_RESULT.md)；[第 24 轮报告](../../report/ITERATION_24.md) |
+| 连续动态 roster 的跨配置容量与有界随机过程复用 | `SUPPORTED_RETAINED` | G31/G32/G34 在已登记 48-step continuous-service toy family 中形成可用测试版：同一 capacity-8 训练 checkpoint 可无适配 strict-load 到配置容量 6/8/12，并在固定 G32 process 与 G34-P0 的四事件随机时间/顺序 process 上保持高 utility、event-window、segment、stochastic 与 learned-gain 表现。容量须在 trajectory 前选定。 | 不能推出 live tensor-width rebinding、capacity 6/8/12 外的规模、任意/重复 membership process、随机 horizon、time-free robustness、UAV transport、技能生命周期、内在奖励增益、比较优势、recurrence 或 G31 credit 的独立必要性。 | [G32 正式结果](EVIDENCE_NOTES/20260725_RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_RESULT.md)；[G34 正式结果](EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_FORMAL_RESULT.md)；[第 25 轮报告](../../report/ITERATION_25.md) |
 | 普通/团队循环状态作为强对照 | `SUPPORTED_RETAINED` | 普通 recurrence 解决精确 G1 cue source；TEAM_REC 解决精确 G2 global-bit handoff，是后续机制主张必须保留的较简单解释。 | 不能推出显式 event-held mechanism 永远无用，也不能替代 variable-cardinality 机制检验。 | [G2 正式结果](EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md)；[反例账本](LEMMA_COUNTEREXAMPLE_LEDGER.md) |
 
 ## 已失败并关闭的精确方向
@@ -54,10 +54,11 @@
 
 | 方向 | 状态 | 当前最小问题 | 为什么仍未验证 |
 |---|---|---|---|
-| G31/G32 向可识别 UAV source 的 transport | `OPEN_UNTESTED` | 在物理可行、目标行为 load-bearing 且 source-identifiable 的 UAV source 上，已支持的 continuous-roster representation 与 realized-future-tail credit 是否保持可用。 | UAV temporary-loss G1 与 charge-rotation G2 均在 learned training 前因 source 不可识别关闭；尚无可判别的 UAV transport 结果。 |
-| N>80、任意 membership process law 与任意随机 horizon | `OPEN_UNTESTED` | 已支持表示的外推边界在哪里。 | 当前正式证据的最大登记范围是 N=80 和指定 process mixture。 |
+| G31/G32/G34 向非 G33、可识别 UAV source 的 transport | `OPEN_UNTESTED` | 在物理可行、目标行为 load-bearing 且 source-identifiable 的非 G33 UAV source 上，已支持的 continuous-roster representation、bounded-process transport 与 realized-future-tail checkpoint 是否保持可用。 | UAV temporary-loss G1 与 charge-rotation G2 均在 learned training 前因 source 不可识别关闭；G33 由用户直接放弃且禁止复活；尚无可判别的 UAV transport 结果。 |
+| 超出已登记边界的 active count、membership process 与 horizon | `OPEN_UNTESTED` | 已支持表示在 N>80、configured capacity 6/8/12 之外、重复 leave/rejoin、不同 event count/type、任意过程律与 horizon≠48 时的边界。 | G34 只覆盖一个 each-of-L/R/J/T、三种顺序、五步最小间隔和 H=48 的有界 process family。 |
 | 异步技能生命周期 | `OUT_OF_SCOPE_FROZEN` | runtime-variable team membership 与 variable individual skill lifetime 的组合效应。 | 当前主链主动冻结 skill-cycle 维度，先建立动态 agent 数量下可用算法。 |
 | 环境无关 intrinsic reward 的增益与比较优势 | `OUT_OF_SCOPE_FROZEN` | 在可识别 source 与强 recurrence comparator 下是否提供稳定额外价值。 | 当前主链目标是先得到可用算法，不以建立优势为准入条件。 |
+| UAV localized-demand-burst G33 及其 full-ledger/static-preposition 衍生线 | `OUT_OF_SCOPE_FROZEN` | 用户直接放弃并禁止重命名或复活该 lineage。 | 这是范围决定，不是 source 或算法的科学失败；不得由后续 G34 结果改写。 |
 | S7/S1 类突增通信、充电轮换、临时脱队/失灵的完整鲁棒性 | `OPEN_UNTESTED` | 在物理可行且可学习的 UAV source 中验证服务 roster 变化与算法 transport。 | 已有两项 UAV source 未通过 source-identifiability；heavy UAV 只用于 toy-supported candidate promotion。 |
 
 ## 科研路线的最小纵向摘要
@@ -74,10 +75,11 @@
 4. UAV G1/G2 说明先验证 source 比直接重型训练更重要：两轮都没有形成
    算法证据，因此主线回到 toy，而不是把基准失败归因于算法。
 5. G32 正式支持同一 capacity-8 训练 checkpoint 在配置容量 6/8/12 间
-   strict-load 复用，并与 G31 合并形成已登记 toy family 中可用的 continuous
-   dynamic-roster 测试版。trajectory 内 live width rebinding 属于当前主张之外
-   的代码 packing/state-migration 覆盖，不升级为科研方向；下一科研边界是
-   先冻结一个可识别的 UAV localized-demand-burst source。
+   strict-load 复用；G34 进一步以零训练证明该 checkpoint 从固定
+   12/24/36 process 迁移到已登记四事件随机时间/顺序 family。固定日程依赖
+   在该 P0 范围内关闭，但 true-time rotation 为 LOAD_BEARING，reactive
+   ablation 为 UNDERPOWERED，因此 recurrence 与 G31 credit 的必要性仍未
+   识别。下一科研边界是 matched current-state reduction 的 G35 design audit。
 
 ## 每轮更新协议
 

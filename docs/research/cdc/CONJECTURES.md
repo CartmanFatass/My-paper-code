@@ -80,44 +80,60 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained as a usable configured-capacity continuous
-  dynamic-roster algorithm test version for the registered 48-step capacity
-  6/8/12 toy family. A finite runtime packing capacity is selected before each
-  trajectory.
-- Claim: a G31 realized-future-tail and direction-balanced recurrent policy whose
-  learned parameter shapes exclude maximum capacity can use one
+- Status: supported and retained as a usable configured-capacity,
+  bounded-random-process continuous dynamic-roster algorithm test version for
+  the registered 48-step capacity-6/8/12 toy family. A finite packing capacity
+  is selected before each trajectory.
+- Claim: a G31 realized-future-tail and direction-balanced recurrent policy
+  whose learned parameter shapes exclude maximum capacity can use one
   capacity-8-trained checkpoint at configured capacities 6, 8 and 12 while
   retaining within-episode temporary leave, rejoin, fresh join and terminal
-  leave.
+  leave across both the fixed G32 process and the bounded held-out G34-P0
+  random-process family.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
   spike-allocation, rotation, gain and fresh-seed stability gates.
 - Formal configured-capacity evidence: G32 strict-loads the same final
   capacity-8 checkpoints at capacities 6, 8 and 12 with zero evaluation
-  optimizer steps. Utility LCBs are 0.95025, 0.93757 and 0.94832; held-out gain
-  LCB is 0.36581, the minimum held-out replicate is 0.94284 and held-out
+  optimizer steps. Utility LCBs are 0.95025, 0.93757 and 0.94832; the held-out
+  gain LCB is 0.36581, the minimum held-out replicate is 0.94284 and held-out
   stochastic mean is 0.87591.
+- Formal bounded-process evidence: G34 evaluates those exact checkpoints with
+  zero optimizer steps on one each of L/R/J/T, random event times in steps
+  5--43, minimum five-step separation, no event at a four-step demand boundary,
+  and orders LRJT/LJRT/JLRT. Capacity-6/8/12 deterministic utility LCBs are
+  0.94248/0.94938/0.94379; minimum event-window and process-segment LCBs are
+  0.91131 and 0.91275; the worst random-minus-fixed LCB is -0.00507 against the
+  -0.05 noninferiority margin; learned-gain LCB is 0.34837; pooled stochastic
+  LCB is 0.88315.
 - Exact padding lemma: under the registered cap8/cap12 common-active process,
   observations, values, deterministic actions, rewards, hidden state and
   lifecycle transitions are exactly equal and added inactive rows remain zero.
-- Retired alternative: within the registered family, usable deployment at a new
-  configured capacity does not require capacity-shaped learned parameters,
-  retraining, checkpoint adapters, tensor slicing or key remapping.
-- Scope: configured packing capacity remains fixed within each trajectory and
-  belongs to the registered 6/8/12 family. Runtime metadata may change between
-  environment instances without changing the learned state dictionary.
-- Strongest scientific counterexample: a capacity change that also changes the
-  distribution of real active members, process law, horizon or allocation
-  difficulty outside the registered family may still break the policy.
+- Retired alternatives: within the registered family, usable deployment at a
+  new configured capacity does not require capacity-shaped learned parameters,
+  retraining, checkpoint adapters, tensor slicing or key remapping; and usable
+  behavior does not require the exact fixed 12/24/36 schedule or atomic R+J
+  event of G32.
+- Scope: horizon is 48; configured capacity is fixed within a trajectory and is
+  one of 6/8/12; G34 covers exactly one each of L/R/J/T, the registered cohort
+  magnitudes and three registered legal event orders. It is not an arbitrary
+  process-law result.
+- Strongest simpler explanation: current load and target mix directly determine
+  the required action, and the exact checkpoint also depends materially on the
+  correct absolute-time coordinate. Bounded process transport may therefore be
+  largely reactive rather than recurrence- or delayed-credit-dependent.
+- Diagnostic boundary: G34 time rotation is LOAD_BEARING for the exact
+  checkpoint, while the reactive ablation is UNDERPOWERED. Neither diagnostic
+  selects recurrence or G31-credit necessity.
 - Code-only boundary: live in-trajectory tensor-width rebinding is unimplemented,
   but under the current claim it is a packing/state-migration coverage gap rather
   than an unresolved learning mechanism. It becomes scientific only if a future
   scope requires no pre-trajectory capacity bound.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
-  non-identifiable. They neither confirm nor reject G31/G32 transport.
-- Exclusions: arbitrary capacity, arbitrary process laws, UAV usability,
-  asynchronous skill lifetime, intrinsic-reward advantage, comparative
-  superiority and causal necessity of the inherited credit mechanism remain
-  unsupported.
+  non-identifiable. G33 and its derivatives are abandoned by user instruction.
+- Exclusions: arbitrary capacity, arbitrary or repeated membership processes,
+  random horizon, time-free robustness, UAV usability, asynchronous skill
+  lifetime, intrinsic-reward advantage, comparative superiority and causal
+  necessity of either recurrence or G31 credit remain unsupported.
 
 ## C-EHC — Event-held temporal state
 
@@ -161,6 +177,12 @@ the Project Manager-accepted CDC state.
   terminal handoff, but team recurrence carries one global bit exactly. Future
   evidence must target structured variable-cardinality factorization and
   held-out transport, not claim finite-network representational impossibility.
+- Continuous-roster update: G34 does not select recurrence necessity. The
+  zero-history reactive ablation is UNDERPOWERED, while rotation of the true
+  time coordinate is LOAD_BEARING for the exact checkpoint. A freshly trained,
+  information-, capacity-, credit- and exposure-matched current-state
+  feedforward null is required to distinguish learned recurrent-state value
+  from direct current-state mapping.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -197,6 +219,11 @@ the Project Manager-accepted CDC state.
   confirms this across fresh seeds: every G17 and G18 gate passes, including
   spike utility LCB `0.95969`. The remaining discriminator is UAV transport,
   not another paired-toy seed or threshold change.
+- G34 update: a checkpoint trained with G31 credit transports to the bounded
+  G34-P0 process family, but G34 performs zero optimization and contains no
+  matched credit comparator. It therefore adds checkpoint-usability evidence,
+  not causal evidence that realized-future-tail credit is necessary. C-CREDIT
+  remains supported only inside the registered G17/G18 paired toy family.
 
 ## C-BENCH — The benchmark is not identifying
 

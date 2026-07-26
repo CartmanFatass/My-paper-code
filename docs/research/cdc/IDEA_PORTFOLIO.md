@@ -7,12 +7,12 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | supported retained: usable configured-capacity continuous-roster test version | Formal G31 passes the paired immediate/delayed toy contract. Formal G32 adds one-checkpoint strict-loadable capacity-6/8/12 transport, positive held-out gain, exact common-active padding invariance and zero evaluation optimizer steps. The supported claim fixes packing capacity before each trajectory. | The next scientific action is the source-identifiable UAV burst design assertion audit. Arbitrary capacities and process laws remain open. Live in-trajectory width rebinding is code coverage under the current claim and becomes scientific only if future scope removes the pre-trajectory capacity bound. |
+| C-CONTINUOUS-ROSTER | supported retained: usable configured-capacity bounded-random-process continuous-roster test version | Formal G31 closes the paired immediate/delayed toy contract; G32 adds strict-loadable capacity-6/8/12 transport and exact padding invariance; G34 adds zero-shot transport to the registered random four-event process with strong utility, event-window, segment, gain and stochastic gates. | Next action: a matched reactive/current-state reduction design audit. Arbitrary processes, horizons, time-free robustness, UAV transport and causal necessity of recurrence or G31 credit remain open. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
-| C-REC | selected for exact G1 and G2 | Per-member recurrence solves G1; persistent TEAM_REC exactly solves the G2 global-bit handoff and yields `G_team=0`. | Retain TEAM_REC as the strongest comparator for any learned roster claim. |
+| C-REC | selected for exact G1/G2; unresolved for the G34 continuous-roster source | G34 primary transport passes, but its reactive ablation is UNDERPOWERED and cannot establish either current-state sufficiency or recurrent-state necessity. | Compare freshly trained recurrent and current-state/feedforward policies under identical information, G31 credit, capacity, interactions and optimizer exposure. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | supported on paired toys; UAV unresolved | Formal G31 passes every frozen G17/G18 gate; UAV G1 and G2 cannot test it because both sources stop before training. | Continue toy mechanism separation; promote only after an independently feasible UAV source exists. |
+| C-CREDIT | supported on paired toys; necessity unresolved outside them | Formal G31 establishes usability on G17/G18. G34 transports a G31-trained checkpoint with zero additional optimization, so it supplies no matched evidence that the credit rule is causally necessary for process transport. | Reactivate only through a representation-fixed, information- and exposure-matched credit-only comparison; do not infer necessity from G34. |
 | C-BENCH | source-family dependent | Useful-effect G3/G4 is identified. UAV G1 has infeasible and negative-advantage control evidence; UAV G2 is load-bearing but its constructive control remains absolutely infeasible. | Close exact G1/G2; retain source-first pruning for every later UAV source. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_ITERATION_24
-source_family=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32
-formal_disposition=USABLE_RUNTIME_CAPACITY_G32
-scientific_disposition=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_CONTINUOUS_ROSTER_G32
-next_action=UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT
+completed_action=CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_FORMAL_ITERATION_25
+source_family=CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_P0
+formal_disposition=SUPPORTED_BOUNDED_RANDOM_PROCESS_TRANSPORT_G34
+scientific_disposition=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CONTINUOUS_ROSTER_G34
+next_action=CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_DESIGN_ASSERTION_AUDIT
 authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=24
-iterations_remaining=13
+conclusion_bearing_iterations_consumed=25
+iterations_remaining=12
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -69,12 +69,12 @@ G31 UAV transport therefore remains unresolved. The active boundary returns to
 toy-first discovery and isolates same-checkpoint transport across configured
 maximum capacities from the already-proved within-capacity active-count changes.
 Formal G32 supports one capacity-8-trained checkpoint at configured capacities
-6, 8 and 12 with exact common-active padding invariance and no evaluation
-optimizer steps. Together G31/G32 form a usable continuous dynamic-roster toy
-test version inside that registered family, with a finite packing capacity fixed
-before each trajectory. Live in-trajectory width rebinding remains code-side
-packing/state migration unless future protected scope removes that bound. The
-next scientific action is the External-Pro-selected
-`UAV_LOCALIZED_DEMAND_BURST_G33_DESIGN_ASSERTION_AUDIT`; it freezes a
-source-identifiable constant-roster UAV access test before any implementation
-or learned compute.
+6, 8 and 12 with exact common-active padding invariance and zero evaluation
+optimizer steps. After the user abandoned G33 without a scientific result,
+formal G34 froze the G32 checkpoints and established zero-shot transport from
+the fixed 12/24/36 process to the registered four-event random-process family.
+G34 retires dependence on that exact fixed schedule inside P0, but its
+time-rotation diagnostic is LOAD_BEARING and its reactive ablation is
+UNDERPOWERED. It therefore does not establish recurrence or G31-credit
+necessity. The next scientific action is
+`CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_DESIGN_ASSERTION_AUDIT`.

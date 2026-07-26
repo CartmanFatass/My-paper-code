@@ -61,9 +61,53 @@ capacity-8 的 time-rotation 注释为 `LOAD_BEARING`；reactive-ablation 注释
 `UNDERPOWERED`。按冻结契约，它们不能挽救或推翻主要分支。PM 不据此自行判断
 recurrence 或绝对时间的一般因果必要性。
 
-## 科学裁决待办
+## External Pro 科学裁决
 
-该有效分支消耗 1 次结论性迭代，自动研究链还剩 12 次。External Pro 将在固定
-分支不变的前提下决定：最强支持主张、必要限制、最强反例、应保留/淘汰的最小
-科研单元、CDC/portfolio/ledger 精确修改，以及唯一下一项科研动作。完成该裁决
-前，本报告不扩展 G34 的科学含义，也不选择 successor。
+External Pro 保持正式分支不变，并给出绑定科研裁决：
+
+```text
+SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CONTINUOUS_ROSTER_G34
+```
+
+G34 在 G32 之上新增的精确结论是：同一组只在 capacity 8、固定 12/24/36
+日程上训练的 checkpoint，可零训练迁移到配置容量 6/8/12 的 G34-P0 四事件
+随机时间/顺序 family，同时保持 deterministic access、event/segment 服务、
+stochastic stability、正 learned gain 与 lifecycle 正确性。
+
+在 P0 范围内，以下解释被关闭：checkpoint 只有依赖固定 12/24/36 日程和 atomic
+R+J 才能工作。但不能将结果扩展成任意过程律、重复 leave/rejoin、任意事件数、
+任意 cohort、`H≠48`、capacity 6/8/12 之外、trajectory 中途改变 capacity、
+time-free robustness、UAV transport、recurrence 必要性或 G31 credit 必要性。
+
+## 诊断与最强剩余解释
+
+time-rotation 的 `LOAD_BEARING` 只说明该精确 checkpoint 在 G34-P0 上实质依赖
+正确 normalized absolute time；它不说明策略记忆 12/24/36，也不证明所有策略
+都必须使用时间。reactive-ablation 的 `UNDERPOWERED` 同时删除 hidden、age 与
+previous action，既不能证明 current-state 已足够，也不能证明 recurrence 必要。
+
+最强剩余简单解释是：策略主要是使用 current load、target mix、active-set 与
+真实时间的直接映射器，而 lifecycle recurrence 或 realized-future-tail credit
+未必是 process transport 的必要原因。
+
+## 唯一下一科研动作
+
+```text
+CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_DESIGN_ASSERTION_AUDIT
+```
+
+该动作只做零计算设计审计，冻结 freshly paired recurrent 与强
+current-state/feedforward null。两臂必须保持 actor-visible current fields、
+centralized critic、active-set、action prefix、true time、age、previous action、
+G31 credit、参数量、交互、optimizer exposure、配对初始化和 final-checkpoint
+规则一致；唯一因果差异是 actor 是否跨 primitive step 与 lifecycle boundary
+携带 learned recurrent hidden state。
+
+设计审计需冻结主估计量 `U_recurrent-U_current-state`、margin、seed、whole-episode
+层次置信区间、共同 access gate 与互斥 first-match 分支，并提供 current-state null
+可表达已登记 constructive load/mix mapping 的正向表示 witness。`H=48`、
+`K_search=0`、hypothetical transitions 为 0，后续任何实现仍受 nonformal 20 分钟、
+formal 8 小时上限约束。
+
+第 25 轮消耗 1 次有效结论性迭代，自动研究链还剩 12 次。G33 及其衍生线继续按
+用户指令保持放弃和禁止复活。

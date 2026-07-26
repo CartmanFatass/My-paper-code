@@ -18,7 +18,7 @@ status=COMPLETE
 operational_valid=true
 operational_errors=[]
 registered_branch=SUPPORTED_BOUNDED_RANDOM_PROCESS_TRANSPORT_G34
-scientific_interpretation=pending_external_pro
+scientific_interpretation=SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CONTINUOUS_ROSTER_G34
 iteration_consumed=true
 iterations_remaining=12
 ```
@@ -91,10 +91,22 @@ SUPPORTED_BOUNDED_RANDOM_PROCESS_TRANSPORT_G34
 ```
 
 This valid registered branch consumes conclusion-bearing iteration 25 and
-cannot be relabelled. It mechanically records success on the exact held-out
-bounded four-event process source at capacities 6/8/12 using the frozen G32
-checkpoints with zero training. External Pro now exclusively owns the supported
-scientific wording, retained/retired units, counterexamples, CDC/portfolio
-changes and the one next scientific action. In particular, PM does not infer
-from the two diagnostic annotations whether recurrence or absolute time is
-generally necessary.
+cannot be relabelled. External Pro accepted the scientific disposition as:
+
+```text
+SUPPORTED_RETAINED_USABLE_CONFIGURED_CAPACITY_BOUNDED_RANDOM_PROCESS_CONTINUOUS_ROSTER_G34
+```
+
+G34 adds zero-shot transport from G32's fixed 12/24/36 three-event schedule to
+the exact bounded P0 random four-event family at configured capacities 6/8/12.
+It retires dependence on that exact schedule and atomic R+J inside P0, but not
+arbitrary process-law dependence. The true-time rotation is load-bearing for
+the exact checkpoint; the reactive ablation is underpowered. Neither selects
+recurrence or G31-credit necessity.
+
+The binding next action is the zero-compute
+`CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_DESIGN_ASSERTION_AUDIT`. It must freeze
+a fresh paired recurrent versus current-state/feedforward comparison that holds
+information, true time, age, previous action, G31 credit, capacity, interaction,
+optimizer exposure and parameter matching fixed. No implementation or compute
+is authorized by this result disposition.
