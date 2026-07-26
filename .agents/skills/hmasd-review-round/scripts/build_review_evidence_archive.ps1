@@ -35,7 +35,7 @@ if ($LASTEXITCODE -ne 0) {
 $inEvidence = $false
 $paths = [Collections.Generic.List[string]]::new()
 foreach ($line in $questionLines) {
-    if ($line -ceq '## Evidence to read') {
+    if (@('## Evidence to read', '## Exact evidence allow-list') -ccontains $line) {
         $inEvidence = $true
         continue
     }

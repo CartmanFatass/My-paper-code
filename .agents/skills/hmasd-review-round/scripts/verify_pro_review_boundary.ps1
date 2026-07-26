@@ -30,7 +30,8 @@ if ([IO.Path]::GetFileName($question) -ne '20_PRO_OPEN_QUESTION.md') {
     throw 'Only the registered Open-Pro question is externally dispatched.'
 }
 $null = Git @('cat-file', '-e', "$resolved`:$question")
-$text = (Git @('show', "$resolved`:$question")) -join "`n"
+$questionLines = @(Git @('show', "$resolved`:$question"))
+$text = $questionLines -join "`n"
 foreach ($required in @(
     'docs/project/ALGORITHM_PRINCIPLES.md',
     'docs/external-review/OPEN_REVIEW_PRINCIPLES.md'
@@ -41,10 +42,27 @@ if ($text.Contains('CONVERGENT_REVIEW_PRINCIPLES.md')) {
     throw 'Open question contains an internal convergence contract.'
 }
 
-$paths = @([regex]::Matches($text, '`([^`\r\n]+)`') | ForEach-Object {
-    $_.Groups[1].Value.Trim().Replace('\', '/')
-} | Where-Object { $_ -match '^(docs|ha_ctse_process|scripts|tests|ref)/' } | Sort-Object -Unique)
+$inEvidence = $false
+$pathList = [Collections.Generic.List[string]]::new()
+foreach ($line in $questionLines) {
+    if (@('## Evidence to read', '## Exact evidence allow-list') -ccontains $line) {
+        $inEvidence = $true
+        continue
+    }
+    if ($inEvidence -and $line -match '^##\s+') { break }
+    if ($inEvidence -and $line -match '^\s*-\s+`([^`]+)`\s*$') {
+        $candidate = $Matches[1].Trim().Replace('\', '/')
+        if ([IO.Path]::IsPathRooted($candidate) -or
+            $candidate.StartsWith('/') -or
+            @($candidate.Split('/')) -contains '..') {
+            throw "Unsafe repository-relative evidence path: $candidate"
+        }
+        $pathList.Add($candidate)
+    }
+}
+$paths = @($pathList | Sort-Object -Unique)
 if ($paths.Count -eq 0) { throw 'Question does not contain exact repository evidence paths.' }
+if ($paths.Count -ne $pathList.Count) { throw 'Question evidence allow-list contains duplicate paths.' }
 foreach ($path in $paths) { $null = Git @('cat-file', '-e', "$resolved`:$path") }
 
 [pscustomobject]@{

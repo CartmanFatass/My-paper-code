@@ -80,11 +80,15 @@ $boundaryVerifier = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/v
 $head = (& git.exe -C $repo rev-parse HEAD).Trim()
 $boundary = & $boundaryVerifier `
     -Commit $head `
-    -QuestionPath 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned/20_PRO_OPEN_QUESTION.md' `
+    -QuestionPath 'docs/external-review/rounds/20260725_uav_localized_demand_burst_g33_design_assertion_audit/20_PRO_OPEN_QUESTION.md' `
     -Remote $repo `
     -Branch 'aggressive' `
     -RepoRoot $repo | ConvertFrom-Json
-if ($boundary.status -ne 'REMOTE_EVIDENCE_READY' -or $boundary.commit -ne $head) {
+if ($boundary.status -ne 'REMOTE_EVIDENCE_READY' -or
+    $boundary.commit -ne $head -or
+    @($boundary.inspected_paths).Count -ne 20 -or
+    @($boundary.inspected_paths) -notcontains 'config_1.py' -or
+    @($boundary.inspected_paths) -notcontains 'envs/pettingzoo/scenario7_energy_aware.py') {
     throw 'Review boundary verifier failed a reachable exact commit'
 }
 
