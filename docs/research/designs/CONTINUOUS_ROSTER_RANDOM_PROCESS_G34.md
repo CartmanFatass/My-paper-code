@@ -7,8 +7,8 @@ source_id=CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_RANDOM_PROCESS_G34_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=pm_technically_accepted_after_commit_bound_nonformal_exercise
-implementation_code_commit=c2489d43d9eaa3a48a4ea18ae55f570ec3e06e63
+implementation_status=alignment_correction_candidate_pending_commit_bound_nonformal_exercise
+superseded_implementation_code_commit=c2489d43d9eaa3a48a4ea18ae55f570ec3e06e63
 training_change=none
 optimizer_steps=0
 formal_compute_status=not_started
@@ -74,8 +74,10 @@ episode_exclusions=none
 No search, candidate rollout or simulated counterfactual is present. The
 commit-bound CPU nonformal exercise completed in 7.3 seconds with 20 cells,
 3,840 real transitions, zero optimizer steps, unchanged checkpoint state and
-`operational_valid=true`. PM therefore technically accepts the implementation.
-A formal run remains prohibited until the required
+`operational_valid=true`. PM initially accepted that implementation candidate;
+the later alignment mismatch superseded that acceptance for formal execution.
+A formal run remains prohibited until the corrected candidate completes its
+bounded exercise and the required
 implementation-post `CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_CODE_SCIENCE_ALIGNMENT_AUDIT`
 returns aligned.
 
@@ -104,8 +106,23 @@ source restriction, cell and episode fail-closed validation, whole-episode
 paired differences, first-match precedence, formal authority and the frozen
 complexity inventory. They are code evidence, not a scientific result.
 
-The bounded integration evidence is archived at
+The initial bounded integration evidence is archived at
 `logs/nonformal_continuous_roster_random_process_g34_cpu_20260726_c2489d4_pm1/`.
 Its evaluation and analysis artifacts both bind the full implementation commit,
 record `formal=false`, and terminate at
 `NONFORMAL_CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_EXERCISE_COMPLETE`.
+
+## Alignment correction
+
+The implementation-post audit returned `MISMATCH` because serialized model-cell
+digests were not independently matched to the declared G32 checkpoint and
+conclusion metrics were not recomputed from episode traces. The in-contract
+correction upgrades the artifact schema to v2, records each 48-step reward and
+roster-size trace, recomputes all conclusion-bearing summaries from those
+traces, and independently strict-loads every declared replicate/kind/capacity
+checkpoint for digest comparison. No process, checkpoint set, control,
+diagnostic, estimand, threshold, sample count or first-match branch changes.
+
+The correction candidate passes 18 G34-focused tests and 31 tests with the two
+G32 upstream files. A new commit-bound nonformal exercise is required before PM
+reaccepts it and opens the single correction-only alignment recheck.

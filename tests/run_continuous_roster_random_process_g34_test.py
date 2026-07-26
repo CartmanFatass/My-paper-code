@@ -87,7 +87,7 @@ def test_nonformal_artifact_tamper_fails_operationally(
     path.write_text(json.dumps(evaluation, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
     assert result["branch"] == runner.INVALID_BRANCH
-    assert any("checkpoint state drift" in row for row in result["operational_errors"])
+    assert any("checkpoint binding mismatch" in row for row in result["operational_errors"])
 
 
 def test_cell_route_and_event_evidence_tamper_fail_closed(
@@ -116,10 +116,88 @@ def test_cell_route_and_event_evidence_tamper_fail_closed(
     path.write_text(json.dumps(evaluation, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
     assert result["branch"] == runner.INVALID_BRANCH
-    assert any(
-        "episode support or pairing mismatch" in row
-        for row in result["operational_errors"]
+    assert any("serialized summary mismatch" in row for row in result["operational_errors"])
+
+
+def test_wrong_checkpoint_digest_cannot_be_routed_as_final(
+    exercise_result: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    run_root, checkpoint_root = exercise_result
+    monkeypatch.setattr(
+        runner,
+        "_validate_checkpoint_source",
+        lambda path: (
+            {"replicate_results": [{} for _ in range(3)]},
+            g32_runner._configuration(formal=True),
+        ),
     )
+    path = run_root / "evaluation_manifest.json"
+    evaluation = json.loads(path.read_text(encoding="utf-8"))
+    final = next(
+        row
+        for row in evaluation["cells"]
+        if row["capacity"] == 8 and row["cell"] == runner.FINAL_RANDOM_DET
+    )
+    zero = next(
+        row
+        for row in evaluation["cells"]
+        if row["capacity"] == 8 and row["cell"] == runner.ZERO_RANDOM_DET
+    )
+    assert final["state_before"] != zero["state_before"]
+    final["state_before"] = zero["state_before"]
+    final["state_after"] = zero["state_after"]
+    path.write_text(json.dumps(evaluation, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
+    assert result["branch"] == runner.INVALID_BRANCH
+    assert any("checkpoint binding mismatch" in row for row in result["operational_errors"])
+
+
+def test_summary_reward_trace_and_roster_trace_tamper_fail_closed(
+    exercise_result: tuple[Path, Path], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    run_root, checkpoint_root = exercise_result
+    monkeypatch.setattr(
+        runner,
+        "_validate_checkpoint_source",
+        lambda path: (
+            {"replicate_results": [{} for _ in range(3)]},
+            g32_runner._configuration(formal=True),
+        ),
+    )
+    path = run_root / "evaluation_manifest.json"
+    baseline = json.loads(path.read_text(encoding="utf-8"))
+    final = next(row for row in baseline["cells"] if row["cell"] == runner.FINAL_RANDOM_DET)
+    original_utility = float(final["episodes"][0]["utility"])
+    original_reward = float(final["episodes"][0]["reward_trace"][0])
+    final["episodes"][0]["utility"] = 0.0 if original_utility != 0.0 else 1.0
+    recomputed = runner._metric_arrays(baseline, runner.FINAL_RANDOM_DET, "utility")
+    assert recomputed[6][0, 0] == pytest.approx(original_utility)
+    path.write_text(json.dumps(baseline, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
+    assert result["branch"] == runner.INVALID_BRANCH
+    assert any("serialized summary mismatch" in row for row in result["operational_errors"])
+
+    reward_tamper = json.loads(path.read_text(encoding="utf-8"))
+    episode = next(
+        row for row in reward_tamper["cells"] if row["cell"] == runner.FINAL_RANDOM_DET
+    )["episodes"][0]
+    episode["utility"] = original_utility
+    episode["reward_trace"][0] = 0.0 if original_reward != 0.0 else 1.0
+    path.write_text(json.dumps(reward_tamper, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
+    assert result["branch"] == runner.INVALID_BRANCH
+    assert any("serialized summary mismatch" in row for row in result["operational_errors"])
+
+    roster_tamper = json.loads(path.read_text(encoding="utf-8"))
+    episode = next(
+        row for row in roster_tamper["cells"] if row["cell"] == runner.FINAL_RANDOM_DET
+    )["episodes"][0]
+    episode["reward_trace"][0] = original_reward
+    episode["roster_size_trace"][0] += 1
+    path.write_text(json.dumps(roster_tamper, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    result = runner.analyze(run_root=run_root, checkpoint_root=checkpoint_root)
+    assert result["branch"] == runner.INVALID_BRANCH
+    assert any("roster trace evidence mismatch" in row for row in result["operational_errors"])
 
 
 def test_event_type_arrays_preserve_episode_pairing(

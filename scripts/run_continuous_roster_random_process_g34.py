@@ -20,7 +20,7 @@ from ha_ctse_process import continuous_roster_random_process_g34 as source
 from scripts import run_runtime_capacity_continuous_roster_g32 as g32_runner
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 ALGORITHM_ID = source.ALGORITHM_ID
 AUTHORIZATION_TOKEN = "AUTHORIZE_CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_FORMAL_CPU_V1"
 G32_SOURCE_COMMIT = "fbce3609b11353634d1b4acb20cb27372de40bf2"
@@ -168,6 +168,8 @@ def _source_inventory(
                 "event_times": list(row.event_times),
                 "event_order": list(row.event_order),
                 "count_trajectory": list(row.count_trajectory),
+                "random_expected_roster_sizes": list(row.expected_roster_sizes),
+                "fixed_expected_roster_sizes": list(row.base.expected_roster_sizes),
                 "temporarily_absent": list(row.base.temporarily_absent),
                 "fresh_join": list(row.base.fresh_join),
                 "terminal_leave": list(row.base.terminal_leave),
@@ -379,14 +381,107 @@ def _expected_cell_names(capacity: int) -> set[str]:
     return set(_expected_cell_contracts(capacity))
 
 
+def _trace_evidence(episode: Mapping[str, Any]) -> dict[str, object]:
+    rewards = np.asarray(episode["reward_trace"], dtype=np.float64)
+    if (
+        rewards.shape != (g32_runner.source.HORIZON,)
+        or not np.isfinite(rewards).all()
+        or np.any((rewards < 0.0) | (rewards > 1.0))
+    ):
+        raise ValueError("G34 reward trace mismatch")
+    event_times = tuple(int(value) for value in episode["event_times"])
+    event_order = tuple(str(value) for value in episode["event_order"])
+    if len(event_times) != 4 or len(event_order) != 4:
+        raise ValueError("G34 event trace identity mismatch")
+    windows = {
+        edit: float(rewards[time : time + 4].mean())
+        for time, edit in zip(event_times, event_order)
+    }
+    boundaries = (0, *event_times, g32_runner.source.HORIZON)
+    segments = tuple(
+        float(rewards[left:right].mean())
+        for left, right in zip(boundaries, boundaries[1:])
+    )
+    roster_values = episode["roster_size_trace"]
+    if (
+        not isinstance(roster_values, list)
+        or len(roster_values) != g32_runner.source.HORIZON
+        or any(
+            not isinstance(value, int) or isinstance(value, bool)
+            for value in roster_values
+        )
+    ):
+        raise ValueError("G34 roster trace mismatch")
+    return {
+        "utility": float(rewards.mean()),
+        "minimum_step_utility": float(rewards.min()),
+        "minimum_event_window_utility": min(windows.values()),
+        "minimum_process_segment_utility": min(segments),
+        "event_window_utility": windows,
+        "process_segment_utility": segments,
+        "roster_size_trace": tuple(int(value) for value in roster_values),
+    }
+
+
+def _summary_matches_trace(
+    episode: Mapping[str, Any], trace: Mapping[str, Any]
+) -> bool:
+    scalar_fields = (
+        "utility",
+        "minimum_step_utility",
+        "minimum_event_window_utility",
+        "minimum_process_segment_utility",
+    )
+    if any(
+        not np.isclose(
+            float(episode[field]), float(trace[field]), rtol=0.0, atol=1e-12
+        )
+        for field in scalar_fields
+    ):
+        return False
+    serialized_windows = episode.get("event_window_utility")
+    trace_windows = trace["event_window_utility"]
+    if (
+        not isinstance(serialized_windows, dict)
+        or set(serialized_windows) != set(trace_windows)
+        or any(
+            not np.isclose(
+                float(serialized_windows[key]),
+                float(trace_windows[key]),
+                rtol=0.0,
+                atol=1e-12,
+            )
+            for key in trace_windows
+        )
+    ):
+        return False
+    serialized_segments = np.asarray(
+        episode.get("process_segment_utility", []), dtype=np.float64
+    )
+    return bool(
+        serialized_segments.shape == (5,)
+        and np.isfinite(serialized_segments).all()
+        and np.allclose(
+            serialized_segments,
+            np.asarray(trace["process_segment_utility"], dtype=np.float64),
+            rtol=0.0,
+            atol=1e-12,
+        )
+    )
+
+
 def _artifact_errors(
     evaluation: Mapping[str, Any], checkpoint_root: Path
 ) -> list[str]:
     errors: list[str] = []
     formal = bool(evaluation.get("formal"))
     configuration = _configuration(formal=formal)
+    checkpoint_training: dict[str, Any] | None = None
+    checkpoint_configuration: dict[str, Any] | None = None
     try:
-        _validate_checkpoint_source(checkpoint_root)
+        checkpoint_training, checkpoint_configuration = _validate_checkpoint_source(
+            checkpoint_root
+        )
     except (KeyError, TypeError, ValueError, OSError) as error:
         errors.append(str(error))
     if (
@@ -416,6 +511,25 @@ def _artifact_errors(
         errors.append("G34 nonformal authority mismatch")
     replicate_count = int(configuration["replicates"])
     episode_count = int(configuration["episodes_per_capacity_replicate"])
+    expected_checkpoint_digests: dict[tuple[int, int, str], str] = {}
+    if checkpoint_training is not None and checkpoint_configuration is not None:
+        for replicate in range(replicate_count):
+            for capacity in source.CAPACITIES:
+                for checkpoint_kind in ("zero", "final"):
+                    try:
+                        expected_model = _load_model(
+                            checkpoint_root,
+                            checkpoint_training,
+                            checkpoint_configuration,
+                            replicate=replicate,
+                            kind=checkpoint_kind,
+                            capacity=capacity,
+                        )
+                        expected_checkpoint_digests[
+                            (replicate, capacity, checkpoint_kind)
+                        ] = _state_digest(expected_model)
+                    except (KeyError, TypeError, ValueError, OSError) as error:
+                        errors.append(str(error))
     expected_inventory: list[dict[str, object]] = []
     for replicate in range(replicate_count):
         for capacity in source.CAPACITIES:
@@ -459,30 +573,22 @@ def _artifact_errors(
             if name == CONSTRUCTIVE_RANDOM:
                 if cell.get("state_before") is not None or cell.get("state_after") is not None:
                     raise ValueError("G34 constructive state identity mismatch")
-            elif (
-                re.fullmatch(r"[0-9a-f]{64}", str(cell.get("state_before"))) is None
-                or cell.get("state_before") != cell.get("state_after")
-            ):
-                raise ValueError("G34 checkpoint state drift")
+            else:
+                expected_digest = expected_checkpoint_digests.get(
+                    (replicate, capacity, str(contract["checkpoint"]))
+                )
+                if (
+                    expected_digest is None
+                    or cell.get("state_before") != expected_digest
+                    or cell.get("state_after") != expected_digest
+                ):
+                    raise ValueError("G34 checkpoint binding mismatch")
             episodes = cell["episodes"]
             if not isinstance(episodes, list) or len(episodes) != episode_count:
                 raise ValueError("G34 episode inventory mismatch")
             expected_processes = inventories[(replicate, capacity)]
             for index, episode in enumerate(episodes):
                 expected_process = expected_processes[index]
-                values = np.asarray(
-                    [
-                        episode["utility"],
-                        episode["minimum_step_utility"],
-                        episode["minimum_event_window_utility"],
-                        episode["minimum_process_segment_utility"],
-                    ],
-                    dtype=np.float64,
-                )
-                windows = episode.get("event_window_utility")
-                segments = np.asarray(
-                    episode.get("process_segment_utility", []), dtype=np.float64
-                )
                 if (
                     episode.get("local_episode_id") != index
                     or episode.get("episode_id") != expected_process["episode_id"]
@@ -492,34 +598,22 @@ def _artifact_errors(
                     or episode.get("count_trajectory")
                     != expected_process["count_trajectory"]
                     or episode.get("signature") != expected_process["signature"]
-                    or episode.get("roster_sizes_valid") is not True
-                    or not np.isfinite(values).all()
-                    or np.any((values < 0.0) | (values > 1.0))
-                    or not isinstance(windows, dict)
-                    or set(windows) != {"L", "R", "J", "T"}
-                    or segments.shape != (5,)
-                    or not np.isfinite(segments).all()
-                    or np.any((segments < 0.0) | (segments > 1.0))
                 ):
                     raise ValueError("G34 episode support or pairing mismatch")
-                window_values = np.asarray(list(windows.values()), dtype=np.float64)
+                trace = _trace_evidence(episode)
+                roster_field = (
+                    "random_expected_roster_sizes"
+                    if contract["process"] == "random"
+                    else "fixed_expected_roster_sizes"
+                )
                 if (
-                    not np.isfinite(window_values).all()
-                    or np.any((window_values < 0.0) | (window_values > 1.0))
-                    or not np.isclose(
-                        float(episode["minimum_event_window_utility"]),
-                        float(window_values.min()),
-                        rtol=0.0,
-                        atol=1e-12,
-                    )
-                    or not np.isclose(
-                        float(episode["minimum_process_segment_utility"]),
-                        float(segments.min()),
-                        rtol=0.0,
-                        atol=1e-12,
-                    )
+                    trace["roster_size_trace"]
+                    != tuple(expected_process[roster_field])
+                    or episode.get("roster_sizes_valid") is not True
                 ):
-                    raise ValueError("G34 event or segment evidence mismatch")
+                    raise ValueError("G34 roster trace evidence mismatch")
+                if not _summary_matches_trace(episode, trace):
+                    raise ValueError("G34 serialized summary mismatch")
         except (KeyError, TypeError, ValueError) as error:
             errors.append(str(error))
     expected_keys = {
@@ -554,7 +648,10 @@ def _metric_arrays(
     for capacity in capacities:
         result[capacity] = np.asarray(
             [
-                [episode[metric] for episode in cells[(replicate, capacity, cell_name)]["episodes"]]
+                [
+                    _trace_evidence(episode)[metric]
+                    for episode in cells[(replicate, capacity, cell_name)]["episodes"]
+                ]
                 for replicate in range(replicates)
             ],
             dtype=np.float64,
@@ -578,7 +675,7 @@ def _event_metric_arrays(
         capacity: np.asarray(
             [
                 [
-                    episode["event_window_utility"][event_type]
+                    _trace_evidence(episode)["event_window_utility"][event_type]
                     for episode in cells[(replicate, capacity, cell_name)]["episodes"]
                 ]
                 for replicate in range(replicates)
@@ -681,7 +778,7 @@ def analyze(
         cells = _cell_map(evaluation)
         constructive_valid = all(
             min(
-                float(episode[field])
+                float(_trace_evidence(episode)[field])
                 for episode in cell["episodes"]
                 for field in (
                     "utility",

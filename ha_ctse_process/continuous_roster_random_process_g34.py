@@ -285,6 +285,8 @@ def _episode_metrics(
         "minimum_process_segment_utility": min(segments),
         "event_window_utility": windows,
         "process_segment_utility": list(segments),
+        "reward_trace": [float(value) for value in rewards],
+        "roster_size_trace": [int(value) for value in outcome.roster_sizes],
         "roster_sizes_valid": outcome.roster_sizes
         == (expected_roster_sizes or process.expected_roster_sizes),
     }

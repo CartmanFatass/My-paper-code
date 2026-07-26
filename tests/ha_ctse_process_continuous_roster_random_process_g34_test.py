@@ -106,6 +106,8 @@ def test_constructive_random_source_closes_exact_windows_and_segments() -> None:
         assert float(row["minimum_event_window_utility"]) >= 1.0 - 2e-7
         assert float(row["minimum_process_segment_utility"]) >= 1.0 - 2e-7
         assert set(row["event_window_utility"]) == {"L", "R", "J", "T"}
+        assert len(row["reward_trace"]) == 48
+        assert len(row["roster_size_trace"]) == 48
 
 
 def test_model_paths_preserve_lifecycle_and_checkpoint_state() -> None:
