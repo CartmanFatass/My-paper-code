@@ -256,6 +256,62 @@ failure, and the proxy was replaced with the **unclipped** mean rate ratio *beca
 separated no arm at all* — not because it missed a threshold, which was never
 reached. Saturation is now re-checked and reported on every run.
 
+## Part B — I audited the wrong instance, twice
+
+Two corrections, found by measurement, and the second is the one that matters.
+
+**First: `S1` disables the mechanism.** Recorded above.
+
+**Second, and larger: energy does not bind at `config_1.py`'s defaults even when
+enabled.** Measured at `S2`, driven through `step()` so batteries actually deplete,
+over 480 of a 500-step episode:
+
+```text
+charge_steps  0        dock_events  0        across all six arms
+battery        ~0.875 mean at reset  ->  ~0.72 after 480 steps
+drain          ~0.000323 / step
+reaching the 0.10 return reserve from 0.75 would take  ~2,012 steps
+episode_length 500
+```
+
+The battery is roughly four times oversized relative to the episode. So the
+charge-rotation dynamics — the thing that forces a duty to be taken over in this
+source — **cannot fire**, and `S2`/`S3` differ from `S1` in label only at this
+sizing.
+
+**The registered source that does bind is G2's, not `config_1.py`'s.**
+`UAV_CHARGE_ROTATION_ROSTER_G2.md` freezes:
+
+```text
+preset               S7-S3          physical_uavs   8
+episode_steps        1500           battery_capacity_wh  160
+training_energy      (0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90)
+heldout_low          (0.45 ... 0.80)
+rejoin_battery_ratio 0.80
+```
+
+Two levers make energy bind: **three times the episode length**, and initial
+energies as low as `0.45`–`0.55` rather than a uniform `0.75`–`1.0`. At the measured
+drain, `0.55` reaches the dock trigger in about `1,071` steps and `0.45` in about
+`1,084` after reserve — inside 1500 either way.
+
+**This was the same error as the `S1` one, one level up.** Pro's instruction was to
+read `H` and the source from the *registered* configuration; I read `config_1.py`'s
+defaults, which are the scenario's defaults and not the registered experiment
+preset. A default is not a registration.
+
+**Consequence for `H`: this source has two causal duty windows, not one.**
+
+| Mechanism | Causal window | Derivation |
+|---|---:|---|
+| duty **exchange** | ~139 steps | mean separation `4171 m` at `30 m/s` |
+| energy-driven **roster change** | ~400–500 steps | charging `0.10 -> 0.80` is `112 Wh` at `1000 W` = `403 s`, plus transit |
+
+D0 says `H` is frozen from *its* causal duty window. With two mechanisms there are
+two windows, and a single `H` cannot serve both — the 139-step window is blind to a
+403-step recharge. `H` must therefore be named per mechanism, which is a correction
+to D0's singular phrasing rather than a choice made here.
+
 ## Part B remains open, and what it needs
 
 `SOURCE_NECESSITY_UNRESOLVED` stands **at S1 only**. The audit must be re-run at
