@@ -7,7 +7,8 @@ source_id=CONTINUOUS_ROSTER_RANDOM_PROCESS_G34_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_RANDOM_PROCESS_G34_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=alignment_correction_candidate_pending_commit_bound_nonformal_exercise
+implementation_status=pm_technically_accepted_alignment_correction
+implementation_code_commit=973589414a865cf79ef9f80a33a8feb2d4aabf40
 superseded_implementation_code_commit=c2489d43d9eaa3a48a4ea18ae55f570ec3e06e63
 training_change=none
 optimizer_steps=0
@@ -123,6 +124,8 @@ traces, and independently strict-loads every declared replicate/kind/capacity
 checkpoint for digest comparison. No process, checkpoint set, control,
 diagnostic, estimand, threshold, sample count or first-match branch changes.
 
-The correction candidate passes 18 G34-focused tests and 31 tests with the two
-G32 upstream files. A new commit-bound nonformal exercise is required before PM
-reaccepts it and opens the single correction-only alignment recheck.
+The correction passes 18 G34-focused tests and 31 tests with the two G32
+upstream files. Its commit-bound schema-v2 nonformal exercise completed once in
+7.1 seconds with 20 cells, 3,840 real transitions, complete 48-step traces and
+`operational_valid=true`. PM technically accepts the correction. The single
+correction-only alignment recheck remains required before formal compute.
