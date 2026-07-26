@@ -7,7 +7,7 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_FACTORIZED_HISTORY_PROXY_COHERENCE_G37_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=action_noise_subset_validation_repair_accepted_after_7_focused_and_18_G36_G37_tests_nonformal_rerun_pending
+implementation_status=pm_accepted_after_7_focused_18_G36_G37_tests_and_repaired_same_commit_nonformal_COMPLETE
 formal_compute_status=not_authorized_before_alignment_and_same_commit_preflight
 training=none
 ```
@@ -107,3 +107,9 @@ nonformal action-noise digest with the complete 128-episode G36 digest. The
 repair recomputes the exact G35 action stream for the current episode subset and
 retains the complete stored-digest equality for formal 128-episode cells. This
 changes no action tensor, pairing unit, factorization law, source or threshold.
+
+The repaired same-commit bounded exercise completed operationally valid with
+4,608 real transitions, zero optimizer steps and a 6,370.006123-second formal
+projection. PM independently reproduced the empty validator error list, complete
+metrics object and nonformal branch. This remains prelaunch evidence only;
+formal compute is blocked on the single code-science alignment audit.
