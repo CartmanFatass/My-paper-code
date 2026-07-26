@@ -3,6 +3,7 @@
 ```text
 document_kind=user_requested_restart_snapshot
 write_trigger=explicit_user_request_only
+automatic_create_or_update=forbidden
 date=2026-07-26
 status=PAUSED_BY_USER_FOR_SESSION_RESTART
 active_role=root_project_manager
