@@ -7,7 +7,8 @@ repair_scope=exact_operational_defect_under_unchanged_contract
 technical_acceptance_owner=project_manager
 technical_acceptance=ACCEPTED
 formal_retry_resume_restart=none
-next_boundary=CODE_SCIENCE_ALIGNMENT_CORRECTION_RECHECK
+code_science_alignment_correction_recheck=ALIGNED
+next_boundary=ONE_REPAIRED_SOURCE_BOUNDED_NONFORMAL_PREFLIGHT
 ```
 
 ## Root cause and exact repair
@@ -73,3 +74,9 @@ The failed formal run root was never modified or resumed, and no nonformal or
 formal experiment was run during repair acceptance. A fresh conclusion-bearing
 execution remains forbidden until External Pro confirms that this correction
 preserves code-science alignment and the required runtime authority is present.
+
+External Pro subsequently returned exactly `AUDIT_DISPOSITION=ALIGNED` in the
+single naturally completed correction-recheck round. The transport used zero
+recovery submissions, no Answer Now action, one completed monitor and two
+stable exact raw snapshots. This authorizes only one bounded nonformal
+preflight from the repaired source; it does not authorize a formal retry.
