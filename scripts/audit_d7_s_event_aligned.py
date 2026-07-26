@@ -51,6 +51,7 @@ field, exactly as it is for the registered G2 roster).
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import math
@@ -1077,61 +1078,1086 @@ def apply_energy_profile(env, energies: np.ndarray) -> None:
     env._update_return_energy_state()
 
 
+AGENT_NAME_FMT = "uav_{}"
+
+
+def agent_name(uav_idx: int) -> str:
+    return AGENT_NAME_FMT.format(int(uav_idx))
+
+
+# =============================================================================
+# Item 1 -- real-env duty geometry (the constructive_mixed/null "targets" the
+# pure duty-map layer needs, wired to live UAV/user/BS geometry)
+# =============================================================================
+
+N_RELAY_DUTIES = 2
+N_SERVICE_DUTIES = 6
+# Registered split for the 8-UAV S7-S3 fleet: reuses the SAME service/relay
+# count the environment's own offline feasibility heuristic tries FIRST
+# (`estimate_heuristic_qos_feasibility`,
+# envs/pettingzoo/scenario7_energy_aware.py:1194-1198: candidates
+# {n_uavs-2, n_uavs-3} tried in that preference order, i.e. 6 service / 2
+# relay before 5/3) -- a grounded, deterministic choice rather than an
+# invented split, fixed (not searched) here because a scripted per-step
+# controller must commit to one duty count every step, not grid-search a
+# static layout the way the offline certificate does.
+
+
+def compute_service_duty_targets(user_xy: np.ndarray, n_service: int,
+                                  prior_centroids: Optional[np.ndarray] = None,
+                                  iters: int = 30) -> np.ndarray:
+    """Lloyd's-iteration centroid update over LIVE user xy positions,
+    warm-started from the PRIOR step's centroids so duty identity (which
+    physical cluster is "duty 2") stays stable across steps instead of
+    being re-seeded from scratch every call -- re-seeding every step would
+    let k-means relabel clusters arbitrarily and destroy the "preserve
+    target between lifecycle events" requirement (section 4). Mirrors the
+    seeding/iteration scheme of the environment's own
+    `estimate_heuristic_qos_feasibility`
+    (envs/pettingzoo/scenario7_energy_aware.py:1199-1220), the only prior
+    art in this repository for clustering `user_positions`."""
+    user_xy = np.asarray(user_xy, dtype=float)
+    if prior_centroids is not None and len(prior_centroids) == n_service:
+        centroids = np.asarray(prior_centroids, dtype=float).copy()
+    else:
+        seed_indices = np.linspace(0, len(user_xy) - 1, n_service, dtype=int)
+        centroids = user_xy[seed_indices].copy()
+    for _ in range(iters):
+        distances = np.sum((user_xy[:, None, :] - centroids[None, :, :]) ** 2, axis=2)
+        labels = np.argmin(distances, axis=1)
+        updated = np.array([
+            np.mean(user_xy[labels == k], axis=0) if np.any(labels == k) else centroids[k]
+            for k in range(n_service)
+        ])
+        if np.allclose(updated, centroids):
+            break
+        centroids = updated
+    return centroids
+
+
+def compute_relay_duty_targets(bs_xy: np.ndarray, service_center: np.ndarray,
+                                n_relay: int) -> list:
+    """Relay duties positioned along the ground-BS-to-service-center line,
+    mirroring `estimate_heuristic_qos_feasibility`
+    (envs/pettingzoo/scenario7_energy_aware.py:1229-1231)."""
+    targets = []
+    bs_xy = np.asarray(bs_xy, dtype=float)
+    service_center = np.asarray(service_center, dtype=float)
+    for relay_idx in range(n_relay):
+        fraction = (relay_idx + 1) / (n_relay + 1)
+        targets.append((1.0 - fraction) * bs_xy + fraction * service_center)
+    return targets
+
+
+def compute_duty_positions(env, prior_service_centroids: Optional[np.ndarray] = None):
+    """Full per-step duty-target geometry: duty ids `0..N_RELAY_DUTIES-1` are
+    relay duties, `N_RELAY_DUTIES..N_RELAY_DUTIES+N_SERVICE_DUTIES-1` are
+    service duties (live k-means centroids of current `user_positions`).
+    Returns `(duty_positions: dict[int, np.ndarray(3,)], service_centroids)`
+    -- callers pass `service_centroids` back in as `prior_service_centroids`
+    next step to warm-start duty identity."""
+    user_xy = np.asarray(env.user_positions, dtype=float)[:, :2]
+    bs_xy = np.mean(np.asarray(env.ground_bs_positions, dtype=float)[:, :2], axis=0)
+    centroids = compute_service_duty_targets(user_xy, N_SERVICE_DUTIES, prior_service_centroids)
+    service_center = np.mean(centroids, axis=0)
+    relay_xy = compute_relay_duty_targets(bs_xy, service_center, N_RELAY_DUTIES)
+    height = float(np.mean(env.height_range))
+    duty_positions: dict = {}
+    for i, xy in enumerate(relay_xy):
+        duty_positions[i] = np.array([xy[0], xy[1], height])
+    for i, xy in enumerate(centroids):
+        duty_positions[N_RELAY_DUTIES + i] = np.array([xy[0], xy[1], height])
+    return duty_positions, centroids
+
+
+def initial_duty_map() -> dict:
+    """Registered fleet shape: 8 duties / 8 UAVs, identity assignment at
+    episode start. Arbitrary in the same sense the environment's own agent
+    index ordering is arbitrary -- no operational meaning attaches to which
+    UAV starts on which duty."""
+    return {i: i for i in range(N_RELAY_DUTIES + N_SERVICE_DUTIES)}
+
+
+def domain_bounds_for_env(env):
+    lo = np.array([0.0, 0.0, float(env.height_range[0])])
+    hi = np.array([float(env.area_size), float(env.area_size), float(env.height_range[1])])
+    return lo, hi
+
+
+# =============================================================================
+# REGISTERED_CONSTANT: DOCK_TRIGGER_RULE -- latest-safe-station-arrival
+# dock-decision formula (item 1)
+# =============================================================================
+#
+# The frozen contract and the G2 design describe `constructive_mixed`'s
+# REQUIRED BEHAVIOR ("forward-plans only its scripted energy evolution,
+# schedules the latest safe station arrival") but neither specifies the
+# internal trigger arithmetic numerically -- this is an ordinary
+# implementation choice, frozen here as one exact constant formula so a
+# later conformance derivation has a single rule to check against rather
+# than an implicit runtime decision.
+#
+#   Let d_i        = straight-line distance from UAV i's current position
+#                     to its nearest charging station
+#                     (`env._nearest_charging_station`)
+#       t_transit_i = ceil(d_i / (max_speed * dt))    -- worst-case transit
+#                     steps at full CRUISE speed, never the slower emergency
+#                     limp-home speed, because this is a PROACTIVE plan
+#                     while the UAV is still fully mobile, not an emergency
+#       E_transit_i = t_transit_i * calculate_power_consumption(max_speed, 0) * dt / 3600
+#       dock_trigger_ratio_i = E_transit_i / battery_capacity_wh + return_reserve_ratio
+#
+# A UAV departs for the station (heads toward it, requesting docking) at
+# the LATEST pre-action boundary at which `battery_ratio_i <=
+# dock_trigger_ratio_i` still holds -- i.e. the step immediately before
+# this predicate would first go False is "latest safe." This function is
+# re-evaluated fresh every step from LIVE state (never a schedule built
+# once at reset), so the controller naturally departs at exactly that step.
+#
+# `return_reserve_ratio` is the environment's OWN registered safety-buffer
+# constant (0.10, envs/pettingzoo/scenario7_energy_aware.py:100) -- reused
+# here rather than reinvented, so the scripted controller's forward energy
+# plan shares the environment's own reserve rather than introducing a
+# second, uncoordinated number.
+def dock_trigger_ratio(*, distance_m: float, max_speed: float, dt: float,
+                        power_transit_w: float, battery_capacity_wh: float,
+                        return_reserve_ratio: float) -> float:
+    t_transit = transit_steps(distance_m, max_speed=max_speed, dt=dt)
+    e_transit_wh = t_transit * power_transit_w * dt / 3600.0
+    return e_transit_wh / max(battery_capacity_wh, 1e-8) + return_reserve_ratio
+
+
+def should_depart_for_charge(*, battery_ratio: float, trigger_ratio: float) -> bool:
+    return battery_ratio <= trigger_ratio
+
+
+def dock_trigger_ratio_for_env(env, uav_idx: int, distance_m: float) -> float:
+    """Binds `dock_trigger_ratio` to the real env's registered constants --
+    the orchestration-boundary counterpart of `flex_transit_steps_for_env`."""
+    power_transit_w = float(env._calculate_power_consumption(float(env.max_speed), 0.0))
+    return dock_trigger_ratio(
+        distance_m=distance_m, max_speed=float(env.max_speed), dt=float(env.time_step),
+        power_transit_w=power_transit_w,
+        battery_capacity_wh=float(env.battery_capacity_wh),
+        return_reserve_ratio=float(getattr(env, "return_reserve_ratio", 0.10)),
+    )
+
+
+# =============================================================================
+# Action synthesis: env action <- target position (item 1)
+# =============================================================================
+
+def action_towards_target(position, target, *, max_speed: float,
+                           max_vertical_speed_mps: float, dt: float,
+                           dock_request: bool) -> np.ndarray:
+    """Builds the 4-vector env action driving directly toward `target`,
+    mirroring the environment's OWN action->velocity contract exactly
+    (`_normalize_continuous_action`/`_movement_velocity_from_action`,
+    envs/pettingzoo/scenario7_energy_aware.py:1584-1634): the horizontal
+    component is direction-normalized THEN scaled by the reachable
+    fraction (never per-axis clipped first), so per-axis [-1,1] clamping
+    can never distort the intended direction; magnitude is capped at
+    `max_speed`; the target is reached exactly if reachable within one
+    `dt`. `action[3]` is the dock-request bit."""
+    delta = np.asarray(target, dtype=float) - np.asarray(position, dtype=float)
+    horizontal = delta[:2]
+    h_norm = float(np.linalg.norm(horizontal))
+    if h_norm > 1e-9:
+        direction = horizontal / h_norm
+        frac = min(h_norm / max(max_speed * dt, 1e-9), 1.0)
+        action_xy = direction * frac
+    else:
+        action_xy = np.zeros(2, dtype=float)
+    vertical_delta = float(delta[2]) if delta.shape[0] > 2 else 0.0
+    vertical_speed_needed = vertical_delta / max(dt, 1e-9)
+    action_z = float(np.clip(vertical_speed_needed / max(max_vertical_speed_mps, 1e-9), -1.0, 1.0))
+    return np.array([action_xy[0], action_xy[1], action_z, 1.0 if dock_request else 0.0],
+                     dtype=np.float32)
+
+
+def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
+                             target_override: Optional[dict] = None) -> dict:
+    """One step of the real-env realization of `constructive_mixed`/`null`
+    (the two share this SAME per-UAV action rule -- they differ only in how
+    `duty_map` is updated across LEAVE/REJOIN, driven separately by
+    `update_duty_map_on_transitions`): every airborne UAV either (a)
+    continues charging in place if already docked and below
+    `REJOIN_BATTERY_RATIO`, (b) heads to its nearest charging station and
+    requests docking once the REGISTERED_CONSTANT dock-trigger rule fires,
+    or (c) otherwise flies to its assigned duty's live target.
+    `target_override` forces a specific UAV's target for this step
+    regardless of (a)/(b)/(c) -- the intervention machinery's SET arm."""
+    uav_to_duty = {u: d for d, u in duty_map.items()}
+    actions: dict = {}
+    dt = float(env.time_step)
+    max_speed = float(env.max_speed)
+    max_vert = float(getattr(env, "max_vertical_speed_mps", 5.0))
+    n_uavs = int(env.n_uavs)
+    for i in range(n_uavs):
+        pos = np.asarray(env.uav_positions[i], dtype=float)
+        battery = float(env.uav_battery_ratios[i])
+        charging = bool(env.uav_charging[i])
+        if target_override is not None and i in target_override:
+            target = np.asarray(target_override[i], dtype=float)
+            actions[agent_name(i)] = action_towards_target(
+                pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
+                dt=dt, dock_request=False)
+            continue
+        if charging:
+            if battery < REJOIN_BATTERY_RATIO:
+                actions[agent_name(i)] = action_towards_target(
+                    pos, pos, max_speed=max_speed, max_vertical_speed_mps=max_vert,
+                    dt=dt, dock_request=True)
+            else:
+                duty_id = uav_to_duty.get(i)
+                target = duty_positions[duty_id] if duty_id is not None else pos
+                actions[agent_name(i)] = action_towards_target(
+                    pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
+                    dt=dt, dock_request=False)
+            continue
+        station_idx, _, distance = env._nearest_charging_station(i)
+        trigger = dock_trigger_ratio_for_env(env, i, distance) if station_idx >= 0 else -1.0
+        if station_idx >= 0 and should_depart_for_charge(battery_ratio=battery, trigger_ratio=trigger):
+            station_pos = np.asarray(env.charging_station_positions[station_idx], dtype=float)
+            actions[agent_name(i)] = action_towards_target(
+                pos, station_pos, max_speed=max_speed, max_vertical_speed_mps=max_vert,
+                dt=dt, dock_request=True)
+        else:
+            duty_id = uav_to_duty.get(i)
+            target = duty_positions[duty_id] if duty_id is not None else pos
+            actions[agent_name(i)] = action_towards_target(
+                pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
+                dt=dt, dock_request=False)
+    return actions
+
+
+# =============================================================================
+# Item 2 -- LEAVE/REJOIN duty-map bookkeeping and per-step metrics extraction
+# =============================================================================
+
+def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
+                                    charging_before: np.ndarray, charging_after: np.ndarray,
+                                    schedule: str, locked_duties: frozenset = frozenset()):
+    """Detects LEAVE (rising edge of `uav_charging`) and REJOIN (falling
+    edge) per UAV and drives `duty_map` through the already-accepted PURE
+    `constructive_mixed_update`/`null_update` functions -- never
+    reimplements their reassignment logic. Returns
+    `(new_duty_map, leave_uavs, rejoin_uavs)`."""
+    charging_before = np.asarray(charging_before, dtype=bool)
+    charging_after = np.asarray(charging_after, dtype=bool)
+    leave_uavs = [i for i in range(len(charging_after)) if charging_after[i] and not charging_before[i]]
+    rejoin_uavs = [i for i in range(len(charging_after)) if charging_before[i] and not charging_after[i]]
+    airborne_positions = {
+        i: np.asarray(env.uav_positions[i], dtype=float)
+        for i in range(int(env.n_uavs)) if not charging_after[i]
+    }
+    new_map = dict(duty_map)
+    for u in leave_uavs:
+        if schedule == "null":
+            new_map = null_update(duty_map=new_map)
+        else:
+            new_map = constructive_mixed_update(
+                duty_map=new_map, duty_positions=duty_positions,
+                airborne_positions=airborne_positions, event="LEAVE",
+                event_uav=u, locked_duties=locked_duties)
+    for u in rejoin_uavs:
+        if schedule == "null":
+            new_map = null_update(duty_map=new_map)
+        else:
+            new_map = constructive_mixed_update(
+                duty_map=new_map, duty_positions=duty_positions,
+                airborne_positions=airborne_positions, event="REJOIN",
+                event_uav=u, locked_duties=locked_duties)
+    return new_map, leave_uavs, rejoin_uavs
+
+
+def per_user_qos_ratio(env) -> np.ndarray:
+    """The per-(user) QoS-ratio vector `user_step_saturation_fraction` needs
+    -- never exposed by the env's info dict (only its mean is), so it is
+    reconstructed here from the same public fields the environment's own
+    reward computation uses (`last_user_rates_mbps`, `user_qos_rate_mbps`)."""
+    rates = np.asarray(getattr(env, "last_user_rates_mbps", []), dtype=float)
+    qos_rate = max(float(getattr(env, "user_qos_rate_mbps", 1.0)), 1e-8)
+    return np.clip(rates / qos_rate, 0.0, 1.0)
+
+
+def extract_step_metrics(env, infos: dict) -> dict:
+    """Pulls the section-7 primary-G component fields out of one
+    `env.step()` call's `infos` (every agent's `reward_info` carries the
+    same episode-level scalar fields -- `_energy_metrics_dict`/
+    `_calculate_constrained_safety_reward`,
+    envs/pettingzoo/scenario7_energy_aware.py:607-618), plus the per-UAV
+    cutoff/depletion masks reconstructed from live battery state (the
+    per-UAV masks are never in `infos` -- only `cutoff_event_count`/
+    `depletion_event_count` scalars are, and those are EPISODE-latched,
+    the wrong thing for window-local latching; see the module's real-env
+    note in its header)."""
+    first_agent = next(iter(infos))
+    reward_info = infos[first_agent].get("reward_info", {})
+    battery = np.asarray(env.uav_battery_ratios, dtype=float)
+    cutoff_mask = battery <= float(getattr(env, "service_cutoff_threshold", 0.02))
+    depletion_mask = battery <= float(getattr(env, "depleted_battery_threshold", 0.0))
+    return {
+        "qos_satisfaction_ratio": float(reward_info.get("qos_satisfaction_ratio", 0.0)),
+        "return_constraint_cost": float(reward_info.get("return_constraint_cost", 0.0)),
+        "return_constraint_cost_raw": float(reward_info.get("return_constraint_cost_raw", 0.0)),
+        "cutoff_mask": cutoff_mask,
+        "depletion_mask": depletion_mask,
+    }
+
+
+def real_env_state_snapshot(env, duty_map: dict) -> dict:
+    """The exact fixed-history surface section 8/Q-I2 requires hashed:
+    positions, battery, charging state, station/queue state, duty map and
+    lifecycle mask (CHARGE_ABSENT == `uav_charging`, per the module's own
+    two-state real-env realization documented in its header)."""
+    charging = np.asarray(env.uav_charging, dtype=bool)
+    return {
+        "positions": np.asarray(env.uav_positions, dtype=float),
+        "battery_ratios": np.asarray(env.uav_battery_ratios, dtype=float),
+        "charging_mask": charging,
+        "station_occupancy": np.asarray(env.station_occupancy, dtype=float),
+        "station_queue": np.asarray(env.station_queue_lengths, dtype=float),
+        "lifecycle_mask": charging,
+        "duty_map": dict(duty_map),
+    }
+
+
+def step_once(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
+              schedule: str = "constructive_mixed", target_override: Optional[dict] = None,
+              locked_duties: frozenset = frozenset()) -> dict:
+    """The atomic real-env step: compute live duty geometry, synthesize
+    every UAV's action (item 1), step the env (energy accounting runs
+    inside `env.step`), then drive the duty map through any LEAVE/REJOIN
+    edge (item 2)."""
+    duty_positions, service_centroids_next = compute_duty_positions(env, service_centroids)
+    charging_before = np.asarray(env.uav_charging, dtype=bool).copy()
+    actions = scripted_source_actions(env, duty_map=duty_map, duty_positions=duty_positions,
+                                       target_override=target_override)
+    action_record = {a: np.asarray(v).copy() for a, v in actions.items()}
+    # `env.step` returns `(observations, rewards, terminations, truncations,
+    # infos)` -- the real `UAVEnergyAwareRelayEnv` never caches this as a
+    # `self.infos` attribute (confirmed: `scenario_base.py:3547` returns the
+    # tuple directly, no assignment to `self`), so the return value MUST be
+    # captured here. An earlier version of this function discarded it and
+    # read `env.infos` instead, which silently fell back to an all-zero
+    # metrics stub for every real-env step -- caught only by re-reading the
+    # real env's own step() source during the pre-return inspection, since
+    # the FakeEnv test double happened to also expose a `self.infos` side
+    # channel that masked the same defect.
+    step_return = env.step(actions)
+    infos = step_return[4] if step_return is not None else {}
+    charging_after = np.asarray(env.uav_charging, dtype=bool).copy()
+    new_map, leave_uavs, rejoin_uavs = update_duty_map_on_transitions(
+        duty_map=duty_map, duty_positions=duty_positions, env=env,
+        charging_before=charging_before, charging_after=charging_after,
+        schedule=schedule, locked_duties=locked_duties)
+    metrics = extract_step_metrics(env, infos) if infos else {
+        "qos_satisfaction_ratio": 0.0, "return_constraint_cost": 0.0,
+        "return_constraint_cost_raw": 0.0,
+        "cutoff_mask": np.asarray(env.uav_battery_ratios, dtype=float) <= float(
+            getattr(env, "service_cutoff_threshold", 0.02)),
+        "depletion_mask": np.asarray(env.uav_battery_ratios, dtype=float) <= float(
+            getattr(env, "depleted_battery_threshold", 0.0)),
+    }
+    return {
+        "actions": action_record,
+        "duty_positions": duty_positions,
+        "service_centroids": service_centroids_next,
+        "duty_map": new_map,
+        "leave_uavs": leave_uavs,
+        "rejoin_uavs": rejoin_uavs,
+        "charging_before": charging_before,
+        "charging_after": charging_after,
+        "metrics": metrics,
+        "qos_user_step": per_user_qos_ratio(env),
+    }
+
+
+# =============================================================================
+# Section 2 evaluator-only forward replay, on a CLONE (item 2)
+# =============================================================================
+
+def evaluator_forward_replay(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
+                              delta_steps: int = DELTA) -> dict:
+    """Section 2's evaluator-only forward replay: an independent CLONE of
+    the pinned env (never the real rollout) is advanced `delta_steps` under
+    the UNPERTURBED `constructive_mixed` continuation, purely to certify
+    stable/flex predicates -- it never contributes to the recorded episode
+    or its replay prefix. A state-hash equality assertion runs immediately
+    after cloning, before any step, so a divergent clone can never silently
+    contaminate certification."""
+    hash_before = compute_state_hash(real_env_state_snapshot(env, duty_map))
+    clone = copy.deepcopy(env)
+    hash_clone = compute_state_hash(real_env_state_snapshot(clone, duty_map))
+    assert_state_hash_equal(hash_before, hash_clone, context="evaluator forward-replay clone")
+
+    clone_duty_map = dict(duty_map)
+    clone_centroids = None if service_centroids is None else np.asarray(service_centroids).copy()
+    charging_ever = np.zeros(int(env.n_uavs), dtype=bool)
+    duty_positions_final = None
+    for _ in range(int(delta_steps)):
+        step = step_once(clone, duty_map=clone_duty_map, service_centroids=clone_centroids,
+                          schedule="constructive_mixed")
+        clone_duty_map = step["duty_map"]
+        clone_centroids = step["service_centroids"]
+        duty_positions_final = step["duty_positions"]
+        charging_ever |= step["charging_after"]
+    return {
+        "charging_ever": charging_ever,
+        "duty_positions_final": duty_positions_final if duty_positions_final is not None else {},
+        "duty_map_final": clone_duty_map,
+    }
+
+
+# =============================================================================
+# Item 2 -- LEAVE-candidate assembly and joint-event search
+# =============================================================================
+
+def build_leave_candidate(env, *, uav_idx: int, t_e_step: int, schedule: str,
+                           station_occupancy_after: np.ndarray, station_queue_after: np.ndarray,
+                           cutoff_before: bool, depletion_before: bool) -> dict:
+    """Assembles one LEAVE candidate's eligibility+conformance fields from
+    real env state observed AT the LEAVE step -- the exact fields
+    `check_leave_eligibility`/`build_event_conformance_record` consume.
+    Occupancy/queue are read POST-step ("at the moment of capture", per
+    `check_leave_eligibility`'s own docstring), with the capturing UAV's own
+    slot subtracted so a 1-slot station's successful, uncontested capture
+    reads as zero contention rather than spuriously excluding itself."""
+    station_idx = int(env.uav_target_stations[uav_idx])
+    occ_excl_self = max(0.0, float(station_occupancy_after[station_idx])) - 1.0 if station_idx >= 0 else 0.0
+    occ_excl_self = max(0.0, occ_excl_self)
+    queue_len = float(station_queue_after[station_idx]) if station_idx >= 0 else 0.0
+    last_arrival = np.asarray(getattr(env, "last_charging_arrival",
+                                       np.zeros(env.n_uavs, dtype=bool)))
+    return {
+        "t_e": int(t_e_step),
+        "uav_idx": int(uav_idx),
+        "station_occupancy_excluding_self": occ_excl_self,
+        "station_queue_length": queue_len,
+        "cutoff_at_leave": bool(cutoff_before),
+        "depletion_at_leave": bool(depletion_before),
+        "temporary_failure": bool(np.asarray(getattr(
+            env, "uav_failed", np.zeros(env.n_uavs, dtype=bool)))[uav_idx]),
+        "schedule_identity": schedule,
+        "pre_service_status": "ACTIVE",
+        "post_service_status": "CHARGE_ABSENT",
+        "capture_edge": True,
+        "last_charging_arrival": bool(last_arrival[uav_idx]),
+        "uav_charging": True,
+        "uav_dock_requests": bool(env.uav_dock_requests[uav_idx]),
+        "uav_target_stations": station_idx,
+        "battery_ratio": float(env.uav_battery_ratios[uav_idx]),
+        "return_energy_margin": float(np.asarray(getattr(
+            env, "uav_return_energy_margins", np.zeros(env.n_uavs)))[uav_idx]),
+        "uav_position": np.asarray(env.uav_positions[uav_idx], dtype=float).tolist(),
+        "station_position": (np.asarray(env.charging_station_positions[station_idx], dtype=float).tolist()
+                              if station_idx >= 0 else None),
+        "station_occupancy": occ_excl_self,
+        "station_queue_length": queue_len,
+    }
+
+
+def _stable_candidates_at(*, duty_map: dict, duty_positions_before: dict,
+                           duty_positions_after: dict, vacated_target, exclude_uav: int,
+                           replay_forward: dict, domain_bounds) -> list:
+    """Every OTHER active, duty-holding UAV as a stable-certification
+    candidate, in ascending duty-id order (the canonical ordering already
+    established for tie-breaks elsewhere in this module)."""
+    candidates = []
+    for d, u in sorted(duty_map.items()):
+        if u == exclude_uav:
+            continue
+        target_before = duty_positions_before.get(d)
+        target_after = replay_forward["duty_positions_final"].get(d)
+        if target_before is None or target_after is None:
+            continue
+        displacement = float(np.linalg.norm(np.asarray(target_after[:2]) - np.asarray(target_before[:2])))
+        legal = legal_set_targets(
+            post_leave_targets=list(duty_positions_after.values()),
+            vacated_pre_leave_target=vacated_target if vacated_target is not None else target_before,
+            focal_incumbent_target=target_before, domain_bounds=domain_bounds)
+        candidates.append({
+            "uav": u, "duty": d, "legal_targets": legal,
+            "kwargs": dict(active=True, has_valid_incumbent=True,
+                           future_target_displacement_m=displacement,
+                           scheduled_to_leave_within_delta=bool(replay_forward["charging_ever"][u]),
+                           has_legal_set_alternative=len(legal) > 0),
+        })
+    return candidates
+
+
+def _flex_survivors_at(env, *, duty_map: dict, vacated_target, exclude_uav: int) -> dict:
+    survivors: dict = {}
+    if vacated_target is None:
+        return survivors
+    for d, u in duty_map.items():
+        if u == exclude_uav or bool(env.uav_charging[u]):
+            continue
+        distance = float(np.linalg.norm(
+            np.asarray(env.uav_positions[u][:2], dtype=float) - np.asarray(vacated_target[:2], dtype=float)))
+        transit = flex_transit_steps_for_env(env, distance)
+        battery = float(env.uav_battery_ratios[u])
+        power_transit = float(env._calculate_power_consumption(float(env.max_speed), 0.0))
+        e_wh = transit * power_transit * float(env.time_step) / 3600.0
+        support_ok = (battery - e_wh / max(float(env.battery_capacity_wh), 1e-8)) > 0.0
+        survivors[u] = {"transit_steps": transit, "support_ok": support_ok}
+    return survivors
+
+
+def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
+    """Item 2's episode driver: rolls `constructive_mixed` from the env's
+    CURRENT (already-reset/pinned) state, recording every action for later
+    prefix replay, until the first joint-qualifying LEAVE (section 2/Q-E4)
+    or `max_step` is exhausted. `t_e` is realized as the LEAVE's own step
+    boundary (distance 0 from itself, which trivially satisfies "at most Y
+    steps before t_e") since this realization has no reduced check cadence
+    below one env step; per Q-E4, if stable does not certify at that t_e
+    the search moves to the NEXT LEAVE entirely, never to a later step of
+    the same LEAVE. Returns the joint event's full snapshot (duty map/
+    positions, state hash, recorded action prefix) or `event=None` with the
+    accumulated exclusion records on a support miss."""
+    duty_map = initial_duty_map()
+    service_centroids = None
+    recorded_actions: list = []
+    exclusions: list = []
+    domain_bounds = domain_bounds_for_env(env)
+
+    for t in range(int(max_step) + 1):
+        battery_before = np.asarray(env.uav_battery_ratios, dtype=float).copy()
+        cutoff_before = battery_before <= float(getattr(env, "service_cutoff_threshold", 0.02))
+        depletion_before = battery_before <= float(getattr(env, "depleted_battery_threshold", 0.0))
+        duty_map_before = dict(duty_map)
+        duty_positions_before, _ = compute_duty_positions(env, service_centroids)
+
+        step = step_once(env, duty_map=duty_map, service_centroids=service_centroids,
+                          schedule="constructive_mixed")
+        recorded_actions.append(step["actions"])
+        duty_map = step["duty_map"]
+        service_centroids = step["service_centroids"]
+
+        for u in step["leave_uavs"]:
+            cand = build_leave_candidate(
+                env, uav_idx=u, t_e_step=t + 1, schedule="constructive_mixed",
+                station_occupancy_after=np.asarray(env.station_occupancy, dtype=float),
+                station_queue_after=np.asarray(env.station_queue_lengths, dtype=float),
+                cutoff_before=bool(cutoff_before[u]), depletion_before=bool(depletion_before[u]))
+            elig_reasons = check_leave_eligibility(cand, t_e=cand["t_e"])
+            if elig_reasons:
+                exclusions.append({"t_e": cand["t_e"], "uav": u, "reasons": elig_reasons})
+                continue
+
+            hash_at_te = compute_state_hash(real_env_state_snapshot(env, duty_map))
+            replay_forward = evaluator_forward_replay(
+                env, duty_map=duty_map, service_centroids=service_centroids)
+
+            vacated_duty = next((d for d, uu in duty_map_before.items() if uu == u), None)
+            vacated_target = duty_positions_before.get(vacated_duty)
+
+            stable_candidates = _stable_candidates_at(
+                duty_map=duty_map, duty_positions_before=duty_positions_before,
+                duty_positions_after=step["duty_positions"], vacated_target=vacated_target,
+                exclude_uav=u, replay_forward=replay_forward, domain_bounds=domain_bounds)
+            survivors = _flex_survivors_at(env, duty_map=duty_map, vacated_target=vacated_target,
+                                            exclude_uav=u)
+            legal_flex = legal_set_targets(
+                post_leave_targets=list(step["duty_positions"].values()),
+                vacated_pre_leave_target=vacated_target if vacated_target is not None else np.zeros(3),
+                focal_incumbent_target=vacated_target if vacated_target is not None else np.zeros(3),
+                domain_bounds=domain_bounds)
+            flex_ok, flex_reasons, focal_flex = certify_flex(
+                leave_step=t + 1, prior_check_step=t, t_e=t + 1,
+                queue_or_cutoff_caused=False, survivors=survivors,
+                has_legal_set_alternative=len(legal_flex) > 0)
+
+            stable_ok = False
+            stable_choice = None
+            for cand_s in stable_candidates:
+                ok, reasons = certify_stable(**cand_s["kwargs"])
+                if ok:
+                    stable_ok = True
+                    stable_choice = cand_s
+                    break
+
+            if stable_ok and flex_ok:
+                locked_for_stable = frozenset({stable_choice["duty"]})
+                flex_focal_duty = next(
+                    (d for d, uu in duty_map.items() if uu == focal_flex), None)
+                locked_for_flex = frozenset({flex_focal_duty}) if flex_focal_duty is not None else frozenset()
+                event = {
+                    "t_e": t + 1,
+                    "focal_flex_uav": focal_flex,
+                    "focal_stable_uav": stable_choice["uav"],
+                    "focal_stable_duty": stable_choice["duty"],
+                    "duty_map_at_te": dict(duty_map),
+                    "duty_positions_at_te": step["duty_positions"],
+                    "service_centroids_at_te": service_centroids,
+                    "hash_at_te": hash_at_te,
+                    "vacated_target": vacated_target,
+                    "legal_targets": {
+                        "stable": {_target_id(z): z for z in stable_choice["legal_targets"]},
+                        "flex": {_target_id(z): z for z in legal_flex},
+                    },
+                    "locked_duties": {"stable": locked_for_flex, "flex": locked_for_stable},
+                    "conformance_record": build_event_conformance_record(cand),
+                }
+                return {"event": event, "exclusions": exclusions, "recorded_actions": recorded_actions}
+            exclusions.append({
+                "t_e": cand["t_e"], "stable_certified": stable_ok,
+                "flex_certified": flex_ok, "flex_reasons": flex_reasons,
+            })
+    return {"event": None, "exclusions": exclusions, "recorded_actions": recorded_actions}
+
+
+def _target_id(target) -> str:
+    t = np.asarray(target, dtype=float)
+    # 6-decimal precision, tighter than `legal_set_targets`' own 1e-6
+    # geometric-dedup tolerance, so two targets the dedup treats as
+    # DISTINCT can never collide onto the same dict key here (which would
+    # silently drop one candidate from `run_audit_event`'s `candidates`
+    # dict rather than raising).
+    return "z_{:.6f}_{:.6f}_{:.6f}".format(float(t[0]), float(t[1]), float(t[2]) if t.shape[0] > 2 else 0.0)
+
+
+# =============================================================================
+# Item 3 -- fixed-history prefix replay from a FRESH pinned env
+# =============================================================================
+
+def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
+                   recorded_actions: list, expected_hash: str, duty_map_at_te: dict,
+                   energy_permutation: Optional[np.ndarray] = None, energy_stage: str = "S3"):
+    """Section 8/Q-I2's fixed-history mechanism: fresh pinned env, same
+    episode seed, replay the EXACT recorded source-control actions up to
+    `t_e`, assert the resulting state hash against the ORIGINAL rollout's
+    recorded hash at `t_e`. A mismatch raises `PrefixReplayMismatchError`
+    and is NEVER repaired -- the caller must treat that as invalidating the
+    pair, never retried or silently downgraded."""
+    env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
+                            coord_hash=coord_hash, energy_stage=energy_stage)
+    if energy_permutation is not None:
+        apply_energy_profile(env, energy_permutation)
+    for actions in recorded_actions:
+        env.step(actions)
+    actual_hash = compute_state_hash(real_env_state_snapshot(env, duty_map_at_te))
+    assert_state_hash_equal(expected_hash, actual_hash, context="prefix replay to t_e")
+    return env
+
+
+def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
+                       service_centroids_at_te, schedule: str, horizon: int,
+                       continuation_seed: int, focal_uav: Optional[int] = None,
+                       focal_target=None, delta_steps: int = DELTA,
+                       locked_duties: frozenset = frozenset()) -> dict:
+    """Forks ONE continuation from an env already replayed to `t_e`:
+    reseeds `env.np_random` to the stream_seed-derived continuation RNG
+    (never the stream that generated the prefix), then rolls `horizon`
+    steps under `schedule`. If `focal_uav` is given, its action target is
+    forced to `focal_target` for the first `delta_steps` steps (the SET
+    arm); KEEP is realized by omitting `focal_uav` entirely -- the
+    unperturbed continuation IS the KEEP arm (section 1: "at t_e+Delta
+    every constraint is released; both branches receive the same best
+    legal continuation" holds identically whether or not a focal was ever
+    diverted). While the focal is diverted, its OWN duty is treated as a
+    virtual LEAVE (vacated, re-matched among survivors by the SAME accepted
+    `constructive_mixed_update` the real LEAVE/REJOIN machinery uses) and a
+    virtual REJOIN restores it at `t_e + delta_steps` -- this reuses the
+    already-accepted duty-map logic rather than inventing new reassignment
+    semantics for the intervention window."""
+    env.np_random = np.random.RandomState(int(continuation_seed) % (2**32 - 1))
+    duty_map = dict(duty_map_at_te)
+    service_centroids = None if service_centroids_at_te is None else np.asarray(service_centroids_at_te).copy()
+    step_metrics: list = []
+    qos_user_steps: list = []
+
+    if focal_uav is not None:
+        airborne_positions = {i: np.asarray(env.uav_positions[i], dtype=float)
+                               for i in range(int(env.n_uavs)) if not bool(env.uav_charging[i])}
+        duty_map = constructive_mixed_update(
+            duty_map=duty_map, duty_positions=duty_positions_at_te,
+            airborne_positions=airborne_positions, event="LEAVE",
+            event_uav=focal_uav, locked_duties=locked_duties)
+
+    for t in range(int(horizon)):
+        override = None
+        if focal_uav is not None and focal_target is not None and t < int(delta_steps):
+            override = {focal_uav: np.asarray(focal_target, dtype=float)}
+        step = step_once(env, duty_map=duty_map, service_centroids=service_centroids,
+                          schedule=schedule, target_override=override,
+                          locked_duties=locked_duties)
+        duty_map = step["duty_map"]
+        service_centroids = step["service_centroids"]
+        step_metrics.append(step["metrics"])
+        qos_user_steps.append(step["qos_user_step"])
+        if focal_uav is not None and t == int(delta_steps) - 1:
+            airborne_positions = {i: np.asarray(env.uav_positions[i], dtype=float)
+                                   for i in range(int(env.n_uavs)) if not bool(env.uav_charging[i])}
+            duty_map = constructive_mixed_update(
+                duty_map=duty_map, duty_positions=step["duty_positions"],
+                airborne_positions=airborne_positions, event="REJOIN",
+                event_uav=focal_uav, locked_duties=locked_duties)
+
+    return {"step_metrics": step_metrics, "qos_user_steps": qos_user_steps}
+
+
+# =============================================================================
+# Item 4 -- window G accumulation from real per-step component fields
+# =============================================================================
+
+def window_g_from_step_metrics(step_metrics: list, qos_user_steps: list, *, h: int,
+                                baseline_cutoff_mask: np.ndarray,
+                                baseline_depletion_mask: np.ndarray) -> dict:
+    """Item 4: window G accumulation from real per-step component fields
+    (section 7), using the already-accepted `compute_G`/
+    `window_latched_counts`/`nondegeneracy_report` -- never recomputes the
+    analyzer formula independently. `baseline_*_mask` is the previous-step
+    state recorded AT `t_e` (row 0 of the H+1-row convention, see
+    `window_series_length`)."""
+    n = min(len(step_metrics), int(h))
+    n_uavs = len(baseline_cutoff_mask)
+    qos_series = np.array([m["qos_satisfaction_ratio"] for m in step_metrics[:n]], dtype=float)
+    return_cost_series = np.array([m["return_constraint_cost"] for m in step_metrics[:n]], dtype=float)
+    return_cost_raw_series = np.array([m["return_constraint_cost_raw"] for m in step_metrics[:n]], dtype=float)
+
+    cutoff_series = np.zeros((n + 1, n_uavs), dtype=bool)
+    depletion_series = np.zeros((n + 1, n_uavs), dtype=bool)
+    cutoff_series[0] = baseline_cutoff_mask
+    depletion_series[0] = baseline_depletion_mask
+    for i in range(n):
+        cutoff_series[i + 1] = step_metrics[i]["cutoff_mask"]
+        depletion_series[i + 1] = step_metrics[i]["depletion_mask"]
+    latched = window_latched_counts(cutoff_series, depletion_series)
+
+    g_series = np.array([
+        compute_G(qos_satisfaction_ratio=qos_series[i], return_constraint_cost=return_cost_series[i],
+                  new_cutoff_count=int(latched["cutoff_per_step"][i + 1]),
+                  new_depletion_count=int(latched["depletion_per_step"][i + 1]))
+        for i in range(n)
+    ], dtype=float)
+
+    qos_user_flat = (np.concatenate([np.asarray(q, dtype=float) for q in qos_user_steps[:n]])
+                      if n and len(qos_user_steps) else np.array([]))
+    report = nondegeneracy_report(
+        qos_series=qos_series, qos_user_step=qos_user_flat, return_cost_series=return_cost_series,
+        cutoff_incidence=latched["cutoff_count"], depletion_incidence=latched["depletion_count"],
+        g_series=g_series, secondary_series=return_cost_raw_series)
+    return {"g_total": float(np.sum(g_series)) if n else 0.0, "g_series": g_series, "report": report,
+            "latched": latched}
+
+
+def _baseline_masks(env) -> tuple:
+    battery = np.asarray(env.uav_battery_ratios, dtype=float)
+    cutoff = battery <= float(getattr(env, "service_cutoff_threshold", 0.02))
+    depletion = battery <= float(getattr(env, "depleted_battery_threshold", 0.0))
+    return cutoff, depletion
+
+
+# =============================================================================
+# Item 5 -- calibration episode driver (B_m: constructive_mixed vs null)
+# =============================================================================
+
+def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, energy_seed: int,
+                             coords: dict, coord_hash: str, energy_stage: str = "S3") -> dict:
+    """One item-2/3/5 calibration episode: rolls `constructive_mixed` from
+    reset to find the joint qualifying event (section 2/Q-E4), then forks
+    at `t_e` into `constructive_mixed` vs `null` and evaluates BOTH
+    `H_stable` and `H_flex` from the SAME paired continuation type (section
+    5). Returns `support_miss=True` (never a synthetic zero) when no
+    qualifying joint event was found."""
+    env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
+                            coord_hash=coord_hash, energy_stage=energy_stage)
+    energies = draw_energy_permutation(energy_seed=energy_seed)
+    apply_energy_profile(env, energies)
+    prefix = roll_prefix_and_find_event(env)
+    if prefix["event"] is None:
+        return {"support_miss": True, "exclusions": prefix["exclusions"]}
+
+    event = prefix["event"]
+    results = {}
+    for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
+        g_by_schedule = {}
+        for schedule in ("constructive_mixed", "null"):
+            replay_env = replay_prefix(
+                config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+                recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
+                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+                energy_stage=energy_stage)
+            baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
+            cont_seed = stream_seed(
+                topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
+                limb=limb, event_index=0, candidate_target_id=schedule,
+                phase="evaluate", replicate_index=0)
+            out = fork_continuation(
+                replay_env, duty_map_at_te=event["duty_map_at_te"],
+                duty_positions_at_te=event["duty_positions_at_te"],
+                service_centroids_at_te=event["service_centroids_at_te"],
+                schedule=schedule, horizon=h_val, continuation_seed=cont_seed)
+            g_by_schedule[schedule] = window_g_from_step_metrics(
+                out["step_metrics"], out["qos_user_steps"], h=h_val,
+                baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+        results[limb] = {
+            "b_value": g_by_schedule["constructive_mixed"]["g_total"] - g_by_schedule["null"]["g_total"],
+            "constructive": g_by_schedule["constructive_mixed"],
+            "null": g_by_schedule["null"],
+        }
+    return {"support_miss": False, "event": event["conformance_record"], "results": results}
+
+
+# =============================================================================
+# Item 3/5 -- audit event driver (KEEP + legal-z SET, n_select/n_eval streams)
+# =============================================================================
+
+def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: dict, coord_hash: str,
+                     recorded_actions: list, energies: np.ndarray, event: dict, limb: str,
+                     n_select: int, n_eval: int, energy_stage: str = "S3") -> dict:
+    """Item 3's audit-event intervention: KEEP (unperturbed
+    `constructive_mixed` continuation) plus, for every legal `z` in the
+    limb's `Z(h)`, `n_select` selection-stream replicates and `n_eval`
+    evaluation-stream replicates -- all via fresh bit-identical prefix
+    replay. Returns the `hierarchical_bootstrap_events`-shaped per-event
+    unit: `{"candidates": {z: {"select":.., "eval_set":..}}, "eval_keep":..}`."""
+    h_val = H_STABLE if limb == "stable" else H_FLEX
+    focal_uav = event["focal_stable_uav"] if limb == "stable" else event["focal_flex_uav"]
+    legal_targets = event["legal_targets"][limb]
+    locked_duties = event["locked_duties"][limb]
+
+    def _run_replicate(*, target, candidate_id: str, phase: str, replicate_index: int) -> float:
+        replay_env = replay_prefix(
+            config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+            recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
+            duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+            energy_stage=energy_stage)
+        baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
+        cont_seed = stream_seed(
+            topology_seed=topology_seed, block="audit", episode_seed=episode_seed,
+            limb=limb, event_index=0, candidate_target_id=candidate_id,
+            phase=phase, replicate_index=replicate_index)
+        out = fork_continuation(
+            replay_env, duty_map_at_te=event["duty_map_at_te"],
+            duty_positions_at_te=event["duty_positions_at_te"],
+            service_centroids_at_te=event["service_centroids_at_te"],
+            schedule="constructive_mixed", horizon=h_val, continuation_seed=cont_seed,
+            focal_uav=focal_uav if target is not None else None, focal_target=target,
+            locked_duties=locked_duties)
+        g = window_g_from_step_metrics(
+            out["step_metrics"], out["qos_user_steps"], h=h_val,
+            baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+        return g["g_total"]
+
+    keep_eval = np.array([
+        _run_replicate(target=None, candidate_id="KEEP", phase="evaluate", replicate_index=r)
+        for r in range(n_eval)
+    ], dtype=float)
+
+    candidates = {}
+    for z_id, z_target in legal_targets.items():
+        select_vals = np.array([
+            _run_replicate(target=z_target, candidate_id=z_id, phase="select", replicate_index=r)
+            for r in range(n_select)
+        ], dtype=float)
+        eval_vals = np.array([
+            _run_replicate(target=z_target, candidate_id=z_id, phase="evaluate", replicate_index=r)
+            for r in range(n_eval)
+        ], dtype=float)
+        candidates[z_id] = {"select": select_vals, "eval_set": eval_vals}
+
+    return {"candidates": candidates, "eval_keep": keep_eval}
+
+
+# =============================================================================
+# Item 5 -- per-topology driver
+# =============================================================================
+
+def _derived_seed(*, topology_seed: int, block: str, idx: int, tag: str) -> int:
+    return int(stream_seed(
+        topology_seed=topology_seed, block=block, episode_seed=idx, limb="na",
+        event_index=0, candidate_target_id=tag, phase="episode", replicate_index=0
+    ) % (2**31 - 1))
+
+
+def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audit: int,
+                        n_select: int = N_SELECT, n_eval: int = N_EVAL, smoke: bool = False,
+                        energy_stage: str = "S3") -> dict:
+    """Item 5's per-topology driver: section 9 pinning, the calibration
+    block (B_m) and the audit block (U*_m, both limbs), assembled into the
+    exact shapes `compute_t_m_bootstrap` consumes."""
+    coords, coord_hash = build_topology_template(config, topology_seed=topology_seed)
+    record = build_topology_record(coords, coord_hash, topology_seed=topology_seed)
+    this_n_select = 1 if smoke else n_select
+    this_n_eval = 2 if smoke else n_eval
+
+    calibration_units_stable, calibration_units_flex = [], []
+    calibration_report = {"episodes_attempted": 0, "qualifying": 0, "exclusions": []}
+    for idx in range(n_calibration):
+        calibration_report["episodes_attempted"] += 1
+        ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
+        en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
+        result = run_calibration_episode(
+            config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
+            coords=coords, coord_hash=coord_hash, energy_stage=energy_stage)
+        if result.get("support_miss"):
+            calibration_report["exclusions"].append(result.get("exclusions", []))
+            continue
+        calibration_report["qualifying"] += 1
+        g_s, g_f = result["results"]["stable"], result["results"]["flex"]
+        calibration_units_stable.append({
+            "candidates": {"cvn": {"select": np.array([g_s["constructive"]["g_total"]]),
+                                    "eval_set": np.array([g_s["constructive"]["g_total"]])}},
+            "eval_keep": np.array([g_s["null"]["g_total"]]),
+        })
+        calibration_units_flex.append({
+            "candidates": {"cvn": {"select": np.array([g_f["constructive"]["g_total"]]),
+                                    "eval_set": np.array([g_f["constructive"]["g_total"]])}},
+            "eval_keep": np.array([g_f["null"]["g_total"]]),
+        })
+
+    audit_units_stable, audit_units_flex, audit_events_out = [], [], []
+    audit_report = {"episodes_attempted": 0, "qualifying": 0, "exclusions": []}
+    for idx in range(n_audit):
+        audit_report["episodes_attempted"] += 1
+        ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
+        en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="energy_seed")
+        env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
+                                energy_stage=energy_stage)
+        energies = draw_energy_permutation(energy_seed=en_seed)
+        apply_energy_profile(env, energies)
+        prefix = roll_prefix_and_find_event(env)
+        if prefix["event"] is None:
+            audit_report["exclusions"].append(prefix["exclusions"])
+            continue
+        audit_report["qualifying"] += 1
+        event = prefix["event"]
+        unit_stable = run_audit_event(
+            config, topology_seed=topology_seed, episode_seed=ep_seed, coords=coords,
+            coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
+            event=event, limb="stable", n_select=this_n_select, n_eval=this_n_eval,
+            energy_stage=energy_stage)
+        unit_flex = run_audit_event(
+            config, topology_seed=topology_seed, episode_seed=ep_seed, coords=coords,
+            coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
+            event=event, limb="flex", n_select=this_n_select, n_eval=this_n_eval,
+            energy_stage=energy_stage)
+        audit_units_stable.append(unit_stable)
+        audit_units_flex.append(unit_flex)
+        audit_events_out.append(event["conformance_record"])
+
+    return {
+        "topology_record": record,
+        "calibration_report": calibration_report,
+        "audit_report": audit_report,
+        "calibration_units_stable": calibration_units_stable,
+        "calibration_units_flex": calibration_units_flex,
+        "audit_units_stable": audit_units_stable,
+        "audit_units_flex": audit_units_flex,
+        "audit_events": audit_events_out,
+        "qualifying_calibration_episodes": calibration_report["qualifying"],
+        "qualifying_audit_episodes": audit_report["qualifying"],
+    }
+
+
+def _json_default(obj):
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, (np.floating,)):
+        return float(obj)
+    if isinstance(obj, (np.integer,)):
+        return int(obj)
+    if isinstance(obj, (np.bool_,)):
+        return bool(obj)
+    if isinstance(obj, frozenset):
+        return sorted(obj)
+    return str(obj)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dev", action="store_true",
                          help="Use the development-only topology 20260725; no scientific reading.")
+    parser.add_argument("--topology-seeds", type=int, nargs="*", default=None,
+                         help="Override the registered topology seed list.")
+    parser.add_argument("--episodes-calibration", type=int, default=N_CALIBRATION_EPISODES)
+    parser.add_argument("--episodes-audit", type=int, default=N_AUDIT_EPISODES)
     parser.add_argument("--out", default="")
-    parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--smoke", action="store_true",
+                         help="ONE topology, ONE calibration + ONE audit episode, full horizon "
+                              "pieces but n_select=1/n_eval=2. JSON tagged SMOKE_NOT_A_RESULT. "
+                              "Proof-sized only -- not the formal audit.")
     args = parser.parse_args()
 
-    topology_seeds = [TOPOLOGY_SEED_DEV] if args.dev else list(TOPOLOGY_SEEDS_INITIAL)
-    config = build_config()
+    if args.smoke:
+        topology_seeds = [TOPOLOGY_SEED_DEV]
+        n_calibration, n_audit = 1, 1
+    elif args.topology_seeds:
+        topology_seeds = list(args.topology_seeds)
+        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
+    elif args.dev:
+        topology_seeds = [TOPOLOGY_SEED_DEV]
+        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
+    else:
+        topology_seeds = list(TOPOLOGY_SEEDS_INITIAL)
+        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
 
-    # Section 9 steps 1-2 only: construct each topology template and
-    # serialize its pinning record. Real, lightweight environment
-    # construction (no episode stepping) -- see the module docstring for
-    # exactly what this does and does not cover.
-    topology_records = []
+    config = build_config()
+    topology_results = []
     for seed in topology_seeds:
-        coords, coord_hash = build_topology_template(config, topology_seed=seed)
-        record = build_topology_record(coords, coord_hash, topology_seed=seed)
-        topology_records.append(record)
+        # A `TopologyMismatchError`/`PrefixReplayMismatchError` raised inside
+        # this call is a conformance failure (branch 1) and is deliberately
+        # NEVER caught here -- it aborts the run rather than being silently
+        # downgraded into a result.
+        topo_out = run_topology_audit(
+            config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit, smoke=args.smoke)
+        topology_results.append(topo_out)
         if args.out:
-            write_topology_record(args.out, record)
+            write_topology_record(args.out, topo_out["topology_record"])
+
+    support_ok, support_detail = check_minimum_support([
+        {"qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
+         "qualifying_audit_episodes": r["qualifying_audit_episodes"]}
+        for r in topology_results
+    ])
 
     result = {
         "contract": CONTRACT_PATH,
         "contract_id": CONTRACT_ID,
-        "note": (
-            "Orchestration scaffold, not a completed audit: this run executed section 9's "
-            "topology-template construction and pinning-record serialization ONLY (real, "
-            "lightweight environment construction, no episode stepping). The "
-            "event-detection -> legal-SET -> bootstrap pipeline is proved by the focused "
-            "test suite against synthetic inputs and was NOT executed against a real "
-            "environment here -- see the module docstring and the accompanying report."
-        ),
+        "procedure_version": TOPOLOGY_PROCEDURE_VERSION,
         "topology_seeds": topology_seeds,
-        "topology_records": [
-            {"topology_seed": r["topology_seed"], "coordinate_hash": r["coordinate_hash"]}
-            for r in topology_records
-        ],
-        "heldout_low": [float(x) for x in HELDOUT_LOW],
-        "thresholds": {
-            "X_stable_m": X_STABLE_DISPLACEMENT_M,
-            "Y_flex_steps": Y_FLEX_STEPS,
-            "Z_flex_transit_steps": Z_FLEX_TRANSIT_STEPS,
-            "H_stable": H_STABLE,
-            "H_flex": H_FLEX,
-            "t_e_max": T_E_MAX,
-        },
+        "smoke": bool(args.smoke),
+        "note": "SMOKE_NOT_A_RESULT" if args.smoke else (
+            "Real orchestration run. Part-A full_sync_SET conformance is NOT wired here "
+            "(conformance_ok/part_a_contradiction below are conservative placeholders, not a "
+            "measured Part-A result) -- see the implementer report."
+        ),
+        "topology_records": [r["topology_record"] for r in topology_results],
+        "calibration_reports": [r["calibration_report"] for r in topology_results],
+        "audit_reports": [r["audit_report"] for r in topology_results],
+        "audit_events": [r["audit_events"] for r in topology_results],
+        "support": {"ok": support_ok, "detail": support_detail},
     }
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+
+    if len(topology_results) > 1 and support_ok:
+        n_topo = len(topology_results)
+        t_m = compute_t_m_bootstrap(
+            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
+            b_flex_topology_units=[r["calibration_units_flex"] for r in topology_results],
+            u_star_stable_topology_units=[r["audit_units_stable"] for r in topology_results],
+            u_star_flex_topology_units=[r["audit_units_flex"] for r in topology_results],
+            n_topo=n_topo)
+        result["t_m_bootstrap"] = {k: v for k, v in t_m.items() if k != "shared_topology_indices"}
+        result["branch"] = decide_branch(
+            conformance_ok=True, support_ok=support_ok, primary_g_degenerate_flag=False,
+            part_a_contradiction=False, b_stable_lcb=t_m["b_stable_lcb"],
+            t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
+            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
+    elif not support_ok:
+        result["branch"] = "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    else:
+        result["branch"] = None
+
+    print(json.dumps(result, ensure_ascii=False, indent=2, default=_json_default))
     if args.out:
         out = Path(args.out)
         out.mkdir(parents=True, exist_ok=True)
         with (out / "d7_s_event_aligned.json").open("w", encoding="utf-8") as fh:
-            json.dump(result, fh, ensure_ascii=False, indent=2)
+            json.dump(result, fh, ensure_ascii=False, indent=2, default=_json_default)
 
 
 if __name__ == "__main__":

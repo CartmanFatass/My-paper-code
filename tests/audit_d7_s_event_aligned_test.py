@@ -1203,5 +1203,377 @@ def test_window_latched_counts_on_a_full_h_stable_sized_series():
     assert result["cutoff_count"] == 1
 
 
+# =============================================================================
+# 10. Real-env orchestration layer (item 6): dock-decision boundary, event-scan
+# glue, prefix-replay fork discipline, evaluator forward-replay producer.
+# =============================================================================
+
+def test_dock_trigger_ratio_hand_worked():
+    # 10 transit steps at 500 W cruise power, dt=1s, 100 Wh capacity, 0.10 reserve:
+    # E = 10 * 500 * 1 / 3600 = 1.3889 Wh -> ratio 0.013889 + 0.10 = 0.113889
+    trig = audit.dock_trigger_ratio(
+        distance_m=290.0, max_speed=30.0, dt=1.0, power_transit_w=500.0,
+        battery_capacity_wh=100.0, return_reserve_ratio=0.10)
+    # ceil(290/30) = 10 transit steps
+    assert trig == pytest.approx(0.10 + (10 * 500.0 * 1.0 / 3600.0) / 100.0)
+
+
+def test_should_depart_for_charge_boundary_equal_departs():
+    """`battery_ratio <= trigger_ratio` -- equality must depart (the LATEST
+    safe boundary is itself still safe, not the step after)."""
+    assert audit.should_depart_for_charge(battery_ratio=0.20, trigger_ratio=0.20) is True
+
+
+def test_should_depart_for_charge_boundary_just_above_does_not_depart():
+    assert audit.should_depart_for_charge(battery_ratio=0.2000001, trigger_ratio=0.20) is False
+
+
+def test_should_depart_for_charge_boundary_just_below_departs():
+    assert audit.should_depart_for_charge(battery_ratio=0.1999999, trigger_ratio=0.20) is True
+
+
+def test_dock_trigger_ratio_increases_with_distance():
+    """A farther station must trigger departure at a HIGHER battery ratio
+    (leave earlier) -- this is the "forward-planned" content of the rule,
+    not just an additive constant; a formula that ignored distance would
+    fail this."""
+    near = audit.dock_trigger_ratio(distance_m=100.0, max_speed=30.0, dt=1.0,
+                                     power_transit_w=400.0, battery_capacity_wh=160.0,
+                                     return_reserve_ratio=0.10)
+    far = audit.dock_trigger_ratio(distance_m=5000.0, max_speed=30.0, dt=1.0,
+                                    power_transit_w=400.0, battery_capacity_wh=160.0,
+                                    return_reserve_ratio=0.10)
+    assert far > near
+
+
+# --- event-scan glue: an env schedule producing a qualifying LEAVE and one
+# of each exclusion (build_leave_candidate -> check_leave_eligibility) -------
+
+def _leave_env_stub(*, station_occupancy_after, station_queue_after, target_station=0):
+    class _Stub:
+        n_uavs = 4
+        uav_target_stations = np.array([target_station, -1, -1, -1])
+        uav_dock_requests = np.array([True, False, False, False])
+        uav_battery_ratios = np.array([0.20, 0.9, 0.9, 0.9])
+        uav_positions = np.zeros((4, 3))
+        charging_station_positions = np.array([[100.0, 0.0, 0.0], [200.0, 0.0, 0.0]])
+        uav_failed = np.zeros(4, dtype=bool)
+        last_charging_arrival = np.array([True, False, False, False])
+        uav_return_energy_margins = np.array([0.05, 0.5, 0.5, 0.5])
+    return _Stub()
+
+
+def test_event_scan_clean_leave_has_no_exclusion_and_full_conformance_record():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=False, depletion_before=False)
+    assert audit.check_leave_eligibility(cand, t_e=42) == []
+    record = audit.build_event_conformance_record(cand)
+    assert record["uav_charging"] is True
+    assert record["battery_ratio"] == pytest.approx(0.20)
+    # capacity-1 station, uncontested capture -> occupancy-excluding-self is 0
+    assert cand["station_occupancy_excluding_self"] == 0.0
+
+
+def test_event_scan_contested_station_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([2.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([2.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=False, depletion_before=False)
+    assert audit.EXCLUDE_QUEUE_OR_OCCUPIED in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_event_scan_nonzero_queue_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([1.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([1.0, 0.0]),
+        cutoff_before=False, depletion_before=False)
+    assert audit.EXCLUDE_QUEUE_OR_OCCUPIED in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_event_scan_cutoff_before_leave_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=True, depletion_before=False)
+    assert audit.EXCLUDE_EMERGENCY in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_event_scan_depletion_before_leave_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=False, depletion_before=True)
+    assert audit.EXCLUDE_EMERGENCY in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_event_scan_temporary_failure_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    env.uav_failed = np.array([True, False, False, False])
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="constructive_mixed",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=False, depletion_before=False)
+    assert audit.EXCLUDE_TEMP_FAILURE in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_event_scan_off_schedule_leave_excludes():
+    env = _leave_env_stub(station_occupancy_after=np.array([1.0, 0.0]),
+                           station_queue_after=np.array([0.0, 0.0]))
+    cand = audit.build_leave_candidate(
+        env, uav_idx=0, t_e_step=42, schedule="null",
+        station_occupancy_after=np.array([1.0, 0.0]), station_queue_after=np.array([0.0, 0.0]),
+        cutoff_before=False, depletion_before=False)
+    assert audit.EXCLUDE_OFF_SCHEDULE in audit.check_leave_eligibility(cand, t_e=42)
+
+
+def test_update_duty_map_on_transitions_detects_leave_and_rejoin_edges():
+    class _Env:
+        n_uavs = 3
+        uav_positions = np.array([[0.0, 0.0, 0.0], [10.0, 0.0, 0.0], [20.0, 0.0, 0.0]])
+
+    duty_positions = {0: np.array([0.0, 0.0, 0.0]), 1: np.array([10.0, 0.0, 0.0]),
+                       2: np.array([20.0, 0.0, 0.0])}
+    duty_map = {0: 0, 1: 1, 2: 2}
+    before = np.array([False, False, False])
+    after_leave = np.array([True, False, False])
+    new_map, leave_uavs, rejoin_uavs = audit.update_duty_map_on_transitions(
+        duty_map=duty_map, duty_positions=duty_positions, env=_Env(),
+        charging_before=before, charging_after=after_leave, schedule="constructive_mixed")
+    assert leave_uavs == [0] and rejoin_uavs == []
+    assert 0 not in new_map.values()  # uav 0 removed from the duty map at LEAVE
+
+    after_rejoin = np.array([False, False, False])
+    new_map2, leave2, rejoin2 = audit.update_duty_map_on_transitions(
+        duty_map=new_map, duty_positions=duty_positions, env=_Env(),
+        charging_before=after_leave, charging_after=after_rejoin, schedule="constructive_mixed")
+    assert leave2 == [] and rejoin2 == [0]
+    assert 0 in new_map2.values()  # uav 0 restored to the duty map at REJOIN
+
+
+def test_update_duty_map_on_transitions_null_schedule_never_changes():
+    duty_positions = {0: np.array([0.0, 0.0, 0.0])}
+    duty_map = {0: 0}
+    new_map, leave_uavs, _ = audit.update_duty_map_on_transitions(
+        duty_map=duty_map, duty_positions=duty_positions,
+        env=type("E", (), {"n_uavs": 1, "uav_positions": np.zeros((1, 3))})(),
+        charging_before=np.array([False]), charging_after=np.array([True]), schedule="null")
+    assert leave_uavs == [0]
+    assert new_map == duty_map  # null freezes the map even across a real LEAVE edge
+
+
+# --- prefix-replay fork discipline: a hash mismatch invalidates -------------
+
+def test_replay_hash_mismatch_is_never_silently_repaired():
+    """Mirrors `replay_prefix`'s own discipline (build fresh env, replay
+    recorded steps, hash-check against the ORIGINAL rollout's recorded
+    hash) without going through the real `UAVEnergyAwareRelayEnv`
+    constructor: two independently-evolved snapshots that genuinely
+    diverged (different battery draw) must raise, not be silently
+    accepted or repaired."""
+    duty_map = {0: 0}
+    original_snapshot = {
+        "positions": np.zeros((1, 3)), "battery_ratios": np.array([0.50]),
+        "charging_mask": np.array([False]), "station_occupancy": np.array([0.0]),
+        "station_queue": np.array([0.0]), "lifecycle_mask": np.array([False]),
+        "duty_map": duty_map,
+    }
+    diverged_replay_snapshot = dict(original_snapshot)
+    diverged_replay_snapshot["battery_ratios"] = np.array([0.49])  # replay drifted
+    expected_hash = audit.compute_state_hash(original_snapshot)
+    actual_hash = audit.compute_state_hash(diverged_replay_snapshot)
+    assert expected_hash != actual_hash
+    with pytest.raises(audit.PrefixReplayMismatchError):
+        audit.assert_state_hash_equal(expected_hash, actual_hash, context="prefix replay to t_e")
+
+
+def test_replay_prefix_raises_on_mismatch_via_the_real_orchestration_function(monkeypatch):
+    """Exercises `replay_prefix` itself (not just the primitive it calls):
+    stubs `build_pinned_env` to return a controllable fake env whose
+    replayed state will not match a deliberately wrong `expected_hash`."""
+    class _FakeEnv:
+        n_uavs = 1
+        uav_positions = np.zeros((1, 3))
+        uav_battery_ratios = np.array([0.5])
+        uav_charging = np.array([False])
+        station_occupancy = np.array([0.0])
+        station_queue_lengths = np.array([0.0])
+
+        def step(self, actions):
+            pass
+
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _FakeEnv())
+    with pytest.raises(audit.PrefixReplayMismatchError):
+        audit.replay_prefix(
+            config=None, coords=None, coord_hash="irrelevant", episode_seed=1,
+            recorded_actions=[], expected_hash="deliberately-wrong-hash",
+            duty_map_at_te={0: 0})
+
+
+# --- evaluator-only forward replay: never contaminates the real rollout ----
+
+class _CloneableFakeEnv:
+    """Minimal FakeEnv supporting the full `step_once` pipeline
+    (`compute_duty_positions` / `scripted_source_actions` / `env.step`) with
+    simple deterministic dynamics, so `evaluator_forward_replay` and
+    `fork_continuation` can be exercised end-to-end without a real
+    `UAVEnergyAwareRelayEnv`."""
+
+    def __init__(self, seed=0):
+        rng = np.random.default_rng(seed)
+        self.n_uavs = 4
+        self.n_users = 6
+        self.time_step = 1.0
+        self.max_speed = 30.0
+        self.max_vertical_speed_mps = 5.0
+        self.area_size = 1000.0
+        self.height_range = (80.0, 80.0)
+        self.battery_capacity_wh = 160.0
+        self.charging_power_w = 1000.0
+        self.return_reserve_ratio = 0.10
+        self.service_cutoff_threshold = 0.02
+        self.depleted_battery_threshold = 0.0
+        self.user_qos_rate_mbps = 1.0
+        self.n_charging_stations = 1
+        self.charging_station_positions = np.array([[900.0, 900.0, 80.0]])
+        self.ground_bs_positions = np.array([[0.0, 0.0, 80.0]])
+        self.agents = [f"uav_{i}" for i in range(self.n_uavs)]
+        self.uav_positions = rng.uniform(100.0, 900.0, size=(self.n_uavs, 3))
+        self.uav_positions[:, 2] = 80.0
+        self.user_positions = rng.uniform(100.0, 900.0, size=(self.n_users, 3))
+        self.user_positions[:, 2] = 0.0
+        self._drift = rng.uniform(-2.0, 2.0, size=(self.n_users, 2))
+        self.uav_battery_ratios = np.full(self.n_uavs, 0.9)
+        self.uav_charging = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_dock_requests = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_target_stations = np.full(self.n_uavs, -1, dtype=int)
+        self.uav_failed = np.zeros(self.n_uavs, dtype=bool)
+        self.last_charging_arrival = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_return_energy_margins = np.full(self.n_uavs, 0.5)
+        self.station_occupancy = np.array([0.0])
+        self.station_queue_lengths = np.array([0.0])
+        self.last_user_rates_mbps = np.full(self.n_users, 2e6)
+        self.np_random = np.random.RandomState(seed)
+
+    def _calculate_power_consumption(self, v_h, v_z):
+        return 300.0 + v_h  # deterministic, monotone -- exact value is not load-bearing
+
+    def _nearest_charging_station(self, uav_idx):
+        rel = self.charging_station_positions[0] - self.uav_positions[uav_idx]
+        return 0, rel, float(np.linalg.norm(rel))
+
+    def step(self, actions):
+        # Mirrors the real env's OWN contract exactly: returns the
+        # 5-tuple `(observations, rewards, terminations, truncations,
+        # infos)` -- `scenario_base.py:3547` -- never caches `infos` as a
+        # `self.infos` attribute. `step_once` must read the RETURNED infos.
+        for idx, agent in enumerate(self.agents):
+            act = np.asarray(actions[agent], dtype=float)
+            self.uav_positions[idx, :2] += act[:2] * self.max_speed * self.time_step
+        self.user_positions[:, :2] += self._drift
+        self.uav_battery_ratios = np.clip(self.uav_battery_ratios - 0.001, 0.0, 1.0)
+        infos = {a: {"reward_info": {"qos_satisfaction_ratio": 0.9,
+                                      "return_constraint_cost": 0.05,
+                                      "return_constraint_cost_raw": 0.05}}
+                 for a in self.agents}
+        return None, None, None, None, infos
+
+
+def test_evaluator_forward_replay_does_not_mutate_the_original_env():
+    env = _CloneableFakeEnv(seed=1)
+    duty_positions, centroids = audit.compute_duty_positions(env)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    positions_before = env.uav_positions.copy()
+    users_before = env.user_positions.copy()
+
+    result = audit.evaluator_forward_replay(env, duty_map=duty_map, service_centroids=centroids,
+                                             delta_steps=5)
+
+    np.testing.assert_array_equal(env.uav_positions, positions_before)
+    np.testing.assert_array_equal(env.user_positions, users_before)
+    assert result["duty_positions_final"]
+    # users drifted on the CLONE, so at least one duty target must have moved
+    moved = any(
+        not np.allclose(result["duty_positions_final"][d][:2], duty_positions[d][:2])
+        for d in duty_positions
+    )
+    assert moved
+
+
+def test_evaluator_forward_replay_asserts_hash_before_stepping(monkeypatch):
+    """A clone that (somehow) diverges from the original before any replay
+    step must be caught by the pre-step hash assertion, never silently
+    used."""
+    env = _CloneableFakeEnv(seed=2)
+    duty_map = {i: i for i in range(env.n_uavs)}
+
+    def _bad_deepcopy(obj):
+        clone = _CloneableFakeEnv(seed=2)
+        clone.uav_battery_ratios = clone.uav_battery_ratios + 0.5  # forced divergence
+        return clone
+
+    monkeypatch.setattr(audit.copy, "deepcopy", _bad_deepcopy)
+    with pytest.raises(audit.PrefixReplayMismatchError):
+        audit.evaluator_forward_replay(env, duty_map=duty_map, service_centroids=None, delta_steps=2)
+
+
+def test_fork_continuation_set_arm_diverges_from_keep_arm():
+    """The SET arm (focal forced toward an alternative target for Delta
+    steps) must produce a DIFFERENT trajectory than KEEP (unperturbed) --
+    if it didn't, the intervention machinery would be measuring nothing."""
+    env_keep = _CloneableFakeEnv(seed=3)
+    env_set = _CloneableFakeEnv(seed=3)
+    duty_positions, centroids = audit.compute_duty_positions(env_keep)
+    duty_map = {i: i for i in range(env_keep.n_uavs)}
+    focal = 0
+    alt_target = np.array([10.0, 10.0, 80.0])
+
+    keep_out = audit.fork_continuation(
+        env_keep, duty_map_at_te=duty_map, duty_positions_at_te=duty_positions,
+        service_centroids_at_te=centroids, schedule="constructive_mixed", horizon=5,
+        continuation_seed=123)
+    set_out = audit.fork_continuation(
+        env_set, duty_map_at_te=duty_map, duty_positions_at_te=duty_positions,
+        service_centroids_at_te=centroids, schedule="constructive_mixed", horizon=5,
+        continuation_seed=123, focal_uav=focal, focal_target=alt_target, delta_steps=3)
+
+    assert not np.allclose(env_keep.uav_positions[focal], env_set.uav_positions[focal])
+    assert len(keep_out["step_metrics"]) == 5
+    assert len(set_out["step_metrics"]) == 5
+
+
+def test_fork_continuation_reseeds_np_random_to_the_stream_seed():
+    """`fork_continuation` must reseed `env.np_random` to the
+    stream_seed-derived continuation RNG -- never leave the PRE-FORK stream
+    running (which would silently reuse whatever the prefix rollout already
+    consumed, breaking the disjoint selection/evaluation replicate streams
+    section 8/Q-I2 requires). Planted precondition: `env.np_random` starts
+    seeded to something else (999) entirely, so a no-op reseed would fail
+    this."""
+    env = _CloneableFakeEnv(seed=4)
+    env.np_random = np.random.RandomState(999)
+    duty_positions, centroids = audit.compute_duty_positions(env)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    audit.fork_continuation(
+        env, duty_map_at_te=duty_map, duty_positions_at_te=duty_positions,
+        service_centroids_at_te=centroids, schedule="constructive_mixed", horizon=1,
+        continuation_seed=42)
+    expected_first_draw = np.random.RandomState(42 % (2**32 - 1)).uniform()
+    actual_first_draw = env.np_random.uniform()
+    assert actual_first_draw == pytest.approx(expected_first_draw)
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
