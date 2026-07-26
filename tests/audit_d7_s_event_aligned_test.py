@@ -1817,5 +1817,278 @@ def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
         invalidated_pairs=0, topology_hash_ok=False, arm_distinct_ok=True) is False
 
 
+# =============================================================================
+# 15. Q-E2 per-topology reporting: distinguishing "no LEAVE ever occurred"
+#     from "LEAVEs occurred but were rejected/consumed silently" -- the exact
+#     ambiguity the first real smoke run collapsed (qualifying=0, exclusions=[]).
+# =============================================================================
+
+def test_map_rejection_reasons_eligibility_short_circuits_certification():
+    """Eligibility-stage reasons alone decide the mapping; certification is
+    never reached (mirrors `roll_prefix_and_find_event`'s own `continue`),
+    so certification-side inputs passed alongside must be ignored."""
+    reasons = audit.map_rejection_reasons(
+        eligibility_reasons=[audit.EXCLUDE_CENSORED, audit.EXCLUDE_QUEUE_OR_OCCUPIED],
+        stable_ok=False, stable_reasons=["no_valid_incumbent"],
+        flex_ok=False, flex_reasons=["no_covering_survivor"])
+    assert reasons == {audit.REJECT_CENSORED, audit.REJECT_STATION_CONTENTION}
+
+
+def test_map_rejection_reasons_no_stable_incumbent_only():
+    reasons = audit.map_rejection_reasons(stable_ok=False, stable_reasons=["no_valid_incumbent"])
+    assert reasons == {audit.REJECT_NO_STABLE_INCUMBENT}
+
+
+def test_map_rejection_reasons_no_flex_survivor_only():
+    reasons = audit.map_rejection_reasons(flex_ok=False, flex_reasons=["no_covering_survivor"])
+    assert reasons == {audit.REJECT_NO_FLEX_SURVIVOR}
+
+
+def test_map_rejection_reasons_empty_legal_set_from_either_limb():
+    """Q-C4: the empty-legal-alternative-set predicate applies to BOTH
+    limbs -- must map to the same reporting bucket regardless of which
+    limb's certification produced it."""
+    from_stable = audit.map_rejection_reasons(
+        stable_ok=False, stable_reasons=[audit.EXCLUDE_EMPTY_SET_ALT])
+    assert audit.REJECT_EMPTY_LEGAL_SET in from_stable
+    from_flex = audit.map_rejection_reasons(
+        flex_ok=False, flex_reasons=[audit.EXCLUDE_EMPTY_SET_ALT])
+    assert audit.REJECT_EMPTY_LEGAL_SET in from_flex
+
+
+def test_map_rejection_reasons_qualifying_leave_has_no_reasons():
+    assert audit.map_rejection_reasons() == set()
+
+
+def test_accumulate_episode_leave_stats_sums_across_episodes_including_support_misses():
+    """The rollup helper `run_topology_audit` uses for BOTH the calibration
+    and audit blocks: independent of whether either episode qualified, every
+    OBSERVED LEAVE and its mapped rejection reasons must accumulate -- this
+    is what makes a qualifying=0 topology report WHY, rather than an empty
+    exclusions list."""
+    report = audit._new_episode_block_report()
+    ep1_diag = [
+        {"uav": 0, "capture_step": 100, "departure_step": 95,
+         "battery_at_departure": 0.4, "rejected_reasons": ["no_flex_survivor"]},
+    ]
+    ep1_counts = {**{k: 0 for k in audit.REJECTION_REASON_KEYS}, "no_flex_survivor": 1}
+    ep2_diag = [
+        {"uav": 1, "capture_step": 951, "departure_step": 940,
+         "battery_at_departure": 0.5, "rejected_reasons": ["censored_after_950"]},
+        {"uav": 2, "capture_step": 200, "departure_step": 190,
+         "battery_at_departure": 0.6, "rejected_reasons": ["no_stable_incumbent", "empty_legal_set"]},
+    ]
+    ep2_counts = {**{k: 0 for k in audit.REJECTION_REASON_KEYS},
+                  "censored_after_950": 1, "no_stable_incumbent": 1, "empty_legal_set": 1}
+
+    audit._accumulate_episode_leave_stats(report, leave_diagnostics=ep1_diag, rejected_counts=ep1_counts)
+    audit._accumulate_episode_leave_stats(report, leave_diagnostics=ep2_diag, rejected_counts=ep2_counts)
+
+    assert report["planned_leaves_observed"] == 3
+    assert report["leaves_before_deadline"] == 2   # capture steps 100, 200 qualify; 951 is censored
+    assert report["rejected_counts"]["no_flex_survivor"] == 1
+    assert report["rejected_counts"]["censored_after_950"] == 1
+    assert report["rejected_counts"]["no_stable_incumbent"] == 1
+    assert report["rejected_counts"]["empty_legal_set"] == 1
+    assert report["rejected_counts"]["station_contention"] == 0
+    assert len(report["leaves"]) == 3
+
+
+def test_run_calibration_episode_propagates_episode_report_on_support_miss(monkeypatch):
+    """Item 1's wiring: `run_calibration_episode` must surface
+    `roll_prefix_and_find_event`'s leave diagnostics even when the episode
+    itself is a support miss (no qualifying event) -- otherwise a
+    support-miss-heavy topology would still report an uninformative,
+    reason-free rollup."""
+    fake_prefix = {
+        "event": None,
+        "exclusions": [{"t_e": 951, "uav": 0, "reasons": [audit.EXCLUDE_CENSORED]}],
+        "recorded_actions": [],
+        "leave_diagnostics": [{"uav": 0, "capture_step": 951, "departure_step": 940,
+                                "battery_at_departure": 0.5,
+                                "rejected_reasons": ["censored_after_950"]}],
+        "rejected_counts": {**{k: 0 for k in audit.REJECTION_REASON_KEYS}, "censored_after_950": 1},
+    }
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _CloneableFakeEnv(seed=9))
+    monkeypatch.setattr(audit, "apply_energy_profile", lambda *a, **k: None)
+    monkeypatch.setattr(audit, "roll_prefix_and_find_event", lambda env, **k: fake_prefix)
+
+    result = audit.run_calibration_episode(
+        config=None, topology_seed=1, episode_seed=1, energy_seed=1, coords={}, coord_hash="x")
+
+    assert result["support_miss"] is True
+    assert result["episode_report"]["leave_diagnostics"] == fake_prefix["leave_diagnostics"]
+    assert result["episode_report"]["rejected_counts"]["censored_after_950"] == 1
+
+
+def test_resolve_run_plan_smoke_defaults_to_one_and_one_without_overrides():
+    plan = audit.resolve_run_plan(smoke=True, dev=False, topology_seeds_override=None,
+                                   episodes_calibration=None, episodes_audit=None)
+    assert plan["topology_seeds"] == [audit.TOPOLOGY_SEED_DEV]
+    assert plan["n_calibration"] == 1 and plan["n_audit"] == 1
+
+
+def test_resolve_run_plan_smoke_honors_explicit_episode_overrides():
+    """Item 2's fix: `--smoke` previously hardcoded 1/1 unconditionally,
+    silently discarding `--episodes-calibration`/`--episodes-audit`. Smoke's
+    topology choice and its n_select=1/n_eval=2 replicate override (not
+    exercised here -- that lives in `run_topology_audit`) are unaffected."""
+    plan = audit.resolve_run_plan(smoke=True, dev=False, topology_seeds_override=None,
+                                   episodes_calibration=3, episodes_audit=5)
+    assert plan["n_calibration"] == 3 and plan["n_audit"] == 5
+    assert plan["topology_seeds"] == [audit.TOPOLOGY_SEED_DEV]
+
+
+def test_resolve_run_plan_non_smoke_default_episode_counts_unchanged():
+    plan = audit.resolve_run_plan(smoke=False, dev=False, topology_seeds_override=None,
+                                   episodes_calibration=None, episodes_audit=None)
+    assert plan["topology_seeds"] == list(audit.TOPOLOGY_SEEDS_INITIAL)
+    assert plan["n_calibration"] == audit.N_CALIBRATION_EPISODES
+    assert plan["n_audit"] == audit.N_AUDIT_EPISODES
+
+
+def test_resolve_run_plan_dev_mode_honors_overrides_too():
+    plan = audit.resolve_run_plan(smoke=False, dev=True, topology_seeds_override=None,
+                                   episodes_calibration=2, episodes_audit=2)
+    assert plan["topology_seeds"] == [audit.TOPOLOGY_SEED_DEV]
+    assert plan["n_calibration"] == 2 and plan["n_audit"] == 2
+
+
+class _ScheduledLeaveFakeEnv:
+    """A deterministic, schedule-driven FakeEnv exercising the full real-env
+    orchestration path (`compute_duty_positions` / `scripted_source_actions`
+    / `step_once` / `roll_prefix_and_find_event`) end to end, WITHOUT relying
+    on physics to produce a LEAVE at a chosen step: `leave_schedule`/
+    `dock_schedule` map a 1-based step count (aligned with `t_e = t+1`, the
+    convention `roll_prefix_and_find_event` uses) to the uav index whose
+    `uav_charging`/`uav_dock_requests` rises at exactly that call. 8 UAVs / 8
+    duties (the registered fleet shape `initial_duty_map` hardcodes), FIXED
+    geometry (no user/uav drift at all), so every certification outcome is
+    hand-traceable rather than depending on incidental clustering noise."""
+
+    def __init__(self, *, leave_schedule, dock_schedule, far_uavs):
+        self.n_uavs = 8
+        self.n_users = 6
+        self.time_step = 1.0
+        self.max_speed = 30.0
+        self.max_vertical_speed_mps = 5.0
+        self.area_size = 2_000_000.0
+        self.height_range = (80.0, 80.0)
+        self.battery_capacity_wh = 160.0
+        self.charging_power_w = 1000.0
+        self.return_reserve_ratio = 0.10
+        self.service_cutoff_threshold = 0.02
+        self.depleted_battery_threshold = 0.0
+        self.user_qos_rate_mbps = 1.0
+        self.n_charging_stations = 1
+        self.charging_station_positions = np.array([[900.0, 900.0, 80.0]])
+        self.ground_bs_positions = np.array([[0.0, 0.0, 80.0]])
+        self.agents = [f"uav_{i}" for i in range(self.n_uavs)]
+        # 6 users in a line, 300 m apart: k-means separates them into 6
+        # distinct singleton service-duty clusters every call, so the legal-
+        # SET alternative set is never accidentally empty.
+        self.user_positions = np.array([[i * 300.0, 0.0, 0.0] for i in range(self.n_users)])
+        # Duty-holding UAVs sit at their own duty's position; `far_uavs` sit
+        # ~2,100 km away so their transit time to ANY vacated flex target
+        # blows the Z=139-step coverage predicate -- a deterministic lever
+        # for "eligible but uncertified" that never touches stable's own
+        # (unrelated, duty-target-displacement-based) certification.
+        self.uav_positions = np.array([
+            [i * 300.0, 0.0, 80.0] if i not in far_uavs else [1_500_000.0, 1_500_000.0, 80.0]
+            for i in range(self.n_uavs)
+        ])
+        self.uav_battery_ratios = np.full(self.n_uavs, 0.5)
+        self.uav_charging = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_dock_requests = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_target_stations = np.zeros(self.n_uavs, dtype=int)
+        self.uav_failed = np.zeros(self.n_uavs, dtype=bool)
+        self.last_charging_arrival = np.zeros(self.n_uavs, dtype=bool)
+        self.uav_return_energy_margins = np.full(self.n_uavs, 0.5)
+        self.station_occupancy = np.array([0.0])
+        self.station_queue_lengths = np.array([0.0])
+        self.last_user_rates_mbps = np.full(self.n_users, 2e6)
+        self.np_random = np.random.RandomState(0)
+        self.leave_schedule = dict(leave_schedule)
+        self.dock_schedule = dict(dock_schedule)
+        self._step_count = 0
+
+    def _calculate_power_consumption(self, v_h, v_z):
+        return 300.0 + v_h
+
+    def _nearest_charging_station(self, uav_idx):
+        rel = self.charging_station_positions[0] - self.uav_positions[uav_idx]
+        return 0, rel, float(np.linalg.norm(rel))
+
+    def step(self, actions):
+        # Ignores the synthesized actions entirely -- transitions are driven
+        # by the schedule tables, not by the dock-trigger/action pipeline,
+        # so the exact capture/departure steps are chosen by the test, not
+        # incidental to distance/battery arithmetic.
+        self._step_count += 1
+        if self._step_count in self.dock_schedule:
+            self.uav_dock_requests[self.dock_schedule[self._step_count]] = True
+        if self._step_count in self.leave_schedule:
+            self.uav_charging[self.leave_schedule[self._step_count]] = True
+        infos = {a: {"reward_info": {"qos_satisfaction_ratio": 0.9,
+                                      "return_constraint_cost": 0.05,
+                                      "return_constraint_cost_raw": 0.05}}
+                 for a in self.agents}
+        return None, None, None, None, infos
+
+
+def test_roll_prefix_and_find_event_distinguishes_ineligible_from_uncertified_leaves():
+    """The exact case the first real smoke run collapsed to qualifying=0 /
+    exclusions=[]: an episode with TWO observed LEAVEs -- one ineligible
+    (t_e=951 > 950, censored) and one eligible but uncertified (fails flex
+    coverage only, since every OTHER UAV sits ~2,100 km from the vacated
+    target) -- must report BOTH as OBSERVED, distinguish which failed on
+    which axis, and never silently produce an empty rejection record.
+
+    UAV 1 departs (dock-request onset) at step 96, captures at step 101
+    (eligible: t_e=101 <= 950). UAV 2 departs at step 946, captures at step
+    951 (t_e=951 > 950: censored). No stable candidate is scheduled to leave
+    within Delta of either event and duty-target geometry never drifts, so
+    UAV 1's event certifies STABLE but fails FLEX purely on distance --
+    `no_flex_survivor` is the only rejection bucket it should hit."""
+    env = _ScheduledLeaveFakeEnv(
+        leave_schedule={101: 1, 951: 2}, dock_schedule={96: 1, 946: 2},
+        far_uavs={0, 2, 3, 4, 5, 6, 7},
+    )
+
+    result = audit.roll_prefix_and_find_event(env)
+
+    assert result["event"] is None   # neither LEAVE became the qualifying event
+    diag = result["leave_diagnostics"]
+    assert len(diag) == 2
+    planned_leaves_observed = len(diag)
+    leaves_before_deadline = sum(1 for d in diag if d["capture_step"] <= audit.T_E_MAX)
+    assert planned_leaves_observed == 2
+    assert leaves_before_deadline == 1
+
+    by_uav = {d["uav"]: d for d in diag}
+    assert by_uav[1]["capture_step"] == 101
+    assert by_uav[1]["departure_step"] == 96
+    assert by_uav[1]["battery_at_departure"] == pytest.approx(0.5)
+    assert by_uav[1]["rejected_reasons"] == [audit.REJECT_NO_FLEX_SURVIVOR]
+
+    assert by_uav[2]["capture_step"] == 951
+    assert by_uav[2]["departure_step"] == 946
+    assert by_uav[2]["rejected_reasons"] == [audit.REJECT_CENSORED]
+
+    counts = result["rejected_counts"]
+    assert counts[audit.REJECT_CENSORED] == 1
+    assert counts[audit.REJECT_NO_FLEX_SURVIVOR] == 1
+    for key in audit.REJECTION_REASON_KEYS:
+        if key not in (audit.REJECT_CENSORED, audit.REJECT_NO_FLEX_SURVIVOR):
+            assert counts[key] == 0
+
+    # The property this test exists to guard: qualifying=0 must NEVER be
+    # reported alongside an empty leave/exclusion record when LEAVEs were
+    # actually observed -- the wrong-implementation failure mode this whole
+    # item fixes.
+    assert len(result["exclusions"]) == 2
+    assert planned_leaves_observed > 0 and result["event"] is None
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))

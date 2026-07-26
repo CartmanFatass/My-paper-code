@@ -113,6 +113,66 @@ EXCLUDE_TEMP_FAILURE = "temporary_failure"
 EXCLUDE_OFF_SCHEDULE = "not_from_constructive_schedule"
 EXCLUDE_EMPTY_SET_ALT = "no_legal_set_alternative"
 
+# --- Q-E2 per-topology rejection-reason reporting vocabulary ---------------
+# Task-brief-mandated reporting keys, rolled up per topology from the SAME
+# eligibility/certification reasons the section-2 predicates above already
+# compute -- never a re-derivation of any predicate, only a relabeling of an
+# outcome those functions already decided.
+REJECT_CENSORED = "censored_after_950"
+REJECT_STATION_CONTENTION = "station_contention"
+REJECT_CUTOFF_OR_DEPLETION = "cutoff_or_depletion_path"
+REJECT_TEMPORARY_FAILURE = "temporary_failure"
+REJECT_OFF_SCHEDULE = "off_schedule"
+REJECT_NO_STABLE_INCUMBENT = "no_stable_incumbent"
+REJECT_NO_FLEX_SURVIVOR = "no_flex_survivor"
+REJECT_EMPTY_LEGAL_SET = "empty_legal_set"
+
+REJECTION_REASON_KEYS = (
+    REJECT_CENSORED, REJECT_STATION_CONTENTION, REJECT_CUTOFF_OR_DEPLETION,
+    REJECT_TEMPORARY_FAILURE, REJECT_OFF_SCHEDULE, REJECT_NO_STABLE_INCUMBENT,
+    REJECT_NO_FLEX_SURVIVOR, REJECT_EMPTY_LEGAL_SET,
+)
+
+_ELIGIBILITY_REJECTION_MAP = {
+    EXCLUDE_CENSORED: REJECT_CENSORED,
+    EXCLUDE_QUEUE_OR_OCCUPIED: REJECT_STATION_CONTENTION,
+    EXCLUDE_EMERGENCY: REJECT_CUTOFF_OR_DEPLETION,
+    EXCLUDE_TEMP_FAILURE: REJECT_TEMPORARY_FAILURE,
+    EXCLUDE_OFF_SCHEDULE: REJECT_OFF_SCHEDULE,
+}
+
+
+def map_rejection_reasons(*, eligibility_reasons=(), stable_ok: bool = True,
+                           stable_reasons=(), flex_ok: bool = True,
+                           flex_reasons=()) -> set:
+    """Maps the ALREADY-COMPUTED `check_leave_eligibility`/`certify_stable`/
+    `certify_flex` reason strings onto the per-topology reporting vocabulary
+    above -- never re-derives any predicate, only relabels an outcome those
+    functions already decided. A LEAVE that fails eligibility never reaches
+    certification (mirrors `roll_prefix_and_find_event`'s own short-circuit),
+    so `eligibility_reasons` alone decides the mapping whenever it is
+    non-empty. Past eligibility, a single LEAVE can land in more than one
+    bucket at once -- e.g. a flex vacancy that is BOTH uncovered
+    (no_flex_survivor) and has an empty legal-SET alternative
+    (empty_legal_set, Q-C4: the empty-alternative-set predicate applies to
+    BOTH limbs)."""
+    mapped: set = set()
+    for r in eligibility_reasons:
+        if r in _ELIGIBILITY_REJECTION_MAP:
+            mapped.add(_ELIGIBILITY_REJECTION_MAP[r])
+    if eligibility_reasons:
+        return mapped
+    if not stable_ok:
+        mapped.add(REJECT_NO_STABLE_INCUMBENT)
+        if EXCLUDE_EMPTY_SET_ALT in stable_reasons:
+            mapped.add(REJECT_EMPTY_LEGAL_SET)
+    if not flex_ok:
+        if "no_covering_survivor" in flex_reasons:
+            mapped.add(REJECT_NO_FLEX_SURVIVOR)
+        if EXCLUDE_EMPTY_SET_ALT in flex_reasons:
+            mapped.add(REJECT_EMPTY_LEGAL_SET)
+    return mapped
+
 
 # =============================================================================
 # Section 8 / Q-I2 -- stable 64-bit stream seed derivation
@@ -1714,12 +1774,32 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
     the search moves to the NEXT LEAVE entirely, never to a later step of
     the same LEAVE. Returns the joint event's full snapshot (duty map/
     positions, state hash, recorded action prefix) or `event=None` with the
-    accumulated exclusion records on a support miss."""
+    accumulated exclusion records on a support miss.
+
+    Also returns the Q-E2 per-episode diagnostic counters: `leave_diagnostics`
+    (one entry per OBSERVED LEAVE -- every ACTIVE->CHARGE_ABSENT capture edge
+    under `constructive_mixed`, regardless of eligibility -- carrying its
+    capture step, `departure_step` (the earliest step this UAV's
+    `uav_dock_requests` rose before this capture, tracked as a rising edge
+    the same way LEAVE/REJOIN are detected elsewhere in this module; falls
+    back to the capture step itself if no onset was ever observed), uav id,
+    battery ratio at that departure onset, and its mapped rejection reasons
+    -- empty for whichever LEAVE ends up qualifying) and `rejected_counts`
+    (the same information pre-tallied via `map_rejection_reasons`'s reporting
+    vocabulary). Both are computed from reasons `check_leave_eligibility`/
+    `certify_stable`/`certify_flex` already decided -- never re-derived."""
     duty_map = initial_duty_map()
     service_centroids = None
     recorded_actions: list = []
     exclusions: list = []
     domain_bounds = domain_bounds_for_env(env)
+
+    n_uavs = int(env.n_uavs)
+    dock_request_prev = np.zeros(n_uavs, dtype=bool)
+    dock_onset_step: dict[int, int] = {}
+    dock_onset_battery: dict[int, float] = {}
+    leave_diagnostics: list = []
+    rejected_counts = {k: 0 for k in REJECTION_REASON_KEYS}
 
     for t in range(int(max_step) + 1):
         battery_before = np.asarray(env.uav_battery_ratios, dtype=float).copy()
@@ -1734,14 +1814,42 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
         duty_map = step["duty_map"]
         service_centroids = step["service_centroids"]
 
+        # Departure-step tracking (Q-E2 diagnosis): a rising edge of
+        # `uav_dock_requests`, mirroring the LEAVE/REJOIN edge detection
+        # `update_duty_map_on_transitions` already performs on `uav_charging`.
+        # `.copy()` is load-bearing: `env.uav_dock_requests` is already
+        # bool-dtype, so `np.asarray(..., dtype=bool)` returns the SAME
+        # array object rather than a snapshot (confirmed by a scratch
+        # reproduction: without `.copy()`, an in-place mutation inside the
+        # next `env.step()` call silently rewrites what `dock_request_prev`
+        # points at too, so the rising-edge XOR always compares the array to
+        # itself and no onset is ever recorded before capture).
+        dock_request_after = np.asarray(env.uav_dock_requests, dtype=bool).copy()
+        battery_after_step = np.asarray(env.uav_battery_ratios, dtype=float)
+        for uu in np.nonzero(dock_request_after & ~dock_request_prev)[0]:
+            dock_onset_step[int(uu)] = t + 1
+            dock_onset_battery[int(uu)] = float(battery_after_step[uu])
+        dock_request_prev = dock_request_after
+
         for u in step["leave_uavs"]:
             cand = build_leave_candidate(
                 env, uav_idx=u, t_e_step=t + 1, schedule="constructive_mixed",
                 station_occupancy_after=np.asarray(env.station_occupancy, dtype=float),
                 station_queue_after=np.asarray(env.station_queue_lengths, dtype=float),
                 cutoff_before=bool(cutoff_before[u]), depletion_before=bool(depletion_before[u]))
+            capture_step = cand["t_e"]
+            diag_entry = {
+                "uav": int(u), "capture_step": int(capture_step),
+                "departure_step": int(dock_onset_step.get(u, capture_step)),
+                "battery_at_departure": float(dock_onset_battery.get(u, battery_before[u])),
+            }
             elig_reasons = check_leave_eligibility(cand, t_e=cand["t_e"])
             if elig_reasons:
+                reject_reasons = map_rejection_reasons(eligibility_reasons=elig_reasons)
+                for r in reject_reasons:
+                    rejected_counts[r] += 1
+                diag_entry["rejected_reasons"] = sorted(reject_reasons)
+                leave_diagnostics.append(diag_entry)
                 exclusions.append({"t_e": cand["t_e"], "uav": u, "reasons": elig_reasons})
                 continue
 
@@ -1770,14 +1878,19 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
 
             stable_ok = False
             stable_choice = None
+            stable_reasons_all: set = set()
             for cand_s in stable_candidates:
                 ok, reasons = certify_stable(**cand_s["kwargs"])
                 if ok:
                     stable_ok = True
                     stable_choice = cand_s
+                    stable_reasons_all = set()
                     break
+                stable_reasons_all.update(reasons)
 
             if stable_ok and flex_ok:
+                diag_entry["rejected_reasons"] = []
+                leave_diagnostics.append(diag_entry)
                 locked_for_stable = frozenset({stable_choice["duty"]})
                 flex_focal_duty = next(
                     (d for d, uu in duty_map.items() if uu == focal_flex), None)
@@ -1810,12 +1923,25 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                     # survivor).
                     "duty_map_before_leave": dict(duty_map_before),
                 }
-                return {"event": event, "exclusions": exclusions, "recorded_actions": recorded_actions}
+                return {
+                    "event": event, "exclusions": exclusions, "recorded_actions": recorded_actions,
+                    "leave_diagnostics": leave_diagnostics, "rejected_counts": rejected_counts,
+                }
+            reject_reasons = map_rejection_reasons(
+                eligibility_reasons=[], stable_ok=stable_ok, stable_reasons=stable_reasons_all,
+                flex_ok=flex_ok, flex_reasons=flex_reasons)
+            for r in reject_reasons:
+                rejected_counts[r] += 1
+            diag_entry["rejected_reasons"] = sorted(reject_reasons)
+            leave_diagnostics.append(diag_entry)
             exclusions.append({
                 "t_e": cand["t_e"], "stable_certified": stable_ok,
                 "flex_certified": flex_ok, "flex_reasons": flex_reasons,
             })
-    return {"event": None, "exclusions": exclusions, "recorded_actions": recorded_actions}
+    return {
+        "event": None, "exclusions": exclusions, "recorded_actions": recorded_actions,
+        "leave_diagnostics": leave_diagnostics, "rejected_counts": rejected_counts,
+    }
 
 
 def _target_id(target) -> str:
@@ -2001,8 +2127,13 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     energies = draw_energy_permutation(energy_seed=energy_seed)
     apply_energy_profile(env, energies)
     prefix = roll_prefix_and_find_event(env)
+    episode_leave_report = {
+        "leave_diagnostics": prefix.get("leave_diagnostics", []),
+        "rejected_counts": prefix.get("rejected_counts", {}),
+    }
     if prefix["event"] is None:
-        return {"support_miss": True, "invalidated": False, "exclusions": prefix["exclusions"]}
+        return {"support_miss": True, "invalidated": False, "exclusions": prefix["exclusions"],
+                "episode_report": episode_leave_report}
 
     event = prefix["event"]
     results = {}
@@ -2060,6 +2191,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
         "results": results,
         "duty_map_at_te": event["duty_map_at_te"],
         "duty_map_before_leave": event["duty_map_before_leave"],
+        "episode_report": episode_leave_report,
     }
 
 
@@ -2155,6 +2287,33 @@ def _derived_seed(*, topology_seed: int, block: str, idx: int, tag: str) -> int:
     ) % (2**31 - 1))
 
 
+def _new_episode_block_report() -> dict:
+    """Q-E2's per-topology rolled-up report shape, shared by the calibration
+    and audit blocks below."""
+    return {
+        "episodes_attempted": 0, "qualifying": 0, "qualifying_joint_events": 0,
+        "exclusions": [], "planned_leaves_observed": 0, "leaves_before_deadline": 0,
+        "rejected_counts": {k: 0 for k in REJECTION_REASON_KEYS},
+        "leaves": [],
+    }
+
+
+def _accumulate_episode_leave_stats(report: dict, *, leave_diagnostics: list,
+                                     rejected_counts: dict) -> None:
+    """Rolls one episode's `roll_prefix_and_find_event` diagnostics (every
+    observed LEAVE, regardless of eligibility, plus its already-computed
+    rejection reasons) into the topology-level report -- called for EVERY
+    attempted episode, qualifying or not, so a qualifying=0 topology still
+    distinguishes 'no planned LEAVE ever occurred' from 'LEAVEs occurred but
+    were rejected' (the exact ambiguity the first real smoke run collapsed)."""
+    report["planned_leaves_observed"] += len(leave_diagnostics)
+    report["leaves_before_deadline"] += sum(
+        1 for d in leave_diagnostics if d["capture_step"] <= T_E_MAX)
+    for k, v in rejected_counts.items():
+        report["rejected_counts"][k] = report["rejected_counts"].get(k, 0) + v
+    report["leaves"].extend(leave_diagnostics)
+
+
 def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audit: int,
                         n_select: int = N_SELECT, n_eval: int = N_EVAL, smoke: bool = False,
                         energy_stage: str = "S3") -> dict:
@@ -2176,7 +2335,7 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
     arm_distinctness_pairs: list = []
 
     calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
-    calibration_report = {"episodes_attempted": 0, "qualifying": 0, "exclusions": []}
+    calibration_report = _new_episode_block_report()
     for idx in range(n_calibration):
         calibration_report["episodes_attempted"] += 1
         ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
@@ -2184,6 +2343,10 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         result = run_calibration_episode(
             config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
             coords=coords, coord_hash=coord_hash, energy_stage=energy_stage)
+        episode_leave_report = result.get("episode_report", {})
+        _accumulate_episode_leave_stats(
+            calibration_report, leave_diagnostics=episode_leave_report.get("leave_diagnostics", []),
+            rejected_counts=episode_leave_report.get("rejected_counts", {}))
         if result.get("support_miss"):
             calibration_report["exclusions"].append(result.get("exclusions", []))
             continue
@@ -2194,6 +2357,7 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             # B_m nor D_A, and is not counted as qualifying.
             continue
         calibration_report["qualifying"] += 1
+        calibration_report["qualifying_joint_events"] += 1
         arm_distinctness_pairs.append(
             (result["duty_map_at_te"], result["duty_map_before_leave"]))
         g_s, g_f = result["results"]["stable"], result["results"]["flex"]
@@ -2214,7 +2378,7 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         })
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
-    audit_report = {"episodes_attempted": 0, "qualifying": 0, "exclusions": []}
+    audit_report = _new_episode_block_report()
     for idx in range(n_audit):
         audit_report["episodes_attempted"] += 1
         ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
@@ -2224,10 +2388,14 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         energies = draw_energy_permutation(energy_seed=en_seed)
         apply_energy_profile(env, energies)
         prefix = roll_prefix_and_find_event(env)
+        _accumulate_episode_leave_stats(
+            audit_report, leave_diagnostics=prefix.get("leave_diagnostics", []),
+            rejected_counts=prefix.get("rejected_counts", {}))
         if prefix["event"] is None:
             audit_report["exclusions"].append(prefix["exclusions"])
             continue
         audit_report["qualifying"] += 1
+        audit_report["qualifying_joint_events"] += 1
         event = prefix["event"]
         arm_distinctness_pairs.append(
             (event["duty_map_at_te"], event["duty_map_before_leave"]))
@@ -2278,33 +2446,61 @@ def _json_default(obj):
     return str(obj)
 
 
+def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optional[list],
+                      episodes_calibration: Optional[int], episodes_audit: Optional[int]) -> dict:
+    """CLI arg resolution (item 2): topology seed list plus episode counts.
+    `--episodes-calibration`/`--episodes-audit` are honored in EVERY mode,
+    `--smoke` included -- previously `--smoke` hardcoded 1/1 unconditionally,
+    silently discarding any explicit override. Smoke's own n_select=1/n_eval=2
+    replicate override (`run_topology_audit`'s `smoke` kwarg) and the
+    `SMOKE_NOT_A_RESULT` JSON labeling are untouched by this function; only
+    the episode COUNTS become overridable here. `None` for either count means
+    "use this mode's own default" -- smoke's default stays 1 calibration + 1
+    audit episode when no override is given, matching its pre-existing fast
+    proof-sized behavior."""
+    if smoke:
+        topology_seeds = [TOPOLOGY_SEED_DEV]
+        default_calibration, default_audit = 1, 1
+    elif topology_seeds_override:
+        topology_seeds = list(topology_seeds_override)
+        default_calibration, default_audit = N_CALIBRATION_EPISODES, N_AUDIT_EPISODES
+    elif dev:
+        topology_seeds = [TOPOLOGY_SEED_DEV]
+        default_calibration, default_audit = N_CALIBRATION_EPISODES, N_AUDIT_EPISODES
+    else:
+        topology_seeds = list(TOPOLOGY_SEEDS_INITIAL)
+        default_calibration, default_audit = N_CALIBRATION_EPISODES, N_AUDIT_EPISODES
+    return {
+        "topology_seeds": topology_seeds,
+        "n_calibration": episodes_calibration if episodes_calibration is not None else default_calibration,
+        "n_audit": episodes_audit if episodes_audit is not None else default_audit,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dev", action="store_true",
                          help="Use the development-only topology 20260725; no scientific reading.")
     parser.add_argument("--topology-seeds", type=int, nargs="*", default=None,
                          help="Override the registered topology seed list.")
-    parser.add_argument("--episodes-calibration", type=int, default=N_CALIBRATION_EPISODES)
-    parser.add_argument("--episodes-audit", type=int, default=N_AUDIT_EPISODES)
+    parser.add_argument("--episodes-calibration", type=int, default=None,
+                         help="Override the calibration episode count for the selected mode "
+                              "(including --smoke, which otherwise defaults to 1).")
+    parser.add_argument("--episodes-audit", type=int, default=None,
+                         help="Override the audit episode count for the selected mode "
+                              "(including --smoke, which otherwise defaults to 1).")
     parser.add_argument("--out", default="")
     parser.add_argument("--smoke", action="store_true",
-                         help="ONE topology, ONE calibration + ONE audit episode, full horizon "
-                              "pieces but n_select=1/n_eval=2. JSON tagged SMOKE_NOT_A_RESULT. "
-                              "Proof-sized only -- not the formal audit.")
+                         help="ONE topology, ONE calibration + ONE audit episode by default "
+                              "(overridable via --episodes-calibration/--episodes-audit), full "
+                              "horizon pieces but n_select=1/n_eval=2. JSON tagged "
+                              "SMOKE_NOT_A_RESULT. Proof-sized only -- not the formal audit.")
     args = parser.parse_args()
 
-    if args.smoke:
-        topology_seeds = [TOPOLOGY_SEED_DEV]
-        n_calibration, n_audit = 1, 1
-    elif args.topology_seeds:
-        topology_seeds = list(args.topology_seeds)
-        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
-    elif args.dev:
-        topology_seeds = [TOPOLOGY_SEED_DEV]
-        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
-    else:
-        topology_seeds = list(TOPOLOGY_SEEDS_INITIAL)
-        n_calibration, n_audit = args.episodes_calibration, args.episodes_audit
+    plan = resolve_run_plan(
+        smoke=args.smoke, dev=args.dev, topology_seeds_override=args.topology_seeds,
+        episodes_calibration=args.episodes_calibration, episodes_audit=args.episodes_audit)
+    topology_seeds, n_calibration, n_audit = plan["topology_seeds"], plan["n_calibration"], plan["n_audit"]
 
     config = build_config()
     topology_results = []
