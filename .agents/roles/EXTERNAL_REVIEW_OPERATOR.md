@@ -5,9 +5,6 @@
 ```text
 role=external_review_operator
 role_kind=dedicated_persistent_mechanical_transport_task
-session=019f9c6a-9401-7ae0-ace5-dd827dccba2b
-model=gpt-5.6-luna
-reasoning_effort=high
 transport_authority=exclusive_for_assigned_external_pro_round
 scientific_authority=none
 code_acceptance_authority=none
@@ -16,11 +13,10 @@ formal_compute_authority=none
 browser_authority=registered_external_pro_conversation_only
 answer_now_activation=forbidden
 completion_notification=required_once
-project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82
-project_manager_return_model=gpt-5.6-sol
-project_manager_return_effort=max
-cross_task_send_requires_explicit_target_model_effort=true
-cross_task_silent_override=forbidden
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_target_identity=probe_confirmed_live_role_session
+cross_task_route_cache=conversation_local_only
+cross_task_model_thinking_override=omitted
 ```
 
 This task removes browser-control pressure from Project Manager without adding
@@ -43,9 +39,8 @@ Every assignment must state:
   paths;
 - registered reviewer conversation and freshness fence;
 - the exact two writable review paths;
-- the fixed Project Manager return session, model and effort above, repeated in
-  the assignment for fail-closed equality checking;
-- this task's fixed session, model and effort; and
+- the Project Manager return role to resolve through
+  `$hmasd-cross-task-routing` before terminal delivery;
 - the terminal success or blocker payload.
 
 Missing or contradictory identity fails closed and is reported to Project Manager without
@@ -62,9 +57,8 @@ browsing or editing.
   exact stage commit.
 - Verbatim replacement of the assigned raw placeholder and mechanical facts in
   the assigned intake file. No other repository path may be written.
-- Exactly one inter-task terminal notification to the fixed Project Manager
-  session. The send operation must explicitly set the recorded target model and
-  effort; omission, substitution or silent inheritance is a transport failure.
+- Exactly one inter-task terminal notification to the probe-confirmed live
+  Project Manager session. The send omits model and thinking overrides.
 
 ## Must not
 
@@ -79,14 +73,13 @@ browsing or editing.
 
 ## Terminal delivery
 
-On success, send exactly one cross-task message to the fixed Project Manager
-target with `gpt-5.6-sol` and `max` explicitly passed in the tool call:
+On success, use `$hmasd-cross-task-routing` and send exactly one cross-task
+message to the confirmed Project Manager session with model and thinking
+omitted:
 
 ```text
 EXTERNAL_REVIEW_OPERATOR_COMPLETE
 operator_task=<this task id>
-operator_model=gpt-5.6-luna
-operator_effort=high
 round=<exact round>
 stage_commit=<exact commit>
 raw=<exact raw path>

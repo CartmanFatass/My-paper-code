@@ -34,6 +34,7 @@ $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANA
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
 $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
+$reviewOperatorNormalized = $reviewOperator -replace '\s+', ' '
 foreach ($required in @(
     'workflow_design_manager_persistent_task=one',
     'workflow_design_manager_workflow_design_authority=exclusive',
@@ -50,28 +51,23 @@ foreach ($required in @(
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
-    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
-    'cross_task_silent_model_effort_override=forbidden',
+    'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_model_thinking_override=omitted',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
     'role_kind=sole_persistent_code_and_runtime_authority_task',
-    'session=019f9d04-8b21-7512-acc7-ffe02d262c82',
-    'model=gpt-5.6-sol',
-    'reasoning_effort=max',
     'workflow_design_authority=none',
     'current_work_owner=exclusive',
     'git_execution=direct_for_code_runtime_evidence_and_state',
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
-    'workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'workflow_design_manager_target_model=gpt-5.6-sol',
-    'workflow_design_manager_target_effort=high',
-    'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
-    'external_review_operator_target_model=gpt-5.6-luna',
-    'external_review_operator_target_effort=high',
-    'cross_task_silent_override=forbidden',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
     'CURRENT_WORK.md',
@@ -81,19 +77,16 @@ foreach ($required in @(
 foreach ($required in @(
     'role=workflow_design_manager',
     'role_kind=dedicated_persistent_workflow_design_authority_task',
-    'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'model=gpt-5.6-sol',
-    'reasoning_effort=high',
     'workflow_design_authority=exclusive',
     'workflow_runtime_authority=none',
     'current_work_authority=none',
     'external_review_runtime_authority=none',
     'experiment_runtime_authority=none',
     'code_acceptance_authority=none',
-    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
-    'project_manager_return_model=gpt-5.6-sol',
-    'project_manager_return_effort=max',
-    'cross_task_silent_override=forbidden',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'CODE_SCIENCE_INDEX.md')) {
@@ -113,14 +106,20 @@ foreach ($required in @(
     'scientific_authority=none',
     'git_authority=none',
     'completion_notification=required_once',
-    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
-    'project_manager_return_model=gpt-5.6-sol',
-    'project_manager_return_effort=max',
-    'cross_task_silent_override=forbidden',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted',
     'cross-task',
-    'cross_task_send_requires_explicit_target_model_effort=true')) {
-    if (-not $reviewOperator.Contains($required)) {
+    'model and thinking omitted')) {
+    if (-not $reviewOperatorNormalized.Contains($required)) {
         throw "External Review Operator role missing: $required"
+    }
+}
+
+foreach ($text in @($pm, $workflow, $reviewOperator)) {
+    if ($text -match '(?m)^(session|model|reasoning_effort|\w+_target_session|\w+_return_session|\w+_target_model|\w+_return_model|\w+_target_effort|\w+_return_effort)=') {
+        throw 'Persistent role charter retains fixed cross-task identity or model/effort'
     }
 }
 

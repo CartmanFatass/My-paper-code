@@ -62,8 +62,9 @@ formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
-cross_task_routing=fixed_session_id_plus_fixed_model_effort
-cross_task_silent_model_effort_override=forbidden
+cross_task_routing=probe_confirmed_session_plus_conversation_local_cache
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_model_thinking_override=omitted
 ```
 
 The user permanently authorizes Workflow Design Manager and Project Manager to fetch and
@@ -126,6 +127,7 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
+- Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
@@ -133,7 +135,6 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 
 No role reads every routed document. The active assignment or role charter
 names the smallest necessary subset.
-
 ## Repository surfaces
 
 - Git-tracked code is implementation truth.
@@ -145,7 +146,5 @@ names the smallest necessary subset.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
 
-Every communicating role records its fixed target session ID, model and effort;
-each send passes model and effort explicitly. Omission, mismatch or inheritance
-fails closed. Route changes require role edits. Native children use fixed
-profiles and one final return rather than session sends.
+Persistent Codex roles probe-confirm live target sessions, cache them only in conversation, and omit model and thinking overrides; session IDs are addresses, not authority.
+Ambiguity fails closed to the user. Native children keep fixed profiles and one final return rather than session sends.

@@ -11,6 +11,7 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
 $expectedSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
+    'hmasd-cross-task-routing',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
@@ -94,9 +95,10 @@ foreach ($required in @(
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_pro_response_sentinel.py',
-    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
-    'cross_task_silent_model_effort_override=forbidden',
-    'each send passes model and effort explicitly',
+    'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_model_thinking_override=omitted',
+    'omit model and thinking overrides',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -112,16 +114,6 @@ foreach ($required in @(
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
     'workflow_design_manager_task=',
-    'workflow_design_manager_fixed_model=gpt-5.6-sol',
-    'workflow_design_manager_fixed_effort=high',
-    'external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
-    'external_review_operator_fixed_model=gpt-5.6-luna',
-    'external_review_operator_fixed_effort=high',
-    'project_manager_fixed_model=gpt-5.6-sol',
-    'project_manager_fixed_effort=max',
-    'cross_task_send_requires_explicit_model_effort=true',
-    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
-    'cross_task_silent_model_effort_override=forbidden',
     'code_science_alignment_position=after_pm_implementation_acceptance',
     'code_science_alignment_index=commit_bound_CODE_SCIENCE_INDEX_required',
     'routine_preimplementation_code_science_review=forbidden',
@@ -188,10 +180,10 @@ foreach ($required in @(
     'current_work_owner=exclusive',
     'external_review_dispatch_and_result_routing=exclusive',
     'experiment_orchestration=registered_native_child',
-    'workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'workflow_design_manager_target_effort=high',
-    'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
-    'external_review_operator_target_effort=high',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_INDEX.md',
@@ -202,9 +194,6 @@ foreach ($required in @(
 foreach ($required in @(
     'role=workflow_design_manager',
     'role_kind=dedicated_persistent_workflow_design_authority_task',
-    'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'model=gpt-5.6-sol',
-    'reasoning_effort=high',
     'workflow_design_authority=exclusive',
     'workflow_design_acceptance_authority=exclusive',
     'workflow_runtime_authority=none',
@@ -214,9 +203,10 @@ foreach ($required in @(
     'scientific_authority=none',
     'code_authority=none',
     'code_acceptance_authority=none',
-    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
-    'project_manager_return_model=gpt-5.6-sol',
-    'project_manager_return_effort=max',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_mutating_workflow_design',
     'workflow_zero_question_path=fully_specified_mutations',
@@ -270,10 +260,10 @@ foreach ($required in @(
     'answer_now_activation=forbidden',
     'completion_notification=required_once',
     'Project Manager',
-    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
-    'project_manager_return_model=gpt-5.6-sol',
-    'project_manager_return_effort=max',
-    'cross_task_send_requires_explicit_target_model_effort=true')) {
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=probe_confirmed_live_role_session',
+    'cross_task_route_cache=conversation_local_only',
+    'cross_task_model_thinking_override=omitted')) {
     if (-not $reviewOperatorRole.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }

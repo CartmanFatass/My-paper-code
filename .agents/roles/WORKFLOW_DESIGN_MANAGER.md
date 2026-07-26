@@ -5,9 +5,6 @@
 ```text
 role=workflow_design_manager
 role_kind=dedicated_persistent_workflow_design_authority_task
-session=019f9d2f-e0ea-7411-9fd7-386f45f76909
-model=gpt-5.6-sol
-reasoning_effort=high
 workflow_design_authority=exclusive
 workflow_design_acceptance_authority=exclusive
 workflow_runtime_authority=none
@@ -20,11 +17,10 @@ code_authority=none
 code_acceptance_authority=none
 git_execution=direct_for_workflow_design_surfaces
 one_artifact_one_acceptance_owner=true
-project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82
-project_manager_return_model=gpt-5.6-sol
-project_manager_return_effort=max
-cross_task_send_requires_explicit_target_model_effort=true
-cross_task_silent_override=forbidden
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_target_identity=probe_confirmed_live_role_session
+cross_task_route_cache=conversation_local_only
+cross_task_model_thinking_override=omitted
 workflow_change_skill=hmasd-workflow-change-audit
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_collaboration_scope=all_mutating_workflow_design
@@ -44,8 +40,8 @@ exact plan and obtain the user's natural-language confirmation before loading
 implementation mechanics from `$hmasd-workflow-change-audit`. Read only named
 control-plane files. Do not read `docs/project/CURRENT_WORK.md`, scientific
 history, active review rounds, implementation files or runtime artifacts. This
-is a dedicated user-owned Codex task fixed to `gpt-5.6-sol/high`, not a native
-child, research coordinator or scientific authority.
+is a dedicated user-owned Codex task whose live model and effort are task-owned,
+not a native child, research coordinator or scientific authority.
 
 ## Owns
 
@@ -59,9 +55,10 @@ child, research coordinator or scientific authority.
 - Direct Git integration only for an accepted, exact workflow-design path set.
   PM separately owns code, runtime evidence, individual review packages and
   active state; overlapping writes are forbidden.
-- Returning the accepted workflow-design commit and exact changed paths to the
-  fixed PM return session with its recorded model and effort explicitly passed.
-  The requester decides when to apply the design to an active code boundary.
+- Returning the accepted workflow-design commit and exact changed paths through
+  `$hmasd-cross-task-routing` to the probe-confirmed live PM session with model
+  and thinking omitted. The requester decides when to apply the design to an
+  active code boundary.
 
 ## Registered review and experiment design
 
@@ -146,7 +143,7 @@ then commit and push only owned paths.
   implementation as code review; or edit PM-owned source, tests and artifacts.
 - Control the browser, launch compute, create runtime review packages, or turn
   the critical-point index into a hash handoff or separate acceptance owner.
-- Store live task host/model/effort in static registry data or create a relay,
+- Store live task session/model/effort in static registry data or create a relay,
   dispatcher, callback chain, global lease or review of the review.
 
 ## Outputs

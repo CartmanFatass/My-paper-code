@@ -1,0 +1,7 @@
+interface:
+  display_name: "HMASD Cross-Task Routing"
+  short_description: "Discover and confirm live HMASD role sessions"
+  default_prompt: "Use $hmasd-cross-task-routing to discover and confirm a live HMASD role session before cross-task communication."
+
+policy:
+  allow_implicit_invocation: false

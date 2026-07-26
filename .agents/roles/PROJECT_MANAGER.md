@@ -5,9 +5,6 @@
 ```text
 role=project_manager
 role_kind=sole_persistent_code_and_runtime_authority_task
-session=019f9d04-8b21-7512-acc7-ffe02d262c82
-model=gpt-5.6-sol
-reasoning_effort=max
 project_code_authority=exclusive
 project_runtime_authority=exclusive
 workflow_design_authority=none
@@ -23,14 +20,10 @@ one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
-workflow_design_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909
-workflow_design_manager_target_model=gpt-5.6-sol
-workflow_design_manager_target_effort=high
-external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b
-external_review_operator_target_model=gpt-5.6-luna
-external_review_operator_target_effort=high
-cross_task_send_requires_explicit_target_model_effort=true
-cross_task_silent_override=forbidden
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_target_identity=probe_confirmed_live_role_session
+cross_task_route_cache=conversation_local_only
+cross_task_model_thinking_override=omitted
 ```
 
 After the router, read `docs/project/CURRENT_WORK.md`, this charter and only the
@@ -117,13 +110,13 @@ pre-implementation review. Pro resolves scientific content.
 - Maintain `CURRENT_WORK.md` as the smallest current code attention pointer.
   Closed or abandoned candidates are not active assignments; detailed evidence
   remains in Git history, review rounds, reports and ledgers.
-- For workflow-design changes, send an exact bounded request to Workflow
-  Manager using the fixed session/model/effort above, explicitly passed in the
-  send. PM does not locally reinterpret its accepted design, and Workflow
-  Manager does not take over runtime execution.
-- For each Pro boundary, send the exact pushed review files and return route to
-  the fixed External Review Operator session with its recorded model and effort
-  explicitly passed. The assignment includes PM's fixed return triple.
+- For workflow-design changes, use `$hmasd-cross-task-routing` to confirm the
+  live Workflow Design Manager session, then send an exact bounded request with
+  model and thinking omitted. PM does not locally reinterpret its accepted
+  design, and Workflow Design Manager does not take over runtime execution.
+- For each Pro boundary, use `$hmasd-cross-task-routing` to confirm the live
+  External Review Operator session, then send the exact pushed review files and
+  return role with model and thinking omitted.
   Receive only its exact-raw file path and terminal notification; do not load
   browser steps into PM context.
 - Supply the Experiment Operator one immutable authorized run assignment. It
