@@ -51,9 +51,14 @@ def test_configuration_freezes_exact_inventory_and_complexity() -> None:
     assert formal["replanning"] is False
 
     exercise = runner._configuration(formal=False)
+    assert exercise["replicates"] == 1
+    assert exercise["arms"] == list(source.ARMS)
+    assert exercise["fast_updates"] == 10
+    assert exercise["return_to_go_updates"] == 10
     assert exercise["training_transitions"] == 15_360
     assert exercise["evaluation_transitions"] == 12_672
     assert exercise["total_real_transitions"] == 28_032
+    assert exercise["optimizer_steps"] == 120
     assert exercise["total_cells"] == 33
 
 
@@ -91,6 +96,38 @@ def test_formal_train_requires_authority_and_matching_preflight(tmp_path: Path) 
         )
 
 
+def test_formal_train_rejects_favorable_summary_only_preflight(
+    tmp_path: Path,
+) -> None:
+    source_commit = "3" * 40
+    preflight_root = tmp_path / "summary_only"
+    preflight_root.mkdir()
+    (preflight_root / "analysis_result.json").write_text(
+        json.dumps(
+            {
+                "formal": False,
+                "source_commit": source_commit,
+                "operational_valid": True,
+                "operational_errors": [],
+                "branch": runner.NONFORMAL_BRANCH,
+                "formal_projection_executable": True,
+                "formal_projection_seconds": 1.0,
+            }
+        ),
+        encoding="utf-8",
+    )
+    formal_root = tmp_path / "formal"
+    with pytest.raises(ValueError, match="preflight"):
+        runner.train(
+            run_root=formal_root,
+            source_commit=source_commit,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            preflight_root=preflight_root,
+        )
+    assert not formal_root.exists()
+
+
 @pytest.fixture
 def tiny_exercise(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -115,9 +152,51 @@ def test_tiny_end_to_end_exercise_is_operational(tiny_exercise) -> None:
     assert result["formal_projection_executable"] is True
     training = json.loads((root / "train_manifest.json").read_text(encoding="utf-8"))
     evaluation = json.loads((root / "evaluation_manifest.json").read_text(encoding="utf-8"))
+    assert result["training_manifest_digest"] == runner._artifact_digest(
+        root / "train_manifest.json"
+    )
+    assert result["evaluation_manifest_digest"] == runner._artifact_digest(
+        root / "evaluation_manifest.json"
+    )
     assert len(training["replicate_results"]) == 1
     assert set(training["replicate_results"][0]["arms"]) == set(source.ARMS)
     assert len(evaluation["cells"]) == 33
+
+
+def test_formal_train_rejects_wrong_inventory_preflight(
+    tiny_exercise, tmp_path: Path
+) -> None:
+    preflight_root, _ = tiny_exercise
+    formal_root = tmp_path / "formal"
+    with pytest.raises(ValueError, match="inventory"):
+        runner.train(
+            run_root=formal_root,
+            source_commit="2" * 40,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            preflight_root=preflight_root,
+        )
+    assert not formal_root.exists()
+
+
+def test_formal_artifact_validation_rechecks_serialized_preflight(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def reject_preflight(_root: Path, *, source_commit: str) -> None:
+        assert source_commit == "4" * 40
+        raise ValueError("tampered preflight")
+
+    monkeypatch.setattr(runner, "_validate_formal_preflight", reject_preflight)
+    errors = runner._training_errors(
+        tmp_path,
+        {
+            "formal": True,
+            "source_commit": "4" * 40,
+            "authorization_token": runner.AUTHORIZATION_TOKEN,
+            "preflight_root": str((tmp_path / "preflight").resolve()),
+        },
+    )
+    assert "formal preflight invalid" in " | ".join(errors).lower()
 
 
 def test_reward_trace_tamper_fails_closed(tiny_exercise) -> None:

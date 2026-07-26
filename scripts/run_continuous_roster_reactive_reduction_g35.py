@@ -365,20 +365,119 @@ def _max_replay_error(metrics: Mapping[str, float]) -> float:
     return max(values, default=0.0)
 
 
+def _artifact_digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _nonnegative_finite_seconds(value: object) -> float:
+    if (
+        not isinstance(value, (int, float))
+        or isinstance(value, bool)
+        or not np.isfinite(value)
+        or value < 0.0
+    ):
+        raise ValueError("G35 formal preflight stage timing invalid")
+    return float(value)
+
+
 def _validate_formal_preflight(
     preflight_root: Path | None, *, source_commit: str
 ) -> None:
     if preflight_root is None:
         raise ValueError("formal G35 execution requires a bounded preflight root")
-    result = _read_json(preflight_root / "analysis_result.json")
+    root = Path(preflight_root)
+    training_path = root / "train_manifest.json"
+    evaluation_path = root / "evaluation_manifest.json"
+    analysis_path = root / "analysis_result.json"
+    try:
+        training = _read_json(training_path)
+        evaluation = _read_json(evaluation_path)
+        result = _read_json(analysis_path)
+    except (OSError, TypeError, ValueError) as error:
+        raise ValueError(
+            f"G35 formal preflight artifacts are unreadable: {error}"
+        ) from error
+
+    validation_errors = _training_errors(root, training)
+    validation_errors.extend(_evaluation_errors(root, training, evaluation))
+    if validation_errors:
+        raise ValueError(
+            "G35 formal preflight artifacts are invalid: "
+            + " | ".join(validation_errors)
+        )
+
+    expected_configuration = _configuration(formal=False)
+    frozen_inventory = {
+        "replicates": 1,
+        "arms": list(source.ARMS),
+        "fast_updates": 10,
+        "return_to_go_updates": 10,
+        "num_envs": 8,
+        "ppo_passes": 2,
+        "evaluation_episodes_per_cell": 8,
+        "cells_per_replicate": 33,
+        "total_cells": 33,
+        "training_transitions": 15_360,
+        "evaluation_transitions": 12_672,
+        "total_real_transitions": 28_032,
+        "optimizer_steps": 120,
+        "evaluation_optimizer_steps": 0,
+    }
     if (
-        result.get("formal") is not False
+        any(
+            expected_configuration.get(name) != value
+            for name, value in frozen_inventory.items()
+        )
+        or training.get("configuration") != expected_configuration
+        or evaluation.get("configuration") != expected_configuration
+    ):
+        raise ValueError("G35 formal preflight frozen inventory mismatch")
+
+    training_seconds = _nonnegative_finite_seconds(
+        training.get("stage_wall_time_seconds")
+    )
+    evaluation_seconds = _nonnegative_finite_seconds(
+        evaluation.get("stage_wall_time_seconds")
+    )
+    analysis_seconds = _nonnegative_finite_seconds(
+        result.get("stage_wall_time_seconds")
+    )
+    projection = 1.25 * (
+        30.0 * training_seconds
+        + 48.0 * evaluation_seconds
+        + 40.0 * analysis_seconds
+    )
+    stored_projection = result.get("formal_projection_seconds")
+    projection_matches = (
+        isinstance(stored_projection, (int, float))
+        and not isinstance(stored_projection, bool)
+        and np.isfinite(stored_projection)
+        and bool(np.isclose(stored_projection, projection, rtol=0.0, atol=1e-9))
+    )
+    if (
+        training.get("formal") is not False
+        or evaluation.get("formal") is not False
+        or training.get("source_commit") != source_commit
+        or evaluation.get("source_commit") != source_commit
+        or result.get("schema_version") != SCHEMA_VERSION
+        or result.get("algorithm") != ALGORITHM_ID
+        or result.get("source_id") != source.SOURCE_ID
+        or result.get("stage") != "analyze"
+        or result.get("status") != "COMPLETE"
+        or result.get("formal") is not False
         or result.get("source_commit") != source_commit
         or result.get("operational_valid") is not True
+        or result.get("operational_errors") != []
         or result.get("branch") != NONFORMAL_BRANCH
+        or result.get("training_manifest_digest")
+        != _artifact_digest(training_path)
+        or result.get("evaluation_manifest_digest")
+        != _artifact_digest(evaluation_path)
+        or result.get("formal_wall_clock_cap_seconds")
+        != FORMAL_WALL_CLOCK_CAP_SECONDS
+        or not projection_matches
         or result.get("formal_projection_executable") is not True
-        or float(result.get("formal_projection_seconds", float("inf")))
-        > FORMAL_WALL_CLOCK_CAP_SECONDS
+        or projection > FORMAL_WALL_CLOCK_CAP_SECONDS
     ):
         raise ValueError("G35 formal preflight is not executable for this source")
 
@@ -681,6 +780,22 @@ def _training_errors(
         errors.append("G35 training runtime mismatch")
     if formal and training.get("authorization_token") != AUTHORIZATION_TOKEN:
         errors.append("G35 formal training authority mismatch")
+    if formal:
+        serialized_preflight_root = training.get("preflight_root")
+        if (
+            not isinstance(serialized_preflight_root, str)
+            or not serialized_preflight_root.strip()
+            or not Path(serialized_preflight_root).is_absolute()
+        ):
+            errors.append("G35 formal preflight root mismatch")
+        else:
+            try:
+                _validate_formal_preflight(
+                    Path(serialized_preflight_root),
+                    source_commit=str(training.get("source_commit")),
+                )
+            except (OSError, TypeError, ValueError) as error:
+                errors.append(f"G35 formal preflight invalid: {error}")
     if not formal and (
         training.get("authorization_token") is not None
         or training.get("preflight_root") is not None
@@ -1549,6 +1664,12 @@ def analyze(*, run_root: Path, require_formal: bool = False) -> dict[str, Any]:
         "operational_errors": errors,
         "branch": branch,
         "metrics": metrics,
+        "training_manifest_digest": _artifact_digest(
+            run_root / "train_manifest.json"
+        ),
+        "evaluation_manifest_digest": _artifact_digest(
+            run_root / "evaluation_manifest.json"
+        ),
         "stage_wall_time_seconds": analysis_seconds,
         "formal_projection_seconds": projection,
         "formal_projection_executable": projection_executable,
