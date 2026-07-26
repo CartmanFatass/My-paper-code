@@ -778,6 +778,92 @@ def part_a_conformance(*, lower_contrast_lcb: float, lower_contrast_ucb: float,
 
 
 # =============================================================================
+# Item 3 -- conformance_ok: real conjunction, and the arm-distinctness spot check
+# =============================================================================
+
+def arm_distinctness_check(duty_map_pairs: list) -> bool:
+    """Section 4 / item 3's arm-distinctness spot check: constructive_mixed
+    must differ from null on at least one certified joint event's duty maps
+    -- proving the two arms are not silently identical at the registered
+    fleet shape (the exact historical defect `constructive_mixed_update`'s
+    own docstring documents: a buggy version left every vacancy unserved,
+    so its map differed from `null`'s only by one stale dict key).
+    `duty_map_pairs` is `[(duty_map_at_te, duty_map_before_leave), ...]` for
+    events where a vacancy was coverable; every certified joint event
+    already guarantees that (flex certification requires a covering
+    survivor), so callers pass every certified event's pair unconditionally.
+
+    An empty list (no certified events found anywhere in the run) passes
+    vacuously here -- that absence is `SOURCE_EVENT_SUPPORT_INSUFFICIENT`
+    (branch 2)'s failure mode, already reported by `support_ok`, and must
+    not be double-counted as an arm-conformance defect (branch 1) ahead of
+    it in `decide_branch`'s precedence: this check exists to catch arms
+    that are indistinguishable WHEN events exist, not to re-detect that no
+    events were found."""
+    if not duty_map_pairs:
+        return True
+    return any(constructive != before_leave for constructive, before_leave in duty_map_pairs)
+
+
+def compute_conformance_ok(*, invalidated_pairs: int, topology_hash_ok: bool,
+                            arm_distinct_ok: bool) -> bool:
+    """Item 3's real conjunction: zero tolerance on invalidated
+    (`PrefixReplayMismatchError`) pairs, every pinned-topology hash assert
+    passed, and the arm-distinctness spot check passed. False routes
+    `decide_branch` to branch 1 (`INVALID_EVENT_ALIGNED_AUDIT`)."""
+    return int(invalidated_pairs) == 0 and bool(topology_hash_ok) and bool(arm_distinct_ok)
+
+
+# =============================================================================
+# Section 8 -- Part-A conformance bounds (joint bootstrap wiring)
+# =============================================================================
+
+def compute_part_a_bounds(*, d_a_topology_units: list, b_stable_topology_units: list,
+                           shared_topology_indices: np.ndarray, seed: int) -> Optional[dict]:
+    """Bootstraps D_A jointly with B_stable, sharing the SAME
+    `shared_topology_indices` every other primary quantity uses (section 8:
+    "All primary quantities use the same topology/episode bootstrap
+    indices"), and returns the three bounds `part_a_conformance` consumes
+    (`lower_contrast_lcb`/`lower_contrast_ucb` of `D_A + 0.05*B_stable`,
+    `upper_contrast_lcb` of `0.05*B_stable - D_A`) plus `b_stable_lcb` for
+    its own conditioning gate.
+
+    Returns `None` when there is no stable-limb calibration D_A data to
+    bootstrap at all (every topology contributed zero qualifying stable
+    events) -- the caller must not report a Part-A verdict in that case,
+    per the "when and only when the stable class has events" requirement;
+    a present-but-nan bound would be a silent, meaningless verdict rather
+    than an honest absence."""
+    if not any(len(units) for units in d_a_topology_units):
+        return None
+    b_stable = hierarchical_bootstrap_quantity(
+        b_stable_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
+    d_a = hierarchical_bootstrap_quantity(
+        d_a_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
+    lower_contrast_iters = d_a["u_star_iters"] + EQUIVALENCE_DELTA * b_stable["u_star_iters"]
+    upper_contrast_iters = EQUIVALENCE_DELTA * b_stable["u_star_iters"] - d_a["u_star_iters"]
+    lower_finite = lower_contrast_iters[np.isfinite(lower_contrast_iters)]
+    upper_finite = upper_contrast_iters[np.isfinite(upper_contrast_iters)]
+    return {
+        "b_stable_lcb": b_stable["lo"],
+        "lower_contrast_lcb": float(np.percentile(lower_finite, 5)) if lower_finite.size else float("nan"),
+        "lower_contrast_ucb": float(np.percentile(lower_finite, 95)) if lower_finite.size else float("nan"),
+        "upper_contrast_lcb": float(np.percentile(upper_finite, 5)) if upper_finite.size else float("nan"),
+    }
+
+
+def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
+    """Maps `part_a_conformance`'s verdict string to `decide_branch`'s
+    `part_a_contradiction` boolean plus the diagnostic string that lands in
+    the JSON payload only, never a branch input itself. ONLY
+    `PART_A_CONTRADICTION` sets the branch input True --
+    `PART_A_CONFORMANCE_UNRESOLVED` (and `NOT_APPLICABLE`,
+    `CONFORMANCE_PASS`) never flip any branch input, per section 8: the
+    unresolved diagnostic "does not relabel the source branch."""
+    return (verdict == "PART_A_CONTRADICTION", verdict)
+
+
+# =============================================================================
 # Section 10 -- ten-branch first-match decision
 # =============================================================================
 
@@ -1342,7 +1428,15 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
     edge) per UAV and drives `duty_map` through the already-accepted PURE
     `constructive_mixed_update`/`null_update` functions -- never
     reimplements their reassignment logic. Returns
-    `(new_duty_map, leave_uavs, rejoin_uavs)`."""
+    `(new_duty_map, leave_uavs, rejoin_uavs)`.
+
+    `schedule == "full_sync_SET"` (Part-A conformance diagnostic, section 4:
+    "reassigns every duty at each check", stable limb only, never applied on
+    the flex limb) bypasses the LEAVE/REJOIN edge-driven update entirely and
+    recomputes the WHOLE duty map from scratch every step via the
+    already-accepted `full_sync_set_update`, regardless of whether a
+    transition happened this step -- it never preserves any incumbent,
+    locked or not."""
     charging_before = np.asarray(charging_before, dtype=bool)
     charging_after = np.asarray(charging_after, dtype=bool)
     leave_uavs = [i for i in range(len(charging_after)) if charging_after[i] and not charging_before[i]]
@@ -1351,6 +1445,10 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
         i: np.asarray(env.uav_positions[i], dtype=float)
         for i in range(int(env.n_uavs)) if not charging_after[i]
     }
+    if schedule == "full_sync_SET":
+        new_map = full_sync_set_update(
+            duty_positions=duty_positions, airborne_positions=airborne_positions)
+        return new_map, leave_uavs, rejoin_uavs
     new_map = dict(duty_map)
     for u in leave_uavs:
         if schedule == "null":
@@ -1700,6 +1798,17 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                     },
                     "locked_duties": {"stable": locked_for_flex, "flex": locked_for_stable},
                     "conformance_record": build_event_conformance_record(cand),
+                    # Item 3 / arm-distinctness spot check witness: the
+                    # PRE-LEAVE duty map is exactly what `null` freezes for
+                    # the whole mechanism horizon (`null_update` is the
+                    # identity on this dict), so pairing it with
+                    # `duty_map_at_te` (constructive_mixed's post-LEAVE
+                    # re-match) gives a real constructive-vs-null witness at
+                    # every certified joint event -- both certifications
+                    # having passed already guarantees the vacancy was
+                    # coverable (flex certification requires a covering
+                    # survivor).
+                    "duty_map_before_leave": dict(duty_map_before),
                 }
                 return {"event": event, "exclusions": exclusions, "recorded_actions": recorded_actions}
             exclusions.append({
@@ -1862,25 +1971,62 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     at `t_e` into `constructive_mixed` vs `null` and evaluates BOTH
     `H_stable` and `H_flex` from the SAME paired continuation type (section
     5). Returns `support_miss=True` (never a synthetic zero) when no
-    qualifying joint event was found."""
+    qualifying joint event was found.
+
+    Part-A conformance (implementer wiring, section 8, stable limb ONLY,
+    "never applied on the flex limb"): the stable limb's schedule set gains a
+    THIRD fork, `full_sync_SET` (the accepted `full_sync_set_update` diagnostic
+    duty policy), run through the identical prefix-replay/continuation-seed
+    machinery as `constructive_mixed`/`null` above -- same CRN continuation
+    construction, same `H_stable` window, same window-local G. `D_A =
+    G(full_sync_SET) - G(constructive_mixed)` is accumulated per qualifying
+    calibration episode, exactly mirroring `b_value`'s per-episode scalar
+    shape (frozen contract section 8's bootstrap text lists "B_stable,
+    B_flex, ... and the Part-A contrast" as resampled from "calibration
+    episodes and audit events" together with B_m, not from the audit block's
+    n_select/n_eval selection-replicate machinery, which section 8's
+    "Replicates" paragraph scopes explicitly to "selected SET and KEEP" --
+    so D_A is a single scalar per calibration episode, not an n_eval-length
+    replicate array).
+
+    Fixed-history discipline (section 8/Q-I2): a `PrefixReplayMismatchError`
+    on ANY schedule's fresh-env prefix replay invalidates the WHOLE episode
+    (every schedule's fork shares the same recorded prefix and expected
+    hash, so a divergence on one schedule means the fixed-history guarantee
+    itself failed for this episode, not just one arm) -- it is caught here,
+    reported via `invalidated_pairs`, and the episode contributes to neither
+    `B_m` nor `D_A`, never silently repaired or retried."""
     env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
                             coord_hash=coord_hash, energy_stage=energy_stage)
     energies = draw_energy_permutation(energy_seed=energy_seed)
     apply_energy_profile(env, energies)
     prefix = roll_prefix_and_find_event(env)
     if prefix["event"] is None:
-        return {"support_miss": True, "exclusions": prefix["exclusions"]}
+        return {"support_miss": True, "invalidated": False, "exclusions": prefix["exclusions"]}
 
     event = prefix["event"]
     results = {}
+    invalidated_pairs: list = []
     for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
+        schedules = (("constructive_mixed", "null", "full_sync_SET") if limb == "stable"
+                     else ("constructive_mixed", "null"))
         g_by_schedule = {}
-        for schedule in ("constructive_mixed", "null"):
-            replay_env = replay_prefix(
-                config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-                recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
-                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-                energy_stage=energy_stage)
+        limb_invalid = False
+        for schedule in schedules:
+            try:
+                replay_env = replay_prefix(
+                    config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+                    recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
+                    duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+                    energy_stage=energy_stage)
+            except PrefixReplayMismatchError as exc:
+                invalidated_pairs.append({
+                    "topology_seed": topology_seed, "episode_seed": episode_seed,
+                    "block": "calibration", "limb": limb, "schedule": schedule,
+                    "reason": str(exc),
+                })
+                limb_invalid = True
+                break
             baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
             cont_seed = stream_seed(
                 topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
@@ -1894,12 +2040,27 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
             g_by_schedule[schedule] = window_g_from_step_metrics(
                 out["step_metrics"], out["qos_user_steps"], h=h_val,
                 baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
-        results[limb] = {
+        if limb_invalid:
+            continue
+        result_entry = {
             "b_value": g_by_schedule["constructive_mixed"]["g_total"] - g_by_schedule["null"]["g_total"],
             "constructive": g_by_schedule["constructive_mixed"],
             "null": g_by_schedule["null"],
         }
-    return {"support_miss": False, "event": event["conformance_record"], "results": results}
+        if limb == "stable":
+            result_entry["full_sync"] = g_by_schedule["full_sync_SET"]
+            result_entry["d_a"] = (g_by_schedule["full_sync_SET"]["g_total"]
+                                    - g_by_schedule["constructive_mixed"]["g_total"])
+        results[limb] = result_entry
+    return {
+        "support_miss": False,
+        "invalidated": bool(invalidated_pairs),
+        "invalidated_pairs": invalidated_pairs,
+        "event": event["conformance_record"],
+        "results": results,
+        "duty_map_at_te": event["duty_map_at_te"],
+        "duty_map_before_leave": event["duty_map_before_leave"],
+    }
 
 
 # =============================================================================
@@ -1914,18 +2075,32 @@ def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: di
     limb's `Z(h)`, `n_select` selection-stream replicates and `n_eval`
     evaluation-stream replicates -- all via fresh bit-identical prefix
     replay. Returns the `hierarchical_bootstrap_events`-shaped per-event
-    unit: `{"candidates": {z: {"select":.., "eval_set":..}}, "eval_keep":..}`."""
+    unit: `{"candidates": {z: {"select":.., "eval_set":..}}, "eval_keep":..}`,
+    plus `invalidated_pairs`: a `PrefixReplayMismatchError` on any single
+    replicate's fresh-env prefix replay (section 8/Q-I2's fixed-history
+    equality assertion) excludes ONLY that one replicate -- reported here,
+    never repaired -- rather than invalidating the whole event, since each
+    replicate replays independently from its own fresh pinned env."""
     h_val = H_STABLE if limb == "stable" else H_FLEX
     focal_uav = event["focal_stable_uav"] if limb == "stable" else event["focal_flex_uav"]
     legal_targets = event["legal_targets"][limb]
     locked_duties = event["locked_duties"][limb]
+    invalidated_pairs: list = []
 
-    def _run_replicate(*, target, candidate_id: str, phase: str, replicate_index: int) -> float:
-        replay_env = replay_prefix(
-            config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-            recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
-            duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-            energy_stage=energy_stage)
+    def _run_replicate(*, target, candidate_id: str, phase: str, replicate_index: int) -> Optional[float]:
+        try:
+            replay_env = replay_prefix(
+                config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+                recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
+                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+                energy_stage=energy_stage)
+        except PrefixReplayMismatchError as exc:
+            invalidated_pairs.append({
+                "topology_seed": topology_seed, "episode_seed": episode_seed,
+                "block": "audit", "limb": limb, "candidate_id": candidate_id,
+                "phase": phase, "replicate_index": replicate_index, "reason": str(exc),
+            })
+            return None
         baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
         cont_seed = stream_seed(
             topology_seed=topology_seed, block="audit", episode_seed=episode_seed,
@@ -1944,23 +2119,29 @@ def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: di
         return g["g_total"]
 
     keep_eval = np.array([
-        _run_replicate(target=None, candidate_id="KEEP", phase="evaluate", replicate_index=r)
-        for r in range(n_eval)
+        v for v in (
+            _run_replicate(target=None, candidate_id="KEEP", phase="evaluate", replicate_index=r)
+            for r in range(n_eval)
+        ) if v is not None
     ], dtype=float)
 
     candidates = {}
     for z_id, z_target in legal_targets.items():
         select_vals = np.array([
-            _run_replicate(target=z_target, candidate_id=z_id, phase="select", replicate_index=r)
-            for r in range(n_select)
+            v for v in (
+                _run_replicate(target=z_target, candidate_id=z_id, phase="select", replicate_index=r)
+                for r in range(n_select)
+            ) if v is not None
         ], dtype=float)
         eval_vals = np.array([
-            _run_replicate(target=z_target, candidate_id=z_id, phase="evaluate", replicate_index=r)
-            for r in range(n_eval)
+            v for v in (
+                _run_replicate(target=z_target, candidate_id=z_id, phase="evaluate", replicate_index=r)
+                for r in range(n_eval)
+            ) if v is not None
         ], dtype=float)
         candidates[z_id] = {"select": select_vals, "eval_set": eval_vals}
 
-    return {"candidates": candidates, "eval_keep": keep_eval}
+    return {"candidates": candidates, "eval_keep": keep_eval, "invalidated_pairs": invalidated_pairs}
 
 
 # =============================================================================
@@ -1978,14 +2159,23 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                         n_select: int = N_SELECT, n_eval: int = N_EVAL, smoke: bool = False,
                         energy_stage: str = "S3") -> dict:
     """Item 5's per-topology driver: section 9 pinning, the calibration
-    block (B_m) and the audit block (U*_m, both limbs), assembled into the
-    exact shapes `compute_t_m_bootstrap` consumes."""
+    block (B_m, and now D_A -- Part-A conformance, stable limb only) and the
+    audit block (U*_m, both limbs), assembled into the exact shapes
+    `compute_t_m_bootstrap`/`compute_part_a_bounds` consume. Also
+    accumulates this topology's `invalidated_pairs` (item 3: any
+    `PrefixReplayMismatchError`, excluded and reported, never repaired) and
+    `arm_distinctness_pairs` (item 3's spot check witnesses: every certified
+    joint event's `(duty_map_at_te, duty_map_before_leave)` pair -- flex
+    certification already guarantees the vacancy was coverable)."""
     coords, coord_hash = build_topology_template(config, topology_seed=topology_seed)
     record = build_topology_record(coords, coord_hash, topology_seed=topology_seed)
     this_n_select = 1 if smoke else n_select
     this_n_eval = 2 if smoke else n_eval
 
-    calibration_units_stable, calibration_units_flex = [], []
+    invalidated_pairs: list = []
+    arm_distinctness_pairs: list = []
+
+    calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
     calibration_report = {"episodes_attempted": 0, "qualifying": 0, "exclusions": []}
     for idx in range(n_calibration):
         calibration_report["episodes_attempted"] += 1
@@ -1997,7 +2187,15 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         if result.get("support_miss"):
             calibration_report["exclusions"].append(result.get("exclusions", []))
             continue
+        invalidated_pairs.extend(result.get("invalidated_pairs", []))
+        if "stable" not in result["results"] or "flex" not in result["results"]:
+            # One or both limbs invalidated by a PrefixReplayMismatchError
+            # (already recorded above) -- this episode contributes neither
+            # B_m nor D_A, and is not counted as qualifying.
+            continue
         calibration_report["qualifying"] += 1
+        arm_distinctness_pairs.append(
+            (result["duty_map_at_te"], result["duty_map_before_leave"]))
         g_s, g_f = result["results"]["stable"], result["results"]["flex"]
         calibration_units_stable.append({
             "candidates": {"cvn": {"select": np.array([g_s["constructive"]["g_total"]]),
@@ -2008,6 +2206,11 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             "candidates": {"cvn": {"select": np.array([g_f["constructive"]["g_total"]]),
                                     "eval_set": np.array([g_f["constructive"]["g_total"]])}},
             "eval_keep": np.array([g_f["null"]["g_total"]]),
+        })
+        calibration_units_d_a.append({
+            "candidates": {"cvn": {"select": np.array([g_s["d_a"]]),
+                                    "eval_set": np.array([g_s["d_a"]])}},
+            "eval_keep": np.array([0.0]),
         })
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
@@ -2026,6 +2229,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             continue
         audit_report["qualifying"] += 1
         event = prefix["event"]
+        arm_distinctness_pairs.append(
+            (event["duty_map_at_te"], event["duty_map_before_leave"]))
         unit_stable = run_audit_event(
             config, topology_seed=topology_seed, episode_seed=ep_seed, coords=coords,
             coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
@@ -2036,6 +2241,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
             event=event, limb="flex", n_select=this_n_select, n_eval=this_n_eval,
             energy_stage=energy_stage)
+        invalidated_pairs.extend(unit_stable.get("invalidated_pairs", []))
+        invalidated_pairs.extend(unit_flex.get("invalidated_pairs", []))
         audit_units_stable.append(unit_stable)
         audit_units_flex.append(unit_flex)
         audit_events_out.append(event["conformance_record"])
@@ -2046,11 +2253,14 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         "audit_report": audit_report,
         "calibration_units_stable": calibration_units_stable,
         "calibration_units_flex": calibration_units_flex,
+        "calibration_units_d_a": calibration_units_d_a,
         "audit_units_stable": audit_units_stable,
         "audit_units_flex": audit_units_flex,
         "audit_events": audit_events_out,
         "qualifying_calibration_episodes": calibration_report["qualifying"],
         "qualifying_audit_episodes": audit_report["qualifying"],
+        "invalidated_pairs": invalidated_pairs,
+        "arm_distinctness_pairs": arm_distinctness_pairs,
     }
 
 
@@ -2098,13 +2308,22 @@ def main() -> None:
 
     config = build_config()
     topology_results = []
+    topology_hash_failures = []
     for seed in topology_seeds:
-        # A `TopologyMismatchError`/`PrefixReplayMismatchError` raised inside
-        # this call is a conformance failure (branch 1) and is deliberately
-        # NEVER caught here -- it aborts the run rather than being silently
-        # downgraded into a result.
-        topo_out = run_topology_audit(
-            config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit, smoke=args.smoke)
+        # A pinned-topology `TopologyMismatchError` fails the run (never
+        # repaired, section 9) -- caught HERE, per topology, so it becomes a
+        # reported `INVALID_EVENT_ALIGNED_AUDIT` (branch 1) result rather
+        # than an uncaught crash; the failing topology contributes no data.
+        # `PrefixReplayMismatchError` is already caught per-pair inside
+        # `run_calibration_episode`/`run_audit_event` (item 3: an invalidated
+        # pair excludes the pair and is reported, never the whole run) and
+        # never escapes here.
+        try:
+            topo_out = run_topology_audit(
+                config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit, smoke=args.smoke)
+        except TopologyMismatchError as exc:
+            topology_hash_failures.append({"topology_seed": seed, "reason": str(exc)})
+            continue
         topology_results.append(topo_out)
         if args.out:
             write_topology_record(args.out, topo_out["topology_record"])
@@ -2115,22 +2334,34 @@ def main() -> None:
         for r in topology_results
     ])
 
+    invalidated_pairs_total = [p for r in topology_results for p in r["invalidated_pairs"]]
+    arm_distinctness_pairs_all = [p for r in topology_results for p in r["arm_distinctness_pairs"]]
+    topology_hash_ok = len(topology_hash_failures) == 0
+    arm_distinct_ok = arm_distinctness_check(arm_distinctness_pairs_all)
+    conformance_ok = compute_conformance_ok(
+        invalidated_pairs=len(invalidated_pairs_total), topology_hash_ok=topology_hash_ok,
+        arm_distinct_ok=arm_distinct_ok)
+
     result = {
         "contract": CONTRACT_PATH,
         "contract_id": CONTRACT_ID,
         "procedure_version": TOPOLOGY_PROCEDURE_VERSION,
         "topology_seeds": topology_seeds,
         "smoke": bool(args.smoke),
-        "note": "SMOKE_NOT_A_RESULT" if args.smoke else (
-            "Real orchestration run. Part-A full_sync_SET conformance is NOT wired here "
-            "(conformance_ok/part_a_contradiction below are conservative placeholders, not a "
-            "measured Part-A result) -- see the implementer report."
-        ),
+        "note": "SMOKE_NOT_A_RESULT" if args.smoke else "Real orchestration run.",
         "topology_records": [r["topology_record"] for r in topology_results],
         "calibration_reports": [r["calibration_report"] for r in topology_results],
         "audit_reports": [r["audit_report"] for r in topology_results],
         "audit_events": [r["audit_events"] for r in topology_results],
         "support": {"ok": support_ok, "detail": support_detail},
+        "conformance": {
+            "ok": conformance_ok,
+            "invalidated_pairs_count": len(invalidated_pairs_total),
+            "invalidated_pairs": invalidated_pairs_total,
+            "topology_hash_ok": topology_hash_ok,
+            "topology_hash_failures": topology_hash_failures,
+            "arm_distinct_ok": arm_distinct_ok,
+        },
     }
 
     if len(topology_results) > 1 and support_ok:
@@ -2142,11 +2373,37 @@ def main() -> None:
             u_star_flex_topology_units=[r["audit_units_flex"] for r in topology_results],
             n_topo=n_topo)
         result["t_m_bootstrap"] = {k: v for k, v in t_m.items() if k != "shared_topology_indices"}
+
+        # Part-A conformance (item 2): the SAME shared topology-resampling
+        # stream `compute_t_m_bootstrap` already drew, so D_A and B_stable's
+        # per-iteration draws come from the identical resampled topology mix
+        # as every other primary quantity (section 8's "common resampling
+        # stream" / "do not assign separate resampling seeds").
+        part_a_bounds = compute_part_a_bounds(
+            d_a_topology_units=[r["calibration_units_d_a"] for r in topology_results],
+            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
+            shared_topology_indices=t_m["shared_topology_indices"], seed=BOOTSTRAP_SEED)
+        if part_a_bounds is None:
+            part_a_verdict = "NOT_APPLICABLE"
+        else:
+            part_a_verdict = part_a_conformance(
+                lower_contrast_lcb=part_a_bounds["lower_contrast_lcb"],
+                lower_contrast_ucb=part_a_bounds["lower_contrast_ucb"],
+                upper_contrast_lcb=part_a_bounds["upper_contrast_lcb"],
+                b_stable_lcb=part_a_bounds["b_stable_lcb"])
+        part_a_contradiction, part_a_diagnostic = map_part_a_verdict_to_inputs(part_a_verdict)
+        result["part_a"] = {
+            "verdict": part_a_diagnostic,
+            **({} if part_a_bounds is None else part_a_bounds),
+        }
+
         result["branch"] = decide_branch(
-            conformance_ok=True, support_ok=support_ok, primary_g_degenerate_flag=False,
-            part_a_contradiction=False, b_stable_lcb=t_m["b_stable_lcb"],
+            conformance_ok=conformance_ok, support_ok=support_ok, primary_g_degenerate_flag=False,
+            part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
             t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
             b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
+    elif not conformance_ok:
+        result["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
     elif not support_ok:
         result["branch"] = "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
     else:

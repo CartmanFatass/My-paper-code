@@ -1575,5 +1575,247 @@ def test_fork_continuation_reseeds_np_random_to_the_stream_seed():
     assert actual_first_draw == pytest.approx(expected_first_draw)
 
 
+# =============================================================================
+# 14. Part-A conformance wiring (item 1-4): full_sync_SET schedule, the real
+#     conformance_ok conjunction, arm-distinctness, joint bootstrap bounds,
+#     verdict-to-branch-input mapping, and invalidated-pair exclusion.
+# =============================================================================
+
+def test_full_sync_set_schedule_resyncs_every_step_even_without_a_transition():
+    """full_sync_SET (Part-A diagnostic, section 4: 'reassigns every duty at
+    each check') must recompute the WHOLE duty map every step regardless of
+    whether a LEAVE/REJOIN transition happened -- unlike constructive_mixed,
+    which preserves the map between lifecycle events (section 4: 'between
+    lifecycle events it performs no full-sync permutation'). Constructed so
+    the CURRENT duty assignment is the WORST possible one (each UAV sits
+    physically at the OTHER duty's position): full_sync must swap it back;
+    an implementation that only updates on transitions would leave this
+    (measurably wrong) map untouched."""
+    duty_positions = {0: np.array([0.0, 0.0, 100.0]), 1: np.array([100.0, 0.0, 100.0])}
+    duty_map = {0: 0, 1: 1}  # current (suboptimal) assignment: identity
+
+    class _Env:
+        n_uavs = 2
+        # uav 0 physically at duty 1's spot; uav 1 physically at duty 0's spot.
+        uav_positions = np.array([[100.0, 0.0, 0.0], [0.0, 0.0, 0.0]])
+
+    no_transition = np.array([False, False])
+    new_map, leave_uavs, rejoin_uavs = audit.update_duty_map_on_transitions(
+        duty_map=duty_map, duty_positions=duty_positions, env=_Env(),
+        charging_before=no_transition, charging_after=no_transition,
+        schedule="full_sync_SET")
+    assert leave_uavs == [] and rejoin_uavs == []   # no transition occurred at all
+    assert new_map == {0: 1, 1: 0}                   # yet the map was fully re-synced
+    assert new_map != duty_map
+
+    # Sanity/contrast: constructive_mixed on the IDENTICAL no-transition
+    # input really does leave the map untouched -- the property this test
+    # exists to distinguish full_sync_SET from.
+    unchanged_map, _, _ = audit.update_duty_map_on_transitions(
+        duty_map=duty_map, duty_positions=duty_positions, env=_Env(),
+        charging_before=no_transition, charging_after=no_transition,
+        schedule="constructive_mixed")
+    assert unchanged_map == duty_map
+
+
+def test_compute_conformance_ok_is_true_only_when_all_three_conjuncts_hold():
+    assert audit.compute_conformance_ok(
+        invalidated_pairs=0, topology_hash_ok=True, arm_distinct_ok=True) is True
+    assert audit.compute_conformance_ok(
+        invalidated_pairs=1, topology_hash_ok=True, arm_distinct_ok=True) is False
+    assert audit.compute_conformance_ok(
+        invalidated_pairs=0, topology_hash_ok=False, arm_distinct_ok=True) is False
+    assert audit.compute_conformance_ok(
+        invalidated_pairs=0, topology_hash_ok=True, arm_distinct_ok=False) is False
+
+
+def test_arm_distinctness_check_true_when_at_least_one_pair_differs():
+    pairs = [({0: 0}, {0: 0}), ({0: 1, 1: 0}, {0: 0, 1: 1})]
+    assert audit.arm_distinctness_check(pairs) is True
+
+
+def test_arm_distinctness_check_false_when_every_pair_is_identical():
+    """Reproduces the exact shape of the historical bug
+    (`constructive_mixed_update`'s own docstring): if constructive and null
+    never actually differ across every witnessed event, the spot check must
+    catch it, not pass vacuously."""
+    pairs = [({0: 0}, {0: 0}), ({1: 1}, {1: 1})]
+    assert audit.arm_distinctness_check(pairs) is False
+
+
+def test_arm_distinctness_check_vacuously_true_on_no_certified_events():
+    """An empty witness list means no events were found anywhere in the run
+    -- that is SOURCE_EVENT_SUPPORT_INSUFFICIENT's (branch 2) failure mode,
+    already reported via `support_ok`, and must not be double-counted as an
+    arm-conformance defect ahead of it in `decide_branch`'s precedence."""
+    assert audit.arm_distinctness_check([]) is True
+
+
+def test_compute_part_a_bounds_returns_none_with_no_stable_event_data():
+    """Item 5a, first half of 'when and only when the stable class has
+    events': zero qualifying stable-limb calibration data anywhere in the
+    run must produce no Part-A bounds at all, never a silently-NaN result."""
+    shared = audit.draw_shared_topology_indices(n_topo=2, iters=20, seed=1)
+    result = audit.compute_part_a_bounds(
+        d_a_topology_units=[[], []],
+        b_stable_topology_units=_degenerate_topology_units([1.0, 1.0]),
+        shared_topology_indices=shared, seed=1)
+    assert result is None
+
+
+def test_compute_part_a_bounds_hand_worked_deterministic_single_topology():
+    """Single topology, degenerate one-event units (no resampling variance):
+    D_A = 3.0, B_stable = 20.0. lower_contrast = D_A + 0.05*B_stable = 3.0 +
+    1.0 = 4.0; upper_contrast = 0.05*B_stable - D_A = 1.0 - 3.0 = -2.0. Every
+    percentile bound must equal these exact point values."""
+    shared = audit.draw_shared_topology_indices(n_topo=1, iters=20, seed=1)
+    result = audit.compute_part_a_bounds(
+        d_a_topology_units=_degenerate_topology_units([3.0]),
+        b_stable_topology_units=_degenerate_topology_units([20.0]),
+        shared_topology_indices=shared, seed=1)
+    assert result["b_stable_lcb"] == pytest.approx(20.0)
+    assert result["lower_contrast_lcb"] == pytest.approx(4.0)
+    assert result["lower_contrast_ucb"] == pytest.approx(4.0)
+    assert result["upper_contrast_lcb"] == pytest.approx(-2.0)
+
+
+def test_part_a_inputs_present_but_not_applicable_when_b_stable_lcb_not_positive():
+    """Item 5a, second half ('and LCB95(B_stable)>0'): stable-limb event
+    data DOES exist (bounds are produced, not None) but B_stable's own LCB
+    is <= 0 -- the verdict must be NOT_APPLICABLE, and that must never flip
+    `part_a_contradiction` to True."""
+    shared = audit.draw_shared_topology_indices(n_topo=1, iters=20, seed=3)
+    bounds = audit.compute_part_a_bounds(
+        d_a_topology_units=_degenerate_topology_units([1.0]),
+        b_stable_topology_units=_degenerate_topology_units([-5.0]),
+        shared_topology_indices=shared, seed=3)
+    assert bounds is not None
+    verdict = audit.part_a_conformance(
+        lower_contrast_lcb=bounds["lower_contrast_lcb"],
+        lower_contrast_ucb=bounds["lower_contrast_ucb"],
+        upper_contrast_lcb=bounds["upper_contrast_lcb"], b_stable_lcb=bounds["b_stable_lcb"])
+    assert verdict == "NOT_APPLICABLE"
+    contradiction, _ = audit.map_part_a_verdict_to_inputs(verdict)
+    assert contradiction is False
+
+
+def test_map_part_a_verdict_to_inputs_only_contradiction_sets_true():
+    assert audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION") == (True, "PART_A_CONTRADICTION")
+    assert audit.map_part_a_verdict_to_inputs("CONFORMANCE_PASS") == (False, "CONFORMANCE_PASS")
+    assert audit.map_part_a_verdict_to_inputs(
+        "PART_A_CONFORMANCE_UNRESOLVED") == (False, "PART_A_CONFORMANCE_UNRESOLVED")
+    assert audit.map_part_a_verdict_to_inputs("NOT_APPLICABLE") == (False, "NOT_APPLICABLE")
+
+
+def test_unresolved_verdict_lands_in_diagnostic_and_never_flips_decide_branch():
+    """Item 5c: PART_A_CONFORMANCE_UNRESOLVED must land in the diagnostic
+    payload only -- `decide_branch`'s outcome under it must be IDENTICAL to
+    CONFORMANCE_PASS/NOT_APPLICABLE (all three keep `part_a_contradiction`
+    False), while PART_A_CONTRADICTION must genuinely flip the branch. A
+    wrong mapping that ever set `part_a_contradiction=True` for UNRESOLVED
+    would make this test's first loop disagree with its last assertion."""
+    common_kwargs = dict(
+        conformance_ok=True, support_ok=True, primary_g_degenerate_flag=False,
+        b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
+        b_flex_lcb=1.0, t_flex_lcb=1.0, t_flex_ucb=2.0,
+    )
+    for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "CONFORMANCE_PASS", "NOT_APPLICABLE"):
+        part_a_contradiction, diagnostic = audit.map_part_a_verdict_to_inputs(verdict)
+        assert part_a_contradiction is False
+        assert diagnostic == verdict
+        branch = audit.decide_branch(part_a_contradiction=part_a_contradiction, **common_kwargs)
+        assert branch == "PERSISTENCE_NECESSARY_SOURCE"
+
+    contradiction_input, _ = audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION")
+    assert contradiction_input is True
+    branch_with_contradiction = audit.decide_branch(part_a_contradiction=contradiction_input, **common_kwargs)
+    assert branch_with_contradiction == "PART_A_CONTRADICTION"
+
+
+def test_run_audit_event_excludes_an_invalidated_replicate_and_reports_it(monkeypatch):
+    """Item 5b, first half: an injected `PrefixReplayMismatchError` on
+    exactly one KEEP evaluation replicate must exclude ONLY that pair (the
+    eval array shrinks by one) and report it via `invalidated_pairs`,
+    never silently repaired and never crashing the whole audit event."""
+    calls = {"n": 0}
+
+    def _flaky_replay_prefix(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] == 2:
+            raise audit.PrefixReplayMismatchError("injected mismatch")
+        return _CloneableFakeEnv(seed=5)
+
+    monkeypatch.setattr(audit, "replay_prefix", _flaky_replay_prefix)
+
+    env_for_geometry = _CloneableFakeEnv(seed=5)
+    duty_positions, centroids = audit.compute_duty_positions(env_for_geometry)
+    duty_map = {i: i for i in range(env_for_geometry.n_uavs)}
+    event = {
+        "hash_at_te": "irrelevant", "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions, "service_centroids_at_te": centroids,
+        "focal_stable_uav": 0, "legal_targets": {"stable": {}},
+        "locked_duties": {"stable": frozenset()},
+    }
+    result = audit.run_audit_event(
+        config=None, topology_seed=1, episode_seed=1, coords=None, coord_hash="x",
+        recorded_actions=[], energies=None, event=event, limb="stable",
+        n_select=1, n_eval=4)
+
+    assert len(result["eval_keep"]) == 3          # one of the 4 requested replicates excluded
+    assert len(result["invalidated_pairs"]) == 1
+    assert result["invalidated_pairs"][0]["candidate_id"] == "KEEP"
+    assert result["invalidated_pairs"][0]["phase"] == "evaluate"
+
+
+def test_run_calibration_episode_excludes_the_whole_episode_on_a_replay_mismatch(monkeypatch):
+    """Item 3/5b: a `PrefixReplayMismatchError` on any one schedule's
+    fresh-env prefix replay invalidates the WHOLE calibration episode (every
+    schedule shares the identical recorded prefix/expected hash, so a
+    divergence means the fixed-history guarantee itself failed for this
+    episode) -- reported via `invalidated_pairs`, and the episode
+    contributes to neither `B_m` nor `D_A`, never repaired or retried."""
+    fake_event = {
+        "hash_at_te": "h", "duty_map_at_te": {0: 0}, "duty_positions_at_te": {},
+        "service_centroids_at_te": None, "conformance_record": {},
+        "duty_map_before_leave": {0: 0},
+    }
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _CloneableFakeEnv(seed=1))
+    monkeypatch.setattr(audit, "apply_energy_profile", lambda *a, **k: None)
+    monkeypatch.setattr(
+        audit, "roll_prefix_and_find_event",
+        lambda env, **k: {"event": fake_event, "exclusions": [], "recorded_actions": []},
+    )
+
+    calls = {"n": 0}
+
+    def _flaky_replay_prefix(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] >= 2:   # first schedule call succeeds, every one after fails
+            raise audit.PrefixReplayMismatchError("injected mismatch")
+        return _CloneableFakeEnv(seed=2)
+
+    monkeypatch.setattr(audit, "replay_prefix", _flaky_replay_prefix)
+
+    result = audit.run_calibration_episode(
+        config=None, topology_seed=1, episode_seed=1, energy_seed=1, coords={}, coord_hash="x")
+
+    assert result["support_miss"] is False
+    assert result["invalidated"] is True
+    assert len(result["invalidated_pairs"]) == 2   # stable/null + flex/constructive_mixed
+    assert result["results"] == {}                  # neither limb contributes B_m or D_A
+
+
+def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
+    """Item 5b, second half: 'at run level, conformance_ok=False when the
+    pinned-topology hash fails' -- exercised directly against the pure
+    conjunction (the real driver's per-topology `TopologyMismatchError`
+    catch sets exactly this `topology_hash_ok=False` input; that real
+    catch is integration wiring already covered by `TopologyMismatchError`
+    raising deterministically off a genuine coordinate mismatch elsewhere
+    in this suite)."""
+    assert audit.compute_conformance_ok(
+        invalidated_pairs=0, topology_hash_ok=False, arm_distinct_ok=True) is False
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
