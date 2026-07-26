@@ -7,7 +7,7 @@ source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 external_pro_disposition=IDENTIFIABLE_BOUNDED_HISTORY_PROXY_SUBSTITUTION_G36_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=alignment_mismatch_smallest_correction_integrated_and_preflight_complete
+implementation_status=alignment_correction_recheck_ALIGNED_formal_ready
 formal_compute_status=not_started
 training=none
 ```
@@ -110,6 +110,12 @@ exercise completed operationally valid with 4,608 transitions, zero optimizer
 steps and a 2,106.554823-second formal projection. PM independently reproduced
 the empty validator error list and projection. Formal compute remains blocked
 until the correction recheck returns `ALIGNED`.
+
+The zero-compute correction recheck returned `AUDIT_DISPOSITION=ALIGNED` for
+repair commit `8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04`. The exact same-commit
+preflight, dedicated G36 formal token and standing CPU grant now satisfy the
+registered formal admission boundary. This acceptance changes no scientific
+interpretation and does not itself consume an iteration.
 
 ## Evidence and complexity inventory
 

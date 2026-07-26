@@ -6,7 +6,8 @@ algorithm_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36
 source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
 implementation_code_commit=8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04
 superseded_implementation_code_commit=e96f0be154afcf778780bad6266458e211b4b047
-alignment_disposition=MISMATCH
+original_alignment_disposition=MISMATCH
+alignment_correction_recheck_disposition=ALIGNED
 repair_implementation_code_commit=8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04
 prior_nonformal_preflight_status=superseded_by_source_change
 pm_technical_acceptance=accepted
@@ -123,3 +124,9 @@ error list, then reproduced the exact source commit, inventory, zero optimizer
 count, terminal branch, manifest digest and projection arithmetic. This note
 still authorizes no formal compute; the exact correction must first return
 `ALIGNED` from the bounded correction recheck.
+
+The exact zero-compute correction recheck subsequently returned
+`AUDIT_DISPOSITION=ALIGNED`. Together with the active standing CPU grant, this
+closes the registered prelaunch boundary for exactly one formal G36 evaluation
+from repair commit `8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04` and the replacement
+preflight above. It authorizes no retry or successor interpretation.
