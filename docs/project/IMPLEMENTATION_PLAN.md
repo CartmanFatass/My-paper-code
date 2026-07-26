@@ -8,16 +8,16 @@ last_nonformal=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_PATH_EXER
 last_nonformal_result=NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE
 active_source=UAV_LOCALIZED_DEMAND_BURST_G33_P0_NOT_YET_ADMITTED
 source_gate=SOURCE_WITNESS_AND_STATIC_UPPER_BOUND_AUDIT
-active_implementation=G33_SOURCE_ENVIRONMENT_SLICE_PM_ACCEPTED
+active_implementation=G33_SOURCE_ENVIRONMENT_ACCEPTED_CONTROL_CONTRACT_CLOSED_IMPLEMENTATION_PENDING
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=24_complete
 iterations_remaining=13
-formal_compute=NONE_UNTIL_G33_SOURCE_WITNESS_EXECUTABLE_CONTRACT_IS_PM_ACCEPTED
+formal_compute=NONE_UNTIL_G33_SOURCE_WITNESS_IMPLEMENTATION_IS_PM_ACCEPTED_AND_CODE_SCIENCE_ALIGNMENT_COMPLETES
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=G33_CONTROL_REALIZATION_CLARIFICATION_PLUS_SOURCE_ENVIRONMENT_SLICE
+next_boundary=G33_SOURCE_WITNESS_EXECUTABLE_REALIZATION
 ```
 
 ## Current G33 transition
@@ -28,15 +28,26 @@ the next zero-learner source witness. Demand, profiles, information, metrics,
 confidence and source outcomes are closed in
 `docs/research/designs/UAV_LOCALIZED_DEMAND_BURST_G33_P0.md`.
 
-PM found one result-bearing implementation gap in the layout controls and has
-dispatched the smallest same-lineage Pro clarification. The disjoint source
-environment slice is now accepted: its demand fields use independent
+The same-lineage clarification completed naturally without `Answer now` and
+returned `G33_P0_CONTROL_CONTRACT_CLOSED_N2_BOUND`. The finite layout library
+cannot certify the universal N1 claim, so `static_upper_bound_complete=false`
+is literal and immutable. The executable witness can support only the narrower
+N2 statement about the named current-only controller's post-onset movement.
+
+The source environment slice is accepted: its demand fields use independent
 episode-addressed namespaces, reward and graph potential share one per-user
 demand seam, actor/critic views remove physical time, and direct structural
-probes preserve raw physics. Fifty-three focused tests pass on CPU with one
-thread. Do not build a source analyzer or run source evidence until the
-clarified control semantics are archived and translated into the executable
-contract.
+probes preserve raw physics. The next-boundary hook removes duplicate G33 view
+materialization while retaining completed-transition telemetry; 54 focused
+tests pass on CPU with one thread and a bounded 20-step benchmark reports
+`1.103x` G33/base time versus the prior `1.279x` observation.
+
+Implement the exact pure relaxed scorer, current-only constructive,
+full-ledger receding-horizon oracle, static preposition and paired branches,
+source metrics, hierarchical bootstrap analyzer and zero-learner runner. Then
+run proof-sized tests and one bounded nonformal CPU exercise. Formal source
+evidence remains gated on PM code acceptance and External-Pro code-science
+alignment; no additional scientific field is locally selectable.
 
 ## Current transition
 

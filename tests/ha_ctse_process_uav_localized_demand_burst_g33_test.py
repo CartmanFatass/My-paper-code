@@ -179,6 +179,56 @@ def test_source_step_returns_next_pre_action_view_without_physics_rewrite():
         env.close()
 
 
+def test_next_boundary_demand_is_installed_before_one_view_materialization(monkeypatch):
+    ledger = make_g33_episode_ledger(BurstProfile.IID_BURST, 14, burst_seed=53)
+    env = UAVLocalizedDemandBurstEnv(ledger, environment_seed=59)
+    try:
+        env.reset(seed=59)
+        env.current_step = ledger.onset - 1
+        env.sync_burst_pre_action()
+        observation_calls = 0
+        state_calls = 0
+        original_observation = env._get_observation
+        original_state = env._get_state
+
+        def counted_observation(agent):
+            nonlocal observation_calls
+            observation_calls += 1
+            return original_observation(agent)
+
+        def counted_state():
+            nonlocal state_calls
+            state_calls += 1
+            return original_state()
+
+        monkeypatch.setattr(env, "_get_observation", counted_observation)
+        monkeypatch.setattr(env, "_get_state", counted_state)
+        actions = {
+            agent: np.zeros(env.action_dim, dtype=np.float32)
+            for agent in env.agents
+        }
+        observations, _rewards, _terminations, _truncations, infos = env.step(actions)
+
+        assert env.current_step == ledger.onset
+        assert observation_calls == len(env.agents)
+        assert state_calls == 1
+        assert env.affected_cohort.size == 8
+        expected = env._normalized_current_demand().astype(np.float32)
+        next_state = infos[env.agents[0]]["next_state"]
+        prefix = env.n_uavs * 3 + env.n_uavs
+        critic_rows = next_state[prefix : prefix + env.n_users * 7].reshape(
+            env.n_users, 7
+        )
+        np.testing.assert_array_equal(critic_rows[:, 6], expected)
+        assert all(row["obs"].shape == (env.obs_dim,) for row in observations.values())
+        np.testing.assert_array_equal(
+            env.last_reward_demand_bps,
+            env.last_graph_potential_demand_bps,
+        )
+    finally:
+        env.close()
+
+
 def test_demand_only_change_preserves_raw_physics_and_changes_delivered_service(monkeypatch):
     ledger = make_g33_episode_ledger(BurstProfile.IID_BURST, 8, burst_seed=17)
     env = UAVLocalizedDemandBurstEnv(ledger, environment_seed=23)

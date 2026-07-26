@@ -244,11 +244,7 @@ class UAVLocalizedDemandBurstEnv(UAVEnergyAwareRelayEnv):
         self._onset_visibility = None
         observations, infos = super().reset(seed=actual_seed, options=options)
         self.sync_burst_pre_action()
-        observations = {agent: self._get_observation(agent) for agent in self.agents}
-        state = self._get_state()
-        self.state = state
         for agent in self.agents:
-            infos[agent]["state"] = state.copy()
             infos[agent]["g33_source"] = self.source_diagnostics()
         return observations, infos
 
@@ -257,16 +253,19 @@ class UAVLocalizedDemandBurstEnv(UAVEnergyAwareRelayEnv):
         # reward and graph potential use exactly this vector for that transition.
         self.sync_burst_pre_action()
         observations, rewards, terminations, truncations, infos = super().step(actions)
-        # Returned observations describe the next pre-action boundary.
-        self.sync_burst_pre_action()
-        self.current_graph_potential = self._graph_service_potential()
-        observations = {agent: self._get_observation(agent) for agent in self.agents}
-        state = self._get_state()
-        self.state = state
         for agent in self.agents:
-            infos[agent]["next_state"] = state.copy()
             infos[agent]["g33_source"] = self.source_diagnostics()
         return observations, rewards, terminations, truncations, infos
+
+    def _prepare_next_boundary_view(self) -> None:
+        """Install q(t+1) before the parent's single returned-view materialization."""
+
+        transition_graph_demand = self.last_graph_potential_demand_bps.copy()
+        self.sync_burst_pre_action()
+        self.current_graph_potential = self._graph_service_potential()
+        # Keep the audit telemetry bound to the just-completed transition; the
+        # current demand vector owns the newly prepared boundary potential.
+        self.last_graph_potential_demand_bps = transition_graph_demand
 
     def sync_burst_pre_action(self) -> None:
         """Install q(t), freezing the selected cohort at the pre-action onset."""

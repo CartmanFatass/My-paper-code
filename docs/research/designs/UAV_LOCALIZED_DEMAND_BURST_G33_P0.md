@@ -6,7 +6,9 @@ scientific_authority=external_pro
 code_acceptance_owner=project_manager
 candidate=UAV_LOCALIZED_DEMAND_BURST_G33_P0
 design_disposition=UNRESOLVED_UAV_BURST_G33_DESIGN
-next_boundary=UAV_LOCALIZED_DEMAND_BURST_G33_SOURCE_WITNESS_AND_STATIC_UPPER_BOUND_AUDIT
+control_disposition=G33_P0_CONTROL_CONTRACT_CLOSED_N2_BOUND
+static_upper_bound_complete=false
+next_boundary=UAV_LOCALIZED_DEMAND_BURST_G33_SOURCE_WITNESS_EXECUTABLE_REALIZATION
 learned_models=0
 optimizer_steps=0
 backend=cpu
@@ -82,11 +84,60 @@ Constructive and no-reallocation actions are identical before onset.
 Motion suppression replaces only UAV movement components by zero from onset
 through recovery while preserving recurrent state and every exogenous draw.
 
-The exact layout score, future-ledger objective, static preposition procedure
-and N1 certificate interface are pending the focused
-`IMPLEMENTATION_ALIGNMENT_CLARIFICATION`. Until that raw completes, code may
-realize the source environment and structural probes but may not implement a
-result-bearing controller or source analyzer.
+The focused clarification at
+`docs/external-review/rounds/20260725_uav_localized_demand_burst_g33_control_realization_clarification/21_PRO_OPEN_RAW.md`
+closes every result-bearing control field. Its binding disposition is
+`G33_P0_CONTROL_CONTRACT_CLOSED_N2_BOUND`.
+
+### Shared relaxed layout library
+
+- Enumerate exactly nine layouts: relay count 1, 2 or 3 crossed with the
+  registered minimum, midpoint or maximum altitude. Relay slots are ordered
+  ground-BS-outward; service slots use the canonical lexicographic XYZ order.
+- Assign physical UAVs by minimum total float64 3-D distance with Hungarian
+  matching and the frozen `1e-12 * (8*i + j)` row/column tie term.
+- Score a candidate only in a detached hypothetical snapshot. Recompute all
+  candidate access interference using bandwidth `B/32`, relaxed Shannon
+  capacity clipped at the maximum MCS efficiency, and all directed UAV/UAV and
+  UAV/BS relaxed backhaul links using bandwidth `B/8` and widest-path max-min
+  routing. For each user take `max_i min(access_iu, backhaul_i)`, divide by its
+  current demand, then average over 30 users.
+- The scorer consumes no RNG and never reads live connection/routing caches or
+  mutates live physical, metric, cache or RNG state. Score ties are exact
+  float64 equality and follow descending score, ascending relay count,
+  ascending altitude, canonical coordinate tuple and assignment vector.
+
+### Result-bearing controllers
+
+`CURRENT_ONLY_ADAPTIVE_CONSTRUCTIVE` recomputes the full nine-layout decision
+from current positions, current demand and current exogenous state at every
+pre-action boundary. It emits the legal 4-D target action with dock component
+`-1`, owns no future ledger or hidden target state, and discards the decision
+after the transition.
+
+`FULL_LEDGER_REACHABILITY_ORACLE` is deterministic evaluation-only receding
+horizon control. At boundary `t`, it builds the exact deduplicated pool from
+the layout libraries at `{t, O, O+D, O+D+60, 499} intersect [t,499]`. Each
+candidate is evaluated in a complete clone by one legal target action followed
+by current-only control to episode end. The objective is lexicographically
+greatest `(A_e, J_burst, J_recovery, Q_unaffected, Q_ordinary, mean_rho,
+S_rel)` for disturbed episodes and `(A_e_ordinary, Q_no_burst, S_rel)` for
+ordinary episodes. Remaining ties use earliest generating boundary, ascending
+relay count, ascending altitude, canonical target tuple and assignment vector.
+Only the first selected action is executed live; the complete procedure is
+repeated at the next boundary.
+
+`STATIC_FULL_LEDGER_PREPOSITION` selects one target and physical assignment at
+reset from the exact union of layouts generated for all boundaries
+`0..F-1`, where `F=O+D+60`. It legally tracks that fixed target on `[0,F)`,
+never recomputes at onset or burst end, and switches to current-only at `F`.
+Its paired no-burst branch reuses the disturbed mate's target, assignment and
+freeze interval exactly and does not reselect after removing the burst.
+
+`static_upper_bound_complete` is a literal immutable `false`: the finite
+static library is not exhaustive over the declared continuous policy class.
+Finite static success is a counterexample, but finite static failure is not a
+universal upper bound.
 
 ## Estimands and evidence unit
 
@@ -117,17 +168,23 @@ branches are never resampled independently.
 
 - `SOURCE_WITNESS_REJECTS_P0_G33`: a confident structural/source failure or a
   confident static counterexample; close P0 without rescue.
-- `SOURCE_WITNESS_SUPPORTS_N1_G33`: all gates pass and a complete declared
-  static-policy upper-bound certificate passes.
+- `SOURCE_WITNESS_SUPPORTS_N1_G33`: all gates pass and
+  `static_upper_bound_complete=true`; this branch is structurally unreachable
+  in this realization.
 - `SOURCE_WITNESS_SUPPORTS_ONLY_N2_G33`: all policy-specific source gates pass
   but universal static coverage is unavailable; return to Pro for explicit
   claim narrowing.
 - `SOURCE_WITNESS_UNDERPOWERED_G33`: a required interval crosses its boundary;
   close the frozen witness without automatically adding evidence.
 
-Exact first-match predicates remain pending only for the focused control
-clarification. No learned runner is eligible before a valid source witness and
-the subsequent Pro disposition.
+The exact first-match order is rejection, N1, N2, underpowered. Structural
+failure, confident access failure of either positive control, confident access
+by either negative movement control, insufficient positive burst-J contrast or
+confident access by the finite static controller rejects P0. All gates passing
+with the frozen false N1 flag returns only
+`SOURCE_WITNESS_SUPPORTS_ONLY_N2_G33`; every remaining valid interval-crossing
+pattern is underpowered. No learned runner is eligible before a valid source
+witness and the subsequent Pro disposition.
 
 ## Implementation-only choices
 

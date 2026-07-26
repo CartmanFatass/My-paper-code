@@ -611,6 +611,7 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             )
         self.last_constrained_reward_metrics = reward_metrics
 
+        self._prepare_next_boundary_view()
         observations = {agent: self._get_observation(agent) for agent in self.agents}
         observations = self._update_observations_dict(observations)
         next_state = self._get_state()
@@ -633,6 +634,10 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             infos[agent]["scale_mode"] = self.scale_mode
 
         return observations, rewards, terminations, truncations, infos
+
+    def _prepare_next_boundary_view(self):
+        """Source hook after transition accounting and before one view materialization."""
+        return None
 
     def set_scenario7_safety_dual(self, safety_dual):
         """Update the rollout-frozen safety multiplier for the adaptive ablation."""
