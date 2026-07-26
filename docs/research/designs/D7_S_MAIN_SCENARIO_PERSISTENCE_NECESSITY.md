@@ -122,9 +122,46 @@ users have moved or its access link has degraded enough that a different skill i
 preferable now. Both determined **in the evaluator only**, from realized user
 motion and link state, never from a role name.
 
-**External-return horizon.** `H` is one slow window of the source, to be read from
-the registered scenario-7 configuration rather than chosen here, with the
-one-check-interval `Δ` retained as the secondary localization (D0 §3).
+**External-return horizon — resolved 2026-07-25, and it is not "one slow window".**
+
+Unlike the toy, this source has **no finite slow period**. `ground_bs_positions` is
+written at reset only (`scenario_base.py:583-586`; `randomize_bs` acts there and
+nowhere else), so the backhaul geometry is static for the whole episode and the
+relay duty's *target never changes*. "One slow window" is therefore ill-defined
+here, and D0 §3 already anticipates that case: *"For the main scenario `H` is frozen
+from its causal duty window before the audit runs."*
+
+The causal duty window is the **transit time of a duty exchange**, because that is
+the interval over which the exchange's cost is realized. From the registered
+constants (`config_1.py`):
+
+```text
+area_size      8000 m        max_speed  30 m/s      time_step  1.0 s
+k = Delta      10 steps      episode    500 steps   n_ground_bs 1
+user_max_speed 15 m/s
+
+mean separation of two uniform points in a square   0.5214 * 8000  = 4171 m
+characteristic transit                              4171 / 30      = 139 s
+                                                                   = 139 steps
+```
+
+So **`H = 139` steps**, read from the source rather than chosen, with `Δ = 10`
+retained as the secondary localization.
+
+**The scale is the finding.** A duty exchange costs about **14 check intervals** and
+more than a quarter of a 500-step episode. Even a close pair 1000 m apart costs 33
+steps, still 3.3 check intervals. The decision cadence is an order of magnitude
+faster than the exchange it would have to pay for: by the time a swap completes,
+roughly fourteen further decisions have been offered. With `n_ground_bs = 1` there
+is a single backhaul anchor, so a relay abandoning its bridging position is not
+substituting one equivalent geometry for another — it is vacating a bottleneck.
+
+**What this still does not establish.** The margin is normalized:
+`U*_stable,src / B_H <= -0.10`. A large transit cost in *steps* does not by itself
+clear a *normalized return* threshold — that depends on return lost per step of
+degraded geometry against the constructive-minus-null gap `B_H`, which is not yet
+measured. The remaining work for part B is exactly `B_H` and the two margins;
+everything else in this freeze is now fixed from repository facts.
 
 **Legal joint continuation.** All agents other than the focal one, and all later
 decisions, take their **best legal continuation** in both terms. This is what makes
