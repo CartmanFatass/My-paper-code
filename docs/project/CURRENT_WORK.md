@@ -7,16 +7,17 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 
 ## Active execution surface
 
-- Project Manager task `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` solely maintains
-  this code-attention pointer and owns code decisions, technical acceptance,
-  review/run dispatch, runtime intake and PM-owned Git. Workflow Manager task
-  `019f9d2f-e0ea-7411-9fd7-386f45f76909`, fixed to `gpt-5.6-sol/high`, changes
-  workflow design only and neither reads this file nor manages runtime.
-  Dedicated External Review Operator task
-  `019f9c6a-9401-7ae0-ace5-dd827dccba2b` owns only Pro browser transport,
-  natural completion, exact raw archival and file-path notification to PM.
+- Project Manager solely maintains this code-attention pointer and owns code
+  decisions, technical acceptance, review/run dispatch, runtime intake and
+  PM-owned Git. Workflow Design Manager changes workflow design only and
+  neither reads this file nor manages runtime. The dedicated External Review
+  Operator owns only Pro browser transport, natural completion, exact raw
+  archival and file-path notification to PM.
   External Pro owns scientific design, interpretation, CDC and successor
   selection inside the user-authorized review boundary.
+- Persistent-role messages use `hmasd-cross-task-routing`: a probe-confirmed
+  session is cached only in the current conversation, and business sends omit
+  both model and thinking overrides.
 - Formal and bounded runs use only the registered nonpersistent
   `hmasd-experiment-operator`, fixed to `gpt-5.6-luna` with `low` reasoning. It
   remains silent and returns exactly one `COMPLETE` or `ERROR` terminal payload.
@@ -97,25 +98,14 @@ active_external_review_compute_budget=zero
 active_external_review_question_scope=read_only_correction_diff_exact_formal_preflight_mismatch_only
 active_external_review_stage_commit=d490754c48c265f13505d9da90a66f9fcc6b6ecc
 active_external_review_audit_target_commit=472178e3cc7675a8ba1044558b47dd094c34138f
-active_external_review_dispatch_target=019f9c6a-9401-7ae0-ace5-dd827dccba2b_gpt-5.6-luna_high
-active_external_review_return_target=019f9e4f-f4d0-7fe0-b214-c47fd034e84d_gpt-5.6-sol_xhigh
-external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b
-external_review_operator_fixed_model=gpt-5.6-luna
-external_review_operator_fixed_effort=high
-workflow_design_manager_task=019f9d2f-e0ea-7411-9fd7-386f45f76909
-workflow_design_manager_fixed_model=gpt-5.6-sol
-workflow_design_manager_fixed_effort=high
 workflow_manager_status=workflow_design_only_reload_smoke_passed_waiting
 workflow_manager_smoke_commit=7e5c2f3
 external_review_operator_smoke_commit=7e5c2f3
 experiment_operator_profile_smoke=passed_parent_pm_luna_low_no_run_no_writes
 workflow_manager_workspace=shared_project_directory_exact_path_ownership
-project_manager_task=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
-project_manager_fixed_model=gpt-5.6-sol
-project_manager_fixed_effort=xhigh
-cross_task_send_requires_explicit_model_effort=true
-cross_task_routing=fixed_session_id_plus_fixed_model_effort
-cross_task_silent_model_effort_override=forbidden
+cross_task_routing=probe_confirmed_session_plus_conversation_local_cache
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_model_thinking_override=omitted
 workflow_manager_responsibility=workflow_design_router_role_skill_profile_registry_contract_and_tests_only
 project_manager_responsibility=current_work_code_architecture_implementation_tests_technical_acceptance_review_and_experiment_runtime
 external_review_operator_responsibility=browser_submission_natural_completion_exact_raw_archival_and_project_manager_file_notification
@@ -376,7 +366,7 @@ g32_result_review_raw=docs/external-review/rounds/20260725_runtime_capacity_g32_
 g32_result_review_intake=docs/external-review/rounds/20260725_runtime_capacity_g32_formal_result_review/50_MECHANICAL_INTAKE_RECORD.md
 g32_result_review_status=complete_exact_raw_archived_and_scientific_records_reconciled
 post_workflow_algorithm_boundary=NONE_G33_ABANDONED_AWAITING_EXACT_SUCCESSOR
-session_restart_required=false_corrected_role_and_fixed_cross_task_route_smokes_complete
+session_restart_required=false_probe_confirmed_cross_task_routing_active
 handoff_document_write_policy=user_explicit_only
 automatic_handoff_document_write=forbidden
 uav_g1_active_runtime_status=removed_after_durable_iteration22_closure
