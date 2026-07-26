@@ -9,7 +9,10 @@ technical_acceptance=ACCEPTED
 formal_retry_resume_restart=none
 code_science_alignment_correction_recheck=ALIGNED
 repaired_source_nonformal_preflight=COMPLETE_operational_valid
-next_boundary=EXACT_USER_AUTHORIZATION_REQUIRED_FOR_ONE_FRESH_FORMAL_ATTEMPT
+fresh_formal_attempt_2_authority=ACTIVE_USER_AUTHORIZED
+fresh_formal_attempt_2_token=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_FORMAL_AUTHORIZATION_V2
+fresh_formal_attempt_2_run=logs/formal_continuous_roster_six_coordinate_cs_g38_cpu_20260726_ea93b15_r2
+next_boundary=ONE_EXACT_REPAIRED_SOURCE_FORMAL_CPU_EXECUTION
 ```
 
 ## Root cause and exact repair
@@ -120,4 +123,7 @@ errors were each exactly `0.0`.
 This closes the repaired-source technical prerequisites. It does not inherit
 or revive the already consumed formal token: the prior formal attempt ended
 operational invalid, and its assignment explicitly prohibited retry, resume or
-restart. One fresh formal attempt therefore requires exact user authorization.
+restart. The user subsequently authorized completion of all nine remaining
+conclusion-bearing rounds. PM therefore issued the distinct V2 token above for
+exactly one fresh G38 CPU attempt. Any operational failure still costs zero
+iterations and authorizes no automatic retry, resume or restart.
