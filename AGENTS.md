@@ -54,7 +54,6 @@ project_manager_remote_repository_authority=permanent_user_grant
 project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 project_manager_external_review_dispatch_and_result_routing=exclusive
 project_manager_experiment_dispatch_and_result_routing=exclusive
-project_manager_round_metrics_skill=hmasd-pm-round-metrics
 external_review_operator_transport_authority=exclusive
 external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
@@ -126,7 +125,6 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
-- PM complete-workflow metrics: `.agents/skills/hmasd-pm-round-metrics/SKILL.md`.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.

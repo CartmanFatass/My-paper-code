@@ -18,9 +18,6 @@ experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
-pm_round_metrics_skill=hmasd-pm-round-metrics
-pm_round_metrics_sample=one_complete_workflow
-pm_round_metrics_ledger=local_gitignored_non_sensitive
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
 cross_task_routing_skill=hmasd-cross-task-routing
@@ -100,12 +97,6 @@ pre-implementation review. Pro resolves scientific content.
 
 ## Operating rules
 
-- Use `$hmasd-pm-round-metrics` once at the start and once at the complete
-  downstream closure of every PM workflow. Keep one model and one reasoning
-  effort for the sample, treat `CONFIGURATION_CHANGED` as no valid sample, and
-  never stage its local `logs/pm-model-performance/ledger.jsonl`. Record only
-  whether the workflow contains code work and whether attributable quality
-  events are code-related; do not split or difficulty-normalize PM performance.
 - Use `$hmasd-agile-research-development` for active-line code work and
   proof-sized evidence. Generic Superpowers execution is disabled.
 - Spawn only registered code-child profiles with exact assignments and file

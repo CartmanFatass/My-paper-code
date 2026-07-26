@@ -51,7 +51,6 @@ foreach ($required in @(
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
-    'project_manager_round_metrics_skill=hmasd-pm-round-metrics',
     'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_model_thinking_override=omitted',
@@ -69,17 +68,25 @@ foreach ($required in @(
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
     'cross_task_model_thinking_override=omitted',
-    'pm_round_metrics_skill=hmasd-pm-round-metrics',
-    'pm_round_metrics_sample=one_complete_workflow',
-    'pm_round_metrics_ledger=local_gitignored_non_sensitive',
-    '$hmasd-pm-round-metrics',
-    'CONFIGURATION_CHANGED',
-    'logs/pm-model-performance/ledger.jsonl',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
     'CURRENT_WORK.md',
     'PM receives one terminal')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($retired in @(
+    'project_manager_round_metrics_skill=',
+    'PM complete-workflow metrics:')) {
+    if ($agents.Contains($retired)) { throw "AGENTS retains PM metrics workflow binding: $retired" }
+}
+foreach ($retired in @(
+    'pm_round_metrics_skill=',
+    'pm_round_metrics_sample=',
+    'pm_round_metrics_ledger=',
+    '$hmasd-pm-round-metrics',
+    'CONFIGURATION_CHANGED',
+    'logs/pm-model-performance/ledger.jsonl')) {
+    if ($pm.Contains($retired)) { throw "Project Manager role retains metrics workflow binding: $retired" }
 }
 foreach ($required in @(
     'role=workflow_design_manager',
