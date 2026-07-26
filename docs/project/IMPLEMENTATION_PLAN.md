@@ -8,16 +8,16 @@ last_nonformal=RUNTIME_CAPACITY_INVARIANT_CONTINUOUS_ROSTER_G32_FORMAL_PATH_EXER
 last_nonformal_result=NONFORMAL_RUNTIME_CAPACITY_G32_EXERCISE_COMPLETE
 active_source=UAV_LOCALIZED_DEMAND_BURST_G33_P0_NOT_YET_ADMITTED
 source_gate=SOURCE_WITNESS_AND_STATIC_UPPER_BOUND_AUDIT
-active_implementation=G33_SOURCE_ENVIRONMENT_ACCEPTED_CONTROL_CONTRACT_CLOSED_IMPLEMENTATION_PENDING
+active_implementation=G33_SOURCE_ENVIRONMENT_RETAINED_NESTED_CONTROL_NONEXECUTABLE
 backend=cpu
 torch=2.7.0+cpu
 torch_threads=1
 formal_iteration=24_complete
 iterations_remaining=13
-formal_compute=NONE_UNTIL_G33_SOURCE_WITNESS_IMPLEMENTATION_IS_PM_ACCEPTED_AND_CODE_SCIENCE_ALIGNMENT_COMPLETES
+formal_compute=FORBIDDEN_FOR_CURRENT_G33_NESTED_SEARCH_CONTRACT
 algebra_status=G31_PAIRED_TOY_AND_G32_CROSS_CAPACITY_USABLE_UAV_G1_AND_G2_SOURCE_NON_IDENTIFIABLE
 screen_contract=docs/research/designs/RETURN_TO_GO_DIRECTION_BALANCED_G31.md
-next_boundary=G33_SOURCE_WITNESS_EXECUTABLE_REALIZATION
+next_boundary=G33_BOUNDED_CONTROL_IMPLEMENTATION_ALIGNMENT
 ```
 
 ## Current G33 transition
@@ -42,12 +42,24 @@ materialization while retaining completed-transition telemetry; 54 focused
 tests pass on CPU with one thread and a bounded 20-step benchmark reports
 `1.103x` G33/base time versus the prior `1.279x` observation.
 
-Implement the exact pure relaxed scorer, current-only constructive,
-full-ledger receding-horizon oracle, static preposition and paired branches,
-source metrics, hierarchical bootstrap analyzer and zero-learner runner. Then
-run proof-sized tests and one bounded nonformal CPU exercise. Formal source
-evidence remains gated on PM code acceptance and External-Pro code-science
-alignment; no additional scientific field is locally selectable.
+The accepted source environment and pure current-only scorer remain useful, but
+the clarified full-ledger/static control is not executable under the user's
+project-wide complexity policy. It replans at every physical step, evaluates
+each candidate through the remaining horizon and invokes current-only scoring
+inside every branch: `O(H^2*K_search)` or worse. A three-sample microbenchmark
+measured median current-only selection at `0.479975 s`; the resulting full-ledger
+order estimate is about 31.2 days for one 500-step episode before the static
+control or formal sample grid. This is `NON_EXECUTABLE_EVIDENCE_DESIGN`, not a
+G33 scientific result, and consumes zero iterations.
+
+Do not implement, optimize in C++, exercise or formally run that nested search.
+Preserve the exact Pro raw, retain only reusable bounded source/scorer work, and
+request the smallest scientifically separating G33 control satisfying
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`: `O(H*K_search)`, fixed
+`K_search<=16`, at most `16*H` hypothetical transitions, no nested replanning,
+20-minute nonformal and eight-hour formal caps. A fixed-small-N exact
+`O(N^2)` communication simulator may remain a reference; a scalable
+dynamic-agent algorithm must instead target `O(N*k_neighbor)` or `O(N*logN)`.
 
 ## Current transition
 

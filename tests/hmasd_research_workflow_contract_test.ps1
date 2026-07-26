@@ -38,10 +38,13 @@ $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CO
 $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
+$reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
 $reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
+$complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 
@@ -65,6 +68,7 @@ foreach ($required in @(
     'superpowers_execution=disabled',
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
+    'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
     'per_file_hash_handoff=forbidden',
     'isolated_worktree_identity=workspace_ticket_only',
     'handoff_document_write_trigger=explicit_user_request_only',
@@ -95,6 +99,18 @@ foreach ($required in @(
     'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
     'workflow_hash_validation=disabled')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
+}
+
+foreach ($required in @(
+    'search_complexity_ceiling=O(H*K_search)',
+    'candidate_trajectory_count_ceiling=16',
+    'future_simulated_transitions_per_controller_episode<=16*H',
+    'nested_rollout_replanning=forbidden',
+    'nonformal_wall_clock_cap_minutes=20',
+    'formal_iteration_wall_clock_cap_hours=8',
+    'scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)',
+    'fixed_small_exact_simulator_O(N^2)=allowed_as_reference_only')) {
+    if (-not $current.Contains($required)) { throw "CURRENT_WORK missing complexity boundary: $required" }
 }
 
 foreach ($required in @(
@@ -140,6 +156,20 @@ foreach ($required in @(
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
+    'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
+    'NON_EXECUTABLE_EVIDENCE_DESIGN',
+    'O(H*K_search)',
+    'O(N*k_neighbor)')) {
+    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing complexity rule: $required" }
+}
+foreach ($roleText in @($implementerRole, $reviewerRole)) {
+    foreach ($required in @(
+        'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
+        'NON_EXECUTABLE_EVIDENCE_DESIGN')) {
+        if (-not $roleText.Contains($required)) { throw "Native code role missing complexity rule: $required" }
+    }
+}
+foreach ($required in @(
     'role=external_review_operator',
     'transport_authority=exclusive_for_assigned_external_pro_round',
     'scientific_authority=none',
@@ -172,6 +202,13 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
 }
 foreach ($required in @(
+    'search_complexity_ceiling=O(H*K_search)',
+    'nested_rollout_replanning=forbidden',
+    'NON_EXECUTABLE_EVIDENCE_DESIGN',
+    'O(N*k_neighbor)')) {
+    if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
+}
+foreach ($required in @(
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
@@ -188,12 +225,35 @@ foreach ($required in @(
     if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
 }
 foreach ($required in @(
+    'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
+    'O(H*K_search)',
+    '16*H',
+    'O(N*k_neighbor)')) {
+    if (-not $proRole.Contains($required)) { throw "External Pro role missing complexity boundary: $required" }
+}
+foreach ($required in @(
     'scientific_acceptance_owner=external_pro',
     'code_acceptance_owner=project_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction')) {
     if (-not $assertion.Contains($required)) { throw "Assertion audit missing: $required" }
+}
+foreach ($required in @(
+    'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
+    'NON_EXECUTABLE_EVIDENCE_DESIGN',
+    'O(H*K_search)',
+    'O(N*logN)')) {
+    if (-not $assertion.Contains($required)) { throw "Assertion audit missing complexity gate: $required" }
+}
+foreach ($required in @(
+    'search_complexity_ceiling=O(H*K_search)',
+    'future_simulated_transitions_per_controller_episode<=16*H',
+    'nested_rollout_replanning=forbidden',
+    'dense_pairwise_deployment_claim=forbidden',
+    'fixed_small_exact_simulator_O(N^2)=allowed_as_reference_only',
+    'override_authority=user_only_for_one_named_boundary')) {
+    if (-not $complexity.Contains($required)) { throw "Complexity policy missing: $required" }
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',

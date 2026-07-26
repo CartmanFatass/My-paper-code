@@ -8,7 +8,9 @@ candidate=UAV_LOCALIZED_DEMAND_BURST_G33_P0
 design_disposition=UNRESOLVED_UAV_BURST_G33_DESIGN
 control_disposition=G33_P0_CONTROL_CONTRACT_CLOSED_N2_BOUND
 static_upper_bound_complete=false
-next_boundary=UAV_LOCALIZED_DEMAND_BURST_G33_SOURCE_WITNESS_EXECUTABLE_REALIZATION
+execution_status=NON_EXECUTABLE_EVIDENCE_DESIGN
+complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+next_boundary=UAV_LOCALIZED_DEMAND_BURST_G33_BOUNDED_CONTROL_IMPLEMENTATION_ALIGNMENT
 learned_models=0
 optimizer_steps=0
 backend=cpu
@@ -19,6 +21,14 @@ conclusion_bearing_iteration_cost=1_only_if_a_valid_source_witness_result_is_pro
 Scientific authority for every field below is the exact raw at
 `docs/external-review/rounds/20260725_uav_localized_demand_burst_g33_design_assertion_audit/21_PRO_OPEN_RAW.md`.
 This document makes its code boundary concise; it does not reinterpret it.
+
+The exact Pro disposition remains archived scientific evidence, but its
+per-step candidate-by-remaining-horizon rollout violates the later direct user
+complexity boundary. It is therefore ineligible for implementation, native-code
+rescue or formal execution. This is an operational design disposition, not a
+G33 result; it costs zero iterations. External Pro must supply a scientifically
+separating replacement inside `O(H*K_search)`, fixed `K_search<=16` and `16*H`
+hypothetical transitions before this source can proceed.
 
 ## Source
 

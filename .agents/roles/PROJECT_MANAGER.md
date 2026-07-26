@@ -16,6 +16,7 @@ experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
+evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
 ```
 
@@ -39,6 +40,10 @@ design, result interpretation, CDC change and scientific successor selection.
 - Direct Git staging, commit, and push of accepted work.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
+- Enforcing the user-owned evidence-complexity ceiling before adopting a Pro
+  design, writing result-bearing code or launching compute. PM owns the
+  complexity estimate and rejects an infeasible realization; it does not alter
+  the scientific idea locally.
 - Validation and interpretation of the operator's terminal artifacts.
 - Selection of the default toy discovery surface and the one-way promotion of
   a toy-supported candidate to a heavy UAV transport/robustness validation.
@@ -97,6 +102,17 @@ scientific scope, escalate that expansion to the user.
   Pro-selected actions without requesting approval for routine implementation,
   Git, transport, bounded diagnostics or authorized runs. When no scientific
   successor is decided, open the smallest Pro boundary instead of choosing one.
+- Before accepting a Pro-selected evidence action, record its asymptotic search
+  cost, fixed candidate count and hypothetical-transition upper bound. Enforce
+  `O(H*K_search)`, `K_search<=16`, at most `16*H` hypothetical transitions per
+  controller episode, no nested rollout/replanning, 20 minutes for a nonformal
+  exercise and eight cumulative hours for one formal iteration. A violation is
+  `NON_EXECUTABLE_EVIDENCE_DESIGN`, costs zero iterations and returns to Pro for
+  a bounded separating idea.
+- For an algorithm claimed to scale with agent count, reject a new dense
+  pairwise deployment path. Target `O(N*k_neighbor)` with `k_neighbor<=16` or
+  `O(N*logN)`. A fixed-small-N exact `O(N^2)` simulator may remain the reference;
+  changing it through sparsity or approximation is a scientific design change.
 - Keep routine algorithm iteration on the existing toy environments. Schedule
   a heavy UAV run only after recording why the candidate is promising on toy
   evidence or why the accepted question is intrinsically UAV-specific.
@@ -127,6 +143,9 @@ scientific scope, escalate that expansion to the user.
 - Permit same-file concurrent writers, preserve obsolete compatibility paths,
   add workflow hash handshakes, or create a Controller/dispatcher callback.
 - Substitute an unnamed/default worker after an unknown custom agent response.
+- Implement, optimize or formally execute a trajectory search that violates
+  `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`; C++ speed does not legalize a
+  forbidden search structure.
 
 ## Outputs and stop
 

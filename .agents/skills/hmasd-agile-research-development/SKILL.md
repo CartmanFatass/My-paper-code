@@ -19,6 +19,13 @@ superpowers_execution=disabled
 development_mode=agile_algorithm_research
 backward_compatibility=not_required
 test_scope=proof_sized
+search_complexity_ceiling=O(H*K_search)
+candidate_trajectory_count_ceiling=16
+future_simulated_transitions_per_controller_episode<=16*H
+nested_rollout_replanning=forbidden
+nonformal_wall_clock_cap_minutes=20
+formal_iteration_wall_clock_cap_hours=8
+scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 codebase_policy=small_active_line_only
 workflow_hash_validation=disabled
 per_file_hash_handoff=forbidden
@@ -34,8 +41,11 @@ A user-named one may be inspected only as reference.
    disposition and its design-audit status. PM may raise a code-side
    `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`; do not fill scientific ambiguity
    locally. Pure operational work records why the audit is not triggered.
-2. **Bound.** Use the brief. Project Manager defines code files, engineering
-   choices, exclusions and completion inside the Pro-frozen semantics. Add no
+2. **Bound.** Use the brief and
+   `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Manager defines code
+   files, engineering choices, exclusions and completion inside the Pro-frozen
+   semantics. Before implementation, write the zero-compute `H`, fixed
+   `K_search`, hypothetical-transition bound and projected wall clock. Add no
    brainstorm, plan, worktree, ledger or approval when known.
 3. **Probe.** Observe the smallest failing test for new behavior or plausible
    regression. For throwaway measurement/configuration, use a diagnostic.
@@ -53,6 +63,25 @@ A user-named one may be inspected only as reference.
 
 On failure, reproduce once, locate the first violated invariant, add a regression
 only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
+
+## Complexity gate
+
+HMASD tests Pro-proposed ideas; it does not implement unlimited solvers. Search
+introduced only for evidence must be at most `O(H*K_search)` with fixed
+`K_search<=16` and no more than `16*H` hypothetical transitions per controller
+episode. Nested remaining-horizon rollout at every real step, recursive rollout
+inside a candidate rollout, tree/beam/MCTS search and horizon-growing candidate
+sets are forbidden regardless of C++ speed or parallel hardware. A nonformal
+exercise is capped at 20 minutes and a formal iteration at eight cumulative
+hours. Exceeding the bound returns `NON_EXECUTABLE_EVIDENCE_DESIGN` to Pro for a
+cheaper discriminator and consumes no conclusion-bearing iteration.
+
+Do not confuse evidence-search complexity with simulator physics. C++ and
+batching remain preferred for a valid fixed-small-N exact reference. A
+deployment algorithm claimed to scale with dynamic agent count must target
+`O(N*k_neighbor)`, `k_neighbor<=16`, or `O(N*logN)` rather than add a dense
+pairwise path. Any sparse or approximate physical model is a new scientific
+choice and requires its own design audit.
 
 Router, role, Skill, native-profile, registry and active workflow-contract
 changes first use `hmasd-workflow-change-audit` for impact classification and
@@ -98,3 +127,4 @@ collision, or exhausted recovery—not in-brief engineering.
 | follow a generic Skill's worktree/review/commit ritual | use this procedure only |
 | turn file hashes into a handoff or approval gate | use exact paths and Git identity |
 | ask again inside an active grant | continue to a real stop boundary |
+| optimize an asymptotically forbidden evidence search | return it to Pro for a bounded discriminator |

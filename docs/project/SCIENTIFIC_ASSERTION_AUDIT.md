@@ -8,6 +8,7 @@ external_scientific_authority=exclusive_within_user_goal_and_review_boundary
 audit_model=two_stage_triggered
 review_stack=false
 backward_compatibility=false
+evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 ```
 
 This workflow protects conclusions, not engineering completeness. External Pro
@@ -54,12 +55,20 @@ Project Manager first tries to falsify the draft without training:
 6. Ask which load-bearing decision the contract makes without explicitly
    asking. Do not turn a PM-written uncertainty into external authority by
    repetition.
+7. Apply the evidence-complexity gate before design freeze: state `H`, fixed
+   `K_search`, hypothetical-transition upper bound and projected wall clock.
+   Reject nested rollout/replanning, horizon-growing enumeration or search
+   above `O(H*K_search)`, `K_search<=16` and `16*H` hypothetical transitions
+   per controller episode. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`,
+   not a scientific result.
 
 Then Project Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
 the draft design, current scientific principles, relevant evidence and exact
 repository paths. Ask Pro to seek counterexamples and missing decisions, not to
-confirm the plan. PM archives the raw answer and implements its exact scientific
-disposition. PM may ask a focused clarification or report a code-side
+confirm the plan, and require the smallest discriminator inside
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. PM archives the raw answer and
+implements its exact scientific disposition. PM may ask a focused clarification
+or report a code-side
 infeasibility, but it cannot select among scientifically different answers.
 Final freeze occurs only after Pro resolves or explicitly scopes out the
 scientific defects.
@@ -126,6 +135,12 @@ analysis, toy, bounded prototype and formal compute. Use a cheap measurement
 before arguing about a causal explanation. Failed directions retain the
 smallest scientific record; obsolete apparatus is deleted and Git history is
 the archive.
+
+An exact small-N simulator may retain dense physical pair calculations as a
+reference, but it is not a scalable deployment claim. A dynamic-agent algorithm
+must target bounded-neighborhood `O(N*k_neighbor)` or hierarchical
+`O(N*logN)`. Sparsifying or approximating the physical model changes science and
+therefore returns to Stage A instead of being hidden as a performance repair.
 
 An experiment operator terminal return or naturally completed Pro response
 wakes Project Manager. With an active grant, no live owned operation and no real

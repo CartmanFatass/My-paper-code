@@ -8,6 +8,7 @@ role_kind=external_scientific_decision_authority_within_user_review_boundary
 transport_owner=dedicated_external_review_operator
 workflow_authority=none
 code_acceptance_authority=none
+evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
@@ -29,6 +30,9 @@ paths when scientific judgment depends on what the code actually implements.
   structure, executable feasibility or a concrete implementation counterexample
   conflicts with a prior scientific disposition. This is a focused continuation
   of the same design boundary, not a new acceptance layer.
+- Supply the smallest separating scientific idea that fits the user-owned
+  evidence-complexity policy. External Pro defines scientific distinctions; it
+  does not require an unbounded solver to establish them.
 
 ## May
 
@@ -44,6 +48,13 @@ paths when scientific judgment depends on what the code actually implements.
   submitted package.
 - Expand protected scope beyond the user's goal or become the acceptance owner
   for a Project Manager-owned code artifact.
+- Propose or preserve nested rollout/replanning, horizon-growing candidate
+  enumeration, or another evidence search above `O(H*K_search)`,
+  `K_search<=16` and `16*H` hypothetical transitions per controller episode.
+  If an idea cannot fit, return a bounded reformulation or retire that idea.
+- Claim dynamic-agent scalability for a new dense `O(N^2)` deployment path.
+  Use bounded-neighbor `O(N*k_neighbor)` or `O(N*logN)` structure; the fixed
+  small exact simulator may remain only as the reference oracle.
 - Write repository files. Its task file-ownership declaration is empty.
 
 ## Inputs
@@ -52,6 +63,8 @@ paths when scientific judgment depends on what the code actually implements.
   submitted without rewriting by the dedicated External Review Operator, with
   declared source and artifact identity.
 - The concurrency policy: no global write lease, disjoint-file parallelism allowed, same-file concurrent writes forbidden, and every mutating task must declare its owned files.
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`, including its agent-count
+  scaling distinction and the 20-minute nonformal/eight-hour formal caps.
 
 ## Outputs and stop
 

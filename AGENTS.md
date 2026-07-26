@@ -84,6 +84,7 @@ superpowers_plugin=reference_only
 superpowers_execution=disabled
 backward_compatibility=not_required
 test_scope=proof_sized
+evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 codebase_policy=small_active_line_only
 workflow_hash_validation=disabled
 per_file_hash_handoff=forbidden
@@ -93,7 +94,6 @@ disjoint_file_parallelism=allowed
 isolated_worktree_identity=workspace_ticket_only
 handoff_document_write_trigger=explicit_user_request_only
 ```
-
 Generic Superpowers Skills are not executed in HMASD. Use the project-native
 Skills only when their mechanics apply. Keep active code small; Git history is
 the archive. Tests protect the exact claim or operational invariant and do not
@@ -111,7 +111,7 @@ forbidden.
 
 ## Routed project mechanisms
 
-- Scientific principles: `docs/project/ALGORITHM_PRINCIPLES.md`.
+- Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - PM authority and automatic research loop: `.agents/roles/PROJECT_MANAGER.md`.
