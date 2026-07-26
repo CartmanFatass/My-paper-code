@@ -20,7 +20,7 @@ one_artifact_one_acceptance_owner=true
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=probe_confirmed_live_role_session
 cross_task_route_cache=conversation_local_only
-cross_task_model_thinking_override=omitted
+cross_task_model_thinking_preservation=live_state_probe_explicit_echo
 workflow_change_skill=hmasd-workflow-change-audit
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_collaboration_scope=all_mutating_workflow_design
@@ -56,9 +56,9 @@ not a native child, research coordinator or scientific authority.
   PM separately owns code, runtime evidence, individual review packages and
   active state; overlapping writes are forbidden.
 - Returning the accepted workflow-design commit and exact changed paths through
-  `$hmasd-cross-task-routing` to the probe-confirmed live PM session with model
-  and thinking omitted. The requester decides when to apply the design to an
-  active code boundary.
+  `$hmasd-cross-task-routing` to the probe-confirmed live PM session with its
+  live model and thinking explicitly echoed. The requester
+  decides when to apply the design to an active code boundary.
 
 ## Registered review and experiment design
 

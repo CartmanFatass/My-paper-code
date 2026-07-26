@@ -16,7 +16,7 @@ completion_notification=required_once
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=probe_confirmed_live_role_session
 cross_task_route_cache=conversation_local_only
-cross_task_model_thinking_override=omitted
+cross_task_model_thinking_preservation=live_state_probe_explicit_echo
 ```
 
 This task removes browser-control pressure from Project Manager without adding
@@ -58,7 +58,8 @@ browsing or editing.
 - Verbatim replacement of the assigned raw placeholder and mechanical facts in
   the assigned intake file. No other repository path may be written.
 - Exactly one inter-task terminal notification to the probe-confirmed live
-  Project Manager session. The send omits model and thinking overrides.
+  Project Manager session. The send explicitly echoes that session's live
+  model and thinking.
 
 ## Must not
 
@@ -74,8 +75,8 @@ browsing or editing.
 ## Terminal delivery
 
 On success, use `$hmasd-cross-task-routing` and send exactly one cross-task
-message to the confirmed Project Manager session with model and thinking
-omitted:
+message to the confirmed Project Manager session with its live model and
+thinking explicitly echoed:
 
 ```text
 EXTERNAL_REVIEW_OPERATOR_COMPLETE

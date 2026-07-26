@@ -99,8 +99,8 @@ foreach ($required in @(
     'scripts/hmasd_pro_response_sentinel.py',
     'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_model_thinking_override=omitted',
-    'omit model and thinking overrides',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
+    'Settings are never stored in Git or cached',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -185,7 +185,7 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_INDEX.md',
@@ -208,7 +208,7 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_mutating_workflow_design',
     'workflow_zero_question_path=fully_specified_mutations',
@@ -265,7 +265,7 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted')) {
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo')) {
     if (-not $reviewOperatorRole.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }

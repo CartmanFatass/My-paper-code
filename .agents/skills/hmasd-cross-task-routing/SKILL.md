@@ -16,6 +16,33 @@ central role registry, store live identity in Git, poll tasks, route native
 children, or replace the External Pro browser conversation binding. A session
 ID is an address, not authority. The target task owns its live model and effort.
 
+## Live settings preservation
+
+Omitting `model` and `thinking` is forbidden: the desktop transport can apply a
+default effort while handling the inserted message and restore the target only
+afterward. Before every protocol or business send, run the registered HMASD
+Python interpreter with the bundled read-only probe:
+
+```powershell
+& '<hmasd_python_interpreter>' '.agents/skills/hmasd-cross-task-routing/scripts/read_codex_thread_settings.py' `
+  --thread-id <target-session> --expect-cwd <project-root>
+```
+
+The script opens `~/.codex/state_5.sqlite` with SQLite `mode=ro`. Accept only
+`status=LIVE_SETTINGS`. Pass its exact `model` as `model` and exact `thinking`
+as `thinking` to `send_message_to_thread`. Never write, persist or cache these
+values. Any nonzero result before the send is `ROUTE_SETTINGS_UNAVAILABLE` and
+forbids delivery.
+
+Routine post-send checking is forbidden because it cannot prevent an already
+delivered wrong-effort turn. Only after the send tool reports an error or the
+user observes a settings anomaly, run one diagnostic read with `--expect-model`
+and `--expect-thinking`. `SETTINGS_DRIFT` is `ROUTE_SETTINGS_DRIFT`; report it
+once and never resend automatically.
+
+This probe preserves settings; it does not establish role authority. Session
+confirmation below remains independently required.
+
 ## Conversation-local route cache
 
 Maintain at most one confirmed session ID per target role in the current
@@ -39,8 +66,8 @@ Do not probe before every message and do not run recurring route audits.
 2. Otherwise, discover plausible tasks by project and role evidence. Inspect at
    most three candidates and finish discovery within 120 wall-clock seconds.
    Polling is forbidden.
-3. Send each candidate one protocol-only probe, omitting both `model` and
-   `thinking`:
+3. Read each candidate's live settings as above, then send one protocol-only
+   probe with those exact `model` and `thinking` values explicitly supplied:
 
    ```text
    ROLE_ROUTE_PROBE
@@ -93,9 +120,12 @@ archived or absent. Any mismatch or two simultaneously live claimants is
 
 ## Send business messages
 
-After confirmation, send the business message to the confirmed session while
-omitting both `model` and `thinking`. Never infer, record, or pass fixed target
-model or effort values. Protocol messages are exempt from recursive probing.
+After confirmation, reread the confirmed session's live settings, send the
+business message with those exact `model` and `thinking` values explicitly
+supplied, and stop after one successful delivery. Never infer a role default,
+reuse probe-time settings, or record fixed target model or effort values.
+Protocol messages are exempt from recursive role probing, but not from
+live-settings preservation.
 
 For an incoming business message, use the actual
 `codex_delegation.source_thread_id` as the sender address. If it conflicts with
@@ -108,6 +138,8 @@ business actions may be unsafe. End with exactly one routing result:
 - `ROUTE_CONFIRMED role=<role> session_id=<session>`
 - `ROUTE_AMBIGUOUS role=<role>`
 - `ROUTE_UNAVAILABLE role=<role>`
+- `ROUTE_SETTINGS_UNAVAILABLE role=<role>`
+- `ROUTE_SETTINGS_DRIFT role=<role>`
 
 This protocol performs no experiment, scientific evaluation, review-runtime
 operation, or project computation.

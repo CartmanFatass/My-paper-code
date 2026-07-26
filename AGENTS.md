@@ -64,7 +64,7 @@ native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
 cross_task_routing=probe_confirmed_session_plus_conversation_local_cache
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_model_thinking_override=omitted
+cross_task_model_thinking_preservation=live_state_probe_explicit_echo
 ```
 
 The user permanently authorizes Workflow Design Manager and Project Manager to fetch and push accepted nonoverlapping path sets there. No other remote or egress is covered.
@@ -145,5 +145,6 @@ No role reads every routed document. The active assignment or role charter names
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
 
-Persistent Codex roles probe-confirm live target sessions, cache them only in conversation, and omit model and thinking overrides; session IDs are addresses, not authority.
+Persistent Codex roles probe-confirm sessions, cache only session IDs in conversation, and before every send read and explicitly echo the target's live model and effort.
+Settings are never stored in Git or cached, and session IDs are addresses, not authority.
 Ambiguity fails closed to the user. Native children keep fixed profiles and one final return rather than session sends.

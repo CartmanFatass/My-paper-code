@@ -54,7 +54,7 @@ foreach ($required in @(
     'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -68,7 +68,7 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
     'CURRENT_WORK.md',
@@ -101,7 +101,7 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'CODE_SCIENCE_INDEX.md')) {
@@ -124,9 +124,9 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=probe_confirmed_live_role_session',
     'cross_task_route_cache=conversation_local_only',
-    'cross_task_model_thinking_override=omitted',
+    'cross_task_model_thinking_preservation=live_state_probe_explicit_echo',
     'cross-task',
-    'model and thinking omitted')) {
+    'live model and thinking explicitly echoed')) {
     if (-not $reviewOperatorNormalized.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }

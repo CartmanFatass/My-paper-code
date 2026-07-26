@@ -19,7 +19,8 @@ response, or what work follows it.
 
 Project Manager authors and pushes its review files, uses
 `$hmasd-cross-task-routing` to confirm the live External Review Operator session,
-then sends one exact assignment with model and thinking omitted. Activate `$hmasd-review-round`
+then sends one exact assignment with the target's live model and thinking
+explicitly echoed. Activate `$hmasd-review-round`
 only in that operator task and use `$browser:control-in-app-browser` for
 submission and archival. After one exact fence is visibly submitted, assign
 the registered nonpersistent `hmasd-pro-response-monitor` to observe the
@@ -68,7 +69,7 @@ visible or the page title looks familiar.
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | External Review Operator initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, External Review Operator confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake, confirms monitor absence, uses `$hmasd-cross-task-routing` to confirm the live Project Manager session, and sends one terminal notification with model and thinking omitted. | Project Manager receives the returned file paths and routes the exact raw; the operator stops. |
+| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, External Review Operator confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake, confirms monitor absence, uses `$hmasd-cross-task-routing` to confirm the live Project Manager session, and sends one terminal notification with its live model and thinking explicitly echoed. | Project Manager receives the returned file paths and routes the exact raw; the operator stops. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
 completion evidence, not a substitute for message identity and inactive
@@ -251,8 +252,9 @@ After stable completion:
 3. Confirm the registered response monitor is terminal and no second monitor or
    heartbeat exists.
 4. Use `$hmasd-cross-task-routing` to confirm the live Project Manager session,
-   then send exactly one completion notification with model and thinking
-   omitted. Route ambiguity or unavailable identity fails closed.
+   then send exactly one completion notification with its live model and
+   thinking explicitly echoed. Route ambiguity, unavailable
+   settings or unavailable identity fails closed.
 5. Keep transport facts separate from scientific content. External Pro owns the
    in-boundary scientific disposition; Project Manager routes the exact raw
    without reinterpretation. The required completion notification is
@@ -292,6 +294,7 @@ resume condition, and `recovery_exhausted=true`.
 
 At terminal success or terminal block, confirm the response monitor is no
 longer live, use `$hmasd-cross-task-routing` to confirm the live Project Manager
-task, and send exactly one terminal notification with model and thinking omitted. A stale response from
+task, and send exactly one terminal notification with its live model and
+thinking explicitly echoed. A stale response from
 another round has no authority and never replaces the exact current-round raw
 or launches a successor.

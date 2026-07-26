@@ -1,5 +1,5 @@
 {
-  "schema_version": 34,
+  "schema_version": 35,
   "updated": "2026-07-26",
   "round_operator": {
     "kind": "dedicated_external_review_operator_task",
@@ -14,7 +14,11 @@
     "cross_task_routing_skill": "$hmasd-cross-task-routing",
     "target_identity": "probe_confirmed_live_role_session",
     "route_cache": "conversation_local_only",
-    "model_thinking_override": "omitted",
+    "model_thinking_preservation": "live_state_probe_explicit_echo",
+    "live_settings_source": "read_only_local_codex_state",
+    "live_settings_cache": "forbidden",
+    "routine_postcheck": "forbidden",
+    "settings_drift_action": "diagnose_once_after_send_error_or_observed_anomaly_no_resend",
     "response_monitor_agent_type": "hmasd-pro-response-monitor",
     "response_monitor_model": "gpt-5.6-luna",
     "response_monitor_effort": "low",
