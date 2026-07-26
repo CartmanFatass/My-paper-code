@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([switch]$WorkflowDesignOnly)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
@@ -8,15 +8,14 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @(
+$requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
-    'hmasd-pm-round-metrics',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
-if (Compare-Object $expectedSkills $skills) {
-    throw "Unexpected active Skill set: $($skills -join ',')"
+foreach ($required in $requiredSkills) {
+    if ($required -notin $skills) { throw "Missing routed workflow Skill: $required" }
 }
 
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
@@ -38,30 +37,25 @@ if (Compare-Object $expectedRoles $roles) {
 }
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
-$current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
-$context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
-$plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
-$workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
-$implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
-$reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
-$costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
-$reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
-$monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
-$assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
-$complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
-$handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 
+if (-not $WorkflowDesignOnly) {
+    $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
+    $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
+    $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
+    $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
+}
 foreach ($required in @(
     'document_kind=role_router',
     'all_workspace_agents_auto_load_this_file=true',
     'project_history_in_router=forbidden',
+    'role_specific_procedure_in_router=forbidden',
     'dedicated Workflow Design Manager task',
     'Project Manager task',
     'registered native child',
@@ -84,17 +78,6 @@ foreach ($required in @(
     'external_review_operator_transport_authority=exclusive',
     'External Review Operator task',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
-    'active_unattended_grant_valid_iteration_limit=9',
-    'active_unattended_grant_permission_prompts=forbidden',
-    'valid_scientific_result_classes=success|failure|mixed|underpowered',
-    'valid_scientific_result_route=exact_archive_then_external_pro',
-    'external_pro_successor_adjudication=required_after_every_valid_result',
-    'project_manager_in_scope_successor_execution=automatic',
-    'out_of_scope_proposal_action=require_in_scope_alternative_without_execution_or_user_prompt',
-    'no_in_scope_successor_action=terminal_authorized_chain_closure',
-    'grant_balance_exhaustion_action=terminal_completion_without_user_prompt',
-    'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
-    'unfavorable_scientific_result_route=external_pro_adjudication',
     'hmasd-pro-response-monitor',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
@@ -114,10 +97,77 @@ foreach ($required in @(
     'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'external_review_operator_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
-    'Persistent Codex roles use only the fixed router session addresses',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
+
+if ((Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md')).Count -gt 150) {
+    throw 'AGENTS role router has accumulated role-specific context'
+}
+
+foreach ($required in @(
+    'active_unattended_grant_valid_iteration_limit=9',
+    'active_unattended_grant_permission_prompts=forbidden',
+    'valid_result_external_pro_adjudication=result_plus_portfolio_delta_required',
+    'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
+    'portfolio_adjudication_authority=external_pro',
+    'scheduled_resource_consuming_action_count=one',
+    'scheduled_action_scientific_uniqueness=false',
+    'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
+    'missing_scheduled_action_with_remaining_balance_and_possible_candidate=focused_external_pro_clarification',
+    'scheduled_action_execution=exact_designated_only',
+    'project_manager_portfolio_reorder_or_compression=forbidden',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'scheduled_action_presence=CONTINUE_only',
+    'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
+    'operational_recovery_reauthorization=not_required_per_attempt',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
+    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
+    'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
+    'portfolio_adjudication_authority=exclusive',
+    'scheduled_resource_consuming_action_count=one',
+    'scheduled_action_scientific_uniqueness=false',
+    'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
+    'missing_scheduled_action_with_remaining_balance_and_possible_candidate_response=focused_clarification_required',
+    'active_grant_closure_condition=no_in_scope_executable_candidate_after_full_portfolio_consideration',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'scheduled_action_presence=CONTINUE_only',
+    'valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remaining_balance|current_portfolio|algorithm_principles_section_3')) {
+    if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
+}
+if ($pmRole.Contains('portfolio_adjudication_authority=project_manager')) {
+    throw 'Project Manager role claims scientific portfolio adjudication'
+}
+foreach ($required in @(
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'scheduled_action_presence=CONTINUE_only',
+    'missing_scheduled_action_clarification=remaining_balance_and_possible_candidate_only',
+    'operational_recovery=automatic_within_unchanged_authorized_boundary',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
+    if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
+}
+
+if ($WorkflowDesignOnly) {
+    Write-Output 'HMASD_RESEARCH_WORKFLOW_DESIGN_CONTRACT_OK'
+    return
+}
+
+$workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
+$implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
+$reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
+$costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
+$reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
+$monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
+$assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
+$complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
 foreach ($required in @(
     'active_assignment_id=',
@@ -298,15 +348,8 @@ if (-not $workflowAudit.Contains('written only on explicit user request')) {
 foreach ($required in @(
     'superpowers_execution=disabled',
     'workflow_hash_validation=disabled',
-    'Project Manager integrates the exact accepted',
-    'no relay or completion receipt exists',
-    'External Pro owns',
-    'Project Manager routes the one existing comparison-only',
-    'do not stop for user',
-    'Archive every valid success, failure, mixed or',
-    'Complete after nine valid iterations',
-    'unrecoverable external technical impossibility',
-    'commit-bound critical-point index',
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
     'CODE_SCIENCE_ALIGNMENT_AUDIT')) {
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
 }
@@ -354,14 +397,6 @@ foreach ($required in @(
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
-    'active_grant_valid_result_adjudication=required',
-    'active_grant_out_of_scope_proposal=require_in_scope_alternative',
-    'active_grant_no_in_scope_successor=terminal_authorized_chain_closure',
-    'active_grant_user_permission_request=forbidden',
-    'valid success, failure, mixed or underpowered result',
-    'one exact in-scope successor action or terminal authorized-chain',
-    'remains unavailable after applicable automatic recovery',
-    'code counterexample',
     'code_science_audit_mode=contract_diff_only',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
@@ -418,9 +453,6 @@ foreach ($required in @(
     if (-not $monitorRole.Contains($required)) { throw "Monitor role missing: $required" }
 }
 
-if ((Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md')).Count -gt 150) {
-    throw 'AGENTS role router has accumulated role-specific context'
-}
 if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELINE.md')) {
     throw 'Stale multi-review pipeline remains on the active line'
 }

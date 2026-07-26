@@ -61,21 +61,22 @@ A user-named one may be inspected only as reference.
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
    changed claim-bearing code, PM writes the commit-bound critical-point index,
-   pushes the accepted implementation, and sends its exact identity to Workflow
-   Manager. Project Manager routes the one existing comparison-only
+   pushes the accepted implementation, and routes the one existing comparison-only
    `CODE_SCIENCE_ALIGNMENT_AUDIT` after implementation acceptance and before a
    formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
-On failure, locate the first violated invariant and distinguish scientific
-failure from a purely operational failure. Within the unchanged user-authorized
-scientific boundary, PM may arrange low-cost retry, resume or restart without
-per-attempt reauthorization or a fixed attempt count. Preserve the estimator,
-source, seed law, budgets, thresholds, backend constraints and branch semantics;
-never weaken checks, retry blindly or use recovery to select among scientific
-outcomes. Operational recovery costs zero scientific iterations and produces no
-scientific disposition or abandonment. Add a regression only for plausible
-recurrence of a code defect.
+Classify every terminal event before continuing. A purely operational failure
+returns control to PM for automatic `retry`, `resume` or `restart` inside the
+unchanged authorized scientific boundary, without per-attempt reauthorization
+or a fixed attempt count. Preserve the estimator, source, seed law, budgets,
+thresholds, backend constraints and branch semantics; never weaken checks or
+use recovery to select among scientific outcomes. Operational recovery uses
+zero scientific iterations and creates no scientific disposition. A valid
+scientific result is archived and routed to External Pro. An external hard
+technical impossibility is terminal only after applicable automatic recovery
+cannot make progress. Add a regression only for plausible recurrence of a code
+defect.
 
 ## Complexity gate
 
@@ -133,16 +134,32 @@ slice.
 
 ## Stop only for a real boundary
 
+```text
+valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED
+valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue
+scheduled_action_presence=CONTINUE_only
+missing_scheduled_action_clarification=remaining_balance_and_possible_candidate_only
+operational_recovery=automatic_within_unchanged_authorized_boundary
+operational_recovery_scientific_iteration_cost=zero
+early_termination_boundary=unrecoverable_external_technical_impossibility_only
+```
+
 Inside the active authorized nine-valid-iteration grant, do not stop for user
 input, a permission prompt, a scientific result or protected-science ambiguity.
 Archive every valid success, failure, mixed or
-underpowered result and return it to External Pro; PM automatically follows the
-exact in-scope successor. An out-of-scope or over-balance proposal is deferred
-and Pro must select an in-scope alternative. If none exists, close the authorized
-chain. Complete after nine valid iterations. Terminate earlier only for an
-unrecoverable external technical impossibility after applicable automatic
-recovery cannot make progress, and report it as a technical blocker rather than
-a permission question.
+underpowered result and return it to External Pro. Pro maintains multiple live
+or parked directions when evidence supports them. Pro returns
+`COMPLETE_BALANCE_EXHAUSTED` when all nine valid iterations are consumed;
+otherwise it returns `CLOSE_NO_EXECUTABLE_CANDIDATE` only when the full preserved
+portfolio has no executable in-scope candidate, or `CONTINUE` with one current
+resource-consuming action. That scheduling boundary provides attribution and
+does not establish scientific uniqueness. PM executes only the designated
+`CONTINUE` action and never reorders or compresses the portfolio. While balance
+remains, an absent or ambiguous action with a possible in-scope candidate causes
+automatic focused Pro clarification. Terminate earlier only for an unrecoverable
+external technical impossibility after applicable automatic recovery cannot
+make progress, and report it as a technical blocker rather than a permission
+question.
 
 ## Common mistakes
 
@@ -153,6 +170,6 @@ a permission question.
 | follow a generic Skill's worktree/review/commit ritual | use this procedure only |
 | turn file hashes into a handoff or approval gate | use exact paths and Git identity |
 | ask again inside an active grant | continue unattended to Pro adjudication, balance exhaustion or terminal closure |
-| pause after an unfavorable result | archive it and obtain the exact in-scope Pro successor |
+| pause after an unfavorable result | archive it and follow the Pro continuation or terminal disposition |
 | propose external authority while an in-scope route exists | defer it and continue the in-scope route |
 | optimize an asymptotically forbidden evidence search | return it to Pro for a bounded discriminator |

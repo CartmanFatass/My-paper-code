@@ -22,8 +22,8 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'model = "gpt-5.6-luna"',
-    'model_reasoning_effort = "max"',
+    'model = "gpt-5.6-sol"',
+    'model_reasoning_effort = "xhigh"',
     'Inspect scalar device work')) {
     if (-not $reviewer.Contains($required)) {
         throw "Selected reviewer profile missing: $required"
@@ -126,7 +126,7 @@ $catalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'
 $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
 foreach ($selected in @(
     @{ Model='gpt-5.6-sol'; Effort='high' },
-    @{ Model='gpt-5.6-luna'; Effort='max' })) {
+    @{ Model='gpt-5.6-sol'; Effort='xhigh' })) {
     $model = @($catalog.models | Where-Object { $_.slug -eq $selected.Model })
     if ($model.Count -ne 1) { throw "Missing model catalog entry: $($selected.Model)" }
     $efforts = @($model[0].supported_reasoning_levels | ForEach-Object { $_.effort })

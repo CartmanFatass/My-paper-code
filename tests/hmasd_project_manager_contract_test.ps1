@@ -8,7 +8,7 @@ $profiles = @{
     'HMASDCodeScout' = @('hmasd-code-scout.toml', 'hmasd-code-scout', 'gpt-5.6-luna', 'medium', 'read-only')
     'HMASDImplementer' = @('hmasd-implementer.toml', 'hmasd-implementer', 'gpt-5.6-sol', 'high', 'workspace-write')
     'HMASDVerifier' = @('hmasd-verifier.toml', 'hmasd-verifier', 'gpt-5.6-luna', 'high', 'workspace-write')
-    'HMASDReviewer' = @('hmasd-reviewer.toml', 'hmasd-reviewer', 'gpt-5.6-luna', 'max', 'read-only')
+    'HMASDReviewer' = @('hmasd-reviewer.toml', 'hmasd-reviewer', 'gpt-5.6-sol', 'xhigh', 'read-only')
     'HMASDWorkflowCostReviewer' = @('hmasd-workflow-cost-reviewer.toml', 'hmasd-workflow-cost-reviewer', 'gpt-5.6-sol', 'xhigh', 'read-only')
     'HMASDExperimentOperator' = @('hmasd-experiment-operator.toml', 'hmasd-experiment-operator', 'gpt-5.6-luna', 'low', 'workspace-write')
 }
@@ -54,25 +54,6 @@ foreach ($required in @(
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
     'formal_compute_authority=user_only',
-    'active_unattended_grant_valid_iteration_limit=9',
-    'active_unattended_grant_permission_prompts=forbidden',
-    'valid_scientific_result_classes=success|failure|mixed|underpowered',
-    'valid_scientific_result_route=exact_archive_then_external_pro',
-    'external_pro_successor_adjudication=required_after_every_valid_result',
-    'project_manager_in_scope_successor_execution=automatic',
-    'out_of_scope_proposal_action=require_in_scope_alternative_without_execution_or_user_prompt',
-    'no_in_scope_successor_action=terminal_authorized_chain_closure',
-    'grant_balance_exhaustion_action=terminal_completion_without_user_prompt',
-    'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
-    'external_authority_expansion_action=defer_without_interrupting_available_in_scope_route',
-    'unfavorable_scientific_result_route=external_pro_adjudication',
-    'operational_recovery_owner=project_manager',
-    'operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization',
-    'operational_recovery_fixed_attempt_limit=none',
-    'operational_recovery_scientific_iteration_cost=zero',
-    'operational_recovery_scientific_disposition=none',
-    'operational_recovery_frozen_scientific_contract_mutation=forbidden',
-    'operational_recovery_scientific_outcome_selection=forbidden',
     'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'cross_task_routing=fixed_role_sessions_plus_pre_send_live_settings_probe',
     'cross_task_routing_skill=hmasd-cross-task-routing',
@@ -93,11 +74,21 @@ foreach ($required in @(
     'formal_compute_authority=user_only',
     'active_unattended_grant_valid_iteration_limit=9',
     'active_unattended_grant_permission_prompts=forbidden',
-    'valid_result_external_pro_adjudication=required',
-    'in_scope_successor_execution=automatic',
+    'valid_result_external_pro_adjudication=result_plus_portfolio_delta_required',
+    'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
+    'portfolio_adjudication_authority=external_pro',
+    'scheduled_resource_consuming_action_count=one',
+    'scheduled_action_scientific_uniqueness=false',
+    'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
+    'missing_scheduled_action_with_remaining_balance_and_possible_candidate=focused_external_pro_clarification',
+    'scheduled_action_execution=exact_designated_only',
+    'project_manager_portfolio_reorder_or_compression=forbidden',
     'out_of_scope_proposal_action=require_in_scope_alternative',
-    'no_in_scope_successor_action=terminal_authorized_chain_closure',
+    'portfolio_closure_condition=no_in_scope_executable_candidate_after_full_portfolio_consideration',
     'grant_balance_exhaustion_action=terminal_completion',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'scheduled_action_presence=CONTINUE_only',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
     'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
     'operational_recovery_reauthorization=not_required_per_attempt',
@@ -110,42 +101,37 @@ foreach ($required in @(
     'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
-    'CURRENT_WORK.md',
-    'PM receives one terminal',
-    'retry`, `resume` or `restart` operation without new per-attempt user',
-    'must not use recovery to select',
-    'Assignments already launched retain their assigned run identity')) {
+    'CURRENT_WORK.md')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
-    'Every mechanically valid success, failure, mixed or underpowered result',
-    'automatically follows that in-scope',
-    'never asks for',
-    'every result, including an',
-    'unfavorable one, is routed to Pro adjudication',
-    'requires the same review to',
-    'does not turn that rejection into a user',
-    'all nine valid iterations are',
-    'unavailable required credential,',
-    'defer them and continue an available in-scope',
-    'None is a prompt for permission')) {
-    if (-not $pm.Contains($required)) { throw "Project Manager unattended grant contract missing: $required" }
-}
-foreach ($required in @(
-    'active_grant_valid_result_adjudication=required',
+    'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
+    'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
+    'portfolio_adjudication_authority=exclusive',
+    'scheduled_resource_consuming_action_count=one',
+    'scheduled_action_scientific_uniqueness=false',
+    'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
+    'missing_scheduled_action_with_remaining_balance_and_possible_candidate_response=focused_clarification_required',
     'active_grant_out_of_scope_proposal=require_in_scope_alternative',
-    'active_grant_no_in_scope_successor=terminal_authorized_chain_closure',
-    'active_grant_user_permission_request=forbidden',
-    'valid success, failure, mixed or underpowered result',
-    'one exact in-scope successor action or terminal authorized-chain',
-    'remains unavailable after applicable automatic recovery')) {
+    'active_grant_closure_condition=no_in_scope_executable_candidate_after_full_portfolio_consideration',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'scheduled_action_presence=CONTINUE_only',
+    'valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remaining_balance|current_portfolio|algorithm_principles_section_3',
+    'active_grant_user_permission_request=forbidden')) {
     if (-not $pro.Contains($required)) { throw "External Pro unattended grant contract missing: $required" }
 }
+if ($pm.Contains('portfolio_adjudication_authority=project_manager')) {
+    throw 'Project Manager role claims scientific portfolio adjudication'
+}
 foreach ($required in @(
-    'do not stop for user',
-    'Archive every valid success, failure, mixed or',
-    'Complete after nine valid iterations',
-    'unrecoverable external technical impossibility')) {
+    'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
+    'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
+    'scheduled_action_presence=CONTINUE_only',
+    'missing_scheduled_action_clarification=remaining_balance_and_possible_candidate_only',
+    'operational_recovery=automatic_within_unchanged_authorized_boundary',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $agile.Contains($required)) { throw "Agile unattended grant contract missing: $required" }
 }
 foreach ($retired in @(

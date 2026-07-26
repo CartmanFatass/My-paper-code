@@ -59,25 +59,6 @@ external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
 external_review_operator_git_authority=none
 formal_compute_authority=user_only
-active_unattended_grant_valid_iteration_limit=9
-active_unattended_grant_permission_prompts=forbidden
-valid_scientific_result_classes=success|failure|mixed|underpowered
-valid_scientific_result_route=exact_archive_then_external_pro
-external_pro_successor_adjudication=required_after_every_valid_result
-project_manager_in_scope_successor_execution=automatic
-out_of_scope_proposal_action=require_in_scope_alternative_without_execution_or_user_prompt
-no_in_scope_successor_action=terminal_authorized_chain_closure
-grant_balance_exhaustion_action=terminal_completion_without_user_prompt
-early_termination_boundary=unrecoverable_external_technical_impossibility_only
-external_authority_expansion_action=defer_without_interrupting_available_in_scope_route
-unfavorable_scientific_result_route=external_pro_adjudication
-operational_recovery_owner=project_manager
-operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization
-operational_recovery_fixed_attempt_limit=none
-operational_recovery_scientific_iteration_cost=zero
-operational_recovery_scientific_disposition=none
-operational_recovery_frozen_scientific_contract_mutation=forbidden
-operational_recovery_scientific_outcome_selection=forbidden
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
@@ -89,43 +70,15 @@ project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 external_review_operator_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b
 ```
 
-The user permanently authorizes Workflow Design Manager and Project Manager to fetch and push accepted nonoverlapping path sets there. No other remote or egress is covered.
+The user permanently authorizes Workflow Design Manager and Project Manager to
+fetch and push accepted nonoverlapping path sets there; no other egress is covered.
 
 There is no Controller, persistent Monitor, dispatcher, semantic relay, role
-registry or global lease. Workflow Design Manager owns workflow design only. External
-Review Operator alone controls the browser and returns exact raw files to PM;
-`hmasd-pro-response-monitor` sees only its metadata sentinel. External Pro owns
-science; PM owns code and its mechanical runtime.
+registry or global lease. Workflow Design Manager owns workflow design only;
+External Review Operator owns the browser; `hmasd-pro-response-monitor` sees only metadata.
+External Pro owns science; PM owns code and its mechanical runtime.
 
-With the active user-authorized nine-valid-iteration grant, every valid success,
-failure, mixed or underpowered result is archived exactly and routed to External
-Pro. Pro returns the exact next in-scope scientific action, and PM automatically
-continues its design audit, implementation, code-science alignment, bounded
-preflight, formal execution, result review and successor sequence. No user
-question or permission prompt is issued inside the grant. The grant itself
-satisfies `formal_compute_authority=user_only`
-for each in-scope run within its remaining conclusion-bearing balance.
-
-An out-of-scope or over-balance Pro proposal is not executed and does not create
-a user question; the review must select an in-scope alternative. If none exists,
-PM closes the authorized research chain and reports terminal closure. Exhausting
-all nine valid conclusion-bearing iterations likewise completes and reports the
-grant without a permission question. Earlier termination is allowed only for a
-hard technical impossibility external to scientific choice after applicable
-automatic recovery cannot make progress. Repository-external destructive or
-egress expansion and any future grant are deferred; they cannot interrupt an
-available in-scope Pro-selected route. Workflow Manager is invoked only to
-change workflow design. Only the user creates or expands a future grant.
-
-Within an already user-authorized scientific boundary, PM may automatically
-retry, resume or restart a low-cost purely operational failure without new
-per-attempt authorization or a fixed attempt count. Recovery remains inside the
-original cumulative budget and cannot change the frozen scientific contract,
-estimator, source, seed law, thresholds, backend constraints, branch semantics
-or select among scientific outcomes. It costs zero scientific iterations,
-creates no scientific disposition and is not scientific abandonment. A launched
-assignment keeps its assigned run identity and semantics; this policy governs
-only later recovery decisions.
+The PM charter defines unattended execution and recovery; the agile Skill defines mechanics. Workflow Design Manager changes workflow only.
 
 ## Universal project constraints
 
@@ -151,15 +104,6 @@ handoff_document_write_trigger=explicit_user_request_only
 Generic Superpowers Skills are not executed. Use project-native Skills, keep
 active code small, and use Git as archive. Tests create no approval owner.
 
-Each mutating assignment owns an exact path set. Disjoint writers may work in
-parallel; overlapping writes are serialized. Native children never run Git.
-For an isolated code worktree, PM creates one machine-readable workspace ticket;
-the child resolves it before editing and never copies, guesses or substitutes
-an absolute path. PM verifies the same ticket after the child returns.
-Each role stages only its accepted owned paths, checks the staged path set
-and `git diff --cached --check`, then commits and pushes `aggressive`. Git commit
-plus exact path set is identity; hashes and handoff receipts are forbidden.
-
 ## Routed project mechanisms
 
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
@@ -180,7 +124,8 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
 
-No role reads every routed document. The active assignment or role charter names the smallest necessary subset.
+No role reads every routed document. The active assignment or role charter
+names the smallest necessary subset.
 ## Repository surfaces
 
 - Git-tracked code is implementation truth.
@@ -191,11 +136,3 @@ No role reads every routed document. The active assignment or role charter names
 - `docs/external-review/` holds exact external evidence.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
-
-Persistent Codex roles use only the fixed router session addresses. Immediately
-before every send they read the target session's live model and effort from
-read-only local Codex state and explicitly echo both in the visible tool call.
-Settings are never stored in Git, cached or placed in message payloads; dynamic
-session discovery remains forbidden, and session replacement requires an
-explicit user-directed workflow-design commit. Native children keep fixed
-profiles and one final return rather than session sends.

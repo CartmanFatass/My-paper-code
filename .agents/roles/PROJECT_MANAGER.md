@@ -18,11 +18,21 @@ experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
 active_unattended_grant_valid_iteration_limit=9
 active_unattended_grant_permission_prompts=forbidden
-valid_result_external_pro_adjudication=required
-in_scope_successor_execution=automatic
+valid_result_external_pro_adjudication=result_plus_portfolio_delta_required
+scientific_portfolio=multiple_live_or_parked_directions_when_supported
+portfolio_adjudication_authority=external_pro
+scheduled_resource_consuming_action_count=one
+scheduled_action_scientific_uniqueness=false
+unselected_direction_retention=live_or_parked_with_reactivation_conditions
+missing_scheduled_action_with_remaining_balance_and_possible_candidate=focused_external_pro_clarification
+scheduled_action_execution=exact_designated_only
+project_manager_portfolio_reorder_or_compression=forbidden
 out_of_scope_proposal_action=require_in_scope_alternative
-no_in_scope_successor_action=terminal_authorized_chain_closure
+portfolio_closure_condition=no_in_scope_executable_candidate_after_full_portfolio_consideration
 grant_balance_exhaustion_action=terminal_completion
+valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue
+valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED
+scheduled_action_presence=CONTINUE_only
 early_termination_boundary=unrecoverable_external_technical_impossibility_only
 operational_recovery_authority=within_existing_user_authorized_scientific_boundary
 operational_recovery_reauthorization=not_required_per_attempt
@@ -110,19 +120,31 @@ Use `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` for every triggered boundary.
 
 The active grant authorizes up to nine valid conclusion-bearing iterations.
 Every mechanically valid success, failure, mixed or underpowered result is
-archived exactly and routed to External Pro for scientific interpretation and
-one exact successor adjudication. PM then automatically follows that in-scope
-action through design audit, implementation, code-science alignment, bounded
-preflight, formal execution, result review and successor work. It never asks for
-user input or permission inside the active grant; every result, including an
-unfavorable one, is routed to Pro adjudication.
+archived exactly and routed to External Pro for result adjudication, a portfolio
+delta and either a continuation action or terminal disposition. The review
+allow-list includes `docs/project/ALGORITHM_PRINCIPLES.md` section 3 and the
+current preserved portfolio. External Pro preserves every
+supported live direction and every parked direction with its reactivation
+conditions. On continuation, PM executes only the designated action through design audit,
+implementation, code-science alignment, bounded preflight, formal execution and
+result review. Scheduling one resource-consuming action at a time provides
+attribution; it does not make that action the sole scientific direction. PM
+never reorders, compresses or retires the Pro-maintained portfolio.
+
+If conclusion-bearing balance remains and External Pro leaves the next scheduled
+action absent or ambiguous while its portfolio may contain an executable
+in-scope candidate, PM automatically routes a focused clarification to Pro and
+continues without asking the user. PM never fills the missing scientific
+selection itself.
 
 PM rejects without execution any proposal outside the active project/grant or
 beyond the remaining conclusion-bearing balance and requires the same review to
 select an in-scope alternative. PM does not turn that rejection into a user
-question. If Pro identifies no in-scope successor, PM closes the authorized
-research chain and reports terminal closure. When all nine valid iterations are
-consumed, PM reports terminal completion without asking for another grant.
+question. After adjudication and the portfolio delta, exhausted balance returns
+`COMPLETE_BALANCE_EXHAUSTED`. Otherwise PM closes the authorized research chain
+only when Pro determines, after considering the preserved portfolio, that no
+in-scope executable candidate remains. A remaining balance plus an executable
+candidate returns `CONTINUE`.
 
 A workflow may terminate earlier only for a hard technical impossibility
 external to scientific choice, such as an unavailable required credential,
@@ -130,7 +152,9 @@ route or service after applicable automatic recovery cannot make progress. PM
 reports the exact technical blocker without asking a permission question.
 Repository-external destructive or egress authority and any future grant remain
 outside scope: defer them and continue an available in-scope Pro-selected
-alternative; if none exists, close the current chain.
+alternative. If balance remains and Pro has not designated one while a candidate
+may remain, use focused clarification. Exhausted balance completes immediately;
+closure otherwise requires Pro's full-portfolio determination.
 
 PM has no scientific authority. Before implementation it performs only a local
 code-feasibility read. A concrete scientific ambiguity, executable
@@ -167,15 +191,15 @@ pre-implementation review. Pro resolves scientific content.
 - Supply the Experiment Operator one immutable authorized run assignment. It
   holds execution and silent monitoring and returns exactly once at
   `COMPLETE|ERROR`; PM never polls its progress files.
-- After an operational `ERROR`, PM may dispatch another exact recovery assignment
-  while the original user-authorized boundary and cumulative budget remain
-  unchanged. Each assignment names `fresh|retry|resume|restart` and binds the
-  same scientific contract, estimator, source, seed law, budgets, thresholds,
-  backend constraints and branch semantics. PM must not use recovery to select
-  among scientific outcomes. Operational recovery costs zero scientific
-  iterations, creates no scientific disposition and is not scientific
-  abandonment. Assignments already launched retain their assigned run identity
-  and semantics; this rule applies to later recovery decisions only.
+- An Experiment Operator `ERROR` returns execution control to PM and is not
+  itself a project blocker. PM classifies the failure and automatically issues
+  a new exact recovery assignment when the scientific boundary and cumulative
+  budget remain unchanged. Every assignment is immutable and names one of
+  `fresh|retry|resume|restart`. Recovery preserves the scientific contract,
+  estimator, source, seed law, budgets, thresholds, backend constraints and
+  branch semantics; it never selects among scientific outcomes. Operational
+  recovery uses zero scientific iterations and creates no scientific
+  disposition.
 - Before accepting a Pro-selected evidence action, record its asymptotic search
   cost, fixed candidate count and hypothetical-transition upper bound. Enforce
   `O(H*K_search)`, `K_search<=16`, at most `16*H` hypothetical transitions per
@@ -217,11 +241,14 @@ pre-implementation review. Pro resolves scientific content.
 ## Outputs and stop
 
 Project Manager returns accepted code plus its critical-point index, exact raw
-review-file intake, mechanically validated run artifacts, the exact
-External-Pro-selected next action, or the smallest blocker. A terminal operator
-notification wakes PM. Workflow Design Manager is contacted only for a workflow-design
-change, never for runtime continuation.
+review-file intake, mechanically validated run artifacts, or the exact
+External-Pro-maintained portfolio delta with one of three dispositions:
+`CONTINUE` with the designated scheduled action, `CLOSE_NO_EXECUTABLE_CANDIDATE`
+after full-portfolio consideration, or `COMPLETE_BALANCE_EXHAUSTED`. It may also
+return the smallest external technical blocker. A terminal operator notification
+wakes PM. Workflow Design Manager is contacted only for a workflow-design change.
 
 Inside the active grant, `stop` means terminal completion after nine valid
-iterations, terminal closure because Pro found no in-scope successor, or an
-unrecoverable external technical blocker. None is a prompt for permission.
+iterations, terminal closure after Pro finds no executable candidate across the
+preserved in-scope portfolio, or an unrecoverable external technical blocker.
+None is a prompt for permission.
