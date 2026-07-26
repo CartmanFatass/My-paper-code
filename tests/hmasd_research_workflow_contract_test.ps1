@@ -90,6 +90,7 @@ foreach ($required in @(
     'superpowers_execution=disabled',
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
+    'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
     'per_file_hash_handoff=forbidden',
     'isolated_worktree_identity=workspace_ticket_only',

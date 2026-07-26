@@ -51,6 +51,7 @@ foreach ($required in @(
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_external_review_dispatch_and_result_routing=exclusive',
     'project_manager_experiment_dispatch_and_result_routing=exclusive',
+    'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'cross_task_routing=probe_confirmed_session_plus_conversation_local_cache',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_model_thinking_override=omitted',

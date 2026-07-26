@@ -85,6 +85,7 @@ or compute authority.
 ```text
 development_mode=agile_algorithm_research
 project_development_skill=hmasd-agile-research-development
+hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 workflow_change_skill=hmasd-workflow-change-audit
 superpowers_plugin=reference_only
 superpowers_execution=disabled
