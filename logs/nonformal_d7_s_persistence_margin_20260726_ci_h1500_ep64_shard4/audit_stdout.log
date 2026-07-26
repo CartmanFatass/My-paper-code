@@ -1,0 +1,191 @@
+D7_S_BRANCH=SOURCE_NECESSITY_UNRESOLVED
+D7_S_REASON=at least one margin did not clear its threshold under these constructive controls
+{
+  "branch": "SOURCE_NECESSITY_UNRESOLVED",
+  "reason": "at least one margin did not clear its threshold under these constructive controls",
+  "horizon": 1500,
+  "energy_stage": "S3",
+  "stage_note": "S1 disables battery_enabled and charging_enabled, so the energy dynamics that create roster change are inert there; S2/S3/S4 enable them",
+  "check_every": 10,
+  "episodes": 8,
+  "seed": 3229032,
+  "episode_seed_base": 3329032,
+  "topology_seed": 20260725,
+  "initial_energies": [
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9
+  ],
+  "n_relay": 2,
+  "n_service": 6,
+  "n_uavs": 8,
+  "n_users": 30,
+  "focal_stable_uav": 0,
+  "focal_flex_uav": 2,
+  "external_return": "unclipped mean rate / qos_target, summed over the window; the clipped form was vacuous, see qos_ratio",
+  "probe_qos_saturation_fraction": 1.0,
+  "arms_all_equal": false,
+  "driven_via": "env.step",
+  "energy_diagnostics": {
+    "constructive": {
+      "charge_steps": 801.0,
+      "dock_events": 34.5,
+      "min_final_battery": 0.2462971768060368,
+      "mean_final_battery": 0.37629716585928397
+    },
+    "null": {
+      "charge_steps": 544.875,
+      "dock_events": 3.0,
+      "min_final_battery": 0.26101668558999613,
+      "mean_final_battery": 0.3963165788108072
+    },
+    "keep_stable": {
+      "charge_steps": 793.0,
+      "dock_events": 34.5,
+      "min_final_battery": 0.2462971768060368,
+      "mean_final_battery": 0.37579016026434026
+    },
+    "set_stable": {
+      "charge_steps": 788.75,
+      "dock_events": 31.25,
+      "min_final_battery": 0.2386394353231131,
+      "mean_final_battery": 0.35836279185717757
+    },
+    "keep_flex": {
+      "charge_steps": 801.0,
+      "dock_events": 19.125,
+      "min_final_battery": 0.24165740634890817,
+      "mean_final_battery": 0.38743460162970983
+    },
+    "set_flex": {
+      "charge_steps": 801.0,
+      "dock_events": 34.5,
+      "min_final_battery": 0.2462971768060368,
+      "mean_final_battery": 0.37629716585928397
+    }
+  },
+  "arm_means": {
+    "constructive": 1944.4128689071526,
+    "null": 1952.5536845386637,
+    "keep_stable": 1935.957646744875,
+    "set_stable": 1862.3777105463041,
+    "keep_flex": 1982.3585067895872,
+    "set_flex": 1944.4128689071526
+  },
+  "b_h": -8.140815631511032,
+  "u_star_stable_src": -73.57993619857098,
+  "u_star_flex_src": -37.94563788243454,
+  "normalized": {
+    "stable": 9.038398549865411,
+    "flex": 4.661159225318481
+  },
+  "intervals": {
+    "b_h": {
+      "point": -8.140815631511146,
+      "lo": -95.17661939295763,
+      "hi": 92.53450474836151,
+      "episodes": 8
+    },
+    "u_star_stable_src": {
+      "point": -73.57993619857098,
+      "lo": -146.2554978125494,
+      "hi": -14.964932693429802,
+      "episodes": 8
+    },
+    "u_star_flex_src": {
+      "point": -37.94563788243457,
+      "lo": -75.27037283283747,
+      "hi": -8.763706609146753,
+      "episodes": 8
+    },
+    "normalized_stable": {
+      "point": 9.038398549865285,
+      "lo": -25.016234433160854,
+      "hi": 27.51376353952677,
+      "episodes": 8,
+      "ratio_sign_stable": false,
+      "resamples_with_unusable_denominator": 0
+    },
+    "normalized_flex": {
+      "point": 4.6611592253184195,
+      "lo": -11.438857799301537,
+      "hi": 13.889054904356636,
+      "episodes": 8,
+      "ratio_sign_stable": false,
+      "resamples_with_unusable_denominator": 0
+    }
+  },
+  "intervals_note": "95% percentile bootstrap over EPISODES, the independent unit; arms are CRN-paired within an episode. Diagnostic only -- the branch below is decided on point estimates, as the contract froze it. A normalized interval whose ratio_sign_stable is false is meaningless however narrow: the denominator changed sign across resamples.",
+  "per_episode": {
+    "constructive": [
+      1694.9693155215764,
+      1940.2878205190264,
+      2184.771972604049,
+      2296.321641060472,
+      2077.916296388317,
+      1296.3843219639698,
+      2118.0199173085207,
+      1946.631665891289
+    ],
+    "null": [
+      1806.6549096985507,
+      1977.5874379086342,
+      2207.79644314295,
+      2272.199554765405,
+      1799.6152629088328,
+      1519.868440516506,
+      2102.214607910077,
+      1934.492819458353
+    ],
+    "keep_stable": [
+      1797.4523425597242,
+      1941.7174508490057,
+      2136.3498279113874,
+      2210.4747013065867,
+      2082.622630650923,
+      1282.4956104669916,
+      2116.90571697432,
+      1919.642893240061
+    ],
+    "set_stable": [
+      1516.3999487089914,
+      1806.293987359378,
+      2159.333775867913,
+      2222.0889089640173,
+      2078.9243535487876,
+      1264.0462228441454,
+      1999.2119660659284,
+      1852.7225210112706
+    ],
+    "keep_flex": [
+      1848.1803660622802,
+      1985.955203472646,
+      2166.0457665693198,
+      2328.6074205852615,
+      2127.448731329225,
+      1296.3894314765696,
+      2121.2331076723754,
+      1985.008027149019
+    ],
+    "set_flex": [
+      1694.9693155215764,
+      1940.2878205190264,
+      2184.771972604049,
+      2296.321641060472,
+      2077.916296388317,
+      1296.3843219639698,
+      2118.0199173085207,
+      1946.631665891289
+    ]
+  },
+  "thresholds": {
+    "stable_ceiling": -0.1,
+    "flex_floor": 0.1
+  },
+  "contract": "docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md"
+}
