@@ -303,8 +303,16 @@ def run_arm_stepped(env, *, seed: int, horizon: int, check_every: int, arm: str,
         env.step(actions)
         total += qos_ratio(env)
 
+        # .copy() is load-bearing. `uav_charging` is already a bool ndarray
+        # (scenario7:157) that `step` mutates IN PLACE (scenario7:1698,1747), and
+        # np.asarray on a matching dtype returns that same object -- so retaining
+        # it as `was_charging` aliased the live buffer, made the rising-edge test
+        # `now & ~was` identically False, and pinned dock_events to exactly 0 in
+        # every arm of every run. charge_steps was unaffected and stayed valid.
+        # The environment itself copies for precisely this reason (:1694, :1761).
         now_charging = np.asarray(getattr(env, "uav_charging",
-                                          np.zeros(env.n_uavs, bool)), dtype=bool)
+                                          np.zeros(env.n_uavs, bool)),
+                                  dtype=bool).copy()
         charge_steps += int(np.sum(now_charging))
         dock_events += int(np.sum(now_charging & ~was_charging))
         was_charging = now_charging
