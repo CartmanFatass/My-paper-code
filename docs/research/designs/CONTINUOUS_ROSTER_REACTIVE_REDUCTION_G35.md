@@ -10,7 +10,7 @@ implementation_authority=project_manager
 implementation_status=pm_technically_accepted_alignment_correction
 implementation_code_commit=f626dfd8a345ef670e08e601344b67e28ffb3563
 superseded_implementation_code_commit=42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56
-formal_compute_status=not_started
+formal_compute_status=complete_operational_valid_pending_external_pro_scientific_disposition
 ```
 
 ## Frozen contract
@@ -106,5 +106,7 @@ G19-through-G35 shared regression. Its single corrected bounded nonformal
 exercise completed in 97.21 seconds with `operational_valid=true`; PM
 independently revalidated all three artifacts and recomputed the conservative
 formal projection as 3,873.24 seconds, below the 28,800-second cap. PM
-technically accepts the correction. Formal compute remains prohibited until
-the one correction-only alignment recheck returns `ALIGNED`.
+technically accepts the correction. The one correction-only alignment recheck
+returned `ALIGNED`; the authorized formal CPU run then completed once with an
+operationally valid registered branch. Scientific interpretation remains
+pending External Pro.
