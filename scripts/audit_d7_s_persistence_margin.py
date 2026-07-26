@@ -568,6 +568,15 @@ def main() -> None:
                        "S2/S3/S4 enable them"),
         "check_every": int(args.check_every),
         "episodes": episodes,
+        # Provenance echo, so sharded runs can be pooled with the identity
+        # assertions airtight instead of trusted from filenames. Episodes are
+        # seeded seed+100000+i, so shards whose seeds tile a contiguous block
+        # reproduce exactly the episode set of one monolithic run.
+        "seed": int(args.seed),
+        "episode_seed_base": int(args.seed) + 100000,
+        "topology_seed": int(args.topology_seed),
+        "initial_energies": ([float(x) for x in initial_energies]
+                             if initial_energies is not None else None),
         "n_relay": n_relay,
         "n_service": n_service,
         "n_uavs": int(env.n_uavs),
