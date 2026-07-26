@@ -22,6 +22,7 @@ foreach ($required in @(
     'model_reasoning_effort = "low"',
     'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
+    'active Workflow Manager',
     'exactly one already-authorized run',
     'Monitoring is silent',
     'Do not emit commentary, progress updates, ETA messages',
@@ -37,6 +38,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',
+    'parent=workflow_manager',
     'model=gpt-5.6-luna',
     'reasoning_effort=low',
     'progress_notifications=forbidden',

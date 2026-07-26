@@ -7,42 +7,50 @@ project_history_in_router=forbidden
 role_specific_procedure_in_router=forbidden
 ```
 
-Every HMASD task in this workspace automatically receives this file. Keep it
-small: it identifies the active role, points to the minimum required documents,
-and states only boundaries shared by every role. Scientific history, current
-results, experiment budgets, browser mechanics and implementation details live
-elsewhere and are loaded only when an assignment names them.
+Every HMASD task receives this small router. It identifies the active role,
+minimum required documents and shared boundaries. Scientific history, results,
+budgets, browser mechanics and implementation details load only when assigned.
 
 ## Precedence and role resolution
 
 Precedence is: direct user instruction, this router, the applicable role
-charter, `docs/project/CURRENT_WORK.md` for Project Manager only, the named
+charter, `docs/project/CURRENT_WORK.md` for Workflow Manager only, the named
 scientific/design contract, then procedural Skills.
 
 Use exactly one route:
 
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
-| root Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/PROJECT_MANAGER.md`, then only the current boundary's named design/review/plan | completed rounds, historical reports, unrelated roles |
+| dedicated Workflow Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/WORKFLOW_MANAGER.md`, then only the active boundary's named workflow/review/plan | implementation files, completed rounds, unrelated roles |
+| Project Manager task | its exact Workflow-Manager assignment, `.agents/roles/PROJECT_MANAGER.md`, then only assignment-named scientific contract, code and tests | `CURRENT_WORK.md`, workflow history, transport mechanics, unrelated roles |
 | dedicated External Review Operator task | its exact inter-task assignment, `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-review-round/SKILL.md`, then only assignment-named round files | `CURRENT_WORK.md`, project history, scientific interpretation, implementation files outside the review allow-list |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, PM history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 
-A child never reconstructs task history. If its assignment omits a required
-identity, path, authority or completion condition, it fails closed instead of
-searching project state for one.
+A child never reconstructs task history. A missing identity, path, authority or
+completion condition fails closed instead of triggering a project-state search.
 
 ## Universal authority boundary
 
 ```text
+workflow_manager_persistent_task=one
+workflow_manager_project_coordination_authority=exclusive
+workflow_manager_workflow_authority=exclusive
+workflow_manager_scientific_authority=none
+workflow_manager_code_acceptance_authority=none
+workflow_manager_git_authority=direct_for_workflow_review_and_state
+workflow_manager_remote_repository_authority=permanent_user_grant
+workflow_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
+workflow_manager_external_review_dispatch_and_result_routing=exclusive
+workflow_manager_experiment_dispatch_and_result_routing=exclusive
 project_manager_persistent_task=one
-project_manager_project_authority=exclusive
+project_manager_code_authority=exclusive
 project_manager_scientific_authority=none
 project_manager_technical_acceptance_authority=exclusive
-project_manager_git_authority=direct
+project_manager_git_authority=direct_for_code_and_engineering_evidence
 project_manager_remote_repository_authority=permanent_user_grant
 project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-project_manager_external_review_transport=question_dispatch_and_result_intake_only
+project_manager_external_review_authority=post_implementation_code_index_and_repair_only
 external_review_operator_transport_authority=exclusive
 external_review_operator_scientific_authority=none
 external_review_operator_code_acceptance_authority=none
@@ -53,26 +61,18 @@ native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
 ```
 
-The user permanently authorizes Project Manager to fetch and push accepted HMASD work to that exact repository without another per-operation prompt; this grant does not cover any other remote, repository or non-Git egress.
+The user permanently authorizes Workflow Manager and Project Manager to fetch and
+push accepted nonoverlapping paths there. No other remote or egress is covered.
 
-There is no Controller, persistent project Monitor, dispatcher, relay chain, role-session registry or global write lease. One dedicated persistent External
-Review Operator is the mechanical browser boundary: PM sends it an exact pushed
-question assignment and receives its exact-raw completion notification. One registered nonpersistent
-`hmasd-pro-response-monitor` is the explicit exception for silently observing
-the metadata-only External-Review-Operator broker for a single already-submitted long Pro turn; it
-owns no browser, transport or science.
-External Pro owns scientific
-designs, result interpretation, CDC changes and scientific successor choice
-inside the user-authorized review boundary. Project Manager owns code,
-engineering acceptance and mechanical realization; it does not adopt, reject
-or reinterpret science. A child reports evidence but accepts nothing.
+There is no Controller, persistent Monitor, dispatcher, semantic relay, role
+registry or global lease. Workflow Manager owns the control plane. External
+Review Operator alone controls the browser and returns raw to Workflow Manager;
+`hmasd-pro-response-monitor` sees only its metadata sentinel. External Pro owns
+science, PM owns code, and Workflow Manager never paraphrases either side.
 
-When `CURRENT_WORK.md` records an active autonomous grant, Project Manager
-continues every in-scope code/experiment action, dispatches exact review
-packages to the registered External Review Operator, and realizes every exact
-External-Pro-selected successor without asking again. If science is not yet
-decided, PM opens the smallest Pro review rather than choosing locally. Only
-the user may expand protected scientific scope or formal-compute authority.
+With an active grant, Workflow Manager coordinates the Pro-selected sequence,
+assigns bounded PM code, dispatches reviews and authorized runs, and records
+state. PM accepts code only; only the user expands science or compute authority.
 
 ## Universal project constraints
 
@@ -94,27 +94,25 @@ disjoint_file_parallelism=allowed
 isolated_worktree_identity=workspace_ticket_only
 handoff_document_write_trigger=explicit_user_request_only
 ```
-Generic Superpowers Skills are not executed in HMASD. Use the project-native
-Skills only when their mechanics apply. Keep active code small; Git history is
-the archive. Tests protect the exact claim or operational invariant and do not
-create another approval owner.
+Generic Superpowers Skills are not executed. Use project-native Skills, keep
+active code small, and use Git as archive. Tests create no approval owner.
 
 Each mutating assignment owns an exact path set. Disjoint writers may work in
 parallel; overlapping writes are serialized. Native children never run Git.
-For an isolated worktree, PM creates one machine-readable workspace ticket;
+For an isolated code worktree, PM creates one machine-readable workspace ticket;
 the child resolves it before editing and never copies, guesses or substitutes
 an absolute path. PM verifies the same ticket after the child returns.
-Project Manager stages accepted paths, checks the staged path set and
-`git diff --cached --check`, then commits and pushes `aggressive`. Git commit
-plus exact path set is code identity; per-file hashes and handoff receipts are
-forbidden.
+Each authority stages only its accepted owned paths, checks the staged path set
+and `git diff --cached --check`, then commits and pushes `aggressive`. Git commit
+plus exact path set is identity; hashes and handoff receipts are forbidden.
 
 ## Routed project mechanisms
 
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
-- PM authority and automatic research loop: `.agents/roles/PROJECT_MANAGER.md`.
+- Workflow coordination and automatic research loop: `.agents/roles/WORKFLOW_MANAGER.md`.
+- PM code authority and engineering loop: `.agents/roles/PROJECT_MANAGER.md`.
 - Mechanical Pro transport and callback: `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - Silent long-Pro-turn observation: `.agents/roles/PRO_RESPONSE_MONITOR.md`.
@@ -133,7 +131,7 @@ names the smallest necessary subset.
 
 - Git-tracked code is implementation truth.
 - `logs/<run-id>/` is runtime evidence.
-- `docs/project/CURRENT_WORK.md` is PM-only active state, not child bootstrap.
+- `docs/project/CURRENT_WORK.md` is Workflow-Manager-only active state, not PM or child bootstrap.
 - `docs/project/` holds stable project principles and executable plans.
 - `docs/research/cdc/` holds durable scientific state.
 - `docs/external-review/` holds exact external evidence.

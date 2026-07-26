@@ -4,7 +4,7 @@
 role=workflow_cost_reviewer
 callable_agent_type=hmasd-workflow-cost-reviewer
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=workflow_manager
 model=gpt-5.6-sol
 reasoning_effort=xhigh
 fork_turns=none_required
@@ -33,4 +33,4 @@ Remain read-only. Do not edit, use Git, run scientific/nonformal/formal compute,
 contact External Pro, spawn children, invoke Skills or accept anything. Return
 exactly `COST_AUDIT_ACCEPT` or `COST_AUDIT_REJECT`, with concrete path/phrase
 findings, residual cost risks and the smallest repair. The return is evidence
-for PM, never another acceptance owner.
+for Workflow Manager, never another acceptance owner.

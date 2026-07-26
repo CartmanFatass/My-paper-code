@@ -4,12 +4,15 @@
 purpose=prevent_wrong_scientific_assertions
 scientific_acceptance_owner=external_pro
 code_acceptance_owner=project_manager
+workflow_owner=workflow_manager
 external_scientific_authority=exclusive_within_user_goal_and_review_boundary
 audit_model=two_stage_triggered
 review_stack=false
 backward_compatibility=false
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 code_science_audit_mode=contract_diff_only
+code_science_audit_position=after_pm_implementation_acceptance
+routine_preimplementation_code_science_review=forbidden
 code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 new_algorithm_design_during_code_audit=forbidden
 new_evidence_search_during_code_audit=forbidden
@@ -21,7 +24,7 @@ inspect different objects and do not duplicate acceptance: Pro accepts the
 scientific contract and its code-science correspondence, while PM accepts
 implementation correctness and operability.
 
-Each stage must pass the PM workflow value test: name the false scientific
+Each stage must pass the Workflow-Manager value test: name the false scientific
 assertion it can prevent and confirm that its complete packaging, waiting,
 repair and compute cost is smaller than the implementation or experiment waste
 it avoids. When a direct proof-sized diagnostic is cheaper and preserves the
@@ -48,7 +51,9 @@ that stage.
 
 ## Stage A: design assertion audit
 
-Project Manager first tries to falsify the draft without training:
+Workflow Manager packages the exact user goal, prior binding evidence and code
+constraints without choosing science. The design question requires External Pro
+to close these points without training:
 
 1. Evaluate every learning signal at the forced initial state and establish a
    live gradient path for every claimed trainable component.
@@ -73,24 +78,26 @@ Project Manager first tries to falsify the draft without training:
    per controller episode. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`,
    not a scientific result.
 
-Then Project Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
+Then Workflow Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
 the draft design, current scientific principles, relevant evidence and exact
 repository paths. Ask Pro to seek counterexamples and missing decisions, not to
 confirm the plan. Pro freezes the scientific distinction and required
 properties; PM owns the cheapest bounded controller, witness, diagnostic and
 other implementation realization inside
-`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. PM archives the raw answer and
-implements its exact scientific disposition. PM may ask a focused clarification
-or report a code-side
-infeasibility, but it cannot select among scientifically different answers.
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Workflow Manager archives and
+routes the exact raw; PM implements the frozen disposition. PM may report one
+focused code-side ambiguity or infeasibility to Workflow Manager, but neither
+role may select among scientifically different answers.
 Final freeze occurs only after Pro resolves or explicitly scopes out the
 scientific defects.
 
-Before implementation starts, PM performs an alignment read from the code side.
+Before implementation starts, PM performs only a local feasibility read from
+the code side; this is not an external review.
 If the Pro disposition is ambiguous in code, structurally unreachable,
 internally inconsistent with the named implementation surface, or contradicted
-by a concrete code-level counterexample, PM sends one
-`IMPLEMENTATION_ALIGNMENT_CLARIFICATION` in the same review lineage. State the
+by a concrete code-level counterexample, PM sends one exact objection to
+Workflow Manager. It may route an `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` in
+the same review lineage. State the
 exact objection and the one scientific invariant that needs clarification; do
 not ask Pro to design a solver or evidence search and do not select a scientific
 option locally. Pro clarifies or corrects the scientific disposition. A real
@@ -101,15 +108,19 @@ require a separate internal reviewer, approval file or checklist artifact.
 
 ## Stage B: code-science alignment audit
 
-After PM implementation acceptance:
+After PM implementation acceptance, Workflow Manager routes the one existing
+code-science audit:
 
 1. Run the proof-sized focused checks and one bounded exercise when a
    runner/analyzer path is material.
-2. Push one exact commit containing the design and implementation.
-3. Author a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming the reviewed design,
-   implementation, runner/analyzer, focused evidence and the exact diff/base
-   boundary. Instruct Pro to read those paths directly from the remote commit.
-4. Ask only whether the code instantiates the scientific contract, whether a
+2. PM pushes one exact commit containing the design, implementation and a
+   `CODE_SCIENCE_INDEX.md`.
+3. Require each index row to be
+   `claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded`.
+4. Workflow Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
+   that exact commit and index. The index is navigation, not a substitute for
+   reading the named code.
+5. Ask only whether the code instantiates the scientific contract, whether a
    test/probe could pass through the wrong mechanism, and whether an alternate
    implementation explanation could change the registered conclusion.
 
@@ -131,7 +142,8 @@ never resubmitted and there is no review of the review.
 
 ## Result intake
 
-Before scientific interpretation, PM mechanically checks in this order:
+Before scientific interpretation, Workflow Manager gives PM the exact artifact
+paths. PM mechanically checks in this order:
 
 1. artifact/source/runtime closure and operational validity;
 2. access and identifiability branches before behavioral branches;
@@ -140,7 +152,8 @@ Before scientific interpretation, PM mechanically checks in this order:
 4. exact budget/code/branch scope of any historical evidence invoked;
 5. exact registered first-match branch reproduction.
 
-PM then submits a `FORMAL_RESULT_SCIENTIFIC_DISPOSITION` boundary to Pro. Pro
+PM returns the exact mechanical validation to Workflow Manager, which submits a
+`FORMAL_RESULT_SCIENTIFIC_DISPOSITION` boundary to Pro. Pro
 owns the smallest unit retired, retained mechanisms/lemmas, CDC/portfolio
 change, excluded interpretations and next scientific action. The frozen
 registered branch is never rescued after observation. Pro may narrow future
@@ -166,8 +179,8 @@ must target bounded-neighborhood `O(N*k_neighbor)` or hierarchical
 `O(N*logN)`. Sparsifying or approximating the physical model changes science and
 therefore returns to Stage A instead of being hidden as a performance repair.
 
-An experiment operator terminal return or naturally completed Pro response
-wakes Project Manager. With an active grant, no live owned operation and no real
-authority blocker, PM either executes the exact Pro-selected action or opens the
-smallest missing Pro scientific decision; it never fills that decision locally
-or ends in an idle gap.
+An experiment-operator terminal return or naturally completed Pro response
+wakes Workflow Manager. With an active grant, no live owned operation and no
+real authority blocker, it routes the exact Pro-selected code action to PM or
+opens the smallest missing Pro scientific decision; neither role fills that
+decision locally or leaves an idle gap.

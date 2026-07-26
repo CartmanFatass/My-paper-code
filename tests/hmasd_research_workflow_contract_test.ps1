@@ -28,6 +28,7 @@ $expectedRoles = @(
     'PRO_RESPONSE_MONITOR.md',
     'REVIEWER.md',
     'VERIFIER.md',
+    'WORKFLOW_MANAGER.md',
     'WORKFLOW_COST_REVIEWER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
@@ -39,6 +40,7 @@ $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CO
 $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$workflowManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_MANAGER.md')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
 $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
@@ -54,14 +56,21 @@ foreach ($required in @(
     'document_kind=role_router',
     'all_workspace_agents_auto_load_this_file=true',
     'project_history_in_router=forbidden',
-    'root Project Manager',
+    'dedicated Workflow Manager task',
+    'Project Manager task',
     'registered native child',
-    'docs/project/CURRENT_WORK.md` is PM-only active state',
+    'docs/project/CURRENT_WORK.md` is Workflow-Manager-only active state',
+    'workflow_manager_project_coordination_authority=exclusive',
+    'workflow_manager_workflow_authority=exclusive',
+    'workflow_manager_git_authority=direct_for_workflow_review_and_state',
+    'workflow_manager_external_review_dispatch_and_result_routing=exclusive',
+    'workflow_manager_experiment_dispatch_and_result_routing=exclusive',
+    'project_manager_code_authority=exclusive',
     'project_manager_scientific_authority=none',
-    'project_manager_git_authority=direct',
+    'project_manager_git_authority=direct_for_code_and_engineering_evidence',
     'project_manager_remote_repository_authority=permanent_user_grant',
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
-    'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
+    'project_manager_external_review_authority=post_implementation_code_index_and_repair_only',
     'external_review_operator_transport_authority=exclusive',
     'External Review Operator task',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
@@ -91,12 +100,18 @@ foreach ($required in @(
     'git_integration_status=',
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
+    'workflow_manager_task=',
+    'workflow_manager_current_model=gpt-5.6-sol',
+    'workflow_manager_current_effort=high',
     'external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'external_review_operator_current_model=gpt-5.6-luna',
     'external_review_operator_current_effort=high',
     'project_manager_current_model=gpt-5.6-sol',
     'project_manager_current_effort=max',
     'cross_task_send_requires_explicit_model_effort=true',
+    'code_science_alignment_position=after_pm_implementation_acceptance',
+    'code_science_alignment_index=commit_bound_CODE_SCIENCE_INDEX_required',
+    'routine_preimplementation_code_science_review=forbidden',
     'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
     'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
     'workflow_hash_validation=disabled')) {
@@ -140,34 +155,49 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'root Project Manager directly stages, commits, and pushes',
+    'Project Manager directly stages, commits and pushes accepted code-owned paths',
+    'Workflow Manager separately stages, commits and pushes accepted workflow',
     'Native children never run Git',
     'fixed native child',
     'not a persistent task')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
 foreach ($required in @(
-    'docs/report/ITERATION_<n>.md',
-    'creates a second acceptance owner',
-    'blocks on separate approval',
+    'role_kind=sole_persistent_code_authority_task',
+    'project_code_authority=exclusive',
+    'workflow_authority=none',
     'scientific_authority=none',
+    'technical_acceptance_authority=exclusive',
+    'current_work_access=forbidden_by_default',
+    'assignment_source=workflow_manager_exact_assignment',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
-    'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
-    'alignment-objection right',
-    'workflow_step_admission=expected_avoided_cost_must_exceed_added_end_to_end_cost',
-    'alignment_review_mode=contract_diff_only',
-    'alignment_review_new_algorithm_design=forbidden',
-    'alignment_review_new_evidence_search=forbidden',
-    'alignment_review_compute_budget=zero',
-    'alignment_review_question_count=one',
-    'workflow_cost_unit=wall_clock_plus_compute_plus_engineering_churn',
-    'workflow_cost_audit_executor=hmasd-workflow-cost-reviewer',
-    'workflow_cost_audit_fork_turns=none',
-    'workflow_cost_audit_trigger=new_or_expanded_workflow_step_only',
-    'workflow_cost_audit_acceptance_authority=none',
-    'review_of_review=forbidden')) {
+    'CODE_SCIENCE_INDEX.md',
+    'routine pre-implementation',
+    'experiment_orchestration=none')) {
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'role=workflow_manager',
+    'role_kind=sole_persistent_workflow_authority_task',
+    'model=gpt-5.6-sol',
+    'reasoning_effort=high',
+    'project_coordination_authority=exclusive',
+    'workflow_authority=exclusive',
+    'workflow_acceptance_authority=exclusive',
+    'scientific_authority=none',
+    'code_authority=none',
+    'code_acceptance_authority=none',
+    'current_work_owner=exclusive',
+    'external_review_dispatch_and_result_routing=exclusive',
+    'experiment_dispatch_and_result_routing=exclusive',
+    'routine_preimplementation_code_science_review=forbidden',
+    'code_science_alignment_audit=once_after_pm_implementation_acceptance',
+    'code_science_alignment_compute_budget=zero',
+    'CODE_SCIENCE_INDEX.md',
+    'hmasd-workflow-cost-reviewer',
+    'handoff_document_write_trigger=explicit_user_request_only')) {
+    if (-not $workflowManagerRole.Contains($required)) { throw "Workflow Manager role missing: $required" }
 }
 foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
@@ -185,6 +215,7 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-workflow-cost-reviewer',
+    'parent=workflow_manager',
     'model=gpt-5.6-sol',
     'reasoning_effort=xhigh',
     'fork_turns=none_required',
@@ -200,13 +231,14 @@ foreach ($required in @(
     'git_authority=none',
     'answer_now_activation=forbidden',
     'completion_notification=required_once',
+    'Workflow Manager',
     'target model and effort explicitly passed')) {
     if (-not $reviewOperatorRole.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }
 }
-if (-not $pmRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
-    throw 'Project Manager role permits automatic handoff writing'
+if (-not $workflowManagerRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
+    throw 'Workflow Manager role permits automatic handoff writing'
 }
 foreach ($required in @(
     'write_trigger=explicit_user_request_only',
@@ -222,6 +254,8 @@ foreach ($required in @(
     'Project Manager integrates the exact accepted',
     'no relay or completion receipt exists',
     'External Pro owns',
+    'Workflow Manager routes the one existing comparison-only',
+    'commit-bound critical-point index',
     'CODE_SCIENCE_ALIGNMENT_AUDIT')) {
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
 }
@@ -233,6 +267,8 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
+    'Workflow Manager control-plane procedure',
+    'Workflow Manager alone accepts workflow',
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
@@ -246,7 +282,7 @@ foreach ($required in @(
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
-    'implementation counterexample',
+    'code counterexample',
     'code_science_audit_mode=contract_diff_only',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
@@ -262,11 +298,16 @@ foreach ($required in @(
 foreach ($required in @(
     'scientific_acceptance_owner=external_pro',
     'code_acceptance_owner=project_manager',
+    'workflow_owner=workflow_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction',
     'code_science_audit_mode=contract_diff_only',
+    'code_science_audit_position=after_pm_implementation_acceptance',
+    'routine_preimplementation_code_science_review=forbidden',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
+    'CODE_SCIENCE_INDEX.md',
+    'claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded',
     'new_algorithm_design_during_code_audit=forbidden',
     'new_evidence_search_during_code_audit=forbidden',
     'there is no review of the review')) {
@@ -304,7 +345,7 @@ if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELI
     throw 'Stale multi-review pipeline remains on the active line'
 }
 
-foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $reviewOperatorRole, $proRole, $assertion)) {
+foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $workflowManagerRole, $reviewOperatorRole, $proRole, $assertion)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

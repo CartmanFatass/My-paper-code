@@ -31,28 +31,49 @@ foreach ($entry in $profiles.GetEnumerator()) {
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_MANAGER.md')
 $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
 $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 foreach ($required in @(
-    'project_manager_project_authority=exclusive',
-    'project_manager_git_authority=direct',
+    'workflow_manager_persistent_task=one',
+    'workflow_manager_workflow_authority=exclusive',
+    'workflow_manager_git_authority=direct_for_workflow_review_and_state',
+    'workflow_manager_remote_repository_authority=permanent_user_grant',
+    'workflow_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
+    'project_manager_code_authority=exclusive',
+    'project_manager_git_authority=direct_for_code_and_engineering_evidence',
     'project_manager_remote_repository_authority=permanent_user_grant',
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
-    'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
+    'project_manager_external_review_authority=post_implementation_code_index_and_repair_only',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'role_kind=sole_persistent_project_authority_task',
-    'git_execution=direct',
-    'external_review_transport=question_dispatch_and_result_intake_only',
-    'external_review_operator=dedicated_persistent_task',
-    'experiment_orchestration=registered_native_child',
-    'hmasd-workflow-change-audit',
+    'role_kind=sole_persistent_code_authority_task',
+    'workflow_authority=none',
+    'git_execution=direct_for_code_and_engineering_evidence',
+    'external_review_authority=post_implementation_code_index_and_repair_only',
+    'experiment_orchestration=none',
+    'current_work_access=forbidden_by_default',
+    'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
-    'Spawn only registered native child profiles',
-    'Continue automatically within an active user grant')) {
+    'Never spawn the experiment operator',
+    'Workflow Manager owns continuation')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'role=workflow_manager',
+    'role_kind=sole_persistent_workflow_authority_task',
+    'model=gpt-5.6-sol',
+    'reasoning_effort=high',
+    'workflow_authority=exclusive',
+    'workflow_acceptance_authority=exclusive',
+    'code_acceptance_authority=none',
+    'current_work_owner=exclusive',
+    'code_science_alignment_audit=once_after_pm_implementation_acceptance',
+    'routine_preimplementation_code_science_review=forbidden',
+    'CODE_SCIENCE_INDEX.md')) {
+    if (-not $workflow.Contains($required)) { throw "Workflow Manager role missing: $required" }
 }
 foreach ($required in @(
     'role=external_review_operator',

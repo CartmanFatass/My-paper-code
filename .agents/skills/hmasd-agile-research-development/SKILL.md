@@ -38,9 +38,11 @@ A user-named one may be inspected only as reference.
 ## Operating loop
 
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
-   disposition and its design-audit status. PM may raise a code-side
-   `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`; do not fill scientific ambiguity
-   locally. Pure operational work records why the audit is not triggered.
+   disposition and its design-audit status. Before implementation PM performs
+   only a local feasibility read. It returns a concrete ambiguity,
+   impossibility or counterexample to Workflow Manager; there is no routine
+   pre-implementation Pro review. Pure operational work records why the audit
+   is not triggered.
 2. **Bound.** Use the brief and
    `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Manager defines code
    files, engineering choices, exclusions and completion inside the Pro-frozen
@@ -58,10 +60,12 @@ A user-named one may be inspected only as reference.
 6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
-   changed claim-bearing code, PM pushes the accepted implementation and routes
-   the exact commit to Pro's comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT`
-   before formal run. That audit may identify a concrete contract mismatch but
-   cannot design an algorithm, controller, solver or new evidence search.
+   changed claim-bearing code, PM writes the commit-bound critical-point index,
+   pushes the accepted implementation, and sends its exact identity to Workflow
+   Manager. Workflow Manager routes the one existing comparison-only
+   `CODE_SCIENCE_ALIGNMENT_AUDIT` after implementation acceptance and before a
+   formal run. The audit may identify a concrete contract mismatch but cannot
+   design an algorithm, controller, solver or new evidence search.
 
 On failure, reproduce once, locate the first violated invariant, add a regression
 only for plausible recurrence, repair, and rerun. Never weaken checks or retry blindly.
@@ -89,9 +93,9 @@ pairwise path. Any sparse or approximate physical model is a new scientific
 choice and requires its own design audit.
 
 Router, role, Skill, native-profile, registry and active workflow-contract
-changes first use `hmasd-workflow-change-audit` for impact classification and
-structural closure. This Skill remains the implementation loop for any source
-code inside that bounded change.
+changes belong to Workflow Manager under `hmasd-workflow-change-audit`. This
+Skill remains PM's implementation loop for any separately assigned source-code
+slice.
 
 ## Concurrency and review
 
@@ -105,8 +109,9 @@ code inside that bounded change.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
 - Subtasks close on evidence plus one fresh PM code check. The required Pro
-  code-science audit is a contract diff and owns scientific alignment, not code
-  acceptance or implementation design. Additional
+  code-science audit occurs once after PM implementation acceptance; it is a
+  contract diff and owns scientific alignment, not code acceptance or
+  implementation design. Additional
   code review is allowed only after a failed check or concrete engineering
   anomaly; it diagnoses repair and is not another approval layer.
 

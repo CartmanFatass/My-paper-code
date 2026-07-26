@@ -30,17 +30,17 @@ paths when scientific judgment depends on what the code actually implements.
 - `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`: interpretation of a mechanically
   valid registered result, CDC/portfolio change, smallest retired unit,
   retained lemmas and next scientific action.
-- Resolve a Project Manager `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` when code
-  structure, executable feasibility or a concrete implementation counterexample
-  conflicts with a prior scientific disposition. This is a focused continuation
-  of the same design boundary, not a new acceptance layer.
+- Resolve one Workflow-Manager-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
+  when PM reports a concrete scientific ambiguity, executable impossibility or
+  code counterexample. This exceptional clarification is not a routine review
+  of a pre-implementation PM plan.
 - Supply the smallest separating scientific distinction that fits the
   user-owned evidence-complexity policy. Project Manager, not External Pro,
   chooses the bounded controller, witness, diagnostic and code realization.
 
 ## May
 
-- Analyze the exact PM-packaged question and allow-list, inspect named remote
+- Analyze the exact Workflow-Manager-packaged question and allow-list, inspect named remote
   code directly, identify missing scientific choices or counterexamples, and
   return a binding in-boundary scientific disposition or request focused
   clarification.
@@ -69,9 +69,9 @@ paths when scientific judgment depends on what the code actually implements.
 
 ## Inputs
 
-- The exact Project Manager-authored question, evidence allow-list and package
-  submitted without rewriting by the dedicated External Review Operator, with
-  declared source and artifact identity.
+- The exact Workflow-Manager-authored question and allow-list submitted without
+  rewriting by the dedicated External Review Operator. A code-science audit
+  includes PM's exact commit-bound critical-point index and source identity.
 - The concurrency policy: no global write lease, disjoint-file parallelism allowed, same-file concurrent writes forbidden, and every mutating task must declare its owned files.
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`, including its agent-count
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
@@ -81,5 +81,5 @@ paths when scientific judgment depends on what the code actually implements.
 - An exact question-scoped scientific answer, or an explicit statement that the question cannot be answered from the permitted material.
 - Stop after the scoped scientific disposition or when required evidence is
   unavailable. The External Review Operator archives the answer exactly and
-  notifies PM; PM mechanically realizes it;
-  PM retains exclusive code acceptance and does not reinterpret the science.
+  notifies Workflow Manager, which routes the exact raw path. PM retains
+  exclusive code acceptance and does not reinterpret the science.

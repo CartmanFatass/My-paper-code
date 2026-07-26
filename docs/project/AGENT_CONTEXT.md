@@ -24,7 +24,9 @@ it as a role constitution or preload it into unrelated children.
 
 ## Git
 
-The root Project Manager directly stages, commits, and pushes accepted work.
+Project Manager directly stages, commits and pushes accepted code-owned paths.
+Workflow Manager separately stages, commits and pushes accepted workflow,
+review, active-state, report and ledger paths.
 Native children never run Git and leave their exact owned paths in the shared
 working tree. Git authority follows the applicable role charter; there is no
 Controller handoff, per-file hash exchange, or callback receipt.
@@ -50,8 +52,8 @@ Skills are reference-only and disabled for HMASD execution.
 
 For an ordinary code gap inside a Pro-frozen scientific brief, Project Manager
 takes the smallest reasonable implementation choice and keeps moving. A
-scientific ambiguity returns to External Pro; PM may raise an implementation
-alignment objection but cannot choose the scientific value.
+scientific ambiguity is reported to Workflow Manager, which alone routes the
+focused Pro clarification; PM cannot choose the scientific value.
 
 ## Protected semantics
 
@@ -67,6 +69,6 @@ and flag it rather than proceeding.
 ## Pointers
 
 - `docs/project/IMPLEMENTATION_PLAN.md` — the frozen executable contract.
-- `docs/project/CURRENT_WORK.md` — live state and binding constraints.
+- `docs/project/CURRENT_WORK.md` — Workflow-Manager-only live state and binding constraints.
 - `.agents/skills/hmasd-agile-research-development/SKILL.md` — project-native
   implementation and verification procedure.

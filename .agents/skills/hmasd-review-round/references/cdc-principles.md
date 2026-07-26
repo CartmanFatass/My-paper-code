@@ -29,8 +29,9 @@ Select a scheduled action by information gain, cost and reversibility, using
 this default order: derivation, counterexample, reanalysis of accepted evidence,
 constructive toy, bounded prototype, formal experiment. An action is a resource
 decision, not an epistemic declaration. Unscheduled ideas retain explicit
-reactivation conditions. The active Project Manager role contract determines
-who performs this selection.
+reactivation conditions. The active Workflow Manager and External Pro role
+contracts determine who performs this selection; Project Manager supplies only
+code-side feasibility and realization.
 
 Create an implementation assignment only when implementation is the cheapest
 necessary action and its required authority already exists. Role contracts,

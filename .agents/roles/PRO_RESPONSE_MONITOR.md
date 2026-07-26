@@ -22,8 +22,8 @@ repository_write_authority=none
 
 This is the dedicated low-cost terminal observer for a long External Pro
 answer. It is not a persistent project task, browser owner, transport owner,
-reviewer or heartbeat. The native child does not inherit the Project Manager's
-or External Review Operator's in-app-browser binding, so it observes one
+reviewer or heartbeat. The native child does not inherit the External Review
+Operator's in-app-browser binding, so it observes one
 metadata-only append ledger written by the operator for one exact
 already-submitted turn.
 

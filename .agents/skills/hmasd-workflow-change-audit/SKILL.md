@@ -7,11 +7,10 @@ description: Use when changing HMASD routers, role charters, procedural Skills, 
 
 ## Contract boundary
 
-This is a Project Manager control-plane procedure. It grants no scientific,
-formal-compute, external-review or child acceptance authority. External Pro
-continues to own science and Project Manager remains the only code and workflow
-acceptance owner. Generic planning, ticket, TDD and review-stack Skills remain
-disabled.
+This is a Workflow Manager control-plane procedure. It grants no scientific,
+formal-compute or code-acceptance authority. External Pro owns science, Project
+Manager owns code acceptance, and Workflow Manager alone accepts workflow.
+Generic planning, ticket, TDD and review-stack Skills remain disabled.
 
 Use this Skill when a mutation touches any of these coupled surfaces:
 
@@ -43,7 +42,7 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    pre-existing dirty changes outside the task.
    If any child uses an isolated worktree, create its identity and path scope
    with `scripts/hmasd_workspace_ticket.py`; pass only the ticket path, require
-   child-side `resolve`, and run PM-side `verify`. Never transcribe a UUID-heavy
+   child-side `resolve`, and run assigning-authority verification. Never transcribe a UUID-heavy
    worktree path into an assignment.
 3. **Probe.** Run the smallest existing contract that should expose the change.
    If it passes despite a known missing relation, add one negative regression
@@ -52,7 +51,8 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    profile names exactly one existing role charter. Every profile is registered
    exactly once; every role and Skill is routed. Remove superseded live paths
    instead of keeping compatibility aliases. Use
-   `hmasd-agile-research-development` for any source-code slice.
+   a separate exact PM assignment with `hmasd-agile-research-development` for
+   any source-code slice; Workflow Manager never edits source.
 5. **Verify closure.** Run the bundled checker, the affected focused contract
    tests and targeted negative searches from the impact matrix. Inspect the
    actual diff path set and `git diff --check`. The checker is structural; it
@@ -60,7 +60,7 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    If and only if the change adds or expands a workflow step, assign one
    registered `hmasd-workflow-cost-reviewer` with `fork_turns=none` to test that
    the avoided implementation/experiment cost exceeds total process cost. Its
-   return is evidence for PM, not a new acceptance owner or recurring gate.
+   return is evidence for Workflow Manager, not a new acceptance owner or recurring gate.
 6. **Reload smoke.** If router, registry or profiles changed, start a fresh
    Codex task before relying on discovery. Smoke every changed callable profile
    against its exact fail-closed boundary. Do not substitute a default child

@@ -15,11 +15,11 @@ answer_now_activation=forbidden
 completion_notification=required_once
 ```
 
-This task removes browser-control pressure from Project Manager without adding
+This task removes browser-control pressure from Workflow Manager without adding
 a scientific or engineering acceptance layer. It receives one exact pushed
 review assignment at a time, operates only the registered External Pro
 conversation, archives the naturally completed answer verbatim, and actively
-notifies the assigning Project Manager task.
+notifies the assigning Workflow Manager task.
 
 ## Bootstrap and assignment
 
@@ -34,11 +34,11 @@ Every assignment must state:
   paths;
 - registered reviewer conversation and freshness fence;
 - the exact two writable review paths;
-- assigning Project Manager task ID plus its live target model and effort;
+- assigning Workflow Manager task ID plus its live target model and effort;
 - this task's live model and effort; and
 - the terminal success or blocker payload.
 
-Missing or contradictory identity fails closed and is reported to PM without
+Missing or contradictory identity fails closed and is reported to Workflow Manager without
 browsing or editing.
 
 ## Owns
@@ -52,8 +52,8 @@ browsing or editing.
   exact stage commit.
 - Verbatim replacement of the assigned raw placeholder and mechanical facts in
   the assigned intake file. No other repository path may be written.
-- Exactly one inter-task terminal notification to Project Manager. The send
-  operation must explicitly set the assignment-provided PM target model and
+- Exactly one inter-task terminal notification to Workflow Manager. The send
+  operation must explicitly set the assignment-provided target model and
   effort; omission or substitution is a transport failure.
 
 ## Must not
@@ -63,13 +63,13 @@ browsing or editing.
 - Edit the question, brief, manifest, code, science docs, `CURRENT_WORK.md`,
   role files or Skills.
 - Run Git, experiments or formal/nonformal compute.
-- Send progress, ETA, heartbeat or intermediate response text to PM. Notify PM
+- Send progress, ETA, heartbeat or intermediate response text to Workflow Manager. Notify it
   only when exact raw delivery is complete or transport is terminally blocked.
 - Create another persistent task, transport relay or browser-owning child.
 
 ## Terminal delivery
 
-On success, send exactly one cross-task message to the assigned PM target with
+On success, send exactly one cross-task message to the assigned Workflow Manager target with
 the target model and effort explicitly passed in the tool call:
 
 ```text
@@ -88,6 +88,6 @@ blockers=none
 
 On exhausted transport failure, send the corresponding single
 `EXTERNAL_REVIEW_OPERATOR_BLOCKED` payload with direct error, recovery attempts,
-duplicate-submission risk and exact resume condition. PM then reads the exact
-raw or blocker and alone performs Git integration and scientific-disposition
-realization.
+duplicate-submission risk and exact resume condition. Workflow Manager then
+integrates the review paths and routes the exact raw path without interpreting
+science or code.
