@@ -7,7 +7,8 @@ source_id=CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_P0
 external_pro_disposition=IDENTIFIABLE_EMPIRICAL_REACTIVE_REDUCTION_G35_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=in_progress
+implementation_status=pm_technically_accepted
+implementation_code_commit=42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56
 formal_compute_status=not_started
 ```
 
@@ -48,6 +49,9 @@ by the matched cell, one G35 source module, one G35 runner, their two focused
 test files, this realization record, the later commit-bound code-science index
 and PM active state.
 
+The commit-bound critical-point mapping is
+`docs/research/designs/CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_INDEX.md`.
+
 ## Evidence and complexity inventory
 
 ```text
@@ -77,3 +81,13 @@ No implementation, test or exercise may alter an arm, source, seed, margin,
 confidence unit, evidence volume or terminal branch from the frozen response.
 After PM technical acceptance, the next scientific boundary is the single
 read-only `CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_ALIGNMENT_AUDIT`.
+
+## PM technical acceptance
+
+Implementation commit `42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56`
+passed 14 focused tests and 79 shared-surface tests. Its single bounded
+nonformal exercise completed in 56.45 seconds with the exact 28,032-transition,
+120-optimizer-step and 33-cell inventory, `operational_valid=true`, and no
+scientific branch. The frozen conservative formal projection is 2,275.28
+seconds, below the 28,800-second cap. PM technically accepts this code; formal
+compute remains prohibited pending the required code-science alignment audit.
