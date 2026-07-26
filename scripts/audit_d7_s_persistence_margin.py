@@ -344,6 +344,13 @@ def main() -> None:
               "0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90 -- unlike config_1's "
               "uniform 0.75-1.0, which never depletes inside an episode."),
     )
+    parser.add_argument(
+        "--topology-seed", type=int, default=20260725,
+        help=("Seed for the ground-BS and charging-station layout, which the "
+              "environment otherwise draws at construction from an unseeded "
+              "np_random and never regenerates on reset. Must be held fixed "
+              "across every run being compared."),
+    )
     parser.add_argument("--smoke", action="store_true")
     args = parser.parse_args()
 
@@ -356,7 +363,42 @@ def main() -> None:
         config.n_agents = int(args.n_uavs)
         config.n_uavs = int(args.n_uavs)
         config.max_observed_uavs = int(args.n_uavs)
-    env = UAVEnergyAwareRelayEnv(config=config, energy_stage=args.stage)
+    def build_env():
+        """A deterministic, pristine env.
+
+        Two defects make the naive `construct once, reuse for every arm` pattern
+        unusable, both measured on 2026-07-25:
+
+        1. Topology is drawn at CONSTRUCTION from `np_random` before any seed
+           exists (`scenario_base:650-666` under `randomize_bs`, and
+           `scenario7:313`), and `reset(seed=)` never regenerates it. Two
+           constructions differed by 2125 m in ground_bs_positions and 1487 m in
+           charging_station_positions, and three runs of one arm on three fresh
+           envs spread 17%. So runs in different processes were not comparable --
+           which silently invalidated a three-point horizon sweep. Seeding the
+           global RNG before construction does NOT fix this; the draw is off
+           `np_random`. Re-seed and regenerate instead.
+
+        2. `reset(seed=)` leaves state dirty -- user_pause_times,
+           cluster_pause_times, last_global_sync_step, previous_connections_snapshot,
+           last_backhaul_potential_reward, the backhaul-guard counters and
+           _heuristic_best_layout_positions all survive it. The first run on an env
+           therefore starts pristine and every later run starts used. Since
+           `constructive` was always arm 1, `B_H = constructive - null` compared a
+           pristine-state arm against a used-state arm: a bias with a direction,
+           not noise.
+
+        A fresh env per arm fixes (2), and pinning the topology makes that fresh
+        env identical every time, which fixes (1). Arms, thresholds and estimands
+        are untouched -- this is reproducibility only.
+        """
+        e = UAVEnergyAwareRelayEnv(config=config, energy_stage=args.stage)
+        e.reset(seed=int(args.topology_seed))   # seeds np_random deterministically
+        e._init_ground_bs()
+        e._init_charging_stations()
+        return e
+
+    env = build_env()
 
     initial_energies = None
     if args.initial_energies.strip():
@@ -394,6 +436,10 @@ def main() -> None:
     for i in range(episodes):
         seed = probe_seed + 100000 + i
         for arm in arms:
+            # Fresh env per arm: see build_env. Reusing one env privileged
+            # whichever arm ran first, which was always `constructive` -- the
+            # arm B_H is measured from.
+            env = build_env()
             if stepped:
                 out = run_arm_stepped(
                     env, seed=seed, horizon=horizon,

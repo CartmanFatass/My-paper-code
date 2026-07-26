@@ -6,7 +6,32 @@ Read `AGENTS.md`, then this file, then `docs/project/RESEARCH_GOAL.md`.
 
 ## Next action, exactly
 
-**D7.S part B — compute the persistence margin on the main scenario.**
+**D7.S part B — re-run the horizon sweep on the repaired instrument, then one
+Pro round.** Do not compute or report a margin before the reproducibility check
+below passes; the margins measured on 2026-07-25 are all invalid.
+
+```text
+harness  scripts/audit_d7_s_persistence_margin.py   (build_env, --topology-seed)
+tests    tests/audit_d7_s_persistence_margin_test.py
+check    two processes, identical args -> byte-identical arm_means
+sweep    H = 139 (exchange window), 450 (energy window), 1500 (registered episode)
+         all three at the SAME --topology-seed, or they are not comparable
+```
+
+The Pro round carries four coupled items, batched deliberately:
+
+1. `set_flex` is defined by the frozen design as "re-decides each check", which is
+   what `constructive` already does, so `U*_flex = constructive - keep_flex` while
+   `B_H = constructive - null` -- treatment and normalizer share a term, which D0
+   forbids. Correcting the arm is protected semantics.
+2. `Delta` is absent from the instrument: D0 freezes it at one check interval, the
+   keep arms hold for the whole window.
+3. No `H` yet found where the margin and its own normalizer are both well behaved.
+   At `H = 139` the exchange margin is large but `B_H` is 0.932; at `H = 1500`
+   `B_H` is healthy but the exchange margin inverts.
+4. The environment ignores its seed for topology. That is wider than this audit.
+
+### The superseded instruction, kept because part B is still frozen
 
 ```text
 design   docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md
@@ -89,6 +114,24 @@ SOURCE_NECESSITY_UNRESOLVED    -> tenure control advances carrier capacity only
   the reported `heavy_pids` first: if the load is ours, wait on the completion
   notification and do documentation-only work; do not sleep an hour beside a job
   that reports itself.
+- **This environment ignores its seed for topology.** `ground_bs_positions` and
+  `charging_station_positions` are drawn at *construction* from `np_random`
+  before any seed exists, and `reset(seed=)` never regenerates them. Two
+  constructions differ by kilometres; the same arm on three fresh envs spread
+  17 %. Seeding the global RNG first does **not** help — the draw is off
+  `np_random`. Any comparison across processes is invalid unless the topology is
+  pinned, as `build_env` now does. This silently destroyed a three-point horizon
+  sweep before anyone looked.
+- **`reset(seed=)` does not clear everything.** Eight attributes survive it,
+  including `user_pause_times` and `last_global_sync_step`. The first run on an
+  env is pristine and every later one is used, so whichever arm runs first is
+  privileged — and it was always `constructive`, the arm `B_H` is built from.
+  Build a fresh env per arm.
+- **An impossible pair of diagnostics is a bug, not a finding.** `charge_steps`
+  of 647.5 alongside `dock_events` of 0.0 was numpy aliasing: `np.asarray` on a
+  matching dtype returns the *same object*, so the rising-edge test compared a
+  buffer with itself. Check arithmetic consistency between diagnostics before
+  reading any of them.
 
 ## Transport, if a round is needed
 
