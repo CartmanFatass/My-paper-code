@@ -1,0 +1,7 @@
+interface:
+  display_name: "HMASD Collaborative Workflow Design"
+  short_description: "Understand, plan, confirm, then execute"
+  default_prompt: "Use $hmasd-collaborative-workflow-design to understand one HMASD workflow-design request, present an exact plan for confirmation, and execute only after approval."
+
+policy:
+  allow_implicit_invocation: false

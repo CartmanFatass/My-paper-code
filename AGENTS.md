@@ -21,7 +21,7 @@ Use exactly one route:
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
 | Project Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/PROJECT_MANAGER.md`, then only current-boundary code, design/review and tests | completed rounds, workflow-design history, unrelated roles |
-| dedicated Workflow Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_MANAGER.md`, `.agents/skills/hmasd-workflow-change-audit/SKILL.md`, then only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
+| dedicated Workflow Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
 | dedicated External Review Operator task | its exact inter-task assignment, `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-review-round/SKILL.md`, then only assignment-named round files | `CURRENT_WORK.md`, project history, scientific interpretation, implementation files outside the review allow-list |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, PM history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
@@ -125,7 +125,8 @@ plus exact path set is identity; hashes and handoff receipts are forbidden.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
-- Control-plane audit: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
+- Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
+- Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.

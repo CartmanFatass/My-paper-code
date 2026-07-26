@@ -10,6 +10,7 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedSkills = @(
     'hmasd-agile-research-development',
+    'hmasd-collaborative-workflow-design',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
@@ -50,6 +51,9 @@ $monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
+$workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
+$workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
+$workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 
 foreach ($required in @(
@@ -79,6 +83,7 @@ foreach ($required in @(
     'External Review Operator task',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'hmasd-pro-response-monitor',
+    'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
     'superpowers_execution=disabled',
     'backward_compatibility=not_required',
@@ -212,6 +217,14 @@ foreach ($required in @(
     'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
     'project_manager_return_model=gpt-5.6-sol',
     'project_manager_return_effort=max',
+    'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
+    'workflow_collaboration_scope=all_mutating_workflow_design',
+    'workflow_zero_question_path=fully_specified_mutations',
+    'workflow_decision_question_condition=changes_named_plan_field',
+    'workflow_plan_confirmation=required_before_mutation',
+    'workflow_read_only_plan_confirmation=not_required',
+    'workflow_material_plan_drift=reconfirmation_required',
+    'workflow_collaboration_runtime_authority=none',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
@@ -305,6 +318,22 @@ foreach ($required in @(
     'fresh-task profile smoke',
     'check_hmasd_agent_harness.py')) {
     if (-not $workflowAudit.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+}
+foreach ($required in @(
+    'runtime_authority=none',
+    'zero-question path',
+    'changes at least one named plan field',
+    'one question at a time',
+    'Requirements understanding',
+    'Exact paths',
+    'Perform no mutation',
+    'confirms the complete plan in natural language',
+    'Complete a read-only inspection',
+    'present a revised complete plan')) {
+    if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing: $required" }
+}
+if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {
+    throw 'Workflow collaboration Skill permits implicit invocation'
 }
 
 foreach ($required in @(

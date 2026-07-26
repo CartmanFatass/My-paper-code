@@ -26,10 +26,22 @@ project_manager_return_effort=max
 cross_task_send_requires_explicit_target_model_effort=true
 cross_task_silent_override=forbidden
 workflow_change_skill=hmasd-workflow-change-audit
+workflow_collaboration_skill=hmasd-collaborative-workflow-design
+workflow_collaboration_scope=all_mutating_workflow_design
+workflow_zero_question_path=fully_specified_mutations
+workflow_decision_question_condition=changes_named_plan_field
+workflow_plan_confirmation=required_before_mutation
+workflow_read_only_plan_confirmation=not_required
+workflow_material_plan_drift=reconfirmation_required
+workflow_collaboration_runtime_authority=none
 ```
 
 After the router, read the exact user or Project-Manager workflow-design
-assignment, this charter, `$hmasd-workflow-change-audit`, and only the named
+assignment and this charter. Complete read-only workflow-design checks directly.
+For every assignment that can mutate workflow-design surfaces, use
+`$hmasd-collaborative-workflow-design` to understand requirements, present one
+exact plan and obtain the user's natural-language confirmation before loading
+implementation mechanics from `$hmasd-workflow-change-audit`. Read only named
 control-plane files. Do not read `docs/project/CURRENT_WORK.md`, scientific
 history, active review rounds, implementation files or runtime artifacts. This
 is a dedicated user-owned Codex task fixed to `gpt-5.6-sol/high`, not a native
@@ -90,14 +102,26 @@ it is not a routine review of PM's implementation plan.
 
 ## Workflow-design loop
 
-1. Receive an exact proposed control-plane change and owned path set.
-2. Inventory coupled design surfaces and classify the task-local impact matrix.
-3. State the error prevented, terminal condition and total recurring cost.
-4. Change the smallest router/role/Skill/profile/contract dependency set.
-5. Run structural and focused contracts plus negative stale-reference searches.
-6. Inspect the staged design-only path set and `git diff --cached --check`, then
+1. Receive a workflow-design request and distinguish read-only work from a
+   possible mutation. Complete read-only work within the named boundary.
+2. For a mutation, resolve discoverable facts by read-only inspection. If the
+   request already fixes every plan field, use the zero-question path and write
+   the plan directly. Otherwise ask one decision question at a time, only when
+   its answer changes a named plan field, and include a recommendation.
+3. Present one compact plan containing the requirements understanding, goals
+   and non-goals, exact paths, intended changes, verification and risks.
+4. Wait for the user's natural-language confirmation; perform no mutation first.
+5. Inventory coupled design surfaces and classify the task-local impact matrix.
+6. Change the smallest router/role/Skill/profile/contract dependency set.
+7. Run structural and focused contracts plus negative stale-reference searches.
+8. Inspect the staged design-only path set and `git diff --cached --check`, then
    commit and push the accepted workflow design.
-7. Return the commit and exact paths; do not enter the active research loop.
+9. Return the commit and exact paths; do not enter the active research loop.
+
+Mechanical adjustments inside the confirmed intent, owned paths and acceptance
+boundary continue without another prompt. A changed goal, authority boundary,
+path set, workflow step or acceptance method requires a revised plan and user
+confirmation before further mutation.
 
 ## Workflow discipline
 
