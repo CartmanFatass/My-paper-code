@@ -124,5 +124,8 @@ validator returned no error and PM independently reproduced the immutable
 first-match branch `MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37`. The exact
 mechanical record is
 `docs/research/cdc/EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_RESULT.md`.
-Scientific interpretation and successor selection remain exclusively pending
-the formal-result External Pro review.
+External Pro accepted the immutable mixed branch as
+`MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0`. It retains G36
+as the deployment boundary, closes G37-P0 without evidence-volume rescue and
+selects `CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT` as the
+unique successor.

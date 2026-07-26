@@ -30,7 +30,7 @@
 | 动态成员直接循环策略 | `SUPPORTED_RETAINED` | G8 的 prefix-normalized direct recurrent policy 在已登记离散 toy family 中，经 G9--G16 覆盖高频 churn、N=12--40 组合、slot layout、N=80、随机 roster process、原子替换、count shock 与 fresh-seed mixture。 | 不能推出任意 N、任意过程律、异步技能生命周期、内在奖励优势或 UAV 可用性。 | [G16 最终链裁决](EVIDENCE_NOTES/20260723_DYNAMIC_ROSTER_CHAIN_FINAL_DISPOSITION.md)；[命题账本](CONJECTURES.md) |
 | 连续动态 roster 的即时服务控制 | `SUPPORTED_RETAINED` | G17 支持在已登记 continuous-service toy family 中，成员生命周期状态、active-set 聚合与直接 demand path 可形成可用控制器。 | 不能推出长延迟信用、真实 UAV 物理运输或任意随机 horizon。 | [G17 正式结果](EVIDENCE_NOTES/20260724_CONTINUOUS_SERVICE_ROSTER_G17_FORMAL_RESULT.md) |
 | realized-return-to-go 的延迟信用修正 | `SUPPORTED_RETAINED` | G31 在配对 G17/G18 toy family 与 fresh seeds 上同时保留即时任务并通过延迟 spike、rotation 和稳定性门槛。 | 不能单独推出 UAV transport、普适信用分配或对其他 source family 的优势。 | [G31 正式结果](EVIDENCE_NOTES/20260724_RETURN_TO_GO_DIRECTION_BALANCED_G31_FORMAL_RESULT.md) |
-| 连续动态 roster 的跨容量、随机过程、current-state 与实际历史传感替代 | `SUPPORTED_RETAINED` | G31/G32/G34/G35/G36 在已登记 48-step toy family 中形成可用测试版：capacity-8 训练模型可在配置容量 6/8/12 与固定/有界随机 roster process 上保持 access；G35 关闭 learned actor carry；G36 进一步表明，对 exact G35 CS final checkpoints，actor 的真实 time、age 与 previous-action bundle 可由冻结的 active-count-conditioned source-valid donor generator 替代，全部绝对门槛与 0.05 noninferiority 门槛通过。 | 不能推出十维到六维的结构删除、任意常数/噪声替代、donor-law 不变性、全局 memoryless、任意容量/过程/horizon、UAV transport、G31 credit 冗余或技能生命周期。 | [G35 正式结果](EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_FORMAL_RESULT.md)；[G36 正式结果](EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_FORMAL_RESULT.md)；[第 27 轮报告](../../report/ITERATION_27.md) |
+| 连续动态 roster 的跨容量、随机过程、current-state 与实际历史传感替代 | `SUPPORTED_RETAINED` | G31/G32/G34/G35/G36 在已登记 H=48、capacity 6/8/12 toy family 中形成当前可用测试版：G35 关闭 learned actor carry，G36 支持以内部一致的 source-valid donor 替代目标真实 time/age/previous-action sensors。G37 的完整四列 factorization 产生正向平均损失，但正式分支为 mixed，未扩展接受边界。 | 不能推出四列 factorized donor 已足够、joint coherence 具有 >0.05 material necessity、十维到六维结构删除、任意 filler、全局 memoryless、任意容量/过程/horizon、UAV transport 或 G31 credit 冗余。 | [G36 正式结果](EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_FORMAL_RESULT.md)；[G37 正式结果](EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_RESULT.md)；[第 28 轮报告](../../report/ITERATION_28.md) |
 | 普通/团队循环状态作为强对照 | `SUPPORTED_RETAINED` | 普通 recurrence 解决精确 G1 cue source；TEAM_REC 解决精确 G2 global-bit handoff，是后续机制主张必须保留的较简单解释。 | 不能推出显式 event-held mechanism 永远无用，也不能替代 variable-cardinality 机制检验。 | [G2 正式结果](EVIDENCE_NOTES/20260723_CROSS_LIFECYCLE_HANDOFF_G2_FORMAL_RESULT.md)；[反例账本](LEMMA_COUNTEREXAMPLE_LEDGER.md) |
 
 ## 已失败并关闭的精确方向
@@ -57,7 +57,8 @@
 | 方向 | 状态 | 当前最小问题 | 为什么仍未验证 |
 |---|---|---|---|
 | G36 简化 continuous-roster controller 向非 G33、可识别 UAV source 的 transport | `OPEN_UNTESTED` | 在物理可行、目标行为 load-bearing 且 source-identifiable 的非 G33 UAV source 上，current-state representation、bounded-process transport、实际历史传感替代与 G31 credit 是否保持可用。 | UAV G1/G2 在 learned training 前因 source 不可识别关闭；G33 被用户放弃；尚无可判别的 UAV transport 结果。 |
-| G36 donor bundle 的 joint coherence 是否 load-bearing | `OPEN_UNTESTED` | 在保持每个 history-proxy 坐标的 active-count-conditioned empirical marginal 与合法 support 时，破坏 time/age/previous-action 的跨坐标、跨成员 joint coherence，exact G35 CS checkpoints 是否仍保持 access 与 0.05 noninferiority。 | G36 只证明目标真实 history 可被一个内部 coherent 的 source-valid donor snapshot 替代；尚未证明任意 marginally in-support surrogate 已足够。 |
+| G36 donor 的跨列 coherence 与 factorized marginal sufficiency | `OPEN_UNTESTED` | G37 primary joint-minus-factorized CI95 为 [0.0063906, 0.0215989, 0.0515355]，方向上支持 joint donor 较好；但 UCB 略高于 0.05，LCB 远低于 0.05，且 capacity-8/12 deterministic access LCB 未过 0.90。 | G37-P0 已按 mixed 分支关闭，禁止通过扩 seed、episode 或证据量救援。现有证据既不能接受 factorized donor，也不能把 coherence 写成 materially load-bearing。 |
+| fresh six-coordinate actor 的结构删除与重新训练适应 | `OPEN_UNTESTED` | 在保持 current load/mix、capability、active set、prefix、critic、G31 credit、G32/G34 source 与 paired exposure 时，重新训练一个可精确折叠为六输入的 no-carry actor，是否保持 fixed/random capacity-6/8/12 access 并对完整十输入 CS 非劣。 | G35/G36/G37 都使用十输入 checkpoint；G37 的 mixed loss 可能只是 coherent-input checkpoint 对 factorized joint OOD 的敏感性，不能回答重新训练后的结构删除。 |
 | 超出已登记边界的 active count、membership process 与 horizon | `OPEN_UNTESTED` | 已支持表示在 N>80、configured capacity 6/8/12 之外、重复 leave/rejoin、不同 event count/type、任意过程律与 horizon≠48 时的边界。 | G34 只覆盖一个 each-of-L/R/J/T、三种顺序、五步最小间隔和 H=48 的有界 process family。 |
 | 异步技能生命周期 | `OUT_OF_SCOPE_FROZEN` | runtime-variable team membership 与 variable individual skill lifetime 的组合效应。 | 当前主链主动冻结 skill-cycle 维度，先建立动态 agent 数量下可用算法。 |
 | 环境无关 intrinsic reward 的增益与比较优势 | `OUT_OF_SCOPE_FROZEN` | 在可识别 source 与强 recurrence comparator 下是否提供稳定额外价值。 | 当前主链目标是先得到可用算法，不以建立优势为准入条件。 |
@@ -78,12 +79,12 @@
 4. UAV G1/G2 说明先验证 source 比直接重型训练更重要：两轮都没有形成
    算法证据，因此主线回到 toy，而不是把基准失败归因于算法。
 5. G32 支持 capacity-6/8/12 strict-load，G34 支持固定过程到有界随机
-   roster process 的零训练 transport，G35 关闭 learned actor hidden carry。
-   G36 进一步以零训练证明 exact G35 CS final checkpoints 不需要目标 episode
-   的真实 time/age/previous-action bundle：冻结的 source-valid donor generator
-   已足以保持全部 access 与 0.05 noninferiority 门槛。该结果仍保留四个模型
-   坐标、donor 内部 joint coherence、critic true time、lifecycle state 与 G31
-   credit；下一边界检查 donor coherence 是否只是维持输入分布的非必要外壳。
+   roster process transport，G35 关闭 learned actor carry，G36 支持用内部一致
+   donor 替代目标真实 history sensors。G37 破坏 donor 四列的 shared snapshot
+   与 shared row alignment 后，得到正向但跨越 0.05 materiality 边界的 primary
+   interval，同时 capacity-8/12 deterministic access 未闭合；正式结论为 mixed。
+   因此 G36 仍是接受边界，G37-P0 不扩证据救援。下一边界改为 fresh
+   six-coordinate actor 的结构删除，而不是继续细分 donor proxy。
 
 ## 每轮更新协议
 

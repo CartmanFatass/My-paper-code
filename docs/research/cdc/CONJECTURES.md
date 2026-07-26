@@ -80,64 +80,75 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained as a usable actual-history-sensor-substituted,
-  configured-capacity, bounded-random-process continuous dynamic-roster test
-  version for the registered 48-step capacity-6/8/12 toy family. A finite
-  packing capacity is selected before each trajectory.
+- Status: supported and retained at the G36 boundary as a usable
+  actual-history-sensor-substituted, configured-capacity,
+  bounded-random-process continuous dynamic-roster test version for the
+  registered 48-step capacity-6/8/12 toy family. G37 does not extend this
+  accepted boundary.
 - Claim: a capacity-shape-independent no-carry actor trained only at capacity 8
   remains usable at configured capacities 6, 8 and 12 across the fixed G32
-  process and bounded G34-P0 random process. For its exact formal G35 CS final
+  process and bounded G34-P0 random process. For the exact formal G35 CS final
   checkpoints, the actor's actual true-time, lifecycle-age and previous-action
   sensor bundle may be replaced by the frozen G36 active-count-conditioned,
-  source-valid donor generator.
+  internally coherent source-valid donor generator.
 - Retained actual actor information: capability, anonymous priority, current
   load and target mix, raw log1p(active_count), active mask and active-fraction
   autoregressive prefix.
-- Retained surrogate interface: the four actor coordinates for age, two previous
-  actions and time remain present and are populated by the exact G36 donor law.
-  This is sensor substitution, not ten-to-six-dimensional architectural
-  deletion.
+- Retained surrogate interface: the four actor coordinates for age, two
+  previous actions and time remain present. The accepted deployment boundary
+  populates them through the exact coherent G36 donor law; this is sensor
+  substitution rather than ten-to-six-dimensional architectural deletion.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
-  spike-allocation, rotation, gain and fresh-seed stability gates.
-- Formal configured-capacity evidence: G32 strict-loads one capacity-8-trained
-  recurrent checkpoint family at capacities 6, 8 and 12 and establishes exact
-  common-active padding invariance.
-- Formal bounded-process evidence: G34 transports those checkpoints without
-  retraining from the fixed 12/24/36 process to one each of L/R/J/T at random
-  held-out times and orders.
-- Formal current-state reduction evidence: G35 freshly trains matched REC and CS
-  arms. Both access; pooled REC-minus-CS CI95 is
+  spike-allocation, rotation, learned-gain and fresh-seed stability gates.
+- Formal configured-capacity evidence: G32 supports strict-loadable
+  capacity-6/8/12 deployment and exact common-active padding invariance.
+- Formal bounded-process evidence: G34 supports zero-training transport from the
+  fixed 12/24/36 process to its registered one-each-of-L/R/J/T random process.
+- Formal current-state evidence: G35 freshly trains matched REC and CS arms.
+  Both access; pooled REC-minus-CS CI95 is
   [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB is at
   most 0.0054082 against the 0.05 margin.
-- Formal actual-history substitution evidence: G36 freezes the exact G35 CS
-  finals and replaces actor time, age and two previous-action fields with an
-  independent source-valid donor bundle. Fixed/random capacity-6/8/12 utility,
-  stochastic, event-window, process-segment, transport and replicate-stability
-  gates all pass. The primary registered-minus-substitution CI95 is
-  [-0.0024790, 0.0001048, 0.0035749]; the largest conclusion-bearing component
-  UCB is 0.0075287 against the 0.05 margin.
+- Formal actual-history substitution evidence: G36 replaces actor time, age and
+  previous-action fields with an independent coherent donor bundle. All
+  fixed/random capacity-6/8/12 access gates pass. Primary
+  registered-minus-substitution CI95 is
+  [-0.0024790, 0.0001048, 0.0035749], and the largest component UCB is
+  0.0075287.
+- Formal coherence evidence: G37 independently samples and permutes each donor
+  column while preserving every column's complete active-count-conditioned
+  empirical marginal. Its primary joint-minus-factorized CI95 is
+  [0.0063906, 0.0215989, 0.0515355]. This supports a directional factorization
+  cost and rejects exact zero average effect on the frozen primary estimand, but
+  neither noninferiority nor >0.05 material loss closes. Capacity-8/12 fixed
+  and random deterministic access LCBs miss 0.90, while no confident-access-
+  failure predicate fires. The terminal branch is
+  MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37.
+- Accepted deployment boundary: retain the coherent G36 donor generator.
+  The G37 factorized generator is neither accepted nor confidently rejected.
 - Retired alternatives: within the registered family, usable deployment does
   not require capacity-shaped learned parameters, capacity-specific retraining,
   checkpoint adapters, the exact fixed 12/24/36 schedule, atomic R+J, learned
   per-lifecycle actor carry, or acquisition of the target episode's actual
-  time/age/previous-action sensor bundle for the exact G35 CS checkpoints.
+  time/age/previous-action bundle. G37 additionally retires only the exact
+  zero-average-effect point null for its primary joint-minus-factorized
+  estimand.
 - Lifecycle boundary: active masks, likelihood ownership, environment lifecycle
   state, fresh initialization, temporary leave/rejoin, terminal deletion and
   survivor continuity remain part of the runtime contract.
 - Scope: H=48; configured capacity is fixed within a trajectory and belongs to
   6/8/12; G34-P0 contains one each of L/R/J/T and three legal event orders; G36
-  uses the exact frozen donor distribution. This is not arbitrary process or
-  arbitrary filler robustness.
-- Strongest remaining explanation: the checkpoints may need only a plausible
-  active-count-conditioned history-shaped nuisance bundle. G36 removes target
-  history but preserves donor-internal time/age/action coherence.
-- Critic and credit boundary: the critic retains true time, and all checkpoints
-  retain G31 training provenance. G36 performs no training and supplies no
+  and G37 use their exact frozen donor distributions.
+- Strongest remaining explanations: G37 may expose generic multivariate
+  distribution-shift sensitivity or specialization of checkpoints trained on
+  coherent inputs. Whether a freshly trained six-coordinate actor can delete
+  the entire surrogate interface remains open.
+- Critic and credit boundary: the critic retains true time, and the checkpoints
+  retain G31 training provenance. G37 performs zero training and supplies no
   credit-comparator evidence.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
   non-identifiable. G33 and all derivatives remain abandoned by user
   instruction.
-- Exclusions: arbitrary capacity/process/horizon, donor-law invariance,
+- Exclusions: arbitrary capacity/process/horizon, arbitrary filler robustness,
   architectural coordinate deletion, globally memoryless control, UAV
   usability, asynchronous skill lifetime, intrinsic-reward advantage,
   complete-algorithm superiority and G31-credit redundancy remain unsupported.
@@ -199,6 +210,12 @@ the Project Manager-accepted CDC state.
   information absent from current observations, followed by a matched material
   recurrent advantage. More seeds, budget or threshold changes on G35/G36-P0
   are not reactivation evidence.
+- G37 update: the mixed factorization result does not reopen G35's rejection of
+  learned actor carry or G36's rejection of actual target-history acquisition.
+  Its positive primary contrast concerns the distribution of four execution-time
+  nuisance coordinates for exact frozen CS checkpoints; it is not recurrence
+  evidence. Cross-column donor coherence remains unresolved, and fresh
+  six-coordinate retraining is the relevant architectural discriminator.
 
 ## C-BASE — The shared base policy class is insufficient
 

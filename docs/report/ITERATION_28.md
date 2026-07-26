@@ -53,9 +53,28 @@ MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37
 
 ## External Pro 科学裁决
 
-待正式结果科学审查。机械分支不可被救援、降级或改名；PM 不预先把“主要差异为正但
-0.05 边界未闭合”和“部分绝对 access 门槛未通过”解释为 coherence 必要、充分或无关，
-也不自行选择追加证据或新机制。
+External Pro 原样接受机械分支并裁决：
+
+```text
+MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0
+```
+
+主区间完全大于零，只支持“完整 factorization 对这些精确 checkpoint 有方向明确的平均
+损失”，并关闭该冻结 estimand 的零平均效应点原假设。它没有证明 factorized donor
+noninferior，没有证明其绝对 access，也没有证明 joint coherence 具有大于 0.05 的 material
+necessity。G36 的内部 coherent donor 仍是接受边界；G37-P0 按 mixed 关闭，禁止追加 seed、
+episode、bootstrap、checkpoint 或改变阈值救援。
+
+唯一下一动作是：
+
+```text
+CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT
+```
+
+G38 不继续拆 donor，而是审计 fresh matched training：FULL10_CS 使用十维实际输入；
+FOLD6_CS 在训练期把 6:10 固定为冻结常量，并在训练后把常量列贡献精确折叠进 bias，形成
+真正的六输入部署 actor。设计审计本身零计算，保持 G31 credit、G32/G34 source、critic、
+配对 exposure、`H=48`、`K_search=0` 与既有八小时上限。
 
 本轮是有效结论性第 28 轮；自动研究链剩余 9 轮。G33 及其衍生线仍保持用户放弃状态，
 禁止复活。

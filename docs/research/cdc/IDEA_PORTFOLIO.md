@@ -7,10 +7,10 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | supported retained: bounded actual-history-sensor-substituted configured-capacity random-process continuous-roster test version | G31 closes the paired immediate/delayed toy contract; G32 adds capacity-6/8/12 transport; G34 adds bounded random-process transport; G35 removes learned actor carry; G36 shows that the exact G35 CS finals retain all registered access and noninferiority gates when actual actor time, age and previous actions are replaced by the frozen source-valid donor generator. | Next action: separate dependence on the G36 donor's joint time/age/action coherence from dependence on marginal in-support filler values. Architectural deletion, arbitrary filler robustness, UAV transport and G31-credit necessity remain open. |
+| C-CONTINUOUS-ROSTER | supported retained at G36; G37 factorized reduction mixed and closed | G31/G32/G34/G35/G36 form the accepted configured-capacity, bounded-process, no-carry, actual-history-sensor-substituted test version. G37 yields a positive primary joint-minus-factorized CI95 [0.0063906, 0.0215989, 0.0515355], but capacity-8/12 deterministic access LCBs miss 0.90 and neither sufficiency nor material-coherence predicates close. | Retain the coherent G36 donor boundary. Do not extend G37-P0 by seeds or evidence volume. Next action: test fresh architectural deletion of coordinates 6:10 rather than further post-training donor-factorization peeling. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
-| C-REC | sufficient in exact memory sources; learned carry and actual target-history acquisition closed as load-bearing in G35/G36-P0 | G35 closes a >0.05 REC advantage. G36 primary registered-minus-substitution CI95 is [-0.0024790, 0.0001048, 0.0035749], and the largest component UCB is 0.0075287. | Reactivate recurrence only on an identified source containing task-relevant information absent from current observations. G36 does not support global memorylessness or deletion of the four model coordinates. |
+| C-REC | sufficient in exact memory sources; learned carry and actual target-history acquisition remain closed in G35/G36-P0 | G37 does not reinstate recurrence. Its mixed result concerns exact-checkpoint sensitivity to factorized nuisance inputs, not cross-step neural state. | Reactivate recurrence only on an identified source containing task-relevant information absent from current observations and a matched material recurrent advantage. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
 | C-CREDIT | supported on paired toys; necessity unresolved outside them | G36 performs zero optimization on checkpoints trained with G31 credit and therefore isolates only execution-time actor inputs. | Reactivate only through a representation-, information- and exposure-matched credit-only comparison. |
 | C-BENCH | source-family dependent | Useful-effect G3/G4 is identified. UAV G1 has infeasible and negative-advantage control evidence; UAV G2 is load-bearing but its constructive control remains absolutely infeasible. | Close exact G1/G2; retain source-first pruning for every later UAV source. |
@@ -21,14 +21,14 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_FORMAL_ITERATION_27
-source_family=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
-formal_disposition=HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36
-scientific_disposition=SUPPORTED_RETAINED_BOUNDED_ACTUAL_HISTORY_SENSOR_BUNDLE_SUBSTITUTION_G36
-next_action=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT
+completed_action=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_ITERATION_28
+source_family=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_P0
+formal_disposition=MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37
+scientific_disposition=MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0
+next_action=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT
 authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=27
-iterations_remaining=10
+conclusion_bearing_iterations_consumed=28
+iterations_remaining=9
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -68,17 +68,16 @@ but constructive absolute utility is far below feasibility and support fails.
 G31 UAV transport therefore remains unresolved. The active boundary returns to
 toy-first discovery and isolates same-checkpoint transport across configured
 maximum capacities from the already-proved within-capacity active-count changes.
-Formal G32 supports capacity-6/8/12 strict-load and padding invariance. Formal
-G34 transports the checkpoints from the fixed 12/24/36 process to the bounded
-four-event random-process family. Formal G35 freshly compares matched REC and
-CS arms and closes learned actor carry as required or materially advantageous
-inside P0. Formal G36 then freezes the exact G35 CS final checkpoints and
-selects `HISTORY_PROXY_FREE_CHECKPOINT_SUFFICIENT_G36`: actual actor time,
-lifecycle age and previous actions can be replaced by the frozen independent
-source-valid donor bundle while all fixed/random capacity-6/8/12 access gates
-pass. The primary registered-minus-substitution CI95 is
-[-0.0024790, 0.0001048, 0.0035749], and every component UCB is below 0.00753
-against the 0.05 margin. This closes acquisition of the target's actual coherent
-history bundle, but retains the four model coordinates, donor-law coherence,
-critic true time and G31 training provenance. The next scientific action is
-`CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_DESIGN_ASSERTION_AUDIT`.
+Formal G32 supports capacity-6/8/12 strict-load and padding invariance. G34
+supports fixed-to-bounded-random process transport. G35 closes learned actor
+carry as required or materially advantageous, and G36 shows that the exact G35
+CS checkpoints do not need the target episode's actual time/age/previous-action
+sensors when supplied with the coherent G36 donor. Formal G37 factorizes the
+four donor columns. Its primary joint-minus-factorized CI95 is
+[0.0063906, 0.0215989, 0.0515355], establishing a directional average
+factorization cost but resolving neither the 0.05 materiality decision nor
+capacity-8/12 deterministic access. G37-P0 closes mixed without
+evidence-volume rescue; the accepted boundary remains G36. The next scientific
+action is `CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT`,
+which tests fresh architectural deletion rather than continued exact-checkpoint
+proxy perturbation.

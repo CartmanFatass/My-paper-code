@@ -16,7 +16,7 @@ status=COMPLETE
 operational_valid=true
 operational_errors=[]
 registered_branch=MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37
-scientific_interpretation=pending_external_pro
+scientific_interpretation=MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0
 iteration_consumed=true
 iterations_remaining=9
 ```
@@ -82,6 +82,20 @@ Replaying the frozen selector reproduces:
 MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37
 ```
 
-This note supplies mechanical evidence only. External Pro must provide the
-scientific interpretation, exact retained/retired units, CDC edits and one next
-action before successor work.
+## External Pro scientific disposition
+
+External Pro accepted the registered mixed branch without modification as
+`MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0`. The positive
+primary interval rejects only the exact zero-average-effect point null for the
+frozen pooled random-deterministic estimand. It does not establish factorized
+noninferiority, factorized absolute access or a >0.05 materially load-bearing
+coherence benefit.
+
+The accepted deployment boundary therefore remains G36's internally coherent
+donor generator. G37-P0 is closed mixed and may not be rescued by expanding
+seeds, episodes, bootstrap draws, checkpoints or thresholds. The factorized
+generator remains neither accepted nor confidently rejected. The unique next
+action is the zero-compute
+`CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT`, which tests
+fresh matched training and exact post-training folding of four constant actor
+coordinates into a true six-coordinate deployment actor.
