@@ -6,11 +6,11 @@
 role=pro_response_monitor
 callable_agent_type=hmasd-pro-response-monitor
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=external_review_operator
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_already_submitted_pro_turn
-observation_mode=pm_brokered_jsonl_sentinel
+observation_mode=external_review_operator_brokered_jsonl_sentinel
 browser_authority=none
 sentinel_write_authority=none
 progress_notifications=forbidden
@@ -23,13 +23,15 @@ repository_write_authority=none
 This is the dedicated low-cost terminal observer for a long External Pro
 answer. It is not a persistent project task, browser owner, transport owner,
 reviewer or heartbeat. The native child does not inherit the Project Manager's
-in-app-browser binding, so it observes one metadata-only append ledger written
-by PM for one exact already-submitted turn.
+or External Review Operator's in-app-browser binding, so it observes one
+metadata-only append ledger written by the operator for one exact
+already-submitted turn.
 
 ## Exact assignment
 
-Project Manager supplies the registered conversation ID, exact freshness fence,
-absolute sentinel path, `observation_mode=pm_brokered_jsonl_sentinel`, and this
+External Review Operator supplies the registered conversation ID, exact freshness fence,
+absolute sentinel path,
+`observation_mode=external_review_operator_brokered_jsonl_sentinel`, and this
 read-only command boundary:
 
 ```text
@@ -51,7 +53,7 @@ the browser as recovery.
 - Repeatedly run only the registered terminal-only `watch` command. Empty output
   means pending: remain silent and run another bounded watch. Do not send
   progress, ETA, heartbeat or phase messages.
-- Trust only a terminal record emitted by the sentinel tool. PM-side `record`
+- Trust only a terminal record emitted by the sentinel tool. Operator-side `record`
   requires the same assistant identity and response fingerprint in two
   snapshots at least three seconds apart with inactive generation/error
   controls. The monitor cannot weaken or bypass that rule.
@@ -73,6 +75,6 @@ candidate_available=<true|false>
 reason=<none or exact direct error>
 ```
 
-On `COMPLETE`, Project Manager retains browser ownership and performs exact raw
+On `COMPLETE`, External Review Operator retains browser ownership and performs exact raw
 archival. The monitor and sentinel never supply scientific evidence itself;
 only the archived visible response does.

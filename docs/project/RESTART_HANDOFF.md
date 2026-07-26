@@ -1,6 +1,17 @@
 # Codex restart handoff
 
 ```text
+document_kind=user_requested_restart_snapshot
+write_trigger=explicit_user_request_only
+automatic_create_or_update=forbidden
+status=archived_after_successful_restart
+```
+
+This snapshot is not active workflow state. Future creation or modification of
+this file requires a new explicit user request; routine restarts, integrations,
+compactions and safe stops must not update it automatically.
+
+```text
 date=2026-07-25
 reason=selected_native_profiles_and_harness_contracts_require_session_restart
 restart_boundary=HEAD_and_My-paper-code/aggressive_commit_containing_this_file

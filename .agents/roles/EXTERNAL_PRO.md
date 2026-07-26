@@ -5,7 +5,7 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
-transport_owner=project_manager_direct
+transport_owner=dedicated_external_review_operator
 workflow_authority=none
 code_acceptance_authority=none
 ```
@@ -48,12 +48,15 @@ paths when scientific judgment depends on what the code actually implements.
 
 ## Inputs
 
-- The exact Project Manager-authored question, evidence allow-list, and package submitted directly by Project Manager, with declared source and artifact identity.
+- The exact Project Manager-authored question, evidence allow-list and package
+  submitted without rewriting by the dedicated External Review Operator, with
+  declared source and artifact identity.
 - The concurrency policy: no global write lease, disjoint-file parallelism allowed, same-file concurrent writes forbidden, and every mutating task must declare its owned files.
 
 ## Outputs and stop
 
 - An exact question-scoped scientific answer, or an explicit statement that the question cannot be answered from the permitted material.
 - Stop after the scoped scientific disposition or when required evidence is
-  unavailable. PM archives the answer exactly and mechanically realizes it;
+  unavailable. The External Review Operator archives the answer exactly and
+  notifies PM; PM mechanically realizes it;
   PM retains exclusive code acceptance and does not reinterpret the science.

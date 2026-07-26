@@ -1,6 +1,6 @@
 """Broker stable Pro-page observations to the read-only response monitor.
 
-The Project Manager remains the sole browser owner.  It appends metadata-only
+The dedicated External Review Operator remains the sole browser owner. It appends metadata-only
 observations to a JSONL sentinel; the Luna-low child reads that sentinel and
 reports only a terminal COMPLETE or ERROR state.  The append-only format avoids
 Windows replace races and tolerates a partially written final line.

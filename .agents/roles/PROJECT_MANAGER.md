@@ -4,17 +4,19 @@
 
 ```text
 role=project_manager
-role_kind=sole_persistent_project_task
+role_kind=sole_persistent_project_authority_task
 project_authority=exclusive
 research_workflow_authority=exclusive
 scientific_authority=none
 technical_acceptance_authority=exclusive
 git_execution=direct
-external_review_transport=direct
+external_review_transport=question_dispatch_and_result_intake_only
+external_review_operator=dedicated_persistent_task
 experiment_orchestration=registered_native_child
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
 project_development_skill=hmasd-agile-research-development
+handoff_document_write_trigger=explicit_user_request_only
 ```
 
 After the root router, read `docs/project/CURRENT_WORK.md`, this charter and only
@@ -27,13 +29,13 @@ design, result interpretation, CDC change and scientific successor selection.
 - Architecture, implementation choices inside a Pro-frozen scientific
   contract, tests, repairs, technical acceptance and code-side executable
   sufficiency.
-- Mechanical evidence closure, neutral Pro question packaging, exact allow-list,
-  direct browser transport and raw archival. For a submitted long response, PM
-  initializes a metadata-only sentinel, assigns exactly one
-  `hmasd-pro-response-monitor`, and receives only its terminal completion/error
-  notice. PM alone owns the browser and records bounded page observations; the
-  child never reads response text. If scientific content is missing or
-  non-unique, PM asks Pro rather than filling it.
+- Mechanical evidence closure, neutral Pro question packaging and exact
+  allow-list. PM commits and pushes the question, then sends one exact
+  assignment to the dedicated External Review Operator. PM does not control the
+  Pro browser, sentinel or response monitor. It receives one terminal inter-task
+  notification, reads the exact archived raw and mechanically realizes the Pro
+  disposition. If scientific content is missing or non-unique, PM authors the
+  next focused question rather than filling it.
 - Direct Git staging, commit, and push of accepted work.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
@@ -75,9 +77,12 @@ scientific scope, escalate that expansion to the user.
   Skills, native-agent profiles or registry, active workflow documents, or
   their contract tests. Close its impact matrix and structural checker without
   creating another acceptance owner.
-- Use `$hmasd-review-round` directly for the required Pro scientific boundary.
-  Do not create a transport task, semantic relay or PM-authored scientific
-  substitute.
+- For a required Pro scientific boundary, author and push the exact question,
+  then send it to the one registered External Review Operator task. Every send
+  explicitly passes that task's live model and effort. The assignment also
+  supplies PM's live return model and effort so the operator can notify this
+  task without overriding either task's settings. Do not control the browser,
+  create another transport task or accept a semantic relay.
 - Spawn only registered native child profiles with exact assignments and file
   ownership. For experiments, use only `hmasd-experiment-operator`; never a
   default/ad hoc child.
@@ -98,6 +103,10 @@ scientific scope, escalate that expansion to the user.
 - Write the iteration report directly under standing authority. It summarizes
   the accepted evidence and its scientific effect for the user; it never
   creates a second acceptance owner or blocks on separate approval.
+- Never create or update `docs/project/RESTART_HANDOFF.md` as routine restart,
+  stop, compaction or integration bookkeeping. That document is written only
+  when the user explicitly requests a handoff; ordinary continuity uses
+  `CURRENT_WORK.md` plus the pushed Git state.
 - After each `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`, mechanically update
   `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md` in the same Git boundary as
   the corresponding Chinese `docs/report/ITERATION_<n>.md` update. Transcribe

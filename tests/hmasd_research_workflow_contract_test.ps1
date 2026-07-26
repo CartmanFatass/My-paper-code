@@ -21,6 +21,7 @@ $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' 
 $expectedRoles = @(
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
+    'EXTERNAL_REVIEW_OPERATOR.md',
     'EXTERNAL_PRO.md',
     'IMPLEMENTER.md',
     'PROJECT_MANAGER.md',
@@ -37,10 +38,12 @@ $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CO
 $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
+$handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 
 foreach ($required in @(
     'document_kind=role_router',
@@ -51,7 +54,9 @@ foreach ($required in @(
     'docs/project/CURRENT_WORK.md` is PM-only active state',
     'project_manager_scientific_authority=none',
     'project_manager_git_authority=direct',
-    'project_manager_external_review_transport=direct',
+    'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
+    'external_review_operator_transport_authority=exclusive',
+    'External Review Operator task',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'hmasd-pro-response-monitor',
     'workflow_change_skill=hmasd-workflow-change-audit',
@@ -60,8 +65,10 @@ foreach ($required in @(
     'test_scope=proof_sized',
     'per_file_hash_handoff=forbidden',
     'isolated_worktree_identity=workspace_ticket_only',
+    'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_pro_response_sentinel.py',
+    'passes both explicitly in the send operation',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -76,9 +83,21 @@ foreach ($required in @(
     'git_integration_status=',
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
+    'external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'external_review_operator_current_model=gpt-5.6-luna',
+    'external_review_operator_current_effort=high',
+    'project_manager_current_model=gpt-5.6-sol',
+    'project_manager_current_effort=max',
+    'cross_task_send_requires_explicit_model_effort=true',
     'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
     'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
     'workflow_hash_validation=disabled')) {
+    if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
+}
+
+foreach ($required in @(
+    'handoff_document_write_policy=user_explicit_only',
+    'automatic_handoff_document_write=forbidden')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 
@@ -119,6 +138,29 @@ foreach ($required in @(
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
+    'role=external_review_operator',
+    'transport_authority=exclusive_for_assigned_external_pro_round',
+    'scientific_authority=none',
+    'git_authority=none',
+    'answer_now_activation=forbidden',
+    'completion_notification=required_once',
+    'target model and effort explicitly passed')) {
+    if (-not $reviewOperatorRole.Contains($required)) {
+        throw "External Review Operator role missing: $required"
+    }
+}
+if (-not $pmRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
+    throw 'Project Manager role permits automatic handoff writing'
+}
+foreach ($required in @(
+    'write_trigger=explicit_user_request_only',
+    'automatic_create_or_update=forbidden')) {
+    if (-not $handoff.Contains($required)) { throw "Handoff contract missing: $required" }
+}
+if (-not $workflowAudit.Contains('update it only when the user explicitly requests a handoff')) {
+    throw 'Workflow audit Skill permits automatic handoff writing'
+}
+foreach ($required in @(
     'superpowers_execution=disabled',
     'workflow_hash_validation=disabled',
     'Project Manager integrates the exact accepted',
@@ -153,7 +195,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=pm_brokered_jsonl_sentinel',
+    'observation_mode=external_review_operator_brokered_jsonl_sentinel',
     'browser_authority=none',
     'progress_notifications=forbidden',
     'answer_now_activated=false')) {
@@ -167,7 +209,7 @@ if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELI
     throw 'Stale multi-review pipeline remains on the active line'
 }
 
-foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $proRole, $assertion)) {
+foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $reviewOperatorRole, $proRole, $assertion)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

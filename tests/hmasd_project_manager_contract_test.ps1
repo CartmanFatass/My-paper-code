@@ -31,22 +31,36 @@ foreach ($entry in $profiles.GetEnumerator()) {
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
+$reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 foreach ($required in @(
     'project_manager_project_authority=exclusive',
     'project_manager_git_authority=direct',
-    'project_manager_external_review_transport=direct')) {
+    'project_manager_external_review_transport=question_dispatch_and_result_intake_only',
+    'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'role_kind=sole_persistent_project_task',
+    'role_kind=sole_persistent_project_authority_task',
     'git_execution=direct',
-    'external_review_transport=direct',
+    'external_review_transport=question_dispatch_and_result_intake_only',
+    'external_review_operator=dedicated_persistent_task',
     'experiment_orchestration=registered_native_child',
     'hmasd-workflow-change-audit',
     'scripts/hmasd_workspace_ticket.py',
     'Spawn only registered native child profiles',
     'Continue automatically within an active user grant')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
+}
+foreach ($required in @(
+    'role=external_review_operator',
+    'scientific_authority=none',
+    'git_authority=none',
+    'completion_notification=required_once',
+    'cross-task',
+    'target model and effort explicitly passed')) {
+    if (-not $reviewOperator.Contains($required)) {
+        throw "External Review Operator role missing: $required"
+    }
 }
 
 $ticket = Join-Path $repo 'scripts/hmasd_workspace_ticket.py'

@@ -21,6 +21,10 @@ Use this Skill when a mutation touches any of these coupled surfaces:
 - active workflow state, routing, restart or contract documents; or
 - tests that enforce those surfaces.
 
+`docs/project/RESTART_HANDOFF.md` is not routine workflow state. Create or
+update it only when the user explicitly requests a handoff; a normal restart or
+safe stop uses `CURRENT_WORK.md` and Git without generating that document.
+
 Ordinary algorithm implementation stays on
 `hmasd-agile-research-development`. A scientific authority or evidence change
 first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
@@ -68,7 +72,7 @@ Run the structural checker with the Python interpreter registered in
 Add change-specific active files or retired terms when needed:
 
 ```powershell
-& '<registered-python>' .agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py --repo . --active-path docs/project/RESTART_HANDOFF.md --forbid hmasd-old-agent
+& '<registered-python>' .agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py --repo . --active-path docs/project/CURRENT_WORK.md --forbid hmasd-old-agent
 ```
 
 ## Acceptance and stop

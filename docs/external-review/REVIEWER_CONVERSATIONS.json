@@ -1,25 +1,29 @@
 {
-  "schema_version": 30,
+  "schema_version": 31,
   "updated": "2026-07-25",
   "round_operator": {
-    "kind": "project_manager_direct_transport",
+    "kind": "dedicated_external_review_operator_task",
     "external_scientific_decision": "external_pro_binding_within_user_boundary",
-    "decision_intake": "project_manager_mechanical_realization",
+    "decision_intake": "project_manager_exact_raw_realization",
     "git_boundary_owner": "project_manager"
   },
-  "direct_transport_contract": {
+  "intertask_transport_contract": {
     "skill": "$hmasd-review-round",
     "browser_skill": "$browser:control-in-app-browser",
-    "transport_owner": "active_project_manager",
+    "transport_owner": "dedicated_external_review_operator",
+    "operator_task_id": "019f9c6a-9401-7ae0-ace5-dd827dccba2b",
+    "operator_model_effort_source": "live_user_choice_in_current_assignment",
+    "project_manager_return_target_source": "live_assignment",
+    "cross_task_send_requires_explicit_model_effort": true,
     "response_monitor_agent_type": "hmasd-pro-response-monitor",
     "response_monitor_model": "gpt-5.6-luna",
     "response_monitor_effort": "low",
-    "response_monitor_owner": "active_project_manager",
+    "response_monitor_owner": "dedicated_external_review_operator",
     "response_monitor_uniqueness": "one_per_submitted_turn",
-    "response_monitor_observation": "project_manager_brokered_jsonl_sentinel",
+    "response_monitor_observation": "external_review_operator_brokered_jsonl_sentinel",
     "response_monitor_sentinel_tool": "scripts/hmasd_pro_response_sentinel.py",
     "response_monitor_progress_notifications": "forbidden",
-    "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_realize_pro_disposition",
+    "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_explicit_model_effort_project_manager_notification",
     "retired_task_output_authority": "none"
   },
   "reviewers": {
@@ -28,7 +32,7 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "transport": "project_manager_in_app_browser",
+      "transport": "external_review_operator_in_app_browser",
       "question_file": "20_PRO_OPEN_QUESTION.md",
       "raw_file": "21_PRO_OPEN_RAW.md"
     }
