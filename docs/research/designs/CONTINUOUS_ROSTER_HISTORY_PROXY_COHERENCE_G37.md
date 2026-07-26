@@ -8,7 +8,7 @@ external_pro_disposition=IDENTIFIABLE_BOUNDED_FACTORIZED_HISTORY_PROXY_COHERENCE
 scientific_authority=external_pro
 implementation_authority=project_manager
 implementation_status=pm_accepted_after_7_focused_18_G36_G37_tests_and_repaired_same_commit_nonformal_COMPLETE
-formal_compute_status=authorized_after_ALIGNED_audit_and_repaired_same_commit_preflight
+formal_compute_status=COMPLETE_operational_valid_pending_external_pro_disposition
 training=none
 ```
 
@@ -115,3 +115,14 @@ metrics object and nonformal branch. This remains prelaunch evidence only;
 the single code-science alignment audit returned `ALIGNED`. The exact repaired
 source commit and preflight are therefore eligible for one formal CPU execution
 under `CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_AUTHORIZATION_V1`.
+
+## Formal mechanical closure
+
+The one authorized formal CPU run completed without retry at the exact repaired
+source commit. Evaluation and analysis both exited zero; the registered
+validator returned no error and PM independently reproduced the immutable
+first-match branch `MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37`. The exact
+mechanical record is
+`docs/research/cdc/EVIDENCE_NOTES/20260726_CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_RESULT.md`.
+Scientific interpretation and successor selection remain exclusively pending
+the formal-result External Pro review.
