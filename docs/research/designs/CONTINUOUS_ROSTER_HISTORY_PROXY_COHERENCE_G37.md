@@ -8,7 +8,7 @@ external_pro_disposition=IDENTIFIABLE_BOUNDED_FACTORIZED_HISTORY_PROXY_COHERENCE
 scientific_authority=external_pro
 implementation_authority=project_manager
 implementation_status=pm_accepted_after_7_focused_18_G36_G37_tests_and_repaired_same_commit_nonformal_COMPLETE
-formal_compute_status=not_authorized_before_alignment_and_same_commit_preflight
+formal_compute_status=authorized_after_ALIGNED_audit_and_repaired_same_commit_preflight
 training=none
 ```
 
@@ -112,4 +112,6 @@ The repaired same-commit bounded exercise completed operationally valid with
 4,608 real transitions, zero optimizer steps and a 6,370.006123-second formal
 projection. PM independently reproduced the empty validator error list, complete
 metrics object and nonformal branch. This remains prelaunch evidence only;
-formal compute is blocked on the single code-science alignment audit.
+the single code-science alignment audit returned `ALIGNED`. The exact repaired
+source commit and preflight are therefore eligible for one formal CPU execution
+under `CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_AUTHORIZATION_V1`.
