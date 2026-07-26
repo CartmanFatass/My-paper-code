@@ -74,11 +74,12 @@ foreach ($required in @(
     'operational_recovery_frozen_scientific_contract_mutation=forbidden',
     'operational_recovery_scientific_outcome_selection=forbidden',
     'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
-    'cross_task_routing=fixed_role_triples_from_router',
+    'cross_task_routing=fixed_role_sessions_plus_pre_send_live_settings_probe',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'workflow_design_manager_route=019f9d2f-e0ea-7411-9fd7-386f45f76909|gpt-5.6-sol|high',
-    'project_manager_route=019f9e4f-f4d0-7fe0-b214-c47fd034e84d|gpt-5.6-sol|xhigh',
-    'external_review_operator_route=019f9c6a-9401-7ae0-ace5-dd827dccba2b|gpt-5.6-luna|medium',
+    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
+    'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'external_review_operator_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -104,9 +105,9 @@ foreach ($required in @(
     'operational_recovery_scientific_iteration_cost=zero',
     'operational_recovery_scientific_disposition=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_target_identity=fixed_router_role_session',
     'cross_task_route_cache=forbidden',
-    'cross_task_model_thinking_source=fixed_router_role_triple',
+    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
     'CURRENT_WORK.md',
@@ -171,9 +172,9 @@ foreach ($required in @(
     'experiment_runtime_authority=none',
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_target_identity=fixed_router_role_session',
     'cross_task_route_cache=forbidden',
-    'cross_task_model_thinking_source=fixed_router_role_triple',
+    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'CODE_SCIENCE_INDEX.md')) {
@@ -194,11 +195,11 @@ foreach ($required in @(
     'git_authority=none',
     'completion_notification=required_once',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_triple',
+    'cross_task_target_identity=fixed_router_role_session',
     'cross_task_route_cache=forbidden',
-    'cross_task_model_thinking_source=fixed_router_role_triple',
+    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'cross-task',
-    'Model and thinking are tool parameters only')) {
+    'live model and thinking as visible tool parameters')) {
     if (-not $reviewOperatorNormalized.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }

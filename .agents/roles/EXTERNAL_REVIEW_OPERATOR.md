@@ -14,9 +14,9 @@ browser_authority=registered_external_pro_conversation_only
 answer_now_activation=forbidden
 completion_notification=required_once
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_triple
+cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_source=fixed_router_role_triple
+cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 ```
 
 This task removes browser-control pressure from Project Manager without adding
@@ -58,7 +58,8 @@ browsing or editing.
 - Verbatim replacement of the assigned raw placeholder and mechanical facts in
   the assigned intake file. No other repository path may be written.
 - Exactly one inter-task terminal notification to the fixed Project Manager
-  triple. Model and thinking are tool parameters only and never payload fields.
+  session after reading and explicitly echoing its live model and thinking as
+  visible tool parameters. They are never payload fields.
 
 ## Must not
 
@@ -73,8 +74,9 @@ browsing or editing.
 
 ## Terminal delivery
 
-On success, use `$hmasd-cross-task-routing` and send exactly one cross-task
-message to the fixed Project Manager triple without route settings in the
+On success, use `$hmasd-cross-task-routing`, read the fixed Project Manager
+session's live model and thinking, explicitly echo both in the visible tool
+call, and send exactly one cross-task message without route settings in the
 payload:
 
 ```text

@@ -34,9 +34,9 @@ project_development_skill=hmasd-agile-research-development
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 handoff_document_write_trigger=explicit_user_request_only
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_triple
+cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_source=fixed_router_role_triple
+cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 ```
 
 After the router, read `docs/project/CURRENT_WORK.md`, this charter and only the
@@ -153,14 +153,15 @@ pre-implementation review. Pro resolves scientific content.
 - Maintain `CURRENT_WORK.md` as the smallest current code attention pointer.
   Closed or abandoned candidates are not active assignments; detailed evidence
   remains in Git history, review rounds, reports and ledgers.
-- For workflow-design changes, use `$hmasd-cross-task-routing` to confirm the
-  fixed Workflow Design Manager triple, then send an exact bounded request with
-  that model and thinking supplied only as tool parameters. PM does not
+- For workflow-design changes, use `$hmasd-cross-task-routing` with the fixed
+  Workflow Design Manager session, read its live model and thinking immediately
+  before sending, and explicitly echo both as visible tool parameters. PM does not
   locally reinterpret its accepted design, and Workflow Design Manager does not
   take over runtime execution.
-- For each Pro boundary, use `$hmasd-cross-task-routing` to confirm the live
-  fixed External Review Operator triple, then send the exact pushed review files
-  and return role without any route model or effort fields in the payload.
+- For each Pro boundary, use `$hmasd-cross-task-routing` with the fixed External
+  Review Operator session, read and explicitly echo its live model and thinking,
+  then send the exact pushed review files and return role without any route
+  model or effort fields in the payload.
   Receive only its exact-raw file path and terminal notification; do not load
   browser steps into PM context.
 - Supply the Experiment Operator one immutable authorized run assignment. It

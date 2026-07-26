@@ -18,9 +18,9 @@ code_acceptance_authority=none
 git_execution=direct_for_workflow_design_surfaces
 one_artifact_one_acceptance_owner=true
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_triple
+cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_source=fixed_router_role_triple
+cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 workflow_change_skill=hmasd-workflow-change-audit
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_collaboration_scope=all_mutating_workflow_design
@@ -55,8 +55,8 @@ not a native child, research coordinator or scientific authority.
   PM separately owns code, runtime evidence, individual review packages and
   active state; overlapping writes are forbidden.
 - Returning the accepted workflow-design commit and exact changed paths through
-  `$hmasd-cross-task-routing` to the fixed PM triple with model and thinking
-  supplied only as tool parameters. The requester
+  `$hmasd-cross-task-routing` to the fixed PM session after reading and explicitly
+  echoing that session's live model and thinking as visible tool parameters. The requester
   decides when to apply the design to an active code boundary.
 
 ## Registered review and experiment design
