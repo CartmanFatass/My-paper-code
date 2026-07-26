@@ -1,0 +1,38 @@
+{
+  "branch": "SOURCE_NECESSITY_UNRESOLVED",
+  "reason": "at least one margin did not clear its threshold under these constructive controls",
+  "horizon": 139,
+  "energy_stage": "S1",
+  "stage_note": "S1 disables battery_enabled and charging_enabled, so the energy dynamics that create roster change are inert there; S2/S3/S4 enable them",
+  "check_every": 10,
+  "episodes": 8,
+  "n_relay": 2,
+  "n_service": 4,
+  "n_uavs": 6,
+  "n_users": 30,
+  "focal_stable_uav": 0,
+  "focal_flex_uav": 2,
+  "external_return": "unclipped mean rate / qos_target, summed over the window; the clipped form was vacuous, see qos_ratio",
+  "probe_qos_saturation_fraction": 1.0,
+  "arms_all_equal": false,
+  "arm_means": {
+    "constructive": 217.72343738317122,
+    "null": 218.54107035923874,
+    "keep_stable": 217.71417812391195,
+    "set_stable": 157.12887667829517,
+    "keep_flex": 217.74824176654715,
+    "set_flex": 217.72009233659494
+  },
+  "b_h": -0.8176329760675287,
+  "u_star_stable_src": -60.58530144561678,
+  "u_star_flex_src": -0.028149429952208038,
+  "normalized": {
+    "stable": 74.09840749942185,
+    "flex": 0.03442795334355884
+  },
+  "thresholds": {
+    "stable_ceiling": -0.1,
+    "flex_floor": 0.1
+  },
+  "contract": "docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md"
+}

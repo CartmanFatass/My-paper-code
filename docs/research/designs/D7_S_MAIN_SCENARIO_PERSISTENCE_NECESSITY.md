@@ -196,6 +196,81 @@ Part A rules out the middle branch structurally. The remaining question is wheth
 the margin clears `0.10`, i.e. `PERSISTENCE_NECESSARY_SOURCE` versus
 `SOURCE_NECESSITY_UNRESOLVED`.
 
+## Part B — measured at stage S1, and the stage is the finding
+
+```text
+audit   scripts/audit_d7_s_persistence_margin.py
+run     logs/nonformal_d7_s_persistence_margin_20260725_s1
+scale   H = 139, Delta = 10, 8 episodes, constructive controls only, no policy
+branch  SOURCE_NECESSITY_UNRESOLVED
+```
+
+| Arm | Return over `H` | |
+|---|---:|---|
+| `constructive` — every duty re-decided at each check | 217.723 | |
+| `null` — t=0 layout held for the whole window | **218.541** | **higher** |
+| `keep_stable` — relay holds its post | 217.714 | |
+| `set_stable` — relay swaps duty with a service UAV | **157.129** | **−27.8 %** |
+| `keep_flex` — one service UAV holds its post | 217.748 | |
+| `set_flex` — that service UAV re-decides each check | 217.720 | |
+
+```text
+B_H           = -0.818      constructive minus null -- NEGATIVE
+U*_stable,src = -60.585     -27.8 % of return
+U*_flex,src   =  -0.028     -0.013 % of return
+```
+
+**Three readings, and the third is the one that matters.**
+
+1. **Persistence is strongly valuable.** Forcing the relay to exchange duties costs
+   **27.8 %** of external return over the window. Part A's structural argument is now
+   quantitative, and the sign is unambiguous.
+2. **The flexible duty is not flexible.** Re-deciding a service UAV changes return by
+   `-0.013 %`. Over 139 steps at `user_max_speed = 15 m/s` inside an 8000 m area,
+   four service UAVs at cluster centroids cover the drift without re-decision.
+3. **Renewal has *negative* value.** `null` beats `constructive`: never re-deciding
+   is better than re-deciding at every check, because re-targeting makes UAVs chase
+   slowly drifting centroids and pay motion for nothing. So `B_H < 0` and the
+   normalization is invalid, not merely tight.
+
+**Why this is a stage artifact, not a verdict on the source.** Pro's condition 1 for
+a usable source is that at supported histories *one commitment should beneficially
+persist while another should beneficially renew*. At S1 the first half holds strongly
+and the second half is absent — and S1 is exactly the stage that switches the
+renewal-creating dynamics **off**: `_build_profile_overrides` sets
+`battery_enabled: False` and `charging_enabled: False`, and only `S2`, `S3`, `S4`
+turn them on (`S4` additionally enables UAV failure and faster cluster motion).
+
+In this source the thing that forces roster change is **energy** — a UAV must leave
+to recharge, and its duty must be taken over. With energy inert there is nothing to
+renew *for*, so measuring renewal value at S1 measures the absence of a mechanism
+rather than a property of the environment.
+
+**The instrument had to be replaced once, and the measurement said so.** The first
+proxy was the clipped QoS satisfaction ratio, which the layout oracle maximizes.
+Over a 40-step window five of six arms returned *exactly* `38.66666666666668`
+= `40 × 29/30`: the probe reports `qos_saturation_fraction = 1.0`, so clipping pins
+almost every user at `1.0` and the metric cannot separate a good layout from a worse
+one. `B_H` was identically `0`. That is the pre-freeze checklist's vacuous-measurement
+failure, and the proxy was replaced with the **unclipped** mean rate ratio *because it
+separated no arm at all* — not because it missed a threshold, which was never
+reached. Saturation is now re-checked and reported on every run.
+
+## Part B remains open, and what it needs
+
+`SOURCE_NECESSITY_UNRESOLVED` stands **at S1 only**. The audit must be re-run at
+`S2` or above, and that needs one change to the harness rather than to the contract:
+
+> The audit drives the physics directly and therefore never depletes a battery —
+> energy accounting lives in `env.step()`. At `S2+` the harness must go through
+> `step()` with actions that steer toward duty targets, reading external return from
+> the step info, or call the energy update explicitly. Until then, an `S2+` number
+> from this harness would report energy-enabled *labels* over energy-inert
+> *dynamics*.
+
+`D8` stays blocked. Nothing here authorizes implementation or compute beyond the
+zero-training constructive controls already used.
+
 ## What this changes now
 
 `D8` remains blocked in every branch until Part B resolves. Nothing here authorizes
