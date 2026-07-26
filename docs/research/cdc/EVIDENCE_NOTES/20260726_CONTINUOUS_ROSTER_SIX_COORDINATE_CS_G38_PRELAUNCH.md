@@ -8,7 +8,7 @@ implementation_code_commit=0fd5f73cc783d5056fdd8019e820965e522c7977
 technical_acceptance_owner=project_manager
 technical_acceptance=ACCEPTED
 formal_compute_started=false
-nonformal_compute_started=false
+nonformal_compute=COMPLETE_operational_valid_same_source
 next_boundary=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_CODE_SCIENCE_ALIGNMENT_AUDIT
 ```
 
@@ -98,5 +98,46 @@ does not authorize training. External Pro must first return `ALIGNED` from the
 single read-only G38 code-science audit. Only then may the registered Experiment
 Operator execute the exact same-source bounded nonformal preflight. Formal work
 additionally requires the preflight bindings and the dedicated frozen token.
+
+## Same-source bounded preflight
+
+After External Pro returned `AUDIT_DISPOSITION=ALIGNED`, the registered
+Experiment Operator executed the exact source commit once at:
+
+`logs/nonformal_continuous_roster_six_coordinate_cs_g38_cpu_20260726_0fd5f73_r1`
+
+```text
+exit_code=0
+formal=false
+operational_valid=true
+operational_errors=[]
+branch=NONFORMAL_CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_EXERCISE_COMPLETE
+replicates=1
+arms=2
+fast_updates_per_arm=10
+return_to_go_updates_per_arm=10
+environments_per_update=8
+ppo_passes=2
+evaluation_cells=30
+evaluation_episodes_per_cell=8
+real_transitions=26880
+optimizer_steps=120
+bootstrap_resamples=250
+train_seconds=54.891060499998275
+evaluate_seconds=9.751860000000306
+analyze_seconds=0.1641401999986556
+nonformal_total_seconds=64.80706069999724
+formal_projection_seconds=2651.7333787498865
+formal_projection_executable=true
+```
+
+PM independently reran the read-only artifact validator. The training and
+evaluation error list was empty; source commit, replicate/cell inventory,
+training/evaluation digests and the exact projection formula all matched the
+serialized artifacts. No retry, resume or second run occurred.
+
+The standing user CPU grant now permits exactly one formal G38 execution from
+the same source, with the aligned audit, all three preflight digests and the
+token `CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_FORMAL_AUTHORIZATION_V1`.
 
 No G33 path was read, restored, staged or reactivated.
