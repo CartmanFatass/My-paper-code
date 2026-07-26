@@ -1,187 +1,309 @@
-# D7.S event-aligned source audit — re-registered contract
+# D7.S event-aligned source audit — frozen contract
 
-Status: **DRAFT_FOR_PRO_FREEZE** — authored 2026-07-26 from the ruling in
-`docs/external-review/rounds/20260726_d7_s_part_b_flex_arm_and_instrument/21_PRO_OPEN_RAW.md`.
-Supersedes the Part B realization of `D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md`
-(whose Part A structural certificate stands untouched). Nothing here is frozen
-until Pro confirms; no conclusion-bearing measurement may run before that.
+Status: **FROZEN 2026-07-26**, recording External Pro's rulings of
+`rounds/20260726_d7_s_part_b_flex_arm_and_instrument/21_PRO_OPEN_RAW.md`
+(the ordering ruling) and
+`rounds/20260726_d7_s_event_aligned_contract_freeze/21_PRO_OPEN_RAW.md`
+(FREEZE AFTER MODIFICATION — eleven amendments, all incorporated below).
+Supersedes the Part B realization of
+`D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md`; Part A's structural
+certificate stands. Never edited after this freeze; supersede with a new
+file. This contract authorizes neither implementation nor compute.
 
-Ordered by Q7 of the ruling: this contract is evidence action 0. Actions 1–3
-(conformance derivation, development-topology exercise, one joint audit) run
-only after freeze, in that order.
+## 0. Environment instance (explicit binding)
 
-## 1. Estimand — one intervention, two history classes
+```text
+preset                    S7-S3
+physical_uavs             8
+episode_steps             1500
+battery_capacity_wh       160
+charging_stations         2, capacity 1 each
+charging_power_w          1000
+temporary_failures        false
+rejoin_battery_ratio      0.80
+initial_energy_profile    heldout_low = (0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80)
+                          fresh private permutation each episode (G2 RNG rule)
+```
 
-For mechanism `m ∈ {stable, flex}` at a qualified check history `h_m`
+All remaining environment, action, channel and energy semantics inherit the
+G2 frozen block (`UAV_CHARGE_ROTATION_ROSTER_G2.md`). `heldout_low` is the
+only substantive profile deviation from the G2 training instance and is
+named in every branch payload: the claim is scoped to
+
+> persistence and renewal necessity on the registered G2 `heldout_low`
+> S7-S3 profile.
+
+The training multiset may run only as a support diagnostic, never pooled.
+
+## 1. Estimand
+
+For mechanism `m ∈ {stable, flex}` at the qualified joint event history
 (section 2):
 
 ```text
-V_KEEP_m(h_m) = max over legal joint continuations of
-                E[ G_{H_m} | focal commitment held for exactly Delta ]
-V_SET_m(h_m)  = max over z != z_i and legal joint continuations of
-                E[ G_{H_m} | focal agent reassigned to z for exactly Delta ]
-U*_m,src      = V_SET_m - V_KEEP_m
+V_KEEP_m = max over legal joint continuations of
+           E[ G_{H_m} | focal commitment held for exactly Delta ]
+V_SET_m  = max over z in Z(h), z != z_i, legal joint continuations of
+           E[ G_{H_m} | focal agent reassigned to z for exactly Delta ]
+U*_m,src = V_SET_m - V_KEEP_m          Delta = 10 primitive steps
 ```
 
-- `Delta = 10` primitive steps — the R30 commitment unit. The forced focal
-  action binds for exactly one `Delta`; at `t + Delta` every constraint is
-  released and **both branches receive the same best legal continuation**.
-- The `max over z` is mandatory. Where the legal alternative set is finite it
-  is enumerated; selection replicates choose the maximizing alternative and
-  **independent evaluation replicates** estimate its return (split-sample),
-  unless the continuation is exactly deterministic and analytically evaluated.
-- Non-focal duties are **not** frozen in either branch: both arms optimize
-  every non-focal assignment. A SET branch may coincide behaviorally with the
-  mixed constructive optimum; what must be explicit is the focal decision,
-  not a behavioral difference.
+At `t_e + Delta` every constraint is released; both branches receive the
+same best legal continuation. Non-focal duties are never frozen: for every
+candidate `z`, all other airborne assignments are reoptimized one-to-one
+under `constructive_mixed` rules; if targets outnumber airborne survivors,
+the continuation chooses the uncovered target by maximizing `G`.
 
-## 2. History classes — evaluator-certified, never role-named
+## 2. The joint mixed-urgency event — one per episode
 
-Both classes are certified per-episode from realized state by the evaluator.
-Role indices, reset-time slots and fixed UAV ids are prohibited as selectors.
+`t_e` is **the first shared check boundary at which a UAV has undergone a
+planned, capture-based transition ACTIVE → CHARGE_ABSENT under the
+registered G2 constructive charge-rotation controller**, that also
+satisfies both certifications below. The battery-threshold trigger 0.25 of
+the superseded harness is retired as an event definition. If the first
+otherwise-qualified LEAVE lacks a certified stable incumbent, continue to
+the next planned LEAVE in the episode; once a joint qualifying event is
+found, stop event search for that episode. Stable and flex limbs are
+evaluated at the same `t_e`.
 
-**Stable check `h_stable`:** a supported shared check where an active
-incumbent's current backhaul/service target remains locally optimal or
-materially unchanged over the next `Delta`, and that incumbent holds a valid
-current commitment.
+**Eligibility (complete-case, no censored estimators):**
+`t_e <= 1500 − 550 = 950`. Ineligible events are excluded from both limbs,
+both `B_m` quantities, the Part-A conformance comparison, and the event
+count. Excluded also: emergency cutoff/depletion-driven absence, occupied
+station or nonzero queue at the selected station, temporary failure, and
+any LEAVE not generated by the registered constructive charge schedule.
 
-**Flex check `h_flex`:** a supported shared check at an actual energy-driven
-handoff opportunity: a duty is being or has just been vacated by a UAV
-entering its charge-return/absence process; at least one active survivor has
-a legal alternative assignment covering the vacated duty; the focal flexible
-agent is selected by the evaluator from current physical state.
+**Stable certification** (all required): active with a valid incumbent; the
+evaluator's recomputed oracle target for its incumbent duty moves at most
+**X = 50 m** over the next `Delta` (S7 overrides user/cluster speed to
+5 m/s, so 50 m is the Δ-scale); not itself scheduled to LEAVE during that
+`Delta`; at least one legal SET alternative exists. The future Δ-step
+target is evaluator-only.
 
-Both certifications require the focal agent active with a valid incumbent
-commitment. At most **one pre-registered qualifying event of each type per
-episode** enters the audit (else cluster all events at episode and topology
-level — one rule, chosen at freeze, not per run).
+**Flex certification** (all required): planned capture-based LEAVE, after
+the preceding shared check and at most **Y = 10 steps** before `t_e`; no
+queue or cutoff/depletion path caused it; at least one active survivor can
+cover the vacancy — `ceil(|p_i − z_vac| / (v_max · dt)) <= Z = 139` steps
+without violating hard return/depletion support. Focal = the qualifying
+survivor with minimum transit time, ties by the canonical anonymous
+ordering frozen in the conformance derivation.
 
-## 3. Horizons — per mechanism, event-anchored
+**Empty alternative set:** a certified history must contain at least one
+legal focal SET alternative; if none exists the history is ineligible (SET
+is never defined as KEEP, no synthetic zero). Report such exclusions.
+
+**Event conformance record per event:** pre/post service status, capture
+edge / `last_charging_arrival`, `uav_charging`, `uav_dock_requests`,
+`uav_target_stations`, battery ratio, return-energy margin, UAV and station
+positions, station occupancy and queue length, source-control schedule
+identity.
+
+## 3. Horizons
 
 ```text
-H_stable = 139   from the certified stable check   (transit window, unchanged)
-H_flex   = 450   from the first certified charge-handoff check
-                 (charge-duration + transit mechanism window)
-H = 1500         secondary whole-episode diagnostic only: verifies energy
-                 binds, describes rotation-system consequences, supports
-                 end-to-end G2 source controls. Never the gate.
+H_stable = 139   from the certified joint event check
+H_flex   = 550   from the LEAVE boundary
+H = 1500         secondary whole-episode diagnostic only, never the gate
 ```
 
-If an event lacks full `H_m` remaining source support, that episode is
-right-censored or ineligible under a support rule frozen here; the horizon is
-never shortened post hoc.
+`H_flex` derivation (frozen): worst planned non-depleted charge duration
+`(0.80 − 0.02) · 160 · 3600 / (1000 − 168.49) ≈ 540.3` steps (hover power
+168.49 W drains during charging), rounded up to the next shared check =
+550. The outbound trip precedes the LEAVE and is not included; REJOIN is
+scheduled at 0.80 at the next pre-action boundary, so no return leg is
+included. If queued LEAVEs or cutoff/depleted captures are ever admitted,
+this guarantee lapses and the event class must be re-registered.
 
-## 4. Normalizers — per mechanism, event-aligned, treatment-independent
+## 4. Controllers
 
-`B_stable`: constructive-minus-null measured on **stable-mechanism source
-controls** whose windows begin at certified stable checks.
-`B_flex`: same contrast on **charge-handoff source controls** whose windows
-begin at certified handoff events.
+**`constructive_mixed`** — binding reference: G2 `CONSTRUCTIVE_CHARGE_ROTATION`.
+It runs the registered deterministic charging schedule; preserves every
+active stable incumbent's target between lifecycle events; at a LEAVE
+removes the absent UAV from the airborne duty map, preserves feasible
+stable targets and incumbents, recomputes flexible service targets for the
+current airborne fleet, reassigns the vacated service capacity to the best
+legal survivor, and never deliberately leaves a coverable vacancy unserved;
+at REJOIN restores the UAV and recomputes flexible targets preserving
+stable incumbents; between lifecycle events it performs no full-sync
+permutation. Covering the vacancy may be realized by re-clustering — what
+is required is reoptimized service coverage after losing one active member.
 
-Both come from a **disjoint source-control/calibration episode block** —
-never from treatment-arm data, never from a reset-to-end window. The
-reset-to-end whole-episode `B` remains a descriptive headroom diagnostic.
+**`null`** — from the identical event prefix, freezes the pre-event duty
+ownership/map for the whole mechanism horizon: the charging UAV leaves
+under unchanged physics, its former duty gets no proactive replacement,
+survivors keep prior targets, a REJOIN inside the window triggers no
+proactive reoptimization. This is event-aligned `NO_PROACTIVE_ROTATION`.
 
-## 5. External return `G` — the registered safety score
+**`full_sync_SET`** — reassigns every duty at each check; conformance
+diagnostic only (section 8).
 
-Primary `G` is the registered G2 PBRS-free per-step safety score, summed over
-the window:
+## 5. Normalizers
+
+`B_m = G(constructive_mixed) − G(null)` over `H_m`, from a **disjoint
+calibration block**: 8 calibration episodes per topology, same topology and
+`heldout_low` profile as audit, disjoint episode seeds and energy
+permutations, one joint qualifying event per episode,
+`constructive_mixed` generates the common prefix, fork at `t_e` into the
+CRN pair, evaluate both `H_stable = 139` and `H_flex = 550` from the same
+paired continuations. A calibration episode without a qualifying event is a
+support miss, never a zero `B_m`. Calibration and treatment share topology
+but never episode, energy-permutation or continuation seeds.
+
+## 6. Legal SET alternatives
+
+At `t_e`, snapshot: the pre-LEAVE incumbent duty map, the post-LEAVE
+`constructive_mixed` survivor target map, and the vacated pre-LEAVE target.
 
 ```text
-G_t = qos_satisfaction_ratio - 2*return_cost - 5*new_cutoff - 10*new_depletion
+Z(h) = {post-LEAVE relay and service targets} ∪ {vacated pre-LEAVE target}
 ```
 
-The unclipped rate ratio is retained as a **secondary mechanism-localization
-metric**, reported with the safety-score components, never gated on. The
-reset-state clipped saturation probe is retired as a validity test and kept
-only as the historical record of the clipped proxy's retirement.
+deduplicated geometrically, held fixed for the focal Δ; the common
+continuation may recompute it after `t_e + Delta`. Excluded only: the focal
+incumbent target; targets outside the physical source/action domain;
+assignments requiring the focal to be absent/charging/failed/non-acting;
+hard safety/action-support violations. **Never** exclude a target for being
+unreachable within Δ — transit cost is part of SET's causal consequence.
+Cross-duty assignments are legal (service focal may take a relay target and
+vice versa). Only active airborne UAVs may own targets.
 
-## 6. Gate — linear contrasts with interval conditions
+## 7. Primary G and its measurement
 
 ```text
-T_stable = U*_stable,src + 0.10 * B_stable
-T_flex   = U*_flex,src   - 0.10 * B_flex
-
-stable limb clears  iff  UCB95(T_stable) < 0  and  LCB95(B_stable) > 0
-flex limb clears    iff  LCB95(T_flex)   > 0  and  LCB95(B_flex)   > 0
+G_t = qos_satisfaction_ratio − 2·return_constraint_cost (capped, 1.0)
+      − 5·new_cutoff − 10·new_depletion
 ```
 
-No ratio gates, no point-only gates. Ratios may be reported descriptively
-where the corresponding `B_m` interval excludes zero. Prospective only: the
-ep64 record is not relabeled.
+Analyzer-computed from component fields with these fixed weights; never
+reuse `safety_reward_before_pbrs` (dynamic return multiplier). Report
+`return_constraint_cost_raw` diagnostically, never gated.
 
-Uncertainty is a **hierarchical bootstrap**: resample topologies first, then
-episodes/qualifying events within each selected topology. The gate reads the
-topology-population contrasts; per-topology margins are mandatory diagnostics.
+**Window-local event latching:** at `t_e` record current cutoff/depletion
+masks as the previous-step state; within the window count at most the first
+false→true cutoff transition and first false→true depletion transition per
+UAV; pre-window events contribute zero; a post-recovery recurrence counts
+if it is the window's first transition of that type. Record both
+episode-latched (native) and window-latched (analyzer) counts; **gate on
+window-latched**. No environment reward is changed.
 
-## 7. Arms and controls
+**Secondary metric:** unclipped rate ratio, reported alongside components.
 
-| Arm | Meaning |
-|---|---|
-| `constructive_mixed` | holds stable assignments while renewing flexible ones — the design's constructive controller, correctly realized |
-| `null` | no renewal |
-| `full_sync_SET` | reassigns every duty at each check — **conformance diagnostic only** |
-| `KEEP_m` / `SET_m` | the focal one-`Delta` interventions of section 1, per mechanism |
+**Non-degeneracy audit (mandatory):** per arm, topology and limb report
+mean/variance of QoS ratio, mean/variance of capped return cost, cutoff
+incidence, depletion incidence, total G, user-step QoS saturation fraction,
+and the secondary metric. Emit `QOS_COMPONENT_SATURATED` when ≥95% of
+user-steps sit at the QoS ceiling AND arm-level mean QoS range < 0.01 (not
+by itself invalidating). Emit `PRIMARY_G_DEGENERATE` and stop before margin
+interpretation when all four component sequences are exactly arm-invariant
+under pairing, or `B_m` cannot establish a positive source-control
+contrast. Saturated QoS with separating safety components and positive-LCB
+`B_m` remains valid, scoped to the safety objective.
 
-CRN and fresh-environment-per-arm are retained: every arm starts from an
-identical pre-intervention history, topology, energy assignment, user-motion
-stream and random state, and the complete pre-intervention state is
-**checked, not assumed**. Topology is pinned per instance by the mechanism
-that actually works in this repository: construction, then
-`reset(seed=topology_seed)`, then explicit `_init_ground_bs()` and
-`_init_charging_stations()` — construction-time draws alone are NOT
-seed-determined (defect 4a). The conformance derivation (evidence action 1)
-must prove seed-to-coordinates determinism under this mechanism.
+## 8. Gate, inference and conformance test
 
-## 8. Result branches — all reachable or explicitly owned
+```text
+T_stable = U*_stable + 0.10·B_stable      stable clears iff UCB95(T_stable) < 0
+T_flex   = U*_flex   − 0.10·B_flex        flex clears   iff LCB95(T_flex) > 0
+each limb additionally requires LCB95(B_m) > 0
+```
 
-| Branch | Fires when | Consequence |
-|---|---|---|
-| `PERSISTENCE_NECESSARY_SOURCE` | both limbs clear | D7.3 proceeds |
-| `MATERIAL_STABLE_PERSISTENCE_IDENTIFIED` | stable clears, flex does not | partial: one commitment class has material value; no heterogeneous-urgency claim; D8 stays blocked |
-| `SOURCE_NECESSITY_UNRESOLVED` | anything else | stays unresolved; no automatic budget expansion without a pre-frozen expansion rule |
-| `PART_A_CONTRADICTION` | `full_sync_SET` matches the mixed constructive optimum | reopens the Part A structural ruling; invalidates downstream reads until resolved |
+**Hierarchical bootstrap** — 10,000 iterations, one-sided 95% percentile
+bounds (no BCa at 8 top-level units), common resampling stream
+`bootstrap_seed = 2026072601` for all primary quantities (covariance
+preserved). Per iteration: resample the 8 topologies with replacement;
+within each, independently resample calibration episodes and audit events;
+within each audit event resample selection streams and **re-run the
+selection of the maximizing z**, resample the paired evaluation streams;
+recompute `B_stable`, `B_flex`, both `U*`, both `T_m`, and the Part-A
+contrast.
 
-`ZERO_COST_ROLE_EXCHANGE_SOURCE` is no longer an advertised executable
-branch: Part A owns that certificate, and its failure mode surfaces as
-`PART_A_CONTRADICTION` through the conformance arm.
+**Replicates:** `n_select = 4`, `n_eval = 8`. Four selection streams per
+candidate `z` fix the maximizer; eight disjoint evaluation streams estimate
+selected SET and KEEP, sharing continuation base streams under CRN.
+Selection and evaluation seed namespaces are disjoint. Every stream's seed
+derives from a stable 64-bit hash of `(contract_id, topology_seed, block,
+episode_seed, limb, event_index, candidate_target_id, phase,
+replicate_index)`.
 
-## 9. Topology population — the paper-level scope
+**Fixed-history mechanism:** bit-identical prefix replay from reset —
+identical topology coordinates, initial-energy permutation, user-motion and
+channel streams, source-control decisions before `t_e`, and identical
+positions, battery, charging state, station/queue state, duty map and
+lifecycle mask at `t_e` — asserted by a state hash before forking. An
+equality failure invalidates that pair; it is never repaired.
 
-- at least **8 fresh topology seeds**, excluding `20260725` (development
-  topology — instrument-contaminated, reserved for the proof-sized exercise
-  with no scientific reading);
-- 8 audit episodes per topology, equal topology weighting;
-- a disjoint calibration block per topology for `B_stable`/`B_flex`;
-- actual BS/charging-station coordinates (or their hash) recorded in every
-  result artifact, not merely the seed;
-- standing provenance rule (repository-wide): any Scenario-7 result reused as
-  a causal comparator or paper-level premise must establish shared topology
-  or scope its claim to its realized/unknown topology; audited on reuse.
-  This section records the rule's origin; its standing home is `AGENTS.md`
-  (*Result interpretation*), which the reuse path actually reads.
+**Part-A conformance (stable event class only):**
+`D_A = G(full_sync_SET) − G(constructive_mixed)`; two one-sided 5% tests of
+`−0.05·B_stable < D_A < +0.05·B_stable`, conditional on
+`LCB95(B_stable) > 0` (δ = 0.05). Both pass → `PART_A_CONTRADICTION`
+(return-equivalence, reopening Part A's decision-relevant return
+implication). Full-sync materially worse → conformance passes. Interval
+overlapping both regions → diagnostic `PART_A_CONFORMANCE_UNRESOLVED`,
+which does not relabel the source branch. Never applied on the flex limb.
 
-## 10. Pre-freeze check (AGENTS.md), answered against this draft
+## 9. Topology population, pinning, and the one expansion
 
-1. *Signals at entry:* evaluation-only; no learning signal exists. The gate
-   quantities are estimated from returns; nothing is trivially zero because
-   KEEP and SET branches genuinely differ at any certified history where a
-   legal alternative exists — certification (section 2) guarantees one.
-2. *Gradient paths:* none — no trainable parameters.
-3. *Trivially satisfied invariants:* `set_flex ≡ constructive` is abolished
-   by construction — both limbs use the same explicit focal intervention;
-   arm-identity is proven in the conformance derivation (evidence action 1),
-   which must show the five arms pairwise distinct on a witness history.
-4. *Branches firing non-scientifically:* `SOURCE_NECESSITY_UNRESOLVED` on
-   zero qualifying events is a support failure, not a margin reading — the
-   result artifact must report qualifying-event counts per topology so an
-   empty support set is visible as such.
-5. *Initialization/credit cancellation:* not applicable; no credit rule.
+**Initial paper-level seeds (frozen):** 20260726, 20260727, 20260728,
+20260729, 20260730, 20260731, 20260732, 20260733. Topology 20260725 is
+development-only (proof-sized exercise, no scientific reading). Record per
+topology: ground-BS coordinates, charging-station coordinates, canonical
+coordinate hash, topology seed, reinitialization procedure version.
 
-## 11. What this contract does not authorize
+**Pinning procedure (ordering is load-bearing):** (1) construct a topology
+template under the topology seed; (2) record coordinates and hash; (3)
+fresh environment per arm/replicate; (4) reset with the episode seed; (5)
+**after that reset**, restore the recorded BS/station coordinates without
+consuming the episode RNG — Scenario 7's `reset` calls
+`_init_charging_stations()`, so pre-reset initialization is insufficient;
+(6) rebuild channel/routing state; (7) assert the coordinate hash before
+prefix replay.
 
-Implementation, compute, or any change to Part A, D0's estimand hierarchy,
-or closed results. After Pro freezes this contract: evidence action 1 is a
-zero-compute derivation; action 2 is a proof-sized exercise on `20260725`;
-action 3 is the single joint audit, which requires its own compute gate and
-prelaunch note under standing authority.
+**Design:** 8 topologies × (8 calibration + 8 audit) episodes,
+`n_select = 4`, `n_eval = 8`, equal topology weighting.
+
+**Minimum support (before reading margins):** qualifying calibration events
+in ≥6 of 8 topologies; qualifying audit events in ≥6 of 8; ≥4 qualifying
+calibration and ≥4 qualifying audit episodes in each counted topology.
+Failure emits `SOURCE_EVENT_SUPPORT_INSUFFICIENT` — never an automatic
+budget increase.
+
+**The one permissible expansion:** only when conformance and support pass,
+`B_m` points are positive, the relevant `T_m` points have intended signs,
+and one or more required bounds remain unresolved — add exactly the eight
+topologies 20260734–20260741 with identical counts, pool all 16 with equal
+weighting and the same bootstrap rule. **No second expansion.** Never
+expand on a wrong-direction point, a resolved-negative branch,
+`B_m ≤ 0`, support failure, or conformance failure.
+
+## 10. Result branches — first match by precedence
+
+| # | Branch | Meaning |
+|---:|---|---|
+| 1 | `INVALID_EVENT_ALIGNED_AUDIT` | prefix, topology, RNG, arm, component or split conformance failed |
+| 2 | `SOURCE_EVENT_SUPPORT_INSUFFICIENT` | registered event population below minimum support |
+| 3 | `PRIMARY_G_DEGENERATE` | primary safety objective cannot separate source controls |
+| 4 | `PART_A_CONTRADICTION` | full-sync SET return-equivalent to constructive mixed on the stable limb |
+| 5 | `PERSISTENCE_NECESSARY_SOURCE` | both limbs clear |
+| 6 | `STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL` | stable clears; flex affirmatively misses (`LCB95(B_flex) > 0` and `UCB95(T_flex) < 0`) |
+| 7 | `MATERIAL_STABLE_PERSISTENCE_IDENTIFIED` | stable clears; flex statistically unresolved |
+| 8 | `NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED` | flex affirmatively misses; stable does not clear |
+| 9 | `NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED` | stable affirmatively on the non-material side |
+| 10 | `SOURCE_NECESSITY_UNRESOLVED` | valid support and measurement, no resolved branch |
+
+Branches 6–9 are affirmative resolutions, never collapsed into 10. Branch 6
+blocks D7.3/D8 on this source formulation and strengthens explanation E3.
+D7.3 proceeds only on branch 5. D8 stays blocked until D7.3 establishes
+decision-time-predictable, label-free urgency.
+
+## 11. Evidence order after this freeze
+
+1. **Zero-compute conformance derivation** proving: event detection,
+   topology restoration, duty-map construction, legal candidate
+   enumeration, distinct arms (pairwise, on a witness history), window-local
+   safety components, and reachability of every branch above.
+2. **Proof-sized exercise on topology 20260725** — history equality, event
+   availability, selection/evaluation separation, serialization; no
+   scientific reading.
+3. **The joint held-out-topology audit**, under its own compute authority,
+   both limbs in one evidence action.
+4. D7.3 only on `PERSISTENCE_NECESSARY_SOURCE`; then D8 per its ladder.
