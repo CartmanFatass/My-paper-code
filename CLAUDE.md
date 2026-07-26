@@ -98,7 +98,11 @@ subagent_definitions=.claude/agents/*.md
 implementer_tier=sonnet_high
 reviewer_tier=opus_high
 mechanical_tier=haiku_low
+general_purpose_tier=opus_high
 ```
+
+An unregistered `general-purpose` spawn never inherits the orchestrator's own
+model: pass `opus` explicitly, at high effort (user ruling 2026-07-26).
 
 Those are defaults for a **new** role by class. Each definition carries its own
 model, effort and tool grant and is the authority for that agent; several
