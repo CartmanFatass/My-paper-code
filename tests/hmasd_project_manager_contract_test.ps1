@@ -36,52 +36,89 @@ $operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXPERI
 $reviewOperator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
 foreach ($required in @(
     'workflow_manager_persistent_task=one',
-    'workflow_manager_workflow_authority=exclusive',
-    'workflow_manager_git_authority=direct_for_workflow_review_and_state',
+    'workflow_manager_workflow_design_authority=exclusive',
+    'workflow_manager_workflow_runtime_authority=none',
+    'workflow_manager_current_work_authority=none',
+    'workflow_manager_git_authority=direct_for_workflow_design_surfaces',
     'workflow_manager_remote_repository_authority=permanent_user_grant',
     'workflow_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
     'project_manager_code_authority=exclusive',
-    'project_manager_git_authority=direct_for_code_and_engineering_evidence',
+    'project_manager_runtime_authority=exclusive',
+    'project_manager_current_work_authority=exclusive',
+    'project_manager_git_authority=direct_for_code_runtime_evidence_and_state',
     'project_manager_remote_repository_authority=permanent_user_grant',
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
-    'project_manager_external_review_authority=post_implementation_code_index_and_repair_only',
+    'project_manager_external_review_dispatch_and_result_routing=exclusive',
+    'project_manager_experiment_dispatch_and_result_routing=exclusive',
+    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
+    'cross_task_silent_model_effort_override=forbidden',
     'external_review_operator_transport_authority=exclusive')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'role_kind=sole_persistent_code_authority_task',
-    'workflow_authority=none',
-    'git_execution=direct_for_code_and_engineering_evidence',
-    'external_review_authority=post_implementation_code_index_and_repair_only',
-    'experiment_orchestration=none',
-    'current_work_access=forbidden_by_default',
+    'role_kind=sole_persistent_code_and_runtime_authority_task',
+    'session=019f9d04-8b21-7512-acc7-ffe02d262c82',
+    'model=gpt-5.6-sol',
+    'reasoning_effort=max',
+    'workflow_design_authority=none',
+    'current_work_owner=exclusive',
+    'git_execution=direct_for_code_runtime_evidence_and_state',
+    'external_review_dispatch_and_result_routing=exclusive',
+    'experiment_orchestration=registered_native_child',
+    'workflow_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'workflow_manager_target_model=gpt-5.6-sol',
+    'workflow_manager_target_effort=high',
+    'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'external_review_operator_target_model=gpt-5.6-luna',
+    'external_review_operator_target_effort=high',
+    'cross_task_silent_override=forbidden',
     'CODE_SCIENCE_INDEX.md',
     'scripts/hmasd_workspace_ticket.py',
-    'Never spawn the experiment operator',
-    'Workflow Manager owns continuation')) {
+    'CURRENT_WORK.md',
+    'PM receives one terminal')) {
     if (-not $pm.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
     'role=workflow_manager',
-    'role_kind=sole_persistent_workflow_authority_task',
+    'role_kind=dedicated_persistent_workflow_design_authority_task',
+    'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'model=gpt-5.6-sol',
     'reasoning_effort=high',
-    'workflow_authority=exclusive',
-    'workflow_acceptance_authority=exclusive',
+    'workflow_design_authority=exclusive',
+    'workflow_runtime_authority=none',
+    'current_work_authority=none',
+    'external_review_runtime_authority=none',
+    'experiment_runtime_authority=none',
     'code_acceptance_authority=none',
-    'current_work_owner=exclusive',
+    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
+    'project_manager_return_model=gpt-5.6-sol',
+    'project_manager_return_effort=max',
+    'cross_task_silent_override=forbidden',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'CODE_SCIENCE_INDEX.md')) {
     if (-not $workflow.Contains($required)) { throw "Workflow Manager role missing: $required" }
+}
+if ($workflow.Contains('current_work_owner=exclusive') -or
+    $workflow.Contains('external_review_dispatch_and_result_routing=exclusive') -or
+    $workflow.Contains('experiment_dispatch_and_result_routing=exclusive')) {
+    throw 'Workflow Manager retains project-runtime authority'
+}
+if ($pm.Contains('current_work_access=forbidden_by_default') -or
+    $pm.Contains('experiment_orchestration=none')) {
+    throw 'Project Manager is denied its runtime attention boundary'
 }
 foreach ($required in @(
     'role=external_review_operator',
     'scientific_authority=none',
     'git_authority=none',
     'completion_notification=required_once',
+    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
+    'project_manager_return_model=gpt-5.6-sol',
+    'project_manager_return_effort=max',
+    'cross_task_silent_override=forbidden',
     'cross-task',
-    'target model and effort explicitly passed')) {
+    'cross_task_send_requires_explicit_target_model_effort=true')) {
     if (-not $reviewOperator.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }

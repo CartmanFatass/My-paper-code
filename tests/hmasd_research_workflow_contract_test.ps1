@@ -59,18 +59,22 @@ foreach ($required in @(
     'dedicated Workflow Manager task',
     'Project Manager task',
     'registered native child',
-    'docs/project/CURRENT_WORK.md` is Workflow-Manager-only active state',
-    'workflow_manager_project_coordination_authority=exclusive',
-    'workflow_manager_workflow_authority=exclusive',
-    'workflow_manager_git_authority=direct_for_workflow_review_and_state',
-    'workflow_manager_external_review_dispatch_and_result_routing=exclusive',
-    'workflow_manager_experiment_dispatch_and_result_routing=exclusive',
+    'docs/project/CURRENT_WORK.md` is PM-only code attention and runtime state',
+    'workflow_manager_workflow_design_authority=exclusive',
+    'workflow_manager_workflow_runtime_authority=none',
+    'workflow_manager_current_work_authority=none',
+    'workflow_manager_git_authority=direct_for_workflow_design_surfaces',
+    'workflow_manager_external_review_runtime_authority=none',
+    'workflow_manager_experiment_runtime_authority=none',
     'project_manager_code_authority=exclusive',
+    'project_manager_runtime_authority=exclusive',
+    'project_manager_current_work_authority=exclusive',
     'project_manager_scientific_authority=none',
-    'project_manager_git_authority=direct_for_code_and_engineering_evidence',
+    'project_manager_git_authority=direct_for_code_runtime_evidence_and_state',
     'project_manager_remote_repository_authority=permanent_user_grant',
     'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
-    'project_manager_external_review_authority=post_implementation_code_index_and_repair_only',
+    'project_manager_external_review_dispatch_and_result_routing=exclusive',
+    'project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_review_operator_transport_authority=exclusive',
     'External Review Operator task',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
@@ -85,7 +89,9 @@ foreach ($required in @(
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_pro_response_sentinel.py',
-    'passes both explicitly in the send operation',
+    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
+    'cross_task_silent_model_effort_override=forbidden',
+    'each send passes model and effort explicitly',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -101,17 +107,22 @@ foreach ($required in @(
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
     'workflow_manager_task=',
-    'workflow_manager_current_model=gpt-5.6-sol',
-    'workflow_manager_current_effort=high',
+    'workflow_manager_fixed_model=gpt-5.6-sol',
+    'workflow_manager_fixed_effort=high',
     'external_review_operator_task=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
-    'external_review_operator_current_model=gpt-5.6-luna',
-    'external_review_operator_current_effort=high',
-    'project_manager_current_model=gpt-5.6-sol',
-    'project_manager_current_effort=max',
+    'external_review_operator_fixed_model=gpt-5.6-luna',
+    'external_review_operator_fixed_effort=high',
+    'project_manager_fixed_model=gpt-5.6-sol',
+    'project_manager_fixed_effort=max',
     'cross_task_send_requires_explicit_model_effort=true',
+    'cross_task_routing=fixed_session_id_plus_fixed_model_effort',
+    'cross_task_silent_model_effort_override=forbidden',
     'code_science_alignment_position=after_pm_implementation_acceptance',
     'code_science_alignment_index=commit_bound_CODE_SCIENCE_INDEX_required',
     'routine_preimplementation_code_science_review=forbidden',
+    'active_assignment_id=NO_ACTIVE_CODE_ASSIGNMENT_G33_ABANDONED',
+    'g33_status=ABANDONED_BY_USER_AFTER_DISCUSSION',
+    'g33_active_code_authority=none',
     'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
     'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
     'workflow_hash_validation=disabled')) {
@@ -155,49 +166,63 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'Project Manager directly stages, commits and pushes accepted code-owned paths',
-    'Workflow Manager separately stages, commits and pushes accepted workflow',
+    'Project Manager directly stages, commits and pushes accepted code, runtime',
+    'Manager separately stages only accepted workflow-design control-plane paths',
     'Native children never run Git',
     'fixed native child',
     'not a persistent task')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
 foreach ($required in @(
-    'role_kind=sole_persistent_code_authority_task',
+    'role_kind=sole_persistent_code_and_runtime_authority_task',
     'project_code_authority=exclusive',
-    'workflow_authority=none',
+    'project_runtime_authority=exclusive',
+    'workflow_design_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'current_work_access=forbidden_by_default',
-    'assignment_source=workflow_manager_exact_assignment',
+    'current_work_owner=exclusive',
+    'external_review_dispatch_and_result_routing=exclusive',
+    'experiment_orchestration=registered_native_child',
+    'workflow_manager_target_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'workflow_manager_target_effort=high',
+    'external_review_operator_target_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'external_review_operator_target_effort=high',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_INDEX.md',
-    'routine pre-implementation',
-    'experiment_orchestration=none')) {
+    'pre-implementation review',
+    'PM receives one terminal')) {
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
 foreach ($required in @(
     'role=workflow_manager',
-    'role_kind=sole_persistent_workflow_authority_task',
+    'role_kind=dedicated_persistent_workflow_design_authority_task',
+    'session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'model=gpt-5.6-sol',
     'reasoning_effort=high',
-    'project_coordination_authority=exclusive',
-    'workflow_authority=exclusive',
-    'workflow_acceptance_authority=exclusive',
+    'workflow_design_authority=exclusive',
+    'workflow_design_acceptance_authority=exclusive',
+    'workflow_runtime_authority=none',
+    'current_work_authority=none',
+    'external_review_runtime_authority=none',
+    'experiment_runtime_authority=none',
     'scientific_authority=none',
     'code_authority=none',
     'code_acceptance_authority=none',
-    'current_work_owner=exclusive',
-    'external_review_dispatch_and_result_routing=exclusive',
-    'experiment_dispatch_and_result_routing=exclusive',
+    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
+    'project_manager_return_model=gpt-5.6-sol',
+    'project_manager_return_effort=max',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_pm_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
     'CODE_SCIENCE_INDEX.md',
-    'hmasd-workflow-cost-reviewer',
-    'handoff_document_write_trigger=explicit_user_request_only')) {
+    'hmasd-workflow-cost-reviewer')) {
     if (-not $workflowManagerRole.Contains($required)) { throw "Workflow Manager role missing: $required" }
+}
+if ($workflowManagerRole.Contains('current_work_owner=exclusive') -or
+    $workflowManagerRole.Contains('external_review_dispatch_and_result_routing=exclusive') -or
+    $workflowManagerRole.Contains('experiment_dispatch_and_result_routing=exclusive')) {
+    throw 'Workflow Manager retains runtime ownership'
 }
 foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
@@ -231,21 +256,24 @@ foreach ($required in @(
     'git_authority=none',
     'answer_now_activation=forbidden',
     'completion_notification=required_once',
-    'Workflow Manager',
-    'target model and effort explicitly passed')) {
+    'Project Manager',
+    'project_manager_return_session=019f9d04-8b21-7512-acc7-ffe02d262c82',
+    'project_manager_return_model=gpt-5.6-sol',
+    'project_manager_return_effort=max',
+    'cross_task_send_requires_explicit_target_model_effort=true')) {
     if (-not $reviewOperatorRole.Contains($required)) {
         throw "External Review Operator role missing: $required"
     }
 }
-if (-not $workflowManagerRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
-    throw 'Workflow Manager role permits automatic handoff writing'
+if (-not $pmRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
+    throw 'Project Manager role permits automatic handoff writing'
 }
 foreach ($required in @(
     'write_trigger=explicit_user_request_only',
     'automatic_create_or_update=forbidden')) {
     if (-not $handoff.Contains($required)) { throw "Handoff contract missing: $required" }
 }
-if (-not $workflowAudit.Contains('update it only when the user explicitly requests a handoff')) {
+if (-not $workflowAudit.Contains('written only on explicit user request')) {
     throw 'Workflow audit Skill permits automatic handoff writing'
 }
 foreach ($required in @(
@@ -254,7 +282,7 @@ foreach ($required in @(
     'Project Manager integrates the exact accepted',
     'no relay or completion receipt exists',
     'External Pro owns',
-    'Workflow Manager routes the one existing comparison-only',
+    'Project Manager routes the one existing comparison-only',
     'commit-bound critical-point index',
     'CODE_SCIENCE_ALIGNMENT_AUDIT')) {
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
@@ -267,8 +295,9 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
-    'Workflow Manager control-plane procedure',
-    'Workflow Manager alone accepts workflow',
+    'Workflow Manager workflow-design procedure',
+    'Workflow Manager alone accepts',
+    'Workflow Manager never reads or edits them',
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
@@ -298,7 +327,8 @@ foreach ($required in @(
 foreach ($required in @(
     'scientific_acceptance_owner=external_pro',
     'code_acceptance_owner=project_manager',
-    'workflow_owner=workflow_manager',
+    'runtime_owner=project_manager',
+    'workflow_design_owner=workflow_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction',

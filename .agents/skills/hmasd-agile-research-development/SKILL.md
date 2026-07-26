@@ -40,9 +40,9 @@ A user-named one may be inspected only as reference.
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
    disposition and its design-audit status. Before implementation PM performs
    only a local feasibility read. It returns a concrete ambiguity,
-   impossibility or counterexample to Workflow Manager; there is no routine
-   pre-implementation Pro review. Pure operational work records why the audit
-   is not triggered.
+   impossibility or counterexample through the dedicated External Review
+   Operator as one focused clarification; there is no routine pre-implementation
+   Pro review. Pure operational work records why the audit is not triggered.
 2. **Bound.** Use the brief and
    `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Manager defines code
    files, engineering choices, exclusions and completion inside the Pro-frozen
@@ -62,7 +62,7 @@ A user-named one may be inspected only as reference.
    evaluation. Report commands, results, limits, and files. For new or materially
    changed claim-bearing code, PM writes the commit-bound critical-point index,
    pushes the accepted implementation, and sends its exact identity to Workflow
-   Manager. Workflow Manager routes the one existing comparison-only
+   Manager. Project Manager routes the one existing comparison-only
    `CODE_SCIENCE_ALIGNMENT_AUDIT` after implementation acceptance and before a
    formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.

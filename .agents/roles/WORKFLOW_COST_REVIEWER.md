@@ -14,6 +14,7 @@ code_acceptance_authority=none
 workflow_acceptance_authority=none
 write_authority=none
 git_authority=none
+cross_session_send=forbidden_native_final_return_only
 ```
 
 This low-frequency role audits only a newly added or expanded workflow step.

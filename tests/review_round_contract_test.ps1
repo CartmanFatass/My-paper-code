@@ -4,13 +4,20 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $registry = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') | ConvertFrom-Json
-if ($registry.schema_version -ne 32 -or
+if ($registry.schema_version -ne 33 -or
     $registry.round_operator.kind -ne 'dedicated_external_review_operator_task' -or
     $registry.round_operator.external_scientific_decision -ne 'external_pro_binding_within_user_boundary' -or
-    $registry.round_operator.decision_intake -ne 'workflow_manager_exact_raw_routing' -or
-    $registry.round_operator.git_boundary_owner -ne 'workflow_manager' -or
+    $registry.round_operator.decision_intake -ne 'project_manager_exact_raw_file_routing' -or
+    $registry.round_operator.git_boundary_owner -ne 'project_manager' -or
     $registry.intertask_transport_contract.transport_owner -ne 'dedicated_external_review_operator' -or
     $registry.intertask_transport_contract.operator_task_id -ne '019f9c6a-9401-7ae0-ace5-dd827dccba2b' -or
+    $registry.intertask_transport_contract.operator_model_effort_source -ne 'fixed_role_contract' -or
+    $registry.intertask_transport_contract.operator_model -ne 'gpt-5.6-luna' -or
+    $registry.intertask_transport_contract.operator_effort -ne 'high' -or
+    $registry.intertask_transport_contract.project_manager_return_target_source -ne 'fixed_role_contract' -or
+    $registry.intertask_transport_contract.project_manager_return_task_id -ne '019f9d04-8b21-7512-acc7-ffe02d262c82' -or
+    $registry.intertask_transport_contract.project_manager_return_model -ne 'gpt-5.6-sol' -or
+    $registry.intertask_transport_contract.project_manager_return_effort -ne 'max' -or
     $registry.intertask_transport_contract.cross_task_send_requires_explicit_model_effort -ne $true -or
     $registry.intertask_transport_contract.response_monitor_agent_type -ne 'hmasd-pro-response-monitor' -or
     $registry.intertask_transport_contract.response_monitor_model -ne 'gpt-5.6-luna' -or
@@ -27,7 +34,7 @@ $skillAgent = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-review-round/agents/openai.yaml')
 foreach ($required in @(
     'Dedicated-operator transport',
-    'dedicated External Review Operator task',
+    'fixed External Review Operator session',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
@@ -49,7 +56,7 @@ foreach ($required in @(
     'transport diagnostic',
     'materialize them from `stage_commit`',
     'not from the current working tree',
-    'explicit-model/effort Workflow-Manager completion notification',
+    'explicit-model/effort Project-Manager completion notification',
     'monitor terminal -> exact raw -> provenance intake -> monitor absence')) {
     if (-not $skill.Contains($required)) { throw "Review Skill missing: $required" }
 }
@@ -61,8 +68,8 @@ foreach ($required in @(
     'Never activate Answer now',
     'operator-brokered JSONL sentinel',
     'child never opens the browser',
-    'notify Workflow Manager once',
-    'explicitly passes the assignment-provided target model and effort')) {
+    'fixed Project Manager session once',
+    'explicitly passes gpt-5.6-sol/max')) {
     if (-not $skillAgent.Contains($required)) {
         throw "Review Skill agent prompt missing: $required"
     }

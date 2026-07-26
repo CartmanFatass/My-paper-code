@@ -22,7 +22,7 @@ foreach ($required in @(
     'model_reasoning_effort = "low"',
     'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
-    'active Workflow Manager',
+    'active Project Manager',
     'exactly one already-authorized run',
     'Monitoring is silent',
     'Do not emit commentary, progress updates, ETA messages',
@@ -38,16 +38,21 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',
-    'parent=workflow_manager',
+    'parent=project_manager',
     'model=gpt-5.6-luna',
     'reasoning_effort=low',
     'progress_notifications=forbidden',
     'terminal_notification_count=exactly_one',
     'terminal_values=COMPLETE|ERROR',
+    'cross_session_send=forbidden_native_final_return_only',
+    'Project Manager supplies',
     'restart policy, whose default is `forbidden`',
     'train -> evaluate -> analyze',
     'No progress, ETA, phase, heartbeat')) {
     if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
+}
+if ($profile.Contains('active Workflow Manager') -or $role.Contains('parent=workflow_manager')) {
+    throw 'Experiment runtime is still assigned to Workflow Manager'
 }
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',

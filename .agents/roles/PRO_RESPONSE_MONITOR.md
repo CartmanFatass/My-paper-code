@@ -15,6 +15,7 @@ browser_authority=none
 sentinel_write_authority=none
 progress_notifications=forbidden
 terminal_notification_count=exactly_one
+cross_session_send=forbidden_native_final_return_only
 terminal_values=COMPLETE|ERROR
 scientific_interpretation=forbidden
 repository_write_authority=none

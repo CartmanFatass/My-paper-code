@@ -6,13 +6,14 @@
 role=experiment_operator
 callable_agent_type=hmasd-experiment-operator
 role_kind=registered_nonpersistent_native_child
-parent=workflow_manager
+parent=project_manager
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_authorized_run
 progress_notifications=forbidden
 terminal_notification_count=exactly_one
 terminal_values=COMPLETE|ERROR
+cross_session_send=forbidden_native_final_return_only
 scientific_interpretation=forbidden
 git_authority=none
 source_write_authority=none
@@ -27,8 +28,8 @@ task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
 
 ## Exact assignment
 
-Workflow Manager supplies all of the following before spawn from the exact
-PM-accepted source package:
+Project Manager supplies all of the following before spawn from its exact
+accepted source package:
 
 - one source commit and one fresh run root;
 - the registered interpreter, CPU backend, and thread count;
@@ -52,7 +53,7 @@ file; terminal diagnostics may read the assigned paths after exit or handle
 loss.
 
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
-is sent to Workflow Manager. The only parent notification is the child's
+is sent to Project Manager. The only parent notification is the child's
 single final return:
 
 ```text
