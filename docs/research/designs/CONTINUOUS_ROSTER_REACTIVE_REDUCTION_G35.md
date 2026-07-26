@@ -7,8 +7,9 @@ source_id=CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_P0
 external_pro_disposition=IDENTIFIABLE_EMPIRICAL_REACTIVE_REDUCTION_G35_DESIGN
 scientific_authority=external_pro
 implementation_authority=project_manager
-implementation_status=pm_technically_accepted
-implementation_code_commit=42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56
+implementation_status=pm_technically_accepted_alignment_correction
+implementation_code_commit=f626dfd8a345ef670e08e601344b67e28ffb3563
+superseded_implementation_code_commit=42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56
 formal_compute_status=not_started
 ```
 
@@ -84,10 +85,26 @@ read-only `CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_ALIGNMENT_AUDIT
 
 ## PM technical acceptance
 
-Implementation commit `42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56`
-passed 14 focused tests and 79 shared-surface tests. Its single bounded
-nonformal exercise completed in 56.45 seconds with the exact 28,032-transition,
-120-optimizer-step and 33-cell inventory, `operational_valid=true`, and no
-scientific branch. The frozen conservative formal projection is 2,275.28
-seconds, below the 28,800-second cap. PM technically accepts this code; formal
-compute remains prohibited pending the required code-science alignment audit.
+The original implementation commit
+`42b9f85a7820ec5f4a3a7507d3a4e644b27fbc56` passed 14 focused tests, 79
+shared-surface tests and one bounded nonformal exercise. The implementation-post
+audit nevertheless returned `MISMATCH`: formal preflight trusted a favorable
+`analysis_result.json` without independently validating and binding the exact
+training and evaluation manifests.
+
+The in-contract correction commit
+`f626dfd8a345ef670e08e601344b67e28ffb3563` loads and validates all three
+nonformal artifacts, freezes the exact 28,032-transition, 120-optimizer-step
+and 33-cell inventory, recomputes the formal projection from the three
+serialized stage times, binds analysis to both manifest digests and repeats
+the check from the formal artifact's serialized absolute `preflight_root`.
+It changes no arm, source, seed, credit rule, threshold, evidence volume,
+estimand or first-match branch.
+
+The correction passed 17 G35-focused tests and the complete 82-test
+G19-through-G35 shared regression. Its single corrected bounded nonformal
+exercise completed in 97.21 seconds with `operational_valid=true`; PM
+independently revalidated all three artifacts and recomputed the conservative
+formal projection as 3,873.24 seconds, below the 28,800-second cap. PM
+technically accepts the correction. Formal compute remains prohibited until
+the one correction-only alignment recheck returns `ALIGNED`.
