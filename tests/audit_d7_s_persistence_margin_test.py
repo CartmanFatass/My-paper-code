@@ -221,5 +221,51 @@ def test_keep_flex_differs_from_constructive_when_the_layout_moves():
     assert a["return"] != b["return"]
 
 
+def test_bootstrap_mean_ci_brackets_a_known_mean():
+    x = np.array([10.0, 11.0, 9.0, 10.5])
+    ci = audit.bootstrap_mean_ci(x, seed=1)
+    assert ci["point"] == pytest.approx(x.mean())
+    assert ci["lo"] <= ci["point"] <= ci["hi"]
+    assert ci["episodes"] == 4
+
+
+def test_bootstrap_ratio_ci_is_a_ratio_of_means_not_a_mean_of_ratios():
+    """These differ, and the difference is the whole point when the denominator
+    is small in some episodes."""
+    num = np.array([2.0, 2.0, 2.0, 2.0])
+    den = np.array([1.0, 1.0, 1.0, 100.0])
+    ci = audit.bootstrap_ratio_ci(num, den, seed=2, iters=2000)
+    assert ci["point"] == pytest.approx(num.mean() / den.mean())
+    assert ci["point"] != pytest.approx(float(np.mean(num / den)))
+
+
+def test_ratio_ci_flags_a_denominator_that_changes_sign():
+    """The H=139 case: B_H was -1.514, near zero and not sign-stable. An interval
+    computed through that is meaningless however narrow it prints."""
+    num = np.array([-50.0, -50.0, -50.0, -50.0])
+    den = np.array([-4.0, -1.0, 1.0, 2.0])       # mean is small, sign varies
+    ci = audit.bootstrap_ratio_ci(num, den, seed=3, iters=4000)
+    assert ci["ratio_sign_stable"] is False
+
+
+def test_ratio_ci_reports_sign_stable_when_the_normalizer_is_healthy():
+    num = np.array([-9.0, -10.0, -8.0, -11.0])
+    den = np.array([60.0, 65.0, 63.0, 66.0])     # H=1500-like: comfortably positive
+    ci = audit.bootstrap_ratio_ci(num, den, seed=4, iters=4000)
+    assert ci["ratio_sign_stable"] is True
+    assert ci["lo"] <= ci["point"] <= ci["hi"]
+    assert ci["resamples_with_unusable_denominator"] == 0
+
+
+def test_ratio_ci_resamples_episodes_not_arms():
+    """With one episode there is nothing to resample, so the interval must
+    collapse onto the point rather than pretend to information it lacks."""
+    ci = audit.bootstrap_ratio_ci(np.array([-9.0]), np.array([60.0]),
+                                  seed=5, iters=500)
+    assert ci["lo"] == pytest.approx(ci["point"])
+    assert ci["hi"] == pytest.approx(ci["point"])
+    assert ci["episodes"] == 1
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))

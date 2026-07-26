@@ -129,6 +129,59 @@ def saturation_fraction(env) -> float:
     return float(np.mean(rates_bps >= target))
 
 
+def bootstrap_ratio_ci(num: np.ndarray, den: np.ndarray, *, seed: int,
+                       iters: int = 20000, alpha: float = 0.05) -> dict:
+    """Percentile CI for `mean(num) / mean(den)`, resampling whole EPISODES.
+
+    The episode is the independent unit: arms are CRN-paired inside one, so
+    resampling arms would treat paired observations as independent and understate
+    the interval. Resampling episodes keeps the pairing intact.
+
+    A ratio of means, not a mean of ratios. `B_H` can be small or cross zero at
+    short horizons -- it was `-1.514` at `H = 139` -- and per-episode ratios then
+    explode or flip sign. `ratio_sign_stable` reports whether the denominator kept
+    one sign across every resample; when it is False the interval is meaningless
+    however narrow it looks, and the point estimate is not rescuable either.
+    """
+    num = np.asarray(num, dtype=float)
+    den = np.asarray(den, dtype=float)
+    n = num.size
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(0, n, size=(iters, n))
+    num_bs = num[idx].mean(axis=1)
+    den_bs = den[idx].mean(axis=1)
+
+    sign_stable = bool(np.all(den_bs > 0.0)) or bool(np.all(den_bs < 0.0))
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = np.where(np.abs(den_bs) > 1e-12, num_bs / den_bs, np.nan)
+    finite = ratio[np.isfinite(ratio)]
+    lo, hi = (float(np.percentile(finite, 100 * alpha / 2)),
+              float(np.percentile(finite, 100 * (1 - alpha / 2)))) if finite.size else (
+        float("nan"), float("nan"))
+    return {
+        "point": float(num.mean() / den.mean()) if den.mean() != 0 else float("nan"),
+        "lo": lo,
+        "hi": hi,
+        "episodes": int(n),
+        "ratio_sign_stable": sign_stable,
+        "resamples_with_unusable_denominator": int(ratio.size - finite.size),
+    }
+
+
+def bootstrap_mean_ci(x: np.ndarray, *, seed: int, iters: int = 20000,
+                      alpha: float = 0.05) -> dict:
+    """Percentile CI for a mean, resampling whole episodes."""
+    x = np.asarray(x, dtype=float)
+    rng = np.random.default_rng(seed)
+    bs = x[rng.integers(0, x.size, size=(iters, x.size))].mean(axis=1)
+    return {
+        "point": float(x.mean()),
+        "lo": float(np.percentile(bs, 100 * alpha / 2)),
+        "hi": float(np.percentile(bs, 100 * (1 - alpha / 2))),
+        "episodes": int(x.size),
+    }
+
+
 def step_toward(positions: np.ndarray, targets: np.ndarray, max_speed: float,
                 dt: float) -> np.ndarray:
     """One step of bounded motion. This is where a duty exchange pays for itself:
@@ -465,6 +518,34 @@ def main() -> None:
     norm_stable = u_stable / b_h if measurable else float("nan")
     norm_flex = u_flex / b_h if measurable else float("nan")
 
+    # Uncertainty, reported but NOT wired into the gate. The branch thresholds are
+    # frozen as point conditions in the contract, and re-specifying them as
+    # interval conditions after seeing output would be renegotiating a frozen
+    # threshold. So these are diagnostics: they say whether a point estimate that
+    # clears is safe to believe, which at H=1500 (-0.1472 against a -0.10 ceiling
+    # on four episodes) is exactly the open question.
+    per_ep = {a: np.asarray(v, dtype=float) for a, v in acc.items()}
+    ci_seed = int(args.seed) + 7717
+    b_h_ep = per_ep["constructive"] - per_ep["null"]
+    intervals = {
+        "b_h": bootstrap_mean_ci(b_h_ep, seed=ci_seed),
+        "u_star_stable_src": bootstrap_mean_ci(
+            per_ep["set_stable"] - per_ep["keep_stable"], seed=ci_seed + 1),
+        "u_star_flex_src": bootstrap_mean_ci(
+            per_ep["set_flex"] - per_ep["keep_flex"], seed=ci_seed + 2),
+        "normalized_stable": bootstrap_ratio_ci(
+            per_ep["set_stable"] - per_ep["keep_stable"], b_h_ep, seed=ci_seed + 3),
+        "normalized_flex": bootstrap_ratio_ci(
+            per_ep["set_flex"] - per_ep["keep_flex"], b_h_ep, seed=ci_seed + 4),
+    }
+    ci_note = (
+        "95% percentile bootstrap over EPISODES, the independent unit; arms are "
+        "CRN-paired within an episode. Diagnostic only -- the branch below is "
+        "decided on point estimates, as the contract froze it. A normalized "
+        "interval whose ratio_sign_stable is false is meaningless however narrow: "
+        "the denominator changed sign across resamples."
+    )
+
     if not measurable:
         branch = "SOURCE_NECESSITY_UNRESOLVED"
         reason = "B_H is degenerate; the normalized margin is undefined"
@@ -511,6 +592,8 @@ def main() -> None:
         "u_star_stable_src": u_stable,
         "u_star_flex_src": u_flex,
         "normalized": {"stable": norm_stable, "flex": norm_flex},
+        "intervals": intervals,
+        "intervals_note": ci_note,
         "thresholds": {"stable_ceiling": MARGIN_STABLE_CEIL,
                        "flex_floor": MARGIN_FLEX_FLOOR},
         "contract": "docs/research/designs/D7_S_MAIN_SCENARIO_PERSISTENCE_NECESSITY.md",
