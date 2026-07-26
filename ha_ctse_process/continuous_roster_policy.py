@@ -131,6 +131,24 @@ class ContinuousRosterPolicy(nn.Module):
         )
         return torch.argsort(priority, dim=1, stable=True)
 
+    def _initialize_next_hidden(self, hidden: torch.Tensor) -> torch.Tensor:
+        """Initialize lifecycle storage for one forward step."""
+
+        return hidden.clone()
+
+    def _actor_hidden_input(
+        self, encoded_member: torch.Tensor, stored_hidden: torch.Tensor
+    ) -> torch.Tensor:
+        """Map current encoding and lifecycle storage to the cell hidden input."""
+
+        del encoded_member
+        return stored_hidden
+
+    def _carried_hidden(self, candidate: torch.Tensor) -> torch.Tensor:
+        """Map the cell output to next-step lifecycle storage."""
+
+        return candidate
+
     def forward_step(
         self,
         *,
@@ -190,7 +208,7 @@ class ContinuousRosterPolicy(nn.Module):
             self.member_capacity, device=observations.device
         ).unsqueeze(0)
         valid_positions = positions < active_count.unsqueeze(1)
-        next_hidden = hidden.clone()
+        next_hidden = self._initialize_next_hidden(hidden)
         actions = torch.zeros(expected_action_shape, dtype=dtype, device=observations.device)
         pre_tanh_actions = torch.zeros_like(actions)
         log_probs = torch.zeros(
@@ -211,11 +229,14 @@ class ContinuousRosterPolicy(nn.Module):
                 break
             owner = order[:, position]
             prefix_fraction = prefix_sum / denominator
-            owner_hidden = next_hidden[batch_index, owner]
+            owner_encoded = encoded[batch_index, owner]
+            owner_hidden = self._actor_hidden_input(
+                owner_encoded, next_hidden[batch_index, owner]
+            )
             candidate = self.actor_rnn(
                 torch.cat(
                     (
-                        encoded[batch_index, owner],
+                        owner_encoded,
                         context,
                         prefix_fraction,
                     ),
@@ -246,7 +267,8 @@ class ContinuousRosterPolicy(nn.Module):
             entropy = distribution.entropy().sum(dim=-1)
             valid_batch = batch_index[valid]
             valid_owner = owner[valid]
-            next_hidden[valid_batch, valid_owner] = candidate[valid]
+            carried = self._carried_hidden(candidate)
+            next_hidden[valid_batch, valid_owner] = carried[valid]
             actions[valid_batch, valid_owner] = chosen[valid]
             pre_tanh_actions[valid_batch, valid_owner] = raw[valid]
             log_probs[valid_batch, valid_owner] = chosen_logp[valid]
