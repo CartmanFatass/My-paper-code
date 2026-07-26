@@ -4,9 +4,10 @@
 document_kind=pm_prelaunch_runtime_evidence
 algorithm_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36
 source_id=CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_P0
-implementation_code_commit=e96f0be154afcf778780bad6266458e211b4b047
+implementation_code_commit=8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04
+superseded_implementation_code_commit=e96f0be154afcf778780bad6266458e211b4b047
 alignment_disposition=MISMATCH
-repair_implementation_code_commit=pending_git_commit_containing_no_read_evaluator_correction
+repair_implementation_code_commit=8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04
 prior_nonformal_preflight_status=superseded_by_source_change
 pm_technical_acceptance=accepted
 scientific_interpretation=none
@@ -96,3 +97,29 @@ focused tests and the 59-test G32/G34/G35/G36 regression passed. Because the
 source commit changed, the earlier operationally valid preflight above cannot
 authorize formal compute and must be replaced by one bounded exercise from the
 exact repair commit before correction recheck.
+
+The registered Experiment Operator then completed exactly one replacement
+preflight from the repair commit, without retry:
+
+```text
+run_root=logs/nonformal_continuous_roster_history_proxy_free_cs_g36_cpu_20260726_8f1cd60_r1
+source_commit=8f1cd60068426ac2c0a35ef2d9f4d624b1a01c04
+formal=false
+exit_code=0
+evaluation_wall_time_seconds=20.494850800001586
+analysis_wall_time_seconds=17.53727549999894
+evaluation_transitions=4608
+optimizer_steps=0
+operational_valid=true
+operational_errors=[]
+branch=NONFORMAL_CONTINUOUS_ROSTER_HISTORY_PROXY_FREE_CS_G36_COMPLETE
+evaluation_manifest_sha256=8f7397f384a2e0d97fa8842f8555f9530eb1831276882def07f74619d4498223
+formal_projection_seconds=2106.5548230000422
+formal_projection_executable=true
+```
+
+PM independently reran the registered artifact validator and received an empty
+error list, then reproduced the exact source commit, inventory, zero optimizer
+count, terminal branch, manifest digest and projection arithmetic. This note
+still authorizes no formal compute; the exact correction must first return
+`ALIGNED` from the bounded correction recheck.
