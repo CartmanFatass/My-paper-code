@@ -78,3 +78,15 @@ a fold while passing all access and the 0.05 noninferiority gates. The smallest
 route is now simplified at actor-information, recurrence and parameterization
 levels; the next boundary isolates the G31 credit package, while broader
 process/horizon/capacity and identifiable non-G33 UAV transport remain retained.
+
+## G41 design result update (mechanically recorded from External Pro)
+
+g41_continuous_roster_status=SUPPORTED_RETAINED_NATIVE6_G31_POST_ANCHOR_NO_SLOW_CRITIC
+g41_scientific_route=COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_NO_SLOW
+g41_design_outcome=SLOW_CRITIC_EXACTLY_REMOVABLE_G41
+g41_scientific_disposition=PROVED_EXACT_POST_ANCHOR_STANDALONE_SLOW_CRITIC_REMOVABILITY_G41
+g41_claim_ceiling=post-anchor standalone slow critic, return loss, Adam state and deployment value output are removable; shared true-state immediate/successor baseline remains retained
+g41_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_ALIGNMENT_AUDIT
+g41_valid_result_disposition=CONTINUE
+g41_conclusion_bearing_iteration_cost=0
+g41_remaining_conclusion_bearing_iterations=6

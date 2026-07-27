@@ -364,3 +364,16 @@ the Project Manager-accepted CDC state.
 - G3/G4 correction: `CE-CAUSAL-RESPONSE-WITHOUT-COMPETENCE` shows that positive
   roster intervention TV can coexist with underpowered/no-access natural
   behavior and cannot substitute for competence or mediation.
+
+## G41 update (mechanically recorded from External Pro)
+
+- The standalone centralized slow critic is not part of the load-bearing
+  post-anchor G31 actor-credit package. Its parameters, return loss, optimizer
+  and value output factorize from the actor and shared immediate/successor
+  baseline updates and are exactly removable.
+- The retained package still uses a shared two-output baseline module with
+  true-current-state inputs. G41 is not a centralized-information reduction.
+- The remaining component-attribution question is limited to realized-successor
+  targeting, immediate/successor decomposition, shared-baseline conditioning,
+  per-channel normalization and direction balancing. No status change is made
+  to C-REC, C-BASE, C-COORD or C-BENCH.

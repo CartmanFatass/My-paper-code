@@ -9,6 +9,18 @@ g40_credit_row_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTIO
 g40_ordinary_team_gae1_replacement_status=FAILED_CLOSED
 g40_remaining_open=standalone_slow_critic_and_internal_G31_component_attribution
 
+## G41 design result update (mechanically recorded from External Pro)
+
+g41_supported_row=continuous-roster native-six G31-credit post-anchor no-slow-critic route
+g41_row_status=SUPPORTED_RETAINED
+g41_row_evidence=G40 formal result plus G41 zero-trajectory dependency proof
+g41_row_claim_ceiling=post-anchor standalone slow critic, return loss, Adam state and deployment value output do not enter actor/shared-baseline updates, behavior traces or checkpoint selection
+g41_scientific_route=COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_NO_SLOW
+g41_retained_true_state_path=shared_immediate_successor_baseline_module
+g41_failed_closed=post-anchor standalone slow critic causal necessity in G41-P0
+g41_remaining_open=G31 internal component attribution; broader process/horizon/capacity; identifiable non-G33 UAV transport
+g41_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_ALIGNMENT_AUDIT
+
 # HMASD 科研方向账本
 
 ## 用途与权威边界
