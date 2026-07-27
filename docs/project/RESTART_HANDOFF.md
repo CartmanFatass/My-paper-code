@@ -108,9 +108,20 @@ ordering is irrelevant and the one "identical" reading was an artifact. Do not
 build on it; it is written up only so nobody re-derives it.
 
 What is solid: **user generation differs across environment constructions within
-one process**, source unlocated. One uninterpreted observation that may help —
-the divergence magnitudes repeat exactly within a process (6644.3 and 6883.8),
-which is not what a freshly drawn continuous layout each time would look like.
+one process**, source unlocated — but the divergence is **discrete**. Six
+constructions with identical config and `np_random` pinned to `RandomState(777)`
+produced only **3 distinct layouts**, one repeating byte-exactly three times:
+
+```text
+2b07b72d15ba, df8a768cf8c9, df8a768cf8c9, f166386dadd0, df8a768cf8c9, f166386dadd0
+```
+
+A continuous fresh draw cannot repeat a byte-exact hash. So this is **not an RNG
+problem** — the stream was pinned identically across all six. Look instead for
+construction-time state with few possible values that the generation path
+branches on: a cluster-assignment vector, a per-instance counter, a cached or
+pooled layout, or a container whose iteration order varies. Instrument
+`_generate_forced_relay_cluster_positions` directly.
 
 A per-instance `user_world_seed` cannot fix a mechanism nobody has identified;
 it would only make the symptom disappear. That is the exact failure this round

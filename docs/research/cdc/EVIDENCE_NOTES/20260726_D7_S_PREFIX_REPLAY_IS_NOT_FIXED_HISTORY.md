@@ -234,11 +234,38 @@ things ruled out in the table above — not the global `np.random`, not config,
 not `self.np_random`, not BS/station geometry, and not inherent nondeterminism
 of the generation routine.
 
-One unexplained observation worth carrying, deliberately *not* interpreted here:
-the divergence magnitudes repeat within a process (6644.3 and 6883.8 recur
-exactly), which is not what a freshly-drawn continuous layout each time would
-look like. That may point somewhere useful; it is one more observation, not a
-second hypothesis to build on.
+### The divergence is DISCRETE, and that is the lead
+
+The repeating magnitudes were followed up rather than left as a curiosity. Six
+constructions, identical config, `np_random` pinned to `RandomState(777)`
+immediately before each call:
+
+```text
+construction 0: layout 2b07b72d15ba
+construction 1: layout df8a768cf8c9
+construction 2: layout df8a768cf8c9
+construction 3: layout f166386dadd0
+construction 4: layout df8a768cf8c9
+construction 5: layout f166386dadd0
+-> 3 distinct layouts across 6 constructions
+```
+
+A freshly drawn continuous layout cannot repeat a byte-exact hash three times.
+**The latent variable is discrete and small.** Whatever differs between
+constructions selects among a handful of outcomes rather than sampling a new
+world each time.
+
+This is a measured fact, not an interpretation, and it narrows the search
+sharply: look for construction-time state with few possible values that the
+generation path branches on — a cluster-assignment vector, a per-instance
+counter, a cached or pooled layout, or a container whose iteration order varies.
+It is **not** an RNG-stream problem, because the stream was pinned identically
+across all six.
+
+Deliberately not guessed further here. The immediately preceding hypothesis in
+this note was committed on one run and had to be retracted; the discipline that
+caught it is the same one that says to stop at the measurement and let the next
+session instrument the generation path directly.
 
 The next session must locate the source before writing `user_world_seed`.
 Seeding a per-instance RNG cannot fix a mechanism that has not been identified —
