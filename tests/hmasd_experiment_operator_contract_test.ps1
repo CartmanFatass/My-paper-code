@@ -10,7 +10,7 @@ if (-not (Test-Path -LiteralPath $definitionPath -PathType Leaf)) {
 }
 $operatorDef = Get-Content -Raw -LiteralPath $definitionPath
 $role = Get-Content -Raw -LiteralPath $rolePath
-$agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$agents = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 
 # The operator is deliberately pinned to the mechanical tier.
@@ -141,9 +141,16 @@ foreach ($leaked in @('_tier=', 'subagent_runtime=', 'loop_driver=')) {
         throw "Role-specific policy leaked into the shared signpost: $leaked"
     }
 }
-foreach ($leaked in @('_tier=', 'subagent_runtime=', '| Subagent | Tier |')) {
-    if ($agents.Contains($leaked)) {
-        throw "Runtime detail leaked into the constitution: $leaked"
+# AGENTS.md is a pointer as of 2026-07-27, not a second instruction set. Policy
+# of any kind reappearing there recreates the split that made a 594-line
+# "constitution" bind nobody, because nothing loads it automatically.
+$agentsPointer = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+if ((($agentsPointer -split "`n").Count) -gt 40) {
+    throw 'AGENTS.md is growing back into an instruction set; it is a pointer'
+}
+foreach ($leaked in @('_tier=', 'subagent_runtime=', '| Subagent | Tier |', '## Execution modes')) {
+    if ($agentsPointer.Contains($leaked)) {
+        throw "Policy leaked back into the AGENTS.md pointer: $leaked"
     }
 }
 

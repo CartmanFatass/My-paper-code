@@ -17,14 +17,13 @@ like in practice.
 
 | You are | Your instructions |
 |---|---|
-| **Project Manager** (main conversation, orchestrator) | `.agents/roles/PROJECT_MANAGER.md` — charter, orchestrator norms, subagent workflow. Then `docs/project/CURRENT_WORK.md` for what is live right now. |
+| **Project Manager** (main conversation, orchestrator) | `.agents/roles/PROJECT_MANAGER.md` — its complete instructions. Then `docs/project/CURRENT_WORK.md` for what is live right now. |
 | **Any subagent** | your own `.claude/agents/<name>.md`, then `docs/project/AGENT_CONTEXT.md`. Its **Unattended operation** and **Reporting honestly** sections bind you. |
-| **External Pro** | `.agents/roles/EXTERNAL_PRO.md` |
-| **Experiment operator** | `.agents/roles/EXPERIMENT_OPERATOR.md` |
+| **External Pro** | only the question you were sent. Nothing in this repository binds you, and you are not asked to know the workflow. |
 
-Everyone is bound by `AGENTS.md`, the constitution: authority map, execution
-modes, the research loop, Stage A and Stage B, protected semantics. It states
-what is true for the project; your role file states what *you* do.
+There is no separate constitution to load. Instructions belong to the actor that
+executes them: a rule an actor cannot load is not a rule, and a rule an actor
+cannot act on is noise in its context.
 
 ## Then read only what your task names
 

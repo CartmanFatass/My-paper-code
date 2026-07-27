@@ -44,12 +44,12 @@ if (Test-Path (Join-Path $repo '.codex')) {
 
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedRoles = @('EXPERIMENT_OPERATOR.md', 'EXTERNAL_PRO.md', 'PROJECT_MANAGER.md') | Sort-Object
+$expectedRoles = @('EXPERIMENT_OPERATOR.md', 'PROJECT_MANAGER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
 }
 
-$agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$agents = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-agile-research-development/SKILL.md')

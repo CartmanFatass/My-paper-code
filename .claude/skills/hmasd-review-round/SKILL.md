@@ -7,11 +7,10 @@ description: Use for direct Project Manager transport to HMASD external GPT-5.6 
 
 ## Contract boundary
 
-Role contracts are normative. Read the root `AGENTS.md` and these relevant role
-documents before operating:
-
-- `.agents/roles/PROJECT_MANAGER.md`
-- `.agents/roles/EXTERNAL_PRO.md`
+Read `.agents/roles/PROJECT_MANAGER.md` before operating — it is the complete
+Project Manager instructions and is normative over this Skill. In particular its
+**External Pro** section decides whether a round is warranted at all; this Skill
+only carries one.
 
 This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
