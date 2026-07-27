@@ -7,7 +7,11 @@ exists before compute rather than after it.
 No verification labor is requested. Every number below is measured, with its
 provenance named; nothing asks you to confirm an inventory.
 
-`stage_commit = 04f7b0b` on `untied-k`, pushed.
+`stage_commit = 04f7b0b` on `untied-k`, pushed. Later commits on that branch are
+execution vehicle and record only — a dependency manifest, workflow comments,
+this round, and an episode-parallelism flag accepted only on byte-identical
+output. None of them changes a registered quantity, so `04f7b0b` remains the
+commit under review.
 
 ## What was implemented
 
@@ -129,14 +133,21 @@ ours.
 Cost is measured, not projected. Local rate `0.0615 s/step`; per topology
 `2.29 h` at `|Z|=3` to `4.18 h` at `|Z|=8`.
 
-GitHub-hosted compute was tested and **rejected on evidence**: benchmarked at
-`0.0864 s/step` (1.405× slower), putting `|Z|=8` at `5.77 h` against a 6-hour
-hard job kill — 1.087× headroom. The legal-set size is data-determined, so which
-shards exceed it cannot be known before launch, and a killed shard is
-unrecoverable because a topology cannot be split. Run `30245735762`.
+GitHub-hosted compute was benchmarked at `0.0864 s/step` (1.405× slower, run
+`30245735762`), putting `|Z|=8` at `5.77 h` against a 6-hour hard job kill. The
+legal-set size is data-determined, so which shards run long cannot be known
+before launch.
 
-Remaining routes: the local box at shard width 4 (no wall-clock cap under the
-2026-07-26 user ruling), or a self-hosted cloud runner.
+We first read that as excluding the hosted route, on the reasoning that a killed
+shard is unrecoverable. **That reasoning was wrong and is withdrawn.** A topology
+cannot be *split*, but it can be re-run *whole* and pooled, because the pooler
+keys on the seed set rather than on run identity; with `fail-fast: false` every
+other shard keeps its artifact. So an overrun costs one shard's wall clock, not
+the run. The hosted route is tight, not excluded, and a run is in flight.
+
+This bears on nothing you are asked to rule on — the vehicle does not touch the
+estimand — and is stated only because the previous round's cost framing is
+otherwise left standing in the record.
 
 **Q4.** Given your answers above, does the audit launch at `stage_commit`?
 
