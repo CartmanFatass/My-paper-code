@@ -39,10 +39,23 @@ orchestrator stops emitting tool calls and **no sentence in any document
 re-invokes it**.
 
 ```text
-loop_driver=/loop          # dynamic pacing, ScheduleWakeup
+loop_driver=/goal          # preferred -- blocks the stop until the condition holds
+loop_driver_alt=/loop      # dynamic pacing, ScheduleWakeup
 primary_wake=task notifications from background children
-fallback_wake=/loop wakeup, for the gap notifications cannot cover
+fallback_wake=the attached driver, for the gap notifications cannot cover
 ```
+
+**Prefer `/goal`** (user ruling 2026-07-27). The two drivers fail in opposite
+directions, and only one of them fails safe. `/loop` *schedules* a return: if the
+wakeup is never armed, or is armed for the wrong horizon, the loop is simply
+gone and nothing reports that it went. `/goal` *withholds* the stop until its
+condition holds, so the failure mode is a turn that will not end rather than a
+loop that quietly died — and a stall that announces itself is recoverable in a
+way that a silent one is not. It also states the terminating condition, which
+`/loop` never did; "keep going" has no completion test, and neither did we.
+
+Either way the driver is session-bound. Overnight autonomy is a scheduled
+`claude -p` and nothing else.
 
 1. **The loop is a backstop, not a scheduler.** It exists to cover an *empty
    gap* — no work in hand, nothing in flight, nothing to answer. If there is a
