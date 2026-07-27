@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -42,6 +43,139 @@ def _assert_nested_equal(left: Any, right: Any) -> None:
             _assert_nested_equal(left_row, right_row)
     else:
         assert left == right
+
+
+def _assert_roundtripped_training_artifact_valid(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    record: Mapping[str, object],
+    models: Mapping[str, g41.G41NoSlowProjection],
+) -> None:
+    configuration = runner._configuration(formal=False)
+    records: list[dict[str, object]] = []
+    for update_index in range(int(configuration["branch_updates_per_arm"])):
+        serialized = json.loads(g42.serialize_diagnostics(record))
+        serialized["update_index"] = update_index
+        assert g42._update_gradient_evidence_valid(serialized) is True
+        records.append(serialized)
+    conclusion_evidence = g42.build_conclusion_evidence(records, formal=False)
+    assert g42.validate_conclusion_evidence(conclusion_evidence) is True
+
+    accepted_anchor_root = ANCHOR_FIXTURE.parent.resolve()
+    anchor_digests = {ANCHOR_FIXTURE.name: "proof-sized-fixture"}
+    monkeypatch.setattr(runner, "_bind_anchor_root", lambda _: accepted_anchor_root)
+    monkeypatch.setattr(
+        runner, "_validate_anchor_manifest", lambda _: anchor_digests
+    )
+    seeds = runner.seed_block(0, formal=False)
+    source_commit = "a" * 40
+    arms: dict[str, dict[str, object]] = {}
+    for arm in g42.ARMS:
+        reference = runner._checkpoint_reference(0, arm)
+        payload = runner._save_checkpoint(
+            tmp_path / reference,
+            source_commit=source_commit,
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            formal=False,
+            replicate=0,
+            arm=arm,
+            configuration=configuration,
+            seeds=seeds,
+            model=models[arm],
+            final_update_record=records[-1],
+            conclusion_evidence=conclusion_evidence,
+        )
+        arms[arm] = {
+            "final_checkpoint": reference,
+            "final_checkpoint_file_digest": runner._artifact_digest(
+                tmp_path / reference
+            ),
+            "final_state_digest": payload["model_state_digest"],
+            "completed_branch_updates": int(
+                configuration["branch_updates_per_arm"]
+            ),
+            "actor_head_optimizer_steps": int(
+                configuration["branch_updates_per_arm"]
+            )
+            * int(configuration["ppo_passes"]),
+            "actor_parameter_departure": True,
+            "shared_baseline_parameter_departure": True,
+        }
+    expected_steps = int(configuration["branch_updates_per_arm"]) * int(
+        configuration["ppo_passes"]
+    )
+    row = {
+        "replicate": 0,
+        "seeds": seeds,
+        "accepted_anchor": g41.accepted_g40_anchor_identity(0),
+        "accepted_anchor_state_digest": (
+            g41.accepted_g40_anchor_authority(0).complete_state_digest
+        ),
+        "branch_boundary_audit": {"passed": True},
+        "paired_collection_before_update": True,
+        "branch_update_order": list(g42.ARMS),
+        "lifecycle_contract_valid": {arm: True for arm in g42.ARMS},
+        "actor_parameter_departure": {arm: True for arm in g42.ARMS},
+        "shared_baseline_parameter_departure": {
+            arm: True for arm in g42.ARMS
+        },
+        "actor_head_optimizer_steps": {
+            arm: float(expected_steps) for arm in g42.ARMS
+        },
+        "update_records": records,
+        "arms": arms,
+    }
+    manifest = {
+        "schema_version": runner.SCHEMA_VERSION,
+        "algorithm": runner.ALGORITHM_ID,
+        "source_id": g42.SOURCE_ID,
+        "stage": "train",
+        "status": "COMPLETE",
+        "formal": False,
+        "source_commit": source_commit,
+        "authorization_token": None,
+        "alignment_audit_id": None,
+        "alignment_disposition": None,
+        "aligned_source_commit": runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        "alignment_stage_commit": None,
+        "preflight_root": None,
+        "preflight_artifact_digests": None,
+        "accepted_anchor_root": str(accepted_anchor_root),
+        "accepted_anchor_root_mode": "read_only_input_no_writes",
+        "accepted_anchor_artifact_digests": anchor_digests,
+        "runtime": {},
+        "native_backend": {
+            "kind": "ContinuousRosterToyBatch_CPU_CPP",
+            "required": True,
+            "python_fallback": False,
+        },
+        "configuration": configuration,
+        "source_controls": runner.source_controls(),
+        "conclusion_evidence": conclusion_evidence,
+        "replicate_results": [row],
+    }
+    runner._write_json(tmp_path / "train_manifest.json", manifest)
+    roundtripped = runner._read_json(tmp_path / "train_manifest.json")
+    assert runner._training_errors(tmp_path, roundtripped) == []
+    expected_files = {
+        Path(runner._checkpoint_reference(0, arm)).name for arm in g42.ARMS
+    }
+    assert (
+        runner._expected_final_checkpoint_files(roundtripped["replicate_results"])
+        == expected_files
+    )
+
+    invalid_update = json.loads(json.dumps(roundtripped))
+    invalid_update["replicate_results"][0]["update_records"][0]["passed"] = False
+    assert runner._training_errors(tmp_path, invalid_update) == [
+        "G42 update evidence mismatch"
+    ]
+
+    extra_checkpoint = tmp_path / "checkpoints" / "replicate_0_intermediate.pt"
+    extra_checkpoint.touch()
+    assert runner._training_errors(tmp_path, roundtripped) == [
+        "G42 checkpoint inventory is not final-only"
+    ]
 
 
 def test_configuration_seeds_cpp_and_balanced_evaluation_inventory() -> None:
@@ -127,7 +261,9 @@ def test_authority_and_anchor_binding_fail_before_compute(tmp_path: Path) -> Non
         )
 
 
-def test_runner_first_update_is_accepted_kernel_and_adam_continues() -> None:
+def test_runner_first_update_is_accepted_kernel_and_adam_continues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     prior_threads = torch.get_num_threads()
     torch.set_num_threads(1)
     try:
@@ -195,6 +331,9 @@ def test_runner_first_update_is_accepted_kernel_and_adam_continues() -> None:
         }
         assert continuation["branch_boundary"]["continuation"] is True
         assert continuation["actor_head_optimizer_step_delta"] == 2
+        _assert_roundtripped_training_artifact_valid(
+            tmp_path, monkeypatch, runner_record, runner_models
+        )
     finally:
         torch.set_num_threads(prior_threads)
 

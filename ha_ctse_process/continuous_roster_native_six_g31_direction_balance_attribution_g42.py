@@ -415,7 +415,7 @@ def validate_registered_gradient_evidence(value: object) -> bool:
     baselines = value.get("baseline_outputs")
     if (
         not isinstance(inventory, Mapping)
-        or tuple(inventory) != g40.REGISTERED_ACTOR_GROUPS
+        or set(inventory) != set(g40.REGISTERED_ACTOR_GROUPS)
         or any(
             not isinstance(inventory.get(group), list)
             or not inventory[group]
@@ -438,7 +438,7 @@ def validate_registered_gradient_evidence(value: object) -> bool:
         rows = channels.get(channel)
         if (
             not isinstance(rows, Mapping)
-            or tuple(rows) != g40.REGISTERED_ACTOR_GROUPS
+            or set(rows) != set(g40.REGISTERED_ACTOR_GROUPS)
             or any(
                 not _valid_finite_gradient_row(rows.get(group))
                 for group in g40.REGISTERED_ACTOR_GROUPS

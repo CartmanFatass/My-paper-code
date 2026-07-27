@@ -1374,6 +1374,29 @@ def _load_final_model(
     return model
 
 
+def _expected_final_checkpoint_files(
+    rows: Sequence[object],
+) -> set[str]:
+    expected_files: set[str] = set()
+    for replicate, row in enumerate(rows):
+        if not isinstance(row, Mapping):
+            raise ValueError("G42 final checkpoint inventory mismatch")
+        arms = row.get("arms")
+        if not isinstance(arms, Mapping) or set(arms) != set(source.ARMS):
+            raise ValueError("G42 final checkpoint inventory mismatch")
+        for arm in source.ARMS:
+            arm_row = arms.get(arm)
+            if not isinstance(arm_row, Mapping):
+                raise ValueError("G42 final checkpoint inventory mismatch")
+            reference = arm_row.get("final_checkpoint")
+            if reference != _checkpoint_reference(replicate, arm):
+                raise ValueError("G42 final checkpoint inventory mismatch")
+            expected_files.add(Path(reference).name)
+    if len(expected_files) != len(rows) * len(source.ARMS):
+        raise ValueError("G42 final checkpoint inventory mismatch")
+    return expected_files
+
+
 def _training_errors(
     run_root: Path, training: Mapping[str, Any]
 ) -> list[str]:
@@ -1453,14 +1476,19 @@ def _training_errors(
     if not isinstance(rows, list) or len(rows) != int(configuration["replicates"]):
         return errors + ["G42 training replicate inventory mismatch"]
     all_update_records: list[Mapping[str, object]] = []
-    expected_files: set[str] = set()
+    update_records_complete = True
+    try:
+        expected_files = _expected_final_checkpoint_files(rows)
+    except (TypeError, ValueError) as error:
+        errors.append(str(error))
+        expected_files = None
+    expected_steps = (
+        int(configuration["branch_updates_per_arm"])
+        * int(configuration["ppo_passes"])
+    )
     for replicate, row in enumerate(rows):
         try:
             records = row["update_records"]
-            expected_steps = (
-                int(configuration["branch_updates_per_arm"])
-                * int(configuration["ppo_passes"])
-            )
             if (
                 row["replicate"] != replicate
                 or row["seeds"] != seed_block(replicate, formal=formal)
@@ -1489,10 +1517,13 @@ def _training_errors(
                 ):
                     raise ValueError("G42 update evidence mismatch")
                 all_update_records.append(record)
+        except (KeyError, TypeError, ValueError) as error:
+            errors.append(str(error))
+            update_records_complete = False
+        try:
             for arm in source.ARMS:
                 arm_row = row["arms"][arm]
                 reference = arm_row["final_checkpoint"]
-                expected_files.add(Path(reference).name)
                 if (
                     arm_row["completed_branch_updates"]
                     != int(configuration["branch_updates_per_arm"])
@@ -1513,17 +1544,18 @@ def _training_errors(
                     raise ValueError("G42 final checkpoint digest mismatch")
         except (KeyError, OSError, TypeError, ValueError) as error:
             errors.append(str(error))
-    expected_conclusion = source.build_conclusion_evidence(
-        all_update_records, formal=formal
-    ) if all_update_records else None
-    if (
-        expected_conclusion != training.get("conclusion_evidence")
-        or not source.validate_conclusion_evidence(training.get("conclusion_evidence"))
-    ):
+    conclusion_evidence = training.get("conclusion_evidence")
+    if not source.validate_conclusion_evidence(conclusion_evidence):
         errors.append("G42 conclusion treatment-separation evidence mismatch")
+    elif update_records_complete:
+        expected_conclusion = source.build_conclusion_evidence(
+            all_update_records, formal=formal
+        )
+        if expected_conclusion != conclusion_evidence:
+            errors.append("G42 conclusion treatment-separation evidence mismatch")
     try:
         observed_files = {path.name for path in (run_root / "checkpoints").iterdir()}
-        if observed_files != expected_files:
+        if expected_files is not None and observed_files != expected_files:
             errors.append("G42 checkpoint inventory is not final-only")
     except OSError as error:
         errors.append(str(error))
