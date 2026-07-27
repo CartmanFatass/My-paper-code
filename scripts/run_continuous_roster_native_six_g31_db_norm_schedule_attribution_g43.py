@@ -59,10 +59,9 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_"
     "CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# Filled only by a later exact correction after the scheduled G43 alignment audit.
-# Formal execution fails closed while these independent identities are absent.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Independently archived G43 correction recheck disposition: ALIGNED.
+ALIGNED_IMPLEMENTATION_COMMIT = "45e16f71d171228135b6444bee1678b157d79abe"
+ALIGNMENT_STAGE_COMMIT = "889c0b4e3d68a8d74f811ae9ecfe7b5213abfa76"
 ACCEPTED_ANCHOR_ROOT_RELATIVE = Path(
     "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
     "20260727_97a8b23_r1"
