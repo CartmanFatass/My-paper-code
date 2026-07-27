@@ -25,6 +25,7 @@ $agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'h
 $expectedAgents = @(
     'hmasd-code-scout.md', 'hmasd-doc-auditor.md',
     'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md',
+    'hmasd-guard-sweeper.md',
     'hmasd-implementer.md', 'hmasd-monitor.md',
     'hmasd-patcher.md', 'hmasd-review-monitor.md', 'hmasd-reviewer.md',
     'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object

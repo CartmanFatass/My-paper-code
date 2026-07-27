@@ -1,175 +1,143 @@
-# Restart handoff — 2026-07-26, mid-iteration (D7.S Stage B repairs)
+# Restart handoff — 2026-07-27, clean seam
 
-Successor PM: read this, then `docs/project/CURRENT_WORK.md`. Written under
-context pressure mid-iteration rather than at a clean seam, so "the one open
-deliverable" is the load-bearing section.
+Successor PM: read this, then `docs/project/CURRENT_WORK.md`. Everything below
+is committed and pushed on `untied-k`. Nothing is half-applied.
 
-**This file replaces the iteration-21 handoff, which quoted the ep64 `B_H
-+65.965` / `norm_stable −0.6155` numbers as decisive. Those readings are
-RETIRED as causal evidence (below). Do not carry them forward.**
+Replaces the 2026-07-26 handoff, whose one open deliverable (task 14,
+`user_world_seed` controlling generation) is **done and closed** — Stage B round
+`20260727_d7_s_stage_b_fingerprint_closure` returned `ALIGNED`, zero blockers.
 
-## Active boundary
-
-```text
-execution_mode=authorized
-grant=ACTIVE_TWENTY_ITERATION_OVERNIGHT_GRANT_20260726
-iterations_remaining=17          # NOT yet deducted -- this boundary has no result yet
-working_branch=untied-k          # everything below is committed AND pushed
-active=D7_S_STAGE_B_REPAIRS
-```
-
-User rulings that changed the rules today, all in `CURRENT_WORK.md`:
-
-- **No wall-clock cap on the formal experiment.** The 8 h gate is gone. What is
-  capped is audit-stage proliferation and audit-driven verification experiments;
-  the 20-minute nonformal cap stands. `EVIDENCE_COMPLEXITY_POLICY.md` is
-  rewritten around this.
-- **Compute sharing:** run alongside the other line at **reduced shard width 4**;
-  do not wait for it. (HMASD-new G39 formal training, pid 15276, different repo.)
-- **Unresolved branch:** auto-expand to 16 topologies when §9's conditions hold;
-  do not return to the user.
-- **Iteration accounting:** this whole boundary is **one** iteration, deducted on
-  completion. Transport repair and workflow rescope consume none.
-- **Transport:** scripts, not a subagent — `scripts/ensure_review_browser.ps1`.
-
-## What happened
-
-Two Pro rounds closed, both archived hash-verified.
-
-1. `20260726_d7_s_replicate_volume_necessity` — froze `n_select=2, n_eval=2`,
-   accepted shared-prefix forking → contract R2.
-2. `20260726_d7_s_stage_b_shared_prefix_realization` — **MISMATCH** → contract R3.
-
-The finding behind both: **the frozen "bit-identical prefix replay" never held.**
-Two freshly constructed envs with the same seed differ in user population by
-kilometres, and `compute_state_hash` covers no user, cluster or channel state, so
-the guard structurally could not detect it. Evidence note:
-`docs/research/cdc/EVIDENCE_NOTES/20260726_D7_S_PREFIX_REPLAY_IS_NOT_FIXED_HISTORY.md`.
-
-Pro then found what I missed: shared-prefix cloning made all arms share **one**
-world, but that world was a *reconstruction*, not the one the event was certified
-in. Plus two independent defects — `full_sync_SET` running every step instead of
-every check, and the stable limb freezing a non-focal flex duty (claim-favouring
-for stable persistence).
-
-ep64 is retired as causal evidence: its env was built fresh **per arm**, and the
-construction-time worlds were never recorded, so no unpaired reanalysis can
-recover it either.
-
-## Repairs — five of six done
-
-| # | Repair | State |
-|---|---|---|
-| 1 | R3 contract supersedes R2 | done `effd21c` |
-| 2 | Direct live-event capture + complete-state fingerprint | done `3c20edd` |
-| 3 | `full_sync_SET` cadence + stable-limb lock | done `fd48f1e` |
-| 4 | Tests rebuilt on the real mechanism | done `3c20edd` |
-| 5 | ep64 retired in the ledger + widened provenance rule | done `7b7bf61` |
-| 6 | `user_world_seed` + episode-world fingerprint | **half done `831112f`** — see below |
-
-150 focused tests pass. `scripts/d7_s_clone_conformance_check.py` reports
-`CLONE_CONFORMANCE_PASS` on the real environment across all seven conditions
-including 1A, 1B and cross-limb, with **zero reconstruction replays**.
-
-## The one open deliverable
-
-**Task 14 — episode-world provenance.** Pro Q2(b): construction-time OS entropy
-is not adequate evidence provenance, and "do nothing" was explicitly refused.
-
-**Done (`831112f`, 152 tests pass):**
-
-- `user_world_seed(topology_seed, block, episode_index)` — derived under a
-  namespace disjoint from `stream_seed`'s, with a test proving no collision, so
-  the user world cannot correlate with the arm streams it must be independent of;
-- `episode_world_fingerprint(env, seed_value=)` — records initial user and
-  cluster state after initialization;
-- the event-history fingerprint at `t_e` was already carried (`3c20edd`).
-
-**Remaining, and it is the substantive half:** the seed does not yet *control*
-user generation. The payload says so explicitly —
-`seed_controls_generation: False`. Making it true means changing construction
-inside `envs/pettingzoo` so the user layout derives from `user_world_seed`
-instead of construction-time entropy, then threading the seed through
-`build_pinned_env` and recording the fingerprint per episode in the artifact.
-
-That is a **protected-semantics edit**: the distribution must not change, only
-become reproducible. Deferred deliberately rather than rushed before a session
-switch — a half-applied change to environment semantics is worse than a clean
-seam.
-
-> **STOP — read this before acting on the section below.**
->
-> At 23:56-23:58 on 2026-07-26 a **concurrent session** was writing this working
-> tree: `envs/pettingzoo/scenario_base.py` and
-> `scripts/audit_d7_s_event_aligned.py` were modified while this handoff was
-> being written. Their changes were uncommitted and were left untouched.
->
-> **They located the mechanism, and it matches every measurement below:**
-> `_generate_forced_relay_cluster_positions` picks its remote corner from
-> `ground_bs_positions`, which is drawn at construction from an unseeded RNG.
-> The user layout depends on the BS geometry only through *which corner* is
-> remote — a discrete choice — which is exactly why six constructions produced
-> three byte-distinct layouts and why two envs with different BS geometry could
-> still produce identical users.
->
-> Their `build_pinned_env` also fixes an ordering trap: `regenerate_user_world`
-> must run **after** the topology hash assert, because the same
-> `user_world_seed` against two different BS layouts yields two different
-> worlds.
->
-> So the investigation below is **already answered** — do not redo it. First
-> establish who owns `untied-k`. `AGENTS.md` sets
-> `same_file_concurrent_writes=forbidden`, and two sessions were writing this
-> tree at once; that it was harmless this time was luck, not design.
-
-**Historical, superseded by the box above: locate the source.** The last
-append in the evidence note has the full table. Ruled out by measurement: the
-global `np.random`, config divergence, `self.np_random`, inherent
-nondeterminism of the generation routine, and dependence on BS/station geometry.
-
-A shared-cross-instance-state hypothesis was raised and then **killed** by
-repeating each ordering three times — both orderings diverge every time, so
-ordering is irrelevant and the one "identical" reading was an artifact. Do not
-build on it; it is written up only so nobody re-derives it.
-
-What is solid: **user generation differs across environment constructions within
-one process**, source unlocated — but the divergence is **discrete**. Six
-constructions with identical config and `np_random` pinned to `RandomState(777)`
-produced only **3 distinct layouts**, one repeating byte-exactly three times:
+## The only boundary
 
 ```text
-2b07b72d15ba, df8a768cf8c9, df8a768cf8c9, f166386dadd0, df8a768cf8c9, f166386dadd0
+next_boundary = USER_COMPUTE_AUTHORIZATION_FOR_THE_D7S_AUDIT
 ```
 
-A continuous fresh draw cannot repeat a byte-exact hash. So this is **not an RNG
-problem** — the stream was pinned identically across all six. Look instead for
-construction-time state with few possible values that the generation path
-branches on: a cluster-assignment vector, a per-instance counter, a cached or
-pooled layout, or a container whose iteration order varies. Instrument
-`_generate_forced_relay_cluster_positions` directly.
+Every gate is passed. To launch:
 
-A per-instance `user_world_seed` cannot fix a mechanism nobody has identified;
-it would only make the symptom disappear. That is the exact failure this round
-exists to stop repeating, which is why locating it comes first.
+```
+git tag d7s-audit-2 && git push origin d7s-audit-2
+```
 
-**The trap to expect:** `tests/env_user_population_determinism_test.py` asserts
-that two fresh envs with the same seed do **not** share users. Implementing task
-14 will make it fail. That is by design and the failure message says so — it is a
-decision point about what prior comparisons meant, not a broken test.
+That tag push is **user authority** (`formal_compute=user authority only`), and
+the last attempt to run it was refused by the auto-mode classifier. Ask; do not
+retry it silently. `d7s-benchmark-*` pushes do succeed, so the block is specific
+to this tag pattern, not to tagging.
 
-## Exact next action
+## What the last six iterations were
 
-Implement task 14 → run the D7.S audit at **4-way sharding** under the project's
-separate conclusion-bearing compute authorization → Pro result round (step 8 ≡
-next iteration's step 1: **one** round, not two) → `docs/report/ITERATION_25.md`
-in zh-CN with the mandatory time-distribution table → only then deduct 17 → 16.
+Supporting work only — iterations 24–29, no conclusion-bearing quota consumed.
+`iterations_remaining=17` unchanged. **The next conclusion-bearing report is 30
+and it is the audit result itself.**
 
-`ITERATION_24.md` already exists and was support work, so the next
-conclusion-bearing report is **25**.
+All of it is one investigation: **guards that cannot go red**. Ten instances so
+far, evidence notes dated `20260727_*` under
+`docs/research/cdc/EVIDENCE_NOTES/`, and the accumulated rule is
+`.claude/skills/hmasd-acceptance-gate/SKILL.md`, section *A guard test needs a
+paired negative*. Read that section before writing any test here.
 
-## Loop state
+The method converged: **sweep mechanically before you sweep by reading.**
+Perturb a constant, disable a guard clause, rerun. It reads nothing, so a
+plausible test name cannot talk it out of a finding — which is how the first
+eight instances survived. Harnesses live in the session scratchpad
+(`mutsweep.py`, `constsweep.py`, `poolsweep.py`); they are disposable, rewrite
+them per surface.
 
-No `/loop` driver attached — it died with the previous session and was not
-re-armed. Nothing is in flight. `check_compute_free.ps1` reports `COMPUTE_BUSY`
-because of the other line; the user's ruling overrides the wait — run alongside
-at width 4.
+## Open findings — two confirmed, un-repaired
+
+A sweep found these on 2026-07-27. **I reproduced both myself with independent
+mutations**; they are not un-verified child claims. Both are UNGUARDED and both
+reach the estimator, so neither is cosmetic:
+
+1. **`test_user_world_seed_is_disjoint_from_every_other_registered_seed`**
+   probes the `stream_seed` namespace at exactly **one** coordinate
+   (`phase="evaluate", limb="stable", event_index=0, replicate_index=0`).
+   Collapsing `user_world_seed` into `stream_seed` at `phase="select"` collides
+   exactly, and the suite stays **177 passed**. The seed reaches
+   `build_pinned_env` → `regenerate_user_world` → `qos_satisfaction_ratio` →
+   `compute_G`. It corrupts an estimator input, not a recorded field.
+
+2. **`test_legal_set_never_excludes_for_unreachability_within_delta`** exercises
+   only the `post_leave_targets` half of `Z(h)`. Excluding the **vacated
+   pre-LEAVE target** for unreachability leaves the suite **177 passed**. That is
+   the worse half to lose: it controls `has_legal_set_alternative`, hence
+   `EXCLUDE_EMPTY_SET_ALT` → `REJECT_EMPTY_LEGAL_SET`, so it silently shrinks the
+   admitted event set, biased toward "persistence is necessary" — the
+   claim-favouring direction.
+
+Repair both before the audit result is read. Neither blocks the launch.
+
+### And seven more in Scenario-7 — reported by a sweep, two verified by me
+
+A second sweep covered `tests/scenario7_energy_aware_test.py` against
+`envs/pettingzoo/scenario7_energy_aware.py` (42 tests here; the sweep ran on an
+older worktree at 34, so **treat its line numbers as approximate and re-anchor
+by text**). It reported seven UNGUARDED and five CLEAN.
+
+**I reproduced the top two myself on the current tree, each anchor matching
+exactly once — 42 passed under both mutations:**
+
+- **Hover gate.** Disabling
+  `if np.linalg.norm(actual_velocities[uav_idx]) > self.charging_hover_speed_threshold`
+  credits charging to a *moving* UAV and nothing notices. Reaches `uav_charging`
+  and the battery credit → `_energy_failure_mask` → cutoff/depletion counts →
+  the 5.0/10.0-weighted penalties in `safety_reward_before_pbrs`. Also
+  trajectory-changing (gates termination) and an observation feature. Highest
+  severity of the set.
+- **Termination quantifier.** `np.all(self.uav_battery_ratios <= 0.0)` →
+  `np.any(...)` ends the episode on the *first* dead UAV, green. Feeds
+  `terminations` → `episode_done` → the `terminal` flag that zeroes
+  `potential_next` in the graph-PBRS term of `G`.
+
+**The remaining five are the child's claims and are NOT yet verified** — treat
+them as leads with stated anchors, not as record, and reproduce before repairing:
+per-slot observation identity (`start = uav_idx * energy_uav_obs_dim` reversed,
+green — every policy input silently re-bound); `set_scenario7_safety_dual` side
+effects unobserved, so *only* in that test's name is vacuous; the five
+parametrized reward-ablation variants collapsing to two numeric outcomes at the
+fixture's seed; docking horizontal speed 3.0 → 1.0 undetected behind a
+clamp-tautology assertion; and the station layout not reproducing across
+processes.
+
+The sweep also named what it did **not** mutate — seven tests plus one
+observation that `test_constrained_safety_reward_metrics_are_exposed` is a
+second copy of the production formula. Read that list before assuming the file
+is covered.
+
+## Two user rulings from this session
+
+- **Subagent dispatch is granted.** It was never blocked by this repository —
+  routing, roster and registrations were intact throughout. The block was one
+  line in the session system prompt, lifted by the user on 2026-07-27.
+- **Do not pin a model in an agent definition; assign it per dispatch — and
+  assign it *explicitly*.** `general-purpose` pins no model and neither does
+  `hmasd-guard-sweeper`, so an omitted `model` **inherits the orchestrator's**;
+  on an Opus session, omitting gets you Opus. Two mechanical sweeps ran on Opus
+  on 2026-07-27 for exactly that reason. Downgrade deliberately: swapping
+  anchors and reading pytest exit codes is haiku work; tracing a mutated
+  quantity to `compute_G` is not. (`hmasd-experiment-operator` stays pinned to
+  haiku — that is a standing constraint, not a default.)
+
+## Standing constraints that make a decision wrong if forgotten
+
+```text
+branch_scope=untied-k only, never touch another branch
+formal_compute=user authority only
+intermediate_authorization_prompts=forbidden
+same_file_concurrent_writes=forbidden
+```
+
+The workstation is shared with another research line — check for foreign
+processes before any local run, never touch them. Never bypass hooks; the drift
+guard has blocked ~13 commits and every one was correct.
+
+**Unresolved and the user's to settle:** ownership of `untied-k`. Another
+session committed `d3e0f72` asking that ownership be established first.
+
+## Two operational traps, both paid for
+
+- `pytest` here raises `PermissionError [WinError 5]` on the system temp dir.
+  Always pass `--basetemp` into the session scratchpad.
+- A sweep script that rewrites a tracked file must verify its restore with
+  `git diff --quiet`, **not** a string compare — a line-ending round trip
+  through `write_text` leaves the string equal and the file modified.
