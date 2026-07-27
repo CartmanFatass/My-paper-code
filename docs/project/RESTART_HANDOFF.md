@@ -97,7 +97,32 @@ become reproducible. Deferred deliberately rather than rushed before a session
 switch — a half-applied change to environment semantics is worse than a clean
 seam.
 
-**Do this first, before writing any seeding code: locate the source.** The last
+> **STOP — read this before acting on the section below.**
+>
+> At 23:56-23:58 on 2026-07-26 a **concurrent session** was writing this working
+> tree: `envs/pettingzoo/scenario_base.py` and
+> `scripts/audit_d7_s_event_aligned.py` were modified while this handoff was
+> being written. Their changes were uncommitted and were left untouched.
+>
+> **They located the mechanism, and it matches every measurement below:**
+> `_generate_forced_relay_cluster_positions` picks its remote corner from
+> `ground_bs_positions`, which is drawn at construction from an unseeded RNG.
+> The user layout depends on the BS geometry only through *which corner* is
+> remote — a discrete choice — which is exactly why six constructions produced
+> three byte-distinct layouts and why two envs with different BS geometry could
+> still produce identical users.
+>
+> Their `build_pinned_env` also fixes an ordering trap: `regenerate_user_world`
+> must run **after** the topology hash assert, because the same
+> `user_world_seed` against two different BS layouts yields two different
+> worlds.
+>
+> So the investigation below is **already answered** — do not redo it. First
+> establish who owns `untied-k`. `AGENTS.md` sets
+> `same_file_concurrent_writes=forbidden`, and two sessions were writing this
+> tree at once; that it was harmless this time was luck, not design.
+
+**Historical, superseded by the box above: locate the source.** The last
 append in the evidence note has the full table. Ruled out by measurement: the
 global `np.random`, config divergence, `self.np_random`, inherent
 nondeterminism of the generation routine, and dependence on BS/station geometry.
