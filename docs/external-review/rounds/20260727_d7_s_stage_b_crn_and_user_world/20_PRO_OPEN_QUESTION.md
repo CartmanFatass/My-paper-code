@@ -7,11 +7,29 @@ exists before compute rather than after it.
 No verification labor is requested. Every number below is measured, with its
 provenance named; nothing asks you to confirm an inventory.
 
-`stage_commit = 04f7b0b` on `untied-k`, pushed. Later commits on that branch are
-execution vehicle and record only — a dependency manifest, workflow comments,
-this round, and an episode-parallelism flag accepted only on byte-identical
-output. None of them changes a registered quantity, so `04f7b0b` remains the
-commit under review.
+Read at `stage_commit` on `untied-k`, pushed.
+
+The science landed at `04f7b0b`. `stage_commit` is later only because this
+question and two record corrections are committed after it; `git diff
+04f7b0b..stage_commit -- envs scripts tests` is **empty**, so every source and
+test file below is byte-identical to the commit that implemented the work.
+
+## Evidence to read
+
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R3.md`
+- `docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R2.md`
+- `envs/pettingzoo/scenario_base.py`
+- `scripts/audit_d7_s_event_aligned.py`
+- `scripts/pool_d7_s_event_aligned_shards.py`
+- `tests/audit_d7_s_event_aligned_test.py`
+- `tests/env_user_population_determinism_test.py`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_SET_AND_KEEP_WERE_NEVER_CRN_PAIRED.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_USER_WORLD_IS_A_FUNCTION_OF_BS_QUADRANT.md`
+
+R2 is listed because Q2 turns on its `§Replicates` wording; R3 is the frozen
+contract the diff must instantiate.
 
 ## What was implemented
 
