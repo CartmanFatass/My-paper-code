@@ -27,39 +27,55 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_EVENT_ALIGNED_SOURCE_AUDIT
-next_boundary=STAGE_B_ROUND_TWO_RULING_THEN_GATED_EXPERIMENT
-workflow_position=step 8 of the eight-step loop -- Pro is reading the result
+next_boundary=USER_COMPUTE_AUTHORIZATION_FOR_THE_D7S_AUDIT
+workflow_position=loop complete -- every gate is passed; only authorization remains
 ```
 
-**Stage B round two is dispatched and pending.** Round
+**Stage B is `ALIGNED` and the audit is cleared to launch.** Round
 `20260727_d7_s_stage_b_fingerprint_closure`, fenced at
-`8cb5a232c2928aa8d6c5c173557da96c2038a329`, sent 2026-07-27 to the registered
-`open_divergent` conversation. Preflight returned `ROUND_PREFLIGHT_READY` over a
-10-path allow-list. It asks three things: judge the blocker closure, rule what
-R3 §C's "complete-state identity surface" means, and decide the launch.
+`8cb5a232c2928aa8d6c5c173557da96c2038a329`, ruled 2026-07-27 after 12m 56s.
+Zero blockers. All seven implementation defects the prior round implicated are
+inactive. Reconciliation at `30_PM_SCIENTIFIC_RECONCILIATION.md`.
 
-The blocker your last ruling named is closed. `full_state_fingerprint` is a
-recursive canonical encoder that raises rather than falling through; six more
-unfailable guards are repaired; the dict branch no longer sorts on `repr(key)`;
-and a world replacement is no longer booked as a handover.
+Launch bindings, unchanged from the freeze: `n_select=2`, `n_eval=2`, the eight
+registered topologies `20260726–20260733`, expansion to `20260734–20260741`
+**only** under the frozen §9 predicate — never as a retry or a power rescue.
 
-Nothing is running locally. Cloud run `30270540138` is proving `--workers`
-determinism; it is apparatus verification, not evidence.
+Nothing is running. No further Stage B review is required unless the frozen
+contract, the recursive fingerprint domain, the environment binding, CRN
+semantics, replicate volume, topology set, inference or result mapping changes.
 
-### Blocked on
+### Blocked on — one thing, and it is the user's
 
-- **Formal audit run** — blocked on the round-two ruling, not on cost. Formal
-  compute authority is the user's.
-- ~~`--workers` wired into the audit job~~ — **done**. See the cost block below.
+- **Compute authorization for the formal audit run.** The ruling says in its own
+  words that it "does not itself grant compute authorization." Everything else
+  is passed. To launch: `git tag d7s-audit-<n> && git push origin d7s-audit-<n>`.
+
+### On a killed shard — the ruling's rule, which replaces ours
+
+A topology is indivisible. Never pool a partial topology; preserve every
+completed whole-topology shard; rerun the failed topology **whole at the same
+stage commit and contract**; pool only once the seed union matches a frozen set.
+
+### Two conditional re-review triggers
+
+- Introducing **arbitrary user-controlled strings** into environment state — the
+  encoder's string branch has no length prefix, tolerable only while no reachable
+  string carries a structural delimiter (measured: 61 distinct, zero such).
+- `observation_spaces`/`action_spaces` ceasing to be immutable configuration, or
+  the audit ever calling `.sample()` on them.
 
 ### Open decisions that are the user's, not mine
 
 - **Ownership of `untied-k`.** Another session committed `d3e0f72` asking that
   ownership be established before either continues. Unresolved.
-- **The OS-entropy construction seed.** `scenario_base.py:328` seeds from OS
-  entropy and `reset(seed=)` does not re-derive `ground_bs_positions`. Fixing it
-  moves the estimand. Now with three measured instances; put to Pro as Q2 of
-  round two, so this may become a ruling rather than a standing question.
+- ~~The OS-entropy construction seed~~ — **ruled, and the answer is "not now."**
+  The station-logistics reorder would change step-zero state and every
+  trajectory. It is a **parked** environment correction; reactivate only if a
+  future estimand reads graph-PBRS state, a conclusion-bearing path needs
+  fresh-environment replay, a result must reproduce the whole event state from
+  registered seeds, or the stale logistics are shown to alter event support,
+  source-control actions or primary-`G` components.
 
 ### Cost — three hosted samples, and the ceiling worry mostly dissolves
 
@@ -113,7 +129,9 @@ and returns exactly one `COMPLETE` or `ERROR` terminal payload.
 No Controller, persistent Monitor, dispatcher, callback route, global write
 lease or compatibility line is active.
 
-Iteration reports 1–24 are complete; the next conclusion-bearing report is 25.
+Iteration reports 1–25 are complete. 24 and 25 are both supporting work and
+consume no conclusion-bearing quota; the next conclusion-bearing report is 26,
+and it will be the audit result itself.
 `conclusion_bearing_iterations_consumed` counts the **lifetime** total, not
 consumption against the current grant — an exhausted-looking pair is not an
 exhausted grant.
@@ -173,7 +191,7 @@ disjoint_file_parallelism   = allowed
 | Findings and measurements | `docs/research/cdc/EVIDENCE_NOTES/` |
 | Review rounds, questions, rulings, reconciliations | `docs/external-review/rounds/` |
 | Closed generations G2–G16 | `docs/research/cdc/CLOSED_GENERATION_BOUNDARY_ARCHIVE_G2_G16.md` |
-| Latest Chinese iteration report | `docs/report/ITERATION_24.md` |
+| Latest Chinese iteration report | `docs/report/ITERATION_25.md` |
 
 Closed generations G17–G20R, UAV G1/G2, the contract-grill mechanism and the D7
 part-B margin-instrument era are retired; their evidence notes and round

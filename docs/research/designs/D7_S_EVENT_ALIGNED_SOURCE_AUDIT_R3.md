@@ -79,6 +79,26 @@ the narrow hash.
 
 ## C. Complete-state fingerprint
 
+**What this clause freezes, and what it does not.** Ruled 2026-07-27, Stage B
+round `20260727_d7_s_stage_b_fingerprint_closure`, after two identically-seeded
+`build_pinned_env` calls were measured to fingerprint differently. Three
+statements, and no fourth:
+
+| Claim | Status |
+|---|---|
+| **User-world reconstruction** from topology plus `user_world_seed` | supported |
+| **Concrete event-state identity** via `full_state_fingerprint` | supported |
+| **Complete seed-to-environment reconstruction** | **not supported** |
+
+This clause freezes *identity of the concrete event state* — that certification,
+the immutable source snapshot and every continuation clone refer to the same
+concrete state, verified process-portably. It does **not** assert that
+`build_pinned_env` is a seed-to-state reconstruction function. `reset()` derives
+station-relative logistics before the registered coordinates are restored, so a
+construction-dependent offset survives in `episode_graph_pbrs_sum`; it lies
+outside primary `G` and cancels before treatment. The reorder that would remove
+it is a **parked** environment correction and must not enter the frozen run.
+
 The narrow state hash may remain as a quick subset assertion. **It cannot carry
 fixed-history validity.** The load-bearing fingerprint must cover every
 continuation-sensitive surface, at minimum:

@@ -2453,6 +2453,18 @@ def full_state_fingerprint(env, *, duty_map: Optional[dict] = None,
                             service_centroids=None) -> str:
     """Canonical digest over every continuation-sensitive state surface.
 
+    SCOPE, ruled 2026-07-27 (Stage B round `..._fingerprint_closure`): this is a
+    process-portable identifier of ONE concrete state, used to establish
+    within-event snapshot/clone identity. It is **not** an assertion that
+    `build_pinned_env` reconstructs a state from its registered seeds. Two
+    identically-seeded constructions measurably fingerprint differently and
+    never converge, because `reset()` derives station-relative logistics before
+    the registered coordinates are restored; the residue lives in
+    `episode_graph_pbrs_sum`, outside primary `G`, and is shared by every limb
+    of an episode before treatment. `episode_world_fingerprint` DOES reproduce
+    across constructions -- that is the R3 section E claim, and it is a
+    different claim from this one.
+
     Replaces `compute_state_hash` as the load-bearing fixed-history assertion.
     That function hashes UAV positions, battery, charging, station occupancy and
     queue, lifecycle mask and duty map -- and nothing else. It therefore
