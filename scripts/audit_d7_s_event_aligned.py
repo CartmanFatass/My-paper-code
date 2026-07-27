@@ -65,7 +65,13 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import numpy as np
 
-CONTRACT_PATH = "docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md"
+CONTRACT_PATH = "docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R2.md"
+
+# DO NOT change CONTRACT_ID with the contract path. It is an input to
+# `stream_seed`, so every registered continuation stream in the audit derives
+# from it; the R2 amendment states explicitly that `stream_seed` semantics are
+# unchanged. Renaming this would silently redraw every continuation RNG stream
+# while every other registered quantity kept its name.
 CONTRACT_ID = "D7_S_EVENT_ALIGNED_SOURCE_AUDIT"
 
 # --- section 0: environment instance ----------------------------------------
@@ -89,8 +95,13 @@ N_CALIBRATION_EPISODES = 8
 N_AUDIT_EPISODES = 8
 
 # --- section 8: replicates, seeds, bootstrap, equivalence -------------------
-N_SELECT = 4
-N_EVAL = 8
+# R2 (2026-07-26): the scientific floor, not a tuning choice. n_select=1 is
+# inadmissible -- the bootstrap reruns the argmax inside every iteration, so a
+# singleton selection array fixes the winner across all inner iterations and
+# selection-uncertainty propagation goes algebraically inert, which changes the
+# estimand and errs in the claim-favouring direction on the stable limb.
+N_SELECT = 2
+N_EVAL = 2
 BOOTSTRAP_SEED = 2026072601
 BOOTSTRAP_ITERS = 10000
 EQUIVALENCE_DELTA = 0.05
@@ -1978,6 +1989,199 @@ def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
     return env
 
 
+# =============================================================================
+# R2 section 8 -- shared-prefix realization: one canonical replay, N clones
+# =============================================================================
+
+class CloneIsolationError(RuntimeError):
+    """A continuation clone failed one of R2 section 8's Stage-B blocking
+    conditions (clone equivalence, mutation isolation, RNG isolation, topology
+    preservation, complete-state restoration). Never repaired: per R2's failure
+    semantics the event emits `INVALID_EVENT_ALIGNED_AUDIT`."""
+
+
+def _rng_state_token(env) -> str:
+    """A stable token for the environment RNG state, used to prove that clone
+    construction consumes no registered continuation randomness (condition 3).
+    Tolerates both `RandomState` and `Generator`, since `fork_continuation`
+    installs a `RandomState` while a fresh env may carry either."""
+    rng = getattr(env, "np_random", None)
+    if rng is None:
+        return "none"
+    getter = getattr(rng, "get_state", None)
+    if callable(getter):                      # numpy RandomState
+        state = getter()
+        parts = []
+        for item in state:
+            arr = np.asarray(item)
+            parts.append(arr.tobytes() if arr.dtype != object else repr(item).encode("utf-8"))
+        return hashlib.sha256(b"".join(parts)).hexdigest()
+    bit_gen = getattr(rng, "bit_generator", None)   # numpy Generator
+    if bit_gen is not None:
+        return hashlib.sha256(repr(bit_gen.state).encode("utf-8")).hexdigest()
+    return "unknown"
+
+
+class EventSnapshot:
+    """R2 section 8's shared-prefix realization: the **one** canonical
+    evaluator-certified prefix replay for a qualifying event, held as an
+    immutable complete-state snapshot from which every continuation is cloned.
+
+    The superseded contract replayed the whole prefix inside every KEEP,
+    selection and evaluation replicate. Repeated physical replay was never the
+    scientific requirement -- equality of the history before forking is -- so
+    deduplicating identical work does not reduce replication of the
+    conclusion-bearing continuation randomness.
+
+    Ordering is load-bearing and follows R2 steps 1-5 exactly: the snapshot is
+    taken **before** any continuation-specific RNG is assigned, so issuing a
+    clone cannot consume a registered continuation stream. The held env is
+    never stepped again; `fork_continuation` always receives a fresh clone and
+    the clone is discarded after one continuation. Multiple continuations are
+    never run sequentially on one mutated clone.
+    """
+
+    def __init__(self, env, *, coord_hash: str, hash_at_te: str, duty_map_at_te: dict):
+        self._env = env
+        self.coord_hash = coord_hash
+        self.hash_at_te = hash_at_te
+        self.duty_map_at_te = dict(duty_map_at_te)
+        self.baseline_cutoff, self.baseline_depletion = _baseline_masks(env)
+        self._source_state_hash = compute_state_hash(
+            real_env_state_snapshot(env, self.duty_map_at_te))
+        self._source_rng_token = _rng_state_token(env)
+        self.clones_issued = 0
+
+    # -- condition 2: the immutable source must survive every clone unchanged --
+    def assert_source_intact(self, *, context: str = "") -> None:
+        current = compute_state_hash(real_env_state_snapshot(self._env, self.duty_map_at_te))
+        if current != self._source_state_hash:
+            raise CloneIsolationError(
+                f"mutation isolation failed{(' (' + context + ')') if context else ''}: "
+                f"the immutable event snapshot changed after a clone was issued "
+                f"(expected {self._source_state_hash}, got {current})")
+
+    def clone(self, *, context: str = ""):
+        """One independent continuation environment, cloned from the immutable
+        snapshot and checked against R2's blocking conditions 2-5 before use.
+
+        Condition 1 (clone equivalence against the previous independent-replay
+        route) is not checkable from inside a single clone -- it is a
+        cross-route property and is proved by
+        `verify_clone_equivalence_against_replay` in the focused suite and by
+        the Stage-B check on this diff."""
+        rng_before = _rng_state_token(self._env)
+        env = copy.deepcopy(self._env)
+        self.clones_issued += 1
+
+        # condition 3 -- clone construction consumed no continuation randomness
+        rng_after = _rng_state_token(self._env)
+        if rng_before != rng_after or rng_after != self._source_rng_token:
+            raise CloneIsolationError(
+                f"RNG isolation failed{(' (' + context + ')') if context else ''}: "
+                f"cloning advanced the source environment RNG state")
+
+        # condition 4 -- topology preservation
+        clone_coord_hash = coordinate_hash(env.ground_bs_positions,
+                                            env.charging_station_positions)
+        if clone_coord_hash != self.coord_hash:
+            raise TopologyMismatchError(
+                f"clone topology hash mismatch{(' (' + context + ')') if context else ''}: "
+                f"expected {self.coord_hash}, got {clone_coord_hash}")
+
+        # condition 5 -- complete-state restoration, against the certified t_e hash
+        clone_state_hash = compute_state_hash(
+            real_env_state_snapshot(env, self.duty_map_at_te))
+        if clone_state_hash != self.hash_at_te:
+            raise CloneIsolationError(
+                f"complete-state restoration failed{(' (' + context + ')') if context else ''}: "
+                f"clone state hash {clone_state_hash} != certified t_e hash {self.hash_at_te}")
+
+        # condition 2 -- issuing the clone did not disturb the source
+        self.assert_source_intact(context=context)
+        return env
+
+
+def materialize_event_snapshot(config, *, coords: dict, coord_hash: str, episode_seed: int,
+                                recorded_actions: list, expected_hash: str, duty_map_at_te: dict,
+                                energy_permutation: Optional[np.ndarray] = None,
+                                energy_stage: str = "S3") -> EventSnapshot:
+    """R2 steps 1-3: one canonical prefix replay, verified against the
+    evaluator-certified event history, captured as an immutable snapshot.
+
+    Raises `PrefixReplayMismatchError` exactly as `replay_prefix` does. Under
+    the shared-prefix realization that failure now invalidates the WHOLE event
+    rather than one replicate -- there is only one replay, so its failure is
+    the fixed-history guarantee failing for the event."""
+    env = replay_prefix(
+        config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+        recorded_actions=recorded_actions, expected_hash=expected_hash,
+        duty_map_at_te=duty_map_at_te, energy_permutation=energy_permutation,
+        energy_stage=energy_stage)
+    return EventSnapshot(env, coord_hash=coord_hash, hash_at_te=expected_hash,
+                          duty_map_at_te=duty_map_at_te)
+
+
+def verify_clone_equivalence_against_replay(config, *, coords: dict, coord_hash: str,
+                                             episode_seed: int, recorded_actions: list,
+                                             expected_hash: str, event: dict, limb: str,
+                                             continuation_seed: int,
+                                             schedule: str = "constructive_mixed",
+                                             focal_uav: Optional[int] = None, focal_target=None,
+                                             locked_duties: frozenset = frozenset(),
+                                             energy_permutation: Optional[np.ndarray] = None,
+                                             energy_stage: str = "S3") -> dict:
+    """Stage-B condition 1 (clone equivalence): one continuation executed on a
+    clone of the canonical snapshot must be exact-numerically identical to the
+    same continuation obtained by the previous independent-replay route under
+    the same continuation seed.
+
+    This is why `replay_prefix` is deliberately retained rather than deleted
+    with the old call sites: it is the reference oracle, and without it the
+    equivalence this condition demands is unprovable. Returns both G totals and
+    the verdict; raises nothing, so a caller can report rather than crash."""
+    duty_map_at_te = event["duty_map_at_te"]
+    h_val = H_STABLE if limb == "stable" else H_FLEX
+
+    def _one(env) -> dict:
+        baseline_cutoff, baseline_depletion = _baseline_masks(env)
+        out = fork_continuation(
+            env, duty_map_at_te=duty_map_at_te,
+            duty_positions_at_te=event["duty_positions_at_te"],
+            service_centroids_at_te=event["service_centroids_at_te"],
+            schedule=schedule, horizon=h_val, continuation_seed=continuation_seed,
+            focal_uav=focal_uav, focal_target=focal_target, locked_duties=locked_duties)
+        return window_g_from_step_metrics(
+            out["step_metrics"], out["qos_user_steps"], h=h_val,
+            baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+
+    replay_kwargs = dict(
+        coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+        recorded_actions=recorded_actions, expected_hash=expected_hash,
+        duty_map_at_te=duty_map_at_te, energy_permutation=energy_permutation,
+        energy_stage=energy_stage)
+
+    snapshot = materialize_event_snapshot(config, **replay_kwargs)
+    clone_g = _one(snapshot.clone(context="clone equivalence check"))
+
+    # The independent route: a second full replay from reset, exactly as the
+    # superseded contract performed for every replicate.
+    reference_env = replay_prefix(config, **replay_kwargs)
+    reference_g = _one(reference_env)
+
+    equivalent = bool(clone_g["g_total"] == reference_g["g_total"]
+                       and np.array_equal(clone_g["g_series"], reference_g["g_series"]))
+    return {
+        "equivalent": equivalent,
+        "clone_g_total": float(clone_g["g_total"]),
+        "reference_g_total": float(reference_g["g_total"]),
+        "max_abs_series_delta": (float(np.max(np.abs(clone_g["g_series"] - reference_g["g_series"])))
+                                  if clone_g["g_series"].shape == reference_g["g_series"].shape
+                                     and clone_g["g_series"].size else None),
+        "source_intact": True,
+    }
+
+
 def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
                        service_centroids_at_te, schedule: str, horizon: int,
                        continuation_seed: int, focal_uav: Optional[int] = None,
@@ -2138,6 +2342,34 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     event = prefix["event"]
     results = {}
     invalidated_pairs: list = []
+
+    # R2 steps 1-3: ONE canonical evaluator-certified replay for this event.
+    # The same snapshot serves both limbs -- they begin at the same registered
+    # joint event -- while focal intervention, locked duties and horizon stay
+    # limb-specific.
+    try:
+        snapshot = materialize_event_snapshot(
+            config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
+            recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
+            duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+            energy_stage=energy_stage)
+    except PrefixReplayMismatchError as exc:
+        # R2 failure semantics: with one replay per event, its failure is the
+        # fixed-history guarantee failing for the WHOLE event, not one arm.
+        invalidated_pairs.append({
+            "topology_seed": topology_seed, "episode_seed": episode_seed,
+            "block": "calibration", "limb": "both",
+            "schedule": "canonical_prefix_replay", "reason": str(exc),
+        })
+        return {
+            "support_miss": False, "invalidated": True,
+            "invalidated_pairs": invalidated_pairs,
+            "event": event["conformance_record"], "results": {},
+            "duty_map_at_te": event["duty_map_at_te"],
+            "duty_map_before_leave": event["duty_map_before_leave"],
+            "episode_report": episode_leave_report,
+        }
+
     for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
         schedules = (("constructive_mixed", "null", "full_sync_SET") if limb == "stable"
                      else ("constructive_mixed", "null"))
@@ -2145,12 +2377,9 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
         limb_invalid = False
         for schedule in schedules:
             try:
-                replay_env = replay_prefix(
-                    config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-                    recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
-                    duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-                    energy_stage=energy_stage)
-            except PrefixReplayMismatchError as exc:
+                replay_env = snapshot.clone(
+                    context=f"calibration limb={limb} schedule={schedule}")
+            except (CloneIsolationError, TopologyMismatchError) as exc:
                 invalidated_pairs.append({
                     "topology_seed": topology_seed, "episode_seed": episode_seed,
                     "block": "calibration", "limb": limb, "schedule": schedule,
@@ -2158,7 +2387,6 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
                 })
                 limb_invalid = True
                 break
-            baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
             cont_seed = stream_seed(
                 topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
                 limb=limb, event_index=0, candidate_target_id=schedule,
@@ -2170,7 +2398,8 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
                 schedule=schedule, horizon=h_val, continuation_seed=cont_seed)
             g_by_schedule[schedule] = window_g_from_step_metrics(
                 out["step_metrics"], out["qos_user_steps"], h=h_val,
-                baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+                baseline_cutoff_mask=snapshot.baseline_cutoff,
+                baseline_depletion_mask=snapshot.baseline_depletion)
         if limb_invalid:
             continue
         result_entry = {
@@ -2199,41 +2428,49 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
 # Item 3/5 -- audit event driver (KEEP + legal-z SET, n_select/n_eval streams)
 # =============================================================================
 
-def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: dict, coord_hash: str,
-                     recorded_actions: list, energies: np.ndarray, event: dict, limb: str,
-                     n_select: int, n_eval: int, energy_stage: str = "S3") -> dict:
-    """Item 3's audit-event intervention: KEEP (unperturbed
-    `constructive_mixed` continuation) plus, for every legal `z` in the
-    limb's `Z(h)`, `n_select` selection-stream replicates and `n_eval`
-    evaluation-stream replicates -- all via fresh bit-identical prefix
-    replay. Returns the `hierarchical_bootstrap_events`-shaped per-event
-    unit: `{"candidates": {z: {"select":.., "eval_set":..}}, "eval_keep":..}`,
-    plus `invalidated_pairs`: a `PrefixReplayMismatchError` on any single
-    replicate's fresh-env prefix replay (section 8/Q-I2's fixed-history
-    equality assertion) excludes ONLY that one replicate -- reported here,
-    never repaired -- rather than invalidating the whole event, since each
-    replicate replays independently from its own fresh pinned env."""
+def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed: int,
+                     event: dict, limb: str, n_select: int, n_eval: int) -> dict:
+    """Item 3's audit-event intervention under R2's shared-prefix realization:
+    KEEP (unperturbed `constructive_mixed` continuation) plus, for every legal
+    `z` in the limb's `Z(h)`, `n_select` selection-stream replicates and
+    `n_eval` evaluation-stream replicates -- each executed on its own
+    independent clone of the ONE canonical `EventSnapshot`, never on a fresh
+    per-replicate prefix replay and never twice on one mutated clone.
+
+    Returns the `hierarchical_bootstrap_events`-shaped per-event unit:
+    `{"candidates": {z: {"select":.., "eval_set":..}}, "eval_keep":..}`.
+
+    Failure semantics changed with R2 and the change is load-bearing. The
+    superseded contract replayed independently per replicate, so one mismatch
+    excluded only that replicate. There is now exactly one replay per event, so
+    a clone-equivalence or isolation failure means the fixed-history guarantee
+    failed for the whole event: `event_invalid=True` is returned, the caller
+    drops the event, and the run reports `INVALID_EVENT_ALIGNED_AUDIT`. Never
+    repaired, never retried, never downgraded to a partial event."""
     h_val = H_STABLE if limb == "stable" else H_FLEX
     focal_uav = event["focal_stable_uav"] if limb == "stable" else event["focal_flex_uav"]
     legal_targets = event["legal_targets"][limb]
     locked_duties = event["locked_duties"][limb]
     invalidated_pairs: list = []
+    event_invalid = {"flag": False}
 
     def _run_replicate(*, target, candidate_id: str, phase: str, replicate_index: int) -> Optional[float]:
+        if event_invalid["flag"]:
+            return None            # short-circuit: the event is already void
         try:
-            replay_env = replay_prefix(
-                config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-                recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
-                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-                energy_stage=energy_stage)
-        except PrefixReplayMismatchError as exc:
+            replay_env = snapshot.clone(
+                context=f"audit limb={limb} candidate={candidate_id} "
+                        f"phase={phase} replicate={replicate_index}")
+        except (CloneIsolationError, TopologyMismatchError) as exc:
             invalidated_pairs.append({
                 "topology_seed": topology_seed, "episode_seed": episode_seed,
                 "block": "audit", "limb": limb, "candidate_id": candidate_id,
                 "phase": phase, "replicate_index": replicate_index, "reason": str(exc),
             })
+            event_invalid["flag"] = True
             return None
-        baseline_cutoff, baseline_depletion = _baseline_masks(replay_env)
+        baseline_cutoff = snapshot.baseline_cutoff
+        baseline_depletion = snapshot.baseline_depletion
         cont_seed = stream_seed(
             topology_seed=topology_seed, block="audit", episode_seed=episode_seed,
             limb=limb, event_index=0, candidate_target_id=candidate_id,
@@ -2280,7 +2517,9 @@ def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: di
               f"select_completed={select_vals.size} eval_completed={eval_vals.size}",
               file=sys.stderr, flush=True)
 
-    return {"candidates": candidates, "eval_keep": keep_eval, "invalidated_pairs": invalidated_pairs}
+    return {"candidates": candidates, "eval_keep": keep_eval,
+            "invalidated_pairs": invalidated_pairs,
+            "event_invalid": event_invalid["flag"]}
 
 
 # =============================================================================
@@ -2338,8 +2577,13 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
           file=sys.stderr, flush=True)
     coords, coord_hash = build_topology_template(config, topology_seed=topology_seed)
     record = build_topology_record(coords, coord_hash, topology_seed=topology_seed)
-    this_n_select = 1 if smoke else n_select
-    this_n_eval = 2 if smoke else n_eval
+    # R2: the smoke path used to drop to n_select=1 to be cheap. n_select=1 is
+    # now inadmissible, and a code path that can still run it is a footgun --
+    # someone eventually reads a smoke number. At the 2/2 floor the smoke costs
+    # one extra selection stream per candidate and exercises the exact
+    # registered volume, so smoke and audit no longer differ in replicate shape.
+    this_n_select = n_select
+    this_n_eval = n_eval
 
     invalidated_pairs: list = []
     arm_distinctness_pairs: list = []
@@ -2416,23 +2660,47 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                   f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
                   file=sys.stderr, flush=True)
             continue
-        audit_report["qualifying"] += 1
-        audit_report["qualifying_joint_events"] += 1
         event = prefix["event"]
-        arm_distinctness_pairs.append(
-            (event["duty_map_at_te"], event["duty_map_before_leave"]))
+
+        # R2 steps 1-3: ONE canonical replay for this event, shared by both
+        # limbs. Its failure invalidates the whole event -- there is no second
+        # replay to fall back on -- so the event is not counted as qualifying.
+        try:
+            snapshot = materialize_event_snapshot(
+                config, coords=coords, coord_hash=coord_hash, episode_seed=ep_seed,
+                recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
+                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
+                energy_stage=energy_stage)
+        except PrefixReplayMismatchError as exc:
+            invalidated_pairs.append({
+                "topology_seed": topology_seed, "episode_seed": ep_seed,
+                "block": "audit", "limb": "both",
+                "candidate_id": "canonical_prefix_replay", "phase": "replay",
+                "replicate_index": 0, "reason": str(exc),
+            })
+            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+                  file=sys.stderr, flush=True)
+            continue
+
         unit_stable = run_audit_event(
-            config, topology_seed=topology_seed, episode_seed=ep_seed, coords=coords,
-            coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
-            event=event, limb="stable", n_select=this_n_select, n_eval=this_n_eval,
-            energy_stage=energy_stage)
+            snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
+            event=event, limb="stable", n_select=this_n_select, n_eval=this_n_eval)
         unit_flex = run_audit_event(
-            config, topology_seed=topology_seed, episode_seed=ep_seed, coords=coords,
-            coord_hash=coord_hash, recorded_actions=prefix["recorded_actions"], energies=energies,
-            event=event, limb="flex", n_select=this_n_select, n_eval=this_n_eval,
-            energy_stage=energy_stage)
+            snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
+            event=event, limb="flex", n_select=this_n_select, n_eval=this_n_eval)
         invalidated_pairs.extend(unit_stable.get("invalidated_pairs", []))
         invalidated_pairs.extend(unit_flex.get("invalidated_pairs", []))
+        if unit_stable.get("event_invalid") or unit_flex.get("event_invalid"):
+            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+                  file=sys.stderr, flush=True)
+            continue
+
+        audit_report["qualifying"] += 1
+        audit_report["qualifying_joint_events"] += 1
+        arm_distinctness_pairs.append(
+            (event["duty_map_at_te"], event["duty_map_before_leave"]))
         audit_units_stable.append(unit_stable)
         audit_units_flex.append(unit_flex)
         audit_events_out.append(event["conformance_record"])

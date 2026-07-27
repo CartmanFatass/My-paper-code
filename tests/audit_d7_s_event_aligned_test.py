@@ -1732,48 +1732,60 @@ def test_unresolved_verdict_lands_in_diagnostic_and_never_flips_decide_branch():
     assert branch_with_contradiction == "PART_A_CONTRADICTION"
 
 
-def test_run_audit_event_excludes_an_invalidated_replicate_and_reports_it(monkeypatch):
-    """Item 5b, first half: an injected `PrefixReplayMismatchError` on
-    exactly one KEEP evaluation replicate must exclude ONLY that pair (the
-    eval array shrinks by one) and report it via `invalidated_pairs`,
-    never silently repaired and never crashing the whole audit event."""
-    calls = {"n": 0}
+def test_run_audit_event_voids_the_whole_event_when_a_clone_fails():
+    """R2 failure semantics, and the exact rule that CHANGED at the refreeze.
 
-    def _flaky_replay_prefix(*args, **kwargs):
-        calls["n"] += 1
-        if calls["n"] == 2:
-            raise audit.PrefixReplayMismatchError("injected mismatch")
-        return _CloneableFakeEnv(seed=5)
+    Under the superseded contract every replicate replayed the prefix
+    independently, so one mismatch excluded only that replicate and the event
+    survived with a shorter array. Under the shared-prefix realization there is
+    ONE canonical replay per event, so a clone-equivalence or isolation failure
+    means the fixed-history guarantee failed for the WHOLE event: the driver
+    must set `event_invalid`, stop issuing further clones, and let the caller
+    drop the event rather than keep a partially-populated one.
 
-    monkeypatch.setattr(audit, "replay_prefix", _flaky_replay_prefix)
-
+    A test that still asserted the old shrink-by-one behaviour would pass only
+    by accident and would license exactly the partial event R2 forbids."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=5))
     env_for_geometry = _CloneableFakeEnv(seed=5)
     duty_positions, centroids = audit.compute_duty_positions(env_for_geometry)
     duty_map = {i: i for i in range(env_for_geometry.n_uavs)}
     event = {
-        "hash_at_te": "irrelevant", "duty_map_at_te": duty_map,
+        "hash_at_te": snap.hash_at_te, "duty_map_at_te": duty_map,
         "duty_positions_at_te": duty_positions, "service_centroids_at_te": centroids,
         "focal_stable_uav": 0, "legal_targets": {"stable": {}},
         "locked_duties": {"stable": frozenset()},
     }
-    result = audit.run_audit_event(
-        config=None, topology_seed=1, episode_seed=1, coords=None, coord_hash="x",
-        recorded_actions=[], energies=None, event=event, limb="stable",
-        n_select=1, n_eval=4)
 
-    assert len(result["eval_keep"]) == 3          # one of the 4 requested replicates excluded
+    real_clone = snap.clone
+    calls = {"n": 0}
+
+    def _flaky_clone(**kwargs):
+        calls["n"] += 1
+        if calls["n"] == 2:
+            raise audit.CloneIsolationError("injected isolation failure")
+        return real_clone(**kwargs)
+
+    snap.clone = _flaky_clone
+
+    result = audit.run_audit_event(
+        snapshot=snap, topology_seed=1, episode_seed=1,
+        event=event, limb="stable", n_select=1, n_eval=4)
+
+    assert result["event_invalid"] is True
     assert len(result["invalidated_pairs"]) == 1
     assert result["invalidated_pairs"][0]["candidate_id"] == "KEEP"
-    assert result["invalidated_pairs"][0]["phase"] == "evaluate"
+    # Short-circuited: replicates 3 and 4 were never attempted after the void.
+    assert calls["n"] == 2
+    assert len(result["eval_keep"]) == 1
 
 
-def test_run_calibration_episode_excludes_the_whole_episode_on_a_replay_mismatch(monkeypatch):
-    """Item 3/5b: a `PrefixReplayMismatchError` on any one schedule's
-    fresh-env prefix replay invalidates the WHOLE calibration episode (every
-    schedule shares the identical recorded prefix/expected hash, so a
-    divergence means the fixed-history guarantee itself failed for this
-    episode) -- reported via `invalidated_pairs`, and the episode
-    contributes to neither `B_m` nor `D_A`, never repaired or retried."""
+def test_run_calibration_episode_voids_the_episode_when_the_canonical_replay_fails(monkeypatch):
+    """R2: there is exactly ONE canonical prefix replay per calibration
+    episode, shared by both limbs, so a `PrefixReplayMismatchError` on it is
+    the fixed-history guarantee failing for the whole episode. It is reported
+    once against `canonical_prefix_replay` -- not once per limb/schedule as
+    the superseded per-replicate route did -- and the episode contributes to
+    neither `B_m` nor `D_A`, never repaired or retried."""
     fake_event = {
         "hash_at_te": "h", "duty_map_at_te": {0: 0}, "duty_positions_at_te": {},
         "service_centroids_at_te": None, "conformance_record": {},
@@ -1788,21 +1800,191 @@ def test_run_calibration_episode_excludes_the_whole_episode_on_a_replay_mismatch
 
     calls = {"n": 0}
 
-    def _flaky_replay_prefix(*args, **kwargs):
+    def _failing_replay_prefix(*args, **kwargs):
         calls["n"] += 1
-        if calls["n"] >= 2:   # first schedule call succeeds, every one after fails
-            raise audit.PrefixReplayMismatchError("injected mismatch")
-        return _CloneableFakeEnv(seed=2)
+        raise audit.PrefixReplayMismatchError("injected mismatch")
 
-    monkeypatch.setattr(audit, "replay_prefix", _flaky_replay_prefix)
+    monkeypatch.setattr(audit, "replay_prefix", _failing_replay_prefix)
 
     result = audit.run_calibration_episode(
         config=None, topology_seed=1, episode_seed=1, energy_seed=1, coords={}, coord_hash="x")
 
     assert result["support_miss"] is False
     assert result["invalidated"] is True
-    assert len(result["invalidated_pairs"]) == 2   # stable/null + flex/constructive_mixed
+    assert calls["n"] == 1                          # ONE canonical replay, not one per arm
+    assert len(result["invalidated_pairs"]) == 1
+    assert result["invalidated_pairs"][0]["schedule"] == "canonical_prefix_replay"
+    assert result["invalidated_pairs"][0]["limb"] == "both"
     assert result["results"] == {}                  # neither limb contributes B_m or D_A
+
+
+# =============================================================================
+# R2 shared-prefix realization -- the six Stage-B blocking conditions.
+# These are what the Pro ruling names as blocking before launch, so they are
+# proved here rather than asserted in prose.
+# =============================================================================
+
+def _snapshot_of(env, *, duty_map=None):
+    """An `EventSnapshot` whose certified hashes are derived from `env` itself,
+    so the snapshot is internally consistent and any failure a test sees is the
+    injected one rather than a hash that never matched."""
+    duty_map = {i: i for i in range(env.n_uavs)} if duty_map is None else duty_map
+    return audit.EventSnapshot(
+        env,
+        coord_hash=audit.coordinate_hash(env.ground_bs_positions,
+                                          env.charging_station_positions),
+        hash_at_te=audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map)),
+        duty_map_at_te=duty_map)
+
+
+def test_replicate_constants_are_the_r2_scientific_floor():
+    """R2 section 8. n_select=1 is inadmissible, so no constant may reintroduce
+    it -- including through the smoke path, which now runs the same shape."""
+    assert audit.N_SELECT == 2
+    assert audit.N_EVAL == 2
+
+
+def test_clone_restores_the_certified_state_condition_5():
+    snap = _snapshot_of(_CloneableFakeEnv(seed=21))
+    clone = snap.clone()
+    assert audit.compute_state_hash(
+        audit.real_env_state_snapshot(clone, snap.duty_map_at_te)) == snap.hash_at_te
+
+
+def test_clone_preserves_the_topology_hash_condition_4():
+    env = _CloneableFakeEnv(seed=22)
+    snap = _snapshot_of(env)
+    clone = snap.clone()
+    assert audit.coordinate_hash(clone.ground_bs_positions,
+                                  clone.charging_station_positions) == snap.coord_hash
+
+
+def test_mutating_one_clone_touches_neither_the_source_nor_a_sibling_condition_2():
+    """The isolation the whole optimization rests on: if clones shared state
+    with the snapshot, continuations would silently contaminate each other and
+    every downstream margin would be measured against a moving history."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=23))
+    first, second = snap.clone(), snap.clone()
+
+    first.uav_positions[0] += 500.0
+    first.uav_battery_ratios[0] = 0.01
+
+    assert not np.allclose(first.uav_positions[0], second.uav_positions[0])
+    assert second.uav_battery_ratios[0] == pytest.approx(0.9)
+    snap.assert_source_intact()          # raises if the snapshot moved
+    assert audit.compute_state_hash(
+        audit.real_env_state_snapshot(second, snap.duty_map_at_te)) == snap.hash_at_te
+
+
+def test_cloning_consumes_no_source_rng_condition_3():
+    """R2 step 3 puts the snapshot BEFORE any continuation-specific RNG is
+    assigned. If cloning advanced the source RNG, the Nth continuation would
+    silently draw from a different stream than its registered `stream_seed`."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=24))
+    before = audit._rng_state_token(snap._env)
+    for _ in range(5):
+        snap.clone()
+    assert audit._rng_state_token(snap._env) == before
+    assert snap.clones_issued == 5
+
+
+def test_clone_raises_when_the_certified_state_hash_does_not_match():
+    """Condition 5's failure direction: a snapshot whose recorded t_e hash does
+    not describe its own env must refuse to issue clones rather than hand out a
+    silently wrong starting state."""
+    env = _CloneableFakeEnv(seed=25)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    bad = audit.EventSnapshot(
+        env,
+        coord_hash=audit.coordinate_hash(env.ground_bs_positions, env.charging_station_positions),
+        hash_at_te="not-the-certified-hash",
+        duty_map_at_te=duty_map)
+    with pytest.raises(audit.CloneIsolationError):
+        bad.clone()
+
+
+def test_clone_raises_on_a_topology_hash_mismatch():
+    env = _CloneableFakeEnv(seed=26)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    bad = audit.EventSnapshot(
+        env, coord_hash="not-the-recorded-topology",
+        hash_at_te=audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map)),
+        duty_map_at_te=duty_map)
+    with pytest.raises(audit.TopologyMismatchError):
+        bad.clone()
+
+
+def test_clone_and_independent_replay_agree_condition_1(monkeypatch):
+    """Condition 1, the one that justifies the whole change: a continuation run
+    on a clone must be exact-numerically identical to the same continuation run
+    off an independent full replay under the same continuation seed. This is
+    why `replay_prefix` is retained rather than deleted -- it is the reference
+    oracle, and deleting it would make this condition unprovable."""
+    monkeypatch.setattr(audit, "replay_prefix", lambda *a, **k: _CloneableFakeEnv(seed=27))
+
+    geometry = _CloneableFakeEnv(seed=27)
+    duty_map = {i: i for i in range(geometry.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(geometry)
+    event = {
+        "hash_at_te": audit.compute_state_hash(
+            audit.real_env_state_snapshot(geometry, duty_map)),
+        "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions,
+        "service_centroids_at_te": centroids,
+    }
+    verdict = audit.verify_clone_equivalence_against_replay(
+        config=None,
+        coords={},
+        coord_hash=audit.coordinate_hash(geometry.ground_bs_positions,
+                                          geometry.charging_station_positions),
+        episode_seed=1, recorded_actions=[], expected_hash=event["hash_at_te"],
+        event=event, limb="stable", continuation_seed=987654321)
+
+    assert verdict["equivalent"] is True
+    assert verdict["clone_g_total"] == verdict["reference_g_total"]
+    assert verdict["max_abs_series_delta"] == 0.0
+
+
+def test_shared_prefix_replays_once_for_every_continuation_in_an_episode(monkeypatch):
+    """The optimization claim itself, measured rather than asserted: one
+    calibration episode runs five continuations (stable x3 including
+    full_sync_SET, flex x2) and must perform exactly ONE prefix replay. The
+    superseded route performed five."""
+    source = _CloneableFakeEnv(seed=28)
+    duty_map = {i: i for i in range(source.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(source)
+    real_coord_hash = audit.coordinate_hash(source.ground_bs_positions,
+                                             source.charging_station_positions)
+    fake_event = {
+        "hash_at_te": audit.compute_state_hash(
+            audit.real_env_state_snapshot(source, duty_map)),
+        "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions,
+        "service_centroids_at_te": centroids,
+        "conformance_record": {},
+        "duty_map_before_leave": duty_map,
+    }
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _CloneableFakeEnv(seed=28))
+    monkeypatch.setattr(audit, "apply_energy_profile", lambda *a, **k: None)
+    monkeypatch.setattr(
+        audit, "roll_prefix_and_find_event",
+        lambda env, **k: {"event": fake_event, "exclusions": [], "recorded_actions": []})
+
+    calls = {"n": 0}
+
+    def _counting_replay(*a, **k):
+        calls["n"] += 1
+        return _CloneableFakeEnv(seed=28)
+
+    monkeypatch.setattr(audit, "replay_prefix", _counting_replay)
+
+    result = audit.run_calibration_episode(
+        config=None, topology_seed=1, episode_seed=1, energy_seed=1,
+        coords={}, coord_hash=real_coord_hash)
+
+    assert result["invalidated"] is False
+    assert calls["n"] == 1
+    assert set(result["results"]) == {"stable", "flex"}
 
 
 def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
