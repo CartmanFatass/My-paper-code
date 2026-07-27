@@ -468,13 +468,33 @@ def test_legal_set_excludes_targets_outside_the_physical_domain():
 
 def test_legal_set_never_excludes_for_unreachability_within_delta():
     """Transit cost is part of SET's causal consequence, never a support
-    exclusion -- a target 10 km away must still be legal."""
-    far = np.array([10000.0, 10000.0, 100.0])
-    legal = audit.legal_set_targets(
-        post_leave_targets=[far], vacated_pre_leave_target=np.array([0.0, 0.0, 100.0]),
+    exclusion. `Z(h)` is the union of BOTH halves -- post-LEAVE targets and the
+    vacated pre-LEAVE target (`legal_set_targets`) -- so a target 10 km away
+    must still be legal whether it arrives via `post_leave_targets` or IS the
+    vacated pre-LEAVE target itself. The vacated half is the worse half to
+    lose: it feeds `has_legal_set_alternative` -> `EXCLUDE_EMPTY_SET_ALT` ->
+    `REJECT_EMPTY_LEGAL_SET`, so an unreachability exclusion aimed only at that
+    half would silently shrink the admitted event set toward 'persistence is
+    necessary'."""
+    far_post_leave = np.array([10000.0, 10000.0, 100.0])
+    legal_far_post_leave = audit.legal_set_targets(
+        post_leave_targets=[far_post_leave],
+        vacated_pre_leave_target=np.array([0.0, 0.0, 100.0]),
         focal_incumbent_target=np.array([1.0, 1.0, 100.0]),
     )
-    assert any(np.allclose(t, far) for t in legal)
+    assert any(np.allclose(t, far_post_leave) for t in legal_far_post_leave), (
+        "a far post-LEAVE target must not be excluded for unreachability")
+
+    # The other half of the union: a far VACATED pre-LEAVE target, near
+    # neither the focal incumbent nor any post-LEAVE target, must survive too.
+    far_vacated = np.array([10000.0, 10000.0, 100.0])
+    legal_far_vacated = audit.legal_set_targets(
+        post_leave_targets=[np.array([10.0, 10.0, 100.0])],
+        vacated_pre_leave_target=far_vacated,
+        focal_incumbent_target=np.array([1.0, 1.0, 100.0]),
+    )
+    assert any(np.allclose(t, far_vacated) for t in legal_far_vacated), (
+        "a far vacated pre-LEAVE target must not be excluded for unreachability")
 
 
 def test_focal_eligible_to_act_requires_all_four_conditions_clear():
@@ -2835,7 +2855,16 @@ def test_locking_a_duty_actually_restricts_reassignment():
 def test_user_world_seed_is_disjoint_from_every_other_registered_seed():
     """R3 section E. The user world must not be correlated with the arm streams
     it is supposed to be independent of, so its seed lives in its own namespace
-    rather than reusing `stream_seed`'s."""
+    rather than reusing `stream_seed`'s.
+
+    'Disjoint from EVERY other registered seed' means the whole declared
+    `stream_seed` coordinate domain, not one convenient probe point --
+    otherwise a collapse into a single untested corner of that domain (e.g.
+    `user_world_seed` delegating to `stream_seed` at one fixed
+    limb/phase/candidate/event/replicate combination) would pass silently
+    while still corrupting `build_pinned_env` -> `regenerate_user_world` ->
+    `qos_satisfaction_ratio` -> `compute_G`, an estimator input rather than a
+    recorded field."""
     a = audit.user_world_seed(topology_seed=20260726, block="audit", episode_index=0)
     b = audit.user_world_seed(topology_seed=20260726, block="calibration", episode_index=0)
     c = audit.user_world_seed(topology_seed=20260726, block="audit", episode_index=1)
@@ -2845,11 +2874,47 @@ def test_user_world_seed_is_disjoint_from_every_other_registered_seed():
     assert a == audit.user_world_seed(
         topology_seed=20260726, block="audit", episode_index=0), "must be reproducible"
 
-    # Disjoint from the continuation-stream namespace for the same coordinates.
-    collision = audit.stream_seed(
-        topology_seed=20260726, block="audit", episode_seed=0, limb="stable",
-        event_index=0, candidate_target_id="KEEP", phase="evaluate", replicate_index=0)
-    assert a != collision
+    # Sweep the declared `stream_seed` domain: both phases, both limbs, the
+    # registered blocks this suite exercises, a candidate-id set spanning an
+    # ordinary id and the EVAL_SHARED_CANDIDATE_TOKEN sentinel, event/replicate
+    # indices over the registered N_SELECT/N_EVAL ranges, and topology seeds
+    # and episode indices that include the exact coordinates probed above --
+    # `episode_seed` identifies with `episode_index` in `user_world_seed`
+    # itself, which is exactly the identification a namespace collapse would
+    # exploit.
+    topology_seeds = (20260726, 20260727)
+    blocks = ("audit", "calibration")
+    episode_indices = (0, 1)
+    limbs = ("stable", "flex")
+    phases = ("select", "evaluate")
+    candidate_ids = ("KEEP", 0, 1, audit.EVAL_SHARED_CANDIDATE_TOKEN)
+    indices = range(max(audit.N_SELECT, audit.N_EVAL))
+
+    for topology_seed in topology_seeds:
+        for block in blocks:
+            for episode_index in episode_indices:
+                user_seed = audit.user_world_seed(
+                    topology_seed=topology_seed, block=block,
+                    episode_index=episode_index)
+                for limb in limbs:
+                    for phase in phases:
+                        for candidate_target_id in candidate_ids:
+                            for event_index in indices:
+                                for replicate_index in indices:
+                                    collision = audit.stream_seed(
+                                        topology_seed=topology_seed, block=block,
+                                        episode_seed=episode_index, limb=limb,
+                                        event_index=event_index,
+                                        candidate_target_id=candidate_target_id,
+                                        phase=phase, replicate_index=replicate_index)
+                                    assert user_seed != collision, (
+                                        f"user_world_seed collided with stream_seed at "
+                                        f"topology_seed={topology_seed} block={block} "
+                                        f"episode_index={episode_index} limb={limb} "
+                                        f"phase={phase} "
+                                        f"candidate_target_id={candidate_target_id!r} "
+                                        f"event_index={event_index} "
+                                        f"replicate_index={replicate_index}")
 
 
 def test_episode_world_fingerprint_separates_two_user_worlds():
