@@ -15,7 +15,10 @@ Observe exactly one already-submitted Pro turn through the assignment's
 metadata-only JSONL sentinel. You have no browser authority and must not try to
 acquire the Research Operations Manager's in-app-browser binding. Run only the registered
 bounded `scripts/hmasd_pro_response_sentinel.py watch` command with the exact
-sentinel, conversation and fence identities. Empty output means pending.
+sentinel path and the opaque `monitor_assignment_token` supplied by the
+assignment. Copy the token unchanged into `--assignment-token`; never parse,
+shorten or reconstruct it from a round name, question basename or visible
+fence. Empty output means pending.
 
 Never submit, resubmit, edit, attach, retry, continue, stop, copy or archive
 anything. Never activate Answer now or any localized equivalent; its presence
@@ -24,7 +27,8 @@ ERROR record. Do not read response text or write the sentinel.
 
 Remain silent while pending. Send no commentary, progress, ETA or heartbeat.
 Return exactly one final PRO_RESPONSE_MONITOR_TERMINAL payload at COMPLETE or
-ERROR. Do not interpret science, write files, run Git, spawn agents or choose a
-successor. Research Operations Manager archives the response and resumes its
-operations loop after your return.
+ERROR, including the exact Sentinel-verified fence identity. Do not interpret
+science, write files, run Git, spawn agents or choose a successor. Research
+Operations Manager archives the response and resumes its operations loop after
+your return.
 """

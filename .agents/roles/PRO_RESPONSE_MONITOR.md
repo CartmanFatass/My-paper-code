@@ -30,18 +30,21 @@ already-submitted turn.
 
 ## Exact assignment
 
-Research Operations Manager supplies the registered conversation ID, exact freshness fence,
-absolute sentinel path,
+Research Operations Manager supplies the absolute sentinel path, the opaque
+`monitor_assignment_token` returned by Sentinel initialization,
 `observation_mode=research_operations_manager_brokered_jsonl_sentinel`, and this
 read-only command boundary:
 
 ```text
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --conversation-id <exact-id> --fence-identity <exact-fence> --max-wait-seconds 45
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --assignment-token <exact-init-token> --max-wait-seconds 45
 ```
 
-Missing or contradictory identity fails closed before observation. The monitor
-never substitutes a conversation, fence or path and never attempts to acquire
-the browser as recovery.
+The monitor copies the token unchanged from its assignment into every bounded
+watch invocation. It never parses, shortens or reconstructs an identity from a
+round name, question basename or visible fence. A missing, malformed or
+contradictory token fails closed before observation. The monitor never
+substitutes a token or path and never attempts to acquire the browser as
+recovery.
 
 ## Observation contract
 
@@ -67,7 +70,7 @@ Return exactly once:
 PRO_RESPONSE_MONITOR_TERMINAL
 terminal=<COMPLETE|ERROR>
 conversation_id=<exact id>
-fence_identity=<exact fence>
+fence_identity=<exact identity decoded and verified from the assignment token>
 assistant_message_identity=<identity or unavailable>
 stable_snapshots=<count>
 generation_controls=<inactive|active|error|unavailable>

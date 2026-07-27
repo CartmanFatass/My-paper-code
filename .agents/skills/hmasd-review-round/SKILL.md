@@ -65,7 +65,7 @@ visible or the page title looks familiar.
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page is observably stuck, wait once, take a fresh snapshot, then reload the same tab once for that stuck episode. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
+| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose fence identity exactly matches the initialized sentinel. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
 
@@ -105,6 +105,21 @@ snapshot and calls `scripts/hmasd_pro_response_sentinel.py record`; it does not
 run a timer loop or emit pending progress messages. The response text remains
 in the browser and is represented in the sentinel only by a content
 fingerprint, assistant-message identity and control state.
+
+The Sentinel `init` result's `monitor_assignment_token` is the sole monitor
+assignment identity. Copy that URL-safe token unchanged into the native-child
+assignment and invoke only:
+
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --assignment-token <exact-init-token> --max-wait-seconds 45
+```
+
+Do not parse, shorten or rebuild the token from a round name, question basename
+or visible fence. The monitor passes it unchanged to the Sentinel. The Sentinel
+decodes the complete conversation and fence identities, compares them exactly
+with the initialized JSONL state, and returns that exact fence identity in its
+terminal payload. A malformed token or any identity mismatch is terminal
+`ERROR`.
 
 The monitor runs only bounded `watch` calls against that sentinel. Pending
 produces no terminal payload. Two matching inactive operator observations at least

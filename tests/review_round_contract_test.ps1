@@ -34,6 +34,11 @@ foreach ($required in @(
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
     'hmasd-pro-response-monitor',
     'operations-manager-brokered metadata sentinel',
+    'monitor_assignment_token',
+    'sole monitor assignment identity',
+    '--assignment-token <exact-init-token>',
+    'Do not parse, shorten or rebuild the token',
+    'returns that exact fence identity',
     'scripts/hmasd_pro_response_sentinel.py record',
     'native child does not inherit',
     'in-app-browser',
@@ -62,9 +67,33 @@ foreach ($forbidden in @(
     'reload until',
     'refresh until',
     'reload proves the matching fence absent',
-    'reload authorizes submission')) {
+    'reload authorizes submission',
+    'watch --state <absolute-jsonl> --conversation-id')) {
     if ($skillNormalized.Contains($forbidden)) {
         throw "Review Skill permits unsafe stuck-page recovery: $forbidden"
+    }
+}
+
+$monitorRole = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
+$monitorProfile = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.codex/agents/hmasd-pro-response-monitor.toml')
+foreach ($required in @(
+    'monitor_assignment_token',
+    '--assignment-token <exact-init-token>',
+    'never parses, shortens or reconstructs',
+    'exact identity decoded and verified from the assignment token')) {
+    if (-not $monitorRole.Contains($required)) {
+        throw "Pro-response monitor role missing opaque identity transport: $required"
+    }
+}
+foreach ($required in @(
+    'monitor_assignment_token',
+    'Copy the token unchanged into `--assignment-token`',
+    'never parse,',
+    'exact Sentinel-verified fence identity')) {
+    if (-not $monitorProfile.Contains($required)) {
+        throw "Pro-response monitor profile missing opaque identity transport: $required"
     }
 }
 foreach ($required in @(

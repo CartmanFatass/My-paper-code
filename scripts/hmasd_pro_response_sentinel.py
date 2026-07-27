@@ -9,6 +9,8 @@ Windows replace races and tolerates a partially written final line.
 from __future__ import annotations
 
 import argparse
+import base64
+import binascii
 import json
 import os
 import sys
@@ -18,6 +20,7 @@ from typing import Any
 
 
 SCHEMA_VERSION = 1
+MONITOR_ASSIGNMENT_SCHEMA_VERSION = 1
 TERMINAL_STATES = {"COMPLETE", "ERROR"}
 CONTROL_STATES = {"active", "inactive", "error", "unavailable"}
 
@@ -67,10 +70,54 @@ def _append(path: Path, payload: dict[str, Any], *, create: bool = False) -> Non
 def _require_identity(
     payload: dict[str, Any], conversation_id: str, fence_identity: str
 ) -> None:
-    if payload.get("conversation_id") != conversation_id:
+    stored_conversation = payload.get("conversation_id")
+    stored_fence = payload.get("fence_identity")
+    if not isinstance(stored_conversation, str) or (
+        stored_conversation.encode("utf-8") != conversation_id.encode("utf-8")
+    ):
         raise SentinelError("conversation identity does not match sentinel")
-    if payload.get("fence_identity") != fence_identity:
+    if not isinstance(stored_fence, str) or (
+        stored_fence.encode("utf-8") != fence_identity.encode("utf-8")
+    ):
         raise SentinelError("freshness-fence identity does not match sentinel")
+
+
+def _encode_monitor_assignment_token(
+    conversation_id: str, fence_identity: str
+) -> str:
+    identity = {
+        "schema_version": MONITOR_ASSIGNMENT_SCHEMA_VERSION,
+        "conversation_id": conversation_id,
+        "fence_identity": fence_identity,
+    }
+    raw = json.dumps(
+        identity, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
+
+
+def _decode_monitor_assignment_token(token: str) -> tuple[str, str]:
+    if not token or not token.isascii():
+        raise SentinelError("monitor assignment token is malformed")
+    padding = "=" * (-len(token) % 4)
+    try:
+        raw = base64.b64decode(
+            token + padding, altchars=b"-_", validate=True
+        ).decode("utf-8")
+        identity = json.loads(raw)
+    except (binascii.Error, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise SentinelError("monitor assignment token is malformed") from exc
+    if not isinstance(identity, dict) or (
+        identity.get("schema_version") != MONITOR_ASSIGNMENT_SCHEMA_VERSION
+    ):
+        raise SentinelError("monitor assignment token schema is unsupported")
+    conversation_id = identity.get("conversation_id")
+    fence_identity = identity.get("fence_identity")
+    if not isinstance(conversation_id, str) or not conversation_id.strip():
+        raise SentinelError("monitor assignment conversation identity is invalid")
+    if not isinstance(fence_identity, str) or not fence_identity.strip():
+        raise SentinelError("monitor assignment fence identity is invalid")
+    return conversation_id, fence_identity
 
 
 def initialize(
@@ -93,6 +140,9 @@ def initialize(
         "answer_now_activated": False,
         "reason": "initialized",
         "observed_at": _utc_timestamp(now),
+        "monitor_assignment_token": _encode_monitor_assignment_token(
+            conversation_id, fence_identity
+        ),
     }
     try:
         _append(path, payload, create=True)
@@ -190,13 +240,15 @@ def terminal_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 def watch(
     path: Path,
-    conversation_id: str,
-    fence_identity: str,
+    assignment_token: str,
     poll_seconds: float,
     max_wait_seconds: float,
 ) -> dict[str, Any] | None:
     if poll_seconds <= 0 or max_wait_seconds < 0:
         raise SentinelError("invalid watch interval")
+    conversation_id, fence_identity = _decode_monitor_assignment_token(
+        assignment_token
+    )
     deadline = time.monotonic() + max_wait_seconds
     while True:
         payload = _load_last(path)
@@ -240,8 +292,7 @@ def _parser() -> argparse.ArgumentParser:
 
     watch_parser = subparsers.add_parser("watch")
     watch_parser.add_argument("--state", required=True, type=Path)
-    watch_parser.add_argument("--conversation-id", required=True)
-    watch_parser.add_argument("--fence-identity", required=True)
+    watch_parser.add_argument("--assignment-token", required=True)
     watch_parser.add_argument("--poll-seconds", type=float, default=2.0)
     watch_parser.add_argument("--max-wait-seconds", type=float, default=45.0)
     return parser
@@ -275,8 +326,7 @@ def main() -> int:
         else:
             watched = watch(
                 args.state,
-                args.conversation_id,
-                args.fence_identity,
+                args.assignment_token,
                 args.poll_seconds,
                 args.max_wait_seconds,
             )
