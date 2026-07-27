@@ -255,11 +255,57 @@ def test_dynamic_return_threshold_and_service_cutoff_are_separate():
     env.uav_positions[0] = np.array([env.area_size, env.area_size, env.height_range[1]])
     env._update_return_energy_state()
 
-    assert env.return_threshold_min <= env.uav_return_threshold_ratios[0] <= env.return_threshold_max
-    assert np.isclose(
-        env.uav_return_energy_margins[0],
-        env._raw_return_energy_margins()[0],
+    # The two assertions this test used to make could not fail.
+    #
+    #   `return_threshold_min <= x <= return_threshold_max` is the clamp
+    #   asserting its own bounds -- true for every implementation that clamps,
+    #   including one that ignores distance and returns a constant.
+    #
+    #   `isclose(uav_return_energy_margins[0], _raw_return_energy_margins()[0])`
+    #   compared two copies of the SAME formula: `_update_return_energy_state`
+    #   and `_raw_return_energy_margins` each write out
+    #   `battery - required_ratio - reserve` independently. Both sides came from
+    #   the code, neither from an independent source of truth, so a wrong
+    #   formula moved both together and stayed green.
+    #
+    # Measured 2026-07-27: replacing the threshold with the constant
+    # `return_threshold_min` left 42/42 of this file green and 197/197 of the
+    # D7.S set green. The threshold is not a cosmetic field -- it drives the
+    # return trigger (`:1908`, `:2035`) and is observation feature 7
+    # (`:2250`), so a constant one changes trajectories and what the policy
+    # sees. It does not enter primary `G` directly: `return_constraint_cost`
+    # reads `_raw_return_energy_margins()`, not the threshold.
+
+    # Paired negative 1 -- the threshold must DISCRIMINATE on distance. No
+    # constant can satisfy this, and it needs no re-derivation of the physics.
+    near = np.asarray(env.charging_station_positions[0], dtype=float).copy()
+    near[2] = env.height_range[0]
+    env.uav_positions[1] = near
+    env._update_return_energy_state()
+    far_threshold = env.uav_return_threshold_ratios[0]
+    near_threshold = env.uav_return_threshold_ratios[1]
+    assert far_threshold > near_threshold, (
+        "a UAV in the far corner must carry a strictly higher return threshold "
+        f"than one parked at a station; got far={far_threshold} near={near_threshold}"
     )
+    assert env.return_threshold_min <= near_threshold <= far_threshold <= env.return_threshold_max
+
+    # Paired negative 2 -- the margin against an INDEPENDENT arithmetic path,
+    # not against the production function that computes it. The hover/travel
+    # power model is separately pinned by
+    # `test_power_model_hover_endurance_matches_current_defaults`, so taking
+    # the power figure from it is a pinned input rather than the same code.
+    _, _, distance = env._nearest_charging_station(0)
+    power_w = env._calculate_power_consumption(env.limp_home_speed_mps, 0.0)
+    expected_margin = (
+        env.uav_battery_ratios[0]
+        - ((distance / env.limp_home_speed_mps) * power_w / 3600.0) / env.battery_capacity_wh
+        - env.return_reserve_ratio
+    )
+    assert np.isclose(env.uav_return_energy_margins[0], expected_margin), (
+        f"margin {env.uav_return_energy_margins[0]} disagrees with the physics "
+        f"recomputed here: {expected_margin}")
+
     env.uav_battery_ratios[0] = env.emergency_return_threshold - 0.001
     assert env._is_uav_in_limp_home(0)
     assert not env._is_uav_unavailable(0)

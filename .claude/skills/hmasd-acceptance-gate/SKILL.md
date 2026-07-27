@@ -40,6 +40,20 @@ drives the guard **red**. A positive assertion alone is not a guard.
 - `assert f(x) == f(x)` may not stand alone. It needs `assert f(x) != f(x')`,
   and `x'` must be drawn from `X`'s **whole declared domain** — every field the
   digest enumerates, not the one the author had in mind.
+- **Never assert a post-condition the code structurally guarantees.** A clamped
+  value lying inside its own clamp, a sorted list being sorted, a normalized
+  vector having unit norm. These read as property checks and are tautologies
+  about the code's *shape* rather than its *correctness*. Found 2026-07-27 in
+  `test_dynamic_return_threshold_...`: `min <= x <= max` on the output of
+  `np.clip(..., min, max)` stayed green while the dynamic return threshold was
+  replaced by a constant, across 42 + 197 tests. The replacement must
+  **discriminate** — a far UAV's threshold strictly exceeding a near one's is a
+  property no constant satisfies.
+- **Two copies of one formula agreeing prove nothing.** Where the same arithmetic
+  is written twice in production — as `_update_return_energy_state` and
+  `_raw_return_energy_margins` both were — comparing them looks like an
+  independent check and is not. Both sides move together under a wrong formula.
+  Recompute from literals, or from an input pinned by a *different* test.
 - Fixtures made degenerate or randomness-free for tractability delete exactly
   the variance the property is about. An environment whose `step()` draws no
   randomness cannot witness a determinism claim.
