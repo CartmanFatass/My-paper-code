@@ -1,0 +1,105 @@
+name: D7.S event-aligned audit
+
+# Two entry points, deliberately separate.
+#
+#   benchmark  cheap. Runs the clone conformance check, which both proves the
+#              instrument works on Linux and prints `continuation s/step`.
+#              That number decides whether `audit` is viable at all, because a
+#              GitHub-hosted job is KILLED at 6 hours and one topology cannot
+#              be split any finer (the pooler refuses to split episodes within
+#              a topology). Locally the rate is 0.0615 s/step -> ~2.0 h for
+#              |Z|=3 and ~3.9 h for |Z|=8. A runner 2x slower puts |Z|=8 at
+#              ~7.9 h, i.e. over the ceiling. Measure before launching.
+#
+#   audit      the real thing, one job per topology seed. Each shard writes its
+#              own JSON; pooling happens afterwards with
+#              scripts/pool_d7_s_event_aligned_shards.py, which asserts the
+#              shard seed sets are disjoint and their union is a frozen set.
+#
+# Both are workflow_dispatch only. Nothing here runs on push -- a formal run
+# starts because someone decided to start it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "benchmark (measure s/step) or audit (formal sharded run)"
+        type: choice
+        options: [benchmark, audit]
+        default: benchmark
+      topology_seeds:
+        description: "Space-separated seeds for audit mode. Default is the registered initial set."
+        type: string
+        default: "20260726 20260727 20260728 20260729 20260730 20260731 20260732 20260733"
+
+jobs:
+  benchmark:
+    if: inputs.mode == 'benchmark'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        # Deliberately NOT requirements_sb3.txt -- that is a cu118 CUDA lock
+        # exported from a different machine, and the recorded runtime pin is
+        # cpu-only. The audit imports torch and stable-baselines3 nowhere; both
+        # are guarded try/except in scenario_base.py and never referenced.
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.3 scipy==1.15.2 matplotlib==3.10.0 \
+                      gymnasium==1.0.0 pettingzoo==1.24.3 networkx==3.2.1
+      - name: Conformance check and step-rate measurement
+        env:
+          OMP_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+        run: |
+          python scripts/d7_s_clone_conformance_check.py \
+            --topology-seed 20260726 \
+            --search-budget-seconds 900 | tee conformance.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d7s-benchmark
+          path: conformance.txt
+
+  audit:
+    if: inputs.mode == 'audit'
+    runs-on: ubuntu-latest
+    # 6 h is the GitHub-hosted hard ceiling; a job that reaches it is killed and
+    # its shard is lost entirely. Stopping at 350 min instead means an overrun
+    # shows up as a clean failure with the log intact.
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [20260726, 20260727, 20260728, 20260729, 20260730, 20260731, 20260732, 20260733]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy==1.26.3 scipy==1.15.2 matplotlib==3.10.0 \
+                      gymnasium==1.0.0 pettingzoo==1.24.3 networkx==3.2.1
+      - name: Run one topology shard
+        env:
+          OMP_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+        # stdout carries the full lossless result JSON, so it is redirected to a
+        # file rather than left to flood the Actions log. Progress telemetry
+        # goes to stderr and stays visible.
+        run: |
+          mkdir -p shard_out
+          python scripts/audit_d7_s_event_aligned.py \
+            --topology-seeds ${{ matrix.seed }} \
+            --out shard_out > shard_out/stdout.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d7s-shard-${{ matrix.seed }}
+          path: shard_out/
+          retention-days: 90
