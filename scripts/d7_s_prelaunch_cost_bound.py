@@ -38,7 +38,12 @@ H_STABLE = 139
 H_FLEX = 550
 T_E_MAX = 950                 # section 2 eligibility deadline; prefix upper bound
 SHARD_WIDTH = 8               # one topology per shard
-CAP_HOURS = 8.0               # EVIDENCE_COMPLEXITY_POLICY formal cap
+
+# Reference horizon only. The user removed the formal wall-clock cap on
+# 2026-07-26 -- the conclusion-bearing experiment is no longer gated on wall
+# clock, and this projection exists so the run's cost is known and scheduled
+# rather than so it can be refused. Kept as a reporting landmark, not a gate.
+REFERENCE_HOURS = 8.0
 
 # Calibration runs three schedules on the stable limb (constructive_mixed,
 # null, full_sync_SET) and two on the flex limb.
@@ -116,7 +121,7 @@ def bound(*, legal_set_size: int, s_per_step: float, n_select: int = N_SELECT,
         "total_steps_all_shards": per_topology_steps * N_TOPOLOGIES,
         "shard_width": SHARD_WIDTH,
         "wall_hours": wall_h,
-        "within_cap": wall_h <= CAP_HOURS,
+        "within_reference_horizon": wall_h <= REFERENCE_HOURS,
     }
 
 
@@ -138,31 +143,28 @@ def main() -> None:
         print(json.dumps(rows, indent=2))
         return
 
-    print("D7.S prelaunch cost bound -- R2 shared-prefix, n_select=2, n_eval=2")
-    print(f"cap={CAP_HOURS:.0f}h at {SHARD_WIDTH}-way sharding "
+    print("D7.S prelaunch cost projection -- R2 shared-prefix, n_select=2, n_eval=2")
+    print(f"{SHARD_WIDTH}-way sharding "
           f"({N_TOPOLOGIES} topologies x [{N_CALIBRATION_EPISODES} calibration "
           f"+ {N_AUDIT_EPISODES} audit] episodes)")
+    print("informational: the formal wall-clock cap was removed by user ruling 2026-07-26")
     print()
-    print(f"{'|Z|':>4} {'s/step':>7} {'steps/topology':>15} {'wall (h)':>9}  verdict")
+    print(f"{'|Z|':>4} {'s/step':>7} {'steps/topology':>15} {'wall (h)':>9}  vs {REFERENCE_HOURS:.0f}h ref")
     for r in rows:
-        verdict = "within cap" if r["within_cap"] else "OVER CAP"
+        marker = "under" if r["within_reference_horizon"] else "over"
         print(f"{r['legal_set_size']:>4} {r['s_per_step']:>7.2f} "
-              f"{r['per_topology_steps']:>15,} {r['wall_hours']:>9.2f}  {verdict}")
+              f"{r['per_topology_steps']:>15,} {r['wall_hours']:>9.2f}  {marker}")
 
     print()
     worst = max(rows, key=lambda r: r["wall_hours"])
     best = min(rows, key=lambda r: r["wall_hours"])
-    print(f"upper bound over the swept band: {worst['wall_hours']:.2f} h "
+    print(f"upper end of the swept band: {worst['wall_hours']:.2f} h "
           f"(|Z|={worst['legal_set_size']}, {worst['s_per_step']:.2f} s/step)")
-    print(f"lower end of the swept band:     {best['wall_hours']:.2f} h "
+    print(f"lower end of the swept band: {best['wall_hours']:.2f} h "
           f"(|Z|={best['legal_set_size']}, {best['s_per_step']:.2f} s/step)")
-
-    if not all(r["within_cap"] for r in rows):
-        print()
-        print("NOT ESTABLISHED: the conservative bound exceeds the cap somewhere in the")
-        print("swept band, so the existing 0.10-0.30 s/step record cannot decide this")
-        print("gate. R2 section 12 permits ONE microbenchmark of at most twenty minutes")
-        print("to pin the shared-prefix continuation rate; rerun with --s-per-step.")
+    print()
+    print("Schedule against the upper end, not the lower. One microbenchmark of at")
+    print("most twenty minutes can collapse the band; rerun with --s-per-step.")
 
 
 if __name__ == "__main__":
