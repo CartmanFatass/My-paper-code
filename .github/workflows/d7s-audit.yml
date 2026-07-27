@@ -114,8 +114,14 @@ jobs:
   # verification, not a conclusion-bearing run, and the workstation is shared
   # with another line's formal training. The minutes are free on a public repo.
   #
-  # Not wired into `audit` below until this job passes. Referencing a flag whose
-  # determinism is unproven would put an unverified change in a formal run's path.
+  # PASSED 2026-07-27, run 30270540138, at commit 527ffd26 -- a descendant of the
+  # 96c0d02d fingerprint rewrite, so the proof covers the recursive encoder and
+  # not the code it replaced. Both arms' `d7_s_event_aligned.json` and
+  # `stdout.json` are byte-identical, verified by independent SHA-256 rather than
+  # by trusting this job's own comparison step:
+  #   d7_s_event_aligned.json  2e454d54...d60f5b8b  (29197 bytes, both arms)
+  #   stdout.json              791b6ad6...fba50154  (29290 bytes, both arms)
+  # `audit` below now passes `--workers 4`; see the note there for why 4.
   workers:
     if: inputs.mode == 'workers' || startsWith(github.ref, 'refs/tags/d7s-workers')
     runs-on: ubuntu-latest
@@ -207,10 +213,18 @@ jobs:
         # stdout carries the full lossless result JSON, so it is redirected to a
         # file rather than left to flood the Actions log. Progress telemetry
         # goes to stderr and stays visible.
+        #
+        # `--workers 4` because the runner has 4 real cores -- measured
+        # `nproc --all=4` (run 30280427538), NOT the `nproc=1` the logs show,
+        # which is coreutils honouring the OMP_NUM_THREADS=1 pinned above. Four
+        # single-threaded workers on four cores is exactly saturating, not
+        # oversubscribed. The flag changes only the schedule: run 30270540138
+        # proved both arms byte-identical at this code.
         run: |
           mkdir -p shard_out
           python scripts/audit_d7_s_event_aligned.py \
             --topology-seeds ${{ matrix.seed }} \
+            --workers 4 \
             --out shard_out > shard_out/stdout.json
       - uses: actions/upload-artifact@v4
         if: always()
