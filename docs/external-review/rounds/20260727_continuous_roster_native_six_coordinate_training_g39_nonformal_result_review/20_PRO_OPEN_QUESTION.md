@@ -21,6 +21,22 @@ Manager may not interpret its scientific meaning or select the next action.
 Read exactly the paths in `01_SHARED_SOURCE_MANIFEST.md` from the pushed
 stage commit. G33 is abandoned and must not be reactivated.
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_CODE_SCIENCE_INDEX.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_NONFORMAL_PREFLIGHT.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/project/CURRENT_WORK.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_code_science_alignment_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md`
+
 ## Frozen mechanical result
 
 - source commit is `e322f817abab49b56dd7c53ad1c09cd2b081b0aa`;
@@ -70,4 +86,3 @@ stage commit. G33 is abandoned and must not be reactivated.
 
 The response owns science only. It authorizes no implementation, Git, browser
 transport or compute by itself. Stop after the scoped disposition.
-
