@@ -1,0 +1,34 @@
+# Shared source manifest
+
+```text
+repository=https://github.com/CartmanFatass/My-paper-code.git
+branch=aggressive
+audit_target_commit=e21a1464e186260878649ad170bc3f32b8b9496d
+repair_implementation_code_commit=e21a1464e186260878649ad170bc3f32b8b9496d
+superseded_implementation_code_commit=43df85e9ebf384f0baf6d44758ef62aeb5e7fe7b
+original_alignment_stage_commit=e991af230f694f7fba8fa394eb662c8c8cc74f04
+fresh_runtime_compute=not_started
+formal_compute=not_started
+```
+
+External Pro may inspect only these paths at the exact target and its stated
+correction history:
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_audit/00_REVIEW_BRIEF.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_audit/01_SHARED_SOURCE_MANIFEST.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_direction_balance_attribution_g42.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_g31_direction_balance_attribution_g42_test.py`
+
+The question, this manifest and `00_REVIEW_BRIEF.md` are the complete
+correction-only package. Runtime logs, `CURRENT_WORK.md`, workflow files,
+unrelated rounds and G33 material are excluded.
