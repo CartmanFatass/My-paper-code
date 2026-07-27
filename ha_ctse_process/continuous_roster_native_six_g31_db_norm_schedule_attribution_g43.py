@@ -289,14 +289,24 @@ def dbnorm_composition_record(
 def treatment_schedule_record(
     *,
     dbnorm: g42.ScaleMatchedRawSumComposition,
-    mean: EqualMeanComposition,
+    reference_equal_mean: EqualMeanComposition,
 ) -> dict[str, object]:
     db_norm = float(dbnorm.registered_gradient_norm)
     raw_sum_norm = float(dbnorm.raw_sum_norm)
-    mean_norm = float(mean.applied_gradient_norm)
+    mean_norm = float(reference_equal_mean.applied_gradient_norm)
     values = (db_norm, raw_sum_norm, mean_norm, float(dbnorm.scale_factor))
     if any(not np.isfinite(value) or value < 0.0 for value in values):
         raise G43GradientGateError("schedule_scalar_nonfinite_or_negative", {})
+    if reference_equal_mean.raw_sum_norm != raw_sum_norm:
+        raise G43GradientGateError(
+            "reference_equal_mean_raw_sum_mismatch",
+            {
+                "dbnorm_raw_sum_norm": raw_sum_norm,
+                "reference_equal_mean_raw_sum_norm": (
+                    reference_equal_mean.raw_sum_norm
+                ),
+            },
+        )
     denominator = max(db_norm, mean_norm)
     if denominator > 0.0:
         q = abs(db_norm - mean_norm) / denominator
@@ -316,6 +326,9 @@ def treatment_schedule_record(
         "q_counting": q_counting,
         "zero_db_norm": db_norm == 0.0,
         "zero_raw_sum": raw_sum_norm == 0.0,
+        "evidence_source_arm": DBNORM_ARM,
+        "reference_equal_mean_counterfactual": True,
+        "null_arm_evidence_read_count": 0,
         "activation_threshold": ACTIVATION_TOLERANCE,
         "strict_activation_observed": bool(q_counting and q > ACTIVATION_TOLERANCE),
         "passed": True,
@@ -353,6 +366,9 @@ def validate_treatment_schedule_record(value: object) -> bool:
         )
         and value.get("zero_db_norm") is (db_norm == 0.0)
         and value.get("zero_raw_sum") is (float(value["raw_sum_norm"]) == 0.0)
+        and value.get("evidence_source_arm") == DBNORM_ARM
+        and value.get("reference_equal_mean_counterfactual") is True
+        and value.get("null_arm_evidence_read_count") == 0
         and value.get("activation_threshold") == ACTIVATION_TOLERANCE
         and value.get("strict_activation_observed")
         is bool(expected_counting and expected_q > ACTIVATION_TOLERANCE)
@@ -757,6 +773,11 @@ def _prepare_passes(
         probes[MEAN_ARM].successor_actor_gradients,
         models[MEAN_ARM].full_actor_parameters(),
     )
+    reference_equal_mean = compose_equal_mean_gradients(
+        probes[DBNORM_ARM].immediate_actor_gradients,
+        probes[DBNORM_ARM].successor_actor_gradients,
+        models[DBNORM_ARM].full_actor_parameters(),
+    )
     plans = {
         DBNORM_ARM: _PassPlan(
             policy=probes[DBNORM_ARM].policy,
@@ -775,7 +796,10 @@ def _prepare_passes(
             composition_record=equal_mean_composition_record(mean),
         ),
     }
-    return plans, probes, treatment_schedule_record(dbnorm=dbnorm, mean=mean)
+    return plans, probes, treatment_schedule_record(
+        dbnorm=dbnorm,
+        reference_equal_mean=reference_equal_mean,
+    )
 
 
 def optimize_norm_schedule_update(

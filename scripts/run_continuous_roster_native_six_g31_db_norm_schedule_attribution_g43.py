@@ -3,11 +3,26 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ProcessPoolExecutor
+import hashlib
+import json
+import multiprocessing
+import os
 from pathlib import Path
 import re
 import sys
 import time
+import tracemalloc
 from typing import Any, Mapping, Sequence
+
+_THREAD_ENV_NAMES = (
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+)
+for _thread_env_name in _THREAD_ENV_NAMES:
+    os.environ[_thread_env_name] = "1"
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -34,7 +49,7 @@ from scripts import run_continuous_roster_reactive_reduction_g35 as g35_runner
 from scripts import run_continuous_roster_six_coordinate_cs_g38 as g38_runner
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 ALGORITHM_ID = source.ALGORITHM_ID
 AUTHORIZATION_TOKEN = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_"
@@ -111,6 +126,10 @@ SEED_BASES = {
 }
 BOOTSTRAP_SEED = 10_437_043
 NONFORMAL_SEED_OFFSET = 900_000
+DEFAULT_CPU_BUDGET = 2
+DEFAULT_PROCESS_WORKERS = 2
+MAX_PROCESS_WORKERS = 6
+WORKER_THREAD_ENV = {name: "1" for name in _THREAD_ENV_NAMES}
 
 configure_runtime = g39_runner.configure_runtime
 _runtime_identity = g39_runner._runtime_identity
@@ -118,6 +137,124 @@ _write_json = g39_runner._write_json
 _read_json = g39_runner._read_json
 _artifact_digest = g39_runner._artifact_digest
 _state_digest = g39_runner._state_digest
+
+
+def _resolve_cpu_execution(
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
+) -> dict[str, object]:
+    budget = DEFAULT_CPU_BUDGET if cpu_budget is None else cpu_budget
+    if isinstance(budget, bool) or not isinstance(budget, int):
+        raise TypeError("G43 cpu_budget must be an integer")
+    if not 1 <= budget <= MAX_PROCESS_WORKERS:
+        raise ValueError("G43 cpu_budget must be in the closed interval [1, 6]")
+    workers = (
+        min(DEFAULT_PROCESS_WORKERS, budget)
+        if process_workers is None
+        else process_workers
+    )
+    if isinstance(workers, bool) or not isinstance(workers, int):
+        raise TypeError("G43 process_workers must be an integer")
+    if not 1 <= workers <= MAX_PROCESS_WORKERS:
+        raise ValueError("G43 process_workers must be in the closed interval [1, 6]")
+    if workers > budget:
+        raise ValueError("G43 process_workers cannot exceed cpu_budget")
+    return {
+        "cpu_budget": budget,
+        "process_workers": workers,
+        "supported_process_worker_ceiling": MAX_PROCESS_WORKERS,
+        "fixed_at_launch": True,
+        "continuous_adaptation": False,
+        "worker_start_method": "spawn",
+        "training_parallel_unit": "formal_replicate_only",
+        "evaluation_parallel_unit": "replicate_capacity_cell",
+        "deterministic_merge": "preassigned_index_not_completion_order",
+        "worker_thread_controls": {
+            **WORKER_THREAD_ENV,
+            "torch_intraop_threads": 1,
+        },
+    }
+
+
+def _activate_single_thread_worker() -> None:
+    for name, value in WORKER_THREAD_ENV.items():
+        os.environ[name] = value
+    torch.set_num_threads(1)
+
+
+def _configure_cpu_execution(
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
+) -> dict[str, object]:
+    execution = _resolve_cpu_execution(cpu_budget, process_workers)
+    _activate_single_thread_worker()
+    return {
+        **execution,
+        "hardware_logical_cpu_count": max(1, os.cpu_count() or 1),
+        "effective_parent_torch_intraop_threads": torch.get_num_threads(),
+    }
+
+
+def _cpu_configuration_from_artifact(
+    value: Mapping[str, Any], *, formal: bool
+) -> dict[str, object]:
+    configuration = value.get("configuration")
+    if not isinstance(configuration, Mapping):
+        raise ValueError("G43 artifact has no configuration")
+    cpu = _resolve_cpu_execution(
+        configuration.get("cpu_budget"),
+        configuration.get("process_workers"),
+    )
+    expected = _configuration(
+        formal=formal,
+        cpu_budget=int(cpu["cpu_budget"]),
+        process_workers=int(cpu["process_workers"]),
+    )
+    if dict(configuration) != expected:
+        raise ValueError("G43 serialized CPU/process configuration mismatch")
+    return expected
+
+
+def _valid_cpu_execution_record(
+    value: object, configuration: Mapping[str, object]
+) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    expected = _resolve_cpu_execution(
+        int(configuration["cpu_budget"]),
+        int(configuration["process_workers"]),
+    )
+    hardware = value.get("hardware_logical_cpu_count")
+    return bool(
+        all(value.get(name) == expected[name] for name in expected)
+        and isinstance(hardware, int)
+        and not isinstance(hardware, bool)
+        and hardware >= 1
+        and value.get("effective_parent_torch_intraop_threads") == 1
+    )
+
+
+def _valid_worker_runtime(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    environment = value.get("thread_environment")
+    return bool(
+        isinstance(value.get("pid"), int)
+        and not isinstance(value.get("pid"), bool)
+        and int(value["pid"]) > 0
+        and isinstance(value.get("wall_time_seconds"), (int, float))
+        and not isinstance(value.get("wall_time_seconds"), bool)
+        and float(value["wall_time_seconds"]) >= 0.0
+        and isinstance(value.get("process_cpu_seconds"), (int, float))
+        and not isinstance(value.get("process_cpu_seconds"), bool)
+        and float(value["process_cpu_seconds"]) >= 0.0
+        and isinstance(value.get("python_peak_traced_bytes"), int)
+        and not isinstance(value.get("python_peak_traced_bytes"), bool)
+        and int(value["python_peak_traced_bytes"]) >= 0
+        and value.get("torch_intraop_threads") == 1
+        and isinstance(environment, Mapping)
+        and all(environment.get(name) == "1" for name in WORKER_THREAD_ENV)
+    )
 
 
 def _native_backend_identity() -> dict[str, object]:
@@ -129,6 +266,298 @@ def _native_backend_identity() -> dict[str, object]:
         "module": str(module.__name__),
         "build_identity": g40.toy_cpp._build_identity(),
     }
+
+
+def _worker_telemetry(
+    *, started_wall: float, started_cpu: float, peak_bytes: int
+) -> dict[str, object]:
+    return {
+        "pid": os.getpid(),
+        "wall_time_seconds": time.perf_counter() - started_wall,
+        "process_cpu_seconds": time.process_time() - started_cpu,
+        "python_peak_traced_bytes": int(peak_bytes),
+        "torch_intraop_threads": torch.get_num_threads(),
+        "thread_environment": {
+            name: os.environ.get(name) for name in WORKER_THREAD_ENV
+        },
+    }
+
+
+def _run_indexed_worker_tasks(
+    tasks: Sequence[Mapping[str, object]],
+    worker: Any,
+    *,
+    process_workers: int,
+) -> list[dict[str, object]]:
+    expected_indices = list(range(len(tasks)))
+    observed_indices = [task.get("index") for task in tasks]
+    output_paths = [task.get("output_path") for task in tasks]
+    if (
+        observed_indices != expected_indices
+        or any(not isinstance(path, str) or not path for path in output_paths)
+        or len(set(output_paths)) != len(output_paths)
+    ):
+        raise ValueError("G43 worker task index/output inventory mismatch")
+    if not 1 <= process_workers <= MAX_PROCESS_WORKERS:
+        raise ValueError("G43 worker pool size is outside [1, 6]")
+    if process_workers == 1 or len(tasks) <= 1:
+        results = [worker(dict(task)) for task in tasks]
+    else:
+        context = multiprocessing.get_context("spawn")
+        with ProcessPoolExecutor(
+            max_workers=min(process_workers, len(tasks)),
+            mp_context=context,
+            initializer=_activate_single_thread_worker,
+        ) as executor:
+            futures = [executor.submit(worker, dict(task)) for task in tasks]
+            results = [future.result() for future in futures]
+    if len(results) != len(tasks):
+        raise RuntimeError("G43 worker result count mismatch")
+    validated: list[dict[str, object]] = []
+    seen: set[int] = set()
+    for expected_index, (task, result) in enumerate(zip(tasks, results)):
+        if not isinstance(result, Mapping):
+            raise RuntimeError("G43 worker returned a non-mapping result")
+        index = result.get("index")
+        path = result.get("output_path")
+        if (
+            index != expected_index
+            or index in seen
+            or path != task["output_path"]
+            or not Path(str(path)).is_file()
+            or result.get("output_digest") != _artifact_digest(Path(str(path)))
+        ):
+            raise RuntimeError("G43 worker result index/output mismatch")
+        seen.add(expected_index)
+        validated.append(dict(result))
+    if seen != set(expected_indices):
+        raise RuntimeError("G43 worker result inventory incomplete")
+    return validated
+
+
+def _benchmark_outcome_payload(
+    outcomes: Sequence[g32.CapacityRosterOutcome],
+) -> list[dict[str, object]]:
+    return [
+        {
+            "utility": row.utility,
+            "minimum_step_utility": row.minimum_step_utility,
+            "segment_utilities": list(row.segment_utilities),
+            "roster_sizes": list(row.roster_sizes),
+            "reward_trace": list(row.reward_trace),
+        }
+        for row in outcomes
+    ]
+
+
+def _cpu_parallel_benchmark_worker(
+    task: Mapping[str, object],
+) -> dict[str, object]:
+    """Run one conclusion-free native toy slice for process-pool measurement."""
+
+    _activate_single_thread_worker()
+    started_wall = time.perf_counter()
+    started_cpu = time.process_time()
+    tracemalloc.start()
+    index = int(task["index"])
+    batch_size = int(task["batch_size"])
+    repeats = int(task["repeats"])
+    output_path = Path(str(task["output_path"]))
+    if output_path.exists():
+        raise RuntimeError("G43 benchmark worker output path is not fresh")
+    ledgers = tuple(
+        g32.make_ledger(
+            index * batch_size + episode,
+            master_seed=91_043_000,
+            profile=g32.TRAIN_PROFILES[(index + episode) % 3],
+        )
+        for episode in range(batch_size)
+    )
+    actions = np.zeros(
+        (batch_size, 8, g32.ACTION_DIM), dtype=np.float32
+    )
+    semantic_rows: list[list[dict[str, object]]] = []
+    for _repeat in range(repeats):
+        envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+        batch = g40.toy_cpp.ContinuousRosterToyBatch(envs)
+        for _time in range(g32.HORIZON):
+            views = batch.observe_six()
+            batch.advance(views, actions)
+        semantic_rows.append(
+            _benchmark_outcome_payload(tuple(env.outcome() for env in envs))
+        )
+    semantic_digest = hashlib.sha256(
+        json.dumps(
+            semantic_rows,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    _, peak_bytes = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    payload = {
+        "index": index,
+        "semantic_digest": semantic_digest,
+        "worker_runtime": _worker_telemetry(
+            started_wall=started_wall,
+            started_cpu=started_cpu,
+            peak_bytes=peak_bytes,
+        ),
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    _write_json(output_path, payload)
+    return {
+        "index": index,
+        "output_path": str(output_path),
+        "output_digest": _artifact_digest(output_path),
+    }
+
+
+def benchmark_cpu_process_parallelism(
+    *,
+    benchmark_root: Path,
+    worker_counts: Sequence[int] = (1, 2, 3, 4, 6),
+    task_count: int = 6,
+    batch_size: int = 8,
+    repeats: int = 2,
+) -> dict[str, object]:
+    """Benchmark fixed process counts without training or result selection."""
+
+    counts = tuple(worker_counts)
+    if (
+        not counts
+        or len(set(counts)) != len(counts)
+        or any(
+            isinstance(value, bool)
+            or not isinstance(value, int)
+            or not 1 <= value <= MAX_PROCESS_WORKERS
+            for value in counts
+        )
+        or isinstance(task_count, bool)
+        or not isinstance(task_count, int)
+        or task_count <= 0
+        or isinstance(batch_size, bool)
+        or not isinstance(batch_size, int)
+        or batch_size <= 0
+        or isinstance(repeats, bool)
+        or not isinstance(repeats, int)
+        or repeats <= 0
+    ):
+        raise ValueError("G43 CPU benchmark inventory is invalid")
+    root = Path(benchmark_root).resolve()
+    if root.exists():
+        raise ValueError("G43 CPU benchmark root must be fresh")
+    root.mkdir(parents=True)
+    _configure_cpu_execution(1, 1)
+    backend = _native_backend_identity()
+    baseline: list[str] | None = None
+    matrix: list[dict[str, object]] = []
+    for workers in counts:
+        execution = _configure_cpu_execution(workers, workers)
+        tasks = [
+            {
+                "index": index,
+                "batch_size": batch_size,
+                "repeats": repeats,
+                "output_path": str(
+                    root
+                    / ".worker_transport"
+                    / f"workers_{workers}"
+                    / f"task_{index}"
+                    / "result.json"
+                ),
+            }
+            for index in range(task_count)
+        ]
+        started = time.perf_counter()
+        results = _run_indexed_worker_tasks(
+            tasks,
+            _cpu_parallel_benchmark_worker,
+            process_workers=workers,
+        )
+        wall_seconds = time.perf_counter() - started
+        semantic_digests: list[str] = []
+        worker_runtime: list[dict[str, object]] = []
+        for index, result in enumerate(results):
+            path = Path(str(result["output_path"]))
+            payload = _read_json(path)
+            runtime = payload.get("worker_runtime")
+            if (
+                payload.get("index") != index
+                or re.fullmatch(
+                    r"[0-9a-f]{64}", str(payload.get("semantic_digest"))
+                )
+                is None
+                or not _valid_worker_runtime(runtime)
+            ):
+                raise RuntimeError("G43 CPU benchmark artifact reload mismatch")
+            semantic_digests.append(str(payload["semantic_digest"]))
+            worker_runtime.append(dict(runtime))  # type: ignore[arg-type]
+            path.unlink()
+        if baseline is None:
+            baseline = semantic_digests
+        equivalent = semantic_digests == baseline
+        if not equivalent:
+            raise RuntimeError("G43 worker-count benchmark semantic mismatch")
+        cpu_seconds = sum(
+            float(row["process_cpu_seconds"]) for row in worker_runtime
+        )
+        matrix.append(
+            {
+                "cpu_budget": workers,
+                "process_workers": workers,
+                "wall_time_seconds": wall_seconds,
+                "worker_process_cpu_seconds": cpu_seconds,
+                "worker_cpu_to_wall_ratio": cpu_seconds / max(wall_seconds, 1e-12),
+                "maximum_python_peak_traced_bytes": max(
+                    int(row["python_peak_traced_bytes"])
+                    for row in worker_runtime
+                ),
+                "observed_unique_worker_processes": len(
+                    {int(row["pid"]) for row in worker_runtime}
+                ),
+                "worker_thread_controls_valid": all(
+                    _valid_worker_runtime(row) for row in worker_runtime
+                ),
+                "deterministic_preassigned_merge": True,
+                "artifact_reload_valid": True,
+                "correctness_disposition": "BITWISE_EQUIVALENT",
+                "semantic_digest": hashlib.sha256(
+                    "".join(semantic_digests).encode("ascii")
+                ).hexdigest(),
+                "cpu_execution": execution,
+            }
+        )
+    report = {
+        "schema": "g43_fixed_cpu_process_parallelism_benchmark_v1",
+        "formal": False,
+        "scientific_iteration_cost": 0,
+        "conclusion_bearing": False,
+        "optimizer_steps": 0,
+        "hypothetical_transitions": 0,
+        "technical_native_transitions_per_matrix_row": (
+            task_count * batch_size * repeats * g32.HORIZON
+        ),
+        "worker_counts": list(counts),
+        "task_count": task_count,
+        "batch_size": batch_size,
+        "repeats": repeats,
+        "native_backend": backend,
+        "matrix": matrix,
+        "all_worker_counts_bitwise_equivalent": True,
+        "artifact_reload_valid": True,
+        "phase_evidence": {
+            "artifact_validation": "digest_bound_indexed_worker_outputs",
+            "artifact_reload": "exact_json_reload_before_merge",
+            "evaluate_entry": "ContinuousRosterToyBatch_CPU_CPP",
+            "analyze_entry": "serial_reference_semantic_digest_comparison",
+        },
+    }
+    report_path = root / "cpu_parallel_benchmark.json"
+    _write_json(report_path, report)
+    if _read_json(report_path) != report:
+        raise RuntimeError("G43 CPU benchmark report reload mismatch")
+    return report
 
 
 def seed_block(replicate: int, *, formal: bool) -> dict[str, int]:
@@ -165,7 +594,13 @@ def _counts(*, formal: bool) -> dict[str, int]:
     }
 
 
-def _configuration(*, formal: bool) -> dict[str, object]:
+def _configuration(
+    *,
+    formal: bool,
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
+) -> dict[str, object]:
+    cpu = _resolve_cpu_execution(cpu_budget, process_workers)
     counts = _counts(formal=formal)
     replicates = int(counts["replicates"])
     updates = int(counts["branch_updates_per_arm"])
@@ -177,6 +612,20 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     evaluation = replicates * cells_per_replicate * episodes * g32.HORIZON
     return {
         **counts,
+        "cpu_budget": cpu["cpu_budget"],
+        "process_workers": cpu["process_workers"],
+        "supported_process_worker_ceiling": cpu[
+            "supported_process_worker_ceiling"
+        ],
+        "cpu_parallelism_fixed_at_launch": True,
+        "cpu_continuous_adaptation": False,
+        "worker_start_method": "spawn",
+        "training_parallel_unit": "formal_replicate_only",
+        "evaluation_parallel_unit": "replicate_capacity_cell",
+        "deterministic_worker_merge": (
+            "preassigned_index_not_completion_order"
+        ),
+        "worker_thread_controls": cpu["worker_thread_controls"],
         "arms": list(source.ARMS),
         "accepted_anchor_replicates": (
             list(source.ACCEPTED_G40_ANCHOR_REPLICATES) if formal else [0]
@@ -999,6 +1448,92 @@ def _train_replicate(
     }
 
 
+def _training_replicate_worker(task: Mapping[str, object]) -> dict[str, object]:
+    _activate_single_thread_worker()
+    started_wall = time.perf_counter()
+    started_cpu = time.process_time()
+    tracemalloc.start()
+    index = int(task["index"])
+    replicate = int(task["replicate"])
+    output_path = Path(str(task["output_path"]))
+    if output_path.exists():
+        raise RuntimeError("G43 training worker output path is not fresh")
+    row = _train_replicate(
+        formal=bool(task["formal"]),
+        replicate=replicate,
+        configuration=dict(task["configuration"]),  # type: ignore[arg-type]
+        accepted_anchor_root=Path(str(task["accepted_anchor_root"])),
+    )
+    models = row.pop("models")
+    _, peak_bytes = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    payload = {
+        "index": index,
+        "replicate": replicate,
+        "row": row,
+        "model_states": {
+            arm: {
+                name: value.detach().cpu().clone()
+                for name, value in models[arm].state_dict().items()
+            }
+            for arm in source.ARMS
+        },
+        "worker_runtime": _worker_telemetry(
+            started_wall=started_wall,
+            started_cpu=started_cpu,
+            peak_bytes=peak_bytes,
+        ),
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(payload, output_path)
+    return {
+        "index": index,
+        "output_path": str(output_path),
+        "output_digest": _artifact_digest(output_path),
+    }
+
+
+def _consume_training_worker_result(
+    result: Mapping[str, object],
+    *,
+    accepted_anchor_root: Path,
+) -> dict[str, Any]:
+    path = Path(str(result["output_path"]))
+    payload = torch.load(path, map_location="cpu", weights_only=False)
+    index = int(result["index"])
+    if (
+        not isinstance(payload, Mapping)
+        or payload.get("index") != index
+        or payload.get("replicate") != index
+        or not isinstance(payload.get("row"), Mapping)
+        or not isinstance(payload.get("model_states"), Mapping)
+        or not isinstance(payload.get("worker_runtime"), Mapping)
+    ):
+        raise RuntimeError("G43 training worker payload identity mismatch")
+    replicate = index
+    anchor = _load_accepted_anchor(accepted_anchor_root, replicate)
+    models = source.project_g43_arms(
+        anchor, accepted_anchor_replicate=replicate
+    )
+    for model in models.values():
+        model.begin_credit_branch_phase()
+    for arm in source.ARMS:
+        models[arm].load_state_dict(payload["model_states"][arm], strict=True)
+    row = dict(payload["row"])
+    row["models"] = models
+    row["worker_execution"] = {
+        "index": index,
+        "replicate": replicate,
+        "configured_process_workers": None,
+        "output_path": str(path),
+        "output_digest": result["output_digest"],
+        "output_transport_consumed": True,
+        "runtime": dict(payload["worker_runtime"]),
+    }
+    path.unlink()
+    return row
+
+
 def train(
     *,
     run_root: Path,
@@ -1010,6 +1545,8 @@ def train(
     alignment_disposition: str | None = None,
     aligned_source_commit: str | None = None,
     alignment_stage_commit: str | None = None,
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
 ) -> dict[str, Any]:
     if re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
         raise ValueError("G43 training requires an integrated source commit")
@@ -1017,6 +1554,7 @@ def train(
     resolved_run_root = Path(run_root).resolve()
     if resolved_run_root == anchor_root or anchor_root in resolved_run_root.parents:
         raise ValueError("G43 run root cannot write inside the read-only anchor root")
+    run_root = resolved_run_root
     preflight_digests: dict[str, str] | None = None
     if formal:
         if authorization_token != AUTHORIZATION_TOKEN:
@@ -1041,21 +1579,51 @@ def train(
     ):
         raise ValueError("G43 nonformal training cannot carry formal authority")
     started = time.perf_counter()
-    configuration = _configuration(formal=formal)
+    cpu_execution = _configure_cpu_execution(cpu_budget, process_workers)
+    configuration = _configuration(
+        formal=formal,
+        cpu_budget=int(cpu_execution["cpu_budget"]),
+        process_workers=int(cpu_execution["process_workers"]),
+    )
     configure_runtime(bootstrap_seed(formal=formal))
     native_backend = _native_backend_identity()
     anchor_digests = _validate_anchor_manifest(anchor_root)
     run_root.mkdir(parents=True, exist_ok=True)
     (run_root / "checkpoints").mkdir(exist_ok=True)
-    internal_rows = [
-        _train_replicate(
-            formal=formal,
-            replicate=replicate,
-            configuration=configuration,
-            accepted_anchor_root=anchor_root,
-        )
+    training_tasks = [
+        {
+            "index": replicate,
+            "replicate": replicate,
+            "formal": formal,
+            "configuration": configuration,
+            "accepted_anchor_root": str(anchor_root),
+            "output_path": str(
+                run_root
+                / ".worker_transport"
+                / "train"
+                / f"replicate_{replicate}"
+                / "result.pt"
+            ),
+        }
         for replicate in range(int(configuration["replicates"]))
     ]
+    training_results = _run_indexed_worker_tasks(
+        training_tasks,
+        _training_replicate_worker,
+        process_workers=(
+            int(configuration["process_workers"]) if formal else 1
+        ),
+    )
+    internal_rows = [
+        _consume_training_worker_result(
+            result, accepted_anchor_root=anchor_root
+        )
+        for result in training_results
+    ]
+    for row in internal_rows:
+        row["worker_execution"]["configured_process_workers"] = int(
+            configuration["process_workers"]
+        )
     update_records = [
         record
         for row in internal_rows
@@ -1118,6 +1686,7 @@ def train(
         "accepted_anchor_root_mode": "read_only_input_no_writes",
         "accepted_anchor_artifact_digests": anchor_digests,
         "runtime": _runtime_identity(),
+        "cpu_execution": cpu_execution,
         "native_backend": native_backend,
         "configuration": configuration,
         "source_controls": source_controls(),
@@ -1277,7 +1846,12 @@ def _training_errors(
 ) -> list[str]:
     errors: list[str] = []
     formal = bool(training.get("formal"))
-    configuration = _configuration(formal=formal)
+    try:
+        configuration = _cpu_configuration_from_artifact(
+            training, formal=formal
+        )
+    except (TypeError, ValueError) as error:
+        return [str(error)]
     if (
         training.get("schema_version") != SCHEMA_VERSION
         or training.get("algorithm") != ALGORITHM_ID
@@ -1290,6 +1864,10 @@ def _training_errors(
         or re.fullmatch(r"[0-9a-f]{40}", str(training.get("source_commit"))) is None
     ):
         return ["G43 training identity mismatch"]
+    if not _valid_cpu_execution_record(
+        training.get("cpu_execution"), configuration
+    ):
+        errors.append("G43 training CPU/process execution mismatch")
     backend = training.get("native_backend")
     if (
         not isinstance(backend, Mapping)
@@ -1364,6 +1942,7 @@ def _training_errors(
     for replicate, row in enumerate(rows):
         try:
             records = row["update_records"]
+            worker_execution = row.get("worker_execution")
             if (
                 row["replicate"] != replicate
                 or row["seeds"] != seed_block(replicate, formal=formal)
@@ -1379,6 +1958,19 @@ def _training_errors(
                 or any(float(value) != float(expected_steps) for value in row["actor_head_optimizer_steps"].values())
                 or not isinstance(records, list)
                 or len(records) != int(configuration["branch_updates_per_arm"])
+                or not isinstance(worker_execution, Mapping)
+                or worker_execution.get("index") != replicate
+                or worker_execution.get("replicate") != replicate
+                or worker_execution.get("configured_process_workers")
+                != int(configuration["process_workers"])
+                or re.fullmatch(
+                    r"[0-9a-f]{64}",
+                    str(worker_execution.get("output_digest")),
+                )
+                is None
+                or not isinstance(worker_execution.get("output_path"), str)
+                or worker_execution.get("output_transport_consumed") is not True
+                or not _valid_worker_runtime(worker_execution.get("runtime"))
             ):
                 raise ValueError("G43 replicate invariant mismatch")
             for update_index, record in enumerate(records):
@@ -1514,53 +2106,216 @@ def _evaluate_cell(
     }
 
 
-def evaluate(*, run_root: Path) -> dict[str, Any]:
+def _evaluation_cell_worker(task: Mapping[str, object]) -> dict[str, object]:
+    _activate_single_thread_worker()
+    started_wall = time.perf_counter()
+    started_cpu = time.process_time()
+    tracemalloc.start()
+    index = int(task["index"])
+    replicate = int(task["replicate"])
+    capacity = int(task["capacity"])
+    name = str(task["cell"])
+    formal = bool(task["formal"])
+    run_root = Path(str(task["run_root"]))
+    output_path = Path(str(task["output_path"]))
+    if output_path.exists():
+        raise RuntimeError("G43 evaluation worker output path is not fresh")
+    training = _read_json(run_root / "train_manifest.json")
+    if training.get("configuration") != task.get("configuration"):
+        raise RuntimeError("G43 evaluation worker configuration mismatch")
+    processes, inventory = _source_inventory(
+        replicate=replicate,
+        capacity=capacity,
+        episode_count=int(training["configuration"]["evaluation_episodes_per_cell"]),
+        formal=formal,
+    )
+    seeds = seed_block(replicate, formal=formal)
+    cells = []
+    for arm in source.ARMS:
+        deployed = _load_final_model(
+            run_root=run_root,
+            training=training,
+            replicate=replicate,
+            capacity=capacity,
+            arm=arm,
+        )
+        cells.append(
+            _evaluate_cell(
+                replicate=replicate,
+                capacity=capacity,
+                arm=arm,
+                name=name,
+                processes=processes,
+                action_seed=seeds["evaluation_action"],
+                deployed=deployed,
+            )
+        )
+    _, peak_bytes = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    payload = {
+        "index": index,
+        "task_identity": {
+            "replicate": replicate,
+            "capacity": capacity,
+            "cell": name,
+        },
+        "direct_source_validation": g38_runner._direct_source_validation(
+            processes
+        ),
+        "source_inventory": inventory,
+        "cells": cells,
+        "worker_runtime": _worker_telemetry(
+            started_wall=started_wall,
+            started_cpu=started_cpu,
+            peak_bytes=peak_bytes,
+        ),
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    _write_json(output_path, payload)
+    return {
+        "index": index,
+        "output_path": str(output_path),
+        "output_digest": _artifact_digest(output_path),
+    }
+
+
+def _consume_evaluation_worker_results(
+    results: Sequence[Mapping[str, object]],
+    tasks: Sequence[Mapping[str, object]],
+) -> tuple[list[dict[str, object]], list[dict[str, object]], list[dict[str, object]], bool]:
+    cells: list[dict[str, object]] = []
+    inventories: dict[tuple[int, int], dict[str, object]] = {}
+    worker_records: list[dict[str, object]] = []
+    direct_source_valid = True
+    for expected_index, (task, result) in enumerate(zip(tasks, results)):
+        path = Path(str(result["output_path"]))
+        payload = _read_json(path)
+        expected_identity = {
+            "replicate": int(task["replicate"]),
+            "capacity": int(task["capacity"]),
+            "cell": str(task["cell"]),
+        }
+        if (
+            payload.get("index") != expected_index
+            or payload.get("task_identity") != expected_identity
+            or not isinstance(payload.get("cells"), list)
+            or len(payload["cells"]) != len(source.ARMS)
+            or not isinstance(payload.get("source_inventory"), Mapping)
+            or not isinstance(payload.get("worker_runtime"), Mapping)
+        ):
+            raise RuntimeError("G43 evaluation worker payload identity mismatch")
+        inventory_key = (
+            expected_identity["replicate"],
+            expected_identity["capacity"],
+        )
+        inventory = dict(payload["source_inventory"])
+        if inventory_key in inventories and inventories[inventory_key] != inventory:
+            raise RuntimeError("G43 duplicate evaluation inventory disagrees")
+        inventories[inventory_key] = inventory
+        direct_source_valid &= payload.get("direct_source_validation") is True
+        cells.extend(dict(row) for row in payload["cells"])
+        worker_records.append(
+            {
+                "index": expected_index,
+                "task_identity": expected_identity,
+                "configured_process_workers": int(
+                    task["configured_process_workers"]
+                ),
+                "output_path": str(path),
+                "output_digest": result["output_digest"],
+                "output_transport_consumed": True,
+                "runtime": dict(payload["worker_runtime"]),
+            }
+        )
+        path.unlink()
+    expected_inventory_keys = [
+        (replicate, capacity)
+        for replicate in range(
+            1 + max(int(task["replicate"]) for task in tasks)
+        )
+        for capacity in g34.CAPACITIES
+    ]
+    if list(inventories) != expected_inventory_keys:
+        raise RuntimeError("G43 evaluation inventory merge mismatch")
+    arm_order = {arm: index for index, arm in enumerate(source.ARMS)}
+    cell_order = {name: index for index, name in enumerate(MODEL_CELLS)}
+    cells.sort(
+        key=lambda row: (
+            int(row["replicate"]),
+            int(row["capacity"]),
+            arm_order[str(row["arm"])],
+            cell_order[str(row["cell"])],
+        )
+    )
+    return cells, list(inventories.values()), worker_records, direct_source_valid
+
+
+def evaluate(
+    *,
+    run_root: Path,
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
+) -> dict[str, Any]:
     started = time.perf_counter()
     training = _read_json(run_root / "train_manifest.json")
     errors = _training_errors(run_root, training)
     if errors:
         raise ValueError("G43 training artifact invalid: " + " | ".join(errors))
     formal = bool(training["formal"])
-    configuration = _configuration(formal=formal)
+    configuration = _cpu_configuration_from_artifact(training, formal=formal)
+    requested = _resolve_cpu_execution(
+        int(configuration["cpu_budget"])
+        if cpu_budget is None
+        else cpu_budget,
+        int(configuration["process_workers"])
+        if process_workers is None
+        else process_workers,
+    )
+    if (cpu_budget is not None or process_workers is not None) and (
+        requested["cpu_budget"] != configuration["cpu_budget"]
+        or requested["process_workers"] != configuration["process_workers"]
+    ):
+        raise ValueError("G43 evaluate CPU/process settings differ from training")
+    cpu_execution = _configure_cpu_execution(
+        int(configuration["cpu_budget"]),
+        int(configuration["process_workers"]),
+    )
     configure_runtime(bootstrap_seed(formal=formal))
     native_backend = _native_backend_identity()
-    cells: list[dict[str, object]] = []
-    inventories: list[dict[str, object]] = []
-    direct_source_valid = True
+    tasks: list[dict[str, object]] = []
     for replicate in range(int(configuration["replicates"])):
-        seeds = seed_block(replicate, formal=formal)
         for capacity in g34.CAPACITIES:
-            processes, inventory = _source_inventory(
-                replicate=replicate,
-                capacity=capacity,
-                episode_count=int(configuration["evaluation_episodes_per_cell"]),
-                formal=formal,
-            )
-            inventories.append(inventory)
-            direct_source_valid &= g38_runner._direct_source_validation(processes)
-            final_models = {
-                arm: _load_final_model(
-                    run_root=run_root,
-                    training=training,
-                    replicate=replicate,
-                    capacity=capacity,
-                    arm=arm,
+            for name in MODEL_CELLS:
+                index = len(tasks)
+                tasks.append(
+                    {
+                        "index": index,
+                        "replicate": replicate,
+                        "capacity": capacity,
+                        "cell": name,
+                        "formal": formal,
+                        "configuration": configuration,
+                        "configured_process_workers": int(
+                            configuration["process_workers"]
+                        ),
+                        "run_root": str(Path(run_root).resolve()),
+                        "output_path": str(
+                            Path(run_root).resolve()
+                            / ".worker_transport"
+                            / "evaluate"
+                            / f"task_{index}"
+                            / "result.json"
+                        ),
+                    }
                 )
-                for arm in source.ARMS
-            }
-            for arm in source.ARMS:
-                for name in MODEL_CELLS:
-                    cells.append(
-                        _evaluate_cell(
-                            replicate=replicate,
-                            capacity=capacity,
-                            arm=arm,
-                            name=name,
-                            processes=processes,
-                            action_seed=seeds["evaluation_action"],
-                            deployed=final_models[arm],
-                        )
-                    )
+    results = _run_indexed_worker_tasks(
+        tasks,
+        _evaluation_cell_worker,
+        process_workers=int(configuration["process_workers"]),
+    )
+    cells, inventories, worker_records, direct_source_valid = (
+        _consume_evaluation_worker_results(results, tasks)
+    )
     manifest = {
         "schema_version": SCHEMA_VERSION,
         "algorithm": ALGORITHM_ID,
@@ -1577,6 +2332,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
         "preflight_artifact_digests": training["preflight_artifact_digests"],
         "accepted_anchor_artifact_digests": training["accepted_anchor_artifact_digests"],
         "runtime": _runtime_identity(),
+        "cpu_execution": cpu_execution,
         "native_backend": native_backend,
         "configuration": configuration,
         "source_controls": source_controls(),
@@ -1585,6 +2341,7 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
         "stage_wall_time_seconds": time.perf_counter() - started,
         "direct_source_validation": bool(direct_source_valid),
         "source_inventory": inventories,
+        "worker_execution": worker_records,
         "cells": cells,
     }
     _write_json(run_root / "evaluation_manifest.json", manifest)
@@ -1598,7 +2355,12 @@ def _evaluation_errors(
 ) -> list[str]:
     errors = _training_errors(run_root, training)
     formal = bool(training.get("formal"))
-    configuration = _configuration(formal=formal)
+    try:
+        configuration = _cpu_configuration_from_artifact(
+            training, formal=formal
+        )
+    except (TypeError, ValueError) as error:
+        return errors + [str(error)]
     if (
         evaluation.get("schema_version") != SCHEMA_VERSION
         or evaluation.get("algorithm") != ALGORITHM_ID
@@ -1624,6 +2386,10 @@ def _evaluation_errors(
         or evaluation.get("direct_source_validation") is not True
     ):
         errors.append("G43 evaluation identity/source mismatch")
+    if not _valid_cpu_execution_record(
+        evaluation.get("cpu_execution"), configuration
+    ):
+        errors.append("G43 evaluation CPU/process execution mismatch")
     backend = evaluation.get("native_backend")
     if (
         not isinstance(backend, Mapping)
@@ -1635,6 +2401,49 @@ def _evaluation_errors(
     cells = evaluation.get("cells")
     if not isinstance(cells, list) or len(cells) != int(configuration["total_cells"]):
         return errors + ["G43 evaluation cell inventory mismatch"]
+    worker_execution = evaluation.get("worker_execution")
+    expected_worker_tasks = (
+        int(configuration["replicates"])
+        * len(g34.CAPACITIES)
+        * len(MODEL_CELLS)
+    )
+    if not isinstance(worker_execution, list) or len(worker_execution) != expected_worker_tasks:
+        errors.append("G43 evaluation worker inventory mismatch")
+    else:
+        observed_worker_keys: list[tuple[int, int, str]] = []
+        for index, row in enumerate(worker_execution):
+            identity = row.get("task_identity") if isinstance(row, Mapping) else None
+            if (
+                not isinstance(row, Mapping)
+                or row.get("index") != index
+                or not isinstance(identity, Mapping)
+                or row.get("configured_process_workers")
+                != int(configuration["process_workers"])
+                or re.fullmatch(
+                    r"[0-9a-f]{64}", str(row.get("output_digest"))
+                )
+                is None
+                or not isinstance(row.get("output_path"), str)
+                or row.get("output_transport_consumed") is not True
+                or not _valid_worker_runtime(row.get("runtime"))
+            ):
+                errors.append("G43 evaluation worker index/runtime mismatch")
+                break
+            observed_worker_keys.append(
+                (
+                    int(identity["replicate"]),
+                    int(identity["capacity"]),
+                    str(identity["cell"]),
+                )
+            )
+        expected_worker_keys = [
+            (replicate, capacity, name)
+            for replicate in range(int(configuration["replicates"]))
+            for capacity in g34.CAPACITIES
+            for name in MODEL_CELLS
+        ]
+        if observed_worker_keys != expected_worker_keys:
+            errors.append("G43 evaluation worker task identity mismatch")
     expected_inventories: list[dict[str, object]] = []
     for replicate in range(int(configuration["replicates"])):
         for capacity in g34.CAPACITIES:
@@ -1946,13 +2755,37 @@ def select_g43_result_branch(metrics: Mapping[str, Any]) -> str:
     return UNDERPOWERED_BRANCH
 
 
-def analyze(*, run_root: Path, require_formal: bool = False) -> dict[str, Any]:
+def analyze(
+    *,
+    run_root: Path,
+    require_formal: bool = False,
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
+) -> dict[str, Any]:
     started = time.perf_counter()
     training = _read_json(run_root / "train_manifest.json")
     evaluation = _read_json(run_root / "evaluation_manifest.json")
     formal = bool(training.get("formal"))
     if require_formal and not formal:
         raise ValueError("formal G43 analysis requires formal artifacts")
+    configuration = _cpu_configuration_from_artifact(training, formal=formal)
+    requested = _resolve_cpu_execution(
+        int(configuration["cpu_budget"])
+        if cpu_budget is None
+        else cpu_budget,
+        int(configuration["process_workers"])
+        if process_workers is None
+        else process_workers,
+    )
+    if (cpu_budget is not None or process_workers is not None) and (
+        requested["cpu_budget"] != configuration["cpu_budget"]
+        or requested["process_workers"] != configuration["process_workers"]
+    ):
+        raise ValueError("G43 analyze CPU/process settings differ from training")
+    cpu_execution = _configure_cpu_execution(
+        int(configuration["cpu_budget"]),
+        int(configuration["process_workers"]),
+    )
     configure_runtime(bootstrap_seed(formal=formal))
     errors = _evaluation_errors(run_root, training, evaluation)
     metrics: dict[str, Any] = {"operational_valid": not errors}
@@ -2010,6 +2843,7 @@ def analyze(*, run_root: Path, require_formal: bool = False) -> dict[str, Any]:
         "branch": branch,
         "metrics": metrics,
         "native_backend": evaluation.get("native_backend"),
+        "cpu_execution": cpu_execution,
         "training_manifest_digest": _artifact_digest(run_root / "train_manifest.json"),
         "evaluation_manifest_digest": _artifact_digest(run_root / "evaluation_manifest.json"),
         "stage_wall_time_seconds": analysis_seconds,
@@ -2033,7 +2867,12 @@ def analyze(*, run_root: Path, require_formal: bool = False) -> dict[str, Any]:
 
 
 def exercise(
-    *, run_root: Path, source_commit: str, accepted_anchor_root: Path
+    *,
+    run_root: Path,
+    source_commit: str,
+    accepted_anchor_root: Path,
+    cpu_budget: int | None = None,
+    process_workers: int | None = None,
 ) -> dict[str, Any]:
     train(
         run_root=run_root,
@@ -2041,9 +2880,19 @@ def exercise(
         formal=False,
         authorization_token=None,
         accepted_anchor_root=accepted_anchor_root,
+        cpu_budget=cpu_budget,
+        process_workers=process_workers,
     )
-    evaluate(run_root=run_root)
-    return analyze(run_root=run_root)
+    evaluate(
+        run_root=run_root,
+        cpu_budget=cpu_budget,
+        process_workers=process_workers,
+    )
+    return analyze(
+        run_root=run_root,
+        cpu_budget=cpu_budget,
+        process_workers=process_workers,
+    )
 
 
 def main() -> None:
@@ -2058,6 +2907,8 @@ def main() -> None:
     parser.add_argument("--alignment-disposition")
     parser.add_argument("--aligned-source-commit")
     parser.add_argument("--alignment-stage-commit")
+    parser.add_argument("--cpu-budget", type=int)
+    parser.add_argument("--process-workers", type=int)
     args = parser.parse_args()
     if args.stage == "train":
         if args.source_commit is None:
@@ -2072,11 +2923,22 @@ def main() -> None:
             alignment_disposition=args.alignment_disposition,
             aligned_source_commit=args.aligned_source_commit,
             alignment_stage_commit=args.alignment_stage_commit,
+            cpu_budget=args.cpu_budget,
+            process_workers=args.process_workers,
         )
     elif args.stage == "evaluate":
-        evaluate(run_root=args.run_root)
+        evaluate(
+            run_root=args.run_root,
+            cpu_budget=args.cpu_budget,
+            process_workers=args.process_workers,
+        )
     elif args.stage == "analyze":
-        analyze(run_root=args.run_root, require_formal=args.formal)
+        analyze(
+            run_root=args.run_root,
+            require_formal=args.formal,
+            cpu_budget=args.cpu_budget,
+            process_workers=args.process_workers,
+        )
     else:
         if args.source_commit is None or args.accepted_anchor_root is None:
             raise ValueError("G43 exercise requires source and accepted anchor root")
@@ -2084,6 +2946,8 @@ def main() -> None:
             run_root=args.run_root,
             source_commit=args.source_commit,
             accepted_anchor_root=args.accepted_anchor_root,
+            cpu_budget=args.cpu_budget,
+            process_workers=args.process_workers,
         )
 
 

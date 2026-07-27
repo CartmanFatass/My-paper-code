@@ -169,7 +169,9 @@ def test_deterministic_mean_and_dbnorm_zero_cancellation_contract() -> None:
         (-torch.ones(2, dtype=torch.float64),),
         (parameter,),
     )
-    schedule = g43.treatment_schedule_record(dbnorm=zero, mean=zero_mean)
+    schedule = g43.treatment_schedule_record(
+        dbnorm=zero, reference_equal_mean=zero_mean
+    )
     assert schedule["q"] == 0.0
     assert schedule["q_counting"] is False
     assert schedule["zero_db_norm"] is True
@@ -228,6 +230,12 @@ def test_first_paired_update_enforces_liveness_activation_order_and_artifacts(
         assert g43.validate_treatment_schedule_record(
             pass_record["treatment_schedule"]
         )
+        assert pass_record["treatment_schedule"]["evidence_source_arm"] == (
+            g43.DBNORM_ARM
+        )
+        assert pass_record["treatment_schedule"][
+            "null_arm_evidence_read_count"
+        ] == 0
     conclusion = g43.build_conclusion_evidence([record], formal=False)
     assert conclusion["passed"] is True, conclusion
     assert g43.validate_conclusion_evidence(conclusion) is True
@@ -256,6 +264,73 @@ def test_first_paired_update_enforces_liveness_activation_order_and_artifacts(
         )
         for arm, optimizer in optimizers.items()
     )
+
+
+def test_reference_schedule_ignores_post_divergence_mean_arm_gradients(
+    accepted_anchor_batch: tuple[
+        g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
+    ],
+) -> None:
+    anchor, trajectory = accepted_anchor_batch
+    models = g43.project_g43_arms(anchor, accepted_anchor_replicate=0)
+    for model in models.values():
+        model.begin_credit_branch_phase()
+    trajectories = {arm: trajectory for arm in g43.ARMS}
+    credits = {
+        arm: g41.compute_g31_credit_without_slow(
+            rewards=trajectory.rewards,
+            immediate_baselines=trajectory.old_immediate_baselines,
+            successor_baselines=trajectory.old_successor_baselines,
+            terminals=g40.terminal_mask(trajectory),
+        )
+        for arm in g43.ARMS
+    }
+    normalized = {
+        arm: g41._normalized_g31_advantages(credits[arm])
+        for arm in g43.ARMS
+    }
+    initial_plans, _, initial_schedule = g43._prepare_passes(
+        models, trajectories, credits, normalized
+    )
+    with torch.no_grad():
+        next(models[g43.MEAN_ARM].policy.parameters()).add_(0.125)
+    divergent_plans, _, divergent_schedule = g43._prepare_passes(
+        models, trajectories, credits, normalized
+    )
+    assert divergent_plans[g43.MEAN_ARM].composition_record != (
+        initial_plans[g43.MEAN_ARM].composition_record
+    )
+    assert divergent_schedule == initial_schedule
+    assert divergent_schedule["evidence_source_arm"] == g43.DBNORM_ARM
+    assert divergent_schedule["reference_equal_mean_counterfactual"] is True
+    assert divergent_schedule["null_arm_evidence_read_count"] == 0
+
+    parameter = nn.Parameter(torch.zeros(1, dtype=torch.float64))
+    reference_dbnorm = g43._dbnorm_composition(
+        (torch.tensor([2.0], dtype=torch.float64),),
+        (torch.tensor([0.0], dtype=torch.float64),),
+        (parameter,),
+        db_norm=1.0,
+    )
+    reference_equal_mean = g43.compose_equal_mean_gradients(
+        (torch.tensor([2.0], dtype=torch.float64),),
+        (torch.tensor([0.0], dtype=torch.float64),),
+        (parameter,),
+    )
+    divergent_null_mean = g43.compose_equal_mean_gradients(
+        (torch.tensor([20.0], dtype=torch.float64),),
+        (torch.tensor([0.0], dtype=torch.float64),),
+        (parameter,),
+    )
+    assert divergent_null_mean.applied_gradient_norm != (
+        reference_equal_mean.applied_gradient_norm
+    )
+    inactive = g43.treatment_schedule_record(
+        dbnorm=reference_dbnorm,
+        reference_equal_mean=reference_equal_mean,
+    )
+    assert inactive["q"] == 0.0
+    assert inactive["strict_activation_observed"] is False
 
 
 def test_zero_db_norm_still_steps_actor_head_and_updates_baselines(

@@ -52,6 +52,42 @@ def _load_anchor() -> g40.G40NativeSixPolicy:
     )
 
 
+def _proof_cpu_execution(
+    configuration: Mapping[str, object],
+) -> dict[str, object]:
+    return {
+        **runner._resolve_cpu_execution(
+            int(configuration["cpu_budget"]),
+            int(configuration["process_workers"]),
+        ),
+        "hardware_logical_cpu_count": 1,
+        "effective_parent_torch_intraop_threads": 1,
+    }
+
+
+def _proof_worker_runtime() -> dict[str, object]:
+    return {
+        "pid": 1,
+        "wall_time_seconds": 0.0,
+        "process_cpu_seconds": 0.0,
+        "python_peak_traced_bytes": 0,
+        "torch_intraop_threads": 1,
+        "thread_environment": {
+            name: "1" for name in runner.WORKER_THREAD_ENV
+        },
+    }
+
+
+def _wrong_index_worker(task: Mapping[str, object]) -> dict[str, object]:
+    path = Path(str(task["output_path"]))
+    runner._write_json(path, {"unexpected": True})
+    return {
+        "index": int(task["index"]) + 1,
+        "output_path": str(path),
+        "output_digest": runner._artifact_digest(path),
+    }
+
+
 def _first_runner_update() -> tuple[
     dict[str, g41.G41NoSlowProjection],
     dict[str, torch.optim.Optimizer],
@@ -112,6 +148,27 @@ def test_configuration_seeds_cpp_and_inventory_are_exact() -> None:
     assert formal["intrinsic_K_search"] == 0
     assert formal["hypothetical_trajectory_count"] == 0
     assert formal["hypothetical_transitions"] == 0
+    assert nonformal["cpu_budget"] == 2
+    assert nonformal["process_workers"] == 2
+    assert formal["cpu_parallelism_fixed_at_launch"] is True
+    assert formal["cpu_continuous_adaptation"] is False
+    assert formal["worker_start_method"] == "spawn"
+    assert formal["training_parallel_unit"] == "formal_replicate_only"
+    assert formal["evaluation_parallel_unit"] == "replicate_capacity_cell"
+    assert formal["deterministic_worker_merge"] == (
+        "preassigned_index_not_completion_order"
+    )
+    assert formal["worker_thread_controls"] == {
+        **runner.WORKER_THREAD_ENV,
+        "torch_intraop_threads": 1,
+    }
+    assert runner._configuration(
+        formal=True, cpu_budget=6, process_workers=6
+    )["process_workers"] == 6
+    with pytest.raises(ValueError, match="closed interval"):
+        runner._configuration(formal=True, cpu_budget=7, process_workers=6)
+    with pytest.raises(ValueError, match="cannot exceed"):
+        runner._configuration(formal=True, cpu_budget=2, process_workers=3)
     assert runner.seed_block(2, formal=True) == {
         "branch_ledger": 10_431_002,
         "branch_action": 10_432_002,
@@ -131,6 +188,51 @@ def test_configuration_seeds_cpp_and_inventory_are_exact() -> None:
         )
         assert set(inventory["order_counts"].values()) == {expected}
         assert set(inventory["profile_counts"].values()) == {expected}
+
+
+def test_fixed_worker_pool_is_bitwise_equivalent_and_fail_closed(
+    tmp_path: Path,
+) -> None:
+    report = runner.benchmark_cpu_process_parallelism(
+        benchmark_root=tmp_path / "parallel-benchmark",
+        worker_counts=(1, 2),
+        task_count=2,
+        batch_size=2,
+        repeats=1,
+    )
+    assert report["all_worker_counts_bitwise_equivalent"] is True
+    assert report["artifact_reload_valid"] is True
+    assert report["phase_evidence"] == {
+        "artifact_validation": "digest_bound_indexed_worker_outputs",
+        "artifact_reload": "exact_json_reload_before_merge",
+        "evaluate_entry": "ContinuousRosterToyBatch_CPU_CPP",
+        "analyze_entry": "serial_reference_semantic_digest_comparison",
+    }
+    matrix = report["matrix"]
+    assert [row["process_workers"] for row in matrix] == [1, 2]
+    assert all(
+        row["correctness_disposition"] == "BITWISE_EQUIVALENT"
+        and row["worker_thread_controls_valid"] is True
+        and row["deterministic_preassigned_merge"] is True
+        for row in matrix
+    )
+    report_path = (
+        tmp_path / "parallel-benchmark" / "cpu_parallel_benchmark.json"
+    )
+    assert runner._read_json(report_path) == report
+
+    with pytest.raises(ValueError, match="index/output inventory"):
+        runner._run_indexed_worker_tasks(
+            [{"index": 1, "output_path": str(tmp_path / "missing.json")}],
+            _wrong_index_worker,
+            process_workers=1,
+        )
+    with pytest.raises(RuntimeError, match="index/output mismatch"):
+        runner._run_indexed_worker_tasks(
+            [{"index": 0, "output_path": str(tmp_path / "wrong.json")}],
+            _wrong_index_worker,
+            process_workers=1,
+        )
 
 
 def test_formal_authority_is_unavailable_until_independent_alignment(
@@ -316,6 +418,17 @@ def test_artifact_roundtrip_final_only_and_tamper_rejection(
             "actor_head_optimizer_steps": {
                 arm: float(expected_steps) for arm in g43.ARMS
             },
+            "worker_execution": {
+                "index": 0,
+                "replicate": 0,
+                "configured_process_workers": int(
+                    configuration["process_workers"]
+                ),
+                "output_path": str(tmp_path / "consumed-worker-result.pt"),
+                "output_digest": "0" * 64,
+                "output_transport_consumed": True,
+                "runtime": _proof_worker_runtime(),
+            },
             "update_records": records,
             "arms": arms,
         }
@@ -338,6 +451,7 @@ def test_artifact_roundtrip_final_only_and_tamper_rejection(
             "accepted_anchor_root_mode": "read_only_input_no_writes",
             "accepted_anchor_artifact_digests": anchor_digests,
             "runtime": {},
+            "cpu_execution": _proof_cpu_execution(configuration),
             "native_backend": {
                 "kind": "ContinuousRosterToyBatch_CPU_CPP",
                 "required": True,
