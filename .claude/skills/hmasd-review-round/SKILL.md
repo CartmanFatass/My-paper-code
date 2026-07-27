@@ -5,6 +5,95 @@ description: Use for direct Project Manager transport to HMASD external GPT-5.6 
 
 # HMASD External Pro Review Transport
 
+## Is a round warranted, and what are you asking?
+
+This decides whether to open a round at all, and how the question must be
+written. Transport mechanics follow below.
+
+
+**Pro does scientific review only.** It is not asked to know the workflow, and
+nothing in this repository binds it: it sees the question you send and the
+evidence allow-list inside that question, and nothing else. Its authority is
+scientific direction and disposition, scoped to that exact question. It never
+sets workflow, chooses successor work, designs or accepts code, authorizes
+compute, or becomes a second acceptance owner.
+
+**Getting the question right is entirely your job.** A weak question is not
+recoverable by the reviewer.
+
+**Warranted when:** two or more structurally distinct explanations remain live; a
+mechanism family is about to be retired permanently; whether the benchmark
+identifies the target is disputed; two consecutive local failures produced no
+clear correction; a local mechanism is about to enter full algorithm
+integration; or the work has visibly converged on one favoured route.
+
+**Not warranted** for lemma extraction, narrow result interpretation, or choosing
+the next minimal action. Those converge internally.
+
+**A valid answer contains** at least one substantive contribution: a new
+conjecture, a concrete counterexample, a hidden assumption named, a corrected
+definition, a retained lemma, or a demonstration that the current benchmark does
+not identify the target. Recommending another experiment is not, by itself, a
+valid open review.
+
+### The dividing question
+
+Does the answer change **what should be measured or claimed** — external — or
+**whether the code does what the plan says** — internal?
+
+Code correctness is internal. **Never send an implementation audit outward.** It
+spends the scientific reviewer's attention on work owned here and is slower than
+the internal pass. Pro's repository access exists so its scientific judgment is
+informed by what the code actually does; it is a context channel, not a request
+to audit the implementation.
+
+A question may legitimately reference implementation detail. "Does your estimand
+require both branches to consume one shared RNG stream" is scientific even though
+the answer determines code, because the *decision* being asked for is scientific.
+
+### Writing the question
+
+1. **Route to code, not to prose.** Give exact paths and function anchors and
+   instruct the reviewer to verify against source. A summary carries its author's
+   errors into the review; a claim stated in the question has already been checked
+   once by someone with an interest in it being true.
+2. **Mark provenance.** Repository fact, external evidence and your own inference
+   are three different things and must be labelled. An unmarked inference reads as
+   an established result and gets inherited as one.
+3. **Declare confidence.** Name which paths you verified by reading and which only
+   by passing tests, and point the reviewer at the latter first.
+4. **State the frozen inputs.** Adopted route, seeds, thresholds, budgets and
+   deliberately deleted legacy code are inputs, not review surface. Say so, or the
+   reviewer re-litigates settled decisions.
+5. **Ask for one decision, not a survey**, and give the required response
+   sections.
+6. **Treat measured evidence in the question as claims to falsify**, and say so.
+7. **Do not defend the framing.** State explicitly that discarding the question's
+   structure is a legitimate answer.
+
+Write the question so the framing is attackable as a hypothesis rather than
+presented for confirmation. If a round returns only agreement, suspect the
+question before the reviewer.
+
+**Declare the read boundary before launching anything speculative alongside a
+round.** State which fields may be read from an in-flight run before the ruling
+lands — wall clock, conformance, provenance — and which may not. Declaring it in
+advance is what makes a NO-LAUNCH ruling cost nothing.
+
+### Rules that survive the round
+
+- **Archive the raw verbatim.** A naturally completed response is valid evidence
+  even when its content has gaps. Transmission artifacts such as mangled LaTeX
+  are preserved as received and noted, never repaired.
+- **Correct the record when the reviewer corrects you.** If the question
+  contained an error, append the correction rather than editing the claim away.
+- **No threshold change after a result is observed.** A pre-registration repair
+  before any run is legitimate; the same edit afterwards is a rescue.
+- **Receiving a response changes nothing by itself.** The scientific decision is
+  External Pro's; the code-side consequence is yours, recorded in the round's
+  reconciliation and, when it changes a contract, in that contract's own commit.
+
+
 ## Contract boundary
 
 Read `AGENTS.md` before operating — it is the complete

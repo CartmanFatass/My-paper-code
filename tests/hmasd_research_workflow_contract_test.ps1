@@ -10,7 +10,11 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 'hmasd-*' |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @('hmasd-review-round') | Sort-Object
+$expectedSkills = @(
+    'hmasd-acceptance-gate',
+    'hmasd-compaction',
+    'hmasd-review-round',
+    'hmasd-task-design') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
 }
@@ -81,11 +85,40 @@ foreach ($required in @(
     'per_file_hash_handoff=forbidden',
     'same_file_concurrent_writes=forbidden',
     '### Crossing the boundary',
-    'converge with External Pro',
-    '## Context compaction',
-    'context boundary, not a control boundary',
-    'continue straight into the next iteration')) {
+    'converge with External Pro')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
+}
+
+# Moment-specific procedure is a Skill, loaded when the moment arrives, so it
+# costs nothing on the turns it does not apply to. AGENTS.md carries only what is
+# true every turn -- it reached 1059 lines on 2026-07-27 by folding everything in
+# on the reasoning that a shared document does not get loaded. True of a document
+# someone must remember to read; false of a Skill, which is injected on match.
+$skillFiles = @{
+    'hmasd-task-design'     = @('Smallest sufficient evidence',
+                                'Trade maintainability away freely',
+                                'out-of-scope list is deliberate staging')
+    'hmasd-acceptance-gate' = @('## Stage A and Stage B',
+                                'A guard test needs a paired negative',
+                                'Two samples cannot separate a cause')
+    'hmasd-compaction'      = @('context boundary, not a control boundary',
+                                'continue straight into the next iteration')
+    'hmasd-review-round'    = @('Is a round warranted',
+                                'Route to code, not to prose',
+                                'Do not defend the framing')
+}
+foreach ($skill in $skillFiles.Keys) {
+    $body = Get-Content -Raw -LiteralPath (Join-Path $repo ".claude/skills/$skill/SKILL.md")
+    foreach ($required in $skillFiles[$skill]) {
+        if (-not $body.Contains($required)) { throw "$skill missing: $required" }
+    }
+}
+# And AGENTS.md must keep pointing at each of them, or a Skill nobody is told to
+# load is a Skill nobody loads.
+foreach ($pointer in $skillFiles.Keys) {
+    if (-not $agents.Contains("`$$pointer")) {
+        throw "AGENTS.md no longer routes to the Skill it moved procedure into: $pointer"
+    }
 }
 
 # Convergence must stay distinguishable from a fence, or the single-fence rule
@@ -193,14 +226,6 @@ reproducibility',
         throw "Implementer execution procedure missing: $required"
     }
 }
-foreach ($required in @(
-    '## Sizing the task',
-    'Smallest sufficient evidence',
-    'Trade maintainability away freely',
-    'out-of-scope list is deliberate staging')) {
-    if (-not $agents.Contains($required)) { throw "Task-sizing procedure missing: $required" }
-}
-
 foreach ($text in @($agents, $current, $context, $implementerDef, $pmRole)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
