@@ -50,8 +50,7 @@ determinism; it is apparatus verification, not evidence.
 
 - **Formal audit run** — blocked on the round-two ruling, not on cost. Formal
   compute authority is the user's.
-- **`--workers` wired into the audit job** — blocked on run `30270540138`
-  returning byte-identical.
+- ~~`--workers` wired into the audit job~~ — **done**. See the cost block below.
 
 ### Open decisions that are the user's, not mine
 
@@ -62,12 +61,30 @@ determinism; it is apparatus verification, not evidence.
   moves the estimand. Now with three measured instances; put to Pro as Q2 of
   round two, so this may become a ruling rather than a standing question.
 
-### Cost, re-measured and now straddling the ceiling
+### Cost — three hosted samples, and the ceiling worry mostly dissolves
 
-`0.0923 s/step` hosted at `stage_commit` (run `30278575924`) against `0.0864`
-at the prior commit. `|Z|=8` projects to ~6.2 h against a 5.92 h self-stop. One
-sample each on shared runners, so the difference is **not** attributed to
-anything. An overrun costs one shard's wall clock, not the run.
+```text
+0.0864 s/step   run 30245735762   pre-rewrite commit
+0.0923 s/step   run 30278575924   stage_commit
+0.0784 s/step   run 30280427538   stage_commit + workflow-only diff
+```
+
+Spread ±9% around `0.0857`. The `0.0923 > 0.0864` step that looked like a cost
+of the fingerprint rewrite is **runner variance** — the third sample is below
+both. `|Z|=8` projects to 5.3–6.3 h against a 5.92 h self-stop.
+
+**The question document quotes only the first two samples** and calls the
+projection "straddling the ceiling", because the third landed after the fence.
+It declines to attribute the difference, so the ruling stays usable; the
+corrected band goes in the reconciliation.
+
+`--workers 4` is now wired into the audit shard. The runner has **4 real cores**
+(`nproc --all`, run `30280427538`; the `nproc=1` in the logs is coreutils
+honouring `OMP_NUM_THREADS=1` and is not the core count). The pool worker runs
+`_compute_audit_episode`, which calls `run_audit_event` for both limbs, so the
+parallelism covers the dominant continuation cost rather than only the prefix.
+Determinism proved byte-identical at run `30270540138`, on a descendant of the
+fingerprint rewrite.
 
 ## Standing constraints
 
