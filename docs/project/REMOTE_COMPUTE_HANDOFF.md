@@ -1,184 +1,169 @@
-# Remote compute handoff — D7.S part B episode budget
+# Remote compute handoff — D7.S event-aligned audit
 
-Written 2026-07-26. Branch `untied-k`. Everything referenced here is committed and
-pushed. Read `AGENTS.md` first, then this file.
+Rewritten 2026-07-27. Branch `untied-k`. Read `AGENTS.md` first, then
+`docs/project/CURRENT_WORK.md`, then this file.
 
-**Why this exists.** The local machine is CPU-only and the run that carries the
-result needs an episode budget it cannot reach in reasonable wall-clock. The
-science is frozen, the instrument is repaired and verified, and what remains is
-arithmetic that needs more cores. Nothing in this document asks for a decision.
+**The previous version of this file described the ep64 persistence-margin job.
+That job is retired as causal evidence** (its environment was built fresh per
+arm and the construction-time worlds were never recorded, so the pairing cannot
+be reconstructed). Do not run it and do not quote its numbers. The record of why
+it died is `CURRENT_WORK.md` under `d7_s_ep64_*`.
 
-## The one thing to run
+## The job
 
 ```bash
-python scripts/audit_d7_s_persistence_margin.py \
-  --episodes 64 --horizon 1500 --stage S3 --n-uavs 8 \
-  --topology-seed 20260725 \
-  --initial-energies "0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90" \
-  --out logs/nonformal_d7_s_persistence_margin_<date>_ci_h1500_ep64
+python scripts/audit_d7_s_event_aligned.py \
+  --topology-seeds <one or more seeds> \
+  --out <run-dir> > <run-dir>/stdout.json
 ```
 
-`--topology-seed 20260725` is **not optional and must not be changed.** Every
-number already recorded was measured at that seed, and the environment draws its
-ground-BS and charging-station layout from an unseeded RNG at construction (see
-*Traps*), so a different seed silently produces an incomparable topology.
+Evaluation only. No training, no policy, no checkpoint, no GPU — `torch` and
+`stable-baselines3` are imported nowhere on this path (both are guarded
+`try/except` in `scenario_base.py` and never referenced). CPU, single-threaded.
 
-Runtime is roughly linear in `episodes x horizon x n_uavs`. Locally, 4 episodes at
-H=1500 took about 82 minutes on 16 cores with contention. 64 episodes is therefore
-a long job — hours, not minutes. It parallelizes trivially across episodes if you
-want to shard it; see *Sharding* below.
-
-CPU only. No GPU is used or wanted anywhere in this audit. No training happens —
-this is an evaluation-only constructive control, no policy, no checkpoint.
-
-### Environment
+Hard dependency set, and nothing more:
 
 ```text
-python      the repo's usual env; locally C:\Users\fires\.conda\envs\hmasd-amd-cpu
-deps        numpy only, for this script
-entry       scripts/audit_d7_s_persistence_margin.py
-tests       pytest tests/audit_d7_s_persistence_margin_test.py     (13 pass)
+numpy==1.26.3  scipy==1.15.2  matplotlib==3.10.0
+gymnasium==1.0.0  pettingzoo==1.24.3  networkx==3.2.1
+python 3.10
 ```
 
-Run the tests first. If any fail, stop and report — do not run the sweep against a
-failing harness.
+**Do not install `requirements_sb3.txt` on a remote runner.** It is a cu118 CUDA
+lock exported from a different machine, and the recorded runtime pin is
+`torch=2.7.0+cpu`, `backend=cpu`, "no CUDA fallback". It would pull CUDA wheels
+this audit never uses.
 
-## Why 64 episodes
+## Sharding — one topology per job, and no finer
 
-Because 4 was not enough and the data now says by how much.
-
-At 4 episodes the normalizer `B_H` is statistically indistinguishable from zero at
-both short horizons, so every normalized margin there is uninformative:
-
-| H | `B_H` point | `B_H` 95% CI | `norm_stable` CI | sign stable |
-|---:|---:|---|---|---|
-| 139 | −1.514 | −3.76 .. +1.79 | −115 .. +1945 | no |
-| 450 | +10.149 | −26.6 .. +46.9 | −16.8 .. +14.6 | no |
-
-Back-solving from those standard errors, `B_H` at H=450 needs on the order of **52
-episodes** before its interval excludes zero. H=1500 has a much larger `B_H`
-(63.53 at 4 episodes) so it may need fewer, but its variance is not yet measured.
-64 is chosen to be above the H=450 requirement rather than tuned to H=1500's
-unknown one, because an underpowered re-run costs another full night.
-
-**Do not treat 64 as established.** The finished run now writes `per_episode` arm
-returns into the result JSON precisely so required-n can be recomputed from it
-without re-running. If the H=1500 interval still straddles its threshold, compute
-the needed n from those per-episode values and run that.
-
-## How to read the output
-
-`<out>/d7_s_persistence_margin.json`. Read it in this order, and stop at the first
-failure:
-
-1. **`arms_all_equal`** must be `false`, and **`probe_qos_saturation_fraction`**
-   should be well under 1.0. A saturated instrument separated no arm at all once
-   already, and that is what these two exist to catch.
-2. **`energy_diagnostics[*].charge_steps`** must be non-zero at H=1500. If it is
-   zero, energy never bound and the run measured an energy-inert regime under an
-   energy-enabled label. `dock_events` is trustworthy again as of commit `c138d5d`;
-   before that it was pinned to zero by an aliasing bug.
-3. **`b_h`** must be clearly positive, and **`intervals.b_h`** must exclude zero.
-   If it does not, nothing normalized by it means anything, whatever the margins
-   say.
-4. **`intervals.normalized_stable.ratio_sign_stable`** must be `true`. When false,
-   the denominator changed sign across bootstrap resamples and the interval is
-   meaningless however narrow it prints.
-5. Only then read **`normalized.stable`** against its `-0.10` ceiling, with
-   `intervals.normalized_stable`.
-
-### Read the stable margin only
-
-`normalized.flex` and anything derived from it is **not the estimand** and must not
-be reported. The frozen design defines the `set_flex` arm as "that service UAV
-re-decides each check", which is exactly what `constructive` already does for every
-UAV, so the two arms are the same arm — confirmed by grep (no `set_flex` branch
-exists) and numerically (`U*_flex == constructive − keep_flex` at every horizon).
-
-That makes `U*_flex / B_H = (constructive − keep_flex) / (constructive − null)`:
-the treatment arm and its own normalizer share a term, which `D0` forbids.
-
-This matters more than a footnote, because **at H=1500 on 4 episodes the gate fired
-`PERSISTENCE_NECESSARY_SOURCE`** — the headline the whole D7.S line is chasing —
-and it fired on that degenerate arm. If the 64-episode run fires it again, it is
-still not claimable. Correcting the arm is a protected-semantics change and belongs
-to External Pro, not to whoever runs this job.
-
-## What is settled — do not re-derive
-
-- **The instrument is reproducible as of commit `847fd8a`.** Two processes with
-  identical arguments return byte-identical `arm_means`, `b_h`, saturation and
-  energy diagnostics. Verified again across days: the 2026-07-26 H=139 and H=450
-  runs reproduced 2026-07-25's exactly.
-- **Exchange always costs.** `U*_stable` is negative at all three horizons (−50.3,
-  −60.6, −9.4). An earlier `+21.18` at H=1500 was a topology artifact, and the
-  amortization-plus-charge-logistics story invented to explain it is retracted.
-- **Energy binds only at H=1500.** `charge_steps` is exactly 0.0 at H=139 and
-  H=450, and 678.5 at H=1500. The energy duty window is ~1500 steps because
-  time-to-first-dock (~1071 steps) dominates the ~403 s charge duration; `D0`'s
-  earlier `~400-500` figure counted the charge alone and was wrong.
-- **`H` is per mechanism, not per source.** Scenario 7 carries two windows —
-  exchange ~139 steps, energy ~1500 — and one `H` misprices whichever it was not
-  derived from.
-- **The gate stays on point estimates.** Thresholds were frozen as point
-  conditions; re-specifying them as interval conditions after seeing output would
-  renegotiate a frozen threshold. The intervals are diagnostics.
-
-## Traps that already cost runs
-
-- **The environment ignores its seed for topology.** `ground_bs_positions` and
-  `charging_station_positions` are drawn at *construction* from `np_random` before
-  any seed exists (`scenario_base.py:650-666` under `randomize_bs`, and
-  `scenario7_energy_aware.py:313`), and `reset(seed=)` never regenerates them. Two
-  constructions differed by 2125 m and 1487 m; the same arm on three fresh envs
-  spread 17 %. Seeding the *global* RNG first does **not** help — the draw is off
-  `np_random`. `build_env` now pins it from `--topology-seed`. This silently
-  destroyed a three-point horizon sweep before anyone looked at it.
-  **This is wider than this audit** and likely affects other experiments in the
-  repo; it has not been assessed beyond D7.S.
-- **`reset(seed=)` does not clear everything.** Eight attributes survive it,
-  including `user_pause_times`, `last_global_sync_step` and
-  `previous_connections_snapshot`. The first run on an env starts pristine and
-  every later one starts used, so whichever arm ran first was privileged — and it
-  was always `constructive`, the arm `B_H` is built from. Hence a fresh env per
-  arm.
-- **An impossible pair of diagnostics is a bug, not a finding.** `charge_steps` of
-  647.5 alongside `dock_events` of 0.0 was numpy aliasing: `np.asarray` on a
-  matching dtype returns the *same object*, so the rising-edge test compared a
-  buffer against itself.
-- **A point estimate near its threshold is not a result.** H=450's `−5.974` looked
-  like a comfortable clear and its interval spans `−16.8 .. +14.6`.
-
-## Sharding, if you want it
-
-Episodes are independent and seeded as `seed = --seed + 100000 + i`. To shard,
-run disjoint episode ranges and pool the `per_episode` arrays afterwards. There is
-no `--episode-offset` flag today, so sharding needs either a small patch adding one
-or separate `--seed` values chosen so the ranges do not overlap. Pool by
-concatenating `per_episode` and recomputing the means, `B_H` and the bootstrap —
-**do not average the normalized margins across shards**, since a ratio of means is
-not the mean of ratios.
-
-## Bring the results back
-
-Commit the whole `logs/<run-id>/` directory — `d7_s_persistence_margin.json` and
-`audit_stdout.log` — and push. Nothing else needs to move; the analysis reads only
-that JSON.
-
-## State of play
+`--topology-seeds` is the only shard lever. `scripts/pool_d7_s_event_aligned_shards.py`
+asserts that shards' seed sets are **disjoint** and that their union is a frozen
+registered set, and its docstring is explicit that sharding is *by whole topology
+seed, never splitting episodes within a topology*. So:
 
 ```text
-harness            repaired, verified, 13 tests
-H=139  ep4         complete, B_H indistinguishable from zero
-H=450  ep4         complete, B_H indistinguishable from zero
-H=1500 ep4         complete, gate fired but on a degenerate arm
-H=1500 ep12        STARTED LOCALLY, KILLED INCOMPLETE, no JSON written
-H=1500 ep64        <- the job in this handoff
+max useful parallel width  8 seeds  (16 under the expansion set)
+min work per job           one complete topology
 ```
 
-Then one External Pro round carrying four coupled items: the `set_flex`
-realization, `Delta` being absent from the instrument (D0 freezes it at one check
-interval; the keep arms hold for the whole window), the absence of any `H` where
-margin and normalizer are both well behaved, and the seed-ignoring topology.
+`--episodes-calibration` / `--episodes-audit` can shrink a topology, but that
+changes the scientific volume, not the sharding. It is not a way to fit a
+wall-clock budget.
 
-`D8` stays blocked in every branch until part B resolves.
+Pool afterwards; never average normalized margins across shards.
+
+## Wall clock, and the ceiling that binds
+
+Measured on the local CPU box 2026-07-27 via
+`scripts/d7_s_clone_conformance_check.py`: **0.0615 s/step** continuation rate.
+Against `scripts/d7_s_prelaunch_cost_bound.py`:
+
+| legal set | s/step | steps/topology | wall clock |
+|---:|---:|---:|---:|
+| 3 | 0.0615 | 119,704 | 2.29 h |
+| 5 | 0.0615 | 163,800 | 3.05 h |
+| 8 | 0.0615 | 229,944 | 4.18 h |
+| 8 | 0.17 | 229,944 | 11.11 h |
+| 8 | 0.30 | 229,944 | 19.41 h |
+
+The recorded band is `3.58 h – 19.41 h`; the local machine sits below its
+optimistic edge.
+
+**A GitHub-hosted Actions job is killed at 6 hours and its shard is lost.** At the
+local rate every legal-set size fits, worst case 4.18 h. The margin is
+`6 / 4.18 = 1.43×` — so the audit survives only if the runner is **less than
+1.43× slower than this box**, and a 4-vCPU shared runner plausibly is not. Since
+a topology cannot be cut below one job, there is no supported way to rescue an
+overrun.
+
+**Therefore: measure the step rate on the target runner before launching the
+audit.** `scripts/d7_s_clone_conformance_check.py` does exactly that in about two
+minutes and simultaneously proves the instrument works there — it prints
+`continuation s/step` and a `CLONE_CONFORMANCE_PASS` verdict over seven
+conditions. The contract already permits one microbenchmark of at most 20
+minutes, so this needs no new authorization.
+
+## GitHub Actions specifics
+
+`.github/workflows/d7s-audit.yml` is prepared in the working tree, with two
+`workflow_dispatch` modes: `benchmark` (the conformance check) and `audit` (an
+8-way topology matrix, `timeout-minutes: 350` so an overrun fails cleanly inside
+the 6 h ceiling rather than being killed at it).
+
+Both former gates were cleared by the user on 2026-07-27:
+
+1. **`workflow` scope granted.** Token scopes are now
+   `gist, read:org, repo, workflow`, so `.github/workflows/` is pushable.
+2. **The repo was made PUBLIC.** Actions minutes on standard GitHub-hosted
+   runners are therefore free and unmetered, which removes the quota question
+   entirely. Note the consequence: this repository and its full history are now
+   world-readable.
+
+**The 6-hour job ceiling is the only remaining hard constraint, it is not
+user-clearable, and the benchmark says it binds.**
+
+## Measured verdict — GitHub-hosted runners are NOT viable for the formal audit
+
+Run `30245735762`, tag `d7s-benchmark-1`, `ubuntu-latest`, 2026-07-27.
+`CLONE_CONFORMANCE_PASS`, all conditions, zero reconstruction replays — the
+instrument works correctly on Linux. The rate does not work:
+
+```text
+local   0.0615 s/step
+runner  0.0864 s/step        ->  runner is 1.405x slower
+```
+
+| legal set | wall clock on runner | vs 6 h kill |
+|---:|---:|---|
+| 3 | 3.12 h | fits |
+| 5 | 4.18 h | fits |
+| 8 | **5.77 h** | **1.087x headroom — about 14 minutes** |
+
+Fourteen minutes of headroom is not a margin. And `|Z|` is **data-determined**,
+not a knob: the legal set size falls out of the certified event, so which shards
+land at 8 cannot be predicted before launching. The realistic outcome is that
+some shards complete and some are killed at 6 h, with **no way to recover a
+killed one** — a topology cannot be split, so the shard is simply lost and must
+be rerun whole.
+
+Do not launch `d7s-audit-*` on `ubuntu-latest`. Two routes that work:
+
+- **Self-hosted runner on a cloud VM.** No job ceiling at all. Costs
+  provisioning; removes the constraint rather than dodging it. This is the
+  recommended vehicle.
+- **GitHub larger runners.** More vCPU, but the 6 h ceiling still applies and
+  they are billed even on a public repo.
+
+## Cross-machine reproducibility — task 14 is a prerequisite, not an extra
+
+The benchmark ran pre-task-14 code and demonstrated the defect in the open. Same
+`topology_seed=20260726`, same `episode_seed=1406135324`, two machines:
+
+```text
+local   t_e = 708 steps
+runner  t_e = 921 steps
+```
+
+The topology is identical — `build_topology_template` binds a private
+`RandomState(topology_seed)` before the two init calls, so it is a pure function
+of the seed and reproduces across machines. What differs is the **user world**,
+which without task 14 comes from construction-time OS entropy, lands in a
+different BS quadrant, and therefore certifies a **different event**.
+
+So a cloud shard and a local shard of the same seed are not comparable runs, and
+rerunning a shard does not reproduce it. Land task 14 before any distributed
+execution, or the shards being pooled were measured in worlds nobody recorded.
+
+## Bringing results back
+
+Each shard writes `<run-dir>/d7_s_event_aligned.json` plus its topology records;
+the full lossless result JSON also goes to **stdout**, which is why the workflow
+redirects it to a file rather than letting it flood the log. Upload the whole
+`<run-dir>` as an artifact, then pool locally.
+
+## What to read first in the result
+
+`episode_world_provenance.all_seed_controlled` must be `true`. False means at
+least one episode ran in a world that cannot be regenerated — the exact position
+that retired ep64 — and those episodes are listed under
+`episodes_not_seed_controlled`. Then `conformance.ok`, then the margins.

@@ -16,6 +16,20 @@ name: D7.S event-aligned audit
 #              scripts/pool_d7_s_event_aligned_shards.py, which asserts the
 #              shard seed sets are disjoint and their union is a frozen set.
 #
+# ############################################################################
+# MEASURED 2026-07-27, run 30245735762: DO NOT LAUNCH `audit` ON ubuntu-latest.
+#
+# The runner benchmarked at 0.0864 s/step against 0.0615 locally -- 1.405x
+# slower. That puts a legal-set-8 topology at 5.77 h against the 6 h hard kill:
+# 1.087x headroom, about fourteen minutes. The legal set size is DATA-DETERMINED
+# by the certified event, so which shards land at 8 cannot be known before
+# launch, and a killed shard is unrecoverable because a topology cannot be
+# split. Use a self-hosted runner on a cloud VM, which has no job ceiling.
+#
+# `benchmark` on ubuntu-latest remains correct and useful -- it passed all
+# conformance conditions there in under four minutes.
+# ############################################################################
+#
 # Both are workflow_dispatch only. Nothing here runs on push -- a formal run
 # starts because someone decided to start it.
 

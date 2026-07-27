@@ -280,3 +280,50 @@ combination, because a later optimization reasoning from that premise (for
 example, exploiting the assumed pairing to tighten the interval) would
 introduce the error the current code accidentally avoids. The docstring is
 corrected in the same commit as this append.
+
+### Append 2026-07-27 — the discrete latent variable is the BS quadrant, and one row above is wrong
+
+The preceding append is right that the latent variable is "discrete and small",
+and right to stop before guessing. It is wrong in one row of its table, and the
+error matters because it rules out the true cause:
+
+> | Users are placed relative to BS/station geometry | **No.** Two objects
+> differing in `ground_bs_positions` and `charging_station_positions` produced
+> *identical* users |
+
+That observation is real but was read as decisive when it is a coin flip. Two
+BS layouts that differ can still fall in the **same quadrant**, and when they do
+the user worlds are identical. Measured over 60 construction pairs on
+2026-07-27:
+
+```text
+fresh envs shared user world   : 21 / 60  (35 %)
+BS center in same quadrant     : 21 / 60  (35 %)
+"same users" == "same quadrant": 60 / 60
+```
+
+Sixty out of sixty agreement. `_generate_forced_relay_cluster_positions` reads
+`ground_bs_positions` exactly once, to compute `bs_center` and pick the opposite
+corner for the remote cluster — a **four-way discrete branch on quadrant**. That
+is precisely the "construction-time state with few possible values that the
+generation path branches on" the append was looking for, and it explains its own
+`3 distinct layouts across 6 constructions` result directly.
+
+Two deterministic confirmations: BS pinned to `(0.05, 0.05)` versus
+`(0.10, 0.10)` — same quadrant, different coordinates — gives **bit-identical**
+users; `(0.05, 0.05)` versus `(0.95, 0.95)` diverges.
+
+So the corrected statement is:
+
+> The user world is a deterministic function of **(episode seed, BS quadrant)**.
+> It is not a function of the BS coordinates, and it is not continuous noise.
+
+The same coin flip made two assertions in
+`tests/env_user_population_determinism_test.py` pass on luck; they failed about
+a third of the time and are now pinned by choosing quadrants explicitly.
+
+The append's closing instruction — locate the source before writing
+`user_world_seed` — was followed, and this is the located source. Full
+derivation, the task-14 implementation built on it, and why the ep64 retirement
+is strengthened rather than weakened by it:
+`20260727_D7_S_USER_WORLD_IS_A_FUNCTION_OF_BS_QUADRANT.md`.
