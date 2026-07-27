@@ -96,11 +96,19 @@ def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifyin
     }
 
 
-def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=None):
+def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=None,
+                  overrides=None):
     """Builds one shard JSON file via the Task-A writer path: the real
     `topology_unit_for_serialization` function plus the same surrounding
     dict shape `main()` assembles (data plumbing only, no branch logic --
-    that stays exclusively in `assemble_audit_result`)."""
+    that stays exclusively in `assemble_audit_result`).
+
+    `overrides` replaces any top-level shard key after assembly. It exists
+    because `contract_id` used to be the only field this builder could vary,
+    while `_assert_identity` quantifies over all of `CONTRACT_IDENTITY_FIELDS`
+    -- so `contract` and `procedure_version` could be dropped from that tuple
+    with the whole file green. A fixture builder with no affordance for a
+    field is why that field goes untested; give it the affordance."""
     seeds = [r["topology_record"]["topology_seed"] for r in topology_results]
     shard = {
         "contract": audit.CONTRACT_PATH,
@@ -116,6 +124,7 @@ def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=N
         "topology_units": [audit.topology_unit_for_serialization(r) for r in topology_results],
         "topology_hash_failures": [],
     }
+    shard.update(overrides or {})
     path = tmp_path / name
     with path.open("w", encoding="utf-8") as fh:
         json.dump(shard, fh, ensure_ascii=False, default=audit._json_default)
@@ -243,16 +252,92 @@ def test_overlapping_topology_seeds_are_refused(tmp_path):
         pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
 
 
+def _flat_pair(tmp_path, seed_a, seed_b, **kw_a):
+    """Two minimal shards on distinct seeds. `kw_a` applies to the first only."""
+    make = lambda n, s, **kw: _write_shard(
+        tmp_path, n, [_topology_result(s, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                                        u_stable=1.0, u_flex=1.0)], **kw)
+    return make("a.json", seed_a, **kw_a), make("b.json", seed_b)
+
+
 def test_smoke_shard_is_refused_without_allow_smoke(tmp_path):
+    """Matches the gate's own wording, not the bare word "smoke".
+
+    A guard-deletion sweep on 2026-07-27 found this file green with EITHER
+    smoke guard disabled, because the two of them mask each other: this
+    fixture is a mixed pair, so whichever gate survives refuses it, and both
+    messages contain "smoke". The match must name one gate."""
+    p1, p2 = _flat_pair(tmp_path, 6001, 6002, smoke=True)
+    with pytest.raises(SystemExit, match="refusing to pool smoke shard"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+
+
+def test_uniformly_smoke_shards_are_refused_without_allow_smoke(tmp_path):
+    """The shape a real smoke run actually produces -- and the one that was
+    never tested. Its sibling above pools a *mixed* pair, so the smoke-flag
+    mismatch gate refused it regardless; deleting the `SMOKE_NOT_A_RESULT`
+    gate left this file 8/8 green while `pool()` accepted a uniformly-smoke
+    set and returned it with `smoke=True`. Measured, not inferred.
+
+    The output does carry the flag onward, so a careful downstream reader
+    could still see it -- but this gate is a refusal, not a label, and
+    nothing tested that it refuses."""
     p1 = _write_shard(tmp_path, "a.json",
-                       [_topology_result(6001, d_a=0.0, b_stable=1.0, b_flex=1.0,
-                                          u_stable=1.0, u_flex=1.0)],
-                       smoke=True)
+                       [_topology_result(6101, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                                          u_stable=1.0, u_flex=1.0)], smoke=True)
     p2 = _write_shard(tmp_path, "b.json",
-                       [_topology_result(6002, d_a=0.0, b_stable=1.0, b_flex=1.0,
-                                          u_stable=1.0, u_flex=1.0)],
-                       smoke=False)
-    with pytest.raises(SystemExit, match="smoke"):
+                       [_topology_result(6102, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                                          u_stable=1.0, u_flex=1.0)], smoke=True)
+    with pytest.raises(SystemExit, match="refusing to pool smoke shard"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+
+
+def test_a_smoke_flag_mix_is_refused_even_when_smoke_is_allowed(tmp_path):
+    """Unmasks the second gate by removing the first: with `allow_smoke=True`
+    the `SMOKE_NOT_A_RESULT` gate stands down, so only the uniformity gate can
+    refuse a mixed pair. Half a real result and half a smoke result is not a
+    result at any flag setting."""
+    p1, p2 = _flat_pair(tmp_path, 6201, 6202, smoke=True)
+    with pytest.raises(SystemExit, match="smoke-flag mismatch"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2],
+                     allow_smoke=True, allow_any_seeds=True)
+
+
+@pytest.mark.parametrize("field, wrong", [
+    ("contract", "docs/research/designs/SOME_OTHER_CONTRACT.md"),
+    ("contract_id", "SOME_OTHER_CONTRACT"),
+    ("procedure_version", "not-the-frozen-procedure"),
+])
+def test_every_contract_identity_field_is_checked(tmp_path, field, wrong):
+    """`_assert_identity` quantifies over all of `CONTRACT_IDENTITY_FIELDS`;
+    only `contract_id` was ever varied, so dropping either of the other two
+    from that tuple left the file green. Read the guard's own quantifier and
+    range over it."""
+    assert field in pooling.CONTRACT_IDENTITY_FIELDS
+    p1, p2 = _flat_pair(tmp_path, 4101, 4102, overrides={field: wrong})
+    with pytest.raises(SystemExit, match=field):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+
+
+def test_pooling_fewer_than_two_shards_is_refused(tmp_path):
+    """Pooling one shard would silently relabel a partial run as a pooled
+    result. The guard existed and nothing exercised it."""
+    p1, _ = _flat_pair(tmp_path, 4201, 4202)
+    with pytest.raises(SystemExit, match="at least two shards"):
+        pooling.pool(_load_shards([p1]), paths=[p1], allow_any_seeds=True)
+
+
+def test_internally_inconsistent_shard_columns_are_refused(tmp_path):
+    """The five per-topology columns are zipped, and `zip` truncates in
+    silence -- a short column would drop topologies out of the pooled result
+    with no error at all. Untested until 2026-07-27."""
+    p1, p2 = _flat_pair(tmp_path, 4301, 4302)
+    with open(p1, encoding="utf-8") as fh:
+        shard = json.load(fh)
+    shard["audit_events"] = []          # one column short, the rest intact
+    with open(p1, "w", encoding="utf-8") as fh:
+        json.dump(shard, fh, ensure_ascii=False)
+    with pytest.raises(SystemExit, match="mismatched lengths"):
         pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
 
 

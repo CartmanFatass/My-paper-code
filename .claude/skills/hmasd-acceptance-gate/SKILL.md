@@ -83,6 +83,20 @@ drives the guard **red**. A positive assertion alone is not a guard.
   and record the standing instruction: if the table and the contract disagree,
   the code is wrong until a round says otherwise — never edit the table to match
   the code.
+- **One fixture violating two guards tests neither.** When a fixture is illegal
+  in more than one way, each surviving guard refuses it and the test passes no
+  matter which one you delete. Found 2026-07-27 in the shard pooler: a test
+  named `test_smoke_shard_is_refused_without_allow_smoke` pooled a *mixed*
+  smoke/real pair and matched `"smoke"`, a word both gates' messages contain, so
+  either gate could be deleted with the file 8/8 green — including the
+  `SMOKE_NOT_A_RESULT` refusal. Give each guard a fixture that violates only it,
+  and match on that guard's own wording, not a word its siblings share.
+- **A fixture builder with no affordance for a field is why that field goes
+  untested.** The same pooler's `_write_shard` accepted `contract_id=` and
+  nothing else, while the guard quantified over three identity fields — the
+  other two were unwritable in the test file's own vocabulary, so two of three
+  could be dropped from the tuple with everything green. Check what your helpers
+  *can* perturb before concluding what the tests *do* perturb.
 - **Your sweep tool needs the same scepticism as the test.** Two extraction bugs
   on 2026-07-27 — `[a-z_]+` stopping at a capital, and a PCRE `(?:` handed to
   `grep -E` — both failed silently *toward reporting full coverage*. A tool that
