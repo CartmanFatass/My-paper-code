@@ -1,0 +1,32 @@
+# G42 disposition-only clarification manifest
+
+```text
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification
+audit_target_commit=6b8ea82d8fdbc76c14a414ff2b042a126f945dfb
+question=docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification/20_PRO_OPEN_QUESTION.md
+raw=docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification/21_PRO_OPEN_RAW.md
+mechanical_intake=docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification/50_MECHANICAL_INTAKE_RECORD.md
+formal_compute_started=false
+nonformal_compute_started=false
+submission_limit=exactly_one
+recovery_submission_limit=zero
+answer_now_policy=never_activate
+completion=natural_only
+```
+
+Exact allow-list from the audit-target commit:
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_direction_balance_attribution_g42.py`
+- `scripts/run_continuous_roster_native_six_g31_direction_balance_attribution_g42.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_g31_direction_balance_attribution_g42_test.py`
+- `tests/run_continuous_roster_native_six_direction_balance_attribution_g42_test.py`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md`
+
+No other review round, runtime log, or repository history is in scope.
