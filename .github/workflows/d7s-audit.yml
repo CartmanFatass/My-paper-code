@@ -51,17 +51,19 @@ name: D7.S event-aligned audit
 #     git tag d7s-audit-<n>     && git push origin d7s-audit-<n>
 # Tagging is also the right ergonomics for a multi-hour formal run: you tag when
 # you mean it, rather than having every push start one.
+#     git tag d7s-workers-<n>   && git push origin d7s-workers-<n>
 on:
   push:
     tags:
       - "d7s-benchmark-*"
       - "d7s-audit-*"
+      - "d7s-workers-*"
   workflow_dispatch:
     inputs:
       mode:
-        description: "benchmark (measure s/step) or audit (formal sharded run)"
+        description: "benchmark (measure s/step), workers (determinism proof) or audit (formal sharded run)"
         type: choice
-        options: [benchmark, audit]
+        options: [benchmark, workers, audit]
         default: benchmark
 
 jobs:
@@ -96,6 +98,71 @@ jobs:
         with:
           name: d7s-benchmark
           path: conformance.txt
+
+  # Proves `--workers N` changes only the schedule, never the result. The pooled
+  # path folds results back in ascending episode index rather than completion
+  # order, so a difference here means a real determinism defect, not jitter.
+  #
+  # This belongs on a runner rather than the workstation: it is apparatus
+  # verification, not a conclusion-bearing run, and the workstation is shared
+  # with another line's formal training. The minutes are free on a public repo.
+  #
+  # Not wired into `audit` below until this job passes. Referencing a flag whose
+  # determinism is unproven would put an unverified change in a formal run's path.
+  workers:
+    if: inputs.mode == 'workers' || startsWith(github.ref, 'refs/tags/d7s-workers')
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: requirements_d7s_audit.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_d7s_audit.txt
+      - name: Both arms, same seeds, different worker counts
+        env:
+          OMP_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+        run: |
+          mkdir -p w1 w4
+          ARGS="--smoke --dev --episodes-calibration 4 --episodes-audit 2"
+          echo "nproc=$(nproc)"
+          /usr/bin/time -f "arm1_seconds=%e" -o w1/time.txt \
+            python scripts/audit_d7_s_event_aligned.py $ARGS --workers 1 --out w1 > w1/stdout.json
+          /usr/bin/time -f "arm4_seconds=%e" -o w4/time.txt \
+            python scripts/audit_d7_s_event_aligned.py $ARGS --workers 4 --out w4 > w4/stdout.json
+          cat w1/time.txt w4/time.txt
+      - name: Byte-identity comparison
+        run: |
+          status=0
+          if cmp -s w1/stdout.json w4/stdout.json; then
+            echo "STDOUT_JSON: BYTE_IDENTICAL"
+          else
+            echo "STDOUT_JSON: DIFFERS"; status=1
+          fi
+          ( cd w1 && sha256sum * | sed 's#  .*/#  #' ) > w1.sums
+          ( cd w4 && sha256sum * | sed 's#  .*/#  #' ) > w4.sums
+          # `time.txt` differs by construction -- it records wall clock.
+          sed -i '/time.txt/d' w1.sums w4.sums
+          if cmp -s w1.sums w4.sums; then
+            echo "OUT_DIR: BYTE_IDENTICAL"
+          else
+            echo "OUT_DIR: DIFFERS"; diff w1.sums w4.sums || true; status=1
+          fi
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d7s-workers-proof
+          path: |
+            w1/
+            w4/
+          retention-days: 90
 
   audit:
     if: inputs.mode == 'audit' || startsWith(github.ref, 'refs/tags/d7s-audit')
