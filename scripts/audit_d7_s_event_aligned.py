@@ -1116,6 +1116,64 @@ def hierarchical_bootstrap_events(events: list[dict], *, iters: int, seed: int,
     }
 
 
+USER_WORLD_SEED_NAMESPACE = "user_world"
+
+
+def user_world_seed(*, topology_seed: int, block: str, episode_index: int) -> int:
+    """R3 section E: the registered seed for an episode's user world.
+
+    Derived from existing episode provenance under a namespace **disjoint** from
+    every other registered seed -- topology, energy permutation and continuation
+    `stream_seed` all live in `stream_seed`'s namespace, and this one must not
+    collide with them or the user world would be correlated with the arm streams
+    it is supposed to be independent of.
+
+    The registered random-user distribution is unchanged by this. The seed makes
+    the draw *reproducible and recorded*; it does not make it fixed across
+    episodes, because the user world is a nested episode-level random factor
+    rather than part of topology identity.
+    """
+    fields = (USER_WORLD_SEED_NAMESPACE, CONTRACT_ID, str(int(topology_seed)),
+              str(block), str(int(episode_index)))
+    digest = hashlib.sha256("|".join(fields).encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big")
+
+
+def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
+    """R3 section E: the episode-world provenance record, taken immediately
+    after environment initialization and before any stepping.
+
+    Records the initial user and cluster state that construction fixed, so that
+    an artifact can later prove which world an episode ran in. This is the
+    provenance the Stage B ruling found missing: the worlds were real, they just
+    were never written down, which is why the ep64 contrasts cannot be recovered
+    even in principle.
+    """
+    parts: list[bytes] = []
+    for name in ("user_positions", "user_velocities", "user_waypoints",
+                 "user_pause_times", "user_cluster_assignments",
+                 "cluster_centers_history", "cluster_velocities",
+                 "cluster_waypoints", "cluster_pause_times"):
+        value = getattr(env, name, None)
+        if value is None:
+            continue
+        arr = np.asarray(value)
+        parts.append(name.encode("utf-8"))
+        parts.append(str(arr.shape).encode("utf-8"))
+        parts.append(np.ascontiguousarray(arr).tobytes())
+    return {
+        "user_world_seed": None if seed_value is None else int(seed_value),
+        "fingerprint": hashlib.sha256(b"".join(parts)).hexdigest(),
+        "n_users": int(getattr(env, "n_users", 0)),
+        # Honest scope: as of this commit the seed is DERIVED and RECORDED but
+        # does not yet CONTROL user generation -- that requires changing
+        # construction inside envs/pettingzoo, which is a protected-semantics
+        # edit. Until it does, the fingerprint proves which world an episode
+        # actually ran in, but a rerun with the same seed will not reproduce it.
+        "seed_controls_generation": False,
+    }
+
+
 SELECTION_DIAGNOSTIC_SEED_TAG = "selection_diagnostic"
 
 

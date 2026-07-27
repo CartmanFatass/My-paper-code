@@ -2176,6 +2176,43 @@ def test_locking_a_duty_actually_restricts_reassignment():
     assert unlocked != locked or unlocked[0] == 0
 
 
+def test_user_world_seed_is_disjoint_from_every_other_registered_seed():
+    """R3 section E. The user world must not be correlated with the arm streams
+    it is supposed to be independent of, so its seed lives in its own namespace
+    rather than reusing `stream_seed`'s."""
+    a = audit.user_world_seed(topology_seed=20260726, block="audit", episode_index=0)
+    b = audit.user_world_seed(topology_seed=20260726, block="calibration", episode_index=0)
+    c = audit.user_world_seed(topology_seed=20260726, block="audit", episode_index=1)
+    d = audit.user_world_seed(topology_seed=20260727, block="audit", episode_index=0)
+
+    assert len({a, b, c, d}) == 4, "block, episode and topology must all separate worlds"
+    assert a == audit.user_world_seed(
+        topology_seed=20260726, block="audit", episode_index=0), "must be reproducible"
+
+    # Disjoint from the continuation-stream namespace for the same coordinates.
+    collision = audit.stream_seed(
+        topology_seed=20260726, block="audit", episode_seed=0, limb="stable",
+        event_index=0, candidate_target_id="KEEP", phase="evaluate", replicate_index=0)
+    assert a != collision
+
+
+def test_episode_world_fingerprint_separates_two_user_worlds():
+    """The provenance the Stage B ruling found missing: the worlds were real,
+    they were simply never written down, which is why ep64 cannot be recovered
+    even in principle."""
+    a = _CloneableFakeEnv(seed=50)
+    b = _CloneableFakeEnv(seed=50)
+    b.user_positions = a.user_positions + 250.0
+
+    fa = audit.episode_world_fingerprint(a, seed_value=1234)
+    fb = audit.episode_world_fingerprint(b, seed_value=1234)
+
+    assert fa["fingerprint"] != fb["fingerprint"]
+    assert fa["user_world_seed"] == 1234
+    # Honest scope while the env-side change is outstanding.
+    assert fa["seed_controls_generation"] is False
+
+
 def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
     """Item 5b, second half: 'at run level, conformance_ok=False when the
     pinned-topology hash fails' -- exercised directly against the pure
