@@ -66,9 +66,13 @@ Constraints that decide job shape:
   whole and pooled afterwards, because the pooler keys on the seed set rather
   than run identity. With `fail-fast: false` the surviving shards keep their
   artifacts, so a slow shard costs wall clock, not the run.
-- **Concurrency is limited.** Only about 5 of 8 matrix shards execute at once, so
-  wall clock is roughly two waves regardless of per-shard speed. Do not model a
-  sharded run as fully parallel.
+- **Concurrency: measured 8 of 8, not 5.** This entry previously said only about
+  5 of 8 matrix shards execute at once and that wall clock is therefore roughly
+  two waves. Counted directly on run `30289161086` (2026-07-27, tag
+  `d7s-audit-2`): all eight shards were `in_progress` simultaneously. The audit
+  is **one wave**, so expected wall clock is per-shard time — 5.3–6.3 h — not
+  double it. Correcting because the two-wave figure argues for splitting or
+  deferring a run that does not need it.
 - **The runner is ~1.4× slower than local** (0.0864 vs 0.0615 s/step, measured
   2026-07-27, run 30245735762).
 - **Unpushed work is invisible.** The runner checks out the tagged commit. Push
