@@ -27,23 +27,28 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_EVENT_ALIGNED_SOURCE_AUDIT
-next_boundary=NEW_STAGE_B_ROUND_THEN_GATED_EXPERIMENT
-workflow_position=steps 5-6 of the eight-step loop, re-entered from the Stage B gate
+next_boundary=STAGE_B_ROUND_TWO_RULING_THEN_GATED_EXPERIMENT
+workflow_position=step 8 of the eight-step loop -- Pro is reading the result
 ```
 
-**The audit does not launch.** Stage B returned `MISMATCH / NO LAUNCH` on
-2026-07-27 with one blocker. That blocker is now closed, so the next step is a
-**new Stage B round** covering everything since: the `full_state_fingerprint`
-rewrite, the six repaired guards, the dict-ordering fix, and the environment
-repair. Steps 2–4 do not repeat — the R3 §E amendment was ruled in the same
-round and needs no further freeze.
+**Stage B round two is dispatched and pending.** Round
+`20260727_d7_s_stage_b_fingerprint_closure`, fenced at
+`8cb5a232c2928aa8d6c5c173557da96c2038a329`, sent 2026-07-27 to the registered
+`open_divergent` conversation. Preflight returned `ROUND_PREFLIGHT_READY` over a
+10-path allow-list. It asks three things: judge the blocker closure, rule what
+R3 §C's "complete-state identity surface" means, and decide the launch.
+
+The blocker your last ruling named is closed. `full_state_fingerprint` is a
+recursive canonical encoder that raises rather than falling through; six more
+unfailable guards are repaired; the dict branch no longer sorts on `repr(key)`;
+and a world replacement is no longer booked as a handover.
 
 Nothing is running locally. Cloud run `30270540138` is proving `--workers`
 determinism; it is apparatus verification, not evidence.
 
 ### Blocked on
 
-- **Formal audit run** — blocked on the new Stage B round, not on cost. Formal
+- **Formal audit run** — blocked on the round-two ruling, not on cost. Formal
   compute authority is the user's.
 - **`--workers` wired into the audit job** — blocked on run `30270540138`
   returning byte-identical.
@@ -54,7 +59,15 @@ determinism; it is apparatus verification, not evidence.
   ownership be established before either continues. Unresolved.
 - **The OS-entropy construction seed.** `scenario_base.py:328` seeds from OS
   entropy and `reset(seed=)` does not re-derive `ground_bs_positions`. Fixing it
-  moves the estimand. See the world-replacement evidence note.
+  moves the estimand. Now with three measured instances; put to Pro as Q2 of
+  round two, so this may become a ruling rather than a standing question.
+
+### Cost, re-measured and now straddling the ceiling
+
+`0.0923 s/step` hosted at `stage_commit` (run `30278575924`) against `0.0864`
+at the prior commit. `|Z|=8` projects to ~6.2 h against a 5.92 h self-stop. One
+sample each on shared runners, so the difference is **not** attributed to
+anything. An overrun costs one shard's wall clock, not the run.
 
 ## Standing constraints
 
