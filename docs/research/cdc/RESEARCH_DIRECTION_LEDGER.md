@@ -1,3 +1,14 @@
+# G40 formal result update (mechanically recorded from External Pro)
+
+g40_credit_row_supersedes=G39 native-six continuous-roster G31 credit package local necessity/open replacement row
+g40_credit_row_status=SUPPORTED_RETAINED
+g40_credit_row_evidence=docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40_FORMAL_RESULT.md|docs/report/ITERATION_31.md|docs/external-review/rounds/20260727_continuous_roster_native_six_credit_reduction_g40_formal_result_review/21_PRO_OPEN_RAW.md
+g40_credit_row_claim_ceiling=shared-accepted-native-six-fast-anchor and exact G40-P0 toy family; G31 realized-tail credit package has material finite-budget access/utility advantage over frozen ordinary shared-team GAE1/PPO branch
+g40_credit_row_exclusions=not-universal-temporal-credit-necessity|not-future-information-alone|not-all-ordinary-estimators|not-UAV|not-recurrence|not-arbitrary-process-capacity-horizon
+g40_credit_row_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_DESIGN_ASSERTION_AUDIT
+g40_ordinary_team_gae1_replacement_status=FAILED_CLOSED
+g40_remaining_open=standalone_slow_critic_and_internal_G31_component_attribution
+
 # HMASD 科研方向账本
 
 ## 用途与权威边界

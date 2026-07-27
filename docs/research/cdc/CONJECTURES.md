@@ -233,8 +233,9 @@ the Project Manager-accepted CDC state.
 
 ## C-CREDIT — Temporal credit is the bottleneck
 
-- Status: supported for the registered G17/G18 paired toy family; still open
-  for UAV transport and unrelated source families.
+- Status: supported retained for the registered G17/G18 paired toy family and
+  the shared-anchor G40-P0 branch; universal necessity remains unsupported for
+  UAV transport and unrelated source families.
 - Claim: representation is adequate but primitive-step credit cannot assign
   delayed consequences to asynchronous events.
 - Separating evidence: representation held fixed while only a well-defined
@@ -283,6 +284,14 @@ the Project Manager-accepted CDC state.
   reduction is now eligible as the next local separating question. Any pass or
   failure must remain local to its frozen source and cannot rewrite G31's
   accepted G17/G18 evidence.
+- G40 update: after one shared accepted native-six fast anchor, G31's retained
+  immediate/realized-successor decomposition, shared two-output baselines and
+  direction-balanced actor-gradient package reaches the complete access
+  contract, while the matched TEAM_GAE1 branch confidently fails and the
+  G31-minus-TEAM_GAE1 pooled and capacity-specific lower confidence bounds all
+  exceed 0.05. The supported unit is the complete package, not future-return
+  information alone; standalone slow-critic and component necessity remain
+  open, and no universal temporal-credit or UAV claim follows.
 
 ## C-BENCH — The benchmark is not identifying
 
