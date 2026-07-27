@@ -194,6 +194,44 @@ diagnostic is fit for any particular reuse. Whether ep64 may serve as a causal
 comparator remains External Pro's call under the standing topology-provenance
 rule.)*
 
+### Append — narrowing where the user-world divergence actually comes from
+
+Investigated to hand the next session a located defect rather than an open
+question. Established, all zero-compute:
+
+| Hypothesis | Result |
+|---|---|
+| Global `np.random` drives it (`uav_env:413` etc.) | **No.** Pinning `np.random.seed(999)` before each construction still gave a 6700 m divergence. Scenario-7 uses `forced_relay_cluster`, so the `"cluster"` branch holding the global draw never executes |
+| Config differs between instances | **No.** `cluster_std`, `central_area_ratio`, `area_size`, `n_clusters`, `n_users`, `randomize_users`, `user_movement_model` all identical |
+| Generation is inherently nondeterministic | **No.** `_generate_user_positions()` called twice on one object with `np_random` reset between gives identical output |
+| Users are placed relative to BS/station geometry | **No.** Two objects differing in `ground_bs_positions` and `charging_station_positions` produced *identical* users |
+
+The generation path itself reads only `self.np_random` (`scenario4:461-502`,
+cluster centres by rejection sampling; `:560` user offsets by
+`multivariate_normal`).
+
+**The unexplained asymmetry, which is the next question.** Two orderings of the
+same operations disagree:
+
+```text
+construct a, construct b, generate a, generate b   -> users DIFFER (6883 m)
+construct a, generate a,  construct b, generate b  -> users IDENTICAL
+```
+
+Both set `np_random = RandomState(777)` immediately before generating. The only
+difference is whether `b` was constructed before `a` generated. That points at
+**mutable state shared across instances** — class-level or module-level —
+touched during construction, rather than at any per-instance seed. It would
+explain why user layout depends on *how many environments have been built*,
+which is exactly the shape of the audit defect: `build_pinned_env` is called
+once per arm.
+
+This is recorded as a narrowed hypothesis, **not** a conclusion. It rests on two
+runs, and the session that found it was long. The next session should confirm or
+kill it before building `user_world_seed` on top, because seeding a per-instance
+RNG would not fix a cross-instance shared-state defect — it would hide it, which
+is the precise failure this whole round exists to stop repeating.
+
 What is genuinely defective is the **stated rationale**, not the arithmetic:
 `bootstrap_ratio_ci`'s docstring (`:136`) justifies resampling episodes rather
 than arms by asserting that "arms are CRN-paired inside one" episode. They are

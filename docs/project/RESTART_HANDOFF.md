@@ -97,6 +97,23 @@ become reproducible. Deferred deliberately rather than rushed before a session
 switch — a half-applied change to environment semantics is worse than a clean
 seam.
 
+**Do this first, before writing any seeding code.** The source of the user-world
+divergence is narrowed but *not* confirmed, and the last append in the evidence
+note has the table. Ruled out: the global `np.random`, config divergence,
+inherent nondeterminism, and dependence on BS/station geometry. What remains is
+an ordering asymmetry —
+
+```text
+construct a, construct b, generate a, generate b   -> users DIFFER (6883 m)
+construct a, generate a,  construct b, generate b  -> users IDENTICAL
+```
+
+— which points at **mutable state shared across instances**, touched at
+construction. Confirm or kill that first. If it is real, adding a per-instance
+`user_world_seed` would *hide* the defect rather than fix it, and hiding a
+defect behind a seed is the exact failure this round exists to stop repeating.
+Two runs is thin evidence and the session that produced it was long.
+
 **The trap to expect:** `tests/env_user_population_determinism_test.py` asserts
 that two fresh envs with the same seed do **not** share users. Implementing task
 14 will make it fail. That is by design and the failure message says so — it is a
