@@ -10,6 +10,7 @@ $config = Get-Content -Raw -LiteralPath $configPath
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$operations = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
 
 if (-not $config.Contains('[agents."HMASDExperimentOperator"]') -or
     -not $config.Contains('config_file = "./agents/hmasd-experiment-operator.toml"')) {
@@ -21,7 +22,7 @@ foreach ($required in @(
     'model_reasoning_effort = "low"',
     'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
-    'active Project Manager',
+    'active Research Operations Manager',
     'already-authorized scientific boundary',
     'Monitoring is silent',
     'Do not emit commentary, progress updates, ETA messages',
@@ -41,14 +42,14 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',
-    'parent=project_manager',
+    'parent=research_operations_manager',
     'model=gpt-5.6-luna',
     'reasoning_effort=low',
     'progress_notifications=forbidden',
     'terminal_notification_count=exactly_one',
     'terminal_values=COMPLETE|ERROR',
     'cross_session_send=forbidden_native_final_return_only',
-    'Project Manager supplies',
+    'Research Operations Manager supplies',
     'execution mode from `fresh|retry|resume|restart`',
     'unchanged authorized-boundary binding',
     'selects among scientific outcomes',
@@ -63,17 +64,19 @@ if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('pare
 }
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',
-    'operational_recovery_owner=project_manager',
-    'operational_recovery_within_authorized_scientific_boundary=automatic_without_per_attempt_user_reauthorization',
-    'operational_recovery_fixed_attempt_limit=none',
     'operational_recovery_scientific_iteration_cost=zero',
-    'operational_recovery_scientific_disposition=none',
-    'operational_recovery_frozen_scientific_contract_mutation=forbidden',
-    'operational_recovery_scientific_outcome_selection=forbidden',
+    'operational_recovery_owner=research_operations_manager',
     'registered native child',
     '.agents/roles/EXPERIMENT_OPERATOR.md',
     'No role reads every routed document')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
+}
+foreach ($required in @(
+    'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
+    'operational_recovery_reauthorization=not_required_per_attempt',
+    'operational_recovery_scientific_iteration_cost=zero',
+    'Automatic `retry`, `resume` or `restart`')) {
+    if (-not $operations.Contains($required)) { throw "Operations recovery contract missing: $required" }
 }
 $catalogMatch = [regex]::Match($config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
 if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }

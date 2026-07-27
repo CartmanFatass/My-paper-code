@@ -4,7 +4,7 @@
 role=code_scout
 callable_agent_type=hmasd-code-scout
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=code_project_manager
 authority=one_exact_read_only_mapping_assignment
 scientific_authority=none
 write_authority=none

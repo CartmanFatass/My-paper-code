@@ -6,7 +6,7 @@
 role=experiment_operator
 callable_agent_type=hmasd-experiment-operator
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=research_operations_manager
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_authorized_run
@@ -28,7 +28,7 @@ task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
 
 ## Exact assignment
 
-Project Manager supplies all of the following before spawn from its exact
+Research Operations Manager supplies all of the following before spawn from its exact
 accepted source package:
 
 - one source commit, one exact run identity, and its assigned run root;
@@ -55,7 +55,7 @@ file; terminal diagnostics may read the assigned paths after exit or handle
 loss.
 
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
-is sent to Project Manager. The only parent notification is the child's
+is returned to Research Operations Manager. The only parent notification is the child's
 single final return:
 
 ```text
@@ -88,5 +88,5 @@ or interprets scientific meaning.
 
 An operational `ERROR` costs zero scientific iterations and carries
 no scientific disposition or abandonment. The operator reports the mechanical
-failure once; Project Manager alone decides whether a later recovery assignment
+failure once; Research Operations Manager alone decides whether a later recovery assignment
 still fits the existing user-authorized scientific boundary.

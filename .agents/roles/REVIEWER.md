@@ -4,7 +4,7 @@
 role=reviewer
 callable_agent_type=hmasd-reviewer
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=code_project_manager
 authority=one_exact_read_only_integrated_package_review
 scientific_authority=none
 write_authority=none

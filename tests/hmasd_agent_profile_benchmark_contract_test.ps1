@@ -106,7 +106,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=external_review_operator_brokered_jsonl_sentinel',
+    'observation_mode=research_operations_manager_brokered_jsonl_sentinel',
     'terminal_notification_count=exactly_one',
     'answer_now_activated=false')) {
     if (-not $monitorRole.Contains($required)) {

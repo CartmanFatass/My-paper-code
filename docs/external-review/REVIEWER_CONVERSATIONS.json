@@ -1,37 +1,25 @@
 {
-  "schema_version": 37,
+  "schema_version": 38,
   "updated": "2026-07-26",
   "round_operator": {
-    "kind": "dedicated_external_review_operator_task",
+    "kind": "research_operations_manager_transport_mode",
     "external_scientific_decision": "external_pro_binding_within_user_boundary",
-    "decision_intake": "project_manager_exact_raw_file_routing",
-    "git_boundary_owner": "project_manager"
+    "decision_intake": "same_task_exact_raw_routing",
+    "git_boundary_owner": "research_operations_manager"
   },
-  "intertask_transport_contract": {
+  "transport_contract": {
     "skill": "$hmasd-review-round",
     "browser_skill": "$browser:control-in-app-browser",
-    "transport_owner": "dedicated_external_review_operator",
-    "cross_task_routing_skill": "$hmasd-cross-task-routing",
-    "target_identity": "fixed_role_session_from_AGENTS.md",
-    "route_cache": "forbidden",
-    "model_thinking_preservation": "pre_send_read_only_probe_explicit_echo",
-    "live_settings_source": "read_only_local_codex_state",
-    "live_settings_probe": ".agents/skills/hmasd-cross-task-routing/scripts/read_codex_thread_settings.py",
-    "live_settings_cache": "forbidden",
-    "settings_unavailable_action": "fail_closed_no_send",
-    "tool_call_visibility": "explicit_model_and_thinking_parameters",
-    "payload_route_settings": "forbidden",
-    "route_replacement": "explicit_user_direction_then_workflow_design_commit",
+    "transport_owner": "research_operations_manager",
     "response_monitor_agent_type": "hmasd-pro-response-monitor",
     "response_monitor_model": "gpt-5.6-luna",
     "response_monitor_effort": "low",
-    "response_monitor_owner": "dedicated_external_review_operator",
+    "response_monitor_owner": "research_operations_manager",
     "response_monitor_uniqueness": "one_per_submitted_turn",
-    "response_monitor_observation": "external_review_operator_brokered_jsonl_sentinel",
+    "response_monitor_observation": "research_operations_manager_brokered_jsonl_sentinel",
     "response_monitor_sentinel_tool": "scripts/hmasd_pro_response_sentinel.py",
     "response_monitor_progress_notifications": "forbidden",
-    "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_probe_confirmed_project_manager_file_notification",
-    "retired_task_output_authority": "none"
+    "terminal_order": "monitor_terminal_then_archive_exact_raw_then_provenance_intake_then_confirm_monitor_absence_then_resume_operations_loop"
   },
   "reviewers": {
     "open_divergent": {
@@ -39,7 +27,7 @@
       "conversation_id": "6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "url": "https://chatgpt.com/c/6a5a7735-ab30-83e8-bb88-d0cfb3cea56c",
       "expected_model_ui": "Pro",
-      "transport": "external_review_operator_in_app_browser",
+      "transport": "research_operations_manager_in_app_browser",
       "question_file": "20_PRO_OPEN_QUESTION.md",
       "raw_file": "21_PRO_OPEN_RAW.md"
     }

@@ -29,7 +29,7 @@ Select a scheduled action by information gain, cost and reversibility, using
 this default order: derivation, counterexample, reanalysis of accepted evidence,
 constructive toy, bounded prototype, formal experiment. An action is a resource
 decision, not an epistemic declaration. Unscheduled ideas retain explicit
-reactivation conditions. The active Project Manager and External Pro role
+reactivation conditions. Research Operations Manager and the External Pro role
 contracts determine who performs this selection. Workflow Design Manager has no
 active research-selection role.
 

@@ -18,7 +18,7 @@ code_acceptance_authority=none
 git_execution=direct_for_workflow_design_surfaces
 one_artifact_one_acceptance_owner=true
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_session
+cross_task_target_identity=exact_fixed_requester_role_session
 cross_task_route_cache=forbidden
 cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 workflow_change_skill=hmasd-workflow-change-audit
@@ -32,8 +32,9 @@ workflow_material_plan_drift=reconfirmation_required
 workflow_collaboration_runtime_authority=none
 ```
 
-After the router, read the exact user or Project-Manager workflow-design
-assignment and this charter. Complete read-only workflow-design checks directly.
+After the router, read the exact user, Code Project Manager or Research
+Operations Manager workflow-design assignment and this charter. Complete
+read-only workflow-design checks directly.
 For every assignment that can mutate workflow-design surfaces, use
 `$hmasd-collaborative-workflow-design` to understand requirements, present one
 exact plan and obtain the user's natural-language confirmation before loading
@@ -52,40 +53,43 @@ not a native child, research coordinator or scientific authority.
   registered `hmasd-workflow-cost-reviewer` is used only when the user
   explicitly requests that audit; it is never an automatic acceptance gate.
 - Direct Git integration only for an accepted, exact workflow-design path set.
-  PM separately owns code, runtime evidence, individual review packages and
-  active state; overlapping writes are forbidden.
+  Code Project Manager separately owns code; Research Operations Manager owns
+  runtime evidence, review packages and active state. Overlapping writes are
+  forbidden.
 - Returning the accepted workflow-design commit and exact changed paths through
-  `$hmasd-cross-task-routing` to the fixed PM session after reading and explicitly
-  echoing that session's live model and thinking as visible tool parameters. The requester
-  decides when to apply the design to an active code boundary.
+  `$hmasd-cross-task-routing` to the fixed Code Project Manager or Research
+  Operations Manager session that made the request, after reading and explicitly
+  echoing that session's live model and thinking. A change affecting both roles
+  sends one reload notification to each fixed session.
 
 ## Registered review and experiment design
 
 ```text
 design_assertion_audit=before_scientific_freeze
 routine_preimplementation_code_science_review=forbidden
-code_science_alignment_audit=once_after_pm_implementation_acceptance
+code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance
 code_science_alignment_compute_budget=zero
 code_science_alignment_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 code_science_alignment_new_algorithm_or_search=forbidden
 correction_recheck_count<=1
-external_review_runtime_owner=project_manager_plus_external_review_operator
-experiment_runtime_owner=project_manager_plus_hmasd_experiment_operator
+external_review_runtime_owner=research_operations_manager
+experiment_runtime_owner=research_operations_manager_plus_hmasd_experiment_operator
 ```
 
-This role owns only the design of those invariants. At runtime PM pushes its own
-review files and sends only their exact identity and return route to the
-dedicated External Review Operator. That task alone performs browser mechanics,
-archives exact raw, and returns the file path to PM. PM never loads those
-mechanics.
+This role owns only the design of those invariants. At runtime Research
+Operations Manager creates and pushes review files, performs the registered
+browser transport as a restricted mode, archives exact raw and resumes the
+operations loop. Code Project Manager never loads browser mechanics.
 
 The registered `hmasd-experiment-operator` is the fixed
 `gpt-5.6-luna/low` child that holds one authorized train/evaluate/analyze run
-and its silent monitoring. It returns exactly one terminal payload to PM. Do
-not add a second experiment monitor or relay.
+and its silent monitoring. It returns exactly one terminal payload to Research
+Operations Manager. Do not add a second experiment monitor or relay.
 
-For claim-bearing code, PM accepts and pushes the implementation, creates the
-commit-bound `CODE_SCIENCE_INDEX.md`, then routes the single alignment audit.
+For claim-bearing code, Code Project Manager accepts and pushes the implementation,
+creates the commit-bound `CODE_SCIENCE_INDEX.md`, and returns that exact commit
+and index to Research Operations Manager. Research Operations Manager routes the
+single alignment audit.
 Index rows remain:
 
 ```text
@@ -93,8 +97,8 @@ claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_in
 ```
 
 An exceptional `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` is allowed only for one
-concrete scientific ambiguity, executable impossibility or code counterexample;
-it is not a routine review of PM's implementation plan.
+  concrete scientific ambiguity, executable impossibility or code counterexample;
+  it is not a routine review of Code Project Manager's implementation plan.
 
 ## Workflow-design loop
 
@@ -135,11 +139,12 @@ then commit and push only owned paths.
 
 ## Must not
 
-- Read or edit `CURRENT_WORK.md`; select or assign active code work; dispatch an
-  External Review Operator or Experiment Operator; intake a Pro response or run
+- Read or edit `CURRENT_WORK.md`; select or assign active code work; operate Pro
+  transport or dispatch an Experiment Operator; intake a Pro response or run
   result; update iteration reports or scientific ledgers; or continue a grant.
-- Make, adopt, reject or reinterpret science; design or accept code; inspect PM
-  implementation as code review; or edit PM-owned source, tests and artifacts.
+- Make, adopt, reject or reinterpret science; design or accept code; inspect a
+  Code Project Manager implementation as code review; or edit another role's
+  source, tests and artifacts.
 - Control the browser, launch compute, create runtime review packages, or turn
   the critical-point index into a hash handoff or separate acceptance owner.
 - Store live task session/model/effort in static registry data or create a relay,

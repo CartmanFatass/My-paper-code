@@ -7,9 +7,10 @@ description: Use in the dedicated Workflow Design Manager task when designing or
 
 ## Contract boundary
 
-This is a Workflow Design Manager workflow-design procedure. It grants no scientific,
-formal-compute, code-acceptance or runtime authority. External Pro owns science,
-Project Manager owns code and runtime, and Workflow Design Manager alone accepts
+This is a Workflow Design Manager workflow-design procedure. It grants no
+scientific, formal-compute, code-acceptance or runtime authority. External Pro
+owns science, Code Project Manager owns code and technical acceptance, Research
+Operations Manager owns runtime, and Workflow Design Manager alone accepts
 workflow-design changes.
 Generic planning, ticket, TDD and review-stack Skills remain disabled.
 
@@ -22,7 +23,8 @@ Use this Skill when a mutation touches any of these coupled surfaces:
 - tests that enforce those surfaces.
 
 `docs/project/CURRENT_WORK.md`, runtime review instances, run artifacts, reports
-and ledgers are PM-owned runtime state, not Workflow Design Manager design surfaces.
+and ledgers are Research-Operations-Manager-owned state, not Workflow Design
+Manager design surfaces.
 Workflow Design Manager never reads or edits them. `docs/project/RESTART_HANDOFF.md`
 also remains outside this procedure and is written only on explicit user request.
 
@@ -53,7 +55,7 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    profile names exactly one existing role charter. Every profile is registered
    exactly once; every role and Skill is routed. Remove superseded live paths
    instead of keeping compatibility aliases. Use
-   a separate exact PM assignment with `hmasd-agile-research-development` for
+   a separate exact Code Project Manager assignment with `hmasd-agile-research-development` for
    any source-code slice; Workflow Design Manager never edits source.
 5. **Verify closure.** Run the bundled checker, the affected focused contract
    tests and targeted negative searches from the impact matrix. Inspect the

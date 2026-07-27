@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use in the dedicated HMASD External Review Operator task for GPT-5.6 Pro browser transport, natural-completion monitoring, exact raw archival, and probe-confirmed completion notification to Project Manager.
+description: Use in the persistent HMASD Research Operations Manager task for GPT-5.6 Pro browser transport, natural-completion monitoring, exact raw archival, and local return to the operations loop.
 ---
 
 # HMASD External Pro Review Transport
@@ -10,23 +10,20 @@ description: Use in the dedicated HMASD External Review Operator task for GPT-5.
 Role contracts are normative. Read the root `AGENTS.md` and these relevant role
 documents before operating:
 
-- `.agents/roles/EXTERNAL_REVIEW_OPERATOR.md`
+- `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`
 - `.agents/roles/EXTERNAL_PRO.md`
 
 This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
-Project Manager authors and pushes its review files, uses
-`$hmasd-cross-task-routing` with the fixed External Review Operator session,
-reads and explicitly echoes that session's live model and thinking in the tool
-call, then sends one exact assignment without route settings in its payload.
-Activate `$hmasd-review-round`
-only in that operator task and use `$browser:control-in-app-browser` for
-submission and archival. After one exact fence is visibly submitted, assign
+Research Operations Manager authors and pushes its review files, then activates
+`$hmasd-review-round` in the same persistent task and uses
+`$browser:control-in-app-browser` for submission and archival. After one exact
+fence is visibly submitted, assign
 the registered nonpersistent `hmasd-pro-response-monitor` to observe the
-operator-brokered metadata sentinel for that turn. The child never opens the
-browser. Do not create another transport task, relay, ad hoc monitor or Project-Manager
+operations-manager-brokered metadata sentinel for that turn. The child never
+opens the browser. Do not create another transport task, relay, ad hoc monitor or manager
 polling loop.
 
 ## Required inputs
@@ -57,7 +54,7 @@ An identity mismatch stops transport for correction; it does not authorize
 editing, paraphrasing, or validating the package.
 
 
-## Dedicated-operator transport
+## Operations-manager transport mode
 
 ### Deterministic browser state machine
 
@@ -68,9 +65,9 @@ visible or the page title looks familiar.
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | External Review Operator initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
+| `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, External Review Operator confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake, confirms monitor absence, and uses `$hmasd-cross-task-routing` with the fixed Project Manager session plus its immediately probed live model and thinking to send one terminal notification without route settings in the payload. | Project Manager receives the returned file paths and routes the exact raw; the operator stops. |
+| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
 completion evidence, not a substitute for message identity and inactive
@@ -101,7 +98,7 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
 
 Keep one registered page, one append-only sentinel and exactly one registered
 Pro-response monitor while pending. Do not create a heartbeat, automation
-poller, second monitor or transport task. External Review Operator owns all
+poller, second monitor or transport task. Research Operations Manager owns all
 browser access because a native child does not inherit the in-app-browser
 binding. At ordinary task wakeups, the operator takes one bounded read-only page
 snapshot and calls `scripts/hmasd_pro_response_sentinel.py record`; it does not
@@ -195,7 +192,7 @@ and one more stable snapshot before deciding. If an explicit response error has
 no completed assistant message, a same-turn `Retry` may be used once as a
 recorded recovery after confirming it cannot submit another freshness fence.
 Do not assess whether requested scientific sections are present; that belongs
-to Project Manager after exact raw delivery.
+to External Pro's scientific disposition after exact raw delivery.
 
 ### Evidence-access transport recovery
 
@@ -203,8 +200,8 @@ An assistant message that explicitly says it could not read one or more
 question-listed evidence paths, asks for those files, or reports unavailable
 repository/connector access is an operational transport diagnostic. This is an
 objective provenance failure, not a scientific judgment about response
-completeness. Do not archive that diagnostic as scientific raw and do not send
-it to Project Manager as the round answer.
+completeness. Do not archive that diagnostic as scientific raw or treat it as
+the round answer.
 
 Recover in the same registered conversation and under the same accepted fence:
 
@@ -230,7 +227,7 @@ Recover in the same registered conversation and under the same accepted fence:
    continuation stating its commit, allow-list identity and that the prior
    response is a transport diagnostic. Do not submit another freshness fence.
 4. The candidate raw is the stable assistant response after the
-   latest External Review Operator transport-repair message, still anchored to the original
+   latest Research Operations Manager transport-repair message, still anchored to the original
    matching fence. Apply the same two-snapshot and generation-control checks to
    that candidate.
 5. If archive ingestion explicitly fails, try one materially distinct
@@ -252,14 +249,9 @@ After stable completion:
    intake. Record no scientific quality classification.
 3. Confirm the registered response monitor is terminal and no second monitor or
    heartbeat exists.
-4. Use `$hmasd-cross-task-routing` with the fixed Project Manager session, read
-   and explicitly echo its live model and thinking in the visible tool call,
-   then send exactly one completion notification without route settings in the
-   payload. An unavailable session or settings probe fails closed.
-5. Keep transport facts separate from scientific content. External Pro owns the
-   in-boundary scientific disposition; Project Manager routes the exact raw
-   without reinterpretation. The required completion notification is
-   mechanical, not a semantic relay.
+4. Keep transport facts separate from scientific content. External Pro owns the
+   in-boundary scientific disposition; Research Operations Manager resumes the
+   operations loop from the exact raw without reinterpretation.
 
 Do not compute or require input-file or raw-response hashes. The pushed Git
 commit identifies reviewer inputs; exact reread equality plus the later Git
@@ -268,7 +260,7 @@ commit identifies archived raw.
 The required order is:
 
 ```text
-monitor terminal -> exact raw -> provenance intake -> monitor absence -> probe-confirmed Project-Manager completion notification -> Project-Manager raw routing
+monitor terminal -> exact raw -> provenance intake -> monitor absence -> resume operations loop
 ```
 
 ## Recovery and retirement
@@ -294,9 +286,7 @@ include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.
 
 At terminal success or terminal block, confirm the response monitor is no
-longer live, use `$hmasd-cross-task-routing` with the fixed Project Manager
-session, read and explicitly echo its live model and thinking in the visible
-tool call, and send exactly one terminal notification without route settings in
-the payload. A stale response from
+longer live and return control locally to the Research Operations Manager
+operations loop. A stale response from
 another round has no authority and never replaces the exact current-round raw
 or launches a successor.

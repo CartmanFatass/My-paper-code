@@ -23,10 +23,10 @@ $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' 
 $expectedRoles = @(
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
-    'EXTERNAL_REVIEW_OPERATOR.md',
     'EXTERNAL_PRO.md',
     'IMPLEMENTER.md',
-    'PROJECT_MANAGER.md',
+    'CODE_PROJECT_MANAGER.md',
+    'RESEARCH_OPERATIONS_MANAGER.md',
     'PRO_RESPONSE_MONITOR.md',
     'REVIEWER.md',
     'VERIFIER.md',
@@ -38,18 +38,22 @@ if (Compare-Object $expectedRoles $roles) {
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
-$pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$codePmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
+$operationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
+$workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
+$assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
+$assertionNormalized = $assertion -replace '\s+', ' '
+$handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 
 if (-not $WorkflowDesignOnly) {
     $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
     $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
     $plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
-    $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 }
 foreach ($required in @(
     'document_kind=role_router',
@@ -57,26 +61,24 @@ foreach ($required in @(
     'project_history_in_router=forbidden',
     'role_specific_procedure_in_router=forbidden',
     'dedicated Workflow Design Manager task',
-    'Project Manager task',
+    'Code Project Manager task',
+    'Research Operations Manager task',
     'registered native child',
-    'docs/project/CURRENT_WORK.md` is PM-only code attention and runtime state',
+    'docs/project/CURRENT_WORK.md` is Research Operations Manager operational state',
     'workflow_design_manager_workflow_design_authority=exclusive',
     'workflow_design_manager_workflow_runtime_authority=none',
     'workflow_design_manager_current_work_authority=none',
     'workflow_design_manager_git_authority=direct_for_workflow_design_surfaces',
     'workflow_design_manager_external_review_runtime_authority=none',
     'workflow_design_manager_experiment_runtime_authority=none',
-    'project_manager_code_authority=exclusive',
-    'project_manager_runtime_authority=exclusive',
-    'project_manager_current_work_authority=exclusive',
-    'project_manager_scientific_authority=none',
-    'project_manager_git_authority=direct_for_code_runtime_evidence_and_state',
-    'project_manager_remote_repository_authority=permanent_user_grant',
-    'project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git',
-    'project_manager_external_review_dispatch_and_result_routing=exclusive',
-    'project_manager_experiment_dispatch_and_result_routing=exclusive',
-    'external_review_operator_transport_authority=exclusive',
-    'External Review Operator task',
+    'code_project_manager_code_authority=exclusive',
+    'code_project_manager_technical_acceptance_authority=exclusive',
+    'code_project_manager_runtime_authority=none',
+    'code_project_manager_current_work_authority=none',
+    'research_operations_manager_runtime_authority=exclusive',
+    'research_operations_manager_current_work_authority=exclusive',
+    'research_operations_manager_external_review_transport_authority=exclusive',
+    'research_operations_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'hmasd-pro-response-monitor',
     'hmasd-collaborative-workflow-design',
@@ -95,8 +97,8 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
-    'project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
-    'external_review_operator_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -116,7 +118,7 @@ foreach ($required in @(
     'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
     'missing_scheduled_action_with_remaining_balance_and_possible_candidate=focused_external_pro_clarification',
     'scheduled_action_execution=exact_designated_only',
-    'project_manager_portfolio_reorder_or_compression=forbidden',
+    'research_operations_manager_portfolio_reorder_or_compression=forbidden',
     'valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue',
     'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
     'scheduled_action_presence=CONTINUE_only',
@@ -124,7 +126,7 @@ foreach ($required in @(
     'operational_recovery_reauthorization=not_required_per_attempt',
     'operational_recovery_scientific_iteration_cost=zero',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
-    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
+    if (-not $operationsRole.Contains($required)) { throw "Research Operations Manager role missing: $required" }
 }
 foreach ($required in @(
     'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
@@ -141,8 +143,8 @@ foreach ($required in @(
     'valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remaining_balance|current_portfolio|algorithm_principles_section_3')) {
     if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
 }
-if ($pmRole.Contains('portfolio_adjudication_authority=project_manager')) {
-    throw 'Project Manager role claims scientific portfolio adjudication'
+if ($operationsRole.Contains('portfolio_adjudication_authority=research_operations_manager')) {
+    throw 'Research Operations Manager claims scientific portfolio adjudication'
 }
 foreach ($required in @(
     'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
@@ -154,19 +156,38 @@ foreach ($required in @(
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
 }
+if ($agile.Contains('External Review Operator') -or
+    -not (($agile -replace '\s+', ' ').Contains('returns its exact commit and index to Research Operations Manager'))) {
+    throw 'Agile Skill retains a stale or ambiguous review route'
+}
+if ($assertionNormalized.Contains('Research Operations Manager executes the smallest repair') -or
+    -not $assertionNormalized.Contains('sends one exact correction assignment to Code Project Manager') -or
+    -not $assertionNormalized.Contains('After `CODE_ACCEPTED`')) {
+    throw 'Assertion audit assigns code repair to Research Operations Manager'
+}
+if (-not $handoff.Contains('Code Project Manager inspects only the G35 diff') -or
+    -not $handoff.Contains('and updates the code-science index') -or
+    -not $handoff.Contains('docs/research/designs/CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_INDEX.md') -or
+    -not $handoff.Contains('stages exactly the three G35 code/index paths') -or
+    -not $handoff.Contains('returns `CODE_ACCEPTED`') -or
+    -not $handoff.Contains('Research Operations Manager dispatches exactly one fresh') -or
+    $handoff.Contains('Research Operations Manager updates the G35 prelaunch note, code-science index')) {
+    throw 'Restart handoff violates code/operations ownership'
+}
+if ($workflowDesignManagerRole.Contains('Project-Manager workflow-design assignment')) {
+    throw 'Workflow Design Manager retains the retired requester identity'
+}
 
 if ($WorkflowDesignOnly) {
     Write-Output 'HMASD_RESEARCH_WORKFLOW_DESIGN_CONTRACT_OK'
     return
 }
 
-$workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
 $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
-$reviewOperatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md')
+$operationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
 $monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
-$assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
 foreach ($required in @(
@@ -179,7 +200,7 @@ foreach ($required in @(
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
     'workflow_design_manager_task=',
-    'code_science_alignment_position=after_pm_implementation_acceptance',
+    'code_science_alignment_position=after_code_project_manager_implementation_acceptance',
     'code_science_alignment_index=commit_bound_CODE_SCIENCE_INDEX_required',
     'routine_preimplementation_code_science_review=forbidden',
     'active_assignment_id=NO_ACTIVE_CODE_ASSIGNMENT_G33_ABANDONED',
@@ -228,7 +249,6 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'Project Manager directly stages, commits and pushes accepted code, runtime',
     'Manager separately stages only accepted workflow-design control-plane paths',
     'Native children never run Git',
     'fixed native child',
@@ -236,25 +256,20 @@ foreach ($required in @(
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
 foreach ($required in @(
-    'role_kind=sole_persistent_code_and_runtime_authority_task',
-    'project_code_authority=exclusive',
-    'project_runtime_authority=exclusive',
+    'role=code_project_manager',
+    'role_kind=persistent_code_and_technical_acceptance_task',
+    'code_authority=exclusive',
+    'runtime_authority=none',
     'workflow_design_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'current_work_owner=exclusive',
-    'external_review_dispatch_and_result_routing=exclusive',
-    'experiment_orchestration=registered_native_child',
+    'current_work_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_route_cache=forbidden',
     'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
-    'DESIGN_ASSERTION_AUDIT',
-    'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_INDEX.md',
-    'pre-implementation review',
-    'PM receives one terminal')) {
-    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
+    'CODE_ACCEPTED')) {
+    if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
     'role=workflow_design_manager',
@@ -269,7 +284,7 @@ foreach ($required in @(
     'code_authority=none',
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
+    'cross_task_target_identity=exact_fixed_requester_role_session',
     'cross_task_route_cache=forbidden',
     'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
     'never an automatic acceptance gate',
@@ -282,7 +297,7 @@ foreach ($required in @(
     'workflow_material_plan_drift=reconfirmation_required',
     'workflow_collaboration_runtime_authority=none',
     'routine_preimplementation_code_science_review=forbidden',
-    'code_science_alignment_audit=once_after_pm_implementation_acceptance',
+    'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
     'CODE_SCIENCE_INDEX.md',
     'hmasd-workflow-cost-reviewer')) {
@@ -298,7 +313,7 @@ foreach ($required in @(
     'NON_EXECUTABLE_EVIDENCE_DESIGN',
     'O(H*K_search)',
     'O(N*k_neighbor)')) {
-    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing complexity rule: $required" }
+    if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing complexity rule: $required" }
 }
 foreach ($roleText in @($implementerRole, $reviewerRole)) {
     foreach ($required in @(
@@ -319,23 +334,22 @@ foreach ($required in @(
     if (-not $costReviewerRole.Contains($required)) { throw "Cost Reviewer role missing: $required" }
 }
 foreach ($required in @(
-    'role=external_review_operator',
-    'transport_authority=exclusive_for_assigned_external_pro_round',
+    'role=research_operations_manager',
+    'external_review_transport_authority=exclusive',
+    'runtime_authority=exclusive',
+    'current_work_authority=exclusive',
     'scientific_authority=none',
-    'git_authority=none',
-    'answer_now_activation=forbidden',
-    'completion_notification=required_once',
-    'Project Manager',
+    'code_acceptance_authority=none',
+    'Research Operations Manager may request a workflow-design change directly',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_route_cache=forbidden',
     'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo')) {
-    if (-not $reviewOperatorRole.Contains($required)) {
-        throw "External Review Operator role missing: $required"
+    if (-not $operationsRole.Contains($required)) {
+        throw "Research Operations Manager role missing: $required"
     }
 }
-if (-not $pmRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
-    throw 'Project Manager role permits automatic handoff writing'
+if (-not $operationsRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
+    throw 'Research Operations Manager role permits automatic handoff writing'
 }
 foreach ($required in @(
     'write_trigger=explicit_user_request_only',
@@ -411,14 +425,14 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'scientific_acceptance_owner=external_pro',
-    'code_acceptance_owner=project_manager',
-    'runtime_owner=project_manager',
+    'code_acceptance_owner=code_project_manager',
+    'runtime_owner=research_operations_manager',
     'workflow_design_owner=workflow_design_manager',
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction',
     'code_science_audit_mode=contract_diff_only',
-    'code_science_audit_position=after_pm_implementation_acceptance',
+    'code_science_audit_position=after_code_project_manager_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'CODE_SCIENCE_INDEX.md',
@@ -446,7 +460,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=external_review_operator_brokered_jsonl_sentinel',
+    'observation_mode=research_operations_manager_brokered_jsonl_sentinel',
     'browser_authority=none',
     'progress_notifications=forbidden',
     'answer_now_activated=false')) {
@@ -457,7 +471,7 @@ if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELI
     throw 'Stale multi-review pipeline remains on the active line'
 }
 
-foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole, $workflowDesignManagerRole, $reviewOperatorRole, $proRole, $assertion)) {
+foreach ($text in @($agents, $current, $context, $plan, $agile, $codePmRole, $operationsRole, $workflowDesignManagerRole, $proRole, $assertion)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

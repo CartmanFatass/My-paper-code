@@ -9,8 +9,9 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 Read the root router, the role contract, and brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
-scientific decisions; Project Manager alone accepts code, directs engineering
-repair and owns direct Git integration. A bounded child requires an exact
+scientific decisions; Code Project Manager alone accepts code, directs
+engineering repair and owns code-side Git integration. Research Operations
+Manager owns runtime and transport. A bounded child requires an exact
 assignment and never scopes, accepts, or commits its work.
 
 ```text
@@ -38,13 +39,13 @@ A user-named one may be inspected only as reference.
 ## Operating loop
 
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
-   disposition and its design-audit status. Before implementation PM performs
+   disposition and its design-audit status. Before implementation Code Project Manager performs
    only a local feasibility read. It returns a concrete ambiguity,
-   impossibility or counterexample through the dedicated External Review
-   Operator as one focused clarification; there is no routine pre-implementation
-   Pro review. Pure operational work records why the audit is not triggered.
+   impossibility or counterexample to Research Operations Manager for one
+   focused Pro clarification; there is no routine pre-implementation review.
+   Pure operational work records why the audit is not triggered.
 2. **Bound.** Use the brief and
-   `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Manager defines code
+   `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Code Project Manager defines code
    files, engineering choices, exclusions and completion inside the Pro-frozen
    semantics. Before implementation, write the zero-compute `H`, fixed
    `K_search`, hypothetical-transition bound and projected wall clock. Add no
@@ -60,14 +61,15 @@ A user-named one may be inspected only as reference.
 6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
-   changed claim-bearing code, PM writes the commit-bound critical-point index,
-   pushes the accepted implementation, and routes the one existing comparison-only
-   `CODE_SCIENCE_ALIGNMENT_AUDIT` after implementation acceptance and before a
-   formal run. The audit may identify a concrete contract mismatch but cannot
+   changed claim-bearing code, Code Project Manager writes the commit-bound
+   critical-point index, pushes the accepted implementation and returns its
+   exact commit and index to Research Operations Manager. Research Operations
+   Manager routes the one comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` before
+   a formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
 Classify every terminal event before continuing. A purely operational failure
-returns control to PM for automatic `retry`, `resume` or `restart` inside the
+returns control to Research Operations Manager for automatic `retry`, `resume` or `restart` inside the
 unchanged authorized scientific boundary, without per-attempt reauthorization
 or a fixed attempt count. Preserve the estimator, source, seed law, budgets,
 thresholds, backend constraints and branch semantics; never weaken checks or
@@ -87,7 +89,7 @@ episode. Nested remaining-horizon rollout at every real step, recursive rollout
 inside a candidate rollout, tree/beam/MCTS search and horizon-growing candidate
 sets are forbidden regardless of C++ speed or parallel hardware. A nonformal
 exercise is capped at 20 minutes and a formal iteration at eight cumulative
-hours. Exceeding the bound returns `NON_EXECUTABLE_EVIDENCE_DESIGN` to PM, which
+hours. Exceeding the bound returns `NON_EXECUTABLE_EVIDENCE_DESIGN` to Code Project Manager, which
 first chooses a cheaper technical realization of the same frozen scientific
 predicate. Pro is asked only when the predicate itself cannot survive the
 bound, and is never asked to design a solver. No conclusion-bearing iteration
@@ -102,22 +104,22 @@ choice and requires its own design audit.
 
 Router, role, Skill, native-profile, registry and active workflow-contract
 changes belong to Workflow Design Manager under `hmasd-workflow-change-audit`. This
-Skill remains PM's implementation loop for any separately assigned source-code
+Skill remains Code Project Manager's implementation loop for any separately assigned source-code
 slice.
 
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
-- Isolated worktrees use `scripts/hmasd_workspace_ticket.py`: PM creates one
+- Isolated worktrees use `scripts/hmasd_workspace_ticket.py`: Code Project Manager creates one
   ticket from the actual Git worktree and base commit, the child resolves that
-  ticket before editing, and PM verifies it after return. Never transcribe,
+  ticket before editing, and Code Project Manager verifies it after return. Never transcribe,
   infer or repair an absolute worktree path in prose.
-- Children do not perform Git. Project Manager integrates the exact accepted
+- Children do not perform Git. Code Project Manager integrates the exact accepted
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
-- Subtasks close on evidence plus one fresh PM code check. The required Pro
-  code-science audit occurs once after PM implementation acceptance; it is a
+- Subtasks close on evidence plus one fresh Code Project Manager check. The required Pro
+  code-science audit occurs once after Code Project Manager implementation acceptance; it is a
   contract diff and owns scientific alignment, not code acceptance or
   implementation design. Additional
   code review is allowed only after a failed check or concrete engineering
@@ -144,7 +146,8 @@ operational_recovery_scientific_iteration_cost=zero
 early_termination_boundary=unrecoverable_external_technical_impossibility_only
 ```
 
-Inside the active authorized nine-valid-iteration grant, do not stop for user
+Research Operations Manager applies the terminal-event routing below. Inside
+the active authorized nine-valid-iteration grant, do not stop for user
 input, a permission prompt, a scientific result or protected-science ambiguity.
 Archive every valid success, failure, mixed or
 underpowered result and return it to External Pro. Pro maintains multiple live
@@ -153,8 +156,9 @@ or parked directions when evidence supports them. Pro returns
 otherwise it returns `CLOSE_NO_EXECUTABLE_CANDIDATE` only when the full preserved
 portfolio has no executable in-scope candidate, or `CONTINUE` with one current
 resource-consuming action. That scheduling boundary provides attribution and
-does not establish scientific uniqueness. PM executes only the designated
-`CONTINUE` action and never reorders or compresses the portfolio. While balance
+does not establish scientific uniqueness. Research Operations Manager executes
+only the designated `CONTINUE` action and never reorders or compresses the
+portfolio. While balance
 remains, an absent or ambiguous action with a possible in-scope candidate causes
 automatic focused Pro clarification. Terminate earlier only for an unrecoverable
 external technical impossibility after applicable automatic recovery cannot

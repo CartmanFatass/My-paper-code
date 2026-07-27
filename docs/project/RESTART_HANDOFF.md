@@ -6,7 +6,7 @@ write_trigger=explicit_user_request_only
 automatic_create_or_update=forbidden
 date=2026-07-26
 status=PAUSED_BY_USER_FOR_SESSION_RESTART
-active_role=root_project_manager
+active_role=research_operations_manager
 controller_role=none
 branch=aggressive
 implementation_base_head=8478935bdd48e7f41b050671afce788b91d68b89
@@ -19,20 +19,18 @@ live_child_work=none_all_registered_children_terminal
 
 ## Restart role resolution
 
-The replacement root task is the Project Manager, not a Controller. It must
-load `AGENTS.md`, `docs/project/CURRENT_WORK.md`,
-`.agents/roles/PROJECT_MANAGER.md` and the active
-`.agents/skills/hmasd-agile-research-development/SKILL.md` before resuming.
-Register the replacement PM task/model/effort in the PM-owned live keys in
-`CURRENT_WORK.md`; also replace the active review return target when the next
-review package is staged. Do not change workflow design or any Workflow Design
-Manager-owned path.
+The replacement operational task is Research Operations Manager. It loads
+`AGENTS.md`, `docs/project/CURRENT_WORK.md` and
+`.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`. Code work is sent to the fixed
+Code Project Manager, which loads its exact assignment and
+`.agents/roles/CODE_PROJECT_MANAGER.md` but never `CURRENT_WORK.md`. Do not
+change workflow design or any Workflow Design Manager-owned path.
 
 Every cross-task send must resolve the target task's live model and reasoning
-effort immediately before sending and pass both explicitly. The dedicated
-External Review Operator remains task
-`019f9c6a-9401-7ae0-ace5-dd827dccba2b`, currently
-`gpt-5.6-luna/high`. Experiment work must use exactly one registered
+effort immediately before sending and pass both explicitly. Research Operations
+Manager remains task `019f9c6a-9401-7ae0-ace5-dd827dccba2b`; Code Project
+Manager remains task `019f9e4f-f4d0-7fe0-b214-c47fd034e84d`. Model and effort
+are live task settings and are not stored here. Experiment work uses one registered
 nonpersistent `hmasd-experiment-operator` at `gpt-5.6-luna/low` for each exact
 authorized run. Re-resolve these identities rather than silently relying on
 this snapshot.
@@ -72,11 +70,12 @@ credit rule, threshold, evidence volume, estimand or first-match branch:
 
 ## Uncommitted accepted-scope implementation
 
-Only these G35 paths contain the correction and are owned by the replacement
-PM:
+Only these G35 paths contain the correction or its commit-bound index and are
+owned by Code Project Manager:
 
 - `scripts/run_continuous_roster_reactive_reduction_g35.py`
 - `tests/run_continuous_roster_reactive_reduction_g35_test.py`
+- `docs/research/designs/CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_INDEX.md`
 
 The runner currently adds artifact digests, finite nonnegative stage-time
 validation, full three-artifact preflight validation, exact frozen inventory
@@ -133,29 +132,30 @@ reactivated without a new direct user instruction.
 
 ## Exact resume sequence
 
-1. Confirm the worktree contains only the two G35 correction paths, this
-   handoff file if not yet integrated, and the four protected G33 paths.
-2. Inspect only the G35 diff. Rerun the complete 82-test shared suite and the
-   relevant syntax compilation. If a failure is within the frozen correction,
-   repair only that boundary and rerun proof-sized checks.
-3. Stage only the two G35 correction paths, assert the exact cached path set,
-   run `git diff --cached --check`, commit and push `aggressive`.
-4. Dispatch exactly one fresh bounded nonformal G35 exercise through a newly
+1. Research Operations Manager sends one exact G35 correction assignment and
+   the three code-owned paths above to Code Project Manager.
+2. Code Project Manager inspects only the G35 diff, reruns the complete 82-test
+   shared suite and relevant syntax compilation, repairs only the frozen
+   correction boundary if required, and updates the code-science index.
+3. Code Project Manager stages exactly the three G35 code/index paths, checks the
+   cached path set and `git diff --cached --check`, commits and pushes
+   `aggressive`, then returns `CODE_ACCEPTED` with commit, paths and verification.
+4. Research Operations Manager dispatches exactly one fresh bounded nonformal G35 exercise through a newly
    registered Luna/low Experiment Operator. Use a new run root and the corrected
    code commit. The old run at
    `logs/nonformal_continuous_roster_reactive_reduction_g35_cpu_20260726_42b9f85_pm1`
    is operational evidence for the old code but is not an admissible preflight
    for the corrected digest-binding contract.
-5. PM must mechanically reread all three new artifacts, independently validate
+5. Research Operations Manager must mechanically reread all three new artifacts, independently validate
    exact identity, inventory, checkpoint/exposure/lifecycle closure, digest
    binding and recomputed projection without rerunning the experiment.
-6. Update the G35 prelaunch note, code-science index, design implementation
-   status and `CURRENT_WORK.md`; stage a correction-only alignment recheck
-   package bound to the corrected implementation and accepted target commit.
-7. Send that exact pushed package to the dedicated External Review Operator
-   with its live task/model/effort and the replacement PM's exact return
-   task/model/effort. One correction-only submission is allowed; do not reopen
-   the design or request a full audit.
+6. Research Operations Manager updates the G35 prelaunch note, design
+   implementation status and `CURRENT_WORK.md`, then stages a correction-only
+   alignment recheck package bound to the corrected implementation and accepted
+   target commit.
+7. Research Operations Manager submits that exact pushed package directly in
+   its registered browser transport mode. One correction-only submission is
+   allowed; do not reopen the design or request a full audit.
 8. Start no formal compute unless the correction-only result is exactly
    `ALIGNED`. Then use the corrected nonformal preflight root and frozen formal
    token through one registered Luna/low Experiment Operator.

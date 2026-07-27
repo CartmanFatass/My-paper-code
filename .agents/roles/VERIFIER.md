@@ -4,7 +4,7 @@
 role=verifier
 callable_agent_type=hmasd-verifier
 role_kind=registered_nonpersistent_native_child
-parent=project_manager
+parent=code_project_manager
 authority=one_exact_verification_assignment
 scientific_authority=none
 source_write_authority=none

@@ -12,8 +12,8 @@ root `AGENTS.md` supplies fixed session addresses only. The target task owns its
 live model and reasoning effort; neither value is stored in Git, inferred from a
 role default, copied from an assignment, or cached between sends.
 
-This protocol does not route native children or replace the External Pro
-browser conversation binding. A session is an address, not authority. Dynamic
+This protocol does not route native children or replace Research Operations
+Manager's External Pro browser binding. A session is an address, not authority. Dynamic
 session discovery, liveness polling and conversation-local route caches remain
 forbidden.
 
@@ -22,8 +22,8 @@ forbidden.
 | Role | Session |
 |---|---|
 | Workflow Design Manager | `019f9d2f-e0ea-7411-9fd7-386f45f76909` |
-| Project Manager | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` |
-| External Review Operator | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` |
+| Code Project Manager | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` |
+| Research Operations Manager | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` |
 
 The router is the source of truth and this table must mirror it exactly.
 

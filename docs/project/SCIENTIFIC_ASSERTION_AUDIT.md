@@ -3,8 +3,8 @@
 ```text
 purpose=prevent_wrong_scientific_assertions
 scientific_acceptance_owner=external_pro
-code_acceptance_owner=project_manager
-runtime_owner=project_manager
+code_acceptance_owner=code_project_manager
+runtime_owner=research_operations_manager
 workflow_design_owner=workflow_design_manager
 external_scientific_authority=exclusive_within_user_goal_and_review_boundary
 audit_model=two_stage_triggered
@@ -12,7 +12,7 @@ review_stack=false
 backward_compatibility=false
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 code_science_audit_mode=contract_diff_only
-code_science_audit_position=after_pm_implementation_acceptance
+code_science_audit_position=after_code_project_manager_implementation_acceptance
 routine_preimplementation_code_science_review=forbidden
 code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 new_algorithm_design_during_code_audit=forbidden
@@ -20,15 +20,15 @@ new_evidence_search_during_code_audit=forbidden
 ```
 
 This workflow protects conclusions, not engineering completeness. External Pro
-owns scientific decisions; Project Manager owns code decisions. The two stages
+owns scientific decisions; Code Project Manager owns code decisions. The two stages
 inspect different objects and do not duplicate acceptance: Pro accepts the
-scientific contract and its code-science correspondence, while PM accepts
+scientific contract and its code-science correspondence, while Code Project Manager accepts
 implementation correctness and operability.
 
 Each stage must pass the registered workflow value test: name the false
 scientific assertion it can prevent and confirm that complete packaging,
 waiting, repair and compute cost is smaller than the waste it avoids. Workflow
-Manager owns changes to this test; PM enforces it in each runtime instance. A
+Manager owns changes to this test; Research Operations Manager enforces it in each runtime instance. A
 cheaper proof-sized diagnostic is preferred when it preserves scientific safety.
 
 ## When it triggers
@@ -51,7 +51,7 @@ that stage.
 
 ## Stage A: design assertion audit
 
-Project Manager packages the exact user goal, prior binding evidence and code
+Research Operations Manager packages the exact user goal, prior binding evidence and code
 constraints without choosing science. The design question requires External Pro
 to close these points without training:
 
@@ -69,7 +69,7 @@ to close these points without training:
    normalization, clustering/unit of analysis, confidence procedure, sample
    exclusion, seed block and first-match precedence.
 6. Ask which load-bearing decision the contract makes without explicitly
-   asking. Do not turn a PM-written uncertainty into external authority by
+   asking. Do not turn a native-role uncertainty into external authority by
    repetition.
 7. Apply the evidence-complexity gate before design freeze: state `H`, fixed
    `K_search`, hypothetical-transition upper bound and projected wall clock.
@@ -78,25 +78,26 @@ to close these points without training:
    per controller episode. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`,
    not a scientific result.
 
-Then Project Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
+Then Research Operations Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
 the draft design, current scientific principles, relevant evidence and exact
 repository paths. Ask Pro to seek counterexamples and missing decisions, not to
 confirm the plan. Pro freezes the scientific distinction and required
-properties; PM owns the cheapest bounded controller, witness, diagnostic and
+properties; Code Project Manager owns the cheapest bounded controller, witness, diagnostic and
 other implementation realization inside
-`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Manager archives and
-routes the exact raw; PM implements the frozen disposition. PM may report one
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Research Operations Manager
+archives and routes the exact raw; Code Project Manager implements the frozen
+disposition and may report one
 focused code-side ambiguity or infeasibility in a Pro question, but neither
 role may select among scientifically different answers.
 Final freeze occurs only after Pro resolves or explicitly scopes out the
 scientific defects.
 
-Before implementation starts, PM performs only a local feasibility read from
+Before implementation starts, Code Project Manager performs only a local feasibility read from
 the code side; this is not an external review.
 If the Pro disposition is ambiguous in code, structurally unreachable,
 internally inconsistent with the named implementation surface, or contradicted
-by a concrete code-level counterexample, PM sends one exact objection to the
-dedicated External Review Operator. PM may route an
+by a concrete code-level counterexample, Code Project Manager sends one exact
+objection to Research Operations Manager. Research Operations Manager may route an
 `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` in the same review lineage. State the
 exact objection and the one scientific invariant that needs clarification; do
 not ask Pro to design a solver or evidence search and do not select a scientific
@@ -108,16 +109,16 @@ require a separate internal reviewer, approval file or checklist artifact.
 
 ## Stage B: code-science alignment audit
 
-After PM implementation acceptance, Project Manager routes the one existing
+After Code Project Manager implementation acceptance, Research Operations Manager routes the one existing
 code-science audit:
 
 1. Run the proof-sized focused checks and one bounded exercise when a
    runner/analyzer path is material.
-2. PM pushes one exact commit containing the design, implementation and a
+2. Code Project Manager pushes one exact commit containing the design, implementation and a
    `CODE_SCIENCE_INDEX.md`.
 3. Require each index row to be
    `claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded`.
-4. Project Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
+4. Research Operations Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
    that exact commit and index. The index is navigation, not a substitute for
    reading the named code.
 5. Ask only whether the code instantiates the scientific contract, whether a
@@ -133,17 +134,19 @@ threshold, evidence volume or experiment that was absent from the frozen
 contract.
 
 Do not ask for style, architecture taste, broad refactoring, coverage,
-compatibility or generic bug hunting. PM remains the code acceptance owner;
-Pro owns only whether that accepted code is scientifically aligned. PM executes
-the smallest repair implied by an in-scope mismatch and reruns the smallest
-affected evidence. At most one correction-only recheck may inspect the repaired
-claim-bearing diff; it cannot reopen design. An unchanged reviewed commit is
-never resubmitted and there is no review of the review.
+compatibility or generic bug hunting. Code Project Manager remains the code
+acceptance owner; Pro owns only whether that accepted code is scientifically
+aligned. For an in-scope mismatch, Research Operations Manager sends one exact
+correction assignment to Code Project Manager. After `CODE_ACCEPTED`, Research
+Operations Manager routes the smallest affected evidence and at most one
+correction-only recheck of the repaired claim-bearing diff. The recheck cannot
+reopen design. An unchanged reviewed commit is never resubmitted and there is no
+review of the review.
 
 ## Result intake
 
-Before scientific interpretation, the Experiment Operator gives PM the exact
-artifact paths. PM mechanically checks in this order:
+Before scientific interpretation, the Experiment Operator gives Research
+Operations Manager the exact artifact paths. Research Operations Manager mechanically checks in this order:
 
 1. artifact/source/runtime closure and operational validity;
 2. access and identifiability branches before behavioral branches;
@@ -152,7 +155,7 @@ artifact paths. PM mechanically checks in this order:
 4. exact budget/code/branch scope of any historical evidence invoked;
 5. exact registered first-match branch reproduction.
 
-PM completes the exact mechanical validation and submits a
+Research Operations Manager completes the exact mechanical validation and submits a
 `FORMAL_RESULT_SCIENTIFIC_DISPOSITION` boundary to Pro. Pro
 owns the smallest unit retired, retained mechanisms/lemmas, CDC/portfolio
 change, excluded interpretations and next scientific action. The frozen
@@ -180,7 +183,8 @@ must target bounded-neighborhood `O(N*k_neighbor)` or hierarchical
 therefore returns to Stage A instead of being hidden as a performance repair.
 
 An experiment-operator terminal return or naturally completed Pro response
-wakes Project Manager. With an active grant, no live owned operation and no
-real authority blocker, PM executes the exact Pro-selected code action or opens
-the smallest missing Pro scientific decision; neither role fills that
+wakes Research Operations Manager. With an active grant, no live owned operation
+and no real authority blocker, Research Operations Manager executes the exact
+Pro-selected action, sends its code component to Code Project Manager, or asks
+External Pro for the smallest missing scientific decision; neither native role fills that
 decision locally or leaves an idle gap.

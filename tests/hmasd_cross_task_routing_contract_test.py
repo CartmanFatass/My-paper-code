@@ -16,9 +16,9 @@ PROBE = (
     ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/read_codex_thread_settings.py"
 )
 PERSISTENT_ROLES = (
-    ROOT / ".agents/roles/PROJECT_MANAGER.md",
+    ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
     ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-    ROOT / ".agents/roles/EXTERNAL_REVIEW_OPERATOR.md",
+    ROOT / ".agents/roles/RESEARCH_OPERATIONS_MANAGER.md",
 )
 PAYLOAD_SURFACES = PERSISTENT_ROLES + (
     ROOT / ".agents/skills/hmasd-review-round/SKILL.md",
@@ -74,8 +74,8 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
         "cross_task_routing=fixed_role_sessions_plus_pre_send_live_settings_probe",
         "cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo",
         "workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909",
-        "project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d",
-        "external_review_operator_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b",
+        "code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d",
+        "research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b",
     )
     for token in required:
         assert agents.count(token) == 1, token
@@ -87,8 +87,8 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
         assert skill.count(session) == 1, session
     for retired in (
         "workflow_design_manager_route=",
-        "project_manager_route=",
-        "external_review_operator_route=",
+        "code_project_manager_route=",
+        "research_operations_manager_route=",
     ):
         assert retired not in agents, retired
 
@@ -97,7 +97,10 @@ def test_persistent_roles_use_fixed_sessions_and_live_settings_without_cache() -
     for path in PERSISTENT_ROLES:
         text = path.read_text(encoding="utf-8")
         assert "cross_task_routing_skill=hmasd-cross-task-routing" in text
-        assert "cross_task_target_identity=fixed_router_role_session" in text
+        assert (
+            "cross_task_target_identity=fixed_router_role_session" in text
+            or "cross_task_target_identity=exact_fixed_requester_role_session" in text
+        )
         assert "cross_task_route_cache=forbidden" in text
         assert (
             "cross_task_model_thinking_preservation="
@@ -105,36 +108,23 @@ def test_persistent_roles_use_fixed_sessions_and_live_settings_without_cache() -
         ) in text
 
 
-def test_static_review_registry_uses_fixed_session_and_live_settings_probe() -> None:
+def test_review_registry_is_local_to_operations_manager_transport() -> None:
     registry = json.loads(
         (ROOT / "docs/external-review/REVIEWER_CONVERSATIONS.json").read_text(
             encoding="utf-8"
         )
     )
-    contract = registry["intertask_transport_contract"]
-    assert registry["schema_version"] == 37
-    assert contract["cross_task_routing_skill"] == "$hmasd-cross-task-routing"
-    assert contract["target_identity"] == "fixed_role_session_from_AGENTS.md"
-    assert contract["route_cache"] == "forbidden"
-    assert (
-        contract["model_thinking_preservation"]
-        == "pre_send_read_only_probe_explicit_echo"
-    )
-    assert contract["live_settings_source"] == "read_only_local_codex_state"
-    assert (
-        contract["live_settings_probe"]
-        == ".agents/skills/hmasd-cross-task-routing/scripts/"
-        "read_codex_thread_settings.py"
-    )
-    assert contract["live_settings_cache"] == "forbidden"
-    assert contract["settings_unavailable_action"] == "fail_closed_no_send"
-    assert contract["tool_call_visibility"] == "explicit_model_and_thinking_parameters"
-    assert "model_thinking_source" not in contract
-    assert contract["payload_route_settings"] == "forbidden"
-    assert (
-        contract["route_replacement"]
-        == "explicit_user_direction_then_workflow_design_commit"
-    )
+    contract = registry["transport_contract"]
+    assert registry["schema_version"] == 38
+    assert contract["transport_owner"] == "research_operations_manager"
+    assert "intertask_transport_contract" not in registry
+    for retired in (
+        "cross_task_routing_skill",
+        "target_identity",
+        "live_settings_probe",
+        "payload_route_settings",
+    ):
+        assert retired not in contract
 
 
 def _make_state(path: Path, cwd: Path) -> None:

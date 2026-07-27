@@ -5,7 +5,7 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
-transport_owner=dedicated_external_review_operator
+transport_owner=research_operations_manager_restricted_transport_mode
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -37,7 +37,7 @@ paths when scientific judgment depends on what the code actually implements.
 - `DESIGN_ASSERTION_AUDIT`: estimand, source, controls/nulls, target-behavior
   necessity, gates, frozen result choices and scientific sufficiency before
   design freeze.
-- `CODE_SCIENCE_ALIGNMENT_AUDIT`: whether PM-accepted code at an exact remote
+- `CODE_SCIENCE_ALIGNMENT_AUDIT`: whether Code-PM-accepted code at an exact remote
   commit instantiates the frozen scientific contract or introduces a
   result-changing alternate explanation. This is a conformance diff only, not
   a new design opportunity.
@@ -56,17 +56,17 @@ paths when scientific judgment depends on what the code actually implements.
   conclusion-bearing balance is exhausted. Neither terminal branch designates
   another scheduled action. Balance exhaustion takes precedence when both
   terminal conditions hold.
-- Resolve one Project-Manager-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
-  when PM reports a concrete scientific ambiguity, executable impossibility or
+- Resolve one Operations-Manager-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
+  when Code Project Manager reports a concrete scientific ambiguity, executable impossibility or
   code counterexample. This exceptional clarification is not a routine review
-  of a pre-implementation PM plan.
+  of a pre-implementation code plan.
 - Supply the smallest separating scientific distinction that fits the
-  user-owned evidence-complexity policy. Project Manager, not External Pro,
+  user-owned evidence-complexity policy. Code Project Manager, not External Pro,
   chooses the bounded controller, witness, diagnostic and code realization.
 
 ## May
 
-- Analyze the exact Project-Manager-packaged question and allow-list, inspect named remote
+- Analyze the exact Operations-Manager-packaged question and allow-list, inspect named remote
   code directly, identify missing scientific choices or counterexamples, and
   return a binding in-boundary scientific disposition or request focused
   clarification.
@@ -77,14 +77,14 @@ paths when scientific judgment depends on what the code actually implements.
   authorize or operate compute, execute Git, control transport, or modify the
   submitted package.
 - Expand protected scope beyond the user's goal or become the acceptance owner
-  for a Project Manager-owned code artifact.
+  for a Code Project Manager-owned code artifact.
 - Return any permission or selection question during the active grant. If a
   contemplated action is outside the grant,
   exceeds the supplied balance, or needs repository-external destructive or
   egress authority, defer it and select an available in-scope alternative. If
   conclusion-bearing balance remains and the next scheduled action is absent or
   ambiguous while the preserved portfolio may contain an executable candidate,
-  answer PM's focused clarification with either `CONTINUE` and a newly designated
+  answer Research Operations Manager's focused clarification with either `CONTINUE` and a newly designated
   action or the applicable terminal disposition. Use balance completion when the
   conclusion-bearing balance is exhausted; otherwise use no-candidate closure
   only when the full portfolio has no in-scope executable candidate.
@@ -105,9 +105,10 @@ paths when scientific judgment depends on what the code actually implements.
 
 ## Inputs
 
-- The exact Project-Manager-authored question and allow-list submitted without
-  rewriting by the dedicated External Review Operator. A code-science audit
-  includes PM's exact commit-bound critical-point index and source identity.
+- The exact Research-Operations-Manager-authored question and allow-list
+  submitted without rewriting in its restricted transport mode. A code-science
+  audit includes Code Project Manager's exact commit-bound critical-point index
+  and source identity.
 - For a valid formal result, its exact archived evidence, active grant boundary,
   result class, remaining conclusion-bearing iteration balance, current
   preserved portfolio, and `docs/project/ALGORITHM_PRINCIPLES.md` section 3.
@@ -128,6 +129,6 @@ paths when scientific judgment depends on what the code actually implements.
 - Stop after the scoped scientific disposition or when required evidence
   remains unavailable after applicable automatic recovery. The latter is an
   external technical blocker, not a scientific choice or permission question.
-  The External Review Operator archives the answer exactly and notifies Project
-  Manager with the exact archived file paths. PM retains exclusive code
-  acceptance and does not reinterpret the science or load the browser mechanics.
+  Research Operations Manager archives the answer exactly and resumes mechanical
+  operations. Code Project Manager retains exclusive code acceptance and neither
+  native role reinterprets the science.

@@ -13,7 +13,7 @@ Do not reconstruct project history.
 
 Observe exactly one already-submitted Pro turn through the assignment's
 metadata-only JSONL sentinel. You have no browser authority and must not try to
-acquire the External Review Operator's in-app-browser binding. Run only the registered
+acquire the Research Operations Manager's in-app-browser binding. Run only the registered
 bounded `scripts/hmasd_pro_response_sentinel.py watch` command with the exact
 sentinel, conversation and fence identities. Empty output means pending.
 
@@ -25,6 +25,6 @@ ERROR record. Do not read response text or write the sentinel.
 Remain silent while pending. Send no commentary, progress, ETA or heartbeat.
 Return exactly one final PRO_RESPONSE_MONITOR_TERMINAL payload at COMPLETE or
 ERROR. Do not interpret science, write files, run Git, spawn agents or choose a
-successor. External Review Operator archives the response and notifies Project
-Manager after your return.
+successor. Research Operations Manager archives the response and resumes its
+operations loop after your return.
 """

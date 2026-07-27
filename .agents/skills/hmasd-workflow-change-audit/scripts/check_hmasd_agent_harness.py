@@ -254,9 +254,11 @@ def audit_repo(
         path.parent.name: path.resolve() for path in skill_root.glob("*/SKILL.md")
     }
     route_texts = [agents_text]
-    pm_role = role_root / "PROJECT_MANAGER.md"
-    if pm_role.is_file():
-        route_texts.append(_read(pm_role))
+    manager_roles = (
+        role_root / "CODE_PROJECT_MANAGER.md",
+        role_root / "RESEARCH_OPERATIONS_MANAGER.md",
+    )
+    route_texts.extend(_read(path) for path in manager_roles if path.is_file())
     route_texts.extend(_read(path) for path in skill_docs.values())
     route_blob = "\n".join(route_texts)
     for name, path in sorted(skill_docs.items()):
@@ -267,7 +269,7 @@ def audit_repo(
         if contains_files and not (directory / "SKILL.md").is_file():
             errors.append(f"Skill directory has no SKILL.md: {directory}")
 
-    for route_path in (agents_path, pm_role):
+    for route_path in (agents_path, *manager_roles):
         if not route_path.is_file():
             continue
         for ref in sorted(_repo_refs(_read(route_path))):
