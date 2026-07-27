@@ -17,6 +17,7 @@ other.
 | **Implementing** | `$hmasd-agile-research-development` |
 | **Running an external review round** | `$hmasd-review-round` |
 | **Judging whether work is on path** | `docs/project/RESEARCH_GOAL.md` |
+| **Designing evidence or freezing a contract** | `docs/project/ALGORITHM_PRINCIPLES.md`, then `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` |
 
 Then read only the charter, definition or document your task actually names.
 Git-tracked code is the implementation source; `logs/<run-id>/` is runtime

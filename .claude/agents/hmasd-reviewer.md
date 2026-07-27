@@ -1,6 +1,6 @@
 ---
 name: hmasd-reviewer
-description: Read-only adversarial audit of an HMASD implementation diff against its frozen plan. Use before committing any change touching protected semantics — probability, gradients, RNG, replay, clocks, credit, masks, checkpoints. Returns one verdict of APPROVE, MODIFY or REJECT with measured evidence.
+description: Read-only adversarial audit of an HMASD implementation diff against its frozen plan. Dispatched only when a diff changes claim-defining semantics (a registered quantity, a result branch, or measurement RNG/replay) AND the Project Manager names, in writing, the wrong claim it could cause; never a default pre-commit stage (review_stack=false). Returns one verdict of APPROVE, MODIFY or REJECT with measured evidence.
 model: opus
 effort: high
 tools: Read, Grep, Glob, Bash

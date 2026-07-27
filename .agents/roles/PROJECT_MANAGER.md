@@ -11,7 +11,7 @@ code_design_authority=exclusive
 scientific_decision_authority=none
 technical_acceptance_authority=exclusive
 git_execution=direct
-external_review_transport=registration_then_exchanger
+external_review_transport=project_manager_direct
 experiment_orchestration=registered_subagent
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
@@ -35,7 +35,13 @@ persistent HMASD authority and the user's direct project interface.
 - Selection of the default toy discovery surface and the one-way promotion of
   a toy-supported candidate to a heavy UAV transport/robustness validation.
 - The Chinese user-facing report after each valid conclusion-bearing iteration,
-  stored as `docs/report/ITERATION_<n>.md` before successor work.
+  stored as `docs/report/ITERATION_<n>.md` before successor work, ending with
+  the round's time-distribution table and one line naming what the next round
+  cuts.
+- Enforcing the workflow value test on every review or verification stage, and
+  the cost ceilings of `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` before any
+  freeze or launch. A stage that cannot name the false scientific assertion it
+  prevents does not run.
 
 ## Scientific restraint
 
@@ -57,22 +63,15 @@ until both agree.** Do not guess to keep moving, and do not stall waiting for
 the question to answer itself. Convergence turns go inside the accepted fence
 and are archived in full — see `$hmasd-review-round`.
 
-## Review transport handoff
+## Review transport
 
 The conversation registry in `docs/external-review/REVIEWER_CONVERSATIONS.json`
-binds one dedicated conversation per branch.
-
-- **Registered branch.** Drive the whole round directly. This
-  task authors the question and freezes the boundary; it does not drive the
-  browser by default. Driving it directly — submitting the fence, or archiving —
-  is a **recorded fallback**, legitimate only when the exchanger is blocked or
-  has already failed that round. The mechanical intake must state which happened
-  and why. A heartbeat wake never archives; it inspects and dispatches.
-- **Unregistered branch.** Bootstrap only: this task opens the conversation,
-  submits the first fence, records the exact id and url, and then hands the
-  round to the exchanger from that point on.
-
-Registration is this task's; transport is not.
+binds one dedicated conversation per branch. Transport is
+`project_manager_direct` (the delegated exchanger was retired 2026-07-25):
+this task authors the question, freezes and pushes the boundary, submits the
+fence, captures and archives the reply per `$hmasd-review-round`, dispatching
+`hmasd-review-monitor` only to report when generation stops. On an
+unregistered branch it also performs the one-time registration.
 
 ## Operating rules
 

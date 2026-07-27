@@ -178,7 +178,16 @@ sending, exactly as it does for a second fence.
 
 Require the assigned round path, pushed 40-character `stage_commit`, exact
 question path, exact raw path, mechanical-intake path, registered reviewer
-conversation, and declared input paths. Before browser submission:
+conversation, and declared input paths.
+
+**Question scope.** The question document carries decisions — claim-defining
+questions, any number of them, tree-structured where dependent. It never
+assigns verification labor to the reviewer: no fact-inventory confirmation,
+no implementation-detail checking, no auditing of what the execution side can
+verify itself. The two bounded exceptions are the Stage A design audit and
+the Stage B code-science alignment diff defined in `AGENTS.md`.
+
+Before browser submission:
 
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.

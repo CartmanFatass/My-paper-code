@@ -1,6 +1,6 @@
 ---
 name: hmasd-verifier
-description: Executes an exact list of assigned checks — focused pytest suites, smoke exercises, artifact and schema validation — and returns bounded runtime evidence. Use to establish that a package runs and what it produced. Never edits source, never repairs failures, never judges scientific meaning.
+description: Executes an exact list of assigned checks — focused pytest suites, smoke exercises, artifact and schema validation — and returns bounded runtime evidence. Only for check lists exceeding what the Project Manager can run in one command; never a default stage. Never edits source, never repairs failures, never judges scientific meaning.
 model: haiku
 effort: high
 tools: Read, Grep, Glob, Bash

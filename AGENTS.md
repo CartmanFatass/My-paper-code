@@ -55,6 +55,10 @@ iteration_report_authorization=standing
 one_artifact_one_acceptance_owner=true
 superpowers_plugin=reference_only
 superpowers_execution=disabled
+scientific_principles=docs/project/ALGORITHM_PRINCIPLES.md
+evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+review_stack=false
+routine_preimplementation_code_science_review=forbidden
 project_development_skill=hmasd-agile-research-development
 development_mode=agile_algorithm_research
 algorithm_iteration_environment=toy_default
@@ -164,36 +168,50 @@ nothing.
 
 ## Research and execution loop
 
-1. The user sets the goal and protected/formal authority.
-2. Project Manager selects the smallest bounded CDC or engineering action.
-3. If external science is needed, Project Manager authors the question, commits
-   and pushes the exact boundary, then hands the round to
-   transports and archives it directly, dispatching `hmasd-review-monitor` only to
-   report when generation stops. Project Manager
-   reconciles the archived raw code-side.
-4. Project Manager designs, implements, verifies, repairs, and accepts code-side
-   work directly or through bounded registered code children. A design that
-   changes a learning signal is adversarially checked **before it is frozen**,
-   per *Pre-freeze design check* below.
-5. Before a conclusion-bearing run, Project Manager freezes the evidence
-   contract and confirms it is inside current user authority.
-6. Project Manager spawns one `hmasd-experiment-operator` with the complete
-   immutable run assignment. The child silently executes
-   `train -> evaluate -> analyze` and returns one terminal payload.
-7. Project Manager validates artifacts and records the smallest supported CDC
-   update.
-8. After every valid conclusion-bearing iteration, Project Manager writes
-   `docs/report/ITERATION_<n>.md` in Chinese before advancing. It explains the
-   scientific question and decision, source/environment/runtime/budget, evidence
-   closure, registered result, impact on conjectures, excluded conclusions and
-   next boundary. This user-facing report is mandatory under standing authority
-   but is not another review, approval or scientific evidence source.
-9. Project Manager performs Git integration and selects the next in-authority
-   action.
+One loop per result, eight steps (user-prescribed 2026-07-26). Every stage
+must pass the **workflow value test**: name the false scientific assertion it
+can prevent, and confirm its complete packaging, waiting, repair and compute
+cost is smaller than the waste it avoids. A stage that cannot name one does
+not run.
+
+1. **Pro scientific decision.** External Pro selects the direction or evidence
+   action, inside the user goal (`docs/project/RESEARCH_GOAL.md`).
+2. **Code decisions.** Project Manager makes every implementation binding —
+   realization, controllers, constants, factoring — records them in the
+   iteration record, and at most discloses them to Pro. A choice crosses to
+   Pro only if reversing it would change a registered quantity or a branch.
+3. **Pro reviews the key decisions — zero experiments run.** The Stage A
+   design assertion audit closes in one round: initial-state signals,
+   positive-control necessity, gate witnesses, frozen result-sensitive
+   choices, the load-bearing decision the contract makes without asking
+   (`docs/project/ALGORITHM_PRINCIPLES.md` section 4), and the cost gate of
+   `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Questions carry decisions —
+   any number of them — and never assign verification labor to Pro.
+4. **Converge the execution plan.** Freeze the contract only after Pro
+   resolves or explicitly scopes out the defects. The audit is a compact
+   section of the round's reconciliation, never a separate reviewer, approval
+   file or checklist artifact.
+5. **Implement.** Bounded children against the frozen contract, focused
+   tests, per `$hmasd-agile-research-development`.
+6. **Review and tests.** Project Manager reads the diff and reruns the focused
+   checks itself. Stage B (below) triggers only for claim-bearing code; the
+   local adversarial reviewer is dispatched only on a PM-named wrong-claim
+   risk.
+7. **The experiment.** Fail-fast asserts and per-episode progress telemetry.
+   At most one smoke, sized to the minimum that proves a genuinely untested
+   path, inside the nonformal cap. Rehearsal beyond that is the defect, not
+   diligence.
+8. **Pro scientific decision on the result.** Mechanical validation first,
+   then one round: smallest unit retired or supported, portfolio delta, next
+   action. Then the Chinese iteration report `docs/report/ITERATION_<n>.md`,
+   ending with the round's time-distribution table (research advancement /
+   verification & ceremony / waste) and one line naming what the next round
+   cuts; research advancement below half is recorded as an incident. The
+   report is mandatory under standing authority but is
+   not another review, approval or scientific evidence source.
 
 No child launches a successor. Automatic continuation belongs only to Project
-Manager. One scheduled action is not the only legal scientific explanation;
-freeze evidence semantics, not theory.
+Manager. Freeze evidence semantics, not theory.
 
 ## Standing authorization
 
@@ -329,69 +347,47 @@ There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
 
-### Pre-freeze design check
+### Stage A and Stage B — the only two audits, both triggered
 
-Reviewing a diff against a frozen plan cannot catch a defect in the plan: a
-faithful implementation of a broken design passes. On 2026-07-24 the G20 credit
-rule was built correctly, passed eighteen tests, and was still inert — its
-leave-one-out contrast was identically zero at the entry state the design itself
-mandated. The screen would have reported that as behavioral no-access.
+```text
+review_stack=false
+routine_preimplementation_code_science_review=forbidden
+audit_model=two_stage_triggered
+code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
+```
 
-So before freezing a design, answer these against it:
+**Stage A (design assertion audit)** triggers before freezing a contract that
+creates or changes an estimand, benchmark source, control or null, a
+reward/credit/gradient/initialization mechanism, a normalization, threshold,
+confidence procedure or result branch, or the interpretation connecting a
+behavior to a capability. Its content is step 3 of the loop and
+`ALGORITHM_PRINCIPLES.md` section 4 — including asking Pro which load-bearing
+decision the contract makes without asking, which is the whole surviving
+function of the former standalone grill stage. It is decided on paper, without
+training; it does not certify a design as sound, it retires the defect class
+that is provable before compute.
 
-1. at the mandated initial state, what is each learning signal numerically?
-2. does every trainable parameter have a live gradient path at entry?
-3. is any required invariant satisfied *trivially*, in a way that makes the
-   measurement vacuous?
-4. can any first-match result branch fire for a non-scientific reason?
-5. do the frozen initialization and the credit definition cancel each other?
+**Stage B (code-science alignment audit)** triggers after implementation
+acceptance and before formal compute, when code newly realizes or materially
+changes a claim-bearing element. One question to Pro naming the exact pushed
+commit and asking only: does the code instantiate the frozen contract; could a
+test pass through the wrong mechanism; could an alternate implementation
+explanation change the registered conclusion. Pro returns exactly `ALIGNED`,
+`MISMATCH` (naming the frozen assertion and the conflicting code path) or
+`SCIENTIFIC_AMBIGUITY` (naming one previously unstated result-changing
+choice) — never a new design, controller, search, threshold or evidence
+volume, and no style, taste, coverage or generic bug hunting. An unchanged
+reviewed commit is never resubmitted; there is no review of the review.
 
-**Triggered only** by a design that introduces or changes a credit or advantage
-definition, a gradient path, an initialization some signal depends on, or a
-result branch. Analysis scripts, evaluation-only work, mechanical refactors and
-source additions that do not touch learning skip it.
+Neither stage triggers for operational repair, logging/schema mechanics, or
+mechanical refactors. If a repair changes only one stage, repeat only that
+stage.
 
-**Bounded by decidability.** It answers only what a derivation or a small probe
-settles without training — the probe is throwaway, writes nothing under
-`logs/`, and costs no iteration. A question needing a run is out of scope and
-belongs to the screen. The check does not certify a design as sound; it retires
-the class of defect that is provable on paper, and identification failures still
-require data.
+#### Retained lemma — persistence necessity under anonymous reward
 
-#### A positive control must make its target behaviour necessary
-
-**Added 2026-07-25 from the D7.2B ruling.** A control built to show that a
-mechanism *can* do X must make X **necessary for optimality**, not merely
-permitted. If some optimal policy reaches the ceiling without X, a negative result
-cannot separate mechanism incapacity from rational selection of an equally optimal
-alternative — and that is not a weak result, it is no result.
-
-`two_timescale_role_free_actions` failed exactly here. Its reward is the better of
-the two agent-to-duty assignments, so from any optimal pair the next optimal pair
-is reachable by a **full-sync swap** in which both agents SET and no commitment
-ever persists. Two distinct optima, one without the target behaviour. The policy
-took it: perfect competence, `KEEP` never used once in 384 ledger rows, every
-realized lifetime pinned at one check interval.
-
-Four questions, answered **before** a source consumes a carrier run, analytically
-or by constructive controls:
-
-1. does an optimal all-SET (target-behaviour-free) continuation exist?
-2. does role exchange preserve not only immediate reward but the **complete future
-   state relevant over `H`**?
-3. is any agent-local or assignment-local state lost on exchange?
-4. is the best full-sync SET return **materially below** the optimal mixed
-   KEEP/SET return?
-
-The margin is the source-level estimand of `D0_CARRIER_AND_ESTIMAND.md`:
-`U*_stable,src / B_H <= -0.10` and `U*_flex,src / B_H >= +0.10`. On the retired toy
-`U*_stable,src = 0` exactly — decidable on paper, for free.
-
-**The tempting general statement is false.** "A permutation-invariant reward means
-role exchange substitutes for persistence at zero cost" is too broad, and was
-ruled so. Position, energy, queue state, internal memory, transition latency and
-non-transferable service state all make persistence necessary under an anonymous
-reward. The valid statement is narrow:
+Positive-control necessity is now `ALGORITHM_PRINCIPLES.md` section 4; the
+D7.2B failure that taught it is in the round archive. The project-specific
+retained lemma, load-bearing for the D7.S line:
 
 > At a supported mixed-urgency history, if reward **and transition** are equivariant
 > under agent permutation, the relevant agent states and capabilities are
@@ -400,76 +396,30 @@ reward. The valid statement is narrow:
 > permutation **with the same future state and return**, then individual persistence
 > is not necessary.
 
-An anonymous source stays usable when assignment history is non-transferable.
+The broad converse ("permutation-invariant reward makes role exchange free")
+was ruled false: position, energy, queue state, internal memory, transition
+latency and non-transferable service state all make persistence necessary
+under an anonymous reward. The margin estimand is in
+`D0_CARRIER_AND_ESTIMAND.md`: `U*_stable,src / B_H <= -0.10`,
+`U*_flex,src / B_H >= +0.10`.
 
-#### Grill the contract past the checklist, and grill Pro
+#### Question form for Stage A rounds
 
-These five questions are a checklist, and a checklist asks what its author
-thought to ask. On 2026-07-25 this check **passed** the G20R2 contract while that
-contract contained six defects — a section 2 / section 5 contradiction in the
-`Q_j` input list, a threshold required in one section and never frozen in
-another, a degenerate null, a Monte Carlo budget conflated with the sample
-estimating it, a missing policy-snapshot condition, and an expectation taken off
-its own declared support. Every one was decidable on paper. None was asked about.
-
-So a contract that will gate a screen also gets **grilled**, and the interviewee
-is **External Pro**, not the user and not an internal agent. Unattended, Pro is
-what actually makes the scientific decisions, so the questions belong to whoever
-owns the answers.
-
-**One shot, as a conditional tree.** The transport carries one question and
-returns one answer, so every question goes in a single turn. A flat list would
-throw away exactly what makes an interview work — that question seven only
-arises from the answer to question three. Write the batch as a **decision tree
-with the branches pre-walked**: *if you rule A on Q3, also answer Q3a and Q3b; if
-B, answer Q3c instead.* One reply then traverses the dependencies that an
-iterative interview would have discovered turn by turn.
-
-**Carry paths, never contents.** Pro reads the repository at `stage_commit`
-through its connector, so the grill names exact files and sections in its
-`## Evidence to read` allow-list and lets Pro read them. This costs nothing and
-puts the whole frozen contract in front of the decision.
-
-**Authority.** Where a code choice is *entailed by* a scientific decision, Pro's
-preference governs and Project Manager implements it. This does not hand Pro the
-implementation: file layout, factoring, naming, test construction and every
-choice that does not change what is measured stay with Project Manager. The test
-is whether reversing the choice would change a registered quantity or a branch.
-
-**Grill the grill, before it is sent.** Leaning on Pro moves the bottleneck onto
-whoever authors the questions, and it moves there silently. Every one of the six
-G20R2 defects existed because Project Manager did not ask — Pro can only rule on
-what is put in front of it, so an unasked question fails exactly like an
-unexecuted rule.
-
-So one adversarial read-only pass over the question precedes every send, asking
-the one thing the preflight gate cannot: **which decision in this contract is
-being made without being asked about?** The preflight script checks structure —
-reachability, a non-empty allow-list, fence fields. It cannot check whether the
-question covers the decisions. Those are different failures and only one of them
-has a gate.
-
-Pro's answer is authoritative **after full reasoning, not before**. The curtailed
-round on 2026-07-24 produced two load-bearing conclusions that Pro itself
-retracted once allowed to finish. Leverage Pro heavily; never leverage a Pro that
-was cut off.
+Write dependent questions as a **decision tree with the branches pre-walked**
+(*if you rule A on Q3, also answer Q3a; if B, Q3c instead*) so one reply
+traverses what an iterative interview would discover turn by turn. Carry exact
+paths in the `## Evidence to read` allow-list, never file contents — Pro reads
+the repository at `stage_commit`. Where a code choice is entailed by a
+scientific decision, Pro's preference governs; everything that does not change
+a registered quantity or branch stays with Project Manager. Pro's answer is
+authoritative **after full reasoning, not before** — never curtail a round.
 
 ## Result interpretation
 
-A failure retires the smallest unit it actually refutes. These categories are
-orthogonal, never a chain:
-
-| Observation | What it retires |
-|---|---|
-| engineering fault, no complete interpretable observation | nothing scientific |
-| the studied object was not instantiated as declared | that implementation |
-| the estimand cannot identify the target proposition | that estimand or measurement |
-| the benchmark gives no access, or cannot separate candidates | that benchmark-comparator pair |
-| a derived necessary consequence fails under identifying conditions | that conjecture, or its scope |
-
-Retiring a whole mechanism family needs a structural contradiction, an
-equivalence proof, or independent counterexamples across several identifying
-environments. One benchmark no-access is never enough.
+Result semantics — smallest implicated unit, mixed/underpowered handling, the
+prohibition on rescuing a valid negative, and what a broad retirement requires
+— are `docs/project/ALGORITHM_PRINCIPLES.md` section 6, and bind every result
+read in this repository.
 
 **Scenario-7 topology provenance (Pro ruling 2026-07-26).** The environment
 draws its ground-BS and charging-station layout at construction from an
@@ -484,15 +434,6 @@ unrelated lines.
 Ordinary recurrent MARL is a comparator and an access diagnostic, never an
 admission gate. A superiority claim must be matched against it; its failure on
 one benchmark does not bar research into a stronger mechanism.
-
-A gate measures; it is not the research goal. Progress means a new capability,
-counterexample, corrected definition, retained lemma or portfolio delta — never
-the count of gates passed.
-
-Prefer the cheapest discriminating action, in this order: derivation,
-counterexample construction, reanalysis of existing data, toy, prototype,
-formal compute. Implement or train only when nothing cheaper can answer the
-question.
 
 ## File concurrency and Git
 

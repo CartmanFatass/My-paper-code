@@ -98,10 +98,11 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 ## 3. CDC Open Research Loop
 
 Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-Operate this loop under the canonical role contracts. Scientific review may use
-a full plural review or a focused continuation in the same registered
-conversation; downstream realization must preserve the adopted scientific
-direction.
+Operate this loop under the canonical role contracts. External Pro owns
+scientific design, result interpretation and successor selection; the Project
+Manager owns code realization and technical acceptance. New conclusion-bearing
+designs close the Stage A design assertion audit (root `AGENTS.md`,
+"Acceptance, tests, and review") before formal compute.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -149,6 +150,15 @@ reasonable implementations instantiate the same estimand. Add at most one
 focused operational check for a concrete corruption risk the evidence-bearing
 run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
 concrete contradiction.
+
+Before design freeze, evaluate claimed learning signals at the forced initial
+state, prove that a positive control makes the target behavior necessary
+rather than merely permitted (write the relevant optimal-policy set — if any
+optimal solution avoids the target behavior, the control cannot support a
+negative claim about it), construct witnesses for result gates, check
+threshold arithmetic and zero denominators, freeze result-sensitive choices,
+and close the cost gate of `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
+These are scientific assertion checks, not generic review layers.
 
 ## 5. Toys, Access, and Transfer
 
