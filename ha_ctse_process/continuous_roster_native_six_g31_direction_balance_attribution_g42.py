@@ -36,6 +36,7 @@ MAX_CONFORMANCE_TRANSITIONS = g41.MAX_CONFORMANCE_TRANSITIONS
 GRADIENT_LIVE_TOLERANCE = g40.GRADIENT_LIVE_TOLERANCE
 SCALE_MATCH_ATOL = 1e-8
 SCALE_MATCH_RTOL = 1e-6
+DIRECTION_SEPARATION_TOLERANCE = 1e-6
 
 
 class G42GradientGateError(ValueError):
@@ -60,6 +61,7 @@ class G42GradientGateError(ValueError):
 @dataclass(frozen=True)
 class ScaleMatchedRawSumComposition:
     gradients: tuple[torch.Tensor, ...]
+    raw_sum_gradients: tuple[torch.Tensor, ...]
     immediate_norm: float
     successor_norm: float
     raw_sum_norm: float
@@ -68,6 +70,17 @@ class ScaleMatchedRawSumComposition:
     scale_factor: float
     scale_match_error: float
     scale_match_tolerance: float
+    registered_norm_zero: bool
+
+
+@dataclass(frozen=True)
+class _ChannelGradientProbe:
+    policy: torch.Tensor
+    immediate_baseline_loss: torch.Tensor
+    successor_baseline_loss: torch.Tensor
+    immediate_actor_gradients: tuple[torch.Tensor, ...]
+    successor_actor_gradients: tuple[torch.Tensor, ...]
+    gradient_evidence: dict[str, object]
 
 
 @dataclass(frozen=True)
@@ -76,6 +89,7 @@ class _RawSumPassPlan:
     immediate_baseline_loss: torch.Tensor
     successor_baseline_loss: torch.Tensor
     composition: ScaleMatchedRawSumComposition
+    gradient_evidence: dict[str, object]
 
 
 def _gradient_rows(
@@ -126,12 +140,27 @@ def validate_scale_match(
     applied = float(applied_gradient_norm)
     tolerance = SCALE_MATCH_ATOL + SCALE_MATCH_RTOL * abs(target)
     error = abs(applied - target)
-    if target <= GRADIENT_LIVE_TOLERANCE:
+    if target < 0.0 or applied < 0.0:
         raise G42GradientGateError(
-            "registered_gradient_norm_zero_or_not_live",
-            {"registered_gradient_norm": target},
+            "negative_scale_match_norm",
+            {
+                "registered_gradient_norm": target,
+                "applied_gradient_norm": applied,
+            },
         )
-    if applied <= GRADIENT_LIVE_TOLERANCE or error > tolerance:
+    if target == 0.0:
+        if applied != 0.0:
+            raise G42GradientGateError(
+                "non_scale_match",
+                {
+                    "registered_gradient_norm": target,
+                    "applied_gradient_norm": applied,
+                    "scale_match_error": error,
+                    "scale_match_tolerance": 0.0,
+                },
+            )
+        return 0.0, 0.0
+    if applied == 0.0 or error > tolerance:
         raise G42GradientGateError(
             "non_scale_match",
             {
@@ -157,28 +186,43 @@ def compose_scale_matched_raw_sum_gradients(
     successor_rows = _gradient_rows(successor, parameters)
     immediate_norm = _global_norm(immediate_rows)
     successor_norm = _global_norm(successor_rows)
+    target = float(registered_gradient_norm)
     diagnostics = {
         "immediate_norm": immediate_norm,
         "successor_norm": successor_norm,
-        "registered_gradient_norm": float(registered_gradient_norm),
+        "registered_gradient_norm": target,
     }
-    if immediate_norm <= GRADIENT_LIVE_TOLERANCE:
-        raise G42GradientGateError("immediate_gradient_zero_or_not_live", diagnostics)
-    if successor_norm <= GRADIENT_LIVE_TOLERANCE:
-        raise G42GradientGateError("successor_gradient_zero_or_not_live", diagnostics)
     raw_sum = tuple(
         left.to(torch.float64) + right.to(torch.float64)
         for left, right in zip(immediate_rows, successor_rows)
     )
     raw_sum_norm = _global_norm(raw_sum)
     diagnostics["raw_sum_norm"] = raw_sum_norm
-    if raw_sum_norm <= GRADIENT_LIVE_TOLERANCE:
-        raise G42GradientGateError("raw_sum_cancellation", diagnostics)
-    target = float(registered_gradient_norm)
-    if not np.isfinite(target) or target <= GRADIENT_LIVE_TOLERANCE:
+    if not np.isfinite(target) or target < 0.0:
         raise G42GradientGateError(
-            "registered_gradient_norm_zero_or_not_live", diagnostics
+            "registered_gradient_norm_negative_or_nonfinite", diagnostics
         )
+    if target == 0.0:
+        gradients = tuple(torch.zeros_like(parameter) for parameter in parameters)
+        error, tolerance = validate_scale_match(
+            registered_gradient_norm=target,
+            applied_gradient_norm=_global_norm(gradients),
+        )
+        return ScaleMatchedRawSumComposition(
+            gradients=gradients,
+            raw_sum_gradients=raw_sum,
+            immediate_norm=immediate_norm,
+            successor_norm=successor_norm,
+            raw_sum_norm=raw_sum_norm,
+            registered_gradient_norm=target,
+            applied_gradient_norm=0.0,
+            scale_factor=0.0,
+            scale_match_error=error,
+            scale_match_tolerance=tolerance,
+            registered_norm_zero=True,
+        )
+    if not np.isfinite(raw_sum_norm) or raw_sum_norm == 0.0:
+        raise G42GradientGateError("positive_norm_raw_sum_zero_or_nonfinite", diagnostics)
     scale_factor = target / raw_sum_norm
     if not np.isfinite(scale_factor) or scale_factor <= 0.0:
         raise G42GradientGateError("invalid_scale_factor", diagnostics)
@@ -195,6 +239,7 @@ def compose_scale_matched_raw_sum_gradients(
     )
     return ScaleMatchedRawSumComposition(
         gradients=gradients,
+        raw_sum_gradients=raw_sum,
         immediate_norm=immediate_norm,
         successor_norm=successor_norm,
         raw_sum_norm=raw_sum_norm,
@@ -203,6 +248,7 @@ def compose_scale_matched_raw_sum_gradients(
         scale_factor=scale_factor,
         scale_match_error=error,
         scale_match_tolerance=tolerance,
+        registered_norm_zero=False,
     )
 
 
@@ -219,11 +265,266 @@ def raw_sum_composition_record(
         "scale_factor": composition.scale_factor,
         "scale_match_error": composition.scale_match_error,
         "scale_match_tolerance": composition.scale_match_tolerance,
+        "registered_norm_zero": composition.registered_norm_zero,
+        "actor_gradients_exact_zero": all(
+            bool(torch.count_nonzero(row) == 0)
+            for row in composition.gradients
+        ),
         "db_direction_input_present": False,
         "channel_fallback_used": False,
         "sum_perturbed": False,
         "passed": True,
     }
+
+
+def _gradient_liveness_row(rows: Sequence[torch.Tensor]) -> dict[str, object]:
+    norm = _global_norm(rows)
+    finite = bool(np.isfinite(norm))
+    return {
+        "gradient_norm": norm,
+        "finite": finite,
+        "live": bool(finite and norm > GRADIENT_LIVE_TOLERANCE),
+    }
+
+
+def registered_gradient_evidence(
+    model: g41.G41NoSlowProjection,
+    immediate_actor_gradients: Sequence[torch.Tensor | None],
+    successor_actor_gradients: Sequence[torch.Tensor | None],
+    immediate_baseline_gradients: Sequence[torch.Tensor | None],
+    successor_baseline_gradients: Sequence[torch.Tensor | None],
+) -> dict[str, object]:
+    """Bind every registered actor group and both baseline-output gradients."""
+
+    actor_parameters = model.full_actor_parameters()
+    baseline_parameters = tuple(model.credit_baselines.parameters())
+    immediate_actor = _gradient_rows(
+        immediate_actor_gradients, actor_parameters
+    )
+    successor_actor = _gradient_rows(
+        successor_actor_gradients, actor_parameters
+    )
+    immediate_baseline = _gradient_rows(
+        immediate_baseline_gradients, baseline_parameters
+    )
+    successor_baseline = _gradient_rows(
+        successor_baseline_gradients, baseline_parameters
+    )
+    actor_groups = g40._actor_groups(model)
+    if tuple(actor_groups) != g40.REGISTERED_ACTOR_GROUPS:
+        raise G42GradientGateError(
+            "registered_actor_group_inventory_mismatch",
+            {"observed_actor_groups": tuple(actor_groups)},
+        )
+    actor_names = {
+        id(parameter): name
+        for name, parameter in g40._named_full_actor_parameters(model)
+    }
+    actor_indexes = {
+        id(parameter): index
+        for index, parameter in enumerate(actor_parameters)
+    }
+    grouped_parameter_ids = tuple(
+        id(parameter)
+        for parameters in actor_groups.values()
+        for parameter in parameters
+    )
+    if (
+        len(set(grouped_parameter_ids)) != len(grouped_parameter_ids)
+        or set(grouped_parameter_ids) != set(actor_indexes)
+        or set(actor_names) != set(actor_indexes)
+    ):
+        raise G42GradientGateError(
+            "registered_actor_group_parameter_coverage_mismatch", {}
+        )
+
+    def channel_rows(
+        gradients: tuple[torch.Tensor, ...],
+    ) -> dict[str, dict[str, object]]:
+        return {
+            group: _gradient_liveness_row(
+                tuple(gradients[actor_indexes[id(parameter)]] for parameter in parameters)
+            )
+            for group, parameters in actor_groups.items()
+        }
+
+    evidence = {
+        "registered_actor_groups": list(g40.REGISTERED_ACTOR_GROUPS),
+        "actor_group_parameter_names": {
+            group: [actor_names[id(parameter)] for parameter in parameters]
+            for group, parameters in actor_groups.items()
+        },
+        "actor_channels": {
+            "immediate": channel_rows(immediate_actor),
+            "successor": channel_rows(successor_actor),
+        },
+        "actor_channel_global": {
+            "immediate": _gradient_liveness_row(immediate_actor),
+            "successor": _gradient_liveness_row(successor_actor),
+        },
+        "baseline_outputs": {
+            "immediate": _gradient_liveness_row(immediate_baseline),
+            "successor": _gradient_liveness_row(successor_baseline),
+        },
+    }
+    evidence["passed"] = validate_registered_gradient_evidence(evidence)
+    return evidence
+
+
+def _valid_live_gradient_row(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    norm = value.get("gradient_norm")
+    return bool(
+        value.get("finite") is True
+        and value.get("live") is True
+        and isinstance(norm, (int, float))
+        and not isinstance(norm, bool)
+        and np.isfinite(float(norm))
+        and float(norm) > GRADIENT_LIVE_TOLERANCE
+    )
+
+
+def _valid_finite_gradient_row(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    norm = value.get("gradient_norm")
+    if (
+        not isinstance(norm, (int, float))
+        or isinstance(norm, bool)
+        or not np.isfinite(float(norm))
+        or float(norm) < 0.0
+    ):
+        return False
+    return bool(
+        value.get("finite") is True
+        and isinstance(value.get("live"), bool)
+        and value.get("live")
+        is (float(norm) > GRADIENT_LIVE_TOLERANCE)
+    )
+
+
+def validate_registered_gradient_evidence(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    if value.get("registered_actor_groups") != list(g40.REGISTERED_ACTOR_GROUPS):
+        return False
+    inventory = value.get("actor_group_parameter_names")
+    channels = value.get("actor_channels")
+    global_channels = value.get("actor_channel_global")
+    baselines = value.get("baseline_outputs")
+    if (
+        not isinstance(inventory, Mapping)
+        or tuple(inventory) != g40.REGISTERED_ACTOR_GROUPS
+        or any(
+            not isinstance(inventory.get(group), list)
+            or not inventory[group]
+            or any(not isinstance(name, str) for name in inventory[group])
+            for group in g40.REGISTERED_ACTOR_GROUPS
+        )
+        or not isinstance(channels, Mapping)
+        or tuple(channels) != ("immediate", "successor")
+        or not isinstance(global_channels, Mapping)
+        or tuple(global_channels) != ("immediate", "successor")
+        or any(
+            not _valid_live_gradient_row(global_channels.get(channel))
+            for channel in ("immediate", "successor")
+        )
+        or not isinstance(baselines, Mapping)
+        or tuple(baselines) != ("immediate", "successor")
+    ):
+        return False
+    for channel in ("immediate", "successor"):
+        rows = channels.get(channel)
+        if (
+            not isinstance(rows, Mapping)
+            or tuple(rows) != g40.REGISTERED_ACTOR_GROUPS
+            or any(
+                not _valid_finite_gradient_row(rows.get(group))
+                for group in g40.REGISTERED_ACTOR_GROUPS
+            )
+        ):
+            return False
+    return bool(
+        all(
+            any(
+                channels[channel][group]["live"] is True
+                for channel in ("immediate", "successor")
+            )
+            for group in g40.REGISTERED_ACTOR_GROUPS
+        )
+        and all(
+            _valid_live_gradient_row(baselines.get(output))
+            for output in ("immediate", "successor")
+        )
+    )
+
+
+def _channel_gradient_probe(
+    model: g41.G41NoSlowProjection,
+    replay: g41.G41RetainedReplay,
+    trajectory: AnchoredRosterTrajectory,
+    credit: g41.G41Credit,
+    normalized_advantages: tuple[torch.Tensor, torch.Tensor],
+) -> _ChannelGradientProbe:
+    actor_parameters = model.full_actor_parameters()
+    baseline_parameters = tuple(model.credit_baselines.parameters())
+    entropy_loss = g40.ENTROPY_COEFFICIENT * g40._entropy(replay)
+    immediate = g40._policy_loss_from_normalized_advantage(
+        replay, trajectory, normalized_advantages[0]
+    ) - entropy_loss
+    successor = g40._policy_loss_from_normalized_advantage(
+        replay, trajectory, normalized_advantages[1]
+    ) - entropy_loss
+    immediate_actor = _gradient_rows(
+        torch.autograd.grad(
+            immediate, actor_parameters, retain_graph=True, allow_unused=True
+        ),
+        actor_parameters,
+    )
+    successor_actor = _gradient_rows(
+        torch.autograd.grad(
+            successor, actor_parameters, retain_graph=True, allow_unused=True
+        ),
+        actor_parameters,
+    )
+    immediate_baseline_loss = F.mse_loss(
+        replay.immediate_baselines, trajectory.rewards.detach()
+    )
+    successor_baseline_loss = F.mse_loss(
+        replay.successor_baselines, credit.successor_targets
+    )
+    immediate_baseline = torch.autograd.grad(
+        immediate_baseline_loss,
+        baseline_parameters,
+        retain_graph=True,
+        allow_unused=True,
+    )
+    successor_baseline = torch.autograd.grad(
+        successor_baseline_loss,
+        baseline_parameters,
+        retain_graph=True,
+        allow_unused=True,
+    )
+    evidence = registered_gradient_evidence(
+        model,
+        immediate_actor,
+        successor_actor,
+        immediate_baseline,
+        successor_baseline,
+    )
+    if not validate_registered_gradient_evidence(evidence):
+        raise G42GradientGateError(
+            "registered_gradient_evidence_failed", evidence
+        )
+    return _ChannelGradientProbe(
+        policy=0.5 * (immediate + successor),
+        immediate_baseline_loss=immediate_baseline_loss,
+        successor_baseline_loss=successor_baseline_loss,
+        immediate_actor_gradients=immediate_actor,
+        successor_actor_gradients=successor_actor,
+        gradient_evidence=evidence,
+    )
 
 
 def raw_sum_null_dependency_audit() -> dict[str, object]:
@@ -275,6 +576,257 @@ def raw_sum_null_dependency_audit() -> dict[str, object]:
         "registered_scalar_norm_only": scalar_only_contract and not forbidden,
         "passed": scalar_only_contract and not forbidden,
     }
+
+
+def direction_unit_distance_record(
+    db_gradients: Sequence[torch.Tensor],
+    raw_sum_gradients: Sequence[torch.Tensor],
+    *,
+    registered_gradient_norm: float,
+) -> dict[str, object]:
+    if not db_gradients or len(db_gradients) != len(raw_sum_gradients):
+        raise G42GradientGateError("direction_distance_inventory_mismatch", {})
+    if any(
+        left.shape != right.shape
+        or not bool(torch.isfinite(left).all())
+        or not bool(torch.isfinite(right).all())
+        for left, right in zip(db_gradients, raw_sum_gradients)
+    ):
+        raise G42GradientGateError(
+            "direction_distance_shape_or_finiteness", {}
+        )
+    db_norm = _global_norm(db_gradients)
+    raw_sum_norm = _global_norm(raw_sum_gradients)
+    validate_scale_match(
+        registered_gradient_norm=registered_gradient_norm,
+        applied_gradient_norm=db_norm,
+    )
+    if registered_gradient_norm == 0.0:
+        return {
+            "db_unit_direction_norm": 0.0,
+            "raw_sum_unit_direction_norm": (
+                0.0 if raw_sum_norm == 0.0 else 1.0
+            ),
+            "unit_direction_distance": 0.0,
+            "unit_direction_distance_defined": False,
+            "registered_norm_zero": True,
+            "strict_separation_observed": False,
+            "separation_threshold": DIRECTION_SEPARATION_TOLERANCE,
+            "passed": True,
+        }
+    if not np.isfinite(raw_sum_norm) or raw_sum_norm == 0.0:
+        raise G42GradientGateError(
+            "positive_norm_raw_sum_zero_or_nonfinite",
+            {
+                "registered_gradient_norm": registered_gradient_norm,
+                "raw_sum_norm": raw_sum_norm,
+            },
+        )
+    distance = _global_norm(
+        tuple(
+            left.to(torch.float64) / db_norm
+            - right.to(torch.float64) / raw_sum_norm
+            for left, right in zip(db_gradients, raw_sum_gradients)
+        )
+    )
+    if not np.isfinite(distance):
+        raise G42GradientGateError("direction_distance_nonfinite", {})
+    return {
+        "db_unit_direction_norm": 1.0,
+        "raw_sum_unit_direction_norm": 1.0,
+        "unit_direction_distance": distance,
+        "unit_direction_distance_defined": True,
+        "registered_norm_zero": False,
+        "strict_separation_observed": bool(
+            distance > DIRECTION_SEPARATION_TOLERANCE
+        ),
+        "separation_threshold": DIRECTION_SEPARATION_TOLERANCE,
+        "passed": True,
+    }
+
+
+def _update_gradient_evidence_valid(value: object) -> bool:
+    if not isinstance(value, Mapping) or value.get("passed") is not True:
+        return False
+    replicate = value.get("accepted_g40_anchor_replicate")
+    boundary = value.get("branch_boundary")
+    if (
+        isinstance(replicate, bool)
+        or not isinstance(replicate, int)
+        or replicate not in ACCEPTED_G40_ANCHOR_REPLICATES
+        or not isinstance(boundary, Mapping)
+        or boundary.get("accepted_g40_anchor_authority")
+        != g41.accepted_g40_anchor_identity(replicate)
+    ):
+        return False
+    pass_records = value.get("pass_records")
+    if not isinstance(pass_records, list) or len(pass_records) != PPO_PASSES:
+        return False
+    for pass_index, pass_record in enumerate(pass_records):
+        if (
+            not isinstance(pass_record, Mapping)
+            or pass_record.get("pass_index") != pass_index
+        ):
+            return False
+        evidence_by_arm = pass_record.get("gradient_evidence")
+        comparison = pass_record.get("direction_comparison")
+        if (
+            not isinstance(evidence_by_arm, Mapping)
+            or tuple(evidence_by_arm) != ARMS
+            or any(
+                not validate_registered_gradient_evidence(
+                    evidence_by_arm.get(arm)
+                )
+                for arm in ARMS
+            )
+            or not isinstance(comparison, Mapping)
+            or comparison.get("passed") is not True
+        ):
+            return False
+        distance = comparison.get("unit_direction_distance")
+        if (
+            not isinstance(distance, (int, float))
+            or isinstance(distance, bool)
+            or not np.isfinite(float(distance))
+            or float(distance) < 0.0
+        ):
+            return False
+    return True
+
+
+def build_conclusion_evidence(
+    update_records: Sequence[Mapping[str, object]], *, formal: bool
+) -> dict[str, object]:
+    if not isinstance(formal, bool) or not update_records:
+        raise ValueError("G42 conclusion evidence requires records and a bool scope")
+    rows_by_replicate: dict[int, list[float]] = {}
+    defined_by_replicate: dict[int, list[bool]] = {}
+    records_valid = True
+    for record in update_records:
+        replicate = record.get("accepted_g40_anchor_replicate")
+        if (
+            isinstance(replicate, bool)
+            or not isinstance(replicate, int)
+            or replicate not in ACCEPTED_G40_ANCHOR_REPLICATES
+            or not _update_gradient_evidence_valid(record)
+        ):
+            records_valid = False
+            continue
+        rows_by_replicate.setdefault(replicate, [])
+        defined_by_replicate.setdefault(replicate, [])
+        for pass_record in record["pass_records"]:  # type: ignore[index]
+            comparison = pass_record["direction_comparison"]
+            rows_by_replicate[replicate].append(
+                float(comparison["unit_direction_distance"])
+            )
+            defined_by_replicate[replicate].append(
+                comparison["unit_direction_distance_defined"] is True
+            )
+    required_replicates = (
+        list(ACCEPTED_G40_ANCHOR_REPLICATES)
+        if formal
+        else sorted(rows_by_replicate)
+    )
+    replicate_rows = [
+        {
+            "replicate": replicate,
+            "unit_direction_distances": rows_by_replicate.get(replicate, []),
+            "unit_direction_distance_defined": defined_by_replicate.get(
+                replicate, []
+            ),
+            "strict_separation_observed": any(
+                defined
+                and distance > DIRECTION_SEPARATION_TOLERANCE
+                for distance, defined in zip(
+                    rows_by_replicate.get(replicate, []),
+                    defined_by_replicate.get(replicate, []),
+                )
+            ),
+        }
+        for replicate in required_replicates
+    ]
+    scope_valid = (
+        set(rows_by_replicate) == set(ACCEPTED_G40_ANCHOR_REPLICATES)
+        if formal
+        else len(rows_by_replicate) == 1
+    )
+    evidence = {
+        "formal": formal,
+        "required_replicates": required_replicates,
+        "separation_threshold": DIRECTION_SEPARATION_TOLERANCE,
+        "strictly_greater_required": True,
+        "records_valid": records_valid,
+        "gradient_evidence_valid": records_valid,
+        "replicate_rows": replicate_rows,
+        "passed": bool(
+            records_valid
+            and scope_valid
+            and replicate_rows
+            and all(row["strict_separation_observed"] for row in replicate_rows)
+        ),
+    }
+    return evidence
+
+
+def validate_conclusion_evidence(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    formal = value.get("formal")
+    rows = value.get("replicate_rows")
+    required = value.get("required_replicates")
+    if (
+        not isinstance(formal, bool)
+        or value.get("separation_threshold") != DIRECTION_SEPARATION_TOLERANCE
+        or value.get("strictly_greater_required") is not True
+        or value.get("records_valid") is not True
+        or value.get("gradient_evidence_valid") is not True
+        or not isinstance(rows, list)
+        or not isinstance(required, list)
+        or not rows
+    ):
+        return False
+    expected_replicates = (
+        list(ACCEPTED_G40_ANCHOR_REPLICATES) if formal else required
+    )
+    if required != expected_replicates or (not formal and len(required) != 1):
+        return False
+    observed: list[int] = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            return False
+        replicate = row.get("replicate")
+        distances = row.get("unit_direction_distances")
+        defined = row.get("unit_direction_distance_defined")
+        if (
+            isinstance(replicate, bool)
+            or not isinstance(replicate, int)
+            or replicate not in ACCEPTED_G40_ANCHOR_REPLICATES
+            or not isinstance(distances, list)
+            or not isinstance(defined, list)
+            or not distances
+            or len(distances) != len(defined)
+            or any(
+                not isinstance(distance, (int, float))
+                or isinstance(distance, bool)
+                or not np.isfinite(float(distance))
+                or float(distance) < 0.0
+                for distance in distances
+            )
+            or any(not isinstance(item, bool) for item in defined)
+        ):
+            return False
+        separated = any(
+            item and float(distance) > DIRECTION_SEPARATION_TOLERANCE
+            for distance, item in zip(distances, defined)
+        )
+        if row.get("strict_separation_observed") is not separated:
+            return False
+        observed.append(replicate)
+    return bool(
+        observed == required
+        and value.get("passed") is True
+        and all(row["strict_separation_observed"] for row in rows)
+    )
 
 
 def project_g42_arms(
@@ -401,37 +953,21 @@ def _prepare_raw_sum_pass(
     *,
     registered_gradient_norm: float,
 ) -> _RawSumPassPlan:
-    parameters = model.full_actor_parameters()
-    entropy_loss = g40.ENTROPY_COEFFICIENT * g40._entropy(replay)
-    immediate = g40._policy_loss_from_normalized_advantage(
-        replay, trajectory, normalized_advantages[0]
-    ) - entropy_loss
-    successor = g40._policy_loss_from_normalized_advantage(
-        replay, trajectory, normalized_advantages[1]
-    ) - entropy_loss
-    immediate_gradients = torch.autograd.grad(
-        immediate, parameters, retain_graph=True, allow_unused=True
-    )
-    successor_gradients = torch.autograd.grad(
-        successor, parameters, retain_graph=True, allow_unused=True
+    probe = _channel_gradient_probe(
+        model, replay, trajectory, credit, normalized_advantages
     )
     composition = compose_scale_matched_raw_sum_gradients(
-        immediate_gradients,
-        successor_gradients,
-        parameters,
+        probe.immediate_actor_gradients,
+        probe.successor_actor_gradients,
+        model.full_actor_parameters(),
         registered_gradient_norm=registered_gradient_norm,
     )
-    immediate_baseline = F.mse_loss(
-        replay.immediate_baselines, trajectory.rewards.detach()
-    )
-    successor_baseline = F.mse_loss(
-        replay.successor_baselines, credit.successor_targets
-    )
     return _RawSumPassPlan(
-        policy=0.5 * (immediate + successor),
-        immediate_baseline_loss=immediate_baseline,
-        successor_baseline_loss=successor_baseline,
+        policy=probe.policy,
+        immediate_baseline_loss=probe.immediate_baseline_loss,
+        successor_baseline_loss=probe.successor_baseline_loss,
         composition=composition,
+        gradient_evidence=probe.gradient_evidence,
     )
 
 
@@ -548,6 +1084,9 @@ def optimize_matched_direction_attribution_update(
             first_replays_equal = _replays_equal(db_replay, no_db_replay)
             if not first_replays_equal:
                 raise ValueError("G42 first paired replay differs before optimizer step")
+        db_probe = _channel_gradient_probe(
+            db_model, db_replay, trajectory, credit, normalized
+        )
         _, db_preview_gradients = g40._actor_objective_gradients(
             g40.G31_ARM,
             db_model,
@@ -562,6 +1101,11 @@ def optimize_matched_direction_attribution_update(
             trajectory,
             credit,
             normalized,
+            registered_gradient_norm=registered_norm,
+        )
+        direction_comparison = direction_unit_distance_record(
+            db_preview_gradients,
+            no_db_plan.composition.raw_sum_gradients,
             registered_gradient_norm=registered_norm,
         )
         db_metrics = g41._retained_actor_head_pass(
@@ -585,6 +1129,11 @@ def optimize_matched_direction_attribution_update(
                 "db_successor_baseline_loss": db_metrics[2],
                 "no_db_successor_baseline_loss": no_db_metrics[2],
                 "db_registered_gradient_norm": registered_norm,
+                "gradient_evidence": {
+                    DB_ARM: db_probe.gradient_evidence,
+                    NO_DB_ARM: no_db_plan.gradient_evidence,
+                },
+                "direction_comparison": direction_comparison,
                 "no_db_composition": raw_sum_composition_record(
                     no_db_plan.composition
                 ),
@@ -616,10 +1165,20 @@ def optimize_matched_direction_attribution_update(
         and all(value == float(PPO_PASSES) for value in optimizer_steps.values())
         and source_trace["passed"] is True
         and raw_sum_null_dependency_audit()["passed"] is True
+        and all(
+            all(
+                validate_registered_gradient_evidence(
+                    pass_record["gradient_evidence"][arm]  # type: ignore[index]
+                )
+                for arm in ARMS
+            )
+            and pass_record["direction_comparison"]["passed"] is True  # type: ignore[index]
+            for pass_record in pass_records
+        )
     )
     if not passed:
         raise RuntimeError("G42 paired post-update invariant failed")
-    return {
+    record = {
         "algorithm_id": ALGORITHM_ID,
         "accepted_g41_source_commit": ACCEPTED_G41_SOURCE_COMMIT,
         "accepted_g40_anchor_registry": [
@@ -627,6 +1186,9 @@ def optimize_matched_direction_attribution_update(
             for replicate in ACCEPTED_G40_ANCHOR_REPLICATES
         ],
         "arms": list(ARMS),
+        "accepted_g40_anchor_replicate": int(
+            boundary["accepted_g40_anchor_authority"]["replicate"]  # type: ignore[index]
+        ),
         "branch_boundary": boundary,
         "first_paired_replay_equal": first_replays_equal,
         "advantage_normalization_count": 2,
@@ -641,8 +1203,18 @@ def optimize_matched_direction_attribution_update(
         "real_transitions": MAX_CONFORMANCE_TRANSITIONS,
         "K_search": 0,
         "hypothetical_transitions": 0,
+        "treatment_separation_observed": any(
+            pass_record["direction_comparison"][  # type: ignore[index]
+                "strict_separation_observed"
+            ]
+            is True
+            for pass_record in pass_records
+        ),
         "passed": passed,
     }
+    if not _update_gradient_evidence_valid(record):
+        raise RuntimeError("G42 serialized gradient evidence failed validation")
+    return record
 
 
 def serialize_diagnostics(record: Mapping[str, object]) -> str:
@@ -653,9 +1225,22 @@ def build_final_checkpoint(
     arm: str,
     model: g41.G41NoSlowProjection,
     update_record: Mapping[str, object],
+    conclusion_evidence: Mapping[str, object],
+    *,
+    formal: bool,
 ) -> dict[str, object]:
     if arm not in ARMS or update_record.get("passed") is not True:
         raise ValueError("G42 final checkpoint requires one valid registered arm")
+    if not _update_gradient_evidence_valid(update_record):
+        raise ValueError("G42 final checkpoint requires valid group gradients")
+    if (
+        not isinstance(formal, bool)
+        or conclusion_evidence.get("formal") is not formal
+        or not validate_conclusion_evidence(conclusion_evidence)
+    ):
+        raise ValueError(
+            "G42 final checkpoint requires non-collinear treatment evidence"
+        )
     if hasattr(model, "slow_critic") or model.phase != "credit_branch":
         raise ValueError("G42 final checkpoint requires the no-slow branch")
     authority = model.accepted_g40_anchor_authority
@@ -682,6 +1267,7 @@ def build_final_checkpoint(
         "arm": arm,
         "direction_mode": direction_mode,
         "checkpoint_kind": "FINAL_ONLY_NO_SLOW_DIRECTION_ATTRIBUTION",
+        "formal": formal,
         "actor_head_optimizer_steps": PPO_PASSES,
         "standalone_slow_present": False,
         "model_state": state,
@@ -693,5 +1279,6 @@ def build_final_checkpoint(
             "hypothetical_transitions": update_record[
                 "hypothetical_transitions"
             ],
+            "treatment_separation": dict(conclusion_evidence),
         },
     }
