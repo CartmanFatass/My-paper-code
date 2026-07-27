@@ -1,9 +1,12 @@
 """D7.S event-aligned source audit.
 
 Contract (frozen, verbatim authority for every semantic choice):
-    docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R2.md (FROZEN 2026-07-26)
-    supersedes D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md (n_select=2/n_eval=2,
-    shared-prefix clone realization, selection diagnostic)
+    docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R3.md (FROZEN 2026-07-26)
+    supersedes R2, which superseded D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md.
+    R2 kept n_select=2/n_eval=2, shared-prefix cloning and the selection
+    diagnostic; R3 replaces prefix RECONSTRUCTION with direct capture off the
+    live certified environment, replaces the narrow state hash with a
+    complete-state fingerprint, and restates condition 1 as 1A/1B/1C.
 G2 binding reference (CONSTRUCTIVE_CHARGE_ROTATION, LEAVE/REJOIN lifecycle,
 heldout_low profile):
     docs/research/designs/UAV_CHARGE_ROTATION_ROSTER_G2.md
@@ -73,7 +76,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import numpy as np
 
-CONTRACT_PATH = "docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R2.md"
+CONTRACT_PATH = "docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R3.md"
 
 # DO NOT change CONTRACT_ID with the contract path. It is an input to
 # `stream_seed`, so every registered continuation stream in the audit derives
