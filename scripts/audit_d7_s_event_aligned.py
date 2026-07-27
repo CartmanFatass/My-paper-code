@@ -789,6 +789,32 @@ def null_update(*, duty_map: dict[int, int]) -> dict[int, int]:
     return dict(duty_map)
 
 
+def limb_locked_duties(*, stable_focal_duty) -> dict:
+    """Which duties each limb is permitted to freeze during its intervention.
+
+    Extracted as a pure function by the Stage B repair so the property is
+    testable rather than buried in the event builder, which is where it went
+    wrong.
+
+    Section 1 is explicit that non-focal duties are **never** frozen -- for
+    every candidate `z`, all other airborne assignments are reoptimized
+    one-to-one under `constructive_mixed`. So:
+
+    - **stable limb: nothing is locked.** It previously received the FLEX
+      focal's incumbent duty, which restricted the stable SET joint
+      continuation relative to the registered maximization and made SET look
+      artificially costly. That biases toward "persistence is necessary" --
+      claim-favouring, the same asymmetry that disqualified `n_select=1`.
+    - **flex limb: the certified stable incumbent's duty.** This is not an
+      extra constraint; preserving an active stable incumbent's target between
+      lifecycle events IS `constructive_mixed` semantics (section 4).
+    """
+    return {
+        "stable": frozenset(),
+        "flex": frozenset({stable_focal_duty}) if stable_focal_duty is not None else frozenset(),
+    }
+
+
 def full_sync_set_update(*, duty_positions: dict[int, np.ndarray],
                           airborne_positions: dict[int, np.ndarray]) -> dict[int, int]:
     """`full_sync_SET`: reassigns every duty at every check (Part-A conformance
@@ -1577,7 +1603,8 @@ def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
 
 def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
                                     charging_before: np.ndarray, charging_after: np.ndarray,
-                                    schedule: str, locked_duties: frozenset = frozenset()):
+                                    schedule: str, locked_duties: frozenset = frozenset(),
+                                    step_index: int = 0):
     """Detects LEAVE (rising edge of `uav_charging`) and REJOIN (falling
     edge) per UAV and drives `duty_map` through the already-accepted PURE
     `constructive_mixed_update`/`null_update` functions -- never
@@ -1587,10 +1614,17 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
     `schedule == "full_sync_SET"` (Part-A conformance diagnostic, section 4:
     "reassigns every duty at each check", stable limb only, never applied on
     the flex limb) bypasses the LEAVE/REJOIN edge-driven update entirely and
-    recomputes the WHOLE duty map from scratch every step via the
-    already-accepted `full_sync_set_update`, regardless of whether a
-    transition happened this step -- it never preserves any incumbent,
-    locked or not."""
+    recomputes the WHOLE duty map from scratch via the already-accepted
+    `full_sync_set_update` -- it never preserves any incumbent, locked or not.
+
+    CADENCE (Stage B repair, Pro ruling 2026-07-26): that recomputation happens
+    only at a **shared check boundary**, `step_index % DELTA == 0`, not on every
+    primitive step. The contract defines this control as reassigning "every duty
+    at each check"; an every-step realization is a materially stronger control.
+    Because `full_sync_SET` supplies `D_A`, its cadence can decide whether
+    `PART_A_CONTRADICTION` fires, so this is claim-bearing rather than
+    cosmetic. Between checks the duty map is carried forward unchanged, which is
+    what "reassigns at each check" means for the steps in between."""
     charging_before = np.asarray(charging_before, dtype=bool)
     charging_after = np.asarray(charging_after, dtype=bool)
     leave_uavs = [i for i in range(len(charging_after)) if charging_after[i] and not charging_before[i]]
@@ -1600,8 +1634,11 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
         for i in range(int(env.n_uavs)) if not charging_after[i]
     }
     if schedule == "full_sync_SET":
-        new_map = full_sync_set_update(
-            duty_positions=duty_positions, airborne_positions=airborne_positions)
+        if int(step_index) % int(DELTA) == 0:
+            new_map = full_sync_set_update(
+                duty_positions=duty_positions, airborne_positions=airborne_positions)
+        else:
+            new_map = dict(duty_map)      # between checks: carried forward, not reassigned
         return new_map, leave_uavs, rejoin_uavs
     new_map = dict(duty_map)
     for u in leave_uavs:
@@ -1677,7 +1714,7 @@ def real_env_state_snapshot(env, duty_map: dict) -> dict:
 
 def step_once(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
               schedule: str = "constructive_mixed", target_override: Optional[dict] = None,
-              locked_duties: frozenset = frozenset()) -> dict:
+              locked_duties: frozenset = frozenset(), step_index: int = 0) -> dict:
     """The atomic real-env step: compute live duty geometry, synthesize
     every UAV's action (item 1), step the env (energy accounting runs
     inside `env.step`), then drive the duty map through any LEAVE/REJOIN
@@ -1703,7 +1740,7 @@ def step_once(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
     new_map, leave_uavs, rejoin_uavs = update_duty_map_on_transitions(
         duty_map=duty_map, duty_positions=duty_positions, env=env,
         charging_before=charging_before, charging_after=charging_after,
-        schedule=schedule, locked_duties=locked_duties)
+        schedule=schedule, locked_duties=locked_duties, step_index=step_index)
     metrics = extract_step_metrics(env, infos) if infos else {
         "qos_satisfaction_ratio": 0.0, "return_constraint_cost": 0.0,
         "return_constraint_cost_raw": 0.0,
@@ -1986,9 +2023,6 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                 diag_entry["rejected_reasons"] = []
                 leave_diagnostics.append(diag_entry)
                 locked_for_stable = frozenset({stable_choice["duty"]})
-                flex_focal_duty = next(
-                    (d for d, uu in duty_map.items() if uu == focal_flex), None)
-                locked_for_flex = frozenset({flex_focal_duty}) if flex_focal_duty is not None else frozenset()
                 event = {
                     "t_e": t + 1,
                     "focal_flex_uav": focal_flex,
@@ -2003,7 +2037,23 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                         "stable": {_target_id(z): z for z in stable_choice["legal_targets"]},
                         "flex": {_target_id(z): z for z in legal_flex},
                     },
-                    "locked_duties": {"stable": locked_for_flex, "flex": locked_for_stable},
+                    # Stage B repair (Pro ruling 2026-07-26). The stable limb
+                    # used to receive `locked_for_flex` -- the FLEX focal's
+                    # incumbent duty -- which froze a non-focal duty during the
+                    # stable intervention. Section 1 says non-focal duties are
+                    # never frozen: they are reoptimized one-to-one under
+                    # `constructive_mixed`. Locking one restricted the stable
+                    # SET joint continuation relative to the registered
+                    # maximization and made SET look artificially costly, which
+                    # biases TOWARD "persistence is necessary" -- the same
+                    # claim-favouring asymmetry that disqualified n_select=1.
+                    #
+                    # The flex limb keeps `locked_for_stable`: preserving a
+                    # genuinely certified stable incumbent IS `constructive_mixed`
+                    # semantics ("preserves every active stable incumbent's
+                    # target between lifecycle events"), not an extra constraint.
+                    "locked_duties": limb_locked_duties(
+                        stable_focal_duty=stable_choice["duty"]),
                     "conformance_record": build_event_conformance_record(cand),
                     # Item 3 / arm-distinctness spot check witness: the
                     # PRE-LEAVE duty map is exactly what `null` freezes for
@@ -2305,7 +2355,7 @@ def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
             override = {focal_uav: np.asarray(focal_target, dtype=float)}
         step = step_once(env, duty_map=duty_map, service_centroids=service_centroids,
                           schedule=schedule, target_override=override,
-                          locked_duties=locked_duties)
+                          locked_duties=locked_duties, step_index=t)
         duty_map = step["duty_map"]
         service_centroids = step["service_centroids"]
         step_metrics.append(step["metrics"])

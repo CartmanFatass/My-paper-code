@@ -2067,6 +2067,93 @@ def test_selection_diagnostic_handles_an_event_with_no_legal_candidates():
     assert diag["selection_frequency"] == {}
 
 
+# =============================================================================
+# Stage B repairs (Pro ruling 2026-07-26): the two independent realization
+# mismatches. Both are claim-bearing, so both get a witness.
+# =============================================================================
+
+def test_full_sync_set_reassigns_only_at_shared_check_boundaries():
+    """Mismatch A. The contract defines `full_sync_SET` as reassigning every
+    duty AT EACH CHECK. It used to recompute the whole duty map on every
+    primitive step, which is a materially stronger control -- and since it
+    supplies `D_A`, its cadence can decide whether PART_A_CONTRADICTION fires."""
+    env = _CloneableFakeEnv(seed=31)
+    duty_positions, _ = audit.compute_duty_positions(env)
+    n = int(env.n_uavs)
+    charging = np.zeros(n, dtype=bool)
+
+    # A duty map deliberately unlike the full-sync assignment, so a
+    # recomputation is visibly different from carrying it forward.
+    scrambled = {i: (i + 1) % n for i in range(n)}
+
+    at_check, _, _ = audit.update_duty_map_on_transitions(
+        duty_map=scrambled, duty_positions=duty_positions, env=env,
+        charging_before=charging, charging_after=charging,
+        schedule="full_sync_SET", step_index=0)
+    between, _, _ = audit.update_duty_map_on_transitions(
+        duty_map=scrambled, duty_positions=duty_positions, env=env,
+        charging_before=charging, charging_after=charging,
+        schedule="full_sync_SET", step_index=1)
+
+    expected = audit.full_sync_set_update(
+        duty_positions=duty_positions,
+        airborne_positions={i: np.asarray(env.uav_positions[i], dtype=float)
+                            for i in range(n)})
+
+    assert at_check == expected                 # t=0 is a check: reassigned
+    assert between == scrambled                 # t=1 is not: carried forward
+    assert at_check != between
+
+    # Every multiple of DELTA is a check; nothing in between is.
+    for t in range(0, 3 * audit.DELTA + 1):
+        out, _, _ = audit.update_duty_map_on_transitions(
+            duty_map=scrambled, duty_positions=duty_positions, env=env,
+            charging_before=charging, charging_after=charging,
+            schedule="full_sync_SET", step_index=t)
+        assert out == (expected if t % audit.DELTA == 0 else scrambled), f"step {t}"
+
+
+def test_stable_limb_locks_nothing_and_flex_locks_the_certified_stable_duty():
+    """Mismatch B. Section 1: non-focal duties are NEVER frozen -- every other
+    airborne assignment is reoptimized one-to-one under constructive_mixed.
+
+    The stable limb used to be handed the flex focal's incumbent duty, which
+    restricted its SET joint continuation and made SET look artificially
+    costly. That errs toward 'persistence is necessary' -- the same
+    claim-favouring direction that disqualified n_select=1, which is why this
+    is a mismatch rather than a tuning detail."""
+    locks = audit.limb_locked_duties(stable_focal_duty=3)
+
+    assert locks["stable"] == frozenset(), (
+        "the stable limb must lock nothing; locking a non-focal duty biases SET "
+        "toward looking costly")
+    assert locks["flex"] == frozenset({3})
+
+    # Degenerate case: no certified stable duty means no lock anywhere.
+    assert audit.limb_locked_duties(stable_focal_duty=None) == {
+        "stable": frozenset(), "flex": frozenset()}
+
+
+def test_locking_a_duty_actually_restricts_reassignment():
+    """The mechanism the previous test's property depends on: a locked duty is
+    genuinely withheld from reassignment, so handing the stable limb a lock was
+    not a harmless no-op."""
+    duty_positions = {0: np.array([0.0, 0.0]), 1: np.array([500.0, 500.0])}
+    airborne = {0: np.array([490.0, 490.0]), 1: np.array([10.0, 10.0])}
+
+    unlocked = audit.constructive_mixed_update(
+        duty_map={0: 0, 1: 1}, duty_positions=duty_positions,
+        airborne_positions=airborne, event="LEAVE", event_uav=None,
+        locked_duties=frozenset())
+    locked = audit.constructive_mixed_update(
+        duty_map={0: 0, 1: 1}, duty_positions=duty_positions,
+        airborne_positions=airborne, event="LEAVE", event_uav=None,
+        locked_duties=frozenset({0}))
+
+    assert locked[0] == 0, "a locked duty keeps its incumbent"
+    assert unlocked != locked or unlocked[0] == 0
+
+
 def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
     """Item 5b, second half: 'at run level, conformance_ok=False when the
     pinned-topology hash fails' -- exercised directly against the pure
