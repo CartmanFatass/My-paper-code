@@ -35,6 +35,24 @@ the credit package; credit-specific auxiliary heads or parameters must be
 explicitly enumerated. Reject the design if the null cannot be sufficiently
 matched to distinguish credit from hidden actor/critic capacity.
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_CODE_SCIENCE_INDEX.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_FORMAL_RESULT.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/project/CURRENT_WORK.md`
+- `docs/report/ITERATION_30.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_formal_result_review/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_formal_result_review/50_MECHANICAL_INTAKE_RECORD.md`
+
 ## Frozen design boundary
 
 Hold fixed native-six actor graph, no-carry semantics, actor information, active
