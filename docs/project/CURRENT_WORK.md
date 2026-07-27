@@ -129,8 +129,8 @@ and returns exactly one `COMPLETE` or `ERROR` terminal payload.
 No Controller, persistent Monitor, dispatcher, callback route, global write
 lease or compatibility line is active.
 
-Iteration reports 1–26 are complete. 24, 25 and 26 are all supporting work and
-consume no conclusion-bearing quota; the next conclusion-bearing report is 27,
+Iteration reports 1–27 are complete. 24 through 27 are all supporting work and
+consume no conclusion-bearing quota; the next conclusion-bearing report is 28,
 and it will be the audit result itself.
 `conclusion_bearing_iterations_consumed` counts the **lifetime** total, not
 consumption against the current grant — an exhausted-looking pair is not an
@@ -191,7 +191,7 @@ disjoint_file_parallelism   = allowed
 | Findings and measurements | `docs/research/cdc/EVIDENCE_NOTES/` |
 | Review rounds, questions, rulings, reconciliations | `docs/external-review/rounds/` |
 | Closed generations G2–G16 | `docs/research/cdc/CLOSED_GENERATION_BOUNDARY_ARCHIVE_G2_G16.md` |
-| Latest Chinese iteration report | `docs/report/ITERATION_26.md` |
+| Latest Chinese iteration report | `docs/report/ITERATION_27.md` |
 
 Closed generations G17–G20R, UAV G1/G2, the contract-grill mechanism and the D7
 part-B margin-instrument era are retired; their evidence notes and round

@@ -54,6 +54,13 @@ drives the guard **red**. A positive assertion alone is not a guard.
   `_raw_return_energy_margins` both were — comparing them looks like an
   independent check and is not. Both sides move together under a wrong formula.
   Recompute from literals, or from an input pinned by a *different* test.
+- **Assert the field that reaches the result, not the convenient sibling.**
+  Before writing an assertion, trace the value to the estimator: if the quantity
+  under test is never read by `compute_G`, the pooler or the branch decision, the
+  guard is on a bystander and reads as coverage of the real output. Found
+  2026-07-27: the only guard on the frozen §7 window-local latching asserted
+  `cutoff_count`, a diagnostic, while `cutoff_per_step` — the field `compute_G`
+  actually multiplies by `-5` — had no test at all.
 - **Read the test's own name as a specification and check the quantifier.**
   "once **per uav**" that drives one UAV, "**every** field" that mutates one,
   "across **processes**" run in one interpreter. Found 2026-07-27:

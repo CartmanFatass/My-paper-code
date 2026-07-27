@@ -485,6 +485,53 @@ def test_window_local_counts_at_most_one_transition_per_uav():
     assert result["cutoff_count"] == 1
 
 
+def test_window_local_latch_is_per_uav_and_not_fleet_global():
+    """The paired negative for the `per_uav` in the test above, which uses a
+    single-column fixture and therefore never varies the dimension its name
+    quantifies over. Measured 2026-07-27: replacing `~counted` with
+    `not counted.any()` -- a fleet-global latch -- left 180/180 green.
+
+    This is the analyzer that produces the published event counts: `compute_G`
+    subtracts `5*new_cutoff_count + 10*new_depletion_count`. A global latch
+    undercounts the moment a SECOND UAV transitions, so every reported `G` comes
+    out high, and `at most one transition per UAV per type` is the frozen
+    section-7 convention this function exists to implement.
+
+    Three UAVs, deliberately transitioning at different steps, plus a recurrence
+    for UAV 0 so the per-UAV latch is exercised in the same fixture."""
+    #        uav0    uav1    uav2
+    window = np.array([
+        [False, False, False],   # step 0 = t_e baseline
+        [True,  False, False],   # uav0 first transition        -> counts
+        [False, True,  False],   # uav0 recovers, uav1 first    -> counts
+        [True,  True,  True],    # uav0 RE-transitions (must NOT recount), uav2 first
+    ])
+    result = audit.window_latched_counts(window, np.zeros_like(window))
+    assert result["cutoff_count"] == 3, (
+        "each of three UAVs must contribute exactly one counted transition; "
+        f"got {result['cutoff_count']} -- a value of 1 means the latch is "
+        "fleet-global rather than per-UAV")
+
+    # And the same on the depletion series, which is a separate accumulator.
+    result_d = audit.window_latched_counts(np.zeros_like(window), window)
+    assert result_d["depletion_count"] == 3
+
+    # `cutoff_count` is the WRONG output to assert the latch on, and asserting
+    # it is why the latch was never guarded. It is `sum()` over a BOOLEAN array,
+    # so it is structurally incapable of exceeding one per UAV no matter what
+    # the latch does -- removing `& ~cutoff_counted` entirely leaves it
+    # unchanged, and left the whole suite green (measured 2026-07-27).
+    #
+    # `cutoff_per_step` is what carries the semantics AND what reaches the
+    # result: `:2877` passes it as `new_cutoff_count` into `compute_G`, whose
+    # cutoff term is `-5 *` that. `cutoff_count` only feeds the
+    # `cutoff_incidence` diagnostic at `:2886`. So the guard has to be here.
+    assert list(result["cutoff_per_step"]) == [0, 1, 1, 1], (
+        "per-step counts must be one per UAV at its own first transition, and "
+        "uav0's step-3 RECURRENCE must add nothing; "
+        f"got {list(result['cutoff_per_step'])}")
+
+
 def test_pre_window_events_contribute_zero():
     """If the baseline recorded at t_e is already True (event happened before
     or exactly at t_e), no in-window transition exists for that UAV unless it
