@@ -1,7 +1,9 @@
 """D7.S event-aligned source audit.
 
 Contract (frozen, verbatim authority for every semantic choice):
-    docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md (FROZEN 2026-07-26)
+    docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT_R2.md (FROZEN 2026-07-26)
+    supersedes D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md (n_select=2/n_eval=2,
+    shared-prefix clone realization, selection diagnostic)
 G2 binding reference (CONSTRUCTIVE_CHARGE_ROTATION, LEAVE/REJOIN lifecycle,
 heldout_low profile):
     docs/research/designs/UAV_CHARGE_ROTATION_ROSTER_G2.md
@@ -21,17 +23,23 @@ instance. The pure layer is what the focused test suite exercises and is what
 the ten branches, the bootstrap and the safety-event latching are actually
 proved against.
 
-Honest scope of `main()` (implementer, 2026-07-26): it is NOT a completed
-audit runner. It executes the section 9 topology-template construction and
-serializes each topology's pinning record (`build_topology_template` /
-`build_topology_record` / `write_topology_record`) -- genuinely real,
-lightweight environment construction, no episode stepping -- but it does NOT
-run episodes, does NOT detect or certify events against a live environment,
-and does NOT execute the bootstrap. The event-detection -> legal-SET ->
-bootstrap pipeline above is proved by the focused test suite against
-synthetic/pure inputs only. Wiring it to real episodes is the proof-sized
-exercise named in the contract's evidence order (section 11, item 2) and is a
-later evidence action, not attempted here.
+Honest scope of `main()` (updated 2026-07-26, R2): it IS wired to real
+episodes. It builds the section 9 pinned topology, rolls real prefixes to find
+and certify the joint event, materializes the canonical `EventSnapshot`, forks
+every continuation from clones of it, and assembles the bootstrap result. The
+earlier note here -- that `main()` ran no episodes -- described the state
+before the driver was wired and is retired.
+
+Known repository fact, load-bearing (see
+`docs/research/cdc/EVIDENCE_NOTES/20260726_D7_S_PREFIX_REPLAY_IS_NOT_FIXED_HISTORY.md`):
+two FRESHLY CONSTRUCTED environments carrying the same episode seed do NOT
+share a user population -- the user layout is fixed by construction-time state
+that `reset(seed=)` does not re-derive, and it differs by kilometres between
+constructions. `compute_state_hash` covers no user, cluster or channel state,
+so it cannot detect this. That is precisely why the R2 shared-prefix
+realization is a correctness fix and not merely an optimization: only one env
+construction per event means all arms of that event share one user world.
+Never reintroduce a per-replicate `replay_prefix` call.
 
 Repository-fact note (implementer, 2026-07-26): the environment has no literal
 `ACTIVE` / `CHARGE_ABSENT` / `TERMINAL` state machine or `CONSTRUCTIVE_CHARGE_
@@ -2849,10 +2857,11 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     """CLI arg resolution (item 2): topology seed list plus episode counts.
     `--episodes-calibration`/`--episodes-audit` are honored in EVERY mode,
     `--smoke` included -- previously `--smoke` hardcoded 1/1 unconditionally,
-    silently discarding any explicit override. Smoke's own n_select=1/n_eval=2
-    replicate override (`run_topology_audit`'s `smoke` kwarg) and the
-    `SMOKE_NOT_A_RESULT` JSON labeling are untouched by this function; only
-    the episode COUNTS become overridable here. `None` for either count means
+    silently discarding any explicit override. Smoke no longer carries a
+    replicate override at all: R2 made `n_select=1` inadmissible, so
+    `run_topology_audit` runs the registered 2/2 volume in every mode and only
+    the `SMOKE_NOT_A_RESULT` JSON labeling distinguishes them. This function
+    governs only the episode COUNTS. `None` for either count means
     "use this mode's own default" -- smoke's default stays 1 calibration + 1
     audit episode when no override is given, matching its pre-existing fast
     proof-sized behavior."""
@@ -3018,8 +3027,9 @@ def main() -> None:
     parser.add_argument("--smoke", action="store_true",
                          help="ONE topology, ONE calibration + ONE audit episode by default "
                               "(overridable via --episodes-calibration/--episodes-audit), full "
-                              "horizon pieces but n_select=1/n_eval=2. JSON tagged "
-                              "SMOKE_NOT_A_RESULT. Proof-sized only -- not the formal audit.")
+                              "horizon pieces at the SAME registered n_select=2/n_eval=2 volume "
+                              "as the formal audit. JSON tagged SMOKE_NOT_A_RESULT. Proof-sized "
+                              "only -- not the formal audit.")
     args = parser.parse_args()
 
     plan = resolve_run_plan(
