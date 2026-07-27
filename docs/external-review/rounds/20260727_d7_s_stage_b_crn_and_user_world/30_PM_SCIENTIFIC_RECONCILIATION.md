@@ -107,8 +107,9 @@ and relevant custom-object state canonically compared or digested; routing paths
 and reusable routing/channel caches covered; service-set and handover state
 covered where live; packet and source-controller mutable state covered where it
 can affect the continuation; duty positions and service centroids bound to event
-identity; **exclusions explicit and justified**; and a test proving that changing
-a nested routing/service/controller object changes the fingerprint.
+identity; **exclusions explicit and justified**; a test proving that changing
+a nested routing/service/controller object changes the fingerprint; and
+cross-limb clones beginning from the same complete identity surface.
 
 Unchanged and not to be touched: direct live snapshotting, the CRN repair, the
 `2/2` volume, topology seeds, episode counts, horizons, thresholds, bootstrap,
