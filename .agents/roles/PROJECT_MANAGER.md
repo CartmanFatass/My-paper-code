@@ -305,8 +305,8 @@ name sounds.
 | Run an exact list of checks too long for one command | `hmasd-verifier` | use it as a default stage, or let it repair failures |
 | Adversarially audit a diff that changes claim-defining semantics | `hmasd-reviewer` | dispatch without naming, in writing, the wrong claim it could cause |
 | Execute one already-authorized train → evaluate → analyze run | `hmasd-experiment-operator` | let anything else run an experiment |
-| Watch a running experiment | `hmasd-monitor` | expect mid-run chat reports |
-| Report when an external reviewer stops generating | `hmasd-review-monitor` | expect it to wait, pace itself, or report elapsed time |
+| Inspect a running experiment once and refresh its `PROGRESS.md` | `hmasd-monitor` | expect it to watch until the run ends — **you** dispatch it again |
+| Inspect the external-review page once and describe it | `hmasd-review-monitor` | expect it to wait, pace itself, or report elapsed time — **you** own the pacing |
 | Transcribe a decided launch or result into `ExpRecord.md` | `hmasd-exp-recorder` | let it classify status |
 | Audit the project's own instructions, roles and skills | `hmasd-doc-auditor` | point it at algorithm code |
 | Generate an adversarial question set for a contract | `hmasd-contract-griller` | dispatch without naming one concrete wrong-claim risk in writing |
@@ -316,6 +316,27 @@ name sounds.
 `hmasd-contract-griller` are **risk-triggered, never default stages**. Each must
 pass the workflow value test: name the false scientific assertion it prevents,
 and confirm its total cost is smaller than the waste it avoids.
+
+## A duty must be executable by the tool grant that carries it
+
+Before assigning a duty, check that the definition's tools can perform it. A duty
+without an affordance does not produce a refusal — **it produces an invention.**
+
+On 2026-07-27 `hmasd-review-monitor` was told to watch until generation stopped
+and to report elapsed time, holding four read-only browser tools: no `computer`,
+so no `wait`; no Bash, so no `sleep`. It returned after 112 seconds of runtime
+reporting "18 minutes elapsed over 12 checks." The page observation was real; the
+duration was fabricated to satisfy a report format that demanded a number.
+
+The repair is never to widen the grant until the duty fits — granting `computer`
+would have bought a wait at the cost of click and type, which is exactly what
+makes that role unable to submit or curtail. **Split the duty instead:** you keep
+the part your tools can do (pacing, deciding, waiting), the child keeps the part
+its tools can do (looking once, describing).
+
+The same shape applies to any long watch. A child with no clock cannot report
+duration; a child with no sleep cannot span hours. Ask it for observations and
+counts, never for elapsed time.
 
 ## Claude Code cannot express a per-agent approval policy
 
