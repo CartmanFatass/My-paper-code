@@ -3270,5 +3270,72 @@ def test_workers_parallel_path_matches_sequential_output_bit_for_bit(monkeypatch
     assert seq_json == par_json
 
 
+# =============================================================================
+# What the complete-state fingerprint certifies, and what it does not
+# =============================================================================
+
+def _two_identically_pinned_envs():
+    """Two `build_pinned_env` results with every registered input identical:
+    same episode seed, same coordinates, same coordinate hash, same user-world
+    seed. They differ only in that each construction draws fresh OS entropy at
+    `scenario_base.py:328`."""
+    config = _real_config()
+    coords, coord_hash = audit.build_topology_template(config, topology_seed=20260726)
+    kwargs = dict(episode_seed=20260726, coords=coords, coord_hash=coord_hash,
+                  energy_stage="S3", user_world_seed=777)
+    return (audit.build_pinned_env(config, **kwargs),
+            audit.build_pinned_env(config, **kwargs))
+
+
+def test_episode_world_provenance_reproduces_across_two_constructions():
+    """R3 section E's provenance claim, stated as a test rather than assumed:
+    the SAME `user_world_seed` against the SAME pinned topology must give the
+    same world in two independently constructed environments.
+
+    Its paired negative is the test below, which asserts the complementary
+    fact on the same two objects -- so neither can pass vacuously by the two
+    environments happening to be identical or happening to be unrelated."""
+    a, b = _two_identically_pinned_envs()
+    assert (audit.episode_world_fingerprint(a, seed_value=777)
+            == audit.episode_world_fingerprint(b, seed_value=777))
+    assert np.array_equal(a.user_positions, b.user_positions)
+    assert np.array_equal(a.uav_positions, b.uav_positions)
+
+
+def test_full_state_fingerprint_is_within_process_identity_not_reproducibility():
+    """The paired negative, and a scope lock on `full_state_fingerprint`.
+
+    Measured 2026-07-27: two identically-pinned environments produce DIFFERENT
+    complete-state fingerprints, and never converge (still different after 20
+    steps). `build_pinned_env` overwrites `charging_station_positions` at step 5,
+    AFTER `reset()` has already derived the station-relative logistics from the
+    construction-time layout; the first `step()` recomputes those, but one
+    contaminated PBRS potential difference is accumulated permanently into
+    `episode_graph_pbrs_sum`.
+
+    Nothing in the instrument is wrong: every use of this fingerprint is
+    within-process (one live env against its own deepcopy clones), the pooler
+    asserts no cross-shard equality, and `compute_G` never reads a PBRS field.
+    But the name and R3 section C's "complete-state identity surface" wording
+    both invite the wider reading, so a reader comparing two shards' fingerprints
+    would get a mismatch and conclude the wrong thing.
+
+    This test exists to make that scope a fact the suite defends. If a future
+    change makes construction reproducible -- fixing `scenario_base.py:328`, or
+    recomputing the logistics after pinning -- this test SHOULD fail, and the
+    correct response is to delete it and widen the claim, not to weaken it."""
+    a, b = _two_identically_pinned_envs()
+    assert audit.full_state_fingerprint(a) != audit.full_state_fingerprint(b), (
+        "constructions have become reproducible; widen the fingerprint's "
+        "documented scope and delete this test rather than weakening it")
+
+    # The narrow hash that the one cross-construction comparison in the audit
+    # (`replay_prefix_to_te`) actually asserts is unaffected: none of its seven
+    # keys is contaminated.
+    snap_a = audit.real_env_state_snapshot(a, {})
+    snap_b = audit.real_env_state_snapshot(b, {})
+    assert audit.compute_state_hash(snap_a) == audit.compute_state_hash(snap_b)
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
