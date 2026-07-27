@@ -4,7 +4,6 @@
 repository=CartmanFatass/My-paper-code
 branch=aggressive
 round=20260727_continuous_roster_post_g41_successor_portfolio_design_assertion_audit
-stage_commit=c14eb7ef2c74e3863e274bc5213620f4fd995e18
 review_mode=DESIGN_ASSERTION_AUDIT
 design_audit_compute=0
 ```
