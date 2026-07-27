@@ -41,22 +41,30 @@ over-confident, and `decide_branch` returns 5 or 7 where the honest answer is 10
 (unresolved). A wrong published branch, produced by a test that reads as
 coverage of exactly this.
 
-## Two production defects found incidentally
+## One production defect found incidentally
 
-Not test defects — code defects, found while confirming the above.
+**`_rng_state_token` returns the constant `"none"` on attribute-name drift**
+rather than raising. It is the *sole* RNG coverage inside
+`full_state_fingerprint`, because a `RandomState`/`Generator` is neither
+ndarray nor scalar nor numeric list and so the include-by-default loop skips
+it. Silent degradation of the only RNG signal — the same shape as the blocker
+itself: a silent fallback where a loud failure belonged.
 
-1. **`real_env_state_snapshot` aliases two of its six keys.** `charging_mask`
-   and `lifecycle_mask` are assigned the *same object* (`:1805-1812`), so one
-   carries no independent information and dropping either alone is a semantic
-   no-op today. The docstring presents them as distinct surfaces.
-2. **`_rng_state_token` returns the constant `"none"` on attribute-name drift**
-   rather than raising. It is the *sole* RNG coverage inside
-   `full_state_fingerprint`, because a `RandomState`/`Generator` is neither
-   ndarray nor scalar nor numeric list and so the include-by-default loop skips
-   it. Silent degradation of the only RNG signal.
+### Withdrawn — the mask aliasing is declared, not silent
 
-Both are the same shape as the blocker itself: a silent fallback where a loud
-failure belonged.
+The sweep also reported `real_env_state_snapshot` aliasing `charging_mask` and
+`lifecycle_mask` to the same object (`:1805-1812`) as a second defect, and the
+first version of this note adopted that. **It is wrong.** The function's own
+docstring states the identity explicitly — "lifecycle mask (CHARGE_ABSENT ==
+`uav_charging`, per the module's own two-state real-env realization documented
+in its header)". The aliasing is the documented modelling choice, not an
+accident.
+
+The redundancy is real — one of six keys carries no independent information —
+but a *declared* redundancy is not the blocker shape, and filing it as one
+would have sent an implementer to "fix" a deliberate semantic. Recorded rather
+than deleted because over-accepting a plausible finding is the same failure as
+under-checking a test.
 
 ## Cause, and the rule adopted
 

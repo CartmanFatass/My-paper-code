@@ -8,6 +8,7 @@ authority=rounds/20260726_d7_s_stage_b_shared_prefix_realization/21_PRO_OPEN_RAW
 verdict_that_forced_it=MISMATCH
 amendment_scope=fixed_history_realization|condition_1|complete_state_fingerprint|cross_limb_conformance|episode_world_provenance|full_sync_cadence|stable_limb_lock|cost_status
 unchanged=replicate_volume_2_2|topology_seeds|episode_counts|horizons|thresholds|bootstrap|stream_seed_semantics|branch_semantics|one_expansion_rule
+wording_amendment_20260727=section_E_probability_model_only|no_new_freeze_round|rounds/20260727_d7_s_stage_b_crn_and_user_world/21_PRO_OPEN_RAW.md
 ```
 
 **Carry-forward.** Every section of R2 not amended below remains binding
@@ -118,6 +119,15 @@ sequences. Actual stable and flex interventions are not expected to agree.
 
 ## E. Episode-world provenance
 
+*Amendment (2026-07-27), ruled without a further freeze round:*
+`docs/external-review/rounds/20260727_d7_s_stage_b_crn_and_user_world/21_PRO_OPEN_RAW.md`
+(Q3(a)) corrected two sentences of this section, quoted verbatim below. The
+causal estimand and the bootstrap hierarchy are unaffected; only the
+probability-model wording changes, from "user worlds contribute through
+within-topology episode variation" to a factorization that names the
+topology-conditioned remote-cluster corner explicitly:
+`T ~ P_T, W ~ P(W|T)`.
+
 Topology identity is **unchanged**: it remains the ground-BS and
 charging-station geometry. The user world is a nested **episode-level random
 factor**, not part of topology identity — pinning one user layout per topology
@@ -133,8 +143,13 @@ carry:
   under a **disjoint namespace**, controlling initial user positions, cluster
   assignments and centres, user/cluster waypoints, and initial motion and pause
   state. Separate from the topology seed, the energy-permutation seed and the
-  continuation stream seed. The statistical distribution remains the registered
-  random-user distribution; it merely becomes reproducible.
+  continuation stream seed. The generator routines and continuous parameters
+  are unchanged, and the draw becomes reproducible — but because the
+  remote-cluster corner is a function of the pinned topology's BS quadrant
+  rather than of construction-time OS entropy, the effective joint
+  distribution and its topology/episode variance decomposition are not simply
+  "the same distribution, now reproducible." Saying so would be too broad:
+  see the corrected factorization below.
 - **an episode-world fingerprint**, recorded after environment initialization:
   initial user and cluster state, relevant initial motion state, the
   `user_world_seed`, and a canonical fingerprint.
@@ -143,9 +158,12 @@ carry:
 
 This permits verifying that all arms of one event share one world, that
 different episodes remain legitimate independent draws, and that an artifact can
-be reconstructed later. The hierarchical bootstrap is unchanged: topology is the
-top-level unit and user worlds contribute through within-topology episode
-variation.
+be reconstructed later. The hierarchical bootstrap is unchanged: topology
+remains the top-level unit. User worlds are **topology-conditioned episode
+draws**: `T ~ P_T`, `W ~ P(W|T)` — topology-determined geometric factors (the
+remote-cluster corner, fixed by the pinned BS quadrant) contribute at the
+topology level, while residual user/cluster geometry, motion, waypoints and
+pauses contribute through within-topology episode variation.
 
 ## F. Two independent realization corrections
 

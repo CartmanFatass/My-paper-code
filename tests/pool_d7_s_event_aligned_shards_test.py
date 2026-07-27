@@ -184,12 +184,24 @@ def test_pooling_is_invariant_to_shard_argument_order(tmp_path, monkeypatch):
     This is the load-bearing property named in the module docstring: the
     hierarchical bootstrap resamples topologies by list position, so an
     order-dependent pooler would silently draw a different bootstrap sample
-    depending on how the shards happened to be listed on the command line."""
+    depending on how the shards happened to be listed on the command line.
+
+    Measured regression (2026-07-27 sweep): the original six topologies here
+    all carried the IDENTICAL degenerate value set, so permuting shard order
+    permuted which POSITION held a given topology without changing what
+    value sat at any position the bootstrap actually reads by index --
+    order literally cannot matter for a construction this degenerate, so a
+    pooler that forgot to re-sort by topology seed before assembly (instead
+    silently keeping shard/argument order) would still pass. Each topology
+    below now carries its own distinct value set, so the bootstrap's
+    per-position resample would draw genuinely different numbers depending
+    on argument order unless the pooler re-sorts."""
     _fast_t_m_bootstrap(monkeypatch, pooling.audit)
 
     topo = [
-        _topology_result(3000 + i, d_a=0.1, b_stable=8.0, b_flex=8.0,
-                          u_stable=-1.0, u_flex=1.5)
+        _topology_result(3000 + i, d_a=0.05 + 0.03 * i, b_stable=6.0 + 1.5 * i,
+                          u_stable=-2.0 + 0.4 * i, u_flex=1.0 + 0.3 * i,
+                          b_flex=5.0 + 0.7 * i)
         for i in range(6)
     ]
     p1 = _write_shard(tmp_path, "a.json", topo[:2])

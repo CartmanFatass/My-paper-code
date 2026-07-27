@@ -62,11 +62,14 @@ field, exactly as it is for the registered G2 roster).
 from __future__ import annotations
 
 import argparse
+import contextlib
 import copy
 import hashlib
 import json
 import math
+import os
 import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -281,15 +284,56 @@ def build_topology_template(config, *, topology_seed: int, energy_stage: str = "
     return coords, coordinate_hash(coords["ground_bs"], coords["charging_stations"])
 
 
-def build_topology_record(coords: dict, coord_hash: str, *, topology_seed: int) -> dict:
+def classify_bs_quadrant(ground_bs, area_size: float) -> str:
+    """Ruling 2026-07-27 (Q3(a), "Scope of the eight topologies"): the eight
+    registered topology seeds cover only three of the four BS-quadrant
+    classes, and topology records must expose that composition -- never
+    rebalance or reselect seeds to fix it, only make it visible.
+
+    Mirrors, exactly, the quadrant test `_generate_forced_relay_cluster_positions`
+    (`envs/pettingzoo/scenario_base.py`) uses to pick the remote-cluster
+    corner from the mean ground-BS position: this is not an independent
+    quadrant definition, it is the same four-way branch, including its tie
+    fold-through (any tie on the area center lands in the same branch that
+    env's own trailing `else` does), so a topology record's `bs_quadrant`
+    always names the corner that topology's episodes actually draw remote
+    users toward."""
+    bs = np.asarray(ground_bs, dtype=float)
+    if bs.size == 0:
+        return "no_ground_bs"
+    bs_center = np.mean(bs[:, :2], axis=0)
+    area_center = float(area_size) / 2.0
+    if bs_center[0] < area_center and bs_center[1] < area_center:
+        return "bs_bottom_left"
+    if bs_center[0] > area_center and bs_center[1] < area_center:
+        return "bs_bottom_right"
+    if bs_center[0] < area_center and bs_center[1] > area_center:
+        return "bs_top_left"
+    return "bs_top_right"
+
+
+def build_topology_record(coords: dict, coord_hash: str, *, topology_seed: int,
+                           config=None) -> dict:
     """Section 9's mandatory per-topology record: coordinates, canonical
-    hash, topology seed, reinitialization procedure version."""
+    hash, topology seed, reinitialization procedure version, and (ruling
+    2026-07-27) the BS-quadrant class this topology's ground-BS layout
+    belongs to, so the eventual paper can report quadrant composition across
+    the registered topology set. Exposure only -- this field must never
+    become an input to reselecting or rebalancing the frozen topology seed
+    list.
+
+    `area_size` is read the same way `UAVEnergyAwareRelayEnv` itself reads it
+    (`getattr(config, 'area_size', 2500)`, `scenario_base.py:159`), so the
+    quadrant classification agrees with the geometry the real environment
+    used to build this topology's coordinates."""
+    area_size = float(getattr(config, "area_size", 2500))
     return {
         "topology_seed": int(topology_seed),
         "ground_bs": [[float(v) for v in row] for row in coords["ground_bs"]],
         "charging_stations": [[float(v) for v in row] for row in coords["charging_stations"]],
         "coordinate_hash": coord_hash,
         "procedure_version": TOPOLOGY_PROCEDURE_VERSION,
+        "bs_quadrant": classify_bs_quadrant(coords["ground_bs"], area_size),
     }
 
 
@@ -2137,8 +2181,13 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                     # R3 condition 1C: the complete-state fingerprint of the
                     # world the event was actually certified in, recorded HERE
                     # on the live environment. The snapshot must equal it.
+                    # Duty positions and service centroids are bound into this
+                    # SAME fingerprint (ruling 2026-07-27) so they are part of
+                    # event identity, not side data the fingerprint is blind to.
                     "full_fingerprint_at_te": full_state_fingerprint(
-                        env, duty_map=duty_map),
+                        env, duty_map=duty_map,
+                        duty_positions=step["duty_positions"],
+                        service_centroids=service_centroids),
                     "vacated_target": vacated_target,
                     "legal_targets": {
                         "stable": {_target_id(z): z for z in stable_choice["legal_targets"]},
@@ -2236,12 +2285,18 @@ def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
 # =============================================================================
 
 # Reviewed exclusions from the complete-state fingerprint. The default is
-# INCLUDE: every ndarray and every numeric/bool scalar attribute is hashed
-# unless it is named here. That direction is deliberate -- the defect this
-# fingerprint replaces was a hash that covered a hand-picked subset, so a field
-# nobody thought about was silently outside it. With include-by-default, a newly
-# added mutable field joins the fingerprint automatically and an exclusion has
-# to be argued for in writing.
+# INCLUDE: every ndarray, every numeric/bool scalar, and now every dict, list,
+# tuple, set/frozenset and custom mutable object (recursed via its own
+# `__dict__`) is covered unless it is named here. That direction is
+# deliberate -- the defect this fingerprint replaces was a hash that covered a
+# hand-picked subset of TYPES (arrays, scalars, flat numeric sequences only),
+# so dicts, nested lists, sets and custom objects fell through with no `else`
+# branch and no record of the omission. With include-by-default plus a loud
+# failure for anything still uncovered (`FingerprintCoverageError`, see
+# `_encode_fingerprint_value`), a newly added mutable field of a type already
+# handled joins the fingerprint automatically, and a field of a genuinely new
+# TYPE raises instead of silently vanishing -- an exclusion still has to be
+# argued for in writing, but silence is no longer an available third option.
 FINGERPRINT_EXCLUDED_ATTRS = frozenset({
     # Pure configuration: fixed for the whole run, identical across every clone
     # by construction, and noisy in a digest.
@@ -2250,10 +2305,152 @@ FINGERPRINT_EXCLUDED_ATTRS = frozenset({
     "n_charging_stations", "return_reserve_ratio",
     "service_cutoff_threshold", "depleted_battery_threshold",
     "user_qos_rate_mbps", "episode_steps", "seed_val",
+    # `np_random` is a `numpy.random.RandomState`/`Generator` instance -- a
+    # C-implemented type with no `__dict__`, so the generic recursive encoder
+    # cannot descend into it and would otherwise raise. It is not silently
+    # dropped: it is already covered, more precisely, via the dedicated
+    # `__rng__` token below (`_rng_state_token`), which reads the RNG's actual
+    # bit-generator state rather than trying to walk it as a generic object.
+    "np_random",
+    # `observation_spaces`/`action_spaces` are dicts of `gymnasium.spaces`
+    # objects. They are pure per-run configuration -- identical across every
+    # clone by construction, never mutated by a continuation -- and their
+    # internal attributes can include a lazily-created `Generator`/
+    # `RandomState` for `.sample()`, which is exactly the opaque, `__dict__`-
+    # less shape `np_random` above is excluded for. This audit never calls
+    # `.sample()` on them (every arm is a scripted source control), so
+    # excluding the spaces outright is simpler and safer than depending on
+    # that lazy attribute staying unset.
+    "observation_spaces", "action_spaces",
+    # Rendering handles. Always `None` on this audit's non-interactive path
+    # (nothing here ever calls `render()`); not environment state, and not a
+    # shape the recursive encoder should be trusted to walk if a stray
+    # `render()` call ever populated them.
+    "viewer", "fig", "ax",
 })
 
 
-def full_state_fingerprint(env, *, duty_map: Optional[dict] = None) -> str:
+class FingerprintCoverageError(RuntimeError):
+    """Raised by `full_state_fingerprint` when an attribute's value is a type
+    `_encode_fingerprint_value` has no canonical encoding rule for, and the
+    attribute is not named in `FINGERPRINT_EXCLUDED_ATTRS`.
+
+    This is the fix for the defect Stage B found: the previous fingerprint
+    covered exactly three shapes (`np.ndarray`, numeric/bool scalars, flat
+    numeric lists/tuples) with no `else` branch, so dicts, nested lists, sets
+    and custom mutable objects fell through and were never recorded, never
+    raised, never logged -- silently absent from an assertion whose docstring
+    claimed to cover them. A newly encountered type must now either be given
+    an explicit encoding rule or a written, reviewed exclusion; it can no
+    longer just fail to match any `isinstance` check and vanish.
+    """
+
+
+def _encode_fingerprint_value(value, *, seen: frozenset) -> bytes:
+    """Canonical recursive encoding for one attribute value (or nested
+    sub-value): the mechanism that replaces the narrow three-shape dispatch.
+
+    Covers, in addition to the `np.ndarray`/numeric-scalar leaves the
+    superseded hash already had: `None`; `str`/`bytes`; `dict` (canonicalized
+    by sorting on the ENCODED key, so key order never affects the digest and
+    the ordering stays address-independent across processes);
+    `list`/`tuple` (order-preserving, arbitrarily nested); `set`/`frozenset`
+    (canonicalized by sorting the ENCODED elements, since set elements need
+    not be independently orderable); and any custom object exposing a
+    `__dict__`, recursed into as a dict of its own attributes -- this is what
+    covers a source-controller/router object's internal caches and tables
+    without hand-listing every such class.
+
+    `seen` is the set of `id()`s already on the current recursion path.
+    `full_state_fingerprint` seeds it with the environment's own id, so a
+    custom object holding a back-reference to the environment (e.g. a
+    routing-protocol object's `self.env`, `routing_protocols.py:12`) resolves
+    to a bounded `<cycle:...>` marker instead of recursing forever -- the
+    environment's own state is already covered by the outer per-attribute
+    loop, so re-walking it through the back-reference would be redundant as
+    well as unbounded.
+
+    Anything reaching the end of this function without a matching rule, and
+    not caught by `full_state_fingerprint`'s exclusion check, raises
+    `FingerprintCoverageError` rather than being silently skipped. That loud
+    failure IS the design constraint this function exists to satisfy: the
+    defect was not the omission, it was that the omission was invisible.
+    """
+    if value is None:
+        return b"None"
+    if isinstance(value, np.ndarray):
+        return (b"ndarray:" + str(value.shape).encode("utf-8") + b":"
+                + str(value.dtype).encode("utf-8") + b":"
+                + np.ascontiguousarray(value).tobytes())
+    if isinstance(value, (bool, np.bool_)):
+        return b"bool:" + repr(bool(value)).encode("utf-8")
+    if isinstance(value, (int, np.integer)):
+        return b"int:" + repr(int(value)).encode("utf-8")
+    if isinstance(value, (float, np.floating)):
+        return b"float:" + repr(float(value)).encode("utf-8")
+    if isinstance(value, (str, bytes)):
+        raw = value.encode("utf-8") if isinstance(value, str) else value
+        return b"str:" + raw
+
+    obj_id = id(value)
+    if isinstance(value, dict):
+        if obj_id in seen:
+            return b"<cycle:dict>"
+        inner = seen | {obj_id}
+        # Canonicalize on the ENCODED key, exactly as the set branch below does.
+        # Sorting on `repr(key)` looks equivalent and is not: a key whose class
+        # does not define `__repr__` reprs as `<Foo object at 0x...>`, so the
+        # sort ORDER becomes address-dependent and the digest differs between
+        # processes for identical state. That is the one thing a fingerprint
+        # pooled across separately-invoked shards must never do, and it would
+        # have been invisible in-process -- the same silent shape as the defect
+        # this whole function exists to fix, one layer down.
+        encoded_items = sorted(
+            (_encode_fingerprint_value(k, seen=inner),
+             _encode_fingerprint_value(v, seen=inner))
+            for k, v in value.items())
+        parts = [b"dict{"]
+        for enc_k, enc_v in encoded_items:
+            parts.append(enc_k)
+            parts.append(b":")
+            parts.append(enc_v)
+            parts.append(b",")
+        parts.append(b"}")
+        return b"".join(parts)
+    if isinstance(value, (list, tuple)):
+        if obj_id in seen:
+            return b"<cycle:seq>"
+        inner = seen | {obj_id}
+        parts = [b"list[" if isinstance(value, list) else b"tuple["]
+        for v in value:
+            parts.append(_encode_fingerprint_value(v, seen=inner))
+            parts.append(b",")
+        parts.append(b"]")
+        return b"".join(parts)
+    if isinstance(value, (set, frozenset)):
+        if obj_id in seen:
+            return b"<cycle:set>"
+        inner = seen | {obj_id}
+        encoded_items = sorted(_encode_fingerprint_value(v, seen=inner) for v in value)
+        return b"set{" + b",".join(encoded_items) + b"}"
+
+    obj_dict = getattr(value, "__dict__", None)
+    if obj_dict is not None:
+        if obj_id in seen:
+            return b"<cycle:obj>"
+        inner = seen | {obj_id}
+        return (b"obj:" + type(value).__name__.encode("utf-8") + b"{"
+                + _encode_fingerprint_value(obj_dict, seen=inner) + b"}")
+
+    raise FingerprintCoverageError(
+        f"full_state_fingerprint has no encoding rule for type {type(value)!r} "
+        f"and it is not in FINGERPRINT_EXCLUDED_ATTRS; add an explicit rule or "
+        f"a justified exclusion rather than letting it fall through silently")
+
+
+def full_state_fingerprint(env, *, duty_map: Optional[dict] = None,
+                            duty_positions: Optional[dict] = None,
+                            service_centroids=None) -> str:
     """Canonical digest over every continuation-sensitive state surface.
 
     Replaces `compute_state_hash` as the load-bearing fixed-history assertion.
@@ -2264,14 +2461,25 @@ def full_state_fingerprint(env, *, duty_map: Optional[dict] = None) -> str:
     The narrow hash survives as a cheap subset assertion; it cannot carry
     fixed-history validity.
 
-    Covers, by including every array and numeric attribute rather than a chosen
-    list: step and episode counters, UAV and user positions and velocities,
-    cluster assignments/centres/velocities/waypoints/pause timers, user
-    waypoints and pause timers, battery/charging/station/queue/docking state,
-    cutoff and depletion latches, connection matrices, SINR, routing paths and
-    channel caches, service-set state, the environment RNG state, duty map and
-    service centroids, lifecycle mask, and topology coordinates.
+    Covers, via `_encode_fingerprint_value`'s recursive dispatch rather than a
+    hand-picked list of shapes: step and episode counters, UAV and user
+    positions and velocities, cluster assignments/centres/velocities/
+    waypoints/pause timers, user waypoints and pause timers, battery/
+    charging/station/queue/docking state, cutoff and depletion latches,
+    connection matrices, SINR, routing paths and reusable channel/radio
+    caches (dicts), service-set and handover state (lists of lists), packet
+    state (lists of dicts), source-controller scheduling state (custom
+    objects such as a routing-protocol instance, recursed via `__dict__`),
+    the environment RNG state, lifecycle mask, and topology coordinates.
+
+    `duty_positions` and `service_centroids` are the second half of the R3
+    §C blocker: duty targets and service centroids named as continuation
+    inputs, bound HERE to the same event identity as everything else rather
+    than living only in the `event` dict unfingerprinted. Passing `None`
+    (the default) omits that term, exactly like `duty_map=None` already did
+    -- callers on the conclusion-bearing path must pass the real values.
     """
+    seen = frozenset({id(env)})
     parts: list[bytes] = []
     for name in sorted(dir(env)):
         if name.startswith("__") or name in FINGERPRINT_EXCLUDED_ATTRS:
@@ -2282,25 +2490,24 @@ def full_state_fingerprint(env, *, duty_map: Optional[dict] = None) -> str:
             continue                      # properties that raise are not state
         if callable(value):
             continue
-        if isinstance(value, np.ndarray):
-            parts.append(name.encode("utf-8"))
-            parts.append(str(value.shape).encode("utf-8"))
-            parts.append(str(value.dtype).encode("utf-8"))
-            parts.append(np.ascontiguousarray(value).tobytes())
-        elif isinstance(value, (bool, int, float, np.integer, np.floating, np.bool_)):
-            parts.append(name.encode("utf-8"))
-            parts.append(repr(float(value)).encode("utf-8"))
-        elif isinstance(value, (list, tuple)) and value and all(
-                isinstance(v, (bool, int, float, np.integer, np.floating)) for v in value):
-            parts.append(name.encode("utf-8"))
-            parts.append(np.asarray(value, dtype=float).tobytes())
+        parts.append(name.encode("utf-8"))
+        parts.append(b"=")
+        parts.append(_encode_fingerprint_value(value, seen=seen))
+        parts.append(b";")
 
     parts.append(b"__rng__")
     parts.append(_rng_state_token(env).encode("utf-8"))
 
     if duty_map is not None:
         parts.append(b"__duty_map__")
-        parts.append(repr(tuple(sorted(dict(duty_map).items()))).encode("utf-8"))
+        parts.append(_encode_fingerprint_value(dict(duty_map), seen=seen))
+    if duty_positions is not None:
+        parts.append(b"__duty_positions__")
+        parts.append(_encode_fingerprint_value(dict(duty_positions), seen=seen))
+    if service_centroids is not None:
+        parts.append(b"__service_centroids__")
+        parts.append(_encode_fingerprint_value(
+            np.asarray(service_centroids, dtype=float), seen=seen))
 
     return hashlib.sha256(b"".join(parts)).hexdigest()
 
@@ -2316,10 +2523,25 @@ def _rng_state_token(env) -> str:
     """A stable token for the environment RNG state, used to prove that clone
     construction consumes no registered continuation randomness (condition 3).
     Tolerates both `RandomState` and `Generator`, since `fork_continuation`
-    installs a `RandomState` while a fresh env may carry either."""
+    installs a `RandomState` while a fresh env may carry either.
+
+    This is the SOLE RNG coverage inside `full_state_fingerprint`: `np_random`
+    is named in `FINGERPRINT_EXCLUDED_ATTRS` precisely because this function
+    reads its actual bit-generator state instead of trying to walk it as a
+    generic object. A silent constant here on an unrecognized shape would
+    therefore silently drop RNG state from clone condition 5 and from
+    `assert_source_intact` on the day an attribute gets renamed -- the same
+    silent-fallback shape `FingerprintCoverageError` exists to stop one layer
+    up in `_encode_fingerprint_value`, so an unrecognized RNG shape raises
+    that same error here rather than returning a constant token that can
+    never move."""
     rng = getattr(env, "np_random", None)
     if rng is None:
-        return "none"
+        raise FingerprintCoverageError(
+            "_rng_state_token found no 'np_random' attribute (missing or "
+            "None) on env; if the env genuinely carries no continuation RNG "
+            "that must be an explicit, reviewed exclusion, not a silent "
+            "constant token")
     getter = getattr(rng, "get_state", None)
     if callable(getter):                      # numpy RandomState
         state = getter()
@@ -2331,7 +2553,11 @@ def _rng_state_token(env) -> str:
     bit_gen = getattr(rng, "bit_generator", None)   # numpy Generator
     if bit_gen is not None:
         return hashlib.sha256(repr(bit_gen.state).encode("utf-8")).hexdigest()
-    return "unknown"
+    raise FingerprintCoverageError(
+        f"_rng_state_token has no encoding rule for env.np_random of type "
+        f"{type(rng)!r} (neither a RandomState with get_state() nor a "
+        f"Generator with bit_generator); add explicit support or a "
+        f"justified exclusion rather than letting it fall through silently")
 
 
 class EventSnapshot:
@@ -2354,13 +2580,27 @@ class EventSnapshot:
     """
 
     def __init__(self, env, *, coord_hash: str, hash_at_te: str, duty_map_at_te: dict,
+                  duty_positions_at_te: dict, service_centroids_at_te=None,
                   certified_fingerprint: Optional[str] = None):
         self._env = env
         self.coord_hash = coord_hash
         self.hash_at_te = hash_at_te
         self.duty_map_at_te = dict(duty_map_at_te)
+        # R3 §C's second blocker (ruling 2026-07-27): duty targets and service
+        # centroids are continuation inputs the contract names explicitly, so
+        # they must be bound to event identity, not merely carried alongside
+        # it. Storing them here and folding them into `full_fingerprint` below
+        # is what makes two events differing only in duty positions or
+        # centroids resolve to different identities instead of the same one.
+        self.duty_positions_at_te = dict(duty_positions_at_te)
+        self.service_centroids_at_te = (
+            None if service_centroids_at_te is None
+            else np.asarray(service_centroids_at_te).copy())
         self.baseline_cutoff, self.baseline_depletion = _baseline_masks(env)
-        self.full_fingerprint = full_state_fingerprint(env, duty_map=self.duty_map_at_te)
+        self.full_fingerprint = full_state_fingerprint(
+            env, duty_map=self.duty_map_at_te,
+            duty_positions=self.duty_positions_at_te,
+            service_centroids=self.service_centroids_at_te)
         self._narrow_hash = compute_state_hash(
             real_env_state_snapshot(env, self.duty_map_at_te))
         self._source_rng_token = _rng_state_token(env)
@@ -2377,7 +2617,10 @@ class EventSnapshot:
 
     # -- condition 2: the immutable source must survive every clone unchanged --
     def assert_source_intact(self, *, context: str = "") -> None:
-        current = full_state_fingerprint(self._env, duty_map=self.duty_map_at_te)
+        current = full_state_fingerprint(
+            self._env, duty_map=self.duty_map_at_te,
+            duty_positions=self.duty_positions_at_te,
+            service_centroids=self.service_centroids_at_te)
         if current != self.full_fingerprint:
             raise CloneIsolationError(
                 f"mutation isolation failed{(' (' + context + ')') if context else ''}: "
@@ -2415,7 +2658,10 @@ class EventSnapshot:
         # condition 5 -- complete-state restoration, against the FULL fingerprint.
         # The narrow hash cannot carry this: it was equal for two environments
         # whose users differed by kilometres, which is the whole Stage B finding.
-        clone_fingerprint = full_state_fingerprint(env, duty_map=self.duty_map_at_te)
+        clone_fingerprint = full_state_fingerprint(
+            env, duty_map=self.duty_map_at_te,
+            duty_positions=self.duty_positions_at_te,
+            service_centroids=self.service_centroids_at_te)
         if clone_fingerprint != self.full_fingerprint:
             raise CloneIsolationError(
                 f"complete-state restoration failed{(' (' + context + ')') if context else ''}: "
@@ -2452,6 +2698,8 @@ def capture_event_snapshot(live_env, *, coord_hash: str, event: dict) -> EventSn
         coord_hash=coord_hash,
         hash_at_te=event["hash_at_te"],
         duty_map_at_te=event["duty_map_at_te"],
+        duty_positions_at_te=event["duty_positions_at_te"],
+        service_centroids_at_te=event["service_centroids_at_te"],
         certified_fingerprint=event.get("full_fingerprint_at_te"))
 
 
@@ -2483,7 +2731,10 @@ def verify_clone_conformance(snapshot: EventSnapshot, *, event: dict, limb: str,
 
     def _one(seed: int) -> dict:
         env = snapshot.clone(context=f"conformance limb={limb} seed={seed}")
-        pre = full_state_fingerprint(env, duty_map=snapshot.duty_map_at_te)
+        pre = full_state_fingerprint(
+            env, duty_map=snapshot.duty_map_at_te,
+            duty_positions=snapshot.duty_positions_at_te,
+            service_centroids=snapshot.service_centroids_at_te)
         baseline_cutoff, baseline_depletion = _baseline_masks(env)
         out = fork_continuation(
             env, duty_map_at_te=event["duty_map_at_te"],
@@ -2890,6 +3141,254 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
 # =============================================================================
 # Item 5 -- per-topology driver
 # =============================================================================
+#
+# `--workers` (orchestration plumbing only, not a contract choice -- see
+# `topology_unit_for_serialization`'s docstring for the same distinction drawn
+# about process topology): episodes within ONE topology are provably
+# independent (fresh env per episode via `build_pinned_env`/
+# `build_topology_template`, seeds derived per-episode via `_derived_seed`,
+# nothing carried across episodes except the accumulating report/unit lists
+# this driver itself owns), so running them through a process pool and
+# folding the results back in ascending episode-index order is required to
+# reproduce the sequential path's output bit-for-bit -- never completion
+# order, which a pool gives no guarantee about.
+
+def _pinned_worker_env():
+    """Pins BLAS/OpenMP threading to 1 for every child process a pool is
+    about to spawn. Must be set in THIS (parent) process's environment
+    BEFORE `ProcessPoolExecutor` creates the children -- env vars are copied
+    at process-creation time, so setting them only inside a worker, after
+    numpy/BLAS may already be initialized there, is too late for backends
+    that fix their thread count at first use. Restored on exit so the
+    orchestrator process's own environment is unaffected once the pool is
+    torn down."""
+    return _PinnedWorkerEnv()
+
+
+class _PinnedWorkerEnv:
+    _KEYS = ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS")
+
+    def __enter__(self):
+        self._previous = {k: os.environ.get(k) for k in self._KEYS}
+        for k in self._KEYS:
+            os.environ[k] = "1"
+        return self
+
+    def __exit__(self, *exc_info):
+        for k, v in self._previous.items():
+            if v is None:
+                os.environ.pop(k, None)
+            else:
+                os.environ[k] = v
+        return False
+
+
+def _run_indexed_in_pool(worker_fn, indices, workers: int, **common_kwargs) -> dict:
+    """Executes `worker_fn(idx=idx, **common_kwargs)` for every `idx` in
+    `indices` across a `ProcessPoolExecutor` of size `workers`, returning a
+    plain `{idx: result}` mapping once every task has completed.
+
+    Deliberately the ONLY place that talks to the pool: every caller folds
+    the returned mapping back in ascending `idx` order itself (never
+    `as_completed`'s own yield order), so a pool's real out-of-order
+    completion can never leak into accumulator order or the per-episode
+    progress line's cumulative-qualifying count. Exposed as its own function
+    so a test can substitute a fake that still calls the real (possibly
+    monkeypatched) `worker_fn` but resolves out of ascending order, proving
+    the caller re-sequences rather than merely trusting it does."""
+    results: dict = {}
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        futures = {executor.submit(worker_fn, idx=idx, **common_kwargs): idx for idx in indices}
+        for future in as_completed(futures):
+            idx = futures[future]
+            results[idx] = future.result()
+    return results
+
+
+def _calibration_episode_worker(*, idx: int, topology_seed: int, coords: dict,
+                                 coord_hash: str, energy_stage: str):
+    """Runs inside a pool worker process: builds its OWN config (never
+    receives the parent's `config` object -- a worker must not depend on
+    `config_1.Config` pickling cleanly, so every worker constructs its own
+    copy via `build_config()` instead) and runs one calibration episode end
+    to end via the existing, unmodified `run_calibration_episode`. Returns
+    `(ep_seed, result)`; the caller folds this into the accumulators exactly
+    as `run_calibration_episode`'s direct sequential-path result is folded."""
+    config = build_config()
+    ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
+    en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
+    result = run_calibration_episode(
+        config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
+        coords=coords, coord_hash=coord_hash, energy_stage=energy_stage, episode_index=idx)
+    return ep_seed, result
+
+
+def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict,
+                            coord_hash: str, energy_stage: str, n_select: int, n_eval: int) -> dict:
+    """Pure per-episode audit-block computation: build the pinned env, roll
+    the prefix, capture the live event snapshot, and run both limbs' audit
+    events. Factored out of `run_topology_audit`'s audit loop so the exact
+    same computation is shared by the sequential path (using the caller's
+    `config`) and the `--workers` pool path (using a freshly built `config`
+    per worker, via `_audit_episode_worker`) -- never re-derives a seed or a
+    predicate, only relocates the existing per-episode body into a callable
+    both paths use identically."""
+    ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
+    en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="energy_seed")
+    uw_seed = user_world_seed(topology_seed=topology_seed, block="audit", episode_index=idx)
+    env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
+                            energy_stage=energy_stage, user_world_seed=uw_seed)
+    raw = {
+        "ep_seed": ep_seed,
+        "world_entry": {"block": "audit", "episode_index": idx, "episode_seed": ep_seed,
+                         **episode_world_fingerprint(env, seed_value=uw_seed)},
+    }
+    energies = draw_energy_permutation(energy_seed=en_seed)
+    apply_energy_profile(env, energies)
+    prefix = roll_prefix_and_find_event(env)
+    raw["leave_diagnostics"] = prefix.get("leave_diagnostics", [])
+    raw["rejected_counts"] = prefix.get("rejected_counts", {})
+    raw["event_found"] = prefix["event"] is not None
+    if prefix["event"] is None:
+        raw["exclusions"] = prefix["exclusions"]
+        return raw
+    event = prefix["event"]
+    try:
+        snapshot = capture_event_snapshot(env, coord_hash=coord_hash, event=event)
+    except CloneIsolationError as exc:
+        raw["capture_failed"] = True
+        raw["capture_error"] = str(exc)
+        return raw
+    raw["unit_stable"] = run_audit_event(
+        snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
+        event=event, limb="stable", n_select=n_select, n_eval=n_eval)
+    raw["unit_flex"] = run_audit_event(
+        snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
+        event=event, limb="flex", n_select=n_select, n_eval=n_eval)
+    raw["event_conformance_record"] = event["conformance_record"]
+    raw["duty_map_at_te"] = event["duty_map_at_te"]
+    raw["duty_map_before_leave"] = event["duty_map_before_leave"]
+    return raw
+
+
+def _audit_episode_worker(*, idx: int, topology_seed: int, coords: dict, coord_hash: str,
+                           energy_stage: str, n_select: int, n_eval: int) -> dict:
+    """Pool-worker entry point for one audit-block episode: builds its own
+    `config` (see `_calibration_episode_worker`) and delegates to
+    `_compute_audit_episode`, returning only a plain, picklable result dict
+    -- never the live env or `EventSnapshot`, which stay inside this worker
+    process for their entire lifetime."""
+    config = build_config()
+    return _compute_audit_episode(
+        config, idx=idx, topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
+        energy_stage=energy_stage, n_select=n_select, n_eval=n_eval)
+
+
+def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topology_seed: int,
+                                 calibration_report: dict, episode_worlds: list,
+                                 invalidated_pairs: list, arm_distinctness_pairs: list,
+                                 calibration_units_stable: list, calibration_units_flex: list,
+                                 calibration_units_d_a: list) -> None:
+    """Folds one calibration episode's already-computed `result` into the
+    topology-level accumulators, identically regardless of whether `result`
+    came from the sequential loop or a pool worker -- this IS the sequential
+    path's original per-episode tail, extracted so both paths fold results
+    through the exact same code rather than two hand-kept-in-sync copies."""
+    if result.get("episode_world") is not None:
+        episode_worlds.append({"block": "calibration", "episode_index": idx,
+                                "episode_seed": ep_seed, **result["episode_world"]})
+    episode_leave_report = result.get("episode_report", {})
+    _accumulate_episode_leave_stats(
+        calibration_report, leave_diagnostics=episode_leave_report.get("leave_diagnostics", []),
+        rejected_counts=episode_leave_report.get("rejected_counts", {}))
+    if result.get("support_miss"):
+        calibration_report["exclusions"].append(result.get("exclusions", []))
+        print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+              f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
+              file=sys.stderr, flush=True)
+        return
+    invalidated_pairs.extend(result.get("invalidated_pairs", []))
+    if "stable" not in result["results"] or "flex" not in result["results"]:
+        # One or both limbs invalidated by a PrefixReplayMismatchError
+        # (already recorded above) -- this episode contributes neither
+        # B_m nor D_A, and is not counted as qualifying.
+        print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+              f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
+              file=sys.stderr, flush=True)
+        return
+    calibration_report["qualifying"] += 1
+    calibration_report["qualifying_joint_events"] += 1
+    arm_distinctness_pairs.append(
+        (result["duty_map_at_te"], result["duty_map_before_leave"]))
+    g_s, g_f = result["results"]["stable"], result["results"]["flex"]
+    calibration_units_stable.append({
+        "candidates": {"cvn": {"select": np.array([g_s["constructive"]["g_total"]]),
+                                "eval_set": np.array([g_s["constructive"]["g_total"]])}},
+        "eval_keep": np.array([g_s["null"]["g_total"]]),
+    })
+    calibration_units_flex.append({
+        "candidates": {"cvn": {"select": np.array([g_f["constructive"]["g_total"]]),
+                                "eval_set": np.array([g_f["constructive"]["g_total"]])}},
+        "eval_keep": np.array([g_f["null"]["g_total"]]),
+    })
+    calibration_units_d_a.append({
+        "candidates": {"cvn": {"select": np.array([g_s["d_a"]]),
+                                "eval_set": np.array([g_s["d_a"]])}},
+        "eval_keep": np.array([0.0]),
+    })
+    print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+          f"qualifying_event=True cumulative_qualifying={calibration_report['qualifying']}",
+          file=sys.stderr, flush=True)
+
+
+def _process_audit_result(raw: dict, *, idx: int, topology_seed: int, audit_report: dict,
+                           episode_worlds: list, invalidated_pairs: list,
+                           arm_distinctness_pairs: list, audit_units_stable: list,
+                           audit_units_flex: list, audit_events_out: list) -> None:
+    """Folds one audit-block episode's already-computed `raw` result (from
+    `_compute_audit_episode`, sequential or pooled) into the topology-level
+    accumulators -- the sequential path's original per-episode tail,
+    extracted for the same reason as `_process_calibration_result`."""
+    episode_worlds.append(raw["world_entry"])
+    _accumulate_episode_leave_stats(
+        audit_report, leave_diagnostics=raw.get("leave_diagnostics", []),
+        rejected_counts=raw.get("rejected_counts", {}))
+    if not raw["event_found"]:
+        audit_report["exclusions"].append(raw["exclusions"])
+        print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+              f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+              file=sys.stderr, flush=True)
+        return
+    if raw.get("capture_failed"):
+        invalidated_pairs.append({
+            "topology_seed": topology_seed, "episode_seed": raw["ep_seed"],
+            "block": "audit", "limb": "both",
+            "candidate_id": "live_event_capture", "phase": "capture",
+            "replicate_index": 0, "reason": raw["capture_error"],
+        })
+        print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+              f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+              file=sys.stderr, flush=True)
+        return
+    unit_stable = raw["unit_stable"]
+    unit_flex = raw["unit_flex"]
+    invalidated_pairs.extend(unit_stable.get("invalidated_pairs", []))
+    invalidated_pairs.extend(unit_flex.get("invalidated_pairs", []))
+    if unit_stable.get("event_invalid") or unit_flex.get("event_invalid"):
+        print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+              f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+              file=sys.stderr, flush=True)
+        return
+    audit_report["qualifying"] += 1
+    audit_report["qualifying_joint_events"] += 1
+    arm_distinctness_pairs.append((raw["duty_map_at_te"], raw["duty_map_before_leave"]))
+    audit_units_stable.append(unit_stable)
+    audit_units_flex.append(unit_flex)
+    audit_events_out.append(raw["event_conformance_record"])
+    print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+          f"qualifying_event=True cumulative_qualifying={audit_report['qualifying']}",
+          file=sys.stderr, flush=True)
+
 
 def _derived_seed(*, topology_seed: int, block: str, idx: int, tag: str) -> int:
     return int(stream_seed(
@@ -2927,7 +3426,7 @@ def _accumulate_episode_leave_stats(report: dict, *, leave_diagnostics: list,
 
 def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audit: int,
                         n_select: int = N_SELECT, n_eval: int = N_EVAL, smoke: bool = False,
-                        energy_stage: str = "S3") -> dict:
+                        energy_stage: str = "S3", workers: int = 1) -> dict:
     """Item 5's per-topology driver: section 9 pinning, the calibration
     block (B_m, and now D_A -- Part-A conformance, stable limb only) and the
     audit block (U*_m, both limbs), assembled into the exact shapes
@@ -2936,12 +3435,32 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
     `PrefixReplayMismatchError`, excluded and reported, never repaired) and
     `arm_distinctness_pairs` (item 3's spot check witnesses: every certified
     joint event's `(duty_map_at_te, duty_map_before_leave)` pair -- flex
-    certification already guarantees the vacancy was coverable)."""
+    certification already guarantees the vacancy was coverable).
+
+    `workers`: opt-in process parallelism ACROSS episodes WITHIN this one
+    topology (never across topologies, and never splitting the calibration
+    block from the audit block -- the audit block does not depend on any
+    calibration-block state, so the two blocks are each parallelised
+    independently, calibration first). `workers=1` (the default) takes the
+    plain sequential loop below unchanged -- no pool is created, so default
+    behaviour is bit-identical to every run before this option existed.
+    `workers>1` runs the same per-episode computation
+    (`run_calibration_episode` / `_compute_audit_episode`, untouched) inside
+    a `ProcessPoolExecutor`, each worker building its own fresh `config` via
+    `build_config()` rather than receiving this function's `config` argument
+    (see `_calibration_episode_worker`/`_audit_episode_worker`), and folds
+    the results back into the accumulators in ASCENDING episode-index order
+    -- never completion order -- via `_process_calibration_result`/
+    `_process_audit_result`, the exact same folding code the sequential path
+    uses. This is what makes the two paths' JSON output identical; only the
+    `[progress] ...` stderr line ORDER may interleave differently under
+    parallelism (sub-episode replicate-level lines from `run_audit_event` in
+    particular), since stderr telemetry is not part of the JSON result."""
     print(f"[progress] topology_seed={topology_seed} start "
           f"n_calibration={n_calibration} n_audit={n_audit} smoke={smoke}",
           file=sys.stderr, flush=True)
     coords, coord_hash = build_topology_template(config, topology_seed=topology_seed)
-    record = build_topology_record(coords, coord_hash, topology_seed=topology_seed)
+    record = build_topology_record(coords, coord_hash, topology_seed=topology_seed, config=config)
     # R2: the smoke path used to drop to n_select=1 to be cheap. n_select=1 is
     # now inadmissible, and a code path that can still run it is a footgun --
     # someone eventually reads a smoke number. At the 2/2 floor the smoke costs
@@ -2960,126 +3479,68 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
 
     calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
     calibration_report = _new_episode_block_report()
-    for idx in range(n_calibration):
-        calibration_report["episodes_attempted"] += 1
-        ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
-        en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
-        result = run_calibration_episode(
-            config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
-            coords=coords, coord_hash=coord_hash, energy_stage=energy_stage,
-            episode_index=idx)
-        if result.get("episode_world") is not None:
-            episode_worlds.append({"block": "calibration", "episode_index": idx,
-                                    "episode_seed": ep_seed, **result["episode_world"]})
-        episode_leave_report = result.get("episode_report", {})
-        _accumulate_episode_leave_stats(
-            calibration_report, leave_diagnostics=episode_leave_report.get("leave_diagnostics", []),
-            rejected_counts=episode_leave_report.get("rejected_counts", {}))
-        if result.get("support_miss"):
-            calibration_report["exclusions"].append(result.get("exclusions", []))
-            print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
-                  f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
-                  file=sys.stderr, flush=True)
-            continue
-        invalidated_pairs.extend(result.get("invalidated_pairs", []))
-        if "stable" not in result["results"] or "flex" not in result["results"]:
-            # One or both limbs invalidated by a PrefixReplayMismatchError
-            # (already recorded above) -- this episode contributes neither
-            # B_m nor D_A, and is not counted as qualifying.
-            print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
-                  f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
-                  file=sys.stderr, flush=True)
-            continue
-        calibration_report["qualifying"] += 1
-        calibration_report["qualifying_joint_events"] += 1
-        arm_distinctness_pairs.append(
-            (result["duty_map_at_te"], result["duty_map_before_leave"]))
-        g_s, g_f = result["results"]["stable"], result["results"]["flex"]
-        calibration_units_stable.append({
-            "candidates": {"cvn": {"select": np.array([g_s["constructive"]["g_total"]]),
-                                    "eval_set": np.array([g_s["constructive"]["g_total"]])}},
-            "eval_keep": np.array([g_s["null"]["g_total"]]),
-        })
-        calibration_units_flex.append({
-            "candidates": {"cvn": {"select": np.array([g_f["constructive"]["g_total"]]),
-                                    "eval_set": np.array([g_f["constructive"]["g_total"]])}},
-            "eval_keep": np.array([g_f["null"]["g_total"]]),
-        })
-        calibration_units_d_a.append({
-            "candidates": {"cvn": {"select": np.array([g_s["d_a"]]),
-                                    "eval_set": np.array([g_s["d_a"]])}},
-            "eval_keep": np.array([0.0]),
-        })
-        print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
-              f"qualifying_event=True cumulative_qualifying={calibration_report['qualifying']}",
-              file=sys.stderr, flush=True)
+    if workers <= 1:
+        for idx in range(n_calibration):
+            calibration_report["episodes_attempted"] += 1
+            ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
+            en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
+            result = run_calibration_episode(
+                config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
+                coords=coords, coord_hash=coord_hash, energy_stage=energy_stage,
+                episode_index=idx)
+            _process_calibration_result(
+                result, idx=idx, ep_seed=ep_seed, topology_seed=topology_seed,
+                calibration_report=calibration_report, episode_worlds=episode_worlds,
+                invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
+                calibration_units_stable=calibration_units_stable,
+                calibration_units_flex=calibration_units_flex,
+                calibration_units_d_a=calibration_units_d_a)
+    else:
+        with _pinned_worker_env():
+            pooled = _run_indexed_in_pool(
+                _calibration_episode_worker, range(n_calibration), workers,
+                topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
+                energy_stage=energy_stage)
+        for idx in range(n_calibration):
+            calibration_report["episodes_attempted"] += 1
+            ep_seed, result = pooled[idx]
+            _process_calibration_result(
+                result, idx=idx, ep_seed=ep_seed, topology_seed=topology_seed,
+                calibration_report=calibration_report, episode_worlds=episode_worlds,
+                invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
+                calibration_units_stable=calibration_units_stable,
+                calibration_units_flex=calibration_units_flex,
+                calibration_units_d_a=calibration_units_d_a)
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
     audit_report = _new_episode_block_report()
-    for idx in range(n_audit):
-        audit_report["episodes_attempted"] += 1
-        ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
-        en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="energy_seed")
-        uw_seed = user_world_seed(topology_seed=topology_seed, block="audit", episode_index=idx)
-        env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
-                                energy_stage=energy_stage, user_world_seed=uw_seed)
-        episode_worlds.append({"block": "audit", "episode_index": idx, "episode_seed": ep_seed,
-                                **episode_world_fingerprint(env, seed_value=uw_seed)})
-        energies = draw_energy_permutation(energy_seed=en_seed)
-        apply_energy_profile(env, energies)
-        prefix = roll_prefix_and_find_event(env)
-        _accumulate_episode_leave_stats(
-            audit_report, leave_diagnostics=prefix.get("leave_diagnostics", []),
-            rejected_counts=prefix.get("rejected_counts", {}))
-        if prefix["event"] is None:
-            audit_report["exclusions"].append(prefix["exclusions"])
-            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
-                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
-                  file=sys.stderr, flush=True)
-            continue
-        event = prefix["event"]
-
-        # R3: capture DIRECTLY off the live certified environment, shared by
-        # both limbs. A condition-1C failure means the world moved between
-        # certification and capture, which voids the whole event.
-        try:
-            snapshot = capture_event_snapshot(env, coord_hash=coord_hash, event=event)
-        except CloneIsolationError as exc:
-            invalidated_pairs.append({
-                "topology_seed": topology_seed, "episode_seed": ep_seed,
-                "block": "audit", "limb": "both",
-                "candidate_id": "live_event_capture", "phase": "capture",
-                "replicate_index": 0, "reason": str(exc),
-            })
-            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
-                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
-                  file=sys.stderr, flush=True)
-            continue
-
-        unit_stable = run_audit_event(
-            snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-            event=event, limb="stable", n_select=this_n_select, n_eval=this_n_eval)
-        unit_flex = run_audit_event(
-            snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-            event=event, limb="flex", n_select=this_n_select, n_eval=this_n_eval)
-        invalidated_pairs.extend(unit_stable.get("invalidated_pairs", []))
-        invalidated_pairs.extend(unit_flex.get("invalidated_pairs", []))
-        if unit_stable.get("event_invalid") or unit_flex.get("event_invalid"):
-            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
-                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
-                  file=sys.stderr, flush=True)
-            continue
-
-        audit_report["qualifying"] += 1
-        audit_report["qualifying_joint_events"] += 1
-        arm_distinctness_pairs.append(
-            (event["duty_map_at_te"], event["duty_map_before_leave"]))
-        audit_units_stable.append(unit_stable)
-        audit_units_flex.append(unit_flex)
-        audit_events_out.append(event["conformance_record"])
-        print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
-              f"qualifying_event=True cumulative_qualifying={audit_report['qualifying']}",
-              file=sys.stderr, flush=True)
+    if workers <= 1:
+        for idx in range(n_audit):
+            audit_report["episodes_attempted"] += 1
+            raw = _compute_audit_episode(
+                config, idx=idx, topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
+                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval)
+            _process_audit_result(
+                raw, idx=idx, topology_seed=topology_seed, audit_report=audit_report,
+                episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
+                arm_distinctness_pairs=arm_distinctness_pairs,
+                audit_units_stable=audit_units_stable, audit_units_flex=audit_units_flex,
+                audit_events_out=audit_events_out)
+    else:
+        with _pinned_worker_env():
+            pooled = _run_indexed_in_pool(
+                _audit_episode_worker, range(n_audit), workers,
+                topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
+                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval)
+        for idx in range(n_audit):
+            audit_report["episodes_attempted"] += 1
+            raw = pooled[idx]
+            _process_audit_result(
+                raw, idx=idx, topology_seed=topology_seed, audit_report=audit_report,
+                episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
+                arm_distinctness_pairs=arm_distinctness_pairs,
+                audit_units_stable=audit_units_stable, audit_units_flex=audit_units_flex,
+                audit_events_out=audit_events_out)
 
     return {
         "topology_record": record,
@@ -3345,6 +3806,14 @@ def main() -> None:
                               "horizon pieces at the SAME registered n_select=2/n_eval=2 volume "
                               "as the formal audit. JSON tagged SMOKE_NOT_A_RESULT. Proof-sized "
                               "only -- not the formal audit.")
+    parser.add_argument("--workers", type=int, default=1,
+                         help="Process-parallelise episodes WITHIN one topology (calibration "
+                              "block and audit block each parallelised separately, calibration "
+                              "first). Default 1 takes the plain sequential path unchanged -- no "
+                              "pool is created. Results are folded back in ascending episode-"
+                              "index order regardless of worker count, so the JSON output is "
+                              "identical to the sequential run; only the interleaving of "
+                              "per-episode [progress] stderr lines may differ under parallelism.")
     args = parser.parse_args()
 
     plan = resolve_run_plan(
@@ -3366,7 +3835,8 @@ def main() -> None:
         # never escapes here.
         try:
             topo_out = run_topology_audit(
-                config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit, smoke=args.smoke)
+                config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit,
+                smoke=args.smoke, workers=args.workers)
         except TopologyMismatchError as exc:
             topology_hash_failures.append({"topology_seed": seed, "reason": str(exc)})
             continue

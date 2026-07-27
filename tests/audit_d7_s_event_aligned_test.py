@@ -17,6 +17,8 @@ against lives specifically in the real environment's `np_random`/
 
 import importlib.util
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -648,11 +650,120 @@ def _seed_kwargs(**overrides):
     return kwargs
 
 
-def test_stream_seed_is_deterministic():
-    a = audit.stream_seed(**_seed_kwargs())
-    b = audit.stream_seed(**_seed_kwargs())
-    assert a == b
-    assert isinstance(a, int)
+# -- cross-process reproducibility of `stream_seed` and `full_state_fingerprint` --
+#
+# AGENTS.md, "A guard test needs a paired negative" (adopted 2026-07-27):
+# "Anything the artifact calls registered, stable or reproducible must be
+# observed reproducing across a process boundary." Both functions are
+# documented that way -- `stream_seed`'s docstring calls it "the nine-field
+# stable hash the contract freezes"; `full_state_fingerprint` is pooled across
+# independently-invoked shards. The superseded `test_stream_seed_is_deterministic`
+# called `stream_seed` twice in ONE process with byte-identical kwargs and
+# asserted `a == b` -- `f(x) == f(x)`, which cannot fail for any
+# implementation, including one that salts the digest with Python's
+# per-process-randomized `hash()`. It read as coverage of "stable" while
+# proving nothing (the same defect shape as the CRN test 43 lines above,
+# already repaired). This subprocess probe replaces it.
+_FINGERPRINT_PROBE_SCRIPT = r'''
+import importlib.util, sys, json
+import numpy as np
+
+root, order = sys.argv[1], sys.argv[2]
+spec = importlib.util.spec_from_file_location(
+    "audit_d7_s_event_aligned", root + "/scripts/audit_d7_s_event_aligned.py")
+audit = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = audit
+spec.loader.exec_module(audit)
+
+
+class _NoReprKey:
+    """Defines neither `__repr__` nor `__eq__`/`__hash__`: the default repr
+    embeds this instance's memory address, and default equality/hash are
+    identity-based -- exactly the key shape that made the superseded
+    dict-branch sort key (`repr(kv[0])`) address-dependent."""
+
+
+class _Env:
+    pass
+
+
+env = _Env()
+env.np_random = np.random.RandomState(20260727)
+env.plain_dict = {"beta": 2, "alpha": 1, "gamma": 3}
+env.nested = {"list": [3, 1, 2], "tuple": (1, 2), "items": {5, 3, 4}}
+env.arr = np.arange(12, dtype=float).reshape(3, 4)
+env.flag = True
+env.count = 7
+
+# Same LOGICAL dict content (one opaque key -> "first", one -> "second") in
+# both branches; only the PHYSICAL creation order of the two key objects
+# differs, which is what flips their relative memory address.
+if order == "fwd":
+    k1 = _NoReprKey()
+    k2 = _NoReprKey()
+else:
+    k2 = _NoReprKey()
+    k1 = _NoReprKey()
+env.no_repr_keyed = {k1: "first", k2: "second"}
+
+fingerprint = audit.full_state_fingerprint(env)
+seed = audit.stream_seed(
+    topology_seed=20260726, block="audit", episode_seed=123,
+    limb="stable", event_index=0, candidate_target_id="z0",
+    phase="select", replicate_index=0,
+)
+print(json.dumps({"fingerprint": fingerprint, "stream_seed": seed}))
+'''
+
+
+def _run_fingerprint_probe(hashseed: str, order: str = "fwd") -> dict:
+    """Launches `_FINGERPRINT_PROBE_SCRIPT` in a genuinely separate
+    interpreter process (never simulated in-process) under the given
+    `PYTHONHASHSEED`, and returns its JSON payload."""
+    child_env = dict(os.environ)
+    child_env["PYTHONHASHSEED"] = hashseed
+    proc = subprocess.run(
+        [sys.executable, "-c", _FINGERPRINT_PROBE_SCRIPT, str(_ROOT), order],
+        capture_output=True, text=True, env=child_env)
+    assert proc.returncode == 0, (
+        f"fingerprint probe subprocess failed (hashseed={hashseed}, order={order}):\n"
+        f"STDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}")
+    return json.loads(proc.stdout.strip().splitlines()[-1])
+
+
+def test_full_state_fingerprint_is_deterministic_across_a_process_boundary():
+    """Identical state, built independently by identical code in two SEPARATE
+    interpreter processes launched under different `PYTHONHASHSEED`s, must
+    fingerprint identically."""
+    a = _run_fingerprint_probe("1000003", order="fwd")
+    b = _run_fingerprint_probe("2000003", order="fwd")
+    assert a["fingerprint"] == b["fingerprint"]
+
+
+def test_stream_seed_is_deterministic_across_a_process_boundary():
+    """Replaces the `f(x) == f(x)` tautology: `stream_seed` computed from
+    identical kwargs in two separate processes, under different
+    `PYTHONHASHSEED`s, must agree -- a salted-`hash()` implementation would
+    still pass in one process but fail this."""
+    a = _run_fingerprint_probe("111111", order="fwd")
+    b = _run_fingerprint_probe("999999", order="fwd")
+    assert isinstance(a["stream_seed"], int)
+    assert a["stream_seed"] == b["stream_seed"]
+
+
+def test_full_state_fingerprint_no_repr_key_dict_is_order_independent_across_processes():
+    """The paired negative for the dict-branch fix: sorting dict items by
+    `repr(key)` (the superseded code, restored temporarily to verify this
+    test can fail) is address-dependent for a key class defining no
+    `__repr__`. Two processes building the SAME logical dict -- one opaque
+    key mapped to "first", another to "second" -- but instantiating the two
+    key objects in OPPOSITE physical order, must still fingerprint
+    identically once the dict is canonicalized on the ENCODED key/value
+    (sorting on `repr(key)` would tie the digest to allocation order, which
+    the fixed order argument here deliberately flips between runs)."""
+    fwd = _run_fingerprint_probe("31337", order="fwd")
+    rev = _run_fingerprint_probe("31337", order="rev")
+    assert fwd["fingerprint"] == rev["fingerprint"]
 
 
 def test_stream_seed_changes_with_any_single_field():
@@ -924,6 +1035,28 @@ def test_hierarchical_bootstrap_events_is_deterministic_for_a_fixed_seed():
     assert np.array_equal(a["u_star_iters"], b["u_star_iters"])
 
 
+def test_hierarchical_bootstrap_events_different_seed_gives_a_different_stream():
+    """AGENTS.md's guard rule, applied to the determinism test directly
+    above: no test anywhere asserted that a DIFFERENT seed moves
+    `hierarchical_bootstrap_events`'s resample stream. A version that
+    silently ignored `seed` (e.g. always `np.random.default_rng(0)`) would
+    still pass the fixed-seed test above -- it never varies `seed` between
+    its two calls -- while collapsing every distinct bootstrap draw this
+    function is ever called with into the SAME resample. `eval_set`/
+    `eval_keep` carry genuine per-index variance here (unlike the
+    fixed-seed test above's constant `eval_set`, where every resample mean
+    is 5.0 regardless of which indices get drawn) -- resampling with
+    replacement needs varying values to have anything to be sensitive to."""
+    event = {
+        "candidates": {"A": {"select": [1.0, 2.0, 3.0, 4.0],
+                              "eval_set": [1.0, 9.0, 2.0, 8.0, 3.0, 7.0, 4.0, 6.0]}},
+        "eval_keep": [0.0, 5.0, 1.0, 4.0, 2.0, 3.0, 1.5, 2.5],
+    }
+    a = audit.hierarchical_bootstrap_events([event], iters=50, seed=42)
+    b = audit.hierarchical_bootstrap_events([event], iters=50, seed=12345)
+    assert not np.array_equal(a["u_star_iters"], b["u_star_iters"])
+
+
 # =============================================================================
 # Supplementary: state-hash prefix-replay assertion and topology hash
 # =============================================================================
@@ -941,6 +1074,47 @@ def test_state_hash_equal_snapshots_hash_equal():
     h1 = audit.compute_state_hash(snap)
     h2 = audit.compute_state_hash(dict(snap))
     audit.assert_state_hash_equal(h1, h2)  # must not raise
+
+
+def test_state_hash_is_sensitive_to_every_digested_key():
+    """The test above only varies the snapshot via `dict(snap)` -- a shallow
+    copy that changes no VALUES at all, so it can never notice a key
+    silently dropped from `compute_state_hash`'s `array_keys` tuple (e.g.
+    `station_occupancy`/`station_queue` removed, which would flip event
+    eligibility downstream without ever moving the digest). Elsewhere in
+    this suite only `positions` (`test_state_hash_mismatch_raises_and_is_
+    never_silently_repaired`) and `battery_ratios`
+    (`test_replay_hash_mismatch_is_never_silently_repaired`) are ever
+    independently perturbed and confirmed to move the hash -- two of the
+    seven keys `compute_state_hash` digests. This test perturbs each of the
+    other five in isolation too."""
+    base = {
+        "positions": np.array([[0.0, 0.0, 0.0], [1.0, 1.0, 1.0]]),
+        "battery_ratios": np.array([0.5, 0.6]),
+        "charging_mask": np.array([False, True]),
+        "station_occupancy": np.array([1.0]),
+        "station_queue": np.array([2.0]),
+        "lifecycle_mask": np.array([True, False]),
+        "duty_map": {0: 0, 1: 1},
+    }
+    base_hash = audit.compute_state_hash(base)
+
+    mutations = {
+        "positions": np.array([[9.0, 9.0, 9.0], [1.0, 1.0, 1.0]]),
+        "battery_ratios": np.array([0.9, 0.6]),
+        "charging_mask": np.array([True, True]),
+        "station_occupancy": np.array([5.0]),
+        "station_queue": np.array([9.0]),
+        "lifecycle_mask": np.array([False, False]),
+        "duty_map": {0: 1, 1: 0},
+    }
+    for key, new_value in mutations.items():
+        mutated = dict(base)
+        mutated[key] = new_value
+        mutated_hash = audit.compute_state_hash(mutated)
+        assert mutated_hash != base_hash, (
+            f"mutating {key!r} alone must move compute_state_hash's digest"
+        )
 
 
 def test_state_hash_mismatch_raises_and_is_never_silently_repaired():
@@ -1150,6 +1324,50 @@ def test_shared_topology_stream_would_have_caught_the_old_per_call_seed_bug():
         "the old per-call-consumption pattern must diverge between "
         "quantities with different event counts -- if it doesn't, this "
         "reference reproduction is not actually exercising the bug"
+    )
+
+
+def test_hierarchical_bootstrap_quantity_different_seed_gives_a_different_stream():
+    """The most dangerous finding in the 2026-07-27 sweep.
+    `hierarchical_bootstrap_quantity` reseeds its inner per-topology event
+    resample from `(seed, iteration, slot)` -- no test anywhere asserted
+    that changing the TOP-LEVEL `seed` actually moves that inner resample.
+    `test_shared_topology_stream_is_identical_across_quantities_with_
+    different_event_counts` above holds `seed` fixed throughout both its
+    calls, so a version that dropped `seed` from the per-slot key entirely
+    (`np.random.default_rng((seed, i, slot))` -> `np.random.default_rng(0)`)
+    would still pass it. Left unrepaired, that bug makes the within-topology
+    resample IDENTICAL in every topology slot of every outer iteration,
+    collapsing a real variance component and narrowing `LCB95(U*)` into
+    false confidence -- exactly the shape that can flip `decide_branch`'s
+    output.
+
+    Non-degenerate per-topology events (several distinct values per event,
+    unlike `_degenerate_topology_units`'s single-value construction) so the
+    within-topology resample actually has something to vary."""
+    def make_units(n_topo=3, n_events=4):
+        rng = np.random.default_rng(2026)
+        return [
+            [
+                {"candidates": {"only": {
+                    "select": list(rng.uniform(0.0, 10.0, size=6)),
+                    "eval_set": list(rng.uniform(0.0, 10.0, size=6))}},
+                 "eval_keep": list(rng.uniform(0.0, 10.0, size=6))}
+                for _ in range(n_events)
+            ]
+            for _ in range(n_topo)
+        ]
+
+    units = make_units()
+    shared = audit.draw_shared_topology_indices(n_topo=3, iters=30, seed=42)
+    result_a = audit.hierarchical_bootstrap_quantity(
+        units, shared_topology_indices=shared, seed=111)
+    result_b = audit.hierarchical_bootstrap_quantity(
+        units, shared_topology_indices=shared, seed=222)
+    assert not np.array_equal(result_a["u_star_iters"], result_b["u_star_iters"]), (
+        "a different top-level seed must move the per-(iteration, slot) "
+        "inner resample -- if it doesn't, every topology slot of every "
+        "outer iteration is drawing the identical within-topology resample"
     )
 
 
@@ -1474,6 +1692,19 @@ def test_replay_prefix_raises_on_mismatch_via_the_real_orchestration_function(mo
 
 # --- evaluator-only forward replay: never contaminates the real rollout ----
 
+class _FakeRouterState:
+    """Stand-in for the real environment's routing-protocol object
+    (`self.router`, `routing_protocols.py`), which holds its own
+    mutable dict-shaped caches (`routing_tables`, `sequence_numbers`,
+    `rreq_cache`) as plain attributes on a custom object. Used to prove
+    `full_state_fingerprint` recurses into a custom object's `__dict__`
+    rather than only ever handling containers the environment itself
+    owns directly."""
+
+    def __init__(self):
+        self.routing_tables = {0: {"dest": 1}}
+
+
 class _CloneableFakeEnv:
     """Minimal FakeEnv supporting the full `step_once` pipeline
     (`compute_duty_positions` / `scripted_source_actions` / `env.step`) with
@@ -1515,6 +1746,17 @@ class _CloneableFakeEnv:
         self.station_occupancy = np.array([0.0])
         self.station_queue_lengths = np.array([0.0])
         self.last_user_rates_mbps = np.full(self.n_users, 2e6)
+        # Nested/mutable state shapes the real environment carries and the
+        # superseded fingerprint's three-shape dispatch (ndarray, numeric
+        # scalar, flat numeric list/tuple) could not see at all: a dict
+        # (`routing_paths`), a list of lists (`user_serving_sets`), a list of
+        # dicts (`active_packets`), and a custom object with its own mutable
+        # `__dict__` (`router`). Present here so the focused tests below can
+        # mutate each in isolation.
+        self.routing_paths = {}
+        self.user_serving_sets = [[] for _ in range(self.n_users)]
+        self.active_packets = []
+        self.router = _FakeRouterState()
         self.np_random = np.random.RandomState(seed)
 
     def _calculate_power_consumption(self, v_h, v_z):
@@ -1539,6 +1781,69 @@ class _CloneableFakeEnv:
                                       "return_constraint_cost_raw": 0.05}}
                  for a in self.agents}
         return None, None, None, None, infos
+
+
+class _RngConsumingFakeEnv(_CloneableFakeEnv):
+    """`_CloneableFakeEnv.step()` draws no randomness at all, so it cannot
+    tell an intact `fork_continuation` seed reduction
+    (`int(continuation_seed) % (2**32 - 1)`) apart from one badly narrowed
+    (e.g. `% 1000`) -- nothing downstream ever reads `env.np_random`. This
+    subclass folds one draw from `self.np_random` into every step so the
+    reseeded continuation stream actually reaches the trajectory. Used ONLY
+    by the seed-reduction-width guard below."""
+
+    def step(self, actions):
+        result = super().step(actions)
+        jitter = self.np_random.normal(scale=1.0, size=self.uav_positions.shape)
+        self.uav_positions = self.uav_positions + jitter
+        return result
+
+
+def test_fork_continuation_seed_reduction_actually_reaches_the_trajectory():
+    """R3 condition 1A ('same snapshot, same stream -> identical') is only a
+    meaningful guard on `fork_continuation`'s seed reduction
+    (`int(continuation_seed) % (2**32 - 1)`) if the continuation stream it
+    seeds actually reaches the trajectory. `_CloneableFakeEnv.step()` draws
+    no randomness at all, so `test_conditions_1a_and_1b_on_one_live_snapshot`
+    above would pass identically even if that reduction were narrowed to
+    `% 1000` -- and a seed as small as `42` would not expose the difference
+    either, since `42 % 1000 == 42 % (2**32 - 1) == 42` (the production
+    reduction is the identity for any seed below 1000).
+
+    `_RngConsumingFakeEnv` closes the first gap. The second is closed by
+    using two real, hash-derived 64-bit continuation seeds that COLLIDE
+    under `% 1000` (they are exactly 1000 apart) but cannot collide under
+    the real `% (2**32 - 1)` reduction (`0 < 1000 < 2**32 - 1`, so their
+    difference is not a multiple of the modulus)."""
+    seed_a = audit.stream_seed(**_seed_kwargs(candidate_target_id="rng-reduction-probe"))
+    seed_b = seed_a + 1000
+    assert seed_a % 1000 == seed_b % 1000
+    assert seed_a % (2**32 - 1) != seed_b % (2**32 - 1)
+
+    def _trajectory(seed):
+        env = _RngConsumingFakeEnv(seed=61)
+        duty_map = {i: i for i in range(env.n_uavs)}
+        duty_positions, centroids = audit.compute_duty_positions(env)
+        audit.fork_continuation(
+            env, duty_map_at_te=duty_map, duty_positions_at_te=duty_positions,
+            service_centroids_at_te=centroids, schedule="constructive_mixed",
+            horizon=5, continuation_seed=seed)
+        return env.uav_positions.copy()
+
+    # condition 1A itself, now meaningfully exercised: same seed twice must
+    # give byte-identical trajectories.
+    pos_a1 = _trajectory(seed_a)
+    pos_a2 = _trajectory(seed_a)
+    np.testing.assert_array_equal(pos_a1, pos_a2)
+
+    # the paired negative: two seeds that collide mod 1000 must still
+    # diverge under the real % (2**32 - 1) reduction.
+    pos_b = _trajectory(seed_b)
+    assert not np.allclose(pos_a1, pos_b), (
+        "two continuation seeds that collide mod 1000 must still diverge "
+        "under the real % (2**32 - 1) reduction -- if they don't, the "
+        "reduction has been narrowed to something at or below 1000"
+    )
 
 
 def test_evaluator_forward_replay_does_not_mutate_the_original_env():
@@ -1868,17 +2173,26 @@ def test_run_calibration_episode_voids_the_episode_when_event_identity_fails(mon
 # proved here rather than asserted in prose.
 # =============================================================================
 
-def _snapshot_of(env, *, duty_map=None):
+def _snapshot_of(env, *, duty_map=None, duty_positions=None, service_centroids=None):
     """An `EventSnapshot` whose certified hashes are derived from `env` itself,
     so the snapshot is internally consistent and any failure a test sees is the
-    injected one rather than a hash that never matched."""
+    injected one rather than a hash that never matched. `duty_positions`/
+    `service_centroids` default to the real per-step geometry so every
+    existing caller of this helper stays bound to non-trivial identity inputs
+    rather than a placeholder that could never move the fingerprint."""
     duty_map = {i: i for i in range(env.n_uavs)} if duty_map is None else duty_map
+    if duty_positions is None or service_centroids is None:
+        computed_positions, computed_centroids = audit.compute_duty_positions(env)
+        duty_positions = computed_positions if duty_positions is None else duty_positions
+        service_centroids = computed_centroids if service_centroids is None else service_centroids
     return audit.EventSnapshot(
         env,
         coord_hash=audit.coordinate_hash(env.ground_bs_positions,
                                           env.charging_station_positions),
         hash_at_te=audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map)),
-        duty_map_at_te=duty_map)
+        duty_map_at_te=duty_map,
+        duty_positions_at_te=duty_positions,
+        service_centroids_at_te=service_centroids)
 
 
 def test_replicate_constants_are_the_r2_scientific_floor():
@@ -1932,6 +2246,22 @@ def test_cloning_consumes_no_source_rng_condition_3():
     assert snap.clones_issued == 5
 
 
+def test_rng_state_token_distinguishes_an_advanced_rng_state():
+    """The missing other half of condition 3's guard above: that test only
+    proves `_rng_state_token` is UNCHANGED after cloning. If
+    `_rng_state_token` degenerated to a constant for every input (e.g. the
+    production defect this sweep also found -- returning a fixed string on
+    an unrecognized/missing RNG attribute), the comparison above would
+    STILL hold trivially, and condition 3 would never fire even though
+    cloning silently consumed the source RNG. The token must actually MOVE
+    when the RNG state genuinely advances."""
+    env = _CloneableFakeEnv(seed=60)
+    before = audit._rng_state_token(env)
+    env.np_random.uniform(0.0, 1.0, size=8)   # advance the RNG state directly
+    after = audit._rng_state_token(env)
+    assert before != after
+
+
 def test_capture_rejects_a_snapshot_that_does_not_match_the_certified_world():
     """R3 condition 1C, the check that would have caught the Stage B defect.
 
@@ -1942,6 +2272,7 @@ def test_capture_rejects_a_snapshot_that_does_not_match_the_certified_world():
     the only check was a narrow UAV-only hash that agreed across worlds."""
     env = _CloneableFakeEnv(seed=25)
     duty_map = {i: i for i in range(env.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(env)
     with pytest.raises(audit.CloneIsolationError):
         audit.EventSnapshot(
             env,
@@ -1950,6 +2281,8 @@ def test_capture_rejects_a_snapshot_that_does_not_match_the_certified_world():
             hash_at_te=audit.compute_state_hash(
                 audit.real_env_state_snapshot(env, duty_map)),
             duty_map_at_te=duty_map,
+            duty_positions_at_te=duty_positions,
+            service_centroids_at_te=centroids,
             certified_fingerprint="a-fingerprint-from-a-different-world")
 
 
@@ -1970,13 +2303,190 @@ def test_full_fingerprint_separates_worlds_the_narrow_hash_cannot():
         "the fingerprint must see what the narrow hash cannot")
 
 
+# =============================================================================
+# Stage B ruling (2026-07-27): the fingerprint's remaining coverage gap.
+# `full_state_fingerprint` iterated `sorted(dir(env))` and recorded exactly
+# three shapes (np.ndarray, numeric/bool scalar, flat numeric list/tuple)
+# with NO `else` branch -- dicts, nested lists, and custom mutable objects
+# fell through and were never digested. Each test below mutates ONE such
+# structure in isolation and would fail against that superseded dispatch,
+# which returns the SAME fingerprint before and after every mutation here
+# because it never looks at any of these attributes at all.
+# =============================================================================
+
+def test_full_state_fingerprint_covers_a_nested_routing_paths_dict():
+    env = _CloneableFakeEnv(seed=50)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    before = audit.full_state_fingerprint(env, duty_map=duty_map)
+    env.routing_paths = {0: ([0, 1], 12.5)}
+    after = audit.full_state_fingerprint(env, duty_map=duty_map)
+    assert after != before, "mutating routing_paths must move the fingerprint"
+
+
+def test_full_state_fingerprint_covers_nested_user_serving_sets():
+    env = _CloneableFakeEnv(seed=50)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    before = audit.full_state_fingerprint(env, duty_map=duty_map)
+    env.user_serving_sets[0].append(2)
+    after = audit.full_state_fingerprint(env, duty_map=duty_map)
+    assert after != before, (
+        "mutating a nested user_serving_sets entry must move the fingerprint")
+
+
+def test_full_state_fingerprint_covers_active_packets_list_of_dicts():
+    env = _CloneableFakeEnv(seed=50)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    before = audit.full_state_fingerprint(env, duty_map=duty_map)
+    env.active_packets.append(
+        {"id": 1, "source_uav": 0, "path": [0, 1], "path_idx": 0,
+         "creation_time": 0, "hop_count": 0})
+    after = audit.full_state_fingerprint(env, duty_map=duty_map)
+    assert after != before, "mutating active_packets must move the fingerprint"
+
+
+def test_full_state_fingerprint_covers_a_custom_controller_objects_state():
+    """Source-controller mutable state (R3 §C): a routing-protocol-shaped
+    object's OWN internal dict, reached only by recursing into its
+    `__dict__` -- never a container the environment holds directly."""
+    env = _CloneableFakeEnv(seed=50)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    before = audit.full_state_fingerprint(env, duty_map=duty_map)
+    env.router.routing_tables[0]["dest"] = 99
+    after = audit.full_state_fingerprint(env, duty_map=duty_map)
+    assert after != before, (
+        "mutating a custom controller object's internal state must move the fingerprint")
+
+
+def test_full_state_fingerprint_raises_rather_than_silently_skipping_an_unhandled_type():
+    """The design constraint the ruling made mandatory: a type the digest
+    cannot encode must be LOUD, not invisible. `object()` has no `__dict__`
+    (only its subclasses do), is not a dict/list/tuple/set/ndarray/scalar/
+    str/None, and is not named in `FINGERPRINT_EXCLUDED_ATTRS` -- exactly the
+    shape that vanished silently under the superseded dispatch, which had no
+    `raise` at all and so could never fail on an attribute of this type."""
+    env = _CloneableFakeEnv(seed=51)
+    env.unencodable_marker = object()
+    with pytest.raises(audit.FingerprintCoverageError):
+        audit.full_state_fingerprint(env)
+
+
+def test_full_state_fingerprint_covers_real_environment_without_raising():
+    """Verify against the real environment, not only the hand-written
+    FakeEnv above: `UAVEnergyAwareRelayEnv` carries `gymnasium.spaces` dicts
+    and (when configured) a real routing-protocol object with an `env` back-
+    reference -- neither shape exists on `_CloneableFakeEnv`, so a fake-only
+    suite could not prove the recursive encoder tolerates them (in
+    particular, the `np_random`-shaped back-reference cycle a router's
+    `self.env` creates) rather than raising or recursing forever. Also
+    proves routing_paths -- real, not a stand-in -- is actually covered."""
+    from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+    config = _real_config()
+    env = UAVEnergyAwareRelayEnv(config=config, energy_stage="S3")
+    env.reset(seed=20260726)
+
+    before = audit.full_state_fingerprint(env)  # must not raise, must not hang
+
+    env.routing_paths = dict(env.routing_paths)
+    env.routing_paths[9999] = ([0, 1, 2], 12.5)
+    after = audit.full_state_fingerprint(env)
+    assert after != before, (
+        "mutating the REAL environment's routing_paths must move the fingerprint")
+
+
+def test_event_snapshot_binds_duty_positions_and_service_centroids_to_identity():
+    """R3 §C's second blocker: `EventSnapshot` used to fingerprint the
+    environment and `duty_map_at_te` only. Two events differing SOLELY in
+    duty positions, or solely in service centroids, would have produced the
+    identical `full_fingerprint` and passed every Stage-B condition
+    regardless of which duty geometry or centroids the continuation actually
+    received."""
+    env = _CloneableFakeEnv(seed=52)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    hash_at_te = audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map))
+    coord_hash = audit.coordinate_hash(env.ground_bs_positions, env.charging_station_positions)
+    duty_positions_a = {0: np.array([1.0, 1.0, 80.0])}
+    duty_positions_b = {0: np.array([999.0, 999.0, 80.0])}
+    centroids_a = np.array([[1.0, 1.0]])
+    centroids_b = centroids_a + 500.0
+
+    def _snap(duty_positions, centroids):
+        return audit.EventSnapshot(
+            env, coord_hash=coord_hash, hash_at_te=hash_at_te, duty_map_at_te=duty_map,
+            duty_positions_at_te=duty_positions, service_centroids_at_te=centroids)
+
+    snap_a = _snap(duty_positions_a, centroids_a)
+    snap_b = _snap(duty_positions_b, centroids_a)
+    snap_c = _snap(duty_positions_a, centroids_b)
+
+    assert snap_a.full_fingerprint != snap_b.full_fingerprint, (
+        "duty positions must be bound to event identity")
+    assert snap_a.full_fingerprint != snap_c.full_fingerprint, (
+        "service centroids must be bound to event identity")
+
+
+def test_capture_event_snapshot_binds_service_centroids_from_the_event_dict():
+    """Integration-level: the actual production entry point,
+    `capture_event_snapshot`, must carry `duty_positions_at_te`/
+    `service_centroids_at_te` from the certified `event` dict through into
+    the snapshot's identity -- not just the lower-level `EventSnapshot`
+    constructor in isolation."""
+    env = _CloneableFakeEnv(seed=53)
+    duty_map = {i: i for i in range(env.n_uavs)}
+    duty_positions = {0: np.array([1.0, 1.0, 80.0])}
+    hash_at_te = audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map))
+    coord_hash = audit.coordinate_hash(env.ground_bs_positions, env.charging_station_positions)
+
+    def _event(centroids):
+        full_fp = audit.full_state_fingerprint(
+            env, duty_map=duty_map, duty_positions=duty_positions,
+            service_centroids=centroids)
+        return {
+            "hash_at_te": hash_at_te, "duty_map_at_te": duty_map,
+            "duty_positions_at_te": duty_positions,
+            "service_centroids_at_te": centroids,
+            "full_fingerprint_at_te": full_fp,
+        }
+
+    snap_1 = audit.capture_event_snapshot(
+        env, coord_hash=coord_hash, event=_event(np.array([[1.0, 1.0]])))
+    snap_2 = audit.capture_event_snapshot(
+        env, coord_hash=coord_hash, event=_event(np.array([[9.0, 9.0]])))
+    assert snap_1.full_fingerprint != snap_2.full_fingerprint
+
+
+def test_classify_bs_quadrant_worked_examples():
+    """Independent worked examples, not re-derived from the function under
+    test: area_size=1000 -> area_center=500. Mirrors
+    `_generate_forced_relay_cluster_positions`'s (`scenario_base.py`) own
+    branch order exactly, including its tie fold-through into the trailing
+    `else` (equal-to-center folds into `bs_top_right` here, just as that
+    function's own `else` catches everything its first three branches do
+    not)."""
+    assert audit.classify_bs_quadrant(np.array([[100.0, 100.0, 80.0]]), 1000.0) == "bs_bottom_left"
+    assert audit.classify_bs_quadrant(np.array([[900.0, 100.0, 80.0]]), 1000.0) == "bs_bottom_right"
+    assert audit.classify_bs_quadrant(np.array([[100.0, 900.0, 80.0]]), 1000.0) == "bs_top_left"
+    assert audit.classify_bs_quadrant(np.array([[900.0, 900.0, 80.0]]), 1000.0) == "bs_top_right"
+    assert audit.classify_bs_quadrant(np.array([[500.0, 500.0, 80.0]]), 1000.0) == "bs_top_right"
+
+
+def test_build_topology_record_exposes_bs_quadrant():
+    config = _real_config()
+    coords, coord_hash = audit.build_topology_template(config, topology_seed=20260726)
+    record = audit.build_topology_record(coords, coord_hash, topology_seed=20260726, config=config)
+    assert record["bs_quadrant"] in (
+        "bs_bottom_left", "bs_bottom_right", "bs_top_left", "bs_top_right")
+
+
 def test_clone_raises_on_a_topology_hash_mismatch():
     env = _CloneableFakeEnv(seed=26)
     duty_map = {i: i for i in range(env.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(env)
     bad = audit.EventSnapshot(
         env, coord_hash="not-the-recorded-topology",
         hash_at_te=audit.compute_state_hash(audit.real_env_state_snapshot(env, duty_map)),
-        duty_map_at_te=duty_map)
+        duty_map_at_te=duty_map,
+        duty_positions_at_te=duty_positions,
+        service_centroids_at_te=centroids)
     with pytest.raises(audit.TopologyMismatchError):
         bad.clone()
 
@@ -2691,6 +3201,73 @@ def test_topology_start_progress_line_goes_to_stderr_not_stdout(monkeypatch, cap
     captured = capsys.readouterr()
     assert captured.out == ""
     assert "[progress] topology_seed=1 start" in captured.err
+
+
+def test_workers_parallel_path_matches_sequential_output_bit_for_bit(monkeypatch):
+    """Task: `--workers` opt-in process parallelism across episodes WITHIN one
+    topology must be pure orchestration plumbing -- results are folded back
+    into `run_topology_audit`'s accumulators in ASCENDING episode-index
+    order, never completion order, so the JSON result must be byte-identical
+    regardless of worker count.
+
+    `_run_indexed_in_pool` is the ONLY seam that talks to a real
+    `ProcessPoolExecutor` (see its docstring); spinning up real OS processes
+    here would be both slow and unable to see this test's monkeypatches (a
+    freshly spawned worker re-imports the module fresh, without them), so
+    this test replaces that ONE seam with a fake that still calls the real
+    `_calibration_episode_worker`/`_audit_episode_worker` (which in turn call
+    the real, unmodified `run_calibration_episode` and `_compute_audit_episode`)
+    but resolves indices in REVERSED order -- the opposite of ascending -- to
+    force a genuine out-of-order completion. A caller that folded results by
+    completion/insertion order instead of indexing `pooled[idx]` (the exact
+    bug class `--workers` risks introducing) would then produce
+    differently-ordered accumulator lists here, and this test would fail."""
+    duty_map = {i: i for i in range(4)}  # _CloneableFakeEnv has n_uavs=4
+    reference_env = _CloneableFakeEnv(seed=77)
+    duty_positions, centroids = audit.compute_duty_positions(reference_env)
+    real_coord_hash = audit.coordinate_hash(reference_env.ground_bs_positions,
+                                             reference_env.charging_station_positions)
+    fake_event = {
+        "hash_at_te": audit.compute_state_hash(
+            audit.real_env_state_snapshot(reference_env, duty_map)),
+        "duty_map_at_te": duty_map,
+        "duty_map_before_leave": duty_map,
+        "duty_positions_at_te": duty_positions,
+        "service_centroids_at_te": centroids,
+        "conformance_record": {"marker": "fixed"},
+        "focal_stable_uav": 0,
+        "focal_flex_uav": 1,
+        "legal_targets": {"stable": {}, "flex": {}},
+        "locked_duties": {"stable": frozenset(), "flex": frozenset()},
+    }
+    monkeypatch.setattr(
+        audit, "build_topology_template",
+        lambda config, *, topology_seed, energy_stage="S3": (
+            {"ground_bs": reference_env.ground_bs_positions,
+             "charging_stations": reference_env.charging_station_positions},
+            real_coord_hash))
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _CloneableFakeEnv(seed=77))
+    monkeypatch.setattr(audit, "apply_energy_profile", lambda *a, **k: None)
+    monkeypatch.setattr(
+        audit, "roll_prefix_and_find_event",
+        lambda env, **k: {"event": fake_event, "exclusions": [], "recorded_actions": []})
+
+    def _fake_pool(worker_fn, indices, workers, **common_kwargs):
+        return {idx: worker_fn(idx=idx, **common_kwargs) for idx in reversed(list(indices))}
+
+    monkeypatch.setattr(audit, "_run_indexed_in_pool", _fake_pool)
+
+    sequential = audit.run_topology_audit(
+        object(), topology_seed=555, n_calibration=3, n_audit=3, workers=1)
+    parallel = audit.run_topology_audit(
+        object(), topology_seed=555, n_calibration=3, n_audit=3, workers=4)
+
+    assert sequential["qualifying_calibration_episodes"] == 3
+    assert sequential["qualifying_audit_episodes"] == 3
+
+    seq_json = json.dumps(sequential, sort_keys=True, default=audit._json_default)
+    par_json = json.dumps(parallel, sort_keys=True, default=audit._json_default)
+    assert seq_json == par_json
 
 
 if __name__ == "__main__":
