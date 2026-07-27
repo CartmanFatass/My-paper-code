@@ -21,6 +21,17 @@ g41_failed_closed=post-anchor standalone slow critic causal necessity in G41-P0
 g41_remaining_open=G31 internal component attribution; broader process/horizon/capacity; identifiable non-G33 UAV transport
 g41_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_ALIGNMENT_AUDIT
 
+## G42 formal result update (mechanically recorded from External Pro)
+
+g42_row=continuous-roster native-six G31 composition with scale-matched raw-sum post-anchor route
+g42_row_status=SUPPORTED_RETAINED
+g42_row_evidence=20260727_CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_FORMAL_RESULT_A6C3C29 plus archived External Pro disposition
+g42_row_claim_ceiling=the stated G42-P0 boundary only; no universal credit, recurrence, process, horizon, capacity, UAV or G33 claim
+g42_scientific_route=COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_RAW_SUM_SCALE_MATCHED_NO_SLOW
+g42_failed_closed=registered DB angular direction reorientation required for access or material advantage over 0.05 inside G42-P0
+g42_retained_boundary=DB_derived_scalar_norm_schedule|realized_successor_target|decomposition|shared_true_state_baseline|per_channel_normalization|common_fast_anchor
+g42_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_DESIGN_ASSERTION_AUDIT
+
 # HMASD 科研方向账本
 
 ## 用途与权威边界

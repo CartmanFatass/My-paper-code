@@ -30,3 +30,12 @@ hypothetical transitions are recorded. Checkpoint selection is final-only.
 This note records transport and runtime facts only. It does not interpret the
 scientific metrics or consume the valid iteration; External Pro disposition is
 required before CDC, ledger, portfolio, or successor-state changes.
+
+## External Pro disposition (mechanically recorded)
+
+The exact archived response records `valid_result_disposition=CONTINUE`,
+`conclusion_bearing_iterations_consumed=32`, `iterations_remaining=5`, and
+the next scheduled action
+`CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_DESIGN_ASSERTION_AUDIT`.
+The exact raw response and transport intake are in the round paths named in
+`CURRENT_WORK.md`.
