@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 from pathlib import Path
@@ -79,6 +80,8 @@ FORMAL_NUM_ENVS = 8
 FORMAL_PPO_PASSES = 2
 FORMAL_EVAL_EPISODES = 64
 FORMAL_BOOTSTRAP_REPETITIONS = 10_000
+EVALUATION_CELL_WORKERS = 1
+TRAINING_ARM_UPDATE_WORKERS = 2
 
 EXERCISE_REPLICATES = 1
 EXERCISE_FAST_UPDATES = 10
@@ -192,6 +195,10 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         "total_real_transitions": training + evaluation,
         "optimizer_steps": optimizer_steps,
         "evaluation_optimizer_steps": 0,
+        "evaluation_cell_workers": EVALUATION_CELL_WORKERS,
+        "evaluation_parallelism": "serial_cells_native_batched_episodes",
+        "training_arm_update_workers": TRAINING_ARM_UPDATE_WORKERS,
+        "training_update_parallelism": "disjoint_arm_optimizers_only",
         "paired_collection_before_update": True,
         "intrinsic_K_search": 0,
         "hypothetical_trajectory_count": 0,
@@ -416,14 +423,25 @@ def _train_replicate(
                 and source.validate_initial_gradient_audit_record(gradient_audit)
             ):
                 raise RuntimeError("G39 initial function/trajectory/gradient gate failed")
-        for arm in source.ARMS:
-            metrics = optimize_fast_anchor_update(
-                models[arm],
-                fast_optimizers[arm],
-                trajectories[arm],
-                device=torch.device("cpu"),
-                ppo_passes=int(configuration["ppo_passes"]),
-            )
+        with ThreadPoolExecutor(
+            max_workers=TRAINING_ARM_UPDATE_WORKERS,
+            thread_name_prefix="g39-fast-arm",
+        ) as executor:
+            update_futures = {
+                arm: executor.submit(
+                    optimize_fast_anchor_update,
+                    models[arm],
+                    fast_optimizers[arm],
+                    trajectories[arm],
+                    device=torch.device("cpu"),
+                    ppo_passes=int(configuration["ppo_passes"]),
+                )
+                for arm in source.ARMS
+            }
+            update_metrics = {
+                arm: update_futures[arm].result() for arm in source.ARMS
+            }
+        for arm, metrics in update_metrics.items():
             finite[arm] &= bool(metrics["finite_update"])
             maximum_replay[arm] = max(maximum_replay[arm], _max_replay_error(metrics))
             fast_steps[arm] += int(metrics["optimizer_steps"])
@@ -460,16 +478,27 @@ def _train_replicate(
         for arm, trajectory in trajectories.items():
             replay_widths[arm].add(int(trajectory.observations.shape[-1]))
             lifecycle[arm] &= _lifecycle_valid(trajectory)
-        for arm in source.ARMS:
-            metrics = optimize_return_to_go_direction_balanced_update(
-                models[arm],
-                actor_optimizers[arm],
-                critic_optimizers[arm],
-                trajectories[arm],
-                device=torch.device("cpu"),
-                ppo_passes=int(configuration["ppo_passes"]),
-                gamma=GAMMA,
-            )
+        with ThreadPoolExecutor(
+            max_workers=TRAINING_ARM_UPDATE_WORKERS,
+            thread_name_prefix="g39-rtg-arm",
+        ) as executor:
+            update_futures = {
+                arm: executor.submit(
+                    optimize_return_to_go_direction_balanced_update,
+                    models[arm],
+                    actor_optimizers[arm],
+                    critic_optimizers[arm],
+                    trajectories[arm],
+                    device=torch.device("cpu"),
+                    ppo_passes=int(configuration["ppo_passes"]),
+                    gamma=GAMMA,
+                )
+                for arm in source.ARMS
+            }
+            update_metrics = {
+                arm: update_futures[arm].result() for arm in source.ARMS
+            }
+        for arm, metrics in update_metrics.items():
             finite[arm] &= bool(metrics["finite_update"])
             maximum_replay[arm] = max(maximum_replay[arm], _max_replay_error(metrics))
             actor_steps[arm] += int(configuration["ppo_passes"])
@@ -869,6 +898,57 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
     return errors
 
 
+def _evaluate_cell(
+    *,
+    replicate: int,
+    capacity: int,
+    arm: str,
+    name: str,
+    processes: Sequence[g34.RandomProcessLedger],
+    action_seed: int,
+    pre: source.G39Policy,
+    deployed: source.G39Policy,
+) -> dict[str, object]:
+    """Evaluate one immutable cell; callers preserve registered output order."""
+
+    contract = _cell_contract(name)
+    state_before = _state_digest(deployed)
+    if arm == source.CONST10_ARM:
+        episodes, lifecycle_valid, fold_audit = source.g38.verify_g38_fold_equivalence(
+            pre,
+            deployed,
+            processes=processes,
+            action_seed=int(action_seed),
+            process_kind=str(contract["process"]),
+            deterministic=bool(contract["deterministic"]),
+        )
+    else:
+        episodes, lifecycle_valid = source.evaluate_g39_model(
+            deployed,
+            processes=processes,
+            action_seed=int(action_seed),
+            process_kind=str(contract["process"]),
+            deterministic=bool(contract["deterministic"]),
+        )
+        fold_audit = None
+    return {
+        "replicate": replicate,
+        "capacity": capacity,
+        "arm": arm,
+        "cell": name,
+        **contract,
+        "optimizer_steps": 0,
+        "state_before": state_before,
+        "state_after": _state_digest(deployed),
+        "pre_fold_state_digest": (
+            _state_digest(pre) if arm == source.CONST10_ARM else None
+        ),
+        "lifecycle_valid": lifecycle_valid,
+        "fold_equivalence": fold_audit,
+        "episodes": list(episodes),
+    }
+
+
 def evaluate(*, run_root: Path) -> dict[str, Any]:
     started = time.perf_counter()
     training = _read_json(run_root / "train_manifest.json")
@@ -898,8 +978,12 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                 replicate=replicate,
                 capacity=capacity,
             )
-            zero_models = source.make_paired_models(capacity, initialization_seed=seeds["model"])
-            zero_folded = source.fold_const_checkpoint(zero_models[source.CONST10_ARM])
+            zero_models = source.make_paired_models(
+                capacity, initialization_seed=seeds["model"]
+            )
+            zero_folded = source.fold_const_checkpoint(
+                zero_models[source.CONST10_ARM]
+            )
             for arm in source.ARMS:
                 for name in MODEL_CELLS:
                     contract = _cell_contract(name)
@@ -907,40 +991,20 @@ def evaluate(*, run_root: Path) -> dict[str, Any]:
                     if arm == source.CONST10_ARM:
                         pre = zero_models[arm] if zero else final_models[arm]
                         deployed = zero_folded if zero else final_folded
-                        episodes, lifecycle_valid, fold_audit = source.g38.verify_g38_fold_equivalence(
-                            pre,
-                            deployed,
-                            processes=processes,
-                            action_seed=seeds["evaluation_action"],
-                            process_kind=str(contract["process"]),
-                            deterministic=bool(contract["deterministic"]),
-                        )
                     else:
                         pre = zero_models[arm] if zero else final_models[arm]
                         deployed = pre
-                        episodes, lifecycle_valid = source.evaluate_g39_model(
-                            deployed,
+                    cells.append(
+                        _evaluate_cell(
+                            replicate=replicate,
+                            capacity=capacity,
+                            arm=arm,
+                            name=name,
                             processes=processes,
                             action_seed=seeds["evaluation_action"],
-                            process_kind=str(contract["process"]),
-                            deterministic=bool(contract["deterministic"]),
+                            pre=pre,
+                            deployed=deployed,
                         )
-                        fold_audit = None
-                    cells.append(
-                        {
-                            "replicate": replicate,
-                            "capacity": capacity,
-                            "arm": arm,
-                            "cell": name,
-                            **contract,
-                            "optimizer_steps": 0,
-                            "state_before": _state_digest(deployed),
-                            "state_after": _state_digest(deployed),
-                            "pre_fold_state_digest": _state_digest(pre) if arm == source.CONST10_ARM else None,
-                            "lifecycle_valid": lifecycle_valid,
-                            "fold_equivalence": fold_audit,
-                            "episodes": list(episodes),
-                        }
                     )
     manifest = {
         "schema_version": SCHEMA_VERSION,

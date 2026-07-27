@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 
@@ -65,6 +66,10 @@ def test_exact_formal_and_nonformal_inventory() -> None:
     assert formal["evaluation_transitions"] == 276_480
     assert formal["total_real_transitions"] == 737_280
     assert formal["optimizer_steps"] == 3_600
+    assert formal["evaluation_cell_workers"] == 1
+    assert formal["evaluation_parallelism"] == "serial_cells_native_batched_episodes"
+    assert formal["training_arm_update_workers"] == 2
+    assert formal["training_update_parallelism"] == "disjoint_arm_optimizers_only"
     assert formal["bootstrap_resamples"] == 10_000
     assert formal["intrinsic_K_search"] == 0
     assert formal["hypothetical_transitions"] == 0
@@ -83,6 +88,159 @@ def test_exact_formal_and_nonformal_inventory() -> None:
     assert nonformal["total_real_transitions"] == 24_000
     assert nonformal["optimizer_steps"] == 120
     assert nonformal["bootstrap_resamples"] == 250
+
+
+def _assert_optimizer_state_equal(
+    expected: torch.optim.Optimizer, actual: torch.optim.Optimizer
+) -> None:
+    left = expected.state_dict()
+    right = actual.state_dict()
+    assert left["param_groups"] == right["param_groups"]
+    assert left["state"].keys() == right["state"].keys()
+    for key, expected_row in left["state"].items():
+        actual_row = right["state"][key]
+        assert expected_row.keys() == actual_row.keys()
+        for name, expected_value in expected_row.items():
+            actual_value = actual_row[name]
+            if isinstance(expected_value, torch.Tensor):
+                assert torch.equal(expected_value, actual_value), (key, name)
+            else:
+                assert expected_value == actual_value, (key, name)
+
+
+def _assert_models_equal(
+    expected: dict[str, runner.source.G39Policy],
+    actual: dict[str, runner.source.G39Policy],
+) -> None:
+    for arm in runner.source.ARMS:
+        for name, expected_value in expected[arm].state_dict().items():
+            assert torch.equal(expected_value, actual[arm].state_dict()[name]), (
+                arm,
+                name,
+            )
+
+
+def test_disjoint_arm_optimizer_parallelism_is_bitwise_serial_equivalent() -> None:
+    runner.configure_runtime(10_991_000)
+    serial_models = runner.source.make_paired_models(8, initialization_seed=10_991_000)
+    parallel_models = runner.source.make_paired_models(8, initialization_seed=10_991_000)
+    trajectories = {
+        arm: runner._collect(
+            serial_models[arm],
+            episode_ids=tuple(range(8)),
+            ledger_seed=10_992_000,
+            action_seed=10_993_000,
+        )
+        for arm in runner.source.ARMS
+    }
+    serial_fast = {
+        arm: runner._optimizer(
+            model,
+            model.fast_actor_parameters() + tuple(model.credit_baselines.parameters()),
+        )
+        for arm, model in serial_models.items()
+    }
+    parallel_fast = {
+        arm: runner._optimizer(
+            model,
+            model.fast_actor_parameters() + tuple(model.credit_baselines.parameters()),
+        )
+        for arm, model in parallel_models.items()
+    }
+
+    serial_metrics = {
+        arm: runner.optimize_fast_anchor_update(
+            serial_models[arm],
+            serial_fast[arm],
+            trajectories[arm],
+            device=torch.device("cpu"),
+            ppo_passes=1,
+        )
+        for arm in runner.source.ARMS
+    }
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures = {
+            arm: executor.submit(
+                runner.optimize_fast_anchor_update,
+                parallel_models[arm],
+                parallel_fast[arm],
+                trajectories[arm],
+                device=torch.device("cpu"),
+                ppo_passes=1,
+            )
+            for arm in runner.source.ARMS
+        }
+        parallel_metrics = {
+            arm: futures[arm].result() for arm in runner.source.ARMS
+        }
+    assert serial_metrics == parallel_metrics
+    _assert_models_equal(serial_models, parallel_models)
+    for arm in runner.source.ARMS:
+        _assert_optimizer_state_equal(serial_fast[arm], parallel_fast[arm])
+
+    for models in (serial_models, parallel_models):
+        for model in models.values():
+            model.begin_direction_balanced_phase()
+    trajectories = {
+        arm: runner._collect(
+            serial_models[arm],
+            episode_ids=tuple(range(8, 16)),
+            ledger_seed=10_992_000,
+            action_seed=10_993_000,
+        )
+        for arm in runner.source.ARMS
+    }
+    serial_actor = {
+        arm: runner._optimizer(model, model.full_actor_parameters())
+        for arm, model in serial_models.items()
+    }
+    serial_critic = {
+        arm: runner._optimizer(model, model.critic_parameters())
+        for arm, model in serial_models.items()
+    }
+    parallel_actor = {
+        arm: runner._optimizer(model, model.full_actor_parameters())
+        for arm, model in parallel_models.items()
+    }
+    parallel_critic = {
+        arm: runner._optimizer(model, model.critic_parameters())
+        for arm, model in parallel_models.items()
+    }
+
+    serial_metrics = {
+        arm: runner.optimize_return_to_go_direction_balanced_update(
+            serial_models[arm],
+            serial_actor[arm],
+            serial_critic[arm],
+            trajectories[arm],
+            device=torch.device("cpu"),
+            ppo_passes=1,
+            gamma=runner.GAMMA,
+        )
+        for arm in runner.source.ARMS
+    }
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures = {
+            arm: executor.submit(
+                runner.optimize_return_to_go_direction_balanced_update,
+                parallel_models[arm],
+                parallel_actor[arm],
+                parallel_critic[arm],
+                trajectories[arm],
+                device=torch.device("cpu"),
+                ppo_passes=1,
+                gamma=runner.GAMMA,
+            )
+            for arm in runner.source.ARMS
+        }
+        parallel_metrics = {
+            arm: futures[arm].result() for arm in runner.source.ARMS
+        }
+    assert serial_metrics == parallel_metrics
+    _assert_models_equal(serial_models, parallel_models)
+    for arm in runner.source.ARMS:
+        _assert_optimizer_state_equal(serial_actor[arm], parallel_actor[arm])
+        _assert_optimizer_state_equal(serial_critic[arm], parallel_critic[arm])
 
 
 def test_proof_training_collects_both_before_update_and_uses_fresh_phase_states(
@@ -392,6 +550,16 @@ def test_bounded_end_to_end_train_evaluate_analyze(
     analysis = runner.analyze(run_root=root)
     assert training["status"] == "COMPLETE"
     assert len(evaluation["cells"]) == 30
+    assert [
+        (cell["replicate"], cell["capacity"], cell["arm"], cell["cell"])
+        for cell in evaluation["cells"]
+    ] == [
+        (replicate, capacity, arm, cell)
+        for replicate in range(1)
+        for capacity in runner.g34.CAPACITIES
+        for arm in runner.source.ARMS
+        for cell in runner.MODEL_CELLS
+    ]
     assert all(len(cell["episodes"]) == 2 for cell in evaluation["cells"])
     assert analysis["operational_valid"] is True, analysis["operational_errors"]
     assert analysis["branch"] in (runner.NONFORMAL_BRANCH, runner.NON_EXECUTABLE_BRANCH)

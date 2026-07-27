@@ -12,6 +12,7 @@ from torch import nn
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
+from ha_ctse_process import continuous_roster_toy_cpp_backend as toy_cpp
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
 
 
@@ -259,6 +260,7 @@ def collect_g39_trajectory(
         for episode in ids
     )
     envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    env_batch = toy_cpp.ContinuousRosterToyBatch(envs)
     batch = len(ids)
     noise = g32.make_action_noise(ids, action_seed=int(action_seed), member_capacity=capacity)
     hidden = torch.zeros((batch, capacity, model.hidden_dim), device=device)
@@ -286,10 +288,7 @@ def collect_g39_trajectory(
     model.eval()
     with torch.no_grad():
         for time in range(g32.HORIZON):
-            views = tuple(
-                g38.observe_g38_actor_source(env, input_mode=g38.FOLD6_INPUT)
-                for env in envs
-            )
+            views = env_batch.observe_six()
             terminal_reset = torch.zeros((batch, capacity), dtype=torch.bool, device=device)
             for batch_index, view in enumerate(views):
                 if view.membership_change.terminally_left:
@@ -306,14 +305,11 @@ def collect_g39_trajectory(
                 hidden=hidden,
                 sampling_noise=torch.as_tensor(noise[time], device=device),
             )
+            action_rows = np.ascontiguousarray(
+                output.actions.detach().cpu().numpy(), dtype=np.float32
+            )
             rewards = np.asarray(
-                [
-                    g38.advance_g38_environment(
-                        env, view, output.actions[index].detach().cpu().numpy()
-                    )
-                    for index, (env, view) in enumerate(zip(envs, views))
-                ],
-                dtype=np.float32,
+                env_batch.advance(views, action_rows), dtype=np.float32
             )
             values = {
                 "observations": observations,
@@ -671,6 +667,7 @@ def evaluate_g39_model(
         else g32.RuntimeCapacityRosterEnv(row.base)
         for row in rows
     )
+    env_batch = toy_cpp.ContinuousRosterToyBatch(envs)
     noise = g32.make_action_noise(
         (row.episode_id for row in rows),
         action_seed=int(action_seed),
@@ -684,10 +681,7 @@ def evaluate_g39_model(
     model.eval()
     with torch.no_grad():
         for time in range(g32.HORIZON):
-            views = tuple(
-                g38.observe_g38_actor_source(env, input_mode=g38.FOLD6_INPUT)
-                for env in envs
-            )
+            views = env_batch.observe_six()
             for index, view in enumerate(views):
                 for key in view.membership_change.temporarily_left:
                     frozen_hidden[index][key] = hidden[index, key].clone()
@@ -729,10 +723,12 @@ def evaluate_g39_model(
                 )
             )
             lifecycle_valid &= bool(torch.equal(output.next_hidden[~active], hidden[~active]))
-            for index, (env, view) in enumerate(zip(envs, views)):
-                g38.advance_g38_environment(
-                    env, view, output.actions[index].detach().cpu().numpy()
-                )
+            env_batch.advance(
+                views,
+                np.ascontiguousarray(
+                    output.actions.detach().cpu().numpy(), dtype=np.float32
+                ),
+            )
             hidden = output.next_hidden
     lifecycle_valid &= not any(frozen_hidden) and not any(frozen_age) and not any(frozen_actions)
     metrics = tuple(
