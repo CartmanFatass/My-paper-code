@@ -39,10 +39,10 @@ AUTHORIZATION_TOKEN = (
 )
 ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_"
-    "CODE_SCIENCE_ALIGNMENT_CORRECTION_RECHECK"
+    "CODE_SCIENCE_ALIGNMENT_AUDIT_SOURCE_6B"
 )
-ALIGNED_IMPLEMENTATION_COMMIT = "e21a1464e186260878649ad170bc3f32b8b9496d"
-ALIGNMENT_STAGE_COMMIT = "9dc84d3372a8e41ead9a5a349689586dc8e772b5"
+ALIGNED_IMPLEMENTATION_COMMIT = "6b8ea82d8fdbc76c14a414ff2b042a126f945dfb"
+ALIGNMENT_STAGE_COMMIT = "309858dca06af66f13857f94773bcef37527d821"
 ACCEPTED_ANCHOR_ROOT_RELATIVE = Path(
     "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
     "20260727_97a8b23_r1"
@@ -961,6 +961,7 @@ def _validate_formal_preflight(
         raise ValueError("formal G42 execution requires a bounded preflight root")
     if (
         alignment_disposition != "ALIGNED"
+        or source_commit != ALIGNED_IMPLEMENTATION_COMMIT
         or aligned_source_commit != ALIGNED_IMPLEMENTATION_COMMIT
         or alignment_stage_commit != ALIGNMENT_STAGE_COMMIT
     ):
@@ -1413,6 +1414,7 @@ def _training_errors(
         or training.get("source_controls") != source_controls()
         or training.get("aligned_source_commit") != ALIGNED_IMPLEMENTATION_COMMIT
         or re.fullmatch(r"[0-9a-f]{40}", str(training.get("source_commit"))) is None
+        or (formal and training.get("source_commit") != ALIGNED_IMPLEMENTATION_COMMIT)
     ):
         return ["G42 training identity mismatch"]
     backend = training.get("native_backend")

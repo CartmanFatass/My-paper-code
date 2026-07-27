@@ -25,6 +25,14 @@ ANCHOR_FIXTURE = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40/"
     "replicate_0_common_native6_fast_anchor.pt"
 )
+SOURCE_6B_COMMIT = "6b8ea82d8fdbc76c14a414ff2b042a126f945dfb"
+SOURCE_6B_ALIGNMENT_STAGE = "309858dca06af66f13857f94773bcef37527d821"
+SOURCE_6B_ALIGNMENT_AUDIT_ID = (
+    "CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_"
+    "CODE_SCIENCE_ALIGNMENT_AUDIT_SOURCE_6B"
+)
+PRIOR_ALIGNED_COMMIT = "e21a1464e186260878649ad170bc3f32b8b9496d"
+PRIOR_ALIGNMENT_STAGE = "9dc84d3372a8e41ead9a5a349689586dc8e772b5"
 
 
 def _assert_nested_equal(left: Any, right: Any) -> None:
@@ -241,7 +249,7 @@ def test_authority_and_anchor_binding_fail_before_compute(tmp_path: Path) -> Non
     with pytest.raises(ValueError, match="bounded preflight root"):
         runner.train(
             run_root=tmp_path / "formal",
-            source_commit="a" * 40,
+            source_commit=SOURCE_6B_COMMIT,
             formal=True,
             authorization_token=runner.AUTHORIZATION_TOKEN,
             accepted_anchor_root=accepted_root,
@@ -259,6 +267,48 @@ def test_authority_and_anchor_binding_fail_before_compute(tmp_path: Path) -> Non
             authorization_token=runner.AUTHORIZATION_TOKEN,
             accepted_anchor_root=accepted_root,
         )
+
+
+def test_source_6b_formal_authority_rejects_prior_alignment_pair(
+    tmp_path: Path,
+) -> None:
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == SOURCE_6B_COMMIT
+    assert runner.ALIGNMENT_STAGE_COMMIT == SOURCE_6B_ALIGNMENT_STAGE
+    assert runner.ALIGNMENT_AUDIT_ID == SOURCE_6B_ALIGNMENT_AUDIT_ID
+    accepted_root = runner.PROJECT_ROOT / runner.ACCEPTED_ANCHOR_ROOT_RELATIVE
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
+        runner._validate_formal_preflight(
+            tmp_path / "missing-prior-pair-preflight",
+            source_commit=SOURCE_6B_COMMIT,
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=PRIOR_ALIGNED_COMMIT,
+            alignment_stage_commit=PRIOR_ALIGNMENT_STAGE,
+            accepted_anchor_root=accepted_root.resolve(),
+        )
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
+        runner._validate_formal_preflight(
+            tmp_path / "missing-prior-source-preflight",
+            source_commit=PRIOR_ALIGNED_COMMIT,
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=SOURCE_6B_COMMIT,
+            alignment_stage_commit=SOURCE_6B_ALIGNMENT_STAGE,
+            accepted_anchor_root=accepted_root.resolve(),
+        )
+    prior_source_manifest = {
+        "schema_version": runner.SCHEMA_VERSION,
+        "algorithm": runner.ALGORITHM_ID,
+        "source_id": g42.SOURCE_ID,
+        "stage": "train",
+        "status": "COMPLETE",
+        "formal": True,
+        "configuration": runner._configuration(formal=True),
+        "source_controls": runner.source_controls(),
+        "source_commit": PRIOR_ALIGNED_COMMIT,
+        "aligned_source_commit": SOURCE_6B_COMMIT,
+    }
+    assert runner._training_errors(tmp_path, prior_source_manifest) == [
+        "G42 training identity mismatch"
+    ]
 
 
 def test_retained_projection_evaluation_has_exact_forward_interface(
