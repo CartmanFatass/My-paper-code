@@ -2,7 +2,7 @@
 
 ```text
 round=20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_review
-stage_commit=f6cdfab19335377e8609c56ac535f65db02ab7cb
+stage_commit=8d6555ed0af8549c6517f06a81a750344a4af816
 source_commit=6b8ea82d8fdbc76c14a414ff2b042a126f945dfb
 registered_conversation_id=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
 ```
