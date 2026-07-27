@@ -16,6 +16,8 @@ code_acceptance_authority=none
 scientific_authority=none
 workflow_design_authority=none
 browser_authority=registered_external_pro_conversation_only
+browser_stuck_page_recovery=same_tab_reload_once_per_observed_episode
+browser_reload_fence_effect=none
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -61,6 +63,10 @@ technical acceptance, and Workflow Design Manager owns workflow design.
 - Automatic `retry`, `resume` or `restart` while the complete authorized
   scientific boundary remains unchanged. Operational recovery consumes zero
   scientific iterations and creates no scientific disposition.
+- A same-tab reload once for each observed stuck-page episode in the registered
+  External Pro conversation. After reload, re-establish the registered
+  conversation identity and visible message state before continuing. Reloading
+  never proves a freshness fence absent and never authorizes submission.
 - Direct Git integration for review packages, runtime evidence, reports,
   `CURRENT_WORK.md` and exact mechanical recording of an External-Pro disposition
   or portfolio delta.

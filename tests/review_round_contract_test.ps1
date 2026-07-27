@@ -21,6 +21,10 @@ if ($registry.schema_version -ne 38 -or
 
 $skillPath = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
 $skill = Get-Content -Raw -LiteralPath $skillPath
+$operations = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
+$skillNormalized = $skill -replace '\s+', ' '
+$operationsNormalized = $operations -replace '\s+', ' '
 $skillAgent = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-review-round/agents/openai.yaml')
 foreach ($required in @(
@@ -38,6 +42,10 @@ foreach ($required in @(
     '$browser:control-in-app-browser',
     'VERIFY_FRESHNESS_FENCE',
     'An accepted matching fence is never resubmitted',
+    'same tab once for that stuck episode',
+    'Reloading never proves the matching fence absent and never authorizes submission',
+    'a new observed stuck episode',
+    'instead of a reload loop',
     'two stable snapshots',
     'at least three seconds',
     'Never activate `Answer now`',
@@ -48,7 +56,24 @@ foreach ($required in @(
     'not from the current working tree',
     'resume operations loop',
     'monitor terminal -> exact raw -> provenance intake -> monitor absence')) {
-    if (-not $skill.Contains($required)) { throw "Review Skill missing: $required" }
+    if (-not $skillNormalized.Contains($required)) { throw "Review Skill missing: $required" }
+}
+foreach ($forbidden in @(
+    'reload until',
+    'refresh until',
+    'reload proves the matching fence absent',
+    'reload authorizes submission')) {
+    if ($skillNormalized.Contains($forbidden)) {
+        throw "Review Skill permits unsafe stuck-page recovery: $forbidden"
+    }
+}
+foreach ($required in @(
+    'browser_stuck_page_recovery=same_tab_reload_once_per_observed_episode',
+    'browser_reload_fence_effect=none',
+    'Reloading never proves a freshness fence absent and never authorizes submission')) {
+    if (-not $operationsNormalized.Contains($required)) {
+        throw "Research Operations Manager role missing stuck-page recovery boundary: $required"
+    }
 }
 if ($skill -match '(?i)\bcontroller\b|hmasd-dispatch-task|hmasd-experiment-monitor|fixed Project Manager session|completion notification') {
     throw 'Review Skill retains a retired relay or monitor surface'

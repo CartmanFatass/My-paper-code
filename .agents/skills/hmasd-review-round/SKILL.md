@@ -63,7 +63,7 @@ visible or the page title looks familiar.
 
 | State | Required observation | Mechanical action | Exit condition |
 |---|---|---|---|
-| `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
+| `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page is observably stuck, wait once, take a fresh snapshot, then reload the same tab once for that stuck episode. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, spawns exactly one `hmasd-pro-response-monitor` with its path and exact identities, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
@@ -137,10 +137,15 @@ discovery ladder before reporting transport unavailable:
 2. Open the registered URL once. If it redirects to the signed-in home page,
    inspect visible conversation links and the sidebar/history for that same
    `conversation_id`.
-   If the matching URL has a composer but no visible message-role containers
-   after one bounded wait, reload the same tab once and take a fresh snapshot.
-   An empty content pane is a recoverable render state, not proof that the
-   conversation or assignment is absent.
+   Treat a blank content pane, missing message-role containers, controls that do
+   not respond, or unchanged incomplete rendering after one bounded wait and a
+   fresh snapshot as one observed stuck-page episode. Reload the same tab once
+   for that episode, take a new snapshot, and re-establish both the registered
+   `conversation_id` in the URL and readable message-role state. Reloading never
+   proves the matching fence absent and never authorizes submission. Another
+   reload requires recovery or materially changed page state followed by a new
+   observed stuck episode; an unchanged stuck state proceeds to a materially
+   distinct recovery instead of a reload loop.
 3. Use the signed-in conversation search with unique current-round evidence:
    the exact `round`, `stage_commit`, and question basename. A candidate is
    accepted only when the candidate URL contains the registered
