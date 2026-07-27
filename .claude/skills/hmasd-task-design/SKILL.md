@@ -63,7 +63,15 @@ Children carry no workflow knowledge by design — `AGENT_CONTEXT.md` gives them
 environment and behaviour only. **Everything task-specific must be in the brief.**
 A worker that has to reconstruct the process from documents is a worker guessing.
 
-Two traps already hit:
+Three traps already hit:
+
+- **Never put an instruction inside a block the child will copy verbatim.** A
+  transcription brief on 2026-07-27 ended a dictated Decision cell with *"carry
+  that qualifier through into the cell rather than dropping it"* — and the child,
+  correctly treating the block as content, copied the instruction into
+  `ExpRecord.md` along with the facts. A transcriber cannot tell your directions
+  from your dictation; that boundary is the author's job. Put the content in one
+  block and the instructions about it outside that block.
 
 - "Submit the question verbatim" reads as *paste the file body*. The review
   transport contract is the opposite — the question carries exact paths, not file
