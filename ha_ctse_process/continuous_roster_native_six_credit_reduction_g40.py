@@ -88,70 +88,12 @@ def bootstrap_seed(*, formal: bool) -> int:
     return BOOTSTRAP_SEED + (0 if formal else NONFORMAL_SEED_OFFSET)
 
 
-class IndependentCreditBaselines(nn.Module):
-    """Two separately-owned heads with no cross-head parameters."""
-
-    def __init__(self, critic_state_dim: int, hidden_dim: int) -> None:
-        super().__init__()
-        self.immediate = nn.Sequential(
-            nn.Linear(int(critic_state_dim), int(hidden_dim)),
-            nn.Tanh(),
-            nn.Linear(int(hidden_dim), 1),
-        )
-        self.successor = nn.Sequential(
-            nn.Linear(int(critic_state_dim), int(hidden_dim)),
-            nn.Tanh(),
-            nn.Linear(int(hidden_dim), 1),
-        )
-
-    def forward(self, critic_states: torch.Tensor) -> torch.Tensor:
-        return torch.cat(
-            (self.immediate(critic_states), self.successor(critic_states)),
-            dim=-1,
-        )
-
-    def load_g39_shared(self, shared: nn.Sequential) -> None:
-        first, final = shared[0], shared[2]
-        if not isinstance(first, nn.Linear) or not isinstance(final, nn.Linear):
-            raise TypeError("G40 expected the accepted G39 baseline affines")
-        with torch.no_grad():
-            for head, row in ((self.immediate, 0), (self.successor, 1)):
-                head_first, head_final = head[0], head[2]
-                assert isinstance(head_first, nn.Linear)
-                assert isinstance(head_final, nn.Linear)
-                head_first.weight.copy_(first.weight)
-                head_first.bias.copy_(first.bias)
-                head_final.weight.copy_(final.weight[row : row + 1])
-                head_final.bias.copy_(final.bias[row : row + 1])
-
-
 class G40NativeSixPolicy(g39.G39NativeSixPolicy):
-    """Accepted native-six actor with two isolated auxiliary baseline heads."""
+    """Accepted G39 native-six model with its shared two-output baseline."""
 
     def __init__(self, *, member_capacity: int) -> None:
         super().__init__(member_capacity=int(member_capacity))
-        shared = self.credit_baselines
-        rng_state = torch.random.get_rng_state()
-        try:
-            isolated = IndependentCreditBaselines(
-                self.critic_state_dim, self.hidden_dim
-            )
-        finally:
-            torch.random.set_rng_state(rng_state)
-        isolated.load_g39_shared(shared)
-        self.credit_baselines = isolated
-
-    @property
-    def immediate_baseline(self) -> nn.Sequential:
-        baselines = self.credit_baselines
-        assert isinstance(baselines, IndependentCreditBaselines)
-        return baselines.immediate
-
-    @property
-    def successor_baseline(self) -> nn.Sequential:
-        baselines = self.credit_baselines
-        assert isinstance(baselines, IndependentCreditBaselines)
-        return baselines.successor
+        self._accepted_g39_initial_baseline_state_equal = False
 
     def actor_credit_parameters(self) -> tuple[nn.Parameter, ...]:
         return self.full_actor_parameters() + tuple(
@@ -189,17 +131,20 @@ def _new_shell(member_capacity: int) -> G40NativeSixPolicy:
 def make_model(
     member_capacity: int, *, initialization_seed: int
 ) -> G40NativeSixPolicy:
-    """Create the accepted G39 native-six initialization with isolated heads."""
+    """Create an exact accepted G39 native-six initialization."""
 
     base = g39.make_paired_models(
         int(member_capacity), initialization_seed=int(initialization_seed)
     )[g39.NATIVE6_ARM]
     model = _new_shell(int(member_capacity))
-    model.policy.load_state_dict(base.policy.state_dict(), strict=True)
-    model.slow_critic.load_state_dict(base.slow_critic.state_dict(), strict=True)
-    baselines = model.credit_baselines
-    assert isinstance(baselines, IndependentCreditBaselines)
-    baselines.load_g39_shared(base.credit_baselines)
+    model.load_state_dict(base.state_dict(), strict=True)
+    if state_bytes(model) != state_bytes(base):
+        raise RuntimeError("G40 initialization is not byte-identical to G39 native")
+    if baseline_inventory(model) != baseline_inventory(base):
+        raise RuntimeError("G40 baseline inventory differs from accepted G39")
+    if state_bytes(model.credit_baselines) != state_bytes(base.credit_baselines):
+        raise RuntimeError("G40 baseline state differs from accepted G39")
+    model._accepted_g39_initial_baseline_state_equal = True
     model.phase = "fast"
     return model
 
@@ -273,6 +218,32 @@ def slow_critic_parameter_names(model: G40NativeSixPolicy) -> tuple[str, ...]:
     )
 
 
+def baseline_inventory(model: g39.G39NativeSixPolicy) -> dict[str, object]:
+    module = model.credit_baselines
+    state = module.state_dict()
+    first = module[0] if isinstance(module, nn.Sequential) and len(module) == 3 else None
+    final = module[2] if isinstance(module, nn.Sequential) and len(module) == 3 else None
+    return {
+        "semantic_keys": list(state),
+        "state_shapes": {name: list(value.shape) for name, value in state.items()},
+        "parameter_count": sum(row.numel() for row in module.parameters()),
+        "initial_tensor_bytes": sum(
+            row.numel() * row.element_size() for row in state.values()
+        ),
+        "shared_two_output_module": bool(
+            isinstance(module, nn.Sequential)
+            and len(module) == 3
+            and isinstance(first, nn.Linear)
+            and first.in_features == model.critic_state_dim
+            and first.out_features == model.hidden_dim
+            and isinstance(module[1], nn.Tanh)
+            and isinstance(final, nn.Linear)
+            and final.in_features == model.hidden_dim
+            and final.out_features == 2
+        ),
+    }
+
+
 def model_inventory(model: G40NativeSixPolicy) -> dict[str, object]:
     named = tuple(model.named_parameters())
     return {
@@ -290,10 +261,7 @@ def model_inventory(model: G40NativeSixPolicy) -> dict[str, object]:
         ),
         "actor_credit_optimizer_order": list(actor_credit_parameter_names(model)),
         "slow_critic_optimizer_order": list(slow_critic_parameter_names(model)),
-        "immediate_successor_storage_disjoint": shared_tensor_storage_count(
-            (model.immediate_baseline, model.successor_baseline)
-        )
-        == 0,
+        "credit_baseline": baseline_inventory(model),
     }
 
 
@@ -326,6 +294,40 @@ def branch_boundary_audit(
     )
     storage_count = shared_tensor_storage_count((anchor, *rows))
     inventory_equal = inventories[G31_ARM] == inventories[GAE1_ARM]
+    anchor_baseline_inventory = baseline_inventory(anchor)
+    baseline_inventories = {arm: baseline_inventory(models[arm]) for arm in ARMS}
+    baseline_keys_equal = all(
+        row["semantic_keys"] == anchor_baseline_inventory["semantic_keys"]
+        for row in baseline_inventories.values()
+    )
+    baseline_shapes_equal = all(
+        row["state_shapes"] == anchor_baseline_inventory["state_shapes"]
+        for row in baseline_inventories.values()
+    )
+    baseline_parameter_count_equal = all(
+        row["parameter_count"] == anchor_baseline_inventory["parameter_count"]
+        for row in baseline_inventories.values()
+    )
+    baseline_initial_tensor_bytes_equal = all(
+        row["initial_tensor_bytes"]
+        == anchor_baseline_inventory["initial_tensor_bytes"]
+        for row in baseline_inventories.values()
+    )
+    baseline_state_equal = all(
+        state_bytes(row.credit_baselines) == state_bytes(anchor.credit_baselines)
+        for row in rows
+    )
+    accepted_g39_initial_equal = bool(
+        anchor._accepted_g39_initial_baseline_state_equal
+        and all(row._accepted_g39_initial_baseline_state_equal for row in rows)
+    )
+    shared_two_output_baseline = bool(
+        anchor_baseline_inventory["shared_two_output_module"] is True
+        and all(
+            row["shared_two_output_module"] is True
+            for row in baseline_inventories.values()
+        )
+    )
     passed = bool(
         model_equal
         and buffers_equal
@@ -333,7 +335,13 @@ def branch_boundary_audit(
         and optimizers_valid
         and storage_count == 0
         and inventory_equal
-        and inventories[G31_ARM]["immediate_successor_storage_disjoint"] is True
+        and baseline_keys_equal
+        and baseline_shapes_equal
+        and baseline_parameter_count_equal
+        and baseline_initial_tensor_bytes_equal
+        and baseline_state_equal
+        and accepted_g39_initial_equal
+        and shared_two_output_baseline
     )
     return {
         "model_state_bytes_equal": model_equal,
@@ -342,6 +350,17 @@ def branch_boundary_audit(
         "optimizer_states_empty_and_separate": optimizers_valid,
         "shared_tensor_storage_count": storage_count,
         "arm_inventory_equal": inventory_equal,
+        "baseline_semantic_keys_equal": baseline_keys_equal,
+        "baseline_state_shapes_equal": baseline_shapes_equal,
+        "baseline_parameter_count_equal": baseline_parameter_count_equal,
+        "baseline_initial_tensor_bytes_equal": baseline_initial_tensor_bytes_equal,
+        "baseline_state_bytes_equal": baseline_state_equal,
+        "accepted_g39_initial_baseline_state_equal": accepted_g39_initial_equal,
+        "shared_two_output_credit_baseline": shared_two_output_baseline,
+        "baseline_inventory": {
+            "anchor": anchor_baseline_inventory,
+            **baseline_inventories,
+        },
         "inventory": inventories,
         "passed": passed,
     }
@@ -649,8 +668,8 @@ def pre_common_gradient_audit(
             for name, parameters in _actor_groups(model).items()
         },
         "centralized_slow_critic": (tuple(model.slow_critic.parameters()), slow_loss),
-        "immediate_baseline": (tuple(model.immediate_baseline.parameters()), immediate_loss),
-        "successor_baseline": (tuple(model.successor_baseline.parameters()), successor_loss),
+        "immediate_baseline": (tuple(model.credit_baselines.parameters()), immediate_loss),
+        "successor_baseline": (tuple(model.credit_baselines.parameters()), successor_loss),
     }
     rows: dict[str, object] = {}
     for name in REGISTERED_TRAINABLE_GROUPS:
@@ -822,14 +841,14 @@ def shadow_independence_audit(
     actor_equal = all(
         torch.equal(left, right) for left, right in zip(without_rows, with_rows)
     )
-    immediate_norm = _gradient_norm(immediate, tuple(model.immediate_baseline.parameters()))
-    successor_norm = _gradient_norm(successor, tuple(model.successor_baseline.parameters()))
+    baseline_parameters = tuple(model.credit_baselines.parameters())
+    immediate_norm = _gradient_norm(immediate, baseline_parameters)
+    successor_norm = _gradient_norm(successor, baseline_parameters)
     disjoint = shared_tensor_storage_count(
         (
             model.policy,
             model.slow_critic,
-            model.immediate_baseline,
-            model.successor_baseline,
+            model.credit_baselines,
         )
     ) == 0
     passed = bool(
@@ -843,6 +862,7 @@ def shadow_independence_audit(
         "slow_critic_objective_excludes_shadow": True,
         "immediate_shadow_gradient_norm": immediate_norm,
         "successor_shadow_gradient_norm": successor_norm,
+        "shared_credit_baseline_module": True,
         "actor_critic_shadow_storage_disjoint": disjoint,
         "diagnostic_optimizer_steps": 0,
         "passed": passed,
@@ -900,8 +920,8 @@ def branch_gradient_audit(
         )
         for name, parameters, objective in (
             ("centralized_slow_critic", tuple(model.slow_critic.parameters()), slow_loss),
-            ("immediate_baseline", tuple(model.immediate_baseline.parameters()), immediate_loss),
-            ("successor_baseline", tuple(model.successor_baseline.parameters()), successor_loss),
+            ("immediate_baseline", tuple(model.credit_baselines.parameters()), immediate_loss),
+            ("successor_baseline", tuple(model.credit_baselines.parameters()), successor_loss),
         ):
             norm = _gradient_norm(objective, parameters)
             rows[name] = {

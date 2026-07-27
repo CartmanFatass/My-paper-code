@@ -38,13 +38,10 @@ def test_seed_law_is_exact_and_anchor_clone_inventory_is_byte_matched() -> None:
     accepted_g39 = g40.g39.make_paired_models(
         8, initialization_seed=10_401_000
     )[g40.g39.NATIVE6_ARM]
-    assert all(
-        torch.equal(value, anchor.policy.state_dict()[name])
-        for name, value in accepted_g39.policy.state_dict().items()
-    )
-    assert all(
-        torch.equal(value, anchor.slow_critic.state_dict()[name])
-        for name, value in accepted_g39.slow_critic.state_dict().items()
+    assert g40.state_bytes(anchor) == g40.state_bytes(accepted_g39)
+    assert g40.baseline_inventory(anchor) == g40.baseline_inventory(accepted_g39)
+    assert g40.state_bytes(anchor.credit_baselines) == g40.state_bytes(
+        accepted_g39.credit_baselines
     )
     arms = g40.clone_anchor_models(anchor)
     for model in arms.values():
@@ -69,9 +66,43 @@ def test_seed_law_is_exact_and_anchor_clone_inventory_is_byte_matched() -> None:
     assert audit["buffer_bytes_equal"] is True
     assert audit["log_std_equal"] is True
     assert audit["shared_tensor_storage_count"] == 0
+    assert audit["baseline_semantic_keys_equal"] is True
+    assert audit["baseline_state_shapes_equal"] is True
+    assert audit["baseline_parameter_count_equal"] is True
+    assert audit["baseline_initial_tensor_bytes_equal"] is True
+    assert audit["baseline_state_bytes_equal"] is True
+    assert audit["accepted_g39_initial_baseline_state_equal"] is True
+    assert audit["shared_two_output_credit_baseline"] is True
     inventory = audit["inventory"]
     assert inventory[g40.G31_ARM] == inventory[g40.GAE1_ARM]
-    assert inventory[g40.G31_ARM]["immediate_successor_storage_disjoint"] is True
+    assert inventory[g40.G31_ARM]["credit_baseline"][
+        "shared_two_output_module"
+    ] is True
+
+    forged = g40.clone_anchor_models(anchor)
+    for model in forged.values():
+        model.begin_credit_branch_phase()
+    with torch.no_grad():
+        forged[g40.G31_ARM].credit_baselines[2].bias[0].add_(1.0)
+    forged_optimizers = {
+        **{
+            f"{arm}:actor": torch.optim.Adam(
+                model.actor_credit_parameters(), lr=1e-3
+            )
+            for arm, model in forged.items()
+        },
+        **{
+            f"{arm}:critic": torch.optim.Adam(
+                model.slow_critic_parameters(), lr=1e-3
+            )
+            for arm, model in forged.items()
+        },
+    }
+    forged_audit = g40.branch_boundary_audit(
+        anchor, forged, forged_optimizers
+    )
+    assert forged_audit["passed"] is False
+    assert forged_audit["baseline_state_bytes_equal"] is False
 
 
 def test_exact_returns_successor_targets_and_lambda_one_identity() -> None:
@@ -170,10 +201,13 @@ def test_shadow_losses_change_only_shadow_heads_and_not_ordinary_actor_or_critic
     enabled = copy.deepcopy(model)
     omitted = copy.deepcopy(model)
     enabled_actor_before = _state(enabled.full_actor_parameters())
-    enabled_immediate_before = _state(tuple(enabled.immediate_baseline.parameters()))
-    enabled_successor_before = _state(tuple(enabled.successor_baseline.parameters()))
-    omitted_immediate_before = _state(tuple(omitted.immediate_baseline.parameters()))
-    omitted_successor_before = _state(tuple(omitted.successor_baseline.parameters()))
+    enabled_baseline_before = _state(tuple(enabled.credit_baselines.parameters()))
+    omitted_baseline_before = _state(tuple(omitted.credit_baselines.parameters()))
+    enabled_final_before = enabled.credit_baselines[2].weight.detach().clone()
+    direct = model.credit_baselines(trajectory.critic_states)
+    immediate, successor = model.baseline_values(trajectory.critic_states)
+    assert torch.equal(immediate, direct[..., 0])
+    assert torch.equal(successor, direct[..., 1])
 
     def update(row: g40.G40NativeSixPolicy, include: bool) -> dict[str, float]:
         return g40.optimize_credit_branch_update(
@@ -207,25 +241,16 @@ def test_shadow_losses_change_only_shadow_heads_and_not_ordinary_actor_or_critic
     assert any(
         not torch.equal(before, after)
         for before, after in zip(
-            enabled_immediate_before, enabled.immediate_baseline.parameters()
+            enabled_baseline_before, enabled.credit_baselines.parameters()
         )
     )
-    assert any(
-        not torch.equal(before, after)
-        for before, after in zip(
-            enabled_successor_before, enabled.successor_baseline.parameters()
-        )
-    )
+    enabled_final = enabled.credit_baselines[2].weight.detach()
+    assert not torch.equal(enabled_final_before[0], enabled_final[0])
+    assert not torch.equal(enabled_final_before[1], enabled_final[1])
     assert all(
         torch.equal(before, after)
         for before, after in zip(
-            omitted_immediate_before, omitted.immediate_baseline.parameters()
-        )
-    )
-    assert all(
-        torch.equal(before, after)
-        for before, after in zip(
-            omitted_successor_before, omitted.successor_baseline.parameters()
+            omitted_baseline_before, omitted.credit_baselines.parameters()
         )
     )
     assert any(
