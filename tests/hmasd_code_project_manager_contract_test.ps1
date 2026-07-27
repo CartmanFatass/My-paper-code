@@ -200,7 +200,10 @@ finally {
 }
 
 $registeredPython = 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe'
-$tempRoot = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-readiness-contract-" + [guid]::NewGuid().ToString('N'))
+$unicodePathSegment = ([char]0x6587).ToString() + ([char]0x6863).ToString()
+$tempRoot = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-readiness-contract-" + $unicodePathSegment + '-' + [guid]::NewGuid().ToString('N'))
+$savedOutputEncoding = $OutputEncoding
+$OutputEncoding = [Text.UTF8Encoding]::new($false)
 try {
     New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
     & git.exe -C $tempRoot init --quiet
@@ -357,6 +360,7 @@ finally {
     if ((Test-Path -LiteralPath $tempRoot) -and $tempRoot.StartsWith([IO.Path]::GetTempPath(), [StringComparison]::OrdinalIgnoreCase)) {
         Remove-Item -LiteralPath $tempRoot -Recurse -Force
     }
+    $OutputEncoding = $savedOutputEncoding
 }
 
 $parentContracts = @{

@@ -31,12 +31,21 @@ class ReadinessError(RuntimeError):
     pass
 
 
+def _configure_utf8_stdio() -> None:
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(encoding="utf-8", errors="strict")
+
+
 def _git(repo: Path, *args: str) -> str:
     completed = subprocess.run(
         ["git", "-C", str(repo), *args],
         check=False,
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="strict",
     )
     if completed.returncode != 0:
         raise ReadinessError(completed.stderr.strip() or "git command failed")
@@ -231,7 +240,7 @@ def run_spec(spec_path: Path) -> int:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print("HMASD_EXECUTION_READINESS_OK")
-    print(json.dumps({"receipt": str(path), "source_commit": spec["source_commit"]}, ensure_ascii=False))
+    print(json.dumps({"receipt": str(path), "source_commit": spec["source_commit"]}, ensure_ascii=True))
     return 0
 
 
@@ -333,6 +342,7 @@ def hook_stop() -> int:
 
 
 def main() -> int:
+    _configure_utf8_stdio()
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
     run_parser = subparsers.add_parser("run")
