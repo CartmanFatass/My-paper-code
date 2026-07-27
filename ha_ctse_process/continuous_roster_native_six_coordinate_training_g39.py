@@ -35,6 +35,19 @@ INITIAL_LOG_PROB_TOLERANCE = 1e-6
 GRADIENT_TOLERANCE = 1e-6
 GRADIENT_LIVE_TOLERANCE = 1e-12
 NONFORMAL_SEED_OFFSET = 900_000
+REGISTERED_TRAINABLE_GROUPS = (
+    "member_encoder",
+    "context_encoder",
+    "gated_cell_input_weights",
+    "gated_cell_recurrent_weights",
+    "gated_cell_biases",
+    "action_head",
+    "current_readout",
+    "log_std",
+    "centralized_slow_critic",
+    "immediate_baseline",
+    "successor_baseline",
+)
 
 SEED_BASES = {
     "model": 10_391_000,
@@ -483,6 +496,60 @@ def _combined_gradient_liveness(
     }
 
 
+def _registered_group_audits_valid(value: object) -> bool:
+    if not isinstance(value, Mapping) or set(value) != set(ARMS):
+        return False
+    for arm in ARMS:
+        audit = value.get(arm)
+        if not isinstance(audit, Mapping) or set(audit) != {
+            *REGISTERED_TRAINABLE_GROUPS,
+            "passed",
+        }:
+            return False
+        if audit.get("passed") is not True:
+            return False
+        for name in REGISTERED_TRAINABLE_GROUPS:
+            row = audit.get(name)
+            if not isinstance(row, Mapping):
+                return False
+            fast = row.get("fast_objective_gradient_norm")
+            rtg = row.get("return_to_go_objective_gradient_norm")
+            if (
+                not isinstance(fast, (int, float))
+                or isinstance(fast, bool)
+                or not isinstance(rtg, (int, float))
+                or isinstance(rtg, bool)
+                or not np.isfinite(fast)
+                or not np.isfinite(rtg)
+                or max(float(fast), float(rtg)) <= GRADIENT_LIVE_TOLERANCE
+                or row.get("finite") is not True
+                or row.get("live") is not True
+            ):
+                return False
+    return True
+
+
+def validate_initial_gradient_audit_record(value: object) -> bool:
+    """Validate the complete serialized first-batch gradient evidence."""
+
+    if not isinstance(value, Mapping) or value.get("passed") is not True:
+        return False
+    scalar = value.get("scalar_liveness")
+    if (
+        not isinstance(scalar, Mapping)
+        or scalar.get("passed") is not True
+        or scalar.get("removable_scalar_total") != REMOVED_ACTOR_WEIGHTS
+        or scalar.get("removable_scalar_live_count") != REMOVED_ACTOR_WEIGHTS
+        or scalar.get("dead_removable_scalars") != []
+        or scalar.get("all_136_removable_scalars_live") is not True
+        or scalar.get("all_native_effective_biases_live") is not True
+    ):
+        return False
+    return _registered_group_audits_valid(
+        value.get("registered_trainable_groups")
+    )
+
+
 def initial_gradient_audit(
     const: g38.G38FoldableMatchedCSPolicy,
     native: G39NativeSixPolicy,
@@ -556,6 +623,22 @@ def initial_gradient_audit(
     )
     rows["scalar_liveness"] = liveness
     passed &= bool(liveness["passed"])
+    registered = {
+        CONST10_ARM: g35.g35_initial_gradient_audit(
+            const,
+            const_trajectory,
+            gamma=gamma,
+            device=torch.device("cpu"),
+        ),
+        NATIVE6_ARM: g35.g35_initial_gradient_audit(
+            native,
+            native_trajectory,
+            gamma=gamma,
+            device=torch.device("cpu"),
+        ),
+    }
+    rows["registered_trainable_groups"] = registered
+    passed &= _registered_group_audits_valid(registered)
     rows["passed"] = bool(passed)
     return rows
 

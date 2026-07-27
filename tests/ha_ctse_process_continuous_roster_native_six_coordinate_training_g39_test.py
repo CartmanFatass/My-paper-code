@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from collections import Counter
 
 import torch
@@ -102,7 +103,11 @@ def test_fast_and_return_to_go_analytic_gradient_identities_and_live_columns() -
     )
     assert audit["passed"] is True, audit
     for name, row in audit.items():
-        if name in ("passed", "scalar_liveness"):
+        if name in (
+            "passed",
+            "scalar_liveness",
+            "registered_trainable_groups",
+        ):
             continue
         assert row["finite"] is True
         assert max(row["errors"].values()) <= 1e-6
@@ -115,6 +120,30 @@ def test_fast_and_return_to_go_analytic_gradient_identities_and_live_columns() -
     assert liveness["dead_native_effective_biases"] == []
     assert liveness["all_native_effective_biases_live"] is True
     assert all(liveness["native_gradient_norm_live"].values())
+    registered = audit["registered_trainable_groups"]
+    assert set(registered) == set(g39.ARMS)
+    for arm in g39.ARMS:
+        assert set(registered[arm]) == {*g39.REGISTERED_TRAINABLE_GROUPS, "passed"}
+        assert registered[arm]["passed"] is True
+        for group in g39.REGISTERED_TRAINABLE_GROUPS:
+            row = registered[arm][group]
+            assert row["finite"] is True
+            assert row["live"] is True
+            assert max(
+                row["fast_objective_gradient_norm"],
+                row["return_to_go_objective_gradient_norm"],
+            ) > 1e-12
+    assert g39.validate_initial_gradient_audit_record(audit) is True
+
+    dead_common = copy.deepcopy(audit)
+    dead_group = dead_common["registered_trainable_groups"][g39.CONST10_ARM][
+        "centralized_slow_critic"
+    ]
+    dead_group["fast_objective_gradient_norm"] = 0.0
+    dead_group["return_to_go_objective_gradient_norm"] = 0.0
+    dead_group["live"] = False
+    assert dead_common["scalar_liveness"]["all_136_removable_scalars_live"] is True
+    assert g39.validate_initial_gradient_audit_record(dead_common) is False
 
 
 def test_all_136_liveness_rejects_one_dead_scalar_despite_live_column() -> None:

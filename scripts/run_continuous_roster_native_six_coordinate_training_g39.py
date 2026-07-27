@@ -410,7 +410,11 @@ def _train_replicate(
                 native_row,
                 gamma=GAMMA,
             )
-            if not (initial_forward["passed"] and initial_trajectory["passed"] and gradient_audit["passed"]):
+            if not (
+                initial_forward["passed"]
+                and initial_trajectory["passed"]
+                and source.validate_initial_gradient_audit_record(gradient_audit)
+            ):
                 raise RuntimeError("G39 initial function/trajectory/gradient gate failed")
         for arm in source.ARMS:
             metrics = optimize_fast_anchor_update(
@@ -803,7 +807,9 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
                 or row["zero_function_digest_equal"] is not True
                 or row["initial_forward_match"]["passed"] is not True
                 or row["initial_trajectory_match"]["passed"] is not True
-                or row["initial_gradient_audit"]["passed"] is not True
+                or not source.validate_initial_gradient_audit_record(
+                    row["initial_gradient_audit"]
+                )
                 or row["initial_fast_optimizer_states_empty_separate"] is not True
                 or row["fast_optimizer_states_discarded"] is not True
                 or row["direction_optimizer_states_fresh_empty_separate"] is not True
@@ -1220,7 +1226,9 @@ def analyze(*, run_root: Path, require_formal: bool = False) -> dict[str, Any]:
         initial_match = all(
             row["initial_forward_match"]["passed"] is True
             and row["initial_trajectory_match"]["passed"] is True
-            and row["initial_gradient_audit"]["passed"] is True
+            and source.validate_initial_gradient_audit_record(
+                row["initial_gradient_audit"]
+            )
             and row["zero_function_digest_equal"] is True
             for row in training["replicate_results"]
         )

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 
 import numpy as np
 import pytest
+import torch
 
 from scripts import run_continuous_roster_native_six_coordinate_training_g39 as runner
 
@@ -104,7 +106,9 @@ def test_proof_training_collects_both_before_update_and_uses_fresh_phase_states(
     assert row["zero_function_digest_equal"] is True
     assert row["initial_forward_match"]["passed"] is True
     assert row["initial_trajectory_match"]["passed"] is True
-    assert row["initial_gradient_audit"]["passed"] is True
+    assert runner.source.validate_initial_gradient_audit_record(
+        row["initial_gradient_audit"]
+    )
     assert row["initial_fast_optimizer_states_empty_separate"] is True
     assert row["fast_optimizer_states_discarded"] is True
     assert row["direction_optimizer_states_fresh_empty_separate"] is True
@@ -117,6 +121,74 @@ def test_proof_training_collects_both_before_update_and_uses_fresh_phase_states(
     assert len(checkpoints) == 3
     assert all("final" in name for name in checkpoints)
     assert row["folded_const_final"]["optimizer_steps_after_fold"] == 0
+
+
+def test_dead_common_baseline_group_fails_before_first_optimizer_step(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    configuration = runner._configuration(formal=False) | {
+        "fast_updates": 1,
+        "return_to_go_updates": 1,
+        "ppo_passes": 1,
+    }
+    original_make = runner.source.make_paired_models
+    original_audit = runner.source.initial_gradient_audit
+    captured: dict[str, object] = {}
+
+    def models_with_dead_common_baseline(
+        *args: object, **kwargs: object
+    ) -> dict[str, runner.source.G39Policy]:
+        models = original_make(*args, **kwargs)
+        baseline = models[runner.source.CONST10_ARM].credit_baselines
+        original_forward = baseline.forward
+
+        def zero_gradient_forward(input: torch.Tensor) -> torch.Tensor:
+            output = original_forward(input)
+            zero_connection = output.new_zeros(())
+            for parameter in baseline.parameters():
+                zero_connection = zero_connection + 0.0 * parameter.sum()
+            return output.detach() + zero_connection
+
+        baseline.forward = zero_gradient_forward
+        return models
+
+    def capture_actual_audit(*args: object, **kwargs: object) -> dict[str, object]:
+        audit = original_audit(*args, **kwargs)
+        captured.clear()
+        captured.update(audit)
+        return audit
+
+    optimizer_calls = 0
+
+    def forbidden_first_step(*args: object, **kwargs: object) -> object:
+        nonlocal optimizer_calls
+        optimizer_calls += 1
+        raise AssertionError("optimizer ran before the registered-group gate")
+
+    monkeypatch.setattr(
+        runner.source,
+        "make_paired_models",
+        models_with_dead_common_baseline,
+    )
+    monkeypatch.setattr(runner.source, "initial_gradient_audit", capture_actual_audit)
+    monkeypatch.setattr(runner, "optimize_fast_anchor_update", forbidden_first_step)
+    with pytest.raises(RuntimeError, match="initial function/trajectory/gradient gate"):
+        runner._train_replicate(
+            run_root=tmp_path / "dead-group",
+            source_commit="e" * 40,
+            formal=False,
+            replicate=0,
+            configuration=configuration,
+        )
+    assert captured["scalar_liveness"]["all_136_removable_scalars_live"] is True
+    dead_group = captured["registered_trainable_groups"][runner.source.CONST10_ARM][
+        "immediate_baseline"
+    ]
+    assert dead_group["finite"] is True
+    assert dead_group["live"] is False
+    assert dead_group["fast_objective_gradient_norm"] == 0.0
+    assert dead_group["return_to_go_objective_gradient_norm"] == 0.0
+    assert optimizer_calls == 0
 
 
 def test_g34_eval_pairing_and_whole_episode_hierarchical_bootstrap() -> None:
@@ -323,6 +395,17 @@ def test_bounded_end_to_end_train_evaluate_analyze(
     assert all(len(cell["episodes"]) == 2 for cell in evaluation["cells"])
     assert analysis["operational_valid"] is True, analysis["operational_errors"]
     assert analysis["branch"] in (runner.NONFORMAL_BRANCH, runner.NON_EXECUTABLE_BRANCH)
+    tampered_training = copy.deepcopy(training)
+    dead_group = tampered_training["replicate_results"][0][
+        "initial_gradient_audit"
+    ]["registered_trainable_groups"][runner.source.NATIVE6_ARM]["immediate_baseline"]
+    dead_group["fast_objective_gradient_norm"] = 0.0
+    dead_group["return_to_go_objective_gradient_norm"] = 0.0
+    dead_group["live"] = False
+    assert "G39 initialization/training gate mismatch" in runner._training_errors(
+        root,
+        tampered_training,
+    )
     tampered_evaluation = dict(evaluation)
     tampered_evaluation["aligned_source_commit"] = "f" * 40
     assert "G39 evaluation identity/source mismatch" in runner._evaluation_errors(
