@@ -121,6 +121,55 @@ def test_stable_certification_requires_all_four_predicates():
     assert ok and reasons == []
 
 
+def test_flex_certification_rejects_a_leave_after_t_e():
+    """`prior_check_step < leave_step <= t_e` is a CHAINED comparison and every
+    existing fixture satisfies the upper half by construction -- all of them use
+    `leave_step` in {479, 480, 485} against `t_e = 490`. Only the lower half was
+    ever violated. Measured 2026-07-27: dropping `<= t_e` left 182/182 green.
+
+    Severity, stated accurately rather than alarmingly: the sole production
+    caller (`:2152`) passes `leave_step=t+1, t_e=t+1`, so the bound is
+    unreachable today and this guard is defence in depth, not a live risk. It is
+    still worth being able to fail -- a causally impossible ordering (a UAV
+    leaving after the event it defines) must not certify.
+
+    Recorded alongside it: that same call site passes `prior_check_step=t`, so
+    the LOWER half is structurally true as well and `leave_not_after_preceding_
+    check` cannot fire in production at all. That follows from the event being
+    the leave, so `t_e == leave_step` by definition; the predicate guards other
+    callers and future changes rather than the current path."""
+    ok, reasons, focal = audit.certify_flex(
+        leave_step=491, prior_check_step=470, t_e=490,
+        queue_or_cutoff_caused=False,
+        survivors={1: {"transit_steps": 50, "support_ok": True}},
+        has_legal_set_alternative=True,
+    )
+    assert not ok, "a leave AFTER t_e must never certify a flex vacancy"
+    assert "leave_not_after_preceding_check" in reasons
+
+
+def test_stable_certification_fails_when_the_focal_is_not_active():
+    """`certify_stable` takes FIVE inputs and the name above says four, because
+    `active` is folded into the first conjunct and shares `has_valid_incumbent`'s
+    reason string. Nothing passed `active=False`, so the conjunct's first half
+    was unguarded: measured 2026-07-27, rewriting
+
+        if not (active and has_valid_incumbent):   ->   if not has_valid_incumbent:
+
+    left 181/181 green. An inactive UAV would then certify as stable, admitting
+    events the frozen section-2 predicate excludes and widening the estimand's
+    conditioning set -- which this project's own rules classify as never an
+    ordinary design gap."""
+    ok, reasons = audit.certify_stable(
+        active=False, has_valid_incumbent=True,
+        future_target_displacement_m=10.0,
+        scheduled_to_leave_within_delta=False,
+        has_legal_set_alternative=True,
+    )
+    assert not ok, "an inactive focal must never certify as stable"
+    assert "no_valid_incumbent" in reasons
+
+
 def test_stable_certification_fails_without_valid_incumbent():
     ok, reasons = audit.certify_stable(
         active=True, has_valid_incumbent=False,
