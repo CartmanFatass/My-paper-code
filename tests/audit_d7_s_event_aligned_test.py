@@ -1987,6 +1987,86 @@ def test_shared_prefix_replays_once_for_every_continuation_in_an_episode(monkeyp
     assert set(result["results"]) == {"stable", "flex"}
 
 
+def test_selection_diagnostic_reports_a_decided_event_as_concentrated():
+    """A candidate that clearly dominates should show up as such: the point
+    winner takes essentially all the bootstrap selection mass."""
+    events = [{
+        "candidates": {
+            "z_far": {"select": np.array([100.0, 101.0]), "eval_set": np.array([1.0])},
+            "z_near": {"select": np.array([0.0, 0.5]), "eval_set": np.array([1.0])},
+        },
+        "eval_keep": np.array([0.0]),
+    }]
+    diag = audit.selection_diagnostic(events, iters=500)[0]
+    assert diag["legal_set_size"] == 2
+    assert diag["point_selected"] == "z_far"
+    assert diag["selection_frequency"]["z_far"] == pytest.approx(1.0)
+    assert diag["concentration_hhi"] == pytest.approx(1.0)
+    assert diag["normalized_entropy"] == pytest.approx(0.0)
+
+
+def test_selection_diagnostic_exposes_an_unstable_maximizer():
+    """The case the contract actually cares about at the 2/2 floor: two
+    indistinguishable candidates must surface as a near coin flip -- high
+    entropy, minimal concentration -- rather than hide behind whichever one the
+    point argmax happened to pick. Instability widens or fails to resolve the
+    gate; it must never be invisible in the artifact."""
+    events = [{
+        "candidates": {
+            "z_a": {"select": np.array([1.0, -1.0]), "eval_set": np.array([1.0])},
+            "z_b": {"select": np.array([-1.0, 1.0]), "eval_set": np.array([1.0])},
+        },
+        "eval_keep": np.array([0.0]),
+    }]
+    diag = audit.selection_diagnostic(events, iters=4000)[0]
+    # NOT 0.5, and the gap is a real property of the 2/2 floor rather than
+    # noise. Resampling two values with replacement gives each candidate mean
+    # 1.0/0.0/-1.0 with probability 0.25/0.5/0.25, so the two candidates TIE on
+    # 0.375 of iterations, and argmax breaks every tie toward the
+    # first-enumerated candidate: 0.3125 strict wins + 0.375 ties = 0.6875.
+    assert diag["selection_frequency"]["z_a"] == pytest.approx(0.6875, abs=0.03)
+    # Still unmistakably unstable, which is what the artifact must convey.
+    assert diag["concentration_hhi"] < 0.65
+    assert diag["normalized_entropy"] > 0.8
+
+
+def test_tie_break_is_deterministic_toward_first_enumeration_order():
+    """Load-bearing and worth pinning, because the volume reduction magnifies
+    it. Ties between resampled candidate means break toward whichever candidate
+    is enumerated first -- in both the diagnostic and the primary bootstrap's
+    own `max(...)`. Exact ties are rare at n_select=4 and common at n_select=2,
+    so dropping to the floor raises how often an unspecified tie-break rule
+    decides the selected z. Recorded here so the behaviour is visible rather
+    than discovered later from a result."""
+    tied = {"z_first": np.array([1.0, 1.0]), "z_second": np.array([1.0, 1.0])}
+    assert audit.select_maximizer(tied) == "z_first"
+
+    reversed_order = {"z_second": np.array([1.0, 1.0]), "z_first": np.array([1.0, 1.0])}
+    assert audit.select_maximizer(reversed_order) == "z_second"
+
+    events = [{"candidates": {z: {"select": s, "eval_set": np.array([1.0])}
+                               for z, s in tied.items()},
+               "eval_keep": np.array([0.0])}]
+    diag = audit.selection_diagnostic(events, iters=200)[0]
+    assert diag["selection_frequency"]["z_first"] == pytest.approx(1.0)
+
+
+def test_selection_diagnostic_seed_is_not_the_inference_stream():
+    """The diagnostic re-runs only the selection half, so it cannot reproduce
+    the primary stream's draw order. The seed must therefore be visibly
+    distinct rather than implying a correspondence that does not hold."""
+    assert audit.selection_diagnostic_seed(audit.BOOTSTRAP_SEED) != audit.BOOTSTRAP_SEED
+    assert audit.selection_diagnostic_seed(7) == audit.selection_diagnostic_seed(7)
+    assert audit.selection_diagnostic_seed(7) != audit.selection_diagnostic_seed(8)
+
+
+def test_selection_diagnostic_handles_an_event_with_no_legal_candidates():
+    diag = audit.selection_diagnostic([{"candidates": {}, "eval_keep": np.array([0.0])}])[0]
+    assert diag["legal_set_size"] == 0
+    assert diag["point_selected"] is None
+    assert diag["selection_frequency"] == {}
+
+
 def test_compute_conformance_ok_false_when_pinned_topology_hash_fails():
     """Item 5b, second half: 'at run level, conformance_ok=False when the
     pinned-topology hash fails' -- exercised directly against the pure

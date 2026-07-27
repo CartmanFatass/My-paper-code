@@ -1079,6 +1079,81 @@ def hierarchical_bootstrap_events(events: list[dict], *, iters: int, seed: int,
     }
 
 
+SELECTION_DIAGNOSTIC_SEED_TAG = "selection_diagnostic"
+
+
+def selection_diagnostic_seed(seed: int = BOOTSTRAP_SEED) -> int:
+    """A seed deliberately DISTINCT from the primary resampling stream.
+
+    The diagnostic re-runs only the selection half, so it cannot consume the
+    inference stream in the same order as `hierarchical_bootstrap_events` and
+    would not reproduce it even given the same seed. Deriving a separate seed
+    makes that explicit instead of implying a correspondence that does not
+    hold."""
+    digest = hashlib.sha256(f"{int(seed)}|{SELECTION_DIAGNOSTIC_SEED_TAG}".encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big")
+
+
+def selection_diagnostic(events: list[dict], *, iters: int = BOOTSTRAP_ITERS,
+                          seed: int = BOOTSTRAP_SEED) -> list[dict]:
+    """R2 section 8's selection diagnostic, required in the result artifact.
+
+    At the `2/2` floor the audit buys a materiality verdict, not a candidate
+    ranking, so the artifact has to expose how concentrated the maximizer
+    choice actually was. Reporting only the point winner would hide an event
+    whose selection was a coin flip behind a number that looks decided.
+    Candidate instability is expected to WIDEN or fail to resolve the gate --
+    it never invalidates a correctly propagated interval.
+
+    Per event: the point-selected candidate, bootstrap selection frequency for
+    every legal `z`, the legal-set size, and two concentration readings (the
+    Herfindahl sum of squared shares, and entropy normalized to [0,1] over the
+    legal set). Ties resolve to the first candidate in insertion order, exactly
+    as the primary bootstrap's `max(...)` does."""
+    rng = np.random.default_rng(selection_diagnostic_seed(seed))
+    iters = int(iters)
+    out: list[dict] = []
+
+    for event in events:
+        candidates = event.get("candidates", {})
+        z_ids = list(candidates)
+        if not z_ids or iters <= 0:
+            out.append({"legal_set_size": len(z_ids), "point_selected": None,
+                        "selection_frequency": {}, "concentration_hhi": None,
+                        "normalized_entropy": None, "bootstrap_iters": iters})
+            continue
+
+        # Vectorized: one (iters x n_select) resample per candidate, then a
+        # single argmax across candidates per iteration.
+        means = np.empty((len(z_ids), iters), dtype=float)
+        for k, z in enumerate(z_ids):
+            sel = np.asarray(candidates[z]["select"], dtype=float)
+            if sel.size == 0:
+                means[k] = -np.inf
+                continue
+            idx = rng.integers(0, sel.size, size=(iters, sel.size))
+            means[k] = sel[idx].mean(axis=1)
+
+        winners = np.argmax(means, axis=0)
+        counts = np.bincount(winners, minlength=len(z_ids))
+        freq = {z_ids[k]: float(counts[k]) / iters for k in range(len(z_ids))}
+
+        hhi = float(sum(p * p for p in freq.values()))
+        shares = [p for p in freq.values() if p > 0.0]
+        entropy = -float(sum(p * math.log(p) for p in shares))
+        normalized_entropy = (entropy / math.log(len(z_ids))) if len(z_ids) > 1 else 0.0
+
+        out.append({
+            "legal_set_size": len(z_ids),
+            "point_selected": select_maximizer({z: candidates[z]["select"] for z in z_ids}),
+            "selection_frequency": freq,
+            "concentration_hhi": hhi,
+            "normalized_entropy": float(normalized_entropy),
+            "bootstrap_iters": iters,
+        })
+    return out
+
+
 def equal_topology_weighted_mean(per_topology_values: list[list[float]]) -> float:
     """Section 9: aggregate per-topology means FIRST, then average
     topologies with EQUAL weight -- never a flat pool of every event across
@@ -2863,6 +2938,20 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             "topology_hash_failures": topology_hash_failures,
             "arm_distinct_ok": arm_distinct_ok,
         },
+    }
+
+    # R2 section 8: the selection diagnostic is a required artifact field, not
+    # an optional extra. At the 2/2 floor an unstable maximizer must be visible
+    # rather than hidden behind a point winner.
+    out["selection_diagnostic"] = {
+        limb: [
+            dict(topology_index=ti,
+                 topology_seed=r.get("topology_record", {}).get("topology_seed"),
+                 event_index=ei, **entry)
+            for ti, r in enumerate(topology_results)
+            for ei, entry in enumerate(selection_diagnostic(r.get(key, [])))
+        ]
+        for limb, key in (("stable", "audit_units_stable"), ("flex", "audit_units_flex"))
     }
 
     if len(topology_results) > 1 and support_ok:
