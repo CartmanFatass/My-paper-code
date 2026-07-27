@@ -7,7 +7,7 @@ description: Use for direct Project Manager transport to HMASD external GPT-5.6 
 
 ## Contract boundary
 
-Read `.agents/roles/PROJECT_MANAGER.md` before operating — it is the complete
+Read `AGENTS.md` before operating — it is the complete
 Project Manager instructions and is normative over this Skill. In particular its
 **External Pro** section decides whether a round is warranted at all; this Skill
 only carries one.

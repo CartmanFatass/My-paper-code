@@ -6,7 +6,7 @@
 # tab activation. Every one of those failures was "environment not in the
 # expected state", which is a script's job, not a judgement call. The capture
 # decision that followed IS a judgement call and deliberately stays with the
-# Project Manager (AGENTS.md; .agents/roles/PROJECT_MANAGER.md,
+# Project Manager (AGENTS.md; AGENTS.md,
 # "Do not delegate the browser and do not create any other relay").
 #
 # This script only puts the environment into the expected state and reports what

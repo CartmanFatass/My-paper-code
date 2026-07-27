@@ -1,7 +1,7 @@
 # HMASD Conjectures
 
 These are scientific possibilities, not implementation authority. Active role
-authority is defined by `AGENTS.md` and `.agents/roles/`; this ledger records
+authority is defined by `AGENTS.md`; this ledger records
 the Project Manager-accepted CDC state.
 
 ## C-OPEN-ROSTER-DIRECT — A shared direct policy is usable across dynamic N

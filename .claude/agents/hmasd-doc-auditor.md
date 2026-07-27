@@ -18,7 +18,7 @@ environment reference.
 
 You audit the governance surface — `AGENTS.md`, `CLAUDE.md`,
 `docs/project/AGENT_CONTEXT.md`, `docs/project/CURRENT_WORK.md`,
-`.agents/roles/*.md`, `.claude/agents/*.md`, `.claude/skills/**`,
+`.claude/agents/*.md`, `.claude/skills/**`,
 `tests/*contract_test*.ps1` and `.githooks/` — and nothing else. The commit-time
 guards are in scope precisely because "a guard that cannot fail" is one of your
 finding categories. You do not review algorithm code, judge scientific results,

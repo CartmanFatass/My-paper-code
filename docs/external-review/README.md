@@ -1,6 +1,6 @@
 # HMASD External Review Workflow
 
-Canonical authority is in `AGENTS.md` and `.agents/roles/`. This file describes
+Canonical authority is in `AGENTS.md`. This file describes
 the compact artifact and transport sequence only.
 
 ## Direct Project Manager sequence

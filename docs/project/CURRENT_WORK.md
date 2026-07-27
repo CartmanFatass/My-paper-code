@@ -135,7 +135,7 @@ disjoint_file_parallelism   = allowed
 | | |
 |---|---|
 | Constitution — authority, the eight-step loop, Stage A/B, acceptance | `AGENTS.md` |
-| Project Manager instructions | `.agents/roles/PROJECT_MANAGER.md` |
+| Project Manager instructions | `AGENTS.md` |
 | Standing context every subagent reads | `docs/project/AGENT_CONTEXT.md` |
 | Which machine runs what | `docs/project/COMPUTE_ROUTING.md` |
 | Scientific method contract | `docs/project/ALGORITHM_PRINCIPLES.md` |

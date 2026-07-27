@@ -1,7 +1,7 @@
 # HMASD Idea Portfolio
 
 The portfolio preserves legal scientific explanations. Active role authority is
-defined by `AGENTS.md` and `.agents/roles/`; Project Manager schedules the next
+defined by `AGENTS.md`; Project Manager schedules the next
 bounded action inside user authority. Status never grants implementation or
 compute authority.
 

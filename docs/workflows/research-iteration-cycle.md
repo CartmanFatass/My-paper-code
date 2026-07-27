@@ -240,7 +240,7 @@ Not questions — work. An implementer can start from here.
 2. **`.agents/roles/EXTERNAL_PRO.md`** — remove "choose successor work" and the
    second-acceptance-owner prohibition from **Must not**; state the new
    scientific decision ownership and the protected-semantics whether/how split.
-3. **`.agents/roles/PROJECT_MANAGER.md`** — move research convergence and
+3. **`AGENTS.md`** — move research convergence and
    scientific reconciliation out; keep code design, acceptance of code, Git,
    transport, orchestration.
 4. **`docs/project/IMPLEMENTATION_PLAN.md`** — restore the

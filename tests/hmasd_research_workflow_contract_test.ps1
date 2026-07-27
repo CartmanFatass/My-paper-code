@@ -16,9 +16,6 @@ $expectedSkills = @(
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
 }
-if (Test-Path (Join-Path $repo '.agents/skills/hmasd-agile-research-development')) {
-    throw 'A project Skill remains at its pre-migration .agents/skills location'
-}
 
 # Every bounded role is a Claude Code subagent definition.
 $agentDefs = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'hmasd-*.md' |
@@ -42,18 +39,18 @@ if (Test-Path (Join-Path $repo '.codex')) {
     throw 'The retired Codex agent runtime remains on the active line'
 }
 
-$roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
-    Select-Object -ExpandProperty Name | Sort-Object)
-$expectedRoles = @('EXPERIMENT_OPERATOR.md', 'PROJECT_MANAGER.md') | Sort-Object
-if (Compare-Object $expectedRoles $roles) {
-    throw "Unexpected active role set: $($roles -join ',')"
+# There is no role directory. One document per actor: AGENTS.md is the Project
+# Manager's instructions, each subagent carries its own definition, and External
+# Pro reads only the question it was sent.
+if (Test-Path (Join-Path $repo '.agents')) {
+    throw 'The retired .agents/ role directory is back'
 }
 
-$agents = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-agile-research-development/SKILL.md')
-$pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 
 foreach ($required in @(
     'single project owner at any moment',

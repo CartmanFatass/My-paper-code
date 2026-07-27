@@ -3,14 +3,16 @@ param()
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
+# One document per actor: the operator's charter was folded into its definition
+# on 2026-07-27, so the identity block and the behaviour rules are asserted
+# against the same file the runtime actually loads.
 $definitionPath = Join-Path $repo '.claude/agents/hmasd-experiment-operator.md'
-$rolePath = Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md'
 if (-not (Test-Path -LiteralPath $definitionPath -PathType Leaf)) {
     throw 'The experiment operator has no registered subagent definition'
 }
 $operatorDef = Get-Content -Raw -LiteralPath $definitionPath
-$role = Get-Content -Raw -LiteralPath $rolePath
-$agents = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$role = $operatorDef
+$agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 
 # The operator is deliberately pinned to the mechanical tier.
@@ -123,7 +125,7 @@ foreach ($required in @(
 # because every subagent loads it and none of them may spawn anything.
 # Relocated from CLAUDE.md 2026-07-27; the assertion is unchanged in strength and
 # gained a second exclusion below.
-$pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
+$pm = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 foreach ($required in @(
     'subagent_runtime=claude_code',
     'subagent_definitions=.claude/agents/*.md',
@@ -141,17 +143,12 @@ foreach ($leaked in @('_tier=', 'subagent_runtime=', 'loop_driver=')) {
         throw "Role-specific policy leaked into the shared signpost: $leaked"
     }
 }
-# AGENTS.md is a pointer as of 2026-07-27, not a second instruction set. Policy
-# of any kind reappearing there recreates the split that made a 594-line
-# "constitution" bind nobody, because nothing loads it automatically.
-$agentsPointer = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
-if ((($agentsPointer -split "`n").Count) -gt 40) {
-    throw 'AGENTS.md is growing back into an instruction set; it is a pointer'
-}
-foreach ($leaked in @('_tier=', 'subagent_runtime=', '| Subagent | Tier |', '## Execution modes')) {
-    if ($agentsPointer.Contains($leaked)) {
-        throw "Policy leaked back into the AGENTS.md pointer: $leaked"
-    }
+# AGENTS.md IS the Project Manager instructions as of 2026-07-27 -- one document
+# per actor, held by the only actor that reads it. There is no separate role
+# directory and no second instruction set; if one reappears, the split that made
+# a 594-line "constitution" bind nobody has been recreated.
+if (Test-Path (Join-Path $repo '.agents')) {
+    throw 'The retired .agents/ role directory is back; instructions belong to the actor that executes them'
 }
 
 foreach ($required in @(
