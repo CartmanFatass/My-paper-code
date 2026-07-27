@@ -11,7 +11,7 @@ Before adding a line, ask where it belongs:
 | The thing you want to record | Where it goes |
 |---|---|
 | A finding, a measurement, a mechanism | an evidence note under `docs/research/cdc/EVIDENCE_NOTES/` |
-| A rule for how work is done | the role file it binds, or `AGENTS.md` |
+| A rule for how work is done | `AGENTS.md` if it binds the orchestrator, the subagent's own definition if it binds a worker |
 | A ruling and its reconciliation | the round directory under `docs/external-review/rounds/` |
 | Which machine runs what | `docs/project/COMPUTE_ROUTING.md` |
 | What is live *right now* | here |
@@ -134,8 +134,7 @@ disjoint_file_parallelism   = allowed
 
 | | |
 |---|---|
-| Constitution — authority, the eight-step loop, Stage A/B, acceptance | `AGENTS.md` |
-| Project Manager instructions | `AGENTS.md` |
+| Project Manager instructions — authority, the loop, Stage A/B, acceptance, task sizing, dispatch, review | `AGENTS.md` |
 | Standing context every subagent reads | `docs/project/AGENT_CONTEXT.md` |
 | Which machine runs what | `docs/project/COMPUTE_ROUTING.md` |
 | Scientific method contract | `docs/project/ALGORITHM_PRINCIPLES.md` |

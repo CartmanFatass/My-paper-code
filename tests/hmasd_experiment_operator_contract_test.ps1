@@ -136,11 +136,21 @@ foreach ($required in @(
     if (-not $pm.Contains($required)) { throw "PROJECT_MANAGER runtime contract missing: $required" }
 }
 
-# CLAUDE.md is loaded by every role, so role-specific policy must not sit there.
+# CLAUDE.md is the only auto-injected file, so a small marked Project-Manager
+# block earns its place there -- but it must stay MARKED and it must stay small.
+# The 2026-07-27 defect was not that PM content sat here; it was that it sat here
+# unmarked and mixed with universal content, so children read tier tables as if
+# they applied to them.
 $claude = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
-foreach ($leaked in @('_tier=', 'subagent_runtime=', 'loop_driver=')) {
+if (-not $claude.Contains('## Project Manager only — subagents skip this section')) {
+    throw 'CLAUDE.md carries Project Manager rules without the marked, skippable heading'
+}
+if ((($claude -split "`n").Count) -gt 120) {
+    throw 'CLAUDE.md is growing back into an instruction set; it is a signpost'
+}
+foreach ($leaked in @('_tier=', 'subagent_runtime=', 'loop_driver=', '| Subagent | Tier |')) {
     if ($claude.Contains($leaked)) {
-        throw "Role-specific policy leaked into the shared signpost: $leaked"
+        throw "Role runtime detail leaked into the shared signpost: $leaked"
     }
 }
 # AGENTS.md IS the Project Manager instructions as of 2026-07-27 -- one document
