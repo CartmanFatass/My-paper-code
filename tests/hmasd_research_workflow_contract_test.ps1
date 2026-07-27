@@ -52,7 +52,6 @@ if (Compare-Object $expectedRoles $roles) {
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
-$plan = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/IMPLEMENTATION_PLAN.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 
@@ -143,21 +142,27 @@ else {
     }
 }
 
+# The subagent context carries worker behaviour and NO workflow. A worker that
+# has to reconstruct the process from documents is a worker guessing, so these
+# assert the behavioural rules are present -- and the exclusion below asserts the
+# workflow has not crept back in. IMPLEMENTATION_PLAN.md was deleted 2026-07-27:
+# it was a third copy of the boundary, three days stale, and pointed at here as
+# the frozen contract. Its assertions were static boilerplate that could not fail
+# on the drift they were meant to catch.
 foreach ($required in @(
-    'backend=cpu',
-    'torch_threads=1',
-    'docs/research/designs/',
-    'Generic Superpowers execution')) {
-    if (-not $plan.Contains($required)) { throw "Implementation plan missing: $required" }
-}
-
-foreach ($required in @(
-    'root Project Manager directly stages, commits, and pushes',
     'Subagents never run Git',
-    'fixed subagent, not a persistent task',
-    '.claude/skills/hmasd-agile-research-development/SKILL.md',
-    '.claude/agents/*.md')) {
+    'It carries **no workflow**',
+    'Never end your turn to wait for your own work',
+    'Never assert a property you did not measure',
+    'Never report an elapsed time you did not measure',
+    'Protected semantics')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
+}
+foreach ($leaked in @(
+    'eight-step', 'Stage A', 'Stage B', 'iteration budget', 'IMPLEMENTATION_PLAN')) {
+    if ($context.Contains($leaked)) {
+        throw "Workflow leaked into the subagent context: $leaked"
+    }
 }
 foreach ($required in @(
     'docs/report/ITERATION_<n>.md',
@@ -173,7 +178,7 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
 }
 
-foreach ($text in @($agents, $current, $context, $plan, $agile, $pmRole)) {
+foreach ($text in @($agents, $current, $context, $agile, $pmRole)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

@@ -235,6 +235,28 @@ subagent, and a child reading tier tables it cannot act on is noise at best.
 - Repeat the in-band waiting rule in the brief. Children stall on this
   specifically and repeatedly.
 
+## Authoring the brief
+
+**A brief that contradicts the procedure governing the child is worse than no
+brief: the child will follow the brief.** This has already cost one retired
+review round. When a Skill or charter governs the work, read it before writing
+and quote its constraints. Never paraphrase a procedure from memory. If brief and
+procedure disagree, the procedure is right and the brief is the defect.
+
+Children carry no workflow knowledge by design — `AGENT_CONTEXT.md` gives them
+environment and behaviour only. **Everything task-specific must be in the brief.**
+A worker that has to reconstruct the process from documents is a worker guessing.
+
+Two traps already hit:
+
+- "Submit the question verbatim" reads as *paste the file body*. The review
+  transport contract is the opposite — the question carries exact paths, not file
+  contents, and the reviewer reads the repository itself.
+- Declaring evidence paths in the brief or a side manifest does not put them in
+  front of the reviewer. The freshness fence names only the question, so the
+  allow-list has to live inside the question under a literal `## Evidence to read`
+  heading.
+
 ## When to assign what
 
 Tier follows the work, not the title. Judgment about protected semantics goes to

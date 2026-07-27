@@ -568,19 +568,22 @@ precedence change only at an explicitly accepted scientific boundary.
 ## Document ownership and update triggers
 
 A document with no live owner drifts, and an owner with no triggering event
-drifts almost as fast. `IMPLEMENTATION_PLAN.md` sat twelve hours stale on
-2026-07-24 — naming a superseded design and an iteration budget of 8 against a
-real 20 — while `AGENT_CONTEXT.md` pointed every child at it as the frozen
-executable contract. Its recorded owner was "Fable", an actor in no roster and
-no charter.
+drifts almost as fast. `IMPLEMENTATION_PLAN.md` proved this twice and was deleted
+2026-07-27. It sat twelve hours stale on 2026-07-24 — naming a superseded design
+and an iteration budget of 8 against a real 20 — was repaired, then went stale
+again for three days across two contract freezes and a MISMATCH ruling, the whole
+time pointed at by `AGENT_CONTEXT.md` as the frozen executable contract.
 
-**An owner must be a live role.** Naming a retired actor is the same as naming
-nobody.
+The lesson is not that it needed a better owner or another trigger. **It was a
+third copy of a boundary that `CURRENT_WORK.md` and the frozen design already
+carried**, and a third copy drifts no matter who owns it. The repair was deletion.
+
+**An owner must be a live role.** Its recorded owner was "Fable", an actor in no
+roster and no charter; naming a retired actor is the same as naming nobody.
 
 | Document | Updated by | Must move when |
 |---|---|---|
 | `docs/project/CURRENT_WORK.md` | Project Manager | any boundary change: active assignment, accepted result, grant or authority change |
-| `docs/project/IMPLEMENTATION_PLAN.md` | Project Manager | the active design, its status, or the iteration budget changes |
 | `docs/research/designs/*.md` | Project Manager, recording Pro's decision | at freeze only — never edited afterwards; supersede with a new file |
 | `docs/research/cdc/EVIDENCE_NOTES/*.md` | Project Manager | a result closes or a derivation completes; append-only |
 | `docs/project/ExpRecord.md` | `hmasd-exp-recorder`, on a PM classification | a run reaches a terminal status |
