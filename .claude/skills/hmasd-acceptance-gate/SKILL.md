@@ -54,6 +54,14 @@ drives the guard **red**. A positive assertion alone is not a guard.
   `_raw_return_energy_margins` both were — comparing them looks like an
   independent check and is not. Both sides move together under a wrong formula.
   Recompute from literals, or from an input pinned by a *different* test.
+- **Read the test's own name as a specification and check the quantifier.**
+  "once **per uav**" that drives one UAV, "**every** field" that mutates one,
+  "across **processes**" run in one interpreter. Found 2026-07-27:
+  `test_cutoff_and_depletion_events_fire_once_per_uav` exercised only UAV 0, so a
+  fleet-**global** latch passed it — 214/214 green — while undercounting the
+  `-5·cutoff -10·depletion` terms, the heaviest in primary `G`, the moment a
+  second UAV crossed. This sweep is cheap: it compares the name against the body
+  and needs no reasoning about the implementation.
 - Fixtures made degenerate or randomness-free for tractability delete exactly
   the variance the property is about. An environment whose `step()` draws no
   randomness cannot witness a determinism claim.

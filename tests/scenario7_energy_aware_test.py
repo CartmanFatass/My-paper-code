@@ -912,6 +912,42 @@ def test_cutoff_and_depletion_events_fire_once_per_uav(monkeypatch):
     assert first_depletion["depletion_event_count"] == 1
     assert repeated_depletion["depletion_event_count"] == 0
 
+    # "per uav" was in the name and not in the test: everything above drives UAV
+    # 0 alone, so a GLOBAL latch -- one flag for the whole fleet -- passes every
+    # assertion. Measured 2026-07-27: replacing the per-UAV mask with
+    # `mask & (not seen.any())` left 214/214 green.
+    #
+    # This is the heaviest-weighted term in the primary quantity: `compute_G`
+    # subtracts `5*new_cutoff + 10*new_depletion`. A global latch undercounts
+    # both whenever a SECOND UAV crosses a threshold, which is the ordinary case
+    # in an eight-UAV fleet under energy stress, so `G` comes out systematically
+    # high. D7.S's window-local latching counts exactly these events.
+    #
+    # A second UAV's first event must therefore be counted even though the first
+    # UAV has already latched.
+    env.uav_battery_ratios[1] = env.service_cutoff_threshold * 0.5
+    second_uav_cutoff = env._calculate_constrained_safety_reward(
+        0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+    )
+    assert second_uav_cutoff["cutoff_event_count"] == 1, (
+        "UAV 1's first cutoff must count even though UAV 0 has already latched; "
+        "a zero here means the latch is fleet-global rather than per-UAV")
+
+    env.uav_battery_ratios[1] = 0.0
+    second_uav_depletion = env._calculate_constrained_safety_reward(
+        0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+    )
+    assert second_uav_depletion["depletion_event_count"] == 1, (
+        "UAV 1's first depletion must count even though UAV 0 has already latched")
+
+    # ...and still exactly once for it, too -- otherwise the repair above could
+    # be satisfied by removing the latch entirely.
+    repeated_second = env._calculate_constrained_safety_reward(
+        0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+    )
+    assert repeated_second["cutoff_event_count"] == 0
+    assert repeated_second["depletion_event_count"] == 0
+
 
 def test_legacy_ablation_restores_original_reward_weights():
     config = Config("S7-S3")

@@ -85,11 +85,57 @@ accepting a plausible finding is the same failure as under-checking a test.
 
 239 tests green after the repair.
 
-## The pattern, on its fourth instance
+## Second finding, same file, heavier: the latch was never tested per-UAV
 
-Every case so far has one cause: **the test was written from the implementation,
-so both sides of the comparison come from the same code path.** This instance
-adds a variant worth naming — *asserting a post-condition the code structurally
-guarantees*. A clamped value inside its clamp, a sorted list being sorted, a
-normalized vector having unit norm. These read as property checks and are
-tautologies about the code's shape rather than its correctness.
+`test_cutoff_and_depletion_events_fire_once_per_uav` is otherwise a good test —
+it drives the real `_calculate_constrained_safety_reward` and asserts
+`first == 1, repeated == 0`, which no always-latch and no never-latch
+implementation satisfies.
+
+**But every assertion drives UAV 0 alone**, so the "per uav" in its name was
+untested. A **fleet-global** latch — one flag for all eight UAVs — passes it.
+
+Green-leaving mutation:
+
+```python
+new_cutoff    = cutoff_mask   & (not bool(self.cutoff_event_seen.any()))
+new_depletion = depleted_mask & (not bool(self.depletion_event_seen.any()))
+```
+
+Measured: **214/214 green** across the scenario-7 and D7.S audit files. The
+production implementation is correctly per-UAV (`cutoff_event_seen` is a boolean
+array); nothing proved it.
+
+**This one is directly claim-bearing, and it is the heaviest term.** `compute_G`
+subtracts `5·new_cutoff_count + 10·new_depletion_count`. A global latch
+undercounts both the moment a *second* UAV crosses a threshold — the ordinary
+case in an eight-UAV fleet under energy stress — so `G` comes out systematically
+high. D7.S's window-local latching counts exactly these events. Unlike the return
+threshold above, this needs no behavioural path: it is arithmetic straight into
+the primary quantity.
+
+Repaired by exercising a second UAV and asserting its first event counts despite
+UAV 0 having latched, plus that it then latches too. Two reds observed:
+
+- global latch → `UAV 1's first cutoff must count …` fails;
+- latch removed entirely → the repeat assertions fail, so the repair cannot be
+  satisfied by deleting the latch.
+
+## The pattern, on its fourth and fifth instances
+
+Most cases share one cause: **the test was written from the implementation, so
+both sides of the comparison come from the same code path.** These two add
+variants worth naming separately:
+
+- *asserting a post-condition the code structurally guarantees* — a clamped value
+  inside its clamp, a sorted list being sorted, a normalized vector having unit
+  norm. Reads as a property check; is a tautology about the code's shape rather
+  than its correctness.
+- *the name quantifies over a domain the test never varies* — "once **per uav**"
+  driving one UAV, "for **every** field" mutating one field, "across
+  **processes**" run in one. The claim is in the name and the coverage is not.
+  Read the test's own name as a specification and check the quantifier.
+
+The second is the cheaper sweep and probably the higher yield: it needs no
+reasoning about the implementation at all, only a comparison between what a test
+is called and what it does.
