@@ -49,8 +49,24 @@ SIX_COORDINATE_ARCHITECTURAL_REDUCTION_SUFFICIENT_G38
 
 ## External Pro 科学裁决
 
-待正式结果复核。External Pro 必须给出该分支的精确结论范围、保留/退役单元、CDC/portfolio/ledger 修改、
-三分支科研 disposition，以及在 `CONTINUE` 时的一个当前调度动作；该调度不把其他 live/parked 方向变成
-无效或退役。PM 不在此处自行解释六坐标充分性、全局历史冗余或研究组合优先级。
+External Pro 原样接受冻结机械分支，并给出：
+
+```text
+scientific_disposition=SUPPORTED_RETAINED_FRESH_FOLDED_SIX_COORDINATE_CONFIGURED_CAPACITY_BOUNDED_PROCESS_CONTINUOUS_ROSTER_G38
+VALID_RESULT_DISPOSITION=CONTINUE
+current_scheduled_action=CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_DESIGN_ASSERTION_AUDIT
+```
+
+在 G38-P0 内，fresh FOLD6 从不读取真实 actor age、两个 previous actions 或 actor time；训练后把常量列贡献
+精确折叠进 bias，删除 136 个 actor weights，并以真六坐标 actor 保持全部 registered access gate。G36 donor
+保留为历史 checkpoint-intervention 证据，但 donor/proxy/filler 和十坐标部署接口不再属于最小接受算法。
+
+该结果不证明原生六输入训练等价、各历史字段分别无条件冗余、critic time 或 G31 credit 冗余、全局
+memoryless，也不外推至任意 capacity/process/horizon 或 UAV。G38 的最强剩余反例是：常量列、bias 与各自
+Adam states 形成不同优化几何；因此 G39 只检验训练参数化，而保持六个 varying actor 字段、critic、G31
+credit、source、paired interactions 和 optimizer exposure 不变。
+
+G31-credit comparator、更广 process/horizon/capacity、非 G33 UAV transport、G37 checkpoint coherence、
+recurrence/EHC 等方向继续保持 live 或 parked；调度 G39 仅是当前资源归属，不代表唯一科学后继。
 
 本轮是有效结论性第 29 轮；自动研究链剩余 8 轮。G33 仍保持用户放弃状态，不得复活。

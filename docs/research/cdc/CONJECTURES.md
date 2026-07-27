@@ -80,24 +80,26 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained at the G36 boundary as a usable
-  actual-history-sensor-substituted, configured-capacity,
-  bounded-random-process continuous dynamic-roster test version for the
-  registered 48-step capacity-6/8/12 toy family. G37 does not extend this
-  accepted boundary.
-- Claim: a capacity-shape-independent no-carry actor trained only at capacity 8
-  remains usable at configured capacities 6, 8 and 12 across the fixed G32
-  process and bounded G34-P0 random process. For the exact formal G35 CS final
-  checkpoints, the actor's actual true-time, lifecycle-age and previous-action
-  sensor bundle may be replaced by the frozen G36 active-count-conditioned,
-  internally coherent source-valid donor generator.
-- Retained actual actor information: capability, anonymous priority, current
-  load and target mix, raw log1p(active_count), active mask and active-fraction
-  autoregressive prefix.
-- Retained surrogate interface: the four actor coordinates for age, two
-  previous actions and time remain present. The accepted deployment boundary
-  populates them through the exact coherent G36 donor law; this is sensor
-  substitution rather than ten-to-six-dimensional architectural deletion.
+- Status: supported and retained at G38 as a usable freshly trained,
+  true-six-coordinate, no-carry, configured-capacity, bounded-random-process
+  continuous dynamic-roster test version for the registered H=48,
+  capacity-6/8/12 toy family.
+- Claim: a capacity-shape-independent actor trained only at capacity 8 remains
+  usable at configured capacities 6, 8 and 12 across the fixed G32 process and
+  bounded G34-P0 random process. Under the G38 training route, the actor never
+  receives varying lifecycle age, previous actions or normalized time, and its
+  final checkpoint is exactly folded into a deployment actor consuming only
+  six per-member coordinates.
+- Deployed actor information: two capability coordinates, anonymous
+  presentation priority, current load, current target mix and
+  log1p(active_count). Active mask, active-set aggregation and the
+  active-fraction autoregressive prefix remain part of the policy contract.
+- Training-route boundary: G38 FOLD6 trains through the common ten-coordinate
+  graph with the last four active-row coordinates fixed to
+  (1/2,1/2,1/2,24/47). Both raw-input affine matrices remain fully trainable.
+  Exact folding incorporates their constant-column contributions into the
+  associated biases, removes 136 actor weights and leaves no donor, proxy,
+  filler or history reader in deployment.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
   spike-allocation, rotation, learned-gain and fresh-seed stability gates.
 - Formal configured-capacity evidence: G32 supports strict-loadable
@@ -108,50 +110,51 @@ the Project Manager-accepted CDC state.
   Both access; pooled REC-minus-CS CI95 is
   [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB is at
   most 0.0054082 against the 0.05 margin.
-- Formal actual-history substitution evidence: G36 replaces actor time, age and
-  previous-action fields with an independent coherent donor bundle. All
-  fixed/random capacity-6/8/12 access gates pass. Primary
-  registered-minus-substitution CI95 is
-  [-0.0024790, 0.0001048, 0.0035749], and the largest component UCB is
-  0.0075287.
-- Formal coherence evidence: G37 independently samples and permutes each donor
-  column while preserving every column's complete active-count-conditioned
-  empirical marginal. Its primary joint-minus-factorized CI95 is
-  [0.0063906, 0.0215989, 0.0515355]. This supports a directional factorization
-  cost and rejects exact zero average effect on the frozen primary estimand, but
-  neither noninferiority nor >0.05 material loss closes. Capacity-8/12 fixed
-  and random deterministic access LCBs miss 0.90, while no confident-access-
-  failure predicate fires. The terminal branch is
-  MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37.
-- Accepted deployment boundary: retain the coherent G36 donor generator.
-  The G37 factorized generator is neither accepted nor confidently rejected.
-- Retired alternatives: within the registered family, usable deployment does
+- Formal actual-history substitution evidence: G36 replaces the exact G35 CS
+  checkpoints' actor time, age and previous-action fields with an independent
+  coherent donor bundle. All
+  capacity-6/8/12 fixed/random access gates pass.
+- Formal donor-coherence evidence: G37's factorized donor produces a directional
+  average loss but selects MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37. This
+  exact checkpoint-level question remains valid but no longer blocks the
+  accepted actor because G38 removes the donor interface entirely after fresh
+  training.
+- Formal architectural-reduction evidence: G38 freshly trains parameter- and
+  exposure-matched FULL10 and constant-input FOLD6 arms. Both satisfy the full
+  access contract. Every one of 45 fold-equivalence gates has exactly zero
+  recorded error. FULL10-minus-FOLD6 primary CI95 is
+  [-0.01008621, -0.00312729, 0.00841468], and every registered component UCB is
+  at most the frozen 0.05 margin.
+- Accepted deployment boundary: the true folded G38 six-coordinate actor.
+  G36's coherent donor remains historical evidence but is no longer required
+  by the smallest retained deployment algorithm.
+- Retired alternatives: within G38-P0, usable deployment does
   not require capacity-shaped learned parameters, capacity-specific retraining,
   checkpoint adapters, the exact fixed 12/24/36 schedule, atomic R+J, learned
-  per-lifecycle actor carry, or acquisition of the target episode's actual
-  time/age/previous-action bundle. G37 additionally retires only the exact
-  zero-average-effect point null for its primary joint-minus-factorized
-  estimand.
+  actor carry, actual actor time/age/previous-action sensors, a donor/filler
+  generator or a ten-coordinate deployment actor. A >0.05 finite-budget
+  advantage for the varying four-field actor bundle is closed.
 - Lifecycle boundary: active masks, likelihood ownership, environment lifecycle
   state, fresh initialization, temporary leave/rejoin, terminal deletion and
-  survivor continuity remain part of the runtime contract.
+  survivor continuity remain protected runtime semantics.
 - Scope: H=48; configured capacity is fixed within a trajectory and belongs to
-  6/8/12; G34-P0 contains one each of L/R/J/T and three legal event orders; G36
-  and G37 use their exact frozen donor distributions.
-- Strongest remaining explanations: G37 may expose generic multivariate
-  distribution-shift sensitivity or specialization of checkpoints trained on
-  coherent inputs. Whether a freshly trained six-coordinate actor can delete
-  the entire surrogate interface remains open.
-- Critic and credit boundary: the critic retains true time, and the checkpoints
-  retain G31 training provenance. G37 performs zero training and supplies no
-  credit-comparator evidence.
+  6/8/12; G34-P0 contains one each of L/R/J/T and three registered legal event
+  orders.
+- Strongest remaining explanation: the redundant constant-coordinate columns
+  and biases may alter Adam optimization even though they fold into a true
+  six-coordinate deployment actor. Native six-coordinate training equivalence
+  remains untested.
+- Critic and credit boundary: the centralized critic retains true current state,
+  including normalized time, and both arms use identical G31
+  realized-future-tail credit. G38 supplies no critic- or credit-comparator
+  evidence.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
   non-identifiable. G33 and all derivatives remain abandoned by user
   instruction.
-- Exclusions: arbitrary capacity/process/horizon, arbitrary filler robustness,
-  architectural coordinate deletion, globally memoryless control, UAV
-  usability, asynchronous skill lifetime, intrinsic-reward advantage,
-  complete-algorithm superiority and G31-credit redundancy remain unsupported.
+- Exclusions: native-six training equivalence, arbitrary capacity/process/
+  horizon, critic-time reduction, UAV usability, asynchronous skill lifetime,
+  intrinsic-reward advantage, complete-algorithm superiority and G31-credit
+  redundancy remain unsupported.
 
 ## C-EHC — Event-held temporal state
 
@@ -184,38 +187,35 @@ the Project Manager-accepted CDC state.
 ## C-REC — Ordinary recurrence is sufficient
 
 - Status: selected as a sufficient capability in the exact G1/G2 memory
-  sources, while learned actor carry is rejected as load-bearing in G35-P0 and
-  target-coherent actor history sensors are replaceable for the exact G35 CS
-  checkpoints under the frozen G36 donor law.
+  sources, while learned actor carry and actor history inputs are rejected as
+  load-bearing in the fully observed G35/G38 continuous-roster source family.
 - Memory-source claim: a matched recurrent MARL controller can represent useful
-  persistence without explicit event-held commitment when task-relevant
-  information is absent from the current observation.
+  persistence when task-relevant information is absent from the current
+  observation.
 - Continuous-roster carry result: G35 compares parameter-identical REC and CS
-  arms under identical current information, G31 credit, source, interactions
-  and optimizer exposure. Both access; every REC-minus-CS UCB is at most
-  0.0054082 against the 0.05 margin.
-- Continuous-roster sensor result: G36 replaces the exact CS checkpoints'
-  actual time, age and previous-action bundle with a target-history-independent,
-  source-valid donor bundle. All access gates pass and the primary
-  registered-minus-substitution UCB is 0.0035749.
-- Smallest retired units: learned cross-step actor carry is not required or
-  materially advantageous in G35-P0; the target episode's actual coherent
-  history bundle is not required or materially advantageous for those exact
-  CS checkpoints under G36-P0.
-- Retained distinction: G36 preserves four history-shaped model coordinates, a
-  source-valid donor generator, active masks, lifecycle ownership and the
-  centralized critic. It does not establish that the task or all policy classes
-  are memoryless.
-- Reactivation condition: an identified source with task-relevant sequential
+  arms under identical information, G31 credit, source, interactions and
+  optimizer exposure. Both access; every REC-minus-CS UCB is at most 0.0054082
+  against the 0.05 margin.
+- Continuous-roster sensor result: G36 shows that exact G35 CS checkpoints do
+  not require the target episode's actual time, age or previous-action bundle
+  when supplied with a coherent donor.
+- Continuous-roster architecture result: G38 freshly trains a FOLD6 arm that
+  never reads those four actual fields and converts it exactly into a true
+  six-coordinate actor. Both FULL10 and FOLD6 access; pooled
+  FULL10-minus-FOLD6 CI95 is
+  [-0.01008621, -0.00312729, 0.00841468].
+- Smallest retired units: learned cross-step actor carry, acquisition of the
+  target's actual actor-history bundle, donor-generated history values and a
+  ten-coordinate deployment actor are not required in G38-P0. The varying
+  four-field bundle supplies no >0.05 finite-budget advantage.
+- Retained distinction: G38 preserves current load/mix, capabilities,
+  active-set information, lifecycle runtime state, the action prefix, a
+  true-current-state critic and G31 training credit. It does not establish that
+  partially observed tasks or all policy classes are memoryless.
+- Reactivation condition: an identified source containing task-relevant
   information absent from current observations, followed by a matched material
-  recurrent advantage. More seeds, budget or threshold changes on G35/G36-P0
+  recurrent advantage. More seeds, budget or threshold changes on G35/G38-P0
   are not reactivation evidence.
-- G37 update: the mixed factorization result does not reopen G35's rejection of
-  learned actor carry or G36's rejection of actual target-history acquisition.
-  Its positive primary contrast concerns the distribution of four execution-time
-  nuisance coordinates for exact frozen CS checkpoints; it is not recurrence
-  evidence. Cross-column donor coherence remains unresolved, and fresh
-  six-coordinate retraining is the relevant architectural discriminator.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -267,6 +267,11 @@ the Project Manager-accepted CDC state.
   about whether G31 realized-future-tail credit was necessary for learning the
   checkpoints or can be replaced. C-CREDIT remains supported only by its
   registered paired G17/G18 evidence.
+- G38 update: FULL10 and FOLD6 use identical G31 realized-future-tail targets,
+  direction-balanced updates, critics and optimizer exposure. The successful
+  six-coordinate reduction therefore isolates actor information and deployment
+  architecture only. It neither establishes G31-credit necessity nor shows that
+  ordinary credit can replace it.
 
 ## C-BENCH — The benchmark is not identifying
 

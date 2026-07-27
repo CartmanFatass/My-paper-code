@@ -7,12 +7,12 @@ compute authority.
 
 | Idea | Status | Current reason | Reactivation or advancement condition |
 |---|---|---|---|
-| C-CONTINUOUS-ROSTER | supported retained at G36; G37 factorized reduction mixed and closed | G31/G32/G34/G35/G36 form the accepted configured-capacity, bounded-process, no-carry, actual-history-sensor-substituted test version. G37 yields a positive primary joint-minus-factorized CI95 [0.0063906, 0.0215989, 0.0515355], but capacity-8/12 deterministic access LCBs miss 0.90 and neither sufficiency nor material-coherence predicates close. | Retain the coherent G36 donor boundary. Do not extend G37-P0 by seeds or evidence volume. Next action: test fresh architectural deletion of coordinates 6:10 rather than further post-training donor-factorization peeling. |
+| C-CONTINUOUS-ROSTER | supported retained at G38: true-six-coordinate no-carry configured-capacity bounded-process test version | G31/G32/G34/G35 establish delayed-credit usability, capacity transport, bounded random-process transport and no-carry sufficiency. G38 freshly trains a FOLD6 arm that never reads actor age, previous actions or time, folds it into a true six-coordinate actor with zero fold error, and obtains FULL10-minus-FOLD6 CI95 [-0.01008621, -0.00312729, 0.00841468] while both arms pass access. | Next action: determine whether the redundant constant-coordinate training parameterization can itself be deleted through native six-coordinate training. Broader process/horizon, credit and non-G33 UAV transport remain live or parked. |
 | C-OPEN-ROSTER-DIRECT | accepted usable test version through N=80 | Formal G16 passes a 108-profile fresh-seed mixture with exact 12/12/12 process-mode balance per scale; all deterministic LCBs exceed `0.9231` and ultra stochastic mean is `0.8929`. | Completed; future expansion requires a new user research direction. |
 | C-EHC | unsupported after five-iteration chain | G2 proves a causal link, but G1/G2 ordinary recurrence is sufficient and G3/G4 do not establish robust roster access or advantage. | A new user-authorized chain with a representation-fixed optimization/access separation. |
-| C-REC | sufficient in exact memory sources; learned carry and actual target-history acquisition remain closed in G35/G36-P0 | G37 does not reinstate recurrence. Its mixed result concerns exact-checkpoint sensitivity to factorized nuisance inputs, not cross-step neural state. | Reactivate recurrence only on an identified source containing task-relevant information absent from current observations and a matched material recurrent advantage. |
+| C-REC | sufficient in exact memory sources; learned carry and actor-history access closed as load-bearing in G35/G38-P0 | G35 closes learned carry; G36 closes acquisition of the target's actual history bundle for exact checkpoints; G38 removes the four history-shaped coordinates and all donor machinery from the deployed actor after fresh training. | Reactivate recurrence only on an identified source containing task-relevant information absent from current observations and a matched material recurrent advantage. |
 | C-BASE | live elsewhere; rejected for G1 | All G1 arms accessed the source above `0.80`; shared base insufficiency cannot explain this result. | An information-matched stronger base accesses a different failed source under unchanged credit semantics. |
-| C-CREDIT | supported on paired toys; necessity unresolved outside them | G36 performs zero optimization on checkpoints trained with G31 credit and therefore isolates only execution-time actor inputs. | Reactivate only through a representation-, information- and exposure-matched credit-only comparison. |
+| C-CREDIT | supported on paired delayed/immediate toys; necessity unresolved outside them | G38 holds G31 credit fixed across FULL10 and FOLD6. Its architectural result supplies no matched credit evidence. | Reactivate through a representation-, information-, source- and exposure-matched credit-only comparison after the actor training route is settled. |
 | C-BENCH | source-family dependent | Useful-effect G3/G4 is identified. UAV G1 has infeasible and negative-advantage control evidence; UAV G2 is load-bearing but its constructive control remains absolutely infeasible. | Close exact G1/G2; retain source-first pruning for every later UAV source. |
 | C-COORD | causal response without competence | G3/G4 roster interventions alter policy, but neither package establishes robust natural access or a >0.10 advantage. | Separate representation from optimization under a new research authority. |
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
@@ -21,14 +21,15 @@ compute authority.
 ## Terminal disposition
 
 ```text
-completed_action=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_FORMAL_ITERATION_28
-source_family=CONTINUOUS_ROSTER_HISTORY_PROXY_COHERENCE_G37_P0
-formal_disposition=MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37
-scientific_disposition=MIXED_DIRECTIONAL_FACTORIZATION_COST_RETAIN_G36_CLOSE_G37_P0
-next_action=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT
+completed_action=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_FORMAL_ITERATION_29
+source_family=CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_P0
+formal_disposition=SIX_COORDINATE_ARCHITECTURAL_REDUCTION_SUFFICIENT_G38
+scientific_disposition=SUPPORTED_RETAINED_FRESH_FOLDED_SIX_COORDINATE_CONFIGURED_CAPACITY_BOUNDED_PROCESS_CONTINUOUS_ROSTER_G38
+valid_result_disposition=CONTINUE
+next_action=CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_DESIGN_ASSERTION_AUDIT
 authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
-conclusion_bearing_iterations_consumed=28
-iterations_remaining=9
+conclusion_bearing_iterations_consumed=29
+iterations_remaining=8
 ```
 
 The former five-iteration EHC chain remains closed. The new user-authorized
@@ -68,16 +69,16 @@ but constructive absolute utility is far below feasibility and support fails.
 G31 UAV transport therefore remains unresolved. The active boundary returns to
 toy-first discovery and isolates same-checkpoint transport across configured
 maximum capacities from the already-proved within-capacity active-count changes.
-Formal G32 supports capacity-6/8/12 strict-load and padding invariance. G34
-supports fixed-to-bounded-random process transport. G35 closes learned actor
-carry as required or materially advantageous, and G36 shows that the exact G35
-CS checkpoints do not need the target episode's actual time/age/previous-action
-sensors when supplied with the coherent G36 donor. Formal G37 factorizes the
-four donor columns. Its primary joint-minus-factorized CI95 is
-[0.0063906, 0.0215989, 0.0515355], establishing a directional average
-factorization cost but resolving neither the 0.05 materiality decision nor
-capacity-8/12 deterministic access. G37-P0 closes mixed without
-evidence-volume rescue; the accepted boundary remains G36. The next scientific
-action is `CONTINUOUS_ROSTER_SIX_COORDINATE_CS_G38_DESIGN_ASSERTION_AUDIT`,
-which tests fresh architectural deletion rather than continued exact-checkpoint
-proxy perturbation.
+Formal G32 supports configured-capacity-6/8/12 transport, G34 supports bounded
+random-process transport, G35 closes learned actor carry and G36 shows that
+actual actor-history sensors can be replaced for exact checkpoints. G37's
+complete donor factorization closes mixed and remains valid historical
+checkpoint-sensitivity evidence. Formal G38 now freshly trains a constant-input
+FOLD6 arm, folds it into a true six-coordinate deployment actor and selects
+`SIX_COORDINATE_ARCHITECTURAL_REDUCTION_SUFFICIENT_G38`. Both FULL10 and FOLD6
+pass access, all 45 fold audits have exact zero recorded error, and
+FULL10-minus-FOLD6 CI95 is [-0.01008621, -0.00312729, 0.00841468]. The accepted
+deployment boundary therefore moves from G36's coherent donor to G38's true
+six-coordinate actor. The next scheduled action is
+`CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_DESIGN_ASSERTION_AUDIT`;
+other live and parked directions remain preserved.
