@@ -271,6 +271,51 @@ def test_charging_hover_gate_excludes_a_moving_uav_but_not_a_hovering_one():
     assert env.uav_battery_ratios[1] < before[1]
 
 
+def test_a_failed_uav_is_excluded_from_charging_selection_even_when_otherwise_eligible():
+    # Defect 4: `_charging_candidates_by_station` (":1779-1781") is meant to
+    # exclude a failed UAV from the charging candidate list before any other
+    # gate runs. No existing charging test ever sets `uav_failed=True` on a
+    # docking candidate -- every one explicitly zeroes the whole array with
+    # `env.uav_failed[:] = False` -- so deleting the guard leaves every
+    # charging test green. Measured 2026-07-27: deleting both lines
+    # `if self.uav_failed[uav_idx]: continue` left 45/45 green.
+    #
+    # Paired design against
+    # `test_charging_hover_gate_excludes_a_moving_uav_but_not_a_hovering_one`:
+    # two otherwise-identical UAVs at the same station, same distance (0 m,
+    # both on the pad), same dock request, same starting battery, same (zero)
+    # actual velocity -- the only difference is `uav_failed`.
+    env = make_env("S7-S3", seed=77)
+    env.reset(seed=77)
+    env.n_charging_stations = 1
+    env.charging_station_capacity[:] = 2.0  # room for both, so the guard --
+    # not slot contention -- is what must exclude the failed UAV.
+    env.uav_failed[:] = False
+    env.uav_failed[1] = True
+
+    station = env.charging_station_positions[0].copy()
+    env.uav_battery_ratios[:2] = 0.5
+    env.uav_positions[:2] = station
+    env.uav_dock_requests[:2] = True
+    env.uav_target_stations[:2] = 0
+
+    pre_positions = env.uav_positions.copy()
+    before = env.uav_battery_ratios.copy()
+    env._apply_energy_dynamics(pre_positions, np.zeros((env.n_uavs, 3)))
+
+    # The healthy, hovering UAV is credited with charge -- the field that
+    # actually reaches battery state, `_energy_failure_mask` and the
+    # 5.0/10.0-weighted safety penalties, not a diagnostic sibling.
+    assert env.uav_charging[0]
+    assert env.uav_battery_ratios[0] > before[0]
+    # The failed UAV must NOT be credited: it still consumes its own hover
+    # power every step (per
+    # `test_failed_uav_consumes_hover_power_and_s4_keeps_six_active`), so its
+    # battery must strictly fall rather than merely fail to rise.
+    assert not env.uav_charging[1]
+    assert env.uav_battery_ratios[1] < before[1]
+
+
 def test_effective_charging_episode_statistics_count_transition_and_energy():
     env = make_env("S7-S3", seed=25)
     env.reset(seed=25)
@@ -803,7 +848,7 @@ def test_constrained_safety_reward_metrics_are_exposed():
     env = make_env("S7-S3", seed=5)
     env.reset(seed=5)
 
-    _, rewards, _, _, infos = env.step(zero_actions(env))
+    _, rewards, terminations, _, infos = env.step(zero_actions(env))
     reward_info = infos[env.agents[0]]["reward_info"]
 
     assert reward_info["scenario7_reward_model"] == "constrained_qos_safety_pbrs_v2"
@@ -817,10 +862,38 @@ def test_constrained_safety_reward_metrics_are_exposed():
     assert "depletion_event_count" in reward_info
     assert "graph_potential_delta" in reward_info
     assert "instantaneous_bits_per_joule" in reward_info
+    # This equality alone is a two-copies trap: `scenario7_reward` and
+    # `graph_potential_delta` both derive from the same production variable
+    # (`potential_delta` in `_calculate_constrained_safety_reward`), so a
+    # consistent error there -- e.g. the whole PBRS term scaled by a wrong
+    # constant -- moves both sides together and the equality still holds.
+    # Measured 2026-07-27: appending `* 2.0` to the `potential_delta =
+    # self._graph_potential_reward(...)` call left this assertion (and the
+    # full 45-test suite) green.
     assert np.isclose(
         reward_info["scenario7_reward"],
         reward_info["safety_reward_before_pbrs"]
         + reward_info["graph_potential_delta"],
+    )
+
+    # Independent recompute: derive the expected PBRS delta from the raw
+    # potential snapshots (`graph_potential_before`/`graph_potential`, which
+    # are the pre-shaping arguments passed INTO `_graph_potential_reward` and
+    # are untouched by any error inside that function) and `gamma`, per the
+    # frozen telescoping-sum formula `gamma * potential_after - potential_before`
+    # with the terminal case zeroing `potential_after`. This never calls
+    # `_graph_potential_reward` itself, so a 2x (or any other) corruption of
+    # that function's output disagrees with this value instead of matching it.
+    terminal = bool(terminations[env.agents[0]])
+    gamma = env.reward_discount_gamma
+    potential_before = reward_info["graph_potential_before"]
+    potential_after = 0.0 if terminal else reward_info["graph_potential"]
+    expected_potential_delta = gamma * potential_after - potential_before
+
+    assert np.isclose(reward_info["graph_potential_delta"], expected_potential_delta)
+    assert np.isclose(
+        reward_info["scenario7_reward"],
+        reward_info["safety_reward_before_pbrs"] + expected_potential_delta,
     )
     assert np.isfinite(np.mean(list(rewards.values())))
 
@@ -895,6 +968,77 @@ def test_graph_potential_increases_when_relay_moves_toward_reachable_backhaul(mo
     assert near_potential > far_potential
 
 
+def test_return_safety_penalty_reaches_composed_reward(monkeypatch):
+    # Defect 1: `return_risk_penalty` is written into `reward_info` as a
+    # standalone diagnostic field regardless of whether it is actually
+    # summed into `safety_reward_before_pbrs` / `scenario7_reward` -- the
+    # literal per-step number every agent trains on. Every existing test
+    # that names `return_risk_penalty` only asserts that standalone field
+    # (`test_runtime_safety_dual_changes_only_adaptive_return_penalty`,
+    # `test_return_constraint_is_zero_for_positive_margins_and_uses_worst_uav`,
+    # `test_v2_return_risk_is_bounded_even_for_severe_deficit`), never the
+    # composed reward, and none of their fixtures drives a genuine deficit
+    # AT the point the reward is actually composed via
+    # `_calculate_constrained_safety_reward`'s own return branch with every
+    # other penalty pinned to zero. Measured 2026-07-27: deleting the line
+    # `- return_risk_penalty` at `envs/pettingzoo/scenario7_energy_aware.py:811`
+    # left 45/45 green.
+    env = make_variant_env("qos_fixed_safety", seed=75)
+    env.reset(seed=75)
+    monkeypatch.setattr(
+        env,
+        "_calculate_end_to_end_user_rates",
+        lambda: (
+            np.zeros(env.n_users),
+            np.zeros((env.n_uavs, env.n_users)),
+            np.zeros(env.n_uavs),
+        ),
+    )
+    monkeypatch.setattr(env, "_normalized_step_energy", lambda: (0.0, 0.0))
+
+    margins = np.full(env.n_uavs, 0.5)
+    margins[4] = -0.15  # genuine return-margin deficit, not the feasible +0.5
+    # the ablation fixture uses elsewhere.
+    monkeypatch.setattr(env, "_raw_return_energy_margins", lambda: margins)
+
+    # Keep every UAV clear of the cutoff/depletion branches so those two
+    # penalties are exactly zero and cannot mask the return-penalty term.
+    env.uav_battery_ratios[:] = 0.9
+
+    metrics = env._calculate_constrained_safety_reward(
+        0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+    )
+
+    # Fixture sanity, not the property under test.
+    assert metrics["cutoff_event_count"] == 0
+    assert metrics["depletion_event_count"] == 0
+    assert metrics["qos_satisfaction_ratio"] == 0.0
+
+    # Pinned literals from the frozen contract (`config_1.py:440-442`):
+    # `return_margin_scale = 0.05`, `return_cost_cap = 1.0`,
+    # `lambda_return = 2.0`. Standing instruction: if these literals and
+    # config_1.py ever disagree, the config is wrong until a round says
+    # otherwise -- never edit these literals to match the code.
+    return_margin_scale = 0.05
+    return_cost_cap = 1.0
+    lambda_return = 2.0
+
+    expected_cost_raw = 0.15 / return_margin_scale
+    expected_cost = min(expected_cost_raw, return_cost_cap)
+    expected_return_risk_penalty = lambda_return * expected_cost
+
+    assert np.isclose(metrics["return_constraint_cost"], expected_cost)
+    assert np.isclose(metrics["return_risk_penalty"], expected_return_risk_penalty)
+
+    # The reach: the composed reward, not the diagnostic sibling, must fall
+    # by exactly the return-risk penalty.
+    expected_safety_reward_before_pbrs = -expected_return_risk_penalty
+    assert np.isclose(
+        metrics["safety_reward_before_pbrs"], expected_safety_reward_before_pbrs
+    )
+    assert np.isclose(metrics["scenario7_reward"], expected_safety_reward_before_pbrs)
+
+
 def test_runtime_safety_dual_changes_only_adaptive_return_penalty():
     env = make_variant_env("qos_adaptive_safety_graph_pbrs", seed=59)
     env.reset(seed=59)
@@ -940,12 +1084,11 @@ def test_reward_ablation_variants_have_explicit_objectives(variant, monkeypatch)
     # pattern `test_cutoff_and_depletion_events_fire_once_per_uav` already
     # uses) instead of through `env.step`, so QoS and the return margin are
     # pinned to exact literals rather than left to network physics. The
-    # expected reward for each arm is then a closed-form sum of config-level
-    # constants (`env.cutoff_event_penalty`, `env.depletion_event_penalty`)
-    # and the literal event count (1) this fixture engineers -- never a
-    # value read back out of the same `reward_info` dict the assertion
-    # checks, which is the two-copies trap the previous version of this test
-    # was already in.
+    # expected reward for each arm is then a closed-form sum of PINNED
+    # LITERAL weights and the literal event count (1) this fixture
+    # engineers -- never a value read back out of the same `reward_info`
+    # dict the assertion checks, which is the two-copies trap the previous
+    # version of this test was already in.
     env = make_variant_env(variant, seed=61)
     env.reset(seed=61)
 
@@ -984,8 +1127,20 @@ def test_reward_ablation_variants_have_explicit_objectives(variant, monkeypatch)
     assert metrics["return_constraint_cost"] == 0.0
     assert metrics["shaping_potential_delta"] == 0.0
 
-    depletion_penalty = env.depletion_event_penalty * 1
-    cutoff_penalty = env.cutoff_event_penalty * 1
+    # Pinned literals from the frozen contract (`config_1.py:443-444`):
+    # `self.cutoff_event_penalty = 5.0`, `self.depletion_event_penalty =
+    # 10.0`. Reading these back off `env.cutoff_event_penalty` /
+    # `env.depletion_event_penalty` instead is self-referential: the two
+    # heaviest reward weights are then free to drift with no test noticing.
+    # Measured 2026-07-27: config_1.py:443 5.0->8.0 and separately :444
+    # 10.0->15.0 each left 45/45 green under the old attribute lookups.
+    # Standing instruction: if this literal and config_1.py ever disagree,
+    # the config is wrong until a round says otherwise -- never edit this
+    # literal to match the code.
+    cutoff_event_penalty = 5.0
+    depletion_event_penalty = 10.0
+    depletion_penalty = depletion_event_penalty * 1
+    cutoff_penalty = cutoff_event_penalty * 1
 
     if variant == "qos_only":
         expected = 0.0
