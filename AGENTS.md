@@ -375,6 +375,25 @@ The failure this prevents is specific: a guard that cannot fail reads as
 coverage forever after, so the defect it was meant to catch is not merely
 undetected, it is recorded as checked.
 
+**Corollary for this repository — pin the construction-time layout.** Env
+construction sets `np_random = RandomState(seed_val)` with `seed_val` defaulting
+to `None`, so it seeds from **OS entropy**, and `reset(seed=)` does not
+re-derive `ground_bs_positions`. With `randomize_bs` true, the ground-BS layout
+is therefore drawn from entropy at construction and is not reproducible from any
+seed the test passes later.
+
+Any test whose outcome depends on the construction-time layout is a coin flip
+unless it pins coordinates explicitly. On 2026-07-27 one such test read as
+order-dependent and consumed a full investigation — bisecting pairs, a matched
+control at the parent commit, and a whole-suite comparison — before repeated
+isolated runs showed it failing ~20% of the time on its own. Every pairing
+result had been a coin flip. **Two samples cannot separate a cause from a 20%
+coin**; measure the rate before concluding anything about ordering.
+
+The entropy default itself is left standing deliberately: changing it moves the
+estimand, so it is a Project Manager or External Pro decision, never an
+implementer's.
+
 ### Stage A and Stage B — the only two audits, both triggered
 
 ```text
