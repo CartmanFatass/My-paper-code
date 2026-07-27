@@ -360,13 +360,16 @@ name sounds.
 | Inspect the external-review page once and describe it | `hmasd-review-monitor` | expect it to wait, pace itself, or report elapsed time — **you** own the pacing |
 | Transcribe a decided launch or result into `ExpRecord.md` | `hmasd-exp-recorder` | let it classify status |
 | Audit the project's own instructions, roles and skills | `hmasd-doc-auditor` | point it at algorithm code |
-| Generate an adversarial question set for a contract | `hmasd-contract-griller` | dispatch without naming one concrete wrong-claim risk in writing |
 | Anything with no registered owner | `general-purpose`, `opus`, high effort | let it inherit a default model |
 
-`review_stack=false`. `hmasd-reviewer`, `hmasd-verifier` and
-`hmasd-contract-griller` are **risk-triggered, never default stages**. Each must
-pass the workflow value test: name the false scientific assertion it prevents,
-and confirm its total cost is smaller than the waste it avoids.
+Adversarial pre-freeze questioning has no agent: it is the Stage A question you
+write yourself, asking which load-bearing decision the contract makes without
+asking. The standalone griller was retired 2026-07-27.
+
+`review_stack=false`. `hmasd-reviewer` and `hmasd-verifier` are **risk-triggered,
+never default stages**. Each must pass the workflow value test: name the false
+scientific assertion it prevents, and confirm its total cost is smaller than the
+waste it avoids.
 
 ## A duty must be executable by the tool grant that carries it
 

@@ -44,6 +44,19 @@ if (Test-Path (Join-Path $repo '.agents')) {
     throw 'The retired .agents/ role directory is back'
 }
 
+# Every agent the dispatch table names must exist. A table row pointing at a
+# deleted agent_type is a blocker the orchestrator only discovers at dispatch --
+# it survived one session after the griller was retired.
+$agentsRaw = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$tableAgents = [regex]::Matches($agentsRaw, '`(hmasd-[a-z-]+)`') |
+    ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
+foreach ($named in $tableAgents) {
+    if (-not (Test-Path (Join-Path $repo ".claude/agents/$named.md")) -and
+        -not (Test-Path (Join-Path $repo ".claude/skills/$named/SKILL.md"))) {
+        throw "AGENTS.md names a subagent or Skill that does not exist: $named"
+    }
+}
+
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
