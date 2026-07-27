@@ -17,8 +17,39 @@ confirmations rather than taken on trust.
 
 ## Confirmed — the docking speed is a clamp tautology
 
-`config_1.py:504`, `self.docking_horizontal_speed_mps = 3.0` → `1.0`.
-Measured: **44 passed**. A threefold change in a commanded velocity, undetected.
+**Corrected 2026-07-27, and the correction is the more useful half of this
+entry.** The finding stands; the proof first recorded for it was worthless.
+
+The original mutation — `config_1.py:504`,
+`self.docking_horizontal_speed_mps = 3.0` → `1.0`, measured **44 passed** — was
+**inert**. `_build_profile_overrides` (`scenario7_energy_aware.py:208-297`)
+hardcodes `"docking_horizontal_speed_mps": 3.0` as a literal in its overrides
+dict for every scenario7 stage, and `_EnergyAwareConfigProxy.__getattr__`
+(`:14-19`) consults that dict **before** falling through to the base `Config`.
+`config_1.py:504` is therefore never read by any `UAVEnergyAwareRelayEnv`.
+Measured directly: with the config mutated, the raw attribute is `1.0` and the
+live `env.docking_horizontal_speed_mps` is still `3.0`.
+
+So the suite stayed green because **nothing changed**, not because nothing was
+watching. Green under an inert mutation is not evidence of a missing guard, and
+recording it as one is the sweep tool failing in the direction the acceptance
+gate warns about — *toward reporting a gap that has not been demonstrated*. The
+same shape as a guard that cannot go red, one level up.
+
+Re-proven at the anchor that is actually live — `scenario7_energy_aware.py:224`,
+the literal inside the overrides dict, `3.0` → `1.0`:
+
+- against the **original** test: **44 passed**. The guard genuinely cannot fail.
+- against the **repaired** test: `test_four_dimensional_action_semantics_and_docking_speed_limits`
+  goes **red** (`isclose(1.0, 3.0)`).
+
+The finding is real. A threefold change in a commanded velocity is undetected.
+
+**Second finding, free with the correction: `config_1.py:504` is dead code.** A
+configuration field that reads as the governing value and is silently shadowed by
+a hardcoded literal is a trap for the next reader, and it is why an anchor chosen
+by text search was wrong. Anchor identification needs the same scepticism as the
+test: confirm the value you mutate is the value the code reads.
 
 The guard reads
 

@@ -157,14 +157,47 @@ def test_four_dimensional_action_semantics_and_docking_speed_limits():
 
     station = env.charging_station_positions[0].copy()
     env.uav_positions[0] = station + np.array([100.0, 0.0, 20.0])
+    pre_positions = env.uav_positions.copy()
     actions = zero_actions(env)
     actions[env.agents[0]] = np.array([1.0, 1.0, 1.0, 1.0], dtype=np.float32)
     _, velocities = env._prepare_energy_actions(actions)
 
-    assert np.linalg.norm(velocities[0, :2]) <= env.docking_horizontal_speed_mps + 1e-6
+    # Pin the expected docking speed as a LITERAL from the frozen spec
+    # (`config_1.py:504`, `docking_horizontal_speed_mps = 3.0`), not against
+    # the live `env.docking_horizontal_speed_mps` attribute the production
+    # clamp (`_docking_velocity`, ":1643") itself uses -- a clamped value
+    # bounded by its own clamp attribute holds for ANY setting of that
+    # attribute, so it could not have caught `config_1.py:504` being changed
+    # to `1.0` (measured 2026-07-27: 44/44 green under that mutation with the
+    # old assertion). If this literal and the configuration ever disagree,
+    # the configuration is wrong until a round says otherwise -- do not edit
+    # this literal to match the code.
+    expected_docking_horizontal_speed_mps = 3.0
+    horizontal_speed = float(np.linalg.norm(velocities[0, :2]))
+    # The UAV is 100 m out (past both the capture and charging-approach
+    # radii), so the only thing capping horizontal speed here is the
+    # configured docking limit -- not distance/dt, not max_speed (30).
+    assert np.isclose(horizontal_speed, expected_docking_horizontal_speed_mps, atol=1e-6)
+    # Discriminating form: a UAV under a 1.0 m/s docking cap cannot exceed
+    # 1.0 m/s here; only something above it (the configured 3.0) can.
+    assert horizontal_speed > 1.0 + 1e-6
     assert abs(velocities[0, 2]) <= env.docking_vertical_speed_mps + 1e-6
     assert env.uav_dock_requests[0]
     assert env.uav_target_stations[0] == 0
+
+    # Reach: the same speed must move `uav_positions` itself each step, not
+    # just the intermediate `velocities` array this test inspects above --
+    # `_docking_velocity` feeds `commanded_velocities`, which the base
+    # environment's `step` turns directly into displacement.
+    env.step(actions)
+    horizontal_displacement = float(
+        np.linalg.norm(env.uav_positions[0, :2] - pre_positions[0, :2])
+    )
+    assert np.isclose(
+        horizontal_displacement,
+        expected_docking_horizontal_speed_mps * env.time_step,
+        atol=1e-3,
+    )
 
 
 def test_charging_requires_request_capture_and_actual_hover():
@@ -368,6 +401,47 @@ def test_observation_and_state_use_fixed_team_and_station_identity():
     assert observations[agent]["obs"].shape == (env.obs_dim,)
     assert env._get_state().shape == (env.state_dim,)
     assert env.energy_obs_extra_dim == 8 * 13 + 2 * 8
+
+
+def test_energy_observation_slot_k_carries_uav_ks_own_state():
+    # Anchor: `_energy_observation` (":2190") writes each UAV's own 13-field
+    # record at `start = uav_idx * self.energy_uav_obs_dim`. The only
+    # existing test that touches this structure,
+    # `test_observation_and_state_use_fixed_team_and_station_identity`,
+    # asserts dimensions only -- a shape assertion cannot see a permutation.
+    # Measured 2026-07-27: replacing `start` with
+    # `(min(n_uavs, max_energy_observed_uavs) - 1 - uav_idx) *
+    # energy_uav_obs_dim` -- binding every slot to the wrong UAV -- still
+    # left 44/44 green, because the array's shape and the *set* of records it
+    # contains are unchanged; only which slot holds which UAV's record moves.
+    #
+    # This checks CONTENT identity, not shape: every UAV is given a distinct
+    # battery ratio (identical UAVs would make any permutation
+    # undetectable), and slot k must report UAV k's own ratio -- the
+    # `battery_ratio` field at record offset 3, the same field
+    # `_energy_failure_mask` and the safety penalties are keyed on, not a
+    # convenient sibling.
+    env = make_env("S7-S3", seed=63)
+    env.reset(seed=63)
+    assert env.battery_enabled
+
+    n = min(env.n_uavs, env.max_energy_observed_uavs)
+    assert n == env.n_uavs  # fixture precondition: every UAV gets a slot
+    distinct_battery_ratios = np.linspace(0.10, 0.90, n)
+    assert len(set(distinct_battery_ratios)) == n  # genuinely distinguishable
+    env.uav_battery_ratios[:n] = distinct_battery_ratios
+
+    energy_obs = env._energy_observation(0)
+    battery_ratio_field_offset = 3
+
+    for uav_idx in range(n):
+        start = uav_idx * env.energy_uav_obs_dim
+        slot_battery_ratio = energy_obs[start + battery_ratio_field_offset]
+        assert np.isclose(slot_battery_ratio, env.uav_battery_ratios[uav_idx]), (
+            f"slot {uav_idx} reports battery ratio {slot_battery_ratio}, but "
+            f"UAV {uav_idx}'s own battery ratio is "
+            f"{env.uav_battery_ratios[uav_idx]} -- the per-slot record has "
+            "been re-bound to a different UAV")
 
 
 def test_failed_uav_consumes_hover_power_and_s4_keeps_six_active():
@@ -846,31 +920,82 @@ def test_runtime_safety_dual_changes_only_adaptive_return_penalty():
         "qos_adaptive_safety_graph_pbrs",
     ],
 )
-def test_reward_ablation_variants_have_explicit_objectives(variant):
+def test_reward_ablation_variants_have_explicit_objectives(variant, monkeypatch):
+    # Measured 2026-07-27: under the previous fixture (a fresh reset, then a
+    # single `env.step` with all-zero actions) `depletion_penalty` is 0.0 at
+    # this seed and step for every arm, so `qos_depletion_penalty`'s
+    # `- depletion_penalty` term was the identity and deleting it outright at
+    # `envs/pettingzoo/scenario7_energy_aware.py:807` still left every test in
+    # this file green. The five arms realized only two distinct numbers.
+    #
+    # This fixture forces exactly one UAV across the depleted-battery
+    # threshold (`depleted_battery_threshold == 0.0`) for the first time it
+    # is ever checked, which is simultaneously a genuine
+    # `depletion_event_count == 1` and -- because
+    # `service_cutoff_threshold == 0.02 > 0.0` -- a genuine
+    # `cutoff_event_count == 1`. Both penalties are then strictly positive,
+    # so the arms that include them are forced away from the ones that don't.
+    #
+    # `_calculate_constrained_safety_reward` is called directly (the same
+    # pattern `test_cutoff_and_depletion_events_fire_once_per_uav` already
+    # uses) instead of through `env.step`, so QoS and the return margin are
+    # pinned to exact literals rather than left to network physics. The
+    # expected reward for each arm is then a closed-form sum of config-level
+    # constants (`env.cutoff_event_penalty`, `env.depletion_event_penalty`)
+    # and the literal event count (1) this fixture engineers -- never a
+    # value read back out of the same `reward_info` dict the assertion
+    # checks, which is the two-copies trap the previous version of this test
+    # was already in.
     env = make_variant_env(variant, seed=61)
     env.reset(seed=61)
-    _, rewards, _, _, infos = env.step(zero_actions(env))
-    metrics = infos[env.agents[0]]["reward_info"]
-    reward = rewards[env.agents[0]]
+
+    assert env.depleted_battery_threshold == 0.0
+    assert env.service_cutoff_threshold > 0.0
+
+    monkeypatch.setattr(
+        env,
+        "_calculate_end_to_end_user_rates",
+        lambda: (
+            np.zeros(env.n_users),
+            np.zeros((env.n_uavs, env.n_users)),
+            np.zeros(env.n_uavs),
+        ),
+    )
+    monkeypatch.setattr(env, "_normalized_step_energy", lambda: (0.0, 0.0))
+    monkeypatch.setattr(
+        env,
+        "_raw_return_energy_margins",
+        lambda: np.full(env.n_uavs, 0.5),
+    )
+
+    env.uav_battery_ratios[:] = 0.9
+    env.uav_battery_ratios[2] = 0.0
+
+    metrics = env._calculate_constrained_safety_reward(
+        0.0, 0.0, 0.0, 0.0, False, 0.0, {}
+    )
+
+    # Fixture sanity, not the property under test: confirm the engineered
+    # single-UAV crossing produced exactly the counts the expected-value
+    # literals below assume.
+    assert metrics["depletion_event_count"] == 1
+    assert metrics["cutoff_event_count"] == 1
+    assert metrics["qos_satisfaction_ratio"] == 0.0
+    assert metrics["return_constraint_cost"] == 0.0
+    assert metrics["shaping_potential_delta"] == 0.0
+
+    depletion_penalty = env.depletion_event_penalty * 1
+    cutoff_penalty = env.cutoff_event_penalty * 1
 
     if variant == "qos_only":
-        expected = metrics["qos_satisfaction_ratio"]
+        expected = 0.0
     elif variant == "qos_depletion_penalty":
-        expected = (
-            metrics["qos_satisfaction_ratio"]
-            - metrics["depletion_event_penalty"]
-        )
-    elif variant == "qos_fixed_safety":
-        expected = metrics["safety_reward_before_pbrs"]
-        assert metrics["shaping_potential_delta"] == 0.0
+        expected = -depletion_penalty
     else:
-        expected = (
-            metrics["safety_reward_before_pbrs"]
-            + metrics["shaping_potential_delta"]
-        )
+        expected = -cutoff_penalty - depletion_penalty
 
     assert metrics["scenario7_reward_variant"] == variant
-    assert np.isclose(reward, expected)
+    assert np.isclose(metrics["scenario7_reward"], expected)
 
 
 def test_return_constraint_is_zero_for_positive_margins_and_uses_worst_uav(monkeypatch):

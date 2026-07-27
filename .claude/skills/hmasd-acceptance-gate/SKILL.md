@@ -101,6 +101,18 @@ drives the guard **red**. A positive assertion alone is not a guard.
   on 2026-07-27 — `[a-z_]+` stopping at a capital, and a PCRE `(?:` handed to
   `grep -E` — both failed silently *toward reporting full coverage*. A tool that
   under-reports gaps is a guard that cannot go red, one level up.
+- **Prove the mutation took effect before reading the green.** A sweep is an
+  experiment whose treatment can silently fail to be applied, and then green
+  means *nothing changed*, not *nothing was watching* — a false gap rather than a
+  missed one. Found 2026-07-27: mutating `docking_horizontal_speed_mps` in
+  `config_1.py` left the suite at 44 passed and was recorded as an unfailable
+  guard, but `_build_profile_overrides` hardcodes that key and
+  `_EnergyAwareConfigProxy.__getattr__` reads the overrides dict first, so the
+  config field is dead code and the live value never moved. Read the value back
+  through the object under test — here `env.docking_horizontal_speed_mps` was
+  still `3.0` while the raw config said `1.0`. The finding survived re-proof at
+  the live anchor; the evidence for it did not. An anchor found by text search is
+  a candidate, not the value the code reads.
 - Fixtures made degenerate or randomness-free for tractability delete exactly
   the variance the property is about. An environment whose `step()` draws no
   randomness cannot witness a determinism claim.
