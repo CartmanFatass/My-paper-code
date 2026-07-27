@@ -1,0 +1,9 @@
+AUDIT_DISPOSITION=MISMATCH
+
+Frozen assertion: both paths must be projections of the accepted G40 common fast-anchor state, and the projected checkpoint must bind to that independently established G40 checkpoint digest—not merely to whichever model object is supplied at runtime. A malformed or unrelated fast-phase checkpoint must fail before projection.
+
+Conflicting code behavior: project_post_anchor_paths accepts any G40NativeSixPolicy whose phase == "fast", computes its digest locally, and passes that self-derived digest into G41NoSlowProjection. The only external provenance check is the caller-provided source-commit string. build_projected_checkpoint then serializes the same self-derived digest, while reconstruct_static_certificate merely compares it back to the same caller-supplied anchor object. An arbitrary fast-phase G40-shaped model can therefore self-certify as the accepted anchor.
+
+The focused test demonstrates the bypass: _anchor() creates a fresh, untrained g40.make_model(...), not the accepted trained G40 common anchor, yet both the static certificate and the 384-transition guard are permitted to pass.
+
+Smallest in-contract correction: require an independently trusted accepted-G40 anchor digest or validated checkpoint payload as an input to projection; compare the supplied anchor’s complete state digest against that value before constructing either path, optimizer, or projected checkpoint. The certificate must validate against the same external digest rather than recomputing its authority from the anchor under test. Add one focused guard proving that a fresh or tampered fast-phase model fails even when its projected checkpoint is rewritten with its own self-consistent digest. This changes no retained graph, credit rule, update kernel, tolerance, evidence bound, or scientific disposition.
