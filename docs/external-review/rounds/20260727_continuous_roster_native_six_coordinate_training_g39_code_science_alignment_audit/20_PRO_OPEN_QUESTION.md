@@ -13,6 +13,22 @@ formal_compute_started=false
 allowed_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 ```
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_CODE_SCIENCE_INDEX.md`
+- `ha_ctse_process/continuous_roster_native_six_coordinate_training_g39.py`
+- `scripts/run_continuous_roster_native_six_coordinate_training_g39.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_coordinate_training_g39_test.py`
+- `tests/run_continuous_roster_native_six_coordinate_training_g39_test.py`
+
 You are External Pro acting only under `.agents/roles/EXTERNAL_PRO.md`. Inspect
 the exact pushed audit target and the allow-list in
 `01_SHARED_SOURCE_MANIFEST.md`. The index is navigation, not a substitute for

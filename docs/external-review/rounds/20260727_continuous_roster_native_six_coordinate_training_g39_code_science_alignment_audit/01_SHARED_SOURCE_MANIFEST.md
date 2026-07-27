@@ -13,6 +13,8 @@ formal_compute=not_started
 External Pro may inspect only these paths at the exact audit target commit:
 
 - `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 - `docs/external-review/rounds/20260727_continuous_roster_native_six_coordinate_training_g39_design_assertion_audit/21_PRO_OPEN_RAW.md`
