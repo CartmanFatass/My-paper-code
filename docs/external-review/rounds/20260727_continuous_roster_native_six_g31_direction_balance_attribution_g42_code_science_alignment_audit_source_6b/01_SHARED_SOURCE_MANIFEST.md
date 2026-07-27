@@ -1,0 +1,40 @@
+# Shared source manifest: G42 source-6b code-science alignment
+
+```text
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_audit_source_6b
+review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
+audit_target_commit=6b8ea82d8fdbc76c14a414ff2b042a126f945dfb
+implementation_code_commit=6b8ea82d8fdbc76c14a414ff2b042a126f945dfb
+design_source_commit=da113117d2b1988d859b1ad6161533b0c176d5dd
+prior_alignment_stage_commit=9dc84d3372a8e41ead9a5a349689586dc8e772b5
+compute_budget=zero
+```
+
+The submitted question and the following paths are the complete allow-list.
+Read only these paths from the pushed stage commit:
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/project/CURRENT_WORK.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_INDEX.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_nonformal_result_disposition_clarification/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_direction_balance_attribution_g42.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_g31_direction_balance_attribution_g42_test.py`
+- `scripts/run_continuous_roster_native_six_g31_direction_balance_attribution_g42.py`
+- `tests/run_continuous_roster_native_six_g31_direction_balance_attribution_g42_test.py`
+- `ha_ctse_process/continuous_roster_native_six_g31_slow_critic_reduction_g41.py`
+
+The implementation and runner paths are the exact source-6b target under
+review. The prior review files are frozen evidence only; no runtime output or
+unlisted evidence is admitted.
