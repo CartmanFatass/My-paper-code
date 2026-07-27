@@ -118,8 +118,12 @@ foreach ($required in @(
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
 
-# Runtime detail belongs to CLAUDE.md; the constitution stays runtime-agnostic.
-$claude = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
+# Runtime detail belongs to the role that spawns children -- the Project Manager.
+# The constitution stays runtime-agnostic, and CLAUDE.md stays role-agnostic
+# because every subagent loads it and none of them may spawn anything.
+# Relocated from CLAUDE.md 2026-07-27; the assertion is unchanged in strength and
+# gained a second exclusion below.
+$pm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_MANAGER.md')
 foreach ($required in @(
     'subagent_runtime=claude_code',
     'subagent_definitions=.claude/agents/*.md',
@@ -127,7 +131,15 @@ foreach ($required in @(
     'reviewer_tier=opus_high',
     'mechanical_tier=haiku_low',
     'hmasd-experiment-operator')) {
-    if (-not $claude.Contains($required)) { throw "CLAUDE runtime contract missing: $required" }
+    if (-not $pm.Contains($required)) { throw "PROJECT_MANAGER runtime contract missing: $required" }
+}
+
+# CLAUDE.md is loaded by every role, so role-specific policy must not sit there.
+$claude = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
+foreach ($leaked in @('_tier=', 'subagent_runtime=', 'loop_driver=')) {
+    if ($claude.Contains($leaked)) {
+        throw "Role-specific policy leaked into the shared signpost: $leaked"
+    }
 }
 foreach ($leaked in @('_tier=', 'subagent_runtime=', '| Subagent | Tier |')) {
     if ($agents.Contains($leaked)) {
