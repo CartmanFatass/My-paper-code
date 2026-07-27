@@ -2032,6 +2032,11 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                     "duty_positions_at_te": step["duty_positions"],
                     "service_centroids_at_te": service_centroids,
                     "hash_at_te": hash_at_te,
+                    # R3 condition 1C: the complete-state fingerprint of the
+                    # world the event was actually certified in, recorded HERE
+                    # on the live environment. The snapshot must equal it.
+                    "full_fingerprint_at_te": full_state_fingerprint(
+                        env, duty_map=duty_map),
                     "vacated_target": vacated_target,
                     "legal_targets": {
                         "stable": {_target_id(z): z for z in stable_choice["legal_targets"]},
@@ -2126,6 +2131,76 @@ def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
 # R2 section 8 -- shared-prefix realization: one canonical replay, N clones
 # =============================================================================
 
+# Reviewed exclusions from the complete-state fingerprint. The default is
+# INCLUDE: every ndarray and every numeric/bool scalar attribute is hashed
+# unless it is named here. That direction is deliberate -- the defect this
+# fingerprint replaces was a hash that covered a hand-picked subset, so a field
+# nobody thought about was silently outside it. With include-by-default, a newly
+# added mutable field joins the fingerprint automatically and an exclusion has
+# to be argued for in writing.
+FINGERPRINT_EXCLUDED_ATTRS = frozenset({
+    # Pure configuration: fixed for the whole run, identical across every clone
+    # by construction, and noisy in a digest.
+    "n_uavs", "n_users", "area_size", "time_step", "max_speed",
+    "max_vertical_speed_mps", "battery_capacity_wh", "charging_power_w",
+    "n_charging_stations", "return_reserve_ratio",
+    "service_cutoff_threshold", "depleted_battery_threshold",
+    "user_qos_rate_mbps", "episode_steps", "seed_val",
+})
+
+
+def full_state_fingerprint(env, *, duty_map: Optional[dict] = None) -> str:
+    """Canonical digest over every continuation-sensitive state surface.
+
+    Replaces `compute_state_hash` as the load-bearing fixed-history assertion.
+    That function hashes UAV positions, battery, charging, station occupancy and
+    queue, lifecycle mask and duty map -- and nothing else. It therefore
+    certified two environments as the same history while their user populations
+    differed by kilometres, which is the defect Stage B returned MISMATCH on.
+    The narrow hash survives as a cheap subset assertion; it cannot carry
+    fixed-history validity.
+
+    Covers, by including every array and numeric attribute rather than a chosen
+    list: step and episode counters, UAV and user positions and velocities,
+    cluster assignments/centres/velocities/waypoints/pause timers, user
+    waypoints and pause timers, battery/charging/station/queue/docking state,
+    cutoff and depletion latches, connection matrices, SINR, routing paths and
+    channel caches, service-set state, the environment RNG state, duty map and
+    service centroids, lifecycle mask, and topology coordinates.
+    """
+    parts: list[bytes] = []
+    for name in sorted(dir(env)):
+        if name.startswith("__") or name in FINGERPRINT_EXCLUDED_ATTRS:
+            continue
+        try:
+            value = getattr(env, name)
+        except Exception:
+            continue                      # properties that raise are not state
+        if callable(value):
+            continue
+        if isinstance(value, np.ndarray):
+            parts.append(name.encode("utf-8"))
+            parts.append(str(value.shape).encode("utf-8"))
+            parts.append(str(value.dtype).encode("utf-8"))
+            parts.append(np.ascontiguousarray(value).tobytes())
+        elif isinstance(value, (bool, int, float, np.integer, np.floating, np.bool_)):
+            parts.append(name.encode("utf-8"))
+            parts.append(repr(float(value)).encode("utf-8"))
+        elif isinstance(value, (list, tuple)) and value and all(
+                isinstance(v, (bool, int, float, np.integer, np.floating)) for v in value):
+            parts.append(name.encode("utf-8"))
+            parts.append(np.asarray(value, dtype=float).tobytes())
+
+    parts.append(b"__rng__")
+    parts.append(_rng_state_token(env).encode("utf-8"))
+
+    if duty_map is not None:
+        parts.append(b"__duty_map__")
+        parts.append(repr(tuple(sorted(dict(duty_map).items()))).encode("utf-8"))
+
+    return hashlib.sha256(b"".join(parts)).hexdigest()
+
+
 class CloneIsolationError(RuntimeError):
     """A continuation clone failed one of R2 section 8's Stage-B blocking
     conditions (clone equivalence, mutation isolation, RNG isolation, topology
@@ -2174,25 +2249,36 @@ class EventSnapshot:
     never run sequentially on one mutated clone.
     """
 
-    def __init__(self, env, *, coord_hash: str, hash_at_te: str, duty_map_at_te: dict):
+    def __init__(self, env, *, coord_hash: str, hash_at_te: str, duty_map_at_te: dict,
+                  certified_fingerprint: Optional[str] = None):
         self._env = env
         self.coord_hash = coord_hash
         self.hash_at_te = hash_at_te
         self.duty_map_at_te = dict(duty_map_at_te)
         self.baseline_cutoff, self.baseline_depletion = _baseline_masks(env)
-        self._source_state_hash = compute_state_hash(
+        self.full_fingerprint = full_state_fingerprint(env, duty_map=self.duty_map_at_te)
+        self._narrow_hash = compute_state_hash(
             real_env_state_snapshot(env, self.duty_map_at_te))
         self._source_rng_token = _rng_state_token(env)
         self.clones_issued = 0
 
+        # Condition 1C -- event identity. When the snapshot is captured directly
+        # off the live certified environment these are the same object, so this
+        # is cheap; it still catches mutation between certification and capture.
+        if certified_fingerprint is not None and certified_fingerprint != self.full_fingerprint:
+            raise CloneIsolationError(
+                f"event identity failed: the captured snapshot does not match the "
+                f"fingerprint recorded at certification "
+                f"(certified {certified_fingerprint}, captured {self.full_fingerprint})")
+
     # -- condition 2: the immutable source must survive every clone unchanged --
     def assert_source_intact(self, *, context: str = "") -> None:
-        current = compute_state_hash(real_env_state_snapshot(self._env, self.duty_map_at_te))
-        if current != self._source_state_hash:
+        current = full_state_fingerprint(self._env, duty_map=self.duty_map_at_te)
+        if current != self.full_fingerprint:
             raise CloneIsolationError(
                 f"mutation isolation failed{(' (' + context + ')') if context else ''}: "
                 f"the immutable event snapshot changed after a clone was issued "
-                f"(expected {self._source_state_hash}, got {current})")
+                f"(expected {self.full_fingerprint}, got {current})")
 
     def clone(self, *, context: str = ""):
         """One independent continuation environment, cloned from the immutable
@@ -2222,97 +2308,117 @@ class EventSnapshot:
                 f"clone topology hash mismatch{(' (' + context + ')') if context else ''}: "
                 f"expected {self.coord_hash}, got {clone_coord_hash}")
 
-        # condition 5 -- complete-state restoration, against the certified t_e hash
-        clone_state_hash = compute_state_hash(
-            real_env_state_snapshot(env, self.duty_map_at_te))
-        if clone_state_hash != self.hash_at_te:
+        # condition 5 -- complete-state restoration, against the FULL fingerprint.
+        # The narrow hash cannot carry this: it was equal for two environments
+        # whose users differed by kilometres, which is the whole Stage B finding.
+        clone_fingerprint = full_state_fingerprint(env, duty_map=self.duty_map_at_te)
+        if clone_fingerprint != self.full_fingerprint:
             raise CloneIsolationError(
                 f"complete-state restoration failed{(' (' + context + ')') if context else ''}: "
-                f"clone state hash {clone_state_hash} != certified t_e hash {self.hash_at_te}")
+                f"clone fingerprint {clone_fingerprint} != source {self.full_fingerprint}")
 
         # condition 2 -- issuing the clone did not disturb the source
         self.assert_source_intact(context=context)
         return env
 
 
-def materialize_event_snapshot(config, *, coords: dict, coord_hash: str, episode_seed: int,
-                                recorded_actions: list, expected_hash: str, duty_map_at_te: dict,
-                                energy_permutation: Optional[np.ndarray] = None,
-                                energy_stage: str = "S3") -> EventSnapshot:
-    """R2 steps 1-3: one canonical prefix replay, verified against the
-    evaluator-certified event history, captured as an immutable snapshot.
+def capture_event_snapshot(live_env, *, coord_hash: str, event: dict) -> EventSnapshot:
+    """R3: capture the immutable snapshot **directly from the live evaluator
+    environment** at the moment the event was certified.
 
-    Raises `PrefixReplayMismatchError` exactly as `replay_prefix` does. Under
-    the shared-prefix realization that failure now invalidates the WHOLE event
-    rather than one replicate -- there is only one replay, so its failure is
-    the fixed-history guarantee failing for the event."""
-    env = replay_prefix(
-        config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-        recorded_actions=recorded_actions, expected_hash=expected_hash,
-        duty_map_at_te=duty_map_at_te, energy_permutation=energy_permutation,
-        energy_stage=energy_stage)
-    return EventSnapshot(env, coord_hash=coord_hash, hash_at_te=expected_hash,
-                          duty_map_at_te=duty_map_at_te)
+    This replaces reconstruction, and the distinction is the whole Stage B
+    finding. The previous route certified the event in one world, then rebuilt a
+    "canonical" snapshot by replaying the recorded actions into a FRESH
+    environment -- whose user and cluster population belongs to a different
+    world -- and accepted it because a narrow hash over UAV-only fields agreed.
+    Every continuation then ran in that second world while the focal identities,
+    legal targets, duty map and service centroids came from the first. Cloning
+    made all arms share the wrong world consistently; it did not make it the
+    right one.
+
+    Capturing off the live environment removes the reconstruction step entirely,
+    so there is no second world to disagree with. Ordering still matters: this
+    must be called BEFORE any continuation-specific RNG is installed, so that
+    issuing a clone cannot consume a registered continuation stream.
+
+    `replay_prefix` is retained in this module as a historical diagnostic and is
+    no longer on the conclusion-bearing path."""
+    return EventSnapshot(
+        live_env,
+        coord_hash=coord_hash,
+        hash_at_te=event["hash_at_te"],
+        duty_map_at_te=event["duty_map_at_te"],
+        certified_fingerprint=event.get("full_fingerprint_at_te"))
 
 
-def verify_clone_equivalence_against_replay(config, *, coords: dict, coord_hash: str,
-                                             episode_seed: int, recorded_actions: list,
-                                             expected_hash: str, event: dict, limb: str,
-                                             continuation_seed: int,
-                                             schedule: str = "constructive_mixed",
-                                             focal_uav: Optional[int] = None, focal_target=None,
-                                             locked_duties: frozenset = frozenset(),
-                                             energy_permutation: Optional[np.ndarray] = None,
-                                             energy_stage: str = "S3") -> dict:
-    """Stage-B condition 1 (clone equivalence): one continuation executed on a
-    clone of the canonical snapshot must be exact-numerically identical to the
-    same continuation obtained by the previous independent-replay route under
-    the same continuation seed.
+def verify_clone_conformance(snapshot: EventSnapshot, *, event: dict, limb: str,
+                              continuation_seed: int, other_seed: Optional[int] = None,
+                              horizon: Optional[int] = None,
+                              schedule: str = "constructive_mixed") -> dict:
+    """R3 conditions 1A and 1B, replacing the comparison to an independent
+    replay.
 
-    This is why `replay_prefix` is deliberately retained rather than deleted
-    with the old call sites: it is the reference oracle, and without it the
-    equivalence this condition demands is unprovable. Returns both G totals and
-    the verdict; raises nothing, so a caller can report rather than crash."""
-    duty_map_at_te = event["duty_map_at_te"]
-    h_val = H_STABLE if limb == "stable" else H_FLEX
+    The superseded condition 1 asked a clone continuation to equal one obtained
+    by rebuilding the environment from scratch. That reference route is
+    nondeterministic across constructions, so the condition demanded the correct
+    mechanism reproduce the broken one -- it was unsatisfiable and inverted. It
+    is deleted rather than kept, along with the monkeypatched deterministic
+    oracle that made it appear to pass.
 
-    def _one(env) -> dict:
+    **1A same snapshot, same stream.** Two independent clones of one snapshot,
+    given the same `stream_seed` and the same arm semantics, must produce
+    identical G component series, total G and duty-map evolution.
+
+    **1B stream isolation.** A clone given a different continuation stream must
+    start from identical non-RNG state and differ only through the registered
+    RNG. It is explicitly *not* required to produce a different trajectory -- a
+    stochastic stream may go unused, or two draws may coincide -- so a
+    difference is reported, never asserted.
+    """
+    h_val = int(horizon if horizon is not None else (H_STABLE if limb == "stable" else H_FLEX))
+
+    def _one(seed: int) -> dict:
+        env = snapshot.clone(context=f"conformance limb={limb} seed={seed}")
+        pre = full_state_fingerprint(env, duty_map=snapshot.duty_map_at_te)
         baseline_cutoff, baseline_depletion = _baseline_masks(env)
         out = fork_continuation(
-            env, duty_map_at_te=duty_map_at_te,
+            env, duty_map_at_te=event["duty_map_at_te"],
             duty_positions_at_te=event["duty_positions_at_te"],
             service_centroids_at_te=event["service_centroids_at_te"],
-            schedule=schedule, horizon=h_val, continuation_seed=continuation_seed,
-            focal_uav=focal_uav, focal_target=focal_target, locked_duties=locked_duties)
-        return window_g_from_step_metrics(
+            schedule=schedule, horizon=h_val, continuation_seed=seed)
+        g = window_g_from_step_metrics(
             out["step_metrics"], out["qos_user_steps"], h=h_val,
             baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+        return {"pre_stream_fingerprint": pre, "g": g}
 
-    replay_kwargs = dict(
-        coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-        recorded_actions=recorded_actions, expected_hash=expected_hash,
-        duty_map_at_te=duty_map_at_te, energy_permutation=energy_permutation,
-        energy_stage=energy_stage)
+    a = _one(continuation_seed)
+    b = _one(continuation_seed)
 
-    snapshot = materialize_event_snapshot(config, **replay_kwargs)
-    clone_g = _one(snapshot.clone(context="clone equivalence check"))
+    same_stream_identical = bool(
+        a["g"]["g_total"] == b["g"]["g_total"]
+        and np.array_equal(a["g"]["g_series"], b["g"]["g_series"]))
 
-    # The independent route: a second full replay from reset, exactly as the
-    # superseded contract performed for every replicate.
-    reference_env = replay_prefix(config, **replay_kwargs)
-    reference_g = _one(reference_env)
-
-    equivalent = bool(clone_g["g_total"] == reference_g["g_total"]
-                       and np.array_equal(clone_g["g_series"], reference_g["g_series"]))
-    return {
-        "equivalent": equivalent,
-        "clone_g_total": float(clone_g["g_total"]),
-        "reference_g_total": float(reference_g["g_total"]),
-        "max_abs_series_delta": (float(np.max(np.abs(clone_g["g_series"] - reference_g["g_series"])))
-                                  if clone_g["g_series"].shape == reference_g["g_series"].shape
-                                     and clone_g["g_series"].size else None),
+    out: dict = {
+        "condition_1a_same_stream_identical": same_stream_identical,
+        "pre_stream_state_equal": a["pre_stream_fingerprint"] == b["pre_stream_fingerprint"],
+        "g_total": float(a["g"]["g_total"]),
         "source_intact": True,
     }
+
+    if other_seed is not None:
+        c = _one(other_seed)
+        out["condition_1b_pre_stream_state_equal"] = bool(
+            a["pre_stream_fingerprint"] == c["pre_stream_fingerprint"])
+        out["different_stream_g_total"] = float(c["g"]["g_total"])
+        out["different_stream_changed_trajectory"] = bool(
+            not np.array_equal(a["g"]["g_series"], c["g"]["g_series"]))
+
+    try:
+        snapshot.assert_source_intact(context="conformance")
+    except CloneIsolationError:
+        out["source_intact"] = False
+
+    return out
 
 
 def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
@@ -2476,23 +2582,20 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     results = {}
     invalidated_pairs: list = []
 
-    # R2 steps 1-3: ONE canonical evaluator-certified replay for this event.
-    # The same snapshot serves both limbs -- they begin at the same registered
-    # joint event -- while focal intervention, locked duties and horizon stay
-    # limb-specific.
+    # R3: capture DIRECTLY off the live certified environment. No second
+    # fresh-environment replay, so there is no second user world to disagree
+    # with. The same snapshot serves both limbs -- they begin at the same
+    # registered joint event -- while focal intervention, locked duties and
+    # horizon stay limb-specific.
     try:
-        snapshot = materialize_event_snapshot(
-            config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-            recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
-            duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-            energy_stage=energy_stage)
-    except PrefixReplayMismatchError as exc:
-        # R2 failure semantics: with one replay per event, its failure is the
-        # fixed-history guarantee failing for the WHOLE event, not one arm.
+        snapshot = capture_event_snapshot(env, coord_hash=coord_hash, event=event)
+    except CloneIsolationError as exc:
+        # Condition 1C failed: the environment moved between certification and
+        # capture. That voids the whole event; it is never repaired.
         invalidated_pairs.append({
             "topology_seed": topology_seed, "episode_seed": episode_seed,
             "block": "calibration", "limb": "both",
-            "schedule": "canonical_prefix_replay", "reason": str(exc),
+            "schedule": "live_event_capture", "reason": str(exc),
         })
         return {
             "support_miss": False, "invalidated": True,
@@ -2795,20 +2898,16 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             continue
         event = prefix["event"]
 
-        # R2 steps 1-3: ONE canonical replay for this event, shared by both
-        # limbs. Its failure invalidates the whole event -- there is no second
-        # replay to fall back on -- so the event is not counted as qualifying.
+        # R3: capture DIRECTLY off the live certified environment, shared by
+        # both limbs. A condition-1C failure means the world moved between
+        # certification and capture, which voids the whole event.
         try:
-            snapshot = materialize_event_snapshot(
-                config, coords=coords, coord_hash=coord_hash, episode_seed=ep_seed,
-                recorded_actions=prefix["recorded_actions"], expected_hash=event["hash_at_te"],
-                duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies,
-                energy_stage=energy_stage)
-        except PrefixReplayMismatchError as exc:
+            snapshot = capture_event_snapshot(env, coord_hash=coord_hash, event=event)
+        except CloneIsolationError as exc:
             invalidated_pairs.append({
                 "topology_seed": topology_seed, "episode_seed": ep_seed,
                 "block": "audit", "limb": "both",
-                "candidate_id": "canonical_prefix_replay", "phase": "replay",
+                "candidate_id": "live_event_capture", "phase": "capture",
                 "replicate_index": 0, "reason": str(exc),
             })
             print(f"[progress] topology_seed={topology_seed} audit episode={idx} "

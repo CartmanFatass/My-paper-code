@@ -127,15 +127,14 @@ def main() -> None:
     recorded_actions = prefix["recorded_actions"]
     report["t_e_steps"] = len(recorded_actions)
 
-    # --- the canonical replay + snapshot -------------------------------------
+    # --- R3: capture directly off the LIVE certified environment -------------
+    # No reconstruction replay. `env` here is the very environment the event was
+    # certified in, so there is no second user world to disagree with.
     t0 = time.time()
-    snapshot = audit.materialize_event_snapshot(
-        config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-        recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
-        duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies)
-    report["canonical_replay_seconds"] = time.time() - t0
-    report["replay_seconds_per_step"] = (report["canonical_replay_seconds"]
-                                          / max(1, len(recorded_actions)))
+    snapshot = audit.capture_event_snapshot(env, coord_hash=coord_hash, event=event)
+    report["live_capture_seconds"] = time.time() - t0
+    report["reconstruction_replays_performed"] = 0
+    report["full_fingerprint_at_te"] = snapshot.full_fingerprint[:16]
 
     # --- conditions 2-5, on the real object ----------------------------------
     t0 = time.time()
@@ -169,44 +168,46 @@ def main() -> None:
         source_intact = False
     report["condition_2_mutation_isolated"] = bool(sibling_untouched and source_intact)
 
-    # --- condition 1: clone vs independent replay ----------------------------
+    # --- conditions 1A / 1B, both clones off ONE live snapshot ---------------
     h = int(args.equivalence_horizon)
     cont_seed = audit.stream_seed(
         topology_seed=args.topology_seed, block="audit", episode_seed=episode_seed,
         limb="stable", event_index=0, candidate_target_id="KEEP",
         phase="evaluate", replicate_index=0)
-
-    def _run(e) -> dict:
-        bc, bd = audit._baseline_masks(e)
-        out = audit.fork_continuation(
-            e, duty_map_at_te=event["duty_map_at_te"],
-            duty_positions_at_te=event["duty_positions_at_te"],
-            service_centroids_at_te=event["service_centroids_at_te"],
-            schedule="constructive_mixed", horizon=h, continuation_seed=cont_seed)
-        return audit.window_g_from_step_metrics(
-            out["step_metrics"], out["qos_user_steps"], h=h,
-            baseline_cutoff_mask=bc, baseline_depletion_mask=bd)
+    other_seed = audit.stream_seed(
+        topology_seed=args.topology_seed, block="audit", episode_seed=episode_seed,
+        limb="stable", event_index=0, candidate_target_id="KEEP",
+        phase="evaluate", replicate_index=1)
 
     t0 = time.time()
-    g_clone = _run(snapshot.clone(context="equivalence clone"))
-    clone_cont_seconds = time.time() - t0
-    report["continuation_seconds_per_step"] = clone_cont_seconds / max(1, h)
+    verdict = audit.verify_clone_conformance(
+        snapshot, event=event, limb="stable", continuation_seed=cont_seed,
+        other_seed=other_seed, horizon=h)
+    report["continuation_seconds_per_step"] = (time.time() - t0) / max(1, 3 * h)
 
-    reference_env = audit.replay_prefix(
-        config, coords=coords, coord_hash=coord_hash, episode_seed=episode_seed,
-        recorded_actions=recorded_actions, expected_hash=event["hash_at_te"],
-        duty_map_at_te=event["duty_map_at_te"], energy_permutation=energies)
-    g_ref = _run(reference_env)
+    report["condition_1a_same_stream_identical"] = verdict["condition_1a_same_stream_identical"]
+    report["condition_1b_pre_stream_state_equal"] = verdict.get(
+        "condition_1b_pre_stream_state_equal")
+    report["different_stream_changed_trajectory"] = verdict.get(
+        "different_stream_changed_trajectory")
+    report["g_total"] = verdict["g_total"]
 
-    report["clone_g_total"] = float(g_clone["g_total"])
-    report["reference_g_total"] = float(g_ref["g_total"])
-    report["condition_1_clone_equivalence"] = bool(
-        g_clone["g_total"] == g_ref["g_total"]
-        and np.array_equal(g_clone["g_series"], g_ref["g_series"]))
-    report["max_abs_series_delta"] = float(
-        np.max(np.abs(g_clone["g_series"] - g_ref["g_series"]))) if h else 0.0
+    # --- cross-limb: one snapshot must serve both limbs identically ----------
+    # Pro requires this demonstrated. The compact witness is a neutral
+    # continuation with no focal intervention through both limb call paths:
+    # same snapshot, same stream, same horizon, no limb-specific locks.
+    stable_side = audit.verify_clone_conformance(
+        snapshot, event=event, limb="stable", continuation_seed=cont_seed, horizon=h)
+    flex_side = audit.verify_clone_conformance(
+        snapshot, event=event, limb="flex", continuation_seed=cont_seed, horizon=h)
+    report["cross_limb_identical"] = bool(
+        stable_side["g_total"] == flex_side["g_total"]
+        and stable_side["pre_stream_state_equal"]
+        and flex_side["pre_stream_state_equal"])
 
-    conditions = [report["condition_1_clone_equivalence"],
+    conditions = [report["condition_1a_same_stream_identical"],
+                  bool(report["condition_1b_pre_stream_state_equal"]),
+                  report["cross_limb_identical"],
                   report["condition_2_mutation_isolated"],
                   report["condition_3_rng_isolated"],
                   report["condition_4_topology_preserved"],
@@ -223,8 +224,12 @@ def main() -> None:
     print(f"topology_seed={args.topology_seed} episode_seed={episode_seed} "
           f"t_e={report.get('t_e_steps')} steps")
     print()
-    print(f"  condition 1  clone equivalence vs independent replay : "
-          f"{_fmt(report['condition_1_clone_equivalence'])}")
+    print(f"  condition 1A same snapshot, same stream, identical   : "
+          f"{_fmt(report['condition_1a_same_stream_identical'])}")
+    print(f"  condition 1B different stream, same pre-stream state : "
+          f"{_fmt(bool(report['condition_1b_pre_stream_state_equal']))}")
+    print(f"  cross-limb   one snapshot serves both limbs          : "
+          f"{_fmt(report['cross_limb_identical'])}")
     print(f"  condition 2  mutation isolation                      : "
           f"{_fmt(report['condition_2_mutation_isolated'])}")
     print(f"  condition 3  RNG isolation                           : "
@@ -235,7 +240,7 @@ def main() -> None:
           f"{_fmt(report['condition_5_state_restored'])}")
     print()
     print(f"  deepcopy per clone      : {report['deepcopy_seconds']:.3f} s")
-    print(f"  replay      s/step      : {report['replay_seconds_per_step']:.4f}")
+    print(f"  reconstruction replays  : {report['reconstruction_replays_performed']}")
     print(f"  continuation s/step     : {report['continuation_seconds_per_step']:.4f}")
     print(f"  elapsed                 : {report['elapsed_seconds']:.1f} s")
     print()

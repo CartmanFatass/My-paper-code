@@ -1779,13 +1779,12 @@ def test_run_audit_event_voids_the_whole_event_when_a_clone_fails():
     assert len(result["eval_keep"]) == 1
 
 
-def test_run_calibration_episode_voids_the_episode_when_the_canonical_replay_fails(monkeypatch):
-    """R2: there is exactly ONE canonical prefix replay per calibration
-    episode, shared by both limbs, so a `PrefixReplayMismatchError` on it is
-    the fixed-history guarantee failing for the whole episode. It is reported
-    once against `canonical_prefix_replay` -- not once per limb/schedule as
-    the superseded per-replicate route did -- and the episode contributes to
-    neither `B_m` nor `D_A`, never repaired or retried."""
+def test_run_calibration_episode_voids_the_episode_when_event_identity_fails(monkeypatch):
+    """R3 condition 1C. The snapshot is captured off the live certified
+    environment, so the failure mode is no longer a replay mismatch -- it is the
+    world having moved between certification and capture. Reported once against
+    `live_event_capture` for both limbs, and the episode contributes to neither
+    `B_m` nor `D_A`, never repaired or retried."""
     fake_event = {
         "hash_at_te": "h", "duty_map_at_te": {0: 0}, "duty_positions_at_te": {},
         "service_centroids_at_te": None, "conformance_record": {},
@@ -1798,22 +1797,17 @@ def test_run_calibration_episode_voids_the_episode_when_the_canonical_replay_fai
         lambda env, **k: {"event": fake_event, "exclusions": [], "recorded_actions": []},
     )
 
-    calls = {"n": 0}
-
-    def _failing_replay_prefix(*args, **kwargs):
-        calls["n"] += 1
-        raise audit.PrefixReplayMismatchError("injected mismatch")
-
-    monkeypatch.setattr(audit, "replay_prefix", _failing_replay_prefix)
+    # R3 failure mode: the world moved between certification and capture, so the
+    # snapshot's fingerprint does not match the one recorded at certification.
+    fake_event["full_fingerprint_at_te"] = "a-fingerprint-from-a-different-world"
 
     result = audit.run_calibration_episode(
         config=None, topology_seed=1, episode_seed=1, energy_seed=1, coords={}, coord_hash="x")
 
     assert result["support_miss"] is False
     assert result["invalidated"] is True
-    assert calls["n"] == 1                          # ONE canonical replay, not one per arm
     assert len(result["invalidated_pairs"]) == 1
-    assert result["invalidated_pairs"][0]["schedule"] == "canonical_prefix_replay"
+    assert result["invalidated_pairs"][0]["schedule"] == "live_event_capture"
     assert result["invalidated_pairs"][0]["limb"] == "both"
     assert result["results"] == {}                  # neither limb contributes B_m or D_A
 
@@ -1888,19 +1882,42 @@ def test_cloning_consumes_no_source_rng_condition_3():
     assert snap.clones_issued == 5
 
 
-def test_clone_raises_when_the_certified_state_hash_does_not_match():
-    """Condition 5's failure direction: a snapshot whose recorded t_e hash does
-    not describe its own env must refuse to issue clones rather than hand out a
-    silently wrong starting state."""
+def test_capture_rejects_a_snapshot_that_does_not_match_the_certified_world():
+    """R3 condition 1C, the check that would have caught the Stage B defect.
+
+    A snapshot whose complete-state fingerprint differs from the one recorded
+    when the event was certified is a snapshot of a DIFFERENT world, and must be
+    refused at construction rather than handed out as the certified history.
+    Under the superseded route this is exactly what happened silently, because
+    the only check was a narrow UAV-only hash that agreed across worlds."""
     env = _CloneableFakeEnv(seed=25)
     duty_map = {i: i for i in range(env.n_uavs)}
-    bad = audit.EventSnapshot(
-        env,
-        coord_hash=audit.coordinate_hash(env.ground_bs_positions, env.charging_station_positions),
-        hash_at_te="not-the-certified-hash",
-        duty_map_at_te=duty_map)
     with pytest.raises(audit.CloneIsolationError):
-        bad.clone()
+        audit.EventSnapshot(
+            env,
+            coord_hash=audit.coordinate_hash(env.ground_bs_positions,
+                                              env.charging_station_positions),
+            hash_at_te=audit.compute_state_hash(
+                audit.real_env_state_snapshot(env, duty_map)),
+            duty_map_at_te=duty_map,
+            certified_fingerprint="a-fingerprint-from-a-different-world")
+
+
+def test_full_fingerprint_separates_worlds_the_narrow_hash_cannot():
+    """Why the fingerprint replaced the hash as the load-bearing assertion."""
+    a = _CloneableFakeEnv(seed=40)
+    b = _CloneableFakeEnv(seed=40)
+    duty_map = {i: i for i in range(a.n_uavs)}
+
+    # Same UAV-side state, different user world.
+    b.user_positions = a.user_positions + 500.0
+
+    assert (audit.compute_state_hash(audit.real_env_state_snapshot(a, duty_map))
+            == audit.compute_state_hash(audit.real_env_state_snapshot(b, duty_map))), (
+        "precondition: the narrow hash is blind to user state")
+    assert (audit.full_state_fingerprint(a, duty_map=duty_map)
+            != audit.full_state_fingerprint(b, duty_map=duty_map)), (
+        "the fingerprint must see what the narrow hash cannot")
 
 
 def test_clone_raises_on_a_topology_hash_mismatch():
@@ -1914,42 +1931,44 @@ def test_clone_raises_on_a_topology_hash_mismatch():
         bad.clone()
 
 
-def test_clone_and_independent_replay_agree_condition_1(monkeypatch):
-    """Condition 1, the one that justifies the whole change: a continuation run
-    on a clone must be exact-numerically identical to the same continuation run
-    off an independent full replay under the same continuation seed. This is
-    why `replay_prefix` is retained rather than deleted -- it is the reference
-    oracle, and deleting it would make this condition unprovable."""
-    monkeypatch.setattr(audit, "replay_prefix", lambda *a, **k: _CloneableFakeEnv(seed=27))
+def test_conditions_1a_and_1b_on_one_live_snapshot():
+    """R3's replacement for the unsatisfiable condition 1. No monkeypatched
+    deterministic oracle: both clones come from ONE real snapshot.
 
-    geometry = _CloneableFakeEnv(seed=27)
-    duty_map = {i: i for i in range(geometry.n_uavs)}
-    duty_positions, centroids = audit.compute_duty_positions(geometry)
+    1A -- same snapshot, same stream, identical results.
+    1B -- a different stream starts from identical non-RNG state. It is NOT
+    required to change the trajectory; a stochastic stream may go unused, so a
+    difference is reported rather than asserted."""
+    source = _CloneableFakeEnv(seed=27)
+    duty_map = {i: i for i in range(source.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(source)
+    snap = _snapshot_of(source, duty_map=duty_map)
     event = {
-        "hash_at_te": audit.compute_state_hash(
-            audit.real_env_state_snapshot(geometry, duty_map)),
+        "hash_at_te": snap.hash_at_te,
         "duty_map_at_te": duty_map,
         "duty_positions_at_te": duty_positions,
         "service_centroids_at_te": centroids,
     }
-    verdict = audit.verify_clone_equivalence_against_replay(
-        config=None,
-        coords={},
-        coord_hash=audit.coordinate_hash(geometry.ground_bs_positions,
-                                          geometry.charging_station_positions),
-        episode_seed=1, recorded_actions=[], expected_hash=event["hash_at_te"],
-        event=event, limb="stable", continuation_seed=987654321)
 
-    assert verdict["equivalent"] is True
-    assert verdict["clone_g_total"] == verdict["reference_g_total"]
-    assert verdict["max_abs_series_delta"] == 0.0
+    verdict = audit.verify_clone_conformance(
+        snap, event=event, limb="stable", continuation_seed=987654321,
+        other_seed=123456789, horizon=25)
+
+    assert verdict["condition_1a_same_stream_identical"] is True
+    assert verdict["pre_stream_state_equal"] is True
+    assert verdict["condition_1b_pre_stream_state_equal"] is True
+    assert verdict["source_intact"] is True
 
 
-def test_shared_prefix_replays_once_for_every_continuation_in_an_episode(monkeypatch):
-    """The optimization claim itself, measured rather than asserted: one
-    calibration episode runs five continuations (stable x3 including
-    full_sync_SET, flex x2) and must perform exactly ONE prefix replay. The
-    superseded route performed five."""
+def test_shared_prefix_performs_no_reconstruction_replay_at_all(monkeypatch):
+    """The R3 claim, measured rather than asserted: one calibration episode runs
+    five continuations (stable x3 including full_sync_SET, flex x2) and must
+    perform ZERO reconstruction replays.
+
+    The superseded route replayed five times, each into a fresh environment with
+    its own user world. R2 cut that to one -- which made the arms mutually
+    consistent but still located them in a reconstructed world rather than the
+    certified one. R3 cuts it to none."""
     source = _CloneableFakeEnv(seed=28)
     duty_map = {i: i for i in range(source.n_uavs)}
     duty_positions, centroids = audit.compute_duty_positions(source)
@@ -1983,7 +2002,10 @@ def test_shared_prefix_replays_once_for_every_continuation_in_an_episode(monkeyp
         coords={}, coord_hash=real_coord_hash)
 
     assert result["invalidated"] is False
-    assert calls["n"] == 1
+    # R3: not "one replay" but ZERO. The snapshot is captured off the live
+    # certified environment, so the reconstruction step is gone entirely --
+    # which is what removes the second user world.
+    assert calls["n"] == 0
     assert set(result["results"]) == {"stable", "flex"}
 
 
