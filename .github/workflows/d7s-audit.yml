@@ -19,7 +19,25 @@ name: D7.S event-aligned audit
 # Both are workflow_dispatch only. Nothing here runs on push -- a formal run
 # starts because someone decided to start it.
 
+# TRIGGERS. Tags are the working route, not a convenience.
+#
+# `workflow_dispatch` only works once this file is on the DEFAULT branch
+# (`new-test`); GitHub returns "not found on the default branch" otherwise. This
+# work is scoped to `untied-k` and must not touch another branch, so dispatch is
+# kept for later but cannot be used today.
+#
+# A `push` trigger on a TAG runs from the tagged commit on whatever branch it
+# lives on, and a tag is not a branch — so tagging respects the scope exactly.
+# Tag to run:
+#     git tag d7s-benchmark-<n> && git push origin d7s-benchmark-<n>
+#     git tag d7s-audit-<n>     && git push origin d7s-audit-<n>
+# Tagging is also the right ergonomics for a multi-hour formal run: you tag when
+# you mean it, rather than having every push start one.
 on:
+  push:
+    tags:
+      - "d7s-benchmark-*"
+      - "d7s-audit-*"
   workflow_dispatch:
     inputs:
       mode:
@@ -27,14 +45,10 @@ on:
         type: choice
         options: [benchmark, audit]
         default: benchmark
-      topology_seeds:
-        description: "Space-separated seeds for audit mode. Default is the registered initial set."
-        type: string
-        default: "20260726 20260727 20260728 20260729 20260730 20260731 20260732 20260733"
 
 jobs:
   benchmark:
-    if: inputs.mode == 'benchmark'
+    if: inputs.mode == 'benchmark' || startsWith(github.ref, 'refs/tags/d7s-benchmark')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -65,7 +79,7 @@ jobs:
           path: conformance.txt
 
   audit:
-    if: inputs.mode == 'audit'
+    if: inputs.mode == 'audit' || startsWith(github.ref, 'refs/tags/d7s-audit')
     runs-on: ubuntu-latest
     # 6 h is the GitHub-hosted hard ceiling; a job that reaches it is killed and
     # its shard is lost entirely. Stopping at 350 min instead means an overrun
