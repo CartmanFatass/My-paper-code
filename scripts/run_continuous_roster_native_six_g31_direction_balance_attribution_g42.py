@@ -1562,6 +1562,34 @@ def _training_errors(
     return errors
 
 
+class _G42RetainedEvaluationPolicy:
+    """Expose only the accepted retained actor step to the generic evaluator."""
+
+    __slots__ = ("_projection",)
+
+    def __init__(self, projection: g41.G41NoSlowProjection) -> None:
+        if projection.phase != "credit_branch" or hasattr(
+            projection, "slow_critic"
+        ):
+            raise ValueError("G42 evaluation requires the retained no-slow branch")
+        self._projection = projection
+
+    @property
+    def member_capacity(self) -> int:
+        return self._projection.member_capacity
+
+    @property
+    def hidden_dim(self) -> int:
+        return self._projection.hidden_dim
+
+    def eval(self) -> _G42RetainedEvaluationPolicy:
+        self._projection.eval()
+        return self
+
+    def forward_step(self, **arguments: Any) -> g41.G41ActorStep:
+        return g41.retained_actor_step(self._projection, **arguments)
+
+
 def _evaluate_cell(
     *,
     replicate: int,
@@ -1575,7 +1603,7 @@ def _evaluate_cell(
     contract = _cell_contract(name)
     before = _state_digest(deployed)
     episodes, lifecycle = g40.evaluate_model(
-        deployed,  # type: ignore[arg-type]
+        _G42RetainedEvaluationPolicy(deployed),  # type: ignore[arg-type]
         processes=processes,
         action_seed=action_seed,
         process_kind=str(contract["process"]),

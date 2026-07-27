@@ -261,6 +261,55 @@ def test_authority_and_anchor_binding_fail_before_compute(tmp_path: Path) -> Non
         )
 
 
+def test_retained_projection_evaluation_has_exact_forward_interface(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    prior_threads = torch.get_num_threads()
+    torch.set_num_threads(1)
+    try:
+        payload = torch.load(ANCHOR_FIXTURE, map_location="cpu", weights_only=False)
+        anchor = g41.load_accepted_g40_anchor_checkpoint(
+            payload, accepted_anchor_replicate=0
+        )
+        deployed = g42.project_g42_arms(
+            anchor, accepted_anchor_replicate=0
+        )[g42.DB_ARM]
+        with pytest.raises(ValueError, match="retained no-slow branch"):
+            runner._G42RetainedEvaluationPolicy(deployed)
+        deployed.begin_credit_branch_phase()
+        retained_calls: list[g41.G41NoSlowProjection] = []
+        retained_actor_step = g41.retained_actor_step
+
+        def traced_retained_actor_step(
+            model: g41.G41NoSlowProjection, **arguments: Any
+        ) -> g41.G41ActorStep:
+            retained_calls.append(model)
+            return retained_actor_step(model, **arguments)
+
+        monkeypatch.setattr(g41, "retained_actor_step", traced_retained_actor_step)
+        processes, _ = runner._source_inventory(
+            replicate=0,
+            capacity=8,
+            episode_count=6,
+            formal=False,
+        )
+        row = runner._evaluate_cell(
+            replicate=0,
+            capacity=8,
+            arm=g42.DB_ARM,
+            name=runner.FINAL_RANDOM_DET,
+            processes=processes[:1],
+            action_seed=runner.seed_block(0, formal=False)["evaluation_action"],
+            deployed=deployed,
+        )
+        assert row["lifecycle_valid"] is True
+        assert len(row["episodes"]) == 1
+        assert row["state_before"] == row["state_after"]
+        assert retained_calls == [deployed] * runner.g32.HORIZON
+    finally:
+        torch.set_num_threads(prior_threads)
+
+
 def test_runner_first_update_is_accepted_kernel_and_adam_continues(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
