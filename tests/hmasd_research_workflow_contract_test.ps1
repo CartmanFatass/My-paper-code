@@ -94,14 +94,20 @@ foreach ($required in @(
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_pro_response_sentinel.py',
-    'cross_task_routing=fixed_role_sessions_plus_pre_send_live_settings_probe',
+    'cross_task_routing=fixed_role_sessions_plus_live_settings_canonicalization',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
+    'cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization',
+    'cross_task_route_guard=pretool_live_settings_canonicalization',
     'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
+}
+foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $operationsRole)) {
+    if ($surface.Contains('pre_send_read_only_probe_explicit_echo')) {
+        throw 'Persistent-role routing retains the unguarded explicit-echo contract'
+    }
 }
 
 if ((Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md')).Count -gt 150) {
@@ -268,7 +274,8 @@ foreach ($required in @(
     'current_work_write_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
+    'cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization',
+    'cross_task_route_guard=pretool_live_settings_canonicalization',
     'CODE_SCIENCE_INDEX.md',
     'CODE_ACCEPTED')) {
     if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing: $required" }
@@ -288,7 +295,8 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=exact_fixed_requester_role_session',
     'cross_task_route_cache=forbidden',
-    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo',
+    'cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization',
+    'cross_task_route_guard=pretool_live_settings_canonicalization',
     'never an automatic acceptance gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_mutating_workflow_design',
@@ -345,7 +353,8 @@ foreach ($required in @(
     'Research Operations Manager may request a workflow-design change directly',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo')) {
+    'cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization',
+    'cross_task_route_guard=pretool_live_settings_canonicalization')) {
     if (-not $operationsRole.Contains($required)) {
         throw "Research Operations Manager role missing: $required"
     }

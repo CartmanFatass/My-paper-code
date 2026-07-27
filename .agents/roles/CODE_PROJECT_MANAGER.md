@@ -20,7 +20,8 @@ candidate_trajectory_count_ceiling=16
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
+cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization
+cross_task_route_guard=pretool_live_settings_canonicalization
 cross_task_routing_skill=hmasd-cross-task-routing
 execution_readiness_owner=code_project_manager
 execution_readiness_skill=hmasd-agile-research-development
@@ -119,8 +120,9 @@ and stops; it never takes over operations.
 ## Workflow changes and Git
 
 Code Project Manager may request a workflow-design change directly from the
-fixed Workflow Design Manager session. It first probes and explicitly echoes the
-target's live model and effort. Workflow Design Manager returns the accepted
+fixed Workflow Design Manager session. It probes and supplies the target's live
+model and effort; the registered PreToolUse guard canonicalizes both values
+again at tool execution. Workflow Design Manager returns the accepted
 commit to the requesting Code Project Manager. Code Project Manager never edits
 router, role, Skill, profile, registry or workflow-contract surfaces.
 

@@ -20,7 +20,8 @@ one_artifact_one_acceptance_owner=true
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=exact_fixed_requester_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
+cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization
+cross_task_route_guard=pretool_live_settings_canonicalization
 workflow_change_skill=hmasd-workflow-change-audit
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_collaboration_scope=all_mutating_workflow_design
@@ -58,9 +59,9 @@ not a native child, research coordinator or scientific authority.
   forbidden.
 - Returning the accepted workflow-design commit and exact changed paths through
   `$hmasd-cross-task-routing` to the fixed Code Project Manager or Research
-  Operations Manager session that made the request, after reading and explicitly
-  echoing that session's live model and thinking. A change affecting both roles
-  sends one reload notification to each fixed session.
+  Operations Manager session that made the request, after the read-only probe
+  and registered PreToolUse guard resolve that session's live model and thinking.
+  A change affecting both roles sends one reload notification to each fixed session.
 
 ## Registered review and experiment design
 

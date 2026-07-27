@@ -1,6 +1,19 @@
 {
-  "description": "HMASD Code Project Manager acceptance guard.",
+  "description": "HMASD routing and Code Project Manager acceptance guards.",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^codex_app__send_message_to_thread$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe\" .agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_route_guard.py",
+            "timeout": 5,
+            "statusMessage": "Preserving HMASD target task settings"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [

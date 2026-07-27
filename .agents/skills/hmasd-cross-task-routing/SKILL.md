@@ -1,6 +1,6 @@
 ---
 name: hmasd-cross-task-routing
-description: Use for every cross-task message between persistent HMASD Codex roles. Route through fixed sessions, read the target's live model and effort immediately before sending, explicitly echo them in the visible tool call, and fail closed on settings or delivery errors.
+description: Use for every cross-task message between persistent HMASD Codex roles. Route through fixed sessions, probe the target's live settings, and let the registered PreToolUse guard canonicalize the tool call at execution.
 ---
 
 # HMASD Cross-Task Routing
@@ -27,7 +27,7 @@ forbidden.
 
 The router is the source of truth and this table must mirror it exactly.
 
-## Pre-send live-settings preservation
+## Live-settings preservation
 
 Immediately before every protocol or business send, use the registered HMASD
 Python interpreter to run the bundled read-only probe:
@@ -51,11 +51,28 @@ Route settings are tool parameters only. Message payloads must not contain
 model/effort copies, return model/effort copies, or another field reusable as a
 reverse-route setting.
 
-Any nonzero probe result is `ROUTE_SETTINGS_UNAVAILABLE` and forbids delivery.
-A send tool error is `ROUTE_UNAVAILABLE`; never retry or resend automatically.
-Only after a send error or a user-observed settings anomaly may the sender run
-one diagnostic probe with `--expect-model` and `--expect-thinking`.
-`SETTINGS_DRIFT` becomes `ROUTE_SETTINGS_DRIFT` and is reported without resend.
+The project `PreToolUse` guard matches
+`codex_app__send_message_to_thread`. For a fixed persistent-role target it reads
+the same live settings again immediately at tool execution and returns one
+`updatedInput` containing the original `threadId`, `prompt`, optional `hostId`
+and the current target `model` and `thinking`. It supplies missing settings and
+replaces mismatched settings. It never creates a second message. Calls to other
+targets remain unchanged.
+
+The guard reads the fixed sessions from `AGENTS.md` and opens the Codex state
+database read-only. A missing router identity, archived target, workspace
+mismatch, unsupported state schema or unavailable live setting denies the tool
+call. The guard never writes Codex state and never treats the sender's settings,
+the message payload or a static model value as target truth.
+
+Any nonzero probe or guard settings result is `ROUTE_SETTINGS_UNAVAILABLE` and
+forbids delivery. A send tool error is `ROUTE_UNAVAILABLE`; never retry or resend
+automatically. Only after a send error or a user-observed settings anomaly may
+the sender run one diagnostic probe with `--expect-model` and
+`--expect-thinking`. `SETTINGS_DRIFT` becomes `ROUTE_SETTINGS_DRIFT` and is
+reported without resend. A previously changed target setting is restored only
+by the user in that target task; cross-task routing only preserves the live
+setting present at send time.
 
 ## Session replacement
 
