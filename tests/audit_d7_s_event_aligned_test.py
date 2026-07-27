@@ -883,6 +883,13 @@ def test_full_state_fingerprint_no_repr_key_dict_is_order_independent_across_pro
 
 
 def test_stream_seed_changes_with_any_single_field():
+    """Every field `stream_seed` hashes (:220-223) must be distinguishable,
+    including `contract_id` -- the ninth hashed field (:208, default
+    `CONTRACT_ID`), which is a keyword-only override this test must exercise
+    explicitly rather than leaving at its default across every variant.
+    Dropping `str(contract_id)` from the hashed `fields` tuple leaves every
+    other variant here unaffected, so only a variant that actually varies
+    `contract_id` can catch it."""
     base = audit.stream_seed(**_seed_kwargs())
     variants = [
         _seed_kwargs(topology_seed=20260727),
@@ -893,6 +900,7 @@ def test_stream_seed_changes_with_any_single_field():
         _seed_kwargs(candidate_target_id="z1"),
         _seed_kwargs(phase="evaluate"),
         _seed_kwargs(replicate_index=1),
+        _seed_kwargs(contract_id="OTHER_CONTRACT"),
     ]
     seeds = [audit.stream_seed(**v) for v in variants]
     assert len(set(seeds)) == len(seeds), "each single-field change must be distinguishable"
@@ -1067,6 +1075,113 @@ def test_branch_precedence_invalid_wins_over_everything_else():
     kwargs = _branch_kwargs(conformance_ok=False, support_ok=False,
                              primary_g_degenerate_flag=True, part_a_contradiction=True)
     assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+def test_branch_precedence_zero_bound_does_not_clear_any_predicate():
+    """Boundary guard for the four LCB/UCB predicates (:1060-1063): all ten
+    branch-precedence fixtures above draw bounds from {1.0, -1.0, -2.0, 0.5,
+    2.0} and never exactly 0.0 -- the one value where strict (`> 0` / `< 0`)
+    and non-strict (`>= 0` / `<= 0`) disagree, on the field that decides the
+    published branch. 0.0 is the boundary of a one-sided 95% CI, so it is a
+    realistic value, not a contrived one.
+
+    Every one of the six bound fields that appears in `stable_clears`,
+    `flex_clears`, `flex_affirmative_miss` and `stable_affirmative_miss` is
+    pinned at exactly 0.0 here. Under the frozen strict inequalities none of
+    the four predicates may fire, so precedence must fall through all the way
+    to branch 10. Loosening every `> 0`/`< 0` to `>= 0`/`<= 0` (verbatim) would
+    instead clear both `stable_clears` and `flex_clears` and return
+    `PERSISTENCE_NECESSARY_SOURCE` -- asserting the returned branch string,
+    the field that actually reaches the result."""
+    kwargs = _branch_kwargs(
+        b_stable_lcb=0.0, t_stable_ucb=0.0, t_stable_lcb=0.0,
+        b_flex_lcb=0.0, t_flex_lcb=0.0, t_flex_ucb=0.0,
+    )
+    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+
+
+def test_branch_precedence_stable_clears_isolated_at_its_own_boundary():
+    """The all-zero fixture above catches loosening all four predicates
+    together but NOT one alone: with every bound at 0.0, `stable_clears`
+    stays False under a strict-vs-loosened `flex_clears`-only mutation (for
+    example), because precedence never reaches a branch where `flex_clears`
+    alone would change the outcome. Each predicate needs its OWN isolating
+    fixture, where every OTHER predicate is pinned away from its boundary
+    (so mutating any other single predicate cannot affect this fixture) and
+    only the predicate under test sits exactly at 0.0.
+
+    Here `flex_affirmative_miss` is pinned True via non-boundary values
+    (b_flex_lcb=1.0, t_flex_ucb=-1.0) and `flex_clears` is pinned False via a
+    non-boundary t_flex_lcb=-1.0 -- neither can flip if some OTHER
+    predicate's line is mutated. Only `stable_clears`'s own two bounds sit at
+    0.0. Strict: `stable_clears` False -> falls through to
+    `flex_affirmative_miss` -> NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED. Loosening
+    only `stable_clears`'s `> 0`/`< 0` to `>= 0`/`<= 0` (line 1060) makes it
+    True, which combines with the still-True `flex_affirmative_miss` to give
+    STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL instead -- a
+    discriminating pair verified against an independent logic replica before
+    being pinned here."""
+    kwargs = _branch_kwargs(
+        b_stable_lcb=0.0, t_stable_ucb=0.0, t_stable_lcb=-5.0,
+        b_flex_lcb=1.0, t_flex_lcb=-1.0, t_flex_ucb=-1.0,
+    )
+    assert audit.decide_branch(**kwargs) == "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"
+
+
+def test_branch_precedence_flex_clears_isolated_at_its_own_boundary():
+    """Isolating fixture for `flex_clears` alone (paired with the all-zero
+    fixture and the other three isolating fixtures around it -- see that
+    test's docstring for why a single shared fixture cannot discriminate
+    which predicate moved). `stable_clears` is pinned True via non-boundary
+    values (b_stable_lcb=1.0, t_stable_ucb=-1.0); `flex_affirmative_miss` is
+    pinned False via a non-boundary t_flex_ucb=1.0. Only `flex_clears`'s own
+    two bounds sit at 0.0. Strict: `stable_clears` True, `flex_clears` False
+    -> MATERIAL_STABLE_PERSISTENCE_IDENTIFIED. Loosening only `flex_clears`'s
+    `> 0` to `>= 0` (line 1061) makes it True too, combining with
+    `stable_clears` to give PERSISTENCE_NECESSARY_SOURCE instead."""
+    kwargs = _branch_kwargs(
+        b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
+        b_flex_lcb=0.0, t_flex_lcb=0.0, t_flex_ucb=1.0,
+    )
+    assert audit.decide_branch(**kwargs) == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
+
+
+def test_branch_precedence_flex_affirmative_miss_isolated_at_its_own_boundary():
+    """Isolating fixture for `flex_affirmative_miss` alone. `stable_clears`
+    is pinned False via a non-boundary b_stable_lcb=-1.0 (kills it
+    regardless of t_stable_ucb); `stable_affirmative_miss` is pinned False
+    via that same non-boundary b_stable_lcb=-1.0. Only `flex_affirmative_
+    miss`'s own two bounds (b_flex_lcb, t_flex_ucb) sit at 0.0; t_flex_lcb is
+    pinned non-boundary negative so `flex_clears` stays False regardless.
+    Strict: everything False -> SOURCE_NECESSITY_UNRESOLVED. Loosening only
+    `flex_affirmative_miss`'s `> 0`/`< 0` to `>= 0`/`<= 0` (line 1062) makes
+    it True, which precedes `stable_affirmative_miss` in the first-match
+    order and gives NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED instead."""
+    kwargs = _branch_kwargs(
+        b_stable_lcb=-1.0, t_stable_ucb=-1.0, t_stable_lcb=5.0,
+        b_flex_lcb=0.0, t_flex_lcb=-1.0, t_flex_ucb=0.0,
+    )
+    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+
+
+def test_branch_precedence_stable_affirmative_miss_isolated_at_its_own_boundary():
+    """Isolating fixture for `stable_affirmative_miss` alone. `stable_clears`
+    is pinned False by the SAME b_stable_lcb=0.0 boundary this predicate
+    shares (0>0 is False under the frozen strict `stable_clears` line, which
+    is not mutated by this fixture's target mutation, so it stays False
+    regardless); `flex_clears` and `flex_affirmative_miss` are both pinned
+    False via a non-boundary b_flex_lcb=-1.0 (kills both regardless of
+    t_flex_lcb/t_flex_ucb). Only `stable_affirmative_miss`'s own two bounds
+    (b_stable_lcb, t_stable_lcb) sit at 0.0. Strict: everything False ->
+    SOURCE_NECESSITY_UNRESOLVED. Loosening only `stable_affirmative_miss`'s
+    `> 0` to `>= 0` (line 1063) makes it True, and it is the last predicate
+    checked before the SOURCE_NECESSITY_UNRESOLVED fallback, giving
+    NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED instead."""
+    kwargs = _branch_kwargs(
+        b_stable_lcb=0.0, t_stable_ucb=5.0, t_stable_lcb=0.0,
+        b_flex_lcb=-1.0, t_flex_lcb=5.0, t_flex_ucb=-5.0,
+    )
+    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
 
 
 # =============================================================================
@@ -3217,6 +3332,50 @@ def test_roll_prefix_and_find_event_distinguishes_ineligible_from_uncertified_le
     # item fixes.
     assert len(result["exclusions"]) == 2
     assert planned_leaves_observed > 0 and result["event"] is None
+
+
+# =============================================================================
+# 8b. Minimum support: both limbs must independently clear
+# =============================================================================
+
+MIN_SUPPORT_TOPOLOGIES = audit.MIN_SUPPORT_TOPOLOGIES
+MIN_SUPPORT_EPISODES_PER_TOPOLOGY = audit.MIN_SUPPORT_EPISODES_PER_TOPOLOGY
+
+
+def test_check_minimum_support_requires_both_limbs_independently_sufficient():
+    """Guard for `check_minimum_support` (:1082-1092), which had no test at
+    all: `support_ok = (calib_ok >= MIN_SUPPORT_TOPOLOGIES) and (audit_ok >=
+    MIN_SUPPORT_TOPOLOGIES)`. Mutating that `and` to `or` (verbatim) lets six
+    well-supported calibration topologies with ZERO supported audit
+    topologies report `support_ok=True` and proceed to a bootstrap and branch
+    decision on data the contract says to refuse -- `support_ok` feeds branch
+    2 (`SOURCE_EVENT_SUPPORT_INSUFFICIENT`) in `decide_branch` via `:3694`.
+
+    Each fixture below is sufficient on exactly one limb and insufficient on
+    the other, in both directions, so each fails for its own reason: a
+    fixture that is insufficient on both limbs would pass under `and` and
+    `or` alike and would guard nothing."""
+    calibration_only = [
+        {"qualifying_calibration_episodes": MIN_SUPPORT_EPISODES_PER_TOPOLOGY,
+         "qualifying_audit_episodes": 0}
+        for _ in range(MIN_SUPPORT_TOPOLOGIES)
+    ]
+    ok, diag = audit.check_minimum_support(calibration_only)
+    assert ok is False, (
+        "6 calibration-sufficient / 0 audit-sufficient topologies must refuse")
+    assert diag["calibration_topologies_ok"] == MIN_SUPPORT_TOPOLOGIES
+    assert diag["audit_topologies_ok"] == 0
+
+    audit_only = [
+        {"qualifying_calibration_episodes": 0,
+         "qualifying_audit_episodes": MIN_SUPPORT_EPISODES_PER_TOPOLOGY}
+        for _ in range(MIN_SUPPORT_TOPOLOGIES)
+    ]
+    ok2, diag2 = audit.check_minimum_support(audit_only)
+    assert ok2 is False, (
+        "6 audit-sufficient / 0 calibration-sufficient topologies must refuse")
+    assert diag2["calibration_topologies_ok"] == 0
+    assert diag2["audit_topologies_ok"] == MIN_SUPPORT_TOPOLOGIES
 
 
 # =============================================================================
