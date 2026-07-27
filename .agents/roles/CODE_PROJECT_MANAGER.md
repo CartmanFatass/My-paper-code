@@ -8,7 +8,8 @@ role_kind=persistent_code_and_technical_acceptance_task
 code_authority=exclusive
 technical_acceptance_authority=exclusive
 runtime_authority=none
-current_work_authority=none
+current_work_read=bounded_read_only_on_demand
+current_work_write_authority=none
 scientific_authority=none
 workflow_design_authority=none
 git_execution=direct_for_code_tests_and_code_science_index
@@ -23,11 +24,14 @@ cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 cross_task_routing_skill=hmasd-cross-task-routing
 ```
 
-Read the exact incoming code assignment, this charter and only its named design,
-code and tests. Never load `docs/project/CURRENT_WORK.md`, runtime review rounds,
-run artifacts or portfolio history. Research Operations Manager owns the active
-research loop. External Pro owns science. Workflow Design Manager owns workflow
-design.
+Read the exact incoming code assignment, this charter and its named design,
+code and tests. At assignment intake or before technical acceptance, Code
+Project Manager may read `docs/project/CURRENT_WORK.md` only to check the current
+code boundary, target commit and named contract. This read is optional and does
+not replace a complete incoming assignment. Never edit, stage, commit or advance
+`CURRENT_WORK.md`; never load runtime review rounds, run artifacts or portfolio
+history. Research Operations Manager owns the active research loop. External Pro
+owns science. Workflow Design Manager owns workflow design.
 
 ## Owns
 

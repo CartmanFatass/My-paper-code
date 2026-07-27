@@ -13,14 +13,14 @@ shared boundaries. History, results, budgets and mechanics load only when assign
 ## Precedence and role resolution
 
 Precedence is: direct user instruction, this router, the applicable role
-charter, `docs/project/CURRENT_WORK.md` for Research Operations Manager only,
-the named scientific/design contract, then procedural Skills.
+charter, any role-authorized current-state read, the named scientific/design
+contract, then procedural Skills.
 
 Use exactly one route:
 
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
-| Code Project Manager task | its exact code assignment, `.agents/roles/CODE_PROJECT_MANAGER.md`, then only assignment-named design, code and tests | `CURRENT_WORK.md`, runtime reviews/runs, portfolio and workflow-design history |
+| Code Project Manager task | its exact code assignment, `.agents/roles/CODE_PROJECT_MANAGER.md`, assignment-named design, code and tests, plus bounded read-only `CURRENT_WORK.md` when checking the current code boundary | runtime reviews/runs, portfolio and workflow-design history |
 | Research Operations Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`, then only current-boundary review, runtime, evidence and state paths | implementation details outside an exact Code-PM return, workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
@@ -48,7 +48,8 @@ workflow_design_manager_experiment_runtime_authority=none
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=none
-code_project_manager_current_work_authority=none
+code_project_manager_current_work_read=bounded_read_only_on_demand
+code_project_manager_current_work_write_authority=none
 code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_tests_and_code_science_index
 code_project_manager_remote_repository_authority=permanent_user_grant
@@ -137,7 +138,7 @@ names the smallest necessary subset.
 
 - Git-tracked code and tests are Code Project Manager implementation truth.
 - `logs/<run-id>/` is Research Operations Manager runtime evidence.
-- `docs/project/CURRENT_WORK.md` is Research Operations Manager operational state and no other role loads it.
+- `docs/project/CURRENT_WORK.md` is Research Operations Manager operational state; Code Project Manager may read it on demand only to check the current code boundary and cannot edit, stage, commit or advance it.
 - `docs/project/` holds stable project principles and executable plans.
 - `docs/research/cdc/` holds Pro-adjudicated scientific state mechanically recorded by Research Operations Manager.
 - `docs/external-review/` holds exact external evidence and transport facts.

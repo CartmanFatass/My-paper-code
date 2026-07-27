@@ -25,7 +25,8 @@ $routerRequired = @(
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=none',
-    'code_project_manager_current_work_authority=none',
+    'code_project_manager_current_work_read=bounded_read_only_on_demand',
+    'code_project_manager_current_work_write_authority=none',
     'research_operations_manager_runtime_authority=exclusive',
     'research_operations_manager_current_work_authority=exclusive',
     'research_operations_manager_external_review_transport_authority=exclusive',
@@ -45,11 +46,14 @@ $codeRequired = @(
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
     'runtime_authority=none',
-    'current_work_authority=none',
+    'current_work_read=bounded_read_only_on_demand',
+    'current_work_write_authority=none',
     'scientific_authority=none',
     'git_execution=direct_for_code_tests_and_code_science_index',
     'code_children=code_scout|implementer|reviewer|verifier',
-    'Never load `docs/project/CURRENT_WORK.md`',
+    'may read `docs/project/CURRENT_WORK.md` only to check the current',
+    'not replace a complete incoming assignment',
+    'Never edit, stage, commit or advance',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'Research Operations Manager',
@@ -89,6 +93,9 @@ $forbiddenCodePm = @(
 )
 foreach ($forbidden in $forbiddenCodePm) {
     if ($codePm.Contains($forbidden)) { throw "Code Project Manager claims operations authority: $forbidden" }
+}
+if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
+    throw 'Code Project Manager retains the obsolete CURRENT_WORK read prohibition'
 }
 
 $forbiddenOperations = @(
