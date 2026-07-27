@@ -1,0 +1,8 @@
+# One-off, nonformal Codex Cloud CPU compatibility test.
+# Mirrors the accepted local Python 3.10 CPU stack only for the focused tests.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+matplotlib==3.10.0
+numpy==1.26.3
+pytest==9.1.1
+torch==2.7.0+cpu
