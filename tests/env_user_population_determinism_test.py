@@ -351,13 +351,71 @@ def test_a_seed_alone_is_not_a_reproduction_key():
         env, seed_value=UW_SEED)["seed_controls_generation"] is False
 
 
+@pytest.mark.parametrize("corner", [(0.05, 0.05), (0.95, 0.95)])
+def test_regenerating_the_user_world_books_no_lifecycle_events(corner):
+    """The defect `test_pinning_books_no_uav_leaves_before_the_episode_starts`
+    can only catch by luck, asserted where it is deterministic.
+
+    `_update_channel_state` books the difference between the serving sets it
+    computes and the ones already in `self.connections` as handovers, joins and
+    leaves. Across a `step` that is the right reading. Across
+    `regenerate_user_world` it is not: the user world has been REPLACED, so the
+    serving sets it diffs against belong to users that no longer exist, and every
+    one of them is booked as a pre-episode "leave" that never happened.
+
+    Why this test is deterministic and the one below is not. Whether the
+    post-`reset` world puts any user in reach of the (seed-determined) UAV start
+    positions is decided by the ground-BS quadrant, and that layout is drawn at
+    CONSTRUCTION from `np.random.RandomState(None)` -- OS entropy, seeded by
+    nothing. Unpinned, the pre-condition `served_before > 0` holds in roughly a
+    third of constructions, so the leave count below was a coin flip run to run.
+    Pinning the corner makes the same fact hold every time; the `served_before`
+    assert states the pre-condition rather than assuming it, so a future world
+    change makes this fail loudly instead of passing vacuously.
+    """
+    env = _env_with_bs_in_corner(corner)
+
+    served_before = int(env.connections.sum())
+    assert served_before > 0, (
+        "Pre-condition for this test: the post-reset world must already have "
+        "UAVs serving users, otherwise the regeneration below has nothing to "
+        "mis-book and the assertions are vacuous."
+    )
+    assert int(env.uav_leaves_count) == 0    # a first pass can only join
+
+    env.regenerate_user_world(user_world_seed=UW_SEED)
+
+    assert int(env.uav_leaves_count) == 0, (
+        "Replacing the user world booked UAV leaves. The rebuild inside "
+        "`regenerate_user_world` diffed the new serving sets against the "
+        "discarded world's serving sets instead of against an empty baseline."
+    )
+    assert int(env.uav_joins_count) == int(env.connections.sum()), (
+        "Joins must describe the new world alone; a larger count means the "
+        "discarded world's joins are still accumulated in."
+    )
+    assert int(env.handover_count) == 0
+    assert int(env.ping_pong_count) == 0
+
+
 def test_pinning_books_no_uav_leaves_before_the_episode_starts():
-    """The channel/connection/routing rebuild must run exactly once, and after
-    the world is final. `_update_uav_connections` ACCUMULATES against
-    `previous_connections_snapshot`, so a FIRST pass can only ever record joins
-    — a leave at step zero is impossible unless the triple ran twice, the
-    second time against a user world the first pass had already connected to.
+    """No UAV may have left a serving set before the episode has stepped.
     Measured at 18 phantom leaves before step 6 was moved after step 8.
+
+    The accumulator is `_update_channel_state`, not `_update_uav_connections`,
+    and it diffs against `self.connections` rather than against
+    `previous_connections_snapshot`: it hands the serving sets it just computed
+    to `_update_soft_handover_stats` together with the ones already in
+    `self.connections`, and books the difference as joins and leaves. A pass
+    that starts from a zeroed baseline can therefore only record joins.
+
+    This test is a WEAK form of the invariant and is kept only because it
+    asserts it on the real `build_pinned_env` path. Whether the post-`reset`
+    world puts any user in reach at all depends on the construction-time
+    ground-BS layout, which is drawn from an entropy-seeded RNG, so on most
+    constructions the baseline is empty and this passes vacuously.
+    `test_regenerating_the_user_world_books_no_lifecycle_events` above pins that
+    away and is the assertion that actually holds the line.
 
     Asserted as `leaves == 0` rather than by comparing against the unseeded
     path, because the two paths hold genuinely different user worlds and their

@@ -2111,7 +2111,41 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 可以根据需要添加更多预定义布局
         
         return cluster_centers
-    
+
+    def _reset_connection_baseline(self):
+        """Clear the connection/routing surface and every lifecycle counter that
+        accumulates against it.
+
+        This MUST run immediately before any
+        `_update_channel_state` / `_update_uav_connections` / `_compute_routing_paths`
+        rebuild that is establishing a world rather than continuing one.
+
+        `_update_channel_state` books the difference between the serving sets it
+        finds and the ones already in `self.connections` as handovers, joins and
+        leaves (`_update_soft_handover_stats`). That is the correct reading for a
+        `step`, where the two serving sets describe the SAME user world one tick
+        apart. It is meaningless when the user world itself has just been
+        replaced: the old serving sets refer to users that no longer exist, so
+        every one of them is booked as a "leave" that never happened, before the
+        episode has stepped at all.
+
+        Zeroing the baseline here is what makes the rebuild a first pass -- joins
+        only, no leaves -- for `reset` and for `regenerate_user_world` alike.
+        """
+        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
+        self.sinr_matrix = np.zeros((self.n_uavs, self.n_users))
+        self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
+        self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)
+        self.routing_paths = {}
+        self.handover_count = 0
+        self.ping_pong_count = 0
+        self.user_serving_uav.fill(-1)
+        self.user_serving_sets = [[] for _ in range(self.n_users)]
+        self.serving_set_changes = 0
+        self.uav_joins_count = 0
+        self.uav_leaves_count = 0
+        self.user_handover_history = [[] for _ in range(self.n_users)]
+
     def reset(self, seed=None, options=None):
         """
         重置环境 - 确保使用场景4特定的全局状态
@@ -2150,20 +2184,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 卡尔曼滤波器已被移除，无需初始化
 
         # 3. 初始化连接和路由信息
-        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
-        self.sinr_matrix = np.zeros((self.n_uavs, self.n_users))
-        self.uav_connections = np.zeros((self.n_uavs, self.n_uavs), dtype=bool)
-        self.uav_bs_connections = np.zeros((self.n_uavs, self.n_ground_bs), dtype=bool)
-        self.routing_paths = {}
-        self.handover_count = 0
-        self.ping_pong_count = 0
-        self.user_serving_uav.fill(-1)
-        self.user_serving_sets = [[] for _ in range(self.n_users)]
-        self.serving_set_changes = 0
-        self.uav_joins_count = 0
-        self.uav_leaves_count = 0
-        self.user_handover_history = [[] for _ in range(self.n_users)]
-        
+        self._reset_connection_baseline()
+
         # 重置数据包仿真指标
         self.metrics = {k: 0 if k != "total_end_to_end_delay" and k != "total_energy_consumed_mj" else 0.0 for k in self.metrics}
         self.active_packets = []
@@ -2251,6 +2273,12 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         self.user_world_seed_applied = seed_value
 
+        # The world was REPLACED, not advanced. Without this the rebuild below
+        # diffs the new serving sets against serving sets belonging to the
+        # discarded world and books the difference as pre-episode handovers,
+        # joins and leaves -- state the D7.S event fingerprint then captures as
+        # if the episode had produced it.
+        self._reset_connection_baseline()
         self._update_channel_state()
         self._update_uav_connections()
         self._compute_routing_paths()
