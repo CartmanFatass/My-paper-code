@@ -490,10 +490,22 @@ Report it; do not fall back to transcription.
 
 Before writing the raw, sanity-check the captured text against the question:
 
+- **it carries this round's own `stage_commit`.** This is the only check that
+  catches a capture of the *wrong round*, and nothing else does. On 2026-07-27 a
+  `ref`-resolved control returned the previous round's ruling — 18322 characters
+  of a real, complete, well-formed scientific answer for a different stage
+  commit. It passed every check below. The transcript is virtualized, so the only
+  rendered `Copy response` belonged to the first assistant turn while the answer
+  being archived was the last;
 - it is not a bare progress trace of the labels above;
 - it addresses the question's numbered asks rather than announcing intent to;
 - its size is plausible for the round — a scoped scientific answer on this line
   runs to kilobytes, and a few hundred bytes is a trace, not an answer.
+
+**Length and non-emptiness prove nothing.** The same session's first bad capture
+was the *fence* — 397 bytes, non-empty, already written to the raw path before
+the verdict-string assertion caught it and it was deleted rather than amended.
+Two different wrong captures in one round, one too small and one too plausible.
 
 A capture failing any of these is a transport fault. Report it and re-enter the
 wait; never archive it and never let it reach reconciliation.
