@@ -347,6 +347,34 @@ There is no review-of-review, mandatory independent review for every child,
 compatibility suite, coverage target, or paperwork gate. Tests enforce actual
 scientific and operational invariants; they do not create another authority.
 
+#### A guard test needs a paired negative
+
+Adopted 2026-07-27 after an internal sweep found six unfailable guards on the
+D7.S instrument, on top of the two external review had already named. Every one
+shared a cause: **the tests were written from the implementation, so both sides
+of the comparison came from the same code path.**
+
+A test claiming a guard protects `X` must carry a perturbation of `X` that
+drives the guard **red**. A positive assertion alone is not a guard.
+
+- `assert f(x) == f(x)` may not stand alone. It needs `assert f(x) != f(x')`,
+  and `x'` must be drawn from `X`'s **whole declared domain** — every field the
+  digest enumerates, not the one the author had in mind.
+- Fixtures made degenerate or randomness-free for tractability delete exactly
+  the variance the property is about. An environment whose `step()` draws no
+  randomness cannot witness a determinism claim.
+- Use realistic values, not `42`. A seed small enough that the production
+  reduction is the identity never exercises the reduction.
+- Anything the artifact calls **registered, stable or reproducible** must be
+  observed reproducing **across a process boundary**. That is what the word
+  means to a reader of the paper, and single-interpreter tests assume it rather
+  than check it — including against `PYTHONHASHSEED` salting, which is invisible
+  inside one process and fatal across pooled shards.
+
+The failure this prevents is specific: a guard that cannot fail reads as
+coverage forever after, so the defect it was meant to catch is not merely
+undetected, it is recorded as checked.
+
 ### Stage A and Stage B — the only two audits, both triggered
 
 ```text
