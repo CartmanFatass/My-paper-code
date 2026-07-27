@@ -1,0 +1,25 @@
+{
+  "topology_seed": 20260726,
+  "ground_bs": [
+    [
+      7691.760928256253,
+      4939.792744899021,
+      30.0
+    ]
+  ],
+  "charging_stations": [
+    [
+      6289.79792455119,
+      4093.8009577881703,
+      50.0
+    ],
+    [
+      640.0,
+      640.0,
+      50.0
+    ]
+  ],
+  "coordinate_hash": "31ae9e7b6bbfa5e07b49a00dd30f0e0d51b3472e7c2f57f0a4a0a6f45a722948",
+  "procedure_version": "d7s_event_aligned_v1",
+  "bs_quadrant": "bs_top_right"
+}
