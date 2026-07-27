@@ -30,7 +30,7 @@ external_review_transport=project_manager_direct
 experiment_orchestration=registered_subagent
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
-project_development_skill=hmasd-agile-research-development
+project_development_procedure=this file (sizing) plus .claude/agents/hmasd-implementer.md (execution)
 ```
 
 Project Manager is the sole persistent HMASD authority and the user's direct
@@ -273,6 +273,50 @@ subagent, and a child reading tier tables it cannot act on is noise at best.
 - Repeat the in-band waiting rule in the brief. Children stall on this
   specifically and repeatedly.
 
+## Sizing the task — agile research development, from the scoping side
+
+This is what you apply when you **design** a task. The implementer definition
+carries the execution side of the same principle; neither restates the other,
+because scoping and executing are different jobs.
+
+**Maintainability is not the requirement here; reproducibility is.** These
+packages are not extended — they are built, produce evidence, and are superseded
+(G20 by G20R by G20R2). So extensibility, adapters and backward compatibility are
+dead weight, and a brief that asks for them is asking for waste. But a package
+*is* the evidence for a claim, so it must produce the same number from the same
+commit in six months: frozen seeds, the registered interpreter and thread count,
+declared RNG stream ownership, exact replay. **Trade maintainability away freely;
+never trade reproducibility.** When those two conflict in a brief you are
+writing, reproducibility wins and you say so explicitly.
+
+**Scope one discriminator, not one feature.** The task is the smallest change
+that can move the decision. Name the files it may touch and the files it may
+not — the out-of-scope list is deliberate staging, and the implementer is told to
+stop rather than widen it, so an omission there reads as permission.
+
+**Size the evidence to the claim, in the brief, before dispatch.** Do not leave
+it to the child to decide how much proof is enough:
+
+| Change | Smallest sufficient evidence |
+|---|---|
+| helper or schema | one focused check |
+| bug or invariant repair | reproduction, regression if durable, focused rerun |
+| runner/analyzer integration | focused suite plus one bounded exercise |
+| protected cross-file path | frozen contract, focused evidence, optional one review |
+
+A broad suite is for a changed **shared surface** only. Asking for one otherwise
+buys nothing and hides the signal you wanted.
+
+**Say what to delete.** No backward compatibility: replaced interfaces, adapters,
+migrations, fallbacks, state and tests go with the change. Git history is the
+archive. If you do not say this, a careful implementer will preserve the old path
+"just in case" and you will accept a worse artifact than you asked for.
+
+**Do not add ceremony the brief does not need** — no brainstorm, plan, worktree,
+ledger or approval step when the outcome, files, exclusions and completion are
+already known. That ceremony is the generic-agile reflex, and it is exactly what
+this project does not run.
+
 ## Authoring the brief
 
 **A brief that contradicts the procedure governing the child is worse than no
@@ -420,7 +464,7 @@ scientific_principles=docs/project/ALGORITHM_PRINCIPLES.md
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 review_stack=false
 routine_preimplementation_code_science_review=forbidden
-project_development_skill=hmasd-agile-research-development
+project_development_procedure=this file (sizing) plus .claude/agents/hmasd-implementer.md (execution)
 development_mode=agile_algorithm_research
 algorithm_iteration_environment=toy_default
 uav_environment_role=promoted_candidate_validation_only
@@ -553,7 +597,7 @@ not run.
    section of the round's reconciliation, never a separate reviewer, approval
    file or checklist artifact.
 5. **Implement.** Bounded children against the frozen contract, focused
-   tests, per `$hmasd-agile-research-development`.
+   tests, sized per **Sizing the task** below.
 6. **Review and tests.** Project Manager reads the diff and reruns the focused
    checks itself. Stage B (below) triggers only for claim-bearing code; the
    local adversarial reviewer is dispatched only on a PM-named wrong-claim
@@ -891,7 +935,7 @@ exception; their pinned profiles are deliberate.
 
 Active project Skills are deliberately small:
 
-- `hmasd-agile-research-development` for implementation, debugging, proof-sized
+- implementation procedure lives in the implementer definition and in **Sizing the task**, not in a Skill:
   testing, bounded repair, and inspection;
 - `hmasd-review-round` for external review transport and exact raw archival,
   executed by the Project Manager directly.

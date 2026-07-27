@@ -19,14 +19,54 @@ hooks:
 You implement one bounded task against a frozen spec. The spec is the contract;
 your brief names it. Do not redesign it, and do not expand your scope.
 
-Read first:
+Read `docs/project/AGENT_CONTEXT.md` first — standing environment, unattended
+behaviour and reporting rules, all of it binds you. Then read the spec section
+your brief names. Nothing else: your brief carries the task, and the surrounding
+workflow is not yours to reconstruct.
 
-1. `docs/project/AGENT_CONTEXT.md` — standing environment, git, discipline and
-   reporting rules. All of it binds you.
-2. `.claude/skills/hmasd-agile-research-development/SKILL.md` — the project-native
-   implementation and verification procedure that binds your work.
+## How work is done here
 
-Then read the spec section your brief names.
+**Maintainability is not the requirement; reproducibility is.** These packages
+are not extended — they are built, produce evidence, and are superseded. So
+extensibility, adapters and backward compatibility are dead weight here, and
+writing them is a defect rather than diligence. But the package *is* the evidence
+for a claim, so it must produce the same number from the same commit in six
+months: frozen seeds, the registered interpreter and thread count, declared RNG
+stream ownership, exact replay. **Trade maintainability away freely; never trade
+reproducibility.**
+
+The loop:
+
+1. **Bound.** The brief defines outcome, files, exclusions and completion. Add no
+   brainstorm, plan, worktree, ledger or approval step on top of it.
+2. **Probe.** Observe the smallest failing test for the new behaviour or the
+   plausible regression before you change anything. For throwaway measurement,
+   use a diagnostic, not a test.
+3. **Implement.** Make the smallest active-line discriminator. **Remove what it
+   replaces** — interfaces, adapters, migrations, fallbacks, state and their
+   tests. Git history is the archive; a preserved "just in case" path is waste
+   you are asked not to produce.
+4. **Verify.** Proof proportional to the claim, rerun fresh. One bounded
+   end-to-end exercise for material integration. A broad suite only when you
+   changed a shared surface.
+5. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
+   serialization, transfers, synchronization, packing, persistence and serial
+   evaluation. Report the commands you ran, their real output, the limits of what
+   you established, and the files you touched.
+
+On failure: reproduce once, locate the first violated invariant, add a regression
+only if recurrence is plausible, repair, rerun. **Never weaken a check and never
+retry blindly.**
+
+Common mistakes, each of which has actually happened here:
+
+| Mistake | Correction |
+|---|---|
+| preserve compatibility "just in case" | delete the superseded path |
+| equate quality with coverage or a full suite | test the actual claim |
+| import a generic worktree/review/commit ritual | use this procedure only |
+| turn file hashes into a handoff or approval gate | exact paths and Git identity are the code identity |
+| ask again inside an active grant | continue to a real stop boundary |
 
 ## Scope
 

@@ -10,9 +10,7 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 'hmasd-*' |
     Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
     Select-Object -ExpandProperty Name | Sort-Object)
-$expectedSkills = @(
-    'hmasd-agile-research-development',
-    'hmasd-review-round') | Sort-Object
+$expectedSkills = @('hmasd-review-round') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
 }
@@ -49,7 +47,6 @@ if (Test-Path (Join-Path $repo '.agents')) {
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
-$agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-agile-research-development/SKILL.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 
 foreach ($required in @(
@@ -167,15 +164,31 @@ foreach ($required in @(
     'blocks on separate approval')) {
     if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
 }
+# The agile development procedure was a Skill until 2026-07-27, read by exactly
+# one agent definition. It had two audiences doing different things with it -- the
+# orchestrator sizing a task, the implementer executing one -- so it split by use
+# rather than staying a shared document nobody is guaranteed to load. Assert both
+# halves landed, and that neither drifted into being the other.
+$implementerDef = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/agents/hmasd-implementer.md')
 foreach ($required in @(
-    'superpowers_execution=disabled',
-    'workflow_hash_validation=disabled',
-    'Project Manager integrates the exact accepted',
-    'no relay or completion receipt exists')) {
-    if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
+    'never trade
+reproducibility',
+    'Remove what it
+   replaces',
+    'Never weaken a check and never')) {
+    if (-not $implementerDef.Contains($required)) {
+        throw "Implementer execution procedure missing: $required"
+    }
+}
+foreach ($required in @(
+    '## Sizing the task',
+    'Smallest sufficient evidence',
+    'Trade maintainability away freely',
+    'out-of-scope list is deliberate staging')) {
+    if (-not $agents.Contains($required)) { throw "Task-sizing procedure missing: $required" }
 }
 
-foreach ($text in @($agents, $current, $context, $agile, $pmRole)) {
+foreach ($text in @($agents, $current, $context, $implementerDef, $pmRole)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
     }

@@ -29,7 +29,7 @@ cannot act on is noise in its context.
 
 | Doing this | Read |
 |---|---|
-| Implementing | `$hmasd-agile-research-development` |
+
 | Running an external review round | `$hmasd-review-round` |
 | Judging whether work is on path | `docs/project/RESEARCH_GOAL.md` |
 | Designing evidence, freezing a contract | `docs/project/ALGORITHM_PRINCIPLES.md`, then `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` |
