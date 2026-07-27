@@ -9,6 +9,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, fields
 from typing import Any
 
+import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -23,11 +24,103 @@ from ha_ctse_process.anchored_residual_g19 import (
 ALGORITHM_ID = "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41"
 SOURCE_ID = "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_P0"
 ACCEPTED_G40_SOURCE_COMMIT = "97a8b237e0cec6c2713dd2a710d324040fa3dfc2"
+ACCEPTED_G40_MANIFEST = (
+    "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
+    "20260727_97a8b23_r1/train_manifest.json"
+)
+ACCEPTED_G40_SCHEMA_VERSION = 1
+ACCEPTED_G40_AUTHORIZATION_TOKEN = (
+    "CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40_FORMAL_AUTHORIZATION_V1"
+)
+ACCEPTED_G40_CHECKPOINT_KIND = "common_native6_fast_anchor"
+ACCEPTED_G40_PAYLOAD_KIND = "anchor"
+ACCEPTED_G40_COMPLETED_ANCHOR_UPDATES = 100
+ACCEPTED_G40_ANCHOR_OPTIMIZER_STEPS = 200
+ACCEPTED_G40_CONFIGURATION_FIELDS = (
+    ("training_capacity", 8),
+    ("anchor_updates", 100),
+    ("ppo_passes", 2),
+    ("environment_backend", "ContinuousRosterToyBatch_CPU_CPP_required"),
+    ("common_anchor", "COMMON_NATIVE6_FAST_ANCHOR"),
+    ("checkpoint_selection", "common_anchor_plus_branch_final_only"),
+)
+ACCEPTED_G40_CHECKPOINT_PAYLOAD_KEYS = frozenset(
+    {
+        "schema_version",
+        "algorithm",
+        "source_id",
+        "source_commit",
+        "formal",
+        "replicate",
+        "kind",
+        "completed_anchor_updates",
+        "completed_branch_updates",
+        "configuration",
+        "seeds",
+        "model_state",
+    }
+)
 FULL_PATH = "FULL_G40_G31"
 NO_SLOW_PATH = "NO_SLOW_G41_G31"
 PATHS = (FULL_PATH, NO_SLOW_PATH)
 MAX_CONFORMANCE_TRANSITIONS = 8 * 48
 PPO_PASSES = 2
+
+
+@dataclass(frozen=True)
+class AcceptedG40AnchorAuthority:
+    replicate: int
+    checkpoint_reference: str
+    complete_state_digest: str
+    anchor_model_seed: int
+    anchor_ledger_seed: int
+    anchor_action_seed: int
+
+
+ACCEPTED_G40_ANCHOR_AUTHORITIES = (
+    AcceptedG40AnchorAuthority(
+        replicate=0,
+        checkpoint_reference=(
+            "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
+            "20260727_97a8b23_r1/checkpoints/"
+            "replicate_0_common_native6_fast_anchor.pt"
+        ),
+        complete_state_digest=(
+            "8868edb01d7ecf93e0832606e5b433522cb9152e75cf972870e94d4116fc5fd6"
+        ),
+        anchor_model_seed=10_401_000,
+        anchor_ledger_seed=10_402_000,
+        anchor_action_seed=10_403_000,
+    ),
+    AcceptedG40AnchorAuthority(
+        replicate=1,
+        checkpoint_reference=(
+            "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
+            "20260727_97a8b23_r1/checkpoints/"
+            "replicate_1_common_native6_fast_anchor.pt"
+        ),
+        complete_state_digest=(
+            "2c256db95170e3882ef1f257cf5877e20ff74325b4f15592e5d386d0c689b888"
+        ),
+        anchor_model_seed=10_401_001,
+        anchor_ledger_seed=10_402_001,
+        anchor_action_seed=10_403_001,
+    ),
+    AcceptedG40AnchorAuthority(
+        replicate=2,
+        checkpoint_reference=(
+            "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
+            "20260727_97a8b23_r1/checkpoints/"
+            "replicate_2_common_native6_fast_anchor.pt"
+        ),
+        complete_state_digest=(
+            "8499c8943a965c5b2e7c089a9dddc256e1d195333838c6627ebe0a8720ebde51"
+        ),
+        anchor_model_seed=10_401_002,
+        anchor_ledger_seed=10_402_002,
+        anchor_action_seed=10_403_002,
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -66,11 +159,11 @@ def _state_rows(
     return tuple(
         (
             name,
-            str(value.dtype),
-            tuple(value.shape),
-            value.detach().cpu().contiguous().numpy().tobytes(),
+            str(values[name].dtype),
+            tuple(values[name].shape),
+            values[name].detach().cpu().contiguous().numpy().tobytes(),
         )
-        for name, value in values.items()
+        for name in sorted(values)
     )
 
 
@@ -79,16 +172,121 @@ def _state_digest(values: Mapping[str, torch.Tensor]) -> str:
     for name, dtype, shape, payload in _state_rows(values):
         digest.update(name.encode("utf-8"))
         digest.update(dtype.encode("ascii"))
-        digest.update(repr(shape).encode("ascii"))
+        digest.update(np.asarray(shape, dtype=np.int64).tobytes())
         digest.update(payload)
     return digest.hexdigest()
 
 
-def _validate_trusted_anchor_digest(value: str) -> None:
-    if len(value) != 64 or any(
-        character not in "0123456789abcdef" for character in value
+def accepted_g40_anchor_authority(replicate: int) -> AcceptedG40AnchorAuthority:
+    if isinstance(replicate, bool) or not isinstance(replicate, int):
+        raise TypeError("G41 accepted anchor replicate must be an integer")
+    if not 0 <= replicate < len(ACCEPTED_G40_ANCHOR_AUTHORITIES):
+        raise ValueError("G41 accepted anchor replicate is not manifest-authorized")
+    authority = ACCEPTED_G40_ANCHOR_AUTHORITIES[replicate]
+    if authority.replicate != replicate:
+        raise RuntimeError("G41 accepted anchor registry is internally inconsistent")
+    return authority
+
+
+def accepted_g40_anchor_identity(replicate: int) -> dict[str, object]:
+    authority = accepted_g40_anchor_authority(replicate)
+    return {
+        "source_manifest": ACCEPTED_G40_MANIFEST,
+        "source_commit": ACCEPTED_G40_SOURCE_COMMIT,
+        "schema_version": ACCEPTED_G40_SCHEMA_VERSION,
+        "algorithm": g40.ALGORITHM_ID,
+        "source_id": g40.SOURCE_ID,
+        "formal": True,
+        "authorization_token": ACCEPTED_G40_AUTHORIZATION_TOKEN,
+        "checkpoint_kind": ACCEPTED_G40_CHECKPOINT_KIND,
+        "checkpoint_payload_kind": ACCEPTED_G40_PAYLOAD_KIND,
+        "replicate": authority.replicate,
+        "completed_anchor_updates": ACCEPTED_G40_COMPLETED_ANCHOR_UPDATES,
+        "anchor_optimizer_steps": ACCEPTED_G40_ANCHOR_OPTIMIZER_STEPS,
+        "checkpoint_reference": authority.checkpoint_reference,
+        "complete_state_digest": authority.complete_state_digest,
+        "anchor_model_seed": authority.anchor_model_seed,
+        "anchor_ledger_seed": authority.anchor_ledger_seed,
+        "anchor_action_seed": authority.anchor_action_seed,
+        "configuration_identity": dict(ACCEPTED_G40_CONFIGURATION_FIELDS),
+    }
+
+
+def _validate_anchor_against_authority(
+    anchor: g40.G40NativeSixPolicy, *, accepted_anchor_replicate: int
+) -> AcceptedG40AnchorAuthority:
+    if not isinstance(anchor, g40.G40NativeSixPolicy):
+        raise TypeError("G41 paths require a G40 native-six anchor")
+    if anchor.phase != "fast":
+        raise ValueError("G41 paths require one common fast anchor")
+    authority = accepted_g40_anchor_authority(accepted_anchor_replicate)
+    if _state_digest(anchor.state_dict()) != authority.complete_state_digest:
+        raise ValueError(
+            "G41 anchor does not match immutable accepted G40 authority"
+        )
+    return authority
+
+
+def load_accepted_g40_anchor_checkpoint(
+    payload: Mapping[str, object], *, accepted_anchor_replicate: int
+) -> g40.G40NativeSixPolicy:
+    authority = accepted_g40_anchor_authority(accepted_anchor_replicate)
+    if not isinstance(payload, Mapping) or set(payload) != set(
+        ACCEPTED_G40_CHECKPOINT_PAYLOAD_KEYS
     ):
-        raise ValueError("G41 trusted anchor digest must be lowercase SHA-256")
+        raise ValueError("G41 accepted G40 checkpoint payload keys mismatch")
+    expected = {
+        "schema_version": ACCEPTED_G40_SCHEMA_VERSION,
+        "algorithm": g40.ALGORITHM_ID,
+        "source_id": g40.SOURCE_ID,
+        "source_commit": ACCEPTED_G40_SOURCE_COMMIT,
+        "formal": True,
+        "replicate": authority.replicate,
+        "kind": ACCEPTED_G40_PAYLOAD_KIND,
+        "completed_anchor_updates": ACCEPTED_G40_COMPLETED_ANCHOR_UPDATES,
+        "completed_branch_updates": 0,
+    }
+    if any(
+        type(payload.get(name)) is not type(value)
+        or payload.get(name) != value
+        for name, value in expected.items()
+    ):
+        raise ValueError("G41 accepted G40 checkpoint identity mismatch")
+    configuration = payload.get("configuration")
+    if not isinstance(configuration, Mapping) or any(
+        type(configuration.get(name)) is not type(value)
+        or configuration.get(name) != value
+        for name, value in ACCEPTED_G40_CONFIGURATION_FIELDS
+    ):
+        raise ValueError("G41 accepted G40 checkpoint configuration mismatch")
+    seeds = payload.get("seeds")
+    expected_seeds = g40.seed_block(authority.replicate, formal=True)
+    if (
+        not isinstance(seeds, Mapping)
+        or set(seeds) != set(expected_seeds)
+        or any(
+            type(seeds.get(name)) is not int or seeds.get(name) != value
+            for name, value in expected_seeds.items()
+        )
+    ):
+        raise ValueError("G41 accepted G40 checkpoint seed identity mismatch")
+    state = payload.get("model_state")
+    if not isinstance(state, Mapping) or not all(
+        isinstance(name, str) and isinstance(value, torch.Tensor)
+        for name, value in state.items()
+    ):
+        raise ValueError("G41 accepted G40 checkpoint state missing")
+    if _state_digest(state) != authority.complete_state_digest:  # type: ignore[arg-type]
+        raise ValueError("G41 accepted G40 checkpoint state digest mismatch")
+    anchor = g40.make_model(
+        int(dict(ACCEPTED_G40_CONFIGURATION_FIELDS)["training_capacity"]),
+        initialization_seed=authority.anchor_model_seed,
+    )
+    anchor.load_state_dict(state, strict=True)  # type: ignore[arg-type]
+    _validate_anchor_against_authority(
+        anchor, accepted_anchor_replicate=authority.replicate
+    )
+    return anchor
 
 
 def retained_state_dict(
@@ -126,16 +324,11 @@ class G41NoSlowProjection(nn.Module):
         self,
         anchor: g40.G40NativeSixPolicy,
         *,
-        source_commit: str,
-        trusted_anchor_digest: str,
+        accepted_anchor_replicate: int,
     ) -> None:
-        if source_commit != ACCEPTED_G40_SOURCE_COMMIT:
-            raise ValueError("G41 projection requires the accepted G40 source commit")
-        if anchor.phase != "fast":
-            raise ValueError("G41 projection requires one post-common fast anchor")
-        _validate_trusted_anchor_digest(trusted_anchor_digest)
-        if _state_digest(anchor.state_dict()) != trusted_anchor_digest:
-            raise ValueError("G41 anchor does not match the externally trusted digest")
+        authority = _validate_anchor_against_authority(
+            anchor, accepted_anchor_replicate=accepted_anchor_replicate
+        )
         super().__init__()
         rng_before = torch.random.get_rng_state().clone()
         self.policy = copy.deepcopy(anchor.policy)
@@ -143,8 +336,7 @@ class G41NoSlowProjection(nn.Module):
         self.member_capacity = int(anchor.member_capacity)
         self.critic_state_dim = int(anchor.critic_state_dim)
         self.phase = "fast"
-        self.accepted_g40_source_commit = source_commit
-        self.accepted_g40_anchor_state_digest = trusted_anchor_digest
+        self.accepted_g40_anchor_authority = authority
         self.projection_rng_unchanged = bool(
             torch.equal(rng_before, torch.random.get_rng_state())
         )
@@ -215,22 +407,16 @@ class G41NoSlowProjection(nn.Module):
 def project_post_anchor_paths(
     anchor: g40.G40NativeSixPolicy,
     *,
-    trusted_anchor_digest: str,
-    source_commit: str = ACCEPTED_G40_SOURCE_COMMIT,
+    accepted_anchor_replicate: int,
 ) -> tuple[g40.G40NativeSixPolicy, G41NoSlowProjection]:
-    if not isinstance(anchor, g40.G40NativeSixPolicy):
-        raise TypeError("G41 paths require a G40 native-six anchor")
-    if anchor.phase != "fast":
-        raise ValueError("G41 paths require one common fast anchor")
-    _validate_trusted_anchor_digest(trusted_anchor_digest)
-    if _state_digest(anchor.state_dict()) != trusted_anchor_digest:
-        raise ValueError("G41 anchor does not match the externally trusted digest")
+    authority = _validate_anchor_against_authority(
+        anchor, accepted_anchor_replicate=accepted_anchor_replicate
+    )
     rng_before = torch.random.get_rng_state().clone()
     full = copy.deepcopy(anchor)
     no_slow = G41NoSlowProjection(
         anchor,
-        source_commit=source_commit,
-        trusted_anchor_digest=trusted_anchor_digest,
+        accepted_anchor_replicate=authority.replicate,
     )
     if not torch.equal(rng_before, torch.random.get_rng_state()):
         raise RuntimeError("G41 path construction advanced global torch RNG")
@@ -528,6 +714,9 @@ def optimize_full_slow_critic_update(
 def build_projected_checkpoint(
     model: G41NoSlowProjection,
 ) -> dict[str, object]:
+    authority = model.accepted_g40_anchor_authority
+    if authority != accepted_g40_anchor_authority(authority.replicate):
+        raise RuntimeError("G41 projection lost immutable G40 anchor authority")
     state = {
         name: value.detach().cpu().clone()
         for name, value in model.state_dict().items()
@@ -537,8 +726,9 @@ def build_projected_checkpoint(
     return {
         "algorithm_id": ALGORITHM_ID,
         "checkpoint_kind": "NO_SLOW_POST_ANCHOR_G31",
-        "accepted_g40_source_commit": model.accepted_g40_source_commit,
-        "accepted_g40_anchor_state_digest": model.accepted_g40_anchor_state_digest,
+        "accepted_g40_anchor_authority": accepted_g40_anchor_identity(
+            authority.replicate
+        ),
         "standalone_value_output_schema": False,
         "model_state": state,
         "model_state_digest": _state_digest(state),
@@ -564,8 +754,6 @@ def reconstruct_static_certificate(
     full_actor_optimizer: torch.optim.Optimizer,
     no_slow_actor_optimizer: torch.optim.Optimizer,
     checkpoint: Mapping[str, object],
-    *,
-    trusted_anchor_digest: str,
 ) -> dict[str, object]:
     component_functions = {
         "actor_forward": (retained_actor_step, type(no_slow.policy).forward_step),
@@ -639,21 +827,23 @@ def reconstruct_static_certificate(
     retained_bytes_equal = _state_rows(retained_state_dict(full)) == _state_rows(
         no_slow.state_dict()
     )
-    trusted_digest_well_formed = bool(
-        len(trusted_anchor_digest) == 64
+    authority = no_slow.accepted_g40_anchor_authority
+    expected_authority = accepted_g40_anchor_authority(authority.replicate)
+    expected_identity = accepted_g40_anchor_identity(authority.replicate)
+    registry_digests_well_formed = all(
+        len(row.complete_state_digest) == 64
         and all(
             character in "0123456789abcdef"
-            for character in trusted_anchor_digest
+            for character in row.complete_state_digest
         )
+        for row in ACCEPTED_G40_ANCHOR_AUTHORITIES
     )
     source_bound = bool(
-        trusted_digest_well_formed
-        and _state_digest(anchor.state_dict()) == trusted_anchor_digest
-        and no_slow.accepted_g40_anchor_state_digest == trusted_anchor_digest
-        and checkpoint.get("accepted_g40_source_commit")
-        == ACCEPTED_G40_SOURCE_COMMIT
-        and checkpoint.get("accepted_g40_anchor_state_digest")
-        == trusted_anchor_digest
+        registry_digests_well_formed
+        and authority == expected_authority
+        and _state_digest(anchor.state_dict())
+        == expected_authority.complete_state_digest
+        and checkpoint.get("accepted_g40_anchor_authority") == expected_identity
     )
     checkpoint_state_digest_valid = bool(
         isinstance(checkpoint_state, Mapping)
@@ -713,7 +903,8 @@ def reconstruct_static_certificate(
         "standalone_slow_retained_storage_disjoint": slow_retained_storage_disjoint,
         "projection_rng_unchanged": no_slow.projection_rng_unchanged,
         "checkpoint_bound_to_accepted_g40_source_and_anchor": source_bound,
-        "trusted_anchor_digest_well_formed": trusted_digest_well_formed,
+        "manifest_backed_anchor_authority_valid": source_bound,
+        "authority_registry_digests_well_formed": registry_digests_well_formed,
         "checkpoint_state_digest_valid": checkpoint_state_digest_valid,
         "checkpoint_matches_projection": checkpoint_matches_projection,
         "standalone_value_output_schema_absent": output_schema_has_no_value,
