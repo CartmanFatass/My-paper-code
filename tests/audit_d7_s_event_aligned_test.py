@@ -2090,5 +2090,150 @@ def test_roll_prefix_and_find_event_distinguishes_ineligible_from_uncertified_le
     assert planned_leaves_observed > 0 and result["event"] is None
 
 
+# =============================================================================
+# 9. Driver-level wiring: assemble_audit_result (Task A -- decide_branch
+# reached through the SAME code path main() uses, not called directly)
+# =============================================================================
+
+def _fast_t_m_bootstrap(monkeypatch, iters=20):
+    """The real `compute_t_m_bootstrap` at its frozen default (10,000 iters)
+    is too slow for a focused test; `assemble_audit_result` does not expose
+    an override (correctly -- production must always run the frozen count),
+    so the override is applied here, at the call site, by monkeypatching the
+    module-level name `assemble_audit_result` resolves at call time. Every
+    fixture below is DEGENERATE (identical value at every topology, so
+    resampling introduces no variance regardless of iteration count) -- the
+    small iters value changes only runtime, never the asserted outcome."""
+    real = audit.compute_t_m_bootstrap
+    monkeypatch.setattr(
+        audit, "compute_t_m_bootstrap",
+        lambda **kw: real(**{**kw, "iters": iters}))
+
+
+def _six_topology_results(*, d_a_value: float, b_stable_value: float,
+                           b_flex_value: float, u_stable_value: float,
+                           u_flex_value: float, invalidated_pairs_by_topology=None) -> list:
+    """Six topologies (the frozen `MIN_SUPPORT_TOPOLOGIES` minimum), each
+    contributing one degenerate calibration/audit unit per quantity --
+    `_degenerate_topology_units` shape, matching exactly what
+    `run_topology_audit` returns per topology. `qualifying_*_episodes=4`
+    meets `MIN_SUPPORT_EPISODES_PER_TOPOLOGY` in every topology, so
+    `support_ok` is True and `assemble_audit_result` reaches its
+    `decide_branch` call (never the single-topology/support-miss shortcuts)."""
+    n = 6
+    d_a_units = _degenerate_topology_units([d_a_value] * n)
+    b_stable_units = _degenerate_topology_units([b_stable_value] * n)
+    b_flex_units = _degenerate_topology_units([b_flex_value] * n)
+    u_stable_units = _degenerate_topology_units([u_stable_value] * n)
+    u_flex_units = _degenerate_topology_units([u_flex_value] * n)
+    invalidated_pairs_by_topology = invalidated_pairs_by_topology or [[] for _ in range(n)]
+    return [
+        {
+            "qualifying_calibration_episodes": 4,
+            "qualifying_audit_episodes": 4,
+            "invalidated_pairs": invalidated_pairs_by_topology[i],
+            "arm_distinctness_pairs": [],
+            "calibration_units_stable": b_stable_units[i],
+            "calibration_units_flex": b_flex_units[i],
+            "calibration_units_d_a": d_a_units[i],
+            "audit_units_stable": u_stable_units[i],
+            "audit_units_flex": u_flex_units[i],
+        }
+        for i in range(n)
+    ]
+
+
+def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
+    """Hand-worked: B_stable=10.0 (deterministic, LCB95=10.0>0), D_A=0.0
+    (deterministic). lower_contrast = D_A + 0.05*B_stable = 0.5 > 0 (passes);
+    upper_contrast = 0.05*B_stable - D_A = 0.5 > 0 (passes). Both equivalence
+    tests pass -> PART_A_CONTRADICTION per section 8 ('Both pass ->
+    PART_A_CONTRADICTION (return-equivalence)'), which `decide_branch`
+    resolves to branch 4 -- checked here through `assemble_audit_result`,
+    the exact function `main()` calls, not `decide_branch` called directly
+    with hand-picked kwargs (section 7's existing coverage)."""
+    _fast_t_m_bootstrap(monkeypatch)
+    topology_results = _six_topology_results(
+        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        u_stable_value=5.0, u_flex_value=5.0)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["conformance"]["ok"] is True
+    assert out["support"]["ok"] is True
+    assert out["part_a"]["verdict"] == "PART_A_CONTRADICTION"
+    assert out["branch"] == "PART_A_CONTRADICTION"
+
+
+def test_driver_part_a_unresolved_does_not_relabel_the_source_branch(monkeypatch):
+    """Hand-worked: B_stable=10.0, D_A=0.6. lower_contrast = 0.6+0.5=1.1>0
+    (passes); upper_contrast = 0.5-0.6=-0.1 (fails, not >0) -> not both pass,
+    so not PART_A_CONTRADICTION; lower_contrast_ucb=1.1 is not <0, so not
+    CONFORMANCE_PASS either -> PART_A_CONFORMANCE_UNRESOLVED. Section 8: the
+    unresolved diagnostic 'does not relabel the source branch' -- T_m is
+    built to clear on both limbs (U*_stable=-2.0 -> T_stable=-2.0+1.0=-1.0<0;
+    U*_flex=2.0 -> T_flex=2.0-1.0=1.0>0), so the source branch must resolve
+    PERSISTENCE_NECESSARY_SOURCE, exactly as if Part-A had never run, proving
+    UNRESOLVED never flips `part_a_contradiction` through the real driver
+    path (not `decide_branch` called directly)."""
+    _fast_t_m_bootstrap(monkeypatch)
+    topology_results = _six_topology_results(
+        d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
+        u_stable_value=-2.0, u_flex_value=2.0)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["part_a"]["verdict"] == "PART_A_CONFORMANCE_UNRESOLVED"
+    assert out["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
+
+
+def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_t_m(monkeypatch):
+    """The same otherwise-favorable T_m fixture as the UNRESOLVED test above
+    (which alone would resolve PERSISTENCE_NECESSARY_SOURCE), but with one
+    topology reporting a single invalidated prefix-replay pair --
+    `compute_conformance_ok`'s zero-tolerance conjunct fails, so
+    `conformance_ok=False` must reach `decide_branch` through
+    `assemble_audit_result` (the `len(topology_results) > 1 and support_ok`
+    path, NOT the single-topology/support-miss shortcut, since support_ok
+    stays True here) and win branch-1 precedence over every later row,
+    including one it would otherwise have cleared."""
+    _fast_t_m_bootstrap(monkeypatch)
+    invalidated = [[{"reason": "synthetic test injection"}]] + [[] for _ in range(5)]
+    topology_results = _six_topology_results(
+        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        u_stable_value=-2.0, u_flex_value=2.0,
+        invalidated_pairs_by_topology=invalidated)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["conformance"]["ok"] is False
+    assert out["conformance"]["invalidated_pairs_count"] == 1
+    assert out["support"]["ok"] is True
+    assert out["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+def test_topology_start_progress_line_goes_to_stderr_not_stdout(monkeypatch, capsys):
+    """Task B guard: `run_topology_audit`'s topology-start progress line must
+    land on stderr, never stdout -- stdout carries exactly the one result
+    JSON `main()` prints at the very end, and a progress line leaking onto
+    stdout would corrupt that artifact. `build_topology_template` (the very
+    next call after the progress print) is stubbed to abort immediately, so
+    this exercises the REAL print call site inside `run_topology_audit`
+    without any environment construction or episode stepping."""
+    class _Abort(Exception):
+        pass
+
+    def _raise(*_a, **_k):
+        raise _Abort()
+
+    monkeypatch.setattr(audit, "build_topology_template", _raise)
+    with pytest.raises(_Abort):
+        audit.run_topology_audit(object(), topology_seed=1, n_calibration=0, n_audit=0)
+
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert "[progress] topology_seed=1 start" in captured.err
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))

@@ -2256,6 +2256,9 @@ def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: di
             for r in range(n_eval)
         ) if v is not None
     ], dtype=float)
+    print(f"[progress] topology_seed={topology_seed} episode_seed={episode_seed} limb={limb} "
+          f"replicate_batch=KEEP n_eval={n_eval} completed={keep_eval.size}",
+          file=sys.stderr, flush=True)
 
     candidates = {}
     for z_id, z_target in legal_targets.items():
@@ -2272,6 +2275,10 @@ def run_audit_event(config, *, topology_seed: int, episode_seed: int, coords: di
             ) if v is not None
         ], dtype=float)
         candidates[z_id] = {"select": select_vals, "eval_set": eval_vals}
+        print(f"[progress] topology_seed={topology_seed} episode_seed={episode_seed} limb={limb} "
+              f"replicate_batch=candidate:{z_id} n_select={n_select} n_eval={n_eval} "
+              f"select_completed={select_vals.size} eval_completed={eval_vals.size}",
+              file=sys.stderr, flush=True)
 
     return {"candidates": candidates, "eval_keep": keep_eval, "invalidated_pairs": invalidated_pairs}
 
@@ -2326,6 +2333,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
     `arm_distinctness_pairs` (item 3's spot check witnesses: every certified
     joint event's `(duty_map_at_te, duty_map_before_leave)` pair -- flex
     certification already guarantees the vacancy was coverable)."""
+    print(f"[progress] topology_seed={topology_seed} start "
+          f"n_calibration={n_calibration} n_audit={n_audit} smoke={smoke}",
+          file=sys.stderr, flush=True)
     coords, coord_hash = build_topology_template(config, topology_seed=topology_seed)
     record = build_topology_record(coords, coord_hash, topology_seed=topology_seed)
     this_n_select = 1 if smoke else n_select
@@ -2349,12 +2359,18 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             rejected_counts=episode_leave_report.get("rejected_counts", {}))
         if result.get("support_miss"):
             calibration_report["exclusions"].append(result.get("exclusions", []))
+            print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+                  f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
+                  file=sys.stderr, flush=True)
             continue
         invalidated_pairs.extend(result.get("invalidated_pairs", []))
         if "stable" not in result["results"] or "flex" not in result["results"]:
             # One or both limbs invalidated by a PrefixReplayMismatchError
             # (already recorded above) -- this episode contributes neither
             # B_m nor D_A, and is not counted as qualifying.
+            print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+                  f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
+                  file=sys.stderr, flush=True)
             continue
         calibration_report["qualifying"] += 1
         calibration_report["qualifying_joint_events"] += 1
@@ -2376,6 +2392,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                                     "eval_set": np.array([g_s["d_a"]])}},
             "eval_keep": np.array([0.0]),
         })
+        print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
+              f"qualifying_event=True cumulative_qualifying={calibration_report['qualifying']}",
+              file=sys.stderr, flush=True)
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
     audit_report = _new_episode_block_report()
@@ -2393,6 +2412,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             rejected_counts=prefix.get("rejected_counts", {}))
         if prefix["event"] is None:
             audit_report["exclusions"].append(prefix["exclusions"])
+            print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+                  f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
+                  file=sys.stderr, flush=True)
             continue
         audit_report["qualifying"] += 1
         audit_report["qualifying_joint_events"] += 1
@@ -2414,6 +2436,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         audit_units_stable.append(unit_stable)
         audit_units_flex.append(unit_flex)
         audit_events_out.append(event["conformance_record"])
+        print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
+              f"qualifying_event=True cumulative_qualifying={audit_report['qualifying']}",
+              file=sys.stderr, flush=True)
 
     return {
         "topology_record": record,
@@ -2477,6 +2502,119 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     }
 
 
+def assemble_audit_result(topology_results: list[dict], topology_hash_failures: list[dict]) -> dict:
+    """Item 5/8's driver-level wiring, isolated from `main()`'s CLI/env
+    concerns so it can be exercised directly against synthetic
+    `topology_results` (the exact shape `run_topology_audit` returns)
+    without a real environment.
+
+    Pools per-topology conformance and Part-A inputs into `decide_branch`'s
+    two driver inputs exactly as section 8 specifies:
+
+    `conformance_ok` -- `compute_conformance_ok` over the pooled
+    `invalidated_pairs` count (every topology's `PrefixReplayMismatchError`
+    records), the pinned-topology hash assert (`topology_hash_failures`,
+    reported per topology in `main`'s per-seed loop), and
+    `arm_distinctness_check` over every topology's certified-event duty-map
+    pairs pooled together.
+
+    `part_a_contradiction` -- `compute_part_a_bounds` bootstraps D_A jointly
+    with B_stable from the pooled per-topology `calibration_units_d_a`/
+    `calibration_units_stable`, sharing the SAME `shared_topology_indices`
+    stream `compute_t_m_bootstrap` already drew (section 8's common
+    resampling stream); `part_a_conformance` turns those bounds into a
+    verdict string; `map_part_a_verdict_to_inputs` maps ONLY
+    `PART_A_CONTRADICTION` to `part_a_contradiction=True` --
+    `PART_A_CONFORMANCE_UNRESOLVED` (like `CONFORMANCE_PASS` and
+    `NOT_APPLICABLE`) never flips it, per section 8: the unresolved
+    diagnostic "does not relabel the source branch." It still lands in the
+    JSON under `part_a.verdict` for the record.
+
+    Both driver inputs then reach `decide_branch` for real: when there are
+    at least two topologies and support holds, `decide_branch` is called
+    with the pooled `conformance_ok`/`part_a_contradiction` plus the T_m
+    bootstrap bounds, so a conformance failure or a Part-A contradiction
+    reaches branch 1/4 through the same first-match precedence as every
+    other branch. Outside that gate (a single topology, or support already
+    failed) `decide_branch` cannot run a T_m bootstrap at all, so branch
+    1/2 are reported directly by the same literal strings `decide_branch`
+    itself would have returned first in its precedence order -- conformance
+    failure is checked before support failure in both paths, matching
+    `decide_branch`'s row order."""
+    support_ok, support_detail = check_minimum_support([
+        {"qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
+         "qualifying_audit_episodes": r["qualifying_audit_episodes"]}
+        for r in topology_results
+    ])
+
+    invalidated_pairs_total = [p for r in topology_results for p in r["invalidated_pairs"]]
+    arm_distinctness_pairs_all = [p for r in topology_results for p in r["arm_distinctness_pairs"]]
+    topology_hash_ok = len(topology_hash_failures) == 0
+    arm_distinct_ok = arm_distinctness_check(arm_distinctness_pairs_all)
+    conformance_ok = compute_conformance_ok(
+        invalidated_pairs=len(invalidated_pairs_total), topology_hash_ok=topology_hash_ok,
+        arm_distinct_ok=arm_distinct_ok)
+
+    out: dict = {
+        "support": {"ok": support_ok, "detail": support_detail},
+        "conformance": {
+            "ok": conformance_ok,
+            "invalidated_pairs_count": len(invalidated_pairs_total),
+            "invalidated_pairs": invalidated_pairs_total,
+            "topology_hash_ok": topology_hash_ok,
+            "topology_hash_failures": topology_hash_failures,
+            "arm_distinct_ok": arm_distinct_ok,
+        },
+    }
+
+    if len(topology_results) > 1 and support_ok:
+        n_topo = len(topology_results)
+        t_m = compute_t_m_bootstrap(
+            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
+            b_flex_topology_units=[r["calibration_units_flex"] for r in topology_results],
+            u_star_stable_topology_units=[r["audit_units_stable"] for r in topology_results],
+            u_star_flex_topology_units=[r["audit_units_flex"] for r in topology_results],
+            n_topo=n_topo)
+        out["t_m_bootstrap"] = {k: v for k, v in t_m.items() if k != "shared_topology_indices"}
+
+        # Part-A conformance (item 2): the SAME shared topology-resampling
+        # stream `compute_t_m_bootstrap` already drew, so D_A and B_stable's
+        # per-iteration draws come from the identical resampled topology mix
+        # as every other primary quantity (section 8's "common resampling
+        # stream" / "do not assign separate resampling seeds").
+        part_a_bounds = compute_part_a_bounds(
+            d_a_topology_units=[r["calibration_units_d_a"] for r in topology_results],
+            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
+            shared_topology_indices=t_m["shared_topology_indices"], seed=BOOTSTRAP_SEED)
+        if part_a_bounds is None:
+            part_a_verdict = "NOT_APPLICABLE"
+        else:
+            part_a_verdict = part_a_conformance(
+                lower_contrast_lcb=part_a_bounds["lower_contrast_lcb"],
+                lower_contrast_ucb=part_a_bounds["lower_contrast_ucb"],
+                upper_contrast_lcb=part_a_bounds["upper_contrast_lcb"],
+                b_stable_lcb=part_a_bounds["b_stable_lcb"])
+        part_a_contradiction, part_a_diagnostic = map_part_a_verdict_to_inputs(part_a_verdict)
+        out["part_a"] = {
+            "verdict": part_a_diagnostic,
+            **({} if part_a_bounds is None else part_a_bounds),
+        }
+
+        out["branch"] = decide_branch(
+            conformance_ok=conformance_ok, support_ok=support_ok, primary_g_degenerate_flag=False,
+            part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
+            t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
+            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
+    elif not conformance_ok:
+        out["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
+    elif not support_ok:
+        out["branch"] = "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    else:
+        out["branch"] = None
+
+    return out
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dev", action="store_true",
@@ -2524,20 +2662,6 @@ def main() -> None:
         if args.out:
             write_topology_record(args.out, topo_out["topology_record"])
 
-    support_ok, support_detail = check_minimum_support([
-        {"qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
-         "qualifying_audit_episodes": r["qualifying_audit_episodes"]}
-        for r in topology_results
-    ])
-
-    invalidated_pairs_total = [p for r in topology_results for p in r["invalidated_pairs"]]
-    arm_distinctness_pairs_all = [p for r in topology_results for p in r["arm_distinctness_pairs"]]
-    topology_hash_ok = len(topology_hash_failures) == 0
-    arm_distinct_ok = arm_distinctness_check(arm_distinctness_pairs_all)
-    conformance_ok = compute_conformance_ok(
-        invalidated_pairs=len(invalidated_pairs_total), topology_hash_ok=topology_hash_ok,
-        arm_distinct_ok=arm_distinct_ok)
-
     result = {
         "contract": CONTRACT_PATH,
         "contract_id": CONTRACT_ID,
@@ -2549,61 +2673,8 @@ def main() -> None:
         "calibration_reports": [r["calibration_report"] for r in topology_results],
         "audit_reports": [r["audit_report"] for r in topology_results],
         "audit_events": [r["audit_events"] for r in topology_results],
-        "support": {"ok": support_ok, "detail": support_detail},
-        "conformance": {
-            "ok": conformance_ok,
-            "invalidated_pairs_count": len(invalidated_pairs_total),
-            "invalidated_pairs": invalidated_pairs_total,
-            "topology_hash_ok": topology_hash_ok,
-            "topology_hash_failures": topology_hash_failures,
-            "arm_distinct_ok": arm_distinct_ok,
-        },
     }
-
-    if len(topology_results) > 1 and support_ok:
-        n_topo = len(topology_results)
-        t_m = compute_t_m_bootstrap(
-            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
-            b_flex_topology_units=[r["calibration_units_flex"] for r in topology_results],
-            u_star_stable_topology_units=[r["audit_units_stable"] for r in topology_results],
-            u_star_flex_topology_units=[r["audit_units_flex"] for r in topology_results],
-            n_topo=n_topo)
-        result["t_m_bootstrap"] = {k: v for k, v in t_m.items() if k != "shared_topology_indices"}
-
-        # Part-A conformance (item 2): the SAME shared topology-resampling
-        # stream `compute_t_m_bootstrap` already drew, so D_A and B_stable's
-        # per-iteration draws come from the identical resampled topology mix
-        # as every other primary quantity (section 8's "common resampling
-        # stream" / "do not assign separate resampling seeds").
-        part_a_bounds = compute_part_a_bounds(
-            d_a_topology_units=[r["calibration_units_d_a"] for r in topology_results],
-            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
-            shared_topology_indices=t_m["shared_topology_indices"], seed=BOOTSTRAP_SEED)
-        if part_a_bounds is None:
-            part_a_verdict = "NOT_APPLICABLE"
-        else:
-            part_a_verdict = part_a_conformance(
-                lower_contrast_lcb=part_a_bounds["lower_contrast_lcb"],
-                lower_contrast_ucb=part_a_bounds["lower_contrast_ucb"],
-                upper_contrast_lcb=part_a_bounds["upper_contrast_lcb"],
-                b_stable_lcb=part_a_bounds["b_stable_lcb"])
-        part_a_contradiction, part_a_diagnostic = map_part_a_verdict_to_inputs(part_a_verdict)
-        result["part_a"] = {
-            "verdict": part_a_diagnostic,
-            **({} if part_a_bounds is None else part_a_bounds),
-        }
-
-        result["branch"] = decide_branch(
-            conformance_ok=conformance_ok, support_ok=support_ok, primary_g_degenerate_flag=False,
-            part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
-            t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
-            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
-    elif not conformance_ok:
-        result["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
-    elif not support_ok:
-        result["branch"] = "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
-    else:
-        result["branch"] = None
+    result.update(assemble_audit_result(topology_results, topology_hash_failures))
 
     print(json.dumps(result, ensure_ascii=False, indent=2, default=_json_default))
     if args.out:
