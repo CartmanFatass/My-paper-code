@@ -17,17 +17,21 @@ name: D7.S event-aligned audit
 #              shard seed sets are disjoint and their union is a frozen set.
 #
 # ############################################################################
-# MEASURED 2026-07-27, run 30245735762: DO NOT LAUNCH `audit` ON ubuntu-latest.
+# MEASURED 2026-07-27, run 30245735762: ubuntu-latest is TIGHT, not excluded.
 #
 # The runner benchmarked at 0.0864 s/step against 0.0615 locally -- 1.405x
-# slower. That puts a legal-set-8 topology at 5.77 h against the 6 h hard kill:
-# 1.087x headroom, about fourteen minutes. The legal set size is DATA-DETERMINED
-# by the certified event, so which shards land at 8 cannot be known before
-# launch, and a killed shard is unrecoverable because a topology cannot be
-# split. Use a self-hosted runner on a cloud VM, which has no job ceiling.
+# slower. Per topology that is 3.12 h at legal-set 3, 4.18 h at 5, and 5.77 h at
+# 8, against the 6 h hard kill. Only the legal-set-8 case is close, the legal set
+# size is data-determined, and it is not known before launch.
 #
-# `benchmark` on ubuntu-latest remains correct and useful -- it passed all
-# conformance conditions there in under four minutes.
+# A shard that overruns is NOT a lost result. A topology cannot be split, but it
+# can be re-run whole and pooled afterwards; `fail-fast: false` keeps every other
+# shard's artifact. On a public repo the minutes are free, so the cost of a slow
+# shard is wall clock alone. That is why this is worth running rather than
+# projecting -- the timing question is answered by trying it.
+#
+# A self-hosted runner on a cloud VM removes the ceiling entirely and is the
+# better vehicle if several shards come back near 6 h.
 # ############################################################################
 #
 # Both are workflow_dispatch only. Nothing here runs on push -- a formal run
@@ -95,10 +99,17 @@ jobs:
   audit:
     if: inputs.mode == 'audit' || startsWith(github.ref, 'refs/tags/d7s-audit')
     runs-on: ubuntu-latest
-    # 6 h is the GitHub-hosted hard ceiling; a job that reaches it is killed and
-    # its shard is lost entirely. Stopping at 350 min instead means an overrun
-    # shows up as a clean failure with the log intact.
-    timeout-minutes: 350
+    # 6 h (360 min) is the GitHub-hosted hard ceiling. Stopping at 355 means an
+    # overrun is a clean failure with the log intact rather than an abrupt kill,
+    # while still giving a slow shard every usable minute -- 350 would have
+    # failed shards that the ceiling itself would have allowed.
+    #
+    # An overrun is RECOVERABLE, contrary to what this file said earlier: a
+    # topology cannot be SPLIT, but it can be re-run whole and pooled afterwards,
+    # because the pooler keys on the seed set rather than on run identity. With
+    # `fail-fast: false` the surviving shards keep their artifacts, so the cost
+    # of a slow shard is its wall clock, not the run.
+    timeout-minutes: 355
     strategy:
       fail-fast: false
       matrix:
