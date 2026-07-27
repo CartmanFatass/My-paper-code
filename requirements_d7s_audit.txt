@@ -1,0 +1,18 @@
+# Exact dependency set for the D7.S event-aligned audit, and nothing else.
+#
+# Deliberately NOT requirements_sb3.txt, which is a cu118 CUDA lock exported
+# from a different machine and contradicts the recorded runtime pin
+# (torch=2.7.0+cpu, backend=cpu, no CUDA fallback).
+#
+# torch and stable-baselines3 are absent on purpose. `scenario_base.py` guards
+# both in try/except ImportError and references neither symbol anywhere on this
+# path, so installing them would download CUDA wheels the audit never calls.
+#
+# Versions match the recorded local environment (hmasd-amd-cpu, python 3.10.20)
+# so a cloud shard and a local shard run the same numerics.
+numpy==1.26.3
+scipy==1.15.2
+matplotlib==3.10.0
+gymnasium==1.0.0
+pettingzoo==1.24.3
+networkx==3.2.1
