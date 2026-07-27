@@ -80,81 +80,78 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained at G38 as a usable freshly trained,
-  true-six-coordinate, no-carry, configured-capacity, bounded-random-process
-  continuous dynamic-roster test version for the registered H=48,
-  capacity-6/8/12 toy family.
+- Status: supported and retained at G39 as a usable freshly trained,
+  native-six-coordinate, no-carry, configured-capacity,
+  bounded-random-process continuous dynamic-roster test version for the
+  registered H=48, capacity-6/8/12 toy family.
 - Claim: a capacity-shape-independent actor trained only at capacity 8 remains
   usable at configured capacities 6, 8 and 12 across the fixed G32 process and
-  bounded G34-P0 random process. Under the G38 training route, the actor never
-  receives varying lifecycle age, previous actions or normalized time, and its
-  final checkpoint is exactly folded into a deployment actor consuming only
-  six per-member coordinates.
-- Deployed actor information: two capability coordinates, anonymous
-  presentation priority, current load, current target mix and
-  log1p(active_count). Active mask, active-set aggregation and the
-  active-fraction autoregressive prefix remain part of the policy contract.
-- Training-route boundary: G38 FOLD6 trains through the common ten-coordinate
-  graph with the last four active-row coordinates fixed to
-  (1/2,1/2,1/2,24/47). Both raw-input affine matrices remain fully trainable.
-  Exact folding incorporates their constant-column contributions into the
-  associated biases, removes 136 actor weights and leaves no donor, proxy,
-  filler or history reader in deployment.
+  bounded G34-P0 random process. The retained actor is six-coordinate from
+  initialization and contains no actor history fields, constant columns, donor
+  interface or post-training fold.
+- Actor information: two capability coordinates, anonymous presentation
+  priority, current load, current target mix and log1p(active_count). Active
+  mask, active-set aggregation and the active-fraction autoregressive prefix
+  remain part of the policy contract.
+- Native training boundary: the only raw-input affine maps are
+  Linear(6,32) and Linear(6,2). The actor carries no learned cross-step hidden
+  state and never reads lifecycle age, previous actions or normalized physical
+  time.
 - Formal immediate/delayed evidence: G31 passes the paired G17/G18 utility,
   spike-allocation, rotation, learned-gain and fresh-seed stability gates.
 - Formal configured-capacity evidence: G32 supports strict-loadable
   capacity-6/8/12 deployment and exact common-active padding invariance.
-- Formal bounded-process evidence: G34 supports zero-training transport from the
-  fixed 12/24/36 process to its registered one-each-of-L/R/J/T random process.
-- Formal current-state evidence: G35 freshly trains matched REC and CS arms.
-  Both access; pooled REC-minus-CS CI95 is
-  [-0.0173505, -0.0081213, 0.0007130], and every capacity-specific UCB is at
-  most 0.0054082 against the 0.05 margin.
-- Formal actual-history substitution evidence: G36 replaces the exact G35 CS
-  checkpoints' actor time, age and previous-action fields with an independent
-  coherent donor bundle. All
-  capacity-6/8/12 fixed/random access gates pass.
-- Formal donor-coherence evidence: G37's factorized donor produces a directional
-  average loss but selects MIXED_UNDERPOWERED_HISTORY_PROXY_COHERENCE_G37. This
-  exact checkpoint-level question remains valid but no longer blocks the
-  accepted actor because G38 removes the donor interface entirely after fresh
-  training.
-- Formal architectural-reduction evidence: G38 freshly trains parameter- and
-  exposure-matched FULL10 and constant-input FOLD6 arms. Both satisfy the full
-  access contract. Every one of 45 fold-equivalence gates has exactly zero
-  recorded error. FULL10-minus-FOLD6 primary CI95 is
-  [-0.01008621, -0.00312729, 0.00841468], and every registered component UCB is
-  at most the frozen 0.05 margin.
-- Accepted deployment boundary: the true folded G38 six-coordinate actor.
-  G36's coherent donor remains historical evidence but is no longer required
-  by the smallest retained deployment algorithm.
-- Retired alternatives: within G38-P0, usable deployment does
-  not require capacity-shaped learned parameters, capacity-specific retraining,
-  checkpoint adapters, the exact fixed 12/24/36 schedule, atomic R+J, learned
-  actor carry, actual actor time/age/previous-action sensors, a donor/filler
-  generator or a ten-coordinate deployment actor. A >0.05 finite-budget
-  advantage for the varying four-field actor bundle is closed.
-- Lifecycle boundary: active masks, likelihood ownership, environment lifecycle
-  state, fresh initialization, temporary leave/rejoin, terminal deletion and
-  survivor continuity remain protected runtime semantics.
+- Formal bounded-process evidence: G34 supports zero-training transport from
+  the fixed 12/24/36 process to its registered one-each-of-L/R/J/T random
+  process.
+- Formal current-state evidence: G35 freshly compares matched REC and CS arms.
+  Both access; every REC-minus-CS UCB is at most 0.0054082 against the 0.05
+  margin.
+- Formal history-interface evidence: G36 shows that exact G35 CS checkpoints do
+  not require the target episode's actual time, age or previous-action bundle
+  when supplied with a coherent donor. G37's complete donor factorization
+  closes mixed and remains historical checkpoint-sensitivity evidence.
+- Formal folded-architecture evidence: G38 freshly trains a constant-input
+  FOLD6 arm and folds it into a true six-coordinate deployment actor. Both
+  FULL10 and FOLD6 access, and FULL10-minus-FOLD6 CI95 is
+  [-0.01008621, -0.00312729, 0.00841468].
+- Formal native-training evidence: G39 compares function-matched CONST10_FOLD6
+  and NATIVE6_CS routes with identical actor information, critic, G31 credit,
+  source, interactions and optimizer-step exposure. Both access. The
+  CONST-minus-NATIVE pooled CI95 is
+  [-0.00286042, 0.00393514, 0.00975470]; capacity-6/8/12 UCBs are
+  0.00834785, 0.00857325 and 0.01206800. Native-six is noninferior by the
+  frozen 0.05 margin.
+- Accepted training and deployment boundary: NATIVE6_CS. Delete the four
+  constant columns, their 136 trainable weights and Adam moments, and the
+  post-training fold from the retained route.
+- Retired alternatives: within G39-P0, usable deployment and training do not
+  require capacity-shaped learned parameters, capacity-specific retraining,
+  checkpoint adapters, the exact fixed schedule, atomic R+J, learned actor
+  carry, actual actor time/age/previous-action sensors, donor/filler inputs,
+  ten-coordinate deployment, constant-column overparameterization or a fold.
+  A >0.05 finite-budget advantage for either the four varying history fields
+  or the redundant constant parameterization is closed.
+- Lifecycle boundary: active masks, likelihood ownership, environment
+  lifecycle state, fresh initialization, temporary leave/rejoin, terminal
+  deletion and survivor continuity remain protected runtime semantics.
 - Scope: H=48; configured capacity is fixed within a trajectory and belongs to
   6/8/12; G34-P0 contains one each of L/R/J/T and three registered legal event
   orders.
-- Strongest remaining explanation: the redundant constant-coordinate columns
-  and biases may alter Adam optimization even though they fold into a true
-  six-coordinate deployment actor. Native six-coordinate training equivalence
-  remains untested.
-- Critic and credit boundary: the centralized critic retains true current state,
-  including normalized time, and both arms use identical G31
-  realized-future-tail credit. G38 supplies no critic- or credit-comparator
-  evidence.
+- Strongest remaining training explanations: the centralized critic's true
+  current state and the G31 realized-future-tail/direction-balanced credit
+  package remain retained. G39 does not identify whether either can be
+  simplified.
+- Initialization boundary: G39 proves native-six sufficiency under a
+  function-matched projected initialization, not under every independently
+  sampled native initializer.
 - UAV boundary: temporary-service-loss G1 and charge-rotation G2 remain source
   non-identifiable. G33 and all derivatives remain abandoned by user
   instruction.
-- Exclusions: native-six training equivalence, arbitrary capacity/process/
-  horizon, critic-time reduction, UAV usability, asynchronous skill lifetime,
-  intrinsic-reward advantage, complete-algorithm superiority and G31-credit
-  redundancy remain unsupported.
+- Exclusions: arbitrary capacity/process/horizon, critic-time reduction,
+  ordinary-credit equivalence, UAV usability, asynchronous skill lifetime,
+  intrinsic-reward advantage and complete-algorithm superiority remain
+  unsupported.
 
 ## C-EHC — Event-held temporal state
 
@@ -216,6 +213,12 @@ the Project Manager-accepted CDC state.
   information absent from current observations, followed by a matched material
   recurrent advantage. More seeds, budget or threshold changes on G35/G38-P0
   are not reactivation evidence.
+- G39 update: native-six training from a function-matched initialization reaches
+  the complete continuous-roster access contract without actor history fields
+  or learned actor carry. This strengthens the local fully observed
+  current-state reduction but does not change recurrence's retained role on
+  sources containing task-relevant information absent from current
+  observations.
 
 ## C-BASE — The shared base policy class is insufficient
 
@@ -272,6 +275,14 @@ the Project Manager-accepted CDC state.
   six-coordinate reduction therefore isolates actor information and deployment
   architecture only. It neither establishes G31-credit necessity nor shows that
   ordinary credit can replace it.
+- G39 update: the actor information, recurrence and training-parameterization
+  reductions are now settled inside the continuous-roster P0 family. Both G39
+  arms still use identical G31 realized-future-tail targets and
+  direction-balanced updates, so G39 supplies no credit-comparator evidence.
+  A representation-, information-, source- and exposure-matched ordinary-credit
+  reduction is now eligible as the next local separating question. Any pass or
+  failure must remain local to its frozen source and cannot rewrite G31's
+  accepted G17/G18 evidence.
 
 ## C-BENCH — The benchmark is not identifying
 
