@@ -116,6 +116,7 @@ git_integration_status=project_manager_direct_authorized
 intermediate_authorization_prompts=forbidden
 experiment_orchestration=hmasd-experiment-operator only, never an ad hoc child
 experiment_operator_fallback=forbidden
+subagent_dispatch=user-granted 2026-07-27; before that the session prompt barred it
 iteration_report_requirement=required_before_successor
 workflow_hash_validation=disabled
 uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness
@@ -129,8 +130,16 @@ and returns exactly one `COMPLETE` or `ERROR` terminal payload.
 No Controller, persistent Monitor, dispatcher, callback route, global write
 lease or compatibility line is active.
 
-Iteration reports 1–28 are complete. 24 through 28 are all supporting work and
-consume no conclusion-bearing quota; the next conclusion-bearing report is 29,
+**Subagent dispatch was blocked by the session prompt, not by this repository.**
+The roster, the routing in `CLAUDE.md` and every `.claude/agents/*.md`
+registration were intact throughout; the binding constraint was one line in the
+session system prompt — *do not call the AgentTool unless the user requested
+it* — which by its own wording a single user sentence lifts. It was lifted on
+2026-07-27. Recorded here because an unused dispatch table looks like a broken
+one, and the next reader should not go looking for the wrong defect.
+
+Iteration reports 1–29 are complete. 24 through 29 are all supporting work and
+consume no conclusion-bearing quota; the next conclusion-bearing report is 30,
 and it will be the audit result itself.
 `conclusion_bearing_iterations_consumed` counts the **lifetime** total, not
 consumption against the current grant — an exhausted-looking pair is not an
@@ -191,7 +200,7 @@ disjoint_file_parallelism   = allowed
 | Findings and measurements | `docs/research/cdc/EVIDENCE_NOTES/` |
 | Review rounds, questions, rulings, reconciliations | `docs/external-review/rounds/` |
 | Closed generations G2–G16 | `docs/research/cdc/CLOSED_GENERATION_BOUNDARY_ARCHIVE_G2_G16.md` |
-| Latest Chinese iteration report | `docs/report/ITERATION_28.md` |
+| Latest Chinese iteration report | `docs/report/ITERATION_29.md` |
 
 Closed generations G17–G20R, UAV G1/G2, the contract-grill mechanism and the D7
 part-B margin-instrument era are retired; their evidence notes and round

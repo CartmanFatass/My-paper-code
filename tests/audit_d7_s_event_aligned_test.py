@@ -3433,5 +3433,77 @@ def test_full_state_fingerprint_is_within_process_identity_not_reproducibility()
     assert audit.compute_state_hash(snap_a) == audit.compute_state_hash(snap_b)
 
 
+# =============================================================================
+# The registered constants, pinned against the frozen contract
+# =============================================================================
+
+def test_every_registered_constant_matches_the_frozen_contract():
+    """A mutation sweep on 2026-07-27 perturbed each registered constant by one
+    step and ran the suite. **Six of sixteen were invisible**:
+
+        REJOIN_BATTERY_RATIO   0.80 -> 1.2          (an impossible ratio)
+        DELTA                    10 -> 11
+        H_STABLE                139 -> 140
+        N_CALIBRATION_EPISODES    8 -> 9
+        N_AUDIT_EPISODES          8 -> 9
+        BOOTSTRAP_SEED   2026072601 -> 2026072602
+
+    All six are read on live paths -- none is dead config. `H_STABLE` is the
+    starkest: `H_FLEX` was caught and `H_STABLE` was not, an asymmetric guard on
+    a symmetric pair, and `H_STABLE` sets the window over which `T_stable` is
+    measured, so changing it changes the estimand.
+
+    Expected values come from the **frozen contract**, not from the code, which
+    is what makes this a guard rather than a restatement: R2 `:119-120` for the
+    horizons, `:63` for Delta, `:38` for the rejoin ratio, `:227` for the
+    bootstrap seed, and R3/R2 section 8-9 for the rest. If a value here and in
+    the contract disagree, the code is wrong until a round says otherwise --
+    never edit this table to match the code.
+
+    The sweep perturbed sixteen constants; this table pins **eighteen**. The six
+    gaps are only where the sweep happened to look, and drift on any of the
+    others is equally silent."""
+    frozen = {
+        "REJOIN_BATTERY_RATIO": 0.80,
+        "DELTA": 10,
+        "X_STABLE_DISPLACEMENT_M": 50.0,
+        "Y_FLEX_STEPS": 10,
+        "Z_FLEX_TRANSIT_STEPS": 139,
+        "H_STABLE": 139,
+        "H_FLEX": 550,
+        "N_CALIBRATION_EPISODES": 8,
+        "N_AUDIT_EPISODES": 8,
+        "N_SELECT": 2,
+        "N_EVAL": 2,
+        "BOOTSTRAP_SEED": 2026072601,
+        "BOOTSTRAP_ITERS": 10000,
+        "EQUIVALENCE_DELTA": 0.05,
+        "MATERIALITY_COEFFICIENT": 0.10,
+        "MIN_SUPPORT_TOPOLOGIES": 6,
+        "MIN_SUPPORT_EPISODES_PER_TOPOLOGY": 4,
+        "EPISODE_STEPS": 1500,
+    }
+    drifted = {
+        name: (getattr(audit, name), expected)
+        for name, expected in frozen.items()
+        if getattr(audit, name) != expected
+    }
+    assert not drifted, (
+        "registered constants drifted from the frozen contract "
+        f"(name: code, contract): {drifted}")
+
+
+def test_the_registered_topology_seed_sets_are_exactly_as_frozen():
+    """The ruling of 2026-07-27 restates these explicitly, and the expansion set
+    is usable only under the frozen section-9 predicate -- never as a retry or a
+    power rescue. A silent edit to either list changes the population."""
+    assert list(audit.TOPOLOGY_SEEDS_INITIAL) == [
+        20260726, 20260727, 20260728, 20260729,
+        20260730, 20260731, 20260732, 20260733]
+    assert list(audit.TOPOLOGY_SEEDS_EXPANSION) == [
+        20260734, 20260735, 20260736, 20260737,
+        20260738, 20260739, 20260740, 20260741]
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))

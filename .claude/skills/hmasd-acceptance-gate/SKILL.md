@@ -69,6 +69,24 @@ drives the guard **red**. A positive assertion alone is not a guard.
   `-5·cutoff -10·depletion` terms, the heaviest in primary `G`, the moment a
   second UAV crossed. This sweep is cheap: it compares the name against the body
   and needs no reasoning about the implementation.
+- **Sweep mechanically before you sweep by reading.** Perturb each registered
+  constant by one step and rerun; delete each guard clause in turn and rerun.
+  This reads nothing, so it cannot be talked out of a finding by a plausible
+  test name — which is how the earlier instances survived. Found 2026-07-27:
+  **six of sixteen** frozen constants on the D7.S instrument could be changed
+  with the suite green, including `REJOIN_BATTERY_RATIO` set to an impossible
+  `1.2`, and including `H_STABLE` while its symmetric partner `H_FLEX` was
+  caught. An asymmetric guard on a symmetric pair means the coverage grew by
+  accident. The same sweep, rerun after the repair, **is** the paired negative.
+- **A table of expected values read out of the code is a restatement, not a
+  guard.** Pin constants against the frozen contract with its section and line,
+  and record the standing instruction: if the table and the contract disagree,
+  the code is wrong until a round says otherwise — never edit the table to match
+  the code.
+- **Your sweep tool needs the same scepticism as the test.** Two extraction bugs
+  on 2026-07-27 — `[a-z_]+` stopping at a capital, and a PCRE `(?:` handed to
+  `grep -E` — both failed silently *toward reporting full coverage*. A tool that
+  under-reports gaps is a guard that cannot go red, one level up.
 - Fixtures made degenerate or randomness-free for tractability delete exactly
   the variance the property is about. An environment whose `step()` draws no
   randomness cannot witness a determinism claim.
