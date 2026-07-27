@@ -80,10 +80,10 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained at G39 as a usable freshly trained,
-  native-six-coordinate, no-carry, configured-capacity,
-  bounded-random-process continuous dynamic-roster test version for the
-  registered H=48, capacity-6/8/12 toy family.
+- Status: supported and retained at G43 as a usable native-six-coordinate,
+  no-carry, post-anchor no-slow-critic, no-shadow fixed-equal-mean G31-credit,
+  configured-capacity, bounded-random-process continuous dynamic-roster test
+  version for the registered H=48, capacity-6/8/12 toy family.
 - Claim: a capacity-shape-independent actor trained only at capacity 8 remains
   usable at configured capacities 6, 8 and 12 across the fixed G32 process and
   bounded G34-P0 random process. The retained actor is six-coordinate from
@@ -122,6 +122,19 @@ the Project Manager-accepted CDC state.
   [-0.00286042, 0.00393514, 0.00975470]; capacity-6/8/12 UCBs are
   0.00834785, 0.00857325 and 0.01206800. Native-six is noninferior by the
   frozen 0.05 margin.
+- Formal scalar-schedule evidence: G43 compares the accepted G42 raw-sum
+  direction with its DB-derived per-pass global norm against the literal
+  no-shadow equal-channel mean `0.5*(g_I+g_S)`. Both arms pass every absolute
+  access gate. DBNORM-minus-MEAN pooled CI95 is
+  [-0.01122548, -0.00215076, 0.00407002]; capacity-6/8/12 UCBs are
+  0.00359780, 0.00473064 and 0.00379189. MEAN is noninferior by 0.05,
+  treatment activation is valid and material DBNORM advantage is false.
+- Accepted post-anchor training boundary: `COMMON_NATIVE6_FAST_ANCHOR ->
+  NATIVE6_G31_EQUAL_MEAN_NO_SHADOW_NO_SLOW`. Retain the native-six actor,
+  shared immediate/successor baseline, realized-successor targets, independent
+  channel normalization and literal equal-channel gradient mean. Delete the
+  standalone slow critic and all post-anchor DB vector, DB norm and shadow
+  computation.
 - Accepted training and deployment boundary: NATIVE6_CS. Delete the four
   constant columns, their 136 trainable weights and Adam moments, and the
   post-training fold from the retained route.
@@ -132,6 +145,10 @@ the Project Manager-accepted CDC state.
   ten-coordinate deployment, constant-column overparameterization or a fold.
   A >0.05 finite-budget advantage for either the four varying history fields
   or the redundant constant parameterization is closed.
+- G43 local closure: the DB-derived scalar global-norm schedule is not required
+  for access and has no material >0.05 advantage over the literal equal-channel
+  mean inside G43-P0. This does not close every adaptive scalar rule or any
+  retained target, decomposition, baseline, normalization or anchor component.
 - Lifecycle boundary: active masks, likelihood ownership, environment
   lifecycle state, fresh initialization, temporary leave/rejoin, terminal
   deletion and survivor continuity remain protected runtime semantics.
@@ -151,7 +168,9 @@ the Project Manager-accepted CDC state.
 - Exclusions: arbitrary capacity/process/horizon, critic-time reduction,
   ordinary-credit equivalence, UAV usability, asynchronous skill lifetime,
   intrinsic-reward advantage and complete-algorithm superiority remain
-  unsupported.
+  unsupported. G43 does not establish that all adaptive scales are useless,
+  that all fixed coefficients suffice, or that G17/G18 need no direction
+  balancing.
 
 ## C-EHC — Event-held temporal state
 

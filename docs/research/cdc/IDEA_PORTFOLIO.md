@@ -18,6 +18,27 @@ compute authority.
 | C-LINK-NULL | selected for G1; rejected locally in G2 | G1 link gain is null; G2 EHC-DUM gain is 0.5 with complete intervention consequences, but TEAM_REC remains sufficient. | Preserve both local results; do not generalize either across sources. |
 | C-MEASURE | retained with label correction | Two G2 replicates used inverted mark labels while every behavioral consequence remained perfect. | Use within-replicate permutation-invariant mark mediation; never raw signed accuracy as a future gate. |
 
+## G43 formal result update (mechanically recorded from External Pro)
+
+g43_continuous_roster_status=supported retained at G43: native-six no-carry, post-anchor no-slow, no-shadow fixed-equal-mean G31-credit configured-capacity bounded-process test version
+g43_continuous_roster_reason=G40 supports the complete G31 package over TEAM_GAE1; G41 deletes the standalone slow critic; G42 deletes DB angular composition; G43 shows both DBNORM and literal equal-mean arms access, with DBNORM-minus-MEAN CI95 [-0.01122548,-0.00215076,0.00407002] and every registered comparison noninferior by 0.05.
+g43_continuous_roster_route=COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_EQUAL_MEAN_NO_SHADOW_NO_SLOW
+g43_continuous_roster_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_DESIGN_ASSERTION_AUDIT
+g43_credit_status=supported on G17/G18 and shared-anchor G40-P0; slow critic and all post-anchor DB composition locally reduced by G41-G43
+g43_credit_retained_unit=realized_tail|decomposed_credit|shared_baseline_conditioning|independent_channel_normalization|literal_equal_channel_mean
+
+## Terminal disposition (G43)
+
+completed_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_FORMAL_ITERATION_33
+source_family=CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_P0
+formal_disposition=EQUAL_MEAN_RAW_SUM_SUFFICIENT_G43
+scientific_disposition=SUPPORTED_RETAINED_FIXED_EQUAL_MEAN_NO_SHADOW_POST_ANCHOR_G31_COMPOSITION_G43
+valid_result_disposition=CONTINUE
+next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_DESIGN_ASSERTION_AUDIT
+authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
+conclusion_bearing_iterations_consumed=33
+iterations_remaining=4
+
 ## Terminal disposition
 
 ```text
