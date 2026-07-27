@@ -20,6 +20,22 @@ The bounded preflight is an operational result only. Do not reinterpret code
 acceptance, change the estimand or controls, redesign G42, or infer a formal
 result from preflight metrics.
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_NONFORMAL_PREFLIGHT_FRESH_53B.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/project/CURRENT_WORK.md`
+
+Read only these paths and this question. Do not use repository history or any
+runtime path outside the evidence note.
+
 ## Frozen mechanical result
 
 - source commit is `53b0cd74487187a3b0618f4fbc04a19c744808e8`;
