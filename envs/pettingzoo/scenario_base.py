@@ -331,6 +331,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.current_step = 0
         self.uav_positions = np.zeros((self.n_uavs, 3))
         self.user_positions = np.zeros((self.n_users, 3))
+        # Set only by `regenerate_user_world`; None means the user world came
+        # from construction-time state and is not reproducible across
+        # constructions.
+        self.user_world_seed_applied = None
         self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
         self.routing_paths = {}
 
@@ -2136,6 +2140,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
         self.user_positions = self._generate_user_positions()
+        self.user_world_seed_applied = None
         self._init_user_velocities()
         
         # 3. 初始化移动模型特定的状态
@@ -2215,6 +2220,40 @@ class UAVForcedRelayEnv(ParallelEnv):
             infos[agent]['ping_pong_count'] = self.ping_pong_count
             
         return observations, infos
+
+    def regenerate_user_world(self, *, user_world_seed):
+        """Re-derive this episode's user world from a registered seed.
+
+        The user layout is a deterministic function of the RNG stream **and** the
+        ground-BS layout: `_generate_forced_relay_cluster_positions` picks its
+        remote corner from `ground_bs_positions`, which is drawn at construction
+        from an unseeded RNG. `reset(seed=)` therefore cannot reproduce a user
+        world across two constructions, and this method cannot either unless the
+        topology is already pinned — call it AFTER restoring recorded
+        coordinates, never before.
+
+        The draw is unchanged. The same generators run against the same
+        distribution parameters, so this makes a world reproducible and
+        recorded rather than altering what is sampled. It draws from a dedicated
+        RNG and restores the main stream afterwards, so the user world stays
+        independent of the arm continuation streams it must not correlate with.
+        """
+        seed_value = int(user_world_seed)
+        saved = self.np_random
+        self.np_random = np.random.RandomState(seed_value % (2 ** 32))
+        try:
+            self.user_positions = self._generate_user_positions()
+            self._init_user_velocities()
+            if self.user_movement_model == "rpgm":
+                self._initialize_user_waypoints_rpgm()
+        finally:
+            self.np_random = saved
+
+        self.user_world_seed_applied = seed_value
+
+        self._update_channel_state()
+        self._update_uav_connections()
+        self._compute_routing_paths()
 
     def _init_user_velocities(self):
         """初始化用户的速度"""

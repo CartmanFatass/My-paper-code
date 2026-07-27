@@ -118,6 +118,12 @@ def _reconstruct_topology_result(unit: dict) -> dict:
         "calibration_units_d_a": [_rebuild_unit_arrays(u) for u in unit["calibration_units_d_a"]],
         "audit_units_stable": [_rebuild_unit_arrays(u) for u in unit["audit_units_stable"]],
         "audit_units_flex": [_rebuild_unit_arrays(u) for u in unit["audit_units_flex"]],
+        # R3 section E provenance. Plain JSON scalars, so nothing to rebuild --
+        # but it must be carried, or the pooled artifact loses the record of
+        # which worlds its numbers were measured in. `.get` with a default keeps
+        # a pre-R3 shard poolable instead of crashing; such a shard simply
+        # reports no seed-controlled episodes.
+        "episode_worlds": unit.get("episode_worlds", []),
     }
 
 

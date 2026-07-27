@@ -65,11 +65,40 @@ guarantee. It is a ~65 % event. Three consequences:
    reproducible from a seed. That is what made task 14 tractable without
    touching `reset()`.
 
-## What was NOT changed
+## What was NOT changed, and the one thing that was
 
 `reset(seed=)` semantics are untouched, so no prior comparison changes meaning.
 Reproducibility is added at the pinning layer (`build_pinned_env` step 8 →
 `regenerate_user_world`), which is opt-in and used only by the D7.S audit.
+
+The **generator** is untouched — same routines, same parameters, and measured
+per-cluster spread is unchanged across 400 draws each way (109.59 ± 31.99 old
+vs 110.09 ± 32.83 new), cluster count config-fixed at 5.
+
+**But one factor moved a level, and an earlier draft of this note wrongly said
+nothing changed.** The remote-cluster corner is selected from the BS quadrant.
+Under the old ordering that quadrant came from the construction-time layout
+which was then discarded, making it an unseeded, roughly uniform, **per-episode**
+draw over four corners. Under the new ordering it is a deterministic function of
+the pinned topology and is **constant across every episode of that topology**.
+Measured remote-corner frequencies: old `(0,0) 119, (0,1) 91, (1,0) 104, (1,1)
+86`; new, over the eight registered topology seeds, three corners only with zero
+within-topology variance.
+
+Consequence, and it is scientific rather than cosmetic: R3 §E says user worlds
+"contribute through within-topology episode variation". The bootstrap machinery
+is unchanged, but the variance structure it estimates is not — the largest
+geometric factor in the user world has moved from the episode level to the
+topology level, which will compress within-topology spread and load the
+between-topology term. **This is disclosed to External Pro before the run, not
+after someone notices the within-topology spread came out small.**
+
+Read against that, the new behaviour is the faithful one. Under the old ordering
+the "remote" cluster was placed relative to a BS layout the episode then threw
+away, so in roughly three episodes in four the remote users were not remote from
+the base stations the episode actually ran with — the forced-relay premise of
+Scenario 7 was broken in most episodes. The fix is not being proposed for
+reversal; the variance-structure change is being put on the record.
 
 ## Provenance
 

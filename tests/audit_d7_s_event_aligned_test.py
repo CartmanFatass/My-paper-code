@@ -691,19 +691,69 @@ def test_selection_and_evaluation_namespaces_are_disjoint_across_many_candidates
     assert select_seeds.isdisjoint(eval_seeds)
 
 
-def test_evaluate_phase_shares_seed_between_set_and_keep_via_shared_token():
-    """CRN pairing: KEEP and the selected SET must derive the SAME evaluate-
-    phase seed for a given replicate, which this module realizes by both
-    callers passing the fixed `EVAL_SHARED_CANDIDATE_TOKEN`."""
-    seed_for_set = audit.stream_seed(
-        **_seed_kwargs(phase="evaluate", candidate_target_id=audit.EVAL_SHARED_CANDIDATE_TOKEN,
-                       replicate_index=3)
-    )
-    seed_for_keep = audit.stream_seed(
-        **_seed_kwargs(phase="evaluate", candidate_target_id=audit.EVAL_SHARED_CANDIDATE_TOKEN,
-                       replicate_index=3)
-    )
-    assert seed_for_set == seed_for_keep
+def test_evaluate_phase_actually_pairs_set_and_keep_on_the_production_path(monkeypatch):
+    """CRN pairing, asserted against the seeds `run_audit_event` REALLY derives.
+
+    The previous version of this test called `stream_seed` twice with
+    byte-identical kwargs and asserted equality -- `f(x) == f(x)`, which cannot
+    fail for any implementation. It read as coverage of the load-bearing CRN
+    invariant while proving nothing, and it passed for months during which no
+    production caller passed `EVAL_SHARED_CANDIDATE_TOKEN` at all and SET and
+    KEEP were NOT paired.
+
+    R2 section "Replicates", carried into R3 unchanged: "two disjoint evaluation
+    streams estimate selected SET and KEEP, sharing continuation base streams
+    under CRN". Unpaired, `U* = mean(eval_set) - mean(eval_keep)` carries the
+    post-`t_e` user-motion and UAV-failure noise of two different streams, which
+    at `n_eval=2` is the difference between a persistence effect and an artifact.
+    """
+    snap = _snapshot_of(_CloneableFakeEnv(seed=5))
+    env_for_geometry = _CloneableFakeEnv(seed=5)
+    duty_positions, centroids = audit.compute_duty_positions(env_for_geometry)
+    duty_map = {i: i for i in range(env_for_geometry.n_uavs)}
+    event = {
+        "hash_at_te": snap.hash_at_te, "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions, "service_centroids_at_te": centroids,
+        "focal_stable_uav": 0,
+        "legal_targets": {"stable": {"zA": np.array([100.0, 200.0, 50.0]),
+                                      "zB": np.array([300.0, 400.0, 50.0])}},
+        "locked_duties": {"stable": frozenset()},
+    }
+
+    # `_run_replicate` clones, then derives the seed, then forks -- so the two
+    # recorders stay index-aligned and the context string carries the identity
+    # the seed call does not receive.
+    contexts, seeds = [], []
+    real_clone = snap.clone
+    snap.clone = lambda **kw: (contexts.append(kw["context"]), real_clone(**kw))[1]
+    monkeypatch.setattr(audit, "fork_continuation",
+                        lambda env, **kw: (seeds.append(kw["continuation_seed"]),
+                                            {"step_metrics": [], "qos_user_steps": []})[1])
+    monkeypatch.setattr(audit, "window_g_from_step_metrics",
+                        lambda *a, **k: {"g_total": 0.0})
+
+    audit.run_audit_event(snapshot=snap, topology_seed=1, episode_seed=1,
+                           event=event, limb="stable", n_select=2, n_eval=2)
+
+    assert len(contexts) == len(seeds) and seeds, "recorders must stay aligned"
+    by_key = {}
+    for ctx, seed in zip(contexts, seeds):
+        parts = dict(p.split("=", 1) for p in ctx.split() if "=" in p)
+        by_key[(parts["candidate"], parts["phase"], parts["replicate"])] = seed
+
+    for r in ("0", "1"):
+        keep = by_key[("KEEP", "evaluate", r)]
+        assert by_key[("zA", "evaluate", r)] == keep, (
+            f"SET candidate zA and KEEP must share the evaluate stream at "
+            f"replicate {r}; U* is a paired contrast or it is noise")
+        assert by_key[("zB", "evaluate", r)] == keep
+
+    # Selection stays per-candidate -- that is what makes the maximizer choice
+    # independent across z -- and never collides with the evaluate namespace.
+    assert by_key[("zA", "select", "0")] != by_key[("zB", "select", "0")]
+    select_seeds = {v for k, v in by_key.items() if k[1] == "select"}
+    eval_seeds = {v for k, v in by_key.items() if k[1] == "evaluate"}
+    assert select_seeds.isdisjoint(eval_seeds)
 
 
 # =============================================================================

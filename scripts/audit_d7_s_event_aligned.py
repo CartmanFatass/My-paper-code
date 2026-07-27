@@ -303,27 +303,51 @@ def write_topology_record(out_dir, record: dict) -> Path:
 
 
 def build_pinned_env(config, *, episode_seed: int, coords: dict, coord_hash: str,
-                      energy_stage: str = "S3"):
-    """Steps 3-7 of the section 9 pinning procedure, in the load-bearing order:
+                      energy_stage: str = "S3", user_world_seed: Optional[int] = None):
+    """Steps 3-8 of the section 9 pinning procedure, in the load-bearing order:
     fresh env, reset with the EPISODE seed, restore the recorded coordinates
     only AFTER that reset (Scenario 7's reset calls `_init_charging_stations`,
     so restoring before it is insufficient), rebuild channel/routing state,
-    and assert the hash before any prefix replay."""
+    assert the hash, and only THEN derive the user world from its registered
+    seed.
+
+    Step 8 (R3 section E) must follow the hash assert, not precede it. The user
+    layout is a function of the ground-BS geometry as well as the RNG stream, so
+    deriving it before the topology is proven pinned would reproduce nothing:
+    the same `user_world_seed` against two different BS layouts gives two
+    different worlds. Passing `user_world_seed=None` keeps the pre-R3 behaviour,
+    where the world comes from construction-time state and no provenance can be
+    claimed for it."""
     from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
 
     env = UAVEnergyAwareRelayEnv(config=config, energy_stage=energy_stage)
     env.reset(seed=int(episode_seed))                       # step 4
     env.ground_bs_positions = coords["ground_bs"].copy()     # step 5 (no RNG consumed)
     env.charging_station_positions = coords["charging_stations"].copy()
-    env._update_channel_state()                              # step 6
-    env._update_uav_connections()
-    env._compute_routing_paths()
-    actual_hash = coordinate_hash(env.ground_bs_positions,    # step 7
+    actual_hash = coordinate_hash(env.ground_bs_positions,    # step 7, moved ahead of step 6
                                    env.charging_station_positions)
     if actual_hash != coord_hash:
         raise TopologyMismatchError(
             f"topology hash mismatch: expected {coord_hash}, got {actual_hash}"
         )
+    # Reproducibility needs BOTH halves: the registered seed AND a pinned
+    # topology, because the user world is a function of the BS quadrant too.
+    # Recording the proven hash here is what lets `episode_world_fingerprint`
+    # witness the second half instead of assuming it.
+    env.pinned_coordinate_hash = actual_hash
+    # Step 6 runs exactly ONCE, and after the world is final. `coordinate_hash`
+    # reads only the two coordinate arrays, so the assert never needed the
+    # channel rebuild ahead of it. Rebuilding before step 8 would rebuild
+    # against a user world step 8 is about to discard, and
+    # `_update_uav_connections` ACCUMULATES lifecycle counters -- a second pass
+    # books the world swap as ~18 UAV "leaves" that never happened, which then
+    # travel into the include-by-default state fingerprint.
+    if user_world_seed is not None:                           # step 8
+        env.regenerate_user_world(user_world_seed=int(user_world_seed))
+    else:
+        env._update_channel_state()                          # step 6
+        env._update_uav_connections()
+        env._compute_routing_paths()
     return env
 
 
@@ -1161,16 +1185,33 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
         parts.append(name.encode("utf-8"))
         parts.append(str(arr.shape).encode("utf-8"))
         parts.append(np.ascontiguousarray(arr).tobytes())
+    # Witnessed rather than declared, and it takes BOTH halves. A seed alone
+    # regenerates nothing: the user world is a function of the BS quadrant as
+    # well as the stream, so without a pinned topology the same seed produces a
+    # different world (measured: 4 distinct worlds in 6 constructions).
+    # `regenerate_user_world` is the only writer of `user_world_seed_applied`,
+    # and `build_pinned_env` is the only writer of `pinned_coordinate_hash`,
+    # which it sets only after the hash assert passes.
+    applied = getattr(env, "user_world_seed_applied", None)
+    pinned = getattr(env, "pinned_coordinate_hash", None)
+    controls = (
+        applied is not None
+        and pinned is not None
+        and seed_value is not None
+        and int(applied) == int(seed_value)
+    )
     return {
         "user_world_seed": None if seed_value is None else int(seed_value),
         "fingerprint": hashlib.sha256(b"".join(parts)).hexdigest(),
         "n_users": int(getattr(env, "n_users", 0)),
-        # Honest scope: as of this commit the seed is DERIVED and RECORDED but
-        # does not yet CONTROL user generation -- that requires changing
-        # construction inside envs/pettingzoo, which is a protected-semantics
-        # edit. Until it does, the fingerprint proves which world an episode
-        # actually ran in, but a rerun with the same seed will not reproduce it.
-        "seed_controls_generation": False,
+        # The other half of the reproduction key. A world is regenerable from
+        # (this hash, this seed), never from the seed alone.
+        "pinned_coordinate_hash": pinned,
+        # True means: rebuilding this episode at the same pinned topology and the
+        # same `user_world_seed` reproduces this fingerprint. False means the
+        # fingerprint still proves which world the episode ran in, but the world
+        # came from construction-time state and cannot be regenerated.
+        "seed_controls_generation": bool(controls),
     }
 
 
@@ -2170,7 +2211,8 @@ def _target_id(target) -> str:
 
 def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
                    recorded_actions: list, expected_hash: str, duty_map_at_te: dict,
-                   energy_permutation: Optional[np.ndarray] = None, energy_stage: str = "S3"):
+                   energy_permutation: Optional[np.ndarray] = None, energy_stage: str = "S3",
+                   user_world_seed: Optional[int] = None):
     """Section 8/Q-I2's fixed-history mechanism: fresh pinned env, same
     episode seed, replay the EXACT recorded source-control actions up to
     `t_e`, assert the resulting state hash against the ORIGINAL rollout's
@@ -2178,7 +2220,8 @@ def replay_prefix(config, *, coords: dict, coord_hash: str, episode_seed: int,
     and is NEVER repaired -- the caller must treat that as invalidating the
     pair, never retried or silently downgraded."""
     env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
-                            coord_hash=coord_hash, energy_stage=energy_stage)
+                            coord_hash=coord_hash, energy_stage=energy_stage,
+                            user_world_seed=user_world_seed)
     if energy_permutation is not None:
         apply_energy_profile(env, energy_permutation)
     for actions in recorded_actions:
@@ -2595,7 +2638,8 @@ def _baseline_masks(env) -> tuple:
 # =============================================================================
 
 def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, energy_seed: int,
-                             coords: dict, coord_hash: str, energy_stage: str = "S3") -> dict:
+                             coords: dict, coord_hash: str, energy_stage: str = "S3",
+                             episode_index: int = 0) -> dict:
     """One item-2/3/5 calibration episode: rolls `constructive_mixed` from
     reset to find the joint qualifying event (section 2/Q-E4), then forks
     at `t_e` into `constructive_mixed` vs `null` and evaluates BOTH
@@ -2626,8 +2670,12 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     itself failed for this episode, not just one arm) -- it is caught here,
     reported via `invalidated_pairs`, and the episode contributes to neither
     `B_m` nor `D_A`, never silently repaired or retried."""
+    uw_seed = user_world_seed(topology_seed=topology_seed, block="calibration",
+                               episode_index=episode_index)
     env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
-                            coord_hash=coord_hash, energy_stage=energy_stage)
+                            coord_hash=coord_hash, energy_stage=energy_stage,
+                            user_world_seed=uw_seed)
+    world = episode_world_fingerprint(env, seed_value=uw_seed)
     energies = draw_energy_permutation(energy_seed=energy_seed)
     apply_energy_profile(env, energies)
     prefix = roll_prefix_and_find_event(env)
@@ -2637,7 +2685,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     }
     if prefix["event"] is None:
         return {"support_miss": True, "invalidated": False, "exclusions": prefix["exclusions"],
-                "episode_report": episode_leave_report}
+                "episode_report": episode_leave_report, "episode_world": world}
 
     event = prefix["event"]
     results = {}
@@ -2665,6 +2713,11 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
             "duty_map_at_te": event["duty_map_at_te"],
             "duty_map_before_leave": event["duty_map_before_leave"],
             "episode_report": episode_leave_report,
+            # An invalidated episode is still an episode the run visited, and the
+            # audit loop's record is one entry per ATTEMPTED episode. Dropping it
+            # here would make the recorded set a filtered sample of the history
+            # rather than the history.
+            "episode_world": world,
         }
 
     for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
@@ -2684,9 +2737,14 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
                 })
                 limb_invalid = True
                 break
+            # CRN: every schedule of one calibration episode shares the
+            # continuation base stream, so `B_m = G(constructive) - G(null)` is a
+            # PAIRED contrast. Passing `schedule` here instead gave each arm its
+            # own stream, which is what made `bootstrap_ratio_ci`'s "arms are
+            # CRN-paired inside one episode" false.
             cont_seed = stream_seed(
                 topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
-                limb=limb, event_index=0, candidate_target_id=schedule,
+                limb=limb, event_index=0, candidate_target_id=EVAL_SHARED_CANDIDATE_TOKEN,
                 phase="evaluate", replicate_index=0)
             out = fork_continuation(
                 replay_env, duty_map_at_te=event["duty_map_at_te"],
@@ -2718,6 +2776,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
         "duty_map_at_te": event["duty_map_at_te"],
         "duty_map_before_leave": event["duty_map_before_leave"],
         "episode_report": episode_leave_report,
+        "episode_world": world,
     }
 
 
@@ -2768,9 +2827,18 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
             return None
         baseline_cutoff = snapshot.baseline_cutoff
         baseline_depletion = snapshot.baseline_depletion
+        # CRN, and the reason `stream_seed`'s docstring gives for the sentinel
+        # existing at all: during `phase="evaluate"` KEEP and the selected SET
+        # must land on the SAME continuation base stream per replicate index, so
+        # `U* = mean(eval_set) - mean(eval_keep)` is a paired contrast. During
+        # `phase="select"` the candidate id stays, because selection needs an
+        # independent stream per candidate. `phase` is itself hashed, so the two
+        # namespaces remain disjoint either way.
+        seed_candidate_id = (EVAL_SHARED_CANDIDATE_TOKEN if phase == "evaluate"
+                             else candidate_id)
         cont_seed = stream_seed(
             topology_seed=topology_seed, block="audit", episode_seed=episode_seed,
-            limb=limb, event_index=0, candidate_target_id=candidate_id,
+            limb=limb, event_index=0, candidate_target_id=seed_candidate_id,
             phase=phase, replicate_index=replicate_index)
         out = fork_continuation(
             replay_env, duty_map_at_te=event["duty_map_at_te"],
@@ -2884,6 +2952,11 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
 
     invalidated_pairs: list = []
     arm_distinctness_pairs: list = []
+    # R3 section E: one provenance record per attempted episode, including the
+    # ones that never qualified. A world that produced no event is still a world
+    # the run visited, and dropping it would make the recorded set a filtered
+    # sample rather than the run's actual history.
+    episode_worlds: list = []
 
     calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
     calibration_report = _new_episode_block_report()
@@ -2893,7 +2966,11 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
         result = run_calibration_episode(
             config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
-            coords=coords, coord_hash=coord_hash, energy_stage=energy_stage)
+            coords=coords, coord_hash=coord_hash, energy_stage=energy_stage,
+            episode_index=idx)
+        if result.get("episode_world") is not None:
+            episode_worlds.append({"block": "calibration", "episode_index": idx,
+                                    "episode_seed": ep_seed, **result["episode_world"]})
         episode_leave_report = result.get("episode_report", {})
         _accumulate_episode_leave_stats(
             calibration_report, leave_diagnostics=episode_leave_report.get("leave_diagnostics", []),
@@ -2943,8 +3020,11 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         audit_report["episodes_attempted"] += 1
         ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
         en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="energy_seed")
+        uw_seed = user_world_seed(topology_seed=topology_seed, block="audit", episode_index=idx)
         env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
-                                energy_stage=energy_stage)
+                                energy_stage=energy_stage, user_world_seed=uw_seed)
+        episode_worlds.append({"block": "audit", "episode_index": idx, "episode_seed": ep_seed,
+                                **episode_world_fingerprint(env, seed_value=uw_seed)})
         energies = draw_energy_permutation(energy_seed=en_seed)
         apply_energy_profile(env, energies)
         prefix = roll_prefix_and_find_event(env)
@@ -3015,6 +3095,7 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         "qualifying_audit_episodes": audit_report["qualifying"],
         "invalidated_pairs": invalidated_pairs,
         "arm_distinctness_pairs": arm_distinctness_pairs,
+        "episode_worlds": episode_worlds,
     }
 
 
@@ -3059,6 +3140,10 @@ def topology_unit_for_serialization(r: dict) -> dict:
         "calibration_units_d_a": r["calibration_units_d_a"],
         "audit_units_stable": r["audit_units_stable"],
         "audit_units_flex": r["audit_units_flex"],
+        # R3 section E provenance travels WITH its shard. A pooled artifact that
+        # dropped it would carry the numbers without the worlds they were
+        # measured in, which is the exact gap that retired ep64.
+        "episode_worlds": r.get("episode_worlds", []),
     }
 
 
@@ -3157,6 +3242,26 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             "topology_hash_failures": topology_hash_failures,
             "arm_distinct_ok": arm_distinct_ok,
         },
+    }
+
+    # R3 section E: episode-world provenance. `all_seed_controlled` is the
+    # readable verdict -- False means at least one episode ran in a world that
+    # cannot be regenerated, so that episode's contrast is in the same position
+    # ep64 was in and must not be read as matched causal evidence. It is
+    # reported rather than gated: the run is still a valid record of what
+    # happened, and whether incomplete provenance retires a reading is a
+    # scientific call, not an instrument one.
+    episode_worlds_all = [w for r in topology_results for w in r.get("episode_worlds", [])]
+    out["episode_world_provenance"] = {
+        "all_seed_controlled": all(
+            bool(w.get("seed_controls_generation")) for w in episode_worlds_all
+        ) if episode_worlds_all else False,
+        "episodes_recorded": len(episode_worlds_all),
+        "episodes_not_seed_controlled": [
+            {k: w.get(k) for k in ("block", "episode_index", "episode_seed", "fingerprint")}
+            for w in episode_worlds_all if not w.get("seed_controls_generation")
+        ],
+        "episode_worlds": episode_worlds_all,
     }
 
     # R2 section 8: the selection diagnostic is a required artifact field, not
