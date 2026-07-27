@@ -193,6 +193,51 @@ def test_charging_requires_request_capture_and_actual_hover():
     assert not env.uav_charging[0]
 
 
+def test_charging_hover_gate_excludes_a_moving_uav_but_not_a_hovering_one():
+    # Two UAVs, otherwise identical: same station, same distance (0 m, both
+    # sitting on the pad), same requested dock, same starting battery. The
+    # only difference is the ACTUAL velocity implied by the position delta
+    # across the step: UAV 0 hovers (zero displacement), UAV 1 is credited
+    # with a displacement that implies a speed above
+    # `charging_hover_speed_threshold`. If the hover gate at
+    # `_charging_candidates_by_station` (":1784-1785") is deleted, both UAVs
+    # become eligible and, with two free slots at the station, both get
+    # selected and charged -- this pair is what would go red under that
+    # deletion. A single hovering UAV cannot show that: charging.py already
+    # asserts the positive case in
+    # `test_charging_requires_request_capture_and_actual_hover`.
+    env = make_env("S7-S3", seed=73)
+    env.reset(seed=73)
+    env.n_charging_stations = 1
+    env.charging_station_capacity[:] = 2.0  # room for both, so the gate --
+    # not slot contention -- is what must exclude UAV 1.
+    env.uav_failed[:] = False
+
+    station = env.charging_station_positions[0].copy()
+    env.uav_battery_ratios[:2] = 0.5
+    env.uav_positions[:2] = station
+    env.uav_dock_requests[:2] = True
+    env.uav_target_stations[:2] = 0
+
+    pre_positions = env.uav_positions.copy()
+    speed_above_threshold = env.charging_hover_speed_threshold + 5.0
+    displacement = speed_above_threshold * env.time_step
+    pre_positions[1] = station + np.array([displacement, 0.0, 0.0])
+
+    before = env.uav_battery_ratios.copy()
+    env._apply_energy_dynamics(pre_positions, np.zeros((env.n_uavs, 3)))
+
+    # The hovering UAV is credited with charge -- the field that actually
+    # reaches battery state, `_energy_failure_mask` and the 5.0/10.0-weighted
+    # safety penalties, not a diagnostic sibling.
+    assert env.uav_charging[0]
+    assert env.uav_battery_ratios[0] > before[0]
+    # The moving UAV must NOT be credited: no charge added, battery only
+    # falls from its own consumption.
+    assert not env.uav_charging[1]
+    assert env.uav_battery_ratios[1] < before[1]
+
+
 def test_effective_charging_episode_statistics_count_transition_and_energy():
     env = make_env("S7-S3", seed=25)
     env.reset(seed=25)
@@ -350,6 +395,32 @@ def test_episode_terminates_when_every_uav_is_exhausted():
 
     _, _, terminations, truncations, _ = env.step(zero_actions(env))
     assert all(terminations.values())
+    assert not any(truncations.values())
+
+
+def test_episode_survives_when_only_some_uavs_are_exhausted():
+    # The termination gate at ":559-563" is `np.all(... <= 0.0)`: the whole
+    # fleet must be dead, not just one member. `test_episode_terminates_
+    # when_every_uav_is_exhausted` alone cannot show this -- an all-dead
+    # fixture terminates identically whether the quantifier is `all` or
+    # `any`. This fixture puts SOME but not all UAVs at zero battery: it must
+    # survive under `all` (the frozen contract) and would wrongly end the
+    # episode on the first dead UAV under `any`.
+    env = make_env("S7-S3", seed=42)
+    env.reset(seed=42)
+    env.uav_battery_ratios[:] = 0.5
+    env.uav_battery_ratios[0] = 0.0
+    env.uav_battery_ratios[1] = 0.0
+    env.uav_charging[:] = False
+
+    _, _, terminations, truncations, _ = env.step(zero_actions(env))
+
+    assert not np.all(env.uav_battery_ratios <= 0.0), (
+        "fixture invalid: the whole fleet drained to zero, which cannot "
+        "discriminate `all` from `any`")
+    assert not any(terminations.values()), (
+        "episode ended with some UAVs still alive -- the termination "
+        "quantifier is not the frozen `np.all` over the whole fleet")
     assert not any(truncations.values())
 
 
