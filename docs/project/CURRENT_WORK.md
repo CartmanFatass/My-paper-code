@@ -27,41 +27,66 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_EVENT_ALIGNED_SOURCE_AUDIT
-next_boundary=D7S_AUDIT_RESULT_READ
-workflow_position=audit launched and running; guard repairs in flight beside it
+next_boundary=PRO_ROUND_ON_THE_D7S_AUDIT_RESULT
+workflow_position=result in hand and mechanically validated; step 8 Pro round is next
 ```
 
-**The audit is running.** Launched 2026-07-27 at 17:25Z by user compute
-authorization: tag `d7s-audit-2` at stage commit `1b17dfb0`, GitHub Actions run
-`30289161086`, workflow `D7.S event-aligned audit`. Projected 5.3–6.3 h against
-a 5.92 h self-stop.
+**The audit ran and returned a valid, non-affirmative result.** Run
+`30289161086`, tag `d7s-audit-2`, stage commit `1b17dfb0`, 8/8 shards success in
+one wave, none near the 355-minute self-stop. Artifacts and full reading:
+`logs/d7s_audit_2_30289161086/` and
+`docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_AUDIT_2_RESULT_AND_A_MISLABELLED_BRANCH.md`.
 
-Stage B cleared it. Round `20260727_d7_s_stage_b_fingerprint_closure`, fenced at
-`8cb5a232c2928aa8d6c5c173557da96c2038a329`, ruled 2026-07-27 after 12m 56s.
-Zero blockers. All seven implementation defects the prior round implicated are
-inactive. Reconciliation at `30_PM_SCIENTIFIC_RECONCILIATION.md`.
+Mechanical validation clean: `smoke=False`, conformance ok, zero invalidated
+pairs, zero topology-hash failures, `arm_distinct_ok`, support 8/8 on both
+limbs, `all_seed_controlled=True`.
 
-Launch bindings, unchanged from the freeze: `n_select=2`, `n_eval=2`, the eight
-registered topologies `20260726–20260733`, expansion to `20260734–20260741`
-**only** under the frozen §9 predicate — never as a retry or a power rescue.
+```text
+b_stable_lcb  -0.077367      t_stable_ucb  +7.206993   t_stable_lcb  -2.189143
+b_flex_lcb    -8.648833      t_flex_lcb   -14.293054   t_flex_ucb    +3.115871
+recorded branch = SOURCE_NECESSITY_UNRESOLVED       part_a = NOT_APPLICABLE
+```
 
-No further Stage B review is required unless the frozen contract, the recursive
-fingerprint domain, the environment binding, CRN semantics, replicate volume,
-topology set, inference or result mapping changes.
+### The recorded branch label is wrong, and that is the round's question
 
-### Before the result may be read — two confirmed unfailable guards
+`assemble_audit_result` passes `primary_g_degenerate_flag=False` as a hardcoded
+literal and never calls `primary_g_degenerate`, so branch 3
+`PRIMARY_G_DEGENERATE` is unreachable. Evaluated post hoc with the instrument's
+own functions on its own output, the flag is `True` and the branch would be
+`PRIMARY_G_DEGENERATE`.
 
-Neither blocks the run; both must be repaired before iteration 30 reads it.
-Both were reproduced by the Project Manager with independent mutations, and both
-reach the estimator:
+Nothing is inflated — both labels are non-affirmative — and the run is valid.
+What changes is the next experiment: *unresolved* invites more replicates and
+topologies; *degenerate* says B_m established no positive source-control
+contrast at all, so more replicates would be a power rescue of a degenerate
+design.
 
-1. `test_user_world_seed_is_disjoint_from_every_other_registered_seed` probes a
-   nine-field namespace at one coordinate. The seed reaches `build_pinned_env`
-   → `regenerate_user_world` → `qos_satisfaction_ratio` → `compute_G`.
-2. `test_legal_set_never_excludes_for_unreachability_within_delta` exercises only
-   the `post_leave_targets` half of `Z(h)`. Losing the vacated pre-LEAVE half
-   shrinks the admitted event set toward "persistence is necessary" — the
-   claim-favouring direction.
+**This is External Pro's call, not this conversation's.** Wiring the flag is a
+change to a result branch. The mapping from recorded bounds to
+`b_m_positive_lcb` is Project Manager **inference** — there is no production
+derivation, because the function is never called.
+
+Do not write `docs/report/ITERATION_30.md` before that round rules. Step 8 is
+Pro-decision-then-report, and 30 is the conclusion-bearing report.
+
+### Guard state — what is now covered, and what is not
+
+Ten unfailable guards were repaired on 2026-07-27 across the instrument and the
+Scenario-7 environment; each was watched red under a mutation the Project
+Manager ran itself. `tests/audit_d7_s_event_aligned_test.py` is **183 passed**,
+`tests/scenario7_energy_aware_test.py` is **47 passed**.
+
+Still open, and deliberately not repaired here:
+
+- **`primary_g_degenerate`, `qos_component_saturated`, `expansion_allowed` are
+  dead code.** The first makes a registered result branch unreachable — the
+  round question above. The third means the §9 "one permissible expansion"
+  predicate **is not enforced by any code**: expansion happens by a human
+  passing `--topology-seeds`. The rule below reads as mechanized and is not.
+- **Over half of `scripts/audit_d7_s_event_aligned.py` is unswept**, function by
+  function, listed in
+  `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_A_RESULT_BRANCH_THAT_CANNOT_FIRE.md`.
+  Neither file may be read as audited.
 
 ### On a killed shard — the ruling's rule, which replaces ours
 

@@ -1,122 +1,105 @@
-# Restart handoff — 2026-07-27, clean seam
+# Restart handoff — 2026-07-27, after the first formal D7.S audit
 
-Successor PM: read this, then `docs/project/CURRENT_WORK.md`. Everything below
-is committed and pushed on `untied-k`. Nothing is half-applied.
+Successor PM: read this, then `docs/project/CURRENT_WORK.md`. Everything below is
+committed and pushed on `untied-k`. Nothing is half-applied.
 
-Replaces the 2026-07-26 handoff, whose one open deliverable (task 14,
-`user_world_seed` controlling generation) is **done and closed** — Stage B round
-`20260727_d7_s_stage_b_fingerprint_closure` returned `ALIGNED`, zero blockers.
+Replaces the earlier 2026-07-27 handoff, whose whole open list — two confirmed
+D7.S guards, two verified Scenario-7 guards, five unverified leads — is closed.
 
 ## The only boundary
 
 ```text
-next_boundary = USER_COMPUTE_AUTHORIZATION_FOR_THE_D7S_AUDIT
+next_boundary = PRO_ROUND_ON_THE_D7S_AUDIT_RESULT
 ```
 
-Every gate is passed. To launch:
+The audit ran. It is valid, non-affirmative, and **its recorded branch label is
+wrong**. That is the round's question and it is the first thing to do.
 
+## What the run returned
+
+```text
+run 30289161086, tag d7s-audit-2, stage_commit 1b17dfb0
+8/8 shards success in ONE wave, none near the 355-minute self-stop
+artifacts logs/d7s_audit_2_30289161086/
 ```
-git tag d7s-audit-2 && git push origin d7s-audit-2
+
+Mechanical validation clean: `smoke=False`, conformance ok, zero invalidated
+pairs, zero topology-hash failures, `arm_distinct_ok`, support 8/8 both limbs,
+`all_seed_controlled=True` — so this run is **not** in ep64's position.
+
+```text
+b_stable_lcb  -0.077367     b_flex_lcb    -8.648833
+t_stable_ucb  +7.206993     t_stable_lcb  -2.189143
+t_flex_lcb   -14.293054     t_flex_ucb    +3.115871
+branch = SOURCE_NECESSITY_UNRESOLVED      part_a = NOT_APPLICABLE
 ```
 
-That tag push is **user authority** (`formal_compute=user authority only`), and
-the last attempt to run it was refused by the auto-mode classifier. Ask; do not
-retry it silently. `d7s-benchmark-*` pushes do succeed, so the block is specific
-to this tag pattern, not to tagging.
+No affirmative branch could fire: each requires a strictly positive `b_*_lcb`.
 
-## What the last six iterations were
+### The label dispute, which is the round
 
-Supporting work only — iterations 24–29, no conclusion-bearing quota consumed.
-`iterations_remaining=17` unchanged. **The next conclusion-bearing report is 30
-and it is the audit result itself.**
+`assemble_audit_result` passes `primary_g_degenerate_flag=False` as a **hardcoded
+literal** and never calls `primary_g_degenerate`. Branch 3 `PRIMARY_G_DEGENERATE`
+is structurally unreachable. Evaluated post hoc with the instrument's own
+functions on its own output, the flag is `True` and the branch is
+`PRIMARY_G_DEGENERATE`.
 
-All of it is one investigation: **guards that cannot go red**. Ten instances so
-far, evidence notes dated `20260727_*` under
-`docs/research/cdc/EVIDENCE_NOTES/`, and the accumulated rule is
-`.claude/skills/hmasd-acceptance-gate/SKILL.md`, section *A guard test needs a
-paired negative*. Read that section before writing any test here.
+Nothing is inflated — both labels are non-affirmative. What changes is the next
+experiment. *Unresolved* invites more replicates, topologies, power. *Degenerate*
+says B_m established no positive source-control contrast at all, so more
+replicates would be a power rescue of a degenerate design. Opposite directions.
 
-The method converged: **sweep mechanically before you sweep by reading.**
-Perturb a constant, disable a guard clause, rerun. It reads nothing, so a
-plausible test name cannot talk it out of a finding — which is how the first
-eight instances survived. Harnesses live in the session scratchpad
-(`mutsweep.py`, `constsweep.py`, `poolsweep.py`); they are disposable, rewrite
-them per surface.
+**Do not decide this yourself.** Wiring a dead result branch is a change to a
+result branch. The mapping from recorded bounds to `b_m_positive_lcb` is PM
+**inference** — there is no production derivation, because the function is never
+called. Carry that qualifier into the question.
 
-## Open findings — two confirmed, un-repaired
+**Do not write `docs/report/ITERATION_30.md` before the round rules.** Step 8 is
+Pro-decision-then-report, and 30 is the conclusion-bearing one.
 
-A sweep found these on 2026-07-27. **I reproduced both myself with independent
-mutations**; they are not un-verified child claims. Both are UNGUARDED and both
-reach the estimator, so neither is cosmetic:
+## Guard state
 
-1. **`test_user_world_seed_is_disjoint_from_every_other_registered_seed`**
-   probes the `stream_seed` namespace at exactly **one** coordinate
-   (`phase="evaluate", limb="stable", event_index=0, replicate_index=0`).
-   Collapsing `user_world_seed` into `stream_seed` at `phase="select"` collides
-   exactly, and the suite stays **177 passed**. The seed reaches
-   `build_pinned_env` → `regenerate_user_world` → `qos_satisfaction_ratio` →
-   `compute_G`. It corrupts an estimator input, not a recorded field.
+Ten unfailable guards repaired today, each watched red under a mutation the PM
+ran itself rather than the implementer's demonstration. Suites:
+`tests/audit_d7_s_event_aligned_test.py` **183 passed**,
+`tests/scenario7_energy_aware_test.py` **47 passed**.
 
-2. **`test_legal_set_never_excludes_for_unreachability_within_delta`** exercises
-   only the `post_leave_targets` half of `Z(h)`. Excluding the **vacated
-   pre-LEAVE target** for unreachability leaves the suite **177 passed**. That is
-   the worse half to lose: it controls `has_legal_set_alternative`, hence
-   `EXCLUDE_EMPTY_SET_ALT` → `REJECT_EMPTY_LEGAL_SET`, so it silently shrinks the
-   admitted event set, biased toward "persistence is necessary" — the
-   claim-favouring direction.
+Evidence notes, all `docs/research/cdc/EVIDENCE_NOTES/20260727_*`:
+`S7_THREE_MORE_UNGUARDED_AND_TWO_LEADS_REFUTED`,
+`S7_FULL_SWEEP_THE_REWARD_ITSELF_IS_UNGUARDED`,
+`D7_S_A_RESULT_BRANCH_THAT_CANNOT_FIRE`,
+`D7_S_AUDIT_2_RESULT_AND_A_MISLABELLED_BRANCH`.
 
-Repair both before the audit result is read. Neither blocks the launch.
+### Open, deliberately not repaired
 
-### And seven more in Scenario-7 — reported by a sweep, two verified by me
+- **Three dead functions**: `primary_g_degenerate` (the round question),
+  `qos_component_saturated` (pure dead code), `expansion_allowed`. The last means
+  the §9 "one permissible expansion" predicate **is enforced by no code at all** —
+  expansion happens by a human passing `--topology-seeds`. `CURRENT_WORK` states
+  that rule as though it were mechanized. It is not.
+- **Over half of `scripts/audit_d7_s_event_aligned.py` is unswept**, listed
+  function by function in `D7_S_A_RESULT_BRANCH_THAT_CANNOT_FIRE`. Neither that
+  file nor the Scenario-7 environment may be read as audited.
 
-A second sweep covered `tests/scenario7_energy_aware_test.py` against
-`envs/pettingzoo/scenario7_energy_aware.py` (42 tests here; the sweep ran on an
-older worktree at 34, so **treat its line numbers as approximate and re-anchor
-by text**). It reported seven UNGUARDED and five CLEAN.
+## Four traps paid for today
 
-**I reproduced the top two myself on the current tree, each anchor matching
-exactly once — 42 passed under both mutations:**
-
-- **Hover gate.** Disabling
-  `if np.linalg.norm(actual_velocities[uav_idx]) > self.charging_hover_speed_threshold`
-  credits charging to a *moving* UAV and nothing notices. Reaches `uav_charging`
-  and the battery credit → `_energy_failure_mask` → cutoff/depletion counts →
-  the 5.0/10.0-weighted penalties in `safety_reward_before_pbrs`. Also
-  trajectory-changing (gates termination) and an observation feature. Highest
-  severity of the set.
-- **Termination quantifier.** `np.all(self.uav_battery_ratios <= 0.0)` →
-  `np.any(...)` ends the episode on the *first* dead UAV, green. Feeds
-  `terminations` → `episode_done` → the `terminal` flag that zeroes
-  `potential_next` in the graph-PBRS term of `G`.
-
-**The remaining five are the child's claims and are NOT yet verified** — treat
-them as leads with stated anchors, not as record, and reproduce before repairing:
-per-slot observation identity (`start = uav_idx * energy_uav_obs_dim` reversed,
-green — every policy input silently re-bound); `set_scenario7_safety_dual` side
-effects unobserved, so *only* in that test's name is vacuous; the five
-parametrized reward-ablation variants collapsing to two numeric outcomes at the
-fixture's seed; docking horizontal speed 3.0 → 1.0 undetected behind a
-clamp-tautology assertion; and the station layout not reproducing across
-processes.
-
-The sweep also named what it did **not** mutate — seven tests plus one
-observation that `test_constrained_safety_reward_metrics_are_exposed` is a
-second copy of the production formula. Read that list before assuming the file
-is covered.
-
-## Two user rulings from this session
-
-- **Subagent dispatch is granted.** It was never blocked by this repository —
-  routing, roster and registrations were intact throughout. The block was one
-  line in the session system prompt, lifted by the user on 2026-07-27.
-- **Do not pin a model in an agent definition; assign it per dispatch — and
-  assign it *explicitly*.** `general-purpose` pins no model and neither does
-  `hmasd-guard-sweeper`, so an omitted `model` **inherits the orchestrator's**;
-  on an Opus session, omitting gets you Opus. Two mechanical sweeps ran on Opus
-  on 2026-07-27 for exactly that reason. Downgrade deliberately: swapping
-  anchors and reading pytest exit codes is haiku work; tracing a mutated
-  quantity to `compute_G` is not. (`hmasd-experiment-operator` stays pinned to
-  haiku — that is a standing constraint, not a default.)
+- **A worktree does not arrive on your branch.** Three separate `isolation:
+  worktree` dispatches landed on `4866eb4e`, an unrelated line. Each child
+  noticed and reset — that is the only reason their findings mean anything. Make
+  every worktree child report the commit it actually ran at.
+- **Prove the mutation took effect before reading the green.** `config_1.py:504`
+  looks like the governing `docking_horizontal_speed_mps` and is dead code;
+  `_build_profile_overrides` hardcodes twelve such fields and the proxy reads
+  them before the base `Config`. A mutation there is inert, and I recorded its
+  green as a finding before catching it. The enumeration is in the S7 full-sweep
+  note. Read the value back through a constructed env.
+- **A guard that fails only when everything fails at once is the same defect one
+  level up.** The first branch-boundary repair reddened when all four predicates
+  were loosened together and stayed green when only `flex_clears` was. Mutate
+  each predicate individually.
+- **Push before you commit anything review-bound.** The drift guard blocked a
+  commit because an earlier one was unpushed and the review contract requires the
+  remote to be readable. It was right; the fix is to push, never `--no-verify`.
 
 ## Standing constraints that make a decision wrong if forgotten
 
@@ -127,17 +110,20 @@ intermediate_authorization_prompts=forbidden
 same_file_concurrent_writes=forbidden
 ```
 
-The workstation is shared with another research line — check for foreign
-processes before any local run, never touch them. Never bypass hooks; the drift
-guard has blocked ~13 commits and every one was correct.
+The user granted full permission for the 2026-07-27 overnight session and that is
+what authorized the `d7s-audit-2` tag push. **Do not treat that as standing** —
+the next formal run needs its own authorization.
 
-**Unresolved and the user's to settle:** ownership of `untied-k`. Another
-session committed `d3e0f72` asking that ownership be established first.
+The workstation is shared. Check `scripts/check_compute_free.ps1` and read
+`heavy_pids` before any local run; the other line's training ran most of today as
+pid 4268 and finished. `COMPUTE_BUSY` from our own work is a different case than
+from theirs — see `AGENTS.md`, Standing authorization.
 
-## Two operational traps, both paid for
+**Unresolved and the user's to settle:** ownership of `untied-k`. Another session
+committed `d3e0f72` asking that ownership be established first.
 
-- `pytest` here raises `PermissionError [WinError 5]` on the system temp dir.
-  Always pass `--basetemp` into the session scratchpad.
-- A sweep script that rewrites a tracked file must verify its restore with
-  `git diff --quiet`, **not** a string compare — a line-ending round trip
-  through `write_text` leaves the string equal and the file modified.
+## One correction to the cloud vehicle doc
+
+`COMPUTE_ROUTING.md` said only ~5 of 8 matrix shards run at once, so a sharded
+run is two waves. Counted on this run: **8 of 8 concurrent, one wave.** Expected
+wall clock is per-shard time, not double it. Corrected at `033a2efe`.
