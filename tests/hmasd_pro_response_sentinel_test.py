@@ -25,6 +25,30 @@ FENCE = "\n".join(
         "its listed evidence from stage_commit.",
     )
 )
+FULL_STAGE_COMMIT = "13ac7eb0eb1adac63a83e55754f7e516d2f40c5b"
+SHORT_STAGE_COMMIT = "13ac7eb"
+CORRECTED_FENCE = "\n".join(
+    (
+        "CURRENT_REVIEW_FENCE_CORRECTION",
+        f"supersedes_stage_commit={SHORT_STAGE_COMMIT}",
+        "repository=CartmanFatass/My-paper-code",
+        "branch=aggressive",
+        "round=20260727_continuous_roster_native_six_g31_db_norm_schedule_"
+        "attribution_g43_formal_result_review",
+        f"stage_commit={FULL_STAGE_COMMIT}",
+        "question=20_PRO_OPEN_QUESTION.md",
+        "instruction=Ignore earlier rounds and refs. Read only this question and "
+        "its listed evidence from stage_commit.",
+        "correction_scope=stage_commit_prefix_expansion_only; scientific question, "
+        "evidence allow-list, and scientific instruction are unchanged and are not "
+        "resubmitted.",
+    )
+)
+PREFIX_FENCE = CORRECTED_FENCE.replace(
+    f"stage_commit={FULL_STAGE_COMMIT}",
+    f"stage_commit={SHORT_STAGE_COMMIT}",
+    1,
+)
 
 
 def run(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -242,6 +266,83 @@ def test_monitor_assignment_token_fails_closed_when_truncated_or_rebound(
         str(state),
         "--assignment-token",
         str(other["monitor_assignment_token"]),
+        "--max-wait-seconds",
+        "0",
+        check=False,
+    )
+    assert rebound.returncode == 2
+    assert "freshness-fence identity does not match sentinel" in rebound.stderr
+
+
+def test_full_hash_correction_token_rejects_prefix_fence_identity(
+    tmp_path: Path,
+) -> None:
+    state = tmp_path / "corrected-monitor.jsonl"
+    initialized = json.loads(
+        run(
+            "init",
+            "--state",
+            str(state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            CORRECTED_FENCE,
+        ).stdout
+    )
+    for _ in range(2):
+        run(
+            "record",
+            "--state",
+            str(state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            CORRECTED_FENCE,
+            "--assistant-message-identity",
+            "assistant-message-corrected",
+            "--snapshot-fingerprint",
+            "corrected-response-fingerprint",
+            "--generation-controls",
+            "inactive",
+            "--candidate-available",
+            "true",
+            "--min-stable-seconds",
+            "0",
+        )
+    terminal = json.loads(
+        run(
+            "watch",
+            "--state",
+            str(state),
+            "--assignment-token",
+            str(initialized["monitor_assignment_token"]),
+            "--max-wait-seconds",
+            "0",
+        ).stdout
+    )
+    assert terminal["fence_identity"].encode("utf-8") == CORRECTED_FENCE.encode(
+        "utf-8"
+    )
+    assert FULL_STAGE_COMMIT in terminal["fence_identity"]
+
+    prefix_state = tmp_path / "prefix-monitor.jsonl"
+    prefix = json.loads(
+        run(
+            "init",
+            "--state",
+            str(prefix_state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            PREFIX_FENCE,
+        ).stdout
+    )
+    rebound = run(
+        "watch",
+        "--state",
+        str(state),
+        "--assignment-token",
+        str(prefix["monitor_assignment_token"]),
         "--max-wait-seconds",
         "0",
         check=False,

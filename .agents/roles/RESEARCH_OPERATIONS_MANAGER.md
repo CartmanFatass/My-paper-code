@@ -18,6 +18,10 @@ workflow_design_authority=none
 browser_authority=registered_external_pro_conversation_only
 browser_stuck_page_recovery=same_tab_reload_once_per_observed_episode
 browser_reload_fence_effect=none
+review_fence_stage_commit=full_40_hex_only
+review_fence_prefix_correction=once_same_conversation_before_assistant_response
+review_fence_correction_question_resubmission=forbidden
+review_fence_monitor_concurrency=one_live
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -102,10 +106,15 @@ science.
 
 Use `$hmasd-review-round` directly in this task. There is no second persistent
 transport role and no completion message back to another manager. The mode
-retains one exact fence, the registered conversation, natural-completion
-detection, one metadata-only `hmasd-pro-response-monitor`, evidence-access
-recovery, verbatim raw archival and provenance intake. It grants no scientific
-interpretation or code acceptance.
+retains one accepted exact full-hash fence, the registered conversation,
+natural-completion detection, one live metadata-only
+`hmasd-pro-response-monitor`, evidence-access recovery, verbatim raw archival
+and provenance intake. A visible fence whose only defect is a strict prefix of
+the assigned 40-character `stage_commit` is a rejected transport record. Before
+an assistant response exists, `$hmasd-review-round` may replace it once with a
+mechanically rendered full-hash correction that contains no scientific question
+body and changes no allow-list or scientific instruction. It grants no
+scientific interpretation or code acceptance.
 
 After archival, resume the operations loop from the exact External-Pro response.
 External Pro maintains multiple supported live or parked directions and selects

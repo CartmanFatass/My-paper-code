@@ -46,6 +46,16 @@ foreach ($required in @(
     'timer loop or emit pending progress messages',
     '$browser:control-in-app-browser',
     'VERIFY_FRESHNESS_FENCE',
+    'CORRECT_PREFIX_FENCE',
+    'render_review_fence.ps1',
+    'Full-hash prefix correction',
+    'rejected transport record',
+    'no assistant response is visible',
+    'no prior correction',
+    'contains no scientific question body',
+    'same pending review turn and registered conversation',
+    'At most one monitor and sentinel generation may be live',
+    'recovery consumes zero scientific iterations',
     'An accepted matching fence is never resubmitted',
     'same tab once for that stuck episode',
     'Reloading never proves the matching fence absent and never authorizes submission',
@@ -68,6 +78,7 @@ foreach ($forbidden in @(
     'refresh until',
     'reload proves the matching fence absent',
     'reload authorizes submission',
+    'Never send a second fence.',
     'watch --state <absolute-jsonl> --conversation-id')) {
     if ($skillNormalized.Contains($forbidden)) {
         throw "Review Skill permits unsafe stuck-page recovery: $forbidden"
@@ -99,6 +110,11 @@ foreach ($required in @(
 foreach ($required in @(
     'browser_stuck_page_recovery=same_tab_reload_once_per_observed_episode',
     'browser_reload_fence_effect=none',
+    'review_fence_stage_commit=full_40_hex_only',
+    'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
+    'review_fence_correction_question_resubmission=forbidden',
+    'review_fence_monitor_concurrency=one_live',
+    'rejected transport record',
     'Reloading never proves a freshness fence absent and never authorizes submission')) {
     if (-not $operationsNormalized.Contains($required)) {
         throw "Research Operations Manager role missing stuck-page recovery boundary: $required"
@@ -109,6 +125,9 @@ if ($skill -match '(?i)\bcontroller\b|hmasd-dispatch-task|hmasd-experiment-monit
 }
 foreach ($required in @(
     'hmasd-pro-response-monitor',
+    'exact 40-character stage commit',
+    'strict stage-commit prefix',
+    'without resubmitting the scientific question',
     'Never activate Answer now',
     'operations-manager-brokered JSONL sentinel',
     'child never opens the browser',
@@ -116,6 +135,76 @@ foreach ($required in @(
     if (-not $skillAgent.Contains($required)) {
         throw "Review Skill agent prompt missing: $required"
     }
+}
+
+$renderer = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/render_review_fence.ps1'
+if (-not (Test-Path -LiteralPath $renderer -PathType Leaf)) {
+    throw 'Deterministic review-fence renderer is missing'
+}
+$round = '20260727_continuous_roster_native_six_g31_db_norm_schedule_attribution_g43_formal_result_review'
+$fullCommit = '13ac7eb0eb1adac63a83e55754f7e516d2f40c5b'
+$prefix = '13ac7eb'
+$question = '20_PRO_OPEN_QUESTION.md'
+$assignment = (& $renderer `
+    -Mode Assignment `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question) -replace "`r`n", "`n"
+$expectedAssignment = @(
+    'CURRENT_REVIEW_ASSIGNMENT'
+    'repository=CartmanFatass/My-paper-code'
+    'branch=aggressive'
+    "round=$round"
+    "stage_commit=$fullCommit"
+    "question=$question"
+    'instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.'
+) -join "`n"
+if ($assignment -cne $expectedAssignment) {
+    throw 'Assignment renderer did not preserve the exact full-hash identity'
+}
+
+$correction = (& $renderer `
+    -Mode FullHashCorrection `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question `
+    -SupersedesStageCommit $prefix) -replace "`r`n", "`n"
+foreach ($required in @(
+    'CURRENT_REVIEW_FENCE_CORRECTION',
+    "supersedes_stage_commit=$prefix",
+    "stage_commit=$fullCommit",
+    'correction_scope=stage_commit_prefix_expansion_only; scientific question, evidence allow-list, and scientific instruction are unchanged and are not resubmitted.')) {
+    if (-not $correction.Contains($required)) {
+        throw "Full-hash correction renderer missing: $required"
+    }
+}
+if ($correction -match '(?m)^stage_commit=13ac7eb$') {
+    throw 'Correction renderer retained a shortened stage_commit field'
+}
+
+$shortAssignmentRejected = $false
+try {
+    & $renderer -Mode Assignment -Round $round -StageCommit $prefix -Question $question | Out-Null
+} catch {
+    $shortAssignmentRejected = $_.Exception.Message.Contains('exactly 40 lowercase hexadecimal')
+}
+if (-not $shortAssignmentRejected) {
+    throw 'Assignment renderer accepted a shortened stage commit'
+}
+
+$unrelatedPrefixRejected = $false
+try {
+    & $renderer `
+        -Mode FullHashCorrection `
+        -Round $round `
+        -StageCommit $fullCommit `
+        -Question $question `
+        -SupersedesStageCommit 'deadbee' | Out-Null
+} catch {
+    $unrelatedPrefixRejected = $_.Exception.Message.Contains('not a strict prefix')
+}
+if (-not $unrelatedPrefixRejected) {
+    throw 'Correction renderer accepted an unrelated commit prefix'
 }
 
 $sentinel = Join-Path $repo 'scripts/hmasd_pro_response_sentinel.py'

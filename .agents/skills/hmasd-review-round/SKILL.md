@@ -19,8 +19,8 @@ response, or what work follows it.
 
 Research Operations Manager authors and pushes its review files, then activates
 `$hmasd-review-round` in the same persistent task and uses
-`$browser:control-in-app-browser` for submission and archival. After one exact
-fence is visibly submitted, assign
+`$browser:control-in-app-browser` for submission and archival. After one
+accepted exact full-hash fence is visibly submitted, assign
 the registered nonpersistent `hmasd-pro-response-monitor` to observe the
 operations-manager-brokered metadata sentinel for that turn. The child never
 opens the browser. Do not create another transport task, relay, ad hoc monitor or manager
@@ -47,7 +47,11 @@ Before browser submission:
 2. Run
    `.agents/skills/hmasd-review-round/scripts/verify_pro_review_boundary.ps1`
    with that commit and question path.
-3. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and select only its
+3. Render the browser message with
+   `.agents/skills/hmasd-review-round/scripts/render_review_fence.ps1` in
+   `Assignment` mode. A short, uppercase or otherwise nonexact commit is an
+   error before browser interaction.
+4. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and select only its
    registered conversation.
 
 An identity mismatch stops transport for correction; it does not authorize
@@ -64,9 +68,10 @@ visible or the page title looks familiar.
 | State | Required observation | Mechanical action | Exit condition |
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page is observably stuck, wait once, take a fresh snapshot, then reload the same tab once for that stuck episode. | URL contains the registered ID and visible conversation messages are readable. |
-| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
+| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, the full 40-character `stage_commit`, `question` and instruction against renderer output. Resume an exact match. Submit once only after readable history proves it absent. | One accepted visible full-hash fence exists, or the single prefix-only correction condition is established. |
+| `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose fence identity exactly matches the initialized sentinel. |
-| `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
+| `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Do not create another accepted assignment fence or a prefix correction. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
@@ -76,7 +81,17 @@ user action; a generic ChatGPT home page does not.
 
 Always inspect the registered conversation before submission.
 
-Search visible user turns for this exact fence identity:
+Generate the original browser text only with:
+
+```powershell
+& .agents/skills/hmasd-review-round/scripts/render_review_fence.ps1 `
+  -Mode Assignment `
+  -Round <round> `
+  -StageCommit <40-character-stage-commit> `
+  -Question <question>
+```
+
+Search visible user turns for the exact emitted fence identity:
 
 ```text
 CURRENT_REVIEW_ASSIGNMENT
@@ -96,8 +111,44 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
 - If presence or absence cannot be established, recover the same conversation;
   uncertainty never authorizes submission.
 
-Keep one registered page, one append-only sentinel and exactly one registered
-Pro-response monitor while pending. Do not create a heartbeat, automation
+### Full-hash prefix correction
+
+A visible assignment whose `stage_commit` is a strict 7-39 character
+hexadecimal prefix of the assigned pushed 40-character commit is not an accepted
+fence. It is a rejected transport record. Exactly one correction is permitted
+only when all other rendered identity fields are equal, the scientific question
+was submitted once, no assistant response is visible, and no prior correction
+exists. A different round, repository, branch, question, instruction, unrelated
+hash or already-visible assistant response fails closed under ordinary transport
+blocking; it is never normalized into this exception.
+
+Before correction, make any sentinel and monitor bound to the rejected prefix
+terminal and confirm neither is live. Generate the correction only with:
+
+```powershell
+& .agents/skills/hmasd-review-round/scripts/render_review_fence.ps1 `
+  -Mode FullHashCorrection `
+  -Round <round> `
+  -StageCommit <40-character-stage-commit> `
+  -Question <question> `
+  -SupersedesStageCommit <visible-strict-prefix>
+```
+
+Send the emitted correction once in the same pending review turn and registered
+conversation. It
+contains the unchanged identity and instruction plus the prefix-expansion scope;
+it contains no scientific question body, no new evidence allow-list and no new
+scientific instruction. Do not use `Retry`, resubmit the original question, or
+activate `Answer now`. After a fresh snapshot proves every correction field
+exact, initialize a new sentinel with the complete correction text as its fence
+identity and assign one replacement monitor with the returned opaque token. At
+most one monitor and sentinel generation may be live. The corrected full-hash
+message is the sole accepted fence and the recovery consumes zero scientific
+iterations.
+
+Keep one registered page, one live append-only sentinel and exactly one live
+registered Pro-response monitor while pending. The bounded prefix correction
+retires the rejected generation before creating its single replacement. Do not create a heartbeat, automation
 poller, second monitor or transport task. Research Operations Manager owns all
 browser access because a native child does not inherit the in-app-browser
 binding. At ordinary task wakeups, the operator takes one bounded read-only page
@@ -174,8 +225,9 @@ browser binding and does not authorize a new fence.
 
 ### Response completion detection
 
-Locate the exact user message containing the matching fence, then inspect the
-assistant message after that fence using message-role containers such as
+Locate the exact user message containing the accepted assignment fence or
+full-hash correction, then inspect the assistant message after that fence using
+message-role containers such as
 `data-message-author-role="assistant"`. Do not use the page tail, a single
 spinner, elapsed time or a global status label as the response identity.
 
@@ -245,7 +297,8 @@ Recover in the same registered conversation and under the same accepted fence:
    expected commit and file count.
 3. Attach that exact archive to the same conversation and send one mechanical
    continuation stating its commit, allow-list identity and that the prior
-   response is a transport diagnostic. Do not submit another freshness fence.
+   response is a transport diagnostic. Do not submit another accepted assignment
+   fence or use the prefix-correction exception.
 4. The candidate raw is the stable assistant response after the
    latest Research Operations Manager transport-repair message, still anchored to the original
    matching fence. Apply the same two-snapshot and generation-control checks to
@@ -256,7 +309,7 @@ Recover in the same registered conversation and under the same accepted fence:
    a newly authored scientific explanation.
 
 Record the diagnostic and recovery as transport facts in the mechanical intake.
-They never change the question contents or the single-fence state.
+They never change the question contents or the one-accepted-fence state.
 
 ## Exact archival, cleanup, and intake
 
@@ -300,7 +353,10 @@ action=<diagnostic or recovery action>
 outcome=<observed result>
 ```
 
-Before any submission retry, prove the matching fence absent. Report
+Before any assignment submission retry, prove the matching fence absent. The
+only post-submission identity message is the once-only prefix correction under
+its complete eligibility predicate; it is not an assignment or scientific
+question resubmission. Report
 `REVIEW_TRANSPORT_BLOCKED` only after all safe in-scope recovery is exhausted;
 include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.

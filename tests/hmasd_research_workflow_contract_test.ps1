@@ -132,6 +132,10 @@ foreach ($required in @(
     'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
     'operational_recovery_reauthorization=not_required_per_attempt',
     'operational_recovery_scientific_iteration_cost=zero',
+    'review_fence_stage_commit=full_40_hex_only',
+    'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
+    'review_fence_correction_question_resubmission=forbidden',
+    'review_fence_monitor_concurrency=one_live',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $operationsRole.Contains($required)) { throw "Research Operations Manager role missing: $required" }
 }
