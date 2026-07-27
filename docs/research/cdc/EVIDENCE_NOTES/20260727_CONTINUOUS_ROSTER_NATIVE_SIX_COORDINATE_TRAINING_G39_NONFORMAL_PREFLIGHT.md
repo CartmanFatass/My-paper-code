@@ -1,0 +1,45 @@
+# G39 same-source nonformal preflight mechanical result
+
+```text
+record_kind=mechanical_runtime_evidence
+algorithm_id=CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39
+source_id=CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39_P0
+source_commit=e322f817abab49b56dd7c53ad1c09cd2b081b0aa
+run=nonformal_continuous_roster_native_six_coordinate_training_g39_cpu_20260727_e322f817_pm1
+run_root=logs/nonformal_continuous_roster_native_six_coordinate_training_g39_cpu_20260727_e322f817_pm1
+formal=false
+authorization_token=not_applicable_nonformal
+alignment_disposition=not_applicable_nonformal
+aligned_source_commit=not_applicable_nonformal
+backend=cpu
+python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
+torch=2.7.0+cpu
+torch_threads=1
+train_status=COMPLETE
+evaluate_status=COMPLETE
+analyze_status=COMPLETE
+train_exit_code=0
+evaluate_exit_code=0
+analyze_exit_code=0
+operational_valid=true
+operational_errors=empty
+analysis_branch=NONFORMAL_CONTINUOUS_ROSTER_NATIVE_SIX_TRAINING_G39_EXERCISE_COMPLETE
+training_transitions=15360
+evaluation_transitions=8640
+total_real_transitions=24000
+optimizer_steps=120
+evaluation_cells=30
+evaluation_episodes_per_cell=6
+bootstrap_resamples=250
+nonformal_wall_time_seconds=88.93207829999994
+nonformal_wall_clock_cap_seconds=1200
+formal_projection_seconds=3370.5618419999973
+formal_projection_executable=true
+train_manifest=train_manifest.json
+evaluation_manifest=evaluation_manifest.json
+analysis_result=analysis_result.json
+```
+
+This note records runtime and artifact facts only. It is not a scientific
+disposition, formal authorization, or successor selection.
+
