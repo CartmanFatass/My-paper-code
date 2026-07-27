@@ -2471,6 +2471,36 @@ def _json_default(obj):
     return str(obj)
 
 
+def topology_unit_for_serialization(r: dict) -> dict:
+    """Sharding support (docs/research/designs/D7_S_EVENT_ALIGNED_SOURCE_AUDIT.md
+    is silent on process topology -- this is orchestration plumbing, not a
+    contract choice): the exact subset of one `run_topology_audit` topology
+    result that `assemble_audit_result` reads --
+    `qualifying_calibration_episodes`, `qualifying_audit_episodes`,
+    `invalidated_pairs`, `arm_distinctness_pairs`, `calibration_units_stable`,
+    `calibration_units_flex`, `calibration_units_d_a`, `audit_units_stable`,
+    `audit_units_flex` -- plus `topology_seed` (which `assemble_audit_result`
+    itself never reads) so a pooler can reorder shards' topologies back into
+    ascending topology-seed order regardless of shard/argument order. This
+    is what `main()` embeds under `topology_units` and what
+    `scripts/pool_d7_s_event_aligned_shards.py` reconstructs from JSON --
+    every numpy array nests unchanged and round-trips via `_json_default`
+    (list of full-precision floats) on the way out and `np.asarray(...,
+    dtype=float)` on the way back in."""
+    return {
+        "topology_seed": r["topology_record"]["topology_seed"],
+        "qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
+        "qualifying_audit_episodes": r["qualifying_audit_episodes"],
+        "invalidated_pairs": r["invalidated_pairs"],
+        "arm_distinctness_pairs": r["arm_distinctness_pairs"],
+        "calibration_units_stable": r["calibration_units_stable"],
+        "calibration_units_flex": r["calibration_units_flex"],
+        "calibration_units_d_a": r["calibration_units_d_a"],
+        "audit_units_stable": r["audit_units_stable"],
+        "audit_units_flex": r["audit_units_flex"],
+    }
+
+
 def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optional[list],
                       episodes_calibration: Optional[int], episodes_audit: Optional[int]) -> dict:
     """CLI arg resolution (item 2): topology seed list plus episode counts.
@@ -2673,6 +2703,14 @@ def main() -> None:
         "calibration_reports": [r["calibration_report"] for r in topology_results],
         "audit_reports": [r["audit_report"] for r in topology_results],
         "audit_events": [r["audit_events"] for r in topology_results],
+        # Sharding support (Task A): a complete, numerically lossless
+        # per-topology serialization of every `run_topology_audit` output key
+        # `assemble_audit_result` consumes, so a per-topology shard's JSON is
+        # self-sufficient for `pool_d7_s_event_aligned_shards.py` to
+        # reconstruct `topology_results` and call `assemble_audit_result`
+        # itself over the pooled union -- see `topology_unit_for_serialization`.
+        "topology_units": [topology_unit_for_serialization(r) for r in topology_results],
+        "topology_hash_failures": topology_hash_failures,
     }
     result.update(assemble_audit_result(topology_results, topology_hash_failures))
 
