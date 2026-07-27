@@ -65,7 +65,7 @@ recover it either.
 | 3 | `full_sync_SET` cadence + stable-limb lock | done `fd48f1e` |
 | 4 | Tests rebuilt on the real mechanism | done `3c20edd` |
 | 5 | ep64 retired in the ledger + widened provenance rule | done `7b7bf61` |
-| 6 | **`user_world_seed` + episode-world fingerprint** | **NOT DONE — task 14** |
+| 6 | `user_world_seed` + episode-world fingerprint | **half done `831112f`** — see below |
 
 150 focused tests pass. `scripts/d7_s_clone_conformance_check.py` reports
 `CLONE_CONFORMANCE_PASS` on the real environment across all seven conditions
@@ -76,16 +76,26 @@ including 1A, 1B and cross-limb, with **zero reconstruction replays**.
 **Task 14 — episode-world provenance.** Pro Q2(b): construction-time OS entropy
 is not adequate evidence provenance, and "do nothing" was explicitly refused.
 
-- a `user_world_seed` derived from existing episode provenance under a **disjoint
-  namespace**, controlling initial user positions, cluster assignments and
-  centres, user/cluster waypoints, initial motion and pause state — separate from
-  topology, energy-permutation and continuation seeds;
-- an episode-world fingerprint recorded after env initialization;
-- the event-history fingerprint at `t_e` carried in the artifact.
+**Done (`831112f`, 152 tests pass):**
 
-The distribution must not change — it only becomes reproducible. This touches
-`envs/pettingzoo` user generation, so treat the protected-semantics boundary
-carefully.
+- `user_world_seed(topology_seed, block, episode_index)` — derived under a
+  namespace disjoint from `stream_seed`'s, with a test proving no collision, so
+  the user world cannot correlate with the arm streams it must be independent of;
+- `episode_world_fingerprint(env, seed_value=)` — records initial user and
+  cluster state after initialization;
+- the event-history fingerprint at `t_e` was already carried (`3c20edd`).
+
+**Remaining, and it is the substantive half:** the seed does not yet *control*
+user generation. The payload says so explicitly —
+`seed_controls_generation: False`. Making it true means changing construction
+inside `envs/pettingzoo` so the user layout derives from `user_world_seed`
+instead of construction-time entropy, then threading the seed through
+`build_pinned_env` and recording the fingerprint per episode in the artifact.
+
+That is a **protected-semantics edit**: the distribution must not change, only
+become reproducible. Deferred deliberately rather than rushed before a session
+switch — a half-applied change to environment semantics is worse than a clean
+seam.
 
 **The trap to expect:** `tests/env_user_population_determinism_test.py` asserts
 that two fresh envs with the same seed do **not** share users. Implementing task
