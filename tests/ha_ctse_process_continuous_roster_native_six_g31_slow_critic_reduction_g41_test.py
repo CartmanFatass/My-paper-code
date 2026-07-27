@@ -1,13 +1,20 @@
 from __future__ import annotations
 
 import copy
+from collections.abc import Iterator
 from typing import Any
 
+import pytest
 import torch
 
 from ha_ctse_process import continuous_roster_native_six_credit_reduction_g40 as g40
 from ha_ctse_process import (
     continuous_roster_native_six_g31_slow_critic_reduction_g41 as g41,
+)
+
+
+TRUSTED_PROOF_ANCHOR_DIGEST = (
+    "1037eedea543ff2eb5c04d45df1367b1dc8ea19cde939c80af2ac6fc54c23931"
 )
 
 
@@ -53,10 +60,48 @@ def _anchor() -> g40.G40NativeSixPolicy:
     return g40.make_model(8, initialization_seed=10_401_000)
 
 
-def test_static_projection_reconstructs_zero_slow_dependency_and_checkpoint_binding() -> None:
-    anchor = _anchor()
+@pytest.fixture(scope="module")
+def trusted_common_anchor() -> Iterator[
+    tuple[g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory]
+]:
+    prior_threads = torch.get_num_threads()
+    torch.set_num_threads(1)  # Accepted G39/G40 CPU runtime configuration.
+    try:
+        anchor = _anchor()
+        trajectory = g40.collect_g40_trajectory(
+            anchor,
+            episode_ids=range(8),
+            ledger_seed=10_404_000,
+            action_seed=10_405_000,
+            device=torch.device("cpu"),
+        )
+        optimizer = torch.optim.Adam(
+            anchor.actor_credit_parameters(),
+            lr=g40.LEARNING_RATE,
+            betas=(0.9, 0.999),
+            eps=1e-8,
+            weight_decay=0.0,
+        )
+        g40.optimize_common_fast_anchor_update(
+            anchor, optimizer, trajectory, ppo_passes=2
+        )
+        del optimizer
+        assert g41._state_digest(anchor.state_dict()) == TRUSTED_PROOF_ANCHOR_DIGEST
+        yield anchor, trajectory
+    finally:
+        torch.set_num_threads(prior_threads)
+
+
+def test_static_projection_reconstructs_external_anchor_binding_and_rejects_self_certification(
+    trusted_common_anchor: tuple[
+        g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
+    ],
+) -> None:
+    anchor, _ = trusted_common_anchor
     rng_before = torch.random.get_rng_state().clone()
-    full, no_slow = g41.project_post_anchor_paths(anchor)
+    full, no_slow = g41.project_post_anchor_paths(
+        anchor, trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST
+    )
     assert torch.equal(rng_before, torch.random.get_rng_state())
     full.begin_credit_branch_phase()
     no_slow.begin_credit_branch_phase()
@@ -70,6 +115,7 @@ def test_static_projection_reconstructs_zero_slow_dependency_and_checkpoint_bind
         full_optimizer,
         no_slow_optimizer,
         checkpoint,
+        trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST,
     )
     assert certificate["passed"] is True, certificate
     assert all(certificate["zero_standalone_slow_reads"].values())
@@ -86,6 +132,9 @@ def test_static_projection_reconstructs_zero_slow_dependency_and_checkpoint_bind
     assert certificate[
         "checkpoint_bound_to_accepted_g40_source_and_anchor"
     ] is True
+    assert certificate["trusted_anchor_digest_well_formed"] is True
+    assert certificate["checkpoint_state_digest_valid"] is True
+    assert certificate["checkpoint_matches_projection"] is True
     assert certificate["standalone_value_output_schema_absent"] is True
     assert certificate["K_search"] == 0
     assert certificate["hypothetical_transitions"] == 0
@@ -97,6 +146,49 @@ def test_static_projection_reconstructs_zero_slow_dependency_and_checkpoint_bind
     assert not any("slow_critic" in name for name in checkpoint["model_state"])
     assert hasattr(full, "slow_critic")
     assert not hasattr(no_slow, "slow_critic")
+
+    fresh = _anchor()
+    fresh_digest = g41._state_digest(fresh.state_dict())
+    assert fresh_digest != TRUSTED_PROOF_ANCHOR_DIGEST
+    with pytest.raises(ValueError, match="lowercase SHA-256"):
+        g41.project_post_anchor_paths(
+            fresh, trusted_anchor_digest="not-a-trusted-checkpoint-digest"
+        )
+    with pytest.raises(ValueError, match="externally trusted digest"):
+        g41.project_post_anchor_paths(
+            fresh, trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST
+        )
+
+    tampered = copy.deepcopy(anchor)
+    with torch.no_grad():
+        tampered.credit_baselines[2].bias[0].add_(1.0)
+    tampered_self_digest = g41._state_digest(tampered.state_dict())
+    assert tampered_self_digest != TRUSTED_PROOF_ANCHOR_DIGEST
+    with pytest.raises(ValueError, match="externally trusted digest"):
+        g41.project_post_anchor_paths(
+            tampered, trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST
+        )
+
+    rewritten = dict(checkpoint)
+    rewritten["accepted_g40_anchor_state_digest"] = tampered_self_digest
+    rewritten["model_state_digest"] = g41._state_digest(
+        rewritten["model_state"]
+    )
+    rewritten_certificate = g41.reconstruct_static_certificate(
+        tampered,
+        full,
+        no_slow,
+        full_optimizer,
+        no_slow_optimizer,
+        rewritten,
+        trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST,
+    )
+    assert rewritten_certificate["passed"] is False
+    assert rewritten_certificate[
+        "checkpoint_bound_to_accepted_g40_source_and_anchor"
+    ] is False
+    assert rewritten_certificate["checkpoint_state_digest_valid"] is True
+    assert rewritten_certificate["checkpoint_matches_projection"] is True
 
 
 def test_g31_credit_targets_are_exact_and_have_no_slow_value_input() -> None:
@@ -131,17 +223,16 @@ def test_g31_credit_targets_are_exact_and_have_no_slow_value_input() -> None:
         assert torch.equal(reduced.successor_advantage, full.successor_advantage)
 
 
-def test_one_cpp_batch_two_passes_is_bitwise_full_no_slow_and_g40_equivalent() -> None:
-    anchor = _anchor()
-    trajectory = g40.collect_g40_trajectory(
-        anchor,
-        episode_ids=range(8),
-        ledger_seed=10_404_000,
-        action_seed=10_405_000,
-        device=torch.device("cpu"),
-    )
+def test_one_cpp_batch_two_passes_is_bitwise_full_no_slow_and_g40_equivalent(
+    trusted_common_anchor: tuple[
+        g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
+    ],
+) -> None:
+    anchor, trajectory = trusted_common_anchor
     assert trajectory.rewards.numel() == g41.MAX_CONFORMANCE_TRANSITIONS
-    full, no_slow = g41.project_post_anchor_paths(anchor)
+    full, no_slow = g41.project_post_anchor_paths(
+        anchor, trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST
+    )
     full.begin_credit_branch_phase()
     no_slow.begin_credit_branch_phase()
     reference = copy.deepcopy(full)
@@ -160,6 +251,7 @@ def test_one_cpp_batch_two_passes_is_bitwise_full_no_slow_and_g40_equivalent() -
         full_actor,
         no_slow_actor,
         checkpoint,
+        trusted_anchor_digest=TRUSTED_PROOF_ANCHOR_DIGEST,
     )
     assert certificate["passed"] is True, certificate
 

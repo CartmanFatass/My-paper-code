@@ -84,6 +84,13 @@ def _state_digest(values: Mapping[str, torch.Tensor]) -> str:
     return digest.hexdigest()
 
 
+def _validate_trusted_anchor_digest(value: str) -> None:
+    if len(value) != 64 or any(
+        character not in "0123456789abcdef" for character in value
+    ):
+        raise ValueError("G41 trusted anchor digest must be lowercase SHA-256")
+
+
 def retained_state_dict(
     model: nn.Module,
 ) -> dict[str, torch.Tensor]:
@@ -120,13 +127,16 @@ class G41NoSlowProjection(nn.Module):
         anchor: g40.G40NativeSixPolicy,
         *,
         source_commit: str,
-        anchor_state_digest: str,
+        trusted_anchor_digest: str,
     ) -> None:
-        super().__init__()
         if source_commit != ACCEPTED_G40_SOURCE_COMMIT:
             raise ValueError("G41 projection requires the accepted G40 source commit")
         if anchor.phase != "fast":
             raise ValueError("G41 projection requires one post-common fast anchor")
+        _validate_trusted_anchor_digest(trusted_anchor_digest)
+        if _state_digest(anchor.state_dict()) != trusted_anchor_digest:
+            raise ValueError("G41 anchor does not match the externally trusted digest")
+        super().__init__()
         rng_before = torch.random.get_rng_state().clone()
         self.policy = copy.deepcopy(anchor.policy)
         self.credit_baselines = copy.deepcopy(anchor.credit_baselines)
@@ -134,7 +144,7 @@ class G41NoSlowProjection(nn.Module):
         self.critic_state_dim = int(anchor.critic_state_dim)
         self.phase = "fast"
         self.accepted_g40_source_commit = source_commit
-        self.accepted_g40_anchor_state_digest = anchor_state_digest
+        self.accepted_g40_anchor_state_digest = trusted_anchor_digest
         self.projection_rng_unchanged = bool(
             torch.equal(rng_before, torch.random.get_rng_state())
         )
@@ -205,17 +215,22 @@ class G41NoSlowProjection(nn.Module):
 def project_post_anchor_paths(
     anchor: g40.G40NativeSixPolicy,
     *,
+    trusted_anchor_digest: str,
     source_commit: str = ACCEPTED_G40_SOURCE_COMMIT,
 ) -> tuple[g40.G40NativeSixPolicy, G41NoSlowProjection]:
+    if not isinstance(anchor, g40.G40NativeSixPolicy):
+        raise TypeError("G41 paths require a G40 native-six anchor")
     if anchor.phase != "fast":
         raise ValueError("G41 paths require one common fast anchor")
-    digest = _state_digest(anchor.state_dict())
+    _validate_trusted_anchor_digest(trusted_anchor_digest)
+    if _state_digest(anchor.state_dict()) != trusted_anchor_digest:
+        raise ValueError("G41 anchor does not match the externally trusted digest")
     rng_before = torch.random.get_rng_state().clone()
     full = copy.deepcopy(anchor)
     no_slow = G41NoSlowProjection(
         anchor,
         source_commit=source_commit,
-        anchor_state_digest=digest,
+        trusted_anchor_digest=trusted_anchor_digest,
     )
     if not torch.equal(rng_before, torch.random.get_rng_state()):
         raise RuntimeError("G41 path construction advanced global torch RNG")
@@ -549,6 +564,8 @@ def reconstruct_static_certificate(
     full_actor_optimizer: torch.optim.Optimizer,
     no_slow_actor_optimizer: torch.optim.Optimizer,
     checkpoint: Mapping[str, object],
+    *,
+    trusted_anchor_digest: str,
 ) -> dict[str, object]:
     component_functions = {
         "actor_forward": (retained_actor_step, type(no_slow.policy).forward_step),
@@ -622,11 +639,35 @@ def reconstruct_static_certificate(
     retained_bytes_equal = _state_rows(retained_state_dict(full)) == _state_rows(
         no_slow.state_dict()
     )
+    trusted_digest_well_formed = bool(
+        len(trusted_anchor_digest) == 64
+        and all(
+            character in "0123456789abcdef"
+            for character in trusted_anchor_digest
+        )
+    )
     source_bound = bool(
-        checkpoint.get("accepted_g40_source_commit")
+        trusted_digest_well_formed
+        and _state_digest(anchor.state_dict()) == trusted_anchor_digest
+        and no_slow.accepted_g40_anchor_state_digest == trusted_anchor_digest
+        and checkpoint.get("accepted_g40_source_commit")
         == ACCEPTED_G40_SOURCE_COMMIT
         and checkpoint.get("accepted_g40_anchor_state_digest")
-        == _state_digest(anchor.state_dict())
+        == trusted_anchor_digest
+    )
+    checkpoint_state_digest_valid = bool(
+        isinstance(checkpoint_state, Mapping)
+        and all(
+            isinstance(name, str) and isinstance(value, torch.Tensor)
+            for name, value in checkpoint_state.items()
+        )
+        and checkpoint.get("model_state_digest")
+        == _state_digest(checkpoint_state)  # type: ignore[arg-type]
+    )
+    checkpoint_matches_projection = bool(
+        isinstance(checkpoint_state, Mapping)
+        and _state_rows(checkpoint_state)  # type: ignore[arg-type]
+        == _state_rows(no_slow.state_dict())
     )
     output_schema_has_no_value = "value" not in {
         field.name for field in fields(G41ActorStep)
@@ -656,6 +697,8 @@ def reconstruct_static_certificate(
         and slow_retained_storage_disjoint
         and no_slow.projection_rng_unchanged
         and source_bound
+        and checkpoint_state_digest_valid
+        and checkpoint_matches_projection
         and output_schema_has_no_value
     )
     return {
@@ -670,6 +713,9 @@ def reconstruct_static_certificate(
         "standalone_slow_retained_storage_disjoint": slow_retained_storage_disjoint,
         "projection_rng_unchanged": no_slow.projection_rng_unchanged,
         "checkpoint_bound_to_accepted_g40_source_and_anchor": source_bound,
+        "trusted_anchor_digest_well_formed": trusted_digest_well_formed,
+        "checkpoint_state_digest_valid": checkpoint_state_digest_valid,
+        "checkpoint_matches_projection": checkpoint_matches_projection,
         "standalone_value_output_schema_absent": output_schema_has_no_value,
         "K_search": 0,
         "hypothetical_transitions": 0,
