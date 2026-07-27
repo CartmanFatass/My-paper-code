@@ -90,10 +90,17 @@ jobs:
         env:
           OMP_NUM_THREADS: "1"
           MKL_NUM_THREADS: "1"
+        # `nproc` alone is not the core count here: GNU coreutils honours
+        # OMP_NUM_THREADS, which this job pins to 1, so it reports 1 on any
+        # runner. The `workers` job's log says `nproc=1` for exactly that
+        # reason and must not be read as a one-core machine. `nproc --all`
+        # ignores the variable, and it decides whether `--workers N` can buy
+        # anything on this vehicle at all.
         run: |
+          echo "nproc=$(nproc) nproc_all=$(nproc --all)" | tee conformance.txt
           python scripts/d7_s_clone_conformance_check.py \
             --topology-seed 20260726 \
-            --search-budget-seconds 900 | tee conformance.txt
+            --search-budget-seconds 900 | tee -a conformance.txt
       - uses: actions/upload-artifact@v4
         with:
           name: d7s-benchmark
