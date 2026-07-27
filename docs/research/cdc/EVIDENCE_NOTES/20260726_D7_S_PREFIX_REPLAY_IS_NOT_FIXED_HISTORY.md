@@ -109,3 +109,57 @@ That is checkable, and it tests the property the estimand actually needs.
 No result is retired or rescued by this note. It records a repository fact and
 the questions it forces. The D7.S audit does not launch until Pro rules on
 question 1.
+
+---
+
+## Append 2026-07-26 (after the Stage B fence was sent, so not visible at that `stage_commit`) — the ep64 diagnostic shares the mechanism
+
+Established by reading `scripts/audit_d7_s_persistence_margin.py`, zero compute.
+
+`env = build_env()` sits **inside** the per-arm loop (`:495`, within
+`for arm in arms:` at `:491`). Every arm of every episode therefore runs on a
+**separately constructed** environment.
+
+`build_env()` (`:419-452`) already documents this defect class from
+2026-07-25 — topology drawn at construction before any seed exists, two
+constructions differing by 2125 m in `ground_bs_positions` and 1487 m in
+`charging_station_positions` — and fixes it by calling `_init_ground_bs()` and
+`_init_charging_stations()` after `reset(seed=topology_seed)`, regenerating the
+topology deterministically.
+
+**It does nothing about the user population.** So the 2026-07-25 repair pinned
+exactly the two surfaces it had measured and left the third moving. Every arm
+comparison in that diagnostic —
+
+```text
+B_H       = mean(constructive) - mean(null)
+U_stable  = mean(set_stable)   - mean(keep_stable)
+U_flex    = mean(set_flex)     - mean(keep_flex)
+```
+
+— is therefore a comparison across **different user worlds**.
+
+### The distinction that decides how bad this is
+
+Because each arm gets its own independent fresh construction, the user layout is
+independent and identically distributed across `(episode, arm)`. That is
+**variance, not a directional bias**: the difference of means stays unbiased,
+but the design is unpaired where it was believed to be paired.
+
+The consequence is therefore entirely about the interval, not the point:
+
+- if ep64's confidence procedure estimated dispersion **empirically from the
+  observed arm samples**, the interval already absorbs the extra variance and
+  the reported exclusions of zero remain usable, merely underpowered;
+- if it assumed pairing or common random numbers anywhere, the interval is **too
+  narrow** and `B_H = +65.965` / `U_stable = -40.602` "CI excludes zero" is
+  false confidence.
+
+That is a question about the registered confidence procedure's meaning, so it is
+External Pro's, and it is exactly what Q2(c) of the Stage B round asks. This
+append sharpens that question; it does not answer it, and it retires nothing.
+
+Note the pattern worth carrying: the 2026-07-25 repair was correct about
+everything it measured and silently incomplete about what it had not thought to
+measure. The same shape recurred here. A fix that pins *the surfaces we
+happened to check* is not a fix for *construction-time nondeterminism*.
