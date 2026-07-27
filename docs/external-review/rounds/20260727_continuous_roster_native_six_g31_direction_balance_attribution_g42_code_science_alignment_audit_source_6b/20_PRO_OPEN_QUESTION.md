@@ -30,7 +30,6 @@ compute, reopen design, or reactivate G33.
 - `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/CURRENT_WORK.md`
 - `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_INDEX.md`
-- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DIRECTION_BALANCE_ATTRIBUTION_G42_CODE_SCIENCE_INDEX.md`
 - `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
 - `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_direction_balance_attribution_g42_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
