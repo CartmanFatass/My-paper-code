@@ -263,6 +263,13 @@ subagent, and a child reading tier tables it cannot act on is noise at best.
   go green, and report both. A repair nobody watched fail is not a repair.
 - Repeat the in-band waiting rule in the brief. Children stall on this
   specifically and repeatedly.
+- **A worktree does not arrive on your branch.** `isolation: "worktree"` checked
+  out `4866eb4e` — an unrelated line — for a sweep of `untied-k` on 2026-07-27.
+  The child noticed, reset to the branch under test and said so, which is the
+  only reason its findings mean anything. Tell every worktree child to report the
+  commit it actually ran at, and treat a report without one as unverified: a
+  mutation sweep on the wrong tree returns confident findings about code nobody
+  is running.
 
 ## Sizing a task and writing a brief — see `$hmasd-task-design`
 
