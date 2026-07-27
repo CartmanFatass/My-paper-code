@@ -210,27 +210,40 @@ The generation path itself reads only `self.np_random` (`scenario4:461-502`,
 cluster centres by rejection sampling; `:560` user offsets by
 `multivariate_normal`).
 
-**The unexplained asymmetry, which is the next question.** Two orderings of the
-same operations disagree:
+**A shared-state hypothesis was raised and then killed by a better test.**
+
+An earlier single run appeared to show that ordering mattered — that
+`construct, generate, construct, generate` produced identical users while
+`construct, construct, generate, generate` did not — which would have implied
+mutable state shared across instances. Repeating each ordering three times
+refutes it:
 
 ```text
-construct a, construct b, generate a, generate b   -> users DIFFER (6883 m)
-construct a, generate a,  construct b, generate b  -> users IDENTICAL
+ORDER-1  construct a, construct b, gen a, gen b   ->  DIFFER  6644.3 / 6644.3 / 6644.3 m
+ORDER-2  construct a, gen a, construct b, gen b   ->  DIFFER  6644.3 / 6883.8 / 6883.8 m
 ```
 
-Both set `np_random = RandomState(777)` immediately before generating. The only
-difference is whether `b` was constructed before `a` generated. That points at
-**mutable state shared across instances** — class-level or module-level —
-touched during construction, rather than at any per-instance seed. It would
-explain why user layout depends on *how many environments have been built*,
-which is exactly the shape of the audit defect: `build_pinned_env` is called
-once per arm.
+Ordering is irrelevant: **both orderings diverge, every time.** The single
+"identical" observation did not reproduce and is recorded as a measurement
+artifact of that one run, not as evidence. The cross-instance shared-state
+hypothesis is **not supported** and should not be built on.
 
-This is recorded as a narrowed hypothesis, **not** a conclusion. It rests on two
-runs, and the session that found it was long. The next session should confirm or
-kill it before building `user_world_seed` on top, because seeding a per-instance
-RNG would not fix a cross-instance shared-state defect — it would hide it, which
-is the precise failure this whole round exists to stop repeating.
+What survives is narrower and solid: **user generation differs across
+environment constructions within one process**, and the source is none of the
+things ruled out in the table above — not the global `np.random`, not config,
+not `self.np_random`, not BS/station geometry, and not inherent nondeterminism
+of the generation routine.
+
+One unexplained observation worth carrying, deliberately *not* interpreted here:
+the divergence magnitudes repeat within a process (6644.3 and 6883.8 recur
+exactly), which is not what a freshly-drawn continuous layout each time would
+look like. That may point somewhere useful; it is one more observation, not a
+second hypothesis to build on.
+
+The next session must locate the source before writing `user_world_seed`.
+Seeding a per-instance RNG cannot fix a mechanism that has not been identified —
+it would only make the symptom disappear, which is the precise failure this
+whole round exists to stop repeating.
 
 What is genuinely defective is the **stated rationale**, not the arithmetic:
 `bootstrap_ratio_ci`'s docstring (`:136`) justifies resampling episodes rather

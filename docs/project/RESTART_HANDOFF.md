@@ -97,22 +97,24 @@ become reproducible. Deferred deliberately rather than rushed before a session
 switch — a half-applied change to environment semantics is worse than a clean
 seam.
 
-**Do this first, before writing any seeding code.** The source of the user-world
-divergence is narrowed but *not* confirmed, and the last append in the evidence
-note has the table. Ruled out: the global `np.random`, config divergence,
-inherent nondeterminism, and dependence on BS/station geometry. What remains is
-an ordering asymmetry —
+**Do this first, before writing any seeding code: locate the source.** The last
+append in the evidence note has the full table. Ruled out by measurement: the
+global `np.random`, config divergence, `self.np_random`, inherent
+nondeterminism of the generation routine, and dependence on BS/station geometry.
 
-```text
-construct a, construct b, generate a, generate b   -> users DIFFER (6883 m)
-construct a, generate a,  construct b, generate b  -> users IDENTICAL
-```
+A shared-cross-instance-state hypothesis was raised and then **killed** by
+repeating each ordering three times — both orderings diverge every time, so
+ordering is irrelevant and the one "identical" reading was an artifact. Do not
+build on it; it is written up only so nobody re-derives it.
 
-— which points at **mutable state shared across instances**, touched at
-construction. Confirm or kill that first. If it is real, adding a per-instance
-`user_world_seed` would *hide* the defect rather than fix it, and hiding a
-defect behind a seed is the exact failure this round exists to stop repeating.
-Two runs is thin evidence and the session that produced it was long.
+What is solid: **user generation differs across environment constructions within
+one process**, source unlocated. One uninterpreted observation that may help —
+the divergence magnitudes repeat exactly within a process (6644.3 and 6883.8),
+which is not what a freshly drawn continuous layout each time would look like.
+
+A per-instance `user_world_seed` cannot fix a mechanism nobody has identified;
+it would only make the symptom disappear. That is the exact failure this round
+exists to stop repeating, which is why locating it comes first.
 
 **The trap to expect:** `tests/env_user_population_determinism_test.py` asserts
 that two fresh envs with the same seed do **not** share users. Implementing task
