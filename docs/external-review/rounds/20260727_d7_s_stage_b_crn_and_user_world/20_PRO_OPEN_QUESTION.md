@@ -149,6 +149,13 @@ This bears on nothing you are asked to rule on — the vehicle does not touch th
 estimand — and is stated only because the previous round's cost framing is
 otherwise left standing in the record.
 
+**What is in flight, so Q4 is not asked in bad faith.** An 8-shard hosted run is
+executing now. It is a *vehicle probe*: we are reading its wall clock, its
+conformance, and its `episode_world_provenance` block, and nothing else. No
+margin, no `U*`, no `B_m` will be read or pooled until you have ruled — so this
+round is not being answered by the compute while you consider it. If you rule
+against launch, the artifacts are discarded unread.
+
 **Q4.** Given your answers above, does the audit launch at `stage_commit`?
 
 - If **yes** → confirm `n_select`/`n_eval` and the topology set (8 registered,
