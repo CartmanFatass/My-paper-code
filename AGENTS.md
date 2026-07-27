@@ -421,6 +421,27 @@ prohibition on rescuing a valid negative, and what a broad retirement requires
 — are `docs/project/ALGORITHM_PRINCIPLES.md` section 6, and bind every result
 read in this repository.
 
+**Scenario-7 world provenance (Pro ruling 2026-07-26, Stage B).** The topology
+rule below was correct and incomplete. The *user* population is also fixed by
+construction-time state that `reset(seed=)` does not re-derive: two freshly
+constructed environments carrying the same seed differ in user positions by
+kilometres. Equal coordinate hashes therefore do **not** imply a shared episode
+world.
+
+The standing rule is consequently:
+
+> Any prior result reused as a causal comparator or paper-level premise must
+> establish that its compared arms shared the **complete episode world**, not
+> merely the same coordinate topology.
+
+Audited on reuse; no repository-wide retrospective audit is required. The ep64
+single-topology diagnostic is retired as causal evidence under this rule — its
+environment was constructed fresh per arm, and because the construction-time
+worlds were never recorded, no unpaired reanalysis can recover the comparison
+either. Topology identity itself is unchanged: it remains the ground-BS and
+charging-station geometry, with the user world a nested episode-level random
+factor carried by a registered `user_world_seed` rather than by OS entropy.
+
 **Scenario-7 topology provenance (Pro ruling 2026-07-26).** The environment
 draws its ground-BS and charging-station layout at construction from an
 unseeded RNG, so two runs share a topology only if that was explicitly
