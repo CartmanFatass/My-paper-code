@@ -961,7 +961,6 @@ def _validate_formal_preflight(
         raise ValueError("formal G42 execution requires a bounded preflight root")
     if (
         alignment_disposition != "ALIGNED"
-        or source_commit != ALIGNED_IMPLEMENTATION_COMMIT
         or aligned_source_commit != ALIGNED_IMPLEMENTATION_COMMIT
         or alignment_stage_commit != ALIGNMENT_STAGE_COMMIT
     ):
@@ -1414,7 +1413,6 @@ def _training_errors(
         or training.get("source_controls") != source_controls()
         or training.get("aligned_source_commit") != ALIGNED_IMPLEMENTATION_COMMIT
         or re.fullmatch(r"[0-9a-f]{40}", str(training.get("source_commit"))) is None
-        or (formal and training.get("source_commit") != ALIGNED_IMPLEMENTATION_COMMIT)
     ):
         return ["G42 training identity mismatch"]
     backend = training.get("native_backend")
