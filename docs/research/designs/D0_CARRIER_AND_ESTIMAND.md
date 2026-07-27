@@ -269,6 +269,38 @@ quantities that are *not* the estimand, and why:
 | Duration-posterior entropy | Measures concentration, not whether re-decision is valuable |
 | KEEP frequency alone | A controller can KEEP because it is inert |
 
+### What the expectation averages over — scope of the claim
+
+Ruled by external review on 2026-07-27, in the round archived at
+`docs/external-review/rounds/20260727_d7_s_stage_b_crn_and_user_world/`. The
+estimand itself is unchanged; what is fixed here is the population, because a
+correct number stated over the wrong population is still a wrong claim.
+
+The measure is **topology-conditioned**, not a single flat draw:
+
+```text
+T ~ P_T          topology, drawn from the registered seed set
+W ~ P(W | T)     user world, drawn conditional on that topology
+```
+
+The existing topology/episode bootstrap hierarchy already represents this. **No
+additional bootstrap level is introduced** — the conditioning was always in the
+sampler, only the wording described it as unconditional.
+
+Two consequences bind any eventual write-up:
+
+1. The result is an **equal-topology-weighted average over the eight registered
+   seeds**. It is not a claim of uniform performance across topologies, and must
+   not be worded as one.
+2. Those eight seeds contain **only three of the four BS-quadrant classes**. The
+   ensemble stays valid and needs no re-registration, but the missing class is a
+   stated limitation, not a gap to be quietly closed. **The seed list must not be
+   rebalanced after the fact** — changing the registered population once results
+   exist converts a limitation into a selection effect.
+
+Topology records expose quadrant composition so this is checkable from the
+artifacts rather than from memory at writing time.
+
 ## 4. Search-cost estimand
 
 Search cost is **not** wall time and **not** nominal action-space cardinality.
