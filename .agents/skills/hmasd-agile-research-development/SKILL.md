@@ -56,8 +56,11 @@ A user-named one may be inspected only as reference.
    discriminator; remove replaced interfaces, adapters, migrations, fallbacks,
    state, and tests. Git history is the archive.
 5. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
-   Add one bounded end-to-end exercise for material integration. Use a broad
-   suite only for a changed shared surface.
+   For result-bearing runner/analyzer integration, execution-entry, artifact,
+   serialization or phase-connection changes, and code defects exposed by
+   preflight, focused tests alone are insufficient. Run the two-layer
+   execution-readiness procedure below. Use a broad suite only for a changed
+   shared surface.
 6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
@@ -67,6 +70,45 @@ A user-named one may be inspected only as reference.
    Manager routes the one comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` before
    a formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
+
+## Mechanical execution readiness
+
+Use the registered interpreter and the Skill-owned script:
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
+  .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py `
+  run --spec <temporary-json-spec>
+```
+
+The temporary JSON spec binds one candidate commit, exact accepted paths,
+`formal=false`, `scientific_iteration_cost=zero`, one independent proof-sized
+exercise root, expected artifacts and argv arrays for these ordered phases:
+
+```text
+interface_smoke -> bounded_exercise -> artifact_validation -> artifact_reload -> evaluate_entry -> analyze_entry
+```
+
+`interface_smoke` instantiates the production configuration and calls the same
+entry method, argument shapes and return schema used by the production runner.
+Calling a lower-level projection method directly is not a substitute. The
+remaining phases exercise the real proof-sized entry, canonical validator,
+artifact reload and minimal real evaluate/analyze entries to completion. They
+never use a formal authorization token, formal budget or scientific threshold
+disposition.
+
+The script executes argv arrays without a shell, fails at the first unsuccessful
+phase, checks the expected artifacts and writes a successful Git-private receipt
+only when all six phases pass on the exact clean candidate commit. The receipt
+is mechanical evidence, is not Git-tracked and is not another acceptance owner.
+For a deterministic post-acceptance defect with plausible recurrence, add one
+proof-sized regression before rerunning the procedure.
+
+The project `Stop` hook is a last-message guard only. It runs no validation
+command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with
+`execution_readiness=passed` must name a matching successful receipt; an
+untriggered return must state its bounded reason. Other roles, ordinary turns
+and blocked returns are no-ops.
 
 Classify every terminal event before continuing. A purely operational failure
 returns control to Research Operations Manager for automatic `retry`, `resume` or `restart` inside the
@@ -131,7 +173,9 @@ slice.
 |---|---|
 | helper or schema | one focused check |
 | bug or invariant repair | reproduction, regression if durable, focused rerun |
-| runner/analyzer integration | focused suite plus one bounded exercise |
+| runner interface or projection wiring | focused check plus production-entry interface smoke |
+| result-bearing runner/analyzer or artifact lifecycle | focused evidence plus all six execution-readiness phases |
+| preflight-exposed code repair | reproduction, durable regression and all six execution-readiness phases |
 | protected cross-file path | frozen contract, focused evidence, optional one review |
 
 ## Stop only for a real boundary

@@ -1,0 +1,17 @@
+{
+  "description": "HMASD Code Project Manager acceptance guard.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe\" .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py hook-stop",
+            "timeout": 10,
+            "statusMessage": "Checking HMASD Code PM acceptance"
+          }
+        ]
+      }
+    ]
+  }
+}

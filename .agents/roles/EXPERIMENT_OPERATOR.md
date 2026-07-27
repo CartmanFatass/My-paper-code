@@ -41,6 +41,13 @@ accepted source package:
 - for a recovery mode, the unchanged authorized-boundary binding and the exact
   mechanical state or run-root relationship to recover.
 
+A recovery mode is valid only for the source commit already bound to that run
+root. A changed source commit requires `fresh`, a new run identity and a new
+independent run root with no checkpoint, artifact, intermediate state or
+validator-result dependency on the failed root. `changed source commit +
+retry|resume|restart` and `changed source commit + prior run root` are
+contradictory assignments and fail before launch.
+
 Missing or contradictory fields fail closed before launch. The operator never
 fills a value from convention, history, another run, or scientific judgment.
 
@@ -85,6 +92,10 @@ executes only the assignment's exact `fresh|retry|resume|restart` mode and never
 chooses a recovery action or launches a successor on its own. It never contacts
 External Pro, spawns a child, sends a progress message, selects among scientific outcomes,
 or interprets scientific meaning.
+
+The operator never reads a prior failed root while executing a changed source
+commit. Run-root isolation is mechanical provenance, not code acceptance or a
+scientific decision.
 
 An operational `ERROR` costs zero scientific iterations and carries
 no scientific disposition or abandonment. The operator reports the mechanical

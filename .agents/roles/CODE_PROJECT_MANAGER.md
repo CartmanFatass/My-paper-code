@@ -22,6 +22,9 @@ cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
 cross_task_model_thinking_preservation=pre_send_read_only_probe_explicit_echo
 cross_task_routing_skill=hmasd-cross-task-routing
+execution_readiness_owner=code_project_manager
+execution_readiness_skill=hmasd-agile-research-development
+execution_readiness_receipt=required_when_triggered
 ```
 
 Read the exact incoming code assignment, this charter and its named design,
@@ -38,6 +41,12 @@ owns science. Workflow Design Manager owns workflow design.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
 - Code-child assignments, source and code-test changes, proof-sized validation,
   repair, technical acceptance and code-side executable sufficiency.
+- Execution readiness for result-bearing runner/analyzer integration, changes to
+  execution entry points, artifacts, serialization or phase connections, and
+  repairs of code defects exposed by preflight. Focused tests alone are
+  insufficient for those changes. Before acceptance, run the registered Skill
+  script on the candidate commit to complete both the production-entry interface
+  smoke and the bounded artifact-lifecycle exercise.
 - The evidence-complexity ceiling before accepting result-bearing code. A
   bounded realization may change engineering structure but not the scientific
   predicate. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN` rather than a
@@ -73,9 +82,19 @@ CODE_ACCEPTED
 commit=<40-character commit>
 exact_paths=<source|tests|CODE_SCIENCE_INDEX>
 verification=<fresh focused evidence>
+execution_readiness=<passed|not_triggered>
+execution_readiness_receipt=<git-private-receipt-path-or-not-triggered>
+execution_readiness_reason=<trigger-or-bounded-not-triggered-reason>
 code_science_index=<path-or-not-triggered>
 blockers=none
 ```
+
+`execution_readiness=passed` is valid only when the receipt is bound to the
+returned commit and exact paths and records successful `interface_smoke`,
+`bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
+and `analyze_entry` phases. Code Project Manager keeps the repair loop until
+that boundary passes or returns one exact technical blocker. It does not use
+Research Operations Manager preflight as an incremental code debugger.
 
 Research Operations Manager then owns code-science audit transport, preflight,
 formal execution and successor routing. Code Project Manager does not follow the

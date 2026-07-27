@@ -40,6 +40,8 @@ scheduled_action_presence=CONTINUE_only
 operational_recovery_authority=within_existing_user_authorized_scientific_boundary
 operational_recovery_reauthorization=not_required_per_attempt
 operational_recovery_scientific_iteration_cost=zero
+changed_source_commit_execution_mode=fresh
+changed_source_commit_run_root=new_independent
 early_termination_boundary=unrecoverable_external_technical_impossibility_only
 handoff_document_write_trigger=explicit_user_request_only
 ```
@@ -117,10 +119,19 @@ mechanically establish unchanged scientific semantics, or a concrete Pro code
 counterexample, implementation impossibility or alignment mismatch.
 
 Send one frozen code assignment. Accept only a pushed `CODE_ACCEPTED` return with
-commit, exact paths, fresh verification and the required critical-point index.
+commit, exact paths, fresh verification, applicable execution-readiness receipt
+and the required critical-point index.
 Research Operations Manager does not inspect implementation details or repeat
 technical acceptance. It then handles alignment-audit transport and the runtime
 sequence.
+
+When a code repair changes the source commit, the next preflight uses
+`mode=fresh`, a new run identity and a new independent run root. It never reads
+or inherits checkpoints, artifacts, intermediate state or validator results
+from the failed root, which remains unchanged as evidence. `retry`, `resume` or
+`restart` remains automatic only for the same source commit and complete
+unchanged authorized boundary. This run-root isolation does not add a scientific
+review or consume a scientific iteration.
 
 ## Unattended grant loop
 

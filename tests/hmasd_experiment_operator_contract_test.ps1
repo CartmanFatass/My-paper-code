@@ -11,6 +11,8 @@ $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $operations = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
+$roleNormalized = $role -replace '\s+', ' '
+$operationsNormalized = $operations -replace '\s+', ' '
 
 if (-not $config.Contains('[agents."HMASDExperimentOperator"]') -or
     -not $config.Contains('config_file = "./agents/hmasd-experiment-operator.toml"')) {
@@ -52,12 +54,17 @@ foreach ($required in @(
     'Research Operations Manager supplies',
     'execution mode from `fresh|retry|resume|restart`',
     'unchanged authorized-boundary binding',
+    'A changed source commit requires `fresh`',
+    'new run identity',
+    'new independent run root',
+    'changed source commit + prior run root',
+    'never reads a prior failed root',
     'selects among scientific outcomes',
     'costs zero scientific iterations',
     'no scientific disposition or abandonment',
     'train -> evaluate -> analyze',
     'No progress, ETA, phase, heartbeat')) {
-    if (-not $role.Contains($required)) { throw "Operator role missing: $required" }
+    if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
 }
 if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('parent=workflow_design_manager')) {
     throw 'Experiment runtime is still assigned to Workflow Design Manager'
@@ -75,8 +82,10 @@ foreach ($required in @(
     'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
     'operational_recovery_reauthorization=not_required_per_attempt',
     'operational_recovery_scientific_iteration_cost=zero',
+    'changed_source_commit_execution_mode=fresh',
+    'changed_source_commit_run_root=new_independent',
     'Automatic `retry`, `resume` or `restart`')) {
-    if (-not $operations.Contains($required)) { throw "Operations recovery contract missing: $required" }
+    if (-not $operationsNormalized.Contains($required)) { throw "Operations recovery contract missing: $required" }
 }
 $catalogMatch = [regex]::Match($config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
 if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
