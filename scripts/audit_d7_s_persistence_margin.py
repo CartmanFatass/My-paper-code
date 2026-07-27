@@ -133,9 +133,26 @@ def bootstrap_ratio_ci(num: np.ndarray, den: np.ndarray, *, seed: int,
                        iters: int = 20000, alpha: float = 0.05) -> dict:
     """Percentile CI for `mean(num) / mean(den)`, resampling whole EPISODES.
 
-    The episode is the independent unit: arms are CRN-paired inside one, so
-    resampling arms would treat paired observations as independent and understate
-    the interval. Resampling episodes keeps the pairing intact.
+    The episode is the independent unit, so resampling episodes is correct and
+    resampling arms would treat within-episode observations as independent.
+
+    CORRECTION 2026-07-26: this docstring used to justify that by asserting
+    "arms are CRN-paired inside one" episode. They are not. `build_env()` is
+    called fresh per arm (:495, inside the arm loop), and a fresh construction
+    does not reproduce the user population -- two envs with the same seed differ
+    by kilometres, and neither `reset(seed=)` nor the topology repair below
+    re-derives it. See
+    docs/research/cdc/EVIDENCE_NOTES/20260726_D7_S_PREFIX_REPLAY_IS_NOT_FIXED_HISTORY.md
+
+    The arithmetic here is unaffected and stays correct: what gets resampled is
+    the OBSERVED per-episode difference, so the extra dispersion from arms
+    living in different user worlds is already inside those numbers and is
+    carried into the interval. The bootstrap measures the spread the differences
+    actually have rather than assuming pairing removed anything.
+
+    Do not "tighten" this by exploiting the pairing the old sentence claimed --
+    that pairing does not exist, and relying on it would introduce the error the
+    current empirical resampling avoids.
 
     A ratio of means, not a mean of ratios. `B_H` can be small or cross zero at
     short horizons -- it was `-1.514` at `H = 139` -- and per-episode ratios then

@@ -163,3 +163,42 @@ Note the pattern worth carrying: the 2026-07-25 repair was correct about
 everything it measured and silently incomplete about what it had not thought to
 measure. The same shape recurred here. A fix that pins *the surfaces we
 happened to check* is not a fix for *construction-time nondeterminism*.
+
+### Resolved by reading the estimator: ep64's intervals are not too narrow
+
+The severity question above turned on whether ep64's confidence procedure
+assumed pairing. It does not. Established from the code, zero compute:
+
+- `bootstrap_mean_ci` (`:171-182`) resamples the supplied array with
+  replacement and takes the mean — a plain empirical percentile bootstrap.
+- It is applied to **per-episode differences**: `b_h_ep`, and
+  `per_ep["set_stable"] - per_ep["keep_stable"]`, `per_ep["set_flex"] -
+  per_ep["keep_flex"]` (`:531-535`).
+
+Because the resampled quantity is the *observed* per-episode difference, any
+extra dispersion caused by the two arms living in different user worlds is
+already present in those numbers and is therefore carried into the interval. The
+bootstrap does not assume the pairing succeeded; it measures whatever spread the
+differences actually have.
+
+So the failure mode feared above does not occur:
+
+| | Verdict |
+|---|---|
+| Point estimates `B_H = +65.965`, `U_stable = -40.602` | unbiased — arm layouts are IID, not systematically ordered |
+| Interval width | honestly wide; it absorbed the unpaired variance |
+| "CI excludes zero" | **survives**, at lower power than a truly paired design would have given |
+
+*(PM inference, not a result: this says the estimator is sound, not that the
+diagnostic is fit for any particular reuse. Whether ep64 may serve as a causal
+comparator remains External Pro's call under the standing topology-provenance
+rule.)*
+
+What is genuinely defective is the **stated rationale**, not the arithmetic:
+`bootstrap_ratio_ci`'s docstring (`:136`) justifies resampling episodes rather
+than arms by asserting that "arms are CRN-paired inside one" episode. They are
+not. The procedure is right and its reason is wrong — which is the dangerous
+combination, because a later optimization reasoning from that premise (for
+example, exploiting the assumed pairing to tighten the interval) would
+introduce the error the current code accidentally avoids. The docstring is
+corrected in the same commit as this append.
