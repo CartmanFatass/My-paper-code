@@ -149,6 +149,23 @@ def test_g46_isolated_orchestration_does_not_mutate_g45() -> None:
     assert runner.source_controls()["parent_source_id"] == g45_runner.source.SOURCE_ID
 
 
+def test_production_continuation_uses_exact_actor_head_ownership() -> None:
+    models, optimizers, update = runner._execute_single_proof_update(ANCHOR_ROOT)
+    assert update["passed"] is True
+    assert all(
+        source._optimizer_owns_actor_head(optimizers[arm], models[arm])
+        for arm in source.ARMS
+    )
+    left, right = source.ARMS
+    assert not source._optimizer_owns_actor_head(optimizers[left], models[right])
+    continuation = runner._backend._continuation_audit(
+        models, optimizers, update_index=1
+    )
+    assert continuation["passed"] is True
+    assert continuation["optimizer_parameter_order_equal"] is True
+    assert continuation["optimizer_step_state_valid"] is True
+
+
 def test_result_branch_order_and_equality_boundary() -> None:
     base = {
         "operational_valid": True,

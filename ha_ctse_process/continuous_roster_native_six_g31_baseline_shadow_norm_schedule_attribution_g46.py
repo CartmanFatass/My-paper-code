@@ -148,6 +148,14 @@ _add_entropy = g45._add_entropy
 _optimizer_step_value = g45._optimizer_step_value
 
 
+def _optimizer_owns_actor_head(
+    optimizer: torch.optim.Optimizer, model: g41.G41NoSlowProjection
+) -> bool:
+    """Expose the accepted optimizer inventory gate to private orchestration."""
+
+    return g45._optimizer_owns_actor_head(optimizer, model)
+
+
 def _gradient_probe(
     model: g41.G41NoSlowProjection,
     replay: g41.G41RetainedReplay,
