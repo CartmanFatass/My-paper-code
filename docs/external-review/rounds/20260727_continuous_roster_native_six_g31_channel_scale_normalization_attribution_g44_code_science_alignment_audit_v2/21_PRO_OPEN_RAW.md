@@ -1,0 +1,7 @@
+AUDIT_DISPOSITION=MISMATCH
+
+Frozen assertion: every PPO pass must serialize and reconstruct the normalization statistics for both arms—both means, both centered sums of squares, all scales, row count, and normalization-mask digest—before conclusion evidence can pass.
+
+Conflicting target behavior: _schedule_record accepts only one ChannelNormalization, and _prepare_passes always supplies normalizations[INDEPENDENT_ARM]. Each pass consequently contains one reference-arm channel_scale_schedule; the POOLED arm’s own post-divergence means, centered sums, scales, row count, and mask digest are never serialized. build_conclusion_evidence then reconstructs only that single reference schedule. A result-changing POOLED path using a different row set, centering law, weighting, or scale can therefore evade artifact validation while still producing live gradients and satisfying the assigned credit-norm gate.
+
+Smallest in-contract correction: add per-arm normalization evidence to every pass—such as normalization_by_arm[INDEPENDENT_SCALE|POOLED_SCALE]—and reconstruct each arm’s means, centered sums, scales, row count, and mask digest in update, checkpoint, and conclusion validators. Keep treatment activation sourced only from the INDEPENDENT arm. Add one focused guard showing that tampering only with the POOLED arm’s normalization evidence or normalization route fails closed while the reference activation record remains unchanged.
