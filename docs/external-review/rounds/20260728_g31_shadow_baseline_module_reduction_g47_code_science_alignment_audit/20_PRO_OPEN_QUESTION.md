@@ -21,6 +21,11 @@ bounded contract diff. Read only the paths in
 implement, run tests or compute, edit CDC, authorize a run, select a successor,
 reopen design, or reactivate G33. Stop after one scoped disposition.
 
+The allow-list includes the governing principles
+`docs/project/ALGORITHM_PRINCIPLES.md` and
+`docs/external-review/OPEN_REVIEW_PRINCIPLES.md`; do not read any path outside
+the manifest.
+
 ## Exact question
 
 Does the implementation at
