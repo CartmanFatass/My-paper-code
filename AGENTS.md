@@ -12,7 +12,6 @@ moment arrives, so it costs nothing on the turns it does not apply to:
 | about to delegate a bounded task | `$hmasd-task-design` |
 | at a gate — accepting a diff, freezing a contract, reading a result | `$hmasd-acceptance-gate` |
 | opening or carrying an external review round | `$hmasd-review-round` |
-| at an iteration seam, context running short | `$hmasd-compaction` |
 
 This file was 1059 lines on 2026-07-27 because everything got folded in on the
 reasoning that a shared document does not get loaded. That is true of a document
@@ -147,12 +146,10 @@ in an empty gap without one is the stall this section exists to prevent.
    and it is yours, **take it now**. A turn ending is not the loop ending: check
    before the last tool call that either work is in flight or a driver is
    attached.
-2. **Compaction never pauses it.** Handoff, compact, resume. Nothing waits for an
-   answer at that seam.
-3. **Compute is a routing decision, not a question.** See
+2. **Compute is a routing decision, not a question.** See
    `docs/project/COMPUTE_ROUTING.md`. Never return to the user to ask where to
    run something.
-4. **Waiting is done in-band.** No blocking sleep exists, so ending a turn to
+3. **Waiting is done in-band.** No blocking sleep exists, so ending a turn to
    wait is a stall. Poll inside the turn, or hand back.
 
 ## Tool batching
@@ -648,11 +645,6 @@ Escalate only what the grant genuinely does not cover: an external destination
 other than the registered conversations, destructive Git on another branch, or a
 real expansion of protected scientific authority.
 
-## Compaction — see `$hmasd-compaction`
-
-Load it at an iteration seam, never mid-iteration. It carries the cadence, the
-fixed handoff sequence, and why the seam never pauses the loop.
-
 ## Environment tiering
 
 Algorithm discovery and routine conclusion-bearing iteration use the existing
@@ -760,7 +752,6 @@ roster and no charter; naming a retired actor is the same as naming nobody.
 | `docs/research/cdc/EVIDENCE_NOTES/*.md` | Project Manager | a result closes or a derivation completes; append-only |
 | `docs/project/ExpRecord.md` | `hmasd-exp-recorder`, on a PM classification | a run reaches a terminal status |
 | `docs/report/ITERATION_<n>.md` | Project Manager | after every valid conclusion-bearing iteration |
-| `docs/project/RESTART_HANDOFF.md` | Project Manager | at a compaction seam, and nowhere else |
 | `AGENTS.md`, `CLAUDE.md`, `.claude/agents/*` | Project Manager; user-authorized where authority itself changes | a rule actually changes — not to restate one |
 | `docs/external-review/rounds/<round>/*` | Project Manager authors, transports and archives | during that round; sealed once reconciled |
 

@@ -12,7 +12,6 @@ $skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedSkills = @(
     'hmasd-acceptance-gate',
-    'hmasd-compaction',
     'hmasd-review-round',
     'hmasd-task-design') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
@@ -103,8 +102,6 @@ $skillFiles = @{
     'hmasd-acceptance-gate' = @('## Stage A and Stage B',
                                 'A guard test needs a paired negative',
                                 'Two samples cannot separate a cause')
-    'hmasd-compaction'      = @('context boundary, not a control boundary',
-                                'continue straight into the next iteration')
     'hmasd-review-round'    = @('Is a round warranted',
                                 'Route to code, not to prose',
                                 'Do not defend the framing')
