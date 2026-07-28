@@ -24,6 +24,30 @@ Do not delegate scientific interpretation to the operator. Do not redesign
 G46, change seeds, budgets, thresholds, source, estimand, evidence volume or
 first-match order. Do not infer a result from a different commit.
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM_SCHEDULE_ATTRIBUTION_G46_CODE_SCIENCE_INDEX.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260728_CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM_ATTRIBUTION_G46_FORMAL_RESULT_AF7D6B1.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_transport_recovery_v1/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_transport_recovery_v1/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_disposition_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_disposition_clarification/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_formal_result_review/00_REVIEW_BRIEF.md`
+- `logs/formal_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_cpu_20260728_af7d6b1_r1/train_manifest.json`
+- `logs/formal_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_cpu_20260728_af7d6b1_r1/evaluation_manifest.json`
+- `logs/formal_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_cpu_20260728_af7d6b1_r1/analysis_result.json`
+
 ## Mechanical formal-result boundary
 
 The exact formal source is `af7d6b1f1ad55f24e25202b39414203677a7813b`; its
