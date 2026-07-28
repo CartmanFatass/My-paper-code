@@ -28,7 +28,8 @@ working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
 next_boundary=CODE_PLAN_FOR_THE_AUTOPSY_THEN_ITS_PRO_PLAN_REVIEW
-workflow_position=previous workflow closed at step 8; Pro's ruling is the next workflow's step 1, so step 2 (the code plan) is live
+workflow_position=workflow 2, touchpoint 2 IN FLIGHT -- the code plan is fenced at f1d79b17 and Pro is generating its convergence decision
+
 ```
 
 ## The workflow, and how often Pro is reached
