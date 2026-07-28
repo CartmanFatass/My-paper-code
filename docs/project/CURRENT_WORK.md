@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4 closure REOPENED at F. The Stage B re-review of D' returned REJECT on both axes; two blocking defects reproduced by the PM. Repair D'' is in flight. The formal R4 run is GATED behind it.
+next_boundary=FORMAL R4 RUN LAUNCHED. run 30403322062, tag d7s-audit-3, instrument a00612ad, 8x1 shards. Closure A-G complete, Stage B on D'' returned APPROVE. Touchpoint 3 (Pro on the result) is next and its question is drafted with every branch pre-walked.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -110,7 +110,16 @@ D' conformance repair                   DONE  28d6933f -- R1-R5, 309 passed
 E proof-sized exercise on 20260725      DONE  13 outcomes, STEP_E_ASSEMBLED_PATH_OK
 F Stage B re-review of D'                REJECT -- conformance and semantics, two blocking
 F' repair D''                            DONE  0193de1a -- 291 passed, 8 paired negatives
-G Stage B review of D''                  IN FLIGHT -- the repair gets the gate too
+G Stage B review of D''                  APPROVE -- conformance and semantics
+G' hardening D''' (NB-1 and guard shapes) DONE  928b6e68 + a00612ad, 264+32 passed
+H formal R4 measurement                  RUNNING  30403322062 / d7s-audit-3
+
+**Round 4 cannot close until H returns.** Touchpoint 3 is drafted ahead of the
+result as a conditional tree -- one section per branch class, the others deleted
+before sending -- so the round closes on the day the shards land rather than a
+day later. It is staged in the session scratchpad, NOT in a round directory:
+`$hmasd-review-round`'s own scaffold and fence procedure owns creating that tree,
+and hand-building it is how a round ends up unfenced.
 ```
 
 **Step F existed because the gate was skipped, not because it was scheduled.**
