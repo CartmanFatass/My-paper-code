@@ -194,7 +194,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        seed: [20260726, 20260727, 20260728, 20260729, 20260730, 20260731, 20260732, 20260733]
+        # R4's frozen population (contract D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE,
+        # ledger R4-003). NOT R3's 20260726-20260733: those eight are measured,
+        # autopsied and used to motivate R4 itself, and R4 forbids pooling with
+        # them. Topology is the top-level inferential unit, so reusing them with
+        # new episode seeds would give fresh CONDITIONAL draws, not fresh draws
+        # from P_T.
+        seed: [20260734, 20260735, 20260736, 20260737, 20260738, 20260739, 20260740, 20260741]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -220,9 +226,18 @@ jobs:
         # single-threaded workers on four cores is exactly saturating, not
         # oversubscribed. The flag changes only the schedule: run 30270540138
         # proved both arms byte-identical at this code.
+        #
+        # `--population r4` is REQUIRED and is not decoration. Identity is
+        # DECLARED, not inferred: without this flag a single-seed shard earns no
+        # R4 contract/namespace fields, runs under the legacy R3 seed namespace,
+        # and pools into an artifact self-labelled "NOT R4 conclusion-bearing"
+        # that still prints a conclusion-bearing branch line. The flag also hard-
+        # refuses any seed outside the frozen population, so a matrix typo is a
+        # loud failure rather than a quiet one.
         run: |
           mkdir -p shard_out
           python scripts/audit_d7_s_event_aligned.py \
+            --population r4 \
             --topology-seeds ${{ matrix.seed }} \
             --workers 4 \
             --out shard_out > shard_out/stdout.json
