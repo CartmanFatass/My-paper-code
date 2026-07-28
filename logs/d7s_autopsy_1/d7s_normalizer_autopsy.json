@@ -1,0 +1,672 @@
+{
+  "artifact_derived": true,
+  "note": "This script analyzes the SCALAR quantities recorded by the executed R3 code, conditional on the correctness of that execution path. It is not itself a second validation of the environment trajectories.",
+  "input_artifact": {
+    "path": "logs/d7s_audit_2_30289161086/pooled/d7_s_event_aligned.json",
+    "sha256": "b087e67cfb79900015ecec16d8c89ad81b495fc23369299401217578b0933514"
+  },
+  "quick_dev_run": false,
+  "bootstrap_iters": 10000,
+  "bootstrap_seed": 2026072601,
+  "materiality_coefficient": 0.1,
+  "topology_seeds": [
+    20260726,
+    20260727,
+    20260728,
+    20260729,
+    20260730,
+    20260731,
+    20260732,
+    20260733
+  ],
+  "sentinel": {
+    "artifact_hash": {
+      "ok": true,
+      "detail": "matches frozen reference"
+    },
+    "contract_and_procedure": {
+      "ok": true,
+      "detail": "contract_id='D7_S_EVENT_ALIGNED_SOURCE_AUDIT' (expected 'D7_S_EVENT_ALIGNED_SOURCE_AUDIT'), procedure_version='d7s_event_aligned_v1' (expected 'd7s_event_aligned_v1')"
+    },
+    "topology_seeds": {
+      "ok": true,
+      "detail": "expected [20260726, 20260727, 20260728, 20260729, 20260730, 20260731, 20260732, 20260733], got [20260726, 20260727, 20260728, 20260729, 20260730, 20260731, 20260732, 20260733]"
+    },
+    "smoke_false": {
+      "ok": true,
+      "detail": "smoke=False"
+    },
+    "topology_units_shape": {
+      "ok": true,
+      "detail": "all four collections present on every topology"
+    },
+    "bounds_reproduction": {
+      "ok": true,
+      "detail": "all six bounds reproduced within tolerance"
+    }
+  },
+  "recomputed_t_m_bootstrap": {
+    "b_stable_lcb": -0.0773669868841909,
+    "b_flex_lcb": -8.64883334932707,
+    "t_stable_ucb": 7.206992755589987,
+    "t_stable_lcb": -2.1891429790109256,
+    "t_flex_lcb": -14.293053950075317,
+    "t_flex_ucb": 3.1158706605951685,
+    "b_stable_point": 0.18013937296584975,
+    "b_flex_point": 4.288853871026891,
+    "u_star_stable_point": 1.254073505784983,
+    "u_star_flex_point": -4.122401635196223,
+    "t_stable_point": 1.272087443081568,
+    "t_flex_point": -4.5512870222989115
+  },
+  "recorded_t_m_bootstrap": {
+    "b_stable_lcb": -0.0773669868841909,
+    "b_flex_lcb": -8.64883334932707,
+    "t_stable_ucb": 7.206992755589987,
+    "t_stable_lcb": -2.1891429790109256,
+    "t_flex_lcb": -14.293053950075317,
+    "t_flex_ucb": 3.1158706605951685
+  },
+  "section_a_standalone_distributions": {
+    "artifact-derived B_stable": {
+      "point": 0.18013937296584975,
+      "interval_5_95": [
+        -0.0773669868841909,
+        0.41607065350803496
+      ],
+      "per_topology_points": [
+        -0.4957929770561596,
+        0.0,
+        0.27452725293831765,
+        0.0,
+        0.5348320687307202,
+        0.37060294775322333,
+        0.39382957000400154,
+        0.36311612135669485
+      ],
+      "min": -0.4957929770561596,
+      "max": 0.5348320687307202,
+      "sign_counts": {
+        "positive": 5,
+        "negative": 1,
+        "zero": 2,
+        "n": 8
+      }
+    },
+    "artifact-derived B_flex": {
+      "point": 4.288853871026891,
+      "interval_5_95": [
+        -8.64883334932707,
+        14.102586809570335
+      ],
+      "per_topology_points": [
+        4.804912963298325,
+        -17.147504774811363,
+        -5.787834458003222,
+        6.341835067521766,
+        4.613811438852021,
+        14.818050573521901,
+        19.027850233324926,
+        7.6397099245107745
+      ],
+      "min": -17.147504774811363,
+      "max": 19.027850233324926,
+      "sign_counts": {
+        "positive": 6,
+        "negative": 2,
+        "zero": 0,
+        "n": 8
+      }
+    },
+    "artifact-derived U*_stable": {
+      "point": 1.254073505784983,
+      "interval_5_95": [
+        -2.20365243256593,
+        7.186346691369819
+      ],
+      "per_topology_points": [
+        -1.1575980329531157,
+        3.0266671084938963,
+        14.04213688264808,
+        -0.22462463128382382,
+        0.6082350903395886,
+        -1.3980004716525676,
+        -5.2053639597798975,
+        0.3411360604677043
+      ],
+      "min": -5.2053639597798975,
+      "max": 14.04213688264808,
+      "sign_counts": {
+        "positive": 4,
+        "negative": 4,
+        "zero": 0,
+        "n": 8
+      }
+    },
+    "artifact-derived U*_flex": {
+      "point": -4.122401635196223,
+      "interval_5_95": [
+        -13.827639538144378,
+        3.3714721010491027
+      ],
+      "per_topology_points": [
+        3.3380138113409594,
+        7.395371784176348,
+        -30.069646256261585,
+        -3.5448380467768175,
+        -1.5174736767338248,
+        -2.5675717242779683,
+        -6.271866757116868,
+        0.2587977840799738
+      ],
+      "min": -30.069646256261585,
+      "max": 7.395371784176348,
+      "sign_counts": {
+        "positive": 3,
+        "negative": 5,
+        "zero": 0,
+        "n": 8
+      }
+    }
+  },
+  "section_a_leave_one_topology_out": {
+    "artifact-derived B_stable": [
+      {
+        "excluded_topology_index": 0,
+        "point": 0.27670113725470824,
+        "interval_5_95": [
+          0.09215935864580012,
+          0.49169603748737967
+        ]
+      },
+      {
+        "excluded_topology_index": 1,
+        "point": 0.20587356910382829,
+        "interval_5_95": [
+          -0.08986235519260793,
+          0.470233024816111
+        ]
+      },
+      {
+        "excluded_topology_index": 2,
+        "point": 0.16665539011264005,
+        "interval_5_95": [
+          -0.11930119403015446,
+          0.43562442548265284
+        ]
+      },
+      {
+        "excluded_topology_index": 3,
+        "point": 0.20587356910382829,
+        "interval_5_95": [
+          -0.08871185805129941,
+          0.4693328504361831
+        ]
+      },
+      {
+        "excluded_topology_index": 4,
+        "point": 0.12946898785658253,
+        "interval_5_95": [
+          -0.14168130061363868,
+          0.37729294385396966
+        ]
+      },
+      {
+        "excluded_topology_index": 5,
+        "point": 0.15293029085336782,
+        "interval_5_95": [
+          -0.13404634647026334,
+          0.4234862767313174
+        ]
+      },
+      {
+        "excluded_topology_index": 6,
+        "point": 0.1496122019603995,
+        "interval_5_95": [
+          -0.1308931662785888,
+          0.40316735440919516
+        ]
+      },
+      {
+        "excluded_topology_index": 7,
+        "point": 0.1539998374814433,
+        "interval_5_95": [
+          -0.13157957530386521,
+          0.4156666182310515
+        ]
+      }
+    ],
+    "artifact-derived B_flex": [
+      {
+        "excluded_topology_index": 0,
+        "point": 4.215131143559543,
+        "interval_5_95": [
+          -10.219192736752069,
+          14.443764704036967
+        ]
+      },
+      {
+        "excluded_topology_index": 1,
+        "point": 7.351190820432356,
+        "interval_5_95": [
+          -1.053809044486831,
+          14.810618324385738
+        ]
+      },
+      {
+        "excluded_topology_index": 2,
+        "point": 5.728380775174051,
+        "interval_5_95": [
+          -8.696538719249217,
+          15.829273839570234
+        ]
+      },
+      {
+        "excluded_topology_index": 3,
+        "point": 3.995570842956195,
+        "interval_5_95": [
+          -10.608354297665947,
+          15.212661096059009
+        ]
+      },
+      {
+        "excluded_topology_index": 4,
+        "point": 4.242431361337587,
+        "interval_5_95": [
+          -10.241542420694993,
+          15.007620154780742
+        ]
+      },
+      {
+        "excluded_topology_index": 5,
+        "point": 2.784682913527604,
+        "interval_5_95": [
+          -11.519353111296217,
+          13.506258396679769
+        ]
+      },
+      {
+        "excluded_topology_index": 6,
+        "point": 2.183282962127172,
+        "interval_5_95": [
+          -11.893305525496464,
+          12.699409932342181
+        ]
+      },
+      {
+        "excluded_topology_index": 7,
+        "point": 3.810160149100622,
+        "interval_5_95": [
+          -10.849401170854884,
+          14.746765239512802
+        ]
+      }
+    ],
+    "artifact-derived U*_stable": [
+      {
+        "excluded_topology_index": 0,
+        "point": 1.5985980113189966,
+        "interval_5_95": [
+          -2.4001559935893733,
+          8.039834872168623
+        ]
+      },
+      {
+        "excluded_topology_index": 1,
+        "point": 1.0008458482551383,
+        "interval_5_95": [
+          -2.7844566820983534,
+          7.490594129205071
+        ]
+      },
+      {
+        "excluded_topology_index": 2,
+        "point": -0.572792690909745,
+        "interval_5_95": [
+          -2.3860044956493063,
+          1.2751159785719068
+        ]
+      },
+      {
+        "excluded_topology_index": 3,
+        "point": 1.465316096794813,
+        "interval_5_95": [
+          -2.598123744193807,
+          8.034928597267918
+        ]
+      },
+      {
+        "excluded_topology_index": 4,
+        "point": 1.3463361365628965,
+        "interval_5_95": [
+          -2.647754628871069,
+          7.933001976504108
+        ]
+      },
+      {
+        "excluded_topology_index": 5,
+        "point": 1.6329412168474902,
+        "interval_5_95": [
+          -2.3866743706801103,
+          8.237061549177836
+        ]
+      },
+      {
+        "excluded_topology_index": 6,
+        "point": 2.176850286579966,
+        "interval_5_95": [
+          -1.441026251990523,
+          8.638598002598131
+        ]
+      },
+      {
+        "excluded_topology_index": 7,
+        "point": 1.3844931408303087,
+        "interval_5_95": [
+          -2.575318429776548,
+          8.051241284615855
+        ]
+      }
+    ],
+    "artifact-derived U*_flex": [
+      {
+        "excluded_topology_index": 0,
+        "point": -5.18817527041582,
+        "interval_5_95": [
+          -16.20175869942078,
+          2.9174754226091344
+        ]
+      },
+      {
+        "excluded_topology_index": 1,
+        "point": -5.767797837963733,
+        "interval_5_95": [
+          -16.581622342082756,
+          2.1089123884750776
+        ]
+      },
+      {
+        "excluded_topology_index": 2,
+        "point": -0.4156524036154569,
+        "interval_5_95": [
+          -5.716752388384157,
+          4.763926507826338
+        ]
+      },
+      {
+        "excluded_topology_index": 3,
+        "point": -4.204910719256138,
+        "interval_5_95": [
+          -15.567369388527815,
+          4.06852068621168
+        ]
+      },
+      {
+        "excluded_topology_index": 4,
+        "point": -4.494534200690851,
+        "interval_5_95": [
+          -15.928445528637376,
+          3.7948719305031844
+        ]
+      },
+      {
+        "excluded_topology_index": 5,
+        "point": -4.344520193898831,
+        "interval_5_95": [
+          -15.665237982501743,
+          4.024691701679795
+        ]
+      },
+      {
+        "excluded_topology_index": 6,
+        "point": -3.8153351892075595,
+        "interval_5_95": [
+          -15.315778187628966,
+          4.448641031860984
+        ]
+      },
+      {
+        "excluded_topology_index": 7,
+        "point": -4.748287266521394,
+        "interval_5_95": [
+          -15.808785518973842,
+          2.855703931912844
+        ]
+      }
+    ]
+  },
+  "section_n4_topology_heterogeneity": {
+    "artifact-derived B_stable": {
+      "s2_between": 0.09649015919858242,
+      "mean_s2_within": 0.08470572277762072,
+      "r_topology": 0.12213096671038383,
+      "within_topology_variance_per_topology": [
+        0.2016422732553462,
+        0.0,
+        0.06297130617170126,
+        0.0,
+        0.1257179132299555,
+        0.07395470238826155,
+        0.13219320465758816,
+        0.0811663825181131
+      ]
+    },
+    "artifact-derived B_flex": {
+      "s2_between": 113.12174989162708,
+      "mean_s2_within": 279.7840700783233,
+      "r_topology": 0.0,
+      "within_topology_variance_per_topology": [
+        317.8538062831443,
+        1467.9005628059006,
+        230.35136710595376,
+        11.606219967591981,
+        123.36976158812784,
+        24.33082313198169,
+        35.81145503715224,
+        27.048564706733938
+      ]
+    },
+    "artifact-derived U*_stable": {
+      "s2_between": 28.08596894920425,
+      "mean_s2_within": 43.62404510588373,
+      "r_topology": 0.0,
+      "within_topology_variance_per_topology": [
+        2.5760505110708145,
+        7.993847837818743,
+        326.1483525155967,
+        2.4769479991808665,
+        3.2767432000621395,
+        2.144320488625941,
+        2.1718094464980586,
+        2.2042888482165823
+      ]
+    },
+    "artifact-derived U*_flex": {
+      "s2_between": 111.86603008518671,
+      "mean_s2_within": 120.66499522638352,
+      "r_topology": 0.0,
+      "within_topology_variance_per_topology": [
+        58.179389844215265,
+        42.644810733207194,
+        567.9437921969562,
+        44.40776134434679,
+        24.824176273813972,
+        19.975808197795658,
+        22.15169039449467,
+        185.1925328262384
+      ]
+    }
+  },
+  "section_n5_association": {
+    "stable": {
+      "pearson_point": 0.03816791841060778,
+      "rank_point": -0.17964393928698885,
+      "bootstrap": {
+        "pearson_interval_5_95": [
+          -0.5997674655266989,
+          0.551409331880312
+        ],
+        "rank_interval_5_95": [
+          -0.6722338334971893,
+          0.5855400437691199
+        ]
+      },
+      "leave_one_topology_out": [
+        {
+          "excluded_topology_index": 0,
+          "pearson": -0.18433645428731135,
+          "rank": -0.3783937343321348
+        },
+        {
+          "excluded_topology_index": 1,
+          "pearson": 0.06806574286121415,
+          "rank": -0.07142857142857144
+        },
+        {
+          "excluded_topology_index": 2,
+          "pearson": -0.1634211861627744,
+          "rank": -0.12613124477737828
+        },
+        {
+          "excluded_topology_index": 3,
+          "pearson": 0.015514057327111478,
+          "rank": -0.3214285714285715
+        },
+        {
+          "excluded_topology_index": 4,
+          "pearson": 0.06441648830131687,
+          "rank": -0.43244998209386837
+        },
+        {
+          "excluded_topology_index": 5,
+          "pearson": 0.08584669879789021,
+          "rank": 0.054056247761733546
+        },
+        {
+          "excluded_topology_index": 6,
+          "pearson": 0.18429860400533007,
+          "rank": 0.054056247761733546
+        },
+        {
+          "excluded_topology_index": 7,
+          "pearson": 0.054134812093864094,
+          "rank": -0.18018749253911182
+        }
+      ],
+      "verdict": "raised",
+      "detail": "pearson=0.038 rank=-0.180: negative relation."
+    },
+    "flex": {
+      "pearson_point": 0.022019681799324804,
+      "rank_point": -0.3333333333333334,
+      "bootstrap": {
+        "pearson_interval_5_95": [
+          -0.6879196072954146,
+          0.7375123095238972
+        ],
+        "rank_interval_5_95": [
+          -0.6666666666666669,
+          0.6190476190476191
+        ]
+      },
+      "leave_one_topology_out": [
+        {
+          "excluded_topology_index": 0,
+          "pearson": 0.017776715568264132,
+          "rank": -0.28571428571428575
+        },
+        {
+          "excluded_topology_index": 1,
+          "pearson": 0.5683511562331945,
+          "rank": 0.0
+        },
+        {
+          "excluded_topology_index": 2,
+          "pearson": -0.8867052719656504,
+          "rank": -0.7500000000000002
+        },
+        {
+          "excluded_topology_index": 3,
+          "pearson": 0.02057308649361294,
+          "rank": -0.3571428571428572
+        },
+        {
+          "excluded_topology_index": 4,
+          "pearson": 0.02103744270790144,
+          "rank": -0.3571428571428572
+        },
+        {
+          "excluded_topology_index": 5,
+          "pearson": 0.0013278789921167436,
+          "rank": -0.28571428571428575
+        },
+        {
+          "excluded_topology_index": 6,
+          "pearson": 0.07329496885754264,
+          "rank": -0.21428571428571433
+        },
+        {
+          "excluded_topology_index": 7,
+          "pearson": 0.0034427845834769347,
+          "rank": -0.39285714285714296
+        }
+      ],
+      "verdict": "raised",
+      "detail": "pearson=0.022 rank=-0.333: negative relation."
+    }
+  },
+  "section_g_selection_instability": {
+    "stable": {
+      "n_events": 54,
+      "median_normalized_entropy": 0.42104336199020775,
+      "range_normalized_entropy": [
+        -0.0,
+        0.7918991386988933
+      ],
+      "fraction_leading_below_0_60": 0.3888888888888889,
+      "fraction_leading_below_0_75": 0.6666666666666666,
+      "association_entropy_vs_abs_u_star_topology_point": 0.005745307404487759
+    },
+    "flex": {
+      "n_events": 54,
+      "median_normalized_entropy": 0.4194048924955055,
+      "range_normalized_entropy": [
+        -0.0,
+        0.8263293331734287
+      ],
+      "fraction_leading_below_0_60": 0.37037037037037035,
+      "fraction_leading_below_0_75": 0.5925925925925926,
+      "association_entropy_vs_abs_u_star_topology_point": -0.22432664791661655
+    }
+  },
+  "evidence_matrix": {
+    "N1_signed_normalizer_failure": {
+      "verdict": "compatible",
+      "detail": "B_m crosses zero; most topology-level U*_m values share one sign, but the pooled U*_m interval still includes zero (moderate)."
+    },
+    "N2_opposite_source_direction": {
+      "verdict": "not resolved",
+      "detail": "neither U*_stable nor U*_flex is resolved in the direction N2 requires."
+    },
+    "N3_component_cancellation": {
+      "verdict": "UNDISCRIMINATED_FROM_STORED_ARTIFACT",
+      "detail": "Primary-G component cancellation remains compatible with every scalar pattern observed in this autopsy."
+    },
+    "N4_topology_heterogeneity": {
+      "verdict": "material",
+      "detail": "max R_topology=0.1221 is nonzero but does not exceed 0.5."
+    },
+    "N5_comparator_scale_mismatch": {
+      "verdict": "raised",
+      "detail": "stable: pearson=0.038 rank=-0.180: negative relation.; flex: pearson=0.022 rank=-0.333: negative relation."
+    },
+    "selection_instability": {
+      "verdict": "moderate",
+      "detail": "stable: frac<0.60=0.39 frac<0.75=0.67 -> moderate; flex: frac<0.60=0.37 frac<0.75=0.59 -> moderate"
+    }
+  },
+  "r4_recommendations_non_binding": [
+    "a normalizer scale better matched to the focal one-Delta intervention (N5 raised)",
+    "stratify or expand by topology before re-attempting a pooled normalizer (N4 material)"
+  ]
+}
