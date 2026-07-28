@@ -27,8 +27,8 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
-next_boundary=SUBMIT_THE_FROZEN_R4_CONTRACT (touchpoint 3), carrying the two decisions it leaves open
-workflow_position=workflow 3 -- R4 derived, ruled derivable, contract FROZEN at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md
+next_boundary=R4_CLOSURE -- ledger, smallest delta, realization-conformance review, proof-sized exercise. No run.
+workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -85,7 +85,35 @@ a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
 the artifact, which today carries only the six bounds; and enforce §9 in
 `main()`.
 
-### R4 is frozen at a five-unit absolute focal margin
+### R4 is COMPLETELY frozen -- read the _COMPLETE file, not the partial one
+
+`docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md`.
+The earlier `D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md` is the **partial** freeze and is
+immutable; it left expansion and population undecided while its own header
+claimed they were frozen. Do not quote it.
+
+```text
+expansion         = NONE
+topology seeds    = 20260734..20260741   (repurposed, NOT inherited via R3 expansion)
+episodes          = 8 Part-A control + 8 focal audit, per topology
+n_select/n_eval   = 2 / 2
+R3 data pooling   = forbidden
+```
+
+**Fresh means fresh at the highest inferential unit.** New episodes under the
+eight R3 topologies are fresh *conditional* observations, not new draws from
+`P_T` -- topology is the top-level bootstrap unit. Such a run is retainable only
+as `R4_ORIGINAL_PANEL_CONDITIONAL_REPLICATION`, never pooled or substituted.
+
+**R3 support does not pre-pass R4 support.** The new topologies must
+independently satisfy minimum support before any focal margin is read; on failure
+`SOURCE_EVENT_SUPPORT_INSUFFICIENT` fires with no substitution and no expansion.
+
+**Guard closure is a PM-owned premise, not an adjudicated fact.** The sweep and
+pooler claims were not reviewed -- the evidence fence did not carry the tests or
+the mutation notes. Check them at the realization gate.
+
+### Superseded: the partial R4 freeze
 
 `docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md`, authority
 `rounds/20260728_r4_materiality_derivation/21_PRO_OPEN_RAW.md`.
