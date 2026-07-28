@@ -1001,6 +1001,14 @@ def _branch_kwargs(**overrides):
         part_a_contradiction=False,
         b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
         b_flex_lcb=1.0, t_flex_lcb=1.0, t_flex_ucb=2.0,
+        # These fixtures exercise the OTHER branch axes, so they declare the
+        # mandatory component audit as performed -- that is the world in which
+        # branches 4-10 are reachable at all under the 2026-07-27 tri-state.
+        # The missing-audit axis has its own dedicated test, which drives this
+        # False. There is deliberately no default on the parameter itself: a
+        # caller that forgets it must raise TypeError rather than silently
+        # inherit a fail-open True.
+        component_invariance_evaluated=True,
     )
     kwargs.update(overrides)
     return kwargs
@@ -2304,6 +2312,7 @@ def test_unresolved_verdict_lands_in_diagnostic_and_never_flips_decide_branch():
         conformance_ok=True, support_ok=True, primary_g_degenerate_flag=False,
         b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
         b_flex_lcb=1.0, t_flex_lcb=1.0, t_flex_ucb=2.0,
+        component_invariance_evaluated=True,
     )
     for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "CONFORMANCE_PASS", "NOT_APPLICABLE"):
         part_a_contradiction, diagnostic = audit.map_part_a_verdict_to_inputs(verdict)
@@ -3445,7 +3454,11 @@ def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
         d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
         u_stable_value=5.0, u_flex_value=5.0)
 
-    out = audit.assemble_audit_result(topology_results, [])
+    # Branches 4-10 are only reachable in the world where the mandatory
+    # primary-G component audit WAS performed (ruling 2026-07-27). This
+    # fixture declares that world explicitly; production defaults False.
+    out = audit.assemble_audit_result(
+        topology_results, [], component_invariance_evaluated=True)
 
     assert out["conformance"]["ok"] is True
     assert out["support"]["ok"] is True
@@ -3469,7 +3482,11 @@ def test_driver_part_a_unresolved_does_not_relabel_the_source_branch(monkeypatch
         d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
         u_stable_value=-2.0, u_flex_value=2.0)
 
-    out = audit.assemble_audit_result(topology_results, [])
+    # Branches 4-10 are only reachable in the world where the mandatory
+    # primary-G component audit WAS performed (ruling 2026-07-27). This
+    # fixture declares that world explicitly; production defaults False.
+    out = audit.assemble_audit_result(
+        topology_results, [], component_invariance_evaluated=True)
 
     assert out["part_a"]["verdict"] == "PART_A_CONFORMANCE_UNRESOLVED"
     assert out["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
@@ -3562,7 +3579,11 @@ def test_assemble_audit_result_preserves_identified_limb_disjunctively(monkeypat
         d_a_value=0.6, b_stable_value=10.0, b_flex_value=-5.0,
         u_stable_value=-2.0, u_flex_value=2.0)
 
-    out = audit.assemble_audit_result(topology_results, [])
+    # Branches 4-10 are only reachable in the world where the mandatory
+    # primary-G component audit WAS performed (ruling 2026-07-27). This
+    # fixture declares that world explicitly; production defaults False.
+    out = audit.assemble_audit_result(
+        topology_results, [], component_invariance_evaluated=True)
 
     assert out["branch"] == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
     assert out["primary_g"]["degenerate"] is False
@@ -3934,6 +3955,325 @@ def test_the_registered_topology_seed_sets_are_exactly_as_frozen():
     assert list(audit.TOPOLOGY_SEEDS_EXPANSION) == [
         20260734, 20260735, 20260736, 20260737,
         20260738, 20260739, 20260740, 20260741]
+
+
+# =============================================================================
+# 10. Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state) -- decide_branch's
+# new mandatory-component-audit gate, and resolve_primary_g_tristate
+# =============================================================================
+
+def test_decide_branch_missing_component_audit_routes_to_branch_1_not_10():
+    """The exact case the governing ruling calls out: at least one limb's
+    normalizer is identified (so branch 3 does not fire -- `_branch_kwargs`'s
+    default fixture has `b_stable_lcb=b_flex_lcb=1.0`), but the mandatory
+    primary-G component audit was never performed. Every OTHER branch-
+    precedence input in the default fixture would otherwise resolve
+    `PERSISTENCE_NECESSARY_SOURCE` (branch 5); the missing audit must preempt
+    it as branch 1, `INVALID_EVENT_ALIGNED_AUDIT` -- never branch 10's
+    `SOURCE_NECESSITY_UNRESOLVED` catch-all, which is what a run that
+    silently dropped this new gate (or wired it to the wrong branch string)
+    would fall through to instead."""
+    kwargs = _branch_kwargs(component_invariance_evaluated=False)
+    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+def test_decide_branch_normalizer_forced_degenerate_preempts_missing_component_audit():
+    """Ruling: 'branch 3 remains reachable through the independently
+    sufficient normalizer condition' -- regardless of whether component
+    invariance was evaluated. `primary_g_degenerate_flag=True` here must win
+    over the new gate, not the other way around."""
+    kwargs = _branch_kwargs(primary_g_degenerate_flag=True, component_invariance_evaluated=False)
+    assert audit.decide_branch(**kwargs) == "PRIMARY_G_DEGENERATE"
+
+
+def test_decide_branch_component_invariance_default_preserves_every_pre_ruling_branch():
+    """`component_invariance_evaluated` defaults to `True` precisely so every
+    pre-ruling caller of `decide_branch` in this module (none of which know
+    this axis exists) keeps its unmodified branch. Spot-checked against
+    branch 5 (the default fixture) and branch 10 (the fixture that
+    deliberately decouples `primary_g_degenerate_flag` from the LCB fields to
+    isolate branch-10 precedence, per its own docstring above) -- both must
+    be unaffected by the new gate sitting silently at its default."""
+    assert audit.decide_branch(**_branch_kwargs()) == "PERSISTENCE_NECESSARY_SOURCE"
+    kwargs = _branch_kwargs(
+        b_stable_lcb=-1.0, t_stable_ucb=1.0, t_stable_lcb=-1.0,
+        b_flex_lcb=-1.0, t_flex_lcb=-1.0, t_flex_ucb=1.0)
+    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+
+
+def test_resolve_primary_g_tristate_normalizer_forces_degenerate_regardless_of_evaluation():
+    """Ruling row 1: `normalizer_forces_degenerate` is independently
+    sufficient, so the degenerate flag is `True` even with
+    `component_invariance_evaluated=False` -- the reason is the normalizer
+    one, not the missing-audit one."""
+    out = audit.resolve_primary_g_tristate(
+        stable_b_identified=False, flex_b_identified=False,
+        component_invariance_evaluated=False)
+    assert out["primary_g_degenerate_flag"] is True
+    assert out["reason"] == "NO_POSITIVE_NORMALIZER_ON_EITHER_LIMB"
+    assert out["stable_measurement_valid"] is False
+    assert out["flex_measurement_valid"] is False
+
+
+def test_resolve_primary_g_tristate_missing_audit_when_normalizer_identified():
+    """Ruling row 2: stable's normalizer is identified, but the mandatory
+    component audit was not performed -- `MANDATORY_PRIMARY_G_COMPONENT_
+    AUDIT_MISSING`, not a silently-False degenerate flag standing in for
+    'nothing to report'."""
+    out = audit.resolve_primary_g_tristate(
+        stable_b_identified=True, flex_b_identified=False,
+        component_invariance_evaluated=False)
+    assert out["primary_g_degenerate_flag"] is False
+    assert out["component_invariance_evaluated"] is False
+    assert out["reason"] == "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
+
+
+def test_resolve_primary_g_tristate_recomputes_degenerate_from_component_separation():
+    """Ruling row 3, and the case that proves this is genuinely new
+    information beyond the old normalizer-only flag: stable's normalizer IS
+    identified (which `primary_g_degenerate` alone would resolve to `False`,
+    i.e. 'not degenerate'), but its components are NOT separate, and flex is
+    neither identified nor separate -- both limbs' `..._measurement_valid`
+    are `False`, so the recomputed `primary_g_degenerate_flag` must be
+    `True`. This is exactly the blind spot the ruling exists to close: a
+    normalizer succeeding is no longer sufficient once component separation
+    is known and fails."""
+    out = audit.resolve_primary_g_tristate(
+        stable_b_identified=True, flex_b_identified=False,
+        component_invariance_evaluated=True,
+        stable_components_separate=False, flex_components_separate=False)
+    assert out["stable_measurement_valid"] is False
+    assert out["flex_measurement_valid"] is False
+    assert out["primary_g_degenerate_flag"] is True
+    assert out["reason"] is None
+
+    # Contrast: same normalizer identification, but stable's components ARE
+    # separate -- measurement valid, not degenerate.
+    out2 = audit.resolve_primary_g_tristate(
+        stable_b_identified=True, flex_b_identified=False,
+        component_invariance_evaluated=True,
+        stable_components_separate=True, flex_components_separate=False)
+    assert out2["stable_measurement_valid"] is True
+    assert out2["primary_g_degenerate_flag"] is False
+
+
+# =============================================================================
+# 11. Ruling 2026-07-27 (D7.S component-cancellation prospective repair) --
+# per-paired-continuation primary-G component persistence
+# =============================================================================
+
+def test_build_primary_g_component_record_persists_every_ruling_mandated_field():
+    """Independent source of truth: the ruling's own enumerated field list
+    (quoted verbatim in the governing task brief) -- QoS component series (or
+    lossless canonical representation), capped return-cost series,
+    window-local cutoff transition series, window-local depletion transition
+    series, component window totals, total G, user-step QoS saturation, and
+    the paired arm identity (topology, event, limb, continuation replicate).
+    A hand-built `window_g_from_step_metrics`-shaped fixture with known
+    values, so every field's presence AND content is checked against a
+    literal, never against what the function itself would recompute."""
+    window_result = {
+        "g_total": 12.5,
+        "qos_series": np.array([0.9, 1.0, 0.95]),
+        "return_cost_series": np.array([0.1, 0.0, 0.2]),
+        "latched": {
+            "cutoff_count": 1, "depletion_count": 0,
+            "cutoff_per_step": np.array([0, 1, 0]),
+            "depletion_per_step": np.array([0, 0, 0]),
+        },
+        "report": {"qos_saturation_fraction": 0.5},
+    }
+    rec = audit.build_primary_g_component_record(
+        window_result=window_result, topology_seed=20260726, event_index=3,
+        limb="stable", arm="KEEP", continuation_replicate=1)
+
+    assert set(rec) == {
+        "topology_seed", "event_index", "limb", "arm", "continuation_replicate",
+        "qos_component_series", "return_cost_series",
+        "cutoff_transition_series", "depletion_transition_series",
+        "component_window_totals", "total_g", "qos_saturation_fraction",
+    }
+    assert rec["topology_seed"] == 20260726
+    assert rec["event_index"] == 3
+    assert rec["limb"] == "stable"
+    assert rec["arm"] == "KEEP"
+    assert rec["continuation_replicate"] == 1
+    assert list(rec["qos_component_series"]) == pytest.approx([0.9, 1.0, 0.95])
+    assert list(rec["return_cost_series"]) == pytest.approx([0.1, 0.0, 0.2])
+    assert rec["cutoff_transition_series"] == [[1, 1]]
+    assert rec["depletion_transition_series"] == []
+    assert rec["component_window_totals"]["qos_total"] == pytest.approx(2.85)
+    assert rec["component_window_totals"]["return_cost_total"] == pytest.approx(0.3)
+    assert rec["component_window_totals"]["cutoff_total"] == 1
+    assert rec["component_window_totals"]["depletion_total"] == 0
+    assert rec["total_g"] == pytest.approx(12.5)
+    assert rec["qos_saturation_fraction"] == pytest.approx(0.5)
+
+
+def test_sparse_transition_series_is_lossless_and_canonical():
+    """The chosen lossless canonical representation for the two window-local
+    transition series: `[[step, count], ...]` for nonzero steps only, in
+    ascending step order -- every zero step is implied by absence, so
+    nothing a dense array carries is lost, and re-expanding against the
+    known length recovers the exact dense array."""
+    dense = np.array([0, 0, 2, 0, 1])
+    sparse = audit.sparse_transition_series(dense)
+    assert sparse == [[2, 2], [4, 1]]
+    reexpanded = np.zeros(5, dtype=int)
+    for step, count in sparse:
+        reexpanded[step] = count
+    assert list(reexpanded) == list(dense)
+    assert audit.sparse_transition_series(np.zeros(5, dtype=int)) == []
+
+
+def test_run_audit_event_persists_component_records_and_pairwise_equality(monkeypatch):
+    """Integration proof that Task 2/3's wiring reaches the real driver, not
+    just the pure helper functions: one real `run_audit_event` call (real
+    `fork_continuation`/`window_g_from_step_metrics`, unmocked, against
+    `_CloneableFakeEnv`, mirroring `test_evaluate_phase_actually_pairs_set_
+    and_keep_on_the_production_path`'s fixture but without stubbing the
+    continuation machinery) must persist one component record per KEEP/SET
+    EVALUATE-phase replicate (never per SELECT-phase replicate -- selection
+    streams are not CRN-paired with anything) and one pairwise-equality
+    entry per (candidate, evaluate replicate)."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=6))
+    env_for_geometry = _CloneableFakeEnv(seed=6)
+    duty_positions, centroids = audit.compute_duty_positions(env_for_geometry)
+    duty_map = {i: i for i in range(env_for_geometry.n_uavs)}
+    event = {
+        "hash_at_te": snap.hash_at_te, "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions, "service_centroids_at_te": centroids,
+        "focal_stable_uav": 0,
+        "legal_targets": {"stable": {"zA": np.array([100.0, 200.0, 50.0]),
+                                      "zB": np.array([300.0, 400.0, 50.0])}},
+        "locked_duties": {"stable": frozenset()},
+    }
+
+    result = audit.run_audit_event(
+        snapshot=snap, topology_seed=42, episode_seed=7, event=event,
+        limb="stable", n_select=2, n_eval=2, event_index=3)
+
+    assert result["event_invalid"] is False
+    records = result["component_audit"]["records"]
+    # 2 KEEP evaluate replicates + 2 candidates x 2 evaluate replicates = 6;
+    # SELECT-phase replicates (2 candidates x 2 = 4 more) must NOT appear.
+    assert len(records) == 6
+    arms_present = {r["arm"] for r in records}
+    assert arms_present == {"KEEP", "zA", "zB"}
+    for r in records:
+        assert r["topology_seed"] == 42
+        assert r["event_index"] == 3
+        assert r["limb"] == "stable"
+
+    pairwise = result["component_audit"]["pairwise_equality"]
+    assert len(pairwise) == 4  # 2 candidates x 2 evaluate replicates
+    assert {(p["candidate"], p["replicate_index"]) for p in pairwise} == {
+        ("zA", 0), ("zA", 1), ("zB", 0), ("zB", 1)}
+    for p in pairwise:
+        assert isinstance(p["sequences_exactly_equal"], (bool, np.bool_))
+
+
+# =============================================================================
+# 12. Ruling 2026-07-27 -- exact paired-sequence equality, computed BEFORE
+# serialization and recorded separately from component totals
+# =============================================================================
+
+def test_exact_paired_sequence_equal_distinguishes_equal_totals_different_sequences():
+    """R2's distinct arm-invariance degeneracy condition, hand-worked: two
+    arms whose cutoff transition lands on DIFFERENT steps (arm A: step 1;
+    arm B: step 2) but with the SAME window `cutoff_total` (1 each) and
+    identical QoS/return-cost series -- so a totals-based comparison would
+    wrongly call these arm-invariant. Only a direct per-step sequence
+    comparison correctly returns `False` here; this is the mutation this
+    test is paired against (deriving the equality boolean from
+    `component_window_totals` instead of the sequences themselves)."""
+    base = {
+        "g_total": 1.0, "qos_series": np.array([1.0, 1.0, 1.0]),
+        "return_cost_series": np.array([0.0, 0.0, 0.0]),
+        "report": {"qos_saturation_fraction": 1.0},
+    }
+    window_a = {**base, "latched": {
+        "cutoff_count": 1, "depletion_count": 0,
+        "cutoff_per_step": np.array([0, 1, 0]), "depletion_per_step": np.array([0, 0, 0])}}
+    window_b = {**base, "latched": {
+        "cutoff_count": 1, "depletion_count": 0,
+        "cutoff_per_step": np.array([0, 0, 1]), "depletion_per_step": np.array([0, 0, 0])}}
+    rec_a = audit.build_primary_g_component_record(
+        window_result=window_a, topology_seed=1, event_index=0, limb="stable",
+        arm="KEEP", continuation_replicate=0)
+    rec_b = audit.build_primary_g_component_record(
+        window_result=window_b, topology_seed=1, event_index=0, limb="stable",
+        arm="zA", continuation_replicate=0)
+
+    # Totals agree (the exact scenario a totals-based comparison would miss)...
+    assert rec_a["component_window_totals"] == rec_b["component_window_totals"]
+    # ...but the sequences do not, and the function must say so.
+    assert audit.exact_paired_sequence_equal(rec_a, rec_b) is False
+
+
+def test_exact_paired_sequence_equal_true_for_identical_sequences():
+    """Contrast case: identical component sequences must compare equal."""
+    window = {
+        "g_total": 3.0, "qos_series": np.array([0.8, 0.9]),
+        "return_cost_series": np.array([0.1, 0.2]),
+        "latched": {"cutoff_count": 0, "depletion_count": 0,
+                    "cutoff_per_step": np.array([0, 0]), "depletion_per_step": np.array([0, 0])},
+        "report": {"qos_saturation_fraction": 0.0},
+    }
+    rec_a = audit.build_primary_g_component_record(
+        window_result=window, topology_seed=1, event_index=0, limb="flex",
+        arm="KEEP", continuation_replicate=0)
+    rec_b = audit.build_primary_g_component_record(
+        window_result=window, topology_seed=1, event_index=0, limb="flex",
+        arm="zB", continuation_replicate=0)
+    assert audit.exact_paired_sequence_equal(rec_a, rec_b) is True
+
+
+def test_run_calibration_episode_records_component_records_and_sequence_equality(monkeypatch):
+    """Integration proof for the calibration block: `b_value`'s own paired
+    arms (`constructive_mixed` vs `null`) get `sequences_exactly_equal`
+    computed and recorded, and every schedule's component record (including
+    `full_sync_SET`, the stable-only Part-A diagnostic arm) is persisted."""
+    source = _CloneableFakeEnv(seed=29)
+    duty_map = {i: i for i in range(source.n_uavs)}
+    duty_positions, centroids = audit.compute_duty_positions(source)
+    real_coord_hash = audit.coordinate_hash(source.ground_bs_positions,
+                                             source.charging_station_positions)
+    fake_event = {
+        "hash_at_te": audit.compute_state_hash(
+            audit.real_env_state_snapshot(source, duty_map)),
+        "duty_map_at_te": duty_map,
+        "duty_positions_at_te": duty_positions,
+        "service_centroids_at_te": centroids,
+        "conformance_record": {},
+        "duty_map_before_leave": duty_map,
+    }
+    monkeypatch.setattr(audit, "build_pinned_env", lambda *a, **k: _CloneableFakeEnv(seed=29))
+    monkeypatch.setattr(audit, "apply_energy_profile", lambda *a, **k: None)
+    monkeypatch.setattr(
+        audit, "roll_prefix_and_find_event",
+        lambda env, **k: {"event": fake_event, "exclusions": [], "recorded_actions": []})
+
+    result = audit.run_calibration_episode(
+        config=None, topology_seed=9, episode_seed=2, energy_seed=1,
+        coords={}, coord_hash=real_coord_hash, episode_index=5)
+
+    assert result["invalidated"] is False
+    records = result["component_records"]
+    arms_by_limb = {
+        limb: {r["arm"] for r in records if r["limb"] == limb}
+        for limb in ("stable", "flex")
+    }
+    assert arms_by_limb["stable"] == {"constructive_mixed", "null", "full_sync_SET"}
+    assert arms_by_limb["flex"] == {"constructive_mixed", "null"}
+    for r in records:
+        assert r["topology_seed"] == 9
+        assert r["event_index"] == 5
+
+    assert set(result["results"]["stable"]) >= {"sequences_exactly_equal"}
+    assert set(result["results"]["flex"]) >= {"sequences_exactly_equal"}
+    assert isinstance(result["results"]["stable"]["sequences_exactly_equal"], (bool, np.bool_))
+    assert isinstance(result["results"]["flex"]["sequences_exactly_equal"], (bool, np.bool_))
 
 
 if __name__ == "__main__":

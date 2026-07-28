@@ -779,6 +779,69 @@ def primary_g_degenerate(*, stable_b_identified: bool, flex_b_identified: bool) 
     return not (stable_b_identified or flex_b_identified)
 
 
+def resolve_primary_g_tristate(*, stable_b_identified: bool, flex_b_identified: bool,
+                                component_invariance_evaluated: bool,
+                                stable_components_separate: bool = False,
+                                flex_components_separate: bool = False) -> dict:
+    """Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state), implemented
+    exactly per the governing task brief's quoted pseudocode. This is the
+    piece `primary_g_degenerate` above deliberately leaves undone -- kept
+    unmodified, per the brief's explicit instruction, and used here as
+    `normalizer_forces_degenerate` -- built AROUND it rather than into it.
+
+    Three outcomes, first match, mirroring the ruling's own if/elif/else:
+
+    1. `normalizer_forces_degenerate` (`primary_g_degenerate(...)`) is
+       independently sufficient and checked FIRST: branch 3 fires
+       "regardless of whether component invariance was evaluated." Neither
+       `stable_components_separate` nor `flex_components_separate` is
+       consulted in this case.
+    2. Otherwise, when the mandatory primary-G component audit was NOT
+       evaluated, the run is `MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING`
+       -- an implementation/measurement invalidity (branch 1), never
+       branch 10's `SOURCE_NECESSITY_UNRESOLVED` catch-all.
+    3. Only when evaluated is `primary_g_degenerate` recomputed from BOTH
+       each limb's normalizer identification and its component-separation
+       result: `stable_measurement_valid = stable_b_identified and
+       stable_components_separate` (mirrored for flex),
+       `primary_g_degenerate = not (stable_measurement_valid or
+       flex_measurement_valid)`.
+
+    Returns the two values `decide_branch` needs beyond its pre-ruling
+    contract (`primary_g_degenerate_flag`, `component_invariance_evaluated`,
+    fed straight into its identically-named keyword-only parameters) plus
+    a `reason` string for the two branch-3/branch-1 cases (`None` when
+    neither applies) and the two intermediate measurement-validity booleans,
+    for direct inspection independent of the driver."""
+    normalizer_forces_degenerate = primary_g_degenerate(
+        stable_b_identified=stable_b_identified, flex_b_identified=flex_b_identified)
+    if normalizer_forces_degenerate:
+        return {
+            "primary_g_degenerate_flag": True,
+            "component_invariance_evaluated": component_invariance_evaluated,
+            "stable_measurement_valid": False,
+            "flex_measurement_valid": False,
+            "reason": "NO_POSITIVE_NORMALIZER_ON_EITHER_LIMB",
+        }
+    if not component_invariance_evaluated:
+        return {
+            "primary_g_degenerate_flag": False,
+            "component_invariance_evaluated": False,
+            "stable_measurement_valid": False,
+            "flex_measurement_valid": False,
+            "reason": "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING",
+        }
+    stable_measurement_valid = stable_b_identified and stable_components_separate
+    flex_measurement_valid = flex_b_identified and flex_components_separate
+    return {
+        "primary_g_degenerate_flag": not (stable_measurement_valid or flex_measurement_valid),
+        "component_invariance_evaluated": True,
+        "stable_measurement_valid": stable_measurement_valid,
+        "flex_measurement_valid": flex_measurement_valid,
+        "reason": None,
+    }
+
+
 # =============================================================================
 # Section 4 -- controllers (pure duty-map layer)
 # =============================================================================
@@ -1070,14 +1133,38 @@ def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
 def decide_branch(*, conformance_ok: bool, support_ok: bool,
                    primary_g_degenerate_flag: bool, part_a_contradiction: bool,
                    b_stable_lcb: float, t_stable_ucb: float, t_stable_lcb: float,
-                   b_flex_lcb: float, t_flex_lcb: float, t_flex_ucb: float) -> str:
-    """First-match precedence over the ten registered branches."""
+                   b_flex_lcb: float, t_flex_lcb: float, t_flex_ucb: float,
+                   component_invariance_evaluated: bool) -> str:
+    """First-match precedence over the ten registered branches.
+
+    `component_invariance_evaluated` (ruling 2026-07-27, COMPONENT_INVARIANCE
+    tri-state -- quoted verbatim in the governing task brief): the normalizer
+    condition (`primary_g_degenerate_flag`, the caller's already-computed
+    `primary_g_degenerate(stable_b_identified, flex_b_identified)`) is
+    independently sufficient for branch 3 and is checked FIRST, regardless of
+    whether component invariance was ever evaluated -- "branch 3 remains
+    reachable through the independently sufficient normalizer condition."
+    Only once that has NOT already resolved the run does this new axis
+    matter: a run with at least one identified normalizer whose mandatory
+    primary-G component audit was never performed is an implementation/
+    measurement invalidity -- branch 1 (`INVALID_EVENT_ALIGNED_AUDIT`), never
+    branch 10's `SOURCE_NECESSITY_UNRESOLVED` catch-all, because the mandatory
+    audit is missing DATA, not an unresolved sign. Defaults to `True` so
+    every pre-ruling caller (of which there are ~190 in this module's own
+    test suite, none aware of this axis) keeps its unmodified branch outcome.
+    No caller in this module passes `False` yet: the ruling's own text notes
+    no production derivation for component separation exists
+    (`assemble_audit_result`'s `component_invariance_evaluated=False`
+    diagnostic field is reported, never fed here), so this new gate is
+    currently unreachable in production and must be tested directly."""
     if not conformance_ok:
         return "INVALID_EVENT_ALIGNED_AUDIT"
     if not support_ok:
         return "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
     if primary_g_degenerate_flag:
         return "PRIMARY_G_DEGENERATE"
+    if not component_invariance_evaluated:
+        return "INVALID_EVENT_ALIGNED_AUDIT"
     if part_a_contradiction:
         return "PART_A_CONTRADICTION"
 
@@ -3042,7 +3129,115 @@ def window_g_from_step_metrics(step_metrics: list, qos_user_steps: list, *, h: i
         cutoff_incidence=latched["cutoff_count"], depletion_incidence=latched["depletion_count"],
         g_series=g_series, secondary_series=return_cost_raw_series)
     return {"g_total": float(np.sum(g_series)) if n else 0.0, "g_series": g_series, "report": report,
-            "latched": latched}
+            "latched": latched,
+            # Ruling 2026-07-27 (component persistence): the two raw
+            # per-step component series this function already computes
+            # locally, now exposed so a caller can persist them per
+            # continuation. `qos_series` is the per-step arm-level QoS
+            # ratio; `return_cost_series` is the ALREADY-CAPPED
+            # return-constraint-cost series `compute_G` itself consumes
+            # (see its docstring: "return_constraint_cost(capped)"), never
+            # the uncapped `return_cost_raw_series` (that one is
+            # `nondegeneracy_report`'s `secondary_metric_mean` input, a
+            # different quantity).
+            "qos_series": qos_series, "return_cost_series": return_cost_series}
+
+
+# =============================================================================
+# Ruling 2026-07-27 (D7.S component-cancellation prospective repair) --
+# per-paired-continuation primary-G component persistence and exact
+# arm-invariance, computed BEFORE serialization.
+#
+# The historical pooled artifact records only `g_total` per continuation, so
+# a component-cancellation explanation of PRIMARY_G_DEGENERATE could not be
+# tested at all -- the ruling requires the FUTURE instrument to retain the
+# component series themselves (or a lossless canonical form), not just their
+# scalar summary, and to compute exact paired-sequence equality between one
+# continuation's two arms while both series are still in memory, recorded
+# SEPARATELY from component totals (equal totals do not imply equal
+# per-step sequences -- R2's distinct arm-invariance degeneracy condition).
+# =============================================================================
+
+def sparse_transition_series(per_step_counts) -> list:
+    """Lossless canonical representation of a window-local transition count
+    series (`window_latched_counts`'s `cutoff_per_step`/`depletion_per_step`
+    -- almost always zero at every step, since a UAV's cutoff/depletion
+    latch fires at most once per window): `[[step_index, count], ...]` for
+    every NONZERO step, dropping nothing a dense array would carry (every
+    zero step is implied by absence) and round-tripping via `_json_default`
+    as plain JSON ints/lists. Materially smaller than the dense array for
+    any window where transitions are rare, which is the registered regime
+    (`window_latched_counts` counts each UAV's FIRST transition per type
+    per window only)."""
+    arr = np.asarray(per_step_counts)
+    return [[int(i), int(v)] for i, v in enumerate(arr) if int(v) != 0]
+
+
+def build_primary_g_component_record(*, window_result: dict, topology_seed, event_index,
+                                       limb: str, arm: str, continuation_replicate: int) -> dict:
+    """Assembles the ruling's mandatory per-paired-continuation persistence
+    record from one `window_g_from_step_metrics` result: the QoS component
+    series (dense, lossless -- floats are not a sparse quantity here), the
+    capped return-cost series (dense, lossless), the two window-local
+    transition series (`sparse_transition_series`, lossless), the four
+    components' window totals, total G, user-step QoS saturation, and the
+    paired arm identity (`topology_seed`/`event_index`/`limb`/`arm`/
+    `continuation_replicate`) so a later analysis can pair arms without
+    guessing which continuation produced which record.
+
+    Reads via `.get` with safe defaults rather than direct indexing: several
+    existing focused tests monkeypatch `window_g_from_step_metrics` down to
+    a bare `{"g_total": ...}` stub to isolate unrelated behaviour (continuation
+    seed wiring, clone-failure short-circuiting); this function must degrade
+    to an honestly-empty record rather than crash a caller that never asked
+    for component persistence in the first place. Every JSON-bound value
+    (arrays, sparse pair lists, floats, ints) round-trips through the
+    existing `_json_default` unchanged."""
+    qos_series = np.asarray(window_result.get("qos_series", []), dtype=float)
+    return_cost_series = np.asarray(window_result.get("return_cost_series", []), dtype=float)
+    latched = window_result.get("latched", {}) or {}
+    cutoff_per_step = np.asarray(latched.get("cutoff_per_step", []))
+    depletion_per_step = np.asarray(latched.get("depletion_per_step", []))
+    report = window_result.get("report", {}) or {}
+    return {
+        "topology_seed": int(topology_seed),
+        "event_index": int(event_index),
+        "limb": str(limb),
+        "arm": str(arm),
+        "continuation_replicate": int(continuation_replicate),
+        "qos_component_series": qos_series,
+        "return_cost_series": return_cost_series,
+        "cutoff_transition_series": sparse_transition_series(cutoff_per_step),
+        "depletion_transition_series": sparse_transition_series(depletion_per_step),
+        "component_window_totals": {
+            "qos_total": float(np.sum(qos_series)) if qos_series.size else 0.0,
+            "return_cost_total": float(np.sum(return_cost_series)) if return_cost_series.size else 0.0,
+            "cutoff_total": int(latched.get("cutoff_count", 0)),
+            "depletion_total": int(latched.get("depletion_count", 0)),
+        },
+        "total_g": float(window_result.get("g_total", float("nan"))),
+        "qos_saturation_fraction": float(report.get("qos_saturation_fraction", float("nan"))),
+    }
+
+
+def exact_paired_sequence_equal(record_a: dict, record_b: dict) -> bool:
+    """Section 7 / ruling 2026-07-27: exact (bit-for-bit) equality of all
+    FOUR primary-G component sequences between one paired continuation's two
+    arms -- computed DIRECTLY from the persisted sequences themselves, never
+    from `component_window_totals` or `total_g`. Two arms can share an
+    identical window total while differing step-by-step (e.g. a cutoff on
+    step 5 of one arm and step 9 of the other, same window count), so a
+    totals-based comparison cannot establish the arm-invariance condition
+    R2 made distinct from component cancellation; only a direct sequence
+    comparison can."""
+    return (
+        np.array_equal(np.asarray(record_a["qos_component_series"]),
+                        np.asarray(record_b["qos_component_series"]))
+        and np.array_equal(np.asarray(record_a["return_cost_series"]),
+                            np.asarray(record_b["return_cost_series"]))
+        and record_a["cutoff_transition_series"] == record_b["cutoff_transition_series"]
+        and record_a["depletion_transition_series"] == record_b["depletion_transition_series"]
+    )
 
 
 def _baseline_masks(env) -> tuple:
@@ -3139,6 +3334,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
             "episode_world": world,
         }
 
+    component_records: list = []
     for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
         schedules = (("constructive_mixed", "null", "full_sync_SET") if limb == "stable"
                      else ("constructive_mixed", "null"))
@@ -3174,12 +3370,31 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
                 out["step_metrics"], out["qos_user_steps"], h=h_val,
                 baseline_cutoff_mask=snapshot.baseline_cutoff,
                 baseline_depletion_mask=snapshot.baseline_depletion)
+            # Ruling 2026-07-27: every calibration schedule IS a paired
+            # continuation (the comment above already establishes the CRN
+            # sharing that makes `b_value`/`d_a` paired contrasts), so every
+            # one persists its component record here, before this episode's
+            # in-memory series are discarded.
+            component_records.append(build_primary_g_component_record(
+                window_result=g_by_schedule[schedule], topology_seed=topology_seed,
+                event_index=episode_index, limb=limb, arm=schedule,
+                continuation_replicate=0))
         if limb_invalid:
             continue
         result_entry = {
             "b_value": g_by_schedule["constructive_mixed"]["g_total"] - g_by_schedule["null"]["g_total"],
             "constructive": g_by_schedule["constructive_mixed"],
             "null": g_by_schedule["null"],
+            # Ruling 2026-07-27: exact paired-sequence equality between the
+            # two arms `b_value` itself contrasts (constructive_mixed vs
+            # null), computed HERE while both arms' series are still in
+            # memory and recorded separately from `b_value`/component
+            # totals -- never inferred from them afterwards.
+            "sequences_exactly_equal": exact_paired_sequence_equal(
+                next(r for r in component_records
+                     if r["limb"] == limb and r["arm"] == "null"),
+                next(r for r in component_records
+                     if r["limb"] == limb and r["arm"] == "constructive_mixed")),
         }
         if limb == "stable":
             result_entry["full_sync"] = g_by_schedule["full_sync_SET"]
@@ -3196,6 +3411,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
         "duty_map_before_leave": event["duty_map_before_leave"],
         "episode_report": episode_leave_report,
         "episode_world": world,
+        "component_records": component_records,
     }
 
 
@@ -3204,7 +3420,8 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
 # =============================================================================
 
 def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed: int,
-                     event: dict, limb: str, n_select: int, n_eval: int) -> dict:
+                     event: dict, limb: str, n_select: int, n_eval: int,
+                     event_index: int = 0) -> dict:
     """Item 3's audit-event intervention under R2's shared-prefix realization:
     KEEP (unperturbed `constructive_mixed` continuation) plus, for every legal
     `z` in the limb's `Z(h)`, `n_select` selection-stream replicates and
@@ -3228,6 +3445,14 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
     locked_duties = event["locked_duties"][limb]
     invalidated_pairs: list = []
     event_invalid = {"flag": False}
+    # Ruling 2026-07-27: only "evaluate"-phase replicates are CRN-paired
+    # (KEEP and the selected SET share a continuation seed per replicate
+    # index -- see the seed-derivation comment below); "select"-phase
+    # replicates each draw an independent stream per candidate and are
+    # never paired with anything, so they are outside the ruling's "paired
+    # continuation" persistence scope. Keyed by (candidate_id,
+    # replicate_index), evaluate phase only.
+    evaluate_component_records: dict = {}
 
     def _run_replicate(*, target, candidate_id: str, phase: str, replicate_index: int) -> Optional[float]:
         if event_invalid["flag"]:
@@ -3269,6 +3494,11 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
         g = window_g_from_step_metrics(
             out["step_metrics"], out["qos_user_steps"], h=h_val,
             baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+        if phase == "evaluate":
+            evaluate_component_records[(candidate_id, replicate_index)] = (
+                build_primary_g_component_record(
+                    window_result=g, topology_seed=topology_seed, event_index=event_index,
+                    limb=limb, arm=candidate_id, continuation_replicate=replicate_index))
         return g["g_total"]
 
     keep_eval = np.array([
@@ -3301,9 +3531,27 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
               f"select_completed={select_vals.size} eval_completed={eval_vals.size}",
               file=sys.stderr, flush=True)
 
+    # Ruling 2026-07-27: exact paired-sequence equality between KEEP and each
+    # legal candidate's SET, per CRN-paired evaluate replicate, computed here
+    # while both arms' records are still in memory. A replicate missing
+    # either side (short-circuited by a clone failure) is skipped rather
+    # than compared -- there is no pair to evaluate.
+    pairwise_equality = [
+        {"candidate": z_id, "replicate_index": r,
+         "sequences_exactly_equal": exact_paired_sequence_equal(
+             evaluate_component_records[("KEEP", r)], evaluate_component_records[(z_id, r)])}
+        for z_id in candidates
+        for r in range(n_eval)
+        if ("KEEP", r) in evaluate_component_records and (z_id, r) in evaluate_component_records
+    ]
+
     return {"candidates": candidates, "eval_keep": keep_eval,
             "invalidated_pairs": invalidated_pairs,
-            "event_invalid": event_invalid["flag"]}
+            "event_invalid": event_invalid["flag"],
+            "component_audit": {
+                "records": list(evaluate_component_records.values()),
+                "pairwise_equality": pairwise_equality,
+            }}
 
 
 # =============================================================================
@@ -3429,10 +3677,10 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
         return raw
     raw["unit_stable"] = run_audit_event(
         snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-        event=event, limb="stable", n_select=n_select, n_eval=n_eval)
+        event=event, limb="stable", n_select=n_select, n_eval=n_eval, event_index=idx)
     raw["unit_flex"] = run_audit_event(
         snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-        event=event, limb="flex", n_select=n_select, n_eval=n_eval)
+        event=event, limb="flex", n_select=n_select, n_eval=n_eval, event_index=idx)
     raw["event_conformance_record"] = event["conformance_record"]
     raw["duty_map_at_te"] = event["duty_map_at_te"]
     raw["duty_map_before_leave"] = event["duty_map_before_leave"]
@@ -3456,7 +3704,9 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
                                  calibration_report: dict, episode_worlds: list,
                                  invalidated_pairs: list, arm_distinctness_pairs: list,
                                  calibration_units_stable: list, calibration_units_flex: list,
-                                 calibration_units_d_a: list) -> None:
+                                 calibration_units_d_a: list,
+                                 primary_g_component_records: Optional[list] = None,
+                                 primary_g_pairwise_equality: Optional[list] = None) -> None:
     """Folds one calibration episode's already-computed `result` into the
     topology-level accumulators, identically regardless of whether `result`
     came from the sequential loop or a pool worker -- this IS the sequential
@@ -3476,6 +3726,8 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
               file=sys.stderr, flush=True)
         return
     invalidated_pairs.extend(result.get("invalidated_pairs", []))
+    if primary_g_component_records is not None:
+        primary_g_component_records.extend(result.get("component_records", []))
     if "stable" not in result["results"] or "flex" not in result["results"]:
         # One or both limbs invalidated by a PrefixReplayMismatchError
         # (already recorded above) -- this episode contributes neither
@@ -3504,6 +3756,14 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
                                 "eval_set": np.array([g_s["d_a"]])}},
         "eval_keep": np.array([0.0]),
     })
+    if primary_g_pairwise_equality is not None:
+        for limb_name, g_entry in (("stable", g_s), ("flex", g_f)):
+            if "sequences_exactly_equal" in g_entry:
+                primary_g_pairwise_equality.append({
+                    "topology_seed": topology_seed, "episode_index": idx, "block": "calibration",
+                    "limb": limb_name, "candidate": "constructive_mixed_vs_null",
+                    "sequences_exactly_equal": g_entry["sequences_exactly_equal"],
+                })
     print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
           f"qualifying_event=True cumulative_qualifying={calibration_report['qualifying']}",
           file=sys.stderr, flush=True)
@@ -3512,7 +3772,9 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
 def _process_audit_result(raw: dict, *, idx: int, topology_seed: int, audit_report: dict,
                            episode_worlds: list, invalidated_pairs: list,
                            arm_distinctness_pairs: list, audit_units_stable: list,
-                           audit_units_flex: list, audit_events_out: list) -> None:
+                           audit_units_flex: list, audit_events_out: list,
+                           primary_g_component_records: Optional[list] = None,
+                           primary_g_pairwise_equality: Optional[list] = None) -> None:
     """Folds one audit-block episode's already-computed `raw` result (from
     `_compute_audit_episode`, sequential or pooled) into the topology-level
     accumulators -- the sequential path's original per-episode tail,
@@ -3542,6 +3804,18 @@ def _process_audit_result(raw: dict, *, idx: int, topology_seed: int, audit_repo
     unit_flex = raw["unit_flex"]
     invalidated_pairs.extend(unit_stable.get("invalidated_pairs", []))
     invalidated_pairs.extend(unit_flex.get("invalidated_pairs", []))
+    if primary_g_component_records is not None:
+        primary_g_component_records.extend(
+            unit_stable.get("component_audit", {}).get("records", []))
+        primary_g_component_records.extend(
+            unit_flex.get("component_audit", {}).get("records", []))
+    if primary_g_pairwise_equality is not None:
+        for limb_name, unit in (("stable", unit_stable), ("flex", unit_flex)):
+            for entry in unit.get("component_audit", {}).get("pairwise_equality", []):
+                primary_g_pairwise_equality.append({
+                    "topology_seed": topology_seed, "episode_index": idx, "block": "audit",
+                    "limb": limb_name, **entry,
+                })
     if unit_stable.get("event_invalid") or unit_flex.get("event_invalid"):
         print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
               f"qualifying_event=False cumulative_qualifying={audit_report['qualifying']}",
@@ -3644,6 +3918,11 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
     # the run visited, and dropping it would make the recorded set a filtered
     # sample rather than the run's actual history.
     episode_worlds: list = []
+    # Ruling 2026-07-27: per-paired-continuation primary-G component
+    # persistence and exact arm-invariance, pooled across both blocks of
+    # this topology.
+    primary_g_component_records: list = []
+    primary_g_pairwise_equality: list = []
 
     calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
     calibration_report = _new_episode_block_report()
@@ -3662,7 +3941,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                 invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
                 calibration_units_stable=calibration_units_stable,
                 calibration_units_flex=calibration_units_flex,
-                calibration_units_d_a=calibration_units_d_a)
+                calibration_units_d_a=calibration_units_d_a,
+                primary_g_component_records=primary_g_component_records,
+                primary_g_pairwise_equality=primary_g_pairwise_equality)
     else:
         with _pinned_worker_env():
             pooled = _run_indexed_in_pool(
@@ -3678,7 +3959,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                 invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
                 calibration_units_stable=calibration_units_stable,
                 calibration_units_flex=calibration_units_flex,
-                calibration_units_d_a=calibration_units_d_a)
+                calibration_units_d_a=calibration_units_d_a,
+                primary_g_component_records=primary_g_component_records,
+                primary_g_pairwise_equality=primary_g_pairwise_equality)
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
     audit_report = _new_episode_block_report()
@@ -3693,7 +3976,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                 episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
                 arm_distinctness_pairs=arm_distinctness_pairs,
                 audit_units_stable=audit_units_stable, audit_units_flex=audit_units_flex,
-                audit_events_out=audit_events_out)
+                audit_events_out=audit_events_out,
+                primary_g_component_records=primary_g_component_records,
+                primary_g_pairwise_equality=primary_g_pairwise_equality)
     else:
         with _pinned_worker_env():
             pooled = _run_indexed_in_pool(
@@ -3708,7 +3993,9 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                 episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
                 arm_distinctness_pairs=arm_distinctness_pairs,
                 audit_units_stable=audit_units_stable, audit_units_flex=audit_units_flex,
-                audit_events_out=audit_events_out)
+                audit_events_out=audit_events_out,
+                primary_g_component_records=primary_g_component_records,
+                primary_g_pairwise_equality=primary_g_pairwise_equality)
 
     return {
         "topology_record": record,
@@ -3725,6 +4012,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         "invalidated_pairs": invalidated_pairs,
         "arm_distinctness_pairs": arm_distinctness_pairs,
         "episode_worlds": episode_worlds,
+        "primary_g_component_records": primary_g_component_records,
+        "primary_g_pairwise_equality": primary_g_pairwise_equality,
     }
 
 
@@ -3773,6 +4062,17 @@ def topology_unit_for_serialization(r: dict) -> dict:
         # dropped it would carry the numbers without the worlds they were
         # measured in, which is the exact gap that retired ep64.
         "episode_worlds": r.get("episode_worlds", []),
+        # Ruling 2026-07-27 (D7.S component-cancellation prospective repair):
+        # per-paired-continuation primary-G component records (QoS/return-
+        # cost series, transition series, window totals, total G, QoS
+        # saturation, paired arm identity) and the exact paired-sequence
+        # equality computed per continuation before serialization. `.get`
+        # defaults keep a pre-repair shard poolable (see `episode_worlds`
+        # above for the same convention) -- `assemble_audit_result` never
+        # reads either key, so this is additive, not load-bearing for the
+        # branch decision.
+        "primary_g_component_records": r.get("primary_g_component_records", []),
+        "primary_g_pairwise_equality": r.get("primary_g_pairwise_equality", []),
     }
 
 
@@ -3808,7 +4108,20 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     }
 
 
-def assemble_audit_result(topology_results: list[dict], topology_hash_failures: list[dict]) -> dict:
+def assemble_audit_result(topology_results: list[dict], topology_hash_failures: list[dict],
+                           *, component_invariance_evaluated: bool = False) -> dict:
+    """`component_invariance_evaluated` defaults **False**, which is the
+    fail-closed direction (ruling 2026-07-27, COMPONENT_INVARIANCE): a run
+    that is not already normalizer-forced-degenerate and never performed the
+    mandatory primary-G component audit resolves to branch 1, because "later
+    branches cannot fire on a future run whose mandatory component audit is
+    missing." Production passes nothing and therefore gets False.
+
+    It is a parameter rather than a hardcoded literal so a caller can declare
+    the world in which the audit WAS performed -- which is what the
+    branch-precedence fixtures for branches 4-10 do. Hardcoding it either way
+    is the defect this whole repair exists to remove; the safe polarity is
+    that omitting it can only make the instrument stricter, never looser."""
     """Item 5/8's driver-level wiring, isolated from `main()`'s CLI/env
     concerns so it can be exercised directly against synthetic
     `topology_results` (the exact shape `run_topology_audit` returns)
@@ -3958,7 +4271,7 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             "degenerate": primary_g_degenerate_flag,
             "stable_b_identified": stable_b_identified,
             "flex_b_identified": flex_b_identified,
-            "component_invariance_evaluated": False,
+            "component_invariance_evaluated": component_invariance_evaluated,
             "stable_status": ("NORMALIZER_NOT_IDENTIFIED" if not stable_b_identified
                                else "NORMALIZER_IDENTIFIED"),
             "flex_status": ("NORMALIZER_NOT_IDENTIFIED" if not flex_b_identified
@@ -3970,7 +4283,14 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             primary_g_degenerate_flag=primary_g_degenerate_flag,
             part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
             t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
-            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
+            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"],
+            # Passed from the payload rather than defaulted. Today this is
+            # always False, so the tri-state's missing-audit gate is live: a
+            # run that is NOT normalizer-forced-degenerate but never performed
+            # the mandatory component audit resolves to branch 1. That is the
+            # ruling's fail-closed direction, and it has no effect on a
+            # normalizer-forced run, which resolves at branch 3 first.
+            component_invariance_evaluated=out["primary_g"]["component_invariance_evaluated"])
     elif not conformance_ok:
         out["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
     elif not support_ok:

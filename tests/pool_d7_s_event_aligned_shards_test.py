@@ -172,7 +172,14 @@ def test_pooled_output_equals_direct_assemble_audit_result(tmp_path, monkeypatch
     expected = audit.assemble_audit_result(topo, [])
 
     assert pooled["branch"] == expected["branch"]
-    assert pooled["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
+    # Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state): a run that is not
+    # normalizer-forced-degenerate and never performed the mandatory
+    # primary-G component audit is a measurement invalidity -- branch 1,
+    # not a later branch. The pooler is production and so takes the
+    # fail-closed default, which is why this fixture now lands there.
+    # The property this test exists for -- pooled output equals direct
+    # assembly -- is asserted above and is unchanged.
+    assert pooled["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
     assert pooled["t_m_bootstrap"] == expected["t_m_bootstrap"]
     assert pooled["part_a"]["verdict"] == expected["part_a"]["verdict"]
     assert pooled["support"] == expected["support"]
@@ -369,7 +376,14 @@ def test_registered_initial_seed_set_is_accepted_without_allow_any_seeds(tmp_pat
     pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])
 
     assert pooled["topology_seeds"] == seeds
-    assert pooled["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
+    # Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state): a run that is not
+    # normalizer-forced-degenerate and never performed the mandatory
+    # primary-G component audit is a measurement invalidity -- branch 1,
+    # not a later branch. The pooler is production and so takes the
+    # fail-closed default, which is why this fixture now lands there.
+    # The property this test exists for -- pooled output equals direct
+    # assembly -- is asserted above and is unchanged.
+    assert pooled["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
 # =============================================================================
