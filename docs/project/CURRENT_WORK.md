@@ -26,7 +26,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 ```text
 working_branch=untied-k
 execution_mode=authorized
-active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
+active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
 next_boundary=R4_CLOSURE -- ledger, smallest delta, realization-conformance review, proof-sized exercise. No run.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
@@ -51,39 +51,6 @@ b_stable_lcb  -0.077367      t_stable_ucb  +7.206993   t_stable_lcb  -2.189143
 b_flex_lcb    -8.648833      t_flex_lcb   -14.293054   t_flex_ucb    +3.115871
 recorded branch = SOURCE_NECESSITY_UNRESOLVED       part_a = NOT_APPLICABLE
 ```
-
-### Ruled: the run is `PRIMARY_G_DEGENERATE`, and this measurement route closes
-
-Round `20260727_d7_s_audit_2_result_disposition`, stage commit `76c1ce32`,
-ruling archived at that round's `21_PRO_OPEN_RAW.md`.
-
-The recorded branch `SOURCE_NECESSITY_UNRESOLVED` is **mislabelled**; the
-frozen-contract disposition is branch 3 `PRIMARY_G_DEGENERATE`. Not
-`INVALID_EVENT_ALIGNED_AUDIT` — the run stays valid and quantitatively usable.
-Leave the historical JSON byte-unchanged and attach the disposition; do not
-rerun to rewrite a string.
-
-Pro's durable conclusion: *"D7.S R3 produced a valid matched observation but an
-unidentifiable materiality scale. The result closes this measurement route, not
-the heterogeneous-renewal research question."*
-
-Smallest retired unit: the **signed** `B_m = G(constructive_mixed) − G(null)`
-as an *identified positive materiality scale* on this frozen route. Primary `G`
-is retained under question; the S7-S3 source-necessity proposition is
-**unjudged**. `D7.3` and `D8` stay blocked.
-
-**Expansion is inadmissible** and this does not depend on the label: §9 forbids
-expansion on a wrong-direction point, and both `T_m` points have the wrong sign
-(`T_stable = +1.272` where it must be negative, `T_flex = -4.551` where it must
-be positive). Do not add topologies `20260734–20260741`, do not add replicates,
-and do not use the positive `B_m` points to bypass their non-positive bounds.
-
-Technical closure owed, and explicitly *not* the next scientific action: wire
-branch 3 **disjunctively** across limbs (`b_stable_lcb > 0 OR b_flex_lcb > 0`,
-with per-limb `stable_b_identified` / `flex_b_identified` recorded separately and
-a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
-the artifact, which today carries only the six bounds; and enforce §9 in
-`main()`.
 
 ### R4 is COMPLETELY frozen -- read the _COMPLETE file, not the partial one
 
@@ -113,158 +80,64 @@ independently satisfy minimum support before any focal margin is read; on failur
 pooler claims were not reviewed -- the evidence fence did not carry the tests or
 the mutation notes. Check them at the realization gate.
 
-### Superseded: the partial R4 freeze
+### The road here, in pointers
 
-`docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md`, authority
-`rounds/20260728_r4_materiality_derivation/21_PRO_OPEN_RAW.md`.
+Each of these is fully recorded in its round directory and its evidence note.
+They are pointers because a narrative copy here drifts and this file has been
+deleted once for exactly that.
+
+| What happened | Where |
+|---|---|
+| D7.S audit run 2 returned a valid non-affirmative result | `logs/d7s_audit_2_30289161086/`, note `20260727_D7_S_AUDIT_2_RESULT_AND_A_MISLABELLED_BRANCH.md` |
+| Ruled `PRIMARY_G_DEGENERATE`; the measurement route closed, not the research question | round `20260727_d7_s_audit_2_result_disposition` |
+| The global normalizer retired for this claim; N5 comparator-scale mismatch raised | round `20260728_d7_s_autopsy_result`, `logs/d7s_autopsy_2/` |
+| R4 derived at a five-unit absolute focal margin, ruled derivable | round `20260728_r4_materiality_derivation` |
+| The partial R4 freeze, left immutable | `docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md` |
+
+**Say "relevance not demonstrated", never "unrelated".** The stronger reading
+was this conversation's inference and Pro rejected it.
+
+**Two errors of mine not to repeat.** The ratio/linear divergence was **not** an
+R3 design defect -- the contract registers the *linear* gate plus the separate
+`LCB95(B_m) > 0` requirement, and that requirement is what keeps the linear form
+inside the domain where it equals the ratio. And `U* = V_SET - V_KEEP`, so
+**`U*_stable = -3` means SET is WORSE than KEEP**, which is why it points toward
+stable persistence.
+
+### Guard state — the launch gate is closed
+
+All seven areas Pro made a precondition on any future environment run now carry
+paired negatives, each watched failing: `window_g_from_step_metrics`, baseline
+masks, calibration arm ordering, audit-limb assignment, seed-controlled
+provenance, qualifying-event construction, and clone conditions 2/3/5. The
+pooler's reconstruction whitelist followed.
 
 ```text
-stable clears  iff  UCB95(U*_stable) < -5.0
-flex clears    iff  LCB95(U*_flex)   > +5.0
+tests/audit_d7_s_event_aligned_test.py        215 passed   (from 183)
+tests/pool_d7_s_event_aligned_shards_test.py   21 passed   (from 15)
+tests/d7s_normalizer_autopsy_test.py           12 passed
+tests/scenario7_energy_aware_test.py           47 passed
 ```
 
-No denominator. Five is the smallest nonzero coefficient on a discrete
-task-semantic safety event in the frozen objective, fixed from the weights alone.
-**It is not mathematically unique** — Pro said so, and it must not be inherited as
-forced.
+**Production code was never changed to close any of these — every one was a
+missing test.**
 
-**Two corrections this conversation must not repeat.** The ratio/linear
-divergence I reported was **not** an R3 design defect: the contract registers the
-*linear* gate plus the separate `LCB95(B_m) > 0` requirement, and that
-requirement is what keeps the linear form inside the domain where it equals the
-ratio; a negative-`B` run terminates before the contrast is interpreted. And
-`U* = V_SET − V_KEEP`, so **`U*_stable = −3` means SET is WORSE than KEEP** —
-which is why it points toward stable persistence.
+The event-admission surface was swept separately and came back **sound**: 31
+independent mutations across `check_leave_eligibility`, `certify_stable`,
+`certify_flex`, `legal_set_targets`, the transit helpers,
+`arm_distinctness_check` and `compute_conformance_ok` all drove red, including
+both operands of every compound condition. That matters most for R4, because a
+defect there changes *which events are measured* rather than perturbing a value.
+Note `20260728_D7_S_THE_EVENT_ADMISSION_SURFACE_IS_SOUND.md`.
 
-**Branch 3's pair set changed.** Under R4 it is the focal `(KEEP, SET(z))`
-evaluation pairs, **not** the R3 calibration pair — that aggregation rule was
-R3-specific because it tied component separation to the normalizer source
-controls, and R4 has no normalizer.
+Known and deliberately not repaired: two rejection-map entries and eleven of
+fourteen `build_event_conformance_record` fields are unguarded but reach
+diagnostics only; `select_joint_event` and `focal_eligible_to_act` are dead in
+production — tested, never called.
 
-**Open before any R4 run:** the expansion rule (freeze one, or freeze no
-expansion — R3's is void) and a fresh evidence population. **The R3 artifact may
-not be rethresholded at ±5 and reported as an R4 result.**
-
-### Superseded: the global normalizer is retired for this claim
-
-Round `20260728_d7_s_autopsy_result`, stage commit `6430ef96`.
-
-> The completed artifact provides no positive evidence that the global
-> `constructive_mixed − null` contrast is a useful scale for the focal one-Δ
-> SET-versus-KEEP effect.
-
-Status `GLOBAL_ROTATION_NORMALIZER_RELEVANCE_NOT_DEMONSTRATED`. **Say "relevance
-not demonstrated", never "unrelated"** — that stronger reading was this
-conversation's inference and Pro rejected it: the association intervals span
-strong relationships in both directions and the leave-one-out estimates are
-unstable.
-
-**Selected next action, zero compute:** derive and pre-freeze an R4 absolute
-task-unit materiality criterion (or the positive pre-treatment scale as live
-alternative), construct its zero-denominator and sign counterexamples, freeze
-its branch semantics, and decide whether it is scientifically meaningful
-**before any implementation or environment run**. S7-S3 carrier retirement is
-the conditional fallback. Topology stratification is **not selected**; higher
-selection volume is parked. `D7.3` and `D8` remain blocked.
-
-**Standing constraint from this ruling:** a future measurement may not use a
-global source-control contrast to scale a focal renewal effect merely because
-both are measured in `G`. It must use an arm-independent task scale, or
-establish analytically **before data** that the normalizer is commensurate with
-the focal one-Δ intervention.
-
-**The aggregation blocker is closed.** `components_separate_m` is the
-disjunction of not-exactly-equal over the complete **calibration** source-control
-pairs; no fraction threshold is permitted; completeness is load-bearing and a
-missing record leaves the run fail-closed. Wire it as part of the **R4**
-instrument closure — do **not** rerun R3 merely because branches 4–10 become
-reachable.
-
-### The launch gate is closed
-
-All seven guard areas Pro made a precondition on any future environment run now
-have paired negatives, watched failing: `window_g_from_step_metrics`, baseline
-masks, calibration arm ordering, audit-limb assignment, seed-controlled
-provenance, qualifying-event construction, and clone conditions 2/3/5. The suite
-went 203 → 215. Production code was not changed; these were purely missing tests.
-
-The widest of them: no test had ever driven the real event-selection algorithm
-to a qualifying event. That positive case now exists.
-
-### The autopsy's first evidence matrix is partly superseded
-
-`logs/d7s_autopsy_1/` ran with three classifier defects Pro then found. **The N1
-row is discarded outright**; N4's "material" was overstated; N2's vocabulary was
-too conjunctive. All three are repaired and `logs/d7s_autopsy_2/` is the
-corrected run. The sentinel result, the four standalone distributions and the R4
-decision are unaffected — the ruling says so explicitly.
-
-Quote the corrected run, and the reconciliation at
-`docs/external-review/rounds/20260728_d7_s_autopsy_result/30_PM_SCIENTIFIC_RECONCILIATION.md`.
-
-### The converged next action, and a precondition it set
-
-Round `20260727_d7_s_normalizer_autopsy_plan`, stage commit `f1d79b17`:
-**APPROVED WITH MODIFICATIONS**. The artifact-only autopsy runs locally against
-the byte-unchanged artifact; *"no environment compute is selected by this
-ruling."* Six modifications, of which the load-bearing ones are a **fail-closed
-input sentinel** that must reproduce all six frozen R3 bounds before any
-statistic is emitted, and **N5 — comparator-scale mismatch**, an explanation this
-conversation had missed: `B_m` measures global proactive rotation versus none
-while `U*_m` measures a focal one-Δ reassignment, so the normalizer can be
-measured correctly and still be the wrong scale.
-
-`N3 = UNDISCRIMINATED_FROM_STORED_ARTIFACT` — the artifact holds no component
-data, and Pro rejected reconstructing it.
-
-**A hard precondition on any future environment run.** Before one may launch, the
-guard gaps in `window_g_from_step_metrics`, baseline masks, calibration arm
-ordering, audit-limb assignment, seed-controlled provenance, qualifying-event
-construction, and clone conditions 2/3/5 **must** be closed with paired negatives
-or another independent conformance mechanism. This is a gate, not a backlog item.
-
-**The wording of the last result was downgraded by Pro itself.** The run is no
-longer "a valid matched observation" but *"a provenance-recorded, CRN-paired,
-executed-code observation that remains admissible for diagnostic reanalysis, but
-is not independently validated at every conclusion-bearing transformation."*
-Quote that form, not the earlier one.
-
-### Guard state — what is now covered, and what is not
-
-Ten unfailable guards were repaired on 2026-07-27 across the instrument and the
-Scenario-7 environment; each was watched red under a mutation the Project
-Manager ran itself. `tests/audit_d7_s_event_aligned_test.py` is **183 passed**,
-`tests/scenario7_energy_aware_test.py` is **47 passed**.
-
-Still open, and deliberately not repaired here:
-
-- **`primary_g_degenerate`, `qos_component_saturated`, `expansion_allowed` are
-  dead code.** The first makes a registered result branch unreachable — the
-  round question above. The third means the §9 "one permissible expansion"
-  predicate **is not enforced by any code**: expansion happens by a human
-  passing `--topology-seeds`. The rule below reads as mechanized and is not.
-- **The back half has now been swept, and the primary result path has almost no
-  guards** —
-  `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_THE_INSTRUMENT_BACK_HALF_SWEEP.md`.
-  Verified by the Project Manager personally, each at 183 passed: `B_stable`'s
-  sign can be flipped at its production fold, `all_seed_controlled` can be
-  hardcoded `True`, and the entire qualifying-event construction branch can be
-  made unreachable. **No test drives event selection through to a real
-  qualifying event.**
-
-  This does not make the recorded result wrong — the production code is correct
-  and the run executed it. It makes "mechanical validation clean" weaker evidence
-  than it reads, which matters because the ruling leaned on it. Carried to the
-  next plan review, not to a follow-up Pro turn.
-
-- **The clone conditions and the `G` accumulator are the worst of it.** Region B
-  returned: three of the five R2 blocking conditions — 2, 3 and 5 — can each be
-  replaced by `if False:` at 183 passed, and reachability probes prove all three
-  execute on every clone. That is what "zero invalidated pairs" is made of.
-  `window_g_from_step_metrics` and `_baseline_masks`, which produce every
-  `g_total` in the run, have **no test at all**: 22 of 22 mutations green,
-  including halving the total, which the Project Manager verified personally.
-
+**Closure is a PM-owned premise, not an adjudicated fact.** Pro declined to rule
+on it because the evidence fence did not carry the tests or the mutation notes.
+Check it at the realization gate.
 ### On a killed shard — the ruling's rule, which replaces ours
 
 A topology is indivisible. Never pool a partial topology; preserve every
@@ -281,20 +154,13 @@ stage commit and contract**; pool only once the seed union matches a frozen set.
 
 ### Open decisions that are the user's, not mine
 
-- ~~**Ownership of `untied-k`**~~ — **settled by direction 2026-07-27.** The user
-  granted this session ten workflow rounds with full permission on this branch,
-  which is an instruction to drive it. `d3e0f72` from another session asked that
-  ownership be established; it now is. Recorded rather than assumed silently.
-- ~~Authorization for a further formal run~~ — covered by `workflow_round_grant`
-  above for the ten rounds it names. The next action is artifact-only anyway and
-  needs no environment compute.
-- ~~The OS-entropy construction seed~~ — **ruled, and the answer is "not now."**
-  The station-logistics reorder would change step-zero state and every
-  trajectory. It is a **parked** environment correction; reactivate only if a
-  future estimand reads graph-PBRS state, a conclusion-bearing path needs
-  fresh-environment replay, a result must reproduce the whole event state from
-  registered seeds, or the stale logistics are shown to alter event support,
-  source-control actions or primary-`G` components.
+**None outstanding.** Branch ownership of `untied-k` is settled by direction;
+formal-run authorization is covered by `workflow_round_grant`; and the
+OS-entropy construction seed is ruled **parked** — reactivate the
+station-logistics reorder only if a future estimand reads graph-PBRS state, a
+conclusion-bearing path needs fresh-environment replay, a result must reproduce
+the whole event state from registered seeds, or the stale logistics are shown to
+alter event support, source-control actions or primary-`G` components.
 
 ### Cost — three hosted samples, and the ceiling worry mostly dissolves
 
