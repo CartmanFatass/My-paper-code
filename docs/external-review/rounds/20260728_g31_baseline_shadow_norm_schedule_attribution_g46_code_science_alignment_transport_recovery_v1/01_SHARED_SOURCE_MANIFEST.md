@@ -1,0 +1,21 @@
+# Shared source manifest: G46 code-science alignment transport recovery v1
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit
+review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
+transport_mode=DISTINCT_BOUNDED_RECOVERY
+assignment_id=G46_CODE_SCIENCE_ALIGNMENT_TRANSPORT_RECOVERY_V1
+audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+superseded_transport_stage=c9696d4a6f8eda2a15f6a7be8b8db27b501d38cc
+formal_compute=not_started
+nonformal_compute=not_started
+compute_budget=zero
+scientific_question=unchanged
+allow_list=the exact allow-list in the original G46 question and manifest is reused without modification
+original_question_resubmission=false
+new_recovery_submission_limit=1
+
+This recovery manifest is operator provenance only. External Pro must read the
+original G46 question and its original `01_SHARED_SOURCE_MANIFEST.md` from the
+exact audit target commit, preserving every scientific and evidence boundary.

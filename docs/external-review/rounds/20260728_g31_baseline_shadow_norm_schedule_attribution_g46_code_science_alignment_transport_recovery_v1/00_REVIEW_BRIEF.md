@@ -1,0 +1,24 @@
+# G46 code-science alignment transport recovery v1
+
+review_type=CODE_SCIENCE_ALIGNMENT_AUDIT
+transport_mode=DISTINCT_BOUNDED_RECOVERY
+assignment_id=G46_CODE_SCIENCE_ALIGNMENT_TRANSPORT_RECOVERY_V1
+round=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit
+question_path=docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/20_PRO_OPEN_QUESTION.md
+allow_list=unchanged_from_original_G46_package
+audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+superseded_transport_stage=c9696d4a6f8eda2a15f6a7be8b8db27b501d38cc
+scientific_question=unchanged
+original_submission_count=1
+new_recovery_submission_limit=1
+original_question_resubmission=false
+answer_now_activated=false
+compute_budget=zero
+formal_compute_started=false
+nonformal_compute_started=false
+scientific_iteration_cost=zero
+completion=natural_only_exact_raw_and_mechanical_intake
+
+This package changes transport identity only. The original G46 scientific
+question, exact evidence allow-list, code target, and scientific scope remain
+unchanged. Submit only after verifying that the prior submitted turn is absent.
