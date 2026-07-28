@@ -106,9 +106,39 @@ A supersede the partial freeze          DONE  D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMP
 B decision ledger, nine bindings        DONE  D7_S_R4_DECISION_LEDGER.md
 C implement the smallest R4 delta       DONE  3de74552 + 7fa90070
 D realization-conformance review        REJECT -- 6 of 10 clean, four blocking
-D' conformance repair                   IN FLIGHT -- R1-R5, hmasd-implementer
-E proof-sized exercise on 20260725      blocked on D'
+D' conformance repair                   DONE  28d6933f -- R1-R5, 309 passed
+E proof-sized exercise on 20260725      next, and the last gate before the run
 ```
+
+**Two implementation bindings the Project Manager decided in D', owed to Pro as
+disclosure at the next touchpoint — neither reopens a frozen decision:**
+
+```text
+the length gate compares against the registered horizon h (139/550), NOT
+  window_series_length(h). That function's own docstring pins h+1 as the LATCH
+  series convention; window_g_from_step_metrics builds the QoS series with
+  n = min(len(step_metrics), h). The repair spec named the wrong constant, and
+  implementing it literally would have failed EVERY conforming record, making
+  PRIMARY_G_DEGENERATE structurally unreachable while `complete` stayed True.
+  Contract section 4's own words are "at the registered horizon".
+
+R4 identity is DECLARED (--population r4), not inferred from the seed list. A
+  strict subset is admitted so the sharded route can carry identity; any seed
+  outside the population is a hard refusal; an accidental subset still gets
+  None/None.
+```
+
+**Provenance rule created by D', and it binds any future run.** With
+`--population r4` the `run_contract_id` becomes the R4 namespace, which changes
+every derived seed for that process. **A shard produced before `28d6933f` and one
+produced after are not the same measurement**, so existing shard artifacts must
+never be pooled with new ones.
+
+`window_series_length` is now dead production code and was already dead at the
+commit the review ran against — referenced by docstrings and its own unit test,
+consulted by no production path. That is the constant the repair spec picked up
+as authoritative. A convention documented in a docstring and exercised only by
+its own test is exactly what the next reader mistakes for the governing rule.
 
 **Step D returned REJECT.** Four blocking defects, all re-verified by the Project
 Manager rather than taken on the child's report:
