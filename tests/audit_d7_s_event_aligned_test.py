@@ -4276,5 +4276,163 @@ def test_run_calibration_episode_records_component_records_and_sequence_equality
     assert isinstance(result["results"]["flex"]["sequences_exactly_equal"], (bool, np.bool_))
 
 
+# =============================================================================
+# 22. Four mutation-sweep gaps (measured: 66-line sweep, 22/22 mutations
+# green across window_g_from_step_metrics/_baseline_masks, and the two
+# calibration/audit limb-assignment swaps green with the whole suite).
+# Every expected value below is a hand-worked literal computed from the
+# frozen weights/contract, never a recomputation of what the code does.
+# =============================================================================
+
+def test_window_g_from_step_metrics_hand_worked_against_baseline_and_safety_terms():
+    """Hand-worked, independent of the implementation. Two UAVs across 3
+    in-window steps, chosen so every one of the five measured-green
+    mutations changes the total:
+
+      - UAV0 is ALREADY cutoff at the window's baseline
+        (`baseline_cutoff_mask=True`) and stays cutoff for every in-window
+        step -- correct row-0 wiring charges this $0$ new cutoffs. If row 0
+        is instead hardcoded `False` (the measured mutation on
+        `cutoff_series[0] = baseline_cutoff_mask`), UAV0's first in-window
+        step reads as a false rising edge and wrongly costs an extra -5.
+      - UAV1 genuinely transitions to cutoff at the second in-window step --
+        a real -5 event that the `new_cutoff_count=0` mutation deletes.
+      - UAV0 genuinely transitions to depletion at the third in-window step
+        -- a real -10 event that the `new_depletion_count=0` mutation
+        deletes.
+      - `qos_satisfaction_ratio=1.0` and `return_constraint_cost=0.0` at
+        every step, so the QoS floor is the `qos_satisfaction_ratio=0.0`
+        mutation's signal, and `* 0.5` halves the whole hand-worked total.
+
+    Per-step G (qos=1.0, return_cost=0.0 throughout):
+        step0: no new event                          -> G0 = 1.0
+        step1: UAV1's new cutoff (-5)                 -> G1 = 1.0 - 5  = -4.0
+        step2: UAV0's new depletion (-10)              -> G2 = 1.0 - 10 = -9.0
+        g_total = 1.0 - 4.0 - 9.0 = -12.0
+    """
+    baseline_cutoff = np.array([True, False])
+    baseline_depletion = np.array([False, False])
+    step_metrics = [
+        {"qos_satisfaction_ratio": 1.0, "return_constraint_cost": 0.0,
+         "return_constraint_cost_raw": 0.0,
+         "cutoff_mask": np.array([True, False]), "depletion_mask": np.array([False, False])},
+        {"qos_satisfaction_ratio": 1.0, "return_constraint_cost": 0.0,
+         "return_constraint_cost_raw": 0.0,
+         "cutoff_mask": np.array([True, True]), "depletion_mask": np.array([False, False])},
+        {"qos_satisfaction_ratio": 1.0, "return_constraint_cost": 0.0,
+         "return_constraint_cost_raw": 0.0,
+         "cutoff_mask": np.array([True, True]), "depletion_mask": np.array([True, False])},
+    ]
+    result = audit.window_g_from_step_metrics(
+        step_metrics, [], h=3,
+        baseline_cutoff_mask=baseline_cutoff, baseline_depletion_mask=baseline_depletion)
+    assert result["g_total"] == pytest.approx(-12.0)
+
+
+def test_baseline_masks_hand_worked_boundary_and_swap_guard():
+    """Hand-worked, independent of the implementation. Battery ratios are
+    chosen so cutoff and depletion counts DIFFER (2 vs 1) -- an equal-count
+    fixture would make a swapped return invisible -- and so each mask has
+    its own exact-boundary entry (index 0 sits exactly at the cutoff
+    threshold, index 1 exactly at the depletion threshold, guarding the
+    `<=` vs `<` boundary on both lines independently):
+        battery = [0.02, 0.00, 0.50], cutoff_threshold=0.02, depletion_threshold=0.0
+        cutoff    = battery <= 0.02 -> [True,  True,  False]
+        depletion = battery <= 0.00 -> [False, True,  False]
+    """
+    class _BaselineMaskEnv:
+        uav_battery_ratios = np.array([0.02, 0.00, 0.50])
+        service_cutoff_threshold = 0.02
+        depleted_battery_threshold = 0.0
+
+    cutoff, depletion = audit._baseline_masks(_BaselineMaskEnv())
+    assert list(cutoff) == [True, True, False]
+    assert list(depletion) == [False, True, False]
+
+
+def _fold_calibration_fixture(**result_overrides):
+    result = {
+        "episode_world": None, "episode_report": {}, "support_miss": False,
+        "invalidated_pairs": [], "duty_map_at_te": {}, "duty_map_before_leave": {},
+        "results": {
+            "stable": {"constructive": {"g_total": 10.0}, "null": {"g_total": 3.0}, "d_a": 0.0},
+            "flex": {"constructive": {"g_total": 99.0}, "null": {"g_total": -50.0}, "d_a": 0.0},
+        },
+    }
+    result.update(result_overrides)
+    calibration_report = audit._new_episode_block_report()
+    episode_worlds, invalidated_pairs, arm_distinctness_pairs = [], [], []
+    calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
+    audit._process_calibration_result(
+        result, idx=0, ep_seed=1, topology_seed=1,
+        calibration_report=calibration_report, episode_worlds=episode_worlds,
+        invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
+        calibration_units_stable=calibration_units_stable,
+        calibration_units_flex=calibration_units_flex,
+        calibration_units_d_a=calibration_units_d_a,
+    )
+    return calibration_units_stable, calibration_units_flex
+
+
+def test_process_calibration_result_stable_limb_folds_constructive_as_select_null_as_keep():
+    """Hand-worked: B_stable's per-unit contrast is
+    `U* = mean(eval_set) - mean(eval_keep)` (`topology_weighted_point_estimate`
+    / the nested-bootstrap contract), so folding the constructive arm into
+    select/eval_set and the null arm into eval_keep must reproduce
+    `G(constructive) - G(null) = 10.0 - 3.0 = +7.0`. Swapping the two arms in
+    the stable-limb fold (the measured mutation) would flip this to -7.0 --
+    the exact sign flip on the headline `b_stable_lcb > 0` gate `decide_branch`
+    checks."""
+    calibration_units_stable, _ = _fold_calibration_fixture()
+    unit = calibration_units_stable[0]
+    u_star_stable = float(unit["candidates"]["cvn"]["eval_set"][0] - unit["eval_keep"][0])
+    assert u_star_stable == pytest.approx(7.0)
+
+
+def test_process_calibration_result_flex_limb_folds_constructive_as_select_null_as_keep():
+    """Independent second test for the flex limb (the brief requires this as
+    a second, independent guard from the stable-limb one above): flex's
+    fixture values are deliberately different (99.0/-50.0, vs the stable
+    limb's 10.0/3.0) so the two tests cannot pass by accident of a shared
+    literal. `G(constructive) - G(null) = 99.0 - (-50.0) = +149.0`; a swap in
+    the flex-limb fold would flip this to -149.0."""
+    _, calibration_units_flex = _fold_calibration_fixture()
+    unit = calibration_units_flex[0]
+    u_star_flex = float(unit["candidates"]["cvn"]["eval_set"][0] - unit["eval_keep"][0])
+    assert u_star_flex == pytest.approx(149.0)
+
+
+def test_process_audit_result_assigns_stable_and_flex_units_to_their_own_limb():
+    """`_process_audit_result` folds `raw["unit_stable"]`/`raw["unit_flex"]`
+    straight into `audit_units_stable`/`audit_units_flex`, which feed
+    `compute_t_m_bootstrap`'s `u_star_stable_topology_units`/
+    `u_star_flex_topology_units` directly -- distinguishable markers (not
+    equal, not derived from each other) so a swapped append is visible."""
+    raw = {
+        "world_entry": {"topology_seed": 1},
+        "leave_diagnostics": [], "rejected_counts": {},
+        "event_found": True, "capture_failed": False,
+        "ep_seed": 1,
+        "unit_stable": {"marker": "STABLE_UNIT"},
+        "unit_flex": {"marker": "FLEX_UNIT"},
+        "duty_map_at_te": {}, "duty_map_before_leave": {},
+        "event_conformance_record": {},
+    }
+    audit_report = audit._new_episode_block_report()
+    episode_worlds, invalidated_pairs, arm_distinctness_pairs = [], [], []
+    audit_units_stable, audit_units_flex, audit_events_out = [], [], []
+
+    audit._process_audit_result(
+        raw, idx=0, topology_seed=1, audit_report=audit_report,
+        episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
+        arm_distinctness_pairs=arm_distinctness_pairs,
+        audit_units_stable=audit_units_stable, audit_units_flex=audit_units_flex,
+        audit_events_out=audit_events_out,
+    )
+
+    assert audit_units_stable[0]["marker"] == "STABLE_UNIT"
+    assert audit_units_flex[0]["marker"] == "FLEX_UNIT"
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
