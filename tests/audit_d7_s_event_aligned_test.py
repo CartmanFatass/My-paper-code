@@ -1075,7 +1075,7 @@ def test_precedence_part_a_conformance_unresolved_never_suppresses_the_combined_
     to_inputs` is the real production mapping (not hand-picked) feeding
     `decide_branch`'s `part_a_contradiction` -- only `PART_A_CONTRADICTION`
     itself may set it True."""
-    for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "CONFORMANCE_PASS", "NOT_APPLICABLE"):
+    for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "PART_A_FULL_SYNC_MATERIALLY_WORSE", "NOT_APPLICABLE"):
         part_a_contradiction, _ = audit.map_part_a_verdict_to_inputs(verdict)
         assert part_a_contradiction is False
         kwargs = _r4_branch_kwargs(part_a_contradiction=part_a_contradiction)
@@ -1139,20 +1139,19 @@ def _attach_component_audit(topology_units, *, sequences_exactly_equal: bool):
     ]
 
 
-def _six_topology_results_r4(*, d_a_value: float, b_stable_value: float, b_flex_value: float,
+def _six_topology_results_r4(*, d_a_value: float,
                               u_stable_value: float, u_flex_value: float,
                               stable_components_invariant: bool,
                               flex_components_invariant: bool,
                               invalidated_pairs_by_topology=None) -> list:
     """The R4 driver-level fixture: the same six-topology shape
-    `_six_topology_results` builds for Part-A/D_A/B_stable (contract
-    section 8, unchanged by this task), with `audit_units_stable`/
-    `audit_units_flex` additionally carrying the FOCAL `component_audit.
-    pairwise_equality` record R4's branch 3 aggregates -- never the R3
-    calibration pair, which `calibration_units_stable`/`_flex` still encode
-    here purely for Part-A's own (untouched) consumption."""
+    `_six_topology_results` builds for PART_A_CONTROL/D_A (contract
+    section 8, rederived at the absolute anchor by this task), with
+    `audit_units_stable`/`audit_units_flex` additionally carrying the FOCAL
+    `component_audit.pairwise_equality` record R4's branch 3 aggregates --
+    never the R3 calibration pair (deleted from the shape entirely)."""
     base = _six_topology_results(
-        d_a_value=d_a_value, b_stable_value=b_stable_value, b_flex_value=b_flex_value,
+        d_a_value=d_a_value,
         u_stable_value=u_stable_value, u_flex_value=u_flex_value,
         invalidated_pairs_by_topology=invalidated_pairs_by_topology)
     stable_units = _attach_component_audit(
@@ -1231,13 +1230,13 @@ def test_combined_mapping_row_has_a_reachable_witness_through_the_real_driver(
     defect this whole result layer exists to fix (R3 could erase the
     non-material limb's state entirely behind a single top-level name)."""
     _fixed_u_star_bootstrap(monkeypatch, **stable_bounds, **flex_bounds)
-    # d_a_value=0.6 (not 0.0) deliberately: with b_stable_value=10.0 this is
-    # the hand-worked PART_A_CONFORMANCE_UNRESOLVED fixture (not
-    # PART_A_CONTRADICTION -- see `test_driver_part_a_unresolved_does_not_
-    # relabel_the_source_branch`'s docstring for the arithmetic), so Part-A
-    # never preempts the combined result under test here.
+    # d_a_value=6.0 (not 0.0) deliberately: at the absolute MATERIALITY_MARGIN
+    # anchor (5.0), D_A=6.0 is the hand-worked PART_A_CONFORMANCE_UNRESOLVED
+    # fixture (not PART_A_CONTRADICTION -- see `test_driver_part_a_unresolved_
+    # does_not_relabel_the_source_branch`'s docstring for the arithmetic), so
+    # Part-A never preempts the combined result under test here.
     topology_results = _six_topology_results_r4(
-        d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
+        d_a_value=6.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=False, flex_components_invariant=False)
 
@@ -1304,15 +1303,14 @@ def test_flex_limb_state_strict_at_the_positive_five_boundary():
 # -----------------------------------------------------------------------
 
 def test_branch_3_fires_from_focal_invariance_regardless_of_calibration_data(monkeypatch):
-    """Both limbs' FOCAL pairs are exactly invariant here; the calibration/
-    Part-A inputs (`d_a_value`/`b_stable_value`/`b_flex_value`) are ordinary
-    non-degenerate favorable values that would otherwise let the run proceed
-    to a combined result -- proving branch 3 fires from the FOCAL signal
-    alone, independent of what the calibration pair says."""
+    """Both limbs' FOCAL pairs are exactly invariant here; the Part-A input
+    (`d_a_value`) is an ordinary value that would otherwise let the run
+    proceed to a combined result -- proving branch 3 fires from the FOCAL
+    signal alone, independent of what the Part-A-control D_A says."""
     _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
                              flex_lcb=10.0, flex_ucb=20.0)
     topology_results = _six_topology_results_r4(
-        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        d_a_value=0.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=True, flex_components_invariant=True)
 
@@ -1331,16 +1329,19 @@ def test_branch_3_does_not_fire_when_a_focal_pair_differs_even_if_calibration_wo
     limb alone is `COMPONENT_INVARIANT` on BOTH, so branch 3 must NOT fire;
     the run must proceed to the absolute gates and reach the combined result
     for (MATERIAL, COMPONENT_INVARIANT) -- proving the aggregation reads
-    `audit_units_*`'s FOCAL `component_audit`, never `calibration_units_*`
+    `audit_units_*`'s FOCAL `component_audit`, never `calibration_units_d_a`
     (which carries no `component_audit` key at all in this fixture shape, so
     a swapped accumulator would instead report `component_invariance_
     evaluated=False`, landing on INVALID_EVENT_ALIGNED_AUDIT -- a materially
     different, easily distinguished outcome from either PRIMARY_G_DEGENERATE
-    or the expected combined result asserted below)."""
+    or the expected combined result asserted below). `d_a_value=6.0` keeps
+    Part-A UNRESOLVED (see `test_driver_part_a_unresolved_does_not_relabel_
+    the_source_branch`'s arithmetic) so it cannot preempt the combined
+    result under test here either."""
     _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
                              flex_lcb=10.0, flex_ucb=20.0)
     topology_results = _six_topology_results_r4(
-        d_a_value=0.0, b_stable_value=0.0, b_flex_value=0.0,
+        d_a_value=6.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=False, flex_components_invariant=True)
 
@@ -1584,45 +1585,59 @@ def test_topology_record_round_trips_through_write():
 
 
 # =============================================================================
-# 10. Part-A conformance: equivalence, materially-worse, and straddling
+# 10. PART_A_CONTROL, rederived at the absolute anchor: contradiction,
+# materially-worse, and the straddling/unresolved fallthrough. Every
+# expected bound below is hand-worked from a literal D_A against the frozen
+# MATERIALITY_MARGIN=5.0 formula (D_A + 5 / 5 - D_A), never recomputed the
+# way `compute_part_a_control_bounds` computes it.
 # =============================================================================
 
-def test_part_a_conformance_both_equivalence_bounds_pass_is_contradiction():
-    verdict = audit.part_a_conformance(
-        lower_contrast_lcb=0.1, lower_contrast_ucb=0.5,
-        upper_contrast_lcb=0.2, b_stable_lcb=1.0,
+def test_part_a_control_verdict_both_equivalence_bounds_pass_is_contradiction():
+    """Hand-worked: D_A=0.0 (deterministic). lower_contrast = D_A +
+    MATERIALITY_MARGIN = 0.0 + 5.0 = 5.0 > 0 (passes); upper_contrast =
+    MATERIALITY_MARGIN - D_A = 5.0 - 0.0 = 5.0 > 0 (passes). Both
+    equivalence tests pass -> PART_A_CONTRADICTION."""
+    verdict = audit.part_a_control_verdict(
+        lower_contrast_lcb=5.0, lower_contrast_ucb=5.0, upper_contrast_lcb=5.0,
     )
     assert verdict == "PART_A_CONTRADICTION"
 
 
-def test_part_a_conformance_confidently_worse_is_conformance_pass():
-    # UCB95 of the lower contrast is itself negative: D_A is confidently
-    # below -0.05*B_stable (full-sync materially worse).
-    verdict = audit.part_a_conformance(
-        lower_contrast_lcb=-0.5, lower_contrast_ucb=-0.1,
-        upper_contrast_lcb=0.9, b_stable_lcb=1.0,
+def test_part_a_control_verdict_confidently_worse_is_materially_worse():
+    """Hand-worked: D_A=-8.0 (deterministic). lower_contrast = -8.0 + 5.0 =
+    -3.0 (LCB95=UCB95=-3.0, degenerate). UCB95 of the lower contrast is
+    itself negative: D_A is confidently below -MATERIALITY_MARGIN
+    (full-sync materially worse)."""
+    verdict = audit.part_a_control_verdict(
+        lower_contrast_lcb=-3.0, lower_contrast_ucb=-3.0, upper_contrast_lcb=13.0,
     )
-    assert verdict == "CONFORMANCE_PASS"
+    assert verdict == "PART_A_FULL_SYNC_MATERIALLY_WORSE"
 
 
-def test_part_a_conformance_straddling_interval_is_unresolved_not_pass():
-    """Measured regression: a 90% interval [-0.333, +0.009] on the lower
-    contrast (LCB95 fails the lower equivalence test, but UCB95 is still
-    positive so "materially worse" is NOT established) previously returned
-    CONFORMANCE_PASS. It must be PART_A_CONFORMANCE_UNRESOLVED."""
-    verdict = audit.part_a_conformance(
-        lower_contrast_lcb=-0.333, lower_contrast_ucb=0.009,
-        upper_contrast_lcb=0.9, b_stable_lcb=1.0,
+def test_part_a_control_verdict_straddling_interval_is_unresolved_not_worse():
+    """Measured regression (R3, preserved unchanged by R4's rederivation): a
+    90% interval [-0.333, +0.009] on the lower contrast (LCB95 fails the
+    lower equivalence test, but UCB95 is still positive so "materially
+    worse" is NOT established) must be PART_A_CONFORMANCE_UNRESOLVED, never
+    PART_A_FULL_SYNC_MATERIALLY_WORSE."""
+    verdict = audit.part_a_control_verdict(
+        lower_contrast_lcb=-0.333, lower_contrast_ucb=0.009, upper_contrast_lcb=0.9,
     )
     assert verdict == "PART_A_CONFORMANCE_UNRESOLVED"
 
 
-def test_part_a_conformance_not_applicable_when_b_stable_not_identified():
-    verdict = audit.part_a_conformance(
-        lower_contrast_lcb=0.5, lower_contrast_ucb=0.9,
-        upper_contrast_lcb=0.5, b_stable_lcb=-0.1,
+def test_part_a_control_verdict_hand_worked_unresolved_from_d_a_six():
+    """Hand-worked: D_A=6.0 (deterministic). lower_contrast = 6.0 + 5.0 =
+    11.0 > 0 (passes); upper_contrast = 5.0 - 6.0 = -1.0 (fails, not > 0) ->
+    not both pass, so not PART_A_CONTRADICTION; lower_contrast_ucb=11.0 is
+    not < 0, so not PART_A_FULL_SYNC_MATERIALLY_WORSE either ->
+    PART_A_CONFORMANCE_UNRESOLVED. This is the exact fixture the driver-level
+    tests below use to keep Part-A from preempting an unrelated combined
+    result."""
+    verdict = audit.part_a_control_verdict(
+        lower_contrast_lcb=11.0, lower_contrast_ucb=11.0, upper_contrast_lcb=-1.0,
     )
-    assert verdict == "NOT_APPLICABLE"
+    assert verdict == "PART_A_CONFORMANCE_UNRESOLVED"
 
 
 # =============================================================================
@@ -2406,57 +2421,39 @@ def test_arm_distinctness_check_vacuously_true_on_no_certified_events():
     assert audit.arm_distinctness_check([]) is True
 
 
-def test_compute_part_a_bounds_returns_none_with_no_stable_event_data():
-    """Item 5a, first half of 'when and only when the stable class has
-    events': zero qualifying stable-limb calibration data anywhere in the
-    run must produce no Part-A bounds at all, never a silently-NaN result."""
+def test_compute_part_a_control_bounds_returns_none_with_no_stable_event_data():
+    """Item 5a, 'when and only when the stable class has events': zero
+    qualifying stable-limb PART_A_CONTROL data anywhere in the run must
+    produce no Part-A bounds at all, never a silently-NaN result. R4 drops
+    the R3 `B_stable`-conditioning gate entirely (no more second half of
+    this rule) -- absence of D_A data is now the ONLY reason bounds are
+    withheld."""
     shared = audit.draw_shared_topology_indices(n_topo=2, iters=20, seed=1)
-    result = audit.compute_part_a_bounds(
+    result = audit.compute_part_a_control_bounds(
         d_a_topology_units=[[], []],
-        b_stable_topology_units=_degenerate_topology_units([1.0, 1.0]),
         shared_topology_indices=shared, seed=1)
     assert result is None
 
 
-def test_compute_part_a_bounds_hand_worked_deterministic_single_topology():
-    """Single topology, degenerate one-event units (no resampling variance):
-    D_A = 3.0, B_stable = 20.0. lower_contrast = D_A + 0.05*B_stable = 3.0 +
-    1.0 = 4.0; upper_contrast = 0.05*B_stable - D_A = 1.0 - 3.0 = -2.0. Every
-    percentile bound must equal these exact point values."""
+def test_compute_part_a_control_bounds_hand_worked_deterministic_single_topology():
+    """Single topology, degenerate one-event unit (no resampling variance):
+    D_A = 3.0. At the absolute anchor, lower_contrast = D_A +
+    MATERIALITY_MARGIN = 3.0 + 5.0 = 8.0; upper_contrast = MATERIALITY_MARGIN
+    - D_A = 5.0 - 3.0 = 2.0. Every percentile bound must equal these exact
+    point values -- no `B_stable` term anywhere in the computation."""
     shared = audit.draw_shared_topology_indices(n_topo=1, iters=20, seed=1)
-    result = audit.compute_part_a_bounds(
+    result = audit.compute_part_a_control_bounds(
         d_a_topology_units=_degenerate_topology_units([3.0]),
-        b_stable_topology_units=_degenerate_topology_units([20.0]),
         shared_topology_indices=shared, seed=1)
-    assert result["b_stable_lcb"] == pytest.approx(20.0)
-    assert result["lower_contrast_lcb"] == pytest.approx(4.0)
-    assert result["lower_contrast_ucb"] == pytest.approx(4.0)
-    assert result["upper_contrast_lcb"] == pytest.approx(-2.0)
-
-
-def test_part_a_inputs_present_but_not_applicable_when_b_stable_lcb_not_positive():
-    """Item 5a, second half ('and LCB95(B_stable)>0'): stable-limb event
-    data DOES exist (bounds are produced, not None) but B_stable's own LCB
-    is <= 0 -- the verdict must be NOT_APPLICABLE, and that must never flip
-    `part_a_contradiction` to True."""
-    shared = audit.draw_shared_topology_indices(n_topo=1, iters=20, seed=3)
-    bounds = audit.compute_part_a_bounds(
-        d_a_topology_units=_degenerate_topology_units([1.0]),
-        b_stable_topology_units=_degenerate_topology_units([-5.0]),
-        shared_topology_indices=shared, seed=3)
-    assert bounds is not None
-    verdict = audit.part_a_conformance(
-        lower_contrast_lcb=bounds["lower_contrast_lcb"],
-        lower_contrast_ucb=bounds["lower_contrast_ucb"],
-        upper_contrast_lcb=bounds["upper_contrast_lcb"], b_stable_lcb=bounds["b_stable_lcb"])
-    assert verdict == "NOT_APPLICABLE"
-    contradiction, _ = audit.map_part_a_verdict_to_inputs(verdict)
-    assert contradiction is False
+    assert result["lower_contrast_lcb"] == pytest.approx(8.0)
+    assert result["lower_contrast_ucb"] == pytest.approx(8.0)
+    assert result["upper_contrast_lcb"] == pytest.approx(2.0)
 
 
 def test_map_part_a_verdict_to_inputs_only_contradiction_sets_true():
     assert audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION") == (True, "PART_A_CONTRADICTION")
-    assert audit.map_part_a_verdict_to_inputs("CONFORMANCE_PASS") == (False, "CONFORMANCE_PASS")
+    assert audit.map_part_a_verdict_to_inputs(
+        "PART_A_FULL_SYNC_MATERIALLY_WORSE") == (False, "PART_A_FULL_SYNC_MATERIALLY_WORSE")
     assert audit.map_part_a_verdict_to_inputs(
         "PART_A_CONFORMANCE_UNRESOLVED") == (False, "PART_A_CONFORMANCE_UNRESOLVED")
     assert audit.map_part_a_verdict_to_inputs("NOT_APPLICABLE") == (False, "NOT_APPLICABLE")
@@ -2993,9 +2990,10 @@ def test_conditions_1a_and_1b_on_one_live_snapshot():
 
 
 def test_shared_prefix_performs_no_reconstruction_replay_at_all(monkeypatch):
-    """The R3 claim, measured rather than asserted: one calibration episode runs
-    five continuations (stable x3 including full_sync_SET, flex x2) and must
-    perform ZERO reconstruction replays.
+    """The R3 claim, measured rather than asserted: one PART_A_CONTROL
+    episode runs two continuations (stable-only: constructive_mixed,
+    full_sync_SET -- R4 deleted the null arm and the flex-limb pass) and
+    must perform ZERO reconstruction replays.
 
     The superseded route replayed five times, each into a fresh environment with
     its own user world. R2 cut that to one -- which made the arms mutually
@@ -3038,7 +3036,7 @@ def test_shared_prefix_performs_no_reconstruction_replay_at_all(monkeypatch):
     # certified environment, so the reconstruction step is gone entirely --
     # which is what removes the second user world.
     assert calls["n"] == 0
-    assert set(result["results"]) == {"stable", "flex"}
+    assert set(result["results"]) == {"stable"}
 
 
 def test_selection_diagnostic_reports_a_decided_event_as_concentrated():
@@ -3425,9 +3423,13 @@ def test_resolve_run_plan_smoke_honors_explicit_episode_overrides():
 
 
 def test_resolve_run_plan_non_smoke_default_episode_counts_unchanged():
+    """R4 population layer: the plain no-flags default is now the frozen
+    `TOPOLOGY_SEEDS_R4`, not R3's `TOPOLOGY_SEEDS_INITIAL` -- contract
+    section 11, "the formal path accepts only the exact R4 topology set."
+    The episode counts this test is named for are unaffected."""
     plan = audit.resolve_run_plan(smoke=False, dev=False, topology_seeds_override=None,
                                    episodes_calibration=None, episodes_audit=None)
-    assert plan["topology_seeds"] == list(audit.TOPOLOGY_SEEDS_INITIAL)
+    assert plan["topology_seeds"] == list(audit.TOPOLOGY_SEEDS_R4)
     assert plan["n_calibration"] == audit.N_CALIBRATION_EPISODES
     assert plan["n_audit"] == audit.N_AUDIT_EPISODES
 
@@ -3673,20 +3675,21 @@ def test_check_minimum_support_requires_both_limbs_independently_sufficient():
 # reached through the SAME code path main() uses, not called directly)
 # =============================================================================
 
-def _six_topology_results(*, d_a_value: float, b_stable_value: float,
-                           b_flex_value: float, u_stable_value: float,
+def _six_topology_results(*, d_a_value: float, u_stable_value: float,
                            u_flex_value: float, invalidated_pairs_by_topology=None) -> list:
     """Six topologies (the frozen `MIN_SUPPORT_TOPOLOGIES` minimum), each
-    contributing one degenerate calibration/audit unit per quantity --
+    contributing one degenerate PART_A_CONTROL/audit unit per quantity --
     `_degenerate_topology_units` shape, matching exactly what
     `run_topology_audit` returns per topology. `qualifying_*_episodes=4`
     meets `MIN_SUPPORT_EPISODES_PER_TOPOLOGY` in every topology, so
     `support_ok` is True and `assemble_audit_result` reaches its
-    `decide_branch` call (never the single-topology/support-miss shortcuts)."""
+    `decide_branch` call (never the single-topology/support-miss shortcuts).
+
+    R4 deleted `calibration_units_stable`/`calibration_units_flex` (R3's
+    `B_m` constructive-vs-null contrast) from the shape `run_topology_audit`
+    returns -- this fixture no longer builds them."""
     n = 6
     d_a_units = _degenerate_topology_units([d_a_value] * n)
-    b_stable_units = _degenerate_topology_units([b_stable_value] * n)
-    b_flex_units = _degenerate_topology_units([b_flex_value] * n)
     u_stable_units = _degenerate_topology_units([u_stable_value] * n)
     u_flex_units = _degenerate_topology_units([u_flex_value] * n)
     invalidated_pairs_by_topology = invalidated_pairs_by_topology or [[] for _ in range(n)]
@@ -3696,8 +3699,6 @@ def _six_topology_results(*, d_a_value: float, b_stable_value: float,
             "qualifying_audit_episodes": 4,
             "invalidated_pairs": invalidated_pairs_by_topology[i],
             "arm_distinctness_pairs": [],
-            "calibration_units_stable": b_stable_units[i],
-            "calibration_units_flex": b_flex_units[i],
             "calibration_units_d_a": d_a_units[i],
             "audit_units_stable": u_stable_units[i],
             "audit_units_flex": u_flex_units[i],
@@ -3707,21 +3708,21 @@ def _six_topology_results(*, d_a_value: float, b_stable_value: float,
 
 
 def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
-    """Hand-worked: B_stable=10.0 (deterministic, LCB95=10.0>0), D_A=0.0
-    (deterministic). lower_contrast = D_A + 0.05*B_stable = 0.5 > 0 (passes);
-    upper_contrast = 0.05*B_stable - D_A = 0.5 > 0 (passes). Both equivalence
-    tests pass -> PART_A_CONTRADICTION per section 8 ('Both pass ->
-    PART_A_CONTRADICTION (return-equivalence)', unchanged by R4), which
-    `decide_branch` resolves to branch 4 -- checked here through
-    `assemble_audit_result`, the exact function `main()` calls, not
-    `decide_branch` called directly with hand-picked kwargs (section 7's
-    existing coverage). U*_stable/U*_flex are fixed via `_fixed_u_star_
-    bootstrap` to values that would OTHERWISE resolve PERSISTENCE_NECESSARY_
-    SOURCE (both MATERIAL), so Part-A's win is a genuine precedence result,
-    not a fixture where nothing else could have fired."""
+    """Hand-worked at the absolute anchor: MATERIALITY_MARGIN=5.0, D_A=0.0
+    (deterministic). lower_contrast = D_A + 5 = 5.0 > 0 (passes);
+    upper_contrast = 5 - D_A = 5.0 > 0 (passes). Both equivalence tests pass
+    -> PART_A_CONTRADICTION per section 8 ('Both pass -> PART_A_CONTRADICTION
+    (return-equivalence)'), which `decide_branch` resolves to branch 4 --
+    checked here through `assemble_audit_result`, the exact function
+    `main()` calls, not `decide_branch` called directly with hand-picked
+    kwargs (section 7's existing coverage). U*_stable/U*_flex are fixed via
+    `_fixed_u_star_bootstrap` to values that would OTHERWISE resolve
+    PERSISTENCE_NECESSARY_SOURCE (both MATERIAL), so Part-A's win is a
+    genuine precedence result, not a fixture where nothing else could have
+    fired."""
     _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
     topology_results = _six_topology_results_r4(
-        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        d_a_value=0.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=False, flex_components_invariant=False)
 
@@ -3734,19 +3735,20 @@ def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
 
 
 def test_driver_part_a_unresolved_does_not_relabel_the_source_branch(monkeypatch):
-    """Hand-worked: B_stable=10.0, D_A=0.6. lower_contrast = 0.6+0.5=1.1>0
-    (passes); upper_contrast = 0.5-0.6=-0.1 (fails, not >0) -> not both pass,
-    so not PART_A_CONTRADICTION; lower_contrast_ucb=1.1 is not <0, so not
-    CONFORMANCE_PASS either -> PART_A_CONFORMANCE_UNRESOLVED (contract
-    section 8, unchanged by R4). Section 7: the unresolved diagnostic
-    "does not suppress an otherwise valid focal result" -- both limbs are
-    fixed MATERIAL via `_fixed_u_star_bootstrap`, so the source branch must
-    resolve PERSISTENCE_NECESSARY_SOURCE, exactly as if Part-A had never
-    run, proving UNRESOLVED never flips `part_a_contradiction` through the
-    real driver path (not `decide_branch` called directly)."""
+    """Hand-worked at the absolute anchor: MATERIALITY_MARGIN=5.0, D_A=6.0.
+    lower_contrast = 6.0+5=11.0>0 (passes); upper_contrast = 5-6.0=-1.0
+    (fails, not >0) -> not both pass, so not PART_A_CONTRADICTION;
+    lower_contrast_ucb=11.0 is not <0, so not PART_A_FULL_SYNC_MATERIALLY_
+    WORSE either -> PART_A_CONFORMANCE_UNRESOLVED (contract section 8).
+    Section 7: the unresolved diagnostic "does not suppress an otherwise
+    valid focal result" -- both limbs are fixed MATERIAL via `_fixed_u_star_
+    bootstrap`, so the source branch must resolve PERSISTENCE_NECESSARY_
+    SOURCE, exactly as if Part-A had never run, proving UNRESOLVED never
+    flips `part_a_contradiction` through the real driver path (not
+    `decide_branch` called directly)."""
     _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
     topology_results = _six_topology_results_r4(
-        d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
+        d_a_value=6.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=False, flex_components_invariant=False)
 
@@ -3769,7 +3771,7 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_result(mon
     _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
     invalidated = [[{"reason": "synthetic test injection"}]] + [[] for _ in range(5)]
     topology_results = _six_topology_results_r4(
-        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        d_a_value=0.0,
         u_stable_value=0.0, u_flex_value=0.0,
         stable_components_invariant=False, flex_components_invariant=False,
         invalidated_pairs_by_topology=invalidated)
@@ -3927,71 +3929,162 @@ def test_compute_t_m_bootstrap_points_reproduce_the_recorded_run_30289161086_anc
 
 
 # =============================================================================
-# 9c. Section 9's one permissible expansion, wired into main() for real
-# (item 3, 2026-07-27 ruling)
+# 9c. R4 contract section 2: there is no expansion path. Not "a rule that
+# rarely fires" -- none. R3's one-permissible-expansion apparatus is
+# deleted, not left as a guard that always refuses.
 # =============================================================================
 
-def test_check_expansion_justified_is_a_noop_for_every_non_expansion_seed_set(monkeypatch):
-    """`resolve_run_plan`'s smoke/dev/plain-8-seed/arbitrary-override paths
-    must be completely unaffected -- the guard fires only on the exact
-    registered 16-seed union, per the "not on every override" scope. Proven
-    here by asserting `assemble_audit_result` (the expensive re-evaluation
-    this function would otherwise trigger) is never even called."""
-    calls = []
-    monkeypatch.setattr(audit, "assemble_audit_result",
-                         lambda *a, **k: calls.append((a, k)) or {})
-
-    audit.check_expansion_justified([audit.TOPOLOGY_SEED_DEV], [], [])
-    audit.check_expansion_justified(list(audit.TOPOLOGY_SEEDS_INITIAL), [], [])
-    audit.check_expansion_justified([1, 2, 3], [], [])
-
-    assert calls == []
+def test_there_is_no_expansion_path_the_symbols_are_gone():
+    """Item (e): asserts the R3 expansion-guard symbols were DELETED from
+    the module -- not merely made unreachable behind a guard that always
+    refuses. A guard that never fires still reads as "there is an expansion
+    path, it just never triggers"; contract section 2 requires the path
+    itself not exist."""
+    for name in ("expansion_allowed", "check_expansion_justified",
+                 "ExpansionNotJustifiedError", "REGISTERED_EXPANSION_SEED_SET"):
+        assert not hasattr(audit, name), f"{name} must not exist on R4's audit module"
 
 
-def test_check_expansion_justified_refuses_when_initial_batch_b_m_point_not_positive(monkeypatch):
-    """Section 9: "Never expand on ... B_m <= 0." `assemble_audit_result` is
-    monkeypatched (module-level name resolved at call time, same idiom as
-    `_fast_t_m_bootstrap`) so this targets ONLY `check_expansion_justified`'s
-    own wiring of `expansion_allowed`'s inputs, not the bootstrap machinery
-    already covered elsewhere. `b_stable_point=-1.0` alone must refuse
-    regardless of every other input being otherwise favorable."""
-    fake_initial = {
-        "conformance": {"ok": True}, "support": {"ok": True},
-        "t_m_bootstrap": {
-            "b_stable_lcb": 10.0, "b_flex_lcb": 10.0,
-            "t_stable_ucb": -1.0, "t_stable_lcb": -2.0,
-            "t_flex_lcb": 1.0, "t_flex_ucb": 2.0,
-            "b_stable_point": -1.0, "b_flex_point": 10.0,
-            "t_stable_point": -1.5, "t_flex_point": 1.5,
-        },
+# =============================================================================
+# 9d. R4 population layer: freshness sentinel (contract section 3), each of
+# the six fail-closed conditions driven SEPARATELY. Condition 5 ("no R3
+# topology unit is accepted by the R4 pooler") is the pooler's own gate and
+# is tested directly in tests/pool_d7_s_event_aligned_shards_test.py.
+# =============================================================================
+
+def test_topology_seeds_r4_are_exactly_the_frozen_literal():
+    """Independent literal, transcribed from the frozen contract text, never
+    re-derived from `TOPOLOGY_SEEDS_EXPANSION` the way the module computes
+    it internally."""
+    assert list(audit.TOPOLOGY_SEEDS_R4) == [
+        20260734, 20260735, 20260736, 20260737,
+        20260738, 20260739, 20260740, 20260741]
+
+
+def _valid_r4_artifact() -> dict:
+    """A minimal but structurally complete R4 artifact -- every field
+    `r4_freshness_sentinel` reads, all correct. Each condition test below
+    mutates exactly ONE field away from this baseline."""
+    return {
+        "topology_seeds": list(audit.TOPOLOGY_SEEDS_R4),
+        "topology_records": [{"topology_seed": s} for s in audit.TOPOLOGY_SEEDS_R4],
+        "r4_contract": audit.R4_CONTRACT_PATH,
+        "r4_population_namespace": audit.R4_POPULATION_NAMESPACE,
+        "topology_units": [
+            {"calibration_units_d_a": [], "audit_units_stable": [], "audit_units_flex": []}
+            for _ in audit.TOPOLOGY_SEEDS_R4
+        ],
     }
-    monkeypatch.setattr(audit, "assemble_audit_result", lambda *a, **k: fake_initial)
-    seeds = list(audit.REGISTERED_EXPANSION_SEED_SET)
-
-    with pytest.raises(audit.ExpansionNotJustifiedError):
-        audit.check_expansion_justified(seeds, [], [])
 
 
-def test_check_expansion_justified_allows_when_initial_batch_predicate_holds(monkeypatch):
-    """The mirror-image positive case: conformance/support pass, both B_m
-    points are positive, both T_m points have the intended sign (T_stable <
-    0, T_flex > 0), and the stable limb's bounds straddle zero (neither
-    clears nor affirmatively misses) so `any_bound_unresolved` is True --
-    every gate in `expansion_allowed` passes, so this must NOT raise."""
-    fake_initial = {
-        "conformance": {"ok": True}, "support": {"ok": True},
-        "t_m_bootstrap": {
-            "b_stable_lcb": 1.0, "b_flex_lcb": 1.0,
-            "t_stable_ucb": 1.0, "t_stable_lcb": -1.0,   # straddles zero: stable unresolved
-            "t_flex_lcb": 1.0, "t_flex_ucb": 2.0,        # flex clears
-            "b_stable_point": 5.0, "b_flex_point": 5.0,
-            "t_stable_point": -0.5, "t_flex_point": 1.5,
-        },
+def test_freshness_sentinel_passes_on_a_valid_r4_artifact():
+    ok, detail = audit.r4_freshness_sentinel(_valid_r4_artifact())
+    assert ok is True
+    assert all(detail.values()), detail
+
+
+def test_freshness_sentinel_condition_1_exact_seed_list_fails_alone():
+    """Condition 1: the exact seed list is 20260734-20260741. One seed
+    short must fail this condition and ONLY this condition."""
+    artifact = _valid_r4_artifact()
+    artifact["topology_seeds"] = list(audit.TOPOLOGY_SEEDS_R4)[:-1]
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": False, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
     }
-    monkeypatch.setattr(audit, "assemble_audit_result", lambda *a, **k: fake_initial)
-    seeds = list(audit.REGISTERED_EXPANSION_SEED_SET)
 
-    audit.check_expansion_justified(seeds, [], [])  # must not raise
+
+def test_freshness_sentinel_condition_2_no_r3_overlap_fails_alone():
+    """Condition 2: none of the topologies that actually produced units
+    overlaps the R3 initial set. Checked against `topology_records` (the
+    ACTUAL per-topology provenance), a genuinely different field from the
+    DECLARED `topology_seeds` condition 1 checks -- exactly the stale-cache
+    topology-substitution failure mode the two-field split exists to catch:
+    the declared list stays fully correct while one record disagrees."""
+    artifact = _valid_r4_artifact()
+    artifact["topology_records"][0] = {"topology_seed": audit.TOPOLOGY_SEEDS_INITIAL[0]}
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": False,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+    }
+
+
+def test_freshness_sentinel_condition_3_identity_fields_fail_alone():
+    """Condition 3: the artifact identifies the R4 contract and population
+    namespace. Losing ONLY the namespace field (contract path still
+    correct) must still fail this condition -- both are required."""
+    artifact = _valid_r4_artifact()
+    artifact["r4_population_namespace"] = None
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": False, "per_topology_block_identities": True,
+    }
+
+
+def test_freshness_sentinel_condition_4_per_topology_block_identities_fail_alone():
+    """Condition 4: each topology has the required Part-A-control and
+    focal-audit block identities. Dropping ONE topology's `audit_units_flex`
+    key (never computed, not merely empty) must fail this condition alone."""
+    artifact = _valid_r4_artifact()
+    del artifact["topology_units"][0]["audit_units_flex"]
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": False,
+    }
+
+
+# =============================================================================
+# 9e. Condition 6: no arbitrary CLI topology-seed override can produce a
+# conclusion-bearing artifact -- `r4_artifact_identity`, the function
+# `main()` uses to decide the identity fields above, exercised directly.
+# =============================================================================
+
+def test_cli_topology_override_cannot_produce_a_conclusion_bearing_artifact():
+    """ONLY the exact frozen `TOPOLOGY_SEEDS_R4` list earns the R4 identity
+    fields -- an arbitrary override, the R3 seed set, a subset, and a
+    superset all get `None`/`None`, exactly like `--dev`/`--smoke` already
+    do."""
+    assert audit.r4_artifact_identity([1, 2, 3]) == {
+        "r4_contract": None, "r4_population_namespace": None}
+    assert audit.r4_artifact_identity(list(audit.TOPOLOGY_SEEDS_INITIAL)) == {
+        "r4_contract": None, "r4_population_namespace": None}
+    assert audit.r4_artifact_identity(list(audit.TOPOLOGY_SEEDS_R4)[:-1]) == {
+        "r4_contract": None, "r4_population_namespace": None}
+    assert audit.r4_artifact_identity(list(audit.TOPOLOGY_SEEDS_R4) + [1]) == {
+        "r4_contract": None, "r4_population_namespace": None}
+
+    assert audit.r4_artifact_identity(list(audit.TOPOLOGY_SEEDS_R4)) == {
+        "r4_contract": audit.R4_CONTRACT_PATH,
+        "r4_population_namespace": audit.R4_POPULATION_NAMESPACE}
+
+
+# =============================================================================
+# 9f. R4's own population/seed namespace (contract section 3): disjoint
+# randomness at every conclusion-bearing layer, not merely a topology
+# change. Same (topology_seed, block, episode_index); different namespace
+# must give different derived seeds.
+# =============================================================================
+
+def test_r4_population_namespace_gives_disjoint_derived_seeds_from_legacy_contract_id():
+    legacy_ep = audit._derived_seed(
+        topology_seed=20260734, block="calibration", idx=0, tag="episode_seed")
+    r4_ep = audit._derived_seed(
+        topology_seed=20260734, block="calibration", idx=0, tag="episode_seed",
+        contract_id=audit.R4_POPULATION_NAMESPACE)
+    assert legacy_ep != r4_ep
+
+    legacy_uw = audit.user_world_seed(topology_seed=20260734, block="calibration", episode_index=0)
+    r4_uw = audit.user_world_seed(topology_seed=20260734, block="calibration", episode_index=0,
+                                   contract_id=audit.R4_POPULATION_NAMESPACE)
+    assert legacy_uw != r4_uw
 
 
 def test_topology_start_progress_line_goes_to_stderr_not_stdout(monkeypatch, capsys):
@@ -4409,11 +4502,13 @@ def test_exact_paired_sequence_equal_true_for_identical_sequences():
     assert audit.exact_paired_sequence_equal(rec_a, rec_b) is True
 
 
-def test_run_calibration_episode_records_component_records_and_sequence_equality(monkeypatch):
-    """Integration proof for the calibration block: `b_value`'s own paired
-    arms (`constructive_mixed` vs `null`) get `sequences_exactly_equal`
-    computed and recorded, and every schedule's component record (including
-    `full_sync_SET`, the stable-only Part-A diagnostic arm) is persisted."""
+def test_run_calibration_episode_records_component_records_for_the_stable_limb_only(monkeypatch):
+    """Integration proof for the PART_A_CONTROL block: every schedule's
+    component record (`constructive_mixed`, `full_sync_SET`) is persisted,
+    stable limb ONLY -- R4 deleted the `null` arm and the flex-limb pass
+    entirely (contract section 8: "comparing only full_sync_SET against
+    constructive_mixed on the stable event class"), so `component_records`
+    must carry no `flex`-limb entry at all."""
     source = _CloneableFakeEnv(seed=29)
     duty_map = {i: i for i in range(source.n_uavs)}
     duty_positions, centroids = audit.compute_duty_positions(source)
@@ -4444,16 +4539,14 @@ def test_run_calibration_episode_records_component_records_and_sequence_equality
         limb: {r["arm"] for r in records if r["limb"] == limb}
         for limb in ("stable", "flex")
     }
-    assert arms_by_limb["stable"] == {"constructive_mixed", "null", "full_sync_SET"}
-    assert arms_by_limb["flex"] == {"constructive_mixed", "null"}
+    assert arms_by_limb["stable"] == {"constructive_mixed", "full_sync_SET"}
+    assert arms_by_limb["flex"] == set()
     for r in records:
         assert r["topology_seed"] == 9
         assert r["event_index"] == 5
 
-    assert set(result["results"]["stable"]) >= {"sequences_exactly_equal"}
-    assert set(result["results"]["flex"]) >= {"sequences_exactly_equal"}
-    assert isinstance(result["results"]["stable"]["sequences_exactly_equal"], (bool, np.bool_))
-    assert isinstance(result["results"]["flex"]["sequences_exactly_equal"], (bool, np.bool_))
+    assert set(result["results"]) == {"stable"}
+    assert set(result["results"]["stable"]) >= {"constructive", "full_sync", "d_a"}
 
 
 # =============================================================================
@@ -4530,56 +4623,68 @@ def test_baseline_masks_hand_worked_boundary_and_swap_guard():
     assert list(depletion) == [False, True, False]
 
 
-def _fold_calibration_fixture(**result_overrides):
+# R3's `_fold_calibration_fixture` and its two dependent tests
+# (`test_process_calibration_result_stable_limb_folds_constructive_as_
+# select_null_as_keep` / `..._flex_limb_...`) guarded the B_m stable/flex
+# constructive-vs-null fold inside `_process_calibration_result`. R4 deleted
+# that fold along with the null arm and both `calibration_units_stable`/
+# `calibration_units_flex` accumulators (contract sections 8/10) -- the
+# property is genuinely gone, not preserved elsewhere, so the tests are
+# deleted with it rather than kept pointing at removed fields. The
+# surviving fold (`calibration_units_d_a`, Part-A's own accumulator) gets
+# its own guard below.
+
+def test_process_calibration_result_folds_d_a_from_the_stable_result():
+    """Hand-worked: Part-A's per-unit contrast is `D_A` itself (a single
+    scalar per qualifying episode, folded as `select == eval_set == d_a`,
+    `eval_keep == 0.0` -- see `_process_calibration_result`'s own body), so
+    folding `results["stable"]["d_a"] = 3.0` must reproduce exactly 3.0
+    (`eval_set - eval_keep = 3.0 - 0.0`). Not tautological: a caller
+    accidentally folding `constructive`'s or `full_sync`'s own `g_total`
+    instead of the precomputed `d_a` field would reproduce a DIFFERENT
+    number (10.0 or 13.0 respectively) against this fixture."""
     result = {
         "episode_world": None, "episode_report": {}, "support_miss": False,
         "invalidated_pairs": [], "duty_map_at_te": {}, "duty_map_before_leave": {},
         "results": {
-            "stable": {"constructive": {"g_total": 10.0}, "null": {"g_total": 3.0}, "d_a": 0.0},
-            "flex": {"constructive": {"g_total": 99.0}, "null": {"g_total": -50.0}, "d_a": 0.0},
+            "stable": {"constructive": {"g_total": 10.0}, "full_sync": {"g_total": 13.0}, "d_a": 3.0},
         },
     }
-    result.update(result_overrides)
     calibration_report = audit._new_episode_block_report()
     episode_worlds, invalidated_pairs, arm_distinctness_pairs = [], [], []
-    calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
+    calibration_units_d_a = []
     audit._process_calibration_result(
         result, idx=0, ep_seed=1, topology_seed=1,
         calibration_report=calibration_report, episode_worlds=episode_worlds,
         invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
-        calibration_units_stable=calibration_units_stable,
-        calibration_units_flex=calibration_units_flex,
         calibration_units_d_a=calibration_units_d_a,
     )
-    return calibration_units_stable, calibration_units_flex
+    unit = calibration_units_d_a[0]
+    d_a_folded = float(unit["candidates"]["cvn"]["eval_set"][0] - unit["eval_keep"][0])
+    assert d_a_folded == pytest.approx(3.0)
+    assert calibration_report["qualifying"] == 1
 
 
-def test_process_calibration_result_stable_limb_folds_constructive_as_select_null_as_keep():
-    """Hand-worked: B_stable's per-unit contrast is
-    `U* = mean(eval_set) - mean(eval_keep)` (`topology_weighted_point_estimate`
-    / the nested-bootstrap contract), so folding the constructive arm into
-    select/eval_set and the null arm into eval_keep must reproduce
-    `G(constructive) - G(null) = 10.0 - 3.0 = +7.0`. Swapping the two arms in
-    the stable-limb fold (the measured mutation) would flip this to -7.0 --
-    the exact sign flip on the headline `b_stable_lcb > 0` gate `decide_branch`
-    checks."""
-    calibration_units_stable, _ = _fold_calibration_fixture()
-    unit = calibration_units_stable[0]
-    u_star_stable = float(unit["candidates"]["cvn"]["eval_set"][0] - unit["eval_keep"][0])
-    assert u_star_stable == pytest.approx(7.0)
-
-
-def test_process_calibration_result_flex_limb_folds_constructive_as_select_null_as_keep():
-    """Independent second test for the flex limb (the brief requires this as
-    a second, independent guard from the stable-limb one above): flex's
-    fixture values are deliberately different (99.0/-50.0, vs the stable
-    limb's 10.0/3.0) so the two tests cannot pass by accident of a shared
-    literal. `G(constructive) - G(null) = 99.0 - (-50.0) = +149.0`; a swap in
-    the flex-limb fold would flip this to -149.0."""
-    _, calibration_units_flex = _fold_calibration_fixture()
-    unit = calibration_units_flex[0]
-    u_star_flex = float(unit["candidates"]["cvn"]["eval_set"][0] - unit["eval_keep"][0])
-    assert u_star_flex == pytest.approx(149.0)
+def test_process_calibration_result_does_not_count_a_missing_stable_result_as_qualifying():
+    """The completeness gate: when the stable limb's fork was invalidated
+    (no `results["stable"]` key at all -- the shape `run_calibration_episode`
+    returns when its `PrefixReplayMismatchError` branch fires), the episode
+    must not be counted as qualifying and must contribute no `D_A` unit."""
+    result = {
+        "episode_world": None, "episode_report": {}, "support_miss": False,
+        "invalidated_pairs": [{"reason": "synthetic"}],
+        "duty_map_at_te": {}, "duty_map_before_leave": {}, "results": {},
+    }
+    calibration_report = audit._new_episode_block_report()
+    calibration_units_d_a = []
+    audit._process_calibration_result(
+        result, idx=0, ep_seed=1, topology_seed=1,
+        calibration_report=calibration_report, episode_worlds=[],
+        invalidated_pairs=[], arm_distinctness_pairs=[],
+        calibration_units_d_a=calibration_units_d_a,
+    )
+    assert calibration_units_d_a == []
+    assert calibration_report["qualifying"] == 0
 
 
 def test_process_audit_result_assigns_stable_and_flex_units_to_their_own_limb():

@@ -67,7 +67,7 @@ def _degenerate_unit(value):
             "eval_keep": [0.0]}
 
 
-def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifying=4,
+def _topology_result(seed, *, d_a, u_stable, u_flex, qualifying=4,
                       qualifying_calibration=None, qualifying_audit=None,
                       invalidated_pairs=None, arm_distinctness_pairs=None,
                       episode_worlds=None):
@@ -106,8 +106,6 @@ def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifyin
         "qualifying_audit_episodes": qa,
         "invalidated_pairs": invalidated_pairs if invalidated_pairs is not None else [],
         "arm_distinctness_pairs": arm_distinctness_pairs,
-        "calibration_units_stable": [_degenerate_unit(b_stable)],
-        "calibration_units_flex": [_degenerate_unit(b_flex)],
         "calibration_units_d_a": [_degenerate_unit(d_a)],
         "audit_units_stable": [_degenerate_unit(u_stable)],
         "audit_units_flex": [_degenerate_unit(u_flex)],
@@ -174,14 +172,16 @@ def test_pooled_output_equals_direct_assemble_audit_result(tmp_path, monkeypatch
     _fast_t_m_bootstrap(monkeypatch, audit)
     _fast_t_m_bootstrap(monkeypatch, pooling.audit)
 
-    # d_a=0.6 with b_stable=10.0 lands PART_A_CONFORMANCE_UNRESOLVED (hand-worked
-    # in `tests/audit_d7_s_event_aligned_test.py`'s
-    # `test_driver_part_a_unresolved_does_not_relabel_the_source_branch`), which
-    # must NOT relabel the branch away from PERSISTENCE_NECESSARY_SOURCE --
-    # d_a=0.0 would instead land PART_A_CONTRADICTION (branch 4), a different
-    # code path this test is not exercising.
+    # d_a=6.0 lands PART_A_CONFORMANCE_UNRESOLVED at the absolute anchor
+    # (hand-worked in `tests/audit_d7_s_event_aligned_test.py`'s
+    # `test_driver_part_a_unresolved_does_not_relabel_the_source_branch`),
+    # which must NOT relabel the branch away from PERSISTENCE_NECESSARY_
+    # SOURCE -- d_a=0.0 would instead land PART_A_CONTRADICTION (branch 4),
+    # a different code path this test is not exercising. In practice branch
+    # 1 (INVALID_EVENT_ALIGNED_AUDIT, asserted below) wins regardless, since
+    # this fixture has no `component_audit` key at all.
     topo = [
-        _topology_result(2000 + i, d_a=0.6, b_stable=10.0, b_flex=10.0,
+        _topology_result(2000 + i, d_a=6.0,
                           u_stable=-2.0, u_flex=2.0)
         for i in range(6)
     ]
@@ -236,9 +236,8 @@ def test_pooling_is_invariant_to_shard_argument_order(tmp_path, monkeypatch):
     _fast_t_m_bootstrap(monkeypatch, pooling.audit)
 
     topo = [
-        _topology_result(3000 + i, d_a=0.05 + 0.03 * i, b_stable=6.0 + 1.5 * i,
-                          u_stable=-2.0 + 0.4 * i, u_flex=1.0 + 0.3 * i,
-                          b_flex=5.0 + 0.7 * i)
+        _topology_result(3000 + i, d_a=0.05 + 0.03 * i,
+                          u_stable=-2.0 + 0.4 * i, u_flex=1.0 + 0.3 * i)
         for i in range(6)
     ]
     p1 = _write_shard(tmp_path, "a.json", topo[:2])
@@ -259,10 +258,10 @@ def test_pooling_is_invariant_to_shard_argument_order(tmp_path, monkeypatch):
 
 def test_contract_id_mismatch_is_refused(tmp_path):
     p1 = _write_shard(tmp_path, "a.json",
-                       [_topology_result(4001, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(4001, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)])
     p2 = _write_shard(tmp_path, "b.json",
-                       [_topology_result(4002, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(4002, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)],
                        contract_id="SOME_OTHER_CONTRACT")
     with pytest.raises(SystemExit, match="contract_id"):
@@ -271,10 +270,10 @@ def test_contract_id_mismatch_is_refused(tmp_path):
 
 def test_overlapping_topology_seeds_are_refused(tmp_path):
     p1 = _write_shard(tmp_path, "a.json",
-                       [_topology_result(5001, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(5001, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)])
     p2 = _write_shard(tmp_path, "b.json",
-                       [_topology_result(5001, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(5001, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)])
     with pytest.raises(SystemExit, match="overlap"):
         pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
@@ -283,7 +282,7 @@ def test_overlapping_topology_seeds_are_refused(tmp_path):
 def _flat_pair(tmp_path, seed_a, seed_b, **kw_a):
     """Two minimal shards on distinct seeds. `kw_a` applies to the first only."""
     make = lambda n, s, **kw: _write_shard(
-        tmp_path, n, [_topology_result(s, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        tmp_path, n, [_topology_result(s, d_a=0.0,
                                         u_stable=1.0, u_flex=1.0)], **kw)
     return make("a.json", seed_a, **kw_a), make("b.json", seed_b)
 
@@ -311,10 +310,10 @@ def test_uniformly_smoke_shards_are_refused_without_allow_smoke(tmp_path):
     could still see it -- but this gate is a refusal, not a label, and
     nothing tested that it refuses."""
     p1 = _write_shard(tmp_path, "a.json",
-                       [_topology_result(6101, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(6101, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)], smoke=True)
     p2 = _write_shard(tmp_path, "b.json",
-                       [_topology_result(6102, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(6102, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)], smoke=True)
     with pytest.raises(SystemExit, match="refusing to pool smoke shard"):
         pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
@@ -371,24 +370,43 @@ def test_internally_inconsistent_shard_columns_are_refused(tmp_path):
 
 def test_seed_union_not_a_frozen_set_is_refused(tmp_path):
     p1 = _write_shard(tmp_path, "a.json",
-                       [_topology_result(7001, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(7001, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)])
     p2 = _write_shard(tmp_path, "b.json",
-                       [_topology_result(7002, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                       [_topology_result(7002, d_a=0.0,
                                           u_stable=1.0, u_flex=1.0)])
     with pytest.raises(SystemExit, match="frozen"):
         pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])  # allow_any_seeds defaults False
 
 
-def test_registered_initial_seed_set_is_accepted_without_allow_any_seeds(tmp_path, monkeypatch):
-    """The positive case of the frozen-set gate: the REAL registered
-    `TOPOLOGY_SEEDS_INITIAL` (8 seeds) pools cleanly with no override, proving
-    the membership check accepts the actual frozen set and not merely that it
-    rejects everything else."""
-    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+def test_r3_topology_unit_is_refused_by_the_r4_pooler(tmp_path):
+    """Freshness sentinel condition 5 (contract section 3): "no R3 topology
+    unit is accepted by the R4 pooler." The REAL registered
+    `TOPOLOGY_SEEDS_INITIAL` (R3's 8 seeds) must be refused even with NO
+    override -- the frozen-set gate now accepts ONLY the R4 population,
+    never R3's, which R3's own historical pooled artifacts under logs/ never
+    needed anyway (they are already complete)."""
     seeds = list(audit.TOPOLOGY_SEEDS_INITIAL)
     topo = [
-        _topology_result(s, d_a=0.35, b_stable=6.0, b_flex=6.0, u_stable=-1.0, u_flex=1.0)
+        _topology_result(s, d_a=0.35, u_stable=-1.0, u_flex=1.0)
+        for s in seeds
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:4])
+    p2 = _write_shard(tmp_path, "b.json", topo[4:])
+
+    with pytest.raises(SystemExit, match="R3 topology unit"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])  # allow_any_seeds defaults False
+
+
+def test_registered_r4_seed_set_is_accepted_without_allow_any_seeds(tmp_path, monkeypatch):
+    """The positive case of the frozen-set gate: the REAL registered
+    `TOPOLOGY_SEEDS_R4` (8 seeds) pools cleanly with no override, proving the
+    membership check accepts the actual frozen R4 set and not merely that it
+    rejects everything else (R3's included, per the paired negative above)."""
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    topo = [
+        _topology_result(s, d_a=0.35, u_stable=-1.0, u_flex=1.0)
         for s in seeds
     ]
     p1 = _write_shard(tmp_path, "a.json", topo[:4])
@@ -447,52 +465,16 @@ def test_numpy_round_trip_is_lossless_on_tricky_magnitudes():
 # correct one, not merely differently-labeled.
 # =============================================================================
 
-def test_calibration_limb_assignment_is_not_swapped(tmp_path, monkeypatch):
-    """Gap 1: `calibration_units_stable`/`calibration_units_flex` must reach
-    `compute_t_m_bootstrap` under their OWN names. `b_stable=10.0` and
-    `b_flex=2.0` are degenerate (single identical candidate at every
-    topology), so `hierarchical_bootstrap_quantity`'s 5th percentile over
-    ANY resample is exactly the literal value regardless of iteration count
-    or resampled topology mix -- confirmed by direct computation, not
-    assumed: `compute_t_m_bootstrap` on 6 degenerate topologies of
-    (10.0, 2.0) returns `b_stable_lcb == 10.0`, `b_flex_lcb == 2.0` bit
-    exact. A stable/flex limb swap would make the pooled run report
-    `b_stable_lcb == 2.0`, silently reversing which limb the B_m branch
-    gate reads."""
-    _fast_t_m_bootstrap(monkeypatch, audit)
-    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
-
-    topo = [
-        _topology_result(8000 + i, d_a=0.0, b_stable=10.0, b_flex=2.0,
-                          u_stable=-1.0, u_flex=1.0)
-        for i in range(6)
-    ]
-    p1 = _write_shard(tmp_path, "a.json", topo[:3])
-    p2 = _write_shard(tmp_path, "b.json", topo[3:])
-
-    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
-    expected = audit.assemble_audit_result(topo, [])
-
-    # R4 deleted B_m, so this guard no longer has a downstream observable to
-    # read the swap through -- `b_stable_lcb` does not exist. The FINDING it was
-    # written for is about the pooler's reconstruction whitelist, not about the
-    # quantity that happened to expose it, so it is asserted directly on the
-    # reconstruction. That survives R4's deletion of the calibration limbs and
-    # would still catch the swap.
-    unit = json.loads(json.dumps(audit.topology_unit_for_serialization(topo[0]),
-                                  default=audit._json_default))
-    rebuilt = pooling._reconstruct_topology_result(unit)
-    def _limb_value(rec, key):
-        # The distinguishing value lives in the candidate's eval_set;
-        # `eval_keep` is 0.0 on both limbs in this fixture, so reading it
-        # would make the swap invisible -- the exact trap this guard exists
-        # for, hit once while writing it.
-        return float(rec[key][0]["candidates"]["only"]["eval_set"][0])
-
-    assert _limb_value(rebuilt, "calibration_units_stable") ==         _limb_value(unit, "calibration_units_stable") == 10.0
-    assert _limb_value(rebuilt, "calibration_units_flex") ==         _limb_value(unit, "calibration_units_flex") == 2.0
-    assert _limb_value(rebuilt, "calibration_units_stable") !=         _limb_value(rebuilt, "calibration_units_flex"),         "fixture must make the two limbs distinguishable or the swap is invisible"
-    assert pooled["branch"] == expected["branch"]
+# R3's `test_calibration_limb_assignment_is_not_swapped` (Gap 1) guarded the
+# `calibration_units_stable`/`calibration_units_flex` reconstruction keys
+# against a stable/flex swap. R4 deleted both fields from `topology_unit_
+# for_serialization` and `_reconstruct_topology_result`'s whitelist (contract
+# sections 8/10: the R3 `B_m` constructive-vs-null contrast has no
+# conclusion-bearing role in R4) -- the property is genuinely gone, not
+# preserved elsewhere, so the test is deleted with the fields rather than
+# kept pointing at keys that no longer exist. `calibration_units_d_a`
+# (Part-A's own surviving accumulator) has no limb-swap failure mode to
+# guard against -- it is a single unlabeled quantity, not a stable/flex pair.
 
 
 def test_pooled_topology_hash_failures_are_not_dropped(tmp_path):
@@ -506,9 +488,9 @@ def test_pooled_topology_hash_failures_are_not_dropped(tmp_path):
     that never produced a `topology_units` entry at all, matching what a
     real hash-assert failure looks like."""
     topo = [
-        _topology_result(8101, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8101, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1),
-        _topology_result(8102, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8102, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1),
     ]
     hash_failure = [{"topology_seed": 8103, "reason": "pinned-coordinate hash mismatch"}]
@@ -539,7 +521,7 @@ def test_qualifying_calibration_and_audit_counts_are_not_swapped(tmp_path):
     `calibration_topologies_ok=3, audit_topologies_ok=6` -- the exact
     opposite pair, not merely a different number."""
     topo = [
-        _topology_result(8200 + i, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8200 + i, d_a=0.0,
                           u_stable=1.0, u_flex=1.0,
                           qualifying_calibration=4,
                           qualifying_audit=4 if i < 3 else 2)
@@ -568,10 +550,10 @@ def test_invalidated_pairs_are_not_dropped(tmp_path):
     docstring)."""
     one_invalidated = [{"episode_index": 0, "reason": "prefix replay mismatch"}]
     topo = [
-        _topology_result(8301, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8301, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1,
                           invalidated_pairs=one_invalidated),
-        _topology_result(8302, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8302, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1),
     ]
     p1 = _write_shard(tmp_path, "a.json", topo[:1])
@@ -600,10 +582,10 @@ def test_arm_distinctness_pairs_are_not_dropped(tmp_path):
     difference."""
     identical_pair = ({0: 1, 1: 0}, {0: 1, 1: 0})
     topo = [
-        _topology_result(8401, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8401, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1,
                           arm_distinctness_pairs=[identical_pair]),
-        _topology_result(8402, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8402, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1,
                           arm_distinctness_pairs=[identical_pair]),
     ]
@@ -631,10 +613,10 @@ def test_episode_worlds_are_not_dropped(tmp_path):
     world = [{"block": "audit", "episode_index": 0, "episode_seed": 8501,
               "fingerprint": "abc123", "seed_controls_generation": False}]
     topo = [
-        _topology_result(8501, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8501, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1,
                           episode_worlds=world),
-        _topology_result(8502, d_a=0.0, b_stable=1.0, b_flex=1.0,
+        _topology_result(8502, d_a=0.0,
                           u_stable=1.0, u_flex=1.0, qualifying=1),
     ]
     p1 = _write_shard(tmp_path, "a.json", topo[:1])

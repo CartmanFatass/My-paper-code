@@ -147,6 +147,31 @@ TOPOLOGY_SEEDS_EXPANSION = tuple(range(20260734, 20260742))
 MIN_SUPPORT_TOPOLOGIES = 6
 MIN_SUPPORT_EPISODES_PER_TOPOLOGY = 4
 
+# --- R4 population layer (docs/research/designs/
+# D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md, sections 2/3) ------------------
+# R2 registered these eight seeds as its only possible second block but
+# never authorized their use absent its (now-deleted) expansion predicate.
+# R4 REPURPOSES them -- same numeric values as `TOPOLOGY_SEEDS_EXPANSION` --
+# as its OWN initial fixed population, NOT inherited through R3 expansion
+# authority. There is no expansion path for R4: this is the whole population,
+# fixed and confirmatory.
+TOPOLOGY_SEEDS_R4 = (20260734, 20260735, 20260736, 20260737,
+                      20260738, 20260739, 20260740, 20260741)
+assert TOPOLOGY_SEEDS_R4 == TOPOLOGY_SEEDS_EXPANSION, (
+    "R4's population must be exactly R2's registered expansion block")
+
+# R4's own population/seed namespace (contract section 3: "R4 uses its own
+# population/seed namespace ... while retaining the existing hash field
+# structure and CRN relationships -- disjoint randomness at every
+# conclusion-bearing layer, not merely a topology change"). Fed as the
+# `contract_id` argument `stream_seed`/`user_world_seed` already expose for
+# exactly this purpose -- never a new hash field, and never a change to the
+# module-level `CONTRACT_ID` those functions default to for every non-R4
+# run. R4's own contract identity (the frozen document's own `id=` field).
+R4_POPULATION_NAMESPACE = "D7_S_R4_ABSOLUTE_FOCAL_MARGIN"
+R4_CONTRACT_PATH = "docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md"
+R4_CONTRACT_ID = "D7.S-R4"
+
 # --- exclusion-reason vocabulary (section 2) --------------------------------
 EXCLUDE_CENSORED = "censored_t_e_gt_950"
 EXCLUDE_QUEUE_OR_OCCUPIED = "queue_or_occupied_station"
@@ -932,48 +957,51 @@ def full_sync_set_update(*, duty_positions: dict[int, np.ndarray],
 
 
 # =============================================================================
-# Section 8 -- Part-A conformance
+# PART_A_CONTROL -- rederived at the absolute anchor (contract section 8,
+# "not an R3 calibration block"). R3's `part_a_conformance` tested
+# equivalence relative to `B_stable` (a data-dependent scale); R4 replaces
+# that scale with the same fixed `MATERIALITY_MARGIN` every other absolute
+# gate in this module uses, and drops the R3 `B_stable`-conditioning gate
+# entirely -- PART_A_CONTROL has no "NOT_APPLICABLE because B_stable wasn't
+# identified" state, because B_stable no longer participates at all.
 # =============================================================================
 
-def part_a_conformance(*, lower_contrast_lcb: float, lower_contrast_ucb: float,
-                        upper_contrast_lcb: float, b_stable_lcb: float) -> str:
-    """Two one-sided 5% equivalence tests of
-    -0.05*B_stable < D_A < +0.05*B_stable, conditional on LCB95(B_stable) > 0.
+def part_a_control_verdict(*, lower_contrast_lcb: float, lower_contrast_ucb: float,
+                            upper_contrast_lcb: float) -> str:
+    """Contract section 8:
 
-    Callers supply the already-bootstrapped bounds of the linear contrast
-    `D_A + 0.05*B_stable` (both its LCB95 `lower_contrast_lcb` and its UCB95
-    `lower_contrast_ucb`) and of `0.05*B_stable - D_A` (its LCB95
-    `upper_contrast_lcb`).
+        D_A = G(full_sync_SET) - G(constructive_mixed)
+        PART_A_CONTRADICTION       iff LCB95(D_A + 5) > 0 AND LCB95(5 - D_A) > 0
+        full-sync materially worse iff UCB95(D_A + 5) < 0
+        otherwise                       PART_A_CONFORMANCE_UNRESOLVED
+
+    Callers supply the already-bootstrapped bounds of the lower contrast
+    `D_A + MATERIALITY_MARGIN` (its LCB95 `lower_contrast_lcb` and its UCB95
+    `lower_contrast_ucb`) and of the upper contrast `MATERIALITY_MARGIN - D_A`
+    (its LCB95 `upper_contrast_lcb`) -- the SAME two-contrast shape section 8
+    used under R3, with `MATERIALITY_MARGIN` (the frozen 5.0 G-unit anchor,
+    section 1) replacing the R3 `0.05*B_stable` scale everywhere it appeared.
 
     Both equivalence tests pass (both LCB95s > 0) -> PART_A_CONTRADICTION
     (return-equivalence).
 
-    CONFORMANCE_PASS ("full-sync materially worse") requires the directly
-    tested condition UCB95(D_A + 0.05*B_stable) < 0 -- i.e. even the UPPER
-    bound of the lower contrast's own interval is negative, so D_A is
-    confidently below -0.05*B_stable. A merely-FAILING lower equivalence
-    test (`lower_contrast_lcb <= 0`) is NOT sufficient for this: an LCB95 at
-    or below zero with a UCB95 at or above zero means that interval
-    straddles zero, which is inconclusive, not "materially worse."
-
-    Fixed defect (measured): the previous signature never received the
-    lower contrast's UCB95 at all, and instead inferred "materially worse"
-    from the (unrelated) upper-contrast LCB failing to pass -- a 90% interval
-    of [-0.333, +0.009] on the lower contrast (LCB95 -0.333 <= 0, so the
-    lower equivalence test fails; UCB95 +0.009 >= 0, so "materially worse"
-    is NOT established) was misclassified CONFORMANCE_PASS. It must be
-    PART_A_CONFORMANCE_UNRESOLVED.
+    `PART_A_FULL_SYNC_MATERIALLY_WORSE` requires the directly tested condition
+    UCB95(D_A + MATERIALITY_MARGIN) < 0 -- i.e. even the UPPER bound of the
+    lower contrast's own interval is negative, so D_A is confidently below
+    `-MATERIALITY_MARGIN`. A merely-FAILING lower equivalence test
+    (`lower_contrast_lcb <= 0`) is NOT sufficient for this: an LCB95 at or
+    below zero with a UCB95 at or above zero means that interval straddles
+    zero, which is inconclusive, not "materially worse" (the exact R3 defect
+    this two-bound shape was built to fix, preserved unchanged by R4).
 
     Every other combination -> PART_A_CONFORMANCE_UNRESOLVED. Never applied
-    on the flex limb."""
-    if b_stable_lcb <= 0:
-        return "NOT_APPLICABLE"
+    on the flex limb (contract section 8: stable event class only)."""
     lower_passes = lower_contrast_lcb > 0
     upper_passes = upper_contrast_lcb > 0
     if lower_passes and upper_passes:
         return "PART_A_CONTRADICTION"
     if lower_contrast_ucb < 0:
-        return "CONFORMANCE_PASS"
+        return "PART_A_FULL_SYNC_MATERIALLY_WORSE"
     return "PART_A_CONFORMANCE_UNRESOLVED"
 
 
@@ -1015,20 +1043,23 @@ def compute_conformance_ok(*, invalidated_pairs: int, topology_hash_ok: bool,
 
 
 # =============================================================================
-# Section 8 -- Part-A conformance bounds (joint bootstrap wiring)
+# PART_A_CONTROL -- bounds (joint bootstrap wiring, rederived at the
+# absolute anchor)
 # =============================================================================
 
-def compute_part_a_bounds(*, d_a_topology_units: list, b_stable_topology_units: list,
-                           shared_topology_indices: np.ndarray, seed: int) -> Optional[dict]:
-    """Bootstraps D_A jointly with B_stable, sharing the SAME
+def compute_part_a_control_bounds(*, d_a_topology_units: list,
+                                   shared_topology_indices: np.ndarray,
+                                   seed: int) -> Optional[dict]:
+    """Bootstraps D_A alone -- no joint `B_stable` draw, R3's data-dependent
+    scale has no role in R4's absolute anchor -- sharing the SAME
     `shared_topology_indices` every other primary quantity uses (section 8:
     "All primary quantities use the same topology/episode bootstrap
-    indices"), and returns the three bounds `part_a_conformance` consumes
-    (`lower_contrast_lcb`/`lower_contrast_ucb` of `D_A + 0.05*B_stable`,
-    `upper_contrast_lcb` of `0.05*B_stable - D_A`) plus `b_stable_lcb` for
-    its own conditioning gate.
+    indices"), and returns the three bounds `part_a_control_verdict`
+    consumes (`lower_contrast_lcb`/`lower_contrast_ucb` of
+    `D_A + MATERIALITY_MARGIN`, `upper_contrast_lcb` of
+    `MATERIALITY_MARGIN - D_A`).
 
-    Returns `None` when there is no stable-limb calibration D_A data to
+    Returns `None` when there is no stable-limb Part-A-control D_A data to
     bootstrap at all (every topology contributed zero qualifying stable
     events) -- the caller must not report a Part-A verdict in that case,
     per the "when and only when the stable class has events" requirement;
@@ -1036,16 +1067,14 @@ def compute_part_a_bounds(*, d_a_topology_units: list, b_stable_topology_units: 
     than an honest absence."""
     if not any(len(units) for units in d_a_topology_units):
         return None
-    b_stable = hierarchical_bootstrap_quantity(
-        b_stable_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
     d_a = hierarchical_bootstrap_quantity(
         d_a_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
-    lower_contrast_iters = d_a["u_star_iters"] + EQUIVALENCE_DELTA * b_stable["u_star_iters"]
-    upper_contrast_iters = EQUIVALENCE_DELTA * b_stable["u_star_iters"] - d_a["u_star_iters"]
+    lower_contrast_iters = d_a["u_star_iters"] + MATERIALITY_MARGIN
+    upper_contrast_iters = MATERIALITY_MARGIN - d_a["u_star_iters"]
     lower_finite = lower_contrast_iters[np.isfinite(lower_contrast_iters)]
     upper_finite = upper_contrast_iters[np.isfinite(upper_contrast_iters)]
     return {
-        "b_stable_lcb": b_stable["lo"],
+        "d_a_point": topology_weighted_point_estimate(d_a_topology_units),
         "lower_contrast_lcb": float(np.percentile(lower_finite, 5)) if lower_finite.size else float("nan"),
         "lower_contrast_ucb": float(np.percentile(lower_finite, 95)) if lower_finite.size else float("nan"),
         "upper_contrast_lcb": float(np.percentile(upper_finite, 5)) if upper_finite.size else float("nan"),
@@ -1053,13 +1082,18 @@ def compute_part_a_bounds(*, d_a_topology_units: list, b_stable_topology_units: 
 
 
 def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
-    """Maps `part_a_conformance`'s verdict string to `decide_branch`'s
+    """Maps `part_a_control_verdict`'s verdict string to `decide_branch`'s
     `part_a_contradiction` boolean plus the diagnostic string that lands in
     the JSON payload only, never a branch input itself. ONLY
     `PART_A_CONTRADICTION` sets the branch input True --
     `PART_A_CONFORMANCE_UNRESOLVED` (and `NOT_APPLICABLE`,
-    `CONFORMANCE_PASS`) never flip any branch input, per section 8: the
-    unresolved diagnostic "does not relabel the source branch."""
+    `PART_A_FULL_SYNC_MATERIALLY_WORSE`) never flip any branch input, per
+    section 8: the unresolved diagnostic "does not relabel the source
+    branch." `NOT_APPLICABLE` is never `part_a_control_verdict`'s own
+    output (it has no such state); it is the caller's label for
+    `compute_part_a_control_bounds` returning `None` (no stable-class D_A
+    data anywhere in the run) and is mapped here identically to every other
+    non-contradiction verdict."""
     return (verdict == "PART_A_CONTRADICTION", verdict)
 
 
@@ -1094,112 +1128,91 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
     return support_ok, {"calibration_topologies_ok": calib_ok, "audit_topologies_ok": audit_ok}
 
 
-def expansion_allowed(*, conformance_ok: bool, support_ok: bool, b_stable_point: float,
-                       b_flex_point: float, t_stable_intended_sign_ok: bool,
-                       t_flex_intended_sign_ok: bool, any_bound_unresolved: bool,
-                       already_expanded: bool) -> bool:
-    """Section 9's one permissible expansion, and no more."""
-    if already_expanded:
-        return False
-    if not (conformance_ok and support_ok):
-        return False
-    if b_stable_point <= 0 or b_flex_point <= 0:
-        return False
-    if not (t_stable_intended_sign_ok and t_flex_intended_sign_ok):
-        return False
-    return bool(any_bound_unresolved)
+# R4 contract section 2: "There is no expansion path. Not 'a rule that
+# rarely fires' -- none." R3's `expansion_allowed`/`REGISTERED_EXPANSION_
+# SEED_SET`/`ExpansionNotJustifiedError`/`check_expansion_justified` (the
+# section-9 one-permissible-expansion gate, and its `main()` call site) are
+# DELETED, not retained as a rule that never fires. `check_expansion_
+# justified` also carried a live defect worth naming for the record: it read
+# `initial["t_m_bootstrap"]`, a key R4's `assemble_audit_result` no longer
+# emits (T_m came off the conclusion-bearing path with the rest of the R4
+# result layer), so it always took the `t_m is None` fallback -- points
+# 0.0, expansion refused -- the right outcome for the wrong reason. Deleting
+# the guard rather than leaving it accidentally-correct is the point: R4 has
+# no expansion path to guard.
 
 
-REGISTERED_EXPANSION_SEED_SET = frozenset(TOPOLOGY_SEEDS_INITIAL) | frozenset(TOPOLOGY_SEEDS_EXPANSION)
+# =============================================================================
+# R4 population layer -- freshness sentinel (contract section 3)
+# =============================================================================
+#
+# Six fail-closed conditions, checked independently so a defect in one can
+# never read through another:
+#   1. the exact seed list is 20260734-20260741;
+#   2. none of the topologies that actually PRODUCED units overlaps the R3
+#      initial set (checked against `topology_records`, not the top-level
+#      declared `topology_seeds` list condition 1 already covers -- a
+#      genuinely different failure mode, e.g. a stale-cache topology
+#      substitution bug that leaves the declared list correct while the
+#      records disagree);
+#   3. the artifact identifies the R4 contract and population namespace;
+#   4. each topology has the required Part-A-control and focal-audit block
+#      identities;
+#   5. no R3 topology unit is accepted by the R4 pooler (the pooler's own
+#      SystemExit gate in `pool_d7_s_event_aligned_shards.py`, tested there
+#      directly -- it cannot be evaluated from a single artifact); and
+#   6. no arbitrary CLI topology-seed override can produce a conclusion-
+#      bearing artifact (`r4_artifact_identity` below: ONLY the exact frozen
+#      `TOPOLOGY_SEEDS_R4` list ever earns the identity fields condition 3
+#      checks).
+
+def r4_artifact_identity(topology_seeds) -> dict:
+    """Condition 6: the ONLY topology-seed list that earns the R4 contract/
+    namespace identity fields is the exact frozen `TOPOLOGY_SEEDS_R4` list,
+    in order. `--dev`'s development topology, `--smoke`'s proof-sized run,
+    and any `--topology-seeds` override -- arbitrary or not -- all get
+    `None`/`None` here, so no downstream reader can mistake any of them for
+    a conclusion-bearing R4 result."""
+    if list(topology_seeds) == list(TOPOLOGY_SEEDS_R4):
+        return {"r4_contract": R4_CONTRACT_PATH,
+                "r4_population_namespace": R4_POPULATION_NAMESPACE}
+    return {"r4_contract": None, "r4_population_namespace": None}
 
 
-class ExpansionNotJustifiedError(RuntimeError):
-    """Raised when a run's topology-seed set IS the registered 16-topology
-    expansion set (`TOPOLOGY_SEEDS_INITIAL` union `TOPOLOGY_SEEDS_EXPANSION`,
-    section 9's ONE permissible expansion) but the frozen `expansion_allowed`
-    predicate, evaluated against the INITIAL 8 topologies' own result, does
-    not license it. Never repaired: `main()` must not report a pooled
-    16-topology result as a conclusion-bearing expansion when the rule that
-    licenses adding the extra eight topologies was not satisfied by the
-    initial batch on its own."""
+def _topology_unit_has_required_blocks(unit: dict) -> bool:
+    """Condition 4, per topology: the serialized unit must structurally
+    carry both the Part-A-control block's record (`calibration_units_d_a`)
+    and the focal-audit block's records (`audit_units_stable`/
+    `audit_units_flex`) -- presence, not count: a topology that legitimately
+    found zero qualifying episodes on one block still carries the (empty)
+    list for it, which is a different failure mode (branch 2, insufficient
+    support) than the key never having been written at all."""
+    return ("calibration_units_d_a" in unit
+            and "audit_units_stable" in unit
+            and "audit_units_flex" in unit)
 
 
-def check_expansion_justified(topology_seeds: list, topology_results: list[dict],
-                               topology_hash_failures: list[dict]) -> None:
-    """Section 9's one-permissible-expansion gate, wired for real (ruling
-    2026-07-27): `expansion_allowed` existed but was never called from
-    `main()`, so a human passing `--topology-seeds` with the 16-seed union
-    bypassed the frozen predicate entirely -- "the dead function does not
-    make the scientific rule optional." A no-op for every topology-seed set
-    OTHER than the registered expansion union -- smoke, dev, the plain
-    8-seed default, or any other override -- per the "guard is on a
-    conclusion-bearing expansion, not on every override" scope
-    `resolve_run_plan` already draws.
-
-    `expansion_allowed`'s inputs are evaluated against the INITIAL 8
-    topologies' OWN `assemble_audit_result` -- never the pooled 16, which
-    would let the extra eight topologies' data justify their own inclusion.
-    `topology_results`/`topology_hash_failures` are the SAME accumulators
-    `main()` already built for the full requested seed set; this function
-    only re-filters them down to the initial 8 and re-runs the driver-level
-    assembly (cheap relative to episode collection) over that subset.
-
-    `t_stable_intended_sign_ok`/`t_flex_intended_sign_ok` and
-    `any_bound_unresolved` apply the frozen section 8 gate definition
-    directly -- stable clears iff `LCB95(B_stable) > 0 and UCB95(T_stable) <
-    0`; flex clears iff `LCB95(B_flex) > 0 and LCB95(T_flex) > 0`; the
-    affirmative-miss reading is the SAME B_m gate with the T_m bound read on
-    the opposite side of its interval. This is `decide_branch`'s identical
-    predicate, reproduced here (not imported from it) because `decide_branch`
-    exposes only its final branch string, never these intermediate booleans;
-    both are separately grounded in the same frozen contract text."""
-    if set(topology_seeds) != REGISTERED_EXPANSION_SEED_SET:
-        return
-
-    initial_results = [r for r in topology_results
-                        if r["topology_record"]["topology_seed"] in TOPOLOGY_SEEDS_INITIAL]
-    initial_hash_failures = [f for f in topology_hash_failures
-                              if f["topology_seed"] in TOPOLOGY_SEEDS_INITIAL]
-    initial = assemble_audit_result(initial_results, initial_hash_failures)
-
-    conformance_ok = bool(initial["conformance"]["ok"])
-    support_ok = bool(initial["support"]["ok"])
-    t_m = initial.get("t_m_bootstrap")
-
-    if conformance_ok and support_ok and t_m is not None:
-        b_stable_point = t_m["b_stable_point"]
-        b_flex_point = t_m["b_flex_point"]
-        t_stable_intended_sign_ok = t_m["t_stable_point"] < 0
-        t_flex_intended_sign_ok = t_m["t_flex_point"] > 0
-        stable_clears = (t_m["b_stable_lcb"] > 0) and (t_m["t_stable_ucb"] < 0)
-        stable_affirmative_miss = (t_m["b_stable_lcb"] > 0) and (t_m["t_stable_lcb"] > 0)
-        flex_clears = (t_m["b_flex_lcb"] > 0) and (t_m["t_flex_lcb"] > 0)
-        flex_affirmative_miss = (t_m["b_flex_lcb"] > 0) and (t_m["t_flex_ucb"] < 0)
-        stable_resolved = stable_clears or stable_affirmative_miss
-        flex_resolved = flex_clears or flex_affirmative_miss
-        any_bound_unresolved = not (stable_resolved and flex_resolved)
-    else:
-        # expansion_allowed's own `not (conformance_ok and support_ok)` gate
-        # already refuses here; these three never reach its later checks.
-        b_stable_point = b_flex_point = 0.0
-        t_stable_intended_sign_ok = t_flex_intended_sign_ok = False
-        any_bound_unresolved = False
-
-    allowed = expansion_allowed(
-        conformance_ok=conformance_ok, support_ok=support_ok,
-        b_stable_point=b_stable_point, b_flex_point=b_flex_point,
-        t_stable_intended_sign_ok=t_stable_intended_sign_ok,
-        t_flex_intended_sign_ok=t_flex_intended_sign_ok,
-        any_bound_unresolved=any_bound_unresolved, already_expanded=False)
-    if not allowed:
-        raise ExpansionNotJustifiedError(
-            "the registered 16-topology expansion set was requested, but "
-            "expansion_allowed refused it against the initial 8 topologies' "
-            f"own result: conformance_ok={conformance_ok} support_ok={support_ok} "
-            f"b_stable_point={b_stable_point!r} b_flex_point={b_flex_point!r} "
-            f"t_stable_intended_sign_ok={t_stable_intended_sign_ok} "
-            f"t_flex_intended_sign_ok={t_flex_intended_sign_ok} "
-            f"any_bound_unresolved={any_bound_unresolved}")
+def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
+    """Conditions 1-4 of the six, checked against one assembled artifact --
+    the exact shape `main()`/`pool_d7_s_event_aligned_shards.pool()` emit.
+    Condition 5 is the pooler's own refusal, tested directly against
+    `pool_d7_s_event_aligned_shards.py`; condition 6 is `r4_artifact_
+    identity`'s own behavior, tested directly against it. Returns
+    `(ok, detail)`; `ok` is the conjunction, `detail` names each condition's
+    own independent boolean so a test can drive exactly one to False."""
+    declared_seeds = list(result.get("topology_seeds", []))
+    actual_seeds = [tr.get("topology_seed") for tr in result.get("topology_records", [])]
+    topology_units = result.get("topology_units") or []
+    detail = {
+        "exact_seed_list": declared_seeds == list(TOPOLOGY_SEEDS_R4),
+        "no_r3_overlap": not (set(actual_seeds) & set(TOPOLOGY_SEEDS_INITIAL)),
+        "identifies_r4_contract_and_namespace": (
+            result.get("r4_contract") == R4_CONTRACT_PATH
+            and result.get("r4_population_namespace") == R4_POPULATION_NAMESPACE),
+        "per_topology_block_identities": bool(topology_units) and all(
+            _topology_unit_has_required_blocks(u) for u in topology_units),
+    }
+    return all(detail.values()), detail
 
 
 # =============================================================================
@@ -1281,7 +1294,8 @@ def hierarchical_bootstrap_events(events: list[dict], *, iters: int, seed: int,
 USER_WORLD_SEED_NAMESPACE = "user_world"
 
 
-def user_world_seed(*, topology_seed: int, block: str, episode_index: int) -> int:
+def user_world_seed(*, topology_seed: int, block: str, episode_index: int,
+                     contract_id: str = CONTRACT_ID) -> int:
     """R3 section E: the registered seed for an episode's user world.
 
     Derived from existing episode provenance under a namespace **disjoint** from
@@ -1294,8 +1308,15 @@ def user_world_seed(*, topology_seed: int, block: str, episode_index: int) -> in
     the draw *reproducible and recorded*; it does not make it fixed across
     episodes, because the user world is a nested episode-level random factor
     rather than part of topology identity.
+
+    `contract_id` defaults to the module's own `CONTRACT_ID` (every non-R4
+    run, unchanged). R4's driver passes `R4_POPULATION_NAMESPACE` instead, so
+    an R4 episode's user world lives in a namespace disjoint from any R3
+    episode ever drawn at the same `(topology_seed, block, episode_index)` --
+    the same mechanism `stream_seed`'s own `contract_id` override already
+    provides, applied here identically.
     """
-    fields = (USER_WORLD_SEED_NAMESPACE, CONTRACT_ID, str(int(topology_seed)),
+    fields = (USER_WORLD_SEED_NAMESPACE, str(contract_id), str(int(topology_seed)),
               str(block), str(int(episode_index)))
     digest = hashlib.sha256("|".join(fields).encode("utf-8")).digest()
     return int.from_bytes(digest[:8], "big")
@@ -3371,39 +3392,44 @@ def _baseline_masks(env) -> tuple:
 
 def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, energy_seed: int,
                              coords: dict, coord_hash: str, energy_stage: str = "S3",
-                             episode_index: int = 0) -> dict:
-    """One item-2/3/5 calibration episode: rolls `constructive_mixed` from
-    reset to find the joint qualifying event (section 2/Q-E4), then forks
-    at `t_e` into `constructive_mixed` vs `null` and evaluates BOTH
-    `H_stable` and `H_flex` from the SAME paired continuation type (section
-    5). Returns `support_miss=True` (never a synthetic zero) when no
+                             episode_index: int = 0, contract_id: str = CONTRACT_ID) -> dict:
+    """One PART_A_CONTROL episode (contract section 8, "not an R3 calibration
+    block"): rolls `constructive_mixed` from reset to find the joint
+    qualifying event (section 2/Q-E4 -- event detection is unchanged: the
+    joint stable+flex certification still defines `t_e`), then forks at
+    `t_e` into `constructive_mixed` vs `full_sync_SET` and evaluates
+    `H_stable` ONLY, on the stable event class ONLY (section 8: "comparing
+    only full_sync_SET against constructive_mixed on the stable event
+    class"). Returns `support_miss=True` (never a synthetic zero) when no
     qualifying joint event was found.
 
-    Part-A conformance (implementer wiring, section 8, stable limb ONLY,
-    "never applied on the flex limb"): the stable limb's schedule set gains a
-    THIRD fork, `full_sync_SET` (the accepted `full_sync_set_update` diagnostic
-    duty policy), run through the identical prefix-replay/continuation-seed
-    machinery as `constructive_mixed`/`null` above -- same CRN continuation
-    construction, same `H_stable` window, same window-local G. `D_A =
-    G(full_sync_SET) - G(constructive_mixed)` is accumulated per qualifying
-    calibration episode, exactly mirroring `b_value`'s per-episode scalar
-    shape (frozen contract section 8's bootstrap text lists "B_stable,
-    B_flex, ... and the Part-A contrast" as resampled from "calibration
-    episodes and audit events" together with B_m, not from the audit block's
-    n_select/n_eval selection-replicate machinery, which section 8's
-    "Replicates" paragraph scopes explicitly to "selected SET and KEEP" --
-    so D_A is a single scalar per calibration episode, not an n_eval-length
-    replicate array).
+    R3's `null` schedule and its flex-limb pass are DELETED, not retained:
+    section 10 replaces "the R3 calibration/null block" wholesale, and R4's
+    Part-A control has no conclusion-bearing use for either (contract
+    section 8: "The null arm and both B_m quantities have no
+    conclusion-bearing role in R4 and are deleted from the R4 path").
+
+    `D_A = G(full_sync_SET) - G(constructive_mixed)` is accumulated per
+    qualifying episode as a single scalar (frozen contract section 8's
+    bootstrap text scopes the audit block's n_select/n_eval selection-
+    replicate machinery to "selected SET and KEEP" only, never to
+    calibration-episode quantities).
 
     Fixed-history discipline (section 8/Q-I2): a `PrefixReplayMismatchError`
     on ANY schedule's fresh-env prefix replay invalidates the WHOLE episode
-    (every schedule's fork shares the same recorded prefix and expected
+    (both schedules' fork shares the same recorded prefix and expected
     hash, so a divergence on one schedule means the fixed-history guarantee
-    itself failed for this episode, not just one arm) -- it is caught here,
-    reported via `invalidated_pairs`, and the episode contributes to neither
-    `B_m` nor `D_A`, never silently repaired or retried."""
+    itself failed for this episode) -- it is caught here, reported via
+    `invalidated_pairs`, and the episode contributes no `D_A`, never
+    silently repaired or retried.
+
+    `contract_id` (contract section 3's R4 population/seed namespace,
+    threaded from `run_topology_audit`): defaults to the module `CONTRACT_ID`
+    for every non-R4 run; R4's driver passes `R4_POPULATION_NAMESPACE`
+    instead, so R4's user world and continuation streams are disjoint from
+    any R3 draw at the same `(topology_seed, block, episode_index)`."""
     uw_seed = user_world_seed(topology_seed=topology_seed, block="calibration",
-                               episode_index=episode_index)
+                               episode_index=episode_index, contract_id=contract_id)
     env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
                             coord_hash=coord_hash, energy_stage=energy_stage,
                             user_world_seed=uw_seed)
@@ -3453,72 +3479,57 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
         }
 
     component_records: list = []
-    for limb, h_val in (("stable", H_STABLE), ("flex", H_FLEX)):
-        schedules = (("constructive_mixed", "null", "full_sync_SET") if limb == "stable"
-                     else ("constructive_mixed", "null"))
-        g_by_schedule = {}
-        limb_invalid = False
-        for schedule in schedules:
-            try:
-                replay_env = snapshot.clone(
-                    context=f"calibration limb={limb} schedule={schedule}")
-            except (CloneIsolationError, TopologyMismatchError) as exc:
-                invalidated_pairs.append({
-                    "topology_seed": topology_seed, "episode_seed": episode_seed,
-                    "block": "calibration", "limb": limb, "schedule": schedule,
-                    "reason": str(exc),
-                })
-                limb_invalid = True
-                break
-            # CRN: every schedule of one calibration episode shares the
-            # continuation base stream, so `B_m = G(constructive) - G(null)` is a
-            # PAIRED contrast. Passing `schedule` here instead gave each arm its
-            # own stream, which is what made `bootstrap_ratio_ci`'s "arms are
-            # CRN-paired inside one episode" false.
-            cont_seed = stream_seed(
-                topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
-                limb=limb, event_index=0, candidate_target_id=EVAL_SHARED_CANDIDATE_TOKEN,
-                phase="evaluate", replicate_index=0)
-            out = fork_continuation(
-                replay_env, duty_map_at_te=event["duty_map_at_te"],
-                duty_positions_at_te=event["duty_positions_at_te"],
-                service_centroids_at_te=event["service_centroids_at_te"],
-                schedule=schedule, horizon=h_val, continuation_seed=cont_seed)
-            g_by_schedule[schedule] = window_g_from_step_metrics(
-                out["step_metrics"], out["qos_user_steps"], h=h_val,
-                baseline_cutoff_mask=snapshot.baseline_cutoff,
-                baseline_depletion_mask=snapshot.baseline_depletion)
-            # Ruling 2026-07-27: every calibration schedule IS a paired
-            # continuation (the comment above already establishes the CRN
-            # sharing that makes `b_value`/`d_a` paired contrasts), so every
-            # one persists its component record here, before this episode's
-            # in-memory series are discarded.
-            component_records.append(build_primary_g_component_record(
-                window_result=g_by_schedule[schedule], topology_seed=topology_seed,
-                event_index=episode_index, limb=limb, arm=schedule,
-                continuation_replicate=0))
-        if limb_invalid:
-            continue
-        result_entry = {
-            "b_value": g_by_schedule["constructive_mixed"]["g_total"] - g_by_schedule["null"]["g_total"],
+    limb, h_val = "stable", H_STABLE
+    schedules = ("constructive_mixed", "full_sync_SET")
+    g_by_schedule = {}
+    limb_invalid = False
+    for schedule in schedules:
+        try:
+            replay_env = snapshot.clone(
+                context=f"calibration limb={limb} schedule={schedule}")
+        except (CloneIsolationError, TopologyMismatchError) as exc:
+            invalidated_pairs.append({
+                "topology_seed": topology_seed, "episode_seed": episode_seed,
+                "block": "calibration", "limb": limb, "schedule": schedule,
+                "reason": str(exc),
+            })
+            limb_invalid = True
+            break
+        # CRN: both schedules of one Part-A-control episode share the
+        # continuation base stream, so `D_A = G(full_sync_SET) -
+        # G(constructive_mixed)` is a PAIRED contrast. Passing `schedule`
+        # here instead gave each arm its own stream, which is what made
+        # `bootstrap_ratio_ci`'s "arms are CRN-paired inside one episode"
+        # false.
+        cont_seed = stream_seed(
+            topology_seed=topology_seed, block="calibration", episode_seed=episode_seed,
+            limb=limb, event_index=0, candidate_target_id=EVAL_SHARED_CANDIDATE_TOKEN,
+            phase="evaluate", replicate_index=0, contract_id=contract_id)
+        out = fork_continuation(
+            replay_env, duty_map_at_te=event["duty_map_at_te"],
+            duty_positions_at_te=event["duty_positions_at_te"],
+            service_centroids_at_te=event["service_centroids_at_te"],
+            schedule=schedule, horizon=h_val, continuation_seed=cont_seed)
+        g_by_schedule[schedule] = window_g_from_step_metrics(
+            out["step_metrics"], out["qos_user_steps"], h=h_val,
+            baseline_cutoff_mask=snapshot.baseline_cutoff,
+            baseline_depletion_mask=snapshot.baseline_depletion)
+        # Ruling 2026-07-27: every calibration schedule IS a paired
+        # continuation (the comment above already establishes the CRN
+        # sharing that makes `d_a` a paired contrast), so every one persists
+        # its component record here, before this episode's in-memory series
+        # are discarded.
+        component_records.append(build_primary_g_component_record(
+            window_result=g_by_schedule[schedule], topology_seed=topology_seed,
+            event_index=episode_index, limb=limb, arm=schedule,
+            continuation_replicate=0))
+    if not limb_invalid:
+        results["stable"] = {
             "constructive": g_by_schedule["constructive_mixed"],
-            "null": g_by_schedule["null"],
-            # Ruling 2026-07-27: exact paired-sequence equality between the
-            # two arms `b_value` itself contrasts (constructive_mixed vs
-            # null), computed HERE while both arms' series are still in
-            # memory and recorded separately from `b_value`/component
-            # totals -- never inferred from them afterwards.
-            "sequences_exactly_equal": exact_paired_sequence_equal(
-                next(r for r in component_records
-                     if r["limb"] == limb and r["arm"] == "null"),
-                next(r for r in component_records
-                     if r["limb"] == limb and r["arm"] == "constructive_mixed")),
+            "full_sync": g_by_schedule["full_sync_SET"],
+            "d_a": (g_by_schedule["full_sync_SET"]["g_total"]
+                    - g_by_schedule["constructive_mixed"]["g_total"]),
         }
-        if limb == "stable":
-            result_entry["full_sync"] = g_by_schedule["full_sync_SET"]
-            result_entry["d_a"] = (g_by_schedule["full_sync_SET"]["g_total"]
-                                    - g_by_schedule["constructive_mixed"]["g_total"])
-        results[limb] = result_entry
     return {
         "support_miss": False,
         "invalidated": bool(invalidated_pairs),
@@ -3539,7 +3550,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
 
 def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed: int,
                      event: dict, limb: str, n_select: int, n_eval: int,
-                     event_index: int = 0) -> dict:
+                     event_index: int = 0, contract_id: str = CONTRACT_ID) -> dict:
     """Item 3's audit-event intervention under R2's shared-prefix realization:
     KEEP (unperturbed `constructive_mixed` continuation) plus, for every legal
     `z` in the limb's `Z(h)`, `n_select` selection-stream replicates and
@@ -3601,7 +3612,7 @@ def run_audit_event(*, snapshot: EventSnapshot, topology_seed: int, episode_seed
         cont_seed = stream_seed(
             topology_seed=topology_seed, block="audit", episode_seed=episode_seed,
             limb=limb, event_index=0, candidate_target_id=seed_candidate_id,
-            phase=phase, replicate_index=replicate_index)
+            phase=phase, replicate_index=replicate_index, contract_id=contract_id)
         out = fork_continuation(
             replay_env, duty_map_at_te=event["duty_map_at_te"],
             duty_positions_at_te=event["duty_positions_at_te"],
@@ -3740,7 +3751,8 @@ def _run_indexed_in_pool(worker_fn, indices, workers: int, **common_kwargs) -> d
 
 
 def _calibration_episode_worker(*, idx: int, topology_seed: int, coords: dict,
-                                 coord_hash: str, energy_stage: str):
+                                 coord_hash: str, energy_stage: str,
+                                 contract_id: str = CONTRACT_ID):
     """Runs inside a pool worker process: builds its OWN config (never
     receives the parent's `config` object -- a worker must not depend on
     `config_1.Config` pickling cleanly, so every worker constructs its own
@@ -3749,16 +3761,20 @@ def _calibration_episode_worker(*, idx: int, topology_seed: int, coords: dict,
     `(ep_seed, result)`; the caller folds this into the accumulators exactly
     as `run_calibration_episode`'s direct sequential-path result is folded."""
     config = build_config()
-    ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
-    en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
+    ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx,
+                             tag="episode_seed", contract_id=contract_id)
+    en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx,
+                             tag="energy_seed", contract_id=contract_id)
     result = run_calibration_episode(
         config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
-        coords=coords, coord_hash=coord_hash, energy_stage=energy_stage, episode_index=idx)
+        coords=coords, coord_hash=coord_hash, energy_stage=energy_stage, episode_index=idx,
+        contract_id=contract_id)
     return ep_seed, result
 
 
 def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict,
-                            coord_hash: str, energy_stage: str, n_select: int, n_eval: int) -> dict:
+                            coord_hash: str, energy_stage: str, n_select: int, n_eval: int,
+                            contract_id: str = CONTRACT_ID) -> dict:
     """Pure per-episode audit-block computation: build the pinned env, roll
     the prefix, capture the live event snapshot, and run both limbs' audit
     events. Factored out of `run_topology_audit`'s audit loop so the exact
@@ -3767,9 +3783,12 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
     per worker, via `_audit_episode_worker`) -- never re-derives a seed or a
     predicate, only relocates the existing per-episode body into a callable
     both paths use identically."""
-    ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="episode_seed")
-    en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx, tag="energy_seed")
-    uw_seed = user_world_seed(topology_seed=topology_seed, block="audit", episode_index=idx)
+    ep_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx,
+                             tag="episode_seed", contract_id=contract_id)
+    en_seed = _derived_seed(topology_seed=topology_seed, block="audit", idx=idx,
+                             tag="energy_seed", contract_id=contract_id)
+    uw_seed = user_world_seed(topology_seed=topology_seed, block="audit", episode_index=idx,
+                               contract_id=contract_id)
     env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
                             energy_stage=energy_stage, user_world_seed=uw_seed)
     raw = {
@@ -3795,10 +3814,12 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
         return raw
     raw["unit_stable"] = run_audit_event(
         snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-        event=event, limb="stable", n_select=n_select, n_eval=n_eval, event_index=idx)
+        event=event, limb="stable", n_select=n_select, n_eval=n_eval, event_index=idx,
+        contract_id=contract_id)
     raw["unit_flex"] = run_audit_event(
         snapshot=snapshot, topology_seed=topology_seed, episode_seed=ep_seed,
-        event=event, limb="flex", n_select=n_select, n_eval=n_eval, event_index=idx)
+        event=event, limb="flex", n_select=n_select, n_eval=n_eval, event_index=idx,
+        contract_id=contract_id)
     raw["event_conformance_record"] = event["conformance_record"]
     raw["duty_map_at_te"] = event["duty_map_at_te"]
     raw["duty_map_before_leave"] = event["duty_map_before_leave"]
@@ -3806,7 +3827,8 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
 
 
 def _audit_episode_worker(*, idx: int, topology_seed: int, coords: dict, coord_hash: str,
-                           energy_stage: str, n_select: int, n_eval: int) -> dict:
+                           energy_stage: str, n_select: int, n_eval: int,
+                           contract_id: str = CONTRACT_ID) -> dict:
     """Pool-worker entry point for one audit-block episode: builds its own
     `config` (see `_calibration_episode_worker`) and delegates to
     `_compute_audit_episode`, returning only a plain, picklable result dict
@@ -3815,16 +3837,14 @@ def _audit_episode_worker(*, idx: int, topology_seed: int, coords: dict, coord_h
     config = build_config()
     return _compute_audit_episode(
         config, idx=idx, topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
-        energy_stage=energy_stage, n_select=n_select, n_eval=n_eval)
+        energy_stage=energy_stage, n_select=n_select, n_eval=n_eval, contract_id=contract_id)
 
 
 def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topology_seed: int,
                                  calibration_report: dict, episode_worlds: list,
                                  invalidated_pairs: list, arm_distinctness_pairs: list,
-                                 calibration_units_stable: list, calibration_units_flex: list,
                                  calibration_units_d_a: list,
-                                 primary_g_component_records: Optional[list] = None,
-                                 primary_g_pairwise_equality: Optional[list] = None) -> None:
+                                 primary_g_component_records: Optional[list] = None) -> None:
     """Folds one calibration episode's already-computed `result` into the
     topology-level accumulators, identically regardless of whether `result`
     came from the sequential loop or a pool worker -- this IS the sequential
@@ -3846,10 +3866,10 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
     invalidated_pairs.extend(result.get("invalidated_pairs", []))
     if primary_g_component_records is not None:
         primary_g_component_records.extend(result.get("component_records", []))
-    if "stable" not in result["results"] or "flex" not in result["results"]:
-        # One or both limbs invalidated by a PrefixReplayMismatchError
-        # (already recorded above) -- this episode contributes neither
-        # B_m nor D_A, and is not counted as qualifying.
+    if "stable" not in result["results"]:
+        # The stable limb's PART_A_CONTROL fork was invalidated by a
+        # PrefixReplayMismatchError (already recorded above) -- this
+        # episode contributes no D_A, and is not counted as qualifying.
         print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
               f"qualifying_event=False cumulative_qualifying={calibration_report['qualifying']}",
               file=sys.stderr, flush=True)
@@ -3858,30 +3878,12 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
     calibration_report["qualifying_joint_events"] += 1
     arm_distinctness_pairs.append(
         (result["duty_map_at_te"], result["duty_map_before_leave"]))
-    g_s, g_f = result["results"]["stable"], result["results"]["flex"]
-    calibration_units_stable.append({
-        "candidates": {"cvn": {"select": np.array([g_s["constructive"]["g_total"]]),
-                                "eval_set": np.array([g_s["constructive"]["g_total"]])}},
-        "eval_keep": np.array([g_s["null"]["g_total"]]),
-    })
-    calibration_units_flex.append({
-        "candidates": {"cvn": {"select": np.array([g_f["constructive"]["g_total"]]),
-                                "eval_set": np.array([g_f["constructive"]["g_total"]])}},
-        "eval_keep": np.array([g_f["null"]["g_total"]]),
-    })
+    g_s = result["results"]["stable"]
     calibration_units_d_a.append({
         "candidates": {"cvn": {"select": np.array([g_s["d_a"]]),
                                 "eval_set": np.array([g_s["d_a"]])}},
         "eval_keep": np.array([0.0]),
     })
-    if primary_g_pairwise_equality is not None:
-        for limb_name, g_entry in (("stable", g_s), ("flex", g_f)):
-            if "sequences_exactly_equal" in g_entry:
-                primary_g_pairwise_equality.append({
-                    "topology_seed": topology_seed, "episode_index": idx, "block": "calibration",
-                    "limb": limb_name, "candidate": "constructive_mixed_vs_null",
-                    "sequences_exactly_equal": g_entry["sequences_exactly_equal"],
-                })
     print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
           f"qualifying_event=True cumulative_qualifying={calibration_report['qualifying']}",
           file=sys.stderr, flush=True)
@@ -3950,10 +3952,12 @@ def _process_audit_result(raw: dict, *, idx: int, topology_seed: int, audit_repo
           file=sys.stderr, flush=True)
 
 
-def _derived_seed(*, topology_seed: int, block: str, idx: int, tag: str) -> int:
+def _derived_seed(*, topology_seed: int, block: str, idx: int, tag: str,
+                   contract_id: str = CONTRACT_ID) -> int:
     return int(stream_seed(
         topology_seed=topology_seed, block=block, episode_seed=idx, limb="na",
-        event_index=0, candidate_target_id=tag, phase="episode", replicate_index=0
+        event_index=0, candidate_target_id=tag, phase="episode", replicate_index=0,
+        contract_id=contract_id,
     ) % (2**31 - 1))
 
 
@@ -3986,16 +3990,24 @@ def _accumulate_episode_leave_stats(report: dict, *, leave_diagnostics: list,
 
 def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audit: int,
                         n_select: int = N_SELECT, n_eval: int = N_EVAL, smoke: bool = False,
-                        energy_stage: str = "S3", workers: int = 1) -> dict:
-    """Item 5's per-topology driver: section 9 pinning, the calibration
-    block (B_m, and now D_A -- Part-A conformance, stable limb only) and the
-    audit block (U*_m, both limbs), assembled into the exact shapes
-    `compute_t_m_bootstrap`/`compute_part_a_bounds` consume. Also
-    accumulates this topology's `invalidated_pairs` (item 3: any
-    `PrefixReplayMismatchError`, excluded and reported, never repaired) and
-    `arm_distinctness_pairs` (item 3's spot check witnesses: every certified
-    joint event's `(duty_map_at_te, duty_map_before_leave)` pair -- flex
-    certification already guarantees the vacancy was coverable).
+                        energy_stage: str = "S3", workers: int = 1,
+                        contract_id: str = CONTRACT_ID) -> dict:
+    """Item 5's per-topology driver: section 9 pinning, the PART_A_CONTROL
+    block (D_A, stable limb only) and the focal-audit block (U*_m, both
+    limbs), assembled into the exact shapes `assemble_audit_result`
+    consumes. Also accumulates this topology's `invalidated_pairs` (item 3:
+    any `PrefixReplayMismatchError`, excluded and reported, never repaired)
+    and `arm_distinctness_pairs` (item 3's spot check witnesses: every
+    certified joint event's `(duty_map_at_te, duty_map_before_leave)` pair
+    -- flex certification already guarantees the vacancy was coverable).
+
+    `contract_id` (contract section 3's R4 population/seed namespace):
+    defaults to the module `CONTRACT_ID` for every non-R4 run; `main()`
+    passes `R4_POPULATION_NAMESPACE` instead whenever this run's whole
+    topology-seed set is exactly the frozen `TOPOLOGY_SEEDS_R4`, so R4
+    draws disjoint episode, energy-permutation, user-world and continuation
+    streams from any R3 run at the identical `(topology_seed, block,
+    episode_index)`.
 
     `workers`: opt-in process parallelism ACROSS episodes WITHIN this one
     topology (never across topologies, and never splitting the calibration
@@ -4042,32 +4054,31 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
     primary_g_component_records: list = []
     primary_g_pairwise_equality: list = []
 
-    calibration_units_stable, calibration_units_flex, calibration_units_d_a = [], [], []
+    calibration_units_d_a = []
     calibration_report = _new_episode_block_report()
     if workers <= 1:
         for idx in range(n_calibration):
             calibration_report["episodes_attempted"] += 1
-            ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="episode_seed")
-            en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx, tag="energy_seed")
+            ep_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx,
+                                     tag="episode_seed", contract_id=contract_id)
+            en_seed = _derived_seed(topology_seed=topology_seed, block="calibration", idx=idx,
+                                     tag="energy_seed", contract_id=contract_id)
             result = run_calibration_episode(
                 config, topology_seed=topology_seed, episode_seed=ep_seed, energy_seed=en_seed,
                 coords=coords, coord_hash=coord_hash, energy_stage=energy_stage,
-                episode_index=idx)
+                episode_index=idx, contract_id=contract_id)
             _process_calibration_result(
                 result, idx=idx, ep_seed=ep_seed, topology_seed=topology_seed,
                 calibration_report=calibration_report, episode_worlds=episode_worlds,
                 invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
-                calibration_units_stable=calibration_units_stable,
-                calibration_units_flex=calibration_units_flex,
                 calibration_units_d_a=calibration_units_d_a,
-                primary_g_component_records=primary_g_component_records,
-                primary_g_pairwise_equality=primary_g_pairwise_equality)
+                primary_g_component_records=primary_g_component_records)
     else:
         with _pinned_worker_env():
             pooled = _run_indexed_in_pool(
                 _calibration_episode_worker, range(n_calibration), workers,
                 topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
-                energy_stage=energy_stage)
+                energy_stage=energy_stage, contract_id=contract_id)
         for idx in range(n_calibration):
             calibration_report["episodes_attempted"] += 1
             ep_seed, result = pooled[idx]
@@ -4075,11 +4086,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
                 result, idx=idx, ep_seed=ep_seed, topology_seed=topology_seed,
                 calibration_report=calibration_report, episode_worlds=episode_worlds,
                 invalidated_pairs=invalidated_pairs, arm_distinctness_pairs=arm_distinctness_pairs,
-                calibration_units_stable=calibration_units_stable,
-                calibration_units_flex=calibration_units_flex,
                 calibration_units_d_a=calibration_units_d_a,
-                primary_g_component_records=primary_g_component_records,
-                primary_g_pairwise_equality=primary_g_pairwise_equality)
+                primary_g_component_records=primary_g_component_records)
 
     audit_units_stable, audit_units_flex, audit_events_out = [], [], []
     audit_report = _new_episode_block_report()
@@ -4088,7 +4096,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             audit_report["episodes_attempted"] += 1
             raw = _compute_audit_episode(
                 config, idx=idx, topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
-                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval)
+                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval,
+                contract_id=contract_id)
             _process_audit_result(
                 raw, idx=idx, topology_seed=topology_seed, audit_report=audit_report,
                 episode_worlds=episode_worlds, invalidated_pairs=invalidated_pairs,
@@ -4102,7 +4111,8 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
             pooled = _run_indexed_in_pool(
                 _audit_episode_worker, range(n_audit), workers,
                 topology_seed=topology_seed, coords=coords, coord_hash=coord_hash,
-                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval)
+                energy_stage=energy_stage, n_select=this_n_select, n_eval=this_n_eval,
+                contract_id=contract_id)
         for idx in range(n_audit):
             audit_report["episodes_attempted"] += 1
             raw = pooled[idx]
@@ -4119,8 +4129,6 @@ def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audi
         "topology_record": record,
         "calibration_report": calibration_report,
         "audit_report": audit_report,
-        "calibration_units_stable": calibration_units_stable,
-        "calibration_units_flex": calibration_units_flex,
         "calibration_units_d_a": calibration_units_d_a,
         "audit_units_stable": audit_units_stable,
         "audit_units_flex": audit_units_flex,
@@ -4155,24 +4163,27 @@ def topology_unit_for_serialization(r: dict) -> dict:
     contract choice): the exact subset of one `run_topology_audit` topology
     result that `assemble_audit_result` reads --
     `qualifying_calibration_episodes`, `qualifying_audit_episodes`,
-    `invalidated_pairs`, `arm_distinctness_pairs`, `calibration_units_stable`,
-    `calibration_units_flex`, `calibration_units_d_a`, `audit_units_stable`,
-    `audit_units_flex` -- plus `topology_seed` (which `assemble_audit_result`
-    itself never reads) so a pooler can reorder shards' topologies back into
-    ascending topology-seed order regardless of shard/argument order. This
-    is what `main()` embeds under `topology_units` and what
-    `scripts/pool_d7_s_event_aligned_shards.py` reconstructs from JSON --
-    every numpy array nests unchanged and round-trips via `_json_default`
-    (list of full-precision floats) on the way out and `np.asarray(...,
-    dtype=float)` on the way back in."""
+    `invalidated_pairs`, `arm_distinctness_pairs`, `calibration_units_d_a`,
+    `audit_units_stable`, `audit_units_flex` -- plus `topology_seed` (which
+    `assemble_audit_result` itself never reads) so a pooler can reorder
+    shards' topologies back into ascending topology-seed order regardless
+    of shard/argument order. This is what `main()` embeds under
+    `topology_units` and what `scripts/pool_d7_s_event_aligned_shards.py`
+    reconstructs from JSON -- every numpy array nests unchanged and
+    round-trips via `_json_default` (list of full-precision floats) on the
+    way out and `np.asarray(..., dtype=float)` on the way back in.
+
+    R4 (contract sections 8/10): `calibration_units_stable`/
+    `calibration_units_flex` (the R3 `B_m` constructive-vs-null contrast)
+    are DELETED from this whitelist, not carried alongside `calibration_
+    units_d_a` behind a flag -- neither has a conclusion-bearing role in
+    R4, and the null schedule that fed them is no longer run at all."""
     return {
         "topology_seed": r["topology_record"]["topology_seed"],
         "qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
         "qualifying_audit_episodes": r["qualifying_audit_episodes"],
         "invalidated_pairs": r["invalidated_pairs"],
         "arm_distinctness_pairs": r["arm_distinctness_pairs"],
-        "calibration_units_stable": r["calibration_units_stable"],
-        "calibration_units_flex": r["calibration_units_flex"],
         "calibration_units_d_a": r["calibration_units_d_a"],
         "audit_units_stable": r["audit_units_stable"],
         "audit_units_flex": r["audit_units_flex"],
@@ -4206,7 +4217,17 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     governs only the episode COUNTS. `None` for either count means
     "use this mode's own default" -- smoke's default stays 1 calibration + 1
     audit episode when no override is given, matching its pre-existing fast
-    proof-sized behavior."""
+    proof-sized behavior.
+
+    R4 population layer: the plain no-flags default is now the frozen
+    `TOPOLOGY_SEEDS_R4` (contract section 11: "the formal path accepts only
+    the exact R4 topology set"), not R3's `TOPOLOGY_SEEDS_INITIAL` -- R4
+    supersedes R3's conclusion-bearing measurement and result layer, so the
+    formal (non-dev, non-smoke, non-override) path is now the R4 run.
+    `--topology-seeds` remains available for development/testing, but
+    `main()` never lets a seed list other than the exact frozen
+    `TOPOLOGY_SEEDS_R4` earn the R4 contract/population-namespace identity
+    fields (`r4_artifact_identity`, freshness sentinel condition 6)."""
     if smoke:
         topology_seeds = [TOPOLOGY_SEED_DEV]
         default_calibration, default_audit = 1, 1
@@ -4217,7 +4238,7 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
         topology_seeds = [TOPOLOGY_SEED_DEV]
         default_calibration, default_audit = N_CALIBRATION_EPISODES, N_AUDIT_EPISODES
     else:
-        topology_seeds = list(TOPOLOGY_SEEDS_INITIAL)
+        topology_seeds = list(TOPOLOGY_SEEDS_R4)
         default_calibration, default_audit = N_CALIBRATION_EPISODES, N_AUDIT_EPISODES
     return {
         "topology_seeds": topology_seeds,
@@ -4232,7 +4253,7 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     exact shape `run_topology_audit` returns) without a real environment.
 
     Pools per-topology conformance and Part-A inputs exactly as section 8
-    specifies (both UNCHANGED by R4, out of this task's scope):
+    specifies:
 
     `conformance_ok` -- `compute_conformance_ok` over the pooled
     `invalidated_pairs` count (every topology's `PrefixReplayMismatchError`
@@ -4241,17 +4262,18 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     `arm_distinctness_check` over every topology's certified-event duty-map
     pairs pooled together.
 
-    `part_a_contradiction` -- `compute_part_a_bounds` bootstraps D_A jointly
-    with B_stable from the pooled per-topology `calibration_units_d_a`/
-    `calibration_units_stable`, sharing the SAME `shared_topology_indices`
-    stream drawn once below (section 8's common resampling stream);
-    `part_a_conformance` turns those bounds into a verdict string;
-    `map_part_a_verdict_to_inputs` maps ONLY `PART_A_CONTRADICTION` to
-    `part_a_contradiction=True` -- `PART_A_CONFORMANCE_UNRESOLVED` (like
-    `CONFORMANCE_PASS` and `NOT_APPLICABLE`) never flips it, per section 7:
-    the unresolved diagnostic never suppresses an otherwise valid focal
-    result. It still lands in the JSON under `part_a.verdict` for the
-    record.
+    `part_a_contradiction` -- `compute_part_a_control_bounds` bootstraps D_A
+    alone (no joint B_stable draw -- R4 rederives PART_A_CONTROL at the
+    absolute `MATERIALITY_MARGIN` anchor, not R3's data-dependent
+    `0.05*B_stable` scale) from the pooled per-topology `calibration_units_
+    d_a`, sharing the SAME `shared_topology_indices` stream drawn once
+    below (section 8's common resampling stream); `part_a_control_verdict`
+    turns those bounds into a verdict string; `map_part_a_verdict_to_inputs`
+    maps ONLY `PART_A_CONTRADICTION` to `part_a_contradiction=True` --
+    `PART_A_CONFORMANCE_UNRESOLVED` (like `PART_A_FULL_SYNC_MATERIALLY_
+    WORSE` and `NOT_APPLICABLE`) never flips it, per section 7: the
+    unresolved diagnostic never suppresses an otherwise valid focal result.
+    It still lands in the JSON under `part_a.verdict` for the record.
 
     R4 section 4/5/6/7 (this task's scope): `compute_focal_component_
     invariance` pools EVERY topology's `audit_units_stable`/
@@ -4350,21 +4372,19 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             shared_topology_indices=shared_topology_indices, seed=BOOTSTRAP_SEED)
         out["u_star_bootstrap"] = u_star
 
-        # Part-A conformance (contract section 8, unchanged by this task):
-        # the SAME shared topology-resampling stream every other primary
+        # PART_A_CONTROL, rederived at the absolute anchor (contract section
+        # 8): the SAME shared topology-resampling stream every other primary
         # quantity in this run uses.
-        part_a_bounds = compute_part_a_bounds(
+        part_a_bounds = compute_part_a_control_bounds(
             d_a_topology_units=[r["calibration_units_d_a"] for r in topology_results],
-            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
             shared_topology_indices=shared_topology_indices, seed=BOOTSTRAP_SEED)
         if part_a_bounds is None:
             part_a_verdict = "NOT_APPLICABLE"
         else:
-            part_a_verdict = part_a_conformance(
+            part_a_verdict = part_a_control_verdict(
                 lower_contrast_lcb=part_a_bounds["lower_contrast_lcb"],
                 lower_contrast_ucb=part_a_bounds["lower_contrast_ucb"],
-                upper_contrast_lcb=part_a_bounds["upper_contrast_lcb"],
-                b_stable_lcb=part_a_bounds["b_stable_lcb"])
+                upper_contrast_lcb=part_a_bounds["upper_contrast_lcb"])
         part_a_contradiction, part_a_diagnostic = map_part_a_verdict_to_inputs(part_a_verdict)
         out["part_a"] = {
             "verdict": part_a_diagnostic,
@@ -4459,6 +4479,18 @@ def main() -> None:
         episodes_calibration=args.episodes_calibration, episodes_audit=args.episodes_audit)
     topology_seeds, n_calibration, n_audit = plan["topology_seeds"], plan["n_calibration"], plan["n_audit"]
 
+    # R4 freshness sentinel condition 6: the ONLY seed list that ever earns
+    # the R4 contract/population-namespace identity fields (condition 3) and
+    # the R4 population/seed namespace used to derive every conclusion-
+    # bearing RNG stream below is the exact frozen `TOPOLOGY_SEEDS_R4` list.
+    # Smoke, dev and every `--topology-seeds` override -- arbitrary or not
+    # -- fall back to the legacy `CONTRACT_ID` namespace and get no R4
+    # identity at all, so none of them can produce a conclusion-bearing R4
+    # artifact no matter what is passed on the command line.
+    r4_identity = r4_artifact_identity(topology_seeds)
+    run_contract_id = (R4_POPULATION_NAMESPACE if r4_identity["r4_population_namespace"]
+                        else CONTRACT_ID)
+
     config = build_config()
     topology_results = []
     topology_hash_failures = []
@@ -4474,7 +4506,7 @@ def main() -> None:
         try:
             topo_out = run_topology_audit(
                 config, topology_seed=seed, n_calibration=n_calibration, n_audit=n_audit,
-                smoke=args.smoke, workers=args.workers)
+                smoke=args.smoke, workers=args.workers, contract_id=run_contract_id)
         except TopologyMismatchError as exc:
             topology_hash_failures.append({"topology_seed": seed, "reason": str(exc)})
             continue
@@ -4482,13 +4514,17 @@ def main() -> None:
         if args.out:
             write_topology_record(args.out, topo_out["topology_record"])
 
-    # Section 9's one permissible expansion (ruling 2026-07-27): refuses a
-    # run whose topology-seed set IS the registered 16-topology expansion
-    # union unless the frozen predicate, evaluated against the initial 8
-    # topologies alone, licenses it. A no-op for every other seed set --
-    # smoke, dev, the plain 8-seed default -- so those affordances are
-    # unaffected.
-    check_expansion_justified(topology_seeds, topology_results, topology_hash_failures)
+    # R4 contract section 2: there is no expansion path. Not "a rule that
+    # rarely fires" -- none. R3's one-permissible-expansion gate is deleted
+    # along with its call site.
+
+    if args.smoke:
+        note = "SMOKE_NOT_A_RESULT"
+    elif r4_identity["r4_population_namespace"]:
+        note = "Real orchestration run. R4 conclusion-bearing population."
+    else:
+        note = ("Real orchestration run. NOT R4 conclusion-bearing -- topology-seed "
+                "set does not match the frozen R4 population.")
 
     result = {
         "contract": CONTRACT_PATH,
@@ -4496,7 +4532,8 @@ def main() -> None:
         "procedure_version": TOPOLOGY_PROCEDURE_VERSION,
         "topology_seeds": topology_seeds,
         "smoke": bool(args.smoke),
-        "note": "SMOKE_NOT_A_RESULT" if args.smoke else "Real orchestration run.",
+        "note": note,
+        **r4_identity,
         "topology_records": [r["topology_record"] for r in topology_results],
         "calibration_reports": [r["calibration_report"] for r in topology_results],
         "audit_reports": [r["audit_report"] for r in topology_results],

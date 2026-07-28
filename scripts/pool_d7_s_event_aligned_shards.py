@@ -1,33 +1,35 @@
 """Pool per-topology D7.S event-aligned audit shards into the JSON one
 monolithic `audit_d7_s_event_aligned.py` run would write.
 
-The formal joint audit runs 8 topology seeds (or 16 under the one permissible
-expansion, section 9 of the frozen contract); one process per topology gives
-topology-level parallelism. Each shard is `audit_d7_s_event_aligned.py`'s
-`main()` run with one or more `--topology-seeds` values -- sharding here is BY
-WHOLE TOPOLOGY SEED, one or more seeds per shard, NEVER splitting episodes
-within a topology (unlike the D7.S part-B persistence-margin pooler's
-episode-tiling in `pool_d7_s_persistence_shards.py`, which does not apply to
-this instrument).
+The formal joint audit runs the frozen R4 population of 8 topology seeds
+(`TOPOLOGY_SEEDS_R4`, 20260734..41) -- R4 has no expansion path (contract
+section 2: "There is no expansion path... not a rule that rarely fires --
+none"), so there is exactly one frozen seed-set union, never a choice of two.
+One process per topology gives topology-level parallelism. Each shard is
+`audit_d7_s_event_aligned.py`'s `main()` run with one or more
+`--topology-seeds` values -- sharding here is BY WHOLE TOPOLOGY SEED, one or
+more seeds per shard, NEVER splitting episodes within a topology (unlike the
+D7.S part-B persistence-margin pooler's episode-tiling in
+`pool_d7_s_persistence_shards.py`, which does not apply to this instrument).
 
 Every shard's JSON already carries (Task A, `audit_d7_s_event_aligned.py`'s
 `main()`) a complete, numerically lossless `topology_units` entry per topology
 it successfully processed -- every key `assemble_audit_result` consumes
 (`qualifying_calibration_episodes`, `qualifying_audit_episodes`,
-`invalidated_pairs`, `arm_distinctness_pairs`, `calibration_units_stable`,
-`calibration_units_flex`, `calibration_units_d_a`, `audit_units_stable`,
-`audit_units_flex`), plus `topology_hash_failures` for topologies that failed
-the pinned-coordinate hash assert. This pooler:
+`invalidated_pairs`, `arm_distinctness_pairs`, `calibration_units_d_a`,
+`audit_units_stable`, `audit_units_flex`), plus `topology_hash_failures` for
+topologies that failed the pinned-coordinate hash assert. This pooler:
 
 1. Refuses to pool anything whose identity is not proven (SystemExit on any
    violation): every shard shares the same `contract`/`contract_id`/
    `procedure_version`; every shard's `smoke` flag is False unless
    `--allow-smoke` is passed (pooling smoke shards -- SMOKE_NOT_A_RESULT -- is
    otherwise refused); every pair of shards' declared topology-seed sets is
-   disjoint; the UNION of every shard's topology seeds equals one of the two
-   frozen sets -- `TOPOLOGY_SEEDS_INITIAL` (20260726..33) or that set plus
-   `TOPOLOGY_SEEDS_EXPANSION` (20260734..41) -- unless `--allow-any-seeds` is
-   passed (development pooling only).
+   disjoint; the UNION of every shard's topology seeds equals the frozen R4
+   population `TOPOLOGY_SEEDS_R4` (20260734..41) -- NEVER `TOPOLOGY_SEEDS_
+   INITIAL` (R3's 8 seeds) or any union containing an R3 seed, per freshness
+   sentinel condition 5 ("no R3 topology unit is accepted by the R4 pooler")
+   -- unless `--allow-any-seeds` is passed (development pooling only).
 2. Reconstructs `topology_results` in ASCENDING topology-seed order
    REGARDLESS of shard/argument order -- deterministic and load-bearing, not
    cosmetic: section 8's hierarchical bootstrap resamples topologies by
@@ -66,9 +68,18 @@ _SPEC.loader.exec_module(audit)
 
 CONTRACT_IDENTITY_FIELDS = ("contract", "contract_id", "procedure_version")
 
+# R4 freshness sentinel condition 5 (docs/research/designs/
+# D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md section 3): "no R3 topology unit
+# is accepted by the R4 pooler." R4 supersedes R3's conclusion-bearing
+# measurement and result layer, and R4 has no expansion path (section 2:
+# "There is no expansion path... not a rule that rarely fires -- none"), so
+# this pooler now accepts exactly ONE frozen seed-set union -- the R4
+# population -- never R3's initial 8, and never the old initial+expansion
+# union (which would silently let R3 topology units ride into a pooled R4
+# artifact alongside genuine R4 ones). R3's own historical pooled artifacts
+# under logs/ are already complete and are never repooled through this path.
 FROZEN_SEED_SETS = (
-    frozenset(audit.TOPOLOGY_SEEDS_INITIAL),
-    frozenset(audit.TOPOLOGY_SEEDS_INITIAL) | frozenset(audit.TOPOLOGY_SEEDS_EXPANSION),
+    frozenset(audit.TOPOLOGY_SEEDS_R4),
 )
 
 
@@ -107,14 +118,18 @@ def _rebuild_arm_distinctness_pairs(pairs: list) -> list:
 def _reconstruct_topology_result(unit: dict) -> dict:
     """Inverts `audit.topology_unit_for_serialization`: the exact subset of
     keys `assemble_audit_result` reads, with numpy arrays and duty-map int
-    keys rebuilt."""
+    keys rebuilt.
+
+    R4 (contract sections 8/10): `calibration_units_stable`/
+    `calibration_units_flex` (R3's `B_m` constructive-vs-null contrast) are
+    DELETED from this reconstruction whitelist, not carried alongside
+    `calibration_units_d_a` behind a flag -- neither has a conclusion-
+    bearing role in R4."""
     return {
         "qualifying_calibration_episodes": unit["qualifying_calibration_episodes"],
         "qualifying_audit_episodes": unit["qualifying_audit_episodes"],
         "invalidated_pairs": unit["invalidated_pairs"],
         "arm_distinctness_pairs": _rebuild_arm_distinctness_pairs(unit["arm_distinctness_pairs"]),
-        "calibration_units_stable": [_rebuild_unit_arrays(u) for u in unit["calibration_units_stable"]],
-        "calibration_units_flex": [_rebuild_unit_arrays(u) for u in unit["calibration_units_flex"]],
         "calibration_units_d_a": [_rebuild_unit_arrays(u) for u in unit["calibration_units_d_a"]],
         "audit_units_stable": [_rebuild_unit_arrays(u) for u in unit["audit_units_stable"]],
         "audit_units_flex": [_rebuild_unit_arrays(u) for u in unit["audit_units_flex"]],
@@ -164,12 +179,12 @@ def _assert_identity(shards: list[dict], paths: list[str], *, allow_smoke: bool,
 
     union = set().union(*seed_sets)
     if not allow_any_seeds and union not in FROZEN_SEED_SETS:
-        initial = sorted(audit.TOPOLOGY_SEEDS_INITIAL)
-        expanded = sorted(set(audit.TOPOLOGY_SEEDS_INITIAL) | set(audit.TOPOLOGY_SEEDS_EXPANSION))
+        r4 = sorted(audit.TOPOLOGY_SEEDS_R4)
         raise SystemExit(
-            f"pooled topology-seed union {sorted(union)} matches neither frozen "
-            f"set (initial {initial} or expanded {expanded}). Pass "
-            "--allow-any-seeds for development pooling of a non-frozen set.")
+            f"pooled topology-seed union {sorted(union)} does not match the frozen "
+            f"R4 population {r4} -- no R3 topology unit is accepted by the R4 "
+            "pooler (freshness sentinel condition 5). Pass --allow-any-seeds for "
+            "development pooling of a non-frozen set.")
 
 
 def pool(shards: list[dict], *, paths: list[str] | None = None, allow_smoke: bool = False,
