@@ -85,29 +85,46 @@ def test_configuration_seed_backend_and_formal_admission_are_exact(
     }
     assert runner.bootstrap_seed(formal=True) == 10_457_045
     assert runner.bootstrap_seed(formal=False) == 11_357_045
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
-    with pytest.raises(ValueError, match="ALIGNED source"):
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "ef3a2fa273d1506c2bc88f50db8e06810e946809"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "d073d13317c09980863a700f6241573dd6709cdf"
+    )
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
         runner._backend._validate_formal_preflight(
-            tmp_path / "unbound_alignment_never_read",
+            tmp_path / "inherited_g45_alignment_never_read",
             source_commit=TEST_SOURCE_COMMIT,
             alignment_disposition="ALIGNED",
-            aligned_source_commit=TEST_SOURCE_COMMIT,
-            alignment_stage_commit="7" * 40,
+            aligned_source_commit=(
+                source.ACCEPTED_G45_ALIGNED_IMPLEMENTATION_COMMIT
+            ),
+            alignment_stage_commit=(
+                source.ACCEPTED_G45_ALIGNMENT_STAGE_COMMIT
+            ),
+            accepted_anchor_root=ANCHOR_ROOT.resolve(),
+        )
+    with pytest.raises(ValueError, match="bounded preflight root"):
+        runner._backend._validate_formal_preflight(
+            None,
+            source_commit=TEST_SOURCE_COMMIT,
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
             accepted_anchor_root=ANCHOR_ROOT.resolve(),
         )
     never_root = tmp_path / "formal_must_not_start"
-    with pytest.raises(ValueError, match="ALIGNED source"):
+    with pytest.raises(ValueError, match="bounded preflight root"):
         runner.train(
             run_root=never_root,
             source_commit=TEST_SOURCE_COMMIT,
             formal=True,
             authorization_token=runner.AUTHORIZATION_TOKEN,
             accepted_anchor_root=ANCHOR_ROOT,
-            preflight_root=tmp_path / "unread_preflight",
+            preflight_root=None,
             alignment_disposition="ALIGNED",
-            aligned_source_commit=TEST_SOURCE_COMMIT,
-            alignment_stage_commit="7" * 40,
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
         )
     assert not never_root.exists()
     for value in (0, 7):

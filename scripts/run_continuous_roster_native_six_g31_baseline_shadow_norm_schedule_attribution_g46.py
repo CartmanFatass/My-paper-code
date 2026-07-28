@@ -62,9 +62,13 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM_SCHEDULE_"
     "ATTRIBUTION_G46_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# A new claim-bearing source remains fail closed until its independent audit.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Exact target/stage mechanically established by the independent G46 audit.
+ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
+    "ef3a2fa273d1506c2bc88f50db8e06810e946809"
+)
+ALIGNMENT_STAGE_COMMIT: str | None = (
+    "d073d13317c09980863a700f6241573dd6709cdf"
+)
 ACCEPTED_ANCHOR_ROOT_RELATIVE = _base.ACCEPTED_ANCHOR_ROOT_RELATIVE
 
 INVALID_BRANCH = (

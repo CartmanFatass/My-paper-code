@@ -19,9 +19,13 @@ formal_authorization_token=CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM
 artifact_schema_version=2
 implementation_commit=the_Git_commit_containing_this_index_and_all_four_G46_code_test_paths
 alignment_audit_id=CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM_SCHEDULE_ATTRIBUTION_G46_CODE_SCIENCE_ALIGNMENT_AUDIT
-aligned_g46_implementation_commit=pending_independent_code_science_alignment_audit
-alignment_stage_commit=pending_independent_code_science_alignment_audit
-formal_admission=closed_until_exact_ALIGNED_target_and_stage_plus_same_source_nonformal_preflight_and_formal_authorization_token
+alignment_audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+alignment_audit_stage_commit=d073d13317c09980863a700f6241573dd6709cdf
+alignment_audit_disposition=ALIGNED
+aligned_g46_implementation_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+alignment_stage_commit=d073d13317c09980863a700f6241573dd6709cdf
+formal_interface_binding_commit=the_Git_commit_containing_this_index_and_the_exact_runner_test_binding
+formal_admission=exact_ALIGNED_target_and_stage_plus_same_source_nonformal_preflight_and_formal_authorization_token
 binding=the_Git_commit_containing_this_index_and_every_listed_code_test_path
 acceptance_owner=code_project_manager
 scientific_authority=external_pro
@@ -47,4 +51,4 @@ complexity=H48|K_search0|hypothetical_trajectory_count0|hypothetical_transitions
 | G46-RUNNER-12 | Frozen counts, inherited seeds, CPU C++ backend and launch-fixed worker controls define execution. | `scripts/run_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46.py::_configuration`; `::source_controls`; `::prove_two_process_update_equivalence` | Nonformal is 14,592 transitions/40 steps; formal is 396,288/1,200. G45 seeds are unchanged. Python fallback is false; workers 1-6 are single-threaded and deterministic preassigned-index merge yields bitwise-equal model, Adam and evidence digests. | runner configuration and readiness lifecycle tests; six-phase execution-readiness receipt | Seed/budget drift, nested threading, Python fallback, adaptive scheduling or completion-order merge cannot enter. |
 | G46-ESTIMAND-13 | Access, SHADOW-minus-RAW confidence and the five first-match labels are frozen. | runner `::_comparison`; `::select_g46_result_branch`; inherited access/bootstrap helpers | Both-arm access plus every UCB `<=0.05` selects RAW sufficiency; reference access plus raw confident failure or strict material advantage selects SHADOW advantage; invalid and source failure retain precedence. | runner `::test_result_branch_order_and_equality_boundary`; protected G45 confidence tests | Diagnostics, wall time, equality drift, independent mate resampling or branch reordering cannot relabel an earlier outcome. |
 | G46-ISOLATION-14 | G46 reuses accepted orchestration privately and leaves canonical G45 unchanged. | runner `::_load_isolated_g45_orchestration`; `::_patch_private_orchestration` | Only the private nested backend receives G46 source, workers and identities; canonical G45 arms and algorithm ID remain unchanged. | runner `::test_g46_isolated_orchestration_does_not_mutate_g45` | Global monkey-patching or cross-experiment source identity leakage cannot occur. |
-| G46-AUTHORITY-15 | Formal execution is closed until an independent G46 alignment target/stage is bound. | runner constants `ALIGNED_IMPLEMENTATION_COMMIT`; `ALIGNMENT_STAGE_COMMIT`; formal preflight validator | The new implementation serializes pending alignment identities and rejects formal admission even with a token until a later Code PM binding follows an independent ALIGNED audit. | runner `::test_configuration_seed_backend_and_formal_admission_are_exact` | G45 alignment, a caller-selected commit/stage or a missing same-source preflight cannot authorize G46 formal compute. |
+| G46-AUTHORITY-15 | Formal execution is bound to the exact independently ALIGNED G46 target and stage and remains closed without its other admission inputs. | runner constants `ALIGNED_IMPLEMENTATION_COMMIT`; `ALIGNMENT_STAGE_COMMIT`; formal preflight validator | The constants equal `ef3a2fa273d1506c2bc88f50db8e06810e946809` and `d073d13317c09980863a700f6241573dd6709cdf`; inherited G45 or caller-selected identities fail before artifact reads, while the exact pair advances only to the required same-source preflight gate. | runner `::test_configuration_seed_backend_and_formal_admission_are_exact` | G45 alignment, a caller-selected commit/stage, token alone or a missing same-source preflight cannot authorize G46 formal compute. |
