@@ -80,6 +80,25 @@ independently satisfy minimum support before any focal margin is read; on failur
 pooler claims were not reviewed -- the evidence fence did not carry the tests or
 the mutation notes. Check them at the realization gate.
 
+### An ambiguity in the freeze ruling, and how it was read
+
+The R4 contract-completion ruling ends *"This review authorizes neither
+implementation nor compute"*, while its own NEXT_ACTION lists **C. Implement the
+smallest R4 delta** and **E. Run a proof-sized assembled-path exercise**. Read
+literally those conflict.
+
+**Resolved in favour of proceeding with A-E**, on the strength of E's closing
+sentence: *"Only after those close may the fixed R4 run return to the project's
+separate conclusion-bearing compute-authorization path."* That sentence only
+makes sense if A-E are the authorized work and the closing guard is on the
+**formal R4 measurement**. Under the opposite reading the ruling would name a
+next action nobody may perform, and the closure sequence could never begin.
+
+This is a Project Manager reading of an ambiguous ruling, not a ruling. It is
+recorded here rather than buried in a commit message so it can be challenged. If
+it is wrong, the wrong thing is the R4 result-layer implementation, which is
+uncommitted-to-a-run and reversible; no compute was spent on it.
+
 ### The road here, in pointers
 
 Each of these is fully recorded in its round directory and its evidence note.
