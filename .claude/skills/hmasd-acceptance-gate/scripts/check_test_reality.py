@@ -124,6 +124,44 @@ def _module_qualified_calls(tree: ast.Module) -> set[tuple[str, str]]:
             if stem.endswith(".py"):
                 loaded_by_path.add(stem[:-3])
 
+    # Which local variables actually hold an importlib-loaded module. Without
+    # this the crediting below is far too loose: every test file here ends with
+    # `pytest.main([__file__, "-q"])`, so the attribute name `main` is present in
+    # every file, and crediting it to any module named by a string constant
+    # suppressed ENTRY_UNRUN on the very example this checker was written from.
+    # Measured by the implementer: at the pre-repair baseline, blanking that one
+    # footer line made the finding reappear.
+    module_vars: set[str] = set()
+    _LOADERS = {"module_from_spec", "import_module", "load_module", "SourceFileLoader"}
+
+    def _callee(call: ast.Call) -> str | None:
+        f = call.func
+        if isinstance(f, ast.Attribute):
+            return f.attr
+        return f.id if isinstance(f, ast.Name) else None
+
+    # One level of indirection: both test files here wrap the importlib dance in
+    # a local `_load(name)` helper, so the module variable is assigned from that
+    # helper, not from module_from_spec directly. Treating only the direct form
+    # as a module variable made `pooling.main()` invisible.
+    loader_funcs: set[str] = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        for inner in ast.walk(node):
+            if isinstance(inner, ast.Call) and _callee(inner) in _LOADERS:
+                loader_funcs.add(node.name)
+                break
+
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Assign) or not isinstance(node.value, ast.Call):
+            continue
+        if _callee(node.value) not in (_LOADERS | loader_funcs):
+            continue
+        for target in node.targets:
+            if isinstance(target, ast.Name):
+                module_vars.add(target.id)
+
     calls: set[tuple[str, str]] = set()
     bare: set[str] = set()
     attribute_calls: set[str] = set()
@@ -132,7 +170,8 @@ def _module_qualified_calls(tree: ast.Module) -> set[tuple[str, str]]:
             continue
         func = node.func
         if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
-            attribute_calls.add(func.attr)
+            if func.value.id in module_vars:
+                attribute_calls.add(func.attr)
             module = alias_to_module.get(func.value.id)
             if module:
                 calls.add((module, func.attr))
