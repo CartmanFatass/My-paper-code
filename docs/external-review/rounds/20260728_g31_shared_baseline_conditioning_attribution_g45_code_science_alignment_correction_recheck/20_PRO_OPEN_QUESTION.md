@@ -30,9 +30,9 @@ successor, or reactivate G33.
 - `docs/research/cdc/CONJECTURES.md`
 - `docs/research/cdc/IDEA_PORTFOLIO.md`
 - `docs/report/ITERATION_34.md`
-- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/20_PRO_OPEN_QUESTION.md`
-- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/21_PRO_OPEN_RAW.md`
-- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_code_science_alignment_audit/20_PRO_OPEN_QUESTION.md`
+- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_code_science_alignment_audit/50_MECHANICAL_INTAKE_RECORD.md`
 - `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_CODE_SCIENCE_INDEX.md`
 - `ha_ctse_process/continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py`
 - `scripts/run_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py`
