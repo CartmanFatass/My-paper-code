@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4_CLOSURE step E -- the proof-sized assembled-path exercise on 20260725. Smoke run in flight; nine-outcome derivation follows it. No formal run.
+next_boundary=R4 closure A-E COMPLETE. The formal R4 run awaits its own conclusion-bearing compute authorization; nothing else gates it.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -107,7 +107,7 @@ B decision ledger, nine bindings        DONE  D7_S_R4_DECISION_LEDGER.md
 C implement the smallest R4 delta       DONE  3de74552 + 7fa90070
 D realization-conformance review        REJECT -- 6 of 10 clean, four blocking
 D' conformance repair                   DONE  28d6933f -- R1-R5, 309 passed
-E proof-sized exercise on 20260725      next, and the last gate before the run
+E proof-sized exercise on 20260725      DONE  13 outcomes, STEP_E_ASSEMBLED_PATH_OK
 ```
 
 **Two implementation bindings the Project Manager decided in D', owed to Pro as
