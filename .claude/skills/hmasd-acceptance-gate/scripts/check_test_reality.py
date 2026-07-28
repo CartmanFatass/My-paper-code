@@ -109,13 +109,30 @@ def _module_qualified_calls(tree: ast.Module) -> set[tuple[str, str]]:
             for a in node.names:
                 direct.add((module, a.asname or a.name))
 
+    # Modules named in string constants. This repository loads the module under
+    # test with importlib.util.spec_from_file_location(...), so the binding is an
+    # assignment, not an Import node, and alias resolution alone cannot see
+    # `audit.main()`. Attributing attribute-calls to every module a file names in
+    # a string over-approximates -- deliberately. A false ENTRY_UNRUN on a module
+    # that IS exercised is the worse error: a checker that cries wolf gets
+    # ignored, and then it protects nothing.
+    loaded_by_path: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Constant) and isinstance(node.value, str):
+            text = node.value.replace("\\", "/")
+            stem = text.rsplit("/", 1)[-1]
+            if stem.endswith(".py"):
+                loaded_by_path.add(stem[:-3])
+
     calls: set[tuple[str, str]] = set()
     bare: set[str] = set()
+    attribute_calls: set[str] = set()
     for node in ast.walk(tree):
         if not isinstance(node, ast.Call):
             continue
         func = node.func
         if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+            attribute_calls.add(func.attr)
             module = alias_to_module.get(func.value.id)
             if module:
                 calls.add((module, func.attr))
@@ -124,6 +141,9 @@ def _module_qualified_calls(tree: ast.Module) -> set[tuple[str, str]]:
     # A `from M import main` followed by a bare `main()` is a real invocation.
     for module, symbol in direct:
         if symbol in bare:
+            calls.add((module, symbol))
+    for module in loaded_by_path:
+        for symbol in attribute_calls:
             calls.add((module, symbol))
     return calls
 
