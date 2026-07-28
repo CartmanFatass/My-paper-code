@@ -67,13 +67,31 @@ def _degenerate_unit(value):
             "eval_keep": [0.0]}
 
 
-def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifying=4):
+def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifying=4,
+                      qualifying_calibration=None, qualifying_audit=None,
+                      invalidated_pairs=None, arm_distinctness_pairs=None,
+                      episode_worlds=None):
     """One synthetic `run_topology_audit`-shaped result -- exactly the shape
     `topology_unit_for_serialization` and the rest of `main()`'s per-topology
-    arrays consume."""
-    at_te = {0: 1, 1: 0}
-    before_leave = {0: 0, 1: 1}
-    return {
+    arrays consume.
+
+    2026-07-28 guard-gap repair: the original builder could only express
+    states where `qualifying_calibration_episodes == qualifying_audit_episodes`,
+    `invalidated_pairs == []`, and one fixed distinct-by-construction
+    `arm_distinctness_pairs` entry -- every state a swapped/dropped whitelist
+    key in `_reconstruct_topology_result` would corrupt was indistinguishable
+    from the correct one under the old fixture. `qualifying_calibration`/
+    `qualifying_audit` (falling back to `qualifying` when unset, so every
+    existing call site is unchanged), `invalidated_pairs` and
+    `arm_distinctness_pairs` now let a caller build an asymmetric,
+    non-vacuous state on purpose."""
+    qc = qualifying if qualifying_calibration is None else qualifying_calibration
+    qa = qualifying if qualifying_audit is None else qualifying_audit
+    if arm_distinctness_pairs is None:
+        at_te = {0: 1, 1: 0}
+        before_leave = {0: 0, 1: 1}
+        arm_distinctness_pairs = [(at_te, before_leave)]
+    result = {
         "topology_record": {
             "topology_seed": seed,
             "ground_bs": [[0.0, 0.0, 0.0]],
@@ -81,19 +99,22 @@ def _topology_result(seed, *, d_a, b_stable, b_flex, u_stable, u_flex, qualifyin
             "coordinate_hash": f"hash-{seed}",
             "procedure_version": audit.TOPOLOGY_PROCEDURE_VERSION,
         },
-        "calibration_report": {"episodes_attempted": qualifying, "qualifying": qualifying},
-        "audit_report": {"episodes_attempted": qualifying, "qualifying": qualifying},
+        "calibration_report": {"episodes_attempted": qc, "qualifying": qc},
+        "audit_report": {"episodes_attempted": qa, "qualifying": qa},
         "audit_events": [],
-        "qualifying_calibration_episodes": qualifying,
-        "qualifying_audit_episodes": qualifying,
-        "invalidated_pairs": [],
-        "arm_distinctness_pairs": [(at_te, before_leave)],
+        "qualifying_calibration_episodes": qc,
+        "qualifying_audit_episodes": qa,
+        "invalidated_pairs": invalidated_pairs if invalidated_pairs is not None else [],
+        "arm_distinctness_pairs": arm_distinctness_pairs,
         "calibration_units_stable": [_degenerate_unit(b_stable)],
         "calibration_units_flex": [_degenerate_unit(b_flex)],
         "calibration_units_d_a": [_degenerate_unit(d_a)],
         "audit_units_stable": [_degenerate_unit(u_stable)],
         "audit_units_flex": [_degenerate_unit(u_flex)],
     }
+    if episode_worlds is not None:
+        result["episode_worlds"] = episode_worlds
+    return result
 
 
 def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=None,
@@ -410,6 +431,210 @@ def test_numpy_round_trip_is_lossless_on_tricky_magnitudes():
     np.testing.assert_array_equal(rebuilt["candidates"]["z"]["select"], values)
     np.testing.assert_array_equal(rebuilt["candidates"]["z"]["eval_set"], values)
     np.testing.assert_array_equal(rebuilt["eval_keep"], values)
+
+
+# =============================================================================
+# 5. `_reconstruct_topology_result` key-whitelist guards
+#
+# Each test compares the POOLED result (JSON round trip through
+# `_reconstruct_topology_result`) against `audit.assemble_audit_result`
+# called DIRECTLY on the original in-memory `topo` list -- a genuinely
+# independent code path that never goes through the pooler's whitelist, so
+# a swapped or dropped key in the reconstruction is visible even though
+# `assemble_audit_result` itself is trusted and never reimplemented. Every
+# fixture is built asymmetric/non-vacuous on purpose (see `_topology_result`
+# docstring) so the corrupted state is numerically DIFFERENT from the
+# correct one, not merely differently-labeled.
+# =============================================================================
+
+def test_calibration_limb_assignment_is_not_swapped(tmp_path, monkeypatch):
+    """Gap 1: `calibration_units_stable`/`calibration_units_flex` must reach
+    `compute_t_m_bootstrap` under their OWN names. `b_stable=10.0` and
+    `b_flex=2.0` are degenerate (single identical candidate at every
+    topology), so `hierarchical_bootstrap_quantity`'s 5th percentile over
+    ANY resample is exactly the literal value regardless of iteration count
+    or resampled topology mix -- confirmed by direct computation, not
+    assumed: `compute_t_m_bootstrap` on 6 degenerate topologies of
+    (10.0, 2.0) returns `b_stable_lcb == 10.0`, `b_flex_lcb == 2.0` bit
+    exact. A stable/flex limb swap would make the pooled run report
+    `b_stable_lcb == 2.0`, silently reversing which limb the B_m branch
+    gate reads."""
+    _fast_t_m_bootstrap(monkeypatch, audit)
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+
+    topo = [
+        _topology_result(8000 + i, d_a=0.0, b_stable=10.0, b_flex=2.0,
+                          u_stable=-1.0, u_flex=1.0)
+        for i in range(6)
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:3])
+    p2 = _write_shard(tmp_path, "b.json", topo[3:])
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, [])
+
+    # Independent literal, hand-computed from the degenerate/uniform
+    # construction above (also confirmed by direct measurement).
+    assert expected["t_m_bootstrap"]["b_stable_lcb"] == 10.0
+    assert expected["t_m_bootstrap"]["b_flex_lcb"] == 2.0
+    assert pooled["t_m_bootstrap"]["b_stable_lcb"] == expected["t_m_bootstrap"]["b_stable_lcb"] == 10.0
+    assert pooled["t_m_bootstrap"]["b_flex_lcb"] == expected["t_m_bootstrap"]["b_flex_lcb"] == 2.0
+
+
+def test_pooled_topology_hash_failures_are_not_dropped(tmp_path):
+    """Gap 2: a shard's top-level `topology_hash_failures` (one topology
+    that failed the pinned-coordinate hash assert and so contributed no
+    `topology_units` entry) must still reach the pooled
+    `assemble_audit_result` call. Two clean 1-episode topologies (qualifying
+    below `MIN_SUPPORT_EPISODES_PER_TOPOLOGY` so support fails fast and the
+    T_m bootstrap never runs -- irrelevant to this guard) plus one shard
+    that independently declares a hash failure for a THIRD topology seed
+    that never produced a `topology_units` entry at all, matching what a
+    real hash-assert failure looks like."""
+    topo = [
+        _topology_result(8101, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1),
+        _topology_result(8102, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1),
+    ]
+    hash_failure = [{"topology_seed": 8103, "reason": "pinned-coordinate hash mismatch"}]
+    p1 = _write_shard(tmp_path, "a.json", topo[:1])
+    p2 = _write_shard(tmp_path, "b.json", topo[1:],
+                       overrides={"topology_hash_failures": hash_failure})
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, hash_failure)
+
+    # Independent literal: any non-empty topology_hash_failures makes
+    # topology_hash_ok False, which alone makes conformance.ok False
+    # (compute_conformance_ok's real conjunction).
+    assert expected["conformance"]["topology_hash_ok"] is False
+    assert expected["conformance"]["ok"] is False
+    assert pooled["conformance"]["topology_hash_failures"] == hash_failure
+    assert pooled["conformance"]["topology_hash_ok"] == expected["conformance"]["topology_hash_ok"] is False
+    assert pooled["conformance"]["ok"] == expected["conformance"]["ok"] is False
+
+
+def test_qualifying_calibration_and_audit_counts_are_not_swapped(tmp_path):
+    """Gap 3: `qualifying_calibration_episodes` and `qualifying_audit_episodes`
+    are thresholded INDEPENDENTLY by `check_minimum_support`
+    (MIN_SUPPORT_EPISODES_PER_TOPOLOGY=4). Six topologies: all six qualify on
+    calibration (4 episodes each), only three qualify on audit (4 vs 2) --
+    an asymmetry the old fixture (`qualifying` sets both counts identically)
+    could not express at all. A whitelist swap would report
+    `calibration_topologies_ok=3, audit_topologies_ok=6` -- the exact
+    opposite pair, not merely a different number."""
+    topo = [
+        _topology_result(8200 + i, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0,
+                          qualifying_calibration=4,
+                          qualifying_audit=4 if i < 3 else 2)
+        for i in range(6)
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:3])
+    p2 = _write_shard(tmp_path, "b.json", topo[3:])
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, [])
+
+    # Independent literal, hand-counted from the fixture above: 6 topologies
+    # clear the calibration threshold, only 3 clear the audit threshold.
+    assert expected["support"]["detail"] == {
+        "calibration_topologies_ok": 6, "audit_topologies_ok": 3}
+    assert pooled["support"]["detail"] == expected["support"]["detail"] == {
+        "calibration_topologies_ok": 6, "audit_topologies_ok": 3}
+
+
+def test_invalidated_pairs_are_not_dropped(tmp_path):
+    """Gap 4: a topology's own `invalidated_pairs`
+    (`PrefixReplayMismatchError` records) must reach the pooled
+    `invalidated_pairs_count`/`conformance.ok`. One topology carries one
+    invalidated pair; conformance must go False on the strength of that
+    single record alone (zero tolerance, per `compute_conformance_ok`'s
+    docstring)."""
+    one_invalidated = [{"episode_index": 0, "reason": "prefix replay mismatch"}]
+    topo = [
+        _topology_result(8301, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1,
+                          invalidated_pairs=one_invalidated),
+        _topology_result(8302, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1),
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:1])
+    p2 = _write_shard(tmp_path, "b.json", topo[1:])
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, [])
+
+    # Independent literal: exactly one invalidated pair was built above.
+    assert expected["conformance"]["invalidated_pairs_count"] == 1
+    assert expected["conformance"]["ok"] is False
+    assert pooled["conformance"]["invalidated_pairs_count"] == expected["conformance"]["invalidated_pairs_count"] == 1
+    assert pooled["conformance"]["ok"] == expected["conformance"]["ok"] is False
+
+
+def test_arm_distinctness_pairs_are_not_dropped(tmp_path):
+    """Gap 5: `arm_distinctness_check([])` returns True VACUOUSLY -- exactly
+    what a populated-but-uniform pair list also returns, so the old fixture
+    (its one hardcoded pair always had `at_te != before_leave`) could not
+    have caught this drop even with a non-empty list: dropping to `[]` and
+    keeping the always-distinct pair both read as conformant. Here every
+    pair has `at_te == before_leave` (arms IDENTICAL at every certified
+    event -- the actual defect this check exists to catch), so the correct
+    pooled result is conformance-failing and the drop-to-`[]` mutation
+    would flip it to vacuously conformant -- a real, not cosmetic,
+    difference."""
+    identical_pair = ({0: 1, 1: 0}, {0: 1, 1: 0})
+    topo = [
+        _topology_result(8401, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1,
+                          arm_distinctness_pairs=[identical_pair]),
+        _topology_result(8402, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1,
+                          arm_distinctness_pairs=[identical_pair]),
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:1])
+    p2 = _write_shard(tmp_path, "b.json", topo[1:])
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, [])
+
+    # Independent literal: every pair built above is arm-identical, so the
+    # spot check must fail (not the vacuous-empty-list True).
+    assert expected["conformance"]["arm_distinct_ok"] is False
+    assert expected["conformance"]["ok"] is False
+    assert pooled["conformance"]["arm_distinct_ok"] == expected["conformance"]["arm_distinct_ok"] is False
+    assert pooled["conformance"]["ok"] == expected["conformance"]["ok"] is False
+
+
+def test_episode_worlds_are_not_dropped(tmp_path):
+    """Lower-priority bonus gap: `episode_worlds` is reported
+    (`episode_world_provenance`), never gated -- the code's own comment
+    says so -- so this guards diagnostic reach only, not a branch or
+    verdict. One topology carries one non-seed-controlled episode-world
+    record; a drop to `[]` would silently erase it from the pooled
+    provenance report."""
+    world = [{"block": "audit", "episode_index": 0, "episode_seed": 8501,
+              "fingerprint": "abc123", "seed_controls_generation": False}]
+    topo = [
+        _topology_result(8501, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1,
+                          episode_worlds=world),
+        _topology_result(8502, d_a=0.0, b_stable=1.0, b_flex=1.0,
+                          u_stable=1.0, u_flex=1.0, qualifying=1),
+    ]
+    p1 = _write_shard(tmp_path, "a.json", topo[:1])
+    p2 = _write_shard(tmp_path, "b.json", topo[1:])
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    expected = audit.assemble_audit_result(topo, [])
+
+    # Independent literal: exactly one episode-world record was built above.
+    assert expected["episode_world_provenance"]["episodes_recorded"] == 1
+    assert expected["episode_world_provenance"]["all_seed_controlled"] is False
+    assert pooled["episode_world_provenance"]["episode_worlds"] == world
+    assert (pooled["episode_world_provenance"]["episodes_recorded"]
+            == expected["episode_world_provenance"]["episodes_recorded"] == 1)
 
 
 if __name__ == "__main__":
