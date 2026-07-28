@@ -26,6 +26,30 @@ Do not delegate scientific interpretation to the operator. Do not redesign
 G44, change seeds, budgets, thresholds, source, estimand, evidence volume or
 first-match order. Do not infer a result from a different commit.
 
+## Exact evidence allow-list
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_CODE_SCIENCE_INDEX.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260727_CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_FORMAL_RESULT_96E35DD.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_code_science_alignment_audit_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_code_science_alignment_audit_v2/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/external-review/rounds/20260727_g44_channel_norm_correction_recheck_v1/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260727_g44_channel_norm_correction_recheck_v1/50_MECHANICAL_INTAKE_RECORD.md`
+- `logs/formal_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_cpu_20260727_96e35dd_r1/train_manifest.json`
+- `logs/formal_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_cpu_20260727_96e35dd_r1/evaluation_manifest.json`
+- `logs/formal_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44_cpu_20260727_96e35dd_r1/analysis_result.json`
+
+Read only those paths and this question from the pushed stage commit. Do not
+use repository history, unlisted runtime paths, or unstated evidence.
+
 ## Mechanical formal-result boundary
 
 The exact formal source is `96e35ddf55de71e56c6bcace4746c408909480dd`; its
