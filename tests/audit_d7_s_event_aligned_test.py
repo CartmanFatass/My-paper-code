@@ -618,7 +618,7 @@ def test_pre_window_events_contribute_zero():
 # 5. Arm distinctness on a witness history
 # =============================================================================
 
-def test_constructive_mixed_null_and_full_sync_produce_distinct_duty_maps():
+def test_constructive_mixed_and_full_sync_produce_distinct_duty_maps():
     """Witness history at the REGISTERED fleet shape: 8 duties, 8 UAVs, zero
     idle survivors after a LEAVE (`physical_uavs=8`, section 0) -- replacing
     the prior witness (4 duties / a 5th idle spare UAV), which the reviewer
@@ -645,7 +645,11 @@ def test_constructive_mixed_null_and_full_sync_produce_distinct_duty_maps():
     This directly realizes contract section 4 / Q-C1's "a duty-holding
     survivor may be reassigned to cover the vacancy": UAV 3 is reassigned
     AWAY from its own duty to cover the fresh vacancy, not merely an idle
-    spare filling a gap (which cannot occur at this fleet shape at all)."""
+    spare filling a gap (which cannot occur at this fleet shape at all).
+
+    R5 deleted the `null` arm, so the comparison against the frozen
+    pre-event map is stated directly against `identity_map` (which is what
+    that arm returned, unchanged) rather than through a `null_update` call."""
     duty_positions = {i: np.array([i * 100.0, 0.0, 100.0]) for i in range(8)}
     identity_map = {i: i for i in range(8)}
     airborne_pre_event = {i: np.array([i * 100.0, 0.0, 0.0]) for i in range(8)}
@@ -656,7 +660,6 @@ def test_constructive_mixed_null_and_full_sync_produce_distinct_duty_maps():
         duty_map=identity_map, duty_positions=duty_positions,
         airborne_positions=airborne_post_leave, event="LEAVE", event_uav=4,
     )
-    null_post = audit.null_update(duty_map=identity_map)
 
     expected_constructive_post = {
         4: 3, 0: 0, 1: 1, 2: 2, 3: 5, 5: 6, 6: 7,
@@ -666,17 +669,15 @@ def test_constructive_mixed_null_and_full_sync_produce_distinct_duty_maps():
     assert constructive_post == expected_constructive_post
     assert 7 not in constructive_post
 
-    # null keeps every duty, including duty 4 still pointing at the now-
-    # absent UAV 4 -- the registered-fleet-shape bug this replaces would have
-    # made these two maps differ only by that one stale key (or be fully
-    # degenerate); the fix produces a substantively different map: 4 of the
-    # 8 duties (3, 4, 5, 6) have different incumbents, and duty 7 -- fully
-    # covered under null -- is uncovered under constructive_mixed.
-    assert null_post == identity_map
-    assert constructive_post != null_post
-    assert null_post[4] == 4          # null: never proactively replaced
+    # Against the frozen pre-event map, the registered-fleet-shape bug this
+    # witness replaces would have produced a map differing only by the one
+    # stale key (or been fully degenerate); the fix produces a substantively
+    # different map: 4 of the 8 duties (3, 4, 5, 6) have different incumbents,
+    # and duty 7 -- covered pre-event -- is uncovered under constructive_mixed.
+    assert constructive_post != identity_map
     assert constructive_post[4] == 3  # constructive: reassigned to a survivor
-    differing_duties = {d for d in identity_map if constructive_post.get(d) != null_post.get(d)}
+    differing_duties = {d for d in identity_map
+                        if constructive_post.get(d) != identity_map.get(d)}
     assert differing_duties == {3, 4, 5, 6, 7}
 
     # full_sync_SET (Part-A diagnostic only) also differs from constructive_mixed
@@ -747,9 +748,14 @@ def test_constructive_mixed_rejoin_covers_an_uncovered_duty():
     assert updated.get(1) == 2
 
 
-def test_null_update_never_changes_regardless_of_event_kwargs():
-    duty_map = {0: 0, 1: 1}
-    assert audit.null_update(duty_map=duty_map) == duty_map
+def test_the_null_arm_is_gone_from_the_r4_path():
+    """R5 (contract section 8): `null_update` and its `schedule == "null"`
+    dispatch are DELETED, not retained as decorative legacy apparatus.
+    Asserted as absence, so a re-introduction has to break this test."""
+    assert not hasattr(audit, "null_update")
+    src = (Path(__file__).resolve().parents[1]
+           / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
+    assert 'schedule == "null"' not in src
 
 
 # =============================================================================
@@ -992,7 +998,8 @@ def test_evaluate_phase_actually_pairs_set_and_keep_on_the_production_path(monke
 
 
 # =============================================================================
-# 7. R4 result layer: resolve_*_limb_state, combined_result, decide_branch
+# 7. R4 result layer: resolve_*_limb_state, combined_result,
+# decide_branch_with_reason
 # (docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md sections
 # 1, 4, 5, 6, 7 -- supersedes R3's ten-branch B_m/T_m decide_branch entirely;
 # git history is the archive for the deleted `_branch_kwargs`/branch-1..10
@@ -1023,22 +1030,22 @@ def _r4_branch_kwargs(**overrides):
 
 def test_precedence_branch_1_invalid_audit_beats_the_combined_result():
     kwargs = _r4_branch_kwargs(conformance_ok=False)
-    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
 def test_precedence_branch_2_support_insufficient_beats_the_combined_result():
     kwargs = _r4_branch_kwargs(support_ok=False)
-    assert audit.decide_branch(**kwargs) == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
 
 
 def test_precedence_branch_3_primary_g_degenerate_beats_the_combined_result():
     kwargs = _r4_branch_kwargs(primary_g_degenerate_flag=True)
-    assert audit.decide_branch(**kwargs) == "PRIMARY_G_DEGENERATE"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "PRIMARY_G_DEGENERATE"
 
 
 def test_precedence_branch_4_part_a_contradiction_beats_the_combined_result():
     kwargs = _r4_branch_kwargs(part_a_contradiction=True)
-    assert audit.decide_branch(**kwargs) == "PART_A_CONTRADICTION"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "PART_A_CONTRADICTION"
 
 
 def test_precedence_missing_component_audit_routes_to_branch_1_not_the_combined_result():
@@ -1048,7 +1055,7 @@ def test_precedence_missing_component_audit_routes_to_branch_1_not_the_combined_
     independently of `conformance_ok` -- so it earns its own isolated
     fixture rather than riding on the conformance test above."""
     kwargs = _r4_branch_kwargs(component_invariance_evaluated=False)
-    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
 def test_precedence_missing_component_audit_wins_even_if_degenerate_flag_is_also_set():
@@ -1061,30 +1068,120 @@ def test_precedence_missing_component_audit_wins_even_if_degenerate_flag_is_also
     regardless of whether component invariance was evaluated"); R4's
     `focal_primary_g_degenerate` is itself DERIVED from the same
     completeness-checked invariance data, so the two can never legitimately
-    disagree in production -- but `decide_branch` must still resolve this
+    disagree in production -- but `decide_branch_with_reason` must still resolve this
     artificial disagreement fail-closed, and a mutation that swapped the two
     checks' order would flip this fixture's result to PRIMARY_G_DEGENERATE."""
     kwargs = _r4_branch_kwargs(component_invariance_evaluated=False,
                                 primary_g_degenerate_flag=True)
-    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+def test_missing_component_audit_outranks_support_insufficiency():
+    """R4 repair. Section 7 makes `INVALID_EVENT_ALIGNED_AUDIT` item **1**
+    and support item 2, and section 4 routes a missing component audit to
+    item 1 -- so a run that failed BOTH must report the instrument failure,
+    not the population reading. Measured defect: the order was conformance ->
+    support -> component, so support-fail plus no component audit reported
+    `SOURCE_EVENT_SUPPORT_INSUFFICIENT`, an artifact carrying no record that
+    the mandatory audit never ran. Section 9's disposition for
+    support-insufficient ("no topology substitution and no expansion") is a
+    scientific reading of the population, not of the instrument."""
+    kwargs = _r4_branch_kwargs(support_ok=False, component_invariance_evaluated=False)
+    branch, reason = audit.decide_branch_with_reason(**kwargs)
+    assert branch == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert reason == "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
+
+
+def test_support_insufficiency_is_still_reachable_with_a_complete_component_audit():
+    """The trap the reordering above walks straight into if nothing guards
+    it: with zero units on a limb the audit is ALSO incomplete, so a naive
+    reorder makes branch 2 unreachable whenever support failure coincides
+    with an empty limb. Branch 2 must stay reachable for a support failure
+    whose component audit DID complete -- this is the witness."""
+    kwargs = _r4_branch_kwargs(support_ok=False, component_invariance_evaluated=True)
+    branch, reason = audit.decide_branch_with_reason(**kwargs)
+    assert branch == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    assert reason is None
+
+
+def test_the_two_frozen_reason_codes_are_emitted_verbatim():
+    """Section 4's two reason codes, transcribed as literals from the frozen
+    contract text. Neither string appeared anywhere in `scripts/` before this
+    repair -- they survived only in a stale `.pyc`. The reason code is what
+    keeps an instrument failure distinguishable from a population reading,
+    since both branch-1 causes report the SAME branch string."""
+    assert audit.decide_branch_with_reason(**_r4_branch_kwargs(
+        component_invariance_evaluated=False)) == (
+        "INVALID_EVENT_ALIGNED_AUDIT", "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING")
+    assert audit.decide_branch_with_reason(**_r4_branch_kwargs(
+        primary_g_degenerate_flag=True)) == (
+        "PRIMARY_G_DEGENERATE", "FOCAL_KEEP_SET_COMPONENTS_EXACTLY_INVARIANT")
+    # A conformance failure is branch 1 for a DIFFERENT reason, and must not
+    # borrow the missing-audit code.
+    assert audit.decide_branch_with_reason(**_r4_branch_kwargs(
+        conformance_ok=False)) == ("INVALID_EVENT_ALIGNED_AUDIT", None)
+
+
+def test_driver_reports_branch_2_for_a_support_failure_with_a_complete_audit(monkeypatch):
+    """The same trap, through `assemble_audit_result` -- the real driver
+    `main()` calls, not `decide_branch_with_reason` with hand-picked kwargs. Six
+    topologies whose `qualifying_*_episodes` are 1 (below the frozen
+    `MIN_SUPPORT_EPISODES_PER_TOPOLOGY` of 4) so support fails, but whose
+    focal units carry a COMPLETE `candidates x range(N_EVAL)` component
+    audit. Branch 2, no reason code, and `primary_g` present in the payload
+    -- which it was not before this repair, because the whole invariance
+    block sat inside the support gate."""
+    topology_results = _six_topology_results_r4(
+        d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False,
+        qualifying=1)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["support"]["ok"] is False
+    assert out["primary_g"]["component_invariance_evaluated"] is True
+    assert out["branch"] == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    assert out["branch_reason"] is None
+
+
+def test_driver_reports_branch_1_for_a_support_failure_with_an_empty_limb():
+    """The paired negative of the test above, and the case the reason code
+    exists for: the same support failure, but with NO focal units on either
+    limb. Same support state, different instrument state, different branch --
+    so the two are genuinely distinguished rather than the driver having a
+    single hard-wired answer for `support_ok=False`."""
+    topology_results = _six_topology_results_r4(
+        d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False,
+        qualifying=1)
+    for r in topology_results:
+        r["audit_units_stable"] = []
+        r["audit_units_flex"] = []
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["support"]["ok"] is False
+    assert out["primary_g"]["component_invariance_evaluated"] is False
+    assert out["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert out["branch_reason"] == "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
 
 
 def test_precedence_part_a_conformance_unresolved_never_suppresses_the_combined_result():
     """Section 7: `PART_A_CONFORMANCE_UNRESOLVED` "remains diagnostic and
     does not suppress an otherwise valid focal result." `map_part_a_verdict_
     to_inputs` is the real production mapping (not hand-picked) feeding
-    `decide_branch`'s `part_a_contradiction` -- only `PART_A_CONTRADICTION`
+    `decide_branch_with_reason`'s `part_a_contradiction` -- only `PART_A_CONTRADICTION`
     itself may set it True."""
     for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "PART_A_FULL_SYNC_MATERIALLY_WORSE", "NOT_APPLICABLE"):
         part_a_contradiction, _ = audit.map_part_a_verdict_to_inputs(verdict)
         assert part_a_contradiction is False
         kwargs = _r4_branch_kwargs(part_a_contradiction=part_a_contradiction)
-        assert audit.decide_branch(**kwargs) == "PERSISTENCE_NECESSARY_SOURCE"
+        assert audit.decide_branch_with_reason(**kwargs)[0] == "PERSISTENCE_NECESSARY_SOURCE"
 
     contradiction_input, _ = audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION")
     assert contradiction_input is True
     kwargs = _r4_branch_kwargs(part_a_contradiction=contradiction_input)
-    assert audit.decide_branch(**kwargs) == "PART_A_CONTRADICTION"
+    assert audit.decide_branch_with_reason(**kwargs)[0] == "PART_A_CONTRADICTION"
 
 
 # -----------------------------------------------------------------------
@@ -1122,17 +1219,25 @@ def test_combined_result_matches_the_frozen_contract_table_literally():
 
 
 def _attach_component_audit(topology_units, *, sequences_exactly_equal: bool):
-    """Attaches a FOCAL (KEEP, SET(z)) `component_audit.pairwise_equality`
-    record to every event in `topology_units` (the `_degenerate_topology_
-    units` shape), fixed to the caller's `sequences_exactly_equal` -- the
-    exact input `compute_focal_component_invariance` consumes, never
-    re-derived from the degenerate G values themselves. Returns a fresh
-    nested structure; does not mutate the input."""
+    """Attaches a COMPLETE FOCAL (KEEP, SET(z)) `component_audit.
+    pairwise_equality` record to every event in `topology_units` (the
+    `_degenerate_topology_units` shape), fixed to the caller's
+    `sequences_exactly_equal` -- the exact input
+    `compute_focal_component_invariance` consumes, never re-derived from the
+    degenerate G values themselves. Returns a fresh nested structure; does
+    not mutate the input.
+
+    "Complete" means the FULL `candidates x range(N_EVAL)` cross product, per
+    contract section 4. The fixture previously carried one record per event
+    regardless of `N_EVAL`, which the repaired completeness gate correctly
+    reads as a truncated audit."""
     return [
         [dict(event, component_audit={
             "pairwise_equality": [
-                {"candidate": "only", "replicate_index": 0,
-                 "sequences_exactly_equal": sequences_exactly_equal},
+                {"candidate": z_id, "replicate_index": r,
+                 "sequences_exactly_equal": sequences_exactly_equal}
+                for z_id in event["candidates"]
+                for r in range(audit.N_EVAL)
             ],
         }) for event in events]
         for events in topology_units
@@ -1143,7 +1248,8 @@ def _six_topology_results_r4(*, d_a_value: float,
                               u_stable_value: float, u_flex_value: float,
                               stable_components_invariant: bool,
                               flex_components_invariant: bool,
-                              invalidated_pairs_by_topology=None) -> list:
+                              invalidated_pairs_by_topology=None,
+                              qualifying: int = 4) -> list:
     """The R4 driver-level fixture: the same six-topology shape
     `_six_topology_results` builds for PART_A_CONTROL/D_A (contract
     section 8, rederived at the absolute anchor by this task), with
@@ -1153,7 +1259,8 @@ def _six_topology_results_r4(*, d_a_value: float,
     base = _six_topology_results(
         d_a_value=d_a_value,
         u_stable_value=u_stable_value, u_flex_value=u_flex_value,
-        invalidated_pairs_by_topology=invalidated_pairs_by_topology)
+        invalidated_pairs_by_topology=invalidated_pairs_by_topology,
+        qualifying=qualifying)
     stable_units = _attach_component_audit(
         [r["audit_units_stable"] for r in base], sequences_exactly_equal=stable_components_invariant)
     flex_units = _attach_component_audit(
@@ -1224,7 +1331,7 @@ def test_combined_mapping_row_has_a_reachable_witness_through_the_real_driver(
         monkeypatch, name, stable_bounds, flex_bounds, expected_stable_state,
         expected_flex_state, expected_combined):
     """Item (a): every one of the nine rows, reached through `assemble_
-    audit_result` (the real driver `main()` calls, not `decide_branch` with
+    audit_result` (the real driver `main()` calls, not `decide_branch_with_reason` with
     hand-picked kwargs) -- asserting BOTH the combined name AND that both
     limb states survive in `out["limb_states"]`, which is the specific
     defect this whole result layer exists to fix (R3 could erase the
@@ -1247,20 +1354,161 @@ def test_combined_mapping_row_has_a_reachable_witness_through_the_real_driver(
     assert out["limb_states"] == {"stable": expected_stable_state, "flex": expected_flex_state}
 
 
+# -----------------------------------------------------------------------
+# 7b-prime. The SAME nine rows with `compute_u_star_bootstrap` NOT stubbed.
+# Its only previous appearance in either suite was the `monkeypatch.setattr`
+# that replaces it, so the function that turns resampled U* into the two
+# gate bounds was never executed by any test -- swapping
+# `u_star_flex_lcb: u_flex["hi"]` inverts the flex MATERIAL gate and every
+# test stayed green.
+#
+# Degenerate per-topology fixtures (`select == eval_set == value`,
+# `eval_keep == 0`) give a per-topology U* of exactly `value` in every
+# resample, so the bootstrap CI has width EXACTLY zero and the asserted
+# bounds are exact literals. `BOOTSTRAP_ITERS` is NOT reduced anywhere; the
+# shared topology-index array these rows pass in is drawn at a smaller
+# iteration count, which the zero CI width makes numerically irrelevant
+# (verified by the `lcb == ucb == value` assertion in each row). One row is
+# additionally run at the full frozen `BOOTSTRAP_ITERS` through
+# `assemble_audit_result` below.
+# -----------------------------------------------------------------------
+
+# stable value: < -5 -> MATERIAL; > -5 -> AFFIRMATIVE_NONMATERIAL;
+#               == -5 -> neither strict bound holds -> UNRESOLVED.
+# flex value:   > +5 -> MATERIAL; < +5 -> AFFIRMATIVE_NONMATERIAL;
+#               == +5 -> UNRESOLVED.
+_REAL_BOOTSTRAP_ROWS = [
+    ("row1_material_material", -10.0, 10.0, "MATERIAL", "MATERIAL",
+     "PERSISTENCE_NECESSARY_SOURCE"),
+    ("row2_material_affirmative", -10.0, 0.0, "MATERIAL", "AFFIRMATIVE_NONMATERIAL",
+     "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"),
+    ("row3_material_unresolved", -10.0, 5.0, "MATERIAL", "UNRESOLVED",
+     "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"),
+    ("row4_affirmative_material", 0.0, 10.0, "AFFIRMATIVE_NONMATERIAL", "MATERIAL",
+     "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE"),
+    ("row5_unresolved_material", -5.0, 10.0, "UNRESOLVED", "MATERIAL",
+     "MATERIAL_FLEX_RENEWAL_IDENTIFIED"),
+    ("row6_affirmative_affirmative", 0.0, 0.0, "AFFIRMATIVE_NONMATERIAL",
+     "AFFIRMATIVE_NONMATERIAL", "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED"),
+    ("row7_affirmative_unresolved", 0.0, 5.0, "AFFIRMATIVE_NONMATERIAL", "UNRESOLVED",
+     "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"),
+    ("row8_unresolved_affirmative", -5.0, 0.0, "UNRESOLVED", "AFFIRMATIVE_NONMATERIAL",
+     "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"),
+    ("row9_unresolved_unresolved", -5.0, 5.0, "UNRESOLVED", "UNRESOLVED",
+     "SOURCE_NECESSITY_UNRESOLVED"),
+]
+
+
+@pytest.mark.parametrize(
+    "name,stable_value,flex_value,expected_stable_state,expected_flex_state,expected_combined",
+    _REAL_BOOTSTRAP_ROWS, ids=[r[0] for r in _REAL_BOOTSTRAP_ROWS])
+def test_each_row_is_reachable_through_the_real_u_star_bootstrap(
+        name, stable_value, flex_value, expected_stable_state, expected_flex_state,
+        expected_combined):
+    n = 6
+    u = audit.compute_u_star_bootstrap(
+        u_star_stable_topology_units=_degenerate_topology_units([stable_value] * n),
+        u_star_flex_topology_units=_degenerate_topology_units([flex_value] * n),
+        shared_topology_indices=audit.draw_shared_topology_indices(
+            n_topo=n, iters=50, seed=audit.BOOTSTRAP_SEED),
+        seed=audit.BOOTSTRAP_SEED)
+
+    # Zero CI width, exactly -- the property that makes the literals below
+    # exact rather than approximate.
+    assert u["u_star_stable_lcb"] == u["u_star_stable_ucb"] == stable_value
+    assert u["u_star_flex_lcb"] == u["u_star_flex_ucb"] == flex_value
+
+    stable_state = audit.resolve_stable_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        ucb95_u_star_stable=u["u_star_stable_ucb"],
+        lcb95_u_star_stable=u["u_star_stable_lcb"])
+    flex_state = audit.resolve_flex_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        lcb95_u_star_flex=u["u_star_flex_lcb"],
+        ucb95_u_star_flex=u["u_star_flex_ucb"])
+
+    assert stable_state == expected_stable_state
+    assert flex_state == expected_flex_state
+    assert audit.combined_result(stable_state, flex_state) == expected_combined
+
+
+def test_u_star_bootstrap_binds_each_gate_bound_to_the_correct_interval_end():
+    """The zero-CI-width fixtures above cannot see a `lo`/`hi` swap, because
+    `lo == hi` there. This one can, and it is the specific mutation the
+    review named: `"u_star_flex_lcb": u_flex["lo"]` -> `u_flex["hi"]` inverts
+    the flex MATERIAL gate (`LCB95(U*_flex) > +5`) without changing any other
+    number in the artifact.
+
+    `hierarchical_bootstrap_quantity` is replaced with a stub returning
+    DISTINGUISHABLE, per-limb interval ends, so the four output keys are
+    checked against literals from the contract's own naming (LCB = the low
+    end, UCB = the high end) rather than against anything the function
+    recomputes."""
+    calls = []
+
+    def _fake(units, *, shared_topology_indices, seed):
+        calls.append(units)
+        # First call is stable, second is flex (the order the function makes
+        # them); distinct ends per limb so no swap can go unnoticed.
+        return ({"lo": -20.0, "hi": -11.0} if len(calls) == 1
+                else {"lo": 13.0, "hi": 21.0})
+
+    real = audit.hierarchical_bootstrap_quantity
+    try:
+        audit.hierarchical_bootstrap_quantity = _fake
+        out = audit.compute_u_star_bootstrap(
+            u_star_stable_topology_units=_degenerate_topology_units([1.0]),
+            u_star_flex_topology_units=_degenerate_topology_units([2.0]),
+            shared_topology_indices=np.zeros((1, 1), dtype=int),
+            seed=audit.BOOTSTRAP_SEED)
+    finally:
+        audit.hierarchical_bootstrap_quantity = real
+
+    assert out["u_star_stable_lcb"] == -20.0
+    assert out["u_star_stable_ucb"] == -11.0
+    assert out["u_star_flex_lcb"] == 13.0
+    assert out["u_star_flex_ucb"] == 21.0
+
+
+def test_the_real_bootstrap_reaches_the_branch_through_the_driver_at_frozen_iters():
+    """One row at the FULL frozen `BOOTSTRAP_ITERS`, through
+    `assemble_audit_result`, with NOTHING stubbed -- neither
+    `compute_u_star_bootstrap` nor the Part-A bounds. This is the only place
+    the production wiring from per-topology units to a published branch runs
+    end to end at the registered iteration count.
+
+    Fixture: stable U* = -10 (MATERIAL, UCB95 < -5), flex U* = +10
+    (MATERIAL, LCB95 > +5) -> PERSISTENCE_NECESSARY_SOURCE. `d_a_value=6.0`
+    keeps Part-A at PART_A_CONFORMANCE_UNRESOLVED so it cannot preempt."""
+    topology_results = _six_topology_results_r4(
+        d_a_value=6.0, u_stable_value=-10.0, u_flex_value=10.0,
+        stable_components_invariant=False, flex_components_invariant=False)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["u_star_bootstrap"]["u_star_stable_lcb"] == -10.0
+    assert out["u_star_bootstrap"]["u_star_stable_ucb"] == -10.0
+    assert out["u_star_bootstrap"]["u_star_flex_lcb"] == 10.0
+    assert out["u_star_bootstrap"]["u_star_flex_ucb"] == 10.0
+    assert out["part_a"]["verdict"] == "PART_A_CONFORMANCE_UNRESOLVED"
+    assert out["limb_states"] == {"stable": "MATERIAL", "flex": "MATERIAL"}
+    assert out["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
+
+
 def test_both_flex_only_positive_results_are_reachable():
     """Item (e): `MATERIAL_FLEX_RENEWAL_IDENTIFIED` and `FLEX_RENEWAL_
     WITHOUT_MATERIAL_STABLE_PERSISTENCE` -- R3's B_m/T_m branch selection
     could not express either (its ten branches have no flex-only-positive
     row at all); both are rows 5 and 4 of the parametrized mapping test
-    above, and are re-asserted directly here, through `decide_branch`
-    itself, as a standalone, narrowly-traceable witness of exactly the
-    claim item (e) names."""
-    assert audit.decide_branch(**_r4_branch_kwargs(
+    above, and are re-asserted directly here, through
+    `decide_branch_with_reason` itself, as a standalone, narrowly-traceable
+    witness of exactly the claim item (e) names."""
+    assert audit.decide_branch_with_reason(**_r4_branch_kwargs(
         stable_limb_state="UNRESOLVED", flex_limb_state="MATERIAL",
-    )) == "MATERIAL_FLEX_RENEWAL_IDENTIFIED"
-    assert audit.decide_branch(**_r4_branch_kwargs(
+    ))[0] == "MATERIAL_FLEX_RENEWAL_IDENTIFIED"
+    assert audit.decide_branch_with_reason(**_r4_branch_kwargs(
         stable_limb_state="AFFIRMATIVE_NONMATERIAL", flex_limb_state="MATERIAL",
-    )) == "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE"
+    ))[0] == "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE"
 
 
 # -----------------------------------------------------------------------
@@ -1352,6 +1600,116 @@ def test_branch_3_does_not_fire_when_a_focal_pair_differs_even_if_calibration_wo
     assert out["branch"] == "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"
     assert out["primary_g"]["degenerate"] is False
     assert out["limb_states"] == {"stable": "MATERIAL", "flex": "COMPONENT_INVARIANT"}
+
+
+# -----------------------------------------------------------------------
+# 7e. R3 repair: contract section 4's COMPLETENESS definition, driven
+# directly against `compute_focal_component_invariance`. The only
+# incompleteness fixture the suite had was an entirely absent
+# `component_audit`; the gate was `if not pairwise` -- list non-empty and
+# nothing more.
+# -----------------------------------------------------------------------
+
+def _focal_unit(candidate_ids, pairwise):
+    """One `audit_units_*` entry: the candidate set the audit was supposed to
+    cover, plus whatever pairwise-equality records it actually produced.
+    Keeping the two independent is the point -- completeness is a statement
+    about the pairs RELATIVE to the candidates, and a fixture that derives
+    one from the other cannot express a truncated audit at all."""
+    return {"candidates": {z: {"select": [0.0], "eval_set": [0.0]} for z in candidate_ids},
+            "eval_keep": [0.0],
+            "component_audit": {"pairwise_equality": pairwise}}
+
+
+def _full_pairwise(candidate_ids, equal_by_candidate):
+    return [{"candidate": z, "replicate_index": r,
+             "sequences_exactly_equal": equal_by_candidate[z]}
+            for z in candidate_ids for r in range(audit.N_EVAL)]
+
+
+def test_focal_completeness_accepts_the_full_candidate_replicate_cross_product():
+    """The positive case: `candidates x range(N_EVAL)`, every pair present.
+    Without this, the completeness gate could be refusing everything and the
+    negatives below would not notice."""
+    ids = ["zA", "zB"]
+    pw = _full_pairwise(ids, {"zA": True, "zB": True})
+    assert len(pw) == 4
+    out = audit.compute_focal_component_invariance(
+        stable_units=[_focal_unit(ids, pw)], flex_units=[_focal_unit(ids, pw)])
+    assert out == {"complete": True, "components_invariant_stable": True,
+                    "components_invariant_flex": True}
+
+
+def test_dropping_the_one_differing_candidates_pairs_is_incomplete_not_invariant():
+    """The measured defect, verbatim: dropping the pairs of the one candidate
+    whose sequences DIFFERED left `complete=True` and flipped both limbs to
+    invariant -- i.e. silently to PRIMARY_G_DEGENERATE, the exact conclusion
+    that already closed R3's measurement route.
+
+    Section 4: "a missing pair is neither equal nor unequal." The direction of
+    failure is what matters -- an incomplete audit must never read as exactly
+    invariant."""
+    ids = ["zA", "zB"]
+    full = _full_pairwise(ids, {"zA": True, "zB": False})
+    truncated = [p for p in full if p["candidate"] != "zB"]
+
+    # Sanity: the audit as actually performed refutes invariance.
+    complete_out = audit.compute_focal_component_invariance(
+        stable_units=[_focal_unit(ids, full)], flex_units=[_focal_unit(ids, full)])
+    assert complete_out == {"complete": True, "components_invariant_stable": False,
+                             "components_invariant_flex": False}
+
+    # With zB's pairs dropped, every SURVIVING record says True. The old gate
+    # (`if not pairwise`) saw a non-empty list and reported exact invariance.
+    assert all(p["sequences_exactly_equal"] for p in truncated)
+    out = audit.compute_focal_component_invariance(
+        stable_units=[_focal_unit(ids, truncated)], flex_units=[_focal_unit(ids, truncated)])
+    assert out == {"complete": False, "components_invariant_stable": False,
+                    "components_invariant_flex": False}
+
+
+def test_focal_completeness_is_membership_not_merely_count():
+    """A count-only check (`len(pairwise) == len(candidates) * N_EVAL`) passes
+    on a record set that covers zA four times and zB never. Completeness is
+    the CROSS PRODUCT: every `(candidate, replicate)` present."""
+    ids = ["zA", "zB"]
+    duplicated = [
+        {"candidate": "zA", "replicate_index": 0, "sequences_exactly_equal": True},
+        {"candidate": "zA", "replicate_index": 1, "sequences_exactly_equal": True},
+        {"candidate": "zA", "replicate_index": 0, "sequences_exactly_equal": True},
+        {"candidate": "zA", "replicate_index": 1, "sequences_exactly_equal": True},
+    ]
+    assert len(duplicated) == len(ids) * audit.N_EVAL   # the count check passes
+    out = audit.compute_focal_component_invariance(
+        stable_units=[_focal_unit(ids, duplicated)],
+        flex_units=[_focal_unit(ids, duplicated)])
+    assert out["complete"] is False
+
+
+def test_focal_completeness_requires_every_registered_replicate():
+    """One replicate short of `N_EVAL` for one candidate -- a partial pair set
+    that is neither empty nor duplicated -- is incomplete."""
+    ids = ["zA"]
+    short = [{"candidate": "zA", "replicate_index": 0, "sequences_exactly_equal": True}]
+    assert audit.N_EVAL > 1
+    out = audit.compute_focal_component_invariance(
+        stable_units=[_focal_unit(ids, short)], flex_units=[_focal_unit(ids, short)])
+    assert out["complete"] is False
+
+
+def test_focal_completeness_fails_on_ONE_truncated_unit_among_complete_ones():
+    """Not "the pooled run produced enough pairs" -- EVERY unit must be
+    complete. Five conforming units and one truncated one is an incomplete
+    audit, and the pooled totals would not reveal it."""
+    ids = ["zA", "zB"]
+    full = _full_pairwise(ids, {"zA": True, "zB": True})
+    units = [_focal_unit(ids, full) for _ in range(6)]
+    units[3] = _focal_unit(ids, full[:2])
+    out = audit.compute_focal_component_invariance(
+        stable_units=units, flex_units=[_focal_unit(ids, full)])
+    assert out["complete"] is False
+    assert out["components_invariant_stable"] is False
+    assert out["components_invariant_flex"] is False
 
 
 # =============================================================================
@@ -1754,7 +2112,7 @@ def test_hierarchical_bootstrap_quantity_different_seed_gives_a_different_stream
     would still pass it. Left unrepaired, that bug makes the within-topology
     resample IDENTICAL in every topology slot of every outer iteration,
     collapsing a real variance component and narrowing `LCB95(U*)` into
-    false confidence -- exactly the shape that can flip `decide_branch`'s
+    false confidence -- exactly the shape that can flip `decide_branch_with_reason`'s
     output.
 
     Non-degenerate per-topology events (several distinct values per event,
@@ -2046,15 +2404,22 @@ def test_update_duty_map_on_transitions_detects_leave_and_rejoin_edges():
     assert 0 in new_map2.values()  # uav 0 restored to the duty map at REJOIN
 
 
-def test_update_duty_map_on_transitions_null_schedule_never_changes():
-    duty_positions = {0: np.array([0.0, 0.0, 0.0])}
-    duty_map = {0: 0}
+def test_update_duty_map_on_transitions_no_longer_honours_a_null_schedule():
+    """R5: with `null_update` and its dispatch deleted, any schedule that is
+    not `full_sync_SET` takes the `constructive_mixed` path. Passing the
+    retired name must NOT freeze the map across a real LEAVE edge -- the sole
+    survivor is re-matched onto the vacated duty, exactly as
+    `constructive_mixed` does."""
+    duty_positions = {0: np.array([0.0, 0.0, 0.0]), 1: np.array([10.0, 0.0, 0.0])}
+    duty_map = {0: 0, 1: 1}
     new_map, leave_uavs, _ = audit.update_duty_map_on_transitions(
         duty_map=duty_map, duty_positions=duty_positions,
-        env=type("E", (), {"n_uavs": 1, "uav_positions": np.zeros((1, 3))})(),
-        charging_before=np.array([False]), charging_after=np.array([True]), schedule="null")
+        env=type("E", (), {"n_uavs": 2, "uav_positions": np.zeros((2, 3))})(),
+        charging_before=np.array([False, False]),
+        charging_after=np.array([True, False]), schedule="null")
     assert leave_uavs == [0]
-    assert new_map == duty_map  # null freezes the map even across a real LEAVE edge
+    assert new_map != duty_map
+    assert new_map == {0: 1}  # UAV 1 re-matched onto the vacated duty 0
 
 
 # --- prefix-replay fork discipline: a hash mismatch invalidates -------------
@@ -2417,7 +2782,7 @@ def test_arm_distinctness_check_vacuously_true_on_no_certified_events():
     """An empty witness list means no events were found anywhere in the run
     -- that is SOURCE_EVENT_SUPPORT_INSUFFICIENT's (branch 2) failure mode,
     already reported via `support_ok`, and must not be double-counted as an
-    arm-conformance defect ahead of it in `decide_branch`'s precedence."""
+    arm-conformance defect ahead of it in `decide_branch_with_reason`'s precedence."""
     assert audit.arm_distinctness_check([]) is True
 
 
@@ -2464,7 +2829,7 @@ def test_map_part_a_verdict_to_inputs_only_contradiction_sets_true():
 # `test_precedence_part_a_conformance_unresolved_never_suppresses_the_
 # combined_result` in section 7 above, which checks the identical property
 # (PART_A_CONFORMANCE_UNRESOLVED never flips the branch, only
-# PART_A_CONTRADICTION does) against the R4 `decide_branch` signature.
+# PART_A_CONTRADICTION does) against the R4 `decide_branch_with_reason` signature.
 
 
 def test_run_audit_event_voids_the_whole_event_when_a_clone_fails():
@@ -3641,7 +4006,7 @@ def test_check_minimum_support_requires_both_limbs_independently_sufficient():
     well-supported calibration topologies with ZERO supported audit
     topologies report `support_ok=True` and proceed to a bootstrap and branch
     decision on data the contract says to refuse -- `support_ok` feeds branch
-    2 (`SOURCE_EVENT_SUPPORT_INSUFFICIENT`) in `decide_branch` via `:3694`.
+    2 (`SOURCE_EVENT_SUPPORT_INSUFFICIENT`) in `decide_branch_with_reason` via `:3694`.
 
     Each fixture below is sufficient on exactly one limb and insufficient on
     the other, in both directions, so each fails for its own reason: a
@@ -3671,19 +4036,21 @@ def test_check_minimum_support_requires_both_limbs_independently_sufficient():
 
 
 # =============================================================================
-# 9. Driver-level wiring: assemble_audit_result (Task A -- decide_branch
+# 9. Driver-level wiring: assemble_audit_result (Task A --
+# decide_branch_with_reason
 # reached through the SAME code path main() uses, not called directly)
 # =============================================================================
 
 def _six_topology_results(*, d_a_value: float, u_stable_value: float,
-                           u_flex_value: float, invalidated_pairs_by_topology=None) -> list:
+                           u_flex_value: float, invalidated_pairs_by_topology=None,
+                           qualifying: int = 4) -> list:
     """Six topologies (the frozen `MIN_SUPPORT_TOPOLOGIES` minimum), each
     contributing one degenerate PART_A_CONTROL/audit unit per quantity --
     `_degenerate_topology_units` shape, matching exactly what
     `run_topology_audit` returns per topology. `qualifying_*_episodes=4`
     meets `MIN_SUPPORT_EPISODES_PER_TOPOLOGY` in every topology, so
     `support_ok` is True and `assemble_audit_result` reaches its
-    `decide_branch` call (never the single-topology/support-miss shortcuts).
+    `decide_branch_with_reason` call (never the single-topology/support-miss shortcuts).
 
     R4 deleted `calibration_units_stable`/`calibration_units_flex` (R3's
     `B_m` constructive-vs-null contrast) from the shape `run_topology_audit`
@@ -3695,8 +4062,8 @@ def _six_topology_results(*, d_a_value: float, u_stable_value: float,
     invalidated_pairs_by_topology = invalidated_pairs_by_topology or [[] for _ in range(n)]
     return [
         {
-            "qualifying_calibration_episodes": 4,
-            "qualifying_audit_episodes": 4,
+            "qualifying_calibration_episodes": qualifying,
+            "qualifying_audit_episodes": qualifying,
             "invalidated_pairs": invalidated_pairs_by_topology[i],
             "arm_distinctness_pairs": [],
             "calibration_units_d_a": d_a_units[i],
@@ -3712,9 +4079,9 @@ def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
     (deterministic). lower_contrast = D_A + 5 = 5.0 > 0 (passes);
     upper_contrast = 5 - D_A = 5.0 > 0 (passes). Both equivalence tests pass
     -> PART_A_CONTRADICTION per section 8 ('Both pass -> PART_A_CONTRADICTION
-    (return-equivalence)'), which `decide_branch` resolves to branch 4 --
+    (return-equivalence)'), which `decide_branch_with_reason` resolves to branch 4 --
     checked here through `assemble_audit_result`, the exact function
-    `main()` calls, not `decide_branch` called directly with hand-picked
+    `main()` calls, not `decide_branch_with_reason` called directly with hand-picked
     kwargs (section 7's existing coverage). U*_stable/U*_flex are fixed via
     `_fixed_u_star_bootstrap` to values that would OTHERWISE resolve
     PERSISTENCE_NECESSARY_SOURCE (both MATERIAL), so Part-A's win is a
@@ -3745,7 +4112,7 @@ def test_driver_part_a_unresolved_does_not_relabel_the_source_branch(monkeypatch
     bootstrap`, so the source branch must resolve PERSISTENCE_NECESSARY_
     SOURCE, exactly as if Part-A had never run, proving UNRESOLVED never
     flips `part_a_contradiction` through the real driver path (not
-    `decide_branch` called directly)."""
+    `decide_branch_with_reason` called directly)."""
     _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
     topology_results = _six_topology_results_r4(
         d_a_value=6.0,
@@ -3763,7 +4130,7 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_result(mon
     (which alone would resolve PERSISTENCE_NECESSARY_SOURCE), but with one
     topology reporting a single invalidated prefix-replay pair --
     `compute_conformance_ok`'s zero-tolerance conjunct fails, so
-    `conformance_ok=False` must reach `decide_branch` through
+    `conformance_ok=False` must reach `decide_branch_with_reason` through
     `assemble_audit_result` (the `len(topology_results) > 1 and support_ok`
     path, NOT the single-topology/support-miss shortcut, since support_ok
     stays True here) and win branch-1 precedence over every later row,
@@ -3792,9 +4159,9 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_result(mon
 # because nothing anywhere referenced the field. Both tests below call
 # `assemble_audit_result` (the real production wiring), never
 # `all_seed_controlled` re-derived by hand, and use `qualifying_*_episodes=0`
-# so `support_ok` is False and the cheap `elif not support_ok` shortcut
-# handles branch resolution -- the expensive T_m bootstrap is irrelevant to
-# what these tests check.
+# so `support_ok` is False and the no-bootstrap path handles branch
+# resolution -- the expensive bootstrap is irrelevant to what these tests
+# check.
 # =============================================================================
 
 def test_all_seed_controlled_is_false_when_any_episode_world_is_not_seed_controlled():
@@ -3974,6 +4341,13 @@ def _valid_r4_artifact() -> dict:
             {"calibration_units_d_a": [], "audit_units_stable": [], "audit_units_flex": []}
             for _ in audit.TOPOLOGY_SEEDS_R4
         ],
+        # Condition 5 (R2): the REGISTERED episode volume, transcribed from
+        # the frozen contract's own eight-per-topology-per-block figure -- not
+        # read back off whatever the module happens to default to.
+        "calibration_reports": [
+            {"episodes_attempted": 8} for _ in audit.TOPOLOGY_SEEDS_R4],
+        "audit_reports": [
+            {"episodes_attempted": 8} for _ in audit.TOPOLOGY_SEEDS_R4],
     }
 
 
@@ -3993,6 +4367,7 @@ def test_freshness_sentinel_condition_1_exact_seed_list_fails_alone():
     assert detail == {
         "exact_seed_list": False, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+        "registered_episode_counts": True,
     }
 
 
@@ -4010,6 +4385,7 @@ def test_freshness_sentinel_condition_2_no_r3_overlap_fails_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": False,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+        "registered_episode_counts": True,
     }
 
 
@@ -4024,6 +4400,7 @@ def test_freshness_sentinel_condition_3_identity_fields_fail_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": False, "per_topology_block_identities": True,
+        "registered_episode_counts": True,
     }
 
 
@@ -4038,11 +4415,222 @@ def test_freshness_sentinel_condition_4_per_topology_block_identities_fail_alone
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": False,
+        "registered_episode_counts": True,
     }
 
 
+def test_freshness_sentinel_condition_5_registered_episode_counts_fails_alone():
+    """Condition 5 (R2 repair): every topology must have ATTEMPTED the
+    registered episode volume in both blocks. The measured defect this
+    catches: `resolve_run_plan(smoke=False, dev=False,
+    topology_seeds_override=None, episodes_calibration=2, episodes_audit=2)`
+    returned `n_calibration=2, n_audit=2` on the formal path and the artifact
+    still earned full R4 identity, so a source-necessity result could be
+    published at 2 episodes per topology instead of the registered 8.
+
+    Driven three ways -- calibration short alone, audit short alone, and one
+    single topology short -- because a check written against only the pooled
+    total, or against only one of the two blocks, passes the first case and
+    fails the population."""
+    for block, short_value in (("calibration_reports", 2), ("audit_reports", 2)):
+        artifact = _valid_r4_artifact()
+        artifact[block] = [{"episodes_attempted": short_value}
+                           for _ in audit.TOPOLOGY_SEEDS_R4]
+        ok, detail = audit.r4_freshness_sentinel(artifact)
+        assert ok is False, block
+        assert detail == {
+            "exact_seed_list": True, "no_r3_overlap": True,
+            "identifies_r4_contract_and_namespace": True,
+            "per_topology_block_identities": True,
+            "registered_episode_counts": False,
+        }, block
+
+    # ONE topology short of the registered volume, the other seven correct --
+    # a pooled-total check (7*8 + 2 vs 8*8) would also fail here, but a
+    # "some topology reached 8" check would pass. This is per topology.
+    artifact = _valid_r4_artifact()
+    artifact["audit_reports"][3]["episodes_attempted"] = 7
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail["registered_episode_counts"] is False
+    assert all(v for k, v in detail.items() if k != "registered_episode_counts")
+
+
+def test_freshness_sentinel_condition_5_is_not_satisfied_by_absent_reports():
+    """Fail-closed direction: an artifact that carries no episode reports at
+    all must FAIL condition 5, never pass it vacuously through an `all()`
+    over an empty list. This is the exact shape every pre-R2 artifact has."""
+    artifact = _valid_r4_artifact()
+    del artifact["calibration_reports"]
+    del artifact["audit_reports"]
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail["registered_episode_counts"] is False
+
+
 # =============================================================================
-# 9e. Condition 6: no arbitrary CLI topology-seed override can produce a
+# 9d-prime. R1: the SHARDED production route's declared path to R4 identity
+# (`--population r4` / `r4_declared_population_identity`), and R2's refusal
+# of an episode-count argument on that path. Both exercised through `main()`
+# itself -- which, before this repair, was invoked by NO test in either file,
+# so every sentinel test hand-built its artifact and the production route to
+# an R4 artifact was never executed at all.
+# =============================================================================
+
+def _stub_topology_result(seed, *, qualifying=0):
+    """Exactly the shape `run_topology_audit` returns, reduced to what
+    `main()` and `assemble_audit_result` read. `qualifying=0` keeps
+    `support_ok` False so no bootstrap runs -- the freshness sentinel is
+    indifferent to the branch, and this test is about identity and episode
+    volume, not about inference."""
+    return {
+        "topology_record": {"topology_seed": seed, "coordinate_hash": f"h{seed}",
+                             "procedure_version": audit.TOPOLOGY_PROCEDURE_VERSION},
+        # `episodes_attempted` is what freshness condition 5 reads. The stub
+        # reports the REGISTERED volume, because that is what an unmodified
+        # `main()` on the R4 population must have run.
+        "calibration_report": {"episodes_attempted": audit.N_CALIBRATION_EPISODES,
+                                "qualifying": qualifying},
+        "audit_report": {"episodes_attempted": audit.N_AUDIT_EPISODES,
+                          "qualifying": qualifying},
+        "audit_events": [],
+        "qualifying_calibration_episodes": qualifying,
+        "qualifying_audit_episodes": qualifying,
+        "invalidated_pairs": [],
+        "arm_distinctness_pairs": [],
+        "calibration_units_d_a": [],
+        "audit_units_stable": [],
+        "audit_units_flex": [],
+        "episode_worlds": [],
+    }
+
+
+def _run_main(monkeypatch, tmp_path, argv, *, n_calibration_seen=None):
+    """Runs the real `main()` with `build_config`/`run_topology_audit`
+    stubbed, and returns the artifact it wrote to disk (never a dict the test
+    assembled itself). `n_calibration_seen` is an out-list that records the
+    episode counts `main()` actually passed down."""
+    monkeypatch.setattr(audit, "build_config", lambda: None)
+
+    def _fake_run_topology_audit(config, *, topology_seed, n_calibration, n_audit, **kw):
+        if n_calibration_seen is not None:
+            n_calibration_seen.append((n_calibration, n_audit, kw.get("contract_id")))
+        return _stub_topology_result(topology_seed)
+
+    monkeypatch.setattr(audit, "run_topology_audit", _fake_run_topology_audit)
+    out_dir = tmp_path / "out"
+    monkeypatch.setattr(sys, "argv", ["audit_d7_s_event_aligned.py", "--out", str(out_dir)] + argv)
+    audit.main()
+    with (out_dir / "d7_s_event_aligned.json").open(encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def test_declared_r4_population_run_through_main_earns_the_sentinel(monkeypatch, tmp_path):
+    """R1, positive: `main() --population r4` over the whole frozen
+    population produces an artifact that PASSES `r4_freshness_sentinel`, and
+    every topology was measured in the R4 population/seed namespace rather
+    than the legacy R3 one. Built by the production path end to end, not by
+    `_valid_r4_artifact()`."""
+    seen = []
+    artifact = _run_main(
+        monkeypatch, tmp_path,
+        ["--population", "r4", "--topology-seeds"] + [str(s) for s in audit.TOPOLOGY_SEEDS_R4],
+        n_calibration_seen=seen)
+
+    assert artifact["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert artifact["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is True, detail
+    # Every topology ran under the R4 namespace, and at the registered volume.
+    assert seen == [(audit.N_CALIBRATION_EPISODES, audit.N_AUDIT_EPISODES,
+                      audit.R4_POPULATION_NAMESPACE)] * len(audit.TOPOLOGY_SEEDS_R4)
+
+
+def test_a_declared_r4_shard_covering_a_subset_still_carries_the_identity(monkeypatch, tmp_path):
+    """R1, the case the whole repair exists for: the formal run is ONE SHARD
+    PER TOPOLOGY. A single-seed shard cannot satisfy the whole-population
+    sentinel (condition 1 is a population property), but it must carry the R4
+    contract/namespace identity fields and must have measured its topology in
+    the R4 seed namespace -- which is precisely what the inference-from-the-
+    seed-list rule could not give it."""
+    seen = []
+    artifact = _run_main(
+        monkeypatch, tmp_path,
+        ["--population", "r4", "--topology-seeds", str(audit.TOPOLOGY_SEEDS_R4[0])],
+        n_calibration_seen=seen)
+
+    assert artifact["topology_seeds"] == [audit.TOPOLOGY_SEEDS_R4[0]]
+    assert artifact["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert artifact["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    assert seen[0][2] == audit.R4_POPULATION_NAMESPACE
+    assert "MEMBER SHARD" in artifact["note"]
+
+
+def test_an_undeclared_subset_run_earns_no_r4_identity(monkeypatch, tmp_path):
+    """R1's paired negative, and the reason the flag exists at all: the SAME
+    single-seed run WITHOUT `--population r4` is an accidental subset. It
+    gets `None`/`None`, runs in the legacy namespace, and is labelled not
+    conclusion-bearing. Intent is what earns identity, never the seed list
+    happening to be a subset."""
+    seen = []
+    artifact = _run_main(
+        monkeypatch, tmp_path,
+        ["--topology-seeds", str(audit.TOPOLOGY_SEEDS_R4[0])],
+        n_calibration_seen=seen)
+
+    assert artifact["r4_contract"] is None
+    assert artifact["r4_population_namespace"] is None
+    assert seen[0][2] == audit.CONTRACT_ID
+    assert "NOT R4 conclusion-bearing" in artifact["note"]
+
+
+def test_declaring_r4_with_a_seed_outside_the_population_is_a_hard_refusal(monkeypatch, tmp_path):
+    """A declared R4 run that names a non-member seed is a contradiction, not
+    a development run: hard `SystemExit`, never the silent denial of identity
+    `r4_artifact_identity` gives an undeclared override."""
+    with pytest.raises(SystemExit, match="not members of the frozen R4 population"):
+        _run_main(monkeypatch, tmp_path,
+                  ["--population", "r4", "--topology-seeds",
+                   str(audit.TOPOLOGY_SEEDS_R4[0]), str(audit.TOPOLOGY_SEEDS_INITIAL[0])])
+
+
+@pytest.mark.parametrize("flag", ["--episodes-calibration", "--episodes-audit"])
+def test_r4_population_refuses_an_episode_count_argument(monkeypatch, tmp_path, flag):
+    """R2. Measured defect: `resolve_run_plan(smoke=False, dev=False,
+    topology_seeds_override=None, episodes_calibration=2, episodes_audit=2)`
+    returned `n_calibration=2, n_audit=2` on the FORMAL path and the artifact
+    still earned full R4 identity -- so a source-necessity result could be
+    computed at 2 episodes per topology instead of the registered 8, and
+    printed the conclusion-bearing branch string anyway. A conclusion-bearing
+    run does not take an episode-count argument. Driven for BOTH flags: a
+    check on only one of them leaves the other live."""
+    with pytest.raises(SystemExit, match="refused on the R4 population"):
+        _run_main(monkeypatch, tmp_path,
+                  ["--population", "r4", "--topology-seeds",
+                   str(audit.TOPOLOGY_SEEDS_R4[0]), flag, "2"])
+
+
+def test_the_whole_population_path_refuses_an_episode_count_argument_too(monkeypatch, tmp_path):
+    """The refusal is keyed on the RUN BEING the R4 population, not on the
+    flag: the plain whole-population path (identity inferred by
+    `r4_artifact_identity`, no `--population`) refuses it as well."""
+    with pytest.raises(SystemExit, match="refused on the R4 population"):
+        _run_main(monkeypatch, tmp_path, ["--episodes-calibration", "2"])
+
+
+def test_a_development_run_may_still_override_episode_counts(monkeypatch, tmp_path):
+    """The positive half: the refusal must not have been implemented as an
+    unconditional one. A `--dev` run still honours the override, so this test
+    goes red if the refusal is widened to every path."""
+    seen = []
+    _run_main(monkeypatch, tmp_path,
+              ["--dev", "--episodes-calibration", "2", "--episodes-audit", "3"],
+              n_calibration_seen=seen)
+    assert seen == [(2, 3, audit.CONTRACT_ID)]
+
+
+# =============================================================================
+# 9e. Condition 7: no arbitrary CLI topology-seed override can produce a
 # conclusion-bearing artifact -- `r4_artifact_identity`, the function
 # `main()` uses to decide the identity fields above, exercised directly.
 # =============================================================================
@@ -4320,13 +4908,13 @@ def test_the_registered_topology_seed_sets_are_exactly_as_frozen():
 
 
 # R3's `resolve_primary_g_tristate` (COMPONENT_INVARIANCE tri-state) and its
-# three `decide_branch`-missing-component-audit tests are DELETED along with
+# three `decide_branch_with_reason`-missing-component-audit tests are DELETED along with
 # the function itself -- superseded by R4's real `compute_focal_component_
 # invariance` (never a caller-supplied override) and covered by section 7's
 # `test_precedence_missing_component_audit_routes_to_branch_1_not_the_
 # combined_result`, `test_precedence_missing_component_audit_wins_even_if_
 # degenerate_flag_is_also_set`, and `test_precedence_primary_g_degenerate_
-# beats_the_combined_result` above, against the real R4 `decide_branch`
+# beats_the_combined_result` above, against the real R4 `decide_branch_with_reason`
 # signature.
 
 
@@ -4451,6 +5039,40 @@ def test_run_audit_event_persists_component_records_and_pairwise_equality(monkey
 # serialization and recorded separately from component totals
 # =============================================================================
 
+def _horizon_window(limb, *, cutoff_step=None, qos_override=None, g_total=1.0, length=None):
+    """A `window_g_from_step_metrics`-shaped result whose series are at the
+    REGISTERED HORIZON for `limb` -- `H_STABLE` (139) or `H_FLEX` (550),
+    exactly what `fork_continuation` + `window_g_from_step_metrics` produce
+    for a conforming full-horizon continuation. `length` overrides that, so a
+    test can build a deliberately truncated record.
+
+    The registered horizon is `h` itself, NOT `window_series_length(h)`:
+    `window_g_from_step_metrics` slices `n = min(len(step_metrics), int(h))`
+    for the QoS and return-cost series, while the H+1 convention belongs to
+    the cutoff/depletion LATCH series (row 0 is the previous-step baseline
+    recorded at `t_e`)."""
+    h = audit.REGISTERED_LIMB_HORIZON[limb] if length is None else length
+    qos = np.full(h, 1.0) if qos_override is None else np.asarray(qos_override, dtype=float)
+    cutoff_per_step = np.zeros(h + 1, dtype=int)
+    if cutoff_step is not None:
+        cutoff_per_step[cutoff_step] = 1
+    return {
+        "g_total": g_total,
+        "qos_series": qos,
+        "return_cost_series": np.zeros(h),
+        "latched": {"cutoff_count": int(cutoff_per_step.sum()), "depletion_count": 0,
+                     "cutoff_per_step": cutoff_per_step,
+                     "depletion_per_step": np.zeros(h + 1, dtype=int)},
+        "report": {"qos_saturation_fraction": 1.0},
+    }
+
+
+def _horizon_record(limb, arm, **kw):
+    return audit.build_primary_g_component_record(
+        window_result=_horizon_window(limb, **kw), topology_seed=1, event_index=0,
+        limb=limb, arm=arm, continuation_replicate=0)
+
+
 def test_exact_paired_sequence_equal_distinguishes_equal_totals_different_sequences():
     """R2's distinct arm-invariance degeneracy condition, hand-worked: two
     arms whose cutoff transition lands on DIFFERENT steps (arm A: step 1;
@@ -4459,40 +5081,125 @@ def test_exact_paired_sequence_equal_distinguishes_equal_totals_different_sequen
     wrongly call these arm-invariant. Only a direct per-step sequence
     comparison correctly returns `False` here; this is the mutation this
     test is paired against (deriving the equality boolean from
-    `component_window_totals` instead of the sequences themselves)."""
-    base = {
-        "g_total": 1.0, "qos_series": np.array([1.0, 1.0, 1.0]),
-        "return_cost_series": np.array([0.0, 0.0, 0.0]),
-        "report": {"qos_saturation_fraction": 1.0},
-    }
-    window_a = {**base, "latched": {
-        "cutoff_count": 1, "depletion_count": 0,
-        "cutoff_per_step": np.array([0, 1, 0]), "depletion_per_step": np.array([0, 0, 0])}}
-    window_b = {**base, "latched": {
-        "cutoff_count": 1, "depletion_count": 0,
-        "cutoff_per_step": np.array([0, 0, 1]), "depletion_per_step": np.array([0, 0, 0])}}
-    rec_a = audit.build_primary_g_component_record(
-        window_result=window_a, topology_seed=1, event_index=0, limb="stable",
-        arm="KEEP", continuation_replicate=0)
-    rec_b = audit.build_primary_g_component_record(
-        window_result=window_b, topology_seed=1, event_index=0, limb="stable",
-        arm="zA", continuation_replicate=0)
+    `component_window_totals` instead of the sequences themselves).
 
+    Both records are at the REGISTERED HORIZON. Before R3 part 2 this fixture
+    used 3-step series, which the length gate would now reject outright --
+    the test would then have passed for the wrong reason, proving nothing
+    about the sequence comparison it exists to check."""
+    rec_a = _horizon_record("stable", "KEEP", cutoff_step=1)
+    rec_b = _horizon_record("stable", "zA", cutoff_step=2)
+
+    assert len(rec_a["qos_component_series"]) == audit.H_STABLE
     # Totals agree (the exact scenario a totals-based comparison would miss)...
     assert rec_a["component_window_totals"] == rec_b["component_window_totals"]
     # ...but the sequences do not, and the function must say so.
+    assert rec_a["cutoff_transition_series"] != rec_b["cutoff_transition_series"]
     assert audit.exact_paired_sequence_equal(rec_a, rec_b) is False
 
 
-def test_exact_paired_sequence_equal_true_for_identical_sequences():
-    """Contrast case: identical component sequences must compare equal."""
-    window = {
-        "g_total": 3.0, "qos_series": np.array([0.8, 0.9]),
-        "return_cost_series": np.array([0.1, 0.2]),
+def test_exact_paired_sequence_equal_accepts_two_identical_records_at_the_registered_horizon():
+    """THE test the length gate's constant is decided by. A conforming
+    full-horizon pair -- 139 entries on stable, 550 on flex -- must compare
+    EQUAL. Comparing against `window_series_length(h)` = h+1 instead would
+    return False for every conforming record in the formal run, driving
+    `components_invariant_*` permanently False and rendering branch 3
+    (PRIMARY_G_DEGENERATE) structurally unreachable while `complete` stayed
+    True. Both limbs, because their horizons are different constants and a
+    hard-coded 139 would pass one and fail the other."""
+    for limb, horizon in (("stable", audit.H_STABLE), ("flex", audit.H_FLEX)):
+        rec_a = _horizon_record(limb, "KEEP")
+        rec_b = _horizon_record(limb, "zA")
+        assert len(rec_a["qos_component_series"]) == horizon, limb
+        assert audit.exact_paired_sequence_equal(rec_a, rec_b) is True, limb
+
+
+def test_exact_paired_sequence_equal_is_false_for_two_one_step_records():
+    """R3 repair, part 2. Two 1-step records compared EQUAL at a registered
+    horizon of 139 -- a truncated window says nothing about whether the arms
+    agree over the window the contract registered, and section 4's "a missing
+    pair is neither equal nor unequal" applies to a missing REMAINDER exactly
+    as it does to a missing pair.
+
+    The two records are byte-identical apart from the arm id, so nothing but
+    the length gate can distinguish them -- if the gate is absent this
+    returns True."""
+    rec_a = _horizon_record("stable", "KEEP", length=1)
+    rec_b = _horizon_record("stable", "zA", length=1)
+
+    assert len(rec_a["qos_component_series"]) == 1
+    assert list(rec_a["qos_component_series"]) == list(rec_b["qos_component_series"])
+    assert rec_a["cutoff_transition_series"] == rec_b["cutoff_transition_series"]
+    assert audit.exact_paired_sequence_equal(rec_a, rec_b) is False
+
+    # One short of the registered horizon is still short.
+    near = _horizon_record("stable", "KEEP", length=audit.H_STABLE - 1)
+    near_b = _horizon_record("stable", "zA", length=audit.H_STABLE - 1)
+    assert audit.exact_paired_sequence_equal(near, near_b) is False
+    # ...and one OVER it is not a conforming record either.
+    over = _horizon_record("stable", "KEEP", length=audit.H_STABLE + 1)
+    over_b = _horizon_record("stable", "zA", length=audit.H_STABLE + 1)
+    assert audit.exact_paired_sequence_equal(over, over_b) is False
+
+
+def test_exact_paired_sequence_equal_rejects_a_cross_limb_pair():
+    """A stable record and a flex record are not a CRN pair at all, and their
+    registered horizons differ. Fail closed rather than picking one limb's
+    horizon for both."""
+    rec_stable = _horizon_record("stable", "KEEP")
+    rec_flex = _horizon_record("flex", "KEEP")
+    assert audit.exact_paired_sequence_equal(rec_stable, rec_flex) is False
+
+
+def test_exact_paired_sequence_equal_is_false_for_two_empty_series():
+    """R3 repair. `np.array_equal([], [])` is True, so two records that
+    produced no window at all compared `sequences_exactly_equal=True` -- even
+    with `total_g` 1.0 vs 999.0, as measured. Section 4: "a missing pair is
+    neither equal nor unequal", and an incomplete audit must never read as
+    exactly invariant, because that routes straight to PRIMARY_G_DEGENERATE,
+    the conclusion that already closed R3's measurement route.
+
+    The `total_g` disagreement is in the fixture deliberately: these two
+    records are not merely un-comparable, they are demonstrably different
+    measurements, and the old code called them equal."""
+    empty = {
+        "g_total": 1.0, "qos_series": np.array([]),
+        "return_cost_series": np.array([]),
         "latched": {"cutoff_count": 0, "depletion_count": 0,
-                    "cutoff_per_step": np.array([0, 0]), "depletion_per_step": np.array([0, 0])},
+                    "cutoff_per_step": np.array([]), "depletion_per_step": np.array([])},
         "report": {"qos_saturation_fraction": 0.0},
     }
+    rec_a = audit.build_primary_g_component_record(
+        window_result=empty, topology_seed=1, event_index=0, limb="stable",
+        arm="KEEP", continuation_replicate=0)
+    rec_b = audit.build_primary_g_component_record(
+        window_result={**empty, "g_total": 999.0}, topology_seed=1, event_index=0,
+        limb="stable", arm="zA", continuation_replicate=0)
+
+    assert len(rec_a["qos_component_series"]) == 0
+    assert rec_a["total_g"] != rec_b["total_g"]
+    assert audit.exact_paired_sequence_equal(rec_a, rec_b) is False
+    # Either side empty is enough -- not only both.
+    nonempty = {**empty, "qos_series": np.array([0.5]),
+                "return_cost_series": np.array([0.0]),
+                "latched": {"cutoff_count": 0, "depletion_count": 0,
+                            "cutoff_per_step": np.array([0]),
+                            "depletion_per_step": np.array([0])}}
+    rec_c = audit.build_primary_g_component_record(
+        window_result=nonempty, topology_seed=1, event_index=0, limb="stable",
+        arm="zB", continuation_replicate=0)
+    assert audit.exact_paired_sequence_equal(rec_a, rec_c) is False
+    assert audit.exact_paired_sequence_equal(rec_c, rec_a) is False
+
+
+def test_exact_paired_sequence_equal_true_for_identical_sequences():
+    """Contrast case: identical component sequences must compare equal. At
+    the registered flex horizon -- the fixture's original 2-step series would
+    now be rejected by the length gate, so the test would have gone red for a
+    reason that has nothing to do with what it checks."""
+    window = _horizon_window(
+        "flex", g_total=3.0,
+        qos_override=np.linspace(0.8, 0.9, audit.REGISTERED_LIMB_HORIZON["flex"]))
     rec_a = audit.build_primary_g_component_record(
         window_result=window, topology_seed=1, event_index=0, limb="flex",
         arm="KEEP", continuation_replicate=0)

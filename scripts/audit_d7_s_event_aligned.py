@@ -102,6 +102,14 @@ Z_FLEX_TRANSIT_STEPS = 139
 H_STABLE = 139
 H_FLEX = 550
 H_DIAGNOSTIC = EPISODE_STEPS
+# The registered horizon per limb, as contract section 4's "all four
+# sequences at the registered horizon" names it. This is `h` itself, NOT
+# `window_series_length(h)` = h+1 -- that convention belongs to the
+# cutoff/depletion LATCH series, which carry a row-0 previous-step baseline
+# the QoS and return-cost series do not. `exact_paired_sequence_equal` reads
+# it to reject a truncated window; see its docstring for why the distinction
+# decides whether branch 3 is reachable at all.
+REGISTERED_LIMB_HORIZON = {"stable": H_STABLE, "flex": H_FLEX}
 T_E_MAX = EPISODE_STEPS - H_FLEX  # 950, section 2 eligibility deadline
 
 # --- section 5: calibration --------------------------------------------------
@@ -124,7 +132,7 @@ EVAL_SHARED_CANDIDATE_TOKEN = "paired"
 # D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md, section 10: "Replace: B_m/T_m
 # inference"). `MATERIALITY_COEFFICIENT` and the T_m linear combination it
 # feeds (`compute_t_m_bootstrap` below) no longer sit on R4's conclusion-
-# bearing path -- `decide_branch` reads the absolute `MATERIALITY_MARGIN`
+# bearing path -- `decide_branch_with_reason` reads the absolute `MATERIALITY_MARGIN`
 # gates instead (contract section 1). Retained, unmodified, only because
 # `scripts/d7s_normalizer_autopsy.py` (a separate, committed artifact-
 # analysis tool) imports `compute_t_m_bootstrap`/`MATERIALITY_COEFFICIENT`
@@ -136,7 +144,7 @@ MATERIALITY_COEFFICIENT = 0.10  # R3 section 8: T_stable = U*_stable + 0.10*B_st
 # limbs. Five G-units is the smallest nonzero coefficient on a discrete,
 # window-local, task-semantic safety event in the frozen objective
 # (G_t = qos - 2*return_cost - 5*cutoff - 10*depletion), fixed from the
-# weights alone, never from an observed U*. Named so `decide_branch`'s limb-
+# weights alone, never from an observed U*. Named so `decide_branch_with_reason`'s limb-
 # state resolvers never carry the literal `5.0` at the call site.
 MATERIALITY_MARGIN = 5.0
 
@@ -902,11 +910,13 @@ def constructive_mixed_update(*, duty_map: dict[int, int],
     return new_map
 
 
-def null_update(*, duty_map: dict[int, int]) -> dict[int, int]:
-    """`null` / NO_PROACTIVE_ROTATION: freezes the pre-event duty ownership
-    map for the whole mechanism horizon, unconditionally -- no proactive
-    replacement at LEAVE, no proactive reoptimization at REJOIN."""
-    return dict(duty_map)
+# R5 (contract section 8): the NO_PROACTIVE_ROTATION arm and its
+# `null_update` duty-map schedule are DELETED from the R4 path, not retained
+# as decorative legacy apparatus. Nothing passed `schedule="null"` any more --
+# R4's PART_A_CONTROL block compares only `full_sync_SET` against
+# `constructive_mixed` on the stable event class, and R3's B_m
+# constructive-vs-null calibration contrast came off the conclusion-bearing
+# path with the rest of the R3 result layer. Git history is the archive.
 
 
 def limb_locked_duties(*, stable_focal_duty) -> dict:
@@ -1025,7 +1035,7 @@ def arm_distinctness_check(duty_map_pairs: list) -> bool:
     vacuously here -- that absence is `SOURCE_EVENT_SUPPORT_INSUFFICIENT`
     (branch 2)'s failure mode, already reported by `support_ok`, and must
     not be double-counted as an arm-conformance defect (branch 1) ahead of
-    it in `decide_branch`'s precedence: this check exists to catch arms
+    it in `decide_branch_with_reason`'s precedence: this check exists to catch arms
     that are indistinguishable WHEN events exist, not to re-detect that no
     events were found."""
     if not duty_map_pairs:
@@ -1038,7 +1048,7 @@ def compute_conformance_ok(*, invalidated_pairs: int, topology_hash_ok: bool,
     """Item 3's real conjunction: zero tolerance on invalidated
     (`PrefixReplayMismatchError`) pairs, every pinned-topology hash assert
     passed, and the arm-distinctness spot check passed. False routes
-    `decide_branch` to branch 1 (`INVALID_EVENT_ALIGNED_AUDIT`)."""
+    `decide_branch_with_reason` to branch 1 (`INVALID_EVENT_ALIGNED_AUDIT`)."""
     return int(invalidated_pairs) == 0 and bool(topology_hash_ok) and bool(arm_distinct_ok)
 
 
@@ -1082,7 +1092,7 @@ def compute_part_a_control_bounds(*, d_a_topology_units: list,
 
 
 def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
-    """Maps `part_a_control_verdict`'s verdict string to `decide_branch`'s
+    """Maps `part_a_control_verdict`'s verdict string to `decide_branch_with_reason`'s
     `part_a_contradiction` boolean plus the diagnostic string that lands in
     the JSON payload only, never a branch input itself. ONLY
     `PART_A_CONTRADICTION` sets the branch input True --
@@ -1101,7 +1111,7 @@ def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
 # version) is DELETED, not retained beside the new path -- frozen contract
 # docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md sections
 # 1/5/6/7 replace both the gate and the branch-selection logic wholesale.
-# The R4 `decide_branch` (first-match precedence over the five registered
+# The R4 `decide_branch_with_reason` (first-match precedence over the five registered
 # branch groups) lives after `compute_t_m_bootstrap` below, alongside the
 # rest of the R4 result layer (`resolve_stable_limb_state`,
 # `resolve_flex_limb_state`, `combined_result`, `focal_primary_g_degenerate`,
@@ -1146,8 +1156,10 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 # R4 population layer -- freshness sentinel (contract section 3)
 # =============================================================================
 #
-# Six fail-closed conditions, checked independently so a defect in one can
-# never read through another:
+# Seven fail-closed conditions, checked independently so a defect in one can
+# never read through another. Five are evaluated against one assembled
+# artifact by `r4_freshness_sentinel`; conditions 6 and 7 are separate
+# functions' own behavior and are tested directly against them.
 #   1. the exact seed list is 20260734-20260741;
 #   2. none of the topologies that actually PRODUCED units overlaps the R3
 #      initial set (checked against `topology_records`, not the top-level
@@ -1158,13 +1170,19 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 #   3. the artifact identifies the R4 contract and population namespace;
 #   4. each topology has the required Part-A-control and focal-audit block
 #      identities;
-#   5. no R3 topology unit is accepted by the R4 pooler (the pooler's own
+#   5. every topology attempted the REGISTERED episode volume in both blocks
+#      (`N_CALIBRATION_EPISODES`/`N_AUDIT_EPISODES`) -- a conclusion-bearing
+#      run does not take an episode-count argument at all (`main()` refuses
+#      one outright on the R4 population), and this is the artifact-level
+#      check that the volume actually ran;
+#   6. no R3 topology unit is accepted by the R4 pooler (the pooler's own
 #      SystemExit gate in `pool_d7_s_event_aligned_shards.py`, tested there
 #      directly -- it cannot be evaluated from a single artifact); and
-#   6. no arbitrary CLI topology-seed override can produce a conclusion-
+#   7. no arbitrary CLI topology-seed override can produce a conclusion-
 #      bearing artifact (`r4_artifact_identity` below: ONLY the exact frozen
 #      `TOPOLOGY_SEEDS_R4` list ever earns the identity fields condition 3
-#      checks).
+#      checks; the sharded production route earns them only through the
+#      explicitly-declared `r4_declared_population_identity`).
 
 def r4_artifact_identity(topology_seeds) -> dict:
     """Condition 6: the ONLY topology-seed list that earns the R4 contract/
@@ -1177,6 +1195,47 @@ def r4_artifact_identity(topology_seeds) -> dict:
         return {"r4_contract": R4_CONTRACT_PATH,
                 "r4_population_namespace": R4_POPULATION_NAMESPACE}
     return {"r4_contract": None, "r4_population_namespace": None}
+
+
+def r4_declared_population_identity(topology_seeds) -> dict:
+    """R1 repair -- the SHARDED production route's path to R4 identity.
+
+    `r4_artifact_identity` above earns identity only when ONE process's whole
+    seed list is the exact frozen population. The formal R4 run is planned as
+    one shard per topology, so under that rule every shard ran in the legacy
+    R3 `CONTRACT_ID` seed namespace, the pooled artifact carried no R4
+    identity, and it was self-labelled "NOT R4 conclusion-bearing" while the
+    pooler still printed the conclusion-bearing `D7_S_EVENT_ALIGNED_BRANCH=`
+    line on stdout.
+
+    Honest severity, for the record: this was a PROVENANCE failure, not a
+    live stream collision. R3 ran 20260726-20260733 only, so the legacy
+    namespace at 20260734-41 is in fact disjoint from every R3 draw -- the
+    randomness would have been fresh; the artifact's PROOF that it is R4
+    would not have existed.
+
+    This is the explicitly-declared path (`--population r4`), and it is
+    deliberately NOT a widening of `r4_artifact_identity`: an accidental
+    subset still gets `None`/`None` there, and the flag is what distinguishes
+    intent from accident. Membership in the frozen population is enforced
+    here as a hard `SystemExit` rather than a silent denial of identity -- a
+    run that DECLARES itself R4 and names a seed outside the population is a
+    contradiction, not a development run."""
+    seeds = list(topology_seeds)
+    if not seeds:
+        raise SystemExit(
+            "--population r4 was declared with an empty topology-seed list; "
+            "an R4 shard must cover at least one seed of the frozen population "
+            f"{list(TOPOLOGY_SEEDS_R4)}.")
+    outside = [s for s in seeds if s not in set(TOPOLOGY_SEEDS_R4)]
+    if outside:
+        raise SystemExit(
+            f"--population r4 was declared, but topology seed(s) {sorted(set(outside))} "
+            f"are not members of the frozen R4 population {list(TOPOLOGY_SEEDS_R4)}. "
+            "A declared R4 run never measures a topology outside its own population; "
+            "drop --population r4 for a development run.")
+    return {"r4_contract": R4_CONTRACT_PATH,
+            "r4_population_namespace": R4_POPULATION_NAMESPACE}
 
 
 def _topology_unit_has_required_blocks(unit: dict) -> bool:
@@ -1193,16 +1252,24 @@ def _topology_unit_has_required_blocks(unit: dict) -> bool:
 
 
 def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
-    """Conditions 1-4 of the six, checked against one assembled artifact --
+    """Conditions 1-5 of the seven, checked against one assembled artifact --
     the exact shape `main()`/`pool_d7_s_event_aligned_shards.pool()` emit.
-    Condition 5 is the pooler's own refusal, tested directly against
-    `pool_d7_s_event_aligned_shards.py`; condition 6 is `r4_artifact_
-    identity`'s own behavior, tested directly against it. Returns
-    `(ok, detail)`; `ok` is the conjunction, `detail` names each condition's
-    own independent boolean so a test can drive exactly one to False."""
+    Condition 6 is the pooler's own refusal, tested directly against
+    `pool_d7_s_event_aligned_shards.py`; condition 7 is `r4_artifact_
+    identity`/`r4_declared_population_identity`'s own behavior, tested
+    directly against them. Returns `(ok, detail)`; `ok` is the conjunction,
+    `detail` names each condition's own independent boolean so a test can
+    drive exactly one to False.
+
+    Note the scope: conditions 1 and 5 are WHOLE-POPULATION properties, so
+    this is the gate for a pooled (or single-process whole-population)
+    artifact, never for an individual shard, which covers a strict subset by
+    construction. The pooler calls it on its own output."""
     declared_seeds = list(result.get("topology_seeds", []))
     actual_seeds = [tr.get("topology_seed") for tr in result.get("topology_records", [])]
     topology_units = result.get("topology_units") or []
+    calibration_reports = result.get("calibration_reports") or []
+    audit_reports = result.get("audit_reports") or []
     detail = {
         "exact_seed_list": declared_seeds == list(TOPOLOGY_SEEDS_R4),
         "no_r3_overlap": not (set(actual_seeds) & set(TOPOLOGY_SEEDS_INITIAL)),
@@ -1211,6 +1278,20 @@ def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
             and result.get("r4_population_namespace") == R4_POPULATION_NAMESPACE),
         "per_topology_block_identities": bool(topology_units) and all(
             _topology_unit_has_required_blocks(u) for u in topology_units),
+        # Condition 5 (R2 repair): the registered episode volume actually ran.
+        # Contract sections 3/8 register EIGHT episodes per topology per block;
+        # `N_CALIBRATION_EPISODES`/`N_AUDIT_EPISODES` were referenced only as
+        # CLI defaults, so a conclusion-bearing artifact could be produced at 2
+        # and still earn full R4 identity. Deliberately NOT merged into
+        # condition 4, which stays presence-not-count: a topology with zero
+        # QUALIFYING episodes still carries the (empty) unit list, a different
+        # failure mode from never having attempted the registered volume.
+        "registered_episode_counts": (
+            bool(calibration_reports) and bool(audit_reports)
+            and all(rep.get("episodes_attempted") == N_CALIBRATION_EPISODES
+                    for rep in calibration_reports)
+            and all(rep.get("episodes_attempted") == N_AUDIT_EPISODES
+                    for rep in audit_reports)),
     }
     return all(detail.values()), detail
 
@@ -1569,7 +1650,7 @@ def compute_t_m_bootstrap(*, b_stable_topology_units: list[list[dict]],
                            u_star_flex_topology_units: list[list[dict]],
                            n_topo: int, iters: int = BOOTSTRAP_ITERS,
                            seed: int = BOOTSTRAP_SEED) -> dict:
-    """Section 8's T_m inference, producing exactly the inputs `decide_branch`
+    """Section 8's T_m inference, producing exactly the inputs `decide_branch_with_reason`
     consumes: `T_stable = U*_stable + 0.10*B_stable` with its UCB95 (and
     LCB95, for the branch-6/9 affirmative-miss checks), `T_flex = U*_flex -
     0.10*B_flex` with its LCB95 (and UCB95, for branch 6/8), and LCB95 of
@@ -1674,12 +1755,34 @@ def compute_focal_component_invariance(*, stable_units: list[dict], flex_units: 
     `components_invariant_*`.
 
     Exact invariance only, no fraction threshold: one `sequences_exactly_
-    equal=False` record anywhere on a limb refutes that limb's invariance."""
+    equal=False` record anywhere on a limb refutes that limb's invariance.
+
+    R3 repair -- the completeness gate used to be `if not pairwise`, i.e.
+    "the list is non-empty and nothing more". Section 4 defines completeness
+    as EVERY qualifying event and legal candidate represented, so dropping
+    the pairs of the single candidate whose sequences differed left
+    `complete=True` and flipped both limbs to invariant -- silently to
+    PRIMARY_G_DEGENERATE, the exact conclusion that already closed R3's
+    measurement route. The gate now requires the FULL
+    `candidates x range(N_EVAL)` cross product per unit, by membership and
+    not merely by count, so a swapped-in duplicate pair cannot stand in for
+    a missing one. `N_EVAL` is the registered evaluate-replicate count: a
+    unit that lost any replicate to a clone/isolation failure never reaches
+    this function at all (`event_invalid` voids the WHOLE event in
+    `run_audit_event`), so requiring the registered count here can only
+    fail on a genuinely truncated audit, never on a conforming run."""
     complete = bool(stable_units) and bool(flex_units)
     for units in (stable_units, flex_units):
         for unit in units:
             pairwise = (unit.get("component_audit") or {}).get("pairwise_equality")
             if not pairwise:
+                complete = False
+                continue
+            expected = {(z_id, r)
+                        for z_id in (unit.get("candidates") or {})
+                        for r in range(N_EVAL)}
+            present = {(p.get("candidate"), p.get("replicate_index")) for p in pairwise}
+            if len(pairwise) != len(expected) or present != expected:
                 complete = False
     if not complete:
         return {"complete": False, "components_invariant_stable": False,
@@ -1727,7 +1830,7 @@ def resolve_stable_limb_state(*, complete_focal_audit: bool, components_invarian
     them is knowable without a complete audit (`COMPONENT_INVARIANT`
     requires completeness explicitly; the other three require "components
     separate", which an incomplete audit cannot establish either way).
-    `decide_branch` never reaches this value as its published branch in that
+    `decide_branch_with_reason` never reaches this value as its published branch in that
     case -- the `component_invariance_evaluated` gate already routes to
     `INVALID_EVENT_ALIGNED_AUDIT` first -- but the payload must not assert a
     MATERIAL/AFFIRMATIVE_NONMATERIAL/UNRESOLVED reading the evidence does
@@ -1799,10 +1902,10 @@ COMBINED_RESULT_MAP = {
 
 def combined_result(stable_state: str, flex_state: str) -> str:
     """Contract section 6's combined-result mapping. Both limb states must
-    already be resolved (never `NOT_EVALUATED` -- `decide_branch` only calls
+    already be resolved (never `NOT_EVALUATED` -- `decide_branch_with_reason` only calls
     this once `component_invariance_evaluated` is True) and must not both be
     `COMPONENT_INVARIANT` -- that combination resolves via branch 3
-    (PRIMARY_G_DEGENERATE) in `decide_branch`'s precedence, strictly before
+    (PRIMARY_G_DEGENERATE) in `decide_branch_with_reason`'s precedence, strictly before
     this mapping is ever consulted, so reaching it here is a caller-contract
     violation, not a ninth row."""
     if stable_state == "COMPONENT_INVARIANT" and flex_state == "COMPONENT_INVARIANT":
@@ -1812,12 +1915,22 @@ def combined_result(stable_state: str, flex_state: str) -> str:
     return COMBINED_RESULT_MAP[(stable_state, flex_state)]
 
 
-def decide_branch(*, conformance_ok: bool, support_ok: bool,
-                   component_invariance_evaluated: bool,
-                   primary_g_degenerate_flag: bool, part_a_contradiction: bool,
-                   stable_limb_state: str, flex_limb_state: str) -> str:
+# Contract section 4's two frozen reason codes, emitted alongside `branch`.
+# They are what keeps an instrument failure distinguishable from a reading of
+# the population: `INVALID_EVENT_ALIGNED_AUDIT` is reported both for a
+# conformance failure and for a missing/incomplete mandatory component audit,
+# and only the reason code says which.
+REASON_COMPONENT_AUDIT_MISSING = "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
+REASON_COMPONENTS_EXACTLY_INVARIANT = "FOCAL_KEEP_SET_COMPONENTS_EXACTLY_INVARIANT"
+
+
+def decide_branch_with_reason(*, conformance_ok: bool, support_ok: bool,
+                               component_invariance_evaluated: bool,
+                               primary_g_degenerate_flag: bool, part_a_contradiction: bool,
+                               stable_limb_state: str, flex_limb_state: str
+                               ) -> tuple[str, Optional[str]]:
     """Contract section 7's first-match precedence over the five registered
-    branch groups:
+    branch groups, and the single source of truth for it:
 
         1. INVALID_EVENT_ALIGNED_AUDIT
         2. SOURCE_EVENT_SUPPORT_INSUFFICIENT
@@ -1827,27 +1940,46 @@ def decide_branch(*, conformance_ok: bool, support_ok: bool,
 
     `component_invariance_evaluated=False` (section 4: "audit missing/
     incomplete") reports the SAME branch string as a conformance failure
-    (`INVALID_EVENT_ALIGNED_AUDIT`) -- both are item 1 -- and is checked
-    BEFORE `primary_g_degenerate_flag` so a run whose focal component audit
-    never completed can never be misreported as PRIMARY_G_DEGENERATE
-    (`primary_g_degenerate_flag` is only ever True when the caller's
-    `compute_focal_component_invariance` reported `complete=True`, but this
-    ordering makes that dependency load-bearing rather than incidental).
+    (`INVALID_EVENT_ALIGNED_AUDIT`), and section 4 routes it to item **1** --
+    so it is checked BEFORE `support_ok`, not after. R4 repair: the order was
+    conformance -> support -> component -> degenerate, which reported a
+    support failure that came with no component audit as
+    `SOURCE_EVENT_SUPPORT_INSUFFICIENT`, an artifact carrying no record that
+    the mandatory audit never ran. That misattributes an instrument failure
+    to the population, and section 9's disposition for support-insufficient
+    ("no topology substitution and no expansion") is a scientific reading of
+    the population, not of the instrument.
+
+    The consequence to keep in view: with zero units on a limb the audit is
+    ALSO incomplete, so item 1 now wins whenever support failure coincides
+    with an empty limb. The reason code is what keeps the two cases
+    distinguishable, and branch 2 stays reachable for a support failure whose
+    component audit did complete.
+
     `PART_A_CONFORMANCE_UNRESOLVED` never reaches this function as True --
     only `PART_A_CONTRADICTION` maps to `part_a_contradiction=True`
     (`map_part_a_verdict_to_inputs`) -- so it can never suppress an
     otherwise valid combined result, exactly as section 7 requires."""
     if not conformance_ok:
-        return "INVALID_EVENT_ALIGNED_AUDIT"
-    if not support_ok:
-        return "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+        return "INVALID_EVENT_ALIGNED_AUDIT", None
     if not component_invariance_evaluated:
-        return "INVALID_EVENT_ALIGNED_AUDIT"
+        return "INVALID_EVENT_ALIGNED_AUDIT", REASON_COMPONENT_AUDIT_MISSING
+    if not support_ok:
+        return "SOURCE_EVENT_SUPPORT_INSUFFICIENT", None
     if primary_g_degenerate_flag:
-        return "PRIMARY_G_DEGENERATE"
+        return "PRIMARY_G_DEGENERATE", REASON_COMPONENTS_EXACTLY_INVARIANT
     if part_a_contradiction:
-        return "PART_A_CONTRADICTION"
-    return combined_result(stable_limb_state, flex_limb_state)
+        return "PART_A_CONTRADICTION", None
+    return combined_result(stable_limb_state, flex_limb_state), None
+
+
+# A `decide_branch(**kwargs) -> str` projection returning only the branch
+# string was retained here briefly and is DELETED. It could not drift out of
+# sync -- it was one line -- but production called `decide_branch_with_reason`
+# at both sites, so the wrapper was kept alive solely by the tests that
+# exercised it, which made those tests self-referential: they asserted against
+# a path the real run never enters. The same assertions now read
+# `decide_branch_with_reason(...)[0]` and test the real one.
 
 
 # =============================================================================
@@ -2135,9 +2267,11 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
                                     step_index: int = 0):
     """Detects LEAVE (rising edge of `uav_charging`) and REJOIN (falling
     edge) per UAV and drives `duty_map` through the already-accepted PURE
-    `constructive_mixed_update`/`null_update` functions -- never
-    reimplements their reassignment logic. Returns
-    `(new_duty_map, leave_uavs, rejoin_uavs)`.
+    `constructive_mixed_update` function -- never reimplements its
+    reassignment logic. Returns `(new_duty_map, leave_uavs, rejoin_uavs)`.
+    R5 deleted the retired no-proactive-rotation dispatch along with
+    `null_update` itself; the only two schedules this function distinguishes
+    are `full_sync_SET` and `constructive_mixed`.
 
     `schedule == "full_sync_SET"` (Part-A conformance diagnostic, section 4:
     "reassigns every duty at each check", stable limb only, never applied on
@@ -2170,21 +2304,15 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
         return new_map, leave_uavs, rejoin_uavs
     new_map = dict(duty_map)
     for u in leave_uavs:
-        if schedule == "null":
-            new_map = null_update(duty_map=new_map)
-        else:
-            new_map = constructive_mixed_update(
-                duty_map=new_map, duty_positions=duty_positions,
-                airborne_positions=airborne_positions, event="LEAVE",
-                event_uav=u, locked_duties=locked_duties)
+        new_map = constructive_mixed_update(
+            duty_map=new_map, duty_positions=duty_positions,
+            airborne_positions=airborne_positions, event="LEAVE",
+            event_uav=u, locked_duties=locked_duties)
     for u in rejoin_uavs:
-        if schedule == "null":
-            new_map = null_update(duty_map=new_map)
-        else:
-            new_map = constructive_mixed_update(
-                duty_map=new_map, duty_positions=duty_positions,
-                airborne_positions=airborne_positions, event="REJOIN",
-                event_uav=u, locked_duties=locked_duties)
+        new_map = constructive_mixed_update(
+            duty_map=new_map, duty_positions=duty_positions,
+            airborne_positions=airborne_positions, event="REJOIN",
+            event_uav=u, locked_duties=locked_duties)
     return new_map, leave_uavs, rejoin_uavs
 
 
@@ -2594,9 +2722,9 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                         stable_focal_duty=stable_choice["duty"]),
                     "conformance_record": build_event_conformance_record(cand),
                     # Item 3 / arm-distinctness spot check witness: the
-                    # PRE-LEAVE duty map is exactly what `null` freezes for
-                    # the whole mechanism horizon (`null_update` is the
-                    # identity on this dict), so pairing it with
+                    # PRE-LEAVE duty map is exactly the frozen, no-proactive-
+                    # rotation ownership map (the identity on this dict), so
+                    # pairing it with
                     # `duty_map_at_te` (constructive_mixed's post-LEAVE
                     # re-match) gives a real constructive-vs-null witness at
                     # every certified joint event -- both certifications
@@ -3368,7 +3496,53 @@ def exact_paired_sequence_equal(record_a: dict, record_b: dict) -> bool:
     step 5 of one arm and step 9 of the other, same window count), so a
     totals-based comparison cannot establish the arm-invariance condition
     R2 made distinct from component cancellation; only a direct sequence
-    comparison can."""
+    comparison can.
+
+    R3 repair -- a series that is not AT THE REGISTERED HORIZON is never
+    evidence of equality. Two defects fell to the one gate below. An EMPTY
+    pair of series compared `sequences_exactly_equal=True`, because
+    `np.array_equal([], [])` is True, even when the two records' `total_g`
+    differed (measured: 1.0 vs 999.0); and two 1-step records compared equal
+    at a registered horizon of 139. Section 4 is explicit that a missing pair
+    is "neither equal nor unequal", and a truncated window says nothing about
+    whether the two arms agree over the window the contract registered. An
+    incomplete audit must never read as exactly invariant, because that is
+    what routes to PRIMARY_G_DEGENERATE.
+
+    A separate `size == 0` branch used to sit ahead of the length check. It
+    is deleted: `0 != horizon` already rejects an empty series, so no input
+    reached it that the length check did not decide identically, and a line
+    that cannot change an answer reads as coverage forever after.
+
+    THE LENGTH COMPARED AGAINST IS THE REGISTERED HORIZON `h` ITSELF --
+    `H_STABLE` (139) on the stable limb, `H_FLEX` (550) on the flex limb --
+    NOT `window_series_length(h)` = h+1. Contract section 4 says "all four
+    sequences at the registered horizon", and the registered horizon is `h`.
+    The H+1 convention `window_series_length` documents is a DIFFERENT
+    series' convention: the cutoff/depletion LATCH series carry a row-0
+    previous-step baseline recorded at `t_e`, which the QoS and return-cost
+    series do not. `fork_continuation` rolls exactly `horizon` steps and
+    `window_g_from_step_metrics` slices `n = min(len(step_metrics), int(h))`,
+    so a conforming full-horizon record measures exactly `h` here (measured:
+    139 stable, 550 flex). Comparing against h+1 would make this function
+    return False for EVERY conforming record, driving `components_invariant_*`
+    permanently False and rendering branch 3 (PRIMARY_G_DEGENERATE)
+    structurally unreachable while `complete` stayed True. Project Manager
+    binding, 2026-07-28.
+
+    The limb is read from the records themselves (`build_primary_g_component_
+    record` writes it), so no horizon has to be threaded in. Two records whose
+    limbs disagree are not a CRN pair at all and are rejected; so is a record
+    carrying no recognized limb -- fail closed, never a guessed horizon."""
+    limb_a, limb_b = record_a.get("limb"), record_b.get("limb")
+    if limb_a != limb_b:
+        return False
+    horizon = REGISTERED_LIMB_HORIZON.get(limb_a)
+    if horizon is None:
+        return False
+    for record in (record_a, record_b):
+        if np.asarray(record["qos_component_series"]).size != horizon:
+            return False
     return (
         np.array_equal(np.asarray(record_a["qos_component_series"]),
                         np.asarray(record_b["qos_component_series"]))
@@ -4286,15 +4460,18 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     turn those into the four per-limb states, always recorded in
     `out["limb_states"]` regardless of what `out["branch"]` ends up being --
     a top-level branch name must never erase which of the two states the
-    non-material limb actually reached. `decide_branch` then applies
+    non-material limb actually reached. `decide_branch_with_reason` then applies
     section 7's five-item first-match precedence for real.
 
     When there are fewer than two topologies, or support already failed,
-    none of the R4 bootstrap/invariance machinery runs (there is nothing
-    valid to bootstrap), and branch 1/2 are reported directly by the same
-    literal strings `decide_branch` itself would have returned first in its
-    precedence order -- conformance failure is checked before support
-    failure in both paths, matching `decide_branch`'s row order."""
+    none of the R4 BOOTSTRAP machinery runs (there is nothing valid to
+    bootstrap), but `compute_focal_component_invariance` still does -- it
+    needs no bootstrap, and section 4 routes a missing component audit to
+    precedence item 1, above support. That path calls
+    `decide_branch_with_reason` too, rather than re-stating its first rows as
+    literals. `out["branch_reason"]` carries section 4's two frozen reason
+    codes so an instrument failure stays distinguishable from a reading of
+    the population."""
     support_ok, support_detail = check_minimum_support([
         {"qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
          "qualifying_audit_episodes": r["qualifying_audit_episodes"]}
@@ -4355,6 +4532,37 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
         for limb, key in (("stable", "audit_units_stable"), ("flex", "audit_units_flex"))
     }
 
+    # Contract section 4/7: the mandatory FOCAL component audit is evaluated
+    # BEFORE the support gate and before any bootstrap, because section 4
+    # routes a missing/incomplete component audit to precedence item 1 and
+    # support is item 2. R4 repair: this block used to sit INSIDE the
+    # `len > 1 and support_ok` gate, so a support failure that came with no
+    # component audit produced an artifact with no `primary_g` key at all --
+    # no record that the mandatory audit never ran. It aggregates the FOCAL
+    # (KEEP, SET(z)) evaluation pairs pooled across every topology --
+    # `audit_units_stable`/`audit_units_flex`'s own `component_audit.
+    # pairwise_equality`, never the R3 calibration pair (`calibration_units_*`,
+    # a disjoint accumulator, never read here).
+    # `.get(...) or []`: a topology_result that never carried the key at all
+    # is exactly section 4's "audit missing" case, and reads through to
+    # `complete=False` -> precedence item 1. Fail-closed, never a KeyError and
+    # never a silent skip. (The bootstrap path below still indexes these keys
+    # directly -- there they are guaranteed by `run_topology_audit`'s shape.)
+    stable_focal_units = [u for r in topology_results for u in (r.get("audit_units_stable") or [])]
+    flex_focal_units = [u for r in topology_results for u in (r.get("audit_units_flex") or [])]
+    invariance = compute_focal_component_invariance(
+        stable_units=stable_focal_units, flex_units=flex_focal_units)
+    component_invariance_evaluated = invariance["complete"]
+    primary_g_degenerate_flag = focal_primary_g_degenerate(
+        components_invariant_stable=invariance["components_invariant_stable"],
+        components_invariant_flex=invariance["components_invariant_flex"])
+    out["primary_g"] = {
+        "degenerate": primary_g_degenerate_flag,
+        "component_invariance_evaluated": component_invariance_evaluated,
+        "components_invariant_stable": invariance["components_invariant_stable"],
+        "components_invariant_flex": invariance["components_invariant_flex"],
+    }
+
     if len(topology_results) > 1 and support_ok:
         n_topo = len(topology_results)
         # Section 8's common resampling stream: every primary quantity in
@@ -4391,28 +4599,8 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             **({} if part_a_bounds is None else part_a_bounds),
         }
 
-        # Contract section 4: branch 3 aggregates the FOCAL (KEEP, SET(z))
-        # evaluation pairs pooled across every topology -- `audit_units_
-        # stable`/`audit_units_flex`'s own `component_audit.
-        # pairwise_equality`, never the R3 calibration pair
-        # (`calibration_units_*`, a disjoint accumulator, never read here).
-        stable_focal_units = [u for r in topology_results for u in r["audit_units_stable"]]
-        flex_focal_units = [u for r in topology_results for u in r["audit_units_flex"]]
-        invariance = compute_focal_component_invariance(
-            stable_units=stable_focal_units, flex_units=flex_focal_units)
-        component_invariance_evaluated = invariance["complete"]
-        primary_g_degenerate_flag = focal_primary_g_degenerate(
-            components_invariant_stable=invariance["components_invariant_stable"],
-            components_invariant_flex=invariance["components_invariant_flex"])
-        out["primary_g"] = {
-            "degenerate": primary_g_degenerate_flag,
-            "component_invariance_evaluated": component_invariance_evaluated,
-            "components_invariant_stable": invariance["components_invariant_stable"],
-            "components_invariant_flex": invariance["components_invariant_flex"],
-        }
-
         # Section 5's per-limb states. Recorded in the payload unconditionally
-        # -- never gated on what `decide_branch` ultimately returns -- so a
+        # -- never gated on what `decide_branch_with_reason` ultimately returns -- so a
         # top-level branch name can never erase whether the non-material limb
         # was affirmatively nonmaterial, exactly invariant, or merely
         # unresolved (the exact defect R3 had, and the reason section 6's
@@ -4429,19 +4617,32 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             ucb95_u_star_flex=u_star["u_star_flex_ucb"])
         out["limb_states"] = {"stable": stable_limb_state, "flex": flex_limb_state}
 
-        out["branch"] = decide_branch(
+        branch, branch_reason = decide_branch_with_reason(
             conformance_ok=conformance_ok, support_ok=support_ok,
             component_invariance_evaluated=component_invariance_evaluated,
             primary_g_degenerate_flag=primary_g_degenerate_flag,
             part_a_contradiction=part_a_contradiction,
             stable_limb_state=stable_limb_state, flex_limb_state=flex_limb_state)
-    elif not conformance_ok:
-        out["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
-    elif not support_ok:
-        out["branch"] = "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    elif conformance_ok and support_ok and component_invariance_evaluated:
+        # Fewer than two topologies with nothing failing: there is no valid
+        # bootstrap and therefore no result to report. (Unreachable in the
+        # registered population -- `support_ok` needs MIN_SUPPORT_TOPOLOGIES=6
+        # topologies -- but `assemble_audit_result` is exercised directly.)
+        branch, branch_reason = None, None
     else:
-        out["branch"] = None
+        # No valid bootstrap. Branch 1/2 come from `decide_branch_with_reason`
+        # itself; R4 repair: this used to re-implement its first two rows as
+        # literals, a second hand-synchronized copy that agreed with the
+        # precedence order only until the order changed.
+        branch, branch_reason = decide_branch_with_reason(
+            conformance_ok=conformance_ok, support_ok=support_ok,
+            component_invariance_evaluated=component_invariance_evaluated,
+            primary_g_degenerate_flag=primary_g_degenerate_flag,
+            part_a_contradiction=False,
+            stable_limb_state="NOT_EVALUATED", flex_limb_state="NOT_EVALUATED")
 
+    out["branch"] = branch
+    out["branch_reason"] = branch_reason
     return out
 
 
@@ -4451,6 +4652,15 @@ def main() -> None:
                          help="Use the development-only topology 20260725; no scientific reading.")
     parser.add_argument("--topology-seeds", type=int, nargs="*", default=None,
                          help="Override the registered topology seed list.")
+    parser.add_argument("--population", choices=["r4"], default=None,
+                         help="Declare this process a member run of the frozen R4 population "
+                              "(contract section 3). Every resolved topology seed must be a "
+                              "member of TOPOLOGY_SEEDS_R4 or the run refuses to start; the "
+                              "R4 population/seed namespace and the R4 contract identity "
+                              "fields are then written even when this process covers a strict "
+                              "SUBSET of the population, which is what the one-shard-per-"
+                              "topology production route needs. Episode-count overrides are "
+                              "refused outright on this path.")
     parser.add_argument("--episodes-calibration", type=int, default=None,
                          help="Override the calibration episode count for the selected mode "
                               "(including --smoke, which otherwise defaults to 1).")
@@ -4479,17 +4689,45 @@ def main() -> None:
         episodes_calibration=args.episodes_calibration, episodes_audit=args.episodes_audit)
     topology_seeds, n_calibration, n_audit = plan["topology_seeds"], plan["n_calibration"], plan["n_audit"]
 
-    # R4 freshness sentinel condition 6: the ONLY seed list that ever earns
-    # the R4 contract/population-namespace identity fields (condition 3) and
-    # the R4 population/seed namespace used to derive every conclusion-
-    # bearing RNG stream below is the exact frozen `TOPOLOGY_SEEDS_R4` list.
-    # Smoke, dev and every `--topology-seeds` override -- arbitrary or not
-    # -- fall back to the legacy `CONTRACT_ID` namespace and get no R4
+    # R4 freshness sentinel condition 7. Two -- and only two -- routes reach
+    # the R4 contract/population-namespace identity fields and the R4
+    # population/seed namespace every conclusion-bearing RNG stream below is
+    # derived from:
+    #
+    #   * the whole population in ONE process: the resolved seed list is the
+    #     exact frozen `TOPOLOGY_SEEDS_R4`, inferred (`r4_artifact_identity`);
+    #   * an explicitly DECLARED member run: `--population r4`, which admits a
+    #     strict subset -- the sharded production route -- but hard-refuses any
+    #     seed outside the population (`r4_declared_population_identity`).
+    #
+    # Smoke, dev and every undeclared `--topology-seeds` override -- arbitrary
+    # or not -- fall back to the legacy `CONTRACT_ID` namespace and get no R4
     # identity at all, so none of them can produce a conclusion-bearing R4
-    # artifact no matter what is passed on the command line.
-    r4_identity = r4_artifact_identity(topology_seeds)
+    # artifact no matter what is passed on the command line. An ACCIDENTAL
+    # subset still gets `None`/`None`; the flag is what distinguishes intent
+    # from accident.
+    if args.population == "r4":
+        r4_identity = r4_declared_population_identity(topology_seeds)
+    else:
+        r4_identity = r4_artifact_identity(topology_seeds)
     run_contract_id = (R4_POPULATION_NAMESPACE if r4_identity["r4_population_namespace"]
                         else CONTRACT_ID)
+
+    # R2 repair (contract sections 3/8): a conclusion-bearing run does not
+    # take an episode-count argument. The registered volume is EIGHT episodes
+    # per topology per block; `resolve_run_plan` honored an override on the
+    # formal path and the artifact still earned full R4 identity, so an R4
+    # result could be published at 2 episodes per topology. Refused outright
+    # here, and independently re-checked from the artifact itself by
+    # `r4_freshness_sentinel`'s `registered_episode_counts` condition.
+    if r4_identity["r4_population_namespace"] and (
+            args.episodes_calibration is not None or args.episodes_audit is not None):
+        raise SystemExit(
+            "--episodes-calibration/--episodes-audit are refused on the R4 population. "
+            f"The registered volume is {N_CALIBRATION_EPISODES} calibration + "
+            f"{N_AUDIT_EPISODES} audit episodes per topology (contract sections 3/8); "
+            "a conclusion-bearing run does not take an episode-count argument. Use "
+            "--dev or --topology-seeds (without --population r4) for a development run.")
 
     config = build_config()
     topology_results = []
@@ -4521,7 +4759,12 @@ def main() -> None:
     if args.smoke:
         note = "SMOKE_NOT_A_RESULT"
     elif r4_identity["r4_population_namespace"]:
-        note = "Real orchestration run. R4 conclusion-bearing population."
+        if list(topology_seeds) == list(TOPOLOGY_SEEDS_R4):
+            note = "Real orchestration run. R4 conclusion-bearing population."
+        else:
+            note = ("Real orchestration run. R4 population MEMBER SHARD covering "
+                    f"{sorted(topology_seeds)} -- conclusion-bearing only once pooled "
+                    "over the whole population by pool_d7_s_event_aligned_shards.py.")
     else:
         note = ("Real orchestration run. NOT R4 conclusion-bearing -- topology-seed "
                 "set does not match the frozen R4 population.")

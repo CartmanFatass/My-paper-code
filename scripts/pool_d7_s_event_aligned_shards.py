@@ -28,8 +28,13 @@ topologies that failed the pinned-coordinate hash assert. This pooler:
    disjoint; the UNION of every shard's topology seeds equals the frozen R4
    population `TOPOLOGY_SEEDS_R4` (20260734..41) -- NEVER `TOPOLOGY_SEEDS_
    INITIAL` (R3's 8 seeds) or any union containing an R3 seed, per freshness
-   sentinel condition 5 ("no R3 topology unit is accepted by the R4 pooler")
-   -- unless `--allow-any-seeds` is passed (development pooling only).
+   sentinel condition 6 ("no R3 topology unit is accepted by the R4 pooler")
+   -- unless `--allow-any-seeds` is passed (development pooling only). When
+   the union IS the R4 population, every shard must additionally carry the
+   `r4_contract`/`r4_population_namespace` identity fields that only
+   `audit_d7_s_event_aligned.py --population r4` writes, and the pooled
+   artifact is put through `r4_freshness_sentinel` before it is returned --
+   contract section 3's "fail closed unless", executable.
 2. Reconstructs `topology_results` in ASCENDING topology-seed order
    REGARDLESS of shard/argument order -- deterministic and load-bearing, not
    cosmetic: section 8's hierarchical bootstrap resamples topologies by
@@ -142,11 +147,22 @@ def _reconstruct_topology_result(unit: dict) -> dict:
     }
 
 
+R4_IDENTITY_FIELDS = ("r4_contract", "r4_population_namespace")
+
+
+def _pooling_r4_population(shards: list[dict]) -> bool:
+    """True when the shards' seed union IS the frozen R4 population -- the
+    only union this pooler accepts without `--allow-any-seeds`, and the only
+    one whose pooled output is a conclusion-bearing R4 artifact."""
+    union = set().union(*(set(s["topology_seeds"]) for s in shards))
+    return union == set(audit.TOPOLOGY_SEEDS_R4)
+
+
 def _assert_identity(shards: list[dict], paths: list[str], *, allow_smoke: bool,
                       allow_any_seeds: bool) -> None:
     """Every check SystemExits on violation -- pooling never warns and
     proceeds. Order: contract identity, smoke-flag gate, seed disjointness,
-    seed-union membership in a frozen set."""
+    seed-union membership in a frozen set, R4 identity on every shard."""
     ref_path, ref = paths[0], shards[0]
     for p, s in zip(paths[1:], shards[1:]):
         for f in CONTRACT_IDENTITY_FIELDS:
@@ -183,8 +199,29 @@ def _assert_identity(shards: list[dict], paths: list[str], *, allow_smoke: bool,
         raise SystemExit(
             f"pooled topology-seed union {sorted(union)} does not match the frozen "
             f"R4 population {r4} -- no R3 topology unit is accepted by the R4 "
-            "pooler (freshness sentinel condition 5). Pass --allow-any-seeds for "
+            "pooler (freshness sentinel condition 6). Pass --allow-any-seeds for "
             "development pooling of a non-frozen set.")
+
+    # R1 repair. Pooling the R4 population means EVERY shard must itself prove
+    # it was produced as a declared member of that population (audit
+    # `main --population r4`): the R4 contract path and population namespace
+    # must be present on each shard, so the pooled artifact's identity is
+    # earned by every contributing process rather than asserted once at the
+    # end. A shard produced WITHOUT the flag carries `None`/`None` -- it ran
+    # in the legacy R3 seed namespace and there is no proof it belongs to the
+    # R4 population -- and the pool is refused rather than relabelled.
+    if _pooling_r4_population(shards):
+        expected = {"r4_contract": audit.R4_CONTRACT_PATH,
+                    "r4_population_namespace": audit.R4_POPULATION_NAMESPACE}
+        for p, s in zip(paths, shards):
+            bad = {f: s.get(f) for f in R4_IDENTITY_FIELDS if s.get(f) != expected[f]}
+            if bad:
+                raise SystemExit(
+                    f"{p} carries no proof it belongs to the R4 population: {bad} "
+                    f"(expected {expected}). Every shard of a pooled R4 artifact must "
+                    "be produced by `audit_d7_s_event_aligned.py --population r4`; a "
+                    "shard run without it derived its streams from the legacy "
+                    f"'{audit.CONTRACT_ID}' namespace and is not an R4 measurement.")
 
 
 def pool(shards: list[dict], *, paths: list[str] | None = None, allow_smoke: bool = False,
@@ -232,13 +269,23 @@ def pool(shards: list[dict], *, paths: list[str] | None = None, allow_smoke: boo
     out = audit.assemble_audit_result(topology_results, topology_hash_failures)
 
     union_seeds = sorted(set().union(*(set(s["topology_seeds"]) for s in shards)))
+    pooling_r4 = _pooling_r4_population(shards)
     result = {
         "contract": shards[0]["contract"],
         "contract_id": shards[0]["contract_id"],
         "procedure_version": shards[0]["procedure_version"],
         "topology_seeds": union_seeds,
         "smoke": bool(shards[0]["smoke"]),
-        "note": shards[0]["note"],
+        "note": ("Pooled R4 conclusion-bearing population."
+                  if pooling_r4 else shards[0]["note"]),
+        # R1: propagated from the shards, never minted here -- `_assert_identity`
+        # has already required both fields on EVERY shard when pooling the R4
+        # population, so this carries an identity each contributing process
+        # earned. A non-R4 development pool gets `None`/`None` and therefore
+        # fails the sentinel's condition 3 if anyone runs it against this
+        # artifact.
+        **({f: shards[0].get(f) for f in R4_IDENTITY_FIELDS} if pooling_r4
+           else {f: None for f in R4_IDENTITY_FIELDS}),
         "topology_records": topology_records,
         "calibration_reports": calibration_reports,
         "audit_reports": audit_reports,
@@ -253,6 +300,21 @@ def pool(shards: list[dict], *, paths: list[str] | None = None, allow_smoke: boo
         },
     }
     result.update(out)
+
+    # R1 repair: contract section 3 says "fail closed unless", and until now
+    # `r4_freshness_sentinel` was defined and called from NO production code
+    # path at all -- there was no executable closure anywhere. This is it. The
+    # pooled artifact is the whole-population artifact, so it is the only
+    # object on which conditions 1 and 5 (exact seed list, registered episode
+    # volume in every topology) are even evaluable.
+    if pooling_r4:
+        ok, detail = audit.r4_freshness_sentinel(result)
+        if not ok:
+            failing = sorted(k for k, v in detail.items() if not v)
+            raise SystemExit(
+                "R4 freshness sentinel FAILED on the pooled artifact; failing "
+                f"condition(s): {failing}. Full detail: {detail}. This artifact is "
+                "not a conclusion-bearing R4 result and no branch is reported for it.")
     return result
 
 

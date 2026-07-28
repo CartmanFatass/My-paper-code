@@ -70,7 +70,8 @@ def _degenerate_unit(value):
 def _topology_result(seed, *, d_a, u_stable, u_flex, qualifying=4,
                       qualifying_calibration=None, qualifying_audit=None,
                       invalidated_pairs=None, arm_distinctness_pairs=None,
-                      episode_worlds=None):
+                      episode_worlds=None,
+                      attempted_calibration=None, attempted_audit=None):
     """One synthetic `run_topology_audit`-shaped result -- exactly the shape
     `topology_unit_for_serialization` and the rest of `main()`'s per-topology
     arrays consume.
@@ -87,6 +88,13 @@ def _topology_result(seed, *, d_a, u_stable, u_flex, qualifying=4,
     non-vacuous state on purpose."""
     qc = qualifying if qualifying_calibration is None else qualifying_calibration
     qa = qualifying if qualifying_audit is None else qualifying_audit
+    # `episodes_attempted` is a DIFFERENT quantity from `qualifying`: the
+    # freshness sentinel's `registered_episode_counts` condition reads the
+    # former, support reads the latter. The fixture used to write `qualifying`
+    # into both, so no test could express "attempted the registered volume,
+    # only some qualified" -- the ordinary real case.
+    ac = audit.N_CALIBRATION_EPISODES if attempted_calibration is None else attempted_calibration
+    aa = audit.N_AUDIT_EPISODES if attempted_audit is None else attempted_audit
     if arm_distinctness_pairs is None:
         at_te = {0: 1, 1: 0}
         before_leave = {0: 0, 1: 1}
@@ -99,8 +107,8 @@ def _topology_result(seed, *, d_a, u_stable, u_flex, qualifying=4,
             "coordinate_hash": f"hash-{seed}",
             "procedure_version": audit.TOPOLOGY_PROCEDURE_VERSION,
         },
-        "calibration_report": {"episodes_attempted": qc, "qualifying": qc},
-        "audit_report": {"episodes_attempted": qa, "qualifying": qa},
+        "calibration_report": {"episodes_attempted": ac, "qualifying": qc},
+        "audit_report": {"episodes_attempted": aa, "qualifying": qa},
         "audit_events": [],
         "qualifying_calibration_episodes": qc,
         "qualifying_audit_episodes": qa,
@@ -116,7 +124,7 @@ def _topology_result(seed, *, d_a, u_stable, u_flex, qualifying=4,
 
 
 def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=None,
-                  overrides=None):
+                  overrides=None, r4_population=False):
     """Builds one shard JSON file via the Task-A writer path: the real
     `topology_unit_for_serialization` function plus the same surrounding
     dict shape `main()` assembles (data plumbing only, no branch logic --
@@ -127,7 +135,12 @@ def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=N
     while `_assert_identity` quantifies over all of `CONTRACT_IDENTITY_FIELDS`
     -- so `contract` and `procedure_version` could be dropped from that tuple
     with the whole file green. A fixture builder with no affordance for a
-    field is why that field goes untested; give it the affordance."""
+    field is why that field goes untested; give it the affordance.
+
+    `r4_population=True` writes the `r4_contract`/`r4_population_namespace`
+    identity fields that only `audit_d7_s_event_aligned.py --population r4`
+    produces. Default False, so the paired negative -- a shard produced
+    WITHOUT the flag -- is what the unmodified builder gives you."""
     seeds = [r["topology_record"]["topology_seed"] for r in topology_results]
     shard = {
         "contract": audit.CONTRACT_PATH,
@@ -142,6 +155,9 @@ def _write_shard(tmp_path, name, topology_results, *, smoke=False, contract_id=N
         "audit_events": [r["audit_events"] for r in topology_results],
         "topology_units": [audit.topology_unit_for_serialization(r) for r in topology_results],
         "topology_hash_failures": [],
+        "r4_contract": audit.R4_CONTRACT_PATH if r4_population else None,
+        "r4_population_namespace": (audit.R4_POPULATION_NAMESPACE
+                                     if r4_population else None),
     }
     shard.update(overrides or {})
     path = tmp_path / name
@@ -402,27 +418,251 @@ def test_registered_r4_seed_set_is_accepted_without_allow_any_seeds(tmp_path, mo
     """The positive case of the frozen-set gate: the REAL registered
     `TOPOLOGY_SEEDS_R4` (8 seeds) pools cleanly with no override, proving the
     membership check accepts the actual frozen R4 set and not merely that it
-    rejects everything else (R3's included, per the paired negative above)."""
+    rejects everything else (R3's included, per the paired negative above).
+
+    Both shards must now be produced as DECLARED R4 population members
+    (`--population r4`), which is what `r4_population=True` writes."""
     _fast_t_m_bootstrap(monkeypatch, pooling.audit)
     seeds = list(audit.TOPOLOGY_SEEDS_R4)
     topo = [
         _topology_result(s, d_a=0.35, u_stable=-1.0, u_flex=1.0)
         for s in seeds
     ]
-    p1 = _write_shard(tmp_path, "a.json", topo[:4])
-    p2 = _write_shard(tmp_path, "b.json", topo[4:])
+    p1 = _write_shard(tmp_path, "a.json", topo[:4], r4_population=True)
+    p2 = _write_shard(tmp_path, "b.json", topo[4:], r4_population=True)
 
     pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])
 
     assert pooled["topology_seeds"] == seeds
+    # R1: the identity fields are propagated into the pooled artifact, so it
+    # carries the proof it belongs to the R4 population.
+    assert pooled["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert pooled["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    # ...and the pooled artifact passed `r4_freshness_sentinel` on the way
+    # out (the pooler SystemExits otherwise), which is checkable here too.
+    assert audit.r4_freshness_sentinel(pooled)[0] is True
     # Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state): a run that is not
     # normalizer-forced-degenerate and never performed the mandatory
     # primary-G component audit is a measurement invalidity -- branch 1,
     # not a later branch. The pooler is production and so takes the
     # fail-closed default, which is why this fixture now lands there.
-    # The property this test exists for -- pooled output equals direct
-    # assembly -- is asserted above and is unchanged.
     assert pooled["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
+    assert pooled["branch_reason"] == "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
+
+
+# =============================================================================
+# 3b. R1: the sharded production route must EARN R4 identity, and the pooled
+# artifact must pass the freshness sentinel before it is returned.
+# =============================================================================
+
+def _r4_shard_pair(tmp_path, monkeypatch, *, r4_population=True, **topo_kwargs):
+    """Two seed-disjoint shards spanning the whole frozen R4 population."""
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    topo = [_topology_result(s, d_a=0.35, u_stable=-1.0, u_flex=1.0, **topo_kwargs)
+            for s in seeds]
+    p1 = _write_shard(tmp_path, "a.json", topo[:4], r4_population=r4_population)
+    p2 = _write_shard(tmp_path, "b.json", topo[4:], r4_population=r4_population)
+    return [p1, p2]
+
+
+def test_a_shard_without_the_population_flag_makes_the_pooler_refuse(tmp_path, monkeypatch):
+    """Paired negative for the test above. Measured defect: the formal R4 run
+    is planned as one shard per topology, and identity was earned only when
+    ONE process's whole seed list equalled `TOPOLOGY_SEEDS_R4` -- so every
+    shard ran under the legacy R3 `contract_id` namespace, the pooled
+    artifact carried `r4_contract=None`/`r4_population_namespace=None` and
+    was self-labelled "NOT R4 conclusion-bearing", while the pooler still
+    printed the conclusion-bearing `D7_S_EVENT_ALIGNED_BRANCH=` line.
+
+    A shard produced without `--population r4` carries no proof it belongs to
+    the R4 population and the pool must be REFUSED, not relabelled."""
+    paths = _r4_shard_pair(tmp_path, monkeypatch, r4_population=False)
+    with pytest.raises(SystemExit, match="carries no proof it belongs to the R4 population"):
+        pooling.pool(_load_shards(paths), paths=paths)
+
+
+def test_one_undeclared_shard_among_declared_ones_is_enough_to_refuse(tmp_path, monkeypatch):
+    """Not "some shard proves it" -- EVERY shard must. One undeclared shard in
+    an otherwise declared pool is refused, and the message names that shard."""
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    topo = [_topology_result(s, d_a=0.35, u_stable=-1.0, u_flex=1.0) for s in seeds]
+    p1 = _write_shard(tmp_path, "declared.json", topo[:4], r4_population=True)
+    p2 = _write_shard(tmp_path, "undeclared.json", topo[4:], r4_population=False)
+
+    with pytest.raises(SystemExit, match=r"undeclared\.json carries no proof"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])
+
+
+def test_pooler_fails_closed_when_the_pooled_artifact_fails_the_sentinel(tmp_path, monkeypatch):
+    """R1: `r4_freshness_sentinel` was defined and called from NO production
+    path at all -- contract section 3 says "fail closed unless" and there was
+    no executable closure. The pooler now runs it on its own output.
+
+    Driven through condition 5 (`registered_episode_counts`), which no other
+    pooler gate touches: every shard is a properly declared R4 member with a
+    disjoint, complete seed union, so identity, smoke, disjointness and the
+    frozen-set gate all pass -- only the sentinel can stop this pool. The
+    topologies attempted 2 calibration episodes instead of the registered 8,
+    the exact volume defect R2 names."""
+    paths = _r4_shard_pair(tmp_path, monkeypatch, attempted_calibration=2)
+    with pytest.raises(SystemExit,
+                       match=r"freshness sentinel FAILED.*registered_episode_counts"):
+        pooling.pool(_load_shards(paths), paths=paths)
+
+
+def test_a_conforming_r4_pool_passes_the_sentinel_it_is_gated_on(tmp_path, monkeypatch):
+    """The positive half of the gate above: with the registered episode
+    volume attempted, the same pool succeeds. Without this, the sentinel call
+    could be refusing everything and the negative test would not notice."""
+    paths = _r4_shard_pair(tmp_path, monkeypatch)
+    pooled = pooling.pool(_load_shards(paths), paths=paths)
+    ok, detail = audit.r4_freshness_sentinel(pooled)
+    assert ok is True, detail
+
+
+# =============================================================================
+# 3c. R1, end to end: shards produced by the REAL `main()` production path,
+# pooled by the REAL pooler. Every fixture above hand-assembles the shard
+# dict; this one does not, so it is the only test that proves the production
+# route from CLI to pooled artifact can earn R4 identity at all.
+# =============================================================================
+
+def _stub_topology_result(seed):
+    """Exactly the shape `run_topology_audit` returns, reduced to what
+    `main()` and `assemble_audit_result` read. Zero qualifying episodes keeps
+    `support_ok` False so no 10,000-iteration bootstrap runs -- the freshness
+    sentinel is indifferent to the branch."""
+    return {
+        "topology_record": {"topology_seed": seed, "coordinate_hash": f"h{seed}",
+                             "procedure_version": audit.TOPOLOGY_PROCEDURE_VERSION},
+        "calibration_report": {"episodes_attempted": audit.N_CALIBRATION_EPISODES,
+                                "qualifying": 0},
+        "audit_report": {"episodes_attempted": audit.N_AUDIT_EPISODES, "qualifying": 0},
+        "audit_events": [],
+        "qualifying_calibration_episodes": 0, "qualifying_audit_episodes": 0,
+        "invalidated_pairs": [], "arm_distinctness_pairs": [],
+        "calibration_units_d_a": [], "audit_units_stable": [], "audit_units_flex": [],
+        "episode_worlds": [],
+    }
+
+
+def _main_shard(monkeypatch, tmp_path, name, seeds, *, declared: bool):
+    """Runs the REAL `audit_d7_s_event_aligned.main()` for `seeds` and returns
+    the path of the shard JSON it wrote."""
+    monkeypatch.setattr(audit, "build_config", lambda: None)
+    monkeypatch.setattr(
+        audit, "run_topology_audit",
+        lambda config, *, topology_seed, **kw: _stub_topology_result(topology_seed))
+    out_dir = tmp_path / name
+    argv = ["audit_d7_s_event_aligned.py", "--out", str(out_dir)]
+    if declared:
+        argv += ["--population", "r4"]
+    argv += ["--topology-seeds"] + [str(s) for s in seeds]
+    monkeypatch.setattr(sys, "argv", argv)
+    audit.main()
+    return str(out_dir / "d7_s_event_aligned.json")
+
+
+def test_shards_from_the_real_main_pool_into_an_artifact_that_earns_r4_identity(
+        tmp_path, monkeypatch):
+    """R1 end to end. Two declared shards, four topologies each, produced by
+    the real `main()`; the real `pool()` accepts them, propagates the identity
+    fields, and the pooled artifact passes `r4_freshness_sentinel`."""
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    p1 = _main_shard(monkeypatch, tmp_path, "s1", seeds[:4], declared=True)
+    p2 = _main_shard(monkeypatch, tmp_path, "s2", seeds[4:], declared=True)
+
+    pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])
+
+    assert pooled["topology_seeds"] == seeds
+    assert pooled["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    ok, detail = audit.r4_freshness_sentinel(pooled)
+    assert ok is True, detail
+
+
+def test_shards_from_main_without_the_population_flag_are_refused_by_the_pooler(
+        tmp_path, monkeypatch):
+    """The paired negative, through the same production path: one shard run
+    WITHOUT `--population r4` -- exactly what the formal run would have
+    produced before this repair -- and the pool is refused rather than
+    quietly producing a branch string for an artifact with no R4 provenance."""
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    p1 = _main_shard(monkeypatch, tmp_path, "s1", seeds[:4], declared=True)
+    p2 = _main_shard(monkeypatch, tmp_path, "s2", seeds[4:], declared=False)
+
+    with pytest.raises(SystemExit, match="carries no proof it belongs to the R4 population"):
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2])
+
+
+# =============================================================================
+# 3d. The pooler's own CLI entry point. `pool()` is well covered; `main()` --
+# argument parsing, file reading, the `D7_S_EVENT_ALIGNED_BRANCH=` line, the
+# artifact write -- was invoked by no test. That is the shape the R1 defect
+# had one level down: a production route nothing exercises, so nothing
+# asserts that the route the real run takes produces a conforming artifact.
+# =============================================================================
+
+def _run_pooler_main(monkeypatch, tmp_path, shard_paths, out_name="pooled"):
+    """Drives the REAL `pool_d7_s_event_aligned_shards.main()` through argv and
+    returns `(pooled_artifact_from_disk, stdout_text)`."""
+    out_dir = tmp_path / out_name
+    monkeypatch.setattr(
+        sys, "argv",
+        ["pool_d7_s_event_aligned_shards.py", "--shards", *shard_paths, "--out", str(out_dir)])
+    pooling.main()
+    with (out_dir / "d7_s_event_aligned.json").open(encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def test_pooler_main_writes_a_conforming_r4_artifact(tmp_path, monkeypatch, capsys):
+    """The pooler CLI, end to end: shards produced by the real audit `main()`
+    on the declared R4 path, pooled by the real pooler `main()`, and the
+    artifact read back OFF DISK -- never the dict `pool()` returned in
+    memory. The R4 identity fields must survive the JSON round trip and the
+    artifact must pass the freshness sentinel."""
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    p1 = _main_shard(monkeypatch, tmp_path, "s1", seeds[:4], declared=True)
+    p2 = _main_shard(monkeypatch, tmp_path, "s2", seeds[4:], declared=True)
+
+    pooled = _run_pooler_main(monkeypatch, tmp_path, [p1, p2])
+
+    assert pooled["topology_seeds"] == seeds
+    assert pooled["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert pooled["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    ok, detail = audit.r4_freshness_sentinel(pooled)
+    assert ok is True, detail
+
+    # The conclusion-bearing line the CLI prints is now printed only for an
+    # artifact that cleared the sentinel -- which is the whole point of R1.
+    out = capsys.readouterr().out
+    assert f"D7_S_EVENT_ALIGNED_BRANCH={pooled['branch']}" in out
+
+
+def test_pooler_main_exits_nonzero_on_an_undeclared_shard(tmp_path, monkeypatch, capsys):
+    """Paired negative for the CLI. One shard produced WITHOUT
+    `--population r4` must make the entry point exit NONZERO and write no
+    artifact -- not warn, not relabel, and above all not reach the
+    `D7_S_EVENT_ALIGNED_BRANCH=` line. A `SystemExit` carrying a string
+    message exits 1."""
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    p1 = _main_shard(monkeypatch, tmp_path, "s1", seeds[:4], declared=True)
+    p2 = _main_shard(monkeypatch, tmp_path, "s2", seeds[4:], declared=False)
+
+    out_dir = tmp_path / "pooled_bad"
+    monkeypatch.setattr(
+        sys, "argv",
+        ["pool_d7_s_event_aligned_shards.py", "--shards", p1, p2, "--out", str(out_dir)])
+
+    with pytest.raises(SystemExit) as excinfo:
+        pooling.main()
+
+    assert excinfo.value.code != 0
+    assert "carries no proof it belongs to the R4 population" in str(excinfo.value)
+    assert not (out_dir / "d7_s_event_aligned.json").exists()
+    assert "D7_S_EVENT_ALIGNED_BRANCH=" not in capsys.readouterr().out
 
 
 # =============================================================================
