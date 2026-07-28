@@ -1,0 +1,47 @@
+# Shared source manifest: G45 code-science alignment correction recheck
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260728_g31_shared_baseline_conditioning_attribution_g45_code_science_alignment_correction_recheck
+review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
+audit_mode=correction_recheck
+audit_target_commit=a42da997712d9c941ac9a6ca08992f4c5de033a2
+repair_implementation_code_commit=a42da997712d9c941ac9a6ca08992f4c5de033a2
+original_audit_target_commit=1c38e387fa7fe90dc6446177eb69146a12a29a20
+original_stage_commit=8dec3a94aff7aaa28f6533eecc987acbd6e0c35c
+formal_compute=not_started
+nonformal_compute=not_started
+compute_budget=zero
+
+The submitted question and the following paths are the complete allow-list.
+Read only these paths from the exact audit target commit:
+
+- .agents/roles/EXTERNAL_PRO.md
+- docs/project/ALGORITHM_PRINCIPLES.md
+- docs/project/SCIENTIFIC_ASSERTION_AUDIT.md
+- docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+- docs/external-review/OPEN_REVIEW_PRINCIPLES.md
+- docs/project/CURRENT_WORK.md
+- docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md
+- docs/research/cdc/CONJECTURES.md
+- docs/research/cdc/IDEA_PORTFOLIO.md
+- docs/report/ITERATION_34.md
+- docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+- docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260728_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_CODE_SCIENCE_INDEX.md
+- ha_ctse_process/continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py
+- scripts/run_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py
+- tests/ha_ctse_process_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45_test.py
+- tests/run_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45_test.py
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_CODE_SCIENCE_INDEX.md
+- ha_ctse_process/continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44.py
+- scripts/run_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44.py
+- ha_ctse_process/continuous_roster_native_six_credit_reduction_g40.py
+- ha_ctse_process/continuous_roster_native_six_g31_slow_critic_reduction_g41.py
+- ha_ctse_process/continuous_roster_native_six_g31_db_norm_schedule_attribution_g43.py
+
+The G45 source, runner, tests and index at a42da997 are the repaired
+implementation under recheck. The earlier G45 raw/intake/question are included
+only to bind the exact prior mismatch. No runtime log, formal/nonformal
+artifact, unlisted round, G33 material or workflow file is admitted.
