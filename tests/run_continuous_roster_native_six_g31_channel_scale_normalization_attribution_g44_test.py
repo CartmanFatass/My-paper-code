@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import pickle
 from pathlib import Path
 from typing import Any
 
@@ -60,6 +61,18 @@ def _proof_cpu_execution(configuration: dict[str, object]) -> dict[str, object]:
         "hardware_logical_cpu_count": 16,
         "effective_parent_torch_intraop_threads": 1,
     }
+
+
+def _raise_g44_gate_error_worker(
+    task: dict[str, object],
+) -> dict[str, object]:
+    raise g44.G44GradientGateError(
+        "spawn_serialization_probe",
+        {
+            "index": int(task["index"]),
+            "stage": "before_either_arm_optimizer_step",
+        },
+    )
 
 
 def _first_update() -> tuple[
@@ -252,6 +265,86 @@ def test_isolated_worker_backend_is_spawn_safe_and_bitwise_equivalent(
         and row["deterministic_preassigned_merge"] is True
         for row in report["matrix"]
     )
+
+
+def test_gradient_gate_error_roundtrips_through_pickle_and_spawn(
+    tmp_path: Path,
+) -> None:
+    original = g44.G44GradientGateError(
+        "serialization_probe",
+        {"replicate": 0, "stage": "before_either_arm_optimizer_step"},
+    )
+    restored = pickle.loads(pickle.dumps(original))
+    assert isinstance(restored, g44.G44GradientGateError)
+    assert restored.reason == original.reason
+    assert restored.diagnostics == original.diagnostics
+    assert str(restored) == str(original)
+    assert restored.to_record() == original.to_record()
+
+    tasks = [
+        {
+            "index": index,
+            "output_path": str(tmp_path / f"worker_{index}.json"),
+        }
+        for index in range(2)
+    ]
+    with pytest.raises(g44.G44GradientGateError) as caught:
+        runner._run_indexed_worker_tasks(
+            tasks,
+            _raise_g44_gate_error_worker,
+            process_workers=2,
+        )
+    assert caught.value.reason == "spawn_serialization_probe"
+    assert caught.value.diagnostics == {
+        "index": 0,
+        "stage": "before_either_arm_optimizer_step",
+    }
+    assert caught.value.to_record()["passed"] is False
+    assert all(not Path(str(task["output_path"])).exists() for task in tasks)
+
+
+def test_spawned_gate_failure_reaches_train_parent_before_artifacts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    run_root = tmp_path / "formal-gate-failure"
+    monkeypatch.setattr(
+        runner._backend,
+        "_validate_formal_preflight",
+        lambda *args, **kwargs: {
+            "training": "0" * 64,
+            "evaluation": "1" * 64,
+            "analysis": "2" * 64,
+        },
+    )
+    monkeypatch.setattr(
+        runner._backend,
+        "_training_replicate_worker",
+        _raise_g44_gate_error_worker,
+    )
+    with pytest.raises(g44.G44GradientGateError) as caught:
+        runner.train(
+            run_root=run_root,
+            source_commit="a" * 40,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            accepted_anchor_root=runner._expected_anchor_root(),
+            preflight_root=tmp_path / "proof-only-preflight",
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
+            cpu_budget=2,
+            process_workers=2,
+        )
+    assert caught.value.reason == "spawn_serialization_probe"
+    assert caught.value.diagnostics == {
+        "index": 0,
+        "stage": "before_either_arm_optimizer_step",
+    }
+    assert not (run_root / "train_manifest.json").exists()
+    assert not (run_root / "evaluation_manifest.json").exists()
+    assert not (run_root / "analysis_result.json").exists()
+    assert (run_root / "checkpoints").is_dir()
+    assert not any((run_root / "checkpoints").iterdir())
 
 
 def test_two_process_g44_update_parameters_adam_and_evidence_are_bitwise(

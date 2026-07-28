@@ -83,6 +83,11 @@ class G44GradientGateError(ValueError):
         self.diagnostics = dict(diagnostics)
         super().__init__(f"G44 gradient gate failed before optimizer step: {reason}")
 
+    def __reduce__(
+        self,
+    ) -> tuple[type[G44GradientGateError], tuple[str, dict[str, object]]]:
+        return type(self), (self.reason, dict(self.diagnostics))
+
     def to_record(self) -> dict[str, object]:
         return {
             "passed": False,
