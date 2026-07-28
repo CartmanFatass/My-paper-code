@@ -1689,21 +1689,8 @@ def validate_conclusion_evidence(value: object) -> bool:
                 != NORMALIZATION_MASK_DIGEST
             ):
                 return False
-            immediate_sum = float(item["immediate_centered_sum_square"])
-            successor_sum = float(item["successor_centered_sum_square"])
             if (
-                float(item["immediate_scale"])
-                != float(np.sqrt(immediate_sum / float(NORMALIZATION_ROWS)))
-                or float(item["successor_scale"])
-                != float(np.sqrt(successor_sum / float(NORMALIZATION_ROWS)))
-                or float(item["pooled_scale"])
-                != float(
-                    np.sqrt(
-                        (immediate_sum + successor_sum)
-                        / float(2 * NORMALIZATION_ROWS)
-                    )
-                )
-                or float(item["s_I"]) != float(item["immediate_scale"])
+                float(item["s_I"]) != float(item["immediate_scale"])
                 or float(item["s_S"]) != float(item["successor_scale"])
                 or float(item["s_P"]) != float(item["pooled_scale"])
             ):

@@ -368,6 +368,93 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
     )
 
 
+def test_formal_conclusion_uses_canonical_scale_reconstruction_and_activation(
+    accepted_anchor_batch: tuple[
+        g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
+    ],
+) -> None:
+    anchor, trajectory = accepted_anchor_batch
+    _, _, record = _project_update(anchor, trajectory)
+    conclusion = g44.build_conclusion_evidence([record], formal=False)
+    template = conclusion["replicate_rows"][0]
+    pass_record = template["reconstructed_passes"][0]
+
+    immediate_sum = 393_912_715.78501064
+    successor_sum = 7_680.0
+    immediate_scale, successor_scale, pooled_scale = (
+        float(value)
+        for value in g44._canonical_normalization_scales(
+            immediate_sum, successor_sum
+        )
+    )
+    canonical = {
+        "immediate_centered_sum_square": immediate_sum,
+        "successor_centered_sum_square": successor_sum,
+        "immediate_scale": immediate_scale,
+        "successor_scale": successor_scale,
+        "pooled_scale": pooled_scale,
+    }
+    pass_record.update(canonical)
+    pass_record["normalization_by_arm"][g44.INDEPENDENT_ARM].update(canonical)
+    pass_record["s_I"] = immediate_scale
+    pass_record["s_S"] = successor_scale
+    pass_record["s_P"] = pooled_scale
+    pass_record["q_scale"] = abs(immediate_scale - successor_scale) / max(
+        immediate_scale, successor_scale
+    )
+    pass_record["active"] = bool(
+        pass_record["q_scale"] > g44.ACTIVATION_TOLERANCE
+        and pass_record["q_direction"] > g44.ACTIVATION_TOLERANCE
+        and pass_record["independent_credit_norm"] > 0.0
+        and pass_record["pooled_counterfactual_credit_norm"] > 0.0
+    )
+    template["strict_activation_observed"] = any(
+        item["active"] for item in template["reconstructed_passes"]
+    )
+
+    formal = copy.deepcopy(conclusion)
+    formal["formal"] = True
+    formal["required_replicates"] = list(g44.ACCEPTED_G40_ANCHOR_REPLICATES)
+    formal["replicate_rows"] = []
+    for replicate in g44.ACCEPTED_G40_ANCHOR_REPLICATES:
+        row = copy.deepcopy(template)
+        row["replicate"] = replicate
+        formal["replicate_rows"].append(row)
+    formal["passed"] = True
+    assert g44.ACTIVATION_TOLERANCE == 1e-6
+    assert formal["activation_threshold"] == 1e-6
+    assert immediate_scale == 1012.8249424374703
+    assert g44.validate_conclusion_evidence(formal)
+
+    tampered = copy.deepcopy(formal)
+    tampered_pass = tampered["replicate_rows"][0]["reconstructed_passes"][0]
+    tampered_scale = math.nextafter(immediate_scale, math.inf)
+    tampered_pass["immediate_scale"] = tampered_scale
+    tampered_pass["s_I"] = tampered_scale
+    tampered_pass["normalization_by_arm"][g44.INDEPENDENT_ARM][
+        "immediate_scale"
+    ] = tampered_scale
+    tampered_pass["q_scale"] = abs(
+        tampered_scale - tampered_pass["s_S"]
+    ) / max(tampered_scale, tampered_pass["s_S"])
+    assert not g44.validate_conclusion_evidence(tampered)
+
+    missing_replicate = copy.deepcopy(formal)
+    missing_replicate["replicate_rows"].pop()
+    assert not g44.validate_conclusion_evidence(missing_replicate)
+
+    inactive_replicate = copy.deepcopy(formal)
+    inactive_row = inactive_replicate["replicate_rows"][1]
+    for item in inactive_row["reconstructed_passes"]:
+        item["independent_credit_norm"] = 0.0
+        item["pooled_counterfactual_credit_norm"] = 0.0
+        item["reference_credit_dot_product"] = 0.0
+        item["q_direction"] = 0.0
+        item["active"] = False
+    inactive_row["strict_activation_observed"] = False
+    assert not g44.validate_conclusion_evidence(inactive_replicate)
+
+
 def test_dead_actor_and_baseline_groups_fail_registered_liveness(
     accepted_anchor_batch: tuple[
         g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
