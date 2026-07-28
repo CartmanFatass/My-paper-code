@@ -26,10 +26,22 @@ one. **When a line here stops being about the present, move it or delete it.**
 ```text
 working_branch=untied-k
 execution_mode=authorized
-active_assignment_id=D7_S_EVENT_ALIGNED_SOURCE_AUDIT
-next_boundary=PRO_ROUND_ON_THE_D7S_AUDIT_RESULT
-workflow_position=result in hand and mechanically validated; step 8 Pro round is next
+active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
+next_boundary=CODE_PLAN_FOR_THE_AUTOPSY_THEN_ITS_PRO_PLAN_REVIEW
+workflow_position=previous workflow closed at step 8; Pro's ruling is the next workflow's step 1, so step 2 (the code plan) is live
 ```
+
+## The workflow, and how often Pro is reached
+
+One workflow has **three** Pro accesses and the count is controlled:
+
+1. Pro's scientific decision;
+2. Pro's review of the Project Manager's code execution plan, which returns the
+   **convergence decision** — Pro closes it, agreement is not required;
+3. the result submission, which becomes the next workflow's access 1.
+
+An iteration **is** that whole loop. Material found after a round closes waits
+for the next plan review; it never becomes a fourth turn.
 
 **The audit ran and returned a valid, non-affirmative result.** Run
 `30289161086`, tag `d7s-audit-2`, stage commit `1b17dfb0`, 8/8 shards success in
@@ -47,27 +59,38 @@ b_flex_lcb    -8.648833      t_flex_lcb   -14.293054   t_flex_ucb    +3.115871
 recorded branch = SOURCE_NECESSITY_UNRESOLVED       part_a = NOT_APPLICABLE
 ```
 
-### The recorded branch label is wrong, and that is the round's question
+### Ruled: the run is `PRIMARY_G_DEGENERATE`, and this measurement route closes
 
-`assemble_audit_result` passes `primary_g_degenerate_flag=False` as a hardcoded
-literal and never calls `primary_g_degenerate`, so branch 3
-`PRIMARY_G_DEGENERATE` is unreachable. Evaluated post hoc with the instrument's
-own functions on its own output, the flag is `True` and the branch would be
-`PRIMARY_G_DEGENERATE`.
+Round `20260727_d7_s_audit_2_result_disposition`, stage commit `76c1ce32`,
+ruling archived at that round's `21_PRO_OPEN_RAW.md`.
 
-Nothing is inflated — both labels are non-affirmative — and the run is valid.
-What changes is the next experiment: *unresolved* invites more replicates and
-topologies; *degenerate* says B_m established no positive source-control
-contrast at all, so more replicates would be a power rescue of a degenerate
-design.
+The recorded branch `SOURCE_NECESSITY_UNRESOLVED` is **mislabelled**; the
+frozen-contract disposition is branch 3 `PRIMARY_G_DEGENERATE`. Not
+`INVALID_EVENT_ALIGNED_AUDIT` — the run stays valid and quantitatively usable.
+Leave the historical JSON byte-unchanged and attach the disposition; do not
+rerun to rewrite a string.
 
-**This is External Pro's call, not this conversation's.** Wiring the flag is a
-change to a result branch. The mapping from recorded bounds to
-`b_m_positive_lcb` is Project Manager **inference** — there is no production
-derivation, because the function is never called.
+Pro's durable conclusion: *"D7.S R3 produced a valid matched observation but an
+unidentifiable materiality scale. The result closes this measurement route, not
+the heterogeneous-renewal research question."*
 
-Do not write `docs/report/ITERATION_30.md` before that round rules. Step 8 is
-Pro-decision-then-report, and 30 is the conclusion-bearing report.
+Smallest retired unit: the **signed** `B_m = G(constructive_mixed) − G(null)`
+as an *identified positive materiality scale* on this frozen route. Primary `G`
+is retained under question; the S7-S3 source-necessity proposition is
+**unjudged**. `D7.3` and `D8` stay blocked.
+
+**Expansion is inadmissible** and this does not depend on the label: §9 forbids
+expansion on a wrong-direction point, and both `T_m` points have the wrong sign
+(`T_stable = +1.272` where it must be negative, `T_flex = -4.551` where it must
+be positive). Do not add topologies `20260734–20260741`, do not add replicates,
+and do not use the positive `B_m` points to bypass their non-positive bounds.
+
+Technical closure owed, and explicitly *not* the next scientific action: wire
+branch 3 **disjunctively** across limbs (`b_stable_lcb > 0 OR b_flex_lcb > 0`,
+with per-limb `stable_b_identified` / `flex_b_identified` recorded separately and
+a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
+the artifact, which today carries only the six bounds; and enforce §9 in
+`main()`.
 
 ### Guard state — what is now covered, and what is not
 
@@ -83,10 +106,23 @@ Still open, and deliberately not repaired here:
   round question above. The third means the §9 "one permissible expansion"
   predicate **is not enforced by any code**: expansion happens by a human
   passing `--topology-seeds`. The rule below reads as mechanized and is not.
-- **Over half of `scripts/audit_d7_s_event_aligned.py` is unswept**, function by
-  function, listed in
-  `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_A_RESULT_BRANCH_THAT_CANNOT_FIRE.md`.
-  Neither file may be read as audited.
+- **The back half has now been swept, and the primary result path has almost no
+  guards** —
+  `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_THE_INSTRUMENT_BACK_HALF_SWEEP.md`.
+  Verified by the Project Manager personally, each at 183 passed: `B_stable`'s
+  sign can be flipped at its production fold, `all_seed_controlled` can be
+  hardcoded `True`, and the entire qualifying-event construction branch can be
+  made unreachable. **No test drives event selection through to a real
+  qualifying event.**
+
+  This does not make the recorded result wrong — the production code is correct
+  and the run executed it. It makes "mechanical validation clean" weaker evidence
+  than it reads, which matters because the ruling leaned on it. Carried to the
+  next plan review, not to a follow-up Pro turn.
+
+- **The fingerprint / clone-isolation region `:2333-:2902` is still unswept.**
+  Its sweep was dispatched and has not returned. That region must not be read as
+  audited.
 
 ### On a killed shard — the ruling's rule, which replaces ours
 
@@ -104,8 +140,13 @@ stage commit and contract**; pool only once the seed union matches a frozen set.
 
 ### Open decisions that are the user's, not mine
 
-- **Ownership of `untied-k`.** Another session committed `d3e0f72` asking that
-  ownership be established before either continues. Unresolved.
+- ~~**Ownership of `untied-k`**~~ — **settled by direction 2026-07-27.** The user
+  granted this session ten workflow rounds with full permission on this branch,
+  which is an instruction to drive it. `d3e0f72` from another session asked that
+  ownership be established; it now is. Recorded rather than assumed silently.
+- ~~Authorization for a further formal run~~ — covered by `workflow_round_grant`
+  above for the ten rounds it names. The next action is artifact-only anyway and
+  needs no environment compute.
 - ~~The OS-entropy construction seed~~ — **ruled, and the answer is "not now."**
   The station-logistics reorder would change step-zero state and every
   trajectory. It is a **parked** environment correction; reactivate only if a
