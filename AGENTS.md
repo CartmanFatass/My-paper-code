@@ -643,6 +643,24 @@ reports `COMPUTE_BUSY` for our own in-flight work too. Read the reported
 `cpu_avg_pct` well under `cpu_ceiling` with `heavy_python = 1` is the signature of
 the second case.
 
+**No script can detach a run here — only the harness can.** Measured 2026-07-28:
+`Start-Process` from the PowerShell tool and `nohup` issued from the PowerShell
+tool both leave a child that is dead within seconds; `nohup … &` issued through
+the **Bash tool with background enabled** survives. That asymmetry is the cause of
+both orphaned runs on 2026-07-27, where an empty output directory was reported as
+"build complete".
+
+```powershell
+scripts/launch_and_watch_run.ps1 -Mode Preflight -ScriptArgs '--smoke' -Tag <tag>
+scripts/launch_and_watch_run.ps1 -Mode Status -RunDir logs/<tag>_<stamp>
+```
+
+Preflight gates on compute, creates the run directory and hands back the exact
+command — **you** run it through a backgrounded Bash call. Status classifies by
+the *command line* holding the run directory, so it works for a run started any
+way at all and cannot be fooled by a reused pid. `VANISHED` is the orphan
+signature and is never reported as `COMPLETED`.
+
 Escalate only what the grant genuinely does not cover: an external destination
 other than the registered conversations, destructive Git on another branch, or a
 real expansion of protected scientific authority.
