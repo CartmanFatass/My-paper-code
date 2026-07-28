@@ -1,0 +1,12 @@
+# Mechanical intake record
+
+```text
+round=20260728_g31_shadow_baseline_module_reduction_g47_design_assertion_audit
+source_commit=af7d6b1f1ad55f24e25202b39414203677a7813b
+question=docs/external-review/rounds/20260728_g31_shadow_baseline_module_reduction_g47_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+raw=docs/external-review/rounds/20260728_g31_shadow_baseline_module_reduction_g47_design_assertion_audit/21_PRO_OPEN_RAW.md
+submission_count=0
+original_question_resubmitted=false
+answer_now_activated=false
+natural_completion=false
+```
