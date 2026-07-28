@@ -17,6 +17,33 @@ bounded contract diff. Read exactly the paths in
 implement, compute, redesign, edit CDC, authorize a run, reopen G44, select a
 successor, or reactivate G33. Stop after one scoped disposition.
 
+## Exact evidence allow-list
+
+- .agents/roles/EXTERNAL_PRO.md
+- docs/project/ALGORITHM_PRINCIPLES.md
+- docs/project/SCIENTIFIC_ASSERTION_AUDIT.md
+- docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+- docs/external-review/OPEN_REVIEW_PRINCIPLES.md
+- docs/project/CURRENT_WORK.md
+- docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md
+- docs/research/cdc/CONJECTURES.md
+- docs/research/cdc/IDEA_PORTFOLIO.md
+- docs/report/ITERATION_34.md
+- docs/external-review/rounds/20260727_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260727_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+- docs/external-review/rounds/20260727_g31_shared_baseline_conditioning_attribution_g45_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_CODE_SCIENCE_INDEX.md
+- ha_ctse_process/continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py
+- scripts/run_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45.py
+- tests/ha_ctse_process_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45_test.py
+- tests/run_continuous_roster_native_six_g31_shared_baseline_conditioning_attribution_g45_test.py
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_CODE_SCIENCE_INDEX.md
+- ha_ctse_process/continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44.py
+- scripts/run_continuous_roster_native_six_g31_channel_scale_normalization_attribution_g44.py
+- ha_ctse_process/continuous_roster_native_six_credit_reduction_g40.py
+- ha_ctse_process/continuous_roster_native_six_g31_slow_critic_reduction_g41.py
+- ha_ctse_process/continuous_roster_native_six_g31_db_norm_schedule_attribution_g43.py
+
 ## Exact question
 
 Does the accepted implementation at
