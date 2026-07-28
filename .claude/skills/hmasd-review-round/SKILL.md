@@ -472,8 +472,30 @@ unspecified and three separate passes improvised three different broken captures
 
    If the icon never flips to its copied state, the write did not happen no matter
    how many times the click reported success.
-6. **Write it to the raw path with `.NET WriteAllText`** from the clipboard
-   directly. Then do the byte-equality reread.
+6. **Archive it with the script — do not re-derive this by hand.**
+
+   ```powershell
+   & '.claude/skills/hmasd-review-round/scripts/archive_pro_response.ps1' `
+       -RoundPath docs/external-review/rounds/<round> `
+       -StageCommit <this round's commit> -Sentinel <the sentinel from step 1>
+   ```
+
+   It writes with `.NET WriteAllText` and `UTF8Encoding($false)` — never
+   `Set-Content`, which writes a BOM by default here — then rereads and checks
+   `-ceq`. It refuses, writing nothing, on any of: an empty clipboard, the
+   sentinel still present (step 1's failure), a capture missing **this** round's
+   `stage_commit` (that is the *previous* round's ruling), a capture too short to
+   be a ruling, or one that does not open with a heading. The raw file is
+   write-once; `-Force` is only for repairing a known-bad capture.
+
+   Its JSON output is the mechanical intake record: `chars`, `exact_equal`,
+   `first_line`, `last_line`.
+
+   Added 2026-07-28 because five consecutive rounds recorded the same sentence —
+   *"captured on the second click after the neutral-body focus step, the same
+   failure mode and fix as the previous four rounds"*. The fix was rediscovered
+   five times because it lived in prose and was re-derived from memory each
+   round.
 
 Three capture methods are **prohibited**, each having produced a corrupt archive
 that only the byte-equality check caught:
