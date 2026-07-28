@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import math
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -125,6 +126,34 @@ def test_exact_centering_rms_and_zero_rules() -> None:
     assert zeros.normalization_mask_digest == normalized.normalization_mask_digest
     assert torch.count_nonzero(zeros.independent_immediate) == 0
     assert torch.count_nonzero(zeros.pooled_successor) == 0
+
+
+def test_canonical_torch_float64_scale_reconstruction_rejects_one_ulp_tamper() -> None:
+    immediate_sum = 393_912_715.78501064
+    successor_sum = 7_680.0
+    immediate_scale, successor_scale, pooled_scale = (
+        float(value)
+        for value in g44._canonical_normalization_scales(
+            immediate_sum, successor_sum
+        )
+    )
+    assert immediate_scale == 1012.8249424374703
+    evidence = {
+        "immediate_mean": 0.0,
+        "successor_mean": 0.0,
+        "immediate_centered_sum_square": immediate_sum,
+        "successor_centered_sum_square": successor_sum,
+        "immediate_scale": immediate_scale,
+        "successor_scale": successor_scale,
+        "pooled_scale": pooled_scale,
+        "normalization_row_count": g44.NORMALIZATION_ROWS,
+        "normalization_mask_digest": g44.NORMALIZATION_MASK_DIGEST,
+    }
+    assert g44.validate_normalization_statistics(evidence)
+
+    tampered = dict(evidence)
+    tampered["immediate_scale"] = math.nextafter(immediate_scale, math.inf)
+    assert not g44.validate_normalization_statistics(tampered)
 
 
 def test_projection_preserves_accepted_chain_and_has_no_db_state(

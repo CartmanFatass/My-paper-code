@@ -165,6 +165,27 @@ def _finite_tensor(name: str, value: torch.Tensor) -> None:
         raise G44GradientGateError(f"{name}_nonfinite", {})
 
 
+def _canonical_normalization_scales(
+    immediate_centered_sum_square: float | torch.Tensor,
+    successor_centered_sum_square: float | torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Reconstruct all RMS scales with the producer's exact float64 operations."""
+
+    immediate_sum = torch.as_tensor(
+        immediate_centered_sum_square, dtype=torch.float64
+    )
+    successor_sum = torch.as_tensor(
+        successor_centered_sum_square, dtype=torch.float64
+    )
+    return (
+        torch.sqrt(immediate_sum / float(NORMALIZATION_ROWS)),
+        torch.sqrt(successor_sum / float(NORMALIZATION_ROWS)),
+        torch.sqrt(
+            (immediate_sum + successor_sum) / float(2 * NORMALIZATION_ROWS)
+        ),
+    )
+
+
 def normalize_credit_channels(credit: g41.G41Credit) -> ChannelNormalization:
     """Center separately and apply the exact independent and pooled RMS rules."""
 
@@ -192,15 +213,9 @@ def normalize_credit_channels(credit: g41.G41Credit) -> ChannelNormalization:
     centered_s = work_s - mean_s
     immediate_centered_sum_square = centered_i.square().sum()
     successor_centered_sum_square = centered_s.square().sum()
-    scale_i = torch.sqrt(
-        immediate_centered_sum_square / float(NORMALIZATION_ROWS)
-    )
-    scale_s = torch.sqrt(
-        successor_centered_sum_square / float(NORMALIZATION_ROWS)
-    )
-    pooled = torch.sqrt(
-        (immediate_centered_sum_square + successor_centered_sum_square)
-        / float(2 * NORMALIZATION_ROWS)
+    scale_i, scale_s, pooled = _canonical_normalization_scales(
+        immediate_centered_sum_square,
+        successor_centered_sum_square,
     )
     for name, scalar in (
         ("immediate_mean", mean_i),
@@ -443,18 +458,15 @@ def validate_normalization_statistics(value: object) -> bool:
         return False
     immediate_sum = float(value["immediate_centered_sum_square"])
     successor_sum = float(value["successor_centered_sum_square"])
+    expected_immediate, expected_successor, expected_pooled = (
+        _canonical_normalization_scales(immediate_sum, successor_sum)
+    )
     return bool(
         float(value["immediate_scale"])
-        == float(np.sqrt(immediate_sum / float(NORMALIZATION_ROWS)))
+        == float(expected_immediate)
         and float(value["successor_scale"])
-        == float(np.sqrt(successor_sum / float(NORMALIZATION_ROWS)))
-        and float(value["pooled_scale"])
-        == float(
-            np.sqrt(
-                (immediate_sum + successor_sum)
-                / float(2 * NORMALIZATION_ROWS)
-            )
-        )
+        == float(expected_successor)
+        and float(value["pooled_scale"]) == float(expected_pooled)
     )
 
 
