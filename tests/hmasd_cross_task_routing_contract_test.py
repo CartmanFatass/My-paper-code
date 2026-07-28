@@ -350,13 +350,20 @@ def test_route_guard_leaves_other_targets_unchanged_and_denies_unavailable_setti
 def test_project_hook_canonicalizes_cross_task_calls_and_preserves_readiness_stop() -> None:
     hooks = json.loads(HOOKS.read_text(encoding="utf-8"))["hooks"]
     pre = hooks["PreToolUse"]
-    assert len(pre) == 1
-    assert pre[0]["matcher"] == "^codex_app__send_message_to_thread$"
-    assert len(pre[0]["hooks"]) == 1
-    handler = pre[0]["hooks"][0]
+    assert len(pre) == 2
+    routes = {entry["matcher"]: entry for entry in pre}
+    route = routes["^codex_app__send_message_to_thread$"]
+    boundary = routes[
+        "^(shell_command|Bash|unified_exec|exec_command|apply_patch|ApplyPatch)$"
+    ]
+    assert len(route["hooks"]) == 1
+    handler = route["hooks"][0]
     assert handler["type"] == "command"
     assert "hmasd_cross_task_route_guard.py" in handler["command"]
     assert handler["timeout"] == 5
+    assert len(boundary["hooks"]) == 1
+    assert "hmasd_workspace_boundary_guard.py" in boundary["hooks"][0]["command"]
+    assert boundary["hooks"][0]["timeout"] == 5
     assert len(hooks["Stop"]) == 1
     assert "hmasd_execution_readiness.py" in hooks["Stop"][0]["hooks"][0]["command"]
 

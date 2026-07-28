@@ -5,13 +5,19 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
+import stat
 import subprocess
 import sys
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
+WORKTREE_ROOT = Path(r"C:\worktrees\HMASD")
+REGISTERED_REPOSITORY = Path(__file__).resolve().parents[1]
+TICKET_DIRECTORY = "hmasd-workspace-tickets"
+ASSIGNMENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,95}$")
 
 
 class TicketError(RuntimeError):
@@ -41,6 +47,46 @@ def _canonical(path: Path, *, label: str) -> Path:
 
 def _same_path(left: Path, right: Path) -> bool:
     return os.path.normcase(str(left)) == os.path.normcase(str(right))
+
+
+def _is_reparse_point(path: Path) -> bool:
+    attributes = getattr(path.stat(), "st_file_attributes", 0)
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
+
+
+def _worktree_root() -> Path:
+    root = _canonical(WORKTREE_ROOT, label="registered worktree root")
+    if not _same_path(root, WORKTREE_ROOT) or root.is_symlink() or _is_reparse_point(root):
+        raise TicketError("registered worktree root is redirected")
+    return root
+
+
+def _assignment_id(raw: str) -> str:
+    if not ASSIGNMENT_ID.fullmatch(raw):
+        raise TicketError(f"unsafe assignment_id: {raw!r}")
+    return raw
+
+
+def _main_repository(raw: Path) -> Path:
+    repo = _canonical(raw, label="source repository")
+    registered = _canonical(REGISTERED_REPOSITORY, label="registered repository")
+    if not _same_path(repo, registered):
+        raise TicketError("source repository is not the registered HMASD checkout")
+    top = _canonical(Path(_git(repo, "rev-parse", "--show-toplevel")), label="git top")
+    if not _same_path(repo, top) or not (repo / ".git").is_dir():
+        raise TicketError("provision requires the main HMASD checkout root")
+    return repo
+
+
+def _common_git_dir(repo: Path) -> Path:
+    raw = Path(_git(repo, "rev-parse", "--git-common-dir"))
+    if not raw.is_absolute():
+        raw = repo / raw
+    return _canonical(raw, label="common git directory")
+
+
+def _ticket_path(common_git_dir: Path, assignment_id: str) -> Path:
+    return common_git_dir / TICKET_DIRECTORY / f"{assignment_id}.json"
 
 
 def _normalize_allowed(raw: str) -> str:
@@ -93,13 +139,17 @@ def _load_ticket(ticket_path: Path, expected_assignment: str | None) -> dict[str
 def _resolve_payload(
     ticket_path: Path, expected_assignment: str | None
 ) -> tuple[dict[str, Any], Path, list[str]]:
-    payload = _load_ticket(ticket_path, expected_assignment)
+    canonical_ticket = _canonical(ticket_path, label="workspace ticket")
+    payload = _load_ticket(canonical_ticket, expected_assignment)
     raw_worktree = payload.get("resolved_worktree")
     if not isinstance(raw_worktree, str):
         raise TicketError("workspace ticket has no resolved_worktree")
     worktree = _canonical(Path(raw_worktree), label="ticket worktree")
     if not _same_path(worktree, Path(raw_worktree)):
         raise TicketError("ticket worktree is not canonical")
+    root = _worktree_root()
+    if not _same_path(worktree.parent, root):
+        raise TicketError("ticket worktree is outside the registered worktree root")
 
     recorded_admin = payload.get("git_admin_dir")
     if not isinstance(recorded_admin, str):
@@ -110,6 +160,10 @@ def _resolve_payload(
     )
     if not _same_path(actual_admin, recorded_admin_path):
         raise TicketError("worktree git identity changed after ticket creation")
+    common_git_dir = actual_admin.parent.parent
+    expected_ticket = _ticket_path(common_git_dir, payload["assignment_id"])
+    if not _same_path(canonical_ticket, expected_ticket):
+        raise TicketError("workspace ticket is outside the registered ticket directory")
 
     raw_allowed = payload.get("allowed_paths")
     if not isinstance(raw_allowed, list) or not raw_allowed:
@@ -169,34 +223,66 @@ def _is_allowed(path: str, allowed: list[str]) -> bool:
     return any(path == root or path.startswith(root + "/") for root in allowed)
 
 
-def create_ticket(args: argparse.Namespace) -> dict[str, Any]:
-    worktree = _canonical(args.worktree, label="worktree")
-    top = _canonical(Path(_git(worktree, "rev-parse", "--show-toplevel")), label="git top")
-    if not _same_path(worktree, top):
-        raise TicketError(f"path is not the worktree root: {worktree}")
-    actual_commit = _git(worktree, "rev-parse", "HEAD")
-    expected_commit = args.base_commit.strip().lower()
-    if actual_commit.lower() != expected_commit:
+def provision_ticket(args: argparse.Namespace) -> dict[str, Any]:
+    repo = _main_repository(args.repo)
+    assignment_id = _assignment_id(args.assignment_id)
+    root = _worktree_root()
+    worktree = root / assignment_id
+    if worktree.exists():
+        raise TicketError(f"worktree destination already exists: {worktree}")
+
+    expected_commit = args.base_commit.strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", expected_commit):
+        raise TicketError("base commit must be exactly forty lowercase hexadecimal characters")
+    actual_commit = _git(repo, "rev-parse", f"{expected_commit}^{{commit}}")
+    if actual_commit != expected_commit:
         raise TicketError(
             f"base commit mismatch: expected {expected_commit}, got {actual_commit}"
         )
     allowed = [_normalize_allowed(value) for value in args.allow]
     if not allowed or len(set(allowed)) != len(allowed):
         raise TicketError("at least one unique allowed path is required")
-    payload = {
-        "schema_version": SCHEMA_VERSION,
-        "assignment_id": args.assignment_id,
-        "resolved_worktree": str(worktree),
-        "git_admin_dir": str(_git_admin_dir(worktree)),
-        "base_commit": actual_commit,
-        "allowed_paths": allowed,
-    }
-    ticket_path = args.ticket.expanduser().resolve(strict=False)
-    ticket_path.parent.mkdir(parents=True, exist_ok=True)
-    ticket_path.write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
-    return {"status": "WORKSPACE_TICKET_CREATED", "ticket": str(ticket_path), **payload}
+    ticket_path = _ticket_path(_common_git_dir(repo), assignment_id)
+    if ticket_path.exists():
+        raise TicketError(f"workspace ticket already exists: {ticket_path}")
+
+    created = False
+    try:
+        _git(repo, "worktree", "add", "--detach", str(worktree), expected_commit)
+        created = True
+        canonical_worktree = _canonical(worktree, label="provisioned worktree")
+        if not _same_path(canonical_worktree.parent, root):
+            raise TicketError("provisioned worktree escaped the registered root")
+        payload = {
+            "schema_version": SCHEMA_VERSION,
+            "assignment_id": assignment_id,
+            "resolved_worktree": str(canonical_worktree),
+            "git_admin_dir": str(_git_admin_dir(canonical_worktree)),
+            "base_commit": actual_commit,
+            "allowed_paths": allowed,
+        }
+        ticket_path.parent.mkdir(parents=True, exist_ok=True)
+        ticket_path.write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    except (OSError, TicketError) as exc:
+        if ticket_path.exists():
+            ticket_path.unlink()
+        if created:
+            cleanup = subprocess.run(
+                ["git", "-C", str(repo), "worktree", "remove", "--force", str(worktree)],
+                check=False,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            if cleanup.returncode != 0:
+                detail = cleanup.stderr.strip() or cleanup.stdout.strip()
+                raise TicketError(f"provision failed and cleanup failed: {exc}; {detail}") from exc
+        if isinstance(exc, TicketError):
+            raise
+        raise TicketError(f"cannot write workspace ticket: {exc}") from exc
+    return {"status": "WORKSPACE_TICKET_PROVISIONED", "ticket": str(ticket_path), **payload}
 
 
 def resolve_ticket(args: argparse.Namespace) -> dict[str, Any]:
@@ -235,13 +321,12 @@ def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(description=__doc__)
     subparsers = root.add_subparsers(dest="command", required=True)
 
-    create = subparsers.add_parser("create")
-    create.add_argument("--ticket", type=Path, required=True)
-    create.add_argument("--assignment-id", required=True)
-    create.add_argument("--worktree", type=Path, required=True)
-    create.add_argument("--base-commit", required=True)
-    create.add_argument("--allow", action="append", default=[], required=True)
-    create.set_defaults(handler=create_ticket)
+    provision = subparsers.add_parser("provision")
+    provision.add_argument("--repo", type=Path, required=True)
+    provision.add_argument("--assignment-id", required=True)
+    provision.add_argument("--base-commit", required=True)
+    provision.add_argument("--allow", action="append", default=[], required=True)
+    provision.set_defaults(handler=provision_ticket)
 
     for name, handler in (("resolve", resolve_ticket), ("verify", verify_ticket)):
         command = subparsers.add_parser(name)

@@ -137,6 +137,16 @@ if ($agile.Contains('External Review Operator') -or
     -not $agileNormalized.Contains('Research Operations Manager routes the one comparison-only')) {
     throw 'Agile Skill retains a stale or ambiguous review route'
 }
+foreach ($surface in @($codePm, $agile)) {
+    foreach ($required in @(
+        'scripts/hmasd_workspace_ticket.py provision',
+        'C:/worktrees/HMASD',
+        'Raw external `git worktree`')) {
+        if (-not $surface.Contains($required)) {
+            throw "Code-PM worktree provisioning contract missing: $required"
+        }
+    }
+}
 if ($assertionNormalized.Contains('Research Operations Manager executes the smallest repair') -or
     -not $assertionNormalized.Contains('sends one exact correction assignment to Code Project Manager') -or
     -not $assertionNormalized.Contains('After `CODE_ACCEPTED`')) {
@@ -179,6 +189,14 @@ if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) {
     throw 'Code acceptance hook configuration is missing'
 }
 $hooks = Get-Content -Raw -LiteralPath $hooksPath | ConvertFrom-Json
+$preHooks = @($hooks.hooks.PreToolUse)
+$boundaryHooks = @($preHooks | Where-Object { $_.matcher -match 'shell_command' })
+if ($boundaryHooks.Count -ne 1 -or
+    @($boundaryHooks[0].hooks).Count -ne 1 -or
+    $boundaryHooks[0].hooks[0].command -notmatch 'hmasd_workspace_boundary_guard\.py' -or
+    $boundaryHooks[0].hooks[0].timeout -ne 5) {
+    throw 'Workspace-boundary PreToolUse hook is missing or ambiguous'
+}
 $stopHooks = @($hooks.hooks.Stop)
 if ($stopHooks.Count -ne 1 -or
     @($stopHooks[0].hooks).Count -ne 1 -or

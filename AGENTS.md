@@ -7,14 +7,11 @@ project_history_in_router=forbidden
 role_specific_procedure_in_router=forbidden
 ```
 
-Every HMASD task receives this small router for identity, minimum documents and
-shared boundaries. History, results, budgets and mechanics load only when assigned.
+Every HMASD task receives this small router for identity, minimum documents and shared boundaries. History, results, budgets and mechanics load only when assigned.
 
 ## Precedence and role resolution
 
-Precedence is: direct user instruction, this router, the applicable role
-charter, any role-authorized current-state read, the named scientific/design
-contract, then procedural Skills.
+Precedence is: direct user instruction, this router, the applicable role charter, any role-authorized current-state read, the named scientific/design contract, then procedural Skills.
 
 Use exactly one route:
 
@@ -26,8 +23,7 @@ Use exactly one route:
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 
-A child never reconstructs task history. A missing identity, path, authority or
-completion condition fails closed instead of triggering a project-state search.
+A child never reconstructs task history. A missing identity, path, authority or completion condition fails closed instead of triggering a project-state search.
 
 ## Universal authority boundary
 
@@ -75,17 +71,10 @@ cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalizat
 cross_task_route_guard=pretool_live_settings_canonicalization
 ```
 
-The user permanently authorizes Workflow Design Manager, Code Project Manager
-and Research Operations Manager to fetch and push their accepted nonoverlapping
-path sets there; no other egress is covered.
+The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered.
 
-There is no Controller, persistent Monitor, dispatcher, semantic relay, role
-registry or global lease. Workflow Design Manager owns workflow design, Code
-Project Manager owns code and technical acceptance, Research Operations Manager
-owns runtime and browser transport, and External Pro owns science.
-`hmasd-pro-response-monitor` sees only metadata. Both persistent managers may
-request workflow design directly; Workflow Design Manager returns to the exact
-requester.
+There is no Controller, persistent Monitor, dispatcher, semantic relay, role registry or global lease. Workflow Design Manager owns workflow design, Code Project Manager owns code and technical acceptance, Research Operations Manager owns runtime and browser transport, and External Pro owns science.
+`hmasd-pro-response-monitor` sees only metadata. Both persistent managers may request workflow design directly; Workflow Design Manager returns to the exact requester.
 
 ## Universal project constraints
 
@@ -106,12 +95,20 @@ concurrency_policy=file_ownership_only
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
 isolated_worktree_identity=workspace_ticket_only
+hmasd_worktree_root=C:/worktrees/HMASD
+project_write_scope=current_checkout_plus_verified_ticket_worktree
+external_workspace_access=read_only
+raw_external_worktree_creation=forbidden
+drive_or_path_alias_creation=forbidden
 handoff_document_write_trigger=explicit_user_request_only
 operational_recovery_owner=research_operations_manager
 operational_recovery_scientific_iteration_cost=zero
 ```
-Generic Superpowers Skills are not executed. Use project-native Skills, keep
-active code small, and use Git as archive. Tests create no approval owner.
+Generic Superpowers Skills are not executed. Use project-native Skills, keep active code small, and use Git as archive. Tests create no approval owner.
+
+The current HMASD checkout and one valid assignment-ticket worktree are the only agent-writable project directories; every other directory is read-only to project agents, while project-external reads remain allowed.
+Agents do not create, edit, copy, move, delete or redirect files outside that scope and do not create drive mappings, junctions or path aliases. Isolated worktrees are provisioned only by `scripts/hmasd_workspace_ticket.py` beneath `C:/worktrees/HMASD`; raw external `git worktree` is not an authority path.
+A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary.
 
 ## Routed project mechanisms
 
@@ -131,6 +128,7 @@ active code small, and use Git as archive. Tests create no approval owner.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
+- Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
 
 No role reads every routed document. The active assignment or role charter

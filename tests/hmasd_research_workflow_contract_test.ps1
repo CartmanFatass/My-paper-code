@@ -91,8 +91,14 @@ foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
     'per_file_hash_handoff=forbidden',
     'isolated_worktree_identity=workspace_ticket_only',
+    'hmasd_worktree_root=C:/worktrees/HMASD',
+    'project_write_scope=current_checkout_plus_verified_ticket_worktree',
+    'external_workspace_access=read_only',
+    'raw_external_worktree_creation=forbidden',
+    'drive_or_path_alias_creation=forbidden',
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
+    'scripts/hmasd_workspace_boundary_guard.py',
     'scripts/hmasd_pro_response_sentinel.py',
     'cross_task_routing=fixed_role_sessions_plus_live_settings_canonicalization',
     'cross_task_routing_skill=hmasd-cross-task-routing',
@@ -170,6 +176,16 @@ foreach ($required in @(
 if ($agile.Contains('External Review Operator') -or
     -not (($agile -replace '\s+', ' ').Contains('returns its exact commit and index to Research Operations Manager'))) {
     throw 'Agile Skill retains a stale or ambiguous review route'
+}
+foreach ($surface in @($codePmRole, $agile)) {
+    foreach ($required in @(
+        'scripts/hmasd_workspace_ticket.py provision',
+        'C:/worktrees/HMASD',
+        'Raw external `git worktree`')) {
+        if (-not $surface.Contains($required)) {
+            throw "Worktree provisioning contract missing: $required"
+        }
+    }
 }
 if ($assertionNormalized.Contains('Research Operations Manager executes the smallest repair') -or
     -not $assertionNormalized.Contains('sends one exact correction assignment to Code Project Manager') -or

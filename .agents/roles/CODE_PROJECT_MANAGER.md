@@ -73,8 +73,11 @@ browser or creates a review package.
 
 Use `$hmasd-agile-research-development`. Spawn only registered code-child
 profiles with exact assignments and file ownership. Code Project Manager alone
-accepts their work and verifies any isolated-worktree ticket. Children never run
-Git or accept code.
+accepts their work and verifies any isolated-worktree ticket. Code Project
+Manager provisions an isolated worktree and its ticket together through
+`scripts/hmasd_workspace_ticket.py provision`; the fixed parent is
+`C:/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are
+forbidden. Children never run Git or accept code.
 
 After acceptance, push the code commit and return exactly:
 

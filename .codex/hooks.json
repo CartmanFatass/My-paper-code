@@ -12,6 +12,17 @@
             "statusMessage": "Preserving HMASD target task settings"
           }
         ]
+      },
+      {
+        "matcher": "^(shell_command|Bash|unified_exec|exec_command|apply_patch|ApplyPatch)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe\" scripts/hmasd_workspace_boundary_guard.py",
+            "timeout": 5,
+            "statusMessage": "Enforcing the HMASD workspace boundary"
+          }
+        ]
       }
     ],
     "Stop": [
