@@ -1,0 +1,11 @@
+# G46 disposition-only clarification
+
+review_type=CODE_SCIENCE_ALIGNMENT_DISPOSITION_CLARIFICATION
+audit_mode=disposition_only
+compute_budget=zero
+audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+stage_commit=STAGE_COMMIT_PLACEHOLDER
+original_round=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit
+original_transport_recovery=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_transport_recovery_v1
+
+This is a transport clarification only. The preceding G46 response was archived verbatim but did not contain the required disposition token. Do not resubmit or restate the original scientific question, do not compute, and do not redesign. Read only the listed evidence and return exactly one allowed disposition token.
