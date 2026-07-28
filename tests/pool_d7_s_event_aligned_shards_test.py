@@ -201,7 +201,7 @@ def test_pooled_output_equals_direct_assemble_audit_result(tmp_path, monkeypatch
     # The property this test exists for -- pooled output equals direct
     # assembly -- is asserted above and is unchanged.
     assert pooled["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
-    assert pooled["t_m_bootstrap"] == expected["t_m_bootstrap"]
+    assert pooled["u_star_bootstrap"] == expected["u_star_bootstrap"]
     assert pooled["part_a"]["verdict"] == expected["part_a"]["verdict"]
     assert pooled["support"] == expected["support"]
     assert pooled["conformance"]["ok"] == expected["conformance"]["ok"] is True
@@ -473,12 +473,26 @@ def test_calibration_limb_assignment_is_not_swapped(tmp_path, monkeypatch):
     pooled = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
     expected = audit.assemble_audit_result(topo, [])
 
-    # Independent literal, hand-computed from the degenerate/uniform
-    # construction above (also confirmed by direct measurement).
-    assert expected["t_m_bootstrap"]["b_stable_lcb"] == 10.0
-    assert expected["t_m_bootstrap"]["b_flex_lcb"] == 2.0
-    assert pooled["t_m_bootstrap"]["b_stable_lcb"] == expected["t_m_bootstrap"]["b_stable_lcb"] == 10.0
-    assert pooled["t_m_bootstrap"]["b_flex_lcb"] == expected["t_m_bootstrap"]["b_flex_lcb"] == 2.0
+    # R4 deleted B_m, so this guard no longer has a downstream observable to
+    # read the swap through -- `b_stable_lcb` does not exist. The FINDING it was
+    # written for is about the pooler's reconstruction whitelist, not about the
+    # quantity that happened to expose it, so it is asserted directly on the
+    # reconstruction. That survives R4's deletion of the calibration limbs and
+    # would still catch the swap.
+    unit = json.loads(json.dumps(audit.topology_unit_for_serialization(topo[0]),
+                                  default=audit._json_default))
+    rebuilt = pooling._reconstruct_topology_result(unit)
+    def _limb_value(rec, key):
+        # The distinguishing value lives in the candidate's eval_set;
+        # `eval_keep` is 0.0 on both limbs in this fixture, so reading it
+        # would make the swap invisible -- the exact trap this guard exists
+        # for, hit once while writing it.
+        return float(rec[key][0]["candidates"]["only"]["eval_set"][0])
+
+    assert _limb_value(rebuilt, "calibration_units_stable") ==         _limb_value(unit, "calibration_units_stable") == 10.0
+    assert _limb_value(rebuilt, "calibration_units_flex") ==         _limb_value(unit, "calibration_units_flex") == 2.0
+    assert _limb_value(rebuilt, "calibration_units_stable") !=         _limb_value(rebuilt, "calibration_units_flex"),         "fixture must make the two limbs distinguishable or the swap is invisible"
+    assert pooled["branch"] == expected["branch"]
 
 
 def test_pooled_topology_hash_failures_are_not_dropped(tmp_path):

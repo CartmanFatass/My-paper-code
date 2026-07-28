@@ -120,8 +120,25 @@ BOOTSTRAP_SEED = 2026072601
 BOOTSTRAP_ITERS = 10000
 EQUIVALENCE_DELTA = 0.05
 EVAL_SHARED_CANDIDATE_TOKEN = "paired"
-MATERIALITY_COEFFICIENT = 0.10  # section 8: T_stable = U*_stable + 0.10*B_stable,
-                                 # T_flex = U*_flex - 0.10*B_flex
+# R3 DIAGNOSTIC-ONLY (frozen contract docs/research/designs/
+# D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md, section 10: "Replace: B_m/T_m
+# inference"). `MATERIALITY_COEFFICIENT` and the T_m linear combination it
+# feeds (`compute_t_m_bootstrap` below) no longer sit on R4's conclusion-
+# bearing path -- `decide_branch` reads the absolute `MATERIALITY_MARGIN`
+# gates instead (contract section 1). Retained, unmodified, only because
+# `scripts/d7s_normalizer_autopsy.py` (a separate, committed artifact-
+# analysis tool) imports `compute_t_m_bootstrap`/`MATERIALITY_COEFFICIENT`
+# directly; a later reader must not mistake this retention for currency.
+MATERIALITY_COEFFICIENT = 0.10  # R3 section 8: T_stable = U*_stable + 0.10*B_stable,
+                                 # T_flex = U*_flex - 0.10*B_flex -- diagnostic only.
+
+# R4 section 1: the absolute focal task-unit margin, both horizons, both
+# limbs. Five G-units is the smallest nonzero coefficient on a discrete,
+# window-local, task-semantic safety event in the frozen objective
+# (G_t = qos - 2*return_cost - 5*cutoff - 10*depletion), fixed from the
+# weights alone, never from an observed U*. Named so `decide_branch`'s limb-
+# state resolvers never carry the literal `5.0` at the call site.
+MATERIALITY_MARGIN = 5.0
 
 # --- section 9: topology population -----------------------------------------
 TOPOLOGY_SEED_DEV = 20260725
@@ -747,99 +764,19 @@ def qos_component_saturated(*, per_arm_qos_means: dict, saturation_fraction: flo
     return saturation_fraction >= 0.95 and qos_range < 0.01
 
 
-def primary_g_degenerate(*, stable_b_identified: bool, flex_b_identified: bool) -> bool:
-    """PRIMARY_G_DEGENERATE fires when NEITHER limb's normalizer establishes
-    a positive LCB95 (ruling 2026-07-27, VERDICT_Q2 -- disjunctive across
-    limbs): `b_m_positive_lcb = b_stable_positive OR b_flex_positive`, so
-    `NOT b_m_positive_lcb == (LCB95(B_stable) <= 0) AND (LCB95(B_flex) <=
-    0)`. A conjunctive definition would let the global degeneracy branch
-    preempt a valid result from one limb merely because the OTHER limb's
-    normalizer failed, conflicting with the frozen partial-result branches:
-    branch 7 preserves an identified stable-persistence result while flex
-    remains unresolved; branch 8 preserves an identified flex
-    non-materiality result while stable does not clear; branch 9 preserves
-    an identified stable non-materiality result. Each limb's substantive
-    predicate already protects itself, so disjunction does not let an
-    unnormalized limb make a claim -- it only stops the invalid limb from
-    erasing a valid result belonging to the other limb.
-
-    The component-invariance limb of branch 3 (conceptually
-    `stable_measurement_valid = stable_components_separate AND
-    stable_b_identified`, mirrored for flex, then
-    `NOT (stable_measurement_valid OR flex_measurement_valid)`) is NOT
-    evaluated here: `stable_components_separate`/`flex_components_separate`
-    have no production derivation anywhere in this module
-    (`qos_component_saturated` is dead code called from nowhere, and no
-    per-limb component-separation quantity is computed or recorded) and
-    must never be invented or approximated by `arm_distinct_ok` -- distinct
-    duty maps do not establish that the four G component sequences differ.
-    Callers must record `component_invariance_evaluated=False` in the
-    result payload alongside this flag, so the missing input stays visible
-    rather than silently defaulted to a convenient literal."""
-    return not (stable_b_identified or flex_b_identified)
-
-
-def resolve_primary_g_tristate(*, stable_b_identified: bool, flex_b_identified: bool,
-                                component_invariance_evaluated: bool,
-                                stable_components_separate: bool = False,
-                                flex_components_separate: bool = False) -> dict:
-    """Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state), implemented
-    exactly per the governing task brief's quoted pseudocode. This is the
-    piece `primary_g_degenerate` above deliberately leaves undone -- kept
-    unmodified, per the brief's explicit instruction, and used here as
-    `normalizer_forces_degenerate` -- built AROUND it rather than into it.
-
-    Three outcomes, first match, mirroring the ruling's own if/elif/else:
-
-    1. `normalizer_forces_degenerate` (`primary_g_degenerate(...)`) is
-       independently sufficient and checked FIRST: branch 3 fires
-       "regardless of whether component invariance was evaluated." Neither
-       `stable_components_separate` nor `flex_components_separate` is
-       consulted in this case.
-    2. Otherwise, when the mandatory primary-G component audit was NOT
-       evaluated, the run is `MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING`
-       -- an implementation/measurement invalidity (branch 1), never
-       branch 10's `SOURCE_NECESSITY_UNRESOLVED` catch-all.
-    3. Only when evaluated is `primary_g_degenerate` recomputed from BOTH
-       each limb's normalizer identification and its component-separation
-       result: `stable_measurement_valid = stable_b_identified and
-       stable_components_separate` (mirrored for flex),
-       `primary_g_degenerate = not (stable_measurement_valid or
-       flex_measurement_valid)`.
-
-    Returns the two values `decide_branch` needs beyond its pre-ruling
-    contract (`primary_g_degenerate_flag`, `component_invariance_evaluated`,
-    fed straight into its identically-named keyword-only parameters) plus
-    a `reason` string for the two branch-3/branch-1 cases (`None` when
-    neither applies) and the two intermediate measurement-validity booleans,
-    for direct inspection independent of the driver."""
-    normalizer_forces_degenerate = primary_g_degenerate(
-        stable_b_identified=stable_b_identified, flex_b_identified=flex_b_identified)
-    if normalizer_forces_degenerate:
-        return {
-            "primary_g_degenerate_flag": True,
-            "component_invariance_evaluated": component_invariance_evaluated,
-            "stable_measurement_valid": False,
-            "flex_measurement_valid": False,
-            "reason": "NO_POSITIVE_NORMALIZER_ON_EITHER_LIMB",
-        }
-    if not component_invariance_evaluated:
-        return {
-            "primary_g_degenerate_flag": False,
-            "component_invariance_evaluated": False,
-            "stable_measurement_valid": False,
-            "flex_measurement_valid": False,
-            "reason": "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING",
-        }
-    stable_measurement_valid = stable_b_identified and stable_components_separate
-    flex_measurement_valid = flex_b_identified and flex_components_separate
-    return {
-        "primary_g_degenerate_flag": not (stable_measurement_valid or flex_measurement_valid),
-        "component_invariance_evaluated": True,
-        "stable_measurement_valid": stable_measurement_valid,
-        "flex_measurement_valid": flex_measurement_valid,
-        "reason": None,
-    }
+# R3's `primary_g_degenerate`/`resolve_primary_g_tristate` (the B_m-LCB95-
+# based normalizer predicate and its tri-state wrapper) are DELETED, not
+# retained beside the new path: frozen contract
+# docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md section 4
+# replaces branch 3's predicate entirely with FOCAL (KEEP, SET(z)) component
+# exact-invariance (`focal_primary_g_degenerate` below, driven by
+# `compute_focal_component_invariance`) -- a different quantity, not this
+# function's B_m LCB95 sign. Neither symbol is imported by
+# `scripts/d7s_normalizer_autopsy.py` (which uses only
+# `compute_t_m_bootstrap`, `MATERIALITY_COEFFICIENT`, and the hierarchical
+# bootstrap primitives, all retained above/below), so nothing outside this
+# module's own now-superseded R3 branch-3 wiring depended on them. Git
+# history is the archive for their prior text.
 
 
 # =============================================================================
@@ -1126,64 +1063,18 @@ def map_part_a_verdict_to_inputs(verdict: str) -> tuple:
     return (verdict == "PART_A_CONTRADICTION", verdict)
 
 
-# =============================================================================
-# Section 10 -- ten-branch first-match decision
-# =============================================================================
-
-def decide_branch(*, conformance_ok: bool, support_ok: bool,
-                   primary_g_degenerate_flag: bool, part_a_contradiction: bool,
-                   b_stable_lcb: float, t_stable_ucb: float, t_stable_lcb: float,
-                   b_flex_lcb: float, t_flex_lcb: float, t_flex_ucb: float,
-                   component_invariance_evaluated: bool) -> str:
-    """First-match precedence over the ten registered branches.
-
-    `component_invariance_evaluated` (ruling 2026-07-27, COMPONENT_INVARIANCE
-    tri-state -- quoted verbatim in the governing task brief): the normalizer
-    condition (`primary_g_degenerate_flag`, the caller's already-computed
-    `primary_g_degenerate(stable_b_identified, flex_b_identified)`) is
-    independently sufficient for branch 3 and is checked FIRST, regardless of
-    whether component invariance was ever evaluated -- "branch 3 remains
-    reachable through the independently sufficient normalizer condition."
-    Only once that has NOT already resolved the run does this new axis
-    matter: a run with at least one identified normalizer whose mandatory
-    primary-G component audit was never performed is an implementation/
-    measurement invalidity -- branch 1 (`INVALID_EVENT_ALIGNED_AUDIT`), never
-    branch 10's `SOURCE_NECESSITY_UNRESOLVED` catch-all, because the mandatory
-    audit is missing DATA, not an unresolved sign. Defaults to `True` so
-    every pre-ruling caller (of which there are ~190 in this module's own
-    test suite, none aware of this axis) keeps its unmodified branch outcome.
-    No caller in this module passes `False` yet: the ruling's own text notes
-    no production derivation for component separation exists
-    (`assemble_audit_result`'s `component_invariance_evaluated=False`
-    diagnostic field is reported, never fed here), so this new gate is
-    currently unreachable in production and must be tested directly."""
-    if not conformance_ok:
-        return "INVALID_EVENT_ALIGNED_AUDIT"
-    if not support_ok:
-        return "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
-    if primary_g_degenerate_flag:
-        return "PRIMARY_G_DEGENERATE"
-    if not component_invariance_evaluated:
-        return "INVALID_EVENT_ALIGNED_AUDIT"
-    if part_a_contradiction:
-        return "PART_A_CONTRADICTION"
-
-    stable_clears = (b_stable_lcb > 0) and (t_stable_ucb < 0)
-    flex_clears = (b_flex_lcb > 0) and (t_flex_lcb > 0)
-    flex_affirmative_miss = (b_flex_lcb > 0) and (t_flex_ucb < 0)
-    stable_affirmative_miss = (b_stable_lcb > 0) and (t_stable_lcb > 0)
-
-    if stable_clears and flex_clears:
-        return "PERSISTENCE_NECESSARY_SOURCE"
-    if stable_clears and flex_affirmative_miss:
-        return "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"
-    if stable_clears:
-        return "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
-    if flex_affirmative_miss:
-        return "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"
-    if stable_affirmative_miss:
-        return "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
-    return "SOURCE_NECESSITY_UNRESOLVED"
+# R3's ten-branch `decide_branch` (the B_m/T_m linear-materiality-gate
+# version) is DELETED, not retained beside the new path -- frozen contract
+# docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md sections
+# 1/5/6/7 replace both the gate and the branch-selection logic wholesale.
+# The R4 `decide_branch` (first-match precedence over the five registered
+# branch groups) lives after `compute_t_m_bootstrap` below, alongside the
+# rest of the R4 result layer (`resolve_stable_limb_state`,
+# `resolve_flex_limb_state`, `combined_result`, `focal_primary_g_degenerate`,
+# `compute_focal_component_invariance`, `compute_u_star_bootstrap`) -- it
+# needs `hierarchical_bootstrap_quantity`/`draw_shared_topology_indices`,
+# both defined further down, so the whole result layer is grouped there
+# rather than split across two locations for no functional reason.
 
 
 # =============================================================================
@@ -1709,6 +1600,233 @@ def compute_t_m_bootstrap(*, b_stable_topology_units: list[list[dict]],
         "t_flex_point": t_flex_point,
         "shared_topology_indices": shared,
     }
+
+
+# =============================================================================
+# R4 result layer -- contract sections 1, 4, 5, 6, 7
+# (docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md)
+# =============================================================================
+
+def compute_u_star_bootstrap(*, u_star_stable_topology_units: list[list[dict]],
+                              u_star_flex_topology_units: list[list[dict]],
+                              shared_topology_indices: np.ndarray,
+                              seed: int = BOOTSTRAP_SEED) -> dict:
+    """Section 1's absolute focal margin reads UCB95/LCB95 of `U*_stable`
+    and `U*_flex` directly -- no T_m linear combination, no `B_m` term. This
+    reuses `hierarchical_bootstrap_quantity` unmodified (R3 already called it
+    for `U*_stable`/`U*_flex` on the way into the now-deleted T_m
+    combination inside `compute_t_m_bootstrap`); the only change is that R4
+    reads its `lo`/`hi` as the gate bounds directly. `shared_topology_indices`
+    must be the SAME draw every other primary quantity in this run uses
+    (section 8's common resampling stream, unchanged by R4), so the caller
+    passes it in rather than this function drawing its own."""
+    u_stable = hierarchical_bootstrap_quantity(
+        u_star_stable_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
+    u_flex = hierarchical_bootstrap_quantity(
+        u_star_flex_topology_units, shared_topology_indices=shared_topology_indices, seed=seed)
+    return {
+        "u_star_stable_lcb": u_stable["lo"], "u_star_stable_ucb": u_stable["hi"],
+        "u_star_flex_lcb": u_flex["lo"], "u_star_flex_ucb": u_flex["hi"],
+        "u_star_stable_point": topology_weighted_point_estimate(u_star_stable_topology_units),
+        "u_star_flex_point": topology_weighted_point_estimate(u_star_flex_topology_units),
+    }
+
+
+def compute_focal_component_invariance(*, stable_units: list[dict], flex_units: list[dict]) -> dict:
+    """Contract section 4: branch 3 aggregates over the FOCAL `(KEEP,
+    SET(z))` evaluation pairs -- `audit_units_stable`/`audit_units_flex`'s
+    own `component_audit.pairwise_equality`, populated per event by
+    `run_audit_event` -- never the R3 calibration pair (`calibration_units_*`,
+    a `constructive_mixed` vs `null` comparison sourced from a disjoint
+    accumulator, and never read here).
+
+    `event_invalid` already forces the WHOLE event out of `audit_units_*` on
+    any clone/isolation failure (`run_audit_event`'s own docstring), so every
+    unit reaching this function already carries a complete per-candidate/
+    per-replicate pairwise-equality record FOR ITSELF; this function's own
+    completeness gate covers what that guarantee is silent about at the
+    pooled-run level -- a unit whose component audit is missing or empty
+    (a stub/non-conforming caller), or the whole pooled run never producing
+    a single qualifying FOCAL audit event on one of the two limbs. Section
+    4: "A missing pair is neither equal nor unequal" -- so an incomplete
+    audit reports `complete=False` rather than guessing either direction on
+    `components_invariant_*`.
+
+    Exact invariance only, no fraction threshold: one `sequences_exactly_
+    equal=False` record anywhere on a limb refutes that limb's invariance."""
+    complete = bool(stable_units) and bool(flex_units)
+    for units in (stable_units, flex_units):
+        for unit in units:
+            pairwise = (unit.get("component_audit") or {}).get("pairwise_equality")
+            if not pairwise:
+                complete = False
+    if not complete:
+        return {"complete": False, "components_invariant_stable": False,
+                "components_invariant_flex": False}
+    components_invariant_stable = all(
+        p["sequences_exactly_equal"]
+        for unit in stable_units
+        for p in unit["component_audit"]["pairwise_equality"])
+    components_invariant_flex = all(
+        p["sequences_exactly_equal"]
+        for unit in flex_units
+        for p in unit["component_audit"]["pairwise_equality"])
+    return {"complete": True,
+            "components_invariant_stable": components_invariant_stable,
+            "components_invariant_flex": components_invariant_flex}
+
+
+def focal_primary_g_degenerate(*, components_invariant_stable: bool,
+                                components_invariant_flex: bool) -> bool:
+    """Contract section 4: `primary_g_degenerate = NOT (components_separate_
+    stable OR components_separate_flex)`, where `components_separate_m =
+    NOT components_invariant_m` -- branch 3 fires only when BOTH limbs'
+    FOCAL pairs are exactly invariant. One differing pair on EITHER limb
+    refutes it (section 5: "Both limbs `COMPONENT_INVARIANT` -> global
+    branch 3 fires first")."""
+    return components_invariant_stable and components_invariant_flex
+
+
+def resolve_stable_limb_state(*, complete_focal_audit: bool, components_invariant: bool,
+                               ucb95_u_star_stable: float, lcb95_u_star_stable: float) -> str:
+    """Contract section 5, stable limb, transcribed directly (not derived
+    from the flex resolver -- the asymmetry is deliberate, see the flex
+    resolver's own docstring):
+
+        COMPONENT_INVARIANT       complete focal audit AND every stable
+                                   KEEP/SET(z) pair exactly invariant
+        MATERIAL                  components separate AND UCB95(U*_stable) < -5
+        AFFIRMATIVE_NONMATERIAL   components separate AND LCB95(U*_stable) > -5
+        UNRESOLVED                components separate AND neither bound holds
+
+    Strict inequalities throughout: a bound sitting exactly on
+    `-MATERIALITY_MARGIN` satisfies neither `<` nor `>` and falls through to
+    UNRESOLVED, never MATERIAL. `complete_focal_audit=False` returns
+    `NOT_EVALUATED` -- not one of the four contract states, since none of
+    them is knowable without a complete audit (`COMPONENT_INVARIANT`
+    requires completeness explicitly; the other three require "components
+    separate", which an incomplete audit cannot establish either way).
+    `decide_branch` never reaches this value as its published branch in that
+    case -- the `component_invariance_evaluated` gate already routes to
+    `INVALID_EVENT_ALIGNED_AUDIT` first -- but the payload must not assert a
+    MATERIAL/AFFIRMATIVE_NONMATERIAL/UNRESOLVED reading the evidence does
+    not support."""
+    if not complete_focal_audit:
+        return "NOT_EVALUATED"
+    if components_invariant:
+        return "COMPONENT_INVARIANT"
+    if ucb95_u_star_stable < -MATERIALITY_MARGIN:
+        return "MATERIAL"
+    if lcb95_u_star_stable > -MATERIALITY_MARGIN:
+        return "AFFIRMATIVE_NONMATERIAL"
+    return "UNRESOLVED"
+
+
+def resolve_flex_limb_state(*, complete_focal_audit: bool, components_invariant: bool,
+                             lcb95_u_star_flex: float, ucb95_u_star_flex: float) -> str:
+    """Contract section 5, flex limb, transcribed directly from the contract
+    text -- NOT a mirror image of the stable resolver above. Both use "the
+    opposite bound" for their AFFIRMATIVE_NONMATERIAL check, but the
+    clearing DIRECTION differs per limb (stable clears toward negative U*,
+    flex clears toward positive U*), so the concrete comparisons are not
+    interchangeable by sign-flipping alone:
+
+        COMPONENT_INVARIANT       complete focal audit AND every flex
+                                   KEEP/SET(z) pair exactly invariant
+        MATERIAL                  components separate AND LCB95(U*_flex) > +5
+        AFFIRMATIVE_NONMATERIAL   components separate AND UCB95(U*_flex) < +5
+        UNRESOLVED                components separate AND neither bound holds
+
+    Strict inequalities; see `resolve_stable_limb_state` for the boundary
+    and `NOT_EVALUATED` rationale, which applies identically here."""
+    if not complete_focal_audit:
+        return "NOT_EVALUATED"
+    if components_invariant:
+        return "COMPONENT_INVARIANT"
+    if lcb95_u_star_flex > MATERIALITY_MARGIN:
+        return "MATERIAL"
+    if ucb95_u_star_flex < MATERIALITY_MARGIN:
+        return "AFFIRMATIVE_NONMATERIAL"
+    return "UNRESOLVED"
+
+
+# Contract section 6's nine-row table, expanded to its 15 concrete
+# (stable_state, flex_state) combinations -- rows using "X or
+# COMPONENT_INVARIANT" become two dict entries with the same combined name.
+# The one remaining combination, (COMPONENT_INVARIANT, COMPONENT_INVARIANT),
+# is deliberately absent: section 5 requires it to resolve via branch 3
+# (PRIMARY_G_DEGENERATE) before ever reaching this mapping, so
+# `combined_result` raises rather than silently returning a value for it.
+COMBINED_RESULT_MAP = {
+    ("MATERIAL", "MATERIAL"): "PERSISTENCE_NECESSARY_SOURCE",
+    ("MATERIAL", "AFFIRMATIVE_NONMATERIAL"): "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL",
+    ("MATERIAL", "COMPONENT_INVARIANT"): "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL",
+    ("MATERIAL", "UNRESOLVED"): "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+    ("AFFIRMATIVE_NONMATERIAL", "MATERIAL"): "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE",
+    ("COMPONENT_INVARIANT", "MATERIAL"): "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE",
+    ("UNRESOLVED", "MATERIAL"): "MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+    ("AFFIRMATIVE_NONMATERIAL", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+    ("AFFIRMATIVE_NONMATERIAL", "COMPONENT_INVARIANT"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+    ("COMPONENT_INVARIANT", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+    ("AFFIRMATIVE_NONMATERIAL", "UNRESOLVED"): "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+    ("COMPONENT_INVARIANT", "UNRESOLVED"): "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+    ("UNRESOLVED", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+    ("UNRESOLVED", "COMPONENT_INVARIANT"): "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+    ("UNRESOLVED", "UNRESOLVED"): "SOURCE_NECESSITY_UNRESOLVED",
+}
+
+
+def combined_result(stable_state: str, flex_state: str) -> str:
+    """Contract section 6's combined-result mapping. Both limb states must
+    already be resolved (never `NOT_EVALUATED` -- `decide_branch` only calls
+    this once `component_invariance_evaluated` is True) and must not both be
+    `COMPONENT_INVARIANT` -- that combination resolves via branch 3
+    (PRIMARY_G_DEGENERATE) in `decide_branch`'s precedence, strictly before
+    this mapping is ever consulted, so reaching it here is a caller-contract
+    violation, not a ninth row."""
+    if stable_state == "COMPONENT_INVARIANT" and flex_state == "COMPONENT_INVARIANT":
+        raise ValueError(
+            "both limbs COMPONENT_INVARIANT must resolve via PRIMARY_G_DEGENERATE "
+            "(precedence item 3), never reach the combined-result mapping")
+    return COMBINED_RESULT_MAP[(stable_state, flex_state)]
+
+
+def decide_branch(*, conformance_ok: bool, support_ok: bool,
+                   component_invariance_evaluated: bool,
+                   primary_g_degenerate_flag: bool, part_a_contradiction: bool,
+                   stable_limb_state: str, flex_limb_state: str) -> str:
+    """Contract section 7's first-match precedence over the five registered
+    branch groups:
+
+        1. INVALID_EVENT_ALIGNED_AUDIT
+        2. SOURCE_EVENT_SUPPORT_INSUFFICIENT
+        3. PRIMARY_G_DEGENERATE
+        4. PART_A_CONTRADICTION
+        5. the combined result from the two per-limb states
+
+    `component_invariance_evaluated=False` (section 4: "audit missing/
+    incomplete") reports the SAME branch string as a conformance failure
+    (`INVALID_EVENT_ALIGNED_AUDIT`) -- both are item 1 -- and is checked
+    BEFORE `primary_g_degenerate_flag` so a run whose focal component audit
+    never completed can never be misreported as PRIMARY_G_DEGENERATE
+    (`primary_g_degenerate_flag` is only ever True when the caller's
+    `compute_focal_component_invariance` reported `complete=True`, but this
+    ordering makes that dependency load-bearing rather than incidental).
+    `PART_A_CONFORMANCE_UNRESOLVED` never reaches this function as True --
+    only `PART_A_CONTRADICTION` maps to `part_a_contradiction=True`
+    (`map_part_a_verdict_to_inputs`) -- so it can never suppress an
+    otherwise valid combined result, exactly as section 7 requires."""
+    if not conformance_ok:
+        return "INVALID_EVENT_ALIGNED_AUDIT"
+    if not support_ok:
+        return "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    if not component_invariance_evaluated:
+        return "INVALID_EVENT_ALIGNED_AUDIT"
+    if primary_g_degenerate_flag:
+        return "PRIMARY_G_DEGENERATE"
+    if part_a_contradiction:
+        return "PART_A_CONTRADICTION"
+    return combined_result(stable_limb_state, flex_limb_state)
 
 
 # =============================================================================
@@ -4108,27 +4226,13 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     }
 
 
-def assemble_audit_result(topology_results: list[dict], topology_hash_failures: list[dict],
-                           *, component_invariance_evaluated: bool = False) -> dict:
-    """`component_invariance_evaluated` defaults **False**, which is the
-    fail-closed direction (ruling 2026-07-27, COMPONENT_INVARIANCE): a run
-    that is not already normalizer-forced-degenerate and never performed the
-    mandatory primary-G component audit resolves to branch 1, because "later
-    branches cannot fire on a future run whose mandatory component audit is
-    missing." Production passes nothing and therefore gets False.
+def assemble_audit_result(topology_results: list[dict], topology_hash_failures: list[dict]) -> dict:
+    """Driver-level wiring, isolated from `main()`'s CLI/env concerns so it
+    can be exercised directly against synthetic `topology_results` (the
+    exact shape `run_topology_audit` returns) without a real environment.
 
-    It is a parameter rather than a hardcoded literal so a caller can declare
-    the world in which the audit WAS performed -- which is what the
-    branch-precedence fixtures for branches 4-10 do. Hardcoding it either way
-    is the defect this whole repair exists to remove; the safe polarity is
-    that omitting it can only make the instrument stricter, never looser."""
-    """Item 5/8's driver-level wiring, isolated from `main()`'s CLI/env
-    concerns so it can be exercised directly against synthetic
-    `topology_results` (the exact shape `run_topology_audit` returns)
-    without a real environment.
-
-    Pools per-topology conformance and Part-A inputs into `decide_branch`'s
-    two driver inputs exactly as section 8 specifies:
+    Pools per-topology conformance and Part-A inputs exactly as section 8
+    specifies (both UNCHANGED by R4, out of this task's scope):
 
     `conformance_ok` -- `compute_conformance_ok` over the pooled
     `invalidated_pairs` count (every topology's `PrefixReplayMismatchError`
@@ -4140,26 +4244,35 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     `part_a_contradiction` -- `compute_part_a_bounds` bootstraps D_A jointly
     with B_stable from the pooled per-topology `calibration_units_d_a`/
     `calibration_units_stable`, sharing the SAME `shared_topology_indices`
-    stream `compute_t_m_bootstrap` already drew (section 8's common
-    resampling stream); `part_a_conformance` turns those bounds into a
-    verdict string; `map_part_a_verdict_to_inputs` maps ONLY
-    `PART_A_CONTRADICTION` to `part_a_contradiction=True` --
-    `PART_A_CONFORMANCE_UNRESOLVED` (like `CONFORMANCE_PASS` and
-    `NOT_APPLICABLE`) never flips it, per section 8: the unresolved
-    diagnostic "does not relabel the source branch." It still lands in the
-    JSON under `part_a.verdict` for the record.
+    stream drawn once below (section 8's common resampling stream);
+    `part_a_conformance` turns those bounds into a verdict string;
+    `map_part_a_verdict_to_inputs` maps ONLY `PART_A_CONTRADICTION` to
+    `part_a_contradiction=True` -- `PART_A_CONFORMANCE_UNRESOLVED` (like
+    `CONFORMANCE_PASS` and `NOT_APPLICABLE`) never flips it, per section 7:
+    the unresolved diagnostic never suppresses an otherwise valid focal
+    result. It still lands in the JSON under `part_a.verdict` for the
+    record.
 
-    Both driver inputs then reach `decide_branch` for real: when there are
-    at least two topologies and support holds, `decide_branch` is called
-    with the pooled `conformance_ok`/`part_a_contradiction` plus the T_m
-    bootstrap bounds, so a conformance failure or a Part-A contradiction
-    reaches branch 1/4 through the same first-match precedence as every
-    other branch. Outside that gate (a single topology, or support already
-    failed) `decide_branch` cannot run a T_m bootstrap at all, so branch
-    1/2 are reported directly by the same literal strings `decide_branch`
-    itself would have returned first in its precedence order -- conformance
-    failure is checked before support failure in both paths, matching
-    `decide_branch`'s row order."""
+    R4 section 4/5/6/7 (this task's scope): `compute_focal_component_
+    invariance` pools EVERY topology's `audit_units_stable`/
+    `audit_units_flex` -- the FOCAL `(KEEP, SET(z))` pairs, never the R3
+    calibration pair -- into `component_invariance_evaluated` (audit
+    completeness) and `components_invariant_stable`/`_flex`.
+    `compute_u_star_bootstrap` reads the SAME shared topology-resampling
+    stream as Part-A/B_stable to bound `U*_stable`/`U*_flex` directly (no
+    T_m combination). `resolve_stable_limb_state`/`resolve_flex_limb_state`
+    turn those into the four per-limb states, always recorded in
+    `out["limb_states"]` regardless of what `out["branch"]` ends up being --
+    a top-level branch name must never erase which of the two states the
+    non-material limb actually reached. `decide_branch` then applies
+    section 7's five-item first-match precedence for real.
+
+    When there are fewer than two topologies, or support already failed,
+    none of the R4 bootstrap/invariance machinery runs (there is nothing
+    valid to bootstrap), and branch 1/2 are reported directly by the same
+    literal strings `decide_branch` itself would have returned first in its
+    precedence order -- conformance failure is checked before support
+    failure in both paths, matching `decide_branch`'s row order."""
     support_ok, support_detail = check_minimum_support([
         {"qualifying_calibration_episodes": r["qualifying_calibration_episodes"],
          "qualifying_audit_episodes": r["qualifying_audit_episodes"]}
@@ -4222,23 +4335,28 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
 
     if len(topology_results) > 1 and support_ok:
         n_topo = len(topology_results)
-        t_m = compute_t_m_bootstrap(
-            b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
-            b_flex_topology_units=[r["calibration_units_flex"] for r in topology_results],
+        # Section 8's common resampling stream: every primary quantity in
+        # this run (U*_stable, U*_flex, D_A, B_stable) shares this SAME draw,
+        # never a separately-seeded one, so their between-topology
+        # covariance is preserved. R4 no longer draws it inside
+        # `compute_t_m_bootstrap` (T_m is off the conclusion-bearing path),
+        # so it is drawn once here instead and threaded to both consumers.
+        shared_topology_indices = draw_shared_topology_indices(
+            n_topo=n_topo, iters=BOOTSTRAP_ITERS, seed=BOOTSTRAP_SEED)
+
+        u_star = compute_u_star_bootstrap(
             u_star_stable_topology_units=[r["audit_units_stable"] for r in topology_results],
             u_star_flex_topology_units=[r["audit_units_flex"] for r in topology_results],
-            n_topo=n_topo)
-        out["t_m_bootstrap"] = {k: v for k, v in t_m.items() if k != "shared_topology_indices"}
+            shared_topology_indices=shared_topology_indices, seed=BOOTSTRAP_SEED)
+        out["u_star_bootstrap"] = u_star
 
-        # Part-A conformance (item 2): the SAME shared topology-resampling
-        # stream `compute_t_m_bootstrap` already drew, so D_A and B_stable's
-        # per-iteration draws come from the identical resampled topology mix
-        # as every other primary quantity (section 8's "common resampling
-        # stream" / "do not assign separate resampling seeds").
+        # Part-A conformance (contract section 8, unchanged by this task):
+        # the SAME shared topology-resampling stream every other primary
+        # quantity in this run uses.
         part_a_bounds = compute_part_a_bounds(
             d_a_topology_units=[r["calibration_units_d_a"] for r in topology_results],
             b_stable_topology_units=[r["calibration_units_stable"] for r in topology_results],
-            shared_topology_indices=t_m["shared_topology_indices"], seed=BOOTSTRAP_SEED)
+            shared_topology_indices=shared_topology_indices, seed=BOOTSTRAP_SEED)
         if part_a_bounds is None:
             part_a_verdict = "NOT_APPLICABLE"
         else:
@@ -4253,44 +4371,50 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             **({} if part_a_bounds is None else part_a_bounds),
         }
 
-        # Ruling 2026-07-27 (VERDICT_Q2): B_m's positive-LCB gate is
-        # disjunctive across limbs -- computed here from the SAME t_m
-        # bounds, through `primary_g_degenerate` (the single place the flag
-        # is computed), never re-derived inline. `stable_b_identified`/
-        # `flex_b_identified` and a per-limb status string are recorded in
-        # the payload so a limb whose normalizer failed to identify is
-        # visible rather than folded into a generic "unresolved", and
-        # `component_invariance_evaluated=False` records that this branch's
-        # component-invariance input has no production derivation and was
-        # not evaluated (see `primary_g_degenerate`'s docstring).
-        stable_b_identified = t_m["b_stable_lcb"] > 0
-        flex_b_identified = t_m["b_flex_lcb"] > 0
-        primary_g_degenerate_flag = primary_g_degenerate(
-            stable_b_identified=stable_b_identified, flex_b_identified=flex_b_identified)
+        # Contract section 4: branch 3 aggregates the FOCAL (KEEP, SET(z))
+        # evaluation pairs pooled across every topology -- `audit_units_
+        # stable`/`audit_units_flex`'s own `component_audit.
+        # pairwise_equality`, never the R3 calibration pair
+        # (`calibration_units_*`, a disjoint accumulator, never read here).
+        stable_focal_units = [u for r in topology_results for u in r["audit_units_stable"]]
+        flex_focal_units = [u for r in topology_results for u in r["audit_units_flex"]]
+        invariance = compute_focal_component_invariance(
+            stable_units=stable_focal_units, flex_units=flex_focal_units)
+        component_invariance_evaluated = invariance["complete"]
+        primary_g_degenerate_flag = focal_primary_g_degenerate(
+            components_invariant_stable=invariance["components_invariant_stable"],
+            components_invariant_flex=invariance["components_invariant_flex"])
         out["primary_g"] = {
             "degenerate": primary_g_degenerate_flag,
-            "stable_b_identified": stable_b_identified,
-            "flex_b_identified": flex_b_identified,
             "component_invariance_evaluated": component_invariance_evaluated,
-            "stable_status": ("NORMALIZER_NOT_IDENTIFIED" if not stable_b_identified
-                               else "NORMALIZER_IDENTIFIED"),
-            "flex_status": ("NORMALIZER_NOT_IDENTIFIED" if not flex_b_identified
-                             else "NORMALIZER_IDENTIFIED"),
+            "components_invariant_stable": invariance["components_invariant_stable"],
+            "components_invariant_flex": invariance["components_invariant_flex"],
         }
+
+        # Section 5's per-limb states. Recorded in the payload unconditionally
+        # -- never gated on what `decide_branch` ultimately returns -- so a
+        # top-level branch name can never erase whether the non-material limb
+        # was affirmatively nonmaterial, exactly invariant, or merely
+        # unresolved (the exact defect R3 had, and the reason section 6's
+        # table exists).
+        stable_limb_state = resolve_stable_limb_state(
+            complete_focal_audit=component_invariance_evaluated,
+            components_invariant=invariance["components_invariant_stable"],
+            ucb95_u_star_stable=u_star["u_star_stable_ucb"],
+            lcb95_u_star_stable=u_star["u_star_stable_lcb"])
+        flex_limb_state = resolve_flex_limb_state(
+            complete_focal_audit=component_invariance_evaluated,
+            components_invariant=invariance["components_invariant_flex"],
+            lcb95_u_star_flex=u_star["u_star_flex_lcb"],
+            ucb95_u_star_flex=u_star["u_star_flex_ucb"])
+        out["limb_states"] = {"stable": stable_limb_state, "flex": flex_limb_state}
 
         out["branch"] = decide_branch(
             conformance_ok=conformance_ok, support_ok=support_ok,
+            component_invariance_evaluated=component_invariance_evaluated,
             primary_g_degenerate_flag=primary_g_degenerate_flag,
-            part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
-            t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
-            b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"],
-            # Passed from the payload rather than defaulted. Today this is
-            # always False, so the tri-state's missing-audit gate is live: a
-            # run that is NOT normalizer-forced-degenerate but never performed
-            # the mandatory component audit resolves to branch 1. That is the
-            # ruling's fail-closed direction, and it has no effect on a
-            # normalizer-forced run, which resolves at branch 3 first.
-            component_invariance_evaluated=out["primary_g"]["component_invariance_evaluated"])
+            part_a_contradiction=part_a_contradiction,
+            stable_limb_state=stable_limb_state, flex_limb_state=flex_limb_state)
     elif not conformance_ok:
         out["branch"] = "INVALID_EVENT_ALIGNED_AUDIT"
     elif not support_ok:

@@ -992,204 +992,365 @@ def test_evaluate_phase_actually_pairs_set_and_keep_on_the_production_path(monke
 
 
 # =============================================================================
-# 7. Branch precedence: every one of the ten branches is constructible
+# 7. R4 result layer: resolve_*_limb_state, combined_result, decide_branch
+# (docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md sections
+# 1, 4, 5, 6, 7 -- supersedes R3's ten-branch B_m/T_m decide_branch entirely;
+# git history is the archive for the deleted `_branch_kwargs`/branch-1..10
+# fixtures.)
 # =============================================================================
 
-def _branch_kwargs(**overrides):
+def _r4_branch_kwargs(**overrides):
+    """Default fixture: every precedence gate clean, both limbs MATERIAL --
+    combined result PERSISTENCE_NECESSARY_SOURCE (contract section 6, row 1)
+    -- so each precedence test below only has to flip ONE axis to see
+    whether that axis wins."""
     kwargs = dict(
-        conformance_ok=True, support_ok=True, primary_g_degenerate_flag=False,
-        part_a_contradiction=False,
-        b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
-        b_flex_lcb=1.0, t_flex_lcb=1.0, t_flex_ucb=2.0,
-        # These fixtures exercise the OTHER branch axes, so they declare the
-        # mandatory component audit as performed -- that is the world in which
-        # branches 4-10 are reachable at all under the 2026-07-27 tri-state.
-        # The missing-audit axis has its own dedicated test, which drives this
-        # False. There is deliberately no default on the parameter itself: a
-        # caller that forgets it must raise TypeError rather than silently
-        # inherit a fail-open True.
+        conformance_ok=True, support_ok=True,
         component_invariance_evaluated=True,
+        primary_g_degenerate_flag=False,
+        part_a_contradiction=False,
+        stable_limb_state="MATERIAL", flex_limb_state="MATERIAL",
     )
     kwargs.update(overrides)
     return kwargs
 
 
-def test_branch_1_invalid_event_aligned_audit():
-    assert audit.decide_branch(**_branch_kwargs(conformance_ok=False)) == "INVALID_EVENT_ALIGNED_AUDIT"
+# -----------------------------------------------------------------------
+# 7a. Item (c): each of the four preceding branches beats the combined
+# result when both fire. Four separate, ISOLATED tests -- a fixture
+# violating several at once would prove none of them (brief's own warning).
+# -----------------------------------------------------------------------
 
-
-def test_branch_2_support_insufficient():
-    assert audit.decide_branch(**_branch_kwargs(support_ok=False)) == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
-
-
-def test_branch_3_primary_g_degenerate():
-    assert audit.decide_branch(**_branch_kwargs(primary_g_degenerate_flag=True)) == "PRIMARY_G_DEGENERATE"
-
-
-def test_branch_4_part_a_contradiction():
-    assert audit.decide_branch(**_branch_kwargs(part_a_contradiction=True)) == "PART_A_CONTRADICTION"
-
-
-def test_branch_5_persistence_necessary_source():
-    # stable clears (b_stable_lcb>0, t_stable_ucb<0); flex clears (b_flex_lcb>0, t_flex_lcb>0)
-    assert audit.decide_branch(**_branch_kwargs()) == "PERSISTENCE_NECESSARY_SOURCE"
-
-
-def test_branch_6_stable_persistence_without_material_flex_renewal():
-    # stable clears; flex affirmatively misses: b_flex_lcb>0 and t_flex_ucb<0
-    kwargs = _branch_kwargs(t_flex_lcb=-1.0, t_flex_ucb=-0.5)
-    assert audit.decide_branch(**kwargs) == "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"
-
-
-def test_branch_7_material_stable_persistence_identified():
-    # stable clears; flex neither clears nor affirmatively misses (unresolved)
-    kwargs = _branch_kwargs(t_flex_lcb=-1.0, t_flex_ucb=1.0)
-    assert audit.decide_branch(**kwargs) == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
-
-
-def test_branch_8_no_material_flex_renewal_identified():
-    # flex affirmatively misses; stable does NOT clear
-    kwargs = _branch_kwargs(
-        t_stable_ucb=1.0, t_stable_lcb=-1.0,   # stable does not clear, not affirmative-miss either
-        t_flex_lcb=-1.0, t_flex_ucb=-0.5,      # flex affirmative miss
-    )
-    assert audit.decide_branch(**kwargs) == "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"
-
-
-def test_branch_9_no_material_stable_persistence_identified():
-    # stable affirmatively misses (b_stable_lcb>0, t_stable_lcb>0); stable
-    # therefore does not clear (t_stable_ucb must be >=0 too); flex not an
-    # affirmative miss (so branch 8 does not preempt it).
-    kwargs = _branch_kwargs(
-        t_stable_ucb=1.0, t_stable_lcb=0.5,
-        t_flex_lcb=1.0, t_flex_ucb=2.0,   # flex clears, not an affirmative miss
-    )
-    assert audit.decide_branch(**kwargs) == "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
-
-
-def test_branch_10_source_necessity_unresolved():
-    # Nothing resolved: stable neither clears nor affirmatively misses;
-    # flex neither clears nor affirmatively misses.
-    kwargs = _branch_kwargs(
-        b_stable_lcb=-1.0, t_stable_ucb=1.0, t_stable_lcb=-1.0,
-        b_flex_lcb=-1.0, t_flex_lcb=-1.0, t_flex_ucb=1.0,
-    )
-    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
-
-
-def test_branch_precedence_invalid_wins_over_everything_else():
-    """A row that would otherwise satisfy branch 5's conditions must still
-    resolve to branch 1 if conformance failed -- precedence is absolute."""
-    kwargs = _branch_kwargs(conformance_ok=False, support_ok=False,
-                             primary_g_degenerate_flag=True, part_a_contradiction=True)
+def test_precedence_branch_1_invalid_audit_beats_the_combined_result():
+    kwargs = _r4_branch_kwargs(conformance_ok=False)
     assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
-def test_branch_precedence_zero_bound_does_not_clear_any_predicate():
-    """Boundary guard for the four LCB/UCB predicates (:1060-1063): all ten
-    branch-precedence fixtures above draw bounds from {1.0, -1.0, -2.0, 0.5,
-    2.0} and never exactly 0.0 -- the one value where strict (`> 0` / `< 0`)
-    and non-strict (`>= 0` / `<= 0`) disagree, on the field that decides the
-    published branch. 0.0 is the boundary of a one-sided 95% CI, so it is a
-    realistic value, not a contrived one.
-
-    Every one of the six bound fields that appears in `stable_clears`,
-    `flex_clears`, `flex_affirmative_miss` and `stable_affirmative_miss` is
-    pinned at exactly 0.0 here. Under the frozen strict inequalities none of
-    the four predicates may fire, so precedence must fall through all the way
-    to branch 10. Loosening every `> 0`/`< 0` to `>= 0`/`<= 0` (verbatim) would
-    instead clear both `stable_clears` and `flex_clears` and return
-    `PERSISTENCE_NECESSARY_SOURCE` -- asserting the returned branch string,
-    the field that actually reaches the result."""
-    kwargs = _branch_kwargs(
-        b_stable_lcb=0.0, t_stable_ucb=0.0, t_stable_lcb=0.0,
-        b_flex_lcb=0.0, t_flex_lcb=0.0, t_flex_ucb=0.0,
-    )
-    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+def test_precedence_branch_2_support_insufficient_beats_the_combined_result():
+    kwargs = _r4_branch_kwargs(support_ok=False)
+    assert audit.decide_branch(**kwargs) == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
 
 
-def test_branch_precedence_stable_clears_isolated_at_its_own_boundary():
-    """The all-zero fixture above catches loosening all four predicates
-    together but NOT one alone: with every bound at 0.0, `stable_clears`
-    stays False under a strict-vs-loosened `flex_clears`-only mutation (for
-    example), because precedence never reaches a branch where `flex_clears`
-    alone would change the outcome. Each predicate needs its OWN isolating
-    fixture, where every OTHER predicate is pinned away from its boundary
-    (so mutating any other single predicate cannot affect this fixture) and
-    only the predicate under test sits exactly at 0.0.
-
-    Here `flex_affirmative_miss` is pinned True via non-boundary values
-    (b_flex_lcb=1.0, t_flex_ucb=-1.0) and `flex_clears` is pinned False via a
-    non-boundary t_flex_lcb=-1.0 -- neither can flip if some OTHER
-    predicate's line is mutated. Only `stable_clears`'s own two bounds sit at
-    0.0. Strict: `stable_clears` False -> falls through to
-    `flex_affirmative_miss` -> NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED. Loosening
-    only `stable_clears`'s `> 0`/`< 0` to `>= 0`/`<= 0` (line 1060) makes it
-    True, which combines with the still-True `flex_affirmative_miss` to give
-    STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL instead -- a
-    discriminating pair verified against an independent logic replica before
-    being pinned here."""
-    kwargs = _branch_kwargs(
-        b_stable_lcb=0.0, t_stable_ucb=0.0, t_stable_lcb=-5.0,
-        b_flex_lcb=1.0, t_flex_lcb=-1.0, t_flex_ucb=-1.0,
-    )
-    assert audit.decide_branch(**kwargs) == "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"
+def test_precedence_branch_3_primary_g_degenerate_beats_the_combined_result():
+    kwargs = _r4_branch_kwargs(primary_g_degenerate_flag=True)
+    assert audit.decide_branch(**kwargs) == "PRIMARY_G_DEGENERATE"
 
 
-def test_branch_precedence_flex_clears_isolated_at_its_own_boundary():
-    """Isolating fixture for `flex_clears` alone (paired with the all-zero
-    fixture and the other three isolating fixtures around it -- see that
-    test's docstring for why a single shared fixture cannot discriminate
-    which predicate moved). `stable_clears` is pinned True via non-boundary
-    values (b_stable_lcb=1.0, t_stable_ucb=-1.0); `flex_affirmative_miss` is
-    pinned False via a non-boundary t_flex_ucb=1.0. Only `flex_clears`'s own
-    two bounds sit at 0.0. Strict: `stable_clears` True, `flex_clears` False
-    -> MATERIAL_STABLE_PERSISTENCE_IDENTIFIED. Loosening only `flex_clears`'s
-    `> 0` to `>= 0` (line 1061) makes it True too, combining with
-    `stable_clears` to give PERSISTENCE_NECESSARY_SOURCE instead."""
-    kwargs = _branch_kwargs(
-        b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
-        b_flex_lcb=0.0, t_flex_lcb=0.0, t_flex_ucb=1.0,
-    )
-    assert audit.decide_branch(**kwargs) == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
+def test_precedence_branch_4_part_a_contradiction_beats_the_combined_result():
+    kwargs = _r4_branch_kwargs(part_a_contradiction=True)
+    assert audit.decide_branch(**kwargs) == "PART_A_CONTRADICTION"
 
 
-def test_branch_precedence_flex_affirmative_miss_isolated_at_its_own_boundary():
-    """Isolating fixture for `flex_affirmative_miss` alone. `stable_clears`
-    is pinned False via a non-boundary b_stable_lcb=-1.0 (kills it
-    regardless of t_stable_ucb); `stable_affirmative_miss` is pinned False
-    via that same non-boundary b_stable_lcb=-1.0. Only `flex_affirmative_
-    miss`'s own two bounds (b_flex_lcb, t_flex_ucb) sit at 0.0; t_flex_lcb is
-    pinned non-boundary negative so `flex_clears` stays False regardless.
-    Strict: everything False -> SOURCE_NECESSITY_UNRESOLVED. Loosening only
-    `flex_affirmative_miss`'s `> 0`/`< 0` to `>= 0`/`<= 0` (line 1062) makes
-    it True, which precedes `stable_affirmative_miss` in the first-match
-    order and gives NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED instead."""
-    kwargs = _branch_kwargs(
-        b_stable_lcb=-1.0, t_stable_ucb=-1.0, t_stable_lcb=5.0,
-        b_flex_lcb=0.0, t_flex_lcb=-1.0, t_flex_ucb=0.0,
-    )
-    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+def test_precedence_missing_component_audit_routes_to_branch_1_not_the_combined_result():
+    """The `component_invariance_evaluated` axis (section 4: "audit missing/
+    incomplete -> INVALID_EVENT_ALIGNED_AUDIT") is the same branch-1 string
+    as a conformance failure, but it is a DISTINCT gate a mutation could drop
+    independently of `conformance_ok` -- so it earns its own isolated
+    fixture rather than riding on the conformance test above."""
+    kwargs = _r4_branch_kwargs(component_invariance_evaluated=False)
+    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
-def test_branch_precedence_stable_affirmative_miss_isolated_at_its_own_boundary():
-    """Isolating fixture for `stable_affirmative_miss` alone. `stable_clears`
-    is pinned False by the SAME b_stable_lcb=0.0 boundary this predicate
-    shares (0>0 is False under the frozen strict `stable_clears` line, which
-    is not mutated by this fixture's target mutation, so it stays False
-    regardless); `flex_clears` and `flex_affirmative_miss` are both pinned
-    False via a non-boundary b_flex_lcb=-1.0 (kills both regardless of
-    t_flex_lcb/t_flex_ucb). Only `stable_affirmative_miss`'s own two bounds
-    (b_stable_lcb, t_stable_lcb) sit at 0.0. Strict: everything False ->
-    SOURCE_NECESSITY_UNRESOLVED. Loosening only `stable_affirmative_miss`'s
-    `> 0` to `>= 0` (line 1063) makes it True, and it is the last predicate
-    checked before the SOURCE_NECESSITY_UNRESOLVED fallback, giving
-    NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED instead."""
-    kwargs = _branch_kwargs(
-        b_stable_lcb=0.0, t_stable_ucb=5.0, t_stable_lcb=0.0,
-        b_flex_lcb=-1.0, t_flex_lcb=5.0, t_flex_ucb=-5.0,
-    )
-    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
+def test_precedence_missing_component_audit_wins_even_if_degenerate_flag_is_also_set():
+    """Contract section 4 lists "audit missing/incomplete ->
+    INVALID_EVENT_ALIGNED_AUDIT" strictly BEFORE "audit complete, all
+    invariant -> PRIMARY_G_DEGENERATE" -- the missing-audit case is checked
+    unconditionally, never contingent on what `primary_g_degenerate_flag`
+    says. This is the OPPOSITE ordering from R3's superseded tri-state
+    ruling (where the normalizer condition was "independently sufficient...
+    regardless of whether component invariance was evaluated"); R4's
+    `focal_primary_g_degenerate` is itself DERIVED from the same
+    completeness-checked invariance data, so the two can never legitimately
+    disagree in production -- but `decide_branch` must still resolve this
+    artificial disagreement fail-closed, and a mutation that swapped the two
+    checks' order would flip this fixture's result to PRIMARY_G_DEGENERATE."""
+    kwargs = _r4_branch_kwargs(component_invariance_evaluated=False,
+                                primary_g_degenerate_flag=True)
+    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+def test_precedence_part_a_conformance_unresolved_never_suppresses_the_combined_result():
+    """Section 7: `PART_A_CONFORMANCE_UNRESOLVED` "remains diagnostic and
+    does not suppress an otherwise valid focal result." `map_part_a_verdict_
+    to_inputs` is the real production mapping (not hand-picked) feeding
+    `decide_branch`'s `part_a_contradiction` -- only `PART_A_CONTRADICTION`
+    itself may set it True."""
+    for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "CONFORMANCE_PASS", "NOT_APPLICABLE"):
+        part_a_contradiction, _ = audit.map_part_a_verdict_to_inputs(verdict)
+        assert part_a_contradiction is False
+        kwargs = _r4_branch_kwargs(part_a_contradiction=part_a_contradiction)
+        assert audit.decide_branch(**kwargs) == "PERSISTENCE_NECESSARY_SOURCE"
+
+    contradiction_input, _ = audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION")
+    assert contradiction_input is True
+    kwargs = _r4_branch_kwargs(part_a_contradiction=contradiction_input)
+    assert audit.decide_branch(**kwargs) == "PART_A_CONTRADICTION"
+
+
+# -----------------------------------------------------------------------
+# 7b. Item (a): every one of the nine combined-mapping rows (contract
+# section 6), plus a direct, literal-table check of `combined_result` over
+# all 15 concrete (stable, flex) combinations it must resolve -- the
+# independent source of truth is the contract table itself, transcribed
+# verbatim, never re-derived from what `COMBINED_RESULT_MAP` already says.
+# -----------------------------------------------------------------------
+
+def test_combined_result_matches_the_frozen_contract_table_literally():
+    frozen_table = {
+        ("MATERIAL", "MATERIAL"): "PERSISTENCE_NECESSARY_SOURCE",
+        ("MATERIAL", "AFFIRMATIVE_NONMATERIAL"): "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL",
+        ("MATERIAL", "COMPONENT_INVARIANT"): "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL",
+        ("MATERIAL", "UNRESOLVED"): "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+        ("AFFIRMATIVE_NONMATERIAL", "MATERIAL"): "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE",
+        ("COMPONENT_INVARIANT", "MATERIAL"): "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE",
+        ("UNRESOLVED", "MATERIAL"): "MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+        ("AFFIRMATIVE_NONMATERIAL", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+        ("AFFIRMATIVE_NONMATERIAL", "COMPONENT_INVARIANT"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+        ("COMPONENT_INVARIANT", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED",
+        ("AFFIRMATIVE_NONMATERIAL", "UNRESOLVED"): "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+        ("COMPONENT_INVARIANT", "UNRESOLVED"): "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED",
+        ("UNRESOLVED", "AFFIRMATIVE_NONMATERIAL"): "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+        ("UNRESOLVED", "COMPONENT_INVARIANT"): "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED",
+        ("UNRESOLVED", "UNRESOLVED"): "SOURCE_NECESSITY_UNRESOLVED",
+    }
+    for (stable, flex), expected in frozen_table.items():
+        assert audit.combined_result(stable, flex) == expected, (stable, flex)
+    # The sixteenth combination is not a row -- both limbs COMPONENT_INVARIANT
+    # must resolve via branch 3, never reach this mapping at all.
+    with pytest.raises(ValueError):
+        audit.combined_result("COMPONENT_INVARIANT", "COMPONENT_INVARIANT")
+
+
+def _attach_component_audit(topology_units, *, sequences_exactly_equal: bool):
+    """Attaches a FOCAL (KEEP, SET(z)) `component_audit.pairwise_equality`
+    record to every event in `topology_units` (the `_degenerate_topology_
+    units` shape), fixed to the caller's `sequences_exactly_equal` -- the
+    exact input `compute_focal_component_invariance` consumes, never
+    re-derived from the degenerate G values themselves. Returns a fresh
+    nested structure; does not mutate the input."""
+    return [
+        [dict(event, component_audit={
+            "pairwise_equality": [
+                {"candidate": "only", "replicate_index": 0,
+                 "sequences_exactly_equal": sequences_exactly_equal},
+            ],
+        }) for event in events]
+        for events in topology_units
+    ]
+
+
+def _six_topology_results_r4(*, d_a_value: float, b_stable_value: float, b_flex_value: float,
+                              u_stable_value: float, u_flex_value: float,
+                              stable_components_invariant: bool,
+                              flex_components_invariant: bool,
+                              invalidated_pairs_by_topology=None) -> list:
+    """The R4 driver-level fixture: the same six-topology shape
+    `_six_topology_results` builds for Part-A/D_A/B_stable (contract
+    section 8, unchanged by this task), with `audit_units_stable`/
+    `audit_units_flex` additionally carrying the FOCAL `component_audit.
+    pairwise_equality` record R4's branch 3 aggregates -- never the R3
+    calibration pair, which `calibration_units_stable`/`_flex` still encode
+    here purely for Part-A's own (untouched) consumption."""
+    base = _six_topology_results(
+        d_a_value=d_a_value, b_stable_value=b_stable_value, b_flex_value=b_flex_value,
+        u_stable_value=u_stable_value, u_flex_value=u_flex_value,
+        invalidated_pairs_by_topology=invalidated_pairs_by_topology)
+    stable_units = _attach_component_audit(
+        [r["audit_units_stable"] for r in base], sequences_exactly_equal=stable_components_invariant)
+    flex_units = _attach_component_audit(
+        [r["audit_units_flex"] for r in base], sequences_exactly_equal=flex_components_invariant)
+    for i, r in enumerate(base):
+        r["audit_units_stable"] = stable_units[i]
+        r["audit_units_flex"] = flex_units[i]
+    return base
+
+
+def _fixed_u_star_bootstrap(monkeypatch, *, stable_lcb, stable_ucb, flex_lcb, flex_ucb):
+    """Monkeypatches `compute_u_star_bootstrap` to return fixed, hand-picked
+    LCB95/UCB95 bounds -- sidesteps needing a real multi-topology bootstrap
+    to straddle a specific boundary (the bootstrap MATH is already covered
+    by `hierarchical_bootstrap_quantity`'s own tests elsewhere); this
+    isolates exactly what `resolve_stable_limb_state`/`resolve_flex_limb_
+    state`/`combined_result`/the payload-retention property are supposed to
+    do with those bounds, matching this file's existing `_fast_t_m_
+    bootstrap` idiom for the same reason."""
+    monkeypatch.setattr(audit, "compute_u_star_bootstrap", lambda **kw: {
+        "u_star_stable_lcb": stable_lcb, "u_star_stable_ucb": stable_ucb,
+        "u_star_flex_lcb": flex_lcb, "u_star_flex_ucb": flex_ucb,
+        "u_star_stable_point": (stable_lcb + stable_ucb) / 2.0,
+        "u_star_flex_point": (flex_lcb + flex_ucb) / 2.0,
+    })
+
+
+# One representative concrete combo per contract-section-6 row (using
+# AFFIRMATIVE_NONMATERIAL for every "X or COMPONENT_INVARIANT" cell --
+# `test_combined_result_matches_the_frozen_contract_table_literally` above
+# already proves the COMPONENT_INVARIANT alternative independently, at the
+# pure-function level). MATERIAL/AFFIRMATIVE_NONMATERIAL/UNRESOLVED bounds
+# are picked well clear of the +/-5.0 boundary (see the dedicated strictness
+# test below for the boundary itself).
+_MATERIAL_STABLE = dict(stable_lcb=-20.0, stable_ucb=-10.0)      # UCB < -5
+_AFFIRMATIVE_STABLE = dict(stable_lcb=0.0, stable_ucb=10.0)      # LCB > -5
+_UNRESOLVED_STABLE = dict(stable_lcb=-10.0, stable_ucb=0.0)      # straddles -5
+_MATERIAL_FLEX = dict(flex_lcb=10.0, flex_ucb=20.0)              # LCB > +5
+_AFFIRMATIVE_FLEX = dict(flex_lcb=-10.0, flex_ucb=0.0)           # UCB < +5
+_UNRESOLVED_FLEX = dict(flex_lcb=0.0, flex_ucb=10.0)             # straddles +5
+
+_COMBINED_MAPPING_ROWS = [
+    ("row1_material_material", _MATERIAL_STABLE, _MATERIAL_FLEX,
+     "MATERIAL", "MATERIAL", "PERSISTENCE_NECESSARY_SOURCE"),
+    ("row2_material_affirmative", _MATERIAL_STABLE, _AFFIRMATIVE_FLEX,
+     "MATERIAL", "AFFIRMATIVE_NONMATERIAL", "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"),
+    ("row3_material_unresolved", _MATERIAL_STABLE, _UNRESOLVED_FLEX,
+     "MATERIAL", "UNRESOLVED", "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"),
+    ("row4_affirmative_material", _AFFIRMATIVE_STABLE, _MATERIAL_FLEX,
+     "AFFIRMATIVE_NONMATERIAL", "MATERIAL", "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE"),
+    ("row5_unresolved_material", _UNRESOLVED_STABLE, _MATERIAL_FLEX,
+     "UNRESOLVED", "MATERIAL", "MATERIAL_FLEX_RENEWAL_IDENTIFIED"),
+    ("row6_affirmative_affirmative", _AFFIRMATIVE_STABLE, _AFFIRMATIVE_FLEX,
+     "AFFIRMATIVE_NONMATERIAL", "AFFIRMATIVE_NONMATERIAL", "NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED"),
+    ("row7_affirmative_unresolved", _AFFIRMATIVE_STABLE, _UNRESOLVED_FLEX,
+     "AFFIRMATIVE_NONMATERIAL", "UNRESOLVED", "NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"),
+    ("row8_unresolved_affirmative", _UNRESOLVED_STABLE, _AFFIRMATIVE_FLEX,
+     "UNRESOLVED", "AFFIRMATIVE_NONMATERIAL", "NO_MATERIAL_FLEX_RENEWAL_IDENTIFIED"),
+    ("row9_unresolved_unresolved", _UNRESOLVED_STABLE, _UNRESOLVED_FLEX,
+     "UNRESOLVED", "UNRESOLVED", "SOURCE_NECESSITY_UNRESOLVED"),
+]
+
+
+@pytest.mark.parametrize(
+    "name,stable_bounds,flex_bounds,expected_stable_state,expected_flex_state,expected_combined",
+    _COMBINED_MAPPING_ROWS, ids=[row[0] for row in _COMBINED_MAPPING_ROWS])
+def test_combined_mapping_row_has_a_reachable_witness_through_the_real_driver(
+        monkeypatch, name, stable_bounds, flex_bounds, expected_stable_state,
+        expected_flex_state, expected_combined):
+    """Item (a): every one of the nine rows, reached through `assemble_
+    audit_result` (the real driver `main()` calls, not `decide_branch` with
+    hand-picked kwargs) -- asserting BOTH the combined name AND that both
+    limb states survive in `out["limb_states"]`, which is the specific
+    defect this whole result layer exists to fix (R3 could erase the
+    non-material limb's state entirely behind a single top-level name)."""
+    _fixed_u_star_bootstrap(monkeypatch, **stable_bounds, **flex_bounds)
+    # d_a_value=0.6 (not 0.0) deliberately: with b_stable_value=10.0 this is
+    # the hand-worked PART_A_CONFORMANCE_UNRESOLVED fixture (not
+    # PART_A_CONTRADICTION -- see `test_driver_part_a_unresolved_does_not_
+    # relabel_the_source_branch`'s docstring for the arithmetic), so Part-A
+    # never preempts the combined result under test here.
+    topology_results = _six_topology_results_r4(
+        d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["part_a"]["verdict"] != "PART_A_CONTRADICTION"
+    assert out["branch"] == expected_combined
+    assert out["limb_states"] == {"stable": expected_stable_state, "flex": expected_flex_state}
+
+
+def test_both_flex_only_positive_results_are_reachable():
+    """Item (e): `MATERIAL_FLEX_RENEWAL_IDENTIFIED` and `FLEX_RENEWAL_
+    WITHOUT_MATERIAL_STABLE_PERSISTENCE` -- R3's B_m/T_m branch selection
+    could not express either (its ten branches have no flex-only-positive
+    row at all); both are rows 5 and 4 of the parametrized mapping test
+    above, and are re-asserted directly here, through `decide_branch`
+    itself, as a standalone, narrowly-traceable witness of exactly the
+    claim item (e) names."""
+    assert audit.decide_branch(**_r4_branch_kwargs(
+        stable_limb_state="UNRESOLVED", flex_limb_state="MATERIAL",
+    )) == "MATERIAL_FLEX_RENEWAL_IDENTIFIED"
+    assert audit.decide_branch(**_r4_branch_kwargs(
+        stable_limb_state="AFFIRMATIVE_NONMATERIAL", flex_limb_state="MATERIAL",
+    )) == "FLEX_RENEWAL_WITHOUT_MATERIAL_STABLE_PERSISTENCE"
+
+
+# -----------------------------------------------------------------------
+# 7c. Item (b): the +/-5.0 threshold is strict -- a limb exactly AT the
+# margin resolves UNRESOLVED, never MATERIAL. Both limbs driven directly.
+# -----------------------------------------------------------------------
+
+def test_stable_limb_state_strict_at_the_negative_five_boundary():
+    """UCB95(U*_stable) == -5.0 exactly (not < -5.0) must NOT clear MATERIAL;
+    with LCB95 also below -5.0 (so AFFIRMATIVE_NONMATERIAL's `> -5` also
+    fails), the only remaining state is UNRESOLVED."""
+    state = audit.resolve_stable_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        ucb95_u_star_stable=-audit.MATERIALITY_MARGIN, lcb95_u_star_stable=-6.0)
+    assert state == "UNRESOLVED"
+    # One-sided sanity: moving the UCB a hair past the boundary DOES clear.
+    state_material = audit.resolve_stable_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        ucb95_u_star_stable=-audit.MATERIALITY_MARGIN - 0.001, lcb95_u_star_stable=-6.0)
+    assert state_material == "MATERIAL"
+
+
+def test_flex_limb_state_strict_at_the_positive_five_boundary():
+    """LCB95(U*_flex) == +5.0 exactly (not > +5.0) must NOT clear MATERIAL;
+    with UCB95 also above +5.0 (so AFFIRMATIVE_NONMATERIAL's `< +5` also
+    fails), the only remaining state is UNRESOLVED."""
+    state = audit.resolve_flex_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        lcb95_u_star_flex=audit.MATERIALITY_MARGIN, ucb95_u_star_flex=6.0)
+    assert state == "UNRESOLVED"
+    state_material = audit.resolve_flex_limb_state(
+        complete_focal_audit=True, components_invariant=False,
+        lcb95_u_star_flex=audit.MATERIALITY_MARGIN + 0.001, ucb95_u_star_flex=6.0)
+    assert state_material == "MATERIAL"
+
+
+# -----------------------------------------------------------------------
+# 7d. Item (d): branch 3 aggregates FOCAL pairs, never the R3 calibration
+# pair -- the supersession a later reader is most likely to get wrong.
+# -----------------------------------------------------------------------
+
+def test_branch_3_fires_from_focal_invariance_regardless_of_calibration_data(monkeypatch):
+    """Both limbs' FOCAL pairs are exactly invariant here; the calibration/
+    Part-A inputs (`d_a_value`/`b_stable_value`/`b_flex_value`) are ordinary
+    non-degenerate favorable values that would otherwise let the run proceed
+    to a combined result -- proving branch 3 fires from the FOCAL signal
+    alone, independent of what the calibration pair says."""
+    _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
+                             flex_lcb=10.0, flex_ucb=20.0)
+    topology_results = _six_topology_results_r4(
+        d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=True, flex_components_invariant=True)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["branch"] == "PRIMARY_G_DEGENERATE"
+    assert out["primary_g"]["degenerate"] is True
+    assert out["limb_states"] == {"stable": "COMPONENT_INVARIANT", "flex": "COMPONENT_INVARIANT"}
+
+
+def test_branch_3_does_not_fire_when_a_focal_pair_differs_even_if_calibration_would_read_invariant(monkeypatch):
+    """The 'vice versa' half: a focal pair DIFFERS on the stable limb (so
+    `components_invariant_stable=False`, and its fixed U* bootstrap bounds
+    clear MATERIAL), while the flex limb's focal pairs are exactly invariant
+    (`components_invariant_flex=True` -> `COMPONENT_INVARIANT`). Neither
+    limb alone is `COMPONENT_INVARIANT` on BOTH, so branch 3 must NOT fire;
+    the run must proceed to the absolute gates and reach the combined result
+    for (MATERIAL, COMPONENT_INVARIANT) -- proving the aggregation reads
+    `audit_units_*`'s FOCAL `component_audit`, never `calibration_units_*`
+    (which carries no `component_audit` key at all in this fixture shape, so
+    a swapped accumulator would instead report `component_invariance_
+    evaluated=False`, landing on INVALID_EVENT_ALIGNED_AUDIT -- a materially
+    different, easily distinguished outcome from either PRIMARY_G_DEGENERATE
+    or the expected combined result asserted below)."""
+    _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
+                             flex_lcb=10.0, flex_ucb=20.0)
+    topology_results = _six_topology_results_r4(
+        d_a_value=0.0, b_stable_value=0.0, b_flex_value=0.0,
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=True)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["branch"] != "PRIMARY_G_DEGENERATE"
+    assert out["branch"] != "INVALID_EVENT_ALIGNED_AUDIT"
+    assert out["branch"] == "STABLE_PERSISTENCE_WITHOUT_MATERIAL_FLEX_RENEWAL"
+    assert out["primary_g"]["degenerate"] is False
+    assert out["limb_states"] == {"stable": "MATERIAL", "flex": "COMPONENT_INVARIANT"}
 
 
 # =============================================================================
@@ -2301,30 +2462,12 @@ def test_map_part_a_verdict_to_inputs_only_contradiction_sets_true():
     assert audit.map_part_a_verdict_to_inputs("NOT_APPLICABLE") == (False, "NOT_APPLICABLE")
 
 
-def test_unresolved_verdict_lands_in_diagnostic_and_never_flips_decide_branch():
-    """Item 5c: PART_A_CONFORMANCE_UNRESOLVED must land in the diagnostic
-    payload only -- `decide_branch`'s outcome under it must be IDENTICAL to
-    CONFORMANCE_PASS/NOT_APPLICABLE (all three keep `part_a_contradiction`
-    False), while PART_A_CONTRADICTION must genuinely flip the branch. A
-    wrong mapping that ever set `part_a_contradiction=True` for UNRESOLVED
-    would make this test's first loop disagree with its last assertion."""
-    common_kwargs = dict(
-        conformance_ok=True, support_ok=True, primary_g_degenerate_flag=False,
-        b_stable_lcb=1.0, t_stable_ucb=-1.0, t_stable_lcb=-2.0,
-        b_flex_lcb=1.0, t_flex_lcb=1.0, t_flex_ucb=2.0,
-        component_invariance_evaluated=True,
-    )
-    for verdict in ("PART_A_CONFORMANCE_UNRESOLVED", "CONFORMANCE_PASS", "NOT_APPLICABLE"):
-        part_a_contradiction, diagnostic = audit.map_part_a_verdict_to_inputs(verdict)
-        assert part_a_contradiction is False
-        assert diagnostic == verdict
-        branch = audit.decide_branch(part_a_contradiction=part_a_contradiction, **common_kwargs)
-        assert branch == "PERSISTENCE_NECESSARY_SOURCE"
-
-    contradiction_input, _ = audit.map_part_a_verdict_to_inputs("PART_A_CONTRADICTION")
-    assert contradiction_input is True
-    branch_with_contradiction = audit.decide_branch(part_a_contradiction=contradiction_input, **common_kwargs)
-    assert branch_with_contradiction == "PART_A_CONTRADICTION"
+# R3's `test_unresolved_verdict_lands_in_diagnostic_and_never_flips_decide_
+# branch` (hand-picked old `decide_branch` T_m kwargs) is superseded by
+# `test_precedence_part_a_conformance_unresolved_never_suppresses_the_
+# combined_result` in section 7 above, which checks the identical property
+# (PART_A_CONFORMANCE_UNRESOLVED never flips the branch, only
+# PART_A_CONTRADICTION does) against the R4 `decide_branch` signature.
 
 
 def test_run_audit_event_voids_the_whole_event_when_a_clone_fails():
@@ -3530,21 +3673,6 @@ def test_check_minimum_support_requires_both_limbs_independently_sufficient():
 # reached through the SAME code path main() uses, not called directly)
 # =============================================================================
 
-def _fast_t_m_bootstrap(monkeypatch, iters=20):
-    """The real `compute_t_m_bootstrap` at its frozen default (10,000 iters)
-    is too slow for a focused test; `assemble_audit_result` does not expose
-    an override (correctly -- production must always run the frozen count),
-    so the override is applied here, at the call site, by monkeypatching the
-    module-level name `assemble_audit_result` resolves at call time. Every
-    fixture below is DEGENERATE (identical value at every topology, so
-    resampling introduces no variance regardless of iteration count) -- the
-    small iters value changes only runtime, never the asserted outcome."""
-    real = audit.compute_t_m_bootstrap
-    monkeypatch.setattr(
-        audit, "compute_t_m_bootstrap",
-        lambda **kw: real(**{**kw, "iters": iters}))
-
-
 def _six_topology_results(*, d_a_value: float, b_stable_value: float,
                            b_flex_value: float, u_stable_value: float,
                            u_flex_value: float, invalidated_pairs_by_topology=None) -> list:
@@ -3583,20 +3711,21 @@ def test_driver_part_a_contradiction_reaches_branch_4(monkeypatch):
     (deterministic). lower_contrast = D_A + 0.05*B_stable = 0.5 > 0 (passes);
     upper_contrast = 0.05*B_stable - D_A = 0.5 > 0 (passes). Both equivalence
     tests pass -> PART_A_CONTRADICTION per section 8 ('Both pass ->
-    PART_A_CONTRADICTION (return-equivalence)'), which `decide_branch`
-    resolves to branch 4 -- checked here through `assemble_audit_result`,
-    the exact function `main()` calls, not `decide_branch` called directly
-    with hand-picked kwargs (section 7's existing coverage)."""
-    _fast_t_m_bootstrap(monkeypatch)
-    topology_results = _six_topology_results(
+    PART_A_CONTRADICTION (return-equivalence)', unchanged by R4), which
+    `decide_branch` resolves to branch 4 -- checked here through
+    `assemble_audit_result`, the exact function `main()` calls, not
+    `decide_branch` called directly with hand-picked kwargs (section 7's
+    existing coverage). U*_stable/U*_flex are fixed via `_fixed_u_star_
+    bootstrap` to values that would OTHERWISE resolve PERSISTENCE_NECESSARY_
+    SOURCE (both MATERIAL), so Part-A's win is a genuine precedence result,
+    not a fixture where nothing else could have fired."""
+    _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
+    topology_results = _six_topology_results_r4(
         d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
-        u_stable_value=5.0, u_flex_value=5.0)
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False)
 
-    # Branches 4-10 are only reachable in the world where the mandatory
-    # primary-G component audit WAS performed (ruling 2026-07-27). This
-    # fixture declares that world explicitly; production defaults False.
-    out = audit.assemble_audit_result(
-        topology_results, [], component_invariance_evaluated=True)
+    out = audit.assemble_audit_result(topology_results, [])
 
     assert out["conformance"]["ok"] is True
     assert out["support"]["ok"] is True
@@ -3608,30 +3737,27 @@ def test_driver_part_a_unresolved_does_not_relabel_the_source_branch(monkeypatch
     """Hand-worked: B_stable=10.0, D_A=0.6. lower_contrast = 0.6+0.5=1.1>0
     (passes); upper_contrast = 0.5-0.6=-0.1 (fails, not >0) -> not both pass,
     so not PART_A_CONTRADICTION; lower_contrast_ucb=1.1 is not <0, so not
-    CONFORMANCE_PASS either -> PART_A_CONFORMANCE_UNRESOLVED. Section 8: the
-    unresolved diagnostic 'does not relabel the source branch' -- T_m is
-    built to clear on both limbs (U*_stable=-2.0 -> T_stable=-2.0+1.0=-1.0<0;
-    U*_flex=2.0 -> T_flex=2.0-1.0=1.0>0), so the source branch must resolve
-    PERSISTENCE_NECESSARY_SOURCE, exactly as if Part-A had never run, proving
-    UNRESOLVED never flips `part_a_contradiction` through the real driver
-    path (not `decide_branch` called directly)."""
-    _fast_t_m_bootstrap(monkeypatch)
-    topology_results = _six_topology_results(
+    CONFORMANCE_PASS either -> PART_A_CONFORMANCE_UNRESOLVED (contract
+    section 8, unchanged by R4). Section 7: the unresolved diagnostic
+    "does not suppress an otherwise valid focal result" -- both limbs are
+    fixed MATERIAL via `_fixed_u_star_bootstrap`, so the source branch must
+    resolve PERSISTENCE_NECESSARY_SOURCE, exactly as if Part-A had never
+    run, proving UNRESOLVED never flips `part_a_contradiction` through the
+    real driver path (not `decide_branch` called directly)."""
+    _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
+    topology_results = _six_topology_results_r4(
         d_a_value=0.6, b_stable_value=10.0, b_flex_value=10.0,
-        u_stable_value=-2.0, u_flex_value=2.0)
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False)
 
-    # Branches 4-10 are only reachable in the world where the mandatory
-    # primary-G component audit WAS performed (ruling 2026-07-27). This
-    # fixture declares that world explicitly; production defaults False.
-    out = audit.assemble_audit_result(
-        topology_results, [], component_invariance_evaluated=True)
+    out = audit.assemble_audit_result(topology_results, [])
 
     assert out["part_a"]["verdict"] == "PART_A_CONFORMANCE_UNRESOLVED"
     assert out["branch"] == "PERSISTENCE_NECESSARY_SOURCE"
 
 
-def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_t_m(monkeypatch):
-    """The same otherwise-favorable T_m fixture as the UNRESOLVED test above
+def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_result(monkeypatch):
+    """The same otherwise-favorable fixture as the UNRESOLVED test above
     (which alone would resolve PERSISTENCE_NECESSARY_SOURCE), but with one
     topology reporting a single invalidated prefix-replay pair --
     `compute_conformance_ok`'s zero-tolerance conjunct fails, so
@@ -3640,11 +3766,12 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_t_m(monkey
     path, NOT the single-topology/support-miss shortcut, since support_ok
     stays True here) and win branch-1 precedence over every later row,
     including one it would otherwise have cleared."""
-    _fast_t_m_bootstrap(monkeypatch)
+    _fixed_u_star_bootstrap(monkeypatch, **_MATERIAL_STABLE, **_MATERIAL_FLEX)
     invalidated = [[{"reason": "synthetic test injection"}]] + [[] for _ in range(5)]
-    topology_results = _six_topology_results(
+    topology_results = _six_topology_results_r4(
         d_a_value=0.0, b_stable_value=10.0, b_flex_value=10.0,
-        u_stable_value=-2.0, u_flex_value=2.0,
+        u_stable_value=0.0, u_flex_value=0.0,
+        stable_components_invariant=False, flex_components_invariant=False,
         invalidated_pairs_by_topology=invalidated)
 
     out = audit.assemble_audit_result(topology_results, [])
@@ -3716,84 +3843,24 @@ def test_all_seed_controlled_is_false_not_vacuously_true_on_no_episode_worlds():
         "zero recorded episode worlds must never read as seed-controlled")
 
 
-# =============================================================================
-# 9a. Ruling 2026-07-27 (VERDICT_Q2) -- primary_g_degenerate is disjunctive
-# across limbs, and assemble_audit_result wires the computed flag for real
-# =============================================================================
-
-def test_primary_g_degenerate_is_disjunctive_not_conjunctive():
-    """Independent source of truth: the ruling's own disjunctive definition
-    `b_m_positive_lcb = b_stable_positive OR b_flex_positive`, so
-    `primary_g_degenerate` fires iff NEITHER limb identified. A conjunctive
-    implementation (`not (stable_b_identified and flex_b_identified)`) would
-    agree with this one at (False, False)->True and (True, True)->False --
-    the two mixed rows are the only rows that distinguish disjunctive from
-    conjunctive, so both must be checked."""
-    assert audit.primary_g_degenerate(stable_b_identified=False, flex_b_identified=False) is True
-    assert audit.primary_g_degenerate(stable_b_identified=True, flex_b_identified=False) is False
-    assert audit.primary_g_degenerate(stable_b_identified=False, flex_b_identified=True) is False
-    assert audit.primary_g_degenerate(stable_b_identified=True, flex_b_identified=True) is False
-
-
-def test_assemble_audit_result_reaches_primary_g_degenerate_when_neither_limb_identified(monkeypatch):
-    """The exact defect this task repairs: `primary_g_degenerate_flag` was a
-    hardcoded `False` literal at the `decide_branch` call site, so branch 3
-    was structurally unreachable through `assemble_audit_result` no matter
-    what the data said. Both `B_stable` and `B_flex` are constructed
-    degenerate-negative here (LCB95 <= 0 for both), which the ruling's
-    disjunctive gate must resolve to PRIMARY_G_DEGENERATE -- the mutation
-    this test is paired against (reverting the flag to hardcoded `False`)
-    makes `decide_branch` fall through every clearing/affirmative-miss row
-    (all of which require a positive B_m LCB) to SOURCE_NECESSITY_UNRESOLVED
-    instead."""
-    _fast_t_m_bootstrap(monkeypatch)
-    topology_results = _six_topology_results(
-        d_a_value=0.0, b_stable_value=-5.0, b_flex_value=-5.0,
-        u_stable_value=0.0, u_flex_value=0.0)
-
-    out = audit.assemble_audit_result(topology_results, [])
-
-    assert out["branch"] == "PRIMARY_G_DEGENERATE"
-    assert out["primary_g"]["degenerate"] is True
-    assert out["primary_g"]["stable_b_identified"] is False
-    assert out["primary_g"]["flex_b_identified"] is False
-    assert out["primary_g"]["stable_status"] == "NORMALIZER_NOT_IDENTIFIED"
-    assert out["primary_g"]["flex_status"] == "NORMALIZER_NOT_IDENTIFIED"
-    assert out["primary_g"]["component_invariance_evaluated"] is False
-
-
-def test_assemble_audit_result_preserves_identified_limb_disjunctively(monkeypatch):
-    """Ruling 2026-07-27: disjunction must not let the UNNORMALIZED limb
-    (flex, B_flex LCB95 <= 0 here) erase the valid result the NORMALIZED
-    limb (stable, B_stable LCB95 > 0, T_stable clears) already established.
-    A conjunctive wiring (`not (stable_b_identified and flex_b_identified)`)
-    would incorrectly resolve this to PRIMARY_G_DEGENERATE instead of
-    preserving branch 7, exactly the case the ruling's own text names:
-    "branch 7 preserves an identified stable-persistence result while flex
-    remains unresolved." D_A=0.6 with B_stable=10.0 keeps Part-A at
-    UNRESOLVED (verified by the existing driver test above), never
-    CONTRADICTION, so branch 4 does not preempt branch 7 here."""
-    _fast_t_m_bootstrap(monkeypatch)
-    topology_results = _six_topology_results(
-        d_a_value=0.6, b_stable_value=10.0, b_flex_value=-5.0,
-        u_stable_value=-2.0, u_flex_value=2.0)
-
-    # Branches 4-10 are only reachable in the world where the mandatory
-    # primary-G component audit WAS performed (ruling 2026-07-27). This
-    # fixture declares that world explicitly; production defaults False.
-    out = audit.assemble_audit_result(
-        topology_results, [], component_invariance_evaluated=True)
-
-    assert out["branch"] == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
-    assert out["primary_g"]["degenerate"] is False
-    assert out["primary_g"]["stable_b_identified"] is True
-    assert out["primary_g"]["flex_b_identified"] is False
-    assert out["primary_g"]["stable_status"] == "NORMALIZER_IDENTIFIED"
-    assert out["primary_g"]["flex_status"] == "NORMALIZER_NOT_IDENTIFIED"
+# R3's `primary_g_degenerate`-disjunctive-across-limbs section (`test_
+# primary_g_degenerate_is_disjunctive_not_conjunctive`, `test_assemble_
+# audit_result_reaches_primary_g_degenerate_when_neither_limb_identified`,
+# `test_assemble_audit_result_preserves_identified_limb_disjunctively`) is
+# superseded by section 7's `test_branch_3_fires_from_focal_invariance_
+# regardless_of_calibration_data` and `test_branch_3_does_not_fire_when_a_
+# focal_pair_differs_even_if_calibration_would_read_invariant`, which check
+# the SAME "one limb's differing focal pairs must not be erased by the other
+# limb's own state" property against R4's real per-limb component-invariance
+# wiring (`focal_primary_g_degenerate`) through the real
+# `assemble_audit_result` driver, rather than the deleted B_m-LCB95 flag.
 
 
 # =============================================================================
-# 9b. t_m_bootstrap point estimates (item 2, 2026-07-27 ruling)
+# 9b. t_m_bootstrap point estimates (item 2, 2026-07-27 ruling) -- R3
+# diagnostic-only (see `MATERIALITY_COEFFICIENT`'s docstring); retained
+# because `scripts/d7s_normalizer_autopsy.py` imports `compute_t_m_
+# bootstrap`, unmodified by this task.
 # =============================================================================
 
 def test_compute_t_m_bootstrap_points_are_independently_distinguishable():
@@ -4111,9 +4178,11 @@ def test_every_registered_constant_matches_the_frozen_contract():
     the contract disagree, the code is wrong until a round says otherwise --
     never edit this table to match the code.
 
-    The sweep perturbed sixteen constants; this table pins **eighteen**. The six
-    gaps are only where the sweep happened to look, and drift on any of the
-    others is equally silent."""
+    The sweep perturbed sixteen constants; this table pins **nineteen**
+    (`MATERIALITY_MARGIN` added by the R4 result-layer task -- contract
+    section 1's absolute focal margin). The six gaps are only where the
+    sweep happened to look, and drift on any of the others is equally
+    silent."""
     frozen = {
         "REJOIN_BATTERY_RATIO": 0.80,
         "DELTA": 10,
@@ -4130,6 +4199,7 @@ def test_every_registered_constant_matches_the_frozen_contract():
         "BOOTSTRAP_ITERS": 10000,
         "EQUIVALENCE_DELTA": 0.05,
         "MATERIALITY_COEFFICIENT": 0.10,
+        "MATERIALITY_MARGIN": 5.0,
         "MIN_SUPPORT_TOPOLOGIES": 6,
         "MIN_SUPPORT_EPISODES_PER_TOPOLOGY": 4,
         "EPISODE_STEPS": 1500,
@@ -4156,104 +4226,15 @@ def test_the_registered_topology_seed_sets_are_exactly_as_frozen():
         20260738, 20260739, 20260740, 20260741]
 
 
-# =============================================================================
-# 10. Ruling 2026-07-27 (COMPONENT_INVARIANCE tri-state) -- decide_branch's
-# new mandatory-component-audit gate, and resolve_primary_g_tristate
-# =============================================================================
-
-def test_decide_branch_missing_component_audit_routes_to_branch_1_not_10():
-    """The exact case the governing ruling calls out: at least one limb's
-    normalizer is identified (so branch 3 does not fire -- `_branch_kwargs`'s
-    default fixture has `b_stable_lcb=b_flex_lcb=1.0`), but the mandatory
-    primary-G component audit was never performed. Every OTHER branch-
-    precedence input in the default fixture would otherwise resolve
-    `PERSISTENCE_NECESSARY_SOURCE` (branch 5); the missing audit must preempt
-    it as branch 1, `INVALID_EVENT_ALIGNED_AUDIT` -- never branch 10's
-    `SOURCE_NECESSITY_UNRESOLVED` catch-all, which is what a run that
-    silently dropped this new gate (or wired it to the wrong branch string)
-    would fall through to instead."""
-    kwargs = _branch_kwargs(component_invariance_evaluated=False)
-    assert audit.decide_branch(**kwargs) == "INVALID_EVENT_ALIGNED_AUDIT"
-
-
-def test_decide_branch_normalizer_forced_degenerate_preempts_missing_component_audit():
-    """Ruling: 'branch 3 remains reachable through the independently
-    sufficient normalizer condition' -- regardless of whether component
-    invariance was evaluated. `primary_g_degenerate_flag=True` here must win
-    over the new gate, not the other way around."""
-    kwargs = _branch_kwargs(primary_g_degenerate_flag=True, component_invariance_evaluated=False)
-    assert audit.decide_branch(**kwargs) == "PRIMARY_G_DEGENERATE"
-
-
-def test_decide_branch_component_invariance_default_preserves_every_pre_ruling_branch():
-    """`component_invariance_evaluated` defaults to `True` precisely so every
-    pre-ruling caller of `decide_branch` in this module (none of which know
-    this axis exists) keeps its unmodified branch. Spot-checked against
-    branch 5 (the default fixture) and branch 10 (the fixture that
-    deliberately decouples `primary_g_degenerate_flag` from the LCB fields to
-    isolate branch-10 precedence, per its own docstring above) -- both must
-    be unaffected by the new gate sitting silently at its default."""
-    assert audit.decide_branch(**_branch_kwargs()) == "PERSISTENCE_NECESSARY_SOURCE"
-    kwargs = _branch_kwargs(
-        b_stable_lcb=-1.0, t_stable_ucb=1.0, t_stable_lcb=-1.0,
-        b_flex_lcb=-1.0, t_flex_lcb=-1.0, t_flex_ucb=1.0)
-    assert audit.decide_branch(**kwargs) == "SOURCE_NECESSITY_UNRESOLVED"
-
-
-def test_resolve_primary_g_tristate_normalizer_forces_degenerate_regardless_of_evaluation():
-    """Ruling row 1: `normalizer_forces_degenerate` is independently
-    sufficient, so the degenerate flag is `True` even with
-    `component_invariance_evaluated=False` -- the reason is the normalizer
-    one, not the missing-audit one."""
-    out = audit.resolve_primary_g_tristate(
-        stable_b_identified=False, flex_b_identified=False,
-        component_invariance_evaluated=False)
-    assert out["primary_g_degenerate_flag"] is True
-    assert out["reason"] == "NO_POSITIVE_NORMALIZER_ON_EITHER_LIMB"
-    assert out["stable_measurement_valid"] is False
-    assert out["flex_measurement_valid"] is False
-
-
-def test_resolve_primary_g_tristate_missing_audit_when_normalizer_identified():
-    """Ruling row 2: stable's normalizer is identified, but the mandatory
-    component audit was not performed -- `MANDATORY_PRIMARY_G_COMPONENT_
-    AUDIT_MISSING`, not a silently-False degenerate flag standing in for
-    'nothing to report'."""
-    out = audit.resolve_primary_g_tristate(
-        stable_b_identified=True, flex_b_identified=False,
-        component_invariance_evaluated=False)
-    assert out["primary_g_degenerate_flag"] is False
-    assert out["component_invariance_evaluated"] is False
-    assert out["reason"] == "MANDATORY_PRIMARY_G_COMPONENT_AUDIT_MISSING"
-
-
-def test_resolve_primary_g_tristate_recomputes_degenerate_from_component_separation():
-    """Ruling row 3, and the case that proves this is genuinely new
-    information beyond the old normalizer-only flag: stable's normalizer IS
-    identified (which `primary_g_degenerate` alone would resolve to `False`,
-    i.e. 'not degenerate'), but its components are NOT separate, and flex is
-    neither identified nor separate -- both limbs' `..._measurement_valid`
-    are `False`, so the recomputed `primary_g_degenerate_flag` must be
-    `True`. This is exactly the blind spot the ruling exists to close: a
-    normalizer succeeding is no longer sufficient once component separation
-    is known and fails."""
-    out = audit.resolve_primary_g_tristate(
-        stable_b_identified=True, flex_b_identified=False,
-        component_invariance_evaluated=True,
-        stable_components_separate=False, flex_components_separate=False)
-    assert out["stable_measurement_valid"] is False
-    assert out["flex_measurement_valid"] is False
-    assert out["primary_g_degenerate_flag"] is True
-    assert out["reason"] is None
-
-    # Contrast: same normalizer identification, but stable's components ARE
-    # separate -- measurement valid, not degenerate.
-    out2 = audit.resolve_primary_g_tristate(
-        stable_b_identified=True, flex_b_identified=False,
-        component_invariance_evaluated=True,
-        stable_components_separate=True, flex_components_separate=False)
-    assert out2["stable_measurement_valid"] is True
-    assert out2["primary_g_degenerate_flag"] is False
+# R3's `resolve_primary_g_tristate` (COMPONENT_INVARIANCE tri-state) and its
+# three `decide_branch`-missing-component-audit tests are DELETED along with
+# the function itself -- superseded by R4's real `compute_focal_component_
+# invariance` (never a caller-supplied override) and covered by section 7's
+# `test_precedence_missing_component_audit_routes_to_branch_1_not_the_
+# combined_result`, `test_precedence_missing_component_audit_wins_even_if_
+# degenerate_flag_is_also_set`, and `test_precedence_primary_g_degenerate_
+# beats_the_combined_result` above, against the real R4 `decide_branch`
+# signature.
 
 
 # =============================================================================
