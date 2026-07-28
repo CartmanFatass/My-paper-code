@@ -1,6 +1,6 @@
 # Exact allow-list for G46 disposition clarification
 
-The following paths are the complete allow-list. Read them at stage_commit=STAGE_COMMIT_PLACEHOLDER and no other repository paths:
+The following paths are the complete allow-list. Read them at stage_commit=b7e02e89c2037ec233851f0fec2bdd0da089bd99 and no other repository paths:
 
 - .agents/roles/EXTERNAL_PRO.md
 - docs/project/ALGORITHM_PRINCIPLES.md
