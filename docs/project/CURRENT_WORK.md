@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4 closure A-E COMPLETE. The formal R4 run awaits its own conclusion-bearing compute authorization; nothing else gates it.
+next_boundary=R4 closure REOPENED at F. The Stage B re-review of D' returned REJECT on both axes; two blocking defects reproduced by the PM. Repair D'' is in flight. The formal R4 run is GATED behind it.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -108,10 +108,52 @@ C implement the smallest R4 delta       DONE  3de74552 + 7fa90070
 D realization-conformance review        REJECT -- 6 of 10 clean, four blocking
 D' conformance repair                   DONE  28d6933f -- R1-R5, 309 passed
 E proof-sized exercise on 20260725      DONE  13 outcomes, STEP_E_ASSEMBLED_PATH_OK
+F Stage B re-review of D'                REJECT -- conformance and semantics, two blocking
+F' repair D''                            IN FLIGHT
 ```
 
-**Two implementation bindings the Project Manager decided in D', owed to Pro as
-disclosure at the next touchpoint — neither reopens a frozen decision:**
+**Step F existed because the gate was skipped, not because it was scheduled.**
+`COMPUTE_ROUTING.md`: "A conclusion-bearing run needs its gate passed first —
+Stage B for claim-bearing code." Step D *was* that gate and it returned REJECT;
+D' repaired it and the PM verified the repair personally, but nothing
+adversarial ever read the repair. D' → E skipped it. Both defects below were in
+the tree while `CURRENT_WORK` said A–E COMPLETE.
+
+**The two blocking defects, reproduced by the PM rather than taken on report:**
+
+```text
+B-1  a DUPLICATED topology seed inside a declared shard produces a nine-slot
+     "eight-topology" artifact that PASSES all five sentinel conditions.
+     measured: r4_declared_population_identity([...734, 734, 735, 736, 737])
+       -> EARNED; resolve_run_plan returns it verbatim, NOT deduplicated;
+       pooled artifact topology_seeds=8 / topology_records=9;
+       r4_freshness_sentinel -> ok=True, all five True.
+     One topology carries double weight in topology_weighted_point_estimate.
+     THIS SHAPE IS NEW WITH D'. r4_artifact_identity's exact-list check refuses
+     the same list (measured: None). The declared path D' added to fix the
+     sharding provenance gap admits a shape the old path refused -- an artifact
+     carrying a PASSING proof of a population it does not have.
+
+B-2  main() never calls r4_freshness_sentinel, and the no-flag default IS a
+     whole-population R4 run.
+     measured: resolve_run_plan(no flags) -> TOPOLOGY_SEEDS_R4 at 8/8 episodes,
+       identity EARNED; 'r4_freshness_sentinel' occurs once inside main() and
+       it is IN A COMMENT (:4722) asserting the check runs. Section 3's "fail
+       closed unless" has no executable closure on the lowest-effort route.
+     Also: --population r4 with the eight seeds REVERSED earns identity and
+       would fail the sentinel (exact_seed_list=False) if anything ran it.
+```
+
+**One correction the PM did NOT adopt from the review.** Its minimal fix for B-1
+re-points sentinel condition 1 at `topology_records`. A topology failing the
+pinned-coordinate hash contributes no record and no unit (`:4744-4750` appends
+to `topology_hash_failures` and continues), so that would turn a lawful
+`INVALID_EVENT_ALIGNED_AUDIT` run into a pooler `SystemExit` instead of a
+reportable branch-1 result. Condition 1 stays on the declared list; a separate
+subset-and-distinct condition closes the hole without touching branch 1.
+
+**Three implementation bindings the Project Manager decided in D'/D'', owed to
+Pro as disclosure at the next touchpoint — none reopens a frozen decision:**
 
 ```text
 the length gate compares against the registered horizon h (139/550), NOT
@@ -126,6 +168,13 @@ R4 identity is DECLARED (--population r4), not inferred from the seed list. A
   strict subset is admitted so the sharded route can carry identity; any seed
   outside the population is a hard refusal; an accidental subset still gets
   None/None.
+
+the freshness sentinel gains an EIGHTH artifact-level condition beyond the
+  contract's registered seven: the seeds that actually produced units are
+  pairwise distinct and all members of the population. Contract conditions 1-7
+  are NOT renumbered. This is D'''s repair of B-1 and it exists because the
+  declared path (binding 2 above) made a duplicate reachable with identity --
+  a binding whose own failure mode needed a second binding to close.
 ```
 
 **Provenance rule created by D', and it binds any future run.** With
