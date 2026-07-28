@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4_CLOSURE -- ledger, smallest delta, realization-conformance review, proof-sized exercise. No run.
+next_boundary=R4_CLOSURE step D (realization-conformance review, in flight) then E (proof-sized exercise). No run.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -98,6 +98,34 @@ This is a Project Manager reading of an ambiguous ruling, not a ruling. It is
 recorded here rather than buried in a commit message so it can be challenged. If
 it is wrong, the wrong thing is the R4 result-layer implementation, which is
 uncommitted-to-a-run and reversible; no compute was spent on it.
+
+### R4 closure progress
+
+```text
+A supersede the partial freeze          DONE  D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
+B decision ledger, nine bindings        DONE  D7_S_R4_DECISION_LEDGER.md
+C implement the smallest R4 delta       DONE  3de74552 + 7fa90070
+D realization-conformance review        IN FLIGHT -- ten checks, hmasd-reviewer
+E proof-sized exercise on 20260725      not started
+```
+
+The R4 instrument exists: absolute five-unit gates, four per-limb states, the
+nine-row combined mapping, five-level precedence, branch 3 over focal pairs, the
+`20260734-20260741` population with its own seed namespace, a six-condition
+freshness sentinel, `PART_A_CONTROL` at the absolute anchor, and the null arm and
+both `B_m` quantities deleted from the run path. **249 passed** across the three
+suites.
+
+Two carried items for the realization gate, neither of them silent:
+
+- **Pro's launch-gate list named "calibration arm ordering"** as a precondition,
+  and R4 satisfies it by **deleting** calibration arm ordering rather than
+  guarding it. Satisfied by removal -- check it, do not assume it.
+- **`NOT_EVALUATED`** is a fifth per-limb state outside the contract's frozen
+  four, emitted only when the focal audit is incomplete (a case already routed to
+  branch 1). An implementation binding, disclosed to Pro at the next touchpoint
+  rather than left as a detail.
+- **`PART_A_FULL_SYNC_MATERIALLY_WORSE`** is a label the contract does not name.
 
 ### The road here, in pointers
 
