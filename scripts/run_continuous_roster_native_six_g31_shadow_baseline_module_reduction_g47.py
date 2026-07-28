@@ -48,9 +48,13 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHADOW_BASELINE_MODULE_REDUCTION_"
     "G47_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# Formal admission remains closed until the independent G47 alignment audit.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Exact independently ALIGNED G47 implementation and correction-recheck stage.
+ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
+    "fab68ae1a87578b59c1a004ac5415edf55ee7452"
+)
+ALIGNMENT_STAGE_COMMIT: str | None = (
+    "33432c16df22e5432710a5e5b05aa34a82c5a45f"
+)
 
 ACCEPTED_ANCHOR_ROOT_RELATIVE = g46_runner.ACCEPTED_ANCHOR_ROOT_RELATIVE
 DEFAULT_CPU_BUDGET = 2

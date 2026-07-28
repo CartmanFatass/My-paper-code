@@ -75,9 +75,28 @@ def test_configuration_backend_and_formal_admission_are_fail_closed(
     with pytest.raises(ValueError, match="process_workers=1"):
         runner._configuration(formal=False, cpu_budget=2, process_workers=2)
 
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
-    with pytest.raises(ValueError, match="independently ALIGNED"):
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "fab68ae1a87578b59c1a004ac5415edf55ee7452"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "33432c16df22e5432710a5e5b05aa34a82c5a45f"
+    )
+    wrong_binding_errors = runner._formal_admission_errors(
+        source_commit=TEST_SOURCE_COMMIT,
+        authorization_token="wrong",
+        preflight_root=None,
+        alignment_disposition="MISMATCH",
+        aligned_source_commit="8" * 40,
+        alignment_stage_commit="9" * 40,
+    )
+    assert wrong_binding_errors == [
+        "G47 formal alignment disposition is not ALIGNED",
+        "G47 formal aligned source identity mismatch",
+        "G47 formal alignment stage identity mismatch",
+        "G47 formal authorization token mismatch",
+        "G47 formal execution requires a same-source preflight",
+    ]
+    with pytest.raises(ValueError, match="same-source preflight"):
         runner.train(
             run_root=tmp_path / "formal",
             source_commit=TEST_SOURCE_COMMIT,
@@ -85,9 +104,9 @@ def test_configuration_backend_and_formal_admission_are_fail_closed(
             authorization_token=runner.AUTHORIZATION_TOKEN,
             accepted_anchor_root=ANCHOR_ROOT,
             alignment_disposition="ALIGNED",
-            aligned_source_commit="8" * 40,
-            alignment_stage_commit="9" * 40,
-            preflight_root=tmp_path / "missing",
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
+            preflight_root=None,
         )
 
 
