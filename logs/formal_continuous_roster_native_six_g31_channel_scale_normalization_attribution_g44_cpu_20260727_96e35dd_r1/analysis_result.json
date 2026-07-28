@@ -1,0 +1,397 @@
+{
+  "algorithm": "CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44",
+  "aligned_source_commit": "1a6e046801ab3d83830d4c9f6e9724c8c47659da",
+  "alignment_stage_commit": "b55578a8e57f444895da59efe9268ebe31edf511",
+  "branch": "INDEPENDENT_CHANNEL_SCALE_ADVANTAGE_G44",
+  "cpu_execution": {
+    "continuous_adaptation": false,
+    "cpu_budget": 2,
+    "deterministic_merge": "preassigned_index_not_completion_order",
+    "effective_parent_torch_intraop_threads": 1,
+    "evaluation_parallel_unit": "replicate_capacity_cell",
+    "fixed_at_launch": true,
+    "hardware_logical_cpu_count": 16,
+    "process_workers": 2,
+    "supported_process_worker_ceiling": 6,
+    "training_parallel_unit": "formal_replicate_only",
+    "worker_start_method": "spawn",
+    "worker_thread_controls": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "torch_intraop_threads": 1
+    }
+  },
+  "evaluation_manifest_digest": "f149345bc9df0d4d5a37317470c9e2c58a7c3f5de37c99275cb7eb9453e42dfb",
+  "formal": true,
+  "formal_projection_executable": null,
+  "formal_projection_seconds": null,
+  "formal_wall_clock_cap_seconds": 28800.0,
+  "metrics": {
+    "arm_access": {
+      "NATIVE6_G31_EQUAL_MEAN_INDEPENDENT_SCALE": {
+        "access_confident_fail": false,
+        "access_pass": true,
+        "fixed_stochastic_pooled_ci95": [
+          0.9011738091485287,
+          0.9033453777686535,
+          0.9056437755564732
+        ],
+        "fixed_utility_ci95": {
+          "6": [
+            0.9581741713894866,
+            0.9626081127485082,
+            0.9656772229301699
+          ],
+          "8": [
+            0.971312527260922,
+            0.9746901982156095,
+            0.9771838674053115
+          ],
+          "12": [
+            0.9646101740171964,
+            0.9690459072642652,
+            0.9733999914297685
+          ]
+        },
+        "minimum_fixed_deterministic_replicate_mean": 0.9644920382217447,
+        "minimum_random_deterministic_replicate_mean": 0.9669304117845707,
+        "random_event_window_ci95": {
+          "6": [
+            0.9370252712689218,
+            0.9433297352045861,
+            0.9489064772361472
+          ],
+          "8": [
+            0.9537919177965404,
+            0.9623090647062285,
+            0.9699467592952448
+          ],
+          "12": [
+            0.9360696215257956,
+            0.9455347498570246,
+            0.9591487939466831
+          ]
+        },
+        "random_minus_fixed_ci95": {
+          "6": [
+            0.0030591056814862645,
+            0.00438224135710511,
+            0.005566365838274231
+          ],
+          "8": [
+            9.462859960750689e-05,
+            0.0005459756362682054,
+            0.0010428947708692262
+          ],
+          "12": [
+            9.045319185777325e-05,
+            0.0011150695945608344,
+            0.002035997145196009
+          ]
+        },
+        "random_process_segment_ci95": {
+          "6": [
+            0.9364255855634209,
+            0.9422867844873122,
+            0.9472902182881887
+          ],
+          "8": [
+            0.9577395558541016,
+            0.9640460345959783,
+            0.9694487135396593
+          ],
+          "12": [
+            0.9401673884648163,
+            0.9482703049195038,
+            0.9598787012294514
+          ]
+        },
+        "random_stochastic_pooled_ci95": [
+          0.9078550167497591,
+          0.9098902143789327,
+          0.9117783579057921
+        ],
+        "random_utility_ci95": {
+          "6": [
+            0.9631643290659014,
+            0.9670005158717725,
+            0.9697103169776914
+          ],
+          "8": [
+            0.9721480396264207,
+            0.9752310339729229,
+            0.9775952546644645
+          ],
+          "12": [
+            0.9660801881180716,
+            0.9700314315117615,
+            0.9749842674750727
+          ]
+        }
+      },
+      "NATIVE6_G31_EQUAL_MEAN_POOLED_SCALE": {
+        "access_confident_fail": true,
+        "access_pass": false,
+        "fixed_stochastic_pooled_ci95": [
+          0.7935388495276618,
+          0.8086080920980738,
+          0.8207069334310434
+        ],
+        "fixed_utility_ci95": {
+          "6": [
+            0.8555862452507089,
+            0.8652133966707193,
+            0.8755476587423164
+          ],
+          "8": [
+            0.8475931450234904,
+            0.8695800420996227,
+            0.8938386417990892
+          ],
+          "12": [
+            0.8026640293749132,
+            0.8354221428241941,
+            0.857677856211531
+          ]
+        },
+        "minimum_fixed_deterministic_replicate_mean": 0.8347869927197453,
+        "minimum_random_deterministic_replicate_mean": 0.8354895254058614,
+        "random_event_window_ci95": {
+          "6": [
+            0.7850669248731101,
+            0.8101871479155458,
+            0.8316154012031781
+          ],
+          "8": [
+            0.755756717190252,
+            0.7951637356413519,
+            0.8276701496501002
+          ],
+          "12": [
+            0.663811140923862,
+            0.7250994243712701,
+            0.7641813919089113
+          ]
+        },
+        "random_minus_fixed_ci95": {
+          "6": [
+            0.0013970508329475687,
+            0.004508291278149527,
+            0.007752657221420913
+          ],
+          "8": [
+            -0.0021747772575895054,
+            0.0010103341423681423,
+            0.004766434187317299
+          ],
+          "12": [
+            -0.008234348094014573,
+            -0.003157393558096423,
+            0.002173311945941092
+          ]
+        },
+        "random_process_segment_ci95": {
+          "6": [
+            0.7885903253518872,
+            0.8125458394538414,
+            0.8316134339759438
+          ],
+          "8": [
+            0.7639166836936472,
+            0.8017191092632477,
+            0.8356927965966826
+          ],
+          "12": [
+            0.667158817560094,
+            0.7363929818480652,
+            0.7780026051154869
+          ]
+        },
+        "random_stochastic_pooled_ci95": [
+          0.7966778090012339,
+          0.8129688147927888,
+          0.8270701337019934
+        ],
+        "random_utility_ci95": {
+          "6": [
+            0.8594608673524744,
+            0.869710754008548,
+            0.8818863257095396
+          ],
+          "8": [
+            0.8509926452559674,
+            0.8705803506548935,
+            0.8950719575865992
+          ],
+          "12": [
+            0.7964722018968349,
+            0.8325104641898811,
+            0.859388688732483
+          ]
+        }
+      }
+    },
+    "component_ci95": {
+      "fixed_deterministic_utility": {
+        "6": [
+          0.0891510115268093,
+          0.09715420844013568,
+          0.10806764962190353
+        ],
+        "8": [
+          0.0817731802544594,
+          0.10449972203982066,
+          0.1292858119014462
+        ],
+        "12": [
+          0.11093579126598882,
+          0.1337412590972089,
+          0.17078137226300988
+        ]
+      },
+      "fixed_stochastic_utility": [
+        0.08051602388775286,
+        0.09475459780169299,
+        0.11215624659896793
+      ],
+      "random_deterministic_utility": {
+        "6": [
+          0.08692653255266457,
+          0.09689437695378614,
+          0.10838351535893645
+        ],
+        "8": [
+          0.08096091610302483,
+          0.1044731500719043,
+          0.12605435525388514
+        ],
+        "12": [
+          0.10996275827095699,
+          0.1377653530567522,
+          0.17842150159682427
+        ]
+      },
+      "random_event_window": {
+        "6": [
+          0.11442531294324557,
+          0.1329225846021746,
+          0.15866291891128628
+        ],
+        "8": [
+          0.13419930725685095,
+          0.16690008511891957,
+          0.21308868927993596
+        ],
+        "12": [
+          0.17503582981966587,
+          0.22065447731490678,
+          0.29540330698570433
+        ]
+      },
+      "random_minus_fixed_transport": {
+        "6": [
+          -0.003796447758676863,
+          -0.00012259835056369306,
+          0.0032481981336269115
+        ],
+        "8": [
+          -0.004395364506397966,
+          -0.00048176567350652073,
+          0.002974187770476867
+        ],
+        "12": [
+          -0.001709359612684983,
+          0.004277790397699032,
+          0.009802269419972778
+        ]
+      },
+      "random_process_segment": {
+        "6": [
+          0.11119233818250668,
+          0.129684636272274,
+          0.15682539676293242
+        ],
+        "8": [
+          0.12896052163134822,
+          0.16176096449521032,
+          0.20475062526201224
+        ],
+        "12": [
+          0.16525356878767208,
+          0.21202434211192553,
+          0.2929297015270644
+        ]
+      },
+      "random_stochastic_utility": [
+        0.08094210672658081,
+        0.0969539350634882,
+        0.11479383741180701
+      ]
+    },
+    "independent_access_confident_fail": false,
+    "independent_access_pass": true,
+    "independent_minus_pooled_capacity_ci95": {
+      "6": [
+        0.08692653255266457,
+        0.09689437695378614,
+        0.10838351535893645
+      ],
+      "8": [
+        0.08096091610302483,
+        0.1044731500719043,
+        0.12605435525388514
+      ],
+      "12": [
+        0.10996275827095699,
+        0.1377653530567522,
+        0.17842150159682427
+      ]
+    },
+    "independent_minus_pooled_primary_ci95": [
+      0.09243883334103671,
+      0.11293003737487087,
+      0.13779360720562545
+    ],
+    "material_independent_advantage": true,
+    "operational_valid": true,
+    "pooled_access_confident_fail": true,
+    "pooled_access_pass": false,
+    "pooled_noninferior": false,
+    "source_valid": true,
+    "treatment_activation_valid": true
+  },
+  "native_backend": {
+    "build_identity": "80dca0e353c5677ebd73",
+    "kind": "ContinuousRosterToyBatch_CPU_CPP",
+    "module": "hmasd_continuous_roster_toy_80dca0e353c5677ebd73",
+    "python_fallback": false,
+    "required": true
+  },
+  "nonformal_total_wall_time_seconds": null,
+  "nonformal_wall_clock_cap_seconds": 1200.0,
+  "operational_errors": [],
+  "operational_valid": true,
+  "preflight_artifact_digests": {
+    "analysis": "67ecd2ad1933f18562b3cb6dc6cbf1137b7b25edd84954b00ba6d1c46ad1e27d",
+    "evaluation": "9e454b94452213fce86f1432b235078a59bd8668ce76fb53ae848af76a012543",
+    "training": "612da70531dade8d9eef6697d0f304690791fd37035d48cfa8ff320a6a0c6144"
+  },
+  "schema_version": 2,
+  "source_commit": "96e35ddf55de71e56c6bcace4746c408909480dd",
+  "source_id": "CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_P0",
+  "stage": "analyze",
+  "stage_wall_time_seconds": 3.9631695999996737,
+  "status": "COMPLETE",
+  "thresholds": {
+    "event_floor": 0.85,
+    "minimum_replicate_floor": 0.85,
+    "process_noninferiority_margin": -0.05,
+    "scale_margin": 0.05,
+    "segment_floor": 0.85,
+    "stochastic_floor": 0.8,
+    "utility_floor": 0.9
+  },
+  "training_manifest_digest": "5611f847602bdd23fb6712ef3db8381068919c304536ae3ff3d4b407a966f248"
+}
