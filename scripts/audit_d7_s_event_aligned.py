@@ -747,12 +747,36 @@ def qos_component_saturated(*, per_arm_qos_means: dict, saturation_fraction: flo
     return saturation_fraction >= 0.95 and qos_range < 0.01
 
 
-def primary_g_degenerate(*, component_sequences_arm_invariant: bool,
-                          b_m_positive_lcb: bool) -> bool:
-    """PRIMARY_G_DEGENERATE fires when all four component sequences are
-    exactly arm-invariant under pairing, OR B_m cannot establish a positive
-    source-control contrast."""
-    return component_sequences_arm_invariant or not b_m_positive_lcb
+def primary_g_degenerate(*, stable_b_identified: bool, flex_b_identified: bool) -> bool:
+    """PRIMARY_G_DEGENERATE fires when NEITHER limb's normalizer establishes
+    a positive LCB95 (ruling 2026-07-27, VERDICT_Q2 -- disjunctive across
+    limbs): `b_m_positive_lcb = b_stable_positive OR b_flex_positive`, so
+    `NOT b_m_positive_lcb == (LCB95(B_stable) <= 0) AND (LCB95(B_flex) <=
+    0)`. A conjunctive definition would let the global degeneracy branch
+    preempt a valid result from one limb merely because the OTHER limb's
+    normalizer failed, conflicting with the frozen partial-result branches:
+    branch 7 preserves an identified stable-persistence result while flex
+    remains unresolved; branch 8 preserves an identified flex
+    non-materiality result while stable does not clear; branch 9 preserves
+    an identified stable non-materiality result. Each limb's substantive
+    predicate already protects itself, so disjunction does not let an
+    unnormalized limb make a claim -- it only stops the invalid limb from
+    erasing a valid result belonging to the other limb.
+
+    The component-invariance limb of branch 3 (conceptually
+    `stable_measurement_valid = stable_components_separate AND
+    stable_b_identified`, mirrored for flex, then
+    `NOT (stable_measurement_valid OR flex_measurement_valid)`) is NOT
+    evaluated here: `stable_components_separate`/`flex_components_separate`
+    have no production derivation anywhere in this module
+    (`qos_component_saturated` is dead code called from nowhere, and no
+    per-limb component-separation quantity is computed or recorded) and
+    must never be invented or approximated by `arm_distinct_ok` -- distinct
+    duty maps do not establish that the four G component sequences differ.
+    Callers must record `component_invariance_evaluated=False` in the
+    result payload alongside this flag, so the missing input stays visible
+    rather than silently defaulted to a convenient literal."""
+    return not (stable_b_identified or flex_b_identified)
 
 
 # =============================================================================
@@ -1108,6 +1132,98 @@ def expansion_allowed(*, conformance_ok: bool, support_ok: bool, b_stable_point:
     return bool(any_bound_unresolved)
 
 
+REGISTERED_EXPANSION_SEED_SET = frozenset(TOPOLOGY_SEEDS_INITIAL) | frozenset(TOPOLOGY_SEEDS_EXPANSION)
+
+
+class ExpansionNotJustifiedError(RuntimeError):
+    """Raised when a run's topology-seed set IS the registered 16-topology
+    expansion set (`TOPOLOGY_SEEDS_INITIAL` union `TOPOLOGY_SEEDS_EXPANSION`,
+    section 9's ONE permissible expansion) but the frozen `expansion_allowed`
+    predicate, evaluated against the INITIAL 8 topologies' own result, does
+    not license it. Never repaired: `main()` must not report a pooled
+    16-topology result as a conclusion-bearing expansion when the rule that
+    licenses adding the extra eight topologies was not satisfied by the
+    initial batch on its own."""
+
+
+def check_expansion_justified(topology_seeds: list, topology_results: list[dict],
+                               topology_hash_failures: list[dict]) -> None:
+    """Section 9's one-permissible-expansion gate, wired for real (ruling
+    2026-07-27): `expansion_allowed` existed but was never called from
+    `main()`, so a human passing `--topology-seeds` with the 16-seed union
+    bypassed the frozen predicate entirely -- "the dead function does not
+    make the scientific rule optional." A no-op for every topology-seed set
+    OTHER than the registered expansion union -- smoke, dev, the plain
+    8-seed default, or any other override -- per the "guard is on a
+    conclusion-bearing expansion, not on every override" scope
+    `resolve_run_plan` already draws.
+
+    `expansion_allowed`'s inputs are evaluated against the INITIAL 8
+    topologies' OWN `assemble_audit_result` -- never the pooled 16, which
+    would let the extra eight topologies' data justify their own inclusion.
+    `topology_results`/`topology_hash_failures` are the SAME accumulators
+    `main()` already built for the full requested seed set; this function
+    only re-filters them down to the initial 8 and re-runs the driver-level
+    assembly (cheap relative to episode collection) over that subset.
+
+    `t_stable_intended_sign_ok`/`t_flex_intended_sign_ok` and
+    `any_bound_unresolved` apply the frozen section 8 gate definition
+    directly -- stable clears iff `LCB95(B_stable) > 0 and UCB95(T_stable) <
+    0`; flex clears iff `LCB95(B_flex) > 0 and LCB95(T_flex) > 0`; the
+    affirmative-miss reading is the SAME B_m gate with the T_m bound read on
+    the opposite side of its interval. This is `decide_branch`'s identical
+    predicate, reproduced here (not imported from it) because `decide_branch`
+    exposes only its final branch string, never these intermediate booleans;
+    both are separately grounded in the same frozen contract text."""
+    if set(topology_seeds) != REGISTERED_EXPANSION_SEED_SET:
+        return
+
+    initial_results = [r for r in topology_results
+                        if r["topology_record"]["topology_seed"] in TOPOLOGY_SEEDS_INITIAL]
+    initial_hash_failures = [f for f in topology_hash_failures
+                              if f["topology_seed"] in TOPOLOGY_SEEDS_INITIAL]
+    initial = assemble_audit_result(initial_results, initial_hash_failures)
+
+    conformance_ok = bool(initial["conformance"]["ok"])
+    support_ok = bool(initial["support"]["ok"])
+    t_m = initial.get("t_m_bootstrap")
+
+    if conformance_ok and support_ok and t_m is not None:
+        b_stable_point = t_m["b_stable_point"]
+        b_flex_point = t_m["b_flex_point"]
+        t_stable_intended_sign_ok = t_m["t_stable_point"] < 0
+        t_flex_intended_sign_ok = t_m["t_flex_point"] > 0
+        stable_clears = (t_m["b_stable_lcb"] > 0) and (t_m["t_stable_ucb"] < 0)
+        stable_affirmative_miss = (t_m["b_stable_lcb"] > 0) and (t_m["t_stable_lcb"] > 0)
+        flex_clears = (t_m["b_flex_lcb"] > 0) and (t_m["t_flex_lcb"] > 0)
+        flex_affirmative_miss = (t_m["b_flex_lcb"] > 0) and (t_m["t_flex_ucb"] < 0)
+        stable_resolved = stable_clears or stable_affirmative_miss
+        flex_resolved = flex_clears or flex_affirmative_miss
+        any_bound_unresolved = not (stable_resolved and flex_resolved)
+    else:
+        # expansion_allowed's own `not (conformance_ok and support_ok)` gate
+        # already refuses here; these three never reach its later checks.
+        b_stable_point = b_flex_point = 0.0
+        t_stable_intended_sign_ok = t_flex_intended_sign_ok = False
+        any_bound_unresolved = False
+
+    allowed = expansion_allowed(
+        conformance_ok=conformance_ok, support_ok=support_ok,
+        b_stable_point=b_stable_point, b_flex_point=b_flex_point,
+        t_stable_intended_sign_ok=t_stable_intended_sign_ok,
+        t_flex_intended_sign_ok=t_flex_intended_sign_ok,
+        any_bound_unresolved=any_bound_unresolved, already_expanded=False)
+    if not allowed:
+        raise ExpansionNotJustifiedError(
+            "the registered 16-topology expansion set was requested, but "
+            "expansion_allowed refused it against the initial 8 topologies' "
+            f"own result: conformance_ok={conformance_ok} support_ok={support_ok} "
+            f"b_stable_point={b_stable_point!r} b_flex_point={b_flex_point!r} "
+            f"t_stable_intended_sign_ok={t_stable_intended_sign_ok} "
+            f"t_flex_intended_sign_ok={t_flex_intended_sign_ok} "
+            f"any_bound_unresolved={any_bound_unresolved}")
+
+
 # =============================================================================
 # Section 8 -- nested/rerun hierarchical bootstrap (event level)
 # =============================================================================
@@ -1426,6 +1542,28 @@ def hierarchical_bootstrap_quantity(topology_units: list[list[dict]], *,
     }
 
 
+def topology_weighted_point_estimate(topology_units: list[list[dict]]) -> float:
+    """Section 9's equal-topology-weighted TRUE point estimate for one
+    primary quantity (a `B_m` or a `U*_m`) -- reuses the SAME point path
+    `hierarchical_bootstrap_quantity` never touches:
+    `hierarchical_bootstrap_events(..., compute_point=True)` returns
+    `point`, computed via the true-argmax `select_maximizer` with NO RNG
+    consumption. `iters=0` skips the (unused, RNG-consuming) resampling
+    loop entirely -- only the `point` key is read, so this costs one
+    O(n_events) pass per topology and nothing else.
+
+    A topology contributing zero events is excluded from the average, never
+    treated as a zero -- mirrors `hierarchical_bootstrap_quantity`'s own
+    "support miss for this resampled topology slot" handling, and
+    aggregation is equal topology weighting: each topology's own point is
+    computed first, then topology points are averaged with equal weight."""
+    topo_points = [
+        hierarchical_bootstrap_events(events, iters=0, seed=0, compute_point=True)["point"]
+        for events in topology_units if events
+    ]
+    return float(np.mean(topo_points)) if topo_points else float("nan")
+
+
 def compute_t_m_bootstrap(*, b_stable_topology_units: list[list[dict]],
                            b_flex_topology_units: list[list[dict]],
                            u_star_stable_topology_units: list[list[dict]],
@@ -1457,6 +1595,18 @@ def compute_t_m_bootstrap(*, b_stable_topology_units: list[list[dict]],
     t_stable_finite = t_stable_iters[np.isfinite(t_stable_iters)]
     t_flex_finite = t_flex_iters[np.isfinite(t_flex_iters)]
 
+    # Point estimates (item 2, 2026-07-27 ruling): every point needed to
+    # evaluate the frozen section 9 predicate, computed via the SAME
+    # true-argmax point path the bounds above never touch (RNG-free), so
+    # adding them cannot perturb a single bound computed above -- those six
+    # values are unchanged from this point on.
+    b_stable_point = topology_weighted_point_estimate(b_stable_topology_units)
+    b_flex_point = topology_weighted_point_estimate(b_flex_topology_units)
+    u_star_stable_point = topology_weighted_point_estimate(u_star_stable_topology_units)
+    u_star_flex_point = topology_weighted_point_estimate(u_star_flex_topology_units)
+    t_stable_point = u_star_stable_point + MATERIALITY_COEFFICIENT * b_stable_point
+    t_flex_point = u_star_flex_point - MATERIALITY_COEFFICIENT * b_flex_point
+
     return {
         "b_stable_lcb": b_stable["lo"],
         "b_flex_lcb": b_flex["lo"],
@@ -1464,6 +1614,12 @@ def compute_t_m_bootstrap(*, b_stable_topology_units: list[list[dict]],
         "t_stable_lcb": float(np.percentile(t_stable_finite, 5)) if t_stable_finite.size else float("nan"),
         "t_flex_lcb": float(np.percentile(t_flex_finite, 5)) if t_flex_finite.size else float("nan"),
         "t_flex_ucb": float(np.percentile(t_flex_finite, 95)) if t_flex_finite.size else float("nan"),
+        "b_stable_point": b_stable_point,
+        "b_flex_point": b_flex_point,
+        "u_star_stable_point": u_star_stable_point,
+        "u_star_flex_point": u_star_flex_point,
+        "t_stable_point": t_stable_point,
+        "t_flex_point": t_flex_point,
         "shared_topology_indices": shared,
     }
 
@@ -3784,8 +3940,34 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             **({} if part_a_bounds is None else part_a_bounds),
         }
 
+        # Ruling 2026-07-27 (VERDICT_Q2): B_m's positive-LCB gate is
+        # disjunctive across limbs -- computed here from the SAME t_m
+        # bounds, through `primary_g_degenerate` (the single place the flag
+        # is computed), never re-derived inline. `stable_b_identified`/
+        # `flex_b_identified` and a per-limb status string are recorded in
+        # the payload so a limb whose normalizer failed to identify is
+        # visible rather than folded into a generic "unresolved", and
+        # `component_invariance_evaluated=False` records that this branch's
+        # component-invariance input has no production derivation and was
+        # not evaluated (see `primary_g_degenerate`'s docstring).
+        stable_b_identified = t_m["b_stable_lcb"] > 0
+        flex_b_identified = t_m["b_flex_lcb"] > 0
+        primary_g_degenerate_flag = primary_g_degenerate(
+            stable_b_identified=stable_b_identified, flex_b_identified=flex_b_identified)
+        out["primary_g"] = {
+            "degenerate": primary_g_degenerate_flag,
+            "stable_b_identified": stable_b_identified,
+            "flex_b_identified": flex_b_identified,
+            "component_invariance_evaluated": False,
+            "stable_status": ("NORMALIZER_NOT_IDENTIFIED" if not stable_b_identified
+                               else "NORMALIZER_IDENTIFIED"),
+            "flex_status": ("NORMALIZER_NOT_IDENTIFIED" if not flex_b_identified
+                             else "NORMALIZER_IDENTIFIED"),
+        }
+
         out["branch"] = decide_branch(
-            conformance_ok=conformance_ok, support_ok=support_ok, primary_g_degenerate_flag=False,
+            conformance_ok=conformance_ok, support_ok=support_ok,
+            primary_g_degenerate_flag=primary_g_degenerate_flag,
             part_a_contradiction=part_a_contradiction, b_stable_lcb=t_m["b_stable_lcb"],
             t_stable_ucb=t_m["t_stable_ucb"], t_stable_lcb=t_m["t_stable_lcb"],
             b_flex_lcb=t_m["b_flex_lcb"], t_flex_lcb=t_m["t_flex_lcb"], t_flex_ucb=t_m["t_flex_ucb"])
@@ -3855,6 +4037,14 @@ def main() -> None:
         topology_results.append(topo_out)
         if args.out:
             write_topology_record(args.out, topo_out["topology_record"])
+
+    # Section 9's one permissible expansion (ruling 2026-07-27): refuses a
+    # run whose topology-seed set IS the registered 16-topology expansion
+    # union unless the frozen predicate, evaluated against the initial 8
+    # topologies alone, licenses it. A no-op for every other seed set --
+    # smoke, dev, the plain 8-seed default -- so those affordances are
+    # unaffected.
+    check_expansion_justified(topology_seeds, topology_results, topology_hash_failures)
 
     result = {
         "contract": CONTRACT_PATH,

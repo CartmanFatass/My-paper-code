@@ -100,23 +100,48 @@ set while ensuring this specific blind spot cannot recur.
 
 ## 4. Technical closure — separate from the science, per your §5
 
-Bundled into the same implementation because it touches the same file, and
-listed here so the plan review sees the whole diff surface:
+**These three are already implemented and verified**, and are in the commit this
+question is fenced at, so you can check the wiring against your own ruling rather
+than against my description of it. Suites: `191 passed` (183 baseline + 8 new)
+and `47 passed`.
 
-1. **Wire branch 3 disjunctively.** Replace the hardcoded
-   `primary_g_degenerate_flag=False` at `scripts/audit_d7_s_event_aligned.py:3788`
-   with your specified form, recording `stable_b_identified` and
-   `flex_b_identified` separately and labelling a failed limb
-   `NORMALIZER_NOT_IDENTIFIED`.
-2. **Record point estimates in the artifact.** Every point in the last round had
-   to be reconstructed post hoc, and §9's own predicate is not evaluable from the
-   recorded artifact without them.
-3. **Enforce §9 in `main()`.** `expansion_allowed` is dead code and
-   `--topology-seeds` bypasses the predicate entirely.
+1. **Branch 3 is wired disjunctively.** `primary_g_degenerate` now takes
+   `(stable_b_identified, flex_b_identified)` and returns
+   `not (stable or flex)`; the hardcoded literal at the `assemble_audit_result`
+   call site is gone. The payload records `degenerate`, both limb booleans,
+   `component_invariance_evaluated`, and a per-limb status that reads
+   `NORMALIZER_NOT_IDENTIFIED` for a failed limb.
+2. **Point estimates are recorded**, via the existing RNG-free true-argmax path
+   with equal topology weighting — not a second implementation.
+3. **§9 is enforced.** The guard is a no-op unless the seed set is exactly the
+   registered expansion set, so smoke, dev and ordinary overrides pass through;
+   on the expansion set it re-evaluates the predicate on the **initial eight
+   topologies only**, never the pooled sixteen, so the added topologies cannot
+   justify their own inclusion.
 
-Each of the three gets a paired-negative test: the mutation that used to leave
-the guard green must drive the new test red, and I watch it fail before calling
-it done.
+**What I verified myself rather than accepting on report**, because the first of
+these decides a result branch and the second could have silently moved a
+published number:
+
+- Feeding the recorded run's own `topology_units` through the modified
+  `compute_t_m_bootstrap` reproduces **all six recorded bounds to better than
+  1e-12** — adding points perturbed nothing.
+- The recorded points come out at `B_stable +0.180139`, `B_flex +4.288854`,
+  `U*_stable +1.254074`, `U*_flex -4.122402`, matching the independent
+  reconstruction in §1.
+- On the real run the flag now returns `True`, so the branch fires
+  `PRIMARY_G_DEGENERATE` as you ruled.
+- I reintroduced the **exact original defect** — the hardcoded
+  `primary_g_degenerate_flag = False` — and watched the new test go red
+  (`1 failed, 190 passed`), then restored it. A repair nobody watched fail is not
+  a repair.
+
+Two implementation facts disclosed rather than buried. `already_expanded` is
+always `False`, justified structurally because no second-tier expansion seed set
+exists in the module. And a genuine sixteen-topology expansion would now pay the
+bootstrap cost twice — once on the initial-eight subset for the predicate, once
+on the pooled sixteen. That is a real one-time cost, not optimized away, and it
+only arises on a path §9 currently forbids anyway.
 
 **One binding inside item 1 is disclosed rather than assumed.** Your §2 wiring
 takes `stable_components_separate` / `flex_components_separate` as inputs. Those

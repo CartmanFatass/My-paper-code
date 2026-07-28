@@ -3500,6 +3500,213 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_t_m(monkey
     assert out["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
 
 
+# =============================================================================
+# 9a. Ruling 2026-07-27 (VERDICT_Q2) -- primary_g_degenerate is disjunctive
+# across limbs, and assemble_audit_result wires the computed flag for real
+# =============================================================================
+
+def test_primary_g_degenerate_is_disjunctive_not_conjunctive():
+    """Independent source of truth: the ruling's own disjunctive definition
+    `b_m_positive_lcb = b_stable_positive OR b_flex_positive`, so
+    `primary_g_degenerate` fires iff NEITHER limb identified. A conjunctive
+    implementation (`not (stable_b_identified and flex_b_identified)`) would
+    agree with this one at (False, False)->True and (True, True)->False --
+    the two mixed rows are the only rows that distinguish disjunctive from
+    conjunctive, so both must be checked."""
+    assert audit.primary_g_degenerate(stable_b_identified=False, flex_b_identified=False) is True
+    assert audit.primary_g_degenerate(stable_b_identified=True, flex_b_identified=False) is False
+    assert audit.primary_g_degenerate(stable_b_identified=False, flex_b_identified=True) is False
+    assert audit.primary_g_degenerate(stable_b_identified=True, flex_b_identified=True) is False
+
+
+def test_assemble_audit_result_reaches_primary_g_degenerate_when_neither_limb_identified(monkeypatch):
+    """The exact defect this task repairs: `primary_g_degenerate_flag` was a
+    hardcoded `False` literal at the `decide_branch` call site, so branch 3
+    was structurally unreachable through `assemble_audit_result` no matter
+    what the data said. Both `B_stable` and `B_flex` are constructed
+    degenerate-negative here (LCB95 <= 0 for both), which the ruling's
+    disjunctive gate must resolve to PRIMARY_G_DEGENERATE -- the mutation
+    this test is paired against (reverting the flag to hardcoded `False`)
+    makes `decide_branch` fall through every clearing/affirmative-miss row
+    (all of which require a positive B_m LCB) to SOURCE_NECESSITY_UNRESOLVED
+    instead."""
+    _fast_t_m_bootstrap(monkeypatch)
+    topology_results = _six_topology_results(
+        d_a_value=0.0, b_stable_value=-5.0, b_flex_value=-5.0,
+        u_stable_value=0.0, u_flex_value=0.0)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["branch"] == "PRIMARY_G_DEGENERATE"
+    assert out["primary_g"]["degenerate"] is True
+    assert out["primary_g"]["stable_b_identified"] is False
+    assert out["primary_g"]["flex_b_identified"] is False
+    assert out["primary_g"]["stable_status"] == "NORMALIZER_NOT_IDENTIFIED"
+    assert out["primary_g"]["flex_status"] == "NORMALIZER_NOT_IDENTIFIED"
+    assert out["primary_g"]["component_invariance_evaluated"] is False
+
+
+def test_assemble_audit_result_preserves_identified_limb_disjunctively(monkeypatch):
+    """Ruling 2026-07-27: disjunction must not let the UNNORMALIZED limb
+    (flex, B_flex LCB95 <= 0 here) erase the valid result the NORMALIZED
+    limb (stable, B_stable LCB95 > 0, T_stable clears) already established.
+    A conjunctive wiring (`not (stable_b_identified and flex_b_identified)`)
+    would incorrectly resolve this to PRIMARY_G_DEGENERATE instead of
+    preserving branch 7, exactly the case the ruling's own text names:
+    "branch 7 preserves an identified stable-persistence result while flex
+    remains unresolved." D_A=0.6 with B_stable=10.0 keeps Part-A at
+    UNRESOLVED (verified by the existing driver test above), never
+    CONTRADICTION, so branch 4 does not preempt branch 7 here."""
+    _fast_t_m_bootstrap(monkeypatch)
+    topology_results = _six_topology_results(
+        d_a_value=0.6, b_stable_value=10.0, b_flex_value=-5.0,
+        u_stable_value=-2.0, u_flex_value=2.0)
+
+    out = audit.assemble_audit_result(topology_results, [])
+
+    assert out["branch"] == "MATERIAL_STABLE_PERSISTENCE_IDENTIFIED"
+    assert out["primary_g"]["degenerate"] is False
+    assert out["primary_g"]["stable_b_identified"] is True
+    assert out["primary_g"]["flex_b_identified"] is False
+    assert out["primary_g"]["stable_status"] == "NORMALIZER_IDENTIFIED"
+    assert out["primary_g"]["flex_status"] == "NORMALIZER_NOT_IDENTIFIED"
+
+
+# =============================================================================
+# 9b. t_m_bootstrap point estimates (item 2, 2026-07-27 ruling)
+# =============================================================================
+
+def test_compute_t_m_bootstrap_points_are_independently_distinguishable():
+    """Hand-worked, non-degenerate-ACROSS-TOPOLOGIES fixture (two topologies
+    per quantity, distinct values) so equal-topology-weighting actually
+    matters and every one of the six point fields gets its OWN value --
+    unlike the existing single-topology `test_compute_t_m_bootstrap_applies_
+    the_registered_materiality_coefficient` fixture, where B_stable and
+    B_flex share the same 20.0 and a stable/flex point swap would go
+    undetected. B_stable points {10,30}->20; B_flex {40,60}->50;
+    U*_stable {1,3}->2; U*_flex {7,9}->8;
+    T_stable = 2 + 0.10*20 = 4; T_flex = 8 - 0.10*50 = 3."""
+    b_stable_units = _degenerate_topology_units([10.0, 30.0])
+    b_flex_units = _degenerate_topology_units([40.0, 60.0])
+    u_stable_units = _degenerate_topology_units([1.0, 3.0])
+    u_flex_units = _degenerate_topology_units([7.0, 9.0])
+
+    out = audit.compute_t_m_bootstrap(
+        b_stable_topology_units=b_stable_units,
+        b_flex_topology_units=b_flex_units,
+        u_star_stable_topology_units=u_stable_units,
+        u_star_flex_topology_units=u_flex_units,
+        n_topo=2, iters=5, seed=7,
+    )
+
+    assert out["b_stable_point"] == pytest.approx(20.0)
+    assert out["b_flex_point"] == pytest.approx(50.0)
+    assert out["u_star_stable_point"] == pytest.approx(2.0)
+    assert out["u_star_flex_point"] == pytest.approx(8.0)
+    assert out["t_stable_point"] == pytest.approx(4.0)
+    assert out["t_flex_point"] == pytest.approx(3.0)
+
+
+def test_compute_t_m_bootstrap_points_reproduce_the_recorded_run_30289161086_anchor():
+    """Independent-source-of-truth anchor, never re-derived from this code:
+    the Project Manager reconstructed these six point values post hoc from
+    the ACTUAL recorded D7.S audit run 30289161086's raw per-topology units
+    (before this task added point recording to the production payload), and
+    verified T_stable/T_flex against B/U* via the frozen section 8 formula
+    to better than 1e-12. Feeding the SAME real per-topology units recorded
+    in that run's pooled artifact through the new point-computation code
+    must reproduce them. `iters=1` -- points never consume the resampling
+    RNG, so the bound machinery's iteration count is irrelevant to them and
+    kept minimal only to keep this fast against real (non-degenerate, many-
+    event) data."""
+    p = _ROOT / "logs" / "d7s_audit_2_30289161086" / "pooled" / "d7_s_event_aligned.json"
+    recorded = json.loads(p.read_text(encoding="utf-8"))
+    tu = recorded["topology_units"]
+
+    out = audit.compute_t_m_bootstrap(
+        b_stable_topology_units=[t["calibration_units_stable"] for t in tu],
+        b_flex_topology_units=[t["calibration_units_flex"] for t in tu],
+        u_star_stable_topology_units=[t["audit_units_stable"] for t in tu],
+        u_star_flex_topology_units=[t["audit_units_flex"] for t in tu],
+        n_topo=len(tu), iters=1, seed=1,
+    )
+
+    assert out["b_stable_point"] == pytest.approx(0.180139, abs=1e-6)
+    assert out["b_flex_point"] == pytest.approx(4.288854, abs=1e-6)
+    assert out["u_star_stable_point"] == pytest.approx(1.254074, abs=1e-6)
+    assert out["u_star_flex_point"] == pytest.approx(-4.122402, abs=1e-6)
+    assert out["t_stable_point"] == pytest.approx(1.272088, abs=1e-6)
+    assert out["t_flex_point"] == pytest.approx(-4.551287, abs=1e-6)
+
+
+# =============================================================================
+# 9c. Section 9's one permissible expansion, wired into main() for real
+# (item 3, 2026-07-27 ruling)
+# =============================================================================
+
+def test_check_expansion_justified_is_a_noop_for_every_non_expansion_seed_set(monkeypatch):
+    """`resolve_run_plan`'s smoke/dev/plain-8-seed/arbitrary-override paths
+    must be completely unaffected -- the guard fires only on the exact
+    registered 16-seed union, per the "not on every override" scope. Proven
+    here by asserting `assemble_audit_result` (the expensive re-evaluation
+    this function would otherwise trigger) is never even called."""
+    calls = []
+    monkeypatch.setattr(audit, "assemble_audit_result",
+                         lambda *a, **k: calls.append((a, k)) or {})
+
+    audit.check_expansion_justified([audit.TOPOLOGY_SEED_DEV], [], [])
+    audit.check_expansion_justified(list(audit.TOPOLOGY_SEEDS_INITIAL), [], [])
+    audit.check_expansion_justified([1, 2, 3], [], [])
+
+    assert calls == []
+
+
+def test_check_expansion_justified_refuses_when_initial_batch_b_m_point_not_positive(monkeypatch):
+    """Section 9: "Never expand on ... B_m <= 0." `assemble_audit_result` is
+    monkeypatched (module-level name resolved at call time, same idiom as
+    `_fast_t_m_bootstrap`) so this targets ONLY `check_expansion_justified`'s
+    own wiring of `expansion_allowed`'s inputs, not the bootstrap machinery
+    already covered elsewhere. `b_stable_point=-1.0` alone must refuse
+    regardless of every other input being otherwise favorable."""
+    fake_initial = {
+        "conformance": {"ok": True}, "support": {"ok": True},
+        "t_m_bootstrap": {
+            "b_stable_lcb": 10.0, "b_flex_lcb": 10.0,
+            "t_stable_ucb": -1.0, "t_stable_lcb": -2.0,
+            "t_flex_lcb": 1.0, "t_flex_ucb": 2.0,
+            "b_stable_point": -1.0, "b_flex_point": 10.0,
+            "t_stable_point": -1.5, "t_flex_point": 1.5,
+        },
+    }
+    monkeypatch.setattr(audit, "assemble_audit_result", lambda *a, **k: fake_initial)
+    seeds = list(audit.REGISTERED_EXPANSION_SEED_SET)
+
+    with pytest.raises(audit.ExpansionNotJustifiedError):
+        audit.check_expansion_justified(seeds, [], [])
+
+
+def test_check_expansion_justified_allows_when_initial_batch_predicate_holds(monkeypatch):
+    """The mirror-image positive case: conformance/support pass, both B_m
+    points are positive, both T_m points have the intended sign (T_stable <
+    0, T_flex > 0), and the stable limb's bounds straddle zero (neither
+    clears nor affirmatively misses) so `any_bound_unresolved` is True --
+    every gate in `expansion_allowed` passes, so this must NOT raise."""
+    fake_initial = {
+        "conformance": {"ok": True}, "support": {"ok": True},
+        "t_m_bootstrap": {
+            "b_stable_lcb": 1.0, "b_flex_lcb": 1.0,
+            "t_stable_ucb": 1.0, "t_stable_lcb": -1.0,   # straddles zero: stable unresolved
+            "t_flex_lcb": 1.0, "t_flex_ucb": 2.0,        # flex clears
+            "b_stable_point": 5.0, "b_flex_point": 5.0,
+            "t_stable_point": -0.5, "t_flex_point": 1.5,
+        },
+    }
+    monkeypatch.setattr(audit, "assemble_audit_result", lambda *a, **k: fake_initial)
+    seeds = list(audit.REGISTERED_EXPANSION_SEED_SET)
+
+    audit.check_expansion_justified(seeds, [], [])  # must not raise
+
+
 def test_topology_start_progress_line_goes_to_stderr_not_stdout(monkeypatch, capsys):
     """Task B guard: `run_topology_audit`'s topology-start progress line must
     land on stderr, never stdout -- stdout carries exactly the one result
