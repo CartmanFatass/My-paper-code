@@ -27,9 +27,8 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
-next_boundary=CODE_PLAN_FOR_THE_AUTOPSY_THEN_ITS_PRO_PLAN_REVIEW
-workflow_position=workflow 2, touchpoint 2 IN FLIGHT -- the code plan is fenced at f1d79b17 and Pro is generating its convergence decision
-
+next_boundary=IMPLEMENT_THE_AUTOPSY_THEN_SUBMIT_ITS_ARTIFACT_AS_TOUCHPOINT_3
+workflow_position=workflow 2, step 5 -- touchpoint 2 closed APPROVED WITH MODIFICATIONS, implementation in flight
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -85,6 +84,33 @@ with per-limb `stable_b_identified` / `flex_b_identified` recorded separately an
 a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
 the artifact, which today carries only the six bounds; and enforce §9 in
 `main()`.
+
+### The converged next action, and a precondition it set
+
+Round `20260727_d7_s_normalizer_autopsy_plan`, stage commit `f1d79b17`:
+**APPROVED WITH MODIFICATIONS**. The artifact-only autopsy runs locally against
+the byte-unchanged artifact; *"no environment compute is selected by this
+ruling."* Six modifications, of which the load-bearing ones are a **fail-closed
+input sentinel** that must reproduce all six frozen R3 bounds before any
+statistic is emitted, and **N5 — comparator-scale mismatch**, an explanation this
+conversation had missed: `B_m` measures global proactive rotation versus none
+while `U*_m` measures a focal one-Δ reassignment, so the normalizer can be
+measured correctly and still be the wrong scale.
+
+`N3 = UNDISCRIMINATED_FROM_STORED_ARTIFACT` — the artifact holds no component
+data, and Pro rejected reconstructing it.
+
+**A hard precondition on any future environment run.** Before one may launch, the
+guard gaps in `window_g_from_step_metrics`, baseline masks, calibration arm
+ordering, audit-limb assignment, seed-controlled provenance, qualifying-event
+construction, and clone conditions 2/3/5 **must** be closed with paired negatives
+or another independent conformance mechanism. This is a gate, not a backlog item.
+
+**The wording of the last result was downgraded by Pro itself.** The run is no
+longer "a valid matched observation" but *"a provenance-recorded, CRN-paired,
+executed-code observation that remains admissible for diagnostic reanalysis, but
+is not independently validated at every conclusion-bearing transformation."*
+Quote that form, not the earlier one.
 
 ### Guard state — what is now covered, and what is not
 
