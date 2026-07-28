@@ -152,6 +152,14 @@ Research Operations Manager does not inspect implementation details or repeat
 technical acceptance. It then handles alignment-audit transport and the runtime
 sequence.
 
+Runtime preflight is not an incremental code debugger. When one preflight
+exposes a code defect, Research Operations Manager preserves that failed run
+unchanged, returns one complete code-diagnosis package containing all available
+failure evidence, and stops that run. Code Project Manager owns the complete
+repair and execution-readiness loop. Only its new pushed `CODE_ACCEPTED` commit
+and matching receipt permits Research Operations Manager to start the next
+preflight; it does not shuttle partial fixes between preflights.
+
 When a code repair changes the source commit, the next preflight uses
 `mode=fresh`, a new run identity and a new independent run root. It never reads
 or inherits checkpoints, artifacts, intermediate state or validator results

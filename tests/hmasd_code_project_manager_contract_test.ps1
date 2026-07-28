@@ -96,6 +96,11 @@ $operationsRequired = @(
     'changed_source_commit_run_root=new_independent',
     '`mode=fresh`',
     'new independent run root',
+    'Runtime preflight is not an incremental code debugger',
+    'one complete code-diagnosis package containing all available failure evidence',
+    'Code Project Manager owns the complete repair and execution-readiness loop',
+    'new pushed `CODE_ACCEPTED` commit and matching receipt',
+    'does not shuttle partial fixes between preflights',
     'Use `$hmasd-review-round` directly in this task',
     'Code Project Manager',
     'Workflow Design Manager'
