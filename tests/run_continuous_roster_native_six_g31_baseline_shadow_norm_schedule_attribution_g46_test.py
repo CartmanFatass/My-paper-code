@@ -6,6 +6,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+import torch
 
 from ha_ctse_process import (
     continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46
@@ -164,6 +165,127 @@ def test_production_continuation_uses_exact_actor_head_ownership() -> None:
     assert continuation["passed"] is True
     assert continuation["optimizer_parameter_order_equal"] is True
     assert continuation["optimizer_step_state_valid"] is True
+
+
+def test_post_divergence_direction_certificate_is_reference_local(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    models, optimizers, first = runner._execute_single_proof_update(ANCHOR_ROOT)
+    assert first["passed"] is True
+    seeds = runner.seed_block(0, formal=False)
+    episode_ids = tuple(range(8, 16))
+    trajectories = {
+        arm: runner._backend._collect_trajectory(
+            model,
+            episode_ids=episode_ids,
+            ledger_seed=seeds["branch_ledger"],
+            action_seed=seeds["branch_action"],
+        )
+        for arm, model in models.items()
+    }
+
+    reference_pairs: list[
+        tuple[tuple[torch.Tensor, ...], tuple[torch.Tensor, ...]]
+    ] = []
+    actual_raw_rows: list[tuple[torch.Tensor, ...]] = []
+    original_activation = source._activation_record
+    original_raw_schedule = source._raw_schedule
+
+    def capture_activation(
+        reference_assigned: tuple[torch.Tensor, ...],
+        reference_raw_counterfactual: tuple[torch.Tensor, ...],
+        *,
+        baseline_counterfactual_norm: float,
+    ) -> dict[str, object]:
+        reference_pairs.append(
+            (
+                tuple(row.detach().clone() for row in reference_assigned),
+                tuple(
+                    row.detach().clone()
+                    for row in reference_raw_counterfactual
+                ),
+            )
+        )
+        return original_activation(
+            reference_assigned,
+            reference_raw_counterfactual,
+            baseline_counterfactual_norm=baseline_counterfactual_norm,
+        )
+
+    def capture_raw_schedule(
+        raw: tuple[torch.Tensor, ...],
+        parameters: tuple[torch.nn.Parameter, ...],
+    ) -> tuple[tuple[torch.Tensor, ...], dict[str, object]]:
+        assigned, record = original_raw_schedule(raw, parameters)
+        actual_raw_rows.append(
+            tuple(row.detach().clone() for row in assigned)
+        )
+        return assigned, record
+
+    monkeypatch.setattr(source, "_activation_record", capture_activation)
+    monkeypatch.setattr(source, "_raw_schedule", capture_raw_schedule)
+    second = runner._backend._apply_matched_update(
+        models,
+        optimizers,
+        trajectories,
+        update_index=1,
+        ledger_seed=seeds["branch_ledger"],
+        action_seed=seeds["branch_action"],
+    )
+    assert second["passed"] is True
+    assert len(reference_pairs) == source.PPO_PASSES
+    assert len(actual_raw_rows) == source.PPO_PASSES
+
+    def unit_distance(
+        left: tuple[torch.Tensor, ...], right: tuple[torch.Tensor, ...]
+    ) -> float:
+        left_flat = torch.cat(
+            [row.detach().to(torch.float64).reshape(-1) for row in left]
+        )
+        right_flat = torch.cat(
+            [row.detach().to(torch.float64).reshape(-1) for row in right]
+        )
+        return float(
+            torch.linalg.vector_norm(
+                left_flat / source._global_norm(left)
+                - right_flat / source._global_norm(right)
+            )
+        )
+
+    assert all(
+        unit_distance(reference_assigned, reference_raw)
+        <= source.DIRECTION_TOLERANCE
+        for reference_assigned, reference_raw in reference_pairs
+    )
+    assert any(
+        unit_distance(reference_assigned, actual_raw)
+        > source.DIRECTION_TOLERANCE
+        for (reference_assigned, _), actual_raw in zip(
+            reference_pairs, actual_raw_rows
+        )
+    )
+    for pass_record in second["pass_records"]:
+        activation = pass_record["baseline_shadow_norm_activation"]
+        reference = pass_record["composition"][source.SHADOW_NORM_ARM]
+        assert activation["direction_evidence_source_arm"] == (
+            source.SHADOW_NORM_ARM
+        )
+        assert activation["reference_local_raw_counterfactual"] is True
+        assert activation["raw_arm_gradient_read_count"] == 0
+        assert activation["raw_equal_mean_credit_norm"] == reference[
+            "raw_credit_norm"
+        ]
+
+    route_tamper = copy.deepcopy(second)
+    pass_record = route_tamper["pass_records"][0]
+    pass_record["composition"][source.SHADOW_NORM_ARM][
+        "raw_credit_norm"
+    ] = pass_record["composition"][source.RAW_NORM_ARM]["raw_credit_norm"]
+    assert source._valid_composition(
+        pass_record["composition"][source.SHADOW_NORM_ARM],
+        source.SHADOW_NORM_ARM,
+    )
+    assert not source._update_evidence_valid(route_tamper)
 
 
 def test_result_branch_order_and_equality_boundary() -> None:

@@ -217,6 +217,9 @@ def test_reference_and_raw_schedule_zero_cancellation_and_direction_rules() -> N
         "activation_threshold": g46.ACTIVATION_TOLERANCE,
         "strict_treatment_activation_observed": False,
         "evidence_source_arms": list(g46.ARMS),
+        "direction_evidence_source_arm": g46.SHADOW_NORM_ARM,
+        "reference_local_raw_counterfactual": True,
+        "raw_arm_gradient_read_count": 0,
         "reference_baseline_counterfactual_calls": 1,
         "raw_arm_baseline_counterfactual_calls": 0,
         "q_norm_reconstructed_not_caller_flag": True,
@@ -277,6 +280,14 @@ def test_first_update_binds_target_only_routes_schedule_and_final_only_evidence(
         assert raw["baseline_read_into_actual_scalar_norm"] == 0
         activation = pass_record["baseline_shadow_norm_activation"]
         assert g46.validate_activation_record(activation)
+        assert activation["direction_evidence_source_arm"] == (
+            g46.SHADOW_NORM_ARM
+        )
+        assert activation["reference_local_raw_counterfactual"] is True
+        assert activation["raw_arm_gradient_read_count"] == 0
+        assert activation["raw_equal_mean_credit_norm"] == reference[
+            "raw_credit_norm"
+        ]
         active |= activation["strict_treatment_activation_observed"]
     assert active
 

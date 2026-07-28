@@ -617,13 +617,15 @@ def _raw_schedule(
 
 def _activation_record(
     reference_assigned: Sequence[torch.Tensor],
-    raw_assigned: Sequence[torch.Tensor],
+    reference_raw_counterfactual: Sequence[torch.Tensor],
     *,
     baseline_counterfactual_norm: float,
 ) -> dict[str, object]:
-    raw_norm = _global_norm(raw_assigned)
+    raw_norm = _global_norm(reference_raw_counterfactual)
     q_norm = corrected_q_norm(baseline_counterfactual_norm, raw_norm)
-    direction = _unit_direction_record(reference_assigned, raw_assigned)
+    direction = _unit_direction_record(
+        reference_assigned, reference_raw_counterfactual
+    )
     active = bool(q_norm > ACTIVATION_TOLERANCE)
     record = {
         "baseline_read_counterfactual_credit_norm": float(
@@ -634,6 +636,9 @@ def _activation_record(
         "activation_threshold": ACTIVATION_TOLERANCE,
         "strict_treatment_activation_observed": active,
         "evidence_source_arms": list(ARMS),
+        "direction_evidence_source_arm": SHADOW_NORM_ARM,
+        "reference_local_raw_counterfactual": True,
+        "raw_arm_gradient_read_count": 0,
         "reference_baseline_counterfactual_calls": 1,
         "raw_arm_baseline_counterfactual_calls": 0,
         "q_norm_reconstructed_not_caller_flag": True,
@@ -660,6 +665,9 @@ def validate_activation_record(value: object) -> bool:
         or value.get("strict_treatment_activation_observed")
         is not (expected_q > ACTIVATION_TOLERANCE)
         or value.get("evidence_source_arms") != list(ARMS)
+        or value.get("direction_evidence_source_arm") != SHADOW_NORM_ARM
+        or value.get("reference_local_raw_counterfactual") is not True
+        or value.get("raw_arm_gradient_read_count") != 0
         or value.get("reference_baseline_counterfactual_calls") != 1
         or value.get("raw_arm_baseline_counterfactual_calls") != 0
         or value.get("q_norm_reconstructed_not_caller_flag") is not True
@@ -967,7 +975,7 @@ def _prepare_passes(
     )
     activation = _activation_record(
         reference_credit,
-        raw_arm_credit,
+        reference_raw,
         baseline_counterfactual_norm=baseline_norm,
     )
     reference_with_entropy = _add_entropy(
@@ -1333,6 +1341,14 @@ def _update_evidence_valid(value: object) -> bool:
                 for arm in ARMS
             )
             or not validate_activation_record(activation)
+            or activation.get("baseline_read_counterfactual_credit_norm")
+            != compositions[SHADOW_NORM_ARM].get(
+                "baseline_read_counterfactual_credit_norm"
+            )
+            or activation.get("raw_equal_mean_credit_norm")
+            != compositions[SHADOW_NORM_ARM].get("raw_credit_norm")
+            or activation.get("reference_assigned_credit_norm")
+            != compositions[SHADOW_NORM_ARM].get("assigned_credit_norm")
         ):
             return False
     if value.get("update_index") == 0:
