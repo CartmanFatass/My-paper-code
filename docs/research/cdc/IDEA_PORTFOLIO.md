@@ -39,6 +39,27 @@ authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
 conclusion_bearing_iterations_consumed=33
 iterations_remaining=4
 
+## G44 formal result update (mechanically recorded from External Pro)
+
+g44_continuous_roster_status=supported retained at G44: native-six no-carry, post-anchor no-slow/no-DB, literal-equal-mean independent-channel-scale G31-credit configured-capacity bounded-process test version
+g44_continuous_roster_reason=G44 records independent-scale access while the globally credit-norm-matched pooled-scale arm confidently fails; independent-minus-pooled primary CI95 [0.09243883,0.11293004,0.13779361].
+g44_continuous_roster_route=COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_EQUAL_MEAN_INDEPENDENT_SCALE_NO_SLOW
+g44_continuous_roster_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_DESIGN_ASSERTION_AUDIT
+g44_credit_status=supported on G17/G18 and shared-anchor G40-P0; independent relative channel scaling retained by G44
+g44_credit_retained_unit=realized_tail|decomposed_credit|shared_baseline_conditioning|separate_centering|independent_relative_channel_scaling|literal_equal_channel_mean
+
+## Terminal disposition (G44)
+
+completed_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_FORMAL_ITERATION_34
+source_family=CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_P0
+formal_disposition=INDEPENDENT_CHANNEL_SCALE_ADVANTAGE_G44
+scientific_disposition=SUPPORTED_RETAINED_INDEPENDENT_RELATIVE_CHANNEL_SCALING_G44
+valid_result_disposition=CONTINUE
+next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_DESIGN_ASSERTION_AUDIT
+authorization_status=active_twenty_iteration_toy_first_uav_promotion_chain
+conclusion_bearing_iterations_consumed=34
+iterations_remaining=3
+
 ## Terminal disposition
 
 ```text

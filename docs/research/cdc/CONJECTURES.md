@@ -149,6 +149,14 @@ the Project Manager-accepted CDC state.
   for access and has no material >0.05 advantage over the literal equal-channel
   mean inside G43-P0. This does not close every adaptive scalar rule or any
   retained target, decomposition, baseline, normalization or anchor component.
+- G44 formal result: the independent relative channel-scale arm passes all
+  registered access gates while the globally credit-norm-matched pooled-scale
+  arm confidently fails. The registered independent-minus-pooled primary CI95 is
+  [0.09243883, 0.11293004, 0.13779361]. The exact retained unit is
+  `SUPPORTED_RETAINED_INDEPENDENT_RELATIVE_CHANNEL_SCALING_G44` within the
+  bounded G44-P0 contract; the exact pooled relative-scale sufficiency unit is
+  failed closed. The next scheduled action is
+  `CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_DESIGN_ASSERTION_AUDIT`.
 - Lifecycle boundary: active masks, likelihood ownership, environment
   lifecycle state, fresh initialization, temporary leave/rejoin, terminal
   deletion and survivor continuity remain protected runtime semantics.
