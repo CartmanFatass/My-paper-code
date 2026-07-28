@@ -27,8 +27,8 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
-next_boundary=DERIVE_AND_PRE_FREEZE_THE_R4_MATERIALITY_CRITERION (zero compute)
-workflow_position=workflow 2 CLOSED at touchpoint 3; its ruling is workflow 3's step 1, so the R4 derivation is live
+next_boundary=SUBMIT_THE_FROZEN_R4_CONTRACT (touchpoint 3), carrying the two decisions it leaves open
+workflow_position=workflow 3 -- R4 derived, ruled derivable, contract FROZEN at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -85,7 +85,39 @@ a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
 the artifact, which today carries only the six bounds; and enforce §9 in
 `main()`.
 
-### Ruled: the global normalizer is retired for this claim
+### R4 is frozen at a five-unit absolute focal margin
+
+`docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN.md`, authority
+`rounds/20260728_r4_materiality_derivation/21_PRO_OPEN_RAW.md`.
+
+```text
+stable clears  iff  UCB95(U*_stable) < -5.0
+flex clears    iff  LCB95(U*_flex)   > +5.0
+```
+
+No denominator. Five is the smallest nonzero coefficient on a discrete
+task-semantic safety event in the frozen objective, fixed from the weights alone.
+**It is not mathematically unique** — Pro said so, and it must not be inherited as
+forced.
+
+**Two corrections this conversation must not repeat.** The ratio/linear
+divergence I reported was **not** an R3 design defect: the contract registers the
+*linear* gate plus the separate `LCB95(B_m) > 0` requirement, and that
+requirement is what keeps the linear form inside the domain where it equals the
+ratio; a negative-`B` run terminates before the contrast is interpreted. And
+`U* = V_SET − V_KEEP`, so **`U*_stable = −3` means SET is WORSE than KEEP** —
+which is why it points toward stable persistence.
+
+**Branch 3's pair set changed.** Under R4 it is the focal `(KEEP, SET(z))`
+evaluation pairs, **not** the R3 calibration pair — that aggregation rule was
+R3-specific because it tied component separation to the normalizer source
+controls, and R4 has no normalizer.
+
+**Open before any R4 run:** the expansion rule (freeze one, or freeze no
+expansion — R3's is void) and a fresh evidence population. **The R3 artifact may
+not be rethresholded at ±5 and reported as an R4 result.**
+
+### Superseded: the global normalizer is retired for this claim
 
 Round `20260728_d7_s_autopsy_result`, stage commit `6430ef96`.
 
