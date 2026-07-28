@@ -268,6 +268,7 @@ fingerprint rewrite.
 ## Standing constraints
 
 ```text
+active_pm_session=27b7458a-a8c3-4f67-a1bb-011d18759db1 (claimed 2026-07-28; CLAUDE.md Ownership names this key)
 branch_scope=untied-k only, never touch another branch (user ruling 2026-07-27)
 aggressive_branch=another line's, never push
 formal_compute=user authority only

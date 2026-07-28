@@ -160,6 +160,30 @@ if ($current.Contains('autonomous_research_grant=ACTIVE_') -and
     [int]$remainingMatch.Groups[1].Value -le 0) {
     throw 'An active autonomous grant has no remaining conclusion-bearing iterations'
 }
+# The grant's size lives in its own name and was parsed by nothing, so the check
+# above could only fire on a hand-written zero. Parse it, and hold the recorded
+# remainder inside it.
+#
+# What this does NOT do, stated so nobody reads more into it: it cannot detect
+# the loop running PAST the grant. Consumption is not machine-countable today --
+# `conclusion_bearing_iterations_consumed` is a LIFETIME total (CURRENT_WORK.md
+# says so), reports 24-29 are supporting work consuming no quota, and nothing
+# emits a countable marker when a conclusion-bearing iteration closes. Deriving
+# the remainder needs such a marker to exist first. Until then this guards
+# transcription drift, not overrun.
+$grantMatch = [regex]::Match($current, '(?m)^autonomous_research_grant=ACTIVE_([A-Z]+)_ITERATION')
+if ($grantMatch.Success) {
+    $sizeWords = @{ 'FIVE' = 5; 'TEN' = 10; 'FIFTEEN' = 15; 'TWENTY' = 20; 'THIRTY' = 30; 'FIFTY' = 50 }
+    $word = $grantMatch.Groups[1].Value
+    if (-not $sizeWords.ContainsKey($word)) {
+        throw "Active autonomous grant declares an unparseable size '$word'. Its size must be readable by a machine, or the remainder it bounds is unenforceable."
+    }
+    $grantSize = $sizeWords[$word]
+    $remaining = [int]$remainingMatch.Groups[1].Value
+    if ($remaining -gt $grantSize) {
+        throw "iterations_remaining=$remaining exceeds the active grant's own size ($word=$grantSize)"
+    }
+}
 
 # The declared mode and the pause contract it implies must agree. Left
 # unchecked these drift apart and the loop pauses in the wrong places.

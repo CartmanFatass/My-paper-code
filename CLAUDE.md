@@ -89,5 +89,10 @@ Retired material competes for attention with live material on every read.
 
 ## Ownership
 
-`docs/project/CURRENT_WORK.md` records who is driving. If it names another active
-Project Manager, remain read-only unless an explicit handoff changes ownership.
+`docs/project/CURRENT_WORK.md` carries `active_pm_session`. If it names a session
+other than yours, remain read-only unless an explicit handoff changes ownership.
+
+Claiming it is one line in your first commit. A stale claim is not a lock: if the
+named session's boundary is behind `HEAD` and you can advance it, take ownership
+by naming yourself — a lock nobody can release is how a dead session blocks a
+live one.
