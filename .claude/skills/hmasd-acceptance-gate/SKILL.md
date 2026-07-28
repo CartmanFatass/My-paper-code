@@ -210,8 +210,12 @@ Write dependent questions as a **decision tree with the branches pre-walked**
 traverses what an iterative interview would discover turn by turn. Carry exact
 paths in the `## Evidence to read` allow-list, never file contents — Pro reads
 the repository at `stage_commit`. Where a code choice is entailed by a
-scientific decision, Pro's preference governs; everything that does not change
-a registered quantity or branch stays with Project Manager. Pro's answer is
+scientific decision, Pro's preference governs; everything that is not a
+scientific judgment stays with Project Manager — code, tests, architecture, Git,
+transport and implementation bindings. **The old line here read "everything that
+does not change a registered quantity or branch", and that test was retired
+2026-07-27** for letting this conversation settle run validity and defect
+severity itself, at this very gate. Pro's answer is
 authoritative **after full reasoning, not before** — never curtail a round.
 
 ## Result interpretation

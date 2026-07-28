@@ -62,7 +62,11 @@ project interface.
 - Direct Git staging, commit, and push of accepted work.
 - Freezing a formal evidence contract and assigning one authorized run to the
   registered `hmasd-experiment-operator`.
-- Validation and interpretation of the operator's terminal artifacts.
+- **Mechanical** validation of the operator's terminal artifacts — files
+  present, schema intact, conformance and provenance fields computed, no crash.
+  Whether the run is *scientifically* valid is Pro's, per **Crossing the
+  boundary**; step 8 sequences the two as "mechanical validation first, then one
+  round."
 - Selection of the default toy discovery surface and the one-way promotion of a
   toy-supported candidate to a heavy UAV transport/robustness validation.
 - Routing every unit of compute to a machine, per
@@ -465,7 +469,7 @@ premise in the next.
 
 When the Project Manager reaches a decision that is scientific and cannot
 proceed without it, neither guessing nor stopping is correct. Open a review
-round and **converge with External Pro until both agree**.
+round and **let External Pro converge with a decision that closes it**.
 
 Convergence is a dialogue inside one accepted fence: bounded follow-ups in the
 branch's registered conversation, each one authored by the Project Manager and

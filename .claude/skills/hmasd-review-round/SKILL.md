@@ -564,16 +564,17 @@ They never change the question contents or the single-fence state.
 ## Convergence turns
 
 A round is not always one question and one answer. When the Project Manager
-reaches a scientific boundary it cannot cross, it converges with the reviewer:
-bounded follow-ups inside the **same accepted fence**, until both sides state
-the same thing.
+reaches a scientific boundary it cannot cross, it puts the question to the
+reviewer inside the **same accepted fence** and the reviewer converges it. See
+**Convergence ends when Pro issues the convergence decision** below — that is the
+operative rule, and agreement by this conversation is not part of it.
 
 A convergence turn is not a fence. Keep them strictly apart:
 
 | | Freshness fence | Convergence turn |
 |---|---|---|
 | carries | the round identity block | prose, no identity block |
-| how many | exactly one per round, never resubmitted | as many as convergence needs |
+| how many | exactly one per round, never resubmitted | bounded by the plan review that owns them — never an open-ended series |
 | authored by | Project Manager | Project Manager |
 | may be sent by transport on its own | no | no |
 

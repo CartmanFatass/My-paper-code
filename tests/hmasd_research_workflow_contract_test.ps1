@@ -86,7 +86,8 @@ foreach ($required in @(
     'per_file_hash_handoff=forbidden',
     'same_file_concurrent_writes=forbidden',
     '### Crossing the boundary',
-    'converge with External Pro')) {
+    'let External Pro converge',
+    'Pro converges; the two sides are not equals here')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 

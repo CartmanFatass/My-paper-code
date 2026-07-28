@@ -32,17 +32,10 @@ workflow_position=workflow 2, touchpoint 2 IN FLIGHT -- the code plan is fenced 
 
 ```
 
-## The workflow, and how often Pro is reached
-
-One workflow has **three** Pro accesses and the count is controlled:
-
-1. Pro's scientific decision;
-2. Pro's review of the Project Manager's code execution plan, which returns the
-   **convergence decision** — Pro closes it, agreement is not required;
-3. the result submission, which becomes the next workflow's access 1.
-
-An iteration **is** that whole loop. Material found after a round closes waits
-for the next plan review; it never becomes a fourth turn.
+An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
+governs it lives in `AGENTS.md`, **Convergence belongs to touchpoint 2** — not
+restated here, because a second copy of a rule is what made this file start
+contradicting itself before.
 
 **The audit ran and returned a valid, non-affirmative result.** Run
 `30289161086`, tag `d7s-audit-2`, stage commit `1b17dfb0`, 8/8 shards success in
