@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4_CLOSURE step D' (conformance repair of four blocking defects, in flight) then re-review, then E. No run.
+next_boundary=R4_CLOSURE step E -- the proof-sized assembled-path exercise on 20260725. Smoke run in flight; nine-outcome derivation follows it. No formal run.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -294,6 +294,45 @@ honouring `OMP_NUM_THREADS=1` and is not the core count). The pool worker runs
 parallelism covers the dominant continuation cost rather than only the prefix.
 Determinism proved byte-identical at run `30270540138`, on a descendant of the
 fingerprint rewrite.
+
+## Control plane — what now enforces itself (2026-07-28)
+
+Prompted by finding a rule that had never been executable: the compaction Skill's
+cadence depended on `iterations_since_last_compaction`, a key `CURRENT_WORK.md`
+had never carried in any revision. Read on many turns, followed on none.
+
+```text
+check_control_plane.py    referents exist: routed agents/skills, backticked paths,
+                          retired names, and check H -- a document naming a state
+                          key its named file does not contain. In pre-commit.
+check_test_reality.py     what the SUITE executed: STUB_ONLY (patched everywhere,
+                          invoked nowhere), ENTRY_UNRUN, DEAD_PROD. Gate-time only.
+paired_negative.py        one mutation, read back off disk, restored; an ERROR is
+                          reported INCONCLUSIVE, never as a red test.
+archive_pro_response.ps1  the round capture rediscovered by hand five times.
+new_review_round.ps1      round scaffold; refuses if the resolved root has no AGENTS.md.
+launch_and_watch_run.ps1  preflight + status. Does NOT launch -- see below.
+pretooluse_guard.ps1      --no-verify, push-before-tag, branch scope. NEEDS the
+                          user to create .claude/settings.json before it binds.
+```
+
+Guards that could not fail, now able to: the drift guard's path set excluded
+`.githooks/` and `.claude/settings*.json`, so a commit neutering the guard ran no
+contract; the review-round rejection probe asserted only `status` over a fixture
+illegal in two ways; the subagent tier check accepted any non-blank `model:`; the
+no-Git hook covered 2 of 6 shell-holding children and its test named them instead
+of discovering them.
+
+**No script can detach a run here.** `Start-Process` and `nohup` from the
+PowerShell tool both leave a child dead within seconds; only a backgrounded Bash
+call survives. That is the cause of both 2026-07-27 orphans, and it is why the
+launcher hands back a command rather than running it.
+
+Five errors in this tooling were caught by its own tests before anything was
+trusted: an omitted `tools` key read as a defect, a false `ENTRY_UNRUN` from
+importlib binding, a false negative from the `pytest.main` footer, stdout
+existence read as output, and a scaffolder writing outside the repository while
+reporting success.
 
 ## Standing constraints
 
