@@ -109,7 +109,8 @@ D realization-conformance review        REJECT -- 6 of 10 clean, four blocking
 D' conformance repair                   DONE  28d6933f -- R1-R5, 309 passed
 E proof-sized exercise on 20260725      DONE  13 outcomes, STEP_E_ASSEMBLED_PATH_OK
 F Stage B re-review of D'                REJECT -- conformance and semantics, two blocking
-F' repair D''                            IN FLIGHT
+F' repair D''                            DONE  0193de1a -- 291 passed, 8 paired negatives
+G Stage B review of D''                  IN FLIGHT -- the repair gets the gate too
 ```
 
 **Step F existed because the gate was skipped, not because it was scheduled.**
@@ -143,6 +144,23 @@ B-2  main() never calls r4_freshness_sentinel, and the no-flag default IS a
      Also: --population r4 with the eight seeds REVERSED earns identity and
        would fail the sentinel (exact_seed_list=False) if anything ran it.
 ```
+
+**The path-proof that protects the run itself, measured after D''.** The new
+`main()` sentinel gate is the one change that could have made the formal run
+produce nothing: if it fired on a shard, all eight jobs would refuse.
+
+```text
+--population r4 --topology-seeds 20260734   identity EARNED   gate fires=False
+--population r4 --topology-seeds 20260735   identity EARNED   gate fires=False
+--population r4 --topology-seeds 20260741   identity EARNED   gate fires=False
+all eight, one process, no flags                              gate fires=True
+all eight declared REVERSED                                   gate fires=True
+                                              -> then exact_seed_list refuses
+```
+
+Shards keep identity and are not put through a whole-population gate they
+cannot satisfy; both whole-population routes are gated. That is exactly the
+intended shape, and it is the CI matrix's exact invocation.
 
 **One correction the PM did NOT adopt from the review.** Its minimal fix for B-1
 re-points sentinel condition 1 at `topology_records`. A topology failing the
