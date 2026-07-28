@@ -4882,6 +4882,73 @@ def test_condition_8_refuses_a_hash_failure_for_a_topology_that_also_produced():
                if k != "every_topology_accounted_for_exactly_once")
 
 
+def test_main_accepts_the_default_no_flag_whole_population_run(monkeypatch, tmp_path, capsys):
+    """B-2's POSITIVE half, and the one this file was missing entirely.
+
+    Every other assertion about `main()`'s sentinel gate is a REFUSAL
+    (`..._refuses_a_whole_population_run_that_fails_the_sentinel`,
+    `..._refusal_prints_no_result_json_to_stdout`,
+    `..._refuses_a_reversed_whole_population_declared_run`). A gate with only
+    negative tests can OVER-refuse and nothing goes red -- the mirror of the
+    rule that a guard which cannot go red is a comment. That risk is not
+    hypothetical here: this is the exact command line the formal run uses, and
+    a sentinel that refused it would turn a 5-6 hour measurement into a
+    `SystemExit` with no artifact.
+
+    NOT covered by
+    `test_declared_r4_population_run_through_main_writes_a_sentinel_passing_artifact`,
+    which passes `--population r4 --topology-seeds <all eight>` and so earns
+    identity through `r4_declared_population_identity`. This is the NO-FLAG
+    default route: `resolve_run_plan` returns the frozen `TOPOLOGY_SEEDS_R4`
+    on its own and `r4_artifact_identity` earns the identity fields from the
+    seed list, which is a different function and a different code path into
+    the same gate. Asserting the default really is the whole population is
+    part of the point.
+
+    The stub attempts the REGISTERED episode volume (`_stub_topology_result`'s
+    default), which is what distinguishes this from the refusal tests below --
+    they hand it 2."""
+    out_dir = _arm_main(monkeypatch, tmp_path, [])
+    capsys.readouterr()
+
+    # "Exits normally" stated as an assertion rather than left implicit in an
+    # uncaught exception: a refusal here is the specific failure being guarded.
+    try:
+        audit.main()
+    except SystemExit as exc:                       # pragma: no cover - the guard
+        pytest.fail(f"the default no-flag whole-population run was REFUSED: {exc}")
+
+    # The result JSON reached stdout -- the conclusion-bearing payload a
+    # downstream reader parses, which the refusal path must not emit and this
+    # path must.
+    printed = json.loads(capsys.readouterr().out)
+    assert printed["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert printed["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+
+    # ... and the artifact reached disk.
+    artifact_path = out_dir / "d7_s_event_aligned.json"
+    assert artifact_path.exists()
+    with artifact_path.open(encoding="utf-8") as fh:
+        artifact = json.load(fh)
+
+    # The no-flag default IS the frozen whole population, in order.
+    assert artifact["topology_seeds"] == list(audit.TOPOLOGY_SEEDS_R4)
+    assert artifact["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert artifact["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+
+    # All SIX conditions True, spelled out rather than `all(detail.values())`:
+    # a condition silently disappearing from the sentinel would satisfy `all`
+    # over the survivors and is exactly the drift this pins.
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is True, detail
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": True,
+    }
+
+
 def test_main_refuses_a_whole_population_run_that_fails_the_sentinel(monkeypatch, tmp_path):
     """B-2, and the ONLY assertion in either file that production applies the
     sentinel. `main()` is invoked with NO population/seed/episode flags at

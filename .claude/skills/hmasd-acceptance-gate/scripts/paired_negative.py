@@ -157,11 +157,24 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     finally:
         shutil.copy2(backup, path)
-        restored = path.read_text(encoding="utf-8")
-        if args.new.strip() and args.new.strip() in restored:
-            print(f"\nWARNING: {path} still contains the mutation after restore. Check it.")
+        # Compare against the BYTES WE SAVED, not against whether the mutated
+        # text appears anywhere. The old check was `args.new.strip() in
+        # restored`, which false-fires whenever the replacement text is a
+        # legitimate substring of the file -- measured 2026-07-28: mutating
+        # `return {"r4_contract": R4_CONTRACT_PATH,` to `return {"r4_contract":
+        # None,` warned on a correctly restored file, because the very next
+        # branch legitimately reads `return {"r4_contract": None, ...}`.
+        #
+        # A residue check that cries wolf is worse than none: this one guards
+        # against leaving mutated PRODUCTION code behind, so it gets ignored at
+        # exactly the moment it matters. Byte comparison against the backup is
+        # exact in both directions and cannot false-fire.
+        if path.read_bytes() != backup.read_bytes():
+            print(f"\nWARNING: {path} does NOT match its pre-mutation bytes after "
+                  f"restore. The backup is at {backup} -- restore it by hand and "
+                  "do not commit until `git diff` on this file is what you expect.")
         else:
-            print(f"\nrestored {path.name}; no residue")
+            print(f"\nrestored {path.name}; byte-identical to pre-mutation")
         shutil.rmtree(backup.parent, ignore_errors=True)
 
 
