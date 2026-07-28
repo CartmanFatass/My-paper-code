@@ -27,8 +27,8 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
-next_boundary=IMPLEMENT_THE_AUTOPSY_THEN_SUBMIT_ITS_ARTIFACT_AS_TOUCHPOINT_3
-workflow_position=workflow 2, step 5 -- touchpoint 2 closed APPROVED WITH MODIFICATIONS, implementation in flight
+next_boundary=PRO_RULING_ON_THE_AUTOPSY_RESULT_THEN_ITERATION_31
+workflow_position=workflow 2, touchpoint 3 IN FLIGHT -- autopsy ran, result fenced at 6430ef96, Pro generating
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -84,6 +84,28 @@ with per-limb `stable_b_identified` / `flex_b_identified` recorded separately an
 a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
 the artifact, which today carries only the six bounds; and enforce §9 in
 `main()`.
+
+### The autopsy result: N5 raised, and one thing the instrument is stuck on
+
+`logs/d7s_autopsy_1/`, evidence note
+`docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_THE_NORMALIZER_IS_UNRELATED_TO_THE_EFFECT.md`.
+
+Sentinel passed all six conditions including exact reproduction of the six
+registered R3 bounds. Evidence matrix: **N5 comparator-scale mismatch raised**,
+N4 material (`R_topology = 0.1221`, no regime), N1 compatible, N2 not resolved,
+N3 `UNDISCRIMINATED_FROM_STORED_ARTIFACT`, selection instability moderate.
+
+N5 rests on an essentially absent topology-level association between `B_m` and
+`U*_m` — pearson `+0.038` / `+0.022`, rank `−0.180` / `−0.333`. Reading that as
+"the denominator was never the right denominator" is **Project Manager
+inference**, not a result: eight topologies make any association estimate
+unstable, and Pro said so when it added N5.
+
+**The instrument is fail-closed and cannot emit branches 4–10.** Component
+persistence and per-paired-continuation exact sequence equality exist; the
+missing piece is the aggregation rule to a per-limb `components_separate`. That
+is a threshold deciding which branch fires, so it was not invented locally — it
+is Q3 of the round in flight.
 
 ### The converged next action, and a precondition it set
 
