@@ -65,9 +65,10 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_"
     "ATTRIBUTION_G45_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# Formal admission remains closed until a fresh independent G45 alignment audit.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Formal admission is bound to the independent correction recheck and still
+# requires an exact same-source nonformal preflight plus the authorization token.
+ALIGNED_IMPLEMENTATION_COMMIT = "a42da997712d9c941ac9a6ca08992f4c5de033a2"
+ALIGNMENT_STAGE_COMMIT = "40840069c4cfe0baad67e2800d13bbee872844b0"
 ACCEPTED_ANCHOR_ROOT_RELATIVE = _base.ACCEPTED_ANCHOR_ROOT_RELATIVE
 
 INVALID_BRANCH = (
