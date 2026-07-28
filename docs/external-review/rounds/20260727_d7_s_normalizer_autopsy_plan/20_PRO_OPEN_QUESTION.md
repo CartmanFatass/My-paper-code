@@ -140,20 +140,52 @@ decided quietly.
 
 ## 5. Context the plan review should have: the instrument's guards
 
-Three mutation sweeps ran over the instrument's back half. Findings:
+Three mutation sweeps covered the instrument's back half — the ~1700 lines a
+previous note listed as unswept. Findings:
 `docs/research/cdc/EVIDENCE_NOTES/20260727_D7_S_THE_INSTRUMENT_BACK_HALF_SWEEP.md`.
 
-Three were re-verified by the Project Manager on the main tree, each leaving the
-suite at **183 passed**: `B_stable`'s sign can be flipped at its production fold;
-`all_seed_controlled` can be hardcoded `True`; and the entire qualifying-event
-construction branch can be made unreachable — **no test drives event selection
-through to a real qualifying event.**
+**Five were re-verified by the Project Manager**, each with the mutated line
+printed off disk immediately before the run, each leaving the suite at **183
+passed**:
 
-This is raised as plan context, not as a challenge to the closed disposition. It
-does not make the recorded numbers wrong: the production code is correct and the
-run executed it. It does mean that the phrase your ruling relied on — *"conformance,
-support, topology identity, CRN pairing, and episode-world provenance passed"* —
-currently rests on verdicts that no test can drive red.
+| Mutation | Effect |
+|---|---|
+| `float(np.sum(g_series))` → `* 0.5` at `:2888` | **every reported `g_total` halved** |
+| condition 5's fingerprint check → `if False:` at `:2677` | R2 blocking condition 5 deleted |
+| `B_stable`'s calibration fold reads `null` as treatment | sign of `B_stable` flipped |
+| `all_seed_controlled` → literal `True` | provenance verdict fabricated |
+| `if stable_ok and flex_ok:` → `if False:` at `:2168` | qualifying-event construction unreachable |
+
+Two consequences bear on your ruling specifically.
+
+**The "zero invalidated pairs" verdict rests on unfailable guards.** Three of the
+five R2 blocking conditions — 2 (mutation isolation), 3 (RNG isolation) and 5
+(complete-state restoration) — can each be replaced by `if False:` at 183 passed,
+and reachability probes prove all three *execute on every clone*. They run;
+nothing ever violates them. Conditions 1C and 4 do have provoking fixtures and go
+red. Clone-object independence is also genuinely guarded.
+
+**The magnitude of the result is unguarded.** `window_g_from_step_metrics` and
+`_baseline_masks`, which between them produce every `g_total` in the run, have no
+test at all — 22 of 22 mutations green, including zeroing the `-5·cutoff` and
+`-10·depletion` terms and swapping the two masks. This is a different category
+from the conformance flags: those decide whether a run is *admitted*, this
+decides *what number it reports*.
+
+**None of this makes the recorded numbers wrong.** The production code is correct
+as written and the run executed that code; I am not asserting a defect, I am
+reporting that a defect would not have been detected. It does mean the phrase
+your ruling relied on — *"conformance, support, topology identity, CRN pairing,
+and episode-world provenance passed"* — currently rests on verdicts no test can
+drive red.
+
+Also measured, and reported because it was previously recorded as a tolerated
+risk rather than a tested one: the fingerprint encoder's string branch has no
+length prefix and produces real collisions (`enc(["p","q"]) == enc(["p,str:q"])`,
+and at `full_state_fingerprint` level a two-attribute and a one-attribute state
+can share a digest). Enumerating a real environment found 109 string leaves
+across 19 attributes and **none currently carries a structural delimiter**, so
+the recorded run is unaffected — but nothing constrains that.
 
 ## 6. What I will not do
 
@@ -171,9 +203,25 @@ because it overrides the no-new-run boundary you set.
 specified actually separate the explanations, or is a discriminator wrong or
 missing? Treat §2's table as a hypothesis to attack.
 
-**Q3 — the guard gap.** Given §5, does the D7.S apparatus lemma you retained
-("eight-topology support/provenance apparatus — Retained lemma") still hold as
-stated, or does it need scoping to what is actually guarded?
+**Q3 — the guard gap.** Two parts, and the second is the one I am least
+comfortable answering myself.
+
+(a) Does the apparatus lemma you retained — *"eight-topology support/provenance
+apparatus — Retained lemma"* — still hold as stated, or does it need scoping to
+what is actually guarded?
+
+(b) You ruled the result *"remains quantitatively usable"* and *"a valid matched
+observation"*. Does that survive §5? I can argue it either way and that is
+exactly why I am asking rather than deciding. **For:** the code is correct, the
+run executed it, and an unguarded correct computation still produces the right
+number. **Against:** "valid" was inferred from verdicts that cannot fail, so the
+evidence for validity is thinner than the word implies, and the autopsy in §2 is
+about to be built *on those same numbers* — if the observation is not usable, the
+autopsy is the wrong next action and the real next action is instrumenting the
+guards first.
+
+This is not an attempt to reopen the disposition. It is the input to the
+disposition being weaker than either of us knew when you ruled.
 
 **Q4 — the component-invariance input.** Is recording it as
 `component_invariance_evaluated=False` the right prospective treatment, or must

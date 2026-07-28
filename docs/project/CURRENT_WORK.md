@@ -120,9 +120,13 @@ Still open, and deliberately not repaired here:
   than it reads, which matters because the ruling leaned on it. Carried to the
   next plan review, not to a follow-up Pro turn.
 
-- **The fingerprint / clone-isolation region `:2333-:2902` is still unswept.**
-  Its sweep was dispatched and has not returned. That region must not be read as
-  audited.
+- **The clone conditions and the `G` accumulator are the worst of it.** Region B
+  returned: three of the five R2 blocking conditions — 2, 3 and 5 — can each be
+  replaced by `if False:` at 183 passed, and reachability probes prove all three
+  execute on every clone. That is what "zero invalidated pairs" is made of.
+  `window_g_from_step_metrics` and `_baseline_masks`, which produce every
+  `g_total` in the run, have **no test at all**: 22 of 22 mutations green,
+  including halving the total, which the Project Manager verified personally.
 
 ### On a killed shard — the ruling's rule, which replaces ours
 
