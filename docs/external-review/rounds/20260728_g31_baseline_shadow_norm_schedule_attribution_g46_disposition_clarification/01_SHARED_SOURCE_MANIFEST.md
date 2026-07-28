@@ -1,6 +1,6 @@
 # Exact allow-list for G46 disposition clarification
 
-The following paths are the complete allow-list. Read them at stage_commit=b7e02e89c2037ec233851f0fec2bdd0da089bd99 and no other repository paths:
+The following paths are the complete allow-list. Read them at stage_commit=59809a79f06021a9305437b8e12459f2e48fed6b and no other repository paths:
 
 - .agents/roles/EXTERNAL_PRO.md
 - docs/project/ALGORITHM_PRINCIPLES.md
@@ -9,8 +9,6 @@ The following paths are the complete allow-list. Read them at stage_commit=b7e02
 - docs/external-review/OPEN_REVIEW_PRINCIPLES.md
 - docs/project/CURRENT_WORK.md
 - docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/20_PRO_OPEN_QUESTION.md
-- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/21_PRO_OPEN_RAW.md
-- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/50_MECHANICAL_INTAKE_RECORD.md
 - docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/20_PRO_OPEN_QUESTION.md
 - docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/21_PRO_OPEN_RAW.md
 - docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/50_MECHANICAL_INTAKE_RECORD.md

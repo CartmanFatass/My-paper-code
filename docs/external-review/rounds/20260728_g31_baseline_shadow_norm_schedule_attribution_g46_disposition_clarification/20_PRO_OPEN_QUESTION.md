@@ -4,7 +4,7 @@ review_type=CODE_SCIENCE_ALIGNMENT_DISPOSITION_CLARIFICATION
 audit_mode=disposition_only
 compute_budget=zero
 audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
-stage_commit=b7e02e89c2037ec233851f0fec2bdd0da089bd99
+stage_commit=59809a79f06021a9305437b8e12459f2e48fed6b
 original_round=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit
 original_recovery_response=docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_transport_recovery_v1/21_PRO_OPEN_RAW.md
 
@@ -17,8 +17,6 @@ original_recovery_response=docs/external-review/rounds/20260728_g31_baseline_sha
 - `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/CURRENT_WORK.md`
 - `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/20_PRO_OPEN_QUESTION.md`
-- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
-- `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit/50_MECHANICAL_INTAKE_RECORD.md`
 - `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/20_PRO_OPEN_QUESTION.md`
 - `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/50_MECHANICAL_INTAKE_RECORD.md`
@@ -32,7 +30,7 @@ original_recovery_response=docs/external-review/rounds/20260728_g31_baseline_sha
 - `tests/ha_ctse_process_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_test.py`
 - `tests/run_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_test.py`
 
-You are External GPT-5.6 Pro and the exclusive scientific authority for this bounded disposition clarification. The preceding G46 response was archived verbatim but omitted the required disposition token. This turn is not a resubmission of the original question and is not a request for computation or redesign. Read only the exact allow-listed evidence in 01_SHARED_SOURCE_MANIFEST.md from stage_commit=b7e02e89c2037ec233851f0fec2bdd0da089bd99.
+You are External GPT-5.6 Pro and the exclusive scientific authority for this bounded disposition clarification. The preceding G46 response was archived verbatim but omitted the required disposition token. This turn is not a resubmission of the original question and is not a request for computation or redesign. Read only the exact allow-listed evidence in 01_SHARED_SOURCE_MANIFEST.md from stage_commit=59809a79f06021a9305437b8e12459f2e48fed6b.
 
 Return exactly one line and nothing else:
 
