@@ -1,0 +1,50 @@
+# Shared source manifest: G46 code-science alignment audit
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260728_g31_baseline_shadow_norm_schedule_attribution_g46_code_science_alignment_audit
+review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
+audit_mode=read_only_contract_diff
+audit_target_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+implementation_code_commit=ef3a2fa273d1506c2bc88f50db8e06810e946809
+accepted_design_source_commit=8cb6fb8872e64c93f6d699ad24dd549704462aaa
+correction_stage_commit=dd762c236066f2673981f20bc1d2f6664961dea7
+formal_compute=not_started
+nonformal_compute=not_started
+compute_budget=zero
+
+The submitted question and the following paths are the complete allow-list.
+Read only these paths from the exact audit target commit:
+
+- .agents/roles/EXTERNAL_PRO.md
+- docs/project/ALGORITHM_PRINCIPLES.md
+- docs/project/SCIENTIFIC_ASSERTION_AUDIT.md
+- docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+- docs/external-review/OPEN_REVIEW_PRINCIPLES.md
+- docs/project/CURRENT_WORK.md
+- docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md
+- docs/research/cdc/CONJECTURES.md
+- docs/research/cdc/IDEA_PORTFOLIO.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_design_assertion_audit/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/20_PRO_OPEN_QUESTION.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260728_g31_baseline_shadow_norm_schedule_attribution_g46_contract_correction_clarification/50_MECHANICAL_INTAKE_RECORD.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_BASELINE_SHADOW_NORM_SCHEDULE_ATTRIBUTION_G46_CODE_SCIENCE_INDEX.md
+- ha_ctse_process/continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46.py
+- scripts/run_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46.py
+- tests/ha_ctse_process_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_test.py
+- tests/run_continuous_roster_native_six_g31_baseline_shadow_norm_schedule_attribution_g46_test.py
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_CODE_SCIENCE_INDEX.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_CODE_SCIENCE_INDEX.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_CREDIT_REDUCTION_G40_CODE_SCIENCE_INDEX.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_SLOW_CRITIC_REDUCTION_G41_CODE_SCIENCE_INDEX.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DB_NORM_SCHEDULE_ATTRIBUTION_G43_CODE_SCIENCE_INDEX.md
+
+The G46 source, runner and focused tests are the implementation under audit.
+The design, correction, and prior code-science indexes are allow-listed only to
+verify the frozen retained route and provenance boundary. No runtime log,
+formal/nonformal artifact, unlisted round, G33 material or workflow file is
+admitted. Do not infer any result from Git history or from the current worktree
+outside this exact commit.
