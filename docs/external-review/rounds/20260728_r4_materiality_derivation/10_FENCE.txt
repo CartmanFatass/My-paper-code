@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260728_r4_materiality_derivation
+stage_commit=214553620e97085060a485d527ead3d85679ca2b
+question=docs/external-review/rounds/20260728_r4_materiality_derivation/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
