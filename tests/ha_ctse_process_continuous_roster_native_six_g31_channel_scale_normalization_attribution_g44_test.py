@@ -96,10 +96,15 @@ def test_exact_centering_rms_and_zero_rules() -> None:
     assert normalized.centered_immediate.numel() == 384
     assert normalized.immediate_mean == 4.0
     assert normalized.successor_mean == 8.0
+    assert normalized.immediate_centered_sum_square == 1_920.0
+    assert normalized.successor_centered_sum_square == 7_680.0
     assert normalized.immediate_scale == pytest.approx(2.23606797749979)
     assert normalized.successor_scale == pytest.approx(4.47213595499958)
     expected_pool = ((normalized.immediate_scale**2 + normalized.successor_scale**2) / 2) ** 0.5
     assert normalized.pooled_scale == pytest.approx(expected_pool)
+    assert normalized.normalization_row_count == 384
+    assert normalized.normalization_mask_digest == g44.NORMALIZATION_MASK_DIGEST
+    assert len(normalized.normalization_mask_digest) == 64
     assert float(normalized.independent_immediate.mean()) == pytest.approx(0.0)
     assert float(normalized.independent_successor.mean()) == pytest.approx(0.0)
 
@@ -115,6 +120,9 @@ def test_exact_centering_rms_and_zero_rules() -> None:
     assert zeros.immediate_scale == 0.0
     assert zeros.successor_scale == 0.0
     assert zeros.pooled_scale == 0.0
+    assert zeros.immediate_centered_sum_square == 0.0
+    assert zeros.successor_centered_sum_square == 0.0
+    assert zeros.normalization_mask_digest == normalized.normalization_mask_digest
     assert torch.count_nonzero(zeros.independent_immediate) == 0
     assert torch.count_nonzero(zeros.pooled_successor) == 0
 
@@ -220,8 +228,15 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
         schedule = pass_record["channel_scale_schedule"]
         assert g44.validate_schedule_record(schedule)
         assert schedule["evidence_source_arm"] == g44.INDEPENDENT_ARM
-        assert schedule["reference_equal_mean_counterfactual"] is True
-        assert schedule["null_arm_evidence_read_count"] == 0
+        assert schedule["reference_pooled_counterfactual"] is True
+        assert schedule["pooled_arm_evidence_read_count"] == 0
+        assert schedule["normalization_row_count"] == 384
+        assert schedule["normalization_mask_digest"] == (
+            g44.NORMALIZATION_MASK_DIGEST
+        )
+        assert schedule["immediate_scale"] == schedule["s_I"]
+        assert schedule["successor_scale"] == schedule["s_S"]
+        assert schedule["pooled_scale"] == schedule["s_P"]
         assert schedule["strict_activation_observed"] is True
         independent = pass_record["composition"][g44.INDEPENDENT_ARM]
         pooled = pass_record["composition"][g44.POOLED_ARM]
@@ -248,6 +263,8 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
             )
     conclusion = g44.build_conclusion_evidence([record], formal=False)
     assert g44.validate_conclusion_evidence(conclusion)
+    assert conclusion["reference_pooled_counterfactual"] is True
+    assert conclusion["pooled_arm_evidence_read_count"] == 0
     forged = copy.deepcopy(conclusion)
     forged["replicate_rows"][0]["reconstructed_passes"][0]["q_scale"] = 0.0
     forged["replicate_rows"][0]["strict_activation_observed"] = True
@@ -257,6 +274,11 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
         "q_direction"
     ] = 0.0
     assert not g44.validate_conclusion_evidence(forged_direction)
+    forged_mask = copy.deepcopy(conclusion)
+    forged_mask["replicate_rows"][0]["reconstructed_passes"][0][
+        "normalization_mask_digest"
+    ] = "0" * 64
+    assert not g44.validate_conclusion_evidence(forged_mask)
     assert all(
         min(
             g44._optimizer_step_value(optimizers[arm], parameter)

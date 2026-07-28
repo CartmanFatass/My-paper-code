@@ -448,6 +448,13 @@ def test_artifact_roundtrip_final_only_and_schedule_tamper_rejected(
         assert "G44 update evidence mismatch" in runner._training_errors(
             tmp_path, tampered
         )
+        tampered_mask = copy.deepcopy(manifest)
+        tampered_mask["replicate_results"][0]["update_records"][0][
+            "pass_records"
+        ][0]["channel_scale_schedule"]["normalization_mask_digest"] = "0" * 64
+        assert "G44 update evidence mismatch" in runner._training_errors(
+            tmp_path, tampered_mask
+        )
         extra = tmp_path / "checkpoints" / "replicate_0_intermediate.pt"
         extra.touch()
         assert "G44 checkpoint inventory is not final-only" in runner._training_errors(
@@ -458,6 +465,10 @@ def test_artifact_roundtrip_final_only_and_schedule_tamper_rejected(
 
 
 def test_first_match_branch_order_is_exact() -> None:
+    assert runner.INVALID_BRANCH == (
+        "INVALID_CONTINUOUS_ROSTER_NATIVE_SIX_G31_"
+        "CHANNEL_SCALE_ATTRIBUTION_G44"
+    )
     base: dict[str, Any] = {
         "operational_valid": True,
         "source_valid": True,

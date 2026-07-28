@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
@@ -63,6 +64,17 @@ ACTIVATION_TOLERANCE = 1e-6
 EQUAL_MEAN_COEFFICIENT = 0.5
 
 
+def _normalization_mask_digest() -> str:
+    mask = np.ones((HORIZON, NUM_ENVS), dtype=np.uint8)
+    digest = hashlib.sha256()
+    digest.update(b"shape=48x8|dtype=uint8|")
+    digest.update(mask.tobytes(order="C"))
+    return digest.hexdigest()
+
+
+NORMALIZATION_MASK_DIGEST = _normalization_mask_digest()
+
+
 class G44GradientGateError(ValueError):
     """A frozen G44 gate failed before either arm optimizer step."""
 
@@ -90,9 +102,13 @@ class ChannelNormalization:
     pooled_successor: torch.Tensor
     immediate_mean: float
     successor_mean: float
+    immediate_centered_sum_square: float
+    successor_centered_sum_square: float
     immediate_scale: float
     successor_scale: float
     pooled_scale: float
+    normalization_row_count: int
+    normalization_mask_digest: str
 
 
 @dataclass(frozen=True)
@@ -169,10 +185,16 @@ def normalize_credit_channels(credit: g41.G41Credit) -> ChannelNormalization:
     mean_s = work_s.mean()
     centered_i = work_i - mean_i
     centered_s = work_s - mean_s
-    scale_i = torch.sqrt(centered_i.square().mean())
-    scale_s = torch.sqrt(centered_s.square().mean())
+    immediate_centered_sum_square = centered_i.square().sum()
+    successor_centered_sum_square = centered_s.square().sum()
+    scale_i = torch.sqrt(
+        immediate_centered_sum_square / float(NORMALIZATION_ROWS)
+    )
+    scale_s = torch.sqrt(
+        successor_centered_sum_square / float(NORMALIZATION_ROWS)
+    )
     pooled = torch.sqrt(
-        (centered_i.square().sum() + centered_s.square().sum())
+        (immediate_centered_sum_square + successor_centered_sum_square)
         / float(2 * NORMALIZATION_ROWS)
     )
     for name, scalar in (
@@ -207,9 +229,13 @@ def normalize_credit_channels(credit: g41.G41Credit) -> ChannelNormalization:
         pooled_successor=pooled_s.to(successor.dtype),
         immediate_mean=float(mean_i),
         successor_mean=float(mean_s),
+        immediate_centered_sum_square=float(immediate_centered_sum_square),
+        successor_centered_sum_square=float(successor_centered_sum_square),
         immediate_scale=float(scale_i),
         successor_scale=float(scale_s),
         pooled_scale=float(pooled),
+        normalization_row_count=NORMALIZATION_ROWS,
+        normalization_mask_digest=NORMALIZATION_MASK_DIGEST,
     )
 
 
@@ -355,6 +381,26 @@ def _direction_scalar_evidence(
     return left_norm, right_norm, dot, distance
 
 
+def _normalization_statistics(
+    normalization: ChannelNormalization,
+) -> dict[str, object]:
+    return {
+        "immediate_mean": normalization.immediate_mean,
+        "successor_mean": normalization.successor_mean,
+        "immediate_centered_sum_square": (
+            normalization.immediate_centered_sum_square
+        ),
+        "successor_centered_sum_square": (
+            normalization.successor_centered_sum_square
+        ),
+        "immediate_scale": normalization.immediate_scale,
+        "successor_scale": normalization.successor_scale,
+        "pooled_scale": normalization.pooled_scale,
+        "normalization_row_count": normalization.normalization_row_count,
+        "normalization_mask_digest": normalization.normalization_mask_digest,
+    }
+
+
 def _schedule_record(
     normalization: ChannelNormalization,
     independent_credit: Sequence[torch.Tensor],
@@ -389,6 +435,7 @@ def _schedule_record(
         and pooled_norm > 0.0
     )
     record = {
+        **_normalization_statistics(normalization),
         "s_I": normalization.immediate_scale,
         "s_S": normalization.successor_scale,
         "s_P": normalization.pooled_scale,
@@ -399,8 +446,8 @@ def _schedule_record(
         "q_direction": q_direction,
         "activation_threshold": ACTIVATION_TOLERANCE,
         "evidence_source_arm": INDEPENDENT_ARM,
-        "reference_equal_mean_counterfactual": True,
-        "null_arm_evidence_read_count": 0,
+        "reference_pooled_counterfactual": True,
+        "pooled_arm_evidence_read_count": 0,
         "strict_activation_observed": active,
         "passed": True,
     }
@@ -413,6 +460,13 @@ def validate_schedule_record(value: object) -> bool:
     if not isinstance(value, Mapping) or value.get("passed") is not True:
         return False
     names = (
+        "immediate_mean",
+        "successor_mean",
+        "immediate_centered_sum_square",
+        "successor_centered_sum_square",
+        "immediate_scale",
+        "successor_scale",
+        "pooled_scale",
         "s_I",
         "s_S",
         "s_P",
@@ -426,10 +480,39 @@ def validate_schedule_record(value: object) -> bool:
         isinstance(value.get(name), bool)
         or not isinstance(value.get(name), (int, float))
         or not np.isfinite(float(value[name]))
-        or (name != "reference_credit_dot_product" and float(value[name]) < 0.0)
+        or (
+            name
+            not in (
+                "immediate_mean",
+                "successor_mean",
+                "reference_credit_dot_product",
+            )
+            and float(value[name]) < 0.0
+        )
         for name in names
     ):
         return False
+    row_count = value.get("normalization_row_count")
+    if (
+        isinstance(row_count, bool)
+        or row_count != NORMALIZATION_ROWS
+        or value.get("normalization_mask_digest") != NORMALIZATION_MASK_DIGEST
+    ):
+        return False
+    immediate_sum = float(value["immediate_centered_sum_square"])
+    successor_sum = float(value["successor_centered_sum_square"])
+    expected_immediate_scale = float(
+        np.sqrt(immediate_sum / float(NORMALIZATION_ROWS))
+    )
+    expected_successor_scale = float(
+        np.sqrt(successor_sum / float(NORMALIZATION_ROWS))
+    )
+    expected_pooled_scale = float(
+        np.sqrt(
+            (immediate_sum + successor_sum)
+            / float(2 * NORMALIZATION_ROWS)
+        )
+    )
     maximum = max(float(value["s_I"]), float(value["s_S"]))
     q_scale = (
         abs(float(value["s_I"]) - float(value["s_S"])) / maximum
@@ -459,10 +542,16 @@ def validate_schedule_record(value: object) -> bool:
     return bool(
         float(value["q_scale"]) == q_scale
         and float(value["q_direction"]) == expected_direction
+        and float(value["immediate_scale"]) == expected_immediate_scale
+        and float(value["successor_scale"]) == expected_successor_scale
+        and float(value["pooled_scale"]) == expected_pooled_scale
+        and float(value["s_I"]) == float(value["immediate_scale"])
+        and float(value["s_S"]) == float(value["successor_scale"])
+        and float(value["s_P"]) == float(value["pooled_scale"])
         and value.get("activation_threshold") == ACTIVATION_TOLERANCE
         and value.get("evidence_source_arm") == INDEPENDENT_ARM
-        and value.get("reference_equal_mean_counterfactual") is True
-        and value.get("null_arm_evidence_read_count") == 0
+        and value.get("reference_pooled_counterfactual") is True
+        and value.get("pooled_arm_evidence_read_count") == 0
         and value.get("strict_activation_observed") is active
     )
 
@@ -1262,7 +1351,7 @@ def build_conclusion_evidence(
 ) -> dict[str, object]:
     if not isinstance(formal, bool) or not update_records:
         raise ValueError("G44 conclusion evidence requires records and bool scope")
-    rows_by_replicate: dict[int, list[dict[str, float | bool]]] = {}
+    rows_by_replicate: dict[int, list[dict[str, object]]] = {}
     records_valid = True
     for record in update_records:
         replicate = record.get("accepted_g40_anchor_replicate")
@@ -1313,6 +1402,23 @@ def build_conclusion_evidence(
                 records_valid = False
             rows_by_replicate[replicate].append(
                 {
+                    "immediate_mean": float(schedule["immediate_mean"]),
+                    "successor_mean": float(schedule["successor_mean"]),
+                    "immediate_centered_sum_square": float(
+                        schedule["immediate_centered_sum_square"]
+                    ),
+                    "successor_centered_sum_square": float(
+                        schedule["successor_centered_sum_square"]
+                    ),
+                    "immediate_scale": float(schedule["immediate_scale"]),
+                    "successor_scale": float(schedule["successor_scale"]),
+                    "pooled_scale": float(schedule["pooled_scale"]),
+                    "normalization_row_count": int(
+                        schedule["normalization_row_count"]
+                    ),
+                    "normalization_mask_digest": str(
+                        schedule["normalization_mask_digest"]
+                    ),
                     "s_I": float(schedule["s_I"]),
                     "s_S": float(schedule["s_S"]),
                     "s_P": float(schedule["s_P"]),
@@ -1359,6 +1465,8 @@ def build_conclusion_evidence(
             "q_scale>1e-6_and_q_direction>1e-6_and_both_credit_norms_positive"
         ),
         "evidence_source_arm": INDEPENDENT_ARM,
+        "reference_pooled_counterfactual": True,
+        "pooled_arm_evidence_read_count": 0,
         "reconstructed_from_all_update_records": True,
         "forged_pass_flag_sufficient": False,
         "records_valid": records_valid,
@@ -1385,6 +1493,8 @@ def validate_conclusion_evidence(value: object) -> bool:
         or not rows
         or value.get("activation_threshold") != ACTIVATION_TOLERANCE
         or value.get("evidence_source_arm") != INDEPENDENT_ARM
+        or value.get("reference_pooled_counterfactual") is not True
+        or value.get("pooled_arm_evidence_read_count") != 0
         or value.get("reconstructed_from_all_update_records") is not True
         or value.get("forged_pass_flag_sufficient") is not False
         or value.get("records_valid") is not True
@@ -1412,6 +1522,13 @@ def validate_conclusion_evidence(value: object) -> bool:
             if not isinstance(item, Mapping):
                 return False
             names = (
+                "immediate_mean",
+                "successor_mean",
+                "immediate_centered_sum_square",
+                "successor_centered_sum_square",
+                "immediate_scale",
+                "successor_scale",
+                "pooled_scale",
                 "s_I",
                 "s_S",
                 "s_P",
@@ -1425,8 +1542,43 @@ def validate_conclusion_evidence(value: object) -> bool:
                 isinstance(item.get(name), bool)
                 or not isinstance(item.get(name), (int, float))
                 or not np.isfinite(float(item[name]))
-                or (name != "reference_credit_dot_product" and float(item[name]) < 0.0)
+                or (
+                    name
+                    not in (
+                        "immediate_mean",
+                        "successor_mean",
+                        "reference_credit_dot_product",
+                    )
+                    and float(item[name]) < 0.0
+                )
                 for name in names
+            ):
+                return False
+            row_count = item.get("normalization_row_count")
+            if (
+                isinstance(row_count, bool)
+                or row_count != NORMALIZATION_ROWS
+                or item.get("normalization_mask_digest")
+                != NORMALIZATION_MASK_DIGEST
+            ):
+                return False
+            immediate_sum = float(item["immediate_centered_sum_square"])
+            successor_sum = float(item["successor_centered_sum_square"])
+            if (
+                float(item["immediate_scale"])
+                != float(np.sqrt(immediate_sum / float(NORMALIZATION_ROWS)))
+                or float(item["successor_scale"])
+                != float(np.sqrt(successor_sum / float(NORMALIZATION_ROWS)))
+                or float(item["pooled_scale"])
+                != float(
+                    np.sqrt(
+                        (immediate_sum + successor_sum)
+                        / float(2 * NORMALIZATION_ROWS)
+                    )
+                )
+                or float(item["s_I"]) != float(item["immediate_scale"])
+                or float(item["s_S"]) != float(item["successor_scale"])
+                or float(item["s_P"]) != float(item["pooled_scale"])
             ):
                 return False
             maximum = max(float(item["s_I"]), float(item["s_S"]))
