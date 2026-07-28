@@ -3,6 +3,27 @@
 Rewritten 2026-07-27. Branch `untied-k`. Read `AGENTS.md` first, then
 `docs/project/CURRENT_WORK.md`, then this file.
 
+> ## DO NOT LAUNCH THE R4 POPULATION FROM THIS FILE (2026-07-28)
+>
+> The shard recipe below **cannot produce a conforming R4 artifact.** Step D
+> measured it: `--topology-seeds` earns no R4 contract/namespace identity, so
+> every per-topology shard runs under the legacy R3 seed namespace and pools into
+> an artifact self-labelled *not* R4 — which still prints the conclusion-bearing
+> `D7_S_EVENT_ALIGNED_BRANCH=` line on stdout. `r4_freshness_sentinel`, which
+> exists to refuse exactly that, is called by no production code.
+>
+> This file is also stale on its own terms: it still cites "16 under the
+> expansion set", and **R4 has no expansion set** (ledger `R4-002`, expansion =
+> NONE).
+>
+> The repair (`--population r4`, plus a pooler that requires and propagates the
+> identity fields and runs the sentinel on its own output) is in flight as step
+> D'. This file is rewritten to match once that lands and is re-reviewed.
+> Until then the R4 launch procedure here is **void**.
+>
+> Evidence:
+> `docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_R4_THE_PLANNED_PRODUCTION_ROUTE_CANNOT_PROVE_IT_IS_R4.md`
+
 **The previous version of this file described the ep64 persistence-margin job.
 That job is retired as causal evidence** (its environment was built fresh per
 arm and the construction-time worlds were never recorded, so the pairing cannot
