@@ -1,6 +1,6 @@
 # Exact allow-list for G45 disposition clarification
 
-The following paths are the complete allow-list. Read them at stage_commit=7c11225be48a8a3b53c9ea178f3d5b6abc99fe86 and no other repository paths:
+The following paths are the complete allow-list. Read them at stage_commit=1dc9810b797337e7d0ae0bbf557d419afed23446 and no other repository paths:
 
 - .agents/roles/EXTERNAL_PRO.md
 - docs/project/ALGORITHM_PRINCIPLES.md
