@@ -37,6 +37,43 @@ of the comparison came from the same code path.**
 A test claiming a guard protects `X` must carry a perturbation of `X` that
 drives the guard **red**. A positive assertion alone is not a guard.
 
+#### Ask what the suite actually executed
+
+A pass count reports the assertions that ran. It is silent about the production
+paths that never ran, and those are where the expensive defects live. Before
+accepting a claim-bearing diff:
+
+```powershell
+& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' `
+  .claude/skills/hmasd-acceptance-gate/scripts/check_test_reality.py --repo . `
+  --only <the module under audit>
+```
+
+Three findings, each invisible to a green suite:
+
+- **`STUB_ONLY`** — the suite patches this symbol everywhere and calls it nowhere,
+  so its real body never runs.
+- **`ENTRY_UNRUN`** — no test invokes this module's entry point, so every fixture
+  is hand-built and nothing asserts that the route a real run takes produces a
+  conforming artifact.
+- **`DEAD_PROD`** — defined and referenced nowhere in the source tree. A contract
+  clause that says "fail closed unless X" while X is called by no production code
+  has no executable closure.
+
+Run it against a clean export of the commit under review
+(`git archive HEAD scripts tests | tar -x -C <tmp>`), never a dirty tree — an
+in-flight edit reads as a defect.
+
+Written 2026-07-28. On the R4 instrument at 249 passing tests it independently
+reproduced two findings an adversarial reviewer had spent 27 minutes reaching:
+`compute_u_star_bootstrap` appeared only as the `monkeypatch.setattr` that
+replaces it, and `r4_freshness_sentinel` — the function whose whole purpose is
+refusing a non-conforming artifact — was called by no production path.
+
+Findings are evidence, not verdicts. A `DEAD_PROD` on a deliberately retained
+archival helper is correct output and a fine answer; an unexplained one on a
+function a frozen contract relies on is a blocking defect.
+
 - `assert f(x) == f(x)` may not stand alone. It needs `assert f(x) != f(x')`,
   and `x'` must be drawn from `X`'s **whole declared domain** — every field the
   digest enumerates, not the one the author had in mind.
