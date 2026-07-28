@@ -2960,6 +2960,16 @@ g46_formal_disposition_clarification_next_action=observe_only_recovery_of_same_s
 g46_formal_disposition_clarification_last_recovery=stale_tab_reacquired_with_new_registered_url_tab; prior_messages_readable_but_clarification_fence_absent
 g46_formal_disposition_clarification_duplicate_submission_risk=present
 
+## G46 clarification transport-control repair request (mechanically recorded)
+
+workflow_transport_repair_target=019f9d2f-e0ea-7411-9fd7-386f45f76909
+workflow_transport_repair_target_model=gpt-5.6-sol
+workflow_transport_repair_target_thinking=high
+workflow_transport_repair_status=WAITING_FOR_WORKFLOW_DESIGN_RETURN
+workflow_transport_repair_scope=same_submitted_clarification_turn_persistence_across_reload_and_reopen
+workflow_transport_repair_no_new_submission=true
+workflow_transport_repair_no_science_or_code=true
+
 ## Pointers
 
 - `AGENTS.md` and `.agents/roles/PROJECT_MANAGER.md` — authority.
