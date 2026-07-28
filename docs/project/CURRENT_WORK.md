@@ -149,6 +149,7 @@ review_transport=project_manager_direct
 autonomous_research_grant=ACTIVE_TWENTY_ITERATION_OVERNIGHT_GRANT_20260726
 overnight_session_grant=FULL_PERMISSION_TEN_ITERATIONS_20260727 (user, this session)
 workflow_round_grant=FULL_PERMISSION_TEN_WORKFLOW_ROUNDS_20260727B (user, this session, granted after the ten-iteration grant above was consumed)
+iteration_definition=one complete Pro-to-Pro loop (user ruling 2026-07-27): receive Pro's ruling, make the code decisions, implement, run the experiment, submit the result back to Pro. Nothing smaller is an iteration.
 d7s_compute_authorization=GRANTED_20260727 (tag d7s-audit-2 pushed under the earlier grant; formal compute for the ten rounds above is covered by workflow_round_grant)
 iterations_remaining=17
 conclusion_bearing_iterations_consumed=20
@@ -184,6 +185,15 @@ and it will be the audit result itself.
 `conclusion_bearing_iterations_consumed` counts the **lifetime** total, not
 consumption against the current grant — an exhausted-looking pair is not an
 exhausted grant.
+
+**A counting error, corrected 2026-07-27.** A session reported "ten iterations
+complete" for the span after the last Pro ruling landed at `343b757d`. Measured:
+23 commits, all guard sweeps, repairs, the audit run and its recording, with
+**zero Pro rounds** among them. Under `iteration_definition` above that span is
+**one** iteration, and it did not close until the result round was fenced at
+`76c1ce32`. The reports numbered 24–29 are the same confusion under another
+name — already labelled supporting work, but numbered as though they were
+iterations. Do not report a count of work cycles as a count of iterations.
 
 The workstation is shared with another research line. Check for foreign
 processes before any local run and never touch them. Routing rules:
