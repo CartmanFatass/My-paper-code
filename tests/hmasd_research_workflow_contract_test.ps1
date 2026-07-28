@@ -13,7 +13,8 @@ $skills = @(Get-ChildItem (Join-Path $repo '.claude/skills') -Directory -Filter 
 $expectedSkills = @(
     'hmasd-acceptance-gate',
     'hmasd-review-round',
-    'hmasd-task-design') | Sort-Object
+    'hmasd-task-design',
+    'hmasd-workflow-change-audit') | Sort-Object
 if (Compare-Object $expectedSkills $skills) {
     throw "Unexpected active Skill set: $($skills -join ',')"
 }
@@ -102,6 +103,9 @@ $skillFiles = @{
     'hmasd-acceptance-gate' = @('## Stage A and Stage B',
                                 'A guard test needs a paired negative',
                                 'Two samples cannot separate a cause')
+    'hmasd-workflow-change-audit' = @('the failure class this procedure exists to catch',
+                                'A guard that has never gone red is indistinguishable from a comment',
+                                'it produces an invention')
     'hmasd-review-round'    = @('Is a round warranted',
                                 'Route to code, not to prose',
                                 'Do not defend the framing')

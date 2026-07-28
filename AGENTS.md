@@ -12,6 +12,7 @@ moment arrives, so it costs nothing on the turns it does not apply to:
 | about to delegate a bounded task | `$hmasd-task-design` |
 | at a gate — accepting a diff, freezing a contract, reading a result | `$hmasd-acceptance-gate` |
 | opening or carrying an external review round | `$hmasd-review-round` |
+| about to change `CLAUDE.md`, `AGENTS.md`, an agent definition, a Skill or a contract test | `$hmasd-workflow-change-audit` |
 
 This file was 1059 lines on 2026-07-27 because everything got folded in on the
 reasoning that a shared document does not get loaded. That is true of a document
@@ -295,6 +296,7 @@ name sounds.
 | Apply exact, pre-decided text edits — renames, constants, docstrings, dead-branch deletion | `hmasd-patcher` | send it anything requiring a numerical or design decision |
 | Run an exact list of checks too long for one command | `hmasd-verifier` | use it as a default stage, or let it repair failures |
 | Adversarially audit a diff that changes claim-defining semantics | `hmasd-reviewer` | dispatch without naming, in writing, the wrong claim it could cause |
+| Ask whether a named test surface's guards can go red at all — paired-negative mutation sweep | `hmasd-guard-sweeper` | expect repairs; it diagnoses. Dispatch with `isolation: worktree` |
 | Execute one already-authorized train → evaluate → analyze run | `hmasd-experiment-operator` | let anything else run an experiment |
 | Inspect a running experiment once and refresh its `PROGRESS.md` | `hmasd-monitor` | expect it to watch until the run ends — **you** dispatch it again |
 | Inspect the external-review page once and describe it | `hmasd-review-monitor` | expect it to wait, pace itself, or report elapsed time — **you** own the pacing |
