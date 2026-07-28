@@ -226,6 +226,18 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
     assert record["order_swap_guard"]["passed"] is True
     for pass_record in record["pass_records"]:
         schedule = pass_record["channel_scale_schedule"]
+        normalization_by_arm = pass_record["normalization_by_arm"]
+        assert tuple(normalization_by_arm) == g44.ARMS
+        assert g44.validate_normalization_by_arm(normalization_by_arm)
+        for arm in g44.ARMS:
+            assert normalization_by_arm[arm]["arm"] == arm
+            assert g44.validate_normalization_statistics(
+                normalization_by_arm[arm]
+            )
+        assert all(
+            schedule[name] == normalization_by_arm[g44.INDEPENDENT_ARM][name]
+            for name in g44.NORMALIZATION_STATISTIC_FIELDS
+        )
         assert g44.validate_schedule_record(schedule)
         assert schedule["evidence_source_arm"] == g44.INDEPENDENT_ARM
         assert schedule["reference_pooled_counterfactual"] is True
@@ -265,6 +277,12 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
     assert g44.validate_conclusion_evidence(conclusion)
     assert conclusion["reference_pooled_counterfactual"] is True
     assert conclusion["pooled_arm_evidence_read_count"] == 0
+    assert conclusion["normalization_evidence_arms"] == list(g44.ARMS)
+    assert g44.validate_normalization_by_arm(
+        conclusion["replicate_rows"][0]["reconstructed_passes"][0][
+            "normalization_by_arm"
+        ]
+    )
     forged = copy.deepcopy(conclusion)
     forged["replicate_rows"][0]["reconstructed_passes"][0]["q_scale"] = 0.0
     forged["replicate_rows"][0]["strict_activation_observed"] = True
@@ -279,6 +297,38 @@ def test_first_update_is_exact_treatment_and_activation_reconstructs(
         "normalization_mask_digest"
     ] = "0" * 64
     assert not g44.validate_conclusion_evidence(forged_mask)
+    forged_pooled = copy.deepcopy(conclusion)
+    forged_pooled["replicate_rows"][0]["reconstructed_passes"][0][
+        "normalization_by_arm"
+    ][g44.POOLED_ARM]["normalization_mask_digest"] = "0" * 64
+    assert not g44.validate_conclusion_evidence(forged_pooled)
+    pooled_tamper = copy.deepcopy(record)
+    reference_schedule = copy.deepcopy(
+        pooled_tamper["pass_records"][0]["channel_scale_schedule"]
+    )
+    pooled_tamper["pass_records"][0]["normalization_by_arm"][
+        g44.POOLED_ARM
+    ]["normalization_mask_digest"] = "0" * 64
+    assert pooled_tamper["pass_records"][0]["channel_scale_schedule"] == (
+        reference_schedule
+    )
+    assert not g44._update_evidence_valid(pooled_tamper)
+    assert not g44.validate_conclusion_evidence(
+        g44.build_conclusion_evidence([pooled_tamper], formal=False)
+    )
+    with pytest.raises(ValueError, match="final checkpoint update evidence invalid"):
+        g44.build_final_checkpoint(
+            g44.POOLED_ARM,
+            models[g44.POOLED_ARM],
+            pooled_tamper,
+            conclusion,
+            formal=False,
+        )
+    route_tamper = copy.deepcopy(record)
+    route_tamper["pass_records"][0]["normalization_by_arm"][
+        g44.POOLED_ARM
+    ]["arm"] = g44.INDEPENDENT_ARM
+    assert not g44._update_evidence_valid(route_tamper)
     assert all(
         min(
             g44._optimizer_step_value(optimizers[arm], parameter)

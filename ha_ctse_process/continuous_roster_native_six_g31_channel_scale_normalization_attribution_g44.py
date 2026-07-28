@@ -401,6 +401,113 @@ def _normalization_statistics(
     }
 
 
+NORMALIZATION_STATISTIC_FIELDS = (
+    "immediate_mean",
+    "successor_mean",
+    "immediate_centered_sum_square",
+    "successor_centered_sum_square",
+    "immediate_scale",
+    "successor_scale",
+    "pooled_scale",
+    "normalization_row_count",
+    "normalization_mask_digest",
+)
+
+
+def validate_normalization_statistics(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    numeric_names = NORMALIZATION_STATISTIC_FIELDS[:-2]
+    if any(
+        isinstance(value.get(name), bool)
+        or not isinstance(value.get(name), (int, float))
+        or not np.isfinite(float(value[name]))
+        or (
+            name not in ("immediate_mean", "successor_mean")
+            and float(value[name]) < 0.0
+        )
+        for name in numeric_names
+    ):
+        return False
+    row_count = value.get("normalization_row_count")
+    if (
+        isinstance(row_count, bool)
+        or row_count != NORMALIZATION_ROWS
+        or value.get("normalization_mask_digest") != NORMALIZATION_MASK_DIGEST
+    ):
+        return False
+    immediate_sum = float(value["immediate_centered_sum_square"])
+    successor_sum = float(value["successor_centered_sum_square"])
+    return bool(
+        float(value["immediate_scale"])
+        == float(np.sqrt(immediate_sum / float(NORMALIZATION_ROWS)))
+        and float(value["successor_scale"])
+        == float(np.sqrt(successor_sum / float(NORMALIZATION_ROWS)))
+        and float(value["pooled_scale"])
+        == float(
+            np.sqrt(
+                (immediate_sum + successor_sum)
+                / float(2 * NORMALIZATION_ROWS)
+            )
+        )
+    )
+
+
+def _normalization_statistics_match(left: object, right: object) -> bool:
+    return bool(
+        validate_normalization_statistics(left)
+        and validate_normalization_statistics(right)
+        and isinstance(left, Mapping)
+        and isinstance(right, Mapping)
+        and all(left.get(name) == right.get(name) for name in NORMALIZATION_STATISTIC_FIELDS)
+    )
+
+
+def _normalization_evidence_by_arm(
+    normalizations: Mapping[str, ChannelNormalization],
+) -> dict[str, object]:
+    if tuple(normalizations) != ARMS:
+        raise G44GradientGateError(
+            "normalization_arm_inventory_mismatch",
+            {"observed_arms": list(normalizations)},
+        )
+    evidence: dict[str, object] = {
+        arm: {"arm": arm, **_normalization_statistics(normalizations[arm])}
+        for arm in ARMS
+    }
+    if not validate_normalization_by_arm(evidence):
+        raise G44GradientGateError("normalization_by_arm_invalid", evidence)
+    return evidence
+
+
+def validate_normalization_by_arm(value: object) -> bool:
+    if not isinstance(value, Mapping) or tuple(value) != ARMS:
+        return False
+    expected_keys = {"arm", *NORMALIZATION_STATISTIC_FIELDS}
+    return all(
+        isinstance(value.get(arm), Mapping)
+        and set(value[arm]) == expected_keys  # type: ignore[arg-type,index]
+        and value[arm].get("arm") == arm  # type: ignore[index]
+        and validate_normalization_statistics(value[arm])
+        for arm in ARMS
+    )
+
+
+def _canonical_normalization_by_arm(value: Mapping[str, object]) -> dict[str, object]:
+    if not validate_normalization_by_arm(value):
+        raise ValueError("G44 per-arm normalization evidence invalid")
+    return {
+        arm: {
+            "arm": arm,
+            **{
+                name: value[arm][name]  # type: ignore[index]
+                for name in NORMALIZATION_STATISTIC_FIELDS
+            },
+        }
+        for arm in ARMS
+    }
+
+
 def _schedule_record(
     normalization: ChannelNormalization,
     independent_credit: Sequence[torch.Tensor],
@@ -457,16 +564,13 @@ def _schedule_record(
 
 
 def validate_schedule_record(value: object) -> bool:
-    if not isinstance(value, Mapping) or value.get("passed") is not True:
+    if (
+        not isinstance(value, Mapping)
+        or value.get("passed") is not True
+        or not validate_normalization_statistics(value)
+    ):
         return False
     names = (
-        "immediate_mean",
-        "successor_mean",
-        "immediate_centered_sum_square",
-        "successor_centered_sum_square",
-        "immediate_scale",
-        "successor_scale",
-        "pooled_scale",
         "s_I",
         "s_S",
         "s_P",
@@ -481,38 +585,12 @@ def validate_schedule_record(value: object) -> bool:
         or not isinstance(value.get(name), (int, float))
         or not np.isfinite(float(value[name]))
         or (
-            name
-            not in (
-                "immediate_mean",
-                "successor_mean",
-                "reference_credit_dot_product",
-            )
+            name != "reference_credit_dot_product"
             and float(value[name]) < 0.0
         )
         for name in names
     ):
         return False
-    row_count = value.get("normalization_row_count")
-    if (
-        isinstance(row_count, bool)
-        or row_count != NORMALIZATION_ROWS
-        or value.get("normalization_mask_digest") != NORMALIZATION_MASK_DIGEST
-    ):
-        return False
-    immediate_sum = float(value["immediate_centered_sum_square"])
-    successor_sum = float(value["successor_centered_sum_square"])
-    expected_immediate_scale = float(
-        np.sqrt(immediate_sum / float(NORMALIZATION_ROWS))
-    )
-    expected_successor_scale = float(
-        np.sqrt(successor_sum / float(NORMALIZATION_ROWS))
-    )
-    expected_pooled_scale = float(
-        np.sqrt(
-            (immediate_sum + successor_sum)
-            / float(2 * NORMALIZATION_ROWS)
-        )
-    )
     maximum = max(float(value["s_I"]), float(value["s_S"]))
     q_scale = (
         abs(float(value["s_I"]) - float(value["s_S"])) / maximum
@@ -542,9 +620,6 @@ def validate_schedule_record(value: object) -> bool:
     return bool(
         float(value["q_scale"]) == q_scale
         and float(value["q_direction"]) == expected_direction
-        and float(value["immediate_scale"]) == expected_immediate_scale
-        and float(value["successor_scale"]) == expected_successor_scale
-        and float(value["pooled_scale"]) == expected_pooled_scale
         and float(value["s_I"]) == float(value["immediate_scale"])
         and float(value["s_S"]) == float(value["successor_scale"])
         and float(value["s_P"]) == float(value["pooled_scale"])
@@ -1112,6 +1187,7 @@ def optimize_channel_scale_update(
         for arm, trajectory in trajectory_map.items()
     }
     normalizations = {arm: normalize_credit_channels(credit) for arm, credit in credits.items()}
+    normalization_by_arm = _normalization_evidence_by_arm(normalizations)
     steps_before = {
         arm: min(
             _optimizer_step_value(optimizers[arm], parameter)
@@ -1155,6 +1231,9 @@ def optimize_channel_scale_update(
                 "composition": {
                     arm: plans[arm].composition_record for arm in ARMS
                 },
+                "normalization_by_arm": _canonical_normalization_by_arm(
+                    normalization_by_arm
+                ),
                 "channel_scale_schedule": schedule,
                 "policy_loss": {arm: metrics[arm][0] for arm in ARMS},
                 "immediate_baseline_loss": {
@@ -1230,6 +1309,15 @@ def optimize_channel_scale_update(
             )
             and validate_schedule_record(
                 pass_record["channel_scale_schedule"]  # type: ignore[index]
+            )
+            and validate_normalization_by_arm(
+                pass_record["normalization_by_arm"]  # type: ignore[index]
+            )
+            and _normalization_statistics_match(
+                pass_record["channel_scale_schedule"],  # type: ignore[index]
+                pass_record["normalization_by_arm"][  # type: ignore[index]
+                    INDEPENDENT_ARM
+                ],
             )
             for pass_record in pass_records
         )
@@ -1319,6 +1407,7 @@ def _update_evidence_valid(value: object) -> bool:
             return False
         evidence = record.get("gradient_evidence")
         composition = record.get("composition")
+        normalization_by_arm = record.get("normalization_by_arm")
         if (
             not isinstance(evidence, Mapping)
             or tuple(evidence) != ARMS
@@ -1329,7 +1418,13 @@ def _update_evidence_valid(value: object) -> bool:
             or not isinstance(composition, Mapping)
             or tuple(composition) != ARMS
             or any(not _valid_composition(composition.get(arm), arm) for arm in ARMS)
+            or not validate_normalization_by_arm(normalization_by_arm)
             or not validate_schedule_record(record.get("channel_scale_schedule"))
+            or not isinstance(normalization_by_arm, Mapping)
+            or not _normalization_statistics_match(
+                record.get("channel_scale_schedule"),
+                normalization_by_arm.get(INDEPENDENT_ARM),
+            )
         ):
             return False
     if value.get("update_index") == 0:
@@ -1366,6 +1461,9 @@ def build_conclusion_evidence(
         rows_by_replicate.setdefault(replicate, [])
         for pass_record in record["pass_records"]:  # type: ignore[index]
             schedule = pass_record["channel_scale_schedule"]
+            normalization_by_arm = _canonical_normalization_by_arm(
+                pass_record["normalization_by_arm"]
+            )
             maximum = max(float(schedule["s_I"]), float(schedule["s_S"]))
             q_scale = (
                 abs(float(schedule["s_I"]) - float(schedule["s_S"])) / maximum
@@ -1402,6 +1500,7 @@ def build_conclusion_evidence(
                 records_valid = False
             rows_by_replicate[replicate].append(
                 {
+                    "normalization_by_arm": normalization_by_arm,
                     "immediate_mean": float(schedule["immediate_mean"]),
                     "successor_mean": float(schedule["successor_mean"]),
                     "immediate_centered_sum_square": float(
@@ -1465,6 +1564,7 @@ def build_conclusion_evidence(
             "q_scale>1e-6_and_q_direction>1e-6_and_both_credit_norms_positive"
         ),
         "evidence_source_arm": INDEPENDENT_ARM,
+        "normalization_evidence_arms": list(ARMS),
         "reference_pooled_counterfactual": True,
         "pooled_arm_evidence_read_count": 0,
         "reconstructed_from_all_update_records": True,
@@ -1493,6 +1593,7 @@ def validate_conclusion_evidence(value: object) -> bool:
         or not rows
         or value.get("activation_threshold") != ACTIVATION_TOLERANCE
         or value.get("evidence_source_arm") != INDEPENDENT_ARM
+        or value.get("normalization_evidence_arms") != list(ARMS)
         or value.get("reference_pooled_counterfactual") is not True
         or value.get("pooled_arm_evidence_read_count") != 0
         or value.get("reconstructed_from_all_update_records") is not True
@@ -1520,6 +1621,15 @@ def validate_conclusion_evidence(value: object) -> bool:
         active = False
         for item in passes:
             if not isinstance(item, Mapping):
+                return False
+            normalization_by_arm = item.get("normalization_by_arm")
+            if (
+                not validate_normalization_by_arm(normalization_by_arm)
+                or not isinstance(normalization_by_arm, Mapping)
+                or not _normalization_statistics_match(
+                    item, normalization_by_arm.get(INDEPENDENT_ARM)
+                )
+            ):
                 return False
             names = (
                 "immediate_mean",
@@ -1660,6 +1770,7 @@ def build_final_checkpoint(
         ),
         "accepted_g41_source_commit": ACCEPTED_G41_SOURCE_COMMIT,
         "accepted_g43_source_commit": ACCEPTED_G43_SOURCE_COMMIT,
+        "normalization_evidence_arms": list(ARMS),
         "actor_head_optimizer_steps": PPO_PASSES,
         "standalone_slow_present": False,
         "standalone_slow_critic_present": False,

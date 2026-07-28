@@ -455,6 +455,63 @@ def test_artifact_roundtrip_final_only_and_schedule_tamper_rejected(
         assert "G44 update evidence mismatch" in runner._training_errors(
             tmp_path, tampered_mask
         )
+        pooled_tamper = copy.deepcopy(manifest)
+        reference_schedule = copy.deepcopy(
+            pooled_tamper["replicate_results"][0]["update_records"][0][
+                "pass_records"
+            ][0]["channel_scale_schedule"]
+        )
+        pooled_tamper["replicate_results"][0]["update_records"][0][
+            "pass_records"
+        ][0]["normalization_by_arm"][g44.POOLED_ARM][
+            "normalization_mask_digest"
+        ] = "0" * 64
+        assert pooled_tamper["replicate_results"][0]["update_records"][0][
+            "pass_records"
+        ][0]["channel_scale_schedule"] == reference_schedule
+        assert "G44 update evidence mismatch" in runner._training_errors(
+            tmp_path, pooled_tamper
+        )
+        route_tamper = copy.deepcopy(manifest)
+        route_tamper["replicate_results"][0]["update_records"][0][
+            "pass_records"
+        ][0]["normalization_by_arm"][g44.POOLED_ARM]["arm"] = (
+            g44.INDEPENDENT_ARM
+        )
+        assert "G44 update evidence mismatch" in runner._training_errors(
+            tmp_path, route_tamper
+        )
+        conclusion_tamper = copy.deepcopy(manifest)
+        conclusion_tamper["conclusion_evidence"]["replicate_rows"][0][
+            "reconstructed_passes"
+        ][0]["normalization_by_arm"][g44.POOLED_ARM][
+            "normalization_mask_digest"
+        ] = "0" * 64
+        assert "G44 conclusion treatment-activation evidence mismatch" in (
+            runner._training_errors(tmp_path, conclusion_tamper)
+        )
+        checkpoint_tamper = copy.deepcopy(manifest)
+        arm = g44.POOLED_ARM
+        reference = checkpoint_tamper["replicate_results"][0]["arms"][arm][
+            "final_checkpoint"
+        ]
+        checkpoint_path = tmp_path / reference
+        payload = torch.load(
+            checkpoint_path, map_location="cpu", weights_only=False
+        )
+        payload["source_final_checkpoint_certificate"][
+            "final_update_evidence"
+        ]["pass_records"][0]["normalization_by_arm"][arm][
+            "normalization_mask_digest"
+        ] = "0" * 64
+        torch.save(payload, checkpoint_path)
+        checkpoint_tamper["replicate_results"][0]["arms"][arm][
+            "final_checkpoint_file_digest"
+        ] = runner._artifact_digest(checkpoint_path)
+        assert (
+            "G44 accepted-source checkpoint normalization evidence mismatch"
+            in runner._training_errors(tmp_path, checkpoint_tamper)
+        )
         extra = tmp_path / "checkpoints" / "replicate_0_intermediate.pt"
         extra.touch()
         assert "G44 checkpoint inventory is not final-only" in runner._training_errors(

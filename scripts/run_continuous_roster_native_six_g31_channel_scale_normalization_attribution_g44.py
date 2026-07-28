@@ -143,6 +143,7 @@ _original_evaluation_cell_worker = _backend._evaluation_cell_worker
 _original_cpu_parallel_benchmark_worker = _backend._cpu_parallel_benchmark_worker
 _original_training_errors = _backend._training_errors
 _original_evaluation_errors = _backend._evaluation_errors
+_original_load_checkpoint_payload = _backend._load_checkpoint_payload
 
 
 def _activate_single_thread_worker() -> None:
@@ -319,6 +320,49 @@ def prove_two_process_update_equivalence(
 
 def _g44_error_text(value: object) -> str:
     return str(value).replace("G43", "G44")
+
+
+def _load_checkpoint_payload(
+    path: Path,
+    *,
+    training: Mapping[str, Any],
+    replicate: int,
+    arm: str,
+) -> Mapping[str, Any]:
+    payload = _original_load_checkpoint_payload(
+        path,
+        training=training,
+        replicate=replicate,
+        arm=arm,
+    )
+    certificate = payload.get("source_final_checkpoint_certificate")
+    try:
+        records = training["replicate_results"][replicate]["update_records"]
+        final_update = records[-1]
+        conclusion = training["conclusion_evidence"]
+    except (IndexError, KeyError, TypeError) as error:
+        raise ValueError(
+            "G44 accepted-source checkpoint normalization evidence mismatch"
+        ) from error
+    if (
+        not isinstance(certificate, Mapping)
+        or certificate.get("normalization_evidence_arms") != list(source.ARMS)
+        or not source._update_evidence_valid(
+            certificate.get("final_update_evidence")
+        )
+        or certificate.get("final_update_evidence") != final_update
+        or not source.validate_conclusion_evidence(
+            certificate.get("conclusion_evidence")
+        )
+        or certificate.get("conclusion_evidence") != conclusion
+    ):
+        raise ValueError(
+            "G44 accepted-source checkpoint normalization evidence mismatch"
+        )
+    return payload
+
+
+_backend._load_checkpoint_payload = _load_checkpoint_payload
 
 
 def _training_errors(
