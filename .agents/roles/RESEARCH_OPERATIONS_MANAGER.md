@@ -22,6 +22,13 @@ review_fence_stage_commit=full_40_hex_only
 review_fence_prefix_correction=once_same_conversation_before_assistant_response
 review_fence_correction_question_resubmission=forbidden
 review_fence_monitor_concurrency=one_live
+review_assignment_acceptance=server_visible_exact_fence_only
+review_client_send_effect=uncommitted_until_server_visible
+review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay
+review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence
+review_unpersisted_assignment_recovery_prior_server_visible_count=zero
+review_unpersisted_assignment_recovery_client_send_limit=2_assignment_sends_total
+review_unpersisted_assignment_recovery_scientific_iteration_cost=zero
 review_response_retry=once_same_conversation_after_terminal_attempt
 review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery
 review_response_retry_requires_server_visible_original_fence=true
@@ -80,6 +87,9 @@ technical acceptance, and Workflow Design Manager owns workflow design.
   External Pro conversation. After reload, re-establish the registered
   conversation identity and visible message state before continuing. Reloading
   never proves a freshness fence absent and never authorizes submission.
+- Acceptance of an Assignment only after its complete rendered identity is
+  server-visible. A client send action or cleared composer remains an
+  `UNPERSISTED_CLIENT_SEND` until that observation succeeds.
 - Direct Git integration for review packages, runtime evidence, reports,
   `CURRENT_WORK.md` and exact mechanical recording of an External-Pro disposition
   or portfolio delta.
@@ -121,6 +131,19 @@ an assistant response exists, `$hmasd-review-round` may replace it once with a
 mechanically rendered full-hash correction that contains no scientific question
 body and changes no allow-list or scientific instruction. It grants no
 scientific interpretation or code acceptance.
+
+An `UNPERSISTED_CLIENT_SEND` permits one exact Assignment replay only when the
+same registered conversation is readable, exactly one client send occurred,
+both the post-reload history and one fresh exact-URL reopen show zero full or
+prefix matching fences and zero corresponding assistant responses, and no
+sentinel, monitor, prefix correction, response retry or earlier persistence
+recovery exists. The replay is byte-for-byte renderer output with the unchanged
+question path, allow-list authority, stage commit and instruction. It is the
+second and final client send but can become only the first server-visible
+Assignment. Establish a sentinel and monitor only after exactly one complete
+fence becomes visible. A second missing fence, duplicate fence or identity
+mismatch ends in `REVIEW_TRANSPORT_BLOCKED`; no further Assignment send is
+permitted. This operational recovery consumes zero scientific iterations.
 
 After the first monitor and sentinel are terminal and no generation remains
 live, the same registered conversation permits one mechanically rendered

@@ -68,7 +68,8 @@ visible or the page title looks familiar.
 | State | Required observation | Mechanical action | Exit condition |
 |---|---|---|---|
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page is observably stuck, wait once, take a fresh snapshot, then reload the same tab once for that stuck episode. | URL contains the registered ID and visible conversation messages are readable. |
-| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, the full 40-character `stage_commit`, `question` and instruction against renderer output. Resume an exact match. Submit once only after readable history proves it absent. | One accepted visible full-hash fence exists, or the single prefix-only correction condition is established. |
+| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, the full 40-character `stage_commit`, `question` and instruction against renderer output. Resume an exact match. Submit once only after readable history proves it absent. | One accepted visible full-hash fence exists, the single prefix-only correction condition is established, or one uncommitted client send requires the persistence check. |
+| `RECOVER_UNPERSISTED_ASSIGNMENT` | Exactly one client send occurred but no matching fence became server-visible; the post-reload history and one fresh exact-URL reopen of the same readable registered conversation both show zero full or prefix matching fences and zero corresponding assistant responses; no sentinel, monitor or prior recovery exists | Classify the action as `UNPERSISTED_CLIENT_SEND`, render the unchanged Assignment again, and replay those exact bytes once. Do not add text or use another recovery mode. | Exactly one complete fence is visible and may initialize the sentinel, or transport terminates as `REVIEW_TRANSPORT_BLOCKED` with no further Assignment send. |
 | `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose fence identity exactly matches the initialized sentinel. |
 | `RETRY_RESPONSE_CONTRACT` | The original full-hash fence is server-visible, attempt 1 is terminal with no live monitor or sentinel, no retry exists, and either a stable answer mechanically omits question-declared response items or recovery is exhausted without a complete answer | Render `ResponseRetry`, require the original Assignment as its exact prefix, submit it once in the same registered conversation, then bind one fresh sentinel and replacement monitor to the complete attempt-2 text. | Attempt 2 produces a mechanically format-complete stable answer, or terminates as `REVIEW_TRANSPORT_BLOCKED` with no third submission. |
@@ -113,6 +114,45 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
   fence once and require the visible user turn to match all identity fields.
 - If presence or absence cannot be established, recover the same conversation;
   uncertainty never authorizes submission.
+
+### One unpersisted-assignment recovery
+
+An Assignment is accepted only after its complete rendered identity is
+server-visible. Clicking send, clearing the composer, receiving a client-side
+acknowledgement or observing a transient placeholder does not increment the
+server-visible submission count. Record such an action as
+`UNPERSISTED_CLIENT_SEND` while its fence remains absent.
+
+Replay is permitted once only when all of the following are mechanically true:
+
+- the same registered conversation is readable and its URL identity is exact;
+- exactly one client send action was recorded for this Assignment;
+- the readable post-reload history and one fresh exact-URL reopen both show
+  zero complete matching fences, zero matching strict-prefix fences and zero
+  assistant responses attributable to this Assignment;
+- no sentinel or monitor was initialized, and no prefix correction, response
+  retry or unpersisted-assignment recovery exists; and
+- the round, 40-character `stage_commit`, question path, repository, branch and
+  instruction still equal the pushed package and renderer output.
+
+A same-tab reload alone is insufficient. The replay predicate requires both
+server-readable observations and every conjunct above; ordinary visibility
+uncertainty remains ineligible.
+
+Render `Assignment` again with the unchanged inputs and require the replay text
+to equal the first rendered Assignment byte-for-byte. Send those bytes once in
+the same registered conversation without an added explanation, scientific
+question body, evidence, instruction or recovery marker. This is the second and
+last client send but, because the prior server-visible count is zero, it may
+create only the first accepted Assignment. It is not a `FullHashCorrection`,
+`ResponseRetry`, UI `Retry` or new scientific assignment.
+
+After replay, initialize the sentinel and monitor only when a fresh readable
+snapshot shows exactly one complete matching fence. If no fence becomes
+visible, if two matching fences become visible, if a delayed earlier message
+appears, or if any identity differs, terminate as `REVIEW_TRANSPORT_BLOCKED`.
+Never send a third Assignment client attempt. This recovery changes no review
+input or authority and consumes zero scientific iterations.
 
 ### Full-hash prefix correction
 
@@ -405,11 +445,13 @@ action=<diagnostic or recovery action>
 outcome=<observed result>
 ```
 
-Before the first Assignment submission, prove the matching fence absent. After
-submission, the only identity changes are the once-only prefix correction under
-its complete eligibility predicate and the once-only response retry under its
-separate server-persistence and terminal-attempt predicate. Neither uncertainty
-nor a missing client-visible message authorizes resubmission. Report
+Before the first Assignment client send, prove the matching fence absent. A
+client action remains uncommitted until its exact fence is server-visible; the
+single exact replay above is the only recovery for a mechanically established
+`UNPERSISTED_CLIENT_SEND`. After a server-visible fence record exists, only the
+once-only prefix correction or response retry may follow, each under its own
+complete eligibility predicate. Neither uncertainty nor one missing
+client-visible observation authorizes replay or resubmission. Report
 `REVIEW_TRANSPORT_BLOCKED` only after all safe in-scope recovery is exhausted;
 include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.

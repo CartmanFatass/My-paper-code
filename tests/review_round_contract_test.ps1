@@ -46,6 +46,7 @@ foreach ($required in @(
     'timer loop or emit pending progress messages',
     '$browser:control-in-app-browser',
     'VERIFY_FRESHNESS_FENCE',
+    'RECOVER_UNPERSISTED_ASSIGNMENT',
     'CORRECT_PREFIX_FENCE',
     'RETRY_RESPONSE_CONTRACT',
     'render_review_fence.ps1',
@@ -61,6 +62,12 @@ foreach ($required in @(
     'submission_attempt=2',
     'supersedes_submission_attempt=1',
     'server-visible',
+    'UNPERSISTED_CLIENT_SEND',
+    'one fresh exact-URL reopen',
+    'zero complete matching fences',
+    'A same-tab reload alone is insufficient',
+    'equal the first rendered Assignment byte-for-byte',
+    'Never send a third Assignment client attempt',
     'never submit attempt 3',
     'same tab once for that stuck episode',
     'Reloading never proves the matching fence absent and never authorizes submission',
@@ -119,6 +126,13 @@ foreach ($required in @(
     'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
     'review_fence_correction_question_resubmission=forbidden',
     'review_fence_monitor_concurrency=one_live',
+    'review_assignment_acceptance=server_visible_exact_fence_only',
+    'review_client_send_effect=uncommitted_until_server_visible',
+    'review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay',
+    'review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence',
+    'review_unpersisted_assignment_recovery_prior_server_visible_count=zero',
+    'review_unpersisted_assignment_recovery_client_send_limit=2_assignment_sends_total',
+    'review_unpersisted_assignment_recovery_scientific_iteration_cost=zero',
     'review_response_retry=once_same_conversation_after_terminal_attempt',
     'review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery',
     'review_response_retry_requires_server_visible_original_fence=true',
@@ -138,6 +152,8 @@ foreach ($required in @(
     'hmasd-pro-response-monitor',
     'exact 40-character stage commit',
     'strict stage-commit prefix',
+    'UNPERSISTED_CLIENT_SEND',
+    'one byte-exact Assignment replay',
     'without resubmitting the scientific question',
     'one ResponseRetry',
     'uncertain persistence is ineligible',
@@ -175,6 +191,15 @@ $expectedAssignment = @(
 ) -join "`n"
 if ($assignment -cne $expectedAssignment) {
     throw 'Assignment renderer did not preserve the exact full-hash identity'
+}
+
+$assignmentReplay = (& $renderer `
+    -Mode Assignment `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question) -replace "`r`n", "`n"
+if ($assignmentReplay -cne $assignment) {
+    throw 'Unpersisted Assignment replay was not byte-exact renderer output'
 }
 
 $responseRetry = (& $renderer `
