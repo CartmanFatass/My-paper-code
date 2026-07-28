@@ -216,6 +216,22 @@ def test_readiness_rejects_residual_route_and_checkpoint_tampering(
     ][source.BASELINE_SHADOW_NO_READ_ARM]["actual_residual_baseline_read_count"] = 1
     assert runner.readiness_training_errors(root, tampered)
 
+    baseline_gradient_tampered = copy.deepcopy(training)
+    baseline_gradient_tampered["update_evidence"]["pass_records"][0][
+        "gradient_evidence"
+    ][source.BASELINE_READ_ARM]["baseline_gradient_groups"][
+        "shared_trunk_union_gradient_norm"
+    ] = 0.0
+    assert runner.readiness_training_errors(root, baseline_gradient_tampered)
+
+    baseline_conclusion_tampered = copy.deepcopy(training)
+    baseline_conclusion_tampered["proof_activation_evidence"]["replicate_rows"][0][
+        "reconstructed_passes"
+    ][0]["baseline_gradient_groups_by_arm"][source.BASELINE_READ_ARM][
+        "immediate_output_row_gradient_norm"
+    ] = 0.0
+    assert runner.readiness_training_errors(root, baseline_conclusion_tampered)
+
     seed_tampered = copy.deepcopy(training)
     seed_tampered["source_controls"]["seed_bases"]["branch_ledger"] += 1
     assert runner.readiness_training_errors(root, seed_tampered)
@@ -236,6 +252,65 @@ def test_readiness_rejects_residual_route_and_checkpoint_tampering(
             )
     finally:
         checkpoint.write_bytes(before)
+
+
+def test_production_checkpoint_reload_revalidates_baseline_gradient_groups(
+    readiness_bundle: tuple[
+        Path, dict[str, object], dict[str, object], dict[str, object]
+    ],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _, training, _, _ = readiness_bundle
+    final_update = training["update_evidence"]
+    conclusion = training["proof_activation_evidence"]
+    certificate = {
+        "residual_evidence_arms": list(source.ARMS),
+        "final_update_evidence": final_update,
+        "conclusion_evidence": conclusion,
+        "baseline_gradient_groups_by_arm": (
+            source._baseline_gradient_groups_from_pass(
+                final_update["pass_records"][-1]
+            )
+        ),
+        "no_read_certificate": final_update["pass_records"][-1]["composition"][
+            source.BASELINE_SHADOW_NO_READ_ARM
+        ],
+        "baseline_checkpoint_selection_read_count": 0,
+        "baseline_evaluation_metric_read_count": 0,
+    }
+    production_training = {
+        "replicate_results": [{"update_records": [final_update]}],
+        "conclusion_evidence": conclusion,
+    }
+    payload = {"source_final_checkpoint_certificate": certificate}
+    monkeypatch.setattr(
+        runner._base,
+        "_original_load_checkpoint_payload",
+        lambda *args, **kwargs: payload,
+    )
+    assert runner._load_checkpoint_payload(
+        Path("unused.pt"),
+        training=production_training,
+        replicate=0,
+        arm=source.BASELINE_READ_ARM,
+    ) is payload
+
+    tampered = copy.deepcopy(payload)
+    tampered["source_final_checkpoint_certificate"][
+        "baseline_gradient_groups_by_arm"
+    ][source.BASELINE_READ_ARM]["shared_trunk_union_gradient_norm"] = 0.0
+    monkeypatch.setattr(
+        runner._base,
+        "_original_load_checkpoint_payload",
+        lambda *args, **kwargs: tampered,
+    )
+    with pytest.raises(ValueError, match="checkpoint evidence mismatch"):
+        runner._load_checkpoint_payload(
+            Path("unused.pt"),
+            training=production_training,
+            replicate=0,
+            arm=source.BASELINE_READ_ARM,
+        )
 
 
 def test_thread_environment_is_hard_bound_before_compute() -> None:

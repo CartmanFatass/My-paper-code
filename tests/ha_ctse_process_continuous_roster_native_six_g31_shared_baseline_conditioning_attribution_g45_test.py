@@ -86,6 +86,36 @@ def _project_update(
     return models, optimizers, record
 
 
+def _synthetic_baseline_gradient_rows(
+    model: g41.G41NoSlowProjection,
+    *,
+    trunk_live: bool,
+    immediate_output_live: bool,
+    successor_output_live: bool,
+) -> tuple[tuple[torch.Tensor, ...], tuple[torch.Tensor, ...]]:
+    immediate: list[torch.Tensor] = []
+    successor: list[torch.Tensor] = []
+    for name, parameter in model.credit_baselines.named_parameters():
+        immediate_row = torch.zeros_like(parameter)
+        successor_row = torch.zeros_like(parameter)
+        if name in ("0.weight", "0.bias") and trunk_live:
+            immediate_row.fill_(1.0)
+            successor_row.fill_(1.0)
+        elif name == "2.weight":
+            if immediate_output_live:
+                immediate_row[0].fill_(1.0)
+            if successor_output_live:
+                successor_row[1].fill_(1.0)
+        elif name == "2.bias":
+            if immediate_output_live:
+                immediate_row[0] = 1.0
+            if successor_output_live:
+                successor_row[1] = 1.0
+        immediate.append(immediate_row)
+        successor.append(successor_row)
+    return tuple(immediate), tuple(successor)
+
+
 def test_projection_preserves_g44_chain_and_disjoint_retained_state(
     accepted_anchor_batch: tuple[
         g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
@@ -205,6 +235,15 @@ def test_first_update_binds_both_residual_laws_and_activation(
     assert record["first_paired_direct_treatment_audit"]["passed"] is True
     assert record["order_swap_guard"]["passed"] is True
     for pass_record in record["pass_records"]:
+        assert set(pass_record["gradient_evidence"]) == set(g45.ARMS)
+        for arm in g45.ARMS:
+            gradients = pass_record["gradient_evidence"][arm]
+            assert g45.validate_registered_gradient_evidence(gradients)
+            groups = gradients["baseline_gradient_groups"]
+            assert g45.validate_baseline_gradient_group_evidence(groups)
+            assert groups["immediate_output_row_gradient_norm"] > 1e-12
+            assert groups["successor_output_row_gradient_norm"] > 1e-12
+            assert groups["shared_trunk_union_gradient_norm"] > 1e-12
         assert tuple(pass_record["residual_evidence_by_arm"]) == g45.ARMS
         read = pass_record["residual_evidence_by_arm"][g45.BASELINE_READ_ARM]
         no_read = pass_record["residual_evidence_by_arm"][
@@ -241,6 +280,11 @@ def test_first_update_binds_both_residual_laws_and_activation(
         assert activation["strict_activation_observed"] is True
     conclusion = g45.build_conclusion_evidence([record], formal=False)
     assert g45.validate_conclusion_evidence(conclusion)
+    assert g45.validate_baseline_gradient_groups_by_arm(
+        conclusion["replicate_rows"][0]["reconstructed_passes"][0][
+            "baseline_gradient_groups_by_arm"
+        ]
+    )
     assert len(g45.serialize_diagnostics(record)) > 1_000
     checkpoint = g45.build_final_checkpoint(
         g45.BASELINE_READ_ARM,
@@ -252,6 +296,9 @@ def test_first_update_binds_both_residual_laws_and_activation(
     assert checkpoint["kind"] == "final_only"
     assert checkpoint["baseline_checkpoint_selection_read_count"] == 0
     assert checkpoint["baseline_evaluation_metric_read_count"] == 0
+    assert g45.validate_baseline_gradient_groups_by_arm(
+        checkpoint["baseline_gradient_groups_by_arm"]
+    )
     assert checkpoint["standalone_slow_present"] is False
     assert all(
         min(
@@ -290,6 +337,12 @@ def test_residual_shadow_and_activation_tampering_fails_closed(
     ]["normalization_recomputed_between_passes"] = True
     assert not g45._update_evidence_valid(stale)
 
+    dead_trunk_evidence = copy.deepcopy(record)
+    dead_trunk_evidence["pass_records"][0]["gradient_evidence"][
+        g45.BASELINE_READ_ARM
+    ]["baseline_gradient_groups"]["shared_trunk_union_gradient_norm"] = 0.0
+    assert not g45._update_evidence_valid(dead_trunk_evidence)
+
     forged = copy.deepcopy(conclusion)
     row = forged["replicate_rows"][0]["reconstructed_passes"][0]
     row["reference_credit_dot_product"] = (
@@ -299,6 +352,14 @@ def test_residual_shadow_and_activation_tampering_fails_closed(
     row["q_direction"] = 0.0
     row["active"] = True
     assert not g45.validate_conclusion_evidence(forged)
+
+    dead_conclusion_group = copy.deepcopy(conclusion)
+    dead_conclusion_group["replicate_rows"][0]["reconstructed_passes"][0][
+        "baseline_gradient_groups_by_arm"
+    ][g45.BASELINE_SHADOW_NO_READ_ARM][
+        "successor_output_row_gradient_norm"
+    ] = 0.0
+    assert not g45.validate_conclusion_evidence(dead_conclusion_group)
 
     with pytest.raises(ValueError, match="update evidence invalid"):
         g45.build_final_checkpoint(
@@ -356,17 +417,64 @@ def test_dead_actor_or_baseline_group_and_wrong_arm_inventory_fail_closed(
     live_actor = tuple(torch.ones_like(parameter) for parameter in actor)
     dead_actor = tuple(torch.zeros_like(parameter) for parameter in actor)
     live_baseline = tuple(torch.ones_like(parameter) for parameter in baseline)
-    dead_baseline = tuple(torch.zeros_like(parameter) for parameter in baseline)
-    assert not g45.g43.validate_registered_gradient_evidence(
-        g45.g43.registered_gradient_evidence(
+    assert not g45.validate_registered_gradient_evidence(
+        g45.registered_gradient_evidence(
             model, dead_actor, live_actor, live_baseline, live_baseline
         )
     )
-    assert not g45.g43.validate_registered_gradient_evidence(
-        g45.g43.registered_gradient_evidence(
-            model, live_actor, live_actor, dead_baseline, live_baseline
-        )
+    dead_trunk, dead_trunk_successor = _synthetic_baseline_gradient_rows(
+        model,
+        trunk_live=False,
+        immediate_output_live=True,
+        successor_output_live=True,
     )
+    inherited_dead_trunk = g45.g43.registered_gradient_evidence(
+        model,
+        live_actor,
+        live_actor,
+        dead_trunk,
+        dead_trunk_successor,
+    )
+    assert g45.g43.validate_registered_gradient_evidence(inherited_dead_trunk)
+    dead_trunk_evidence = g45.registered_gradient_evidence(
+        model,
+        live_actor,
+        live_actor,
+        dead_trunk,
+        dead_trunk_successor,
+    )
+    assert dead_trunk_evidence["baseline_gradient_groups"][
+        "shared_trunk_union_gradient_norm"
+    ] == 0.0
+    assert not g45.validate_registered_gradient_evidence(dead_trunk_evidence)
+
+    for immediate_live, successor_live, missing_field in (
+        (False, True, "immediate_output_row_gradient_norm"),
+        (True, False, "successor_output_row_gradient_norm"),
+    ):
+        immediate_rows, successor_rows = _synthetic_baseline_gradient_rows(
+            model,
+            trunk_live=True,
+            immediate_output_live=immediate_live,
+            successor_output_live=successor_live,
+        )
+        inherited = g45.g43.registered_gradient_evidence(
+            model,
+            live_actor,
+            live_actor,
+            immediate_rows,
+            successor_rows,
+        )
+        assert g45.g43.validate_registered_gradient_evidence(inherited)
+        grouped = g45.registered_gradient_evidence(
+            model,
+            live_actor,
+            live_actor,
+            immediate_rows,
+            successor_rows,
+        )
+        assert grouped["baseline_gradient_groups"][missing_field] == 0.0
+        assert not g45.validate_registered_gradient_evidence(grouped)
     for item in models.values():
         item.begin_credit_branch_phase()
     optimizers = {

@@ -60,6 +60,28 @@ MAX_CONFORMANCE_TRANSITIONS = NUM_ENVS * HORIZON
 NORMALIZATION_ROWS = MAX_CONFORMANCE_TRANSITIONS
 NORMALIZATION_MASK_DIGEST = g44.NORMALIZATION_MASK_DIGEST
 GRADIENT_LIVE_TOLERANCE = g40.GRADIENT_LIVE_TOLERANCE
+BASELINE_PARAMETER_NAMES = (
+    "credit_baselines.0.weight",
+    "credit_baselines.0.bias",
+    "credit_baselines.2.weight",
+    "credit_baselines.2.bias",
+)
+BASELINE_GRADIENT_GROUP_RECONSTRUCTION = {
+    "immediate_output_row": [
+        "immediate_loss:credit_baselines.2.weight[0]",
+        "immediate_loss:credit_baselines.2.bias[0]",
+    ],
+    "successor_output_row": [
+        "successor_loss:credit_baselines.2.weight[1]",
+        "successor_loss:credit_baselines.2.bias[1]",
+    ],
+    "shared_trunk_union": [
+        "immediate_loss:credit_baselines.0.weight",
+        "immediate_loss:credit_baselines.0.bias",
+        "successor_loss:credit_baselines.0.weight",
+        "successor_loss:credit_baselines.0.bias",
+    ],
+}
 SCALE_MATCH_ATOL = 1e-8
 SCALE_MATCH_RTOL = 1e-6
 ACTIVATION_TOLERANCE = 1e-6
@@ -124,6 +146,156 @@ def _gradient_rows(
 
 def _global_norm(rows: Sequence[torch.Tensor]) -> float:
     return g43._global_norm(rows)
+
+
+def validate_baseline_gradient_group_evidence(value: object) -> bool:
+    if not isinstance(value, Mapping):
+        return False
+    expected_keys = {
+        "parameter_inventory",
+        "group_reconstruction",
+        "immediate_output_row_gradient_norm",
+        "successor_output_row_gradient_norm",
+        "shared_trunk_union_gradient_norm",
+        "all_group_gradients_finite",
+        "gradient_live_tolerance",
+        "passed",
+    }
+    if (
+        set(value) != expected_keys
+        or value.get("parameter_inventory") != list(BASELINE_PARAMETER_NAMES)
+        or value.get("group_reconstruction")
+        != BASELINE_GRADIENT_GROUP_RECONSTRUCTION
+        or value.get("all_group_gradients_finite") is not True
+        or value.get("gradient_live_tolerance") != GRADIENT_LIVE_TOLERANCE
+    ):
+        return False
+    norms = (
+        value.get("immediate_output_row_gradient_norm"),
+        value.get("successor_output_row_gradient_norm"),
+        value.get("shared_trunk_union_gradient_norm"),
+    )
+    return bool(
+        value.get("passed") is True
+        and all(
+            isinstance(norm, (int, float))
+            and not isinstance(norm, bool)
+            and np.isfinite(float(norm))
+            and float(norm) > GRADIENT_LIVE_TOLERANCE
+            for norm in norms
+        )
+    )
+
+
+def baseline_gradient_group_evidence(
+    model: g41.G41NoSlowProjection,
+    immediate_baseline_gradients: Sequence[torch.Tensor | None],
+    successor_baseline_gradients: Sequence[torch.Tensor | None],
+) -> dict[str, object]:
+    named_parameters = tuple(model.credit_baselines.named_parameters())
+    local_names = tuple(name for name, _ in named_parameters)
+    if local_names != ("0.weight", "0.bias", "2.weight", "2.bias"):
+        raise G45GradientGateError(
+            "baseline_parameter_inventory_mismatch",
+            {"observed_parameter_names": list(local_names)},
+        )
+    parameters = tuple(parameter for _, parameter in named_parameters)
+    immediate = _gradient_rows(immediate_baseline_gradients, parameters)
+    successor = _gradient_rows(successor_baseline_gradients, parameters)
+    immediate_by_name = dict(zip(local_names, immediate))
+    successor_by_name = dict(zip(local_names, successor))
+    output_weight = immediate_by_name["2.weight"]
+    output_bias = immediate_by_name["2.bias"]
+    if output_weight.ndim != 2 or output_weight.shape[0] != 2 or output_bias.shape != (2,):
+        raise G45GradientGateError(
+            "baseline_output_schema_mismatch",
+            {
+                "weight_shape": list(output_weight.shape),
+                "bias_shape": list(output_bias.shape),
+            },
+        )
+    immediate_output_rows = (
+        immediate_by_name["2.weight"][0],
+        immediate_by_name["2.bias"][0:1],
+    )
+    successor_output_rows = (
+        successor_by_name["2.weight"][1],
+        successor_by_name["2.bias"][1:2],
+    )
+    shared_trunk_union = (
+        immediate_by_name["0.weight"],
+        immediate_by_name["0.bias"],
+        successor_by_name["0.weight"],
+        successor_by_name["0.bias"],
+    )
+    all_rows = immediate_output_rows + successor_output_rows + shared_trunk_union
+    evidence: dict[str, object] = {
+        "parameter_inventory": list(BASELINE_PARAMETER_NAMES),
+        "group_reconstruction": {
+            name: list(rows)
+            for name, rows in BASELINE_GRADIENT_GROUP_RECONSTRUCTION.items()
+        },
+        "immediate_output_row_gradient_norm": _global_norm(immediate_output_rows),
+        "successor_output_row_gradient_norm": _global_norm(successor_output_rows),
+        "shared_trunk_union_gradient_norm": _global_norm(shared_trunk_union),
+        "all_group_gradients_finite": all(
+            bool(torch.isfinite(row).all()) for row in all_rows
+        ),
+        "gradient_live_tolerance": GRADIENT_LIVE_TOLERANCE,
+        "passed": False,
+    }
+    evidence["passed"] = bool(
+        evidence["all_group_gradients_finite"] is True
+        and all(
+            float(evidence[name]) > GRADIENT_LIVE_TOLERANCE
+            for name in (
+                "immediate_output_row_gradient_norm",
+                "successor_output_row_gradient_norm",
+                "shared_trunk_union_gradient_norm",
+            )
+        )
+    )
+    return evidence
+
+
+def registered_gradient_evidence(
+    model: g41.G41NoSlowProjection,
+    immediate_actor_gradients: Sequence[torch.Tensor | None],
+    successor_actor_gradients: Sequence[torch.Tensor | None],
+    immediate_baseline_gradients: Sequence[torch.Tensor | None],
+    successor_baseline_gradients: Sequence[torch.Tensor | None],
+) -> dict[str, object]:
+    try:
+        evidence = g43.registered_gradient_evidence(
+            model,
+            immediate_actor_gradients,
+            successor_actor_gradients,
+            immediate_baseline_gradients,
+            successor_baseline_gradients,
+        )
+    except g43.G43GradientGateError as error:
+        raise G45GradientGateError(error.reason, error.diagnostics) from error
+    evidence["baseline_gradient_groups"] = baseline_gradient_group_evidence(
+        model, immediate_baseline_gradients, successor_baseline_gradients
+    )
+    evidence["passed"] = bool(
+        g43.validate_registered_gradient_evidence(evidence)
+        and validate_baseline_gradient_group_evidence(
+            evidence["baseline_gradient_groups"]
+        )
+    )
+    return evidence
+
+
+def validate_registered_gradient_evidence(value: object) -> bool:
+    return bool(
+        isinstance(value, Mapping)
+        and value.get("passed") is True
+        and g43.validate_registered_gradient_evidence(value)
+        and validate_baseline_gradient_group_evidence(
+            value.get("baseline_gradient_groups")
+        )
+    )
 
 
 def _rows_bitwise_equal(
@@ -402,17 +574,14 @@ def _gradient_probe(
         ),
         baseline_parameters,
     )
-    try:
-        evidence = g43.registered_gradient_evidence(
-            model,
-            immediate_actor,
-            successor_actor,
-            immediate_baseline,
-            successor_baseline,
-        )
-    except g43.G43GradientGateError as error:
-        raise G45GradientGateError(error.reason, error.diagnostics) from error
-    if not g43.validate_registered_gradient_evidence(evidence):
+    evidence = registered_gradient_evidence(
+        model,
+        immediate_actor,
+        successor_actor,
+        immediate_baseline,
+        successor_baseline,
+    )
+    if not validate_registered_gradient_evidence(evidence):
         raise G45GradientGateError("registered_gradient_evidence_failed", evidence)
     return _GradientProbe(
         policy=EQUAL_MEAN_COEFFICIENT * (immediate + successor)
@@ -1383,7 +1552,7 @@ def optimize_baseline_conditioning_update(
         and record["torch_rng_unchanged"] is True
         and all(
             all(
-                g43.validate_registered_gradient_evidence(
+                validate_registered_gradient_evidence(
                     pass_record["gradient_evidence"][arm]  # type: ignore[index]
                 )
                 for arm in ARMS
@@ -1496,7 +1665,7 @@ def _update_evidence_valid(value: object) -> bool:
             not isinstance(gradients, Mapping)
             or tuple(gradients) != ARMS
             or any(
-                not g43.validate_registered_gradient_evidence(gradients.get(arm))
+                not validate_registered_gradient_evidence(gradients.get(arm))
                 for arm in ARMS
             )
             or not isinstance(compositions, Mapping)
@@ -1536,6 +1705,38 @@ def _update_evidence_valid(value: object) -> bool:
     return True
 
 
+def validate_baseline_gradient_groups_by_arm(value: object) -> bool:
+    return bool(
+        isinstance(value, Mapping)
+        and set(value) == set(ARMS)
+        and all(
+            validate_baseline_gradient_group_evidence(value.get(arm)) for arm in ARMS
+        )
+    )
+
+
+def _baseline_gradient_groups_from_pass(
+    pass_record: Mapping[str, object],
+) -> dict[str, object]:
+    gradients = pass_record.get("gradient_evidence")
+    if (
+        not isinstance(gradients, Mapping)
+        or set(gradients) != set(ARMS)
+        or any(
+            not validate_registered_gradient_evidence(gradients.get(arm))
+            for arm in ARMS
+        )
+    ):
+        raise ValueError("G45 pass gradient evidence invalid")
+    groups = {
+        arm: gradients[arm]["baseline_gradient_groups"]  # type: ignore[index]
+        for arm in ARMS
+    }
+    if not validate_baseline_gradient_groups_by_arm(groups):
+        raise ValueError("G45 per-arm baseline gradient evidence invalid")
+    return json.loads(json.dumps(groups, sort_keys=True))
+
+
 def build_conclusion_evidence(
     update_records: Sequence[Mapping[str, object]], *, formal: bool
 ) -> dict[str, object]:
@@ -1559,11 +1760,15 @@ def build_conclusion_evidence(
             residuals = _canonical_residual_evidence(
                 pass_record["residual_evidence_by_arm"]
             )
+            baseline_gradient_groups = _baseline_gradient_groups_from_pass(
+                pass_record
+            )
             if not validate_activation_record(activation):
                 records_valid = False
             rows_by_replicate[replicate].append(
                 {
                     "residual_evidence_by_arm": residuals,
+                    "baseline_gradient_groups_by_arm": baseline_gradient_groups,
                     "centered_immediate_baseline_RMS": float(
                         activation["centered_immediate_baseline_RMS"]
                     ),
@@ -1684,12 +1889,18 @@ def validate_conclusion_evidence(value: object) -> bool:
             if not isinstance(item, Mapping):
                 return False
             residuals = item.get("residual_evidence_by_arm")
+            baseline_gradient_groups = item.get(
+                "baseline_gradient_groups_by_arm"
+            )
             if (
                 not isinstance(residuals, Mapping)
                 or tuple(residuals) != ARMS
                 or any(
                     not validate_arm_credit_evidence(residuals.get(arm), arm)
                     for arm in ARMS
+                )
+                or not validate_baseline_gradient_groups_by_arm(
+                    baseline_gradient_groups
                 )
             ):
                 return False
@@ -1780,6 +1991,9 @@ def build_final_checkpoint(
         no_read_certificate, BASELINE_SHADOW_NO_READ_ARM
     ):
         raise ValueError("G45 final checkpoint no-read certificate invalid")
+    baseline_gradient_groups = _baseline_gradient_groups_from_pass(
+        final_update_record["pass_records"][-1]  # type: ignore[index]
+    )
     return {
         "algorithm_id": ALGORITHM_ID,
         "source_id": SOURCE_ID,
@@ -1800,6 +2014,7 @@ def build_final_checkpoint(
         "db_shadow_present": False,
         "baseline_checkpoint_selection_read_count": 0,
         "baseline_evaluation_metric_read_count": 0,
+        "baseline_gradient_groups_by_arm": baseline_gradient_groups,
         "no_read_certificate": dict(no_read_certificate),
         "model_state": state,
         "model_state_digest": g41._state_digest(state),

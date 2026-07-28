@@ -418,6 +418,9 @@ def _load_checkpoint_payload(
     try:
         final_update = training["replicate_results"][replicate]["update_records"][-1]
         conclusion = training["conclusion_evidence"]
+        baseline_gradient_groups = source._baseline_gradient_groups_from_pass(
+            final_update["pass_records"][-1]
+        )
     except (IndexError, KeyError, TypeError) as error:
         raise ValueError("G45 accepted-source checkpoint evidence mismatch") from error
     if (
@@ -429,6 +432,11 @@ def _load_checkpoint_payload(
             certificate.get("conclusion_evidence")
         )
         or certificate.get("conclusion_evidence") != conclusion
+        or not source.validate_baseline_gradient_groups_by_arm(
+            certificate.get("baseline_gradient_groups_by_arm")
+        )
+        or certificate.get("baseline_gradient_groups_by_arm")
+        != baseline_gradient_groups
         or not source._valid_composition(
             certificate.get("no_read_certificate"),
             source.BASELINE_SHADOW_NO_READ_ARM,
