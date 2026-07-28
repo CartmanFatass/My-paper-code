@@ -22,11 +22,15 @@ from the run. The assembler, the bootstrap and the resolvers are untouched.
 Steering method: the exercise replicates the one real topology into N identical
 copies, so every bootstrap resample sees the same value and the interval collapses
 to a point (lcb == ucb == U*). The registered iteration count is therefore
-numerically irrelevant here and is left alone. With MATERIALITY_MARGIN = 5.0:
+numerically irrelevant here and is left alone. With MATERIALITY_MARGIN = 5.0 --
+and note the limbs are MIRRORED, which is the science and not a convention:
 
-    U* = -10  -> UCB < -5          -> MATERIAL
-    U* =   0  -> LCB > -5          -> AFFIRMATIVE_NONMATERIAL
-    U* =  -5  -> neither, equality -> UNRESOLVED   (never MATERIAL)
+    stable  U* = -10 -> UCB < -5 -> MATERIAL      (SET is WORSE: persistence)
+            U* =   0 -> LCB > -5 -> AFFIRMATIVE_NONMATERIAL
+            U* =  -5 -> equality -> UNRESOLVED    (never MATERIAL)
+    flex    U* = +10 -> LCB > +5 -> MATERIAL      (SET is BETTER: renewal)
+            U* =   0 -> UCB < +5 -> AFFIRMATIVE_NONMATERIAL
+            U* =  +5 -> equality -> UNRESOLVED
 
 `SMOKE_NOT_A_RESULT`: this reads a smoke artifact and fabricates limb values. It
 is an instrument exercise and can never be a source-necessity result. It writes
@@ -48,7 +52,27 @@ import audit_d7_s_event_aligned as audit           # noqa: E402
 import pool_d7_s_event_aligned_shards as pooling   # noqa: E402
 
 N_TOPOLOGIES = 8
-U_STAR_FOR_STATE = {"MATERIAL": -10.0, "AFFIRMATIVE_NONMATERIAL": 0.0, "UNRESOLVED": -5.0}
+
+# The two limbs are MIRRORED, and a single map for both is simply wrong -- the
+# first version of this exercise used one and every flex case silently came back
+# AFFIRMATIVE_NONMATERIAL regardless of what was asked for.
+#
+#   stable  MATERIAL = UCB95(U*) < -5     flex  MATERIAL = LCB95(U*) > +5
+#           AFF_NONMAT = LCB95(U*) > -5         AFF_NONMAT = UCB95(U*) < +5
+#
+# Which is the science, not a convention: material stable PERSISTENCE means SET
+# is worse than KEEP (negative U*), material flex RENEWAL means SET is better
+# (positive U*). Equality at the margin resolves to UNRESOLVED on both limbs.
+U_STAR_FOR_STATE = {
+    "stable": {"MATERIAL": -10.0, "AFFIRMATIVE_NONMATERIAL": 0.0, "UNRESOLVED": -5.0},
+    "flex":   {"MATERIAL": +10.0, "AFFIRMATIVE_NONMATERIAL": 0.0, "UNRESOLVED": +5.0},
+}
+
+# PART_A_CONTRADICTION fires when the two arms are EQUIVALENT -- both
+# LCB95(D_A + 5) > 0 and LCB95(5 - D_A) > 0. The real dev unit has D_A ~ 0.46,
+# inside the margin, so it contradicts legitimately and masks every combined
+# result behind it in the precedence. A separated D_A clears the way.
+D_A_SEPARATED = 20.0
 
 
 def _set_u_star(unit: dict, value: float) -> None:
@@ -72,7 +96,8 @@ def _set_invariance(unit: dict, invariant: bool) -> None:
 
 def _topologies(base: dict, *, stable: str | None, flex: str | None,
                 stable_invariant: bool = False, flex_invariant: bool = False,
-                drop_component_audit: bool = False, clear_support: bool = True) -> list[dict]:
+                drop_component_audit: bool = False, clear_support: bool = True,
+                separate_part_a: bool = True) -> list[dict]:
     """N copies of the real unit, steered.
 
     `clear_support` raises the qualifying-episode counters to the registered
@@ -90,15 +115,19 @@ def _topologies(base: dict, *, stable: str | None, flex: str | None,
         if clear_support:
             r["qualifying_calibration_episodes"] = audit.MIN_SUPPORT_EPISODES_PER_TOPOLOGY
             r["qualifying_audit_episodes"] = audit.MIN_SUPPORT_EPISODES_PER_TOPOLOGY
-        for limb, state, invariant in (("audit_units_stable", stable, stable_invariant),
-                                       ("audit_units_flex", flex, flex_invariant)):
-            for unit in r[limb]:
+        if separate_part_a:
+            for unit in r["calibration_units_d_a"]:
+                _set_u_star(unit, D_A_SEPARATED)
+        for key, limb, state, invariant in (
+                ("audit_units_stable", "stable", stable, stable_invariant),
+                ("audit_units_flex", "flex", flex, flex_invariant)):
+            for unit in r[key]:
                 if drop_component_audit:
                     unit.pop("component_audit", None)
                     continue
                 _set_invariance(unit, invariant)
                 if state is not None:
-                    _set_u_star(unit, U_STAR_FOR_STATE[state])
+                    _set_u_star(unit, U_STAR_FOR_STATE[limb][state])
         out.append(r)
     return out
 
@@ -157,6 +186,9 @@ def main(argv: list[str] | None = None) -> int:
                      hash_failures=[{"topology_seed": audit.TOPOLOGY_SEED_DEV}]))
     rows.append(_run("branch 2: real qualifying counts, support insufficient",
                      _topologies(base, stable="MATERIAL", flex="MATERIAL", clear_support=False)))
+    rows.append(_run("branch 4: real Part-A block, arms equivalent",
+                     _topologies(base, stable="MATERIAL", flex="MATERIAL",
+                                 separate_part_a=False)))
     rows.append(_run("branch 3: both limbs exactly invariant",
                      _topologies(base, stable=None, flex=None,
                                  stable_invariant=True, flex_invariant=True)))
