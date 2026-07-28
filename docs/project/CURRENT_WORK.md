@@ -27,8 +27,8 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_NORMALIZER_IDENTIFIABILITY_AUTOPSY
-next_boundary=PRO_RULING_ON_THE_AUTOPSY_RESULT_THEN_ITERATION_31
-workflow_position=workflow 2, touchpoint 3 IN FLIGHT -- autopsy ran, result fenced at 6430ef96, Pro generating
+next_boundary=DERIVE_AND_PRE_FREEZE_THE_R4_MATERIALITY_CRITERION (zero compute)
+workflow_position=workflow 2 CLOSED at touchpoint 3; its ruling is workflow 3's step 1, so the R4 derivation is live
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -85,27 +85,62 @@ a failed limb labelled `NORMALIZER_NOT_IDENTIFIED`); record point estimates in
 the artifact, which today carries only the six bounds; and enforce §9 in
 `main()`.
 
-### The autopsy result: N5 raised, and one thing the instrument is stuck on
+### Ruled: the global normalizer is retired for this claim
 
-`logs/d7s_autopsy_1/`, evidence note
-`docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_THE_NORMALIZER_IS_UNRELATED_TO_THE_EFFECT.md`.
+Round `20260728_d7_s_autopsy_result`, stage commit `6430ef96`.
 
-Sentinel passed all six conditions including exact reproduction of the six
-registered R3 bounds. Evidence matrix: **N5 comparator-scale mismatch raised**,
-N4 material (`R_topology = 0.1221`, no regime), N1 compatible, N2 not resolved,
-N3 `UNDISCRIMINATED_FROM_STORED_ARTIFACT`, selection instability moderate.
+> The completed artifact provides no positive evidence that the global
+> `constructive_mixed − null` contrast is a useful scale for the focal one-Δ
+> SET-versus-KEEP effect.
 
-N5 rests on an essentially absent topology-level association between `B_m` and
-`U*_m` — pearson `+0.038` / `+0.022`, rank `−0.180` / `−0.333`. Reading that as
-"the denominator was never the right denominator" is **Project Manager
-inference**, not a result: eight topologies make any association estimate
-unstable, and Pro said so when it added N5.
+Status `GLOBAL_ROTATION_NORMALIZER_RELEVANCE_NOT_DEMONSTRATED`. **Say "relevance
+not demonstrated", never "unrelated"** — that stronger reading was this
+conversation's inference and Pro rejected it: the association intervals span
+strong relationships in both directions and the leave-one-out estimates are
+unstable.
 
-**The instrument is fail-closed and cannot emit branches 4–10.** Component
-persistence and per-paired-continuation exact sequence equality exist; the
-missing piece is the aggregation rule to a per-limb `components_separate`. That
-is a threshold deciding which branch fires, so it was not invented locally — it
-is Q3 of the round in flight.
+**Selected next action, zero compute:** derive and pre-freeze an R4 absolute
+task-unit materiality criterion (or the positive pre-treatment scale as live
+alternative), construct its zero-denominator and sign counterexamples, freeze
+its branch semantics, and decide whether it is scientifically meaningful
+**before any implementation or environment run**. S7-S3 carrier retirement is
+the conditional fallback. Topology stratification is **not selected**; higher
+selection volume is parked. `D7.3` and `D8` remain blocked.
+
+**Standing constraint from this ruling:** a future measurement may not use a
+global source-control contrast to scale a focal renewal effect merely because
+both are measured in `G`. It must use an arm-independent task scale, or
+establish analytically **before data** that the normalizer is commensurate with
+the focal one-Δ intervention.
+
+**The aggregation blocker is closed.** `components_separate_m` is the
+disjunction of not-exactly-equal over the complete **calibration** source-control
+pairs; no fraction threshold is permitted; completeness is load-bearing and a
+missing record leaves the run fail-closed. Wire it as part of the **R4**
+instrument closure — do **not** rerun R3 merely because branches 4–10 become
+reachable.
+
+### The launch gate is closed
+
+All seven guard areas Pro made a precondition on any future environment run now
+have paired negatives, watched failing: `window_g_from_step_metrics`, baseline
+masks, calibration arm ordering, audit-limb assignment, seed-controlled
+provenance, qualifying-event construction, and clone conditions 2/3/5. The suite
+went 203 → 215. Production code was not changed; these were purely missing tests.
+
+The widest of them: no test had ever driven the real event-selection algorithm
+to a qualifying event. That positive case now exists.
+
+### The autopsy's first evidence matrix is partly superseded
+
+`logs/d7s_autopsy_1/` ran with three classifier defects Pro then found. **The N1
+row is discarded outright**; N4's "material" was overstated; N2's vocabulary was
+too conjunctive. All three are repaired and `logs/d7s_autopsy_2/` is the
+corrected run. The sentinel result, the four standalone distributions and the R4
+decision are unaffected — the ruling says so explicitly.
+
+Quote the corrected run, and the reconciliation at
+`docs/external-review/rounds/20260728_d7_s_autopsy_result/30_PM_SCIENTIFIC_RECONCILIATION.md`.
 
 ### The converged next action, and a precondition it set
 

@@ -1,4 +1,30 @@
-# The normalizer is not weak — it is unrelated to the effect it was scaling
+# Normalizer relevance is not demonstrated
+
+> **CORRECTION, 2026-07-28, by External Pro's ruling on this very note.**
+>
+> This note was originally titled *"The normalizer is not weak — it is unrelated
+> to the effect it was scaling"* and the body below still argues that. **That
+> claim is not established and must not be quoted.** The association intervals
+> encompass strong negative *and* positive relationships and the
+> leave-one-topology-out estimates are unstable. The supported statement is
+> `GLOBAL_ROTATION_NORMALIZER_RELEVANCE_NOT_DEMONSTRATED` — *relevance not
+> demonstrated*, never *unrelated*. N5 moves the portfolio by prioritising
+> focal-compatible scale design; it does not independently retire a comparator.
+>
+> Two further rows below are superseded. **The N1 row is discarded outright** —
+> the classifier concatenated the stable and flex per-topology vectors and
+> evaluated the combined vector against the stable-only interval and stable-only
+> leave-one-out points, mixing two horizons and two causal classes. **N4
+> "material" was overstated** — only `B_stable` has a nonzero adjusted ratio, and
+> the accurate statement is *limited topology contribution for `B_stable`;
+> topology-dominant variation not established for any quantity*. The
+> stratify-or-expand recommendation is **not selected**.
+>
+> The sentinel result, the four standalone distributions in Section A, and the
+> R4 decision are unaffected. The corrected run is `logs/d7s_autopsy_2/`.
+>
+> The body is preserved unedited below, because a claim the reviewer corrected is
+> appended to, not erased.
 
 First execution of the artifact-only normalizer-identifiability autopsy, the
 action External Pro converged after D7.S audit run 2 returned
