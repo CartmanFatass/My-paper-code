@@ -1193,9 +1193,10 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 # renumbering anything: 1-7 are contract-registered and their numbers are
 # cited in the pooler, in the tests and in the evidence notes.
 #
-#   8. the topologies that actually PRODUCED units are pairwise DISTINCT and
-#      every one is a MEMBER of `TOPOLOGY_SEEDS_R4` -- subset-and-distinct,
-#      never equal-to-the-population.
+#   8. every declared topology is ACCOUNTED FOR EXACTLY ONCE: the topologies
+#      that PRODUCED units, taken together with the topologies recorded as
+#      HASH FAILURES, are pairwise distinct and are exactly
+#      `TOPOLOGY_SEEDS_R4` -- exact-coverage-and-distinct.
 #
 #      The hole it closes, measured: `r4_declared_population_identity`
 #      checked MEMBERSHIP only, so `--population r4 --topology-seeds
@@ -1210,17 +1211,40 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 #      DEDUPLICATED declared list. Condition 1 is the witness that cannot see
 #      a duplicate; condition 8 is the witness that can.
 #
-#      Why NOT "re-point condition 1 at `topology_records`": a topology that
-#      fails the pinned-coordinate hash assert contributes no
-#      `topology_record` and no `topology_unit` at all (`main()` appends to
-#      `topology_hash_failures` and continues), so requiring the RECORDS to
-#      equal the whole population would make a LAWFUL
-#      `INVALID_EVENT_ALIGNED_AUDIT` (branch 1) run fail the sentinel and
-#      become a refusal instead of a reportable result. Condition 1 stays on
-#      the DECLARED list; condition 8 is subset-and-distinct for exactly that
-#      reason. `r4_declared_population_identity` also refuses a duplicate
-#      outright, at the earliest point -- condition 8 is defence in depth on
-#      the assembled artifact, not the primary gate.
+#      The MIRROR hole, closed 2026-07-28 (D''' repair), and the reason this
+#      is now EXACT COVERAGE rather than the subset it shipped as. Distinctness
+#      alone closes only the "too many topologies" half. Measured through the
+#      real pooler on an artifact whose `topology_records`/`topology_units`/
+#      `calibration_reports`/`audit_reports` are SEVEN long against EIGHT
+#      declared seeds, with `topology_hash_failures` empty:
+#
+#          declared seeds: [20260734..41]   n_records: 7   hash_failures: []
+#          branch: NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED
+#          SENTINEL: True, all six conditions True
+#
+#      -- a conclusion-bearing source-necessity result computed over SEVEN
+#      topologies while declaring EIGHT, passing everything. Seven of eight
+#      must never be published as eight, so this fails closed.
+#
+#      Why the RECORDS alone still cannot be required to equal the population:
+#      a topology that fails the pinned-coordinate hash assert contributes no
+#      `topology_record` and no `topology_unit` at all, so a LAWFUL
+#      `INVALID_EVENT_ALIGNED_AUDIT` (branch 1) run legitimately has seven
+#      producing topologies against eight declared. What makes that run lawful
+#      is that `main()` records the eighth in `topology_hash_failures` and
+#      continues (`:4840-4858`: the per-seed loop has exactly two exits per
+#      declared seed, `topology_results.append` or the
+#      `except TopologyMismatchError` append-and-continue, and no third path;
+#      the key itself is written unconditionally). ADDING the failures to the
+#      producing seeds is therefore what restores that lawful case while still
+#      refusing the silent drop: the union is the population, exactly once
+#      each, or the artifact is not a whole-population measurement.
+#
+#      Condition 1 stays on the DECLARED list -- it is the statement of intent,
+#      and it is what the union is compared against.
+#      `r4_declared_population_identity` also refuses a duplicate outright, at
+#      the earliest point; condition 8 is defence in depth on the assembled
+#      artifact, not the primary gate.
 
 def r4_artifact_identity(topology_seeds) -> dict:
     """Condition 7: the ONLY topology-seed list that earns the R4 contract/
@@ -1329,6 +1353,21 @@ def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
     population (which the default no-flag invocation does)."""
     declared_seeds = list(result.get("topology_seeds", []))
     actual_seeds = [tr.get("topology_seed") for tr in result.get("topology_records", [])]
+    # Condition 8's second witness: the topologies that failed the pinned-
+    # coordinate hash assert produced no record and no unit, so they are
+    # invisible to `actual_seeds` and are the ONLY lawful reason the producing
+    # set can be smaller than the declared population.
+    #
+    # A MISSING key is not defaulted into innocence here the way the pooler's
+    # old `s.get(..., [])` did, and it is deliberately not a KeyError either:
+    # an artifact with no failure list and fewer records than declared seeds
+    # simply fails to cover the population, so condition 8 goes False and the
+    # sentinel REFUSES. Fail-closed through the condition is what this gate is
+    # for; a raw KeyError would escape `main()`'s SystemExit path entirely and
+    # crash instead of refusing.
+    failed_seeds = [f.get("topology_seed")
+                    for f in (result.get("topology_hash_failures") or [])]
+    accounted_seeds = actual_seeds + failed_seeds
     topology_units = result.get("topology_units") or []
     calibration_reports = result.get("calibration_reports") or []
     audit_reports = result.get("audit_reports") or []
@@ -1354,15 +1393,19 @@ def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
                     for rep in calibration_reports)
             and all(rep.get("episodes_attempted") == N_AUDIT_EPISODES
                     for rep in audit_reports)),
-        # Condition 8 (D'' repair) -- NOT a contract row; see the block above
-        # for the measured hole and for why this is subset-and-distinct rather
-        # than equal-to-the-population. Computed from `actual_seeds` (the
-        # topologies that PRODUCED units), the one witness that can see a
-        # duplicate; condition 1 reads the declared list, which the pooler has
-        # already deduplicated through `set()`.
-        "no_duplicate_producing_topologies": (
-            len(actual_seeds) == len(set(actual_seeds))
-            and set(actual_seeds) <= set(TOPOLOGY_SEEDS_R4)),
+        # Condition 8 (D'' repair, widened to exact coverage by D''') -- NOT a
+        # contract row; see the block above for both measured holes. Computed
+        # from `actual_seeds` (the topologies that PRODUCED units) plus
+        # `failed_seeds` (those recorded as hash failures): together they are
+        # the only two lawful fates of a declared topology, so their union is
+        # the population exactly once each or the artifact does not measure the
+        # whole population. `actual_seeds` is the one witness that can see a
+        # DUPLICATE; the union is the one witness that can see a SILENT DROP.
+        # Condition 1 reads the declared list, which the pooler has already
+        # deduplicated through `set()` and which cannot see either.
+        "every_topology_accounted_for_exactly_once": (
+            len(accounted_seeds) == len(set(accounted_seeds))
+            and set(accounted_seeds) == set(TOPOLOGY_SEEDS_R4)),
     }
     return all(detail.values()), detail
 
@@ -2795,9 +2838,9 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                     # Item 3 / arm-distinctness spot check witness: the
                     # PRE-LEAVE duty map is exactly the frozen, no-proactive-
                     # rotation ownership map (the identity on this dict), so
-                    # pairing it with
-                    # `duty_map_at_te` (constructive_mixed's post-LEAVE
-                    # re-match) gives a real constructive-vs-null witness at
+                    # pairing it with `duty_map_at_te` (constructive_mixed's
+                    # post-LEAVE re-match) gives a real
+                    # `duty_map_at_te`-vs-`duty_map_before_leave` witness at
                     # every certified joint event -- both certifications
                     # having passed already guarantees the vacancy was
                     # coverable (flex certification requires a covering
@@ -4719,17 +4762,38 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
         # Fewer than two topologies with nothing failing: there is no valid
         # bootstrap and therefore no result to report.
         #
-        # DEAD, and its old comment ("unreachable in the registered population
-        # ... but exercised directly") understated it. Reaching here needs
-        # `len(topology_results) <= 1` AND `support_ok`, and `support_ok` comes
-        # from `check_minimum_support` over those SAME results, which requires
-        # MIN_SUPPORT_TOPOLOGIES=6 qualifying topologies. Measured directly:
-        # support_ok is False at n=0, 1 and 2, True at n=6 -- so the two
-        # conjuncts cannot hold together even when this function is called with
-        # hand-built results. Left in place rather than deleted only because
-        # the formal run is gated and folding it into the `else` would change
-        # which branch an unreachable input reports; delete it in the next
-        # round, per the repo's own no-dead-guard policy.
+        # DEAD, and RETAINED DELIBERATELY. If you arrived here reaching for
+        # `codebase_policy=small_active_line_only`, this branch is the
+        # exception and the measurements below are why -- deleting it makes
+        # the code strictly worse, not smaller.
+        #
+        # Unreachable: getting here needs `len(topology_results) <= 1` AND
+        # `support_ok`, and `support_ok` comes from `check_minimum_support`
+        # over those SAME results, which requires MIN_SUPPORT_TOPOLOGIES=6
+        # qualifying topologies. Measured directly: support_ok is False at
+        # n=0, 1 and 2, True at n=6 -- so the two conjuncts cannot hold
+        # together even when this function is called with hand-built results.
+        #
+        # Deleting it does not remove a branch, it CONVERTS AN UNREACHABLE
+        # `None` INTO AN UNREACHABLE `KeyError`. The `else` below passes
+        # `stable_limb_state="NOT_EVALUATED", flex_limb_state="NOT_EVALUATED"`,
+        # and on this branch's own inputs (`conformance_ok`, `support_ok` and
+        # `component_invariance_evaluated` all True) `decide_branch_with_reason`
+        # falls past its first three gates. With `primary_g_degenerate_flag`
+        # False it then reaches `combined_result("NOT_EVALUATED",
+        # "NOT_EVALUATED")`, and the frozen nine-row `COMBINED_RESULT_MAP` has
+        # no such row. Measured on a mirror with this `elif` deleted:
+        #
+        #     primary_g_degenerate=True  -> branch='PRIMARY_G_DEGENERATE'
+        #     primary_g_degenerate=False -> KeyError: ('NOT_EVALUATED',
+        #                                              'NOT_EVALUATED')
+        #
+        # Note it is a KeyError, NOT `combined_result`'s one ValueError case
+        # (both limbs COMPONENT_INVARIANT) -- that guard is genuinely
+        # unreachable here; the map lookup one line below it is not. Making
+        # the fall-through safe would mean adding a tenth row to a frozen map,
+        # which is a contract change, not a cleanup. So: unreachable `None`
+        # stays, and this comment is the reason.
         branch, branch_reason = None, None
     else:
         # No valid bootstrap. Branch 1/2 come from `decide_branch_with_reason`

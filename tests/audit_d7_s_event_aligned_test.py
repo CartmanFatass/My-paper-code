@@ -15,6 +15,7 @@ against lives specifically in the real environment's `np_random`/
 `_init_ground_bs` interaction and a synthetic stand-in would not exercise it.
 """
 
+import ast
 import importlib.util
 import inspect
 import json
@@ -2231,15 +2232,36 @@ def test_window_latched_counts_on_a_full_h_stable_sized_series():
     length (140 rows: baseline + 139 steps), pinning the row-0-baseline /
     H+1-rows alignment convention at registered size, not just a small
     hand-picked array. The literal `+ 1` is the convention itself, stated
-    here rather than read back from production."""
+    here rather than read back from production.
+
+    D''' repair -- this test could not go red on the convention it names.
+    uav 0 was cutoff at row 0 and NEVER AGAIN, so under an implementation
+    that treats row 0 as a counted step it still has no rising edge and
+    `cutoff_count` stayed 1: the measured mutation left this green. uav 0 is
+    now cutoff at row 0 AND row 1 -- a LATCHED baseline, which is what a UAV
+    already cutoff at t_e actually looks like on the next step. Under the
+    correct convention row 0 is the previous-step baseline, so row 1 is not a
+    false->true transition for uav 0 and only uav 1 is counted (1). Under an
+    implementation that counts row 0 as a step (baseline zeroed, or the loop
+    started at t=0), uav 0 acquires a rising edge and the count becomes 2.
+
+    `cutoff_per_step` is asserted PER ROW, not just for its length:
+    `len(out) == len(in)` holds for any row convention whatsoever and pinned
+    nothing. Row 0 must contribute zero by definition, and the single counted
+    transition must land on row 1 -- the alignment claim itself."""
     n_uavs = 2
     rows = audit.H_STABLE + 1
     cutoff = np.zeros((rows, n_uavs), dtype=bool)
     cutoff[0, 0] = True   # baseline: uav 0 already cutoff at t_e -- never counted
+    cutoff[1, 0] = True   # ... and STILL cutoff at step 1: latched, not a new event
     cutoff[1, 1] = True   # uav 1: genuine in-window transition at step 1
     result = audit.window_latched_counts(cutoff, np.zeros_like(cutoff))
     assert result["cutoff_per_step"].shape[0] == rows
     assert result["cutoff_count"] == 1
+    per_step = result["cutoff_per_step"]
+    assert per_step[0] == 0, "row 0 is the baseline and can never contribute a count"
+    assert per_step[1] == 1, "exactly uav 1's transition is counted, at row 1"
+    assert int(per_step.sum()) == 1
 
 
 # =============================================================================
@@ -4367,7 +4389,8 @@ def test_freshness_sentinel_condition_1_exact_seed_list_fails_alone():
     assert detail == {
         "exact_seed_list": False, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
-        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": True,
     }
 
 
@@ -4393,7 +4416,8 @@ def test_freshness_sentinel_condition_2_no_r3_overlap_fails_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": False,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
-        "registered_episode_counts": True, "no_duplicate_producing_topologies": False,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": False,
     }
 
 
@@ -4408,7 +4432,8 @@ def test_freshness_sentinel_condition_3_identity_fields_fail_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": False, "per_topology_block_identities": True,
-        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": True,
     }
 
 
@@ -4423,7 +4448,8 @@ def test_freshness_sentinel_condition_4_per_topology_block_identities_fail_alone
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": False,
-        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": True,
     }
 
 
@@ -4451,7 +4477,7 @@ def test_freshness_sentinel_condition_5_registered_episode_counts_fails_alone():
             "identifies_r4_contract_and_namespace": True,
             "per_topology_block_identities": True,
             "registered_episode_counts": False,
-            "no_duplicate_producing_topologies": True,
+            "every_topology_accounted_for_exactly_once": True,
         }, block
 
     # ONE topology short of the registered volume, the other seven correct --
@@ -4744,9 +4770,11 @@ def test_a_duplicate_seed_is_refused_through_main_itself(monkeypatch, tmp_path):
 
 def test_freshness_sentinel_condition_8_catches_a_nine_record_artifact():
     """B-1, the ARTIFACT level -- defence in depth behind the refusal above,
-    and the invariant no assertion in this file named: *the seeds that
-    actually produced topology units are exactly the members of the
-    population, at most once each.*
+    and the "too many topologies" half of the invariant no assertion in this
+    file named: *the topologies that produced units, together with those
+    recorded as hash failures, are exactly the declared population, each
+    exactly once.* (The "too few, silently" half is
+    `test_condition_8_refuses_a_silently_dropped_topology` below.)
 
     This is the measured 28d6933f state: `r4_freshness_sentinel` returned
     `ok=True` with all five conditions True on this artifact. Conditions 1-5
@@ -4758,27 +4786,100 @@ def test_freshness_sentinel_condition_8_catches_a_nine_record_artifact():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
-        "registered_episode_counts": True, "no_duplicate_producing_topologies": False,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": False,
     }
 
 
-def test_condition_8_does_not_fail_a_lawful_hash_failure_run():
-    """The binding condition 8 exists under: it is SUBSET-AND-DISTINCT, never
-    EQUAL-to-the-population. A topology that fails the pinned-coordinate hash
-    assert contributes no `topology_record` and no `topology_unit` at all
-    (`main()` records a `topology_hash_failures` entry and continues), so a
-    LAWFUL `INVALID_EVENT_ALIGNED_AUDIT` run legitimately has seven producing
-    topologies against eight declared. Re-pointing condition 1 at
-    `topology_records` -- the other repair the review proposed -- would turn
-    that reportable branch-1 result into a refusal. This test is what goes red
-    if condition 8 is ever tightened to equality."""
+def _seven_producing_artifact(*, with_hash_failure: bool) -> dict:
+    """`_valid_r4_artifact()` with the LAST topology's record/unit/reports
+    deleted, so seven topologies produced units against eight declared.
+
+    `with_hash_failure` is the ONLY difference between the lawful branch-1
+    shape and the silent-drop shape, and it is the whole subject of the pair
+    below: `main()` reaches an eighth-topology-missing artifact by exactly one
+    route -- `except TopologyMismatchError` appends to `topology_hash_failures`
+    and continues -- so the entry is what makes seven-of-eight lawful. Without
+    it the artifact claims eight topologies and measured seven."""
     artifact = _valid_r4_artifact()
+    dropped = artifact["topology_records"][-1]["topology_seed"]
     for key in ("topology_records", "topology_units",
                 "calibration_reports", "audit_reports"):
         artifact[key] = artifact[key][:-1]
-    ok, detail = audit.r4_freshness_sentinel(artifact)
-    assert detail["no_duplicate_producing_topologies"] is True
+    artifact["topology_hash_failures"] = (
+        [{"topology_seed": dropped, "reason": "pinned-coordinate hash mismatch"}]
+        if with_hash_failure else [])
+    return artifact
+
+
+def test_condition_8_does_not_fail_a_lawful_hash_failure_run():
+    """POSITIVE half of the pair. Condition 8 is EXACT-COVERAGE-AND-DISTINCT
+    over (produced + hash-failed), never over the produced seeds alone.
+
+    A topology that fails the pinned-coordinate hash assert contributes no
+    `topology_record` and no `topology_unit` at all, so a LAWFUL
+    `INVALID_EVENT_ALIGNED_AUDIT` (branch 1) run legitimately has SEVEN
+    producing topologies against EIGHT declared. THE `topology_hash_failures`
+    ENTRY IS WHAT MAKES THIS RUN LAWFUL -- it is not decoration and it is not
+    incidental fixture furniture: it is the artifact's own record of the
+    eighth topology's fate, and it is the only thing distinguishing this
+    artifact from the silent-drop artifact the next test refuses. Delete it
+    and this test becomes that test.
+
+    (Before D''', this fixture carried NO failure entry and the condition was
+    subset-only, so the lawful case and the silent-drop case were the same
+    object and the sentinel passed both. That is the hole D''' closes.)
+
+    Conditions 1-5 must all be True here as well: a lawful branch-1 result is
+    a reportable result, not a refusal."""
+    ok, detail = audit.r4_freshness_sentinel(
+        _seven_producing_artifact(with_hash_failure=True))
+    assert detail["every_topology_accounted_for_exactly_once"] is True
     assert ok is True, detail
+
+
+def test_condition_8_refuses_a_silently_dropped_topology():
+    """NEGATIVE half of the pair, and the D''' repair's own subject: the
+    mirror image of the nine-record artifact above. Seven topologies produced
+    units, EIGHT are declared, and `topology_hash_failures` is EMPTY -- so the
+    artifact carries no account of the eighth topology at all.
+
+    Measured through the real pooler before this repair: branch
+    `NO_MATERIAL_SOURCE_NECESSITY_IDENTIFIED`, sentinel True, all six
+    conditions True. That is a conclusion-bearing source-necessity result
+    computed over SEVEN topologies while declaring EIGHT. Seven of eight must
+    never be published as eight.
+
+    Conditions 1-5 must ALL still be True -- condition 1 reads the DECLARED
+    list, which is fully correct here and structurally cannot see the drop --
+    and only condition 8 may go False, exactly as in the nine-record test."""
+    ok, detail = audit.r4_freshness_sentinel(
+        _seven_producing_artifact(with_hash_failure=False))
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+        "registered_episode_counts": True,
+        "every_topology_accounted_for_exactly_once": False,
+    }
+
+
+def test_condition_8_refuses_a_hash_failure_for_a_topology_that_also_produced():
+    """The distinctness clause still binds across the UNION, not just within
+    `topology_records`. All eight topologies produced units AND one of them is
+    also listed as a hash failure -- nine accounted slots for eight seeds, a
+    self-contradictory artifact (a topology cannot both fail its coordinate
+    assert and contribute a unit). Set equality alone would pass this, since
+    the union's SET is still exactly the population; only the length clause
+    catches it."""
+    artifact = _valid_r4_artifact()
+    artifact["topology_hash_failures"] = [
+        {"topology_seed": audit.TOPOLOGY_SEEDS_R4[2], "reason": "hash mismatch"}]
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert ok is False
+    assert detail["every_topology_accounted_for_exactly_once"] is False
+    assert all(v for k, v in detail.items()
+               if k != "every_topology_accounted_for_exactly_once")
 
 
 def test_main_refuses_a_whole_population_run_that_fails_the_sentinel(monkeypatch, tmp_path):
@@ -4957,43 +5058,119 @@ def test_the_no_bootstrap_paths_report_the_fifth_state_not_a_resolved_one(monkey
 # (precedence item 5) where section 4 files it under Completeness (item 1).
 # The predicate is NOT re-routed: that is claim-defining precedence, and the
 # short-series case is UNREACHABLE in production because `fork_continuation`
-# rolls `range(int(horizon))` with no early exit. This pins the
-# unreachability, so an early break goes red here rather than silently
-# changing the routing.
+# rolls `range(int(horizon))` with no early exit and no clamp on
+# `horizon` itself. This pins the unreachability, so either shape goes red
+# here rather than silently changing the routing.
 # =============================================================================
 
-def test_fork_continuation_has_no_early_exit_from_its_horizon_loop():
+def _horizon_loop_early_exits(fn: ast.AST) -> list[str]:
+    """Every statement inside `fork_continuation`'s `for t in
+    range(int(horizon)):` body that can end the loop before its trip count is
+    reached, named by node type.
+
+    `Break`/`Continue` bind to the INNERMOST enclosing loop, so one inside a
+    nested loop cannot shorten the horizon loop and is not reported; `Return`
+    always can, at any depth. A nested `def`/`lambda` carries its own control
+    flow and is skipped entirely."""
+    loops = [n for n in ast.walk(fn)
+             if isinstance(n, ast.For)
+             and isinstance(n.iter, ast.Call)
+             and isinstance(n.iter.func, ast.Name) and n.iter.func.id == "range"
+             and len(n.iter.args) == 1
+             and ast.unparse(n.iter.args[0]) == "int(horizon)"]
+    assert len(loops) == 1, "the horizon loop header changed shape"
+
+    found: list[str] = []
+
+    def walk(node, in_nested_loop):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+            return
+        if isinstance(node, ast.Return):
+            found.append("return")
+        elif isinstance(node, (ast.Break, ast.Continue)) and not in_nested_loop:
+            found.append(type(node).__name__.lower())
+        nested = in_nested_loop or isinstance(node, (ast.For, ast.While))
+        for child in ast.iter_child_nodes(node):
+            walk(child, nested)
+
+    for stmt in loops[0].body:
+        walk(stmt, False)
+    return sorted(set(found))
+
+
+def test_fork_continuation_rolls_the_full_horizon_with_no_early_exit_and_no_clamp():
     """Structural pin at BOTH registered horizons. `fork_continuation` at
     H_FLEX=550 needs a real environment stepped 550 times -- far too slow for
     a unit test, and the shape being pinned is not numeric anyway -- so this
-    asserts the property directly on the SOURCE of the loop body: no `break`,
-    no `return`, and no `continue` inside `for t in range(int(horizon))`.
+    asserts the property on the PARSED SOURCE of the function.
 
-    That is what makes `len(step_metrics) == horizon` hold identically for
-    H_STABLE=139 and H_FLEX=550, and therefore what makes
+    The invariant is `len(step_metrics) == horizon`, which is what makes
     `exact_paired_sequence_equal`'s length gate unreachable-as-False on a
     conforming record. The two registered horizons are named here so the
-    reason this test exists survives with it."""
+    reason this test exists survives with it.
+
+    D''' repair. The old guard was a line-anchored regex,
+    `re.search(r"^\\s+(break|continue|return)\\b", loop_body, MULTILINE)`, and
+    it caught only an OWN-LINE `break`. Measured: `if bad: break`,
+    `if bad: return {}` and `horizon = min(horizon, k)` above the loop header
+    all left it GREEN -- so its name described three shapes it could not see.
+    The exit check is now `ast`-based and cannot be fooled by where a
+    statement sits on a line.
+
+    TWO distinct shapes are rejected here, and the name says both because
+    they are genuinely different mechanisms with the same consequence:
+
+    * an EARLY EXIT binding to the horizon loop (`_horizon_loop_early_exits`).
+    * a REBINDING of `horizon` anywhere in the function. A clamp is not an
+      early exit -- the loop body stays exit-free -- but it produces the same
+      short continuation. A guard scoped only to exits would have kept a name
+      claiming `len(step_metrics) == horizon` while a clamp broke it, which is
+      the failure mode this repair exists to remove; so the clamp is inside
+      the guard and the name is widened to match."""
     assert audit.REGISTERED_LIMB_HORIZON == {"stable": audit.H_STABLE, "flex": audit.H_FLEX}
     assert (audit.H_STABLE, audit.H_FLEX) == (139, 550)
 
-    source = inspect.getsource(audit.fork_continuation)
-    body = source.split("for t in range(int(horizon)):", 1)
-    assert len(body) == 2, "the horizon loop header changed shape"
-    loop_and_after = body[1]
-    # Everything after the loop header up to the function's single return.
-    loop_body = loop_and_after.split("\n    return ", 1)[0]
-    for token in ("break", "continue", "return"):
-        assert not re.search(rf"^\s+{token}\b", loop_body, flags=re.MULTILINE), (
-            f"`{token}` inside `fork_continuation`'s horizon loop: a continuation can "
-            "now be SHORTER than the registered horizon, which "
-            "`exact_paired_sequence_equal` reads as 'components separate' "
-            "(precedence item 5) where contract section 4 files a short series under "
-            "Completeness (item 1). Re-route the predicate before adding this.")
+    fn = ast.parse(inspect.getsource(audit.fork_continuation)).body[0]
+
+    assert not _horizon_loop_early_exits(fn), (
+        f"{_horizon_loop_early_exits(fn)} inside `fork_continuation`'s horizon loop: "
+        "a continuation can now be SHORTER than the registered horizon, which "
+        "`exact_paired_sequence_equal` reads as 'components separate' "
+        "(precedence item 5) where contract section 4 files a short series under "
+        "Completeness (item 1). Re-route the predicate before adding this.")
+
+    rebound = []
+    for node in ast.walk(fn):
+        if isinstance(node, ast.Assign):
+            targets = node.targets
+        elif isinstance(node, (ast.AugAssign, ast.AnnAssign, ast.NamedExpr)):
+            targets = [node.target]
+        elif isinstance(node, ast.For):
+            targets = [node.target]
+        else:
+            continue
+        for target in targets:
+            for name in ast.walk(target):
+                if isinstance(name, ast.Name) and name.id == "horizon":
+                    rebound.append(ast.unparse(node))
+    assert not rebound, (
+        f"`horizon` is rebound inside `fork_continuation`: {rebound}. A clamp such "
+        "as `horizon = min(horizon, k)` is not an early exit and leaves the loop "
+        "body exit-free, but it produces the same short continuation and the same "
+        "misrouting through `exact_paired_sequence_equal`.")
 
     # The `step_metrics.append` that makes the count equal the loop trip count
-    # must still be unconditional at the top level of the loop body.
-    assert re.search(r"^        step_metrics\.append\(", loop_body, flags=re.MULTILINE)
+    # must still be unconditional at the TOP LEVEL of the loop body -- read off
+    # the parsed body, so a version that appends inside an `if` fails here too.
+    loop = next(n for n in ast.walk(fn)
+                if isinstance(n, ast.For) and isinstance(n.iter, ast.Call)
+                and ast.unparse(n.iter) == "range(int(horizon))")
+    assert any(isinstance(n, ast.Expr) and isinstance(n.value, ast.Call)
+               and ast.unparse(n.value.func) == "step_metrics.append"
+               for n in loop.body), (
+        "`step_metrics.append(...)` is no longer an unconditional top-level "
+        "statement of the horizon loop body: the loop trip count and the recorded "
+        "series length can now disagree.")
 
 
 # =============================================================================

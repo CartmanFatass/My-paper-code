@@ -262,8 +262,29 @@ def pool(shards: list[dict], *, paths: list[str] | None = None, allow_smoke: boo
     topology_units = [r[5] for r in rows]
     topology_results = [_reconstruct_topology_result(u) for u in topology_units]
 
+    # D''' repair. This read `s.get("topology_hash_failures", [])`, and that
+    # default is the exact shape that silently under-counts the population: a
+    # shard whose key is ABSENT is indistinguishable here from a shard that
+    # genuinely had no hash failure, so a topology that produced no unit AND
+    # left no failure record simply vanishes from the pooled artifact while
+    # `topology_seeds` still declares it. `main()` writes the key
+    # unconditionally on every path (it is initialised to `[]` before the
+    # per-seed loop and always placed in the result dict), so a shard lacking
+    # it was not produced by this instrument and is malformed -- refused here,
+    # in the same style as `_assert_identity`'s refusals, rather than defaulted.
+    for p, s in zip(paths, shards):
+        if "topology_hash_failures" not in s:
+            raise SystemExit(
+                f"{p}: shard JSON carries no `topology_hash_failures` key. "
+                "`audit_d7_s_event_aligned.py main()` writes that key on every "
+                "path, so its absence means this file was not produced by this "
+                "instrument (hand-edited, truncated, or written by another "
+                "tool). Defaulting it to [] would let a topology that produced "
+                "no unit and recorded no hash failure disappear from the pooled "
+                "population while `topology_seeds` still declares it.")
+
     topology_hash_failures = sorted(
-        (f for s in shards for f in s.get("topology_hash_failures", [])),
+        (f for s in shards for f in s["topology_hash_failures"]),
         key=lambda f: f["topology_seed"])
 
     out = audit.assemble_audit_result(topology_results, topology_hash_failures)

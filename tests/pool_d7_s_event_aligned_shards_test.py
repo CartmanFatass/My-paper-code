@@ -641,6 +641,47 @@ def test_pooler_main_writes_a_conforming_r4_artifact(tmp_path, monkeypatch, caps
     assert f"D7_S_EVENT_ALIGNED_BRANCH={pooled['branch']}" in out
 
 
+def test_pooler_main_writes_a_conforming_r4_artifact_at_the_production_8x1_shape(
+        tmp_path, monkeypatch, capsys):
+    """D''' repair: the CI matrix's ACTUAL shape, committed.
+
+    Every end-to-end pooler test above runs 2 shards x 4 seeds. The formal R4
+    run is 8 shards x 1 seed -- one process per topology -- and that shape was
+    covered by no committed test at all, only by a reviewer's ad-hoc
+    measurement. It is not a cosmetic difference: at one seed per shard every
+    per-shard list has length 1, so a length/zip/ordering defect in `pool()`
+    that a 4-long list masks would be invisible at the shape the 5-6 hour run
+    actually uses. `rows.sort` is also exercised for real here -- the eight
+    shard paths are handed to the pooler in a DELIBERATELY SCRAMBLED order,
+    and the pooled `topology_seeds` must still come back ascending.
+
+    Same assertions as the 2x4 test, so the two shapes are held to one
+    standard, plus the pooled record ordering."""
+    _fast_t_m_bootstrap(monkeypatch, pooling.audit)
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    paths = [_main_shard(monkeypatch, tmp_path, f"shard{i}", [s], declared=True)
+             for i, s in enumerate(seeds)]
+    assert len(paths) == 8
+
+    scrambled = [paths[3], paths[7], paths[0], paths[5],
+                 paths[1], paths[6], paths[2], paths[4]]
+    pooled = _run_pooler_main(monkeypatch, tmp_path, scrambled)
+
+    assert pooled["topology_seeds"] == seeds
+    assert pooled["r4_contract"] == audit.R4_CONTRACT_PATH
+    assert pooled["r4_population_namespace"] == audit.R4_POPULATION_NAMESPACE
+    # Deterministic ascending reassembly, not the order the shards arrived in.
+    assert [r["topology_seed"] for r in pooled["topology_records"]] == seeds
+    assert [u["topology_seed"] for u in pooled["topology_units"]] == seeds
+    assert len(pooled["calibration_reports"]) == 8
+    assert len(pooled["audit_reports"]) == 8
+    ok, detail = audit.r4_freshness_sentinel(pooled)
+    assert ok is True, detail
+
+    out = capsys.readouterr().out
+    assert f"D7_S_EVENT_ALIGNED_BRANCH={pooled['branch']}" in out
+
+
 def test_pooler_main_exits_nonzero_on_an_undeclared_shard(tmp_path, monkeypatch, capsys):
     """Paired negative for the CLI. One shard produced WITHOUT
     `--population r4` must make the entry point exit NONZERO and write no
@@ -786,6 +827,47 @@ def test_pooled_topology_hash_failures_are_not_dropped(tmp_path):
     assert pooled["conformance"]["topology_hash_failures"] == hash_failure
     assert pooled["conformance"]["topology_hash_ok"] == expected["conformance"]["topology_hash_ok"] is False
     assert pooled["conformance"]["ok"] == expected["conformance"]["ok"] is False
+
+
+def test_a_shard_missing_the_hash_failures_key_is_refused_not_defaulted(tmp_path):
+    """D''' repair, and the paired negative for dropping
+    `s.get("topology_hash_failures", [])`.
+
+    That default made an ABSENT key indistinguishable from an empty one. It is
+    the exact shape that under-counts the population silently: a topology that
+    produced no `topology_units` entry AND left no hash-failure record simply
+    disappears from the pooled artifact, while `topology_seeds` still declares
+    it and every artifact-level condition stays True. `main()` writes the key
+    on every path, so a shard without it was not produced by this instrument.
+
+    Both halves asserted, because a refusal implemented unconditionally would
+    satisfy the negative alone:
+      NEGATIVE -- the key deleted from ONE shard's JSON on disk: SystemExit
+        naming that shard's path.
+      POSITIVE -- the same two shards with the key present and EMPTY (the
+        ordinary no-hash-failure case, which is what the default used to
+        manufacture): pools normally."""
+    topo = [_topology_result(8201, d_a=0.0, u_stable=1.0, u_flex=1.0, qualifying=1),
+            _topology_result(8202, d_a=0.0, u_stable=1.0, u_flex=1.0, qualifying=1)]
+    p1 = _write_shard(tmp_path, "ok.json", topo[:1])
+    p2 = _write_shard(tmp_path, "no_key.json", topo[1:])
+
+    # The POSITIVE half first, on the untouched pair: an EMPTY key pools fine,
+    # so the refusal below cannot be an unconditional one.
+    good = pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    assert good["topology_hash_failures"] == []
+
+    # Now plant the violating input: delete the key from one shard on disk.
+    with open(p2, encoding="utf-8") as fh:
+        shard = json.load(fh)
+    assert shard.pop("topology_hash_failures") == []
+    with open(p2, "w", encoding="utf-8") as fh:
+        json.dump(shard, fh, ensure_ascii=False)
+
+    with pytest.raises(SystemExit) as excinfo:
+        pooling.pool(_load_shards([p1, p2]), paths=[p1, p2], allow_any_seeds=True)
+    assert "no_key.json" in str(excinfo.value)
+    assert "topology_hash_failures" in str(excinfo.value)
 
 
 def test_qualifying_calibration_and_audit_counts_are_not_swapped(tmp_path):
