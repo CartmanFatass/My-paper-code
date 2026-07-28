@@ -62,6 +62,8 @@ $codeRequired = @(
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
     'execution_readiness_receipt=required_when_triggered',
+    'test_acceptance_basis=risk_and_claim_coverage',
+    'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',
@@ -175,6 +177,32 @@ foreach ($required in @(
     'runs no validation command')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing execution-readiness rule: $required"
+    }
+}
+foreach ($required in @(
+    'test_acceptance_basis=risk_and_claim_coverage',
+    'line_coverage_target=none',
+    'test_count_target=none',
+    'cpm_performance_scoring_from_tests=forbidden',
+    'formal_result_snapshot_oracle=forbidden',
+    'direction_local_test_lifetime=active_implementation_only',
+    'shared_defect_regression_promotion=plausible_recurrence_only',
+    'these classes are alternatives selected by the task, not four mandatory gates',
+    'The implementer normally owns the assigned code and its corresponding focused test together',
+    'Do not create a dedicated test agent or make verifier invocation a routine gate',
+    'A focused test should reject one plausible wrong implementation',
+    'remove its code and test together when the direction leaves the active line',
+    'Run a broad suite only for an actually changed shared surface')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill missing proof-sized test strategy: $required"
+    }
+}
+foreach ($required in @(
+    'Persistent tests protect stable shared contracts',
+    'A direction-local test has the lifetime of its active implementation',
+    'Test count, line coverage and a prior formal result are not technical-acceptance targets')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager test-acceptance boundary missing: $required"
     }
 }
 if (-not (Test-Path -LiteralPath $readinessScriptPath -PathType Leaf)) {

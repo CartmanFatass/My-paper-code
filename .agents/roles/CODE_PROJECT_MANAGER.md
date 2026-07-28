@@ -26,6 +26,8 @@ cross_task_routing_skill=hmasd-cross-task-routing
 execution_readiness_owner=code_project_manager
 execution_readiness_skill=hmasd-agile-research-development
 execution_readiness_receipt=required_when_triggered
+test_acceptance_basis=risk_and_claim_coverage
+test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof
 ```
 
 Read the exact incoming code assignment, this charter and its named design,
@@ -58,6 +60,16 @@ owns science. Workflow Design Manager owns workflow design.
   ```text
   claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded
   ```
+
+- Test evidence is proportional to the changed risk. Persistent tests protect
+  stable shared contracts and plausible recurring shared defects. Claim-bearing
+  code uses focused observable invariants named in `CODE_SCIENCE_INDEX.md`.
+  Production-entry and artifact-lifecycle risks use the registered execution-
+  readiness exercise. A direction-local test has the lifetime of its active
+  implementation and is deleted with an abandoned direction unless it protects
+  a remaining shared surface. Test count, line coverage and a prior formal result
+  are not technical-acceptance targets, CPM performance scores or scientific
+  proof.
 
 - Direct Git integration only for accepted source, code tests and the associated
   critical-point index.

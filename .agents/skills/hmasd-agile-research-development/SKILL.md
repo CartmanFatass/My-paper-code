@@ -30,6 +30,13 @@ scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 codebase_policy=small_active_line_only
 workflow_hash_validation=disabled
 per_file_hash_handoff=forbidden
+test_acceptance_basis=risk_and_claim_coverage
+line_coverage_target=none
+test_count_target=none
+cpm_performance_scoring_from_tests=forbidden
+formal_result_snapshot_oracle=forbidden
+direction_local_test_lifetime=active_implementation_only
+shared_defect_regression_promotion=plausible_recurrence_only
 ```
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
@@ -70,6 +77,39 @@ A user-named one may be inspected only as reference.
    Manager routes the one comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` before
    a formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
+
+## Proof-sized test selection
+
+Choose the smallest evidence class that exposes the changed risk; these classes
+are alternatives selected by the task, not four mandatory gates:
+
+| Changed risk | Smallest evidence | Lifetime |
+|---|---|---|
+| stable shared interface, schema, seed, backend or serialization contract | focused contract or durable regression | persistent while the shared surface remains |
+| claim-bearing mechanism | one focused test of the `CODE_SCIENCE_INDEX.md` observable invariant | while the claim-bearing implementation remains active |
+| production entry, runner phase connection or artifact lifecycle | focused evidence plus the triggered execution-readiness phases | candidate-bound receipt |
+| direction-local prototype or throwaway measurement | local focused test or diagnostic | delete with the abandoned implementation |
+
+Code Project Manager selects the evidence class, states the observable invariant
+and owns acceptance. The implementer normally owns the assigned code and its
+corresponding focused test together. The existing verifier may perform bounded
+read-only verification for a risky cross-file, RNG, serialization, runner or
+artifact change; it is optional and creates no second acceptance owner. Do not
+create a dedicated test agent or make verifier invocation a routine gate.
+
+Select an oracle in this order when applicable: a hand-checkable exact case; a
+structural invariant or metamorphic relation; a differential comparison with a
+small simple reference; boundary and fail-closed behavior; then a deterministic
+seeded statistical band only when no cheaper relation tests the claim. A focused
+test should reject one plausible wrong implementation. Do not freeze a formal
+research outcome as an implementation oracle or use test count, line coverage
+or suite pass rate to score Code Project Manager performance or establish
+scientific truth.
+
+Promote a direction-local failure to a persistent regression only when the
+defect can recur on a remaining shared surface. Otherwise remove its code and
+test together when the direction leaves the active line; Git retains the
+history. Run a broad suite only for an actually changed shared surface.
 
 ## Mechanical execution readiness
 
