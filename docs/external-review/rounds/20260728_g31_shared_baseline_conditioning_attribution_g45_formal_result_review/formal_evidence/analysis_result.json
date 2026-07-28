@@ -1,0 +1,397 @@
+{
+  "algorithm": "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45",
+  "aligned_source_commit": "a42da997712d9c941ac9a6ca08992f4c5de033a2",
+  "alignment_stage_commit": "40840069c4cfe0baad67e2800d13bbee872844b0",
+  "branch": "SHADOW_BASELINE_NO_ACTOR_READ_SUFFICIENT_G45",
+  "cpu_execution": {
+    "continuous_adaptation": false,
+    "cpu_budget": 2,
+    "deterministic_merge": "preassigned_index_not_completion_order",
+    "effective_parent_torch_intraop_threads": 1,
+    "evaluation_parallel_unit": "replicate_capacity_cell",
+    "fixed_at_launch": true,
+    "hardware_logical_cpu_count": 16,
+    "process_workers": 2,
+    "supported_process_worker_ceiling": 6,
+    "training_parallel_unit": "formal_replicate_only",
+    "worker_start_method": "spawn",
+    "worker_thread_controls": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "torch_intraop_threads": 1
+    }
+  },
+  "evaluation_manifest_digest": "1ceab8a5781a5d5b689d758d9cfdaa8e7e05b17b442c5089539cc7e2d4f1eeb6",
+  "formal": true,
+  "formal_projection_executable": null,
+  "formal_projection_seconds": null,
+  "formal_wall_clock_cap_seconds": 28800.0,
+  "metrics": {
+    "arm_access": {
+      "NATIVE6_G31_INDEPENDENT_SCALE_BASELINE_READ": {
+        "access_confident_fail": false,
+        "access_pass": true,
+        "fixed_stochastic_pooled_ci95": [
+          0.901956360667657,
+          0.9041389212948309,
+          0.9059649851359619
+        ],
+        "fixed_utility_ci95": {
+          "6": [
+            0.9624705171664195,
+            0.9652006879166963,
+            0.9673841895502064
+          ],
+          "8": [
+            0.9721425768874489,
+            0.9744188257206657,
+            0.976914008273831
+          ],
+          "12": [
+            0.9666704054745594,
+            0.9691756312153432,
+            0.9711492985048463
+          ]
+        },
+        "minimum_fixed_deterministic_replicate_mean": 0.9681223487139619,
+        "minimum_random_deterministic_replicate_mean": 0.9701380709038259,
+        "random_event_window_ci95": {
+          "6": [
+            0.9411809013139428,
+            0.9458770936473841,
+            0.9501615201322997
+          ],
+          "8": [
+            0.9611302337536601,
+            0.9631828751828462,
+            0.9653956150257427
+          ],
+          "12": [
+            0.9409253568150071,
+            0.9497564722915822,
+            0.9560229189441236
+          ]
+        },
+        "random_minus_fixed_ci95": {
+          "6": [
+            0.003227734313742244,
+            0.004665227084850327,
+            0.006371922734466032
+          ],
+          "8": [
+            0.00019480232854325805,
+            0.0005729772745377019,
+            0.000961102454985541
+          ],
+          "12": [
+            2.3003458392946647e-05,
+            0.0008399282194819995,
+            0.0017268929382763137
+          ]
+        },
+        "random_process_segment_ci95": {
+          "6": [
+            0.9424337259995873,
+            0.9467652715782235,
+            0.9506631500764636
+          ],
+          "8": [
+            0.9621815007937234,
+            0.9649196618441104,
+            0.9676971418042661
+          ],
+          "12": [
+            0.9419683809370486,
+            0.9515317959968287,
+            0.9575929912962409
+          ]
+        },
+        "random_stochastic_pooled_ci95": [
+          0.9087907836613335,
+          0.9106658108742732,
+          0.9123618564983097
+        ],
+        "random_utility_ci95": {
+          "6": [
+            0.9670527165908419,
+            0.9698954728891533,
+            0.9722621975518387
+          ],
+          "8": [
+            0.9727211541894956,
+            0.9749979819821267,
+            0.9775136963984875
+          ],
+          "12": [
+            0.9680325778782175,
+            0.9700174150464509,
+            0.9715687946837581
+          ]
+        }
+      },
+      "NATIVE6_G31_INDEPENDENT_SCALE_BASELINE_SHADOW_NO_READ": {
+        "access_confident_fail": false,
+        "access_pass": true,
+        "fixed_stochastic_pooled_ci95": [
+          0.9015109895242349,
+          0.9035073909718193,
+          0.905480353382135
+        ],
+        "fixed_utility_ci95": {
+          "6": [
+            0.9639047882007481,
+            0.9661606916598882,
+            0.9691029349304416
+          ],
+          "8": [
+            0.9748572774852875,
+            0.9762636795575002,
+            0.9777723650907095
+          ],
+          "12": [
+            0.96570290265315,
+            0.9697914570259354,
+            0.9728867391077545
+          ]
+        },
+        "minimum_fixed_deterministic_replicate_mean": 0.9690384546650157,
+        "minimum_random_deterministic_replicate_mean": 0.9714171531283774,
+        "random_event_window_ci95": {
+          "6": [
+            0.9423829844076388,
+            0.9468588697977386,
+            0.9510824470801634
+          ],
+          "8": [
+            0.9628466940712059,
+            0.9659830443325794,
+            0.9683913819930281
+          ],
+          "12": [
+            0.9405920403801986,
+            0.9476354141213961,
+            0.9572952120349948
+          ]
+        },
+        "random_minus_fixed_ci95": {
+          "6": [
+            0.003922753640522708,
+            0.005124372540417357,
+            0.0064863376007998595
+          ],
+          "8": [
+            0.0002304517639715128,
+            0.0007677651408322735,
+            0.0013208403020528849
+          ],
+          "12": [
+            0.00021036883186443032,
+            0.0009915970792766045,
+            0.0017482697491341742
+          ]
+        },
+        "random_process_segment_ci95": {
+          "6": [
+            0.9433748001561006,
+            0.9478787198877916,
+            0.9522695226624376
+          ],
+          "8": [
+            0.9651081434629444,
+            0.9670878040710629,
+            0.9691967168617865
+          ],
+          "12": [
+            0.9409218104604554,
+            0.9491482366467429,
+            0.9594770655191799
+          ]
+        },
+        "random_stochastic_pooled_ci95": [
+          0.908462651344815,
+          0.9100313353883199,
+          0.9116186026095937
+        ],
+        "random_utility_ci95": {
+          "6": [
+            0.9692838307708596,
+            0.9713497536689177,
+            0.9736545352204132
+          ],
+          "8": [
+            0.9757356585912017,
+            0.9770173440985838,
+            0.9786373901089399
+          ],
+          "12": [
+            0.9668930790795188,
+            0.9707982078343007,
+            0.9739417163865186
+          ]
+        }
+      }
+    },
+    "component_ci95": {
+      "fixed_deterministic_utility": {
+        "6": [
+          -0.002199459991880043,
+          -0.0010970057471381702,
+          0.0004080954924104051
+        ],
+        "8": [
+          -0.00369569724413749,
+          -0.0018635069069975157,
+          0.0009603706433734676
+        ],
+        "12": [
+          -0.0029696645079969374,
+          -0.0005555706465948088,
+          0.001058857936321089
+        ]
+      },
+      "fixed_stochastic_utility": [
+        0.00017630540326251333,
+        0.0005931043016877806,
+        0.0012260476290528982
+      ],
+      "random_deterministic_utility": {
+        "6": [
+          -0.0030194861611804046,
+          -0.0015501910079842233,
+          0.0007737374620295832
+        ],
+        "8": [
+          -0.004090149492283792,
+          -0.002048450199702274,
+          0.0012358342521565627
+        ],
+        "12": [
+          -0.003165920213655343,
+          -0.0006791314684120162,
+          0.0011876058223635152
+        ]
+      },
+      "random_event_window": {
+        "6": [
+          -0.002769632804939908,
+          -0.0009998471628598013,
+          0.0007945137758245112
+        ],
+        "8": [
+          -0.005579408887590936,
+          -0.002726790818933614,
+          0.0012440040311944226
+        ],
+        "12": [
+          -0.0023771052304395386,
+          0.0016706501373175944,
+          0.007370424286840787
+        ]
+      },
+      "random_minus_fixed_transport": {
+        "6": [
+          -0.0011149327787899291,
+          -0.00045945549274428656,
+          0.00033950821283373287
+        ],
+        "8": [
+          -0.0006809291685811524,
+          -0.00018991281024031737,
+          0.00027740400145563024
+        ],
+        "12": [
+          -0.000618476748481587,
+          -0.00013560532553701985,
+          0.0003037307351199228
+        ]
+      },
+      "random_process_segment": {
+        "6": [
+          -0.002683287488309223,
+          -0.0011366049357082212,
+          0.0002689755066820994
+        ],
+        "8": [
+          -0.004675418725506014,
+          -0.0022360387406347485,
+          0.0012721910391736365
+        ],
+        "12": [
+          -0.0025894779823387526,
+          0.0020009028722524965,
+          0.007893838767197582
+        ]
+      },
+      "random_stochastic_utility": [
+        7.70778739738802e-05,
+        0.0006050461489780563,
+        0.00132742946800594
+      ]
+    },
+    "material_baseline_conditioning_advantage": false,
+    "no_read_access_confident_fail": false,
+    "no_read_access_pass": true,
+    "no_read_noninferior": true,
+    "operational_valid": true,
+    "read_access_confident_fail": false,
+    "read_access_pass": true,
+    "read_minus_no_read_capacity_ci95": {
+      "6": [
+        -0.0030194861611804046,
+        -0.0015501910079842233,
+        0.0007737374620295832
+      ],
+      "8": [
+        -0.004090149492283792,
+        -0.002048450199702274,
+        0.0012358342521565627
+      ],
+      "12": [
+        -0.003165920213655343,
+        -0.0006791314684120162,
+        0.0011876058223635152
+      ]
+    },
+    "read_minus_no_read_primary_ci95": [
+      -0.003077230819581201,
+      -0.0014496800236112246,
+      0.0010699409259821953
+    ],
+    "source_valid": true,
+    "treatment_activation_valid": true
+  },
+  "native_backend": {
+    "build_identity": "80dca0e353c5677ebd73",
+    "kind": "ContinuousRosterToyBatch_CPU_CPP",
+    "module": "hmasd_continuous_roster_toy_80dca0e353c5677ebd73",
+    "python_fallback": false,
+    "required": true
+  },
+  "nonformal_total_wall_time_seconds": null,
+  "nonformal_wall_clock_cap_seconds": 1200.0,
+  "operational_errors": [],
+  "operational_valid": true,
+  "preflight_artifact_digests": {
+    "analysis": "51e50fdb6ec2346b5370bdad6971f05292e1537c346a1e0caa2038a135fcdfe5",
+    "evaluation": "c90da6d4019564f492deedef0f9863e1d1298c9a6dc9588b11a48442ddd94c7d",
+    "training": "be7c25224cb474af5390539be017fff351d5b9bacfa5264b2de0a288812e8892"
+  },
+  "schema_version": 2,
+  "source_commit": "d2502f4d1732601aa1249a1df7627690d51a9954",
+  "source_id": "CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_P0",
+  "stage": "analyze",
+  "stage_wall_time_seconds": 4.077426500000001,
+  "status": "COMPLETE",
+  "thresholds": {
+    "baseline_margin": 0.05,
+    "event_floor": 0.85,
+    "minimum_replicate_floor": 0.85,
+    "process_noninferiority_margin": -0.05,
+    "segment_floor": 0.85,
+    "stochastic_floor": 0.8,
+    "utility_floor": 0.9
+  },
+  "training_manifest_digest": "5c2843dc10f33d425af7dbabbbe714805c8afa26849227264b957f7a376b1c8a"
+}
