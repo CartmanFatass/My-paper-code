@@ -4,6 +4,15 @@ description: Executes an exact list of assigned checks — focused pytest suites
 model: haiku
 effort: high
 tools: Read, Grep, Glob, Bash
+hooks:
+  PreToolUse:
+    - matcher: "Bash|PowerShell"
+      hooks:
+        - type: command
+          command: |-
+            payload=$(cat)
+            if command -v jq >/dev/null 2>&1; then cmd=$(printf '%s' "$payload" | jq -r '.tool_input.command // ""'); else cmd=$payload; fi
+            if printf '%s' "$cmd" | grep -Eiq 'git([[:space:]]+-[cC][[:space:]]+[^[:space:]]+)*[[:space:]]+(add|commit|push|stash|reset|checkout|restore|rebase|merge|cherry-pick|revert|clean)([[:space:]]|"|$)'; then echo "BLOCKED: you execute assigned checks and report; git mutations belong to the orchestrator. Read-only git (status, diff, log, show) is allowed." >&2; exit 2; fi
 ---
 
 # HMASD Verifier

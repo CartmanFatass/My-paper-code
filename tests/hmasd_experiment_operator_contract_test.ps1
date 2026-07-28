@@ -48,7 +48,17 @@ if (-not $shell) {
 if (-not $shell -or -not (Test-Path $shell)) {
     throw 'No POSIX shell available to execute the child git hooks; the no-Git boundary cannot be proven'
 }
-foreach ($definition in @('hmasd-experiment-operator', 'hmasd-implementer')) {
+# Discovered, never enumerated. The hardcoded pair here meant a hook added to any
+# other definition was executed by nothing -- a guard outside its own guard, which
+# is the defect this file exists to prevent. Every definition carrying a hooks:
+# block is now proven against the same four cases.
+$hookedDefinitions = @(Get-ChildItem (Join-Path $repo '.claude/agents') -File -Filter 'hmasd-*.md' |
+    Where-Object { (Get-Content -Raw -LiteralPath $_.FullName) -match '(?m)^hooks:\s*$' } |
+    ForEach-Object { $_.BaseName } | Sort-Object)
+if ($hookedDefinitions.Count -lt 2) {
+    throw "Expected at least the operator and implementer to carry PreToolUse hooks; found $($hookedDefinitions.Count)"
+}
+foreach ($definition in $hookedDefinitions) {
     $text = Get-Content -Raw -LiteralPath (Join-Path $repo ".claude/agents/$definition.md")
     $matcherMatch = [regex]::Match($text, '(?m)^\s*- matcher:\s*"([^"]*)"')
     if (-not $matcherMatch.Success) { throw "$definition hook has no matcher" }
@@ -62,11 +72,17 @@ foreach ($definition in @('hmasd-experiment-operator', 'hmasd-implementer')) {
     $script = Join-Path ([IO.Path]::GetTempPath()) "hookcheck_$definition.sh"
     [IO.File]::WriteAllText($script, ($body -replace '^\s{12}', '' -replace "(?m)^\s{12}", '') + "`nexit 0`n")
     foreach ($case in @(
-        @{ cmd = 'git commit -m wip';    expect = 2 },
-        @{ cmd = 'git -C /repo push';    expect = 2 },
-        @{ cmd = 'ls && git add -A';     expect = 2 },
-        @{ cmd = 'git status --short';   expect = 0 })) {
-        $json = '{"tool_input":{"command":"' + $case.cmd + '"}}'
+        @{ cmd = 'git commit -m wip';      expect = 2; cwd = 'C:/Projects/My-paper-code' },
+        @{ cmd = 'git -C /repo push';      expect = 2; cwd = 'C:/Projects/My-paper-code' },
+        @{ cmd = 'ls && git add -A';       expect = 2; cwd = 'C:/Projects/My-paper-code' },
+        # The destructive one, in the SHARED tree. hmasd-guard-sweeper is
+        # instructed to run this inside its worktree; every definition must
+        # still refuse it when the cwd is the shared tree, where it would
+        # silently destroy the orchestrator's staged work and any concurrent
+        # child's uncommitted output.
+        @{ cmd = 'git reset --hard main'; expect = 2; cwd = 'C:/Projects/My-paper-code' },
+        @{ cmd = 'git status --short';     expect = 0; cwd = 'C:/Projects/My-paper-code' })) {
+        $json = '{"cwd":"' + $case.cwd + '","tool_input":{"command":"' + $case.cmd + '"}}'
         # A blocking hook writes its reason to stderr, and PowerShell 5.1 wraps a
         # native command's stderr in an ErrorRecord that trips ErrorActionPreference
         # 'Stop'. The exit code is the contract here, so judge on that alone.
@@ -75,7 +91,23 @@ foreach ($definition in @('hmasd-experiment-operator', 'hmasd-implementer')) {
         $json | & $shell $script 2>&1 | Out-Null
         $ErrorActionPreference = $previous
         if ($LASTEXITCODE -ne $case.expect) {
-            throw "$definition hook returned $LASTEXITCODE for '$($case.cmd)', expected $($case.expect)"
+            throw "$definition hook returned $LASTEXITCODE for '$($case.cmd)' at cwd '$($case.cwd)', expected $($case.expect)"
+        }
+    }
+
+    # The sweeper's allow path. Blocking reset everywhere would be safe and
+    # useless: its whole job is to mutate production code inside an isolated
+    # worktree, and its definition tells it to reset that worktree to the branch
+    # under test. Without this case the hook could refuse unconditionally and the
+    # suite would never notice -- a guard that forbids the work it guards.
+    if ($definition -eq 'hmasd-guard-sweeper') {
+        $json = '{"cwd":"C:/Projects/My-paper-code/.claude/worktrees/agent-abc123","tool_input":{"command":"git reset --hard untied-k"}}'
+        $previous = $ErrorActionPreference
+        $ErrorActionPreference = 'SilentlyContinue'
+        $json | & $shell $script 2>&1 | Out-Null
+        $ErrorActionPreference = $previous
+        if ($LASTEXITCODE -ne 0) {
+            throw "hmasd-guard-sweeper hook returned $LASTEXITCODE for a reset inside its own worktree; it must be allowed there or the sweeper cannot do its assigned work"
         }
     }
 }

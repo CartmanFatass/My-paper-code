@@ -4,6 +4,22 @@ description: Runs a paired-negative mutation sweep on a named test surface — p
 model: sonnet
 effort: high
 tools: Read, Grep, Glob, Bash, Edit, Write
+hooks:
+  PreToolUse:
+    - matcher: "Bash|PowerShell"
+      hooks:
+        - type: command
+          command: |-
+            payload=$(cat)
+            if command -v jq >/dev/null 2>&1; then cmd=$(printf '%s' "$payload" | jq -r '.tool_input.command // ""'); cwd=$(printf '%s' "$payload" | jq -r '.cwd // ""'); else cmd=$payload; cwd=$(printf '%s' "$payload" | sed -n 's/.*"cwd"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p'); fi
+            cwd=$(printf '%s' "$cwd" | tr '\\' '/')
+            if printf '%s' "$cmd" | grep -Eiq 'git([[:space:]]+-[cC][[:space:]]+[^[:space:]]+)*[[:space:]]+(add|commit|push|stash|rebase|merge|cherry-pick|revert)([[:space:]]|"|$)'; then echo "BLOCKED: git mutations belong to the orchestrator. You diagnose; you never commit or publish." >&2; exit 2; fi
+            if printf '%s' "$cmd" | grep -Eiq 'git([[:space:]]+-[cC][[:space:]]+[^[:space:]]+)*[[:space:]]+(reset|checkout|restore|clean)([[:space:]]|"|$)'; then
+              case "$cwd" in
+                */.claude/worktrees/*) : ;;
+                *) echo "BLOCKED: reset/checkout/restore/clean is survivable ONLY inside your own worktree, and your cwd is '$cwd', which is not under .claude/worktrees/. In the shared tree this destroys the orchestrator's staged work and any concurrent child's output, silently. If you were dispatched without isolation: worktree, stop and report that instead." >&2; exit 2 ;;
+              esac
+            fi
 ---
 
 # HMASD Guard Sweeper
