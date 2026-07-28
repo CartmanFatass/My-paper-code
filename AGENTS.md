@@ -478,11 +478,26 @@ holds; an unresolved boundary is a real result and belongs in the portfolio.
 
 ### Implementing a ruling is not making one
 
-The test for whether a decision must cross the boundary is whether **reversing it
-would change a registered quantity or a branch**. A choice that only decides
-whether an already-authorized configuration can *start* fails that test, however
-scientific its subject sounds. Sending it anyway asks Pro to re-authorize what it
-already authorized, and spends the scarcest resource in the project on nothing.
+The test for whether a decision must cross the boundary is whether **it is a
+scientific judgment**. If it is, it crosses — user ruling 2026-07-27: *Pro is
+responsible for all scientific decisions.* That is broader than the test this
+section carried until then, which asked only whether reversing the decision would
+change a registered quantity or a branch. Under the narrow test this conversation
+settled **run validity and instrument-defect severity itself** and handed them to
+Pro as frozen inputs, which is not restraint — a reviewer given "the run is
+valid" as a premise is not being asked the question.
+
+The narrow test survives only as its contrapositive, which is what it was written
+for: a decision that is **not** scientific does not cross, however scientific its
+subject sounds. A choice that only decides whether an already-authorized
+configuration can *start* is the case in point. Sending it asks Pro to
+re-authorize what it already authorized, and spends the scarcest resource in the
+project on nothing.
+
+Do not confuse this with the scoping rule on the pre-implementation **alignment**
+round, which stays narrow: that round takes claim-defining decisions only, and
+endless implementation detail stays out of it. Scoping one round is not narrowing
+Pro's authority.
 
 On 2026-07-25 D7.2B stalled behind exactly this. Pro's ruling permitted a supplied
 primitive executor for the positive control; three stale validation guards made
@@ -498,8 +513,15 @@ answer it and rewrite the note — do not treat your own earlier sentence as a
 ruling you must wait on. That inversion is how an authorized loop stops without
 anyone deciding to stop it.
 
-What still crosses: a change to what is measured, to a threshold or estimand, to a
-result branch, or to the meaning of a closed result.
+What crosses: a change to what is measured, to a threshold or estimand, to a
+result branch, or to the meaning of a closed result — and equally **whether a
+completed run is valid, how severe an instrument defect is, and whether evidence
+closes**. None of those three moves a registered quantity, and all three decide
+what a result means, which is why the narrow test let them slip.
+
+What does not cross: code, tests, architecture, Git, transport, and
+implementation bindings. Those the Project Manager decides, records, and at most
+discloses.
 
 ## Fixed experiment operator
 
@@ -525,7 +547,9 @@ not run.
 2. **Code decisions.** Project Manager makes every implementation binding —
    realization, controllers, constants, factoring — records them in the
    iteration record, and at most discloses them to Pro. A choice crosses to
-   Pro only if reversing it would change a registered quantity or a branch.
+   Pro whenever it is a scientific judgment — including run validity, defect
+   severity and whether evidence closes, none of which move a registered
+   quantity.
 3. **Pro reviews the key decisions — zero experiments run.** The Stage A
    design assertion audit closes in one round: initial-state signals,
    positive-control necessity, gate witnesses, frozen result-sensitive
