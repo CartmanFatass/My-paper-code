@@ -173,6 +173,13 @@ $rejected = & $preflight `
 if ($rejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
     throw 'Round preflight accepted a question with no evidence allow-list'
 }
+# Assert on this guard's OWN wording, not on `status`. The fixture is illegal in
+# two independent ways -- no allow-list and no fence artifact -- so a status-only
+# check stays green even with the entire allow-list contract deleted from the
+# preflight. One fixture violating two guards tests neither.
+if (-not ($rejected.failures -match 'no "## Evidence to read" allow-list')) {
+    throw "Round preflight rejected the fixture, but not for the missing evidence allow-list -- this probe was masked by a sibling guard. Failures: $($rejected.failures -join ' | ')"
+}
 
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'
 # The deliberate rejection probe above exits 1 by design; do not inherit it.

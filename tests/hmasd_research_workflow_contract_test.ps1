@@ -309,6 +309,16 @@ foreach ($definition in (Get-ChildItem -LiteralPath (Join-Path $repo '.claude/ag
             throw "Subagent definition has no $field field: $($definition.Name)"
         }
     }
+    # Presence is not resolvability. A non-blank value that names no real model
+    # behaves exactly like an omitted field -- a silent inherit of the session
+    # model -- so the check above passes while the tier pin does nothing. Validate
+    # against the closed set the harness actually resolves.
+    if ($text -match '(?m)^model:\s*(\S+)') {
+        $declaredModel = $Matches[1]
+        if ($declaredModel -notin @('haiku', 'sonnet', 'opus', 'fable', 'inherit')) {
+            throw "Subagent definition declares an unresolvable model '$declaredModel': $($definition.Name)"
+        }
+    }
 }
 
 Write-Output 'HMASD_RESEARCH_WORKFLOW_CONTRACT_OK'

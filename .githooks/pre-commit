@@ -8,7 +8,10 @@
 staged=$(git diff --cached --name-only --diff-filter=ACMR)
 [ -z "$staged" ] && exit 0
 
-guarded=$(printf '%s\n' "$staged" | grep -E '^(AGENTS\.md|CLAUDE\.md|\.agents/roles/|\.claude/agents/|\.claude/skills/hmasd-|docs/project/|docs/external-review/REVIEWER_CONVERSATIONS\.json|tests/.*contract.*|tests/run_workflow_contracts\.ps1)')
+# The enforcement layer must be inside its own enforcement. Without the last
+# three alternatives, a commit that neuters this hook, widens the permission
+# allow-list, or edits a PreToolUse guard script runs no contract at all.
+guarded=$(printf '%s\n' "$staged" | grep -E '^(AGENTS\.md|CLAUDE\.md|\.agents/roles/|\.claude/agents/|\.claude/skills/hmasd-|docs/project/|docs/external-review/REVIEWER_CONVERSATIONS\.json|tests/.*contract.*|tests/run_workflow_contracts\.ps1|\.githooks/|\.claude/settings.*\.json|\.claude/hooks/)')
 [ -z "$guarded" ] && exit 0
 
 echo "workflow drift guard: guarded paths staged"
