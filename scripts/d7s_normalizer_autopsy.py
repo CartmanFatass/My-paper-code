@@ -491,14 +491,25 @@ def classify_n4(ratios: dict[str, dict]) -> tuple[str, str]:
     this script's own interpretive choice (documented in the implementer
     report), not a value Modification 5 states numerically -- it decides
     only this diagnostic label, never a registered R3 branch."""
-    values = [r["r_topology"] for r in ratios.values() if math.isfinite(r["r_topology"])]
-    if not values:
+    finite = {q: r["r_topology"] for q, r in ratios.items() if math.isfinite(r["r_topology"])}
+    if not finite:
         return "not established", "R_topology undefined for every quantity."
-    worst = max(values)
-    if worst > 0.5:
-        return "dominant", f"max R_topology={worst:.4f} exceeds 0.5 for at least one quantity."
-    if worst > 0.0:
-        return "material", f"max R_topology={worst:.4f} is nonzero but does not exceed 0.5."
+    dominant = {q: v for q, v in finite.items() if v > 0.5}
+    if dominant:
+        return "dominant", ("topology-dominant variation established for "
+                            + ", ".join(f"{q} (R_topology={v:.4f})" for q, v in dominant.items()))
+    # Ruling 2026-07-28 (CHALLENGES 3): calling any positive MAXIMUM "material"
+    # overstated the finding. Only one quantity had a nonzero adjusted ratio;
+    # the other three were exactly zero because their estimated within-topology
+    # variance exceeded their between-topology point variance. The verdict now
+    # names which quantities show limited contribution rather than promoting a
+    # single quantity's ratio into a global label.
+    limited = {q: v for q, v in finite.items() if v > 0.0}
+    if limited:
+        return "not established", (
+            "limited topology contribution detected for "
+            + ", ".join(f"artifact-derived {q} (R_topology={v:.4f})" for q, v in limited.items())
+            + "; topology-dominant variation is not established for any quantity")
     return "not established", "R_topology is zero for every quantity."
 
 
@@ -686,12 +697,22 @@ def classify_n2(u_stable_interval: list[float], u_flex_interval: list[float]) ->
     flex_lo, flex_hi = u_flex_interval
     stable_resolved = stable_lo > 0
     flex_resolved = flex_hi < 0
-    if stable_resolved and flex_resolved:
-        return "resolved", "U*_stable positively resolved and U*_flex negatively resolved."
-    if stable_resolved or flex_resolved:
-        leg = "U*_stable positively resolved" if stable_resolved else "U*_flex negatively resolved"
-        return "compatible", f"only one leg resolved ({leg})."
-    return "not resolved", "neither U*_stable nor U*_flex is resolved in the direction N2 requires."
+    # Ruling 2026-07-28 (CHALLENGES 4): the AND-predicate above was
+    # prospectively too conjunctive. The governing ruling said EITHER a
+    # positively resolved U*_stable OR a negatively resolved U*_flex raises N2
+    # directly; this script had reserved "resolved" for both legs and demoted a
+    # single resolved leg to "compatible". The legs are now reported
+    # separately rather than collapsed into one predicate.
+    legs = {
+        "stable": ("resolved" if stable_resolved else "not resolved"),
+        "flex": ("resolved" if flex_resolved else "not resolved"),
+    }
+    verdict = "; ".join(f"{k}={v}" for k, v in legs.items())
+    detail = (f"U*_stable interval [{stable_lo:.6f}, {stable_hi:.6f}] -> {legs['stable']} "
+              f"(N2 leg requires the lower edge above zero); "
+              f"U*_flex interval [{flex_lo:.6f}, {flex_hi:.6f}] -> {legs['flex']} "
+              f"(N2 leg requires the upper edge below zero). Either leg alone raises N2.")
+    return verdict, detail
 
 
 # =============================================================================
@@ -827,12 +848,24 @@ def run_autopsy(*, artifact_path: Path, iters: int, seed: int, quick: bool) -> d
     rank_order = {"raised": 2, "compatible": 1, "lowered": 0}
     n5_overall = max(n5_by_limb.values(), key=lambda v: rank_order[v["verdict"]])["verdict"]
 
-    n1_verdict, n1_detail = classify_n1(
-        b_topo_points=standalone["b_stable"]["per_topology_points"] + standalone["b_flex"]["per_topology_points"],
-        u_topo_points=standalone["u_star_stable"]["per_topology_points"] + standalone["u_star_flex"]["per_topology_points"],
-        u_interval=standalone["u_star_stable"]["interval_5_95"],
-        u_loto_points=[e["point"] for e in loto["u_star_stable"]],
-    )
+    # Ruling 2026-07-28 (CHALLENGES 2): the first implementation concatenated
+    # the stable and flex per-topology vectors and then evaluated the combined
+    # 16-element vector against the u_star_stable interval and stable-only
+    # leave-one-out points. That mixes two horizons, two causal classes, two
+    # differently scaled B_m distributions and two U* directions, and the row
+    # it produced was ordered discarded. N1 is evaluated SEPARATELY BY LIMB.
+    n1_by_limb = {}
+    for limb, (b_key, u_key) in LIMB_QUANTITIES.items():
+        v, d = classify_n1(
+            b_topo_points=standalone[b_key]["per_topology_points"],
+            u_topo_points=standalone[u_key]["per_topology_points"],
+            u_interval=standalone[u_key]["interval_5_95"],
+            u_loto_points=[e["point"] for e in loto[u_key]],
+        )
+        n1_by_limb[limb] = {"verdict": v, "detail": d}
+    n1_verdict = "; ".join(f"{limb}={n1_by_limb[limb]['verdict']}" for limb in n1_by_limb)
+    n1_detail = " | ".join(f"{limb}: {n1_by_limb[limb]['detail']}" for limb in n1_by_limb)
+
     n2_verdict, n2_detail = classify_n2(
         standalone["u_star_stable"]["interval_5_95"], standalone["u_star_flex"]["interval_5_95"])
 
@@ -854,12 +887,23 @@ def run_autopsy(*, artifact_path: Path, iters: int, seed: int, quick: bool) -> d
     # Modification 6: nominate, never freeze. Purely descriptive candidates,
     # explicitly labeled non-binding -- this script decides no R4 branch.
     r4_candidates = []
-    if n1_verdict == "raised":
-        r4_candidates.append("normalizer redefinition or per-topology normalization (N1 raised)")
+    if "raised" in n1_verdict:
+        r4_candidates.append("normalizer redefinition or per-topology normalization (N1 raised on at least one limb)")
     if n5_overall == "raised":
-        r4_candidates.append("a normalizer scale better matched to the focal one-Delta intervention (N5 raised)")
-    if n4_verdict in ("dominant", "material"):
-        r4_candidates.append("stratify or expand by topology before re-attempting a pooled normalizer (N4 " + n4_verdict + ")")
+        # Ruling 2026-07-28 (CHALLENGES 5): "raised" is a HYPOTHESIS STATUS,
+        # not an acceptance test, and must never be quoted as a statistically
+        # identified mismatch. The supported statement is "relevance not
+        # demonstrated", not "unrelated".
+        r4_candidates.append(
+            "a normalizer scale better matched to the focal one-Delta intervention "
+            "(N5 raised = the comparator-mismatch explanation remains important enough to "
+            "affect design; NOT a statistically identified mismatch)")
+    # Ruling 2026-07-28 (CHALLENGES 3): the stratify-or-expand recommendation is
+    # NOT to be selected. R3 expansion remains forbidden and eight post hoc
+    # topologies cannot identify a transportable regime, so this is only ever
+    # nominated on genuine topology DOMINANCE, never on limited contribution.
+    if n4_verdict == "dominant":
+        r4_candidates.append("stratify by topology before re-attempting a pooled normalizer (N4 dominant)")
     if not r4_candidates:
         r4_candidates.append("no autopsy-nominated R4 direction; disposition remains open at the next review boundary")
 
