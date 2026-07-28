@@ -47,8 +47,10 @@ foreach ($required in @(
     '$browser:control-in-app-browser',
     'VERIFY_FRESHNESS_FENCE',
     'CORRECT_PREFIX_FENCE',
+    'RETRY_RESPONSE_CONTRACT',
     'render_review_fence.ps1',
     'Full-hash prefix correction',
+    'One response-contract retry',
     'rejected transport record',
     'no assistant response is visible',
     'no prior correction',
@@ -56,7 +58,10 @@ foreach ($required in @(
     'same pending review turn and registered conversation',
     'At most one monitor and sentinel generation may be live',
     'recovery consumes zero scientific iterations',
-    'An accepted matching fence is never resubmitted',
+    'submission_attempt=2',
+    'supersedes_submission_attempt=1',
+    'server-visible',
+    'never submit attempt 3',
     'same tab once for that stuck episode',
     'Reloading never proves the matching fence absent and never authorizes submission',
     'a new observed stuck episode',
@@ -114,6 +119,12 @@ foreach ($required in @(
     'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
     'review_fence_correction_question_resubmission=forbidden',
     'review_fence_monitor_concurrency=one_live',
+    'review_response_retry=once_same_conversation_after_terminal_attempt',
+    'review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery',
+    'review_response_retry_requires_server_visible_original_fence=true',
+    'review_response_retry_unproven_persistence=forbidden',
+    'review_response_retry_submission_limit=2_total',
+    'review_response_retry_scientific_iteration_cost=zero',
     'rejected transport record',
     'Reloading never proves a freshness fence absent and never authorizes submission')) {
     if (-not $operationsNormalized.Contains($required)) {
@@ -128,6 +139,9 @@ foreach ($required in @(
     'exact 40-character stage commit',
     'strict stage-commit prefix',
     'without resubmitting the scientific question',
+    'one ResponseRetry',
+    'uncertain persistence is ineligible',
+    'there is no third submission',
     'Never activate Answer now',
     'operations-manager-brokered JSONL sentinel',
     'child never opens the browser',
@@ -161,6 +175,103 @@ $expectedAssignment = @(
 ) -join "`n"
 if ($assignment -cne $expectedAssignment) {
     throw 'Assignment renderer did not preserve the exact full-hash identity'
+}
+
+$responseRetry = (& $renderer `
+    -Mode ResponseRetry `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question `
+    -RetryReason format_nonconforming) -replace "`r`n", "`n"
+$retryPrefix = $assignment + "`n`n"
+if (-not $responseRetry.StartsWith($retryPrefix, [StringComparison]::Ordinal)) {
+    throw 'Response retry did not preserve the original Assignment as its exact prefix'
+}
+foreach ($required in @(
+    'CURRENT_REVIEW_RESPONSE_RETRY',
+    'submission_attempt=2',
+    'supersedes_submission_attempt=1',
+    'retry_reason=format_nonconforming',
+    'RESPONSE_REQUIREMENTS',
+    '1. Answer the unchanged question completely.',
+    '2. Use every required heading, field, disposition token and section exactly as specified by the question.',
+    '3. Do not omit a required item; if it cannot be determined, mark that item UNDETERMINED and state its blocker.',
+    '4. Do not return only transport, status or acknowledgement text.')) {
+    if (-not $responseRetry.Contains($required)) {
+        throw "Response retry renderer missing: $required"
+    }
+}
+
+$noResponseRetry = (& $renderer `
+    -Mode ResponseRetry `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question `
+    -RetryReason no_response_after_exhausted_recovery) -replace "`r`n", "`n"
+if (-not $noResponseRetry.StartsWith($retryPrefix, [StringComparison]::Ordinal) -or
+    -not $noResponseRetry.Contains('retry_reason=no_response_after_exhausted_recovery')) {
+    throw 'No-response retry renderer did not preserve the bounded retry identity'
+}
+
+$missingRetryReasonRejected = $false
+try {
+    & $renderer `
+        -Mode ResponseRetry `
+        -Round $round `
+        -StageCommit $fullCommit `
+        -Question $question | Out-Null
+} catch {
+    $missingRetryReasonRejected = $_.Exception.Message.Contains('RetryReason is required')
+}
+if (-not $missingRetryReasonRejected) {
+    throw 'Response retry renderer accepted a missing RetryReason'
+}
+
+$assignmentRetryParameterRejected = $false
+try {
+    & $renderer `
+        -Mode Assignment `
+        -Round $round `
+        -StageCommit $fullCommit `
+        -Question $question `
+        -RetryReason format_nonconforming | Out-Null
+} catch {
+    $assignmentRetryParameterRejected = $_.Exception.Message.Contains('accepts no correction or retry parameters')
+}
+if (-not $assignmentRetryParameterRejected) {
+    throw 'Assignment renderer accepted a response-retry parameter'
+}
+
+$responseRetryCorrectionParameterRejected = $false
+try {
+    & $renderer `
+        -Mode ResponseRetry `
+        -Round $round `
+        -StageCommit $fullCommit `
+        -Question $question `
+        -RetryReason format_nonconforming `
+        -SupersedesStageCommit $prefix | Out-Null
+} catch {
+    $responseRetryCorrectionParameterRejected = $_.Exception.Message.Contains('valid only in FullHashCorrection mode')
+}
+if (-not $responseRetryCorrectionParameterRejected) {
+    throw 'Response retry renderer accepted a full-hash correction parameter'
+}
+
+$correctionRetryParameterRejected = $false
+try {
+    & $renderer `
+        -Mode FullHashCorrection `
+        -Round $round `
+        -StageCommit $fullCommit `
+        -Question $question `
+        -SupersedesStageCommit $prefix `
+        -RetryReason format_nonconforming | Out-Null
+} catch {
+    $correctionRetryParameterRejected = $_.Exception.Message.Contains('valid only in ResponseRetry mode')
+}
+if (-not $correctionRetryParameterRejected) {
+    throw 'Full-hash correction renderer accepted a response-retry parameter'
 }
 
 $correction = (& $renderer `

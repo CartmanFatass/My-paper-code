@@ -142,6 +142,12 @@ foreach ($required in @(
     'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
     'review_fence_correction_question_resubmission=forbidden',
     'review_fence_monitor_concurrency=one_live',
+    'review_response_retry=once_same_conversation_after_terminal_attempt',
+    'review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery',
+    'review_response_retry_requires_server_visible_original_fence=true',
+    'review_response_retry_unproven_persistence=forbidden',
+    'review_response_retry_submission_limit=2_total',
+    'review_response_retry_scientific_iteration_cost=zero',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $operationsRole.Contains($required)) { throw "Research Operations Manager role missing: $required" }
 }

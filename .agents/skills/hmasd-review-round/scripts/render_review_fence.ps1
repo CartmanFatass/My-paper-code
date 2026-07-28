@@ -1,13 +1,15 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('Assignment', 'FullHashCorrection')]
+    [ValidateSet('Assignment', 'FullHashCorrection', 'ResponseRetry')]
     [string]$Mode,
 
     [Parameter(Mandatory = $true)][string]$Round,
     [Parameter(Mandatory = $true)][string]$StageCommit,
     [Parameter(Mandatory = $true)][string]$Question,
-    [string]$SupersedesStageCommit
+    [string]$SupersedesStageCommit,
+    [ValidateSet('format_nonconforming', 'no_response_after_exhausted_recovery')]
+    [string]$RetryReason
 )
 
 $ErrorActionPreference = 'Stop'
@@ -43,11 +45,39 @@ $identity = @(
 )
 
 if ($Mode -eq 'Assignment') {
-    if (-not [string]::IsNullOrEmpty($SupersedesStageCommit)) {
-        throw 'SupersedesStageCommit is valid only in FullHashCorrection mode.'
+    if (-not [string]::IsNullOrEmpty($SupersedesStageCommit) -or
+        -not [string]::IsNullOrEmpty($RetryReason)) {
+        throw 'Assignment mode accepts no correction or retry parameters.'
     }
     Write-Output (@('CURRENT_REVIEW_ASSIGNMENT') + $identity -join "`n")
     return
+}
+
+if ($Mode -eq 'ResponseRetry') {
+    if (-not [string]::IsNullOrEmpty($SupersedesStageCommit)) {
+        throw 'SupersedesStageCommit is valid only in FullHashCorrection mode.'
+    }
+    if ([string]::IsNullOrEmpty($RetryReason)) {
+        throw 'RetryReason is required in ResponseRetry mode.'
+    }
+    $retry = @('CURRENT_REVIEW_ASSIGNMENT') + $identity + @(
+        ''
+        'CURRENT_REVIEW_RESPONSE_RETRY'
+        'submission_attempt=2'
+        'supersedes_submission_attempt=1'
+        "retry_reason=$RetryReason"
+        'RESPONSE_REQUIREMENTS'
+        '1. Answer the unchanged question completely.'
+        '2. Use every required heading, field, disposition token and section exactly as specified by the question.'
+        '3. Do not omit a required item; if it cannot be determined, mark that item UNDETERMINED and state its blocker.'
+        '4. Do not return only transport, status or acknowledgement text.'
+    )
+    Write-Output ($retry -join "`n")
+    return
+}
+
+if (-not [string]::IsNullOrEmpty($RetryReason)) {
+    throw 'RetryReason is valid only in ResponseRetry mode.'
 }
 
 Require-SingleLine 'SupersedesStageCommit' $SupersedesStageCommit

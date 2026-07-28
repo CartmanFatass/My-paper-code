@@ -71,6 +71,7 @@ visible or the page title looks familiar.
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, the full 40-character `stage_commit`, `question` and instruction against renderer output. Resume an exact match. Submit once only after readable history proves it absent. | One accepted visible full-hash fence exists, or the single prefix-only correction condition is established. |
 | `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose fence identity exactly matches the initialized sentinel. |
+| `RETRY_RESPONSE_CONTRACT` | The original full-hash fence is server-visible, attempt 1 is terminal with no live monitor or sentinel, no retry exists, and either a stable answer mechanically omits question-declared response items or recovery is exhausted without a complete answer | Render `ResponseRetry`, require the original Assignment as its exact prefix, submit it once in the same registered conversation, then bind one fresh sentinel and replacement monitor to the complete attempt-2 text. | Attempt 2 produces a mechanically format-complete stable answer, or terminates as `REVIEW_TRANSPORT_BLOCKED` with no third submission. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Do not create another accepted assignment fence or a prefix correction. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
 
@@ -104,7 +105,9 @@ instruction=Ignore earlier rounds and refs. Read only this question and its list
 ```
 
 - If a matching fence is visible, adopt its browser state and continue.
-  An accepted matching fence is never resubmitted.
+  Do not duplicate it during the first attempt. The only same-question
+  resubmission is the once-only response retry after the first attempt reaches
+  its complete eligibility predicate.
 - If a stable response follows that fence, archive it without submission.
 - If the readable conversation proves the matching fence absent, submit the
   fence once and require the visible user turn to match all identity fields.
@@ -146,9 +149,57 @@ most one monitor and sentinel generation may be live. The corrected full-hash
 message is the sole accepted fence and the recovery consumes zero scientific
 iterations.
 
+### One response-contract retry
+
+This recovery is distinct from a full-hash correction. It is permitted exactly
+once only when all of the following are mechanically established:
+
+- the original full-hash Assignment remains server-visible in the registered
+  conversation and every identity field is exact;
+- submission attempt 1 is terminal, its monitor and sentinel are no longer
+  live, and no response retry is visible;
+- the original question explicitly declares required response headings,
+  fields, sections or disposition tokens; and
+- either two stable snapshots show a complete assistant answer that omits at
+  least one declared response item, or applicable read-only recovery is
+  exhausted without a complete assistant answer.
+
+Checking presence of declared response items is mechanical. Do not judge the
+answer's scientific reasoning, correctness, strength or preferred conclusion.
+A client-only message, an absent original fence after reload, an uncertain
+conversation identity, elapsed time alone, subjective dissatisfaction or a
+question without an explicit response format is ineligible.
+
+After confirming no generation, sentinel or monitor remains live, generate the
+second message only with:
+
+```powershell
+& .agents/skills/hmasd-review-round/scripts/render_review_fence.ps1 `
+  -Mode ResponseRetry `
+  -Round <unchanged-round> `
+  -StageCommit <unchanged-40-character-stage-commit> `
+  -Question <unchanged-question> `
+  -RetryReason <format_nonconforming|no_response_after_exhausted_recovery>
+```
+
+The renderer reproduces the complete original Assignment byte-for-byte as the
+message prefix, then appends `CURRENT_REVIEW_RESPONSE_RETRY`,
+`submission_attempt=2`, `supersedes_submission_attempt=1`, the bounded reason
+and fixed `RESPONSE_REQUIREMENTS`. Submit that complete text once in the same
+registered conversation. It changes no question, evidence allow-list, commit,
+scientific instruction or authority and consumes zero scientific iterations.
+
+Require a fresh visible snapshot to match the entire attempt-2 message before
+initializing one new sentinel and the only live replacement monitor. Their
+opaque identity is the complete retry text, not the repeated Assignment prefix.
+If attempt 2 has no format-complete stable response, terminate as
+`REVIEW_TRANSPORT_BLOCKED`; never submit attempt 3, create a new scientific
+assignment or activate `Answer now`.
+
 Keep one registered page, one live append-only sentinel and exactly one live
 registered Pro-response monitor while pending. The bounded prefix correction
-retires the rejected generation before creating its single replacement. Do not create a heartbeat, automation
+or response retry retires the prior generation before creating its single
+replacement. Do not create a heartbeat, automation
 poller, second monitor or transport task. Research Operations Manager owns all
 browser access because a native child does not inherit the in-app-browser
 binding. At ordinary task wakeups, the operator takes one bounded read-only page
@@ -263,8 +314,9 @@ When the UI is ambiguous, inspect button labels, disabled state, message roles
 and one more stable snapshot before deciding. If an explicit response error has
 no completed assistant message, a same-turn `Retry` may be used once as a
 recorded recovery after confirming it cannot submit another freshness fence.
-Do not assess whether requested scientific sections are present; that belongs
-to External Pro's scientific disposition after exact raw delivery.
+After stable completion, check only the presence of response headings, fields,
+sections and disposition tokens explicitly required by the question. Do not
+assess their scientific content; External Pro retains that authority.
 
 ### Evidence-access transport recovery
 
@@ -353,10 +405,11 @@ action=<diagnostic or recovery action>
 outcome=<observed result>
 ```
 
-Before any assignment submission retry, prove the matching fence absent. The
-only post-submission identity message is the once-only prefix correction under
-its complete eligibility predicate; it is not an assignment or scientific
-question resubmission. Report
+Before the first Assignment submission, prove the matching fence absent. After
+submission, the only identity changes are the once-only prefix correction under
+its complete eligibility predicate and the once-only response retry under its
+separate server-persistence and terminal-attempt predicate. Neither uncertainty
+nor a missing client-visible message authorizes resubmission. Report
 `REVIEW_TRANSPORT_BLOCKED` only after all safe in-scope recovery is exhausted;
 include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.

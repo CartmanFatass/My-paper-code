@@ -25,6 +25,23 @@ FENCE = "\n".join(
         "its listed evidence from stage_commit.",
     )
 )
+RETRY_FENCE = "\n".join(
+    (
+        FENCE,
+        "",
+        "CURRENT_REVIEW_RESPONSE_RETRY",
+        "submission_attempt=2",
+        "supersedes_submission_attempt=1",
+        "retry_reason=format_nonconforming",
+        "RESPONSE_REQUIREMENTS",
+        "1. Answer the unchanged question completely.",
+        "2. Use every required heading, field, disposition token and section "
+        "exactly as specified by the question.",
+        "3. Do not omit a required item; if it cannot be determined, mark that "
+        "item UNDETERMINED and state its blocker.",
+        "4. Do not return only transport, status or acknowledgement text.",
+    )
+)
 FULL_STAGE_COMMIT = "13ac7eb0eb1adac63a83e55754f7e516d2f40c5b"
 SHORT_STAGE_COMMIT = "13ac7eb"
 CORRECTED_FENCE = "\n".join(
@@ -343,6 +360,71 @@ def test_full_hash_correction_token_rejects_prefix_fence_identity(
         str(state),
         "--assignment-token",
         str(prefix["monitor_assignment_token"]),
+        "--max-wait-seconds",
+        "0",
+        check=False,
+    )
+    assert rebound.returncode == 2
+    assert "freshness-fence identity does not match sentinel" in rebound.stderr
+
+
+def test_response_retry_token_binds_complete_attempt_two_identity(
+    tmp_path: Path,
+) -> None:
+    retry_state = tmp_path / "response-retry-monitor.jsonl"
+    initialized = json.loads(
+        run(
+            "init",
+            "--state",
+            str(retry_state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            RETRY_FENCE,
+        ).stdout
+    )
+    for _ in range(2):
+        run(
+            "record",
+            "--state",
+            str(retry_state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            RETRY_FENCE,
+            "--assistant-message-identity",
+            "assistant-message-attempt-2",
+            "--snapshot-fingerprint",
+            "attempt-2-response-fingerprint",
+            "--generation-controls",
+            "inactive",
+            "--candidate-available",
+            "true",
+            "--min-stable-seconds",
+            "0",
+        )
+    terminal = json.loads(
+        run(
+            "watch",
+            "--state",
+            str(retry_state),
+            "--assignment-token",
+            str(initialized["monitor_assignment_token"]),
+            "--max-wait-seconds",
+            "0",
+        ).stdout
+    )
+    assert terminal["fence_identity"].encode("utf-8") == RETRY_FENCE.encode("utf-8")
+    assert "submission_attempt=2" in terminal["fence_identity"]
+
+    first_state = tmp_path / "attempt-1-monitor.jsonl"
+    first = initialize(first_state)
+    rebound = run(
+        "watch",
+        "--state",
+        str(retry_state),
+        "--assignment-token",
+        str(first["monitor_assignment_token"]),
         "--max-wait-seconds",
         "0",
         check=False,

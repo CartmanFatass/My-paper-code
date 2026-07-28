@@ -22,6 +22,12 @@ review_fence_stage_commit=full_40_hex_only
 review_fence_prefix_correction=once_same_conversation_before_assistant_response
 review_fence_correction_question_resubmission=forbidden
 review_fence_monitor_concurrency=one_live
+review_response_retry=once_same_conversation_after_terminal_attempt
+review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery
+review_response_retry_requires_server_visible_original_fence=true
+review_response_retry_unproven_persistence=forbidden
+review_response_retry_submission_limit=2_total
+review_response_retry_scientific_iteration_cost=zero
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -115,6 +121,17 @@ an assistant response exists, `$hmasd-review-round` may replace it once with a
 mechanically rendered full-hash correction that contains no scientific question
 body and changes no allow-list or scientific instruction. It grants no
 scientific interpretation or code acceptance.
+
+After the first monitor and sentinel are terminal and no generation remains
+live, the same registered conversation permits one mechanically rendered
+response retry only when the server-visible original fence remains exact and
+either a stable answer omits question-declared response fields or applicable
+recovery is exhausted without a complete answer. The retry preserves the full
+original Assignment as its prefix, adds `submission_attempt=2` and fixed response
+requirements, changes no scientific input and consumes zero scientific
+iterations. Unproven fence persistence, subjective answer quality or an absent
+question-declared format is ineligible. A second unsuccessful attempt ends in a
+transport blocker; there is no third submission.
 
 After archival, resume the operations loop from the exact External-Pro response.
 External Pro maintains multiple supported live or parked directions and selects
