@@ -102,9 +102,10 @@ Offer a scientific suggestion only when it is well supported. Silence is correct
 more often than a plausible guess.
 
 When a scientific decision actually blocks progress, there is a third option and
-it is the right one: **open a review round and converge with External Pro until
-both agree.** Do not guess to keep moving, and do not stall waiting for the
-question to answer itself. Convergence turns go inside the accepted fence and are
+it is the right one: **open a review round and let External Pro converge it.**
+Pro reviews and issues the convergence decision; that closes the question,
+whether or not this conversation agrees. Do not guess to keep moving, and do not
+stall waiting for the question to answer itself. Convergence turns go inside the accepted fence and are
 archived in full — see `$hmasd-review-round`.
 
 ---
@@ -486,9 +487,21 @@ a closed result round was about to receive an extra turn carrying mutation-sweep
 findings; that would have been a fourth access nobody budgeted, and endless
 ping-pong is the specific failure this rule prevents.
 
-Converged means both sides state the same thing, not that the reviewer stopped
-objecting. If convergence fails, record where it stalled and what each side
-holds; an unresolved boundary is a real result and belongs in the portfolio.
+**Pro converges; the two sides are not equals here** (user ruling 2026-07-27).
+After Pro reviews the Project Manager's code execution plan it returns the
+**convergence decision**, and that decision closes the exchange. It does not
+require the Project Manager to agree, and it is not a negotiation continued until
+two parties happen to state the same thing.
+
+The symmetric definition this paragraph used to carry — *converged means both
+sides state the same thing* — is what makes ping-pong unbounded: either side
+could withhold agreement and the exchange had no terminator. Scientific authority
+is Pro's, so the closing move is Pro's.
+
+The one thing that is **not** convergence failure is disagreement. Implement the
+decision. The narrow exception is a decision that cannot be executed at all —
+that is a technical blocker, reported to the user with the smallest exact missing
+condition, and never grounds for another Pro turn.
 
 ### Implementing a ruling is not making one
 

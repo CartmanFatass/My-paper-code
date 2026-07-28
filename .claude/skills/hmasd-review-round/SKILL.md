@@ -588,9 +588,19 @@ after the first archived raw, verbatim, none omitted. The turns that changed the
 answer are the evidence; keeping only the last message destroys the reason the
 conclusion moved.
 
-Convergence ends when both sides state the same thing. A reviewer that merely
-stops objecting has not converged. If it stalls, archive what each side holds
-and where it diverged — an unresolved boundary is a real result.
+**Convergence ends when Pro issues the convergence decision.** It reviews the
+Project Manager's code execution plan and closes the exchange; the Project
+Manager implements the result. Disagreement by this conversation is not a reason
+to continue — scientific authority is Pro's, so the terminating move is Pro's.
+
+The symmetric rule this paragraph used to carry — *ends when both sides state the
+same thing* — gave the exchange no terminator, because either party could
+withhold agreement indefinitely. A decision that cannot be **executed** is a
+technical blocker for the user, not grounds for another turn.
+
+The access count is fixed: a workflow gets Pro's scientific decision, this plan
+review, and the result submission. Material discovered after a round closes waits
+for the next workflow's plan review.
 
 ## Exact archival, cleanup, and intake
 
