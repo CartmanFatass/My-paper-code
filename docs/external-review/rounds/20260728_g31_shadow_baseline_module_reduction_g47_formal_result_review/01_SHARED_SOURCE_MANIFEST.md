@@ -28,6 +28,7 @@ Read only the following repository paths at the exact pushed stage commit:
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 - `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `.agents/roles/EXTERNAL_PRO.md`
 - `ha_ctse_process/continuous_roster_native_six_g31_shadow_baseline_module_reduction_g47.py`
 - `scripts/run_continuous_roster_native_six_g31_shadow_baseline_module_reduction_g47.py`
