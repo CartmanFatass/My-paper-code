@@ -29,6 +29,14 @@ review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_bot
 review_unpersisted_assignment_recovery_prior_server_visible_count=zero
 review_unpersisted_assignment_recovery_client_send_limit=2_assignment_sends_total
 review_unpersisted_assignment_recovery_scientific_iteration_cost=zero
+review_post_error_persistence_recheck=once_observe_only_after_unpersisted_assignment_terminal
+review_post_error_persistence_recheck_send_authority=none
+review_post_error_persistence_recheck_observations=exact_url_history_plus_registered_conversation_search
+review_post_error_persistence_recheck_success=exactly_one_full_fence
+review_post_error_persistence_recheck_zero=REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT
+review_post_error_persistence_recheck_uncertain=REVIEW_TRANSPORT_BLOCKED
+review_post_error_persistence_recheck_monitor_before_fence=forbidden
+review_post_error_persistence_recheck_scientific_iteration_cost=zero
 review_response_retry=once_same_conversation_after_terminal_attempt
 review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery
 review_response_retry_requires_server_visible_original_fence=true
@@ -144,6 +152,25 @@ Assignment. Establish a sentinel and monitor only after exactly one complete
 fence becomes visible. A second missing fence, duplicate fence or identity
 mismatch ends in `REVIEW_TRANSPORT_BLOCKED`; no further Assignment send is
 permitted. This operational recovery consumes zero scientific iterations.
+
+After that terminal state, one observe-only `POST_ERROR_PERSISTENCE_RECHECK` is
+permitted at an ordinary task wakeup. It sends nothing and combines a fresh
+exact-URL read of the registered conversation with signed-in conversation
+search for the exact round, full stage commit and question basename. A search
+candidate counts only when its URL has the same registered conversation ID and
+its visible user turn matches the complete Assignment. Exactly one full fence
+restores ordinary transport: initialize the sentinel and monitor if no response
+exists, or apply normal stable-response archival if a response already exists.
+Zero fences terminates as
+`REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`. A prefix, duplicate, identity
+mismatch or uncertain readable state remains `REVIEW_TRANSPORT_BLOCKED`. The
+recheck never sends an Assignment, uses `Retry` or `ResponseRetry`, activates
+`Answer now`, or initializes a sentinel or monitor before the exact fence is
+observed. It consumes zero scientific iterations and is not repeated.
+
+The closed state resumes only if the same exact fence later becomes
+server-visible without a new send, or a new explicit user-authorized workflow
+contract defines any further client send or replacement review package.
 
 After the first monitor and sentinel are terminal and no generation remains
 live, the same registered conversation permits one mechanically rendered

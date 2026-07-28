@@ -70,6 +70,7 @@ visible or the page title looks familiar.
 | `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page is observably stuck, wait once, take a fresh snapshot, then reload the same tab once for that stuck episode. | URL contains the registered ID and visible conversation messages are readable. |
 | `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, the full 40-character `stage_commit`, `question` and instruction against renderer output. Resume an exact match. Submit once only after readable history proves it absent. | One accepted visible full-hash fence exists, the single prefix-only correction condition is established, or one uncommitted client send requires the persistence check. |
 | `RECOVER_UNPERSISTED_ASSIGNMENT` | Exactly one client send occurred but no matching fence became server-visible; the post-reload history and one fresh exact-URL reopen of the same readable registered conversation both show zero full or prefix matching fences and zero corresponding assistant responses; no sentinel, monitor or prior recovery exists | Classify the action as `UNPERSISTED_CLIENT_SEND`, render the unchanged Assignment again, and replay those exact bytes once. Do not add text or use another recovery mode. | Exactly one complete fence is visible and may initialize the sentinel, or transport terminates as `REVIEW_TRANSPORT_BLOCKED` with no further Assignment send. |
+| `POST_ERROR_PERSISTENCE_RECHECK` | Both permitted Assignment client sends are terminal as unpersisted; no full or prefix fence, response, sentinel or monitor exists; the recheck has not run | Without sending, read the fresh exact registered URL and use signed-in conversation search for the exact round, full stage commit and question basename. Accept a search candidate only under the same registered conversation ID and complete visible Assignment identity. | Exactly one full fence restores ordinary monitoring or archival; zero closes as `REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`; prefix, duplicate, mismatch or uncertainty remains `REVIEW_TRANSPORT_BLOCKED`. |
 | `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
 | `WAIT_FOR_RESPONSE` | Exact fence and visible user-turn identity are known | Research Operations Manager initializes one metadata-only JSONL sentinel, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose fence identity exactly matches the initialized sentinel. |
 | `RETRY_RESPONSE_CONTRACT` | The original full-hash fence is server-visible, attempt 1 is terminal with no live monitor or sentinel, no retry exists, and either a stable answer mechanically omits question-declared response items or recovery is exhausted without a complete answer | Render `ResponseRetry`, require the original Assignment as its exact prefix, submit it once in the same registered conversation, then bind one fresh sentinel and replacement monitor to the complete attempt-2 text. | Attempt 2 produces a mechanically format-complete stable answer, or terminates as `REVIEW_TRANSPORT_BLOCKED` with no third submission. |
@@ -153,6 +154,44 @@ visible, if two matching fences become visible, if a delayed earlier message
 appears, or if any identity differs, terminate as `REVIEW_TRANSPORT_BLOCKED`.
 Never send a third Assignment client attempt. This recovery changes no review
 input or authority and consumes zero scientific iterations.
+
+### One post-error persistence recheck
+
+When both allowed Assignment client sends are terminal as unpersisted, perform
+at most one `POST_ERROR_PERSISTENCE_RECHECK`. This is an observation of possible
+delayed server persistence, not another submission or another scientific
+assignment. It is eligible only when the round, 40-character `stage_commit`,
+question path, repository, branch, instruction and registered conversation are
+unchanged; no full or prefix fence, corresponding assistant response, sentinel
+or monitor is currently visible; and no prior post-error recheck exists.
+
+Use exactly these bounded read-only observations:
+
+1. Reacquire the exact registered URL and require readable role-identified
+   conversation history.
+2. Use signed-in conversation search with the exact round, full stage commit
+   and question basename. A candidate is evidence only when its URL contains
+   the registered conversation ID and its visible user turn matches the full
+   rendered Assignment identity.
+
+Do not send or render a message, reload repeatedly, use UI `Retry`, invoke
+`ResponseRetry`, activate `Answer now`, or initialize a sentinel or monitor
+before observing exactly one accepted full fence. Then classify once:
+
+- exactly one full fence and no assistant response: initialize the normal
+  sentinel and unique monitor for that existing fence;
+- exactly one full fence with a stable assistant response: apply the ordinary
+  stable-completion and archival checks without sending;
+- zero full or prefix fences in both readable observations:
+  `REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`;
+- a prefix, duplicate full fence, identity mismatch, unreadable history or
+  disagreement between observations: `REVIEW_TRANSPORT_BLOCKED`.
+
+The recheck consumes zero scientific iterations and cannot repeat. The closed
+state resumes only when the same exact fence later becomes server-visible
+without a new send, or a new explicit user-authorized workflow contract defines
+any further client send or replacement review package. An unchanged absence is
+terminal, not a reason to poll or reopen the conversation again.
 
 ### Full-hash prefix correction
 
