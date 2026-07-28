@@ -73,7 +73,7 @@ _SPEC.loader.exec_module(audit)
 
 CONTRACT_IDENTITY_FIELDS = ("contract", "contract_id", "procedure_version")
 
-# R4 freshness sentinel condition 5 (docs/research/designs/
+# R4 freshness sentinel condition 6 (docs/research/designs/
 # D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md section 3): "no R3 topology unit
 # is accepted by the R4 pooler." R4 supersedes R3's conclusion-bearing
 # measurement and result layer, and R4 has no expansion path (section 2:
@@ -338,7 +338,26 @@ def main() -> None:
 
     result = pool(shards, paths=list(args.shards), allow_smoke=args.allow_smoke,
                   allow_any_seeds=args.allow_any_seeds)
-    print(f"D7_S_EVENT_ALIGNED_BRANCH={result.get('branch')}")
+
+    # D'' repair (same family as the R1 defect: a conclusion-bearing line on a
+    # non-conclusion artifact). `D7_S_EVENT_ALIGNED_BRANCH=` was printed
+    # unconditionally, including for an `--allow-any-seeds` development pool
+    # whose union is not the R4 population and which therefore ran NO sentinel
+    # at all. The line is now printed only for the R4 population artifact --
+    # and `pool()` raises SystemExit rather than returning when the sentinel
+    # fails, so reaching this line with the R4 identity present means the
+    # sentinel cleared. The identity fields are the artifact-level witness of
+    # `_pooling_r4_population`: `pool()` writes them through from the shards
+    # only when pooling the R4 population, and `None`/`None` otherwise.
+    # A development pool gets an EXPLICIT not-conclusion-bearing line rather
+    # than silence, so its absence is never mistaken for a missing branch.
+    if result.get("r4_population_namespace") == audit.R4_POPULATION_NAMESPACE:
+        print(f"D7_S_EVENT_ALIGNED_BRANCH={result.get('branch')}")
+    else:
+        print("D7_S_EVENT_ALIGNED_NOT_CONCLUSION_BEARING: pooled topology-seed union "
+              f"{result.get('topology_seeds')} is not the frozen R4 population "
+              f"{sorted(audit.TOPOLOGY_SEEDS_R4)}; no freshness sentinel was run and "
+              "no branch is reported for this artifact.")
     print(json.dumps(result, ensure_ascii=False, indent=2, default=audit._json_default))
     if args.out:
         out = Path(args.out)

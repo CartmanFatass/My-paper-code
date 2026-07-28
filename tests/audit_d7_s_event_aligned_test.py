@@ -16,8 +16,10 @@ against lives specifically in the real environment's `np_random`/
 """
 
 import importlib.util
+import inspect
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -2224,18 +2226,14 @@ def test_compute_g_hand_worked_weights_exactly_minus2_minus5_minus10():
     assert g == pytest.approx(-14.8)
 
 
-def test_window_series_length_convention_is_pinned_to_h_plus_1():
-    assert audit.window_series_length(audit.H_STABLE) == audit.H_STABLE + 1
-    assert audit.window_series_length(audit.H_FLEX) == audit.H_FLEX + 1
-
-
 def test_window_latched_counts_on_a_full_h_stable_sized_series():
     """Exercises `window_latched_counts` at the REAL H_stable=139 window
     length (140 rows: baseline + 139 steps), pinning the row-0-baseline /
     H+1-rows alignment convention at registered size, not just a small
-    hand-picked array."""
+    hand-picked array. The literal `+ 1` is the convention itself, stated
+    here rather than read back from production."""
     n_uavs = 2
-    rows = audit.window_series_length(audit.H_STABLE)
+    rows = audit.H_STABLE + 1
     cutoff = np.zeros((rows, n_uavs), dtype=bool)
     cutoff[0, 0] = True   # baseline: uav 0 already cutoff at t_e -- never counted
     cutoff[1, 1] = True   # uav 1: genuine in-window transition at step 1
@@ -4314,9 +4312,11 @@ def test_there_is_no_expansion_path_the_symbols_are_gone():
 
 # =============================================================================
 # 9d. R4 population layer: freshness sentinel (contract section 3), each of
-# the six fail-closed conditions driven SEPARATELY. Condition 5 ("no R3
+# its fail-closed conditions driven SEPARATELY -- contract conditions 1-5 plus
+# the implementation binding numbered 8 (D''). Contract condition 6 ("no R3
 # topology unit is accepted by the R4 pooler") is the pooler's own gate and
-# is tested directly in tests/pool_d7_s_event_aligned_shards_test.py.
+# is tested directly in tests/pool_d7_s_event_aligned_shards_test.py;
+# condition 7 is section 9e below.
 # =============================================================================
 
 def test_topology_seeds_r4_are_exactly_the_frozen_literal():
@@ -4367,7 +4367,7 @@ def test_freshness_sentinel_condition_1_exact_seed_list_fails_alone():
     assert detail == {
         "exact_seed_list": False, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
-        "registered_episode_counts": True,
+        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
     }
 
 
@@ -4377,7 +4377,15 @@ def test_freshness_sentinel_condition_2_no_r3_overlap_fails_alone():
     ACTUAL per-topology provenance), a genuinely different field from the
     DECLARED `topology_seeds` condition 1 checks -- exactly the stale-cache
     topology-substitution failure mode the two-field split exists to catch:
-    the declared list stays fully correct while one record disagrees."""
+    the declared list stays fully correct while one record disagrees.
+
+    Condition 8 goes False here TOO, and that is deliberate, not a leak: an
+    R3 seed in the records is also a NON-MEMBER of `TOPOLOGY_SEEDS_R4`, which
+    condition 8's subset clause independently rejects. The two are computed
+    from the same field but by different predicates (R3-set intersection vs
+    R4-set containment plus pairwise distinctness), so this is defence in
+    depth on one witness. Condition 1 -- the DECLARED list -- stays True,
+    which is the split this test exists to pin."""
     artifact = _valid_r4_artifact()
     artifact["topology_records"][0] = {"topology_seed": audit.TOPOLOGY_SEEDS_INITIAL[0]}
     ok, detail = audit.r4_freshness_sentinel(artifact)
@@ -4385,7 +4393,7 @@ def test_freshness_sentinel_condition_2_no_r3_overlap_fails_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": False,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
-        "registered_episode_counts": True,
+        "registered_episode_counts": True, "no_duplicate_producing_topologies": False,
     }
 
 
@@ -4400,7 +4408,7 @@ def test_freshness_sentinel_condition_3_identity_fields_fail_alone():
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": False, "per_topology_block_identities": True,
-        "registered_episode_counts": True,
+        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
     }
 
 
@@ -4415,7 +4423,7 @@ def test_freshness_sentinel_condition_4_per_topology_block_identities_fail_alone
     assert detail == {
         "exact_seed_list": True, "no_r3_overlap": True,
         "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": False,
-        "registered_episode_counts": True,
+        "registered_episode_counts": True, "no_duplicate_producing_topologies": True,
     }
 
 
@@ -4443,6 +4451,7 @@ def test_freshness_sentinel_condition_5_registered_episode_counts_fails_alone():
             "identifies_r4_contract_and_namespace": True,
             "per_topology_block_identities": True,
             "registered_episode_counts": False,
+            "no_duplicate_producing_topologies": True,
         }, block
 
     # ONE topology short of the registered volume, the other seven correct --
@@ -4477,21 +4486,30 @@ def test_freshness_sentinel_condition_5_is_not_satisfied_by_absent_reports():
 # an R4 artifact was never executed at all.
 # =============================================================================
 
-def _stub_topology_result(seed, *, qualifying=0):
+def _stub_topology_result(seed, *, qualifying=0, episodes_attempted=None):
     """Exactly the shape `run_topology_audit` returns, reduced to what
     `main()` and `assemble_audit_result` read. `qualifying=0` keeps
     `support_ok` False so no bootstrap runs -- the freshness sentinel is
     indifferent to the branch, and this test is about identity and episode
-    volume, not about inference."""
+    volume, not about inference.
+
+    `episodes_attempted` overrides the volume BOTH blocks report, so a test
+    can build a run that reached the artifact stage having attempted fewer
+    than the registered eight -- the state `main()`'s own CLI refusal cannot
+    see, because no episode-count flag was passed."""
+    calibration_attempted = (audit.N_CALIBRATION_EPISODES if episodes_attempted is None
+                             else episodes_attempted)
+    audit_attempted = (audit.N_AUDIT_EPISODES if episodes_attempted is None
+                       else episodes_attempted)
     return {
         "topology_record": {"topology_seed": seed, "coordinate_hash": f"h{seed}",
                              "procedure_version": audit.TOPOLOGY_PROCEDURE_VERSION},
         # `episodes_attempted` is what freshness condition 5 reads. The stub
-        # reports the REGISTERED volume, because that is what an unmodified
-        # `main()` on the R4 population must have run.
-        "calibration_report": {"episodes_attempted": audit.N_CALIBRATION_EPISODES,
+        # reports the REGISTERED volume by default, because that is what an
+        # unmodified `main()` on the R4 population must have run.
+        "calibration_report": {"episodes_attempted": calibration_attempted,
                                 "qualifying": qualifying},
-        "audit_report": {"episodes_attempted": audit.N_AUDIT_EPISODES,
+        "audit_report": {"episodes_attempted": audit_attempted,
                           "qualifying": qualifying},
         "audit_events": [],
         "qualifying_calibration_episodes": qualifying,
@@ -4505,32 +4523,52 @@ def _stub_topology_result(seed, *, qualifying=0):
     }
 
 
-def _run_main(monkeypatch, tmp_path, argv, *, n_calibration_seen=None):
-    """Runs the real `main()` with `build_config`/`run_topology_audit`
-    stubbed, and returns the artifact it wrote to disk (never a dict the test
-    assembled itself). `n_calibration_seen` is an out-list that records the
-    episode counts `main()` actually passed down."""
+def _arm_main(monkeypatch, tmp_path, argv, *, n_calibration_seen=None,
+              episodes_attempted=None):
+    """Stubs `build_config`/`run_topology_audit` and points `sys.argv` at the
+    real `main()`. Returns the `--out` directory so a caller can assert on
+    what `main()` did or did not write. Never calls `main()` itself, so a
+    refusal path can be exercised with `pytest.raises`."""
     monkeypatch.setattr(audit, "build_config", lambda: None)
 
     def _fake_run_topology_audit(config, *, topology_seed, n_calibration, n_audit, **kw):
         if n_calibration_seen is not None:
             n_calibration_seen.append((n_calibration, n_audit, kw.get("contract_id")))
-        return _stub_topology_result(topology_seed)
+        return _stub_topology_result(topology_seed, episodes_attempted=episodes_attempted)
 
     monkeypatch.setattr(audit, "run_topology_audit", _fake_run_topology_audit)
     out_dir = tmp_path / "out"
     monkeypatch.setattr(sys, "argv", ["audit_d7_s_event_aligned.py", "--out", str(out_dir)] + argv)
+    return out_dir
+
+
+def _run_main(monkeypatch, tmp_path, argv, *, n_calibration_seen=None):
+    """Runs the real `main()` with `build_config`/`run_topology_audit`
+    stubbed, and returns the artifact it wrote to disk (never a dict the test
+    assembled itself). `n_calibration_seen` is an out-list that records the
+    episode counts `main()` actually passed down."""
+    out_dir = _arm_main(monkeypatch, tmp_path, argv, n_calibration_seen=n_calibration_seen)
     audit.main()
     with (out_dir / "d7_s_event_aligned.json").open(encoding="utf-8") as fh:
         return json.load(fh)
 
 
-def test_declared_r4_population_run_through_main_earns_the_sentinel(monkeypatch, tmp_path):
+def test_declared_r4_population_run_through_main_writes_a_sentinel_passing_artifact(
+        monkeypatch, tmp_path):
     """R1, positive: `main() --population r4` over the whole frozen
     population produces an artifact that PASSES `r4_freshness_sentinel`, and
     every topology was measured in the R4 population/seed namespace rather
     than the legacy R3 one. Built by the production path end to end, not by
-    `_valid_r4_artifact()`."""
+    `_valid_r4_artifact()`.
+
+    RENAMED (D''). It used to be called `..._earns_the_sentinel`, which read
+    as "main() applies the sentinel" -- it does not prove that, and at the
+    time `main()` did not apply it at all: the SENTINEL CALL BELOW IS THIS
+    TEST'S, not production's. What this test proves is that the declared
+    whole-population route writes a CONFORMING artifact. The claim that
+    production applies the gate is proved by its paired negative,
+    `test_main_refuses_a_whole_population_run_that_fails_the_sentinel`, which
+    can only pass if `main()` itself runs it."""
     seen = []
     artifact = _run_main(
         monkeypatch, tmp_path,
@@ -4627,6 +4665,335 @@ def test_a_development_run_may_still_override_episode_counts(monkeypatch, tmp_pa
               ["--dev", "--episodes-calibration", "2", "--episodes-audit", "3"],
               n_calibration_seen=seen)
     assert seen == [(2, 3, audit.CONTRACT_ID)]
+
+
+# =============================================================================
+# 9d-bis (D''). The two blocking holes an adversarial re-review of 28d6933f
+# measured, and the invariants that name them.
+#
+# B-1: a DUPLICATED topology seed inside a declared shard. Every pre-existing
+#      assertion in this file is against `result["topology_seeds"]`, which the
+#      pooler has already pushed through `set()`; the seeds that ACTUALLY
+#      PRODUCED units are a different list, and nothing asserted anything
+#      about it. A nine-slot "eight-topology" artifact passed all five
+#      artifact-level conditions.
+# B-2: `main()` never called `r4_freshness_sentinel` -- the string appeared
+#      once, in a comment -- while the DEFAULT no-flag invocation IS a
+#      whole-population R4 run.
+# =============================================================================
+
+def _nine_record_artifact() -> dict:
+    """The exact artifact shape a duplicated declared seed produced, measured
+    end to end on 28d6933f: EIGHT `topology_seeds` (the pooler deduplicates
+    the declared union through `set()`, so the duplicate is invisible there)
+    against NINE `topology_records`/`topology_units`/reports, one topology
+    appearing twice. That extra slot reaches `draw_shared_topology_indices`
+    with n_topo=9 and gives one topology double weight in every
+    topology-weighted point estimate."""
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    producing = [seeds[0]] + seeds          # nine entries, seeds[0] twice
+    return {
+        "topology_seeds": seeds,
+        "topology_records": [{"topology_seed": s} for s in producing],
+        "r4_contract": audit.R4_CONTRACT_PATH,
+        "r4_population_namespace": audit.R4_POPULATION_NAMESPACE,
+        "topology_units": [
+            {"calibration_units_d_a": [], "audit_units_stable": [], "audit_units_flex": []}
+            for _ in producing
+        ],
+        "calibration_reports": [{"episodes_attempted": 8} for _ in producing],
+        "audit_reports": [{"episodes_attempted": 8} for _ in producing],
+    }
+
+
+def test_a_duplicate_seed_in_a_declared_r4_run_is_a_hard_refusal():
+    """B-1, the EARLIEST point. `r4_declared_population_identity` checked
+    MEMBERSHIP only (`s not in set(TOPOLOGY_SEEDS_R4)`), and a repeated seed
+    IS a member -- so `[20260734, 20260734, 20260735, ...]` earned full R4
+    identity, `resolve_run_plan` returned it verbatim, and the pooler's
+    set-based union/disjointness checks could not see it.
+
+    A topology is the top-level inferential unit and can appear AT MOST ONCE.
+    Driven for a duplicate inside a SHARD-sized declaration too, because a
+    check written against the whole-population length (9 != 8) would pass the
+    first case and miss the second."""
+    seeds = list(audit.TOPOLOGY_SEEDS_R4)
+    with pytest.raises(SystemExit, match="appear more than once"):
+        audit.r4_declared_population_identity([seeds[0]] + seeds)
+    with pytest.raises(SystemExit, match="appear more than once"):
+        audit.r4_declared_population_identity([seeds[2], seeds[2]])
+
+    # The positive half, so the refusal cannot have been implemented as an
+    # unconditional one: a distinct subset still earns the identity.
+    assert audit.r4_declared_population_identity(seeds[:3]) == {
+        "r4_contract": audit.R4_CONTRACT_PATH,
+        "r4_population_namespace": audit.R4_POPULATION_NAMESPACE}
+
+
+def test_a_duplicate_seed_is_refused_through_main_itself(monkeypatch, tmp_path):
+    """The same refusal on the production route, and NOT via the identity
+    function called in isolation: `main() --population r4` with a repeated
+    seed must exit nonzero and write no artifact."""
+    seeds = [str(s) for s in audit.TOPOLOGY_SEEDS_R4]
+    out_dir = _arm_main(monkeypatch, tmp_path,
+                        ["--population", "r4", "--topology-seeds", seeds[0]] + seeds)
+    with pytest.raises(SystemExit, match="appear more than once"):
+        audit.main()
+    assert not (out_dir / "d7_s_event_aligned.json").exists()
+
+
+def test_freshness_sentinel_condition_8_catches_a_nine_record_artifact():
+    """B-1, the ARTIFACT level -- defence in depth behind the refusal above,
+    and the invariant no assertion in this file named: *the seeds that
+    actually produced topology units are exactly the members of the
+    population, at most once each.*
+
+    This is the measured 28d6933f state: `r4_freshness_sentinel` returned
+    `ok=True` with all five conditions True on this artifact. Conditions 1-5
+    must ALL still be True here -- that is the point, condition 1 reads the
+    DEDUPLICATED declared list and structurally cannot see the duplicate --
+    and only condition 8 may go False."""
+    ok, detail = audit.r4_freshness_sentinel(_nine_record_artifact())
+    assert ok is False
+    assert detail == {
+        "exact_seed_list": True, "no_r3_overlap": True,
+        "identifies_r4_contract_and_namespace": True, "per_topology_block_identities": True,
+        "registered_episode_counts": True, "no_duplicate_producing_topologies": False,
+    }
+
+
+def test_condition_8_does_not_fail_a_lawful_hash_failure_run():
+    """The binding condition 8 exists under: it is SUBSET-AND-DISTINCT, never
+    EQUAL-to-the-population. A topology that fails the pinned-coordinate hash
+    assert contributes no `topology_record` and no `topology_unit` at all
+    (`main()` records a `topology_hash_failures` entry and continues), so a
+    LAWFUL `INVALID_EVENT_ALIGNED_AUDIT` run legitimately has seven producing
+    topologies against eight declared. Re-pointing condition 1 at
+    `topology_records` -- the other repair the review proposed -- would turn
+    that reportable branch-1 result into a refusal. This test is what goes red
+    if condition 8 is ever tightened to equality."""
+    artifact = _valid_r4_artifact()
+    for key in ("topology_records", "topology_units",
+                "calibration_reports", "audit_reports"):
+        artifact[key] = artifact[key][:-1]
+    ok, detail = audit.r4_freshness_sentinel(artifact)
+    assert detail["no_duplicate_producing_topologies"] is True
+    assert ok is True, detail
+
+
+def test_main_refuses_a_whole_population_run_that_fails_the_sentinel(monkeypatch, tmp_path):
+    """B-2, and the ONLY assertion in either file that production applies the
+    sentinel. `main()` is invoked with NO population/seed/episode flags at
+    all: `resolve_run_plan` then returns the frozen `TOPOLOGY_SEEDS_R4` and
+    `r4_artifact_identity` earns full R4 identity, so the lowest-effort
+    command line on this script IS a conclusion-bearing whole-population run.
+
+    The stub reports `episodes_attempted=2` in both blocks -- a state the
+    CLI-argument refusal structurally cannot see, since no episode-count flag
+    was passed -- so the only thing that can catch it is the artifact-level
+    `registered_episode_counts` condition, run by `main()` itself.
+
+    Asserted three ways, because the R1 defect was a conclusion-bearing line
+    printed beside a refused artifact: nonzero exit, NO artifact on disk, and
+    NO result JSON on stdout."""
+    out_dir = _arm_main(monkeypatch, tmp_path, [], episodes_attempted=2)
+
+    with pytest.raises(SystemExit) as excinfo:
+        audit.main()
+
+    assert excinfo.value.code != 0
+    assert "R4 freshness sentinel FAILED" in str(excinfo.value)
+    assert "registered_episode_counts" in str(excinfo.value)
+    assert not (out_dir / "d7_s_event_aligned.json").exists()
+
+
+def test_main_refusal_prints_no_result_json_to_stdout(monkeypatch, tmp_path, capsys):
+    """The stdout half of the above, isolated so a `capsys` interaction cannot
+    make the disk assertion pass vacuously. A refused run must emit no result
+    JSON at all -- a downstream reader parsing stdout must find nothing to
+    read, not a conclusion-bearing payload beside a nonzero exit."""
+    _arm_main(monkeypatch, tmp_path, [], episodes_attempted=2)
+    capsys.readouterr()
+
+    with pytest.raises(SystemExit):
+        audit.main()
+
+    assert capsys.readouterr().out == ""
+
+
+def test_main_refuses_a_reversed_whole_population_declared_run(monkeypatch, tmp_path):
+    """B-2's second half. `r4_declared_population_identity` is
+    order-insensitive, so `--population r4` with the eight seeds REVERSED
+    earns full R4 identity. Topology ORDER is load-bearing -- section 8's
+    bootstrap resamples topologies by POSITION
+    (`draw_shared_topology_indices` draws slot indices) -- so such a run would
+    otherwise escape with a branch computed under a non-canonical ordering.
+
+    This is why `main()`'s sentinel gate tests SET coverage, not list
+    equality: under list equality this run would skip the gate entirely. It
+    is refused rather than silently sorted, so the operator sees the mistake.
+    The failing condition must be `exact_seed_list` specifically -- every
+    other condition is order-insensitive and passes here."""
+    reversed_seeds = [str(s) for s in reversed(audit.TOPOLOGY_SEEDS_R4)]
+    out_dir = _arm_main(monkeypatch, tmp_path,
+                        ["--population", "r4", "--topology-seeds"] + reversed_seeds)
+
+    with pytest.raises(SystemExit) as excinfo:
+        audit.main()
+
+    assert excinfo.value.code != 0
+    assert "R4 freshness sentinel FAILED" in str(excinfo.value)
+    assert "['exact_seed_list']" in str(excinfo.value)
+    assert not (out_dir / "d7_s_event_aligned.json").exists()
+
+
+def test_a_declared_shard_is_not_put_through_the_whole_population_sentinel(
+        monkeypatch, tmp_path):
+    """The positive half of the gate's scope, so it cannot have been widened
+    to every run. Conditions 1 and 5 are WHOLE-POPULATION properties; a
+    single-seed `--population r4` shard covers a strict subset BY
+    CONSTRUCTION and would fail condition 1 every time. It must still write
+    its artifact -- the sharded production route depends on it."""
+    artifact = _run_main(
+        monkeypatch, tmp_path,
+        ["--population", "r4", "--topology-seeds", str(audit.TOPOLOGY_SEEDS_R4[0])])
+    assert artifact["topology_seeds"] == [audit.TOPOLOGY_SEEDS_R4[0]]
+    assert audit.r4_freshness_sentinel(artifact)[0] is False
+
+
+# =============================================================================
+# 9d-ter (D'', N-4). Contract section 6: `limb_states` "must always remain in
+# the payload". It was ASSIGNED only inside `assemble_audit_result`'s
+# `len > 1 and support_ok` block, so a six-topology support failure returned
+# `branch=SOURCE_EVENT_SUPPORT_INSUFFICIENT` with no `limb_states` key at all.
+# =============================================================================
+
+def _limb_state_branch_cases(monkeypatch):
+    """Every branch `assemble_audit_result` can return, with the fixture that
+    reaches it. Built as a list of `(label, expected_branch, topology_results)`
+    so one sweep covers the bootstrap path AND both no-bootstrap paths."""
+    _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
+                             flex_lcb=10.0, flex_ucb=20.0)
+    cases = [
+        # --- the no-bootstrap `else` path: no limb resolver runs -----------
+        ("support_insufficient", "SOURCE_EVENT_SUPPORT_INSUFFICIENT",
+         _six_topology_results_r4(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+                                   stable_components_invariant=False,
+                                   flex_components_invariant=False, qualifying=0)),
+        ("component_audit_missing_and_unsupported", "INVALID_EVENT_ALIGNED_AUDIT",
+         _six_topology_results(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+                                qualifying=0)),
+        # --- the bootstrap path -------------------------------------------
+        ("component_audit_missing_but_supported", "INVALID_EVENT_ALIGNED_AUDIT",
+         _six_topology_results(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0)),
+        ("conformance_failure", "INVALID_EVENT_ALIGNED_AUDIT",
+         _six_topology_results_r4(
+             d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+             stable_components_invariant=False, flex_components_invariant=False,
+             invalidated_pairs_by_topology=[[{"reason": "replay"}]] + [[] for _ in range(5)])),
+        ("primary_g_degenerate", "PRIMARY_G_DEGENERATE",
+         _six_topology_results_r4(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+                                   stable_components_invariant=True,
+                                   flex_components_invariant=True)),
+        ("part_a_contradiction", "PART_A_CONTRADICTION",
+         _six_topology_results_r4(d_a_value=0.0, u_stable_value=0.0, u_flex_value=0.0,
+                                   stable_components_invariant=False,
+                                   flex_components_invariant=False)),
+        ("combined_result", "PERSISTENCE_NECESSARY_SOURCE",
+         _six_topology_results_r4(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+                                   stable_components_invariant=False,
+                                   flex_components_invariant=False)),
+    ]
+    return cases
+
+
+_LIMB_STATE_VOCABULARY = {"MATERIAL", "AFFIRMATIVE_NONMATERIAL", "COMPONENT_INVARIANT",
+                          "UNRESOLVED", "NOT_EVALUATED"}
+
+
+def test_limb_states_is_in_the_payload_on_every_branch(monkeypatch):
+    """Section 6, swept across every branch `assemble_audit_result` reaches.
+    The measured defect: `SOURCE_EVENT_SUPPORT_INSUFFICIENT` returned a
+    payload with no `limb_states` KEY -- not an empty one, absent -- so a
+    reader could not tell that no limb resolver had run from one that had.
+    `.get(...)` would hide exactly that, so this asserts KEY PRESENCE
+    (`in`), and asserts both values are drawn from the frozen four states
+    plus `NOT_EVALUATED`, never `None` or a placeholder."""
+    for label, expected_branch, topology_results in _limb_state_branch_cases(monkeypatch):
+        out = audit.assemble_audit_result(topology_results, [])
+        assert out["branch"] == expected_branch, label
+        assert "limb_states" in out, label
+        assert set(out["limb_states"]) == {"stable", "flex"}, label
+        for limb, state in out["limb_states"].items():
+            assert state in _LIMB_STATE_VOCABULARY, (label, limb, state)
+
+
+def test_the_no_bootstrap_paths_report_the_fifth_state_not_a_resolved_one(monkeypatch):
+    """The value half, so key presence cannot be satisfied by writing any
+    dict. On a path where NO limb resolver ran, `limb_states` must be
+    `NOT_EVALUATED` on both limbs -- the same fifth state
+    `resolve_stable_limb_state`/`resolve_flex_limb_state` themselves return
+    for an incomplete focal audit, and the same pair
+    `assemble_audit_result` already hands `decide_branch_with_reason` there.
+    A payload asserting MATERIAL/AFFIRMATIVE_NONMATERIAL/UNRESOLVED on a run
+    that computed no bootstrap would be a reading the evidence does not
+    support."""
+    _fixed_u_star_bootstrap(monkeypatch, stable_lcb=-20.0, stable_ucb=-10.0,
+                             flex_lcb=10.0, flex_ucb=20.0)
+    out = audit.assemble_audit_result(
+        _six_topology_results_r4(d_a_value=6.0, u_stable_value=0.0, u_flex_value=0.0,
+                                  stable_components_invariant=False,
+                                  flex_components_invariant=False, qualifying=0), [])
+
+    assert out["branch"] == "SOURCE_EVENT_SUPPORT_INSUFFICIENT"
+    assert "u_star_bootstrap" not in out          # no bootstrap ran at all
+    assert out["limb_states"] == {"stable": "NOT_EVALUATED", "flex": "NOT_EVALUATED"}
+
+
+# =============================================================================
+# 9d-quater (D'', N-1). The section-4 horizon criterion is enforced inside
+# `exact_paired_sequence_equal`, which returns False for a short series --
+# read by `compute_focal_component_invariance` as "components separate"
+# (precedence item 5) where section 4 files it under Completeness (item 1).
+# The predicate is NOT re-routed: that is claim-defining precedence, and the
+# short-series case is UNREACHABLE in production because `fork_continuation`
+# rolls `range(int(horizon))` with no early exit. This pins the
+# unreachability, so an early break goes red here rather than silently
+# changing the routing.
+# =============================================================================
+
+def test_fork_continuation_has_no_early_exit_from_its_horizon_loop():
+    """Structural pin at BOTH registered horizons. `fork_continuation` at
+    H_FLEX=550 needs a real environment stepped 550 times -- far too slow for
+    a unit test, and the shape being pinned is not numeric anyway -- so this
+    asserts the property directly on the SOURCE of the loop body: no `break`,
+    no `return`, and no `continue` inside `for t in range(int(horizon))`.
+
+    That is what makes `len(step_metrics) == horizon` hold identically for
+    H_STABLE=139 and H_FLEX=550, and therefore what makes
+    `exact_paired_sequence_equal`'s length gate unreachable-as-False on a
+    conforming record. The two registered horizons are named here so the
+    reason this test exists survives with it."""
+    assert audit.REGISTERED_LIMB_HORIZON == {"stable": audit.H_STABLE, "flex": audit.H_FLEX}
+    assert (audit.H_STABLE, audit.H_FLEX) == (139, 550)
+
+    source = inspect.getsource(audit.fork_continuation)
+    body = source.split("for t in range(int(horizon)):", 1)
+    assert len(body) == 2, "the horizon loop header changed shape"
+    loop_and_after = body[1]
+    # Everything after the loop header up to the function's single return.
+    loop_body = loop_and_after.split("\n    return ", 1)[0]
+    for token in ("break", "continue", "return"):
+        assert not re.search(rf"^\s+{token}\b", loop_body, flags=re.MULTILINE), (
+            f"`{token}` inside `fork_continuation`'s horizon loop: a continuation can "
+            "now be SHORTER than the registered horizon, which "
+            "`exact_paired_sequence_equal` reads as 'components separate' "
+            "(precedence item 5) where contract section 4 files a short series under "
+            "Completeness (item 1). Re-route the predicate before adding this.")
+
+    # The `step_metrics.append` that makes the count equal the loop trip count
+    # must still be unconditional at the top level of the loop body.
+    assert re.search(r"^        step_metrics\.append\(", loop_body, flags=re.MULTILINE)
 
 
 # =============================================================================
@@ -5046,7 +5413,7 @@ def _horizon_window(limb, *, cutoff_step=None, qos_override=None, g_total=1.0, l
     for a conforming full-horizon continuation. `length` overrides that, so a
     test can build a deliberately truncated record.
 
-    The registered horizon is `h` itself, NOT `window_series_length(h)`:
+    The registered horizon is `h` itself, NOT h+1:
     `window_g_from_step_metrics` slices `n = min(len(step_metrics), int(h))`
     for the QoS and return-cost series, while the H+1 convention belongs to
     the cutoff/depletion LATCH series (row 0 is the previous-step baseline
@@ -5101,7 +5468,7 @@ def test_exact_paired_sequence_equal_distinguishes_equal_totals_different_sequen
 def test_exact_paired_sequence_equal_accepts_two_identical_records_at_the_registered_horizon():
     """THE test the length gate's constant is decided by. A conforming
     full-horizon pair -- 139 entries on stable, 550 on flex -- must compare
-    EQUAL. Comparing against `window_series_length(h)` = h+1 instead would
+    EQUAL. Comparing against h+1 instead would
     return False for every conforming record in the formal run, driving
     `components_invariant_*` permanently False and rendering branch 3
     (PRIMARY_G_DEGENERATE) structurally unreachable while `complete` stayed

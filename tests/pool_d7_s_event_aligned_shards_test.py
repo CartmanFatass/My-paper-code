@@ -396,7 +396,7 @@ def test_seed_union_not_a_frozen_set_is_refused(tmp_path):
 
 
 def test_r3_topology_unit_is_refused_by_the_r4_pooler(tmp_path):
-    """Freshness sentinel condition 5 (contract section 3): "no R3 topology
+    """Freshness sentinel condition 6 (contract section 3): "no R3 topology
     unit is accepted by the R4 pooler." The REAL registered
     `TOPOLOGY_SEEDS_INITIAL` (R3's 8 seeds) must be refused even with NO
     override -- the frozen-set gate now accepts ONLY the R4 population,
@@ -663,6 +663,43 @@ def test_pooler_main_exits_nonzero_on_an_undeclared_shard(tmp_path, monkeypatch,
     assert "carries no proof it belongs to the R4 population" in str(excinfo.value)
     assert not (out_dir / "d7_s_event_aligned.json").exists()
     assert "D7_S_EVENT_ALIGNED_BRANCH=" not in capsys.readouterr().out
+
+
+def test_a_development_pool_prints_no_conclusion_bearing_branch_line(
+        tmp_path, monkeypatch, capsys):
+    """D'' (N-5), same family as the R1 defect: a conclusion-bearing line on a
+    non-conclusion artifact. `main()` printed `D7_S_EVENT_ALIGNED_BRANCH=`
+    UNCONDITIONALLY, so an `--allow-any-seeds` development pool -- whose seed
+    union is not the R4 population, which therefore runs NO freshness sentinel
+    at all -- emitted the same line the formal run's operator reads off stdout.
+
+    The pooled artifact here does have a `branch`, computed by
+    `assemble_audit_result` exactly as always; that is the point. The branch
+    exists and is simply not conclusion-bearing, so the discriminator cannot
+    be "is there a branch". An explicit NOT-conclusion-bearing line is printed
+    instead of silence, so its absence is never read as a crash."""
+    p1 = _write_shard(tmp_path, "dev_a.json",
+                      [_topology_result(7001, d_a=0.0, u_stable=1.0, u_flex=1.0)])
+    p2 = _write_shard(tmp_path, "dev_b.json",
+                      [_topology_result(7002, d_a=0.0, u_stable=1.0, u_flex=1.0)])
+    out_dir = tmp_path / "dev_pooled"
+    monkeypatch.setattr(
+        sys, "argv",
+        ["pool_d7_s_event_aligned_shards.py", "--shards", p1, p2,
+         "--allow-any-seeds", "--out", str(out_dir)])
+
+    pooling.main()
+
+    with (out_dir / "d7_s_event_aligned.json").open(encoding="utf-8") as fh:
+        pooled = json.load(fh)
+    # The artifact is real and DOES carry a branch -- so a test that merely
+    # checked for a missing branch would be satisfied by the fixture.
+    assert pooled["branch"] is not None
+    assert pooled["r4_population_namespace"] is None
+
+    out = capsys.readouterr().out
+    assert "D7_S_EVENT_ALIGNED_BRANCH=" not in out
+    assert "D7_S_EVENT_ALIGNED_NOT_CONCLUSION_BEARING" in out
 
 
 # =============================================================================

@@ -104,7 +104,7 @@ H_FLEX = 550
 H_DIAGNOSTIC = EPISODE_STEPS
 # The registered horizon per limb, as contract section 4's "all four
 # sequences at the registered horizon" names it. This is `h` itself, NOT
-# `window_series_length(h)` = h+1 -- that convention belongs to the
+# h+1 -- that convention belongs to the
 # cutoff/depletion LATCH series, which carry a row-0 previous-step baseline
 # the QoS and return-cost series do not. `exact_paired_sequence_equal` reads
 # it to reject a truncated window; see its docstring for why the distinction
@@ -678,26 +678,19 @@ def compute_G(*, qos_satisfaction_ratio: float, return_constraint_cost: float,
             - 10.0 * new_depletion_count)
 
 
-def window_series_length(h: int) -> int:
-    """Pinned alignment convention (section 7, item 11): a window-local latch
-    series holds exactly `H + 1` rows -- row 0 is the previous-step baseline
-    recorded AT `t_e` ("record the current cutoff/depletion masks as the
-    previous-step state"), and rows `1..H` are the `H` in-window steps
-    checked for a rising edge. Pinned to `H+1` (not `H`) so callers building
-    a real series from `H_stable`/`H_flex` have one unambiguous length to
-    target; `window_latched_counts` itself infers its shape from whatever it
-    is given, so this is the convention callers must follow, not a runtime
-    check inside that function."""
-    return int(h) + 1
-
-
 def window_latched_counts(cutoff_series: np.ndarray, depletion_series: np.ndarray) -> dict:
     """Window-local event latching. Row 0 of each series is the previous-step
     baseline recorded AT t_e (contributes zero by definition); each
     subsequent row counts at most the first false->true transition per UAV
     per type within the window -- a post-recovery recurrence counts only if
-    it is the window's first transition of that type. Callers must size
-    their series per `window_series_length` (H+1 rows: baseline + H steps)."""
+    it is the window's first transition of that type.
+
+    Callers must size their series H+1 rows -- baseline + H in-window steps
+    (section 7, item 11). This function infers its shape from whatever it is
+    given, so that is a convention callers follow, not a runtime check here.
+    The H+1 convention is THIS series' alone: the QoS and return-cost series
+    carry no row-0 baseline and are H long, which is the length
+    `exact_paired_sequence_equal` gates on."""
     cutoff_series = np.asarray(cutoff_series, dtype=bool)
     depletion_series = np.asarray(depletion_series, dtype=bool)
     n_steps, n_uavs = cutoff_series.shape
@@ -1020,12 +1013,19 @@ def part_a_control_verdict(*, lower_contrast_lcb: float, lower_contrast_ucb: flo
 # =============================================================================
 
 def arm_distinctness_check(duty_map_pairs: list) -> bool:
-    """Section 4 / item 3's arm-distinctness spot check: constructive_mixed
-    must differ from null on at least one certified joint event's duty maps
-    -- proving the two arms are not silently identical at the registered
-    fleet shape (the exact historical defect `constructive_mixed_update`'s
-    own docstring documents: a buggy version left every vacancy unserved,
-    so its map differed from `null`'s only by one stale dict key).
+    """Section 4 / item 3's arm-distinctness spot check. The R5 null arm is
+    DELETED, so this no longer compares constructive_mixed against null: the
+    witness is now `duty_map_at_te` -- `constructive_mixed_update`'s POST-
+    LEAVE re-match -- against `duty_map_before_leave`, the frozen pre-LEAVE
+    ownership map with no proactive rotation (see the parallel comment at the
+    site in `roll_prefix_and_find_event` that records the pair). The two must
+    differ on at least one certified joint event, proving
+    `constructive_mixed_update` actually re-matched the vacancy rather than
+    leaving ownership untouched at the registered fleet shape -- the exact
+    historical defect `constructive_mixed_update`'s own docstring documents:
+    a buggy version left every vacancy unserved, so its map differed from the
+    pre-LEAVE map only by one stale dict key.
+
     `duty_map_pairs` is `[(duty_map_at_te, duty_map_before_leave), ...]` for
     events where a vacancy was coverable; every certified joint event
     already guarantees that (flex certification requires a covering
@@ -1156,10 +1156,14 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 # R4 population layer -- freshness sentinel (contract section 3)
 # =============================================================================
 #
-# Seven fail-closed conditions, checked independently so a defect in one can
-# never read through another. Five are evaluated against one assembled
-# artifact by `r4_freshness_sentinel`; conditions 6 and 7 are separate
-# functions' own behavior and are tested directly against them.
+# Seven CONTRACT-REGISTERED fail-closed conditions, checked independently so
+# a defect in one can never read through another. Conditions 1-5 are
+# evaluated against one assembled artifact by `r4_freshness_sentinel`;
+# conditions 6 and 7 are separate functions' own behavior and are tested
+# directly against them. `r4_freshness_sentinel` additionally evaluates ONE
+# condition beyond the registered seven -- condition 8 below, an
+# implementation binding, not a contract row -- so it returns SIX booleans
+# against one assembled artifact, not five.
 #   1. the exact seed list is 20260734-20260741;
 #   2. none of the topologies that actually PRODUCED units overlaps the R3
 #      initial set (checked against `topology_records`, not the top-level
@@ -1183,9 +1187,43 @@ def check_minimum_support(topology_reports: list[dict]) -> tuple[bool, dict]:
 #      `TOPOLOGY_SEEDS_R4` list ever earns the identity fields condition 3
 #      checks; the sharded production route earns them only through the
 #      explicitly-declared `r4_declared_population_identity`).
+#
+# Condition 8 is an IMPLEMENTATION BINDING added beyond the contract's seven
+# (D'' repair, 2026-07-28). It is deliberately numbered 8 rather than
+# renumbering anything: 1-7 are contract-registered and their numbers are
+# cited in the pooler, in the tests and in the evidence notes.
+#
+#   8. the topologies that actually PRODUCED units are pairwise DISTINCT and
+#      every one is a MEMBER of `TOPOLOGY_SEEDS_R4` -- subset-and-distinct,
+#      never equal-to-the-population.
+#
+#      The hole it closes, measured: `r4_declared_population_identity`
+#      checked MEMBERSHIP only, so `--population r4 --topology-seeds
+#      20260734 20260734 20260735 ...` earned R4 identity; `resolve_run_plan`
+#      returned the list verbatim; the pooler's union/disjointness/
+#      `union_seeds` all go through `set()` and so could not see the repeat.
+#      The pooled artifact then carried EIGHT `topology_seeds` and NINE
+#      `topology_records`/`topology_units`, `draw_shared_topology_indices`
+#      ran at n_topo=9, one topology carried double weight in every
+#      topology-weighted point estimate -- and all five artifact-level
+#      conditions above returned True, because condition 1 reads the
+#      DEDUPLICATED declared list. Condition 1 is the witness that cannot see
+#      a duplicate; condition 8 is the witness that can.
+#
+#      Why NOT "re-point condition 1 at `topology_records`": a topology that
+#      fails the pinned-coordinate hash assert contributes no
+#      `topology_record` and no `topology_unit` at all (`main()` appends to
+#      `topology_hash_failures` and continues), so requiring the RECORDS to
+#      equal the whole population would make a LAWFUL
+#      `INVALID_EVENT_ALIGNED_AUDIT` (branch 1) run fail the sentinel and
+#      become a refusal instead of a reportable result. Condition 1 stays on
+#      the DECLARED list; condition 8 is subset-and-distinct for exactly that
+#      reason. `r4_declared_population_identity` also refuses a duplicate
+#      outright, at the earliest point -- condition 8 is defence in depth on
+#      the assembled artifact, not the primary gate.
 
 def r4_artifact_identity(topology_seeds) -> dict:
-    """Condition 6: the ONLY topology-seed list that earns the R4 contract/
+    """Condition 7: the ONLY topology-seed list that earns the R4 contract/
     namespace identity fields is the exact frozen `TOPOLOGY_SEEDS_R4` list,
     in order. `--dev`'s development topology, `--smoke`'s proof-sized run,
     and any `--topology-seeds` override -- arbitrary or not -- all get
@@ -1220,7 +1258,17 @@ def r4_declared_population_identity(topology_seeds) -> dict:
     intent from accident. Membership in the frozen population is enforced
     here as a hard `SystemExit` rather than a silent denial of identity -- a
     run that DECLARES itself R4 and names a seed outside the population is a
-    contradiction, not a development run."""
+    contradiction, not a development run.
+
+    D'' repair: so is a run that names the same topology TWICE, and this is
+    the earliest point at which that can be refused. Membership alone is not
+    enough -- a repeated seed IS a member, so the old check passed it, the
+    pooler's set-based union/disjointness checks could not see it, and the
+    pooled artifact reached `draw_shared_topology_indices` with one extra
+    slot and one topology carrying double weight in every topology-weighted
+    estimate while all five artifact-level sentinel conditions stayed True.
+    A topology is the top-level inferential unit and can appear at most
+    once."""
     seeds = list(topology_seeds)
     if not seeds:
         raise SystemExit(
@@ -1234,6 +1282,16 @@ def r4_declared_population_identity(topology_seeds) -> dict:
             f"are not members of the frozen R4 population {list(TOPOLOGY_SEEDS_R4)}. "
             "A declared R4 run never measures a topology outside its own population; "
             "drop --population r4 for a development run.")
+    repeated = sorted({s for s in seeds if seeds.count(s) > 1})
+    if repeated:
+        raise SystemExit(
+            f"--population r4 was declared, but topology seed(s) {repeated} appear more "
+            f"than once in {seeds}. A topology is the TOP-LEVEL INFERENTIAL UNIT of "
+            "this instrument and can appear AT MOST ONCE: a repeat silently gives that "
+            "topology double weight in every topology-weighted estimate and adds a slot "
+            "to the topology bootstrap. A declared R4 run naming the same topology "
+            "twice is a contradiction, exactly like naming a seed outside the "
+            "population.")
     return {"r4_contract": R4_CONTRACT_PATH,
             "r4_population_namespace": R4_POPULATION_NAMESPACE}
 
@@ -1252,19 +1310,23 @@ def _topology_unit_has_required_blocks(unit: dict) -> bool:
 
 
 def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
-    """Conditions 1-5 of the seven, checked against one assembled artifact --
-    the exact shape `main()`/`pool_d7_s_event_aligned_shards.pool()` emit.
-    Condition 6 is the pooler's own refusal, tested directly against
-    `pool_d7_s_event_aligned_shards.py`; condition 7 is `r4_artifact_
-    identity`/`r4_declared_population_identity`'s own behavior, tested
-    directly against them. Returns `(ok, detail)`; `ok` is the conjunction,
-    `detail` names each condition's own independent boolean so a test can
-    drive exactly one to False.
+    """Conditions 1-5 of the contract's seven, PLUS condition 8 (the
+    implementation binding described in the block above), checked against one
+    assembled artifact -- the exact shape `main()`/
+    `pool_d7_s_event_aligned_shards.pool()` emit. Condition 6 is the pooler's
+    own refusal, tested directly against `pool_d7_s_event_aligned_shards.py`;
+    condition 7 is `r4_artifact_identity`/`r4_declared_population_identity`'s
+    own behavior, tested directly against them. Returns `(ok, detail)`; `ok`
+    is the conjunction of SIX booleans, and `detail` names each condition's
+    own independent boolean so a test can drive exactly one to False.
 
     Note the scope: conditions 1 and 5 are WHOLE-POPULATION properties, so
     this is the gate for a pooled (or single-process whole-population)
     artifact, never for an individual shard, which covers a strict subset by
-    construction. The pooler calls it on its own output."""
+    construction. TWO production call sites, both gated on whole-population
+    coverage: the pooler calls it on its own pooled output, and `main()`
+    calls it whenever ONE process earned R4 identity and covers the whole
+    population (which the default no-flag invocation does)."""
     declared_seeds = list(result.get("topology_seeds", []))
     actual_seeds = [tr.get("topology_seed") for tr in result.get("topology_records", [])]
     topology_units = result.get("topology_units") or []
@@ -1292,6 +1354,15 @@ def r4_freshness_sentinel(result: dict) -> tuple[bool, dict]:
                     for rep in calibration_reports)
             and all(rep.get("episodes_attempted") == N_AUDIT_EPISODES
                     for rep in audit_reports)),
+        # Condition 8 (D'' repair) -- NOT a contract row; see the block above
+        # for the measured hole and for why this is subset-and-distinct rather
+        # than equal-to-the-population. Computed from `actual_seeds` (the
+        # topologies that PRODUCED units), the one witness that can see a
+        # duplicate; condition 1 reads the declared list, which the pooler has
+        # already deduplicated through `set()`.
+        "no_duplicate_producing_topologies": (
+            len(actual_seeds) == len(set(actual_seeds))
+            and set(actual_seeds) <= set(TOPOLOGY_SEEDS_R4)),
     }
     return all(detail.values()), detail
 
@@ -3365,8 +3436,8 @@ def window_g_from_step_metrics(step_metrics: list, qos_user_steps: list, *, h: i
     (section 7), using the already-accepted `compute_G`/
     `window_latched_counts`/`nondegeneracy_report` -- never recomputes the
     analyzer formula independently. `baseline_*_mask` is the previous-step
-    state recorded AT `t_e` (row 0 of the H+1-row convention, see
-    `window_series_length`)."""
+    state recorded AT `t_e` (row 0 of the LATCH series' H+1-row convention,
+    see `window_latched_counts`)."""
     n = min(len(step_metrics), int(h))
     n_uavs = len(baseline_cutoff_mask)
     qos_series = np.array([m["qos_satisfaction_ratio"] for m in step_metrics[:n]], dtype=float)
@@ -3516,9 +3587,9 @@ def exact_paired_sequence_equal(record_a: dict, record_b: dict) -> bool:
 
     THE LENGTH COMPARED AGAINST IS THE REGISTERED HORIZON `h` ITSELF --
     `H_STABLE` (139) on the stable limb, `H_FLEX` (550) on the flex limb --
-    NOT `window_series_length(h)` = h+1. Contract section 4 says "all four
+    NOT h+1. Contract section 4 says "all four
     sequences at the registered horizon", and the registered horizon is `h`.
-    The H+1 convention `window_series_length` documents is a DIFFERENT
+    The H+1 convention `window_latched_counts` documents is a DIFFERENT
     series' convention: the cutoff/depletion LATCH series carry a row-0
     previous-step baseline recorded at `t_e`, which the QoS and return-cost
     series do not. `fork_continuation` rolls exactly `horizon` steps and
@@ -4401,7 +4472,7 @@ def resolve_run_plan(*, smoke: bool, dev: bool, topology_seeds_override: Optiona
     `--topology-seeds` remains available for development/testing, but
     `main()` never lets a seed list other than the exact frozen
     `TOPOLOGY_SEEDS_R4` earn the R4 contract/population-namespace identity
-    fields (`r4_artifact_identity`, freshness sentinel condition 6)."""
+    fields (`r4_artifact_identity`, freshness sentinel condition 7)."""
     if smoke:
         topology_seeds = [TOPOLOGY_SEED_DEV]
         default_calibration, default_audit = 1, 1
@@ -4462,6 +4533,18 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     a top-level branch name must never erase which of the two states the
     non-material limb actually reached. `decide_branch_with_reason` then applies
     section 7's five-item first-match precedence for real.
+
+    D'' repair -- "always recorded" is now true. The key was ASSIGNED only
+    inside the `len > 1 and support_ok` block, so a six-topology support
+    failure returned `branch=SOURCE_EVENT_SUPPORT_INSUFFICIENT` with no
+    `limb_states` key in the payload at all, against section 6's "must always
+    remain in the payload". It is now seeded before the branch split with the
+    fifth state, `{"stable": "NOT_EVALUATED", "flex": "NOT_EVALUATED"}` -- the
+    same value `resolve_stable_limb_state`/`resolve_flex_limb_state`
+    themselves return when `complete_focal_audit` is False, and the same value
+    this function already passes to `decide_branch_with_reason` on the
+    no-bootstrap path, for the same reason: no limb resolver ran. The
+    bootstrap path overwrites it with the resolved pair.
 
     When there are fewer than two topologies, or support already failed,
     none of the R4 BOOTSTRAP machinery runs (there is nothing valid to
@@ -4563,6 +4646,15 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
         "components_invariant_flex": invariance["components_invariant_flex"],
     }
 
+    # Section 6: `limb_states` "must always remain in the payload". Seeded for
+    # EVERY path before the branch split -- the bootstrap path below overwrites
+    # it with the resolved pair; the two no-bootstrap paths keep the fifth
+    # state, which is exactly what they already assert by passing
+    # `NOT_EVALUATED` into `decide_branch_with_reason`. Before this it was
+    # assigned only inside the bootstrap block, so a support failure emitted an
+    # artifact with no `limb_states` key at all.
+    out["limb_states"] = {"stable": "NOT_EVALUATED", "flex": "NOT_EVALUATED"}
+
     if len(topology_results) > 1 and support_ok:
         n_topo = len(topology_results)
         # Section 8's common resampling stream: every primary quantity in
@@ -4625,9 +4717,19 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
             stable_limb_state=stable_limb_state, flex_limb_state=flex_limb_state)
     elif conformance_ok and support_ok and component_invariance_evaluated:
         # Fewer than two topologies with nothing failing: there is no valid
-        # bootstrap and therefore no result to report. (Unreachable in the
-        # registered population -- `support_ok` needs MIN_SUPPORT_TOPOLOGIES=6
-        # topologies -- but `assemble_audit_result` is exercised directly.)
+        # bootstrap and therefore no result to report.
+        #
+        # DEAD, and its old comment ("unreachable in the registered population
+        # ... but exercised directly") understated it. Reaching here needs
+        # `len(topology_results) <= 1` AND `support_ok`, and `support_ok` comes
+        # from `check_minimum_support` over those SAME results, which requires
+        # MIN_SUPPORT_TOPOLOGIES=6 qualifying topologies. Measured directly:
+        # support_ok is False at n=0, 1 and 2, True at n=6 -- so the two
+        # conjuncts cannot hold together even when this function is called with
+        # hand-built results. Left in place rather than deleted only because
+        # the formal run is gated and folding it into the `else` would change
+        # which branch an unreachable input reports; delete it in the next
+        # round, per the repo's own no-dead-guard policy.
         branch, branch_reason = None, None
     else:
         # No valid bootstrap. Branch 1/2 come from `decide_branch_with_reason`
@@ -4718,8 +4820,11 @@ def main() -> None:
     # per topology per block; `resolve_run_plan` honored an override on the
     # formal path and the artifact still earned full R4 identity, so an R4
     # result could be published at 2 episodes per topology. Refused outright
-    # here, and independently re-checked from the artifact itself by
-    # `r4_freshness_sentinel`'s `registered_episode_counts` condition.
+    # here on the ARGUMENT, and -- once this process covers the whole
+    # population -- independently re-checked from the assembled artifact by
+    # the `r4_freshness_sentinel` call at the end of this function
+    # (`registered_episode_counts`). The two are not redundant: this refusal
+    # cannot see an episode volume that came from anywhere but the CLI.
     if r4_identity["r4_population_namespace"] and (
             args.episodes_calibration is not None or args.episodes_audit is not None):
         raise SystemExit(
@@ -4791,6 +4896,42 @@ def main() -> None:
         "topology_hash_failures": topology_hash_failures,
     }
     result.update(assemble_audit_result(topology_results, topology_hash_failures))
+
+    # D'' repair, contract section 3's "fail closed unless", executable on the
+    # SINGLE-PROCESS route. `r4_freshness_sentinel` was called from the pooler
+    # only, and the DEFAULT no-flag invocation of this script IS a whole-
+    # population R4 run (`resolve_run_plan` returns `TOPOLOGY_SEEDS_R4`,
+    # `r4_artifact_identity` earns identity): the lowest-effort command line
+    # produced a fully identified, self-labelled "R4 conclusion-bearing
+    # population" artifact with a branch string and no sentinel anywhere.
+    #
+    # The coverage test is SET equality, deliberately not list equality.
+    # `r4_declared_population_identity` is order-insensitive, so
+    # `--population r4` with the eight seeds REVERSED earns identity; under
+    # list equality that run would skip this gate entirely and escape with a
+    # branch computed under a non-canonical topology ordering -- and topology
+    # ORDER is load-bearing, because section 8's bootstrap resamples
+    # topologies by POSITION (see `draw_shared_topology_indices`). Set
+    # coverage routes it in here, where `exact_seed_list` refuses it. It is
+    # refused rather than silently sorted: a conclusion-bearing run that names
+    # its own population out of order is an operator mistake worth surfacing,
+    # and sorting would hide it. (The pooler sorts because it assembles from
+    # many processes whose argument order is arbitrary; one process's declared
+    # list is a statement of intent.)
+    #
+    # Placed BEFORE the stdout JSON and BEFORE the `--out` artifact write, so
+    # a refused run produces neither. The per-topology files
+    # `write_topology_record` already wrote inside the loop are RECORDS of
+    # what ran, not the artifact, and are deliberately left alone.
+    if (r4_identity["r4_population_namespace"]
+            and set(topology_seeds) == set(TOPOLOGY_SEEDS_R4)):
+        ok, detail = r4_freshness_sentinel(result)
+        if not ok:
+            failing = sorted(k for k, v in detail.items() if not v)
+            raise SystemExit(
+                "R4 freshness sentinel FAILED on the assembled artifact; failing "
+                f"condition(s): {failing}. Full detail: {detail}. This artifact is "
+                "not a conclusion-bearing R4 result and no branch is reported for it.")
 
     print(json.dumps(result, ensure_ascii=False, indent=2, default=_json_default))
     if args.out:
