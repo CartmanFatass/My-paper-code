@@ -2449,6 +2449,28 @@ def test_clone_restores_the_certified_state_condition_5():
         audit.real_env_state_snapshot(clone, snap.duty_map_at_te)) == snap.hash_at_te
 
 
+def test_clone_raises_when_the_clone_diverges_from_the_certified_state_condition_5(monkeypatch):
+    """Paired negative for condition 5: the test above only proves a
+    well-formed clone passes -- "positive assertion alone," exactly the
+    shape a mutation sweep found already replaceable by `if False:` with the
+    suite green. A clone whose state actually DIVERGES from the certified
+    snapshot (e.g. a buggy `copy.deepcopy` that returns a stale or mutated
+    copy) must be refused by `clone()` itself, never handed out as a
+    continuation environment."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=73))
+    real_deepcopy = audit.copy.deepcopy
+
+    def _diverging_deepcopy(obj, *a, **k):
+        clone = real_deepcopy(obj, *a, **k)
+        if obj is snap._env:
+            clone.uav_battery_ratios = clone.uav_battery_ratios + 0.5  # perturb restored state
+        return clone
+
+    monkeypatch.setattr(audit.copy, "deepcopy", _diverging_deepcopy)
+    with pytest.raises(audit.CloneIsolationError, match="complete-state restoration failed"):
+        snap.clone()
+
+
 def test_clone_preserves_the_topology_hash_condition_4():
     env = _CloneableFakeEnv(seed=22)
     snap = _snapshot_of(env)
@@ -2472,6 +2494,19 @@ def test_mutating_one_clone_touches_neither_the_source_nor_a_sibling_condition_2
     snap.assert_source_intact()          # raises if the snapshot moved
     assert audit.compute_state_hash(
         audit.real_env_state_snapshot(second, snap.duty_map_at_te)) == snap.hash_at_te
+
+
+def test_assert_source_intact_raises_when_the_source_env_is_mutated_condition_2():
+    """Paired negative for condition 2: the test above only proves an
+    UNTOUCHED source survives -- "positive assertion alone." A mutation
+    sweep found `if current != self.full_fingerprint:` (the line
+    `assert_source_intact` actually raises on) replaceable by `if False:`
+    with the suite green. This directly mutates the immutable source env
+    after the snapshot is taken and asserts the raise fires."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=70))
+    snap._env.uav_positions[0] = snap._env.uav_positions[0] + 500.0  # mutate the source directly
+    with pytest.raises(audit.CloneIsolationError, match="mutation isolation failed"):
+        snap.assert_source_intact()
 
 
 def test_cloning_consumes_no_source_rng_condition_3():
@@ -2500,6 +2535,60 @@ def test_rng_state_token_distinguishes_an_advanced_rng_state():
     env.np_random.uniform(0.0, 1.0, size=8)   # advance the RNG state directly
     after = audit._rng_state_token(env)
     assert before != after
+
+
+# -- condition 3's guard is `if rng_before != rng_after or rng_after !=
+# self._source_rng_token: -> if False:`, a two-operand disjunction. Neither
+# operand alone was covered by any existing test (the positive test above
+# only proves the well-formed case where BOTH operands stay False
+# together). The two tests below force each operand independently.
+
+def test_clone_raises_when_rng_moves_during_the_call_and_reverts_to_source_condition_3(monkeypatch):
+    """Operand 1 in isolation, with operand 2 held False: the source RNG is
+    pre-drifted BEFORE `clone()` is entered (so `rng_before`, captured at the
+    top of the call, already differs from `self._source_rng_token`), and then
+    the monkeypatched deepcopy step reverts the source RNG's raw state back
+    to EXACTLY its value at `EventSnapshot` construction before returning --
+    so `rng_after == self._source_rng_token` holds (operand 2 is FALSE) and
+    only `rng_before != rng_after` (operand 1, the drift-during-the-call
+    comparison) is left to catch the violation. Without this test, deleting
+    `rng_before != rng_after` from the disjunction and keeping only operand 2
+    would leave this exact violation -- randomness consumed and then
+    concealed by a coincidental revert -- completely undetected."""
+    env = _CloneableFakeEnv(seed=74)
+    original_state = env.np_random.get_state()
+    snap = _snapshot_of(env)
+    env.np_random.uniform(0.0, 1.0, size=4)  # pre-drift BEFORE clone() is ever called
+    assert audit._rng_state_token(env) != snap._source_rng_token, (
+        "precondition: the source RNG must already differ from the token "
+        "captured at construction")
+
+    real_deepcopy = audit.copy.deepcopy
+
+    def _reverting_deepcopy(obj, *a, **k):
+        result = real_deepcopy(obj, *a, **k)
+        if obj is snap._env:
+            obj.np_random.set_state(original_state)  # revert exactly to the constructed token
+        return result
+
+    monkeypatch.setattr(audit.copy, "deepcopy", _reverting_deepcopy)
+    with pytest.raises(audit.CloneIsolationError, match="RNG isolation failed"):
+        snap.clone()
+
+
+def test_clone_raises_when_source_rng_already_drifted_before_the_call_condition_3():
+    """Operand 2 in isolation, with operand 1 held False: the source RNG is
+    advanced BEFORE `clone()` is ever entered (e.g. some other consumer drew
+    from `env.np_random` between snapshot capture and cloning), so `rng_before
+    != self._source_rng_token` already holds at the top of `clone()`. Nothing
+    touches the RNG during the call itself (`_CloneableFakeEnv`'s real
+    `copy.deepcopy` draws no randomness), so `rng_before == rng_after` --
+    operand 1 is False here and only operand 2 can catch the violation."""
+    snap = _snapshot_of(_CloneableFakeEnv(seed=72))
+    snap._env.np_random.uniform(0.0, 1.0, size=4)  # drift BEFORE clone() is called at all
+
+    with pytest.raises(audit.CloneIsolationError, match="RNG isolation failed"):
+        snap.clone()
 
 
 def test_capture_rejects_a_snapshot_that_does_not_match_the_certified_world():
@@ -3343,6 +3432,55 @@ def test_roll_prefix_and_find_event_distinguishes_ineligible_from_uncertified_le
     assert planned_leaves_observed > 0 and result["event"] is None
 
 
+def test_roll_prefix_and_find_event_returns_a_qualifying_event_end_to_end():
+    """The missing positive case for GAP B: a mutation sweep found the whole
+    `if stable_ok and flex_ok:` branch -- which builds every field of the
+    returned event dict -- replaceable by `if False:` with the suite green,
+    because no existing test ever drove the real `constructive_mixed`
+    rollout plus eligibility/certification all the way to a genuinely
+    qualifying event. Every event-carrying fixture elsewhere either builds
+    the dict as a literal or monkeypatches `roll_prefix_and_find_event`
+    away; the ineligible/uncertified test just above deliberately forces
+    flex certification to fail and asserts `event is None`.
+
+    This reuses `_ScheduledLeaveFakeEnv` -- the same fixture, unmodified --
+    with `far_uavs=set()`. The negative test above places every OTHER uav
+    ~2,100 km from the vacated target specifically to blow flex's Z=139-step
+    coverage predicate; leaving that set empty keeps every uav clustered
+    along the same short line as the 6 users (x in [0, 2100] m), well inside
+    the coverage radius, and duty-target geometry never drifts in this
+    FakeEnv (positions are schedule-driven, not physics-driven), so a stable
+    candidate's displacement is always 0 <= X. Both limbs certify for real,
+    through the production predicates, with nothing stubbed."""
+    env = _ScheduledLeaveFakeEnv(
+        leave_schedule={51: 0}, dock_schedule={46: 0}, far_uavs=set(),
+    )
+
+    result = audit.roll_prefix_and_find_event(env)
+
+    event = result["event"]
+    assert event is not None, (
+        "a qualifying event must actually be found by the real algorithm; "
+        "None here means the qualifying branch never ran")
+    assert event["t_e"] == 51
+    assert isinstance(event["focal_stable_uav"], int)
+    assert isinstance(event["focal_flex_uav"], int)
+    # UAV 0 is the one that LEFT -- it must never be its own replacement,
+    # and must not remain assigned to any duty at t_e.
+    assert event["focal_stable_uav"] != 0
+    assert event["focal_flex_uav"] != 0
+    assert 0 not in event["duty_map_at_te"].values()
+    # The pre-LEAVE map (item 3's arm-distinctness witness, section 5) is
+    # exactly the identity map this fixture starts from.
+    assert event["duty_map_before_leave"] == {i: i for i in range(8)}
+    for key in ("full_fingerprint_at_te", "conformance_record", "locked_duties",
+                "duty_positions_at_te", "service_centroids_at_te", "hash_at_te",
+                "legal_targets"):
+        assert key in event, f"missing required event field: {key}"
+    assert event["conformance_record"]["source_control_schedule_identity"] == "constructive_mixed"
+    assert set(event["locked_duties"].keys()) == {"stable", "flex"}
+
+
 # =============================================================================
 # 8b. Minimum support: both limbs must independently clear
 # =============================================================================
@@ -3515,6 +3653,67 @@ def test_driver_conformance_failure_reaches_branch_1_over_a_favorable_t_m(monkey
     assert out["conformance"]["invalidated_pairs_count"] == 1
     assert out["support"]["ok"] is True
     assert out["branch"] == "INVALID_EVENT_ALIGNED_AUDIT"
+
+
+# =============================================================================
+# 9a-prime. R3 section E: episode-world provenance verdict (`all_seed_
+# controlled`). This is the reader-facing verdict on whether a run's
+# contrasts are matched causal evidence at all -- a mutation sweep found the
+# whole expression replaceable by the literal `True` with the suite green,
+# because nothing anywhere referenced the field. Both tests below call
+# `assemble_audit_result` (the real production wiring), never
+# `all_seed_controlled` re-derived by hand, and use `qualifying_*_episodes=0`
+# so `support_ok` is False and the cheap `elif not support_ok` shortcut
+# handles branch resolution -- the expensive T_m bootstrap is irrelevant to
+# what these tests check.
+# =============================================================================
+
+def test_all_seed_controlled_is_false_when_any_episode_world_is_not_seed_controlled():
+    """The named mutation: `all(...) if episode_worlds_all else False` ->
+    `True` would report a fabricated provenance verdict here, where one of
+    two recorded episode worlds explicitly did NOT control its own
+    generation."""
+    topology_results = [{
+        "qualifying_calibration_episodes": 0, "qualifying_audit_episodes": 0,
+        "invalidated_pairs": [], "arm_distinctness_pairs": [],
+        "episode_worlds": [
+            {"block": "audit", "episode_index": 0, "episode_seed": 1,
+             "fingerprint": "fp0", "seed_controls_generation": True},
+            {"block": "audit", "episode_index": 1, "episode_seed": 2,
+             "fingerprint": "fp1", "seed_controls_generation": False},
+        ],
+    }]
+
+    out = audit.assemble_audit_result(topology_results, [])
+    prov = out["episode_world_provenance"]
+
+    assert prov["all_seed_controlled"] is False, (
+        "one episode world with seed_controls_generation=False must make "
+        "the pooled verdict False -- a literal True here is a fabricated "
+        "scientific credential")
+    assert prov["episodes_recorded"] == 2
+    assert [w["episode_seed"] for w in prov["episodes_not_seed_controlled"]] == [2]
+
+
+def test_all_seed_controlled_is_false_not_vacuously_true_on_no_episode_worlds():
+    """The empty-list case named explicitly in the brief: `all([])` is
+    vacuously True in Python, so a caller who drops the `if episode_worlds_all
+    else False` guard (leaving bare `all(...)`) would report a run with ZERO
+    recorded episode worlds as fully seed-controlled. That is not a weaker
+    reading of the same fact -- it is the opposite claim, made from no
+    evidence at all."""
+    topology_results = [{
+        "qualifying_calibration_episodes": 0, "qualifying_audit_episodes": 0,
+        "invalidated_pairs": [], "arm_distinctness_pairs": [],
+        "episode_worlds": [],
+    }]
+
+    out = audit.assemble_audit_result(topology_results, [])
+    prov = out["episode_world_provenance"]
+
+    assert prov["episodes_recorded"] == 0
+    assert prov["all_seed_controlled"] is False, (
+        "zero recorded episode worlds must never read as seed-controlled")
 
 
 # =============================================================================
