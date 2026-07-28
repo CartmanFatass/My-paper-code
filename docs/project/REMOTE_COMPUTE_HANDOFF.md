@@ -3,26 +3,30 @@
 Rewritten 2026-07-27. Branch `untied-k`. Read `AGENTS.md` first, then
 `docs/project/CURRENT_WORK.md`, then this file.
 
-> ## DO NOT LAUNCH THE R4 POPULATION FROM THIS FILE (2026-07-28)
+> ## The R4 launch procedure here is LIVE again (2026-07-28)
 >
-> The shard recipe below **cannot produce a conforming R4 artifact.** Step D
-> measured it: `--topology-seeds` earns no R4 contract/namespace identity, so
-> every per-topology shard runs under the legacy R3 seed namespace and pools into
-> an artifact self-labelled *not* R4 — which still prints the conclusion-bearing
-> `D7_S_EVENT_ALIGNED_BRANCH=` line on stdout. `r4_freshness_sentinel`, which
-> exists to refuse exactly that, is called by no production code.
+> The void banner that stood here is lifted: its own condition — "rewritten once
+> the repair lands and is re-reviewed" — is met. `--population r4` landed in
+> `28d6933f` (D'), its two blocking defects were repaired in `0193de1a` (D''),
+> and the Stage B review of D'' returned **APPROVE on conformance and
+> semantics**, having driven the eight-shard route end to end.
 >
-> This file is also stale on its own terms: it still cites "16 under the
-> expansion set", and **R4 has no expansion set** (ledger `R4-002`, expansion =
-> NONE).
+> **`--population r4` is REQUIRED on every shard and is not decoration.** R4
+> identity is DECLARED, not inferred. Without the flag a shard earns no R4
+> contract/namespace fields, runs under the legacy R3 seed namespace, and pools
+> into an artifact carrying no proof it is R4. The pooler now refuses such a
+> pool outright rather than relabelling it.
 >
-> The repair (`--population r4`, plus a pooler that requires and propagates the
-> identity fields and runs the sentinel on its own output) is in flight as step
-> D'. This file is rewritten to match once that lands and is re-reviewed.
-> Until then the R4 launch procedure here is **void**.
+> Two behaviours to expect that this file previously did not describe:
+> a **whole-population single-process run** (including the bare no-flag
+> invocation) is now put through `r4_freshness_sentinel` and refuses before
+> writing anything if it fails; and the pooler prints
+> `D7_S_EVENT_ALIGNED_BRANCH=` **only** for an R4-population artifact, printing
+> an explicit `D7_S_EVENT_ALIGNED_NOT_CONCLUSION_BEARING:` line otherwise.
 >
 > Evidence:
 > `docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_R4_THE_PLANNED_PRODUCTION_ROUTE_CANNOT_PROVE_IT_IS_R4.md`
+> and `..._THE_REPAIR_OPENED_A_HOLE_THE_OLD_CODE_REFUSED.md`
 
 **The previous version of this file described the ep64 persistence-margin job.
 That job is retired as causal evidence** (its environment was built fresh per
@@ -34,9 +38,19 @@ it died is `CURRENT_WORK.md` under `d7_s_ep64_*`.
 
 ```bash
 python scripts/audit_d7_s_event_aligned.py \
-  --topology-seeds <one or more seeds> \
+  --population r4 \
+  --topology-seeds <one seed of the frozen R4 population> \
+  --workers 4 \
   --out <run-dir> > <run-dir>/stdout.json
 ```
+
+The frozen R4 population is `20260734 20260735 20260736 20260737 20260738
+20260739 20260740 20260741` — **not** R3's `20260726-20260733`, which are
+measured, autopsied, used to motivate R4 itself, and which R4 forbids pooling
+with. `--population r4` hard-refuses any seed outside the population, so a
+matrix typo is a loud failure rather than a quiet one; it also refuses a
+repeated seed, and refuses `--episodes-calibration`/`--episodes-audit` outright,
+because a conclusion-bearing run does not take an episode-count argument.
 
 Evaluation only. No training, no policy, no checkpoint, no GPU — `torch` and
 `stable-baselines3` are imported nowhere on this path (both are guarded
@@ -63,13 +77,21 @@ registered set, and its docstring is explicit that sharding is *by whole topolog
 seed, never splitting episodes within a topology*. So:
 
 ```text
-max useful parallel width  8 seeds  (16 under the expansion set)
+max useful parallel width  8 seeds  -- the whole R4 population, and that is all
 min work per job           one complete topology
 ```
 
-`--episodes-calibration` / `--episodes-audit` can shrink a topology, but that
-changes the scientific volume, not the sharding. It is not a way to fit a
-wall-clock budget.
+**R4 has no expansion set.** Ledger `R4-002` registers expansion = NONE, and the
+R3 expansion apparatus was deleted rather than left as a guard that never fires.
+An earlier version of this line cited "16 under the expansion set"; there is no
+such set to expand into.
+
+`--episodes-calibration` / `--episodes-audit` are **refused outright on the R4
+population** (R2 repair) — they are a development lever only. They were never a
+way to fit a wall-clock budget, and now they are not a way to do anything to a
+conclusion-bearing run: the registered volume is 8 calibration + 8 audit
+episodes per topology per block, and the freshness sentinel re-checks from the
+artifact that the volume actually ran.
 
 Pool afterwards; never average normalized margins across shards.
 

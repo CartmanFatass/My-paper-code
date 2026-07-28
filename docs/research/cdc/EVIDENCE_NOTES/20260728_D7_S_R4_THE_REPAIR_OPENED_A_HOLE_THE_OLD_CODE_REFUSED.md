@@ -89,7 +89,8 @@ N-5   the pooler prints D7_S_EVENT_ALIGNED_BRANCH= only for the R4 population;
         a development pool gets an explicit NOT_CONCLUSION_BEARING line
 N-1   NOT re-routed. The horizon criterion sits in the wrong predicate but is
         unreachable (`fork_continuation` has no early break). Pinned by a test
-        that reddens if anyone adds one, rather than touching precedence.
+        rather than by touching precedence -- but see the correction below:
+        that pin is weaker than this line first claimed.
 ```
 
 ## Set equality, not list equality — the binding that would have half-fixed B-2
@@ -129,6 +130,41 @@ needs six. Measured: `support_ok` is False at n=0, 1, 2 and True at n=6.
 The comment is corrected. The branch is left in place because the formal run is
 gated and folding it into the `else` would change which branch an unreachable
 input reports; deletion belongs in the next round.
+
+## What the Stage B review of D'' corrected in this note
+
+D'' was itself put through the gate, because a repair of a rejected gate is
+claim-bearing code by construction. **Verdict: APPROVE on conformance and
+semantics, no blocking defects.** The reviewer drove the real eight-shard route
+end to end and ran a 17-scenario OLD/NEW differential: every difference between
+`28d6933f` and D'' is either the added `limb_states` key or D'' refusing where
+the old code admitted. No scenario admits something the old code refused.
+
+Two claims **this note made are weaker than they read**, and the corrections
+belong here rather than in a separate document:
+
+```text
+the fork_continuation early-exit pin. This note said the guard "reddens if
+  anyone adds" an early break. Measured: it catches an own-line `break` and
+  MISSES `if bad: break`, `if bad: return {}`, and a horizon clamp above the
+  loop header. It is a source-regex guard, and the claim overstated it.
+
+the h vs h+1 pin after deleting window_series_length. Two tests were named as
+  carrying it. Only one does: test_window_latched_counts_on_a_full_h_stable_
+  sized_series asserts len(output) == len(input), which is unconditionally
+  true, and a count assertion insensitive to whether row 0 is a baseline. The
+  convention IS covered -- by other tests, verified by mutation -- but not by
+  the test named for it.
+```
+
+**One residual wrong-claim class the review found, and it is the mirror of B-1.**
+An artifact declaring eight topologies while producing units for seven, with no
+hash-failure entry, passes all six conditions and prints a conclusion-bearing
+branch. Measured through the real pooler. It is **not** a regression — identical
+at `28d6933f` — and no route to it was found through either production path.
+Condition 8 bound "too many topologies"; nothing bound "too few, silently".
+Being unreachable is the same defence that failed twice already in this
+workflow, so it is closed rather than recorded.
 
 ## Disposition
 
