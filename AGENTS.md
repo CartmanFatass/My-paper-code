@@ -472,6 +472,20 @@ carried by the Project Manager. It is not a second fence and not a second
 round. Archive the whole converged exchange, not only its last message — the
 turns that changed the answer are evidence.
 
+**Convergence belongs to touchpoint 2 and nowhere else** (user ruling
+2026-07-27). A workflow has three Pro accesses and the count is controlled:
+Pro's scientific decision, the review of the Project Manager's code plan which
+returns the convergence decision, and the result submission that becomes the next
+workflow's first touchpoint. "As many follow-ups as convergence needs" scopes to
+*that* review, not to the workflow at large.
+
+When new material appears after a round has closed — a sweep finding, a
+measurement, a defect — it does **not** justify a follow-up turn. Carry it into
+the next workflow's plan review, where it is context for the plan. On 2026-07-27
+a closed result round was about to receive an extra turn carrying mutation-sweep
+findings; that would have been a fourth access nobody budgeted, and endless
+ping-pong is the specific failure this rule prevents.
+
 Converged means both sides state the same thing, not that the reviewer stopped
 objecting. If convergence fails, record where it stalled and what each side
 holds; an unresolved boundary is a real result and belongs in the portfolio.
