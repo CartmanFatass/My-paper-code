@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4_CLOSURE step D (realization-conformance review, in flight) then E (proof-sized exercise). No run.
+next_boundary=R4_CLOSURE step D' (conformance repair of four blocking defects, in flight) then re-review, then E. No run.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -105,9 +105,40 @@ uncommitted-to-a-run and reversible; no compute was spent on it.
 A supersede the partial freeze          DONE  D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 B decision ledger, nine bindings        DONE  D7_S_R4_DECISION_LEDGER.md
 C implement the smallest R4 delta       DONE  3de74552 + 7fa90070
-D realization-conformance review        IN FLIGHT -- ten checks, hmasd-reviewer
-E proof-sized exercise on 20260725      not started
+D realization-conformance review        REJECT -- 6 of 10 clean, four blocking
+D' conformance repair                   IN FLIGHT -- R1-R5, hmasd-implementer
+E proof-sized exercise on 20260725      blocked on D'
 ```
+
+**Step D returned REJECT.** Four blocking defects, all re-verified by the Project
+Manager rather than taken on the child's report:
+
+```text
+B1  the sharded production route earns no R4 identity, and r4_freshness_sentinel
+    is called by NO production code -- contract section 3's "fail closed" has no
+    executable closure
+B2  --episodes-* overrides survive on the formal path: a conclusion-bearing R4
+    artifact at 2 episodes per topology instead of the frozen 8
+B3  the completeness gate is `if not pairwise` -- a truncated audit reads as
+    exactly invariant and routes to PRIMARY_G_DEGENERATE
+B4  section 7 precedence inverted: support is checked before missing-audit, so an
+    instrument failure is reported as a population failure
+```
+
+Full evidence:
+`docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_R4_THE_PLANNED_PRODUCTION_ROUTE_CANNOT_PROVE_IT_IS_R4.md`.
+
+All four are the code failing to do what the **already-frozen** contract says, so
+they are conformance repairs under Project Manager authority — no Pro round. The
+one item that does cross is `NOT_EVALUATED`, a fifth per-limb state outside the
+frozen four-state vocabulary; it joins the list owed to Pro at the next
+touchpoint.
+
+**The 249 green tests proved less than they appeared to.** `main()` is invoked by
+no test in either suite, and `compute_u_star_bootstrap` appears only as the
+`monkeypatch.setattr` that replaces it — so the invariant that matters (an
+artifact emitted by the route the formal run actually uses satisfies the
+sentinel) was never asserted. Do not read that count as instrument validation.
 
 The R4 instrument exists: absolute five-unit gates, four per-limb states, the
 nine-row combined mapping, five-level precedence, branch 3 over focal pairs, the
