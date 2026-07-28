@@ -6,6 +6,7 @@ import copy
 import dis
 import hashlib
 import json
+import math
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import Any
@@ -93,6 +94,20 @@ class G47ActorReplay:
     pre_tanh_actions: torch.Tensor
     actions: torch.Tensor
     joint_log_probs: torch.Tensor
+
+
+@dataclass(frozen=True)
+class G47ActorTrajectory:
+    """Reduced-arm view with no baseline-only true-state field."""
+
+    observations: torch.Tensor
+    active_mask: torch.Tensor
+    rewards: torch.Tensor
+    hidden_before: torch.Tensor
+    terminal_hidden_reset_mask: torch.Tensor | None
+    pre_tanh_actions: torch.Tensor
+    actions: torch.Tensor
+    old_log_probs: torch.Tensor
 
 
 @dataclass(frozen=True)
@@ -563,11 +578,25 @@ def reconstruct_static_certificate(
     ):
         return {"passed": False, "model_types_valid": False}
     component_functions = {
-        "actor_gradient": (_actor_only_probe,),
+        "actor_gradient": (
+            _actor_only_trajectory_view,
+            _actor_only_step,
+            actor_only_replay,
+            _actor_only_probe,
+        ),
         "entropy": (_actor_only_probe,),
-        "action_or_logprob": (actor_only_replay, actor_trace),
+        "action_or_logprob": (
+            _actor_only_trajectory_view,
+            _actor_only_step,
+            actor_only_replay,
+            _actor_only_trace,
+        ),
         "checkpoint_selection": (_build_reduced_checkpoint_payload,),
-        "evaluation": (actor_trace,),
+        "evaluation": (
+            _actor_only_trajectory_view,
+            _actor_only_step,
+            _actor_only_trace,
+        ),
         "source_or_lifecycle": (_source_trace_evidence,),
     }
     reads = {
@@ -590,6 +619,24 @@ def reconstruct_static_certificate(
                     "credit_baselines",
                     "baseline_values",
                     "baseline_loss",
+                    "critic_state",
+                    "baseline_true_state",
+                    "true_current_state",
+                )
+            )
+        )
+        for name, values in reads.items()
+    }
+    true_state_reads = {
+        name: sorted(
+            value
+            for value in values
+            if any(
+                token in value
+                for token in (
+                    "critic_state",
+                    "baseline_true_state",
+                    "true_current_state",
                 )
             )
         )
@@ -639,6 +686,15 @@ def reconstruct_static_certificate(
         "baseline_loss_gradient_into_actor_count": 0,
         "actor_loss_gradient_into_baseline_count": 0,
         "baseline_RNG_consumption": 0,
+        "baseline_true_state_read_into_reduced_actor_gradient": len(
+            true_state_reads["actor_gradient"]
+        ),
+        "baseline_true_state_read_into_reduced_actor_action_or_logprob": len(
+            true_state_reads["action_or_logprob"]
+        ),
+        "baseline_true_state_read_into_reduced_evaluation": len(
+            true_state_reads["evaluation"]
+        ),
     }
     optimizer_predicates = {
         "actor_optimizer_class_equal": type(optimizers[REFERENCE_ARM])
@@ -696,6 +752,7 @@ def reconstruct_static_certificate(
         "static_certificate_first": True,
         "component_bytecode_reads": reads,
         "forbidden_baseline_reads": forbidden_reads,
+        "baseline_true_state_reads_by_component": true_state_reads,
         "zero_baseline_reads_by_component": zero_reads,
         "static_predicates": static_predicates,
         "optimizer_predicates": optimizer_predicates,
@@ -721,6 +778,7 @@ def validate_static_certificate(value: object) -> bool:
     predicates = value.get("static_predicates")
     optimizer = value.get("optimizer_predicates")
     zero_reads = value.get("zero_baseline_reads_by_component")
+    true_state_reads = value.get("baseline_true_state_reads_by_component")
     return bool(
         value.get("certificate_kind")
         == "zero_trajectory_static_dependency_and_optimizer_factorization"
@@ -740,6 +798,9 @@ def validate_static_certificate(value: object) -> bool:
                 "baseline_loss_gradient_into_actor_count",
                 "actor_loss_gradient_into_baseline_count",
                 "baseline_RNG_consumption",
+                "baseline_true_state_read_into_reduced_actor_gradient",
+                "baseline_true_state_read_into_reduced_actor_action_or_logprob",
+                "baseline_true_state_read_into_reduced_evaluation",
             )
         )
         and isinstance(optimizer, Mapping)
@@ -767,18 +828,183 @@ def validate_static_certificate(value: object) -> bool:
         and isinstance(zero_reads, Mapping)
         and zero_reads
         and all(row is True for row in zero_reads.values())
+        and isinstance(true_state_reads, Mapping)
+        and all(
+            true_state_reads.get(name) == []
+            for name in (
+                "actor_gradient",
+                "action_or_logprob",
+                "evaluation",
+            )
+        )
         and value.get("reduced_baseline_module_parameter_and_schema_absent") is True
         and value.get("actor_optimizer_factorized") is True
         and value.get("canonical_actor_projection_bitwise_equal") is True
         and value.get("K_search") == 0
         and value.get("hypothetical_transitions") == 0
         and value.get("formal_statistical_run") is False
+)
+
+
+def _actor_only_trajectory_view(
+    trajectory: AnchoredRosterTrajectory | G47ActorTrajectory,
+) -> G47ActorTrajectory:
+    if isinstance(trajectory, G47ActorTrajectory):
+        return trajectory
+    return G47ActorTrajectory(
+        observations=trajectory.observations,
+        active_mask=trajectory.active_mask,
+        rewards=trajectory.rewards,
+        hidden_before=trajectory.hidden_before,
+        terminal_hidden_reset_mask=trajectory.terminal_hidden_reset_mask,
+        pre_tanh_actions=trajectory.pre_tanh_actions,
+        actions=trajectory.actions,
+        old_log_probs=trajectory.old_log_probs,
+    )
+
+
+def _actor_only_step(
+    model: G47NoBaselineProjection,
+    *,
+    observations: torch.Tensor,
+    active_mask: torch.Tensor,
+    hidden: torch.Tensor,
+    sampling_noise: torch.Tensor | None = None,
+    teacher_pre_tanh: torch.Tensor | None = None,
+    deterministic: bool = False,
+) -> g41.G41ActorStep:
+    """Run the retained actor without accepting or evaluating true-state input."""
+
+    if hasattr(model, "credit_baselines") or hasattr(model, "baseline_values"):
+        raise G47InvariantError("reduced_baseline_path_present", {})
+    actor = model.policy
+    actor_observations = model.actor_input(observations, active_mask)
+    expected_observation_shape = (actor.member_capacity, actor.observation_dim)
+    if (
+        actor_observations.ndim != 3
+        or actor_observations.shape[1:] != expected_observation_shape
+    ):
+        raise ValueError("G47 actor-only observation shape mismatch")
+    batch = actor_observations.shape[0]
+    if (
+        active_mask.shape != (batch, actor.member_capacity)
+        or active_mask.dtype != torch.bool
+    ):
+        raise ValueError("G47 actor-only active mask shape/dtype mismatch")
+    if hidden.shape != (batch, actor.member_capacity, actor.hidden_dim):
+        raise ValueError("G47 actor-only hidden shape mismatch")
+    modes = (
+        int(sampling_noise is not None)
+        + int(teacher_pre_tanh is not None)
+        + int(deterministic)
+    )
+    if modes != 1:
+        raise ValueError("choose exactly one sampling, replay, or deterministic mode")
+    expected_action_shape = (batch, actor.member_capacity, actor.action_dim)
+    if sampling_noise is not None and sampling_noise.shape != expected_action_shape:
+        raise ValueError("G47 actor-only sampling-noise shape mismatch")
+    if (
+        teacher_pre_tanh is not None
+        and teacher_pre_tanh.shape != expected_action_shape
+    ):
+        raise ValueError("G47 actor-only teacher-latent shape mismatch")
+
+    active_count = active_mask.sum(dim=1)
+    if bool((active_count <= 0).any()):
+        raise ValueError("G47 actor-only path requires an active lifecycle")
+    dtype = actor_observations.dtype
+    batch_index = torch.arange(batch, device=actor_observations.device)
+    encoded = actor.member_encoder(actor_observations)
+    member_sum = (encoded * active_mask.to(dtype).unsqueeze(-1)).sum(dim=1)
+    count_coordinate = torch.log1p(active_count.to(dtype)).unsqueeze(-1)
+    context_input = torch.cat((member_sum, count_coordinate), dim=-1)
+    context = actor.context_encoder(context_input)
+    order = actor._routing_order(active_mask, actor_observations)
+    positions = torch.arange(
+        actor.member_capacity, device=actor_observations.device
+    ).unsqueeze(0)
+    valid_positions = positions < active_count.unsqueeze(1)
+    next_hidden = actor._initialize_next_hidden(hidden)
+    actions = torch.zeros(
+        expected_action_shape, dtype=dtype, device=actor_observations.device
+    )
+    pre_tanh_actions = torch.zeros_like(actions)
+    log_probs = torch.zeros(
+        (batch, actor.member_capacity),
+        dtype=dtype,
+        device=actor_observations.device,
+    )
+    entropies = torch.zeros_like(log_probs)
+    prefix_rows = torch.zeros_like(actions)
+    prefix_sum = torch.zeros(
+        (batch, actor.action_dim), dtype=dtype, device=actor_observations.device
+    )
+    denominator = active_count.to(dtype).unsqueeze(-1)
+    log_std = actor.log_std.clamp(-5.0, 2.0)
+    std = torch.exp(log_std)
+
+    for position in range(actor.member_capacity):
+        valid = valid_positions[:, position]
+        if not bool(valid.any()):
+            break
+        owner = order[:, position]
+        prefix_fraction = prefix_sum / denominator
+        owner_encoded = encoded[batch_index, owner]
+        owner_hidden = actor._actor_hidden_input(
+            owner_encoded, next_hidden[batch_index, owner]
+        )
+        candidate = actor.actor_rnn(
+            torch.cat((owner_encoded, context, prefix_fraction), dim=-1),
+            owner_hidden,
+        )
+        mean = actor._action_mean_for_member(
+            candidate=candidate,
+            prefix_fraction=prefix_fraction,
+            observation=actor_observations[batch_index, owner],
+        )
+        distribution = torch.distributions.Normal(mean, std.expand_as(mean))
+        if teacher_pre_tanh is not None:
+            raw = teacher_pre_tanh[batch_index, owner]
+            chosen = torch.tanh(raw)
+        elif deterministic:
+            raw = mean
+            chosen = torch.tanh(raw)
+        else:
+            assert sampling_noise is not None
+            raw = mean + std * sampling_noise[batch_index, owner]
+            chosen = torch.tanh(raw)
+        log_jacobian = 2.0 * (
+            math.log(2.0) - raw - F.softplus(-2.0 * raw)
+        )
+        chosen_logp = (distribution.log_prob(raw) - log_jacobian).sum(dim=-1)
+        entropy = distribution.entropy().sum(dim=-1)
+        valid_batch = batch_index[valid]
+        valid_owner = owner[valid]
+        carried = actor._carried_hidden(candidate)
+        next_hidden[valid_batch, valid_owner] = carried[valid]
+        actions[valid_batch, valid_owner] = chosen[valid]
+        pre_tanh_actions[valid_batch, valid_owner] = raw[valid]
+        log_probs[valid_batch, valid_owner] = chosen_logp[valid]
+        entropies[valid_batch, valid_owner] = entropy[valid]
+        prefix_rows[:, position] = prefix_sum
+        prefix_sum = prefix_sum + torch.where(
+            valid.unsqueeze(-1), chosen, torch.zeros_like(chosen)
+        )
+
+    return g41.G41ActorStep(
+        actions=actions,
+        pre_tanh_actions=pre_tanh_actions,
+        token_log_probs=log_probs,
+        token_entropies=entropies,
+        next_hidden=next_hidden,
+        prefix_action_sums=prefix_rows,
+        likelihood_mask=active_mask,
     )
 
 
 def actor_only_replay(
     model: G47NoBaselineProjection,
-    trajectory: AnchoredRosterTrajectory,
+    trajectory: G47ActorTrajectory,
 ) -> G47ActorReplay:
     if hasattr(model, "credit_baselines") or hasattr(model, "baseline_values"):
         raise G47InvariantError("reduced_baseline_path_present", {})
@@ -788,11 +1014,10 @@ def actor_only_replay(
     for time in range(trajectory.rewards.shape[0]):
         if resets is not None:
             hidden = torch.where(resets[time].unsqueeze(-1), 0.0, hidden)
-        output = g41.retained_actor_step(
+        output = _actor_only_step(
             model,
             observations=trajectory.observations[time],
             active_mask=trajectory.active_mask[time],
-            critic_state=trajectory.critic_states[time],
             hidden=hidden,
             teacher_pre_tanh=trajectory.pre_tanh_actions[time],
         )
@@ -874,7 +1099,7 @@ def _actor_gradient_evidence(
 def _actor_only_probe(
     model: G47NoBaselineProjection,
     replay: G47ActorReplay,
-    trajectory: AnchoredRosterTrajectory,
+    trajectory: G47ActorTrajectory,
     normalized_advantages: tuple[torch.Tensor, torch.Tensor],
 ) -> _ActorProbe:
     parameters = model.full_actor_parameters()
@@ -919,9 +1144,50 @@ def _actor_only_probe(
     )
 
 
-def actor_trace(
-    model: G47Model, trajectory: AnchoredRosterTrajectory
+def _actor_only_trace(
+    model: G47NoBaselineProjection,
+    trajectory: G47ActorTrajectory,
 ) -> dict[str, object]:
+    hidden = trajectory.hidden_before[0]
+    resets = trajectory.terminal_hidden_reset_mask
+    pre_tanh: list[torch.Tensor] = []
+    actions: list[torch.Tensor] = []
+    log_probs: list[torch.Tensor] = []
+    for time in range(trajectory.rewards.shape[0]):
+        if resets is not None:
+            hidden = torch.where(resets[time].unsqueeze(-1), 0.0, hidden)
+        output = _actor_only_step(
+            model,
+            observations=trajectory.observations[time],
+            active_mask=trajectory.active_mask[time],
+            hidden=hidden,
+            sampling_noise=torch.zeros_like(trajectory.actions[time]),
+        )
+        pre_tanh.append(output.pre_tanh_actions)
+        actions.append(output.actions)
+        log_probs.append(output.token_log_probs)
+        hidden = output.next_hidden
+    pre_tanh_row = torch.stack(pre_tanh)
+    action_row = torch.stack(actions)
+    token_row = torch.stack(log_probs)
+    joint = torch.where(trajectory.active_mask, token_row, 0.0).sum(dim=-1)
+    return {
+        "pre_tanh_digest": _tensor_digest(pre_tanh_row),
+        "actions_same_zero_noise_digest": _tensor_digest(action_row),
+        "token_log_probability_digest": _tensor_digest(token_row),
+        "joint_log_probability_digest": _tensor_digest(joint),
+    }
+
+
+def actor_trace(
+    model: G47Model, trajectory: AnchoredRosterTrajectory | G47ActorTrajectory
+) -> dict[str, object]:
+    if isinstance(model, G47NoBaselineProjection):
+        return _actor_only_trace(model, _actor_only_trajectory_view(trajectory))
+    if not isinstance(model, g41.G41NoSlowProjection):
+        raise TypeError("G47 actor trace model type is invalid")
+    if not isinstance(trajectory, AnchoredRosterTrajectory):
+        raise TypeError("G47 reference actor trace requires the retained trajectory")
     hidden = trajectory.hidden_before[0]
     resets = trajectory.terminal_hidden_reset_mask
     pre_tanh: list[torch.Tensor] = []
@@ -1086,6 +1352,7 @@ def optimize_shadow_baseline_module_reduction_update(
         normalization.independent_immediate,
         normalization.independent_successor,
     )
+    reduced_trajectory = _actor_only_trajectory_view(trajectory)
     source_trace = _source_trace_evidence(trajectory)
     pass_records: list[dict[str, object]] = []
     rng_before = torch.random.get_rng_state().clone()
@@ -1098,9 +1365,9 @@ def optimize_shadow_baseline_module_reduction_update(
         baseline_rng_unchanged = torch.equal(
             baseline_rng_before, torch.random.get_rng_state()
         )
-        reduced_replay = actor_only_replay(reduced, trajectory)
+        reduced_replay = actor_only_replay(reduced, reduced_trajectory)
         reduced_probe = _actor_only_probe(
-            reduced, reduced_replay, trajectory, normalized
+            reduced, reduced_replay, reduced_trajectory, normalized
         )
         reference_credit = g46._equal_mean(
             reference_probe.immediate_credit_gradients,
@@ -1168,7 +1435,7 @@ def optimize_shadow_baseline_module_reduction_update(
         actor_equal = _state_equal(_actor_state(reference), _actor_state(reduced))
         adam_equal = _actor_optimizer_projection_equal(models, optimizers)
         reference_trace = actor_trace(reference, trajectory)
-        reduced_trace = actor_trace(reduced, trajectory)
+        reduced_trace = _actor_only_trace(reduced, reduced_trajectory)
         trace_equal = reference_trace == reduced_trace
         if not (actor_equal and adam_equal and trace_equal):
             raise G47InvariantError(

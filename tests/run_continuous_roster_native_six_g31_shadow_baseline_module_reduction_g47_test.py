@@ -102,6 +102,14 @@ def test_readiness_lifecycle_reloads_exact_final_only_artifacts(
     assert training["formal_statistical_run"] is False
     assert training["dynamic_equivalence"]["D_G47"] == 0
     assert training["dynamic_equivalence"]["real_transitions"] == 384
+    assert all(
+        training["static_certificate"]["static_predicates"][name] == 0
+        for name in (
+            "baseline_true_state_read_into_reduced_actor_gradient",
+            "baseline_true_state_read_into_reduced_actor_action_or_logprob",
+            "baseline_true_state_read_into_reduced_evaluation",
+        )
+    )
     assert tuple(training["checkpoint_inventory"]) == source.ARMS
     assert all(
         row["kind"] == "final_only"
@@ -147,6 +155,22 @@ def test_artifact_tamper_and_first_match_guards_fail_closed(
     )
     with pytest.raises(ValueError, match="train manifest invariant mismatch"):
         runner.validate_training_artifacts(tampered)
+
+    static_tampered = tmp_path / "static_tampered"
+    shutil.copytree(root, static_tampered)
+    static_manifest_path = static_tampered / runner.TRAIN_MANIFEST
+    static_manifest = json.loads(
+        static_manifest_path.read_text(encoding="utf-8")
+    )
+    static_manifest["static_certificate"]["static_predicates"][
+        "baseline_true_state_read_into_reduced_evaluation"
+    ] = 1
+    static_manifest_path.write_text(
+        json.dumps(static_manifest, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="train manifest invariant mismatch"):
+        runner.validate_training_artifacts(static_tampered)
 
     base = {
         "operational_valid": True,

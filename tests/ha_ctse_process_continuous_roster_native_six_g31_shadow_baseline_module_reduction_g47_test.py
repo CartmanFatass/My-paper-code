@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import inspect
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -25,6 +26,20 @@ ANCHOR_FIXTURE = (
     "replicate_0_common_native6_fast_anchor.pt"
 )
 ANCHOR_SHA256 = "d6920e8ab958b776ee0b25a5d2a1b120528b69abc87d4eacc2a6deee2351b521"
+
+
+class _CriticStateReadTrap:
+    """Expose every actor field while rejecting baseline-only state reads."""
+
+    def __init__(self, trajectory: g40.AnchoredRosterTrajectory) -> None:
+        self._trajectory = trajectory
+
+    @property
+    def critic_states(self) -> torch.Tensor:
+        raise AssertionError("reduced G47 path read critic_states")
+
+    def __getattr__(self, name: str) -> object:
+        return getattr(self._trajectory, name)
 
 
 @pytest.fixture(scope="module")
@@ -80,6 +95,9 @@ def test_static_projection_deletes_only_baseline_and_proves_factorization(
     assert hasattr(reference, "credit_baselines")
     assert not hasattr(reduced, "credit_baselines")
     assert not hasattr(reduced, "baseline_values")
+    assert "critic_state" not in inspect.signature(
+        g47._actor_only_step
+    ).parameters
     assert all("credit_baselines" not in key for key in reduced.state_dict())
     assert g47._state_equal(
         g47._actor_state(reference), g47._actor_state(reduced)
@@ -102,6 +120,19 @@ def test_static_projection_deletes_only_baseline_and_proves_factorization(
     assert certificate["static_certificate_first"] is True
     assert all(
         value == 0 for value in certificate["static_predicates"].values()
+    )
+    assert certificate["static_predicates"][
+        "baseline_true_state_read_into_reduced_actor_gradient"
+    ] == 0
+    assert certificate["static_predicates"][
+        "baseline_true_state_read_into_reduced_actor_action_or_logprob"
+    ] == 0
+    assert certificate["static_predicates"][
+        "baseline_true_state_read_into_reduced_evaluation"
+    ] == 0
+    assert all(
+        certificate["baseline_true_state_reads_by_component"][name] == []
+        for name in ("actor_gradient", "action_or_logprob", "evaluation")
     )
     assert certificate["optimizer_predicates"] == {
         "actor_optimizer_class_equal": True,
@@ -126,9 +157,19 @@ def test_one_shared_batch_is_bitwise_equal_and_checkpoint_rejects_baseline_leaka
     accepted_anchor_batch: tuple[
         g40.G40NativeSixPolicy, g40.AnchoredRosterTrajectory
     ],
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     anchor, trajectory = accepted_anchor_batch
     models, optimizers = _project(anchor)
+    reduced_model = models[g47.REDUCED_ARM]
+    assert isinstance(reduced_model, g47.G47NoBaselineProjection)
+    trapped = _CriticStateReadTrap(trajectory)
+    monkeypatch.setattr(g47, "_actor_only_trajectory_view", lambda _: trapped)
+    replay = g47.actor_only_replay(reduced_model, trapped)  # type: ignore[arg-type]
+    assert replay.log_probs.shape == trajectory.old_log_probs.shape
+    assert g47.actor_trace(reduced_model, trapped)[  # type: ignore[arg-type]
+        "token_log_probability_digest"
+    ]
     record = g47.optimize_shadow_baseline_module_reduction_update(
         models, optimizers, trajectory
     )
@@ -168,6 +209,11 @@ def test_one_shared_batch_is_bitwise_equal_and_checkpoint_rejects_baseline_leaka
         g47.canonical_actor_projection(reference)["actor_state_digest"]
         == g47.canonical_actor_projection(reduced)["actor_state_digest"]
     )
+    payload = io.BytesIO()
+    torch.save(checkpoints, payload)
+    payload.seek(0)
+    reloaded = torch.load(payload, map_location="cpu", weights_only=False)
+    assert g47.validate_checkpoint_pair(reloaded)
 
     extra_baseline = copy.deepcopy(checkpoints)
     extra_baseline[g47.REDUCED_ARM]["model_state"][
