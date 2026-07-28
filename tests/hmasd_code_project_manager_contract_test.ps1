@@ -8,8 +8,12 @@ $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
 $operations = Get-Content -Raw -LiteralPath $operationsPath
+$verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
+$verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $operationsNormalized = $operations -replace '\s+', ' '
+$verifierRoleNormalized = $verifierRole -replace '\s+', ' '
+$verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $agileNormalized = $agile -replace '\s+', ' '
@@ -61,6 +65,7 @@ $codeRequired = @(
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
+    'execution_readiness_executor=hmasd-verifier_when_triggered',
     'execution_readiness_receipt=required_when_triggered',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
@@ -71,6 +76,8 @@ $codeRequired = @(
     '`artifact_reload`',
     '`evaluate_entry`',
     '`analyze_entry`',
+    'prepares the exact spec and dispatches the registered `hmasd-verifier`',
+    'verifier returns mechanical evidence only',
     'Research Operations Manager',
     'Workflow Design Manager'
 )
@@ -185,6 +192,35 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
+    'role=verifier',
+    'authority=one_exact_execution_readiness_assignment',
+    'execution_readiness_executor=required_when_triggered_by_code_project_manager',
+    'formal_compute_authority=none',
+    'exact proof-sized exercise root',
+    "readiness script's Git-private receipt",
+    'Code Project Manager classifies the failure and alone accepts the code')) {
+    if (-not $verifierRoleNormalized.Contains($required)) {
+        throw "Verifier role missing execution-readiness boundary: $required"
+    }
+}
+foreach ($required in @(
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "high"',
+    'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
+    'hmasd_execution_readiness.py',
+    'formal=false with scientific_iteration_cost=zero',
+    'exactly the six ordered readiness phases',
+    'Do not stage, commit, checkout, reset or write Git-tracked state')) {
+    if (-not $verifierProfileNormalized.Contains($required)) {
+        throw "Verifier profile missing execution-readiness setting: $required"
+    }
+}
+foreach ($forbidden in @('CUDA', 'C:/Users/wu/.conda/envs/SB3/python.exe')) {
+    if ($verifierRole.Contains($forbidden) -or $verifierProfile.Contains($forbidden)) {
+        throw "Verifier retains stale environment setting: $forbidden"
+    }
+}
+foreach ($required in @(
     'test_acceptance_basis=risk_and_claim_coverage',
     'line_coverage_target=none',
     'test_count_target=none',
@@ -194,7 +230,9 @@ foreach ($required in @(
     'shared_defect_regression_promotion=plausible_recurrence_only',
     'these classes are alternatives selected by the task, not four mandatory gates',
     'The implementer normally owns the assigned code and its corresponding focused test together',
-    'Do not create a dedicated test agent or make verifier invocation a routine gate',
+    'verifier use remains optional',
+    'registered verifier is the required mechanical executor on the clean candidate commit',
+    'This is not a routine gate for ordinary code changes',
     'A focused test should reject one plausible wrong implementation',
     'remove its code and test together when the direction leaves the active line',
     'Run a broad suite only for an actually changed shared surface')) {

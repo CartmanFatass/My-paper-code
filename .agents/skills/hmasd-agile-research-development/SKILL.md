@@ -92,10 +92,12 @@ are alternatives selected by the task, not four mandatory gates:
 
 Code Project Manager selects the evidence class, states the observable invariant
 and owns acceptance. The implementer normally owns the assigned code and its
-corresponding focused test together. The existing verifier may perform bounded
-read-only verification for a risky cross-file, RNG, serialization, runner or
-artifact change; it is optional and creates no second acceptance owner. Do not
-create a dedicated test agent or make verifier invocation a routine gate.
+corresponding focused test together. For an ordinary risky cross-file or RNG
+change that does not trigger execution readiness, verifier use remains optional.
+When runner, execution-entry, serialization, phase-connection or artifact risk
+triggers execution readiness, the registered verifier is the required mechanical
+executor on the clean candidate commit. This is not a routine gate for ordinary
+code changes and creates no second acceptance owner.
 
 Select an oracle in this order when applicable: a hand-checkable exact case; a
 structural invariant or metamorphic relation; a differential comparison with a
@@ -113,7 +115,9 @@ history. Run a broad suite only for an actually changed shared surface.
 
 ## Mechanical execution readiness
 
-Use the registered interpreter and the Skill-owned script:
+Code Project Manager prepares the exact candidate-bound spec and assigns the
+registered `hmasd-verifier`. The verifier uses the registered interpreter and
+the Skill-owned script:
 
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
@@ -141,6 +145,9 @@ The script executes argv arrays without a shell, fails at the first unsuccessful
 phase, checks the expected artifacts and writes a successful Git-private receipt
 only when all six phases pass on the exact clean candidate commit. The receipt
 is mechanical evidence, is not Git-tracked and is not another acceptance owner.
+The verifier returns the receipt or the first causal failure without repair.
+Code Project Manager classifies that evidence, owns any reassignment or repair,
+and alone accepts the candidate.
 For a deterministic post-acceptance defect with plausible recurrence, add one
 proof-sized regression before rerunning the procedure.
 
@@ -150,7 +157,10 @@ command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with
 untriggered return must state its bounded reason. Other roles, ordinary turns
 and blocked returns are no-ops.
 
-Classify every terminal event before continuing. A purely operational failure
+An execution-readiness operational failure before `CODE_ACCEPTED` remains in
+the Code Project Manager verification loop and never routes to Research
+Operations Manager as a partial code handoff. After code acceptance, classify
+every runtime terminal event before continuing. A purely operational failure
 returns control to Research Operations Manager for automatic `retry`, `resume` or `restart` inside the
 unchanged authorized scientific boundary, without per-attempt reauthorization
 or a fixed attempt count. Preserve the estimator, source, seed law, budgets,

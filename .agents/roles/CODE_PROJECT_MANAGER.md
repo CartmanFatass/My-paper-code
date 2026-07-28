@@ -24,6 +24,7 @@ cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalizat
 cross_task_route_guard=pretool_live_settings_canonicalization
 cross_task_routing_skill=hmasd-cross-task-routing
 execution_readiness_owner=code_project_manager
+execution_readiness_executor=hmasd-verifier_when_triggered
 execution_readiness_skill=hmasd-agile-research-development
 execution_readiness_receipt=required_when_triggered
 test_acceptance_basis=risk_and_claim_coverage
@@ -47,9 +48,10 @@ owns science. Workflow Design Manager owns workflow design.
 - Execution readiness for result-bearing runner/analyzer integration, changes to
   execution entry points, artifacts, serialization or phase connections, and
   repairs of code defects exposed by preflight. Focused tests alone are
-  insufficient for those changes. Before acceptance, run the registered Skill
-  script on the candidate commit to complete both the production-entry interface
-  smoke and the bounded artifact-lifecycle exercise.
+  insufficient for those changes. Code Project Manager prepares the exact spec
+  and dispatches the registered `hmasd-verifier` on the clean candidate commit
+  to execute the production-entry interface smoke and bounded artifact-lifecycle
+  exercise before acceptance.
 - The evidence-complexity ceiling before accepting result-bearing code. A
   bounded realization may change engineering structure but not the scientific
   predicate. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN` rather than a
@@ -89,7 +91,9 @@ accepts their work and verifies any isolated-worktree ticket. Code Project
 Manager provisions an isolated worktree and its ticket together through
 `scripts/hmasd_workspace_ticket.py provision`; the fixed parent is
 `C:/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are
-forbidden. Children never run Git or accept code.
+forbidden. Children never stage, commit or accept code. For triggered execution
+readiness, the verifier may run the registered script's read-only Git identity
+checks and write only its exact Git-private receipt.
 
 After acceptance, push the code commit and return exactly:
 
@@ -109,8 +113,11 @@ blockers=none
 returned commit and exact paths and records successful `interface_smoke`,
 `bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
 and `analyze_entry` phases. Code Project Manager keeps the repair loop until
-that boundary passes or returns one exact technical blocker. It does not use
-Research Operations Manager preflight as an incremental code debugger.
+that boundary passes or returns one exact technical blocker. The verifier
+returns mechanical evidence only; Code Project Manager classifies an operational
+failure for bounded reassignment or a code defect for implementer repair, then
+requires full verification on the new commit. It does not use Research
+Operations Manager preflight as an incremental code debugger.
 
 Research Operations Manager then owns code-science audit transport, preflight,
 formal execution and successor routing. Code Project Manager does not follow the
