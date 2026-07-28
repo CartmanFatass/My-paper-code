@@ -102,7 +102,9 @@ def test_isolated_orchestration_does_not_mutate_g43_module() -> None:
     )
     assert runner._backend.source is g44
     assert runner._backend.ALGORITHM_ID == g44.ALGORITHM_ID
-    assert runner._backend.ALIGNED_IMPLEMENTATION_COMMIT is None
+    assert runner._backend.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "1a6e046801ab3d83830d4c9f6e9724c8c47659da"
+    )
 
 
 def test_configuration_seed_budget_and_cpp_contract() -> None:
@@ -126,7 +128,9 @@ def test_configuration_seed_budget_and_cpp_contract() -> None:
     assert formal["environment_python_fallback"] is False
     assert formal["normalization_rows"] == 384
     assert formal["channel_composition"] == "literal_equal_mean_0.5"
-    assert formal["aligned_g44_implementation_commit"] is None
+    assert formal["aligned_g44_implementation_commit"] == (
+        "1a6e046801ab3d83830d4c9f6e9724c8c47659da"
+    )
     assert formal["accepted_g43_source_commit"] == g44.ACCEPTED_G43_SOURCE_COMMIT
     assert formal["cpu_budget"] == 2
     assert formal["process_workers"] == 2
@@ -150,21 +154,83 @@ def test_configuration_seed_budget_and_cpp_contract() -> None:
     assert runner.bootstrap_seed(formal=False) == 11_347_044
 
 
-def test_formal_admission_is_closed_until_independent_g44_alignment(
-    tmp_path: Path,
+def test_formal_authority_is_bound_to_independent_alignment(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
-    with pytest.raises(ValueError, match="independently archived ALIGNED source"):
-        runner._validate_formal_preflight(
-            tmp_path / "not-read",
+    aligned_commit = "1a6e046801ab3d83830d4c9f6e9724c8c47659da"
+    alignment_stage = "b55578a8e57f444895da59efe9268ebe31edf511"
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == aligned_commit
+    assert runner.ALIGNMENT_STAGE_COMMIT == alignment_stage
+    assert runner._backend.ALIGNED_IMPLEMENTATION_COMMIT == aligned_commit
+    assert runner._backend.ALIGNMENT_STAGE_COMMIT == alignment_stage
+    assert runner._configuration(formal=True)[
+        "aligned_g44_implementation_commit"
+    ] == aligned_commit
+    assert runner.source_controls()[
+        "aligned_g44_implementation_commit"
+    ] == aligned_commit
+    accepted_root = runner.PROJECT_ROOT / runner.ACCEPTED_ANCHOR_ROOT_RELATIVE
+    with pytest.raises(ValueError, match="authorization token mismatch"):
+        runner.train(
+            run_root=tmp_path / "formal-token",
             source_commit="a" * 40,
-            alignment_disposition="ALIGNED",
-            aligned_source_commit="a" * 40,
-            alignment_stage_commit="b" * 40,
-            accepted_anchor_root=runner._expected_anchor_root(),
+            formal=True,
+            authorization_token="wrong",
+            accepted_anchor_root=accepted_root,
         )
-    assert not (tmp_path / "not-read").exists()
+
+    def _unexpected_preflight_read(_: Path) -> dict[str, object]:
+        raise AssertionError("invalid alignment identity reached preflight read")
+
+    monkeypatch.setattr(runner._backend, "_read_json", _unexpected_preflight_read)
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
+        runner.train(
+            run_root=tmp_path / "formal-wrong-source",
+            source_commit="a" * 40,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            accepted_anchor_root=accepted_root,
+            preflight_root=tmp_path / "not-read",
+            alignment_disposition="ALIGNED",
+            aligned_source_commit="0" * 40,
+            alignment_stage_commit=alignment_stage,
+        )
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
+        runner.train(
+            run_root=tmp_path / "formal-wrong-stage",
+            source_commit="a" * 40,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            accepted_anchor_root=accepted_root,
+            preflight_root=tmp_path / "not-read",
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=aligned_commit,
+            alignment_stage_commit="1" * 40,
+        )
+
+    class _ReachedExactPreflightRead(Exception):
+        pass
+
+    def _exact_preflight_read(_: Path) -> dict[str, object]:
+        raise _ReachedExactPreflightRead
+
+    monkeypatch.setattr(runner._backend, "_read_json", _exact_preflight_read)
+    with pytest.raises(_ReachedExactPreflightRead):
+        runner.train(
+            run_root=tmp_path / "formal-exact-binding",
+            source_commit="a" * 40,
+            formal=True,
+            authorization_token=runner.AUTHORIZATION_TOKEN,
+            accepted_anchor_root=accepted_root,
+            preflight_root=tmp_path / "exact-preflight",
+            alignment_disposition="ALIGNED",
+            aligned_source_commit=aligned_commit,
+            alignment_stage_commit=alignment_stage,
+        )
+    assert not (tmp_path / "formal-token").exists()
+    assert not (tmp_path / "formal-wrong-source").exists()
+    assert not (tmp_path / "formal-wrong-stage").exists()
+    assert not (tmp_path / "formal-exact-binding").exists()
 
 
 def test_isolated_worker_backend_is_spawn_safe_and_bitwise_equivalent(
@@ -257,6 +323,10 @@ def test_proof_only_readiness_lifecycle_reload_and_tamper_rejection(
     )
     assert training["artifact_kind"] == "execution_readiness_proof_only"
     assert training["conclusion_bearing"] is False
+    assert (
+        training["aligned_source_commit"]
+        == "1a6e046801ab3d83830d4c9f6e9724c8c47659da"
+    )
     assert training["proof_inventory"]["branch_updates_per_arm"] == 1
     assert runner.readiness_training_errors(run_root, training) == []
     reloaded = runner.reload_readiness_artifacts(run_root)
@@ -359,7 +429,7 @@ def test_artifact_roundtrip_final_only_and_schedule_tamper_rejected(
             payload = runner._save_checkpoint(
                 tmp_path / reference,
                 source_commit="a" * 40,
-                aligned_source_commit=None,
+                aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
                 formal=False,
                 replicate=0,
                 arm=arm,
@@ -421,7 +491,7 @@ def test_artifact_roundtrip_final_only_and_schedule_tamper_rejected(
             "authorization_token": None,
             "alignment_audit_id": None,
             "alignment_disposition": None,
-            "aligned_source_commit": None,
+            "aligned_source_commit": runner.ALIGNED_IMPLEMENTATION_COMMIT,
             "alignment_stage_commit": None,
             "preflight_root": None,
             "preflight_artifact_digests": None,

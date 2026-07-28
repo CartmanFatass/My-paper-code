@@ -52,9 +52,10 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_"
     "ATTRIBUTION_G44_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# Formal admission stays closed until an independent G44 audit is archived.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Formal admission is bound to the independent correction recheck and still
+# requires an exact same-source nonformal preflight plus the authorization token.
+ALIGNED_IMPLEMENTATION_COMMIT = "1a6e046801ab3d83830d4c9f6e9724c8c47659da"
+ALIGNMENT_STAGE_COMMIT = "b55578a8e57f444895da59efe9268ebe31edf511"
 ACCEPTED_ANCHOR_ROOT_RELATIVE = Path(
     "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
     "20260727_97a8b23_r1"
@@ -1150,7 +1151,8 @@ def readiness_training_errors(
             or training.get("formal") is not False
             or training.get("scientific_iteration_cost") != 0
             or training.get("conclusion_bearing") is not False
-            or training.get("aligned_source_commit") is not None
+            or training.get("aligned_source_commit")
+            != ALIGNED_IMPLEMENTATION_COMMIT
             or training.get("accepted_anchor_root")
             != interface["accepted_anchor_root"]
             or training.get("accepted_anchor_root_mode")
