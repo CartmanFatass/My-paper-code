@@ -17,9 +17,6 @@ Allow-listed paths only:
 - `docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
-- `logs/formal_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_cpu_20260729_8ecb01f_r1/train_manifest.json`
-- `logs/formal_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_cpu_20260729_8ecb01f_r1/evaluation_manifest.json`
-- `logs/formal_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_cpu_20260729_8ecb01f_r1/analysis_result.json`
 - `docs/research/cdc/CONJECTURES.md`
 - `docs/research/cdc/IDEA_PORTFOLIO.md`
 - `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
