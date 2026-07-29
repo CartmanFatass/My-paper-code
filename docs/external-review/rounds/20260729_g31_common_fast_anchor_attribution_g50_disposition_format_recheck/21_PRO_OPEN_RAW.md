@@ -1,0 +1,2 @@
+DISPOSITION=CONTINUE
+RATIONALE=The G50 contract can proceed to its single zero-compute phase-A treatment-identity clarification because that boundary is explicitly scoped to resolve the sole remaining objective-identity and optimizer-inventory ambiguity.
