@@ -1,95 +1,67 @@
 # Mechanical intake — transport facts only
 
-No scientific classification here. This round has **not** been delivered.
+No scientific classification here.
 
 ```text
 round         20260729_d7_s_r4_formal_result
-stage_commit  048483a9aa67357f98355715565bd0b4475c4469
+stage_commit  3e5624fa908c5fdf33f0fb6e06025f252aeb2f94
 branch        untied-k
 reviewer      open_divergent (registered), conversation 6a63979e-35d8-83e8-8da7-10de59a5fdeb
 preflight     ROUND_PREFLIGHT_READY, allow_list_count=8, archive REVIEW_EVIDENCE_ARCHIVE_READY
-fence_sent    NO
-status        REVIEW_TRANSPORT_BLOCKED
-recovery_exhausted true
+fence_sent    YES
+status        REVIEW_PENDING
 ```
 
-## Duplicate-submission risk: NONE
+## Submission
 
-The fence was never composed and never submitted. The clipboard was loaded and
-verified byte-exact against `10_FENCE.txt` (375 chars, `-ceq` True), but the
-composer was never clicked, no paste was performed, and no send was clicked.
-Every browser call in this pass was read-only — `get_page_text`, `screenshot`,
-`wait`, `navigate`, `find`, `tabs_close_mcp`.
+Fence delivered once. Sequence, in order:
 
-**A resuming pass must still prove the fence absent before submitting**, exactly
-as on a first visit. This record is evidence about this pass, not a licence to
-skip that check.
+1. Preflight re-run at `3e5624fa` immediately before the browser session —
+   `ROUND_PREFLIGHT_READY`, 8-path allow-list, archive builds.
+2. Registry read: `open_divergent`, `registration_status=registered`,
+   branch `untied-k`, matching the fence.
+3. Registered conversation opened in a single tab. Fence absence proved by
+   content, not by assumption: the two visible fences named rounds
+   `20260728_r4_materiality_derivation` and `20260728_r4_contract_freeze`;
+   `3e5624fa...` and `20260729_d7_s_r4_formal_result` were both absent from the
+   page.
+4. Clipboard loaded from `10_FENCE.txt` with `-Encoding UTF8`, verified
+   byte-exact: 375 chars, `-ceq` True.
+5. Pasted with `ctrl+v` — no keystroke composition, so no newline could submit a
+   fragment. Composer read back before sending: `CURRENT_REVIEW_ASSIGNMENT`
+   present exactly once, with `stage_commit`, `round`, `question` and
+   `instruction` all matching.
+6. Sent once. Model selector read `Pro`.
 
-## Attempts
+**Send verification.** Composer empty afterwards, and **exactly one** user turn
+carries `stage_commit=3e5624fa...`. Generation active.
 
-```text
-RECOVERY_ATTEMPT attempt=1
-boundary=get_page_text and screenshot on tab 507032375 both timed out
-action=reload the registered URL in the same tab, wait 10s
-outcome=PARTIAL -- screenshot succeeded once. Page showed the correct
-  conversation selected, composer present, model "Pro", content pane still
-  hydrating with no message-role containers. Wedged again on the next call.
+The Skill's user-turn-count+1 test was inconclusive here and was not relied on:
+this conversation virtualizes its message list, so the count read 4 both before
+and after while an older turn was evicted from the DOM. The content test —
+exactly one turn bearing this round's commit — is the stronger check and is what
+establishes both that the send happened and that it happened once.
 
-RECOVERY_ATTEMPT attempt=2
-boundary=screenshot after hydration wait
-action=second reload-and-wait, then `find` for the fence identity
-outcome=FAILED -- "Page still loading (executeScript waited 45000ms for
-  document_idle)"
+`hmasd-review-monitor` dispatched after send-verification passed.
 
-RECOVERY_ATTEMPT attempt=3
-boundary=every script-injecting operation
-action=close the wedged tab per the Skill's bounded replacement procedure
-outcome=FAILED -- "The browser is shutting down."
+## Prior pass — transport was blocked, and nothing was sent
 
-RECOVERY_ATTEMPT attempt=4
-boundary=extension not connected
-action=restart the registered runtime -- locate and launch Chrome
-outcome=FAILED -- `Get-Process chrome` returns nothing, and chrome.exe is
-  absent from Program Files, Program Files (x86), LOCALAPPDATA, the
-  HKLM App Paths registry entry, the Start Menu shortcuts, and a recursive
-  search of every Google directory on the machine.
+An earlier pass reached the composer and stopped. The browser went down
+mid-pass: page operations timed out, two reload-and-waits failed, closing the
+tab returned "The browser is shutting down", `chrome.exe` was then absent from
+every standard install location, and `list_connected_browsers` returned `[]`.
+Five recovery attempts, then stop.
 
-  Chrome was serving tabs earlier in THIS session, so it either exited and is
-  installed somewhere non-standard, or was removed mid-session. Either way the
-  runtime cannot be restarted from here, and re-probing is the behaviour the
-  browser guidance names as a rabbit hole. Stopped at four attempts.
+**Nothing was submitted in that pass.** The clipboard was loaded and verified,
+but the composer was never clicked, nothing was pasted and no send occurred —
+every browser call was read-only. That is why this round carries one fence and
+not two.
 
-RECOVERY_ATTEMPT attempt=5
-boundary=Chrome absent from this machine
-action=`list_connected_browsers` -- the extension can pair with a browser on
-  another device, so "no Chrome here" is not the same as "no browser at all"
-outcome=FAILED -- returned `[]`. Zero browsers connected to the account.
-  This is the definitive check and it closes every remaining avenue: there is
-  no browser on this machine and none paired from anywhere else.
+The two reloads spent on a wedged-renderer diagnosis were correct on the
+evidence then available; a shutdown only became distinguishable from a wedge
+once tab closure was attempted.
 
-DIAGNOSIS
-tabs_context_mcp then returned: "Browser extension is not connected."
-The earlier timeouts were not the documented wedged-renderer state -- the
-browser itself was going down. The two reloads spent on the wrong diagnosis
-were correct procedure on the evidence available at the time; the shutdown was
-only distinguishable once tab closure was attempted.
-```
-
-## Exact resume condition
-
-1. Chrome running with the Claude browser extension connected, signed in to the
-   same account as Claude Code.
-2. `tabs_context_mcp` returns a tab whose URL contains
-   `6a63979e-35d8-83e8-8da7-10de59a5fdeb`, and **exactly one** tab holds it.
-3. Re-verify the fence for `stage_commit=048483a9...` is absent from the visible
-   user turns.
-4. Reload the clipboard from `10_FENCE.txt` with `-Encoding UTF8` and confirm
-   `-ceq` before pasting — the clipboard is user-shared state and cannot be
-   assumed to have survived.
-5. Paste, verify the composer holds the whole fence exactly once, submit once,
-   and confirm by the mechanical test: composer empty **and** user-turn count up
-   by exactly one.
-6. Dispatch `hmasd-review-monitor` only after send-verification passes.
-
-Nothing upstream needs redoing. The question, the fence and the boundary are
-pushed and the preflight gate is green at `048483a9`.
+That record named `stage_commit=048483a9...`, which was stale — the round was
+re-fenced at `3e5624fa` after `ALGORITHM_PRINCIPLES.md` and
+`OPEN_REVIEW_PRINCIPLES.md` were added to the allow-list to satisfy preflight.
+`3e5624fa` is the delivered commit.
