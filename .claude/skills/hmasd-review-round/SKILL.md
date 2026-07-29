@@ -574,6 +574,46 @@ too.
 good.** Test the method against something you know is there before reporting a
 negative.
 
+#### Never use `find` to prove a fence absent
+
+`find` is a **semantic** matcher, not a string search, and its failure mode is
+the opposite of the one above: it does not report nothing, it reports a
+*plausible* something.
+
+On 2026-07-30, asked for a message containing
+`9cb7974563cb7de3371b1d22f3691fc00e02744d`, it returned one "matching element"
+whose own quoted text read `round=20260729_d7_s` — the **previous** round's
+fence — and justified the match by noting that the phrase "zero-compute
+source-assignment correction" appeared nearby. Had that been accepted, the round
+would have been treated as already fenced and never sent.
+
+Prove presence or absence from the conversation API, which is exact and
+deterministic:
+
+```javascript
+const s = await fetch('/api/auth/session').then(r=>r.json());
+const conv = await fetch('/backend-api/conversation/'+cid,
+  {headers:{Authorization:'Bearer '+s.accessToken}}).then(r=>r.json());
+const users = Object.values(conv.mapping)
+  .filter(n=>n.message && n.message.author && n.message.author.role==='user');
+let hits = 0;
+for (const n of users) {
+  const t = (n.message.content.parts||[]).map(p=>typeof p==='string'?p:'').join('');
+  if (t.indexOf(stageCommit) !== -1) hits++;
+}
+'user_turns=' + users.length + ' exact_fence_hits=' + hits;
+```
+
+`exact_fence_hits=0` authorizes submission; anything else does not. Return the
+**counts**, never the message bodies — bulk text through this channel is blocked
+by design, and encoding around that block is defeating a safety control rather
+than satisfying it.
+
+The same rule governs verifying a *capture*: the fence itself contains the
+`stage_commit`, so `clipboard.Contains(stage_commit)` cannot distinguish the
+archived ruling from the fence you just sent. Assert a length and a body-only
+heading as well.
+
 ### The primary capture path — read the conversation API, not the clipboard
 
 **Prefer this over `Copy response`.** From page context, with the user's own
