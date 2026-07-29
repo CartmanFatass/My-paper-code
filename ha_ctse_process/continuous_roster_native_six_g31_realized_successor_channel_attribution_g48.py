@@ -592,10 +592,11 @@ def _activation_scalars(
     null_norm_square = float(null.square().sum())
     difference = reference - null
     difference_sum_square = float(difference.square().sum())
-    denominator = max(reference_norm_square, null_norm_square)
-    q_credit = 0.0 if denominator == 0.0 else difference_sum_square / denominator
     reference_norm = math.sqrt(reference_norm_square)
     null_norm = math.sqrt(null_norm_square)
+    difference_norm = math.sqrt(difference_sum_square)
+    denominator = max(reference_norm, null_norm)
+    q_credit = 0.0 if denominator == 0.0 else difference_norm / denominator
     direction_distance: float | None = None
     if reference_norm > 0.0 and null_norm > 0.0:
         direction_distance = float(
@@ -622,7 +623,7 @@ def _activation_scalars(
         "reference_credit_norm": reference_norm,
         "null_counterfactual_credit_norm": null_norm,
         "full_credit_vector_difference_sum_square": difference_sum_square,
-        "full_credit_vector_difference_norm": math.sqrt(difference_sum_square),
+        "full_credit_vector_difference_norm": difference_norm,
         "q_credit": q_credit,
         "unit_direction_distance_descriptive": direction_distance,
         "treatment_active": bool(
@@ -666,13 +667,16 @@ def validate_activation_record(value: object) -> bool:
         reference_square = float(value["reference_credit_norm_square"])
         null_square = float(value["null_counterfactual_credit_norm_square"])
         difference_square = float(value["full_credit_vector_difference_sum_square"])
+        reference_norm = math.sqrt(reference_square)
+        null_norm = math.sqrt(null_square)
+        difference_norm = math.sqrt(difference_square)
         expected_q_target = float(
             torch.sqrt(
                 torch.as_tensor(target_sum, dtype=torch.float64) / float(row_count)
             )
         )
-        denominator = max(reference_square, null_square)
-        expected_q_credit = 0.0 if denominator == 0.0 else difference_square / denominator
+        denominator = max(reference_norm, null_norm)
+        expected_q_credit = 0.0 if denominator == 0.0 else difference_norm / denominator
         expected_active = bool(
             expected_q_target > ACTIVATION_TOLERANCE
             and expected_q_credit > ACTIVATION_TOLERANCE
@@ -685,10 +689,9 @@ def validate_activation_record(value: object) -> bool:
         and all(np.isfinite(row) and row >= 0.0 for row in scalar_values)
         and value.get("q_target") == expected_q_target
         and value.get("q_credit") == expected_q_credit
-        and value.get("reference_credit_norm") == math.sqrt(reference_square)
-        and value.get("null_counterfactual_credit_norm") == math.sqrt(null_square)
-        and value.get("full_credit_vector_difference_norm")
-        == math.sqrt(difference_square)
+        and value.get("reference_credit_norm") == reference_norm
+        and value.get("null_counterfactual_credit_norm") == null_norm
+        and value.get("full_credit_vector_difference_norm") == difference_norm
         and value.get("treatment_active") is expected_active
         and value.get("evidence_source_arm") == REFERENCE_ARM
         and value.get("reference_evidence_source") is True

@@ -170,6 +170,34 @@ def test_strict_activation_and_zero_nonfinite_cases() -> None:
     assert above["q_target"] > g48.ACTIVATION_TOLERANCE
     assert above["treatment_active"] is True
 
+    intermediate = g48._activation_scalars(
+        immediate,
+        torch.full((rows,), 1.0e-3, dtype=torch.float64),
+        (torch.tensor([1.0005], dtype=torch.float64),),
+        (torch.tensor([1.0], dtype=torch.float64),),
+    )
+    assert intermediate["q_target"] == 1.0e-3
+    assert intermediate["q_credit"] == abs(1.0005 - 1.0) / 1.0005
+    assert 1.0e-6 < intermediate["q_credit"] < 1.0e-3
+    assert intermediate["treatment_active"] is True
+    intermediate_record = {
+        **intermediate,
+        "evidence_source_arm": g48.REFERENCE_ARM,
+        "reference_evidence_source": True,
+        "reference_null_counterfactual": "0.5*(g_I+g_I)",
+        "actual_null_evidence_read_count": 0,
+        "activation_tolerance": g48.ACTIVATION_TOLERANCE,
+        "direction_distance_conclusion_gate": False,
+    }
+    assert g48.validate_activation_record(intermediate_record)
+    squared = copy.deepcopy(intermediate_record)
+    squared["q_credit"] = squared["full_credit_vector_difference_sum_square"] / max(
+        squared["reference_credit_norm_square"],
+        squared["null_counterfactual_credit_norm_square"],
+    )
+    squared["treatment_active"] = False
+    assert not g48.validate_activation_record(squared)
+
     both_zero = g48._activation_scalars(
         immediate,
         immediate,
