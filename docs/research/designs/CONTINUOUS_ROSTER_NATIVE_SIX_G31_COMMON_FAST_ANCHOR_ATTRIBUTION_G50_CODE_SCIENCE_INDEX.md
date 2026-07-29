@@ -187,6 +187,11 @@ strict advantage.
 4. `COMMON_FAST_ANCHOR_FINITE_BUDGET_ADVANTAGE_G50`
 5. `MIXED_UNDERPOWERED_COMMON_FAST_ANCHOR_ATTRIBUTION_G50`
 
+Priority 2 is selected for `source_valid=false` or
+`reference_access_pass=false`. `reference_access_confident_fail` remains
+diagnostic evidence only; it cannot replace the absolute reference-access
+predicate. This priority precedes favorable stored comparative booleans.
+
 ## Artifacts and reload
 
 Terminal artifacts are `train_manifest.json`, `evaluation_manifest.json`,
@@ -232,10 +237,11 @@ residue tampering, activation reconstruction, order-swap implementation, and
 the null zero-read certificate.
 
 The runner test covers nonformal/formal inventories, source-authority use,
-five first-match witnesses, fail-closed unbound formal admission, exact six
-checkpoint names, paired whole-episode bootstrap indices, CPU/spawn/thread
-controls, all six readiness interfaces, and immutable token/predecessor
-bindings.
+five first-match witnesses, the non-confident absolute reference-access failure
+guard and its precedence over favorable comparisons, fail-closed unbound formal
+admission, exact six checkpoint names, paired whole-episode bootstrap indices,
+CPU/spawn/thread controls, all six readiness interfaces, and immutable
+token/predecessor bindings.
 
 Execution readiness is candidate-bound and formal=false. Its six phases use
 only static certificates, synthetic episode/index records, synthetic branch

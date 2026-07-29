@@ -96,6 +96,23 @@ def test_five_branch_first_match_order_and_tokens(runner) -> None:
     ) == runner.SOURCE_FAILURE_BRANCH
 
 
+def test_reference_access_failure_precedes_favorable_comparison_without_confidence(
+    runner,
+) -> None:
+    assert runner.select_g50_result_branch(
+        {
+            "operational_valid": True,
+            "source_valid": True,
+            "reference_access_pass": False,
+            "reference_access_confident_fail": False,
+            "null_access_pass": True,
+            "null_access_confident_fail": False,
+            "fresh_single_immediate_noninferior": True,
+            "material_common_fast_anchor_advantage": True,
+        }
+    ) == runner.SOURCE_FAILURE_BRANCH
+
+
 def test_formal_admission_is_unbound_and_fails_before_runtime(runner, tmp_path) -> None:
     assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
     assert runner.ALIGNMENT_STAGE_COMMIT is None

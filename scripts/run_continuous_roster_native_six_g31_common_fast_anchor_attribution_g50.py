@@ -940,8 +940,8 @@ def _comparison(
 def select_g50_result_branch(metrics: Mapping[str, Any]) -> str:
     if not bool(metrics["operational_valid"]):
         return INVALID_BRANCH
-    if not bool(metrics["source_valid"]) or bool(
-        metrics["reference_access_confident_fail"]
+    if not bool(metrics["source_valid"]) or not bool(
+        metrics["reference_access_pass"]
     ):
         return SOURCE_FAILURE_BRANCH
     if (
@@ -1087,7 +1087,12 @@ def _synthetic_branch_witnesses() -> dict[str, str]:
     }
     witnesses = {
         "invalid": {**base, "operational_valid": False},
-        "source_failure": {**base, "source_valid": False},
+        "source_failure": {
+            **base,
+            "reference_access_pass": False,
+            "fresh_single_immediate_noninferior": True,
+            "material_common_fast_anchor_advantage": True,
+        },
         "sufficient": {**base, "fresh_single_immediate_noninferior": True},
         "advantage": {**base, "null_access_pass": False, "null_access_confident_fail": True},
         "underpowered": base,
