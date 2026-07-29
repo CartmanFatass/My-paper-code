@@ -49,9 +49,9 @@ ALIGNMENT_AUDIT_ID = (
     "SINGLE_CHANNEL_COLLAPSE_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
 
-# Formal admission is intentionally closed until an independent G49 alignment.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Formal admission is bound only to the independently aligned G49 implementation.
+ALIGNED_IMPLEMENTATION_COMMIT = "9edddc845d88191bbfbd6c2ec779551edbbcb78a"
+ALIGNMENT_STAGE_COMMIT = "b56288597c6c91f784fb5f0fcc36ec5ef92de452"
 
 ACCEPTED_ANCHOR_ROOT_RELATIVE = g48_runner.ACCEPTED_ANCHOR_ROOT_RELATIVE
 DEFAULT_CPU_BUDGET = 2

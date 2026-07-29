@@ -12,6 +12,10 @@ accepted_G48_formal_source_commit=4abbee66d43ffd592d65624121121bc0109882ab
 accepted_G48_aligned_implementation_commit=d96f8f29367b55b5ea655b984631d6064877e237
 accepted_G48_alignment_stage_commit=617414f9a175f044eecfbfec4e4b170c6990b47f
 accepted_G48_formal_branch=DUPLICATED_IMMEDIATE_CREDIT_SUFFICIENT_G48
+aligned_G49_implementation_commit=9edddc845d88191bbfbd6c2ec779551edbbcb78a
+G49_alignment_recheck_round=20260729_g48_duplicated_immediate_single_channel_collapse_code_science_alignment_correction_recheck
+G49_alignment_stage_commit=b56288597c6c91f784fb5f0fcc36ec5ef92de452
+G49_alignment_disposition=ALIGNED
 reference_arm=NATIVE6_G31_DUPLICATED_IMMEDIATE
 reduced_arm=NATIVE6_G31_SINGLE_IMMEDIATE
 result_type=exact_functional_and_optimizer_equivalence_not_statistical_noninferiority
@@ -78,7 +82,7 @@ No G48 source, runner, test, index, runtime, review, CDC, `CURRENT_WORK`, or wor
 | Inductive equality and `D_SC=0` | Per-pass assigned-gradient/model/Adam/trace equality plus shared source trace | `validate_update_evidence` reconstructs all six registered `D_SC` components and requires each and the maximum to be exactly zero. |
 | Full checkpoint schemas intentionally differ | `build_final_checkpoints` retains the accepted two-channel reference schema and a one-channel reduced schema | `validate_checkpoint_pair` compares only the canonical actor/`log_std`/Adam/update/provenance/final-only projection and rejects reduced residue or ordinal drift. |
 | Backend and process determinism | Runner requires `ContinuousRosterToyBatch_CPU_CPP`, Python fallback false, fixed worker indexes and single-thread controls | `prove_two_process_equivalence` requires two distinct spawn workers and exact model/Adam/evidence/checkpoint semantic payload equality; `_attach_readiness_process_proof` permits the readiness-complete marker only after that report passes. |
-| No statistical result or unauthorized formal entry | Configuration fixes bootstrap zero, one batch, 384 transitions, two passes, `formal_statistical_run=false`; alignment constants are `None` | `_formal_admission_errors` fails before trajectory collection until independently bound ALIGNED identities, same-source proof and exact token exist. |
+| No statistical result or unauthorized formal entry | Configuration fixes bootstrap zero, one batch, 384 transitions, two passes, `formal_statistical_run=false`; `ALIGNED_IMPLEMENTATION_COMMIT` and `ALIGNMENT_STAGE_COMMIT` bind the exact independently aligned G49 identities | `_formal_admission_errors` reconstructs exact alignment, same-source validated preflight and authorization-token predicates before trajectory collection; focused tests reject missing preflight, wrong aligned source, wrong stage and wrong token. |
 
 ## Result branches and claim ceiling
 
@@ -116,7 +120,7 @@ The runner changes an execution entry and artifact schema, so technical acceptan
 ## Next boundary
 
 ```text
-CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_CODE_SCIENCE_ALIGNMENT_CORRECTION_RECHECK
+CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_G49_FORMAL_EXECUTION_INTERFACE
 ```
 
-No nonformal or formal scientific compute is admitted before a fresh independently ALIGNED G49 source/stage binding and a later explicit execution interface.
+Formal execution remains closed until a fresh same-source nonformal preflight validates, the exact authorization token is supplied, and the explicit execution interface uses this bound source/stage pair.

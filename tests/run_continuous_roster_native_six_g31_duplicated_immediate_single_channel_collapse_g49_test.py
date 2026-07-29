@@ -73,20 +73,22 @@ def test_configuration_backend_and_formal_admission_are_fail_closed(
     with pytest.raises(ValueError, match="process_workers=1"):
         runner._configuration(formal=False, cpu_budget=4, process_workers=3)
 
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "9edddc845d88191bbfbd6c2ec779551edbbcb78a"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "b56288597c6c91f784fb5f0fcc36ec5ef92de452"
+    )
     errors = runner._formal_admission_errors(
         source_commit=TEST_SOURCE_COMMIT,
         authorization_token=runner.AUTHORIZATION_TOKEN,
         preflight_root=None,
         alignment_disposition="ALIGNED",
-        aligned_source_commit=TEST_SOURCE_COMMIT,
-        alignment_stage_commit="8" * 40,
+        aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
     )
-    assert errors == [
-        "G49 formal execution requires an independently ALIGNED source"
-    ]
-    with pytest.raises(ValueError, match="independently ALIGNED"):
+    assert errors == ["G49 formal execution requires a same-source preflight"]
+    with pytest.raises(ValueError, match="same-source preflight"):
         runner.train(
             run_root=tmp_path / "formal",
             source_commit=TEST_SOURCE_COMMIT,
@@ -94,10 +96,45 @@ def test_configuration_backend_and_formal_admission_are_fail_closed(
             authorization_token=runner.AUTHORIZATION_TOKEN,
             accepted_anchor_root=ANCHOR_ROOT,
             alignment_disposition="ALIGNED",
-            aligned_source_commit=TEST_SOURCE_COMMIT,
-            alignment_stage_commit="8" * 40,
-            preflight_root=tmp_path / "preflight",
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
+            preflight_root=None,
         )
+
+
+def test_formal_admission_reconstructs_exact_alignment_and_same_source_preflight(
+    proof_bundle: tuple[
+        Path, dict[str, object], dict[str, object], dict[str, object]
+    ],
+) -> None:
+    root, _, _, _ = proof_bundle
+    arguments = {
+        "source_commit": TEST_SOURCE_COMMIT,
+        "authorization_token": runner.AUTHORIZATION_TOKEN,
+        "preflight_root": root,
+        "alignment_disposition": "ALIGNED",
+        "aligned_source_commit": runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        "alignment_stage_commit": runner.ALIGNMENT_STAGE_COMMIT,
+    }
+    assert runner._formal_admission_errors(**arguments) == []
+
+    wrong_source = dict(arguments)
+    wrong_source["aligned_source_commit"] = "8" * 40
+    assert "G49 formal aligned source identity mismatch" in (
+        runner._formal_admission_errors(**wrong_source)
+    )
+
+    wrong_stage = dict(arguments)
+    wrong_stage["alignment_stage_commit"] = "7" * 40
+    assert "G49 formal alignment stage identity mismatch" in (
+        runner._formal_admission_errors(**wrong_stage)
+    )
+
+    wrong_token = dict(arguments)
+    wrong_token["authorization_token"] = "wrong"
+    assert "G49 formal authorization token mismatch" in (
+        runner._formal_admission_errors(**wrong_token)
+    )
 
 
 def test_full_proof_artifact_lifecycle_is_final_only_and_reloadable(
