@@ -139,9 +139,17 @@ function Get-RefTokens([string]$tail) {
     return @($tail -split '\s+' | ForEach-Object { $_.Trim('"', "'") } | Where-Object { $_ })
 }
 
+# The git SUBCOMMAND, not any occurrence of a word. `git stash push -- <path>`
+# is a stash, and reading its pathspec as a refspec denied it as a branch push.
+# Anything before the subcommand is an option or `-C <path>`.
+$subcommand = ''
+if ($scan -match 'git\b((?:\s+-\S+|\s+-C\s+\S+)*)\s+([a-z][a-z-]*)') {
+    $subcommand = $Matches[2]
+}
+
 if ($scan -match 'git\b') {
     # 3a. a push whose refspec names a branch other than the protected one
-    if ($scan -match 'git\b[^|;&]*\bpush\b' -and
+    if ($subcommand -eq 'push' -and
         $command -match 'git\b[^|;&]*\bpush\b([^|;&]*)') {
         $refs = @(Get-RefTokens $Matches[1] | Where-Object {
             $_ -notmatch '^-' -and $_ -notmatch '^(origin|upstream)$' -and $_ -notmatch 'refs/tags'

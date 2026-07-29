@@ -132,6 +132,13 @@ $cases = @(
        Cmd = 'git push origin "aggressive"' },
     @{ Deny = $false; Why = 'rule 3a paired negative: push of the protected branch';
        Cmd = 'git push origin untied-k' },
+    # `push` is a word in several git subcommands. Only the SUBCOMMAND is a push.
+    @{ Deny = $false; Why = 'rule 3a paired negative: git stash push is a stash, not a push';
+       Cmd = 'git stash push -- ha_ctse_process/dynamic_roster_testbed.py' },
+    @{ Deny = $false; Why = 'rule 3a paired negative: a config key containing "push"';
+       Cmd = 'git config push.default simple' },
+    @{ Deny = $true;  Why = 'rule 3a: still caught when git carries leading options';
+       Cmd = 'git -C . push origin aggressive' },
     @{ Deny = $true;  Why = 'rule 3b: branch deletion';
        Cmd = 'git branch -D aggressive' },
     @{ Deny = $true;  Why = 'rule 3c: checkout of an existing foreign branch';
