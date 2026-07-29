@@ -72,18 +72,69 @@ last_charging_arrival >= 0 entries   49
 
 Charging occurs 49 times across the R4 population within the registered horizon.
 
+### MEASURED, 2026-07-29: the branch fires on this population
+
+`scripts/d7_s_r4_rejoin_exposure_probe.py` settles it without a formal re-run.
+The repair's scope is Pro's (b1), the REJOIN branch, plus a universal final
+assertion, so **a roll with zero REJOIN events runs identical code before and
+after the repair.** A nonzero is therefore decisive about H.
+
+Full R4 population, 2 episodes per block, 950 steps each, 30400 steps rolled:
+
+```text
+topology    rejoins  leaves  charging_steps
+20260734          0       4             381
+20260735          0       2              94
+20260736          0       4             366
+20260737          0       4             137
+20260738          0       2             176
+20260739          2       6             441
+20260740          0       4             610
+20260741          1       5             673
+------------------------------------------------
+totals            3      31            2878     injectivity_checks 60800
+                                                refusals 0
+R4_REJOIN_PROBE_FIRED
+```
+
+**The REJOIN branch is reached on the R4 population.** H therefore ran code that
+could double-assign at exactly those boundaries, and its contamination is now
+measured rather than inferred from the commit graph.
+
+`refusals = 0` says the repaired branch handled those three events without
+violating the invariant -- which is the repair working, and precisely the
+divergence: the historical code took the double-assigning path at the same three
+boundaries.
+
+**One topology lied.** The first run of this probe was `20260734` alone: zero
+rejoins over 1900 steps with 322 charging steps, reported as
+`R4_REJOIN_PROBE_ZERO_WITH_POWER`. Taken as the answer it would have argued for
+rehabilitating H. It is one of the six topologies that genuinely show zero; the
+signal lives in the other two. Two samples cannot separate a cause from a coin,
+and eight topologies cost forty minutes.
+
+**Do not read this as "six of eight shards are clean."** This probe rolls 2
+episodes per block and H ran 8, so a topology showing zero here can still carry a
+rejoin in the episodes not rolled. What is established is reachability on the
+population, which is all that is needed: a topology is indivisible and the pooled
+estimate spans all eight.
+
 ### What is established, and what is not
 
-- **Established.** H predates the repair. Charging -- the precondition for
-  REJOIN -- occurred 49 times. H is otherwise mechanically clean.
-- **NOT established.** That a double assignment actually occurred during H's
-  episodes. The shard artifacts record `leaves`, `planned_leaves_observed`,
-  `leaves_before_deadline`, `uav_charging` and `last_charging_arrival`, and **no
-  rejoin field at all**, so the artifact cannot answer this about itself.
+- **Established.** H predates the repair. Charging occurred 49 times. The REJOIN
+  branch is reachable and reached on the R4 population -- 3 events across
+  20260739 and 20260741 under the probe above. H is otherwise mechanically clean.
+- **NOT established.** That a double assignment produced a *different recorded
+  number* in H. Reaching the branch is not the same as the duplication surviving
+  into a certified limb; establishing that would need the pre-repair code re-run
+  under instrumentation, which is not worth it when the re-run is needed anyway.
 
-The burden runs the other way. A conclusion-bearing artifact must be able to show
-the invariant held, and this one cannot; "the defect probably did not fire" is not
-a property an immutable JSON can be given after the fact. This is the same
+The burden runs the other way regardless. A conclusion-bearing artifact must be
+able to show the invariant held, and this one cannot -- it records `leaves`,
+`planned_leaves_observed`, `leaves_before_deadline`, `uav_charging` and
+`last_charging_arrival`, and **no rejoin field at all**. "The defect probably did
+not fire" is not a property an immutable JSON can be given after the fact, and
+here the measurement says it very likely did. This is the same
 disposition `CURRENT_WORK` already carries for the earlier R4 artifact --
 `INVALID_R4_REALIZATION: DUTY_ASSIGNMENT_NOT_EXECUTABLY_WELL_DEFINED`, citable
 only as a descriptive external-return observation of the historical code paths --
