@@ -719,7 +719,7 @@ def train(
         "source_controls": source_controls(),
         "native_backend": native_backend,
         "cpu_execution": cpu,
-        "phase_A_conclusion_evidence": conclusion,
+        "conclusion_evidence": conclusion,
         "replicate_results": rows,
         "stage_wall_time_seconds": time.perf_counter() - started,
     }
@@ -798,8 +798,9 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
         or training.get("configuration") != expected_configuration
         or training.get("source_controls") != source_controls()
         or not _valid_commit(training.get("source_commit"))
+        or "phase_A_conclusion_evidence" in training
         or not source.validate_phase_A_conclusion_evidence(
-            training.get("phase_A_conclusion_evidence")
+            training.get("conclusion_evidence")
         )
     ):
         errors.append("G50 training manifest identity/configuration mismatch")
@@ -860,6 +861,12 @@ def _evaluation_errors(
         or evaluation.get("formal") is not training.get("formal")
         or evaluation.get("source_commit") != training.get("source_commit")
         or evaluation.get("configuration") != configuration
+        or "phase_A_conclusion_evidence" in evaluation
+        or not source.validate_phase_A_conclusion_evidence(
+            evaluation.get("conclusion_evidence")
+        )
+        or evaluation.get("conclusion_evidence")
+        != training.get("conclusion_evidence")
         or evaluation.get("training_manifest_digest")
         != _artifact_digest(run_root / TRAIN_MANIFEST)
         or not isinstance(cells, list)
@@ -1013,7 +1020,7 @@ def analyze(
                     "access_confident_fail"
                 ],
                 "treatment_activation_valid": source.validate_phase_A_conclusion_evidence(
-                    training["phase_A_conclusion_evidence"]
+                    training["conclusion_evidence"]
                 ),
                 **_comparison(evaluation, plan),
             }
@@ -1268,7 +1275,7 @@ def readiness_train(
     payload = {
         "smoke": smoke,
         "static_configuration": source.static_configuration_certificate(formal=False),
-        "phase_A_conclusion_evidence": phase_A_conclusion,
+        "conclusion_evidence": phase_A_conclusion,
         "branch_witnesses": _synthetic_branch_witnesses(),
         "two_process_proof": {
             "worker_count": 2,
@@ -1307,7 +1314,7 @@ def readiness_validate(*, run_root: Path) -> dict[str, object]:
             payload.get("static_configuration"), formal=False
         )
         and source.validate_phase_A_conclusion_evidence(
-            payload.get("phase_A_conclusion_evidence")
+            payload.get("conclusion_evidence")
         )
         and payload.get("branch_witnesses")
         == {
@@ -1334,8 +1341,13 @@ def readiness_reload(*, run_root: Path) -> dict[str, object]:
 
 def readiness_evaluate(*, run_root: Path) -> dict[str, object]:
     readiness_reload(run_root=run_root)
+    static_payload = _read_json(Path(run_root) / READINESS_STATIC)
+    conclusion_evidence = static_payload.get("conclusion_evidence")
+    if not source.validate_phase_A_conclusion_evidence(conclusion_evidence):
+        raise RuntimeError("G50 readiness evaluation evidence invalid")
     payload = {
         "formal": False,
+        "conclusion_evidence": conclusion_evidence,
         "synthetic_episode_ids": list(range(6)),
         "whole_episode_pairing": True,
         "fixed_random_mates_retained": True,
@@ -1351,9 +1363,17 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, object]:
 
 
 def readiness_analyze(*, run_root: Path) -> dict[str, object]:
-    readiness_evaluate(run_root=run_root)
+    evaluation = readiness_evaluate(run_root=run_root)
+    static_payload = _read_json(Path(run_root) / READINESS_STATIC)
+    conclusion_evidence = evaluation.get("conclusion_evidence")
+    if (
+        conclusion_evidence != static_payload.get("conclusion_evidence")
+        or not source.validate_phase_A_conclusion_evidence(conclusion_evidence)
+    ):
+        raise RuntimeError("G50 readiness analysis evidence mismatch")
     payload = {
         "formal": False,
+        "conclusion_evidence": conclusion_evidence,
         "branch_witnesses": _synthetic_branch_witnesses(),
         "equality_boundaries": {
             "access_floor_equality_passes": True,

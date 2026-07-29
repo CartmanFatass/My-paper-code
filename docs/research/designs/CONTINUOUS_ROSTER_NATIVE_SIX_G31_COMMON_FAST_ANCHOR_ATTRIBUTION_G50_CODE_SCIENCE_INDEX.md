@@ -229,6 +229,16 @@ canonical state.
 Runner validators recompute configuration, source controls, activation,
 checkpoint names and SHA-256 values, checkpoint schemas, cell inventory,
 episode counts, zero evaluation steps, and train/evaluation manifest digests.
+The Phase-A activation/liveness payload has one canonical terminal field,
+`conclusion_evidence`, in both the training and evaluation manifests. G50
+validates that field before evaluation, the privately inherited evaluator
+reads that exact field, and `_evaluation_errors` requires JSON-value-equal
+training/evaluation evidence and separately reruns the G50 evidence
+validator. The obsolete `phase_A_conclusion_evidence` alias is rejected rather
+than duplicated, so artifact consumers cannot observe divergent activation
+facts. The readiness static artifact uses and reconstructs the same canonical
+field; readiness evaluation propagates it, and readiness analysis compares the
+evaluation copy to the reloaded static source before passing.
 The analyzer rebuilds access, the shared bootstrap plan, comparative CIs,
 branch booleans, and the first match; stored favorable labels are not trusted.
 
@@ -266,7 +276,9 @@ guard and its precedence over favorable comparisons, exact alignment binding
 and fail-closed missing-preflight admission, exact six checkpoint names,
 paired whole-episode bootstrap indices,
 CPU/spawn/thread controls, all six readiness interfaces, and immutable
-token/predecessor bindings.
+token/predecessor bindings. It also proves the canonical training producer key
+matches the inherited evaluation consumer, rejects the obsolete alias, and
+requires evaluation evidence to equal the validated training evidence.
 
 Execution readiness is candidate-bound and formal=false. Its six phases use
 only static certificates, synthetic episode/index records, synthetic branch

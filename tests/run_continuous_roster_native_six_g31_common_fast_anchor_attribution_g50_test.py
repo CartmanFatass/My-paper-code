@@ -232,20 +232,172 @@ def test_training_manifest_identity_survives_json_reload_before_evaluate(
             formal=False, cpu_budget=2, process_workers=2
         ),
         "source_controls": runner.source_controls(),
-        "phase_A_conclusion_evidence": conclusion,
+        "conclusion_evidence": conclusion,
         "replicate_results": [],
     }
     reloaded = json.loads(json.dumps(training, allow_nan=False))
+    assert "conclusion_evidence" in reloaded
+    assert "phase_A_conclusion_evidence" not in reloaded
     assert runner._training_errors(tmp_path, reloaded) == [
         "G50 training replicate inventory mismatch"
     ]
 
-    reloaded["phase_A_conclusion_evidence"][
+    reloaded["conclusion_evidence"][
         "active_phase_A_pass_by_replicate"
     ]["0"] = False
     assert "G50 training manifest identity/configuration mismatch" in (
         runner._training_errors(tmp_path, reloaded)
     )
+
+    legacy_alias_only = dict(training)
+    legacy_alias_only["phase_A_conclusion_evidence"] = (
+        legacy_alias_only.pop("conclusion_evidence")
+    )
+    assert "G50 training manifest identity/configuration mismatch" in (
+        runner._training_errors(tmp_path, legacy_alias_only)
+    )
+
+    duplicate_alias = dict(training)
+    duplicate_alias["phase_A_conclusion_evidence"] = conclusion
+    assert "G50 training manifest identity/configuration mismatch" in (
+        runner._training_errors(tmp_path, duplicate_alias)
+    )
+
+
+def test_training_conclusion_evidence_key_matches_inherited_evaluate_consumer(
+    runner,
+) -> None:
+    train_source = inspect.getsource(runner.train)
+    inherited_evaluate_source = inspect.getsource(runner._backend.evaluate)
+    evaluation_errors_source = inspect.getsource(runner._evaluation_errors)
+
+    assert '"conclusion_evidence": conclusion' in train_source
+    assert '"phase_A_conclusion_evidence": conclusion' not in train_source
+    assert 'training["conclusion_evidence"]' in inherited_evaluate_source
+    assert 'evaluation.get("conclusion_evidence")' in evaluation_errors_source
+    assert 'training.get("conclusion_evidence")' in evaluation_errors_source
+    assert "source.validate_phase_A_conclusion_evidence" in evaluation_errors_source
+
+
+def test_inherited_evaluate_propagates_canonical_g50_conclusion_evidence(
+    runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    conclusion = runner.source.build_phase_A_conclusion_evidence(
+        (
+            {
+                "replicate": 0,
+                "pass_records": ({"activation": {"treatment_active": True}},),
+            },
+        ),
+        formal=False,
+    )
+    configuration = runner._configuration(
+        formal=False, cpu_budget=2, process_workers=2
+    )
+    training = {
+        "formal": False,
+        "source_commit": "a" * 40,
+        "authorization_token": None,
+        "alignment_audit_id": runner.ALIGNMENT_AUDIT_ID,
+        "alignment_disposition": None,
+        "aligned_source_commit": None,
+        "alignment_stage_commit": None,
+        "preflight_artifact_digests": {},
+        "accepted_anchor_artifact_digests": {},
+        "configuration": configuration,
+        "conclusion_evidence": conclusion,
+    }
+    written: dict[str, object] = {}
+    monkeypatch.setattr(runner._backend, "_read_json", lambda _path: training)
+    monkeypatch.setattr(runner._backend, "_training_errors", lambda *_args: [])
+    monkeypatch.setattr(
+        runner._backend,
+        "_cpu_configuration_from_artifact",
+        lambda *_args, **_kwargs: configuration,
+    )
+    monkeypatch.setattr(
+        runner._backend,
+        "_resolve_cpu_execution",
+        lambda *_args: {"cpu_budget": 2, "process_workers": 2},
+    )
+    monkeypatch.setattr(
+        runner._backend,
+        "_configure_cpu_execution",
+        lambda *_args: {"cpu_budget": 2, "process_workers": 2},
+    )
+    monkeypatch.setattr(runner._backend, "configure_runtime", lambda *_args: None)
+    monkeypatch.setattr(
+        runner._backend, "_native_backend_identity", lambda: {"backend": "proof"}
+    )
+    monkeypatch.setattr(
+        runner._backend, "_run_indexed_worker_tasks", lambda *_args, **_kwargs: []
+    )
+    monkeypatch.setattr(
+        runner._backend,
+        "_consume_evaluation_worker_results",
+        lambda *_args: ([], [], [], True),
+    )
+    monkeypatch.setattr(
+        runner._backend, "_artifact_digest", lambda _path: "train-digest"
+    )
+    monkeypatch.setattr(
+        runner._backend,
+        "_write_json",
+        lambda _path, payload: written.update(payload),
+    )
+
+    evaluation = runner.evaluate(run_root=tmp_path, cpu_budget=2, process_workers=2)
+    assert evaluation["conclusion_evidence"] == conclusion
+    assert written["conclusion_evidence"] == conclusion
+    assert "phase_A_conclusion_evidence" not in evaluation
+
+    cells = [
+        {
+            "optimizer_steps": 0,
+            "baseline_evaluation_read_count": 0,
+            "episodes": list(range(configuration["episodes_per_cell"])),
+        }
+        for _ in range(configuration["evaluation_cells"])
+    ]
+    validation_training = {
+        **training,
+        "schema_version": runner.SCHEMA_VERSION,
+        "algorithm_id": runner.ALGORITHM_ID,
+        "source_id": runner.source.SOURCE_ID,
+        "stage": "train",
+        "status": "COMPLETE",
+        "source_controls": runner.source_controls(),
+    }
+    validation_evaluation = {
+        "schema_version": runner.SCHEMA_VERSION,
+        "algorithm": runner.ALGORITHM_ID,
+        "source_id": runner.source.SOURCE_ID,
+        "stage": "evaluate",
+        "status": "COMPLETE",
+        "formal": False,
+        "source_commit": "a" * 40,
+        "configuration": configuration,
+        "conclusion_evidence": conclusion,
+        "training_manifest_digest": "train-digest",
+        "cells": cells,
+    }
+    monkeypatch.setattr(runner, "_training_errors", lambda *_args: [])
+    monkeypatch.setattr(runner, "_artifact_digest", lambda _path: "train-digest")
+    assert runner._evaluation_errors(
+        tmp_path, validation_training, validation_evaluation
+    ) == []
+
+    missing = dict(validation_evaluation)
+    missing.pop("conclusion_evidence")
+    assert runner._evaluation_errors(tmp_path, validation_training, missing) == [
+        "G50 evaluation manifest/cell inventory mismatch"
+    ]
+
+    duplicate_alias = dict(validation_evaluation)
+    duplicate_alias["phase_A_conclusion_evidence"] = conclusion
+    assert runner._evaluation_errors(
+        tmp_path, validation_training, duplicate_alias
+    ) == ["G50 evaluation manifest/cell inventory mismatch"]
 
 
 def test_paired_bootstrap_plan_uses_whole_episode_indices(runner) -> None:
@@ -304,16 +456,24 @@ def test_readiness_interfaces_are_zero_science_and_cover_six_phases(runner) -> N
         assert "formal=True" not in implementation
     readiness_train_source = inspect.getsource(runner.readiness_train)
     readiness_validate_source = inspect.getsource(runner.readiness_validate)
+    readiness_evaluate_source = inspect.getsource(runner.readiness_evaluate)
+    readiness_analyze_source = inspect.getsource(runner.readiness_analyze)
     assert "_run_distinct_readiness_workers(tasks)" in readiness_train_source
     assert "_backend._run_indexed_worker_tasks" not in readiness_train_source
     assert '"scientific_real_transitions": 0' in readiness_train_source
     assert '"optimizer_steps": 0' in readiness_train_source
-    assert '"phase_A_conclusion_evidence": phase_A_conclusion' in (
+    assert '"conclusion_evidence": phase_A_conclusion' in (
         readiness_train_source
     )
     assert "source.validate_phase_A_conclusion_evidence" in (
         readiness_validate_source
     )
+    assert 'static_payload.get("conclusion_evidence")' in readiness_evaluate_source
+    assert '"conclusion_evidence": conclusion_evidence' in (
+        readiness_evaluate_source
+    )
+    assert 'evaluation.get("conclusion_evidence")' in readiness_analyze_source
+    assert 'static_payload.get("conclusion_evidence")' in readiness_analyze_source
 
     smoke = runner.readiness_interface_smoke(
         source_commit="a" * 40,
