@@ -123,6 +123,28 @@ class _PhaseAPlan:
     actor_groups: dict[str, object]
 
 
+class G50PhaseBActor(g40.g39.g38.G38FoldableMatchedCSActor):
+    """G49 actor route after physical removal of the zero Phase-A residual."""
+
+    def _action_mean_for_member(
+        self,
+        *,
+        candidate: torch.Tensor,
+        prefix_fraction: torch.Tensor,
+        observation: torch.Tensor,
+    ) -> torch.Tensor:
+        head_input = torch.cat((candidate, prefix_fraction), dim=-1)
+        action_mean = self.action_mean(head_input)
+        # The deleted Phase-A residual was exactly zero.  Retain its addition
+        # slot without retaining a module, parameter, buffer, or schema field so
+        # the accepted G49 floating-point expression remains byte-identical.
+        return (
+            action_mean
+            + torch.zeros_like(action_mean)
+            + self.current_readout(observation)
+        )
+
+
 class G50PhaseBProjection(g47.G47NoBaselineProjection):
     """Physical actor-only projection of one freshly trained G50 phase-A arm."""
 
@@ -130,6 +152,12 @@ class G50PhaseBProjection(g47.G47NoBaselineProjection):
         nn.Module.__init__(self)
         rng_before = torch.random.get_rng_state().clone()
         self.policy = copy.deepcopy(source.policy)
+        if type(self.policy) is not g40.g39.g38.G38FoldableMatchedCSActor:
+            raise G50InvariantError("phase_B_actor_source_class_invalid")
+        # G47's actor-only executor dispatches through this method.  Switch the
+        # retained object to the G50 route before deleting the Phase-A residual;
+        # no module construction, parameter copy, or RNG consumption occurs.
+        self.policy.__class__ = G50PhaseBActor
         # These complete-G40 modules are phase-A-only.  Removing them makes the
         # phase-B object and its state_dict structurally actor-only.
         if hasattr(self.policy, "critic"):
@@ -857,6 +885,71 @@ def project_phase_B_models(
     if _parameter_storage_ids(models[REFERENCE_ARM]) & _parameter_storage_ids(models[NULL_ARM]):
         raise G50InvariantError("phase_B_storage_alias")
     return models, certificates
+
+
+def phase_B_actor_interface_evidence(
+    *, member_capacity: int, initialization_seed: int
+) -> dict[str, object]:
+    """Exercise the deleted-residual production dispatch with zero transitions."""
+
+    rng_before = torch.random.get_rng_state().clone()
+    arm_rows: dict[str, dict[str, object]] = {}
+    with torch.random.fork_rng():
+        phase_A = make_phase_A_models(
+            member_capacity=member_capacity, initialization_seed=initialization_seed
+        )
+        projected, certificates = project_phase_B_models(
+            phase_A, completed_phase_A_updates=10
+        )
+        for arm in ARMS:
+            model = projected[arm]
+            actor = model.policy
+            step = g47._actor_only_step(
+                model,
+                observations=torch.zeros(
+                    (1, member_capacity, actor.observation_dim),
+                    dtype=actor.log_std.dtype,
+                ),
+                active_mask=torch.ones((1, member_capacity), dtype=torch.bool),
+                hidden=torch.zeros(
+                    (1, member_capacity, actor.hidden_dim), dtype=actor.log_std.dtype
+                ),
+                deterministic=True,
+            )
+            arm_rows[arm] = {
+                "actor_class": type(actor).__name__,
+                "delayed_residual_absent": not hasattr(actor, "delayed_residual"),
+                "projection_certificate_passed": certificates[arm]["passed"] is True,
+                "actions_finite": bool(torch.isfinite(step.actions).all()),
+                "action_shape": list(step.actions.shape),
+            }
+        expected_shape = [
+            1,
+            member_capacity,
+            projected[REFERENCE_ARM].policy.action_dim,
+        ]
+    rng_unchanged = bool(torch.equal(rng_before, torch.random.get_rng_state()))
+    passed = bool(
+        rng_unchanged
+        and all(
+            row["actor_class"] == "G50PhaseBActor"
+            and row["delayed_residual_absent"] is True
+            and row["projection_certificate_passed"] is True
+            and row["actions_finite"] is True
+            and row["action_shape"] == expected_shape
+            for row in arm_rows.values()
+        )
+    )
+    evidence: dict[str, object] = {
+        "arms": arm_rows,
+        "projection_RNG_consumption": 0 if rng_unchanged else 1,
+        "scientific_real_transitions": 0,
+        "optimizer_steps": 0,
+        "passed": passed,
+    }
+    if not passed:
+        raise G50InvariantError("phase_B_actor_interface_invalid", evidence)
+    return evidence
 
 
 def make_phase_B_optimizers(

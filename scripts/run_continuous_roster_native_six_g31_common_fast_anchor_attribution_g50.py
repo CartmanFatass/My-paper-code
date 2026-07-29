@@ -1207,6 +1207,10 @@ def readiness_interface_smoke(
         PROJECT_ROOT / ACCEPTED_ANCHOR_ROOT_RELATIVE
     ).resolve():
         raise ValueError("G50 readiness accepted-anchor authority mismatch")
+    phase_B_actor_interface = source.phase_B_actor_interface_evidence(
+        member_capacity=g32.TRAIN_CAPACITY,
+        initialization_seed=source.SEED_BASES["initialization"],
+    )
     return {
         "algorithm_id": ALGORITHM_ID,
         "source_commit": source_commit,
@@ -1214,6 +1218,7 @@ def readiness_interface_smoke(
         "formal": False,
         "scientific_real_transitions": 0,
         "optimizer_steps": 0,
+        "phase_B_actor_interface": phase_B_actor_interface,
         "interfaces": [
             "train",
             "evaluate",

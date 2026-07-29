@@ -117,6 +117,50 @@ def test_phase_A_complete_graph_boundary_and_phase_B_physical_deletion() -> None
     assert reference_pointers.isdisjoint(null_pointers)
 
 
+def test_phase_B_deleted_residual_dispatch_is_exact_and_executable() -> None:
+    phase_A = g50.make_phase_A_models(
+        member_capacity=8, initialization_seed=10_501_000
+    )
+    projected, certificates = g50.project_phase_B_models(
+        phase_A, completed_phase_A_updates=10
+    )
+
+    for arm in g50.ARMS:
+        source_actor = phase_A[arm].policy
+        model = projected[arm]
+        actor = model.policy
+        assert isinstance(actor, g50.G50PhaseBActor)
+        assert not hasattr(actor, "delayed_residual")
+        assert certificates[arm]["policy_delayed_residual_deleted"] is True
+
+        candidate = torch.linspace(-0.4, 0.4, actor.hidden_dim).reshape(1, -1)
+        prefix = torch.tensor([[0.2, -0.1]], dtype=candidate.dtype)
+        observation = torch.linspace(
+            -0.3, 0.3, actor.observation_dim, dtype=candidate.dtype
+        ).reshape(1, -1)
+        expected = source_actor._action_mean_for_member(
+            candidate=candidate,
+            prefix_fraction=prefix,
+            observation=observation,
+        )
+        actual = actor._action_mean_for_member(
+            candidate=candidate,
+            prefix_fraction=prefix,
+            observation=observation,
+        )
+        assert torch.equal(actual, expected)
+
+        step = g50.g47._actor_only_step(
+            model,
+            observations=torch.zeros((1, 8, actor.observation_dim)),
+            active_mask=torch.ones((1, 8), dtype=torch.bool),
+            hidden=torch.zeros((1, 8, actor.hidden_dim)),
+            deterministic=True,
+        )
+        assert torch.isfinite(step.actions).all()
+        assert tuple(step.actions.shape) == (1, 8, actor.action_dim)
+
+
 def test_final_checkpoint_exact_schema_reload_and_residue_tamper_guards() -> None:
     models = g50.make_phase_A_models(
         member_capacity=8, initialization_seed=10_501_000

@@ -267,6 +267,21 @@ def test_readiness_interfaces_are_zero_science_and_cover_six_phases(runner) -> N
     assert '"scientific_real_transitions": 0' in readiness_train_source
     assert '"optimizer_steps": 0' in readiness_train_source
 
+    smoke = runner.readiness_interface_smoke(
+        source_commit="a" * 40,
+        accepted_anchor_root=runner.PROJECT_ROOT / runner.ACCEPTED_ANCHOR_ROOT_RELATIVE,
+    )
+    assert smoke["phase_B_actor_interface"]["passed"] is True
+    assert smoke["phase_B_actor_interface"]["scientific_real_transitions"] == 0
+    assert smoke["phase_B_actor_interface"]["optimizer_steps"] == 0
+    assert all(
+        row["delayed_residual_absent"] is True
+        and row["actions_finite"] is True
+        for row in smoke["phase_B_actor_interface"]["arms"].values()
+    )
+    smoke_source = inspect.getsource(runner.readiness_interface_smoke)
+    assert "source.phase_B_actor_interface_evidence" in smoke_source
+
 
 def test_readiness_two_process_proof_cannot_reuse_one_pool_worker(runner) -> None:
     implementation = inspect.getsource(runner._run_distinct_readiness_workers)

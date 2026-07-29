@@ -113,6 +113,18 @@ copies only actor/`log_std` state, and physically deletes:
 - `policy.delayed_residual`;
 - every Phase-A optimizer object and state.
 
+Before deleting the frozen-zero `policy.delayed_residual`, the projection
+changes only the copied actor's method dispatch to `G50PhaseBActor`. Its
+`_action_mean_for_member` is the exact retained G49 expression
+`action_mean([candidate,prefix])+current_readout(observation)`, so the inherited
+G47 collection/replay entry remains executable without a compatibility module.
+The focused dispatch guard requires byte-equal means against the pre-deletion
+zero-residual actor and executes the production actor-only step after proving
+the residual attribute and state are absent.
+`readiness_interface_smoke` repeats that exact production dispatch for both
+arms with zero environment transitions and zero optimizer steps, so a deleted
+module/call-surface mismatch fails the first candidate-bound readiness phase.
+
 The projection consumes zero RNG and zero optimizer steps. Its disposal
 certificate reconstructs deleted modules/state keys and actor byte
 preservation. `make_phase_B_optimizers` then creates fresh, empty,
