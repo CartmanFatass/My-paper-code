@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import operator
 import time
 from torch.distributions import Normal, Categorical
 import logging
@@ -20,55 +21,41 @@ def sparsemax(logits, dim=-1):
     返回:
         稀疏概率分布 [..., d]
     """
-    # 获取输入的形状和设备
-    original_shape = logits.shape
-    device = logits.device
-    
-    # 重塑为二维张量以便处理
-    if dim != -1 and dim != len(original_shape) - 1:
-        # 将指定维度移动到最后
-        logits = logits.transpose(dim, -1)
-    
-    # 展平除最后一维外的所有维度
-    batch_size = logits.shape[:-1].numel()
-    d = logits.shape[-1]
-    logits_2d = logits.reshape(batch_size, d)
-    
-    # 对每个样本应用sparsemax
-    output = torch.zeros_like(logits_2d)
-    
-    for i in range(batch_size):
-        z = logits_2d[i]
-        
-        # 按降序排序
-        z_sorted, _ = torch.sort(z, descending=True)
-        
-        # 计算累积和
-        cumsum = torch.cumsum(z_sorted, dim=0)
-        
-        # 找到支持集大小
-        k_vals = torch.arange(1, d + 1, device=device, dtype=torch.float32)
-        support_condition = 1 + k_vals * z_sorted > cumsum
-        
-        if support_condition.any():
-            k = support_condition.nonzero()[-1].item() + 1
-        else:
-            k = 1
-        
-        # 计算阈值
-        tau = (cumsum[k-1] - 1) / k
-        
-        # 应用阈值
-        output[i] = torch.clamp(z - tau, min=0.0)
-    
-    # 重塑回原始形状
-    output = output.reshape(original_shape)
-    
-    # 如果之前移动了维度，现在移回去
-    if dim != -1 and dim != len(original_shape) - 1:
-        output = output.transpose(dim, -1)
-    
-    return output
+    if not isinstance(logits, torch.Tensor):
+        raise TypeError("sparsemax expects a torch.Tensor")
+    if logits.ndim == 0:
+        raise ValueError("sparsemax expects at least one dimension")
+    if not logits.is_floating_point():
+        raise TypeError("sparsemax expects floating-point logits")
+
+    dim = operator.index(dim)
+    if dim < 0:
+        dim += logits.ndim
+    if dim < 0 or dim >= logits.ndim:
+        raise IndexError(f"sparsemax dim {dim} out of range for {logits.ndim} dimensions")
+
+    dimension_size = logits.shape[dim]
+    if dimension_size == 0:
+        raise ValueError("sparsemax cannot project an empty dimension")
+
+    shifted_logits = logits - logits.max(dim=dim, keepdim=True).values
+    sorted_logits = torch.sort(shifted_logits, dim=dim, descending=True).values
+    cumulative_logits = torch.cumsum(sorted_logits, dim=dim)
+    support_indices = torch.arange(
+        1,
+        dimension_size + 1,
+        device=logits.device,
+        dtype=logits.dtype,
+    )
+    support_shape = [1] * logits.ndim
+    support_shape[dim] = dimension_size
+    support_indices = support_indices.view(support_shape)
+    support = 1 + support_indices * sorted_logits > cumulative_logits
+    support_size = support.sum(dim=dim, keepdim=True).clamp_min(1)
+    threshold = (
+        cumulative_logits.gather(dim, support_size - 1) - 1
+    ) / support_size.to(dtype=logits.dtype)
+    return torch.clamp(shifted_logits - threshold, min=0.0)
 
 def initialize_weights(module, gain=1.0, last_layer_gain=None):
     """
@@ -80,7 +67,7 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
         gain: 权重初始化的增益因子（默认为1.0）
         last_layer_gain: 最后一层的特殊增益因子（如果为None则使用gain值）
     """
-    if not last_layer_gain:
+    if last_layer_gain is None:
         last_layer_gain = gain
     
     if isinstance(module, nn.Sequential):
@@ -95,31 +82,36 @@ def initialize_weights(module, gain=1.0, last_layer_gain=None):
             if isinstance(m, nn.Linear):
                 if i == last_linear_idx:
                     # 最后一层使用不同的增益因子
-                    nn.init.orthogonal_(m.weight.data, last_layer_gain)
+                    nn.init.orthogonal_(m.weight, last_layer_gain)
                 else:
-                    nn.init.orthogonal_(m.weight.data, gain)
+                    nn.init.orthogonal_(m.weight, gain)
                 if m.bias is not None:
-                    nn.init.zeros_(m.bias.data)
+                    nn.init.zeros_(m.bias)
     
     elif isinstance(module, nn.Linear):
-        # 单个线性层
-        nn.init.orthogonal_(module.weight.data, gain)
+        # 单个线性层也是它所在调用边界的最后一层。
+        nn.init.orthogonal_(module.weight, last_layer_gain)
         if module.bias is not None:
-            nn.init.zeros_(module.bias.data)
+            nn.init.zeros_(module.bias)
+
+    elif isinstance(module, nn.Embedding):
+        nn.init.orthogonal_(module.weight, gain)
+        if module.padding_idx is not None:
+            nn.init.zeros_(module.weight[module.padding_idx])
     
     elif isinstance(module, nn.GRU) or isinstance(module, nn.LSTM):
         # RNN层
         for name, param in module.named_parameters():
             if 'weight' in name:
-                nn.init.orthogonal_(param.data, gain)
+                nn.init.orthogonal_(param, gain)
             elif 'bias' in name:
-                nn.init.zeros_(param.data)
+                nn.init.zeros_(param)
                 
     elif hasattr(module, 'weight') and hasattr(module, 'bias'):
         # 其他有weight和bias的层
-        nn.init.orthogonal_(module.weight.data, gain)
+        nn.init.orthogonal_(module.weight, gain)
         if module.bias is not None:
-            nn.init.zeros_(module.bias.data)
+            nn.init.zeros_(module.bias)
 
 
 class ResBlock(nn.Module):
