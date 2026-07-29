@@ -204,11 +204,45 @@ creates the state in the first place, which suggests the LEAVE phase repairs the
 map and the REJOIN phase immediately re-breaks it within one `step_once` — making
 `repaired_by_leave = 0` a measure of the *net* step, not of the LEAVE phase.
 
-Being measured directly at the intermediate point between the two phases. Not
-asserted until it is. Pro's prescribed repair — one injective post-transition
-assignment over the final action-capable UAV set, with a rejoining UAV already
-assigned in the same batch barred from a second duty — targets exactly this
-simultaneity.
+### Measured at the intermediate point — this one is established
+
+Replicating `update_duty_map_on_transitions`' own two-phase order (all LEAVEs,
+then all REJOINs) and checking injectivity **between** the phases, over every
+simultaneous LEAVE+REJOIN step in 8 episodes:
+
+```text
+dup_in   dup_after_leaves   dup_out      n
+True     False              True       241
+False    False              True         8
+                                       ---
+                                       249
+```
+
+- `dup_after_leaves` is **False in all 249**. The LEAVE phase produces an
+  injective map every single time.
+- `dup_out` is **True in all 249**. The REJOIN phase re-creates the duplicate
+  every single time.
+- The 8 rows with `dup_in = False` are exactly the 8 onsets.
+
+**So duplication is not persistent state that nothing repairs. It is
+continuously re-created, once per simultaneous LEAVE+REJOIN step.** The LEAVE
+branch is correct as written; the whole defect is the REJOIN branch acting on a
+map the LEAVE phase has just made injective.
+
+This also explains the misleading `repaired_by_leave = 0` in the previous table:
+that counter compared the map before and after a whole `step_once`, so the LEAVE
+phase's repair was always already undone by the REJOIN phase when it looked. It
+measured the net step, not the phase.
+
+The rejoining UAV is in the LEAVE rematch pool because `airborne_positions` is
+built from `charging_after`, under which a UAV whose falling edge fires this step
+counts as airborne. It receives a duty there, and then the REJOIN loop gives it a
+second.
+
+Pro's prescribed repair — one injective post-transition assignment over the final
+action-capable UAV set, with a rejoining UAV already assigned in the same batch
+barred from a second duty — targets exactly this, and the measurement says the
+LEAVE side needs no change.
 
 ## What it invalidates
 

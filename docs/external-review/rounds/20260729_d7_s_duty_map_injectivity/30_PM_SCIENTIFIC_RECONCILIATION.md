@@ -136,7 +136,18 @@ justify a follow-up turn. It goes to the next touchpoint:
 - Duplication is **absorbing** on the development topology: one onset per
   episode, `dup_steps == 1500 - onset` in all eight, so no episode ever leaves
   the state once it enters.
-- My first stated reason for that persistence was wrong and is retracted in the
-  evidence note. The LEAVE path with empty `locked_duties` re-matches injectively
-  and should repair a duplicated map, so the live hypothesis is that no LEAVE
-  fires after the onset. Being measured.
+- **The mechanism is now measured, and it localizes the repair.** Checking
+  injectivity *between* the LEAVE and REJOIN phases across every simultaneous
+  step in 8 episodes: `dup_after_leaves` is False in **all 249**, `dup_out` is
+  True in **all 249**. The LEAVE phase produces an injective map every time; the
+  REJOIN phase re-creates the duplicate every time. Duplication is not persistent
+  state — it is continuously re-created, once per simultaneous LEAVE+REJOIN step.
+  **The LEAVE branch needs no change.** This is direct implementation evidence for
+  the correction scheduled in §9, and it agrees with the ruling's lifecycle
+  clause.
+- Two earlier explanations of mine were wrong and are retracted in the evidence
+  note — "the LEAVE re-match never checks injectivity" (false: with empty
+  `locked_duties` it re-matches injectively) and "no LEAVE fires after the onset"
+  (false: 3-24 fire per episode). Both were produced by reading the code to
+  explain a measurement instead of measuring the explanation. Recorded because the
+  pattern, not the two facts, is the reusable part.
