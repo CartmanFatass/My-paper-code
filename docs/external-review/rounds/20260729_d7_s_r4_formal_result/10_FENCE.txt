@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260729_d7_s_r4_formal_result
-stage_commit=4c13d5515914b62db1bc643506b06dd860cc06be
+stage_commit=3e5624fa908c5fdf33f0fb6e06025f252aeb2f94
 question=docs/external-review/rounds/20260729_d7_s_r4_formal_result/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
