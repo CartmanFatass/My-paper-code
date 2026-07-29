@@ -46,6 +46,19 @@ boundary=every script-injecting operation
 action=close the wedged tab per the Skill's bounded replacement procedure
 outcome=FAILED -- "The browser is shutting down."
 
+RECOVERY_ATTEMPT attempt=4
+boundary=extension not connected
+action=restart the registered runtime -- locate and launch Chrome
+outcome=FAILED -- `Get-Process chrome` returns nothing, and chrome.exe is
+  absent from Program Files, Program Files (x86), LOCALAPPDATA, the
+  HKLM App Paths registry entry, the Start Menu shortcuts, and a recursive
+  search of every Google directory on the machine.
+
+  Chrome was serving tabs earlier in THIS session, so it either exited and is
+  installed somewhere non-standard, or was removed mid-session. Either way the
+  runtime cannot be restarted from here, and re-probing is the behaviour the
+  browser guidance names as a rabbit hole. Stopped at four attempts.
+
 DIAGNOSIS
 tabs_context_mcp then returned: "Browser extension is not connected."
 The earlier timeouts were not the documented wedged-renderer state -- the
