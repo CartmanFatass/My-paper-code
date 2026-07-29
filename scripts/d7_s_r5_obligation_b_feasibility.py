@@ -218,6 +218,12 @@ def run_episode(config, *, topology_seed, coords, coord_hash, idx, max_steps):
     duty_map = audit.initial_duty_map()
     centroids = None
     rows = []
+    # The triggering mechanism, counted rather than assumed. A feasibility rate
+    # measured over a stretch where no UAV ever left or rejoined says nothing
+    # about feasibility UNDER roster change, which is the only thing obligation
+    # B is asked about. See the guard in main().
+    events = {"leaves": 0, "rejoins": 0, "steps_rolled": 0}
+    refusal = None
     for step_index in range(max_steps):
         duty_positions, centroids_next = audit.compute_duty_positions(env, centroids)
         if step_index % audit.DELTA == 0:
@@ -225,11 +231,28 @@ def run_episode(config, *, topology_seed, coords, coord_hash, idx, max_steps):
             row["step_index"] = step_index
             row["episode_index"] = idx
             rows.append(row)
-        step = audit.step_once(env, duty_map=duty_map, service_centroids=centroids,
-                               schedule="constructive_mixed", step_index=step_index)
+        try:
+            step = audit.step_once(env, duty_map=duty_map, service_centroids=centroids,
+                                   schedule="constructive_mixed", step_index=step_index)
+        except audit.SourceAssignmentInvariantError as error:
+            # A refusal is a CONCLUSIVE result and must dominate the power guard.
+            # The earlier version of this pattern let the exception break the
+            # loop before the counters were added, so a decisive refusal was
+            # then reported as INCONCLUSIVE for want of events it never got to
+            # count. Record it, stop this episode, and carry it upward.
+            refusal = {
+                "episode_index": idx,
+                "step_index": step_index,
+                "reason": str(error),
+            }
+            break
+        # Counted BEFORE anything that can raise on the next iteration.
+        events["leaves"] += len(step["leave_uavs"])
+        events["rejoins"] += len(step["rejoin_uavs"])
+        events["steps_rolled"] += 1
         duty_map = step["duty_map"]
         centroids = step["service_centroids"]
-    return rows
+    return rows, events, refusal
 
 
 def main():
@@ -246,13 +269,21 @@ def main():
     print(f"DELTA={audit.DELTA}  duties={audit.N_RELAY_DUTIES + audit.N_SERVICE_DUTIES}")
 
     rows = []
+    totals = {"leaves": 0, "rejoins": 0, "steps_rolled": 0}
+    refusals = []
     for idx in range(args.episodes):
-        r = run_episode(config, topology_seed=seed, coords=coords, coord_hash=coord_hash,
-                        idx=idx, max_steps=args.steps)
+        r, events, refusal = run_episode(config, topology_seed=seed, coords=coords,
+                                         coord_hash=coord_hash, idx=idx,
+                                         max_steps=args.steps)
         rows.extend(r)
+        for key in totals:
+            totals[key] += events[key]
+        if refusal is not None:
+            refusals.append(refusal)
         feas = sum(1 for x in r if x["full_derangement_exists"])
         print(f"  episode {idx}: checks={len(r)}  derangement_feasible={feas}"
-              f"  infeasible={len(r) - feas}")
+              f"  infeasible={len(r) - feas}"
+              f"  leaves={events['leaves']}  rejoins={events['rejoins']}")
 
     total = len(rows)
     feasible = sum(1 for r in rows if r["full_derangement_exists"])
@@ -285,12 +316,42 @@ def main():
     for k in sorted(cov):
         print(f"  covered={k:2d}  checks={cov[k]}")
 
+    print("\n=== roster-change power ===")
+    print(f"steps_rolled={totals['steps_rolled']}  "
+          f"LEAVE events={totals['leaves']}  REJOIN events={totals['rejoins']}")
+
+    # A refusal is conclusive and dominates the power guard.
+    verdict = "OBLIGATION_B_MEASURED"
+    if refusals:
+        verdict = "OBLIGATION_B_REFUSED"
+        print(f"\n{verdict}: the source-assignment invariant refused during the roll.")
+        for row in refusals:
+            print(f"  episode {row['episode_index']} step {row['step_index']}: "
+                  f"{row['reason'][:200]}")
+        print("This is a CONCLUSIVE result about the trajectory, not a shortage of "
+              "power. Do not rerun for longer hoping it clears.")
+    elif totals["leaves"] == 0 and totals["rejoins"] == 0:
+        verdict = "OBLIGATION_B_INCONCLUSIVE"
+        print(f"\n{verdict}: {totals['steps_rolled']} steps rolled with ZERO LEAVE "
+              "and ZERO REJOIN events.")
+        print("The feasibility percentages above are arithmetic over a roster that "
+              "never changed, so they carry no evidence about derangement "
+              "feasibility UNDER roster change -- which is the only question "
+              "obligation B asks.")
+        print("The charging onset on this topology is near step ~900. A run whose "
+              "horizon ends before it cannot observe the mechanism at all.")
+
     if args.out:
         with open(args.out, "w", encoding="utf-8") as fh:
             json.dump({"topology_seed": seed, "coord_hash": coord_hash,
-                       "delta": audit.DELTA, "rows": rows}, fh, indent=2)
+                       "delta": audit.DELTA, "steps_requested": args.steps,
+                       "episodes": args.episodes, "power": totals,
+                       "refusals": refusals, "verdict": verdict,
+                       "rows": rows}, fh, indent=2)
         print(f"\nwrote {args.out}")
-    return 0
+
+    print(f"\n{verdict}")
+    return 0 if verdict == "OBLIGATION_B_MEASURED" else 1
 
 
 if __name__ == "__main__":
