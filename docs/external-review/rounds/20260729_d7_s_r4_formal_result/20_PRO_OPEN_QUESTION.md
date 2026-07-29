@@ -176,6 +176,8 @@ frozen four-state vocabulary, carried only where no resolver ran.
 - `docs/research/cdc/EVIDENCE_NOTES/20260728_D7_S_R4_THE_REPAIR_OPENED_A_HOLE_THE_OLD_CODE_REFUSED.md`
 - `scripts/audit_d7_s_event_aligned.py`
 - `scripts/pool_d7_s_event_aligned_shards.py`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 
 ## Required response sections
 
