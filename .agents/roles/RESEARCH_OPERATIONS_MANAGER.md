@@ -48,6 +48,19 @@ review_user_authorized_assignment_send_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORI
 review_user_authorized_assignment_send_uncertain=REVIEW_TRANSPORT_BLOCKED
 review_user_authorized_assignment_send_monitor_before_fence=forbidden
 review_user_authorized_assignment_send_scientific_iteration_cost=zero
+review_user_authorized_assignment_resend=once_after_closed_user_authorized_send
+review_user_authorized_assignment_resend_authority=direct_user_only
+review_user_authorized_assignment_resend_package=reuse_exact_existing_package
+review_user_authorized_assignment_resend_presend=exact_url_plus_registered_search_both_zero
+review_user_authorized_assignment_resend_count=one
+review_user_authorized_assignment_resend_postsend=one_snapshot_no_reload
+review_user_authorized_assignment_resend_automatic_recovery=forbidden
+review_user_authorized_assignment_resend_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED
+review_user_authorized_assignment_resend_uncertain=REVIEW_TRANSPORT_BLOCKED
+review_user_authorized_assignment_resend_monitor_before_fence=forbidden
+review_user_authorized_assignment_resend_terminal_callback=one_local_ops_return
+review_user_authorized_assignment_resend_pending_callback=forbidden
+review_user_authorized_assignment_resend_scientific_iteration_cost=zero
 review_response_retry=once_same_conversation_after_terminal_attempt
 review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery
 review_response_retry_requires_server_visible_original_fence=true
@@ -213,8 +226,49 @@ The new closed state resumes only if that same exact fence later becomes
 server-visible without another send, or another direct user authorization is
 implemented through a new explicit workflow contract.
 
+That later direct user authorization may activate one
+`USER_AUTHORIZED_ASSIGNMENT_RESEND` after
+`REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`. It is a distinct
+grant and does not reopen, replenish or inherit the consumed
+`USER_AUTHORIZED_ASSIGNMENT_SEND`. Reuse the same exact pushed package and
+registered conversation; transport failure alone does not authorize a
+replacement package.
+
+Immediately before the resend, repeat the exact registered-URL and signed-in
+conversation-search gate. Both observations must agree on zero full fences,
+zero prefix fences and zero corresponding responses, with no live generation,
+sentinel or monitor. An existing exact full fence cancels the resend and is
+adopted. A prefix, duplicate, mismatch, unreadable state or disagreement blocks
+without consuming the grant. Only the agreed zero state may render the unchanged
+Assignment byte-for-byte and perform one client resend; that action consumes the
+grant.
+
+After the resend, take one fresh readable snapshot only. Exactly one full fence
+restores normal monitoring or archival. Zero closes as
+`REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED`; a prefix,
+duplicate, mismatch or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. Do not reload,
+reopen, search again, retry, correct, recover or activate `Answer now`.
+
+Return exactly one local terminal operations callback for this resend and no
+pending or cross-task completion relay:
+
+```text
+USER_AUTHORIZED_ASSIGNMENT_RESEND_TERMINAL
+outcome=EXISTING_FENCE_ADOPTED|FENCE_ACCEPTED|UNPERSISTED|BLOCKED
+client_send_consumed=true|false
+server_visible_full_fence_count=0|1|greater_than_1
+assistant_response_visible=true|false
+sentinel_initialized=true|false
+monitor_initialized=true|false
+```
+
+The resend grant is not inherited and consumes zero scientific iterations. Its
+closed state resumes only if the same exact fence later becomes server-visible
+without another send, or another direct user grant is implemented through a new
+explicit workflow contract.
+
 For an ordinary accepted first attempt that is not a
-`USER_AUTHORIZED_ASSIGNMENT_SEND`, after the first monitor and sentinel are
+`USER_AUTHORIZED_ASSIGNMENT_SEND` or `USER_AUTHORIZED_ASSIGNMENT_RESEND`, after the first monitor and sentinel are
 terminal and no generation remains live, the same registered conversation permits one mechanically rendered
 response retry only when the server-visible original fence remains exact and
 either a stable answer omits question-declared response fields or applicable
