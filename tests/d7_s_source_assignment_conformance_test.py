@@ -15,10 +15,31 @@ corrected contract, not the current behaviour. A case that fails today is
 supposed to fail today. Recorded expected failures live in
 `docs/research/designs/D7_S_SOURCE_ASSIGNMENT_CONFORMANCE_BASELINE.md`.
 
-`xfail(strict=True)` marks the cases that must fail now and must go green the
-moment the repair lands — strict, so a case that starts passing without its mark
-being removed is itself a failure. Nothing here may be relaxed to make the suite
-green; relaxing a predicate is the specific prohibited repair.
+`xfail(strict=True)` marks the cases that must fail now and must go green when
+the repair lands. Nothing here may be relaxed to make the suite green; relaxing a
+predicate is the specific prohibited repair.
+
+**CORRECTION (Pro, 2026-07-30), verified empirically.** An earlier version of
+this docstring claimed a case "turns red the moment the interface lands without
+its mark being removed". **That is false for the CONDITIONAL xfail used below.**
+When `not _HAS_PROVENANCE` becomes False the mark is inactive, so a passing test
+is an ordinary PASS, never `XPASS(strict)`:
+
+```text
+conditional xfail, condition False, test passes  -> PASS
+unconditional strict xfail, test passes          -> XPASS(strict) -> FAILED
+```
+
+The property described belongs to the **unconditional** strict xfail
+`test_rejoin_never_gives_one_uav_a_second_duty` in
+`audit_d7_s_event_aligned_test.py`, which must be removed or converted in the
+same atomic repair change or the full suite will correctly fail on XPASS.
+
+Because of this, **final acceptance must be fail-closed** and cannot rely on the
+marks: run with `pytest --runxfail` requiring every test to pass, or require
+`0 failed, 0 xfailed, 0 xpassed, 0 skipped` plus an unmarked hard sentinel that
+the provenance interface exists. A run is **not** green while provenance cases
+remain XFAIL.
 
 ## Two axes, deliberately
 

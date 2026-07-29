@@ -1,5 +1,19 @@
 # D7.S source-assignment conformance suite — pre-repair baseline
 
+> **SUPERSEDED 2026-07-30 by Pro's ruling on round
+> `20260730_d7_s_conformance_suite_freeze`: step 1 is NOT closed at that commit.**
+>
+> Five blocking issues — N5 contradicts fail-closed injectivity; provenance omits
+> `IDLE_OR_OTHER`; the provenance path is not bound to production; N1/N2/N6 are
+> observations rather than rejection tests; final acceptance can pass with
+> provenance cases still XFAIL.
+>
+> The amendments change several predicates, so **this baseline no longer
+> describes the suite that will be frozen** and a new old-code baseline must be
+> recorded against the amended source. Kept, not deleted: it is the record of
+> what was measured and of what the review changed. Reconciliation:
+> `docs/external-review/rounds/20260730_d7_s_conformance_suite_freeze/30_PM_SCIENTIFIC_RECONCILIATION.md`.
+
 **Frozen 2026-07-30, before the controller repair.** This is step 2 of Pro's
 red-to-green procedure: the cases are frozen, run against the **old**
 implementation, and their failures recorded here as expected.
