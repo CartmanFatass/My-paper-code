@@ -104,5 +104,20 @@ That is conclusion-bearing compute and therefore user authority.
 **One instrument gap worth closing in the same change.** The artifact records
 leaves and charging but not rejoins, which is why this note has to argue from the
 commit graph instead of from the measurement. A rejoin counter, and a recorded
-count of duty-map injectivity checks performed and violations found, would let
-the next R4 artifact answer this question about itself in one field.
+count of duty-map injectivity checks performed, would let the next R4 artifact
+answer this question about itself in one field.
+
+The natural choke points already exist and are single: `assert_partial_injection`
+for the check count, and `step_once`'s `rejoin_uavs` for the event count -- the
+same key obligation B's power guard now reads.
+
+**The trap in implementing it.** `run_topology_audit` takes `workers` and the
+episode work runs under `ProcessPoolExecutor`. A module-level counter incremented
+inside `assert_partial_injection` lives in the WORKER process and is discarded
+when that process exits, so the parent would record zero checks on a run that
+performed thousands -- a counter reading zero for the same reason a rate reads
+zero over an empty set, and indistinguishable in the artifact from a guard that
+never ran. The count has to travel back in the per-episode return payload and be
+accumulated by the parent, exactly as `_accumulate_episode_leave_stats` already
+does for leaves. Verify it against a `--workers 4` run, not a serial one:
+`--workers 1` would pass while the shipped configuration silently recorded zero.
