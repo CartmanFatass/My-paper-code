@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260729_d7_s_duty_map_injectivity
-stage_commit=1c4510e94fd59c5925b12a9b83f7f08aab57cf39
+stage_commit=db7ad266394657300b2463e78fc8a5bd06c7e0ad
 question=docs/external-review/rounds/20260729_d7_s_duty_map_injectivity/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
