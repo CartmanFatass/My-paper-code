@@ -1,0 +1,50 @@
+# G49 single-channel-collapse design audit mechanical intake
+
+```text
+record_kind=EXTERNAL_PRO_MECHANICAL_TRANSPORT_INTAKE
+round=20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit
+stage_commit=fc8288b53401cea1642110994305272905e56c5f
+scientific_predecessor_commit=4abbee66d43ffd592d65624121121bc0109882ab
+registered_conversation_id=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
+question=docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+submission_count=1
+recovery_submission_count=0
+response_retry_count=1
+client_send_consumed=true
+main_body_fence_visible=true
+attachment_identity_verified=false
+assistant_generation_started=true
+natural_completion=true
+answer_now_activated=false
+original_monitor_terminal=ERROR
+original_monitor_error=explicit Pro error: unusual activity detected
+replacement_monitor_terminal=COMPLETE
+replacement_monitor_created=true
+second_live_monitor_created=false
+assistant_message_identity=494fda9c-5f79-4fc2-ba20-e2b49c72f8db
+stable_snapshots=2
+stable_snapshot_interval_seconds=4
+generation_controls=inactive
+candidate_available=true
+sentinel_terminal=COMPLETE
+retry_reason=explicit same-turn Pro error with no completed assistant response
+retry_count_bounded=true
+raw=docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/21_PRO_OPEN_RAW.md
+raw_visible_text_length=15432
+raw_archived_file_length=15433
+raw_exact_reread=true_terminal_newline_only
+required_section_count=9
+required_sections_present=true
+design_disposition=CONTINUE
+design_compute=0
+conclusion_bearing_iteration_cost=zero
+new_environment_transitions=0
+new_optimizer_steps=0
+new_bootstrap_resamples=0
+science_interpreted_by_ops=false
+code_modified_by_ops=false
+git_run_artifact_modified=false
+```
+
+The visible response body is archived verbatim. The terminal newline is the
+only archival byte added by the repository text-file operation.
