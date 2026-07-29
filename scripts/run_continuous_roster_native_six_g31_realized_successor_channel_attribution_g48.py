@@ -1616,6 +1616,15 @@ def readiness_training_errors(
     return errors
 
 
+def validate_readiness_training_artifacts(run_root: Path) -> list[str]:
+    root = Path(run_root).resolve()
+    try:
+        training = _read_json(root / "train_manifest.json")
+    except (OSError, TypeError, ValueError) as error:
+        return [str(error)]
+    return readiness_training_errors(root, training)
+
+
 def reload_readiness_artifacts(run_root: Path) -> dict[str, object]:
     root = Path(run_root).resolve()
     training = _read_json(root / "train_manifest.json")
@@ -1876,7 +1885,7 @@ def main() -> None:
             accepted_anchor_root=args.accepted_anchor_root,
         )
     elif args.stage == "readiness-validate":
-        errors = validate_readiness_artifacts(args.run_root)
+        errors = validate_readiness_training_artifacts(args.run_root)
         if errors:
             raise ValueError("G48 readiness validation failed: " + " | ".join(errors))
     elif args.stage == "readiness-reload":

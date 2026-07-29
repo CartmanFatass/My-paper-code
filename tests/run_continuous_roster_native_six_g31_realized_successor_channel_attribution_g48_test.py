@@ -40,6 +40,8 @@ def readiness_bundle(
         source_commit=TEST_SOURCE_COMMIT,
         accepted_anchor_root=ANCHOR_ROOT,
     )
+    assert runner.validate_readiness_training_artifacts(root) == []
+    assert not (root / "evaluation_manifest.json").exists()
     evaluation = runner.readiness_evaluate(run_root=root)
     analysis = runner.readiness_analyze(run_root=root)
     yield root, training, evaluation, analysis
