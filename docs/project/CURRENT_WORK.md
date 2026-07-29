@@ -423,6 +423,7 @@ overnight_session_grant=FULL_PERMISSION_TEN_ITERATIONS_20260727 (user, this sess
 workflow_round_grant=FULL_PERMISSION_TEN_WORKFLOW_ROUNDS_20260727B (user, this session, granted after the ten-iteration grant above was consumed)
 iteration_definition=one complete Pro-to-Pro loop (user ruling 2026-07-27): receive Pro's ruling, make the code decisions, implement, run the experiment, submit the result back to Pro. Nothing smaller is an iteration.
 d7s_compute_authorization=GRANTED_20260727 (tag d7s-audit-2 pushed under the earlier grant; formal compute for the ten rounds above is covered by workflow_round_grant)
+r5_reanchor_compute_grant=GRANTED_20260728 (user, "launch it anyway", given in advance of Pro's ruling). Covers the full formal run a re-anchored successor contract requires -- including a fresh topology population -- with no cost preview and no check-back before launch. It removes the AUTHORIZATION gate only. It does not authorize launching before Pro's ruling names the branch, and it does not authorize running an unregistered contract: a margin re-anchor is pre-registered first, always, because the same edit after a result is observed is a rescue and not a repair.
 iterations_remaining=17
 conclusion_bearing_iterations_consumed=20
 git_integration_status=project_manager_direct_authorized
