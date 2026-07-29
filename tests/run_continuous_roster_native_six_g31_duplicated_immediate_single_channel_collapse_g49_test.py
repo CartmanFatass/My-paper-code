@@ -110,6 +110,8 @@ def test_full_proof_artifact_lifecycle_is_final_only_and_reloadable(
     assert training["formal"] is False
     assert training["formal_statistical_run"] is False
     assert training["scientific_iteration_cost"] == 0
+    assert training["execution_readiness_proof_only"] is False
+    assert training["two_process_equivalence"] is None
     assert training["dynamic_equivalence"]["D_SC"] == 0.0
     assert training["dynamic_equivalence"]["real_transitions"] == 384
     assert training["shared_trajectory"]["used_by_both_paths"] is True
@@ -164,6 +166,22 @@ def test_two_real_processes_reconstruct_identical_model_adam_and_evidence(
     assert report[
         "parameters_Adam_evidence_checkpoint_bitwise_equivalent"
     ] is True
+
+    ordinary = {
+        "execution_readiness_proof_only": False,
+        "two_process_equivalence": None,
+        "two_process_equivalence_artifact": None,
+    }
+    attached = runner._attach_readiness_process_proof(ordinary, report)
+    assert attached["execution_readiness_proof_only"] is True
+    assert attached["two_process_equivalence"] == report
+    assert attached["two_process_equivalence_artifact"] == (
+        runner.TWO_PROCESS_REPORT_REFERENCE
+    )
+    premature = copy.deepcopy(ordinary)
+    premature["execution_readiness_proof_only"] = True
+    with pytest.raises(ValueError, match="marked complete before process proof"):
+        runner._attach_readiness_process_proof(premature, report)
 
 
 def test_artifact_and_first_match_tamper_guards_fail_closed(

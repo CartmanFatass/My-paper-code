@@ -391,7 +391,6 @@ def train(
     cpu_budget: int | None = None,
     process_workers: int | None = None,
     _interface_smoke_only: bool = False,
-    _execution_readiness_proof: bool = False,
 ) -> dict[str, object]:
     if not _valid_commit(source_commit):
         raise ValueError("G49 train requires a lowercase 40-character source commit")
@@ -467,7 +466,10 @@ def train(
         "source_commit": source_commit,
         "formal": formal,
         "formal_statistical_run": False,
-        "execution_readiness_proof_only": _execution_readiness_proof,
+        # The ordinary train artifact is not readiness-complete.  The
+        # readiness entry upgrades this only after the real process proof is
+        # present, so no partially assembled readiness manifest can validate.
+        "execution_readiness_proof_only": False,
         "scientific_iteration_cost": 0,
         "configuration": configuration,
         "source_controls": source_controls(),
@@ -617,6 +619,37 @@ def prove_two_process_equivalence(
     if report["passed"] is not True:
         raise RuntimeError("G49 two-process equivalence failed")
     return report
+
+
+def _attach_readiness_process_proof(
+    manifest: Mapping[str, object], report: Mapping[str, object]
+) -> dict[str, object]:
+    """Upgrade a complete ordinary manifest only after the process proof passes."""
+
+    if manifest.get("execution_readiness_proof_only") is not False:
+        raise ValueError("G49 readiness manifest was marked complete before process proof")
+    if (
+        manifest.get("two_process_equivalence") is not None
+        or manifest.get("two_process_equivalence_artifact") is not None
+    ):
+        raise ValueError("G49 readiness process proof was already attached")
+    if (
+        report.get("passed") is not True
+        or report.get("worker_count") != 2
+        or report.get("distinct_processes") is not True
+        or report.get("single_thread_workers") is not True
+        or report.get("deterministic_preassigned_index_merge") is not True
+        or report.get("duplicated_environment_interaction") is not False
+        or report.get("real_transitions") != source.MAX_REAL_TRANSITIONS
+        or report.get("parameters_Adam_evidence_checkpoint_bitwise_equivalent")
+        is not True
+    ):
+        raise ValueError("G49 readiness process proof is incomplete")
+    updated = dict(manifest)
+    updated["execution_readiness_proof_only"] = True
+    updated["two_process_equivalence"] = dict(report)
+    updated["two_process_equivalence_artifact"] = TWO_PROCESS_REPORT_REFERENCE
+    return updated
 
 
 def validate_training_artifacts(
@@ -857,7 +890,6 @@ def readiness_interface_smoke(
         cpu_budget=DEFAULT_CPU_BUDGET,
         process_workers=DEFAULT_PROCESS_WORKERS,
         _interface_smoke_only=True,
-        _execution_readiness_proof=True,
     )
     if row.get("return_schema") != "G49_train_manifest_v1":
         raise RuntimeError("G49 production-entry smoke schema mismatch")
@@ -876,15 +908,13 @@ def readiness_train(
         accepted_anchor_root=accepted_anchor_root,
         cpu_budget=DEFAULT_CPU_BUDGET,
         process_workers=DEFAULT_PROCESS_WORKERS,
-        _execution_readiness_proof=True,
     )
     report = prove_two_process_equivalence(
         proof_root=root / "parallel_proof",
         accepted_anchor_root=accepted_anchor_root,
         trajectory_path=root / SHARED_TRAJECTORY_REFERENCE,
     )
-    manifest["two_process_equivalence"] = report
-    manifest["two_process_equivalence_artifact"] = TWO_PROCESS_REPORT_REFERENCE
+    manifest = _attach_readiness_process_proof(manifest, report)
     _write_json(root / TRAIN_MANIFEST, manifest)
     validate_training_artifacts(root, expected_source_commit=source_commit)
     return manifest
