@@ -80,10 +80,11 @@ the Project Manager-accepted CDC state.
 
 ## C-CONTINUOUS-ROSTER — Continuous control under dynamic membership
 
-- Status: supported and retained at G43 as a usable native-six-coordinate,
-  no-carry, post-anchor no-slow-critic, no-shadow fixed-equal-mean G31-credit,
-  configured-capacity, bounded-random-process continuous dynamic-roster test
-  version for the registered H=48, capacity-6/8/12 toy family.
+- Status: supported and retained at G48 as a usable native-six-coordinate,
+  no-carry, post-anchor no-slow/no-DB/no-baseline, duplicated-immediate,
+  separately centered and independently RMS-normalized continuous-roster
+  training route for the registered H=48, capacity-6/8/12 bounded-process toy
+  family.
 - Claim: a capacity-shape-independent actor trained only at capacity 8 remains
   usable at configured capacities 6, 8 and 12 across the fixed G32 process and
   bounded G34-P0 random process. The retained actor is six-coordinate from
@@ -156,7 +157,40 @@ the Project Manager-accepted CDC state.
   `SUPPORTED_RETAINED_INDEPENDENT_RELATIVE_CHANNEL_SCALING_G44` within the
   bounded G44-P0 contract; the exact pooled relative-scale sufficiency unit is
   failed closed. The next scheduled action is
-  `CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_DESIGN_ASSERTION_AUDIT`.
+   `CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_ATTRIBUTION_G45_DESIGN_ASSERTION_AUDIT`.
+- Formal realized-successor attribution evidence: G48 compares the accepted
+  baseline-free immediate-plus-realized-successor reference against a
+  duplicated-immediate null that never reads `G_(t+1)` into actor credit.
+  Both arms pass the complete access contract. Reference-minus-null pooled
+  CI95 is [-0.0099297350, -0.0031302390, 0.0006496391]; capacity-6/8/12 CI95
+  are [-0.0030475732, -0.0000237678, 0.0032257702],
+  [-0.0117158886, -0.0034464184, 0.0011528930], and
+  [-0.0148397661, -0.0059030163, -0.0006160106]. Duplicated-immediate
+  noninferiority holds and material realized-successor advantage is false.
+- Accepted post-anchor training boundary: `COMMON_NATIVE6_FAST_ANCHOR ->
+  NATIVE6_G31_DUPLICATED_IMMEDIATE`. Retain the native-six actor, immediate
+  reward credit, separate channel centering, independent population-RMS
+  normalization, literal equal-channel composition and common entropy. Delete
+  the complete realized-successor channel package from the retained post-anchor
+  route.
+- G48 local closure: the complete realized-successor channel package is not
+  required for access and supplies no >0.05 material advantage over the exact
+  duplicated-immediate null inside G48-P0. This does not establish fresh
+  end-to-end immediate-only sufficiency, TEAM-GAE1 sufficiency, exact
+  single-channel structural equivalence or universal future-information
+  redundancy.
+- Strongest remaining training explanations: the accepted route still depends
+  on the common fast anchor, immediate-target centering/RMS normalization,
+  literal immediate-gradient composition and the frozen Adam/PPO exposure.
+  Exact collapse of the duplicated two-channel bookkeeping to one channel and
+  fresh end-to-end training of the fully simplified route remain untested.
+- G48 update under C-CREDIT: the complete realized-successor channel package is
+  locally removable from the accepted post-anchor route. This does not rewrite
+  G31's paired G17/G18 result or G40's package-level advantage over TEAM-GAE1,
+  because the G48 null is a normalized duplicated-immediate estimator rather
+  than TEAM-GAE1. The smallest retained post-anchor credit object is now the
+  normalized immediate channel under the registered common-anchor and Adam
+  boundary.
 - Lifecycle boundary: active masks, likelihood ownership, environment
   lifecycle state, fresh initialization, temporary leave/rejoin, terminal
   deletion and survivor continuity remain protected runtime semantics.
@@ -404,3 +438,30 @@ the Project Manager-accepted CDC state.
   targeting, immediate/successor decomposition, shared-baseline conditioning,
   per-channel normalization and direction balancing. No status change is made
   to C-REC, C-BASE, C-COORD or C-BENCH.
+
+## G48 formal result update
+
+g48_formal_source_commit=
+4abbee66d43ffd592d65624121121bc0109882ab
+
+g48_formal_branch=
+DUPLICATED_IMMEDIATE_CREDIT_SUFFICIENT_G48
+
+g48_scientific_disposition=
+SUPPORTED_RETAINED_DUPLICATED_IMMEDIATE_POST_ANCHOR_CREDIT_SUFFICIENCY_G48
+
+g48_scientific_route=
+COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_DUPLICATED_IMMEDIATE
+
+g48_supported_unit=
+duplicated_immediate_post_anchor_access_and_0.05_noninferiority
+
+g48_failed_closed=
+complete_realized_successor_channel_package_required_for_access_or_material_advantage_inside_G48_P0
+
+g48_primary_ci95=
+[-0.009929735010121536,-0.003130239010674661,0.0006496391334839275]
+
+g48_conclusion_bearing_iterations_consumed=37
+g48_iterations_remaining=0
+g48_next_action=NONE_BALANCE_EXHAUSTED

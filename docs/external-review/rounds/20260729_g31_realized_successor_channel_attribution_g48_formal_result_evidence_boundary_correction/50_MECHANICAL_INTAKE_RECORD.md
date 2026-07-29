@@ -1,0 +1,57 @@
+# G48 formal-result evidence-boundary correction mechanical intake
+
+```text
+record_kind=EXTERNAL_PRO_MECHANICAL_TRANSPORT_INTAKE
+round=20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction
+stage_commit=21e3417780f25dab708eb74d4950b6a2780554e8
+formal_source_commit=4abbee66d43ffd592d65624121121bc0109882ab
+registered_conversation_id=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
+question=docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/20_PRO_OPEN_QUESTION.md
+submission_count=1
+recovery_submission_count=0
+response_retry_count=0
+client_send_consumed=true
+main_body_fence_visible=true
+attachment_identity_verified=false
+assistant_generation_started=true
+natural_completion=true
+answer_now_activated=false
+assistant_message_identity=c76b72c6-2399-4b34-b1da-6a1d0c4c50ca
+stable_snapshots=2
+stable_snapshot_interval_seconds=4
+generation_controls=inactive
+candidate_available=true
+original_monitor_terminal=ERROR
+original_monitor_error=sentinel remained pending without emitting a terminal record during bounded watches
+browser_same_tab_reload_after_stuck_wait=true
+browser_reestablished_registered_url=true
+browser_reestablished_registered_conversation=true
+browser_post_reload_exact_fence_visible=true
+replacement_monitor_created=false
+second_monitor_created=false
+sentinel_terminal=COMPLETE
+sentinel_status_after_archive=COMPLETE
+raw=docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/21_PRO_OPEN_RAW.md
+raw_visible_text_length=21040
+raw_archived_file_length=21041
+raw_exact_reread=true_terminal_newline_only
+raw_file_terminal_newline_only=true
+required_section_count=8
+required_sections_present=true
+corrected_evidence_conformance=CONFORMS
+valid_result_disposition=COMPLETE_BALANCE_EXHAUSTED
+g48_iterations_remaining_after_disposition=0
+scientific_iteration_cost=one
+compute_budget_for_correction=0
+new_environment_transitions=0
+new_optimizer_steps=0
+new_bootstrap_resamples=0
+formal_artifacts_recomputed=false
+science_interpreted_by_ops=false
+code_modified_by_ops=false
+git_run_artifact_modified=false
+```
+
+The response body above is archived verbatim. The terminal newline is the
+only archival byte added by the repository text-file operation; no response
+content was rewritten.

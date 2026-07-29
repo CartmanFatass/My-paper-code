@@ -74,6 +74,57 @@ g45_next_action=CONTINUOUS_ROSTER_NATIVE_SIX_G31_SHARED_BASELINE_CONDITIONING_AT
 g45_valid_result_disposition=CONTINUE
 g45_design_compute=0
 
+## G48 formal result update
+
+g48_row=
+continuous-roster native-six duplicated-immediate post-anchor credit route
+
+g48_row_status=SUPPORTED_RETAINED
+
+g48_row_evidence=
+docs/research/cdc/EVIDENCE_NOTES/20260729_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_FORMAL_RESULT.md
+|docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/21_PRO_OPEN_RAW.md
+
+g48_row_claim_ceiling=
+exact post-anchor G48-P0 source, accepted anchors, H48, capacity-6/8/12
+fixed/random process family, registered Adam exposure and duplicated-immediate
+two-channel null; no fresh-training, TEAM-GAE1, arbitrary-task, UAV or
+universal-future-information claim
+
+g48_scientific_route=
+COMMON_NATIVE6_FAST_ANCHOR_to_NATIVE6_G31_DUPLICATED_IMMEDIATE
+
+g48_supported_unit=
+duplicated_immediate_access_and_noninferiority_inside_G48_P0
+
+g48_failed_closed=
+complete_realized_successor_channel_package_necessity_or_material_advantage_inside_G48_P0
+
+g48_primary_ci95=
+[-0.009929735010121536,-0.003130239010674661,0.0006496391334839275]
+
+g48_capacity_ci95_6=
+[-0.003047573242081267,-0.000023767837701393361,0.003225770189697182]
+
+g48_capacity_ci95_8=
+[-0.011715888608560947,-0.0034464183754958928,0.0011528930163752981]
+
+g48_capacity_ci95_12=
+[-0.014839766149231546,-0.005903016317533048,-0.0006160106466084341]
+
+g48_conclusion_bearing_iterations_consumed=37
+g48_iterations_remaining=0
+g48_next_action=NONE_BALANCE_EXHAUSTED
+
+| G48-P0 中 complete realized-successor channel package 对 access 的必要性或相对 duplicated-immediate null 的 >0.05 material advantage | `FAILED_CLOSED` | Reference 与 null 均通过完整 access；reference-minus-null pooled CI95 为 [-0.0099297350, -0.0031302390, 0.0006496391]，全部 component UCB 低于 0.004003，duplicated-immediate noninferiority 成立，material realized-successor advantage 为 false。 | 不得写成“TEAM-GAE1 已充分”“所有 delayed credit 都无用”“fresh immediate-only training 已成立”或“所有任务不需要未来信息”。 |
+
+| G48 duplicated-immediate route 的 exact single-channel structural collapse | `OPEN_UNTESTED` | 两条 immediate target、normalized row 和 channel gradient 在冻结 null 中逐字节相等，但尚未完成删除第二 channel loss、backward construction 与 artifact schema 的 exact optimizer-equivalence 证明。 | 仅在新的用户授权与余额下复活；优先零轨迹依赖证明。 |
+
+| 从随机初始化开始的 fully simplified immediate-only/no-baseline training | `OPEN_UNTESTED` | G48 是 accepted-common-anchor 之后的比较，不能回答完全移除历史训练路径后是否仍可学习。 | 需要 function-、source-、interaction- 与 optimizer-exposure-matched fresh-training contract。 |
+
+portfolio_terminal_disposition=COMPLETE_BALANCE_EXHAUSTED
+supersedes_stale_active_markers=G43|G44|G45
+
 # HMASD 科研方向账本
 
 ## 用途与权威边界
