@@ -127,3 +127,33 @@ equivalence holds under every re-derivation, a factor of ~3 inside the margin.
 
 `D_A` 95% interval, inverted from the registered contrasts: **[-0.681, +1.686]**,
 point **+0.484**, against a margin of **+/-5**.
+
+## The masked limb states, re-derived the same way
+
+The limb states are masked by the branch but are disclosed to Pro, so a wrong
+value there is a wrong disclosure. Re-derived by the same independent path:
+
+```text
+u_star_stable_point  -1.0919725533508093   BIT FOR BIT, diff 0.0e+00
+u_star_flex_point    -0.1643991783956942   BIT FOR BIT, diff 0.0e+00
+units per topology   [5, 6, 6, 5, 6, 7, 8, 6]   identical on both limbs,
+                     which is expected -- the two lists are appended in lockstep
+```
+
+Re-applying the MIRRORED resolvers from first principles, not by calling them:
+
+```text
+stable  MATERIAL iff UCB95 < -5   -> +1.3401 < -5 ?  False
+        AFFIRMATIVE_NONMATERIAL iff LCB95 > -5 -> -3.1781 > -5 ?  True
+        => AFFIRMATIVE_NONMATERIAL
+flex    MATERIAL iff LCB95 > +5   -> -8.1859 > +5 ?  False
+        AFFIRMATIVE_NONMATERIAL iff UCB95 < +5 -> +7.4558 < +5 ?  False
+        => UNRESOLVED
+```
+
+Both match the artifact. The mirror is the science and not a convention, and it
+is the exact asymmetry an earlier exercise got wrong by using one `U*` table for
+both limbs -- so re-deriving it rather than trusting it is the point.
+
+**Every numeric claim in the result submission is now independently verified**:
+the Part-A point and interval, both `U*` points, and the limb states.
