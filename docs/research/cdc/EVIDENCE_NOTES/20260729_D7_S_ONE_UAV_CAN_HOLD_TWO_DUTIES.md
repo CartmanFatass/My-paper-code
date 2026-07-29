@@ -176,9 +176,39 @@ what `limb_locked_duties` gives the stable limb — the LEAVE path pops **every*
 unlocked duty and re-assigns greedily with `pool.remove(best)`. That is injective
 by construction, so a LEAVE should *repair* a duplicated map, not preserve it.
 
-The live hypothesis is therefore that **no LEAVE fires after the onset** — the
-onsets cluster at steps 848-1189, late enough that the charge cycle may already
-be exhausted. Being measured; not asserted until it is.
+I then guessed that **no LEAVE fires after the onset**. Measured, and false:
+
+```text
+ep  onset  leaves_after  rejoins_after  repaired_by_leave  cleared
+ 0   910        9              9               0            False
+ 1  1019        3              3               0            False
+ 2   983        5              5               0            False
+ 3   847        3              3               0            False
+ 4  1042       24             24               0            False
+ 5  1006       18             18               0            False
+ 6   963       21             21               0            False
+ 7  1188        7              7               0            False
+```
+
+Three to twenty-four LEAVEs fire after the onset in every episode, and the state
+is still never cleared.
+
+**That is two wrong mechanisms in a row from me, both produced by reading the
+code instead of measuring it.** The observation was never in doubt; only my
+explanations were.
+
+The column that matters is one I did not predict: `leaves_after` equals
+`rejoins_after` **exactly**, in all eight episodes. After the onset, every LEAVE
+is paired with a REJOIN in the same step. That is the same simultaneity that
+creates the state in the first place, which suggests the LEAVE phase repairs the
+map and the REJOIN phase immediately re-breaks it within one `step_once` — making
+`repaired_by_leave = 0` a measure of the *net* step, not of the LEAVE phase.
+
+Being measured directly at the intermediate point between the two phases. Not
+asserted until it is. Pro's prescribed repair — one injective post-transition
+assignment over the final action-capable UAV set, with a rejoining UAV already
+assigned in the same batch barred from a second duty — targets exactly this
+simultaneity.
 
 ## What it invalidates
 
