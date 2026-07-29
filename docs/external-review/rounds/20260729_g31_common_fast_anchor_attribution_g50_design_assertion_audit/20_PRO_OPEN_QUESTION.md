@@ -16,7 +16,7 @@ inside this zero-compute question. Read only the paths listed in
 and cannot be selected. Do not request permission, authorize code, or start
 compute.
 
-Exact evidence allow-list:
+## Exact evidence allow-list
 
 - `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_design_assertion_audit/00_REVIEW_BRIEF.md`
 - `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_design_assertion_audit/01_SHARED_SOURCE_MANIFEST.md`
