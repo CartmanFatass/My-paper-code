@@ -22,8 +22,13 @@ review_fence_stage_commit=full_40_hex_only
 review_fence_prefix_correction=once_same_conversation_before_assistant_response
 review_fence_correction_question_resubmission=forbidden
 review_fence_monitor_concurrency=one_live
-review_assignment_acceptance=server_visible_exact_fence_only
-review_client_send_effect=uncommitted_until_server_visible
+review_assignment_acceptance=server_visible_main_body_or_verified_attachment_identity
+review_assignment_identity_sources=main_body_exact_fence|verified_attachment_payload
+review_assignment_attachment_validator=.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py
+review_assignment_attachment_filename_authority=none
+review_assignment_attachment_unreadable=IDENTITY_UNREADABLE
+review_assignment_observation_fields=client_send_consumed|main_body_fence_visible|attachment_identity_verified|assistant_generation_started|natural_completion_verified
+review_client_send_effect=uncommitted_until_assignment_identity_verified
 review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay
 review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence
 review_unpersisted_assignment_recovery_prior_server_visible_count=zero
@@ -120,8 +125,10 @@ technical acceptance, and Workflow Design Manager owns workflow design.
   conversation identity and visible message state before continuing. Reloading
   never proves a freshness fence absent and never authorizes submission.
 - Acceptance of an Assignment only after its complete rendered identity is
-  server-visible. A client send action or cleared composer remains an
-  `UNPERSISTED_CLIENT_SEND` until that observation succeeds.
+  verified in the server-visible main body or in the exact attachment payload
+  of the same identified user turn. A filename, cleared composer or generation
+  start is not identity evidence. An unreadable attachment is
+  `IDENTITY_UNREADABLE`, not proof that the send failed.
 - Direct Git integration for review packages, runtime evidence, reports,
   `CURRENT_WORK.md` and exact mechanical recording of an External-Pro disposition
   or portfolio delta.
@@ -154,7 +161,7 @@ science.
 
 Use `$hmasd-review-round` directly in this task. There is no second persistent
 transport role and no completion message back to another manager. The mode
-retains one accepted exact full-hash fence, the registered conversation,
+retains one accepted exact full-hash Assignment identity, the registered conversation,
 natural-completion detection, one live metadata-only
 `hmasd-pro-response-monitor`, evidence-access recovery, verbatim raw archival
 and provenance intake. A visible fence whose only defect is a strict prefix of
@@ -164,37 +171,67 @@ mechanically rendered full-hash correction that contains no scientific question
 body and changes no allow-list or scientific instruction. It grants no
 scientific interpretation or code acceptance.
 
+For every Assignment client action, record independently:
+
+```text
+client_send_consumed=true|false
+main_body_fence_visible=true|false
+attachment_identity_verified=true|false
+assistant_generation_started=true|false
+natural_completion_verified=true|false
+```
+
+The accepted identity source is either the complete main-body fence or one
+attachment payload bound to the same registered conversation and exact user
+turn. Before sending, preserve the exact complete payload bytes; they must
+contain exactly one renderer-produced Assignment identity. For an
+attachment-backed turn, run
+`.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py`
+against those bytes and either the readable attachment payload or
+provider-native metadata. Metadata is sufficient only when it binds the exact
+conversation, user turn and immutable attachment identity to the exact byte
+count and payload SHA-256. A display filename, preview, ordinary file size,
+cleared composer, response start or reconstructed observation has no identity
+authority.
+
+`ATTACHMENT_IDENTITY_VERIFIED` is equivalent to a main-body exact fence for
+sentinel initialization. Use the validator's complete canonical
+`sentinel_fence_identity`; the returned monitor token remains opaque.
+`IDENTITY_UNREADABLE` or `IDENTITY_MISMATCH` blocks without claiming send
+failure and without authorizing another send. Assistant generation starting
+does not establish identity or natural completion.
+
 An `UNPERSISTED_CLIENT_SEND` permits one exact Assignment replay only when the
 same registered conversation is readable, exactly one client send occurred,
 both the post-reload history and one fresh exact-URL reopen show zero full or
-prefix matching fences and zero corresponding assistant responses, and no
-sentinel, monitor, prefix correction, response retry or earlier persistence
-recovery exists. The replay is byte-for-byte renderer output with the unchanged
-question path, allow-list authority, stage commit and instruction. It is the
-second and final client send but can become only the first server-visible
-Assignment. Establish a sentinel and monitor only after exactly one complete
-fence becomes visible. A second missing fence, duplicate fence or identity
+prefix matching fences, no attachment-backed candidate user turn and zero
+corresponding assistant responses, and no sentinel, monitor, prefix correction,
+response retry or earlier persistence recovery exists. The replay is
+byte-for-byte unchanged payload with the same question path, allow-list
+authority, stage commit and instruction. It is the second and final client send
+but can become only the first verified Assignment. Establish a sentinel and
+monitor only after exactly one main-body or attachment-backed identity is
+verified. An unreadable attachment, a second missing identity, duplicate or
 mismatch ends in `REVIEW_TRANSPORT_BLOCKED`; no further Assignment send is
-permitted by this operational recovery. This recovery consumes zero scientific
-iterations and grants no later send authority.
+permitted. This recovery consumes zero scientific iterations.
 
 After that terminal state, one observe-only `POST_ERROR_PERSISTENCE_RECHECK` is
 permitted at an ordinary task wakeup. It sends nothing and combines a fresh
 exact-URL read of the registered conversation with signed-in conversation
 search for the exact round, full stage commit and question basename. A search
 candidate counts only when its URL has the same registered conversation ID and
-its visible user turn matches the complete Assignment. Exactly one full fence
-restores ordinary transport: initialize the sentinel and monitor if no response
+its user turn has a verified main-body or attachment-backed Assignment identity.
+Exactly one verified identity restores ordinary transport: initialize the sentinel and monitor if no response
 exists, or apply normal stable-response archival if a response already exists.
-Zero fences terminates as
+Zero main-body fences and no attachment-backed candidate turn terminates as
 `REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`. A prefix, duplicate, identity
-mismatch or uncertain readable state remains `REVIEW_TRANSPORT_BLOCKED`. The
+mismatch, unreadable attachment or uncertain state remains `REVIEW_TRANSPORT_BLOCKED`. The
 recheck never sends an Assignment, uses `Retry` or `ResponseRetry`, activates
 `Answer now`, or initializes a sentinel or monitor before the exact fence is
 observed. It consumes zero scientific iterations and is not repeated.
 
-The closed state resumes only if the same exact fence later becomes
-server-visible without a new send, or a new explicit user-authorized workflow
+The closed state resumes only if the same exact Assignment identity later becomes
+verifiable without a new send, or a new explicit user-authorized workflow
 contract defines any further client send or replacement review package.
 
 A direct user authorization may activate one
@@ -206,24 +243,28 @@ is not permitted merely because transport failed.
 
 Immediately before this send, require the exact registered URL and signed-in
 conversation search to agree that the same round, full stage commit and question
-have zero full fences, zero prefix fences and zero corresponding responses. No
-sentinel, monitor or generation may be live. If exactly one full fence is found,
-cancel the authorized send and adopt that existing fence. A prefix, duplicate,
-identity mismatch, unreadable history or disagreement blocks the send. Only
-when both observations prove zero may the existing renderer reproduce the
-unchanged Assignment byte-for-byte and send it once.
+have zero full fences, zero prefix fences, no attachment-backed candidate turn
+and zero corresponding responses. No
+sentinel, monitor or generation may be live. If exactly one main-body or
+attachment-backed identity is verified, cancel the authorized send and adopt
+it. A prefix, duplicate, identity mismatch, unreadable attachment or history,
+or disagreement blocks the send. Only when both observations prove both
+identity sources absent may the existing renderer reproduce the unchanged
+Assignment payload byte-for-byte and send it once.
 
 After the send, take one fresh readable snapshot without reload, reopen or
-recovery. Exactly one full fence permits the normal sentinel and unique monitor,
-or normal archival when a stable response already exists. Zero fences closes as
+recovery. Exactly one verified main-body or attachment-backed identity permits
+the normal sentinel and unique monitor, or normal archival when a stable
+response already exists. Zero main-body fences, no attachment-backed candidate
+turn and no attributable response closes as
 `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; a prefix, duplicate,
-mismatch or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. No additional Assignment,
+mismatch, unreadable attachment or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. No additional Assignment,
 `Retry`, `ResponseRetry`, prefix correction, post-error recheck or `Answer now`
 is authorized. The grant is consumed by the client send, cannot be inherited,
 and costs zero scientific iterations.
 
-The new closed state resumes only if that same exact fence later becomes
-server-visible without another send, or another direct user authorization is
+The new closed state resumes only if that same exact Assignment identity later becomes
+verifiable without another send, or another direct user authorization is
 implemented through a new explicit workflow contract.
 
 That later direct user authorization may activate one
@@ -236,18 +277,24 @@ replacement package.
 
 Immediately before the resend, repeat the exact registered-URL and signed-in
 conversation-search gate. Both observations must agree on zero full fences,
-zero prefix fences and zero corresponding responses, with no live generation,
-sentinel or monitor. An existing exact full fence cancels the resend and is
-adopted. A prefix, duplicate, mismatch, unreadable state or disagreement blocks
-without consuming the grant. Only the agreed zero state may render the unchanged
-Assignment byte-for-byte and perform one client resend; that action consumes the
-grant.
+zero prefix fences, no attachment-backed candidate turn and zero corresponding responses, with no live generation,
+sentinel or monitor. An existing verified main-body or attachment-backed
+identity cancels the resend and is adopted. A prefix, duplicate, mismatch,
+unreadable attachment or history, or disagreement blocks without consuming the
+grant. Only agreed absence of both identity sources may render the unchanged
+Assignment payload byte-for-byte and perform one client resend; that action
+consumes the grant.
 
-After the resend, take one fresh readable snapshot only. Exactly one full fence
-restores normal monitoring or archival. Zero closes as
-`REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED`; a prefix,
-duplicate, mismatch or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. Do not reload,
-reopen, search again, retry, correct, recover or activate `Answer now`.
+After the resend, take one fresh readable snapshot only. Exactly one verified
+main-body or attachment-backed identity restores normal monitoring or archival.
+An attachment container whose contents or provider-native payload metadata
+cannot be verified is `IDENTITY_UNREADABLE` and remains
+`REVIEW_TRANSPORT_BLOCKED`; it is never counted as zero persistence. Only a
+snapshot with no main-body fence, no attachment-backed candidate user turn and
+no attributable response closes as
+`REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED`. A prefix,
+duplicate, mismatch or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. Do not
+reload, reopen, search again, retry, correct, recover or activate `Answer now`.
 
 Return exactly one local terminal operations callback for this resend and no
 pending or cross-task completion relay:
@@ -257,20 +304,24 @@ USER_AUTHORIZED_ASSIGNMENT_RESEND_TERMINAL
 outcome=EXISTING_FENCE_ADOPTED|FENCE_ACCEPTED|UNPERSISTED|BLOCKED
 client_send_consumed=true|false
 server_visible_full_fence_count=0|1|greater_than_1
+main_body_fence_visible=true|false
+attachment_identity=VERIFIED|UNREADABLE|MISMATCH|ABSENT
 assistant_response_visible=true|false
+assistant_generation_started=true|false
+natural_completion_verified=true|false
 sentinel_initialized=true|false
 monitor_initialized=true|false
 ```
 
 The resend grant is not inherited and consumes zero scientific iterations. Its
-closed state resumes only if the same exact fence later becomes server-visible
+closed state resumes only if the same exact Assignment identity later becomes verifiable
 without another send, or another direct user grant is implemented through a new
 explicit workflow contract.
 
 For an ordinary accepted first attempt that is not a
 `USER_AUTHORIZED_ASSIGNMENT_SEND` or `USER_AUTHORIZED_ASSIGNMENT_RESEND`, after the first monitor and sentinel are
 terminal and no generation remains live, the same registered conversation permits one mechanically rendered
-response retry only when the server-visible original fence remains exact and
+response retry only when the verified original Assignment identity remains exact and
 either a stable answer omits question-declared response fields or applicable
 recovery is exhausted without a complete answer. The retry preserves the full
 original Assignment as its prefix, adds `submission_attempt=2` and fixed response

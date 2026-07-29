@@ -142,8 +142,13 @@ foreach ($required in @(
     'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
     'review_fence_correction_question_resubmission=forbidden',
     'review_fence_monitor_concurrency=one_live',
-    'review_assignment_acceptance=server_visible_exact_fence_only',
-    'review_client_send_effect=uncommitted_until_server_visible',
+    'review_assignment_acceptance=server_visible_main_body_or_verified_attachment_identity',
+    'review_assignment_identity_sources=main_body_exact_fence|verified_attachment_payload',
+    'review_assignment_attachment_validator=.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py',
+    'review_assignment_attachment_filename_authority=none',
+    'review_assignment_attachment_unreadable=IDENTITY_UNREADABLE',
+    'review_assignment_observation_fields=client_send_consumed|main_body_fence_visible|attachment_identity_verified|assistant_generation_started|natural_completion_verified',
+    'review_client_send_effect=uncommitted_until_assignment_identity_verified',
     'review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay',
     'review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence',
     'review_unpersisted_assignment_recovery_prior_server_visible_count=zero',
@@ -189,6 +194,13 @@ foreach ($required in @(
     'review_response_retry_scientific_iteration_cost=zero',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $operationsRole.Contains($required)) { throw "Research Operations Manager role missing: $required" }
+}
+foreach ($forbidden in @(
+    'review_assignment_acceptance=server_visible_exact_fence_only',
+    'review_client_send_effect=uncommitted_until_server_visible')) {
+    if ($operationsRole.Contains($forbidden)) {
+        throw "Research Operations Manager retains stale attachment-blind transport: $forbidden"
+    }
 }
 foreach ($required in @(
     'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',

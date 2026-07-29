@@ -64,12 +64,26 @@ foreach ($required in @(
     'recovery consumes zero scientific iterations',
     'submission_attempt=2',
     'supersedes_submission_attempt=1',
-    'server-visible',
+    'Exactly one main-body or attachment-backed identity is verified',
+    'Assignment identity evidence',
+    'MAIN_BODY_IDENTITY_VERIFIED',
+    'ATTACHMENT_IDENTITY_VERIFIED',
+    'IDENTITY_UNREADABLE',
+    'IDENTITY_MISMATCH',
+    'verify_assignment_attachment_identity.py',
+    'client_send_consumed=true|false',
+    'main_body_fence_visible=true|false',
+    'attachment_identity_verified=true|false',
+    'assistant_generation_started=true|false',
+    'natural_completion_verified=true|false',
+    'complete canonical `sentinel_fence_identity`',
+    'The attachment filename, icon, preview, ordinary file size',
+    'never proves natural completion',
     'UNPERSISTED_CLIENT_SEND',
     'one fresh exact-URL reopen',
     'zero complete matching fences',
     'A same-tab reload alone is insufficient',
-    'equal the first rendered Assignment byte-for-byte',
+    'replay payload to equal the first complete payload byte-for-byte',
     'This automatic recovery grants no third Assignment client attempt',
     'REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT',
     'signed-in conversation search',
@@ -115,7 +129,9 @@ foreach ($forbidden in @(
     'reload proves the matching fence absent',
     'reload authorizes submission',
     'Never send a second fence.',
-    'watch --state <absolute-jsonl> --conversation-id')) {
+    'watch --state <absolute-jsonl> --conversation-id',
+    'review_assignment_acceptance=server_visible_exact_fence_only',
+    'review_client_send_effect=uncommitted_until_server_visible')) {
     if ($skillNormalized.Contains($forbidden)) {
         throw "Review Skill permits unsafe stuck-page recovery: $forbidden"
     }
@@ -150,8 +166,13 @@ foreach ($required in @(
     'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
     'review_fence_correction_question_resubmission=forbidden',
     'review_fence_monitor_concurrency=one_live',
-    'review_assignment_acceptance=server_visible_exact_fence_only',
-    'review_client_send_effect=uncommitted_until_server_visible',
+    'review_assignment_acceptance=server_visible_main_body_or_verified_attachment_identity',
+    'review_assignment_identity_sources=main_body_exact_fence|verified_attachment_payload',
+    'review_assignment_attachment_validator=.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py',
+    'review_assignment_attachment_filename_authority=none',
+    'review_assignment_attachment_unreadable=IDENTITY_UNREADABLE',
+    'review_assignment_observation_fields=client_send_consumed|main_body_fence_visible|attachment_identity_verified|assistant_generation_started|natural_completion_verified',
+    'review_client_send_effect=uncommitted_until_assignment_identity_verified',
     'review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay',
     'review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence',
     'review_unpersisted_assignment_recovery_prior_server_visible_count=zero',
@@ -206,12 +227,15 @@ if ($skill -match '(?i)\bcontroller\b|hmasd-dispatch-task|hmasd-experiment-monit
 }
 foreach ($required in @(
     'hmasd-pro-response-monitor',
+    'main body or its same-turn Pasted_text attachment',
+    'IDENTITY_UNREADABLE rather than send failure',
+    'Record client-send, main-body identity, attachment identity, generation-started and natural-completion facts independently',
     'exact 40-character stage commit',
     'strict stage-commit prefix',
     'UNPERSISTED_CLIENT_SEND',
-    'one byte-exact Assignment replay',
+    'one byte-exact complete-payload Assignment replay',
     'without resubmitting the scientific question',
-    'one ResponseRetry',
+    'One ResponseRetry',
     'uncertain persistence is ineligible',
     'there is no third submission',
     'Never activate Answer now',
@@ -226,6 +250,10 @@ foreach ($required in @(
 $renderer = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/render_review_fence.ps1'
 if (-not (Test-Path -LiteralPath $renderer -PathType Leaf)) {
     throw 'Deterministic review-fence renderer is missing'
+}
+$attachmentValidator = Join-Path $repo '.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py'
+if (-not (Test-Path -LiteralPath $attachmentValidator -PathType Leaf)) {
+    throw 'Deterministic attachment-assignment identity validator is missing'
 }
 $round = '20260727_continuous_roster_native_six_g31_db_norm_schedule_attribution_g43_formal_result_review'
 $fullCommit = '13ac7eb0eb1adac63a83e55754f7e516d2f40c5b'

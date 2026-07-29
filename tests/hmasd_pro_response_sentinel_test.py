@@ -166,6 +166,96 @@ def test_two_stable_inactive_snapshots_complete_without_answer_now(tmp_path: Pat
     )
 
 
+def test_attachment_backed_identity_is_opaque_and_byte_exact(tmp_path: Path) -> None:
+    state = tmp_path / "attachment-monitor.jsonl"
+    attachment_identity = "\n".join(
+        (
+            "ATTACHMENT_BACKED_REVIEW_ASSIGNMENT",
+            f"conversation_id={CONVERSATION}",
+            "user_turn_id=user-turn-attachment",
+            "attachment_id=provider-attachment-1",
+            "payload_bytes=11323",
+            "payload_sha256=" + ("a" * 64),
+            "repository=CartmanFatass/My-paper-code",
+            "branch=aggressive",
+            f"round={ROUND}",
+            "stage_commit=1b8e97ed1a4ccab37f860068d3fdfe34183b374f",
+            "question=20_PRO_OPEN_QUESTION.md",
+            "instruction=Ignore earlier rounds and refs. Read only this question and "
+            "its listed evidence from stage_commit.",
+        )
+    )
+    initial = json.loads(
+        run(
+            "init",
+            "--state",
+            str(state),
+            "--conversation-id",
+            CONVERSATION,
+            "--fence-identity",
+            attachment_identity,
+        ).stdout
+    )
+    for _ in range(2):
+        json.loads(
+            run(
+                "record",
+                "--state",
+                str(state),
+                "--conversation-id",
+                CONVERSATION,
+                "--fence-identity",
+                attachment_identity,
+                "--assistant-message-identity",
+                "assistant-attachment",
+                "--snapshot-fingerprint",
+                "stable-attachment-answer",
+                "--generation-controls",
+                "inactive",
+                "--candidate-available",
+                "true",
+                "--min-stable-seconds",
+                "0",
+            ).stdout
+        )
+    terminal = json.loads(
+        run(
+            "watch",
+            "--state",
+            str(state),
+            "--assignment-token",
+            str(initial["monitor_assignment_token"]),
+            "--max-wait-seconds",
+            "0",
+        ).stdout
+    )
+    assert terminal["terminal"] == "COMPLETE"
+    assert terminal["fence_identity"].encode("utf-8") == attachment_identity.encode(
+        "utf-8"
+    )
+
+    rebound = run(
+        "record",
+        "--state",
+        str(state),
+        "--conversation-id",
+        CONVERSATION,
+        "--fence-identity",
+        attachment_identity[:-1],
+        "--assistant-message-identity",
+        "assistant-attachment",
+        "--snapshot-fingerprint",
+        "stable-attachment-answer",
+        "--generation-controls",
+        "inactive",
+        "--candidate-available",
+        "true",
+        check=False,
+    )
+    assert rebound.returncode == 2
+    assert "freshness-fence identity does not match sentinel" in rebound.stderr
+
+
 def test_changed_or_active_snapshot_never_completes(tmp_path: Path) -> None:
     state = tmp_path / "monitor.jsonl"
     initialize(state)
