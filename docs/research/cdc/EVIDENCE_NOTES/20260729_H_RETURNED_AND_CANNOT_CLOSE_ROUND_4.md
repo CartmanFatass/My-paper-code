@@ -111,6 +111,32 @@ The natural choke points already exist and are single: `assert_partial_injection
 for the check count, and `step_once`'s `rejoin_uavs` for the event count -- the
 same key obligation B's power guard now reads.
 
+**CLOSED at `e6e585a9` as `roll_power`, and its first measurement is a signal
+about H.** A `--smoke` run on the development topology under `--workers 4`:
+
+```text
+calibration   rejoin_events 0   leave_events 1   injectivity_checks 1678   steps_rolled 829
+audit         rejoin_events 0   leave_events 1   injectivity_checks 1828   steps_rolled 904
+```
+
+The check counts are nonzero across the worker boundary, which is the plumbing
+working. The interesting number is **`rejoin_events` = 0 over ~900 rolled
+steps**, consistent with the ~900 charging onset measured for obligation B: a
+roll of this length can complete with the defective branch never entered.
+
+**This does NOT rehabilitate H.** It is a smoke, with reduced episode counts, on
+development topology 20260725 rather than the R4 population, and H's charging
+count of 49 says charging DID occur there. What it changes is the prior: "the
+REJOIN branch never fired in H" is now a live possibility rather than a
+hand-wave, and it is no longer answerable by argument in either direction.
+
+That is precisely the point of the instrument. The re-run will record
+`rejoin_events` per topology block, and the question that forced this note to
+argue from the commit graph becomes a field in the artifact. If the re-run
+reports zero rejoins across the population, that is also the evidence that would
+have retrospectively cleared H -- but it has to be measured on the R4
+configuration, not inferred from a smoke.
+
 **The trap in implementing it.** `run_topology_audit` takes `workers` and the
 episode work runs under `ProcessPoolExecutor`. A module-level counter incremented
 inside `assert_partial_injection` lives in the WORKER process and is discarded
