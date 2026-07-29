@@ -2370,9 +2370,34 @@ class SourceAssignmentInvariantError(AssertionError):
         self.reason = reason
 
 
+_INJECTIVITY_CHECK_COUNT = 0
+
+
+def injectivity_check_count() -> int:
+    """How many partial-injection checks this PROCESS has performed.
+
+    Process-local on purpose, and that is the whole subtlety. Episode work runs
+    under `ProcessPoolExecutor` when `--workers` > 1, so this counter lives in
+    the worker and dies with it. Read it where the work happens -- inside
+    `roll_prefix_and_find_event` -- and let the delta ride home in the episode's
+    return payload, exactly as the leave diagnostics already do. A parent-side
+    read would report zero checks on a run that performed thousands, which is
+    indistinguishable in the artifact from a guard that never ran.
+    """
+
+    return _INJECTIVITY_CHECK_COUNT
+
+
+def reset_injectivity_check_count() -> None:
+    global _INJECTIVITY_CHECK_COUNT
+    _INJECTIVITY_CHECK_COUNT = 0
+
+
 def assert_partial_injection(duty_map: dict, *, reason: str = "DUPLICATE_HOLDER") -> dict:
     """Refuse any duty map that is not a partial injection. Returns the map
     unchanged when valid, so it can be used inline without hiding the check."""
+    global _INJECTIVITY_CHECK_COUNT
+    _INJECTIVITY_CHECK_COUNT += 1
     holders = list(duty_map.values())
     if len(holders) != len(set(holders)):
         seen, doubled = set(), set()
@@ -2847,6 +2872,9 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
     dock_onset_battery: dict[int, float] = {}
     leave_diagnostics: list = []
     rejected_counts = {k: 0 for k in REJECTION_REASON_KEYS}
+    rejoin_events = 0
+    leave_events = 0
+    injectivity_checks_before = injectivity_check_count()
 
     for t in range(int(max_step) + 1):
         battery_before = np.asarray(env.uav_battery_ratios, dtype=float).copy()
@@ -2877,6 +2905,12 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
             dock_onset_step[int(uu)] = t + 1
             dock_onset_battery[int(uu)] = float(battery_after_step[uu])
         dock_request_prev = dock_request_after
+
+        # The REJOIN branch is where the source-assignment defect lived, and
+        # step H could not say whether it ever fired because nothing recorded
+        # rejoins. Counted here, at the same boundary the leaves are.
+        rejoin_events += len(step["rejoin_uavs"])
+        leave_events += len(step["leave_uavs"])
 
         for u in step["leave_uavs"]:
             cand = build_leave_candidate(
@@ -2996,6 +3030,13 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
                 return {
                     "event": event, "exclusions": exclusions, "recorded_actions": recorded_actions,
                     "leave_diagnostics": leave_diagnostics, "rejected_counts": rejected_counts,
+                    "roll_power": {
+                        "rejoin_events": int(rejoin_events),
+                        "leave_events": int(leave_events),
+                        "injectivity_checks": int(
+                            injectivity_check_count() - injectivity_checks_before),
+                        "steps_rolled": int(t + 1),
+                    },
                 }
             reject_reasons = map_rejection_reasons(
                 eligibility_reasons=[], stable_ok=stable_ok, stable_reasons=stable_reasons_all,
@@ -3011,6 +3052,13 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
     return {
         "event": None, "exclusions": exclusions, "recorded_actions": recorded_actions,
         "leave_diagnostics": leave_diagnostics, "rejected_counts": rejected_counts,
+        "roll_power": {
+            "rejoin_events": int(rejoin_events),
+            "leave_events": int(leave_events),
+            "injectivity_checks": int(
+                injectivity_check_count() - injectivity_checks_before),
+            "steps_rolled": int(max_step),
+        },
     }
 
 
@@ -3874,6 +3922,7 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     episode_leave_report = {
         "leave_diagnostics": prefix.get("leave_diagnostics", []),
         "rejected_counts": prefix.get("rejected_counts", {}),
+        "roll_power": prefix.get("roll_power", {}),
     }
     if prefix["event"] is None:
         return {"support_miss": True, "invalidated": False, "exclusions": prefix["exclusions"],
@@ -4235,6 +4284,7 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
     prefix = roll_prefix_and_find_event(env)
     raw["leave_diagnostics"] = prefix.get("leave_diagnostics", [])
     raw["rejected_counts"] = prefix.get("rejected_counts", {})
+    raw["roll_power"] = prefix.get("roll_power", {})
     raw["event_found"] = prefix["event"] is not None
     if prefix["event"] is None:
         raw["exclusions"] = prefix["exclusions"]
@@ -4290,7 +4340,8 @@ def _process_calibration_result(result: dict, *, idx: int, ep_seed: int, topolog
     episode_leave_report = result.get("episode_report", {})
     _accumulate_episode_leave_stats(
         calibration_report, leave_diagnostics=episode_leave_report.get("leave_diagnostics", []),
-        rejected_counts=episode_leave_report.get("rejected_counts", {}))
+        rejected_counts=episode_leave_report.get("rejected_counts", {}),
+        roll_power=episode_leave_report.get("roll_power", {}))
     if result.get("support_miss"):
         calibration_report["exclusions"].append(result.get("exclusions", []))
         print(f"[progress] topology_seed={topology_seed} calibration episode={idx} "
@@ -4336,7 +4387,8 @@ def _process_audit_result(raw: dict, *, idx: int, topology_seed: int, audit_repo
     episode_worlds.append(raw["world_entry"])
     _accumulate_episode_leave_stats(
         audit_report, leave_diagnostics=raw.get("leave_diagnostics", []),
-        rejected_counts=raw.get("rejected_counts", {}))
+        rejected_counts=raw.get("rejected_counts", {}),
+        roll_power=raw.get("roll_power", {}))
     if not raw["event_found"]:
         audit_report["exclusions"].append(raw["exclusions"])
         print(f"[progress] topology_seed={topology_seed} audit episode={idx} "
@@ -4403,11 +4455,17 @@ def _new_episode_block_report() -> dict:
         "exclusions": [], "planned_leaves_observed": 0, "leaves_before_deadline": 0,
         "rejected_counts": {k: 0 for k in REJECTION_REASON_KEYS},
         "leaves": [],
+        # Whether the source-assignment mechanism could fire at all in this
+        # run, recorded so the artifact can answer that about itself. Step H
+        # could not, and its disposition had to rest on the commit graph.
+        "roll_power": {"rejoin_events": 0, "leave_events": 0,
+                       "injectivity_checks": 0, "steps_rolled": 0},
     }
 
 
 def _accumulate_episode_leave_stats(report: dict, *, leave_diagnostics: list,
-                                     rejected_counts: dict) -> None:
+                                     rejected_counts: dict,
+                                     roll_power: dict | None = None) -> None:
     """Rolls one episode's `roll_prefix_and_find_event` diagnostics (every
     observed LEAVE, regardless of eligibility, plus its already-computed
     rejection reasons) into the topology-level report -- called for EVERY
@@ -4420,6 +4478,8 @@ def _accumulate_episode_leave_stats(report: dict, *, leave_diagnostics: list,
     for k, v in rejected_counts.items():
         report["rejected_counts"][k] = report["rejected_counts"].get(k, 0) + v
     report["leaves"].extend(leave_diagnostics)
+    for k, v in (roll_power or {}).items():
+        report["roll_power"][k] = report["roll_power"].get(k, 0) + int(v)
 
 
 def run_topology_audit(config, *, topology_seed: int, n_calibration: int, n_audit: int,
