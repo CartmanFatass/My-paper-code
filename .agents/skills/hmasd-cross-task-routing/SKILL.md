@@ -51,6 +51,46 @@ Route settings are tool parameters only. Message payloads must not contain
 model/effort copies, return model/effort copies, or another field reusable as a
 reverse-route setting.
 
+## Long-text file handoff
+
+Do not embed a UTF-8 payload larger than 8 KiB in a cross-task message. Also use
+this path for a smaller payload when exact bytes must survive message rendering,
+attachment conversion, task summaries or output truncation. Short ordinary
+messages remain direct and incur no file-handling step.
+
+The sender writes the complete payload beneath `temp/handoffs/` with the
+mechanical helper:
+
+```powershell
+& '<hmasd_python_interpreter>' `
+  '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' write `
+  --label <purpose> --source <source-file>
+```
+
+Omit `--source` only when piping the exact payload bytes on standard input. The
+helper accepts valid UTF-8, creates a non-overwriting timestamped file, and
+returns `handoff_path`, `handoff_bytes`, `handoff_sha256` and
+`handoff_encoding=utf-8`. Actual payloads are local-only and Git-ignored.
+
+The cross-task message contains no payload body. It carries exactly the returned
+identity plus `handoff_purpose`. That relative path becomes an assignment-named
+read within the receiver's existing authority; it grants no search of `temp/`
+or any other project state. Before reading, the receiver verifies the identity:
+
+```powershell
+& '<hmasd_python_interpreter>' `
+  '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' verify `
+  --path <handoff_path> --bytes <handoff_bytes> --sha256 <handoff_sha256>
+```
+
+Only `LONG_TEXT_HANDOFF_VERIFIED` permits consumption. A missing, truncated,
+non-UTF-8, out-of-root or digest-mismatched file fails closed as
+`LONG_TEXT_HANDOFF_INVALID`; it does not authorize reconstructing the payload
+from task history or resending an embedded copy. After use, the receiver returns
+`HANDOFF_CONSUMED path=<handoff_path> sha256=<handoff_sha256>`. Neither role
+deletes a payload automatically; cleanup is a separate explicit action after
+acknowledgement.
+
 The project `PreToolUse` guard matches
 `codex_app__send_message_to_thread`. For a fixed persistent-role target it reads
 the same live settings again immediately at tool execution and returns one

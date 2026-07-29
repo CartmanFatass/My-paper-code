@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sqlite3
 import subprocess
 import sys
@@ -17,6 +18,9 @@ PROBE = (
 )
 GUARD = (
     ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_route_guard.py"
+)
+PAYLOAD = (
+    ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py"
 )
 HOOKS = ROOT / ".codex/hooks.json"
 WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
@@ -59,6 +63,13 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "live_target_effort",
         "live_target_thinking",
         "never retry or resend automatically",
+        "Long-text file handoff",
+        "larger than 8 KiB",
+        "temp/handoffs/",
+        "LONG_TEXT_HANDOFF_VERIFIED",
+        "LONG_TEXT_HANDOFF_INVALID",
+        "HANDOFF_CONSUMED",
+        "Neither role deletes a payload automatically",
     )
     for token in required:
         assert token in text, token
@@ -72,6 +83,96 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "pre_send_read_only_probe_explicit_echo",
     ):
         assert retired not in text, retired
+
+
+def _payload_command(repo: Path, *args: str, stdin: bytes | None = None):
+    return subprocess.run(
+        (sys.executable, str(PAYLOAD), "--repo", str(repo), *args),
+        input=stdin,
+        check=False,
+        capture_output=True,
+    )
+
+
+def _handoff_repo(tmp_path: Path) -> Path:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    (repo / ".git").mkdir()
+    (repo / "AGENTS.md").write_text("document_kind=role_router\n", encoding="utf-8")
+    return repo
+
+
+def test_long_text_handoff_preserves_exact_utf8_and_identity(tmp_path: Path) -> None:
+    repo = _handoff_repo(tmp_path)
+    payload = ("G46 候选计划\r\n" + "exact-byte-line\n" * 700).encode("utf-8")
+    source = tmp_path / "candidate.txt"
+    source.write_bytes(payload)
+
+    written = _payload_command(repo, "write", "--label", "g46-candidate", "--source", str(source))
+    assert written.returncode == 0, written.stderr.decode()
+    metadata = json.loads(written.stdout)
+    assert metadata["status"] == "LONG_TEXT_HANDOFF_WRITTEN"
+    assert metadata["handoff_bytes"] == len(payload)
+    assert metadata["handoff_sha256"] == hashlib.sha256(payload).hexdigest()
+    assert metadata["handoff_encoding"] == "utf-8"
+    target = repo / metadata["handoff_path"]
+    assert target.read_bytes() == payload
+
+    verified = _payload_command(
+        repo,
+        "verify",
+        "--path",
+        metadata["handoff_path"],
+        "--bytes",
+        str(metadata["handoff_bytes"]),
+        "--sha256",
+        metadata["handoff_sha256"],
+    )
+    assert verified.returncode == 0, verified.stderr.decode()
+    assert json.loads(verified.stdout)["status"] == "LONG_TEXT_HANDOFF_VERIFIED"
+
+
+def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
+    tmp_path: Path,
+) -> None:
+    repo = _handoff_repo(tmp_path)
+    written = _payload_command(repo, "write", "--label", "tamper", stdin=b"complete payload")
+    metadata = json.loads(written.stdout)
+    target = repo / metadata["handoff_path"]
+    target.write_bytes(target.read_bytes()[:-1])
+
+    for args in (
+        (
+            "verify",
+            "--path",
+            metadata["handoff_path"],
+            "--bytes",
+            str(metadata["handoff_bytes"]),
+            "--sha256",
+            metadata["handoff_sha256"],
+        ),
+        (
+            "verify",
+            "--path",
+            "AGENTS.md",
+            "--bytes",
+            "26",
+            "--sha256",
+            hashlib.sha256(b"document_kind=role_router\n").hexdigest(),
+        ),
+    ):
+        rejected = _payload_command(repo, *args)
+        assert rejected.returncode != 0
+        assert json.loads(rejected.stdout)["status"] == "LONG_TEXT_HANDOFF_INVALID"
+
+
+def test_temp_handoff_payloads_are_git_ignored_but_contract_is_tracked() -> None:
+    ignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert "/temp/*" in ignore
+    assert "!/temp/README.md" in ignore
+    contract = (ROOT / "temp/README.md").read_text(encoding="utf-8")
+    assert "temp/handoffs/" in contract
+    assert "Payloads are never deleted automatically" in contract
 
 
 def test_cross_task_routing_skill_is_explicit_only() -> None:

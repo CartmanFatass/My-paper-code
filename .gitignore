@@ -139,6 +139,10 @@ debug/
 #test/
 temp_collection_log/
 
+# Cross-task long-text handoffs are local-only. Keep only the directory contract.
+/temp/*
+!/temp/README.md
+
 # Keep the isolated remote log sync utility trackable under dist.
 !dist/
 dist/*
