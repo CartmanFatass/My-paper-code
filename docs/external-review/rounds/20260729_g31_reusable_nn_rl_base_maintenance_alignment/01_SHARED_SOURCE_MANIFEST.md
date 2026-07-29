@@ -1,0 +1,17 @@
+# Shared Source Manifest
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+audit_target_commit=ebf2db1d05645c66055e259f8927ecfacddc0f2f
+assignment_id=USER_AUTHORIZED_REUSABLE_NN_RL_BASE_OPTIMIZATION
+review_type=MAINTENANCE_ALIGNMENT_ADJUDICATION
+compute_budget=zero
+scientific_iteration_cost=zero
+
+allow_list=
+hmasd/networks.py
+tests/hmasd_network_foundation_test.py
+hmasd/ha_ctse.py (read-only exact initialize_weights call-site excerpts only)
+
+forbidden=algorithm_redesign|new_model|new_loss|new_reward|new_optimizer|runtime_experiment|formal_compute|nonformal_compute|portfolio_interpretation|iteration_advancement
+required_response_tokens=MAINTENANCE_ALIGNMENT_DISPOSITION=ALIGNED_INITIALIZATION_CONTRACT_CORRECTION|MAINTENANCE_ALIGNMENT_DISPOSITION=RESTRICT_TO_PRIOR_EFFECTIVE_INITIALIZATION
