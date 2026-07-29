@@ -100,3 +100,30 @@ Manager's to answer. It goes to Pro as the third touchpoint.
 Artifact at `logs/d7s_r4_30403322062/pooled/d7_s_event_aligned.json`; the eight
 shard artifacts beside it under `shards/`. Numbers above are transcribed here
 because `logs/` is untracked and `git add -f` is forbidden.
+
+## Independent re-derivation of the Part-A numbers
+
+The reviews of this instrument all stubbed the environment, so before this run
+nothing had checked its numerics against real data. Closed here, by an
+implementation reading only the artifact and sharing no code with the audit
+module.
+
+```text
+point estimate       0.4839380477047651   reproduces BIT FOR BIT, diff 0.0e+00
+naive unit-pooled    0.550812             differs -- so topology weighting is
+                                          genuinely applied, not merely claimed
+my bootstrap, 3 seeds  LCB95  -0.6382 / -0.6734 / -0.6452
+                       UCB95  +1.7020 / +1.6563 / +1.6574
+reported (inverted)    LCB95  -0.6810     UCB95  +1.6860
+```
+
+The bit-exact point estimate is the sharper of the two checks because it is
+deterministic. The naive unit-pooled mean is what the code would have produced
+had it pooled events instead of weighting topologies; it differs, so this is a
+discriminating check rather than a tautology.
+
+Interval differences are Monte-Carlo noise at `BOOTSTRAP_ITERS = 10000`. The
+equivalence holds under every re-derivation, a factor of ~3 inside the margin.
+
+`D_A` 95% interval, inverted from the registered contrasts: **[-0.681, +1.686]**,
+point **+0.484**, against a margin of **+/-5**.

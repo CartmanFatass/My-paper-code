@@ -160,8 +160,23 @@ frozen four-state vocabulary, carried only where no resolver ran.
 
 - **Verified by me against source**: the sentinel conditions, the identity
   routing, the branch precedence, and the per-shard provenance above.
-- **Verified only by passing tests**: the bootstrap numerics. I did not
-  re-derive `part_a` bounds by an independent implementation.
+- **Re-derived independently from the artifact**, after the run, by an
+  implementation sharing no code with the audit module:
+
+  ```text
+  point estimate   0.4839380477047651   reproduces BIT FOR BIT (diff 0.0e+00)
+  naive unit-pooled mean 0.550812       -- differs, so the topology weighting
+                                           is genuinely applied, not assumed
+  my hierarchical bootstrap, 3 seeds    LCB95 -0.638 / -0.673 / -0.645
+                                        UCB95 +1.702 / +1.656 / +1.657
+  reported (inverted from contrasts)    LCB95 -0.681   UCB95 +1.686
+  ```
+
+  Differences are Monte-Carlo noise at `BOOTSTRAP_ITERS = 10000`. The
+  equivalence conclusion is robust: every re-derivation puts the interval a
+  factor of ~3 inside the +/-5 margin. This paragraph previously said the
+  bootstrap numerics were verified only by passing tests; that is no longer
+  true and the correction is recorded rather than the claim edited away.
 - **Not verified by anyone**: what a real episode emits. Every adversarial review
   of this instrument stubbed the environment, so the reviews speak to identity,
   routing, gating and assembly — not to `run_topology_audit`'s numerics. **This
