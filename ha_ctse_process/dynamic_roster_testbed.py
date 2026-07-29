@@ -213,8 +213,67 @@ class EpisodeOutcome:
     observation_shapes_valid: bool
 
 
+def _copied_boundary_snapshot(snapshot: BoundarySnapshot) -> BoundarySnapshot:
+    """Rebuild a snapshot with independent arrays and nothing else copied."""
+
+    return BoundarySnapshot(
+        physical_time=snapshot.physical_time,
+        members=tuple(
+            BoundaryMember(
+                lifecycle_key=member.lifecycle_key,
+                membership_epoch=member.membership_epoch,
+                observation=member.observation.copy(),
+                critic_member_features=member.critic_member_features.copy(),
+            )
+            for member in snapshot.members
+        ),
+        critic_global_features=snapshot.critic_global_features.copy(),
+        frontier=snapshot.frontier,
+    )
+
+
+def _copied_transaction(
+    transaction: MembershipTransaction,
+) -> MembershipTransaction:
+    """The same independence ``deepcopy`` gave, without its bookkeeping.
+
+    ``event_transaction`` handed the caller a ``copy.deepcopy`` on every step,
+    and it was the single most expensive thing the environment did: ~118 calls
+    per step, with the generic machinery -- the memo dict, ``_keep_alive``,
+    ``id()`` -- costing roughly twenty times the array copying it existed to
+    perform.
+
+    Only the float arrays are mutable. ``BoundaryMember``, ``BoundarySnapshot``
+    and ``MembershipTransaction`` are frozen dataclasses, and every
+    ``MembershipDelta`` is frozen and holds no array, so the delta tuple is
+    shared rather than rebuilt. The caller still receives arrays no one else
+    holds a reference to, which is the whole guarantee ``deepcopy`` was making.
+
+    The plain constructors are used on purpose: the ``make`` classmethods
+    re-validate and re-copy, and this input was already validated when the
+    environment built it.
+    """
+
+    return MembershipTransaction(
+        pre_membership_boundary_snapshot=_copied_boundary_snapshot(
+            transaction.pre_membership_boundary_snapshot
+        ),
+        atomic_membership_delta=transaction.atomic_membership_delta,
+        post_membership_pre_policy_snapshot=_copied_boundary_snapshot(
+            transaction.post_membership_pre_policy_snapshot
+        ),
+    )
+
+
 class GenericShortDynamicRosterEnv:
     """One exact 80-step dynamic-roster environment episode."""
+
+    # Class-level on purpose, NOT set in __init__. OpenRosterDynamicEnv and
+    # OpenRosterHighChurnEnv inherit active_keys but define their own __init__
+    # without calling this one, so an instance attribute would not exist by the
+    # time they first observe. Initialising it here means the cache arrives with
+    # the property that reads it, for every subclass, present and future.
+    _active_keys_cache: tuple[tuple[int, tuple[Any, ...]], tuple[int, ...]] | None = None
 
     def __init__(self, ledger: DynamicRosterLedger):
         ledger.validate()
@@ -239,15 +298,35 @@ class GenericShortDynamicRosterEnv:
 
     @property
     def active_keys(self) -> tuple[int, ...]:
+        # Read ~27 times per step -- once per member per observation, and every
+        # call rebuilt the list and re-sorted it through a float() lambda.
+        #
+        # The result depends on exactly two things: the physical time and the
+        # six lifecycle statuses. DynamicRosterLedger is a frozen dataclass, so
+        # presentation_priorities cannot move underneath the cache. Keying on
+        # that whole dependency set means the cache cannot go stale by
+        # construction: there is no invalidate() call to forget at any of the
+        # five status-mutation sites, and from_snapshot_state rebinding
+        # lifecycles or time simply misses and recomputes.
+        signature = (
+            self.time,
+            tuple(state.status for state in self.lifecycles.values()),
+        )
+        cached = self._active_keys_cache
+        if cached is not None and cached[0] == signature:
+            return cached[1]
         active = [
             key
             for key, state in self.lifecycles.items()
             if state.status == ACTIVE
         ]
         if self.time >= HORIZON:
-            return tuple(sorted(active))
-        priorities = self.ledger.presentation_priorities[self.time]
-        return tuple(sorted(active, key=lambda key: float(priorities[key])))
+            result = tuple(sorted(active))
+        else:
+            priorities = self.ledger.presentation_priorities[self.time]
+            result = tuple(sorted(active, key=lambda key: float(priorities[key])))
+        self._active_keys_cache = (signature, result)
+        return result
 
     def preferred_owner(self, keys: tuple[int, ...] | None = None) -> int:
         candidates = tuple(self.active_keys if keys is None else keys)
@@ -373,16 +452,24 @@ class GenericShortDynamicRosterEnv:
         )
 
     def _event_snapshot(self, *, frontier: tuple[int, ...] = ()) -> BoundarySnapshot:
+        # One observation per member, not two. The actor and critic rows were
+        # built by two separate calls with identical inputs, so the second was
+        # always a byte-for-byte repeat of the first. They stay two independent
+        # arrays: BoundaryMember.make sends each through _float_array, which
+        # ends in array.copy(), so passing one source twice yields exactly the
+        # two arrays this built before.
         members = tuple(
             BoundaryMember.make(
                 str(key),
                 self.lifecycles[key].membership_epoch,
-                self._observation_for(key),
-                self._observation_for(key),
+                observation,
+                observation,
                 obs_dim=OBSERVATION_DIM,
                 critic_member_dim=OBSERVATION_DIM,
             )
-            for key in self.active_keys
+            for key, observation in (
+                (key, self._observation_for(key)) for key in self.active_keys
+            )
         )
         return BoundarySnapshot.make(
             self.time,
@@ -442,7 +529,7 @@ class GenericShortDynamicRosterEnv:
         self._prepare()
         if self._pending_event_transaction is None:
             raise RuntimeError("event boundary was not prepared")
-        return deepcopy(self._pending_event_transaction)
+        return _copied_transaction(self._pending_event_transaction)
 
     def _observation_for(self, key: int) -> np.ndarray:
         state = self.lifecycles[key]
