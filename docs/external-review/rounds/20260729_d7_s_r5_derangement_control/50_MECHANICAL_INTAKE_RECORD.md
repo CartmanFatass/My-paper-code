@@ -9,8 +9,96 @@ branch        untied-k
 reviewer      open_divergent (registered), conversation 6a63979e-35d8-83e8-8da7-10de59a5fdeb
 preflight     ROUND_PREFLIGHT_READY, allow_list_count=7, archive REVIEW_EVIDENCE_ARCHIVE_READY
 fence_sent    YES (once)
-status        REVIEW_PENDING
+status        REVIEW_ANSWERED_BUT_UNCAPTURED
 ```
+
+## The ruling arrived and is NOT archived
+
+Pro's answer to this round completed on the page: 20745 characters, stop control
+gone, subject matter matching this round, anchored to a user turn carrying
+`72a41fab`. Read directly through `javascript_tool`, since the monitor's three
+tools were timing out.
+
+Observed, and recorded here only as transport state -- **this is not a
+reconciliation and must not be treated as one**:
+
+```text
+header   "Scientific ruling -- D7.S R5 derangement control"
+         "Stage reviewed: 72a41fab3146c10caf4b802ff7635042de4ed056"
+verdict  MODIFY BEFORE FREEZE
+tail     "...the proof-sized feasibility and exposure exercise above, after the
+          derivation is amended. It is not a conclusion-bearing source run.
+          D7.3 and D8 remain blocked. This review authorizes neither
+          implementation nor compute."
+```
+
+**Everything between the header and the tail is unread.** No amendment, no
+answer to 4a/4b/4c, and no reasoning has been captured. `21_PRO_OPEN_RAW.md`
+does not exist for this round and no reconciliation may be written until it does.
+
+## Why the capture failed -- and a correction to what this file said earlier
+
+This file previously diagnosed the read failures as a wedged renderer with
+accumulated state, citing the Skill's documented 2026-07-25 case. **That
+diagnosis was wrong, and the correction is recorded rather than the claim
+edited away.**
+
+The actual cause is `document.visibilityState === "hidden"`. The tab was
+backgrounded. That single fact explains every symptom seen:
+
+- `screenshot` and `find` time out, because a hidden tab is render-throttled and
+  never reaches `document_idle`;
+- `javascript_tool` keeps working, because script evaluation is not throttled the
+  same way -- which is why the page looked half-alive;
+- `Copy response` silently does nothing, because `navigator.clipboard.writeText`
+  refuses on a hidden document.
+
+The click itself was never the problem. A temporary capturing click listener
+proved the OS-level click landed on page coordinates `(712, 763)` with
+`aria-label="Copy response"` -- the exact intended button. The copy failed after
+a correct click, not because of a missed one.
+
+**The coordinate mapping, since it cost two failed attempts.** `javascript_tool`
+rect coordinates are page pixels; `computer` click coordinates are screenshot
+pixels. Here `innerWidth=1912` against a 1568-wide screenshot, so the factor is
+`1568/1912 = 0.820`. A JS rect at `(712, 763)` is a click at `(584, 626)`. Do not
+pass a JS rect straight to `computer`.
+
+**The lesson that generalizes:** check `document.visibilityState` before
+diagnosing a page as wedged. It is one JS call, it is unambiguous, and "hidden"
+and "wedged" have completely different remedies -- activate the tab versus
+replace it.
+
+## Then the browser went down again
+
+Attempting the Skill's bounded replacement -- close the tab, create one, navigate
+-- returned "The browser is shutting down." Immediately after:
+
+```text
+list_connected_browsers   []
+Get-Process msedge,chrome none
+```
+
+Same terminal failure as the previous round, from a different starting state.
+Stopped there; re-probing is the documented rabbit hole.
+
+**Nothing is lost and nothing is at risk.** The answer is complete server-side.
+The fence is sent exactly once, so a resuming pass must NOT submit anything --
+it must find the existing `72a41fab` fence, confirm exactly one, and capture the
+answer that follows it.
+
+## Exact resume condition
+
+1. A browser with the Claude extension connected and signed in.
+2. Open the registered conversation and confirm the tab is **visible** --
+   `document.visibilityState === "visible"` -- before attempting any capture.
+3. Confirm exactly one user turn carries `72a41fab3146c10caf4b802ff7635042de4ed056`.
+   **Do not send a fence.** This round is already delivered.
+4. Capture the assistant turn that follows it via its own `Copy response`
+   control, selecting the `copy-turn-action-button` that follows the last
+   assistant node in document order. Verify against a clipboard sentinel and
+   assert the commit string is present in the copied text before writing.
+5. Write `21_PRO_OPEN_RAW.md`, reread for byte equality, then reconcile.
 
 Touchpoint 1 of round 5. Fence absence proved before sending: the page carried
 neither `72a41fab` nor the round id, and the two visible fences named
