@@ -34,6 +34,30 @@ Suite: `tests/d7_s_source_assignment_conformance_test.py`.
 | N7 | a removed final injection assertion | **FAIL** | PASS |
 | N8 | silently dropping one duplicate and continuing | **FAIL** | PASS |
 
+## The repository is now RED BY DESIGN — exact expected state
+
+Running the audit suite and this suite together:
+
+```text
+tests/audit_d7_s_event_aligned_test.py
+tests/d7_s_source_assignment_conformance_test.py
+
+6 failed, 269 passed, 5 xfailed        (~8m10s)
+```
+
+**All six failures are the conformance cases named below and nothing else.** The
+audit suite's 269 all pass; the 5 xfails are this suite's 4 provenance cases plus
+the pre-existing `test_rejoin_never_gives_one_uav_a_second_duty` strict xfail.
+
+Recorded exactly so a later run can be diffed against it. A seventh failure, or a
+failure outside this file, is a **regression** and not part of the plan.
+
+**No CI gate is broken.** The only workflow is `.github/workflows/d7s-audit.yml`
+and it does not invoke pytest. The redness is local and intentional.
+
+> **Do not "fix" the red by deselecting these cases.** They are the record that
+> the defect exists. The only sanctioned way to green is the repair.
+
 ## What each failure actually says
 
 **P2** — the defect itself, at the pure function: `{0: 2}` + REJOIN(2) yields
