@@ -76,7 +76,7 @@ visible or the page title looks familiar.
 | `USER_AUTHORIZED_ASSIGNMENT_SEND` | Direct user authorization names one send after `REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`; the existing package and registered conversation identity remain exact; the grant has not been consumed | Immediately before sending, require the exact registered URL and signed-in search to agree that both identity sources and any corresponding response are absent. Send the unchanged complete payload once only if both prove absence. | One post-send snapshot verifies exactly one main-body or attachment-backed identity and restores monitoring or archival; true absence closes as `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; unreadable or mismatched identity is `REVIEW_TRANSPORT_BLOCKED`. |
 | `USER_AUTHORIZED_ASSIGNMENT_RESEND` | A new direct user authorization names one resend after `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; the prior grant is consumed; the same package and registered conversation remain exact; the resend grant is unused | Immediately before resending, require the exact registered URL and signed-in search to agree that both identity sources and any corresponding response are absent. Send the unchanged complete payload once only if both prove absence. | One post-send snapshot verifies exactly one main-body or attachment-backed identity and restores monitoring or archival; true absence closes as `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED`; unreadable or mismatched identity is `REVIEW_TRANSPORT_BLOCKED`; emit one local terminal Ops callback. |
 | `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
-| `WAIT_FOR_RESPONSE` | Exact main-body or attachment-backed identity and its user turn are known | Research Operations Manager initializes one metadata-only JSONL sentinel with that complete identity, copies the returned opaque monitor-assignment token unchanged into exactly one `hmasd-pro-response-monitor` assignment, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Sentinel-backed monitor returns one `COMPLETE` or `ERROR` terminal payload whose identity exactly matches the initialized sentinel. |
+| `WAIT_FOR_RESPONSE` | Exact main-body or attachment-backed identity and its user turn are known | Research Operations Manager initializes one metadata-only JSONL sentinel, mechanically generates one monitor-assignment receipt, passes only its absolute path to exactly one `hmasd-pro-response-monitor`, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Repeated 45-second bounded watches in the same monitor remain pending until the Sentinel returns one identity-matched `COMPLETE` or `ERROR`. |
 | `RETRY_RESPONSE_CONTRACT` | The original full-hash Assignment identity remains verified, attempt 1 is neither `USER_AUTHORIZED_ASSIGNMENT_SEND` nor `USER_AUTHORIZED_ASSIGNMENT_RESEND`, attempt 1 is terminal with no live monitor or sentinel, no retry exists, and either a stable answer mechanically omits question-declared response items or recovery is exhausted without a complete answer | Render `ResponseRetry`, require the original Assignment as its exact prefix, submit it once in the same registered conversation, then bind one fresh sentinel and replacement monitor to the complete attempt-2 text. | Attempt 2 produces a mechanically format-complete stable answer, or terminates as `REVIEW_TRANSPORT_BLOCKED` with no third submission. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Do not create another accepted assignment fence or a prefix correction. | A later assistant candidate is attributable to the repair message. |
 | `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
@@ -480,24 +480,33 @@ run a timer loop or emit pending progress messages. The response text remains
 in the browser and is represented in the sentinel only by a content
 fingerprint, assistant-message identity and control state.
 
-The Sentinel `init` result's `monitor_assignment_token` is the sole monitor
-assignment identity. Copy that URL-safe token unchanged into the native-child
-assignment and invoke only:
+After Sentinel `init`, create exactly one monitor-assignment receipt with:
 
 ```text
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --assignment-token <exact-init-token> --max-wait-seconds 45
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py assignment --state <absolute-jsonl> --receipt <new-absolute-receipt-json>
 ```
 
-Do not parse, shorten or rebuild the token from a round name, question basename
-or visible fence. The monitor passes it unchanged to the Sentinel. The Sentinel
-decodes the complete conversation and fence identities, compares them exactly
-with the initialized JSONL state, and returns that exact fence identity in its
-terminal payload. A malformed token or any identity mismatch is terminal
-`ERROR`.
+The receipt binds the absolute sentinel path and the opaque
+`monitor_assignment_token`. Pass only the receipt path to the native child and
+invoke only:
 
-The monitor runs only bounded `watch` calls against that sentinel. Pending
-produces no terminal payload. Two matching inactive operator observations at least
-three seconds apart cause the sentinel tool to emit `COMPLETE`; a browser,
+```text
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --assignment-receipt <absolute-receipt-json> --max-wait-seconds 45
+```
+
+Do not copy the token into the assignment or command and do not parse, shorten
+or rebuild it from a round name, question basename or visible fence. The
+Sentinel loads it mechanically from the receipt, decodes the complete
+conversation and fence identities, compares them exactly with the initialized
+JSONL state, and returns that exact fence identity in its terminal payload. A
+missing, duplicate, malformed or mismatched receipt is terminal `ERROR`.
+
+The monitor runs only bounded `watch` calls against that sentinel. Each call is
+limited to at most 45 seconds so one tool invocation does not remain blocked;
+the same monitor continues these calls for the full Pro response duration.
+Expiry of one call is only `PENDING`, never a response deadline, error or
+blocked outcome. Two matching inactive operator observations at least three
+seconds apart cause the sentinel tool to emit `COMPLETE`; a browser,
 identity or response-control error emits `ERROR`. On `COMPLETE`, the operator
 already owns the browser and performs exact archival snapshots. On `ERROR`, the operator handles
 transport recovery without allowing the monitor to browse, submit or retry.
@@ -677,6 +686,27 @@ boundary=<failed operation>
 action=<diagnostic or recovery action>
 outcome=<observed result>
 ```
+
+A local argument-transport failure, terminated monitor process, stale page,
+wrong message anchor or objectively correctable observation is an operational
+recovery condition, not `REVIEW_TRANSPORT_BLOCKED`. After the prior monitor is
+terminal, Research Operations Manager may reuse the same verified receipt to
+start one replacement monitor for the same verified Assignment;
+there is never more than one live monitor. It may reacquire the same registered
+conversation, re-anchor the current verified user turn and assistant message,
+and take fresh read-only snapshots without resubmitting the question. These
+recoveries consume zero scientific iterations.
+
+`REVIEW_TRANSPORT_BLOCKED` is permitted only when identity or page state remains
+uncertain after every safe in-scope read-only or zero-egress recovery is
+exhausted and the next action would risk a duplicate send, `Answer now`, wrong
+raw archival or another irreversible external effect. One parser error, one
+monitor `ERROR`, elapsed time or a corrected observation is never sufficient.
+If later objective evidence proves an earlier blocked classification was an
+operational misclassification, preserve that record and append an exact
+`RECOVERED_OPERATIONAL_MISCLASSIFICATION` correction with its evidence,
+duplicate-submission status and `scientific_iteration_cost=zero`; never rewrite
+the historical entry silently.
 
 Before the first Assignment client send, prove the matching fence absent. A
 client action remains uncommitted until its exact main-body or attachment-backed

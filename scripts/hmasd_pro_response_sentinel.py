@@ -21,6 +21,7 @@ from typing import Any
 
 SCHEMA_VERSION = 1
 MONITOR_ASSIGNMENT_SCHEMA_VERSION = 1
+MONITOR_ASSIGNMENT_RECEIPT_SCHEMA_VERSION = 1
 TERMINAL_STATES = {"COMPLETE", "ERROR"}
 CONTROL_STATES = {"active", "inactive", "error", "unavailable"}
 
@@ -120,6 +121,91 @@ def _decode_monitor_assignment_token(token: str) -> tuple[str, str]:
     return conversation_id, fence_identity
 
 
+def create_monitor_assignment_receipt(
+    state_path: Path, receipt_path: Path
+) -> dict[str, Any]:
+    state = _load_last(state_path)
+    if state.get("status") != "PENDING":
+        raise SentinelError("monitor assignment requires a pending sentinel")
+    if state.get("monitor_assignment_receipt") is not None:
+        raise SentinelError("sentinel already has a monitor assignment receipt")
+    token = state.get("monitor_assignment_token")
+    if not isinstance(token, str):
+        raise SentinelError("sentinel has no monitor assignment token")
+    conversation_id, fence_identity = _decode_monitor_assignment_token(token)
+    _require_identity(state, conversation_id, fence_identity)
+    resolved_state = state_path.resolve(strict=True)
+    resolved_receipt = receipt_path.resolve()
+    receipt = {
+        "schema_version": MONITOR_ASSIGNMENT_RECEIPT_SCHEMA_VERSION,
+        "state_path": str(resolved_state),
+        "monitor_assignment_token": token,
+    }
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with receipt_path.open("x", encoding="utf-8", newline="\n") as handle:
+            handle.write(json.dumps(receipt, sort_keys=True, separators=(",", ":")))
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+    except FileExistsError as exc:
+        raise SentinelError(
+            f"monitor assignment receipt already exists: {receipt_path}"
+        ) from exc
+    assigned_state = dict(state)
+    assigned_state["sequence"] = int(state.get("sequence", 0)) + 1
+    assigned_state["monitor_assignment_receipt"] = str(resolved_receipt)
+    assigned_state["reason"] = "monitor assignment registered"
+    assigned_state["observed_at"] = _utc_timestamp(time.time())
+    try:
+        _append(state_path, assigned_state)
+    except OSError:
+        receipt_path.unlink(missing_ok=True)
+        raise
+    return receipt
+
+
+def load_monitor_assignment_receipt(receipt_path: Path) -> tuple[Path, str]:
+    try:
+        raw = receipt_path.read_text(encoding="utf-8")
+        receipt = json.loads(raw)
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise SentinelError("monitor assignment receipt is unreadable") from exc
+    if not isinstance(receipt, dict) or (
+        receipt.get("schema_version")
+        != MONITOR_ASSIGNMENT_RECEIPT_SCHEMA_VERSION
+    ):
+        raise SentinelError("monitor assignment receipt schema is unsupported")
+    if set(receipt) != {
+        "schema_version",
+        "state_path",
+        "monitor_assignment_token",
+    }:
+        raise SentinelError("monitor assignment receipt fields are invalid")
+    state_value = receipt.get("state_path")
+    token = receipt.get("monitor_assignment_token")
+    if not isinstance(state_value, str) or not state_value.strip():
+        raise SentinelError("monitor assignment receipt state path is invalid")
+    if not isinstance(token, str):
+        raise SentinelError("monitor assignment receipt token is invalid")
+    state_path = Path(state_value)
+    if not state_path.is_absolute():
+        raise SentinelError("monitor assignment receipt state path is not absolute")
+    state = _load_last(state_path)
+    try:
+        registered_receipt = Path(
+            str(state.get("monitor_assignment_receipt"))
+        ).resolve(strict=True)
+        supplied_receipt = receipt_path.resolve(strict=True)
+    except OSError as exc:
+        raise SentinelError("monitor assignment receipt binding is unavailable") from exc
+    if registered_receipt != supplied_receipt:
+        raise SentinelError("monitor assignment receipt does not match sentinel")
+    conversation_id, fence_identity = _decode_monitor_assignment_token(token)
+    _require_identity(state, conversation_id, fence_identity)
+    return state_path, token
+
+
 def initialize(
     path: Path, conversation_id: str, fence_identity: str, now: float
 ) -> dict[str, Any]:
@@ -217,6 +303,7 @@ def record(
         "generation_controls": generation_controls,
         "candidate_available": candidate_available,
         "answer_now_activated": False,
+        "monitor_assignment_receipt": previous.get("monitor_assignment_receipt"),
         "reason": terminal_reason,
         "observed_at": _utc_timestamp(now),
     }
@@ -290,9 +377,12 @@ def _parser() -> argparse.ArgumentParser:
     status_parser.add_argument("--conversation-id", required=True)
     status_parser.add_argument("--fence-identity", required=True)
 
+    assignment_parser = subparsers.add_parser("assignment")
+    assignment_parser.add_argument("--state", required=True, type=Path)
+    assignment_parser.add_argument("--receipt", required=True, type=Path)
+
     watch_parser = subparsers.add_parser("watch")
-    watch_parser.add_argument("--state", required=True, type=Path)
-    watch_parser.add_argument("--assignment-token", required=True)
+    watch_parser.add_argument("--assignment-receipt", required=True, type=Path)
     watch_parser.add_argument("--poll-seconds", type=float, default=2.0)
     watch_parser.add_argument("--max-wait-seconds", type=float, default=45.0)
     return parser
@@ -323,10 +413,15 @@ def main() -> int:
             payload = _load_last(args.state)
             _require_identity(payload, args.conversation_id, args.fence_identity)
             result = payload
+        elif args.command == "assignment":
+            result = create_monitor_assignment_receipt(args.state, args.receipt)
         else:
+            state_path, assignment_token = load_monitor_assignment_receipt(
+                args.assignment_receipt
+            )
             watched = watch(
-                args.state,
-                args.assignment_token,
+                state_path,
+                assignment_token,
                 args.poll_seconds,
                 args.max_wait_seconds,
             )

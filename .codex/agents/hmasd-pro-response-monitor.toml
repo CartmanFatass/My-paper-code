@@ -15,10 +15,13 @@ Observe exactly one already-submitted Pro turn through the assignment's
 metadata-only JSONL sentinel. You have no browser authority and must not try to
 acquire the Research Operations Manager's in-app-browser binding. Run only the registered
 bounded `scripts/hmasd_pro_response_sentinel.py watch` command with the exact
-sentinel path and the opaque `monitor_assignment_token` supplied by the
-assignment. Copy the token unchanged into `--assignment-token`; never parse,
-shorten or reconstruct it from a round name, question basename or visible
-fence. Empty output means pending.
+mechanically generated monitor-assignment receipt path supplied by the
+assignment. Pass only that receipt through `--assignment-receipt`; the Sentinel
+loads its bound state path and opaque token without model-mediated token
+copying. Never parse, shorten or reconstruct an identity from a round name,
+question basename or visible fence. Each watch lasts at most 45 seconds, but the
+same monitor continues bounded watches until the Sentinel is terminal. Empty
+output means pending, not timeout or failure.
 
 Never submit, resubmit, edit, attach, retry, continue, stop, copy or archive
 anything. Never activate Answer now or any localized equivalent; its presence

@@ -35,9 +35,9 @@ foreach ($required in @(
     'hmasd-pro-response-monitor',
     'operations-manager-brokered metadata sentinel',
     'monitor_assignment_token',
-    'sole monitor assignment identity',
-    '--assignment-token <exact-init-token>',
-    'Do not parse, shorten or rebuild the token',
+    'monitor-assignment receipt',
+    '--assignment-receipt <absolute-receipt-json>',
+    'Do not copy the token into the assignment or command',
     'returns that exact fence identity',
     'scripts/hmasd_pro_response_sentinel.py record',
     'native child does not inherit',
@@ -113,6 +113,10 @@ foreach ($required in @(
     'instead of a reload loop',
     'two stable snapshots',
     'at least three seconds',
+    'Each call is limited to at most 45 seconds',
+    'Expiry of one call is only `PENDING`',
+    'RECOVERED_OPERATIONAL_MISCLASSIFICATION',
+    'One parser error, one monitor `ERROR`, elapsed time or a corrected observation is never sufficient',
     'Never activate `Answer now`',
     'its presence or absence is neutral',
     'Only Pro''s natural completion is admissible',
@@ -143,17 +147,18 @@ $monitorProfile = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-pro-response-monitor.toml')
 foreach ($required in @(
     'monitor_assignment_token',
-    '--assignment-token <exact-init-token>',
-    'never parses, shortens or reconstructs',
-    'exact identity decoded and verified from the assignment token')) {
+    '--assignment-receipt <absolute-receipt-json>',
+    'never parses, copies,',
+    'not the Pro response deadline')) {
     if (-not $monitorRole.Contains($required)) {
         throw "Pro-response monitor role missing opaque identity transport: $required"
     }
 }
 foreach ($required in @(
-    'monitor_assignment_token',
-    'Copy the token unchanged into `--assignment-token`',
-    'never parse,',
+    'monitor-assignment receipt path',
+    'Pass only that receipt through `--assignment-receipt`',
+    'Never parse,',
+    'same monitor continues bounded watches',
     'exact Sentinel-verified fence identity')) {
     if (-not $monitorProfile.Contains($required)) {
         throw "Pro-response monitor profile missing opaque identity transport: $required"
@@ -216,6 +221,13 @@ foreach ($required in @(
     'review_response_retry_unproven_persistence=forbidden',
     'review_response_retry_submission_limit=2_total',
     'review_response_retry_scientific_iteration_cost=zero',
+    'review_monitor_assignment=one_mechanical_receipt_per_sentinel',
+    'review_monitor_watch_call_limit_seconds=45',
+    'review_monitor_total_response_deadline=none',
+    'review_monitor_watch_expiry=PENDING',
+    'review_transport_operational_error=automatic_safe_recovery',
+    'review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains',
+    'review_transport_misclassification_correction=append_only',
     'rejected transport record',
     'Reloading never proves a freshness fence absent and never authorizes submission')) {
     if (-not $operationsNormalized.Contains($required)) {

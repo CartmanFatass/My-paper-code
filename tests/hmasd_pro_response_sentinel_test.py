@@ -95,11 +95,16 @@ def initialize(state: Path) -> dict[str, object]:
     )
 
 
-def assignment_token(state: Path) -> str:
-    initialized = initialize(state)
-    token = initialized["monitor_assignment_token"]
-    assert isinstance(token, str)
-    return token
+def create_assignment(state: Path, receipt: Path) -> dict[str, object]:
+    return json.loads(
+        run(
+            "assignment",
+            "--state",
+            str(state),
+            "--receipt",
+            str(receipt),
+        ).stdout
+    )
 
 
 def record(
@@ -138,6 +143,8 @@ def record(
 def test_two_stable_inactive_snapshots_complete_without_answer_now(tmp_path: Path) -> None:
     state = tmp_path / "monitor.jsonl"
     initial = initialize(state)
+    receipt = tmp_path / "monitor-assignment.json"
+    create_assignment(state, receipt)
     assert initial["status"] == "PENDING"
     first = record(state, controls="inactive", available=True)
     assert first["status"] == "PENDING"
@@ -150,10 +157,8 @@ def test_two_stable_inactive_snapshots_complete_without_answer_now(tmp_path: Pat
     terminal = json.loads(
         run(
             "watch",
-            "--state",
-            str(state),
-            "--assignment-token",
-            str(initial["monitor_assignment_token"]),
+            "--assignment-receipt",
+            str(receipt),
             "--max-wait-seconds",
             "0",
         ).stdout
@@ -196,6 +201,8 @@ def test_attachment_backed_identity_is_opaque_and_byte_exact(tmp_path: Path) -> 
             attachment_identity,
         ).stdout
     )
+    receipt = tmp_path / "attachment-assignment.json"
+    create_assignment(state, receipt)
     for _ in range(2):
         json.loads(
             run(
@@ -221,10 +228,8 @@ def test_attachment_backed_identity_is_opaque_and_byte_exact(tmp_path: Path) -> 
     terminal = json.loads(
         run(
             "watch",
-            "--state",
-            str(state),
-            "--assignment-token",
-            str(initial["monitor_assignment_token"]),
+            "--assignment-receipt",
+            str(receipt),
             "--max-wait-seconds",
             "0",
         ).stdout
@@ -337,14 +342,21 @@ def test_monitor_assignment_token_fails_closed_when_truncated_or_rebound(
     tmp_path: Path,
 ) -> None:
     state = tmp_path / "monitor.jsonl"
-    token = assignment_token(state)
+    initial = initialize(state)
+    truncated_receipt = tmp_path / "truncated-assignment.json"
+    create_assignment(state, truncated_receipt)
+    truncated_payload = json.loads(truncated_receipt.read_text(encoding="utf-8"))
+    truncated_payload["monitor_assignment_token"] = str(
+        initial["monitor_assignment_token"]
+    )[:-1]
+    truncated_receipt.write_text(
+        json.dumps(truncated_payload), encoding="utf-8"
+    )
 
     truncated = run(
         "watch",
-        "--state",
-        str(state),
-        "--assignment-token",
-        token[:-1],
+        "--assignment-receipt",
+        str(truncated_receipt),
         "--max-wait-seconds",
         "0",
         check=False,
@@ -367,12 +379,15 @@ def test_monitor_assignment_token_fails_closed_when_truncated_or_rebound(
             other_fence,
         ).stdout
     )
+    rebound_payload = dict(truncated_payload)
+    rebound_payload["monitor_assignment_token"] = other[
+        "monitor_assignment_token"
+    ]
+    truncated_receipt.write_text(json.dumps(rebound_payload), encoding="utf-8")
     rebound = run(
         "watch",
-        "--state",
-        str(state),
-        "--assignment-token",
-        str(other["monitor_assignment_token"]),
+        "--assignment-receipt",
+        str(truncated_receipt),
         "--max-wait-seconds",
         "0",
         check=False,
@@ -396,6 +411,8 @@ def test_full_hash_correction_token_rejects_prefix_fence_identity(
             CORRECTED_FENCE,
         ).stdout
     )
+    receipt = tmp_path / "corrected-assignment.json"
+    create_assignment(state, receipt)
     for _ in range(2):
         run(
             "record",
@@ -419,10 +436,8 @@ def test_full_hash_correction_token_rejects_prefix_fence_identity(
     terminal = json.loads(
         run(
             "watch",
-            "--state",
-            str(state),
-            "--assignment-token",
-            str(initialized["monitor_assignment_token"]),
+            "--assignment-receipt",
+            str(receipt),
             "--max-wait-seconds",
             "0",
         ).stdout
@@ -444,12 +459,15 @@ def test_full_hash_correction_token_rejects_prefix_fence_identity(
             PREFIX_FENCE,
         ).stdout
     )
+    rebound_payload = json.loads(receipt.read_text(encoding="utf-8"))
+    rebound_payload["monitor_assignment_token"] = prefix[
+        "monitor_assignment_token"
+    ]
+    receipt.write_text(json.dumps(rebound_payload), encoding="utf-8")
     rebound = run(
         "watch",
-        "--state",
-        str(state),
-        "--assignment-token",
-        str(prefix["monitor_assignment_token"]),
+        "--assignment-receipt",
+        str(receipt),
         "--max-wait-seconds",
         "0",
         check=False,
@@ -473,6 +491,8 @@ def test_response_retry_token_binds_complete_attempt_two_identity(
             RETRY_FENCE,
         ).stdout
     )
+    receipt = tmp_path / "retry-assignment.json"
+    create_assignment(retry_state, receipt)
     for _ in range(2):
         run(
             "record",
@@ -496,10 +516,8 @@ def test_response_retry_token_binds_complete_attempt_two_identity(
     terminal = json.loads(
         run(
             "watch",
-            "--state",
-            str(retry_state),
-            "--assignment-token",
-            str(initialized["monitor_assignment_token"]),
+            "--assignment-receipt",
+            str(receipt),
             "--max-wait-seconds",
             "0",
         ).stdout
@@ -509,15 +527,91 @@ def test_response_retry_token_binds_complete_attempt_two_identity(
 
     first_state = tmp_path / "attempt-1-monitor.jsonl"
     first = initialize(first_state)
+    rebound_payload = json.loads(receipt.read_text(encoding="utf-8"))
+    rebound_payload["monitor_assignment_token"] = first[
+        "monitor_assignment_token"
+    ]
+    receipt.write_text(json.dumps(rebound_payload), encoding="utf-8")
     rebound = run(
         "watch",
-        "--state",
-        str(retry_state),
-        "--assignment-token",
-        str(first["monitor_assignment_token"]),
+        "--assignment-receipt",
+        str(receipt),
         "--max-wait-seconds",
         "0",
         check=False,
     )
     assert rebound.returncode == 2
     assert "freshness-fence identity does not match sentinel" in rebound.stderr
+
+
+def test_assignment_receipt_handles_non_ascii_path_and_is_unique(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "带 空格"
+    root.mkdir()
+    state = root / "monitor.jsonl"
+    receipt = root / "monitor assignment.json"
+    initialize(state)
+    created = create_assignment(state, receipt)
+    assert Path(str(created["state_path"])) == state.resolve()
+    assert receipt.is_file()
+
+    duplicate = run(
+        "assignment",
+        "--state",
+        str(state),
+        "--receipt",
+        str(root / "second.json"),
+        check=False,
+    )
+    assert duplicate.returncode == 2
+    assert "already has a monitor assignment receipt" in duplicate.stderr
+
+
+def test_bounded_watch_timeout_is_pending_and_receipt_remains_reusable(
+    tmp_path: Path,
+) -> None:
+    state = tmp_path / "monitor.jsonl"
+    receipt = tmp_path / "assignment.json"
+    initialize(state)
+    create_assignment(state, receipt)
+
+    for _ in range(2):
+        pending = run(
+            "watch",
+            "--assignment-receipt",
+            str(receipt),
+            "--max-wait-seconds",
+            "0",
+        )
+        assert pending.stdout == ""
+
+    first = record(state, controls="inactive", available=True)
+    assert first["status"] == "PENDING"
+    second = record(state, controls="inactive", available=True)
+    assert second["status"] == "COMPLETE"
+    complete = json.loads(
+        run(
+            "watch",
+            "--assignment-receipt",
+            str(receipt),
+            "--max-wait-seconds",
+            "0",
+        ).stdout
+    )
+    assert complete["terminal"] == "COMPLETE"
+
+
+def test_watch_rejects_legacy_direct_token_transport(tmp_path: Path) -> None:
+    state = tmp_path / "monitor.jsonl"
+    initial = initialize(state)
+    rejected = run(
+        "watch",
+        "--assignment-token",
+        str(initial["monitor_assignment_token"]),
+        "--max-wait-seconds",
+        "0",
+        check=False,
+    )
+    assert rejected.returncode == 2
+    assert "--assignment-receipt" in rejected.stderr

@@ -431,7 +431,14 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization',
-    'cross_task_route_guard=pretool_live_settings_canonicalization')) {
+    'cross_task_route_guard=pretool_live_settings_canonicalization',
+    'review_monitor_assignment=one_mechanical_receipt_per_sentinel',
+    'review_monitor_watch_call_limit_seconds=45',
+    'review_monitor_total_response_deadline=none',
+    'review_monitor_watch_expiry=PENDING',
+    'review_transport_operational_error=automatic_safe_recovery',
+    'review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains',
+    'review_transport_misclassification_correction=append_only')) {
     if (-not $operationsRole.Contains($required)) {
         throw "Research Operations Manager role missing: $required"
     }
@@ -551,6 +558,8 @@ foreach ($required in @(
     'observation_mode=research_operations_manager_brokered_jsonl_sentinel',
     'browser_authority=none',
     'progress_notifications=forbidden',
+    '--assignment-receipt <absolute-receipt-json>',
+    'not the Pro response deadline',
     'answer_now_activated=false')) {
     if (-not $monitorRole.Contains($required)) { throw "Monitor role missing: $required" }
 }

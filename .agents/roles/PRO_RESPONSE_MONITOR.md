@@ -30,19 +30,22 @@ already-submitted turn.
 
 ## Exact assignment
 
-Research Operations Manager supplies the absolute sentinel path, the opaque
-`monitor_assignment_token` returned by Sentinel initialization,
+Research Operations Manager supplies one absolute, mechanically generated
+monitor-assignment receipt path. The receipt binds the sentinel path and opaque
+`monitor_assignment_token` without placing the token in the child command,
 `observation_mode=research_operations_manager_brokered_jsonl_sentinel`, and this
 read-only command boundary:
 
 ```text
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --state <absolute-jsonl> --assignment-token <exact-init-token> --max-wait-seconds 45
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_pro_response_sentinel.py watch --assignment-receipt <absolute-receipt-json> --max-wait-seconds 45
 ```
 
-The monitor copies the token unchanged from its assignment into every bounded
-watch invocation. It never parses, shortens or reconstructs an identity from a
-round name, question basename or visible fence. A missing, malformed or
-contradictory token fails closed before observation. The monitor never
+The monitor passes only that exact receipt path into every bounded watch
+invocation. The Sentinel loads the opaque token and state path from the receipt
+as an argv-safe mechanical operation. The monitor never parses, copies,
+shortens or reconstructs an identity from a round name, question basename or
+visible fence. A missing, malformed or contradictory receipt fails closed
+before observation. The monitor never
 substitutes a token or path and never attempts to acquire the browser as
 recovery.
 
@@ -54,8 +57,10 @@ recovery.
   equivalent. Its presence or absence is neutral.
 - Never click Retry/Continue, stop generation, copy/archive text, interpret the
   response, edit files, run Git, spawn children or contact the user.
-- Repeatedly run only the registered terminal-only `watch` command. Empty output
-  means pending: remain silent and run another bounded watch. Do not send
+- Repeatedly run only the registered terminal-only `watch` command. Each call is
+  bounded to at most 45 seconds; that bound is not the Pro response deadline.
+  Empty output means pending: remain silent and run another bounded watch in
+  the same monitor for as long as the sentinel remains pending. Do not send
   progress, ETA, heartbeat or phase messages.
 - Trust only a terminal record emitted by the sentinel tool. Operator-side `record`
   requires the same assistant identity and response fingerprint in two

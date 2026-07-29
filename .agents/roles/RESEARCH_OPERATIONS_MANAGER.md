@@ -72,6 +72,13 @@ review_response_retry_requires_server_visible_original_fence=true
 review_response_retry_unproven_persistence=forbidden
 review_response_retry_submission_limit=2_total
 review_response_retry_scientific_iteration_cost=zero
+review_monitor_assignment=one_mechanical_receipt_per_sentinel
+review_monitor_watch_call_limit_seconds=45
+review_monitor_total_response_deadline=none
+review_monitor_watch_expiry=PENDING
+review_transport_operational_error=automatic_safe_recovery
+review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains
+review_transport_misclassification_correction=append_only
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -196,7 +203,9 @@ authority.
 
 `ATTACHMENT_IDENTITY_VERIFIED` is equivalent to a main-body exact fence for
 sentinel initialization. Use the validator's complete canonical
-`sentinel_fence_identity`; the returned monitor token remains opaque.
+`sentinel_fence_identity`; generate one monitor-assignment receipt mechanically
+from the initialized sentinel. The receipt keeps the opaque token out of model-
+assembled commands and is the only monitor assignment transport.
 `IDENTITY_UNREADABLE` or `IDENTITY_MISMATCH` blocks without claiming send
 failure and without authorizing another send. Assistant generation starting
 does not establish identity or natural completion.
@@ -334,6 +343,31 @@ After archival, resume the operations loop from the exact External-Pro response.
 External Pro maintains multiple supported live or parked directions and selects
 one current resource-consuming action. Research Operations Manager never
 reorders or compresses that portfolio.
+
+## Operational transport recovery
+
+A local command or argument failure, terminal monitor process, stale page,
+wrong message anchor or objectively correctable observation keeps the same
+review active. Reuse the same verified monitor-assignment receipt after the
+prior monitor is terminal, reacquire the same registered conversation, and
+re-anchor the verified user turn and following assistant message as needed.
+There is never more than one live monitor, no repeated question submission and
+no scientific iteration cost.
+
+One 45-second watch expiry is `PENDING`; it is not the total Pro response
+deadline. The same monitor continues bounded watches until the Sentinel returns
+`COMPLETE` or `ERROR`, including when Pro naturally reasons for 10–30 minutes or
+longer. Elapsed time alone never authorizes `Answer now`, retry or blocked.
+
+Record `REVIEW_TRANSPORT_BLOCKED` only after identity or page state remains
+uncertain, every safe read-only or zero-egress recovery is exhausted, and the
+next action would risk duplicate submission, forced completion, wrong raw
+archival or another irreversible external effect. A parser error, monitor
+`ERROR` or corrected observation is insufficient. If later objective evidence
+shows that an earlier blocked record was an operational misclassification,
+preserve it and append `RECOVERED_OPERATIONAL_MISCLASSIFICATION` with the exact
+recovery evidence, duplicate-submission status and
+`scientific_iteration_cost=zero`.
 
 ## Code Project Manager boundary
 
