@@ -179,8 +179,9 @@ after the boundary action — and never becomes evidence for the repaired arm.
 **Before the intervention begins.** Build the matching graph at candidate-event
 certification and **test feasibility, not cardinality**. No full derangement →
 the event is ineligible; continue to the next candidate in that episode; if none
-qualifies, the episode is a Part-A **support miss**, and the recorded reason
-carries the Hall witness `(S, N(S))`. Typical causes: fewer than two eligible
+qualifies, the episode is a Part-A **support miss**, and the recorded refusal
+carries the full Hall witness — `S`, `N(S)`, `|S|` and `|N(S)|`, not merely the
+neighbourhood size. Typical causes: fewer than two eligible
 incumbents; no geometrically distinct alternative; Hall-condition failure at
 larger sizes. Never reported as zero effect, never a greedy or partial fallback.
 
@@ -244,8 +245,23 @@ Full text in the ruling. Summary:
 
 ## Implementation bindings — PM-decided, disclosed, none claim-defining
 
-1. **Solver.** Rectangular linear assignment with forbidden cells at `+inf`,
-   over `U_e × D_e`. Deterministic given inputs.
+1. **Solver.** Rectangular linear assignment over `U_e × D_e`, deterministic
+   given inputs.
+
+   **The frozen object is logical, not numerical** (Pro, 2026-07-29 — an earlier
+   revision of this line said "forbidden cells at `+inf`" while the obligation-A
+   harness used a large finite sentinel and explained why `inf` cannot carry
+   infeasibility; the design contradicted its own proof):
+
+   > Forbidden edges are logically absent. The implementation must use a
+   > representation that preserves the legal optimum and must reject any
+   > returned forbidden edge.
+
+   A finite sentinel is admissible **only when proved larger than every possible
+   legal total cost for the registered geometry**. `+inf` is inadmissible because
+   the solver raises rather than reporting infeasibility, which hides the case
+   the Hall witness exists to expose. **Infeasibility is owned by the Hall
+   witness, never by a sentinel-valued solver output.**
 2. **Tie-break.** Lexicographic by `(duty_id, uav_id)` among optimal solutions,
    **produced by an explicit canonicalisation pass, not by the solver.**
    Obligation A found that `linear_sum_assignment` does not honour this
