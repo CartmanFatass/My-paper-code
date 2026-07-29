@@ -29,6 +29,20 @@ zero-compute clarification or a new design audit may be selected, but no
 implementation, formal/nonformal run or Git change is authorized by this
 question itself.
 
+## Evidence to read
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/project/CURRENT_WORK.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_G49_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_phase_a_treatment_identity_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_phase_a_treatment_identity_clarification/50_MECHANICAL_INTAKE_RECORD.md`
+
 ## Required scientific response
 
 Return exactly these sections:
@@ -54,4 +68,3 @@ COMPLETE_BALANCE_EXHAUSTED
 evidence ceiling and exact next boundary. This is portfolio scheduling only;
 do not accept code, dispatch runtime work or make a scientific claim beyond
 the selected boundary.
-
