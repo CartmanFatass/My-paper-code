@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=R4 RESULT IS IN: PART_A_CONTRADICTION, D_A=0.484, both one-sided bounds clear zero -- a positive equivalence at the registered margin. Sentinel passed all six. Touchpoint 3 is fenced and preflight-green at 048483a9 but UNDELIVERED: REVIEW_TRANSPORT_BLOCKED, the Chrome extension disconnected mid-pass. The fence was never sent; resume condition is in the round's 50_MECHANICAL_INTAKE_RECORD.md.
+next_boundary=R4 RESULT IS IN: PART_A_CONTRADICTION, D_A=0.484 on [-0.681,+1.686] against a +/-5 margin -- a positive equivalence, INDEPENDENTLY RE-DERIVED (Part-A point, both U* points bit-for-bit; limb states re-resolved from first principles). Sentinel passed all six. Touchpoint 3 fenced and preflight-green at 3e5624fa but UNDELIVERED: REVIEW_TRANSPORT_BLOCKED -- no browser is paired to the account (list_connected_browsers returns []). The fence was never sent; resume condition is in the round's 50_MECHANICAL_INTAKE_RECORD.md.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 

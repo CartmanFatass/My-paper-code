@@ -156,3 +156,13 @@ distinct outcomes observed: 13
 
 STEP_E_ASSEMBLED_PATH_OK -- every registered outcome reached from the real dev-topology unit through the production reconstruction path.
 ```
+
+## Forward pointer, added 2026-07-29
+
+The `D_A ~ 0.46` recorded above as an obstacle to be steered around was **the
+result arriving early**. The eight-topology formal population returned
+`D_A = 0.484` and branched `PART_A_CONTRADICTION` for exactly the same reason.
+
+The dev topology was not an outlier and this note held the signal without
+recognising it. See
+`20260729_D7_S_R4_THE_CONTROL_SAYS_THE_ARMS_ARE_EQUIVALENT.md`.
