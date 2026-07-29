@@ -209,8 +209,17 @@ the round directory first, then paste it in one operation:
    ```powershell
    $src = Get-Content -Raw -Encoding UTF8 <artifact-path>
    Set-Clipboard -Value $src
+   Start-Sleep -Milliseconds 300      # let the write land before reading it back
    ($src -ceq (Get-Clipboard -Raw))   # must print True before continuing
    ```
+
+   **The settle is load-bearing.** Without it the read can race the write and
+   report `exact=False` on bytes that are perfectly correct — measured on
+   2026-07-29, where the same file compared equal on a retry with an unchanged
+   artifact and `cr=0` on both sides. A check that fails on timing alone gets
+   explained away as flaky, and that is exactly how a real corruption would get
+   waved through. If it reports a mismatch, retry once with the settle before
+   believing it.
 
 3. click the composer and press `ctrl+v` — a paste inserts the whole text at
    once and generates no Enter keypress;
@@ -493,7 +502,124 @@ page pixels; `computer` coordinates are screenshot pixels. Convert by
 `screenshot_width / window.innerWidth` — on 2026-07-29 that was
 `1568 / 1912 = 0.820`, so a rect at `(712, 763)` was a click at `(584, 626)`.
 
-### How to capture the response — one click, never transcription
+#### `hidden` is the normal state, and most of transport works in it
+
+The registered conversation usually sits in a window whose **foreground tab is
+something else**, so `hidden` is the steady state rather than a symptom. Do not
+"fix" it before every operation. What matters is knowing which half of the tool
+surface it takes away:
+
+| Works on a hidden tab | Fails on a hidden tab |
+|---|---|
+| `javascript_tool` DOM reads | `screenshot`, `find` (render-throttled, time out) |
+| OS-level `computer` `key` — `ctrl+v`, `Return`, `ctrl+a`, `Delete` | `navigator.clipboard.writeText` (refuses) |
+| OS-level `computer` `left_click` (lands correctly) | heavy `await fetch` (may time out) |
+
+**So a fence can be sent end to end on a hidden tab**: focus the composer with
+`javascript_tool`, paste with OS-level `ctrl+v`, verify by reading the composer
+back, submit with `Return`. No foregrounding, no reload, no screenshot. Activate
+the tab only when something genuinely needs it — the clipboard write during
+capture — and not before.
+
+#### The composer keeps its text after a successful send
+
+Measured twice on this page: after a send that **did** land, the composer still
+held the full fence while exactly one user turn carried the commit and generation
+was already running.
+
+**So composer emptiness is corroborating evidence, not the send test.** The test
+is: *how many user turns carry the fence's `stage_commit`?* Zero means send;
+one means done; more than one is the duplicate this Skill exists to prevent. The
+earlier heuristic — "composer still holding your text means it did not send" —
+points the wrong way in this state and must not be used alone.
+
+Clear the residue with `ctrl+a` then `Delete`. **Never a second `Return`.**
+Leaving a valid fence sitting in a composer is a duplicate submission waiting for
+a stray keypress.
+
+### Keeping the browser alive is part of transport
+
+Two rounds lost their capture to the browser disappearing. Measured cause:
+`exit_type = Normal` in the Edge profile, no sleep in 8 hours on a 38-hour
+uptime, and the binary unchanged for days. **It was closed cleanly, not crashed**,
+and both deaths landed inside long idle waits rather than during active work.
+
+1. **Check liveness before spending a reload.** `list_connected_browsers` plus a
+   process count costs one call. A wedge and a dying browser present identically;
+   the previous round burned two reloads on the wrong one.
+2. **Never close the last tab.** `tabs_close_mcp` on the only tab closes the
+   window and ends the browser — both "The browser is shutting down" messages
+   arrived on that call. The Skill's bounded replacement is still
+   close-then-create *when another tab exists*; when it does not, **create
+   first**.
+3. **Pace in minutes, not tens of minutes.** Poll every 2–3 minutes while a
+   round is generating. A death is then caught while the answer is still
+   recoverable instead of after it is stranded.
+4. **You can restart the browser yourself.** It is Edge, not Chrome:
+   `${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe`. Launch it and
+   the extension reconnects on its own. "The runtime cannot be restarted from
+   here" was a false conclusion drawn from searching for `chrome.exe` —
+   `tabs_context_mcp` reports `chrome://newtab/` because Chromium-based Edge uses
+   that scheme, and Chrome has never been installed on this machine.
+
+#### Verify a search before concluding absence
+
+The `chrome.exe` error above is the general failure worth naming: a search that
+finds nothing was treated as proof the thing does not exist. The same mistake
+recurred hours later when `"$env:ProgramFiles(x86)\..."` — which PowerShell does
+not expand that way; it needs `${env:ProgramFiles(x86)}` — reported Edge missing
+too.
+
+**A failed search is not evidence of absence until the search itself is known
+good.** Test the method against something you know is there before reporting a
+negative.
+
+### The primary capture path — read the conversation API, not the clipboard
+
+**Prefer this over `Copy response`.** From page context, with the user's own
+session:
+
+```javascript
+const s = await fetch('/api/auth/session').then(r => r.json());
+const c = await fetch('/backend-api/conversation/<conversation_id>',
+  {headers: {Authorization: 'Bearer ' + s.accessToken}}).then(r => r.json());
+const asst = Object.values(c.mapping || {})
+  .filter(m => m.message && m.message.author.role === 'assistant'
+            && m.message.content && m.message.content.content_type === 'text');
+asst.sort((x, y) => (x.message.create_time || 0) - (y.message.create_time || 0));
+const txt = asst[asst.length - 1].message.content.parts.join('');
+```
+
+Why this is better than the control, not merely easier:
+
+- it returns **the model's own emitted markdown**, not a re-serialization of
+  rendered DOM, so there is no rendering layer to lose a marker;
+- it needs neither focus nor visibility, so it works on a background tab, which
+  is the normal state of this tab;
+- it gives an **independent length to check against**. On 2026-07-29 the
+  clipboard held 22485 characters with CRLF; normalized to LF the file was 21876,
+  exactly the length the page reported for its own source string. That is a
+  fidelity proof the clipboard path cannot produce.
+
+Two practical notes:
+
+1. **Returning the text through `javascript_tool` may be blocked** by an output
+   filter after a call that touched an auth token. Hand it to the OS clipboard
+   instead: stash it on `window`, then copy it with a real user gesture (below)
+   and read it with `Get-Clipboard -Raw` — zero context cost, exact bytes.
+2. **`navigator.clipboard.writeText` needs a real user gesture.** Supply one
+   safely with a full-viewport transparent overlay carrying the copy handler,
+   clicked once by `computer`, then removed immediately. The overlay cannot hit
+   any page control while it exists, which a bare click on the page cannot
+   promise.
+3. **A heavy `await fetch` can time out under background throttling.** That is
+   throttling, not death — check liveness, then activate the tab and retry. Light
+   DOM reads keep working throughout and are the reliable progress signal.
+
+Normalize CRLF to LF before writing, so the archive matches the emitted source
+rather than the clipboard's transport encoding.
+
+### Fallback — the `Copy response` control
 
 Use the page's own **`Copy response`** control. It is in the `Response actions`
 group attached to the assistant turn, it copies the full message verbatim

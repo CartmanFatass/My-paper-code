@@ -189,6 +189,24 @@ is order-dependent, environment-dependent, or caused by a change, **run it
 repeatedly in isolation and report the rate.** Ten isolated runs cost about ninety
 seconds and are the cheapest evidence in this repository.
 
+## Validate a search before reporting an absence
+
+A search that returns nothing is evidence about the search until you have shown
+the search works. **Test the method against something you know is present, then
+report the negative.**
+
+Measured twice in one day, 2026-07-29. A transport pass concluded "Chrome was
+removed from this machine mid-session" after `chrome.exe` was absent from every
+standard location — Chrome had never been installed, the browser was Edge, and
+the search followed a `chrome://` URL scheme to the wrong executable name. Hours
+later the corrected check reported Edge missing too, because
+`"$env:ProgramFiles(x86)\..."` is not how PowerShell expands that variable; it
+needs `${env:ProgramFiles(x86)}`.
+
+The first absence became a written conclusion that the runtime could not be
+restarted, which was false and blocked the round longer than the actual fault
+did. **A negative result inherits every defect of the query that produced it.**
+
 ## Keep a review-bound commit minimal
 
 When a commit will be the `stage_commit` of a review round, it carries only the
@@ -206,6 +224,18 @@ The workflow drift guard blocks a commit touching guarded paths when the
 contracts do not hold. **Repair the cause, not the assertion.** Its
 `--no-verify` escape is for a user-directed override, not for unblocking
 yourself; a bypassed guard reads as covered forever after.
+
+Two mechanical facts that cost a retry each on 2026-07-29:
+
+- **The drift guard checks that `HEAD` is reachable from the remote**, so a
+  guarded commit needs its *parent* pushed first. Push, then commit the next
+  change. A first attempt that fails this way is not a broken gate.
+- **Never pass a multi-line commit message through a PowerShell here-string.**
+  Any `"` or `<` inside it is reparsed by the shell and the commit dies with
+  `pathspec ... did not match any file`. Write the message to a scratchpad file
+  and use `git commit -F <file>`, or pass several `-m` flags. This is the same
+  quoting hazard the Bash/PowerShell split creates everywhere in this
+  repository.
 
 ## External Pro — see `$hmasd-review-round`
 
@@ -333,6 +363,45 @@ its tools can do (looking once, describing).
 The same shape applies to any long watch. A child with no clock cannot report
 duration; a child with no sleep cannot span hours. Ask it for observations and
 counts, never for elapsed time.
+
+### And a specification must be satisfiable by the library that implements it
+
+The sibling failure, measured 2026-07-29. An R5 implementation binding registered
+a tie-break — "lexicographic by `(duty_id, uav_id)` among optimal solutions" —
+and named `scipy.optimize.linear_sum_assignment` as the solver. **The solver does
+not provide that property.** On a symmetric ring at `n = 4`, where every
+single-rotation derangement costs the same to the last digit, it returns an
+optimal assignment that is not the lexicographically smallest one.
+
+Nothing was wrong with the intent and nothing was wrong with the solver. The
+binding simply asserted a guarantee its own tool never made, and would have
+produced an artifact that disagreed with its own reproducibility claim.
+
+**Before registering a binding, name the component that enforces it and check
+that it does.** "The solver is deterministic" is not the same claim as "the
+solver returns the solution I registered."
+
+## Construct the degenerate case; do not wait to sample it
+
+The tie-break defect above survived **360 randomised trials** without once
+firing, because exact ties are measure-zero in continuous positions. It appeared
+on the first deliberately constructed input.
+
+This is the paired-negative rule pointed at numerics rather than at code paths.
+A guard over continuous quantities — a tolerance, a tie-break, an equality test,
+a degeneracy branch — will essentially never meet its own edge case by chance,
+so random testing reports it as covered forever.
+
+**Build the input that ought to break it**: the exact tie, the collinear points,
+the zero-length interval, the duplicate key, the empty neighbourhood. If you
+cannot construct an input that makes the guard go red, you do not yet know that
+it is a guard.
+
+The same round supplied the positive form: Hall's condition on the derangement
+graph was proven to fail at `n = 3` only by hand-building
+`allowed = [{2}, {2}, {0,1}]` — two agents whose sole alternative is the same
+duty. No sampling over realistic geometry would have produced it, and the
+contract's support rule was wrong until it did.
 
 ## Claude Code cannot express a per-agent approval policy
 
