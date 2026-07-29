@@ -53,7 +53,31 @@ action-provenance interface as contract rather than letting the repair define it
 P5 as a case that must stay green rather than go red-to-green; and N4 built on a
 deliberately injective map so a shape-only check cannot detect its violation.
 
+## Capture
+
+The tab wedged a **fifth** time (CDP `Runtime.evaluate` timeout). Bounded
+replacement applied; the new tab rendered the completed answer immediately.
+
+Clipboard cleared to a sentinel first, then `Copy response`:
+
+```text
+still_sentinel=False  clip_len=21026  has_title=True  has_final=True  has_n5=True
+```
+
+`has_n5` deliberately checks a **body-only** string (`N5 contradicts`) rather
+than the stage_commit, which the fence also contains.
+
+Archived via `UTF8Encoding($false)`: `written_len=21026`,
+`exact_roundtrip=True`, `bom_free=True`.
+
+Fence absence was proved before submission through the conversation API
+(`user_turns=35 exact_fence_hits=0`), not `find`.
+
 ## Status
 
-`AWAITING RESPONSE`. `21_PRO_OPEN_RAW.md` does not exist yet and no
-reconciliation may be written until it does.
+`CLOSED`. Ruling archived byte-exact; reconciliation in
+`30_PM_SCIENTIFIC_RECONCILIATION.md`.
+
+Verdict: **FREEZE AFTER MODIFICATION — step 1 is NOT closed at this commit.**
+Five blocking issues; architecture judged sound; several predicates change, so a
+new old-code baseline is required and the existing baseline is superseded.
