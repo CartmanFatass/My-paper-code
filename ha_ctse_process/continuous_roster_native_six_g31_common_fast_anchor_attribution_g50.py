@@ -792,7 +792,12 @@ def build_phase_A_conclusion_evidence(
     return {
         "formal": formal,
         "required_replicates": list(expected_replicates),
-        "active_phase_A_pass_by_replicate": active,
+        # JSON object keys are strings. Emit the terminal representation at
+        # construction time so one exact validator applies before and after
+        # manifest serialization.
+        "active_phase_A_pass_by_replicate": {
+            str(replicate): active[replicate] for replicate in expected_replicates
+        },
         "activation_tolerance": ACTIVATION_TOLERANCE,
         "strict_activation": True,
         "reference_only_activation_evidence": True,
@@ -806,13 +811,14 @@ def validate_phase_A_conclusion_evidence(value: object) -> bool:
         return False
     formal = value.get("formal")
     expected = [0, 1, 2] if formal is True else [0]
+    expected_keys = [str(replicate) for replicate in expected]
     active = value.get("active_phase_A_pass_by_replicate")
     return bool(
         formal in (True, False)
         and value.get("required_replicates") == expected
         and isinstance(active, Mapping)
-        and set(active) == set(expected)
-        and all(active[replicate] is True for replicate in expected)
+        and set(active) == set(expected_keys)
+        and all(active[key] is True for key in expected_keys)
         and value.get("activation_tolerance") == ACTIVATION_TOLERANCE
         and value.get("strict_activation") is True
         and value.get("reference_only_activation_evidence") is True

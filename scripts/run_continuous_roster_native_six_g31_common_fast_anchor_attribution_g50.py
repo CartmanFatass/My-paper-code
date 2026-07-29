@@ -1256,9 +1256,19 @@ def readiness_train(
         {key: value for key, value in row.items() if key != "pid"} for row in rows
     ]
     equivalent = semantics[0] == {**semantics[1], "index": 0}
+    phase_A_conclusion = source.build_phase_A_conclusion_evidence(
+        (
+            {
+                "replicate": 0,
+                "pass_records": ({"activation": {"treatment_active": True}},),
+            },
+        ),
+        formal=False,
+    )
     payload = {
         "smoke": smoke,
         "static_configuration": source.static_configuration_certificate(formal=False),
+        "phase_A_conclusion_evidence": phase_A_conclusion,
         "branch_witnesses": _synthetic_branch_witnesses(),
         "two_process_proof": {
             "worker_count": 2,
@@ -1295,6 +1305,9 @@ def readiness_validate(*, run_root: Path) -> dict[str, object]:
         payload.get("passed") is True
         and source.validate_static_configuration(
             payload.get("static_configuration"), formal=False
+        )
+        and source.validate_phase_A_conclusion_evidence(
+            payload.get("phase_A_conclusion_evidence")
         )
         and payload.get("branch_witnesses")
         == {

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import inspect
+import json
 
 import pytest
 import torch
@@ -216,9 +217,34 @@ def test_activation_inventory_and_order_swap_guard_are_reconstructed() -> None:
         [active_record], formal=False
     )
     assert g50.validate_phase_A_conclusion_evidence(conclusion)
+    assert conclusion["active_phase_A_pass_by_replicate"] == {"0": True}
+    serialized = json.loads(json.dumps(conclusion, allow_nan=False))
+    assert serialized == conclusion
+    assert g50.validate_phase_A_conclusion_evidence(serialized)
     tampered = copy.deepcopy(conclusion)
-    tampered["active_phase_A_pass_by_replicate"][0] = False
+    tampered["active_phase_A_pass_by_replicate"]["0"] = False
     assert not g50.validate_phase_A_conclusion_evidence(tampered)
+
+    integer_keyed = copy.deepcopy(conclusion)
+    integer_keyed["active_phase_A_pass_by_replicate"] = {0: True}
+    assert not g50.validate_phase_A_conclusion_evidence(integer_keyed)
+
+    formal_records = [
+        {
+            "replicate": replicate,
+            "pass_records": [{"activation": {"treatment_active": True}}],
+        }
+        for replicate in (0, 1, 2)
+    ]
+    formal = g50.build_phase_A_conclusion_evidence(formal_records, formal=True)
+    assert formal["active_phase_A_pass_by_replicate"] == {
+        "0": True,
+        "1": True,
+        "2": True,
+    }
+    assert g50.validate_phase_A_conclusion_evidence(
+        json.loads(json.dumps(formal, allow_nan=False))
+    )
 
     implementation = inspect.getsource(g50.phase_A_order_swap_guard)
     assert "tuple(reversed(ARMS))" in implementation

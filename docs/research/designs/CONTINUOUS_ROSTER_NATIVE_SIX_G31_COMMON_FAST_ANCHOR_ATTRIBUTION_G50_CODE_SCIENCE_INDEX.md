@@ -100,7 +100,12 @@ both objective rows finite, and requires each group live in at least one row
 with strict norm `>1e-12`. Equality at `1e-6` is inactive; equality at `1e-12`
 is not live. `build_phase_A_conclusion_evidence` requires one active pass for
 the nonformal replicate and for every formal replicate `0|1|2`; the null arm
-contributes zero activation evidence.
+contributes zero activation evidence. Its activation map emits canonical JSON
+replicate keys `"0"|"1"|"2"` at construction time while
+`required_replicates` remains numeric. The same exact validator must accept the
+evidence before serialization and after a JSON write/read round trip; the
+readiness static artifact carries and reconstructs this evidence before later
+phases can pass.
 
 ## Phase boundary and Phase B
 
