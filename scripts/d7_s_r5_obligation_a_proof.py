@@ -108,15 +108,45 @@ def brute_force(C, forbidden, n):
 
 
 def hall_witness(n, allowed):
-    """Smallest agent set S with |N(S)| < |S|, or None if Hall's condition holds."""
+    """Smallest agent set S with |N(S)| < |S|, or None if Hall's condition holds.
+
+    Pro's ruling 2026-07-29: a refusal must carry S, N(S), |S| and |N(S)| -- not
+    merely the neighbourhood size. A size alone cannot be checked against the
+    graph that produced it.
+    """
     for size in range(1, n + 1):
         for S in itertools.combinations(range(n), size):
             nbr = set()
             for i in S:
                 nbr |= allowed[i]
             if len(nbr) < len(S):
-                return {"S": list(S), "neighbourhood": sorted(nbr)}
+                return {"S": sorted(S), "N_S": sorted(nbr),
+                        "abs_S": len(S), "abs_N_S": len(nbr)}
     return None
+
+
+def forbidden_from_allowed(n, allowed):
+    """Every pair NOT in the allowed adjacency, so a sparse graph reaches the
+    solver as forbidden cells rather than as an implicit assumption."""
+    return {(i, j) for i in range(n) for j in range(n) if j not in allowed[i]}
+
+
+def sentinel_dominates(C, n):
+    """The finite sentinel is admissible only when proved larger than every
+    possible legal total cost for the geometry in hand (Pro, 2026-07-29)."""
+    return BIG > float(n) * float(np.max(C)) + 1.0
+
+
+def _random_sparse(rng, n, keep):
+    """A derangement-shaped sparse graph: never the incumbent edge, and each
+    agent keeps a random subset of the rest."""
+    allowed = []
+    for i in range(n):
+        others = [j for j in range(n) if j != i]
+        rng.shuffle(others)
+        k = max(1, int(round(keep * len(others))))
+        allowed.append(set(others[:k]))
+    return allowed
 
 
 def _ring(n, r=10.0):
@@ -174,7 +204,93 @@ def main():
     w = hall_witness(3, allowed)
     print(f"  allowed={allowed} witness={w}")
     print("  => infeasible at n=3, so a cardinality test alone is NOT the support rule")
-    ok &= (w is not None)
+    ok &= (w is not None and w["abs_N_S"] < w["abs_S"])
+
+    # ---- Step 0 additions (Pro 2026-07-29): the tests above use the COMPLETE
+    # non-incumbent graph. The real control has SPARSE graphs after geometric
+    # exclusion, so A's technical certificate needs sparse coverage.
+    print("\n=== A5s sparse graphs: canonical vs brute force, feasible and not ===")
+    sparse_trials = sparse_feasible = sparse_infeasible = 0
+    sparse_bad = 0
+    witness_bad = 0
+    for n in range(3, 7):
+        for keep in (0.34, 0.5, 0.75):
+            for _ in range(25):
+                sparse_trials += 1
+                allowed = _random_sparse(rng, n, keep)
+                forb = forbidden_from_allowed(n, allowed)
+                C = cost_matrix(rng.uniform(-50, 50, (n, 2)), rng.uniform(-50, 50, (n, 2)))
+                if not sentinel_dominates(C, n):
+                    sparse_bad += 1
+                    continue
+                w = hall_witness(n, allowed)
+                can, can_c = canonical_min_derangement(C, forb, n)
+                bf, bf_c = brute_force(C, forb, n)
+                if bf is None:
+                    # Brute force found no legal assignment: Hall must agree, and
+                    # the canonical solver must refuse rather than return a
+                    # forbidden edge.
+                    sparse_infeasible += 1
+                    if w is None or can is not None:
+                        sparse_bad += 1
+                        witness_bad += 1
+                    continue
+                sparse_feasible += 1
+                if w is not None:
+                    sparse_bad += 1        # Hall claimed infeasible; enumeration disagrees
+                    witness_bad += 1
+                    continue
+                if can is None or abs(can_c - bf_c) > 1e-9:
+                    sparse_bad += 1
+                    continue
+                if any(p in forb for p in can):
+                    sparse_bad += 1        # returned a forbidden edge
+    print(f"  trials={sparse_trials} feasible={sparse_feasible} "
+          f"infeasible={sparse_infeasible} disagreements={sparse_bad}")
+    print(f"  witness/enumeration disagreements={witness_bad}")
+    ok &= (sparse_bad == 0)
+
+    print("\n=== A5s sparse graphs with exact ties ===")
+    sparse_tie_bad = 0
+    for n in (4, 5, 6):
+        pts = _ring(n)
+        C = cost_matrix(pts, pts)
+        for drop in range(n):
+            allowed = [set(j for j in range(n) if j != i) for i in range(n)]
+            allowed[drop] = set(list(allowed[drop])[:1])     # sparsify one agent hard
+            forb = forbidden_from_allowed(n, allowed)
+            w = hall_witness(n, allowed)
+            can, can_c = canonical_min_derangement(C, forb, n)
+            bf, bf_c = brute_force(C, forb, n)
+            if bf is None:
+                if w is None or can is not None:
+                    sparse_tie_bad += 1
+                continue
+            if w is not None or can is None:
+                sparse_tie_bad += 1
+                continue
+            if abs(can_c - bf_c) > 1e-9 or sorted((j, i) for i, j in can) != sorted((j, i) for i, j in bf):
+                sparse_tie_bad += 1
+    print(f"  disagreements={sparse_tie_bad}")
+    ok &= (sparse_tie_bad == 0)
+
+    print("\n=== A6w the witness describes the graph actually handed to the solver ===")
+    allowed = [{2}, {2}, {0, 1}]
+    forb = forbidden_from_allowed(3, allowed)
+    w = hall_witness(3, allowed)
+    edges_in_forb = all((i, j) in forb for i in range(3) for j in range(3)
+                        if j not in allowed[i])
+    S_has_no_outside_edge = all(
+        j in w["N_S"] for i in w["S"] for j in allowed[i])
+    print(f"  every non-allowed pair reached the solver as forbidden: {edges_in_forb}")
+    print(f"  N(S) covers every allowed edge out of S: {S_has_no_outside_edge}")
+    ok &= (edges_in_forb and S_has_no_outside_edge)
+
+    print("\n=== sentinel admissibility ===")
+    C = cost_matrix(rng.uniform(-50, 50, (8, 2)), rng.uniform(-50, 50, (8, 2)))
+    dom = sentinel_dominates(C, 8)
+    print(f"  BIG={BIG:g} > n*max(C)={8*float(np.max(C)):.3f} : {dom}")
+    ok &= dom
 
     print("\n=== A3: |U_e| == |D_e| by construction ===")
     a3 = True

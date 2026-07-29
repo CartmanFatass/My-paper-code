@@ -44,6 +44,28 @@ def _departing_for_charge(env, i):
         battery_ratio=float(env.uav_battery_ratios[i]), trigger_ratio=trigger))
 
 
+def _present_and_acting(env, i):
+    """Eligibility conditions 1 and 3 -- present and active at the boundary, and
+    not failed, terminal or otherwise non-acting.
+
+    Asserted rather than assumed (Pro 2026-07-29). The registered Scenario 7 env
+    exposes no failure or termination flag per UAV; every attribute probed here
+    is optional, so a future env that gains one is handled instead of silently
+    treated as healthy.
+    """
+    for attr, bad in (("uav_failed", True), ("uav_terminated", True),
+                      ("uav_active", False), ("uav_alive", False)):
+        arr = getattr(env, attr, None)
+        if arr is None:
+            continue
+        try:
+            if bool(np.asarray(arr, dtype=bool)[i]) == bad:
+                return False
+        except (IndexError, TypeError, ValueError):
+            continue
+    return True
+
+
 def observe_check(env, duty_map, duty_positions):
     """One check-boundary observation. Returns the obligation-B row."""
     n_uavs = int(env.n_uavs)
@@ -54,23 +76,33 @@ def observe_check(env, duty_map, duty_positions):
     covered = sorted(duty_map.keys())
     airborne = [i for i in range(n_uavs) if not charging[i]]
 
+    # ---- The six-condition eligibility definition, asserted rather than assumed.
+    # FROZEN RULE (Pro 2026-07-29, option 2 of the two offered): the eligible set
+    # is established ONCE from the six conditions. A later empty adjacency is
+    # MATCHING INFEASIBILITY, not a reason to shrink the treated set. Iterating a
+    # pruning loop to a fixed point would choose whom to treat on the basis of
+    # feasibility, which preferentially treats the easy agents -- the exact
+    # selection effect the post-start abort rule exists to prevent.
     exclusions = Counter()
     action_bearing = []
     for i in range(n_uavs):
-        if i not in uav_to_duty:
+        if not _present_and_acting(env, i):          # conditions 1 and 3
+            exclusions["absent_failed_or_terminal"] += 1
+            continue
+        if i not in uav_to_duty:                     # condition 4
             exclusions["no_incumbent_duty"] += 1
             continue
-        if charging[i]:
+        if charging[i]:                              # condition 2
             exclusions["charging"] += 1
             continue
-        if _departing_for_charge(env, i):
+        if _departing_for_charge(env, i):            # condition 5
             exclusions["duty_overridden_by_station_return"] += 1
             continue
         action_bearing.append(i)
 
-    # Condition 6 needs a candidate duty pool; the pool is the duties held by
-    # action-bearing incumbents, which is the retained covered set restricted to
-    # agents whose duty actually drives them.
+    # The retained covered-duty set is the set of duties held by action-bearing
+    # incumbents -- that is what the derangement permutes. Condition 6 is
+    # evaluated against it, once.
     pool = {uav_to_duty[u] for u in action_bearing}
     allowed = {}
     for u in action_bearing:
@@ -82,31 +114,23 @@ def observe_check(env, duty_map, duty_positions):
                 continue
             if np.linalg.norm(np.asarray(duty_positions[d], dtype=float)[:2] - z0) > TARGET_IDENTITY_TOL:
                 opts.add(d)
-        if opts:
+        if opts:                                     # condition 6
             allowed[u] = opts
         else:
             exclusions["no_geometrically_distinct_alternative"] += 1
 
-    eligible = sorted(allowed)
-    # Restrict options to the eligible pool, then test Hall's condition.
+    eligible = sorted(allowed)                       # FROZEN from here on
     elig_duties = {uav_to_duty[u] for u in eligible}
     allowed_r = {u: (allowed[u] & elig_duties) for u in eligible}
-    empty_after = [u for u in eligible if not allowed_r[u]]
-    for _ in empty_after:
-        exclusions["no_alternative_within_eligible_pool"] += 1
-    eligible = [u for u in eligible if allowed_r[u]]
-    elig_duties = {uav_to_duty[u] for u in eligible}
-    allowed_r = {u: (allowed_r[u] & elig_duties) for u in eligible}
-    eligible = [u for u in eligible if allowed_r[u]]
 
     n_e = len(eligible)
     witness = None
     if n_e < 2:
         exists = False
-        witness = {"reason": "fewer_than_two_eligible", "n_eligible": n_e}
+        witness = {"reason": "fewer_than_two_eligible", "abs_S": n_e}
     else:
-        idx = {u: k for k, u in enumerate(eligible)}
-        duty_idx = {d: k for k, d in enumerate(sorted(elig_duties))}
+        duty_list = sorted(elig_duties)
+        duty_idx = {d: k for k, d in enumerate(duty_list)}
         sets = [set(duty_idx[d] for d in allowed_r[u]) for u in eligible]
         w = None
         for size in range(1, n_e + 1):
@@ -115,15 +139,17 @@ def observe_check(env, duty_map, duty_positions):
                 for k in S:
                     nbr |= sets[k]
                 if len(nbr) < len(S):
+                    # Full witness: S, N(S), |S|, |N(S)| -- a size alone cannot
+                    # be checked against the graph that produced it.
                     w = {"reason": "hall_violation",
-                         "S_uavs": [eligible[k] for k in S],
-                         "neighbourhood_size": len(nbr)}
+                         "S": [eligible[k] for k in S],
+                         "N_S": [duty_list[k] for k in sorted(nbr)],
+                         "abs_S": len(S), "abs_N_S": len(nbr)}
                     break
             if w:
                 break
         exists = w is None
         witness = w
-        del idx
 
     return {
         "total_duties": total_duties,
