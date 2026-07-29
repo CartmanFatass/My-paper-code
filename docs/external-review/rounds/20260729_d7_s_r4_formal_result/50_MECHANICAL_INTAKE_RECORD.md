@@ -74,6 +74,16 @@ tab returned "The browser is shutting down", `chrome.exe` was then absent from
 every standard install location, and `list_connected_browsers` returned `[]`.
 Five recovery attempts, then stop.
 
+**Correction 2026-07-29.** The `chrome.exe` half of that was a wrong inference,
+not a fact about the machine. Chrome is not installed here and never was —
+`App Paths\chrome.exe` is unregistered. The browser serving tabs was Edge.
+`tabs_context_mcp` reports `chrome://newtab/` because Chromium-based Edge uses
+that scheme, and the search was aimed at `chrome.exe` on the strength of that
+string. Nothing was uninstalled mid-session; the search was looking for the
+wrong executable. Evidence, including `exit_type=Normal` proving a clean close
+rather than a crash:
+`docs/research/cdc/EVIDENCE_NOTES/20260729_TRANSPORT_THE_BROWSER_IS_CLOSED_NOT_CRASHED.md`.
+
 **Nothing was submitted in that pass.** The clipboard was loaded and verified,
 but the composer was never clicked, nothing was pasted and no send occurred —
 every browser call was read-only. That is why this round carries one fence and
