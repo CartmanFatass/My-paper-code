@@ -67,7 +67,7 @@ No G48 source, runner, test, index, runtime, review, CDC, `CURRENT_WORK`, or wor
 | Accepted G48 duplicated-immediate branch is the only predecessor | `project_g49_arms`, provenance constants, `reconstruct_static_certificate` | `validate_static_certificate`; tests assert all three G48 source/stage identities and accepted branch. |
 | Branch start is bitwise paired, storage-disjoint, RNG-free, with empty identical Adam | `project_g49_arms`, `make_g49_optimizers`, `branch_boundary_audit` | Static validator reconstructs arm order, actor state/name/order, Adam inventory/hyperparameters/state, storage and baseline absence. |
 | Reduced route owns exactly one target and one normalization | `_single_immediate_target`, `_normalize_single`, `SingleChannelNormalization` | Exact-key `validate_single_normalization_record`; `_reduced_function_dependency_certificate` reports every removed count as zero. |
-| Reduced artifact has no second/dummy/compatibility residue | `_reduced_pass_record`, reduced final checkpoint schema | `validate_reduced_schema` recursively rejects `channel_2`, `second_*`, duplicate-equality, equal-mean, averaging, dummy and compatibility fields. |
+| Reduced artifact has no hidden second/dummy/compatibility residue | `_reduced_pass_record`, `_REDUCED_PASS_KEYS`, `_SINGLE_NORMALIZATION_KEYS`, `_SINGLE_GRADIENT_EVIDENCE_KEYS`, `_GRADIENT_ROW_KEYS`, `_REDUCED_CHECKPOINT_KEYS`, reduced final checkpoint schema | `_validate_reduced_pass` and `validate_checkpoint_pair` require exact outer key sets; target and gradient validators require exact nested key sets; `validate_reduced_schema` recursively rejects duplicated-immediate, second-channel, equal-mean, averaging, dummy and compatibility identities in keys and free-form string values. Focused update and artifact-reload tamper guards inject the innocuous `legacy` key with `accepted_G48_duplicated_immediate` and `immediate_2` values and fail closed. |
 | Actual reference target/normalization bytes equal the single path | `_normalization_equivalence` compares the one reduced row with both accepted G48 rows | `validate_update_evidence` requires every equality observation; focused tamper flips an equality and fails closed. |
 | Actual reference `0.5*(g1+g2)` bytes equal one gradient | `_duplicate_probe` calls the inherited literal equal-mean function; `_single_probe` performs one `autograd.grad`; `_pass_equivalence` compares tensors | Every pass validator requires both channel rows, the actual combined row and the single row to be byte-equal. No symbolic-equality flag is accepted alone. |
 | Entropy is common and added exactly once | Both probes form the unchanged entropy objective once; reference uses inherited add, reduced uses one tensor addition | Per-pass equality binds entropy and assigned-gradient digests; schemas require one entropy addition. |
@@ -116,7 +116,7 @@ The runner changes an execution entry and artifact schema, so technical acceptan
 ## Next boundary
 
 ```text
-CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_CODE_SCIENCE_ALIGNMENT_AUDIT
+CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_CODE_SCIENCE_ALIGNMENT_CORRECTION_RECHECK
 ```
 
 No nonformal or formal scientific compute is admitted before a fresh independently ALIGNED G49 source/stage binding and a later explicit execution interface.

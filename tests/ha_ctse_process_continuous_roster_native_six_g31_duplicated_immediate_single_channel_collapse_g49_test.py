@@ -104,6 +104,13 @@ def test_static_factorization_and_single_schema_have_zero_removed_residue(
     assert g49.validate_reduced_schema({"target": record})
     contaminated = {"target": record, "channel_2_gradient": "placeholder"}
     assert not g49.validate_reduced_schema(contaminated)
+    hidden_value_residue = {
+        "legacy": {
+            "route": "accepted_G48_duplicated_immediate",
+            "channels": ["immediate_1", "immediate_2"],
+        }
+    }
+    assert not g49.validate_reduced_schema(hidden_value_residue)
 
 
 def test_actual_two_loss_to_one_loss_bytes_match_through_both_adam_passes(
@@ -166,6 +173,13 @@ def test_tamper_guards_reject_removed_fields_and_projection_drift(
     dummy[g49.REDUCED_ARM]["dummy_compatibility_channel"] = 0
     assert not g49.validate_checkpoint_pair(dummy)
 
+    hidden_checkpoint_residue = copy.deepcopy(checkpoints)
+    hidden_checkpoint_residue[g49.REDUCED_ARM]["legacy"] = {
+        "route": "accepted_G48_duplicated_immediate",
+        "channels": ["immediate_1", "immediate_2"],
+    }
+    assert not g49.validate_checkpoint_pair(hidden_checkpoint_residue)
+
     drift = copy.deepcopy(checkpoints)
     projection = drift[g49.REDUCED_ARM]["canonical_projection"]
     first = next(iter(projection["actor_log_std_state"]))
@@ -177,6 +191,19 @@ def test_tamper_guards_reject_removed_fields_and_projection_drift(
         "actual_reference_average_equals_single_gradient_bytes"
     ] = False
     assert not g49.validate_update_evidence(forged)
+
+    hidden_pass_residue = copy.deepcopy(record)
+    hidden_pass_residue["pass_records"][0]["reduced_route"]["legacy"] = {
+        "route": "accepted_G48_duplicated_immediate",
+        "channels": ["immediate_1", "immediate_2"],
+    }
+    assert not g49.validate_update_evidence(hidden_pass_residue)
+
+    nested_gradient_residue = copy.deepcopy(record)
+    nested_gradient_residue["pass_records"][0]["reduced_route"][
+        "gradient_evidence"
+    ]["legacy"] = "single_immediate"
+    assert not g49.validate_update_evidence(nested_gradient_residue)
 
 
 def test_gate_exception_pickle_roundtrip_preserves_fail_closed_diagnostics() -> None:

@@ -206,7 +206,10 @@ def test_artifact_and_first_match_tamper_guards_fail_closed(
     shutil.copytree(root, reduced_tampered)
     path = runner._checkpoint_path(reduced_tampered, source.REDUCED_ARM)
     checkpoint = runner._load_checkpoint(path)
-    checkpoint["route_schema"]["channel_2_placeholder"] = 0
+    checkpoint["legacy"] = {
+        "route": "accepted_G48_duplicated_immediate",
+        "channels": ["immediate_1", "immediate_2"],
+    }
     runner._save_checkpoint(path, checkpoint)
     manifest_path = reduced_tampered / runner.TRAIN_MANIFEST
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))

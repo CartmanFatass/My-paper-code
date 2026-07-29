@@ -410,6 +410,35 @@ _SINGLE_NORMALIZATION_KEYS = {
     "zero_scale_maps_to_zero",
 }
 
+_GRADIENT_ROW_KEYS = {"gradient_norm", "finite", "live"}
+_SINGLE_GRADIENT_EVIDENCE_KEYS = {
+    "registered_actor_groups",
+    "single_channel_actor_groups",
+    "single_channel_global",
+    "all_group_gradients_finite",
+    "passed",
+}
+_REDUCED_PASS_KEYS = {
+    "route",
+    "target",
+    "policy_loss_digest",
+    "credit_gradient_digest",
+    "entropy_gradient_digest",
+    "assigned_gradient_digest",
+    "gradient_evidence",
+    "entropy_addition_count",
+    "actor_Adam_step_count",
+}
+_REDUCED_CHECKPOINT_KEYS = {
+    "algorithm_id",
+    "source_id",
+    "arm",
+    "kind",
+    "route_schema",
+    "canonical_projection",
+    "update_evidence_sha256",
+}
+
 
 def _single_normalization_record(
     normalization: SingleChannelNormalization,
@@ -429,7 +458,11 @@ def _single_normalization_record(
 
 
 def validate_single_normalization_record(value: object) -> bool:
-    if not isinstance(value, Mapping) or set(value) != _SINGLE_NORMALIZATION_KEYS:
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != _SINGLE_NORMALIZATION_KEYS
+        or _forbidden_reduced_schema_fields(value)
+    ):
         return False
     try:
         centered_sum_square = torch.as_tensor(
@@ -501,7 +534,11 @@ def _single_gradient_evidence(
 
 
 def validate_single_gradient_evidence(value: object) -> bool:
-    if not isinstance(value, Mapping):
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != _SINGLE_GRADIENT_EVIDENCE_KEYS
+        or _forbidden_reduced_schema_fields(value)
+    ):
         return False
     groups = value.get("single_channel_actor_groups")
     global_row = value.get("single_channel_global")
@@ -513,7 +550,7 @@ def validate_single_gradient_evidence(value: object) -> bool:
         return False
 
     def valid_row(row: object) -> bool:
-        if not isinstance(row, Mapping):
+        if not isinstance(row, Mapping) or set(row) != _GRADIENT_ROW_KEYS:
             return False
         try:
             norm = float(row["gradient_norm"])
@@ -621,7 +658,10 @@ def _single_probe(
 def _forbidden_reduced_schema_fields(value: object) -> tuple[str, ...]:
     forbidden_fragments = (
         "channel_2",
+        "immediate_2",
         "second_",
+        "duplicated_immediate",
+        "duplicate_immediate",
         "duplicate_channel",
         "duplicate_equality",
         "equal_mean",
@@ -631,10 +671,29 @@ def _forbidden_reduced_schema_fields(value: object) -> tuple[str, ...]:
     )
     found: list[str] = []
 
+    def normalized_identity(item: object) -> str:
+        parts: list[str] = []
+        pending_separator = False
+        for character in str(item).lower():
+            if character.isalnum():
+                if pending_separator and parts:
+                    parts.append("_")
+                parts.append(character)
+                pending_separator = False
+            else:
+                pending_separator = True
+        return "".join(parts)
+
+    protected_identity_fields = {
+        "algorithm_id": ALGORITHM_ID,
+        "source_id": SOURCE_ID,
+        "accepted_g48_formal_branch": ACCEPTED_G48_FORMAL_BRANCH,
+    }
+
     def visit(row: object, path: str) -> None:
         if isinstance(row, Mapping):
             for key, item in row.items():
-                name = str(key).lower()
+                name = normalized_identity(key)
                 next_path = f"{path}.{key}" if path else str(key)
                 if any(fragment in name for fragment in forbidden_fragments):
                     found.append(next_path)
@@ -642,6 +701,13 @@ def _forbidden_reduced_schema_fields(value: object) -> tuple[str, ...]:
         elif isinstance(row, (list, tuple)):
             for index, item in enumerate(row):
                 visit(item, f"{path}[{index}]")
+        elif isinstance(row, str):
+            field_name = str(path).rsplit(".", 1)[-1]
+            if protected_identity_fields.get(field_name) == row:
+                return
+            identity = normalized_identity(row)
+            if any(fragment in identity for fragment in forbidden_fragments):
+                found.append(path)
 
     visit(value, "")
     return tuple(found)
@@ -1249,7 +1315,11 @@ def _validate_reference_pass(value: object) -> bool:
 
 
 def _validate_reduced_pass(value: object) -> bool:
-    if not isinstance(value, Mapping) or not validate_reduced_schema(value):
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != _REDUCED_PASS_KEYS
+        or not validate_reduced_schema(value)
+    ):
         return False
     return bool(
         value.get("route") == "single_immediate"
@@ -1486,7 +1556,11 @@ def validate_checkpoint_pair(value: object) -> bool:
         return False
     reference = value.get(REFERENCE_ARM)
     reduced = value.get(REDUCED_ARM)
-    if not isinstance(reference, Mapping) or not isinstance(reduced, Mapping):
+    if (
+        not isinstance(reference, Mapping)
+        or not isinstance(reduced, Mapping)
+        or set(reduced) != _REDUCED_CHECKPOINT_KEYS
+    ):
         return False
     reduced_route = reduced.get("route_schema")
     if not isinstance(reduced_route, Mapping) or not validate_reduced_schema(reduced):
