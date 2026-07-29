@@ -157,3 +157,48 @@ both limbs -- so re-deriving it rather than trusting it is the point.
 
 **Every numeric claim in the result submission is now independently verified**:
 the Part-A point and interval, both `U*` points, and the limb states.
+
+## Correction, after Pro's ruling — the equivalence is an instrument verdict
+
+Appended rather than substituted. The claims below stood in this note and were
+falsified; editing them away would hide that the record was wrong once.
+
+Ruling: `docs/external-review/rounds/20260729_d7_s_r4_formal_result/21_PRO_OPEN_RAW.md`.
+Reconciliation: `30_PM_SCIENTIFIC_RECONCILIATION.md` beside it.
+
+**The headline reading of this note is too strong.** The numbers are right and
+the branch stands, but the equivalence does not identify the proposition it was
+built to test. `full_sync_SET` removes only *explicit incumbent protection* — it
+greedily reassigns the nearest UAV to each duty, receives no incumbent map, and
+may hand a duty straight back to its current holder. Renewal exposure was
+therefore neither guaranteed nor measured, and the equivalence cannot separate
+genuine zero-cost renewal from a recomputation that mostly reproduces the
+incumbent assignment.
+
+`conformance.ok = True` does not close this. Its arm-distinctness check compares
+`constructive_mixed`'s post-LEAVE map to the pre-LEAVE ownership map; it never
+compares `full_sync_SET` to anything.
+
+Two specific claims above are corrected:
+
+1. **"the tight pooled interval comes from topology-level cancellation, not from
+   small within-topology variance"** — overstated. All eight topology point
+   estimates are themselves inside `±5`, so this is not mainly large effects
+   cancelling. Cancellation helps place the point near `0.484`; it does not
+   explain the interval width, and between-topology heterogeneity generally
+   widens an interval. No variance decomposition was supplied, so nothing here
+   established which term dominates.
+2. **"the source-control contrast is systematically near zero at this margin"** —
+   too strong. Defensible: every observed topology-level point contrast was under
+   five G-units in magnitude, and the equal-topology-weighted population interval
+   sat comfortably inside the margin.
+
+What survives unchanged: the branch, the numbers, the bit-exact re-derivations,
+and the finding that the development topology did **not** contaminate the formal
+population. `MATERIALITY_MARGIN = 5.0` is sound — the defect is the control, not
+the anchor.
+
+The durable claim is the narrower one: a greedy duty-map recomputation at every
+shared check was externally equivalent within five G-units to `constructive_mixed`
+on eight fresh topologies. That is a baseline result about replanning frequency,
+not evidence that individual persistence is unnecessary.

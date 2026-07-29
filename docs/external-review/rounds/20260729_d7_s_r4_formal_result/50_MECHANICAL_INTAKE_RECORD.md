@@ -9,8 +9,30 @@ branch        untied-k
 reviewer      open_divergent (registered), conversation 6a63979e-35d8-83e8-8da7-10de59a5fdeb
 preflight     ROUND_PREFLIGHT_READY, allow_list_count=8, archive REVIEW_EVIDENCE_ARCHIVE_READY
 fence_sent    YES
-status        REVIEW_PENDING
+status        REVIEW_RECEIVED_AND_ARCHIVED
+raw_file      21_PRO_OPEN_RAW.md (20307 chars, markdown preserved, byte-exact reread)
+worked_for    9m55s as reported by the page
 ```
+
+## Capture
+
+Captured through the message's own `Copy response` control, not from rendered
+page text, so headings, tables and fenced blocks survive: 40 headings, 14 fenced
+blocks, both `5a` and `5b` present, `stage_commit` present in the body.
+
+**The first copy attempt took the wrong message.** A `find` for the copy control
+returned the toolbar of the *previous* round's answer; the clipboard came back
+37728 chars with no `3e5624fa` in it. Caught by asserting the commit was present
+rather than by trusting the click. Resolved by selecting the
+`copy-turn-action-button` that follows the last assistant node in document order
+-- exactly one does -- and re-copying against a clipboard sentinel to prove the
+copy actually happened. 20307 chars, commit present.
+
+A monitor inspection had independently reported the same 37728-char figure and
+described the previous round's subject matter while claiming generation had
+stopped. That report was wrong on which turn it read, and it was not acted on:
+the page was re-read directly and the last assistant turn identified by document
+position relative to the fence.
 
 ## Submission
 
