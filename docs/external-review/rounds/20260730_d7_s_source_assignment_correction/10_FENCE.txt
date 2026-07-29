@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260730_d7_s_source_assignment_correction
+stage_commit=9cb7974563cb7de3371b1d22f3691fc00e02744d
+question=docs/external-review/rounds/20260730_d7_s_source_assignment_correction/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
