@@ -458,18 +458,18 @@ class GenericShortDynamicRosterEnv:
         # arrays: BoundaryMember.make sends each through _float_array, which
         # ends in array.copy(), so passing one source twice yields exactly the
         # two arrays this built before.
+        keys = self.active_keys
+        observations = self._observation_matrix(keys)
         members = tuple(
             BoundaryMember.make(
                 str(key),
                 self.lifecycles[key].membership_epoch,
-                observation,
-                observation,
+                observations[index],
+                observations[index],
                 obs_dim=OBSERVATION_DIM,
                 critic_member_dim=OBSERVATION_DIM,
             )
-            for key, observation in (
-                (key, self._observation_for(key)) for key in self.active_keys
-            )
+            for index, key in enumerate(keys)
         )
         return BoundarySnapshot.make(
             self.time,
@@ -531,10 +531,14 @@ class GenericShortDynamicRosterEnv:
             raise RuntimeError("event boundary was not prepared")
         return _copied_transaction(self._pending_event_transaction)
 
-    def _observation_for(self, key: int) -> np.ndarray:
-        state = self.lifecycles[key]
-        if state.status != ACTIVE:
-            raise RuntimeError("cannot observe an inactive lifecycle")
+    def _shared_observation_prefix(self) -> tuple[float, ...]:
+        """Coordinates 0-7, which are properties of the EPISODE, not the member.
+
+        Every member of a boundary shares these exact eight values, and they were
+        being rebuilt once per member -- including a `np.log1p` call and, before
+        the cache, a full `active_keys` sort.
+        """
+
         wave = self.current_wave
         required_arrived = self.short_required_total
         completion_fraction = (
@@ -542,37 +546,61 @@ class GenericShortDynamicRosterEnv:
             if required_arrived > 0
             else 0.0
         )
-        observation = np.zeros(OBSERVATION_DIM, dtype=np.float32)
-        observation[0] = float(self.time) / float(HORIZON)
-        observation[1] = np.log1p(len(self.active_keys)) / np.log(7.0)
-        observation[2] = float(self.persistent_units) / float(PERSISTENT_TARGET)
-        observation[3] = float(self.persistent_owner is not None)
-        observation[4] = float(wave is not None)
-        observation[5] = (
-            float(wave.steps_remaining(self.time)) / float(SHORT_WINDOW)
-            if wave is not None
-            else 0.0
+        return (
+            float(self.time) / float(HORIZON),
+            float(np.log1p(len(self.active_keys)) / np.log(7.0)),
+            float(self.persistent_units) / float(PERSISTENT_TARGET),
+            float(self.persistent_owner is not None),
+            float(wave is not None),
+            (
+                float(wave.steps_remaining(self.time)) / float(SHORT_WINDOW)
+                if wave is not None
+                else 0.0
+            ),
+            (
+                float(wave.required_work - wave.completed_work)
+                / float(max(wave.required_work, 1))
+                if wave is not None
+                else 0.0
+            ),
+            completion_fraction,
         )
-        observation[6] = (
-            float(wave.required_work - wave.completed_work)
-            / float(max(wave.required_work, 1))
-            if wave is not None
-            else 0.0
-        )
-        observation[7] = completion_fraction
-        observation[8] = float(self.persistent_owner == key)
-        observation[9] = float(state.short_streak) / float(SHORT_STREAK_TARGET)
-        observation[10] = float(state.contributed_current_wave)
-        observation[11] = float(state.active_steps) / float(HORIZON)
-        observation[12 + int(state.previous_action)] = 1.0
-        return observation
+
+    def _observation_matrix(self, keys: tuple[int, ...]) -> np.ndarray:
+        """Every active member's observation as one [n, OBSERVATION_DIM] block.
+
+        Bit-identical to calling `_observation_for` per key: the shared prefix is
+        the same eight Python floats written into the same float32 storage, and
+        the per-member coordinates are written exactly as before. The only thing
+        that changes is how many times the prefix is computed.
+        """
+
+        rows = np.zeros((len(keys), OBSERVATION_DIM), dtype=np.float32)
+        if not keys:
+            return rows
+        rows[:, :8] = self._shared_observation_prefix()
+        owner = self.persistent_owner
+        for index, key in enumerate(keys):
+            state = self.lifecycles[key]
+            if state.status != ACTIVE:
+                raise RuntimeError("cannot observe an inactive lifecycle")
+            rows[index, 8] = float(owner == key)
+            rows[index, 9] = float(state.short_streak) / float(SHORT_STREAK_TARGET)
+            rows[index, 10] = float(state.contributed_current_wave)
+            rows[index, 11] = float(state.active_steps) / float(HORIZON)
+            rows[index, 12 + int(state.previous_action)] = 1.0
+        return rows
+
+    def _observation_for(self, key: int) -> np.ndarray:
+        # Delegates so the single-key and batched paths cannot drift apart. It
+        # is no longer on the hot path; `_event_snapshot` and `observe` build the
+        # whole block at once.
+        return self._observation_matrix((key,))[0]
 
     def observe(self) -> DynamicRosterView:
         self._prepare()
         keys = self.active_keys
-        observations = np.stack(
-            [self._observation_for(key) for key in keys], axis=0
-        ).astype(np.float32)
+        observations = self._observation_matrix(keys).astype(np.float32)
         self.observation_shapes_valid &= observations.shape == (
             len(keys),
             OBSERVATION_DIM,
