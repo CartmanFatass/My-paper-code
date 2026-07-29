@@ -72,9 +72,22 @@ if (-not $command) { exit 0 }
 
 $repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 
+# --- A flag inside a quoted message is prose, not a flag ---------------------
+# The first commit this guard ever judged was BLOCKED by its own commit message,
+# which described the bypass it forbids. Rules 1 and 2 match FLAGS and
+# SUBCOMMANDS, so a heredoc body or a quoted -m argument is noise to them.
+# Blocking that teaches the next reader to route around the guard, which costs
+# more than the bypass it covers.
+#
+# Rule 3 deliberately keeps reading the RAW command. It matches branch NAMES,
+# and stripping a quoted `"aggressive"` would open the one hole the user ruling
+# exists to close. There, a false block is recoverable and a false allow is not.
+$scan = [regex]::Replace($command, "(?s)<<-?\s*['`"]?(\w+)['`"]?.*?\r?\n\s*\1", ' ')
+$scan = [regex]::Replace($scan, "`"[^`"]*`"|'[^']*'", ' ')
+
 # --- RULE 1: --no-verify -----------------------------------------------------
-if ($command -match 'git\b' -and $command -match '\bcommit\b') {
-    if ($command -match '(^|\s)(--no-verify|-n)(\s|$)') {
+if ($scan -match 'git\b' -and $scan -match '\bcommit\b') {
+    if ($scan -match '(^|\s)(--no-verify|-n)(\s|$)') {
         Deny @"
 --no-verify is a user-directed override, not a way to unblock yourself.
 
@@ -89,8 +102,8 @@ If the user has directed this override, say so and ask them to run it.
 }
 
 # --- RULE 2: push before tag -------------------------------------------------
-$isTagCreate = $command -match 'git\b[^|;&]*\btag\b(?!\s+-[dl])'
-$isTagPush = $command -match 'git\b[^|;&]*\bpush\b[^|;&]*(--tags|refs/tags|\btag\b)'
+$isTagCreate = $scan -match 'git\b[^|;&]*\btag\b(?!\s+-[dl])'
+$isTagPush = $scan -match 'git\b[^|;&]*\bpush\b[^|;&]*(--tags|refs/tags|\btag\b)'
 if ($isTagCreate -or $isTagPush) {
     $branch = (& git -C $repo rev-parse --abbrev-ref HEAD 2>$null)
     if ($branch) {
@@ -116,12 +129,22 @@ Push first, then tag.
 }
 
 # --- RULE 3: branch scope ----------------------------------------------------
-if ($command -match 'git\b') {
+# Two strings, on purpose. The VERB is detected in $scan, so prose cannot summon
+# the rule: `git commit -m "push before tag, always"` is a commit, and reading
+# `push` out of its message denied it outright -- a guard that blocks ordinary
+# commits gets routed around, and then it guards nothing. The ARGUMENTS are read
+# from the raw $command and unquoted per token, so `git push origin "aggressive"`
+# is still caught. Prose cannot invent a push; quoting cannot hide a branch.
+function Get-RefTokens([string]$tail) {
+    return @($tail -split '\s+' | ForEach-Object { $_.Trim('"', "'") } | Where-Object { $_ })
+}
+
+if ($scan -match 'git\b') {
     # 3a. a push whose refspec names a branch other than the protected one
-    if ($command -match 'git\b[^|;&]*\bpush\b([^|;&]*)') {
-        $tail = $Matches[1]
-        $refs = @($tail -split '\s+' | Where-Object {
-            $_ -and $_ -notmatch '^-' -and $_ -notmatch '^(origin|upstream)$' -and $_ -notmatch 'refs/tags'
+    if ($scan -match 'git\b[^|;&]*\bpush\b' -and
+        $command -match 'git\b[^|;&]*\bpush\b([^|;&]*)') {
+        $refs = @(Get-RefTokens $Matches[1] | Where-Object {
+            $_ -notmatch '^-' -and $_ -notmatch '^(origin|upstream)$' -and $_ -notmatch 'refs/tags'
         })
         foreach ($ref in $refs) {
             $name = ($ref -replace '^.*:', '')      # local:remote refspec
@@ -131,20 +154,21 @@ if ($command -match 'git\b') {
         }
     }
     # 3b. branch deletion, anywhere
-    if ($command -match 'git\b[^|;&]*\bbranch\b[^|;&]*\s-(D|d)\b') {
+    if ($scan -match 'git\b[^|;&]*\bbranch\b[^|;&]*\s-(D|d)\b') {
         Deny 'branch deletion is outside this session. Branches other than the protected one belong to another line.'
     }
     # 3c. switching to an EXISTING local branch that is not the protected one.
     #     Resolved against the real branch list so `git checkout -- <path>` and
     #     `git checkout <commit>` stay untouched -- both are used constantly for
     #     restores, and blocking them would make this guard the obstacle.
-    if ($command -match 'git\b[^|;&]*\b(checkout|switch)\b([^|;&]*)') {
-        $args = @($Matches[2] -split '\s+' | Where-Object { $_ -and $_ -notmatch '^-' })
-        if ($args.Count -gt 0) {
+    if ($scan -match 'git\b[^|;&]*\b(checkout|switch)\b' -and
+        $command -match 'git\b[^|;&]*\b(checkout|switch)\b([^|;&]*)') {
+        $targets = @(Get-RefTokens $Matches[2] | Where-Object { $_ -notmatch '^-' })
+        if ($targets.Count -gt 0) {
             $branches = @(& git -C $repo for-each-ref --format='%(refname:short)' refs/heads 2>$null)
-            foreach ($a in $args) {
-                if ($branches -contains $a -and $a -ne $ProtectedBranch) {
-                    Deny "'$a' is another branch. branch_scope is '$ProtectedBranch' only; this session never checks out another line's work."
+            foreach ($target in $targets) {
+                if ($branches -contains $target -and $target -ne $ProtectedBranch) {
+                    Deny "'$target' is another branch. branch_scope is '$ProtectedBranch' only; this session never checks out another line's work."
                 }
             }
         }

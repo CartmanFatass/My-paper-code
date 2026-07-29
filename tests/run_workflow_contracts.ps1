@@ -7,7 +7,8 @@ $here = $PSScriptRoot
 $contracts = @(
     'review_round_contract_test.ps1',
     'hmasd_research_workflow_contract_test.ps1',
-    'hmasd_experiment_operator_contract_test.ps1')
+    'hmasd_experiment_operator_contract_test.ps1',
+    'pretooluse_guard_contract_test.ps1')
 
 $failed = @()
 foreach ($name in $contracts) {
