@@ -62,6 +62,55 @@ def test_result_contract_configuration_counts_and_source_authority(runner) -> No
     )
 
 
+def test_accepted_anchor_replicate_interface_survives_private_backend_binding(
+    runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    assert runner.source.ACCEPTED_G40_ANCHOR_REPLICATES == (0, 1, 2)
+    assert runner._backend.source is runner.source
+
+    rows = []
+    for replicate in runner.source.ACCEPTED_G40_ANCHOR_REPLICATES:
+        authority = runner._backend.g41.accepted_g40_anchor_authority(replicate)
+        rows.append(
+            {
+                "replicate": replicate,
+                "common_anchor": {
+                    "checkpoint": authority.checkpoint_reference,
+                    "state_digest": authority.complete_state_digest,
+                    "optimizer_steps": (
+                        runner._backend.g41.ACCEPTED_G40_ANCHOR_OPTIMIZER_STEPS
+                    ),
+                },
+            }
+        )
+    manifest = {
+        "schema_version": runner._backend.g41.ACCEPTED_G40_SCHEMA_VERSION,
+        "algorithm": runner._backend.g40.ALGORITHM_ID,
+        "source_id": runner._backend.g40.SOURCE_ID,
+        "source_commit": runner._backend.g41.ACCEPTED_G40_SOURCE_COMMIT,
+        "formal": True,
+        "authorization_token": (
+            runner._backend.g41.ACCEPTED_G40_AUTHORIZATION_TOKEN
+        ),
+        "status": "COMPLETE",
+        "configuration": dict(
+            runner._backend.g41.ACCEPTED_G40_CONFIGURATION_FIELDS
+        ),
+        "replicate_results": rows,
+    }
+    monkeypatch.setattr(runner._backend, "_read_json", lambda _path: manifest)
+    monkeypatch.setattr(
+        runner._backend, "_artifact_digest", lambda path: f"digest:{path.name}"
+    )
+
+    assert runner._backend._validate_anchor_manifest(tmp_path) == {
+        "manifest": "digest:train_manifest.json",
+        "checkpoint_0": "digest:replicate_0_common_native6_fast_anchor.pt",
+        "checkpoint_1": "digest:replicate_1_common_native6_fast_anchor.pt",
+        "checkpoint_2": "digest:replicate_2_common_native6_fast_anchor.pt",
+    }
+
+
 def test_five_branch_first_match_order_and_tokens(runner) -> None:
     assert runner._synthetic_branch_witnesses() == {
         "invalid": runner.INVALID_BRANCH,

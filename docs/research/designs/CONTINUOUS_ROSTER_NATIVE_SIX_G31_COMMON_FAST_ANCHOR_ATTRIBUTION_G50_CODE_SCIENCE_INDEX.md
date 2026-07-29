@@ -38,6 +38,7 @@ files are read-only authorities.
 | Reference arm | `REFERENCE_ARM=FAST_ANCHOR_THEN_SINGLE_IMMEDIATE` |
 | Null arm | `NULL_ARM=SINGLE_IMMEDIATE_FROM_INITIALIZATION` |
 | Phase-A authority | `PHASE_A_OBJECTIVE_CONTRACT_ID=G40_COMMON_NATIVE6_FAST_ANCHOR_V1`, source `97a8b237e0cec6c2713dd2a710d324040fa3dfc2` |
+| Accepted anchor replicate interface | `ACCEPTED_G40_ANCHOR_REPLICATES=(0,1,2)`, inherited unchanged from the accepted G48/G40 authority chain |
 | Phase-A interpretation | `B_COMPLETE_HISTORICAL_FAST_ANCHOR_PACKAGE` |
 | Phase-B authority | G49 source `8ecb01fd3ac0debf1b792e4e51293e07974d633b`, aligned implementation `9edddc845d88191bbfbd6c2ec779551edbbcb78a`, stage `b56288597c6c91f784fb5f0fcc36ec5ef92de452` |
 | Phase-B accepted branch | `DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_EXACTLY_COLLAPSIBLE_G49` |
@@ -242,6 +243,7 @@ residue tampering, activation reconstruction, order-swap implementation, and
 the null zero-read certificate.
 
 The runner test covers nonformal/formal inventories, source-authority use,
+the privately rebound backend's complete accepted-anchor replicate interface,
 five first-match witnesses, the non-confident absolute reference-access failure
 guard and its precedence over favorable comparisons, exact alignment binding
 and fail-closed missing-preflight admission, exact six checkpoint names,
