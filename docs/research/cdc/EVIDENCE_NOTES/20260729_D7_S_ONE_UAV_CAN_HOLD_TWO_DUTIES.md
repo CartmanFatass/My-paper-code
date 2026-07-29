@@ -134,6 +134,42 @@ inversion, so the 291 charging-induced cases above are invisible to this count b
 construction. The two rows measure different things and only the
 `constructive_mixed` row is a phantom census.
 
+## It is absorbing, not transient — POST-FENCE MATERIAL
+
+**Recorded after round `20260729_d7_s_duty_map_injectivity` was dispatched at
+`db7ad266`, so Pro has NOT seen this.** It does not justify a follow-up turn; it
+is carried to the next touchpoint as context. Noted here so the round's archived
+question and this note cannot be confused for one another.
+
+Only **8 onsets** occur in 12000 steps, which reads as negligible until the
+onsets are matched against the per-episode duplicate-step counts:
+
+```text
+ep   dup_steps   1500 - dup_steps = implied onset
+ 0        589    911     <- matches the directly observed onset exactly
+ 1        480   1020     <- onset script independently reported step 1019
+ 2        516    984     <- onset script independently reported step  983
+ 3        652    848
+ 4        457   1043
+ 5        493   1007
+ 6        536    964
+ 7        311   1189
+```
+
+Eight onsets across eight episodes is exactly one each, and in every episode the
+duplicate-step count equals `1500 - onset`. Had the state ever cleared, that
+count would be strictly smaller. It never is.
+
+The two independent scripts agree to the expected one-step offset — one records
+the step at which the update runs, the other counts from the following step's
+pre-check.
+
+**So every episode enters a duplicated state in its second half and never leaves
+it.** The 33% prevalence is not 33% of episodes intermittently affected; it is
+every episode, permanently, from roughly step 850-1190 onward. A LEAVE re-match
+does not repair it, because the re-match assigns unlocked duties from a survivor
+pool without ever asking whether the incoming map was injective.
+
 ## What it invalidates
 
 1. **Obligation A's step A3.** It argued `|U_e| = |D_e|` from "`m0` is injective
