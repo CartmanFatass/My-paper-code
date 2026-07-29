@@ -40,6 +40,20 @@ the map it was given is close to a no-op, and comparing a near-no-op against
 `constructive_mixed` measures almost nothing. This is stated as inference, not
 measurement — the retention rate was never recorded, which is the whole defect.
 
+> **Correction, after Pro's R5 ruling.** "Geometrically favoured" is **plausible
+> but not established**, and this note leaned on it too hard. Reasons it need not
+> hold: service centroids move with users; a LEAVE/REJOIN may have just rematched
+> incumbents; another UAV can be nearer after motion; an airborne UAV may be
+> travelling to a charging station rather than its duty; nearest-duty geometry can
+> change between checks. No retention data were serialized, so this explanation of
+> `D_A ≈ 0` is unmeasured and stays unmeasured.
+>
+> **The finding does not depend on it.** The durable reason R4 is non-identifying
+> is that retention was *neither prohibited nor recorded* — which holds whether
+> retention was frequent or rare. Appended rather than substituted, so the record
+> shows the claim and what it became.
+> Ruling: `docs/external-review/rounds/20260729_d7_s_r5_derangement_control/21_PRO_OPEN_RAW.md`.
+
 ## Claim 2 — the recomputed map is applied one step late. CONFIRMED, and it is not confined to step 0.
 
 `step_once` (`:2485`) in execution order:
