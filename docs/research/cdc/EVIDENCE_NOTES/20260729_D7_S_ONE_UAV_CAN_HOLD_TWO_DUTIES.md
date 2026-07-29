@@ -166,9 +166,19 @@ pre-check.
 
 **So every episode enters a duplicated state in its second half and never leaves
 it.** The 33% prevalence is not 33% of episodes intermittently affected; it is
-every episode, permanently, from roughly step 850-1190 onward. A LEAVE re-match
-does not repair it, because the re-match assigns unlocked duties from a survivor
-pool without ever asking whether the incoming map was injective.
+every episode, permanently, from roughly step 850-1190 onward.
+
+**Why it persists is NOT yet established, and one wrong explanation is recorded
+here so it does not get repeated.** I first wrote that the LEAVE re-match fails
+to repair it "because it never asks whether the incoming map was injective".
+That is false. With `locked_duties` empty — which is what these runs used, and
+what `limb_locked_duties` gives the stable limb — the LEAVE path pops **every**
+unlocked duty and re-assigns greedily with `pool.remove(best)`. That is injective
+by construction, so a LEAVE should *repair* a duplicated map, not preserve it.
+
+The live hypothesis is therefore that **no LEAVE fires after the onset** — the
+onsets cluster at steps 848-1189, late enough that the charge cycle may already
+be exhausted. Being measured; not asserted until it is.
 
 ## What it invalidates
 
