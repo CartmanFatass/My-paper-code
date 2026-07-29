@@ -59,6 +59,14 @@ outcome=FAILED -- `Get-Process chrome` returns nothing, and chrome.exe is
   runtime cannot be restarted from here, and re-probing is the behaviour the
   browser guidance names as a rabbit hole. Stopped at four attempts.
 
+RECOVERY_ATTEMPT attempt=5
+boundary=Chrome absent from this machine
+action=`list_connected_browsers` -- the extension can pair with a browser on
+  another device, so "no Chrome here" is not the same as "no browser at all"
+outcome=FAILED -- returned `[]`. Zero browsers connected to the account.
+  This is the definitive check and it closes every remaining avenue: there is
+  no browser on this machine and none paired from anywhere else.
+
 DIAGNOSIS
 tabs_context_mcp then returned: "Browser extension is not connected."
 The earlier timeouts were not the documented wedged-renderer state -- the
