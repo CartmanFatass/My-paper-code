@@ -23,6 +23,24 @@ alters a duty map. Development topology only; not conclusion-bearing.
 > **B was not zero-compute.** Eight 1500-step episodes and 1200 check boundaries
 > is non-conclusion-bearing *development* compute.
 
+> **Third correction, 2026-07-29 — the figures below were computed through a
+> lossy view.**
+>
+> The probe inverts the duty map with `{u: d for d, u in duty_map.items()}`,
+> which drops a duty whenever one UAV holds two. `constructive_mixed_update`'s
+> REJOIN branch produces exactly that at **33% of check boundaries**. In those
+> checks one duty was outside the eligibility accounting entirely.
+>
+> The numbers are not wrong about the view the probe had; the view was missing a
+> duty. They are left standing with the defect named rather than recomputed,
+> because what the eligible set *should* be once ownership is non-injective is a
+> scientific decision, not a code fix — round
+> `20260729_d7_s_duty_map_injectivity`, §5. The inversion is deliberately left
+> lossy so the probe keeps seeing the duty set the source actually flies.
+>
+> Evidence:
+> `docs/research/cdc/EVIDENCE_NOTES/20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md`.
+
 ```text
 topology       20260725 (dev), coord_hash 37b1a44987839dfd...
 DELTA          10

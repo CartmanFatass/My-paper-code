@@ -28,7 +28,24 @@ definition rather than excluded by a check.
 Also by construction: any `d` with `m0(d) ∉ U_e` is absent from `D_e`, so no
 variable represents it and the solver cannot move it.
 
-### A3 — `|U_e| = |D_e|`
+### A3 — `|U_e| = |D_e|` — **INVALID, 2026-07-29**
+
+> **The premise below is false for this source and the step does not hold.**
+> Left in place, not edited away: the claim was submitted to review and the
+> correction belongs beside it.
+>
+> `constructive_mixed_update`'s REJOIN branch can give one UAV a second duty, so
+> `m0` is **not** injective — measured at 33% of check boundaries on the
+> development topology. Evidence:
+> `docs/research/cdc/EVIDENCE_NOTES/20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md`.
+>
+> The generator that produced the 2000-sample check below built injective maps,
+> so it could not have found this. It confirmed the arithmetic of a premise
+> instead of the premise.
+>
+> No replacement is written here. A derangement is a permutation of a set, and
+> which set that is once ownership is non-injective is a scientific decision --
+> round `20260729_d7_s_duty_map_injectivity`, §5.
 
 `m0` is injective on its domain (a UAV holds at most one duty). Restricting an
 injection to the preimage of a set gives a bijection onto that set, so
