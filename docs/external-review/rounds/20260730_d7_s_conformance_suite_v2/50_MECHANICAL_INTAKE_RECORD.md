@@ -64,7 +64,31 @@ different route — which is the realization freedom Pro explicitly granted. It 
 the same defect class the previous round rejected, so it is flagged rather than
 presented as equivalent to the others.
 
+## Capture
+
+The tab wedged a **sixth** time (CDP `Runtime.evaluate` timeout). Bounded
+replacement applied; the new tab rendered the completed answer immediately.
+
+Clipboard cleared to a sentinel, then `Copy response`:
+
+```text
+still_sentinel=False  clip_len=17099  has_title=True  has_final=True  has_p6e=True
+```
+
+`has_p6e` checks a **body-only** string (`P6e observes source text`), never the
+stage_commit, which the fence also contains.
+
+Archived via `UTF8Encoding($false)`: `written_len=17099`,
+`exact_roundtrip=True`, `bom_free=True`.
+
 ## Status
 
-`AWAITING RESPONSE`. `21_PRO_OPEN_RAW.md` does not exist yet and no
-reconciliation may be written until it does.
+`CLOSED`. Ruling archived byte-exact; reconciliation in
+`30_PM_SCIENTIFIC_RECONCILIATION.md`.
+
+Verdict: **FREEZE AFTER MODIFICATION — step 1 still not closed.** Six named
+blockers. Critically, the ruling **closes the remaining scientific choices
+prospectively**: after the six amendments and a hash-bound v3 baseline, ordinary
+PM authority may authorize the atomic repair with **no further Pro design round**,
+provided no protected semantic choice changes. No conclusion-bearing compute is
+authorized.
