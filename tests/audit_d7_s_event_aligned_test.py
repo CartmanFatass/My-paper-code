@@ -751,6 +751,51 @@ def test_constructive_mixed_rejoin_covers_an_uncovered_duty():
     assert updated.get(1) == 2
 
 
+@pytest.mark.xfail(strict=True, reason=(
+    "KNOWN DEFECT, scientific ruling pending. constructive_mixed_update's REJOIN "
+    "branch assigns the rejoining UAV the nearest uncovered duty without checking "
+    "whether it already holds one, so one UAV can end up holding two. Measured at "
+    "33% of check boundaries on the development topology. Evidence: "
+    "docs/research/cdc/EVIDENCE_NOTES/20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md. "
+    "The repair is a choice between distinct semantics and belongs to Pro, not "
+    "here -- so the property is asserted and marked, never quietly relaxed. "
+    "strict=True: this goes RED the moment the defect is fixed without updating "
+    "the mark, and it can never pass by accident."))
+def test_rejoin_never_gives_one_uav_a_second_duty():
+    """No UAV may hold two duties: it can only fly to one of them, and the audit's
+    own `uav_to_duty` inversion (scripts/audit_d7_s_event_aligned.py:2330) silently
+    drops the other, so the map reports coverage the flown actions never deliver."""
+    duty_positions = {0: np.array([0.0, 0.0, 100.0]), 1: np.array([100.0, 0.0, 100.0])}
+    duty_map = {0: 2}                     # UAV 2 ALREADY holds duty 0
+    airborne_positions = {0: np.array([0.0, 0.0, 0.0]), 2: np.array([90.0, 0.0, 0.0])}
+    updated = audit.constructive_mixed_update(
+        duty_map=duty_map, duty_positions=duty_positions,
+        airborne_positions=airborne_positions, event="REJOIN", event_uav=2,
+    )
+    holders = list(updated.values())
+    assert len(holders) == len(set(holders)), (
+        f"UAV(s) holding more than one duty in {updated}")
+
+
+def test_full_sync_set_update_is_injective_by_construction():
+    """The paired positive for the xfail above -- the defect is ARM-SPECIFIC.
+
+    `full_sync_set_update` removes each chosen UAV from `remaining`, so it cannot
+    double-assign. Locked here because the asymmetry is the reason the defect
+    matters: only one of the two arms can over-report its own coverage."""
+    duty_positions = {d: np.array([100.0 * d, 0.0, 100.0]) for d in range(4)}
+    # Three UAVs stacked near duty 0 -- a greedy rule without removal would give
+    # every duty to the same nearest body.
+    airborne_positions = {0: np.array([0.0, 0.0, 0.0]),
+                          1: np.array([1.0, 0.0, 0.0]),
+                          2: np.array([2.0, 0.0, 0.0])}
+    updated = audit.full_sync_set_update(
+        duty_positions=duty_positions, airborne_positions=airborne_positions)
+    holders = list(updated.values())
+    assert len(holders) == len(set(holders)), f"non-injective map {updated}"
+    assert len(updated) == 3      # 3 UAVs, 4 duties -> exactly one duty uncovered
+
+
 def test_the_null_arm_is_gone_from_the_r4_path():
     """R5 (contract section 8): `null_update` and its `schedule == "null"`
     dispatch are DELETED, not retained as decorative legacy apparatus.

@@ -66,15 +66,27 @@ def _present_and_acting(env, i):
     return True
 
 
-def observe_check(env, duty_map, duty_positions):
-    """One check-boundary observation. Returns the obligation-B row."""
+def eligibility(env, duty_map, duty_positions):
+    """THE frozen six-condition eligibility construction, in one place.
+
+    Obligations B, C, D and E must all use this exact function. Two copies of an
+    eligibility rule is how the control and its witness end up sharing a
+    narrowed definition -- the R4 failure, one obligation later.
+
+    Returns the sets the derangement operates on, plus the exclusion tally.
+    """
     n_uavs = int(env.n_uavs)
     charging = np.asarray(env.uav_charging, dtype=bool)
+    # KNOWN LOSSY (measured 2026-07-29, ruling pending). This inversion drops a
+    # duty whenever one UAV holds two, which `constructive_mixed_update`'s REJOIN
+    # branch produces at ~33% of check boundaries. It is written exactly as the
+    # audit's own action rule writes it (audit_d7_s_event_aligned.py:2330) --
+    # DELIBERATELY, so this probe sees the duty set the source actually flies,
+    # not a repaired one. Silently fixing it here would make the probe disagree
+    # with the instrument and hide the defect instead of measuring it.
+    # Evidence: docs/research/cdc/EVIDENCE_NOTES/
+    #           20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md
     uav_to_duty = {u: d for d, u in duty_map.items()}
-
-    total_duties = audit.N_RELAY_DUTIES + audit.N_SERVICE_DUTIES
-    covered = sorted(duty_map.keys())
-    airborne = [i for i in range(n_uavs) if not charging[i]]
 
     # ---- The six-condition eligibility definition, asserted rather than assumed.
     # FROZEN RULE (Pro 2026-07-29, option 2 of the two offered): the eligible set
@@ -123,6 +135,34 @@ def observe_check(env, duty_map, duty_positions):
     elig_duties = {uav_to_duty[u] for u in eligible}
     allowed_r = {u: (allowed[u] & elig_duties) for u in eligible}
 
+    return {
+        "uav_to_duty": uav_to_duty,
+        "action_bearing": action_bearing,
+        "pool": pool,
+        "eligible": eligible,
+        "elig_duties": elig_duties,
+        "allowed": allowed_r,
+        "exclusions": exclusions,
+        "charging": charging,
+        "n_uavs": n_uavs,
+    }
+
+
+def observe_check(env, duty_map, duty_positions):
+    """One check-boundary observation. Returns the obligation-B row."""
+    el = eligibility(env, duty_map, duty_positions)
+    uav_to_duty = el["uav_to_duty"]
+    exclusions = el["exclusions"]
+    eligible = el["eligible"]
+    allowed_r = el["allowed"]
+    elig_duties = el["elig_duties"]
+    charging = el["charging"]
+    n_uavs = el["n_uavs"]
+
+    total_duties = audit.N_RELAY_DUTIES + audit.N_SERVICE_DUTIES
+    covered = sorted(duty_map.keys())
+    airborne = [i for i in range(n_uavs) if not charging[i]]
+
     n_e = len(eligible)
     witness = None
     if n_e < 2:
@@ -155,7 +195,7 @@ def observe_check(env, duty_map, duty_positions):
         "total_duties": total_duties,
         "covered_duties": len(covered),
         "airborne_uavs": len(airborne),
-        "action_bearing_incumbents": len(action_bearing),
+        "action_bearing_incumbents": len(el["action_bearing"]),
         "eligible_matching_size": n_e,
         "full_derangement_exists": bool(exists),
         "infeasibility_witness": witness,
