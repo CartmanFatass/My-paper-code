@@ -124,6 +124,25 @@ shows this.
 more than an order of magnitude.** I did not go looking for this; it came out of
 the same diagnostic and I am reporting it because it bears on §5(b).
 
+Counting the phantoms directly — duties the map calls covered against duties the
+audit's own inversion will fly someone to:
+
+```text
+                    steps with a duty claimed-but-not-flown   phantoms per step
+constructive_mixed  4034  (33.62%)                            always exactly 1
+full_sync_SET          0  ( 0.00%)                            --
+
+first  ep 0 step 911  {0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:5}  phantom = duty 5
+```
+
+**That `full_sync_SET` zero does not mean "no phantoms", and I do not want it
+read that way.** The metric compares `duty_map.keys()` against
+`set(uav_to_duty.values())`, so it sees only the phantom the lossy inversion
+creates. A charging incumbent still appears in the inversion, so the 291
+charging-induced cases are invisible to this count by construction. Only the
+`constructive_mixed` row is a phantom census; the two rows measure different
+things.
+
 ### 3.6 It was present in the R4 confirmatory artifact
 
 Both the REJOIN branch and the lossy inversion are present verbatim at
