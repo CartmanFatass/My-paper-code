@@ -1,0 +1,27 @@
+# G49 code-science alignment shared source manifest
+
+round=20260729_g48_duplicated_immediate_single_channel_collapse_code_science_alignment_audit
+audit_target_commit=aa94030834ca161d6da4014210fd89b70cf2d40c
+design_stage_commit=fc8288b53401cea1642110994305272905e56c5f
+implementation_code_commit=aa94030834ca161d6da4014210fd89b70cf2d40c
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
+
+## Exact allow-list
+
+- .agents/roles/EXTERNAL_PRO.md
+- docs/project/ALGORITHM_PRINCIPLES.md
+- docs/project/SCIENTIFIC_ASSERTION_AUDIT.md
+- docs/project/EVIDENCE_COMPLEXITY_POLICY.md
+- docs/external-review/OPEN_REVIEW_PRINCIPLES.md
+- docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md
+- docs/research/cdc/CONJECTURES.md
+- docs/research/cdc/IDEA_PORTFOLIO.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_G49.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_G49_CODE_SCIENCE_INDEX.md
+- docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+- docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+- ha_ctse_process/continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49.py
+- scripts/run_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49.py
+- tests/ha_ctse_process_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_test.py
+- tests/run_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_test.py
