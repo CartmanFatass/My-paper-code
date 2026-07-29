@@ -292,22 +292,82 @@ def main():
     print(f"  BIG={BIG:g} > n*max(C)={8*float(np.max(C)):.3f} : {dom}")
     ok &= dom
 
-    print("\n=== A3: |U_e| == |D_e| by construction ===")
+    print("\n=== A3: |U_e| == |D_e| over the EXECUTABLE assignment relation ===")
+    #
+    # REWRITTEN 2026-07-29 after Pro ruled the previous version INVALID.
+    #
+    # The old sampler built `m0 = {d: u for u, d in enumerate(duties[:n_air])}`
+    # -- distinct UAVs by construction. So every one of its 2000 samples was
+    # injective, `|U_e| == |D_e|` followed as arithmetic, and the check could
+    # not have failed however false the premise was in production. It was
+    # confirming a consequence of an assumption its own generator installed,
+    # while the real duty map was non-injective at 33% of check boundaries.
+    #
+    # Pro ruled A3 RESCUABLE rather than replaceable: it follows once the
+    # domain is the injective EXECUTABLE assignment relation. So the claim is
+    # restated as an IFF, which is falsifiable in both directions:
+    #
+    #     |U_e| == |D_e|   <=>   m0 restricted to D_e is injective
+    #
+    # and the production guarantee (assert_partial_injection) is what supplies
+    # the left-to-right instance. The generator now draws holders WITH
+    # replacement so non-injective maps actually occur, and the run refuses to
+    # pass unless BOTH classes were sampled -- a partition with an empty side
+    # proves nothing about the side that is empty.
     a3 = True
-    for _ in range(2000):
+    n_inj = n_noninj = 0
+    n_exec_checked = 0
+    a3_iff_violations = []
+    for _ in range(4000):
         n_duties = int(rng.integers(2, 9))
-        n_air = int(rng.integers(1, n_duties + 1))
+        n_uavs = int(rng.integers(1, n_duties + 1))
         duties = list(range(n_duties))
         rng.shuffle(duties)
-        m0 = {d: u for u, d in enumerate(duties[:n_air])}
-        eligible = {u for u in range(n_air) if rng.random() < 0.7}
+        held = duties[:int(rng.integers(1, n_duties + 1))]
+        # WITH replacement: duplicates are possible and that is the point.
+        m0 = {d: int(rng.integers(0, n_uavs)) for d in held}
+
+        eligible = {u for u in range(n_uavs) if rng.random() < 0.7}
         D_e = {d for d, u in m0.items() if u in eligible}
         U_e = {m0[d] for d in D_e}
-        if len(U_e) != len(D_e):
+
+        restricted_injective = len({m0[d] for d in D_e}) == len(D_e)
+        if restricted_injective:
+            n_inj += 1
+        else:
+            n_noninj += 1
+        if (len(U_e) == len(D_e)) != restricted_injective:
             a3 = False
+            a3_iff_violations.append((dict(m0), sorted(D_e)))
             break
-    print(f"  held_on_every_sample={a3}")
-    ok &= a3
+
+        # The executable layer: a holder that is docked, returning to a station
+        # or overridden covers nothing, so C is a SUBSET of D_e. The identity
+        # must survive that restriction, which is the form R5's treatment
+        # domain actually uses.
+        executable = {u for u in range(n_uavs) if rng.random() < 0.8}
+        C = {d for d in D_e if m0[d] in executable}
+        U_e_exec = {m0[d] for d in C}
+        if restricted_injective:
+            n_exec_checked += 1
+            if len(U_e_exec) != len(C):
+                a3 = False
+                a3_iff_violations.append(("executable restriction", dict(m0), sorted(C)))
+                break
+
+    print(f"  iff_held_on_every_sample={a3}")
+    print(f"  samples: restricted-injective={n_inj}  NON-injective={n_noninj}"
+          f"  executable-restrictions checked={n_exec_checked}")
+    if a3_iff_violations:
+        print(f"  violation: {a3_iff_violations[0]}")
+    # POWER GUARD. Without it this section reverts to exactly the defect it was
+    # rewritten to remove: if the generator never produced a non-injective map,
+    # `iff_held` would be True having tested only one side.
+    powered = n_inj > 0 and n_noninj > 0 and n_exec_checked > 0
+    if not powered:
+        print("  A3 INCONCLUSIVE: the sample did not contain both classes, so "
+              "the iff was never exercised in both directions")
+    ok &= (a3 and powered)
 
     print(f"\nOBLIGATION_A_CHECKS_PASS={ok}")
     return 0 if ok else 1
