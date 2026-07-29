@@ -113,6 +113,14 @@ derangement then applies to the resulting incumbents.
 An event with fewer than two eligible incumbents cannot instantiate full
 derangement and is a **support miss**.
 
+**That cardinality test is a pre-filter, not the support rule.** Obligation A
+showed `n ≥ 2` is necessary but not sufficient: condition 6 removes edges, and
+Hall's condition can fail at any size. Witness at `n = 3` with
+`allowed = [{2}, {2}, {0,1}]` — two incumbents whose only geometrically distinct
+alternative is the same duty cannot both be deranged. **The support decision is
+"no full derangement exists, with a Hall witness", tested per event.** A contract
+gating on cardinality alone would silently admit structurally infeasible events.
+
 Recorded per check: active UAVs; number holding duties; number action-bearing;
 number eligible; exclusions by reason; matching-graph size.
 
@@ -169,11 +177,12 @@ after the boundary action — and never becomes evidence for the repaired arm.
 ## Infeasibility — three cases, not one
 
 **Before the intervention begins.** Build the matching graph at candidate-event
-certification. No full derangement → the event is ineligible; continue to the
-next candidate in that episode; if none qualifies, the episode is a Part-A
-**support miss**. Typical causes: fewer than two eligible incumbents; no
-geometrically distinct alternative; Hall-condition failure. Never reported as
-zero effect, never a greedy or partial fallback.
+certification and **test feasibility, not cardinality**. No full derangement →
+the event is ineligible; continue to the next candidate in that episode; if none
+qualifies, the episode is a Part-A **support miss**, and the recorded reason
+carries the Hall witness `(S, N(S))`. Typical causes: fewer than two eligible
+incumbents; no geometrically distinct alternative; Hall-condition failure at
+larger sizes. Never reported as zero effect, never a greedy or partial fallback.
 
 **After an R5 continuation has begun.** The episode must **not** be quietly
 dropped while its siblings are retained — that conditions the estimate on a
@@ -238,8 +247,23 @@ Full text in the ruling. Summary:
 1. **Solver.** Rectangular linear assignment with forbidden cells at `+inf`,
    over `U_e × D_e`. Deterministic given inputs.
 2. **Tie-break.** Lexicographic by `(duty_id, uav_id)` among optimal solutions,
-   so the control is reproducible independent of dict ordering. Ties are
-   measure-zero in continuous positions; this exists for reproducibility.
+   **produced by an explicit canonicalisation pass, not by the solver.**
+   Obligation A found that `linear_sum_assignment` does not honour this
+   tie-break: on the symmetric ring at `n = 4`, where every single-rotation
+   derangement costs `56.568542` exactly, it returns an optimal assignment that
+   is not the lexicographically smallest. The binding named a property the tool
+   does not provide.
+
+   The canonicalisation: take the optimal cost, then walk duties ascending and
+   fix the smallest agent id whose forced completion still attains it. Verified
+   against exhaustive enumeration on constructed ties (rings `n = 3…7`, integer
+   lattices) and 200 random cases, plus 20 repeated solves of one tied input
+   returning a single distinct result.
+   `scripts/d7_s_r5_obligation_a_proof.py`,
+   `docs/research/designs/D7_S_R5_OBLIGATION_A_SUPPORT_DERIVATION.md`.
+
+   Ties are measure-zero in continuous positions, which is why random trials
+   never surfaced this and the counterexample had to be constructed.
 
 Eligibility was binding 3 in the earlier draft. It is now a frozen definition
 above, on Pro's ruling — which is where I had flagged I was least sure it
