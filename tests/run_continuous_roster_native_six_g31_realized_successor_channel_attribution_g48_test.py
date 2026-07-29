@@ -94,9 +94,17 @@ def test_configuration_seeds_workers_and_formal_admission_are_fail_closed(
                 formal=True, cpu_budget=2, process_workers=workers
             )
 
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
-    with pytest.raises(ValueError, match="independently archived ALIGNED source"):
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "d96f8f29367b55b5ea655b984631d6064877e237"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "617414f9a175f044eecfbfec4e4b170c6990b47f"
+    )
+    assert runner._backend.ALIGNED_IMPLEMENTATION_COMMIT == (
+        runner.ALIGNED_IMPLEMENTATION_COMMIT
+    )
+    assert runner._backend.ALIGNMENT_STAGE_COMMIT == runner.ALIGNMENT_STAGE_COMMIT
+    with pytest.raises(ValueError, match="registered ALIGNED source"):
         runner.train(
             run_root=tmp_path / "formal",
             source_commit=TEST_SOURCE_COMMIT,
@@ -106,8 +114,9 @@ def test_configuration_seeds_workers_and_formal_admission_are_fail_closed(
             preflight_root=tmp_path / "missing_preflight",
             alignment_disposition="ALIGNED",
             aligned_source_commit="9" * 40,
-            alignment_stage_commit="a" * 40,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
         )
+    assert not (tmp_path / "formal").exists()
 
 
 def test_readiness_proves_two_process_artifact_reload_and_evaluate_entry(

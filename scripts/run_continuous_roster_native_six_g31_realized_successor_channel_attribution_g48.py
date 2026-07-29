@@ -56,9 +56,11 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_REALIZED_SUCCESSOR_CHANNEL_"
     "ATTRIBUTION_G48_CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# Bound only after the independent code-science alignment audit.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Bound by the independent G48 correction recheck disposition.
+ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
+    "d96f8f29367b55b5ea655b984631d6064877e237"
+)
+ALIGNMENT_STAGE_COMMIT: str | None = "617414f9a175f044eecfbfec4e4b170c6990b47f"
 ACCEPTED_ANCHOR_ROOT_RELATIVE = Path(
     "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"
     "20260727_97a8b23_r1"
