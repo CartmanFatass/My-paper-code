@@ -1,0 +1,34 @@
+# Shared source manifest: G50 formal result
+
+```text
+round=20260729_g31_common_fast_anchor_attribution_g50_formal_result_review
+source_commit=b8290699f5c10c593bbc21a6666c17950fae84d3
+execution_code_commit=23af6bf7c80a4b73c09cf0423f9f539972b1b55d
+formal_run_root=logs/formal_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50_cpu_20260729_b829069_r5
+preflight_root=logs/nonformal_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50_cpu_20260729_b829069_r5
+```
+
+Allow-listed paths only:
+
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_formal_result_review/00_REVIEW_BRIEF.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_formal_result_review/01_SHARED_SOURCE_MANIFEST.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_formal_result_review/20_PRO_OPEN_QUESTION.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260729_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_FORMAL_RESULT.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_design_assertion_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_code_science_alignment_correction_recheck_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_disposition_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_disposition_format_recheck/21_PRO_OPEN_RAW.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `.agents/roles/EXTERNAL_PRO.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_common_fast_anchor_attribution_g50.py`
+- `scripts/run_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50.py`
