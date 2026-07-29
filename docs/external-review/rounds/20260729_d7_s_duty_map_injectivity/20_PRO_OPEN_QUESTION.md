@@ -80,7 +80,51 @@ One check boundary in three. Interventions launch at check boundaries, so
 `[INFERENCE]` roughly one intervention window in three begins from a map
 carrying a phantom duty.
 
-### 3.4 It was present in the R4 confirmatory artifact
+### 3.4 The mechanism, measured rather than assumed
+
+Every onset in 12000 steps fell in one class, with no second class at all:
+`LEAVE + REJOIN in the same step`, 8 of 8.
+
+1. `airborne_positions` is built from `charging_after`, so a UAV whose falling
+   edge fires **this** step is in it.
+2. `update_duty_map_on_transitions` processes every LEAVE first, then every
+   REJOIN.
+3. The LEAVE re-match therefore has the rejoining UAV in its survivor pool and
+   gives it a duty.
+4. The REJOIN loop then hands the same UAV the duty the LEAVE left uncovered.
+
+Episode 0 step 910, `leaves=[7] rejoins=[5]`:
+
+```text
+before  {0:0, 1:6, 2:2, 3:3, 4:4, 5:1, 6:7}
+after   {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:5}   UAV 5 holds duties 5 and 7
+```
+
+A LEAVE alone never does it; a REJOIN alone never does it.
+
+### 3.5 The control arm has the MIRROR defect, by a different route
+
+```text
+                    steps with a duplicate   steps where a CHARGING UAV
+                    holder                   still held a duty
+constructive_mixed  4042  (33.68%)             0   (0.00%)
+full_sync_SET          0  ( 0.00%)           291   (2.42%)
+```
+
+`full_sync_SET` cannot double-book — but it recomputes only at
+`step_index % DELTA == 0` and carries the map forward unchanged in between, which
+you ruled correct for "reassigns every duty at each check". A UAV that starts
+charging mid-interval therefore keeps its duty in the map until the next
+boundary, and while docked it does not fly there.
+
+`constructive_mixed` drops the duty on the LEAVE edge immediately, so it never
+shows this.
+
+**Both arms emit phantom duties, by opposite mechanisms, at rates differing by
+more than an order of magnitude.** I did not go looking for this; it came out of
+the same diagnostic and I am reporting it because it bears on §5(b).
+
+### 3.6 It was present in the R4 confirmatory artifact
 
 Both the REJOIN branch and the lossy inversion are present verbatim at
 `1b17dfb0`, the stage commit of the R4 formal result (run `30289161086`, tag
@@ -99,10 +143,11 @@ Both the REJOIN branch and the lossy inversion are present verbatim at
    the eligibility accounting entirely. The count is not wrong about the view it
    had; the view was missing a duty.
 3. **`[INFERENCE]` R4 contrasted two arms, neither of which realizes its stated
-   semantics.** You already ruled the control defective for not excluding
-   incumbents. The treatment arm can double-book a UAV and silently drop a duty.
-   I am not claiming this changes the R4 verdict — I am claiming I cannot tell,
-   and that it is your call and not mine.
+   semantics.** `D_A = G(full_sync_SET) - G(constructive_mixed)` is a direct
+   contrast of exactly the two. You already ruled the *control* defective for not
+   excluding incumbents. The *treatment* arm can double-book a UAV and silently
+   drop a duty. I am not claiming this changes the R4 verdict — I am claiming I
+   cannot tell, and that it is your call and not mine.
 4. **What it does NOT touch:** no registered quantity reads `len(duty_map)` as a
    coverage metric. Step metrics come from `env.step`'s `infos`. The effect
    reaches any result only through the actions actually flown.
@@ -149,7 +194,25 @@ that choice is scientific.
   repaired one.
 - Obligation C now scores an unbuildable negative as `UNCONSTRUCTIBLE` with its
   reason instead of laundering it into either the caught or the missed column.
-  The gate stays red.
+  The gate stays red:
+
+```text
+deranged checks 450, same-support pass 450, refused 0
+
+derangement takes an uncovered duty    caught= 44 missed=0 unconstructible=0  clean=True
+non-eligible incumbent moved           caught=136 missed=0 unconstructible=3  clean=False
+covered-duty count shrinks             caught=450 missed=0 unconstructible=0  clean=True
+charging decision altered              caught=450 missed=0 unconstructible=0  clean=True
+ineligible UAV's action changed        caught=258 missed=0 unconstructible=0  clean=True
+
+OBLIGATION_C_CHECKS_PASS=False
+```
+
+  So the witness has no demonstrated hole — 136 caught, 0 missed on that same
+  mutation. What blocks C is the source state, not the witness. Had those three
+  been scored as passes (the tempting reading, since the witness genuinely
+  reported correctly), a 33%-prevalence non-injective duty map would still be
+  invisible.
 
 ## 7. Required response sections
 

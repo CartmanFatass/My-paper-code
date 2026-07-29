@@ -56,6 +56,61 @@ first occurrence               ep 0 step 911
 
 This is not a tail event. One check boundary in three.
 
+## The exact mechanism — measured, not assumed
+
+Every duplication onset in 12000 steps was the same class, with no second class
+at all:
+
+```text
+duplication ONSET classification (constructive_mixed)
+  LEAVE+REJOIN same step      8
+  (no other class)            0
+```
+
+The path, confirmed against `update_duty_map_on_transitions`:
+
+1. `airborne_positions` is built from `charging_after`
+   (`audit_d7_s_event_aligned.py:2408-2411`). A UAV whose falling edge fires
+   **this** step has `charging_after == False`, so it IS in that dict.
+2. The function processes **every LEAVE first, then every REJOIN** (`:2420`,
+   `:2425`).
+3. The LEAVE re-match therefore has the rejoining UAV in its survivor pool and
+   assigns it a duty.
+4. The REJOIN loop then hands that same UAV the duty the LEAVE left uncovered.
+
+Worked example, episode 0 step 910, `leaves=[7] rejoins=[5]`:
+
+```text
+before  {0:0, 1:6, 2:2, 3:3, 4:4, 5:1, 6:7}          7 duties covered
+after   {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:5}     UAV 5 holds duties 5 and 7
+```
+
+A LEAVE alone never does it. A REJOIN alone never does it. It takes both in one
+step, which is why it reads as a rare coincidence and is in fact a third of all
+boundaries once the state persists.
+
+## The other arm has the mirror defect, by a different route
+
+```text
+                    steps with a duplicate    steps where a CHARGING UAV
+                    holder                    still held a duty
+constructive_mixed  4042  (33.68%)              0   (0.00%)
+full_sync_SET          0  ( 0.00%)            291   (2.42%)
+```
+
+`full_sync_SET` cannot double-book, but it only recomputes at
+`step_index % DELTA == 0` and carries the map forward unchanged in between
+(`:2412-2417`). A UAV that starts charging mid-interval keeps its duty in the map
+until the next check boundary, and while docked it does not fly there.
+
+`constructive_mixed` removes the duty on the LEAVE edge immediately, so it never
+shows this.
+
+**So both arms emit phantom duties — duties the map calls covered that no UAV
+flies to — by opposite mechanisms and at rates differing by more than an order of
+magnitude.** `D_A = G(full_sync_SET) - G(constructive_mixed)` contrasts exactly
+these two.
+
 ## What it invalidates
 
 1. **Obligation A's step A3.** It argued `|U_e| = |D_e|` from "`m0` is injective
