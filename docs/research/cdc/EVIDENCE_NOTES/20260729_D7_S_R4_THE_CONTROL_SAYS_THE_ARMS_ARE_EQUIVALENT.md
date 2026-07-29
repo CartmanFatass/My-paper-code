@@ -1,0 +1,102 @@
+# D7.S R4 — the formal result: `PART_A_CONTRADICTION`
+
+The first valid fresh-population R4 measurement. Every gate upstream passed; the
+Part-A control is what stopped it.
+
+```text
+run          30403322062, tag d7s-audit-3, instrument a00612ad
+population   TOPOLOGY_SEEDS_R4 = 20260734..41, 8 shards x 1 topology
+wall clock   2h08m (22:06:31Z -> 00:14:58Z), all eight shards success
+branch       PART_A_CONTRADICTION
+limb_states  {stable: AFFIRMATIVE_NONMATERIAL, flex: UNRESOLVED}
+```
+
+## The sentinel passed, so the rest is readable
+
+```text
+exact_seed_list                            True
+no_r3_overlap                              True
+identifies_r4_contract_and_namespace       True
+per_topology_block_identities              True
+registered_episode_counts                  True
+every_topology_accounted_for_exactly_once  True
+```
+
+Every shard independently carried `r4_population_namespace =
+D7_S_R4_ABSOLUTE_FOCAL_MARGIN`, ran the registered 8/8 episode volume, and
+recorded zero hash failures. The identity is earned by every contributing
+process, not asserted once at the end.
+
+## The result
+
+```text
+part_a.verdict              PART_A_CONTRADICTION
+part_a.d_a_point            0.4839380477047651
+part_a.lower_contrast_lcb   4.318957155049049      LCB95(D_A + 5) > 0
+part_a.lower_contrast_ucb   6.685962861943237
+part_a.upper_contrast_lcb   3.314037138056763      LCB95(5 - D_A) > 0
+
+support.ok                  True
+conformance.ok              True
+  invalidated_pairs_count   0
+  topology_hash_ok          True
+  arm_distinct_ok           True
+
+primary_g.degenerate                      False
+primary_g.component_invariance_evaluated  True
+primary_g.components_invariant_stable     False
+primary_g.components_invariant_flex       False
+```
+
+**This is a positive equivalence finding, not a failure to resolve.** Both
+one-sided bounds clear zero comfortably, so the bootstrap established
+`|D_A| < 5` on both sides at 95%. The arms are equivalent *within the
+registered margin*, and that is a measurement, not an absence of one.
+
+Per-topology `D_A` means straddle zero:
+
+```text
+20260734  n=6  mean=-1.2609    20260738  n=8  mean=+2.6829
+20260735  n=7  mean=+0.6096    20260739  n=7  mean=-1.9098
+20260736  n=7  mean=-0.1806    20260740  n=8  mean=+0.1581
+20260737  n=7  mean=+3.0277    20260741  n=8  mean=+0.7446
+```
+
+Within-topology spread is wide (individual contributions from −7.9 to +11.5),
+so the tight pooled interval comes from topology-level cancellation, not from
+small within-topology variance.
+
+## What it means, stated as the contract states it
+
+`PART_A_CONTRADICTION` fires when the two arms are **equivalent**. The name
+reads backwards until the reasoning is visible: if the source were necessary,
+the full-sync arm should *differ* from constructive-mixed. It does not. So the
+focal result cannot be read as source necessity, and §7 puts this above the
+combined result in the precedence — it masks whatever the limbs said.
+
+What it masked, recorded because §6 requires the limb states to survive the
+branch name: `(AFFIRMATIVE_NONMATERIAL, UNRESOLVED)` — which maps to
+`NO_MATERIAL_STABLE_PERSISTENCE_IDENTIFIED`. **That mapping is not this run's
+result.** It is recorded so the mask is auditable, and it is exactly the
+information R3 lost by letting a top-level branch name erase the per-limb states.
+
+## The dev topology predicted this, and that is the uncomfortable part
+
+Step E, on development topology 20260725 alone, measured `D_A ≈ 0.46` and noted
+it "contradicts legitimately" — at the time this was an obstacle to the
+exercise, worked around by steering `D_A` to a separated value so the nine
+combined results could be reached at all.
+
+The full eight-topology population now returns `0.484`. The dev topology was not
+an outlier: **the source-control contrast is systematically near zero at this
+margin**, and the step-E note recorded the signal without recognising it as one.
+
+Whether that is a property of the estimand, of the `MATERIALITY_MARGIN = 5.0`
+anchor, or of the S7-S3 carrier is a scientific question and is not the Project
+Manager's to answer. It goes to Pro as the third touchpoint.
+
+## Provenance
+
+Artifact at `logs/d7s_r4_30403322062/pooled/d7_s_event_aligned.json`; the eight
+shard artifacts beside it under `shards/`. Numbers above are transcribed here
+because `logs/` is untracked and `git add -f` is forbidden.
