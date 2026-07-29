@@ -50,6 +50,41 @@ you again. Returning quickly is correct behaviour, not a failure.
    it is not required and it proves nothing about timing.
 3. Describe what you saw. Return.
 
+## Anchor on the fence, not on the bottom of the page
+
+**A conversation holds many rounds.** Each has its own large answer, and the one
+you were sent to look at is usually the last of several. Reporting on the wrong
+one is the failure mode that has actually happened here.
+
+On 2026-07-29 a monitor reported `generating=false` with a ~38,000-character
+answer and described its subject matter confidently. It had read the *previous*
+round's turn. The round it was sent to inspect was still generating and had
+produced about 900 characters. Nothing in the report was flagged as uncertain.
+
+So: your brief names a `stage_commit`. Find the user turn containing that exact
+string, and report **only** on assistant content that comes after it.
+
+- If you cannot establish that ordering, say so. `ordering_established=false` is
+  a complete, correct report.
+- If the content you found does not discuss the subject your brief names, you are
+  almost certainly on an earlier turn. Say that rather than describing it.
+- A character count from the wrong turn is worse than no count, because it reads
+  as precision.
+
+## When the page will not respond, that is your report
+
+Your three read tools wait for `document_idle`. A conversation carrying several
+large answers can reach a state where they all time out at 45 seconds while the
+page is otherwise alive.
+
+**You cannot see through this, and you must not try.** Two timeouts on a tool is
+enough — stop using it, report `page_state` describing the failure, and return.
+
+This is a real boundary of your grant, not a failure on your part. The Project
+Manager holds `javascript_tool` and can read a wedged page directly; your
+returning promptly with "cannot read" is what tells it to do so. A long silence
+while you retry costs strictly more than an honest refusal.
+
 ## What to look for
 
 Report each of these as a separate observation, not as a verdict:
