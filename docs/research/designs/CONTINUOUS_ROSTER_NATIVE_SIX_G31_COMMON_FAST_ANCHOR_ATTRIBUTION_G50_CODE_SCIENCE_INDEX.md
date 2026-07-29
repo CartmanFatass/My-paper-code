@@ -10,8 +10,11 @@ design_disposition=CONTRACT_IDENTIFIED_B
 result_contract_disposition=RESULT_CONTRACT_IDENTIFIED
 design_stage_commit=b673032361b36dfc5531a06f4a8a37ce0e2c7b62
 result_contract_stage_commit=22df8091c9f0cbd129f1473862186ce84bcb712a
-compute_authority=zero_until_independent_alignment_and_execution_readiness
-next_boundary=CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_CODE_SCIENCE_ALIGNMENT_AUDIT
+alignment_disposition=ALIGNED
+aligned_implementation_commit=b8290699f5c10c593bbc21a6666c17950fae84d3
+alignment_stage_commit=4df41063d077ace7e0c9212e0cbadbf56e1be4b7
+compute_authority=zero_in_this_alignment_binding_assignment
+next_boundary=OPS_FRESH_SAME_SOURCE_NONFORMAL_PREFLIGHT
 ```
 
 This package implements the frozen G50 result contract only. It does not run or
@@ -219,14 +222,16 @@ alignment_audit_id=CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTI
 nonformal_completion_branch=NONFORMAL_CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_EXERCISE_COMPLETE
 ```
 
-The initial implementation intentionally ships with
-`ALIGNED_IMPLEMENTATION_COMMIT=None` and `ALIGNMENT_STAGE_COMMIT=None`. Formal
-admission therefore fails before runtime configuration, worker creation,
-environment collection, or run-root writes. A later alignment-only binding
-must match exact lowercase 40-character source/stage commits, the token,
-`ALIGNED`, same-source valid nonformal manifests/digests/inventory/branch,
-historical G40 objective authority, G49 authority, wall-clock projection,
-fresh root, C++ backend, and CPU/process/thread settings.
+The independent correction-recheck-v2 binds
+`ALIGNED_IMPLEMENTATION_COMMIT=b8290699f5c10c593bbc21a6666c17950fae84d3`
+and
+`ALIGNMENT_STAGE_COMMIT=4df41063d077ace7e0c9212e0cbadbf56e1be4b7`.
+Formal admission still fails before runtime configuration, worker creation,
+environment collection, or run-root writes unless the CLI supplies those exact
+lowercase identities, the token, `ALIGNED`, same-source valid nonformal
+manifests/digests/inventory/branch, historical G40 objective authority, G49
+authority, wall-clock projection, fresh root, C++ backend, and CPU/process/thread
+settings.
 
 ## Focused evidence
 
@@ -238,8 +243,9 @@ the null zero-read certificate.
 
 The runner test covers nonformal/formal inventories, source-authority use,
 five first-match witnesses, the non-confident absolute reference-access failure
-guard and its precedence over favorable comparisons, fail-closed unbound formal
-admission, exact six checkpoint names, paired whole-episode bootstrap indices,
+guard and its precedence over favorable comparisons, exact alignment binding
+and fail-closed missing-preflight admission, exact six checkpoint names,
+paired whole-episode bootstrap indices,
 CPU/spawn/thread controls, all six readiness interfaces, and immutable
 token/predecessor bindings.
 

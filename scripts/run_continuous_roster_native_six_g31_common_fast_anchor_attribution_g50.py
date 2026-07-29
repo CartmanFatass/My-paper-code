@@ -67,9 +67,14 @@ ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_"
     "CODE_SCIENCE_ALIGNMENT_AUDIT"
 )
-# These remain fail-closed until the independent G50 alignment audit.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
+# Exact target/stage mechanically established by the independent G50
+# correction-recheck-v2 audit.
+ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
+    "b8290699f5c10c593bbc21a6666c17950fae84d3"
+)
+ALIGNMENT_STAGE_COMMIT: str | None = (
+    "4df41063d077ace7e0c9212e0cbadbf56e1be4b7"
+)
 
 ACCEPTED_ANCHOR_ROOT_RELATIVE = Path(
     "logs/formal_continuous_roster_native_six_credit_reduction_g40_cpu_"

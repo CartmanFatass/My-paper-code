@@ -113,23 +113,28 @@ def test_reference_access_failure_precedes_favorable_comparison_without_confiden
     ) == runner.SOURCE_FAILURE_BRANCH
 
 
-def test_formal_admission_is_unbound_and_fails_before_runtime(runner, tmp_path) -> None:
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
+def test_formal_admission_is_bound_and_fails_before_runtime_without_preflight(
+    runner, tmp_path
+) -> None:
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "b8290699f5c10c593bbc21a6666c17950fae84d3"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "4df41063d077ace7e0c9212e0cbadbf56e1be4b7"
+    )
     result = runner.validate_formal_admission(
-        source_commit="a" * 40,
+        source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
         authorization_token=runner.AUTHORIZATION_TOKEN,
         accepted_anchor_root=runner.PROJECT_ROOT / runner.ACCEPTED_ANCHOR_ROOT_RELATIVE,
         preflight_root=tmp_path / "missing_preflight",
         alignment_disposition="ALIGNED",
-        aligned_source_commit="a" * 40,
-        alignment_stage_commit="b" * 40,
+        aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
         cpu_budget=2,
         process_workers=2,
     )
     assert result["admitted"] is False
-    assert "trusted_alignment_binding" in result["errors"]
-    assert "same_source_preflight" in result["errors"]
+    assert result["errors"] == ["same_source_preflight"]
     implementation = inspect.getsource(runner.train)
     assert implementation.index("_formal_admission_errors") < implementation.index(
         "_configure_cpu_execution"
