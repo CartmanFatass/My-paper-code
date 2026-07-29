@@ -37,3 +37,72 @@ The three terminal manifests and six required final checkpoints were present
 under the formal run root after sequential train, evaluate and analyze exits.
 This file records transport and artifact facts only; it does not interpret the
 formal result, select a branch, edit CDC state or authorize a successor.
+
+## Reviewer-visible terminal result fields (mechanically copied)
+
+```text
+terminal_artifact_scope=existing_formal_run_files_only
+analysis_result_path=logs/formal_continuous_roster_native_six_g31_realized_successor_channel_attribution_g48_cpu_20260729_d96f8f2_r1/analysis_result.json
+analysis_result_sha256=fdd0c6d301b0f2d25cf81451e296a1f0eeffca2fc03fcc8dc1b691554a168c6d
+analysis_status=COMPLETE
+analysis_branch=DUPLICATED_IMMEDIATE_CREDIT_SUFFICIENT_G48
+analysis_source_id=CONTINUOUS_ROSTER_NATIVE_SIX_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_P0
+analysis_source_commit=4abbee66d43ffd592d65624121121bc0109882ab
+analysis_aligned_source_commit=d96f8f29367b55b5ea655b984631d6064877e237
+analysis_alignment_stage_commit=617414f9a175f044eecfbfec4e4b170c6990b47f
+analysis_formal=true
+analysis_schema_version=2
+analysis_operational_valid=true
+metrics.source_valid=true
+metrics.treatment_activation_valid=true
+metrics.reference_access_pass=true
+metrics.reference_access_confident_fail=false
+metrics.null_access_pass=true
+metrics.null_access_confident_fail=false
+metrics.duplicated_immediate_noninferior=true
+metrics.material_realized_successor_advantage=false
+metrics.reference_minus_null_primary_ci95=[-0.009929735010121536,-0.003130239010674661,0.0006496391334839275]
+metrics.reference_minus_null_capacity_6_ci95=[-0.003047573242081267,-0.000023767837701393361,0.003225770189697182]
+metrics.reference_minus_null_capacity_8_ci95=[-0.011715888608560947,-0.0034464183754958928,0.0011528930163752981]
+metrics.reference_minus_null_capacity_12_ci95=[-0.014839766149231546,-0.005903016317533048,-0.0006160106466084341]
+metrics.fixed_deterministic_utility_capacity_6_ci95=[-0.0017148744459359452,0.0002685538845332646,0.0027599580330676106]
+metrics.fixed_deterministic_utility_capacity_8_ci95=[-0.009257316044765374,-0.0027079892131545843,0.0010040346456545997]
+metrics.fixed_deterministic_utility_capacity_12_ci95=[-0.011955130252594006,-0.005002325688914663,-0.0008811503567691073]
+metrics.fixed_stochastic_utility_ci95=[-0.0069917157725470185,-0.00480999213195724,-0.0034921380020885785]
+metrics.random_deterministic_utility_capacity_6_ci95=[-0.003047573242081267,-0.000023767837701393361,0.003225770189697182]
+metrics.random_deterministic_utility_capacity_8_ci95=[-0.011715888608560947,-0.0034464183754958928,0.0011528930163752981]
+metrics.random_deterministic_utility_capacity_12_ci95=[-0.014839766149231546,-0.005903016317533048,-0.0006160106466084341]
+metrics.random_event_window_capacity_6_ci95=[-0.0011659048780715867,0.001395819042866525,0.003888424202694785]
+metrics.random_event_window_capacity_8_ci95=[-0.015903042194876725,-0.005228393603995771,0.0010101339497125032]
+metrics.random_event_window_capacity_12_ci95=[-0.02015980309581044,-0.009265100512962452,-0.0019606245086581657]
+metrics.random_minus_fixed_transport_capacity_6_ci95=[-0.0015820495319704504,-0.0002351061273157536,0.0006057483560985063]
+metrics.random_minus_fixed_transport_capacity_8_ci95=[-0.0023583931058605294,-0.0007208339911085133,0.0003267511430238936]
+metrics.random_minus_fixed_transport_capacity_12_ci95=[-0.0027906668172270515,-0.0008612718487178729,0.00039112567876911706]
+metrics.random_process_segment_capacity_6_ci95=[-0.0010049423929779856,0.0015810794533190433,0.004002914604373589]
+metrics.random_process_segment_capacity_8_ci95=[-0.013976130536842438,-0.004085273713635129,0.0014437325736390994]
+metrics.random_process_segment_capacity_12_ci95=[-0.022060317769626327,-0.010245405539724337,-0.0024392731888772516]
+metrics.random_stochastic_utility_ci95=[-0.007284973957196952,-0.004901565883347881,-0.0035283685228663167]
+analysis_thresholds_json={"activation_tolerance":1e-6,"event_floor":0.85,"minimum_replicate_floor":0.85,"process_noninferiority_margin":-0.05,"segment_floor":0.85,"stochastic_floor":0.8,"successor_margin":0.05,"utility_floor":0.9}
+analysis_training_manifest_digest=f55ba06583d256f94461cc0393470f2adc68f2a74525724dab940e7bca65d276
+analysis_evaluation_manifest_digest=04b5a1767e4f438f2412bae771517b12203ad9fd7815ecec15443ed518c7b4b5
+train_manifest_sha256=f55ba06583d256f94461cc0393470f2adc68f2a74525724dab940e7bca65d276
+evaluation_manifest_sha256=04b5a1767e4f438f2412bae771517b12203ad9fd7815ecec15443ed518c7b4b5
+analysis_result_file_sha256=fdd0c6d301b0f2d25cf81451e296a1f0eeffca2fc03fcc8dc1b691554a168c6d
+checkpoint_replicate_0_native6_g31_duplicated_immediate_final_sha256=66f266c57a2e9e54c5d38414b3cca07045e0145b3d1ab58e13611e330af7c1d7
+checkpoint_replicate_0_native6_g31_immediate_realized_successor_final_sha256=769514f3a431f24073e08b1794e32453c4d84ac442358d90cc0c53c142a5f6e1
+checkpoint_replicate_1_native6_g31_duplicated_immediate_final_sha256=941b405a1517e0356e2bb1a6aaa88e6d9b9f983d088fb3b8dbc5131bc6a6b093
+checkpoint_replicate_1_native6_g31_immediate_realized_successor_final_sha256=a6e2ccef620acb2cc2296b762172e0c7bcc86a78dc08975c0116fea321d6d3e8
+checkpoint_replicate_2_native6_g31_duplicated_immediate_final_sha256=4091395580177e8df46cc9efdff18ba88fdeeb889c319c2adc17571e514b201d
+checkpoint_replicate_2_native6_g31_immediate_realized_successor_final_sha256=91c8137cd44ac4a0f4922e0794faf7835f2af3bbb46813bfdca925477fc1d7dc
+seed_block_json={"bootstrap_seed":10487048,"branch_action":10482000,"branch_gradient_probe":10483000,"branch_ledger":10481000,"evaluation_action":10486000,"evaluation_ledger":10484000,"evaluation_process":10485000,"nonformal_seed_offset":900000}
+configuration_json={"arms":["NATIVE6_G31_IMMEDIATE_REALIZED_SUCCESSOR","NATIVE6_G31_DUPLICATED_IMMEDIATE"],"horizon":48,"K_search":0,"hypothetical_trajectory_count":0,"hypothetical_transitions":0,"nested_rollout":false,"replanning":false,"replicates":3,"training_capacity":8,"evaluation_capacities":[6,8,12],"evaluation_episodes_per_cell":48,"branch_updates_per_arm":100,"ppo_passes":2,"training_transitions":230400,"evaluation_transitions":165888,"total_real_transitions":396288,"optimizer_steps":1200,"bootstrap_resamples":10000,"checkpoint_selection":"final_only","environment_backend":"ContinuousRosterToyBatch_CPU_CPP_required","environment_python_fallback":false,"cpu_budget":2,"process_workers":2}
+activation_source_arm=NATIVE6_G31_IMMEDIATE_REALIZED_SUCCESSOR
+activation_tolerance=1e-6
+actual_null_evidence_read_count=0
+activation_expected_replicates=[0,1,2]
+activation_active_pass_count_by_replicate={"0":200,"1":200,"2":200}
+```
+
+The values above are byte/value copies from the existing terminal JSON and
+checkpoint files. No run, recomputation, filtering, relabelling or checkpoint
+rewrite was performed.
