@@ -12,7 +12,7 @@ compute_budget=zero
 new_environment_transitions=0
 new_optimizer_steps=0
 new_bootstrap_resamples=0
-``` 
+```
 
 ## Exact task
 

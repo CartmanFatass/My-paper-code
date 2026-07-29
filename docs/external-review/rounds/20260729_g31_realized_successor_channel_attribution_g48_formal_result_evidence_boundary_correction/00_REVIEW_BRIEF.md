@@ -12,7 +12,7 @@ new_environment_transitions=0
 new_optimizer_steps=0
 new_bootstrap_resamples=0
 registered_branch=G48_FORMAL_RESULT_EVIDENCE_BOUNDARY_CORRECTION_PENDING_EXTERNAL_PRO
-``` 
+```
 
 ## Purpose
 

@@ -10,7 +10,7 @@ round=20260729_g31_realized_successor_channel_attribution_g48_formal_result_evid
 stage_commit=bound_by_transport_fence
 formal_source_commit=4abbee66d43ffd592d65624121121bc0109882ab
 existing_formal_run_root=logs/formal_continuous_roster_native_six_g31_realized_successor_channel_attribution_g48_cpu_20260729_d96f8f2_r1
-``` 
+```
 
 Read only these repository paths at the exact pushed stage commit:
 
