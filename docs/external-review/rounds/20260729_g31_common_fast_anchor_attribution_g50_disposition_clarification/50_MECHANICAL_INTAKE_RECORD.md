@@ -1,0 +1,33 @@
+# Mechanical intake record
+
+round=20260729_g31_common_fast_anchor_attribution_g50_disposition_clarification
+stage_commit=5e30dd04812c34af3981ad03fa24f0b81f6c4ab9
+audit_target_archival_commit=625c68a19724c5d4ac5be1336f1a7b847ce6f9a7
+conversation_id=6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
+question=docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_disposition_clarification/20_PRO_OPEN_QUESTION.md
+raw=docs/external-review/rounds/20260729_g31_common_fast_anchor_attribution_g50_disposition_clarification/21_PRO_OPEN_RAW.md
+
+submission_count=1
+same_turn_retry_count=1
+recovery_submission_count=0
+answer_now_activated=false
+original_monitor_terminal=ERROR
+original_monitor_reason=explicit_response_error_unusual_activity_retry_available
+retry_monitor_terminal=COMPLETE
+retry_sentinel_terminal=COMPLETE
+assistant_message_identity=041acb4c-bc46-4f53-9982-24f3b6e27dae
+stable_snapshots=2
+generation_controls=inactive
+response_chars=541
+response_sha256=e06e3da6e64e97bfe2db1822e6c1df51db0b2f2d3be05c38c46b8be5e3932cdf
+raw_exact_equality=true
+required_disposition_token=CONTINUE
+disposition_token_count=2
+required_rationale_present=true
+response_format=NONCONFORMING_DUPLICATE_FIELDS_AND_EXTRA_COMMENTARY
+natural_completion=true
+scientific_iteration_cost=zero
+scientific_interpretation=none
+terminal_status=REVIEW_TRANSPORT_BLOCKED_RESPONSE_FORMAT
+
+The response was naturally complete and mechanically archived, but it did not obey the exact two-line response format: it repeated DISPOSITION/RATIONALE and added commentary ("Worked for 4m 16s" and "Sources"). No scientific disposition is accepted from this record.
