@@ -432,6 +432,67 @@ alone will happily certify it. On 2026-07-24 an archival pass captured 794 bytes
 of exactly that trace as scientific raw and asserted byte equality while the stop
 control was visible. Two stable snapshots are necessary, never sufficient.
 
+### Step zero — take a provisional capture the moment generation stops
+
+**Before locating any control, before any click, dump the answer text with
+`javascript_tool` and write it to the round directory as
+`22_PROVISIONAL_CAPTURE.txt`.** One call, no clipboard, no focus requirement, no
+OS gesture — it works on a hidden tab, and it is the only capture path that
+survives the browser dying in the next thirty seconds.
+
+This is a **provisional** artifact and never the archive:
+
+- it is `innerText`, so every markdown marker is gone — the exact loss this
+  Skill's history records;
+- it does not satisfy "exact raw" and **no reconciliation may be written from
+  it**;
+- it is deleted once `21_PRO_OPEN_RAW.md` exists, and the intake record notes
+  that it was taken.
+
+It exists for one reason. On 2026-07-29 a completed 20745-character ruling was
+read, confirmed, and then lost mid-capture when the browser went down — the round
+was left with a header, a tail, and nothing in between, and no reconciliation
+could be written at all. A provisional dump costs one call and would have left
+the full reasoning readable while the byte-exact capture waited for a browser.
+
+Cheap and immediate beats perfect and contingent, **as long as the cheap one
+cannot be mistaken for the archive.** Name it `PROVISIONAL`, and let the
+byte-exact copy supersede it.
+
+### Check `document.visibilityState` before diagnosing anything
+
+A hidden tab and a wedged tab present identically and have opposite remedies.
+
+```javascript
+document.visibilityState   // "visible" or "hidden"
+```
+
+`"hidden"` explains, all at once: `screenshot` and `find` timing out at
+`document_idle` under render throttling; `javascript_tool` still answering
+instantly, which makes the page look half-alive; and `Copy response` silently
+doing nothing, because `navigator.clipboard.writeText` refuses on a hidden
+document. The remedy is to activate the tab, **not** to replace it — and
+replacing it throws away a perfectly good page.
+
+On 2026-07-29 this was misdiagnosed as the accumulated-renderer-state case
+documented above, and two capture attempts were spent hunting a coordinate bug
+that did not exist. A capturing click listener proved the click was landing on
+the right button the whole time:
+
+```javascript
+document.addEventListener('click', e => window.__clicks.push(
+  {x: e.clientX, y: e.clientY, label: e.target.closest('button')?.getAttribute('aria-label')}), true)
+```
+
+Use that listener whenever a click is suspect. It settles *where the click
+landed* in one call, which no amount of screenshot-staring does on a page that
+will not render.
+
+**And do not pass a `javascript_tool` rect straight to `computer`.** JS rects are
+page pixels; `computer` coordinates are screenshot pixels. Convert by
+`screenshot_width / window.innerWidth` — on 2026-07-29 that was
+`1568 / 1912 = 0.820`, so a rect at `(712, 763)` was a click at `(584, 626)`.
+
 ### How to capture the response — one click, never transcription
 
 Use the page's own **`Copy response`** control. It is in the `Response actions`
