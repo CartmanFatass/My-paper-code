@@ -83,8 +83,6 @@ formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_route_cache=forbidden
-cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization
-cross_task_route_guard=pretool_live_settings_canonicalization
 active_unattended_grant_valid_iteration_limit=9
 active_unattended_grant_permission_prompts=forbidden
 valid_result_external_pro_adjudication=result_plus_portfolio_delta_required
@@ -412,9 +410,9 @@ impossibility is the only earlier non-scientific terminal blocker.
 ## Workflow changes and Git
 
 Research Operations Manager may request a workflow-design change directly from
-the fixed Workflow Design Manager session after probing and supplying its live
-model and effort. The registered PreToolUse guard canonicalizes both values
-again at tool execution. It never edits workflow surfaces locally.
+the fixed Workflow Design Manager session.
+Cross-task routing does not inspect, select, preserve or restore task model and reasoning settings. It never edits
+workflow surfaces locally.
 
 Stage only accepted operations-owned paths, inspect the staged path set, run
 `git diff --cached --check`, commit and push `aggressive`. Never stage source,

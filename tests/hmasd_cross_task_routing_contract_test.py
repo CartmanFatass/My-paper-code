@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import hashlib
-import sqlite3
 import subprocess
 import sys
 from pathlib import Path
@@ -13,12 +12,6 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".agents/skills/hmasd-cross-task-routing/SKILL.md"
 UI = ROOT / ".agents/skills/hmasd-cross-task-routing/agents/openai.yaml"
-PROBE = (
-    ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/read_codex_thread_settings.py"
-)
-GUARD = (
-    ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_route_guard.py"
-)
 PAYLOAD = (
     ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py"
 )
@@ -41,28 +34,19 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
     text = " ".join(SKILL.read_text(encoding="utf-8").split())
     required = (
         "Fixed session addresses",
-        "fixed session addresses only",
-        "Live-settings preservation",
-        "SQLite `mode=ro`",
-        "visible `send_message_to_thread`",
-        "returned `model` as `model`",
-        "returned `thinking` as `thinking`",
-        "PreToolUse guard",
-        "supplies missing settings",
-        "replaces mismatched settings",
-        "updatedInput",
-        "never creates a second message",
+        "session identity only",
+        "Native send",
+        "currently callable Codex cross-task send tool",
+        "runtime capability",
+        "does not inspect, select, transmit, preserve, compare or restore",
+        "makes no claim about the target task's model or reasoning effort",
         "ROUTE_SENT",
-        "ROUTE_SOURCE_MISMATCH",
+        "ROUTE_IDENTITY_MISMATCH",
+        "ROUTE_HANDOFF_INVALID",
         "ROUTE_UNAVAILABLE",
-        "ROUTE_SETTINGS_UNAVAILABLE",
-        "ROUTE_SETTINGS_DRIFT",
         "codex_delegation.source_thread_id",
         "explicit user-directed workflow-design commit",
-        "live_target_model",
-        "live_target_effort",
-        "live_target_thinking",
-        "never retry or resend automatically",
+        "Do not retry automatically",
         "Long-text file handoff",
         "larger than 8 KiB",
         "temp/handoffs/",
@@ -81,6 +65,13 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "fixed route triples",
         "user supplies the new session, model and effort",
         "pre_send_read_only_probe_explicit_echo",
+        "Live-settings preservation",
+        "ROUTE_SETTINGS_UNAVAILABLE",
+        "ROUTE_SETTINGS_DRIFT",
+        "read_codex_thread_settings.py",
+        "hmasd_cross_task_route_guard.py",
+        "SQLite `mode=ro`",
+        "PreToolUse guard",
     ):
         assert retired not in text, retired
 
@@ -185,9 +176,8 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     skill = SKILL.read_text(encoding="utf-8")
     required = (
-        "cross_task_routing=fixed_role_sessions_plus_live_settings_canonicalization",
-        "cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization",
-        "cross_task_route_guard=pretool_live_settings_canonicalization",
+        "cross_task_routing=fixed_role_sessions",
+        "cross_task_routing_skill=hmasd-cross-task-routing",
         f"workflow_design_manager_session={WDM_SESSION}",
         f"code_project_manager_session={CPM_SESSION}",
         f"research_operations_manager_session={ROM_SESSION}",
@@ -204,11 +194,14 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
         "workflow_design_manager_route=",
         "code_project_manager_route=",
         "research_operations_manager_route=",
+        "cross_task_model_thinking_preservation=",
+        "cross_task_route_guard=",
+        "live_settings_canonicalization",
     ):
         assert retired not in agents, retired
 
 
-def test_persistent_roles_use_fixed_sessions_and_live_settings_without_cache() -> None:
+def test_persistent_roles_use_fixed_sessions_without_settings_management() -> None:
     for path in PERSISTENT_ROLES:
         text = path.read_text(encoding="utf-8")
         assert "cross_task_routing_skill=hmasd-cross-task-routing" in text
@@ -217,11 +210,9 @@ def test_persistent_roles_use_fixed_sessions_and_live_settings_without_cache() -
             or "cross_task_target_identity=exact_fixed_requester_role_session" in text
         )
         assert "cross_task_route_cache=forbidden" in text
-        assert (
-            "cross_task_model_thinking_preservation="
-            "pre_send_probe_plus_pretool_canonicalization"
-        ) in text
-        assert "cross_task_route_guard=pretool_live_settings_canonicalization" in text
+        assert "does not inspect, select, preserve or restore" in text
+        assert "cross_task_model_thinking_preservation=" not in text
+        assert "cross_task_route_guard=" not in text
 
 
 def test_review_registry_is_local_to_operations_manager_transport() -> None:
@@ -243,249 +234,20 @@ def test_review_registry_is_local_to_operations_manager_transport() -> None:
         assert retired not in contract
 
 
-def _make_state(path: Path, cwd: Path) -> None:
-    connection = sqlite3.connect(path)
-    connection.execute(
-        "CREATE TABLE threads ("
-        "id TEXT PRIMARY KEY, cwd TEXT, archived INTEGER, model TEXT, "
-        "reasoning_effort TEXT, updated_at_ms INTEGER)"
-    )
-    connection.executemany(
-        "INSERT INTO threads VALUES (?, ?, ?, ?, ?, ?)",
-        (
-            ("live", str(cwd), 0, "gpt-5.6-sol", "medium", 100),
-            ("archived", str(cwd), 1, "gpt-5.6-sol", "high", 101),
-            ("incomplete", str(cwd), 0, "gpt-5.6-sol", None, 102),
-            (WDM_SESSION, str(cwd), 0, "gpt-5.6-sol", "high", 103),
-        ),
-    )
-    connection.commit()
-    connection.close()
-
-
-def _probe(state: Path, cwd: Path, thread_id: str, *extra: str) -> tuple[int, dict]:
-    result = subprocess.run(
-        (
-            sys.executable,
-            str(PROBE),
-            "--state-db",
-            str(state),
-            "--thread-id",
-            thread_id,
-            "--expect-cwd",
-            str(cwd),
-            *extra,
-        ),
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    return result.returncode, json.loads(result.stdout)
-
-
-def _write_router(repo: Path) -> None:
-    (repo / "AGENTS.md").write_text(
-        "\n".join(
-            (
-                f"workflow_design_manager_session={WDM_SESSION}",
-                f"code_project_manager_session={CPM_SESSION}",
-                f"research_operations_manager_session={ROM_SESSION}",
-            )
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-
-
-def _guard(state: Path, repo: Path, tool_input: dict) -> tuple[int, dict | None]:
-    payload = {
-        "session_id": CPM_SESSION,
-        "cwd": str(repo),
-        "hook_event_name": "PreToolUse",
-        "tool_name": "codex_app__send_message_to_thread",
-        "tool_input": tool_input,
-    }
-    result = subprocess.run(
-        (
-            sys.executable,
-            str(GUARD),
-            "--repo",
-            str(repo),
-            "--state-db",
-            str(state),
-        ),
-        input=json.dumps(payload),
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    output = json.loads(result.stdout) if result.stdout.strip() else None
-    return result.returncode, output
-
-
-def test_live_settings_probe_is_read_only_and_supports_drift_diagnostic(
-    tmp_path: Path,
-) -> None:
-    cwd = tmp_path / "repo"
-    cwd.mkdir()
-    state = tmp_path / "state.sqlite"
-    _make_state(state, cwd)
-    before = state.read_bytes()
-
-    code, payload = _probe(state, cwd, "live")
-    assert code == 0
-    assert payload["status"] == "LIVE_SETTINGS"
-    assert payload["model"] == "gpt-5.6-sol"
-    assert payload["thinking"] == "medium"
-
-    code, payload = _probe(
-        state,
-        cwd,
-        "live",
-        "--expect-model",
-        "gpt-5.6-sol",
-        "--expect-thinking",
-        "high",
-    )
-    assert code != 0
-    assert payload["status"] == "SETTINGS_DRIFT"
-    assert state.read_bytes() == before
-
-
-def test_live_settings_probe_fails_closed(tmp_path: Path) -> None:
-    cwd = tmp_path / "repo"
-    cwd.mkdir()
-    state = tmp_path / "state.sqlite"
-    _make_state(state, cwd)
-
-    expected = {
-        "missing": "THREAD_NOT_FOUND",
-        "archived": "THREAD_ARCHIVED",
-        "incomplete": "THREAD_SETTINGS_INCOMPLETE",
-    }
-    for thread_id, status in expected.items():
-        code, payload = _probe(state, cwd, thread_id)
-        assert code != 0
-        assert payload["status"] == status
-
-    other = tmp_path / "other"
-    other.mkdir()
-    code, payload = _probe(state, other, "live")
-    assert code != 0
-    assert payload["status"] == "THREAD_WORKSPACE_MISMATCH"
-
-
-def test_route_guard_canonicalizes_missing_mismatched_and_matching_settings(
-    tmp_path: Path,
-) -> None:
-    repo = tmp_path / "repo"
-    repo.mkdir()
-    _write_router(repo)
-    state = tmp_path / "state.sqlite"
-    _make_state(state, repo)
-
-    cases = (
-        {"threadId": WDM_SESSION, "prompt": "missing", "hostId": "local"},
-        {
-            "threadId": WDM_SESSION,
-            "prompt": "mismatched",
-            "model": "gpt-5.6-luna",
-            "thinking": "max",
-        },
-        {
-            "threadId": WDM_SESSION,
-            "prompt": "matching",
-            "model": "gpt-5.6-sol",
-            "thinking": "high",
-        },
-    )
-    for tool_input in cases:
-        code, decision = _guard(state, repo, tool_input)
-        assert code == 0
-        output = decision["hookSpecificOutput"]
-        assert output["hookEventName"] == "PreToolUse"
-        assert output["permissionDecision"] == "allow"
-        updated = output["updatedInput"]
-        assert updated["threadId"] == WDM_SESSION
-        assert updated["prompt"] == tool_input["prompt"]
-        assert updated["model"] == "gpt-5.6-sol"
-        assert updated["thinking"] == "high"
-        assert updated.get("hostId") == tool_input.get("hostId")
-
-
-def test_route_guard_leaves_other_targets_unchanged_and_denies_unavailable_settings(
-    tmp_path: Path,
-) -> None:
-    repo = tmp_path / "repo"
-    repo.mkdir()
-    _write_router(repo)
-    state = tmp_path / "state.sqlite"
-    _make_state(state, repo)
-
-    code, decision = _guard(
-        state,
-        repo,
-        {"threadId": "unrelated", "prompt": "ordinary", "model": "gpt-5.6-luna"},
-    )
-    assert code == 0
-    assert decision is None
-
-    connection = sqlite3.connect(state)
-    connection.execute("UPDATE threads SET archived = 1 WHERE id = ?", (WDM_SESSION,))
-    connection.commit()
-    connection.close()
-    code, decision = _guard(state, repo, {"threadId": WDM_SESSION, "prompt": "blocked"})
-    assert code == 0
-    output = decision["hookSpecificOutput"]
-    assert output["permissionDecision"] == "deny"
-    assert "THREAD_ARCHIVED" in output["permissionDecisionReason"]
-
-    (repo / "AGENTS.md").write_text(
-        f"workflow_design_manager_session={WDM_SESSION}\n", encoding="utf-8"
-    )
-    code, decision = _guard(state, repo, {"threadId": WDM_SESSION, "prompt": "blocked"})
-    assert code == 0
-    assert decision["hookSpecificOutput"]["permissionDecision"] == "deny"
-
-
-def test_project_hook_canonicalizes_cross_task_calls_and_preserves_readiness_stop() -> None:
+def test_project_hooks_preserve_workspace_boundary_and_readiness_stop() -> None:
     hooks = json.loads(HOOKS.read_text(encoding="utf-8"))["hooks"]
     pre = hooks["PreToolUse"]
-    assert len(pre) == 2
+    assert len(pre) == 1
     routes = {entry["matcher"]: entry for entry in pre}
-    route = routes["^codex_app__send_message_to_thread$"]
     boundary = routes[
         "^(shell_command|Bash|unified_exec|exec_command|apply_patch|ApplyPatch)$"
     ]
-    assert len(route["hooks"]) == 1
-    handler = route["hooks"][0]
-    assert handler["type"] == "command"
-    assert "hmasd_cross_task_route_guard.py" in handler["command"]
-    assert handler["timeout"] == 5
+    assert "^codex_app__send_message_to_thread$" not in routes
     assert len(boundary["hooks"]) == 1
     assert "hmasd_workspace_boundary_guard.py" in boundary["hooks"][0]["command"]
     assert boundary["hooks"][0]["timeout"] == 5
     assert len(hooks["Stop"]) == 1
     assert "hmasd_execution_readiness.py" in hooks["Stop"][0]["hooks"][0]["command"]
-
-    payload = {
-        "session_id": WDM_SESSION,
-        "cwd": str(ROOT),
-        "hook_event_name": "PreToolUse",
-        "tool_name": "codex_app__send_message_to_thread",
-        "tool_input": {"threadId": "unrelated", "prompt": "configured hook smoke"},
-    }
-    result = subprocess.run(
-        handler["command"],
-        cwd=ROOT,
-        input=json.dumps(payload),
-        check=False,
-        capture_output=True,
-        text=True,
-        shell=True,
-    )
-    assert result.returncode == 0, result.stderr
-    assert not result.stdout.strip()
 
 
 def test_route_settings_are_forbidden_from_message_payload_surfaces() -> None:

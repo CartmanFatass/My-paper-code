@@ -65,10 +65,8 @@ formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
-cross_task_routing=fixed_role_sessions_plus_live_settings_canonicalization
+cross_task_routing=fixed_role_sessions
 cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_model_thinking_preservation=pre_send_probe_plus_pretool_canonicalization
-cross_task_route_guard=pretool_live_settings_canonicalization
 ```
 
 The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered.
