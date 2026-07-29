@@ -1,0 +1,34 @@
+# G50 code-science alignment audit source manifest
+
+```text
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260729_g31_common_fast_anchor_attribution_g50_code_science_alignment_audit
+stage_commit=5aeb3b7745847ca39edf556af29067506ead4c00
+audit_target_commit=5aeb3b7745847ca39edf556af29067506ead4c00
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
+```
+
+The allow-list is exact. Do not read or infer from any other path.
+
+- `.agents/roles/EXTERNAL_PRO.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50_CODE_SCIENCE_INDEX.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_CODE_SCIENCE_INDEX.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_DUPLICATED_IMMEDIATE_SINGLE_CHANNEL_COLLAPSE_G49_CODE_SCIENCE_INDEX.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_common_fast_anchor_attribution_g50.py`
+- `scripts/run_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50_test.py`
+- `tests/run_continuous_roster_native_six_g31_common_fast_anchor_attribution_g50_test.py`
+- `ha_ctse_process/continuous_roster_native_six_credit_reduction_g40.py`
+- `ha_ctse_process/continuous_roster_native_six_g31_slow_critic_reduction_g41.py`
+- `ha_ctse_process/continuous_roster_native_six_g31_realized_successor_channel_attribution_g48.py`
+- `scripts/run_continuous_roster_native_six_g31_realized_successor_channel_attribution_g48.py`
+- `ha_ctse_process/continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49.py`
+- `scripts/run_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49.py`
+- `tests/ha_ctse_process_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_test.py`
+- `tests/run_continuous_roster_native_six_g31_duplicated_immediate_single_channel_collapse_g49_test.py`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_result_contract_clarification_g50/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_common_fast_anchor_result_contract_clarification_g50/50_MECHANICAL_INTAKE_RECORD.md`
