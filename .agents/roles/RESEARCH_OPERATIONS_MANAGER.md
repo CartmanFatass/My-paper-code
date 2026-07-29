@@ -37,6 +37,17 @@ review_post_error_persistence_recheck_zero=REVIEW_TRANSPORT_CLOSED_UNPERSISTED_A
 review_post_error_persistence_recheck_uncertain=REVIEW_TRANSPORT_BLOCKED
 review_post_error_persistence_recheck_monitor_before_fence=forbidden
 review_post_error_persistence_recheck_scientific_iteration_cost=zero
+review_user_authorized_assignment_send=once_after_closed_unpersisted_assignment
+review_user_authorized_assignment_send_authority=direct_user_only
+review_user_authorized_assignment_send_package=reuse_exact_existing_package
+review_user_authorized_assignment_send_presend=exact_url_plus_registered_search_both_zero
+review_user_authorized_assignment_send_count=one
+review_user_authorized_assignment_send_postsend=one_snapshot_no_reload
+review_user_authorized_assignment_send_automatic_recovery=forbidden
+review_user_authorized_assignment_send_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED
+review_user_authorized_assignment_send_uncertain=REVIEW_TRANSPORT_BLOCKED
+review_user_authorized_assignment_send_monitor_before_fence=forbidden
+review_user_authorized_assignment_send_scientific_iteration_cost=zero
 review_response_retry=once_same_conversation_after_terminal_attempt
 review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery
 review_response_retry_requires_server_visible_original_fence=true
@@ -151,7 +162,8 @@ second and final client send but can become only the first server-visible
 Assignment. Establish a sentinel and monitor only after exactly one complete
 fence becomes visible. A second missing fence, duplicate fence or identity
 mismatch ends in `REVIEW_TRANSPORT_BLOCKED`; no further Assignment send is
-permitted. This operational recovery consumes zero scientific iterations.
+permitted by this operational recovery. This recovery consumes zero scientific
+iterations and grants no later send authority.
 
 After that terminal state, one observe-only `POST_ERROR_PERSISTENCE_RECHECK` is
 permitted at an ordinary task wakeup. It sends nothing and combines a fresh
@@ -172,8 +184,38 @@ The closed state resumes only if the same exact fence later becomes
 server-visible without a new send, or a new explicit user-authorized workflow
 contract defines any further client send or replacement review package.
 
-After the first monitor and sentinel are terminal and no generation remains
-live, the same registered conversation permits one mechanically rendered
+A direct user authorization may activate one
+`USER_AUTHORIZED_ASSIGNMENT_SEND` after
+`REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`. It does not reset the two
+earlier client sends or create automatic recovery. Reuse the same pushed
+package unless its identity or evidence boundary is invalid; package replacement
+is not permitted merely because transport failed.
+
+Immediately before this send, require the exact registered URL and signed-in
+conversation search to agree that the same round, full stage commit and question
+have zero full fences, zero prefix fences and zero corresponding responses. No
+sentinel, monitor or generation may be live. If exactly one full fence is found,
+cancel the authorized send and adopt that existing fence. A prefix, duplicate,
+identity mismatch, unreadable history or disagreement blocks the send. Only
+when both observations prove zero may the existing renderer reproduce the
+unchanged Assignment byte-for-byte and send it once.
+
+After the send, take one fresh readable snapshot without reload, reopen or
+recovery. Exactly one full fence permits the normal sentinel and unique monitor,
+or normal archival when a stable response already exists. Zero fences closes as
+`REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; a prefix, duplicate,
+mismatch or uncertainty is `REVIEW_TRANSPORT_BLOCKED`. No additional Assignment,
+`Retry`, `ResponseRetry`, prefix correction, post-error recheck or `Answer now`
+is authorized. The grant is consumed by the client send, cannot be inherited,
+and costs zero scientific iterations.
+
+The new closed state resumes only if that same exact fence later becomes
+server-visible without another send, or another direct user authorization is
+implemented through a new explicit workflow contract.
+
+For an ordinary accepted first attempt that is not a
+`USER_AUTHORIZED_ASSIGNMENT_SEND`, after the first monitor and sentinel are
+terminal and no generation remains live, the same registered conversation permits one mechanically rendered
 response retry only when the server-visible original fence remains exact and
 either a stable answer omits question-declared response fields or applicable
 recovery is exhausted without a complete answer. The retry preserves the full

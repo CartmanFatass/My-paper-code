@@ -48,6 +48,7 @@ foreach ($required in @(
     'VERIFY_FRESHNESS_FENCE',
     'RECOVER_UNPERSISTED_ASSIGNMENT',
     'POST_ERROR_PERSISTENCE_RECHECK',
+    'USER_AUTHORIZED_ASSIGNMENT_SEND',
     'CORRECT_PREFIX_FENCE',
     'RETRY_RESPONSE_CONTRACT',
     'render_review_fence.ps1',
@@ -68,12 +69,21 @@ foreach ($required in @(
     'zero complete matching fences',
     'A same-tab reload alone is insufficient',
     'equal the first rendered Assignment byte-for-byte',
-    'Never send a third Assignment client attempt',
+    'This automatic recovery grants no third Assignment client attempt',
     'REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT',
     'signed-in conversation search',
     'Do not send or render a message',
     'cannot repeat',
     'without a new send',
+    'REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED',
+    'One direct-user-authorized Assignment send',
+    'The client action consumes the grant',
+    'take one fresh readable snapshot only',
+    'Do not reload, reopen',
+    'grant cannot be inherited',
+    'attempt 1 is not `USER_AUTHORIZED_ASSIGNMENT_SEND`',
+    'ineligible for this correction',
+    'the accepted attempt is not `USER_AUTHORIZED_ASSIGNMENT_SEND`',
     'never submit attempt 3',
     'same tab once for that stuck episode',
     'Reloading never proves the matching fence absent and never authorizes submission',
@@ -147,6 +157,17 @@ foreach ($required in @(
     'review_post_error_persistence_recheck_uncertain=REVIEW_TRANSPORT_BLOCKED',
     'review_post_error_persistence_recheck_monitor_before_fence=forbidden',
     'review_post_error_persistence_recheck_scientific_iteration_cost=zero',
+    'review_user_authorized_assignment_send=once_after_closed_unpersisted_assignment',
+    'review_user_authorized_assignment_send_authority=direct_user_only',
+    'review_user_authorized_assignment_send_package=reuse_exact_existing_package',
+    'review_user_authorized_assignment_send_presend=exact_url_plus_registered_search_both_zero',
+    'review_user_authorized_assignment_send_count=one',
+    'review_user_authorized_assignment_send_postsend=one_snapshot_no_reload',
+    'review_user_authorized_assignment_send_automatic_recovery=forbidden',
+    'review_user_authorized_assignment_send_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED',
+    'review_user_authorized_assignment_send_uncertain=REVIEW_TRANSPORT_BLOCKED',
+    'review_user_authorized_assignment_send_monitor_before_fence=forbidden',
+    'review_user_authorized_assignment_send_scientific_iteration_cost=zero',
     'review_response_retry=once_same_conversation_after_terminal_attempt',
     'review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery',
     'review_response_retry_requires_server_visible_original_fence=true',
@@ -214,6 +235,15 @@ $assignmentReplay = (& $renderer `
     -Question $question) -replace "`r`n", "`n"
 if ($assignmentReplay -cne $assignment) {
     throw 'Unpersisted Assignment replay was not byte-exact renderer output'
+}
+
+$userAuthorizedAssignment = (& $renderer `
+    -Mode Assignment `
+    -Round $round `
+    -StageCommit $fullCommit `
+    -Question $question) -replace "`r`n", "`n"
+if ($userAuthorizedAssignment -cne $assignment) {
+    throw 'User-authorized Assignment send did not reuse byte-exact renderer output'
 }
 
 $responseRetry = (& $renderer `
