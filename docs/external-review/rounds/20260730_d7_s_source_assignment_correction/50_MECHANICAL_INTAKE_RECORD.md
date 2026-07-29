@@ -54,10 +54,45 @@ allow-listed from the start this time — the round-7 failure is not repeated.
 
 `Answer now` was visible and was **not** clicked.
 
+## Capture
+
+Generation completed after `Worked for 8m 27s`. The answer node was located
+through the conversation API first — walking the child chain from the fence to the
+longest assistant `text` node, `d196a64d-b0b4-43d3-9daa-3747bf121bdf`, 21990
+chars — which fixed *which* turn to capture before any click.
+
+The tab wedged a **fourth** time mid-capture (45 s timeout on `scroll`). The
+ruling was never at risk: it is server-side and its node id was already known.
+Bounded replacement applied; the new tab rendered at the bottom of the answer.
+
+The first `Copy response` click did not land — the sentinel survived:
+
+```text
+still_sentinel=True  clip_len=29
+```
+
+Retried after a body click to take focus:
+
+```text
+still_sentinel=False  clip_len=22936  has_title=True  has_final=True  has_b1=True
+```
+
+Archived via `UTF8Encoding($false)`: `written_len=22936`,
+`exact_roundtrip=True`, `bom_free=True`.
+
+**The sentinel earned its keep twice now.** In both rounds the first copy click
+silently failed, and in both the naive check would have passed on stale content —
+round 7 on the fence, this round on the sentinel itself had I only tested for
+non-emptiness.
+
 ## Status
 
-`AWAITING RESPONSE`. `21_PRO_OPEN_RAW.md` does not exist yet and no
-reconciliation may be written until it does.
+`CLOSED`. Ruling archived byte-exact; reconciliation written in
+`30_PM_SCIENTIFIC_RECONCILIATION.md`.
+
+Verdict: **FREEZE AFTER MODIFICATION**; repair scope **(b1) plus a universal
+final injectivity assertion, not (b2)**; the conformance suite must be frozen
+before the repair and demonstrate red-to-green.
 
 ## Note for later rounds
 

@@ -224,10 +224,18 @@ False    False              True         8
   every single time.
 - The 8 rows with `dup_in = False` are exactly the 8 onsets.
 
-**So duplication is not persistent state that nothing repairs. It is
-continuously re-created, once per simultaneous LEAVE+REJOIN step.** The LEAVE
-branch is correct as written; the whole defect is the REJOIN branch acting on a
-map the LEAVE phase has just made injective.
+**Both descriptions are true, at different boundaries, and each answers a
+different question** (wording corrected on Pro's ruling of 2026-07-30, after I
+wrote the second as if it replaced the first):
+
+- **At the externally visible step boundary it is PERSISTENT after onset.** This
+  is what bounds the damage — it says how many downstream checks and events were
+  contaminated.
+- **At the internal phase boundary it is repaired and immediately recreated.**
+  This is what locates the minimal repair.
+
+The LEAVE branch is correct as written; the whole defect is the REJOIN branch
+acting on a map the LEAVE phase has just made injective.
 
 This also explains the misleading `repaired_by_leave = 0` in the previous table:
 that counter compared the map before and after a whole `step_once`, so the LEAVE
