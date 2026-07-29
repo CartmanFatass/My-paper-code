@@ -1,0 +1,27 @@
+# G48 single-channel collapse shared source manifest
+
+```text
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+round=20260729_g48_duplicated_immediate_single_channel_collapse_design_assertion_audit
+source_lineage=G48 accepted common-anchor duplicated-immediate null
+source_commit=4bb9f71116a2ac2b58e077f63bbd2f74071380aa
+scientific_predecessor_commit=4abbee66d43ffd592d65624121121bc0109882ab
+compute_budget=zero
+conclusion_bearing_iteration_cost=zero
+design_scope=exact_single_channel_structural_collapse_only
+design_reopen=forbidden
+g48_reopen=forbidden
+uav_scope=forbidden
+formal_compute_authority=none
+```
+
+Allow-listed evidence paths, all required to be read from the stage commit:
+
+```text
+docs/research/cdc/EVIDENCE_NOTES/20260729_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_FORMAL_RESULT.md
+docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_CODE_SCIENCE_INDEX.md
+docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/21_PRO_OPEN_RAW.md
+docs/research/cdc/CONJECTURES.md
+docs/research/cdc/IDEA_PORTFOLIO.md
+```
