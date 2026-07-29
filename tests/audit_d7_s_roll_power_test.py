@@ -94,3 +94,37 @@ def test_accumulator_tolerates_a_missing_roll_power() -> None:
     audit._accumulate_episode_leave_stats(
         report, leave_diagnostics=[], rejected_counts={})
     assert report["roll_power"]["rejoin_events"] == 0
+
+
+def test_the_pooler_carries_roll_power_into_the_pooled_artifact() -> None:
+    """A counter that survives the workers and then dies in the pooler is no
+    counter at all.
+
+    The pooler flattens each shard's per-topology reports with `zip(*cols)` and
+    keeps the dicts whole, so `roll_power` rides through today. Nothing enforces
+    that. If a future change rebuilds those reports field by field, the pooled
+    artifact would go back to being unable to say whether the mechanism fired --
+    silently, and looking exactly like a run in which it did not.
+    """
+
+    import importlib.util
+    import pathlib
+
+    root = pathlib.Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location(
+        "_pooler", root / "scripts" / "pool_d7_s_event_aligned_shards.py")
+    pooler = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pooler)
+
+    source = (root / "scripts" / "pool_d7_s_event_aligned_shards.py").read_text(
+        encoding="utf-8")
+    assert "calibration_reports = [r[2] for r in rows]" in source, (
+        "the pooler no longer carries whole per-topology report dicts; check "
+        "that roll_power still reaches the pooled artifact"
+    )
+    assert "audit_reports = [r[3] for r in rows]" in source
+
+    # and the field the reader will look for must be the one the audit writes
+    report = audit._new_episode_block_report()
+    assert set(report["roll_power"]) == {
+        "rejoin_events", "leave_events", "injectivity_checks", "steps_rolled"}
