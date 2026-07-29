@@ -891,6 +891,20 @@ def constructive_mixed_update(*, duty_map: dict[int, int],
             new_map[d] = best
             pool.remove(best)
     elif event == "REJOIN" and event_uav is not None:
+        # Pro ruling 2026-07-30, repair scope (b1): a rejoining UAV that ALREADY
+        # holds a duty after the LEAVE phase receives no second one. Without
+        # this the branch assigned the nearest uncovered duty unconditionally,
+        # so one UAV could hold two -- measured at 33% of check boundaries on
+        # the development topology, in every episode. Nobody flew to the second
+        # duty (the inversion dropped it) while the map still reported it
+        # covered: a phantom duty.
+        #
+        # Skipping is the whole repair here. The LEAVE re-match is deliberately
+        # untouched -- Pro declined the full atomic rebatch (b2) on the strength
+        # of the between-phase measurement showing the LEAVE phase leaves the
+        # map injective every time and the REJOIN phase re-breaks it every time.
+        if event_uav in new_map.values():
+            return new_map
         uncovered = [d for d in duty_positions if d not in new_map]
         if uncovered:
             best_d = min(
@@ -2315,20 +2329,105 @@ def action_towards_target(position, target, *, max_speed: float,
                      dtype=np.float32)
 
 
-def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
-                             target_override: Optional[dict] = None) -> dict:
-    """One step of the real-env realization of `constructive_mixed`/`null`
-    (the two share this SAME per-UAV action rule -- they differ only in how
-    `duty_map` is updated across LEAVE/REJOIN, driven separately by
-    `update_duty_map_on_transitions`): every airborne UAV either (a)
-    continues charging in place if already docked and below
-    `REJOIN_BATTERY_RATIO`, (b) heads to its nearest charging station and
-    requests docking once the REGISTERED_CONSTANT dock-trigger rule fires,
-    or (c) otherwise flies to its assigned duty's live target.
-    `target_override` forces a specific UAV's target for this step
-    regardless of (a)/(b)/(c) -- the intervention machinery's SET arm."""
-    uav_to_duty = {u: d for d, u in duty_map.items()}
+# =============================================================================
+# Source-assignment invariants (Pro rulings 2026-07-29 / 2026-07-30)
+# =============================================================================
+#
+# `duty_map` is a PARTIAL INJECTION from executable duties to physical UAVs. A
+# UAV may hold at most one executable duty, because this controller emits
+# exactly one physical action per UAV and obtains it by INVERTING the map. A
+# non-injective map is therefore an internally inconsistent controller state,
+# not a legitimate multi-duty one, and it is refused rather than absorbed.
+#
+# The refusal is FAIL-CLOSED and CLASSIFIED. There is no synthetic zero and no
+# silent repair: dropping one of a duplicate's duties to make the map valid is
+# the specific prohibited repair, because it produces a plausible answer for a
+# state that never had one.
+
+SOURCE_TAG_DUTY = "DUTY"
+SOURCE_TAG_CHARGING = "CHARGING"
+SOURCE_TAG_STATION_RETURN = "STATION_RETURN"
+SOURCE_TAG_OVERRIDE = "OVERRIDE"
+SOURCE_TAG_IDLE_OR_OTHER = "IDLE_OR_OTHER"
+
+SOURCE_TAGS = (SOURCE_TAG_DUTY, SOURCE_TAG_CHARGING, SOURCE_TAG_STATION_RETURN,
+               SOURCE_TAG_OVERRIDE, SOURCE_TAG_IDLE_OR_OTHER)
+
+
+class SourceAssignmentInvariantError(AssertionError):
+    """An invalid source-control realization, refused with a registered reason.
+
+    `reason` is one of:
+
+        NONINJECTIVE_RAW_ASSIGNMENT   a caller handed a non-injective raw map
+                                      to a public action-synthesis entry point
+        DUPLICATE_HOLDER              a map under construction or validation
+                                      gives one UAV more than one duty
+    """
+
+    def __init__(self, message: str, *, reason: str):
+        super().__init__(message)
+        self.reason = reason
+
+
+def assert_partial_injection(duty_map: dict, *, reason: str = "DUPLICATE_HOLDER") -> dict:
+    """Refuse any duty map that is not a partial injection. Returns the map
+    unchanged when valid, so it can be used inline without hiding the check."""
+    holders = list(duty_map.values())
+    if len(holders) != len(set(holders)):
+        seen, doubled = set(), set()
+        for u in holders:
+            if u in seen:
+                doubled.add(u)
+            seen.add(u)
+        raise SourceAssignmentInvariantError(
+            f"duty map is not a partial injection: UAV(s) {sorted(doubled)} hold "
+            f"more than one duty in {dict(duty_map)}", reason=reason)
+    return duty_map
+
+
+def invert_duty_map(duty_map: dict) -> dict:
+    """The `uav -> duty` reverse lookup, as a NAMED function.
+
+    It is named rather than inlined so the ordering guarantee is testable: every
+    caller must run `assert_partial_injection` FIRST. This inversion assumes
+    injectivity and is lossy without it -- that loss is precisely how a second
+    duty used to vanish while the map still reported it covered, which is the
+    phantom duty this whole surface exists to make impossible."""
+    return {u: d for d, u in duty_map.items()}
+
+
+def executable_covered_duties(*, duty_map: dict, provenance: dict) -> set:
+    """The EXECUTABLY covered duty set `C = dom(m_exec)`.
+
+    A map key is an assignment CLAIM. Coverage requires an incumbent that is
+    actually flying to that duty's target this step, so a holder that is docked,
+    returning to a station, overridden, or idle contributes nothing -- its duty
+    is a phantom even though the map shape is perfectly injective."""
+    covered = set()
+    for uav, record in provenance.items():
+        tag, duty = record[0], record[1]
+        if tag == SOURCE_TAG_DUTY and duty is not None and duty_map.get(duty) == uav:
+            covered.add(duty)
+    return covered
+
+
+def scripted_source_actions_with_provenance(env, *, duty_map: dict, duty_positions: dict,
+                                             target_override: Optional[dict] = None):
+    """THE canonical per-UAV action generator, returning `(actions, provenance)`.
+
+    `scripted_source_actions` is a thin projection of this function, so the two
+    cannot drift: there is one action rule, not two that must be kept equal by
+    hand.
+
+    `provenance` maps each UAV index to `(tag, duty_id_or_None)` with exactly
+    one record per emitted action, `tag` drawn from the exhaustive and mutually
+    exclusive `SOURCE_TAGS`. It exists because "which duties are covered" is not
+    answerable from the map alone -- see `executable_covered_duties`."""
+    assert_partial_injection(duty_map, reason="NONINJECTIVE_RAW_ASSIGNMENT")
+    uav_to_duty = invert_duty_map(duty_map)
     actions: dict = {}
+    provenance: dict = {}
     dt = float(env.time_step)
     max_speed = float(env.max_speed)
     max_vert = float(getattr(env, "max_vertical_speed_mps", 5.0))
@@ -2342,18 +2441,22 @@ def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
             actions[agent_name(i)] = action_towards_target(
                 pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
                 dt=dt, dock_request=False)
+            provenance[i] = (SOURCE_TAG_OVERRIDE, None)
             continue
         if charging:
             if battery < REJOIN_BATTERY_RATIO:
                 actions[agent_name(i)] = action_towards_target(
                     pos, pos, max_speed=max_speed, max_vertical_speed_mps=max_vert,
                     dt=dt, dock_request=True)
+                provenance[i] = (SOURCE_TAG_CHARGING, None)
             else:
                 duty_id = uav_to_duty.get(i)
                 target = duty_positions[duty_id] if duty_id is not None else pos
                 actions[agent_name(i)] = action_towards_target(
                     pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
                     dt=dt, dock_request=False)
+                provenance[i] = ((SOURCE_TAG_DUTY, duty_id) if duty_id is not None
+                                  else (SOURCE_TAG_IDLE_OR_OTHER, None))
             continue
         station_idx, _, distance = env._nearest_charging_station(i)
         trigger = dock_trigger_ratio_for_env(env, i, distance) if station_idx >= 0 else -1.0
@@ -2362,12 +2465,40 @@ def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
             actions[agent_name(i)] = action_towards_target(
                 pos, station_pos, max_speed=max_speed, max_vertical_speed_mps=max_vert,
                 dt=dt, dock_request=True)
+            provenance[i] = (SOURCE_TAG_STATION_RETURN, None)
         else:
             duty_id = uav_to_duty.get(i)
             target = duty_positions[duty_id] if duty_id is not None else pos
             actions[agent_name(i)] = action_towards_target(
                 pos, target, max_speed=max_speed, max_vertical_speed_mps=max_vert,
                 dt=dt, dock_request=False)
+            provenance[i] = ((SOURCE_TAG_DUTY, duty_id) if duty_id is not None
+                              else (SOURCE_TAG_IDLE_OR_OTHER, None))
+    return actions, provenance
+
+
+def scripted_source_actions(env, *, duty_map: dict, duty_positions: dict,
+                             target_override: Optional[dict] = None) -> dict:
+    """One step of the real-env realization of `constructive_mixed`/`null`
+    (the two share this SAME per-UAV action rule -- they differ only in how
+    `duty_map` is updated across LEAVE/REJOIN, driven separately by
+    `update_duty_map_on_transitions`): every airborne UAV either (a)
+    continues charging in place if already docked and below
+    `REJOIN_BATTERY_RATIO`, (b) heads to its nearest charging station and
+    requests docking once the REGISTERED_CONSTANT dock-trigger rule fires,
+    or (c) otherwise flies to its assigned duty's live target.
+    `target_override` forces a specific UAV's target for this step
+    regardless of (a)/(b)/(c) -- the intervention machinery's SET arm.
+
+    The action rule itself now lives in
+    `scripted_source_actions_with_provenance`, of which this is the
+    actions-only projection. It is a projection rather than a copy on purpose:
+    two functions carrying the same branch logic drift, and the drift would be
+    invisible precisely where it matters -- in which duties the audit believes
+    are covered."""
+    actions, _provenance = scripted_source_actions_with_provenance(
+        env, duty_map=duty_map, duty_positions=duty_positions,
+        target_override=target_override)
     return actions
 
 
@@ -2415,6 +2546,7 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
                 duty_positions=duty_positions, airborne_positions=airborne_positions)
         else:
             new_map = dict(duty_map)      # between checks: carried forward, not reassigned
+        assert_partial_injection(new_map)
         return new_map, leave_uavs, rejoin_uavs
     new_map = dict(duty_map)
     for u in leave_uavs:
@@ -2427,6 +2559,11 @@ def update_duty_map_on_transitions(*, duty_map: dict, duty_positions: dict, env,
             duty_map=new_map, duty_positions=duty_positions,
             airborne_positions=airborne_positions, event="REJOIN",
             event_uav=u, locked_duties=locked_duties)
+    # The UNIVERSAL final assertion Pro required alongside (b1). It covers the
+    # complete transition batch rather than any single branch, so a future
+    # source of duplication -- REJOIN is not provably the only one -- is
+    # refused here even if nothing upstream anticipated it.
+    assert_partial_injection(new_map)
     return new_map, leave_uavs, rejoin_uavs
 
 
@@ -2491,8 +2628,15 @@ def step_once(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
     edge (item 2)."""
     duty_positions, service_centroids_next = compute_duty_positions(env, service_centroids)
     charging_before = np.asarray(env.uav_charging, dtype=bool).copy()
-    actions = scripted_source_actions(env, duty_map=duty_map, duty_positions=duty_positions,
-                                       target_override=target_override)
+    actions, action_provenance = scripted_source_actions_with_provenance(
+        env, duty_map=duty_map, duty_positions=duty_positions,
+        target_override=target_override)
+    # Executable coverage is computed from the provenance of the actions this
+    # step ACTUALLY emits, and carried forward on the result. Computing it and
+    # discarding it would leave the map's own claim as the only answer any
+    # consumer could reach, which is the state that produced the phantom.
+    covered_duties = executable_covered_duties(
+        duty_map=duty_map, provenance=action_provenance)
     action_record = {a: np.asarray(v).copy() for a, v in actions.items()}
     # `env.step` returns `(observations, rewards, terminations, truncations,
     # infos)` -- the real `UAVEnergyAwareRelayEnv` never caches this as a
@@ -2521,6 +2665,8 @@ def step_once(env, *, duty_map: dict, service_centroids: Optional[np.ndarray],
     }
     return {
         "actions": action_record,
+        "action_provenance": action_provenance,
+        "executable_covered_duties": covered_duties,
         "duty_positions": duty_positions,
         "service_centroids": service_centroids_next,
         "duty_map": new_map,

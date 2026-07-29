@@ -243,7 +243,21 @@ def run_episode(config, *, coords, coord_hash, idx, max_steps, mutation_hits,
                         if not v:
                             failures[k] += 1
                 for name, mut in MUTATIONS:
-                    out = mut(duty_map, m1, el, a0, a1)
+                    try:
+                        out = mut(duty_map, m1, el, a0, a1)
+                    except audit.SourceAssignmentInvariantError as exc:
+                        # The source-assignment repair made action synthesis
+                        # FAIL-CLOSED, so a mutation that produces a
+                        # non-injective map is now refused instead of returning
+                        # a lossy answer. That mutation could not be BUILT, so
+                        # it is neither caught nor missed -- the same scoring
+                        # rule that already covers the explicit UNCONSTRUCTIBLE
+                        # return, and the rule that surfaced the defect in the
+                        # first place. Scoring it as a hit would credit the
+                        # probe for a mutation it never made.
+                        mutation_hits[name + " :: UNCONSTRUCTIBLE"] += 1
+                        mutation_reasons[name].add(f"refused: {exc.reason}")
+                        continue
                     if out is None:
                         continue
                     mm, ma = out

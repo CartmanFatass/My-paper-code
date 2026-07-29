@@ -751,20 +751,21 @@ def test_constructive_mixed_rejoin_covers_an_uncovered_duty():
     assert updated.get(1) == 2
 
 
-@pytest.mark.xfail(strict=True, reason=(
-    "KNOWN DEFECT, scientific ruling pending. constructive_mixed_update's REJOIN "
-    "branch assigns the rejoining UAV the nearest uncovered duty without checking "
-    "whether it already holds one, so one UAV can end up holding two. Measured at "
-    "33% of check boundaries on the development topology. Evidence: "
-    "docs/research/cdc/EVIDENCE_NOTES/20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md. "
-    "The repair is a choice between distinct semantics and belongs to Pro, not "
-    "here -- so the property is asserted and marked, never quietly relaxed. "
-    "strict=True: this goes RED the moment the defect is fixed without updating "
-    "the mark, and it can never pass by accident."))
 def test_rejoin_never_gives_one_uav_a_second_duty():
-    """No UAV may hold two duties: it can only fly to one of them, and the audit's
-    own `uav_to_duty` inversion (scripts/audit_d7_s_event_aligned.py:2330) silently
-    drops the other, so the map reports coverage the flown actions never deliver."""
+    """No UAV may hold two duties: it can only fly to one of them, and the
+    audit's `uav_to_duty` inversion silently dropped the other, so the map
+    reported coverage the flown actions never delivered.
+
+    This was an UNCONDITIONAL `xfail(strict=True)` while the repair was a
+    scientific choice belonging to Pro rather than a defect to fix here. The
+    mark was written to go RED the moment the defect was fixed without updating
+    it -- and that is exactly what it does, which is why it is removed in the
+    SAME atomic change as the repair rather than afterwards. A strict xfail left
+    behind a landed fix reports `XPASS(strict)` and fails the suite, correctly.
+
+    It is now the ordinary positive guarding `constructive_mixed_update`'s (b1)
+    REJOIN skip. Evidence for the defect it recorded:
+    `docs/research/cdc/EVIDENCE_NOTES/20260729_D7_S_ONE_UAV_CAN_HOLD_TWO_DUTIES.md`."""
     duty_positions = {0: np.array([0.0, 0.0, 100.0]), 1: np.array([100.0, 0.0, 100.0])}
     duty_map = {0: 2}                     # UAV 2 ALREADY holds duty 0
     airborne_positions = {0: np.array([0.0, 0.0, 0.0]), 2: np.array([90.0, 0.0, 0.0])}
