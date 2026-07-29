@@ -242,6 +242,8 @@ OBLIGATION_C_CHECKS_PASS=False
 
 ## Evidence to read
 
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `scripts/audit_d7_s_event_aligned.py`
 - `scripts/d7_s_r5_obligation_a_proof.py`
 - `scripts/d7_s_r5_obligation_b_feasibility.py`
