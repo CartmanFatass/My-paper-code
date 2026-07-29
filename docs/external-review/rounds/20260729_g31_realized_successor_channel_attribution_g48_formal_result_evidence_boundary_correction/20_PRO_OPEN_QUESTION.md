@@ -31,6 +31,26 @@ This is not a new experiment and does not reopen design. Do not request or
 infer a rerun. Do not select G33. The evidence note contains copied values;
 evaluate their sufficiency inside the exact G48 formal boundary only.
 
+## Exact evidence allow-list
+
+- `docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/00_REVIEW_BRIEF.md`
+- `docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/01_SHARED_SOURCE_MANIFEST.md`
+- `docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_evidence_boundary_correction/20_PRO_OPEN_QUESTION.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260729_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_FORMAL_RESULT.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_review/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_realized_successor_channel_attribution_g48_formal_result_review/50_MECHANICAL_INTAKE_RECORD.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `.agents/roles/EXTERNAL_PRO.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_realized_successor_channel_attribution_g48.py`
+- `scripts/run_continuous_roster_native_six_g31_realized_successor_channel_attribution_g48.py`
+
 ## Required response format
 
 Return these sections exactly once and stop:
