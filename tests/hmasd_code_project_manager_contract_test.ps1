@@ -67,6 +67,10 @@ $codeRequired = @(
     'execution_readiness_owner=code_project_manager',
     'execution_readiness_executor=hmasd-verifier_when_triggered',
     'execution_readiness_receipt=required_when_triggered',
+    'execution_readiness_phase_executor=wrapper_run_only',
+    'execution_readiness_receipt_finalizer=wrapper_finalize_only',
+    'sum of the six phase timeouts plus 60 seconds',
+    'only zero-compute `finalize` receives narrow elevation',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
     'Focused tests alone are insufficient',
@@ -186,6 +190,10 @@ foreach ($required in @(
     'Calling a lower-level projection method directly is not a substitute',
     'executes argv arrays without a shell',
     'Git-private receipt',
+    'HMASD_EXECUTION_READINESS_PHASES_OK',
+    'finalize --spec',
+    'reruns no phase',
+    'ordinary candidate toolchain environment without elevation',
     'runs no validation command')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing execution-readiness rule: $required"
@@ -196,6 +204,11 @@ foreach ($required in @(
     'authority=one_exact_execution_readiness_assignment',
     'execution_readiness_executor=required_when_triggered_by_code_project_manager',
     'formal_compute_authority=none',
+    'readiness_phase_executor=wrapper_run_only',
+    'readiness_receipt_finalizer=wrapper_finalize_only',
+    'never pre-run, replay or manually invoke',
+    'Do not elevate `run`',
+    'sum of the six phase timeouts plus 60 seconds',
     'exact proof-sized exercise root',
     "readiness script's Git-private receipt",
     'Code Project Manager classifies the failure and alone accepts the code')) {
@@ -208,6 +221,10 @@ foreach ($required in @(
     'model_reasoning_effort = "high"',
     'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'hmasd_execution_readiness.py',
+    '`run --spec` exactly once',
+    '`finalize --spec` exactly once',
+    'Do not elevate this command',
+    'sum of the six phase timeouts plus 60 seconds',
     'formal=false with scientific_iteration_cost=zero',
     'exactly the six ordered readiness phases',
     'Do not stage, commit, checkout, reset or write Git-tracked state')) {
@@ -325,10 +342,25 @@ try {
     Push-Location $tempRoot
     try {
         $runOutput = & $registeredPython $readinessScriptPath run --spec $specPath
-        if ($LASTEXITCODE -ne 0 -or $runOutput -notcontains 'HMASD_EXECUTION_READINESS_OK') {
-            throw 'Execution-readiness script did not create a successful fixture receipt'
+        if ($LASTEXITCODE -ne 0 -or $runOutput -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
+            throw 'Execution-readiness run did not create a successful candidate receipt'
         }
-        $receiptRecord = $runOutput[-1] | ConvertFrom-Json
+        $candidateRecord = $runOutput[-1] | ConvertFrom-Json
+        if (-not (Test-Path -LiteralPath $candidateRecord.candidate_receipt -PathType Leaf)) {
+            throw 'Execution-readiness run did not persist its candidate receipt in the exercise root'
+        }
+        $savedPrematurePreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $prematureCheck = & $registeredPython $readinessScriptPath check --commit $fixtureCommit 2>&1
+        $ErrorActionPreference = $savedPrematurePreference
+        if ($LASTEXITCODE -eq 0 -or ($prematureCheck -join ' ') -notmatch 'receipt') {
+            throw 'Execution-readiness run exposed a final receipt before finalization'
+        }
+        $finalizeOutput = & $registeredPython $readinessScriptPath finalize --spec $specPath
+        if ($LASTEXITCODE -ne 0 -or $finalizeOutput -notcontains 'HMASD_EXECUTION_READINESS_OK') {
+            throw 'Execution-readiness finalizer did not create a successful fixture receipt'
+        }
+        $receiptRecord = $finalizeOutput[-1] | ConvertFrom-Json
         $fixtureReceipt = $receiptRecord.receipt
         $checkOutput = & $registeredPython $readinessScriptPath check --commit $fixtureCommit
         if ($LASTEXITCODE -ne 0 -or $checkOutput -notcontains 'HMASD_EXECUTION_READINESS_RECEIPT_OK') {
@@ -380,6 +412,29 @@ blockers=none
         $savedErrorActionPreference = $ErrorActionPreference
         $ErrorActionPreference = 'Continue'
         try {
+            $tamperedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+            $tamperedSpec.exercise_root = Join-Path $tempRoot 'tampered-finalize-exercise'
+            $tamperedArtifact = Join-Path $tamperedSpec.exercise_root 'artifact.json'
+            $tamperedSpec.expected_artifacts = @($tamperedArtifact)
+            $tamperedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$tamperedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
+            foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
+                $tamperedSpec.phases.$phase.argv = $tamperedArgv
+            }
+            $tamperedSpecPath = Join-Path $tempRoot 'tampered-finalize.json'
+            [IO.File]::WriteAllText($tamperedSpecPath, ($tamperedSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+            $tamperedRun = & $registeredPython $readinessScriptPath run --spec $tamperedSpecPath
+            if ($LASTEXITCODE -ne 0 -or $tamperedRun -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
+                throw 'Tampered-finalize fixture did not complete its six phases'
+            }
+            $tamperedCandidatePath = ($tamperedRun[-1] | ConvertFrom-Json).candidate_receipt
+            $tamperedCandidateText = Get-Content -Raw -Encoding UTF8 -LiteralPath $tamperedCandidatePath
+            $tamperedCandidateText = $tamperedCandidateText.Replace($registeredPython, 'forged-python')
+            [IO.File]::WriteAllText($tamperedCandidatePath, $tamperedCandidateText, [Text.UTF8Encoding]::new($false))
+            $tamperedFinalize = & $registeredPython $readinessScriptPath finalize --spec $tamperedSpecPath 2>&1
+            if ($LASTEXITCODE -eq 0 -or ($tamperedFinalize -join ' ') -notmatch 'argv mismatch') {
+                throw "Execution-readiness finalizer accepts a tampered candidate receipt: $($tamperedFinalize -join ' ')"
+            }
+
             $badSource = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
             $badSource.source_commit = '0' * 40
             $badSource.exercise_root = Join-Path $tempRoot 'bad-source-exercise'

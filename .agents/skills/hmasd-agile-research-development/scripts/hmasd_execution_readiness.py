@@ -93,7 +93,9 @@ def _code_pm_session(repo: Path) -> str:
     return matches[0]
 
 
-def _load_spec(path: Path, repo: Path) -> dict[str, Any]:
+def _load_spec(
+    path: Path, repo: Path, *, require_fresh_exercise_root: bool
+) -> dict[str, Any]:
     try:
         spec = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -124,8 +126,12 @@ def _load_spec(path: Path, repo: Path) -> dict[str, Any]:
     if not isinstance(exercise_root, str) or not exercise_root.strip():
         raise ReadinessError("exercise_root must be a non-empty path")
     exercise_path = _resolve_artifact(repo, exercise_root)
-    if exercise_path.exists() and (not exercise_path.is_dir() or any(exercise_path.iterdir())):
+    if require_fresh_exercise_root and exercise_path.exists() and (
+        not exercise_path.is_dir() or any(exercise_path.iterdir())
+    ):
         raise ReadinessError("exercise_root must be absent or empty before readiness starts")
+    if not require_fresh_exercise_root and not exercise_path.is_dir():
+        raise ReadinessError("exercise_root must exist before receipt finalization")
 
     artifacts = spec.get("expected_artifacts")
     if not isinstance(artifacts, list) or not artifacts:
@@ -205,9 +211,59 @@ def _resolve_artifact(repo: Path, value: str) -> Path:
     return path.resolve() if path.is_absolute() else (repo / path).resolve()
 
 
+def _candidate_receipt_path(repo: Path, spec: dict[str, Any]) -> Path:
+    return _resolve_artifact(repo, spec["exercise_root"]) / ".hmasd-readiness-candidate.json"
+
+
+def _artifact_states(repo: Path, spec: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        {"path": item, "present": _resolve_artifact(repo, item).is_file()}
+        for item in spec["expected_artifacts"]
+    ]
+
+
+def _validate_candidate_receipt(
+    repo: Path, spec: dict[str, Any], receipt: dict[str, Any]
+) -> None:
+    expected_header = {
+        "schema_version": SCHEMA_VERSION,
+        "status": "PASSED",
+        "source_commit": spec["source_commit"],
+        "trigger": spec["trigger"],
+        "exact_paths": spec["exact_paths"],
+        "formal": False,
+        "scientific_iteration_cost": 0,
+        "exercise_root": spec["exercise_root"],
+    }
+    for key, value in expected_header.items():
+        if receipt.get(key) != value:
+            raise ReadinessError(
+                f"candidate receipt {key} mismatch: "
+                f"expected={value!r} observed={receipt.get(key)!r}"
+            )
+
+    results = receipt.get("phases")
+    if not isinstance(results, list) or [item.get("name") for item in results] != list(PHASES):
+        raise ReadinessError("candidate receipt phase set mismatch")
+    for result, phase in zip(results, PHASES, strict=True):
+        phase_spec = spec["phases"][phase]
+        if result.get("status") != "PASSED" or result.get("exit_code") != 0:
+            raise ReadinessError(f"candidate receipt {phase} is not successful")
+        if result.get("argv") != phase_spec["argv"]:
+            raise ReadinessError(f"candidate receipt {phase} argv mismatch")
+        if result.get("timeout_seconds") != phase_spec["timeout_seconds"]:
+            raise ReadinessError(f"candidate receipt {phase} timeout mismatch")
+
+    current_artifacts = _artifact_states(repo, spec)
+    if receipt.get("artifacts") != current_artifacts or not all(
+        item["present"] for item in current_artifacts
+    ):
+        raise ReadinessError("candidate receipt artifact set mismatch")
+
+
 def run_spec(spec_path: Path) -> int:
     repo = _repo_root()
-    spec = _load_spec(spec_path.resolve(), repo)
+    spec = _load_spec(spec_path.resolve(), repo, require_fresh_exercise_root=True)
     results: list[dict[str, Any]] = []
     for phase in PHASES:
         result = _run_phase(repo, phase, spec["phases"][phase])
@@ -216,10 +272,7 @@ def run_spec(spec_path: Path) -> int:
             print(json.dumps({"status": "FAILED", "phase": phase, "result": result}, ensure_ascii=False))
             return 1
 
-    artifact_states = [
-        {"path": item, "present": _resolve_artifact(repo, item).is_file()}
-        for item in spec["expected_artifacts"]
-    ]
+    artifact_states = _artifact_states(repo, spec)
     if not all(item["present"] for item in artifact_states):
         print(json.dumps({"status": "FAILED", "phase": "expected_artifacts", "artifacts": artifact_states}))
         return 1
@@ -236,6 +289,30 @@ def run_spec(spec_path: Path) -> int:
         "phases": results,
         "artifacts": artifact_states,
     }
+    path = _candidate_receipt_path(repo, spec)
+    path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print("HMASD_EXECUTION_READINESS_PHASES_OK")
+    print(
+        json.dumps(
+            {"candidate_receipt": str(path), "source_commit": spec["source_commit"]},
+            ensure_ascii=True,
+        )
+    )
+    return 0
+
+
+def finalize_spec(spec_path: Path) -> int:
+    repo = _repo_root()
+    spec = _load_spec(spec_path.resolve(), repo, require_fresh_exercise_root=False)
+    candidate_path = _candidate_receipt_path(repo, spec)
+    try:
+        receipt = json.loads(candidate_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ReadinessError(f"missing or invalid candidate receipt: {exc}") from exc
+    if not isinstance(receipt, dict):
+        raise ReadinessError("candidate receipt must be an object")
+    _validate_candidate_receipt(repo, spec, receipt)
+
     path = _receipt_path(repo, spec["source_commit"])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -347,6 +424,8 @@ def main() -> int:
     subparsers = parser.add_subparsers(dest="command", required=True)
     run_parser = subparsers.add_parser("run")
     run_parser.add_argument("--spec", type=Path, required=True)
+    finalize_parser = subparsers.add_parser("finalize")
+    finalize_parser.add_argument("--spec", type=Path, required=True)
     check_parser = subparsers.add_parser("check")
     check_parser.add_argument("--commit", required=True)
     subparsers.add_parser("hook-stop")
@@ -354,6 +433,8 @@ def main() -> int:
     try:
         if args.command == "run":
             return run_spec(args.spec)
+        if args.command == "finalize":
+            return finalize_spec(args.spec)
         if args.command == "check":
             return check_receipt(args.commit)
         return hook_stop()

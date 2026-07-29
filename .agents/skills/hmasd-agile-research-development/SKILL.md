@@ -116,14 +116,36 @@ history. Run a broad suite only for an actually changed shared surface.
 ## Mechanical execution readiness
 
 Code Project Manager prepares the exact candidate-bound spec and assigns the
-registered `hmasd-verifier`. The verifier uses the registered interpreter and
-the Skill-owned script:
+registered `hmasd-verifier`. Candidate-focused checks never duplicate a phase
+argv or write the exercise root. The verifier uses the registered interpreter
+and the Skill-owned script in two mechanical steps:
 
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
   .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py `
   run --spec <temporary-json-spec>
 ```
+
+Invoke `run` once in the ordinary candidate toolchain environment without
+elevation. The outer tool timeout is explicit and equals the sum of the six
+`timeout_seconds` values plus 60 seconds. The script is the only executor of the
+phase argv arrays; neither Code Project Manager nor verifier pre-runs, replays or
+manually invokes them. Successful `run` writes a candidate receipt inside the
+exercise root and returns `HMASD_EXECUTION_READINESS_PHASES_OK`.
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
+  .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py `
+  finalize --spec <temporary-json-spec>
+```
+
+Invoke `finalize` once only after the phase-success token. Give this
+zero-compute command a short explicit timeout and narrow exact-command
+elevation. It reruns no phase, validates the candidate receipt against the
+current clean commit, exact spec, phase argv/status and expected artifacts, and
+writes only the Git-private receipt. The result-bearing `run` is never elevated,
+so its compiler, native-extension cache and candidate environment do not change
+between focused evidence and readiness execution.
 
 The temporary JSON spec binds one candidate commit, exact accepted paths,
 `formal=false`, `scientific_iteration_cost=zero`, one independent proof-sized
@@ -142,10 +164,12 @@ never use a formal authorization token, formal budget or scientific threshold
 disposition.
 
 The script executes argv arrays without a shell, fails at the first unsuccessful
-phase, checks the expected artifacts and writes a successful Git-private receipt
-only when all six phases pass on the exact clean candidate commit. The receipt
-is mechanical evidence, is not Git-tracked and is not another acceptance owner.
-The verifier returns the receipt or the first causal failure without repair.
+phase and checks the expected artifacts. It exposes the successful Git-private
+receipt only after `finalize` revalidates all six phases on the exact clean
+candidate commit. The receipt is mechanical evidence, is not Git-tracked and is
+not another acceptance owner. The verifier returns the receipt or distinguishes
+a pre-phase invocation failure, the first causal phase failure, and a
+zero-compute finalization failure without repair.
 Code Project Manager classifies that evidence, owns any reassignment or repair,
 and alone accepts the candidate.
 For a deterministic post-acceptance defect with plausible recurrence, add one
