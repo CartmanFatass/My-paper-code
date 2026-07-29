@@ -94,6 +94,21 @@ The older **unconditional** strict xfail
 `audit_d7_s_event_aligned_test.py` must be removed or converted in the same
 atomic repair, or the full suite will correctly fail on `XPASS(strict)`.
 
+## Combined repository state
+
+Both suites together:
+
+```text
+tests/audit_d7_s_event_aligned_test.py
+tests/d7_s_source_assignment_conformance_test.py
+
+4 failed, 268 passed, 15 xfailed        (~8m02s)
+```
+
+Reconciles exactly against the v1 run (`6 failed, 269 passed, 5 xfailed`, 280
+cases): the conformance file grew from 14 cases to 21, and 280 + 7 = 287 =
+4 + 268 + 15. The audit suite contributes 265 passed + 1 xfailed and is unchanged.
+
 ## Regression boundary
 
 Four failures, all named above. A fifth failure, or any failure outside this
