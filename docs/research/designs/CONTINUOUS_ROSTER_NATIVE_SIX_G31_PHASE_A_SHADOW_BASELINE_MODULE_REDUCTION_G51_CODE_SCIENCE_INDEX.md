@@ -22,8 +22,12 @@ alignment_correction_recheck_round=20260729_g31_phase_a_shadow_baseline_module_r
 alignment_disposition=ALIGNED
 aligned_implementation_commit=188b210975a0f243ae34318d658fbf943d1d63ab
 alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
-formal_authorization_token=none
-formal_admission=FAIL_CLOSED_UNTIL_SEPARATE_AUTHORIZATION_TOKEN_AND_EXECUTION_INTERFACE
+formal_execution_source_commit=ce6ed8659c480ca2779155b2871dc82b89fa0e95
+formal_authorization_token=CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_FORMAL_AUTHORIZATION_V1
+formal_admission_clarification_round=20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification
+formal_artifact_contract_clarification_round=20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_artifact_contract_clarification
+formal_artifact_contract=OUTCOME_CONDITIONAL
+formal_admission=FAIL_CLOSED_EXACT_AUTHORITY_SAME_SOURCE_PREFLIGHT_AND_FRESH_ROOT
 formal_compute_started=false
 nonformal_compute_started=false
 scientific_iteration_cost=zero
@@ -111,6 +115,26 @@ use `phase_A_gradient_probe`, while the stored witness collection uses exactly
 action noise. The manifest serializes the complete replicate-zero nonformal
 seed block and the validator reconstructs it from `source.seed_block`.
 
+The formal interface is bound to source commit `ce6ed865...`, independently of
+the later execution-code commit. Before formal root creation or any model,
+trajectory or optimizer construction, admission validates the exact capability
+token, ALIGNED implementation/stage/disposition, the complete same-source
+nonformal preflight lifecycle, its backend/seed/thread/work accounting and
+digest chains, and the freshness and canonical identity of the formal root.
+The preflight branch is recomputed from its assessment and optimizer ledger;
+all four registered branches are admissible and no favorable gate is applied.
+
+Every terminal branch owns the five common artifacts: train, evaluation and
+analysis manifests, the shared trajectory, and the result assessment. Exact
+removability alone additionally owns both final checkpoints and the validated
+two-process reload report; the three adverse branches require an empty
+checkpoint inventory and forbid the report. Production nonformal and formal
+exact training complete that reload attestation as part of train, while
+readiness remains nonformal proof-only and does not duplicate the scientific
+witness. Evaluation and analysis infer formal scope from upstream manifests,
+perform zero transitions and optimizer steps, and bind/reconstruct upstream
+digests and the stored branch.
+
 The serialized configuration and source controls bind the inherited runtime
 contract as `ContinuousRosterToyBatch_CPU_CPP_required` with
 `environment_python_fallback=false`; the proof runner cannot relabel a Python
@@ -161,8 +185,8 @@ technical failure or a positive claim.
 | G51-ARTIFACT-08 | Design raw `COUNTEREXAMPLES_AND_CLAIM_CEILING / Checkpoint-schema counterexample` | source `::build_final_checkpoints`; `::validate_checkpoint_pair`; `::canonical_actor_projection`; runner `::validate_training_artifacts`; `::validate_evaluation_artifacts`; `::validate_analysis_artifacts` | Reference and reduced full schemas intentionally differ, while canonical actor/`log_std`/Adam/update/provenance/final-only projections are exact. Every assessment, runner envelope, nested source certificate, trajectory row, checkpoint inventory row, process report, evaluation and analysis schema is exact and rejects recursive extras; checkpoint source provenance and phase-boundary records have exact nested schemas and reject innocuous extra keys. The reduced checkpoint omits baseline-bearing comparison labels and rejects every baseline identity recursively in keys and free-form string values. | source checkpoint round-trip/tamper proof; runner `::test_recursive_artifact_and_checkpoint_tamper_guards_fail_closed` | Full-file equality, synthesized reduced defaults, extra legacy keys, forbidden string values, digest-only trust or incomplete canonical projection cannot pass. |
 | G51-WITNESS-09 | Design raw `EVIDENCE_AND_COMPLEXITY_DISPOSITION / Optional proof-sized numerical witness` | runner `::_configuration`; `::_materialize_source_bundle`; `::train` | One initialization, one shared 8×48 batch and exactly two passes per arm invoke the actual source kernel within four actor steps, zero bootstrap and the hard complexity ceiling. Collection binds ledger=`phase_A_ledger` and action=`phase_A_action`, while the gradient-probe seed is runtime-only. Fresh-root admission occurs before materialization. | runner configuration, stale-root, seed and lifecycle tests | Duplicate collection, seed-role collapse, compute before root admission, statistical inference, a replacement optimizer, hidden evaluation steps or expanded search cannot enter. |
 | G51-OUTCOME-10 | Design raw `EVIDENCE_AND_COMPLEXITY_DISPOSITION / Ordered result classes` | source `::optimize_phase_A_update`; `::_pre_step_semantic_coupling_detected`; `::_pre_step_numeric_difference_detected`; `::assess_structural_witness`; `::validate_structural_assessment`; runner `::record_terminal_assessment`; `::select_g51_result_branch`; `::analyze` | First match is exactly invalid, reconstructed semantic coupling, exact removability, then numerical unresolved. Pre-step coupling and numeric reasons are disjoint: zero coupling predicates plus a failed registered equality selects unresolved with zero actor steps. Source and runner independently reconstruct the branch from diagnostics and optimizer ledger. | source assessment/branch proof; runner `::test_frozen_first_match_order_and_tokens_are_exact`; `::test_source_assessed_adverse_lifecycles_are_terminal_and_zero_extra_work`; `::test_zero_coupling_pre_step_numeric_difference_is_unresolved_with_zero_steps`; partial/unknown failure rejection | Failure-reason text, a favorable stored branch or `D_G51` cannot manufacture coupling or exactness; partial updates, unknown errors and malformed evidence cannot be relabeled as scientific outcomes. |
-| G51-READINESS-11 | Code-PM execution-readiness contract | runner `::readiness_interface_smoke`; `::readiness_train`; `::readiness_validate`; `::readiness_reload`; `::readiness_evaluate`; `::readiness_analyze`; `::_run_distinct_proof_workers` | Smoke constructs the real pre-trajectory boundary with zero transitions/steps. Bounded exercise alone runs the authorized witness. Later phases add no optimizer steps or transitions. Two dedicated concurrently live spawn processes independently reload and validate the same artifacts; they do not rerun collection or optimization. | runner lifecycle, smoke and `::test_two_process_attestation_is_dedicated_spawn_and_not_a_second_witness` | A reused pool PID, a second scientific witness, phase replay, manual artifact trust or lower-level projection-only smoke cannot satisfy readiness. |
-| G51-AUTHORITY-12 | Formal-interface alignment-binding assignment; router formal authority | runner `::AUTHORIZATION_TOKEN`; `::ALIGNED_IMPLEMENTATION_COMMIT`; `::ALIGNMENT_STAGE_COMMIT`; `::source_controls`; `::_formal_admission_errors`; `::train` | The runner binds exactly the independently ALIGNED correction target `188b2109...` and correction-recheck stage `aa756dcd...`. The scientific contract supplies no formal authorization token, so every formal request still fails before run-root creation, model construction, trajectory collection or optimizer work; nonformal/proof-only CLI rejects every formal field. | runner `::test_configuration_provenance_and_formal_admission_are_fail_closed`; CLI formal-field guard | A caller-selected target/stage, package/archive commit, invented token, preflight path or this index cannot self-authorize formal execution. |
+| G51-READINESS-11 | Code-PM execution-readiness and production attestation contract | runner `::train`; `::readiness_interface_smoke`; `::readiness_train`; `::readiness_validate`; `::_run_distinct_proof_workers` | Exact production train completes two concurrently live spawn reloads and binds the validated report; adverse train omits it. Readiness invokes the same nonformal production lifecycle once and adds no witness, transitions or optimizer steps. | runner lifecycle; `::test_readiness_lifecycle_is_exact_reloadable_and_zero_additional_science`; `::test_two_process_attestation_is_dedicated_spawn_and_not_a_second_witness` | A reused pool PID, second scientific witness, phase replay, adverse compatibility report or readiness-only production shortcut cannot satisfy the contract. |
+| G51-AUTHORITY-12 | Formal-admission and outcome-conditional artifact clarifications | runner `::FORMAL_SOURCE_COMMIT`; `::AUTHORIZATION_TOKEN`; `::_formal_admission_errors`; `::_validate_preflight`; `::_validate_branch_inventory`; `::train`; `::validate_training_artifacts` | Formal train requires the exact token, `ce6ed865...` source, `188b2109...` aligned implementation, `aa756dcd...` stage and ALIGNED disposition. It validates a full same-source nonformal preflight of any registered branch and a fresh canonical formal root before mutation/materialization, then binds preflight and local payload digests. Nonformal manifests forbid authority keys; CLI permits them only for train. | runner `::test_configuration_provenance_and_formal_admission_are_fail_closed`; `::test_formal_gate_binds_preflight_before_root_and_model_materialization`; `::test_preflight_admission_accepts_every_registered_branch_without_a_favorable_gate`; CLI separation test | A caller-selected branch, forged stored success, stale/partial preflight, mismatched source/stage/token, forbidden branch artifact or formal evaluate/analyze bypass cannot enter. |
 | G51-ISOLATION-13 | Assignment protected predecessor semantics | source/runner read-only `g50` dependency | G51 adds new paths and does not mutate G47, G49 or G50 arm names, source identities, optimizers, RNG, artifacts, formal gates or accepted results. | runner `::test_g51_import_leaves_g50_identity_unchanged`; protected predecessor checks | Global monkey-patching or cross-direction identity leakage cannot alter the supported G50 line. |
 
 Because the accepted PyTorch backward/Adam kernel is exercised by this
@@ -196,11 +220,11 @@ the accepted G50 formal result.
 ## Next boundary
 
 ```text
-CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_FORMAL_EXECUTION_INTERFACE
+CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_FORMAL_EXECUTION
 ```
 
-The independently ALIGNED implementation and stage are now bound. Formal
-admission remains closed because neither the frozen G51 contract nor this
-binding assignment supplies an authorization token or a conclusion-bearing
-same-source preflight interface. This implementation, its tests, its mandatory
-proof-sized actual-kernel witness and this index cannot supply that authority.
+The formal execution interface is implemented and fail-closed under the exact
+authorization, same-source preflight and outcome-conditional artifact
+contracts above. This package authorizes no dispatch and records no formal or
+nonformal compute; execution remains owned by the user and Research Operations
+Manager boundary.

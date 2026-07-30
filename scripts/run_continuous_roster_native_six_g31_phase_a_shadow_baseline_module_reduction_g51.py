@@ -47,12 +47,14 @@ ACCEPTED_PREDECESSOR_SOURCE_COMMIT = (
     "044d9690fa19aa07b8e68bf5cbb2a159c19be8c1"
 )
 
-# The independently reviewed G51 implementation and correction-recheck stage
-# are bound here.  The scientific contract still supplies no formal
-# authorization token, so this identity binding cannot admit formal execution.
-AUTHORIZATION_TOKEN: None = None
+FORMAL_SOURCE_COMMIT = "ce6ed8659c480ca2779155b2871dc82b89fa0e95"
+AUTHORIZATION_TOKEN = (
+    "CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_"
+    "REDUCTION_G51_FORMAL_AUTHORIZATION_V1"
+)
 ALIGNED_IMPLEMENTATION_COMMIT = "188b210975a0f243ae34318d658fbf943d1d63ab"
 ALIGNMENT_STAGE_COMMIT = "aa756dcd06a2ea622c155f2983a89bb5d76e9d80"
+ALIGNMENT_DISPOSITION = "ALIGNED"
 ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_"
     "REDUCTION_G51_CODE_SCIENCE_ALIGNMENT_AUDIT"
@@ -82,6 +84,14 @@ CHECKPOINT_FILES = {
 TWO_PROCESS_REPORT_REFERENCE = "parallel_proof/two_process_equivalence.json"
 SHARED_TRAJECTORY_REFERENCE = "proof_inputs/shared_phase_A_trajectory.pt"
 ASSESSMENT_REFERENCE = "proof/result_assessment.pt"
+PREFLIGHT_ROOT = PROJECT_ROOT / (
+    "logs/nonformal_continuous_roster_native_six_g31_phase_a_shadow_baseline_"
+    "module_reduction_g51_cpu_20260729_ce6ed86_r1"
+)
+FORMAL_RUN_ROOT = PROJECT_ROOT / (
+    "logs/formal_continuous_roster_native_six_g31_phase_a_shadow_baseline_"
+    "module_reduction_g51_cpu_20260729_ce6ed86_r1"
+)
 
 DEFAULT_CPU_BUDGET = 2
 DEFAULT_PROCESS_WORKERS = 1
@@ -116,7 +126,20 @@ _TRAIN_KEYS = frozenset(
         "execution_readiness_proof_only",
         "two_process_proof",
         "two_process_proof_artifact",
+        "two_process_proof_sha256",
         "passed",
+    }
+)
+_FORMAL_AUTHORITY_KEYS = frozenset(
+    {
+        "authorization_token_id",
+        "aligned_implementation_commit",
+        "alignment_stage_commit",
+        "alignment_disposition",
+        "preflight_source_commit",
+        "preflight_train_manifest_sha256",
+        "preflight_evaluation_manifest_sha256",
+        "preflight_analysis_result_sha256",
     }
 )
 _CHECKPOINT_ROW_KEYS = frozenset({"path", "sha256", "kind"})
@@ -148,6 +171,7 @@ _EVALUATION_KEYS = frozenset(
         "evaluation_optimizer_steps",
         "environment_transitions",
         "result_assessment_sha256",
+        "checkpoint_sha256",
         "result_branch",
         "operational_valid",
         "passed",
@@ -1222,6 +1246,46 @@ def _artifact_digest(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _relative_file_inventory(root: Path) -> set[str]:
+    return {
+        str(path.relative_to(root)).replace("\\", "/")
+        for path in root.rglob("*")
+        if path.is_file()
+    }
+
+
+def _validate_branch_inventory(
+    root: Path, *, result_branch: str, terminal: bool
+) -> None:
+    exact = result_branch == REMOVABLE_BRANCH
+    required = {
+        TRAIN_MANIFEST,
+        SHARED_TRAJECTORY_REFERENCE,
+        ASSESSMENT_REFERENCE,
+    }
+    if terminal:
+        required.update({EVALUATION_MANIFEST, ANALYSIS_RESULT})
+    exact_only = {
+        f"{CHECKPOINT_DIRECTORY}/{CHECKPOINT_FILES[arm]}"
+        for arm in source.ARMS
+    } | {TWO_PROCESS_REPORT_REFERENCE}
+    if exact:
+        required.update(exact_only)
+    allowed = set(required)
+    if not terminal:
+        allowed.update({EVALUATION_MANIFEST, ANALYSIS_RESULT})
+    actual = _relative_file_inventory(root)
+    missing = required - actual
+    forbidden = (exact_only & actual) if not exact else set()
+    extra = actual - allowed
+    if missing or forbidden or extra:
+        raise ValueError(
+            "G51 branch-conditioned artifact inventory mismatch: "
+            f"missing={sorted(missing)}, forbidden={sorted(forbidden)}, "
+            f"extra={sorted(extra)}"
+        )
+
+
 def _semantic_digest(value: object) -> str:
     digest = hashlib.sha256()
 
@@ -1391,10 +1455,6 @@ def source_controls() -> dict[str, object]:
         "reference_arm": source.REFERENCE_ARM,
         "reduced_arm": source.REDUCED_ARM,
         "first_match_order": list(FIRST_MATCH_ORDER),
-        "formal_alignment_status": "ALIGNED_IDENTITY_BOUND_AUTHORIZATION_CLOSED",
-        "formal_authorization_token": None,
-        "aligned_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
-        "alignment_stage_commit": ALIGNMENT_STAGE_COMMIT,
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_python_fallback": False,
         "K_search": 0,
@@ -1747,35 +1807,86 @@ def _formal_admission_errors(
     authorization_token: str | None,
     preflight_root: Path | None,
     alignment_disposition: str | None,
-    aligned_source_commit: str | None,
+    aligned_implementation_commit: str | None,
     alignment_stage_commit: str | None,
+    run_root: Path | None = None,
 ) -> list[str]:
-    del source_commit, authorization_token, preflight_root
     errors: list[str] = []
-    if ALIGNED_IMPLEMENTATION_COMMIT is None or ALIGNMENT_STAGE_COMMIT is None:
-        return ["G51 formal execution requires an independently ALIGNED source"]
-    if alignment_disposition != "ALIGNED":
+    if authorization_token != AUTHORIZATION_TOKEN:
+        errors.append("G51 formal authorization token mismatch")
+    if source_commit != FORMAL_SOURCE_COMMIT:
+        errors.append("G51 formal execution source identity mismatch")
+    if alignment_disposition != ALIGNMENT_DISPOSITION:
         errors.append("G51 formal alignment disposition is not ALIGNED")
-    if aligned_source_commit != ALIGNED_IMPLEMENTATION_COMMIT:
-        errors.append("G51 formal aligned source identity mismatch")
+    if aligned_implementation_commit != ALIGNED_IMPLEMENTATION_COMMIT:
+        errors.append("G51 formal aligned implementation identity mismatch")
     if alignment_stage_commit != ALIGNMENT_STAGE_COMMIT:
         errors.append("G51 formal alignment stage identity mismatch")
-    if AUTHORIZATION_TOKEN is None:
-        errors.append("G51 formal authorization token is not bound")
+    if preflight_root is None or Path(preflight_root).resolve() != PREFLIGHT_ROOT.resolve():
+        errors.append("G51 formal preflight root identity mismatch")
+    if run_root is not None and Path(run_root).resolve() != FORMAL_RUN_ROOT.resolve():
+        errors.append("G51 formal run root identity mismatch")
     return errors
+
+
+def _root_is_fresh(root: Path) -> bool:
+    resolved = Path(root).resolve()
+    return not resolved.exists() or (resolved.is_dir() and not any(resolved.iterdir()))
+
+
+def _validate_preflight(preflight_root: Path) -> dict[str, str]:
+    root = Path(preflight_root).resolve()
+    if _read_json(root / TRAIN_MANIFEST).get("formal") is not False:
+        raise ValueError("G51 preflight must be nonformal")
+    training = validate_training_artifacts(
+        root, expected_source_commit=FORMAL_SOURCE_COMMIT
+    )
+    evaluation = validate_evaluation_artifacts(root)
+    analysis = validate_analysis_artifacts(root)
+    if (
+        training.get("formal") is not False
+        or evaluation.get("formal") is not False
+        or analysis.get("formal") is not False
+        or training.get("source_commit") != FORMAL_SOURCE_COMMIT
+        or evaluation.get("source_commit") != FORMAL_SOURCE_COMMIT
+        or analysis.get("source_commit") != FORMAL_SOURCE_COMMIT
+    ):
+        raise ValueError("G51 preflight formal/source identity mismatch")
+    branch = training.get("result_branch")
+    if branch not in FIRST_MATCH_ORDER:
+        raise ValueError("G51 preflight result branch is not registered")
+    _validate_branch_inventory(root, result_branch=str(branch), terminal=True)
+    return {
+        "preflight_source_commit": FORMAL_SOURCE_COMMIT,
+        "preflight_train_manifest_sha256": _artifact_digest(root / TRAIN_MANIFEST),
+        "preflight_evaluation_manifest_sha256": _artifact_digest(
+            root / EVALUATION_MANIFEST
+        ),
+        "preflight_analysis_result_sha256": _artifact_digest(root / ANALYSIS_RESULT),
+    }
+
+
+def _formal_authority_binding(preflight_digests: Mapping[str, str]) -> dict[str, str]:
+    return {
+        "authorization_token_id": AUTHORIZATION_TOKEN,
+        "aligned_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
+        "alignment_stage_commit": ALIGNMENT_STAGE_COMMIT,
+        "alignment_disposition": ALIGNMENT_DISPOSITION,
+        **dict(preflight_digests),
+    }
 
 
 # Keep the new source coupling in this small adapter block.  The proof entry
 # constructs the accepted complete G50 null graph once, clones both arms,
 # collects one shared 8x48 batch, and invokes the actual phase-A Adam kernel.
-def _prepare_static_source_boundary() -> tuple[
+def _prepare_static_source_boundary(*, formal: bool = False) -> tuple[
     dict[str, source.G51Model],
     dict[str, torch.optim.Adam],
     dict[str, object],
     dict[str, object],
     dict[str, int],
 ]:
-    seeds = source.seed_block(0, formal=False)
+    seeds = source.seed_block(0, formal=formal)
     g50_runner._backend.configure_runtime(seeds["phase_A_gradient_probe"])
     models = source.make_phase_A_models(
         member_capacity=8,
@@ -1792,13 +1903,13 @@ def _prepare_static_source_boundary() -> tuple[
 
 
 def _materialize_source_bundle(
-    *, source_commit: str
+    *, source_commit: str, formal: bool = False
 ) -> tuple[
     dict[str, object],
     object,
     dict[str, int],
 ]:
-    models, optimizers, _, _, seeds = _prepare_static_source_boundary()
+    models, optimizers, _, _, seeds = _prepare_static_source_boundary(formal=formal)
     trajectory = source.g40.collect_g40_trajectory(
         models[source.REFERENCE_ARM],
         episode_ids=tuple(range(source.NUM_ENVS)),
@@ -1929,6 +2040,8 @@ def _write_training_assessment(
     trajectory: object,
     seeds: Mapping[str, int],
     native_backend: Mapping[str, object],
+    formal: bool,
+    formal_authority: Mapping[str, str] | None,
     cpu_budget: int | None,
     process_workers: int | None,
 ) -> dict[str, object]:
@@ -1943,7 +2056,7 @@ def _write_training_assessment(
     assert isinstance(evidence, Mapping)
     work = _work_accounting(assessment)
     configuration = _configuration(
-        formal=False,
+        formal=formal,
         cpu_budget=cpu_budget,
         process_workers=process_workers,
         completed_paired_passes=int(work["completed_paired_passes"]),
@@ -1991,7 +2104,7 @@ def _write_training_assessment(
         "algorithm_id": ALGORITHM_ID,
         "source_id": SOURCE_ID,
         "source_commit": source_commit,
-        "formal": False,
+        "formal": formal,
         "formal_statistical_run": False,
         "scientific_iteration_cost": 0,
         "configuration": configuration,
@@ -2021,10 +2134,23 @@ def _write_training_assessment(
         "execution_readiness_proof_only": False,
         "two_process_proof": None,
         "two_process_proof_artifact": None,
+        "two_process_proof_sha256": None,
         "passed": exact,
     }
+    if formal:
+        if formal_authority is None or set(formal_authority) != set(
+            _FORMAL_AUTHORITY_KEYS
+        ):
+            raise ValueError("G51 formal authority binding is incomplete")
+        manifest.update(formal_authority)
+    elif formal_authority is not None:
+        raise ValueError("G51 nonformal manifest forbids authority bindings")
     _write_json(root / TRAIN_MANIFEST, manifest)
-    validate_training_artifacts(root, expected_source_commit=source_commit)
+    validate_training_artifacts(
+        root,
+        expected_source_commit=source_commit,
+        _allow_pending_process_report=exact,
+    )
     return manifest
 
 
@@ -2036,7 +2162,7 @@ def train(
     authorization_token: str | None,
     preflight_root: Path | None = None,
     alignment_disposition: str | None = None,
-    aligned_source_commit: str | None = None,
+    aligned_implementation_commit: str | None = None,
     alignment_stage_commit: str | None = None,
     cpu_budget: int | None = None,
     process_workers: int | None = None,
@@ -2049,30 +2175,39 @@ def train(
         cpu_budget=cpu_budget,
         process_workers=process_workers,
     )
+    formal_authority: dict[str, str] | None = None
     if formal:
         errors = _formal_admission_errors(
             source_commit=source_commit,
             authorization_token=authorization_token,
             preflight_root=preflight_root,
             alignment_disposition=alignment_disposition,
-            aligned_source_commit=aligned_source_commit,
+            aligned_implementation_commit=aligned_implementation_commit,
             alignment_stage_commit=alignment_stage_commit,
+            run_root=run_root,
         )
-        raise ValueError(" | ".join(errors))
-    if any(
+        if not _root_is_fresh(run_root):
+            errors.append("G51 formal run root is not fresh")
+        if errors:
+            raise ValueError(" | ".join(errors))
+        assert preflight_root is not None
+        formal_authority = _formal_authority_binding(
+            _validate_preflight(preflight_root)
+        )
+    if not formal and any(
         value is not None
         for value in (
             authorization_token,
             preflight_root,
             alignment_disposition,
-            aligned_source_commit,
+            aligned_implementation_commit,
             alignment_stage_commit,
         )
     ):
         raise ValueError("G51 proof-only scope forbids formal admission fields")
     _activate_single_thread_runtime()
     if _interface_smoke_only:
-        _, _, boundary, static, _ = _prepare_static_source_boundary()
+        _, _, boundary, static, _ = _prepare_static_source_boundary(formal=False)
         if (
             set(boundary) != set(_BOUNDARY_KEYS)
             or boundary.get("passed") is not True
@@ -2109,18 +2244,27 @@ def train(
     root = _fresh_root(run_root)
     native_backend = _native_backend_identity()
     assessment, trajectory, seeds = _materialize_source_bundle(
-        source_commit=source_commit
+        source_commit=source_commit,
+        formal=formal,
     )
-    return _write_training_assessment(
+    manifest = _write_training_assessment(
         root=root,
         source_commit=source_commit,
         assessment=assessment,
         trajectory=trajectory,
         seeds=seeds,
         native_backend=native_backend,
+        formal=formal,
+        formal_authority=formal_authority,
         cpu_budget=cpu_budget,
         process_workers=process_workers,
     )
+    if manifest.get("result_branch") == REMOVABLE_BRANCH:
+        report = prove_two_process_artifact_reload(run_root=root)
+        manifest = _attach_process_proof(root, manifest, report)
+        _write_json(root / TRAIN_MANIFEST, manifest)
+    validate_training_artifacts(root, expected_source_commit=source_commit)
+    return manifest
 
 
 def record_terminal_assessment(
@@ -2148,17 +2292,24 @@ def record_terminal_assessment(
         trajectory=trajectory,
         seeds=source.seed_block(0, formal=False),
         native_backend=_native_backend_identity(),
+        formal=False,
+        formal_authority=None,
         cpu_budget=cpu_budget,
         process_workers=process_workers,
     )
 
 
 def validate_training_artifacts(
-    run_root: Path, *, expected_source_commit: str | None = None
+    run_root: Path,
+    *,
+    expected_source_commit: str | None = None,
+    _allow_pending_process_report: bool = False,
 ) -> dict[str, object]:
     root = Path(run_root).resolve()
     manifest = _read_json(root / TRAIN_MANIFEST)
-    _require_exact_keys(manifest, _TRAIN_KEYS, label="train manifest")
+    formal = manifest.get("formal")
+    expected_keys = _TRAIN_KEYS | (_FORMAL_AUTHORITY_KEYS if formal is True else set())
+    _require_exact_keys(manifest, expected_keys, label="train manifest")
     source_commit = manifest.get("source_commit")
     if (
         manifest.get("schema_version") != SCHEMA_VERSION
@@ -2169,15 +2320,41 @@ def validate_training_artifacts(
             expected_source_commit is not None
             and source_commit != expected_source_commit
         )
-        or manifest.get("formal") is not False
+        or not isinstance(formal, bool)
+        or (formal and source_commit != FORMAL_SOURCE_COMMIT)
         or manifest.get("formal_statistical_run") is not False
         or manifest.get("scientific_iteration_cost") != 0
         or manifest.get("source_controls") != source_controls()
         or not _strict_native_backend(manifest.get("native_backend"))
-        or manifest.get("seed_block") != source.seed_block(0, formal=False)
+        or manifest.get("seed_block") != source.seed_block(0, formal=formal)
         or manifest.get("operational_valid") is not True
     ):
         raise ValueError("G51 train manifest invariant mismatch")
+    if formal:
+        digest_keys = {
+            "preflight_train_manifest_sha256",
+            "preflight_evaluation_manifest_sha256",
+            "preflight_analysis_result_sha256",
+        }
+        if (
+            manifest.get("authorization_token_id") != AUTHORIZATION_TOKEN
+            or manifest.get("aligned_implementation_commit")
+            != ALIGNED_IMPLEMENTATION_COMMIT
+            or manifest.get("alignment_stage_commit") != ALIGNMENT_STAGE_COMMIT
+            or manifest.get("alignment_disposition") != ALIGNMENT_DISPOSITION
+            or manifest.get("preflight_source_commit") != FORMAL_SOURCE_COMMIT
+            or any(
+                re.fullmatch(r"[0-9a-f]{64}", str(manifest.get(key))) is None
+                for key in digest_keys
+            )
+        ):
+            raise ValueError("G51 formal authority/preflight binding mismatch")
+        expected_preflight = _validate_preflight(PREFLIGHT_ROOT)
+        if any(
+            manifest.get(key) != expected
+            for key, expected in expected_preflight.items()
+        ):
+            raise ValueError("G51 formal manifest preflight digest mismatch")
     assessment_reference = _require_exact_keys(
         manifest.get("result_assessment"),
         _ASSESSMENT_REFERENCE_KEYS,
@@ -2214,7 +2391,7 @@ def validate_training_artifacts(
     assert isinstance(evidence, Mapping)
     configuration = manifest.get("configuration")
     if not isinstance(configuration, Mapping) or dict(configuration) != _configuration(
-        formal=False,
+        formal=formal,
         cpu_budget=int(configuration.get("cpu_budget", 0)),
         process_workers=int(configuration.get("process_workers", 0)),
         completed_paired_passes=int(work["completed_paired_passes"]),
@@ -2308,15 +2485,37 @@ def validate_training_artifacts(
             raise ValueError("G51 adverse result cannot claim execution readiness")
         if report_reference != TWO_PROCESS_REPORT_REFERENCE:
             raise ValueError("G51 readiness process-proof reference mismatch")
-        report = _read_json(root / str(report_reference))
-        _validate_process_report(report)
+        report_path = root / str(report_reference)
+        if (
+            not report_path.is_file()
+            or manifest.get("two_process_proof_sha256")
+            != _artifact_digest(report_path)
+        ):
+            raise ValueError("G51 process-proof digest mismatch")
+        report = _read_json(report_path)
+        _validate_process_report(report, expected_formal=formal)
         if report != manifest.get("two_process_proof"):
             raise ValueError("G51 readiness process-proof payload mismatch")
+    elif exact and _allow_pending_process_report:
+        if (
+            report_reference is not None
+            or manifest.get("two_process_proof") is not None
+            or manifest.get("two_process_proof_sha256") is not None
+        ):
+            raise ValueError("G51 pending process proof is internally inconsistent")
+    elif exact:
+        raise ValueError("G51 exact result requires the two-process report")
     elif (
         report_reference is not None
         or manifest.get("two_process_proof") is not None
+        or manifest.get("two_process_proof_sha256") is not None
+        or readiness
     ):
-        raise ValueError("G51 ordinary artifact contains readiness-only proof")
+        raise ValueError("G51 adverse result forbids a two-process report")
+    if not _allow_pending_process_report:
+        _validate_branch_inventory(
+            root, result_branch=str(result_branch), terminal=False
+        )
     return manifest
 
 
@@ -2337,12 +2536,15 @@ def _proof_reload_worker(task: Mapping[str, object]) -> None:
     if output_path.exists():
         raise RuntimeError("G51 readiness worker output path is not fresh")
     root = Path(str(task["run_root"]))
-    training = validate_training_artifacts(root)
+    training = validate_training_artifacts(
+        root, _allow_pending_process_report=True
+    )
     checkpoints = {
         arm: _load_checkpoint(_checkpoint_path(root, arm)) for arm in source.ARMS
     }
     semantic = {
         "source_commit": training["source_commit"],
+        "formal": training["formal"],
         "native_backend": training["native_backend"],
         "seed_block": training["seed_block"],
         "result_assessment": training["result_assessment"],
@@ -2434,7 +2636,9 @@ def _run_distinct_proof_workers(
     return results
 
 
-def _validate_process_report(report: object) -> Mapping[str, object]:
+def _validate_process_report(
+    report: object, *, expected_formal: bool
+) -> Mapping[str, object]:
     value = _require_exact_keys(
         report, _PROCESS_REPORT_KEYS, label="two-process report"
     )
@@ -2451,7 +2655,7 @@ def _validate_process_report(report: object) -> Mapping[str, object]:
         or value.get("mechanical_reconstruction_not_scientific_witness") is not True
         or value.get("scientific_real_transitions") != 0
         or value.get("optimizer_steps") != 0
-        or value.get("formal") is not False
+        or value.get("formal") is not expected_formal
         or value.get("formal_statistical_run") is not False
         or value.get("scientific_iteration_cost") != 0
         or value.get("passed") is not True
@@ -2462,6 +2666,9 @@ def _validate_process_report(report: object) -> Mapping[str, object]:
 
 def prove_two_process_artifact_reload(*, run_root: Path) -> dict[str, object]:
     root = Path(run_root).resolve()
+    training = validate_training_artifacts(
+        root, _allow_pending_process_report=True
+    )
     tasks = tuple(
         {
             "index": index,
@@ -2471,6 +2678,8 @@ def prove_two_process_artifact_reload(*, run_root: Path) -> dict[str, object]:
         for index in range(2)
     )
     rows = _run_distinct_proof_workers(tasks)
+    for task in tasks:
+        Path(str(task["output_path"])).unlink()
     semantic_equal = rows[0]["semantic_digest"] == rows[1]["semantic_digest"]
     report = {
         "proof_kind": "two_process_G51_independent_artifact_reload",
@@ -2491,18 +2700,20 @@ def prove_two_process_artifact_reload(*, run_root: Path) -> dict[str, object]:
         "mechanical_reconstruction_not_scientific_witness": True,
         "scientific_real_transitions": 0,
         "optimizer_steps": 0,
-        "formal": False,
+        "formal": training["formal"],
         "formal_statistical_run": False,
         "scientific_iteration_cost": 0,
         "passed": bool(semantic_equal),
     }
     _write_json(root / TWO_PROCESS_REPORT_REFERENCE, report)
-    _validate_process_report(report)
+    _validate_process_report(report, expected_formal=bool(training["formal"]))
     return report
 
 
-def _attach_readiness_process_proof(
-    manifest: Mapping[str, object], report: Mapping[str, object]
+def _attach_process_proof(
+    run_root: Path,
+    manifest: Mapping[str, object],
+    report: Mapping[str, object],
 ) -> dict[str, object]:
     if manifest.get("execution_readiness_proof_only") is not False:
         raise ValueError("G51 readiness manifest was complete before process proof")
@@ -2511,11 +2722,17 @@ def _attach_readiness_process_proof(
         or manifest.get("two_process_proof_artifact") is not None
     ):
         raise ValueError("G51 readiness process proof was already attached")
-    _validate_process_report(report)
+    formal = manifest.get("formal")
+    if not isinstance(formal, bool):
+        raise ValueError("G51 process proof manifest has invalid formal scope")
+    _validate_process_report(report, expected_formal=formal)
     updated = dict(manifest)
     updated["execution_readiness_proof_only"] = True
     updated["two_process_proof"] = dict(report)
     updated["two_process_proof_artifact"] = TWO_PROCESS_REPORT_REFERENCE
+    updated["two_process_proof_sha256"] = _artifact_digest(
+        Path(run_root) / TWO_PROCESS_REPORT_REFERENCE
+    )
     return updated
 
 
@@ -2566,17 +2783,22 @@ def evaluate(*, run_root: Path) -> dict[str, object]:
         difference_vector: dict[str, object] | None = dict(difference)
         D_G51 = certificate.get("D_G51")
         evaluation_kind = "exact_registered_D_G51_and_canonical_actor_projection"
+        checkpoint_sha256 = {
+            arm: training["checkpoint_inventory"][arm]["sha256"]
+            for arm in source.ARMS
+        }
     else:
         canonical_equal = None
         difference_vector = None
         D_G51 = envelope.get("D_G51")
         evaluation_kind = "terminal_source_result_envelope"
+        checkpoint_sha256 = {}
     result = {
         "schema_version": SCHEMA_VERSION,
         "algorithm_id": ALGORITHM_ID,
         "source_id": SOURCE_ID,
         "source_commit": training["source_commit"],
-        "formal": False,
+        "formal": training["formal"],
         "formal_statistical_run": False,
         "scientific_iteration_cost": 0,
         "train_manifest_sha256": _artifact_digest(root / TRAIN_MANIFEST),
@@ -2587,6 +2809,7 @@ def evaluate(*, run_root: Path) -> dict[str, object]:
         "evaluation_optimizer_steps": 0,
         "environment_transitions": 0,
         "result_assessment_sha256": assessment_reference["sha256"],
+        "checkpoint_sha256": checkpoint_sha256,
         "result_branch": result_branch,
         "operational_valid": True,
         "passed": bool(exact and D_G51 == 0 and canonical_equal),
@@ -2622,12 +2845,20 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, object]:
         if exact
         else "terminal_source_result_envelope"
     )
+    expected_checkpoint_sha256 = (
+        {
+            arm: training["checkpoint_inventory"][arm]["sha256"]
+            for arm in source.ARMS
+        }
+        if exact
+        else {}
+    )
     if (
         value.get("schema_version") != SCHEMA_VERSION
         or value.get("algorithm_id") != ALGORITHM_ID
         or value.get("source_id") != SOURCE_ID
         or value.get("source_commit") != training.get("source_commit")
-        or value.get("formal") is not False
+        or value.get("formal") is not training.get("formal")
         or value.get("formal_statistical_run") is not False
         or value.get("scientific_iteration_cost") != 0
         or value.get("train_manifest_sha256")
@@ -2650,6 +2881,7 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, object]:
         or value.get("environment_transitions") != 0
         or value.get("result_assessment_sha256")
         != assessment_reference.get("sha256")
+        or value.get("checkpoint_sha256") != expected_checkpoint_sha256
         or value.get("result_branch") != result_branch
         or value.get("operational_valid") is not True
         or value.get("passed") is not exact
@@ -2757,7 +2989,7 @@ def analyze(*, run_root: Path) -> dict[str, object]:
         "algorithm_id": ALGORITHM_ID,
         "source_id": SOURCE_ID,
         "source_commit": training["source_commit"],
-        "formal": False,
+        "formal": training["formal"],
         "formal_statistical_run": False,
         "scientific_iteration_cost": 0,
         "train_manifest_sha256": _artifact_digest(root / TRAIN_MANIFEST),
@@ -2802,7 +3034,7 @@ def validate_analysis_artifacts(run_root: Path) -> dict[str, object]:
         or value.get("algorithm_id") != ALGORITHM_ID
         or value.get("source_id") != SOURCE_ID
         or value.get("source_commit") != training.get("source_commit")
-        or value.get("formal") is not False
+        or value.get("formal") is not training.get("formal")
         or value.get("formal_statistical_run") is not False
         or value.get("scientific_iteration_cost") != 0
         or value.get("train_manifest_sha256")
@@ -2823,6 +3055,9 @@ def validate_analysis_artifacts(run_root: Path) -> dict[str, object]:
         or value.get("passed") is not exact
     ):
         raise ValueError("G51 analysis artifact invariant mismatch")
+    _validate_branch_inventory(
+        root, result_branch=str(expected_branch), terminal=True
+    )
     return value
 
 
@@ -2860,27 +3095,22 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, object]:
 
 
 def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, object]:
-    root = Path(run_root).resolve()
-    manifest = train(
-        run_root=root,
+    return train(
+        run_root=Path(run_root).resolve(),
         source_commit=source_commit,
         formal=False,
         authorization_token=None,
         cpu_budget=DEFAULT_CPU_BUDGET,
         process_workers=DEFAULT_PROCESS_WORKERS,
     )
-    if manifest.get("result_branch") != REMOVABLE_BRANCH:
-        return manifest
-    report = prove_two_process_artifact_reload(run_root=root)
-    manifest = _attach_readiness_process_proof(manifest, report)
-    _write_json(root / TRAIN_MANIFEST, manifest)
-    validate_training_artifacts(root, expected_source_commit=source_commit)
-    return manifest
 
 
 def readiness_validate(*, run_root: Path) -> dict[str, object]:
     training = validate_training_artifacts(run_root)
-    if training.get("execution_readiness_proof_only") is not True:
+    if (
+        training.get("formal") is not False
+        or training.get("execution_readiness_proof_only") is not True
+    ):
         raise RuntimeError("G51 readiness validation requires process proof")
     return {
         "artifact_validation": True,
@@ -2895,6 +3125,8 @@ def readiness_reload(*, run_root: Path) -> dict[str, object]:
     root = Path(run_root).resolve()
     before = _artifact_digest(root / TRAIN_MANIFEST)
     training = validate_training_artifacts(root)
+    if training.get("formal") is not False:
+        raise RuntimeError("G51 readiness reload is nonformal proof-only")
     checkpoints = {
         arm: _load_checkpoint(_checkpoint_path(root, arm)) for arm in source.ARMS
     }
@@ -2919,6 +3151,7 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, object]:
 
 
 def readiness_analyze(*, run_root: Path) -> dict[str, object]:
+    readiness_validate(run_root=run_root)
     return analyze(run_root=run_root)
 
 
@@ -2934,19 +3167,22 @@ def exercise(*, run_root: Path, source_commit: str) -> dict[str, object]:
 
 
 def _reject_cli_formal_authority(args: argparse.Namespace) -> None:
-    if args.formal or any(
+    authority_supplied = any(
         getattr(args, name) is not None
         for name in (
             "authorization_token",
             "preflight_root",
             "alignment_disposition",
-            "aligned_source_commit",
+            "aligned_implementation_commit",
             "alignment_stage_commit",
         )
-    ):
+    )
+    if args.stage != "train" and (args.formal or authority_supplied):
         raise ValueError(
-            "G51 proof-only CLI forbids formal execution or admission fields"
+            "G51 CLI allows formal execution and authority fields only for train"
         )
+    if args.stage == "train" and not args.formal and authority_supplied:
+        raise ValueError("G51 nonformal train forbids formal authority fields")
 
 
 def main() -> None:
@@ -2972,7 +3208,7 @@ def main() -> None:
     parser.add_argument("--authorization-token")
     parser.add_argument("--preflight-root", type=Path)
     parser.add_argument("--alignment-disposition")
-    parser.add_argument("--aligned-source-commit")
+    parser.add_argument("--aligned-implementation-commit")
     parser.add_argument("--alignment-stage-commit")
     parser.add_argument("--cpu-budget", type=int)
     parser.add_argument("--process-workers", type=int)
@@ -3005,7 +3241,7 @@ def main() -> None:
             authorization_token=args.authorization_token,
             preflight_root=args.preflight_root,
             alignment_disposition=args.alignment_disposition,
-            aligned_source_commit=args.aligned_source_commit,
+            aligned_implementation_commit=args.aligned_implementation_commit,
             alignment_stage_commit=args.alignment_stage_commit,
             cpu_budget=args.cpu_budget,
             process_workers=args.process_workers,

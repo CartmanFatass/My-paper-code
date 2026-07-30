@@ -107,7 +107,7 @@ def _synthetic_adverse_failure(
 
 
 def test_configuration_provenance_and_formal_admission_are_fail_closed(
-    runner, tmp_path: Path
+    runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     configuration = runner._configuration(formal=False)
     assert configuration["proof_kind"] == (
@@ -156,43 +156,48 @@ def test_configuration_provenance_and_formal_admission_are_fail_closed(
     assert runner.source.ACCEPTED_G50_ALIGNMENT_STAGE_COMMIT == (
         "4df41063d077ace7e0c9212e0cbadbf56e1be4b7"
     )
-    assert runner.AUTHORIZATION_TOKEN is None
+    assert runner.FORMAL_SOURCE_COMMIT == (
+        "ce6ed8659c480ca2779155b2871dc82b89fa0e95"
+    )
+    assert runner.AUTHORIZATION_TOKEN == (
+        "CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_"
+        "REDUCTION_G51_FORMAL_AUTHORIZATION_V1"
+    )
     assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
         "188b210975a0f243ae34318d658fbf943d1d63ab"
     )
     assert runner.ALIGNMENT_STAGE_COMMIT == (
         "aa756dcd06a2ea622c155f2983a89bb5d76e9d80"
     )
-    assert controls["formal_alignment_status"] == (
-        "ALIGNED_IDENTITY_BOUND_AUTHORIZATION_CLOSED"
-    )
-    assert controls["aligned_implementation_commit"] == (
-        runner.ALIGNED_IMPLEMENTATION_COMMIT
-    )
-    assert controls["alignment_stage_commit"] == runner.ALIGNMENT_STAGE_COMMIT
+    assert "formal_authorization_token" not in controls
+    assert "aligned_implementation_commit" not in controls
+    monkeypatch_preflight = tmp_path / "preflight"
+    monkeypatch.setattr(runner, "PREFLIGHT_ROOT", monkeypatch_preflight)
     assert runner._formal_admission_errors(
-        source_commit=TEST_SOURCE_COMMIT,
-        authorization_token="invented",
-        preflight_root=tmp_path,
+        source_commit=runner.FORMAL_SOURCE_COMMIT,
+        authorization_token=runner.AUTHORIZATION_TOKEN,
+        preflight_root=monkeypatch_preflight,
         alignment_disposition="ALIGNED",
-        aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        aligned_implementation_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
         alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
-    ) == ["G51 formal authorization token is not bound"]
+    ) == []
     wrong_binding_errors = runner._formal_admission_errors(
         source_commit=TEST_SOURCE_COMMIT,
         authorization_token="invented",
         preflight_root=tmp_path,
         alignment_disposition="MISMATCH",
-        aligned_source_commit="3" * 40,
+        aligned_implementation_commit="3" * 40,
         alignment_stage_commit="4" * 40,
     )
     assert wrong_binding_errors == [
+        "G51 formal authorization token mismatch",
+        "G51 formal execution source identity mismatch",
         "G51 formal alignment disposition is not ALIGNED",
-        "G51 formal aligned source identity mismatch",
+        "G51 formal aligned implementation identity mismatch",
         "G51 formal alignment stage identity mismatch",
-        "G51 formal authorization token is not bound",
+        "G51 formal preflight root identity mismatch",
     ]
-    with pytest.raises(ValueError, match="authorization token is not bound"):
+    with pytest.raises(ValueError, match="authorization token mismatch"):
         runner.train(
             run_root=tmp_path / "formal",
             source_commit=TEST_SOURCE_COMMIT,
@@ -200,7 +205,7 @@ def test_configuration_provenance_and_formal_admission_are_fail_closed(
             authorization_token="invented",
             preflight_root=tmp_path,
             alignment_disposition="ALIGNED",
-            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            aligned_implementation_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
             alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
         )
     assert not (tmp_path / "formal").exists()
@@ -209,7 +214,7 @@ def test_configuration_provenance_and_formal_admission_are_fail_closed(
     assert 'action_seed=seeds["phase_A_action"]' in implementation
 
 
-def test_cli_rejects_every_formal_field_before_every_stage_dispatch(
+def test_cli_separates_formal_train_from_nonformal_and_inferred_stages(
     runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     dispatched = False
@@ -234,7 +239,6 @@ def test_cli_rejects_every_formal_field_before_every_stage_dispatch(
         monkeypatch.setattr(runner, name, forbidden_dispatch)
 
     stages = (
-        "train",
         "evaluate",
         "analyze",
         "exercise",
@@ -250,7 +254,7 @@ def test_cli_rejects_every_formal_field_before_every_stage_dispatch(
         ("--authorization-token", "invented"),
         ("--preflight-root", str(tmp_path)),
         ("--alignment-disposition", "ALIGNED"),
-        ("--aligned-source-commit", TEST_SOURCE_COMMIT),
+        ("--aligned-implementation-commit", TEST_SOURCE_COMMIT),
         ("--alignment-stage-commit", "4" * 40),
     )
     for stage in stages:
@@ -262,11 +266,66 @@ def test_cli_rejects_every_formal_field_before_every_stage_dispatch(
                 [str(RUNNER_PATH), stage, "--run-root", str(root), *extra],
             )
             with pytest.raises(
-                ValueError, match="forbids formal execution or admission fields"
+                ValueError, match="only for train"
             ):
                 runner.main()
             assert not root.exists()
+    for index, extra in enumerate(formal_arguments[1:]):
+        root = tmp_path / f"nonformal_train_{index}"
+        monkeypatch.setattr(
+            sys,
+            "argv",
+            [
+                str(RUNNER_PATH),
+                "train",
+                "--run-root",
+                str(root),
+                "--source-commit",
+                TEST_SOURCE_COMMIT,
+                *extra,
+            ],
+        )
+        with pytest.raises(ValueError, match="nonformal train forbids"):
+            runner.main()
+        assert not root.exists()
     assert dispatched is False
+
+    captured: dict[str, object] = {}
+
+    def capture_formal_train(**arguments: object) -> dict[str, object]:
+        captured.update(arguments)
+        return {}
+
+    monkeypatch.setattr(runner, "train", capture_formal_train)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            str(RUNNER_PATH),
+            "train",
+            "--run-root",
+            str(tmp_path / "formal_train"),
+            "--source-commit",
+            runner.FORMAL_SOURCE_COMMIT,
+            "--formal",
+            "--authorization-token",
+            runner.AUTHORIZATION_TOKEN,
+            "--preflight-root",
+            str(tmp_path / "preflight"),
+            "--alignment-disposition",
+            runner.ALIGNMENT_DISPOSITION,
+            "--aligned-implementation-commit",
+            runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            "--alignment-stage-commit",
+            runner.ALIGNMENT_STAGE_COMMIT,
+        ],
+    )
+    runner.main()
+    assert captured["formal"] is True
+    assert captured["authorization_token"] == runner.AUTHORIZATION_TOKEN
+    assert captured["aligned_implementation_commit"] == (
+        runner.ALIGNED_IMPLEMENTATION_COMMIT
+    )
 
 
 def test_stale_root_rejects_before_witness_materialization(
@@ -294,6 +353,74 @@ def test_stale_root_rejects_before_witness_materialization(
         )
     assert called is False
     assert (root / "owned.txt").read_text(encoding="utf-8") == "preserve\n"
+
+
+def test_formal_gate_binds_preflight_before_root_and_model_materialization(
+    runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    preflight_root = tmp_path / "preflight"
+    formal_root = tmp_path / "formal"
+    monkeypatch.setattr(runner, "PREFLIGHT_ROOT", preflight_root)
+    monkeypatch.setattr(runner, "FORMAL_RUN_ROOT", formal_root)
+    calls: list[str] = []
+    preflight_digests = {
+        "preflight_source_commit": runner.FORMAL_SOURCE_COMMIT,
+        "preflight_train_manifest_sha256": "1" * 64,
+        "preflight_evaluation_manifest_sha256": "2" * 64,
+        "preflight_analysis_result_sha256": "3" * 64,
+    }
+
+    def validate_preflight(root: Path) -> dict[str, str]:
+        calls.append("preflight")
+        assert root == preflight_root
+        assert not formal_root.exists()
+        return dict(preflight_digests)
+
+    def fresh_root(root: Path) -> Path:
+        calls.append("root")
+        root.mkdir()
+        return root
+
+    def materialize(**arguments: object) -> tuple[object, object, object]:
+        calls.append("model")
+        assert arguments["formal"] is True
+        return object(), object(), object()
+
+    captured: dict[str, object] = {}
+
+    def write_training(**arguments: object) -> dict[str, object]:
+        calls.append("write")
+        captured.update(arguments)
+        return {"result_branch": runner.INVALID_BRANCH}
+
+    monkeypatch.setattr(runner, "_validate_preflight", validate_preflight)
+    monkeypatch.setattr(runner, "_fresh_root", fresh_root)
+    monkeypatch.setattr(runner, "_native_backend_identity", lambda: {})
+    monkeypatch.setattr(runner, "_materialize_source_bundle", materialize)
+    monkeypatch.setattr(runner, "_write_training_assessment", write_training)
+    monkeypatch.setattr(
+        runner, "validate_training_artifacts", lambda *_args, **_kwargs: {}
+    )
+    result = runner.train(
+        run_root=formal_root,
+        source_commit=runner.FORMAL_SOURCE_COMMIT,
+        formal=True,
+        authorization_token=runner.AUTHORIZATION_TOKEN,
+        preflight_root=preflight_root,
+        alignment_disposition=runner.ALIGNMENT_DISPOSITION,
+        aligned_implementation_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
+    )
+    assert result["result_branch"] == runner.INVALID_BRANCH
+    assert calls == ["preflight", "root", "model", "write"]
+    assert captured["formal"] is True
+    assert captured["formal_authority"] == {
+        "authorization_token_id": runner.AUTHORIZATION_TOKEN,
+        "aligned_implementation_commit": runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        "alignment_stage_commit": runner.ALIGNMENT_STAGE_COMMIT,
+        "alignment_disposition": runner.ALIGNMENT_DISPOSITION,
+        **preflight_digests,
+    }
 
 
 def test_frozen_first_match_order_and_tokens_are_exact(runner) -> None:
@@ -331,6 +458,140 @@ def test_frozen_first_match_order_and_tokens_are_exact(runner) -> None:
     assert runner.select_g51_result_branch(static_only) == runner.UNRESOLVED_BRANCH
 
 
+@pytest.mark.parametrize("branch", runner_module.FIRST_MATCH_ORDER)
+def test_preflight_admission_accepts_every_registered_branch_without_a_favorable_gate(
+    runner,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    branch: str,
+) -> None:
+    root = tmp_path / branch
+    root.mkdir()
+    for name in (
+        runner.TRAIN_MANIFEST,
+        runner.EVALUATION_MANIFEST,
+        runner.ANALYSIS_RESULT,
+    ):
+        (root / name).write_text(
+            json.dumps({"formal": False, "branch": branch}) + "\n",
+            encoding="utf-8",
+        )
+    monkeypatch.setattr(
+        runner,
+        "validate_training_artifacts",
+        lambda *_args, **_kwargs: {
+            "formal": False,
+            "source_commit": runner.FORMAL_SOURCE_COMMIT,
+            "result_branch": branch,
+        },
+    )
+    monkeypatch.setattr(
+        runner,
+        "validate_evaluation_artifacts",
+        lambda *_args, **_kwargs: {
+            "formal": False,
+            "source_commit": runner.FORMAL_SOURCE_COMMIT,
+        },
+    )
+    monkeypatch.setattr(
+        runner,
+        "validate_analysis_artifacts",
+        lambda *_args, **_kwargs: {
+            "formal": False,
+            "source_commit": runner.FORMAL_SOURCE_COMMIT,
+        },
+    )
+    inventory_call: dict[str, object] = {}
+
+    def capture_inventory(
+        checked_root: Path, *, result_branch: str, terminal: bool
+    ) -> None:
+        inventory_call.update(
+            root=checked_root, result_branch=result_branch, terminal=terminal
+        )
+
+    monkeypatch.setattr(runner, "_validate_branch_inventory", capture_inventory)
+    digests = runner._validate_preflight(root)
+    assert inventory_call == {
+        "root": root.resolve(),
+        "result_branch": branch,
+        "terminal": True,
+    }
+    assert digests["preflight_source_commit"] == runner.FORMAL_SOURCE_COMMIT
+    assert all(
+        len(value) == 64
+        for key, value in digests.items()
+        if key.endswith("sha256")
+    )
+
+
+def test_formal_evaluate_and_analyze_infer_and_propagate_manifest_scope(
+    runner, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    root = tmp_path / "formal_adverse"
+    root.mkdir()
+    (root / runner.TRAIN_MANIFEST).write_text("{}\n", encoding="utf-8")
+    training = {
+        "source_commit": runner.FORMAL_SOURCE_COMMIT,
+        "formal": True,
+        "result_branch": runner.INVALID_BRANCH,
+        "result_assessment": {
+            "path": runner.ASSESSMENT_REFERENCE,
+            "sha256": "a" * 64,
+            "result": runner.INVALID_BRANCH,
+        },
+        "checkpoint_inventory": {},
+        "configuration": {"numerical_witness_invoked": True},
+        "static_certificate": None,
+        "structural_witness": None,
+    }
+    assessment = {
+        "result_envelope": {
+            "result": runner.INVALID_BRANCH,
+            "D_G51": None,
+            "evidence": {},
+        }
+    }
+    monkeypatch.setattr(
+        runner,
+        "validate_training_artifacts",
+        lambda *_args, **_kwargs: training,
+    )
+    monkeypatch.setattr(runner, "_load_checkpoint", lambda _path: assessment)
+    monkeypatch.setattr(
+        runner,
+        "_result_assessment",
+        lambda _root, _training: assessment,
+    )
+    monkeypatch.setattr(
+        runner.source,
+        "classify_result",
+        lambda _evidence: runner.INVALID_BRANCH,
+    )
+    monkeypatch.setattr(
+        runner, "_validate_branch_inventory", lambda *_args, **_kwargs: None
+    )
+    evaluation = runner.evaluate(run_root=root)
+    analysis = runner.analyze(run_root=root)
+    assert evaluation["formal"] is True
+    assert evaluation["checkpoint_sha256"] == {}
+    assert evaluation["evaluation_optimizer_steps"] == 0
+    assert evaluation["environment_transitions"] == 0
+    assert analysis["formal"] is True
+    assert analysis["train_manifest_sha256"] == runner._artifact_digest(
+        root / runner.TRAIN_MANIFEST
+    )
+    assert analysis["evaluation_manifest_sha256"] == runner._artifact_digest(
+        root / runner.EVALUATION_MANIFEST
+    )
+    assert analysis["result_branch"] == runner.INVALID_BRANCH
+    (root / runner.TRAIN_MANIFEST).write_text(
+        '{"tampered":true}\n', encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="evaluation artifact invariant mismatch"):
+        runner.validate_evaluation_artifacts(root)
+
+
 def test_readiness_lifecycle_is_exact_reloadable_and_zero_additional_science(
     runner,
     readiness_bundle: tuple[
@@ -353,6 +614,9 @@ def test_readiness_lifecycle_is_exact_reloadable_and_zero_additional_science(
     assert training["two_process_proof"]["semantic_payload_equal"] is True
     assert training["two_process_proof"]["scientific_real_transitions"] == 0
     assert training["two_process_proof"]["optimizer_steps"] == 0
+    assert training["two_process_proof_sha256"] == runner._artifact_digest(
+        root / runner.TWO_PROCESS_REPORT_REFERENCE
+    )
     assert tuple(training["checkpoint_inventory"]) == runner.source.ARMS
     assert all(
         row["kind"] == "final_only_proof_witness"
@@ -363,6 +627,10 @@ def test_readiness_lifecycle_is_exact_reloadable_and_zero_additional_science(
     assert evaluation["canonical_final_checkpoint_projection_equal"] is True
     assert evaluation["evaluation_optimizer_steps"] == 0
     assert evaluation["environment_transitions"] == 0
+    assert evaluation["checkpoint_sha256"] == {
+        arm: training["checkpoint_inventory"][arm]["sha256"]
+        for arm in runner.source.ARMS
+    }
     assert analysis["result_branch"] == runner.REMOVABLE_BRANCH
     assert analysis["first_match_order"] == list(runner.FIRST_MATCH_ORDER)
     assert runner.readiness_validate(run_root=root)["passed"] is True
@@ -512,6 +780,19 @@ def test_source_assessed_adverse_lifecycles_are_terminal_and_zero_extra_work(
     assert reloaded["training"]["result_branch"] == branch
     assert reloaded["evaluation"]["result_branch"] == branch
     assert reloaded["analysis"]["result_branch"] == branch
+    assert runner._relative_file_inventory(root) == {
+        runner.TRAIN_MANIFEST,
+        runner.EVALUATION_MANIFEST,
+        runner.ANALYSIS_RESULT,
+        runner.SHARED_TRAJECTORY_REFERENCE,
+        runner.ASSESSMENT_REFERENCE,
+    }
+
+    forbidden = root / runner.TWO_PROCESS_REPORT_REFERENCE
+    forbidden.parent.mkdir(parents=True, exist_ok=True)
+    forbidden.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="artifact inventory mismatch"):
+        runner.validate_training_artifacts(root)
 
 
 def test_unknown_and_partial_step_failures_are_reraised_without_assessment(
