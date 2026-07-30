@@ -1,0 +1,31 @@
+# Mechanical Intake Record
+
+- round: 20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification
+- package_stage_commit: e9ed22b0bb1202971a42fad3be57067aae86914e
+- source_commit: ce6ed8659c480ca2779155b2871dc82b89fa0e95
+- aligned_source_commit: 188b210975a0f243ae34318d658fbf943d1d63ab
+- alignment_stage_commit: aa756dcd06a2ea622c155f2983a89bb5d76e9d80
+- question: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/20_PRO_OPEN_QUESTION.md
+- raw: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/21_PRO_OPEN_RAW.md
+- mechanical_intake: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/50_MECHANICAL_INTAKE_RECORD.md
+- registered_conversation_id: 6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
+- submission_count: 1
+- fence_visible_before_submission: true
+- fence_visible_after_submission: true
+- original_monitor_terminal: ERROR
+- original_monitor_error: monitor_assignment_receipt_unreadable_before_observation
+- recovery_monitor_terminal: COMPLETE
+- recovery_monitor_assignment_receipt: logs/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/monitor_assignment.json
+- sentinel_terminal: COMPLETE
+- sentinel_stable_snapshots: 2
+- stable_snapshot_spacing_seconds: >=5
+- assistant_message_identity: efd2f7e3-a020-44df-9dad-268d3e95d09d
+- assistant_response_bytes_utf8: 9730
+- assistant_response_sha256: 989a3893eaa3f7e615e61f7fb6db7b9622152b34245aa1f9044ca569b75868f3
+- natural_completion: true
+- generation_controls: inactive
+- answer_now_activated: false
+- stuck_page_recovery: one_same_tab_reload_after_repeated_stuck_snapshots
+- raw_exact_reread: true
+- compute_started: false
+- scientific_iteration_cost: zero
