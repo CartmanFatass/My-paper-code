@@ -179,11 +179,14 @@ A readiness phase timeout is candidate evidence, not authority to replay the
 same proof root or relax its timeout. Before another attempt, an explicit
 workflow contract chooses exactly one response: a semantics-preserving
 technical optimization under the unchanged phase timeout, or an
-evidence-backed timeout revision. Under the optimization response, any code
-change produces a new candidate, the verifier uses a fresh absent root, and the
-same six phases and full commit-bound receipt remain mandatory. Failure to meet
-the unchanged timeout returns a technical blocker; it never switches to the
-timeout-revision response automatically.
+evidence-backed timeout revision. Any code change produces a new clean pushed
+candidate. A timeout-only workflow revision may retain an unchanged clean
+candidate only when its explicit contract permits that case. Both responses
+require one exact spec, one fresh absent root, one wrapper run, the same ordered
+six phases and a full commit-bound receipt. A timeout, technical failure or
+finalization failure consumes zero scientific iterations, produces no
+scientific disposition and leaves its root terminal. It never triggers an
+automatic retry, timeout increase or switch between the two responses.
 
 The project `Stop` hook is a last-message guard only. It runs no validation
 command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with

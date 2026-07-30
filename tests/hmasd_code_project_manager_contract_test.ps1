@@ -217,41 +217,54 @@ foreach ($required in @(
     'readiness phase timeout is candidate evidence',
     'semantics-preserving technical optimization under the unchanged phase timeout',
     'evidence-backed timeout revision',
-    'any code change produces a new candidate',
+    'Any code change produces a new clean pushed candidate',
+    'timeout-only workflow revision may retain an unchanged clean candidate',
+    'one exact spec',
     'fresh absent root',
+    'one wrapper run',
     'full commit-bound receipt',
-    'never switches to the timeout-revision response automatically')) {
+    'consumes zero scientific iterations',
+    'automatic retry, timeout increase or switch')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing timeout-response rule: $required"
     }
 }
 
 foreach ($required in @(
-    'request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT',
-    'selected_option=A',
-    'baseline_candidate_commit=379726e325236a02c3a45bf7049bedaaa90d4e31',
+    'request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V2',
+    'selected_option=B_EVIDENCE_BACKED_TIMEOUT_REVISION',
+    'observed_timeout_candidate_commit=379726e325236a02c3a45bf7049bedaaa90d4e31',
     'scientific_contract_stage_commit=8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc',
-    'bounded_exercise_timeout_seconds=300',
-    'bounded_exercise_success_duration_seconds=<300',
-    'timeout_revision=forbidden',
-    'other_phase_timeout_values=unchanged',
-    'outer_run_timeout=sum_of_six_phase_timeouts_plus_60_seconds',
+    'interface_smoke_timeout_seconds=60',
+    'bounded_exercise_timeout_seconds=1200',
+    'artifact_validation_timeout_seconds=300',
+    'artifact_reload_timeout_seconds=300',
+    'evaluate_entry_timeout_seconds=300',
+    'analyze_entry_timeout_seconds=300',
+    'outer_run_timeout_seconds=2520',
+    'finalize_timeout_seconds=120',
     'failed_root_reuse=forbidden',
+    'candidate_spec_root_attempt_count=1',
     'candidate_commit_rule=new_commit_required_for_any_code_change',
-    'unchanged_candidate_reexecution=forbidden',
+    'unchanged_clean_candidate_rule=one_attempt_permitted_only_by_this_timeout_revision',
     'fresh_absent_root_required=true',
     'full_six_phase_commit_bound_receipt=required',
+    'current_oracle_reproduction=continues_under_code_project_manager',
     'formal_compute=forbidden',
     'nonformal_scientific_compute=forbidden',
     'scientific_iteration_cost=zero',
     'duplicate_pro_review=forbidden',
     'current_work_mutation=forbidden',
     'evidence_weakening=forbidden',
-    'option_b_automatic_fallback=forbidden',
-    'geometry, RNG and seed identities, pairing',
-    'controls, oracle, metrics, estimator, first-match order and complexity',
+    'automatic_timeout_increase=forbidden',
+    'automatic_retry=forbidden',
+    'geometry, `R=273`, `O(H*K_search)`, RNG and seed identities, pairing',
+    'controls, oracle, metrics, estimator, first-match order and independent replay',
+    'READINESS_PHASE_TIMEOUT',
+    'READINESS_TECHNICAL_FAILURE',
     'READINESS_PERFORMANCE_BLOCKED',
-    'Research Operations Manager then applies its existing same-source preflight and formal-admission rules')) {
+    'READINESS_FINALIZATION_FAILURE',
+    'Research Operations Manager then applies the existing same-source preflight and formal')) {
     if (-not $g0ReadinessContractNormalized.Contains($required)) {
         throw "G0 readiness performance contract missing: $required"
     }
