@@ -24,7 +24,7 @@ External Pro may inspect only these repository-relative paths at the exact
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 - `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
-- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_executable_contract_addendum_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_uav_source_identifiability_g0_executable_contract_clarification/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260730_uav_source_identifiability_g0_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_admission_review/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_clarification/21_PRO_OPEN_RAW.md`
