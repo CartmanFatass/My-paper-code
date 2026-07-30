@@ -14,8 +14,9 @@ this bounded design review. Read only the allow-listed paths in
 explicitly authorized one transport of this independent UAV review. Do not
 start experiments, formal execution, code changes, or paper acceptance.
 
-Exact evidence allow-list (read only these repository-relative paths at the
-stage commit):
+## Exact evidence allow-list
+
+Read only these repository-relative paths at the stage commit:
 
 - `docs/research/designs/UAV_DYNAMIC_SERVICE_ROSTER_RESEARCH_BRIEF.md`
 - `docs/research/designs/UAV_TEMPORARY_SERVICE_LOSS_G1.md`
