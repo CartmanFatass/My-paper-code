@@ -58,6 +58,8 @@ result-sensitive field cannot be frozen without scientific invention, return
 propose compute, redesign, a new control, threshold, estimator, geometry,
 ownership rule, or successor action.
 
+## Exact evidence allow-list
+
 The complete evidence allow-list is:
 
 - `docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md`
