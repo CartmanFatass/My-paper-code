@@ -1,0 +1,24 @@
+# Mechanical Intake Record
+
+- round: 20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck
+- package_stage_commit: 15558359fd760fb68337f799f3e18823eb1c6f3b
+- audit_target_commit: 188b210975a0f243ae34318d658fbf943d1d63ab
+- original_audit_target_commit: 4b605ff64a4624e838092c10c2fc2b536c34eaae
+- question: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/20_PRO_OPEN_QUESTION.md
+- raw: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md
+- mechanical_intake: docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md
+- registered_conversation_id: 6a5a7735-ab30-83e8-bb88-d0cfb3cea56c
+- submission_count: 1
+- fence_visible_before_submission: true
+- fence_visible_after_submission: true
+- assistant_message_identity: e1bcffdb-b2b9-4a69-a828-fdb9a26bc927
+- stable_snapshots: 2
+- stable_snapshot_spacing_seconds: >=4
+- natural_completion: true
+- generation_controls: inactive
+- answer_now_activated: false
+- monitor_terminal: COMPLETE
+- sentinel_terminal: COMPLETE
+- raw_exact_reread: true
+- compute_started: false
+- scientific_iteration_cost: zero
