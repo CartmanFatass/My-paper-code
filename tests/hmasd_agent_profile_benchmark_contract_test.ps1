@@ -38,7 +38,11 @@ foreach ($required in @(
     'model_reasoning_effort = "max"',
     'sandbox_mode = "read-only"',
     '.agents/roles/RESEARCH_INNOVATOR.md',
+    'research-methodology.md',
     'RESEARCH_DIRECTION_PACKET',
+    'develop, refine,',
+    'combine or challenge',
+    'replacement ledger',
     'Do not force an affirmative result',
     'spawn children')) {
     if (-not $researchInnovator.Contains($required)) {
@@ -54,7 +58,9 @@ foreach ($required in @(
     'catalog.v2',
     'quality and provenance',
     'structured JSON',
-    'PDF verification')) {
+    'PDF verification',
+    'campaign/cohort/brief identities',
+    'mechanism primitives')) {
     if (-not $researchScout.Contains($required)) {
         throw "Research Scout profile missing: $required"
     }
@@ -65,12 +71,15 @@ foreach ($required in @(
     'model_reasoning_effort = "max"',
     'sandbox_mode = "read-only"',
     '.agents/roles/RESEARCH_CRITIC.md',
+    'research-methodology.md',
+    'only for scientific innovation, not evidence review',
     'Metadata v2',
     'quality and provenance',
     'structured JSON',
     'PDF verification',
     'SCOUT_EVIDENCE_PACKET or RESEARCH_DIRECTION_PACKET',
-    'target-specific adversarial checklist')) {
+    'target-specific checklist',
+    'immutable corrections')) {
     if (-not $researchCritic.Contains($required)) {
         throw "Research Critic profile missing: $required"
     }

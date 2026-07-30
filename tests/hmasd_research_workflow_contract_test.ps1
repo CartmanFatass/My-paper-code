@@ -61,6 +61,7 @@ $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
+$researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
@@ -185,7 +186,7 @@ foreach ($required in @(
     'model=gpt-5.6-sol',
     'reasoning_effort=ultra',
     'canonical_scientific_authority=none',
-    'write_scope=local_research_only',
+    'write_scope=local_research_except_pro_reviews',
     'current_work_read=forbidden',
     'local_research_single_writer=true',
     'local_research_write_tool=apply_patch_only',
@@ -193,8 +194,20 @@ foreach ($required in @(
     'research_scout_parallel_limit=4',
     'research_innovator_parallel_limit=4',
     'research_modes=evidence_review|scientific_innovation',
-    'additional_wave_user_confirmation=required_per_wave',
-    'automatic_research_loop=forbidden',
+    'campaign_authorization=one_user_confirmation_with_frozen_total_budgets',
+    'automatic_cohort_progression=allowed_within_confirmed_campaign',
+    'per_cohort_user_confirmation=not_required',
+    'unbounded_research_loop=forbidden',
+    'methodology_reference=research-methodology.md_required_for_scientific_innovation',
+    'fingerprint binds that complete automation boundary',
+    'Every Critic assignment consumes',
+    'planned Scout sources must remain inside',
+    'planned Innovators collectively cover the exact admitted parent',
+    'each refinement carries its own immediate predecessor',
+    'registry visible before',
+    'serve as a historical parent',
+    "every cohort's family-disposition snapshot",
+    'completed later cohort retains that admission',
     'research_critic_parallel_limit=2')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
@@ -207,6 +220,8 @@ foreach ($pair in @(
         'reasoning_effort=high',
         'write_authority=none',
         'child_authority=none',
+        'research_mode=evidence_review_or_campaign_evidence_axis',
+        'exact input collaboration-brief',
         'json_content_layer_required=true',
         'pdf_verification_on_fidelity_boundary=true') },
     @{ Text=$researchInnovatorRole; Required=@(
@@ -216,7 +231,9 @@ foreach ($pair in @(
         'write_authority=none',
         'child_authority=none',
         'research_mode=scientific_innovation_only',
-        'favored_family_visibility=withheld_unless_exact_challenge_assignment',
+        'assignment_purposes=develop|refine|combine|challenge',
+        'initial_favored_family_visibility=withheld_unless_exact_challenge_assignment',
+        'methodology_reference=required',
         'conclusion_forcing=forbidden',
         'RESEARCH_DIRECTION_PACKET') },
     @{ Text=$researchCriticRole; Required=@(
@@ -225,6 +242,8 @@ foreach ($pair in @(
         'reasoning_effort=max',
         'write_authority=none',
         'child_authority=none',
+        'methodology_reference=required_for_scientific_innovation_only',
+        'portfolio_selection_authority=none',
         'json_content_layer_required=true',
         'pdf_verification_on_fidelity_boundary=true') })) {
     foreach ($required in $pair.Required) {
@@ -254,7 +273,22 @@ foreach ($required in @(
     'CRITIC_ASSESSMENT_PACKET',
     'evidence review',
     'scientific innovation',
-    'additional wave',
+    'adaptive campaign',
+    'next cohort',
+    'delete|retain|add',
+    'No per-cohort user',
+    'confirmation is required inside',
+    '`--output` is forbidden in this route',
+    'expected Critic assignment',
+    'originating-admission binding',
+    '`applied`, `unresolved` or `conflicting`',
+    '`partial_operational_failure`',
+    'explicit allowed-source set',
+    'canonical prospective conjecture versions and exact parent',
+    'each refinement bound to its own immediate predecessor',
+    'only conjectures visible before that',
+    'become a parent retroactively',
+    "every cohort's disposition snapshot",
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
         throw "Independent research Skill missing: $required"
@@ -282,11 +316,63 @@ foreach ($required in @(
     'merge_barrier=required',
     'completion_order_priority=forbidden',
     'single_writer=independent_research_explorer',
-    'automatic_additional_wave=forbidden',
-    'additional_wave_user_confirmation=required_per_wave',
+    'campaign_authorization=one_user_confirmation_with_total_budgets',
+    'automatic_cohort_progression=allowed_within_frozen_campaign',
+    'per_cohort_user_confirmation=not_required',
+    'initial_cohort_independence_shielding=required',
+    'later_cohort_collaboration_brief=required',
+    'unbounded_cohort_loop=forbidden',
+    'complete immutable corrections',
+    'prior family-disposition snapshot',
+    'operational_failure|partial_operational_failure',
+    'An absent source set is not equivalent to an explicit empty set',
+    'Prospective conjectures use the',
+    'all planned Innovators together cover the exact',
+    'another assignment cannot satisfy that lineage obligation',
+    'registry visible before that cohort',
+    'must already belong to that historical registry',
+    'ordered disposition snapshot for every',
+    'completed later cohort retains the originating admission',
     'automatic_formal_workflow_promotion=forbidden')) {
     if (-not $parallelResearch.Contains($required)) {
         throw "Parallel research workflow missing: $required"
+    }
+}
+foreach ($required in @(
+    'MRM-01_OBJECT_BEFORE_MECHANISM',
+    'MRM-02_DECOMPOSE_MEMBERSHIP_NONSTATIONARITY',
+    'MRM-03_EXPLICIT_IDENTITY_AND_OWNERSHIP',
+    'MRM-04_SEMI_MARKOV_CLOCK_DISCIPLINE',
+    'MRM-05_STRATEGIC_POLICY_DEPENDENCE',
+    'MRM-06_ESTIMAND_FIRST',
+    'MRM-07_STRONGEST_SIMPLE_NULL',
+    'MRM-08_FAIL_CLOSED_MODULE_ADMISSION',
+    'MRM-09_COUNTEREXAMPLE_BEFORE_ESCALATION',
+    'MRM-10_IDENTIFYING_TOYS_AND_CONTROLS',
+    'MRM-11_INDEPENDENCE_WITH_PROVENANCE',
+    'MRM-12_PROPAGATE_CORRECTIONS_WITHOUT_FORCING_CONVERGENCE',
+    'MRM-13_BOUND_EVIDENCE_AND_DEPLOYMENT_COMPLEXITY',
+    'MRM-14_INTERPRET_THE_SMALLEST_PROPOSITION',
+    'provenance.cross_pollination_edges',
+    'scope.partner_policy_population',
+    '`stop_condition`',
+    'mechanical_schema_validity_is_not_scientific_truth=true')) {
+    if (-not $researchMethodology.Contains($required)) {
+        throw "Independent research methodology missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'additional_wave_user_confirmation=required_per_wave',
+    'automatic_additional_wave=forbidden',
+    'user_confirmation_fingerprint')) {
+    foreach ($surface in @(
+        $independentResearchRole,
+        $independentResearchSkill,
+        $parallelResearch,
+        $researchMethodology)) {
+        if ($surface.Contains($forbidden)) {
+            throw "Independent research retains stale per-wave control: $forbidden"
+        }
     }
 }
 foreach ($forbidden in @(

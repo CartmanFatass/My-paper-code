@@ -11,7 +11,7 @@ code_authority=none
 runtime_authority=none
 git_authority=none
 current_work_read=forbidden
-write_scope=local_research_only
+write_scope=local_research_except_pro_reviews
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
@@ -19,10 +19,12 @@ research_scout_parallel_limit=4
 research_innovator_parallel_limit=4
 research_critic_parallel_limit=2
 research_portfolio_owner=independent_research_explorer
-initial_wave_count=1
-additional_wave_user_confirmation=required_per_wave
-automatic_research_loop=forbidden
 research_modes=evidence_review|scientific_innovation
+campaign_authorization=one_user_confirmation_with_frozen_total_budgets
+automatic_cohort_progression=allowed_within_confirmed_campaign
+per_cohort_user_confirmation=not_required
+unbounded_research_loop=forbidden
+methodology_reference=research-methodology.md_required_for_scientific_innovation
 ```
 
 This task explores research questions outside the formal HMASD workflow. It
@@ -37,41 +39,73 @@ review packages, runtime evidence, implementation or scientific ledgers unless
 the user supplies an exact read-only excerpt as part of the research question.
 
 The task may read MyLib and other user-named research sources. MyLib is always
-read-only. Write only research notes, evidence tables and synthesis under
-`local_research/` through `apply_patch`; shell commands remain read-only. Never
-edit project code, workflow, science, Git state or an
-external workspace. The workspace guard enforces this boundary for the
-registered task session.
+read-only. Write only under `local_research/`, excluding the Operator-owned
+`local_research/pro_reviews/`, through `apply_patch`; shell commands remain
+read-only. Never edit project code, workflow, science, Git state or an external
+workspace. The workspace guard enforces this boundary for the registered task.
 
-Freeze exactly one research mode before dispatch. In `evidence_review`, use at
-most four Sol-high Research Scouts with disjoint evidence axes or paper sets,
-then the merge barrier and at most two Sol-max Research Critics. This mode asks
-what existing sources establish and stops after one evidence report.
+In `evidence_review`, freeze one bounded question, use at most four Sol-high
+Scouts with disjoint evidence axes or paper ownership, cross the merge barrier,
+and use at most two Sol-max Critics for central or conflicting claims. Return
+one evidence report. This mode does not claim innovation or create an
+autonomous campaign.
 
-In `scientific_innovation`, freeze an evidence baseline and maintain the
-advisory approach-family registry defined by the Skill. Launch at most four
-Sol-max Research Innovators on materially different mechanisms or
-formulations, then the merge barrier and at most two Sol-max Research Critics.
-Shared baseline sources are allowed; the independent unit is the approach
-family. Withhold the favored family unless an exact assignment is to challenge
-it. Cross-pollination begins only after every Innovator assignment has either
-a terminal packet or a structured terminal operational failure. A failure
-contains no scientific output or disposition and remains an exact gap.
+In `scientific_innovation`, one direct user confirmation freezes the campaign
+question, mission link, exclusions, scope, common scientific objects, exact
+source identities and boundary, evidence baseline, total Scout/Innovator/Critic
+budgets, maximum cohort count, stop conditions and completion condition. One
+fingerprint binds that complete automation boundary. Within its remaining
+balances, the Explorer may advance successive cohorts without asking the user
+again. It may not change a frozen field, increase a budget, authorize compute
+or continue past a stop condition.
 
-The Explorer owns the registry in scientific-innovation mode; no child may
-reorder it, change a family disposition or authorize another wave. The
-Explorer remains the only writer and reconciles packet evidence rather than
-privileging completion order.
+Before the first cohort, load the methodology reference named by the Skill and
+instantiate the common scientific objects. The first Innovator cohort is
+independently shielded: materially different families receive the same frozen
+baseline and cannot see one another's packets. The merge barrier opens only
+after every expected Scout/Innovator and Critic assignment has a terminal
+packet or exact operational-failure record. Every Critic assignment consumes
+budget even when it fails operationally. The Explorer then creates a versioned
+collaboration brief containing terminal packet identities, retained lemmas,
+counterexamples, complete immutable Critic corrections, unresolved gaps and
+transfer candidates. Later assignments may `develop`, `refine`, `combine` or
+`challenge` a conjecture and must cite their input brief and parent identities.
 
-Default to synthesis and stop after the initial scientific-innovation wave. An
-additional wave needs a mechanically valid admission record and a separate
-natural-language user confirmation for that exact wave. Gate eligibility never
-dispatches work. Blocked families reopen only for a named new mechanism,
-invariant or construction. Rephrasing a known gap, another generic search or
-an unfinished packet is not a reopen condition. No autonomous sequence of
-waves is allowed.
+Launch no more than four Scouts or Innovators concurrently and no more than two
+Critics after a merge. The Explorer is the only writer and portfolio owner.
+Children cannot change family dispositions, spend unassigned budget, dispatch
+another child or make a project decision. Completion order has no evidential
+weight.
 
-Separate paper claims, paper-supported findings, Explorer inference and open
-hypotheses. Seek counterexamples and applicability boundaries. Stop after the
-local advisory synthesis; do not assign implementation, authorize compute,
-contact External Pro, or promote a direction into CDC state.
+Admit another cohort only when the prior barrier is closed, remaining campaign
+budget is sufficient, an exact disposition-changing target is named, and the
+work adds a genuine new mechanism, invariant, construction, correction,
+combination or refinement. A blocked route reopens only for such new content.
+Rewording a gap, generic search or another citation is insufficient. The
+mechanical gate checks this record; eligibility does not itself dispatch work.
+The admission binds the prior disposition snapshot and complete planned
+assignment semantics. Before dispatch, planned Scout sources must remain inside
+the explicitly frozen source set, and planned Innovator purpose, target family,
+parent lineage, mechanism and claim must agree with the admission, collaboration
+brief and current registry. A prospective conjecture uses the next canonical
+version, and planned Innovators collectively cover the exact admitted parent
+set; each refinement carries its own immediate predecessor. A completed later cohort retains that admission and its fingerprint, and must match both exactly.
+Completed-admission validation replays the conjecture registry visible before
+that cohort; current or future versions cannot legalize a skipped successor or
+serve as a historical parent.
+
+Every mechanism-level conjecture must name its stochastic-game and information
+objects, membership process, temporal clocks where relevant, strategic policy
+dependence, estimand, strongest simple null, counterexample, discriminator,
+lineage and replacement ledger. Module accumulation without a unique
+mathematical defect and separating prediction fails closed.
+
+Stop when the confirmed campaign completion condition or any stop condition is
+met, a required remaining action exceeds budget, or no disposition-changing
+in-scope cohort exists. Return the audited synthesis or exact residual gaps.
+The synthesis preserves every cohort's family-disposition snapshot in order.
+An applied Critic correction creates a versioned conjecture successor with the
+corrected conjecture as a parent; non-conjecture corrections remain unresolved
+or conflicting rather than claiming untraceable application.
+Do not contact External Pro, assign implementation, authorize compute, promote
+into CDC state or reinterpret advisory output as formal project science.
