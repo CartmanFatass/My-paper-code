@@ -405,9 +405,17 @@ try {
     $fixtureCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
     $artifactPath = Join-Path $tempRoot 'exercise/artifact.json'
     $phaseArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$artifactPath'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
+    $phaseTimeouts = [ordered]@{
+        interface_smoke = 60
+        bounded_exercise = 1200
+        artifact_validation = 300
+        artifact_reload = 300
+        evaluate_entry = 300
+        analyze_entry = 300
+    }
     $phases = [ordered]@{}
     foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-        $phases[$phase] = [ordered]@{ argv = $phaseArgv; timeout_seconds = 10 }
+        $phases[$phase] = [ordered]@{ argv = $phaseArgv; timeout_seconds = $phaseTimeouts[$phase] }
     }
     $spec = [ordered]@{
         schema_version = 1
@@ -424,6 +432,29 @@ try {
     [IO.File]::WriteAllText($specPath, ($spec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
     Push-Location $tempRoot
     try {
+        $rejectedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+        $rejectedRoot = Join-Path $tempRoot 'combined-timeout-rejected-exercise'
+        $rejectedSpec.exercise_root = $rejectedRoot
+        $rejectedArtifact = Join-Path $rejectedRoot 'artifact.json'
+        $rejectedSpec.expected_artifacts = @($rejectedArtifact)
+        $rejectedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$rejectedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
+        foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
+            $rejectedSpec.phases.$phase.argv = $rejectedArgv
+        }
+        $rejectedSpec.phases.analyze_entry.timeout_seconds = 301
+        $rejectedSpecPath = Join-Path $tempRoot 'combined-timeout-rejected-spec.json'
+        [IO.File]::WriteAllText($rejectedSpecPath, ($rejectedSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $savedRejectedPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $rejectedOutput = & $registeredPython $readinessScriptPath run --spec $rejectedSpecPath 2>&1
+        $ErrorActionPreference = $savedRejectedPreference
+        if ($LASTEXITCODE -eq 0 -or ($rejectedOutput -join ' ') -notmatch 'combined phase timeout exceeds 2460 seconds') {
+            throw "Execution-readiness wrapper did not reject a 2461-second combined timeout: $($rejectedOutput -join ' ')"
+        }
+        if (Test-Path -LiteralPath $rejectedRoot) {
+            throw 'Combined-timeout rejection created a phase root before validation completed'
+        }
+
         $runOutput = & $registeredPython $readinessScriptPath run --spec $specPath
         if ($LASTEXITCODE -ne 0 -or $runOutput -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
             throw 'Execution-readiness run did not create a successful candidate receipt'

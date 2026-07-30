@@ -23,7 +23,7 @@ PHASES = (
     "analyze_entry",
 )
 MAX_SMOKE_SECONDS = 60
-MAX_TOTAL_SECONDS = 1200
+MAX_TOTAL_SECONDS = 2460
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
