@@ -1575,10 +1575,25 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
         # The other half of the reproduction key. A world is regenerable from
         # (this hash, this seed), never from the seed alone.
         "pinned_coordinate_hash": pinned,
-        # True means: rebuilding this episode at the same pinned topology and the
-        # same `user_world_seed` reproduces this fingerprint. False means the
-        # fingerprint still proves which world the episode ran in, but the world
-        # came from construction-time state and cannot be regenerated.
+        # True means: the pinned topology hash was set AND the seed this record
+        # names is the seed the world generator actually applied. False means the
+        # world came from construction-time state with no seed control at all.
+        #
+        # IT DOES NOT MEAN THE FINGERPRINT IS REPRODUCIBLE, and it used to say it
+        # did. MEASURED 2026-07-29: topology 20260736 / calibration / episode 0,
+        # at identical `pinned_coordinate_hash`, identical `user_world_seed`,
+        # identical `n_users`, and `seed_controls_generation` True on every side,
+        # produced THREE fingerprints -- local `d700a69e`, run 30403322062
+        # `b5007214`, run 30479940700 `6307c329`. The two cloud runs disagree on
+        # 3 of 8 topologies with numpy and python hard-pinned. Ruled out by
+        # measurement: code change, construction order, PYTHONHASHSEED, global
+        # RNG state, and the pooler.
+        #
+        # So this flag is a seed-APPLICATION witness, which is what it computes.
+        # Within one run it proves which world an episode ran in -- the job it was
+        # built for. It does not license regenerating that world elsewhere.
+        # See docs/research/cdc/EVIDENCE_NOTES/
+        #     20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md
         "seed_controls_generation": bool(controls),
     }
 
@@ -4831,12 +4846,18 @@ def assemble_audit_result(topology_results: list[dict], topology_hash_failures: 
     }
 
     # R3 section E: episode-world provenance. `all_seed_controlled` is the
-    # readable verdict -- False means at least one episode ran in a world that
-    # cannot be regenerated, so that episode's contrast is in the same position
+    # readable verdict -- False means at least one episode ran in a world with no
+    # seed control at all, so that episode's contrast is in the same position
     # ep64 was in and must not be read as matched causal evidence. It is
     # reported rather than gated: the run is still a valid record of what
     # happened, and whether incomplete provenance retires a reading is a
     # scientific call, not an instrument one.
+    #
+    # True does NOT mean the worlds are reproducible. Two runs of this population
+    # both reported True over 128/128 episodes while disagreeing about 3 of 8
+    # topologies' worlds -- see `seed_controls_generation` above for the
+    # measurement. Read this as "every episode's world was seed-applied", never as
+    # "this run can be regenerated".
     episode_worlds_all = [w for r in topology_results for w in r.get("episode_worlds", [])]
     out["episode_world_provenance"] = {
         "all_seed_controlled": all(

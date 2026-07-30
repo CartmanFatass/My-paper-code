@@ -1,5 +1,18 @@
 # Step H returned, mechanically clean, and it still cannot close round 4
 
+> **READ WITH ITS RESOLUTION --
+> `20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md`.** Two things in this note
+> were later corrected by measurement:
+>
+> 1. The probe in "MEASURED: the branch fires on this population" rolled the
+>    **wrong seed namespace** and its verdict is VOID. `rejoin_events = 0` on the
+>    real R4 population.
+> 2. The **contamination charge against H is withdrawn.** H's focal events are
+>    bit-identical to the post-repair re-run's on all eight topologies.
+>
+> What stands: H carries no rejoin field, so it could never have answered this
+> about itself, and the re-run was necessary to settle it either way.
+
 Date: 2026-07-29
 Run: `30403322062`, tag `d7s-audit-3`, head `a00612ad`, branch `d7s-audit-3`
 Artifacts: 8 shard artifacts `d7s-shard-20260734 .. 20260741`
@@ -72,7 +85,46 @@ last_charging_arrival >= 0 entries   49
 
 Charging occurs 49 times across the R4 population within the registered horizon.
 
-### MEASURED, 2026-07-29: the branch fires on this population
+### WITHDRAWN, 2026-07-29: this probe measured the wrong population
+
+**Everything from here to the end of this section is void.** The probe derived
+its episode, energy and user-world seeds without passing `contract_id`.
+`_derived_seed` and `user_world_seed` both default to the module `CONTRACT_ID`
+(R3's namespace), while every R4 driver passes `R4_POPULATION_NAMESPACE`
+explicitly. The probe therefore rolled **R3-namespace episodes at R4 topology
+coordinates** -- a different population. Measured, all three seeds, topology
+20260739 / audit / episode 0:
+
+```text
+                 default (R3) namespace   R4 namespace
+episode_seed     1688249791               37629764
+energy_seed      978540538                1548591420
+user_world_seed  6943297548021737841      2189845897274172325
+```
+
+Not a near miss: every derived seed differs. The three REJOIN events it found
+are real events in episodes **no R4 artifact contains**, so they say nothing
+about whether the branch fires on the R4 population.
+
+Nothing caught it because the namespace was never printed and derived seeds are
+opaque integers either way. Closed in
+`scripts/d7_s_r4_rejoin_exposure_probe.py`: the R4 namespace is now the default,
+rolling the R4 population under any other namespace is REFUSED, the namespace is
+printed and recorded in `--out`, and `tests/d7_s_r4_probe_namespace_test.py`
+pins all of it -- both guards watched failing under paired-negative mutation.
+
+The corrected answer, and H's actual disposition, is in
+`20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md`. In short:
+`rejoin_events = 0` across the whole R4 population over 111,433 rolled steps,
+and H's recorded focal events are bit-identical to the post-repair re-run's on
+all eight topologies. **The contamination charge against H is withdrawn** -- by
+measurement, not by argument.
+
+The reasoning the void section rests on was not wrong, and is worth keeping: a
+roll with zero REJOIN events runs identical code before and after the repair, so
+a count IS decisive about H. Only the population it was counted on was wrong.
+
+### VOID -- original claim, retained because it is cited above
 
 `scripts/d7_s_r4_rejoin_exposure_probe.py` settles it without a formal re-run.
 The repair's scope is Pro's (b1), the REJOIN branch, plus a universal final
@@ -121,25 +173,38 @@ estimate spans all eight.
 
 ### What is established, and what is not
 
-- **Established.** H predates the repair. Charging occurred 49 times. The REJOIN
-  branch is reachable and reached on the R4 population -- 3 events across
-  20260739 and 20260741 under the probe above. H is otherwise mechanically clean.
-- **NOT established.** That a double assignment produced a *different recorded
-  number* in H. Reaching the branch is not the same as the duplication surviving
-  into a certified limb; establishing that would need the pre-repair code re-run
-  under instrumentation, which is not worth it when the re-run is needed anyway.
+**SUPERSEDED 2026-07-29 by the re-run.** The two bullets below were written when
+the only evidence about reachability was the void probe. Corrected:
 
-The burden runs the other way regardless. A conclusion-bearing artifact must be
-able to show the invariant held, and this one cannot -- it records `leaves`,
-`planned_leaves_observed`, `leaves_before_deadline`, `uav_charging` and
-`last_charging_arrival`, and **no rejoin field at all**. "The defect probably did
-not fire" is not a property an immutable JSON can be given after the fact, and
-here the measurement says it very likely did. This is the same
-disposition `CURRENT_WORK` already carries for the earlier R4 artifact --
-`INVALID_R4_REALIZATION: DUTY_ASSIGNMENT_NOT_EXECUTABLY_WELL_DEFINED`, citable
-only as a descriptive external-return observation of the historical code paths --
-reached here independently, from the commit graph and the artifacts, rather than
-inherited.
+- **Established.** H predates the repair, and charging occurred 49 times. But the
+  REJOIN branch is **not** reached on the R4 population: the re-run measured
+  `rejoin_events = 0` across all eight topologies over 111,433 rolled steps with
+  225,048 injectivity checks and zero refusals. H is mechanically clean and its
+  focal events are bit-identical to the post-repair re-run's on all eight
+  topologies.
+- **Therefore.** The defective branch never executed on these episodes, so H's
+  trajectories are the trajectories the repaired code produces. The
+  contamination charge is withdrawn.
+
+The original bullets, void, for the record:
+
+> - **Established.** H predates the repair. Charging occurred 49 times. The
+>   REJOIN branch is reachable and reached on the R4 population -- 3 events
+>   across 20260739 and 20260741 under the probe above. H is otherwise
+>   mechanically clean.
+> - **NOT established.** That a double assignment produced a *different recorded
+>   number* in H. Reaching the branch is not the same as the duplication
+>   surviving into a certified limb.
+
+One paragraph of the original reasoning survives intact and is worth keeping,
+because it is why the re-run was right to launch regardless of how the charge
+resolved: a conclusion-bearing artifact must be able to show the invariant held,
+and H cannot -- it records `leaves`, `planned_leaves_observed`,
+`leaves_before_deadline`, `uav_charging` and `last_charging_arrival`, and **no
+rejoin field at all**. "The defect did not fire" is not a property an immutable
+JSON can be given after the fact. It took a *different* artifact, carrying the
+instrument, to answer it. That the answer exonerates H does not mean H could have
+been read as exonerated on its own.
 
 `PART_A_CONTRADICTION` is not rewritten and the shard JSONs stay immutable.
 

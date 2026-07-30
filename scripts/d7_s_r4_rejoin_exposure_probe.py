@@ -39,13 +39,41 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import audit_d7_s_event_aligned as audit  # noqa: E402
 
 
-def roll_one_episode(config, *, topology_seed, coords, coord_hash, idx, block, max_steps):
+def assert_namespace_matches_population(topologies, contract_id: str) -> None:
+    """Refuse to roll the R4 topologies under any namespace but R4's.
+
+    THE DEFECT THIS EXISTS FOR (2026-07-29). `_derived_seed` and
+    `user_world_seed` both take `contract_id` and both DEFAULT to the module
+    `CONTRACT_ID` (R3's namespace). The R4 drivers pass
+    `R4_POPULATION_NAMESPACE` explicitly; the first version of this probe did
+    not, so it rolled R3-namespace episodes at R4 topology COORDINATES -- a
+    different population entirely -- and reported `R4_REJOIN_PROBE_FIRED` about
+    it. Every seed differed. The verdict was measured on episodes no R4
+    artifact contains.
+
+    Nothing caught it because the namespace was never printed and the seeds
+    looked plausible either way. A default that is silently wrong for this
+    script's only intended population is a trap, so it is refused here rather
+    than defaulted around.
+    """
+    if set(topologies) == set(audit.TOPOLOGY_SEEDS_R4) and contract_id != audit.R4_POPULATION_NAMESPACE:
+        raise SystemExit(
+            f"REFUSED: rolling the frozen R4 population under contract_id "
+            f"{contract_id!r}, not {audit.R4_POPULATION_NAMESPACE!r}. Those are "
+            f"different episodes -- every derived seed differs -- so the result "
+            f"would not be about the R4 population at all. Pass "
+            f"--contract-id {audit.R4_POPULATION_NAMESPACE} or a topology set "
+            f"that is not the R4 population.")
+
+
+def roll_one_episode(config, *, topology_seed, coords, coord_hash, idx, block, max_steps,
+                      contract_id: str):
     ep_seed = audit._derived_seed(topology_seed=topology_seed, block=block,
-                                  idx=idx, tag="episode_seed")
+                                  idx=idx, tag="episode_seed", contract_id=contract_id)
     en_seed = audit._derived_seed(topology_seed=topology_seed, block=block,
-                                  idx=idx, tag="energy_seed")
+                                  idx=idx, tag="energy_seed", contract_id=contract_id)
     uw_seed = audit.user_world_seed(topology_seed=topology_seed, block=block,
-                                    episode_index=idx)
+                                    episode_index=idx, contract_id=contract_id)
     env = audit.build_pinned_env(config, episode_seed=ep_seed, coords=coords,
                                  coord_hash=coord_hash, energy_stage="S3",
                                  user_world_seed=uw_seed)
@@ -82,8 +110,12 @@ def main() -> int:
                     default=list(audit.TOPOLOGY_SEEDS_R4))
     ap.add_argument("--episodes", type=int, default=2)
     ap.add_argument("--steps", type=int, default=audit.T_E_MAX)
+    ap.add_argument("--contract-id", default=audit.R4_POPULATION_NAMESPACE,
+                    help="seed namespace; must be R4's when rolling the R4 population")
     ap.add_argument("--out", default=None)
     args = ap.parse_args()
+
+    assert_namespace_matches_population(args.topologies, args.contract_id)
 
     config = audit.build_config()
     totals = {"rejoins": 0, "leaves": 0, "charging_steps": 0, "steps": 0,
@@ -91,13 +123,15 @@ def main() -> int:
     rows = []
     print(f"R4 rejoin-exposure probe -- {len(args.topologies)} topologies x "
           f"{args.episodes} episodes x up to {args.steps} steps")
+    # Printed because its absence is exactly what hid the namespace defect.
+    print(f"contract_id / seed namespace: {args.contract_id}")
     for seed in args.topologies:
         coords, coord_hash = audit.build_topology_template(config, topology_seed=seed)
         for block in ("calibration", "audit"):
             for idx in range(args.episodes):
                 s = roll_one_episode(config, topology_seed=seed, coords=coords,
                                      coord_hash=coord_hash, idx=idx, block=block,
-                                     max_steps=args.steps)
+                                     max_steps=args.steps, contract_id=args.contract_id)
                 s.update({"topology_seed": seed, "block": block, "episode_index": idx})
                 rows.append(s)
                 for k in totals:
@@ -141,7 +175,9 @@ def main() -> int:
     if args.out:
         with open(args.out, "w", encoding="utf-8") as fh:
             json.dump({"verdict": verdict, "totals": totals, "rows": rows,
-                       "episodes": args.episodes, "max_steps": args.steps}, fh, indent=2)
+                       "episodes": args.episodes, "max_steps": args.steps,
+                       "contract_id": args.contract_id,
+                       "topologies": list(args.topologies)}, fh, indent=2)
         print(f"\nwrote {args.out}")
     print(f"\n{verdict}")
     return 0
