@@ -44,7 +44,7 @@ randomness, source feasibility, access/utility, ownership/permutation
 certificates, and result-sensitive gates. Explain what must be held out and
 what claims remain excluded.
 
-Required response sections and exact disposition token:
+## Required response sections and exact disposition token
 
 1. `G0_DESIGN_CONFORMANCE`
 2. `G0_SCIENTIFIC_BOUNDARY`
@@ -53,6 +53,8 @@ Required response sections and exact disposition token:
 5. `G0_EVIDENCE_AND_FIRST_MATCH_GATES`
 6. `G0_NEXT_BOUNDARY`
 7. `G0_DESIGN_DISPOSITION`
+
+## Disposition values
 
 Return exactly one final token in section 7:
 
