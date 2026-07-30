@@ -1,0 +1,34 @@
+# Shared source manifest: G51 formal result
+
+```text
+round=20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review
+source_commit=ce6ed8659c480ca2779155b2871dc82b89fa0e95
+execution_code_commit=fa52274bdc6d90c79ef1658cd5c060046f113692
+aligned_implementation_commit=188b210975a0f243ae34318d658fbf943d1d63ab
+alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
+formal_run_root=logs/formal_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_cpu_20260729_ce6ed86_r1
+preflight_root=logs/nonformal_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_cpu_20260729_ce6ed86_r1
+```
+
+Allow-listed paths only:
+
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review/00_REVIEW_BRIEF.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review/01_SHARED_SOURCE_MANIFEST.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review/20_PRO_OPEN_QUESTION.md`
+- `docs/research/cdc/EVIDENCE_NOTES/20260729_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_FORMAL_RESULT.md`
+- `docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_CODE_SCIENCE_INDEX.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_design_assertion_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_audit/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_artifact_contract_clarification/21_PRO_OPEN_RAW.md`
+- `docs/research/cdc/CONJECTURES.md`
+- `docs/research/cdc/IDEA_PORTFOLIO.md`
+- `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `.agents/roles/EXTERNAL_PRO.md`
+- `ha_ctse_process/continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51.py`
+- `scripts/run_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51.py`

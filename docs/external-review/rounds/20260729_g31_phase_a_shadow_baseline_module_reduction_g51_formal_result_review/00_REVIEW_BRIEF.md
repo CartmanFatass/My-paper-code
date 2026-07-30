@@ -1,0 +1,24 @@
+# External Pro review brief: G51 formal result
+
+```text
+round=20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review
+review_type=FORMAL_RESULT_SCIENTIFIC_DISPOSITION
+source_commit=ce6ed8659c480ca2779155b2871dc82b89fa0e95
+execution_code_commit=fa52274bdc6d90c79ef1658cd5c060046f113692
+aligned_implementation_commit=188b210975a0f243ae34318d658fbf943d1d63ab
+alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
+formal_run_root=logs/formal_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_cpu_20260729_ce6ed86_r1
+preflight_root=logs/nonformal_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_cpu_20260729_ce6ed86_r1
+registered_branch=G51_FORMAL_RESULT_DISPOSITION_PENDING_EXTERNAL_PRO
+compute_budget=zero_for_review
+scientific_iteration_cost_already_paid=one
+answer_now=forbidden
+completion=natural_only
+```
+
+Research Operations Manager has mechanically validated the terminal artifacts
+and records them in the allow-listed evidence note. External Pro alone decides
+the scientific claim ceiling, CDC/portfolio edits, and whether one next action
+is supported. This is a CPU-only toy-environment structural formal result; it
+is not a UAV deployment result, a population-statistical claim, or permission
+to reactivate abandoned G33.
