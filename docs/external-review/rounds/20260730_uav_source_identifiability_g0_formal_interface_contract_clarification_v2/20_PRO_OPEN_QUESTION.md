@@ -57,3 +57,19 @@ result-sensitive field cannot be frozen without scientific invention, return
 `G0_FORMAL_INTERFACE=HOLD` and list only those exact missing fields. Do not
 propose compute, redesign, a new control, threshold, estimator, geometry,
 ownership rule, or successor action.
+
+The complete evidence allow-list is:
+
+- `docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md`
+- `docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_executable_contract_addendum_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_admission_review/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_clarification/21_PRO_OPEN_RAW.md`
+- `ha_ctse_process/uav_source_identifiability_g0.py`
+- `scripts/run_uav_source_identifiability_g0.py`
+- `tests/ha_ctse_process_uav_source_identifiability_g0_test.py`
+- `tests/run_uav_source_identifiability_g0_test.py`
