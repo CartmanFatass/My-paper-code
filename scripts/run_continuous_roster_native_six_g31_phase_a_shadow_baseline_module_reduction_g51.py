@@ -47,12 +47,12 @@ ACCEPTED_PREDECESSOR_SOURCE_COMMIT = (
     "044d9690fa19aa07b8e68bf5cbb2a159c19be8c1"
 )
 
-# G51 is an unaligned code candidate.  No token or source/stage value in this
-# file can authorize formal execution; a later independently reviewed binding
-# must change that boundary in a separate assignment.
+# The independently reviewed G51 implementation and correction-recheck stage
+# are bound here.  The scientific contract still supplies no formal
+# authorization token, so this identity binding cannot admit formal execution.
 AUTHORIZATION_TOKEN: None = None
-ALIGNED_IMPLEMENTATION_COMMIT: None = None
-ALIGNMENT_STAGE_COMMIT: None = None
+ALIGNED_IMPLEMENTATION_COMMIT = "188b210975a0f243ae34318d658fbf943d1d63ab"
+ALIGNMENT_STAGE_COMMIT = "aa756dcd06a2ea622c155f2983a89bb5d76e9d80"
 ALIGNMENT_AUDIT_ID = (
     "CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_"
     "REDUCTION_G51_CODE_SCIENCE_ALIGNMENT_AUDIT"
@@ -1391,10 +1391,10 @@ def source_controls() -> dict[str, object]:
         "reference_arm": source.REFERENCE_ARM,
         "reduced_arm": source.REDUCED_ARM,
         "first_match_order": list(FIRST_MATCH_ORDER),
-        "formal_alignment_status": "UNALIGNED_FAIL_CLOSED",
+        "formal_alignment_status": "ALIGNED_IDENTITY_BOUND_AUTHORIZATION_CLOSED",
         "formal_authorization_token": None,
-        "aligned_implementation_commit": None,
-        "alignment_stage_commit": None,
+        "aligned_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
+        "alignment_stage_commit": ALIGNMENT_STAGE_COMMIT,
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_python_fallback": False,
         "K_search": 0,
@@ -1750,15 +1750,19 @@ def _formal_admission_errors(
     aligned_source_commit: str | None,
     alignment_stage_commit: str | None,
 ) -> list[str]:
-    del (
-        source_commit,
-        authorization_token,
-        preflight_root,
-        alignment_disposition,
-        aligned_source_commit,
-        alignment_stage_commit,
-    )
-    return ["G51 formal execution requires an independently ALIGNED source"]
+    del source_commit, authorization_token, preflight_root
+    errors: list[str] = []
+    if ALIGNED_IMPLEMENTATION_COMMIT is None or ALIGNMENT_STAGE_COMMIT is None:
+        return ["G51 formal execution requires an independently ALIGNED source"]
+    if alignment_disposition != "ALIGNED":
+        errors.append("G51 formal alignment disposition is not ALIGNED")
+    if aligned_source_commit != ALIGNED_IMPLEMENTATION_COMMIT:
+        errors.append("G51 formal aligned source identity mismatch")
+    if alignment_stage_commit != ALIGNMENT_STAGE_COMMIT:
+        errors.append("G51 formal alignment stage identity mismatch")
+    if AUTHORIZATION_TOKEN is None:
+        errors.append("G51 formal authorization token is not bound")
+    return errors
 
 
 # Keep the new source coupling in this small adapter block.  The proof entry

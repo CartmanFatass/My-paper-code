@@ -18,11 +18,12 @@ reference_arm=G50_FRESH_SINGLE_IMMEDIATE_WITH_PHASE_A_SHADOW_BASELINE
 reduced_arm=G50_FRESH_SINGLE_IMMEDIATE_WITHOUT_PHASE_A_BASELINE_MODULE
 implementation_commit=the_Git_commit_containing_this_index_and_all_four_G51_code_test_paths
 alignment_audit_id=CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_CODE_SCIENCE_ALIGNMENT_AUDIT
-alignment_disposition=PENDING_INDEPENDENT_REVIEW
-aligned_implementation_commit=none
-alignment_stage_commit=none
+alignment_correction_recheck_round=20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck
+alignment_disposition=ALIGNED
+aligned_implementation_commit=188b210975a0f243ae34318d658fbf943d1d63ab
+alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
 formal_authorization_token=none
-formal_admission=FAIL_CLOSED_UNTIL_INDEPENDENT_ALIGNMENT_AND_SEPARATE_BINDING
+formal_admission=FAIL_CLOSED_UNTIL_SEPARATE_AUTHORIZATION_TOKEN_AND_EXECUTION_INTERFACE
 formal_compute_started=false
 nonformal_compute_started=false
 scientific_iteration_cost=zero
@@ -161,7 +162,7 @@ technical failure or a positive claim.
 | G51-WITNESS-09 | Design raw `EVIDENCE_AND_COMPLEXITY_DISPOSITION / Optional proof-sized numerical witness` | runner `::_configuration`; `::_materialize_source_bundle`; `::train` | One initialization, one shared 8×48 batch and exactly two passes per arm invoke the actual source kernel within four actor steps, zero bootstrap and the hard complexity ceiling. Collection binds ledger=`phase_A_ledger` and action=`phase_A_action`, while the gradient-probe seed is runtime-only. Fresh-root admission occurs before materialization. | runner configuration, stale-root, seed and lifecycle tests | Duplicate collection, seed-role collapse, compute before root admission, statistical inference, a replacement optimizer, hidden evaluation steps or expanded search cannot enter. |
 | G51-OUTCOME-10 | Design raw `EVIDENCE_AND_COMPLEXITY_DISPOSITION / Ordered result classes` | source `::optimize_phase_A_update`; `::_pre_step_semantic_coupling_detected`; `::_pre_step_numeric_difference_detected`; `::assess_structural_witness`; `::validate_structural_assessment`; runner `::record_terminal_assessment`; `::select_g51_result_branch`; `::analyze` | First match is exactly invalid, reconstructed semantic coupling, exact removability, then numerical unresolved. Pre-step coupling and numeric reasons are disjoint: zero coupling predicates plus a failed registered equality selects unresolved with zero actor steps. Source and runner independently reconstruct the branch from diagnostics and optimizer ledger. | source assessment/branch proof; runner `::test_frozen_first_match_order_and_tokens_are_exact`; `::test_source_assessed_adverse_lifecycles_are_terminal_and_zero_extra_work`; `::test_zero_coupling_pre_step_numeric_difference_is_unresolved_with_zero_steps`; partial/unknown failure rejection | Failure-reason text, a favorable stored branch or `D_G51` cannot manufacture coupling or exactness; partial updates, unknown errors and malformed evidence cannot be relabeled as scientific outcomes. |
 | G51-READINESS-11 | Code-PM execution-readiness contract | runner `::readiness_interface_smoke`; `::readiness_train`; `::readiness_validate`; `::readiness_reload`; `::readiness_evaluate`; `::readiness_analyze`; `::_run_distinct_proof_workers` | Smoke constructs the real pre-trajectory boundary with zero transitions/steps. Bounded exercise alone runs the authorized witness. Later phases add no optimizer steps or transitions. Two dedicated concurrently live spawn processes independently reload and validate the same artifacts; they do not rerun collection or optimization. | runner lifecycle, smoke and `::test_two_process_attestation_is_dedicated_spawn_and_not_a_second_witness` | A reused pool PID, a second scientific witness, phase replay, manual artifact trust or lower-level projection-only smoke cannot satisfy readiness. |
-| G51-AUTHORITY-12 | Design raw `EXECUTABLE_BOUNDARY`; router formal authority | runner `::AUTHORIZATION_TOKEN`; `::ALIGNED_IMPLEMENTATION_COMMIT`; `::ALIGNMENT_STAGE_COMMIT`; `::_formal_admission_errors`; `::train` | All three candidate authority constants are `None`; every formal request fails before run-root creation, model construction, trajectory collection or optimizer work. Nonformal/proof-only entry rejects every formal field. | runner formal fail-closed test | A source hash, stage hash, preflight, caller string or this code-science index cannot self-authorize formal execution. |
+| G51-AUTHORITY-12 | Formal-interface alignment-binding assignment; router formal authority | runner `::AUTHORIZATION_TOKEN`; `::ALIGNED_IMPLEMENTATION_COMMIT`; `::ALIGNMENT_STAGE_COMMIT`; `::source_controls`; `::_formal_admission_errors`; `::train` | The runner binds exactly the independently ALIGNED correction target `188b2109...` and correction-recheck stage `aa756dcd...`. The scientific contract supplies no formal authorization token, so every formal request still fails before run-root creation, model construction, trajectory collection or optimizer work; nonformal/proof-only CLI rejects every formal field. | runner `::test_configuration_provenance_and_formal_admission_are_fail_closed`; CLI formal-field guard | A caller-selected target/stage, package/archive commit, invented token, preflight path or this index cannot self-authorize formal execution. |
 | G51-ISOLATION-13 | Assignment protected predecessor semantics | source/runner read-only `g50` dependency | G51 adds new paths and does not mutate G47, G49 or G50 arm names, source identities, optimizers, RNG, artifacts, formal gates or accepted results. | runner `::test_g51_import_leaves_g50_identity_unchanged`; protected predecessor checks | Global monkey-patching or cross-direction identity leakage cannot alter the supported G50 line. |
 
 Because the accepted PyTorch backward/Adam kernel is exercised by this
@@ -195,9 +196,11 @@ the accepted G50 formal result.
 ## Next boundary
 
 ```text
-CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_CODE_SCIENCE_ALIGNMENT_AUDIT
+CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_FORMAL_EXECUTION_INTERFACE
 ```
 
-Formal admission remains closed. This implementation, its tests, its mandatory
-proof-sized actual-kernel witness, and this index supply no authorization token,
-aligned source identity or alignment-stage identity.
+The independently ALIGNED implementation and stage are now bound. Formal
+admission remains closed because neither the frozen G51 contract nor this
+binding assignment supplies an authorization token or a conclusion-bearing
+same-source preflight interface. This implementation, its tests, its mandatory
+proof-sized actual-kernel witness and this index cannot supply that authority.

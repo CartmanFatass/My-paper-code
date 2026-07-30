@@ -157,17 +157,42 @@ def test_configuration_provenance_and_formal_admission_are_fail_closed(
         "4df41063d077ace7e0c9212e0cbadbf56e1be4b7"
     )
     assert runner.AUTHORIZATION_TOKEN is None
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "188b210975a0f243ae34318d658fbf943d1d63ab"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "aa756dcd06a2ea622c155f2983a89bb5d76e9d80"
+    )
+    assert controls["formal_alignment_status"] == (
+        "ALIGNED_IDENTITY_BOUND_AUTHORIZATION_CLOSED"
+    )
+    assert controls["aligned_implementation_commit"] == (
+        runner.ALIGNED_IMPLEMENTATION_COMMIT
+    )
+    assert controls["alignment_stage_commit"] == runner.ALIGNMENT_STAGE_COMMIT
     assert runner._formal_admission_errors(
         source_commit=TEST_SOURCE_COMMIT,
         authorization_token="invented",
         preflight_root=tmp_path,
         alignment_disposition="ALIGNED",
-        aligned_source_commit=TEST_SOURCE_COMMIT,
+        aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+        alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
+    ) == ["G51 formal authorization token is not bound"]
+    wrong_binding_errors = runner._formal_admission_errors(
+        source_commit=TEST_SOURCE_COMMIT,
+        authorization_token="invented",
+        preflight_root=tmp_path,
+        alignment_disposition="MISMATCH",
+        aligned_source_commit="3" * 40,
         alignment_stage_commit="4" * 40,
-    ) == ["G51 formal execution requires an independently ALIGNED source"]
-    with pytest.raises(ValueError, match="independently ALIGNED"):
+    )
+    assert wrong_binding_errors == [
+        "G51 formal alignment disposition is not ALIGNED",
+        "G51 formal aligned source identity mismatch",
+        "G51 formal alignment stage identity mismatch",
+        "G51 formal authorization token is not bound",
+    ]
+    with pytest.raises(ValueError, match="authorization token is not bound"):
         runner.train(
             run_root=tmp_path / "formal",
             source_commit=TEST_SOURCE_COMMIT,
@@ -175,8 +200,8 @@ def test_configuration_provenance_and_formal_admission_are_fail_closed(
             authorization_token="invented",
             preflight_root=tmp_path,
             alignment_disposition="ALIGNED",
-            aligned_source_commit=TEST_SOURCE_COMMIT,
-            alignment_stage_commit="4" * 40,
+            aligned_source_commit=runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            alignment_stage_commit=runner.ALIGNMENT_STAGE_COMMIT,
         )
     assert not (tmp_path / "formal").exists()
     implementation = inspect.getsource(runner._materialize_source_bundle)
