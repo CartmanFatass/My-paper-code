@@ -1,0 +1,18 @@
+# Shared source manifest
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+source_kind=zero_compute_G0_contract_clarification
+prior_evidence_commit=14f1303d2aabc5282c9c2e4e7764c13e58c1b515
+
+allow_list=
+docs/external-review/rounds/20260730_uav_g0_oracle_safety_information_contract_clarification/00_REVIEW_BRIEF.md
+docs/external-review/rounds/20260730_uav_g0_oracle_safety_information_contract_clarification/01_SHARED_SOURCE_MANIFEST.md
+docs/external-review/rounds/20260730_uav_g0_oracle_safety_information_contract_clarification/20_PRO_OPEN_QUESTION.md
+docs/external-review/rounds/20260730_uav_g0_oracle_safety_information_contract_clarification/21_PRO_OPEN_RAW.md
+docs/external-review/rounds/20260730_uav_g0_oracle_safety_information_contract_clarification/50_MECHANICAL_INTAKE_RECORD.md
+
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from prior_evidence_commit.
+compute_budget=zero
+scientific_iteration_cost=zero
+answer_now=forbidden
