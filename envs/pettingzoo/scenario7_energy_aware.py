@@ -1,7 +1,23 @@
+import hashlib
+
 import numpy as np
 from gymnasium.spaces import Box, Dict
 
 from envs.pettingzoo.scenario_base import UAVForcedRelayEnv
+
+
+class PostPinRandomnessError(RuntimeError):
+    """Raised when the canonical post-pin initialization barrier moved the
+    environment RNG.
+
+    The barrier exists to be runnable at an arbitrary point after a replayed
+    world is installed. If it drew, every arm continuation forked afterwards
+    would be offset by however many draws it happened to take, so the repair
+    would corrupt exactly the streams it is meant to leave alone. This is
+    raised rather than repaired by save/restore: a save/restore would hide a
+    genuine finding -- that some initialization work is not a pure function of
+    the final inputs -- behind an assertion that then always passes.
+    """
 
 
 class _EnergyAwareConfigProxy:
@@ -440,14 +456,25 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
 
     def reset(self, seed=None, options=None):
         observations, infos = super().reset(seed=seed, options=options)
+        # The two RNG-consuming, input-producing steps: the station geometry and
+        # the initial battery draw. They are episode INPUTS, not derived state,
+        # so they sit outside the barrier -- a replay that already carries
+        # registered coordinates and a registered energy profile must not redraw
+        # them, and the barrier must be callable without consuming randomness.
         self._init_charging_stations()
-        self._reset_energy_state()
+        self._draw_initial_battery_ratios()
 
-        observations = {agent: self._get_observation(agent) for agent in self.agents}
-        observations = self._update_observations_dict(observations)
+        # Everything reset derives once the world is final runs through the
+        # barrier, so `reset` and a post-pin replay execute THE SAME code path.
+        # This is what stops the recompute set from being a hand-maintained list
+        # that silently drifts from what initialization actually does: a step
+        # added to `_post_pin_initialization_steps` runs in both places, and a
+        # step added anywhere else does not run in `reset` either, which the
+        # scenario 7 suite notices immediately.
+        report = self.canonicalize_post_pin_initialization()
+        observations = report["observations"]
 
-        current_state = self._get_state()
-        self.state = current_state
+        current_state = self.state
         reset_metrics = self._energy_metrics_dict()
         reset_metrics.update(self._episode_safety_metrics())
         reset_metrics.update({
@@ -466,7 +493,14 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
             infos[agent]["reward_info"] = dict(reset_metrics)
         return observations, infos
 
-    def _reset_energy_state(self):
+    def _draw_initial_battery_ratios(self):
+        """The episode's initial energy INPUT. The only randomness reset's
+        energy initialization consumes, split out so the rest of that
+        initialization can be re-run at the post-pin barrier without drawing.
+
+        An audit that installs a registered energy permutation overwrites this
+        array afterwards; the barrier then re-derives everything downstream of
+        it."""
         if self.battery_enabled:
             low, high = self.initial_battery_ratio_range
             self.uav_battery_ratios = self.np_random.uniform(low, high, size=self.n_uavs).astype(float)
@@ -474,6 +508,17 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         else:
             self.uav_battery_ratios = np.ones(self.n_uavs, dtype=float)
 
+    def _reset_derived_energy_state(self):
+        """Every energy-side quantity reset derives once the world and the
+        battery array are final. Consumes no randomness.
+
+        This body was not copied out of `reset`; `reset` reaches it through the
+        same barrier a replay does. `last_min_station_distance_before/after`,
+        `uav_return_threshold_ratios`, `uav_return_energy_margins` and
+        `current_graph_potential` all live here, and all four were measured
+        stale after a pinned rebuild precisely because nothing re-entered this
+        code once the registered coordinates replaced the construction-time
+        ones."""
         self.uav_charging = np.zeros(self.n_uavs, dtype=bool)
         self.charging_wait_steps = np.zeros(self.n_uavs, dtype=int)
         self.uav_failure_timers = np.zeros(self.n_uavs, dtype=int)
@@ -526,6 +571,123 @@ class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
         self.last_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
         self.last_widest_backhaul_capacities_bps = np.zeros(self.n_uavs, dtype=float)
         self.last_constrained_reward_metrics = {}
+
+    def _refresh_public_views(self):
+        """Recompute the public decision-time surfaces: the per-agent
+        observations and the cached global `state`.
+
+        Both embed `uav_return_threshold_ratios` and `uav_return_energy_margins`
+        directly (`_energy_observation`, `_get_state`), so a stale energy
+        recompute reaches a policy input and not only a debugging cache."""
+        observations = {agent: self._get_observation(agent) for agent in self.agents}
+        observations = self._update_observations_dict(observations)
+        self.state = self._get_state()
+        return observations
+
+    def _post_pin_initialization_steps(self):
+        """THE definition of the derived-state initialization set, as an ordered
+        tuple of (name, bound method) executed by both `reset` and
+        `canonicalize_post_pin_initialization`.
+
+        Every entry is a method that already owns its computation. Nothing here
+        re-implements a field: the tuple names WHERE initialization happens, and
+        the methods decide WHAT it produces. That is why this is not the
+        hand-listed field set the ruling forbids -- adding a derived field to
+        `_reset_derived_energy_state` or to `_get_state` makes the barrier
+        recompute it with no edit here, and a derived field added outside these
+        six methods is not initialized by `reset` either.
+
+        The order mirrors `reset`: the connection/channel/routing surface is
+        rebuilt first (the energy recompute reads `routing_paths` and the
+        service potential reads the connection matrices), the energy-derived
+        state second, and the public views last, since they read both."""
+        return (
+            ("connection_baseline", self._reset_connection_baseline),
+            ("channel_state", self._update_channel_state),
+            ("uav_connections", self._update_uav_connections),
+            ("routing_paths", self._compute_routing_paths),
+            ("derived_energy_state", self._reset_derived_energy_state),
+            ("public_views", self._refresh_public_views),
+        )
+
+    def _np_random_state_token(self):
+        """A digest of the environment RNG's actual bit-generator state.
+
+        Tolerates both `RandomState` (what `reset(seed=)` installs) and
+        `Generator`. An unrecognized shape raises rather than returning a
+        constant, because a constant token would make the no-randomness
+        assertion below pass forever without ever reading the RNG."""
+        rng = getattr(self, "np_random", None)
+        if rng is None:
+            raise PostPinRandomnessError(
+                "canonicalize_post_pin_initialization cannot prove it consumed "
+                "no randomness: env has no 'np_random'")
+        getter = getattr(rng, "get_state", None)
+        if callable(getter):
+            parts = []
+            for item in getter():
+                arr = np.asarray(item)
+                parts.append(arr.tobytes() if arr.dtype != object
+                             else repr(item).encode("utf-8"))
+            return hashlib.sha256(b"".join(parts)).hexdigest()
+        bit_gen = getattr(rng, "bit_generator", None)
+        if bit_gen is not None:
+            return hashlib.sha256(repr(bit_gen.state).encode("utf-8")).hexdigest()
+        raise PostPinRandomnessError(
+            f"no RNG-state encoding for env.np_random of type {type(rng)!r}")
+
+    def canonicalize_post_pin_initialization(self):
+        """The canonical post-pin initialization barrier.
+
+        Once topology, world and initial energy are final, re-run every piece of
+        derived-state initialization from those final inputs, so the environment
+        carries no quantity computed against an earlier construction state.
+
+        The measured defect this closes: `build_pinned_env` resets the
+        environment, and only THEN restores the registered ground-BS and
+        charging-station coordinates. Everything reset derived in between --
+        station distances, return thresholds and margins, the graph service
+        potential, the cached `state` -- was computed against construction-time
+        coordinates drawn from unseeded OS entropy, and nothing recomputed it.
+        Two constructions with identical registered seeds therefore agreed on
+        all nine world arrays and on both coordinate arrays while disagreeing on
+        `full_state_fingerprint`.
+
+        Guarantees, each asserted rather than asserted-about:
+
+        * consumes no randomness -- the RNG state token is compared across the
+          whole barrier and a change raises `PostPinRandomnessError`;
+        * idempotent -- every step either overwrites derived state from the
+          final inputs or is preceded by `_reset_connection_baseline`, which
+          zeroes the lifecycle counters `_update_channel_state` would otherwise
+          accumulate into on a second pass;
+        * touches no registered input -- it never assigns `uav_positions`,
+          `user_positions`, `ground_bs_positions`, `charging_station_positions`,
+          `uav_battery_ratios`, or any seed.
+
+        Returns a report naming the steps recomputed, plus the freshly computed
+        observation dict for callers that need it (`reset` does).
+        """
+        rng_before = self._np_random_state_token()
+        outputs = {}
+        recomputed = []
+        for name, run_step in self._post_pin_initialization_steps():
+            outputs[name] = run_step()
+            recomputed.append(name)
+        rng_after = self._np_random_state_token()
+        if rng_after != rng_before:
+            raise PostPinRandomnessError(
+                "canonicalize_post_pin_initialization consumed randomness "
+                f"(RNG token {rng_before[:16]} -> {rng_after[:16]}). One of "
+                f"{recomputed} is not a pure function of the final registered "
+                "inputs; that is a finding about initialization, not something "
+                "to hide behind a save/restore.")
+        return {
+            "recomputed": tuple(recomputed),
+            "rng_state_unchanged": True,
+            "rng_state_token": rng_after,
+            "observations": outputs["public_views"],
+        }
 
     def step(self, actions):
         self._update_uav_failures()
