@@ -139,3 +139,67 @@ def test_the_same_runtime_override_is_labelled_not_silent(tmp_path) -> None:
     assert code == 0
     assert "WORLD_CONFORMANCE_PASS_SAME_RUNTIME_ALLOWED" in out
     assert "must not be cited as one" in out
+
+
+def _log_with_block(path, payload):
+    """A conformance.txt-shaped log: prose, then the block, then more prose."""
+    import json
+    path.write_text(
+        "nproc=4 nproc_all=4\n"
+        "  condition 1A same snapshot, same stream, identical   : True\n"
+        "  CLONE_CONFORMANCE_OK\n"
+        "\n=== D7_S_WORLD_DIGEST_BLOCK_BEGIN ===\n"
+        + json.dumps(payload)
+        + "\n=== D7_S_WORLD_DIGEST_BLOCK_END ===\n",
+        encoding="utf-8")
+    return str(path)
+
+
+def _payload(digests, runtime, seed=7):
+    return {
+        "runtime_identity": runtime,
+        "episode_world_provenance": {"episode_worlds": [{
+            "topology_seed": 20260734, "block": "audit", "episode_index": 0,
+            "episode_seed": 11, "user_world_seed": seed,
+            "pinned_coordinate_hash": "topo", "n_users": 3,
+            "fingerprint": "fp", "component_digests": dict(digests),
+        }]},
+    }
+
+
+def test_it_reads_the_block_embedded_in_a_log(tmp_path) -> None:
+    """The benchmark job uploads conformance.txt, not JSON. Requiring a separate
+    extraction step is a step someone forgets."""
+
+    a = _log_with_block(tmp_path / "a.txt", _payload(BASE, RUNTIME_A))
+    b = _log_with_block(tmp_path / "b.txt", _payload(BASE, RUNTIME_B))
+    code, out = _run(a, b)
+    assert code == 0
+    assert "WORLD_CONFORMANCE_PASS" in out
+
+
+def test_a_block_that_failed_to_build_is_not_an_agreement(tmp_path) -> None:
+    """The digest block swallows exceptions so it cannot redden a benchmark job.
+    That makes an ERROR payload possible, and it must never be read as 'the worlds
+    agreed' -- an empty comparison is the most dangerous kind of pass."""
+
+    import json
+    good = _log_with_block(tmp_path / "a.txt", _payload(BASE, RUNTIME_A))
+    bad = tmp_path / "b.txt"
+    bad.write_text(
+        "=== D7_S_WORLD_DIGEST_BLOCK_BEGIN ===\n"
+        + json.dumps({"world_digest_block_error": "ImportError: boom"})
+        + "\n=== D7_S_WORLD_DIGEST_BLOCK_END ===\n", encoding="utf-8")
+    code, out = _run(good, str(bad))
+    assert code != 0
+    assert "FAILED to build" in out
+    assert "WORLD_CONFORMANCE_PASS" not in out
+
+
+def test_a_log_without_a_block_is_refused(tmp_path) -> None:
+    plain = tmp_path / "a.txt"
+    plain.write_text("nproc=4\nCLONE_CONFORMANCE_OK\n", encoding="utf-8")
+    other = _log_with_block(tmp_path / "b.txt", _payload(BASE, RUNTIME_B))
+    code, out = _run(str(plain), other)
+    assert code != 0
+    assert "neither a JSON artifact nor a log" in out
