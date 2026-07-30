@@ -15,14 +15,17 @@ $reviewer = Get-Content -Raw -LiteralPath (
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
+$researchPrinciplesPath = Join-Path $repo '.codex/agents/hmasd-research-principles-analyst.toml'
 if (-not (Test-Path -LiteralPath $researchScoutPath) -or
     -not (Test-Path -LiteralPath $researchInnovatorPath) -or
-    -not (Test-Path -LiteralPath $researchCriticPath)) {
+    -not (Test-Path -LiteralPath $researchCriticPath) -or
+    -not (Test-Path -LiteralPath $researchPrinciplesPath)) {
     throw 'Independent research child profiles are missing'
 }
 $researchScout = Get-Content -Raw -LiteralPath $researchScoutPath
 $researchInnovator = Get-Content -Raw -LiteralPath $researchInnovatorPath
 $researchCritic = Get-Content -Raw -LiteralPath $researchCriticPath
+$researchPrinciples = Get-Content -Raw -LiteralPath $researchPrinciplesPath
 
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
@@ -38,11 +41,10 @@ foreach ($required in @(
     'model_reasoning_effort = "max"',
     'sandbox_mode = "read-only"',
     '.agents/roles/RESEARCH_INNOVATOR.md',
-    'research-methodology.md',
-    'RESEARCH_DIRECTION_PACKET',
-    'develop, refine,',
-    'combine or challenge',
-    'replacement ledger',
+    'research-methodology.md only for candidate_validation',
+    'ALGORITHM_INSPIRATION_PACKET',
+    'adapt, combine, develop',
+    'delete-retain-add ledger',
     'Do not force an affirmative result',
     'spawn children')) {
     if (-not $researchInnovator.Contains($required)) {
@@ -59,8 +61,8 @@ foreach ($required in @(
     'quality and provenance',
     'structured JSON',
     'PDF verification',
-    'campaign/cohort/brief identities',
-    'mechanism primitives')) {
+    'SOURCE_RESULT_PACKET',
+    'source absorption, not idea competition')) {
     if (-not $researchScout.Contains($required)) {
         throw "Research Scout profile missing: $required"
     }
@@ -72,16 +74,33 @@ foreach ($required in @(
     'sandbox_mode = "read-only"',
     '.agents/roles/RESEARCH_CRITIC.md',
     'research-methodology.md',
-    'only for scientific innovation, not evidence review',
+    'only for candidate_validation',
     'Metadata v2',
     'quality and provenance',
     'structured JSON',
     'PDF verification',
-    'SCOUT_EVIDENCE_PACKET or RESEARCH_DIRECTION_PACKET',
-    'target-specific checklist',
-    'immutable corrections')) {
+    'SOURCE_RESULT_PACKET',
+    'ALGORITHM_INSPIRATION_PACKET',
+    'RL_PRINCIPLE_ANALYSIS_PACKET',
+    'after constructive principles analysis',
+    'Formal proof and routine counterexample construction are not required')) {
     if (-not $researchCritic.Contains($required)) {
         throw "Research Critic profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-research-principles-analyst"',
+    'model = "gpt-5.6-sol"',
+    'model_reasoning_effort = "max"',
+    'sandbox_mode = "read-only"',
+    '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md',
+    'information-theoretic',
+    'exploration/exploitation',
+    'posterior-collapse',
+    'RL_PRINCIPLE_ANALYSIS_PACKET',
+    'Do not demand a theorem')) {
+    if (-not $researchPrinciples.Contains($required)) {
+        throw "Research Principles Analyst profile missing: $required"
     }
 }
 foreach ($required in @(
@@ -90,7 +109,9 @@ foreach ($required in @(
     '[agents."HMASDResearchInnovator"]',
     'config_file = "./agents/hmasd-research-innovator.toml"',
     '[agents."HMASDResearchCritic"]',
-    'config_file = "./agents/hmasd-research-critic.toml"')) {
+    'config_file = "./agents/hmasd-research-critic.toml"',
+    '[agents."HMASDResearchPrinciplesAnalyst"]',
+    'config_file = "./agents/hmasd-research-principles-analyst.toml"')) {
     if (-not $config.Contains($required)) {
         throw "Independent research profile is not registered: $required"
     }

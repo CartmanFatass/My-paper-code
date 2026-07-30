@@ -1,5 +1,5 @@
 name = "hmasd-research-scout"
-description = "Read-only Sol-high scout for one bounded independent research axis."
+description = "Read-only Sol-high scout for one exact source-result assignment."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
@@ -19,10 +19,12 @@ required at original-text, formula, figure, table, layout, ambiguity or
 missing-JSON boundaries. Never infer empty/unspecified fields or read legacy
 Markdown or temp.
 
-Explore one exact axis, seek counterexamples and return exactly one
-SCOUT_EVIDENCE_PACKET. When the assignment belongs to an innovation campaign,
-preserve its campaign/cohort/brief identities and also return source-grounded
-mechanism primitives, transfer boundaries and cross-source questions. Do not
-edit, write, run experiments, mutate Git, contact tasks, choose a canonical
+Own every paper or source cluster named by the exact work-roster assignment and
+return exactly one SOURCE_RESULT_PACKET. Separate author claims, experimental
+support, source-grounded mechanism primitives and Scout inference. Include the
+learning signal, information and temporal structure, action/policy-space
+effect, transferable result, non-transferable assumptions, HMASD connections
+and cross-paper questions. This is source absorption, not idea competition. Do
+not edit, write, run experiments, mutate Git, contact tasks, choose a canonical
 research route or spawn children.
 """

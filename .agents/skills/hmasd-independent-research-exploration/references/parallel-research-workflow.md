@@ -1,167 +1,119 @@
 # Parallel independent research workflow
 
 ```text
-scout_parallel_limit=4
-innovator_parallel_limit=4
-critic_parallel_limit=2
+logical_assignment_count=derived_from_exact_work_roster
+runtime_concurrency=available_native_capacity
 merge_barrier=required
 completion_order_priority=forbidden
 single_writer=independent_research_explorer
 child_depth=0
 automatic_formal_workflow_promotion=forbidden
-campaign_authorization=one_user_confirmation_with_total_budgets
-automatic_cohort_progression=allowed_within_frozen_campaign
-per_cohort_user_confirmation=not_required
-unbounded_cohort_loop=forbidden
-initial_cohort_independence_shielding=required
-later_cohort_collaboration_brief=required
+automatic_campaign_progression=allowed_until_convergence
+unbounded_source_expansion=forbidden
+first_innovation_roster_independence_shielding=required
+later_cycle_collaboration_brief=required
 ```
 
 ## Shared intake and barrier
 
-Freeze the question, one exact mode, mission link, named sources, exclusions,
-completion condition and target-semantic traps before dispatch. A scientific-
-innovation campaign also freezes exclusions, total Scout/Innovator/Critic
-budgets, maximum cohort count, stop conditions, scope, common scientific
-objects, exact source identities and boundary, and evidence baseline in one
-fingerprinted user-confirmed campaign record. Operational failure may receive
-one unchanged low-cost retry. A changed scope or larger budget needs a new user
-authorization; a changed axis, family or mechanism inside the frozen campaign
-is a new cohort assignment.
+Freeze one exact mode, campaign direction or evidence question, mission link,
+authorized source boundary, exclusions and completion meaning before dispatch.
+Every phase freezes an exact logical work roster. Runtime launches as many
+independent assignments as available native capacity permits and queues the
+rest. Operational failure may receive one unchanged low-cost retry. A changed
+source boundary or project authority needs a new user decision; a new mechanism
+or subdirection inside the campaign is an opportunity-bound assignment.
 
-Every cohort has expected Scout/Innovator assignments and, after their return,
-an exact expected Critic assignment set. The final merge barrier opens only
-when every expected assignment has one terminal packet or terminal operational
-failure. Reject packets with missing identity, locator or provenance, scope
-expansion, authority claims or incomplete semantic-trap results. Never use
-completion order as evidence priority. A terminal operational failure records
-the exact `OPERATIONAL_FAILURE` kind, terminal status, assignment identity,
-stable failure signature, whether its one unchanged low-cost retry was used,
-and `scientific_output=false`. Its schema admits no scientific payload and it
-cannot be cited as evidence.
+Each barrier opens only when every expected assignment has one terminal packet
+or exact operational-failure record. Reject missing identity, locator,
+provenance, unauthorized source expansion or authority claims. Never use
+completion order as evidence priority. An operational failure records its
+stable signature and `scientific_output=false`; it cannot be cited as evidence.
 
 ## Evidence-review mode
 
 1. **Integrity and recall.** Read live MyLib integrity when applicable. Build a
    bounded candidate list from registered indexes without treating excerpts as
    evidence.
-2. **Evidence partition.** Split by disjoint evidence axes or paper IDs. Each
-   candidate has one Sol-high Research Scout owner and one or more exact
-   source-identity, JSON/PDF type and absolute-path bindings.
-3. **Scout wave.** Launch 1-4 Scouts with exact axis, source set, semantic traps
-   and `SCOUT_EVIDENCE_PACKET` contract.
+2. **Evidence partition.** Split by evidence axes or paper IDs. Each candidate
+   has one Sol-high Research Scout owner and exact source bindings.
+3. **Scout roster.** Launch the exact roster at available native capacity and
+   require one `SOURCE_RESULT_PACKET` per terminal assignment.
 4. **Merge.** Wait until every assignment has a terminal packet or terminal
    operational-failure record, deduplicate returned evidence by paper ID and
    claim, and map support, conflict, fidelity boundaries and uncovered evidence.
-5. **Targeted criticism.** Select only central, surprising, conflicting or
-   high-consequence claims. Launch 0-2 Sol-max Critics with exact packet and
-   claim identities plus a target-specific checklist.
+5. **Targeted criticism.** Select only central, conflicting or high-consequence
+   source claims and bind exact packet identities.
 6. **Evidence synthesis and stop.** Write one advisory evidence report. This
    mode has no approach-family registry or additional research wave.
 
-## Scientific-innovation campaign
+## Algorithm-inspiration campaign
 
-1. **Campaign freeze.** Name the evidence baseline, exact source set, common
-   definitions and scientific objects, scope, completion/stop conditions,
-   maximum cohorts and total role budgets. Record what is established,
-   contradicted and unresolved. Do not silently search project state.
-2. **Conjecture portfolio.** The Explorer creates one versioned advisory row
-   per mechanism-level family:
+1. **Direction intake.** Freeze one broad research direction, mission link,
+   supplied algorithm abstraction, authorized source boundary, exclusions and
+   convergence meaning. Do not preselect a winning mechanism or silently search
+   project state.
+2. **Corpus lock.** Recall relevant sources and create one versioned row per
+   paper or source cluster:
 
    ```text
-   family_id | conjecture_id/version | parent_conjecture_ids |
-   core_mechanism | exact_claim | evidence_baseline |
-   strongest_support | strongest_counterexample | current_gap |
-   status=live|blocked|parked|contradicted | reopen_condition |
-   innovator_packet_ids |
-   critic_status=not_selected|supported|weakened|contradicted|unresolved|conflicting|operational_failure|partial_operational_failure
+   source_id | immutable_identity | inclusion_reason | exclusion_boundary |
+   owner_assignment_id | content_paths | quality_warnings | corpus_version
    ```
 
-3. **Independent first cohort.** Launch 1-4 read-only Sol-max Innovators on
-   materially different mechanisms or formulations. Every assignment receives
-   the same baseline and methodology but no peer packet. Do not reveal the
-   favored family unless the assignment is an exact challenge. Group by
-   mechanism, not wording.
-4. **Concrete return gate.** Require one `RESEARCH_DIRECTION_PACKET` per
-   assignment and at least one lemma, construction, equation, counterexample or
-   falsifiable prediction. A reduction with a missing lemma of unchanged
-   difficulty is `blocked`, not near-complete.
-5. **Merge before cross-pollination.** Wait until every expected assignment has
-   a terminal packet or terminal operational-failure record. Only returned
-   packets may support comparison; failures remain exact gaps. The Explorer
-   then writes a versioned collaboration brief with packet identities, retained
-   lemmas, counterexamples, complete immutable corrections, gaps, transfer candidates and
-   permitted parent identities.
-6. **Targeted Critic wave.** Record and launch 0-2 Sol-max Critics only for central,
-   conflicting, surprising or high-consequence claims. Each receives exact
-   family, claim and packet identities plus an adversarial checklist tailored
-   to the target semantics. Each expected Critic must return a terminal packet
-   or operational-failure record; either consumes one frozen Critic slot.
-   A family without a Critic assignment is `not_selected`. A selected Critic
-   with only terminal failures is `operational_failure`; mixed packet/failure
-   completion is `partial_operational_failure`. Other `critic_status` values
-   derive from actual terminal packets, using `conflicting` when dispositions
-   disagree.
-7. **Cohort disposition.** Update every family to `live`, `blocked`, `parked` or
-   `contradicted`. Preserve competing families; scheduling or emphasizing one
-   does not make it the unique scientific direction.
-8. **Adaptive next-cohort gate.** Continue automatically only within the
-   confirmed campaign. Record prior/next cohort IDs, exact terminal assignment
-   and packet sets, input collaboration brief, target/parent families, purpose
-   `develop|refine|combine|challenge`, genuine novelty basis, expected
-   disposition change, prior family-disposition snapshot, complete planned
-   assignment semantics, role budgets and exact stop condition. A deterministic
-   fingerprint binds the admission to the unchanged campaign authorization.
-   Before dispatch, Scout plans bind to the explicit frozen source set and
-   source paths; Innovator plans bind purpose, targets, parents, mechanism and
-   claim to the admission, brief and registry. Prospective conjectures use the
-   next canonical version, and all planned Innovators together cover the exact
-   admitted parent set. Each refinement carries its own immediate predecessor;
-   another assignment cannot satisfy that lineage obligation. An absent source set is not equivalent to an explicit empty set.
-   `combine` creates a new family with at least two parents and a new interaction
-   claim. A blocked route needs a new mechanism, invariant, construction or
-   applicable exact Critic correction; rewording, generic search or one more
-   citation is insufficient.
-   A completed later cohort retains the originating admission and fingerprint
-   and must match the admitted assignment semantics exactly. Its successor
-   lineage is replayed against the registry visible before that cohort, never
-   legalized by a current or future version. Every admitted and planned parent
-   must already belong to that historical registry.
-9. **Collaborative later cohort.** Later Scouts/Innovators see only their named
-   collaboration brief and sources. They may transfer a lemma, counterexample,
-   representation or identification design, refine one conjecture, combine
-   parent families, or challenge a dependency. Every output records exact
-   parent and input versions; originals remain immutable.
-10. **Budget/stop check.** Derive cumulative role use from terminal cohort
-    records. Stop before dispatch if the next cohort exceeds any total, exceeds
-    maximum cohorts, leaves no disposition-changing target or meets a campaign
-    stop/completion condition. Eligibility never authorizes compute or formal
-    work.
-11. **Synthesis and stop.** Return an audited result or the strongest rigorous
-    derivation plus its exact gap and the ordered disposition snapshot for every
-    cohort. Mark each exact Critic correction applied, unresolved or conflicting;
-    an applied correction is a versioned conjecture successor whose target field
-    contains the exact correction text and whose lineage includes the corrected
-    conjecture. Never
-   force an affirmative conclusion or automatically promote the result.
+3. **Parallel source absorption.** Derive one exact Scout assignment roster from
+   the entire corpus. There is no workflow-level assignment-count cap. Launch at
+   available capacity and queue the rest. Every source is owned exactly once.
+4. **Absorption barrier.** Require one terminal `SOURCE_RESULT_PACKET` or exact
+   operational failure for every assignment. Only source-grounded packets may
+   support the absorption brief.
+5. **Absorption synthesis.** The Explorer writes a versioned
+   `SOURCE_ABSORPTION_BRIEF` with source results, mechanism primitives, transfer
+   boundaries, cross-paper connections, conflicts and unresolved opportunities.
+6. **Innovation roster.** Derive exact adaptation, development, combination,
+   refinement, split or dependency-challenge assignments from the brief. The
+   first roster receives no peer packet or favored answer. Require one terminal
+   `ALGORITHM_INSPIRATION_PACKET` per assignment.
+7. **Constructive principles review.** After the innovation barrier, assign
+   Sol-max Principles Analysts to exact candidates or connected candidate sets.
+   Require terminal `RL_PRINCIPLE_ANALYSIS_PACKET`s before adversarial review.
+8. **Adversarial review.** Only after principles analysis, assign Critics to
+   candidate claims or connected sets. They challenge empirical interpretation,
+   hidden equivalence, passive randomness, capacity or exposure confounds and
+   partner co-adaptation. Formal proof and routine counterexample construction
+   are not required in inspiration mode.
+9. **Portfolio update.** Preserve every useful candidate, parent and child.
+   Record source-result dependencies, mechanism and transfer edges, principle
+   analyses, corrections, validation maturity, parked reasons and reactivation
+   conditions. Scheduling one direction never makes it the unique direction.
+10. **Next-cycle opportunity map.** Record every material in-boundary
+    `new_mechanism|transfer|combination|important_correction|subdirection_split|cross_direction_inspiration`
+    opportunity. Each binds exact sources or parents, novelty delta, expected
+    portfolio effect, required role and completion condition. A transfer binds
+    source and target contexts plus changed assumptions; a combination has at
+    least two parents and a new interaction; a split has a distinct assumption,
+    learning driver or prediction. Independent opportunities may run in
+    parallel from an exact roster.
+11. **Convergence or continuation.** Continue while a material opportunity
+    remains inside the authorized boundary. Converge only after corpus coverage,
+    principles reviews, required adversarial reviews, corrections and all six
+    opportunity classes are closed. Resource exhaustion is partial, not
+    convergence. Return the multi-direction portfolio and exact residual gaps;
+    never force an affirmative result or automatically promote it.
 
-## Scientific-methodology contract
+## Candidate-validation methodology
 
-Every innovation campaign loads `research-methodology.md`. A conjecture and
-direction packet instantiate the game/information objects, membership process,
-identity ownership, clocks, strategic policy dependence, estimand, sampling
-hierarchy, identification assumptions, strongest simple null, counterexample,
-replacement ledger, partner-policy population, cross-pollination provenance,
-unique discriminator, stop condition and lineage. Conditional fields use
-explicit `unknown` or `not_applicable` records. Mechanical completeness never
-means scientific truth.
+Only `candidate_validation` loads `research-methodology.md`. It instantiates the
+game and information objects, membership process, identity ownership, clocks,
+strategic dependence, estimand, sampling, identification, strongest simple
+null, counterexample, replacement ledger and discriminator. Mechanical
+completeness never means scientific truth.
 
 ## Concurrency and authority
 
-With `max_threads=8`, normal maximum occupancy is one Explorer plus four Scouts
-or Innovators, followed after the merge barrier by two Critics. Children cannot
-spawn, write, use Git, contact persistent tasks or access active HMASD state.
-There is no minimum-duration rule, fixed large-agent target or unbounded loop.
-One user-confirmed campaign may use multiple bounded cohorts within its frozen
-balances; only the user may expand that boundary or later initiate a separate
-formal workflow submission.
+The workflow defines no fixed per-role parallel count. Exact source and
+opportunity rosters determine logical work; current Codex capacity determines
+how many run simultaneously. Phase dependencies remain ordered. Children
+cannot spawn, write, use Git, contact persistent tasks or access active HMASD
+state. There is no minimum-duration rule or forced large-agent target. Only the
+user may expand the source/project authority boundary or initiate formal work.

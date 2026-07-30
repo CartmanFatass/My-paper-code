@@ -34,6 +34,7 @@ $expectedRoles = @(
     'INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
+    'RESEARCH_PRINCIPLES_ANALYST.md',
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
@@ -58,9 +59,11 @@ $independentReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
 $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
+$researchPrinciplesRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md')
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
+$openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
@@ -194,28 +197,25 @@ foreach ($required in @(
     'local_research_single_writer=true',
     'local_research_write_tool=apply_patch_only',
     'local_research_shell_mutation=forbidden',
-    'research_scout_parallel_limit=4',
-    'research_innovator_parallel_limit=4',
-    'research_modes=evidence_review|scientific_innovation',
-    'campaign_authorization=one_user_confirmation_with_frozen_total_budgets',
-    'automatic_cohort_progression=allowed_within_confirmed_campaign',
-    'per_cohort_user_confirmation=not_required',
-    'unbounded_research_loop=forbidden',
-    'methodology_reference=research-methodology.md_required_for_scientific_innovation',
+    'logical_assignment_count=derived_from_exact_work_roster',
+    'runtime_concurrency=available_native_capacity',
+    'phase_barrier=required',
+    'completion_order_priority=forbidden',
+    'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
+    'automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary',
+    'unbounded_source_expansion=forbidden',
+    'methodology_reference=research-methodology.md_required_for_candidate_validation',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
-    'fingerprint binds that complete automation boundary',
-    'Every Critic assignment consumes',
-    'planned Scout sources must remain inside',
-    'planned Innovators collectively cover the exact admitted parent',
-    'each refinement carries its own immediate predecessor',
-    'registry visible before',
-    'serve as a historical parent',
-    "every cohort's family-disposition snapshot",
-    'completed later cohort retains that admission',
-    'research_critic_parallel_limit=2')) {
+    'research architect, portfolio integrator and only',
+    'SOURCE_ABSORPTION_BRIEF',
+    'RL_PRINCIPLE_ANALYSIS_PACKET',
+    'new_mechanism',
+    'subdirection_split',
+    'cross_direction_inspiration',
+    'PARTIAL_CAMPAIGN_RESOURCE_BOUND')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
@@ -227,8 +227,8 @@ foreach ($pair in @(
         'reasoning_effort=high',
         'write_authority=none',
         'child_authority=none',
-        'research_mode=evidence_review_or_campaign_evidence_axis',
-        'exact input collaboration-brief',
+        'research_modes=evidence_review|algorithm_inspiration_campaign',
+        'SOURCE_RESULT_PACKET',
         'json_content_layer_required=true',
         'pdf_verification_on_fidelity_boundary=true') },
     @{ Text=$researchInnovatorRole; Required=@(
@@ -237,22 +237,33 @@ foreach ($pair in @(
         'reasoning_effort=max',
         'write_authority=none',
         'child_authority=none',
-        'research_mode=scientific_innovation_only',
-        'assignment_purposes=develop|refine|combine|challenge',
-        'initial_favored_family_visibility=withheld_unless_exact_challenge_assignment',
-        'methodology_reference=required',
+        'research_modes=algorithm_inspiration_campaign|candidate_validation',
+        'inspiration_purposes=adapt|combine|develop|refine|split|challenge_dependency',
+        'initial_favored_direction_visibility=withheld',
+        'methodology_reference=required_for_candidate_validation_only',
         'conclusion_forcing=forbidden',
-        'RESEARCH_DIRECTION_PACKET') },
+        'ALGORITHM_INSPIRATION_PACKET') },
     @{ Text=$researchCriticRole; Required=@(
         'callable_agent_type=hmasd-research-critic',
         'model=gpt-5.6-sol',
         'reasoning_effort=max',
         'write_authority=none',
         'child_authority=none',
-        'methodology_reference=required_for_scientific_innovation_only',
+        'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
+        'principles_analysis_precedes_campaign_criticism=true',
+        'formal_proof_requirement=forbidden_for_algorithm_inspiration_campaign',
         'portfolio_selection_authority=none',
-        'json_content_layer_required=true',
-        'pdf_verification_on_fidelity_boundary=true') })) {
+        'RL_PRINCIPLE_ANALYSIS_PACKET') },
+    @{ Text=$researchPrinciplesRole; Required=@(
+        'callable_agent_type=hmasd-research-principles-analyst',
+        'model=gpt-5.6-sol',
+        'reasoning_effort=max',
+        'write_authority=none',
+        'child_authority=none',
+        'review_nature=constructive_not_adversarial',
+        'RL_PRINCIPLE_ANALYSIS_PACKET',
+        'exploration and exploitation drivers',
+        'posterior-collapse risk') })) {
     foreach ($required in $pair.Required) {
         if (-not $pair.Text.Contains($required)) {
             throw "Independent research child role missing: $required"
@@ -275,27 +286,24 @@ foreach ($required in @(
     'structured JSON is the formal LLM content layer',
     'PDF is required for original verification, formula/figure/table semantics, or missing JSON',
     'legacy Markdown is excluded',
-    'SCOUT_EVIDENCE_PACKET',
-    'RESEARCH_DIRECTION_PACKET',
+    'SOURCE_RESULT_PACKET',
+    'ALGORITHM_INSPIRATION_PACKET',
+    'RL_PRINCIPLE_ANALYSIS_PACKET',
     'CRITIC_ASSESSMENT_PACKET',
     'evidence review',
-    'scientific innovation',
-    'adaptive campaign',
-    'next cohort',
+    'algorithm inspiration campaign',
+    'candidate validation',
+    'NEXT_CYCLE_OPPORTUNITY_MAP',
     'delete|retain|add',
-    'No per-cohort user',
-    'confirmation is required inside',
     '`--output` is forbidden in this route',
-    'expected Critic assignment',
-    'originating-admission binding',
-    '`applied`, `unresolved` or `conflicting`',
-    '`partial_operational_failure`',
-    'explicit allowed-source set',
-    'canonical prospective conjecture versions and exact parent',
-    'each refinement bound to its own immediate predecessor',
-    'only conjectures visible before that',
-    'become a parent retroactively',
-    "every cohort's disposition snapshot",
+    'new_mechanism',
+    'transfer',
+    'combination',
+    'important_correction',
+    'subdirection_split',
+    'cross_direction_inspiration',
+    'available native capacity',
+    'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
         throw "Independent research Skill missing: $required"
@@ -317,32 +325,46 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'scout_parallel_limit=4',
-    'innovator_parallel_limit=4',
-    'critic_parallel_limit=2',
+    'logical_assignment_count=derived_from_exact_work_roster',
+    'runtime_concurrency=available_native_capacity',
     'merge_barrier=required',
     'completion_order_priority=forbidden',
     'single_writer=independent_research_explorer',
-    'campaign_authorization=one_user_confirmation_with_total_budgets',
-    'automatic_cohort_progression=allowed_within_frozen_campaign',
-    'per_cohort_user_confirmation=not_required',
-    'initial_cohort_independence_shielding=required',
-    'later_cohort_collaboration_brief=required',
-    'unbounded_cohort_loop=forbidden',
-    'complete immutable corrections',
-    'prior family-disposition snapshot',
-    'operational_failure|partial_operational_failure',
-    'An absent source set is not equivalent to an explicit empty set',
-    'Prospective conjectures use the',
-    'all planned Innovators together cover the exact',
-    'another assignment cannot satisfy that lineage obligation',
-    'registry visible before that cohort',
-    'must already belong to that historical registry',
-    'ordered disposition snapshot for every',
-    'completed later cohort retains the originating admission',
+    'automatic_campaign_progression=allowed_until_convergence',
+    'first_innovation_roster_independence_shielding=required',
+    'later_cycle_collaboration_brief=required',
+    'SOURCE_RESULT_PACKET',
+    'SOURCE_ABSORPTION_BRIEF',
+    'ALGORITHM_INSPIRATION_PACKET',
+    'RL_PRINCIPLE_ANALYSIS_PACKET',
+    'Constructive principles review',
+    'Adversarial review',
+    'Next-cycle opportunity map',
+    'Resource exhaustion is partial',
     'automatic_formal_workflow_promotion=forbidden')) {
     if (-not $parallelResearch.Contains($required)) {
         throw "Parallel research workflow missing: $required"
+    }
+}
+foreach ($required in @(
+    'campaign_unit=one_broad_research_direction',
+    'source_first=true',
+    'fixed_first_wave_count=forbidden',
+    'source_result',
+    'transferable_primitive',
+    'adaptation_hypothesis',
+    'algorithm_candidate',
+    'information-theoretic',
+    'posterior collapse',
+    'NEXT_CYCLE_OPPORTUNITY_MAP',
+    'new_mechanism',
+    'transfer',
+    'combination',
+    'important_correction',
+    'subdirection_split',
+    'cross_direction_inspiration')) {
+    if (-not $openInspiration.Contains($required)) {
+        throw "Open algorithm inspiration workflow missing: $required"
     }
 }
 foreach ($required in @(
@@ -379,6 +401,29 @@ foreach ($forbidden in @(
         $researchMethodology)) {
         if ($surface.Contains($forbidden)) {
             throw "Independent research retains stale per-wave control: $forbidden"
+        }
+    }
+}
+foreach ($forbidden in @(
+    'scientific_innovation',
+    'SCOUT_EVIDENCE_PACKET',
+    'RESEARCH_DIRECTION_PACKET',
+    'research_scout_parallel_limit',
+    'research_innovator_parallel_limit',
+    'research_critic_parallel_limit',
+    'max_cohorts',
+    'unique_winner')) {
+    foreach ($surface in @(
+        $independentResearchRole,
+        $researchScoutRole,
+        $researchInnovatorRole,
+        $researchCriticRole,
+        $researchPrinciplesRole,
+        $independentResearchSkill,
+        $parallelResearch,
+        $openInspiration)) {
+        if ($surface.Contains($forbidden)) {
+            throw "Independent research retains stale closed-proof control: $forbidden"
         }
     }
 }

@@ -7,15 +7,14 @@ role_kind=registered_ephemeral_native_child
 parent=independent_research_explorer
 model=gpt-5.6-sol
 reasoning_effort=high
-authority=one_exact_read_only_research_assignment
+authority=one_exact_read_only_source_assignment
 write_authority=none
 git_authority=none
 scientific_authority=none
 child_authority=none
 json_content_layer_required=true
 pdf_verification_on_fidelity_boundary=true
-target_semantic_traps=required
-research_mode=evidence_review_or_campaign_evidence_axis
+research_modes=evidence_review|algorithm_inspiration_campaign
 ```
 
 Read the exact assignment, this charter and only its named research sources.
@@ -30,23 +29,22 @@ PDF verification when the assignment reaches an original-text, formula,
 figure, table, layout or missing-JSON fidelity boundary. Never read legacy
 Markdown or `papers/temp`; never infer an empty or `unspecified` field.
 
-Explore only the assigned evidence axis, exact claim and paper set. The
-assignment must name its semantic traps and exact source-identity,
-content-type and absolute-path bindings. This role establishes what existing
-sources support, contradict or leave unresolved; it does not invent a new
-mechanism or own a conjecture. In a campaign cohort, also extract
-source-grounded mechanism primitives, transfer boundaries and cross-source
-questions that later Innovators may use only after the merge barrier.
+In evidence review, establish what the assigned sources support, contradict or
+leave unresolved. In an inspiration campaign, own every paper or source cluster
+listed in the assignment and extract results for absorption rather than compete
+with other ideas. The assignment binds exact source identities and semantic
+traps; it may not add another source.
 
 Record counterevidence and scope limits as diligently as supporting evidence.
-Return exactly one `SCOUT_EVIDENCE_PACKET` containing assignment,
-campaign/cohort when applicable, evidence-axis and claim identities; searches,
-candidates and exclusions; evidence rows; conflicts; semantic-trap results;
-hypotheses; mechanism primitives; transfer boundaries; cross-source questions;
-and unresolved facts. Each evidence row names paper ID, title, JSON or PDF
-absolute path, locator, provenance, claim kind, confidence and verification
-state. A campaign packet also repeats the exact input collaboration-brief
-identity. The packet may not add sources outside its assigned ownership set.
+Return exactly one `SOURCE_RESULT_PACKET` containing assignment and source
+identities; problem addressed; actual contribution; evidence rows and
+locators; mechanism primitives; learning signal; information used; temporal
+structure; action/policy-space effect; empirical support; failure boundaries;
+transferable results; non-transferable assumptions; possible HMASD connections;
+cross-paper questions; exclusions and coverage limits. Separate author claims,
+experimental support, source-grounded extraction and Scout inference. Each
+evidence row names paper ID, title, JSON or PDF absolute path, locator,
+provenance, claim kind, confidence and verification state.
 
 Do not write files, edit code, run experiments, mutate Git, load HMASD state,
 spawn children, contact another task or turn a finding into a project decision.

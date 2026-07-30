@@ -15,26 +15,25 @@ write_scope=local_research_except_pro_reviews
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
-research_scout_parallel_limit=4
-research_innovator_parallel_limit=4
-research_critic_parallel_limit=2
+logical_assignment_count=derived_from_exact_work_roster
+runtime_concurrency=available_native_capacity
+phase_barrier=required
+completion_order_priority=forbidden
 research_portfolio_owner=independent_research_explorer
-research_modes=evidence_review|scientific_innovation
-campaign_authorization=one_user_confirmation_with_frozen_total_budgets
-automatic_cohort_progression=allowed_within_confirmed_campaign
-per_cohort_user_confirmation=not_required
-unbounded_research_loop=forbidden
-methodology_reference=research-methodology.md_required_for_scientific_innovation
+research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
+automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary
+unbounded_source_expansion=forbidden
+methodology_reference=research-methodology.md_required_for_candidate_validation
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 ```
 
-This task explores research questions outside the formal HMASD workflow. It
-preserves the project mission and conjecture discipline but produces advisory
-research material only. The user alone decides whether any result is later
-submitted to the formal scientific workflow.
+This persistent task is the research architect, portfolio integrator and only
+writer for advisory research outside the formal HMASD workflow. It does not
+select canonical science. The user alone decides whether any result later
+enters the formal project.
 
 After the root router, read this charter,
 `$hmasd-independent-research-exploration`, and only sections 1 and 3 of
@@ -48,68 +47,71 @@ read-only. Write only under `local_research/`, excluding the Operator-owned
 read-only. Never edit project code, workflow, science, Git state or an external
 workspace. The workspace guard enforces this boundary for the registered task.
 
-In `evidence_review`, freeze one bounded question, use at most four Sol-high
-Scouts with disjoint evidence axes or paper ownership, cross the merge barrier,
-and use at most two Sol-max Critics for central or conflicting claims. Return
-one evidence report. This mode does not claim innovation or create an
-autonomous campaign.
+## Main-task responsibility
 
-In `scientific_innovation`, one direct user confirmation freezes the campaign
-question, mission link, exclusions, scope, common scientific objects, exact
-source identities and boundary, evidence baseline, total Scout/Innovator/Critic
-budgets, maximum cohort count, stop conditions and completion condition. One
-fingerprint binds that complete automation boundary. Within its remaining
-balances, the Explorer may advance successive cohorts without asking the user
-again. It may not change a frozen field, increase a budget, authorize compute
-or continue past a stop condition.
+The Explorer turns one user-authorized broad direction, such as variable skill
+period or variable agent population, into an exact campaign. It freezes the
+mission and authorized source boundary, builds and versions the relevant-source
+corpus manifest, derives exact child work rosters, waits at phase barriers and
+writes every durable campaign record.
 
-Before the first cohort, load the methodology reference named by the Skill and
-instantiate the common scientific objects. The first Innovator cohort is
-independently shielded: materially different families receive the same frozen
-baseline and cannot see one another's packets. The merge barrier opens only
-after every expected Scout/Innovator and Critic assignment has a terminal
-packet or exact operational-failure record. Every Critic assignment consumes
-budget even when it fails operationally. The Explorer then creates a versioned
-collaboration brief containing terminal packet identities, retained lemmas,
-counterexamples, complete immutable Critic corrections, unresolved gaps and
-transfer candidates. Later assignments may `develop`, `refine`, `combine` or
-`challenge` a conjecture and must cite their input brief and parent identities.
+It performs the high-value integration itself: merge source results without
+erasing provenance, build cross-paper connection graphs, map transferable
+principles to the supplied HMASD algorithm abstraction, create collaboration
+briefs, identify mechanism/transfer/combination/correction/split opportunities,
+and synthesize Principles-Analyst and Critic findings. It may schedule the next
+internal advisory work but cannot adopt a project direction. It does not
+deep-read every paper in place of Scouts or solve every mechanism in place of
+Innovators. The first innovation roster receives the common absorption brief
+without the Explorer's favored answer.
 
-Launch no more than four Scouts or Innovators concurrently and no more than two
-Critics after a merge. The Explorer is the only writer and portfolio owner.
-Children cannot change family dispositions, spend unassigned budget, dispatch
-another child or make a project decision. Completion order has no evidential
-weight.
+## Modes and ordered campaign
 
-Admit another cohort only when the prior barrier is closed, remaining campaign
-budget is sufficient, an exact disposition-changing target is named, and the
-work adds a genuine new mechanism, invariant, construction, correction,
-combination or refinement. A blocked route reopens only for such new content.
-Rewording a gap, generic search or another citation is insufficient. The
-mechanical gate checks this record; eligibility does not itself dispatch work.
-The admission binds the prior disposition snapshot and complete planned
-assignment semantics. Before dispatch, planned Scout sources must remain inside
-the explicitly frozen source set, and planned Innovator purpose, target family,
-parent lineage, mechanism and claim must agree with the admission, collaboration
-brief and current registry. A prospective conjecture uses the next canonical
-version, and planned Innovators collectively cover the exact admitted parent
-set; each refinement carries its own immediate predecessor. A completed later cohort retains that admission and its fingerprint, and must match both exactly.
-Completed-admission validation replays the conjecture registry visible before
-that cohort; current or future versions cannot legalize a skipped successor or
-serve as a historical parent.
+`evidence_review` answers one bounded source question and stops after its exact
+work roster and optional source-fidelity review are complete.
 
-Every mechanism-level conjecture must name its stochastic-game and information
-objects, membership process, temporal clocks where relevant, strategic policy
-dependence, estimand, strongest simple null, counterexample, discriminator,
-lineage and replacement ledger. Module accumulation without a unique
-mathematical defect and separating prediction fails closed.
+`algorithm_inspiration_campaign` is the default for a broad or fuzzy theme.
+First lock a versioned relevant-source corpus, then let every corpus-owned Scout
+assignment finish. Merge their `SOURCE_RESULT_PACKET`s into one
+`SOURCE_ABSORPTION_BRIEF` before innovation. Innovators create source-bound
+adaptations, mechanisms, combinations and subdirections. Constructive
+`RL_PRINCIPLE_ANALYSIS_PACKET`s precede adversarial review; only after both
+barriers may the Explorer update the multi-direction portfolio and schedule the
+next cycle.
 
-Stop when the confirmed campaign completion condition or any stop condition is
-met, a required remaining action exceeds budget, or no disposition-changing
-in-scope cohort exists. Return the audited synthesis or exact residual gaps.
-The synthesis preserves every cohort's family-disposition snapshot in order.
-An applied Critic correction creates a versioned conjecture successor with the
-corrected conjecture as a parent; non-conjecture corrections remain unresolved
-or conflicting rather than claiming untraceable application.
-Do not contact External Pro, assign implementation, authorize compute, promote
-into CDC state or reinterpret advisory output as formal project science.
+Keep every useful direction, parent and child. Advance on an exact
+`new_mechanism`, `transfer`, `combination`, `important_correction`,
+`subdirection_split` or `cross_direction_inspiration` opportunity. Logical
+assignment count comes from the exact source or opportunity roster. Launch as
+many independent tasks as current native capacity permits and queue the
+remainder; no workflow-level first-wave count exists.
+
+Additional papers inside the authorized source boundary require a versioned
+corpus delta and exact ownership. A new source boundary, project adoption,
+code, compute or formal promotion requires a separate user decision.
+
+`candidate_validation` is reserved for a mature candidate with a precise
+defect, mechanism, algorithm delta, strongest simple explanation and separating
+prediction. It loads `research-methodology.md` and may use CDC-style derivation,
+counterexample and estimand discipline. It remains advisory.
+
+Each cycle freezes an exact assignment roster before dispatch. Children cannot
+spend unassigned work, add sources, spawn children or edit the portfolio. A
+terminal operational failure closes only that assignment and carries no
+scientific content. Completion order has no evidential weight.
+
+An inspiration campaign converges only when source absorption is complete;
+every retained direction has required constructive principles analysis; every
+recommended direction has required adversarial review; actionable corrections
+are applied, rejected with reasons or parked; and no material in-boundary
+mechanism, transfer, combination, correction, subdirection split or
+cross-direction connection remains unprocessed. Exhausted resources produce
+`PARTIAL_CAMPAIGN_RESOURCE_BOUND`, never convergence.
+
+The mechanical gate checks identities, coverage, order, provenance, work
+rosters and recorded convergence predicates. It never decides relevance,
+novelty, correctness, importance or scientific convergence. Return an advisory
+multi-direction portfolio with provenance, cross-pollination edges, validation
+candidates, residual gaps and reactivation conditions. Do not contact External
+Pro, assign implementation, authorize compute, promote into CDC state or
+reinterpret advisory output as formal project science.

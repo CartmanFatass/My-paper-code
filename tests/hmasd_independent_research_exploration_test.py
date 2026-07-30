@@ -463,3 +463,34 @@ def test_smoke_reads_integrity_catalog_json_and_a_traceable_pdf(
     assert result["quality_grade"] == "A"
     assert result["provenance_checked"] is True
     assert result["legacy_markdown_allowed"] is False
+
+
+def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -> None:
+    skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    reference = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "open-algorithm-inspiration.md"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "algorithm inspiration campaign",
+        "SOURCE_RESULT_PACKET",
+        "RL_PRINCIPLE_ANALYSIS_PACKET",
+        "NEXT_CYCLE_OPPORTUNITY_MAP",
+        "available native capacity",
+    ):
+        assert required in skill
+    for required in (
+        "source_result",
+        "transferable_primitive",
+        "adaptation_hypothesis",
+        "algorithm_candidate",
+        "subdirection_split",
+        "cross_direction_inspiration",
+    ):
+        assert required in reference
