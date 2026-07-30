@@ -250,6 +250,75 @@ def main() -> None:
     print("it asserts what happens when these fail, which cannot be observed on a")
     print("healthy environment.")
 
+    _emit_world_digest_block()
+
+
+def _emit_world_digest_block() -> None:
+    """Print R4 world component digests and this runtime's identity, as JSON.
+
+    WHY THIS IS HERE rather than in its own job. Step 1 of the provenance
+    correction (Pro ruling 2026-07-30) needs component digests for R4 episode
+    keys from two different machines, with each machine's identity recorded so an
+    AGREEMENT can be told apart from two samples that shared hardware.
+
+    Of the three existing workflow jobs, none provided that: `audit` is the
+    114-minute formal run, `workers` is the development topology only, and adding
+    a job needs a workflow-file change that is not this actor's to make. Both
+    attempts through `workers` returned `WORLD_CONFORMANCE_UNTESTED` for reasons
+    recorded in advance.
+
+    The `benchmark` job pipes this script's stdout into the artifact it uploads,
+    so printing the block here delivers exactly the missing measurement through a
+    job that already exists.
+
+    **Construction only.** It builds environments and hashes their initial world.
+    It never steps one, never forks a continuation, computes no estimand and
+    writes nothing into the audit path -- so it cannot influence the conformance
+    result printed above, which has already completed by the time this runs.
+
+    Failures are swallowed and reported. A diagnostic must never be the reason a
+    benchmark job goes red.
+    """
+    print()
+    print("=== D7_S_WORLD_DIGEST_BLOCK_BEGIN ===")
+    try:
+        config = audit.build_config()
+        worlds = []
+        for seed in audit.TOPOLOGY_SEEDS_R4:
+            coords, coord_hash = audit.build_topology_template(config, topology_seed=seed)
+            for block in ("calibration", "audit"):
+                for index in range(2):
+                    episode_seed = audit._derived_seed(
+                        topology_seed=seed, block=block, idx=index,
+                        tag="episode_seed", contract_id=audit.R4_POPULATION_NAMESPACE)
+                    user_seed = audit.user_world_seed(
+                        topology_seed=seed, block=block, episode_index=index,
+                        contract_id=audit.R4_POPULATION_NAMESPACE)
+                    env = audit.build_pinned_env(
+                        config, episode_seed=episode_seed, coords=coords,
+                        coord_hash=coord_hash, energy_stage="S3",
+                        user_world_seed=user_seed)
+                    record = audit.episode_world_fingerprint(env, seed_value=user_seed)
+                    worlds.append({
+                        "topology_seed": seed, "block": block,
+                        "episode_index": index, "episode_seed": episode_seed,
+                        "user_world_seed": record["user_world_seed"],
+                        "pinned_coordinate_hash": record["pinned_coordinate_hash"],
+                        "n_users": record["n_users"],
+                        "fingerprint": record["fingerprint"],
+                        "component_digests": record["component_digests"],
+                    })
+        payload = {
+            "episode_world_provenance": {"episode_worlds": worlds},
+            "runtime_identity": audit.runtime_identity(),
+            "contract_id": audit.R4_POPULATION_NAMESPACE,
+            "probe": "d7_s_clone_conformance_check",
+        }
+        print(json.dumps(payload, sort_keys=True))
+    except Exception as error:  # pragma: no cover - diagnostic must not fail a job
+        print(json.dumps({"world_digest_block_error": f"{type(error).__name__}: {error}"}))
+    print("=== D7_S_WORLD_DIGEST_BLOCK_END ===")
+
 
 if __name__ == "__main__":
     main()

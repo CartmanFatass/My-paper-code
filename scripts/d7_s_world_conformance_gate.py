@@ -35,6 +35,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import pathlib
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -55,9 +56,39 @@ IDENTITY_FIELDS = ("episode_seed", "user_world_seed", "pinned_coordinate_hash", 
 RUNTIME_DISCRIMINATORS = ("processor", "machine", "platform", "numpy_blas", "cpu_features")
 
 
+BLOCK_BEGIN = "=== D7_S_WORLD_DIGEST_BLOCK_BEGIN ==="
+BLOCK_END = "=== D7_S_WORLD_DIGEST_BLOCK_END ==="
+
+
+def _read_payload(path: str) -> dict:
+    """Accept a JSON artifact, or a log containing the embedded digest block.
+
+    The `benchmark` workflow job pipes `d7_s_clone_conformance_check.py` into
+    `conformance.txt` and uploads that file, which is how R4 component digests
+    with runtime identity are obtainable at all without a workflow change. So the
+    gate reads either shape rather than requiring a separate extraction step that
+    someone would have to remember.
+    """
+    text = pathlib.Path(path).read_text(encoding="utf-8")
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    if BLOCK_BEGIN not in text or BLOCK_END not in text:
+        raise SystemExit(
+            f"{path} is neither a JSON artifact nor a log containing "
+            f"{BLOCK_BEGIN!r}. Nothing to compare.")
+    body = text.split(BLOCK_BEGIN, 1)[1].split(BLOCK_END, 1)[0].strip()
+    payload = json.loads(body)
+    if "world_digest_block_error" in payload:
+        raise SystemExit(
+            f"{path} carries a digest block that FAILED to build: "
+            f"{payload['world_digest_block_error']}. That is not an agreement.")
+    return payload
+
+
 def load_sample(path: str) -> dict:
-    with open(path, encoding="utf-8") as handle:
-        payload = json.load(handle)
+    payload = _read_payload(path)
     provenance = payload.get("episode_world_provenance") or {}
     worlds = provenance.get("episode_worlds") or []
     indexed = {}
