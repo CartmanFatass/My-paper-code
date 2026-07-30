@@ -1661,7 +1661,10 @@ def _adverse_assessment(
         raise failure
     assert isinstance(ledger, Mapping)
     pass_index = failure.diagnostics.get("pass_index")
-    if failure.reason == "phase_A_pre_step_coupling_or_numeric_difference":
+    if failure.reason in {
+        "phase_A_pre_step_semantic_coupling",
+        "phase_A_pre_step_numeric_difference",
+    }:
         ledger_consistent = bool(
             isinstance(pass_index, int)
             and not isinstance(pass_index, bool)

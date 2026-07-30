@@ -77,8 +77,28 @@ RESULT_BRANCHES = (
 )
 ASSESSMENT_ALLOWED_FAILURE_REASONS = (
     "static_certificate_failed_before_optimizer",
-    "phase_A_pre_step_coupling_or_numeric_difference",
+    "phase_A_pre_step_semantic_coupling",
+    "phase_A_pre_step_numeric_difference",
     "phase_A_actual_Adam_kernel_difference",
+)
+_PRE_STEP_FAILURE_REASONS = (
+    "phase_A_pre_step_semantic_coupling",
+    "phase_A_pre_step_numeric_difference",
+)
+_PRE_STEP_NUMERIC_EQUALITY_KEYS = (
+    "actor_assigned_gradient_bytes_equal",
+    "policy_loss_bytes_equal",
+    "teacher_logprob_bytes_equal",
+    "teacher_pre_tanh_bytes_equal",
+    "teacher_action_bytes_equal",
+)
+_PRE_STEP_CROSS_GRADIENT_COUNT_KEYS = (
+    "baseline_loss_gradient_into_actor_count",
+    "actor_loss_gradient_into_baseline_count",
+)
+_PRE_STEP_COMPARISON_KEYS = frozenset(
+    (*_PRE_STEP_NUMERIC_EQUALITY_KEYS, *_PRE_STEP_CROSS_GRADIENT_COUNT_KEYS,
+     "plan_RNG_unchanged")
 )
 
 ACTOR_PARAMETER_PREFIX = "policy."
@@ -982,11 +1002,27 @@ def optimize_phase_A_update(
             "baseline_loss_gradient_into_actor_count": sum(row is not None for row in baseline_into_actor),
             "actor_loss_gradient_into_baseline_count": sum(row is not None for row in actor_into_baseline),
         }
-        if not all(value is True for key, value in pre_equal.items() if not key.endswith("_count")) or any(
-            pre_equal[key] != 0 for key in pre_equal if key.endswith("_count")
-        ) or not plan_rng_unchanged:
+        pre_step_diagnostics = {
+            **pre_equal,
+            "plan_RNG_unchanged": plan_rng_unchanged,
+        }
+        semantic_coupling = bool(
+            any(
+                pre_equal[key] != 0
+                for key in _PRE_STEP_CROSS_GRADIENT_COUNT_KEYS
+            )
+            or not plan_rng_unchanged
+        )
+        numeric_difference = any(
+            pre_equal[key] is not True for key in _PRE_STEP_NUMERIC_EQUALITY_KEYS
+        )
+        if semantic_coupling or numeric_difference:
             raise G51InvariantError(
-                "phase_A_pre_step_coupling_or_numeric_difference",
+                (
+                    "phase_A_pre_step_semantic_coupling"
+                    if semantic_coupling
+                    else "phase_A_pre_step_numeric_difference"
+                ),
                 {
                     "pass_index": pass_index,
                     "optimizer_ledger": _optimizer_ledger(
@@ -994,7 +1030,7 @@ def optimize_phase_A_update(
                         failure_detected_before_current_pair=True,
                     ),
                     "static_certificate": static,
-                    "comparison": pre_equal,
+                    "comparison": pre_step_diagnostics,
                 },
             )
         reference_actor_steps_before = tuple(
@@ -1929,6 +1965,114 @@ def _static_coupling_detected(value: Mapping[str, object]) -> bool:
     )
 
 
+def _pre_step_comparison(
+    diagnostics: object,
+) -> tuple[Mapping[str, object] | None, Mapping[str, object] | None]:
+    if not isinstance(diagnostics, Mapping):
+        return None, None
+    static = diagnostics.get("static_certificate")
+    comparison = diagnostics.get("comparison")
+    return (
+        static if isinstance(static, Mapping) else None,
+        comparison if isinstance(comparison, Mapping) else None,
+    )
+
+
+def _pre_step_semantic_predicates_complete(diagnostics: object) -> bool:
+    static, comparison = _pre_step_comparison(diagnostics)
+    return bool(
+        static is not None
+        and comparison is not None
+        and validate_static_certificate(static)
+        and set(comparison) == _PRE_STEP_COMPARISON_KEYS
+        and all(
+            isinstance(comparison.get(name), bool)
+            for name in _PRE_STEP_NUMERIC_EQUALITY_KEYS
+        )
+        and all(
+            isinstance(comparison.get(name), int)
+            and not isinstance(comparison.get(name), bool)
+            and int(comparison[name]) >= 0
+            for name in _PRE_STEP_CROSS_GRADIENT_COUNT_KEYS
+        )
+        and isinstance(comparison.get("plan_RNG_unchanged"), bool)
+    )
+
+
+def _pre_step_semantic_coupling_detected(diagnostics: object) -> bool:
+    static, comparison = _pre_step_comparison(diagnostics)
+    if (
+        static is None
+        or comparison is None
+        or not _pre_step_semantic_predicates_complete(diagnostics)
+    ):
+        return False
+    return bool(
+        _static_coupling_detected(static)
+        or any(
+            int(comparison[name]) > 0
+            for name in _PRE_STEP_CROSS_GRADIENT_COUNT_KEYS
+        )
+        or comparison.get("plan_RNG_unchanged") is False
+    )
+
+
+def _pre_step_numeric_difference_detected(diagnostics: object) -> bool:
+    static, comparison = _pre_step_comparison(diagnostics)
+    if (
+        static is None
+        or comparison is None
+        or not validate_static_certificate(static)
+        or not _pre_step_semantic_predicates_complete(diagnostics)
+        or _pre_step_semantic_coupling_detected(diagnostics)
+        or any(name not in comparison for name in _PRE_STEP_NUMERIC_EQUALITY_KEYS)
+    ):
+        return False
+    return any(
+        comparison.get(name) is not True
+        for name in _PRE_STEP_NUMERIC_EQUALITY_KEYS
+    )
+
+
+def _failure_route_consistent(
+    failure: object,
+    evidence: Mapping[str, object],
+    result: object,
+) -> bool:
+    if failure is None:
+        return True
+    if not isinstance(failure, Mapping) or set(failure) != {
+        "passed",
+        "reason",
+        "diagnostics",
+    } or failure.get("passed") is not False:
+        return False
+    reason = failure.get("reason")
+    diagnostics = failure.get("diagnostics")
+    if reason == "phase_A_pre_step_semantic_coupling":
+        return bool(
+            result == COUPLING_RESULT
+            and evidence.get("semantic_coupling_detected") is True
+            and _pre_step_semantic_coupling_detected(diagnostics)
+        )
+    if reason == "phase_A_pre_step_numeric_difference":
+        return bool(
+            result == NUMERICALLY_UNRESOLVED_RESULT
+            and evidence.get("semantic_coupling_detected") is not True
+            and _pre_step_numeric_difference_detected(diagnostics)
+        )
+    if reason == "phase_A_actual_Adam_kernel_difference":
+        return bool(
+            result == NUMERICALLY_UNRESOLVED_RESULT
+            and evidence.get("semantic_coupling_detected") is not True
+        )
+    if reason == "static_certificate_failed_before_optimizer":
+        return result == INVALID_RESULT
+    return bool(
+        result == INVALID_RESULT and evidence.get("evidence_valid") is False
+    )
+
+
 def classify_result(evidence: Mapping[str, object]) -> str:
     if evidence.get("provenance_valid", True) is not True or evidence.get("evidence_valid", True) is not True:
         return INVALID_RESULT
@@ -1960,10 +2104,15 @@ def build_result_evidence_envelope(
     failure_record: dict[str, object] | None = None
     if failure is not None:
         failure_record = failure.to_record()
-        reason = failure.reason.lower()
-        if "coupling" in reason or "cross_gradient" in reason:
+        if (
+            failure.reason == "phase_A_pre_step_semantic_coupling"
+            and _pre_step_semantic_coupling_detected(failure.diagnostics)
+        ):
             routed["semantic_coupling_detected"] = True
-        elif "numeric" in reason or "adam_kernel_difference" in reason:
+        elif (
+            failure.reason == "phase_A_pre_step_numeric_difference"
+            and _pre_step_numeric_difference_detected(failure.diagnostics)
+        ) or failure.reason == "phase_A_actual_Adam_kernel_difference":
             routed["numerical_kernel_unresolved"] = True
         else:
             routed["evidence_valid"] = False
@@ -2009,11 +2158,7 @@ def validate_result_evidence_envelope(value: object) -> bool:
         and isinstance(evidence, Mapping)
         and result == classify_result(evidence)
         and result in RESULT_BRANCHES
-        and (failure is None or (
-            isinstance(failure, Mapping)
-            and set(failure) == {"passed", "reason", "diagnostics"}
-            and failure.get("passed") is False
-        ))
+        and _failure_route_consistent(failure, evidence, result)
         and value.get("valid_evidence") is (result != INVALID_RESULT)
         and value.get("successful_exact_result") is (result == EXACT_RESULT)
         and (result != EXACT_RESULT or value.get("D_G51") == 0)
@@ -2090,7 +2235,7 @@ def assess_structural_witness(
             raise
         assert isinstance(ledger, Mapping)
         pass_index = error.diagnostics.get("pass_index")
-        if error.reason == "phase_A_pre_step_coupling_or_numeric_difference":
+        if error.reason in _PRE_STEP_FAILURE_REASONS:
             ledger_consistent = bool(
                 isinstance(pass_index, int)
                 and ledger["completed_paired_passes"] == pass_index
@@ -2242,12 +2387,20 @@ def validate_structural_assessment(value: object) -> bool:
     pass_index = diagnostics.get("pass_index")
     if result == COUPLING_RESULT:
         return bool(
-            reason == "phase_A_pre_step_coupling_or_numeric_difference"
+            reason == "phase_A_pre_step_semantic_coupling"
+            and _pre_step_semantic_coupling_detected(diagnostics)
             and isinstance(pass_index, int)
             and ledger.get("completed_paired_passes") == pass_index
             and ledger.get("failure_detected_before_current_pair") is True
         )
     if result == NUMERICALLY_UNRESOLVED_RESULT:
+        if reason == "phase_A_pre_step_numeric_difference":
+            return bool(
+                _pre_step_numeric_difference_detected(diagnostics)
+                and isinstance(pass_index, int)
+                and ledger.get("completed_paired_passes") == pass_index
+                and ledger.get("failure_detected_before_current_pair") is True
+            )
         return bool(
             reason == "phase_A_actual_Adam_kernel_difference"
             and isinstance(pass_index, int)

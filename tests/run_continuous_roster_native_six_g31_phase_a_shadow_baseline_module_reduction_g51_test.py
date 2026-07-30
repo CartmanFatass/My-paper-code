@@ -70,7 +70,7 @@ def _synthetic_adverse_failure(
         )
     if branch == runner.COUPLING_BRANCH:
         return runner.source.G51InvariantError(
-            "phase_A_pre_step_coupling_or_numeric_difference",
+            "phase_A_pre_step_semantic_coupling",
             {
                 "pass_index": 0,
                 "optimizer_ledger": runner.source._optimizer_ledger(
@@ -78,7 +78,16 @@ def _synthetic_adverse_failure(
                     failure_detected_before_current_pair=True,
                 ),
                 "static_certificate": static,
-                "comparison": {"synthetic_zero_work_test": True},
+                "comparison": {
+                    "actor_assigned_gradient_bytes_equal": True,
+                    "policy_loss_bytes_equal": True,
+                    "teacher_logprob_bytes_equal": True,
+                    "teacher_pre_tanh_bytes_equal": True,
+                    "teacher_action_bytes_equal": True,
+                    "baseline_loss_gradient_into_actor_count": 1,
+                    "actor_loss_gradient_into_baseline_count": 0,
+                    "plan_RNG_unchanged": True,
+                },
             },
         )
     if branch == runner.UNRESOLVED_BRANCH:
@@ -499,7 +508,7 @@ def test_unknown_and_partial_step_failures_are_reraised_without_assessment(
     assert unknown_error.value is unknown
 
     partial = runner.source.G51InvariantError(
-        "phase_A_pre_step_coupling_or_numeric_difference",
+        "phase_A_pre_step_semantic_coupling",
         {
             "pass_index": 0,
             "optimizer_ledger": runner.source._optimizer_ledger(
@@ -514,6 +523,76 @@ def test_unknown_and_partial_step_failures_are_reraised_without_assessment(
             source_commit=TEST_SOURCE_COMMIT, failure=partial
         )
     assert partial_error.value is partial
+
+
+def test_zero_coupling_pre_step_numeric_difference_is_unresolved_with_zero_steps(
+    runner,
+    readiness_bundle: tuple[
+        Path, dict[str, object], dict[str, object], dict[str, object]
+    ],
+    tmp_path: Path,
+) -> None:
+    exact_root, training, _, _ = readiness_bundle
+    static = training["static_certificate"]
+    assert isinstance(static, Mapping)
+    failure = runner.source.G51InvariantError(
+        "phase_A_pre_step_numeric_difference",
+        {
+            "pass_index": 0,
+            "optimizer_ledger": runner.source._optimizer_ledger(
+                paired_passes=0,
+                failure_detected_before_current_pair=True,
+            ),
+            "static_certificate": static,
+            "comparison": {
+                "actor_assigned_gradient_bytes_equal": False,
+                "policy_loss_bytes_equal": True,
+                "teacher_logprob_bytes_equal": True,
+                "teacher_pre_tanh_bytes_equal": True,
+                "teacher_action_bytes_equal": True,
+                "baseline_loss_gradient_into_actor_count": 0,
+                "actor_loss_gradient_into_baseline_count": 0,
+                "plan_RNG_unchanged": True,
+            },
+        },
+    )
+    assessment = runner._adverse_assessment(
+        source_commit=TEST_SOURCE_COMMIT,
+        failure=failure,
+    )
+    assert runner._strict_structural_assessment(
+        assessment, source_commit=TEST_SOURCE_COMMIT
+    )
+    assert assessment["result_envelope"]["result"] == runner.UNRESOLVED_BRANCH
+    assert assessment["result_envelope"]["evidence"].get(
+        "semantic_coupling_detected"
+    ) is not True
+    assert assessment["optimizer_ledger"]["reference_actor_steps"] == 0
+    assert assessment["optimizer_ledger"]["reduced_actor_steps"] == 0
+    assert assessment["optimizer_ledger"]["completed_paired_passes"] == 0
+    assert assessment["optimizer_ledger"][
+        "failure_detected_before_current_pair"
+    ] is True
+
+    trajectory = runner._load_shared_phase_A_trajectory(
+        exact_root / runner.SHARED_TRAJECTORY_REFERENCE
+    )
+    root = tmp_path / "pre_step_numeric_unresolved"
+    terminal = runner.record_terminal_assessment(
+        run_root=root,
+        source_commit=TEST_SOURCE_COMMIT,
+        assessment=assessment,
+        trajectory=trajectory,
+    )
+    evaluation = runner.evaluate(run_root=root)
+    analysis = runner.analyze(run_root=root)
+    assert terminal["work_accounting"]["completed_paired_passes"] == 0
+    assert terminal["checkpoint_inventory"] == {}
+    assert evaluation["result_branch"] == runner.UNRESOLVED_BRANCH
+    assert evaluation["evaluation_optimizer_steps"] == 0
+    assert evaluation["environment_transitions"] == 0
+    assert analysis["result_branch"] == runner.UNRESOLVED_BRANCH
+    assert analysis["passed"] is False
 
 
 def test_recursive_artifact_and_checkpoint_tamper_guards_fail_closed(

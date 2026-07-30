@@ -127,6 +127,9 @@ def test_identity_result_order_and_zero_phase_B_structural_helper() -> None:
         g51.build_structural_witness(None)  # type: ignore[arg-type]
 
     update_source = inspect.getsource(g51.optimize_phase_A_update)
+    assert "phase_A_pre_step_coupling_or_numeric_difference" not in update_source
+    assert "phase_A_pre_step_semantic_coupling" in update_source
+    assert "phase_A_pre_step_numeric_difference" in update_source
     assert "reference_baseline_optimizer_steps" not in update_source
     assert "reference_baseline_Adam_step_count" not in update_source
     assert "reference_baseline_parameter_Adam_exposures" in update_source
@@ -183,6 +186,98 @@ def test_identity_result_order_and_zero_phase_B_structural_helper() -> None:
         failure=g51.G51InvariantError("localized_coupling", {"path": "x"}),
     )
     assert invalid_first["result"] == g51.INVALID_RESULT
+
+
+def test_actual_pre_step_numeric_difference_is_zero_step_unresolved(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    previous_threads = torch.get_num_threads()
+    torch.set_num_threads(1)
+    try:
+        models = g51.make_phase_A_models(
+            member_capacity=8, initialization_seed=10_501_000
+        )
+        optimizers = g51.make_phase_A_optimizers(models)
+        trajectory = g51.g40.collect_g40_trajectory(
+            models[g51.REFERENCE_ARM],
+            episode_ids=range(8),
+            ledger_seed=11_402_000,
+            action_seed=11_403_000,
+            device=torch.device("cpu"),
+        )
+        original_reduced_plan = g51._reduced_plan
+
+        def numerically_perturbed_reduced_plan(*args: object, **kwargs: object):
+            plan = original_reduced_plan(*args, **kwargs)
+            assigned = list(plan.assigned)
+            assigned[0] = assigned[0] + torch.ones_like(assigned[0])
+            return g51._ReducedPlan(
+                policy_loss=plan.policy_loss,
+                entropy_objective=plan.entropy_objective,
+                assigned=tuple(assigned),
+                replay=plan.replay,
+            )
+
+        monkeypatch.setattr(g51, "_reduced_plan", numerically_perturbed_reduced_plan)
+        with pytest.raises(g51.G51InvariantError) as captured:
+            g51.optimize_phase_A_update(models, optimizers, trajectory)
+        failure = captured.value
+        assert failure.reason == "phase_A_pre_step_numeric_difference"
+        diagnostics = failure.diagnostics
+        comparison = diagnostics["comparison"]
+        assert set(comparison) == g51._PRE_STEP_COMPARISON_KEYS
+        assert comparison["actor_assigned_gradient_bytes_equal"] is False
+        assert comparison["baseline_loss_gradient_into_actor_count"] == 0
+        assert comparison["actor_loss_gradient_into_baseline_count"] == 0
+        assert comparison["plan_RNG_unchanged"] is True
+        assert g51._pre_step_semantic_coupling_detected(diagnostics) is False
+        assert g51._pre_step_numeric_difference_detected(diagnostics) is True
+        ledger = diagnostics["optimizer_ledger"]
+        assert ledger["reference_actor_steps"] == 0
+        assert ledger["reduced_actor_steps"] == 0
+        assert ledger["completed_paired_passes"] == 0
+        assert ledger["failure_detected_before_current_pair"] is True
+        assert all(not optimizer.state for optimizer in optimizers.values())
+
+        envelope = g51.build_result_evidence_envelope(
+            {
+                "static_certificate": diagnostics["static_certificate"],
+                "provenance_valid": True,
+                "evidence_valid": True,
+            },
+            failure=failure,
+        )
+        assert g51.validate_result_evidence_envelope(envelope)
+        assert envelope["result"] == g51.NUMERICALLY_UNRESOLVED_RESULT
+        assert envelope["evidence"].get("semantic_coupling_detected") is not True
+
+        for malformed_comparison in (
+            {
+                key: value
+                for key, value in comparison.items()
+                if key != "policy_loss_bytes_equal"
+            },
+            {**comparison, "teacher_action_bytes_equal": 0},
+        ):
+            malformed_diagnostics = copy.deepcopy(diagnostics)
+            malformed_diagnostics["comparison"] = malformed_comparison
+            with pytest.raises(
+                g51.G51InvariantError,
+                match="result_evidence_envelope_invalid",
+            ):
+                g51.build_result_evidence_envelope(
+                    {
+                        "static_certificate": diagnostics["static_certificate"],
+                        "provenance_valid": True,
+                        "evidence_valid": True,
+                    },
+                    failure=g51.G51InvariantError(
+                        "phase_A_pre_step_numeric_difference",
+                        malformed_diagnostics,
+                    ),
+                )
+    finally:
+        torch.set_num_threads(previous_threads)
 
 
 def test_actual_phase_B_zero_step_G49_certificate_is_required_and_tamper_closed() -> None:
@@ -284,13 +379,22 @@ def test_assessment_allowlist_ledgers_partial_rejection_and_forged_branch(
             paired_passes=0, failure_detected_before_current_pair=True
         ),
         "static_certificate": static,
-        "comparison": {"baseline_loss_gradient_into_actor_count": 1},
+        "comparison": {
+            "actor_assigned_gradient_bytes_equal": True,
+            "policy_loss_bytes_equal": True,
+            "teacher_logprob_bytes_equal": True,
+            "teacher_pre_tanh_bytes_equal": True,
+            "teacher_action_bytes_equal": True,
+            "baseline_loss_gradient_into_actor_count": 1,
+            "actor_loss_gradient_into_baseline_count": 0,
+            "plan_RNG_unchanged": True,
+        },
     }
     monkeypatch.setattr(
         g51,
         "build_structural_witness",
         lambda *_args, **_kwargs: fail(
-            "phase_A_pre_step_coupling_or_numeric_difference", pre_error
+            "phase_A_pre_step_semantic_coupling", pre_error
         ),
     )
     coupling = g51.assess_structural_witness(None)  # type: ignore[arg-type]
@@ -299,6 +403,30 @@ def test_assessment_allowlist_ledgers_partial_rejection_and_forged_branch(
     assert coupling["optimizer_ledger"]["reference_actor_steps"] == 0
     assert coupling["optimizer_ledger"]["reduced_actor_steps"] == 0
     assert coupling["optimizer_ledger"]["failure_detected_before_current_pair"] is True
+
+    numeric_error = copy.deepcopy(pre_error)
+    numeric_error["comparison"]["baseline_loss_gradient_into_actor_count"] = 0
+    numeric_error["comparison"]["actor_assigned_gradient_bytes_equal"] = False
+    monkeypatch.setattr(
+        g51,
+        "build_structural_witness",
+        lambda *_args, **_kwargs: fail(
+            "phase_A_pre_step_numeric_difference", numeric_error
+        ),
+    )
+    pre_step_unresolved = g51.assess_structural_witness(None)  # type: ignore[arg-type]
+    assert g51.validate_structural_assessment(pre_step_unresolved)
+    assert pre_step_unresolved["result_envelope"]["result"] == (
+        g51.NUMERICALLY_UNRESOLVED_RESULT
+    )
+    assert pre_step_unresolved["optimizer_ledger"]["reference_actor_steps"] == 0
+    assert pre_step_unresolved["optimizer_ledger"]["reduced_actor_steps"] == 0
+    assert pre_step_unresolved["optimizer_ledger"][
+        "failure_detected_before_current_pair"
+    ] is True
+    assert pre_step_unresolved["result_envelope"]["evidence"].get(
+        "semantic_coupling_detected"
+    ) is not True
 
     post_error = {
         "pass_index": 0,
@@ -344,13 +472,13 @@ def test_assessment_allowlist_ledgers_partial_rejection_and_forged_branch(
         g51,
         "build_structural_witness",
         lambda *_args, **_kwargs: fail(
-            "phase_A_pre_step_coupling_or_numeric_difference", partial
+            "phase_A_pre_step_semantic_coupling", partial
         ),
     )
     with pytest.raises(g51.G51InvariantError) as partial_error:
         g51.assess_structural_witness(None)  # type: ignore[arg-type]
     assert partial_error.value.reason == (
-        "phase_A_pre_step_coupling_or_numeric_difference"
+        "phase_A_pre_step_semantic_coupling"
     )
 
     forged = copy.deepcopy(coupling)
