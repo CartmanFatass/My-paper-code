@@ -22,7 +22,7 @@ import numpy as np
 _SOURCE: Final[Path] = (
     Path(__file__).resolve().parent / "native" / "uav_geometry_backend.cpp"
 )
-_BUILD_INTERFACE_VERSION: Final[str] = "ascii_source_stage_v2"
+_BUILD_INTERFACE_VERSION: Final[str] = "communication_kernel_v1"
 _LOS_PARAMETERS: Final[dict[str, tuple[float, float, float, float]]] = {
     "suburban": (0.1, 7.5e-4, 1.0, 20.0),
     "urban": (0.3, 5e-4, 1.5, 25.0),
@@ -36,11 +36,17 @@ class UAVCppBackendUnavailable(RuntimeError):
 
 
 @dataclass(frozen=True)
-class BatchedUAVGeometry:
-    next_uav_positions: np.ndarray
+class UAVCommunicationBatch:
     access_path_loss: np.ndarray
     air_path_loss: np.ndarray
     base_path_loss: np.ndarray
+    user_ipn_dbm: np.ndarray
+    uav_uav_ipn_dbm: np.ndarray
+    uav_bs_ipn_dbm: np.ndarray
+    bs_uav_ipn_dbm: np.ndarray
+    cap_uav_uav: np.ndarray
+    cap_uav_bs: np.ndarray
+    cap_bs_uav: np.ndarray
 
 
 def _safe_component(value: str) -> str:
@@ -235,6 +241,33 @@ def _require_array(
     return value
 
 
+def _require_mcs_array(name: str, value: np.ndarray, *, rank: int) -> np.ndarray:
+    """Like `_require_array`, except +infinity is legal, not just finite.
+
+    `env.mcs_table`'s last row is `(float('inf'), se)` by design -- it is the
+    catch-all bucket the first-match scan falls into for every SINR that
+    cleared every real threshold. Rejecting it here would make the one
+    threshold array this kernel is required to accept (per the frozen spec,
+    split "in table order" straight out of `env.mcs_table`) permanently
+    un-passable, which would make `step_communication_batch` uncallable
+    rather than merely declining. NaN and -infinity remain rejected: neither
+    is a value this table ever legitimately carries.
+    """
+
+    if not isinstance(value, np.ndarray):
+        raise TypeError(f"{name} must be a numpy.ndarray")
+    if value.dtype != np.dtype(np.float64):
+        raise TypeError(f"{name} must have dtype float64")
+    if value.ndim != rank:
+        raise ValueError(f"{name} must have rank {rank}")
+    if not value.flags.c_contiguous:
+        raise ValueError(f"{name} must be C-contiguous")
+    legal = np.isfinite(value) | (value == np.inf)
+    if not legal.all():
+        raise ValueError(f"{name} must contain only finite values or +inf")
+    return value
+
+
 def _require_finite_scalar(name: str, value: float) -> float:
     result = float(value)
     if not np.isfinite(result):
@@ -242,21 +275,26 @@ def _require_finite_scalar(name: str, value: float) -> float:
     return result
 
 
-def step_geometry_batch(
+def step_communication_batch(
     *,
     uav_positions: np.ndarray,
     user_positions: np.ndarray,
     ground_bs_positions: np.ndarray,
-    prepared_velocities: np.ndarray,
-    movable_mask: np.ndarray,
-    time_step: float,
-    area_size: float,
-    height_range: tuple[float, float],
     carrier_frequency: float,
     environment_type: str,
+    tx_power: float,
+    ground_bs_tx_power: float,
+    noise_power_linear_mw: float,
+    interference_radius: float,
+    use_fdma: bool,
+    aclr_linear: float,
+    bandwidth: float,
+    min_sinr: float,
+    mcs_thresholds: np.ndarray,
+    mcs_efficiencies: np.ndarray,
     build_root: str | os.PathLike[str] | None = None,
-) -> BatchedUAVGeometry:
-    """Execute one stateless batch geometry step without implicit conversions."""
+) -> UAVCommunicationBatch:
+    """Execute one stateless batch communication step without implicit conversions."""
 
     uavs = _require_array(
         "uav_positions", uav_positions, dtype=np.dtype(np.float64), rank=3, trailing=3
@@ -271,65 +309,69 @@ def step_geometry_batch(
         rank=3,
         trailing=3,
     )
-    velocities = _require_array(
-        "prepared_velocities",
-        prepared_velocities,
-        dtype=np.dtype(np.float32),
-        rank=3,
-        trailing=3,
-    )
-    mask = _require_array(
-        "movable_mask", movable_mask, dtype=np.dtype(np.bool_), rank=2
+    thresholds = _require_mcs_array("mcs_thresholds", mcs_thresholds, rank=1)
+    efficiencies = _require_array(
+        "mcs_efficiencies", mcs_efficiencies, dtype=np.dtype(np.float64), rank=1
     )
     batch, uav_count, _ = uavs.shape
     if users.shape[0] != batch or bases.shape[0] != batch:
         raise ValueError("all position arrays must share the batch dimension")
-    if velocities.shape[:2] != (batch, uav_count) or mask.shape != (
-        batch,
-        uav_count,
-    ):
-        raise ValueError("velocity/mask dimensions must match the UAV batch")
     if environment_type not in _LOS_PARAMETERS:
         raise ValueError(
             "environment_type must be suburban, urban, or dense_urban"
         )
-    if len(height_range) != 2:
-        raise ValueError("height_range must contain exactly two bounds")
+    if thresholds.shape[0] < 1 or thresholds.shape != efficiencies.shape:
+        raise ValueError(
+            "mcs_thresholds and mcs_efficiencies must share one non-empty length"
+        )
 
-    dt = _require_finite_scalar("time_step", time_step)
-    area = _require_finite_scalar("area_size", area_size)
-    minimum_height = _require_finite_scalar("height_range[0]", height_range[0])
-    maximum_height = _require_finite_scalar("height_range[1]", height_range[1])
     frequency = _require_finite_scalar("carrier_frequency", carrier_frequency)
-    if dt <= 0.0 or area <= 0.0 or frequency <= 0.0:
-        raise ValueError("time_step, area_size, and carrier_frequency must be positive")
-    if minimum_height > maximum_height:
-        raise ValueError("height_range lower bound exceeds upper bound")
+    tx = _require_finite_scalar("tx_power", tx_power)
+    ground_bs_tx = _require_finite_scalar("ground_bs_tx_power", ground_bs_tx_power)
+    noise_linear = _require_finite_scalar(
+        "noise_power_linear_mw", noise_power_linear_mw
+    )
+    radius = _require_finite_scalar("interference_radius", interference_radius)
+    aclr = _require_finite_scalar("aclr_linear", aclr_linear)
+    band = _require_finite_scalar("bandwidth", bandwidth)
+    min_sinr_value = _require_finite_scalar("min_sinr", min_sinr)
+    if frequency <= 0.0:
+        raise ValueError("carrier_frequency must be positive")
 
     los_a, los_b, eta_los, eta_nlos = _LOS_PARAMETERS[environment_type]
     module = load_uav_cpp_backend(build_root=build_root)
-    raw = module.step_geometry_batch(
+    raw = module.step_communication_batch(
         uavs,
         users,
         bases,
-        velocities,
-        mask,
-        dt,
-        area,
-        minimum_height,
-        maximum_height,
         frequency,
         los_a,
         los_b,
         eta_los,
         eta_nlos,
+        tx,
+        ground_bs_tx,
+        noise_linear,
+        radius,
+        bool(use_fdma),
+        aclr,
+        band,
+        min_sinr_value,
+        thresholds,
+        efficiencies,
     )
-    if not isinstance(raw, tuple) or len(raw) != 4:
-        raise RuntimeError("native geometry backend returned an invalid payload")
+    if not isinstance(raw, tuple) or len(raw) != 10:
+        raise RuntimeError("native communication backend returned an invalid payload")
     expected = (
-        ((batch, uav_count, 3), np.dtype(np.float64)),
         ((batch, uav_count, users.shape[1]), np.dtype(np.float64)),
         ((batch, uav_count, uav_count), np.dtype(np.float64)),
+        ((batch, uav_count, bases.shape[1]), np.dtype(np.float64)),
+        ((batch, uav_count, users.shape[1]), np.dtype(np.float64)),
+        ((batch, uav_count, uav_count), np.dtype(np.float64)),
+        ((batch, uav_count, bases.shape[1]), np.dtype(np.float64)),
+        ((batch, uav_count), np.dtype(np.float64)),
+        ((batch, uav_count, uav_count), np.dtype(np.float64)),
+        ((batch, uav_count, bases.shape[1]), np.dtype(np.float64)),
         ((batch, uav_count, bases.shape[1]), np.dtype(np.float64)),
     )
     checked: list[np.ndarray] = []
@@ -341,4 +383,4 @@ def step_geometry_batch(
         if not np.isfinite(value).all():
             raise RuntimeError(f"native output {index} contains non-finite values")
         checked.append(value)
-    return BatchedUAVGeometry(*checked)
+    return UAVCommunicationBatch(*checked)

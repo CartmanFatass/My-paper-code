@@ -2738,52 +2738,64 @@ class UAVForcedRelayEnv(ParallelEnv):
             "config": self._communication_config_signature(),
             "user_path_loss": {},
             "user_path_loss_matrix": None,
+            "air_path_loss_matrix": None,
+            "base_path_loss_matrix": None,
+            "user_ipn_matrix": None,
+            "uav_uav_ipn_matrix": None,
+            "uav_bs_ipn_matrix": None,
+            "bs_uav_ipn_vector": None,
+            "cap_uav_uav_matrix": None,
+            "cap_uav_bs_matrix": None,
+            "cap_bs_uav_matrix": None,
             "link_sinr": {},
             "link_capacity": {},
         }
         self._step_communication_cache = cache
-        self._prefill_access_path_loss_natively(cache)
+        self._prefill_communication_natively(cache)
         return cache
 
-    def _prefill_access_path_loss_natively(self, cache):
-        """Fill every UAV-user path loss with ONE native call, or change nothing.
+    def _prefill_communication_natively(self, cache):
+        """Fill every communication matrix this step consumes with ONE native call.
 
         OFF BY DEFAULT. Set `env.use_native_geometry = True` to enable.
 
         `_update_channel_state` drives an `n_uavs * n_users` loop over
-        `_compute_sinr`, and each new pair reaches `_cached_user_path_loss` ->
-        `_compute_air_to_ground_path_loss`.
+        `_compute_sinr`, and every SINR/capacity accessor for this step reaches
+        one of `_cached_user_path_loss`, `_cached_link_sinr`,
+        `_compute_uav_to_user_sinr`, `_compute_uav_to_uav_sinr` or
+        `_get_link_capacity`. This single call fills every matrix those
+        accessors read: access/air/base path loss, the three interference-
+        plus-noise matrices (user, uav-uav, uav-bs), the bs-uav
+        interference-plus-noise vector, and the three link-capacity matrices.
 
-        The matrix is kept AS a matrix, in `user_path_loss_matrix`. That is the
-        whole point of this function and it is not incidental: an earlier version
-        exploded the native result into the per-element `user_path_loss` dict with
-        an `n_uavs * n_users` Python loop, which re-paid the exact iteration count
-        it was supposed to retire and measured 1.044x -- inside the +/-6.8% noise
-        of the bench box. Marshalling a native array back into a Python container
-        costs what the native call saves. Index the array.
+        Every matrix is kept AS an array, never exploded into the per-element
+        Python dicts. An earlier version of the access-path-loss-only prefill
+        did that and measured 1.044x -- inside the +/-6.8% noise of the bench
+        box -- because marshalling a native array back into a Python container
+        repays the exact iteration count the native call exists to retire.
 
-        The self-time profile that this reading rests on: air-to-ground path loss
-        is 9.2% cumulative / 4.6% self of a scenario-7 step, so path-loss
-        arithmetic alone caps out near 1.10x. The remaining cost is call COUNT,
-        not arithmetic -- 3410 `_compute_distance` calls, 1052 cache-validity
-        checks and 813 config-signature rebuilds per step. Do not add the
-        cumulative profiler shares of nested frames together; that double-counts
-        and is how the discarded 1.6x projection was produced.
-
-        This is a substitution of PROVENANCE, not of physics: the kernel's
-        `access_path_loss` is bitwise identical to
-        `_compute_air_to_ground_path_loss` over the full matrix, max_ulp 0
-        (`tests/uav_cpp_backend_oracle_test.py`). Because the values are the same
-        bits, falling back to the Python path on any failure cannot change a
-        result -- which is why every failure below is swallowed rather than
-        raised. If that equality ever stops holding, the oracle goes red and this
-        function is not the thing to fix.
+        This is a substitution of PROVENANCE, not of physics: every kernel
+        output is bitwise identical, element for element, to the Python method
+        it replaces, max_ulp 0 (`tests/uav_cpp_backend_oracle_test.py`).
+        Because the values are the same bits, falling back to the Python path
+        on any failure cannot change a result -- which is why every failure
+        below is swallowed rather than raised. If that equality ever stops
+        holding, the oracle goes red and this function is not the thing to fix.
 
         Returns True when it prefilled, so a test can assert the fast path was
         actually taken rather than silently skipped -- a benchmark against a
         never-enabled backend measures nothing and looks like a win.
         """
         if not bool(getattr(self, "use_native_geometry", False)):
+            return False
+        # The kernel accumulates every interference sum LEFT-TO-RIGHT. Measured
+        # on this box: `np.sum` over a Python list of float64 values is
+        # bitwise identical to sequential left-to-right summation for list
+        # lengths <= 7 and DIVERGES at length 8. Every interference sum here
+        # has at most n_uavs - 1 <= 7 terms only when n_uavs <= 8, so beyond
+        # that the kernel's sums would stop matching `np.sum`'s bit-for-bit.
+        # Refuse to engage rather than silently diverge.
+        if self.n_uavs > 8:
             return False
         try:
             from ha_ctse_process import uav_cpp_backend
@@ -2795,25 +2807,32 @@ class UAVForcedRelayEnv(ParallelEnv):
             bases = np.ascontiguousarray(cache["ground_bs_positions"], dtype=np.float64)
             if uavs.ndim != 2 or users.ndim != 2 or uavs.shape[0] == 0 or users.shape[0] == 0:
                 return False
-            geometry = uav_cpp_backend.step_geometry_batch(
+            mcs_thresholds = np.ascontiguousarray(
+                [float(threshold) for threshold, _ in self.mcs_table], dtype=np.float64
+            )
+            mcs_efficiencies = np.ascontiguousarray(
+                [float(efficiency) for _, efficiency in self.mcs_table], dtype=np.float64
+            )
+            result = uav_cpp_backend.step_communication_batch(
                 uav_positions=uavs[None, ...],
                 user_positions=users[None, ...],
                 ground_bs_positions=bases[None, ...],
-                # Zero velocities and an empty movable mask make this a pure
-                # geometry query: the kernel's position integrator is a no-op, so
-                # nothing here advances the environment. Verified as zero drift
-                # by the oracle.
-                prepared_velocities=np.zeros((1,) + uavs.shape, dtype=np.float32),
-                movable_mask=np.zeros((1, uavs.shape[0]), dtype=np.bool_),
-                time_step=float(self.time_step),
-                area_size=float(self.area_size),
-                height_range=tuple(float(v) for v in self.height_range),
                 carrier_frequency=float(self.carrier_frequency),
                 environment_type=str(getattr(self, "environment_type", "urban")),
+                tx_power=float(self.tx_power),
+                ground_bs_tx_power=float(self.ground_bs_tx_power),
+                noise_power_linear_mw=float(self._noise_power_linear_mw()),
+                interference_radius=float(self._compute_interference_radius()),
+                use_fdma=bool(self.use_fdma),
+                aclr_linear=float(self.aclr_linear),
+                bandwidth=float(self.bandwidth),
+                min_sinr=float(self.min_sinr),
+                mcs_thresholds=mcs_thresholds,
+                mcs_efficiencies=mcs_efficiencies,
             )
         except Exception:
             return False
-        access = np.asarray(geometry.access_path_loss)[0]
+        access = np.asarray(result.access_path_loss)[0]
         if access.shape != (uavs.shape[0], users.shape[0]):
             return False
         if access.dtype != np.float64:
@@ -2821,6 +2840,15 @@ class UAVForcedRelayEnv(ParallelEnv):
             # the Python path returns. A narrower dtype would silently round.
             return False
         cache["user_path_loss_matrix"] = access
+        cache["air_path_loss_matrix"] = np.asarray(result.air_path_loss)[0]
+        cache["base_path_loss_matrix"] = np.asarray(result.base_path_loss)[0]
+        cache["user_ipn_matrix"] = np.asarray(result.user_ipn_dbm)[0]
+        cache["uav_uav_ipn_matrix"] = np.asarray(result.uav_uav_ipn_dbm)[0]
+        cache["uav_bs_ipn_matrix"] = np.asarray(result.uav_bs_ipn_dbm)[0]
+        cache["bs_uav_ipn_vector"] = np.asarray(result.bs_uav_ipn_dbm)[0]
+        cache["cap_uav_uav_matrix"] = np.asarray(result.cap_uav_uav)[0]
+        cache["cap_uav_bs_matrix"] = np.asarray(result.cap_uav_bs)[0]
+        cache["cap_bs_uav_matrix"] = np.asarray(result.cap_bs_uav)[0]
         return True
 
     def _current_step_communication_cache(self):
@@ -2872,6 +2900,19 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def _cached_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
         cache = self._current_step_communication_cache()
+        if cache is not None:
+            if tx_type == "uav" and rx_type == "uav":
+                matrix = cache["uav_uav_ipn_matrix"]
+                if matrix is not None:
+                    return rx_power - float(matrix[int(tx_idx), int(rx_idx)])
+            elif tx_type == "uav" and rx_type == "ground_bs":
+                matrix = cache["uav_bs_ipn_matrix"]
+                if matrix is not None:
+                    return rx_power - float(matrix[int(tx_idx), int(rx_idx)])
+            elif tx_type == "ground_bs" and rx_type == "uav":
+                vector = cache["bs_uav_ipn_vector"]
+                if vector is not None:
+                    return rx_power - float(vector[int(rx_idx)])
         key = (
             str(tx_type),
             int(tx_idx),
@@ -3204,12 +3245,17 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         使用场景4的精确信道模型计算UAV到UAV的SINR
         """
-        sender_pos = self.uav_positions[sender_idx]
-        receiver_pos = self.uav_positions[receiver_idx]
-        
-        # 使用精确的A2A路径损耗模型
-        path_loss = self._compute_air_to_air_path_loss(sender_pos, receiver_pos)
-        
+        cache = self._current_step_communication_cache()
+        if cache is not None and cache["air_path_loss_matrix"] is not None:
+            path_loss = float(
+                cache["air_path_loss_matrix"][int(sender_idx), int(receiver_idx)]
+            )
+        else:
+            sender_pos = self.uav_positions[sender_idx]
+            receiver_pos = self.uav_positions[receiver_idx]
+            # 使用精确的A2A路径损耗模型
+            path_loss = self._compute_air_to_air_path_loss(sender_pos, receiver_pos)
+
         # 计算接收功率
         rx_power = self.tx_power - path_loss
         
@@ -4458,6 +4504,20 @@ class UAVForcedRelayEnv(ParallelEnv):
         if cache is not None and cache_key in cache:
             return cache[cache_key]
 
+        if step_cache is not None:
+            if node1_type == "uav" and node2_type == "uav":
+                matrix = step_cache["cap_uav_uav_matrix"]
+                if matrix is not None:
+                    return float(matrix[int(node1_idx), int(node2_idx)])
+            elif node1_type == "uav" and node2_type == "ground_bs":
+                matrix = step_cache["cap_uav_bs_matrix"]
+                if matrix is not None:
+                    return float(matrix[int(node1_idx), int(node2_idx)])
+            elif node1_type == "ground_bs" and node2_type == "uav":
+                matrix = step_cache["cap_bs_uav_matrix"]
+                if matrix is not None:
+                    return float(matrix[int(node2_idx), int(node1_idx)])
+
         # 获取节点位置
         if node1_type == "uav":
             pos1 = self.uav_positions[node1_idx]
@@ -5312,22 +5372,27 @@ class UAVForcedRelayEnv(ParallelEnv):
             uav_idx: 无人机索引
             user_idx: 用户索引
             rx_power: 接收功率 (dBm)
-            
+
         返回:
             sinr_db: SINR (dB)
         """
+        if step_cache is _STEP_CACHE_UNSET:
+            step_cache = self._current_step_communication_cache()
+        if step_cache is not None:
+            matrix = step_cache["user_ipn_matrix"]
+            if matrix is not None:
+                return rx_power - float(matrix[int(uav_idx), int(user_idx)])
+
         # 原则1: 动态干扰半径 - 基于能够产生有意义干扰的最大距离（已移除上限）
         interference_radius = self._compute_interference_radius()
-        
+
         # 原则2: 确定性干扰权重 - 模拟MAC层协议，提高干扰强度
         # 设置为1.0，表示所有干扰源都产生100%的干扰，更接近真实同频干扰场景
         uav_interference_weight = 1.0
-        
+
         interference_powers_linear = []
         user_pos_3d = self.user_positions[user_idx]  # 用户位置已经是三维的
-        if step_cache is _STEP_CACHE_UNSET:
-            step_cache = self._current_step_communication_cache()
-        
+
         # 计算来自其他UAV的干扰
         for i in range(self.n_uavs):
             if i != uav_idx:  # 排除目标UAV自身

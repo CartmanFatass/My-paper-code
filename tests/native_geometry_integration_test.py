@@ -81,7 +81,7 @@ def test_the_prefill_actually_runs_when_enabled(toolchain) -> None:
     env = _build(native=True)
     cache = env._refresh_step_communication_cache()
     assert cache is not None
-    took_it = env._prefill_access_path_loss_natively(cache)
+    took_it = env._prefill_communication_natively(cache)
     assert took_it is True, "the native prefill declined; the rest of this file is vacuous"
     matrix = cache["user_path_loss_matrix"]
     assert matrix is not None, "prefill reported success but stored no matrix"
@@ -95,15 +95,38 @@ def test_the_prefill_actually_runs_when_enabled(toolchain) -> None:
         "dict re-pays the n_uavs*n_users Python loop the native call exists to "
         "retire, and measured 1.044x -- inside the bench box's noise.")
 
+    # Every OTHER matrix this single native call is supposed to fill must also
+    # be present, cover the whole extent, and stay float64 -- a partial fill
+    # would silently reintroduce the Python path for whichever matrix is
+    # missing, exactly like `user_path_loss_matrix` above.
+    expected_shapes = {
+        "air_path_loss_matrix": (env.n_uavs, env.n_uavs),
+        "base_path_loss_matrix": (env.n_uavs, env.n_ground_bs),
+        "user_ipn_matrix": (env.n_uavs, env.n_users),
+        "uav_uav_ipn_matrix": (env.n_uavs, env.n_uavs),
+        "uav_bs_ipn_matrix": (env.n_uavs, env.n_ground_bs),
+        "bs_uav_ipn_vector": (env.n_uavs,),
+        "cap_uav_uav_matrix": (env.n_uavs, env.n_uavs),
+        "cap_uav_bs_matrix": (env.n_uavs, env.n_ground_bs),
+        "cap_bs_uav_matrix": (env.n_uavs, env.n_ground_bs),
+    }
+    for key, shape in expected_shapes.items():
+        value = cache[key]
+        assert value is not None, f"prefill reported success but left {key} unset"
+        assert value.shape == shape, f"{key} has shape {value.shape}, expected {shape}"
+        assert value.dtype == np.float64, f"{key} must stay float64"
+
 
 def test_the_prefill_declines_when_the_flag_is_off() -> None:
     """The paired negative for the flag itself. Default-off must mean off."""
 
     env = _build(native=False)
     cache = env._refresh_step_communication_cache()
-    assert env._prefill_access_path_loss_natively(cache) is False
+    assert env._prefill_communication_natively(cache) is False
     assert cache["user_path_loss"] == {}
     assert cache["user_path_loss_matrix"] is None
+    assert cache["air_path_loss_matrix"] is None
+    assert cache["cap_uav_uav_matrix"] is None
 
 
 def test_default_is_off_without_anyone_setting_it() -> None:
@@ -139,7 +162,7 @@ def test_prefilled_values_are_bitwise_what_the_python_path_would_cache(toolchain
 
     env = _build(native=True)
     cache = env._refresh_step_communication_cache()
-    assert env._prefill_access_path_loss_natively(cache) is True
+    assert env._prefill_communication_natively(cache) is True
     matrix = cache["user_path_loss_matrix"]
 
     mismatches = []
@@ -193,7 +216,7 @@ def test_the_comparison_can_actually_fail(toolchain) -> None:
     baseline = np.asarray(env.sinr_matrix).copy()
 
     cache = env._refresh_step_communication_cache()
-    assert env._prefill_access_path_loss_natively(cache) is True
+    assert env._prefill_communication_natively(cache) is True
     # Perturb the ndarray the accessor now reads. Copy first: the native buffer
     # must not be assumed writeable, and a silent failure to mutate would make
     # this negative pass for the wrong reason.
