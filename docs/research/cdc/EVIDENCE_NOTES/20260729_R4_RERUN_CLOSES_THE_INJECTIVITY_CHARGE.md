@@ -44,9 +44,24 @@ empty set. Charging ends by one of two routes:
 
 - **Full charge.** Measured from the env: `charging_power_w` 1000 W, `time_step`
   1 s, `battery_capacity_wh` 160 -> 0.2778 Wh/step = 0.174% of capacity per step.
-  From the 2% service cutoff to full is **~565 steps**. Charging onset on this
-  configuration sits near step 900, and the registered prefix is capped at
-  `T_E_MAX = 950`. A full charge cannot complete inside the prefix.
+  From the 2% service cutoff to full is **~565 steps**.
+
+  **MEASURED ON THIS POPULATION, not inherited.** An earlier draft of this note
+  said "charging onset sits near step 900", carried over from the development
+  topology -- a number for a different population doing load-bearing work. The
+  re-run's own 218 recorded leaves say:
+
+  ```text
+  capture_step (charging capture)   min 602   p10 755   median 873   max 951
+  departure_step (dock request)     min 306   p10 533   median 728   max 891
+  leaves with capture_step + 565 <= 950            0 of 218
+  ```
+
+  The earliest capture anywhere in the population is step **602**, so the
+  earliest a full charge could complete is step **1167** against a prefix capped
+  at `T_E_MAX = 950` -- 217 steps beyond the cap, and that is the best case out of
+  218. A full charge cannot complete inside the prefix, by measurement on the
+  population the claim is about.
 - **Losing station selection** to contention. Needs no full charge, and did not
   occur across all 109 charging entries.
 
