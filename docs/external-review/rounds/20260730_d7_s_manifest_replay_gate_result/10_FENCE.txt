@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260730_d7_s_manifest_replay_gate_result
-stage_commit=PLACEHOLDER
+stage_commit=a666b86caab06990d931ae346b637617ad6993c1
 question=docs/external-review/rounds/20260730_d7_s_manifest_replay_gate_result/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
