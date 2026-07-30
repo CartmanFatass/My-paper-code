@@ -16,6 +16,7 @@ audit target commit:
 - `docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md`
 - `docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 - `docs/external-review/rounds/20260730_uav_g0_executable_contract_addendum_v2/21_PRO_OPEN_RAW.md`
 - `ha_ctse_process/uav_source_identifiability_g0.py`
