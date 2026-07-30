@@ -116,3 +116,66 @@ tuple -- contract namespace, topology hash, block, episode index, `user_world_se
 -- fails to determine the world across a machine boundary. That is a
 population-identity failure rather than final-digit numerical drift, which is what
 the ruling said and what the manifest-replay repair addresses regardless of cause.
+
+## THIRD SAMPLE, 2026-07-30: a tiebreaker, and the fleet is homogeneous today
+
+Two concurrent `benchmark` runs (`30530239912`, `30530245806`) at the corrected
+identity, carrying the R4 digest block: 32 R4 episode keys each, component digests
+and runtime identity.
+
+```text
+both runners        AMD EPYC 7763 64-Core Processor
+detected features   identical, no difference in either direction
+agreement           32 of 32 keys, all nine arrays
+
+WORLD_CONFORMANCE_UNTESTED   (exit 1)
+```
+
+`UNTESTED` is the correct verdict and the gate is right to give it: **the two runs
+landed on the same CPU model**, so their agreement says nothing about
+cross-machine behaviour. What is new is that we can now SEE that, rather than
+guessing -- `cpu_model` and numpy's runtime-detected feature set are recorded.
+
+**The GitHub-hosted fleet looks homogeneous.** Two concurrent runs, guaranteed
+different runners, both EPYC 7763 with identical feature detection. Repeated
+tagging may therefore never produce two different CPU models, which means the
+CPU-dispatch hypothesis may not be testable on this vehicle at all.
+
+### The tiebreaker, which is the useful part
+
+Today's fingerprints against both historical runs, same R4 keys:
+
+```text
+                          now == H     now == re-run     H == re-run
+overall (32 keys)            29             24              21
+20260736  (4 keys)          True          False           False
+20260740  (4 keys)          True          False           False
+20260739  (3 keys)         False           True           False
+```
+
+**Neither historical run is simply "the broken one."** On 20260736 and 20260740 the
+re-run is the outlier; on 20260739 H is. A third independent sample agrees with
+whichever run is not the outlier, in every case.
+
+That rules out a story where one run was corrupted and the other was correct, and
+it is not what a per-run random perturbation would look like either -- today's two
+runs agree with each other on 32 of 32, so the generator is not simply unstable
+from run to run.
+
+### What it does NOT establish
+
+The cause. Neither H nor the re-run recorded its hardware -- `runtime_identity` is
+newer than both -- so it cannot be tested whether their outlier episodes correlate
+with the CPU they ran on. That evidence is unrecoverable for those two artifacts.
+
+The glibc-ifunc prediction remains **untested**, not refuted: today's pair could not
+test it, because they shared a CPU model.
+
+Pro's Challenge 6 continues to bind.
+
+### What changed for the better
+
+Every artifact this repository produces from now on carries the runtime that made
+it. The next disagreement is interpretable at the moment it appears, rather than
+requiring three samples and a tiebreaker to partially localize. That is the durable
+outcome of this stretch, and it is worth more than the verdict.
