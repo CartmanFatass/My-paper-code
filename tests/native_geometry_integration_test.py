@@ -83,9 +83,17 @@ def test_the_prefill_actually_runs_when_enabled(toolchain) -> None:
     assert cache is not None
     took_it = env._prefill_access_path_loss_natively(cache)
     assert took_it is True, "the native prefill declined; the rest of this file is vacuous"
-    assert len(cache["user_path_loss"]) == env.n_uavs * env.n_users, (
+    matrix = cache["user_path_loss_matrix"]
+    assert matrix is not None, "prefill reported success but stored no matrix"
+    assert matrix.shape == (env.n_uavs, env.n_users), (
         "prefill must cover the WHOLE matrix; a partial fill leaves misses that "
         "silently reintroduce the Python path")
+    assert matrix.dtype == np.float64, (
+        "a narrower dtype would round the value the environment reads")
+    assert cache["user_path_loss"] == {}, (
+        "the native result must stay an ndarray. Exploding it into the per-element "
+        "dict re-pays the n_uavs*n_users Python loop the native call exists to "
+        "retire, and measured 1.044x -- inside the bench box's noise.")
 
 
 def test_the_prefill_declines_when_the_flag_is_off() -> None:
@@ -95,6 +103,7 @@ def test_the_prefill_declines_when_the_flag_is_off() -> None:
     cache = env._refresh_step_communication_cache()
     assert env._prefill_access_path_loss_natively(cache) is False
     assert cache["user_path_loss"] == {}
+    assert cache["user_path_loss_matrix"] is None
 
 
 def test_default_is_off_without_anyone_setting_it() -> None:
@@ -131,15 +140,22 @@ def test_prefilled_values_are_bitwise_what_the_python_path_would_cache(toolchain
     env = _build(native=True)
     cache = env._refresh_step_communication_cache()
     assert env._prefill_access_path_loss_natively(cache) is True
-    prefilled = dict(cache["user_path_loss"])
+    matrix = cache["user_path_loss_matrix"]
 
     mismatches = []
-    for (i, j), cached in prefilled.items():
-        expected = env._compute_air_to_ground_path_loss(
-            env.uav_positions[i], env.user_positions[j])
-        if np.float64(cached).tobytes() != np.float64(expected).tobytes():
-            mismatches.append(((i, j), cached, expected))
-    assert not mismatches, f"{len(mismatches)} of {len(prefilled)} differ: {mismatches[:3]}"
+    total = 0
+    for i in range(env.n_uavs):
+        for j in range(env.n_users):
+            total += 1
+            # Read through the accessor the environment actually uses, so this
+            # tests the wiring and not just the array's contents.
+            cached = env._cached_user_path_loss(i, j, step_cache=cache)
+            expected = env._compute_air_to_ground_path_loss(
+                env.uav_positions[i], env.user_positions[j])
+            if np.float64(cached).tobytes() != np.float64(expected).tobytes():
+                mismatches.append(((i, j), cached, expected))
+    assert total == matrix.size, "iterated a different extent than was stored"
+    assert not mismatches, f"{len(mismatches)} of {total} differ: {mismatches[:3]}"
 
 
 def test_a_full_step_produces_identical_channel_state(toolchain) -> None:
@@ -178,9 +194,14 @@ def test_the_comparison_can_actually_fail(toolchain) -> None:
 
     cache = env._refresh_step_communication_cache()
     assert env._prefill_access_path_loss_natively(cache) is True
-    key = (0, 0)
-    cache["user_path_loss"][key] = float(
-        np.nextafter(np.float64(cache["user_path_loss"][key]), np.inf))
+    # Perturb the ndarray the accessor now reads. Copy first: the native buffer
+    # must not be assumed writeable, and a silent failure to mutate would make
+    # this negative pass for the wrong reason.
+    perturbed = np.array(cache["user_path_loss_matrix"], dtype=np.float64, copy=True)
+    perturbed[0, 0] = np.nextafter(perturbed[0, 0], np.inf)
+    assert perturbed[0, 0] != cache["user_path_loss_matrix"][0, 0], (
+        "the perturbation did not take, so this negative proves nothing")
+    cache["user_path_loss_matrix"] = perturbed
     env._channel_update_cache_active = True
     try:
         for j in range(env.n_users):

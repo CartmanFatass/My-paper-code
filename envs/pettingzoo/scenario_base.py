@@ -2711,6 +2711,7 @@ class UAVForcedRelayEnv(ParallelEnv):
             "unavailable": self._communication_unavailable_mask(),
             "config": self._communication_config_signature(),
             "user_path_loss": {},
+            "user_path_loss_matrix": None,
             "link_sinr": {},
             "link_capacity": {},
         }
@@ -2725,11 +2726,23 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         `_update_channel_state` drives an `n_uavs * n_users` loop over
         `_compute_sinr`, and each new pair reaches `_cached_user_path_loss` ->
-        `_compute_air_to_ground_path_loss`. Measured on a scenario-7 step
-        (0.0937 s): the air-to-ground path loss is 17.5% of it and the cache
-        machinery wrapped around it another 24%, so populating the whole matrix
-        once retires both -- the cache still answers every lookup, it just never
-        has to miss.
+        `_compute_air_to_ground_path_loss`.
+
+        The matrix is kept AS a matrix, in `user_path_loss_matrix`. That is the
+        whole point of this function and it is not incidental: an earlier version
+        exploded the native result into the per-element `user_path_loss` dict with
+        an `n_uavs * n_users` Python loop, which re-paid the exact iteration count
+        it was supposed to retire and measured 1.044x -- inside the +/-6.8% noise
+        of the bench box. Marshalling a native array back into a Python container
+        costs what the native call saves. Index the array.
+
+        The self-time profile that this reading rests on: air-to-ground path loss
+        is 9.2% cumulative / 4.6% self of a scenario-7 step, so path-loss
+        arithmetic alone caps out near 1.10x. The remaining cost is call COUNT,
+        not arithmetic -- 3410 `_compute_distance` calls, 1052 cache-validity
+        checks and 813 config-signature rebuilds per step. Do not add the
+        cumulative profiler shares of nested frames together; that double-counts
+        and is how the discarded 1.6x projection was produced.
 
         This is a substitution of PROVENANCE, not of physics: the kernel's
         `access_path_loss` is bitwise identical to
@@ -2777,11 +2790,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         access = np.asarray(geometry.access_path_loss)[0]
         if access.shape != (uavs.shape[0], users.shape[0]):
             return False
-        store = cache["user_path_loss"]
-        for i in range(access.shape[0]):
-            row = access[i]
-            for j in range(row.shape[0]):
-                store[(i, j)] = float(row[j])
+        if access.dtype != np.float64:
+            # float64 is what makes an ndarray read bit-identical to the float
+            # the Python path returns. A narrower dtype would silently round.
+            return False
+        cache["user_path_loss_matrix"] = access
         return True
 
     def _current_step_communication_cache(self):
@@ -2813,6 +2826,14 @@ class UAVForcedRelayEnv(ParallelEnv):
             if step_cache is _STEP_CACHE_UNSET
             else step_cache
         )
+        if cache is not None:
+            matrix = cache["user_path_loss_matrix"]
+            if matrix is not None:
+                # Bitwise identical to _compute_air_to_ground_path_loss over the
+                # whole matrix, max_ulp 0 (tests/uav_cpp_backend_oracle_test.py),
+                # so this returns the same float the Python path would. Reached
+                # without a tuple key, a dict hash or a possible miss.
+                return float(matrix[int(uav_idx), int(user_idx)])
         key = (int(uav_idx), int(user_idx))
         if cache is not None and key in cache["user_path_loss"]:
             return cache["user_path_loss"][key]
