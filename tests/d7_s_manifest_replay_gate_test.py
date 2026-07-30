@@ -56,7 +56,19 @@ def _episode(**over):
             "snapshot_state_hash": "e" * 64,
             "unit_stable_digest": "f" * 64,
             "unit_flex_digest": "g" * 64,
+            "unit_stable_invalid": False,
+            "unit_flex_invalid": False,
             "horizons_executed": {"stable": 139, "flex": 550},
+            "continuation_stable_digest": "j" * 64,
+            "continuation_flex_digest": "k" * 64,
+            "continuation_stable_steps": 139,
+            "continuation_flex_steps": 550,
+            "continuation_stable_user_waypoint_regenerations": 2,
+            "continuation_stable_cluster_target_regenerations": 0,
+            "continuation_flex_user_waypoint_regenerations": 5,
+            "continuation_flex_cluster_target_regenerations": 1,
+            "post_manifest_user_waypoint_regenerations": 7,
+            "post_manifest_cluster_target_regenerations": 1,
         },
     }
     entry.update(over)
@@ -199,6 +211,161 @@ def test_a_unit_digest_divergence_fails(tmp_path) -> None:
     out, code = _run(tmp_path, _probe(pid=1), right)
     assert "MANIFEST_REPLAY_FAIL" in out, out
     assert "unit_flex_digest" in out
+    assert code == 1
+
+
+@pytest.mark.parametrize("field", gate.REQUIRED_HORIZON_FIELDS)
+def test_every_required_horizon_field_is_untested_when_missing(tmp_path, field) -> None:
+    """PAIRED NEGATIVE for ruling section 5.4: a required horizon field missing
+    on one side must never be silently skipped -- the old gate's
+    `if field not in ha and field not in hb: continue` let a whole surface go
+    uncompared instead of reporting it."""
+
+    left = _probe(pid=1)
+    entry = _episode()
+    entry["horizon"] = copy.deepcopy(entry["horizon"])
+    del entry["horizon"][field]
+    left["episodes"] = [entry]
+    out, code = _run(tmp_path, left, _probe(pid=2))
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert field in out
+    assert "absence is UNTESTED, not equality" in out
+    assert code == 1
+
+
+@pytest.mark.parametrize("field", gate.REQUIRED_HORIZON_FIELDS)
+def test_every_required_horizon_field_is_untested_when_none(tmp_path, field) -> None:
+    """PAIRED NEGATIVE for the other half of section 5.4: two probes that both
+    record `None` for a required field must not compare equal and read as a
+    witness -- the exact failure mode the ruling names for
+    `snapshot_state_hash`, generalized to every required field."""
+
+    def _episode_with_none():
+        entry = _episode()
+        entry["horizon"] = copy.deepcopy(entry["horizon"])
+        entry["horizon"][field] = None
+        return entry
+
+    left = _probe(pid=1)
+    left["episodes"] = [_episode_with_none()]
+    right = _probe(pid=2)
+    right["episodes"] = [_episode_with_none()]
+    out, code = _run(tmp_path, left, right)
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert field in out
+    assert "absence is UNTESTED, not equality" in out
+    assert code == 1
+
+
+def test_event_found_false_on_both_sides_is_untested_not_equal(tmp_path) -> None:
+    """PAIRED NEGATIVE: two probes that both found NO event still "agree" under
+    plain equality (False == False). Section 8 action 6 requires
+    `event_found == True`, not merely equal-to-each-other."""
+
+    def _no_event():
+        entry = _episode()
+        entry["horizon"] = copy.deepcopy(entry["horizon"])
+        entry["horizon"]["event_found"] = False
+        return entry
+
+    left = _probe(pid=1)
+    left["episodes"] = [_no_event()]
+    right = _probe(pid=2)
+    right["episodes"] = [_no_event()]
+    out, code = _run(tmp_path, left, right)
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert "event_found is not True" in out
+    assert code == 1
+
+
+@pytest.mark.parametrize("flag", ("unit_stable_invalid", "unit_flex_invalid"))
+def test_an_invalid_audit_unit_is_untested(tmp_path, flag) -> None:
+    """PAIRED NEGATIVE: section 8 requires both recorded audit units to be
+    valid -- an invalid unit on either side must never read as a passing
+    comparison just because the surviving digests happen to agree."""
+
+    left = _probe(pid=1)
+    entry = _episode()
+    entry["horizon"] = copy.deepcopy(entry["horizon"])
+    entry["horizon"][flag] = True
+    left["episodes"] = [entry]
+    out, code = _run(tmp_path, left, _probe(pid=2))
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert "invalid audit unit" in out
+    assert code == 1
+
+
+def test_a_wrong_horizons_executed_length_is_untested(tmp_path) -> None:
+    """PAIRED NEGATIVE: a horizon that ran to some OTHER length must not
+    silently pass just because both sides ran to that same wrong length --
+    length must equal the REGISTERED `H_STABLE`/`H_FLEX`, not merely agree."""
+
+    left = _probe(pid=1)
+    entry = _episode()
+    entry["horizon"] = copy.deepcopy(entry["horizon"])
+    entry["horizon"]["horizons_executed"] = {"stable": 100, "flex": 550}
+    left["episodes"] = [entry]
+    out, code = _run(tmp_path, left, _probe(pid=2))
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert "horizons_executed" in out
+    assert code == 1
+
+
+@pytest.mark.parametrize("field,wrong", (("continuation_stable_steps", 50),
+                                         ("continuation_flex_steps", 400)))
+def test_a_wrong_continuation_step_count_is_untested(tmp_path, field, wrong) -> None:
+    """PAIRED NEGATIVE: the continuation-trajectory exercise (section 2 Gap 2)
+    must have actually run the registered horizon length, not some shorter
+    walk that happened to agree between the two sides."""
+
+    left = _probe(pid=1)
+    entry = _episode()
+    entry["horizon"] = copy.deepcopy(entry["horizon"])
+    entry["horizon"][field] = wrong
+    left["episodes"] = [entry]
+    out, code = _run(tmp_path, left, _probe(pid=2))
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert field in out
+    assert code == 1
+
+
+def test_no_liveness_witness_is_untested(tmp_path) -> None:
+    """PAIRED NEGATIVE for section 2 Gap 3: if every relevant generator stayed
+    dormant on both compared probes, equality must not read as evidence that
+    A1's exercised post-initialization regeneration path was ever tested."""
+
+    def _dormant():
+        entry = _episode()
+        entry["horizon"] = copy.deepcopy(entry["horizon"])
+        entry["horizon"]["post_manifest_user_waypoint_regenerations"] = 0
+        entry["horizon"]["post_manifest_cluster_target_regenerations"] = 0
+        return entry
+
+    left = _probe(pid=1)
+    left["episodes"] = [_dormant()]
+    right = _probe(pid=2)
+    right["episodes"] = [_dormant()]
+    out, code = _run(tmp_path, left, right)
+    assert "MANIFEST_REPLAY_UNTESTED" in out, out
+    assert "liveness" in out
+    assert code == 1
+
+
+@pytest.mark.parametrize("field", ("continuation_stable_digest", "continuation_flex_digest"))
+def test_a_continuation_digest_divergence_fails(tmp_path, field) -> None:
+    """PAIRED NEGATIVE for section 2 Gap 2: the new per-step continuation-
+    trajectory digest is a FAIL surface, not merely diagnostic -- a divergence
+    inside the 139- or 550-step fork the previous gate never recorded must
+    fail the gate outright."""
+
+    right = _probe(pid=2)
+    entry = _episode()
+    entry["horizon"] = copy.deepcopy(entry["horizon"])
+    entry["horizon"][field] = "z" * 64
+    right["episodes"] = [entry]
+    out, code = _run(tmp_path, _probe(pid=1), right)
+    assert "MANIFEST_REPLAY_FAIL" in out, out
+    assert field in out
     assert code == 1
 
 

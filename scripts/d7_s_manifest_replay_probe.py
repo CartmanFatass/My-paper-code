@@ -254,14 +254,41 @@ def replay_one_episode(config, *, manifest_root: str, topology_seed: int, block:
     outcome["replaced_a_different_world"] = any(
         before[name] != after[name] for name in audit.WORLD_COMPONENT_ORDER)
 
-    # a6 -- the COMPLETE pre-step environment identity, not only the nine arrays.
-    # `full_state_fingerprint` covers the continuation-sensitive surfaces the nine
-    # arrays do not: battery, charging, station queues, duty map, lifecycle mask.
+    # a6 -- ruling 2026-07-30 section 1.1: the actual first-action boundary is
+    # AFTER the registered energy permutation and one canonical
+    # post-initialization refresh, not immediately after manifest application.
+    # Fingerprinting earlier made two of six measured mismatches
+    # (`uav_return_energy_margins`, `uav_return_threshold_ratios`) look like
+    # failures at a boundary the audit never actually steps from -- they
+    # converge once the energy profile is applied.
+    energies = audit.draw_energy_permutation(energy_seed=seeds["energy_seed"])
+    audit.apply_energy_profile(env, energies)
+
+    # The canonicalization barrier (section 1.2's "canonical post-pin
+    # initialization barrier") is owned by another agent, as a method on the
+    # Scenario 7 env. It does not exist yet on every branch, so this probe must
+    # run -- and correctly report a6 as failed, never crash -- before it lands.
+    canonicalize = getattr(env, "canonicalize_post_pin_initialization", None)
+    outcome["canonicalization_barrier_present"] = canonicalize is not None
+    if canonicalize is not None:
+        canonicalize()
+        outcome["assertions"]["a6_complete_pre_step_environment_identity"] = True
+    else:
+        outcome["assertions"]["a6_complete_pre_step_environment_identity"] = False
+        outcome["failure"] = (
+            "a6_complete_pre_step_environment_identity: "
+            "canonicalize_post_pin_initialization is absent on env -- there is no "
+            "canonical post-pin initialization barrier yet (ruling 2026-07-30 "
+            "section 1.2)")
+
+    # `full_state_fingerprint` covers the continuation-sensitive surfaces the
+    # nine world arrays do not: battery, charging, station queues, duty map,
+    # lifecycle mask. Recorded regardless of whether the barrier ran, so a
+    # missing barrier still produces a comparable (if uncertified) fingerprint.
     outcome["episode_world_fingerprint"] = audit.episode_world_fingerprint(
         env, seed_value=seeds["user_world_seed"])["fingerprint"]
     outcome["pre_step_state_fingerprint"] = audit.full_state_fingerprint(env)
     outcome["pre_step_state_attribute_digests"] = state_attribute_digests(env)
-    outcome["assertions"]["a6_complete_pre_step_environment_identity"] = True
 
     if not run_horizon:
         outcome["horizon"] = None
@@ -269,9 +296,8 @@ def replay_one_episode(config, *, manifest_root: str, topology_seed: int, block:
 
     # a8's INPUTS. The equality itself is cross-runner and belongs to the gate;
     # what this side can do is execute the registered horizon and digest the four
-    # surfaces the ruling names.
-    energies = audit.draw_energy_permutation(energy_seed=seeds["energy_seed"])
-    audit.apply_energy_profile(env, energies)
+    # surfaces the ruling names. The energy permutation was already applied above
+    # (section 1.1) -- only the first action remains.
     prefix = audit.roll_prefix_and_find_event(env)
 
     horizon = {
@@ -290,8 +316,13 @@ def replay_one_episode(config, *, manifest_root: str, topology_seed: int, block:
         # bullet 2: event and candidate identity
         horizon["event_conformance_digest"] = _canonical_digest(event["conformance_record"])
         horizon["duty_map_at_te_digest"] = _canonical_digest(event["duty_map_at_te"])
-        horizon["snapshot_state_hash"] = snapshot.state_hash if hasattr(
-            snapshot, "state_hash") else None
+        # Ruling section 5.4: a present-but-None field can look like a witness
+        # when two `None`s compare equal. `EventSnapshot` exposes no public
+        # `state_hash` attribute today, so the key is DROPPED rather than
+        # written as `None` -- absence must read as absence, on both the probe
+        # and the gate side.
+        if hasattr(snapshot, "state_hash"):
+            horizon["snapshot_state_hash"] = snapshot.state_hash
         # bullets 3 and 4: primary-G component series and branch-relevant
         # quantities both live inside the per-limb units, over the registered
         # stable (139) and flex (550) horizons
@@ -309,8 +340,106 @@ def replay_one_episode(config, *, manifest_root: str, topology_seed: int, block:
         horizon["unit_flex_invalid"] = bool(unit_flex.get("event_invalid"))
         horizon["horizons_executed"] = {"stable": audit.H_STABLE, "flex": audit.H_FLEX}
 
+        # section 2 Gap 2 + Gap 3, closed together: a per-step lossless digest of
+        # the nine world arrays through EACH continuation fork (not just the
+        # prefix roll `post_roll_world_digests` already covers), plus a liveness
+        # count of the post-initialization trigonometric writers along that same
+        # fork -- so equality can no longer mean "every relevant generator
+        # stayed dormant."
+        for limb, h_val in (("stable", audit.H_STABLE), ("flex", audit.H_FLEX)):
+            cont_seed = audit.stream_seed(
+                topology_seed=topology_seed, block=block, episode_seed=seeds["episode_seed"],
+                limb=limb, event_index=idx, candidate_target_id="PROBE_CONTINUATION_WITNESS",
+                phase="probe_continuation_witness", replicate_index=0, contract_id=contract_id)
+            trajectory = continuation_trajectory_witness(
+                snapshot=snapshot, event=event, limb=limb, horizon=h_val,
+                continuation_seed=cont_seed)
+            horizon[f"continuation_{limb}_digest"] = trajectory["digest"]
+            horizon[f"continuation_{limb}_steps"] = trajectory["steps"]
+            horizon[f"continuation_{limb}_user_waypoint_regenerations"] = (
+                trajectory["user_waypoint_regenerations"])
+            horizon[f"continuation_{limb}_cluster_target_regenerations"] = (
+                trajectory["cluster_target_regenerations"])
+        horizon["post_manifest_user_waypoint_regenerations"] = (
+            horizon["continuation_stable_user_waypoint_regenerations"]
+            + horizon["continuation_flex_user_waypoint_regenerations"])
+        horizon["post_manifest_cluster_target_regenerations"] = (
+            horizon["continuation_stable_cluster_target_regenerations"]
+            + horizon["continuation_flex_cluster_target_regenerations"])
+
     outcome["horizon"] = horizon
     return outcome
+
+
+def continuation_trajectory_witness(*, snapshot, event: dict, limb: str, horizon: int,
+                                    continuation_seed: int) -> dict:
+    """Section 2 Gap 2 + Gap 3: an explicit, probe-controlled continuation the
+    probe steps itself -- never inside `run_audit_event`, which cannot be
+    hooked without touching audit internals.
+
+    WHY THIS DOES NOT DUPLICATE `fork_continuation`'S LOGIC. It calls the exact
+    same two PUBLIC primitives `run_audit_event` already uses for isolation and
+    per-step advance -- `EventSnapshot.clone` and `step_once` -- in a loop the
+    probe controls, unperturbed (no `focal_uav`, i.e. the same continuation KEEP
+    already runs). `fork_continuation` only returns aggregated step metrics, never
+    the per-step world arrays, so there is no public surface that hands back a
+    per-step digest; stepping the clone directly, one call to the same primitive
+    `fork_continuation` calls internally, is the documented fallback for exactly
+    this gap (`evaluator_forward_replay`, above in this same audit module, is the
+    existing precedent for stepping a clone directly with `step_once`).
+
+    WHY THE COUNTING WRAPPERS GO ON *THIS* CLONE, NEVER ON `snapshot`'S SOURCE
+    ENV. `copy.deepcopy` treats a plain function as atomic and never descends
+    into its closure. A counting wrapper installed on the snapshot's source env
+    (or on `snapshot._env` itself) would still be present, UNCHANGED, on every
+    future `snapshot.clone()` -- including the KEEP/SELECT/EVAL clones
+    `run_audit_event` takes from the very same snapshot for the real audit
+    units. Its closure would keep calling the ORIGINAL env's bound method,
+    silently mutating the wrong environment's arrays on every clone that
+    happened to fire a regeneration -- corrupting the real audit units, not
+    just this diagnostic. Wrapping only this already-cloned, already-isolated,
+    single-use env avoids that hazard entirely: nothing downstream ever
+    deep-copies this particular object again, and it is discarded once its
+    digest is taken.
+    """
+    env = snapshot.clone(context=f"probe continuation trajectory witness limb={limb}")
+    counts = {"user_waypoint": 0, "cluster_target": 0}
+
+    def _counting(key, fn):
+        def _wrapped(*args, **kwargs):
+            counts[key] += 1
+            return fn(*args, **kwargs)
+        return _wrapped
+
+    for name, key in (
+        ("_generate_intra_cluster_waypoint", "user_waypoint"),
+        ("_generate_inter_cluster_waypoint", "user_waypoint"),
+        ("_generate_new_cluster_target_rpgm", "cluster_target"),
+    ):
+        original = getattr(env, name, None)
+        if original is not None:
+            setattr(env, name, _counting(key, original))
+
+    # Mirrors `fork_continuation`'s own first line: reseed to the continuation
+    # stream, never the stream that produced the prefix.
+    env.np_random = np.random.RandomState(int(continuation_seed) % (2**32 - 1))
+    duty_map = dict(event["duty_map_at_te"])
+    centroids = event["service_centroids_at_te"]
+    service_centroids = None if centroids is None else np.asarray(centroids).copy()
+
+    rolling = hashlib.sha256()
+    steps_completed = 0
+    for t in range(int(horizon)):
+        step = audit.step_once(env, duty_map=duty_map, service_centroids=service_centroids,
+                               schedule="constructive_mixed", step_index=t)
+        duty_map = step["duty_map"]
+        service_centroids = step["service_centroids"]
+        rolling.update(_canonical_digest(_world_component_digests(env)).encode("ascii"))
+        steps_completed += 1
+
+    return {"digest": rolling.hexdigest(), "steps": steps_completed,
+            "user_waypoint_regenerations": counts["user_waypoint"],
+            "cluster_target_regenerations": counts["cluster_target"]}
 
 
 def run_probe(*, manifest_root: str, topology_seed: int, block: str, episodes: int,
