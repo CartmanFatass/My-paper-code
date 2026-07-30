@@ -199,3 +199,32 @@ def test_no_docstring_still_claims_cross_machine_reproduction() -> None:
     # and each site must carry the scope it actually has
     assert "IT DOES NOT MAKE THE DRAW REPRODUCIBLE" in source
     assert "within one\n    machine only" in source
+
+
+def test_the_component_order_has_exactly_one_definition() -> None:
+    """The order is a hash input, so two copies of it is a drift risk.
+
+    It was an inline literal inside `episode_world_fingerprint` and had to be
+    repeated in `scripts/d7_s_world_component_digest_diff.py`. Extracted to
+    `WORLD_COMPONENT_ORDER` on 2026-07-30. The localizer keeps a light local copy
+    rather than importing the audit module (which pulls in the environments), so
+    this test is what stops the two from drifting.
+    """
+
+    import importlib.util
+
+    assert len(audit.WORLD_COMPONENT_ORDER) == 9
+    assert audit.WORLD_COMPONENT_ORDER[0] == "user_positions"
+
+    spec = importlib.util.spec_from_file_location(
+        "_diff_for_order", ROOT / "scripts" / "d7_s_world_component_digest_diff.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert tuple(module.COMPONENT_ORDER) == tuple(audit.WORLD_COMPONENT_ORDER), (
+        "the localizer's component order has drifted from the fingerprint's")
+
+    # and the fingerprint must actually consume the constant, not a stale literal
+    source = (ROOT / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
+    start = source.index("def episode_world_fingerprint")
+    block = source[start:start + 4000]
+    assert "for name in WORLD_COMPONENT_ORDER:" in block

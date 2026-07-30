@@ -94,6 +94,22 @@ EPISODE_STEPS = 1500
 HELDOUT_LOW = np.array([0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80])
 REJOIN_BATTERY_RATIO = 0.80
 
+# The episode world's components, in GENERATION order, and the exact order
+# `episode_world_fingerprint` hashes them in. Extracted from an inline literal on
+# 2026-07-30 because the same tuple had to be repeated in the cross-machine
+# localizer, and two copies of a hash input's ordering is a drift risk: changing
+# one would silently make every prior fingerprint incomparable.
+#
+# The order is load-bearing beyond the hash. A divergence in an earlier component
+# propagates into later ones through the shared RNG stream, so "the first
+# differing component" only names a root cause when read in this order.
+WORLD_COMPONENT_ORDER = (
+    "user_positions", "user_velocities", "user_waypoints",
+    "user_pause_times", "user_cluster_assignments",
+    "cluster_centers_history", "cluster_velocities",
+    "cluster_waypoints", "cluster_pause_times",
+)
+
 # --- sections 1/2/3: estimand, event window, horizons -----------------------
 DELTA = 10
 X_STABLE_DISPLACEMENT_M = 50.0
@@ -1561,10 +1577,7 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
     # `component_digests` is derived from exactly the bytes that feed
     # `fingerprint`, so it cannot drift from it.
     component_digests: dict[str, str] = {}
-    for name in ("user_positions", "user_velocities", "user_waypoints",
-                 "user_pause_times", "user_cluster_assignments",
-                 "cluster_centers_history", "cluster_velocities",
-                 "cluster_waypoints", "cluster_pause_times"):
+    for name in WORLD_COMPONENT_ORDER:
         value = getattr(env, name, None)
         if value is None:
             continue
