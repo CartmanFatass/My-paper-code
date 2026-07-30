@@ -49,19 +49,30 @@ empty set. Charging ends by one of two routes:
   **MEASURED ON THIS POPULATION, not inherited.** An earlier draft of this note
   said "charging onset sits near step 900", carried over from the development
   topology -- a number for a different population doing load-bearing work. The
-  re-run's own 218 recorded leaves say:
+  re-run's own 109 recorded leaves, read from the eight shards:
 
   ```text
   capture_step (charging capture)   min 602   p10 755   median 873   max 951
   departure_step (dock request)     min 306   p10 533   median 728   max 891
-  leaves with capture_step + 565 <= 950            0 of 218
+  leaves with capture_step + 565 <= 950            0 of 109
   ```
 
   The earliest capture anywhere in the population is step **602**, so the
   earliest a full charge could complete is step **1167** against a prefix capped
   at `T_E_MAX = 950` -- 217 steps beyond the cap, and that is the best case out of
-  218. A full charge cannot complete inside the prefix, by measurement on the
+  109. A full charge cannot complete inside the prefix, by measurement on the
   population the claim is about.
+
+  **Count these from the shards only.** A first pass globbed the shard directory
+  and the pooled artifact together and reported 218 leaves -- every shard counted
+  twice. The quantiles above are unaffected (duplicating every value preserves
+  min, median and max, which is exactly why the error survived a sanity check),
+  but the population total is 109.
+
+  **The counter is corroborated independently.** `roll_power.leave_events` equals
+  `len(report["leaves"])` in all sixteen blocks, exactly. The new counter and the
+  pre-existing per-leave diagnostic list agree, which is the cross-check the
+  counter itself could not provide.
 - **Losing station selection** to contention. Needs no full charge, and did not
   occur across all 109 charging entries.
 
