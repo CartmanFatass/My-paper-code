@@ -2419,6 +2419,7 @@ def _validate_record_branchpoint_and_transducer(
     selected_candidate_id: str,
     expected_target_positions: np.ndarray,
     expected_rng_state_bindings: Mapping[str, Any] | None = None,
+    cell: Cell | str = Cell.EVENT,
 ) -> None:
     context = _validate_pre_action_context_primitive(
         record.pre_action_context
@@ -2429,6 +2430,7 @@ def _validate_record_branchpoint_and_transducer(
         physical_step=record.physical_step,
         selected_candidate_id=selected_candidate_id,
         rng_state_bindings=expected_rng_state_bindings,
+        cell=cell,
     )
     if context != expected_context:
         raise G0RealizationError(
@@ -3606,6 +3608,8 @@ def _validate_behavioral_transducer_binding(
     source: G0EpisodeSource,
     ledger: OracleSafetyLedger,
     execution: OracleBehavioralExecution,
+    *,
+    cell: Cell | str = Cell.EVENT,
 ) -> None:
     schedule = execution.target_schedule.array()
     if schedule.shape != (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3):
@@ -3624,6 +3628,7 @@ def _validate_behavioral_transducer_binding(
             selected_candidate_id=ledger.selected_candidate_id,
             expected_target_positions=targets_internal,
             expected_rng_state_bindings=expected_rng_state_bindings,
+            cell=cell,
         )
 
 
@@ -3839,6 +3844,67 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
         ),
         behavioral_replay_sha256=behavior.trace_sha256,
         return_ready_step=derived_return_ready,
+        prefix_identity_ok=True,
+        branchpoint_identity_ok=True,
+        shared_ledger_identity_ok=True,
+        prebehavior_self_replay_ok=True,
+        behavioral_self_replay_ok=True,
+        target_switch_ok=True,
+        safety_guard_ok=True,
+        replay_ok=True,
+    )
+
+
+def _validate_oracle_no_event_replay_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
+    behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
+    behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
+) -> OracleSafetyCertificate:
+    """Reconstruct the frozen Oracle Z row, for which causal R is absent."""
+
+    source, ledger, _certificate = _require_validated_oracle_safety_context(
+        context
+    )
+    behavior = oracle_behavioral_execution_from_primitive(
+        behavioral_execution.to_primitive()
+        if isinstance(behavioral_execution, OracleBehavioralExecution)
+        else behavioral_execution
+    )
+    behavior_replay = oracle_behavioral_execution_from_primitive(
+        behavioral_self_replay.to_primitive()
+        if isinstance(behavioral_self_replay, OracleBehavioralExecution)
+        else behavioral_self_replay
+    )
+    if behavior.to_primitive() != behavior_replay.to_primitive():
+        raise G0RealizationError(
+            "oracle NO_EVENT branch self-replay differs byte-for-byte"
+        )
+    if (
+        behavior.selected_candidate_id != ledger.selected_candidate_id
+        or behavior_replay.selected_candidate_id != ledger.selected_candidate_id
+    ):
+        raise G0RealizationError("oracle NO_EVENT replay reselected the reserve")
+    if behavior.return_ready_step is not None or behavior_replay.return_ready_step is not None:
+        raise G0RealizationError("oracle NO_EVENT replay observed a RETURN_READY step")
+    _validate_branch_safety_trace(ledger, behavior.steps)
+    _validate_branch_safety_trace(ledger, behavior_replay.steps)
+    _validate_behavioral_transducer_binding(
+        source, ledger, behavior, cell=Cell.NO_EVENT
+    )
+    _validate_behavioral_transducer_binding(
+        source, ledger, behavior_replay, cell=Cell.NO_EVENT
+    )
+    expected_targets = _expected_behavioral_target_schedule(context, None)
+    if not np.array_equal(behavior.target_schedule.array(), expected_targets):
+        raise G0RealizationError("oracle NO_EVENT fallback target schedule drifted")
+    return OracleSafetyCertificate(
+        ledger_sha256=ledger.content_sha256,
+        selected_candidate_id=ledger.selected_candidate_id,
+        candidate_trace_sha256=tuple(
+            candidate.trace_sha256 for candidate in ledger.candidates
+        ),
+        behavioral_replay_sha256=behavior.trace_sha256,
+        return_ready_step=None,
         prefix_identity_ok=True,
         branchpoint_identity_ok=True,
         shared_ledger_identity_ok=True,
@@ -4485,13 +4551,18 @@ def _expected_pre_action_context(
     physical_step: int,
     selected_candidate_id: str,
     rng_state_bindings: Mapping[str, Any] | None = None,
+    cell: Cell | str = Cell.EVENT,
 ) -> dict[str, Any]:
+    chosen_cell = Cell(cell)
     handles = list(initial_lifecycle_handles(source))
     epochs = np.zeros(PHYSICAL_UAVS, dtype=np.int64)
     owner_storage = source.assignment.row_to_target.index(
         source.event.owner_target.key
     )
-    if int(physical_step) >= source.event.rejoin:
+    if (
+        chosen_cell is Cell.EVENT
+        and int(physical_step) >= source.event.rejoin
+    ):
         handles[owner_storage] = replacement_lifecycle_handle(
             source, handles[owner_storage]
         )
@@ -4512,7 +4583,7 @@ def _expected_pre_action_context(
         rng_states=rng_states,
         service_active_mask=[
             bool(
-                source.event.active(int(physical_step), Cell.EVENT)
+                source.event.active(int(physical_step), chosen_cell)
                 if internal_row == TARGET_LABELS.index(source.event.owner_target)
                 else True
             )
@@ -5317,6 +5388,7 @@ class MechanicallyQualifiedOracleController:
         _validate_oracle_qualification_from_context(qualification, context)
         instance = cls.__new__(cls)
         instance._initialize(source, handles, qualification, safety_ledger)
+        instance._validated_safety_context = context
         return instance
 
     def _initialize(
@@ -5524,10 +5596,10 @@ def _controller_for_run(
         and float(time_step) == 1.0
     ):
         raise G0RealizationError("oracle behavior requires frozen S7-S1 dynamics")
-    safety_ledger = build_oracle_safety_ledger(source)
-    qualification = oracle_qualification_from_safety_ledger(source, safety_ledger)
-    return MechanicallyQualifiedOracleController(
-        source, handles, qualification, safety_ledger
+    _safety_ledger, context = _build_oracle_safety_ledger_with_context(source)
+    qualification = _oracle_qualification_from_validated_context(context)
+    return MechanicallyQualifiedOracleController._from_validated_context(
+        handles, qualification, context
     )
 
 
@@ -5824,6 +5896,13 @@ def run_g0_episode(
                 user_delivered_rate_mbps=delivered_input,
                 channel_association=association_input,
             )
+            oracle_pre_action_context = None
+            if chosen_control is Control.ORACLE:
+                oracle_pre_action_context = _pre_action_context(
+                    env,
+                    controller.ownership,
+                    controller.safety_ledger.selected_candidate_id,
+                )
             target_map = controller.target_map(
                 information,
                 physical_step=step,
@@ -5846,7 +5925,42 @@ def run_g0_episode(
                 action_support_violations += 1
             if not np.array_equal(actions[~active], np.zeros_like(actions[~active])):
                 tracker_failures += 1
-            transition = env.step_dense(actions)
+            if chosen_control is Control.ORACLE:
+                positions_internal = np.asarray(
+                    env.uav_positions, dtype=np.float64
+                ).copy()
+                targets_internal = np.zeros_like(dense_targets)
+                targets_internal[env._storage_to_internal] = dense_targets
+                active_internal = np.zeros(PHYSICAL_UAVS, dtype=np.bool_)
+                active_internal[env._storage_to_internal] = active
+                actions_internal = g1_common_target_actions(
+                    physical_positions=positions_internal,
+                    target_positions=targets_internal,
+                    active_mask=active_internal,
+                    max_speed=env.max_speed,
+                    max_vertical_speed=env.max_vertical_speed_mps,
+                    time_step=env.time_step,
+                )
+                if not np.array_equal(
+                    actions_internal[env._storage_to_internal], actions
+                ):
+                    raise G0RealizationError(
+                        "production common transducer lost permutation equivariance"
+                    )
+                oracle_transducer_evidence = _common_transducer_evidence(
+                    physical_positions=positions_internal,
+                    target_positions=targets_internal,
+                    active_mask=active_internal,
+                    raw_action=actions_internal,
+                )
+                transition = env.step_dense(
+                    actions,
+                    oracle_ownership=controller.ownership,
+                    oracle_pre_action_context=oracle_pre_action_context,
+                    oracle_common_transducer_evidence=oracle_transducer_evidence,
+                )
+            else:
+                transition = env.step_dense(actions)
             if transition.physical_step != step:
                 raise G0RealizationError("physical-step ledger is not exactly 0..499")
             if (transition.terminated or transition.truncated) and step != PHYSICAL_HORIZON - 1:
@@ -5891,11 +6005,9 @@ def run_g0_episode(
         )
         controller_evidence = controller.evidence()
         if chosen_control is Control.ORACLE:
+            oracle_context = controller._validated_safety_context
             selected_label = TargetLabel.parse(
                 controller.safety_ledger.selected_candidate_id
-            )
-            prebehavior_self_replay, _prestate = _oracle_candidate_trace(
-                source, selected_label
             )
             target_evidence = _NativeArrayEvidence.from_array(
                 np.asarray(target_trace, dtype=np.float64)
@@ -5926,16 +6038,31 @@ def run_g0_episode(
                     }
                 ),
             )
-            behavioral_self_replay = _build_selected_oracle_behavioral_execution(
-                source, controller.safety_ledger
+            behavioral_self_replay = (
+                _build_selected_oracle_behavioral_execution_from_validated_context(
+                    oracle_context, cell=chosen_cell
+                )
             )
-            behavioral_certificate = validate_oracle_branch_aware_replay(
-                source,
-                controller.safety_ledger,
-                prebehavior_self_replay,
-                actual_execution,
-                behavioral_self_replay,
-            )
+            if chosen_cell is Cell.EVENT:
+                prebehavior_self_replay, _prestate = _oracle_candidate_trace(
+                    source, selected_label
+                )
+                behavioral_certificate = (
+                    _validate_oracle_branch_aware_replay_from_validated_context(
+                        oracle_context,
+                        prebehavior_self_replay,
+                        actual_execution,
+                        behavioral_self_replay,
+                    )
+                )
+            else:
+                behavioral_certificate = (
+                    _validate_oracle_no_event_replay_from_validated_context(
+                        oracle_context,
+                        actual_execution,
+                        behavioral_self_replay,
+                    )
+                )
             controller_evidence["behavioral_replay_certificate"] = (
                 behavioral_certificate.to_primitive()
             )

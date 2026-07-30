@@ -845,8 +845,9 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         for candidate in ledger.candidates
         if candidate.candidate_id == ledger.selected_candidate_id
     )
+    context = g0._validated_oracle_safety_context(source, ledger)
     target_evidence = g0._NativeArrayEvidence.from_array(
-        g0._expected_behavioral_target_schedule(source, ledger, None)
+        g0._expected_behavioral_target_schedule(context, None)
     )
     service_evidence = g0._NativeArrayEvidence.from_array(
         np.zeros(g0.PHYSICAL_HORIZON, dtype=np.float64)
@@ -943,6 +944,44 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
         g0.validate_oracle_branch_aware_replay(
             source, ledger, selected, stale, stale
         )
+
+
+def test_production_oracle_event_and_no_event_bind_branch_evidence() -> None:
+    source = g0.make_episode_source(0)
+    event = g0.run_g0_episode(
+        source,
+        control=g0.Control.ORACLE,
+        cell=g0.Cell.EVENT,
+    )
+    no_event = g0.run_g0_episode(
+        source,
+        control=g0.Control.ORACLE,
+        cell=g0.Cell.NO_EVENT,
+    )
+
+    assert [(item.kind, item.physical_step) for item in event.lifecycle_events] == [
+        ("LEAVE", 191),
+        ("REJOIN", 272),
+    ]
+    assert no_event.lifecycle_events == ()
+    for run, expected_return_ready in ((event, 273), (no_event, None)):
+        certificate = run.controller_evidence["behavioral_replay_certificate"]
+        assert certificate["return_ready_step"] == expected_return_ready
+        assert certificate["replay_ok"] is True
+        assert certificate["prefix_identity_ok"] is True
+        assert certificate["branchpoint_identity_ok"] is True
+        assert certificate["shared_ledger_identity_ok"] is True
+        assert certificate["behavioral_self_replay_ok"] is True
+        assert certificate["safety_guard_ok"] is True
+        assert run.raw_action_trace.shape == (
+            g0.PHYSICAL_HORIZON,
+            g0.PHYSICAL_UAVS,
+            g0.ACTION_DIM,
+        )
+        assert run.tracker_failures == 0
+        assert run.action_support_violations == 0
+        assert run.ownership_violations == 0
+        assert run.oracle_qualification_failures == 0
 
 
 @pytest.mark.parametrize(
