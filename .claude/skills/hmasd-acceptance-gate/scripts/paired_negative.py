@@ -37,6 +37,7 @@ the run was inconclusive and proved nothing either way.
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import shutil
 import subprocess
@@ -45,6 +46,25 @@ import tempfile
 from pathlib import Path
 
 INTERPRETER = r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
+
+# Terminal colour became a CORRECTNESS concern here. pytest honours FORCE_COLOR
+# even when its output is captured, and this environment sets FORCE_COLOR=3, so
+# its summary lines arrive as "<ESC>[31mFAILED tests/..." and a
+# `startswith("FAILED")` test never matches.
+#
+# MEASURED 2026-07-30: a mutation that genuinely reddened a guard was reported as
+# "the suite stayed GREEN under this mutation" -- this tool told the operator that
+# a working guard was broken. That is the worst direction for THIS tool to fail
+# in: it invites repairing correct code, and it teaches distrust of the one
+# checker that makes the discipline real.
+#
+# Belt and braces deliberately: the subprocess is told not to colour, AND its
+# output is stripped before parsing. Either alone would have prevented this.
+_ANSI = re.compile(chr(27) + r"\[[0-9;]*[A-Za-z]")
+
+
+def _strip_ansi(text: str) -> str:
+    return _ANSI.sub("", text)
 
 
 def _apply(path: Path, old: str | None, new: str, line: int | None) -> tuple[str, str]:
@@ -126,13 +146,17 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  read back off disk -> {shown}")
         print()
 
-        cmd = [INTERPRETER, "-m", "pytest", *args.test, "-q"]
+        cmd = [INTERPRETER, "-m", "pytest", *args.test, "-q", "--color=no"]
         if args.keyword:
             cmd += ["-k", args.keyword]
         if args.basetemp:
             cmd += ["--basetemp", args.basetemp]
-        proc = subprocess.run(cmd, capture_output=True, text=True)
-        out = proc.stdout + proc.stderr
+        env = dict(os.environ)
+        env.pop("FORCE_COLOR", None)
+        env.pop("PY_COLORS", None)
+        env["NO_COLOR"] = "1"
+        proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
+        out = _strip_ansi(proc.stdout + proc.stderr)
 
         failed = [l for l in out.splitlines() if l.startswith("FAILED")]
         errored = [l for l in out.splitlines() if l.startswith("ERROR")]

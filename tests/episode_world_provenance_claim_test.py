@@ -228,3 +228,52 @@ def test_the_component_order_has_exactly_one_definition() -> None:
     start = source.index("def episode_world_fingerprint")
     block = source[start:start + 4000]
     assert "for name in WORLD_COMPONENT_ORDER:" in block
+
+
+def test_the_audit_artifact_records_its_runtime_identity() -> None:
+    """Without this field, two agreeing artifacts cannot be told apart from two
+    artifacts that shared a machine.
+
+    MEASURED COST OF ITS ABSENCE: runs 30516912923 and 30518707693 agreed on all
+    nine world arrays for all six shared episode keys, and that agreement was
+    UNINTERPRETABLE -- `d7_s_world_conformance_gate.py` could only return UNTESTED.
+    The ruling requires a cross-machine check, and a cross-machine check needs to
+    know the machines differed.
+    """
+
+    identity = audit.runtime_identity()
+    assert identity, "runtime_identity returned nothing"
+    for field in ("platform", "machine", "processor", "python", "numpy"):
+        assert identity.get(field) is not None, f"{field} missing"
+
+    blas = identity.get("numpy_blas") or {}
+    assert blas.get("name"), "no BLAS library name; two different stacks would compare equal"
+    config = blas.get("openblas_configuration") or ""
+    assert "DYNAMIC_ARCH" in config, (
+        "the openblas configuration string is the reason the numpy VERSION is "
+        "insufficient -- one wheel carries many CPU kernels and picks at runtime")
+    assert (identity.get("cpu_features") or {}).get("dispatch"), "no CPU dispatch list"
+
+    # and it must actually reach the artifact, not merely be computable
+    source = (ROOT / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
+    assert '"runtime_identity": runtime_identity(),' in source, (
+        "the audit result no longer carries runtime_identity; cross-machine "
+        "comparisons of its artifacts become uninterpretable again")
+
+
+def test_the_probe_and_the_audit_share_one_identity_definition() -> None:
+    """A duplicated identity function is slow-motion drift: two artifacts could
+    record 'the same' runtime under two different definitions of same."""
+
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "_probe_identity", ROOT / "scripts" / "d7_s_world_digest_probe.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.runtime_identity() == audit.runtime_identity()
+
+    probe_source = (ROOT / "scripts" / "d7_s_world_digest_probe.py").read_text(
+        encoding="utf-8")
+    assert "return audit.runtime_identity()" in probe_source, (
+        "the probe has its own identity implementation again")

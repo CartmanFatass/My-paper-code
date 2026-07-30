@@ -110,6 +110,52 @@ WORLD_COMPONENT_ORDER = (
     "cluster_waypoints", "cluster_pause_times",
 )
 
+
+def runtime_identity() -> dict:
+    """What produced an artifact, in enough detail to compare two of them.
+
+    Written into every artifact so that two runs which AGREE can be told apart
+    from two runs that shared a machine. Without it, agreement is uninterpretable
+    and `d7_s_world_conformance_gate.py` can only return UNTESTED -- which is
+    exactly what happened to runs 30516912923 and 30518707693.
+
+    The BLAS configuration string matters as much as the numpy version. The pinned
+    wheel reports `DYNAMIC_ARCH=1`: one wheel carries many CPU-specific kernels and
+    picks at runtime, so the version pins the code and nothing about which kernel
+    runs. An identity that recorded only the version would call two different
+    numerical stacks "the same environment".
+
+    Every lookup is defensive. This must never be the reason a run fails.
+    """
+    import platform
+
+    blas: dict = {}
+    try:
+        config = getattr(np.__config__, "CONFIG", None) or {}
+        entry = (config.get("Build Dependencies") or {}).get("blas") or {}
+        blas = {"name": entry.get("name"), "version": entry.get("version"),
+                "openblas_configuration": entry.get("openblas configuration")}
+    except Exception:
+        blas = {}
+    cpu: dict = {}
+    try:
+        cpu = {"baseline": np.core._multiarray_umath.__cpu_baseline__,
+               "dispatch": np.core._multiarray_umath.__cpu_dispatch__}
+    except Exception:
+        cpu = {}
+    try:
+        return {
+            "platform": platform.platform(),
+            "machine": platform.machine(),
+            "processor": platform.processor(),
+            "python": platform.python_version(),
+            "numpy": np.__version__,
+            "numpy_blas": blas,
+            "cpu_features": cpu,
+        }
+    except Exception:  # pragma: no cover - identity must not break a run
+        return {}
+
 # --- sections 1/2/3: estimand, event window, horizons -----------------------
 DELTA = 10
 X_STABLE_DISPLACEMENT_M = 50.0
@@ -5214,6 +5260,19 @@ def main() -> None:
         "topology_seeds": topology_seeds,
         "smoke": bool(args.smoke),
         "note": note,
+        # WHICH RUNTIME PRODUCED THIS. Added 2026-07-30 because its absence made a
+        # cross-machine comparison unanswerable rather than merely incomplete: two
+        # artifacts that AGREE are indistinguishable from two artifacts that ran on
+        # the same hardware, so `d7_s_world_conformance_gate.py` can only return
+        # UNTESTED without it. Measured: runs 30516912923 and 30518707693 agreed on
+        # all nine world arrays for all six shared keys, and that agreement could
+        # not be interpreted.
+        #
+        # It records the BLAS configuration and CPU dispatch list, not just the
+        # numpy version, because the pinned wheel is built `DYNAMIC_ARCH=1` -- one
+        # wheel carrying many CPU-specific kernels, selected at runtime. Pinning the
+        # version pins the code and nothing about which kernel executes.
+        "runtime_identity": runtime_identity(),
         **r4_identity,
         "topology_records": [r["topology_record"] for r in topology_results],
         "calibration_reports": [r["calibration_report"] for r in topology_results],

@@ -38,45 +38,15 @@ import audit_d7_s_event_aligned as audit  # noqa: E402
 
 
 def runtime_identity() -> dict:
-    """What must be recorded for a cross-machine comparison to mean anything.
+    """Delegates to the audit module, which is the single definition.
 
-    `numpy.__config__` is included deliberately: the pinned wheel reports
-    `DYNAMIC_ARCH=1`, meaning one wheel carries many CPU-specific BLAS kernels and
-    selects at runtime. Pinning the numpy VERSION therefore pins the code and
-    nothing about which kernel executes, so a comparison that recorded only the
-    version could conclude "same environment" across two genuinely different
-    numerical stacks.
+    It was duplicated here first, and a duplicate of an identity function is a
+    slow-motion drift: two artifacts could record "the same" runtime under two
+    different definitions of same. The audit script now writes this into every
+    artifact it produces, so the probe and the formal path must agree by
+    construction rather than by review.
     """
-    import numpy as np
-
-    # `np.__config__.CONFIG` is the accessible form on numpy 1.26; `get_info` was
-    # removed and returns nothing, which would have silently recorded an empty
-    # BLAS identity -- the exact "same environment" false conclusion this field
-    # exists to prevent.
-    blas = {}
-    try:
-        config = getattr(np.__config__, "CONFIG", None) or {}
-        entry = (config.get("Build Dependencies") or {}).get("blas") or {}
-        blas = {"name": entry.get("name"),
-                "version": entry.get("version"),
-                "openblas_configuration": entry.get("openblas configuration")}
-    except Exception:
-        blas = {}
-    simd = {}
-    try:
-        simd = {"baseline": np.core._multiarray_umath.__cpu_baseline__,
-                "dispatch": np.core._multiarray_umath.__cpu_dispatch__}
-    except Exception:
-        simd = {}
-    return {
-        "platform": platform.platform(),
-        "machine": platform.machine(),
-        "processor": platform.processor(),
-        "python": platform.python_version(),
-        "numpy": np.__version__,
-        "numpy_blas": blas,
-        "cpu_features": simd,
-    }
+    return audit.runtime_identity()
 
 
 def main() -> int:
