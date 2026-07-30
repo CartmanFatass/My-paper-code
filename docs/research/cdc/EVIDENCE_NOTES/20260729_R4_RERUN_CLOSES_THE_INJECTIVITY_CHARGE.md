@@ -1,4 +1,32 @@
-# The R4 re-run: the defect never fired, and H is exonerated by measurement
+# The R4 re-run: what its zero actually covers, and why it did not exonerate H
+
+> **THIS NOTE'S ORIGINAL TITLE AND CONCLUSION ARE REFUTED. Ruled 2026-07-30 in
+> `docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/` --
+> read `30_PM_SCIENTIFIC_RECONCILIATION.md` before anything below.**
+>
+> It was titled "the defect never fired, and H is exonerated by measurement".
+> Both halves are wrong, and the second follows from the first:
+>
+> 1. **The repaired branch DOES execute on conclusion-bearing paths.**
+>    `fork_continuation` calls `constructive_mixed_update(..., event="REJOIN",
+>    event_uav=focal_uav)` at `t = DELTA - 1` in **every** focal SET continuation
+>    (`scripts/audit_d7_s_event_aligned.py:3681`). `roll_power.rejoin_events`
+>    counts only environment falling-edge REJOINs inside the prefix roll, so it
+>    cannot see that call. The zero is real and it measures a narrower thing than
+>    this note claimed.
+> 2. **Environment REJOINs also occur inside 950 steps on this population.** The
+>    corrected probe, right namespace, found 3 in 32 rolls -- 20260734
+>    calibration ep0, 20260736 audit ep1, 20260739 audit ep0. The structural
+>    unreachability argument below is dead by measurement. The controller releases
+>    at `REJOIN_BATTERY_RATIO = 0.80`, not at full charge, so the 2%-to-100%
+>    arithmetic used the wrong terminal condition; and `T_E_MAX = 950` bounds the
+>    event SEARCH, not the measurement, which continues 139 or 550 more steps.
+> 3. **H keeps `INVALID_R4_REALIZATION`** and the re-run does **not** carry the R4
+>    conclusion. The provenance defect in the last section is claim-blocking.
+>
+> What survives: zero environment REJOINs *on the main prefix paths*, 225,048
+> injectivity checks, zero refusals, and `roll_power.leave_events` agreeing
+> exactly with `len(report["leaves"])` in all sixteen blocks.
 
 Date: 2026-07-29
 Run: `30479940700`, tag `d7s-audit-4`, stage commit `56a64c3c`, branch `untied-k`

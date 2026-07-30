@@ -1514,9 +1514,19 @@ def user_world_seed(*, topology_seed: int, block: str, episode_index: int,
     it is supposed to be independent of.
 
     The registered random-user distribution is unchanged by this. The seed makes
-    the draw *reproducible and recorded*; it does not make it fixed across
-    episodes, because the user world is a nested episode-level random factor
-    rather than part of topology identity.
+    the draw *recorded*; it does not make it fixed across episodes, because the
+    user world is a nested episode-level random factor rather than part of
+    topology identity.
+
+    IT DOES NOT MAKE THE DRAW REPRODUCIBLE, and this docstring said "reproducible
+    and recorded" until 2026-07-30. Pro ruling of that date, Challenge 7: runs
+    30403322062 and 30479940700 produced DIFFERENT initial worlds for 3 of 8
+    topologies at identical `contract_id`, topology hash, block, episode index and
+    `user_world_seed`, with numpy and python hard-pinned. The registered key is
+    therefore not a reproduction key, and the ruling is that this is a
+    claim-blocking population-provenance defect rather than a wording problem.
+    See `episode_world_fingerprint` for the measurement and
+    `docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/`.
 
     `contract_id` defaults to the module's own `CONTRACT_ID` (every non-R4
     run, unchanged). R4's driver passes `R4_POPULATION_NAMESPACE` instead, so
@@ -3306,9 +3316,16 @@ def full_state_fingerprint(env, *, duty_map: Optional[dict] = None,
     never converge, because `reset()` derives station-relative logistics before
     the registered coordinates are restored; the residue lives in
     `episode_graph_pbrs_sum`, outside primary `G`, and is shared by every limb
-    of an episode before treatment. `episode_world_fingerprint` DOES reproduce
-    across constructions -- that is the R3 section E claim, and it is a
-    different claim from this one.
+    of an episode before treatment.
+
+    `episode_world_fingerprint` reproduces across constructions **within one
+    machine only.** This docstring asserted it reproduces across constructions
+    full stop, as the R3 section E claim; that assertion was withdrawn by the Pro
+    ruling of 2026-07-30 (Challenge 7). Measured: two cloud runs at identical
+    registered episode keys produced different worlds on 3 of 8 topologies. Do not
+    read the R3 section E claim as cross-machine, and do not use either
+    fingerprint as a cross-machine reproduction key until the provenance repair
+    lands. See `docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/`.
 
     Replaces `compute_state_hash` as the load-bearing fixed-history assertion.
     That function hashes UAV positions, battery, charging, station occupancy and

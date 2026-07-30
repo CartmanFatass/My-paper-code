@@ -1,17 +1,26 @@
 # Step H returned, mechanically clean, and it still cannot close round 4
 
-> **READ WITH ITS RESOLUTION --
-> `20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md`.** Two things in this note
-> were later corrected by measurement:
+> **THIS NOTE'S ORIGINAL DISPOSITION STANDS. Ruled 2026-07-30 --
+> `docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/`.**
 >
-> 1. The probe in "MEASURED: the branch fires on this population" rolled the
->    **wrong seed namespace** and its verdict is VOID. `rejoin_events = 0` on the
->    real R4 population.
-> 2. The **contamination charge against H is withdrawn.** H's focal events are
->    bit-identical to the post-repair re-run's on all eight topologies.
+> A withdrawal notice sat here for part of 2026-07-29 claiming the contamination
+> charge against H was withdrawn. **That withdrawal was wrong and is itself
+> withdrawn.** H keeps `INVALID_R4_REALIZATION:
+> DUTY_ASSIGNMENT_NOT_EXECUTABLY_WELL_DEFINED`, with a sharpened reason: H does
+> not establish that its complete conclusion-bearing assignment paths are
+> equivalent to the repaired realization.
 >
-> What stands: H carries no rejoin field, so it could never have answered this
-> about itself, and the re-run was necessary to settle it either way.
+> One thing in this note IS still void, on its own grounds: the probe in
+> "MEASURED: the branch fires on this population" rolled the **wrong seed
+> namespace**. A correctly namespaced re-run of that probe reaches the same
+> qualitative verdict -- 3 REJOIN events on the R4 population inside 950 steps --
+> so the conclusion was right, but a right conclusion from a wrong measurement is
+> still a wrong measurement, and the original numbers must not be cited.
+>
+> What was never true: that `rejoin_events = 0` exonerated H. That counter covers
+> only environment falling-edge REJOINs on the main prefix, while every focal SET
+> continuation invokes the repaired REJOIN branch directly at `t = DELTA - 1`.
+> See `30_PM_SCIENTIFIC_RECONCILIATION.md`.
 
 Date: 2026-07-29
 Run: `30403322062`, tag `d7s-audit-3`, head `a00612ad`, branch `d7s-audit-3`
@@ -173,28 +182,34 @@ estimate spans all eight.
 
 ### What is established, and what is not
 
-**SUPERSEDED 2026-07-29 by the re-run.** The two bullets below were written when
-the only evidence about reachability was the void probe. Corrected:
+**CORRECTED TWICE. The current statement is the third one, ruled 2026-07-30.**
+The intermediate version claimed the contamination charge was withdrawn; that was
+wrong. As it stands:
 
-- **Established.** H predates the repair, and charging occurred 49 times. But the
-  REJOIN branch is **not** reached on the R4 population: the re-run measured
-  `rejoin_events = 0` across all eight topologies over 111,433 rolled steps with
-  225,048 injectivity checks and zero refusals. H is mechanically clean and its
-  focal events are bit-identical to the post-repair re-run's on all eight
-  topologies.
-- **Therefore.** The defective branch never executed on these episodes, so H's
-  trajectories are the trajectories the repaired code produces. The
-  contamination charge is withdrawn.
+- **Established.** H predates the repair, and charging occurred 49 times. The
+  REJOIN branch **is** reached on the R4 population: a correctly namespaced probe
+  found 3 environment REJOIN events inside 950-step rolls (20260734 calibration
+  ep0, 20260736 audit ep1, 20260739 audit ep0). Separately and independently,
+  every focal SET continuation invokes the repaired branch directly at
+  `t = DELTA - 1` via `fork_continuation`, so it executes on conclusion-bearing
+  paths regardless of any environment edge.
+- **NOT established.** That a double assignment produced a *different recorded
+  number* in H. Reaching the branch is not the same as the duplication surviving
+  into a certified limb. The disposition is fail-closed evidentiary, not a claim
+  that a differing value has been found.
+- **Void, superseded, or wrong at various points on 2026-07-29:** the original
+  probe's numbers (wrong seed namespace); the claim that the re-run's
+  `rejoin_events = 0` showed the branch unreached (that counter covers only
+  environment edges on the main prefix); and the withdrawal of the contamination
+  charge that followed from it.
 
-The original bullets, void, for the record:
+The intermediate wrong version, for the record:
 
-> - **Established.** H predates the repair. Charging occurred 49 times. The
->   REJOIN branch is reachable and reached on the R4 population -- 3 events
->   across 20260739 and 20260741 under the probe above. H is otherwise
->   mechanically clean.
-> - **NOT established.** That a double assignment produced a *different recorded
->   number* in H. Reaching the branch is not the same as the duplication
->   surviving into a certified limb.
+> - **Established.** ... the REJOIN branch is **not** reached on the R4
+>   population: the re-run measured `rejoin_events = 0` ...
+> - **Therefore.** The defective branch never executed on these episodes, so H's
+>   trajectories are the trajectories the repaired code produces. The
+>   contamination charge is withdrawn.
 
 One paragraph of the original reasoning survives intact and is worth keeping,
 because it is why the re-run was right to launch regardless of how the charge

@@ -176,3 +176,26 @@ def test_the_fingerprint_bytes_are_pinned() -> None:
         "50652d9b112b16386631b3b9038e1c98af700c68dc7a4d22e93ce1a0b5aeafb4"
     ), ("the fingerprint byte layout moved; every existing artifact's world "
         "provenance just became incomparable")
+
+
+def test_no_docstring_still_claims_cross_machine_reproduction() -> None:
+    """Challenge 7 of the 2026-07-30 ruling: the corrected
+    `episode_world_fingerprint` comment was not enough, because two OTHER
+    docstrings still asserted the withdrawn property.
+
+    `user_world_seed` said the seed makes the draw "reproducible and recorded".
+    `full_state_fingerprint` said `episode_world_fingerprint` "DOES reproduce
+    across constructions". Both are claims the ruling found unestablished, and a
+    reader reaching either one first would inherit it.
+    """
+
+    source = (ROOT / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
+
+    assert "the draw *reproducible and recorded*" not in source, (
+        "user_world_seed again claims the seed makes the draw reproducible")
+    assert "`episode_world_fingerprint` DOES reproduce\n    across constructions" not in source, (
+        "full_state_fingerprint again claims unqualified cross-construction "
+        "reproduction of the episode world")
+    # and each site must carry the scope it actually has
+    assert "IT DOES NOT MAKE THE DRAW REPRODUCIBLE" in source
+    assert "within one\n    machine only" in source
