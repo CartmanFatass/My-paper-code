@@ -96,5 +96,70 @@ fewer crossings of the Python boundary -- a dirty-flag cache validity check, or 
 native call that computes the whole SINR matrix rather than one path-loss matrix.
 Neither is attempted here, and neither is claimed.
 
+## ADDENDUM, same day: the shim gives back what the kernel saves
+
+`scenario_base.py:2781-2784`, inside the prefill:
+
+```python
+geometry = uav_cpp_backend.step_geometry_batch(...)   # one native call, whole matrix
+access = np.asarray(geometry.access_path_loss)[0]
+store = cache["user_path_loss"]
+for i in range(access.shape[0]):
+    row = access[i]
+    for j in range(row.shape[0]):
+        store[(i, j)] = float(row[j])                 # a float(), a tuple key, a dict insert
+```
+
+The native call returns a matrix and the shim immediately marshals it back into a
+per-element Python dict, with an iteration count equal to the loop it replaced. The
+mature backend this kernel came from is fast because it crosses the boundary once
+per step and keeps arrays as arrays; the variant implemented here is the one that
+violates both. That is a defect in the consumer, not in the kernel.
+
+Arithmetic check, so the point is not overstated: `_compute_air_to_ground_path_loss`
+costs ~15.9 us per call and 365 calls/step = 5.8 ms, while 240 dict inserts cost
+well under 0.1 ms. The shim does **not** consume the whole saving -- ~9% was
+available and ~4% arrived. So the shim is part of the gap, not all of it, and the
+bigger part remains that only 9% was ever addressable.
+
+## The real target, resolved to its callers
+
+`_current_step_communication_cache` runs **1,028 times per step**, but the 240 calls
+from `_compute_sinr` are already short-circuited by `_channel_update_cache_active`.
+The **788 that run the full check** are:
+
+```text
+_get_link_capacity   (scenario_base.py:4357)   534 per step
+_cached_link_sinr    (scenario_base.py:2826)   254 per step
+                                              ---
+                                              788 per step
+```
+
+and that matches `_communication_config_signature` at **789 per step** exactly --
+each full check rebuilds a 13-field tuple, including a generator over `mcs_table`,
+and runs four `np.array_equal` calls.
+
+**This is the dominant cost, and it is larger than the path loss the kernel
+replaces.** `_get_link_capacity` alone has nine call sites across the routing code,
+each inside a loop, so threading `step_cache` through is invasive.
+
+## Why the obvious fix is NOT attempted here
+
+The tempting change is to stamp the cache with a per-step counter and compare
+integers instead of arrays -- exactly what `_channel_update_cache_active` already
+does for the channel-update window. It would remove nearly all of the 788 full
+checks.
+
+It is not attempted because it converts a guard that *verifies* inputs are unchanged
+into one that *assumes* it, and correctness then depends on nothing mutating
+positions, unavailability or config between the cache's creation and its last use
+**within** a step. That ordering has not been traced, and this session has already
+produced three claims that were true of a narrower scope than they were asserted
+over. Tracing every mutation site is the prerequisite, and it is the same shape of
+work as the "identify every writer" step the provenance ruling ordered.
+
+Recorded so the next attempt starts from the caller table above rather than from a
+guess about where the time is.
+
 No threshold, contract, population or result is touched by any of this. The
 integration remains default-off and outside every R4 path.
