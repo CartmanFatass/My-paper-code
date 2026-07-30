@@ -42,10 +42,43 @@ SCHEMA_VERSION = source.SCHEMA_VERSION
 ALGORITHM_ID = source.ALGORITHM_ID
 SOURCE_ID = source.SOURCE_ID
 FORMAL_EXECUTION_AUTHORIZED = source.FORMAL_EXECUTION_AUTHORIZED
-DESIGN_DISPOSITION = "G0_EXECUTABLE_ADDENDUM_DISPOSITION=READY_FOR_CODE_CONTRACT"
+DESIGN_DISPOSITION = source.DESIGN_DISPOSITION
 ORACLE_SAFETY_DISPOSITION = source.ORACLE_SAFETY_DISPOSITION
 REPLAY_DISPOSITION = source.REPLAY_DISPOSITION
 RETURN_READY_STEP_DISPOSITION = source.RETURN_READY_STEP_DISPOSITION
+CLAIM_SCOPE = "SOURCE_IDENTIFIABILITY_G0_ONLY"
+BOOTSTRAP_GENERATOR = "numpy.Generator(PCG64(2026072901))"
+GEOMETRY_SUPPORT_RULE = "analytic_complete_support_for_every_phi_in_[0,2*pi)"
+ORACLE_RANKING_ARITHMETIC = {
+    "violation_count": (
+        "candidate_steps_with_hard_physical_or_safety_violation_or_"
+        "real_guard_safety_deviation"
+    ),
+    "gate_arrival_step": (
+        "min_pre_action_t_latest_departure_le_t_le_O_bitwise_equal_gate_"
+        "else_H_plus_1"
+    ),
+    "event_tracking_error": (
+        "sum_t_O_to_O_plus_D_minus_1_squared_xy_post_to_primary"
+    ),
+    "path_length": "sum_t_0_to_H_minus_1_euclidean_xy_post_minus_pre",
+    "lexicographic_keys": [
+        "violation_count",
+        "gate_arrival_step",
+        "event_tracking_error",
+        "path_length",
+        "original_stage_x",
+        "original_stage_y",
+    ],
+}
+RETURN_READY_OWNERSHIP_RULE = (
+    "lifecycle_owner_to_target_owned_internal_row|service_active_and_owns_"
+    "vacant_primary|no_position_tolerance_or_storage_row"
+)
+PRE_ACTION_CONTEXT_SERVICE_MASK_RULE = "complete_bool8_target_owned_internal_order"
+FIRST_MATCH_EVALUATION_RULE = (
+    "strict_lazy_stop_at_first_match_lower_priority_statuses_null"
+)
 ENVIRONMENT_BACKEND = (
     "envs.pettingzoo.scenario7_energy_aware.UAVEnergyAwareRelayEnv|S7-S1"
 )
@@ -71,6 +104,8 @@ _SOURCE_MANIFEST_KEYS = frozenset(
         "design_round",
         "design_disposition",
         "design_package_stage_commit",
+        "design_archive_commit",
+        "claim_scope",
         "evidence_source_commit",
         "oracle_safety_clarification_round",
         "oracle_safety_package_stage_commit",
@@ -101,6 +136,8 @@ _SOURCE_MANIFEST_KEYS = frozenset(
         "paired_episode_ids",
         "episode_id_inventory",
         "bootstrap_resamples",
+        "bootstrap_generator",
+        "bootstrap_seed",
         "K_search",
         "K_search_ceiling",
         "nested_rollout",
@@ -108,6 +145,12 @@ _SOURCE_MANIFEST_KEYS = frozenset(
         "tree_or_beam_or_mcts",
         "real_environment_transitions",
         "hypothetical_candidate_transitions",
+        "geometry_support_rule",
+        "geometry_support_certificate",
+        "oracle_ranking_arithmetic",
+        "return_ready_ownership_rule",
+        "pre_action_context_service_mask_rule",
+        "first_match_evaluation_rule",
         "source_proof",
         "oracle_proof",
         "tracker_proof",
@@ -243,6 +286,15 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
     if any((source.LEARNING_ENABLED, source.OPTIMIZER_ENABLED, source.CHECKPOINT_ENABLED)):
         raise RuntimeError("G0 readiness found a prohibited learning artifact class")
     episode = source.make_episode_source(0)
+    source_primitive = episode.to_primitive()
+    geometry_primitive = source_primitive.get("geometry")
+    geometry_support_certificate = (
+        geometry_primitive.get("geometry_support_certificate")
+        if isinstance(geometry_primitive, Mapping)
+        else None
+    )
+    if not isinstance(geometry_support_certificate, Mapping):
+        raise RuntimeError("G0 universal geometry-support certificate is absent")
     environment = source.UAVSourceIdentifiabilityEnv(episode, source.Cell.EVENT)
     try:
         production_shapes = {
@@ -268,6 +320,11 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
         "algorithm_id": ALGORITHM_ID,
         "source_id": SOURCE_ID,
         "source_commit": commit,
+        "design_round": source.DESIGN_ROUND,
+        "design_package_stage_commit": source.DESIGN_PACKAGE_STAGE_COMMIT,
+        "design_archive_commit": source.DESIGN_ARCHIVE_COMMIT,
+        "design_disposition": DESIGN_DISPOSITION,
+        "claim_scope": CLAIM_SCOPE,
         "interfaces": [
             "source",
             "evaluate",
@@ -284,6 +341,16 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
         "oracle_safety_disposition": ORACLE_SAFETY_DISPOSITION,
         "replay_disposition": REPLAY_DISPOSITION,
         "return_ready_step_disposition": RETURN_READY_STEP_DISPOSITION,
+        "bootstrap_generator": BOOTSTRAP_GENERATOR,
+        "bootstrap_seed": source.BOOTSTRAP_SEED,
+        "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
+        "geometry_support_certificate": geometry_support_certificate,
+        "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
+        "return_ready_ownership_rule": RETURN_READY_OWNERSHIP_RULE,
+        "pre_action_context_service_mask_rule": (
+            PRE_ACTION_CONTEXT_SERVICE_MASK_RULE
+        ),
+        "first_match_evaluation_rule": FIRST_MATCH_EVALUATION_RULE,
         "scientific_iteration_cost": 0,
         "passed": True,
     }
@@ -326,6 +393,14 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=True)
     episode = source.make_episode_source(0)
     source_value = episode.to_primitive()
+    geometry_primitive = source_value.get("geometry")
+    geometry_support_certificate = (
+        geometry_primitive.get("geometry_support_certificate")
+        if isinstance(geometry_primitive, Mapping)
+        else None
+    )
+    if not isinstance(geometry_support_certificate, Mapping):
+        raise RuntimeError("G0 universal geometry-support certificate is absent")
     source_path = root / SOURCE_PROOF
     _write_json(source_path, source_value)
 
@@ -368,6 +443,8 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "design_round": source.DESIGN_ROUND,
         "design_disposition": DESIGN_DISPOSITION,
         "design_package_stage_commit": source.DESIGN_PACKAGE_STAGE_COMMIT,
+        "design_archive_commit": source.DESIGN_ARCHIVE_COMMIT,
+        "claim_scope": CLAIM_SCOPE,
         "evidence_source_commit": source.EVIDENCE_SOURCE_COMMIT,
         "oracle_safety_clarification_round": source.ORACLE_SAFETY_CLARIFICATION_ROUND,
         "oracle_safety_package_stage_commit": source.ORACLE_SAFETY_PACKAGE_STAGE_COMMIT,
@@ -398,6 +475,8 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "paired_episode_ids": len(source.EPISODE_IDS),
         "episode_id_inventory": list(source.EPISODE_IDS),
         "bootstrap_resamples": source.BOOTSTRAP_RESAMPLES,
+        "bootstrap_generator": BOOTSTRAP_GENERATOR,
+        "bootstrap_seed": source.BOOTSTRAP_SEED,
         "K_search": source.K_SEARCH,
         "K_search_ceiling": source.K_SEARCH_CEILING,
         "nested_rollout": False,
@@ -405,6 +484,14 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "tree_or_beam_or_mcts": False,
         "real_environment_transitions": 0,
         "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * source.K_SEARCH,
+        "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
+        "geometry_support_certificate": geometry_support_certificate,
+        "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
+        "return_ready_ownership_rule": RETURN_READY_OWNERSHIP_RULE,
+        "pre_action_context_service_mask_rule": (
+            PRE_ACTION_CONTEXT_SERVICE_MASK_RULE
+        ),
+        "first_match_evaluation_rule": FIRST_MATCH_EVALUATION_RULE,
         "source_proof": _reference(source_path, root),
         "oracle_proof": _reference(oracle_path, root),
         "tracker_proof": _reference(tracker_path, root),
@@ -463,6 +550,8 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         "design_round": source.DESIGN_ROUND,
         "design_disposition": DESIGN_DISPOSITION,
         "design_package_stage_commit": source.DESIGN_PACKAGE_STAGE_COMMIT,
+        "design_archive_commit": source.DESIGN_ARCHIVE_COMMIT,
+        "claim_scope": CLAIM_SCOPE,
         "evidence_source_commit": source.EVIDENCE_SOURCE_COMMIT,
         "oracle_safety_clarification_round": source.ORACLE_SAFETY_CLARIFICATION_ROUND,
         "oracle_safety_package_stage_commit": source.ORACLE_SAFETY_PACKAGE_STAGE_COMMIT,
@@ -493,6 +582,8 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         "paired_episode_ids": len(source.EPISODE_IDS),
         "episode_id_inventory": list(source.EPISODE_IDS),
         "bootstrap_resamples": source.BOOTSTRAP_RESAMPLES,
+        "bootstrap_generator": BOOTSTRAP_GENERATOR,
+        "bootstrap_seed": source.BOOTSTRAP_SEED,
         "K_search": source.K_SEARCH,
         "K_search_ceiling": source.K_SEARCH_CEILING,
         "nested_rollout": False,
@@ -500,6 +591,15 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         "tree_or_beam_or_mcts": False,
         "real_environment_transitions": 0,
         "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * source.K_SEARCH,
+        "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
+        "geometry_support_certificate": source.make_episode_source(0)
+        .to_primitive()["geometry"]["geometry_support_certificate"],
+        "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
+        "return_ready_ownership_rule": RETURN_READY_OWNERSHIP_RULE,
+        "pre_action_context_service_mask_rule": (
+            PRE_ACTION_CONTEXT_SERVICE_MASK_RULE
+        ),
+        "first_match_evaluation_rule": FIRST_MATCH_EVALUATION_RULE,
         "artifact_inventory": [
             SOURCE_PROOF,
             ORACLE_PROOF,
@@ -770,24 +870,30 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
     return value
 
 
-def _branch_witnesses() -> dict[str, str]:
+def _branch_witnesses() -> dict[str, dict[str, Any]]:
     cases = {
-        "invalid": (False, source.GateStatus.OPEN, source.GateStatus.OPEN, source.GateStatus.OPEN),
-        "infeasible": (True, source.GateStatus.FAIL, source.GateStatus.OPEN, source.GateStatus.OPEN),
-        "oracle_only": (True, source.GateStatus.PASS, source.GateStatus.FAIL, source.GateStatus.OPEN),
+        "invalid": (False, None, None, None),
+        "infeasible": (True, source.GateStatus.FAIL, None, None),
+        "oracle_only": (True, source.GateStatus.PASS, source.GateStatus.FAIL, None),
         "non_causal": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.FAIL),
-        "underpowered_oracle": (True, source.GateStatus.OPEN, source.GateStatus.OPEN, source.GateStatus.OPEN),
-        "underpowered_sameinfo": (True, source.GateStatus.PASS, source.GateStatus.OPEN, source.GateStatus.OPEN),
+        "underpowered_oracle": (True, source.GateStatus.OPEN, None, None),
+        "underpowered_sameinfo": (True, source.GateStatus.PASS, source.GateStatus.OPEN, None),
         "underpowered_causal": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.OPEN),
         "identified": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.PASS),
     }
     return {
-        name: source.select_result_branch(
-            valid=valid,
-            oracle_status=oracle,
-            sameinfo_status=sameinfo,
-            causal_status=causal,
-        )
+        name: {
+            "valid": valid,
+            "ORACLE_STATUS": oracle.value if oracle is not None else None,
+            "SAMEINFO_STATUS": sameinfo.value if sameinfo is not None else None,
+            "CAUSAL_STATUS": causal.value if causal is not None else None,
+            "result_branch": source.select_result_branch(
+                valid=valid,
+                oracle_status=oracle,
+                sameinfo_status=sameinfo,
+                causal_status=causal,
+            ),
+        }
         for name, (valid, oracle, sameinfo, causal) in cases.items()
     }
 
@@ -840,7 +946,7 @@ def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
         "operational_valid": False,
         "result_branch": None,
         "scientific_conclusion": None,
-        "claim_scope": "SOURCE_IDENTIFIABILITY_G0_ONLY",
+        "claim_scope": CLAIM_SCOPE,
         "additional_environment_transitions": 0,
         "additional_optimizer_steps": 0,
     }
@@ -875,7 +981,7 @@ def validate_analysis_artifacts(run_root: Path) -> dict[str, Any]:
         or value.get("operational_valid") is not False
         or value.get("result_branch") is not None
         or value.get("scientific_conclusion") is not None
-        or value.get("claim_scope") != "SOURCE_IDENTIFIABILITY_G0_ONLY"
+        or value.get("claim_scope") != CLAIM_SCOPE
         or value.get("additional_environment_transitions") != 0
         or value.get("additional_optimizer_steps") != 0
     ):

@@ -4,9 +4,10 @@
 algorithm_id=UAV_SOURCE_IDENTIFIABILITY_G0
 source_id=UAV_SOURCE_IDENTIFIABILITY_G0_P0
 schema_version=1
-design_round=20260729_uav_source_identifiability_g0_executable_contract_clarification
-design_disposition=G0_EXECUTABLE_ADDENDUM_DISPOSITION=READY_FOR_CODE_CONTRACT
-package_stage_commit=22efb10e338c2264a6d23a6962486e0fd3c4adc8
+design_round=20260730_uav_g0_executable_contract_addendum_v2
+design_disposition=G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT
+package_stage_commit=8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc
+design_archive_commit=9c1566e1c6adefcd500facb1bb50d5a7428eae9c
 evidence_source_commit=45385faa81197bdb90c14f849eee17b999ca2f57
 oracle_safety_round=20260730_uav_g0_oracle_safety_information_contract_clarification
 behavioral_replay_round=20260730_uav_g0_behavioral_replay_contract_clarification
@@ -45,7 +46,8 @@ outside this implementation boundary.
 |---|---|---|---|
 | H=500; 8 UAV; 30 users; one centered BS; S7-S1; fixed altitude; battery/charging/failure/terminal-loss off | `PHYSICAL_HORIZON`, `UAVSourceIdentifiabilityEnv.__init__`, `step_dense` | exact inventory, map, backend flags, zero vertical actions and before/after altitude | `test_source_geometry_rng_assignment_and_support_are_exact`, `test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries` |
 | Uniform `phi`; three `.300L` hotspot centers; ten radius-uniform `.040L` users per hotspot | `_frozen_geometry_arrays`, `G0Geometry.__post_init__` | every array regenerated from episode ID and compared bitwise | source tamper test |
-| Six tangent primaries, two `.050L` stages, inward `.060L` gates, independent `.002L` perturbations | `_frozen_geometry_arrays`, `make_episode_source` | exact target/gate/initial arrays and support rejection; no clipping/redraw | source geometry test |
+| Six tangent primaries, two `.050L` stages, inward `.060L` gates, independent `.002L` perturbations | `_frozen_geometry_arrays`, `make_episode_source` | exact target/gate/initial arrays; no clipping/redraw | source geometry test |
+| Complete support inside `MAP` for every `phi in [0,2*pi)`, including hotspot/user disks, primary perturbation disks, staging perturbation disks and all gates | `geometry_support_certificate`, `G0Geometry.__post_init__`, `build_episode_validity_record` | analytic radial bounds and inward map-axis margins are reconstructed independently; sampled-phi success cannot authorize the source | universal-support and certificate-tamper tests; runner source-proof reconstruction |
 | Uniform storage-only 8! permutation | `make_episode_source`, `G0Geometry`, `minimum_cost_target_assignment` | physical rows equal target-owned rows indexed by the registered permutation | assignment permutation test |
 | Independent phi/users/perturbation/permutation/channel/owner/onset/duration namespaces | `_NAMESPACE_CODES`, `_rng`, `channel_seed_word` | exact namespace inventory and controller-independent, step-addressed channel word | source RNG test |
 | One primary leave, O in 180..220, D in 80..100; paired NO_EVENT only disables leave/rejoin | `G0EventLedger`, `_active_mask_for_step`, `_synchronize_service_mask` | event fields regenerated; one source digest is shared by both cells | environment boundary test; result-time `build_episode_validity_record` |
@@ -81,8 +83,11 @@ reserves by squared physical distance, anonymous physical content and stage
 coordinates.  Survivors retain targets.  On rejoin, the fresh lifecycle owns
 the vacant primary and the reserve targets its inward gate.  Only after one
 complete primary step and current weakest-hotspot service `>=0.90` does the
-reserve return to its original stage.  The focused rejoin test covers the
-primary → gate → stage state sequence.
+reserve return to its original stage. `ACTIVE_AT_PRIMARY_PRE` is reconstructed
+only from service activity and ownership of the vacant-primary target through
+the lifecycle-owner to target-owned-internal-row mapping; position coincidence,
+tolerance and storage-row indexing are forbidden. The focused rejoin test
+covers the primary → gate → stage state sequence.
 
 ### No-reallocation controller
 
@@ -101,7 +106,7 @@ or active-count-driven target change.
 | no future channel/service candidate-selection read | exact zero counters |
 | unchanged common dynamics/action/safety source | immutable shared-method digest record |
 | moving an unaffected primary would create another vacancy | reconstructed unique ownership of all five unaffected primary labels |
-| lexicographic winner | candidate rank: violations, arrival, event tracking error, path length, stage coordinates |
+| lexicographic winner | exact rank `(violation_count, gate_arrival_step, event_tracking_error, path_length, stage_x, stage_y)`: violations count hard physical/safety/real-guard deviations; arrival is the first bitwise gate-equal pre-action row between latest departure and `O`, else `H+1`; event error is squared XY post-transition error summed only over `O..O+D-1`; path length is Euclidean XY post-minus-pre distance summed over `0..H-1` |
 | `O(H*K_search)`, no nested rollout/replanning/tree/beam/MCTS/adaptive candidates | literal certificate fields and `K_search=2` |
 | actual safety deviation fails qualification | `run_g0_episode` folds any backhaul-guard block into oracle qualification failures |
 
@@ -120,6 +125,7 @@ all steps, and byte-exact self-replay within each post-`R` branch.
 Every safety step now serializes an exact-schema `pre_action_context`: all eight
 opaque lifecycle handles, epochs, target-owned internal rows and ownership;
 the event and reserve owners; the six unaffected survivor ownership rows; the
+complete eight-entry service-active mask in target-owned internal order; the
 explicit empty controller-RNG inventory; content-addressed bindings to every
 full environment `RandomState` in the immutable common prestate; and the empty
 channel-tape cursor. `_expected_pre_action_context` reconstructs the
@@ -176,7 +182,7 @@ does not accept caller-authored metric or validity summaries.
 | EVENT `W={O..O+D+59}`, normalized deficit, `J`, outside-window `Q`, minimum `M`, `A=min(J/.90,Q/.90)`, access and 10-step catastrophe | `compute_episode_metrics`, `_has_catastrophic_streak` |
 | NO_EVENT `J=1`, whole-row `Q/M`, `A=Q/.90`, access, no catastrophe | `compute_episode_metrics`, `EpisodeMetrics.__post_init__` reconstruction |
 | paired deltas same-information minus no-reallocation | `build_analysis_evidence` |
-| one PCG64 seed 2026072901 and one 10000×128 index matrix | `make_bootstrap_index_plan` |
+| exactly one `numpy Generator(PCG64(2026072901))` and one `10000×128` integer index matrix generated once and reused for every continuous metric and paired delta | `make_bootstrap_index_plan` |
 | sorted no-interpolation `x_(500)`, `x_(9500)` | `bootstrap_bounds` uses zero-indexed `[499]`, `[9499]` |
 | one-sided 95% Clopper–Pearson | `clopper_pearson_one_sided` |
 
@@ -194,7 +200,7 @@ passes; no-reallocation upper bound 1 and binary upper .90 do not pass causal;
 `Delta_J` and `Delta_M` confidence improvements remain strict while the
 `Delta_M` mean threshold is inclusive.
 
-`select_result_branch` uses only this order:
+`select_result_branch` uses only this order and stops at the first match:
 
 1. `INVALID_UAV_G0_REALIZATION`
 2. `INFEASIBLE_UAV_G0_SOURCE`
@@ -203,7 +209,10 @@ passes; no-reallocation upper bound 1 and binary upper .90 do not pass causal;
 5. `UNDERPOWERED_UAV_G0_SOURCE`
 6. `IDENTIFIED_UAV_G0_SOURCE`
 
-No reward, throughput, distance, collision, effort or prior toy result enters
+Unread lower-priority statuses are serialized as `null`: INVALID reads no
+scientific status, ORACLE FAIL reads neither SAMEINFO nor CAUSAL, SAMEINFO FAIL
+reads no CAUSAL, and each OPEN boundary leaves its lower statuses unread. No
+reward, throughput, distance, collision, effort or prior toy result enters
 these gates.
 
 ## Proof-only runner and artifact closure
@@ -246,8 +255,12 @@ scientific_conclusion=null
 result_branch=null
 ```
 
-Manifest references are exact root-local paths with SHA-256 containment
-checks.  Validators independently reconstruct the source, full oracle and
+The source manifest exact schema binds the v2 round, stage commit, archive
+commit and disposition; the corrected PCG64 generator/seed; the universal
+geometry-support certificate; exact oracle ranking arithmetic; ownership-only
+RETURN_READY; target-owned context-mask ordering; and strict lazy first-match
+closure. Manifest references are exact root-local paths with SHA-256 containment
+checks. Validators independently reconstruct the source, full oracle and
 full tracker proofs, metric/CP/bootstrap witnesses, branch fixtures and digest
 chain.  Absolute paths, `..`, extra artifacts, checkpoints, altered CP rows,
 forged proof fields or a stored readiness branch fail validation.
@@ -272,7 +285,10 @@ execution or supports a UAV paper conclusion.
 | claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded |
 |---|---|---|---|---|---|
 | G0-ORACLE-LEDGER | G0 oracle-safety clarification, registered ledger | `ha_ctse_process/uav_source_identifiability_g0.py::build_oracle_safety_ledger` | exactly two sealed H=500 traces, immutable rank and real-guard evidence | `test_oracle_safety_ledger_is_real_complete_and_reconstructed` | synthetic ranking flags, service-aware candidate generation, adaptive search |
+| G0-V2-GEOMETRY | executable-contract addendum v2 section 1.6 | `ha_ctse_process/uav_source_identifiability_g0.py::geometry_support_certificate` | complete analytic support under every `phi`, with zero clipping/rejection/redraw authority | universal-support and geometry-certificate tamper tests | sampled-angle-only bounds and result-dependent repair |
+| G0-V2-RANK | executable-contract addendum v2 sections 2.10 and 2.14 | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_safety_ledger` | bitwise pre-`O` gate arrival, exact event-window squared error, full-H path length and real-guard deviations reconstruct the lexicographic rank | oracle rank arithmetic boundary/tamper tests | tolerance arrival, post-`O` arrival, extended-window error and stored favorable ranks |
 | G0-REPLAY | G0 behavioral-replay clarification, branch-aware certificate | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_branch_aware_replay` | pre-R identity, independently reconstructed lifecycle/RNG/channel branchpoint, branch-local self-replay and shared ledger | `test_branch_aware_replay_R_NONE_requires_full_identity`, `test_branchpoint_primitives_are_required_and_independently_reconstructed` | full-episode cross-branch identity, missing primitive evidence and caller-authored replay pass flags |
 | G0-TRANSDUCER | G0 branchpoint/transducer evidence repair | `ha_ctse_process/uav_source_identifiability_g0.py::_validate_record_branchpoint_and_transducer` | every target row is an input to a freshly recomputed accepted-G1 action; record output and executed mask match exactly | `test_target_schedule_requires_recomputed_common_transducer_binding`, `test_tampered_common_transducer_input_or_output_fails_closed` | detached target schedules, stale action rows and forged transducer summaries |
-| G0-R273 | G0 return-ready-step clarification, predicate and assertion | `ha_ctse_process/uav_source_identifiability_g0.py::_derive_return_ready_step` | episode-0 owner internal row reconstructs causal R=273 and stored R=280 is rejected | `test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273` | storage-row indexing, seven-step delay, future service, first-differing-byte selection |
-| G0-RUNNER | G0 return-ready-step clarification, artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds all three clarification identities and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts` | stale contract identity and favorable stored certificate |
+| G0-R273 | executable-contract addendum v2 section 2.6 | `ha_ctse_process/uav_source_identifiability_g0.py::_derive_return_ready_step` | episode-0 owner internal row and complete service mask reconstruct causal R=273 without a position test | `test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273` | storage-row indexing, positional coincidence, seven-step delay, future service, first-differing-byte selection |
+| G0-FIRST-MATCH | executable-contract addendum v2 section 5.1 | `ha_ctse_process/uav_source_identifiability_g0.py::_build_analysis_from_reconstructed_rows` | lower scientific statuses are unread and serialized null after INVALID, ORACLE FAIL/OPEN or SAMEINFO FAIL/OPEN | lazy first-match source tests; `test_branch_witnesses_cover_exact_first_match_inventory` | eager lower-gate computation hidden by final branch precedence |
+| G0-RUNNER | executable-contract addendum v2 identity and artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds v2 stage/archive/disposition plus certificate semantics and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts`, `test_reference_paths_cp_and_tracker_are_independently_reconstructed` | stale contract identity, altered universal-support certificate and favorable stored certificate |

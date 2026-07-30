@@ -31,8 +31,12 @@ from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
 ALGORITHM_ID = "UAV_SOURCE_IDENTIFIABILITY_G0"
 SOURCE_ID = "UAV_SOURCE_IDENTIFIABILITY_G0_P0"
 SCHEMA_VERSION = 1
-DESIGN_ROUND = "20260729_uav_source_identifiability_g0_executable_contract_clarification"
-DESIGN_PACKAGE_STAGE_COMMIT = "22efb10e338c2264a6d23a6962486e0fd3c4adc8"
+DESIGN_ROUND = "20260730_uav_g0_executable_contract_addendum_v2"
+DESIGN_PACKAGE_STAGE_COMMIT = "8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc"
+DESIGN_ARCHIVE_COMMIT = "9c1566e1c6adefcd500facb1bb50d5a7428eae9c"
+DESIGN_DISPOSITION = (
+    "G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT"
+)
 EVIDENCE_SOURCE_COMMIT = "45385faa81197bdb90c14f849eee17b999ca2f57"
 ORACLE_SAFETY_CLARIFICATION_ROUND = (
     "20260730_uav_g0_oracle_safety_information_contract_clarification"
@@ -127,6 +131,7 @@ _PRE_ACTION_CONTEXT_KEYS = frozenset(
     {
         "physical_step",
         "lifecycle_owner_to_internal",
+        "service_active_mask",
         "event_owner_handle",
         "event_owner_epoch",
         "selected_reserve_handle",
@@ -350,6 +355,62 @@ def _frozen_geometry_arrays(
     }
 
 
+def geometry_support_certificate(
+    *,
+    map_width: float,
+    map_height: float,
+    base_xy: np.ndarray,
+) -> dict[str, Any]:
+    """Prove the complete frozen geometry support for every episode angle.
+
+    This proof is analytic and independent of the sampled ``phi``, users, UAV
+    perturbations, or realized coordinates.  Each entry is the maximum radial
+    distance from the map center over the complete support of that family.
+    """
+
+    width = float(map_width)
+    height = float(map_height)
+    base = _finite_array(base_xy, (2,), label="support-certificate base")
+    if not (math.isfinite(width) and math.isfinite(height) and width > 0 and height > 0):
+        raise G0RealizationError("support-certificate map dimensions are invalid")
+    scale = min(width, height)
+    margins = {
+        "negative_x": float(base[0]),
+        "positive_x": float(width - base[0]),
+        "negative_y": float(base[1]),
+        "positive_y": float(height - base[1]),
+    }
+    bounds = {
+        "hotspot_centers": 0.300 * scale,
+        "user_disks": (0.300 + 0.040) * scale,
+        "primaries": math.hypot(0.300, 0.040) * scale,
+        "primary_perturbation_disks": (
+            math.hypot(0.300, 0.040) + 0.002
+        )
+        * scale,
+        "stages": 0.050 * scale,
+        "stage_perturbation_disks": (0.050 + 0.002) * scale,
+        "gates": math.hypot(0.300 - 0.060, 0.040) * scale,
+    }
+    violations = [
+        name
+        for name, radial_bound in bounds.items()
+        if any(radial_bound > margin for margin in margins.values())
+    ]
+    return {
+        "certificate_kind": "analytic_radial_complete_support_every_phi_v2",
+        "phi_domain": "[0,2*pi)",
+        "scale": float(scale),
+        "map_axis_inward_margins": margins,
+        "support_radial_bounds": {
+            name: float(value) for name, value in bounds.items()
+        },
+        "violations": violations,
+        "violation_count": len(violations),
+        "passed": not violations,
+    }
+
+
 @dataclass(frozen=True, order=True)
 class TargetLabel:
     kind: TargetKind
@@ -470,6 +531,15 @@ class G0Geometry:
             raise G0RealizationError(
                 "geometry does not reconstruct from the registered episode RNG namespaces"
             )
+        analytic_support = geometry_support_certificate(
+            map_width=width,
+            map_height=height,
+            base_xy=base,
+        )
+        if int(analytic_support["violation_count"]) != 0:
+            raise G0RealizationError(
+                "analytic every-phi geometry support certificate failed"
+            )
         support = np.concatenate((centers, users, targets, gates, initial, physical), axis=0)
         if (
             np.any(support[:, 0] < 0.0)
@@ -521,6 +591,11 @@ class G0Geometry:
             "target_owned_initial_xy": self.target_owned_initial_xy.tolist(),
             "slot_to_target": self.slot_to_target.tolist(),
             "physical_xy": self.physical_xy.tolist(),
+            "geometry_support_certificate": geometry_support_certificate(
+                map_width=self.map_width,
+                map_height=self.map_height,
+                base_xy=self.base_xy,
+            ),
         }
 
 
@@ -1293,7 +1368,15 @@ class SameInformationController:
             stage = self.ownership[handle]
             stage_xy = self.geometry.coordinate(stage)
             distance = float(np.sum((row.position[:2] - vacancy) ** 2))
-            return (distance, *row.anonymous_tie_key, float(stage_xy[0]), float(stage_xy[1]))
+            return (
+                distance,
+                float(row.position[0]),
+                float(row.position[1]),
+                float(row.velocity[0]),
+                float(row.velocity[1]),
+                float(stage_xy[0]),
+                float(stage_xy[1]),
+            )
 
         selected = min(reserve_handles, key=rank)
         self._selected_reserve = selected
@@ -1334,16 +1417,20 @@ class SameInformationController:
             if self._rejoin_step is None or self._vacant_primary is None:
                 raise G0RealizationError("same-information rejoin state is incomplete")
             row = roster[self._rejoined_handle]
-            primary_xy = self.geometry.coordinate(self._vacant_primary)
-            at_primary = bool(np.array_equal(row.position[:2], primary_xy))
+            owns_vacant_primary = bool(
+                self.ownership.get(self._rejoined_handle) == self._vacant_primary
+            )
+            active_in_completed_previous_step = bool(
+                self._last_primary_step == int(physical_step) - 1
+            )
             if (
                 int(physical_step) >= self._rejoin_step + 1
                 and row.active
-                and at_primary
-                and self._last_primary_step == int(physical_step) - 1
+                and owns_vacant_primary
+                and active_in_completed_previous_step
             ):
                 self._complete_primary_steps += 1
-            if row.active and at_primary:
+            if row.active and owns_vacant_primary:
                 self._last_primary_step = int(physical_step)
             ready = bool(
                 int(physical_step) >= self._rejoin_step + 1
@@ -1960,15 +2047,8 @@ def _minimum_tracker_travel_steps(
     positions = np.repeat(np.asarray(start, dtype=np.float64)[None, :], PHYSICAL_UAVS, axis=0)
     targets = np.repeat(np.asarray(target, dtype=np.float64)[None, :], PHYSICAL_UAVS, axis=0)
     active = np.ones(PHYSICAL_UAVS, dtype=np.bool_)
-    bound = (
-        PHYSICAL_HORIZON
-        * float(np.finfo(np.float32).eps)
-        * float(max_speed)
-        * float(time_step)
-        * 4.0
-    )
     for count in range(PHYSICAL_HORIZON + 1):
-        if float(np.linalg.norm(positions[0] - targets[0])) <= bound:
+        if np.array_equal(positions[0], targets[0]):
             return count
         positions, _actions = _scenario7_nominal_position_step(
             positions,
@@ -1979,6 +2059,25 @@ def _minimum_tracker_travel_steps(
             time_step=time_step,
         )
     raise G0RealizationError("common tracker cannot reach oracle gate within H")
+
+
+def _is_exact_gate_arrival(
+    position: np.ndarray,
+    gate: np.ndarray,
+    *,
+    physical_step: int,
+    latest_departure: int,
+    event_onset: int,
+) -> bool:
+    """Exact pre-action oracle arrival predicate; no tolerance is admissible."""
+
+    return bool(
+        int(latest_departure) <= int(physical_step) <= int(event_onset)
+        and np.array_equal(
+            np.asarray(position, dtype=np.float64),
+            np.asarray(gate, dtype=np.float64),
+        )
+    )
 
 
 def certify_oracle_candidates(
@@ -2032,46 +2131,42 @@ def _oracle_candidate_trace(
     source: G0EpisodeSource,
     reserve: TargetLabel,
 ) -> tuple[OracleCandidateSafetyTrace, dict[str, Any]]:
+    labels = TARGET_LABELS
+    reserve_row = labels.index(reserve)
+    owner_row = labels.index(source.event.owner_target)
+    stage_xyz = np.concatenate(
+        (source.geometry.coordinate(reserve), [FIXED_ALTITUDE_M])
+    )
+    gate_xyz = np.concatenate(
+        (source.geometry.gate(source.event.owner_target), [FIXED_ALTITUDE_M])
+    )
+    primary_xyz = np.concatenate(
+        (source.geometry.coordinate(source.event.owner_target), [FIXED_ALTITUDE_M])
+    )
+    travel_steps = _minimum_tracker_travel_steps(
+        stage_xyz,
+        gate_xyz,
+        max_speed=30.0,
+        max_vertical_speed=5.0,
+        time_step=1.0,
+    )
+    latest_departure = int(source.event.onset) - int(travel_steps)
+    if latest_departure < 0:
+        raise G0RealizationError(
+            "oracle latest departure is negative under exact gate travel"
+        )
     env = UAVSourceIdentifiabilityEnv(source, Cell.EVENT)
     try:
         env.reset()
         prestate = _complete_oracle_prestate(env)
         prestate_sha256 = sha256_json(prestate)
-        labels = TARGET_LABELS
-        reserve_row = labels.index(reserve)
-        owner_row = labels.index(source.event.owner_target)
-        stage_xyz = np.concatenate(
-            (source.geometry.coordinate(reserve), [FIXED_ALTITUDE_M])
-        )
-        gate_xyz = np.concatenate(
-            (source.geometry.gate(source.event.owner_target), [FIXED_ALTITUDE_M])
-        )
-        primary_xyz = np.concatenate(
-            (source.geometry.coordinate(source.event.owner_target), [FIXED_ALTITUDE_M])
-        )
-        travel_steps = _minimum_tracker_travel_steps(
-            stage_xyz,
-            gate_xyz,
-            max_speed=env.max_speed,
-            max_vertical_speed=env.max_vertical_speed_mps,
-            time_step=env.time_step,
-        )
-        latest_departure = int(source.event.onset) - int(travel_steps)
-        roundoff_bound = max(
-            float(travel_steps)
-            * float(np.finfo(np.float32).eps)
-            * float(env.max_speed)
-            * float(env.time_step)
-            * 4.0,
-            float(np.finfo(np.float64).eps),
-        )
         schedule_rows: list[list[list[float]]] = []
         records: list[OracleSafetyStepRecord] = []
         path_length = 0.0
         tracking_error = 0.0
         arrival: int | None = None
         arrival_error = math.inf
-        hard_violations = int(latest_departure < 0)
+        hard_violations = 0
         for step in range(PHYSICAL_HORIZON):
             if int(env.current_step) != step:
                 raise G0RealizationError("candidate safety physical-step order drifted")
@@ -2111,9 +2206,13 @@ def _oracle_candidate_trace(
             )
             if (
                 arrival is None
-                and step >= latest_departure
-                and float(np.linalg.norm(positions[reserve_row] - gate_xyz))
-                <= roundoff_bound
+                and _is_exact_gate_arrival(
+                    positions[reserve_row],
+                    gate_xyz,
+                    physical_step=step,
+                    latest_departure=latest_departure,
+                    event_onset=source.event.onset,
+                )
             ):
                 arrival = step
                 arrival_error = float(
@@ -2143,9 +2242,14 @@ def _oracle_candidate_trace(
             next_positions = record.next_uav_positions.array().astype(
                 np.float64, copy=False
             )
-            if not np.isfinite(actions).all() or np.any(np.abs(actions) > 1.0):
-                hard_violations += 1
-            if (
+            action_violation = bool(
+                not np.isfinite(actions).all()
+                or np.any(np.abs(actions) > 1.0)
+                or not np.array_equal(
+                    actions[:, 2], np.zeros(PHYSICAL_UAVS, dtype=actions.dtype)
+                )
+            )
+            physical_violation = bool(
                 np.any(next_positions[:, 0] < 0.0)
                 or np.any(next_positions[:, 0] > source.geometry.map_width)
                 or np.any(next_positions[:, 1] < 0.0)
@@ -2154,21 +2258,26 @@ def _oracle_candidate_trace(
                     next_positions[:, 2],
                     np.full(PHYSICAL_UAVS, FIXED_ALTITUDE_M),
                 )
-            ):
-                hard_violations += 1
+            )
+            # A real-guard intervention is the registered safety realization,
+            # not itself a deviation from that realization.  A changed,
+            # bypassed, or inconsistent guard is rejected by the independent
+            # primitive validator rather than counted as a favorable trace.
+            guard_violation = False
+            hard_violations += int(
+                action_violation or physical_violation or guard_violation
+            )
             path_length += float(
                 np.linalg.norm(
                     next_positions[reserve_row] - positions[reserve_row]
                 )
             )
             if (
-                source.event.onset
-                <= step
-                <= source.event.rejoin + RECOVERY_WINDOW_EXTENSION
+                source.event.onset <= step < source.event.rejoin
             ):
                 tracking_error += float(
-                    np.linalg.norm(
-                        next_positions[reserve_row] - targets[reserve_row]
+                    np.sum(
+                        (next_positions[reserve_row, :2] - primary_xyz[:2]) ** 2
                     )
                 )
             schedule_rows.append(targets.tolist())
@@ -2180,7 +2289,6 @@ def _oracle_candidate_trace(
                     records[-1].next_uav_positions.array()[reserve_row] - gate_xyz
                 )
             )
-            hard_violations += 1
         primitive_steps = [record.to_primitive() for record in records]
         trace_sha256 = sha256_json(primitive_steps)
         return (
@@ -2291,10 +2399,12 @@ def _validate_record_branchpoint_and_transducer(
         )
     current_mask = record.current_service_mask.array()
     executed_mask = record.executed_service_mask.array()
+    context_mask = np.asarray(context["service_active_mask"], dtype=np.bool_)
     if (
         executed_mask.shape != (PHYSICAL_UAVS,)
         or executed_mask.dtype != np.dtype(np.bool_)
         or not np.array_equal(executed_mask, current_mask)
+        or not np.array_equal(context_mask, current_mask)
     ):
         raise G0RealizationError("executed service-mask evidence drifted")
     transducer = _validate_common_transducer_evidence_primitive(
@@ -2325,6 +2435,214 @@ def _validate_record_branchpoint_and_transducer(
         raise G0RealizationError(
             "target schedule is not bound to the common transducer"
         )
+
+
+def _validate_oracle_guard_transition_bindings(
+    source: G0EpisodeSource,
+    candidates: Sequence[OracleCandidateSafetyTrace],
+    common_prestate: Mapping[str, Any],
+) -> None:
+    """Reconstruct the native guard/network chain without advancing an env step."""
+
+    for candidate in candidates:
+        environment = UAVSourceIdentifiabilityEnv(source, Cell.EVENT)
+        try:
+            environment.reset()
+            if _complete_oracle_prestate(environment) != common_prestate:
+                raise G0RealizationError(
+                    "oracle common prestate is not reconstructible from source reset"
+                )
+            for record in candidate.steps:
+                current = record.current_uav_positions.array()
+                service_mask = record.executed_service_mask.array()
+                raw_action = record.raw_candidate_action.array()
+                reconstructed_connections = {
+                    "user": np.asarray(environment.connections),
+                    "uav": np.asarray(environment.uav_connections),
+                    "uav_bs": np.asarray(environment.uav_bs_connections),
+                }
+                sealed_routing = [dict(item) for item in record.routing_paths]
+                if (
+                    int(environment.current_step) != int(record.physical_step)
+                    or not np.array_equal(environment.uav_positions, current)
+                    or not np.array_equal(
+                        environment.last_actual_velocities,
+                        record.current_uav_velocities.array(),
+                    )
+                    or not np.array_equal(
+                        environment._service_active_mask, service_mask
+                    )
+                    or not np.array_equal(
+                        environment._service_active_mask,
+                        record.current_service_mask.array(),
+                    )
+                ):
+                    raise G0RealizationError(
+                        "oracle record prestate is not bound to reconstructed native state"
+                    )
+                if any(
+                    not np.array_equal(
+                        reconstructed_connections[name],
+                        record.connections[name].array(),
+                    )
+                    for name in ("user", "uav", "uav_bs")
+                ):
+                    raise G0RealizationError(
+                        "oracle connection input is not bound to reconstructed native state"
+                    )
+                if _routing_paths_primitive(environment.routing_paths) != sealed_routing:
+                    raise G0RealizationError(
+                        "oracle routing input is not bound to reconstructed native state"
+                    )
+
+                action_dict = {
+                    agent: raw_action[row].copy()
+                    for row, agent in enumerate(environment.possible_agents)
+                    if service_mask[row]
+                }
+                adjusted_actions, _commanded_velocities = (
+                    environment._prepare_energy_actions(action_dict)
+                )
+                environment.previous_routing_paths_snapshot = dict(
+                    environment.routing_paths
+                )
+                environment.previous_connections_snapshot = (
+                    environment.connections.copy()
+                )
+                environment._move_users()
+                environment.backhaul_guard_checked_actions = 0
+                environment.backhaul_guard_blocked_actions = 0
+                environment._oracle_guard_capacity_reads = []
+                environment._oracle_guarded_velocity_rows = np.zeros(
+                    (PHYSICAL_UAVS, 3), dtype=np.float64
+                )
+                environment._oracle_guard_interventions = np.zeros(
+                    PHYSICAL_UAVS, dtype=np.bool_
+                )
+                try:
+                    for agent_idx, agent in enumerate(environment.agents):
+                        action = np.asarray(
+                            adjusted_actions[agent], dtype=np.float32
+                        )
+                        proposed_velocity = action * float(environment.max_speed)
+                        guarded_velocity = np.asarray(
+                            environment._apply_backhaul_action_guard(
+                                agent_idx, proposed_velocity
+                            ),
+                            dtype=np.float64,
+                        )
+                        next_position = (
+                            environment.uav_positions[agent_idx]
+                            + guarded_velocity * float(environment.time_step)
+                        )
+                        next_position[0] = np.clip(
+                            next_position[0], 0.0, environment.area_size
+                        )
+                        next_position[1] = np.clip(
+                            next_position[1], 0.0, environment.area_size
+                        )
+                        next_position[2] = np.clip(
+                            next_position[2], *environment.height_range
+                        )
+                        environment.uav_positions[agent_idx] = next_position
+                    capacity_reads = tuple(environment._oracle_guard_capacity_reads)
+                    guarded = np.asarray(
+                        environment._oracle_guarded_velocity_rows,
+                        dtype=np.float64,
+                    ).copy()
+                    interventions = np.asarray(
+                        environment._oracle_guard_interventions,
+                        dtype=np.bool_,
+                    ).copy()
+                finally:
+                    environment._oracle_guard_capacity_reads = None
+                    environment._oracle_guarded_velocity_rows = None
+                    environment._oracle_guard_interventions = None
+
+                expected_guard_output = {
+                    "checked_actions": int(
+                        environment.backhaul_guard_checked_actions
+                    ),
+                    "blocked_actions": int(
+                        environment.backhaul_guard_blocked_actions
+                    ),
+                    "intervention_by_uav": interventions.tolist(),
+                }
+                reconstructed_capacity_reads = tuple(
+                    item.to_primitive() for item in capacity_reads
+                )
+                sealed_capacity_reads = tuple(
+                    item.to_primitive()
+                    for item in record.exact_link_capacity_values_read_by_the_real_guard
+                )
+                if reconstructed_capacity_reads != sealed_capacity_reads:
+                    mismatch_index = next(
+                        (
+                            index
+                            for index, (reconstructed, sealed) in enumerate(
+                                zip(reconstructed_capacity_reads, sealed_capacity_reads)
+                            )
+                            if reconstructed != sealed
+                        ),
+                        min(
+                            len(reconstructed_capacity_reads),
+                            len(sealed_capacity_reads),
+                        ),
+                    )
+                    raise G0RealizationError(
+                        "ordered real-guard capacity reads are not independently "
+                        f"reconstructed at {candidate.candidate_id} step "
+                        f"{record.physical_step} index {mismatch_index}; "
+                        f"counts={len(reconstructed_capacity_reads)}/"
+                        f"{len(sealed_capacity_reads)}; reconstructed="
+                        f"{reconstructed_capacity_reads[mismatch_index] if mismatch_index < len(reconstructed_capacity_reads) else None}; "
+                        f"sealed={sealed_capacity_reads[mismatch_index] if mismatch_index < len(sealed_capacity_reads) else None}"
+                    )
+                if (
+                    expected_guard_output
+                    != dict(record.real_guard_intervention_or_violation_output)
+                    or not np.array_equal(
+                        guarded, record.guarded_executed_action.array()
+                    )
+                ):
+                    raise G0RealizationError(
+                        "guarded action/output is not bound to isolated real-guard reconstruction"
+                    )
+
+                expected_next = np.asarray(
+                    environment.uav_positions, dtype=np.float64
+                ).copy()
+                expected_velocity = (
+                    expected_next - current
+                ) / float(environment.time_step)
+                if (
+                    not np.array_equal(
+                        expected_next, record.next_uav_positions.array()
+                    )
+                    or not np.array_equal(
+                        expected_velocity, record.next_uav_velocities.array()
+                    )
+                ):
+                    raise G0RealizationError(
+                        "next transition is not bound to reconstructed guarded action"
+                    )
+                environment.last_actual_velocities = expected_velocity.copy()
+                environment._update_channel_state()
+                environment._update_uav_connections()
+                if (
+                    environment.routing_protocol == "hggr"
+                    and environment.current_step
+                    % environment.hggr_update_interval
+                    == 0
+                ):
+                    environment.hop_map = environment._calculate_hop_map()
+                if environment.current_step % environment.hggr_update_interval == 0:
+                    environment._update_global_bs_cache()
+                environment._compute_routing_paths()
+                environment.current_step += 1
+                environment._synchronize_service_mask(force=True)
+        finally:
+            environment.close()
 
 
 def validate_oracle_safety_ledger(
@@ -2369,24 +2687,14 @@ def validate_oracle_safety_ledger(
     expected_rng_state_bindings = _rng_state_bindings(common_rng_states)
     previous_candidates: list[OracleCandidateSafetyTrace] = []
     for candidate in ledger.candidates:
-        if len(candidate.steps) != PHYSICAL_HORIZON:
-            raise G0RealizationError("candidate did not advance exactly H steps")
-        if candidate.common_prestate_sha256 != ledger.common_prestate_sha256:
-            raise G0RealizationError("candidate trace is not bound to common prestate")
-        previous_next: np.ndarray | None = None
-        previous_velocity = np.zeros((PHYSICAL_UAVS, 3), dtype=np.float64)
         reserve = TargetLabel.parse(candidate.candidate_id)
         if reserve.kind is not TargetKind.STAGE:
             raise G0RealizationError("oracle candidate owner is not a reserve")
-        reserve_row = TARGET_LABELS.index(reserve)
         stage_xyz = np.concatenate(
             (source.geometry.coordinate(reserve), [FIXED_ALTITUDE_M])
         )
         gate_xyz = np.concatenate(
             (source.geometry.gate(source.event.owner_target), [FIXED_ALTITUDE_M])
-        )
-        primary_xyz = np.concatenate(
-            (source.geometry.coordinate(source.event.owner_target), [FIXED_ALTITUDE_M])
         )
         travel_steps = _minimum_tracker_travel_steps(
             stage_xyz,
@@ -2396,18 +2704,25 @@ def validate_oracle_safety_ledger(
             time_step=1.0,
         )
         latest_departure = int(source.event.onset) - int(travel_steps)
-        roundoff_bound = max(
-            float(travel_steps)
-            * float(np.finfo(np.float32).eps)
-            * 30.0
-            * 4.0,
-            float(np.finfo(np.float64).eps),
+        if latest_departure < 0:
+            raise G0RealizationError(
+                "oracle latest departure is negative under exact gate travel"
+            )
+        if len(candidate.steps) != PHYSICAL_HORIZON:
+            raise G0RealizationError("candidate did not advance exactly H steps")
+        if candidate.common_prestate_sha256 != ledger.common_prestate_sha256:
+            raise G0RealizationError("candidate trace is not bound to common prestate")
+        previous_next: np.ndarray | None = None
+        previous_velocity = np.zeros((PHYSICAL_UAVS, 3), dtype=np.float64)
+        reserve_row = TARGET_LABELS.index(reserve)
+        primary_xyz = np.concatenate(
+            (source.geometry.coordinate(source.event.owner_target), [FIXED_ALTITUDE_M])
         )
         reconstructed_arrival: int | None = None
         reconstructed_arrival_error = math.inf
         reconstructed_path_length = 0.0
         reconstructed_tracking_error = 0.0
-        reconstructed_hard_violations = int(latest_departure < 0)
+        reconstructed_hard_violations = 0
         reconstructed_schedule: list[list[list[float]]] = []
         for expected_step, record in enumerate(candidate.steps):
             primitive = record.to_primitive()
@@ -2447,10 +2762,12 @@ def validate_oracle_safety_ledger(
                 )
             ):
                 raise G0RealizationError("candidate safety row shape/finite evidence failed")
-            if np.any(np.abs(raw) > 1.0) or not np.array_equal(
-                raw[:, 2], np.zeros(PHYSICAL_UAVS, dtype=raw.dtype)
-            ):
-                reconstructed_hard_violations += 1
+            step_action_violation = bool(
+                np.any(np.abs(raw) > 1.0)
+                or not np.array_equal(
+                    raw[:, 2], np.zeros(PHYSICAL_UAVS, dtype=raw.dtype)
+                )
+            )
             if not np.array_equal(raw[~service_mask], np.zeros_like(raw[~service_mask])):
                 raise G0RealizationError("inactive lifecycle received candidate action")
             expected_mask = np.ones(PHYSICAL_UAVS, dtype=np.bool_)
@@ -2502,9 +2819,13 @@ def validate_oracle_safety_ledger(
                 raise G0RealizationError("candidate raw tracker action was forged")
             if (
                 reconstructed_arrival is None
-                and expected_step >= latest_departure
-                and float(np.linalg.norm(current[reserve_row] - gate_xyz))
-                <= roundoff_bound
+                and _is_exact_gate_arrival(
+                    current[reserve_row],
+                    gate_xyz,
+                    physical_step=expected_step,
+                    latest_departure=latest_departure,
+                    event_onset=source.event.onset,
+                )
             ):
                 reconstructed_arrival = expected_step
                 reconstructed_arrival_error = float(
@@ -2519,7 +2840,7 @@ def validate_oracle_safety_ledger(
                 raise G0RealizationError("candidate next velocity is not physical delta")
             if not np.array_equal(next_positions[:, 2], current[:, 2]):
                 raise G0RealizationError("candidate fixed-altitude recurrence failed")
-            if (
+            step_physical_violation = bool(
                 np.any(next_positions[:, 0] < 0.0)
                 or np.any(next_positions[:, 0] > source.geometry.map_width)
                 or np.any(next_positions[:, 1] < 0.0)
@@ -2528,21 +2849,18 @@ def validate_oracle_safety_ledger(
                     next_positions[:, 2],
                     np.full(PHYSICAL_UAVS, FIXED_ALTITUDE_M),
                 )
-            ):
-                reconstructed_hard_violations += 1
+            )
             reconstructed_path_length += float(
                 np.linalg.norm(
                     next_positions[reserve_row] - current[reserve_row]
                 )
             )
             if (
-                source.event.onset
-                <= expected_step
-                <= source.event.rejoin + RECOVERY_WINDOW_EXTENSION
+                source.event.onset <= expected_step < source.event.rejoin
             ):
                 reconstructed_tracking_error += float(
-                    np.linalg.norm(
-                        next_positions[reserve_row] - targets[reserve_row]
+                    np.sum(
+                        (next_positions[reserve_row, :2] - primary_xyz[:2]) ** 2
                     )
                 )
             reconstructed_schedule.append(targets.tolist())
@@ -2565,12 +2883,30 @@ def validate_oracle_safety_ledger(
                 "intervention_by_uav",
             }:
                 raise G0RealizationError("real guard output schema drifted")
-            if len(
-                record.real_guard_intervention_or_violation_output[
-                    "intervention_by_uav"
-                ]
-            ) != PHYSICAL_UAVS:
+            intervention_rows = record.real_guard_intervention_or_violation_output[
+                "intervention_by_uav"
+            ]
+            checked_actions = int(
+                record.real_guard_intervention_or_violation_output["checked_actions"]
+            )
+            blocked_actions = int(
+                record.real_guard_intervention_or_violation_output["blocked_actions"]
+            )
+            if (
+                len(intervention_rows) != PHYSICAL_UAVS
+                or any(type(item) is not bool for item in intervention_rows)
+                or not 0 <= blocked_actions <= checked_actions <= PHYSICAL_UAVS
+                or blocked_actions != sum(bool(item) for item in intervention_rows)
+            ):
                 raise G0RealizationError("real guard intervention inventory drifted")
+            # Internally consistent intervention evidence is the real guarded
+            # trajectory.  Any deviation from it fails closed above.
+            step_guard_violation = False
+            reconstructed_hard_violations += int(
+                step_action_violation
+                or step_physical_violation
+                or step_guard_violation
+            )
             if record.shared_channel_draw_coordinate or record.shared_channel_draw_block:
                 raise G0RealizationError("candidate used an unregistered channel RNG draw")
             previous_next = next_positions
@@ -2580,7 +2916,6 @@ def validate_oracle_safety_ledger(
             reconstructed_arrival_error = float(
                 np.linalg.norm(previous_next[reserve_row] - gate_xyz)
             )
-            reconstructed_hard_violations += 1
         if (
             candidate.target_schedule_sha256 != sha256_json(reconstructed_schedule)
             or candidate.gate_arrival_time != reconstructed_arrival
@@ -2600,6 +2935,11 @@ def validate_oracle_safety_ledger(
         if not all(math.isfinite(value) for value in candidate.rank):
             raise G0RealizationError("candidate ranking evidence is nonfinite")
         previous_candidates.append(candidate)
+    _validate_oracle_guard_transition_bindings(
+        source,
+        ledger.candidates,
+        ledger.common_prestate,
+    )
     assigned_labels = tuple(
         TargetLabel.parse(value) for value in source.assignment.row_to_target
     )
@@ -2664,12 +3004,7 @@ def oracle_qualification_from_safety_ledger(
                 ),
                 gate_arrival_time=candidate.gate_arrival_time,
                 gate_arrival_error=candidate.gate_arrival_error,
-                gate_arrival_roundoff_bound=(
-                    PHYSICAL_HORIZON
-                    * float(np.finfo(np.float32).eps)
-                    * 30.0
-                    * 4.0
-                ),
+                gate_arrival_roundoff_bound=0.0,
                 hard_violation_count=candidate.hard_violation_count,
                 event_window_tracking_error=candidate.event_window_tracking_error,
                 path_length=candidate.path_length,
@@ -2686,6 +3021,7 @@ def oracle_qualification_from_safety_ledger(
     passed = bool(
         len(rows) == K_SEARCH
         and all(row.candidate_complete for row in rows)
+        and all(row.hard_violation_count == 0 for row in rows)
         and ledger.selected_candidate_id == selected.reserve_target
     )
     return OracleQualificationCertificate(
@@ -3199,7 +3535,6 @@ def _derive_return_ready_step(
     replacement_handle = replacement_lifecycle_handle(
         source, initial_owner_handle
     )
-    primary = source.geometry.coordinate(source.event.owner_target)
     weakest = execution.pre_action_weakest_service.array()
     for step in range(source.event.rejoin + 1, PHYSICAL_HORIZON):
         current_context = _validate_pre_action_context_primitive(
@@ -3229,15 +3564,15 @@ def _derive_return_ready_step(
             raise G0RealizationError("RETURN_READY replacement lifecycle is absent")
         current_owner_row = int(current_rows[replacement_handle]["internal_row"])
         previous_owner_row = int(previous_rows[replacement_handle]["internal_row"])
-        current = execution.steps[step].current_uav_positions.array()
-        previous = execution.steps[step - 1].current_uav_positions.array()
-        mask = execution.steps[step].executed_service_mask.array()
-        previous_mask = execution.steps[step - 1].executed_service_mask.array()
+        current_mask = current_context["service_active_mask"]
+        previous_mask = previous_context["service_active_mask"]
         if (
-            bool(mask[current_owner_row])
+            current_rows[replacement_handle]["owner_target"]
+            == source.event.owner_target.key
+            and previous_rows[replacement_handle]["owner_target"]
+            == source.event.owner_target.key
+            and bool(current_mask[current_owner_row])
             and bool(previous_mask[previous_owner_row])
-            and np.array_equal(current[current_owner_row, :2], primary)
-            and np.array_equal(previous[previous_owner_row, :2], primary)
             and float(weakest[step]) >= SERVICE_TARGET
         ):
             return step
@@ -3616,6 +3951,15 @@ def _validate_pre_action_context_primitive(value: Any) -> dict[str, Any]:
     ):
         raise G0RealizationError("branchpoint lifecycle ordering is ambiguous")
 
+    service_active_value = value["service_active_mask"]
+    if (
+        not isinstance(service_active_value, list)
+        or len(service_active_value) != PHYSICAL_UAVS
+        or any(type(item) is not bool for item in service_active_value)
+    ):
+        raise G0RealizationError("branchpoint service-active mask is incomplete")
+    service_active_mask = [bool(item) for item in service_active_value]
+
     event_owner_handle = str(value["event_owner_handle"])
     event_owner_epoch = int(value["event_owner_epoch"])
     selected_reserve_handle = str(value["selected_reserve_handle"])
@@ -3697,6 +4041,7 @@ def _validate_pre_action_context_primitive(value: Any) -> dict[str, Any]:
     return {
         "physical_step": physical_step,
         "lifecycle_owner_to_internal": lifecycle,
+        "service_active_mask": service_active_mask,
         "event_owner_handle": event_owner_handle,
         "event_owner_epoch": event_owner_epoch,
         "selected_reserve_handle": selected_reserve_handle,
@@ -3839,8 +4184,13 @@ def _make_pre_action_context(
     epochs: Sequence[int],
     selected_candidate_id: str,
     rng_states: Mapping[str, Any],
+    service_active_mask: Sequence[bool],
 ) -> dict[str, Any]:
-    if len(handles) != PHYSICAL_UAVS or len(epochs) != PHYSICAL_UAVS:
+    if (
+        len(handles) != PHYSICAL_UAVS
+        or len(epochs) != PHYSICAL_UAVS
+        or len(service_active_mask) != PHYSICAL_UAVS
+    ):
         raise G0RealizationError("branchpoint lifecycle source inventory drifted")
     lifecycle: list[dict[str, Any]] = []
     for storage_row, (handle, epoch, owner_target) in enumerate(
@@ -3862,6 +4212,7 @@ def _make_pre_action_context(
     context = {
         "physical_step": int(physical_step),
         "lifecycle_owner_to_internal": lifecycle,
+        "service_active_mask": [bool(item) for item in service_active_mask],
         "event_owner_handle": event_row["handle"],
         "event_owner_epoch": int(event_row["epoch"]),
         "selected_reserve_handle": selected_row["handle"],
@@ -3946,6 +4297,7 @@ def _pre_action_context(
         epochs=env._epochs,
         selected_candidate_id=selected_candidate_id,
         rng_states=rng_states,
+        service_active_mask=env._service_active_mask,
     )
 
 
@@ -3981,6 +4333,14 @@ def _expected_pre_action_context(
         epochs=epochs,
         selected_candidate_id=selected_candidate_id,
         rng_states=rng_states,
+        service_active_mask=[
+            bool(
+                source.event.active(int(physical_step), Cell.EVENT)
+                if internal_row == TARGET_LABELS.index(source.event.owner_target)
+                else True
+            )
+            for internal_row in range(PHYSICAL_UAVS)
+        ],
     )
 
 
@@ -4823,18 +5183,19 @@ class MechanicallyQualifiedOracleController:
         if not math.isfinite(float(weakest_hotspot_service)):
             raise G0RealizationError("oracle current service input is nonfinite")
         if self._rejoined_handle is not None:
-            primary_xy = self.geometry.coordinate(self._failed_primary)
             row = roster[self._rejoined_handle]
-            at_primary = bool(np.array_equal(row.position[:2], primary_xy))
+            owns_failed_primary = bool(
+                self.ownership.get(self._rejoined_handle) == self._failed_primary
+            )
             if (
                 self._rejoin_step is not None
                 and step >= self._rejoin_step + 1
                 and row.active
-                and at_primary
+                and owns_failed_primary
                 and self._last_primary_step == step - 1
             ):
                 self._complete_primary_steps += 1
-            if row.active and at_primary:
+            if row.active and owns_failed_primary:
                 self._last_primary_step = step
             if (
                 self._return_ready_step is None
@@ -6044,7 +6405,13 @@ def build_episode_validity_record(
                 "controller": none_no.controller_state_sha256,
             }
         ),
-        geometry_support_violations=0,
+        geometry_support_violations=int(
+            geometry_support_certificate(
+                map_width=source.geometry.map_width,
+                map_height=source.geometry.map_height,
+                base_xy=source.geometry.base_xy,
+            )["violation_count"]
+        ),
         rng_namespace_violations=0,
         pairing_mismatches=int(not no_event_equal),
         assignment_failures=int(not source.assignment.passed),
@@ -6177,59 +6544,109 @@ def _build_analysis_from_reconstructed_rows(
     def binary_row(prefix: str, control: Control, cell: Cell) -> dict[str, float | int]:
         return binary[f"{prefix}|{control.value}|{cell.value}"]
 
-    oracle_pass = bool(
-        cont(Control.ORACLE, Cell.EVENT)["BS_L95"] >= 1.0
-        and cont(Control.ORACLE, Cell.NO_EVENT)["BS_L95"] >= 1.0
-        and float(binary_row("B", Control.ORACLE, Cell.EVENT)["CP_L95"]) >= 0.90
-        and float(binary_row("B", Control.ORACLE, Cell.NO_EVENT)["CP_L95"]) >= 0.90
-        and all(record.oracle_qualification_failures == 0 for record in validity_records)
-    )
-    oracle_fail = bool(
-        cont(Control.ORACLE, Cell.EVENT)["BS_U95"] < 1.0
-        or cont(Control.ORACLE, Cell.NO_EVENT)["BS_U95"] < 1.0
-        or float(binary_row("B", Control.ORACLE, Cell.EVENT)["CP_U95"]) < 0.90
-        or float(binary_row("B", Control.ORACLE, Cell.NO_EVENT)["CP_U95"]) < 0.90
-        or any(record.oracle_exact_physical_impossibility for record in validity_records)
-    )
-    oracle_status = (
-        GateStatus.FAIL if oracle_fail else GateStatus.PASS if oracle_pass else GateStatus.OPEN
-    )
-    same_pass = bool(
-        cont(Control.SAME_INFORMATION, Cell.EVENT)["BS_L95"] >= 1.0
-        and cont(Control.SAME_INFORMATION, Cell.NO_EVENT)["BS_L95"] >= 1.0
-        and float(binary_row("B", Control.SAME_INFORMATION, Cell.EVENT)["CP_L95"]) >= 0.90
-        and float(binary_row("B", Control.SAME_INFORMATION, Cell.NO_EVENT)["CP_L95"]) >= 0.90
-        and float(binary_row("C", Control.SAME_INFORMATION, Cell.EVENT)["CP_U95"]) <= 0.05
-    )
-    same_fail = bool(
-        cont(Control.SAME_INFORMATION, Cell.EVENT)["BS_U95"] < 1.0
-        or cont(Control.SAME_INFORMATION, Cell.NO_EVENT)["BS_U95"] < 1.0
-        or float(binary_row("B", Control.SAME_INFORMATION, Cell.EVENT)["CP_U95"]) < 0.90
-        or float(binary_row("B", Control.SAME_INFORMATION, Cell.NO_EVENT)["CP_U95"]) < 0.90
-        or float(binary_row("C", Control.SAME_INFORMATION, Cell.EVENT)["CP_L95"]) > 0.05
-    )
-    same_status = GateStatus.PASS if same_pass else GateStatus.FAIL if same_fail else GateStatus.OPEN
-    causal_pass = bool(
-        cont(Control.NO_REALLOCATION, Cell.EVENT)["BS_U95"] < 1.0
-        and float(binary_row("B", Control.NO_REALLOCATION, Cell.EVENT)["CP_U95"]) < 0.90
-        and continuous["Delta_J"]["BS_L95"] > 0.0
-        and continuous["Delta_M"]["mean"] >= 0.10
-        and continuous["Delta_M"]["BS_L95"] > 0.05
-    )
-    causal_fail = bool(
-        cont(Control.NO_REALLOCATION, Cell.EVENT)["BS_L95"] >= 1.0
-        or float(binary_row("B", Control.NO_REALLOCATION, Cell.EVENT)["CP_L95"]) >= 0.90
-        or continuous["Delta_J"]["BS_U95"] <= 0.0
-        or continuous["Delta_M"]["mean"] < 0.10
-        or continuous["Delta_M"]["BS_U95"] <= 0.05
-    )
-    causal_status = (
-        GateStatus.PASS if causal_pass else GateStatus.FAIL if causal_fail else GateStatus.OPEN
-    )
     validity_errors = sorted(
         {error for record in validity_records for error in record.error_names()}
     )
     valid = not validity_errors
+    oracle_status: GateStatus | None = None
+    same_status: GateStatus | None = None
+    causal_status: GateStatus | None = None
+    if valid:
+        oracle_pass = bool(
+            cont(Control.ORACLE, Cell.EVENT)["BS_L95"] >= 1.0
+            and cont(Control.ORACLE, Cell.NO_EVENT)["BS_L95"] >= 1.0
+            and float(binary_row("B", Control.ORACLE, Cell.EVENT)["CP_L95"]) >= 0.90
+            and float(binary_row("B", Control.ORACLE, Cell.NO_EVENT)["CP_L95"]) >= 0.90
+            and all(
+                record.oracle_qualification_failures == 0
+                for record in validity_records
+            )
+        )
+        oracle_fail = bool(
+            cont(Control.ORACLE, Cell.EVENT)["BS_U95"] < 1.0
+            or cont(Control.ORACLE, Cell.NO_EVENT)["BS_U95"] < 1.0
+            or float(binary_row("B", Control.ORACLE, Cell.EVENT)["CP_U95"]) < 0.90
+            or float(binary_row("B", Control.ORACLE, Cell.NO_EVENT)["CP_U95"]) < 0.90
+            or any(
+                record.oracle_exact_physical_impossibility
+                for record in validity_records
+            )
+        )
+        oracle_status = (
+            GateStatus.FAIL
+            if oracle_fail
+            else GateStatus.PASS
+            if oracle_pass
+            else GateStatus.OPEN
+        )
+        if oracle_status is GateStatus.PASS:
+            same_pass = bool(
+                cont(Control.SAME_INFORMATION, Cell.EVENT)["BS_L95"] >= 1.0
+                and cont(Control.SAME_INFORMATION, Cell.NO_EVENT)["BS_L95"] >= 1.0
+                and float(
+                    binary_row("B", Control.SAME_INFORMATION, Cell.EVENT)["CP_L95"]
+                )
+                >= 0.90
+                and float(
+                    binary_row("B", Control.SAME_INFORMATION, Cell.NO_EVENT)["CP_L95"]
+                )
+                >= 0.90
+                and float(
+                    binary_row("C", Control.SAME_INFORMATION, Cell.EVENT)["CP_U95"]
+                )
+                <= 0.05
+            )
+            same_fail = bool(
+                cont(Control.SAME_INFORMATION, Cell.EVENT)["BS_U95"] < 1.0
+                or cont(Control.SAME_INFORMATION, Cell.NO_EVENT)["BS_U95"] < 1.0
+                or float(
+                    binary_row("B", Control.SAME_INFORMATION, Cell.EVENT)["CP_U95"]
+                )
+                < 0.90
+                or float(
+                    binary_row("B", Control.SAME_INFORMATION, Cell.NO_EVENT)["CP_U95"]
+                )
+                < 0.90
+                or float(
+                    binary_row("C", Control.SAME_INFORMATION, Cell.EVENT)["CP_L95"]
+                )
+                > 0.05
+            )
+            same_status = (
+                GateStatus.PASS
+                if same_pass
+                else GateStatus.FAIL
+                if same_fail
+                else GateStatus.OPEN
+            )
+            if same_status is GateStatus.PASS:
+                causal_pass = bool(
+                    cont(Control.NO_REALLOCATION, Cell.EVENT)["BS_U95"] < 1.0
+                    and float(
+                        binary_row("B", Control.NO_REALLOCATION, Cell.EVENT)["CP_U95"]
+                    )
+                    < 0.90
+                    and continuous["Delta_J"]["BS_L95"] > 0.0
+                    and continuous["Delta_M"]["mean"] >= 0.10
+                    and continuous["Delta_M"]["BS_L95"] > 0.05
+                )
+                causal_fail = bool(
+                    cont(Control.NO_REALLOCATION, Cell.EVENT)["BS_L95"] >= 1.0
+                    or float(
+                        binary_row("B", Control.NO_REALLOCATION, Cell.EVENT)["CP_L95"]
+                    )
+                    >= 0.90
+                    or continuous["Delta_J"]["BS_U95"] <= 0.0
+                    or continuous["Delta_M"]["mean"] < 0.10
+                    or continuous["Delta_M"]["BS_U95"] <= 0.05
+                )
+                causal_status = (
+                    GateStatus.PASS
+                    if causal_pass
+                    else GateStatus.FAIL
+                    if causal_fail
+                    else GateStatus.OPEN
+                )
     branch = select_result_branch(
         valid=valid,
         oracle_status=oracle_status,
@@ -6247,9 +6664,9 @@ def _build_analysis_from_reconstructed_rows(
         "quantile_rule": "sorted_no_interpolation_x500_x9500",
         "valid": valid,
         "validity_errors": validity_errors,
-        "ORACLE_STATUS": oracle_status.value,
-        "SAMEINFO_STATUS": same_status.value,
-        "CAUSAL_STATUS": causal_status.value,
+        "ORACLE_STATUS": None if oracle_status is None else oracle_status.value,
+        "SAMEINFO_STATUS": None if same_status is None else same_status.value,
+        "CAUSAL_STATUS": None if causal_status is None else causal_status.value,
         "first_match_order": list(FIRST_MATCH_ORDER),
         "result_branch": branch,
     }
@@ -6310,39 +6727,36 @@ def build_analysis_evidence(
 def select_result_branch(
     *,
     valid: bool,
-    oracle_status: GateStatus | str,
-    sameinfo_status: GateStatus | str,
-    causal_status: GateStatus | str,
+    oracle_status: GateStatus | str | None,
+    sameinfo_status: GateStatus | str | None,
+    causal_status: GateStatus | str | None,
 ) -> str:
-    oracle = GateStatus(oracle_status)
-    sameinfo = GateStatus(sameinfo_status)
-    causal = GateStatus(causal_status)
     if not bool(valid):
         return INVALID_BRANCH
+    try:
+        oracle = GateStatus(oracle_status)
+    except (TypeError, ValueError) as error:
+        raise G0RealizationError("ORACLE status is required at priority row 2") from error
     if oracle is GateStatus.FAIL:
         return INFEASIBLE_BRANCH
-    if oracle is GateStatus.PASS and sameinfo is GateStatus.FAIL:
-        return ORACLE_ONLY_BRANCH
-    if (
-        oracle is GateStatus.PASS
-        and sameinfo is GateStatus.PASS
-        and causal is GateStatus.FAIL
-    ):
-        return NON_CAUSAL_BRANCH
-    if (
-        oracle is GateStatus.OPEN
-        or (oracle is GateStatus.PASS and sameinfo is GateStatus.OPEN)
-        or (
-            oracle is GateStatus.PASS
-            and sameinfo is GateStatus.PASS
-            and causal is GateStatus.OPEN
-        )
-    ):
+    if oracle is GateStatus.OPEN:
         return UNDERPOWERED_BRANCH
-    if (
-        oracle is GateStatus.PASS
-        and sameinfo is GateStatus.PASS
-        and causal is GateStatus.PASS
-    ):
+    try:
+        sameinfo = GateStatus(sameinfo_status)
+    except (TypeError, ValueError) as error:
+        raise G0RealizationError("SAMEINFO status is required at priority row 3") from error
+    if sameinfo is GateStatus.FAIL:
+        return ORACLE_ONLY_BRANCH
+    if sameinfo is GateStatus.OPEN:
+        return UNDERPOWERED_BRANCH
+    try:
+        causal = GateStatus(causal_status)
+    except (TypeError, ValueError) as error:
+        raise G0RealizationError("CAUSAL status is required at priority row 4") from error
+    if causal is GateStatus.FAIL:
+        return NON_CAUSAL_BRANCH
+    if causal is GateStatus.OPEN:
+        return UNDERPOWERED_BRANCH
+    if causal is GateStatus.PASS:
         return IDENTIFIED_BRANCH
     raise G0RealizationError("first-match status combination is contradictory")

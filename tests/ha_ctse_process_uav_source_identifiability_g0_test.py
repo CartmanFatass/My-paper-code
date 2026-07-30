@@ -101,6 +101,12 @@ def _information(
 
 
 def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
+    assert g0.DESIGN_ROUND == "20260730_uav_g0_executable_contract_addendum_v2"
+    assert g0.DESIGN_PACKAGE_STAGE_COMMIT == "8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc"
+    assert g0.DESIGN_ARCHIVE_COMMIT == "9c1566e1c6adefcd500facb1bb50d5a7428eae9c"
+    assert g0.DESIGN_DISPOSITION == (
+        "G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT"
+    )
     source = g0.make_episode_source(17)
     duplicate = g0.make_episode_source(17)
     assert source.to_primitive() == duplicate.to_primitive()
@@ -118,6 +124,40 @@ def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
     assert 180 <= source.event.onset <= 220
     assert 80 <= source.event.duration <= 100
     assert len({g0.channel_seed_word(17, step) for step in range(4)}) == 4
+    support = geometry.to_primitive()["geometry_support_certificate"]
+    assert support == g0.geometry_support_certificate(
+        map_width=geometry.map_width,
+        map_height=geometry.map_height,
+        base_xy=geometry.base_xy,
+    )
+    assert support["certificate_kind"] == (
+        "analytic_radial_complete_support_every_phi_v2"
+    )
+    assert support["passed"] is True
+    assert support["violation_count"] == 0
+    assert set(support["support_radial_bounds"]) == {
+        "hotspot_centers",
+        "user_disks",
+        "primaries",
+        "primary_perturbation_disks",
+        "stages",
+        "stage_perturbation_disks",
+        "gates",
+    }
+    for width, height in ((1.0, 1.0), (1.0, 100.0), (100.0, 1.0)):
+        universal = g0.geometry_support_certificate(
+            map_width=width,
+            map_height=height,
+            base_xy=np.asarray((width / 2.0, height / 2.0)),
+        )
+        assert universal["passed"] is True
+        assert universal["violation_count"] == 0
+    failed = g0.geometry_support_certificate(
+        map_width=1.0,
+        map_height=1.0,
+        base_xy=np.asarray((0.01, 0.5)),
+    )
+    assert failed["violation_count"] == len(failed["violations"]) > 0
 
     with pytest.raises(g0.G0RealizationError, match="registered episode RNG"):
         replace(geometry, phi=np.nextafter(geometry.phi, math.inf))
@@ -224,7 +264,7 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
         source,
         active_owner=True,
         replacement=replacement,
-        owner_at_primary=True,
+        owner_at_primary=False,
     )
     gate_targets = controller.target_map(
         _information(source, rejoin_rows, weakest_service=1.0),
@@ -233,13 +273,9 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
     assert np.array_equal(
         gate_targets[selected][:2], source.geometry.gate(source.event.owner_target)
     )
-    controller.target_map(
+    returned = controller.target_map(
         _information(source, rejoin_rows, weakest_service=1.0),
         physical_step=source.event.rejoin + 1,
-    )
-    returned = controller.target_map(
-        _information(source, rejoin_rows, weakest_service=0.90),
-        physical_step=source.event.rejoin + 2,
     )
     stage = g0.TargetLabel.parse(
         next(
@@ -250,6 +286,49 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
     )
     assert stage.kind is g0.TargetKind.STAGE
     assert np.array_equal(returned[selected][:2], source.geometry.coordinate(stage))
+    owner = next(row for row in rejoin_rows if row.handle == replacement)
+    assert not np.array_equal(
+        owner.position[:2], source.geometry.coordinate(source.event.owner_target)
+    )
+
+
+def test_same_information_reserve_tie_ignores_vertical_fields() -> None:
+    source = g0.make_episode_source(4)
+    handles = g0.initial_lifecycle_handles(source)
+    ownership = {
+        handle: g0.TargetLabel.parse(target)
+        for handle, target in zip(handles, source.assignment.row_to_target)
+    }
+    owner_handle = next(
+        handle for handle, label in ownership.items() if label == source.event.owner_target
+    )
+    reserve_handles = [
+        handle for handle, label in ownership.items() if label.kind is g0.TargetKind.STAGE
+    ]
+    expected = min(
+        reserve_handles,
+        key=lambda handle: tuple(source.geometry.coordinate(ownership[handle])),
+    )
+    common_xy = source.geometry.base_xy.copy()
+    rows = []
+    for row in _rows(source, active_owner=False):
+        if row.handle in reserve_handles:
+            rows.append(
+                replace(
+                    row,
+                    position=np.asarray(
+                        [common_xy[0], common_xy[1], 100.0 if row.handle == expected else 1.0]
+                    ),
+                    velocity=np.asarray(
+                        [0.0, 0.0, 100.0 if row.handle == expected else -100.0]
+                    ),
+                )
+            )
+        else:
+            rows.append(row)
+    controller = g0.SameInformationController(source, handles)
+    controller.on_leave(owner_handle, tuple(rows))
+    assert controller.evidence()["selected_reserve"] == expected
 
 
 def test_no_reallocation_freezes_targets_and_no_event_maps_match() -> None:
@@ -297,8 +376,55 @@ def test_oracle_two_candidate_schedule_certificate_is_exact(
     assert certificate.shared_dynamics_action_safety_identity is True
     assert certificate.complexity == "O(H*K_search)"
     assert all(row.gate_arrival_time > 0 for row in certificate.candidates)
+    assert all(
+        row.gate_arrival_time <= source.event.onset
+        or row.gate_arrival_time == g0.PHYSICAL_HORIZON + 1
+        for row in certificate.candidates
+    )
     assert all(row.physical_steps_advanced == 500 for row in certificate.candidates)
     assert all(row.hard_violation_count == 0 for row in certificate.candidates)
+    primary = source.geometry.coordinate(source.event.owner_target)
+    gate = np.concatenate(
+        (source.geometry.gate(source.event.owner_target), [g0.FIXED_ALTITUDE_M])
+    )
+    for row, trace in zip(certificate.candidates, ledger.candidates):
+        reserve_internal = g0._target_internal_row(row.reserve_target)
+        if row.gate_arrival_time <= source.event.onset:
+            arrival_position = trace.steps[
+                row.gate_arrival_time
+            ].current_uav_positions.array()[reserve_internal]
+            assert np.array_equal(arrival_position, gate)
+        else:
+            assert not any(
+                np.array_equal(
+                    trace.steps[step].current_uav_positions.array()[reserve_internal],
+                    gate,
+                )
+                for step in range(row.latest_departure, source.event.onset + 1)
+            )
+        expected_tracking_error = sum(
+            float(
+                np.sum(
+                    (
+                        trace.steps[step].next_uav_positions.array()[
+                            reserve_internal, :2
+                        ]
+                        - primary
+                    )
+                    ** 2
+                )
+            )
+            for step in range(source.event.onset, source.event.rejoin)
+        )
+        assert row.event_window_tracking_error == expected_tracking_error
+        assert any(
+            any(
+                step.real_guard_intervention_or_violation_output[
+                    "intervention_by_uav"
+                ]
+            )
+            for step in trace.steps
+        )
     assert certificate.selected_rank == min(row.rank for row in certificate.candidates)
     forged = replace(certificate, selected_reserve_target="stage/+1")
     if forged.to_primitive() != certificate.to_primitive():
@@ -306,6 +432,96 @@ def test_oracle_two_candidate_schedule_certificate_is_exact(
             g0.validate_oracle_qualification(
                 source, forged, safety_ledger=ledger
             )
+
+
+def test_oracle_gate_arrival_is_bitwise_and_onset_bounded() -> None:
+    gate = np.asarray((1.0, 2.0, g0.FIXED_ALTITUDE_M), dtype=np.float64)
+    near = gate.copy()
+    near[0] = np.nextafter(near[0], math.inf)
+    assert not g0._is_exact_gate_arrival(
+        near,
+        gate,
+        physical_step=190,
+        latest_departure=100,
+        event_onset=191,
+    )
+    assert g0._is_exact_gate_arrival(
+        gate,
+        gate,
+        physical_step=191,
+        latest_departure=100,
+        event_onset=191,
+    )
+    assert not g0._is_exact_gate_arrival(
+        gate,
+        gate,
+        physical_step=192,
+        latest_departure=100,
+        event_onset=191,
+    )
+
+
+def test_negative_latest_departure_fails_builder_and_validator(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = g0.make_episode_source(0)
+    environment = g0.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
+    try:
+        environment.reset()
+        prestate = g0._complete_oracle_prestate(environment)
+    finally:
+        environment.close()
+    prestate_sha256 = g0.sha256_json(prestate)
+    candidates = tuple(
+        g0.OracleCandidateSafetyTrace(
+            candidate_id=label.key,
+            target_schedule_sha256=g0.sha256_json([]),
+            common_prestate_sha256=prestate_sha256,
+            steps=(),
+            hard_violation_count=0,
+            gate_arrival_time=g0.PHYSICAL_HORIZON + 1,
+            gate_arrival_error=0.0,
+            event_window_tracking_error=0.0,
+            path_length=0.0,
+            stage_coordinates=tuple(
+                float(item) for item in source.geometry.coordinate(label)
+            ),
+            trace_sha256=g0.sha256_json([]),
+        )
+        for label in g0.TARGET_LABELS
+        if label.kind is g0.TargetKind.STAGE
+    )
+    provisional = g0.OracleSafetyLedger(
+        source_sha256=source.to_primitive()["sha256"],
+        common_prestate=prestate,
+        common_prestate_sha256=prestate_sha256,
+        candidate_prestate_sha256=(prestate_sha256, prestate_sha256),
+        channel_draw_schema=(),
+        shared_channel_draw_blocks=(),
+        candidates=candidates,
+        selected_candidate_id=candidates[0].candidate_id,
+        selected_rank=candidates[0].rank,
+        shared_action_method_sha256=g0.oracle_safety_method_digests(),
+        content_sha256="",
+    )
+    ledger = replace(
+        provisional,
+        content_sha256=g0.sha256_json(
+            provisional.to_primitive(include_digest=False)
+        ),
+    )
+    monkeypatch.setattr(
+        g0,
+        "_minimum_tracker_travel_steps",
+        lambda *args, **kwargs: source.event.onset + 1,
+    )
+    reserve = next(
+        label for label in g0.TARGET_LABELS if label.kind is g0.TargetKind.STAGE
+    )
+    with pytest.raises(g0.G0RealizationError, match="latest departure is negative"):
+        g0._oracle_candidate_trace(source, reserve)
+    with pytest.raises(g0.G0RealizationError, match="latest departure is negative"):
+        g0.validate_oracle_safety_ledger(source, ledger)
 
 
 def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
@@ -349,6 +565,45 @@ def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
     )
 
 
+@pytest.mark.parametrize("tamper_kind", ("connection", "routing"))
+def test_resealed_oracle_network_inputs_require_native_provenance(
+    oracle_safety_bundle: tuple[
+        g0.G0EpisodeSource,
+        g0.OracleSafetyLedger,
+        g0.OracleQualificationCertificate,
+    ],
+    tamper_kind: str,
+) -> None:
+    source, ledger, _qualification = oracle_safety_bundle
+    tampered = copy.deepcopy(ledger.to_primitive())
+    candidate = tampered["candidates"][0]
+    step = candidate["steps"][0]
+    if tamper_kind == "connection":
+        connections = g0._native_array_from_primitive(
+            step["connections"]["user"]
+        ).array()
+        connections[0, 0] = ~connections[0, 0]
+        step["connections"]["user"] = (
+            g0._NativeArrayEvidence.from_array(connections).to_primitive()
+        )
+    else:
+        assert len(step["routing_paths"]) > 1
+        step["routing_paths"] = list(reversed(step["routing_paths"]))
+    candidate["trace_sha256"] = g0.sha256_json(candidate["steps"])
+    tampered["content_sha256"] = g0.sha256_json(
+        {
+            key: value
+            for key, value in tampered.items()
+            if key != "content_sha256"
+        }
+    )
+    with pytest.raises(
+        g0.G0RealizationError,
+        match="oracle (connection|routing) input is not bound",
+    ):
+        g0.validate_oracle_safety_primitive(source, tampered)
+
+
 def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     oracle_safety_bundle: tuple[
         g0.G0EpisodeSource,
@@ -368,6 +623,73 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     proof = g0.analyze_proof_fixture(source, tampered)
     assert proof["operational_valid"] is False
     assert proof["result_branch"] == g0.INVALID_BRANCH
+
+    guard_tampered = copy.deepcopy(primitive)
+    candidate = guard_tampered["candidates"][0]
+    step = candidate["steps"][-1]
+    reserve_row = g0._target_internal_row(candidate["candidate_id"])
+    tampered_row = next(row for row in range(8) if row != reserve_row)
+    current = g0._native_array_from_primitive(
+        step["current_uav_positions"]
+    ).array()
+    original_next = g0._native_array_from_primitive(
+        step["next_uav_positions"]
+    ).array()
+    guarded = g0._native_array_from_primitive(
+        step["guarded_executed_action"]
+    ).array()
+    forged_next = original_next.copy()
+    inward_x = 1.0 if current[tampered_row, 0] < source.geometry.base_xy[0] else -1.0
+    forged_next[tampered_row] = current[tampered_row]
+    forged_next[tampered_row, 0] += inward_x
+    guarded[tampered_row] = np.asarray((inward_x, 0.0, 0.0))
+    step["guarded_executed_action"] = g0._NativeArrayEvidence.from_array(
+        guarded
+    ).to_primitive()
+    step["next_uav_positions"] = g0._NativeArrayEvidence.from_array(
+        forged_next
+    ).to_primitive()
+    step["next_uav_velocities"] = g0._NativeArrayEvidence.from_array(
+        forged_next - current
+    ).to_primitive()
+    guard_output = step["real_guard_intervention_or_violation_output"]
+    guard_output["intervention_by_uav"][tampered_row] = True
+    guard_output["blocked_actions"] = sum(
+        bool(item) for item in guard_output["intervention_by_uav"]
+    )
+    guard_output["checked_actions"] = max(
+        int(guard_output["checked_actions"]),
+        int(guard_output["blocked_actions"]),
+    )
+    candidate["trace_sha256"] = g0.sha256_json(candidate["steps"])
+
+    def candidate_rank(value: dict) -> tuple[float, ...]:
+        return (
+            float(value["hard_violation_count"]),
+            float(value["gate_arrival_time"]),
+            float(value["event_window_tracking_error"]),
+            float(value["path_length"]),
+            float(value["stage_coordinates"][0]),
+            float(value["stage_coordinates"][1]),
+        )
+
+    forged_winner = min(
+        guard_tampered["candidates"], key=candidate_rank
+    )
+    guard_tampered["selected_candidate_id"] = forged_winner["candidate_id"]
+    guard_tampered["selected_rank"] = list(candidate_rank(forged_winner))
+    guard_tampered["content_sha256"] = g0.sha256_json(
+        {
+            key: value
+            for key, value in guard_tampered.items()
+            if key != "content_sha256"
+        }
+    )
+    with pytest.raises(
+        g0.G0RealizationError,
+        match="isolated real-guard reconstruction|reconstructed guarded action",
+    ):
+        g0.validate_oracle_safety_primitive(source, guard_tampered)
 
     selected = next(
         candidate
@@ -511,6 +833,8 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
     "mutation",
     (
         "missing_lifecycle",
+        "missing_service_mask",
+        "tampered_service_mask",
         "missing_rng",
         "missing_channel_cursor",
         "tampered_epoch",
@@ -530,6 +854,10 @@ def test_branchpoint_primitives_are_required_and_independently_reconstructed(
     context = primitive["steps"][273]["pre_action_context"]
     if mutation == "missing_lifecycle":
         context.pop("lifecycle_owner_to_internal")
+    elif mutation == "missing_service_mask":
+        context.pop("service_active_mask")
+    elif mutation == "tampered_service_mask":
+        context["service_active_mask"][g0._target_internal_row(source.event.owner_target)] = False
     elif mutation == "missing_rng":
         context.pop("non_controller_rng_states")
     elif mutation == "missing_channel_cursor":
@@ -664,11 +992,11 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
     assert g0.clopper_pearson_one_sided(0)[0] == 0.0
     assert g0.clopper_pearson_one_sided(128)[1] == 1.0
     cases = {
-        g0.INVALID_BRANCH: (False, "OPEN", "OPEN", "OPEN"),
-        g0.INFEASIBLE_BRANCH: (True, "FAIL", "OPEN", "OPEN"),
-        g0.ORACLE_ONLY_BRANCH: (True, "PASS", "FAIL", "OPEN"),
+        g0.INVALID_BRANCH: (False, None, object(), object()),
+        g0.INFEASIBLE_BRANCH: (True, "FAIL", object(), object()),
+        g0.ORACLE_ONLY_BRANCH: (True, "PASS", "FAIL", object()),
         g0.NON_CAUSAL_BRANCH: (True, "PASS", "PASS", "FAIL"),
-        g0.UNDERPOWERED_BRANCH: (True, "PASS", "PASS", "OPEN"),
+        g0.UNDERPOWERED_BRANCH: (True, "OPEN", object(), object()),
         g0.IDENTIFIED_BRANCH: (True, "PASS", "PASS", "PASS"),
     }
     for expected, arguments in cases.items():
@@ -678,6 +1006,55 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
             sameinfo_status=arguments[2],
             causal_status=arguments[3],
         ) == expected
+
+
+def test_analysis_serializes_unread_lower_statuses_as_null() -> None:
+    rows = {}
+    for control in g0.Control:
+        for cell in g0.Cell:
+            rows[(control, cell)] = tuple(
+                g0.compute_episode_metrics(
+                    np.full(g0.PHYSICAL_HORIZON, 0.90),
+                    episode_id=episode_id,
+                    control=control,
+                    cell=cell,
+                    onset=180,
+                    duration=80,
+                )
+                for episode_id in g0.EPISODE_IDS
+            )
+
+    def validity(episode_id: int, *, geometry_errors: int) -> g0.EpisodeValidityRecord:
+        return g0.EpisodeValidityRecord(
+            episode_id=episode_id,
+            source_event_digest="source",
+            source_no_event_digest="source",
+            sameinfo_no_event_digest="no-event",
+            no_reallocation_no_event_digest="no-event",
+            geometry_support_violations=geometry_errors,
+            rng_namespace_violations=0,
+            pairing_mismatches=0,
+            assignment_failures=0,
+            tracker_failures=0,
+            oracle_qualification_failures=0,
+            action_support_violations=0,
+            information_visibility_violations=0,
+            ownership_violations=0,
+            survivor_continuity_violations=0,
+            permutation_mismatches=0,
+            metric_reconstruction_mismatches=0,
+            missing_rows=0,
+            nonfinite_rows=0,
+        )
+
+    invalid = g0._build_analysis_from_reconstructed_rows(
+        rows,
+        tuple(validity(episode_id, geometry_errors=1) for episode_id in g0.EPISODE_IDS),
+    )
+    assert invalid["result_branch"] == g0.INVALID_BRANCH
+    assert invalid["ORACLE_STATUS"] is None
+    assert invalid["SAMEINFO_STATUS"] is None
+    assert invalid["CAUSAL_STATUS"] is None
 
 
 def test_no_learning_optimizer_checkpoint_or_formal_authority() -> None:

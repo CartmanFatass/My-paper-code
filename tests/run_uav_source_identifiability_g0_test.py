@@ -11,7 +11,13 @@ from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner
 
 
-SOURCE_COMMIT = "a9580155b294a52f1e57be08c4ea3a8dfdd7630b"
+SOURCE_COMMIT = "fdc76381176a40c306a327c6edd1357a828cf466"
+DESIGN_ROUND = "20260730_uav_g0_executable_contract_addendum_v2"
+DESIGN_STAGE_COMMIT = "8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc"
+DESIGN_ARCHIVE_COMMIT = "9c1566e1c6adefcd500facb1bb50d5a7428eae9c"
+DESIGN_DISPOSITION = (
+    "G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT"
+)
 
 
 def _load(path: Path) -> dict:
@@ -33,11 +39,52 @@ def _complete_readiness(root: Path) -> None:
     runner.readiness_analyze(run_root=root)
 
 
+def test_v2_contract_metadata_and_manifest_schema_are_exact() -> None:
+    assert source.DESIGN_ROUND == DESIGN_ROUND
+    assert source.DESIGN_PACKAGE_STAGE_COMMIT == DESIGN_STAGE_COMMIT
+    assert source.DESIGN_ARCHIVE_COMMIT == DESIGN_ARCHIVE_COMMIT
+    assert source.DESIGN_DISPOSITION == DESIGN_DISPOSITION
+    assert runner.DESIGN_DISPOSITION == DESIGN_DISPOSITION
+    assert runner.BOOTSTRAP_GENERATOR == "numpy.Generator(PCG64(2026072901))"
+    assert runner.ORACLE_RANKING_ARITHMETIC["lexicographic_keys"] == [
+        "violation_count",
+        "gate_arrival_step",
+        "event_tracking_error",
+        "path_length",
+        "original_stage_x",
+        "original_stage_y",
+    ]
+    assert {
+        "design_archive_commit",
+        "geometry_support_certificate",
+        "oracle_ranking_arithmetic",
+        "return_ready_ownership_rule",
+        "pre_action_context_service_mask_rule",
+        "first_match_evaluation_rule",
+    } <= runner._SOURCE_MANIFEST_KEYS
+
+
 def test_six_readiness_entries_and_terminal_artifacts(tmp_path: Path) -> None:
     root = tmp_path / "uav-g0-readiness"
     smoke = runner.readiness_interface_smoke(source_commit=SOURCE_COMMIT)
     assert smoke["passed"] is True
     assert smoke["formal_execution_authorized"] is False
+    assert smoke["design_round"] == DESIGN_ROUND
+    assert smoke["design_package_stage_commit"] == DESIGN_STAGE_COMMIT
+    assert smoke["design_archive_commit"] == DESIGN_ARCHIVE_COMMIT
+    assert smoke["design_disposition"] == DESIGN_DISPOSITION
+    assert smoke["claim_scope"] == "SOURCE_IDENTIFIABILITY_G0_ONLY"
+    assert smoke["bootstrap_generator"] == "numpy.Generator(PCG64(2026072901))"
+    assert smoke["bootstrap_seed"] == 2026072901
+    assert smoke["geometry_support_certificate"]["passed"] is True
+    assert smoke["oracle_ranking_arithmetic"] == runner.ORACLE_RANKING_ARITHMETIC
+    assert smoke["return_ready_ownership_rule"] == runner.RETURN_READY_OWNERSHIP_RULE
+    assert smoke["pre_action_context_service_mask_rule"] == (
+        "complete_bool8_target_owned_internal_order"
+    )
+    assert smoke["first_match_evaluation_rule"] == (
+        "strict_lazy_stop_at_first_match_lower_priority_statuses_null"
+    )
     assert smoke["production_shapes"] == {
         "uav_positions": [8, 3],
         "service_mask": [8],
@@ -62,6 +109,20 @@ def test_six_readiness_entries_and_terminal_artifacts(tmp_path: Path) -> None:
     evaluation = runner.validate_evaluation_artifacts(root)
     analysis = runner.validate_analysis_artifacts(root)
     assert source_manifest["episode_id_inventory"] == list(range(128))
+    assert source_manifest["design_round"] == DESIGN_ROUND
+    assert source_manifest["design_package_stage_commit"] == DESIGN_STAGE_COMMIT
+    assert source_manifest["design_archive_commit"] == DESIGN_ARCHIVE_COMMIT
+    assert source_manifest["design_disposition"] == DESIGN_DISPOSITION
+    assert source_manifest["bootstrap_generator"] == (
+        "numpy.Generator(PCG64(2026072901))"
+    )
+    assert source_manifest["bootstrap_seed"] == 2026072901
+    assert source_manifest["geometry_support_rule"] == (
+        "analytic_complete_support_for_every_phi_in_[0,2*pi)"
+    )
+    assert source_manifest["geometry_support_certificate"] == (
+        smoke["geometry_support_certificate"]
+    )
     assert source_manifest["accepted_g1_source_commit"] == source.ACCEPTED_G1_SOURCE_COMMIT
     assert source_manifest["nested_rollout"] is False
     assert source_manifest["replanning"] is False
@@ -73,6 +134,12 @@ def test_six_readiness_entries_and_terminal_artifacts(tmp_path: Path) -> None:
     )
     replay = _load(root / runner.ORACLE_BEHAVIORAL_REPLAY_PROOF)
     assert replay["certificate"]["return_ready_step"] == 273
+    execution_steps = replay["behavioral_execution"]["steps"]
+    assert sum(execution_steps[190]["pre_action_context"]["service_active_mask"]) == 8
+    assert sum(execution_steps[191]["pre_action_context"]["service_active_mask"]) == 7
+    assert sum(execution_steps[271]["pre_action_context"]["service_active_mask"]) == 7
+    assert sum(execution_steps[272]["pre_action_context"]["service_active_mask"]) == 8
+    assert sum(execution_steps[273]["pre_action_context"]["service_active_mask"]) == 8
     assert evaluation["evaluation_optimizer_steps"] == 0
     assert evaluation["production_episode_validity_witness"]["operational_valid"] is True
     assert analysis["result_branch"] is None
@@ -100,6 +167,46 @@ def test_reference_paths_cp_and_tracker_are_independently_reconstructed(
     _store(manifest_path, manifest)
     with pytest.raises(ValueError, match="root-local"):
         runner.validate_source_artifacts(root)
+    manifest_path.write_bytes(manifest_bytes)
+
+    for field, forged in (
+        ("design_round", "20260729_stale"),
+        ("design_package_stage_commit", "0" * 40),
+        ("design_archive_commit", "1" * 40),
+        ("design_disposition", "STALE"),
+        ("claim_scope", "UAV_GENERALIZATION"),
+        ("bootstrap_generator", "numpy.Generator(MT19937(2026072901))"),
+        ("geometry_support_rule", "sampled_phi_only"),
+        ("oracle_ranking_arithmetic", {"forged": True}),
+        ("return_ready_ownership_rule", "position_tolerance"),
+        ("pre_action_context_service_mask_rule", "storage_order"),
+        ("first_match_evaluation_rule", "eager"),
+    ):
+        manifest = _load(manifest_path)
+        manifest[field] = forged
+        _store(manifest_path, manifest)
+        with pytest.raises(ValueError, match="source manifest invariant"):
+            runner.validate_source_artifacts(root)
+        manifest_path.write_bytes(manifest_bytes)
+
+    manifest = _load(manifest_path)
+    manifest.pop("design_archive_commit")
+    _store(manifest_path, manifest)
+    with pytest.raises(ValueError, match="source manifest exact schema"):
+        runner.validate_source_artifacts(root)
+    manifest_path.write_bytes(manifest_bytes)
+
+    source_path = root / runner.SOURCE_PROOF
+    source_bytes = source_path.read_bytes()
+    source_proof = _load(source_path)
+    source_proof["geometry"]["geometry_support_certificate"]["passed"] = False
+    _store(source_path, source_proof)
+    manifest = _load(manifest_path)
+    manifest["source_proof"]["sha256"] = runner._digest(source_path)
+    _store(manifest_path, manifest)
+    with pytest.raises(ValueError, match="source proof does not reconstruct"):
+        runner.validate_source_artifacts(root)
+    source_path.write_bytes(source_bytes)
     manifest_path.write_bytes(manifest_bytes)
 
     tracker_path = root / runner.TRACKER_PROOF
@@ -195,6 +302,29 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
 
     replay_path.write_bytes(original_replay)
     manifest_path.write_bytes(original_manifest)
+    replay = _load(replay_path)
+    for name in ("behavioral_execution", "behavioral_self_replay"):
+        replay[name]["steps"][191]["pre_action_context"].pop(
+            "service_active_mask"
+        )
+        replay[name]["trace_sha256"] = source.sha256_json(
+            {
+                key: value
+                for key, value in replay[name].items()
+                if key != "trace_sha256"
+            }
+        )
+    _store(replay_path, replay)
+    manifest = _load(manifest_path)
+    manifest["oracle_behavioral_replay_proof"]["sha256"] = runner._digest(
+        replay_path
+    )
+    _store(manifest_path, manifest)
+    with pytest.raises(source.G0RealizationError, match="branchpoint"):
+        runner.validate_source_artifacts(root)
+
+    replay_path.write_bytes(original_replay)
+    manifest_path.write_bytes(original_manifest)
     evaluation_path = root / runner.EVALUATION_MANIFEST
     evaluation = _load(evaluation_path)
     evaluation["production_episode_validity_witness"] = {
@@ -251,8 +381,22 @@ def test_stale_root_and_scientific_or_formal_entries_fail_before_mutation(
 
 def test_branch_witnesses_cover_exact_first_match_inventory() -> None:
     witnesses = runner._branch_witnesses()
-    assert set(witnesses.values()) == set(source.FIRST_MATCH_ORDER)
-    assert witnesses["invalid"] == source.INVALID_BRANCH
-    assert witnesses["identified"] == source.IDENTIFIED_BRANCH
+    assert {item["result_branch"] for item in witnesses.values()} == set(
+        source.FIRST_MATCH_ORDER
+    )
+    assert witnesses["invalid"] == {
+        "valid": False,
+        "ORACLE_STATUS": None,
+        "SAMEINFO_STATUS": None,
+        "CAUSAL_STATUS": None,
+        "result_branch": source.INVALID_BRANCH,
+    }
+    assert witnesses["infeasible"]["SAMEINFO_STATUS"] is None
+    assert witnesses["infeasible"]["CAUSAL_STATUS"] is None
+    assert witnesses["oracle_only"]["CAUSAL_STATUS"] is None
+    assert witnesses["underpowered_oracle"]["SAMEINFO_STATUS"] is None
+    assert witnesses["underpowered_oracle"]["CAUSAL_STATUS"] is None
+    assert witnesses["underpowered_sameinfo"]["CAUSAL_STATUS"] is None
+    assert witnesses["identified"]["result_branch"] == source.IDENTIFIED_BRANCH
     assert runner.SCHEMA_VERSION == source.SCHEMA_VERSION
     assert runner.FORMAL_EXECUTION_AUTHORIZED is False
