@@ -2715,7 +2715,74 @@ class UAVForcedRelayEnv(ParallelEnv):
             "link_capacity": {},
         }
         self._step_communication_cache = cache
+        self._prefill_access_path_loss_natively(cache)
         return cache
+
+    def _prefill_access_path_loss_natively(self, cache):
+        """Fill every UAV-user path loss with ONE native call, or change nothing.
+
+        OFF BY DEFAULT. Set `env.use_native_geometry = True` to enable.
+
+        `_update_channel_state` drives an `n_uavs * n_users` loop over
+        `_compute_sinr`, and each new pair reaches `_cached_user_path_loss` ->
+        `_compute_air_to_ground_path_loss`. Measured on a scenario-7 step
+        (0.0937 s): the air-to-ground path loss is 17.5% of it and the cache
+        machinery wrapped around it another 24%, so populating the whole matrix
+        once retires both -- the cache still answers every lookup, it just never
+        has to miss.
+
+        This is a substitution of PROVENANCE, not of physics: the kernel's
+        `access_path_loss` is bitwise identical to
+        `_compute_air_to_ground_path_loss` over the full matrix, max_ulp 0
+        (`tests/uav_cpp_backend_oracle_test.py`). Because the values are the same
+        bits, falling back to the Python path on any failure cannot change a
+        result -- which is why every failure below is swallowed rather than
+        raised. If that equality ever stops holding, the oracle goes red and this
+        function is not the thing to fix.
+
+        Returns True when it prefilled, so a test can assert the fast path was
+        actually taken rather than silently skipped -- a benchmark against a
+        never-enabled backend measures nothing and looks like a win.
+        """
+        if not bool(getattr(self, "use_native_geometry", False)):
+            return False
+        try:
+            from ha_ctse_process import uav_cpp_backend
+        except Exception:
+            return False
+        try:
+            uavs = np.ascontiguousarray(cache["uav_positions"], dtype=np.float64)
+            users = np.ascontiguousarray(cache["user_positions"], dtype=np.float64)
+            bases = np.ascontiguousarray(cache["ground_bs_positions"], dtype=np.float64)
+            if uavs.ndim != 2 or users.ndim != 2 or uavs.shape[0] == 0 or users.shape[0] == 0:
+                return False
+            geometry = uav_cpp_backend.step_geometry_batch(
+                uav_positions=uavs[None, ...],
+                user_positions=users[None, ...],
+                ground_bs_positions=bases[None, ...],
+                # Zero velocities and an empty movable mask make this a pure
+                # geometry query: the kernel's position integrator is a no-op, so
+                # nothing here advances the environment. Verified as zero drift
+                # by the oracle.
+                prepared_velocities=np.zeros((1,) + uavs.shape, dtype=np.float32),
+                movable_mask=np.zeros((1, uavs.shape[0]), dtype=np.bool_),
+                time_step=float(self.time_step),
+                area_size=float(self.area_size),
+                height_range=tuple(float(v) for v in self.height_range),
+                carrier_frequency=float(self.carrier_frequency),
+                environment_type=str(getattr(self, "environment_type", "urban")),
+            )
+        except Exception:
+            return False
+        access = np.asarray(geometry.access_path_loss)[0]
+        if access.shape != (uavs.shape[0], users.shape[0]):
+            return False
+        store = cache["user_path_loss"]
+        for i in range(access.shape[0]):
+            row = access[i]
+            for j in range(row.shape[0]):
+                store[(i, j)] = float(row[j])
+        return True
 
     def _current_step_communication_cache(self):
         """Return the cache only when every result-bearing input is unchanged."""
