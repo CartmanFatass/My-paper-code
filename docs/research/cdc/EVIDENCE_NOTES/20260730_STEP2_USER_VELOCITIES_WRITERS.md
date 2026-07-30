@@ -1,4 +1,38 @@
-# Step 2: every writer and random source for the diverging array
+# Step 2: every writer and random source for the diverging array -- WRITER TABLE REFUTED
+
+> **REFUTED 2026-07-30 by the Pro ruling in
+> `docs/external-review/rounds/20260730_d7_s_provenance_correction_result/21_PRO_OPEN_RAW.md`,
+> §3.1-§3.2, and re-verified in source by the Project Manager.** The table below
+> is **incomplete** and its headline conclusion does not hold. Three specific
+> claims are dead:
+>
+> 1. **`_initialize_user_waypoints_rpgm` does not use only `sqrt`.** It calls
+>    `_initialize_cluster_migration_rpgm` (`np.cos`/`np.sin` at
+>    `scenario_base.py:2557-2558`), `_generate_intra_cluster_waypoint` (`:2470`)
+>    and `_generate_inter_cluster_waypoint` (`:2498`), and then **overwrites**
+>    `user_velocities` from the waypoint direction at `:2539`. On the `rpgm` path
+>    it, not `_init_user_velocities`, is the final writer of the fingerprinted
+>    array. So "exactly one non-portable operation" is false, and so is
+>    "`_init_user_velocities` is the writer that matters".
+> 2. **Replay does not retire the trig path.** `_update_user_positions_rpgm`
+>    (`:2320`) and `_update_cluster_centers_rpgm` (`:2372`) re-enter those same
+>    trigonometric generators every time a user or cluster centre reaches its
+>    waypoint. An initial-state manifest covers `t = 0` only; R4 runs 139 or 550
+>    further steps. The §"Consequence for the repair choice" section below is
+>    wrong for any horizon longer than zero.
+> 3. **The `user_cluster_assignments` near-tie story was never available.** On
+>    this path the assignment is an integer written either as `cluster_idx`
+>    during generation or by an explicit `np_random.choice` at `:2507`. There is
+>    no floating-point nearest-centre classifier to produce a near-tie.
+>
+> What survives: `user_velocities` is still the earliest differing component
+> across the platform boundary, it is still written through a trigonometric path,
+> the pre-registered `user_positions`/SVD mechanism is still dead, and Route B is
+> still a change to the registered draw. What does not survive is uniqueness --
+> which was the load-bearing claim, and the one this round asked to have attacked.
+>
+> The record of the error is kept rather than edited away. Reconciliation:
+> `.../30_PM_SCIENTIFIC_RECONCILIATION.md`.
 
 Date: 2026-07-30
 Ordered by the Pro ruling (`20260730_d7_s_r4_rerun_disposition`), step 2 of five:
@@ -18,9 +52,9 @@ Step 1 named the array across a platform boundary: **`user_velocities`**
 | `_generate_user_positions` | dispatch only | -- | none |
 | `_generate_forced_relay_cluster_positions` | `user_positions`, `cluster_centers_history`, `user_cluster_assignments` (line 790) | `np_random.uniform`, `np_random.multivariate_normal` | `cluster_std**2`; SVD inside `multivariate_normal` |
 | `_init_user_velocities` | `user_velocities` | `np_random.uniform` x2 | **`np.cos`, `np.sin`** |
-| `_initialize_user_waypoints_rpgm` | `user_waypoints`, `user_velocities` (overwrites) | `np_random.random`, `np_random.uniform` | `np.linalg.norm` -> `sqrt` |
+| `_initialize_user_waypoints_rpgm` | `user_waypoints`, `user_velocities` (overwrites) | `np_random.random`, `np_random.uniform` | ~~`np.linalg.norm` -> `sqrt`~~ **WRONG -- also `np.cos`/`np.sin` via three helpers; see the banner** |
 
-## The single non-portable operation
+## ~~The single non-portable operation~~ -- REFUTED, there is more than one
 
 **IEEE 754 requires `sqrt` to be correctly rounded. It does not require `sin` or
 `cos` to be.** Every other operation above is an IEEE-mandated arithmetic
@@ -41,19 +75,27 @@ goes through `multivariate_normal`'s SVD and no transcendentals -- is bit-identi
 across the same boundary. The RNG stream is provably shared: identical positions
 require identical draws.
 
-`user_cluster_assignments` is an `int` array written at line 790 from float
-comparisons, so it cannot drift numerically but a near-tie can flip. That remains a
-plausible downstream consequence, not an established one.
+~~`user_cluster_assignments` is an `int` array written at line 790 from float
+comparisons, so it cannot drift numerically but a near-tie can flip.~~
+**REFUTED.** It is written as the integer `cluster_idx` during generation and by
+an explicit `np_random.choice` at `scenario_base.py:2507` -- no float comparison
+is involved, so no near-tie exists to flip. The one differing key is therefore
+**unexplained**, and since both branches consume a fixed number of draws from an
+aligned stream, it is evidence that this writer audit is incomplete.
 
-## Consequence for the repair choice, which is the useful part
+## Consequence for the repair choice -- the Route A half is REFUTED
 
 The ruling left two routes live. This finding separates them sharply.
 
-**Route A -- persist and replay the complete manifest (selected).** Generation
+**Route A -- persist and replay the complete manifest (selected).** ~~Generation
 happens once, on one machine, and every formal episode loads those bytes. Trig
-portability stops mattering entirely, because the trig is never re-executed. **Step
-2's finding does not threaten Route A; it explains why Route A was the right
-selection.**
+portability stops mattering entirely, because the trig is never re-executed.~~
+**REFUTED for any horizon longer than zero steps.** An initial-state manifest
+fixes `t = 0`; `_update_user_positions_rpgm` and `_update_cluster_centers_rpgm`
+re-execute the same trigonometric generators during the episode. Route A is still
+selected, but only as **manifest plus a registered execution rule** -- either a
+frozen runtime class (A1) or a persisted exogenous-process tape (A2). That choice
+is protected and unfrozen.
 
 **Route B -- a deterministic pure seed-to-world generator (live alternative).** To
 make generation bit-portable, the `np.cos`/`np.sin` dependency must be removed or

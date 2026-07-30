@@ -1,0 +1,432 @@
+# Scientific ruling — D7.S provenance-correction result
+
+**Stage reviewed:** `b8652fd97cc7f29b123a343eab7aaa3df3a2bbf2`
+
+## Overall disposition
+
+# **SELECT ROUTE A, BUT HOLD CONCLUSION-BEARING INTEGRATION AND POPULATION SELECTION**
+
+The cloud-versus-cloud root cause does **not** have to be identified before the cause-agnostic provenance repair proceeds. Step 1 has done enough to establish that the current seed-to-world reconstruction is not a portable identity mechanism, while correctly leaving the cloud-fleet cause unresolved.
+
+However, the submitted Route A realization is not ready to enter the audit path. It has two classes of blocker:
+
+1. the manifest loader and applier do not yet bind the manifest to the requested episode identity or reconstruct the complete post-world-generation environment state;
+2. an **initial-state manifest alone does not remove the cross-platform numerical path**, because the RPGM user process can execute `sin`/`cos` again during the episode.
+
+The present conformance gate also tests generated-world agreement, not manifest replay. It therefore cannot certify Route A as implemented.
+
+The requested decisions are:
+
+| Decision | Ruling |
+|---|---|
+| **5a — must cloud-cloud localization finish first?** | **No. Proceed while recording the cloud cause as unresolved.** |
+| **5b — Route A or Route B?** | **Route A, amended; Route B remains a contract-changing alternative.** |
+| **5c — may fresh evidence be designed now?** | **Yes. Freeze the design and deterministic selection rule; do not select, generate, or inspect the actual population yet.** |
+| **5d — wire the manifest now?** | **No, not as written. Correct it and close a manifest-specific development gate first.** |
+
+`D7.3` and `D8` remain blocked.
+
+---
+
+# 1. Decision 5a — status of root-cause localization
+
+## Ruling: the platform-boundary result is sufficient to proceed with a cause-agnostic repair
+
+The clean scientific statement is:
+
+> The registered episode key has already been falsified as a portable world identity. A local-versus-cloud comparison found `user_velocities` as the earliest differing component on most compared keys, but the causal mechanism behind the historical cloud-versus-cloud divergence remains unidentified.
+
+The two new cloud runs do not close the cause question. They ran on the same detected EPYC 7763 model with the same feature set, so their 32-of-32 agreement was correctly classified as `WORLD_CONFORMANCE_UNTESTED`, not as a generator pass. The third sample does show that neither historical artifact is simply “the corrupted run”: on different topologies, today’s sample agrees alternately with H and with the rerun. The old artifacts lack runtime identity, so the relationship between their differing worlds and their hardware is unrecoverable. fileciteturn132file0L38-L86 fileciteturn138file0L122-L176
+
+That unresolved cause does not block Route A. The prior ruling selected persisted-world reconstruction precisely because it removes cross-machine regeneration from the result path independently of why regeneration differs. Its required object is the complete registered world itself, not a successful theory of the faulty generator. fileciteturn136file0L34-L48
+
+## How Step 1 should be recorded
+
+Use:
+
+```text
+CROSS_PLATFORM_FIRST_DIFFERING_SURFACE:
+    user_velocities
+
+CLOUD_FLEET_ROOT_CAUSE:
+    UNRESOLVED
+
+GITHUB_HOSTED_HETEROGENEITY_TEST:
+    UNTESTED_ON_OBSERVED_EPYC_7763_PAIR
+```
+
+Do not record:
+
+```text
+CLOUD_CAUSE = scalar trig
+```
+
+or:
+
+```text
+WORLD_GENERATOR_PORTABLE_ON_GITHUB_FLEET
+```
+
+The first exceeds the evidence; the second mistakes a homogeneous comparison for a portability test.
+
+## Is another vehicle required?
+
+Not for Route A.
+
+If the project later needs to identify the generator’s cause—for example, to reactivate Route B—the informative vehicle is a deliberately heterogeneous pair of registered runtimes, such as independently controlled runners with different CPU/libm implementations. Repeatedly re-tagging the current apparently homogeneous hosted fleet is not a scientific requirement and risks an indefinite operational loop.
+
+The heterogeneous-runtime diagnostic remains optional research apparatus. It is no longer a gate in front of the selected cause-agnostic repair.
+
+---
+
+# 2. Decision 5b — Route A versus Route B
+
+# **Select Route A, but amend its scope**
+
+Route B would alter the sampled world process. Replacing or rounding trigonometric functions, pinning a different implementation, or introducing a portable direction sampler would change the generated velocities and waypoints. That is a new world-generator contract, not a transparent repair of the already registered draw. The project principles prohibit rescuing a non-identifying measurement by silently changing its evidence-generating semantics. fileciteturn133file0L126-L163 fileciteturn133file0L186-L208
+
+Route A preserves the actual generated bytes and makes those bytes—not an unreliable promise about regeneration—the authoritative evidence input. That is the narrower, more reversible choice.
+
+## But “manifest replay never re-executes trig” is false
+
+The current design captures only the initial nine arrays. During a subsequent RPGM episode, the environment can generate new cluster targets and user waypoints using `np.cos` and `np.sin`:
+
+- `_update_user_positions_rpgm` may call the intra- or inter-cluster waypoint generators when a user reaches a waypoint;
+- `_update_cluster_centers_rpgm` may generate a new cluster target;
+- `_generate_new_cluster_target_rpgm`, `_generate_intra_cluster_waypoint`, and `_generate_inter_cluster_waypoint` all use trigonometric conversion from polar coordinates. fileciteturn151file0L123-L173 fileciteturn151file0L175-L225 fileciteturn152file0L47-L130
+
+The initial waypoint initialization also invokes trigonometric helpers and then overwrites `user_velocities` from waypoint directions. `_init_user_velocities` is therefore not the sole writer determining the final fingerprinted velocity array. fileciteturn151file0L90-L97 fileciteturn153file0L3-L55
+
+Consequently, the selected repair family must be stated as:
+
+> **Manifest-defined initial evidence population, plus a registered execution rule preventing unregistered runtime variation from changing the exogenous world process after initialization.**
+
+Before formal use, R4 must choose one of the following sub-realizations.
+
+### A1 — manifest plus homogeneous registered execution runtime
+
+All conclusion-bearing shards execute under one frozen runtime class, and a full-horizon conformance exercise shows that identical manifests and streams produce identical exogenous user/cluster trajectories and conclusion-bearing component series.
+
+This is the smallest extension of the current design, but it binds the formal run to that execution runtime.
+
+### A2 — exogenous-process replay
+
+Persist and replay the future user/cluster process—or the complete random/event tape necessary to reconstruct it—rather than only the initial arrays.
+
+This is stronger and removes runtime math from the exogenous process, but it is a larger apparatus and must preserve the registered relationship between continuation streams and user motion.
+
+### A3 — portable user-motion implementation
+
+Make later RPGM transitions bit-portable. This overlaps Route B and changes executable dynamics, so it requires a new source version and is not selected now.
+
+Route A remains preferred. The exact A1-versus-A2 realization is a protected choice that must be frozen before formal evidence.
+
+---
+
+# 3. Challenges to the Step 2 causal claim
+
+## 3.1 “Scalar trig is the only non-portable operation” is not established
+
+The table in the evidence note is incomplete.
+
+`_initialize_user_waypoints_rpgm` is not merely a caller of `np.linalg.norm`. It calls helpers that themselves execute `np.cos` and `np.sin`, and it uses their outputs to overwrite `user_velocities`. fileciteturn153file0L3-L55 fileciteturn152file0L76-L130
+
+Moreover:
+
+- bit portability of a whole `np.linalg.norm` expression does not follow merely from a correctly rounded scalar square root; its reductions and intermediate arithmetic are also part of the operation;
+- SVD/LAPACK is not guaranteed to produce bit-identical outputs across all conforming implementations;
+- observing bit-identical positions on six sampled local-cloud keys refutes the pre-registered SVD explanation **for those keys**, but it does not establish a universal portability theorem for every other operation.
+
+The supported claim is:
+
+> The local-versus-cloud measurement is consistent with divergence on a trigonometric user-motion path and refutes the pre-registered position/SVD mechanism on the sampled keys.
+
+It is not:
+
+> Scalar trig has been proved to be the unique cloud-fleet cause.
+
+## 3.2 The `user_cluster_assignments` explanation is unsupported
+
+On the configured forced-relay-cluster path, initial cluster assignments are written directly as the integer `cluster_idx` while users are emitted. They are not obtained from a floating-point nearest-centre comparison. fileciteturn144file0L73-L103
+
+During RPGM waypoint initialization, an assignment may also change through an explicit random inter-cluster choice. That is again not a floating near-tie classifier. fileciteturn152file0L101-L130
+
+Therefore:
+
+> “A float near-tie may have flipped `user_cluster_assignments`”
+
+is not supported by the listed implementation.
+
+That one differing assignment instead indicates at least one of:
+
+- a different RNG/control-flow state by that point;
+- an unenumerated writer;
+- an episode-key or array-alignment problem;
+- or another construction-state difference.
+
+It is evidence against treating the current writer audit as complete.
+
+## 3.3 Identical user positions do not prove the complete RNG stream was shared
+
+They provide strong evidence that the position-generation prefix agreed. They do not by themselves prove that:
+
+- the post-position RNG state was byte-identical;
+- every underlying distribution implementation consumed the same number of draws;
+- or all later control-flow decisions were identical.
+
+A phase-level diagnostic would need to record the RNG state token immediately after each world-generation phase. This is optional under Route A, but required before claiming a fully localized generator cause.
+
+---
+
+# 4. Decision 5c — fresh confirmatory evidence
+
+# **The evidence design may begin now; the actual population must wait**
+
+The project may now freeze:
+
+- the scientific question;
+- sample size and hierarchy;
+- topology-selection **rule**;
+- block and episode counts;
+- manifest schema and generation authority;
+- runtime or exogenous-process realization;
+- acceptance and invalidity branches;
+- and the rule prohibiting reuse of H, the rerun, and their inspected worlds.
+
+This is design work, not population consumption.
+
+## What must remain unselected
+
+Do not yet:
+
+- bind the exact confirmatory topology list;
+- construct those topologies;
+- generate their user-world manifests;
+- inspect their coordinates or worlds;
+- run support probes;
+- or insert them into a conclusion-bearing driver.
+
+Use a separate development manifest set for every repair and cross-runtime test.
+
+After the repaired manifest path and its development gate pass, the previously frozen deterministic rule may be applied to identify an untouched topology set. The exact set and its manifest-inventory hash then become part of the final protected evidence contract.
+
+This sequencing preserves freshness while avoiding another round in which the result-sensitive selection rule is written only after the apparatus output is seen. The prior ruling requires a fresh population **under** the repaired provenance contract; it does not require postponing all design until the repair code exists. fileciteturn136file0L74-L86
+
+---
+
+# 5. Decision 5d — may the manifest be wired in?
+
+# **Hold the conclusion-bearing path**
+
+The manifest is the correct repair family, but the current implementation does not yet realize its own design contract.
+
+## Blocker 1 — loaded identity is not bound to the requested episode
+
+`load_world_manifest` locates a directory using the requested contract, topology, block, and episode, but after reading the sidecar it does not compare the recorded identity with those requested values.
+
+It does not fail on mismatched:
+
+- contract ID;
+- topology seed;
+- block;
+- episode index;
+- pinned-coordinate hash;
+- user-world seed;
+- generator version;
+- user or cluster counts.
+
+A stale or incorrectly copied manifest can therefore be loaded from a plausible path and accepted as long as its arrays agree with its own sidecar digests. fileciteturn141file0L196-L234
+
+All identity fields must be compared against independently supplied expected values before application.
+
+## Blocker 2 — the required nine-component set is not enforced
+
+The design says the manifest contains exactly the nine world arrays. The implementation skips any attribute whose value is `None`, while `verify_manifest_digests` only checks that the saved arrays and saved digest sets agree with each other.
+
+A manifest that omits one component from both sets can pass. fileciteturn141file0L130-L171 fileciteturn141file0L237-L267
+
+Formal loading must require:
+
+```text
+set(arrays) == set(component_digests) == WORLD_COMPONENT_ORDER
+```
+
+with exact shapes and dtypes frozen per schema version.
+
+## Blocker 3 — the generator version is incomplete
+
+`generator_version` hashes five named methods and a small parameter subset. It does not cover the transitive waypoint and cluster-target helpers that actually use trigonometric operations and write the manifest arrays. It also omits multiple distribution and movement parameters that can change the generated world. fileciteturn141file0L98-L127 fileciteturn152file0L47-L130
+
+Use either:
+
+- a repository blob/commit identity for the complete world-generation implementation plus a complete configuration digest; or
+- a transitive implementation hash that includes every reachable writer and every source parameter.
+
+The present subset hash can assign one version to two semantically different generators.
+
+## Blocker 4 — applying the arrays leaves a hybrid environment
+
+`apply_world_manifest` assigns the nine arrays and verifies their readback, but then only writes `user_world_seed_applied`. It does not rebuild the state derived from the user world. fileciteturn141file0L269-L298
+
+The ordinary `regenerate_user_world` path, by contrast, subsequently:
+
+- resets the connection baseline;
+- updates channel state;
+- updates UAV-user connections;
+- recomputes routing paths.
+
+fileciteturn151file0L50-L88
+
+Without that postcondition, a formal episode can contain:
+
+```text
+manifest user/cluster arrays
++
+connections, routing, service baselines or handover state from the locally
+generated world that was just replaced
+```
+
+That is another non-identifying hybrid state.
+
+Manifest application must reproduce the complete post-`regenerate_user_world` state transition. Any derived-state rebuild must also be checked for RNG consumption. If it cannot be reproduced deterministically, the affected derived state must be included in the persisted canonical state.
+
+## Blocker 5 — manifests are overwritable and there is no population inventory
+
+`save_world_manifest` writes into a deterministic directory and will overwrite an existing `.npz` and sidecar. There is no immutable manifest-set index binding:
+
+- all expected episode keys;
+- each identity;
+- each component digest;
+- the payload hash;
+- and the complete set hash.
+
+fileciteturn141file0L174-L193
+
+A formal population requires create-once semantics or an explicit refusal on conflicting existing content. The manifest-set inventory must be frozen before the first conclusion-bearing episode.
+
+## Blocker 6 — the current conformance gate tests the wrong mechanism
+
+`d7_s_world_conformance_gate.py` compares independently generated `episode_world_provenance` records. It does not:
+
+- load the same manifest on two runners;
+- apply it to two environments;
+- compare post-application readback;
+- compare rebuilt derived state;
+- or exercise a complete episode or continuation.
+
+fileciteturn142file0L102-L125 fileciteturn142file0L128-L221
+
+It remains a useful **generator diagnostic** and should retain its three outcomes. It is not the Route A acceptance gate.
+
+---
+
+# 6. The Route A gate that is actually required
+
+Create a separate manifest-replay conformance gate.
+
+## Required development inputs
+
+- one immutable development manifest inventory;
+- identical manifest payload hashes on both runners;
+- identical topology, energy, episode and continuation identities;
+- independent runner/job identities;
+- no confirmatory population keys.
+
+## Required assertions
+
+For every manifest key:
+
+1. sidecar identity equals the independently expected identity;
+2. the complete nine-component set, shapes and dtypes match;
+3. payload and component digests match before application;
+4. post-application readback matches exactly;
+5. post-world-replacement derived state matches a canonical postcondition;
+6. the complete pre-step environment identity matches;
+7. the manifest load and derived-state rebuild consume no registered continuation randomness;
+8. at least one full registered stable and flex horizon is executed from the same manifest and streams, comparing:
+   - exogenous user/cluster trajectories;
+   - event and candidate identity;
+   - primary-\(G\) component series;
+   - branch-relevant quantities.
+
+The last assertion is required because initial replay can pass while later RPGM trigonometric updates diverge.
+
+## Runtime distinction
+
+The present rule—agreement counts only when some CPU/platform field differs—belongs to the generator-portability question.
+
+For manifest replay, two independently provisioned runners using the same immutable bytes provide meaningful evidence even if their CPU model strings match. Record distinct workflow job/runner identities. A deliberately heterogeneous platform pair is a stronger stress test, but an inability to obtain two CPU models from the hosted fleet must not create a permanent `UNTESTED` state for a byte-replay mechanism.
+
+A formal manifest gate may pass only after:
+
+- the same manifest was independently transported and loaded;
+- the complete replay assertions above passed;
+- and the two executions are proven independent.
+
+The existing `--allow-same-runtime` escape must never exist on the conclusion-bearing route.
+
+---
+
+# 7. Revised sequence
+
+| Order | Action | Status |
+|---:|---|---|
+| 0 | Record cloud-fleet cause as unresolved; retain platform-surface finding only | Decided |
+| 1 | Amend the Route A contract to include runtime user-motion consequences | Required |
+| 2 | Correct identity, completeness, generator-version, derived-state and immutability defects | Required |
+| 3 | Build a separate manifest-replay development gate | Required |
+| 4 | Run it on development manifests and full relevant horizons | Required |
+| 5 | Freeze the fresh-population selection rule and full result contract | May proceed in parallel |
+| 6 | After the gate passes, apply the frozen rule and generate an immutable fresh manifest inventory | Held |
+| 7 | Route any new formal run through its separate compute authority | Held |
+
+No additional retries on homogeneous hosted hardware are required merely to name the old cloud-cloud cause.
+
+---
+
+# 8. Smallest scientific update
+
+## Supported
+
+- The historical registered episode key does not identify one portable world.
+- A local-versus-cloud comparison first differs at `user_velocities` on most sampled keys while positions agree.
+- The cloud-fleet root cause remains unresolved.
+- Route A is the preferred cause-agnostic repair family.
+- The present generator-conformance gate correctly refuses to treat same-runtime agreement as generator portability evidence.
+
+## Refuted or modified
+
+- Refuted: scalar trig is proven to be the sole non-portable operation.
+- Refuted: the final velocity array is written only by `_init_user_velocities`.
+- Refuted: a float near-tie explains the observed cluster-assignment difference on the configured writer path.
+- Refuted: initial-manifest replay means trigonometric world dynamics are never executed again.
+- Refuted: the present conformance gate certifies manifest replay.
+- Modified: Steps 1–2 need not finish cloud-root-cause identification before the cause-agnostic repair proceeds.
+
+## Still unresolved
+
+- The causal mechanism behind the historical cloud-versus-cloud divergence.
+- Whether initial-manifest plus a frozen runtime is sufficient, or a full exogenous-process tape is required.
+- The fresh R4 successor population and its result.
+
+---
+
+# 9. Retained portfolio
+
+| Route | Status | Raising or lowering observation |
+|---|---|---|
+| **Route A: immutable manifest-defined population** | **Selected** | Raised after identity and hybrid-state blockers close |
+| A1: manifest + frozen homogeneous runtime | Live simplest realization | Raised by full-horizon cross-runner equality |
+| A2: exogenous trajectory/random-tape replay | Live stronger realization | Raised if later RPGM transitions diverge under A1 |
+| Route B: portable deterministic generator | Parked contract change | Raise only if manifest-based execution is impractical |
+| Heterogeneous-runner root-cause probe | Optional diagnostic | Does not block Route A |
+| Current manifest implementation | **Not ready** | Requires the six blockers above to close |
+| Current R4 rerun | Historical conditional observation only | Never becomes the fresh confirmatory result |
+
+## Scheduled next scientific action
+
+**Amend and conformance-test the manifest-replay realization on development-only worlds, including complete post-application state and full-horizon exogenous-process equality.**
+
+The fresh evidence design may be drafted now, but no confirmatory population may be selected, generated, or inspected until that gate passes.
+
+**This review selects the scientific repair route. It authorizes neither implementation nor conclusion-bearing compute.**
