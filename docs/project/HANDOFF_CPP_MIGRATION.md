@@ -13,7 +13,19 @@ toy 后端：Python 保留状态、生命周期与失败关闭边界，C++ 只�
 | 阶段 | 内容 | 提交 |
 |---|---|---|
 | 纯 Python 优化（无需工具链） | `_compute_distance` 标量化、getattr 默认值移除、mcs_table 按身份缓存 | `cd6471b3`，实测 1.434× |
-| 通信内核整体迁移（阶段 1） | 每步一次原生调用产出全部通信矩阵 | 本提交，实测 **1.61×**（叠加在 1.43× 之上） |
+| 通信内核整体迁移（阶段 1） | 每步一次原生调用产出全部通信矩阵 | `be677e02`，实测 1.61× |
+| 缓存重验证降价（阶段 2） | 步内信任窗口 + 步外字节比较 | `9dfef0a1`，flag 开 44.07→**28.05 ms/step**，flag 关 70.9→47.8 |
+
+阶段 2 的内容：写点清点（135831d9 处，含逐条 file:line 引用，见提交信息）证明
+从 `_update_channel_state()` 的 refresh 到基类 `step()` 返回之间，不存在任何
+改动校验输入的生产写点——位置写全部在 refresh 之前，13 个签名字段只在构造期写，
+scenario7 的电量/故障写在 S1（基类 step 之前）与 S5（之后）。据此基类 `step()`
+在信道更新后置 `_intra_step_cache_trusted`，`finally` 清除；窗口内校验短路。
+**step() 之外的访问器调用保持全量逐调用重验证**（全部守卫测试都工作在这个面上，
+含冻结的步内 `noise_power`/`uav_failed` 陷阱测试，未触动、保持绿色），只是
+数组比较换成字节比较（±0.0/NaN 边缘语义为值中性，行内注释有论证），config
+签名实时重建原样保留。新守卫：`tests/step_cache_trust_window_test.py`（5 个，
+含看着变红过的 finally 负例、1-ULP 步外分辨力、无缓存参照 3 步等价）。
 
 阶段 1 的内容：`step_communication_batch`（`ha_ctse_process/native/uav_geometry_backend.cpp`，
 加载器 `ha_ctse_process/uav_cpp_backend.py`）一次算出 10 个输出——access/air/base
@@ -58,25 +70,26 @@ toy 后端：Python 保留状态、生命周期与失败关闭边界，C++ 只�
 `_simulate_packet_flow`、指标/奖励计算，以及 240 对/步的 `_compute_sinr`
 Python 调用外壳（现在每次只做两次矩阵索引 + 减法）。
 
-## 下一阶段候选（按迁移后 flag 开的 cProfile，25 步 1.411s）
+## 下一阶段候选（按阶段 2 后 flag 开的 cProfile，25 步 1.038s）
 
-1. **`_current_step_communication_cache` 本身：新的第一名。** 26,400 次 / 25 步
-   = 1,056 次/步，0.616s 累积（≈44%）——算术搬走后，剩下的主导成本是每次访问
-   重建 config 签名 + 4 个 `np.array_equal`（81,750 次调用，0.388s）。这是纯
-   开销、零物理。风险也最高：步内试探性配置变更（`noise_power` 中途改动的守卫
-   测试）正是这套重验证存在的理由。任何"脏标记/信任窗口扩宽"方案都必须先清点
-   步内每一个可能改动签名字段或位置数组的写点，再谈缓存判定的降价。
-2. `_get_observation`（0.293s 累积，含 `_graph_service_potential` 0.277s——
-   scenario7 奖励整形的松弛求解器占了观测大头）：纯组装 + 独立求解器，
-   勿与路由 Dijkstra 合并。
-3. `_update_channel_state` 的 240 对循环：向量化 sinr_matrix 填充
-   （`tx_power − access_pl − user_ipn` 逐元素即位相同的表达式等价本轮已论证；
-   未实施，且受 scenario7 不可用掩码语义约束）。
-4. `_simulate_packet_flow` 与指标计算。
+阶段 2 已吃掉此前第一名：`_current_step_communication_cache` 从 0.616s 降到
+0.094s。剩余两大块都在 **scenario7 的奖励/观测面**，属于 claim 邻接代码
+（奖励路径），继续动它是一次应当有意识做出的决定，不是顺手的下一步：
+
+1. `_graph_service_potential` 0.301s（≈29%）——scenario7 奖励整形簇，含
+   `_widest_backhaul_capacities` 0.111s、`_relaxed_backhaul_capacity_bps`
+   0.098s、自有的 `_spectral_efficiency`（7,600 次）与 `_access_capacity_bps`
+   （6,000 次）。语义独立的松弛求解器，勿与路由 Dijkstra 合并。
+2. `_get_observation` 0.278s（≈27%）——组装 + `_energy_observation` 0.071s +
+   `_get_local_uavs` 0.070s + 12,232 次 `np.linalg.norm` 0.076s。
+3. 全局 `np.clip` 22,464 次（0.22s 累积）散布在动作/能量路径。
+4. 路由 0.141s；`_update_channel_state` 0.084s（240 对循环的向量化等价
+   表达式已论证，未实施）。
+5. S5 之后的奖励整形访问器仍逐调用重验证——若要扩窗到 S9/S10，须先决定
+   电量掩码变更（S5 写点，落在 refresh→末次访问跨度内）的语义并补守卫。
 
 Dijkstra 本体保留 Python（heapq 平局语义即路径身份），其内层
-`_get_link_capacity` 已是 O(1) 矩阵读；路由阶段剩余的 0.49s 里大部分其实是
-上面第 1 条的重验证成本，不是图搜索本身。
+`_get_link_capacity` 已是 O(1) 矩阵读。
 
 ## 环境与工具
 
