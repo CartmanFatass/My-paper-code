@@ -1,0 +1,24 @@
+# G51 formal-artifact contract clarification manifest
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+source_commit=ce6ed8659c480ca2779155b2871dc82b89fa0e95
+aligned_source_commit=188b210975a0f243ae34318d658fbf943d1d63ab
+alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
+alignment_disposition=ALIGNED
+compute_budget=zero
+
+Read only these allow-listed paths from source_commit and the submitted
+question:
+
+- ha_ctse_process/continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51.py
+- scripts/run_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51.py
+- tests/ha_ctse_process_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_test.py
+- tests/run_continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51_test.py
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_CODE_SCIENCE_INDEX.md
+- docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_admission_clarification/50_MECHANICAL_INTAKE_RECORD.md
+
+These files establish the aligned G51 implementation, the existing adverse
+branch behavior and the already frozen formal-admission inventory. They do
+not authorize compute or a code change.
