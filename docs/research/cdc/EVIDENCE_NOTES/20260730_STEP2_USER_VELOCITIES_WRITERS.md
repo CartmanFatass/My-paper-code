@@ -130,3 +130,61 @@ is why the R4 population showed 3 of 8 topologies rather than all eight.
 Written before reading the artifact, for the same reason as the previous
 pre-registration: the last one turned a wrong hypothesis into a marked-dead one
 instead of letting it disappear quietly.
+
+## RESULT: the cloud-versus-cloud comparison is UNTESTED, exactly as pre-registered
+
+Run `30518707693` arm `w1` against run `30516912923` arm `w1`, both `ubuntu-latest`,
+same commit family, same pins, same invocation, launched **concurrently** so they
+could not share a runner.
+
+```text
+shared episode keys                6
+fingerprints differing             0 of 6
+first differing component          none -- all nine arrays agree on every key
+runtimes distinguishable           False (audit artifacts record no runtime_identity)
+
+WORLD_CONFORMANCE_UNTESTED         (exit 1)
+```
+
+**This neither confirms nor refutes the glibc-ifunc prediction.** It is the third
+item on that prediction's own refutation list, quoted before the artifact was read:
+
+> Every component agrees. Then the two runners were not distinguishable on this
+> topology and the comparison tested nothing -- `UNTESTED`, not a pass, and the
+> escalated probe job over the R4 seeds becomes necessary.
+
+Two explanations remain open and the artifacts cannot separate them:
+
+1. **Development topology 20260725 is simply stable.** The measured divergence is 3
+   of 8 *R4* topologies; 20260725 is not an R4 topology at all. The `workers` job is
+   the only accessible job that emits component digests, and it runs only this
+   topology.
+2. **Both runs landed on similar hardware.** Concurrency guarantees different
+   runners, not different CPU models, and the `workers` job prints `nproc` and no
+   CPU identity.
+
+The gate returning `UNTESTED` rather than `PASS` here is the design working. A
+two-outcome gate would have reported six-for-six agreement as a pass and closed step
+1 on evidence that establishes nothing.
+
+## The accessible route is now exhausted, with the result recorded
+
+Step 1's clean answer requires component digests from two runs, on **R4 topologies**,
+with **runner identity recorded**. Of the three existing workflow jobs, none provides
+that: `audit` is the 114-minute formal run, `workers` is the development topology
+only, `benchmark` emits no digests. Both attempts at the accessible route were made
+and both returned uninformative for reasons stated in advance.
+
+**The escalation stands and is now evidenced rather than predicted:** one job running
+
+```text
+python scripts/d7_s_world_digest_probe.py --episodes 2 --out probe.json
+```
+
+on `ubuntu-latest`, uploading the JSON. Seconds of compute, the R4 seeds where the
+divergence lives, and `platform`/`processor`/`openblas configuration`/CPU-dispatch
+recorded inside the artifact so a future agreement is interpretable instead of
+ambiguous. Run twice, diff with `d7_s_world_conformance_gate.py`.
+
+Until then the platform-boundary localization (`user_velocities`, scalar trig) is
+what step 1 has produced, and it is explicitly *not* the cloud-versus-cloud answer.
