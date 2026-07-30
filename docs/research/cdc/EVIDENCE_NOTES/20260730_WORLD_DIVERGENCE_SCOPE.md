@@ -63,6 +63,41 @@ runner identity has to be recorded to know whether the comparison tested anythin
 reason. Without the runner identity, two agreeing samples are indistinguishable
 from two samples that ran on the same hardware.
 
+## ESCALATION -- the clean localization needs a workflow file change
+
+Recorded rather than worked around, because workflow-file pushes are user-gated on
+this line.
+
+`d7_s_world_digest_probe.py` produces exactly what step 1 needs, in seconds, and
+records the runner identity that makes a comparison interpretable. **No existing
+workflow job invokes it.** The jobs that do exist give:
+
+| job | what it gives | why it is not enough |
+|---|---|---|
+| `audit` | R4 population, component digests | 114 min, 8 shards, and it is the formal run |
+| `workers` | dev topology 20260725 only, component digests, ~1 h | wrong topologies -- the divergence is known on 3 of 8 R4 seeds, and 20260725 may simply be stable |
+| `benchmark` | a step-rate number | no world digests at all |
+
+So the accessible route is the `workers` job on the **development** topology, and
+its answer is asymmetric:
+
+- if two runs' digests DIFFER, the array is localized and that is decisive;
+- if they AGREE, it means nothing -- either the generator is stable for that
+  topology, or both runs landed on similar hardware, and the job prints `nproc`
+  but no CPU model so the two cannot be distinguished.
+
+**What would make step 1 cheap and conclusive:** one workflow job that runs
+`python scripts/d7_s_world_digest_probe.py --episodes 2 --out probe.json` on
+`ubuntu-latest` and uploads `probe.json`. Seconds of compute, the R4 topologies
+where the divergence actually lives, and runner identity recorded in the artifact.
+Run it twice and diff with `d7_s_world_component_digest_diff.py`.
+
+Until then: `d7s-workers-2` (`30516912923`) and `d7s-workers-3` (`30518707693`)
+were launched **concurrently**, since two simultaneous runs cannot share a runner.
+Different runners do not guarantee different CPU models, so an agreement between
+them remains uninformative -- which is the whole reason this escalation is written
+down instead of being treated as a result.
+
 ## What is not yet established
 
 - Which world array diverges first. Unchanged: not localized.
