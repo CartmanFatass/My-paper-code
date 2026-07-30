@@ -242,9 +242,20 @@ under an anonymous reward. The margin estimand is in
 
 #### Question form for Stage A rounds
 
+Stage A is touchpoint 2, and its primary question is **conformance**: the
+completed design is presented and Pro is asked whether it conforms to the
+decision already issued — `AGENTS.md`, **The question after a code design is a
+conformance question** (user ruling 2026-07-30). Do not write that question as a
+menu of routes.
+
 Write dependent questions as a **decision tree with the branches pre-walked**
 (*if you rule A on Q3, also answer Q3a; if B, Q3c instead*) so one reply
-traverses what an iterative interview would discover turn by turn. Carry exact
+traverses what an iterative interview would discover turn by turn. That form is
+for questions that are genuinely **open** — touchpoint 1, and the convergence
+turns this round owns. Its branches enumerate what *Pro* might rule, and
+**never what this conversation prefers**; a tree whose branches are candidate
+routes with one of them argued for is a proposal wearing a question's shape.
+Carry exact
 paths in the `## Evidence to read` allow-list, never file contents — Pro reads
 the repository at `stage_commit`. Where a code choice is entailed by a
 scientific decision, Pro's preference governs; everything that is not a

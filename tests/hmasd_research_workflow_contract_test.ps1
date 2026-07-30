@@ -87,7 +87,17 @@ foreach ($required in @(
     'same_file_concurrent_writes=forbidden',
     '### Crossing the boundary',
     'let External Pro converge',
-    'Pro converges; the two sides are not equals here')) {
+    'Pro converges; the two sides are not equals here',
+    # User ruling 2026-07-30: the Project Manager holds ZERO scientific decision
+    # rights, and the touchpoint-2 question is a CONFORMANCE question rather than
+    # a proposal. Both halves are asserted because the first alone was already
+    # true -- `scientific_decision_authority=none` has been in the Identity block
+    # for days, and it did not stop this conversation from recommending a
+    # research redirect. A key that was already green is not a guard.
+    'scientific_proposal_authority=none',
+    'pro_plan_review_question=conformance_to_pro_decision',
+    '### The question after a code design is a conformance question',
+    'does not recommend a scientific route')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 
@@ -102,13 +112,22 @@ $skillFiles = @{
                                 'out-of-scope list is deliberate staging')
     'hmasd-acceptance-gate' = @('## Stage A and Stage B',
                                 'A guard test needs a paired negative',
-                                'Two samples cannot separate a cause')
+                                'Two samples cannot separate a cause',
+                                # User ruling 2026-07-30 -- the pre-walked
+                                # decision tree is the form for OPEN scientific
+                                # questions, not for the conformance question.
+                                # Left unscoped it authorised a menu of routes at
+                                # the exact gate the ruling redefined.
+                                'never what this conversation prefers')
     'hmasd-workflow-change-audit' = @('the failure class this procedure exists to catch',
                                 'A guard that has never gone red is indistinguishable from a comment',
                                 'it produces an invention')
     'hmasd-review-round'    = @('Is a round warranted',
                                 'Route to code, not to prose',
-                                'Do not defend the framing')
+                                'Do not defend the framing',
+                                # User ruling 2026-07-30 -- touchpoint 2 asks for
+                                # conformance, not for a scientific proposal.
+                                'At touchpoint 2 the question is a conformance question')
 }
 foreach ($skill in $skillFiles.Keys) {
     $body = Get-Content -Raw -LiteralPath (Join-Path $repo ".claude/skills/$skill/SKILL.md")

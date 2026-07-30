@@ -27,8 +27,15 @@ identifies the target is disputed; two consecutive local failures produced no
 clear correction; a local mechanism is about to enter full algorithm
 integration; or the work has visibly converged on one favoured route.
 
-**Not warranted** for lemma extraction, narrow result interpretation, or choosing
-the next minimal action. Those converge internally.
+**Not warranted** for lemma extraction or choosing the next minimal action. Those
+converge internally.
+
+*Narrow result interpretation* was on that list until 2026-07-30 and is not
+"internal" — reading what a result means is a scientific decision, and the user
+ruling of that date leaves the Project Manager none. It does not become an extra
+round either: it belongs to touchpoint 3, the result submission. The list is
+about what does not justify a *fourth* access, never about what the Project
+Manager may settle alone.
 
 **A valid answer contains** at least one substantive contribution: a new
 conjecture, a concrete counterexample, a hidden assumption named, a corrected
@@ -52,6 +59,20 @@ require both branches to consume one shared RNG stream" is scientific even thoug
 the answer determines code, because the *decision* being asked for is scientific.
 
 ### Writing the question
+
+**At touchpoint 2 the question is a conformance question** — user ruling
+2026-07-30. The Project Manager's completed code design is presented, and the
+one thing asked is whether it conforms to the scientific decision Pro already
+issued. Not which route is better, not which of two the Project Manager favours,
+not a case argued for one. Ranking options inside the question is proposing a
+route, and this task has no authority to propose one; see `AGENTS.md`, **The
+question after a code design is a conformance question**.
+
+Touchpoints 1 and 3 are open scientific questions and the rules below apply to
+them in full. At touchpoint 2 rules 1-4 and 6-7 still bind — routing to code,
+marking provenance, declaring confidence, stating frozen inputs, treating
+measured evidence as falsifiable, and refusing to defend the framing — while
+rule 5's "one decision" is fixed in advance: conformance.
 
 1. **Route to code, not to prose.** Give exact paths and function anchors and
    instruct the reviewer to verify against source. A summary carries its author's
@@ -877,7 +898,7 @@ A convergence turn is not a fence. Keep them strictly apart:
 | | Freshness fence | Convergence turn |
 |---|---|---|
 | carries | the round identity block | prose, no identity block |
-| how many | exactly one per round, never resubmitted | bounded by the plan review that owns them — never an open-ended series |
+| how many | exactly one per round, never resubmitted | bounded by the conformance check that owns them — never an open-ended series |
 | authored by | Project Manager | Project Manager |
 | may be sent by transport on its own | no | no |
 
@@ -892,9 +913,9 @@ after the first archived raw, verbatim, none omitted. The turns that changed the
 answer are the evidence; keeping only the last message destroys the reason the
 conclusion moved.
 
-**Convergence ends when Pro issues the convergence decision.** It reviews the
-Project Manager's code execution plan and closes the exchange; the Project
-Manager implements the result. Disagreement by this conversation is not a reason
+**Convergence ends when Pro issues the convergence decision.** It checks the
+Project Manager's completed code design for conformance and closes the exchange;
+the Project Manager implements the result. Disagreement by this conversation is not a reason
 to continue — scientific authority is Pro's, so the terminating move is Pro's.
 
 The symmetric rule this paragraph used to carry — *ends when both sides state the
@@ -902,9 +923,9 @@ same thing* — gave the exchange no terminator, because either party could
 withhold agreement indefinitely. A decision that cannot be **executed** is a
 technical blocker for the user, not grounds for another turn.
 
-The access count is fixed: a workflow gets Pro's scientific decision, this plan
-review, and the result submission. Material discovered after a round closes waits
-for the next workflow's plan review.
+The access count is fixed: a workflow gets Pro's scientific decision, this
+conformance check, and the result submission. Material discovered after a round
+closes waits for the next workflow's conformance check.
 
 ## Exact archival, cleanup, and intake
 
