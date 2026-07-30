@@ -181,6 +181,45 @@ if (-not ($rejected.failures -match 'no "## Evidence to read" allow-list')) {
     throw "Round preflight rejected the fixture, but not for the missing evidence allow-list -- this probe was masked by a sibling guard. Failures: $($rejected.failures -join ' | ')"
 }
 
+# --- the transport-fault channel must actually carry something --------------
+#
+# Added 2026-07-30 after an audit found that `## Transport faults` was a TODO
+# nobody checked: no test and no preflight script mentioned it, so a transport
+# defect observed during a round had somewhere to be written and no reason to be.
+# That is the "duty without an affordance" failure CLAUDE.md names -- it does not
+# produce a refusal, it produces an invention.
+#
+# SCOPE, deliberately narrow. Most historical intake records predate the scaffold
+# section entirely and are exempt: history is evidence, not a repair target. The
+# rule binds the shape the scaffold now emits, so every round created from here on
+# is covered automatically.
+$roundsRoot = Join-Path $repo 'docs/external-review/rounds'
+$faultsFilled = 0
+foreach ($dir in (Get-ChildItem -LiteralPath $roundsRoot -Directory)) {
+    $intakePath = Join-Path $dir.FullName '50_MECHANICAL_INTAKE_RECORD.md'
+    if (-not (Test-Path -LiteralPath $intakePath)) { continue }
+    $intake = Get-Content -Raw -LiteralPath $intakePath
+    $m = [regex]::Match($intake, '(?s)##\s+Transport faults\s*(?<body>.*)$')
+    if (-not $m.Success) { continue }          # pre-scaffold record, exempt
+    $body = $m.Groups['body'].Value.Trim()
+    if ($body.Length -eq 0 -or $body -match '^TODO') {
+        throw "Round '$($dir.Name)' carries a '## Transport faults' section that is empty or still TODO. A round that observed no fault must say ``none`` -- silence is indistinguishable from a fault nobody wrote down, which is the whole reason this channel exists."
+    }
+    $faultsFilled++
+}
+# Do NOT let this vacate itself. If every round lost the heading the loop above
+# would pass over an empty set and stay green -- the same shape as the retired
+# fixture guard higher in this file, and the same reason it is written this way.
+if ($faultsFilled -lt 1) {
+    throw 'No round carries a filled "## Transport faults" section, so the check above ran over nothing. Point it at a round that does, rather than leaving a guard that cannot fail.'
+}
+$scaffoldPath = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/new_review_round.ps1'
+if (-not (Test-Path -LiteralPath $scaffoldPath)) { throw 'Round scaffolder is missing' }
+$scaffold = Get-Content -Raw -LiteralPath $scaffoldPath
+if (-not $scaffold.Contains('## Transport faults')) {
+    throw 'new_review_round.ps1 no longer emits a "## Transport faults" section; future rounds would silently escape the check above'
+}
+
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'
 # The deliberate rejection probe above exits 1 by design; do not inherit it.
 exit 0

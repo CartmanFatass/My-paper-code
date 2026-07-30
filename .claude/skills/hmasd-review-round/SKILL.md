@@ -111,7 +111,7 @@ skill before the first browser call.
 
 **Transport is `project_manager_direct`.** The active Project Manager authors the
 question, freezes and pushes the boundary, owns registration, submits the fence,
-captures the reply and archives it. There is no transport delegate.
+and **owns the archive decision**.
 
 This replaced a delegated exchanger on 2026-07-25. The split that failed was
 handing one role both a long mechanical wait and a precise capture: the wait was
@@ -119,13 +119,67 @@ abandoned twice mid-round, and one archive lost every markdown marker because th
 capture fell back to rendered page text. Waiting and capturing are now separated
 by who does them.
 
+### Capture may be delegated, but only against a digest bond
+
+Amended 2026-07-30. The old rule said flatly that there is no transport delegate,
+and its reason was sound when written: a relay could archive rendered DOM, the
+wrong round's message, or a failed capture dressed as a success. **All three are
+now mechanically excludable**, so the blanket prohibition costs more than it buys.
+
+A bounded child may perform the capture when **all four** hold. Any one missing and
+the Project Manager captures it directly.
+
+1. **The Project Manager supplies the expected `message_id`**, taken from the
+   conversation API, and the child refuses if the latest assistant message is not
+   that one. The child never decides which message is the ruling.
+2. **The child returns a page-computed digest**: `crypto.subtle.digest('SHA-256')`
+   over the emitted markdown, plus its character length and the message id. It
+   returns no bulk text through the tool channel.
+3. **The child writes nothing into the round directory.** It hands the bytes over
+   the OS clipboard; `archive_pro_response.ps1` is run by the Project Manager.
+4. **The Project Manager independently recomputes SHA-256** over the LF-normalized
+   archived file and it must equal the child's page-computed digest. **A mismatch
+   is a refusal, never a repair** — do not reconcile by editing the file.
+
+**The digest bond binds the Project Manager's own captures too, and that is what
+earns the loosening.** Until 2026-07-30 the direct path was verified by a length
+match, which a substitution can satisfy; a digest match cannot. Compute it on both
+sides of the boundary, every round, delegated or not.
+
+What is still not delegable: choosing which message is the ruling, and deciding
+that a failed capture is archivable anyway. Those are judgements, and they stay
+with the Project Manager whatever mechanism moved the bytes.
+
 **`hmasd-review-monitor` (haiku) does the waiting and nothing else.** Dispatch it
 after the fence lands; it polls the conversation and reports when generation has
 stopped. It holds no click, type or write tools, so it structurally cannot submit,
 capture or curtail — it reports one observation and the Project Manager acts on
 it. A wrong report from it is cheap: an early wake costs one page read.
 
-Create no other relay, dispatcher, or Monitor.
+Create no standing relay, dispatcher or Monitor. A bounded, single-purpose child
+dispatched for one capture under the digest bond above is not a relay: it holds no
+state between rounds, decides nothing, and its output is verified by a number the
+Project Manager computes itself.
+
+### The monitor reports procedure defects, and the Project Manager must carry them
+
+`hmasd-review-monitor` is required to return a `PROCEDURE_DEFECTS` item: every
+expectation **its brief stated** that the page did not meet. Two duties follow, and
+they are the Project Manager's:
+
+- **State the expectations in the brief.** A brief that names no control, selector
+  or marker cannot detect a stale procedure, and the monitor will correctly report
+  `none stated`. That reply is a finding about the brief, not about the page.
+- **Carry every reported defect into the round's `## Transport faults`**, and in
+  the same round either repair this Skill or record why not. The monitor holds no
+  write tool and never runs Git; its reply is the only channel, so a defect the
+  Project Manager does not transcribe is a defect that did not happen.
+
+`tests/review_round_contract_test.ps1` refuses a round whose `## Transport faults`
+section is empty or still `TODO`. That check exists because this section was a TODO
+nobody read for thirty rounds: the duty had somewhere to be written and no reason
+to be, which is how a prescribed mechanism went on being prescribed after it
+stopped working.
 
 ### Browser tool mapping
 

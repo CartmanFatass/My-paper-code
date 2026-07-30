@@ -5,9 +5,21 @@
 # Edge vs Chrome, sandboxed process launch failing silently, foreground focus,
 # tab activation. Every one of those failures was "environment not in the
 # expected state", which is a script's job, not a judgement call. The capture
-# decision that followed IS a judgement call and deliberately stays with the
-# Project Manager (AGENTS.md; AGENTS.md,
-# "Do not delegate the browser and do not create any other relay").
+# DECISION that follows -- which message is the ruling, and whether a failed
+# capture is archivable anyway -- IS a judgement call and stays with the Project
+# Manager. See `.claude/skills/hmasd-review-round/SKILL.md`, "Capture may be
+# delegated, but only against a digest bond".
+#
+# CORRECTED 2026-07-30. This comment previously carried, in quotation marks and
+# attributed to AGENTS.md twice over, the sentence "Do not delegate the browser
+# and do not create any other relay". A repository-wide search for that string
+# returns this file and nothing else: it was never in AGENTS.md, never in the
+# Skill, and a reader who trusted the citation would have gone looking for a rule
+# that does not exist. The substance was real -- the Skill did say "There is no
+# transport delegate" -- but the quotation was invented, and an invented
+# quotation is worse than a paraphrase because it forecloses checking. The rule
+# it named has since been narrowed: capture may now be delegated under a digest
+# bond, while the judgement above may not.
 #
 # This script only puts the environment into the expected state and reports what
 # it could not fix. It never submits, captures, or archives anything.

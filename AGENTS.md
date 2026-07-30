@@ -253,6 +253,30 @@ the boundary, submit the fence, capture and archive the reply per
 only — it holds no tool that can wait, so **you own the pacing**. On an
 unregistered branch, perform the one-time registration.
 
+**Capture may be delegated; the archive decision may not.** Amended 2026-07-30.
+The four conditions are in the Skill, and the load-bearing one is a digest bond:
+the child returns a page-computed SHA-256 over the emitted markdown and you
+recompute it over the archived file, with a mismatch being a refusal rather than a
+repair. That bond binds your own captures too — a length match can be satisfied by
+a substitution, a digest match cannot.
+
+**Two duties you owe the monitor, and they are the point of dispatching it.**
+
+1. **State your expectations in its brief** — the control, selector, heading or
+   marker you believe is there. A brief naming none cannot detect a stale
+   procedure, and the monitor will correctly answer `PROCEDURE_DEFECTS: none
+   stated`, which is a finding about your brief.
+2. **Carry every reported defect into the round's `## Transport faults`**, and in
+   the same round either repair the Skill or record why not. It holds no write
+   tool and never runs Git, so its reply is the only channel: a defect you do not
+   transcribe is a defect that did not happen.
+
+This exists because a mechanism the Skill prescribed — the overlay clicked by
+`computer` to supply a user gesture — worked in one round and failed in the next,
+and nothing in this project had both the eyes to see it and a duty to say so. The
+Skill kept prescribing the broken step. `tests/review_round_contract_test.ps1` now
+refuses a round whose `## Transport faults` section is empty or still `TODO`.
+
 ---
 
 # Subagent workflow
