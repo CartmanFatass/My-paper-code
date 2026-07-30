@@ -45,6 +45,15 @@ def _build(*, native: bool, seed: int = 20260725):
     `build_pinned_env` takes an explicit `user_world_seed`, and construction order
     was separately measured not to move its fingerprint. Comparing anything about
     the channel requires that both sides inhabit the same world first.
+
+    This was NOT a new discovery, and the canonical record is
+    `tests/env_user_population_determinism_test.py` plus
+    `docs/research/cdc/EVIDENCE_NOTES/20260726_D7_S_PREFIX_REPLAY_IS_NOT_FIXED_HISTORY.md`:
+    the repository already pins "two freshly constructed environments carrying the
+    same episode seed do not share a user population", and names
+    `regenerate_user_world` after a pinned topology as the repair. I rediscovered
+    it the expensive way by writing the obvious construction into a comparison.
+    Read those two first before building an env for any comparison.
     """
     import audit_d7_s_event_aligned as audit
 
