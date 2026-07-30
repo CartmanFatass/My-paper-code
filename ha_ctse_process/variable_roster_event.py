@@ -85,11 +85,29 @@ BOUNDARY_KINDS = (
 )
 
 
-def _float_array(value: Any, *, size: int, name: str) -> np.ndarray:
+def _float_array(value: Any, *, size: int, name: str,
+                  finite_checked: bool = False) -> np.ndarray:
+    """Shape-check, finiteness-check and COPY one feature vector.
+
+    `finite_checked=True` skips only the finiteness scan, and only for a caller
+    that has already scanned the same values. It is a CALL-COUNT optimisation with
+    identical coverage, not a relaxation: measured on the generic-SHORT testbed,
+    `np.all(np.isfinite(...))` ran 18 times per step here -- once per member per
+    array -- while the caller had already built one contiguous
+    `(n_members, obs_dim)` matrix it could scan in a single call. Scanning the
+    matrix once checks exactly the same numbers.
+
+    The default is False, so every existing caller keeps its own check.
+
+    **Never pass True to skip a scan that was not performed.** The `.copy()` below
+    is unconditional and stays that way: callers rely on receiving an array the
+    environment cannot subsequently mutate, and a digest over values cannot see a
+    shared reference.
+    """
     array = np.asarray(value, dtype=np.float32).reshape(-1)
     if tuple(array.shape) != (int(size),):
         raise ValueError(f"{name} must have shape [{size}]")
-    if not bool(np.all(np.isfinite(array))):
+    if not finite_checked and not bool(np.all(np.isfinite(array))):
         raise ValueError(f"{name} contains a non-finite value")
     return array.copy()
 
@@ -157,18 +175,23 @@ class BoundaryMember:
         *,
         obs_dim: int,
         critic_member_dim: int,
+        finite_checked: bool = False,
     ) -> "BoundaryMember":
+        """`finite_checked` is forwarded to `_float_array`; see its docstring for
+        the one condition under which a caller may pass True."""
         key = str(lifecycle_key)
         if not key:
             raise ValueError("lifecycle_key must be non-empty")
         return cls(
             lifecycle_key=key,
             membership_epoch=int(membership_epoch),
-            observation=_float_array(observation, size=obs_dim, name="observation"),
+            observation=_float_array(observation, size=obs_dim, name="observation",
+                                      finite_checked=finite_checked),
             critic_member_features=_float_array(
                 critic_member_features,
                 size=critic_member_dim,
                 name="critic_member_features",
+                finite_checked=finite_checked,
             ),
         )
 

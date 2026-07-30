@@ -468,6 +468,11 @@ class GenericShortDynamicRosterEnv:
                 observations[index],
                 obs_dim=OBSERVATION_DIM,
                 critic_member_dim=OBSERVATION_DIM,
+                # `_observation_matrix` scanned the whole block for finiteness one
+                # line above, so the per-row scans here would re-check the same
+                # numbers. Every value is still checked exactly once, and every row
+                # is still copied.
+                finite_checked=True,
             )
             for index, key in enumerate(keys)
         )
@@ -589,6 +594,17 @@ class GenericShortDynamicRosterEnv:
             rows[index, 10] = float(state.contributed_current_wave)
             rows[index, 11] = float(state.active_steps) / float(HORIZON)
             rows[index, 12 + int(state.previous_action)] = 1.0
+        # ONE finiteness scan over the whole block, so `BoundaryMember.make` can be
+        # told the values are already checked. Measured: the per-member scans inside
+        # `_float_array` ran 18 times per step and cost ~19% of a step. This checks
+        # exactly the same numbers in one call -- coverage is relocated, not
+        # dropped, and `_float_array` still copies every row.
+        #
+        # Kept here rather than in the caller because this function is the only
+        # writer of these values, so a future coordinate added below cannot escape
+        # the scan by the caller forgetting to run it.
+        if not bool(np.all(np.isfinite(rows))):
+            raise ValueError("observation matrix contains a non-finite value")
         return rows
 
     def _observation_for(self, key: int) -> np.ndarray:
