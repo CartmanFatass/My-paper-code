@@ -1,7 +1,8 @@
 # External Pro open question: complete UAV G0 formal interface contract v2
 
 ```text
-review_type=FORMAL_INTERFACE_CONTRACT_CLARIFICATION_V2
+review_type=IMPLEMENTATION_ALIGNMENT_CLARIFICATION
+clarification_subtype=FORMAL_INTERFACE_CONTRACT_V2
 audit_mode=zero_compute_code_facing_contract_only
 compute_budget=zero
 scientific_iteration_cost=zero
