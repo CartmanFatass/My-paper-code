@@ -97,6 +97,38 @@ def _world_component_digests(env) -> dict:
     return out
 
 
+def state_attribute_digests(env) -> dict:
+    """Per-attribute digests over the same surface `full_state_fingerprint` hashes.
+
+    WHY THIS EXISTS. The first run of this gate returned
+    `FAIL:pre_step_state_fingerprint` while every world array, the full 139/550
+    horizon and both limbs' units agreed -- a combined hash that says only "these
+    differ" and leaves the next reader to rediscover which of 273 attributes did
+    it. Measured: six, all station-distance-derived. Recording them per attribute
+    turns an opaque hash into a named surface at no cost to strictness.
+    """
+    seen = frozenset({id(env)})
+    out = {}
+    for name in sorted(dir(env)):
+        if name.startswith("__") or name in audit.FINGERPRINT_EXCLUDED_ATTRS:
+            continue
+        try:
+            value = getattr(env, name)
+        except Exception:
+            continue
+        if callable(value):
+            continue
+        try:
+            encoded = audit._encode_fingerprint_value(value, seen=seen)
+        except Exception as exc:                       # pragma: no cover
+            out[name] = f"<encode-failed:{exc}>"
+            continue
+        out[name] = hashlib.sha256(encoded).hexdigest()
+    out["__rng__"] = hashlib.sha256(
+        audit._rng_state_token(env).encode("utf-8")).hexdigest()
+    return out
+
+
 def refuse_confirmatory_topology(topology_seed: int) -> None:
     """The ruling holds the confirmatory population unselected AND uninspected.
 
@@ -228,6 +260,7 @@ def replay_one_episode(config, *, manifest_root: str, topology_seed: int, block:
     outcome["episode_world_fingerprint"] = audit.episode_world_fingerprint(
         env, seed_value=seeds["user_world_seed"])["fingerprint"]
     outcome["pre_step_state_fingerprint"] = audit.full_state_fingerprint(env)
+    outcome["pre_step_state_attribute_digests"] = state_attribute_digests(env)
     outcome["assertions"]["a6_complete_pre_step_environment_identity"] = True
 
     if not run_horizon:

@@ -116,10 +116,14 @@ H formal R4 measurement                  INVALID_R4_REALIZATION stands (ruled)
 H' post-repair R4 re-run                 RETURNED 8/8 -- REJECTED as formal result
 I  provenance correction + localization   RULED -- steps 1-4 accepted as done,
                                           cloud cause recorded UNRESOLVED
-J  Route A amendment + B1-B5 repair       REQUIRED, next
-K  manifest-replay development gate       REQUIRED, 8 assertions
-L  full-horizon replay exercise (dev)     REQUIRED, decides A1 vs A2
-M  freeze fresh-population selection RULE MAY PROCEED IN PARALLEL (no population)
+J  Route A amendment + B1-B5 repair       DONE  69c95e61 -- schema 2, 36 passed,
+                                          6 paired negatives watched red
+K  manifest-replay development gate       DONE  fd3087ac -- probe + gate, 22 passed,
+                                          12 paired negatives watched red
+L  full-horizon replay exercise (dev)     IN FLIGHT -- two local processes on
+                                          TOPOLOGY_SEED_DEV; decides A1 vs A2
+M  freeze fresh-population selection RULE DONE  fd3087ac --
+                                          D7_S_SUCCESSOR_POPULATION_SELECTION_RULE.md
 N  generate immutable fresh inventory     HELD until K/L pass
 O  formal successor run                   HELD, separate compute authority
 ```

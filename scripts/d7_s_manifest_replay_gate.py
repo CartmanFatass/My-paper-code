@@ -172,8 +172,20 @@ def main() -> int:
         compared += 1
         for field in EQUALITY_FIELDS:
             if a.get(field) != b.get(field):
+                detail = f"{str(a.get(field))[:16]} != {str(b.get(field))[:16]}"
+                if field == "pre_step_state_fingerprint":
+                    named = _differing_attributes(a.get("pre_step_state_attribute_digests"),
+                                                  b.get("pre_step_state_attribute_digests"))
+                    if named is not None:
+                        detail = (f"{len(named)} of {len(a.get('pre_step_state_attribute_digests') or {})} "
+                                  f"attribute(s): {', '.join(named[:8])}")
                 failures.append({"episode": list(key), "surface": field,
-                                 "detail": f"{str(a.get(field))[:16]} != {str(b.get(field))[:16]}"})
+                                 "detail": detail,
+                                 "differing_attributes": (
+                                     _differing_attributes(
+                                         a.get("pre_step_state_attribute_digests"),
+                                         b.get("pre_step_state_attribute_digests"))
+                                     if field == "pre_step_state_fingerprint" else None)})
         if horizon:
             ha, hb = a.get("horizon") or {}, b.get("horizon") or {}
             for field in HORIZON_EQUALITY_FIELDS:
@@ -224,6 +236,17 @@ def main() -> int:
                       handle, indent=2, sort_keys=True, default=repr)
         print(f"wrote {args.out}")
     return exit_code
+
+
+def _differing_attributes(a, b):
+    """Name the attributes behind a combined-fingerprint mismatch.
+
+    Returns None when a probe carries no per-attribute record -- an older artifact
+    is not a reason to guess, and a guessed surface is worse than an opaque hash.
+    """
+    if not a or not b:
+        return None
+    return sorted(name for name in set(a) | set(b) if a.get(name) != b.get(name))
 
 
 def _first_differing_component(a, b) -> str:
