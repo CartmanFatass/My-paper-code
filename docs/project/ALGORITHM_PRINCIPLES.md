@@ -8,8 +8,8 @@ Current ownership and the scheduled action belong in
 `docs/project/CURRENT_WORK.md`. Durable conjectures, retained lemmas,
 counterexamples, idea status and evidence notes live under
 `docs/research/cdc/`. Canonical role authority for scientific decisions,
-adoption, realization and acceptance is defined only in root `AGENTS.md` and
-`AGENTS.md`; this file does not restate it.
+adoption, realization and acceptance is defined only in `AGENTS.md`; this file
+does not restate it.
 Formal experiment contracts and dispositions belong in
 `docs/project/ExpRecord.md`. Git history preserves removed research history.
 
@@ -101,7 +101,7 @@ Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
 Operate this loop under the canonical role contracts. External Pro owns
 scientific design, result interpretation and successor selection; the Project
 Manager owns code realization and technical acceptance. New conclusion-bearing
-designs close the Stage A design assertion audit (root `AGENTS.md`,
+designs close the Stage A design assertion audit (`$hmasd-acceptance-gate`,
 "Acceptance, tests, and review") before formal compute.
 
 Maintain several live conjectures when evidence permits. Each states its scope,

@@ -48,6 +48,27 @@ DEFAULT_FORBIDDEN = (
 # Referenced paths that are legitimately patterns or external, not files on disk.
 REF_EXEMPT_SUFFIXES = ("/", "*")
 
+# A cross-reference that names BOTH a document and a section of it:
+#   `AGENTS.md`, **Scientific restraint**
+#   (root `AGENTS.md`, "Acceptance, tests, and review")
+#   `$hmasd-review-round`, **Convergence turns**
+# Matched against whitespace-normalised paragraphs, so a reference that wraps
+# across two lines is still one reference. `_repo_refs` cannot catch this class:
+# the FILE resolves, and only the section inside it is gone.
+SECTION_REF = re.compile(
+    r"`(?P<target>[$A-Za-z0-9_/.-]+)`,\s*"
+    r"(?:\*\*(?P<bold>[^*]+)\*\*|\"(?P<quoted>[^\"]+)\")"
+)
+# Documents that are not control plane themselves but are ROUTED from CLAUDE.md,
+# so a dangling section reference in one misdirects whoever follows the route.
+ROUTED_PROJECT_DOCS = (
+    "docs/project/ALGORITHM_PRINCIPLES.md",
+    "docs/project/EVIDENCE_COMPLEXITY_POLICY.md",
+    "docs/project/COMPUTE_ROUTING.md",
+    "docs/project/AGENT_CONTEXT.md",
+    "docs/project/RESEARCH_GOAL.md",
+)
+
 
 def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
@@ -191,6 +212,36 @@ def audit_repo(
         for ref in sorted(_repo_refs(_read(doc))):
             if not (repo / ref).exists():
                 errors.append(f"broken path reference in {doc.relative_to(repo)}: {ref}")
+
+    # I -- a document that names a file AND a section of it must name a section
+    # that file actually contains. Check F proves the FILE exists and stops
+    # there, which is why ALGORITHM_PRINCIPLES.md could point at AGENTS.md for
+    # "Acceptance, tests, and review" -- a heading that has lived in
+    # hmasd-acceptance-gate/SKILL.md since the split -- and pass for days.
+    # Membership, not heading-shape: the claim being checked is that the referent
+    # exists, exactly as everywhere else in this checker.
+    for rel in (*[str(d.relative_to(repo)).replace("\\", "/") for d in control_docs],
+                *ROUTED_PROJECT_DOCS):
+        doc = repo / rel
+        if not doc.exists():
+            continue
+        for paragraph in _paragraphs(_read(doc)):
+            for match in SECTION_REF.finditer(paragraph):
+                target = match.group("target")
+                section = (match.group("bold") or match.group("quoted") or "").strip()
+                if not section:
+                    continue
+                if target.startswith("$"):
+                    resolved = skills.get(target[1:])
+                else:
+                    candidate = repo / target
+                    resolved = candidate if candidate.exists() else None
+                if resolved is None or not resolved.exists():
+                    continue  # check D/F owns a missing target; do not double-report
+                if section not in _read(resolved):
+                    errors.append(
+                        f"dangling section reference in {rel}: "
+                        f"{target} does not contain {section!r}")
 
     # G -- retired names must not survive in an active document.
     allowed = set(allow_forbidden)
