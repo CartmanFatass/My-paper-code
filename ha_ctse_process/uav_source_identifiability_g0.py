@@ -108,6 +108,9 @@ _ORACLE_SAFETY_ALLOWED_STEP_KEYS = frozenset(
         "current_uav_positions",
         "current_uav_velocities",
         "current_service_mask",
+        "pre_action_context",
+        "executed_service_mask",
+        "common_transducer_evidence",
         "raw_candidate_action",
         "shared_channel_draw_coordinate",
         "shared_channel_draw_block",
@@ -118,6 +121,36 @@ _ORACLE_SAFETY_ALLOWED_STEP_KEYS = frozenset(
         "guarded_executed_action",
         "next_uav_positions",
         "next_uav_velocities",
+    }
+)
+_PRE_ACTION_CONTEXT_KEYS = frozenset(
+    {
+        "physical_step",
+        "lifecycle_owner_to_internal",
+        "event_owner_handle",
+        "event_owner_epoch",
+        "selected_reserve_handle",
+        "selected_reserve_original_target",
+        "survivor_ownership",
+        "survivor_controller_rng_owners",
+        "non_controller_rng_states",
+        "channel_tape_cursor",
+    }
+)
+_LIFECYCLE_CONTEXT_ROW_KEYS = frozenset(
+    {"handle", "epoch", "internal_row", "owner_target"}
+)
+_COMMON_TRANSDUCER_EVIDENCE_KEYS = frozenset(
+    {
+        "transducer_source_sha256",
+        "row_order",
+        "physical_positions",
+        "target_positions",
+        "active_mask",
+        "raw_action",
+        "max_speed",
+        "max_vertical_speed",
+        "time_step",
     }
 )
 _ORACLE_SAFETY_FORBIDDEN_TOKENS = (
@@ -1560,6 +1593,9 @@ class OracleSafetyStepRecord:
     current_uav_positions: _NativeArrayEvidence
     current_uav_velocities: _NativeArrayEvidence
     current_service_mask: _NativeArrayEvidence
+    pre_action_context: Mapping[str, Any]
+    executed_service_mask: _NativeArrayEvidence
+    common_transducer_evidence: Mapping[str, Any]
     raw_candidate_action: _NativeArrayEvidence
     shared_channel_draw_coordinate: tuple[OracleSafetyDrawCoordinate, ...]
     shared_channel_draw_block: tuple[str, ...]
@@ -1578,6 +1614,11 @@ class OracleSafetyStepRecord:
             "current_uav_positions": self.current_uav_positions.to_primitive(),
             "current_uav_velocities": self.current_uav_velocities.to_primitive(),
             "current_service_mask": self.current_service_mask.to_primitive(),
+            "pre_action_context": _json_safe(self.pre_action_context),
+            "executed_service_mask": self.executed_service_mask.to_primitive(),
+            "common_transducer_evidence": _json_safe(
+                self.common_transducer_evidence
+            ),
             "raw_candidate_action": self.raw_candidate_action.to_primitive(),
             "shared_channel_draw_coordinate": [
                 coordinate.to_primitive()
@@ -2059,6 +2100,15 @@ def _oracle_candidate_trace(
             else:
                 raise G0RealizationError("unregistered oracle target schedule state")
             positions = np.asarray(env.uav_positions, dtype=np.float64).copy()
+            ownership = {
+                str(handle): TargetLabel.parse(owner_target)
+                for handle, owner_target in zip(
+                    env._handles, source.assignment.row_to_target
+                )
+            }
+            pre_action_context = _pre_action_context(
+                env, ownership, reserve.key
+            )
             if (
                 arrival is None
                 and step >= latest_departure
@@ -2077,9 +2127,18 @@ def _oracle_candidate_trace(
                 max_vertical_speed=env.max_vertical_speed_mps,
                 time_step=env.time_step,
             )
+            transducer_evidence = _common_transducer_evidence(
+                physical_positions=positions,
+                target_positions=targets,
+                active_mask=active,
+                raw_action=actions,
+            )
             record = env.step_oracle_safety(
                 actions,
                 candidate_id=reserve.key,
+                ownership=ownership,
+                pre_action_context=pre_action_context,
+                common_transducer_evidence=transducer_evidence,
             )
             next_positions = record.next_uav_positions.array().astype(
                 np.float64, copy=False
@@ -2207,6 +2266,67 @@ def _forbidden_oracle_safety_key(value: Any, path: str = "") -> str | None:
     return None
 
 
+def _validate_record_branchpoint_and_transducer(
+    source: G0EpisodeSource,
+    common_prestate: Mapping[str, Any],
+    record: OracleSafetyStepRecord,
+    *,
+    selected_candidate_id: str,
+    expected_target_positions: np.ndarray,
+    expected_rng_state_bindings: Mapping[str, Any] | None = None,
+) -> None:
+    context = _validate_pre_action_context_primitive(
+        record.pre_action_context
+    )
+    expected_context = _expected_pre_action_context(
+        source,
+        common_prestate,
+        physical_step=record.physical_step,
+        selected_candidate_id=selected_candidate_id,
+        rng_state_bindings=expected_rng_state_bindings,
+    )
+    if context != expected_context:
+        raise G0RealizationError(
+            "branchpoint lifecycle/RNG/channel evidence is not reconstructible"
+        )
+    current_mask = record.current_service_mask.array()
+    executed_mask = record.executed_service_mask.array()
+    if (
+        executed_mask.shape != (PHYSICAL_UAVS,)
+        or executed_mask.dtype != np.dtype(np.bool_)
+        or not np.array_equal(executed_mask, current_mask)
+    ):
+        raise G0RealizationError("executed service-mask evidence drifted")
+    transducer = _validate_common_transducer_evidence_primitive(
+        record.common_transducer_evidence
+    )
+    if (
+        not np.array_equal(
+            _native_array_from_primitive(
+                transducer["physical_positions"]
+            ).array(),
+            record.current_uav_positions.array(),
+        )
+        or not np.array_equal(
+            _native_array_from_primitive(
+                transducer["target_positions"]
+            ).array(),
+            np.asarray(expected_target_positions, dtype=np.float64),
+        )
+        or not np.array_equal(
+            _native_array_from_primitive(transducer["active_mask"]).array(),
+            executed_mask,
+        )
+        or not np.array_equal(
+            _native_array_from_primitive(transducer["raw_action"]).array(),
+            record.raw_candidate_action.array(),
+        )
+    ):
+        raise G0RealizationError(
+            "target schedule is not bound to the common transducer"
+        )
+
+
 def validate_oracle_safety_ledger(
     source: G0EpisodeSource,
     ledger: OracleSafetyLedger,
@@ -2243,6 +2363,10 @@ def validate_oracle_safety_ledger(
     )
     if tuple(candidate.candidate_id for candidate in ledger.candidates) != expected_ids:
         raise G0RealizationError("oracle ledger omitted or added a reserve candidate")
+    common_rng_states = ledger.common_prestate.get("rng_states")
+    if not isinstance(common_rng_states, Mapping):
+        raise G0RealizationError("oracle common prestate omitted RNG states")
+    expected_rng_state_bindings = _rng_state_bindings(common_rng_states)
     previous_candidates: list[OracleCandidateSafetyTrace] = []
     for candidate in ledger.candidates:
         if len(candidate.steps) != PHYSICAL_HORIZON:
@@ -2358,6 +2482,14 @@ def validate_oracle_safety_ledger(
                 targets[reserve_row] = primary_xyz
             else:
                 raise G0RealizationError("candidate target schedule is unregistered")
+            _validate_record_branchpoint_and_transducer(
+                source,
+                ledger.common_prestate,
+                record,
+                selected_candidate_id=candidate.candidate_id,
+                expected_target_positions=targets,
+                expected_rng_state_bindings=expected_rng_state_bindings,
+            )
             expected_raw = g1_common_target_actions(
                 physical_positions=current,
                 target_positions=targets,
@@ -2663,6 +2795,16 @@ def oracle_safety_step_from_primitive(value: Any) -> OracleSafetyStepRecord:
         ),
         current_service_mask=_native_array_from_primitive(
             value["current_service_mask"]
+        ),
+        pre_action_context=_validate_pre_action_context_primitive(
+            value["pre_action_context"]
+        ),
+        executed_service_mask=_native_array_from_primitive(
+            value["executed_service_mask"]
+        ),
+        common_transducer_evidence=_validate_common_transducer_evidence_primitive(
+            value["common_transducer_evidence"],
+            recompute=False,
         ),
         raw_candidate_action=_native_array_from_primitive(
             value["raw_candidate_action"]
@@ -3021,26 +3163,81 @@ def _expected_behavioral_target_schedule(
     return schedule
 
 
+def _validate_behavioral_transducer_binding(
+    source: G0EpisodeSource,
+    ledger: OracleSafetyLedger,
+    execution: OracleBehavioralExecution,
+) -> None:
+    schedule = execution.target_schedule.array()
+    if schedule.shape != (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3):
+        raise G0RealizationError("behavioral target schedule shape drifted")
+    common_rng_states = ledger.common_prestate.get("rng_states")
+    if not isinstance(common_rng_states, Mapping):
+        raise G0RealizationError("oracle common prestate omitted RNG states")
+    expected_rng_state_bindings = _rng_state_bindings(common_rng_states)
+    for step, record in enumerate(execution.steps):
+        targets_internal = np.zeros((PHYSICAL_UAVS, 3), dtype=np.float64)
+        targets_internal[source.geometry.slot_to_target] = schedule[step]
+        _validate_record_branchpoint_and_transducer(
+            source,
+            ledger.common_prestate,
+            record,
+            selected_candidate_id=ledger.selected_candidate_id,
+            expected_target_positions=targets_internal,
+            expected_rng_state_bindings=expected_rng_state_bindings,
+        )
+
+
 def _derive_return_ready_step(
     source: G0EpisodeSource,
     execution: OracleBehavioralExecution,
 ) -> int | None:
-    # Safety step records are captured in target-owned internal order.  The
-    # sampled storage permutation is an artifact adapter and must never index
-    # these lifecycle rows.
-    owner_internal_row = _target_internal_row(source.event.owner_target)
+    owner_storage = source.assignment.row_to_target.index(
+        source.event.owner_target.key
+    )
+    initial_owner_handle = initial_lifecycle_handles(source)[owner_storage]
+    replacement_handle = replacement_lifecycle_handle(
+        source, initial_owner_handle
+    )
     primary = source.geometry.coordinate(source.event.owner_target)
     weakest = execution.pre_action_weakest_service.array()
     for step in range(source.event.rejoin + 1, PHYSICAL_HORIZON):
+        current_context = _validate_pre_action_context_primitive(
+            execution.steps[step].pre_action_context
+        )
+        previous_context = _validate_pre_action_context_primitive(
+            execution.steps[step - 1].pre_action_context
+        )
+        if (
+            current_context["event_owner_handle"] != replacement_handle
+            or previous_context["event_owner_handle"] != replacement_handle
+            or int(current_context["event_owner_epoch"]) != 1
+            or int(previous_context["event_owner_epoch"]) != 1
+        ):
+            raise G0RealizationError(
+                "RETURN_READY lifecycle owner/epoch is not reconstructed"
+            )
+        current_rows = {
+            row["handle"]: row
+            for row in current_context["lifecycle_owner_to_internal"]
+        }
+        previous_rows = {
+            row["handle"]: row
+            for row in previous_context["lifecycle_owner_to_internal"]
+        }
+        if replacement_handle not in current_rows or replacement_handle not in previous_rows:
+            raise G0RealizationError("RETURN_READY replacement lifecycle is absent")
+        current_owner_row = int(current_rows[replacement_handle]["internal_row"])
+        previous_owner_row = int(previous_rows[replacement_handle]["internal_row"])
         current = execution.steps[step].current_uav_positions.array()
         previous = execution.steps[step - 1].current_uav_positions.array()
-        mask = execution.steps[step].current_service_mask.array()
-        previous_mask = execution.steps[step - 1].current_service_mask.array()
+        mask = execution.steps[step].executed_service_mask.array()
+        previous_mask = execution.steps[step - 1].executed_service_mask.array()
         if (
-            bool(mask[owner_internal_row])
-            and bool(previous_mask[owner_internal_row])
-            and np.array_equal(current[owner_internal_row, :2], primary)
-            and np.array_equal(previous[owner_internal_row, :2], primary)
+            bool(mask[current_owner_row])
+            and bool(previous_mask[previous_owner_row])
+            and np.array_equal(current[current_owner_row, :2], primary)
+            and np.array_equal(previous[previous_owner_row, :2], primary)
             and float(weakest[step]) >= SERVICE_TARGET
         ):
             return step
@@ -3089,6 +3286,8 @@ def validate_oracle_branch_aware_replay(
     _validate_branch_safety_trace(ledger, selected.steps)
     _validate_branch_safety_trace(ledger, behavior.steps)
     _validate_branch_safety_trace(ledger, behavior_replay.steps)
+    _validate_behavioral_transducer_binding(source, ledger, behavior)
+    _validate_behavioral_transducer_binding(source, ledger, behavior_replay)
     derived_return_ready = _derive_return_ready_step(source, behavior)
     if behavior.return_ready_step != derived_return_ready:
         raise G0RealizationError("stored RETURN_READY step is not causally reconstructed")
@@ -3123,6 +3322,8 @@ def validate_oracle_branch_aware_replay(
             "current_uav_positions",
             "current_uav_velocities",
             "current_service_mask",
+            "pre_action_context",
+            "executed_service_mask",
             "shared_channel_draw_coordinate",
             "shared_channel_draw_block",
         ):
@@ -3134,8 +3335,43 @@ def validate_oracle_branch_aware_replay(
                 raise G0RealizationError("step-R pre-action branchpoint identity failed")
         pre_action = pre_record.raw_candidate_action.array()
         behavior_action = behavior_record.raw_candidate_action.array()
+        pre_transducer = _validate_common_transducer_evidence_primitive(
+            pre_record.common_transducer_evidence
+        )
+        behavior_transducer = _validate_common_transducer_evidence_primitive(
+            behavior_record.common_transducer_evidence
+        )
+        for name in (
+            "transducer_source_sha256",
+            "row_order",
+            "physical_positions",
+            "active_mask",
+            "max_speed",
+            "max_vertical_speed",
+            "time_step",
+        ):
+            if pre_transducer[name] != behavior_transducer[name]:
+                raise G0RealizationError(
+                    "step-R common transducer pre-action inputs drifted"
+                )
+        pre_targets = _native_array_from_primitive(
+            pre_transducer["target_positions"]
+        ).array()
+        behavior_targets = _native_array_from_primitive(
+            behavior_transducer["target_positions"]
+        ).array()
         unaffected = np.ones(PHYSICAL_UAVS, dtype=np.bool_)
         unaffected[selected_internal_row] = False
+        if (
+            not np.array_equal(pre_targets[unaffected], behavior_targets[unaffected])
+            or np.array_equal(
+                pre_targets[selected_internal_row],
+                behavior_targets[selected_internal_row],
+            )
+        ):
+            raise G0RealizationError(
+                "RETURN_READY target switch is not isolated to the reserve"
+            )
         if not np.array_equal(pre_action[unaffected], behavior_action[unaffected]):
             raise G0RealizationError("RETURN_READY changed an unaffected owner action")
         # The selected target changes before action construction at R.  The
@@ -3323,6 +3559,429 @@ def _random_state_primitive(random_state: np.random.RandomState) -> dict[str, An
         "has_gauss": int(has_gauss),
         "cached_gaussian": float(cached_gaussian),
     }
+
+
+def _validate_random_state_primitive(value: Any) -> dict[str, Any]:
+    expected = {"algorithm", "keys", "position", "has_gauss", "cached_gaussian"}
+    if not isinstance(value, Mapping) or set(value) != expected:
+        raise G0RealizationError("branchpoint RNG-state schema drifted")
+    keys = _native_array_from_primitive(value["keys"])
+    key_array = keys.array()
+    if (
+        str(value["algorithm"]) != "MT19937"
+        or key_array.shape != (624,)
+        or key_array.dtype != np.dtype(np.uint32)
+        or not 0 <= int(value["position"]) <= 624
+        or int(value["has_gauss"]) not in (0, 1)
+        or not math.isfinite(float(value["cached_gaussian"]))
+    ):
+        raise G0RealizationError("branchpoint RNG-state primitive is invalid")
+    return {
+        "algorithm": "MT19937",
+        "keys": keys.to_primitive(),
+        "position": int(value["position"]),
+        "has_gauss": int(value["has_gauss"]),
+        "cached_gaussian": float(value["cached_gaussian"]),
+    }
+
+
+def _validate_pre_action_context_primitive(value: Any) -> dict[str, Any]:
+    if not isinstance(value, Mapping) or set(value) != _PRE_ACTION_CONTEXT_KEYS:
+        raise G0RealizationError("branchpoint pre-action context schema drifted")
+    physical_step = int(value["physical_step"])
+    if not 0 <= physical_step < PHYSICAL_HORIZON:
+        raise G0RealizationError("branchpoint physical step is outside H")
+
+    lifecycle_value = value["lifecycle_owner_to_internal"]
+    if not isinstance(lifecycle_value, list) or len(lifecycle_value) != PHYSICAL_UAVS:
+        raise G0RealizationError("branchpoint lifecycle inventory is incomplete")
+    lifecycle: list[dict[str, Any]] = []
+    for item in lifecycle_value:
+        if not isinstance(item, Mapping) or set(item) != _LIFECYCLE_CONTEXT_ROW_KEYS:
+            raise G0RealizationError("branchpoint lifecycle row schema drifted")
+        label = TargetLabel.parse(str(item["owner_target"]))
+        row = {
+            "handle": str(item["handle"]),
+            "epoch": int(item["epoch"]),
+            "internal_row": int(item["internal_row"]),
+            "owner_target": label.key,
+        }
+        if not row["handle"] or row["epoch"] not in (0, 1):
+            raise G0RealizationError("branchpoint lifecycle identity is invalid")
+        lifecycle.append(row)
+    if (
+        [row["internal_row"] for row in lifecycle] != list(range(PHYSICAL_UAVS))
+        or len({row["handle"] for row in lifecycle}) != PHYSICAL_UAVS
+        or len({row["owner_target"] for row in lifecycle}) != PHYSICAL_UAVS
+    ):
+        raise G0RealizationError("branchpoint lifecycle ordering is ambiguous")
+
+    event_owner_handle = str(value["event_owner_handle"])
+    event_owner_epoch = int(value["event_owner_epoch"])
+    selected_reserve_handle = str(value["selected_reserve_handle"])
+    selected_target = TargetLabel.parse(
+        str(value["selected_reserve_original_target"])
+    )
+    if selected_target.kind is not TargetKind.STAGE:
+        raise G0RealizationError("branchpoint selected owner is not a reserve")
+    by_handle = {row["handle"]: row for row in lifecycle}
+    if (
+        event_owner_handle not in by_handle
+        or by_handle[event_owner_handle]["epoch"] != event_owner_epoch
+        or selected_reserve_handle not in by_handle
+        or by_handle[selected_reserve_handle]["owner_target"] != selected_target.key
+        or selected_reserve_handle == event_owner_handle
+    ):
+        raise G0RealizationError("branchpoint owner/epoch identity is inconsistent")
+
+    survivor_value = value["survivor_ownership"]
+    if not isinstance(survivor_value, list) or len(survivor_value) != 6:
+        raise G0RealizationError("branchpoint survivor-controller state is incomplete")
+    survivor: list[dict[str, Any]] = []
+    for item in survivor_value:
+        if not isinstance(item, Mapping) or set(item) != _LIFECYCLE_CONTEXT_ROW_KEYS:
+            raise G0RealizationError("branchpoint survivor row schema drifted")
+        canonical = {
+            "handle": str(item["handle"]),
+            "epoch": int(item["epoch"]),
+            "internal_row": int(item["internal_row"]),
+            "owner_target": TargetLabel.parse(str(item["owner_target"])).key,
+        }
+        if canonical not in lifecycle:
+            raise G0RealizationError("branchpoint survivor is not lifecycle-owned")
+        survivor.append(canonical)
+    expected_survivors = [
+        row
+        for row in lifecycle
+        if row["handle"] not in {event_owner_handle, selected_reserve_handle}
+    ]
+    if survivor != expected_survivors:
+        raise G0RealizationError("branchpoint survivor-controller ordering drifted")
+    if value["survivor_controller_rng_owners"] != []:
+        raise G0RealizationError("branchpoint controller unexpectedly owns RNG")
+
+    rng_value = value["non_controller_rng_states"]
+    if (
+        not isinstance(rng_value, Mapping)
+        or not rng_value
+        or list(rng_value) != sorted(str(key) for key in rng_value)
+    ):
+        raise G0RealizationError("branchpoint non-controller RNG inventory drifted")
+    rng_states: dict[str, dict[str, str]] = {}
+    for name, item in rng_value.items():
+        expected_binding_keys = {"state_source", "state_sha256"}
+        if not isinstance(item, Mapping) or set(item) != expected_binding_keys:
+            raise G0RealizationError("branchpoint RNG binding schema drifted")
+        state_source = str(item["state_source"])
+        state_sha256 = str(item["state_sha256"])
+        if (
+            state_source != f"common_prestate.rng_states/{name}"
+            or len(state_sha256) != 64
+            or any(character not in "0123456789abcdef" for character in state_sha256)
+        ):
+            raise G0RealizationError("branchpoint RNG binding is invalid")
+        rng_states[str(name)] = {
+            "state_source": state_source,
+            "state_sha256": state_sha256,
+        }
+    if "_channel_rng" not in rng_states:
+        raise G0RealizationError("branchpoint omitted the registered channel RNG")
+
+    cursor = value["channel_tape_cursor"]
+    if (
+        not isinstance(cursor, Mapping)
+        or set(cursor) != {"draw_ordinal", "coordinate_count", "block_count"}
+        or any(int(cursor[key]) != 0 for key in cursor)
+    ):
+        raise G0RealizationError("branchpoint channel-tape cursor is not empty")
+    return {
+        "physical_step": physical_step,
+        "lifecycle_owner_to_internal": lifecycle,
+        "event_owner_handle": event_owner_handle,
+        "event_owner_epoch": event_owner_epoch,
+        "selected_reserve_handle": selected_reserve_handle,
+        "selected_reserve_original_target": selected_target.key,
+        "survivor_ownership": survivor,
+        "survivor_controller_rng_owners": [],
+        "non_controller_rng_states": rng_states,
+        "channel_tape_cursor": {
+            "draw_ordinal": 0,
+            "coordinate_count": 0,
+            "block_count": 0,
+        },
+    }
+
+
+def _validate_common_transducer_evidence_primitive(
+    value: Any,
+    *,
+    recompute: bool = True,
+) -> dict[str, Any]:
+    if not isinstance(value, Mapping) or set(value) != _COMMON_TRANSDUCER_EVIDENCE_KEYS:
+        raise G0RealizationError("common transducer evidence schema drifted")
+    positions = _native_array_from_primitive(value["physical_positions"])
+    targets = _native_array_from_primitive(value["target_positions"])
+    active = _native_array_from_primitive(value["active_mask"])
+    raw = _native_array_from_primitive(value["raw_action"])
+    position_array = positions.array()
+    target_array = targets.array()
+    active_array = active.array()
+    raw_array = raw.array()
+    if (
+        str(value["transducer_source_sha256"]) != common_tracker_source_digest()
+        or str(value["row_order"]) != "target_owned_internal"
+        or position_array.shape != (PHYSICAL_UAVS, 3)
+        or position_array.dtype != np.dtype(np.float64)
+        or target_array.shape != (PHYSICAL_UAVS, 3)
+        or target_array.dtype != np.dtype(np.float64)
+        or active_array.shape != (PHYSICAL_UAVS,)
+        or active_array.dtype != np.dtype(np.bool_)
+        or raw_array.shape != (PHYSICAL_UAVS, ACTION_DIM)
+        or raw_array.dtype != np.dtype(np.float32)
+        or not np.isfinite(position_array).all()
+        or not np.isfinite(target_array).all()
+        or not np.isfinite(raw_array).all()
+        or float(value["max_speed"]) != 30.0
+        or float(value["max_vertical_speed"]) != 5.0
+        or float(value["time_step"]) != 1.0
+    ):
+        raise G0RealizationError("common transducer primitive is not frozen G1")
+    if recompute:
+        expected_raw = g1_common_target_actions(
+            physical_positions=position_array,
+            target_positions=target_array,
+            active_mask=active_array,
+            max_speed=30.0,
+            max_vertical_speed=5.0,
+            time_step=1.0,
+        )
+        if not np.array_equal(raw_array, expected_raw):
+            raise G0RealizationError(
+                "common transducer output is not independently recomputed"
+            )
+    return {
+        "transducer_source_sha256": common_tracker_source_digest(),
+        "row_order": "target_owned_internal",
+        "physical_positions": positions.to_primitive(),
+        "target_positions": targets.to_primitive(),
+        "active_mask": active.to_primitive(),
+        "raw_action": raw.to_primitive(),
+        "max_speed": 30.0,
+        "max_vertical_speed": 5.0,
+        "time_step": 1.0,
+    }
+
+
+def _common_transducer_evidence(
+    *,
+    physical_positions: np.ndarray,
+    target_positions: np.ndarray,
+    active_mask: np.ndarray,
+    raw_action: np.ndarray,
+) -> dict[str, Any]:
+    return _validate_common_transducer_evidence_primitive(
+        {
+            "transducer_source_sha256": common_tracker_source_digest(),
+            "row_order": "target_owned_internal",
+            "physical_positions": _NativeArrayEvidence.from_array(
+                np.asarray(physical_positions, dtype=np.float64)
+            ).to_primitive(),
+            "target_positions": _NativeArrayEvidence.from_array(
+                np.asarray(target_positions, dtype=np.float64)
+            ).to_primitive(),
+            "active_mask": _NativeArrayEvidence.from_array(
+                np.asarray(active_mask, dtype=np.bool_)
+            ).to_primitive(),
+            "raw_action": _NativeArrayEvidence.from_array(
+                np.asarray(raw_action, dtype=np.float32)
+            ).to_primitive(),
+            "max_speed": 30.0,
+            "max_vertical_speed": 5.0,
+            "time_step": 1.0,
+        }
+    )
+
+
+def _rng_state_bindings(
+    rng_states: Mapping[str, Any],
+) -> dict[str, dict[str, str]]:
+    result: dict[str, dict[str, str]] = {}
+    for name, item in sorted(rng_states.items()):
+        key = str(name)
+        if isinstance(item, Mapping) and set(item) == {
+            "state_source",
+            "state_sha256",
+        }:
+            source = str(item["state_source"])
+            digest = str(item["state_sha256"])
+            if (
+                source != f"common_prestate.rng_states/{key}"
+                or len(digest) != 64
+                or any(character not in "0123456789abcdef" for character in digest)
+            ):
+                raise G0RealizationError("branchpoint RNG binding is invalid")
+            result[key] = {"state_source": source, "state_sha256": digest}
+        else:
+            result[key] = {
+                "state_source": f"common_prestate.rng_states/{key}",
+                "state_sha256": sha256_json(
+                    _validate_random_state_primitive(item)
+                ),
+            }
+    return result
+
+
+def _make_pre_action_context(
+    source: G0EpisodeSource,
+    *,
+    physical_step: int,
+    handles: Sequence[str],
+    epochs: Sequence[int],
+    selected_candidate_id: str,
+    rng_states: Mapping[str, Any],
+) -> dict[str, Any]:
+    if len(handles) != PHYSICAL_UAVS or len(epochs) != PHYSICAL_UAVS:
+        raise G0RealizationError("branchpoint lifecycle source inventory drifted")
+    lifecycle: list[dict[str, Any]] = []
+    for storage_row, (handle, epoch, owner_target) in enumerate(
+        zip(handles, epochs, source.assignment.row_to_target)
+    ):
+        lifecycle.append(
+            {
+                "handle": str(handle),
+                "epoch": int(epoch),
+                "internal_row": int(source.geometry.slot_to_target[storage_row]),
+                "owner_target": TargetLabel.parse(owner_target).key,
+            }
+        )
+    lifecycle.sort(key=lambda row: int(row["internal_row"]))
+    by_target = {row["owner_target"]: row for row in lifecycle}
+    selected = TargetLabel.parse(selected_candidate_id)
+    event_row = by_target[source.event.owner_target.key]
+    selected_row = by_target[selected.key]
+    context = {
+        "physical_step": int(physical_step),
+        "lifecycle_owner_to_internal": lifecycle,
+        "event_owner_handle": event_row["handle"],
+        "event_owner_epoch": int(event_row["epoch"]),
+        "selected_reserve_handle": selected_row["handle"],
+        "selected_reserve_original_target": selected.key,
+        "survivor_ownership": [
+            dict(row)
+            for row in lifecycle
+            if row["handle"] not in {event_row["handle"], selected_row["handle"]}
+        ],
+        "survivor_controller_rng_owners": [],
+        "non_controller_rng_states": _rng_state_bindings(rng_states),
+        "channel_tape_cursor": {
+            "draw_ordinal": 0,
+            "coordinate_count": 0,
+            "block_count": 0,
+        },
+    }
+    return _validate_pre_action_context_primitive(context)
+
+
+def _pre_action_context(
+    env: "UAVSourceIdentifiabilityEnv",
+    ownership: Mapping[str, TargetLabel],
+    selected_candidate_id: str,
+) -> dict[str, Any]:
+    env._synchronize_service_mask()
+    expected_ownership = {
+        str(handle): TargetLabel.parse(owner_target).key
+        for handle, owner_target in zip(
+            env._handles, env.g0_source.assignment.row_to_target
+        )
+    }
+    actual_ownership = {
+        str(handle): TargetLabel.parse(label.key).key
+        for handle, label in ownership.items()
+    }
+    if actual_ownership != expected_ownership:
+        raise G0RealizationError("branchpoint controller ownership is stale or forged")
+    live_rngs = {
+        str(name): item
+        for name, item in sorted(env.__dict__.items())
+        if isinstance(item, np.random.RandomState)
+    }
+    rng_states = getattr(env, "_g0_branchpoint_rng_bindings", None)
+    snapshots = getattr(env, "_g0_branchpoint_rng_snapshots", None)
+    if rng_states is None or snapshots is None:
+        primitives = {
+            name: _random_state_primitive(item)
+            for name, item in live_rngs.items()
+        }
+        rng_states = _rng_state_bindings(primitives)
+        snapshots = {
+            name: (
+                state[0],
+                np.asarray(state[1], dtype=np.uint32).copy(),
+                int(state[2]),
+                int(state[3]),
+                float(state[4]),
+            )
+            for name, item in live_rngs.items()
+            for state in (item.get_state(),)
+        }
+        env._g0_branchpoint_rng_bindings = rng_states
+        env._g0_branchpoint_rng_snapshots = snapshots
+    if set(live_rngs) != set(snapshots):
+        raise G0RealizationError("branchpoint RNG ownership changed")
+    for name, item in live_rngs.items():
+        current = item.get_state()
+        frozen = snapshots[name]
+        if not (
+            str(current[0]) == str(frozen[0])
+            and np.array_equal(current[1], frozen[1])
+            and int(current[2]) == int(frozen[2])
+            and int(current[3]) == int(frozen[3])
+            and float(current[4]) == float(frozen[4])
+        ):
+            raise G0RealizationError("branchpoint non-controller RNG state changed")
+    return _make_pre_action_context(
+        env.g0_source,
+        physical_step=int(env.current_step),
+        handles=env._handles,
+        epochs=env._epochs,
+        selected_candidate_id=selected_candidate_id,
+        rng_states=rng_states,
+    )
+
+
+def _expected_pre_action_context(
+    source: G0EpisodeSource,
+    common_prestate: Mapping[str, Any],
+    *,
+    physical_step: int,
+    selected_candidate_id: str,
+    rng_state_bindings: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    handles = list(initial_lifecycle_handles(source))
+    epochs = np.zeros(PHYSICAL_UAVS, dtype=np.int64)
+    owner_storage = source.assignment.row_to_target.index(
+        source.event.owner_target.key
+    )
+    if int(physical_step) >= source.event.rejoin:
+        handles[owner_storage] = replacement_lifecycle_handle(
+            source, handles[owner_storage]
+        )
+        epochs[owner_storage] = 1
+    rng_states = (
+        rng_state_bindings
+        if rng_state_bindings is not None
+        else common_prestate.get("rng_states")
+    )
+    if not isinstance(rng_states, Mapping):
+        raise G0RealizationError("common prestate omitted branchpoint RNG evidence")
+    return _make_pre_action_context(
+        source,
+        physical_step=int(physical_step),
+        handles=handles,
+        epochs=epochs,
+        selected_candidate_id=selected_candidate_id,
+        rng_states=rng_states,
+    )
 
 
 def _candidate_state_value(value: Any, *, path: str) -> Any:
@@ -3751,6 +4410,9 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         *,
         candidate_id: str,
         raw_internal: np.ndarray,
+        pre_action_context: Mapping[str, Any],
+        executed_service_mask: np.ndarray,
+        common_transducer_evidence: Mapping[str, Any],
     ) -> dict[str, Any]:
         if getattr(self, "_oracle_guard_capacity_reads", None) is not None:
             raise G0RealizationError("nested oracle safety capture is forbidden")
@@ -3765,6 +4427,13 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             "positions": np.asarray(self.uav_positions).copy(),
             "velocities": np.asarray(self.last_actual_velocities).copy(),
             "service_mask": np.asarray(self._service_active_mask).copy(),
+            "pre_action_context": _json_safe(pre_action_context),
+            "executed_service_mask": np.asarray(
+                executed_service_mask, dtype=np.bool_
+            ).copy(),
+            "common_transducer_evidence": _json_safe(
+                common_transducer_evidence
+            ),
             "raw_internal": np.asarray(raw_internal, dtype=np.float32).copy(),
             "connections": {
                 "user": _NativeArrayEvidence.from_array(self.connections),
@@ -3803,6 +4472,17 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             current_service_mask=_NativeArrayEvidence.from_array(
                 capture["service_mask"]
             ),
+            pre_action_context=_validate_pre_action_context_primitive(
+                capture["pre_action_context"]
+            ),
+            executed_service_mask=_NativeArrayEvidence.from_array(
+                capture["executed_service_mask"]
+            ),
+            common_transducer_evidence=(
+                _validate_common_transducer_evidence_primitive(
+                    capture["common_transducer_evidence"]
+                )
+            ),
             raw_candidate_action=_NativeArrayEvidence.from_array(
                 capture["raw_internal"]
             ),
@@ -3830,6 +4510,9 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         actions_internal: np.ndarray,
         *,
         candidate_id: str,
+        ownership: Mapping[str, TargetLabel],
+        pre_action_context: Mapping[str, Any],
+        common_transducer_evidence: Mapping[str, Any],
     ) -> OracleSafetyStepRecord:
         """Advance only physical/channel/routing safety state, never service/reward."""
 
@@ -3841,9 +4524,41 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             raise G0RealizationError("oracle safety action is outside support")
         if not np.array_equal(dense[:, 2], np.zeros(PHYSICAL_UAVS, dtype=np.float32)):
             raise G0RealizationError("oracle safety action changed fixed altitude")
+        expected_context = _pre_action_context(
+            self, ownership, str(candidate_id)
+        )
+        actual_context = _validate_pre_action_context_primitive(
+            pre_action_context
+        )
+        if actual_context != expected_context:
+            raise G0RealizationError("oracle safety branchpoint context is stale")
+        transducer = _validate_common_transducer_evidence_primitive(
+            common_transducer_evidence
+        )
+        if (
+            not np.array_equal(
+                _native_array_from_primitive(
+                    transducer["physical_positions"]
+                ).array(),
+                np.asarray(self.uav_positions, dtype=np.float64),
+            )
+            or not np.array_equal(
+                _native_array_from_primitive(transducer["active_mask"]).array(),
+                self._service_active_mask,
+            )
+            or not np.array_equal(
+                _native_array_from_primitive(transducer["raw_action"]).array(),
+                dense,
+            )
+        ):
+            raise G0RealizationError("oracle safety transducer binding is stale")
+        executed_service_mask = self._service_active_mask.copy()
         capture = self._begin_oracle_safety_capture(
             candidate_id=candidate_id,
             raw_internal=dense,
+            pre_action_context=actual_context,
+            executed_service_mask=executed_service_mask,
+            common_transducer_evidence=transducer,
         )
         action_dict = {
             agent: dense[row].copy()
@@ -3891,7 +4606,14 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         self._synchronize_service_mask(force=True)
         return record
 
-    def step_dense(self, actions: np.ndarray) -> G0Transition:
+    def step_dense(
+        self,
+        actions: np.ndarray,
+        *,
+        oracle_ownership: Mapping[str, TargetLabel] | None = None,
+        oracle_pre_action_context: Mapping[str, Any] | None = None,
+        oracle_common_transducer_evidence: Mapping[str, Any] | None = None,
+    ) -> G0Transition:
         self._synchronize_service_mask()
         dense = np.asarray(actions, dtype=np.float32)
         if dense.shape != (PHYSICAL_UAVS, ACTION_DIM):
@@ -3910,14 +4632,62 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         behavioral_candidate = getattr(
             self, "_oracle_behavioral_candidate_id", None
         )
-        safety_capture = (
-            self._begin_oracle_safety_capture(
+        safety_capture = None
+        if behavioral_candidate is not None:
+            if (
+                oracle_ownership is None
+                or oracle_pre_action_context is None
+                or oracle_common_transducer_evidence is None
+            ):
+                raise G0RealizationError(
+                    "behavioral branch omitted branchpoint/transducer evidence"
+                )
+            expected_context = _pre_action_context(
+                self, oracle_ownership, str(behavioral_candidate)
+            )
+            actual_context = _validate_pre_action_context_primitive(
+                oracle_pre_action_context
+            )
+            if actual_context != expected_context:
+                raise G0RealizationError("behavioral branchpoint context is stale")
+            transducer = _validate_common_transducer_evidence_primitive(
+                oracle_common_transducer_evidence
+            )
+            if (
+                not np.array_equal(
+                    _native_array_from_primitive(
+                        transducer["physical_positions"]
+                    ).array(),
+                    np.asarray(self.uav_positions, dtype=np.float64),
+                )
+                or not np.array_equal(
+                    _native_array_from_primitive(
+                        transducer["active_mask"]
+                    ).array(),
+                    executed_internal,
+                )
+                or not np.array_equal(
+                    _native_array_from_primitive(transducer["raw_action"]).array(),
+                    dense_internal,
+                )
+            ):
+                raise G0RealizationError("behavioral transducer binding is stale")
+            safety_capture = self._begin_oracle_safety_capture(
                 candidate_id=str(behavioral_candidate),
                 raw_internal=dense_internal,
+                pre_action_context=actual_context,
+                executed_service_mask=executed_internal,
+                common_transducer_evidence=transducer,
             )
-            if behavioral_candidate is not None
-            else None
-        )
+        elif any(
+            item is not None
+            for item in (
+                oracle_ownership,
+                oracle_pre_action_context,
+                oracle_common_transducer_evidence,
+            )
+        ):
+            raise G0RealizationError("non-oracle step received oracle evidence")
         action_dict = {
             agent: dense_internal[row].copy()
             for row, agent in enumerate(self.possible_agents)
@@ -4263,14 +5033,34 @@ def _build_selected_oracle_behavioral_execution(
                 ],
             )
             weakest_rows.append(float(information.weakest_hotspot_service))
+            pre_action_context = _pre_action_context(
+                env, controller.ownership, ledger.selected_candidate_id
+            )
+            target_map = controller.target_map(
+                information, physical_step=step
+            )
             targets, active = target_map_to_dense(
                 rows=rows,
-                target_map=controller.target_map(
-                    information, physical_step=step
-                ),
+                target_map=target_map,
             )
             target_rows.append(np.asarray(targets, dtype=np.float64).copy())
-            actions = g1_common_target_actions(
+            positions_internal = np.asarray(
+                env.uav_positions, dtype=np.float64
+            ).copy()
+            targets_internal = np.zeros_like(targets)
+            targets_internal[env._storage_to_internal] = targets
+            active_internal = np.zeros(PHYSICAL_UAVS, dtype=np.bool_)
+            active_internal[env._storage_to_internal] = active
+            actions_internal = g1_common_target_actions(
+                physical_positions=positions_internal,
+                target_positions=targets_internal,
+                active_mask=active_internal,
+                max_speed=env.max_speed,
+                max_vertical_speed=env.max_vertical_speed_mps,
+                time_step=env.time_step,
+            )
+            actions = actions_internal[env._storage_to_internal]
+            storage_actions = g1_common_target_actions(
                 physical_positions=np.stack([row.position for row in rows]),
                 target_positions=targets,
                 active_mask=active,
@@ -4278,7 +5068,22 @@ def _build_selected_oracle_behavioral_execution(
                 max_vertical_speed=env.max_vertical_speed_mps,
                 time_step=env.time_step,
             )
-            transition = env.step_dense(actions)
+            if not np.array_equal(actions, storage_actions):
+                raise G0RealizationError(
+                    "common transducer lost registered permutation equivariance"
+                )
+            transducer_evidence = _common_transducer_evidence(
+                physical_positions=positions_internal,
+                target_positions=targets_internal,
+                active_mask=active_internal,
+                raw_action=actions_internal,
+            )
+            transition = env.step_dense(
+                actions,
+                oracle_ownership=controller.ownership,
+                oracle_pre_action_context=pre_action_context,
+                oracle_common_transducer_evidence=transducer_evidence,
+            )
             if transition.physical_step != step:
                 raise G0RealizationError("behavioral replay physical step drifted")
             pending_events = transition.boundary_events

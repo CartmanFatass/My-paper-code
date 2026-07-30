@@ -22,6 +22,37 @@ def oracle_safety_bundle() -> tuple[
     return source, ledger, qualification
 
 
+@pytest.fixture(scope="module")
+def oracle_behavior_bundle(
+    oracle_safety_bundle: tuple[
+        g0.G0EpisodeSource,
+        g0.OracleSafetyLedger,
+        g0.OracleQualificationCertificate,
+    ],
+) -> tuple[
+    g0.G0EpisodeSource,
+    g0.OracleSafetyLedger,
+    g0.OracleCandidateSafetyTrace,
+    g0.OracleBehavioralExecution,
+]:
+    source, ledger, _qualification = oracle_safety_bundle
+    selected = next(
+        candidate
+        for candidate in ledger.candidates
+        if candidate.candidate_id == ledger.selected_candidate_id
+    )
+    behavior = g0._build_selected_oracle_behavioral_execution(source, ledger)
+    return source, ledger, selected, behavior
+
+
+def _reseal_behavioral_primitive(value: dict) -> dict:
+    result = copy.deepcopy(value)
+    result["trace_sha256"] = g0.sha256_json(
+        {key: item for key, item in result.items() if key != "trace_sha256"}
+    )
+    return result
+
+
 def _rows(
     source: g0.G0EpisodeSource,
     *,
@@ -417,20 +448,24 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         target_schedule=forged_target_evidence,
         trace_sha256=g0.sha256_json(forged_body),
     )
-    with pytest.raises(g0.G0RealizationError, match="target switch"):
+    with pytest.raises(
+        g0.G0RealizationError,
+        match="target switch|target schedule is not bound",
+    ):
         g0.validate_oracle_branch_aware_replay(
             source, ledger, selected, forged, forged
         )
 
 
 def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
-    oracle_safety_bundle: tuple[
+    oracle_behavior_bundle: tuple[
         g0.G0EpisodeSource,
         g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        g0.OracleCandidateSafetyTrace,
+        g0.OracleBehavioralExecution,
     ],
 ) -> None:
-    source, ledger, _qualification = oracle_safety_bundle
+    source, ledger, selected, execution = oracle_behavior_bundle
     assert source.event.onset == 191
     assert source.event.rejoin == 272
     assert ledger.selected_candidate_id == "stage/+1"
@@ -440,51 +475,118 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
     )
     assert owner_internal == 2
     assert owner_storage == 7
-
-    selected = next(
-        candidate
-        for candidate in ledger.candidates
-        if candidate.candidate_id == ledger.selected_candidate_id
-    )
-    service = np.zeros(g0.PHYSICAL_HORIZON, dtype=np.float64)
-    service[273:] = 1.0
-    service_evidence = g0._NativeArrayEvidence.from_array(service)
-    target_evidence = g0._NativeArrayEvidence.from_array(
-        g0._expected_behavioral_target_schedule(source, ledger, 273)
-    )
-    # The target switches before step-273 action construction, while the
-    # frozen contract explicitly permits a coincident raw-action byte row.
-    behavior_steps = list(selected.steps)
-    body = {
-        "selected_candidate_id": ledger.selected_candidate_id,
-        "return_ready_step": 273,
-        "steps": [step.to_primitive() for step in behavior_steps],
-        "target_schedule": target_evidence.to_primitive(),
-        "pre_action_weakest_service": service_evidence.to_primitive(),
-    }
-    execution = g0.OracleBehavioralExecution(
-        selected_candidate_id=ledger.selected_candidate_id,
-        return_ready_step=273,
-        steps=tuple(behavior_steps),
-        target_schedule=target_evidence,
-        pre_action_weakest_service=service_evidence,
-        trace_sha256=g0.sha256_json(body),
+    independent = g0.oracle_behavioral_execution_from_primitive(
+        execution.to_primitive()
     )
     certificate = g0.validate_oracle_branch_aware_replay(
-        source, ledger, selected, execution, execution
+        source, ledger, selected, execution, independent
     )
     assert certificate.return_ready_step == 273
     assert certificate.branchpoint_identity_ok is True
+    context = execution.steps[273].pre_action_context
+    assert context == g0._expected_pre_action_context(
+        source,
+        ledger.common_prestate,
+        physical_step=273,
+        selected_candidate_id=ledger.selected_candidate_id,
+    )
+    selected_internal = g0._target_internal_row(ledger.selected_candidate_id)
+    assert np.array_equal(
+        selected.steps[273].raw_candidate_action.array()[selected_internal],
+        execution.steps[273].raw_candidate_action.array()[selected_internal],
+    )
 
-    stale_body = {**body, "return_ready_step": 280}
-    stale = replace(
-        execution,
-        return_ready_step=280,
-        trace_sha256=g0.sha256_json(stale_body),
+    stale_primitive = execution.to_primitive()
+    stale_primitive["return_ready_step"] = 280
+    stale = g0.oracle_behavioral_execution_from_primitive(
+        _reseal_behavioral_primitive(stale_primitive)
     )
     with pytest.raises(g0.G0RealizationError, match="causally reconstructed"):
         g0.validate_oracle_branch_aware_replay(
             source, ledger, selected, stale, stale
+        )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        "missing_lifecycle",
+        "missing_rng",
+        "missing_channel_cursor",
+        "tampered_epoch",
+    ),
+)
+def test_branchpoint_primitives_are_required_and_independently_reconstructed(
+    oracle_behavior_bundle: tuple[
+        g0.G0EpisodeSource,
+        g0.OracleSafetyLedger,
+        g0.OracleCandidateSafetyTrace,
+        g0.OracleBehavioralExecution,
+    ],
+    mutation: str,
+) -> None:
+    source, ledger, selected, execution = oracle_behavior_bundle
+    primitive = execution.to_primitive()
+    context = primitive["steps"][273]["pre_action_context"]
+    if mutation == "missing_lifecycle":
+        context.pop("lifecycle_owner_to_internal")
+    elif mutation == "missing_rng":
+        context.pop("non_controller_rng_states")
+    elif mutation == "missing_channel_cursor":
+        context.pop("channel_tape_cursor")
+    else:
+        context["event_owner_epoch"] = 0
+    tampered = _reseal_behavioral_primitive(primitive)
+    with pytest.raises(g0.G0RealizationError, match="branchpoint|lifecycle"):
+        g0.validate_oracle_branch_aware_replay(
+            source, ledger, selected, tampered, tampered
+        )
+
+
+def test_target_schedule_requires_recomputed_common_transducer_binding(
+    oracle_behavior_bundle: tuple[
+        g0.G0EpisodeSource,
+        g0.OracleSafetyLedger,
+        g0.OracleCandidateSafetyTrace,
+        g0.OracleBehavioralExecution,
+    ],
+) -> None:
+    source, ledger, selected, execution = oracle_behavior_bundle
+    attached = execution.to_primitive()
+    attached["steps"] = [step.to_primitive() for step in selected.steps]
+    attached = _reseal_behavioral_primitive(attached)
+    with pytest.raises(
+        g0.G0RealizationError,
+        match="target schedule is not bound|prefix differs",
+    ):
+        g0.validate_oracle_branch_aware_replay(
+            source, ledger, selected, attached, attached
+        )
+
+
+@pytest.mark.parametrize("field", ("physical_positions", "raw_action"))
+def test_tampered_common_transducer_input_or_output_fails_closed(
+    oracle_behavior_bundle: tuple[
+        g0.G0EpisodeSource,
+        g0.OracleSafetyLedger,
+        g0.OracleCandidateSafetyTrace,
+        g0.OracleBehavioralExecution,
+    ],
+    field: str,
+) -> None:
+    source, ledger, selected, execution = oracle_behavior_bundle
+    primitive = execution.to_primitive()
+    evidence = primitive["steps"][273]["common_transducer_evidence"]
+    array = g0._native_array_from_primitive(evidence[field]).array()
+    array.flat[0] += 1.0 if array.dtype == np.dtype(np.float64) else 0.125
+    evidence[field] = g0._NativeArrayEvidence.from_array(array).to_primitive()
+    tampered = _reseal_behavioral_primitive(primitive)
+    with pytest.raises(
+        g0.G0RealizationError,
+        match="transducer|target schedule",
+    ):
+        g0.validate_oracle_branch_aware_replay(
+            source, ledger, selected, tampered, tampered
         )
 
 

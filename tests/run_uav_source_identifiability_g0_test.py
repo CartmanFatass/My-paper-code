@@ -172,6 +172,29 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
 
     replay_path.write_bytes(original_replay)
     manifest_path.write_bytes(original_manifest)
+    replay = _load(replay_path)
+    for name in ("behavioral_execution", "behavioral_self_replay"):
+        replay[name]["steps"][273]["pre_action_context"].pop(
+            "channel_tape_cursor"
+        )
+        replay[name]["trace_sha256"] = source.sha256_json(
+            {
+                key: value
+                for key, value in replay[name].items()
+                if key != "trace_sha256"
+            }
+        )
+    _store(replay_path, replay)
+    manifest = _load(manifest_path)
+    manifest["oracle_behavioral_replay_proof"]["sha256"] = runner._digest(
+        replay_path
+    )
+    _store(manifest_path, manifest)
+    with pytest.raises(source.G0RealizationError, match="branchpoint"):
+        runner.validate_source_artifacts(root)
+
+    replay_path.write_bytes(original_replay)
+    manifest_path.write_bytes(original_manifest)
     evaluation_path = root / runner.EVALUATION_MANIFEST
     evaluation = _load(evaluation_path)
     evaluation["production_episode_validity_witness"] = {

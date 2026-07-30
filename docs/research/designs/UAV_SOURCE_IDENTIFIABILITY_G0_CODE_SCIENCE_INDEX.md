@@ -12,6 +12,7 @@ oracle_safety_round=20260730_uav_g0_oracle_safety_information_contract_clarifica
 behavioral_replay_round=20260730_uav_g0_behavioral_replay_contract_clarification
 return_ready_step_round=20260730_uav_g0_return_ready_step_contract_clarification
 return_ready_step_disposition=G0_RETURN_READY_STEP_DISPOSITION=KEEP_CAUSAL_R_273
+branchpoint_transducer_repair_assignment=UAV_SOURCE_IDENTIFIABILITY_G0_BRANCHPOINT_AND_TRANSDUCER_EVIDENCE_REPAIR
 claim_scope=SOURCE_IDENTIFIABILITY_G0_ONLY
 formal_execution_authorized=false
 learning=false
@@ -115,6 +116,25 @@ is executed and independently replayed. `validate_oracle_branch_aware_replay`
 requires complete P/B byte identity for every step before causal `R`, identical
 pre-action branchpoint state at `R`, an unchanged shared exogenous ledger for
 all steps, and byte-exact self-replay within each post-`R` branch.
+
+Every safety step now serializes an exact-schema `pre_action_context`: all eight
+opaque lifecycle handles, epochs, target-owned internal rows and ownership;
+the event and reserve owners; the six unaffected survivor ownership rows; the
+explicit empty controller-RNG inventory; content-addressed bindings to every
+full environment `RandomState` in the immutable common prestate; and the empty
+channel-tape cursor. `_expected_pre_action_context` reconstructs the
+same object from the immutable source and registered common prestate. Missing,
+stale, reordered, self-authored or jointly tampered P/B evidence therefore
+cannot be rescued by a favorable `branchpoint_identity_ok` summary.
+
+Each step also binds `current_service_mask` to the exact executed action mask
+and carries canonical target-owned `common_transducer_evidence`: physical
+positions, targets, active mask, accepted-G1 transducer source digest and raw
+output. The validator reruns the real common transducer and binds its target
+input to the registered candidate schedule or behavioral target schedule.
+Attaching a stage-switch schedule beside unchanged gate-target actions is
+rejected; a coincident raw action remains valid only when the recomputed output
+is byte-identical.
 
 `_derive_return_ready_step` resolves the rejoined lifecycle owner through the
 environment's target-owned internal order. The sampled physical storage row is
@@ -252,6 +272,7 @@ execution or supports a UAV paper conclusion.
 | claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded |
 |---|---|---|---|---|---|
 | G0-ORACLE-LEDGER | G0 oracle-safety clarification, registered ledger | `ha_ctse_process/uav_source_identifiability_g0.py::build_oracle_safety_ledger` | exactly two sealed H=500 traces, immutable rank and real-guard evidence | `test_oracle_safety_ledger_is_real_complete_and_reconstructed` | synthetic ranking flags, service-aware candidate generation, adaptive search |
-| G0-REPLAY | G0 behavioral-replay clarification, branch-aware certificate | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_branch_aware_replay` | pre-R identity, R branchpoint identity, branch-local self-replay and shared ledger | `test_branch_aware_replay_R_NONE_requires_full_identity` | full-episode cross-branch identity and caller-authored replay pass flags |
+| G0-REPLAY | G0 behavioral-replay clarification, branch-aware certificate | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_branch_aware_replay` | pre-R identity, independently reconstructed lifecycle/RNG/channel branchpoint, branch-local self-replay and shared ledger | `test_branch_aware_replay_R_NONE_requires_full_identity`, `test_branchpoint_primitives_are_required_and_independently_reconstructed` | full-episode cross-branch identity, missing primitive evidence and caller-authored replay pass flags |
+| G0-TRANSDUCER | G0 branchpoint/transducer evidence repair | `ha_ctse_process/uav_source_identifiability_g0.py::_validate_record_branchpoint_and_transducer` | every target row is an input to a freshly recomputed accepted-G1 action; record output and executed mask match exactly | `test_target_schedule_requires_recomputed_common_transducer_binding`, `test_tampered_common_transducer_input_or_output_fails_closed` | detached target schedules, stale action rows and forged transducer summaries |
 | G0-R273 | G0 return-ready-step clarification, predicate and assertion | `ha_ctse_process/uav_source_identifiability_g0.py::_derive_return_ready_step` | episode-0 owner internal row reconstructs causal R=273 and stored R=280 is rejected | `test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273` | storage-row indexing, seven-step delay, future service, first-differing-byte selection |
 | G0-RUNNER | G0 return-ready-step clarification, artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds all three clarification identities and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts` | stale contract identity and favorable stored certificate |
