@@ -120,8 +120,10 @@ J  Route A amendment + B1-B5 repair       DONE  69c95e61 -- schema 2, 36 passed,
                                           6 paired negatives watched red
 K  manifest-replay development gate       DONE  fd3087ac -- probe + gate, 22 passed,
                                           12 paired negatives watched red
-L  full-horizon replay exercise (dev)     IN FLIGHT -- two local processes on
-                                          TOPOLOGY_SEED_DEV; decides A1 vs A2
+L  full-horizon replay exercise (dev)     RAN -- MANIFEST_REPLAY_FAIL on
+                                          assertion 6 ONLY; replay itself
+                                          reproduced everything. Note
+                                          20260730_MANIFEST_REPLAY_GATE_FIRST_RESULT.md
 M  freeze fresh-population selection RULE DONE  fd3087ac --
                                           D7_S_SUCCESSOR_POPULATION_SELECTION_RULE.md
 N  generate immutable fresh inventory     HELD until K/L pass
