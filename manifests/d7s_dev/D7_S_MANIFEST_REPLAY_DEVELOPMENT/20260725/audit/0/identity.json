@@ -1,0 +1,72 @@
+{
+  "component_digests": {
+    "cluster_centers_history": "b968138c12bcfb1b50ba3c94307a52128bc2893b27d7e22356a1b193621f60ec",
+    "cluster_pause_times": "daadf30c8ddb6c5f65df4b24510868abe65aa4c035849e1e92fe89c5b5c3b437",
+    "cluster_velocities": "7ab30890b1c78d5130025a289360bf663096fa4d6dbb2fc2303a5693e2f11368",
+    "cluster_waypoints": "8930bb77cac77ecf74fa34e6b43e75944f2763014cf877058536e6502de15986",
+    "user_cluster_assignments": "7399fedfba7a6b7f9f8160fa11aa416b09df5e0c76bad9ab82b669192316a5a3",
+    "user_pause_times": "8c423185cf36f6faef97751e564953bb9c6bd9a061cacee7ce8f4dff8f960c6d",
+    "user_positions": "fdfd6d39adde8a51678eef17f70f1abda8768522ea2edb68fe4e01ac6ca9b1e5",
+    "user_velocities": "6d907cf76de1188cb3f603d1d942285ac9bcae28dcd5e6062fd8a2a4c0aa0af7",
+    "user_waypoints": "444c1a38e4cfdeb5e33364ff8d14f01541055f719272bed2119c483a42c26742"
+  },
+  "component_dtypes": {
+    "cluster_centers_history": "<f8",
+    "cluster_pause_times": "<f8",
+    "cluster_velocities": "<f8",
+    "cluster_waypoints": "<f8",
+    "user_cluster_assignments": "<i4",
+    "user_pause_times": "<f8",
+    "user_positions": "<f8",
+    "user_velocities": "<f8",
+    "user_waypoints": "<f8"
+  },
+  "component_shapes": {
+    "cluster_centers_history": [
+      5,
+      2
+    ],
+    "cluster_pause_times": [
+      5
+    ],
+    "cluster_velocities": [
+      5,
+      2
+    ],
+    "cluster_waypoints": [
+      5,
+      2
+    ],
+    "user_cluster_assignments": [
+      30
+    ],
+    "user_pause_times": [
+      30
+    ],
+    "user_positions": [
+      30,
+      3
+    ],
+    "user_velocities": [
+      30,
+      3
+    ],
+    "user_waypoints": [
+      30,
+      2
+    ]
+  },
+  "identity": {
+    "block": "audit",
+    "contract_id": "D7_S_MANIFEST_REPLAY_DEVELOPMENT",
+    "episode_index": 0,
+    "generator_version": "ae9d4a1ba8fe84035b02b87c5768302bdda0301e2fc2ec9860249e1f59eccde3",
+    "n_clusters": 5,
+    "n_users": 30,
+    "pinned_coordinate_hash": "37b1a44987839dfd9d76f3934870d5786b9018f70d96c6cc6ca1ef767f1af457",
+    "schema_version": 3,
+    "topology_seed": 20260725,
+    "user_world_seed": 11472779752202160669
+  },
+  "payload_hash": "5ea75e92d98db80178c06acf781d16e630b6d4c5e0698d5b50684e52d24d65f1"
+}
