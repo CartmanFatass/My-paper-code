@@ -14,6 +14,17 @@ this bounded design review. Read only the allow-listed paths in
 explicitly authorized one transport of this independent UAV review. Do not
 start experiments, formal execution, code changes, or paper acceptance.
 
+Exact evidence allow-list (read only these repository-relative paths at the
+stage commit):
+
+- `docs/research/designs/UAV_DYNAMIC_SERVICE_ROSTER_RESEARCH_BRIEF.md`
+- `docs/research/designs/UAV_TEMPORARY_SERVICE_LOSS_G1.md`
+- `docs/external-review/independent/20260729_dynamic_roster_uav_paper_readiness_external_review_v1/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/30_PM_SCIENTIFIC_RECONCILIATION.md`
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+
 The project-manager summary supplied to this review is: the toy chain has a
 compact candidate mechanism, but whether the paper can stand depends first on
 G0, not on further toy ablations. Treat that summary as a proposal to audit,
