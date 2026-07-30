@@ -17,6 +17,7 @@ The exact allow-list for this review is:
 - `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/30_PM_SCIENTIFIC_RECONCILIATION.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 
 Read only these paths from `source_commit`. Do not use G33 material, G51

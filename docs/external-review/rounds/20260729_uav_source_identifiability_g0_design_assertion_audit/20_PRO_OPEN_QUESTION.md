@@ -23,6 +23,7 @@ stage commit):
 - `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/21_PRO_OPEN_RAW.md`
 - `docs/external-review/rounds/20260723_uav_dynamic_service_roster_source_contract/30_PM_SCIENTIFIC_RECONCILIATION.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 
 The project-manager summary supplied to this review is: the toy chain has a
