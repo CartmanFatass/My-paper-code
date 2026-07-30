@@ -37,7 +37,15 @@ world:
         was the only blocker that fails on the happy path. Fixed below, with the
         rebuild list derived from `regenerate_user_world` itself.
     B5  save overwrote silently and no inventory bound the population together.
-        Fixed: create-once, plus a set-hashed inventory.
+        Fixed: create-once, plus a set-hashed inventory. SCHEMA 3 -- the set hash
+        covered only `relative_dir=payload_hash`, so an entry's recorded
+        identity, component digests, shapes and dtypes could be edited inside
+        the frozen inventory.json without moving the set hash at all, and
+        verification reloaded only the entries the inventory named -- an EXTRA
+        manifest written to disk was structurally invisible to it. Fixed: the
+        set hash covers the complete canonical entry, and verification walks
+        the manifest root and refuses any `identity.json` the inventory does
+        not name.
 
 The ordering rule that matters when reading a mismatch: components are compared in
 GENERATION order, because a divergence in an earlier array propagates into later
@@ -68,7 +76,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 INVENTORY_FILE = "inventory.json"
 
@@ -763,12 +771,33 @@ def apply_world_manifest(env, manifest: dict, *, rebuild_derived_state: bool = T
 
 # ---------------------------------------------------------- inventory, B5 ---
 
+def _canonical_entry_json(entry: dict) -> str:
+    """A stable serialization of one COMPLETE entry, for hashing.
+
+    SCHEMA 3's fix for the narrower half of B5: `sort_keys` makes the encoding
+    independent of dict insertion order, and `separators` removes the whitespace
+    freedom JSON otherwise allows, so two callers holding the same entry always
+    produce the same bytes to hash. Every field the entry carries -- identity,
+    component digests, component shapes, component dtypes, payload hash -- goes
+    in; a field left out of this string is a field an editor of the frozen
+    inventory.json could change for free.
+    """
+    return json.dumps(entry, sort_keys=True, separators=(",", ":"))
+
+
 def build_manifest_inventory(manifests) -> dict:
     """Bind a whole population together, so the SET is frozen and not just its parts.
 
     B5: without this there is nothing that says which episode keys the population
     contains. A manifest can be deleted, and every remaining manifest still
     verifies perfectly.
+
+    SCHEMA 3: the set hash used to cover only `relative_dir=payload_hash`. That
+    left the entry's own recorded identity, component digests, shapes and dtypes
+    outside what freezes the population -- nothing else on the verification path
+    reads those fields for any OTHER comparison, so a set hash blind to them was
+    blind to an edit of them, full stop. The hash now covers the complete
+    canonical entry.
     """
     entries = []
     for manifest in manifests:
@@ -777,6 +806,8 @@ def build_manifest_inventory(manifests) -> dict:
             "relative_dir": manifest_relative_dir(identity).replace(os.sep, "/"),
             "identity": {field: identity[field] for field in IDENTITY_FIELDS},
             "component_digests": dict(manifest["component_digests"]),
+            "component_shapes": dict(manifest["component_shapes"]),
+            "component_dtypes": dict(manifest["component_dtypes"]),
             "payload_hash": manifest["payload_hash"],
         })
     entries.sort(key=lambda e: e["relative_dir"])
@@ -788,7 +819,7 @@ def build_manifest_inventory(manifests) -> dict:
             "weights one world twice", reason="DUPLICATE_EPISODE_KEY")
 
     set_hash = hashlib.sha256("\n".join(
-        f"{e['relative_dir']}={e['payload_hash']}" for e in entries).encode("utf-8")).hexdigest()
+        _canonical_entry_json(e) for e in entries).encode("utf-8")).hexdigest()
     return {"schema_version": SCHEMA_VERSION, "entries": entries,
             "episode_count": len(entries), "set_hash": set_hash}
 
@@ -810,12 +841,35 @@ def write_manifest_inventory(root: str, manifests, *, allow_overwrite: bool = Fa
     return path
 
 
+def _manifest_dirs_on_disk(root: str) -> set:
+    """Every directory under `root` that holds an `identity.json`, as the same
+    forward-slash-normalized relative path `manifest_relative_dir` produces.
+
+    SCHEMA 3: this is the walk that did not exist before. Reloading the entries
+    an inventory NAMES can never see a manifest the inventory never named --
+    that direction of the defect is structural, not a missed check, and only a
+    scan of what is actually on disk can close it. Normalizing with
+    `os.sep` -> `/` (the same call `build_manifest_inventory` makes) is
+    deliberate: on Windows, `os.walk` and `os.path.relpath` yield backslashes,
+    and comparing those raw against the inventory's forward-slash
+    `relative_dir` would report every real manifest as unlisted.
+    """
+    found = set()
+    for dirpath, _dirnames, filenames in os.walk(root):
+        if "identity.json" in filenames:
+            rel = os.path.relpath(dirpath, root).replace(os.sep, "/")
+            found.add(rel)
+    return found
+
+
 def verify_manifest_inventory(root: str) -> dict:
     """Reload every manifest the inventory names and check the set is intact.
 
-    Catches the three failures a per-manifest check cannot see: an episode key
-    deleted, an episode key added, and a manifest replaced by a different world
-    that verifies perfectly against its own sidecar.
+    Catches the four failures a per-manifest check cannot see: an episode key
+    deleted, an episode key added anywhere under `root` (whether or not it
+    shares a directory with a named episode), a manifest replaced by a
+    different world that verifies perfectly against its own sidecar, and a
+    frozen inventory.json entry edited in place.
     """
     path = os.path.join(root, INVENTORY_FILE)
     if not os.path.isfile(path):
@@ -823,6 +877,16 @@ def verify_manifest_inventory(root: str) -> dict:
                                  f"not frozen", reason="INVENTORY_ABSENT")
     with open(path, encoding="utf-8") as handle:
         inventory = json.load(handle)
+
+    named = {entry["relative_dir"] for entry in inventory.get("entries", [])}
+    on_disk = _manifest_dirs_on_disk(root)
+    unlisted = sorted(on_disk - named)
+    if unlisted:
+        raise WorldManifestError(
+            f"manifest root {root} holds identity.json at {unlisted}, not named "
+            f"by the inventory; a formal population must consume exactly its "
+            f"inventory entries, and an unnamed manifest on disk is unreachable "
+            f"by that guarantee", reason="INVENTORY_UNLISTED_MANIFEST")
 
     checked = []
     for entry in inventory.get("entries", []):

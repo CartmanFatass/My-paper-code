@@ -536,19 +536,86 @@ def test_a_deleted_episode_is_caught_by_the_inventory_and_by_nothing_else(tmp_pa
 
 def test_an_added_episode_is_caught_by_the_set_hash(tmp_path) -> None:
     """The direction the per-manifest checks structurally cannot see: everything
-    the inventory names is present and correct, and the population is still wrong."""
+    the inventory names is present and correct, and the population is still wrong.
+
+    A rebuilt-vs-frozen hash COMPARISON proves nothing about `verify_manifest_
+    inventory` itself unless the function is actually called and its refusal
+    observed -- comparing two `build_manifest_inventory` outputs never touches the
+    disk-walk path at all. This calls the real entry point.
+    """
 
     manifests = _population(tmp_path)
     wm.write_manifest_inventory(str(tmp_path), manifests)
-    extra = _population(tmp_path, keys=((20260734, "audit", 2),))
-
     assert wm.verify_manifest_inventory(str(tmp_path))["episode_count"] == 2
-    rebuilt = wm.build_manifest_inventory(manifests + extra)
-    with open(tmp_path / wm.INVENTORY_FILE, encoding="utf-8") as handle:
-        frozen = json.load(handle)
-    assert rebuilt["set_hash"] != frozen["set_hash"], (
-        "a third episode must change the set hash, or the inventory does not "
-        "freeze the population at all")
+
+    _population(tmp_path, keys=((20260734, "audit", 2),))
+
+    with pytest.raises(wm.WorldManifestError) as excinfo:
+        wm.verify_manifest_inventory(str(tmp_path))
+    assert excinfo.value.reason == "INVENTORY_UNLISTED_MANIFEST"
+    assert "2" in str(excinfo.value)
+
+
+def test_an_unlisted_manifest_on_disk_is_refused(tmp_path) -> None:
+    """B5's PAIRED NEGATIVE for the disk walk, kept separate from the test above so
+    the walk is exercised at a DIFFERENT topology_seed subtree -- the earlier test
+    only adds a sibling episode_index under the same topology directory, which
+    would not catch a walk that only looks one directory level too shallow or too
+    deep. Per-manifest checks cannot see this at all: nothing here names episode
+    99 or asks whether it verifies, so a check that only reloads inventory-named
+    entries has no way to notice it exists.
+    """
+
+    manifests = _population(tmp_path)
+    wm.write_manifest_inventory(str(tmp_path), manifests)
+    _population(tmp_path, keys=((99999, "audit", 0),))
+
+    with pytest.raises(wm.WorldManifestError) as excinfo:
+        wm.verify_manifest_inventory(str(tmp_path))
+    assert excinfo.value.reason == "INVENTORY_UNLISTED_MANIFEST"
+    message = str(excinfo.value)
+    # Forward-slash, exactly the extra directory -- and MEASURED to matter: a
+    # walk that emits raw os.path.relpath (backslash on Windows) would compare
+    # unequal to every forward-slash `relative_dir` the inventory names, so it
+    # would report the two ALREADY-LISTED directories as unlisted too. A bare
+    # `"99999" in message` substring check does not notice that failure mode --
+    # it stays true either way -- so this asserts the legitimate entries are
+    # named nowhere in the refusal.
+    assert "99999/audit/0" in message
+    assert "20260734/audit/0" not in message
+    assert "20260734/audit/1" not in message
+
+
+def test_a_consistent_metadata_tamper_is_caught_by_the_full_entry_set_hash(tmp_path) -> None:
+    """B5's PAIRED NEGATIVE for entry completeness, and the one that actually
+    isolates it. Editing the disk sidecar's identity ALONE is already caught by
+    `_compare_identity` regardless of the set-hash formula, so that would not
+    distinguish the fix. This edits `n_clusters` in BOTH the disk sidecar and the
+    inventory's own recorded entry, consistently -- so the per-manifest identity
+    check (which compares disk against the entry's OWN identity) cannot see
+    anything wrong, and `payload_hash` is untouched since no array byte changed.
+    The old formula hashed only `relative_dir=payload_hash`, so this tamper would
+    not move it. Only a set hash that also covers the entry's identity notices
+    the recorded population moved, because the stored `set_hash` was computed
+    BEFORE the tamper and nothing here recomputes it to match.
+    """
+
+    manifests = _population(tmp_path)
+    wm.write_manifest_inventory(str(tmp_path), manifests)
+
+    sidecar_path = tmp_path / "NS" / "20260734" / "audit" / "0" / "identity.json"
+    sidecar = json.loads(sidecar_path.read_text(encoding="utf-8"))
+    sidecar["identity"]["n_clusters"] = 999
+    sidecar_path.write_text(json.dumps(sidecar), encoding="utf-8")
+
+    inventory_path = tmp_path / wm.INVENTORY_FILE
+    inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
+    inventory["entries"][0]["identity"]["n_clusters"] = 999
+    inventory_path.write_text(json.dumps(inventory), encoding="utf-8")
+
+    with pytest.raises(wm.WorldManifestError) as excinfo:
+        wm.verify_manifest_inventory(str(tmp_path))
+    assert excinfo.value.reason == "INVENTORY_SET_HASH_MISMATCH"
 
 
 def test_a_replaced_world_is_caught_even_though_it_verifies(tmp_path) -> None:
