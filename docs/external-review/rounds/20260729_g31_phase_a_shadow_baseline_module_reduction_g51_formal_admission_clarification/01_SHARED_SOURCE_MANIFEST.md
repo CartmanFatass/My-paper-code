@@ -1,0 +1,21 @@
+# G51 formal-admission clarification manifest
+
+repository=CartmanFatass/My-paper-code
+branch=aggressive
+source_commit=ce6ed8659c480ca2779155b2871dc82b89fa0e95
+aligned_source_commit=188b210975a0f243ae34318d658fbf943d1d63ab
+alignment_stage_commit=aa756dcd06a2ea622c155f2983a89bb5d76e9d80
+alignment_disposition=ALIGNED
+compute_budget=zero
+
+Read only these allow-listed paths from source_commit and the submitted
+question:
+
+- docs/project/CURRENT_WORK.md
+- docs/research/designs/CONTINUOUS_ROSTER_NATIVE_SIX_G31_PHASE_A_SHADOW_BASELINE_MODULE_REDUCTION_G51_CODE_SCIENCE_INDEX.md
+- docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_design_assertion_audit/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md
+- docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_code_science_alignment_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md
+
+These files establish the scheduled action, its aligned identity and the
+current fail-closed formal boundary. They do not authorize compute.
