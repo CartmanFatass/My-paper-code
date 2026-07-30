@@ -82,6 +82,7 @@ review_transport_misclassification_correction=append_only
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
+cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 active_unattended_grant_valid_iteration_limit=9
 active_unattended_grant_permission_prompts=forbidden
@@ -411,8 +412,8 @@ impossibility is the only earlier non-scientific terminal blocker.
 
 Research Operations Manager may request a workflow-design change directly from
 the fixed Workflow Design Manager session.
-Cross-task routing does not inspect, select, preserve or restore task model and reasoning settings. It never edits
-workflow surfaces locally.
+Cross-task routing passes the locked target session, model and thinking
+explicitly. It never edits workflow surfaces locally.
 
 Stage only accepted operations-owned paths, inspect the staged path set, run
 `git diff --cached --check`, commit and push `aggressive`. Never stage source,

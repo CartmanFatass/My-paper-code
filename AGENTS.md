@@ -60,7 +60,7 @@ research_operations_manager_scientific_authority=none
 research_operations_manager_git_authority=direct_for_runtime_review_evidence_report_ledger_and_state
 research_operations_manager_remote_repository_authority=permanent_user_grant
 research_operations_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-independent_research_explorer_session=019fb2e1-d153-7043-b2e9-58690f9bd48d
+independent_research_explorer_session=019fb398-0a76-7bd0-9400-c5ea4eefa5de
 independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b
 independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_except_pro_reviews
@@ -72,7 +72,7 @@ formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
-cross_task_routing=fixed_role_sessions
+cross_task_routing=locked_role_session_model_thinking
 cross_task_routing_skill=hmasd-cross-task-routing
 ```
 The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered. Independent research tasks have no Git or repository-egress authority.

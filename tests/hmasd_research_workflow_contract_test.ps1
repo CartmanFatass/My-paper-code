@@ -119,17 +119,17 @@ foreach ($required in @(
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_workspace_boundary_guard.py',
     'scripts/hmasd_pro_response_sentinel.py',
-    'cross_task_routing=fixed_role_sessions',
+    'cross_task_routing=locked_role_session_model_thinking',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'independent_research_explorer_session=019fb398-0a76-7bd0-9400-c5ea4eefa5de',
     'independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
-    'independent_research_explorer_session=',
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_except_pro_reviews',
     'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review',
@@ -152,7 +152,10 @@ foreach ($required in @(
     'browser_authority=one_separate_registered_external_pro_conversation',
     'write_scope=local_research/pro_reviews_only',
     'formal_review_conversation_access=forbidden',
-    'cross_task_routing_skill=hmasd-cross-task-routing')) {
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=fixed_router_role_session',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'cross_task_route_cache=forbidden')) {
     if (-not $independentReviewRole.Contains($required)) {
         throw "Independent Research Review Operator role missing: $required"
     }
@@ -199,6 +202,10 @@ foreach ($required in @(
     'per_cohort_user_confirmation=not_required',
     'unbounded_research_loop=forbidden',
     'methodology_reference=research-methodology.md_required_for_scientific_innovation',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=fixed_router_role_session',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'cross_task_route_cache=forbidden',
     'fingerprint binds that complete automation boundary',
     'Every Critic assignment consumes',
     'planned Scout sources must remain inside',
@@ -631,7 +638,8 @@ foreach ($required in @(
     'current_work_write_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'does not inspect, select, preserve or restore task model and reasoning settings',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'passes the locked target session, model and thinking',
     'CODE_SCIENCE_INDEX.md',
     'CODE_ACCEPTED')) {
     if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing: $required" }
@@ -650,8 +658,9 @@ foreach ($required in @(
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=exact_fixed_requester_role_session',
+    'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
-    'does not inspect, select, preserve or restore task model and reasoning settings',
+    'resolves the requester''s locked session, model and thinking',
     'never an automatic acceptance gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_mutating_workflow_design',
@@ -708,7 +717,8 @@ foreach ($required in @(
     'Research Operations Manager may request a workflow-design change directly',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
-    'does not inspect, select, preserve or restore task model and reasoning settings',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'passes the locked target session, model and thinking',
     'review_monitor_assignment=one_mechanical_receipt_per_sentinel',
     'review_monitor_watch_call_limit_seconds=45',
     'review_monitor_total_response_deadline=none',

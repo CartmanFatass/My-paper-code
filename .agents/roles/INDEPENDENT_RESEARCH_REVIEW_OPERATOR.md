@@ -21,8 +21,8 @@ formal_review_conversation_access=forbidden
 formal_review_round_access=forbidden
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
+cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
-cross_task_settings_management=forbidden
 ```
 
 This task performs low-frequency External Pro transport for independent research
@@ -64,5 +64,5 @@ contact Code Project Manager or Research Operations Manager, update the formal
 project, launch compute or continue into another review without a new direct
 user instruction.
 
-Cross-task routing does not inspect, select, preserve or restore task model and
-reasoning settings.
+Cross-task routing passes the locked target session, model and thinking
+explicitly.

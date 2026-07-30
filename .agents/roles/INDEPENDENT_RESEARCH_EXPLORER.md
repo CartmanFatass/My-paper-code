@@ -25,6 +25,10 @@ automatic_cohort_progression=allowed_within_confirmed_campaign
 per_cohort_user_confirmation=not_required
 unbounded_research_loop=forbidden
 methodology_reference=research-methodology.md_required_for_scientific_innovation
+cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_target_identity=fixed_router_role_session
+cross_task_target_settings=locked_role_session_model_thinking
+cross_task_route_cache=forbidden
 ```
 
 This task explores research questions outside the formal HMASD workflow. It

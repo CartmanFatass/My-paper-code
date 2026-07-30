@@ -19,6 +19,7 @@ git_execution=direct_for_workflow_design_surfaces
 one_artifact_one_acceptance_owner=true
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=exact_fixed_requester_role_session
+cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 workflow_change_skill=hmasd-workflow-change-audit
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
@@ -61,7 +62,8 @@ not a native child, research coordinator or scientific authority.
   `$hmasd-cross-task-routing` to the fixed Code Project Manager or Research
   Operations Manager session that made the request. A change affecting both roles
   sends one reload notification to each fixed session.
-  Cross-task routing does not inspect, select, preserve or restore task model and reasoning settings.
+  Cross-task routing resolves the requester's locked session, model and thinking
+  from its single route table and passes all three explicitly.
 - Encoding an exact, format-complete
   `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` into the independent-research Skill
   only after the registered Independent Research Pro Review Operator has
@@ -161,8 +163,9 @@ then commit and push only owned paths.
   source, tests and artifacts.
 - Control the browser, launch compute, create runtime review packages, or turn
   the critical-point index into a hash handoff or separate acceptance owner.
-- Store live task session/model/effort in static registry data or create a relay,
-  dispatcher, callback chain, global lease or review of the review.
+- Discover, cache or override persistent-role routes outside the user-approved
+  locked route table, or create a relay, dispatcher, callback chain, global
+  lease or review of the review.
 
 ## Outputs
 

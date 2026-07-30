@@ -19,6 +19,7 @@ search_complexity_ceiling=O(H*K_search)
 candidate_trajectory_count_ceiling=16
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 cross_task_target_identity=fixed_router_role_session
+cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 cross_task_routing_skill=hmasd-cross-task-routing
 execution_readiness_owner=code_project_manager
@@ -163,9 +164,9 @@ and stops; it never takes over operations.
 Code Project Manager may request a workflow-design change directly from the
 fixed Workflow Design Manager session. Workflow Design Manager returns the
 accepted commit to the requesting Code Project Manager.
-Cross-task routing does not inspect, select, preserve or restore task model and reasoning settings. Code
-Project Manager never edits router, role, Skill, profile, registry or
-workflow-contract surfaces.
+Cross-task routing passes the locked target session, model and thinking
+explicitly. Code Project Manager never edits router, role, Skill, profile,
+registry or workflow-contract surfaces.
 
 Stage only accepted code-owned paths, inspect the staged path set, run
 `git diff --cached --check`, commit and push `aggressive`. Do not stage runtime,

@@ -28,6 +28,7 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath)) {
 }
 
 $routerRequired = @(
+    'cross_task_routing=locked_role_session_model_thinking',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'code_project_manager_code_authority=exclusive',
@@ -37,7 +38,7 @@ $routerRequired = @(
     'code_project_manager_current_work_write_authority=none',
     'research_operations_manager_runtime_authority=exclusive',
     'research_operations_manager_current_work_authority=exclusive',
-    'research_operations_manager_external_review_transport_authority=exclusive',
+    'research_operations_manager_formal_external_review_transport_authority=exclusive',
     'research_operations_manager_mechanical_result_acceptance=exclusive',
     'research_operations_manager_code_authority=none',
     'research_operations_manager_code_acceptance_authority=none',
@@ -73,6 +74,11 @@ $codeRequired = @(
     'only zero-compute `finalize` receives narrow elevation',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=fixed_router_role_session',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'cross_task_route_cache=forbidden',
+    'passes the locked target session, model and thinking',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',
@@ -99,6 +105,11 @@ $operationsRequired = @(
     'code_authority=none',
     'code_acceptance_authority=none',
     'scientific_authority=none',
+    'cross_task_routing_skill=hmasd-cross-task-routing',
+    'cross_task_target_identity=fixed_router_role_session',
+    'cross_task_target_settings=locked_role_session_model_thinking',
+    'cross_task_route_cache=forbidden',
+    'passes the locked target session, model and thinking',
     'MECHANICALLY_VALID_RESULT',
     'OPERATIONAL_FAILURE',
     'CODE_DIAGNOSIS_REQUIRED',
@@ -513,7 +524,7 @@ $parentContracts = @{
     '.agents/roles/REVIEWER.md' = 'parent=code_project_manager'
     '.agents/roles/VERIFIER.md' = 'parent=code_project_manager'
     '.agents/roles/EXPERIMENT_OPERATOR.md' = 'parent=research_operations_manager'
-    '.agents/roles/PRO_RESPONSE_MONITOR.md' = 'parent=research_operations_manager'
+    '.agents/roles/PRO_RESPONSE_MONITOR.md' = 'parent=registered_pro_transport_owner'
 }
 foreach ($entry in $parentContracts.GetEnumerator()) {
     $text = Get-Content -Raw -LiteralPath (Join-Path $repo $entry.Key)

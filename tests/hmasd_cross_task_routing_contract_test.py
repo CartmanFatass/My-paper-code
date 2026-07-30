@@ -20,10 +20,28 @@ WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
 CPM_SESSION = "019f9e4f-f4d0-7fe0-b214-c47fd034e84d"
 ROM_SESSION = "019f9c6a-9401-7ae0-ace5-dd827dccba2b"
 RESEARCH_REVIEW_SESSION = "019fb311-6137-7781-9708-3df24da34a4b"
+RESEARCH_EXPLORER_SESSION = "019fb398-0a76-7bd0-9400-c5ea4eefa5de"
+RETIRED_RESEARCH_EXPLORER_SESSION = "019fb2e1-d153-7043-b2e9-58690f9bd48d"
+LOCKED_ROUTES = {
+    "workflow_design_manager": (WDM_SESSION, "gpt-5.6-sol", "high"),
+    "code_project_manager": (CPM_SESSION, "gpt-5.6-sol", "max"),
+    "research_operations_manager": (ROM_SESSION, "gpt-5.6-luna", "high"),
+    "independent_research_explorer": (
+        RESEARCH_EXPLORER_SESSION,
+        "gpt-5.6-sol",
+        "ultra",
+    ),
+    "independent_research_review_operator": (
+        RESEARCH_REVIEW_SESSION,
+        "gpt-5.6-luna",
+        "high",
+    ),
+}
 PERSISTENT_ROLES = (
     ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
     ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
     ROOT / ".agents/roles/RESEARCH_OPERATIONS_MANAGER.md",
+    ROOT / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
     ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md",
 )
 PAYLOAD_SURFACES = PERSISTENT_ROLES + (
@@ -35,14 +53,18 @@ PAYLOAD_SURFACES = PERSISTENT_ROLES + (
 def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
     text = " ".join(SKILL.read_text(encoding="utf-8").split())
     required = (
-        "Fixed session addresses",
-        "session identity only",
+        "Locked route table",
+        "role_id",
+        "session_id",
+        "model",
+        "thinking",
         "Native send",
-        "currently callable Codex cross-task send tool",
+        "codex_app__send_message_to_thread",
         "runtime capability",
-        "does not inspect, select, transmit, preserve, compare or restore",
-        "makes no claim about the target task's model or reasoning effort",
+        "Passing both `model` and `thinking` is mandatory",
+        "substituting the sender's settings",
         "ROUTE_SENT",
+        "ROUTE_CONFIGURATION_MISMATCH",
         "ROUTE_IDENTITY_MISMATCH",
         "ROUTE_HANDOFF_INVALID",
         "ROUTE_UNAVAILABLE",
@@ -64,8 +86,6 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "ROLE_ROUTE_CONFIRM",
         "ROLE_ROUTE_ANNOUNCE",
         "Conversation-local route cache",
-        "fixed route triples",
-        "user supplies the new session, model and effort",
         "pre_send_read_only_probe_explicit_echo",
         "Live-settings preservation",
         "ROUTE_SETTINGS_UNAVAILABLE",
@@ -74,6 +94,9 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "hmasd_cross_task_route_guard.py",
         "SQLite `mode=ro`",
         "PreToolUse guard",
+        "session identity only",
+        "does not inspect, select, transmit, preserve, compare or restore",
+        "makes no claim about the target task's model or reasoning effort",
     ):
         assert retired not in text, retired
 
@@ -172,29 +195,30 @@ def test_cross_task_routing_skill_is_explicit_only() -> None:
     interface = yaml.safe_load(UI.read_text(encoding="utf-8"))
     assert interface["policy"]["allow_implicit_invocation"] is False
     assert "$hmasd-cross-task-routing" in interface["interface"]["default_prompt"]
+    assert "locked session, model, and thinking" in interface["interface"]["default_prompt"]
 
 
-def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
+def test_router_and_skill_lock_exact_role_routes() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    skill = " ".join(SKILL.read_text(encoding="utf-8").split())
+    skill = SKILL.read_text(encoding="utf-8")
     required = (
-        "cross_task_routing=fixed_role_sessions",
+        "cross_task_routing=locked_role_session_model_thinking",
         "cross_task_routing_skill=hmasd-cross-task-routing",
         f"workflow_design_manager_session={WDM_SESSION}",
         f"code_project_manager_session={CPM_SESSION}",
         f"research_operations_manager_session={ROM_SESSION}",
+        f"independent_research_explorer_session={RESEARCH_EXPLORER_SESSION}",
         f"independent_research_review_operator_session={RESEARCH_REVIEW_SESSION}",
     )
     for token in required:
         assert agents.count(token) == 1, token
-    for session in (
-        WDM_SESSION,
-        CPM_SESSION,
-        ROM_SESSION,
-        RESEARCH_REVIEW_SESSION,
-    ):
-        assert skill.count(session) == 1, session
+    for role_id, (session_id, model, thinking) in LOCKED_ROUTES.items():
+        row = f"| `{role_id}` | `{session_id}` | `{model}` | `{thinking}` |"
+        assert skill.count(row) == 1, row
+    assert RETIRED_RESEARCH_EXPLORER_SESSION not in agents
+    assert RETIRED_RESEARCH_EXPLORER_SESSION not in skill
     for retired in (
+        "cross_task_routing=fixed_role_sessions",
         "workflow_design_manager_route=",
         "code_project_manager_route=",
         "research_operations_manager_route=",
@@ -205,7 +229,7 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
         assert retired not in agents, retired
 
 
-def test_persistent_roles_use_fixed_sessions_without_settings_management() -> None:
+def test_persistent_roles_require_locked_target_settings() -> None:
     for path in PERSISTENT_ROLES:
         text = path.read_text(encoding="utf-8")
         assert "cross_task_routing_skill=hmasd-cross-task-routing" in text
@@ -213,8 +237,9 @@ def test_persistent_roles_use_fixed_sessions_without_settings_management() -> No
             "cross_task_target_identity=fixed_router_role_session" in text
             or "cross_task_target_identity=exact_fixed_requester_role_session" in text
         )
+        assert "cross_task_target_settings=locked_role_session_model_thinking" in text
         assert "cross_task_route_cache=forbidden" in text
-        assert "does not inspect, select, preserve or restore" in text
+        assert "does not inspect, select, preserve or restore" not in text
         assert "cross_task_model_thinking_preservation=" not in text
         assert "cross_task_route_guard=" not in text
 
