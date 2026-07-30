@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=PICK UP HERE. Loop 13 of a 10-loop goal. THE R4 RE-RUN RETURNED AND IT REVERSES H. Run 30479940700 / d7s-audit-4 at 56a64c3c, 8/8 shards, 114 min. roll_power reads ZERO rejoin_events across the whole R4 population -- 111,433 rolled steps, 225,048 injectivity checks, 109 leaves, 0 refusals. Branch reproduces H exactly: PART_A_CONTRADICTION, stable AFFIRMATIVE_NONMATERIAL, flex UNRESOLVED, every u* interval covering zero. H IS EXONERATED, verified three ways not argued: H's audit module and HEAD's roll bit-identical action prefixes on the same R4 seeds; audit_events identical on 8/8 topologies; per-episode reports differ ONLY by the added roll_power field. INVALID_R4_REALIZATION does not apply to H. MY OWN PROBE WAS THE DEFECT: d7_s_r4_rejoin_exposure_probe.py derived seeds without contract_id, so it rolled R3-namespace episodes at R4 coordinates -- every seed different -- and its R4_REJOIN_PROBE_FIRED verdict is VOID. Fixed at bcdcc780: R4 namespace is the default, any other namespace over the R4 population is REFUSED, namespace printed and recorded, tests/d7_s_r4_probe_namespace_test.py with both guards watched failing. WHY ZERO IS EXPECTED, and it outranks the zero: charging to full takes ~565 steps (1000 W, 160 Wh, dt=1) against a 950-step prefix with onset near 900, so R4's horizon ENDS BEFORE ANY REJOIN CAN OCCUR. The R4 measurement is INSENSITIVE to the repair -- not evidence the repair was unnecessary. Any longer-horizon successor WILL enter that branch and must read roll_power, not assume. NEW DEFECT, found explaining why the point estimates moved (d_a 0.4839 -> 0.5108): same pinned topology hash, same user_world_seed, same n_users, seed_controls_generation True on every side -> THREE different world fingerprints (local d700a69e, H b5007214, re-run 6307c329); the two cloud runs disagree on 3 of 8 topologies (20260736, 39, 40) with numpy==1.26.3 and python 3.10 hard-pinned. Ruled out BY MEASUREMENT: code change, construction order, PYTHONHASHSEED, global RNG state, the pooler (re-pooling reproduces every field). The flag asserts more than it tests -- documented as 'rebuilding at the same topology and seed reproduces this fingerprint', computed as 'the applied seed equals the recorded seed'; both runs report all_seed_controlled True over 128/128 while disagreeing about three worlds. Docstring corrected, tests/episode_world_provenance_claim_test.py pins the distinction. TWO OPEN CALLS, BOTH PRO'S: whether this closes round 4 given the branch reproduces but the point estimates are not bit-reproducible across machines; and the severity of the reproducibility defect. Notes: 20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md and the corrected 20260729_H_RETURNED_AND_CANNOT_CLOSE_ROUND_4.md. OBLIGATIONS A, B AND C GREEN WITH REAL POWER (A 2180/1820 both classes; B 560/560 over 5600 steps with 19 LEAVE / 15 REJOIN, INCONCLUSIVE at the old 400-step default; C 120/120 with unconstructible=0, independent confirmation the repair killed double-holding). D-F STILL OPEN; D and E have no design and no script -- touchpoint-1 science needing a Pro round. ENVIRONMENT IS FASTER AND THE NATIVE PATH IS PROVEN: generic-SHORT toy env 1.92x (2839 -> 5462 steps/s) with caller-visible bytes unchanged, pinned at digest 50f7385f...0445e7; UAV geometry kernel BITWISE EXACT against the env (312/312, max_ulp 0). NOT INTEGRATED, deliberately -- wiring it into _update_channel_state retires 17.5% path loss plus 24% cache machinery per step. THREE GENERIC TRAPS, ALL LIVE: (a) a rate is evidence only if the triggering event fired; (b) use .claude/skills/hmasd-acceptance-gate/scripts/paired_negative.py, hand-rolled mutations miss silently; (c) a refusal is CONCLUSIVE and dominates a power guard. AND A FOURTH, earned twice today: a seed derivation that defaults to the wrong namespace, and a provenance flag that tests application while claiming reproduction, both read as correct forever -- print the namespace, and test the property you claim.
+next_boundary=PICK UP HERE. ROUND 4 IS RULED AND BOTH OF MY CONCLUSIONS WERE REFUTED. Ruling archived byte-exact at docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/ (21_PRO_OPEN_RAW.md, 22675 chars, ROUND_ARCHIVE_OK; reconciliation in 30_PM_..., transport in 50_...). VERDICTS: 4a NO (H keeps INVALID_R4_REALIZATION), 4b NO (earlier artifact too), 6a NO (the re-run does NOT carry the R4 conclusion), 6b the missing property is REPRODUCIBLE EVIDENCE-POPULATION IDENTITY not bit-identical estimates, 6c EXPLORATORY_BRANCH_ROBUSTNESS_UNDER_UNREGISTERED_WORLD_VARIATION, severity CLAIM-BLOCKING repair before any formal or published R4 claim. THE MECHANISM I MISSED, verified in source at scripts/audit_d7_s_event_aligned.py:3681: fork_continuation calls constructive_mixed_update(event='REJOIN', event_uav=focal_uav) at t=DELTA-1 in EVERY focal SET continuation -- the exact branch the repair changed. roll_power.rejoin_events counts only ENVIRONMENT falling-edge REJOINs inside the prefix roll, so it cannot see that call. 'The repaired branch never executed' was FALSE. MY OWN PROBE FALSIFIED THE OTHER CLAIM: set up as a falsification test with the prediction that 950<1167 forces ZERO_WITH_POWER, it returned R4_REJOIN_PROBE_FIRED -- 3 environment REJOINs inside 950-step rolls on the R4 population (20260734 calibration ep0, 20260736 audit ep1, 20260739 audit ep0), archived at 40_R4_REJOIN_PROBE_CORRECTED.json. The controller releases at REJOIN_BATTERY_RATIO=0.80 not full charge, and T_E_MAX=950 bounds the event SEARCH not the measurement, which continues H_STABLE=139 or H_FLEX=550 more steps. 20260734 calibration ep0 is the sharpest case: the formal run reports zero for that block and the probe finds one in that very episode, because the formal roll truncates at the first qualifying LEAVE. WHAT SURVIVES: zero environment REJOINs on the MAIN PREFIX paths, 225,048 injectivity checks, 0 refusals, and roll_power.leave_events == len(report['leaves']) in all 16 blocks (independent corroboration of the new counter). The original probe's withdrawal still stands on its own grounds -- wrong seed namespace -- and its numbers must never be cited even though the corrected probe reaches the same qualitative verdict. SCHEDULED NEXT ACTION, ruled: an episode-world provenance correction and ROOT-CAUSE LOCALIZATION, NOT another R4 run. Five steps: (1) compare component digests and identify the FIRST differing world array; (2) identify every writer and random source for that array; (3) freeze either manifest replay or deterministic generation; (4) define a cross-machine fail-closed conformance gate; (5) only then design fresh confirmatory evidence. Selected repair family is PERSIST AND REPLAY THE COMPLETE WORLD MANIFEST (not just its hash); live alternative is a pure deterministic seed-to-world generator gated by a CROSS-PROCESS AND CROSS-MACHINE digest check -- one machine is insufficient because one machine is exactly where the generator looks stable; machine-as-random-factor is PARKED. Pro's Challenge 6 forbids freezing 'machine-dependent construction state' as the cause until the digest comparison names the first differing surface. STEP 1 IS IN FLIGHT: component_digests is new so neither H nor the re-run has it, and locally all nine arrays are stable even under perturbed global RNG, so localization needs a second machine. Tag d7s-workers-2 at add28991 launched run 30516912923 -- the EXISTING workers job, which runs --smoke --dev --episodes-calibration 4 --episodes-audit 2 on ubuntu-latest and now emits component_digests. Development topology, no population inference, which is what Pro allows. The identical invocation is running locally for the comparison. WHEN IT RETURNS: diff component_digests per (block, episode_index) local vs cloud, name the first differing array, then step 2. CHALLENGE 7 CLOSED: user_world_seed no longer claims the seed makes the draw reproducible and full_state_fingerprint no longer claims unqualified cross-construction reproduction; guarded by tests/episode_world_provenance_claim_test.py with a paired negative watched failing. FULL AUDIT SUITE GREEN at add28991: 266 passed in 9:12. NATIVE KERNEL WIRED, DEFAULT OFF: envs/pettingzoo/scenario_base.py prefills the whole access path-loss matrix with one native call; flag-off/flag-on give identical SINR, connections and serving assignment over real steps; tests/native_geometry_integration_test.py. NOT benchmarked yet -- the box was contended, and a contended sample once nearly reported a 1.59x speedup as a regression. STANDING TRAPS: (a) a rate is evidence only if the triggering event fired; (b) use the paired_negative.py script, hand-rolled mutations miss silently; (c) a refusal is CONCLUSIVE and dominates a power guard; (d) print the namespace and test the property you claim; and NEW THIS ROUND (e) CHECK WHAT YOUR COUNTER COVERS BEFORE YOU BELIEVE ITS ZERO -- a real measurement of a narrower quantity, reported as the broader one, is how both refuted claims happened.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -112,51 +112,63 @@ F Stage B re-review of D'                REJECT -- conformance and semantics, tw
 F' repair D''                            DONE  0193de1a -- 291 passed, 8 paired negatives
 G Stage B review of D''                  APPROVE -- conformance and semantics
 G' hardening D''' (NB-1 and guard shapes) DONE  928b6e68 + a00612ad, 264+32 passed
-H formal R4 measurement                  RETURNED -- clean, and EXONERATED
-H' post-repair R4 re-run                 RETURNED -- 8/8, rejoin_events 0
+H formal R4 measurement                  INVALID_R4_REALIZATION stands (ruled)
+H' post-repair R4 re-run                 RETURNED 8/8 -- REJECTED as formal result
+I  provenance correction + localization   SCHEDULED, step 1 in flight
 ```
 
-**The re-run landed and it reverses H's disposition.** Run `30479940700`, tag
-`d7s-audit-4`, stage commit `56a64c3c`, 8/8 shards, 114 min. `roll_power` reads
-**zero `rejoin_events` across the whole R4 population** -- 111,433 rolled steps,
-225,048 injectivity checks, 109 leaves, 0 refusals. The repaired branch never
-executed, so pre-repair and post-repair code produce the same trajectories here.
+**RULED 2026-07-30: the re-run does NOT reverse H, and it is not a formal R4
+result.** Ruling archived at
+`docs/external-review/rounds/20260730_d7_s_r4_rerun_disposition/`; reconciliation
+in `30_PM_SCIENTIFIC_RECONCILIATION.md`.
 
-Verified three ways, not argued: H's audit module and HEAD's roll **bit-identical
-action prefixes** on the same R4 seeds; `audit_events` are **identical on 8/8
-topologies**; and the per-episode reports differ **only** by the added
-`roll_power` field. Branch reproduces exactly -- `PART_A_CONTRADICTION`, stable
-`AFFIRMATIVE_NONMATERIAL`, flex `UNRESOLVED`, every u\* interval covering zero.
-An unplanned replication.
+```text
+4a  retract H's invalid disposition           NO
+4b  retract it for the earlier R4 artifact    NO
+6a  does the rerun carry R4's conclusion      NO
+6b  missing property   reproducible evidence-population identity
+6c  classification     EXPLORATORY_BRANCH_ROBUSTNESS_UNDER_UNREGISTERED_WORLD_VARIATION
+D3  severity           claim-blocking repair
+```
 
-**H is exonerated. `INVALID_R4_REALIZATION` does not apply to it.** The charge
-rested partly on `d7_s_r4_rejoin_exposure_probe.py`, which derived seeds without
-`contract_id` and therefore rolled **R3-namespace episodes at R4 coordinates** --
-every seed different. Its `FIRED` verdict is VOID. Fixed and guarded; the R4
-namespace is now the default and any other is refused over that population.
+Run `30479940700`, tag `d7s-audit-4`, stage `56a64c3c`, 8/8 shards, 114 min,
+`PART_A_CONTRADICTION` / stable `AFFIRMATIVE_NONMATERIAL` / flex `UNRESOLVED`. It
+is preserved as a conditional within-run observation with **no confirmatory
+weight**.
 
-Zero is expected here for a reason that outranks the zero: charging to full takes
-~565 steps (1000 W, 160 Wh, dt=1) against a 950-step prefix with onset near 900,
-so **R4's horizon ends before any REJOIN can occur.** The R4 measurement is
-INSENSITIVE to the repair -- not evidence the repair was unnecessary. A longer
-horizon will enter that branch and must read `roll_power` rather than assume.
+**The mechanism I missed**, verified in source at
+`scripts/audit_d7_s_event_aligned.py:3681`: `fork_continuation` calls
+`constructive_mixed_update(event="REJOIN", event_uav=focal_uav)` at
+`t = DELTA - 1` in **every focal SET continuation** -- the exact branch the repair
+changed. `roll_power.rejoin_events` counts only ENVIRONMENT falling-edge REJOINs
+inside the prefix roll, so it cannot see that call. "The repaired branch never
+executed" was **false**.
 
-**A separate defect fell out of explaining why the point estimates moved**
-(`d_a` 0.4839 -> 0.5108). Same pinned topology hash, same `user_world_seed`, same
-`n_users`, `seed_controls_generation` True on every side -> **three different
-world fingerprints** (local, H, re-run); the two cloud runs disagree on 3 of 8
-topologies with numpy and python hard-pinned. Ruled out by measurement: code
-change, construction order, `PYTHONHASHSEED`, global RNG state, the pooler. The
-flag asserts more than it tests -- documented as "rebuilding at the same topology
-and seed reproduces this fingerprint", computed as "the applied seed equals the
-recorded seed". Docstring corrected; `tests/episode_world_provenance_claim_test.py`
-pins the distinction. Full reading:
-`docs/research/cdc/EVIDENCE_NOTES/20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md`.
+**My own probe then falsified the horizon claim.** Set up as a falsification test
+predicting `ZERO_WITH_POWER` because 950 < 1167, it returned
+`R4_REJOIN_PROBE_FIRED`: 3 environment REJOINs inside 950-step rolls on the R4
+population (20260734 calibration ep0, 20260736 audit ep1, 20260739 audit ep0),
+archived at that round's `40_R4_REJOIN_PROBE_CORRECTED.json`. The controller
+releases at `REJOIN_BATTERY_RATIO = 0.80`, not full charge, and `T_E_MAX = 950`
+bounds the event SEARCH, not the measurement, which continues `H_STABLE = 139` or
+`H_FLEX = 550` more steps. `20260734 calibration ep0` is the sharpest case: the
+formal run reports zero for that block and the probe finds one in that very
+episode, because the formal roll truncates at the first qualifying LEAVE.
 
-**Two open scientific calls, both Pro's, neither decided here:** whether this
-closes round 4 given that the branch and limb states reproduce but the point
-estimates are not bit-reproducible across machines; and the severity of the
-reproducibility defect.
+**What survives.** Zero environment REJOINs on the MAIN PREFIX paths, 225,048
+injectivity checks, 0 refusals, and `roll_power.leave_events` equal to
+`len(report["leaves"])` in all sixteen blocks -- independent corroboration of the
+new counter. The original probe's withdrawal stands on its own grounds (wrong seed
+namespace) and its numbers must never be cited, even though the corrected probe
+reaches the same qualitative verdict.
+
+**The claim-blocking defect.** Same pinned topology hash, same `user_world_seed`,
+same `n_users`, `seed_controls_generation` True on every side -> **three different
+world fingerprints**; the two cloud runs disagree on 3 of 8 topologies with numpy
+and python hard-pinned. Ruled a population-provenance failure, not a wording
+problem: a registered episode key must identify either one reproducible world or
+one validated probability law, and it currently identifies neither.
+
 
 **Step F existed because the gate was skipped, not because it was scheduled.**
 `COMPUTE_ROUTING.md`: "A conclusion-bearing run needs its gate passed first —
