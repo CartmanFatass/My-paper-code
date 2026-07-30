@@ -32,6 +32,16 @@ compact candidate mechanism, but whether the paper can stand depends first on
 G0, not on further toy ablations. Treat that summary as a proposal to audit,
 not as an accepted scientific conclusion.
 
+## GitHub connector access boundary
+
+Use the connected GitHub repository connector for reviewer-visible source
+access: `https://github.com/CartmanFatass/My-paper-code.git`, branch
+`aggressive`, exact stage commit from the Assignment fence. Read only the
+allow-listed repository-relative paths below through that connector. Do not
+use the prior custom-GPT conversation, a local working tree, an unlisted path,
+or an inferred code snapshot. If connector access is unavailable, report an
+objective transport diagnostic rather than substituting or guessing evidence.
+
 Decide whether the next correct boundary is a minimal UAV
 `SOURCE_IDENTIFIABILITY_G0` design audit. If it is, freeze the smallest
 executable contract that tests both (a) physical/service-task feasibility and
