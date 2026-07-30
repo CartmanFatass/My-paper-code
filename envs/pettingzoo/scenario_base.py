@@ -2730,11 +2730,24 @@ class UAVForcedRelayEnv(ParallelEnv):
         if bool(getattr(self, "_disable_step_communication_cache", False)):
             self._step_communication_cache = None
             return None
+        unavailable = self._communication_unavailable_mask()
         cache = {
             "uav_positions": np.asarray(self.uav_positions).copy(),
             "user_positions": np.asarray(self.user_positions).copy(),
             "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
-            "unavailable": self._communication_unavailable_mask(),
+            "unavailable": unavailable,
+            # Byte snapshots let the per-call revalidation below compare with
+            # `.tobytes()` instead of `np.array_equal`. Bytes-equality differs
+            # from array_equal only on +/-0.0 (array_equal: equal; bytes:
+            # different -> invalidates -> fallback recomputes the same bits,
+            # value-neutral) and identical-pattern NaN (array_equal: not
+            # equal; bytes: equal -> trusts values computed from this
+            # byte-identical snapshot, value-neutral). For the bool mask,
+            # byte and value equality coincide exactly.
+            "uav_positions_bytes": None,
+            "user_positions_bytes": None,
+            "ground_bs_positions_bytes": None,
+            "unavailable_bytes": None,
             "config": self._communication_config_signature(),
             "user_path_loss": {},
             "user_path_loss_matrix": None,
@@ -2750,6 +2763,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             "link_sinr": {},
             "link_capacity": {},
         }
+        # Snapshot the byte representation of the exact arrays just copied into
+        # the cache (not a fresh read of self.xxx) so this reflects precisely
+        # the state every accessor below is validated against.
+        cache["uav_positions_bytes"] = cache["uav_positions"].tobytes()
+        cache["user_positions_bytes"] = cache["user_positions"].tobytes()
+        cache["ground_bs_positions_bytes"] = cache["ground_bs_positions"].tobytes()
+        cache["unavailable_bytes"] = np.ascontiguousarray(cache["unavailable"]).tobytes()
         self._step_communication_cache = cache
         self._prefill_communication_natively(cache)
         return cache
@@ -2860,15 +2880,32 @@ class UAVForcedRelayEnv(ParallelEnv):
             return None
         if bool(getattr(self, "_channel_update_cache_active", False)):
             return cache
+        # Trust window: between _update_channel_state()'s refresh and base
+        # step()'s return, the writer inventory at 135831d9 proves no
+        # production writer touches any input this method validates (see the
+        # comment in step() where this flag is set). Skipping revalidation
+        # inside that window is therefore value-neutral. Accessor calls made
+        # from outside step() never see this flag set and fall through to the
+        # full per-call revalidation below, unchanged.
+        if bool(getattr(self, "_intra_step_cache_trusted", False)):
+            return cache
         if cache["config"] != self._communication_config_signature():
             return None
-        if not np.array_equal(cache["uav_positions"], self.uav_positions):
+        # Byte-compare instead of np.array_equal. This differs from
+        # array_equal only on +/-0.0 (array_equal: equal; bytes: different ->
+        # invalidates -> fallback recomputes the same bits, value-neutral) and
+        # identical-pattern NaN (array_equal: not equal; bytes: equal ->
+        # trusts values computed from this byte-identical snapshot,
+        # value-neutral). For the bool mask, byte and value equality coincide
+        # exactly.
+        if np.ascontiguousarray(self.uav_positions).tobytes() != cache["uav_positions_bytes"]:
             return None
-        if not np.array_equal(cache["user_positions"], self.user_positions):
+        if np.ascontiguousarray(self.user_positions).tobytes() != cache["user_positions_bytes"]:
             return None
-        if not np.array_equal(cache["ground_bs_positions"], self.ground_bs_positions):
+        if np.ascontiguousarray(self.ground_bs_positions).tobytes() != cache["ground_bs_positions_bytes"]:
             return None
-        if not np.array_equal(cache["unavailable"], self._communication_unavailable_mask()):
+        current_unavailable = self._communication_unavailable_mask()
+        if np.ascontiguousarray(current_unavailable).tobytes() != cache["unavailable_bytes"]:
             return None
         return cache
 
@@ -3435,343 +3472,359 @@ class UAVForcedRelayEnv(ParallelEnv):
 
         # 3. Update system state based on new positions
         self._update_channel_state()
-        self._update_uav_connections()
+        # The writer inventory at 135831d9 proves no production writer to any
+        # validity input (config-signature fields, uav/user/ground_bs positions,
+        # the unavailability mask) exists between _update_channel_state()'s
+        # refresh and this method's return: positions are only written earlier
+        # in this same step (_move_users, the action loop, and the
+        # save-mutate-restore in _would_preserve_dependent_backhaul_paths, all
+        # before _update_channel_state()); scenario7's battery/failure mutation
+        # (S5, _apply_energy_dynamics) runs AFTER this method returns, so even the
+        # unavailability mask cannot change inside this window. Trusting the
+        # cache unconditionally for the rest of this call is therefore
+        # value-neutral. Accessor calls made from OUTSIDE step() never see this
+        # flag set and keep full per-call revalidation.
+        self._intra_step_cache_trusted = True
+        try:
+            self._update_uav_connections()
         
-        # 【核心修改】实现分层的路由计算
-        # 高层决策：周期性更新全局 hop_map
-        if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
-            self.hop_map = self._calculate_hop_map()
-            
-        # 【新增】分层可见性：在K step同步时更新全局基站缓存
-        if self.current_step % self.hggr_update_interval == 0:
-            self._update_global_bs_cache()
-        
-        # 低层决策：每一步都基于当前（可能过时的）信息计算路径
-        self._compute_routing_paths()
-
-        # >>> 插入数据包仿真调用 <<<
-        self._simulate_packet_flow()
-        
-        # 计算路由开销（简化版本 - 基于协议类型）
-        if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router'):
-            routing_overhead_this_step = self.router.get_and_reset_overhead()
-        else:
-            # 使用默认的简化开销模型
+            # 【核心修改】实现分层的路由计算
+            # 高层决策：周期性更新全局 hop_map
             if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
-                routing_overhead_this_step = self.n_uavs  # HGGR的全局更新开销
-            elif self.routing_protocol == 'geographic':
-                routing_overhead_this_step = self.n_uavs  # 地理路由的hello消息开销
-            else:
-                routing_overhead_this_step = 0  # 其他协议的默认开销
-
-        # 7. CALCULATE REWARDS
-        # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
-        self._calculate_coverage_metrics()
-        backhaul_outage_metrics = self._calculate_backhaul_outage_metrics()
-        relay_backhaul_metrics = self._calculate_relay_backhaul_metrics()
-        reward_components = {}
-        # 始终计算切换指标以用于日志记录
-        #handover_metrics = self._calculate_handover_metrics()
-
-        # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
-        system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
-        self.reward_info['system_throughput_mbps'] = system_throughput_mbps
-        self.reward_info['avg_throughput_per_user_mbps'] = avg_throughput_per_user_mbps
-
-        # 11. 更新步数并检查终止/截断条件
-        self.current_step += 1
-        # 检查是否因为达到最大步数而被截断
-        is_truncated = self.current_step >= self.max_steps
-        # 【方案A修改】不再因为100%覆盖而提前终止，让episode自然运行到max_steps
-        # 这样可以解决GAE问题，并鼓励智能体学会维持最优状态
-        # coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-        # is_terminated = coverage_ratio >= 1.0
-        is_terminated = False  # 永不提前终止
-
-        # 12. 准备返回值
-        observations = {}
-        rewards = {}
-        terminations = {}
-        truncations = {}
-        infos = {}
+                self.hop_map = self._calculate_hop_map()
+            
+            # 【新增】分层可见性：在K step同步时更新全局基站缓存
+            if self.current_step % self.hggr_update_interval == 0:
+                self._update_global_bs_cache()
         
-        # 根据模式计算奖励 - 简化版：只保留三种模式
-        # 根据reward_type参数选择奖励类型
-        if self.reward_type == "naive":
-            # naive模式：直接使用覆盖率作为奖励
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            shared_reward = coverage_ratio
-        elif self.reward_type == "load_balance":
-            # load_balance 模式: 使用门控奖励机制 + 斥力场惩罚
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            load_balance_penalty = self._calculate_load_balancing_penalty()
-            repulsion_penalty = self._calculate_repulsion_penalty()
-            backhaul_outage_ratio = backhaul_outage_metrics.get("backhaul_outage_ratio", 0.0)
-            backhaul_drop_ratio = backhaul_outage_metrics.get("backhaul_drop_ratio", 0.0)
-            coverage_drop_ratio = backhaul_outage_metrics.get("coverage_drop_ratio", 0.0)
-            outage_memory_penalty = backhaul_outage_metrics.get("backhaul_outage_ema", 0.0)
-            full_disconnect_penalty = float(backhaul_outage_metrics.get("full_network_disconnect", 0))
-            relay_route_loss_ratio = relay_backhaul_metrics.get("relay_route_loss_ratio", 0.0)
-            relay_margin_penalty = relay_backhaul_metrics.get("backhaul_margin_penalty_raw", 0.0)
-            
-            # 组合惩罚项：负载均衡 + 斥力场
-            # 使用权重参数来平衡两种惩罚的影响
-            w_repulsion = getattr(self, 'w_repulsion', 0.3)  # 默认斥力场权重为0.3
-            combined_penalty = self.w_load_balance * load_balance_penalty + w_repulsion * repulsion_penalty
-            
-            shared_reward = coverage_ratio * (1 - combined_penalty)
+            # 低层决策：每一步都基于当前（可能过时的）信息计算路径
+            self._compute_routing_paths()
 
-            # 回传断联惩罚不乘覆盖率。即使瞬时覆盖率已经掉到0，也保留负梯度，
-            # 避免策略把短时断联当作普通低覆盖状态处理。
-            robustness_penalty = (
-                self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio) +
-                self.w_full_disconnect * full_disconnect_penalty +
-                self.w_coverage_drop * coverage_drop_ratio +
-                self.w_outage_memory * outage_memory_penalty +
-                self.w_relay_break * relay_route_loss_ratio +
-                self.w_backhaul_margin * relay_margin_penalty
-            )
-            shared_reward -= robustness_penalty
-
-            # === 灯塔导航奖励 (Lighthouse/Navigation Reward) ===
-            # 替代原有的 catalyst_reward，解决极端位置导致的稀疏性问题
-            
-            # 1. 检查整个团队是否有任何连接
-            team_connected = np.any(self.uav_bs_connections)
-            
-            nav_reward = 0.0
-            
-            if not team_connected:
-                # === 阶段 A: 求生模式 (Survival Mode) ===
-                # 全员未连接，给予基于距离的负奖励（引导向基站移动）
-                
-                # 计算每个UAV到最近基站的距离
-                dists = []
-                for uav_pos in self.uav_positions:
-                    d = np.linalg.norm(self.ground_bs_positions - uav_pos, axis=1)
-                    dists.append(np.min(d))  # 找到离该UAV最近的基站距离
-                
-                avg_min_dist = np.mean(dists)
-                
-                # 归一化距离 (使用地图对角线长度)
-                map_scale = self.area_size * np.sqrt(2)
-                normalized_dist = avg_min_dist / map_scale
-                
-                # 复用 w_first_contact 作为导航权重
-                w_nav = self.w_first_contact
-                
-                # 给予负奖励：距离越远，惩罚越大
-                # 这样梯度下降的方向就是让距离变小
-                nav_reward = -1.0 * w_nav * normalized_dist
+            # >>> 插入数据包仿真调用 <<<
+            self._simulate_packet_flow()
+        
+            # 计算路由开销（简化版本 - 基于协议类型）
+            if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router'):
+                routing_overhead_this_step = self.router.get_and_reset_overhead()
             else:
-                # === 阶段 B: 覆盖模式 (Coverage Mode) ===
-                # 已经连接，关闭导航奖励，专注于覆盖
+                # 使用默认的简化开销模型
+                if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
+                    routing_overhead_this_step = self.n_uavs  # HGGR的全局更新开销
+                elif self.routing_protocol == 'geographic':
+                    routing_overhead_this_step = self.n_uavs  # 地理路由的hello消息开销
+                else:
+                    routing_overhead_this_step = 0  # 其他协议的默认开销
+
+            # 7. CALCULATE REWARDS
+            # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
+            self._calculate_coverage_metrics()
+            backhaul_outage_metrics = self._calculate_backhaul_outage_metrics()
+            relay_backhaul_metrics = self._calculate_relay_backhaul_metrics()
+            reward_components = {}
+            # 始终计算切换指标以用于日志记录
+            #handover_metrics = self._calculate_handover_metrics()
+
+            # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
+            system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
+            self.reward_info['system_throughput_mbps'] = system_throughput_mbps
+            self.reward_info['avg_throughput_per_user_mbps'] = avg_throughput_per_user_mbps
+
+            # 11. 更新步数并检查终止/截断条件
+            self.current_step += 1
+            # 检查是否因为达到最大步数而被截断
+            is_truncated = self.current_step >= self.max_steps
+            # 【方案A修改】不再因为100%覆盖而提前终止，让episode自然运行到max_steps
+            # 这样可以解决GAE问题，并鼓励智能体学会维持最优状态
+            # coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+            # is_terminated = coverage_ratio >= 1.0
+            is_terminated = False  # 永不提前终止
+
+            # 12. 准备返回值
+            observations = {}
+            rewards = {}
+            terminations = {}
+            truncations = {}
+            infos = {}
+        
+            # 根据模式计算奖励 - 简化版：只保留三种模式
+            # 根据reward_type参数选择奖励类型
+            if self.reward_type == "naive":
+                # naive模式：直接使用覆盖率作为奖励
+                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+                shared_reward = coverage_ratio
+            elif self.reward_type == "load_balance":
+                # load_balance 模式: 使用门控奖励机制 + 斥力场惩罚
+                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+                load_balance_penalty = self._calculate_load_balancing_penalty()
+                repulsion_penalty = self._calculate_repulsion_penalty()
+                backhaul_outage_ratio = backhaul_outage_metrics.get("backhaul_outage_ratio", 0.0)
+                backhaul_drop_ratio = backhaul_outage_metrics.get("backhaul_drop_ratio", 0.0)
+                coverage_drop_ratio = backhaul_outage_metrics.get("coverage_drop_ratio", 0.0)
+                outage_memory_penalty = backhaul_outage_metrics.get("backhaul_outage_ema", 0.0)
+                full_disconnect_penalty = float(backhaul_outage_metrics.get("full_network_disconnect", 0))
+                relay_route_loss_ratio = relay_backhaul_metrics.get("relay_route_loss_ratio", 0.0)
+                relay_margin_penalty = relay_backhaul_metrics.get("backhaul_margin_penalty_raw", 0.0)
+            
+                # 组合惩罚项：负载均衡 + 斥力场
+                # 使用权重参数来平衡两种惩罚的影响
+                w_repulsion = getattr(self, 'w_repulsion', 0.3)  # 默认斥力场权重为0.3
+                combined_penalty = self.w_load_balance * load_balance_penalty + w_repulsion * repulsion_penalty
+            
+                shared_reward = coverage_ratio * (1 - combined_penalty)
+
+                # 回传断联惩罚不乘覆盖率。即使瞬时覆盖率已经掉到0，也保留负梯度，
+                # 避免策略把短时断联当作普通低覆盖状态处理。
+                robustness_penalty = (
+                    self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio) +
+                    self.w_full_disconnect * full_disconnect_penalty +
+                    self.w_coverage_drop * coverage_drop_ratio +
+                    self.w_outage_memory * outage_memory_penalty +
+                    self.w_relay_break * relay_route_loss_ratio +
+                    self.w_backhaul_margin * relay_margin_penalty
+                )
+                shared_reward -= robustness_penalty
+
+                # === 灯塔导航奖励 (Lighthouse/Navigation Reward) ===
+                # 替代原有的 catalyst_reward，解决极端位置导致的稀疏性问题
+            
+                # 1. 检查整个团队是否有任何连接
+                team_connected = np.any(self.uav_bs_connections)
+            
                 nav_reward = 0.0
+            
+                if not team_connected:
+                    # === 阶段 A: 求生模式 (Survival Mode) ===
+                    # 全员未连接，给予基于距离的负奖励（引导向基站移动）
                 
-            shared_reward += nav_reward
+                    # 计算每个UAV到最近基站的距离
+                    dists = []
+                    for uav_pos in self.uav_positions:
+                        d = np.linalg.norm(self.ground_bs_positions - uav_pos, axis=1)
+                        dists.append(np.min(d))  # 找到离该UAV最近的基站距离
+                
+                    avg_min_dist = np.mean(dists)
+                
+                    # 归一化距离 (使用地图对角线长度)
+                    map_scale = self.area_size * np.sqrt(2)
+                    normalized_dist = avg_min_dist / map_scale
+                
+                    # 复用 w_first_contact 作为导航权重
+                    w_nav = self.w_first_contact
+                
+                    # 给予负奖励：距离越远，惩罚越大
+                    # 这样梯度下降的方向就是让距离变小
+                    nav_reward = -1.0 * w_nav * normalized_dist
+                else:
+                    # === 阶段 B: 覆盖模式 (Coverage Mode) ===
+                    # 已经连接，关闭导航奖励，专注于覆盖
+                    nav_reward = 0.0
+                
+                shared_reward += nav_reward
 
-            reward_components.update({
-                "gated_reward": shared_reward,
-                "load_balance_reward": shared_reward,
-                "rt_final_health_score": shared_reward,
-                "load_balance_penalty": load_balance_penalty,
-                "repulsion_penalty": repulsion_penalty,
-                "combined_penalty": combined_penalty,
-                "robustness_penalty": robustness_penalty,
-                "backhaul_outage_penalty": self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio),
-                "full_disconnect_penalty": self.w_full_disconnect * full_disconnect_penalty,
-                "coverage_drop_penalty": self.w_coverage_drop * coverage_drop_ratio,
-                "outage_memory_penalty": self.w_outage_memory * outage_memory_penalty,
-                "relay_break_penalty": self.w_relay_break * relay_route_loss_ratio,
-                "backhaul_margin_penalty": self.w_backhaul_margin * relay_margin_penalty,
-                "backhaul_guard_checked_actions": getattr(self, 'backhaul_guard_checked_actions', 0),
-                "backhaul_guard_blocked_actions": getattr(self, 'backhaul_guard_blocked_actions', 0),
-                "nav_reward": nav_reward  # 记录导航奖励以便观察
-            })
-        elif self.reward_type == "awareness":
-            # awareness模式：覆盖率 + 地图新鲜度 + 负载均衡的综合惩罚
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+                reward_components.update({
+                    "gated_reward": shared_reward,
+                    "load_balance_reward": shared_reward,
+                    "rt_final_health_score": shared_reward,
+                    "load_balance_penalty": load_balance_penalty,
+                    "repulsion_penalty": repulsion_penalty,
+                    "combined_penalty": combined_penalty,
+                    "robustness_penalty": robustness_penalty,
+                    "backhaul_outage_penalty": self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio),
+                    "full_disconnect_penalty": self.w_full_disconnect * full_disconnect_penalty,
+                    "coverage_drop_penalty": self.w_coverage_drop * coverage_drop_ratio,
+                    "outage_memory_penalty": self.w_outage_memory * outage_memory_penalty,
+                    "relay_break_penalty": self.w_relay_break * relay_route_loss_ratio,
+                    "backhaul_margin_penalty": self.w_backhaul_margin * relay_margin_penalty,
+                    "backhaul_guard_checked_actions": getattr(self, 'backhaul_guard_checked_actions', 0),
+                    "backhaul_guard_blocked_actions": getattr(self, 'backhaul_guard_blocked_actions', 0),
+                    "nav_reward": nav_reward  # 记录导航奖励以便观察
+                })
+            elif self.reward_type == "awareness":
+                # awareness模式：覆盖率 + 地图新鲜度 + 负载均衡的综合惩罚
+                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
             
-            # 计算两种惩罚
-            freshness_penalty = self._calculate_map_freshness_penalty()
-            balance_penalty = self._calculate_load_balancing_penalty()
+                # 计算两种惩罚
+                freshness_penalty = self._calculate_map_freshness_penalty()
+                balance_penalty = self._calculate_load_balancing_penalty()
             
-            # 组合成综合惩罚项
-            comprehensive_penalty = (self.w_freshness_penalty * freshness_penalty +
-                                     self.w_load_balance * balance_penalty)
+                # 组合成综合惩罚项
+                comprehensive_penalty = (self.w_freshness_penalty * freshness_penalty +
+                                         self.w_load_balance * balance_penalty)
             
-            # 应用乘法结构
-            shared_reward = coverage_ratio * (1 - np.clip(comprehensive_penalty, 0, 1))
+                # 应用乘法结构
+                shared_reward = coverage_ratio * (1 - np.clip(comprehensive_penalty, 0, 1))
             
-            # 更新日志
-            reward_components["freshness_penalty"] = freshness_penalty
-            reward_components["awareness_reward"] = shared_reward
-        elif self.reward_type == "test_reward":
-            # ===== test_reward Ver2.0: 基于真实物理能耗模型 =====
+                # 更新日志
+                reward_components["freshness_penalty"] = freshness_penalty
+                reward_components["awareness_reward"] = shared_reward
+            elif self.reward_type == "test_reward":
+                # ===== test_reward Ver2.0: 基于真实物理能耗模型 =====
             
-            # --- Part 1: 基于 IEEE TWC (Zeng et al. 2019) 的物理能耗惩罚 ---
-            total_power_watts = 0.0
+                # --- Part 1: 基于 IEEE TWC (Zeng et al. 2019) 的物理能耗惩罚 ---
+                total_power_watts = 0.0
             
-            for i, agent in enumerate(self.agents):
-                if agent in actions:
-                    # 获取速度 (增加安全检查)
-                    if self.action_space_type == 'discrete':
-                        action = actions[agent]
-                        if action in self.action_to_velocity:
-                            vel = self.action_to_velocity[action]
+                for i, agent in enumerate(self.agents):
+                    if agent in actions:
+                        # 获取速度 (增加安全检查)
+                        if self.action_space_type == 'discrete':
+                            action = actions[agent]
+                            if action in self.action_to_velocity:
+                                vel = self.action_to_velocity[action]
+                            else:
+                                # 默认悬停
+                                vel = self.action_to_velocity[0]
                         else:
-                            # 默认悬停
-                            vel = self.action_to_velocity[0]
-                    else:
-                        vel = actions[agent] * self.max_speed
+                            vel = actions[agent] * self.max_speed
                     
-                    v_xy = np.linalg.norm(vel[:2])
-                    v_z = vel[2] # 保留符号，虽然我们在计算功率时用了abs
+                        v_xy = np.linalg.norm(vel[:2])
+                        v_z = vel[2] # 保留符号，虽然我们在计算功率时用了abs
                     
-                    # 计算该无人机的瞬时功率 (W)
-                    power = self._calculate_power_consumption(v_xy, v_z)
+                        # 计算该无人机的瞬时功率 (W)
+                        power = self._calculate_power_consumption(v_xy, v_z)
                     
-                    # 我们主要惩罚 "额外的运动能耗"，而不是悬停能耗
-                    # 因此减去悬停功率 (v=0时的功率)
-                    # P_hover = P0 + Pi ≈ 168W
-                    # 这样静止时的惩罚为 0
-                    p_hover = self.P0 + self.Pi
-                    extra_power = max(0, power - p_hover)
+                        # 我们主要惩罚 "额外的运动能耗"，而不是悬停能耗
+                        # 因此减去悬停功率 (v=0时的功率)
+                        # P_hover = P0 + Pi ≈ 168W
+                        # 这样静止时的惩罚为 0
+                        p_hover = self.P0 + self.Pi
+                        extra_power = max(0, power - p_hover)
                     
-                    total_power_watts += extra_power
+                        total_power_watts += extra_power
 
-            # 归一化处理
-            # 这里的 max_power_consumption 也是减去悬停功率后的值
-            max_extra_power = self.max_power_consumption - (self.P0 + self.Pi)
-            # 防止除以零或过小
-            if max_extra_power <= 1e-3:
-                max_extra_power = 1.0
+                # 归一化处理
+                # 这里的 max_power_consumption 也是减去悬停功率后的值
+                max_extra_power = self.max_power_consumption - (self.P0 + self.Pi)
+                # 防止除以零或过小
+                if max_extra_power <= 1e-3:
+                    max_extra_power = 1.0
             
-            normalized_energy_penalty = total_power_watts / (self.n_uavs * max_extra_power)
+                normalized_energy_penalty = total_power_watts / (self.n_uavs * max_extra_power)
             
-            # 【安全保护】防止惩罚值爆炸
-            if normalized_energy_penalty > 2.0:
-                # print(f"Warning: Energy penalty exploded ({normalized_energy_penalty:.2f}). Total Watts: {total_power_watts:.2f}, Max Extra/UAV: {max_extra_power:.2f}")
-                normalized_energy_penalty = 2.0 # 软截断
+                # 【安全保护】防止惩罚值爆炸
+                if normalized_energy_penalty > 2.0:
+                    # print(f"Warning: Energy penalty exploded ({normalized_energy_penalty:.2f}). Total Watts: {total_power_watts:.2f}, Max Extra/UAV: {max_extra_power:.2f}")
+                    normalized_energy_penalty = 2.0 # 软截断
             
-            # --- Part 2: 稳定性迟滞惩罚 (Hysteresis) ---
-            # 比较当前连接状态与上一步连接状态
-            current_connected = set()
-            prev_connected = getattr(self, '_prev_connected_ues', set())
+                # --- Part 2: 稳定性迟滞惩罚 (Hysteresis) ---
+                # 比较当前连接状态与上一步连接状态
+                current_connected = set()
+                prev_connected = getattr(self, '_prev_connected_ues', set())
             
-            for user_idx in range(self.n_users):
-                for uav_idx in range(self.n_uavs):
-                    if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
-                        current_connected.add(user_idx)
-                        break
+                for user_idx in range(self.n_users):
+                    for uav_idx in range(self.n_uavs):
+                        if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
+                            current_connected.add(user_idx)
+                            break
             
-            # 计算新上线和掉线的用户数量
-            new_connected = current_connected - prev_connected  # 新上线
-            disconnected = prev_connected - current_connected   # 掉线
+                # 计算新上线和掉线的用户数量
+                new_connected = current_connected - prev_connected  # 新上线
+                disconnected = prev_connected - current_connected   # 掉线
             
-            # 迟滞系数：掉线惩罚是上线收益的2.5倍
-            hysteresis_ratio = 2.5
-            connection_gain = len(new_connected) * 1.0
-            disconnection_loss = len(disconnected) * hysteresis_ratio
+                # 迟滞系数：掉线惩罚是上线收益的2.5倍
+                hysteresis_ratio = 2.5
+                connection_gain = len(new_connected) * 1.0
+                disconnection_loss = len(disconnected) * hysteresis_ratio
             
-            # 归一化迟滞惩罚到 [-1, 1]
-            # 正值表示净收益，负值表示净损失
-            if self.n_users > 0:
-                hysteresis_score = (connection_gain - disconnection_loss) / self.n_users
+                # 归一化迟滞惩罚到 [-1, 1]
+                # 正值表示净收益，负值表示净损失
+                if self.n_users > 0:
+                    hysteresis_score = (connection_gain - disconnection_loss) / self.n_users
+                else:
+                    hysteresis_score = 0.0
+                hysteresis_score = np.clip(hysteresis_score, -1.0, 1.0)
+            
+                # 保存当前状态用于下一步
+                self._prev_connected_ues = current_connected.copy()
+            
+                # --- Part 3: 组合最终奖励 ---
+                # 基础覆盖率奖励 (使用已计算的覆盖率)
+                coverage_reward = self.reward_info.get("coverage_ratio", 0)
+            
+                # 组合公式：
+                # R = w_cov * coverage - w_energy * energy_penalty + w_hysteresis * hysteresis_score
+                w_coverage = 0.5
+                # w_energy 建议 0.05 ~ 0.1, 使用初始化时设定的值
+                w_energy = self.w_energy 
+                w_hysteresis = 0.3
+            
+                shared_reward = (w_coverage * coverage_reward - 
+                                w_energy * normalized_energy_penalty + 
+                                w_hysteresis * hysteresis_score)
+            
+                # 更新日志
+                reward_components["test_reward"] = shared_reward
+                reward_components["energy_penalty"] = normalized_energy_penalty
+                reward_components["hysteresis_score"] = hysteresis_score
+                reward_components["coverage_component"] = coverage_reward
+                reward_components["total_power_watts"] = total_power_watts # 记录总功率以便调试
             else:
-                hysteresis_score = 0.0
-            hysteresis_score = np.clip(hysteresis_score, -1.0, 1.0)
-            
-            # 保存当前状态用于下一步
-            self._prev_connected_ues = current_connected.copy()
-            
-            # --- Part 3: 组合最终奖励 ---
-            # 基础覆盖率奖励 (使用已计算的覆盖率)
-            coverage_reward = self.reward_info.get("coverage_ratio", 0)
-            
-            # 组合公式：
-            # R = w_cov * coverage - w_energy * energy_penalty + w_hysteresis * hysteresis_score
-            w_coverage = 0.5
-            # w_energy 建议 0.05 ~ 0.1, 使用初始化时设定的值
-            w_energy = self.w_energy 
-            w_hysteresis = 0.3
-            
-            shared_reward = (w_coverage * coverage_reward - 
-                            w_energy * normalized_energy_penalty + 
-                            w_hysteresis * hysteresis_score)
-            
-            # 更新日志
-            reward_components["test_reward"] = shared_reward
-            reward_components["energy_penalty"] = normalized_energy_penalty
-            reward_components["hysteresis_score"] = hysteresis_score
-            reward_components["coverage_component"] = coverage_reward
-            reward_components["total_power_watts"] = total_power_watts # 记录总功率以便调试
-        else:
-            # 默认使用naive模式
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            shared_reward = coverage_ratio
+                # 默认使用naive模式
+                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+                shared_reward = coverage_ratio
         
-        # 所有智能体接收完全相同的共享团队奖励
-        for agent in self.agents:
-            rewards[agent] = shared_reward
-
-        # Visualization consumes these snapshots from every agent's reward_info.
-        # Build them once per step and share the same read-only-by-contract values
-        # instead of copying the full topology once for every agent.
-        connections_snapshot = self.connections.copy()
-        routing_paths_snapshot = dict(self.routing_paths)
-        defer_base_views = bool(
-            getattr(self, "_defer_base_view_materialization", False)
-        )
-
-        # 13. 获取新的观测并填充返回值
-        for agent_idx, agent in enumerate(self.agents):
-            if not defer_base_views:
-                observations[agent] = self._get_observation(agent)
-
-            # 【核心修正】正确设置 termination 和 truncation
-            terminations[agent] = is_terminated
-            truncations[agent] = is_truncated
-            
-            # 【关键修复】创建统一的 reward_info 字典，包含所有性能指标
-            # 合并基础覆盖指标和网络健康度组件
-            unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
-            unified_reward_info.update(reward_components)  # 添加网络健康度组件
-            
-            # 添加额外的性能指标
-            unified_reward_info.update({
-                "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
-                "total_connected_users": sum(np.sum(self.connections[i]) for i in range(self.n_uavs)),
-                "uavs_with_backhaul": len(self.routing_paths),
-                "system_throughput_mbps": system_throughput_mbps,
-                "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
-                "connections": connections_snapshot,
-                "routing_paths": routing_paths_snapshot,
-            })
-            
-            # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化
-            infos[agent] = {
-                "reward_info": unified_reward_info,
-                "coverage_ratio": unified_reward_info.get("coverage_ratio", 0),
-                "connectivity_ratio": unified_reward_info.get("connectivity_ratio", 0),
-            # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
-            "uav_positions": self.uav_positions.copy(),
-            # 添加路由开销信息
-                "routing_overhead": routing_overhead_this_step,
-                "routing_protocol": self.routing_protocol,
-            }
-        
-        # 7. 更新观测值（在循环外一次性完成）
-        if not defer_base_views:
-            observations = self._update_observations_dict(observations)
-
-            # 8. 计算并添加 next_state 到 infos
-            next_state = self._get_state()
-            self.state = next_state
+            # 所有智能体接收完全相同的共享团队奖励
             for agent in self.agents:
-                infos[agent]['next_state'] = next_state.copy()
+                rewards[agent] = shared_reward
+
+            # Visualization consumes these snapshots from every agent's reward_info.
+            # Build them once per step and share the same read-only-by-contract values
+            # instead of copying the full topology once for every agent.
+            connections_snapshot = self.connections.copy()
+            routing_paths_snapshot = dict(self.routing_paths)
+            defer_base_views = bool(
+                getattr(self, "_defer_base_view_materialization", False)
+            )
+
+            # 13. 获取新的观测并填充返回值
+            for agent_idx, agent in enumerate(self.agents):
+                if not defer_base_views:
+                    observations[agent] = self._get_observation(agent)
+
+                # 【核心修正】正确设置 termination 和 truncation
+                terminations[agent] = is_terminated
+                truncations[agent] = is_truncated
             
-        return observations, rewards, terminations, truncations, infos
+                # 【关键修复】创建统一的 reward_info 字典，包含所有性能指标
+                # 合并基础覆盖指标和网络健康度组件
+                unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
+                unified_reward_info.update(reward_components)  # 添加网络健康度组件
+            
+                # 添加额外的性能指标
+                unified_reward_info.update({
+                    "connectivity_ratio": len(self.routing_paths) / self.n_uavs if self.n_uavs > 0 else 0,
+                    "total_connected_users": sum(np.sum(self.connections[i]) for i in range(self.n_uavs)),
+                    "uavs_with_backhaul": len(self.routing_paths),
+                    "system_throughput_mbps": system_throughput_mbps,
+                    "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
+                    "connections": connections_snapshot,
+                    "routing_paths": routing_paths_snapshot,
+                })
+            
+                # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化
+                infos[agent] = {
+                    "reward_info": unified_reward_info,
+                    "coverage_ratio": unified_reward_info.get("coverage_ratio", 0),
+                    "connectivity_ratio": unified_reward_info.get("connectivity_ratio", 0),
+                # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
+                "uav_positions": self.uav_positions.copy(),
+                # 添加路由开销信息
+                    "routing_overhead": routing_overhead_this_step,
+                    "routing_protocol": self.routing_protocol,
+                }
+        
+            # 7. 更新观测值（在循环外一次性完成）
+            if not defer_base_views:
+                observations = self._update_observations_dict(observations)
+
+                # 8. 计算并添加 next_state 到 infos
+                next_state = self._get_state()
+                self.state = next_state
+                for agent in self.agents:
+                    infos[agent]['next_state'] = next_state.copy()
+            
+            return observations, rewards, terminations, truncations, infos
+        finally:
+            self._intra_step_cache_trusted = False
 
     def observation_space(self, agent):
         return self.observation_spaces[agent]
