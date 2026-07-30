@@ -137,17 +137,47 @@ def runtime_identity() -> dict:
                 "openblas_configuration": entry.get("openblas configuration")}
     except Exception:
         blas = {}
+    # `__cpu_baseline__` and `__cpu_dispatch__` are COMPILE-time: identical on every
+    # machine running the same wheel, so they discriminate nothing.
+    # `__cpu_features__` is RUNTIME-detected -- the features this CPU actually has --
+    # and it is the field that can tell two runners apart.
+    #
+    # This distinction cost a round trip. The first version recorded only the
+    # compile-time lists and `platform.processor()`, which on Linux returns the bare
+    # machine string "x86_64". Two cloud runners therefore looked identical on every
+    # discriminator, and the gate would have returned UNTESTED for a second time --
+    # the exact failure the gate exists to make visible, reproduced inside the
+    # identity meant to prevent it.
     cpu: dict = {}
     try:
-        cpu = {"baseline": np.core._multiarray_umath.__cpu_baseline__,
-               "dispatch": np.core._multiarray_umath.__cpu_dispatch__}
+        module = np.core._multiarray_umath
+        detected = dict(getattr(module, "__cpu_features__", {}) or {})
+        cpu = {
+            "baseline": getattr(module, "__cpu_baseline__", None),
+            "dispatch": getattr(module, "__cpu_dispatch__", None),
+            "detected_enabled": sorted(k for k, v in detected.items() if v),
+        }
     except Exception:
         cpu = {}
+
+    # The CPU model itself, where the OS exposes it. `platform.processor()` gives
+    # the model on Windows and only "x86_64" on Linux, which is why this is read
+    # directly rather than trusted from platform.
+    cpu_model = None
+    try:
+        with open("/proc/cpuinfo", encoding="utf-8") as handle:
+            for line in handle:
+                if line.lower().startswith("model name"):
+                    cpu_model = line.split(":", 1)[1].strip()
+                    break
+    except Exception:
+        cpu_model = None
     try:
         return {
             "platform": platform.platform(),
             "machine": platform.machine(),
             "processor": platform.processor(),
+            "cpu_model": cpu_model,
             "python": platform.python_version(),
             "numpy": np.__version__,
             "numpy_blas": blas,

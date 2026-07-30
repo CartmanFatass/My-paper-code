@@ -53,7 +53,17 @@ IDENTITY_FIELDS = ("episode_seed", "user_world_seed", "pinned_coordinate_hash", 
 
 # Fields whose difference makes two samples genuinely distinct runtimes. Any one
 # of these differing is enough.
-RUNTIME_DISCRIMINATORS = ("processor", "machine", "platform", "numpy_blas", "cpu_features")
+# Any ONE of these differing proves the runtimes differ.
+#
+# `cpu_model` and `cpu_features` carry the weight. `processor` returns the bare
+# machine string on Linux, and `cpu_features` must contain numpy's RUNTIME-detected
+# feature set -- its compile-time baseline/dispatch lists are identical on every
+# machine running the same wheel and discriminate nothing. Measured on run
+# 30529921979: processor was "x86_64" and the compile-time lists matched local
+# exactly, so an identity built from those alone would have produced a second
+# UNTESTED verdict.
+RUNTIME_DISCRIMINATORS = ("cpu_model", "processor", "machine", "platform",
+                          "numpy_blas", "cpu_features")
 
 
 BLOCK_BEGIN = "=== D7_S_WORLD_DIGEST_BLOCK_BEGIN ==="
