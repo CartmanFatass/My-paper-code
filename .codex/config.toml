@@ -46,3 +46,13 @@ nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run 
 description = "Silent Luna-low observer for one already-submitted External Pro response."
 config_file = "./agents/hmasd-pro-response-monitor.toml"
 nickname_candidates = ["HMASD Pro Monitor", "Pro Response Monitor"]
+
+[agents."HMASDResearchScout"]
+description = "Read-only Sol-high scout for one bounded independent research axis."
+config_file = "./agents/hmasd-research-scout.toml"
+nickname_candidates = ["Research Scout", "Evidence Scout", "Counterexample Scout"]
+
+[agents."HMASDResearchCritic"]
+description = "Read-only Sol-max critic for one bounded independent research claim."
+config_file = "./agents/hmasd-research-critic.toml"
+nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]

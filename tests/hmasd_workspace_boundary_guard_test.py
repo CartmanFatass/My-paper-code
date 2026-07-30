@@ -39,9 +39,15 @@ def repository(tmp_path: Path) -> tuple[Path, str]:
     return repo, git(repo, "rev-parse", "HEAD")
 
 
-def invoke(repo: Path, tool: str, tool_input: object) -> dict[str, object] | None:
+def invoke(
+    repo: Path,
+    tool: str,
+    tool_input: object,
+    *,
+    session_id: str = "guard-test",
+) -> dict[str, object] | None:
     payload = {
-        "session_id": "guard-test",
+        "session_id": session_id,
         "cwd": str(repo),
         "hook_event_name": "PreToolUse",
         "tool_name": tool,
@@ -199,4 +205,224 @@ def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
             {"command": "Set-Content -Path seed.txt -Value blocked"},
         ),
         "no unique valid workspace ticket",
+    )
+
+
+def test_registered_research_session_writes_only_local_research(tmp_path: Path) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    local_research = repo / "local_research"
+    local_research.mkdir()
+
+    inside = local_research / "note.md"
+    outside = repo / "outside.md"
+    assert_denied(
+        invoke(
+            local_research,
+            "shell_command",
+            {"command": f'Set-Content -LiteralPath "{inside}" -Value ok'},
+            session_id="research-session",
+        ),
+        "shell mutation is forbidden",
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "Get-Content -Raw AGENTS.md"},
+            session_id="research-session",
+        )
+        is None
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/.agents/skills/'
+                    "hmasd-independent-research-exploration/scripts/"
+                    'mylib_research_probe.py" --local-research-root '
+                    f'"{local_research}" status'
+                )
+            },
+            session_id="research-session",
+        )
+        is None
+    )
+    assert (
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/patch-note.md\n*** End Patch",
+            session_id="research-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: project-note.md\n*** End Patch",
+            session_id="research-session",
+        ),
+        "outside the writable scope",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            (
+                "*** Begin Patch\n"
+                "*** Update File: local_research/patch-note.md\n"
+                "*** Move to: AGENTS.md\n"
+                "*** End Patch"
+            ),
+            session_id="research-session",
+        ),
+        "outside the writable scope",
+    )
+    assert_denied(
+        invoke(
+            local_research,
+            "shell_command",
+            {"command": "Set-Content -LiteralPath ..\\AGENTS.md -Value bad"},
+            session_id="research-session",
+        ),
+        "shell mutation is forbidden",
+    )
+    assert_denied(
+        invoke(
+            local_research,
+            "shell_command",
+            {"command": f'Copy-Item -LiteralPath "{inside}" -Destination ..\\AGENTS.md'},
+            session_id="research-session",
+        ),
+        "shell mutation is forbidden",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'},
+            session_id="research-session",
+        ),
+        "shell mutation is forbidden",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "git add local_research/note.md"},
+            session_id="research-session",
+        ),
+        "Git mutation is forbidden",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "python -c \"from pathlib import Path; Path('AGENTS.md').write_text('bad')\""},
+            session_id="research-session",
+        ),
+        "nested or executable shell expression",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "[IO.File]::WriteAllText('AGENTS.md','bad')"},
+            session_id="research-session",
+        ),
+        "nested or executable shell expression",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": f"Get-Item ([IO.File]::WriteAllText('{outside}','bad'))"},
+            session_id="research-session",
+        ),
+        "nested or executable shell expression",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "Get-Item (Start-Process cmd.exe)"},
+            session_id="research-session",
+        ),
+        "nested or executable shell expression",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "rg --pre malicious pattern ."},
+            session_id="research-session",
+        ),
+        "option can execute or write",
+    )
+    executable = local_research / "escape.cmd"
+    executable.write_text("@echo off\r\necho bad>..\\AGENTS.md\r\n", encoding="utf-8")
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": f'rg --hostname-bin="{executable}" pattern .'},
+            session_id="research-session",
+        ),
+        "option can execute or write",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "git diff --output=AGENTS.md"},
+            session_id="research-session",
+        ),
+        "option can execute or write",
+    )
+    for option in ("--ext-diff", "--textconv"):
+        assert_denied(
+            invoke(
+                repo,
+                "shell_command",
+                {"command": f"git diff {option}"},
+                session_id="research-session",
+            ),
+            "option can execute or write",
+        )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "git status --short"},
+            session_id="research-session",
+        )
+        is None
+    )
+
+
+def test_other_session_keeps_main_checkout_scope_when_research_is_registered(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n",
+        encoding="utf-8",
+    )
+    ordinary = repo / "ordinary.md"
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": f'Set-Content -LiteralPath "{ordinary}" -Value ok'},
+            session_id="another-session",
+        )
+        is None
     )

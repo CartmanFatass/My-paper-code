@@ -139,6 +139,9 @@ debug/
 #test/
 temp_collection_log/
 
+# User-controlled independent research is local-only and never enters Git.
+/local_research/
+
 # Cross-task long-text handoffs are local-only. Keep only the directory contract.
 /temp/*
 !/temp/README.md

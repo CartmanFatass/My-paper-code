@@ -12,6 +12,14 @@ $implementer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
+$researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
+$researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
+if (-not (Test-Path -LiteralPath $researchScoutPath) -or
+    -not (Test-Path -LiteralPath $researchCriticPath)) {
+    throw 'Independent research child profiles are missing'
+}
+$researchScout = Get-Content -Raw -LiteralPath $researchScoutPath
+$researchCritic = Get-Content -Raw -LiteralPath $researchCriticPath
 
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
@@ -20,6 +28,46 @@ foreach ($required in @(
     if (-not $implementer.Contains($required)) {
         throw "Selected implementer profile missing: $required"
     }
+}
+foreach ($required in @(
+    'name = "hmasd-research-scout"',
+    'model = "gpt-5.6-sol"',
+    'model_reasoning_effort = "high"',
+    'sandbox_mode = "read-only"',
+    '.agents/roles/RESEARCH_SCOUT.md',
+    'catalog.v2',
+    'quality and provenance',
+    'structured JSON',
+    'PDF verification')) {
+    if (-not $researchScout.Contains($required)) {
+        throw "Research Scout profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-research-critic"',
+    'model = "gpt-5.6-sol"',
+    'model_reasoning_effort = "max"',
+    'sandbox_mode = "read-only"',
+    '.agents/roles/RESEARCH_CRITIC.md',
+    'Metadata v2',
+    'quality and provenance',
+    'structured JSON',
+    'PDF verification')) {
+    if (-not $researchCritic.Contains($required)) {
+        throw "Research Critic profile missing: $required"
+    }
+}
+foreach ($required in @(
+    '[agents."HMASDResearchScout"]',
+    'config_file = "./agents/hmasd-research-scout.toml"',
+    '[agents."HMASDResearchCritic"]',
+    'config_file = "./agents/hmasd-research-critic.toml"')) {
+    if (-not $config.Contains($required)) {
+        throw "Independent research profile is not registered: $required"
+    }
+}
+if (-not $config.Contains('max_depth = 1')) {
+    throw 'Independent research child no-spawn depth is not enforced'
 }
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
@@ -126,7 +174,8 @@ $catalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'
 $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
 foreach ($selected in @(
     @{ Model='gpt-5.6-sol'; Effort='high' },
-    @{ Model='gpt-5.6-sol'; Effort='xhigh' })) {
+    @{ Model='gpt-5.6-sol'; Effort='xhigh' },
+    @{ Model='gpt-5.6-sol'; Effort='max' })) {
     $model = @($catalog.models | Where-Object { $_.slug -eq $selected.Model })
     if ($model.Count -ne 1) { throw "Missing model catalog entry: $($selected.Model)" }
     $efforts = @($model[0].supported_reasoning_levels | ForEach-Object { $_.effort })

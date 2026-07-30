@@ -22,6 +22,24 @@ GLOBAL_MUTATION = re.compile(
     r"-itemtype\s+(?:junction|symboliclink)|\bnew-item\b[^\r\n]*"
     r"-itemtype\s+(?:junction|symboliclink))"
 )
+GIT_MUTATION = re.compile(
+    r"(?i)\bgit(?:\.exe)?\b[^\r\n;&|]*\b(?:add|am|apply|branch|checkout|"
+    r"cherry-pick|clean|clone|commit|fetch|init|merge|mv|pull|push|rebase|"
+    r"reset|restore|revert|rm|stash|switch|tag|worktree)\b"
+)
+RESEARCH_READ_ONLY_COMMAND = re.compile(
+    r"(?i)^\s*(?:get-content|get-childitem|get-item|get-filehash|select-string|"
+    r"test-path|resolve-path|measure-object|compare-object|rg(?:\.exe)?|"
+    r"git(?:\.exe)?\s+(?:status|diff|log|show|rev-parse|ls-files|check-ignore))\b"
+)
+RESEARCH_UNSAFE_READ_OPTION = re.compile(
+    r"(?i)(?:^|\s)(?:--pre(?:-glob)?(?:=|\s)|--output(?:=|\s)|"
+    r"--exec-path(?:=|\s)|--hostname-bin(?:=|\s)|"
+    r"--ext-diff(?:\s|$)|--textconv(?:\s|$))"
+)
+RESEARCH_UNSAFE_EXPRESSION = re.compile(
+    r"(?i)(?:[\(\)\{\}\[\]]|::|\b(?:start-process|invoke-expression|iex)\b)"
+)
 MUTATION = re.compile(
     r"(?i)(?:\bnew-item\b|\bmkdir\b|\bset-content\b|\badd-content\b|"
     r"\bout-file\b|\bremove-item\b|\bmove-item\b|\bcopy-item\b|"
@@ -32,7 +50,9 @@ DYNAMIC_TARGET = re.compile(r"(?:\$\{|\$[A-Za-z_]|%[A-Za-z_][A-Za-z0-9_]*%|`|\$\
 QUOTED_WINDOWS_PATH = re.compile(r"(?i)(?:\"([^\"]*[A-Z]:[\\/][^\"]*)\"|'([^']*[A-Z]:[\\/][^']*)')")
 BARE_WINDOWS_PATH = re.compile(r"(?i)(?<![A-Za-z0-9_])([A-Z]:[\\/][^\s;|>'\"\)\]]+)")
 UNC_PATH = re.compile(r"(?<![\\])((?:\\\\|//)[^\s;|>'\"\)\]]+)")
-PATCH_PATH = re.compile(r"(?m)^\*\*\* (?:Add|Update|Delete) File: (.+?)\s*$")
+PATCH_PATH = re.compile(
+    r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
+)
 
 
 class GuardError(RuntimeError):
@@ -111,6 +131,54 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
     return top, allowed_roots, True
 
 
+def _registered_research_session(repo: Path) -> str | None:
+    router = repo / "AGENTS.md"
+    if not router.is_file():
+        return None
+    matches = re.findall(
+        r"(?m)^independent_research_explorer_session=([^\s]+)\s*$",
+        router.read_text(encoding="utf-8"),
+    )
+    if len(matches) > 1:
+        raise GuardError("router has multiple independent research sessions")
+    return matches[0] if matches else None
+
+
+def _registered_python(repo: Path) -> str | None:
+    router = repo / "AGENTS.md"
+    if not router.is_file():
+        return None
+    matches = re.findall(
+        r"(?m)^hmasd_python_interpreter=([^\r\n]+?)\s*$",
+        router.read_text(encoding="utf-8"),
+    )
+    return matches[0] if len(matches) == 1 else None
+
+
+def _trusted_research_probe(command: str, repo: Path) -> bool:
+    if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
+        return False
+    interpreter = _registered_python(repo)
+    if interpreter is None:
+        return False
+    normalized = command.strip().replace("\\", "/")
+    normalized_interpreter = interpreter.replace("\\", "/")
+    registered_probe = str(
+        repo
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "scripts"
+        / "mylib_research_probe.py"
+    ).replace("\\", "/")
+    prefix = re.compile(
+        rf'^"?{re.escape(normalized_interpreter)}"?\s+'
+        rf'"?{re.escape(registered_probe)}"?(?:\s|$)',
+        re.IGNORECASE,
+    )
+    return bool(prefix.match(normalized))
+
+
 def _extract_absolute_paths(command: str) -> list[Path]:
     raw: list[str] = []
     for match in QUOTED_WINDOWS_PATH.finditer(command):
@@ -159,11 +227,41 @@ def _guard_patch(cwd: Path, allowed_roots: list[Path], tool_input: Any) -> None:
 
 
 def _guard_shell(
-    repo: Path, cwd: Path, allowed_roots: list[Path], linked: bool, tool_input: Any
+    repo: Path,
+    cwd: Path,
+    allowed_roots: list[Path],
+    linked: bool,
+    tool_input: Any,
+    research_session: bool = False,
 ) -> None:
     if not isinstance(tool_input, dict) or not isinstance(tool_input.get("command"), str):
         raise GuardError("shell payload has no command")
     command = tool_input["command"]
+    if research_session:
+        if GIT_MUTATION.search(command):
+            raise GuardError("Git mutation is forbidden for the independent research session")
+        if _trusted_research_probe(command, repo):
+            return
+        if RESEARCH_UNSAFE_EXPRESSION.search(command):
+            raise GuardError("nested or executable shell expression is forbidden")
+        if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
+            raise GuardError("compound shell commands are forbidden for the research session")
+        if RESEARCH_UNSAFE_READ_OPTION.search(command):
+            raise GuardError("shell option can execute or write and is forbidden")
+        known_mutation = bool(
+            MUTATION.search(command)
+            or re.search(r"(?m)(?<![<>=])-?>{1,2}(?![=])", command)
+        )
+        if known_mutation:
+            raise GuardError(
+                "research shell mutation is forbidden; use apply_patch under local_research"
+            )
+        if not RESEARCH_READ_ONLY_COMMAND.search(command):
+            raise GuardError(
+                "research shell command is not an approved read-only form; "
+                "use the registered probe or apply_patch under local_research"
+            )
+        return
     if _trusted_provision(command, repo, linked):
         return
     if GLOBAL_MUTATION.search(command):
@@ -202,10 +300,26 @@ def main() -> int:
             raise GuardError("hook payload has no working directory")
         cwd = _canonical(Path(cwd_raw))
         repo, allowed_roots, linked = _workspace_scope(cwd)
+        registered = _registered_research_session(repo)
+        session_id = payload.get("session_id")
+        research_session = bool(
+            registered and isinstance(session_id, str) and session_id == registered
+        )
+        if research_session:
+            if linked:
+                raise GuardError("independent research is confined to the main checkout")
+            allowed_roots = [_canonical(repo / "local_research")]
         if tool_name in PATCH_TOOLS:
             _guard_patch(cwd, allowed_roots, payload.get("tool_input"))
         else:
-            _guard_shell(repo, cwd, allowed_roots, linked, payload.get("tool_input"))
+            _guard_shell(
+                repo,
+                cwd,
+                allowed_roots,
+                linked,
+                payload.get("tool_input"),
+                research_session,
+            )
     except (GuardError, OSError, ticketing.TicketError) as exc:
         return _emit_deny(str(exc))
     return 0

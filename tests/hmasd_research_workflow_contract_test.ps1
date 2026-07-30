@@ -12,6 +12,7 @@ $requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
+    'hmasd-independent-research-exploration',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 foreach ($required in $requiredSkills) {
@@ -28,6 +29,9 @@ $expectedRoles = @(
     'CODE_PROJECT_MANAGER.md',
     'RESEARCH_OPERATIONS_MANAGER.md',
     'PRO_RESPONSE_MONITOR.md',
+    'INDEPENDENT_RESEARCH_EXPLORER.md',
+    'RESEARCH_CRITIC.md',
+    'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
     'WORKFLOW_DESIGN_MANAGER.md',
@@ -46,6 +50,12 @@ $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
+$independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
+$researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
+$researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
+$independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
+$independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
+$parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
@@ -107,6 +117,101 @@ foreach ($required in @(
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
+}
+foreach ($required in @(
+    'independent_research_explorer_session=',
+    'independent_research_canonical_scientific_authority=none',
+    'independent_research_write_scope=local_research_only',
+    '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
+    'hmasd-independent-research-exploration')) {
+    if (-not $agents.Contains($required)) { throw "AGENTS missing research route: $required" }
+}
+foreach ($required in @(
+    'role=independent_research_explorer',
+    'model=gpt-5.6-sol',
+    'reasoning_effort=ultra',
+    'canonical_scientific_authority=none',
+    'write_scope=local_research_only',
+    'current_work_read=forbidden',
+    'local_research_single_writer=true',
+    'local_research_write_tool=apply_patch_only',
+    'local_research_shell_mutation=forbidden',
+    'research_scout_parallel_limit=4',
+    'research_critic_parallel_limit=2')) {
+    if (-not $independentResearchRole.Contains($required)) {
+        throw "Independent Research Explorer role missing: $required"
+    }
+}
+foreach ($pair in @(
+    @{ Text=$researchScoutRole; Required=@(
+        'callable_agent_type=hmasd-research-scout',
+        'model=gpt-5.6-sol',
+        'reasoning_effort=high',
+        'write_authority=none',
+        'child_authority=none',
+        'json_content_layer_required=true',
+        'pdf_verification_on_fidelity_boundary=true') },
+    @{ Text=$researchCriticRole; Required=@(
+        'callable_agent_type=hmasd-research-critic',
+        'model=gpt-5.6-sol',
+        'reasoning_effort=max',
+        'write_authority=none',
+        'child_authority=none',
+        'json_content_layer_required=true',
+        'pdf_verification_on_fidelity_boundary=true') })) {
+    foreach ($required in $pair.Required) {
+        if (-not $pair.Text.Contains($required)) {
+            throw "Independent research child role missing: $required"
+        }
+    }
+}
+foreach ($authority in @(
+    'C:/Projects/Inst-sci/AGENTS.md',
+    'C:/Projects/Inst-sci/papers/AGENTS.md',
+    'llm-index/INSTRUCTIONS.md')) {
+    if (-not $researchScoutRole.Contains($authority) -or
+        -not $researchCriticRole.Contains($authority)) {
+        throw "Independent research child authority load missing: $authority"
+    }
+}
+foreach ($required in @(
+    'docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3',
+    'metadata/integrity.json',
+    'structured JSON is the formal LLM content layer',
+    'PDF is required for original verification, formula/figure/table semantics, or missing JSON',
+    'legacy Markdown is excluded',
+    'SCOUT_EVIDENCE_PACKET',
+    'CRITIC_ASSESSMENT_PACKET',
+    'local_research')) {
+    if (-not $independentResearchSkill.Contains($required)) {
+        throw "Independent research Skill missing: $required"
+    }
+}
+foreach ($required in @(
+    'llm-index/catalog.v2.jsonl',
+    'metadata/v2/papers.v2.jsonl',
+    'metadata/v2/schema.v2.json',
+    'quality-report.v2.json',
+    'quality.grade',
+    'quality.warnings',
+    'provenance.field_evidence',
+    'abstract_only',
+    'Empty arrays and `unspecified` remain unknown')) {
+    if (-not $independentResearchSkill.Contains($required) -and
+        -not $independentResearchMyLib.Contains($required)) {
+        throw "Independent research Metadata v2 contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'scout_parallel_limit=4',
+    'critic_parallel_limit=2',
+    'merge_barrier=required',
+    'completion_order_priority=forbidden',
+    'single_writer=independent_research_explorer',
+    'automatic_formal_workflow_promotion=forbidden')) {
+    if (-not $parallelResearch.Contains($required)) {
+        throw "Parallel research workflow missing: $required"
+    }
 }
 foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $operationsRole)) {
     if ($surface.Contains('pre_send_read_only_probe_explicit_echo')) {

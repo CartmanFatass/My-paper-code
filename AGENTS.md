@@ -20,6 +20,7 @@ Use exactly one route:
 | Code Project Manager task | its exact code assignment, `.agents/roles/CODE_PROJECT_MANAGER.md`, assignment-named design, code and tests, plus bounded read-only `CURRENT_WORK.md` when checking the current code boundary | runtime reviews/runs, portfolio and workflow-design history |
 | Research Operations Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`, then only current-boundary review, runtime, evidence and state paths | implementation details outside an exact Code-PM return, workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
+| Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 
@@ -61,6 +62,9 @@ research_operations_manager_scientific_authority=none
 research_operations_manager_git_authority=direct_for_runtime_review_evidence_report_ledger_and_state
 research_operations_manager_remote_repository_authority=permanent_user_grant
 research_operations_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
+independent_research_explorer_session=019fb233-8fb4-7802-b0ed-278106572fa0
+independent_research_canonical_scientific_authority=none
+independent_research_write_scope=local_research_only
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -125,6 +129,7 @@ A future project-external write requires a new explicit user instruction for its
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
+- Independent advisory research: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
@@ -141,3 +146,4 @@ names the smallest necessary subset.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
+- `local_research/` is ignored advisory output written only by the registered Independent Research Explorer.
