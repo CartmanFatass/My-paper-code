@@ -37,12 +37,12 @@ the easiest one to make while believing it was diligence.
 
 ## 1. The estimand is unchanged
 
-`U*_stable,src / B_H <= -0.10`, `U*_flex,src / B_H >= +0.10`, agent-level. The R4
-absolute focal margin contract
-(`docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md`) carries the
-gates, the four per-limb states, the nine-row combined mapping, the five-level
-precedence and branch 3. **No threshold moves.** This document adds a population
-and a provenance mechanism, nothing else.
+The successor preserves the R4 ABSOLUTE five-G-unit focal margin criterion
+(`docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md`), agent-level.
+The R4 absolute focal margin contract carries the gates, the four per-limb states,
+the nine-row combined mapping, the five-level precedence and branch 3. **No
+threshold moves.** This document adds a population and a provenance mechanism,
+nothing else.
 
 ## 2. The selection rule
 

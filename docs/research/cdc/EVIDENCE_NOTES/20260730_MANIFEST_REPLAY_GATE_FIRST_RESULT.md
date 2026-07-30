@@ -1,5 +1,32 @@
 # The replay gate's first result: replay works, and assertion 6 fails for another reason
 
+> **REFUTED 2026-07-30 by the Pro ruling in
+> `docs/external-review/rounds/20260730_d7_s_manifest_replay_gate_result/21_PRO_OPEN_RAW.md`,
+> §5.1 and §5.2.** The characterization of the six differing attributes is
+> incorrect. Two specific claims are dead:
+>
+> 1. **The six fields are not all station-distance-derived.** The two
+>    `last_min_station_distance_*` caches are station-distance-derived, and the
+>    return threshold/margin arrays are downstream of station distance and battery.
+>    But `current_graph_potential` is a graph-service potential computed from
+>    communication, user/UAV geometry, and backhaul capacity. `state` is a
+>    composite cache containing base state, energy state, station state, and stage
+>    identity. The evidence establishes AT LEAST TWO stale initialization families:
+>    station/return-energy-derived state; and topology/world/radio-derived potential
+>    and public state.
+> 2. **Replay is not exonerated as a complete evidence-population reconstruction
+>    mechanism.** The manifest payload does not create these values, but the
+>    current manifest application path fails to canonicalize or replace
+>    construction-derived state that remains live at the pre-step boundary. Replay
+>    is exonerated as the source of the original bytes. It is not exonerated as a
+>    complete evidence-population reconstruction mechanism.
+>
+> What survives: Manifest replay reproduced the episode, the post-roll world,
+> event identity, and both limbs' units across independent executions. The
+> pre-step divergence is construction-borne (six of 273 attributes), and one
+> carrier is a provably stale distance cache. The measurements are correct; only
+> the characterisation of them was wrong.
+
 Date: 2026-07-30
 Instruments: `scripts/d7_s_manifest_replay_probe.py`, `scripts/d7_s_manifest_replay_gate.py`
 Topology: `TOPOLOGY_SEED_DEV = 20260725`. **No R4 topology was constructed** -- the
@@ -53,8 +80,10 @@ station_occupancy / station_queue  True
 coordinate_hash                    True
 ```
 
-So the failing surface differs between two plain constructions. **Replay is
-exonerated by measurement, not by argument.**
+So the failing surface differs between two plain constructions. ~~**Replay is
+exonerated by measurement, not by argument.**~~ **UNQUALIFIED — Replay is exonerated
+as the source of the original bytes, but not as a complete evidence-population
+reconstruction mechanism** (see refutation banner for full correction).
 
 This also **refutes the explanation `full_state_fingerprint`'s own docstring
 gives.** It blames station-relative logistics and says the residue lives in
@@ -75,8 +104,8 @@ current_graph_potential
 state                              (the 306-dim observation, which embeds them)
 ```
 
-All station-distance-derived -- while the charging-station coordinates **and** the
-UAV positions both compare byte-equal.
+~~All station-distance-derived~~ **NOT ALL station-distance-derived** -- while the charging-station coordinates **and** the
+UAV positions both compare byte-equal. (Refutation recorded in banner above.)
 
 ## Proving it is a stale cache, by making it converge
 
