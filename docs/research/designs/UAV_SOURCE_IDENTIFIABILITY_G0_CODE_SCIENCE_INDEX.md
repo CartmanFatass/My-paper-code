@@ -14,6 +14,10 @@ behavioral_replay_round=20260730_uav_g0_behavioral_replay_contract_clarification
 return_ready_step_round=20260730_uav_g0_return_ready_step_contract_clarification
 return_ready_step_disposition=G0_RETURN_READY_STEP_DISPOSITION=KEEP_CAUSAL_R_273
 branchpoint_transducer_repair_assignment=UAV_SOURCE_IDENTIFIABILITY_G0_BRANCHPOINT_AND_TRANSDUCER_EVIDENCE_REPAIR
+readiness_performance_contract=UAV_G0_READINESS_PERFORMANCE_CONTRACT
+readiness_performance_workflow_commit=dc3d3af1be4c1d97725f9f7db50ef62456c090e1
+bounded_exercise_timeout_seconds=300
+timeout_revision=forbidden
 claim_scope=SOURCE_IDENTIFIABILITY_G0_ONLY
 formal_execution_authorized=false
 learning=false
@@ -265,6 +269,25 @@ full tracker proofs, metric/CP/bootstrap witnesses, branch fixtures and digest
 chain.  Absolute paths, `..`, extra artifacts, checkpoints, altered CP rows,
 forged proof fields or a stored readiness branch fail validation.
 
+### Readiness performance closure
+
+The 300-second bounded-exercise ceiling is preserved.  Callable source
+digests are cached only by the live callable object, so replacing a method
+changes the cache key and forces a new digest.  One
+`_ValidatedOracleSafetyContext` may be reused only inside its issuing Python
+call: it is non-serializable authority, binds the exact source and ledger
+objects, recomputes the ledger content digest, and binds both candidate trace
+digests plus the independently reconstructed certificate.
+
+Public validators still begin with a complete native two-candidate ledger
+reconstruction.  Each readiness phase starts a fresh process and therefore a
+fresh reconstruction.  Within that phase, qualification, replay validation,
+evaluation and analysis reuse the same bound context rather than rerunning the
+identical 2x500 native guard/network proof.  `readiness-train` retains its
+independent post-write `validate_source_artifacts` reconstruction.  The two
+candidate traces, selected prebehavior replay, behavioral execution and
+independent behavioral self-replay are never copied, merged or omitted.
+
 ## Technical completion boundary
 
 Technical acceptance requires:
@@ -292,3 +315,4 @@ execution or supports a UAV paper conclusion.
 | G0-R273 | executable-contract addendum v2 section 2.6 | `ha_ctse_process/uav_source_identifiability_g0.py::_derive_return_ready_step` | episode-0 owner internal row and complete service mask reconstruct causal R=273 without a position test | `test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273` | storage-row indexing, positional coincidence, seven-step delay, future service, first-differing-byte selection |
 | G0-FIRST-MATCH | executable-contract addendum v2 section 5.1 | `ha_ctse_process/uav_source_identifiability_g0.py::_build_analysis_from_reconstructed_rows` | lower scientific statuses are unread and serialized null after INVALID, ORACLE FAIL/OPEN or SAMEINFO FAIL/OPEN | lazy first-match source tests; `test_branch_witnesses_cover_exact_first_match_inventory` | eager lower-gate computation hidden by final branch precedence |
 | G0-RUNNER | executable-contract addendum v2 identity and artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds v2 stage/archive/disposition plus certificate semantics and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts`, `test_reference_paths_cp_and_tracker_are_independently_reconstructed` | stale contract identity, altered universal-support certificate and favorable stored certificate |
+| G0-READINESS-PERFORMANCE | `UAV_G0_READINESS_PERFORMANCE_CONTRACT`, Option A | `ha_ctse_process/uav_source_identifiability_g0.py::_ValidatedOracleSafetyContext`, `_callable_source_digest`; `scripts/run_uav_source_identifiability_g0.py::_ValidatedSourceArtifacts` | every independent phase performs canonical reconstruction while identical within-phase reconstruction is reused; frozen artifacts, counts and R=273 remain unchanged; bounded exercise is strictly below 300 seconds | `test_callable_source_digests_are_cached_by_callable_identity`, `test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift`, `test_readiness_train_uses_phase_local_context_and_one_disk_validator`; commit-bound six-phase readiness receipt | timeout relaxation, cross-phase cache, stale/tampered evidence reuse, copied replay and weakened validation |

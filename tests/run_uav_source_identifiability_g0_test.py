@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from types import SimpleNamespace
 
 import pytest
 
@@ -37,6 +38,90 @@ def _complete_readiness(root: Path) -> None:
     runner.readiness_reload(run_root=root)
     runner.readiness_evaluate(run_root=root)
     runner.readiness_analyze(run_root=root)
+
+
+def test_readiness_train_uses_phase_local_context_and_one_disk_validator(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "phase-local-validation"
+    context = object()
+    ledger = SimpleNamespace(to_primitive=lambda: {"sealed": "ledger"})
+    qualification = SimpleNamespace(
+        passed=True,
+        to_primitive=lambda: {"passed": True, "sealed": "qualification"},
+    )
+    replay = {
+        "schema_version": 1,
+        "ledger_sha256": "ledger",
+        "selected_candidate_id": "stage:-1",
+        "prebehavior_self_replay": {},
+        "behavioral_execution": {},
+        "behavioral_self_replay": {},
+        "certificate": {},
+    }
+    final_validation_calls: list[Path] = []
+
+    def forbidden(*_args: object, **_kwargs: object) -> object:
+        raise AssertionError("readiness train re-entered a public full validator")
+
+    monkeypatch.setattr(
+        source,
+        "_build_oracle_safety_ledger_with_context",
+        lambda _episode: (ledger, context),
+    )
+    monkeypatch.setattr(
+        source,
+        "_oracle_qualification_from_validated_context",
+        lambda supplied: qualification if supplied is context else forbidden(),
+    )
+    monkeypatch.setattr(
+        source,
+        "_build_oracle_branch_aware_replay_evidence_from_validated_context",
+        lambda supplied: replay if supplied is context else forbidden(),
+    )
+    monkeypatch.setattr(
+        runner,
+        "_build_tracker_proof",
+        lambda _episode: {"passed": True, "sealed": "tracker"},
+    )
+    for name in (
+        "build_oracle_safety_ledger",
+        "validate_oracle_safety_primitive",
+        "oracle_qualification_from_safety_ledger",
+        "build_oracle_branch_aware_replay_evidence",
+    ):
+        monkeypatch.setattr(source, name, forbidden)
+
+    def final_validate(path: Path) -> dict:
+        final_validation_calls.append(Path(path).resolve())
+        return {"status": "COMPLETE"}
+
+    monkeypatch.setattr(runner, "validate_source_artifacts", final_validate)
+    manifest = runner.readiness_train(
+        run_root=root,
+        source_commit=SOURCE_COMMIT,
+    )
+    assert manifest["artifact_inventory"] == [
+        runner.SOURCE_PROOF,
+        runner.ORACLE_PROOF,
+        runner.TRACKER_PROOF,
+        runner.ORACLE_SAFETY_LEDGER_PROOF,
+        runner.ORACLE_BEHAVIORAL_REPLAY_PROOF,
+    ]
+    assert final_validation_calls == [root.resolve()]
+    assert {
+        path.relative_to(root).as_posix()
+        for path in root.rglob("*")
+        if path.is_file()
+    } == {
+        runner.SOURCE_MANIFEST,
+        runner.SOURCE_PROOF,
+        runner.ORACLE_PROOF,
+        runner.TRACKER_PROOF,
+        runner.ORACLE_SAFETY_LEDGER_PROOF,
+        runner.ORACLE_BEHAVIORAL_REPLAY_PROOF,
+    }
 
 
 def test_v2_contract_metadata_and_manifest_schema_are_exact() -> None:

@@ -10,6 +10,122 @@ import pytest
 from ha_ctse_process import uav_source_identifiability_g0 as g0
 
 
+def test_callable_source_digests_are_cached_by_callable_identity(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original_getsource = g0.inspect.getsource
+    calls: list[object] = []
+
+    def counted_getsource(value: object) -> str:
+        calls.append(value)
+        return original_getsource(value)
+
+    g0._callable_source_digest.cache_clear()
+    monkeypatch.setattr(g0.inspect, "getsource", counted_getsource)
+    first = g0.common_tracker_source_digest()
+    second = g0.common_tracker_source_digest()
+    assert first == second == g0.ACCEPTED_G1_TRACKER_SOURCE_SHA256
+    assert calls == [g0.actions_toward_targets]
+
+    def replacement_tracker(**_kwargs: object) -> np.ndarray:
+        return np.zeros((g0.PHYSICAL_UAVS, g0.ACTION_DIM), dtype=np.float32)
+
+    monkeypatch.setattr(g0, "actions_toward_targets", replacement_tracker)
+    replacement = g0.common_tracker_source_digest()
+    assert replacement != first
+    assert calls == [g0.g1_common_target_actions, replacement_tracker]
+
+
+def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = g0.make_episode_source(0)
+    candidates = tuple(
+        g0.OracleCandidateSafetyTrace(
+            candidate_id=label.key,
+            target_schedule_sha256=g0.sha256_json([]),
+            common_prestate_sha256=g0.sha256_json({}),
+            steps=(),
+            hard_violation_count=0,
+            gate_arrival_time=g0.PHYSICAL_HORIZON + 1,
+            gate_arrival_error=1.0,
+            event_window_tracking_error=0.0,
+            path_length=0.0,
+            stage_coordinates=tuple(
+                float(item) for item in source.geometry.coordinate(label)
+            ),
+            trace_sha256=g0.sha256_json([]),
+        )
+        for label in g0.TARGET_LABELS
+        if label.kind is g0.TargetKind.STAGE
+    )
+    provisional = g0.OracleSafetyLedger(
+        source_sha256=source.to_primitive()["sha256"],
+        common_prestate={},
+        common_prestate_sha256=g0.sha256_json({}),
+        candidate_prestate_sha256=(g0.sha256_json({}),) * 2,
+        channel_draw_schema=(),
+        shared_channel_draw_blocks=(),
+        candidates=(candidates[0], candidates[1]),
+        selected_candidate_id=candidates[0].candidate_id,
+        selected_rank=candidates[0].rank,
+        shared_action_method_sha256=g0.oracle_safety_method_digests(),
+        content_sha256="",
+    )
+    ledger = replace(
+        provisional,
+        content_sha256=g0.sha256_json(
+            provisional.to_primitive(include_digest=False)
+        ),
+    )
+    candidate_digests = tuple(item.trace_sha256 for item in ledger.candidates)
+    certificate = g0.OracleSafetyCertificate(
+        ledger_sha256=ledger.content_sha256,
+        selected_candidate_id=ledger.selected_candidate_id,
+        candidate_trace_sha256=candidate_digests,
+    )
+    with pytest.raises(TypeError):
+        g0._ValidatedOracleSafetyContext(
+            source=source,
+            ledger=ledger,
+            certificate=certificate,
+            content_sha256=ledger.content_sha256,
+            candidate_trace_sha256=candidate_digests,
+        )
+    forged = object.__new__(g0._ValidatedOracleSafetyContext)
+    with pytest.raises(g0.G0RealizationError, match="not module-issued"):
+        g0._require_validated_oracle_safety_context(forged)
+
+    def validated(
+        supplied_source: g0.G0EpisodeSource,
+        supplied_ledger: g0.OracleSafetyLedger,
+    ) -> g0.OracleSafetyCertificate:
+        assert supplied_source is source
+        assert supplied_ledger is ledger
+        return certificate
+
+    monkeypatch.setattr(g0, "validate_oracle_safety_ledger", validated)
+    context = g0._validated_oracle_safety_context(source, ledger)
+    bound_source, bound_ledger, bound_certificate = (
+        g0._require_validated_oracle_safety_context(context)
+    )
+    assert bound_source is source
+    assert bound_ledger is ledger
+    assert bound_certificate is certificate
+
+    cross_source_context = g0._validated_oracle_safety_context(source, ledger)
+    object.__setattr__(
+        cross_source_context,
+        "source",
+        g0.make_episode_source(1),
+    )
+    with pytest.raises(g0.G0RealizationError, match="context drifted"):
+        g0._require_validated_oracle_safety_context(cross_source_context)
+    ledger.common_prestate["tampered"] = True
+    with pytest.raises(g0.G0RealizationError, match="context drifted"):
+        g0._require_validated_oracle_safety_context(context)
+
+
 @pytest.fixture(scope="module")
 def oracle_safety_bundle() -> tuple[
     g0.G0EpisodeSource,

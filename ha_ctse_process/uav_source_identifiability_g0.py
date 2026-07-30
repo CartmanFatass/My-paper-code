@@ -14,6 +14,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from enum import Enum
+import functools
 import hashlib
 import inspect
 import itertools
@@ -915,28 +916,33 @@ def actions_toward_targets(
 g1_common_target_actions = actions_toward_targets
 
 
+@functools.cache
+def _callable_source_digest(value: Callable[..., Any]) -> str:
+    """Hash immutable code identity once per callable object in this process."""
+
+    text = inspect.getsource(value).replace("\r\n", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
 def common_tracker_source_digest() -> str:
-    source = inspect.getsource(actions_toward_targets).replace("\r\n", "\n")
-    return hashlib.sha256(source.encode("utf-8")).hexdigest()
+    return _callable_source_digest(actions_toward_targets)
 
 
 def shared_action_method_digests() -> dict[str, str]:
-    def digest(value: Callable[..., Any]) -> str:
-        text = inspect.getsource(value).replace("\r\n", "\n")
-        return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
     return {
-        "prepare_energy_actions": digest(
+        "prepare_energy_actions": _callable_source_digest(
             UAVEnergyAwareRelayEnv._prepare_energy_actions
         ),
-        "movement_velocity": digest(
+        "movement_velocity": _callable_source_digest(
             UAVEnergyAwareRelayEnv._movement_velocity_from_action
         ),
-        "base_action": digest(UAVEnergyAwareRelayEnv._base_action_from_velocity),
-        "scenario7_backhaul_guard": digest(
+        "base_action": _callable_source_digest(
+            UAVEnergyAwareRelayEnv._base_action_from_velocity
+        ),
+        "scenario7_backhaul_guard": _callable_source_digest(
             UAVEnergyAwareRelayEnv._apply_backhaul_action_guard
         ),
-        "base_backhaul_guard": digest(
+        "base_backhaul_guard": _callable_source_digest(
             UAVEnergyAwareRelayEnv.__mro__[1]._apply_backhaul_action_guard
         ),
     }
@@ -945,29 +951,25 @@ def shared_action_method_digests() -> dict[str, str]:
 def oracle_safety_method_digests() -> dict[str, str]:
     """Bind every unchanged result-bearing native safety transition method."""
 
-    def digest(value: Callable[..., Any]) -> str:
-        text = inspect.getsource(value).replace("\r\n", "\n")
-        return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
     values = dict(shared_action_method_digests())
     values.update(
         {
-            "g0_channel_update": digest(
+            "g0_channel_update": _callable_source_digest(
                 UAVSourceIdentifiabilityEnv._update_channel_state
             ),
-            "scenario7_connection_update": digest(
+            "scenario7_connection_update": _callable_source_digest(
                 UAVEnergyAwareRelayEnv._update_uav_connections
             ),
-            "native_routing_update": digest(
+            "native_routing_update": _callable_source_digest(
                 UAVEnergyAwareRelayEnv.__mro__[1]._compute_routing_paths
             ),
-            "scenario7_link_capacity": digest(
+            "scenario7_link_capacity": _callable_source_digest(
                 UAVEnergyAwareRelayEnv._get_link_capacity
             ),
-            "g0_guard_capacity_capture": digest(
+            "g0_guard_capacity_capture": _callable_source_digest(
                 UAVSourceIdentifiabilityEnv._get_link_capacity
             ),
-            "g0_safety_only_transition": digest(
+            "g0_safety_only_transition": _callable_source_digest(
                 UAVSourceIdentifiabilityEnv.step_oracle_safety
             ),
         }
@@ -1853,6 +1855,21 @@ class OracleSafetyCertificate:
         }
 
 
+_VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL = object()
+
+
+@dataclass(frozen=True, eq=False, init=False)
+class _ValidatedOracleSafetyContext:
+    """Call-local proof that one immutable ledger passed native reconstruction."""
+
+    source: G0EpisodeSource
+    ledger: OracleSafetyLedger
+    certificate: OracleSafetyCertificate
+    content_sha256: str
+    candidate_trace_sha256: tuple[str, str]
+    seal: object = field(repr=False, compare=False)
+
+
 @dataclass(frozen=True)
 class OracleBehavioralExecution:
     """Safety-only projection of one causal selected-candidate execution."""
@@ -2127,6 +2144,18 @@ def validate_oracle_qualification(
         raise G0RealizationError("oracle qualification is missing, forged, or failed")
 
 
+def _validate_oracle_qualification_from_context(
+    certificate: OracleQualificationCertificate,
+    context: _ValidatedOracleSafetyContext,
+) -> None:
+    expected = _oracle_qualification_from_validated_context(context)
+    if (
+        certificate.to_primitive() != expected.to_primitive()
+        or not certificate.passed
+    ):
+        raise G0RealizationError("oracle qualification is missing, forged, or failed")
+
+
 def _oracle_candidate_trace(
     source: G0EpisodeSource,
     reserve: TargetLabel,
@@ -2311,8 +2340,10 @@ def _oracle_candidate_trace(
         env.close()
 
 
-def build_oracle_safety_ledger(source: G0EpisodeSource) -> OracleSafetyLedger:
-    """Build the immutable two-candidate, service-blind real-guard ledger."""
+def _build_oracle_safety_ledger_with_context(
+    source: G0EpisodeSource,
+) -> tuple[OracleSafetyLedger, _ValidatedOracleSafetyContext]:
+    """Build and fully validate one immutable real-guard ledger."""
 
     reserves = tuple(
         label for label in TARGET_LABELS if label.kind is TargetKind.STAGE
@@ -2353,7 +2384,13 @@ def build_oracle_safety_ledger(source: G0EpisodeSource) -> OracleSafetyLedger:
             ),
         }
     )
-    validate_oracle_safety_ledger(source, ledger)
+    return ledger, _validated_oracle_safety_context(source, ledger)
+
+
+def build_oracle_safety_ledger(source: G0EpisodeSource) -> OracleSafetyLedger:
+    """Build the immutable two-candidate, service-blind real-guard ledger."""
+
+    ledger, _context = _build_oracle_safety_ledger_with_context(source)
     return ledger
 
 
@@ -2974,11 +3011,66 @@ def validate_oracle_safety_ledger(
     )
 
 
-def oracle_qualification_from_safety_ledger(
+def _validated_oracle_safety_context(
     source: G0EpisodeSource,
     ledger: OracleSafetyLedger,
+) -> _ValidatedOracleSafetyContext:
+    certificate = validate_oracle_safety_ledger(source, ledger)
+    context = object.__new__(_ValidatedOracleSafetyContext)
+    values = {
+        "source": source,
+        "ledger": ledger,
+        "certificate": certificate,
+        "content_sha256": ledger.content_sha256,
+        "candidate_trace_sha256": tuple(
+            candidate.trace_sha256 for candidate in ledger.candidates
+        ),
+        "seal": _VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL,
+    }
+    for name, value in values.items():
+        object.__setattr__(context, name, value)
+    return context
+
+
+def _require_validated_oracle_safety_context(
+    context: _ValidatedOracleSafetyContext,
+) -> tuple[G0EpisodeSource, OracleSafetyLedger, OracleSafetyCertificate]:
+    if (
+        not isinstance(context, _ValidatedOracleSafetyContext)
+        or getattr(context, "seal", None) is not _VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL
+    ):
+        raise G0RealizationError("oracle safety context is not module-issued")
+    source, ledger, certificate = (
+        context.source,
+        context.ledger,
+        context.certificate,
+    )
+    candidate_digests = tuple(
+        candidate.trace_sha256 for candidate in ledger.candidates
+    )
+    if (
+        ledger.source_sha256 != source.to_primitive()["sha256"]
+        or ledger.content_sha256 != context.content_sha256
+        or ledger.content_sha256
+        != sha256_json(ledger.to_primitive(include_digest=False))
+        or candidate_digests != context.candidate_trace_sha256
+        or certificate
+        != OracleSafetyCertificate(
+            ledger_sha256=ledger.content_sha256,
+            selected_candidate_id=ledger.selected_candidate_id,
+            candidate_trace_sha256=candidate_digests,
+        )
+    ):
+        raise G0RealizationError("validated oracle safety context drifted")
+    return source, ledger, certificate
+
+
+def _oracle_qualification_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
 ) -> OracleQualificationCertificate:
-    safety_certificate = validate_oracle_safety_ledger(source, ledger)
+    source, ledger, safety_certificate = (
+        _require_validated_oracle_safety_context(context)
+    )
     rows: list[OracleCandidateEvidence] = []
     for candidate in ledger.candidates:
         rows.append(
@@ -3048,6 +3140,15 @@ def oracle_qualification_from_safety_ledger(
         passed=passed,
         oracle_safety_ledger_sha256=ledger.content_sha256,
         safety_certificate=safety_certificate,
+    )
+
+
+def oracle_qualification_from_safety_ledger(
+    source: G0EpisodeSource,
+    ledger: OracleSafetyLedger,
+) -> OracleQualificationCertificate:
+    return _oracle_qualification_from_validated_context(
+        _validated_oracle_safety_context(source, ledger)
     )
 
 
@@ -3453,13 +3554,15 @@ def _target_internal_row(target: TargetLabel | str) -> int:
 
 
 def _expected_behavioral_target_schedule(
-    source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+    context: _ValidatedOracleSafetyContext,
     return_ready_step: int | None,
 ) -> np.ndarray:
+    source, ledger, _certificate = _require_validated_oracle_safety_context(
+        context
+    )
     selected = TargetLabel.parse(ledger.selected_candidate_id)
     selected_row = _selected_reserve_storage_row(source, selected.key)
-    qualification = oracle_qualification_from_safety_ledger(source, ledger)
+    qualification = _oracle_qualification_from_validated_context(context)
     candidate = next(
         item for item in qualification.candidates if item.reserve_target == selected.key
     )
@@ -3579,16 +3682,17 @@ def _derive_return_ready_step(
     return None
 
 
-def validate_oracle_branch_aware_replay(
-    source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+def _validate_oracle_branch_aware_replay_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
     prebehavior_self_replay: OracleCandidateSafetyTrace | Mapping[str, Any],
     behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
     behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
 ) -> OracleSafetyCertificate:
     """Reconstruct the frozen prefix/branchpoint/post-R replay certificate."""
 
-    validate_oracle_safety_ledger(source, ledger)
+    source, ledger, _certificate = _require_validated_oracle_safety_context(
+        context
+    )
     selected = next(
         candidate
         for candidate in ledger.candidates
@@ -3629,7 +3733,7 @@ def validate_oracle_branch_aware_replay(
     if behavior_replay.return_ready_step != derived_return_ready:
         raise G0RealizationError("behavioral self-replay RETURN_READY step drifted")
     expected_targets = _expected_behavioral_target_schedule(
-        source, ledger, derived_return_ready
+        context, derived_return_ready
     )
     if not np.array_equal(behavior.target_schedule.array(), expected_targets):
         raise G0RealizationError("behavioral target switch is early, late, or wrong")
@@ -3746,11 +3850,28 @@ def validate_oracle_branch_aware_replay(
     )
 
 
-def validate_oracle_branch_aware_replay_primitive(
+def validate_oracle_branch_aware_replay(
     source: G0EpisodeSource,
     ledger: OracleSafetyLedger,
+    prebehavior_self_replay: OracleCandidateSafetyTrace | Mapping[str, Any],
+    behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
+    behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
+) -> OracleSafetyCertificate:
+    return _validate_oracle_branch_aware_replay_from_validated_context(
+        _validated_oracle_safety_context(source, ledger),
+        prebehavior_self_replay,
+        behavioral_execution,
+        behavioral_self_replay,
+    )
+
+
+def _validate_oracle_branch_aware_replay_primitive_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
     primitive: Mapping[str, Any],
 ) -> OracleSafetyCertificate:
+    _source, ledger, _safety_certificate = (
+        _require_validated_oracle_safety_context(context)
+    )
     expected = {
         "schema_version",
         "ledger_sha256",
@@ -3768,9 +3889,8 @@ def validate_oracle_branch_aware_replay_primitive(
         or primitive["selected_candidate_id"] != ledger.selected_candidate_id
     ):
         raise G0RealizationError("branch-aware replay artifact identity drifted")
-    certificate = validate_oracle_branch_aware_replay(
-        source,
-        ledger,
+    certificate = _validate_oracle_branch_aware_replay_from_validated_context(
+        context,
         primitive["prebehavior_self_replay"],
         primitive["behavioral_execution"],
         primitive["behavioral_self_replay"],
@@ -3778,6 +3898,16 @@ def validate_oracle_branch_aware_replay_primitive(
     if primitive["certificate"] != certificate.to_primitive():
         raise G0RealizationError("branch-aware replay certificate was forged")
     return certificate
+
+
+def validate_oracle_branch_aware_replay_primitive(
+    source: G0EpisodeSource,
+    ledger: OracleSafetyLedger,
+    primitive: Mapping[str, Any],
+) -> OracleSafetyCertificate:
+    return _validate_oracle_branch_aware_replay_primitive_from_validated_context(
+        _validated_oracle_safety_context(source, ledger), primitive
+    )
 
 
 def build_proof_episode_validity(
@@ -3788,12 +3918,14 @@ def build_proof_episode_validity(
     """Proof-only public entry; derives validity rather than accepting a flag."""
 
     try:
-        certificate = validate_oracle_safety_primitive(source, safety_primitive)
+        ledger = oracle_safety_ledger_from_primitive(safety_primitive)
+        context = _validated_oracle_safety_context(source, ledger)
         replay_certificate = None
         if replay_primitive is not None:
-            ledger = oracle_safety_ledger_from_primitive(safety_primitive)
-            replay_certificate = validate_oracle_branch_aware_replay_primitive(
-                source, ledger, replay_primitive
+            replay_certificate = (
+                _validate_oracle_branch_aware_replay_primitive_from_validated_context(
+                    context, replay_primitive
+                )
             )
     except (G0RealizationError, KeyError, TypeError, ValueError) as error:
         return {
@@ -3801,6 +3933,32 @@ def build_proof_episode_validity(
             "errors": [f"oracle_safety:{type(error).__name__}:{error}"],
             "result_branch": INVALID_BRANCH,
         }
+    return _build_proof_episode_validity_from_validated_evidence(
+        context,
+        replay_primitive=replay_primitive,
+        replay_certificate=replay_certificate,
+    )
+
+
+def _build_proof_episode_validity_from_validated_evidence(
+    context: _ValidatedOracleSafetyContext,
+    *,
+    replay_primitive: Mapping[str, Any] | None,
+    replay_certificate: OracleSafetyCertificate | None,
+) -> dict[str, Any]:
+    _source, _ledger, certificate = (
+        _require_validated_oracle_safety_context(context)
+    )
+    if replay_primitive is None:
+        if replay_certificate is not None:
+            raise G0RealizationError("replay certificate lacks primitive evidence")
+    elif (
+        replay_certificate is None
+        or replay_primitive.get("certificate")
+        != replay_certificate.to_primitive()
+        or replay_certificate.ledger_sha256 != certificate.ledger_sha256
+    ):
+        raise G0RealizationError("validated replay evidence binding drifted")
     return {
         "operational_valid": True,
         "errors": [],
@@ -3821,6 +3979,25 @@ def analyze_proof_fixture(
 
     reconstructed = build_proof_episode_validity(
         source, safety_primitive, replay_primitive
+    )
+    return {
+        "proof_only": True,
+        "operational_valid": bool(reconstructed["operational_valid"]),
+        "operational_errors": list(reconstructed["errors"]),
+        "result_branch": reconstructed["result_branch"],
+    }
+
+
+def _analyze_proof_fixture_from_validated_evidence(
+    context: _ValidatedOracleSafetyContext,
+    *,
+    replay_primitive: Mapping[str, Any],
+    replay_certificate: OracleSafetyCertificate,
+) -> dict[str, Any]:
+    reconstructed = _build_proof_episode_validity_from_validated_evidence(
+        context,
+        replay_primitive=replay_primitive,
+        replay_certificate=replay_certificate,
     )
     return {
         "proof_only": True,
@@ -5125,6 +5302,30 @@ class MechanicallyQualifiedOracleController:
         validate_oracle_qualification(
             source, qualification, safety_ledger=safety_ledger
         )
+        self._initialize(source, handles, qualification, safety_ledger)
+
+    @classmethod
+    def _from_validated_context(
+        cls,
+        handles: Sequence[str],
+        qualification: OracleQualificationCertificate,
+        context: _ValidatedOracleSafetyContext,
+    ) -> MechanicallyQualifiedOracleController:
+        source, safety_ledger, _certificate = (
+            _require_validated_oracle_safety_context(context)
+        )
+        _validate_oracle_qualification_from_context(qualification, context)
+        instance = cls.__new__(cls)
+        instance._initialize(source, handles, qualification, safety_ledger)
+        return instance
+
+    def _initialize(
+        self,
+        source: G0EpisodeSource,
+        handles: Sequence[str],
+        qualification: OracleQualificationCertificate,
+        safety_ledger: OracleSafetyLedger,
+    ) -> None:
         self.source = source
         self.geometry = G0ControllerGeometry.from_source(source)
         self.qualification = qualification
@@ -5345,21 +5546,22 @@ def _canonical_controller_state(controller: Any) -> dict[str, Any]:
     }
 
 
-def _build_selected_oracle_behavioral_execution(
-    source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+def _build_selected_oracle_behavioral_execution_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
     *,
     cell: Cell | str = Cell.EVENT,
 ) -> OracleBehavioralExecution:
     """Execute one causal branch and retain only replay-certificate primitives."""
 
-    validate_oracle_safety_ledger(source, ledger)
+    source, ledger, _certificate = _require_validated_oracle_safety_context(
+        context
+    )
     env = UAVSourceIdentifiabilityEnv(source, Cell(cell))
     try:
         env.reset()
-        qualification = oracle_qualification_from_safety_ledger(source, ledger)
-        controller = MechanicallyQualifiedOracleController(
-            source, env._handles, qualification, ledger
+        qualification = _oracle_qualification_from_validated_context(context)
+        controller = MechanicallyQualifiedOracleController._from_validated_context(
+            env._handles, qualification, context
         )
         env._oracle_behavioral_candidate_id = ledger.selected_candidate_id
         env._oracle_behavioral_trace = []
@@ -5478,6 +5680,17 @@ def _build_selected_oracle_behavioral_execution(
         env.close()
 
 
+def _build_selected_oracle_behavioral_execution(
+    source: G0EpisodeSource,
+    ledger: OracleSafetyLedger,
+    *,
+    cell: Cell | str = Cell.EVENT,
+) -> OracleBehavioralExecution:
+    return _build_selected_oracle_behavioral_execution_from_validated_context(
+        _validated_oracle_safety_context(source, ledger), cell=cell
+    )
+
+
 def build_selected_oracle_behavioral_replay(
     source: G0EpisodeSource,
     ledger: OracleSafetyLedger,
@@ -5491,28 +5704,32 @@ def build_selected_oracle_behavioral_replay(
     ).steps
 
 
-def build_oracle_branch_aware_replay_evidence(
-    source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+def _build_oracle_branch_aware_replay_evidence_from_validated_context(
+    context: _ValidatedOracleSafetyContext,
 ) -> dict[str, Any]:
     """Build the registered P/B self-replay package without reranking."""
 
-    validate_oracle_safety_ledger(source, ledger)
+    source, ledger, _certificate = _require_validated_oracle_safety_context(
+        context
+    )
     selected_label = TargetLabel.parse(ledger.selected_candidate_id)
     prebehavior_self_replay, prestate = _oracle_candidate_trace(
         source, selected_label
     )
     if sha256_json(prestate) != ledger.common_prestate_sha256:
         raise G0RealizationError("prebehavior self-replay prestate drifted")
-    behavioral_execution = _build_selected_oracle_behavioral_execution(
-        source, ledger
+    behavioral_execution = (
+        _build_selected_oracle_behavioral_execution_from_validated_context(
+            context
+        )
     )
-    behavioral_self_replay = _build_selected_oracle_behavioral_execution(
-        source, ledger
+    behavioral_self_replay = (
+        _build_selected_oracle_behavioral_execution_from_validated_context(
+            context
+        )
     )
-    certificate = validate_oracle_branch_aware_replay(
-        source,
-        ledger,
+    certificate = _validate_oracle_branch_aware_replay_from_validated_context(
+        context,
         prebehavior_self_replay,
         behavioral_execution,
         behavioral_self_replay,
@@ -5526,6 +5743,15 @@ def build_oracle_branch_aware_replay_evidence(
         "behavioral_self_replay": behavioral_self_replay.to_primitive(),
         "certificate": certificate.to_primitive(),
     }
+
+
+def build_oracle_branch_aware_replay_evidence(
+    source: G0EpisodeSource,
+    ledger: OracleSafetyLedger,
+) -> dict[str, Any]:
+    return _build_oracle_branch_aware_replay_evidence_from_validated_context(
+        _validated_oracle_safety_context(source, ledger)
+    )
 
 
 def run_g0_episode(

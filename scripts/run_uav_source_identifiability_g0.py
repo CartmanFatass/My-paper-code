@@ -11,6 +11,7 @@ surfaces but fail before creating or mutating a run root.
 from __future__ import annotations
 
 import argparse
+from dataclasses import dataclass
 import hashlib
 import json
 import math
@@ -91,6 +92,16 @@ ORACLE_PROOF = "proof/oracle_qualification.json"
 TRACKER_PROOF = "proof/common_tracker_qualification.json"
 ORACLE_SAFETY_LEDGER_PROOF = "proof/oracle_safety_ledger.json"
 ORACLE_BEHAVIORAL_REPLAY_PROOF = "proof/oracle_behavioral_replay.json"
+
+
+@dataclass(frozen=True)
+class _ValidatedSourceArtifacts:
+    manifest: Mapping[str, Any]
+    episode: source.G0EpisodeSource
+    ledger: source.OracleSafetyLedger
+    ledger_context: source._ValidatedOracleSafetyContext
+    replay_primitive: Mapping[str, Any]
+    replay_certificate: source.OracleSafetyCertificate
 
 _SHA1 = re.compile(r"^[0-9a-f]{40}$")
 
@@ -404,23 +415,24 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     source_path = root / SOURCE_PROOF
     _write_json(source_path, source_value)
 
-    ledger = source.build_oracle_safety_ledger(episode)
-    ledger_value = ledger.to_primitive()
-    ledger_certificate = source.validate_oracle_safety_primitive(
-        episode, ledger_value
+    ledger, ledger_context = source._build_oracle_safety_ledger_with_context(
+        episode
     )
+    ledger_value = ledger.to_primitive()
     ledger_path = root / ORACLE_SAFETY_LEDGER_PROOF
     _write_json(ledger_path, ledger_value)
 
-    oracle = source.oracle_qualification_from_safety_ledger(episode, ledger)
+    oracle = source._oracle_qualification_from_validated_context(ledger_context)
     oracle_value = oracle.to_primitive()
     if not oracle.passed:
         raise RuntimeError("G0 proof oracle qualification failed")
     oracle_path = root / ORACLE_PROOF
     _write_json(oracle_path, oracle_value)
 
-    replay_value = source.build_oracle_branch_aware_replay_evidence(
-        episode, ledger
+    replay_value = (
+        source._build_oracle_branch_aware_replay_evidence_from_validated_context(
+            ledger_context
+        )
     )
     _require_exact_keys(
         replay_value, _BEHAVIORAL_REPLAY_KEYS, label="behavioral replay proof"
@@ -537,11 +549,15 @@ def _load_reference(
     return _read_json(path)
 
 
-def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
+def _validate_source_artifacts_bundle(
+    run_root: Path,
+) -> _ValidatedSourceArtifacts:
     root = Path(run_root).resolve()
     value = _read_json(root / SOURCE_MANIFEST)
     _require_exact_keys(value, _SOURCE_MANIFEST_KEYS, label="source manifest")
     commit = _validate_source_commit(value.get("source_commit", ""))
+    episode = source.make_episode_source(0)
+    episode_primitive = episode.to_primitive()
     expected_scalars = {
         "status": "COMPLETE",
         "schema_version": SCHEMA_VERSION,
@@ -592,8 +608,9 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         "real_environment_transitions": 0,
         "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * source.K_SEARCH,
         "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
-        "geometry_support_certificate": source.make_episode_source(0)
-        .to_primitive()["geometry"]["geometry_support_certificate"],
+        "geometry_support_certificate": episode_primitive["geometry"][
+            "geometry_support_certificate"
+        ],
         "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
         "return_ready_ownership_rule": RETURN_READY_OWNERSHIP_RULE,
         "pre_action_context_service_mask_rule": (
@@ -616,8 +633,7 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         label="source proof",
         expected_relative_path=SOURCE_PROOF,
     )
-    expected_source = source.make_episode_source(0).to_primitive()
-    if source_value != expected_source:
+    if source_value != episode_primitive:
         raise ValueError("G0 source proof does not reconstruct episode zero")
     ledger_value = _load_reference(
         root,
@@ -626,9 +642,10 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         expected_relative_path=ORACLE_SAFETY_LEDGER_PROOF,
     )
     ledger = source.oracle_safety_ledger_from_primitive(ledger_value)
-    safety_certificate = source.validate_oracle_safety_ledger(
-        source.make_episode_source(0), ledger
+    ledger_context = source._validated_oracle_safety_context(
+        episode, ledger
     )
+    safety_certificate = ledger_context.certificate
     replay_value = _load_reference(
         root,
         value["oracle_behavioral_replay_proof"],
@@ -643,8 +660,10 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         or replay_value.get("selected_candidate_id") != ledger.selected_candidate_id
     ):
         raise ValueError("G0 behavioral replay identity mismatch")
-    replay_certificate = source.validate_oracle_branch_aware_replay_primitive(
-        source.make_episode_source(0), ledger, replay_value
+    replay_certificate = (
+        source._validate_oracle_branch_aware_replay_primitive_from_validated_context(
+            ledger_context, replay_value
+        )
     )
     if replay_value.get("certificate") != replay_certificate.to_primitive():
         raise ValueError("G0 behavioral replay certificate reconstruction mismatch")
@@ -657,8 +676,8 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         label="oracle proof",
         expected_relative_path=ORACLE_PROOF,
     )
-    expected_oracle = source.oracle_qualification_from_safety_ledger(
-        source.make_episode_source(0), ledger
+    expected_oracle = source._oracle_qualification_from_validated_context(
+        ledger_context
     ).to_primitive()
     if oracle_value != expected_oracle or oracle_value.get("passed") is not True:
         raise ValueError("G0 oracle proof reconstruction mismatch")
@@ -668,7 +687,7 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
         label="tracker proof",
         expected_relative_path=TRACKER_PROOF,
     )
-    expected_tracker = _build_tracker_proof(source.make_episode_source(0))
+    expected_tracker = _build_tracker_proof(episode)
     if tracker_value != expected_tracker or tracker_value.get("passed") is not True:
         raise ValueError("G0 tracker proof reconstruction mismatch")
     if value["source_commit"] != commit:
@@ -689,7 +708,18 @@ def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
     if (root / ANALYSIS_RESULT).is_file():
         allowed.add(ANALYSIS_RESULT)
     _assert_exact_files(root, allowed)
-    return value
+    return _ValidatedSourceArtifacts(
+        manifest=value,
+        episode=episode,
+        ledger=ledger,
+        ledger_context=ledger_context,
+        replay_primitive=replay_value,
+        replay_certificate=replay_certificate,
+    )
+
+
+def validate_source_artifacts(run_root: Path) -> dict[str, Any]:
+    return dict(_validate_source_artifacts_bundle(run_root).manifest)
 
 
 def readiness_validate(*, run_root: Path) -> dict[str, Any]:
@@ -765,24 +795,21 @@ def _clopper_pearson_witness() -> dict[str, Any]:
     }
 
 
+def _proof_episode_validity_from_bundle(
+    bundle: _ValidatedSourceArtifacts,
+) -> dict[str, Any]:
+    return source._build_proof_episode_validity_from_validated_evidence(
+        bundle.ledger_context,
+        replay_primitive=bundle.replay_primitive,
+        replay_certificate=bundle.replay_certificate,
+    )
+
+
 def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
     root = Path(run_root).resolve()
-    training = validate_source_artifacts(root)
-    ledger_value = _load_reference(
-        root,
-        training["oracle_safety_ledger_proof"],
-        label="oracle safety ledger proof",
-        expected_relative_path=ORACLE_SAFETY_LEDGER_PROOF,
-    )
-    replay_value = _load_reference(
-        root,
-        training["oracle_behavioral_replay_proof"],
-        label="oracle behavioral replay proof",
-        expected_relative_path=ORACLE_BEHAVIORAL_REPLAY_PROOF,
-    )
-    production_witness = source.build_proof_episode_validity(
-        source.make_episode_source(0), ledger_value, replay_value
-    )
+    bundle = _validate_source_artifacts_bundle(root)
+    training = bundle.manifest
+    production_witness = _proof_episode_validity_from_bundle(bundle)
     if (
         production_witness.get("operational_valid") is not True
         or production_witness.get("result_branch") is not None
@@ -815,13 +842,16 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
     }
     _require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
     _write_json(root / EVALUATION_MANIFEST, value)
-    validate_evaluation_artifacts(root)
+    _validate_evaluation_artifacts_from_bundle(root, bundle)
     return value
 
 
-def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
+def _validate_evaluation_artifacts_from_bundle(
+    run_root: Path,
+    bundle: _ValidatedSourceArtifacts,
+) -> dict[str, Any]:
     root = Path(run_root).resolve()
-    training = validate_source_artifacts(root)
+    training = bundle.manifest
     value = _read_json(root / EVALUATION_MANIFEST)
     _require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
     plan = source.make_bootstrap_index_plan()
@@ -833,21 +863,7 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
         "upper_order_statistic": 9500,
         "interpolation": False,
     }
-    ledger_value = _load_reference(
-        root,
-        training["oracle_safety_ledger_proof"],
-        label="oracle safety ledger proof",
-        expected_relative_path=ORACLE_SAFETY_LEDGER_PROOF,
-    )
-    replay_value = _load_reference(
-        root,
-        training["oracle_behavioral_replay_proof"],
-        label="oracle behavioral replay proof",
-        expected_relative_path=ORACLE_BEHAVIORAL_REPLAY_PROOF,
-    )
-    expected_production_witness = source.build_proof_episode_validity(
-        source.make_episode_source(0), ledger_value, replay_value
-    )
+    expected_production_witness = _proof_episode_validity_from_bundle(bundle)
     if (
         value.get("status") != "COMPLETE"
         or value.get("schema_version") != SCHEMA_VERSION
@@ -867,7 +883,26 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
         != expected_production_witness
     ):
         raise ValueError("G0 evaluation artifact invariant mismatch")
+    allowed = {
+        SOURCE_MANIFEST,
+        EVALUATION_MANIFEST,
+        SOURCE_PROOF,
+        ORACLE_PROOF,
+        TRACKER_PROOF,
+        ORACLE_SAFETY_LEDGER_PROOF,
+        ORACLE_BEHAVIORAL_REPLAY_PROOF,
+    }
+    if (root / ANALYSIS_RESULT).is_file():
+        allowed.add(ANALYSIS_RESULT)
+    _assert_exact_files(root, allowed)
     return value
+
+
+def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
+    root = Path(run_root).resolve()
+    return _validate_evaluation_artifacts_from_bundle(
+        root, _validate_source_artifacts_bundle(root)
+    )
 
 
 def _branch_witnesses() -> dict[str, dict[str, Any]]:
@@ -899,22 +934,12 @@ def _branch_witnesses() -> dict[str, dict[str, Any]]:
 
 
 def _primitive_analysis_witness(
-    *, root: Path, training: Mapping[str, Any]
+    bundle: _ValidatedSourceArtifacts,
 ) -> dict[str, Any]:
-    ledger_value = _load_reference(
-        root,
-        training["oracle_safety_ledger_proof"],
-        label="oracle safety ledger proof",
-        expected_relative_path=ORACLE_SAFETY_LEDGER_PROOF,
-    )
-    replay_value = _load_reference(
-        root,
-        training["oracle_behavioral_replay_proof"],
-        label="oracle behavioral replay proof",
-        expected_relative_path=ORACLE_BEHAVIORAL_REPLAY_PROOF,
-    )
-    reconstructed = source.analyze_proof_fixture(
-        source.make_episode_source(0), ledger_value, replay_value
+    reconstructed = source._analyze_proof_fixture_from_validated_evidence(
+        bundle.ledger_context,
+        replay_primitive=bundle.replay_primitive,
+        replay_certificate=bundle.replay_certificate,
     )
     if (
         reconstructed.get("proof_only") is not True
@@ -924,11 +949,14 @@ def _primitive_analysis_witness(
     ):
         raise RuntimeError("G0 public primitive proof analyzer failed")
     return reconstructed
+
+
 def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
     root = Path(run_root).resolve()
-    training = validate_source_artifacts(root)
-    evaluation = validate_evaluation_artifacts(root)
-    primitive_witness = _primitive_analysis_witness(root=root, training=training)
+    bundle = _validate_source_artifacts_bundle(root)
+    training = bundle.manifest
+    evaluation = _validate_evaluation_artifacts_from_bundle(root, bundle)
+    primitive_witness = _primitive_analysis_witness(bundle)
     value = {
         "status": "COMPLETE",
         "schema_version": SCHEMA_VERSION,
@@ -953,14 +981,17 @@ def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
     del evaluation
     _require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
     _write_json(root / ANALYSIS_RESULT, value)
-    validate_analysis_artifacts(root)
+    _validate_analysis_artifacts_from_bundle(root, bundle)
     return value
 
 
-def validate_analysis_artifacts(run_root: Path) -> dict[str, Any]:
+def _validate_analysis_artifacts_from_bundle(
+    run_root: Path,
+    bundle: _ValidatedSourceArtifacts,
+) -> dict[str, Any]:
     root = Path(run_root).resolve()
-    training = validate_source_artifacts(root)
-    validate_evaluation_artifacts(root)
+    training = bundle.manifest
+    _validate_evaluation_artifacts_from_bundle(root, bundle)
     value = _read_json(root / ANALYSIS_RESULT)
     _require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
     if (
@@ -977,7 +1008,7 @@ def validate_analysis_artifacts(run_root: Path) -> dict[str, Any]:
         or value.get("first_match_order") != list(source.FIRST_MATCH_ORDER)
         or value.get("branch_witnesses") != _branch_witnesses()
         or value.get("primitive_analysis_witness")
-        != _primitive_analysis_witness(root=root, training=training)
+        != _primitive_analysis_witness(bundle)
         or value.get("operational_valid") is not False
         or value.get("result_branch") is not None
         or value.get("scientific_conclusion") is not None
@@ -986,7 +1017,27 @@ def validate_analysis_artifacts(run_root: Path) -> dict[str, Any]:
         or value.get("additional_optimizer_steps") != 0
     ):
         raise ValueError("G0 analysis artifact invariant mismatch")
+    _assert_exact_files(
+        root,
+        {
+            SOURCE_MANIFEST,
+            EVALUATION_MANIFEST,
+            ANALYSIS_RESULT,
+            SOURCE_PROOF,
+            ORACLE_PROOF,
+            TRACKER_PROOF,
+            ORACLE_SAFETY_LEDGER_PROOF,
+            ORACLE_BEHAVIORAL_REPLAY_PROOF,
+        },
+    )
     return value
+
+
+def validate_analysis_artifacts(run_root: Path) -> dict[str, Any]:
+    root = Path(run_root).resolve()
+    return _validate_analysis_artifacts_from_bundle(
+        root, _validate_source_artifacts_bundle(root)
+    )
 
 
 def _formal_execution_unbound(*_args: Any, **_kwargs: Any) -> None:
