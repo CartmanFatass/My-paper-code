@@ -41,7 +41,10 @@ if you read nothing else.
    cause from a coin. Ten isolated runs cost ninety seconds.
 3. **Verify a child's claim before it becomes a record.** Children are bound to
    report honestly; that protects the report, not the archive. Spot-check the
-   load-bearing ones yourself and cite what you checked.
+   load-bearing ones yourself and cite what you checked — **mechanically**:
+   files present, schema intact, the number reproduced. Whether a run is
+   *scientifically* valid is Pro's, never yours (`AGENTS.md`, **Scientific
+   restraint**, user ruling 2026-07-30).
 4. **A guard test needs a paired negative.** A test that cannot go red reads as
    coverage forever after. Watch it fail before you call it done.
 5. **Waiting is in-band.** Ending a turn to wait is a stall, not a pause. Poll

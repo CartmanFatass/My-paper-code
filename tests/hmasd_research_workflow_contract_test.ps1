@@ -241,6 +241,11 @@ foreach ($required in @(
     'Never end your turn to wait for your own work',
     'Never assert a property you did not measure',
     'Never report an elapsed time you did not measure',
+    # The workstation is shared with another research line, and that rule lived
+    # only in COMPUTE_ROUTING.md and CURRENT_WORK.md -- two documents NO subagent
+    # is routed to read. Four shell-holding definitions carried zero mention of
+    # it. A rule binding an actor that cannot load it is not a rule.
+    'Another research line runs on the same box',
     'Protected semantics')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
@@ -249,6 +254,22 @@ foreach ($leaked in @(
     if ($context.Contains($leaked)) {
         throw "Workflow leaked into the subagent context: $leaked"
     }
+}
+
+# CLAUDE.md is the ONLY file every role loads by default; everything else arrives
+# through its routing table. Nothing asserted its CONTENT until 2026-07-30 -- the
+# control-plane checker proves its referents exist, which is a different claim.
+# Its PM-only block carries a verify duty, and that duty must not read as licence
+# to judge scientific validity now that the Project Manager holds none.
+$claudeMd = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
+# Keep every asserted substring inside ONE wrapped line. The first version of the
+# assertion below spanned a line break and could therefore never match, which
+# reads exactly like a missing rule -- a guard that cannot go green is as useless
+# as one that cannot go red.
+foreach ($required in @(
+    'This file is a signpost, and nothing else',
+    "valid is Pro's, never yours")) {
+    if (-not $claudeMd.Contains($required)) { throw "CLAUDE.md missing: $required" }
 }
 foreach ($required in @(
     'docs/report/ITERATION_<n>.md',

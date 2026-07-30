@@ -31,6 +31,13 @@ the honesty rules at all.
 - Leave your owned paths in the shared working tree. **Subagents never run Git.**
   If a markdown file will not stage, that is the repository's bare `*.md` ignore
   rule — report it rather than working around it, and never `git add -f`.
+- **Another research line runs on the same box, and its processes are not
+  yours.** Before starting any local run, check what is already running and
+  record what you find by pid, script and run root;
+  `scripts/check_compute_free.ps1` answers the *is it free* half. Never kill,
+  suspend, or interfere with a process you did not start, and label your own so
+  the other line can do the same. Under foreign load local wall clock is a noisy
+  lower bound — never report a timing number measured against it.
 
 ## Unattended operation
 
