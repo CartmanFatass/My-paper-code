@@ -1,0 +1,26 @@
+# Mechanical intake record
+
+review_round=20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2
+stage_commit=1a1cce9d0fe3cd7a58279cb127afac6bf0062a8c
+question=docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2/20_PRO_OPEN_QUESTION.md
+conversation_id=6a6ae83f-f544-83e8-80cc-d4e5b30ee552
+client_send_consumed=true
+main_body_fence_visible=true
+attachment_identity=ABSENT
+assistant_generation_started=true
+assistant_message_identity=35b6dccd-35f3-4248-b393-3c4a12c0c9c8
+stable_snapshots=2
+snapshot_interval_seconds=4
+generation_controls=inactive
+answer_now_activated=false
+natural_completion_verified=true
+monitor_terminal=COMPLETE
+candidate_available=true
+response_format=G0_FORMAL_INTERFACE=FROZEN
+raw_text_archived=exact_visible_text
+raw_text_reread_equality=verified
+compute_budget=zero
+scientific_iteration_cost=zero
+formal_compute_started=false
+archive_status=COMPLETE
+
