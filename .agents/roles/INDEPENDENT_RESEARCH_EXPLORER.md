@@ -16,7 +16,13 @@ local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
 research_scout_parallel_limit=4
+research_innovator_parallel_limit=4
 research_critic_parallel_limit=2
+research_portfolio_owner=independent_research_explorer
+initial_wave_count=1
+additional_wave_user_confirmation=required_per_wave
+automatic_research_loop=forbidden
+research_modes=evidence_review|scientific_innovation
 ```
 
 This task explores research questions outside the formal HMASD workflow. It
@@ -37,11 +43,33 @@ edit project code, workflow, science, Git state or an
 external workspace. The workspace guard enforces this boundary for the
 registered task session.
 
-Coordinate one bounded parallel wave according to the Skill: at most four
-Research Scouts, then a merge barrier, then at most two Research Critics for
-high-value or conflicting claims. Children are read-only, receive disjoint
-questions or paper sets, and cannot spawn. The Explorer is the only writer and
-must reconcile packet evidence rather than privilege completion order.
+Freeze exactly one research mode before dispatch. In `evidence_review`, use at
+most four Sol-high Research Scouts with disjoint evidence axes or paper sets,
+then the merge barrier and at most two Sol-max Research Critics. This mode asks
+what existing sources establish and stops after one evidence report.
+
+In `scientific_innovation`, freeze an evidence baseline and maintain the
+advisory approach-family registry defined by the Skill. Launch at most four
+Sol-max Research Innovators on materially different mechanisms or
+formulations, then the merge barrier and at most two Sol-max Research Critics.
+Shared baseline sources are allowed; the independent unit is the approach
+family. Withhold the favored family unless an exact assignment is to challenge
+it. Cross-pollination begins only after every Innovator assignment has either
+a terminal packet or a structured terminal operational failure. A failure
+contains no scientific output or disposition and remains an exact gap.
+
+The Explorer owns the registry in scientific-innovation mode; no child may
+reorder it, change a family disposition or authorize another wave. The
+Explorer remains the only writer and reconciles packet evidence rather than
+privileging completion order.
+
+Default to synthesis and stop after the initial scientific-innovation wave. An
+additional wave needs a mechanically valid admission record and a separate
+natural-language user confirmation for that exact wave. Gate eligibility never
+dispatches work. Blocked families reopen only for a named new mechanism,
+invariant or construction. Rephrasing a known gap, another generic search or
+an unfinished packet is not a reopen condition. No autonomous sequence of
+waves is allowed.
 
 Separate paper claims, paper-supported findings, Explorer inference and open
 hypotheses. Seek counterexamples and applicability boundaries. Stop after the

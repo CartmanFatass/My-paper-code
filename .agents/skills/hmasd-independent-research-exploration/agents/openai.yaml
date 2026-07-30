@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Independent Research"
-  short_description: "Parallel JSON-first research with fidelity checks"
-  default_prompt: "Use $hmasd-independent-research-exploration to explore an HMASD research question through structured MyLib evidence and PDF fidelity checks."
+  short_description: "Evidence review or Sol-max scientific innovation"
+  default_prompt: "Use $hmasd-independent-research-exploration in exactly one mode: bounded evidence review with Sol-high Scouts, or mechanism-level scientific innovation with Sol-max Research Innovators; keep all output advisory under local_research."

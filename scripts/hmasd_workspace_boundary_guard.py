@@ -155,7 +155,7 @@ def _registered_python(repo: Path) -> str | None:
     return matches[0] if len(matches) == 1 else None
 
 
-def _trusted_research_probe(command: str, repo: Path) -> bool:
+def _trusted_research_script(command: str, repo: Path) -> bool:
     if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
         return False
     interpreter = _registered_python(repo)
@@ -163,20 +163,27 @@ def _trusted_research_probe(command: str, repo: Path) -> bool:
         return False
     normalized = command.strip().replace("\\", "/")
     normalized_interpreter = interpreter.replace("\\", "/")
-    registered_probe = str(
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-independent-research-exploration"
-        / "scripts"
-        / "mylib_research_probe.py"
-    ).replace("\\", "/")
-    prefix = re.compile(
-        rf'^"?{re.escape(normalized_interpreter)}"?\s+'
-        rf'"?{re.escape(registered_probe)}"?(?:\s|$)',
-        re.IGNORECASE,
+    scripts = (
+        "mylib_research_probe.py",
+        "research_portfolio_gate.py",
     )
-    return bool(prefix.match(normalized))
+    for basename in scripts:
+        registered = str(
+            repo
+            / ".agents"
+            / "skills"
+            / "hmasd-independent-research-exploration"
+            / "scripts"
+            / basename
+        ).replace("\\", "/")
+        prefix = re.compile(
+            rf'^"?{re.escape(normalized_interpreter)}"?\s+'
+            rf'"?{re.escape(registered)}"?(?:\s|$)',
+            re.IGNORECASE,
+        )
+        if prefix.match(normalized):
+            return True
+    return False
 
 
 def _extract_absolute_paths(command: str) -> list[Path]:
@@ -240,12 +247,12 @@ def _guard_shell(
     if research_session:
         if GIT_MUTATION.search(command):
             raise GuardError("Git mutation is forbidden for the independent research session")
-        if _trusted_research_probe(command, repo):
-            return
         if RESEARCH_UNSAFE_EXPRESSION.search(command):
             raise GuardError("nested or executable shell expression is forbidden")
         if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
             raise GuardError("compound shell commands are forbidden for the research session")
+        if _trusted_research_script(command, repo):
+            return
         if RESEARCH_UNSAFE_READ_OPTION.search(command):
             raise GuardError("shell option can execute or write and is forbidden")
         known_mutation = bool(
@@ -259,7 +266,7 @@ def _guard_shell(
         if not RESEARCH_READ_ONLY_COMMAND.search(command):
             raise GuardError(
                 "research shell command is not an approved read-only form; "
-                "use the registered probe or apply_patch under local_research"
+                "use a registered research script or apply_patch under local_research"
             )
         return
     if _trusted_provision(command, repo, linked):

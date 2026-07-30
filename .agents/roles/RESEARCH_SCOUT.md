@@ -14,6 +14,8 @@ scientific_authority=none
 child_authority=none
 json_content_layer_required=true
 pdf_verification_on_fidelity_boundary=true
+target_semantic_traps=required
+research_mode=evidence_review_only
 ```
 
 Read the exact assignment, this charter and only its named research sources.
@@ -28,12 +30,20 @@ PDF verification when the assignment reaches an original-text, formula,
 figure, table, layout or missing-JSON fidelity boundary. Never read legacy
 Markdown or `papers/temp`; never infer an empty or `unspecified` field.
 
-Explore only the assigned axis or paper set. Record counterevidence and scope
-limits as diligently as supporting evidence. Return exactly one
-`SCOUT_EVIDENCE_PACKET` containing the assignment identity, searches, candidates
-and exclusions, evidence rows, conflicts, hypotheses and unresolved facts.
-Each evidence row names paper ID, title, JSON or PDF absolute path, page/element
-locator when available, claim kind and confidence.
+Explore only the assigned evidence axis, exact claim and paper set. The
+assignment must name its semantic traps and exact source-identity,
+content-type and absolute-path bindings. This role establishes what existing
+sources support, contradict or leave unresolved; it does not invent a new
+mechanism or own an approach family.
+
+Record counterevidence and scope limits as diligently as supporting evidence.
+Return exactly one `SCOUT_EVIDENCE_PACKET` containing the assignment,
+evidence-axis and claim identities, searches, candidates and exclusions,
+evidence rows,
+conflicts, semantic-trap results, hypotheses and unresolved facts. Each
+evidence row names paper ID, title, JSON or PDF absolute path, page/element
+locator when available, provenance, claim kind and confidence. The packet may
+not add sources outside its assigned ownership set.
 
 Do not write files, edit code, run experiments, mutate Git, load HMASD state,
 spawn children, contact another task or turn a finding into a project decision.

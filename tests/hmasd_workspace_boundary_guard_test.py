@@ -246,6 +246,52 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
                 "command": (
                     f'C:/Python/python.exe "{repo}/.agents/skills/'
                     "hmasd-independent-research-exploration/scripts/"
+                    'research_portfolio_gate.py" check --record '
+                    f'"{local_research / "portfolio.json"}" --phase merge'
+                )
+            },
+            session_id="research-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/.agents/skills/'
+                    "hmasd-independent-research-exploration/scripts/"
+                    'unregistered.py"'
+                )
+            },
+            session_id="research-session",
+        ),
+        "use a registered research script or apply_patch",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/.agents/skills/'
+                    "hmasd-independent-research-exploration/scripts/"
+                    'research_portfolio_gate.py" (Start-Process cmd.exe)'
+                )
+            },
+            session_id="research-session",
+        ),
+        "nested or executable shell expression",
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/.agents/skills/'
+                    "hmasd-independent-research-exploration/scripts/"
                     'mylib_research_probe.py" --local-research-root '
                     f'"{local_research}" status'
                 )

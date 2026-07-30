@@ -52,6 +52,11 @@ description = "Read-only Sol-high scout for one bounded independent research axi
 config_file = "./agents/hmasd-research-scout.toml"
 nickname_candidates = ["Research Scout", "Evidence Scout", "Counterexample Scout"]
 
+[agents."HMASDResearchInnovator"]
+description = "Read-only Sol-max innovator for one bounded advisory research direction."
+config_file = "./agents/hmasd-research-innovator.toml"
+nickname_candidates = ["Research Innovator", "Mechanism Explorer", "Direction Builder"]
+
 [agents."HMASDResearchCritic"]
 description = "Read-only Sol-max critic for one bounded independent research claim."
 config_file = "./agents/hmasd-research-critic.toml"

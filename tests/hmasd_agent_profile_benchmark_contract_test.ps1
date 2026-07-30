@@ -13,12 +13,15 @@ $implementer = Get-Content -Raw -LiteralPath (
 $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
+$researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
 if (-not (Test-Path -LiteralPath $researchScoutPath) -or
+    -not (Test-Path -LiteralPath $researchInnovatorPath) -or
     -not (Test-Path -LiteralPath $researchCriticPath)) {
     throw 'Independent research child profiles are missing'
 }
 $researchScout = Get-Content -Raw -LiteralPath $researchScoutPath
+$researchInnovator = Get-Content -Raw -LiteralPath $researchInnovatorPath
 $researchCritic = Get-Content -Raw -LiteralPath $researchCriticPath
 
 foreach ($required in @(
@@ -27,6 +30,19 @@ foreach ($required in @(
     'Use only the assignment-named runtime')) {
     if (-not $implementer.Contains($required)) {
         throw "Selected implementer profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-research-innovator"',
+    'model = "gpt-5.6-sol"',
+    'model_reasoning_effort = "max"',
+    'sandbox_mode = "read-only"',
+    '.agents/roles/RESEARCH_INNOVATOR.md',
+    'RESEARCH_DIRECTION_PACKET',
+    'Do not force an affirmative result',
+    'spawn children')) {
+    if (-not $researchInnovator.Contains($required)) {
+        throw "Research Innovator profile missing: $required"
     }
 }
 foreach ($required in @(
@@ -52,7 +68,9 @@ foreach ($required in @(
     'Metadata v2',
     'quality and provenance',
     'structured JSON',
-    'PDF verification')) {
+    'PDF verification',
+    'SCOUT_EVIDENCE_PACKET or RESEARCH_DIRECTION_PACKET',
+    'target-specific adversarial checklist')) {
     if (-not $researchCritic.Contains($required)) {
         throw "Research Critic profile missing: $required"
     }
@@ -60,6 +78,8 @@ foreach ($required in @(
 foreach ($required in @(
     '[agents."HMASDResearchScout"]',
     'config_file = "./agents/hmasd-research-scout.toml"',
+    '[agents."HMASDResearchInnovator"]',
+    'config_file = "./agents/hmasd-research-innovator.toml"',
     '[agents."HMASDResearchCritic"]',
     'config_file = "./agents/hmasd-research-critic.toml"')) {
     if (-not $config.Contains($required)) {

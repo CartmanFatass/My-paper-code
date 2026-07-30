@@ -31,6 +31,7 @@ $expectedRoles = @(
     'PRO_RESPONSE_MONITOR.md',
     'INDEPENDENT_RESEARCH_EXPLORER.md',
     'RESEARCH_CRITIC.md',
+    'RESEARCH_INNOVATOR.md',
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
@@ -53,6 +54,7 @@ $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agen
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
+$researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
@@ -137,6 +139,10 @@ foreach ($required in @(
     'local_research_write_tool=apply_patch_only',
     'local_research_shell_mutation=forbidden',
     'research_scout_parallel_limit=4',
+    'research_innovator_parallel_limit=4',
+    'research_modes=evidence_review|scientific_innovation',
+    'additional_wave_user_confirmation=required_per_wave',
+    'automatic_research_loop=forbidden',
     'research_critic_parallel_limit=2')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
@@ -151,6 +157,16 @@ foreach ($pair in @(
         'child_authority=none',
         'json_content_layer_required=true',
         'pdf_verification_on_fidelity_boundary=true') },
+    @{ Text=$researchInnovatorRole; Required=@(
+        'callable_agent_type=hmasd-research-innovator',
+        'model=gpt-5.6-sol',
+        'reasoning_effort=max',
+        'write_authority=none',
+        'child_authority=none',
+        'research_mode=scientific_innovation_only',
+        'favored_family_visibility=withheld_unless_exact_challenge_assignment',
+        'conclusion_forcing=forbidden',
+        'RESEARCH_DIRECTION_PACKET') },
     @{ Text=$researchCriticRole; Required=@(
         'callable_agent_type=hmasd-research-critic',
         'model=gpt-5.6-sol',
@@ -170,6 +186,7 @@ foreach ($authority in @(
     'C:/Projects/Inst-sci/papers/AGENTS.md',
     'llm-index/INSTRUCTIONS.md')) {
     if (-not $researchScoutRole.Contains($authority) -or
+        -not $researchInnovatorRole.Contains($authority) -or
         -not $researchCriticRole.Contains($authority)) {
         throw "Independent research child authority load missing: $authority"
     }
@@ -181,7 +198,11 @@ foreach ($required in @(
     'PDF is required for original verification, formula/figure/table semantics, or missing JSON',
     'legacy Markdown is excluded',
     'SCOUT_EVIDENCE_PACKET',
+    'RESEARCH_DIRECTION_PACKET',
     'CRITIC_ASSESSMENT_PACKET',
+    'evidence review',
+    'scientific innovation',
+    'additional wave',
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
         throw "Independent research Skill missing: $required"
@@ -204,13 +225,31 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'scout_parallel_limit=4',
+    'innovator_parallel_limit=4',
     'critic_parallel_limit=2',
     'merge_barrier=required',
     'completion_order_priority=forbidden',
     'single_writer=independent_research_explorer',
+    'automatic_additional_wave=forbidden',
+    'additional_wave_user_confirmation=required_per_wave',
     'automatic_formal_workflow_promotion=forbidden')) {
     if (-not $parallelResearch.Contains($required)) {
         throw "Parallel research workflow missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'Assume for purposes of this task that a complete affirmative proof exists',
+    'Spend at least 8 hours',
+    'up to 64 concurrent agents',
+    'Return only when a complete affirmative proof has been found')) {
+    foreach ($surface in @(
+        $independentResearchRole,
+        $researchInnovatorRole,
+        $independentResearchSkill,
+        $parallelResearch)) {
+        if ($surface.Contains($forbidden)) {
+            throw "Independent research imported conclusion-forcing CDC text: $forbidden"
+        }
     }
 }
 foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $operationsRole)) {
