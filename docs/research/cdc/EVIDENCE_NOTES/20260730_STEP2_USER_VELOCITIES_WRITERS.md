@@ -89,3 +89,44 @@ different vectorised code path selected by CPU. `d7s-workers-3` (run
 
 Pro's Challenge 6 continues to bind: nothing here is frozen as *the* cause of the
 cloud-versus-cloud divergence.
+
+## PRE-REGISTERED, before `d7s-workers-3` is read
+
+The cloud-versus-cloud divergence needs a mechanism that works with the **same**
+glibc on both runners. There is one, and it is the same family as the platform
+finding rather than a new one:
+
+**glibc dispatches `sin`/`cos` through ifunc on CPU features.** libm ships multiple
+implementations -- notably FMA-using variants -- and selects at load time from what
+the CPU reports. Two `ubuntu-latest` runners on different microarchitectures
+therefore run *different* `sin` code from the *same* glibc, and FMA changes the
+rounding of the intermediate products.
+
+That predicts, for run `30518707693` against run `30516912923`:
+
+```text
+first differing component (generation order)   user_velocities
+user_positions                                 IDENTICAL
+divergence present on SOME episode keys, not all
+```
+
+The partial pattern is part of the prediction, not an escape: a dispatch difference
+only shows in the last bits for angles where the two implementations disagree, which
+is why the R4 population showed 3 of 8 topologies rather than all eight.
+
+**What refutes it:**
+
+- `user_positions` differs. Then the RNG stream or the SVD is implicated after all,
+  and the trig story does not cover the cloud case.
+- The first differing array is one the platform comparison found identical, with
+  `user_velocities` identical. Then cloud-versus-cloud is a genuinely different
+  mechanism.
+- Every component agrees. Then the two runners were not distinguishable on this
+  topology and the comparison tested nothing -- `UNTESTED`, not a pass, and the
+  escalated probe job over the R4 seeds becomes necessary.
+- The gate reports the runtimes as indistinguishable. Same as above: no evidence
+  either way.
+
+Written before reading the artifact, for the same reason as the previous
+pre-registration: the last one turned a wrong hypothesis into a marked-dead one
+instead of letting it disappear quietly.
