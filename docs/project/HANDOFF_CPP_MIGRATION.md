@@ -58,18 +58,25 @@ toy 后端：Python 保留状态、生命周期与失败关闭边界，C++ 只�
 `_simulate_packet_flow`、指标/奖励计算，以及 240 对/步的 `_compute_sinr`
 Python 调用外壳（现在每次只做两次矩阵索引 + 减法）。
 
-## 下一阶段候选（按剩余占比）
+## 下一阶段候选（按迁移后 flag 开的 cProfile，25 步 1.411s）
 
-1. `_get_observation`（12.6%，8 次/步）：纯组装，规约到批量 numpy 或原生。
-2. `_update_channel_state` 的 240 对循环：在 scenario7 不可用掩码语义下
-   向量化 sinr_matrix 填充（`tx_power − access_pl − user_ipn` 逐元素即位相同的
-   表达式等价本轮已论证；未实施）。
-3. `_simulate_packet_flow` 与指标计算。
-4. scenario7 的 `_widest_backhaul_capacities`（奖励整形用的独立松弛求解器）——
-   语义独立，勿与路由 Dijkstra 合并。
+1. **`_current_step_communication_cache` 本身：新的第一名。** 26,400 次 / 25 步
+   = 1,056 次/步，0.616s 累积（≈44%）——算术搬走后，剩下的主导成本是每次访问
+   重建 config 签名 + 4 个 `np.array_equal`（81,750 次调用，0.388s）。这是纯
+   开销、零物理。风险也最高：步内试探性配置变更（`noise_power` 中途改动的守卫
+   测试）正是这套重验证存在的理由。任何"脏标记/信任窗口扩宽"方案都必须先清点
+   步内每一个可能改动签名字段或位置数组的写点，再谈缓存判定的降价。
+2. `_get_observation`（0.293s 累积，含 `_graph_service_potential` 0.277s——
+   scenario7 奖励整形的松弛求解器占了观测大头）：纯组装 + 独立求解器，
+   勿与路由 Dijkstra 合并。
+3. `_update_channel_state` 的 240 对循环：向量化 sinr_matrix 填充
+   （`tx_power − access_pl − user_ipn` 逐元素即位相同的表达式等价本轮已论证；
+   未实施，且受 scenario7 不可用掩码语义约束）。
+4. `_simulate_packet_flow` 与指标计算。
 
 Dijkstra 本体保留 Python（heapq 平局语义即路径身份），其内层
-`_get_link_capacity` 已是 O(1) 矩阵读。
+`_get_link_capacity` 已是 O(1) 矩阵读；路由阶段剩余的 0.49s 里大部分其实是
+上面第 1 条的重验证成本，不是图搜索本身。
 
 ## 环境与工具
 
