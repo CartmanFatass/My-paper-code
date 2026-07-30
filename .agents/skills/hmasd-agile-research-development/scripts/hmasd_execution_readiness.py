@@ -13,7 +13,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 PHASES = (
     "interface_smoke",
     "bounded_exercise",
@@ -24,6 +24,10 @@ PHASES = (
 )
 MAX_SMOKE_SECONDS = 60
 MAX_TOTAL_SECONDS = 2460
+EXECUTION_SUPPORT_PATHS = (
+    ".agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py",
+    "tests/hmasd_code_project_manager_contract_test.ps1",
+)
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -50,6 +54,20 @@ def _git(repo: Path, *args: str) -> str:
     if completed.returncode != 0:
         raise ReadinessError(completed.stderr.strip() or "git command failed")
     return completed.stdout.strip()
+
+
+def _git_predicate(repo: Path, *args: str) -> bool:
+    completed = subprocess.run(
+        ["git", "-C", str(repo), *args],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="strict",
+    )
+    if completed.returncode not in (0, 1):
+        raise ReadinessError(completed.stderr.strip() or "git predicate failed")
+    return completed.returncode == 0
 
 
 def _repo_root(start: Path | None = None) -> Path:
@@ -93,6 +111,52 @@ def _code_pm_session(repo: Path) -> str:
     return matches[0]
 
 
+def _validate_execution_binding(
+    repo: Path,
+    source_commit: str,
+    execution_commit: str,
+    exact_paths: list[str],
+    execution_support_paths: list[str],
+) -> None:
+    for field, commit in (
+        ("source_commit", source_commit),
+        ("execution_commit", execution_commit),
+    ):
+        try:
+            resolved = _git(repo, "rev-parse", "--verify", f"{commit}^{{commit}}")
+        except ReadinessError as exc:
+            raise ReadinessError(f"{field} does not identify a Git commit") from exc
+        if resolved != commit:
+            raise ReadinessError(f"{field} does not identify the exact Git commit")
+    if _git(repo, "rev-parse", "HEAD") != execution_commit:
+        raise ReadinessError("execution_commit does not equal current HEAD")
+    if execution_support_paths != list(EXECUTION_SUPPORT_PATHS):
+        raise ReadinessError("execution_support_paths do not equal the approved readiness bridge")
+    if set(exact_paths).intersection(execution_support_paths):
+        raise ReadinessError("accepted paths overlap execution_support_paths")
+    if not _git_predicate(repo, "merge-base", "--is-ancestor", source_commit, execution_commit):
+        raise ReadinessError("source_commit is not an ancestor of execution_commit")
+    observed_delta = [
+        item
+        for item in _git(
+            repo, "diff", "--name-only", source_commit, execution_commit, "--"
+        ).splitlines()
+        if item
+    ]
+    if observed_delta != execution_support_paths:
+        raise ReadinessError("source-to-execution path delta does not match execution_support_paths")
+    dirty = _git(
+        repo,
+        "status",
+        "--porcelain=v1",
+        "--",
+        *exact_paths,
+        *execution_support_paths,
+    )
+    if dirty:
+        raise ReadinessError("accepted or execution-support paths contain uncommitted changes")
+
+
 def _load_spec(
     path: Path, repo: Path, *, require_fresh_exercise_root: bool
 ) -> dict[str, Any]:
@@ -102,11 +166,12 @@ def _load_spec(
         raise ReadinessError(f"invalid readiness spec: {exc}") from exc
     if not isinstance(spec, dict) or spec.get("schema_version") != SCHEMA_VERSION:
         raise ReadinessError(f"schema_version must equal {SCHEMA_VERSION}")
-    commit = spec.get("source_commit")
-    if not isinstance(commit, str) or not COMMIT_RE.fullmatch(commit):
+    source_commit = spec.get("source_commit")
+    if not isinstance(source_commit, str) or not COMMIT_RE.fullmatch(source_commit):
         raise ReadinessError("source_commit must be a 40-character lowercase SHA")
-    if _git(repo, "rev-parse", "HEAD") != commit:
-        raise ReadinessError("source_commit does not equal current HEAD")
+    execution_commit = spec.get("execution_commit")
+    if not isinstance(execution_commit, str) or not COMMIT_RE.fullmatch(execution_commit):
+        raise ReadinessError("execution_commit must be a 40-character lowercase SHA")
     if spec.get("formal") is not False or spec.get("scientific_iteration_cost") != 0:
         raise ReadinessError("readiness must be nonformal and cost zero scientific iterations")
     if not isinstance(spec.get("trigger"), str) or not spec["trigger"].strip():
@@ -118,9 +183,22 @@ def _load_spec(
     normalized_paths = [_safe_relative_path(item, "exact_paths") for item in exact_paths]
     if len(set(normalized_paths)) != len(normalized_paths):
         raise ReadinessError("exact_paths contains duplicates")
-    dirty = _git(repo, "status", "--porcelain=v1", "--", *normalized_paths)
-    if dirty:
-        raise ReadinessError("accepted paths contain uncommitted changes")
+
+    support_paths = spec.get("execution_support_paths")
+    if not isinstance(support_paths, list) or not support_paths:
+        raise ReadinessError("execution_support_paths must be a non-empty list")
+    normalized_support_paths = [
+        _safe_relative_path(item, "execution_support_paths") for item in support_paths
+    ]
+    if len(set(normalized_support_paths)) != len(normalized_support_paths):
+        raise ReadinessError("execution_support_paths contains duplicates")
+    _validate_execution_binding(
+        repo,
+        source_commit,
+        execution_commit,
+        normalized_paths,
+        normalized_support_paths,
+    )
 
     exercise_root = spec.get("exercise_root")
     if not isinstance(exercise_root, str) or not exercise_root.strip():
@@ -168,6 +246,7 @@ def _load_spec(
         raise ReadinessError(f"combined phase timeout exceeds {MAX_TOTAL_SECONDS} seconds")
 
     spec["exact_paths"] = normalized_paths
+    spec["execution_support_paths"] = normalized_support_paths
     return spec
 
 
@@ -229,6 +308,8 @@ def _validate_candidate_receipt(
         "schema_version": SCHEMA_VERSION,
         "status": "PASSED",
         "source_commit": spec["source_commit"],
+        "execution_commit": spec["execution_commit"],
+        "execution_support_paths": spec["execution_support_paths"],
         "trigger": spec["trigger"],
         "exact_paths": spec["exact_paths"],
         "formal": False,
@@ -281,6 +362,8 @@ def run_spec(spec_path: Path) -> int:
         "schema_version": SCHEMA_VERSION,
         "status": "PASSED",
         "source_commit": spec["source_commit"],
+        "execution_commit": spec["execution_commit"],
+        "execution_support_paths": spec["execution_support_paths"],
         "trigger": spec["trigger"],
         "exact_paths": spec["exact_paths"],
         "formal": False,
@@ -294,7 +377,11 @@ def run_spec(spec_path: Path) -> int:
     print("HMASD_EXECUTION_READINESS_PHASES_OK")
     print(
         json.dumps(
-            {"candidate_receipt": str(path), "source_commit": spec["source_commit"]},
+            {
+                "candidate_receipt": str(path),
+                "source_commit": spec["source_commit"],
+                "execution_commit": spec["execution_commit"],
+            },
             ensure_ascii=True,
         )
     )
@@ -317,7 +404,16 @@ def finalize_spec(spec_path: Path) -> int:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(receipt, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print("HMASD_EXECUTION_READINESS_OK")
-    print(json.dumps({"receipt": str(path), "source_commit": spec["source_commit"]}, ensure_ascii=True))
+    print(
+        json.dumps(
+            {
+                "receipt": str(path),
+                "source_commit": spec["source_commit"],
+                "execution_commit": spec["execution_commit"],
+            },
+            ensure_ascii=True,
+        )
+    )
     return 0
 
 
@@ -331,6 +427,32 @@ def _read_receipt(repo: Path, commit: str) -> dict[str, Any]:
         raise ReadinessError("readiness receipt is not successful")
     if receipt.get("source_commit") != commit:
         raise ReadinessError("readiness receipt commit mismatch")
+    execution_commit = receipt.get("execution_commit")
+    if not isinstance(execution_commit, str) or not COMMIT_RE.fullmatch(execution_commit):
+        raise ReadinessError("readiness receipt execution_commit mismatch")
+    exact_paths = receipt.get("exact_paths")
+    if not isinstance(exact_paths, list) or not exact_paths:
+        raise ReadinessError("readiness receipt exact_paths mismatch")
+    normalized_exact_paths = [
+        _safe_relative_path(item, "receipt exact_paths") for item in exact_paths
+    ]
+    if normalized_exact_paths != exact_paths or len(set(exact_paths)) != len(exact_paths):
+        raise ReadinessError("readiness receipt exact_paths mismatch")
+    execution_support_paths = receipt.get("execution_support_paths")
+    if not isinstance(execution_support_paths, list) or not execution_support_paths:
+        raise ReadinessError("readiness receipt execution_support_paths mismatch")
+    normalized_support_paths = [
+        _safe_relative_path(item, "receipt execution_support_paths")
+        for item in execution_support_paths
+    ]
+    if (
+        normalized_support_paths != execution_support_paths
+        or len(set(execution_support_paths)) != len(execution_support_paths)
+    ):
+        raise ReadinessError("readiness receipt execution_support_paths mismatch")
+    _validate_execution_binding(
+        repo, commit, execution_commit, exact_paths, execution_support_paths
+    )
     if receipt.get("formal") is not False or receipt.get("scientific_iteration_cost") != 0:
         raise ReadinessError("readiness receipt crosses the nonformal boundary")
     phases = receipt.get("phases")
@@ -395,10 +517,10 @@ def hook_stop() -> int:
     if not exact_paths:
         print(json.dumps(_hook_feedback("CODE_ACCEPTED has no exact_paths.", already_active)))
         return 0
-    if _git(repo, "rev-parse", "HEAD") != commit:
-        print(json.dumps(_hook_feedback("CODE_ACCEPTED commit is not current HEAD.", already_active)))
-        return 0
     if readiness == "not_triggered":
+        if _git(repo, "rev-parse", "HEAD") != commit:
+            print(json.dumps(_hook_feedback("CODE_ACCEPTED commit is not current HEAD.", already_active)))
+            return 0
         if not reason or reason in {"none", "not-triggered", "not_triggered"}:
             print(json.dumps(_hook_feedback("Untriggered execution readiness needs a bounded reason.", already_active)))
         return 0

@@ -403,6 +403,18 @@ try {
     & git.exe -C $tempRoot add accepted.py AGENTS.md
     & git.exe -C $tempRoot commit --quiet -m 'fixture'
     $fixtureCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
+    $executionSupportPaths = @(
+        '.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py',
+        'tests/hmasd_code_project_manager_contract_test.ps1'
+    )
+    foreach ($supportPath in $executionSupportPaths) {
+        $absoluteSupportPath = Join-Path $tempRoot $supportPath
+        New-Item -ItemType Directory -Path (Split-Path -Parent $absoluteSupportPath) -Force | Out-Null
+        [IO.File]::WriteAllText($absoluteSupportPath, "SUPPORT = 1`n")
+    }
+    & git.exe -C $tempRoot add -- $executionSupportPaths
+    & git.exe -C $tempRoot commit --quiet -m 'readiness execution support'
+    $executionCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
     $artifactPath = Join-Path $tempRoot 'exercise/artifact.json'
     $phaseArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$artifactPath'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
     $phaseTimeouts = [ordered]@{
@@ -418,8 +430,10 @@ try {
         $phases[$phase] = [ordered]@{ argv = $phaseArgv; timeout_seconds = $phaseTimeouts[$phase] }
     }
     $spec = [ordered]@{
-        schema_version = 1
+        schema_version = 2
         source_commit = $fixtureCommit
+        execution_commit = $executionCommit
+        execution_support_paths = $executionSupportPaths
         trigger = 'contract_fixture'
         exact_paths = @('accepted.py')
         formal = $false
@@ -430,8 +444,87 @@ try {
     }
     $specPath = Join-Path $tempRoot 'readiness-spec.json'
     [IO.File]::WriteAllText($specPath, ($spec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+    $newIsolatedSpec = {
+        param($baseSpec, $name)
+        $copy = $baseSpec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+        $copy.exercise_root = Join-Path $tempRoot $name
+        $isolatedArtifact = Join-Path $copy.exercise_root 'artifact.json'
+        $copy.expected_artifacts = @($isolatedArtifact)
+        $isolatedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$isolatedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
+        foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
+            $copy.phases.$phase.argv = $isolatedArgv
+        }
+        return $copy
+    }
     Push-Location $tempRoot
     try {
+        $legacySpec = & $newIsolatedSpec $spec 'legacy-schema-rejected-exercise'
+        $legacySpec.schema_version = 1
+        $legacySpecPath = Join-Path $tempRoot 'legacy-schema-rejected-spec.json'
+        [IO.File]::WriteAllText($legacySpecPath, ($legacySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $savedLegacyPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $legacyOutput = & $registeredPython $readinessScriptPath run --spec $legacySpecPath 2>&1
+        $legacyExit = $LASTEXITCODE
+        $ErrorActionPreference = $savedLegacyPreference
+        if ($legacyExit -eq 0 -or ($legacyOutput -join ' ') -notmatch 'schema_version must equal 2') {
+            throw "Execution-readiness wrapper accepted a schema-v1 spec: $($legacyOutput -join ' ')"
+        }
+        if (Test-Path -LiteralPath $legacySpec.exercise_root) {
+            throw 'Schema-v1 rejection created a phase root'
+        }
+
+        foreach ($supportCase in @('missing','extra')) {
+            $supportSpec = & $newIsolatedSpec $spec "$supportCase-support-rejected-exercise"
+            if ($supportCase -eq 'missing') {
+                $supportSpec.execution_support_paths = @($executionSupportPaths[0])
+            }
+            else {
+                $supportSpec.execution_support_paths = @($executionSupportPaths + 'docs/project/unapproved.md')
+            }
+            $supportSpecPath = Join-Path $tempRoot "$supportCase-support-rejected-spec.json"
+            [IO.File]::WriteAllText($supportSpecPath, ($supportSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+            $savedSupportPreference = $ErrorActionPreference
+            $ErrorActionPreference = 'Continue'
+            $supportOutput = & $registeredPython $readinessScriptPath run --spec $supportSpecPath 2>&1
+            $supportExit = $LASTEXITCODE
+            $ErrorActionPreference = $savedSupportPreference
+            if ($supportExit -eq 0 -or ($supportOutput -join ' ') -notmatch 'approved readiness bridge') {
+                throw "Execution-readiness wrapper accepted a $supportCase support path set: $($supportOutput -join ' ')"
+            }
+            if (Test-Path -LiteralPath $supportSpec.exercise_root) {
+                throw "Rejected $supportCase support path set created a phase root"
+            }
+        }
+
+        $headMismatchSpec = & $newIsolatedSpec $spec 'head-mismatch-rejected-exercise'
+        $headMismatchSpec.execution_commit = $fixtureCommit
+        $headMismatchSpecPath = Join-Path $tempRoot 'head-mismatch-rejected-spec.json'
+        [IO.File]::WriteAllText($headMismatchSpecPath, ($headMismatchSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $savedHeadPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $headMismatchOutput = & $registeredPython $readinessScriptPath run --spec $headMismatchSpecPath 2>&1
+        $headMismatchExit = $LASTEXITCODE
+        $ErrorActionPreference = $savedHeadPreference
+        if ($headMismatchExit -eq 0 -or ($headMismatchOutput -join ' ') -notmatch 'execution_commit does not equal current HEAD') {
+            throw "Execution-readiness wrapper accepted a mismatched execution HEAD: $($headMismatchOutput -join ' ')"
+        }
+
+        $fixtureTree = (& git.exe -C $tempRoot rev-parse "$fixtureCommit`^{tree}").Trim()
+        $unrelatedCommit = ("unrelated source`n" | & git.exe -C $tempRoot commit-tree $fixtureTree).Trim()
+        $nonAncestorSpec = & $newIsolatedSpec $spec 'nonancestor-rejected-exercise'
+        $nonAncestorSpec.source_commit = $unrelatedCommit
+        $nonAncestorSpecPath = Join-Path $tempRoot 'nonancestor-rejected-spec.json'
+        [IO.File]::WriteAllText($nonAncestorSpecPath, ($nonAncestorSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $savedAncestorPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $nonAncestorOutput = & $registeredPython $readinessScriptPath run --spec $nonAncestorSpecPath 2>&1
+        $nonAncestorExit = $LASTEXITCODE
+        $ErrorActionPreference = $savedAncestorPreference
+        if ($nonAncestorExit -eq 0 -or ($nonAncestorOutput -join ' ') -notmatch 'not an ancestor') {
+            throw "Execution-readiness wrapper accepted a nonancestor source: $($nonAncestorOutput -join ' ')"
+        }
+
         $rejectedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
         $rejectedRoot = Join-Path $tempRoot 'combined-timeout-rejected-exercise'
         $rejectedSpec.exercise_root = $rejectedRoot
@@ -498,6 +591,16 @@ blockers=none
             throw 'Stop hook rejected a matching execution-readiness receipt'
         }
 
+        $savedReceiptText = Get-Content -Raw -Encoding UTF8 -LiteralPath $fixtureReceipt
+        $mismatchedReceipt = $savedReceiptText | ConvertFrom-Json
+        $mismatchedReceipt.execution_commit = $fixtureCommit
+        [IO.File]::WriteAllText($fixtureReceipt, ($mismatchedReceipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $executionMismatchHookOutput = ($validHook | & $registeredPython $readinessScriptPath hook-stop) | ConvertFrom-Json
+        if ($executionMismatchHookOutput.decision -ne 'block' -or $executionMismatchHookOutput.reason -notmatch 'CODE_ACCEPTANCE_BLOCKED') {
+            throw 'Stop hook accepts a receipt whose execution identity is not current HEAD'
+        }
+        [IO.File]::WriteAllText($fixtureReceipt, $savedReceiptText, [Text.UTF8Encoding]::new($false))
+
         $otherHook = @{ session_id = 'not-code-pm'; stop_hook_active = $false; last_assistant_message = $validMessage } | ConvertTo-Json -Compress
         $otherHookOutput = $otherHook | & $registeredPython $readinessScriptPath hook-stop
         if ($LASTEXITCODE -ne 0 -or $otherHookOutput) {
@@ -549,6 +652,22 @@ blockers=none
                 throw "Execution-readiness finalizer accepts a tampered candidate receipt: $($tamperedFinalize -join ' ')"
             }
 
+            $identitySpec = & $newIsolatedSpec $spec 'identity-tampered-finalize-exercise'
+            $identitySpecPath = Join-Path $tempRoot 'identity-tampered-finalize.json'
+            [IO.File]::WriteAllText($identitySpecPath, ($identitySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+            $identityRun = & $registeredPython $readinessScriptPath run --spec $identitySpecPath
+            if ($LASTEXITCODE -ne 0 -or $identityRun -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
+                throw 'Identity-tamper fixture did not complete its six phases'
+            }
+            $identityCandidatePath = ($identityRun[-1] | ConvertFrom-Json).candidate_receipt
+            $identityCandidate = Get-Content -Raw -Encoding UTF8 -LiteralPath $identityCandidatePath | ConvertFrom-Json
+            $identityCandidate.execution_commit = $fixtureCommit
+            [IO.File]::WriteAllText($identityCandidatePath, ($identityCandidate | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+            $identityFinalize = & $registeredPython $readinessScriptPath finalize --spec $identitySpecPath 2>&1
+            if ($LASTEXITCODE -eq 0 -or ($identityFinalize -join ' ') -notmatch 'execution_commit mismatch') {
+                throw "Execution-readiness finalizer accepts a tampered execution identity: $($identityFinalize -join ' ')"
+            }
+
             $badSource = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
             $badSource.source_commit = '0' * 40
             $badSource.exercise_root = Join-Path $tempRoot 'bad-source-exercise'
@@ -583,10 +702,27 @@ blockers=none
             }
             [IO.File]::WriteAllText((Join-Path $tempRoot 'accepted.py'), "VALUE = 2`n")
             & git.exe -C $tempRoot add accepted.py
-            & git.exe -C $tempRoot commit --quiet -m 'failed phase fixture'
-            $failedCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
+            & git.exe -C $tempRoot commit --quiet -m 'second candidate fixture'
+            $failedSourceCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
+
+            $candidateMutationSpec = & $newIsolatedSpec $spec 'candidate-mutation-rejected-exercise'
+            $candidateMutationSpec.execution_commit = $failedSourceCommit
+            $candidateMutationSpecPath = Join-Path $tempRoot 'candidate-mutation-rejected-spec.json'
+            [IO.File]::WriteAllText($candidateMutationSpecPath, ($candidateMutationSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+            $candidateMutationOutput = & $registeredPython $readinessScriptPath run --spec $candidateMutationSpecPath 2>&1
+            if ($LASTEXITCODE -eq 0 -or ($candidateMutationOutput -join ' ') -notmatch 'path delta does not match') {
+                throw "Execution-readiness wrapper accepted a candidate-path mutation in the execution delta: $($candidateMutationOutput -join ' ')"
+            }
+
+            foreach ($supportPath in $executionSupportPaths) {
+                [IO.File]::WriteAllText((Join-Path $tempRoot $supportPath), "SUPPORT = 2`n")
+            }
+            & git.exe -C $tempRoot add -- $executionSupportPaths
+            & git.exe -C $tempRoot commit --quiet -m 'second readiness execution support'
+            $failedExecutionCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
             $failedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $failedSpec.source_commit = $failedCommit
+            $failedSpec.source_commit = $failedSourceCommit
+            $failedSpec.execution_commit = $failedExecutionCommit
             $failedSpec.exercise_root = Join-Path $tempRoot 'failed-phase-exercise'
             $failedArtifact = Join-Path $failedSpec.exercise_root 'artifact.json'
             $failedSpec.expected_artifacts = @($failedArtifact)
@@ -601,7 +737,7 @@ blockers=none
             if ($LASTEXITCODE -eq 0 -or ($failedOutput -join ' ') -notmatch 'interface_smoke') {
                 throw 'Execution-readiness script does not fail at the first unsuccessful phase'
             }
-            $failedCheck = & $registeredPython $readinessScriptPath check --commit $failedCommit 2>&1
+            $failedCheck = & $registeredPython $readinessScriptPath check --commit $failedSourceCommit 2>&1
             if ($LASTEXITCODE -eq 0 -or ($failedCheck -join ' ') -notmatch 'receipt') {
                 throw 'A failed execution-readiness run produced a successful receipt'
             }
