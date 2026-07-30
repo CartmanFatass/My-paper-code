@@ -108,3 +108,71 @@ def test_the_documentation_no_longer_claims_reproduction() -> None:
     assert "reproduces this fingerprint" not in block, (
         "the withdrawn reproduction claim is back in the docstring")
     assert "IT DOES NOT MEAN THE FINGERPRINT IS REPRODUCIBLE" in block
+
+
+def test_component_digests_cover_exactly_what_the_fingerprint_hashes() -> None:
+    """The per-array digests must be derived from the same bytes as the combined
+    hash, or they localize the wrong thing.
+
+    Added because runs 30403322062 and 30479940700 disagreed about 3 of 8
+    worlds and the artifact could not say which array moved.
+    """
+
+    out = audit.episode_world_fingerprint(
+        _World(applied=1, pinned="p", n_users=4), seed_value=1)
+    digests = out["component_digests"]
+    # only the arrays actually present on the object appear
+    assert set(digests) == {"user_positions"}
+    assert all(len(v) == 64 for v in digests.values())
+
+
+def test_a_component_digest_moves_when_its_array_moves() -> None:
+    """The paired negative. A digest that cannot change localizes nothing."""
+
+    a = _World(applied=1, pinned="p", n_users=2)
+    b = _World(applied=1, pinned="p", n_users=2)
+    b.user_positions = b.user_positions + 1.0
+
+    da = audit.episode_world_fingerprint(a, seed_value=1)
+    db = audit.episode_world_fingerprint(b, seed_value=1)
+    assert da["component_digests"]["user_positions"] != db["component_digests"]["user_positions"]
+    assert da["fingerprint"] != db["fingerprint"]
+
+
+def test_an_untouched_component_digest_stays_put() -> None:
+    """The half that makes localization useful: only the moved array's digest
+    changes, so a diff of two artifacts points at one component."""
+
+    class _Two(_World):
+        def __init__(self, *, shift):
+            super().__init__(applied=1, pinned="p", n_users=2)
+            self.user_velocities = np.zeros((2, 3), dtype=np.float64)
+            self.user_positions = self.user_positions + shift
+
+    a = audit.episode_world_fingerprint(_Two(shift=0.0), seed_value=1)
+    b = audit.episode_world_fingerprint(_Two(shift=1.0), seed_value=1)
+    assert a["component_digests"]["user_positions"] != b["component_digests"]["user_positions"]
+    assert a["component_digests"]["user_velocities"] == b["component_digests"]["user_velocities"], (
+        "an untouched array's digest moved, so the localization is not per-array")
+
+
+def test_the_fingerprint_bytes_are_pinned() -> None:
+    """A golden digest over a fixed synthetic world.
+
+    The fingerprint is recorded in every artifact, so its byte layout is a
+    contract: change the order, the shape encoding or the name encoding and every
+    prior artifact silently becomes incomparable. Adding `component_digests`
+    refactored this loop, and the only reason that was safe is that the combined
+    bytes stayed identical -- verified against a real R4 env
+    (topology 20260736 / calibration / 0 -> `d700a69e...`, unchanged across the
+    refactor). This pins it without needing a 5-second env build.
+    """
+
+    world = _World(applied=7, pinned="pin", n_users=3)
+    world.user_velocities = np.full((3, 3), 0.5, dtype=np.float64)
+    world.user_pause_times = np.arange(3, dtype=np.float64)
+    out = audit.episode_world_fingerprint(world, seed_value=7)
+    assert out["fingerprint"] == (
+        "50652d9b112b16386631b3b9038e1c98af700c68dc7a4d22e93ce1a0b5aeafb4"
+    ), ("the fingerprint byte layout moved; every existing artifact's world "
+        "provenance just became incomparable")

@@ -1542,6 +1542,15 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
     even in principle.
     """
     parts: list[bytes] = []
+    # Per-array digests alongside the combined one. ADDED 2026-07-29 for a
+    # measured reason: runs 30403322062 and 30479940700 disagreed about 3 of 8
+    # topologies' worlds at identical seeds, and because the artifact recorded
+    # only the combined SHA there was no way to ask WHICH array moved -- a
+    # cross-machine investigation had to substitute for a field. One digest per
+    # component makes the next disagreement localizable by reading two artifacts.
+    # `component_digests` is derived from exactly the bytes that feed
+    # `fingerprint`, so it cannot drift from it.
+    component_digests: dict[str, str] = {}
     for name in ("user_positions", "user_velocities", "user_waypoints",
                  "user_pause_times", "user_cluster_assignments",
                  "cluster_centers_history", "cluster_velocities",
@@ -1550,9 +1559,10 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
         if value is None:
             continue
         arr = np.asarray(value)
-        parts.append(name.encode("utf-8"))
-        parts.append(str(arr.shape).encode("utf-8"))
-        parts.append(np.ascontiguousarray(arr).tobytes())
+        chunk = (name.encode("utf-8"), str(arr.shape).encode("utf-8"),
+                 np.ascontiguousarray(arr).tobytes())
+        parts.extend(chunk)
+        component_digests[name] = hashlib.sha256(b"".join(chunk)).hexdigest()
     # Witnessed rather than declared, and it takes BOTH halves. A seed alone
     # regenerates nothing: the user world is a function of the BS quadrant as
     # well as the stream, so without a pinned topology the same seed produces a
@@ -1571,6 +1581,8 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
     return {
         "user_world_seed": None if seed_value is None else int(seed_value),
         "fingerprint": hashlib.sha256(b"".join(parts)).hexdigest(),
+        # Which component moved, when two artifacts disagree. See above.
+        "component_digests": component_digests,
         "n_users": int(getattr(env, "n_users", 0)),
         # The other half of the reproduction key. A world is regenerable from
         # (this hash, this seed), never from the seed alone.
