@@ -13,7 +13,7 @@ Do not reconstruct project history.
 
 Observe exactly one already-submitted Pro turn through the assignment's
 metadata-only JSONL sentinel. You have no browser authority and must not try to
-acquire the Research Operations Manager's in-app-browser binding. Run only the registered
+acquire the assigning transport owner's in-app-browser binding. Run only the registered
 bounded `scripts/hmasd_pro_response_sentinel.py watch` command with the exact
 mechanically generated monitor-assignment receipt path supplied by the
 assignment. Pass only that receipt through `--assignment-receipt`; the Sentinel
@@ -31,7 +31,8 @@ ERROR record. Do not read response text or write the sentinel.
 Remain silent while pending. Send no commentary, progress, ETA or heartbeat.
 Return exactly one final PRO_RESPONSE_MONITOR_TERMINAL payload at COMPLETE or
 ERROR, including the exact Sentinel-verified fence identity. Do not interpret
-science, write files, run Git, spawn agents or choose a successor. Research
-Operations Manager archives the response and resumes its operations loop after
-your return.
+science, write files, run Git, spawn agents or choose a successor. The assigning
+registered transport owner archives the response after your return. Formal
+operations resume only when that owner is Research Operations Manager; an
+independent methodology review has no formal workflow effect.
 """

@@ -212,11 +212,14 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
     repo, _ = repository(tmp_path)
     (repo / "AGENTS.md").write_text(
         "independent_research_explorer_session=research-session\n"
+        "independent_research_review_operator_session=review-session\n"
         "hmasd_python_interpreter=C:/Python/python.exe\n",
         encoding="utf-8",
     )
     local_research = repo / "local_research"
     local_research.mkdir()
+    pro_reviews = local_research / "pro_reviews"
+    pro_reviews.mkdir()
 
     inside = local_research / "note.md"
     outside = repo / "outside.md"
@@ -238,6 +241,22 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
         )
         is None
     )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/.agents/skills/'
+                    "hmasd-independent-research-exploration/scripts/"
+                    'research_portfolio_gate.py" check --record '
+                    f'"{pro_reviews / "forbidden.json"}" --phase merge'
+                )
+            },
+            session_id="research-session",
+        ),
+        "use a registered research script or apply_patch",
+    )
     assert (
         invoke(
             repo,
@@ -253,6 +272,15 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
             session_id="research-session",
         )
         is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/pro_reviews/forbidden.md\n*** End Patch",
+            session_id="research-session",
+        ),
+        "reserved for another role",
     )
     assert_denied(
         invoke(
@@ -451,6 +479,108 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
             session_id="research-session",
         )
         is None
+    )
+
+
+def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_helpers(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "independent_research_review_operator_session=review-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    pro_reviews = repo / "local_research" / "pro_reviews"
+    pro_reviews.mkdir(parents=True)
+    review = pro_reviews / "audit-1"
+    review.mkdir()
+    sentinel = review / "sentinel.jsonl"
+    packet = review / "60_METHODOLOGY_PACKET.md"
+    packet.write_text("packet\n", encoding="utf-8")
+
+    assert (
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/pro_reviews/audit-1/raw.md\n*** End Patch",
+            session_id="review-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/explorer-note.md\n*** End Patch",
+            session_id="review-session",
+        ),
+        "outside the writable scope",
+    )
+    sentinel_command = (
+        f'C:/Python/python.exe "{repo}/scripts/hmasd_pro_response_sentinel.py" init '
+        f'--state "{sentinel}" --conversation-id c1 --fence-identity f1'
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": sentinel_command},
+            session_id="review-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {
+                "command": (
+                    f'C:/Python/python.exe "{repo}/scripts/hmasd_pro_response_sentinel.py" init '
+                    f'--state "{repo / "outside.jsonl"}" --conversation-id c1 --fence-identity f1'
+                )
+            },
+            session_id="review-session",
+        ),
+        "use a registered research script or apply_patch",
+    )
+    handoff_command = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-cross-task-routing/scripts/'
+        f'hmasd_cross_task_payload.py" --repo "{repo}" write --label methodology '
+        f'--source "{packet}"'
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": handoff_command},
+            session_id="review-session",
+        )
+        is None
+    )
+    for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
+        command = (
+            'powershell -ExecutionPolicy Bypass -File '
+            f'"{repo}/.agents/skills/hmasd-review-round/scripts/{basename}"'
+        )
+        assert (
+            invoke(
+                repo,
+                "shell_command",
+                {"command": command},
+                session_id="review-session",
+            )
+            is None
+        )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "git status --short"},
+            session_id="review-session",
+        ),
+        "Git mutation is forbidden",
     )
 
 

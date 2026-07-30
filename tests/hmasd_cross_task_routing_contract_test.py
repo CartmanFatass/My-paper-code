@@ -19,10 +19,12 @@ HOOKS = ROOT / ".codex/hooks.json"
 WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
 CPM_SESSION = "019f9e4f-f4d0-7fe0-b214-c47fd034e84d"
 ROM_SESSION = "019f9c6a-9401-7ae0-ace5-dd827dccba2b"
+RESEARCH_REVIEW_SESSION = "019fb311-6137-7781-9708-3df24da34a4b"
 PERSISTENT_ROLES = (
     ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
     ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
     ROOT / ".agents/roles/RESEARCH_OPERATIONS_MANAGER.md",
+    ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md",
 )
 PAYLOAD_SURFACES = PERSISTENT_ROLES + (
     ROOT / ".agents/skills/hmasd-review-round/SKILL.md",
@@ -174,13 +176,14 @@ def test_cross_task_routing_skill_is_explicit_only() -> None:
 
 def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
-    skill = SKILL.read_text(encoding="utf-8")
+    skill = " ".join(SKILL.read_text(encoding="utf-8").split())
     required = (
         "cross_task_routing=fixed_role_sessions",
         "cross_task_routing_skill=hmasd-cross-task-routing",
         f"workflow_design_manager_session={WDM_SESSION}",
         f"code_project_manager_session={CPM_SESSION}",
         f"research_operations_manager_session={ROM_SESSION}",
+        f"independent_research_review_operator_session={RESEARCH_REVIEW_SESSION}",
     )
     for token in required:
         assert agents.count(token) == 1, token
@@ -188,6 +191,7 @@ def test_router_contains_fixed_sessions_without_model_or_effort() -> None:
         WDM_SESSION,
         CPM_SESSION,
         ROM_SESSION,
+        RESEARCH_REVIEW_SESSION,
     ):
         assert skill.count(session) == 1, session
     for retired in (
@@ -232,6 +236,23 @@ def test_review_registry_is_local_to_operations_manager_transport() -> None:
         "payload_route_settings",
     ):
         assert retired not in contract
+
+
+def test_independent_review_operator_routes_only_terminal_methodology_to_wdm() -> None:
+    role = (ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md").read_text(
+        encoding="utf-8"
+    )
+    skill = " ".join(SKILL.read_text(encoding="utf-8").split())
+    for token in (
+        "formal_workflow_authority=none",
+        "write_scope=local_research/pro_reviews_only",
+        "formal_review_conversation_access=forbidden",
+        "A format-complete",
+        "Workflow Design Manager",
+    ):
+        assert token in role, token
+    assert "may route only its exact terminal methodology" in skill
+    assert "never routes through Research Operations Manager" in skill
 
 
 def test_project_hooks_preserve_workspace_boundary_and_readiness_stop() -> None:

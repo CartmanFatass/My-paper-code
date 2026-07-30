@@ -5,7 +5,8 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
-transport_owner=research_operations_manager_restricted_transport_mode
+formal_transport_owner=research_operations_manager_restricted_transport_mode
+independent_methodology_transport_owner=independent_research_review_operator_separate_conversation
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -26,6 +27,8 @@ valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANC
 scheduled_action_presence=CONTINUE_only
 valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remaining_balance|current_portfolio|algorithm_principles_section_3
 active_grant_user_permission_request=forbidden
+independent_research_methodology_audit=user_authorized_advisory_only
+independent_research_methodology_audit_project_state_effect=none
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
@@ -63,13 +66,22 @@ paths when scientific judgment depends on what the code actually implements.
 - Supply the smallest separating scientific distinction that fits the
   user-owned evidence-complexity policy. Code Project Manager, not External Pro,
   chooses the bounded controller, witness, diagnostic and code realization.
+- `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`: for one exact user-authorized
+  independent-research question, identify the mathematical and empirical
+  discipline needed to keep advisory MARL exploration focused on stochastic
+  control, statistics and game-theoretic problems rather than unmotivated
+  network or module accumulation. Return principles, failure modes,
+  module-admission conditions and required campaign fields. Do not select an
+  active project direction, alter the formal portfolio or grant, authorize
+  compute, or promote an advisory result.
 
 ## May
 
-- Analyze the exact Operations-Manager-packaged question and allow-list, inspect named remote
-  code directly, identify missing scientific choices or counterexamples, and
-  return a binding in-boundary scientific disposition or request focused
-  clarification.
+- Analyze the exact authorized transport-owner-packaged question and allow-list,
+  inspect named remote evidence directly, identify missing scientific choices
+  or counterexamples, and return the question-scoped disposition. Only Research
+  Operations Manager may package formal reviews; only the Independent Research
+  Pro Review Operator may package the independent methodology audit.
 
 ## Must not
 
@@ -114,6 +126,11 @@ paths when scientific judgment depends on what the code actually implements.
   preserved portfolio, and `docs/project/ALGORITHM_PRINCIPLES.md` section 3.
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`, including its agent-count
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
+- For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, the exact Workflow-Design-
+  Manager-committed question and repository allow-list submitted by the
+  registered Independent Research Pro Review Operator from its separate
+  conversation. `CURRENT_WORK.md`, active portfolios, runs and formal review
+  artifacts are not inputs.
 
 ## Outputs and stop
 
@@ -132,3 +149,9 @@ paths when scientific judgment depends on what the code actually implements.
   Research Operations Manager archives the answer exactly and resumes mechanical
   operations. Code Project Manager retains exclusive code acceptance and neither
   native role reinterprets the science.
+- For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, return one format-complete
+  `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` containing every question-declared
+  field. It is advisory to the independent-research Skill and has no
+  project-state, code, compute, CDC or formal-review effect. The independent
+  operator archives it exactly; Workflow Design Manager may encode it without
+  reinterpretation.

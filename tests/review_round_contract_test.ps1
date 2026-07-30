@@ -23,17 +23,25 @@ $skillPath = Join-Path $repo '.agents/skills/hmasd-review-round/SKILL.md'
 $skill = Get-Content -Raw -LiteralPath $skillPath
 $operations = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
+$independentOperator = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
+$independentSkill = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
+$independentQuestion = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $skillNormalized = $skill -replace '\s+', ' '
+$independentSkillNormalized = $independentSkill -replace '\s+', ' '
 $operationsNormalized = $operations -replace '\s+', ' '
 $skillAgent = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-review-round/agents/openai.yaml')
 foreach ($required in @(
-    'Operations-manager transport mode',
+    'Registered-owner transport mode',
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
+    'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
     'hmasd-pro-response-monitor',
-    'operations-manager-brokered metadata sentinel',
+    'transport-owner-brokered metadata sentinel',
     'monitor_assignment_token',
     'monitor-assignment receipt',
     '--assignment-receipt <absolute-receipt-json>',
@@ -126,6 +134,44 @@ foreach ($required in @(
     'resume operations loop',
     'monitor terminal -> exact raw -> provenance intake -> monitor absence')) {
     if (-not $skillNormalized.Contains($required)) { throw "Review Skill missing: $required" }
+}
+foreach ($required in @(
+    'role=independent_research_review_operator',
+    'model=gpt-5.6-luna',
+    'reasoning_effort=high',
+    'formal_workflow_authority=none',
+    'write_scope=local_research/pro_reviews_only',
+    'formal_review_conversation_access=forbidden',
+    'native_child_authority=hmasd-pro-response-monitor_only',
+    'registered cross-task handoff helper')) {
+    if (-not $independentOperator.Contains($required)) {
+        throw "Independent research review operator missing: $required"
+    }
+}
+foreach ($required in @(
+    'local_research/pro_reviews/REVIEWER_CONVERSATION.json',
+    'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'one `hmasd-pro-response-monitor`',
+    '45-second watches',
+    '60_METHODOLOGY_PACKET.md',
+    'complete response verbatim',
+    'Workflow Design Manager',
+    'no scientific-iteration, formal-grant or project-state effect')) {
+    if (-not $independentSkillNormalized.Contains($required)) {
+        throw "Independent research Pro-review Skill missing: $required"
+    }
+}
+foreach ($required in @(
+    'review_mode=INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'MODULE_ADMISSION',
+    'CONJECTURE_AND_COLLABORATION',
+    'REQUIRED_CAMPAIGN_FIELDS',
+    'METHODOLOGY_PRINCIPLES_PACKET',
+    'principle_id',
+    'critic_challenge')) {
+    if (-not $independentQuestion.Contains($required)) {
+        throw "Independent methodology question missing: $required"
+    }
 }
 foreach ($forbidden in @(
     'reload until',

@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use in the persistent HMASD Research Operations Manager task for GPT-5.6 Pro browser transport, natural-completion monitoring, exact raw archival, and local return to the operations loop.
+description: Use for GPT-5.6 Pro browser transport, natural-completion monitoring and exact raw archival in either the persistent Research Operations Manager or the separately registered Independent Research Pro Review Operator, under the applicable role-owned wrapper and storage boundary.
 ---
 
 # HMASD External Pro Review Transport
@@ -11,19 +11,24 @@ Role contracts are normative. Read the root `AGENTS.md` and these relevant role
 documents before operating:
 
 - `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`
+- `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md` when the exact review
+  is an independent methodology audit
 - `.agents/roles/EXTERNAL_PRO.md`
 
 This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
-Research Operations Manager authors and pushes its review files, then activates
-`$hmasd-review-round` in the same persistent task and uses
-`$browser:control-in-app-browser` for submission and archival. After one
+The applicable registered transport owner activates `$hmasd-review-round` in
+the same persistent task and uses `$browser:control-in-app-browser` for
+submission and archival. Research Operations Manager alone owns formal review
+packages and state. The Independent Research Pro Review Operator may use these
+mechanics only through `$hmasd-independent-research-pro-review`, with one
+separate conversation and local `local_research/pro_reviews/` storage. After one
 exact full-hash Assignment identity is verified in the main body or its
 attachment payload, assign
 the registered nonpersistent `hmasd-pro-response-monitor` to observe the
-operations-manager-brokered metadata sentinel for that turn. The child never
+transport-owner-brokered metadata sentinel for that turn. The child never
 opens the browser. Do not create another transport task, relay, ad hoc monitor or manager
 polling loop.
 
@@ -39,6 +44,7 @@ DESIGN_ASSERTION_AUDIT
 IMPLEMENTATION_ALIGNMENT_CLARIFICATION
 CODE_SCIENCE_ALIGNMENT_AUDIT
 FORMAL_RESULT_SCIENTIFIC_DISPOSITION
+INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT
 ```
 
 Before browser submission:
@@ -53,14 +59,22 @@ Before browser submission:
    `Assignment` mode. A short, uppercase or otherwise nonexact commit is an
    error before browser interaction. Preserve the exact complete payload bytes
    that will be sent and require them to contain this block exactly once.
-4. Read `docs/external-review/REVIEWER_CONVERSATIONS.json` and select only its
-   registered conversation.
+4. Select only the role-owned registered conversation. Formal reviews read
+   `docs/external-review/REVIEWER_CONVERSATIONS.json`; an independent
+   methodology audit reads only its local registry under
+   `local_research/pro_reviews/` and must use a different conversation ID.
 
 An identity mismatch stops transport for correction; it does not authorize
 editing, paraphrasing, or validating the package.
 
 
-## Operations-manager transport mode
+## Registered-owner transport mode
+
+The tables and shared recovery rules below use `operator` for the persistent
+task that owns the exact browser conversation. Formal state and operations-loop
+language applies only to Research Operations Manager. The independent operator
+instead archives locally and returns one exact methodology packet to Workflow
+Design Manager; it never resumes or mutates the formal operations loop.
 
 ### Deterministic browser state machine
 
@@ -76,10 +90,10 @@ visible or the page title looks familiar.
 | `USER_AUTHORIZED_ASSIGNMENT_SEND` | Direct user authorization names one send after `REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT`; the existing package and registered conversation identity remain exact; the grant has not been consumed | Immediately before sending, require the exact registered URL and signed-in search to agree that both identity sources and any corresponding response are absent. Send the unchanged complete payload once only if both prove absence. | One post-send snapshot verifies exactly one main-body or attachment-backed identity and restores monitoring or archival; true absence closes as `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; unreadable or mismatched identity is `REVIEW_TRANSPORT_BLOCKED`. |
 | `USER_AUTHORIZED_ASSIGNMENT_RESEND` | A new direct user authorization names one resend after `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED`; the prior grant is consumed; the same package and registered conversation remain exact; the resend grant is unused | Immediately before resending, require the exact registered URL and signed-in search to agree that both identity sources and any corresponding response are absent. Send the unchanged complete payload once only if both prove absence. | One post-send snapshot verifies exactly one main-body or attachment-backed identity and restores monitoring or archival; true absence closes as `REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED`; unreadable or mismatched identity is `REVIEW_TRANSPORT_BLOCKED`; emit one local terminal Ops callback. |
 | `CORRECT_PREFIX_FENCE` | Exactly one visible assignment differs only because `stage_commit` is a strict 7-39 character hexadecimal prefix of the assigned 40-character commit; all other fields match; no assistant response and no earlier correction exist | Retire any sentinel and monitor bound to the rejected prefix record. Render and send one `FullHashCorrection` message in the same registered conversation. Do not include the scientific question body or alter its allow-list or instruction. | The correction is visibly exact; a fresh sentinel and the only live replacement monitor bind its complete identity. |
-| `WAIT_FOR_RESPONSE` | Exact main-body or attachment-backed identity and its user turn are known | Research Operations Manager initializes one metadata-only JSONL sentinel, mechanically generates one monitor-assignment receipt, passes only its absolute path to exactly one `hmasd-pro-response-monitor`, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Repeated 45-second bounded watches in the same monitor remain pending until the Sentinel returns one identity-matched `COMPLETE` or `ERROR`. |
+| `WAIT_FOR_RESPONSE` | Exact main-body or attachment-backed identity and its user turn are known | The registered transport owner initializes one metadata-only JSONL sentinel, mechanically generates one monitor-assignment receipt, passes only its absolute path to exactly one `hmasd-pro-response-monitor`, then records bounded browser observations at ordinary task wakeups. The child never opens the browser or reads response text. | Repeated 45-second bounded watches in the same monitor remain pending until the Sentinel returns one identity-matched `COMPLETE` or `ERROR`. |
 | `RETRY_RESPONSE_CONTRACT` | The original full-hash Assignment identity remains verified, attempt 1 is neither `USER_AUTHORIZED_ASSIGNMENT_SEND` nor `USER_AUTHORIZED_ASSIGNMENT_RESEND`, attempt 1 is terminal with no live monitor or sentinel, no retry exists, and either a stable answer mechanically omits question-declared response items or recovery is exhausted without a complete answer | Render `ResponseRetry`, require the original Assignment as its exact prefix, submit it once in the same registered conversation, then bind one fresh sentinel and replacement monitor to the complete attempt-2 text. | Attempt 2 produces a mechanically format-complete stable answer, or terminates as `REVIEW_TRANSPORT_BLOCKED` with no third submission. |
 | `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Do not create another accepted assignment fence or a prefix correction. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, Research Operations Manager confirms stable text, writes exact visible text to raw, rereads for exact equality, writes provenance intake and confirms monitor absence. | The same task resumes its operations loop from the exact raw path. |
+| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | After monitor `COMPLETE`, the registered transport owner confirms stable text, writes exact visible text to its role-owned raw path, rereads for exact equality, writes provenance intake and confirms monitor absence. | Formal ROM resumes its operations loop; the independent operator returns one exact packet and stops. |
 
 `Response actions` such as `Copy response` plus stable text are supporting
 completion evidence, not a substitute for message identity and inactive
@@ -472,7 +486,7 @@ Keep one registered page, one live append-only sentinel and exactly one live
 registered Pro-response monitor while pending. The bounded prefix correction
 or response retry retires the prior generation before creating its single
 replacement. Do not create a heartbeat, automation
-poller, second monitor or transport task. Research Operations Manager owns all
+poller, second monitor or transport task. The registered transport owner owns all
 browser access because a native child does not inherit the in-app-browser
 binding. At ordinary task wakeups, the operator takes one bounded read-only page
 snapshot and calls `scripts/hmasd_pro_response_sentinel.py record`; it does not
@@ -634,7 +648,7 @@ Recover in the same registered conversation and under the same accepted fence:
    response is a transport diagnostic. Do not submit another accepted assignment
    fence or use the prefix-correction exception.
 4. The candidate raw is the stable assistant response after the
-   latest Research Operations Manager transport-repair message, still anchored to the original
+   latest registered-operator transport-repair message, still anchored to the original
    matching fence. Apply the same two-snapshot and generation-control checks to
    that candidate.
 5. If archive ingestion explicitly fails, try one materially distinct
@@ -652,13 +666,15 @@ After stable completion:
 1. Copy the complete visible response text to the assigned raw path without
    rewriting, normalization, filtering, or summary.
 2. Reread it and require exact text equality; record its source commit, paths,
-   completion evidence, and any transport recovery in the mechanical
+   completion evidence, and any transport recovery in the role-owned mechanical
    intake. Record no scientific quality classification.
 3. Confirm the registered response monitor is terminal and no second monitor or
    heartbeat exists.
 4. Keep transport facts separate from scientific content. External Pro owns the
-   in-boundary scientific disposition; Research Operations Manager resumes the
-   operations loop from the exact raw without reinterpretation.
+   in-boundary scientific disposition. Research Operations Manager resumes the
+   formal operations loop from formal raw. The independent operator instead
+   copies a format-complete methodology packet verbatim to the registered
+   cross-task handoff and stops; it does not update formal state.
 
 Do not compute or require input-file or raw-response hashes. The pushed Git
 commit identifies reviewer inputs; exact reread equality plus the later Git
@@ -690,7 +706,7 @@ outcome=<observed result>
 A local argument-transport failure, terminated monitor process, stale page,
 wrong message anchor or objectively correctable observation is an operational
 recovery condition, not `REVIEW_TRANSPORT_BLOCKED`. After the prior monitor is
-terminal, Research Operations Manager may reuse the same verified receipt to
+terminal, the registered transport owner may reuse the same verified receipt to
 start one replacement monitor for the same verified Assignment;
 there is never more than one live monitor. It may reacquire the same registered
 conversation, re-anchor the current verified user turn and assistant message,
@@ -721,7 +737,7 @@ include the direct cause, attempt summary, duplicate-submission risk, exact
 resume condition, and `recovery_exhausted=true`.
 
 At terminal success or terminal block, confirm the response monitor is no
-longer live and return control locally to the Research Operations Manager
-operations loop. A stale response from
+longer live and return control to the applicable registered transport owner.
+Only Research Operations Manager resumes the formal operations loop. A stale response from
 another round has no authority and never replaces the exact current-round raw
 or launches a successor.

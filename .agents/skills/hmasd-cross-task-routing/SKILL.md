@@ -24,8 +24,12 @@ The role table is the only target selection performed here.
 | Workflow Design Manager | `019f9d2f-e0ea-7411-9fd7-386f45f76909` |
 | Code Project Manager | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` |
 | Research Operations Manager | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` |
+| Independent Research Pro Review Operator | `019fb311-6137-7781-9708-3df24da34a4b` |
 
 The router is the source of truth and this table must mirror it exactly.
+The independent review operator may route only its exact terminal methodology
+packet or blocker to Workflow Design Manager. It never routes through Research
+Operations Manager or changes the formal operations loop.
 
 ## Native send
 

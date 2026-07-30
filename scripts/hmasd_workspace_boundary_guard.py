@@ -131,17 +131,25 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
     return top, allowed_roots, True
 
 
-def _registered_research_session(repo: Path) -> str | None:
+def _registered_research_sessions(repo: Path) -> dict[str, str]:
     router = repo / "AGENTS.md"
     if not router.is_file():
-        return None
-    matches = re.findall(
-        r"(?m)^independent_research_explorer_session=([^\s]+)\s*$",
-        router.read_text(encoding="utf-8"),
-    )
-    if len(matches) > 1:
-        raise GuardError("router has multiple independent research sessions")
-    return matches[0] if matches else None
+        return {}
+    text = router.read_text(encoding="utf-8")
+    fields = {
+        "explorer": "independent_research_explorer_session",
+        "review_operator": "independent_research_review_operator_session",
+    }
+    sessions: dict[str, str] = {}
+    for role, field in fields.items():
+        matches = re.findall(rf"(?m)^{field}=([^\s]+)\s*$", text)
+        if len(matches) > 1:
+            raise GuardError(f"router has multiple {role} sessions")
+        if matches:
+            sessions[role] = matches[0]
+    if len(set(sessions.values())) != len(sessions):
+        raise GuardError("independent research roles share one session identity")
+    return sessions
 
 
 def _registered_python(repo: Path) -> str | None:
@@ -155,33 +163,126 @@ def _registered_python(repo: Path) -> str | None:
     return matches[0] if len(matches) == 1 else None
 
 
-def _trusted_research_script(command: str, repo: Path) -> bool:
+def _flag_path(command: str, flag: str) -> Path | None:
+    match = re.search(
+        rf"(?:^|\s){re.escape(flag)}(?:=|\s+)"
+        r'(?:"([^"]+)"|\'([^\']+)\'|([^\s]+))',
+        command,
+        re.IGNORECASE,
+    )
+    if not match:
+        return None
+    return _canonical(
+        Path(next(value for value in match.groups() if value is not None))
+    )
+
+
+def _registered_script_prefix(command: str, interpreter: str, script: Path) -> bool:
+    normalized = command.strip().replace("\\", "/")
+    normalized_interpreter = interpreter.replace("\\", "/")
+    registered = str(script).replace("\\", "/")
+    prefix = re.compile(
+        rf'^"?{re.escape(normalized_interpreter)}"?\s+'
+        rf'"?{re.escape(registered)}"?(?:\s|$)',
+        re.IGNORECASE,
+    )
+    return bool(prefix.match(normalized))
+
+
+def _registered_powershell_file(command: str, script: Path) -> bool:
+    normalized = command.strip().replace("\\", "/")
+    registered = str(script).replace("\\", "/")
+    return bool(
+        re.match(r'^(?:powershell|pwsh)(?:\.exe)?\b', normalized, re.IGNORECASE)
+        and re.search(
+            rf'(?:^|\s)-File\s+"?{re.escape(registered)}"?(?:\s|$)',
+            normalized,
+            re.IGNORECASE,
+        )
+    )
+
+
+def _trusted_research_script(command: str, repo: Path, role: str) -> bool:
     if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
         return False
     interpreter = _registered_python(repo)
     if interpreter is None:
         return False
-    normalized = command.strip().replace("\\", "/")
-    normalized_interpreter = interpreter.replace("\\", "/")
-    scripts = (
-        "mylib_research_probe.py",
-        "research_portfolio_gate.py",
+    if role == "explorer":
+        forbidden = str(repo / "local_research" / "pro_reviews").replace("\\", "/")
+        normalized = command.replace("\\", "/")
+        if (
+            forbidden.lower() in normalized.lower()
+            or "local_research/pro_reviews" in normalized.lower()
+        ):
+            return False
+        for basename in ("mylib_research_probe.py", "research_portfolio_gate.py"):
+            script = (
+                repo
+                / ".agents"
+                / "skills"
+                / "hmasd-independent-research-exploration"
+                / "scripts"
+                / basename
+            )
+            if _registered_script_prefix(command, interpreter, script):
+                return True
+        return False
+
+    if role != "review_operator":
+        return False
+    review_root = _canonical(repo / "local_research" / "pro_reviews")
+    sentinel = repo / "scripts" / "hmasd_pro_response_sentinel.py"
+    attachment = (
+        repo
+        / ".agents"
+        / "skills"
+        / "hmasd-review-round"
+        / "scripts"
+        / "verify_assignment_attachment_identity.py"
     )
-    for basename in scripts:
-        registered = str(
+    handoff = (
+        repo
+        / ".agents"
+        / "skills"
+        / "hmasd-cross-task-routing"
+        / "scripts"
+        / "hmasd_cross_task_payload.py"
+    )
+    if _registered_script_prefix(command, interpreter, sentinel):
+        paths = [
+            path
+            for flag in ("--state", "--receipt", "--assignment-receipt")
+            if (path := _flag_path(command, flag)) is not None
+        ]
+        return bool(paths) and all(_inside(path, review_root) for path in paths)
+    if _registered_script_prefix(command, interpreter, attachment):
+        paths = [
+            path
+            for flag in ("--expected-payload", "--observed-attachment", "--provider-metadata")
+            if (path := _flag_path(command, flag)) is not None
+        ]
+        return bool(paths) and all(_inside(path, review_root) for path in paths)
+    if _registered_script_prefix(command, interpreter, handoff):
+        repo_arg = _flag_path(command, "--repo")
+        source = _flag_path(command, "--source")
+        return (
+            repo_arg is not None
+            and _same(repo_arg, repo)
+            and source is not None
+            and _inside(source, review_root)
+            and re.search(r"\swrite(?:\s|$)", command, re.IGNORECASE) is not None
+        )
+    for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
+        script = (
             repo
             / ".agents"
             / "skills"
-            / "hmasd-independent-research-exploration"
+            / "hmasd-review-round"
             / "scripts"
             / basename
-        ).replace("\\", "/")
-        prefix = re.compile(
-            rf'^"?{re.escape(normalized_interpreter)}"?\s+'
-            rf'"?{re.escape(registered)}"?(?:\s|$)',
-            re.IGNORECASE,
         )
-        if prefix.match(normalized):
+        if _registered_powershell_file(command, script):
             return True
     return False
 
@@ -222,13 +323,20 @@ def _patch_text(tool_input: Any) -> str:
     raise GuardError("apply_patch payload has no patch text")
 
 
-def _guard_patch(cwd: Path, allowed_roots: list[Path], tool_input: Any) -> None:
+def _guard_patch(
+    cwd: Path,
+    allowed_roots: list[Path],
+    tool_input: Any,
+    forbidden_roots: tuple[Path, ...] = (),
+) -> None:
     paths = PATCH_PATH.findall(_patch_text(tool_input))
     if not paths:
         raise GuardError("apply_patch payload has no recognized file paths")
     for raw in paths:
         candidate = Path(raw.strip())
         resolved = _canonical(candidate if candidate.is_absolute() else cwd / candidate)
+        if any(_inside(resolved, root) for root in forbidden_roots):
+            raise GuardError(f"apply_patch target is reserved for another role: {resolved}")
         if not any(_inside(resolved, root) for root in allowed_roots):
             raise GuardError(f"apply_patch target is outside the writable scope: {resolved}")
 
@@ -239,19 +347,22 @@ def _guard_shell(
     allowed_roots: list[Path],
     linked: bool,
     tool_input: Any,
-    research_session: bool = False,
+    research_role: str | None = None,
 ) -> None:
     if not isinstance(tool_input, dict) or not isinstance(tool_input.get("command"), str):
         raise GuardError("shell payload has no command")
     command = tool_input["command"]
-    if research_session:
-        if GIT_MUTATION.search(command):
+    if research_role is not None:
+        if GIT_MUTATION.search(command) or (
+            research_role == "review_operator"
+            and re.search(r"(?i)(?:^|\s)git(?:\.exe)?(?:\s|$)", command)
+        ):
             raise GuardError("Git mutation is forbidden for the independent research session")
         if RESEARCH_UNSAFE_EXPRESSION.search(command):
             raise GuardError("nested or executable shell expression is forbidden")
         if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
             raise GuardError("compound shell commands are forbidden for the research session")
-        if _trusted_research_script(command, repo):
+        if _trusted_research_script(command, repo, research_role):
             return
         if RESEARCH_UNSAFE_READ_OPTION.search(command):
             raise GuardError("shell option can execute or write and is forbidden")
@@ -307,17 +418,32 @@ def main() -> int:
             raise GuardError("hook payload has no working directory")
         cwd = _canonical(Path(cwd_raw))
         repo, allowed_roots, linked = _workspace_scope(cwd)
-        registered = _registered_research_session(repo)
+        registered = _registered_research_sessions(repo)
         session_id = payload.get("session_id")
-        research_session = bool(
-            registered and isinstance(session_id, str) and session_id == registered
+        research_role = next(
+            (
+                role
+                for role, registered_session in registered.items()
+                if isinstance(session_id, str) and session_id == registered_session
+            ),
+            None,
         )
-        if research_session:
+        forbidden_roots: tuple[Path, ...] = ()
+        if research_role is not None:
             if linked:
                 raise GuardError("independent research is confined to the main checkout")
-            allowed_roots = [_canonical(repo / "local_research")]
+            if research_role == "explorer":
+                allowed_roots = [_canonical(repo / "local_research")]
+                forbidden_roots = (_canonical(repo / "local_research" / "pro_reviews"),)
+            else:
+                allowed_roots = [_canonical(repo / "local_research" / "pro_reviews")]
         if tool_name in PATCH_TOOLS:
-            _guard_patch(cwd, allowed_roots, payload.get("tool_input"))
+            _guard_patch(
+                cwd,
+                allowed_roots,
+                payload.get("tool_input"),
+                forbidden_roots,
+            )
         else:
             _guard_shell(
                 repo,
@@ -325,7 +451,7 @@ def main() -> int:
                 allowed_roots,
                 linked,
                 payload.get("tool_input"),
-                research_session,
+                research_role,
             )
     except (GuardError, OSError, ticketing.TicketError) as exc:
         return _emit_deny(str(exc))

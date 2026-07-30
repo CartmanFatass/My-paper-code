@@ -6,13 +6,11 @@ all_workspace_agents_auto_load_this_file=true
 project_history_in_router=forbidden
 role_specific_procedure_in_router=forbidden
 ```
-
 Every HMASD task receives this small router for identity, minimum documents and shared boundaries. History, results, budgets and mechanics load only when assigned.
 
 ## Precedence and role resolution
 
 Precedence is: direct user instruction, this router, the applicable role charter, any role-authorized current-state read, the named scientific/design contract, then procedural Skills.
-
 Use exactly one route:
 
 | Active identity | Read after this file | Do not load by default |
@@ -21,9 +19,9 @@ Use exactly one route:
 | Research Operations Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`, then only current-boundary review, runtime, evidence and state paths | implementation details outside an exact Code-PM return, workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
 | Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
+| Independent Research Pro Review Operator task | its exact methodology-review assignment, `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`, then the shared transport mechanics named by that Skill | `CURRENT_WORK.md`, formal review rounds, runtime/science/code state and the registered formal Pro conversation |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
-
 A child never reconstructs task history. A missing identity, path, authority or completion condition fails closed instead of triggering a project-state search.
 
 ## Universal authority boundary
@@ -53,7 +51,7 @@ code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 research_operations_manager_runtime_authority=exclusive
 research_operations_manager_current_work_authority=exclusive
-research_operations_manager_external_review_transport_authority=exclusive
+research_operations_manager_formal_external_review_transport_authority=exclusive
 research_operations_manager_experiment_dispatch_and_result_routing=exclusive
 research_operations_manager_mechanical_result_acceptance=exclusive
 research_operations_manager_code_authority=none
@@ -63,8 +61,13 @@ research_operations_manager_git_authority=direct_for_runtime_review_evidence_rep
 research_operations_manager_remote_repository_authority=permanent_user_grant
 research_operations_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 independent_research_explorer_session=019fb2e1-d153-7043-b2e9-58690f9bd48d
+independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b
 independent_research_canonical_scientific_authority=none
-independent_research_write_scope=local_research_only
+independent_research_explorer_write_scope=local_research_except_pro_reviews
+independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review
+independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper
+independent_research_review_operator_formal_workflow_authority=none
+independent_research_review_operator_scientific_authority=none
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -72,11 +75,9 @@ one_artifact_one_acceptance_owner=true
 cross_task_routing=fixed_role_sessions
 cross_task_routing_skill=hmasd-cross-task-routing
 ```
-
-The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered.
-
-There is no Controller, persistent Monitor, dispatcher, semantic relay, role registry or global lease. Workflow Design Manager owns workflow design, Code Project Manager owns code and technical acceptance, Research Operations Manager owns runtime and browser transport, and External Pro owns science.
-`hmasd-pro-response-monitor` sees only metadata. Both persistent managers may request workflow design directly; Workflow Design Manager returns to the exact requester.
+The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered. Independent research tasks have no Git or repository-egress authority.
+There is no Controller, persistent Monitor, dispatcher, semantic relay, role registry or global lease. Workflow Design Manager owns workflow design, Code Project Manager owns code and technical acceptance, Research Operations Manager owns formal runtime and formal Pro transport, and External Pro owns science. The Independent Research Pro Review Operator owns only its separate registered conversation and local methodology-review archive.
+`hmasd-pro-response-monitor` sees only metadata and may observe one exact turn for either registered transport owner. Both persistent project managers may request workflow design directly; Workflow Design Manager returns to the exact requester.
 
 ## Universal project constraints
 
@@ -107,7 +108,6 @@ operational_recovery_owner=research_operations_manager
 operational_recovery_scientific_iteration_cost=zero
 ```
 Generic Superpowers Skills are not executed. Use project-native Skills, keep active code small, and use Git as archive. Tests create no approval owner.
-
 The current HMASD checkout and one valid assignment-ticket worktree are the only agent-writable project directories; every other directory is read-only to project agents, while project-external reads remain allowed.
 Agents do not create, edit, copy, move, delete or redirect files outside that scope and do not create drive mappings, junctions or path aliases. Isolated worktrees are provisioned only by `scripts/hmasd_workspace_ticket.py` beneath `C:/worktrees/HMASD`; raw external `git worktree` is not an authority path.
 A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary.
@@ -130,6 +130,7 @@ A future project-external write requires a new explicit user instruction for its
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
 - Independent advisory research: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`.
+- Independent methodology Pro review: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
@@ -146,4 +147,4 @@ names the smallest necessary subset.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
-- `local_research/` is ignored advisory output written only by the registered Independent Research Explorer.
+- `local_research/` is ignored advisory output. The Explorer owns it except for `local_research/pro_reviews/`, which is owned only by the registered Independent Research Pro Review Operator.

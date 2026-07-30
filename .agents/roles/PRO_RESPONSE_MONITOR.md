@@ -6,11 +6,11 @@
 role=pro_response_monitor
 callable_agent_type=hmasd-pro-response-monitor
 role_kind=registered_nonpersistent_native_child
-parent=research_operations_manager
+parent=registered_pro_transport_owner
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_already_submitted_pro_turn
-observation_mode=research_operations_manager_brokered_jsonl_sentinel
+observation_mode=registered_transport_owner_brokered_jsonl_sentinel
 browser_authority=none
 sentinel_write_authority=none
 progress_notifications=forbidden
@@ -25,15 +25,16 @@ This is the dedicated low-cost terminal observer for a long External Pro
 answer. It is not a persistent project task, browser owner, transport owner,
 reviewer or heartbeat. The native child does not inherit the Research
 Operations Manager's in-app-browser binding, so it observes one
-metadata-only append ledger written by the operator for one exact
+metadata-only append ledger written by the registered transport owner for one exact
 already-submitted turn.
 
 ## Exact assignment
 
-Research Operations Manager supplies one absolute, mechanically generated
+The assigning Research Operations Manager or Independent Research Pro Review
+Operator supplies one absolute, mechanically generated
 monitor-assignment receipt path. The receipt binds the sentinel path and opaque
 `monitor_assignment_token` without placing the token in the child command,
-`observation_mode=research_operations_manager_brokered_jsonl_sentinel`, and this
+`observation_mode=registered_transport_owner_brokered_jsonl_sentinel`, and this
 read-only command boundary:
 
 ```text
@@ -84,6 +85,6 @@ candidate_available=<true|false>
 reason=<none or exact direct error>
 ```
 
-On `COMPLETE`, Research Operations Manager retains browser ownership and performs exact raw
+On `COMPLETE`, the assigning registered transport owner retains browser ownership and performs exact raw
 archival. The monitor and sentinel never supply scientific evidence itself;
 only the archived visible response does.

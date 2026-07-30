@@ -13,6 +13,7 @@ $requiredSkills = @(
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
     'hmasd-independent-research-exploration',
+    'hmasd-independent-research-pro-review',
     'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 foreach ($required in $requiredSkills) {
@@ -30,6 +31,7 @@ $expectedRoles = @(
     'RESEARCH_OPERATIONS_MANAGER.md',
     'PRO_RESPONSE_MONITOR.md',
     'INDEPENDENT_RESEARCH_EXPLORER.md',
+    'INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
     'RESEARCH_SCOUT.md',
@@ -52,12 +54,15 @@ $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
+$independentReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
 $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
+$independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
+$independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
@@ -75,6 +80,7 @@ foreach ($required in @(
     'dedicated Workflow Design Manager task',
     'Code Project Manager task',
     'Research Operations Manager task',
+    'Independent Research Pro Review Operator task',
     'registered native child',
     'docs/project/CURRENT_WORK.md` is Research Operations Manager operational state; Code Project Manager may read it on demand',
     'workflow_design_manager_workflow_design_authority=exclusive',
@@ -90,7 +96,7 @@ foreach ($required in @(
     'code_project_manager_current_work_write_authority=none',
     'research_operations_manager_runtime_authority=exclusive',
     'research_operations_manager_current_work_authority=exclusive',
-    'research_operations_manager_external_review_transport_authority=exclusive',
+    'research_operations_manager_formal_external_review_transport_authority=exclusive',
     'research_operations_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'hmasd-pro-response-monitor',
@@ -117,16 +123,62 @@ foreach ($required in @(
     'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
+    'independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($required in @(
     'independent_research_explorer_session=',
     'independent_research_canonical_scientific_authority=none',
-    'independent_research_write_scope=local_research_only',
+    'independent_research_explorer_write_scope=local_research_except_pro_reviews',
+    'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review',
+    'independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper',
+    'independent_research_review_operator_formal_workflow_authority=none',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
-    'hmasd-independent-research-exploration')) {
+    '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
+    'hmasd-independent-research-exploration',
+    'hmasd-independent-research-pro-review')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing research route: $required" }
+}
+foreach ($required in @(
+    'role=independent_research_review_operator',
+    'role_kind=user_owned_persistent_independent_pro_transport_task',
+    'model=gpt-5.6-luna',
+    'reasoning_effort=high',
+    'formal_workflow_authority=none',
+    'scientific_authority=none',
+    'git_authority=none',
+    'browser_authority=one_separate_registered_external_pro_conversation',
+    'write_scope=local_research/pro_reviews_only',
+    'formal_review_conversation_access=forbidden',
+    'cross_task_routing_skill=hmasd-cross-task-routing')) {
+    if (-not $independentReviewRole.Contains($required)) {
+        throw "Independent Research Review Operator role missing: $required"
+    }
+}
+foreach ($required in @(
+    'registered Independent Research Pro Review Operator',
+    'local_research/pro_reviews/',
+    'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'one `hmasd-pro-response-monitor`',
+    'complete response verbatim',
+    '60_METHODOLOGY_PACKET.md',
+    'Workflow Design Manager')) {
+    if (-not $independentReviewSkill.Contains($required)) {
+        throw "Independent research Pro-review Skill missing: $required"
+    }
+}
+foreach ($required in @(
+    'review_mode=INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'SCIENTIFIC_OBJECTS',
+    'MEMBERSHIP_NONSTATIONARITY',
+    'VARIABLE_SKILL_DURATION',
+    'MODULE_ADMISSION',
+    'CONJECTURE_AND_COLLABORATION',
+    'METHODOLOGY_PRINCIPLES_PACKET')) {
+    if (-not $independentReviewQuestion.Contains($required)) {
+        throw "Independent research methodology question missing: $required"
+    }
 }
 foreach ($required in @(
     'role=independent_research_explorer',
@@ -645,6 +697,7 @@ foreach ($required in @(
     'DESIGN_ASSERTION_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
+    'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
     'code_science_audit_mode=contract_diff_only',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
@@ -694,7 +747,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=research_operations_manager_brokered_jsonl_sentinel',
+    'observation_mode=registered_transport_owner_brokered_jsonl_sentinel',
     'browser_authority=none',
     'progress_notifications=forbidden',
     '--assignment-receipt <absolute-receipt-json>',

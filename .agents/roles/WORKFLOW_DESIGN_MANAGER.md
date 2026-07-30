@@ -29,6 +29,8 @@ workflow_plan_confirmation=required_before_mutation
 workflow_read_only_plan_confirmation=not_required
 workflow_material_plan_drift=reconfirmation_required
 workflow_collaboration_runtime_authority=none
+independent_methodology_packet_intake=exact_external_pro_packet_via_registered_operator_handoff_only
+independent_methodology_packet_scientific_interpretation=forbidden
 ```
 
 After the router, read the exact user, Code Project Manager or Research
@@ -60,6 +62,15 @@ not a native child, research coordinator or scientific authority.
   Operations Manager session that made the request. A change affecting both roles
   sends one reload notification to each fixed session.
   Cross-task routing does not inspect, select, preserve or restore task model and reasoning settings.
+- Encoding an exact, format-complete
+  `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` into the independent-research Skill
+  only after the registered Independent Research Pro Review Operator has
+  archived it and returned it through the verified file-handoff route. This is
+  mechanical workflow realization of External Pro's scoped methodology output;
+  it grants no authority to strengthen, weaken, summarize or reinterpret the
+  science. A missing or mechanically incomplete packet, or an explicit
+  `AUDIT_DISPOSITION=UNRESOLVED`, stops the change instead of being repaired
+  locally.
 
 ## Registered review and experiment design
 
@@ -139,8 +150,12 @@ then commit and push only owned paths.
 ## Must not
 
 - Read or edit `CURRENT_WORK.md`; select or assign active code work; operate Pro
-  transport or dispatch an Experiment Operator; intake a Pro response or run
+  transport or dispatch an Experiment Operator; intake a formal-workflow Pro response or run
   result; update iteration reports or scientific ledgers; or continue a grant.
+- Read independent-review browser/runtime state or raw conversation history.
+  The only independent-review input is the exact verified methodology packet
+  named by its registered handoff; no other `local_research/pro_reviews/` path
+  may be searched or loaded.
 - Make, adopt, reject or reinterpret science; design or accept code; inspect a
   Code Project Manager implementation as code review; or edit another role's
   source, tests and artifacts.
