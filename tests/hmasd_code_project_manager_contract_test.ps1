@@ -22,6 +22,9 @@ $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 $readinessScriptPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py'
 $hooksPath = Join-Path $repo '.codex/hooks.json'
+$g0ReadinessContractPath = Join-Path $repo 'docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md'
+$g0ReadinessContract = Get-Content -Raw -LiteralPath $g0ReadinessContractPath
+$g0ReadinessContractNormalized = $g0ReadinessContract -replace '\s+', ' '
 
 if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath)) {
     throw 'Retired manager role path remains live'
@@ -208,6 +211,62 @@ foreach ($required in @(
     'runs no validation command')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing execution-readiness rule: $required"
+    }
+}
+foreach ($required in @(
+    'readiness phase timeout is candidate evidence',
+    'semantics-preserving technical optimization under the unchanged phase timeout',
+    'evidence-backed timeout revision',
+    'any code change produces a new candidate',
+    'fresh absent root',
+    'full commit-bound receipt',
+    'never switches to the timeout-revision response automatically')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill missing timeout-response rule: $required"
+    }
+}
+
+foreach ($required in @(
+    'request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT',
+    'selected_option=A',
+    'baseline_candidate_commit=379726e325236a02c3a45bf7049bedaaa90d4e31',
+    'scientific_contract_stage_commit=8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc',
+    'bounded_exercise_timeout_seconds=300',
+    'bounded_exercise_success_duration_seconds=<300',
+    'timeout_revision=forbidden',
+    'other_phase_timeout_values=unchanged',
+    'outer_run_timeout=sum_of_six_phase_timeouts_plus_60_seconds',
+    'failed_root_reuse=forbidden',
+    'candidate_commit_rule=new_commit_required_for_any_code_change',
+    'unchanged_candidate_reexecution=forbidden',
+    'fresh_absent_root_required=true',
+    'full_six_phase_commit_bound_receipt=required',
+    'formal_compute=forbidden',
+    'nonformal_scientific_compute=forbidden',
+    'scientific_iteration_cost=zero',
+    'duplicate_pro_review=forbidden',
+    'current_work_mutation=forbidden',
+    'evidence_weakening=forbidden',
+    'option_b_automatic_fallback=forbidden',
+    'geometry, RNG and seed identities, pairing',
+    'controls, oracle, metrics, estimator, first-match order and complexity',
+    'READINESS_PERFORMANCE_BLOCKED',
+    'Research Operations Manager then applies its existing same-source preflight and formal-admission rules')) {
+    if (-not $g0ReadinessContractNormalized.Contains($required)) {
+        throw "G0 readiness performance contract missing: $required"
+    }
+}
+
+$g0CodePaths = @(
+    'ha_ctse_process/uav_source_identifiability_g0.py',
+    'scripts/run_uav_source_identifiability_g0.py',
+    'tests/ha_ctse_process_uav_source_identifiability_g0_test.py',
+    'tests/run_uav_source_identifiability_g0_test.py',
+    'docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md'
+)
+foreach ($required in $g0CodePaths) {
+    if (-not $g0ReadinessContract.Contains($required)) {
+        throw "G0 readiness performance path boundary missing: $required"
     }
 }
 foreach ($required in @(
