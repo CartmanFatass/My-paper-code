@@ -1,0 +1,28 @@
+# Mechanical intake record
+
+```text
+round=20260731_uav_source_identifiability_g0_code_science_alignment_audit_c4d54e5
+review_type=CODE_SCIENCE_ALIGNMENT_AUDIT
+package_stage_commit=7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3
+audit_target_commit=c4d54e54978d98430c22c2cf21b789dd73c72d52
+implementation_code_commit=c4d54e54978d98430c22c2cf21b789dd73c72d52
+readiness_execution_commit=e6d1794362015ad0d79c73f3df169c413e09497e
+registered_conversation_id=6a6ae83f-f544-83e8-80cc-d4e5b30ee552
+submission_count=1
+question_resubmitted=false
+answer_now_activated=false
+natural_completion=true
+monitor_terminal=COMPLETE
+assistant_message_identity=bfef0dd2-8864-4da7-bb26-186a6aae1113
+stable_snapshots=2
+generation_controls=inactive
+attachment_identity=not_used
+transport_recovery=none
+scientific_compute_started=false
+scientific_iteration_cost=zero
+raw_response_exact_text=AUDIT_DISPOSITION=ALIGNED
+```
+
+The raw file was reread after archival and matched the visible response
+exactly. This record contains transport facts only and does not reinterpret the
+External Pro disposition.
