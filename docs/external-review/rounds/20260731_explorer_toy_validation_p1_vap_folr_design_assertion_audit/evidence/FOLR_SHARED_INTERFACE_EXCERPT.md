@@ -469,4 +469,3 @@ The future gate must establish all of the following before any implementation ma
 10. Positive, negative, mixed, access-failed, and implementation-invalid first-match outputs are encoded exactly as this contract specifies.
 11. The shared-interface counterfactual no-effect checks pass.
 12. Passing this gate would establish design sufficiency only; it would not authorize code, compute, Stage B return evaluation, CPM activation, or formal adoption.
-
