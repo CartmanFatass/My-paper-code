@@ -74,6 +74,13 @@ paths when scientific judgment depends on what the code actually implements.
   module-admission conditions and required campaign fields. Do not select an
   active project direction, alter the formal portfolio or grant, authorize
   compute, or promote an advisory result.
+- `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`: assess exactly one named advisory
+  candidate from one mechanically bounded campaign packet. Judge its problem
+  formulation, mechanism path, RL/MARL driver, alternative explanations,
+  identification controls, source-to-mechanism boundary, required interfaces
+  and minimum validation contract. Do not request or compare other candidates,
+  rank the portfolio, choose a global winner, authorize code or compute, or
+  decide formal project adoption.
 
 ## May
 
@@ -131,6 +138,10 @@ paths when scientific judgment depends on what the code actually implements.
   registered Independent Research Pro Review Operator from its separate
   conversation. `CURRENT_WORK.md`, active portfolios, runs and formal review
   artifacts are not inputs.
+- For `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`, the committed single-direction
+  question plus one mechanically generated packet bound to one campaign and
+  one candidate. Other candidate records, the full portfolio, `CURRENT_WORK.md`,
+  code, runtime, CDC and formal review artifacts are not inputs.
 
 ## Outputs and stop
 
@@ -155,3 +166,8 @@ paths when scientific judgment depends on what the code actually implements.
   project-state, code, compute, CDC or formal-review effect. The independent
   operator archives it exactly; Workflow Design Manager may encode it without
   reinterpretation.
+- For `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`, return one format-complete
+  `INDEPENDENT_RESEARCH_DIRECTION_PACKET` containing every question-declared
+  field for the sole candidate. It is advisory, has no project-state effect and
+  is archived exactly by the independent operator before verbatim routing to
+  the Independent Research Explorer.

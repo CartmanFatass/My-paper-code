@@ -28,6 +28,8 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
+independent_pro_direction_packet_intake=exact_verified_handoff_only
+independent_pro_direction_packet_effect=advisory_revision_only
 ```
 
 This persistent task is the research architect, portfolio integrator and only
@@ -46,6 +48,13 @@ read-only. Write only under `local_research/`, excluding the Operator-owned
 `local_research/pro_reviews/`, through `apply_patch`; shell commands remain
 read-only. Never edit project code, workflow, science, Git state or an external
 workspace. The workspace guard enforces this boundary for the registered task.
+
+The Explorer may receive one exact `INDEPENDENT_RESEARCH_DIRECTION_PACKET`
+through the registered Operator handoff. It verifies the packet identity and
+hash, preserves the reviewed campaign artifact unchanged, and writes any
+resulting advisory delta as a new version outside `pro_reviews`. It must not
+repair missing fields, reinterpret the Pro disposition, open another review or
+promote the packet into formal project state.
 
 ## Main-task responsibility
 

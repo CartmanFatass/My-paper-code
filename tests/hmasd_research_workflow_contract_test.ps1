@@ -67,6 +67,8 @@ $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skill
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
+$independentDirectionQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_SCIENTIFIC_AUDIT.md')
+$directionReviewBuilder = Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/scripts/build_direction_review_input.py'
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
@@ -135,7 +137,7 @@ foreach ($required in @(
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_except_pro_reviews',
-    'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review',
+    'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_research_review',
     'independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper',
     'independent_research_review_operator_formal_workflow_authority=none',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
@@ -149,6 +151,7 @@ foreach ($required in @(
     'role_kind=user_owned_persistent_independent_pro_transport_task',
     'model=gpt-5.6-luna',
     'reasoning_effort=high',
+    'review_scope=explicit_user_authorized_methodology_or_one_independent_research_direction',
     'formal_workflow_authority=none',
     'scientific_authority=none',
     'git_authority=none',
@@ -164,12 +167,25 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
+    'registered direction-input builder',
+    '22_DIRECTION_INPUT.md',
+    'copy one completed exact packet to `temp/handoffs/`')) {
+    if (-not $independentReviewRole.Contains($required)) {
+        throw "Independent Research Review Operator write boundary missing: $required"
+    }
+}
+foreach ($required in @(
     'registered Independent Research Pro Review Operator',
     'local_research/pro_reviews/',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
     'one `hmasd-pro-response-monitor`',
     'complete response verbatim',
     '60_METHODOLOGY_PACKET.md',
+    '60_DIRECTION_PACKET.md',
+    'build_direction_review_input.py build',
+    'it never treats local research paths as a',
+    'Independent Research Explorer',
     'Workflow Design Manager')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
@@ -186,6 +202,30 @@ foreach ($required in @(
     if (-not $independentReviewQuestion.Contains($required)) {
         throw "Independent research methodology question missing: $required"
     }
+}
+foreach ($required in @(
+    'review_mode=INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
+    'review_scope=one_exact_advisory_candidate_only',
+    'portfolio_ranking=forbidden',
+    'global_winner_selection=forbidden',
+    'DIRECTION_DISPOSITION',
+    'MECHANISM_CAUSAL_PATH',
+    'RL_MARL_DRIVER',
+    'IDENTIFICATION_AND_CONTROLS',
+    'SOURCE_TO_MECHANISM_BOUNDARY',
+    'INTERFACE_DEPENDENCIES',
+    'VALIDATION_CONTRACT',
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
+    if (-not $independentDirectionQuestion.Contains($required)) {
+        throw "Independent research direction question missing: $required"
+    }
+}
+if (-not (Test-Path -LiteralPath $directionReviewBuilder -PathType Leaf)) {
+    throw 'Independent research direction packet builder is missing'
+}
+$directionBuilderResult = & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' $directionReviewBuilder self-test
+if ($LASTEXITCODE -ne 0 -or $directionBuilderResult -notcontains 'HMASD_DIRECTION_REVIEW_PACKAGER_SELF_TEST_OK') {
+    throw "Independent direction packet builder self-test failed: $directionBuilderResult"
 }
 foreach ($required in @(
     'role=independent_research_explorer',
@@ -209,6 +249,9 @@ foreach ($required in @(
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
+    'independent_pro_direction_packet_intake=exact_verified_handoff_only',
+    'independent_pro_direction_packet_effect=advisory_revision_only',
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'research architect, portfolio integrator and only',
     'SOURCE_ABSORPTION_BRIEF',
     'RL_PRINCIPLE_ANALYSIS_PACKET',
@@ -304,6 +347,9 @@ foreach ($required in @(
     'cross_direction_inspiration',
     'available native capacity',
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
+    'not an automatic campaign phase',
+    'Never infer a',
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
         throw "Independent research Skill missing: $required"
@@ -407,7 +453,6 @@ foreach ($forbidden in @(
 foreach ($forbidden in @(
     'scientific_innovation',
     'SCOUT_EVIDENCE_PACKET',
-    'RESEARCH_DIRECTION_PACKET',
     'research_scout_parallel_limit',
     'research_innovator_parallel_limit',
     'research_critic_parallel_limit',
@@ -425,6 +470,19 @@ foreach ($forbidden in @(
         if ($surface.Contains($forbidden)) {
             throw "Independent research retains stale closed-proof control: $forbidden"
         }
+    }
+}
+foreach ($surface in @(
+    $independentResearchRole,
+    $researchScoutRole,
+    $researchInnovatorRole,
+    $researchCriticRole,
+    $researchPrinciplesRole,
+    $independentResearchSkill,
+    $parallelResearch,
+    $openInspiration)) {
+    if ($surface -match '\bRESEARCH_DIRECTION_PACKET\b') {
+        throw 'Independent research retains stale closed-proof RESEARCH_DIRECTION_PACKET'
     }
 }
 foreach ($forbidden in @(
@@ -839,6 +897,9 @@ foreach ($required in @(
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
+    'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
+    'Other candidate records, the full portfolio',
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'code_science_audit_mode=contract_diff_only',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {

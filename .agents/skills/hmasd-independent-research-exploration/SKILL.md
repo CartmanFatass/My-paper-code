@@ -62,6 +62,14 @@ dispatch. Keep all useful parent and child directions. Stop only at recorded
 convergence, a resource boundary, an external-source expansion or work that
 requires code, compute or formal adoption.
 
+A user-authorized independent Pro direction audit is external advisory input,
+not an automatic campaign phase. Accept only one exact verified
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET` from the registered Operator. Preserve
+the reviewed artifact, record the packet identity and disposition, and create a
+new advisory version only when the packet names exact revisions. Never infer a
+portfolio ranking, choose a unique winner, open the next direction or contact
+Pro from the Explorer task.
+
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
 prediction. Load the strict methodology reference and produce an advisory
