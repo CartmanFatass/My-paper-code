@@ -119,7 +119,7 @@ def _worktree_is_registered(repo: Path, worktree: Path) -> bool:
 
 
 def _verify_worktree_absent(repo: Path, worktree: Path, ticket_path: Path) -> None:
-    if worktree.exists() or _worktree_is_registered(repo, worktree):
+    if worktree.exists() or worktree.is_symlink() or _worktree_is_registered(repo, worktree):
         raise TicketError("partial worktree cleanup did not remove the registered state")
     if ticket_path.exists():
         raise TicketError("partial worktree cleanup left a workspace ticket")
@@ -151,22 +151,38 @@ def _recover_partial_assignment(
     ticket_path = _ticket_path(common_git_dir, assignment_id)
     if ticket_path.exists():
         raise TicketError("partial assignment recovery refuses an existing workspace ticket")
-    if not worktree.exists():
-        raise TicketError("partial assignment recovery found no worktree destination")
+    registered = _worktree_is_registered(repo, worktree)
+    destination_present = worktree.exists() or worktree.is_symlink()
+    if not registered and not destination_present:
+        _verify_worktree_absent(repo, worktree, ticket_path)
+        return {
+            "recovered_assignment_id": assignment_id,
+            "recovery_status": "PARTIAL_WORKSPACE_CLEANED",
+            "recovery_observation": "ALREADY_CLEAN",
+        }
+    if not registered:
+        raise TicketError("partial assignment is not the registered worktree identity")
+    if not destination_present:
+        _worktree_git(repo, "remove", "--force", str(worktree))
+        _verify_worktree_absent(repo, worktree, ticket_path)
+        return {
+            "recovered_assignment_id": assignment_id,
+            "recovery_status": "PARTIAL_WORKSPACE_CLEANED",
+            "recovery_observation": "REGISTERED_STATE_REMOVED",
+        }
     if (
         not _same_path(worktree.parent, root)
         or worktree.is_symlink()
         or _is_reparse_point(worktree)
     ):
         raise TicketError("partial assignment worktree is redirected")
-    if not _worktree_is_registered(repo, worktree):
-        raise TicketError("partial assignment is not the registered worktree identity")
     _verify_registered_worktree_identity(worktree, common_git_dir)
     _worktree_git(repo, "remove", "--force", str(worktree))
     _verify_worktree_absent(repo, worktree, ticket_path)
     return {
         "recovered_assignment_id": assignment_id,
         "recovery_status": "PARTIAL_WORKSPACE_CLEANED",
+        "recovery_observation": "REGISTERED_WORKTREE_REMOVED",
     }
 
 

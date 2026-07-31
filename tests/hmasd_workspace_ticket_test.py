@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -317,6 +318,7 @@ def test_new_provision_recovers_one_registered_unticketed_partial_assignment(
     )
     assert created["recovered_assignment_id"] == "TASK_R2"
     assert created["recovery_status"] == "PARTIAL_WORKSPACE_CLEANED"
+    assert created["recovery_observation"] == "REGISTERED_WORKTREE_REMOVED"
     assert not old_worktree.exists()
     assert "TASK_R2" not in git(source, "worktree", "list")
     assert Path(str(created["resolved_worktree"])).exists()
@@ -325,6 +327,54 @@ def test_new_provision_recovers_one_registered_unticketed_partial_assignment(
         == ("-c", "core.longpaths=true", "worktree", "remove", "--force")
         for args in invocations
     )
+
+
+def test_new_provision_accepts_idempotent_already_clean_recovery(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_R4",
+        recover_partial_assignment="TASK_R2_ALREADY_CLEAN",
+    )
+
+    assert created["recovered_assignment_id"] == "TASK_R2_ALREADY_CLEAN"
+    assert created["recovery_status"] == "PARTIAL_WORKSPACE_CLEANED"
+    assert created["recovery_observation"] == "ALREADY_CLEAN"
+    assert not (worktree_root / "TASK_R2_ALREADY_CLEAN").exists()
+    assert "TASK_R2_ALREADY_CLEAN" not in git(source, "worktree", "list")
+    assert Path(str(created["resolved_worktree"])).exists()
+
+
+def test_new_provision_removes_registered_state_with_missing_destination(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", source)
+    old_worktree = worktree_root / "TASK_REGISTERED_WITHOUT_DESTINATION"
+    ticketing._worktree_git(source, "add", "--detach", str(old_worktree), base)
+    shutil.rmtree(old_worktree)
+    assert not old_worktree.exists()
+    assert ticketing._worktree_is_registered(source, old_worktree)
+
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_AFTER_MISSING_DESTINATION",
+        recover_partial_assignment="TASK_REGISTERED_WITHOUT_DESTINATION",
+    )
+
+    assert created["recovery_status"] == "PARTIAL_WORKSPACE_CLEANED"
+    assert created["recovery_observation"] == "REGISTERED_STATE_REMOVED"
+    assert not ticketing._worktree_is_registered(source, old_worktree)
+    assert Path(str(created["resolved_worktree"])).exists()
 
 
 def test_partial_recovery_refuses_ticketed_or_unregistered_state(
@@ -398,6 +448,49 @@ def test_partial_recovery_refuses_registered_path_with_mismatched_git_backlink(
     assert admin.exists()
     assert not (worktree_root / "TASK_AFTER_REPLACED_IDENTITY").exists()
     new_ticket = source / ".git" / ticketing.TICKET_DIRECTORY / "TASK_AFTER_REPLACED_IDENTITY.json"
+    assert not new_ticket.exists()
+
+
+def test_partial_recovery_refuses_redirected_registered_destination_without_removal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", source)
+    old_worktree = worktree_root / "TASK_REDIRECTED_DESTINATION"
+    ticketing._worktree_git(source, "add", "--detach", str(old_worktree), base)
+    real_reparse = ticketing._is_reparse_point
+    real_worktree_git = ticketing._worktree_git
+    remove_called = False
+
+    def report_redirect(path: Path) -> bool:
+        if ticketing._same_path(path, old_worktree):
+            return True
+        return real_reparse(path)
+
+    def forbid_remove(root: Path, *args: str) -> str:
+        nonlocal remove_called
+        if args[:2] == ("remove", "--force"):
+            remove_called = True
+            raise AssertionError("redirected recovery must not invoke worktree remove")
+        return real_worktree_git(root, *args)
+
+    monkeypatch.setattr(ticketing, "_is_reparse_point", report_redirect)
+    monkeypatch.setattr(ticketing, "_worktree_git", forbid_remove)
+    with pytest.raises(ticketing.TicketError, match="worktree is redirected"):
+        provision(
+            monkeypatch,
+            source,
+            worktree_root,
+            base,
+            assignment="TASK_AFTER_REDIRECTED_DESTINATION",
+            recover_partial_assignment="TASK_REDIRECTED_DESTINATION",
+        )
+
+    assert not remove_called
+    assert old_worktree.exists()
+    assert not (worktree_root / "TASK_AFTER_REDIRECTED_DESTINATION").exists()
+    new_ticket = source / ".git" / ticketing.TICKET_DIRECTORY / "TASK_AFTER_REDIRECTED_DESTINATION.json"
     assert not new_ticket.exists()
 
 

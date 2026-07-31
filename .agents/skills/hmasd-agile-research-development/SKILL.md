@@ -248,12 +248,14 @@ slice.
   transcribe, infer or repair an absolute worktree path in prose.
 - Registered provision uses command-local `core.longpaths=true` without changing
   repository or global Git configuration. A workflow-frozen replacement
-  assignment may name one earlier registered but unticketed partial assignment
-  with `--recover-partial-assignment`; the script verifies and removes that
-  exact deterministic worktree before provisioning the new assignment. It
-  fails closed on an existing ticket, unregistered or redirected path, identity
-  mismatch or incomplete cleanup. Callers never run raw `worktree remove` or
-  `worktree prune`, manually delete the path, or reuse the retired assignment.
+  assignment may name one earlier unticketed partial assignment with
+  `--recover-partial-assignment`. An already-clean state with no ticket,
+  destination or Git registration is an idempotent `PARTIAL_WORKSPACE_CLEANED`;
+  otherwise the script removes only the exact registered state, verifies its
+  absence, then provisions the new assignment. It fails closed on an existing
+  ticket, an unregistered destination, a redirected path, identity mismatch or
+  incomplete cleanup. Callers never run raw `worktree remove` or `worktree
+  prune`, manually delete the path, or reuse the retired assignment.
 - Children do not perform Git. Code Project Manager integrates the exact accepted
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
