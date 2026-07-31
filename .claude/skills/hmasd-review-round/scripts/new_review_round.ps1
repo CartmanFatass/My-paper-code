@@ -152,7 +152,8 @@ last_line. Do not summarise it.
 
 ## Transport faults
 
-TODO, or ``none``. Record deviations even when they worked.
+PENDING — round not yet transported. At capture, replace with observed
+deviations (record them even when they worked) or ``none``.
 "@
 
 @{ status = 'ROUND_SCAFFOLD_OK'; round = $roundRel

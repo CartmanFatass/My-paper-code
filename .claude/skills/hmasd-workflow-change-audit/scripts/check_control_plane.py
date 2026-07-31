@@ -44,6 +44,12 @@ DEFAULT_FORBIDDEN = (
     "hmasd-compaction",
     "RESTART_HANDOFF",
     "iterations_since_last_compaction",
+    # Retired 2026-07-25; its dispatch instruction survived in a rendered .ps1
+    # prompt until 2026-07-31 because this scan covers only .md. The rendered
+    # output is guarded by review_round_contract_test.ps1; this entry keeps the
+    # name out of the md surface. Historical records say "delegated transport
+    # child" instead of the name.
+    "exchanger",
 )
 # Referenced paths that are legitimately patterns or external, not files on disk.
 REF_EXEMPT_SUFFIXES = ("/", "*")

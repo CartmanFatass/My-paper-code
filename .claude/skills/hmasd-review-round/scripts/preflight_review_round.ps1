@@ -67,7 +67,7 @@ foreach ($line in $lines) {
     }
 }
 if ($paths.Count -eq 0) {
-    $failures.Add('Question has no "## Evidence to read" allow-list. The freshness fence names only the question, so paths declared in a side manifest or in the exchanger brief never reach the reviewer.')
+    $failures.Add('Question has no "## Evidence to read" allow-list. The freshness fence names only the question, so paths declared in a side manifest or in a delegated child''s brief never reach the reviewer.')
 }
 $duplicates = @($paths | Group-Object | Where-Object Count -gt 1 | ForEach-Object Name)
 foreach ($d in $duplicates) { $failures.Add("Allow-list contains a duplicate path: $d") }

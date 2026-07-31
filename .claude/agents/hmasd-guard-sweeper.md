@@ -33,7 +33,7 @@ how the defects you are hunting survived — a plausible test name talks a reade
 out of the finding, and a mutation cannot be talked out of anything.
 
 **The `model` above is a floor, not a fixture — the caller overrides it per
-dispatch.** It is declared low on purpose. Leaving the field out does *not*
+dispatch.** It is declared sonnet on purpose. Leaving the field out does *not*
 economise: an unset model inherits the orchestrator's, so on an Opus session
 omitting it **is** Opus, which is what happened to two mechanical sweeps on
 2026-07-27. A cheap default plus a deliberate upgrade is the arrangement that

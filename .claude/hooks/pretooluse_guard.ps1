@@ -101,6 +101,25 @@ If the user has directed this override, say so and ask them to run it.
     }
 }
 
+# --- RULE 1b: core.hooksPath is --no-verify with a different spelling --------
+# Measured 2026-07-31: `git -c core.hooksPath=nul commit` reached exit 0 while
+# --no-verify was blocked, and `Bash(git commit *)` is pre-approved without a
+# prompt. Redirecting or unsetting the hooks path turns off the same drift guard
+# RULE 1 exists to protect, for every subsequent command if set persistently.
+# Matched in $scan like the flag itself, so quoted prose naming it stays allowed.
+# This also denies reads (`git config --get core.hooksPath`); that false block
+# is recoverable -- read .git/config directly, or ask the user.
+if ($scan -match 'git\b' -and $scan -match 'core\.hooksPath') {
+    Deny @"
+core.hooksPath reaches the same leverage as --no-verify: repoint or clear it and
+the workflow drift guard stops running, silently, for every commit after.
+
+If you meant to READ the current value, inspect .git/config with a file tool
+instead. If the user has directed a hooks-path change, say so and ask them to
+run it.
+"@
+}
+
 # --- RULE 2: push before tag -------------------------------------------------
 $isTagCreate = $scan -match 'git\b[^|;&]*\btag\b(?!\s+-[dl])'
 $isTagPush = $scan -match 'git\b[^|;&]*\bpush\b[^|;&]*(--tags|refs/tags|\btag\b)'

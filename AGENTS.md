@@ -48,7 +48,7 @@ external_review_transport=project_manager_direct
 experiment_orchestration=registered_subagent
 formal_compute_authority=user_only
 one_artifact_one_acceptance_owner=true
-project_development_procedure=this file (sizing) plus .claude/agents/hmasd-implementer.md (execution)
+project_development_procedure=$hmasd-task-design (sizing) plus .claude/agents/hmasd-implementer.md (execution)
 ```
 
 Project Manager is the sole persistent HMASD authority and the user's direct
@@ -288,7 +288,7 @@ question all live in that Skill, next to the transport that carries it.
 
 The registry `docs/external-review/REVIEWER_CONVERSATIONS.json` binds one
 dedicated conversation per branch. Transport is `project_manager_direct` (the
-delegated exchanger was retired 2026-07-25): author the question, freeze and push
+delegated transport child was retired 2026-07-25): author the question, freeze and push
 the boundary, submit the fence, capture and archive the reply per
 `$hmasd-review-round`. Dispatch `hmasd-review-monitor` for bounded inspection
 only — it holds no tool that can wait, so **you own the pacing**. On an
@@ -513,8 +513,8 @@ definition, and `docs/project/AGENT_CONTEXT.md`. A child does not reconstruct
 task history. There is no Controller, persistent Monitor, role-session registry,
 dispatcher, or callback chain.
 
-Precedence is: direct user instruction, this constitution, the applicable role
-charter, active state in `CURRENT_WORK.md`, then procedural Skills. Git history
+Precedence is: direct user instruction, this file, the subagent's registered
+definition, active state in `CURRENT_WORK.md`, then procedural Skills. Git history
 and completed review artifacts are evidence, not active authority.
 
 ## Authority map
@@ -545,7 +545,7 @@ scientific_principles=docs/project/ALGORITHM_PRINCIPLES.md
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 review_stack=false
 routine_preimplementation_code_science_review=forbidden
-project_development_procedure=this file (sizing) plus .claude/agents/hmasd-implementer.md (execution)
+project_development_procedure=$hmasd-task-design (sizing) plus .claude/agents/hmasd-implementer.md (execution)
 development_mode=agile_algorithm_research
 algorithm_iteration_environment=toy_default
 uav_environment_role=promoted_candidate_validation_only
@@ -728,7 +728,7 @@ not run.
    run.** The Stage A design assertion audit closes in one round:
    initial-state signals, positive-control necessity, gate witnesses, frozen
    result-sensitive choices, the load-bearing decision the contract makes
-   without asking (`docs/project/ALGORITHM_PRINCIPLES.md` section 4), and the
+   without asking, and the
    cost gate of `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Each is presented
    **as the design resolves it**, under one question: does this conform to the
    decision you issued? Never assign verification labor to Pro.
@@ -745,7 +745,7 @@ not run.
    section of the round's reconciliation, never a separate reviewer, approval
    file or checklist artifact.
 5. **Implement.** Bounded children against the frozen contract, focused
-   tests, sized per **Sizing the task** below.
+   tests, sized per `$hmasd-task-design`.
 6. **Review and tests.** Project Manager reads the diff and reruns the focused
    checks itself. Stage B (below) triggers only for claim-bearing code; the
    local adversarial reviewer is dispatched only on a PM-named wrong-claim
@@ -866,13 +866,13 @@ exception; their pinned profiles are deliberate.
 
 Active project Skills are deliberately small:
 
-- implementation procedure lives in the implementer definition and in **Sizing the task**, not in a Skill:
-  testing, bounded repair, and inspection;
+- implementation procedure lives in the implementer definition — testing,
+  bounded repair, and inspection — with sizing in `$hmasd-task-design`;
 - `hmasd-review-round` for external review transport and exact raw archival,
   executed by the Project Manager directly.
 
 There is no dispatch or experiment-monitor Skill. Experiment behavior is fixed
-by its subagent definition and role charter. Generic Superpowers Skills are
+by the operator's registered subagent definition. Generic Superpowers Skills are
 reference-only and disabled for HMASD execution, including their worktree,
 planning, TDD, review-stack, and completion rituals.
 
@@ -898,7 +898,9 @@ precedence change only at an explicitly accepted scientific boundary.
 - `docs/research/cdc/` contains durable research state.
 - `docs/external-review/` contains exact external evidence.
 - `AGENTS.md` is this file: the Project Manager instructions. There is no role directory.
-- `CLAUDE.md` contains the Claude Code runtime: subagent roster and tiers.
+- `CLAUDE.md` is the shared signpost that routes every role to its instructions.
+  It carries no roster and no tiers — those live in this file, and a contract
+  test refuses their return to the signpost.
 - `.claude/agents/` contains the registered subagent definitions.
 - `.claude/skills/hmasd-*/` contains only reusable operating mechanics.
 

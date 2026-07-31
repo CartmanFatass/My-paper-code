@@ -109,6 +109,16 @@ $cases = @(
     @{ Deny = $false; Why = 'rule 1 paired negative: message supplied by file';
        Cmd = 'git commit -F msg.txt' },
 
+    # rule 1 -- the equivalent bypass. `-c core.hooksPath=nul` reaches exactly
+    # the leverage --no-verify is blocked for, and `Bash(git commit *)` is
+    # pre-approved, so it runs without a prompt. Measured allowed on 2026-07-31.
+    @{ Deny = $true;  Why = 'rule 1: core.hooksPath inline override neuters every hook';
+       Cmd = 'git -c core.hooksPath=nul commit -m x' },
+    @{ Deny = $true;  Why = 'rule 1: core.hooksPath set persistently';
+       Cmd = 'git config core.hooksPath nul' },
+    @{ Deny = $false; Why = 'rule 1 paired negative: core.hooksPath NAMED inside a quoted message';
+       Cmd = 'git commit -m "never set core.hooksPath to dodge the drift guard"' },
+
     # rule 2 -- tagging, and the word "tag" as message text
     @{ Deny = $false; Why = 'rule 2 paired negative: "tag" appearing in a commit message';
        Cmd = 'git commit -m "always tag the stage commit"' },

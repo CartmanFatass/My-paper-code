@@ -197,10 +197,11 @@ code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 creates or changes an estimand, benchmark source, control or null, a
 reward/credit/gradient/initialization mechanism, a normalization, threshold,
 confidence procedure or result branch, or the interpretation connecting a
-behavior to a capability. Its content is step 3 of the loop and
-`ALGORITHM_PRINCIPLES.md` section 4 — including asking Pro which load-bearing
-decision the contract makes without asking, which is the whole surviving
-function of the former standalone grill stage. It is decided on paper, without
+behavior to a capability. Its content is step 3 of the loop and the checklist
+of `ALGORITHM_PRINCIPLES.md` section 4, plus asking Pro which load-bearing
+decision the contract makes without asking — that question is the whole
+surviving function of the former standalone grill stage, and it lives here,
+not in section 4. It is decided on paper, without
 training; it does not certify a design as sound, it retires the defect class
 that is provable before compute.
 

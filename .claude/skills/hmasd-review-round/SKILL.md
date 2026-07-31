@@ -134,7 +134,7 @@ skill before the first browser call.
 question, freezes and pushes the boundary, owns registration, submits the fence,
 and **owns the archive decision**.
 
-This replaced a delegated exchanger on 2026-07-25. The split that failed was
+This replaced a delegated transport child on 2026-07-25. The split that failed was
 handing one role both a long mechanical wait and a precise capture: the wait was
 abandoned twice mid-round, and one archive lost every markdown marker because the
 capture fell back to rendered page text. Waiting and capturing are now separated
@@ -171,11 +171,15 @@ What is still not delegable: choosing which message is the ruling, and deciding
 that a failed capture is archivable anyway. Those are judgements, and they stay
 with the Project Manager whatever mechanism moved the bytes.
 
-**`hmasd-review-monitor` (haiku) does the waiting and nothing else.** Dispatch it
-after the fence lands; it polls the conversation and reports when generation has
-stopped. It holds no click, type or write tools, so it structurally cannot submit,
-capture or curtail — it reports one observation and the Project Manager acts on
-it. A wrong report from it is cheap: an early wake costs one page read.
+**`hmasd-review-monitor` (haiku) performs one bounded inspection per dispatch,
+and nothing else.** It holds no wait affordance and no clock: the Project Manager
+owns the pacing and dispatches it again when another look is due, starting the
+moment the fence lands. It holds no click, type or write tools, so it
+structurally cannot submit, capture or curtail — it reports one observation and
+the Project Manager acts on it. A wrong report from it is cheap: an early wake
+costs one page read. (The prior wording — "does the waiting" — re-created the
+poll-until-stopped duty that produced a fabricated elapsed-time report on
+2026-07-27; a brief quoting it re-imposes an impossible duty.)
 
 Create no standing relay, dispatcher or Monitor. A bounded, single-purpose child
 dispatched for one capture under the digest bond above is not a relay: it holds no
@@ -304,9 +308,14 @@ the round directory first, then paste it in one operation:
 
 **Deciding whether you sent — do not reason about this, measure it.** Before
 pasting, count the user turns in the conversation. After clicking send, wait,
-then check two things: the composer is **empty**, and the user-turn count has
-gone up by exactly one. Both true means sent. **Composer still holding your text
-means it did not send — click send.**
+then apply the one send test: **how many user turns carry this fence's
+`stage_commit`?** Zero means it did not send; exactly one means sent; more than
+one is the duplicate this Skill exists to prevent. Composer emptiness is
+corroborating evidence only — measured on this page, the composer can keep the
+full text after a send that **did** land (see *The composer keeps its text after
+a successful send* below), so a still-full composer must never by itself trigger
+a second send. **Never a second `Return` on a composer holding an
+already-counted fence; clear the residue instead.**
 
 "I am not sure whether it sent" is not a terminal state and never a reason to
 stop. On 2026-07-24 a transport pass pasted a convergence turn, could not
@@ -352,12 +361,14 @@ Require the assigned round path, pushed 40-character `stage_commit`, exact
 question path, exact raw path, mechanical-intake path, registered reviewer
 conversation, and declared input paths.
 
-**Question scope.** The question document carries decisions — claim-defining
-questions, any number of them, tree-structured where dependent. It never
-assigns verification labor to the reviewer: no fact-inventory confirmation,
+**Question scope.** At touchpoints 1 and 3 the question document carries
+decisions — claim-defining questions, tree-structured where dependent. At
+touchpoint 2 it is a conformance question and nothing more — see **Writing the
+question** above (user ruling 2026-07-30). At no touchpoint does it assign
+verification labor to the reviewer: no fact-inventory confirmation,
 no implementation-detail checking, no auditing of what the execution side can
 verify itself. The two bounded exceptions are the Stage A design audit and
-the Stage B code-science alignment diff defined in `AGENTS.md`.
+the Stage B code-science alignment diff defined in `$hmasd-acceptance-gate`.
 
 Before browser submission:
 
@@ -604,9 +615,10 @@ was already running.
 
 **So composer emptiness is corroborating evidence, not the send test.** The test
 is: *how many user turns carry the fence's `stage_commit`?* Zero means send;
-one means done; more than one is the duplicate this Skill exists to prevent. The
-earlier heuristic — "composer still holding your text means it did not send" —
-points the wrong way in this state and must not be used alone.
+one means done; more than one is the duplicate this Skill exists to prevent. An
+earlier revision taught "composer still holding your text means it did not send —
+click send"; that heuristic points the wrong way in this state and was removed
+on 2026-07-31.
 
 Clear the residue with `ctrl+a` then `Delete`. **Never a second `Return`.**
 Leaving a valid fence sitting in a composer is a duplicate submission waiting for

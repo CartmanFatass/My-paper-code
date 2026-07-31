@@ -133,6 +133,12 @@ foreach ($required in @(
 if ($prompt -match '(?i)\bcontroller\b|hmasd-dispatch-task') {
     throw 'Rendered heartbeat retains a retired Controller route'
 }
+# The exchanger was retired 2026-07-25, yet its dispatch instruction survived in
+# this rendered prompt until 2026-07-31 -- unseen because nothing scanned the
+# runtime output of a .ps1 (check G covers only .md). Assert on the OUTPUT.
+if ($prompt -match '(?i)exchanger') {
+    throw 'Rendered heartbeat retains the retired exchanger role'
+}
 
 $preflight = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/preflight_review_round.ps1'
 if (-not (Test-Path $preflight)) { throw 'Round preflight gate is missing' }
@@ -202,6 +208,17 @@ foreach ($dir in (Get-ChildItem -LiteralPath $roundsRoot -Directory)) {
     $m = [regex]::Match($intake, '(?s)##\s+Transport faults\s*(?<body>.*)$')
     if (-not $m.Success) { continue }          # pre-scaffold record, exempt
     $body = $m.Groups['body'].Value.Trim()
+    # Between scaffold and capture the faults are genuinely unknowable, and the
+    # first shape of this rule blocked every guarded commit in that window --
+    # pressuring an invented `none` before transport ran. PENDING is the honest
+    # in-flight state, tolerated exactly until the response capture exists.
+    $rawPresent = Test-Path -LiteralPath (Join-Path $dir.FullName '21_PRO_OPEN_RAW.md')
+    if ($body -match '^PENDING') {
+        if ($rawPresent) {
+            throw "Round '$($dir.Name)' has its response captured (21_PRO_OPEN_RAW.md exists) but '## Transport faults' still says PENDING. Transport has run; record what it did -- observed faults, or ``none``."
+        }
+        continue
+    }
     if ($body.Length -eq 0 -or $body -match '^TODO') {
         throw "Round '$($dir.Name)' carries a '## Transport faults' section that is empty or still TODO. A round that observed no fault must say ``none`` -- silence is indistinguishable from a fault nobody wrote down, which is the whole reason this channel exists."
     }
@@ -218,6 +235,11 @@ if (-not (Test-Path -LiteralPath $scaffoldPath)) { throw 'Round scaffolder is mi
 $scaffold = Get-Content -Raw -LiteralPath $scaffoldPath
 if (-not $scaffold.Contains('## Transport faults')) {
     throw 'new_review_round.ps1 no longer emits a "## Transport faults" section; future rounds would silently escape the check above'
+}
+# The scaffold must emit the tolerated in-flight marker, not TODO -- a TODO
+# scaffold re-arms the trap where every guarded commit before capture is blocked.
+if ($scaffold -match '(?s)## Transport faults.{0,40}TODO' -or $scaffold -notmatch '(?s)## Transport faults.{0,10}PENDING') {
+    throw 'new_review_round.ps1 must scaffold "## Transport faults" as PENDING (in-flight marker), not TODO'
 }
 
 Write-Output 'HMASD_REVIEW_ROUND_CONTRACT_OK'

@@ -59,7 +59,7 @@ refusal — it produces an invention.
 | Doing this | Read |
 |---|---|
 | Implementing against a frozen spec | your definition's **How work is done here** |
-| Sizing a task before dispatching it | `AGENTS.md`, **Sizing the task** |
+| Sizing a task before dispatching it | `$hmasd-task-design` |
 | Running an external review round | `$hmasd-review-round` |
 | Judging whether work is on path | `docs/project/RESEARCH_GOAL.md` |
 | Designing evidence, freezing a contract | `docs/project/ALGORITHM_PRINCIPLES.md`, then `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` |
