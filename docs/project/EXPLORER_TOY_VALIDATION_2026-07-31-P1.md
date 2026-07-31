@@ -71,3 +71,20 @@ The active UAV/G0 workflow is paused at its existing safe boundary. Its gate-08
 failed root, G0 finite-precision clarification package, transport blocker and
 resume condition remain unchanged in `CURRENT_WORK.md`. This separate record
 does not consume the UAV iteration balance or alter its scheduled action.
+
+## Current candidate lane: CAND-VAP-FOLR-CORE
+
+candidate_status=ADVISORY_REFINEMENT_REQUIRED
+candidate_review_round=20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit
+candidate_package_stage_commit=6139a1def6613335e183e09ce0016eaf2b2da873
+candidate_ops_pro_conversation_id=6a6cd2d9-321c-83e8-a046-7062de12c4b7
+candidate_raw_archive=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/21_PRO_OPEN_RAW.md
+candidate_mechanical_intake=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+candidate_exact_gap=Gate item 3 is not frozen: no exact sixteen-row trace matrix specifies, per row, the initial state, event and boundary order, in-flight binding, expected state reads/writes, masks, actions, receipt transitions, and terminal result; the advisory trace list instead contains eighteen scenario labels.
+candidate_next_boundary=EXPLORER_ADVISORY_REFINEMENT_PACKET_REQUIRED
+candidate_cpm_dispatch_authorized=false
+candidate_compute_authorized=false
+candidate_scientific_iteration_cost=zero
+
+The VSP units remain queued/live and were not compared or selected. The paused
+UAV/G0 workflow remains unchanged.

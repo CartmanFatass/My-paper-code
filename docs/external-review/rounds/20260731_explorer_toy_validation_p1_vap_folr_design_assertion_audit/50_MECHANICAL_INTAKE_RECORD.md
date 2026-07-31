@@ -1,0 +1,32 @@
+# Mechanical intake record
+
+workflow_id=EXPLORER-TOY-VALIDATION-2026-07-31-P1
+candidate_id=CAND-VAP-FOLR-CORE
+candidate_packet=local_research/2026-07-31_explorer_project_candidate_packet_vap_folr_core_p1_v1.json
+review_round=20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit
+package_stage_commit=6139a1def6613335e183e09ce0016eaf2b2da873
+registered_ops_pro_session=conversation_id=6a6cd2d9-321c-83e8-a046-7062de12c4b7|url=https://chatgpt.com/c/6a6cd2d9-321c-83e8-a046-7062de12c4b7
+question=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+submission_count=1
+main_body_fence_visible=true
+attachment_identity_verified=false
+assistant_generation_started=true
+natural_completion_verified=true
+assistant_message_identity=3db5c5ab-6861-4cc8-84b0-c15da673d1b1
+stable_snapshots=2
+snapshot_fingerprint=3d3f5463d1007e5ed605660f6fc8eaf785885a19bcd7220fdf612d19bfabde65
+generation_controls=inactive
+answer_now_activated=false
+sentinel_status=COMPLETE
+sentinel_state=C:\Users\fires\.codex\visualizations\2026\07\26\019f9c6a-9401-7ae0-ace5-dd827dccba2b\explorer_toy_validation_p1_vap_ops_sentinel.jsonl
+monitor_receipt=C:\Users\fires\.codex\visualizations\2026\07\26\019f9c6a-9401-7ae0-ace5-dd827dccba2b\explorer_toy_validation_p1_vap_ops_monitor_receipt.json
+monitor_terminal=COMPLETE
+disposition_token=ADVISORY_REFINEMENT_REQUIRED
+exact_gap=Gate item 3 is not frozen: no exact sixteen-row trace matrix specifies, per row, the initial state, event and boundary order, in-flight binding, expected state reads/writes, masks, actions, receipt transitions, and terminal result; the advisory trace list instead contains eighteen scenario labels.
+raw_archive=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/21_PRO_OPEN_RAW.md
+raw_bytes=338
+raw_sha256=308b5380d69d21220bfdf5abb0a9f2432ad1948406aa22cb98f61a3a29f1c574
+scientific_interpretation=not_performed
+compute_authorized=false
+scientific_iteration_cost=zero
+cpm_dispatched=false
