@@ -129,7 +129,7 @@ foreach ($required in @(
     'scripts/hmasd_pro_response_sentinel.py',
     'cross_task_routing=locked_role_session_model_thinking',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'workflow_design_manager_session=019f9d2f-e0ea-7411-9fd7-386f45f76909',
+    'workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'independent_research_explorer_session=019fb398-0a76-7bd0-9400-c5ea4eefa5de',

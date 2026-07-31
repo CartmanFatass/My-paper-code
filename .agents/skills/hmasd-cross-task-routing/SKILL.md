@@ -21,7 +21,7 @@ sender's settings or infer a replacement row.
 
 | role_id | session_id | model | thinking |
 |---|---|---|---|
-| `workflow_design_manager` | `019f9d2f-e0ea-7411-9fd7-386f45f76909` | `gpt-5.6-sol` | `high` |
+| `workflow_design_manager` | `019fb73d-5635-7b63-b165-6c5129bc0217` | `gpt-5.6-sol` | `high` |
 | `code_project_manager` | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` | `gpt-5.6-sol` | `max` |
 | `research_operations_manager` | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` | `gpt-5.6-luna` | `high` |
 | `independent_research_explorer` | `019fb398-0a76-7bd0-9400-c5ea4eefa5de` | `gpt-5.6-sol` | `ultra` |

@@ -16,7 +16,8 @@ PAYLOAD = (
     ROOT / ".agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py"
 )
 HOOKS = ROOT / ".codex/hooks.json"
-WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
+WDM_SESSION = "019fb73d-5635-7b63-b165-6c5129bc0217"
+RETIRED_WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
 CPM_SESSION = "019f9e4f-f4d0-7fe0-b214-c47fd034e84d"
 ROM_SESSION = "019f9c6a-9401-7ae0-ace5-dd827dccba2b"
 RESEARCH_REVIEW_SESSION = "019fb311-6137-7781-9708-3df24da34a4b"
@@ -215,8 +216,9 @@ def test_router_and_skill_lock_exact_role_routes() -> None:
     for role_id, (session_id, model, thinking) in LOCKED_ROUTES.items():
         row = f"| `{role_id}` | `{session_id}` | `{model}` | `{thinking}` |"
         assert skill.count(row) == 1, row
-    assert RETIRED_RESEARCH_EXPLORER_SESSION not in agents
-    assert RETIRED_RESEARCH_EXPLORER_SESSION not in skill
+    for retired in (RETIRED_RESEARCH_EXPLORER_SESSION, RETIRED_WDM_SESSION):
+        assert retired not in agents
+        assert retired not in skill
     for retired in (
         "cross_task_routing=fixed_role_sessions",
         "workflow_design_manager_route=",
@@ -264,8 +266,10 @@ def test_review_registry_is_local_to_operations_manager_transport() -> None:
 
 
 def test_independent_review_operator_routes_only_terminal_methodology_to_wdm() -> None:
-    role = (ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md").read_text(
-        encoding="utf-8"
+    role = " ".join(
+        (ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md")
+        .read_text(encoding="utf-8")
+        .split()
     )
     skill = " ".join(SKILL.read_text(encoding="utf-8").split())
     for token in (
