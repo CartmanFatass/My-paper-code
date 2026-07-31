@@ -58,12 +58,13 @@ on:
       - "d7s-benchmark-*"
       - "d7s-audit-*"
       - "d7s-workers-*"
+      - "d7s-replay-*"
   workflow_dispatch:
     inputs:
       mode:
-        description: "benchmark (measure s/step), workers (determinism proof) or audit (formal sharded run)"
+        description: "benchmark (measure s/step), workers (determinism proof), audit (formal sharded run) or replay (manifest replay probe)"
         type: choice
-        options: [benchmark, workers, audit]
+        options: [benchmark, workers, audit, replay]
         default: benchmark
 
 jobs:
@@ -246,4 +247,43 @@ jobs:
         with:
           name: d7s-shard-${{ matrix.seed }}
           path: shard_out/
+          retention-days: 90
+
+  # Ruling 2026-07-30 (20260730_d7_s_manifest_replay_gate_result), §8 item 8:
+  # run the SAME COMMITTED development manifest on two independently provisioned
+  # cloud jobs. Tag twice (d7s-replay-1, d7s-replay-2), download both artifacts,
+  # compare with scripts/d7_s_manifest_replay_gate.py. The probe refuses any R4
+  # topology; this produces apparatus evidence only, never a conclusion-bearing
+  # artifact, and a PASS selects A1 without wiring the manifest anywhere.
+  # Exact job text: docs/project/PROPOSED_WORKFLOW_JOB_MANIFEST_REPLAY.md.
+  replay:
+    if: inputs.mode == 'replay' || startsWith(github.ref, 'refs/tags/d7s-replay')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+          cache-dependency-path: requirements_d7s_audit.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements_d7s_audit.txt
+      - name: Manifest replay probe over the full registered horizon
+        env:
+          OMP_NUM_THREADS: "1"
+          MKL_NUM_THREADS: "1"
+        run: |
+          python scripts/d7_s_manifest_replay_probe.py \
+            --mode replay \
+            --manifest-root manifests/d7s_dev \
+            --episodes 1 \
+            --out replay_probe.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d7s-replay-${{ github.run_id }}
+          path: replay_probe.json
           retention-days: 90
