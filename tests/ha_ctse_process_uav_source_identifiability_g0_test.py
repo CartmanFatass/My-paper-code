@@ -947,16 +947,85 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
 
 
 @pytest.fixture(scope="module")
-def oracle_episode_zero_runs() -> tuple[
+def episode_zero_all_control_cell_runs() -> tuple[
     g0.G0EpisodeSource,
-    dict[g0.Cell, g0.EpisodeRunEvidence],
+    dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
 ]:
     source = g0.make_episode_source(0)
     runs = {
-        cell: g0.run_g0_episode(source, control=g0.Control.ORACLE, cell=cell)
+        (control, cell): g0.run_g0_episode(source, control=control, cell=cell)
+        for control in g0.Control
         for cell in g0.Cell
     }
     return source, runs
+
+
+@pytest.fixture(scope="module")
+def oracle_episode_zero_runs(
+    episode_zero_all_control_cell_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
+    ],
+) -> tuple[
+    g0.G0EpisodeSource,
+    dict[g0.Cell, g0.EpisodeRunEvidence],
+]:
+    source, runs = episode_zero_all_control_cell_runs
+    return source, {
+        cell: runs[(g0.Control.ORACLE, cell)] for cell in g0.Cell
+    }
+
+
+def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
+    episode_zero_all_control_cell_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
+    ],
+) -> None:
+    source, runs = episode_zero_all_control_cell_runs
+    expected_identities = {
+        (control, cell) for control in g0.Control for cell in g0.Cell
+    }
+    assert set(runs) == expected_identities
+    expected_initial_positions = np.concatenate(
+        (
+            source.geometry.physical_xy,
+            np.full(
+                (g0.PHYSICAL_UAVS, 1),
+                g0.FIXED_ALTITUDE_M,
+                dtype=np.float64,
+            ),
+        ),
+        axis=1,
+    )
+    permutation = np.asarray((3, 1, 7, 0, 6, 2, 5, 4), dtype=np.int64)
+
+    for identity in sorted(
+        expected_identities, key=lambda item: (item[0].value, item[1].value)
+    ):
+        run = runs[identity]
+        assert np.array_equal(run.position_trace[0], expected_initial_positions)
+        expected_action = g0.actions_toward_targets(
+            physical_positions=run.position_trace[0],
+            target_positions=run.target_trace[0],
+            active_mask=run.active_mask_trace[0],
+            max_speed=30.0,
+            max_vertical_speed=5.0,
+            time_step=1.0,
+        )
+        assert np.array_equal(run.raw_action_trace[0], expected_action)
+
+        permuted_action = g0.actions_toward_targets(
+            physical_positions=run.position_trace[0, permutation],
+            target_positions=run.target_trace[0, permutation],
+            active_mask=run.active_mask_trace[0, permutation],
+            max_speed=30.0,
+            max_vertical_speed=5.0,
+            time_step=1.0,
+        )
+        restored_action = np.empty_like(permuted_action)
+        restored_action[permutation] = permuted_action
+        assert np.array_equal(restored_action, run.raw_action_trace[0])
 
 
 def test_production_oracle_event_and_no_event_bind_branch_evidence(

@@ -5863,7 +5863,11 @@ def run_g0_episode(
         target_trace: list[list[list[float]]] = []
         action_trace: list[list[list[float]]] = []
         velocity_trace: list[list[list[float]]] = []
-        position_trace: list[list[list[float]]] = [env.uav_positions.tolist()]
+        position_trace: list[list[list[float]]] = [
+            np.asarray(env.uav_positions, dtype=np.float64)[
+                env._storage_to_internal
+            ].tolist()
+        ]
         active_mask_trace: list[list[bool]] = []
         lifecycle_events: list[LifecycleBoundaryEvent] = []
         tracker_failures = 0
