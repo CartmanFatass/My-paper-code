@@ -473,13 +473,13 @@ def test_result_bearing_alignment_binding_is_exact_and_removal_fails_pre_root(
 ) -> None:
     binding = _binding(tmp_path)
     assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
-        "c4d54e54978d98430c22c2cf21b789dd73c72d52"
+        "c88f43de6451c40defefd7c679ba8d353c45735c"
     )
     assert runner.ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA == (
-        "95b46e29ee44cc16ba5c5e91757b704be33e094e"
+        "b0baab9c47c2537217b689699d0520f158355e3d"
     )
     assert runner.ALIGNMENT_STAGE_COMMIT == (
-        "7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3"
+        "499fcaac7acea4faf58268b71773459ef73bedec"
     )
     assert runner.ALIGNMENT_DISPOSITION == "ALIGNED"
     monkeypatch.setattr(runner, "_verify_git_identity", lambda _commit: None)
@@ -498,6 +498,38 @@ def test_result_bearing_alignment_binding_is_exact_and_removal_fails_pre_root(
         runner.scientific_train(binding=binding)
     assert not binding.run_root.exists()
     assert not binding.bound_formal_root.exists()
+
+
+def test_bound_alignment_tuple_matches_git_objects() -> None:
+    source_path = "ha_ctse_process/uav_source_identifiability_g0.py"
+    aligned_blob = runner._command_output(
+        (
+            "git",
+            "rev-parse",
+            f"{runner.ALIGNED_IMPLEMENTATION_COMMIT}:{source_path}",
+        )
+    )
+    head_blob = runner._command_output(("git", "rev-parse", f"HEAD:{source_path}"))
+    assert aligned_blob == runner.ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA
+    assert head_blob == aligned_blob
+    assert runner._command_output(
+        (
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            runner.ALIGNED_IMPLEMENTATION_COMMIT,
+            "HEAD",
+        )
+    ) == ""
+    assert runner._command_output(
+        (
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            runner.ALIGNMENT_STAGE_COMMIT,
+            "HEAD",
+        )
+    ) == ""
 
 
 def test_result_bearing_alignment_rejects_historical_identity_rebinding(

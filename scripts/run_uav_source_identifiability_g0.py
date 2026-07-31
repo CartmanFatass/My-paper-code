@@ -67,17 +67,18 @@ FORMAL_AUTHORIZATION_TOKEN = "G0_FORMAL_ADMISSION=PROCEED"
 FAILED_ROOT_SCHEMA_ID = "UAV_G0_FAILED_ROOT"
 FAILED_ROOT_SCHEMA_VERSION = 1
 
-# Bound only after CODE_ACCEPTED and the independent c4d54e5 code-science audit.
+# Bound only after CODE_ACCEPTED and the independent c88f43d correction-only
+# code-science audit.
 # The historical accepted provenance above remains distinct from this active
 # aligned implementation identity.
 ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
-    "c4d54e54978d98430c22c2cf21b789dd73c72d52"
+    "c88f43de6451c40defefd7c679ba8d353c45735c"
 )
 ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA: str | None = (
-    "95b46e29ee44cc16ba5c5e91757b704be33e094e"
+    "b0baab9c47c2537217b689699d0520f158355e3d"
 )
 ALIGNMENT_STAGE_COMMIT: str | None = (
-    "7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3"
+    "499fcaac7acea4faf58268b71773459ef73bedec"
 )
 ALIGNMENT_DISPOSITION: str | None = "ALIGNED"
 
