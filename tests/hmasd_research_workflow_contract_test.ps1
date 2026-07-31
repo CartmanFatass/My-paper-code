@@ -10,6 +10,7 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Select-Object -ExpandProperty Name | Sort-Object)
 $requiredSkills = @(
     'hmasd-agile-research-development',
+    'hmasd-agentify-pro-transport',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
     'hmasd-explorer-project-validation',
@@ -76,6 +77,13 @@ $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skil
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
+$agentifyTransportSkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
+$agentifyTransportScriptPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py'
+$agentifyTransportContractPath = Join-Path $repo 'docs/project/AGENTIFY_PRO_TRANSPORT.md'
+$agentifyTransportSkill = Get-Content -Raw -LiteralPath $agentifyTransportSkillPath
+$agentifyTransportScript = Get-Content -Raw -LiteralPath $agentifyTransportScriptPath
+$agentifyTransportContract = Get-Content -Raw -LiteralPath $agentifyTransportContractPath
+$agentifyTransportContractNormalized = $agentifyTransportContract -replace '\s+', ' '
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $independentDirectionQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_SCIENTIFIC_AUDIT.md')
 $directionReviewBuilder = Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/scripts/build_direction_review_input.py'
@@ -209,6 +217,36 @@ foreach ($required in @(
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
+foreach ($entry in @(
+    @($agents, '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'),
+    @($operationsRole, 'review_transport_backend_selection=exactly_one_backend_before_submission'),
+    @($operationsRole, 'review_browser_contract_scope=transport_backend_browser_only'),
+    @($operationsRole, 'review_transport_agentify_formal_stable_key=hmasd-formal-pro'),
+    @($operationsRole, 'review_transport_agentify_explorer_validation_stable_key=hmasd-explorer-validation-pro'),
+    @($operationsRole, 'review_transport_agentify_monitor=forbidden'),
+    @($independentReviewRole, 'review_transport_agentify_stable_key=hmasd-independent-research-pro'),
+    @($independentReviewRole, 'review_transport_agentify_monitor=forbidden'),
+    @($independentReviewSkill, '$hmasd-agentify-pro-transport'),
+    @($agentifyTransportSkill, 'transport_backend'),
+    @($agentifyTransportSkill, 'transport_owner'),
+    @($agentifyTransportSkill, 'assignment_identity'),
+    @($agentifyTransportSkill, 'prompt_sha256'),
+    @($agentifyTransportSkill, 'timeout_ms'),
+    @($agentifyTransportContractNormalized, 'agentify_required_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39'),
+    @($agentifyTransportContractNormalized, 'runtime-only'),
+    @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
+    @($agentifyTransportContractNormalized, 'sourceDirty'),
+    @($agentifyTransportContractNormalized, 'Retiring the browser monitor or its sentinel is a separate workflow change'),
+    @($agentifyTransportScript, 'transport_owner'),
+    @($agentifyTransportScript, 'backend_selection_path'),
+    @($agentifyTransportScript, 'AGENTIFY_REQUIRED_COMMIT'),
+    @($agentifyTransportScript, 'sendCount'),
+    @($agentifyTransportScript, 'snapshot_stability_too_short')
+)) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Agentify route/contract coupling missing: $($entry[1])"
+    }
+}
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_except_pro_reviews',
@@ -254,7 +292,7 @@ foreach ($required in @(
     'local_research/pro_reviews/',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
     'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
-    'one `hmasd-pro-response-monitor`',
+    'one browser-only `hmasd-pro-response-monitor`',
     'complete response verbatim',
     '60_METHODOLOGY_PACKET.md',
     '60_DIRECTION_PACKET.md',

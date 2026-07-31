@@ -27,6 +27,19 @@ $independentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
 $independentSkill = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
+$agentifySkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
+$agentifyScriptPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py'
+$agentifyContractPath = Join-Path $repo 'docs/project/AGENTIFY_PRO_TRANSPORT.md'
+foreach ($path in @($agentifySkillPath, $agentifyScriptPath, $agentifyContractPath)) {
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "Agentify transport surface is missing: $path"
+    }
+}
+$agentifySkill = Get-Content -Raw -LiteralPath $agentifySkillPath
+$agentifyScript = Get-Content -Raw -LiteralPath $agentifyScriptPath
+$agentifyContract = Get-Content -Raw -LiteralPath $agentifyContractPath
+$agentifySkillNormalized = $agentifySkill -replace '\s+', ' '
+$agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 $independentQuestion = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $skillNormalized = $skill -replace '\s+', ' '
@@ -151,7 +164,7 @@ foreach ($required in @(
 foreach ($required in @(
     'local_research/pro_reviews/REVIEWER_CONVERSATION.json',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
-    'one `hmasd-pro-response-monitor`',
+    'one browser-only `hmasd-pro-response-monitor`',
     '45-second watches',
     '60_METHODOLOGY_PACKET.md',
     'BATCH_MANIFEST.json',
@@ -165,6 +178,43 @@ foreach ($required in @(
     'no scientific-iteration, formal-grant or project-state effect')) {
     if (-not $independentSkillNormalized.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
+    }
+}
+foreach ($entry in @(
+    @($skillNormalized, 'Before any client send, the registered transport owner freezes exactly one backend'),
+    @($skillNormalized, 'Do not initialize the browser sentinel/monitor and do not use any browser retry'),
+    @($skillNormalized, 'TRANSPORT_BACKEND.json'),
+    @($skillNormalized, '## Agentify backend only'),
+    @($skillNormalized, '## Browser backend only'),
+    @($skillNormalized, 'The remainder of this Skill applies only when the immutable selection is `browser`'),
+    @($independentSkillNormalized, 'never submit the same item through both backends'),
+    @($independentSkillNormalized, 'Do not execute the browser substitutions, watches, retry or sentinel/monitor rules'),
+    @($operations, 'review_transport_agentify_sentinel=forbidden'),
+    @($operations, 'review_transport_agentify_monitor=forbidden'),
+    @($independentOperator, 'review_transport_agentify_sentinel=forbidden'),
+    @($independentOperator, 'review_transport_agentify_monitor=forbidden'),
+    @($agentifySkillNormalized, 'Agentify owns its durable ledger and send idempotency'),
+    @($agentifySkillNormalized, 'submit --request <absolute-request.json> --receipt <new-absolute-receipt.json>'),
+    @($agentifySkillNormalized, 'submit --verify-existing'),
+    @($agentifySkillNormalized, 'verify --request <absolute-request.json> --receipt <absolute-receipt.json>'),
+    @($agentifySkillNormalized, 'archive --request <absolute-request.json> --receipt <absolute-receipt.json>'),
+    @($agentifySkillNormalized, 'the wrapper does not create a short-watch terminal state'),
+    @($agentifyContractNormalized, 'agentify_required_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39'),
+    @($agentifyContractNormalized, 'hmasd-formal-pro'),
+    @($agentifyContractNormalized, 'hmasd-explorer-validation-pro'),
+    @($agentifyContractNormalized, 'hmasd-independent-research-pro'),
+    @($agentifyContractNormalized, 'The Independent Research Pro Review Operator remains a persistent ownership task'),
+    @($agentifyContractNormalized, 'An Agentify-backed turn never creates a sentinel or monitor child'),
+    @($agentifyContractNormalized, 'Retiring the browser monitor or its sentinel is a separate workflow change'),
+    @($agentifyScript, 'MAX_TIMEOUT_MS = 45 * 60 * 1000'),
+    @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "e594eabb7059ecea20cfddbef5523ceb9562cf39"'),
+    @($agentifyScript, 'BACKEND_SELECTION_FIELDS ='),
+    @($agentifyScript, 'command_freeze'),
+    @($agentifyScript, 'OWNER_KEYS ='),
+    @($agentifyScript, 'REQUEST_FIELDS =')
+)) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Agentify transport contract missing: $($entry[1])"
     }
 }
 foreach ($required in @(

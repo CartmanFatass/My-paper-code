@@ -16,6 +16,7 @@ code_acceptance_authority=none
 scientific_authority=none
 workflow_design_authority=none
 browser_authority=registered_external_pro_conversation_only
+review_browser_contract_scope=transport_backend_browser_only
 browser_stuck_page_recovery=same_tab_reload_once_per_observed_episode
 browser_reload_fence_effect=none
 review_fence_stage_commit=full_40_hex_only
@@ -79,6 +80,15 @@ review_monitor_watch_expiry=PENDING
 review_transport_operational_error=automatic_safe_recovery
 review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains
 review_transport_misclassification_correction=append_only
+review_transport_backend_selection=exactly_one_backend_before_submission
+review_transport_backend_parallel_execution=forbidden
+review_transport_agentify_receipt_validator=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
+review_transport_agentify_formal_stable_key=hmasd-formal-pro
+review_transport_agentify_explorer_validation_stable_key=hmasd-explorer-validation-pro
+review_transport_agentify_conversation_identity=runtime_only
+review_transport_agentify_credentials=runtime_only
+review_transport_agentify_sentinel=forbidden
+review_transport_agentify_monitor=forbidden
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -116,6 +126,15 @@ early_termination_boundary=unrecoverable_external_technical_impossibility_only
 handoff_document_write_trigger=explicit_user_request_only
 ```
 
+For a review round, select exactly one transport backend before submission.
+Operations owns the Agentify stable keys `hmasd-formal-pro` and
+`hmasd-explorer-validation-pro`; their conversation IDs, URLs, model evidence,
+credentials and live registrations remain runtime state. The Agentify receipt
+validator is the only acceptance path for an Agentify result. The existing
+in-app browser path remains available as an alternative, but it is never used
+in parallel for the same round. A transport receipt does not authorize science,
+compute, code acceptance or project-state mutation.
+
 Read `docs/project/CURRENT_WORK.md`, this charter and only the paths named by the
 current operational boundary. This is the sole persistent owner of the active
 research loop. External Pro owns science, Code Project Manager owns code and
@@ -129,8 +148,10 @@ The Explorer-origin toy-validation boundary is specified by
 - `CURRENT_WORK.md`, grant balance, exact current scheduled action, review/run
   coordination and operational attention state.
 - Neutral External Pro question packaging, allow-lists, Git-visible source
-  identity, direct registered-browser transport, exact raw archival and
-  mechanical intake.
+  identity, backend-selected registered Pro transport, exact raw archival and
+  mechanical intake. The named wrapper may write only its role-owned immutable
+  backend selection and Agentify request/receipt under `logs/`, plus the exact raw archive under
+  `docs/external-review/`.
 - Exact Experiment Operator assignments and one terminal child return.
 - Mechanical validation of task identity, source commit, seed law, budgets,
   backend, completion state, required artifacts, schema, finite values and
@@ -231,8 +252,15 @@ science.
 ## External Pro transport mode
 
 Use `$hmasd-review-round` directly in this task. There is no second persistent
-transport role and no completion message back to another manager. The mode
-retains one accepted exact full-hash Assignment identity, the registered conversation,
+transport role and no completion message back to another manager. For
+`transport_backend=agentify`, use only the named Agentify Skill/wrapper; after
+its validated request/receipt pair and exact raw archive return, continue with
+normal mechanical intake and do not enter any browser recovery paragraph below.
+No sentinel, monitor, prefix correction, response retry, evidence continuation,
+reload or browser send is available on that branch.
+
+For `transport_backend=browser` only, the mode retains one accepted exact
+full-hash Assignment identity, the registered conversation,
 natural-completion detection, one live metadata-only
 `hmasd-pro-response-monitor`, evidence-access recovery, verbatim raw archival
 and provenance intake. A visible fence whose only defect is a strict prefix of
@@ -410,7 +438,7 @@ reorders or compresses that portfolio.
 
 ## Operational transport recovery
 
-A local command or argument failure, terminal monitor process, stale page,
+This section is `transport_backend=browser` only. A local command or argument failure, terminal monitor process, stale page,
 wrong message anchor or objectively correctable observation keeps the same
 review active. Reuse the same verified monitor-assignment receipt after the
 prior monitor is terminal, reacquire the same registered conversation, and

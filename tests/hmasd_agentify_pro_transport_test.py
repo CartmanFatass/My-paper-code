@@ -1,0 +1,295 @@
+from __future__ import annotations
+
+import contextlib
+import hashlib
+import importlib.util
+import io
+import json
+from pathlib import Path
+import tempfile
+from types import SimpleNamespace
+import unittest
+from unittest import mock
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = REPO_ROOT / ".agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"
+SPEC = importlib.util.spec_from_file_location("hmasd_agentify_pro_transport", SCRIPT)
+MODULE = importlib.util.module_from_spec(SPEC)
+assert SPEC and SPEC.loader
+SPEC.loader.exec_module(MODULE)
+
+
+def sha256(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+class AgentifyTransportTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        (self.root / "docs/external-review/round").mkdir(parents=True)
+        (self.root / "logs/agentify/round").mkdir(parents=True)
+        self.prompt = "Assignment: ROUND-ABC\nReply exactly."
+        self.prompt_path = self.root / "docs/external-review/round/20_PRO_OPEN_QUESTION.md"
+        self.prompt_path.write_bytes(self.prompt.encode("utf-8"))
+        self.backend_selection_path = self.root / "logs/agentify/round/TRANSPORT_BACKEND.json"
+        self.backend_selection_path.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "assignment_identity": "ROUND-ABC",
+                    "transport_backend": "agentify",
+                    "operation_key": "round-abc-stage-1",
+                    "prompt_sha256": sha256(self.prompt),
+                }
+            ),
+            encoding="utf-8",
+        )
+        self.request = {
+            "schema_version": 1,
+            "transport_backend": "agentify",
+            "transport_owner": "research_operations_manager",
+            "stable_key": "hmasd-formal-pro",
+            "provider": "chatgpt",
+            "model": "Pro",
+            "conversation_url": "https://chatgpt.com/c/conversation-1",
+            "conversation_id": "conversation-1",
+            "idempotency_key": "round-abc-stage-1",
+            "assignment_identity": "ROUND-ABC",
+            "backend_selection_path": str(self.backend_selection_path),
+            "prompt_path": str(self.prompt_path),
+            "prompt_sha256": sha256(self.prompt),
+            "timeout_ms": 300000,
+        }
+        self.validated = MODULE.validate_request(self.request, repo_root=self.root)
+        response = "STRICT_OK"
+        response_hash = sha256(response)
+        self.receipt = {
+            "operationId": "operation-1",
+            "idempotencyKey": self.request["idempotency_key"],
+            "requestFingerprint": "a" * 64,
+            "stableKey": self.request["stable_key"],
+            "provider": "chatgpt",
+            "model": "Pro",
+            "conversationUrl": self.request["conversation_url"],
+            "conversationId": self.request["conversation_id"],
+            "promptSha256": self.request["prompt_sha256"],
+            "timeoutMs": 300000,
+            "deadlineAt": 301000,
+            "status": "COMPLETE",
+            "terminalState": "NATURAL_COMPLETION_VERIFIED",
+            "sendCount": 1,
+            "createdAt": 1000,
+            "preparedAt": 1100,
+            "modelEvidence": "Pro",
+            "userMessageId": "user-1",
+            "submittedAt": 1200,
+            "assistantMessageId": "assistant-1",
+            "responseText": response,
+            "responseSha256": response_hash,
+            "snapshots": [
+                {"observedAt": 2000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
+                {"observedAt": 5000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
+            ],
+            "controls": {"stop": False, "continue": False, "retry": False, "answerNow": True},
+            "clickedControls": [],
+            "completedAt": 5100,
+        }
+
+    def tearDown(self) -> None:
+        self.temp.cleanup()
+
+    def test_complete_receipt_and_visible_answer_now_without_activation_pass(self) -> None:
+        result = MODULE.validate_receipt(self.receipt, self.validated)
+        self.assertEqual(result["assistantMessageId"], "assistant-1")
+
+    def test_owner_key_prompt_and_conversation_are_bound(self) -> None:
+        cases = [
+            ("stable_key", "hmasd-independent-research-pro", "stable_key_owner_mismatch"),
+            ("conversation_id", "other", "conversation_identity_mismatch"),
+            ("prompt_sha256", "0" * 64, "backend_selection_mismatch"),
+            ("assignment_identity", "ROUND-MISSING", "backend_selection_mismatch"),
+        ]
+        for field, value, error in cases:
+            with self.subTest(field=field), self.assertRaisesRegex(MODULE.TransportError, error):
+                bad = dict(self.request)
+                bad[field] = value
+                MODULE.validate_request(bad, repo_root=self.root)
+        self.backend_selection_path.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "assignment_identity": "ROUND-MISSING",
+                    "transport_backend": "agentify",
+                    "operation_key": "round-abc-stage-1",
+                    "prompt_sha256": sha256(self.prompt),
+                }
+            ),
+            encoding="utf-8",
+        )
+        missing = dict(self.request)
+        missing["assignment_identity"] = "ROUND-MISSING"
+        with self.assertRaisesRegex(MODULE.TransportError, "assignment_identity_not_in_prompt"):
+            MODULE.validate_request(missing, repo_root=self.root)
+        selection = json.loads(self.backend_selection_path.read_text(encoding="utf-8"))
+        selection["assignment_identity"] = "ROUND-ABC"
+        selection["prompt_sha256"] = "0" * 64
+        self.backend_selection_path.write_text(json.dumps(selection), encoding="utf-8")
+        wrong_hash = dict(self.request)
+        wrong_hash["prompt_sha256"] = "0" * 64
+        with self.assertRaisesRegex(MODULE.TransportError, "prompt_hash_mismatch"):
+            MODULE.validate_request(wrong_hash, repo_root=self.root)
+        with self.assertRaisesRegex(MODULE.TransportError, "request_field_set_mismatch"):
+            MODULE.validate_request({**self.request, "extra": "forbidden"}, repo_root=self.root)
+
+    def test_backend_selection_is_restart_stable_and_agentify_only(self) -> None:
+        selection = json.loads(self.backend_selection_path.read_text(encoding="utf-8"))
+        selection["transport_backend"] = "browser"
+        self.backend_selection_path.write_text(json.dumps(selection), encoding="utf-8")
+        with self.assertRaisesRegex(MODULE.TransportError, "backend_selection_mismatch"):
+            MODULE.validate_request(self.request, repo_root=self.root)
+
+    def test_freeze_command_is_exact_and_cannot_switch_backend(self) -> None:
+        selection = self.root / "logs/agentify/frozen/TRANSPORT_BACKEND.json"
+        args = SimpleNamespace(
+            owner="research_operations_manager",
+            assignment_identity="ROUND-FROZEN",
+            backend="agentify",
+            operation_key="round-frozen-operation",
+            prompt_sha256="b" * 64,
+            selection=selection,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            MODULE.command_freeze(args)
+            MODULE.command_freeze(args)
+            args.backend = "browser"
+            with self.assertRaisesRegex(MODULE.TransportError, "output_exists_with_different_bytes"):
+                MODULE.command_freeze(args)
+        self.assertEqual(
+            json.loads(selection.read_text(encoding="utf-8")),
+            {
+                "schema_version": 1,
+                "assignment_identity": "ROUND-FROZEN",
+                "transport_backend": "agentify",
+                "operation_key": "round-frozen-operation",
+                "prompt_sha256": "b" * 64,
+            },
+        )
+
+    def test_receipt_rejects_wrong_send_identity_completion_and_hash(self) -> None:
+        mutations = [
+            ("sendCount", 2, "receipt_sendCount_mismatch"),
+            ("assistantMessageId", "user-1", "receipt_message_identity_collision"),
+            ("responseSha256", "0" * 64, "receipt_response_hash_mismatch"),
+            ("clickedControls", ["Answer now"], "receipt_prohibited_control_activated"),
+        ]
+        for field, value, error in mutations:
+            with self.subTest(field=field), self.assertRaisesRegex(MODULE.TransportError, error):
+                bad = json.loads(json.dumps(self.receipt))
+                bad[field] = value
+                MODULE.validate_receipt(bad, self.validated)
+
+    def test_receipt_rejects_short_or_mismatched_stable_snapshots(self) -> None:
+        short = json.loads(json.dumps(self.receipt))
+        short["snapshots"][1]["observedAt"] = 4999
+        with self.assertRaisesRegex(MODULE.TransportError, "receipt_snapshot_stability_too_short"):
+            MODULE.validate_receipt(short, self.validated)
+        mismatch = json.loads(json.dumps(self.receipt))
+        mismatch["snapshots"][1]["assistantMessageId"] = "assistant-2"
+        with self.assertRaisesRegex(MODULE.TransportError, "receipt_snapshot_identity_mismatch"):
+            MODULE.validate_receipt(mismatch, self.validated)
+
+        outside = json.loads(json.dumps(self.receipt))
+        outside["snapshots"][0]["observedAt"] = outside["submittedAt"] - 1
+        with self.assertRaisesRegex(MODULE.TransportError, "receipt_snapshot_outside_response_interval"):
+            MODULE.validate_receipt(outside, self.validated)
+
+    def test_response_text_preserves_leading_and_trailing_whitespace(self) -> None:
+        receipt = json.loads(json.dumps(self.receipt))
+        receipt["responseText"] = "\n  STRICT_OK  \n"
+        receipt["responseSha256"] = sha256(receipt["responseText"])
+        for snapshot in receipt["snapshots"]:
+            snapshot["textSha256"] = receipt["responseSha256"]
+        self.assertEqual(MODULE.validate_receipt(receipt, self.validated)["responseText"], receipt["responseText"])
+
+    def test_agentify_source_identity_mismatch_fails_before_http(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        (state_dir / "state.json").write_text(
+            json.dumps(
+                {
+                    "port": 43111,
+                    "serverId": "server-1",
+                    "sourceCommit": "0" * 40,
+                    "sourceDirty": False,
+                }
+            ),
+            encoding="utf-8",
+        )
+        (state_dir / "token.txt").write_text("token", encoding="utf-8")
+        with mock.patch.object(MODULE, "_http_json") as http_json:
+            with self.assertRaisesRegex(MODULE.TransportError, "agentify_state_source_identity_mismatch"):
+                MODULE.call_agentify(self.validated, state_dir=state_dir, verify_existing=False)
+            http_json.assert_not_called()
+
+        (state_dir / "state.json").write_text(
+            json.dumps(
+                {
+                    "port": 43111,
+                    "serverId": "server-1",
+                    "sourceCommit": MODULE.AGENTIFY_REQUIRED_COMMIT,
+                    "sourceDirty": False,
+                }
+            ),
+            encoding="utf-8",
+        )
+        wrong_health = {
+            "ok": True,
+            "serverId": "server-1",
+            "sourceCommit": "0" * 40,
+            "sourceDirty": False,
+        }
+        with mock.patch.object(MODULE, "_http_json", return_value=wrong_health) as http_json:
+            with self.assertRaisesRegex(MODULE.TransportError, "agentify_server_identity_mismatch"):
+                MODULE.call_agentify(self.validated, state_dir=state_dir, verify_existing=True)
+            http_json.assert_called_once()
+
+        with self.assertRaisesRegex(MODULE.TransportError, "agentify_state_dir_not_absolute"):
+            MODULE.call_agentify(self.validated, state_dir=Path("relative-state"), verify_existing=True)
+
+    def test_archive_is_exact_and_never_overwrites_different_bytes(self) -> None:
+        output = self.root / "docs/external-review/round/21_PRO_OPEN_RAW.md"
+        MODULE._atomic_write_new(output, self.receipt["responseText"].encode("utf-8"))
+        self.assertEqual(output.read_bytes(), b"STRICT_OK")
+        MODULE._atomic_write_new(output, b"STRICT_OK")
+        with self.assertRaisesRegex(MODULE.TransportError, "output_exists_with_different_bytes"):
+            MODULE._atomic_write_new(output, b"DIFFERENT")
+
+    def test_command_archive_validates_and_rereads_exact_bytes(self) -> None:
+        request_path = self.root / "logs/agentify/round/request.json"
+        receipt_path = self.root / "logs/agentify/round/receipt.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        receipt_path.write_text(json.dumps(self.receipt), encoding="utf-8")
+        raw_output = self.root / "docs/external-review/round/21_PRO_OPEN_RAW.md"
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            MODULE.command_archive(
+                SimpleNamespace(request=request_path, receipt=receipt_path, raw_output=raw_output)
+            )
+        self.assertEqual(raw_output.read_bytes(), self.receipt["responseText"].encode("utf-8"))
+
+    def test_command_verify_returns_stable_operation_identity(self) -> None:
+        request_path = self.root / "logs/agentify/round/request-verify.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-verify.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        receipt_path.write_text(json.dumps(self.receipt), encoding="utf-8")
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            with contextlib.redirect_stdout(output):
+                MODULE.command_verify(SimpleNamespace(request=request_path, receipt=receipt_path))
+        self.assertIn("operation_id=operation-1", output.getvalue())
+        self.assertIn(str(receipt_path.resolve()), output.getvalue())
+
+
+if __name__ == "__main__":
+    unittest.main()

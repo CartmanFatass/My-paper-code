@@ -23,6 +23,14 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
+review_transport_backend_selection=exactly_one_backend_before_submission
+review_transport_backend_parallel_execution=forbidden
+review_transport_agentify_receipt_validator=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
+review_transport_agentify_stable_key=hmasd-independent-research-pro
+review_transport_agentify_conversation_identity=runtime_only
+review_transport_agentify_credentials=runtime_only
+review_transport_agentify_sentinel=forbidden
+review_transport_agentify_monitor=forbidden
 ```
 
 This task performs low-frequency External Pro transport for independent research
@@ -47,14 +55,21 @@ the registered direction-input builder may create one immutable batch manifest
 and one immutable `22_DIRECTION_INPUT.md` per batch item there, and the
 registered cross-task handoff helper may
 copy one completed exact packet to `temp/handoffs/`. Shell use is read-only
-except for that builder and the registered sentinel, receipt and handoff
-helpers within those exact roots. Never use Git.
+except for that builder, the browser sentinel/receipt helpers, the named
+Agentify transport wrapper, and the registered handoff helper within their
+existing exact roots. The named wrapper may write only the immutable backend
+selection, Agentify request/receipt and exact raw archive under
+`local_research/pro_reviews/`.
+Never use Git.
 
-Reuse the registered full-hash fence, attachment identity, natural-completion,
-single-sentinel and single-monitor rules. The one native child sees metadata
-only and returns to this task. A 45-second watch is one bounded observation,
-not the response deadline. Never activate `Answer now`, duplicate the question,
-archive an incomplete answer or classify scientific quality.
+For `transport_backend=browser`, reuse the registered full-hash fence, attachment
+identity, natural-completion, single-sentinel and single-monitor rules. The one
+native child sees metadata only and returns to this task. A 45-second watch is
+one bounded observation, not the response deadline. For
+`transport_backend=agentify`, use
+only the named wrapper and create no child, sentinel or monitor. Neither backend
+may activate `Answer now`, duplicate the question, archive an incomplete answer
+or classify scientific quality.
 
 After exact natural completion, archive the visible response and mechanical
 intake locally. A format-complete methodology response becomes an
@@ -70,7 +85,8 @@ skipping to a later item. A normal direction disposition is terminal for that
 item and does not stop the remaining authorized batch.
 
 One user instruction may authorize one immutable ordered batch. Run at most one
-Pro turn, sentinel and monitor at a time. After an item's exact packet is
+Pro turn at a time; a browser turn has at most one sentinel/monitor pair and an
+Agentify turn has one ledger operation and no child. After an item's exact packet is
 archived and its handoff is routed to Explorer, use the registered batch gate to
 select the next item without another user prompt. Never skip, reorder, compare
 or rank items, expose the batch or another candidate to Pro, or create a new
@@ -81,3 +97,12 @@ or launch compute.
 
 Cross-task routing passes the locked target session, model and thinking
 explicitly.
+
+For an independent-review turn, select exactly one transport backend before
+submission. The Agentify stable key `hmasd-independent-research-pro` is owned
+by this role; its conversation ID, URL, model evidence, credentials and live
+registration are runtime-only. Validate Agentify receipts through the named
+transport Skill/script before archival. The existing in-app browser path may
+be used instead, but Agentify and the browser path are never run in parallel
+for the same turn. This transport choice does not add scientific, formal,
+runtime, Git or project-state authority.

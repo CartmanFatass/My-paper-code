@@ -128,7 +128,7 @@ A future project-external write requires a new explicit user instruction for its
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
-- Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
+- Pro transport: browser mechanics in `.agents/skills/hmasd-review-round/SKILL.md`; optional receipt-bearing Agentify in `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key and backend-selection mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 - Independent methodology and ordered single-direction Pro review batches: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.

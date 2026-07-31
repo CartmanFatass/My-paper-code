@@ -19,18 +19,36 @@ This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
-The applicable registered transport owner activates `$hmasd-review-round` in
-the same persistent task and uses `$browser:control-in-app-browser` for
-submission and archival. Research Operations Manager alone owns formal review
-packages and state. The Independent Research Pro Review Operator may use these
-mechanics only through `$hmasd-independent-research-pro-review`, with one
-separate conversation and local `local_research/pro_reviews/` storage. After one
-exact full-hash Assignment identity is verified in the main body or its
-attachment payload, assign
-the registered nonpersistent `hmasd-pro-response-monitor` to observe the
-transport-owner-brokered metadata sentinel for that turn. The child never
-opens the browser. Do not create another transport task, relay, ad hoc monitor or manager
-polling loop.
+## Backend selection fork
+
+Before any client send, the registered transport owner freezes exactly one
+backend for the round: the existing browser path or the optional Agentify path.
+After the common input checks below, write one new immutable
+`TRANSPORT_BACKEND.json` in the role-owned round root with exactly
+`schema_version=1`, the exact `assignment_identity`, and
+`transport_backend=browser|agentify`, plus the immutable `operation_key` and
+exact prompt SHA-256. The record is the authority for every send, recovery and
+restart. It is never overwritten or changed after creation.
+The browser path must refuse an Agentify selection; the Agentify wrapper must
+refuse a browser selection. Never submit, monitor or recover the same round
+through both backends.
+
+Create or exactly revalidate that record only through the registered helper:
+
+```powershell
+& C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
+  .agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py `
+  freeze --owner <research_operations_manager|independent_research_review_operator> `
+  --assignment-identity <exact-identity> --backend <browser|agentify> `
+  --operation-key <round-unique-key> --prompt-sha256 <exact-64-hex> `
+  --selection <absolute-role-owned-round-root/TRANSPORT_BACKEND.json>
+```
+
+Agentify is eligible only when its pinned local endpoint is healthy and the
+runtime binding supplies the exact stable key, conversation identity and Pro
+model. Before the immutable selection record exists, the owner may instead
+choose the browser path. After selection, endpoint failure cannot authorize a
+backend switch or another send.
 
 ## Required inputs
 
@@ -47,7 +65,7 @@ FORMAL_RESULT_SCIENTIFIC_DISPOSITION
 INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT
 ```
 
-Before browser submission:
+Before either backend submission:
 
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
@@ -59,13 +77,43 @@ Before browser submission:
    `Assignment` mode. A short, uppercase or otherwise nonexact commit is an
    error before browser interaction. Preserve the exact complete payload bytes
    that will be sent and require them to contain this block exactly once.
-4. Select only the role-owned registered conversation. Formal reviews read
-   `docs/external-review/REVIEWER_CONVERSATIONS.json`; an independent
-   methodology audit reads only its local registry under
-   `local_research/pro_reviews/` and must use a different conversation ID.
+4. Select only the role-owned registered conversation. A browser selection uses
+   its existing role-owned registry. An Agentify selection resolves only the
+   role-owned stable key and live runtime binding described by the Agentify
+   contract; a repository registry cannot supply or override that identity.
 
 An identity mismatch stops transport for correction; it does not authorize
 editing, paraphrasing, or validating the package.
+
+## Agentify backend only
+
+When the immutable selection is `agentify`, activate
+`.agents/skills/hmasd-agentify-pro-transport/SKILL.md` and use its wrapper for
+submission, same-operation observation, receipt validation and archival. Do
+not initialize the browser sentinel/monitor and do not use any browser retry,
+response-repair send, evidence continuation or stuck-page recovery. After the
+validated raw archive returns to the registered owner, leave this transport
+procedure and continue only the owner's normal mechanical intake. The complete
+validated request/receipt pair is the only Agentify transport evidence. A
+missing, conflicting or incomplete pair fails closed without another send.
+
+## Browser backend only
+
+The remainder of this Skill applies only when the immutable selection is
+`browser`. Reload `TRANSPORT_BACKEND.json` before every client send, correction,
+retry or recovery and refuse unless it still names this assignment and
+`transport_backend=browser`. The applicable registered transport owner activates
+`$hmasd-review-round` in the same persistent task and uses
+`$browser:control-in-app-browser` for submission and archival. Research
+Operations Manager alone owns formal review packages and state. The Independent
+Research Pro Review Operator may use these mechanics only through
+`$hmasd-independent-research-pro-review`, with one separate conversation and
+local `local_research/pro_reviews/` storage. After one exact full-hash Assignment
+identity is verified in the main body or its attachment payload, assign the
+registered nonpersistent `hmasd-pro-response-monitor` to observe the
+transport-owner-brokered metadata sentinel for that turn. The child never opens
+the browser. Do not create another transport task, relay, ad hoc monitor or
+manager polling loop.
 
 
 ## Registered-owner transport mode

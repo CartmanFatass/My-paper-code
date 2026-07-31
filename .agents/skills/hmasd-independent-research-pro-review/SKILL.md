@@ -10,10 +10,12 @@ description: Use only in the registered Independent Research Pro Review Operator
 Operate only as the registered Independent Research Pro Review Operator. Read
 the root router, `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, the
 exact methodology assignment or ordered direction-audit batch and
-`.agents/roles/EXTERNAL_PRO.md`. Then read
-`$hmasd-review-round` completely and apply its fence, attachment-identity,
-single-sentinel, single-monitor, natural-completion and recovery mechanics under
-this Skill's separate-conversation and local-storage boundary.
+`.agents/roles/EXTERNAL_PRO.md`. Then read `$hmasd-review-round` completely and
+apply its immutable backend fork. A browser selection uses its fence,
+attachment-identity, single-sentinel, single-monitor, natural-completion and
+recovery mechanics. An Agentify selection uses only its request/receipt and
+exact-archive branch. Both remain under this Skill's separate-conversation and
+local-storage boundary.
 
 Do not load Research Operations Manager, `CURRENT_WORK.md`, formal review
 rounds, runtime evidence, code, CDC state or active portfolios. This Skill
@@ -89,8 +91,10 @@ local_research/pro_reviews/<review_id>/
   50_MECHANICAL_INTAKE_RECORD.md
   60_METHODOLOGY_PACKET.md or 60_DIRECTION_PACKET.md
   assignment_payload.txt
-  sentinel.jsonl
-  monitor_assignment_receipt.json
+  TRANSPORT_BACKEND.json
+  sentinel.jsonl (browser only)
+  monitor_assignment_receipt.json (browser only)
+  agentify_request.json and agentify_receipt.json (Agentify only)
 
 local_research/pro_reviews/<batch_id>/
   BATCH_MANIFEST.json
@@ -103,8 +107,10 @@ local_research/pro_reviews/<batch_id>/
     70_EXPLORER_HANDOFF.json
     90_TERMINAL_BLOCKER.json (only on a terminal blocker)
     assignment_payload.txt
-    sentinel.jsonl
-    monitor_assignment_receipt.json
+    TRANSPORT_BACKEND.json
+    sentinel.jsonl (browser only)
+    monitor_assignment_receipt.json (browser only)
+    agentify_request.json and agentify_receipt.json (Agentify only)
 ```
 
 Copy the committed question text exactly into the local question path. For a
@@ -122,21 +128,40 @@ submission.
 
 ## Transport without formal-state effects
 
-Follow `$hmasd-review-round` with these role substitutions only:
+Follow `$hmasd-review-round` with these role substitutions only. Before the
+first send, freeze exactly one backend for the item. The default remains the
+browser path; if Agentify is selected, activate
+`$hmasd-agentify-pro-transport` and route the complete item through its
+request, verify and archive commands. Do not initialize a browser sentinel or
+monitor for an Agentify item, and never submit the same item through both
+backends. The Agentify receipt must bind the exact prompt hash, stable key,
+runtime conversation/model, `sendCount=1`, exact message IDs, two stable
+snapshots separated by at least three seconds, response hash and
+`clickedControls=[]`; the validator derives that no prohibited control was
+activated. An incomplete or conflicting receipt is a blocker without another
+send.
+
+When Agentify is selected, the validated request/receipt pair and exact raw
+archive return directly to **Return one exact packet** below for normal
+mechanical intake. Do not execute the browser substitutions, watches, retry or
+sentinel/monitor rules in between.
+
+When browser is selected, follow these role substitutions only:
 
 - `registered transport owner` is this task;
 - the conversation registry is the local independent registry;
-- all raw, intake, payload, sentinel and receipt paths are under this review
-  directory;
+- all raw, intake, payload and receipt paths are under this review directory;
+- browser-only sentinel paths are also under this directory;
 - no step reads, writes or resumes formal operations;
-- one `hmasd-pro-response-monitor` returns locally to this task.
+- one browser-only `hmasd-pro-response-monitor` returns locally to this task.
 
-Do not paraphrase the question, evidence allow-list or Pro instruction. Pro may
-reason for 10-30 minutes or longer. Continue bounded 45-second watches in the
-same monitor; one watch expiry is `PENDING`. Never activate `Answer now`, create
-a second monitor or submit a duplicate question.
+Do not paraphrase the question, evidence allow-list or Pro instruction. In a
+browser turn, Pro may reason for 10-30 minutes or longer. Continue bounded
+45-second watches in the same monitor; one watch expiry is `PENDING`. Never
+activate `Answer now`, create a second monitor or submit a duplicate question.
 
-At most one batch item may own an active Pro turn, sentinel or monitor. A later
+At most one batch item may own an active Pro turn. A browser item may own one
+sentinel/monitor pair; an Agentify item may own one ledger operation. A later
 item cannot start until the current item has exact natural completion, exact
 archive and a `ROUTE_SENT` handoff receipt bound to the direction packet's byte
 count and SHA-256. A scientific disposition of `VALIDATION_READY`,
@@ -173,10 +198,10 @@ After natural completion:
    the same authorized batch without another user prompt; `COMPLETE` terminates
    it.
 
-If the response is format-incomplete, use the existing once-only response
-contract retry only when its full mechanical predicate holds. Otherwise return
-the exact terminal blocker. Never invent a missing principle or continue into
-Explorer workflow mutation.
+If a browser response is format-incomplete, use the existing once-only response
+contract retry only when its full mechanical predicate holds. Agentify does not
+use that browser retry path. Otherwise return the exact terminal blocker. Never
+invent a missing principle or continue into Explorer workflow mutation.
 
 Stop after one terminal methodology return, one completed ordered batch, or one
 batch blocker. Each Pro turn remains a single-direction audit and never compares
