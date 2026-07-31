@@ -1,0 +1,777 @@
+{
+  "document_kind": "independent_research_direction_audit_advisory_delta_v4",
+  "created_at_local": "2026-07-31",
+  "formal": false,
+  "scientific_iteration_cost": 0,
+  "formal_project_effect": "none",
+  "authority": {
+    "role": "independent_research_explorer",
+    "session_id": "019fb398-0a76-7bd0-9400-c5ea4eefa5de",
+    "model": "gpt-5.6-sol",
+    "thinking": "ultra",
+    "write_scope": "local_research_except_pro_reviews",
+    "effect": "advisory_revision_only"
+  },
+  "reviewed_artifact": {
+    "path": "local_research/2026-07-30_variable_agent_population_inspiration_campaign_v3.json",
+    "bytes_observed_before_delta": 284196,
+    "campaign_id": "VAP-MYLIB-2026-07-30-C1",
+    "workflow_commit": "5179398",
+    "candidate_id": "CAND-VAP-FOLR-CORE",
+    "candidate_name": "FOLR-Core",
+    "preservation_rule": "The reviewed v3 campaign artifact remains unchanged. This file is a candidate-scoped later advisory delta and does not rewrite its historical packets or statuses."
+  },
+  "review_packet": {
+    "source_role": "independent_research_review_operator",
+    "source_session_id": "019fb311-6137-7781-9708-3df24da34a4b",
+    "handoff_path": "temp/handoffs/20260731T061807197486Z_independent_direction_vap_mylib_c1_cand_vap_folr_core_aede04414f9f.txt",
+    "handoff_bytes": 28846,
+    "handoff_sha256": "aede04414f9ff8185949f99a1c674e801950c4bb7565667005a74588b016d379",
+    "handoff_purpose": "independent_direction_vap_mylib_c1_cand_vap_folr_core",
+    "question_contract_commit": "4b03d37c5746c7a9d5c188f61a27ff74a611ad95",
+    "mechanical_verification": "LONG_TEXT_HANDOFF_VERIFIED",
+    "direction_disposition": "REVISION_REQUIRED",
+    "required_revision_count": 5,
+    "validation_status_at_intake": "blocked_pending_bounded_scientific_contract_revisions"
+  },
+  "disposition_control": {
+    "operator_disposition_preserved_exactly": "REVISION_REQUIRED",
+    "explorer_reinterpretation": "forbidden_and_not_performed",
+    "revision_work_status": "five_named_revisions_materialized_as_advisory_delta",
+    "reaudit_status": "not_requested_not_performed",
+    "validation_authorization": false,
+    "compute_authorization": false,
+    "portfolio_ranking_effect": "none",
+    "next_audit_item_selection": "not_performed"
+  },
+  "candidate_boundary": {
+    "retained_claim": "FOLR-Core is a deterministic lifecycle, state-admission and delayed-credit transducer for an unchanged base MARL learner under authoritative changing-membership events.",
+    "non_claims": [
+      "It does not learn membership management or lifecycle decisions.",
+      "It adds no reward, intrinsic objective, exploration policy or learned release gate.",
+      "It assumes no state portability across an ownership epoch boundary.",
+      "It does not include optional restoration or SCOPE-1S.",
+      "A conformance pass is not evidence of return, sample-efficiency, coordination or generalization benefit."
+    ],
+    "base_learner_contract": "Policy, critic, optimizer, task reward and ordinary exploration are unchanged; Core changes only admissible history, state continuity, masks and action-instance credit ownership."
+  },
+  "claim_split": {
+    "conformance_claim": {
+      "claim_id": "FOLR-C1-CONFORMANCE",
+      "text": "For every trace inside the registered authoritative-event contract, FOLR-Core admits no stale or wrong-owner state, action, message or learner update; never transfers state through slot reuse or an epoch boundary; and resolves or explicitly cancels every admitted action receipt without duplicate consumption."
+    },
+    "downstream_marl_claim": {
+      "claim_id": "FOLR-C2-DOWNSTREAM",
+      "retained": true,
+      "text": "Conditional on a complete conformance pass, the full continuation-plus-origin-credit Core can improve normalized primitive-time team return over the complete post-event roster spell relative to matched MaskReset under held-out partner policies.",
+      "interpretation_limit": "This claim is restricted to the registered task, roster-event and held-out-partner populations. It cannot be inferred from conformance, mechanism counters or training-partner results alone."
+    },
+    "claim_precedence": "Any conformance failure blocks every downstream interpretation."
+  },
+  "scientific_transducer": {
+    "contract_id": "FOLR-CORE-R4-TRANSDUCER",
+    "authoritative_inputs": [
+      "authenticated persistent owner token",
+      "reusable slot token",
+      "unique lifecycle event id and monotone event sequence",
+      "lifecycle operation and logical boundary",
+      "owner- and epoch-tagged observations and messages",
+      "legal action mask available at action admission",
+      "action-instance-tagged outcome or cancellation",
+      "registered environment action-lifecycle semantics"
+    ],
+    "registered_symbols": {
+      "owner_id": "Authenticated persistent pseudonym. At most one epoch for an owner may be active in a team trace.",
+      "slot_id": "Reusable physical position with no ownership or state-continuity meaning.",
+      "owner_epoch": "Strictly increasing positive integer per owner. Every accepted join while inactive, including rejoin, creates a new epoch.",
+      "roster_version": "Strictly increasing integer advanced once by each accepted nonduplicate lifecycle transaction.",
+      "event_seq": "Strictly increasing team-trace lifecycle sequence; gaps quarantine the trace until resolved.",
+      "action_instance_id": "Unique immutable id assigned once at action admission and never reused.",
+      "D_outcome_max": "Finite maximum action-to-terminal-outcome latency declared by the environment before validation.",
+      "D_event_replay_max": "Finite maximum duplicate-event or duplicate-outcome replay latency declared before validation.",
+      "B_open": "D_outcome_max plus one logical boundary.",
+      "B_tombstone": "max(D_outcome_max, D_event_replay_max) plus one logical boundary."
+    },
+    "binding_gate": "No trace or stochastic validation is admissible until D_outcome_max, D_event_replay_max, the boundary ordering and the in-flight-action rule are finite and frozen for that environment.",
+    "total_order_contract": {
+      "boundary_modes": [
+        {
+          "mode": "OUTCOME_BEFORE_LIFECYCLE",
+          "order": ["prior-action outcome", "lifecycle transaction", "learner receipt consumption", "current observation and message admission", "current action admission"]
+        },
+        {
+          "mode": "LIFECYCLE_BEFORE_OUTCOME",
+          "order": ["lifecycle transaction", "prior-action outcome", "learner receipt consumption", "current observation and message admission", "current action admission"]
+        }
+      ],
+      "selection_rule": "Exactly one mode is frozen per environment binding; the adversarial conformance suite exercises both as separate bindings.",
+      "same_phase_tie_break": "Unique source sequence, then unique event or action-instance id. A remaining tie is a contract conflict and quarantines action and learner admission.",
+      "policy_version_rule": "Learner consumption precedes current action admission, and each new receipt stores the policy version actually used after that boundary's registered learner step."
+    },
+    "event_definitions": {
+      "join": "An inactive authenticated owner becomes active in an unused slot and receives a fresh owner epoch.",
+      "leave": "The currently active owner and epoch in a slot become inactive; the epoch is permanently closed.",
+      "replacement": "One atomic transaction closes the current owner epoch and activates a different owner with that owner's fresh epoch in the same slot.",
+      "rejoin": "A previously seen but currently inactive owner joins after an absence; it is a join with a fresh epoch and no cross-epoch state read.",
+      "slot_reuse": "Any later activation in a previously used slot. Slot history has no read permission.",
+      "duplicate": "The same event id, sequence and payload is delivered again; it is an idempotent no-op.",
+      "stale": "A nonduplicate lifecycle event has an event sequence below the next required sequence; it is rejected with no state effect.",
+      "conflict": "An event id is reused with a different payload, an owner is activated twice, a slot has two active owners, or an event sequence gap exists; the affected trace is quarantined fail-closed."
+    },
+    "state_dependency_manifest": [
+      {
+        "state_id": "S01_LIFECYCLE_LEDGER",
+        "class": "globally_shared_authoritative",
+        "contents": "active owner, active epoch and slot binding; last accepted event sequence; roster version; accepted event-id digest",
+        "readers": ["state admission", "mask builder", "action admission", "receipt transition"],
+        "writers": ["accepted lifecycle transaction only"],
+        "join_leave_rule": "Persist ledger; apply one accepted transaction atomically.",
+        "slot_reuse_rule": "Overwrite only the active binding after closing the prior epoch; never expose prior slot state.",
+        "action_effect": "Authoritative gate only; not an actor feature unless every arm receives the identical declared feature."
+      },
+      {
+        "state_id": "S02_OWNER_EPOCH_COUNTER",
+        "class": "owner_global_monotone",
+        "contents": "last issued epoch number per authenticated owner",
+        "readers": ["lifecycle ledger"],
+        "writers": ["accepted activation while owner is inactive"],
+        "join_leave_rule": "Increment on every first join or rejoin; never decrement or reopen.",
+        "slot_reuse_rule": "Independent of slot.",
+        "action_effect": "Addressing only."
+      },
+      {
+        "state_id": "S03_OWNER_PRIVATE_RECURRENCE",
+        "class": "uninterrupted_survivor_private",
+        "contents": "actor or learner recurrence whose declared input ancestry contains only that owner's self observation, self action, self outcome history and roster-invariant public signals",
+        "readers": ["same active owner epoch only"],
+        "writers": ["same active owner epoch only"],
+        "join_leave_rule": "Fresh zero or declared base initialization on join, rejoin or replacement; preserve only while the exact owner epoch remains continuously active.",
+        "roster_change_rule": "Preserve for uninterrupted survivors only if the ancestry allowlist remains satisfied.",
+        "slot_reuse_rule": "No read by a later slot occupant.",
+        "action_effect": "May affect the survivor's next action.",
+        "fail_closed_rule": "Any recurrence touched by teammate, roster, message or partner-policy input is not S03 and is classified as S04."
+      },
+      {
+        "state_id": "S04_ROSTER_DEPENDENT_RECURRENCE",
+        "class": "roster_dependent",
+        "contents": "attention memory, teammate belief, joint critic recurrence, role or convention state, aggregate-set memory, or any hidden state with cross-agent ancestry",
+        "readers": ["current active owner epochs under current roster version"],
+        "writers": ["current valid representation or communication inputs"],
+        "join_leave_rule": "Invalidate for every active owner before the first action following any accepted roster-version change; rebuild only from current-roster inputs.",
+        "slot_reuse_rule": "No cross-owner or cross-roster read.",
+        "action_effect": "May affect action, value, communication or later learning."
+      },
+      {
+        "state_id": "S05_EDGE_MESSAGE_CACHE",
+        "class": "roster_dependent",
+        "contents": "sender-receiver message cache, edge feature, adjacency or communication history",
+        "readers": ["current sender and receiver epochs only"],
+        "writers": ["messages admitted under current roster version"],
+        "join_leave_rule": "Purge every edge incident to a changed owner and every derived aggregate before the next action; this revision uses full current-roster rebuild for auditability.",
+        "slot_reuse_rule": "Prior slot edges are inaccessible.",
+        "action_effect": "May affect representation or action through communication."
+      },
+      {
+        "state_id": "S06_CURRENT_OBSERVATION_CACHE",
+        "class": "nonpersistent_owner_epoch_tagged",
+        "contents": "most recent accepted observation with owner, epoch, roster version and emission boundary",
+        "readers": ["current representation and action admission"],
+        "writers": ["observation admission gate"],
+        "join_leave_rule": "Clear on every lifecycle transaction before current-boundary admission.",
+        "slot_reuse_rule": "No carryover.",
+        "action_effect": "Direct policy input."
+      },
+      {
+        "state_id": "S07_TYPED_MASKS",
+        "class": "roster_dependent_derived",
+        "contents": "representation, communication, action and credit eligibility masks",
+        "readers": ["respective named path only"],
+        "writers": ["pure rebuild from ledger, current tags, legal mask and receipt state"],
+        "join_leave_rule": "Rebuild after every accepted lifecycle transaction and before any later path admission.",
+        "slot_reuse_rule": "Owner and epoch tags dominate slot.",
+        "action_effect": "Defines which information, messages, actions and updates may be admitted."
+      },
+      {
+        "state_id": "S08_OWNER_EXPLORATION_STREAM",
+        "class": "uninterrupted_survivor_private",
+        "contents": "owner-epoch-keyed random stream position for the unchanged base exploration process",
+        "readers": ["same active owner epoch action selection"],
+        "writers": ["one advancement per admitted action for that owner epoch"],
+        "join_leave_rule": "Fresh stream on every new epoch; preserve for uninterrupted survivors; lifecycle events do not themselves consume draws.",
+        "slot_reuse_rule": "Never keyed by slot.",
+        "action_effect": "Changes exploratory action but adds no new exploration objective."
+      },
+      {
+        "state_id": "S09_ACTION_RECEIPT",
+        "class": "action_instance_owned",
+        "contents": "immutable origin and action context plus bounded mutable receipt status",
+        "readers": ["outcome router", "learner admission", "conformance observer"],
+        "writers": ["action admission creates once; receipt FSM changes status only"],
+        "join_leave_rule": "Never rekey to the current slot occupant; close, detach or resolve only by the registered FSM.",
+        "slot_reuse_rule": "Slot reuse has no effect on receipt ownership.",
+        "action_effect": "Controls whether and where delayed training consequence is admitted."
+      },
+      {
+        "state_id": "S10_ACTION_CONTINUATION_PROXY",
+        "class": "action_instance_owned",
+        "contents": "environment-declared continuing-action state or completion proxy",
+        "readers": ["receipt FSM and outcome router only"],
+        "writers": ["environment action-lifecycle interface"],
+        "join_leave_rule": "Follow CANCEL_ON_LEAVE or AWAIT_OUTCOME exactly; never attach to a new owner epoch.",
+        "slot_reuse_rule": "Independent of slot after admission.",
+        "action_effect": "Determines terminal receipt handling, not current action ownership."
+      },
+      {
+        "state_id": "S11_REPLAY_OR_UPDATE_RECORD",
+        "class": "action_instance_owned",
+        "contents": "training sample linked to one consumed receipt and its immutable origin tags",
+        "readers": ["unchanged base learner"],
+        "writers": ["exactly-once learner receipt consumption"],
+        "join_leave_rule": "Persist or expire under the base replay policy but never reassign owner or epoch.",
+        "slot_reuse_rule": "No slot-keyed lookup is permitted.",
+        "action_effect": "May change later policy parameters through ordinary task learning."
+      },
+      {
+        "state_id": "S12_GLOBAL_LEARNER_STATE",
+        "class": "globally_shared",
+        "contents": "shared policy and critic parameters, optimizer state, update counter and fixed algorithm hyperparameters",
+        "readers": ["all active owners through the unchanged shared learner"],
+        "writers": ["ordinary valid learner updates only"],
+        "join_leave_rule": "Persist; no lifecycle-specific clone, reset or auxiliary update.",
+        "slot_reuse_rule": "Independent of slot and owner.",
+        "action_effect": "Defines the shared policy and changes only through the unchanged learning objective."
+      },
+      {
+        "state_id": "S13_GLOBAL_NORMALIZATION",
+        "class": "globally_shared_masked",
+        "contents": "observation or return normalization statistics used by the base learner",
+        "readers": ["same paths in all factorial arms"],
+        "writers": ["current valid active-owner observations or consumed valid receipts only"],
+        "join_leave_rule": "Persist with identical update rule across arms; padded, stale and inactive entries have zero contribution.",
+        "slot_reuse_rule": "No slot-specific statistics unless explicitly reclassified and reset.",
+        "action_effect": "May rescale actor input and is therefore included in matching."
+      },
+      {
+        "state_id": "S14_FORWARD_TEMPORARIES",
+        "class": "nonpersistent",
+        "contents": "logits, attention scratch, temporary set aggregates and per-forward caches",
+        "readers": ["one decision only"],
+        "writers": ["current forward pass"],
+        "join_leave_rule": "Discard after each decision and always discard across a lifecycle boundary.",
+        "slot_reuse_rule": "No persistence.",
+        "action_effect": "Affects only the current decision."
+      }
+    ],
+    "manifest_completeness_rule": "Every concrete action- or update-affecting variable must bind to exactly one S01-S14 class before validation. An unbound or multiply bound variable is unreadable, nonpersistent and a conformance failure; it cannot be silently assigned by implementation convenience.",
+    "lifecycle_transition_table": [
+      {
+        "precondition": "inactive owner; unused active slot; next event sequence",
+        "event": "JOIN",
+        "transition": "increment owner epoch; bind owner and new epoch to slot; increment roster version; initialize S03 and S08; clear or rebuild S04-S07",
+        "receipt_effect": "none for prior epochs except their already registered FSM state",
+        "result": "ACCEPT"
+      },
+      {
+        "precondition": "same event id, sequence and payload was already accepted",
+        "event": "ANY_LIFECYCLE_DUPLICATE",
+        "transition": "no state, mask, epoch, receipt or counter change",
+        "receipt_effect": "none",
+        "result": "IDEMPOTENT_NO_OP"
+      },
+      {
+        "precondition": "matching active owner, epoch and slot; next event sequence",
+        "event": "LEAVE",
+        "transition": "close epoch permanently; unbind slot; increment roster version; make leaving-owner S03-S08 unreadable; preserve S03 and S08 only for uninterrupted survivors; rebuild survivor S04-S07",
+        "receipt_effect": "apply the frozen in-flight-action rule to every OPEN receipt of the closed epoch",
+        "result": "ACCEPT"
+      },
+      {
+        "precondition": "active old owner in slot; different inactive new owner; next event sequence",
+        "event": "REPLACEMENT",
+        "transition": "atomically perform old-owner leave then new-owner join in one roster-version transition; new owner receives a fresh epoch",
+        "receipt_effect": "old receipts retain old immutable origin and follow the in-flight rule",
+        "result": "ACCEPT"
+      },
+      {
+        "precondition": "previously seen owner is inactive; target slot unused; next event sequence",
+        "event": "REJOIN",
+        "transition": "increment owner epoch; initialize all owner-private state fresh; never read a prior epoch; rebuild roster-dependent state",
+        "receipt_effect": "prior-epoch receipts remain prior-epoch records only",
+        "result": "ACCEPT"
+      },
+      {
+        "precondition": "slot was used earlier but is currently unused; incoming owner inactive; next event sequence",
+        "event": "SLOT_REUSE",
+        "transition": "process as JOIN or REJOIN from owner identity; slot history supplies no state",
+        "receipt_effect": "none",
+        "result": "ACCEPT"
+      },
+      {
+        "precondition": "nonduplicate event sequence below the next required sequence",
+        "event": "STALE_EVENT",
+        "transition": "reject with no state effect and log stale-event witness",
+        "receipt_effect": "none",
+        "result": "REJECT_NO_EFFECT"
+      },
+      {
+        "precondition": "event sequence above the next required sequence, contradictory duplicate, active owner joined again, occupied slot joined, or owner/epoch mismatch",
+        "event": "CONFLICT_OR_GAP",
+        "transition": "quarantine the affected team trace; admit no action, message or learner update until authoritative reconciliation",
+        "receipt_effect": "existing receipts remain immutable; terminal outcomes may be logged but not consumed while quarantined",
+        "result": "FAIL_CLOSED_QUARANTINE"
+      }
+    ],
+    "in_flight_action_contract": {
+      "allowed_bindings": [
+        {
+          "binding": "CANCEL_ON_LEAVE",
+          "rule": "Every OPEN receipt owned by the closing epoch becomes CANCELLED_NO_LEARN. A later outcome is rejected against the tombstone and has no learner effect."
+        },
+        {
+          "binding": "AWAIT_OUTCOME",
+          "rule": "Every OPEN receipt owned by the closing epoch becomes DETACHED_OPEN. A later outcome may resolve only that immutable receipt and may update only the shared learner, never current owner-private state."
+        }
+      ],
+      "selection_rule": "Exactly one binding is frozen per environment. Missing, mixed or action-dependent undeclared semantics are ineligible."
+    },
+    "observation_message_action_admission": [
+      {
+        "path": "representation",
+        "admit_if": "owner and epoch are currently active; roster version equals the ledger; observation is current and nonduplicate",
+        "otherwise": "reject with no recurrent-state or normalization update"
+      },
+      {
+        "path": "communication",
+        "admit_if": "sender and receiver owner epochs are current and active; message roster version is current; edge is legal; payload is not stale",
+        "otherwise": "reject with no edge-cache, receiver-state or normalization update"
+      },
+      {
+        "path": "action",
+        "admit_if": "owner epoch is current and active; trace not quarantined; representation input is valid; selected action is legal under the current legal-action mask",
+        "otherwise": "no environment action and no receipt creation"
+      },
+      {
+        "path": "credit",
+        "admit_if": "an immutable receipt is RESOLVED_READY, its outcome action id matches, and consumption count is zero",
+        "otherwise": "no learner sample or optimizer contribution; current active roster is never used to reassign origin"
+      }
+    ],
+    "action_receipt_schema": {
+      "immutable_fields": [
+        "team_trace_id",
+        "action_instance_id",
+        "owner_id",
+        "owner_epoch",
+        "slot_at_admission_for_audit_only",
+        "roster_version_at_admission",
+        "admission_boundary",
+        "policy_version",
+        "state_schema_version",
+        "legal_action_mask_digest",
+        "chosen_action",
+        "in_flight_action_binding",
+        "outcome_deadline"
+      ],
+      "mutable_fields": ["receipt_status", "terminal_outcome_reference", "terminal_reason", "consumption_count", "last_transition_boundary"],
+      "uniqueness": "One action_instance_id creates at most one receipt; immutable-field mutation is a conformance failure.",
+      "retention": {
+        "open_or_detached": "Retain through B_open. If no outcome arrives by the deadline, transition once to EXPIRED_CANCELLED.",
+        "resolved_ready": "Must be consumed at the next registered learner-admission boundary; missing that boundary is a conformance failure and quarantines further learner admission.",
+        "terminal": "Retain a digest tombstone through B_tombstone; an outcome with an unknown or expired id is rejected fail-closed."
+      }
+    },
+    "receipt_fsm": [
+      {
+        "from": "ABSENT",
+        "input": "valid action admission with fresh action id",
+        "to": "OPEN",
+        "effect": "create one immutable receipt; consumption_count=0"
+      },
+      {
+        "from": "OPEN",
+        "input": "same action id admitted again",
+        "to": "OPEN",
+        "effect": "reject duplicate action admission; no second receipt"
+      },
+      {
+        "from": "OPEN",
+        "input": "owner epoch closes under CANCEL_ON_LEAVE",
+        "to": "CANCELLED_NO_LEARN",
+        "effect": "terminal cancellation; no learner sample"
+      },
+      {
+        "from": "OPEN",
+        "input": "owner epoch closes under AWAIT_OUTCOME",
+        "to": "DETACHED_OPEN",
+        "effect": "retain immutable origin; prohibit owner-private-state write"
+      },
+      {
+        "from": "OPEN or DETACHED_OPEN",
+        "input": "first matching terminal outcome before deadline",
+        "to": "RESOLVED_READY",
+        "effect": "bind outcome once to the receipt; no current-slot lookup"
+      },
+      {
+        "from": "OPEN or DETACHED_OPEN",
+        "input": "outcome deadline expires",
+        "to": "EXPIRED_CANCELLED",
+        "effect": "terminal registered cancellation and missing-outcome witness"
+      },
+      {
+        "from": "RESOLVED_READY",
+        "input": "next valid learner admission",
+        "to": "CONSUMED",
+        "effect": "create exactly one action-origin-tagged update record; consumption_count becomes one"
+      },
+      {
+        "from": "RESOLVED_READY",
+        "input": "duplicate outcome",
+        "to": "RESOLVED_READY",
+        "effect": "reject duplicate with no payload or count change"
+      },
+      {
+        "from": "CONSUMED",
+        "input": "duplicate outcome or learner-consume request",
+        "to": "CONSUMED",
+        "effect": "reject against tombstone; consumption_count remains one"
+      },
+      {
+        "from": "CANCELLED_NO_LEARN or EXPIRED_CANCELLED",
+        "input": "outcome or learner-consume request",
+        "to": "same terminal state",
+        "effect": "reject against tombstone; no learner effect"
+      }
+    ],
+    "typed_mask_semantics": {
+      "representation_mask": "One only for current active owner epochs with a current valid observation; controls feature participation and recurrence writes.",
+      "communication_mask": "One only for current active sender-receiver epochs with a current legal message; controls physical or model message influence.",
+      "action_mask": "Intersection of current active owner-epoch eligibility and the environment legal-action mask; controls environment action and receipt creation.",
+      "credit_mask": "One only for RESOLVED_READY immutable receipts eligible for exactly-once learner admission; it is receipt-indexed and need not equal current activity.",
+      "collapse_rule": "Two masks may share one implementation only after an equality witness proves identical domains and transitions; decorative duplication is forbidden."
+    },
+    "registered_invariants": [
+      "I01 accepted lifecycle transactions are atomic and exact duplicates are idempotent",
+      "I02 each owner has at most one active epoch and every activation while inactive creates a strictly newer epoch",
+      "I03 slot reuse never grants access to a prior owner or epoch state",
+      "I04 only S03 and S08 of uninterrupted survivor epochs may persist across a roster change",
+      "I05 every S04-S07 object is invalidated or rebuilt before the next affected action",
+      "I06 stale, wrong-epoch or quarantined observations, messages and events have no action or learner effect",
+      "I07 an inactive or wrong-epoch owner cannot act",
+      "I08 each admitted action creates at most one immutable receipt",
+      "I09 a delayed outcome resolves only its originating action instance and never the current slot occupant",
+      "I10 each resolved receipt is consumed exactly once or reaches one registered cancellation state",
+      "I11 no receipt consumption writes owner-private state of a closed epoch",
+      "I12 every concrete action- or update-affecting state variable has exactly one manifest binding"
+    ]
+  },
+  "estimands": {
+    "primary_conformance": {
+      "symbol": "psi_inv",
+      "definition": "Probability that a complete trace from the frozen registered lifecycle-trace population contains at least one I01-I12 violation.",
+      "sampling_unit": "one complete lifecycle-action-outcome trace",
+      "pass_rule": "zero observed violations in every frozen adversarial trace; any violation is terminal for downstream interpretation",
+      "uncertainty_rule": "No stochastic interval substitutes for conformance. Coverage is justified by the explicit trace matrix and zero-tolerance witnesses."
+    },
+    "primary_downstream_marl": {
+      "symbol": "psi_core",
+      "definition": "Expected paired independent-run-block difference Y_FullCore minus Y_MaskReset.",
+      "outcome": "Y is normalized mean primitive-time team reward over the complete roster spell beginning immediately after an accepted lifecycle-event cluster and ending immediately before the next accepted lifecycle cluster or episode termination.",
+      "normalization": "Each primitive reward is mapped to [0,1] using environment-declared fixed r_min and r_max; an environment without finite frozen bounds is ineligible for this estimand.",
+      "event_aggregation": "Compute one mean per event-type stratum, then weight JOIN, LEAVE, REPLACEMENT, REJOIN and SLOT_REUSE equally at 0.2 so event frequency or spell duration cannot select the result.",
+      "population": "Frozen task and membership generator with the five registered event strata, authoritative event delivery, bounded outcome delay, and partner policies drawn only from a held-out policy-family set disjoint from all training families.",
+      "horizon": "one complete post-event roster spell in primitive environment time; simultaneous lifecycle events are one event cluster and no event is dropped because another event later shortens the spell",
+      "comparator": "matched MaskReset arm S=0,C=0",
+      "interpretation_limit": "Supports only incremental post-event return inside the registered population after conformance and matching pass; it does not establish general MARL superiority or literature novelty."
+    },
+    "mechanism_observables_not_estimand_substitutes": [
+      "wrong-owner or wrong-epoch state-access count",
+      "stale observation or message admission count",
+      "missed, duplicate and misrouted credit count",
+      "uninterrupted-survivor S03 discontinuity count",
+      "receipt cancellation and expiry rates",
+      "partner-held-out versus training-partner contrast"
+    ]
+  },
+  "component_factorial": {
+    "factors": {
+      "S": "preserve S03 and S08 for uninterrupted survivors after current-roster sanitation",
+      "C": "admit a delayed outcome after epoch closure through immutable action-origin credit routing under AWAIT_OUTCOME"
+    },
+    "common_components": [
+      "authoritative lifecycle ledger and owner-epoch addressing",
+      "current-roster observation, message and action sanitation",
+      "fresh epoch and full owner-private reset on every join or rejoin",
+      "full invalidation of S04-S07 on roster change",
+      "identical measurement receipt allocation and archive bytes",
+      "identical policy, critic, optimizer and exploration algorithm",
+      "identical lifecycle information and logical timing"
+    ],
+    "arms": [
+      {
+        "arm": "MaskReset",
+        "S": 0,
+        "C": 0,
+        "survivor_rule": "Reset S03 and S08 for every owner after every roster-version change; retain same-size inert buffers.",
+        "late_credit_rule": "Close late receipts as CANCELLED_NO_LEARN; retain identical tombstone bytes and insert a zero-weight update placeholder at the matched learner boundary."
+      },
+      {
+        "arm": "ReceiptOnly",
+        "S": 0,
+        "C": 1,
+        "survivor_rule": "Same full survivor reset as MaskReset.",
+        "late_credit_rule": "Resolve and consume the immutable origin receipt under AWAIT_OUTCOME."
+      },
+      {
+        "arm": "ContinuationOnly",
+        "S": 1,
+        "C": 0,
+        "survivor_rule": "Preserve only S03 and S08 for uninterrupted survivor epochs.",
+        "late_credit_rule": "Same cancellation and zero-weight placeholder as MaskReset."
+      },
+      {
+        "arm": "FullCore",
+        "S": 1,
+        "C": 1,
+        "survivor_rule": "Preserve only S03 and S08 for uninterrupted survivor epochs.",
+        "late_credit_rule": "Resolve and consume the immutable origin receipt under AWAIT_OUTCOME."
+      }
+    ],
+    "matching_table": {
+      "lifecycle_information": "identical event id, operation, owner token, epoch, roster version and timing for every arm",
+      "actor_visible_information": "identical current observations, current event feature policy and legal-action masks; receipts and future events are never actor inputs",
+      "parameters": "identical policy and critic parameter count and initialization",
+      "state_capacity": "identical allocated owner, roster and inert-buffer bytes",
+      "archive_exposure": "identical receipt schema, outcome delivery, archive bytes and retention; only the C gate changes learner eligibility",
+      "environment_interactions": "identical primitive action opportunities and roster-event trace",
+      "learner_updates": "identical optimizer-step schedule, batch slots and update count; a C=0 late sample occupies a declared zero-weight placeholder rather than being replaced by easier data",
+      "randomness": "paired task, roster, partner and exploration seed blocks with arm-specific independent random streams derived before outcomes",
+      "partner_context": "identical partner-policy family and event crossing within each independent block",
+      "compute_and_timing": "same forward and update cadence; inert or zero-weight operations match intervention-deleted paths"
+    },
+    "single_factor_rule": "After common sanitation, each adjacent arm pair differs only in S or C. A failed matching witness blocks causal attribution."
+  },
+  "sampling_uncertainty_and_failure": {
+    "top_level_unit": "one independent training-run block containing all four arms under a preassigned paired task, roster and partner-policy draw",
+    "nested_units": "episodes, event spells, agents, actions and receipts are nested observations and are never counted as independent algorithm replications",
+    "partner_sampling_level": "partner-policy family is a crossed block factor; multiple policies or episodes from one family remain nested within the training-run block",
+    "held_out_requirement": "all primary psi_core evaluation families are disjoint from policy families used to train any arm or write any recurrent state",
+    "uncertainty_procedure": "Report the paired run-block effect and a two-sided 95 percent confidence interval obtained by exact inversion of within-block arm-label randomization; no episode-level resampling or optional stopping.",
+    "equivalence_margin": "delta_eq=0.02 on normalized mean primitive reward. Equivalence requires the complete 95 percent interval for the paired difference to lie inside [-0.02,0.02]; nonsignificance alone is not equivalence.",
+    "factorial_effects": "Report paired S main effect, C main effect and S-by-C interaction from the same independent run blocks with the same interval rule. These are explanatory contrasts; psi_core remains the sole downstream primary estimand.",
+    "cohort_rule": "The independent-block count and all randomization assignments must be frozen before any outcome is observed. This advisory delta does not authorize or choose a compute budget.",
+    "first_match_interpretation": [
+      {
+        "priority": 1,
+        "condition": "any I01-I12 violation or missing manifest binding",
+        "disposition": "CORE_CONFORMANCE_FAILED_REVISE_SMALLEST_TRANSITION",
+        "performance_effect": "ignore"
+      },
+      {
+        "priority": 2,
+        "condition": "any information, capacity, archive, interaction, update, timing or partner matching witness fails",
+        "disposition": "IDENTIFICATION_FAILED_REPAIR_MATCHING",
+        "performance_effect": "unattributed"
+      },
+      {
+        "priority": 3,
+        "condition": "FullCore improves training-partner results but held-out psi_core is equivalent to or worse than MaskReset",
+        "disposition": "PARTNER_CONVENTION_RETENTION_ONLY",
+        "performance_effect": "no general survivor-continuity claim"
+      },
+      {
+        "priority": 4,
+        "condition": "FullCore improves psi_core but neither continuation nor credit mechanism observable changes in the predicted direction",
+        "disposition": "UNATTRIBUTED_RETURN_GAIN",
+        "performance_effect": "do not credit FOLR mechanism"
+      },
+      {
+        "priority": 5,
+        "condition": "ReceiptOnly is equivalent to FullCore and improves credit observables relative to MaskReset",
+        "disposition": "RETAIN_RECEIPT_ONLY_WEAKEN_CONTINUATION"
+      },
+      {
+        "priority": 6,
+        "condition": "ContinuationOnly is equivalent to FullCore and improves survivor-continuity observables relative to MaskReset",
+        "disposition": "RETAIN_CONTINUATION_ONLY_WEAKEN_CREDIT_INCREMENT"
+      },
+      {
+        "priority": 7,
+        "condition": "FullCore is equivalent to MaskReset within delta_eq",
+        "disposition": "MASKRESET_SUFFICIENT_FOR_DOWNSTREAM_CLAIM"
+      },
+      {
+        "priority": 8,
+        "condition": "FullCore has lower psi_core than MaskReset with the complete interval below -delta_eq",
+        "disposition": "CORE_DOWNSTREAM_HARM"
+      },
+      {
+        "priority": 9,
+        "condition": "FullCore improves psi_core over MaskReset, both S and C observables improve, and neither single-factor arm is equivalent to FullCore",
+        "disposition": "CONJUNCTIVE_CORE_SUPPORTED_WITHIN_REGISTERED_POPULATION"
+      },
+      {
+        "priority": 10,
+        "condition": "conformance passes but no downstream rule above is met",
+        "disposition": "CORRECTNESS_ONLY_OR_INCONCLUSIVE_DOWNSTREAM"
+      }
+    ]
+  },
+  "leakage_and_strategic_transport": {
+    "shared_information_boundary": [
+      "Every arm receives the same lifecycle event at the same logical boundary.",
+      "Persistent owner tokens and epochs are available to every arm's sanitation layer; actor visibility is identical and frozen.",
+      "No arm receives a future join, leave, replacement, rejoin or outcome.",
+      "Policy version, legal-mask digest and receipt status are audit and learner-routing fields, never anticipatory actor features.",
+      "Outcome delivery time and payload are identical across arms.",
+      "Receipt archive size, retention and inspection opportunities are identical; C alone controls the delayed sample's learner weight.",
+      "Partner identity is not an actor feature unless identically exposed in every arm and explicitly included in the claim."
+    ],
+    "held_out_partner_crossing": {
+      "training_side": "All learning and recurrent-state writing use partner policies from frozen P_train families.",
+      "evaluation_side": "Primary evaluation replaces a departed partner with a policy from disjoint P_holdout while matching declared role, observable capability envelope, action interface and roster-event stratum.",
+      "what_changes": ["persistent partner identity", "partner policy and convention"],
+      "what_is_held_fixed": ["declared capability envelope", "role label", "task distribution", "event information", "action interface"],
+      "interpretation": "A training-only benefit is same-partner convention retention. A held-out benefit is consistent with, but does not alone prove, portable survivor-private continuity."
+    },
+    "negative_controls": [
+      "exact duplicate lifecycle event",
+      "stale prior-epoch lifecycle event",
+      "different owner reusing the same slot",
+      "outcome after leave",
+      "outcome after slot reassignment",
+      "duplicate outcome delivery",
+      "action completion and leave at one boundary under both registered orders",
+      "inactive-owner observation or message",
+      "wrong-epoch or shuffled receipt outcome",
+      "inert membership event with no task-relevant state change"
+    ]
+  },
+  "advisory_validation_contract": {
+    "execution_authorized": false,
+    "stage_a_conformance_traces": [
+      "join into unused slot",
+      "leave with no in-flight action",
+      "leave with OPEN action under CANCEL_ON_LEAVE",
+      "leave with OPEN action under AWAIT_OUTCOME",
+      "replacement in the same slot",
+      "same owner rejoin into same slot with fresh epoch",
+      "same owner rejoin into different slot with fresh epoch",
+      "different owner slot reuse",
+      "exact duplicate join and leave",
+      "stale prior-epoch event",
+      "event sequence gap and reconciliation quarantine",
+      "simultaneous outcome and lifecycle event under both boundary modes",
+      "delayed outcome after leave",
+      "delayed outcome after replacement",
+      "duplicate outcome before and after consumption",
+      "inactive observation and communication",
+      "multiple uninterrupted survivors while another member changes",
+      "unclassified action-affecting state sentinel"
+    ],
+    "stage_a_observables": [
+      "active owner, epoch, slot and roster version",
+      "every state read and write with manifest class",
+      "preserved S03 and S08 set",
+      "invalidated S04-S07 set",
+      "all four typed masks",
+      "admitted action-instance ids",
+      "complete receipt transitions",
+      "outcome and learner-update destination",
+      "receipt consumption count",
+      "quarantine and rejection reason"
+    ],
+    "stage_a_pass_rule": "Every I01-I12 invariant holds with zero violations for every frozen trace and both boundary-order bindings. Any failure stops before Stage B.",
+    "stage_b_design": "Run the frozen 2x2 S-by-C factorial under the complete matching table, the five equally weighted event strata and the held-out partner-policy crossing.",
+    "stage_b_primary": "psi_core only",
+    "stage_b_required_mechanism_readouts": [
+      "wrong-owner or wrong-epoch accesses",
+      "stale input admissions",
+      "missed, duplicate and misrouted credit",
+      "uninterrupted-survivor state discontinuities",
+      "receipt expiry and cancellation",
+      "held-out versus training-partner difference"
+    ],
+    "named_simple_fallback": "MaskReset with fresh owner epochs, full owner-private and roster-dependent reset after each roster change, current-roster sanitation, and minimum receipt tombstones that cancel rather than misroute objectively late credit.",
+    "scope_after_success": "An advisory lifecycle and credit mechanism under the registered event contract only; no formal workflow, implementation, compute, novelty or portfolio-promotion consequence."
+  },
+  "source_to_mechanism_boundary": {
+    "campaign_reported_source_facts": [
+      "The absorbed corpus contains variable-cardinality sets, masks, modular routing, fixed-scenario transfer, event-clock history, stale-observation rejection, action-continuation proxies, partner-drift beliefs and restart boundaries.",
+      "The absorbed source set did not establish online join, leave, rejoin, slot-reuse ownership or selective survivor persistence."
+    ],
+    "transferred_primitives": [
+      "variable-set and mask processing",
+      "explicit event time and freshness",
+      "action-continuation representation",
+      "context partitioning",
+      "state retention and reset boundaries",
+      "modular owner-conditioned routing"
+    ],
+    "explorer_inferences": [
+      "slot reuse requires owner-and-epoch addressing",
+      "different representation, communication, action and credit domains require typed masks",
+      "only uninterrupted strictly self-ancestry state is eligible for survivor persistence",
+      "delayed reward belongs to an immutable action instance",
+      "every rejoin opens a fresh epoch under Core's no-portability assumption"
+    ],
+    "untested_hypotheses": [
+      "owner epochs add value beyond ordinary reset boundaries",
+      "typed masks add value beyond one correctly applied active mask",
+      "survivor-private continuation helps rather than preserves obsolete convention",
+      "origin receipts improve learning beyond generic sanitation",
+      "the S-by-C interaction adds value beyond either component",
+      "any downstream benefit transports to held-out partner policies"
+    ],
+    "review_evidence_limit": "The Pro audit reviewed the attached direction packet and its provenance records; it did not independently reopen the underlying JSON or PDFs."
+  },
+  "required_revision_trace": [
+    {
+      "revision": 1,
+      "operator_requirement": "materialize the exact scientific transducer",
+      "delta_objects": ["scientific_transducer.state_dependency_manifest", "scientific_transducer.lifecycle_transition_table", "scientific_transducer.action_receipt_schema", "scientific_transducer.receipt_fsm", "scientific_transducer.total_order_contract"],
+      "status": "materialized_not_reaudited"
+    },
+    {
+      "revision": 2,
+      "operator_requirement": "split and freeze claims and estimands",
+      "delta_objects": ["claim_split", "estimands.primary_conformance", "estimands.primary_downstream_marl"],
+      "status": "materialized_not_reaudited"
+    },
+    {
+      "revision": 3,
+      "operator_requirement": "freeze an exact component decomposition",
+      "delta_objects": ["component_factorial.factors", "component_factorial.arms", "component_factorial.matching_table"],
+      "status": "materialized_not_reaudited"
+    },
+    {
+      "revision": 4,
+      "operator_requirement": "register units, uncertainty and failure rules",
+      "delta_objects": ["sampling_uncertainty_and_failure"],
+      "status": "materialized_not_reaudited"
+    },
+    {
+      "revision": 5,
+      "operator_requirement": "close leakage and strategic-transport boundaries",
+      "delta_objects": ["leakage_and_strategic_transport", "advisory_validation_contract"],
+      "status": "materialized_not_reaudited"
+    }
+  ],
+  "residual_uncertainty": [
+    "Trusted complete lifecycle events and authenticated ownership remain prerequisites rather than learned capabilities.",
+    "The concrete base learner may contain an action-affecting variable that fails the S01-S14 binding gate.",
+    "A recurrent state may mix self-history and teammate convention, leaving no nontrivial S03 state to preserve.",
+    "Environment-specific continuing-action semantics may make cancellation or detached resolution inappropriate until explicitly bound.",
+    "Receipt matching can equalize archive bytes and schedules without equalizing every optimizer-geometry consequence of a zero-weight sample.",
+    "The held-out crossing isolates policy convention at matched capability but does not establish transport across capabilities, protocols, roster sizes or event laws.",
+    "Full reset can remain sufficient in environments without persistent self-state or delayed credit.",
+    "Cross-epoch restoration remains deliberately outside FOLR-Core."
+  ],
+  "terminal_advisory_status": {
+    "direction_disposition": "REVISION_REQUIRED",
+    "exact_revision_count_materialized": 5,
+    "reacceptance_claimed": false,
+    "validation_status": "blocked_until_external_reaudit_or_user_direction",
+    "campaign_mutation": "none",
+    "formal_project_effect": "none"
+  }
+}
