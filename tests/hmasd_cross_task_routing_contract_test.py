@@ -34,7 +34,7 @@ LOCKED_ROUTES = {
     "independent_research_review_operator": (
         RESEARCH_REVIEW_SESSION,
         "gpt-5.6-luna",
-        "high",
+        "medium",
     ),
 }
 PERSISTENT_ROLES = (

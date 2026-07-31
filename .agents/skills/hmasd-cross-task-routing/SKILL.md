@@ -25,7 +25,7 @@ sender's settings or infer a replacement row.
 | `code_project_manager` | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` | `gpt-5.6-sol` | `max` |
 | `research_operations_manager` | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` | `gpt-5.6-luna` | `high` |
 | `independent_research_explorer` | `019fb398-0a76-7bd0-9400-c5ea4eefa5de` | `gpt-5.6-sol` | `ultra` |
-| `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `high` |
+| `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `medium` |
 
 Each role appears exactly once. Router session fields must mirror this table.
 The independent review operator may route only its exact terminal methodology

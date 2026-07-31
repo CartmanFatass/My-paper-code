@@ -49,12 +49,14 @@ read-only. Write only under `local_research/`, excluding the Operator-owned
 read-only. Never edit project code, workflow, science, Git state or an external
 workspace. The workspace guard enforces this boundary for the registered task.
 
-The Explorer may receive one exact `INDEPENDENT_RESEARCH_DIRECTION_PACKET`
-through the registered Operator handoff. It verifies the packet identity and
-hash, preserves the reviewed campaign artifact unchanged, and writes any
+The Explorer may receive individually exact
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET`s from one user-authorized ordered batch
+through separate registered Operator handoffs. It verifies each packet identity
+and hash, preserves the reviewed campaign artifact unchanged, and writes any
 resulting advisory delta as a new version outside `pro_reviews`. It must not
-repair missing fields, reinterpret the Pro disposition, open another review or
-promote the packet into formal project state.
+repair missing fields, reinterpret the Pro disposition, select or reorder the
+next audit item, open another batch or promote a packet into formal project
+state.
 
 ## Main-task responsibility
 

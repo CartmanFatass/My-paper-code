@@ -138,7 +138,7 @@ foreach ($required in @(
 foreach ($required in @(
     'role=independent_research_review_operator',
     'model=gpt-5.6-luna',
-    'reasoning_effort=high',
+    'reasoning_effort=medium',
     'formal_workflow_authority=none',
     'write_scope=local_research/pro_reviews_only',
     'formal_review_conversation_access=forbidden',
@@ -154,6 +154,12 @@ foreach ($required in @(
     'one `hmasd-pro-response-monitor`',
     '45-second watches',
     '60_METHODOLOGY_PACKET.md',
+    'BATCH_MANIFEST.json',
+    'build_direction_review_input.py batch-plan',
+    'build_direction_review_input.py batch-next',
+    '--batch-manifest',
+    'At most one batch item',
+    '90_TERMINAL_BLOCKER.json',
     'complete response verbatim',
     'Workflow Design Manager',
     'no scientific-iteration, formal-grant or project-state effect')) {

@@ -19,7 +19,7 @@ Use exactly one route:
 | Research Operations Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`, then only current-boundary review, runtime, evidence and state paths | implementation details outside an exact Code-PM return, workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
 | Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
-| Independent Research Pro Review Operator task | its exact user-authorized methodology or single-direction review assignment, `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`, then the shared transport mechanics named by that Skill | `CURRENT_WORK.md`, formal review rounds, runtime/science/code state and the registered formal Pro conversation |
+| Independent Research Pro Review Operator task | its exact user-authorized methodology assignment or ordered direction-audit batch, `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`, then the shared transport mechanics named by that Skill | `CURRENT_WORK.md`, formal review rounds, runtime/science/code state and the registered formal Pro conversation |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 A child never reconstructs task history. A missing identity, path, authority or completion condition fails closed instead of triggering a project-state search.
@@ -130,7 +130,7 @@ A future project-external write requires a new explicit user instruction for its
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Browser review mechanics: `.agents/skills/hmasd-review-round/SKILL.md`.
 - Independent advisory research: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`.
-- Independent methodology and single-direction Pro review: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
+- Independent methodology and ordered single-direction Pro review batches: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 - Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.

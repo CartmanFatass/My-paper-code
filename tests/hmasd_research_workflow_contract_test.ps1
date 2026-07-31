@@ -150,8 +150,8 @@ foreach ($required in @(
     'role=independent_research_review_operator',
     'role_kind=user_owned_persistent_independent_pro_transport_task',
     'model=gpt-5.6-luna',
-    'reasoning_effort=high',
-    'review_scope=explicit_user_authorized_methodology_or_one_independent_research_direction',
+    'reasoning_effort=medium',
+    'review_scope=explicit_user_authorized_methodology_or_ordered_independent_research_direction_batch',
     'formal_workflow_authority=none',
     'scientific_authority=none',
     'git_authority=none',
@@ -184,6 +184,12 @@ foreach ($required in @(
     '60_METHODOLOGY_PACKET.md',
     '60_DIRECTION_PACKET.md',
     'build_direction_review_input.py build',
+    'build_direction_review_input.py batch-plan',
+    'build_direction_review_input.py batch-next',
+    '--batch-manifest',
+    'instruction authorizes that immutable list',
+    'At most one batch item',
+    '90_TERMINAL_BLOCKER.json',
     'it never treats local research paths as a',
     'Independent Research Explorer',
     'Workflow Design Manager')) {
@@ -227,6 +233,9 @@ $directionBuilderResult = & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 if ($LASTEXITCODE -ne 0 -or $directionBuilderResult -notcontains 'HMASD_DIRECTION_REVIEW_PACKAGER_SELF_TEST_OK') {
     throw "Independent direction packet builder self-test failed: $directionBuilderResult"
 }
+if ($directionBuilderResult -notcontains 'HMASD_DIRECTION_REVIEW_BATCH_SELF_TEST_OK') {
+    throw "Independent direction batch self-test failed: $directionBuilderResult"
+}
 foreach ($required in @(
     'role=independent_research_explorer',
     'model=gpt-5.6-sol',
@@ -252,6 +261,8 @@ foreach ($required in @(
     'independent_pro_direction_packet_intake=exact_verified_handoff_only',
     'independent_pro_direction_packet_effect=advisory_revision_only',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
+    'one user-authorized ordered batch',
+    'select or reorder the',
     'research architect, portfolio integrator and only',
     'SOURCE_ABSORPTION_BRIEF',
     'RL_PRINCIPLE_ANALYSIS_PACKET',
@@ -349,6 +360,8 @@ foreach ($required in @(
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'not an automatic campaign phase',
+    'immutable manifest controls audit order',
+    'select the next audit',
     'Never infer a',
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
