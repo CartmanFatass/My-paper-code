@@ -5,7 +5,7 @@ workflow_id=EXPLORER-TOY-VALIDATION-2026-07-31-P1
 origin=independent_research_explorer
 formal_orchestration=true
 evidence_tier=nonformal_toy
-workflow_status=REGISTERED_PAUSED_BEFORE_REVIEW
+workflow_status=REVIEW_COMPLETE_ARCHIVED
 user_authority=direct_user_authorization
 cross_direction_competition=false
 within_target_matched_competition=true
@@ -13,7 +13,22 @@ combined_toy=false
 toy_compute_balance=0_pending_user_freeze
 compute_authorized=false
 cpm_dispatch_authorized=false
+phase=external_pro_design_assertion_audit
 phase_stop=complete_archived_pro_answer_or_external_technical_blocker
+review_package_stage_commit=ff7cd4bab13b22beb0606cd5761d14e74ca4b257
+review_round=20260731_explorer_toy_validation_p1_design_assertion_audit
+external_pro_transport=accepted
+external_pro_conversation_id=6a6cc971-fd24-83e8-bbed-f63a9ddddb8c
+external_pro_conversation_url=https://chatgpt.com/c/6a6cc971-fd24-83e8-bbed-f63a9ddddb8c
+question=docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/20_PRO_OPEN_QUESTION.md
+raw_archive=docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/21_PRO_OPEN_RAW.md
+mechanical_intake=docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/50_MECHANICAL_INTAKE_RECORD.md
+contract_dispositions=three
+shared_interface_contract_count=1
+scheduled_toy_action_count=1
+toy_compute_started=false
+formal_compute_started=false
+scientific_interpretation=not_performed
 ```
 
 ## First cohort

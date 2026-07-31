@@ -30,6 +30,17 @@
       "transport": "research_operations_manager_in_app_browser",
       "question_file": "20_PRO_OPEN_QUESTION.md",
       "raw_file": "21_PRO_OPEN_RAW.md"
+    },
+    "explorer_toy_validation_p1_formal": {
+      "role": "EXPLORER_TOY_VALIDATION_P1_FORMAL",
+      "conversation_id": "6a6cc971-fd24-83e8-bbed-f63a9ddddb8c",
+      "url": "https://chatgpt.com/c/6a6cc971-fd24-83e8-bbed-f63a9ddddb8c",
+      "expected_model_ui": "Pro",
+      "transport": "research_operations_manager_in_app_browser",
+      "workflow_id": "EXPLORER-TOY-VALIDATION-2026-07-31-P1",
+      "round": "20260731_explorer_toy_validation_p1_design_assertion_audit",
+      "question_file": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/20_PRO_OPEN_QUESTION.md",
+      "raw_file": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/21_PRO_OPEN_RAW.md"
     }
   }
 }
