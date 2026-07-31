@@ -29,6 +29,13 @@ valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remai
 active_grant_user_permission_request=forbidden
 independent_research_methodology_audit=user_authorized_advisory_only
 independent_research_methodology_audit_project_state_effect=none
+explorer_toy_design_review=EXPLORER_TOY_DESIGN_ASSERTION_AUDIT
+explorer_toy_result_review=EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION
+explorer_toy_candidate_per_package=one
+explorer_toy_science_freeze=external_pro
+explorer_toy_cross_direction_competition=forbidden
+explorer_toy_design_outputs=TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE
+explorer_toy_result_outputs=CONTINUE_CANDIDATE|PARK_CANDIDATE|COMPLETE_CANDIDATE
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
@@ -81,6 +88,17 @@ paths when scientific judgment depends on what the code actually implements.
   and minimum validation contract. Do not request or compare other candidates,
   rank the portfolio, choose a global winner, authorize code or compute, or
   decide formal project adoption.
+- `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: assess exactly one Operations-packaged
+  Explorer candidate, freeze its estimand, mechanism, controls and minimum toy
+  validation contract, and return exactly one of `TOY_CONTRACT_FROZEN`,
+  `ADVISORY_REFINEMENT_REQUIRED` with one exact gap, or `PARK_CANDIDATE`.
+- `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`: interpret one mechanically
+  valid isolated toy result under the frozen contract. Preserve multiple live
+  or parked directions and return exactly one of `CONTINUE_CANDIDATE`,
+  `PARK_CANDIDATE` or `COMPLETE_CANDIDATE`, without ranking or creating
+  cross-direction competition. The disposition is authoritative only for the
+  frozen toy estimand; it cannot consume a formal iteration, update the CDC portfolio,
+  or establish a formal project claim.
 
 ## May
 
@@ -142,6 +160,13 @@ paths when scientific judgment depends on what the code actually implements.
   question plus one mechanically generated packet bound to one campaign and
   one candidate. Other candidate records, the full portfolio, `CURRENT_WORK.md`,
   code, runtime, CDC and formal review artifacts are not inputs.
+- For Explorer-origin toy reviews, the exact Operations-authored question and
+  allow-list include either one `EXPLORER_PROJECT_CANDIDATE_PACKET` plus its
+  named candidate evidence, or one mechanically valid isolated result package.
+  The identity envelope and all evidence are bound to one candidate and the
+  dedicated Operations-owned conversation. The active formal-research Pro and
+  Independent Research Pro Review Operator conversations are separate and are
+  not interchangeable.
 
 ## Outputs and stop
 
@@ -171,3 +196,11 @@ paths when scientific judgment depends on what the code actually implements.
   field for the sole candidate. It is advisory, has no project-state effect and
   is archived exactly by the independent operator before verbatim routing to
   the Independent Research Explorer.
+- For `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`, return exactly
+  `TOY_CONTRACT_FROZEN` with the sole candidate's complete scientific contract,
+  `ADVISORY_REFINEMENT_REQUIRED` with one bounded gap, or `PARK_CANDIDATE`;
+  never authorize compute or accept code. For
+  `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, return the scoped scientific
+  interpretation plus exactly `CONTINUE_CANDIDATE`, `PARK_CANDIDATE` or
+  `COMPLETE_CANDIDATE`. Operations archives and routes the answer without
+  converting it into a cross-direction ranking.

@@ -98,6 +98,15 @@ research_operations_manager_portfolio_reorder_or_compression=forbidden
 valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue
 valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED
 scheduled_action_presence=CONTINUE_only
+explorer_toy_validation_skill=hmasd-explorer-project-validation
+explorer_toy_candidate_packet=EXPLORER_PROJECT_CANDIDATE_PACKET
+explorer_toy_refinement_packet=EXPLORER_ADVISORY_REFINEMENT_PACKET_optional
+explorer_toy_design_review=EXPLORER_TOY_DESIGN_ASSERTION_AUDIT
+explorer_toy_result_review=EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION
+explorer_toy_pro_conversation=dedicated_ops_owned_runtime_registration
+explorer_toy_candidate_per_package=one
+explorer_toy_compute_gate=explicit_user_grant_required
+explorer_toy_pregrant_stop=AWAITING_TOY_COMPUTE_GRANT
 operational_recovery_authority=within_existing_user_authorized_scientific_boundary
 operational_recovery_reauthorization=not_required_per_attempt
 operational_recovery_scientific_iteration_cost=zero
@@ -111,6 +120,9 @@ Read `docs/project/CURRENT_WORK.md`, this charter and only the paths named by th
 current operational boundary. This is the sole persistent owner of the active
 research loop. External Pro owns science, Code Project Manager owns code and
 technical acceptance, and Workflow Design Manager owns workflow design.
+The Explorer-origin toy-validation boundary is specified by
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; use
+`$hmasd-explorer-project-validation` only when that boundary is active.
 
 ## Owns
 
@@ -138,6 +150,59 @@ technical acceptance, and Workflow Design Manager owns workflow design.
 - Direct Git integration for review packages, runtime evidence, reports,
   `CURRENT_WORK.md` and exact mechanical recording of an External-Pro disposition
   or portfolio delta.
+
+## Explorer-origin toy validation
+
+For a directly user-authorized Explorer-origin project-validation workflow,
+Operations is the sole persistent coordinator. It mechanically validates one
+`EXPLORER_PROJECT_CANDIDATE_PACKET`, independently verifies the live user grant,
+and schedules one candidate per Pro package. The packet proves identity and
+provenance only; it cannot freeze science, assign code, authorize compute or
+change project state.
+
+Use one dedicated Operations-owned Pro conversation for this workflow. It is
+separate from both the active formal-research Pro conversation and the
+Independent Research Pro Review Operator conversation. Its live conversation
+identity is registered in Operations state and never hardcoded in a role,
+Skill, packet or stable contract. Reuse that conversation sequentially with
+exactly one candidate per Pro turn; never combine or concurrently review
+candidates.
+
+Process the registered cohort in its frozen scheduling order without ranking
+or cross-direction competition. For each candidate, obtain
+`EXPLORER_TOY_DESIGN_ASSERTION_AUDIT` before issuing one complete Pro-frozen code
+assignment to Code Project Manager. After `CODE_ACCEPTED`, perform the required
+code-science alignment. Without an explicit toy-compute grant, stop at
+`AWAITING_TOY_COMPUTE_GRANT`; neither the Explorer packet nor a Pro answer can
+supply that grant. Inside a later frozen grant, route steps automatically:
+operational failures remain with Operations, code defects go to Code Project
+Manager, mechanically valid isolated toy results go to
+`EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, and workflow defects go to
+Workflow Design Manager.
+
+This lane is separate from the active formal-research grant and portfolio. Its
+`nonformal_toy` evidence and Pro dispositions apply only to the frozen toy
+estimand: they do not consume a formal iteration, update the CDC portfolio, or
+support a formal project claim. A later promotion requires a separate explicit
+project-science boundary; Operations does not infer one from toy completion.
+
+```text
+formal=false
+current_work_mutation=forbidden
+```
+
+Explorer packet or candidate-artifact nonconformance returns to Explorer through
+Operations. Accepted implementation or frozen runtime-interface defects go to
+Code Project Manager. Contract, packet-validator or routing defects go to
+Workflow Design Manager.
+
+Request one `EXPLORER_ADVISORY_REFINEMENT_PACKET` only when External Pro returns
+an exact advisory gap. Supply the bounded gap and allowed source boundary to
+Explorer; do not expose active runtime state or let the refinement bypass the
+same Pro conversation. Advance to the next queued candidate only after Pro
+returns `PARK_CANDIDATE` or `COMPLETE_CANDIDATE`; `CONTINUE_CANDIDATE` retains
+the current candidate. Shared harness code may be reused, but candidate roots,
+artifacts, evidence and results remain isolated.
 
 ## Mechanical result boundary
 

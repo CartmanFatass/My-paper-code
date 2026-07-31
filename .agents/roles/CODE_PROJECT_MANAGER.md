@@ -30,6 +30,9 @@ execution_readiness_phase_executor=wrapper_run_only
 execution_readiness_receipt_finalizer=wrapper_finalize_only
 test_acceptance_basis=risk_and_claim_coverage
 test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof
+explorer_toy_assignment_intake=ops_complete_pro_frozen_only
+explorer_toy_local_research_read=forbidden
+explorer_toy_code_acceptance=exclusive_after_pro_science_freeze
 ```
 
 Read the exact incoming code assignment, this charter and its named design,
@@ -44,6 +47,10 @@ owns science. Workflow Design Manager owns workflow design.
 ## Owns
 
 - Architecture and implementation choices inside an exact Pro-frozen contract.
+- For an Explorer-origin toy candidate, accept work only from an Operations-
+  complete assignment after External Pro freezes the science. The Explorer
+  packet is not a code assignment, and `local_research/` is outside the CPM
+  read boundary.
 - Code-child assignments, source and code-test changes, proof-sized validation,
   repair, technical acceptance and code-side executable sufficiency.
 - Execution readiness for result-bearing runner/analyzer integration, changes to
@@ -180,6 +187,8 @@ review, report, ledger, `CURRENT_WORK.md` or workflow-design paths.
   maintain grant balance and operational state.
 - Delegate technical acceptance to a child, Research Operations Manager or
   External Pro.
+- Read `local_research/`, treat an Explorer packet as a Pro-frozen assignment,
+  or begin toy compute before Operations supplies the complete frozen contract.
 - Preserve obsolete compatibility paths, create hash handoffs, or poll another
   persistent task.
 

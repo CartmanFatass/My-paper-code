@@ -12,6 +12,7 @@ $requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
+    'hmasd-explorer-project-validation',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review',
     'hmasd-review-round',
@@ -64,6 +65,12 @@ $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/ro
 $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
 $researchPrinciplesRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md')
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
+$explorerValidationSkillPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/SKILL.md'
+$explorerValidationSkill = Get-Content -Raw -LiteralPath $explorerValidationSkillPath
+$explorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
+$explorerValidationContractPath = Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
+$explorerValidationContract = Get-Content -Raw -LiteralPath $explorerValidationContractPath
+$explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
@@ -75,6 +82,71 @@ $directionReviewBuilder = Join-Path $repo '.agents/skills/hmasd-independent-rese
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
+
+if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
+    -not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf) -or
+    -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf)) {
+    throw 'Explorer project-validation Skill/script/contract coupling is missing'
+}
+foreach ($required in @(
+    'EXPLORER_PROJECT_CANDIDATE_PACKET',
+    'EXPLORER_ADVISORY_REFINEMENT_PACKET',
+    'Ops-centered lane',
+    'dedicated Operations-owned Pro conversation',
+    'formal Pro transport',
+    'Independent Research Review Operator',
+    'one candidate is selected for each Pro package',
+    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
+    'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
+    'AWAITING_TOY_COMPUTE_GRANT')) {
+    if (-not $explorerValidationSkill.Contains($required)) {
+        throw "Explorer project-validation Skill missing: $required"
+    }
+}
+foreach ($entry in @(
+    @($operationsRole, 'explorer_toy_validation_skill=hmasd-explorer-project-validation'),
+    @($operationsRole, 'explorer_toy_pro_conversation=dedicated_ops_owned_runtime_registration'),
+    @($operationsRole, 'explorer_toy_candidate_per_package=one'),
+    @($operationsRole, 'explorer_toy_pregrant_stop=AWAITING_TOY_COMPUTE_GRANT'),
+    @($operationsRole, 'formal=false'),
+    @($operationsRole, 'current_work_mutation=forbidden'),
+    @($operationsRole, 'exactly one candidate per Pro turn'),
+    @($independentResearchRole, 'EXPLORER_PROJECT_CANDIDATE_PACKET'),
+    @($independentResearchRole, 'project_toy_compute_authority=none'),
+    @($proRole, 'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT'),
+    @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
+    @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
+    @($explorerValidationContract, 'authority={scientific_authority:none,code_authority:none,compute_authority:none,project_state_effect:none}'),
+    @($explorerValidationContract, 'dedicated Ops-owned Pro conversation'),
+    @($explorerValidationContract, 'current_work_mutation=forbidden'),
+    @($explorerValidationContract, 'exactly one candidate in each Pro'),
+    @($explorerValidationContract, 'Explorer packet or candidate-artifact nonconformance'),
+    @($explorerValidationContract, 'packet-validator or workflow-routing defect'),
+    @($operationsRole, 'do not consume a formal iteration, update the CDC portfolio'),
+    @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
+    @($explorerValidationSkill, 'do not update the CDC portfolio'),
+    @($explorerValidationSkill, 'current_work_mutation=forbidden'),
+    @($explorerValidationSkill, 'CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05'),
+    @($explorerValidationContract, 'consume no formal iteration'),
+    @($explorerValidationContractNormalized, 'Candidate evidence, run roots, artifacts and results must remain candidate-specific')) ) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer project-validation role/contract coupling missing: $($entry[1])"
+    }
+}
+foreach ($required in @(
+    'document_kind=explorer_project_candidate_packet_v1',
+    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
+    'nonformal_toy',
+    'local_research',
+    'pro_reviews',
+    'symlink/reparse',
+    'EXPLORER_PROJECT_PACKET_OK',
+    'build',
+    'check')) {
+    if (-not (Get-Content -Raw -LiteralPath $explorerValidationScriptPath).Contains($required)) {
+        throw "Explorer project packet script missing: $required"
+    }
+}
 
 if (-not $WorkflowDesignOnly) {
     $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')

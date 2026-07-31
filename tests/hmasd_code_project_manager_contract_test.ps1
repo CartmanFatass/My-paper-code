@@ -16,6 +16,8 @@ $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
+$explorerValidationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/SKILL.md')
+$explorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
 $agileNormalized = $agile -replace '\s+', ' '
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
@@ -25,6 +27,31 @@ $hooksPath = Join-Path $repo '.codex/hooks.json'
 $g0ReadinessContractPath = Join-Path $repo 'docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md'
 $g0ReadinessContract = Get-Content -Raw -LiteralPath $g0ReadinessContractPath
 $g0ReadinessContractNormalized = $g0ReadinessContract -replace '\s+', ' '
+
+if (-not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf)) {
+    throw 'Explorer project-validation packet script is missing'
+}
+foreach ($required in @(
+    'EXPLORER_PROJECT_CANDIDATE_PACKET',
+    'document_kind=explorer_project_candidate_packet_v1',
+    'evidence_tier=nonformal_toy',
+    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
+    'AWAITING_TOY_COMPUTE_GRANT',
+    'EXPLORER_PROJECT_PACKET_OK')) {
+    if (-not $explorerValidationSkill.Contains($required) -and
+        -not (Get-Content -Raw -LiteralPath $explorerValidationScriptPath).Contains($required)) {
+        throw "Explorer project-validation coupling missing: $required"
+    }
+}
+foreach ($required in @(
+    'explorer_toy_assignment_intake=ops_complete_pro_frozen_only',
+    'explorer_toy_local_research_read=forbidden',
+    'Explorer packet is not a code assignment',
+    'Read `local_research/`')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code PM Explorer-toy boundary missing: $required"
+    }
+}
 
 if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath)) {
     throw 'Retired manager role path remains live'

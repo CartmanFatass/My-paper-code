@@ -30,6 +30,12 @@ cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 independent_pro_direction_packet_intake=exact_verified_handoff_only
 independent_pro_direction_packet_effect=advisory_revision_only
+explorer_project_candidate_packet=EXPLORER_PROJECT_CANDIDATE_PACKET_v1
+explorer_advisory_refinement_packet=EXPLORER_ADVISORY_REFINEMENT_PACKET_optional
+project_toy_validation_authority=none
+project_toy_compute_authority=none
+project_toy_queue_authority=none
+project_toy_cross_direction_competition=forbidden
 ```
 
 This persistent task is the research architect, portfolio integrator and only
@@ -57,6 +63,17 @@ resulting advisory delta as a new version outside `pro_reviews`. It must not
 repair missing fields, reinterpret the Pro disposition, select or reorder the
 next audit item, open another batch or promote a packet into formal project
 state.
+
+For the project toy-validation bridge, the Explorer emits only the typed
+`EXPLORER_PROJECT_CANDIDATE_PACKET` defined in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. It remains advisory:
+the packet cannot adopt a project direction, assign code, authorize compute,
+contact External Pro, or decide a result. The packet must carry one candidate
+while preserving the complete multi-direction cohort without ranking or
+cross-direction competition. An optional
+`EXPLORER_ADVISORY_REFINEMENT_PACKET` is allowed only after Operations reports
+an explicit External Pro advisory gap; it refines that exact candidate and is
+never a new authority or direct Pro handoff.
 
 ## Main-task responsibility
 

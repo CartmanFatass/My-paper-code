@@ -203,3 +203,27 @@ mechanism/transfer/combination/split graph, principle analyses, adversarial
 findings, validation-ready candidates, residual gaps, resource disposition and
 convergence basis. The Explorer cannot contact External Pro, change CDC state,
 authorize compute, dispatch implementation or advance the formal workflow.
+
+## Project-validation handoff (advisory only)
+
+When a mature candidate is ready for a toy-project identity intake, emit one
+`EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
+`hmasd-explorer-project-validation` Skill. The packet is routed through the
+Ops-centered lane to a dedicated Operations-owned Pro conversation, separate
+from both formal Pro transport and the Independent Research Review Operator
+(IRRO). It is not a dispatcher or a transition engine: `candidate_count=1`,
+`cross_direction_competition=false`, and `combined_toy=false` prevent selecting
+multiple directions in one Pro package.
+
+The request label is `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`; after a separately
+authorized nonformal toy run, the scientific disposition label is
+`EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`. The packet records
+`evidence_tier=nonformal_toy` and `completion=OPS_IDENTITY_INTAKE_ONLY`. If
+Operations lacks an explicit toy-compute grant, its workflow state—not the
+packet—stops at `AWAITING_TOY_COMPUTE_GRANT`. All authority fields remain
+`none`, and the Explorer retains no Code Project Manager, compute, scientific,
+or project-state authority.
+
+`EXPLORER_ADVISORY_REFINEMENT_PACKET` is optional and may be produced only for
+a gap explicitly requested by Pro. It is advisory refinement, not an automatic
+retry, direction selector, or formal-workflow transition.
