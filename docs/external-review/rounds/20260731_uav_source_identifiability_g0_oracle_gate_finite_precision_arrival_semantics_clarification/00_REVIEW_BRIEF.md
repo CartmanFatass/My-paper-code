@@ -1,7 +1,8 @@
 # UAV G0 oracle-gate finite-precision clarification
 
 ```text
-review_type=ORACLE_GATE_FINITE_PRECISION_ARRIVAL_CLARIFICATION
+review_type=IMPLEMENTATION_ALIGNMENT_CLARIFICATION
+clarification_type=ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS
 audit_mode=read_only_zero_compute_contract_clarification
 compute_budget=zero
 scientific_iteration_cost=zero
