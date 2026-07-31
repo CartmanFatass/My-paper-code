@@ -21,9 +21,9 @@ bounded_exercise_timeout_seconds=1200
 outer_readiness_timeout_seconds=2520
 finalize_timeout_seconds=120
 automatic_timeout_revision=forbidden
-code_science_alignment_audit_round=20260730_uav_source_identifiability_g0_code_science_alignment_audit
-code_science_alignment_audit_stage_commit=ae1e01c64643b816fd15534fbfd46d16d3bf2f17
-code_science_alignment_audit_disposition=MISMATCH
+code_science_alignment_audit_round=20260731_uav_source_identifiability_g0_code_science_alignment_audit_c4d54e5
+code_science_alignment_audit_stage_commit=7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3
+code_science_alignment_audit_disposition=ALIGNED
 formal_interface_contract_round=20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2
 formal_interface_contract_id=UAV_SOURCE_IDENTIFIABILITY_G0_FORMAL_INTERFACE_V2
 formal_interface_reconstruction_carrier_round=20260731_uav_source_identifiability_g0_formal_interface_reconstruction_carrier_clarification
@@ -34,8 +34,8 @@ runtime_carrier_rule=EXPLICIT_WRAPPER_FIELDS_REQUIRED
 formal_interface_next_action=NEW_SOURCE_CANDIDATE_AND_ALIGNMENT
 historical_accepted_g0_source_commit=9239e3ec8a3d5b0ac3ba078f5598c19bde3c6d43
 frozen_v2_scientific_source_blob_sha=0bfaca5c0e2be428c6c9a15cd41c83f4bf7d1f5a
-aligned_implementation_commit=unbound_pending_new_alignment
-aligned_scientific_source_blob_sha=unbound_pending_new_alignment
+aligned_implementation_commit=c4d54e54978d98430c22c2cf21b789dd73c72d52
+aligned_scientific_source_blob_sha=95b46e29ee44cc16ba5c5e91757b704be33e094e
 claim_scope=SOURCE_IDENTIFIABILITY_G0_ONLY
 formal_execution_authorized=false
 learning=false
@@ -249,17 +249,17 @@ these gates.
 
 ## Result-bearing interface and proof-only readiness closure
 
-The runner now exposes the frozen `train`, `evaluate` and `analyze` interface,
-but the candidate intentionally leaves `ALIGNED_IMPLEMENTATION_COMMIT`,
-`ALIGNMENT_STAGE_COMMIT` and `ALIGNMENT_DISPOSITION` unbound. Therefore result-bearing entry fails before
-either preflight or formal root creation until this new source candidate has a
-fresh independent code-science alignment and a later exact binding commit.
+The runner exposes the frozen `train`, `evaluate` and `analyze` interface
+and binds the independently ALIGNED c4d54e5 implementation, its exact active
+scientific-source blob and alignment stage 7a91902. A future execution commit
+must contain that aligned implementation unchanged and satisfy every remaining
+runtime carrier, same-source preflight and fresh-root gate.
 The admission token remains an identity gate, not user authorization.
 The frozen CLI field `accepted_g0_source_commit=9239e3e...` remains historical
-accepted provenance; it is intentionally distinct from the future new aligned
-candidate. The old `0bfaca5...` blob remains the immutable V2 contract record,
-while the active aligned source blob is separately unbound until that candidate
-has been committed and independently aligned.
+accepted provenance and is intentionally distinct from the active aligned
+c4d54e5 implementation. The old `0bfaca5...` blob remains the immutable V2
+contract record, while `95b46e2...` is the independently aligned active source
+blob.
 
 Every result-bearing invocation must explicitly carry the external user-grant
 reference, the prebound absolute formal root, the failed-root identity and
@@ -392,6 +392,6 @@ execution or supports a UAV paper conclusion.
 | G0-PRODUCTION-ORACLE | G0 code-science alignment audit plus reconstruction-carrier clarification | `ha_ctse_process/uav_source_identifiability_g0.py::run_g0_episode`, `_reconstruct_controller_trace`, `_authoritative_replay_errors` | every Oracle E/Z step supplies exact ownership, pre-action context and freshly recomputed common-transducer evidence; base controller evidence and the registered replay certificate are independently exact, with episode-0 E at R=273 and Z at R=NONE | `test_production_oracle_event_and_no_event_bind_branch_evidence`, `test_valid_oracle_certificate_is_separate_from_base_controller_evidence`, `test_oracle_behavioral_replay_certificate_fails_closed_separately` | readiness-only helper coverage, silently discarded certificates, detached target schedules, EVENT lifecycle assumptions in NO_EVENT and certificate residue on non-Oracle rows |
 | G0-FIRST-MATCH | executable-contract addendum v2 section 5.1 | `ha_ctse_process/uav_source_identifiability_g0.py::_build_analysis_from_reconstructed_rows` | lower scientific statuses are unread and serialized null after INVALID, ORACLE FAIL/OPEN or SAMEINFO FAIL/OPEN | lazy first-match source tests; `test_branch_witnesses_cover_exact_first_match_inventory` | eager lower-gate computation hidden by final branch precedence |
 | G0-RUNNER | executable-contract addendum v2 identity and artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds v2 stage/archive/disposition plus certificate semantics and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts`, `test_reference_paths_cp_and_tracker_are_independently_reconstructed` | stale contract identity, altered universal-support certificate and favorable stored certificate |
-| G0-FORMAL-CARRIER | formal-interface V2 plus reconstruction-carrier clarification | `scripts/run_uav_source_identifiability_g0.py::FormalRuntimeBinding`, `_validate_binding`, `_validate_preflight`, `_validate_preflight_admission` | explicit user-grant reference, prebound formal root and failed-root identity/schema are frozen before mutation; exact outer/carrier schemas reject extra authority-looking fields; token-only admission, absent new alignment, and rebinding either future identity to the historical accepted commit/blob fail closed; formal admission checks the exact four-file hash chain and operational fields without importing or replaying episode rows | `test_result_bearing_alignment_gate_fails_before_root_creation`, `test_result_bearing_alignment_rejects_historical_identity_rebinding`, `test_result_cli_requires_explicit_wrapper_carriers`, `test_mocked_preflight_writes_exact_four_file_terminal_contract`, `test_failed_root_preserves_prior_terminal_but_replaces_current_invalid_terminal` | repository token treated as user authority, inferred or extra carrier fields, stale historical identity reuse, stale/broken-chain preflight and a failed current self-check left apparently COMPLETE |
+| G0-FORMAL-CARRIER | formal-interface V2 plus reconstruction-carrier clarification and c4d54e5 alignment audit | `scripts/run_uav_source_identifiability_g0.py::FormalRuntimeBinding`, `_validate_binding`, `_validate_preflight`, `_validate_preflight_admission` | explicit user-grant reference, prebound formal root and failed-root identity/schema are frozen before mutation; exact outer/carrier schemas reject extra authority-looking fields; the exact c4d54e5/95b46e2/7a91902 ALIGNED tuple is bound while token-only admission, removed alignment and rebinding either active identity to the historical accepted commit/blob fail closed; formal admission checks the exact four-file hash chain and operational fields without importing or replaying episode rows | `test_result_bearing_alignment_binding_is_exact_and_removal_fails_pre_root`, `test_result_bearing_alignment_rejects_historical_identity_rebinding`, `test_result_cli_requires_explicit_wrapper_carriers`, `test_mocked_preflight_writes_exact_four_file_terminal_contract`, `test_failed_root_preserves_prior_terminal_but_replaces_current_invalid_terminal` | repository token treated as user authority, inferred or extra carrier fields, absent/stale alignment, stale historical identity reuse, stale/broken-chain preflight and a failed current self-check left apparently COMPLETE |
 | G0-FORMAL-RECONSTRUCTION | formal-interface V2 gates 8-11 | `scripts/run_uav_source_identifiability_g0.py::_authoritative_replay_guard`, `_capture_analysis_reconstruction`, `_reuse_bootstrap_index_plan`, `scientific_evaluate`, `scientific_analyze` | preflight accounts for 6+6 runs and formal train remains exactly 768; evaluate and analyze each use one exact 768-replay pass; analysis compares all reconstructed metric rows, 128 validity records, episode digests and one generated/reused PCG64 plan; terminal inventory uses the exact registered 133 paths | `test_authoritative_replay_counts_are_single_pass_and_guarded`, `test_analysis_reconstruction_rejects_per_episode_validity_tamper`, `test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities`, `test_bootstrap_plan_is_generated_once_and_reused_for_source_validation` | 774-run formal train, doubled analysis replay, per-episode validity substitution, caller-authored bootstrap digest, same-count artifact swaps and favorable stored result branches |
 | G0-READINESS-PERFORMANCE | `UAV_G0_READINESS_PERFORMANCE_CONTRACT_V2`, Option B | `ha_ctse_process/uav_source_identifiability_g0.py::_ValidatedOracleSafetyContext`, `_callable_source_digest`; `scripts/run_uav_source_identifiability_g0.py::_ValidatedSourceArtifacts` | every independent phase performs canonical reconstruction while identical within-phase reconstruction is reused; frozen artifacts, counts and R=273 remain unchanged; every phase duration is strictly below its registered V2 cap | `test_callable_source_digests_are_cached_by_callable_identity`, `test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift`, `test_readiness_train_uses_phase_local_context_and_one_disk_validator`; commit-bound six-phase readiness receipt | automatic timeout increase, cross-phase cache, stale/tampered evidence reuse, copied replay and weakened validation |

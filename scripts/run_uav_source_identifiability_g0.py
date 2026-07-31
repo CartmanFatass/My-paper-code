@@ -67,12 +67,19 @@ FORMAL_AUTHORIZATION_TOKEN = "G0_FORMAL_ADMISSION=PROCEED"
 FAILED_ROOT_SCHEMA_ID = "UAV_G0_FAILED_ROOT"
 FAILED_ROOT_SCHEMA_VERSION = 1
 
-# These are deliberately unbound in a source candidate.  Code Project Manager
-# may bind them only after CODE_ACCEPTED and the required independent alignment.
-ALIGNED_IMPLEMENTATION_COMMIT: str | None = None
-ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA: str | None = None
-ALIGNMENT_STAGE_COMMIT: str | None = None
-ALIGNMENT_DISPOSITION: str | None = None
+# Bound only after CODE_ACCEPTED and the independent c4d54e5 code-science audit.
+# The historical accepted provenance above remains distinct from this active
+# aligned implementation identity.
+ALIGNED_IMPLEMENTATION_COMMIT: str | None = (
+    "c4d54e54978d98430c22c2cf21b789dd73c72d52"
+)
+ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA: str | None = (
+    "95b46e29ee44cc16ba5c5e91757b704be33e094e"
+)
+ALIGNMENT_STAGE_COMMIT: str | None = (
+    "7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3"
+)
+ALIGNMENT_DISPOSITION: str | None = "ALIGNED"
 
 FROZEN_CONTRACT_PATH = PROJECT_ROOT / (
     "docs/external-review/rounds/"

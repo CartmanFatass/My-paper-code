@@ -467,12 +467,33 @@ def _binding(tmp_path: Path, *, mode: str = "nonformal-preflight") -> runner.For
     )
 
 
-def test_result_bearing_alignment_gate_fails_before_root_creation(tmp_path: Path) -> None:
+def test_result_bearing_alignment_binding_is_exact_and_removal_fails_pre_root(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     binding = _binding(tmp_path)
-    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
-    assert runner.ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA is None
-    assert runner.ALIGNMENT_STAGE_COMMIT is None
-    assert runner.ALIGNMENT_DISPOSITION is None
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT == (
+        "c4d54e54978d98430c22c2cf21b789dd73c72d52"
+    )
+    assert runner.ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA == (
+        "95b46e29ee44cc16ba5c5e91757b704be33e094e"
+    )
+    assert runner.ALIGNMENT_STAGE_COMMIT == (
+        "7a9190274f3dcde4eb168b2ec65fbcaf8b99a1c3"
+    )
+    assert runner.ALIGNMENT_DISPOSITION == "ALIGNED"
+    monkeypatch.setattr(runner, "_verify_git_identity", lambda _commit: None)
+    monkeypatch.setattr(
+        runner,
+        "_runtime_environment_manifest",
+        lambda commit: {"formal_execution_commit": commit},
+    )
+    environment = runner._validate_binding(binding, stage="train")
+    assert environment["formal_execution_commit"] == binding.formal_execution_commit
+    assert not binding.run_root.exists()
+    assert not binding.bound_formal_root.exists()
+
+    monkeypatch.setattr(runner, "ALIGNMENT_DISPOSITION", None)
     with pytest.raises(ValueError, match="implementation/alignment"):
         runner.scientific_train(binding=binding)
     assert not binding.run_root.exists()
