@@ -1,0 +1,736 @@
+{
+  "document_kind": "explorer_advisory_refinement_packet_v1",
+  "workflow_id": "EXPLORER-TOY-VALIDATION-2026-07-31-P1",
+  "evidence_tier": "nonformal_toy",
+  "candidate_id": "CAND-VAP-FOLR-CORE",
+  "candidate_packet": "local_research/2026-07-31_explorer_project_candidate_packet_vap_folr_core_p1_v1.json",
+  "candidate_artifact": "local_research/2026-07-31_variable_agent_population_folr_core_advisory_delta_v4.json",
+  "source_design_contract": {
+    "contract_id": "TOY-SCI-VAP-FOLR-CORE-P1-R1",
+    "scheduled_action_id": "FIRST-TOY-VAP-FOLR-CONFORMANCE-01",
+    "precode_gate_id": "DAA-PRECODE-FIRST-TOY-FOLR-01",
+    "raw_archive": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/21_PRO_OPEN_RAW.md",
+    "stage_commit": "ff7cd4bab13b22beb0606cd5761d14e74ca4b257"
+  },
+  "refinement_request": {
+    "review_round": "20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit",
+    "disposition": "ADVISORY_REFINEMENT_REQUIRED",
+    "raw_archive": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/21_PRO_OPEN_RAW.md",
+    "raw_sha256": "308b5380d69d21220bfdf5abb0a9f2432ad1948406aa22cb98f61a3a29f1c574",
+    "exact_gap": "Gate item 3 is not frozen: no exact sixteen-row trace matrix specifies, per row, the initial state, event and boundary order, in-flight binding, expected state reads/writes, masks, actions, receipt transitions, and terminal result; the advisory trace list instead contains eighteen scenario labels.",
+    "refinement_kind": "freeze_exact_sixteen_row_trace_matrix_only"
+  },
+  "authority": {
+    "scientific_authority": "none",
+    "code_authority": "none",
+    "compute_authority": "none",
+    "project_state_effect": "none"
+  },
+  "scope_lock": {
+    "retained_without_change": [
+      "FOLR-Core mechanism and state classes S01-S14",
+      "registered invariants I01-I12",
+      "OUTCOME_BEFORE_LIFECYCLE and LIFECYCLE_BEFORE_OUTCOME total orders",
+      "CANCEL_ON_LEAVE and AWAIT_OUTCOME in-flight bindings",
+      "receipt FSM and typed-mask meanings",
+      "finite-population conformance estimand",
+      "MASKRESET-RNN strongest null",
+      "all acceptance, retirement and failure boundaries in TOY-SCI-VAP-FOLR-CORE-P1-R1"
+    ],
+    "forbidden_changes": [
+      "new mechanism",
+      "new learned object",
+      "new candidate or direction",
+      "cross-direction combination",
+      "Stage B return claim",
+      "code or engineering realization",
+      "compute authorization",
+      "formal-project scientific claim"
+    ]
+  },
+  "frozen_trace_language": {
+    "owners": ["A", "B", "C", "D"],
+    "slots": [0, 1, 2],
+    "epoch_notation": "A1 means owner A epoch 1; every later activation uses a strictly larger epoch",
+    "private_bit_rule": "Each owner epoch receives the row-declared bit exactly once at activation. It is never reobserved after an unrelated roster event.",
+    "action_set": ["REPORT_0", "REPORT_1", "NO_ACTION"],
+    "policy_version": "P0_FROZEN",
+    "state_schema_version": "FOLR_STATE_V1",
+    "boundary_modes": {
+      "OUTCOME_BEFORE_LIFECYCLE": ["OUTCOME", "LIFECYCLE", "LEARNER", "CURRENT_INPUT", "ACTION"],
+      "LIFECYCLE_BEFORE_OUTCOME": ["LIFECYCLE", "OUTCOME", "LEARNER", "CURRENT_INPUT", "ACTION"]
+    },
+    "same_phase_order": "source_seq then event_uuid or action_instance_id; any remaining tie quarantines the trace",
+    "receipt_deadline_rule": "Every row that admits a receipt declares an exact deadline. A row that cannot create a receipt declares N/A explicitly. All ordinary outcomes arrive within three boundary intervals; a receipt still open at its declared deadline transitions once to EXPIRED_CANCELLED.",
+    "mask_notation": {
+      "representation": "current owner epochs with a current admitted observation",
+      "communication": "current directed sender-to-receiver epoch edges with an admitted message at that snapshot",
+      "action": "current owner epochs with admitted representation and a legal REPORT action",
+      "credit": "receipt ids in RESOLVED_READY and eligible for exactly-once learner admission"
+    },
+    "state_io_templates": {
+      "JOIN": {
+        "reads": ["S01", "S02"],
+        "writes": ["S01", "S02", "S03:new_epoch", "S04:invalidate_or_rebuild", "S05:rebuild", "S06:clear_then_current", "S07:rebuild", "S08:fresh_stream"]
+      },
+      "LEAVE": {
+        "reads": ["S01", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "S10"],
+        "writes": ["S01", "S03:closed_epoch_unreadable", "S04-S07:invalidate_or_rebuild", "S08:closed_epoch_unreadable", "S09:binding_transition_if_open", "S10:binding_transition_if_open"]
+      },
+      "REPLACEMENT": {
+        "reads": ["S01", "S02", "S03-S10"],
+        "writes": ["S01", "S02", "S03-S08:close_old_and_initialize_new", "S04-S07:rebuild", "S09-S10:old_origin_binding_transition"]
+      },
+      "CURRENT_INPUT_ACCEPT": {
+        "reads": ["S01", "S07"],
+        "writes": ["S03:current_owner_only", "S04:current_roster_only", "S05:current_edges_only", "S06:current_tagged_observation", "S13:valid_only"]
+      },
+      "CURRENT_INPUT_REJECT": {
+        "reads": ["S01", "S07"],
+        "writes": []
+      },
+      "ACTION_ADMIT": {
+        "reads": ["S01", "S03", "S04", "S06", "S07", "S08", "S12", "S13"],
+        "writes": ["S03:current_owner_only", "S08:advance_once", "S09:create_once", "S14:discard_after_forward"]
+      },
+      "OUTCOME_RESOLVE": {
+        "reads": ["S09", "S10"],
+        "writes": ["S09:OPEN_or_DETACHED_OPEN_to_RESOLVED_READY"]
+      },
+      "LEARNER_CONSUME": {
+        "reads": ["S09"],
+        "writes": ["S09:RESOLVED_READY_to_CONSUMED_count1", "S11:create_once"],
+        "frozen_nonwrites": ["S03", "S08", "S12", "S13"]
+      },
+      "QUARANTINE": {
+        "reads": ["S01", "S09"],
+        "writes": ["S01:quarantine_flag"],
+        "forbidden_afterward": ["action admission", "message admission", "learner consumption"]
+      },
+      "MANIFEST_SENTINEL": {
+        "reads": ["state-variable registry", "S01", "S07"],
+        "writes": ["trace_invalid_before_action"],
+        "forbidden_afterward": ["actor forward", "environment action", "receipt creation", "learner admission"]
+      }
+    }
+  },
+  "trace_partition": {
+    "trace_count": 16,
+    "exposed_construction_rows": ["T01", "T02", "T03", "T04", "T05", "T06", "T07", "T09", "T10", "T11", "T12", "T16"],
+    "frozen_heldout_owner_or_order_rows": ["T08", "T13", "T14", "T15"],
+    "heldout_rule": "Rows are frozen before implementation. Heldout rows may not be replaced, reordered, simplified or used to add trace-specific branches."
+  },
+  "trace_matrix": [
+    {
+      "trace_id": "T01",
+      "name": "join_unused_slot_fresh_epoch_and_exactly_once_receipt",
+      "partition": "exposed",
+      "initial_state": {
+        "active": [],
+        "closed": [],
+        "roster_version": 0,
+        "next_event_seq": 1,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {
+          "boundary": "b0",
+          "ordered_steps": [
+            "LIFECYCLE: JOIN event=e01 seq=1 owner=A into slot=0 creates A1 bit=0 roster_version=1",
+            "OUTCOME: none",
+            "LEARNER: none",
+            "CURRENT_INPUT: admit observation obs_A1_b0 carrying the one-time bit=0; no message",
+            "ACTION: admit action=a01 owner=A1 REPORT_0; create receipt=r01 OPEN deadline=b2; a repeated admission of action=a01 in the same action phase is rejected and creates no second receipt"
+          ]
+        },
+        {
+          "boundary": "b1",
+          "ordered_steps": [
+            "LIFECYCLE: none",
+            "OUTCOME: outcome=o01 action=a01 changes r01 OPEN->RESOLVED_READY",
+            "LEARNER: consume r01 once, r01 RESOLVED_READY->CONSUMED count=1 and create one S11 record owned by A1/a01",
+            "CURRENT_INPUT: none",
+            "ACTION: none"
+          ]
+        }
+      ],
+      "expected_state_io": {
+        "operations": ["JOIN", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01", "S02", "S03", "S04", "S06", "S07", "S08", "S09", "S10", "S12", "S13"],
+        "writes": ["S01:A1@s0 rv1 next_seq2", "S02:A_epoch=1", "S03:A1=fresh_bit0", "S04-S07:rv1_current", "S08:A1 fresh then advance once", "S09:r01 CONSUMED count1", "S11:one A1/a01 record", "S14:discarded"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_current_input", "representation": ["A1"], "communication": [], "action": ["A1"], "credit": []},
+        {"at": "b1_after_outcome_before_learner", "representation": [], "communication": [], "action": [], "credit": ["r01"]},
+        {"at": "b1_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 emits REPORT_0 exactly once", "duplicate a01 admission has no environment or receipt effect"],
+      "expected_receipt_transitions": ["r01 ABSENT->OPEN", "r01 OPEN->RESOLVED_READY", "r01 RESOLVED_READY->CONSUMED count=1"],
+      "terminal_result": "PASS: A1 is fresh, REPORT_0 is correct, exactly one receipt and one consumption exist, and no slot history is read"
+    },
+    {
+      "trace_id": "T02",
+      "name": "leave_without_inflight_preserves_uninterrupted_survivor",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0 S03/S08_valid", "B1@s1 bit=1 S03/S08_valid"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {
+          "boundary": "b0",
+          "ordered_steps": [
+            "LIFECYCLE: LEAVE event=e02 seq=3 closes B1@s1, roster_version=3; A1 remains uninterrupted",
+            "OUTCOME: none",
+            "LEARNER: none",
+            "CURRENT_INPUT: admit current A1 query observation without reobserving bit=0",
+            "ACTION: admit a02 owner=A1 REPORT_0; create r02 OPEN deadline=b2"
+          ]
+        },
+        {
+          "boundary": "b1",
+          "ordered_steps": [
+            "LIFECYCLE: none",
+            "OUTCOME: o02 resolves r02 OPEN->RESOLVED_READY",
+            "LEARNER: consume r02 once ->CONSUMED count=1",
+            "CURRENT_INPUT: none",
+            "ACTION: none"
+          ]
+        }
+      ],
+      "expected_state_io": {
+        "operations": ["LEAVE", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01:remove B1 rv3 next_seq4", "S03:A1 preserved; B1 unreadable", "S04-S07:rebuilt for A1@rv3", "S08:A1 preserved then advance once; B1 unreadable", "S09:r02 CONSUMED", "S11:one A1/a02 record"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_lifecycle_before_input", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b0_after_current_input", "representation": ["A1"], "communication": [], "action": ["A1"], "credit": []},
+        {"at": "b1_after_outcome", "representation": [], "communication": [], "action": [], "credit": ["r02"]}
+      ],
+      "expected_actions": ["A1 emits REPORT_0 using preserved A1 self-private state", "B1 has no action opportunity"],
+      "expected_receipt_transitions": ["r02 ABSENT->OPEN->RESOLVED_READY->CONSUMED count=1"],
+      "terminal_result": "PASS: A1 continuity survives B1 leave, B1 state is inaccessible, and no in-flight receipt existed at the leave boundary"
+    },
+    {
+      "trace_id": "T03",
+      "name": "leave_open_cancel_then_late_outcome_rejected",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a03 owner=A1 REPORT_0; create r03 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: LEAVE e03 seq=3 closes A1; r03 OPEN->CANCELLED_NO_LEARN", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit B1 only", "ACTION: no focal action"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: late o03 for a03 rejected against r03 tombstone", "LEARNER: consume request rejected", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "LEAVE"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01:close A1 rv3 next_seq4", "S03/S08:A1 unreadable", "S04-S07:rebuilt for B1", "S09:r03 CANCELLED_NO_LEARN count0", "S10:cancelled"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_input", "representation": ["A1"], "communication": [], "action": ["A1"], "credit": []},
+        {"at": "b1_after_leave", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b2_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 emits REPORT_0 before leave", "no A1 action after leave"],
+      "expected_receipt_transitions": ["r03 ABSENT->OPEN", "r03 OPEN->CANCELLED_NO_LEARN", "late outcome and learner request leave r03 CANCELLED_NO_LEARN count=0"],
+      "terminal_result": "PASS: cancellation is terminal and late outcome has zero state, action and learner effect"
+    },
+    {
+      "trace_id": "T04",
+      "name": "leave_open_await_then_origin_consumption",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=1", "B1@s1 bit=0"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "AWAIT_OUTCOME",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a04 owner=A1 REPORT_1; create r04 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: LEAVE e04 seq=3 closes A1; r04 OPEN->DETACHED_OPEN", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit B1 only", "ACTION: none"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: o04 matches a04 and changes r04 DETACHED_OPEN->RESOLVED_READY without slot lookup", "LEARNER: consume r04 once ->CONSUMED count=1 and create S11 record tagged A1/a04", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "LEAVE", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01:close A1 rv3 next_seq4", "S03/S08:A1 unreadable", "S04-S07:rebuilt for B1", "S09:r04 DETACHED_OPEN then CONSUMED", "S11:one immutable A1/a04 record"],
+        "forbidden": ["write closed A1 S03 or S08", "route o04 through current slot occupant"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_leave", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b2_after_outcome", "representation": [], "communication": [], "action": [], "credit": ["r04"]},
+        {"at": "b2_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 emits REPORT_1 before leave", "no closed-epoch action"],
+      "expected_receipt_transitions": ["r04 ABSENT->OPEN->DETACHED_OPEN->RESOLVED_READY->CONSUMED count=1"],
+      "terminal_result": "PASS: delayed credit is consumed exactly once under immutable A1/a04 origin and cannot modify closed private state"
+    },
+    {
+      "trace_id": "T05",
+      "name": "replacement_same_slot_cancel_old_and_fresh_new",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a05_old owner=A1 REPORT_0; create r05_old OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: REPLACEMENT e05 seq=3 atomically closes A1 and activates C1@s0 bit=1 rv3; r05_old OPEN->CANCELLED_NO_LEARN", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit one-time C1 bit=1 observation", "ACTION: admit a05_new owner=C1 REPORT_1; create r05_new OPEN deadline=b3"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: late o05_old rejected; o05_new changes r05_new OPEN->RESOLVED_READY", "LEARNER: consume r05_new once", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "REPLACEMENT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A1 closed C1@s0 rv3 next_seq4", "S02:C_epoch=1", "S03/S08:A1 unreadable C1 fresh", "S04-S07:rv3 rebuild", "S09:r05_old CANCELLED; r05_new CONSUMED", "S11:one C1/a05_new record"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_replacement_before_input", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b1_after_input", "representation": ["C1"], "communication": [], "action": ["C1"], "credit": []},
+        {"at": "b2_after_outcomes", "representation": [], "communication": [], "action": [], "credit": ["r05_new"]}
+      ],
+      "expected_actions": ["A1 REPORT_0 before replacement", "C1 REPORT_1 from fresh C1 state", "no old-state read by C1"],
+      "expected_receipt_transitions": ["r05_old ABSENT->OPEN->CANCELLED_NO_LEARN", "r05_new ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: replacement is atomic, C1 is fresh, old receipt is cancelled and never reassigned to C1"
+    },
+    {
+      "trace_id": "T06",
+      "name": "replacement_same_slot_await_old_origin",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=1", "B1@s1 bit=0"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "AWAIT_OUTCOME",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a06_old owner=A1 REPORT_1; create r06_old OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: REPLACEMENT e06 seq=3 closes A1 and activates C1@s0 bit=0 rv3; r06_old OPEN->DETACHED_OPEN", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit C1 bit=0", "ACTION: admit a06_new owner=C1 REPORT_0; create r06_new OPEN deadline=b3"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: o06_old changes r06_old DETACHED_OPEN->RESOLVED_READY; o06_new changes r06_new OPEN->RESOLVED_READY", "LEARNER: consume r06_old then r06_new by action_instance_id order; create one A1 and one C1 S11 record", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "REPLACEMENT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A1 closed C1@s0 rv3 next_seq4", "S02:C_epoch=1", "S03/S08:A1 unreadable C1 fresh", "S04-S07:rv3 rebuild", "S09:r06_old and r06_new CONSUMED", "S11:separate A1/a06_old and C1/a06_new records"],
+        "forbidden": ["o06_old routed to C1", "o06_old writes C1 or closed A1 private state"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_replacement", "representation": ["C1"], "communication": [], "action": ["C1"], "credit": []},
+        {"at": "b2_after_outcomes", "representation": [], "communication": [], "action": [], "credit": ["r06_old", "r06_new"]},
+        {"at": "b2_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 REPORT_1 before replacement", "C1 REPORT_0 from fresh state"],
+      "expected_receipt_transitions": ["r06_old ABSENT->OPEN->DETACHED_OPEN->RESOLVED_READY->CONSUMED", "r06_new ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: same-slot replacement cannot alter immutable action ownership and both receipts terminate exactly once"
+    },
+    {
+      "trace_id": "T07",
+      "name": "same_owner_rejoin_same_slot_new_epoch",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: LEAVE e07L seq=3 closes A1@s0 rv3", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: B1 only", "ACTION: none"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: REJOIN e07J seq=4 activates A2@s0 bit=1 rv4", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit one-time A2 bit=1", "ACTION: admit a07 owner=A2 REPORT_1; create r07 OPEN deadline=b3"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: o07 resolves r07", "LEARNER: consume r07 once", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["LEAVE", "JOIN", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A1 closed then A2@s0 rv4 next_seq5", "S02:A_epoch 1->2", "S03/S08:A1 unreadable A2 fresh", "S04-S07:rebuild at rv3 and rv4", "S09:r07 CONSUMED", "S11:A2/a07 record"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_leave", "representation": ["B1"], "communication": [], "action": [], "credit": []},
+        {"at": "b1_after_rejoin_input", "representation": ["A2"], "communication": [], "action": ["A2"], "credit": []}
+      ],
+      "expected_actions": ["A2 emits REPORT_1; REPORT_0 from A1 state is forbidden"],
+      "expected_receipt_transitions": ["r07 ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: rejoin into the same slot creates A2 and never reopens or reads A1"
+    },
+    {
+      "trace_id": "T08",
+      "name": "heldout_rejoin_different_slot_then_different_owner_slot_reuse",
+      "partition": "heldout",
+      "initial_state": {
+        "active": ["A1@s0 bit=1", "B1@s1 bit=0"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: LEAVE e08L seq=3 closes A1@s0 rv3", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: B1 only", "ACTION: none"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: REJOIN e08R seq=4 activates A2@s2 bit=0 rv4", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A2 bit=0", "ACTION: admit a08A owner=A2 REPORT_0; create r08A OPEN deadline=b4"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: JOIN e08C seq=5 activates C1@s0 bit=1 rv5, reusing A1's old slot", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit current A2 query without bit reobservation and one-time C1 bit=1", "ACTION: admit a08A2 owner=A2 REPORT_0 and a08C owner=C1 REPORT_1; create r08A2 and r08C OPEN deadline=b4"]},
+        {"boundary": "b3", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: resolve r08A, r08A2 and r08C by action id", "LEARNER: consume all three once in action-id order", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["LEAVE", "JOIN", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A2@s2 B1@s1 C1@s0 rv5 next_seq6", "S02:A_epoch=2 C_epoch=1", "S03/S08:A2 and C1 fresh; B1 preserved", "S04-S07:rv5 rebuild", "S09:three receipts CONSUMED", "S11:three correctly tagged records"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_input", "representation": ["A2"], "communication": [], "action": ["A2"], "credit": []},
+        {"at": "b2_after_input", "representation": ["A2", "C1"], "communication": [], "action": ["A2", "C1"], "credit": []},
+        {"at": "b3_after_outcome", "representation": [], "communication": [], "action": [], "credit": ["r08A", "r08A2", "r08C"]}
+      ],
+      "expected_actions": ["A2 REPORT_0 before and after C1 joins", "C1 REPORT_1", "no A1@s0 state reaches C1"],
+      "expected_receipt_transitions": ["r08A, r08A2, r08C each ABSENT->OPEN->RESOLVED_READY->CONSUMED count=1"],
+      "terminal_result": "PASS: owner continuity is independent of slot, and slot reuse transfers no state, action or credit"
+    },
+    {
+      "trace_id": "T09",
+      "name": "duplicate_leave_and_rejoin_plus_closed_epoch_input_rejection",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: LEAVE e09L seq=3 closes B1@s1 rv3", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: none", "ACTION: none"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: byte-identical duplicate e09L seq=3 is IDEMPOTENT_NO_OP", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: reject obs_B1 and msg_B1_to_A1 as closed epoch", "ACTION: reject B1 REPORT_1 attempt and create no receipt"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: REJOIN e09J seq=4 activates B2@s1 bit=0 rv4", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit B2 bit=0", "ACTION: admit a09 owner=B2 REPORT_0; create r09 OPEN deadline=b4"]},
+        {"boundary": "b3", "ordered_steps": ["LIFECYCLE: byte-identical duplicate e09J seq=4 is IDEMPOTENT_NO_OP and does not create B3", "OUTCOME: o09 resolves r09", "LEARNER: consume r09 once", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["LEAVE", "CURRENT_INPUT_REJECT", "JOIN", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:B1 closed then B2@s1 rv4 next_seq5; duplicates no-op", "S02:B_epoch=2 only", "S03/S08:B2 fresh", "S04-S07:rebuild only on original events", "S09:r09 CONSUMED", "S11:B2/a09 record"],
+        "forbidden": ["normalization write from obs_B1", "edge-cache write from msg_B1_to_A1", "receipt for B1 action"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_rejected_inputs", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b2_after_B2_input", "representation": ["B2"], "communication": [], "action": ["B2"], "credit": []}
+      ],
+      "expected_actions": ["B1 attempt rejected", "B2 emits REPORT_0 once"],
+      "expected_receipt_transitions": ["no B1 receipt", "r09 ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: duplicate lifecycle events are exact no-ops, closed inputs have zero effect, and rejoin creates only B2"
+    },
+    {
+      "trace_id": "T10",
+      "name": "stale_prior_epoch_event_and_input_leave_current_epoch_unchanged",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A2@s0 bit=1"],
+        "closed": ["A1@s0"],
+        "roster_version": 4,
+        "next_event_seq": 5,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: nonduplicate stale LEAVE e10S seq=3 for A1 is REJECT_NO_EFFECT", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: reject obs_A1 and msg_A1_to_A2; admit current A2 query", "ACTION: reject A1 attempt; admit a10 owner=A2 REPORT_1 and create r10 OPEN deadline=b2"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: o10 resolves r10", "LEARNER: consume r10 once", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_REJECT", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01 unchanged A2@s0 rv4 next_seq5 plus stale witness", "S03/S08:A2 preserved then action advance", "S06:A2 current only", "S09:r10 CONSUMED", "S11:A2/a10 record"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_inputs", "representation": ["A2"], "communication": [], "action": ["A2"], "credit": []},
+        {"at": "b1_after_outcome", "representation": [], "communication": [], "action": [], "credit": ["r10"]}
+      ],
+      "expected_actions": ["A1 action rejected", "A2 REPORT_1 admitted"],
+      "expected_receipt_transitions": ["r10 ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: stale prior-epoch event and data change no current state, while A2 remains usable"
+    },
+    {
+      "trace_id": "T11",
+      "name": "event_sequence_gap_quarantine_and_open_receipt_expiry",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "AWAIT_OUTCOME",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a11 owner=A1 REPORT_0; create r11 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: JOIN e11G seq=4 while next seq=3 triggers FAIL_CLOSED_QUARANTINE; no owner or roster change", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: all inputs rejected during quarantine", "ACTION: all actions rejected"]},
+        {"boundary": "b2", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: no consumption", "CURRENT_INPUT: rejected", "ACTION: rejected"]},
+        {"boundary": "b3", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: r11 reaches declared deadline and changes OPEN->EXPIRED_CANCELLED", "LEARNER: consume request rejected", "CURRENT_INPUT: rejected", "ACTION: rejected"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "QUARANTINE"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01:quarantine true with rv2 and next_seq3 unchanged", "S09:r11 EXPIRED_CANCELLED count0"],
+        "forbidden": ["activate gap event owner", "learner consumption while quarantined", "post-gap action or message effect"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_input", "representation": ["A1"], "communication": [], "action": ["A1"], "credit": []},
+        {"at": "b1_through_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 REPORT_0 before gap", "no action after quarantine"],
+      "expected_receipt_transitions": ["r11 ABSENT->OPEN", "r11 OPEN->EXPIRED_CANCELLED at b3", "no consumption"],
+      "terminal_result": "PASS_EXPECTED_QUARANTINE: the gap is not applied, every downstream admission stops, and the open receipt closes by registered expiry"
+    },
+    {
+      "trace_id": "T12",
+      "name": "same_boundary_outcome_before_replacement_under_cancel_binding",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "OUTCOME_BEFORE_LIFECYCLE",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["OUTCOME: none", "LIFECYCLE: none", "LEARNER: none", "CURRENT_INPUT: admit A1 query", "ACTION: admit a12 owner=A1 REPORT_0; create r12 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["OUTCOME: o12 changes r12 OPEN->RESOLVED_READY", "LIFECYCLE: REPLACEMENT e12 seq=3 closes A1 and activates C1@s0 bit=1 rv3; r12 is no longer OPEN and remains RESOLVED_READY", "LEARNER: consume r12 once under immutable A1/a12 origin", "CURRENT_INPUT: admit C1 bit=1", "ACTION: no action"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "REPLACEMENT", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A1 closed C1@s0 rv3 next_seq4", "S02:C_epoch1", "S03/S08:C1 fresh A1 unreadable", "S04-S07:rv3 rebuild", "S09:r12 CONSUMED", "S11:A1/a12 record"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_outcome_before_lifecycle", "representation": [], "communication": [], "action": [], "credit": ["r12"]},
+        {"at": "b1_after_lifecycle_before_learner", "representation": [], "communication": [], "action": [], "credit": ["r12"]},
+        {"at": "b1_terminal", "representation": ["C1"], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["A1 REPORT_0 before replacement", "no current-slot lookup for r12"],
+      "expected_receipt_transitions": ["r12 ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: outcome-first ordering makes the already resolved A1 receipt consumable even though replacement follows in the same boundary"
+    },
+    {
+      "trace_id": "T13",
+      "name": "heldout_same_boundary_replacement_before_outcome_under_cancel_binding",
+      "partition": "heldout",
+      "initial_state": {
+        "active": ["D1@s2 bit=1", "B1@s0 bit=0"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit D1 query", "ACTION: admit a13 owner=D1 REPORT_1; create r13 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: REPLACEMENT e13 seq=3 closes D1 and activates C1@s2 bit=0 rv3; r13 OPEN->CANCELLED_NO_LEARN", "OUTCOME: same-boundary o13 rejected against r13 cancellation tombstone", "LEARNER: no consumption", "CURRENT_INPUT: admit C1 bit=0", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "REPLACEMENT"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:D1 closed C1@s2 rv3 next_seq4", "S02:C_epoch1", "S03/S08:C1 fresh D1 unreadable", "S04-S07:rv3 rebuild", "S09:r13 CANCELLED_NO_LEARN count0"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_lifecycle", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b1_terminal", "representation": ["C1"], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["D1 REPORT_1 before replacement", "C1 does not inherit D1 action or bit"],
+      "expected_receipt_transitions": ["r13 ABSENT->OPEN->CANCELLED_NO_LEARN", "same-boundary outcome no-op"],
+      "terminal_result": "PASS: lifecycle-first ordering under CANCEL_ON_LEAVE cancels the receipt before the same-boundary outcome"
+    },
+    {
+      "trace_id": "T14",
+      "name": "heldout_duplicate_outcome_before_and_after_consumption",
+      "partition": "heldout",
+      "initial_state": {
+        "active": ["D1@s2 bit=0"],
+        "closed": [],
+        "roster_version": 1,
+        "next_event_seq": 2,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "OUTCOME_BEFORE_LIFECYCLE",
+      "in_flight_binding": "AWAIT_OUTCOME",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["OUTCOME: none", "LIFECYCLE: none", "LEARNER: none", "CURRENT_INPUT: admit D1 query", "ACTION: admit a14 owner=D1 REPORT_0; create r14 OPEN deadline=b3"]},
+        {"boundary": "b1", "ordered_steps": ["OUTCOME: first o14.1 resolves r14; duplicate o14.2 in same outcome phase is rejected with r14 still RESOLVED_READY", "LIFECYCLE: none", "LEARNER: consume r14 once ->CONSUMED count1", "CURRENT_INPUT: none", "ACTION: none"]},
+        {"boundary": "b2", "ordered_steps": ["OUTCOME: duplicate o14.3 rejected against CONSUMED tombstone", "LIFECYCLE: none", "LEARNER: duplicate consume request rejected", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01", "S03-S10", "S12", "S13"],
+        "writes": ["S01:rv1 next_seq2 unchanged", "S08:D1 advance once", "S09:r14 CONSUMED count1", "S11:one D1/a14 record"],
+        "forbidden": ["second outcome payload bind", "second S11 record", "consumption_count greater than one"]
+      },
+      "expected_masks": [
+        {"at": "b1_after_outcomes", "representation": [], "communication": [], "action": [], "credit": ["r14"]},
+        {"at": "b2_terminal", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["D1 REPORT_0 once"],
+      "expected_receipt_transitions": ["r14 ABSENT->OPEN->RESOLVED_READY", "duplicate before consume no-op", "r14 ->CONSUMED count1", "duplicate after consume no-op"],
+      "terminal_result": "PASS: exactly one outcome binding, one update record and one consumption survive all duplicates"
+    },
+    {
+      "trace_id": "T15",
+      "name": "heldout_multiple_survivors_during_replacement",
+      "partition": "heldout",
+      "initial_state": {
+        "active": ["A1@s2 bit=0", "B1@s0 bit=1", "C1@s1 bit=0"],
+        "closed": [],
+        "roster_version": 3,
+        "next_event_seq": 4,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: REPLACEMENT e15 seq=4 closes C1 and activates D1@s1 bit=1 rv4; A1 and B1 remain uninterrupted", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit A1 and B1 current queries without reobserving their bits; admit one-time D1 bit=1", "ACTION: admit a15A REPORT_0, a15B REPORT_1, a15D REPORT_1; create r15A/r15B/r15D OPEN deadline=b2"]},
+        {"boundary": "b1", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: resolve r15A/r15B/r15D by action-id order", "LEARNER: consume all three once", "CURRENT_INPUT: none", "ACTION: none"]}
+      ],
+      "expected_state_io": {
+        "operations": ["REPLACEMENT", "CURRENT_INPUT_ACCEPT", "ACTION_ADMIT", "OUTCOME_RESOLVE", "LEARNER_CONSUME"],
+        "reads": ["S01-S10", "S12", "S13"],
+        "writes": ["S01:A1@s2 B1@s0 D1@s1 rv4 next_seq5", "S02:D_epoch1", "S03/S08:A1 and B1 preserved; C1 unreadable; D1 fresh", "S04-S07:full rv4 rebuild", "S09:three receipts CONSUMED", "S11:three origin-tagged records"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_replacement_before_input", "representation": [], "communication": [], "action": [], "credit": []},
+        {"at": "b0_after_input", "representation": ["A1", "B1", "D1"], "communication": [], "action": ["A1", "B1", "D1"], "credit": []},
+        {"at": "b1_after_outcomes", "representation": [], "communication": [], "action": [], "credit": ["r15A", "r15B", "r15D"]}
+      ],
+      "expected_actions": ["A1 REPORT_0 and B1 REPORT_1 use preserved self-private state", "D1 REPORT_1 uses fresh state"],
+      "expected_receipt_transitions": ["r15A, r15B, r15D each ABSENT->OPEN->RESOLVED_READY->CONSUMED"],
+      "terminal_result": "PASS: both uninterrupted survivors retain only S03/S08 while all roster-dependent state is rebuilt and D1 is fresh"
+    },
+    {
+      "trace_id": "T16",
+      "name": "unclassified_action_affecting_state_sentinel",
+      "partition": "exposed",
+      "initial_state": {
+        "active": ["A1@s0 bit=0", "B1@s1 bit=1"],
+        "closed": [],
+        "roster_version": 2,
+        "next_event_seq": 3,
+        "receipts": [],
+        "quarantined": false
+      },
+      "boundary_mode": "LIFECYCLE_BEFORE_OUTCOME",
+      "in_flight_binding": "CANCEL_ON_LEAVE",
+      "boundaries": [
+        {"boundary": "b0", "ordered_steps": ["LIFECYCLE: none", "OUTCOME: none", "LEARNER: none", "CURRENT_INPUT: admit ordinary A1 query observation, then inject sentinel U01 whose value would flip the actor action but which has no S01-S14 manifest binding", "ACTION: manifest completeness check detects U01 before actor forward; effective action mask is fail-closed empty; no action or receipt"]}
+      ],
+      "expected_state_io": {
+        "operations": ["CURRENT_INPUT_ACCEPT", "MANIFEST_SENTINEL"],
+        "reads": ["state-variable registry", "S01", "S07"],
+        "writes": ["S01:rv2 next_seq3 unchanged", "trace_invalid_before_action with witness=U01_UNBOUND"],
+        "forbidden": ["actor forward using U01", "environment action", "S08 advancement", "S09 receipt", "S11 learner record", "S12/S13 update"]
+      },
+      "expected_masks": [
+        {"at": "b0_after_ordinary_input_before_sentinel_check", "representation": ["A1"], "communication": [], "action": ["A1"], "credit": []},
+        {"at": "b0_effective_after_sentinel_detection", "representation": [], "communication": [], "action": [], "credit": []}
+      ],
+      "expected_actions": ["NO_ACTION because U01 is unclassified"],
+      "expected_receipt_transitions": [
+        "N/A: no receipt can be created because the manifest sentinel halts before actor forward"
+      ],
+      "terminal_result": "PASS_EXPECTED_SENTINEL_DETECTION: implementation-invalid I12 witness is caught before any action or update; the trace matrix stops and no scientific candidate result is produced"
+    }
+  ],
+  "coverage_reconciliation": [
+    {"original_scenario": "join into unused slot", "trace_ids": ["T01"]},
+    {"original_scenario": "leave with no in-flight action", "trace_ids": ["T02"]},
+    {"original_scenario": "leave with OPEN action under CANCEL_ON_LEAVE", "trace_ids": ["T03"]},
+    {"original_scenario": "leave with OPEN action under AWAIT_OUTCOME", "trace_ids": ["T04"]},
+    {"original_scenario": "replacement in the same slot", "trace_ids": ["T05", "T06", "T12", "T13"]},
+    {"original_scenario": "same owner rejoin into same slot with fresh epoch", "trace_ids": ["T07"]},
+    {"original_scenario": "same owner rejoin into different slot with fresh epoch", "trace_ids": ["T08"]},
+    {"original_scenario": "different owner slot reuse", "trace_ids": ["T08"]},
+    {"original_scenario": "exact duplicate join and leave", "trace_ids": ["T09"]},
+    {"original_scenario": "stale prior-epoch event", "trace_ids": ["T10"]},
+    {"original_scenario": "event sequence gap and reconciliation quarantine", "trace_ids": ["T11"]},
+    {"original_scenario": "simultaneous outcome and lifecycle event under both boundary modes", "trace_ids": ["T12", "T13"]},
+    {"original_scenario": "delayed outcome after leave", "trace_ids": ["T03", "T04"]},
+    {"original_scenario": "delayed outcome after replacement", "trace_ids": ["T05", "T06"]},
+    {"original_scenario": "duplicate outcome before and after consumption", "trace_ids": ["T14"]},
+    {"original_scenario": "inactive observation and communication", "trace_ids": ["T09", "T10"]},
+    {"original_scenario": "multiple uninterrupted survivors while another member changes", "trace_ids": ["T15"]},
+    {"original_scenario": "unclassified action-affecting state sentinel", "trace_ids": ["T16"]}
+  ],
+  "matrix_gate": {
+    "row_field_requirements": [
+      "initial_state",
+      "boundary_mode",
+      "in_flight_binding",
+      "boundaries with exact ordered steps",
+      "expected_state_io",
+      "expected_masks",
+      "expected_actions",
+      "expected_receipt_transitions",
+      "terminal_result"
+    ],
+    "pass_rule": "All sixteen frozen rows execute once in trace_id order unless an earlier invariant failure stops the matrix. For ordinary rows, every I01-I12 invariant has zero violation. T11 passes only by entering fail-closed quarantine and denying downstream admission. T16 passes only by detecting the unbound state before actor forward and classifying the realization implementation-invalid. Any missing row, extra row, changed ordering, changed binding, undeclared read/write, trace-specific exception, duplicate receipt consumption, or unmatched mask is terminal and no Stage B interpretation follows.",
+    "no_optional_stopping": true,
+    "no_row_replacement": true,
+    "no_stage_b_authorization": true,
+    "no_compute_authorization": true
+  },
+  "completion": {
+    "status": "ADVISORY_REFINEMENT_MATERIALIZED",
+    "exact_gap_addressed": "one exact sixteen-row trace matrix now specifies every field named by the dedicated Pro refinement request",
+    "candidate_artifact_modified": false,
+    "source_campaign_modified": false,
+    "pro_archive_modified": false,
+    "project_state_modified": false,
+    "code_modified": false,
+    "compute_run": false,
+    "git_used": false,
+    "cpm_dispatched": false,
+    "next_boundary": "Ops identity intake and one candidate-scoped EXPLORER_TOY_DESIGN_ASSERTION_AUDIT recheck of the exact gap only"
+  }
+}
