@@ -232,7 +232,7 @@ foreach ($entry in @(
     @($agentifyTransportSkill, 'assignment_identity'),
     @($agentifyTransportSkill, 'prompt_sha256'),
     @($agentifyTransportSkill, 'timeout_ms'),
-    @($agentifyTransportContractNormalized, 'agentify_required_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39'),
+    @($agentifyTransportContractNormalized, 'agentify_required_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f'),
     @($agentifyTransportContractNormalized, 'runtime-only'),
     @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
     @($agentifyTransportContractNormalized, 'sourceDirty'),

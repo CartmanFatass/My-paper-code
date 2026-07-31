@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = 1
 MAX_TIMEOUT_MS = 45 * 60 * 1000
-AGENTIFY_REQUIRED_COMMIT = "e594eabb7059ecea20cfddbef5523ceb9562cf39"
+AGENTIFY_REQUIRED_COMMIT = "2a06420f0beabea1b45061ffc2f98be8d4a4b63f"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
@@ -393,22 +393,52 @@ def _receipt_bytes(receipt: dict[str, Any]) -> bytes:
     return (json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
-def command_freeze(args: argparse.Namespace) -> None:
+def command_prepare(args: argparse.Namespace) -> None:
     repo_root = _repo_root()
     owner = _required_text(args.owner, "transport_owner", maximum=128)
     if owner not in OWNER_KEYS:
         _fail("invalid_transport_owner")
+    stable_key = _required_text(args.stable_key, "stable_key", maximum=128)
+    if not KEY_RE.fullmatch(stable_key) or stable_key not in OWNER_KEYS[owner]:
+        _fail("stable_key_owner_mismatch")
     assignment_identity = _required_text(
         args.assignment_identity, "assignment_identity", maximum=1024
     )
     operation_key = _required_text(args.operation_key, "operation_key", maximum=128)
     if not KEY_RE.fullmatch(operation_key):
         _fail("invalid_operation_key")
-    prompt_sha256 = _required_text(args.prompt_sha256, "prompt_sha256", maximum=64)
-    if not SHA256_RE.fullmatch(prompt_sha256):
-        _fail("invalid_prompt_sha256")
-    if args.backend not in {"browser", "agentify"}:
-        _fail("invalid_transport_backend")
+    model = _required_text(args.model, "model", maximum=128)
+    conversation_url = _required_text(args.conversation_url, "conversation_url", maximum=2048)
+    conversation_id = _required_text(args.conversation_id, "conversation_id", maximum=256)
+    parsed = urlparse(conversation_url)
+    if (
+        parsed.scheme != "https"
+        or parsed.netloc != "chatgpt.com"
+        or parsed.query
+        or parsed.fragment
+        or parsed.path != f"/c/{conversation_id}"
+    ):
+        _fail("conversation_identity_mismatch")
+    timeout_ms = _required_int(
+        args.timeout_ms, "timeout_ms", minimum=3000, maximum=MAX_TIMEOUT_MS
+    )
+    prompt_path = _require_within(
+        args.prompt_path,
+        _owner_roots(repo_root, owner, "archive"),
+        "prompt_path",
+    )
+    if not prompt_path.is_file():
+        _fail("prompt_path_missing")
+    try:
+        prompt_bytes = prompt_path.read_bytes()
+        prompt = prompt_bytes.decode("utf-8")
+    except (OSError, UnicodeError) as exc:
+        raise TransportError("prompt_not_exact_utf8") from exc
+    if not prompt:
+        _fail("prompt_empty")
+    if assignment_identity not in prompt:
+        _fail("assignment_identity_not_in_prompt")
+    prompt_sha256 = _sha256(prompt_bytes)
     selection_path = _require_within(
         args.selection,
         _owner_roots(repo_root, owner, "runtime"),
@@ -419,16 +449,44 @@ def command_freeze(args: argparse.Namespace) -> None:
     selection = {
         "schema_version": SCHEMA_VERSION,
         "assignment_identity": assignment_identity,
-        "transport_backend": args.backend,
+        "transport_backend": "agentify",
         "operation_key": operation_key,
         "prompt_sha256": prompt_sha256,
     }
-    data = (json.dumps(selection, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    _atomic_write_new(selection_path, data)
+    request_path = _require_within(
+        args.request,
+        _owner_roots(repo_root, owner, "runtime"),
+        "request_path",
+    )
+    request = {
+        "schema_version": SCHEMA_VERSION,
+        "transport_backend": "agentify",
+        "transport_owner": owner,
+        "stable_key": stable_key,
+        "provider": "chatgpt",
+        "model": model,
+        "conversation_url": conversation_url,
+        "conversation_id": conversation_id,
+        "idempotency_key": operation_key,
+        "assignment_identity": assignment_identity,
+        "backend_selection_path": str(selection_path),
+        "prompt_path": str(prompt_path),
+        "prompt_sha256": prompt_sha256,
+        "timeout_ms": timeout_ms,
+    }
+    selection_bytes = (
+        json.dumps(selection, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    request_bytes = (
+        json.dumps(request, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    _atomic_write_new(selection_path, selection_bytes)
+    validate_request(request, repo_root=repo_root)
+    _atomic_write_new(request_path, request_bytes)
     print(
-        "HMASD_TRANSPORT_BACKEND_FROZEN "
+        "HMASD_AGENTIFY_REQUEST_PREPARED "
         f"assignment_identity={assignment_identity} operation_key={operation_key} "
-        f"backend={args.backend} path={selection_path}"
+        f"prompt_sha256={prompt_sha256} selection={selection_path} request={request_path}"
     )
 
 
@@ -484,14 +542,19 @@ def command_archive(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
-    freeze = subparsers.add_parser("freeze")
-    freeze.add_argument("--owner", required=True)
-    freeze.add_argument("--assignment-identity", required=True)
-    freeze.add_argument("--operation-key", required=True)
-    freeze.add_argument("--prompt-sha256", required=True)
-    freeze.add_argument("--backend", choices=("browser", "agentify"), required=True)
-    freeze.add_argument("--selection", type=Path, required=True)
-    freeze.set_defaults(handler=command_freeze)
+    prepare = subparsers.add_parser("prepare")
+    prepare.add_argument("--owner", required=True)
+    prepare.add_argument("--stable-key", required=True)
+    prepare.add_argument("--model", required=True)
+    prepare.add_argument("--conversation-url", required=True)
+    prepare.add_argument("--conversation-id", required=True)
+    prepare.add_argument("--assignment-identity", required=True)
+    prepare.add_argument("--operation-key", required=True)
+    prepare.add_argument("--prompt-path", type=Path, required=True)
+    prepare.add_argument("--timeout-ms", type=int, default=MAX_TIMEOUT_MS)
+    prepare.add_argument("--selection", type=Path, required=True)
+    prepare.add_argument("--request", type=Path, required=True)
+    prepare.set_defaults(handler=command_prepare)
     for name in ("submit", "verify", "archive"):
         command = subparsers.add_parser(name)
         command.add_argument("--request", type=Path, required=True)

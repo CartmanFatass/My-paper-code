@@ -150,22 +150,31 @@ class AgentifyTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.TransportError, "backend_selection_mismatch"):
             MODULE.validate_request(self.request, repo_root=self.root)
 
-    def test_freeze_command_is_exact_and_cannot_switch_backend(self) -> None:
+    def test_prepare_command_computes_hash_and_writes_exact_restart_stable_pair(self) -> None:
         selection = self.root / "logs/agentify/frozen/TRANSPORT_BACKEND.json"
+        request_path = self.root / "logs/agentify/frozen/REQUEST.json"
+        prompt = self.root / "docs/external-review/round/frozen_question.md"
+        prompt.write_text("Assignment: ROUND-FROZEN\nReply exactly.", encoding="utf-8")
         args = SimpleNamespace(
             owner="research_operations_manager",
+            stable_key="hmasd-formal-pro",
+            model="Pro",
+            conversation_url="https://chatgpt.com/c/conversation-1",
+            conversation_id="conversation-1",
             assignment_identity="ROUND-FROZEN",
-            backend="agentify",
             operation_key="round-frozen-operation",
-            prompt_sha256="b" * 64,
+            prompt_path=prompt,
+            timeout_ms=300000,
             selection=selection,
+            request=request_path,
         )
         with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
-            MODULE.command_freeze(args)
-            MODULE.command_freeze(args)
-            args.backend = "browser"
+            MODULE.command_prepare(args)
+            MODULE.command_prepare(args)
+            args.model = "Thinking"
             with self.assertRaisesRegex(MODULE.TransportError, "output_exists_with_different_bytes"):
-                MODULE.command_freeze(args)
+                MODULE.command_prepare(args)
+        expected_hash = hashlib.sha256(prompt.read_bytes()).hexdigest()
         self.assertEqual(
             json.loads(selection.read_text(encoding="utf-8")),
             {
@@ -173,9 +182,23 @@ class AgentifyTransportTest(unittest.TestCase):
                 "assignment_identity": "ROUND-FROZEN",
                 "transport_backend": "agentify",
                 "operation_key": "round-frozen-operation",
-                "prompt_sha256": "b" * 64,
+                "prompt_sha256": expected_hash,
             },
         )
+        prepared_request = json.loads(request_path.read_text(encoding="utf-8"))
+        self.assertEqual(prepared_request["prompt_sha256"], expected_hash)
+        self.assertEqual(prepared_request["prompt_path"], str(prompt.resolve()))
+        self.assertEqual(prepared_request["backend_selection_path"], str(selection.resolve()))
+        self.assertEqual(
+            MODULE.validate_request(prepared_request, repo_root=self.root)["prompt"],
+            prompt.read_bytes().decode("utf-8"),
+        )
+
+    def test_prepare_parser_does_not_accept_operator_supplied_prompt_hash(self) -> None:
+        help_text = MODULE.build_parser().format_help()
+        self.assertIn("prepare", help_text)
+        prepare = MODULE.build_parser()._subparsers._group_actions[0].choices["prepare"]
+        self.assertNotIn("--prompt-sha256", prepare.format_help())
 
     def test_receipt_rejects_wrong_send_identity_completion_and_hash(self) -> None:
         mutations = [

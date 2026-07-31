@@ -7,7 +7,7 @@ formal_compute=false
 scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
-agentify_required_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39
+agentify_required_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f
 ```
 
 Agentify is an optional receipt-bearing transport for an already-authorized
@@ -33,14 +33,15 @@ model before sending.
 
 ## One-round protocol
 
-1. The owning role verifies the user-authorized turn and writes one new
-   role-owned `TRANSPORT_BACKEND.json` containing exactly `schema_version=1`,
-   the assignment identity, `transport_backend=browser|agentify`, one immutable
-   operation key and the exact prompt SHA-256.
+1. The owning role verifies the user-authorized turn. For Agentify, the
+   registered wrapper reads the exact prompt bytes, computes SHA-256 internally,
+   and writes one new role-owned `TRANSPORT_BACKEND.json` plus its matching
+   request. Operators do not calculate, transcribe or edit hashes.
 2. The immutable selection is reloaded before every send or recovery. It cannot
    be changed after creation; the other backend must refuse the assignment.
 3. For Agentify, the owner resolves its stable key to one runtime conversation
-   binding and persists the immutable request identity before sending.
+   binding and uses the wrapper's `prepare` command to persist the immutable
+   request identity before sending.
 4. Agentify submits at most one exact prompt for that operation. It does not
    click `Answer now`, `Continue`, `Retry` or `ResponseRetry`.
 5. The transport validator
@@ -69,7 +70,8 @@ stable Agentify production turns and the user explicitly accepts removal.
 
 ## Runtime and installation boundary
 
-Agentify must run from the exact required commit above with no tracked source
+Agentify must run with the Electron browser backend from the exact required
+commit above with no tracked source
 changes; a later fork revision requires a new bounded compatibility smoke
 before use. Its public `/health` response supplies `sourceCommit` and
 `sourceDirty`, and the HMASD wrapper must match both before any send. Its MCP

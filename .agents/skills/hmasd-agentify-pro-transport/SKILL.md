@@ -21,7 +21,7 @@ Use the locally installed Agentify endpoint and the HMASD conda interpreter:
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
 runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39
+required_agentify_source_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f
 ```
 
 Read the runtime contract before use. The wrapper requires the live Agentify
@@ -51,8 +51,11 @@ place credentials, Agentify state or live conversation registrations in Git.
 
 ## Request and one-send contract
 
-Create one UTF-8 JSON request file with exactly these fields (the wrapper
-rejects unknown or missing identity fields):
+Run `prepare` once from the exact prompt file. The wrapper computes the prompt
+SHA-256 itself and creates the immutable backend selection plus UTF-8 request;
+the operator never calculates, copies or edits the hash. The generated request
+contains exactly these fields (the wrapper rejects unknown or missing identity
+fields):
 
 ```json
 {
@@ -91,8 +94,24 @@ transport blocker.
 ## Mechanical commands
 
 All paths are absolute at invocation. Agentify owns the durable ledger; the
-wrapper owns validation and the new role-owned receipt. The caller supplies no
-assembled monitor command or opaque token.
+wrapper owns request preparation, validation and the new role-owned receipt.
+The caller supplies no prompt hash, assembled monitor command or opaque token.
+
+```powershell
+& C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
+  .agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py `
+  prepare --owner <registered-owner> --stable-key <owner-key> `
+  --model <live-pro-model> --conversation-url <live-exact-url> `
+  --conversation-id <live-id> --assignment-identity <exact-assignment> `
+  --operation-key <round-unique-key> --prompt-path <absolute-prompt> `
+  --timeout-ms 2700000 --selection <new-absolute-TRANSPORT_BACKEND.json> `
+  --request <new-absolute-request.json>
+```
+
+`prepare` is idempotent only for byte-identical outputs. It verifies that the
+prompt is exact UTF-8 and contains the assignment identity, computes its hash,
+and validates the generated pair before returning. A changed prompt, model,
+conversation or operation identity cannot overwrite the pair.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `

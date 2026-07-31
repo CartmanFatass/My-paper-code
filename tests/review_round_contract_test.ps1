@@ -199,7 +199,7 @@ foreach ($entry in @(
     @($agentifySkillNormalized, 'verify --request <absolute-request.json> --receipt <absolute-receipt.json>'),
     @($agentifySkillNormalized, 'archive --request <absolute-request.json> --receipt <absolute-receipt.json>'),
     @($agentifySkillNormalized, 'the wrapper does not create a short-watch terminal state'),
-    @($agentifyContractNormalized, 'agentify_required_commit=e594eabb7059ecea20cfddbef5523ceb9562cf39'),
+    @($agentifyContractNormalized, 'agentify_required_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f'),
     @($agentifyContractNormalized, 'hmasd-formal-pro'),
     @($agentifyContractNormalized, 'hmasd-explorer-validation-pro'),
     @($agentifyContractNormalized, 'hmasd-independent-research-pro'),
@@ -207,9 +207,9 @@ foreach ($entry in @(
     @($agentifyContractNormalized, 'An Agentify-backed turn never creates a sentinel or monitor child'),
     @($agentifyContractNormalized, 'Retiring the browser monitor or its sentinel is a separate workflow change'),
     @($agentifyScript, 'MAX_TIMEOUT_MS = 45 * 60 * 1000'),
-    @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "e594eabb7059ecea20cfddbef5523ceb9562cf39"'),
+    @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "2a06420f0beabea1b45061ffc2f98be8d4a4b63f"'),
     @($agentifyScript, 'BACKEND_SELECTION_FIELDS ='),
-    @($agentifyScript, 'command_freeze'),
+    @($agentifyScript, 'command_prepare'),
     @($agentifyScript, 'OWNER_KEYS ='),
     @($agentifyScript, 'REQUEST_FIELDS =')
 )) {
