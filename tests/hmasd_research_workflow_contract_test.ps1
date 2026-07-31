@@ -38,8 +38,11 @@ $expectedRoles = @(
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
+    'WORKFLOW_AUDITOR.md',
     'WORKFLOW_DESIGN_MANAGER.md',
-    'WORKFLOW_COST_REVIEWER.md') | Sort-Object
+    'WORKFLOW_COST_REVIEWER.md',
+    'WORKFLOW_IMPLEMENTER.md',
+    'WORKFLOW_REVIEWER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
 }

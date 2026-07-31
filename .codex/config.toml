@@ -37,6 +37,21 @@ description = "Independent Sol-xhigh reviewer for low-frequency workflow cost au
 config_file = "./agents/hmasd-workflow-cost-reviewer.toml"
 nickname_candidates = ["HMASD Cost Reviewer", "Workflow Cost Reviewer"]
 
+[agents."HMASDWorkflowAuditor"]
+description = "Read-only Luna-high auditor for workflow impact mapping and verification."
+config_file = "./agents/hmasd-workflow-auditor.toml"
+nickname_candidates = ["Workflow Auditor", "Control Plane Auditor", "Workflow Verifier"]
+
+[agents."HMASDWorkflowImplementer"]
+description = "Luna-high implementer for one confirmed nonoverlapping workflow slice."
+config_file = "./agents/hmasd-workflow-implementer.toml"
+nickname_candidates = ["Workflow Implementer", "Control Plane Implementer"]
+
+[agents."HMASDWorkflowReviewer"]
+description = "Read-only Sol-xhigh reviewer for risk-triggered workflow changes."
+config_file = "./agents/hmasd-workflow-reviewer.toml"
+nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
+
 [agents."HMASDExperimentOperator"]
 description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."
 config_file = "./agents/hmasd-experiment-operator.toml"

@@ -48,10 +48,21 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    with `scripts/hmasd_workspace_ticket.py`; pass only the ticket path, require
    child-side `resolve`, and run assigning-authority verification. Never transcribe a UUID-heavy
    worktree path into an assignment.
+   For a multi-family change or broad path set, WDM may split read-only mapping
+   across two or three registered `hmasd-workflow-auditor` children with
+   disjoint surface families. Six paths is a useful dispatch heuristic, not an
+   authorization or acceptance gate. WDM merges their evidence, decides every
+   classification and owns the final path set.
 3. **Probe.** Run the smallest existing contract that should expose the change.
    If it passes despite a known missing relation, add one negative regression
    for that relation rather than expanding a coverage suite.
-4. **Implement.** Close the smallest active-line dependency set. A registered
+4. **Implement.** Close the smallest active-line dependency set. After the user
+   confirms the complete plan, WDM may assign one or two registered
+   `hmasd-workflow-implementer` children exact nonoverlapping path slices and
+   frozen plan clauses. Each child edits only its slice, uses no Git and returns
+   one `WORKFLOW_CHANGE_PACKET`. WDM directly implements semantic junctions,
+   resolves packet conflicts and integrates the result.
+   A registered
    profile names exactly one existing role charter. Every profile is registered
    exactly once; every role and Skill is routed. Remove superseded live paths
    instead of keeping compatibility aliases. Use
@@ -61,6 +72,16 @@ first follows `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
    tests and targeted negative searches from the impact matrix. Inspect the
    actual diff path set and `git diff --check`. The checker is structural; it
    does not replace change-specific semantic checks.
+   Registered `hmasd-workflow-auditor` children in `postchange_verify` mode may
+   run disjoint named read-only checks and return `WORKFLOW_VERIFY_PACKET`s.
+   WDM still reads the final diff, checks the decisive semantics and owns the
+   acceptance decision.
+   Assign one registered `hmasd-workflow-reviewer` only when the integrated
+   change touches authority or file ownership, locked routing or model settings,
+   Pro transport/recovery, compute admission, an action-performing script/hook,
+   or unresolved cross-worker semantics. Its `WORKFLOW_REVIEW_PACKET` is
+   advisory. Ordinary low-risk documentation edits need no reviewer, and there
+   is no review of the review.
    Only when the user explicitly requests a workflow cost audit, assign one
    registered `hmasd-workflow-cost-reviewer` with `fork_turns=none`. Its return
    is optional evidence for Workflow Design Manager, never an automatic
@@ -88,7 +109,8 @@ Add change-specific active files or retired terms when needed:
 
 Accept only when the impact matrix is classified, structural closure passes,
 focused contracts pass, targeted stale-reference searches are explained, the
-exact changed path set is inspected, and any user-requested workflow cost audit
+exact changed path set and final diff are inspected by WDM, every assigned
+workflow-child packet is reconciled, and any user-requested workflow cost audit
 has no unresolved finding. A fresh-task profile smoke may remain
 an explicit post-restart condition when the current task cannot reload its own
 router.

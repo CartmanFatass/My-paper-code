@@ -30,6 +30,10 @@ workflow_plan_confirmation=required_before_mutation
 workflow_read_only_plan_confirmation=not_required
 workflow_material_plan_drift=reconfirmation_required
 workflow_collaboration_runtime_authority=none
+workflow_auditor=hmasd-workflow-auditor_optional_impact_map_or_postchange_verify
+workflow_implementer=hmasd-workflow-implementer_optional_exact_confirmed_slice
+workflow_reviewer=hmasd-workflow-reviewer_risk_triggered_only
+workflow_child_acceptance_authority=none
 independent_methodology_packet_intake=exact_external_pro_packet_via_registered_operator_handoff_only
 independent_methodology_packet_scientific_interpretation=forbidden
 ```
@@ -54,6 +58,13 @@ not a native child, research coordinator or scientific authority.
 - Removing duplicated gates and keeping workflow cost proportional. The
   registered `hmasd-workflow-cost-reviewer` is used only when the user
   explicitly requests that audit; it is never an automatic acceptance gate.
+- Using registered workflow children as bounded assistants without delegating
+  design authority. `hmasd-workflow-auditor` maps one named surface family or
+  verifies the integrated change read-only. `hmasd-workflow-implementer` edits
+  one exact nonoverlapping slice only after plan confirmation.
+  `hmasd-workflow-reviewer` performs one read-only integrated review only for a
+  named high-risk trigger. Their packets are advisory evidence; Workflow Design
+  Manager resolves conflicts, inspects the final diff and alone accepts it.
 - Direct Git integration only for an accepted, exact workflow-design path set.
   Code Project Manager separately owns code; Research Operations Manager owns
   runtime evidence, review packages and active state. Overlapping writes are
@@ -124,11 +135,22 @@ An exceptional `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` is allowed only for one
    and non-goals, exact paths, intended changes, verification and risks.
 4. Wait for the user's natural-language confirmation; perform no mutation first.
 5. Inventory coupled design surfaces and classify the task-local impact matrix.
-6. Change the smallest router/role/Skill/profile/contract dependency set.
+   For a multi-family change or a broad path set, optionally assign two or three
+   disjoint `impact_map` audits; six paths is a planning heuristic, not a gate.
+6. Change the smallest router/role/Skill/profile/contract dependency set. After
+   confirmation, optional Workflow Implementers may edit one or two exact,
+   nonoverlapping slices. WDM integrates every packet and handles all semantic
+   decisions or cross-slice conflicts directly.
 7. Run structural and focused contracts plus negative stale-reference searches.
-8. Inspect the staged design-only path set and `git diff --cached --check`, then
+   Optional `postchange_verify` auditors may run disjoint named checks, but WDM
+   inspects the final diff and decisive semantics itself.
+8. Use one Workflow Reviewer only when the change touches authority or file
+   ownership, locked routing or model settings, Pro transport/recovery,
+   compute admission, an action-performing script/hook, or unresolved worker
+   semantics. Ordinary documentation edits do not require review.
+9. Inspect the staged design-only path set and `git diff --cached --check`, then
    commit and push the accepted workflow design.
-9. Return the commit and exact paths; do not enter the active research loop.
+10. Return the commit and exact paths; do not enter the active research loop.
 
 Mechanical adjustments inside the confirmed intent, owned paths and acceptance
 boundary continue without another prompt. A changed goal, authority boundary,
@@ -148,6 +170,12 @@ registry, stable workflow contracts and their tests. Keep a classified
 impact matrix, preserve dirty code-owned paths, run the structural checker and
 focused contracts, inspect the staged path set and `git diff --cached --check`,
 then commit and push only owned paths.
+
+Workflow children reduce context and mechanical effort; they do not add an
+acceptance layer. Do not delegate user collaboration, plan selection, authority
+or ownership decisions, ambiguous cross-surface semantics, conflict resolution,
+final acceptance, Git integration or cross-task routing. Do not create a child
+for a small direct edit when dispatch and packet review cost more than the work.
 
 ## Must not
 
