@@ -88,3 +88,21 @@ candidate_scientific_iteration_cost=zero
 
 The VSP units remain queued/live and were not compared or selected. The paused
 UAV/G0 workflow remains unchanged.
+
+## VAP-FOLR Gate 3 correction recheck
+
+candidate_status=TOY_CONTRACT_FROZEN
+candidate_review_round=20260731_explorer_toy_validation_p1_vap_folr_design_assertion_correction_recheck
+candidate_package_stage_commit=b31a182f845617f3b1ddcf6382bcaee376ff9e28
+candidate_ops_pro_conversation_id=6a6cd2d9-321c-83e8-a046-7062de12c4b7
+candidate_raw_archive=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_correction_recheck/21_PRO_OPEN_RAW.md
+candidate_mechanical_intake=docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_correction_recheck/50_MECHANICAL_INTAKE_RECORD.md
+candidate_disposition=TOY_CONTRACT_FROZEN
+candidate_recheck_scope=exact_gap_only
+candidate_cpm_dispatch_authorized=false
+candidate_compute_authorized=false
+candidate_scientific_iteration_cost=zero
+candidate_next_boundary=EXPLORER_TOY_CONTRACT_FROZEN_AWAITING_EXPLICIT_CPM_HANDOFF_AUTHORITY
+
+The refinement closed the previously reported trace-matrix gap. This status
+does not itself authorize code, toy compute or a CPM assignment.
