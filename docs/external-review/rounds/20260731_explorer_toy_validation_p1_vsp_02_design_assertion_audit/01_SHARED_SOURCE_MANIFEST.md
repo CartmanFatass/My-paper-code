@@ -5,6 +5,7 @@ repository=CartmanFatass/My-paper-code
 branch=aggressive
 workflow_id=EXPLORER-TOY-VALIDATION-2026-07-31-P1
 candidate_id=CAND-VSP-02
+package_stage_commit=bd9c6d2fbb073537c8c4a0a0e635142948cbaf9c
 candidate_count=1
 cross_direction_competition=false
 combined_toy=false
