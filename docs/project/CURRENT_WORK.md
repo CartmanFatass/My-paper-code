@@ -27,7 +27,7 @@ one. **When a line here stops being about the present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=PICK UP HERE. Round 3 closed, round 4 in progress. The ruling, the five corrections and the eight scheduled actions are reconciled at docs/external-review/rounds/20260730_d7_s_manifest_replay_gate_result/30_PM_SCIENTIFIC_RECONCILIATION.md -- read that, not a restatement here. Action status: 1-6 done (canonicalization barrier in envs/pettingzoo/scenario7_energy_aware.py, recompute set derived, verified 4/4 construction pairs; manifests/d7s_dev/ committed); 7 done -- MANIFEST_REPLAY_PASS locally with the liveness mechanism firing 223 times (commit fa155bdd); 8 (two independent cloud jobs) ESCALATED, BLOCKED ON USER -- docs/project/PROPOSED_WORKFLOW_JOB_MANIFEST_REPLAY.md carries the exact YAML and needs approval. STILL OPEN: the user_cluster_assignments divergence, unexplained since round 2.
+next_boundary=PICK UP HERE. Round 3 closed, round 4 in progress. The ruling, the five corrections and the eight scheduled actions are reconciled at docs/external-review/rounds/20260730_d7_s_manifest_replay_gate_result/30_PM_SCIENTIFIC_RECONCILIATION.md -- read that, not a restatement here. Action status: 1-6 done (canonicalization barrier in envs/pettingzoo/scenario7_energy_aware.py, recompute set derived, verified 4/4 construction pairs; manifests/d7s_dev/ committed); 7 done -- MANIFEST_REPLAY_PASS locally with the liveness mechanism firing 223 times (commit fa155bdd); 8 (two independent cloud jobs) ESCALATED, BLOCKED ON USER -- docs/project/PROPOSED_WORKFLOW_JOB_MANIFEST_REPLAY.md carries the exact YAML and needs approval; the same job now also settles the dtype prediction below. The user_cluster_assignments divergence is EXPLAINED at the mechanism level: a dtype-width serialization artifact (int32 vs int64 from `dtype=int`), values identical, one inferred link (the Linux int64 default) untested -- docs/research/cdc/EVIDENCE_NOTES/20260731_USER_CLUSTER_ASSIGNMENTS_DIVERGENCE_IS_DTYPE_WIDTH_NOT_VALUES.md. It adds one disclosure item (digest treats width as world-distinguishing) and does NOT explain the cloud-cloud 3-of-8 divergence, which remains UNRESOLVED.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -487,7 +487,7 @@ reporting success.
 ## Standing constraints
 
 ```text
-active_pm_session=5c76d4a4-b3e5-41ff-8682-03d16b234f5f (claimed 2026-07-31 at 293fb879; the prior claim's boundary was behind HEAD, a stale claim is not a lock)
+active_pm_session=cdc7100d-dd1b-4a52-821e-cff16b7fe2df (claimed 2026-07-31 in the dtype-mechanism commit; the prior claim's boundary 293fb879 was behind HEAD 5e25ae1e, a stale claim is not a lock)
 branch_scope=untied-k only, never touch another branch (user ruling 2026-07-27)
 aggressive_branch=another line's, never push
 formal_compute=user authority only

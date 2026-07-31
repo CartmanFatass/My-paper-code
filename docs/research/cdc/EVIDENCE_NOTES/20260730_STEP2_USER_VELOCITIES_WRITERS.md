@@ -230,3 +230,17 @@ ambiguous. Run twice, diff with `d7_s_world_conformance_gate.py`.
 
 Until then the platform-boundary localization (`user_velocities`, scalar trig) is
 what step 1 has produced, and it is explicitly *not* the cloud-versus-cloud answer.
+
+---
+
+**Correction, 2026-07-31.** Two more claims in this note are dead:
+
+1. The "fixed number of draws" premise (line 83 above) is **refuted by
+   measurement**: the intra-cluster branch consumes 8 MT19937 words per user,
+   the inter-cluster branch 9. Do not cite it.
+2. The `user_cluster_assignments` divergence is no longer unexplained: it is a
+   serialization-width artifact (`dtype=int` is int32 on Windows, int64 on LP64
+   Linux; the component digest hashes bytes without dtype), with identical
+   values on both sides. Mechanism, PM verification, the falsifiable prediction
+   and its exact test:
+   `20260731_USER_CLUSTER_ASSIGNMENTS_DIVERGENCE_IS_DTYPE_WIDTH_NOT_VALUES.md`.
