@@ -41,6 +41,17 @@
       "round": "20260731_explorer_toy_validation_p1_design_assertion_audit",
       "question_file": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/20_PRO_OPEN_QUESTION.md",
       "raw_file": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/21_PRO_OPEN_RAW.md"
+    },
+    "explorer_toy_validation_p1_vap_ops": {
+      "role": "EXPLORER_TOY_VALIDATION_P1_VAP_OPS",
+      "conversation_id": "6a6cd2d9-321c-83e8-a046-7062de12c4b7",
+      "url": "https://chatgpt.com/c/6a6cd2d9-321c-83e8-a046-7062de12c4b7",
+      "expected_model_ui": "Pro",
+      "transport": "research_operations_manager_in_app_browser",
+      "workflow_id": "EXPLORER-TOY-VALIDATION-2026-07-31-P1",
+      "candidate_id": "CAND-VAP-FOLR-CORE",
+      "round": "20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit",
+      "question_file": "docs/external-review/rounds/20260731_explorer_toy_validation_p1_vap_folr_design_assertion_audit/20_PRO_OPEN_QUESTION.md"
     }
   }
 }
