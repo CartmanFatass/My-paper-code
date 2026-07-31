@@ -497,6 +497,22 @@ try {
             }
         }
 
+        $identicalIdentitySpec = & $newIsolatedSpec $spec 'identical-identity-rejected-exercise'
+        $identicalIdentitySpec.source_commit = $executionCommit
+        $identicalIdentitySpecPath = Join-Path $tempRoot 'identical-identity-rejected-spec.json'
+        [IO.File]::WriteAllText($identicalIdentitySpecPath, ($identicalIdentitySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        $savedIdenticalIdentityPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $identicalIdentityOutput = & $registeredPython $readinessScriptPath run --spec $identicalIdentitySpecPath 2>&1
+        $identicalIdentityExit = $LASTEXITCODE
+        $ErrorActionPreference = $savedIdenticalIdentityPreference
+        if ($identicalIdentityExit -eq 0 -or ($identicalIdentityOutput -join ' ') -notmatch 'nonempty approved readiness bridge') {
+            throw "Execution-readiness wrapper accepted identical source/execution identities: $($identicalIdentityOutput -join ' ')"
+        }
+        if (Test-Path -LiteralPath $identicalIdentitySpec.exercise_root) {
+            throw 'Identical source/execution identity rejection created a phase root'
+        }
+
         $headMismatchSpec = & $newIsolatedSpec $spec 'head-mismatch-rejected-exercise'
         $headMismatchSpec.execution_commit = $fixtureCommit
         $headMismatchSpecPath = Join-Path $tempRoot 'head-mismatch-rejected-spec.json'

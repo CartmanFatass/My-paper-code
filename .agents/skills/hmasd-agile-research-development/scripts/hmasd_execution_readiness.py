@@ -132,6 +132,10 @@ def _validate_execution_binding(
         raise ReadinessError("execution_commit does not equal current HEAD")
     if execution_support_paths != list(EXECUTION_SUPPORT_PATHS):
         raise ReadinessError("execution_support_paths do not equal the approved readiness bridge")
+    if source_commit == execution_commit:
+        raise ReadinessError(
+            "source_commit and execution_commit require a nonempty approved readiness bridge"
+        )
     if set(exact_paths).intersection(execution_support_paths):
         raise ReadinessError("accepted paths overlap execution_support_paths")
     if not _git_predicate(repo, "merge-base", "--is-ancestor", source_commit, execution_commit):
