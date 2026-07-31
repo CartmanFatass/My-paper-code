@@ -946,18 +946,28 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
         )
 
 
-def test_production_oracle_event_and_no_event_bind_branch_evidence() -> None:
+@pytest.fixture(scope="module")
+def oracle_episode_zero_runs() -> tuple[
+    g0.G0EpisodeSource,
+    dict[g0.Cell, g0.EpisodeRunEvidence],
+]:
     source = g0.make_episode_source(0)
-    event = g0.run_g0_episode(
-        source,
-        control=g0.Control.ORACLE,
-        cell=g0.Cell.EVENT,
-    )
-    no_event = g0.run_g0_episode(
-        source,
-        control=g0.Control.ORACLE,
-        cell=g0.Cell.NO_EVENT,
-    )
+    runs = {
+        cell: g0.run_g0_episode(source, control=g0.Control.ORACLE, cell=cell)
+        for cell in g0.Cell
+    }
+    return source, runs
+
+
+def test_production_oracle_event_and_no_event_bind_branch_evidence(
+    oracle_episode_zero_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[g0.Cell, g0.EpisodeRunEvidence],
+    ],
+) -> None:
+    _source, runs = oracle_episode_zero_runs
+    event = runs[g0.Cell.EVENT]
+    no_event = runs[g0.Cell.NO_EVENT]
 
     assert [(item.kind, item.physical_step) for item in event.lifecycle_events] == [
         ("LEAVE", 191),
@@ -982,6 +992,69 @@ def test_production_oracle_event_and_no_event_bind_branch_evidence() -> None:
         assert run.action_support_violations == 0
         assert run.ownership_violations == 0
         assert run.oracle_qualification_failures == 0
+
+
+def test_valid_oracle_certificate_is_separate_from_base_controller_evidence(
+    oracle_episode_zero_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[g0.Cell, g0.EpisodeRunEvidence],
+    ],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source, runs = oracle_episode_zero_runs
+    monkeypatch.setattr(g0, "_authoritative_replay_errors", lambda *_args: ())
+
+    for cell in g0.Cell:
+        _metrics, errors = g0._validate_run_primitives(source, runs[cell])
+        assert "controller_evidence" not in errors
+        assert "controller_evidence_certificate" not in errors
+
+
+@pytest.mark.parametrize("mutation", ("missing", "tampered"))
+def test_oracle_behavioral_replay_certificate_fails_closed_separately(
+    oracle_episode_zero_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[g0.Cell, g0.EpisodeRunEvidence],
+    ],
+    mutation: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source, runs = oracle_episode_zero_runs
+    run = runs[g0.Cell.EVENT]
+    controller_evidence = copy.deepcopy(dict(run.controller_evidence))
+    if mutation == "missing":
+        controller_evidence.pop("behavioral_replay_certificate")
+    else:
+        controller_evidence["behavioral_replay_certificate"]["return_ready_step"] = None
+    altered = replace(run, controller_evidence=controller_evidence)
+    monkeypatch.setattr(g0, "run_g0_episode", lambda *_args, **_kwargs: run)
+
+    errors = g0._authoritative_replay_errors(source, altered)
+    assert "environment_replay_certificate" in errors
+    assert "environment_replay_controller_evidence" not in errors
+
+
+def test_non_oracle_injected_replay_certificate_is_not_discarded(
+    oracle_episode_zero_runs: tuple[
+        g0.G0EpisodeSource,
+        dict[g0.Cell, g0.EpisodeRunEvidence],
+    ],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source, runs = oracle_episode_zero_runs
+    reference = replace(
+        runs[g0.Cell.EVENT],
+        control=g0.Control.NO_REALLOCATION,
+        controller_evidence={},
+    )
+    injected = replace(
+        reference,
+        controller_evidence={"behavioral_replay_certificate": {}},
+    )
+    monkeypatch.setattr(g0, "run_g0_episode", lambda *_args, **_kwargs: reference)
+
+    errors = g0._authoritative_replay_errors(source, injected)
+    assert "environment_replay_controller_evidence" in errors
 
 
 @pytest.mark.parametrize(

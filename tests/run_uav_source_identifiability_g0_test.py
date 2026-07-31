@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import json
+import inspect
+import shutil
 from pathlib import Path
-import subprocess
-import sys
 from types import SimpleNamespace
 
 import pytest
+import numpy as np
 
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner
@@ -147,6 +148,17 @@ def test_v2_contract_metadata_and_manifest_schema_are_exact() -> None:
         "pre_action_context_service_mask_rule",
         "first_match_evaluation_rule",
     } <= runner._SOURCE_MANIFEST_KEYS
+    frozen = runner._load_frozen_records()
+    assert frozen["reconstruction_clarification_stage_commit"] == (
+        "d77710ec87e06d345cc1cdfc94d77645d8673de8"
+    )
+    assert {
+        key: frozen[key]
+        for key in runner.RECONSTRUCTION_CLARIFICATION_RECORDS
+    } == runner.RECONSTRUCTION_CLARIFICATION_RECORDS
+    assert frozen["scientific_source_module_git_blob_sha"] == (
+        runner.FROZEN_V2_SCIENTIFIC_SOURCE_BLOB_SHA
+    )
 
 
 def test_six_readiness_entries_and_terminal_artifacts(tmp_path: Path) -> None:
@@ -422,7 +434,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
         runner.validate_evaluation_artifacts(root)
 
 
-def test_stale_root_and_scientific_or_formal_entries_fail_before_mutation(
+def test_stale_readiness_root_fails_before_mutation(
     tmp_path: Path,
 ) -> None:
     stale = tmp_path / "stale"
@@ -432,36 +444,422 @@ def test_stale_root_and_scientific_or_formal_entries_fail_before_mutation(
         runner.readiness_train(run_root=stale, source_commit=SOURCE_COMMIT)
     assert (stale / "existing.txt").read_text(encoding="utf-8") == "preserve"
 
-    for scientific in (
-        runner.scientific_source,
-        runner.scientific_evaluate,
-        runner.scientific_analyze,
-    ):
-        root = tmp_path / scientific.__name__
-        with pytest.raises(RuntimeError, match="not authorized"):
-            scientific(run_root=root, source_commit=SOURCE_COMMIT)
-        assert not root.exists()
 
-    cli_root = tmp_path / "formal-cli"
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(Path(runner.__file__).resolve()),
-            "source",
-            "--run-root",
-            str(cli_root),
-            "--source-commit",
-            SOURCE_COMMIT,
-            "--formal",
-        ],
-        cwd=Path(runner.__file__).resolve().parents[1],
-        capture_output=True,
-        text=True,
-        check=False,
+
+def _binding(tmp_path: Path, *, mode: str = "nonformal-preflight") -> runner.FormalRuntimeBinding:
+    preflight = tmp_path / "preflight"
+    formal = tmp_path / "formal"
+    return runner.FormalRuntimeBinding(
+        execution_mode=mode,
+        run_root=preflight if mode == "nonformal-preflight" else formal,
+        nonformal_preflight_root=None if mode == "nonformal-preflight" else preflight,
+        bound_formal_root=formal,
+        source_commit=runner.FORMAL_INTERFACE_SOURCE_COMMIT,
+        accepted_g0_source_commit=runner.ACCEPTED_G0_SOURCE_COMMIT,
+        formal_execution_commit="a" * 40,
+        formal_authorization_token=runner.FORMAL_AUTHORIZATION_TOKEN,
+        external_user_authorization_reference="direct-user-grant:test",
+        failed_root_identity="b" * 64,
+        failed_root_schema_id=runner.FAILED_ROOT_SCHEMA_ID,
+        failed_root_schema_version=runner.FAILED_ROOT_SCHEMA_VERSION,
+        workers=16,
+        start_method="spawn",
     )
-    assert completed.returncode != 0
-    assert "not authorized" in completed.stderr
-    assert not cli_root.exists()
+
+
+def test_result_bearing_alignment_gate_fails_before_root_creation(tmp_path: Path) -> None:
+    binding = _binding(tmp_path)
+    assert runner.ALIGNED_IMPLEMENTATION_COMMIT is None
+    assert runner.ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA is None
+    assert runner.ALIGNMENT_STAGE_COMMIT is None
+    assert runner.ALIGNMENT_DISPOSITION is None
+    with pytest.raises(ValueError, match="implementation/alignment"):
+        runner.scientific_train(binding=binding)
+    assert not binding.run_root.exists()
+    assert not binding.bound_formal_root.exists()
+
+
+def test_result_bearing_alignment_rejects_historical_identity_rebinding(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    binding = _binding(tmp_path)
+    monkeypatch.setattr(
+        runner, "ALIGNED_IMPLEMENTATION_COMMIT", runner.ACCEPTED_G0_SOURCE_COMMIT
+    )
+    monkeypatch.setattr(
+        runner,
+        "ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA",
+        runner.FROZEN_V2_SCIENTIFIC_SOURCE_BLOB_SHA,
+    )
+    monkeypatch.setattr(runner, "ALIGNMENT_STAGE_COMMIT", "c" * 40)
+    monkeypatch.setattr(runner, "ALIGNMENT_DISPOSITION", "ALIGNED")
+    with pytest.raises(ValueError, match="implementation/alignment"):
+        runner.scientific_train(binding=binding)
+    assert not binding.run_root.exists()
+    assert not binding.bound_formal_root.exists()
+
+
+def test_result_cli_requires_explicit_wrapper_carriers(tmp_path: Path) -> None:
+    parser = runner._build_parser()
+    with pytest.raises(SystemExit):
+        parser.parse_args(
+            [
+                "train", "--execution-mode", "nonformal-preflight",
+                "--run-root", str((tmp_path / "preflight").resolve()),
+                "--source-commit", runner.FORMAL_INTERFACE_SOURCE_COMMIT,
+            ]
+        )
+    args = parser.parse_args(
+        [
+            "train", "--execution-mode", "nonformal-preflight",
+            "--run-root", str((tmp_path / "preflight").resolve()),
+            "--source-commit", runner.FORMAL_INTERFACE_SOURCE_COMMIT,
+            "--accepted-g0-source-commit", runner.ACCEPTED_G0_SOURCE_COMMIT,
+            "--formal-execution-commit", "a" * 40,
+            "--formal-authorization-token", runner.FORMAL_AUTHORIZATION_TOKEN,
+            "--external-user-authorization-reference", "direct-user-grant:test",
+            "--bound-formal-root", str((tmp_path / "formal").resolve()),
+            "--failed-root-identity", "b" * 64,
+            "--failed-root-schema-id", runner.FAILED_ROOT_SCHEMA_ID,
+            "--failed-root-schema-version", "1", "--workers", "16",
+            "--start-method", "spawn",
+        ]
+    )
+    assert args.external_user_authorization_reference == "direct-user-grant:test"
+    assert args.bound_formal_root == (tmp_path / "formal").resolve()
+    exact_binding = _binding(tmp_path).to_primitive()
+    runner._require_runtime_binding_schema(exact_binding)
+    with pytest.raises(ValueError, match="runtime binding exact schema"):
+        runner._require_runtime_binding_schema({**exact_binding, "authority": True})
+    with pytest.raises(ValueError, match="carrier exact schema"):
+        runner._require_runtime_binding_schema(
+            {
+                **exact_binding,
+                "carrier": {**exact_binding["carrier"], "result_branch": "IDENTIFIED"},
+            }
+        )
+
+
+def test_mocked_preflight_writes_exact_four_file_terminal_contract(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    binding = _binding(tmp_path)
+    episode = source.make_episode_source(0)
+    fake_runs = {
+        identity: SimpleNamespace(
+            control=identity[0],
+            cell=identity[1],
+            controller_evidence={
+                "behavioral_replay_certificate": {
+                    "return_ready_step": 273 if identity[1] is source.Cell.EVENT else None
+                }
+            }
+        )
+        for identity in runner._RUN_IDENTITIES
+    }
+    validity = source.EpisodeValidityRecord(
+        episode_id=0,
+        source_event_digest="s", source_no_event_digest="s",
+        sameinfo_no_event_digest="n", no_reallocation_no_event_digest="n",
+        geometry_support_violations=0, rng_namespace_violations=0,
+        pairing_mismatches=0, assignment_failures=0, tracker_failures=0,
+        oracle_qualification_failures=0, action_support_violations=0,
+        information_visibility_violations=0, ownership_violations=0,
+        survivor_continuity_violations=0, permutation_mismatches=0,
+        metric_reconstruction_mismatches=0, missing_rows=0, nonfinite_rows=0,
+    )
+    payload = {
+        "episode_id": 0,
+        "source_primitive": episode.to_primitive(),
+        "runs": {key: {"mocked": key} for key in runner._RUN_KEYS},
+    }
+    monkeypatch.setattr(
+        runner, "ALIGNED_IMPLEMENTATION_COMMIT", "d" * 40
+    )
+    monkeypatch.setattr(runner, "ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA", "e" * 40)
+    monkeypatch.setattr(runner, "ALIGNMENT_STAGE_COMMIT", "c" * 40)
+    monkeypatch.setattr(runner, "ALIGNMENT_DISPOSITION", "ALIGNED")
+    monkeypatch.setattr(runner, "_verify_git_identity", lambda _commit: None)
+    monkeypatch.setattr(
+        runner, "_runtime_environment_manifest",
+        lambda commit: {"formal_execution_commit": commit, "mocked": True},
+    )
+    monkeypatch.setattr(
+        runner, "_execute_episode_ids",
+        lambda episode_ids, *, workers: [payload],
+    )
+    monkeypatch.setattr(
+        runner, "_load_episode_bundle",
+        lambda *_args, **_kwargs: (episode, fake_runs, {
+            "bundle_sha256": _load(binding.run_root / "episodes" / "episode_000.json")["bundle_sha256"]
+        }),
+    )
+    def mocked_replay(_episode: object, run: object) -> tuple[str, ...]:
+        source.run_g0_episode(None)
+        assert getattr(run, "control") in source.Control
+        return ()
+
+    def mocked_validity(
+        replay_episode: object,
+        replay_runs: dict,
+    ) -> tuple[object, dict]:
+        for run in replay_runs.values():
+            source._authoritative_replay_errors(replay_episode, run)
+        return validity, {}
+
+    monkeypatch.setattr(source, "run_g0_episode", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(source, "_authoritative_replay_errors", mocked_replay)
+    monkeypatch.setattr(source, "build_episode_validity_record", mocked_validity)
+
+    terminal = runner.scientific_train(binding=binding)
+    assert terminal["status"] == "COMPLETE"
+    assert terminal["formal"] is False
+    assert terminal["result_branch"] is None
+    assert {
+        path.relative_to(binding.run_root).as_posix()
+        for path in binding.run_root.rglob("*") if path.is_file()
+    } == {
+        "preflight_contract.json", "episodes/episode_000.json",
+        "preflight_result.json", "terminal_manifest.json",
+    }
+    contract = _load(binding.run_root / "preflight_contract.json")
+    assert contract["runtime_binding"]["carrier"] == binding.carrier_primitive()
+    assert contract["runtime_binding"]["accepted_g0_source_commit"] == (
+        runner.ACCEPTED_G0_SOURCE_COMMIT
+    )
+    assert contract["runtime_binding"]["aligned_implementation_commit"] == "d" * 40
+    assert contract["runtime_binding"]["aligned_scientific_source_blob_sha"] == (
+        "e" * 40
+    )
+    assert contract["frozen_records"]["G0_FORMAL_INTERFACE_NEXT_ACTION"] == (
+        "NEW_SOURCE_CANDIDATE_AND_ALIGNMENT"
+    )
+    assert contract["content_sha256"] == runner._content_digest(
+        {key: value for key, value in contract.items() if key != "content_sha256"},
+        "content_sha256",
+    )["content_sha256"]
+
+    monkeypatch.setattr(
+        source,
+        "run_g0_episode",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("formal admission executed a preflight simulator run")
+        ),
+    )
+    monkeypatch.setattr(
+        runner,
+        "_load_episode_bundle",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("formal admission imported preflight episode rows")
+        ),
+    )
+    admission = runner._validate_preflight_admission(
+        binding.run_root,
+        binding,
+        {"formal_execution_commit": "a" * 40, "mocked": True},
+    )
+    assert admission["content_sha256"] == terminal["content_sha256"]
+    copied_root = tmp_path / "copied-preflight"
+    shutil.copytree(binding.run_root, copied_root)
+    with pytest.raises(ValueError, match="runtime path binding"):
+        runner._validate_preflight_admission(
+            copied_root,
+            binding,
+            {"formal_execution_commit": "a" * 40, "mocked": True},
+        )
+
+    result_path = binding.run_root / "preflight_result.json"
+    result = _load(result_path)
+    result["run_count"] = 7
+    result = runner._content_digest(
+        {key: value for key, value in result.items() if key != "content_sha256"},
+        "content_sha256",
+    )
+    _store(result_path, result)
+    terminal_path = binding.run_root / "terminal_manifest.json"
+    tampered_terminal = _load(terminal_path)
+    tampered_terminal["preflight_result_sha256"] = result["content_sha256"]
+    tampered_terminal["exact_file_inventory"]["preflight_result.json"] = runner._digest(result_path)
+    tampered_terminal = runner._content_digest(
+        {
+            key: value
+            for key, value in tampered_terminal.items()
+            if key != "content_sha256"
+        },
+        "content_sha256",
+    )
+    _store(terminal_path, tampered_terminal)
+    with pytest.raises(ValueError, match="preflight operational result"):
+        runner._validate_preflight_admission(
+            binding.run_root,
+            binding,
+            {"formal_execution_commit": "a" * 40, "mocked": True},
+        )
+
+
+def test_authoritative_replay_counts_are_single_pass_and_guarded(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(source, "run_g0_episode", lambda *_args, **_kwargs: None)
+    with runner._authoritative_replay_guard(6):
+        for _ in range(6):
+            source.run_g0_episode(None)
+    with pytest.raises(RuntimeError, match="expected 6, got 5"):
+        with runner._authoritative_replay_guard(6):
+            for _ in range(5):
+                source.run_g0_episode(None)
+
+    preflight_text = inspect.getsource(runner._preflight_semantic_evidence)
+    admission_text = inspect.getsource(runner._validate_preflight_admission)
+    train_text = inspect.getsource(runner.scientific_train)
+    evaluate_text = inspect.getsource(runner.scientific_evaluate)
+    analyze_text = inspect.getsource(runner.scientific_analyze)
+    assert "_authoritative_replay_guard(6)" in preflight_text
+    assert "_validate_preflight_admission" in train_text
+    assert "authoritative_replay" not in train_text
+    assert "_load_episode_bundle" not in admission_text
+    assert "run_g0_episode" not in admission_text
+    assert evaluate_text.count("_authoritative_replay_guard(768)") == 1
+    assert analyze_text.count("_authoritative_replay_guard(768)") == 1
+    assert "_load_inventory_without_replay" in analyze_text
+    assert "_capture_analysis_reconstruction" in analyze_text
+    assert "_reconstruct_inventory(" not in analyze_text
+    assert analyze_text.count("make_bootstrap_index_plan()") == 1
+    assert "_reuse_bootstrap_index_plan" in analyze_text
+
+
+def test_analysis_reconstruction_rejects_per_episode_validity_tamper() -> None:
+    metrics = {key: [{"episode_id": 0}] for key in runner._RUN_KEYS}
+    validity = [{"episode_id": 0, "tracker_failures": 0}]
+    bundles = {"0": "d" * 64}
+    evaluation = {
+        "metric_rows": metrics,
+        "validity_records": validity,
+        "episode_bundle_sha256_by_id": bundles,
+    }
+    runner._require_evaluation_reconstruction(
+        evaluation, metrics, validity, bundles
+    )
+    tampered = [{"episode_id": 0, "tracker_failures": 1}]
+    with pytest.raises(ValueError, match="independent reconstruction"):
+        runner._require_evaluation_reconstruction(
+            evaluation, metrics, tampered, bundles
+        )
+
+
+def test_native_array_schema_is_exact_and_byte_stable() -> None:
+    value = np.asarray([[1.5, -2.0]], dtype=np.float64)
+    primitive = runner._native_array(value)
+    assert primitive == {
+        "dtype": "float64",
+        "shape": [1, 2],
+        "data_hex": value.tobytes(order="C").hex(),
+    }
+    assert np.array_equal(
+        runner._array_from_native(primitive, label="test"), value
+    )
+    with pytest.raises(ValueError, match="byte count"):
+        runner._array_from_native(
+            {**primitive, "shape": [2, 2]}, label="test"
+        )
+
+
+def test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source_primitive = {"episode_id": 0, "sha256": "d" * 64}
+    dummy_episode = SimpleNamespace(to_primitive=lambda: source_primitive)
+    contract_sha = "c" * 64
+    bundle = runner._content_digest(
+        {
+            "schema_id": "UAV_G0_EPISODE_BUNDLE",
+            "schema_version": 1,
+            "formal": False,
+            "contract_sha256": contract_sha,
+            "episode_id": 0,
+            "source_primitive": source_primitive,
+            "source_sha256": source_primitive["sha256"],
+            "runs": {
+                key: {"episode_id": 0, "identity": key}
+                for key in runner._RUN_KEYS
+            },
+        },
+        "bundle_sha256",
+    )
+    path = tmp_path / "episode_000.json"
+    _store(path, bundle)
+    monkeypatch.setattr(source, "make_episode_source", lambda _episode_id: dummy_episode)
+    monkeypatch.setattr(
+        runner,
+        "_episode_run_from_primitive",
+        lambda value: SimpleNamespace(
+            episode_id=value["episode_id"], identity=value["identity"]
+        ),
+    )
+
+    _episode, runs, loaded = runner._load_episode_bundle(
+        path,
+        formal=False,
+        contract_sha256=contract_sha,
+    )
+    assert loaded == bundle
+    assert [runs[identity].identity for identity in runner._RUN_IDENTITIES] == list(
+        runner._RUN_KEYS
+    )
+
+
+def test_failed_root_preserves_prior_terminal_but_replaces_current_invalid_terminal(
+    tmp_path: Path,
+) -> None:
+    binding = _binding(tmp_path)
+    prior_root = tmp_path / "prior"
+    prior_root.mkdir()
+    prior_terminal = prior_root / "terminal_manifest.json"
+    prior_terminal.write_text("prior-terminal\n", encoding="utf-8")
+    runner._write_failed_root(
+        prior_root,
+        binding,
+        gate="gate_11",
+        error=ValueError("repeat"),
+    )
+    assert prior_terminal.read_text(encoding="utf-8") == "prior-terminal\n"
+    assert not (prior_root / "failed_root.json").exists()
+
+    current_root = tmp_path / "current"
+    current_root.mkdir()
+    (current_root / "terminal_manifest.json").write_text(
+        "current-invalid-terminal\n",
+        encoding="utf-8",
+    )
+    runner._write_failed_root(
+        current_root,
+        binding,
+        gate="gate_11",
+        error=ValueError("self-check"),
+        current_attempt_terminal=True,
+    )
+    assert not (current_root / "terminal_manifest.json").exists()
+    failed_path = current_root / "failed_root.json"
+    first = failed_path.read_bytes()
+    assert _load(failed_path)["failed_gate"] == "gate_11"
+    runner._write_failed_root(
+        current_root,
+        binding,
+        gate="gate_09",
+        error=ValueError("repeat"),
+    )
+    assert failed_path.read_bytes() == first
+
+
+def test_bootstrap_plan_is_generated_once_and_reused_for_source_validation() -> None:
+    original = source.make_bootstrap_index_plan
+    plan = np.arange(12, dtype=np.int64).reshape(3, 4)
+    with runner._reuse_bootstrap_index_plan(plan):
+        assert source.make_bootstrap_index_plan() is plan
+    assert source.make_bootstrap_index_plan is original
 
 
 def test_branch_witnesses_cover_exact_first_match_inventory() -> None:

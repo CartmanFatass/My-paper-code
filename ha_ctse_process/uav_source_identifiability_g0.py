@@ -6464,7 +6464,32 @@ def _authoritative_replay_errors(
             errors.append(f"environment_replay_{name}")
     if run.metrics.to_primitive() != replay.metrics.to_primitive():
         errors.append("environment_replay_metrics")
-    if dict(run.controller_evidence) != dict(replay.controller_evidence):
+    stored_controller_evidence = dict(run.controller_evidence)
+    replay_controller_evidence = dict(replay.controller_evidence)
+    if run.control is Control.ORACLE:
+        stored_has_certificate = (
+            "behavioral_replay_certificate" in stored_controller_evidence
+        )
+        replay_has_certificate = (
+            "behavioral_replay_certificate" in replay_controller_evidence
+        )
+        stored_certificate = stored_controller_evidence.pop(
+            "behavioral_replay_certificate", None
+        )
+        replay_certificate = replay_controller_evidence.pop(
+            "behavioral_replay_certificate", None
+        )
+        if stored_controller_evidence != replay_controller_evidence:
+            errors.append("environment_replay_controller_evidence")
+        if (
+            not stored_has_certificate
+            or not replay_has_certificate
+            or not isinstance(stored_certificate, Mapping)
+            or not isinstance(replay_certificate, Mapping)
+            or dict(stored_certificate) != dict(replay_certificate)
+        ):
+            errors.append("environment_replay_certificate")
+    elif stored_controller_evidence != replay_controller_evidence:
         errors.append("environment_replay_controller_evidence")
     if tuple(event.to_primitive() for event in run.lifecycle_events) != tuple(
         event.to_primitive() for event in replay.lifecycle_events
@@ -6513,7 +6538,17 @@ def _validate_run_primitives(
         )
         if not np.array_equal(run.target_trace, expected_targets):
             errors.append("controller_target_trace")
-        if dict(run.controller_evidence) != expected_controller_evidence:
+        stored_controller_evidence = dict(run.controller_evidence)
+        if run.control is Control.ORACLE:
+            if "behavioral_replay_certificate" not in stored_controller_evidence:
+                errors.append("controller_evidence_certificate")
+            else:
+                stored_certificate = stored_controller_evidence.pop(
+                    "behavioral_replay_certificate"
+                )
+                if not isinstance(stored_certificate, Mapping):
+                    errors.append("controller_evidence_certificate")
+        if stored_controller_evidence != expected_controller_evidence:
             errors.append("controller_evidence")
         if run.controller_state_sha256 != expected_state_digest:
             errors.append("controller_state")
