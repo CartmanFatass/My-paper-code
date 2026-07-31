@@ -506,7 +506,7 @@ try {
         $identicalIdentityOutput = & $registeredPython $readinessScriptPath run --spec $identicalIdentitySpecPath 2>&1
         $identicalIdentityExit = $LASTEXITCODE
         $ErrorActionPreference = $savedIdenticalIdentityPreference
-        if ($identicalIdentityExit -eq 0 -or ($identicalIdentityOutput -join ' ') -notmatch 'must be distinct.*nonempty approved readiness bridge') {
+        if ($identicalIdentityExit -eq 0 -or ($identicalIdentityOutput -join ' ') -notmatch 'must be distinct.*joined through.*nonempty approved readiness bridge') {
             throw "Execution-readiness wrapper accepted identical source/execution identities: $($identicalIdentityOutput -join ' ')"
         }
         if (Test-Path -LiteralPath $identicalIdentitySpec.exercise_root) {
