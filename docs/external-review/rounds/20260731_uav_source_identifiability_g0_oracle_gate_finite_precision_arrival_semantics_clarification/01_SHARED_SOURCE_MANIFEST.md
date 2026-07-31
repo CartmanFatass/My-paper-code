@@ -19,6 +19,8 @@ scientific_iteration_cost=zero
 External Pro may inspect only these repository-relative paths at the exact
 commits named above:
 
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `ha_ctse_process/uav_source_identifiability_g0.py`
 - `scripts/run_uav_source_identifiability_g0.py`
 - `tests/ha_ctse_process_uav_source_identifiability_g0_test.py`

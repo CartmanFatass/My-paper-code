@@ -23,6 +23,19 @@ commits. Do not use a local working tree, runtime logs, unlisted files, or
 compute. Do not activate Answer now. Return exactly one ASCII line and no
 Chinese summary.
 
+## Exact evidence allow-list
+
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `ha_ctse_process/uav_source_identifiability_g0.py`
+- `scripts/run_uav_source_identifiability_g0.py`
+- `tests/ha_ctse_process_uav_source_identifiability_g0_test.py`
+- `tests/run_uav_source_identifiability_g0_test.py`
+- `docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md`
+- `docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260731_uav_source_identifiability_g0_code_science_alignment_c88_correction_only/21_PRO_OPEN_RAW.md`
+
 The first formal G0 attempt reached gate_08 but stopped before Oracle EVENT or
 NO_EVENT evidence. For episode 1, both the stage/-1 and stage/+1 owner-gate
 candidate pairs raised `G0RealizationError: common tracker cannot reach oracle
