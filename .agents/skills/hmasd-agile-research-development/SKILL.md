@@ -246,6 +246,14 @@ slice.
   `subst` and path-alias setup are forbidden. The child resolves the ticket
   before editing, and Code Project Manager verifies it after return. Never
   transcribe, infer or repair an absolute worktree path in prose.
+- Registered provision uses command-local `core.longpaths=true` without changing
+  repository or global Git configuration. A workflow-frozen replacement
+  assignment may name one earlier registered but unticketed partial assignment
+  with `--recover-partial-assignment`; the script verifies and removes that
+  exact deterministic worktree before provisioning the new assignment. It
+  fails closed on an existing ticket, unregistered or redirected path, identity
+  mismatch or incomplete cleanup. Callers never run raw `worktree remove` or
+  `worktree prune`, manually delete the path, or reuse the retired assignment.
 - Children do not perform Git. Code Project Manager integrates the exact accepted
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,

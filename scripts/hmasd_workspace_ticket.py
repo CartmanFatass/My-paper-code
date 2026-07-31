@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import stat
 import subprocess
 import sys
@@ -18,6 +19,7 @@ WORKTREE_ROOT = Path(r"C:\worktrees\HMASD")
 REGISTERED_REPOSITORY = Path(__file__).resolve().parents[1]
 TICKET_DIRECTORY = "hmasd-workspace-tickets"
 ASSIGNMENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,95}$")
+LONG_PATH_GIT_ARGS = ("-c", "core.longpaths=true")
 
 
 class TicketError(RuntimeError):
@@ -47,6 +49,16 @@ def _canonical(path: Path, *, label: str) -> Path:
 
 def _same_path(left: Path, right: Path) -> bool:
     return os.path.normcase(str(left)) == os.path.normcase(str(right))
+
+
+def _filesystem_cleanup_path(path: Path) -> Path:
+    resolved = path.resolve(strict=False)
+    if os.name != "nt":
+        return resolved
+    text = str(resolved)
+    if text.startswith("\\\\"):
+        return Path("\\\\?\\UNC\\" + text[2:])
+    return Path("\\\\?\\" + text)
 
 
 def _is_reparse_point(path: Path) -> bool:
@@ -89,6 +101,75 @@ def _ticket_path(common_git_dir: Path, assignment_id: str) -> Path:
     return common_git_dir / TICKET_DIRECTORY / f"{assignment_id}.json"
 
 
+def _worktree_git(repo: Path, *args: str) -> str:
+    return _git(repo, *LONG_PATH_GIT_ARGS, "worktree", *args)
+
+
+def _registered_worktrees(repo: Path) -> list[Path]:
+    paths: list[Path] = []
+    for line in _worktree_git(repo, "list", "--porcelain").splitlines():
+        if line.startswith("worktree "):
+            paths.append(Path(line[len("worktree ") :]).resolve(strict=False))
+    return paths
+
+
+def _worktree_is_registered(repo: Path, worktree: Path) -> bool:
+    candidate = worktree.resolve(strict=False)
+    return any(_same_path(candidate, path) for path in _registered_worktrees(repo))
+
+
+def _verify_worktree_absent(repo: Path, worktree: Path, ticket_path: Path) -> None:
+    if worktree.exists() or _worktree_is_registered(repo, worktree):
+        raise TicketError("partial worktree cleanup did not remove the registered state")
+    if ticket_path.exists():
+        raise TicketError("partial worktree cleanup left a workspace ticket")
+
+
+def _cleanup_current_attempt(
+    repo: Path, root: Path, worktree: Path, ticket_path: Path
+) -> None:
+    if ticket_path.exists():
+        ticket_path.unlink()
+    registered = _worktree_is_registered(repo, worktree)
+    if registered:
+        _worktree_git(repo, "remove", "--force", str(worktree))
+    elif worktree.exists():
+        if (
+            not _same_path(worktree.parent, root)
+            or worktree.is_symlink()
+            or _is_reparse_point(worktree)
+        ):
+            raise TicketError("partial worktree destination is redirected")
+        shutil.rmtree(_filesystem_cleanup_path(worktree))
+    _verify_worktree_absent(repo, worktree, ticket_path)
+
+
+def _recover_partial_assignment(
+    repo: Path, root: Path, common_git_dir: Path, assignment_id: str
+) -> dict[str, str]:
+    worktree = root / assignment_id
+    ticket_path = _ticket_path(common_git_dir, assignment_id)
+    if ticket_path.exists():
+        raise TicketError("partial assignment recovery refuses an existing workspace ticket")
+    if not worktree.exists():
+        raise TicketError("partial assignment recovery found no worktree destination")
+    if (
+        not _same_path(worktree.parent, root)
+        or worktree.is_symlink()
+        or _is_reparse_point(worktree)
+    ):
+        raise TicketError("partial assignment worktree is redirected")
+    if not _worktree_is_registered(repo, worktree):
+        raise TicketError("partial assignment is not the registered worktree identity")
+    _verify_registered_worktree_identity(worktree, common_git_dir)
+    _worktree_git(repo, "remove", "--force", str(worktree))
+    _verify_worktree_absent(repo, worktree, ticket_path)
+    return {
+        "recovered_assignment_id": assignment_id,
+        "recovery_status": "PARTIAL_WORKSPACE_CLEANED",
+    }
+
+
 def _normalize_allowed(raw: str) -> str:
     normalized = raw.replace("\\", "/")
     candidate = PurePosixPath(normalized)
@@ -103,9 +184,13 @@ def _normalize_allowed(raw: str) -> str:
     return candidate.as_posix()
 
 
-def _git_admin_dir(worktree: Path) -> Path:
+def _git_admin_reference(worktree: Path) -> Path:
     marker = worktree / ".git"
-    if not marker.is_file():
+    if (
+        not marker.is_file()
+        or marker.is_symlink()
+        or _is_reparse_point(marker)
+    ):
         raise TicketError(f"isolated worktree has no .git file: {worktree}")
     text = marker.read_text(encoding="utf-8").strip()
     prefix = "gitdir:"
@@ -115,7 +200,44 @@ def _git_admin_dir(worktree: Path) -> Path:
     candidate = Path(raw)
     if not candidate.is_absolute():
         candidate = marker.parent / candidate
+    return candidate
+
+
+def _git_admin_dir(worktree: Path) -> Path:
+    candidate = _git_admin_reference(worktree)
+    if candidate.is_symlink() or _is_reparse_point(candidate):
+        raise TicketError("worktree git admin directory is redirected")
     return _canonical(candidate, label="worktree git admin directory")
+
+
+def _verify_registered_worktree_identity(
+    worktree: Path, common_git_dir: Path
+) -> None:
+    marker = worktree / ".git"
+    admin = _git_admin_dir(worktree)
+    linked_admin_root = _canonical(
+        common_git_dir / "worktrees", label="linked-worktree admin root"
+    )
+    if not _same_path(admin.parent, linked_admin_root):
+        raise TicketError("partial assignment git admin identity mismatch")
+
+    backlink = admin / "gitdir"
+    if (
+        not backlink.is_file()
+        or backlink.is_symlink()
+        or _is_reparse_point(backlink)
+    ):
+        raise TicketError("partial assignment gitdir backlink is invalid")
+    raw = backlink.read_text(encoding="utf-8").strip()
+    backlink_target = Path(raw)
+    if not backlink_target.is_absolute():
+        backlink_target = admin / backlink_target
+    resolved_target = _canonical(
+        backlink_target, label="partial assignment gitdir backlink"
+    )
+    resolved_marker = _canonical(marker, label="partial assignment .git marker")
+    if not _same_path(resolved_target, resolved_marker):
+        raise TicketError("partial assignment gitdir backlink identity mismatch")
 
 
 def _load_ticket(ticket_path: Path, expected_assignment: str | None) -> dict[str, Any]:
@@ -242,14 +364,23 @@ def provision_ticket(args: argparse.Namespace) -> dict[str, Any]:
     allowed = [_normalize_allowed(value) for value in args.allow]
     if not allowed or len(set(allowed)) != len(allowed):
         raise TicketError("at least one unique allowed path is required")
-    ticket_path = _ticket_path(_common_git_dir(repo), assignment_id)
+    common_git_dir = _common_git_dir(repo)
+    ticket_path = _ticket_path(common_git_dir, assignment_id)
     if ticket_path.exists():
         raise TicketError(f"workspace ticket already exists: {ticket_path}")
 
-    created = False
+    recovery: dict[str, str] = {}
+    raw_recovery = getattr(args, "recover_partial_assignment", None)
+    if raw_recovery is not None:
+        recovery_assignment = _assignment_id(raw_recovery)
+        if recovery_assignment == assignment_id:
+            raise TicketError("new assignment must differ from recovered assignment")
+        recovery = _recover_partial_assignment(
+            repo, root, common_git_dir, recovery_assignment
+        )
+
     try:
-        _git(repo, "worktree", "add", "--detach", str(worktree), expected_commit)
-        created = True
+        _worktree_git(repo, "add", "--detach", str(worktree), expected_commit)
         canonical_worktree = _canonical(worktree, label="provisioned worktree")
         if not _same_path(canonical_worktree.parent, root):
             raise TicketError("provisioned worktree escaped the registered root")
@@ -266,23 +397,21 @@ def provision_ticket(args: argparse.Namespace) -> dict[str, Any]:
             json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8"
         )
     except (OSError, TicketError) as exc:
-        if ticket_path.exists():
-            ticket_path.unlink()
-        if created:
-            cleanup = subprocess.run(
-                ["git", "-C", str(repo), "worktree", "remove", "--force", str(worktree)],
-                check=False,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-            )
-            if cleanup.returncode != 0:
-                detail = cleanup.stderr.strip() or cleanup.stdout.strip()
-                raise TicketError(f"provision failed and cleanup failed: {exc}; {detail}") from exc
+        try:
+            _cleanup_current_attempt(repo, root, worktree, ticket_path)
+        except (OSError, TicketError) as cleanup_exc:
+            raise TicketError(
+                f"provision failed and cleanup failed: {exc}; {cleanup_exc}"
+            ) from exc
         if isinstance(exc, TicketError):
             raise
         raise TicketError(f"cannot write workspace ticket: {exc}") from exc
-    return {"status": "WORKSPACE_TICKET_PROVISIONED", "ticket": str(ticket_path), **payload}
+    return {
+        "status": "WORKSPACE_TICKET_PROVISIONED",
+        "ticket": str(ticket_path),
+        **recovery,
+        **payload,
+    }
 
 
 def resolve_ticket(args: argparse.Namespace) -> dict[str, Any]:
@@ -326,6 +455,7 @@ def parser() -> argparse.ArgumentParser:
     provision.add_argument("--assignment-id", required=True)
     provision.add_argument("--base-commit", required=True)
     provision.add_argument("--allow", action="append", default=[], required=True)
+    provision.add_argument("--recover-partial-assignment")
     provision.set_defaults(handler=provision_ticket)
 
     for name, handler in (("resolve", resolve_ticket), ("verify", verify_ticket)):

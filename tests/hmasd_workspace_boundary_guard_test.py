@@ -104,6 +104,8 @@ def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writ
         r"subst X: C:\repo",
         r"New-PSDrive -Name X -PSProvider FileSystem -Root C:\repo",
         r"git worktree add C:\wtp HEAD",
+        r"git worktree remove --force C:\wtp",
+        r"git worktree prune",
         r"New-Item -ItemType Junction -Path C:\wtp -Target C:\repo",
         r"New-Item -ItemType Directory -Path C:\wtp_tmp",
         r"Set-Content -Path \\server\share\outside.txt -Value blocked",
@@ -138,6 +140,8 @@ def test_only_registered_provision_command_can_cross_the_main_checkout_boundary(
         "--allow pkg/worker.py"
     )
     assert invoke(repo, "shell_command", {"command": command}) is None
+    recovery_command = command + " --recover-partial-assignment TASK_OLD"
+    assert invoke(repo, "shell_command", {"command": recovery_command}) is None
     assert_denied(
         invoke(repo, "shell_command", {"command": command + "; New-Item C:\\wtp"}),
         "outside the writable scope",
