@@ -19,6 +19,19 @@ read only the allow-list in `01_SHARED_SOURCE_MANIFEST.md` at exact target
 commit `c4d54e54978d98430c22c2cf21b789dd73c72d52`. Do not use a local working
 tree, runtime logs, unlisted files, or compute. Do not activate Answer now.
 
+## Evidence to read
+
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md`
+- `docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md`
+- `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_code_science_alignment_correction_recheck/21_PRO_OPEN_RAW.md`
+- `ha_ctse_process/uav_source_identifiability_g0.py`
+- `scripts/run_uav_source_identifiability_g0.py`
+- `tests/ha_ctse_process_uav_source_identifiability_g0_test.py`
+- `tests/run_uav_source_identifiability_g0_test.py`
+
 Return exactly one of these tokens and no Chinese summary:
 
 `AUDIT_DISPOSITION=ALIGNED`
