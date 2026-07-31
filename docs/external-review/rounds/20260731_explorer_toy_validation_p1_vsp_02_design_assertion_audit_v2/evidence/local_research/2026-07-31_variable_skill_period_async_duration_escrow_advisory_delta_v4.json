@@ -1,0 +1,821 @@
+{
+  "document_kind": "independent_research_direction_audit_advisory_delta_v4",
+  "created_at_local": "2026-07-31",
+  "formal": false,
+  "scientific_iteration_cost": 0,
+  "formal_project_effect": "none",
+  "authority": {
+    "role": "independent_research_explorer",
+    "session_id": "019fb398-0a76-7bd0-9400-c5ea4eefa5de",
+    "model": "gpt-5.6-sol",
+    "thinking": "ultra",
+    "write_scope": "local_research_except_pro_reviews",
+    "effect": "advisory_revision_only"
+  },
+  "reviewed_artifact": {
+    "path": "local_research/2026-07-30_variable_skill_period_inspiration_campaign_v3.json",
+    "bytes_observed_before_delta": 123797,
+    "sha256_observed_before_delta": "47c48f7562d2f7bf6b20a9ed30cd85edfb70d812046115b02994ac8c11c753a5",
+    "last_write_observed_before_delta_local": "2026-07-30 15:38:17",
+    "campaign_id": "VSP-MYLIB-2026-07-30-C1",
+    "workflow_commit": "5179398",
+    "candidate_id": "CAND-VSP-02",
+    "candidate_name": "Asynchronous Nominal-Duration Escrow",
+    "historical_candidate_status": "validation_ready",
+    "historical_target_problem": "Credit an initiation-time nominal period under asynchronous execution while separating ledger correctness from adaptive value.",
+    "historical_mechanism": "Immutable versioned exactly-once cause-coded own-boundary escrow with physical-time targets, disjoint duration and primitive paths, and explicit nominal-versus-realized duration.",
+    "historical_learning_driver": "One elapsed-time semi-Markov advantage per eligible nominal-duration choice; escrow itself supplies no reward or evidence of adaptive value.",
+    "preservation_rule": "The reviewed v3 campaign artifact remains unchanged. Its historical packets and validation_ready status are not corrected in place; this candidate-scoped advisory delta records the later external REVISION_REQUIRED disposition."
+  },
+  "review_packet": {
+    "source_role": "independent_research_review_operator",
+    "source_session_id": "019fb311-6137-7781-9708-3df24da34a4b",
+    "handoff_path": "temp/handoffs/20260731T124411309292Z_vsp_c1_item002_30046e9dfe91.txt",
+    "handoff_bytes": 45358,
+    "handoff_sha256": "30046e9dfe91b53e55609904170c2d3b1c55f65cd0cd8571368d158568843800",
+    "handoff_purpose": "vsp_c1_item002",
+    "question_contract_commit": "4b03d37c5746c7a9d5c188f61a27ff74a611ad95",
+    "campaign_workflow_commit": "5179398",
+    "mechanical_verification": "LONG_TEXT_HANDOFF_VERIFIED",
+    "direction_disposition": "REVISION_REQUIRED",
+    "required_revision_count": 6,
+    "validation_status_at_intake": "blocked_pending_exact_smdp_action_boundary_escrow_estimator_support_and_matched_control_contract"
+  },
+  "disposition_control": {
+    "operator_disposition_preserved_exactly": "REVISION_REQUIRED",
+    "explorer_reinterpretation": "forbidden_and_not_performed",
+    "revision_work_status": "six_named_revisions_materialized_as_advisory_delta",
+    "reaudit_status": "not_requested_not_performed",
+    "validation_authorization": false,
+    "implementation_authorization": false,
+    "compute_authorization": false,
+    "portfolio_ranking_effect": "none",
+    "next_audit_item_selection": "not_performed",
+    "new_direction_added": false
+  },
+  "candidate_boundary": {
+    "scientific_question": "At an agent's own eligible renewal boundary, can a context-conditioned nominal-duration policy improve shared external task return over tuned fixed, context-shuffled and recurrent timing controls when each duration choice receives exactly one physical-time semi-Markov score term, while primitive losses, teammate boundary notifications, atomic frame count, stale records and optimizer opportunities cannot manufacture that advantage?",
+    "mechanism_claim": "Each eligible initiation creates one immutable versioned record for a nominal period chosen from {1.0,4.0} physical seconds. The primitive actor is duration-blind. The earliest registered own terminal cause closes realized duration, a bounded reward-arrival watermark closes the physical-time target, and a compare-and-set transition emits at most one strict-on-policy duration score. Ledger conformance and adaptive-period value are reported as separate propositions.",
+    "learning_driver": "One physical-time semi-Markov advantage per valid nominal-duration decision trains only the duration policy and its duration critic. Escrow, event deduplication, cause precedence and exposure accounting supply no reward, intrinsic objective, responsibility signal or evidence that adaptive periods are useful.",
+    "claim_decomposition": {
+      "escrow_conformance": "Every eligible decision has one immutable identity, one exclusive terminal cause and zero or one registered learning release. Duplicate, replayed, reordered and other-agent administrative events cannot create a second score term.",
+      "estimator_validity": "The one released score uses the registered shared external reward measure, physical-time discount, cause-dependent bootstrap, reward-latency closure and strict behavior-policy version.",
+      "effective_duration_action": "Nominal short and long periods produce distinct renewal opportunities or commitment-state consequences under the supported competing-interruption law.",
+      "adaptive_period_value": "A context-conditioned policy achieves higher common-physical-horizon external return than the strongest training-selected fixed period, context-shuffled stochastic duration and matched recurrent timing controls.",
+      "multi_agent_scope": "Shared team return is a legitimate joint-policy learning signal. The mechanism does not decompose retrospective agent responsibility for that return."
+    },
+    "initial_validation_scope": "Freeze the duration-blind primitive actor, high-level skill implementation, partner policies and membership process. Train or intervene only on the timing controller. Joint primitive-duration learning is outside this first discriminator.",
+    "explicit_exclusions": [
+      "agent-specific causal credit decomposition for shared team reward",
+      "proof that exactly-once bookkeeping makes adaptive duration useful",
+      "duration value obtained only by conditioning on nominal-expiry records",
+      "duration value created by a duration label entering primitive action",
+      "optimizer-update, batch-reuse, atomic-frame or other-agent event multiplication",
+      "general learned termination or completion semantics",
+      "off-support duration, context, interruption, membership or partner claims",
+      "transport to adapting or adversarial partner policies",
+      "formal workflow, implementation, compute, adoption, recommendation or portfolio-selection effect"
+    ],
+    "named_simple_fallback": "Training-selected tuned fixed nominal duration using the identical immutable escrow, cause transducer, physical-time target, duration-blind primitive actor, physical interaction, interruption process and exposure ledger."
+  },
+  "semi_markov_action_and_nonvacuous_crossed_control": {
+    "high_level_state": {
+      "initiation_information": "H_q contains the current decentralized observation, execution-visible context ID, current high-level skill ID, active-roster mask, owner epoch, frozen partner-policy family ID, prior own-boundary summary and ordinary recurrent history. It contains no future event, duration outcome, accumulated interval reward or evaluation label.",
+      "context_domain": ["C_FAST", "C_STABLE"],
+      "context_rule": "The context bit is execution-visible before the duration draw, exogenous to that draw and balanced one-half to one-half by the registered positive-control environment. No reward-derived or post-treatment context relabeling is allowed.",
+      "nominal_duration_seconds": [1.0, 4.0],
+      "duration_action": "At every own eligible renewal boundary, mu_v(d|H_q) draws one nominal duration. The draw fixes the next voluntary renewal opportunity; the duration policy cannot reconsider before that time unless a registered competing cause terminates the record.",
+      "renewal_action": "At nominal expiry, the agent may retain or change its high-level skill using the same frozen high-level selector available to every timing arm. Re-selecting the same skill still executes the registered renewal transition.",
+      "primitive_execution": "Between own boundaries, the frozen primitive actor executes the selected high-level skill from ordinary observations and recurrent state without seeing d, elapsed age, remaining time, escrow state or duration-policy outputs."
+    },
+    "crossed_positive_control": {
+      "environment_id": "CROSSED_COMMITMENT_SMDP_V1",
+      "physical_horizon_seconds": 4.25,
+      "task_reward_window_seconds": 4.0,
+      "physical_discount": "Gamma(u)=exp(-0.1*u) for elapsed physical seconds u.",
+      "duration_assignment_for_value_probe": "At each serialized base starting boundary, a frozen equal-logit probe policy with behavior probabilities (0.5,0.5) randomizes between stationary fixed-short and stationary fixed-long continuation policies. The assigned continuation repeats the same duration at every later own renewal through the four-second reward window. The initial randomized record is learning-eligible for conditional-value and score calibration; later forced-continuation records are explicitly diagnostic nonlearning records.",
+      "C_FAST": {
+        "task_process": "A public target bit starts at zero and flips once at physical time 1.5 seconds. The high-level skill bit may be selected only at own renewal boundaries; the frozen primitive actor follows that bit exactly.",
+        "reward_measure": "External task reward has rate one while the skill bit equals the target bit and zero otherwise. There is no duration bonus, renewal bonus or optimizer-dependent reward.",
+        "short_consequence": "Short renewals occur at 1, 2 and 3 seconds. The renewal at 2 seconds observes the flipped target and switches the high-level skill, yielding reward-rate support on [0,1.5) and [2,4].",
+        "long_consequence": "The long commitment has no renewal before the four-second horizon and retains the initial skill, yielding reward-rate support only on [0,1.5).",
+        "optimal_duration": "short_1.0_second"
+      },
+      "C_STABLE": {
+        "task_process": "The target and skill remain correct, but an option-internal public progress variable must accumulate 2.5 uninterrupted physical seconds before task reward begins. Every registered renewal resets that progress to zero even when the same skill is selected again.",
+        "reward_measure": "External task reward has rate one after uninterrupted progress reaches 2.5 seconds and zero before it. No reward directly references nominal duration.",
+        "short_consequence": "Renewals at 1, 2 and 3 seconds repeatedly reset progress, so the threshold is never reached within the four-second horizon.",
+        "long_consequence": "No renewal occurs before four seconds; progress reaches 2.5 seconds and reward rate one applies on [2.5,4].",
+        "optimal_duration": "long_4.0_seconds"
+      },
+      "competing_interruption": {
+        "law": "Independently of context and duration, a forced interruption occurs at physical time 3.25 seconds with probability 0.15 and otherwise does not occur.",
+        "effect": "The interruption closes the active record under FORCED_INTERRUPT and truncates the positive-control rollout without emitting a simultaneous EPISODE_TERMINAL receipt. It does not modify reward before 3.25 seconds and therefore preserves both strict crossed preferences while creating interrupted long records.",
+        "randomization": "The same interruption variate is paired across short and long forks from one starting state."
+      },
+      "post_reward_tail": "At physical time four seconds, every noninterrupted active record reaches its registered nominal expiry. No new learning record is admitted after the four-second task-reward endpoint; the state is held until 4.25 seconds solely to close the reward watermark, after which EPISODE_TERMINAL ends the rollout.",
+      "constructive_values": {
+        "Q_FAST_short": "Full-horizon value of the stationary fixed-short continuation: E_J[integral from 0 to min(1.5,J,4) of exp(-0.1*t) dt plus integral from 2 to min(J,4) of exp(-0.1*t) dt], where J is the 3.25-second forced interruption with probability 0.15 and the four-second task-reward endpoint otherwise.",
+        "Q_FAST_long": "Full-horizon value of the stationary fixed-long continuation: E_J[integral from 0 to min(1.5,J,4) of exp(-0.1*t) dt]. Without forced interruption, the long record reaches nominal expiry at four seconds before the rollout ends at 4.25 seconds.",
+        "Q_STABLE_short": "Full-horizon value of the stationary fixed-short continuation: 0.",
+        "Q_STABLE_long": "Full-horizon value of the stationary fixed-long continuation: E_J[integral from 2.5 to min(J,4) of exp(-0.1*t) dt]. Without forced interruption, the long record reaches nominal expiry at four seconds before the rollout ends at 4.25 seconds.",
+        "crossed_order": "Q_FAST_short > Q_FAST_long and Q_STABLE_long > Q_STABLE_short.",
+        "adaptive_oracle": "Choose short in C_FAST and long in C_STABLE. With balanced contexts, it strictly exceeds both fixed-short and fixed-long policies.",
+        "registered_normalization": "Divide the discounted return by integral from 0 to 4 of exp(-0.1*t) dt, producing a value in [0,1]."
+      },
+      "long_period_nonvacuity": "Repeated short renewals cannot reproduce the long C_STABLE behavior because every renewal resets the 2.5-second progress variable. Suppressing that reset would change the registered control process, not emulate the long action.",
+      "short_period_nonvacuity": "The long C_FAST action cannot use the post-flip renewal opportunity at 2 seconds; primitive duration blindness prevents a hidden mid-commitment skill switch.",
+      "crossed_margin": "For each directed context contrast, the simultaneous 95 percent lower confidence bound must exceed 0.05 normalized return. The constructive environment must also reproduce the analytic integral values within 0.01 before any learned comparison."
+    },
+    "ordinary_boundary_causes": {
+      "terminal_time": "T_q is the earliest physical time among nominal expiry, registered skill completion, focal membership leave, focal owner replacement, episode terminal and forced interruption.",
+      "realized_duration": "Delta_q=T_q-tau_q is stored separately from nominal D_q.",
+      "exclusive_causes": [
+        "NOMINAL_EXPIRY",
+        "SKILL_COMPLETION",
+        "FOCAL_LEAVE",
+        "FOCAL_REPLACEMENT",
+        "EPISODE_TERMINAL",
+        "FORCED_INTERRUPT"
+      ],
+      "all_decision_rule": "Primary duration value is intention-to-treat over every eligible nominal-duration decision. Nominal-expiry-only estimates are diagnostic selected-population summaries and cannot support adaptive value."
+    }
+  },
+  "escrow_and_cause_coded_boundary_transducer": {
+    "record_schema": {
+      "decision_id": "Tuple(agent_uuid, owner_epoch, own_renewal_index, behavior_duration_policy_version); globally unique within the registered run.",
+      "immutable_header": [
+        "decision_id",
+        "agent_uuid",
+        "owner_epoch",
+        "own_renewal_index",
+        "initiation_physical_time_tau",
+        "nominal_duration_D",
+        "behavior_duration_policy_version",
+        "behavior_probability_vector_over_all_durations",
+        "behavior_log_probability_of_D",
+        "learning_eligible_boolean",
+        "initiation_information_receipt",
+        "current_high_level_skill_id",
+        "active_roster_version",
+        "partner_policy_family_and_snapshot",
+        "physical_discount_rate",
+        "reward_latency_bound",
+        "record_schema_version"
+      ],
+      "append_only_fields": [
+        "deduplicated_reward_receipts",
+        "deduplicated_event_receipts",
+        "candidate_terminal_time_and_cause",
+        "realized_duration_Delta",
+        "reward_watermark_time",
+        "bootstrap_receipt",
+        "target_Qhat",
+        "baseline_Vhat",
+        "advantage_Ahat",
+        "release_receipt",
+        "terminal_status"
+      ],
+      "immutability_rule": "After creation, no header field may change. Corrections append a superseding receipt under the same decision ID before terminalization; they never overwrite source data or create another decision."
+    },
+    "states": [
+      "PENDING",
+      "WAITING_REWARD_WATERMARK",
+      "CONSUMED",
+      "CONSUMED_DIAGNOSTIC_NO_SCORE",
+      "REJECTED_VERSION_MISMATCH",
+      "REJECTED_REWARD_LATENCY",
+      "CANCELLED_PREEXECUTION_OWNER_INVALID",
+      "INVALID_CONFLICT"
+    ],
+    "event_order": {
+      "primary_order": "earliest physical event time",
+      "same_time_precedence": [
+        "EPISODE_TERMINAL",
+        "FOCAL_REPLACEMENT",
+        "FOCAL_LEAVE",
+        "FORCED_INTERRUPT",
+        "SKILL_COMPLETION",
+        "NOMINAL_EXPIRY"
+      ],
+      "final_tie_break": "lexicographic event_uuid",
+      "other_agent_event_rule": "Another agent's boundary or union notification has no terminal precedence for the focal record. It may affect the physical environment only through an independently registered genuine action or roster event."
+    },
+    "transition_table": [
+      {
+        "from": "none",
+        "event": "eligible own-boundary duration draw",
+        "to": "PENDING",
+        "effect": "Create exactly one immutable decision ID and register it before primitive execution."
+      },
+      {
+        "from": "PENDING",
+        "event": "unique reward or nonterminal physical event receipt",
+        "to": "PENDING",
+        "effect": "Append once by event_uuid; a duplicate is a no-op."
+      },
+      {
+        "from": "PENDING",
+        "event": "first focal terminal cause under the frozen precedence rule",
+        "to": "WAITING_REWARD_WATERMARK",
+        "effect": "Freeze T_q, C_q and Delta_q; no later event may replace the cause."
+      },
+      {
+        "from": "PENDING",
+        "event": "owner epoch invalid before the first primitive action",
+        "to": "CANCELLED_PREEXECUTION_OWNER_INVALID",
+        "effect": "Emit no learning release and record zero executed duration."
+      },
+      {
+        "from": "WAITING_REWARD_WATERMARK",
+        "event": "unique reward receipt with causal event time in the half-open interval [tau_q,T_q), or one terminal impulse explicitly owned by decision_id at T_q, arriving no later than T_q+0.25 seconds",
+        "to": "WAITING_REWARD_WATERMARK",
+        "effect": "Append once. The same shared-team reward may belong to multiple agents' distinct records, but only once per record."
+      },
+      {
+        "from": "WAITING_REWARD_WATERMARK",
+        "event": "watermark T_q+0.25 with complete reward sequence and matching behavior-policy version",
+        "to": "CONSUMED",
+        "effect": "For learning_eligible=true, atomically write one target, baseline, advantage and release receipt; emit exactly one duration score term."
+      },
+      {
+        "from": "WAITING_REWARD_WATERMARK",
+        "event": "watermark T_q+0.25 with complete reward sequence for a registered forced-continuation record",
+        "to": "CONSUMED_DIAGNOSTIC_NO_SCORE",
+        "effect": "For learning_eligible=false, write the diagnostic target and terminal receipt but emit no duration score."
+      },
+      {
+        "from": "WAITING_REWARD_WATERMARK",
+        "event": "watermark with a declared missing or late causal reward",
+        "to": "REJECTED_REWARD_LATENCY",
+        "effect": "Emit no score; report by nominal duration, context, cause, partner and realized duration."
+      },
+      {
+        "from": "WAITING_REWARD_WATERMARK",
+        "event": "behavior-policy version differs from the frozen collection version",
+        "to": "REJECTED_VERSION_MISMATCH",
+        "effect": "Emit no score; importance correction and silent relabeling are forbidden in this initial contract."
+      },
+      {
+        "from": "any terminal state",
+        "event": "duplicate, replayed, reordered or late event or record",
+        "to": "same terminal state",
+        "effect": "No mutation and no release. Increment only the diagnostic duplicate counter."
+      },
+      {
+        "from": "any nonterminal state",
+        "event": "two nonidentical receipts reuse one event_uuid or one decision_id header conflicts",
+        "to": "INVALID_CONFLICT",
+        "effect": "Emit no score and fail Stage A conformance."
+      }
+    ],
+    "exactly_once_rule": "A compare-and-set from WAITING_REWARD_WATERMARK to CONSUMED owns the only learning-release edge. release_count_q must equal one for every valid learning-eligible record and zero for every diagnostic, rejected, cancelled or invalid record.",
+    "sham_union_event": "A sham event adds only an other-agent boundary notification with a unique UUID. It may not change physical state, reward, observation, teammate action, partner state, roster version, focal boundary eligibility, reward watermark or RNG position.",
+    "genuine_partner_event": "A genuine teammate action or policy change may alter the focal observation and return; it is not required to be invariant. It still cannot directly terminalize or release the focal record unless it produces one of the registered focal physical causes.",
+    "late_reward_contract": "The environment must provide a completeness watermark proving that every reward causally assigned to [tau_q,T_q), plus any explicitly owned terminal impulse at T_q, arrives by T_q+0.25 seconds. This half-open rule prevents adjacent records of one agent from double-counting a boundary reward. A violated watermark rejects the record rather than releasing an incomplete target."
+  },
+  "physical_time_smdp_estimator": {
+    "objective": "Expected shared external team return per unit physical time under the joint policy. The score for agent i's duration action uses team reward but makes no claim of agent-specific retrospective responsibility.",
+    "reward_measure": "Each reward receipt has physical event time, arrival time, event_uuid, external team-reward amount and decision-interval ownership metadata. Intrinsic, duration, renewal, ledger and optimizer rewards are forbidden.",
+    "discount": {
+      "rate_per_physical_second": 0.1,
+      "function": "Gamma(u)=exp(-0.1*u)",
+      "atomic_index_dependency": "none"
+    },
+    "target": "Qhat_q=sum over unique rewards k causally owned by q in [tau_q,T_q), plus any explicitly owned terminal impulse at T_q, of exp(-0.1*(t_k-tau_q))*r_team_k plus exp(-0.1*Delta_q)*B_Cq(H_Tq). For continuous reward rate, use its exact physical-time integral over [tau_q,T_q).",
+    "cause_dependent_bootstrap": {
+      "NOMINAL_EXPIRY": "Frozen duration critic V_v(H_T) at the post-renewal-eligible pre-action state.",
+      "SKILL_COMPLETION": "Frozen duration critic V_v(H_T) at the registered completion state if the owner remains active.",
+      "FORCED_INTERRUPT": "Frozen duration critic V_v(H_T) at the post-interrupt state if the episode and owner continue; zero if the registered interrupt is terminal.",
+      "FOCAL_LEAVE": "Frozen centralized-training team continuation value V_team_v(H_T,post_leave_roster); no old-owner duration state is reused.",
+      "FOCAL_REPLACEMENT": "Frozen centralized-training team continuation value V_team_v(H_T,post_replacement_roster); replacement receives a new owner epoch and no inherited record.",
+      "EPISODE_TERMINAL": "zero"
+    },
+    "bootstrap_version_rule": "Stage B estimator calibration supplies the exact constructive continuation-value table of CROSSED_COMMITMENT_SMDP_V1 as the frozen bootstrap. Stage C uses the learned duration critic frozen at the record's cohort version v. No target may use a critic updated after the record begins.",
+    "baseline": "V_v(H_q) is evaluated before the duration draw from the same behavior-version duration critic, integrates over the behavior policy's duration distribution and has no sampled-duration input.",
+    "advantage": "Ahat_q=Qhat_q-V_v(H_q). The target and baseline are stop-gradient quantities for the duration-policy score.",
+    "policy_score": "g_q=grad_theta log mu_v(D_q|H_q)*stopgrad(Ahat_q). Each CONSUMED record contributes this term once with on-policy weight exactly one.",
+    "off_policy_rule": {
+      "mode": "strict_on_policy_version_cohorts",
+      "acceptance": "Consume only when current duration-policy version, duration-critic version and behavior version all equal v.",
+      "mismatch": "REJECTED_VERSION_MISMATCH with zero score.",
+      "importance_weighting": "disabled",
+      "selective_rejection": "forbidden; every mismatch is reported by duration, context, terminal cause, partner and record age."
+    },
+    "nominal_realized_and_interruption": {
+      "nominal_duration": "D_q is the initiation-time action.",
+      "realized_duration": "Delta_q is elapsed physical time to the first registered cause.",
+      "primary_population": "all eligible decisions, including leave, replacement, completion, episode terminal and forced interruption",
+      "diagnostics": [
+        "Pr(C_q=cause|context,D,partner)",
+        "E[Delta_q|context,D,partner]",
+        "nominal-expiry probability",
+        "rejection rate and effective consumed count",
+        "duration-critic bootstrap by cause"
+      ],
+      "prohibition": "No adaptive-value estimate may condition on C_q=NOMINAL_EXPIRY."
+    },
+    "frame_refinement": {
+      "clone_factor": 4,
+      "construction": "Replace each simulator interval by four subintervals with the same physical transition law, identical boundary times, identical integrated reward measure, identical exogenous event times, identical partner actions and Gamma evaluated from physical time. Reward rate is integrated over the subintervals rather than copied four times.",
+      "paired_objects": "Original and refined clones share the same physical initial state and exogenous random tape.",
+      "exact_invariants": [
+        "decision_id and release count",
+        "terminal cause and physical terminal time",
+        "nominal and realized duration",
+        "physical-time reward integral",
+        "bootstrap state and value",
+        "Qhat, Vhat and Ahat",
+        "duration score vector"
+      ],
+      "numeric_tolerances": {
+        "target_advantage_absolute": 0.00000001,
+        "score_vector_relative_norm": 0.000001,
+        "score_vector_cosine_distance": 0.000001,
+        "learned_policy_normalized_return_equivalence": 0.02
+      }
+    },
+    "reader_reproduction_receipt": "A future audit must provide the record, reward receipts, cause, frozen critic outputs and formula inputs sufficient for two independent readers to derive the identical Qhat, Vhat, Ahat and g_q for every terminal cause."
+  },
+  "duration_primitive_firewall_and_exposure_accounting": {
+    "matched_timing_module_architecture": {
+      "numeric_type": "float32",
+      "input_adapter": "The registered timing-information vector is projected to width 64, then passed through an independent LayerNorm of width 64.",
+      "recurrent_core": "One GRU with hidden width 32.",
+      "policy_head": "A 32-to-64 tanh layer followed by two logits. The logits mean short/long for nominal-duration arms and renew/continue for MATCHED_RECURRENT_TIMING.",
+      "value_head": "A separate 32-to-64 tanh layer followed by one scalar physical-time value.",
+      "matching": "ADAPTIVE_ESCROW, CONTEXT_SHUFFLED and MATCHED_RECURRENT_TIMING use this exact trainable architecture and input byte width. FIXED_SHORT, FIXED_LONG and TUNED_FIXED retain the same instantiated module, state and optimizer slots but clamp the scientific timing output after logging the dormant logits.",
+      "state_initialization": "All timing arms use the same zero GRU initializer at episode start and the same owner-epoch reset rule."
+    },
+    "duration_path": {
+      "inputs": [
+        "current decentralized observation summary",
+        "pre-treatment context ID",
+        "current high-level skill ID",
+        "active-roster mask and owner epoch",
+        "frozen partner-policy family ID",
+        "ordinary prior own-boundary history"
+      ],
+      "trainable_objects": [
+        "duration policy mu_theta",
+        "duration critic V_phi",
+        "duration-only encoder and normalization state",
+        "duration-policy optimizer",
+        "duration-critic optimizer"
+      ],
+      "losses": [
+        "one strict-on-policy physical-time score per CONSUMED decision",
+        "duration-critic regression to Qhat on the same consumed records",
+        "registered entropy regularizer applied once per eligible duration decision"
+      ],
+      "behavior_policy": "mu_behavior(d|H)=0.8*softmax(logits)_d+0.2*Uniform({short,long})_d, giving exact probability floor 0.10.",
+      "cohort_losses": "Policy loss is -(1/64)*sum_q log(mu_behavior(D_q|H_q))*stopgrad(Ahat_q) - 0.001*mean_q entropy(mu_behavior(.|H_q)). Critic loss is mean Huber(delta=1.0) between V_v(H_q) and stopgrad(Qhat_q).",
+      "optimizer": "Separate Adam optimizers for policy and critic, learning rate 0.0003, betas (0.9,0.999), epsilon 1e-8, zero weight decay and global gradient-norm cap 1.0; identical timing-arm schedules."
+    },
+    "primitive_path": {
+      "inputs": "Current decentralized primitive observation, active-action mask, current high-level skill identity and ordinary primitive recurrent state.",
+      "frozen_during_discriminator": true,
+      "frozen_objects": [
+        "primitive actor",
+        "primitive critic",
+        "primitive encoder",
+        "primitive recurrent state transition",
+        "primitive normalization state",
+        "high-level skill implementation"
+      ]
+    },
+    "primitive_input_firewall": [
+      "nominal duration",
+      "duration-policy logits, probabilities, entropy or sampled-action rank",
+      "remaining duration or countdown",
+      "segment age or time since renewal",
+      "next nominal-expiry time",
+      "escrow state, decision ID or behavior-policy version",
+      "accumulated interval reward",
+      "reward watermark or release readiness",
+      "future terminal or release cause",
+      "future membership or partner event",
+      "context label when it is not independently part of the ordinary primitive observation"
+    ],
+    "gradient_ownership": {
+      "primitive_to_duration": "no edge from primitive loss, primitive critic, primitive normalization, primitive optimizer or primitive recurrent update to any duration object",
+      "duration_to_primitive": "no edge from duration policy, duration critic, entropy, target, escrow or exposure loss to any primitive object",
+      "shared_trainable_parameters": "none in the initial discriminator",
+      "shared_read_only_observation": "Permitted only as two separately normalized copies with distinct storage and checksums.",
+      "sentinels": [
+        "one primitive-loss backward pass leaves every duration parameter, gradient buffer, optimizer slot and normalization statistic byte-identical",
+        "one duration-loss backward pass leaves every primitive object byte-identical",
+        "changing only escrow metadata leaves the primitive action-probability vector identical within 1e-8",
+        "injecting period, age or countdown sentinel values into logger-only fields leaves the primitive action-probability vector identical within 1e-8"
+      ]
+    },
+    "physical_version_cohort": {
+      "initiation_window_seconds": 64.0,
+      "drain_window_seconds": 4.25,
+      "rule": "Hold duration policy and duration critic version v fixed for a 64-second physical initiation window, admit no new learning records during the 4.25-second drain, wait for every admitted record's terminal cause and reward watermark, then perform exactly one duration-policy and one duration-critic optimizer update.",
+      "between_window_execution": "During drain, the last selected skill continues under the frozen primitive actor; any administrative boundary is logged but creates no new learning record in any arm.",
+      "policy_gradient_normalization": "Sum every consumed decision score once and divide by the exact 64-second initiation-window exposure, not by record count. Short-period decision frequency therefore remains a legitimate per-physical-time likelihood contribution.",
+      "optimizer_control": "All learned timing arms receive exactly one optimizer opportunity per cohort and the same global parameter-update norm cap. Fixed arms execute matched dormant optimizer calls with zero scientific effect.",
+      "rejected_record_rule": "Any rejected record remains in the exposure ledger and contributes zero score; differential rejection blocks adaptive-value interpretation."
+    },
+    "exposure_ledger": [
+      "physical environment seconds, including drain",
+      "primitive transitions and actor calls",
+      "eligible own renewal opportunities",
+      "nominal-duration decisions by context and duration",
+      "created, terminal, consumed, rejected, cancelled and invalid records",
+      "realized duration and terminal cause",
+      "reward receipts and latency",
+      "duration score terms",
+      "duration-policy and duration-critic batch inclusions",
+      "duration-policy and duration-critic optimizer opportunities",
+      "primitive optimizer opportunities, fixed at zero during the discriminator",
+      "parameter-update norm and gradient norm",
+      "partner events, membership events and sham union notifications",
+      "duration, primitive and recurrent parameter bytes and state bytes"
+    ],
+    "matching_rule": "Arms match physical time, primitive interactions, frozen primitive objects, partner and membership draws, version-cohort schedule, optimizer opportunities, update-norm cap, parameter/state budget and evaluation count. They do not force equal duration-decision counts, because decision frequency is a causal property of a timing policy; instead every score sum is normalized by common physical exposure and decision count is reported."
+  },
+  "complete_discriminator_support_sampling_and_uncertainty": {
+    "arms": {
+      "ADAPTIVE_ESCROW": "Two-duration context-conditioned policy with the complete escrow and estimator.",
+      "FIXED_SHORT": "Always choose 1.0 second using the same escrow, physical target, primitive actor and event process.",
+      "FIXED_LONG": "Always choose 4.0 seconds under the same contracts.",
+      "TUNED_FIXED": "Choose FIXED_SHORT or FIXED_LONG exclusively by training-side validation return inside each paired run block, then freeze before evaluation.",
+      "CONTEXT_SHUFFLED": "Use the same stochastic duration network and marginal context counts, but permute C_FAST and C_STABLE labels within every 64-second initiation window using a dedicated counter-RNG before the duration policy reads them. Physical observations, reward and primitive policy remain unchanged.",
+      "MATCHED_RECURRENT_TIMING": "Replace the explicit nominal-duration catalogue with a capacity- and state-matched recurrent renew-versus-continue controller queried every 1.0 physical second. It receives ordinary history but no period, age, countdown, future boundary or context channel beyond ordinary observation.",
+      "ORACLE_CROSSED_DIAGNOSTIC": "Choose short in C_FAST and long in C_STABLE. It is a positive-control diagnostic and cannot be a recommended learned arm."
+    },
+    "one_property_differences": {
+      "adaptive_vs_tuned_fixed": "context-conditioned duration selection versus one globally frozen training-selected duration",
+      "adaptive_vs_context_shuffled": "correct pre-treatment context-duration association versus the same architecture and marginal context exposure with that association broken",
+      "adaptive_vs_recurrent": "explicit initiation-time nominal commitment versus ordinary recurrent renew-or-continue timing",
+      "original_vs_frame_clone": "atomic representation only; physical process, reward measure and boundary times are identical",
+      "no_sham_vs_sham_union": "noncausal other-agent notification count only"
+    },
+    "training_and_evaluation_cohort": {
+      "independent_paired_run_blocks": 24,
+      "run_block": "One independently pretrained frozen primitive-policy checkpoint and one environment seed define a block. Every timing arm branches from that checkpoint with arm-specific timing-policy RNG and the same physical curriculum, partner-family schedule, interruption and membership tapes.",
+      "top_level_inference_unit": "one independently pretrained run block summarized once per arm",
+      "training_physical_seconds_per_timing_arm": 65536,
+      "fixed_run_count": "No sequential stopping and no outcome-based seed replacement; all 24 registered blocks are reported.",
+      "tuned_fixed_selection": "Use only the first 20 percent training-side validation windows from the same run block, with ties resolved to short. Evaluation episodes and held-out partners are inaccessible to selection."
+    },
+    "duration_support": {
+      "adaptive_training_floor": "During timing-policy training, clamp each duration probability to at least 0.10 in each registered context before sampling and include the exact behavior probabilities in every record.",
+      "fixed_policy_probe_assignment": "For estimator calibration and crossed-value estimation, randomize each base starting boundary with probability 0.5 to a stationary fixed-short or stationary fixed-long continuation inside each context and partner family. The initial decision is the randomized treatment unit.",
+      "minimum_consumed_records": "At least 256 CONSUMED randomized-probe records per context x duration x partner factor in each run block.",
+      "effective_action_gate": "Within each context and partner factor, nominal-expiry probability is at least 0.20 for both durations and the simultaneous 95 percent interval for abs(E[Delta|long]-E[Delta|short]) excludes values below 0.50 physical seconds.",
+      "interruption_collapse": "If the effective-action gate fails, report NO_EFFECTIVE_DURATION_SUPPORT; do not interpret a null adaptive contrast as evidence against the ledger or learner."
+    },
+    "partners_and_membership": {
+      "familiar_partners": "Three frozen partner-policy families used during timing-policy training, one preregistered snapshot per family.",
+      "heldout_partners": "Three frozen policy families excluded from primitive, timing, critic and tuned-fixed selection, matched before evaluation by public competence range without focal-policy outcomes.",
+      "partner_initialization": "Each frozen partner has a deterministic registered initializer from its current decentralized observation; inaccessible private history places a partner outside support.",
+      "partner_sampling": "Uniform over families within familiar or held-out factor, nested within run block; the same family and exogenous tape are paired across arms.",
+      "membership_process": "The same preregistered leave and replacement tape is paired across arms. Owner epochs and post-roster bootstraps are audited separately by cause."
+    },
+    "evaluation_sampling": {
+      "positive_control_base_states_per_context_partner_factor_per_run": 256,
+      "randomized_duration_forks_per_base_state": 2,
+      "frame_conditions": ["ORIGINAL", "REFINED_X4"],
+      "union_conditions": ["NO_SHAM", "SHAM_EXPANDED"],
+      "learned_policy_episodes_per_context_partner_family_per_run": 128,
+      "common_physical_horizon": "4.25 physical seconds for CROSSED_COMMITMENT_SMDP_V1, with external task reward supported only through four seconds so the four-second nominal expiry precedes rollout terminalization; any later transport environment must predeclare one common physical horizon shared by all arms.",
+      "pairing": "Base state, partner snapshot, interruption, membership, physical transition and reward tapes are shared wherever an intervention leaves them causally valid. Duration and arm action RNGs use separate namespaces.",
+      "nested_units": "Primitive frames are nested in duration records; records and episodes are nested in agent and partner snapshot; these are nested in one trained run block. Only run-block summaries enter algorithm-level inference."
+    },
+    "primary_estimands": {
+      "escrow_release": "release_count_q for every record q, with zero tolerance for duplicate release",
+      "conditional_duration_value": "Q(c,d)=E[full-horizon normalized physical-time return under stationary fixed-d continuation|pre-treatment context c and randomized initial assignment d]",
+      "crossed_interaction": "I=[Q(C_FAST,short)-Q(C_FAST,long)]-[Q(C_STABLE,short)-Q(C_STABLE,long)]",
+      "adaptive_vs_fixed": "Delta_adaptive_fixed=E[Y_phys(ADAPTIVE_ESCROW)-Y_phys(TUNED_FIXED)]",
+      "adaptive_vs_shuffle": "Delta_adaptive_shuffle=E[Y_phys(ADAPTIVE_ESCROW)-Y_phys(CONTEXT_SHUFFLED)]",
+      "adaptive_vs_recurrent": "Delta_adaptive_recurrent=E[Y_phys(ADAPTIVE_ESCROW)-Y_phys(MATCHED_RECURRENT_TIMING)]",
+      "frame_difference": "Paired original-minus-refined differences for release count, Qhat, Ahat, score vector and learned-policy return",
+      "sham_union_difference": "Paired no-sham-minus-sham differences for focal release count, target, advantage and duration score"
+    },
+    "registered_margins": {
+      "crossed_directed_normalized_return": 0.05,
+      "adaptive_meaningful_normalized_return": 0.02,
+      "matched_control_equivalence_normalized_return": 0.02,
+      "heldout_partner_noninferiority": 0.02,
+      "frame_target_absolute": 0.00000001,
+      "frame_score_relative": 0.000001,
+      "learned_frame_return_equivalence": 0.02,
+      "sham_release_count": 0,
+      "sham_target_absolute": 0.00000001,
+      "effective_realized_duration_seconds": 0.50
+    },
+    "uncertainty": {
+      "run_summaries": "Aggregate contexts, records, agents, episodes and partner snapshots inside each run block according to the registered estimand before inference.",
+      "interval_method": "Use a 10000-resample paired bootstrap over the 24 run-block indices with max-t adjustment across crossed, adaptive-fixed, adaptive-shuffle, adaptive-recurrent, held-out and learned-invariance primary contrasts. Report simultaneous two-sided 95 percent intervals.",
+      "equivalence": "Use simultaneous two-one-sided tests on run-level contrasts; equivalence requires the simultaneous 90 percent interval wholly inside the registered margin.",
+      "deterministic_conformance": "Release multiplicity, state-machine legality, decision-ID uniqueness and prohibited gradient edges use zero-tolerance pass/fail rather than sampling intervals.",
+      "support_reporting": "Report assignment probability, consumed and rejected counts, nominal-expiry probability, realized-duration distribution and effective sample size by context, duration, cause, partner factor and run.",
+      "multiplicity": "No unregistered context, cause, partner subgroup or latent probe can replace a failed primary contrast.",
+      "missingness": "No outcome-based record deletion, seed replacement, retry, winsorization or imputation. A missing required arm or cell invalidates that run block and is reported.",
+      "mixed_result_rule": "A passed lower stage remains a narrow result when a later stage fails; it cannot be promoted to the later claim."
+    }
+  },
+  "advisory_validation_contract": {
+    "stage_A_escrow_boundary_and_gradient_conformance": {
+      "trace_roster": [
+        "ordinary nominal expiry",
+        "early skill completion",
+        "focal leave",
+        "focal replacement with new owner epoch",
+        "episode terminal",
+        "forced interrupt",
+        "simultaneous competing causes",
+        "duplicate terminal notification",
+        "reordered notification",
+        "replayed record",
+        "other-agent sham union events",
+        "genuine teammate physical action",
+        "on-time delayed reward",
+        "reward after the 0.25-second watermark",
+        "behavior-version mismatch",
+        "four-way physical frame refinement"
+      ],
+      "required_passes": [
+        "one immutable decision ID per eligible draw and no ID collision",
+        "complete immutable header including behavior version and probability vector",
+        "separate nominal and realized duration",
+        "first-time plus precedence cause selection and one terminal cause",
+        "deduplicated reward and event receipts",
+        "zero or one compare-and-set release according to terminal status",
+        "no focal release, terminalization, resampling or RNG movement from sham union events",
+        "bounded reward-latency watermark and rejection of incomplete targets",
+        "strict policy-version consumption and fully stratified rejection ledger",
+        "two-way primitive-duration parameter, normalization and optimizer firewall",
+        "primitive action-kernel invariance to escrow, period, age and countdown sentinels",
+        "closed physical-time, decision, record, batch, optimizer and update-norm counters"
+      ],
+      "gate": "Any uniqueness, cause, reward-closure, exactly-once, version, gradient or accounting failure is INVALID_ESCROW_ESTIMATOR. Return differences cannot repair it."
+    },
+    "stage_B_physical_time_estimator_and_positive_control": {
+      "procedure": "Freeze primitive and partner policies. From every registered positive-control base state, randomize stationary fixed-short versus stationary fixed-long continuation and construct original/refined and no-sham/sham paired forks using common physical random tapes. Calibrate the initial randomized record's SMDP target against the analytic continuation value and audit every later continuation record for conformance.",
+      "required_passes": [
+        "analytic crossed values reproduced within 0.01 normalized return",
+        "short optimal in C_FAST by more than 0.05",
+        "long optimal in C_STABLE by more than 0.05",
+        "oracle adaptive policy exceeds both fixed endpoints",
+        "long C_STABLE progress cannot survive any short renewal",
+        "effective-action support passes despite competing interruption",
+        "Qhat, baseline, advantage and score agree with independent receipt derivation",
+        "frame clone preserves release, cause, physical return, target, advantage and score within margins",
+        "sham union expansion changes no focal release, target, advantage or score"
+      ],
+      "gate": "Estimator calibration, nonvacuous crossed control, frame invariance, sham invariance and effective-action support all precede learned adaptive-value interpretation."
+    },
+    "stage_C_adaptive_duration_value": {
+      "procedure": "Branch all timing arms from each of 24 independent frozen primitive checkpoints, train under identical physical version cohorts, then evaluate on balanced contexts with familiar and held-out frozen partner families over a common physical horizon.",
+      "primary_gate": "ADAPTIVE_ESCROW has a simultaneous 95 percent lower confidence bound more than 0.02 above TUNED_FIXED, CONTEXT_SHUFFLED and MATCHED_RECURRENT_TIMING, while maintaining duration support, effective realized-duration separation, exposure closure and Stage A/B invariance.",
+      "partner_gate": "The held-out adaptive advantage is positive and noninferior to the familiar advantage by no more than 0.02.",
+      "mechanism_observables": [
+        "nominal-duration probability and chosen duration by context",
+        "realized duration and nominal-expiry probability",
+        "crossed interaction and oracle gap",
+        "physical return per common horizon",
+        "duration entropy and support floor",
+        "record age, rejection and reward latency",
+        "physical decisions, releases, batches, updates and update norms",
+        "cause-specific returns without cause-conditioned primary selection",
+        "familiar and held-out partner contrasts",
+        "post-learning frame and sham-event invariance"
+      ],
+      "fallback_rule": "If adaptive value fails while the ledger and estimator pass, retain the escrow bookkeeping result and use TUNED_FIXED as the timing fallback."
+    },
+    "completion_meaning": "A future external re-audit may determine whether this advisory contract closes the six review requirements. This artifact itself does not reaccept, validate, implement, execute, recommend or promote CAND-VSP-02."
+  },
+  "failure_and_interpretation_matrix": [
+    {
+      "first_match": 1,
+      "condition": "Any immutable-ID, state-transition, cause-precedence, reward-watermark, exactly-once, policy-version, gradient-firewall or exposure-ledger conformance check fails.",
+      "interpretation": "INVALID_ESCROW_ESTIMATOR; neither bookkeeping nor adaptive-duration conclusions are available."
+    },
+    {
+      "first_match": 2,
+      "condition": "Escrow mechanics pass but two readers cannot reproduce Qhat, baseline, advantage and score for every terminal cause.",
+      "interpretation": "ESTIMATOR_UNDERSPECIFIED; retain event records only, not an SMDP estimator claim."
+    },
+    {
+      "first_match": 3,
+      "condition": "Reward-latency rejection occurs or differs materially by duration, context, cause or partner.",
+      "interpretation": "TARGET_CLOSURE_FAILURE; the one released or rejected record does not identify comparable duration return."
+    },
+    {
+      "first_match": 4,
+      "condition": "Frame refinement changes release count, physical target, advantage, score or learned return beyond the registered margin.",
+      "interpretation": "ATOMIC_DISCRETIZATION_EXPLANATION; elapsed-time invariance fails."
+    },
+    {
+      "first_match": 5,
+      "condition": "Sham union events change focal record state, release, target, advantage or score.",
+      "interpretation": "TEAMMATE_EVENT_MULTIPLICATION; asynchronous exactly-once isolation fails."
+    },
+    {
+      "first_match": 6,
+      "condition": "The analytic positive-control values are not recovered, oracle crossed duration does not beat both fixed endpoints or the directed crossed margins fail.",
+      "interpretation": "POSITIVE_CONTROL_NOT_IDENTIFYING; no learned adaptive-period conclusion is permitted."
+    },
+    {
+      "first_match": 7,
+      "condition": "Interruptions collapse nominal short and long to unsupported or equivalent realized-duration distributions.",
+      "interpretation": "NO_EFFECTIVE_DURATION_SUPPORT; this is not evidence against escrow correctness."
+    },
+    {
+      "first_match": 8,
+      "condition": "Duration advantage appears only among NOMINAL_EXPIRY records and not in the all-decision intention-to-treat population.",
+      "interpretation": "POST_TREATMENT_SELECTION_EXPLANATION."
+    },
+    {
+      "first_match": 9,
+      "condition": "Adaptive timing wins only before physical-cohort optimizer and update-norm matching, or only when primitive-duration coupling is allowed.",
+      "interpretation": "OPTIMIZER_EXPOSURE_OR_SHARED_PATH_EXPLANATION."
+    },
+    {
+      "first_match": 10,
+      "condition": "Stage A/B pass and ADAPTIVE_ESCROW is equivalent to TUNED_FIXED within +/-0.02.",
+      "interpretation": "Adaptive-period value unsupported; retain the tuned fixed-duration fallback and any separately passed escrow result."
+    },
+    {
+      "first_match": 11,
+      "condition": "Adaptive exceeds tuned fixed but is equivalent to CONTEXT_SHUFFLED.",
+      "interpretation": "Stochastic timing, exploration or regularization is sufficient; context-sensitive duration selection is unsupported."
+    },
+    {
+      "first_match": 12,
+      "condition": "Adaptive exceeds fixed and shuffled but is equivalent to MATCHED_RECURRENT_TIMING.",
+      "interpretation": "Ordinary recurrent timing is sufficient; an explicit nominal-duration catalogue is unnecessary in the registered scope."
+    },
+    {
+      "first_match": 13,
+      "condition": "Oracle crossed timing succeeds but the learned adaptive policy does not realize the crossed mapping.",
+      "interpretation": "Duration value is accessible, but the registered learning rule is unsupported."
+    },
+    {
+      "first_match": 14,
+      "condition": "Adaptive advantage exists with familiar partners but held-out positivity or noninferiority fails.",
+      "interpretation": "Partner-conditioned timing convention, not reusable adaptive period control."
+    },
+    {
+      "first_match": 15,
+      "condition": "Ledger conformance and physical estimator pass, but no adaptive arm contrast passes.",
+      "interpretation": "Retain exactly-once asynchronous SMDP bookkeeping only; use TUNED_FIXED and make no adaptive-duration claim."
+    },
+    {
+      "first_match": 16,
+      "condition": "All conformance, estimator, nonvacuity, crossed, support, frame, sham, exposure, fixed, shuffled, recurrent and held-out-partner gates pass.",
+      "interpretation": "Bounded evidence for context-adaptive nominal-duration value under the registered asynchronous SMDP; external re-audit remains required before any validation-ready status."
+    }
+  ],
+  "source_to_mechanism_boundary": {
+    "campaign_source_result_packet_ids": [
+      "SRP-VSP-01",
+      "SRP-VSP-03",
+      "SRP-VSP-07"
+    ],
+    "direct_candidate_packet_ids": [
+      "AIP-VSP-02",
+      "RLPA-VSP-02",
+      "CAP-VSP-02",
+      "AIP-VSP-C2-02",
+      "RLPA-VSP-C2-02",
+      "CAP-VSP-C2-02"
+    ],
+    "source_ids": [
+      "VS-0001",
+      "VS-0005",
+      "MARL-0449",
+      "MARL-0530",
+      "VS-0002",
+      "MARL-0603",
+      "MARL-0134",
+      "MARL-0032",
+      "MARL-0500",
+      "MARL-0066",
+      "MARL-0203",
+      "MARL-0454",
+      "MARL-0149",
+      "MARL-0209",
+      "MARL-0052",
+      "MARL-0602",
+      "MARL-0116"
+    ],
+    "source_supported_transfer_as_recorded_by_campaign": [
+      "initiation-time duration choice followed by countdown",
+      "target-state stopping under a hard cap",
+      "separation of elapsed-time, event-clock and atomic-step credit units",
+      "continuous-time value and policy-gradient targets using elapsed time",
+      "logical progress, context length and primitive action as distinct temporal objects",
+      "semi-Markov transfer requiring explicit boundaries, elapsed-time discounting, masks and causal windows",
+      "the warning that retrospective causal analysis is not automatically a training signal"
+    ],
+    "campaign_and_explorer_construction": [
+      "immutable versioned duration-decision escrow",
+      "exclusive cause-coded compare-and-set release",
+      "0.25-second reward-latency watermark and strict rejection",
+      "strict on-policy physical version cohorts",
+      "fully disjoint frozen primitive and learned duration paths",
+      "one-versus-four-second C_FAST/C_STABLE crossed commitment SMDP",
+      "renewal-reset progress as the nonemulable long-period benefit",
+      "four-way physical frame clone and noncausal teammate-union sham",
+      "tuned fixed, context-shuffled, recurrent and oracle controls",
+      "24 paired run blocks, exact support floors, run-level intervals and first-match interpretations"
+    ],
+    "claim_boundary": "The source packets do not directly establish general learned per-agent skill periods, this escrow state machine, reward watermark, strict version cohort, crossed positive-control environment, nonemulable progress reset, comparator implementations, numeric margins, cohort sizes or inference rules. They motivate the temporal abstractions and accounting hazards. Every exact interface and validation constant here is an advisory construction requiring external re-audit and future evidence."
+  },
+  "required_revision_trace": [
+    {
+      "revision_number": 1,
+      "review_requirement": "Materialize the semi-Markov duration action and its nonvacuous causal consequence.",
+      "materialized_in": [
+        "semi_markov_action_and_nonvacuous_crossed_control"
+      ],
+      "closure": "Defines H_q, the 1/4-second action set, own renewal opportunity, committed high-level skill process and primitive execution. C_FAST values short renewal after a target flip; C_STABLE values uninterrupted progress that every renewal resets, so repeated costless short periods cannot emulate long commitment. Analytic crossed values and the oracle policy are explicit."
+    },
+    {
+      "revision_number": 2,
+      "review_requirement": "Materialize the escrow and cause-coded boundary transducer.",
+      "materialized_in": [
+        "escrow_and_cause_coded_boundary_transducer"
+      ],
+      "closure": "Freezes immutable and append-only record fields, seven states, earliest-time and same-time cause precedence, duplicate/replay/conflict handling, other-agent event semantics, a 0.25-second reward watermark, strict terminal statuses and the sole compare-and-set learning release."
+    },
+    {
+      "revision_number": 3,
+      "review_requirement": "Freeze the physical-time SMDP estimator.",
+      "materialized_in": [
+        "physical_time_smdp_estimator"
+      ],
+      "closure": "Defines shared external reward, exp(-0.1*u) discount, cause-dependent bootstraps, sampled-duration-independent baseline, one score term, strict on-policy version cohorts, all-decision interruption treatment, nominal/realized duration and a four-way reward-preserving frame-refinement contract."
+    },
+    {
+      "revision_number": 4,
+      "review_requirement": "Close the duration/primitive firewall and exposure accounting.",
+      "materialized_in": [
+        "duration_primitive_firewall_and_exposure_accounting"
+      ],
+      "closure": "Enumerates duration and primitive inputs, parameters, losses, normalizers and optimizers; freezes the primitive path; prohibits all direct and shared gradient edges; adds byte and action-kernel sentinels; and uses fixed physical version cohorts with one optimizer opportunity while preserving legitimate score frequency per physical time."
+    },
+    {
+      "revision_number": 5,
+      "review_requirement": "Freeze the complete discriminator, support, sampling hierarchy and uncertainty.",
+      "materialized_in": [
+        "complete_discriminator_support_sampling_and_uncertainty",
+        "advisory_validation_contract"
+      ],
+      "closure": "Defines adaptive, fixed endpoints, training-selected fixed, context-shuffled, recurrent and oracle arms; duration and effective-action support; familiar and held-out partners; 24 independent paired run blocks; nested record and partner units; physical forks; run-level max-t intervals; equivalence; multiplicity and fixed stopping."
+    },
+    {
+      "revision_number": 6,
+      "review_requirement": "Freeze the narrow result and fallback matrix.",
+      "materialized_in": [
+        "failure_and_interpretation_matrix",
+        "advisory_validation_contract"
+      ],
+      "closure": "Separates invalid ledger, underdetermined estimator, reward latency, frame sensitivity, sham-event multiplication, failed positive control, duration collapse, post-treatment selection, exposure, fixed, shuffled, recurrent, learner, partner and ledger-only outcomes. TUNED_FIXED is the named fallback, and bookkeeping success never becomes adaptive-period success."
+    }
+  ],
+  "residual_uncertainty": [
+    "The source evidence is adjacent to, not direct evidence for, learned per-agent skill periods in general MARL.",
+    "The C_FAST/C_STABLE construction is a diagnostic SMDP, not evidence that real tasks contain the same temporal tradeoff.",
+    "Renewal-reset progress creates a genuine long-period advantage but may be environment-specific or resemble an engineered option-state rule.",
+    "A different renewal interface that preserves progress would remove that long-period advantage.",
+    "The one-versus-four-second catalogue does not establish value for continuous or larger duration sets.",
+    "Correct exactly-once accounting does not establish that nominal duration is a useful action.",
+    "A duration-blind primitive actor can still infer boundary spacing from ordinary recurrent history unless the frozen actor audit is exact.",
+    "Freezing the primitive actor improves identification but does not establish stability under joint primitive-duration learning.",
+    "The 0.25-second reward-arrival bound requires an environment receipt contract that some systems may not provide.",
+    "Rejecting a late reward avoids a wrong target but can create duration-dependent missingness and block value interpretation.",
+    "Post-leave and post-replacement team bootstraps require a calibrated centralized continuation critic under changed rosters.",
+    "Shared team return is a joint-policy objective and does not isolate the focal duration decision's causal responsibility.",
+    "Strict version cohorts avoid staleness correction but delay learning and impose a drain phase not present in every online system.",
+    "Score normalization per physical time preserves decision-frequency effects but does not guarantee equal gradient variance across durations.",
+    "The fixed global update-norm cap can affect arms differently when their score counts differ.",
+    "Frame refinement is valid only if physical transitions, integrated reward, discount and boundary times are genuinely equivalent.",
+    "Noncausal sham union events cannot model genuine partner actions that legitimately change focal return.",
+    "Competing leave, replacement and interruption can still make some context-duration cells rare despite the nominal assignment floor.",
+    "A recurrent renew-or-continue controller is more flexible than a commitment catalogue and may dominate for reasons other than simplicity.",
+    "Context shuffling can alter temporal correlations even when marginal counts match.",
+    "Training-selected fixed duration may overfit its training-side validation windows despite the frozen selection rule.",
+    "Held-out frozen partners do not establish robustness to continuously adapting, strategic or adversarial teammates.",
+    "The proposed 24-run cohort, exposure lengths and margins are advisory constants, not a power analysis; no compute was run.",
+    "No implementation, experiment or external re-audit has verified this complete contract."
+  ],
+  "terminal_advisory_status": {
+    "candidate_id": "CAND-VSP-02",
+    "direction_disposition": "REVISION_REQUIRED",
+    "exact_revision_count_materialized": 6,
+    "reacceptance_claimed": false,
+    "validation_status": "blocked_until_external_reaudit_or_user_direction",
+    "campaign_mutation": "none",
+    "reviewed_v3_artifact_mutation": "none",
+    "next_audit_item_selected": false,
+    "new_campaign_opened": false,
+    "implementation_or_compute": "none",
+    "formal_project_effect": "none"
+  }
+}
