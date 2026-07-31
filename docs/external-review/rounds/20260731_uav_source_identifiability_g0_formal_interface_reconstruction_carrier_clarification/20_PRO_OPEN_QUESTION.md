@@ -1,6 +1,15 @@
 ZERO_COMPUTE_IMPLEMENTATION_ALIGNMENT_CLARIFICATION
 review_type=IMPLEMENTATION_ALIGNMENT_CLARIFICATION
 
+## Evidence to read
+
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
+- `ha_ctse_process/uav_source_identifiability_g0.py`
+- `scripts/run_uav_source_identifiability_g0.py`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2/21_PRO_OPEN_RAW.md`
+- `docs/external-review/rounds/20260730_uav_source_identifiability_g0_formal_interface_contract_clarification_v2/50_MECHANICAL_INTAKE_RECORD.md`
+
 The accepted G0 scientific source is audit_target_commit=9239e3ec8a3d5b0ac3ba078f5598c19bde3c6d43. The prior frozen interface response is at the allow-listed formal_interface_raw path. Code PM inspected the exact target and returned this mechanical diagnosis:
 
 1. `run_g0_episode` adds `behavioral_replay_certificate` to `controller_evidence` for Oracle runs, but `_reconstruct_controller_trace` returns only the base controller evidence. The exact comparison therefore reports missing `controller_evidence` for real Oracle runs, making Oracle EpisodeRunEvidence invalid and preventing the six-control/cell analysis inventory.
