@@ -24,6 +24,7 @@ summary.
 
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `.agents/roles/EXTERNAL_PRO.md`
 - `.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md`
 - `docs/external-review/rounds/20260731_explorer_toy_validation_p1_design_assertion_audit/evidence/local_research/2026-07-30_variable_agent_population_inspiration_campaign_v3.json`

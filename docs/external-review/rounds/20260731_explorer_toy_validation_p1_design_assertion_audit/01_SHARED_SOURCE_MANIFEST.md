@@ -28,6 +28,7 @@ Additional tracked methodology and principle inputs:
 - `.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md`
 - `docs/project/ALGORITHM_PRINCIPLES.md`
 - `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `.agents/roles/EXTERNAL_PRO.md`
 
 External Pro must use the connected GitHub repository connector, inspect only
