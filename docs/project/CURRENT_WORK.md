@@ -2,7 +2,7 @@
 
 ```text
 document_kind=current_work_portfolio
-state_owner=research_operations_manager
+state_owner=code_project_manager
 state_updated=2026-08-01
 workstream_ids=formal_toy_research|uav_validation|explorer_project_validation
 independent_research_pointer_ids=independent_research_explorer
@@ -17,7 +17,7 @@ legacy snapshot above.
 
 ```text
 workstream_id=formal_toy_research
-owner_role=research_operations_manager
+owner_role=code_project_manager
 status=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
 active_assignment_id=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
 next_boundary=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
@@ -33,7 +33,7 @@ current_evidence_pointer=docs/external-review/rounds/20260729_g31_phase_a_shadow
 
 ```text
 workstream_id=uav_validation
-owner_role=research_operations_manager
+owner_role=code_project_manager
 status=PAUSED_SAFE_BOUNDARY_USER_AUTHORIZED
 active_assignment_id=UAV_G0_ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS_EXTERNAL_PRO_CLARIFICATION
 next_boundary=UAV_G0_ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS_EXTERNAL_PRO_CLARIFICATION
@@ -47,7 +47,7 @@ current_evidence_pointer=docs/external-review/rounds/20260731_uav_source_identif
 
 ```text
 workstream_id=explorer_project_validation
-owner_role=research_operations_manager
+owner_role=code_project_manager
 status=COMPLETE_QUEUE_EXHAUSTED
 active_assignment_id=NONE
 next_boundary=NONE
