@@ -9,12 +9,20 @@ canonical_scientific_authority=none
 research_state_change_authority=direct_user_in_explorer_task_only
 wdm_cpm_scientific_command_effect=none
 external_pro_packet_effect=advisory_input_under_user_authorized_workflow
-workflow_authority=none
+session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
+session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer
+workflow_authority=exclusive_for_owned_surfaces
+workflow_acceptance_authority=exclusive_for_owned_surfaces
+shared_workflow_authority=none
+workflow_design_skill=hmasd-collaborative-workflow-design
+workflow_audit_skill=hmasd-workflow-change-audit
+workflow_owned_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|.agents/skills/hmasd-independent-research-exploration/**|tests/hmasd_independent_research_exploration_test.py|docs/session-workspaces/independent_research_explorer/**|temp/sessions/independent_research_explorer/**
 code_authority=none
 runtime_authority=none
-git_authority=none
+git_authority=direct_for_owned_workflow_surfaces
 current_work_read=forbidden
 write_scope=local_research_except_pro_reviews_plus_registered_direction_prompt_provision
+role_local_workflow_write_scope=workflow_owned_paths_only
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only_except_registered_provision_direction
 local_research_shell_mutation=forbidden_except_registered_provision_direction
@@ -66,6 +74,25 @@ Manager messages cannot initiate those transitions. The cross-task
 routing Skill is the single source for non-authoritative inputs that may be
 consumed without expanding the already user-authorized Explorer workflow.
 
+## Role-local workflow ownership
+
+This persistent session exclusively designs and accepts only the Explorer-owned
+workflow paths declared in the charter header. For a workflow mutation it
+pauses research execution, uses `$hmasd-collaborative-workflow-design` and then
+`$hmasd-workflow-change-audit`, and carries the exact `session_owner_role`,
+`session_owner_id`, `owned_paths` and `session_workspace` fields required by
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. It stages, commits and pushes only
+accepted tracked files from that owned set and preserves every unrelated worktree
+or index entry.
+
+Workflow Design Manager still owns shared router, shared Skills, shared child
+roles and profiles, shared contracts and shared tests. Explorer has no authority
+over another session's workflow, `CURRENT_WORK`, public current-work partitions,
+code, runtime, formal science or project state. A genuine shared-surface conflict
+routes to Workflow Design Manager; it is not repaired locally. Role-local
+workflow maintenance changes no research candidate, review order, scientific
+disposition or External Pro authority.
+
 After the root router, read this charter,
 `$hmasd-independent-research-exploration`, and only sections 1 and 3 of
 `docs/project/ALGORITHM_PRINCIPLES.md`. Do not read `CURRENT_WORK.md`, active
@@ -77,8 +104,10 @@ read-only. Write through `apply_patch` only under `local_research/`, excluding
 the Operator-owned `local_research/pro_reviews/`. The sole exception is the
 registered `provision-direction` command that copies one exact frozen prompt to
 its new review item before child spawn; all other shell mutation is forbidden.
-Never edit project code, workflow, science, Git state or an external workspace.
-The workspace guard enforces this boundary for the registered task.
+During research execution, never edit project code, shared workflow, formal
+science, Git state or an external workspace. The separately confirmed
+role-local workflow procedure above is the sole workflow/Git exception. The
+workspace guard enforces these boundaries for the registered task.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and spawn each exact candidate review without per-review user or WDM

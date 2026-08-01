@@ -38,10 +38,34 @@ Explorer writes durable research outputs outside the transport-owned
    [references/research-methodology.md](references/research-methodology.md).
 
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
-scientific ledgers. Do not use Git or create project changes.
+scientific ledgers. During research execution, do not use Git or create project
+changes.
 Write advisory files only with `apply_patch` under `local_research`, excluding
 `local_research/pro_reviews`. The sole shell-write exception is the registered
 `provision-direction` copy of one frozen prompt before child spawn.
+
+A separately confirmed Explorer-owned workflow mutation is outside the active
+research loop. Pause research execution and use
+`$hmasd-collaborative-workflow-design`, followed by
+`$hmasd-workflow-change-audit`, under the Explorer role charter and
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Every workflow child assignment
+must carry the three locked identity/workspace values below and spell out
+`owned_paths` as the literal exact nonoverlapping paths assigned for that child:
+
+```text
+session_owner_role=independent_research_explorer
+session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
+session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer
+```
+
+The literal `owned_paths` list must be a subset of the exact
+`workflow_owned_paths=` boundary in the Explorer role charter. Symbolic aliases,
+directory-family shortcuts and implicit path expansion are forbidden.
+
+That procedure may change only the charter-declared role-local workflow paths.
+It grants no `CURRENT_WORK`, public-partition, shared-control-plane, code,
+runtime, scientific or `local_research` Git authority and never runs
+concurrently with research mutation.
 
 ## Choose exactly one research mode
 

@@ -494,3 +494,63 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
         "cross_direction_inspiration",
     ):
         assert required in reference
+
+
+def test_explorer_phase_two_workflow_adoption_is_role_local() -> None:
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    workspace = (
+        REPO / "docs" / "session-workspaces" / "independent_research_explorer" / "README.md"
+    ).read_text(encoding="utf-8")
+    role_lines = set(role.splitlines())
+    skill_normalized = " ".join(skill.split())
+    exact_owned_paths = (
+        "workflow_owned_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|"
+        ".agents/skills/hmasd-independent-research-exploration/**|"
+        "tests/hmasd_independent_research_exploration_test.py|"
+        "docs/session-workspaces/independent_research_explorer/**|"
+        "temp/sessions/independent_research_explorer/**"
+    )
+
+    for required in (
+        "session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e",
+        "session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer",
+        "workflow_authority=exclusive_for_owned_surfaces",
+        "workflow_acceptance_authority=exclusive_for_owned_surfaces",
+        "shared_workflow_authority=none",
+        "git_authority=direct_for_owned_workflow_surfaces",
+        "workflow_design_skill=hmasd-collaborative-workflow-design",
+        "workflow_audit_skill=hmasd-workflow-change-audit",
+        "current_work_read=forbidden",
+    ):
+        assert required in role
+    assert exact_owned_paths in role_lines
+    assert "workflow_authority=none" not in role_lines
+    assert "git_authority=none" not in role_lines
+
+    for required in (
+        "$hmasd-collaborative-workflow-design",
+        "$hmasd-workflow-change-audit",
+        "docs/project/SESSION_WORKSPACE_CONTRACT.md",
+        "session_owner_role=independent_research_explorer",
+        "`owned_paths` as the literal exact nonoverlapping paths",
+        "Symbolic aliases, directory-family shortcuts and implicit path expansion are forbidden.",
+        "never runs concurrently with research mutation",
+    ):
+        assert required in skill_normalized
+    assert "owned_paths=exact_workflow_owned_paths_from_role_charter" not in skill
+    assert "Do not use Git or create project changes." not in skill
+
+    for required in (
+        "session_owner_role=independent_research_explorer",
+        "session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e",
+        "durable_workspace=docs/session-workspaces/independent_research_explorer/",
+        "temporary_workspace=temp/sessions/independent_research_explorer/",
+        "shared_surface_owner=false",
+        "public_current_work_partition_authority=none",
+    ):
+        assert required in workspace
