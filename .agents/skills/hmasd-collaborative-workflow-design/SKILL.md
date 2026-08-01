@@ -1,16 +1,39 @@
 ---
 name: hmasd-collaborative-workflow-design
-description: Use in the dedicated Workflow Design Manager task for any HMASD workflow-design request that may mutate control-plane surfaces. Discover facts, ask only decision questions that change a named plan field, present one complete plan, wait for natural-language confirmation, then audit and execute it.
+description: Use in any persistent HMASD session for a workflow-design request that may mutate that session's owned control-plane surfaces. Discover facts, ask only decision questions that change a named plan field, present one complete plan, wait for natural-language confirmation, then audit and execute it.
 ---
 
 # HMASD Collaborative Workflow Design
 
 ## Boundary
 
-Operate only as the dedicated Workflow Design Manager. Keep this procedure inside
-workflow design: `runtime_authority=none`, `current_work_authority=none`,
-`scientific_authority=none`, `code_authority=none`, and
-`code_acceptance_authority=none`.
+Operate only inside the calling persistent session's owned workflow surfaces.
+This Skill grants no runtime, current-work, scientific, code or acceptance
+authority beyond the caller's role charter. Do not combine a workflow mutation
+with the caller's runtime, science or implementation work.
+
+```text
+runtime_authority=none
+current_work_authority=none
+scientific_authority=none
+code_authority=none
+code_acceptance_authority=none
+workflow_zero_question_path=fully_specified_mutations
+workflow_decision_question_condition=changes_named_plan_field
+workflow_plan_confirmation=required_before_mutation
+workflow_read_only_plan_confirmation=not_required
+workflow_material_plan_drift=reconfirmation_required
+```
+
+### Persistent-session contract
+
+When invoked by a persistent session, this procedure requires the exact
+`session_owner_role`, `session_owner_id`, `owned_paths` and `session_workspace`
+from `docs/project/SESSION_WORKSPACE_CONTRACT.md`. The Skill grants no authority: the caller
+role and contract define the owned surfaces. Workflow Design Manager retains
+shared-control-plane ownership. Any workflow child uses
+`parent=assigning_persistent_session` and returns advisory evidence only to the
+exact session owner.
 
 Classify the request before collaborating on a plan. Complete a read-only
 inspection, explanation, status reply or reload smoke directly within its named
@@ -57,7 +80,8 @@ required.
 
 ## Execute the confirmed plan
 
-After confirmation, use `$hmasd-workflow-change-audit` for impact classification,
+After confirmation, the assigning persistent session uses
+`$hmasd-workflow-change-audit` for impact classification,
 mutation, structural and focused checks, stale-reference searches, exact staging,
 commit, push and any required reload smoke. The confirmed plan authorizes those
 operations only for its stated intent, authority, path set and acceptance method.
@@ -71,5 +95,6 @@ an external effect not described in the confirmed plan.
 Do not create a handoff, runtime record, review round, experiment or child merely
 to manage this collaboration. Do not enter the active research loop. Before plan
 confirmation, return only the next decision question or the complete plan; after
-execution, return the accepted commits, exact paths and focused verification
-evidence.
+execution, the calling session returns its accepted commits, exact paths and
+focused verification evidence. WDM performs this acceptance only for shared
+control-plane surfaces.

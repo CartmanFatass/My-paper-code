@@ -58,6 +58,10 @@ data/
 !memory/*.md
 # Project control plane is load-bearing collaboration state.
 !docs/project/*.md
+!docs/project/current-work/
+!docs/project/current-work/**/*.md
+!docs/session-workspaces/
+!docs/session-workspaces/**/*.md
 !docs/report/*.md
 !docs/plans/*.md
 !docs/superpowers/plans/*.md

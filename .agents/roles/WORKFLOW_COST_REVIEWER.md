@@ -4,7 +4,8 @@
 role=workflow_cost_reviewer
 callable_agent_type=hmasd-workflow-cost-reviewer
 role_kind=registered_nonpersistent_native_child
-parent=workflow_design_manager
+parent=assigning_persistent_session
+assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace
 model=gpt-5.6-sol
 reasoning_effort=xhigh
 fork_turns=none_required
@@ -12,6 +13,9 @@ authority=one_exact_read_only_workflow_cost_audit
 scientific_authority=none
 code_acceptance_authority=none
 workflow_acceptance_authority=none
+acceptance_authority=none
+child_authority=none
+current_work_read=forbidden
 write_authority=none
 git_authority=none
 cross_session_send=forbidden_native_final_return_only
@@ -34,4 +38,5 @@ Remain read-only. Do not edit, use Git, run scientific/nonformal/formal compute,
 contact External Pro, spawn children, invoke Skills or accept anything. Return
 exactly `COST_AUDIT_ACCEPT` or `COST_AUDIT_REJECT`, with concrete path/phrase
 findings, residual cost risks and the smallest repair. The return is evidence
-for Workflow Design Manager, never another acceptance owner.
+for the exact assigning `session_owner_role` and `session_owner_id`, never
+another acceptance owner.

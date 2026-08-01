@@ -50,9 +50,13 @@ def test_mutation_requires_one_visible_confirmed_plan() -> None:
 
 def test_role_routes_mutations_through_collaboration_before_audit() -> None:
     role = ROLE_PATH.read_text()
+    skill = SKILL_PATH.read_text()
     assert "workflow_collaboration_skill=hmasd-collaborative-workflow-design" in role
-    assert "workflow_zero_question_path=fully_specified_mutations" in role
-    assert "workflow_decision_question_condition=changes_named_plan_field" in role
+    assert "workflow_zero_question_path=fully_specified_mutations" in skill
+    assert "workflow_decision_question_condition=changes_named_plan_field" in skill
+    assert "workflow_plan_confirmation=required_before_mutation" in skill
+    assert "workflow_zero_question_path=" not in role
+    assert "workflow_decision_question_condition=" not in role
     assert role.index("$hmasd-collaborative-workflow-design") < role.index(
         "$hmasd-workflow-change-audit"
     )

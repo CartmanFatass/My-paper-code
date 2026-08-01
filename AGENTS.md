@@ -23,12 +23,15 @@ Use exactly one route:
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 A child never reconstructs task history. A missing identity, path, authority or completion condition fails closed instead of triggering a project-state search.
 
+Every persistent session uses the shared Workflow Design Skills for its own surfaces; its role charter and `docs/project/SESSION_WORKSPACE_CONTRACT.md` define ownership, and the Skills grant none.
+
 ## Universal authority boundary
 
 ```text
 workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217
 code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
-workflow_design_manager_workflow_design_authority=exclusive
+workflow_design_manager_workflow_design_authority=exclusive_for_shared_control_plane_surfaces
+workflow_design_manager_workflow_acceptance_authority=exclusive_for_shared_control_plane_surfaces
 workflow_design_manager_workflow_runtime_authority=none
 workflow_design_manager_current_work_authority=none
 workflow_design_manager_scientific_authority=none
@@ -38,6 +41,9 @@ workflow_design_manager_remote_repository_authority=permanent_user_grant
 workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 workflow_design_manager_external_review_runtime_authority=none
 workflow_design_manager_experiment_runtime_authority=none
+shared_workflow_design_owner=workflow_design_manager|persistent_session_role_local_workflow_design_authority=exclusive_for_owned_surfaces|persistent_session_role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces
+persistent_session_workflow_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace|persistent_session_workflow_collaboration_skill=hmasd-collaborative-workflow-design|persistent_session_workflow_audit_skill=hmasd-workflow-change-audit
+workflow_child_parent=assigning_persistent_session|workflow_child_acceptance_authority=none|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
@@ -72,9 +78,8 @@ cross_task_routing=locked_role_session_model_thinking
 cross_task_routing_skill=hmasd-cross-task-routing
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 ```
-The user permanently authorizes Workflow Design Manager and Code Project Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered. Independent research tasks have no Git or repository-egress authority.
-There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. Workflow Design Manager owns workflow design, Code Project Manager owns project coordination, code, technical acceptance, runtime and formal Pro transport, and External Pro owns science. The Independent Research Pro Review Operator owns only its separate registered methodology conversation and local independent-review archive.
-Code Project Manager may request workflow design directly; Workflow Design Manager returns to that exact requester.
+The user permanently authorizes every registered persistent session to fetch and push accepted nonoverlapping paths in `SESSION_WORKSPACE_CONTRACT.md`; independent-research egress remains limited to role-local workflow and workspace.
+There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. WDM owns shared workflow; each session owns its local workflow; CPM owns project execution; External Pro owns science. Only shared-surface conflicts route to WDM.
 ## Universal project constraints
 
 ```text
@@ -131,8 +136,7 @@ A future project-external write requires a new explicit user instruction for its
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 
-No role reads every routed document. The active assignment or role charter
-names the smallest necessary subset.
+No role reads every routed document. The active assignment or role charter names the smallest necessary subset.
 ## Repository surfaces
 - Git-tracked code and tests are Code Project Manager implementation truth.
 - `logs/<run-id>/` is Code Project Manager-owned runtime evidence written only by an exact assigned native operator or CPM.

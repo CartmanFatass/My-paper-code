@@ -68,7 +68,9 @@ def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
         "Do not retry automatically",
         "Long-text file handoff",
         "larger than 8 KiB",
-        "temp/handoffs/",
+        "temp/sessions/<role>/handoffs/",
+        "handoff_owner_role",
+        "locked source role",
         "LONG_TEXT_HANDOFF_VERIFIED",
         "LONG_TEXT_HANDOFF_INVALID",
         "HANDOFF_CONSUMED",
@@ -119,19 +121,34 @@ def test_long_text_handoff_preserves_exact_utf8_and_identity(tmp_path: Path) -> 
     source = tmp_path / "candidate.txt"
     source.write_bytes(payload)
 
-    written = _payload_command(repo, "write", "--label", "g46-candidate", "--source", str(source))
+    written = _payload_command(
+        repo,
+        "write",
+        "--owner-role",
+        "workflow_design_manager",
+        "--label",
+        "g46-candidate",
+        "--source",
+        str(source),
+    )
     assert written.returncode == 0, written.stderr.decode()
     metadata = json.loads(written.stdout)
     assert metadata["status"] == "LONG_TEXT_HANDOFF_WRITTEN"
     assert metadata["handoff_bytes"] == len(payload)
     assert metadata["handoff_sha256"] == hashlib.sha256(payload).hexdigest()
     assert metadata["handoff_encoding"] == "utf-8"
+    assert metadata["handoff_owner_role"] == "workflow_design_manager"
+    assert metadata["handoff_path"].startswith(
+        "temp/sessions/workflow_design_manager/handoffs/"
+    )
     target = repo / metadata["handoff_path"]
     assert target.read_bytes() == payload
 
     verified = _payload_command(
         repo,
         "verify",
+        "--owner-role",
+        "workflow_design_manager",
         "--path",
         metadata["handoff_path"],
         "--bytes",
@@ -147,7 +164,15 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
     tmp_path: Path,
 ) -> None:
     repo = _handoff_repo(tmp_path)
-    written = _payload_command(repo, "write", "--label", "tamper", stdin=b"complete payload")
+    written = _payload_command(
+        repo,
+        "write",
+        "--owner-role",
+        "code_project_manager",
+        "--label",
+        "tamper",
+        stdin=b"complete payload",
+    )
     metadata = json.loads(written.stdout)
     target = repo / metadata["handoff_path"]
     target.write_bytes(target.read_bytes()[:-1])
@@ -155,6 +180,8 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
     for args in (
         (
             "verify",
+            "--owner-role",
+            "code_project_manager",
             "--path",
             metadata["handoff_path"],
             "--bytes",
@@ -164,6 +191,8 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
         ),
         (
             "verify",
+            "--owner-role",
+            "code_project_manager",
             "--path",
             "AGENTS.md",
             "--bytes",
@@ -182,8 +211,54 @@ def test_temp_handoff_payloads_are_git_ignored_but_contract_is_tracked() -> None
     assert "/temp/*" in ignore
     assert "!/temp/README.md" in ignore
     contract = (ROOT / "temp/README.md").read_text(encoding="utf-8")
-    assert "temp/handoffs/" in contract
+    assert "temp/sessions/<role>/handoffs/" in contract
     assert "Payloads are never deleted automatically" in contract
+
+
+def test_long_text_handoff_rejects_owner_role_escape_and_cross_role_path(
+    tmp_path: Path,
+) -> None:
+    repo = _handoff_repo(tmp_path)
+    written = _payload_command(
+        repo,
+        "write",
+        "--owner-role",
+        "workflow_design_manager",
+        "--label",
+        "owner",
+        stdin=b"owner payload",
+    )
+    metadata = json.loads(written.stdout)
+    for owner_role in ("../escape", "role/name", "role\\name", ".."):
+        rejected = _payload_command(
+            repo,
+            "verify",
+            "--owner-role",
+            owner_role,
+            "--path",
+            metadata["handoff_path"],
+            "--bytes",
+            str(metadata["handoff_bytes"]),
+            "--sha256",
+            metadata["handoff_sha256"],
+        )
+        assert rejected.returncode != 0
+        assert json.loads(rejected.stdout)["status"] == "LONG_TEXT_HANDOFF_INVALID"
+
+    cross_role = _payload_command(
+        repo,
+        "verify",
+        "--owner-role",
+        "code_project_manager",
+        "--path",
+        metadata["handoff_path"],
+        "--bytes",
+        str(metadata["handoff_bytes"]),
+        "--sha256",
+        metadata["handoff_sha256"],
+    )
+    assert cross_role.returncode != 0
+    assert json.loads(cross_role.stdout)["status"] == "LONG_TEXT_HANDOFF_INVALID"
 
 
 def test_cross_task_routing_skill_is_explicit_only() -> None:
@@ -191,6 +266,24 @@ def test_cross_task_routing_skill_is_explicit_only() -> None:
     assert interface["policy"]["allow_implicit_invocation"] is False
     assert "$hmasd-cross-task-routing" in interface["interface"]["default_prompt"]
     assert "locked session, model, and thinking" in interface["interface"]["default_prompt"]
+
+
+def test_workflow_skills_bind_persistent_session_contract_without_granting_authority() -> None:
+    for relative in (
+        ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
+        ".agents/skills/hmasd-workflow-change-audit/SKILL.md",
+    ):
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        for token in (
+            "session_owner_role",
+            "session_owner_id",
+            "owned_paths",
+            "session_workspace",
+            "SESSION_WORKSPACE_CONTRACT",
+            "grants no authority",
+            "shared-control-plane ownership",
+        ):
+            assert token in text, (relative, token)
 
 
 def test_router_and_skill_lock_exact_role_routes() -> None:

@@ -41,6 +41,16 @@ $profiles = @(
         Effort = 'model_reasoning_effort = "xhigh"'
         Sandbox = 'sandbox_mode = "read-only"'
         Packet = 'WORKFLOW_REVIEW_PACKET'
+    },
+    @{
+        Path = '.codex/agents/hmasd-workflow-cost-reviewer.toml'
+        Role = '.agents/roles/WORKFLOW_COST_REVIEWER.md'
+        Name = 'hmasd-workflow-cost-reviewer'
+        Registry = '[agents."HMASDWorkflowCostReviewer"]'
+        Model = 'model = "gpt-5.6-sol"'
+        Effort = 'model_reasoning_effort = "xhigh"'
+        Sandbox = 'sandbox_mode = "read-only"'
+        Packet = 'COST_AUDIT_ACCEPT'
     })
 
 foreach ($entry in $profiles) {
@@ -59,7 +69,8 @@ foreach ($entry in $profiles) {
     }
     foreach ($required in @(
         "callable_agent_type=$($entry.Name)",
-        'parent=workflow_design_manager',
+        'parent=assigning_persistent_session',
+        'assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace',
         'acceptance_authority=none',
         'child_authority=none',
         'current_work_read=forbidden',
@@ -105,7 +116,7 @@ foreach ($required in @(
     'authority=one_exact_read_only_integrated_workflow_review',
     'write_authority=none',
     'git_authority=none',
-    'Review only when WDM names a risk trigger',
+    'Review only when the assigning persistent session names a risk trigger',
     'ACCEPTABLE',
     'REVISION_REQUIRED',
     'are advisory dispositions')) {
@@ -116,28 +127,26 @@ foreach ($required in @(
 
 if (($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-auditor.toml"' -AllMatches).Matches.Count -ne 1 -or
     ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-implementer.toml"' -AllMatches).Matches.Count -ne 1 -or
-    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-reviewer.toml"' -AllMatches).Matches.Count -ne 1) {
+    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-reviewer.toml"' -AllMatches).Matches.Count -ne 1 -or
+    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-cost-reviewer.toml"' -AllMatches).Matches.Count -ne 1) {
     throw 'A workflow child profile is not registered exactly once'
 }
 
 foreach ($required in @(
-    'workflow_design_authority=exclusive',
-    'workflow_design_acceptance_authority=exclusive',
-    'workflow_child_acceptance_authority=none',
-    'six paths is a planning heuristic, not a gate',
-    'nonoverlapping slices',
-    'Ordinary documentation edits do not require review',
-    'final diff and decisive semantics itself',
-    'Do not delegate user collaboration',
-    'plan selection',
-    'authority',
-    'ownership decisions',
-    'conflict resolution',
-    'final acceptance',
-    'Git integration or cross-task routing')) {
+    'workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
+    'workflow_design_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
+    'session_owner_role=workflow_design_manager',
+    'Shared workflow procedure',
+    'single source',
+    'shared-surface ownership and prohibitions',
+    'exact registered persistent session that',
+    'A direct user request returns in this task')) {
     if (-not $manager.Contains($required)) {
         throw "Workflow Design Manager delegation contract missing: $required"
     }
+}
+if ($manager.Contains('fixed Code Project Manager session')) {
+    throw 'Workflow Design Manager retains a CPM-only return route'
 }
 
 foreach ($required in @(
@@ -149,7 +158,17 @@ foreach ($required in @(
     '`WORKFLOW_VERIFY_PACKET`',
     '`hmasd-workflow-reviewer` only when',
     'Ordinary low-risk documentation edits need no reviewer',
-    'final diff are inspected by WDM')) {
+    'assigning session still reads the final diff',
+    'workflow_child_parent=assigning_persistent_session',
+    'workflow_child_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'workflow_child_acceptance_authority=none',
+    'Six paths is a useful dispatch heuristic',
+    'exact nonoverlapping path slices',
+    'Do not delegate user collaboration',
+    'authority or ownership decisions',
+    'ambiguous cross-surface semantics, conflict',
+    'resolution, final acceptance, Git integration or cross-task routing',
+    'is no review of the review')) {
     if (-not $skill.Contains($required)) {
         throw "Workflow change audit delegation contract missing: $required"
     }

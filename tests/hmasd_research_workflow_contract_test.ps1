@@ -63,6 +63,7 @@ $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
 $crossTaskRouting = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-cross-task-routing/SKILL.md')
 $crossTaskRoutingNormalized = $crossTaskRouting -replace '\s+', ' '
+$sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $independentReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
@@ -172,7 +173,14 @@ foreach ($required in @(
     'Independent Research Pro Review Operator task',
     'registered native child',
     'docs/project/CURRENT_WORK.md` is Code Project Manager operational state',
-    'workflow_design_manager_workflow_design_authority=exclusive',
+    'workflow_design_manager_workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
+    'workflow_design_manager_workflow_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
+    'persistent_session_role_local_workflow_design_authority=exclusive_for_owned_surfaces',
+    'persistent_session_role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces',
+    'persistent_session_workflow_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'workflow_child_parent=assigning_persistent_session',
+    'workflow_child_acceptance_authority=none',
+    'session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md',
     'workflow_design_manager_workflow_runtime_authority=none',
     'workflow_design_manager_current_work_authority=none',
     'workflow_design_manager_git_authority=direct_for_workflow_design_surfaces',
@@ -972,9 +980,12 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'role=workflow_design_manager',
-    'role_kind=dedicated_persistent_workflow_design_authority_task',
-    'workflow_design_authority=exclusive',
-    'workflow_design_acceptance_authority=exclusive',
+    'role_kind=dedicated_persistent_shared_workflow_design_authority_task',
+    'workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
+    'workflow_design_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
+    'role_local_workflow_design_authority=exclusive',
+    'session_owner_role=workflow_design_manager',
+    'session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessions/workflow_design_manager',
     'workflow_runtime_authority=none',
     'current_work_authority=none',
     'external_review_runtime_authority=none',
@@ -992,14 +1003,8 @@ foreach ($required in @(
     'resolves the requester''s locked session, model and thinking',
     'never an automatic acceptance gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
-    'workflow_collaboration_scope=all_mutating_workflow_design',
-    'workflow_zero_question_path=fully_specified_mutations',
-    'workflow_decision_question_condition=changes_named_plan_field',
-    'workflow_plan_confirmation=required_before_mutation',
-    'workflow_read_only_plan_confirmation=not_required',
-    'workflow_material_plan_drift=reconfirmation_required',
+    'workflow_collaboration_scope=shared_control_plane_mutations',
     'workflow_collaboration_runtime_authority=none',
-    'workflow_design_mechanical_guarantee_scope=irreversible_external_actions_only', 'workflow_design_retry_recoverable_failure_mechanism=forbidden', 'workflow_design_single_mechanism_line_budget=100', 'workflow_design_single_mechanism_terminal_state_budget=3', 'workflow_design_new_mechanism_requires_named_deletion=true', 'workflow_design_net_line_growth_default=negative_or_zero', 'workflow_design_incident_to_mechanism_promotion_threshold=2_recurrences', 'workflow_design_single_incident_response=root_cause_fix_plus_note_only', 'workflow_design_rule_single_source=one_defining_file_others_point', 'workflow_design_role_file_rule_duplication=forbidden', 'workflow_design_sha256_whitelist=archived_response_integrity_only', 'workflow_design_recovery_path_line_share=must_not_exceed_normal_path',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
@@ -1028,7 +1033,8 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-workflow-cost-reviewer',
-    'parent=workflow_design_manager',
+    'parent=assigning_persistent_session',
+    'assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace',
     'model=gpt-5.6-sol',
     'reasoning_effort=xhigh',
     'fork_turns=none_required',
@@ -1078,9 +1084,24 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
-    'Workflow Design Manager workflow-design procedure',
-    'Workflow Design Manager alone accepts',
-    'Workflow Design Manager never reads or edits them',
+    'shared persistent-session workflow-design procedure',
+    'calling session accepts only its exact owned workflow artifact',
+    'workflow-design procedure never loads them merely to reconstruct history',
+    'parent=assigning_persistent_session',
+    'workflow_child_parent=assigning_persistent_session',
+    'workflow_child_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'workflow_child_acceptance_authority=none',
+    'workflow_design_mechanical_guarantee_scope=irreversible_external_actions_only',
+    'workflow_design_retry_recoverable_failure_mechanism=forbidden',
+    'workflow_design_new_mechanism_requires_named_deletion=true',
+    'workflow_design_net_line_growth_default=negative_or_zero',
+    'workflow_design_incident_to_mechanism_promotion_threshold=2_recurrences',
+    'workflow_design_rule_single_source=one_defining_file_others_point',
+    'session_owner_role',
+    'session_owner_id',
+    'owned_paths',
+    'session_workspace',
+    'never create a review of the review',
     'task-local impact matrix',
     'exactly one existing role charter',
     'Every profile is registered',
@@ -1090,7 +1111,22 @@ foreach ($required in @(
     if (-not $workflowAudit.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
+    'shared_workflow_surface_owner=workflow_design_manager',
+    'role_local_workflow_surface_owner=exact_persistent_session',
+    'docs/session-workspaces/<role_id>/',
+    'temp/sessions/<role_id>/',
+    'docs/project/current-work/common/<record-id>.md',
+    'docs/project/current-work/sessions/<role_id>.md',
+    'same_file_concurrent_writes=forbidden')) {
+    if (-not $sessionWorkspaceContract.Contains($required)) { throw "Session workspace contract missing: $required" }
+}
+foreach ($required in @(
     'runtime_authority=none',
+    'workflow_zero_question_path=fully_specified_mutations',
+    'workflow_decision_question_condition=changes_named_plan_field',
+    'workflow_plan_confirmation=required_before_mutation',
+    'workflow_read_only_plan_confirmation=not_required',
+    'workflow_material_plan_drift=reconfirmation_required',
     'zero-question path',
     'changes at least one named plan field',
     'one question at a time',

@@ -78,18 +78,21 @@ this path for a smaller payload when exact bytes must survive message rendering,
 attachment conversion, task summaries or output truncation. Short ordinary
 messages remain direct and incur no file-handling step.
 
-The sender writes the complete payload beneath `temp/handoffs/` with the
-mechanical helper:
+The sender writes the complete payload beneath its sender-owned
+`temp/sessions/<role>/handoffs/` with the mechanical helper. The source role is
+the locked role that owns the route; a receiver cannot select or substitute a
+different owner. Verification must use the locked source role:
 
 ```powershell
 & '<hmasd_python_interpreter>' `
   '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' write `
+  --owner-role <source-role> `
   --label <purpose> --source <source-file>
 ```
 
 Omit `--source` only when piping the exact payload bytes on standard input. The
 helper accepts valid UTF-8, creates a non-overwriting timestamped file, and
-returns `handoff_path`, `handoff_bytes`, `handoff_sha256` and
+returns `handoff_path`, `handoff_owner_role`, `handoff_bytes`, `handoff_sha256` and
 `handoff_encoding=utf-8`. Actual payloads are local-only and Git-ignored.
 
 The cross-task message contains no payload body. It carries exactly the returned
@@ -100,6 +103,7 @@ or any other project state. Before reading, the receiver verifies the identity:
 ```powershell
 & '<hmasd_python_interpreter>' `
   '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' verify `
+  --owner-role <locked-source-role> `
   --path <handoff_path> --bytes <handoff_bytes> --sha256 <handoff_sha256>
 ```
 
@@ -108,8 +112,8 @@ non-UTF-8, out-of-root or digest-mismatched file fails closed as
 `LONG_TEXT_HANDOFF_INVALID`; it does not authorize reconstructing the payload
 from task history or resending an embedded copy. After use, the receiver returns
 `HANDOFF_CONSUMED path=<handoff_path> sha256=<handoff_sha256>`. Neither role
-deletes a payload automatically; cleanup is a separate explicit action after
-acknowledgement.
+deletes a payload automatically; after acknowledgement, only the source owner
+may perform the separate explicit cleanup action.
 
 ## Session replacement
 

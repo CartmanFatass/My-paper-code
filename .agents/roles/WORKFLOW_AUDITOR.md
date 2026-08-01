@@ -4,7 +4,8 @@
 role=workflow_auditor
 callable_agent_type=hmasd-workflow-auditor
 role_kind=registered_nonpersistent_native_child
-parent=workflow_design_manager
+parent=assigning_persistent_session
+assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace
 model=gpt-5.6-luna
 reasoning_effort=high
 assignment_modes=impact_map|postchange_verify
@@ -32,6 +33,11 @@ tests and stale-reference terms. Run only the assigned read-only checks, using
 no-bytecode Python when applicable. Return `WORKFLOW_VERIFY_PACKET` with the
 observed path set, command results, stale-reference results, first causal
 failure and residual verification limits. Do not repair a failure.
+
+Return the packet only to the exact `session_owner_role` and
+`session_owner_id` in the assignment. The `owned_paths` and
+`session_workspace` fields are read boundaries, not authority delegated to this
+child.
 
 Remain read-only. Do not edit, stage, commit, push, contact persistent tasks,
 invoke Skills, spawn children, accept the workflow or create another audit.
