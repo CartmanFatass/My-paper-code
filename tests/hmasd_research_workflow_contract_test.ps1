@@ -89,7 +89,10 @@ foreach ($required in @(
     # User ruling 2026-07-30: zero scientific decision rights; touchpoint 2 is
     # a conformance question, never a proposal.
     'scientific_proposal_authority=none',
-    'pro_plan_review_question=conformance_to_pro_decision')) {
+    'pro_plan_review_question=conformance_to_pro_decision',
+    # Single source: the AGENTS fence defines the hash prohibition; CURRENT_WORK
+    # no longer restates it.
+    'workflow_hash_validation=disabled')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 
@@ -136,8 +139,7 @@ foreach ($required in @(
     'experiment_operator_fallback=forbidden',
     'iteration_report_requirement=required_before_successor',
     'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
-    'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
-    'workflow_hash_validation=disabled')) {
+    'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster')) {
     if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
 }
 
