@@ -1,0 +1,7 @@
+CURRENT_REVIEW_ASSIGNMENT
+repository=CartmanFatass/My-paper-code
+branch=untied-k
+round=20260801_d7_s_local_only_successor_reruling
+stage_commit=e2f0e8a15dcc0d132999e0c70c52c9c34514374f
+question=docs/external-review/rounds/20260801_d7_s_local_only_successor_reruling/20_PRO_OPEN_QUESTION.md
+instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.

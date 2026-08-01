@@ -25,8 +25,8 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=PICK UP HERE. The cloud/cross-device comparison line is CANCELLED (user ruling 2026-08-01) -- action 8's escalation is withdrawn, the vehicle and apparatus are deleted; record: docs/research/cdc/EVIDENCE_NOTES/20260801_CLOUD_CROSS_DEVICE_COMPARISON_LINE_RETIRED_BY_USER.md. MAINLINE: open the next Pro touchpoint -- disclose the cancellation, local-only execution, the dtype-width digest item (note 20260731, CLOSED 6/6), and the implementation-binding list below; ask Pro to re-rule the successor-population route, since the A1 precondition (cross-machine MANIFEST_REPLAY_PASS) is unsatisfiable with one machine. Until that ruling, development is rapid local validation of research ideas only -- no new apparatus.
-workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
+next_boundary=Workflow 4 touchpoint 1 IN FLIGHT: round docs/external-review/rounds/20260801_d7_s_local_only_successor_reruling asks Pro to re-rule the successor-population route under local-only execution (A1 cross-machine precondition unsatisfiable by design), decide the dtype/digest binding, and receives the disclosure list. Steps N and O stay HELD until its ruling is reconciled. Until then, development is rapid local validation of research ideas only -- no new apparatus.
+workflow_position=workflow 4 OPEN at touchpoint 1; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -210,10 +210,10 @@ branch_scope=untied-k only, never touch another branch (user ruling 2026-07-27)
 aggressive_branch=another line's, never push
 formal_compute=user authority only
 review_transport=project_manager_direct
-autonomous_research_grant=ACTIVE_TEN_ITERATION_WORKFLOW_ROUND_GRANT_20260727B (user; one iteration = one workflow round, per iteration_definition below)
-iterations_remaining=7
+autonomous_research_grant=ACTIVE_TEN_ITERATION_WORKFLOW_ROUND_GRANT_20260801 (user /goal 2026-08-01, "10轮完整的工作流自动迭代"; one iteration = one workflow round, per iteration_definition below)
+iterations_remaining=10
 conclusion_bearing_iterations_consumed=34
-grant_history=TWENTY_ITERATION_OVERNIGHT_20260726 and FULL_PERMISSION_TEN_ITERATIONS_20260727 both consumed and closed; details in git history of this file
+grant_history=TWENTY_ITERATION_OVERNIGHT_20260726 and FULL_PERMISSION_TEN_ITERATIONS_20260727 both consumed and closed; TEN_ITERATION_WORKFLOW_ROUND_GRANT_20260727B superseded 2026-08-01 with 7 remaining by the new ten-round grant; details in git history of this file
 iteration_definition=one complete Pro-to-Pro loop (user ruling 2026-07-27): receive Pro's ruling, make the code decisions, implement, run the experiment, submit the result back to Pro. Nothing smaller is an iteration.
 d7s_compute_authorization=GRANTED_20260727 (formal compute for the ten rounds is covered by the active grant)
 r5_reanchor_compute_grant=GRANTED_20260728 (user, "launch it anyway", in advance of Pro's ruling; removes the AUTHORIZATION gate only -- it does not authorize launching before Pro's ruling names the branch, and a margin re-anchor is pre-registered first, always)
@@ -227,9 +227,10 @@ uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_tempor
 uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster
 ```
 
-Accounting: the active grant is ten workflow rounds; workflows 1–3 are CLOSED
-(see `workflow_position`), workflow 4 is in progress and consumes on close, so
-`iterations_remaining=7`. `conclusion_bearing_iterations_consumed` is the
+Accounting: the active grant (2026-08-01) is ten workflow rounds starting with
+workflow 4, which is in progress and consumes on close, so
+`iterations_remaining=10`. Workflows 1–3 closed under the superseded 20260727B
+grant. `conclusion_bearing_iterations_consumed` is the
 **lifetime count of iteration reports** — the machine-checkable anchor for
 `docs/report/ITERATION_<n>.md` (1–34 exist; 24–29 were supporting work) — not
 consumption against the current grant. The stale "next report is 30" claim this
