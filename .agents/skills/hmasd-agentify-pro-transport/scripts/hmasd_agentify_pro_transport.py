@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -25,7 +24,6 @@ SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
 AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
-SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
@@ -33,8 +31,8 @@ OWNER_KEYS = {
         "hmasd-uav-formal-pro",
         "hmasd-explorer-validation-pro",
     },
-    "independent_research_review_operator": {
-        "hmasd-independent-research-pro",
+    "independent_research_explorer": {
+        "hmasd-independent-research-explorer-pro",
     },
 }
 REQUEST_FIELDS = {
@@ -66,10 +64,6 @@ class TransportError(RuntimeError):
 
 def _fail(code: str) -> None:
     raise TransportError(code)
-
-
-def _sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
 
 
 def _required_text(value: Any, field: str, *, maximum: int = 4096) -> str:
@@ -122,7 +116,7 @@ def _require_within(path: Path, roots: list[Path], field: str) -> Path:
 def _owner_roots(repo_root: Path, owner: str, kind: str) -> list[Path]:
     if owner == "code_project_manager":
         return [repo_root / ("logs" if kind == "runtime" else "docs/external-review")]
-    if owner == "independent_research_review_operator":
+    if owner == "independent_research_explorer":
         return [repo_root / "local_research/pro_reviews"]
     _fail("invalid_transport_owner")
 
@@ -251,6 +245,8 @@ def _require_preexisting_review_tab(
     request: dict[str, Any],
     *,
     require_send_ready: bool = True,
+    allow_tab_creation: bool = False,
+    state_dir: Path,
 ) -> str:
     """Prove exact tab identity; new sends additionally require a ready prompt."""
     inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
@@ -262,6 +258,36 @@ def _require_preexisting_review_tab(
         for tab in tabs
         if isinstance(tab, dict) and tab.get("key") == request["stable_key"]
     ]
+    if not matches and allow_tab_creation:
+        transport_path = state_dir.resolve(strict=False) / "review-transport.json"
+        if transport_path.exists():
+            transport = _load_json(transport_path)
+            bindings = transport.get("bindings")
+            operations = transport.get("operations")
+            binding_exists = isinstance(bindings, dict) and request["stable_key"] in bindings
+            operation_exists = isinstance(operations, dict) and request["idempotency_key"] in operations
+            if binding_exists and not operation_exists:
+                _fail("agentify_tab_creation_requires_first_binding_or_restart_recovery")
+        _http_json(
+            f"{base}/tabs/create",
+            token=token,
+            body={
+                "key": request["stable_key"],
+                "vendorId": request["provider"],
+                "url": request["conversation_url"],
+                "model": request["model"],
+            },
+            timeout_seconds=10.0,
+        )
+        inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
+        tabs = inventory.get("tabs")
+        if inventory.get("ok") is not True or not isinstance(tabs, list):
+            _fail("agentify_created_tab_inventory_invalid")
+        matches = [
+            tab
+            for tab in tabs
+            if isinstance(tab, dict) and tab.get("key") == request["stable_key"]
+        ]
     if not matches:
         _fail("agentify_preexisting_tab_missing")
     if len(matches) != 1:
@@ -316,7 +342,11 @@ def _require_preexisting_review_tab(
 
 
 def _agentify_session(
-    request: dict[str, Any], state_dir: Path, *, require_send_ready: bool = True
+    request: dict[str, Any],
+    state_dir: Path,
+    *,
+    require_send_ready: bool = True,
+    allow_tab_creation: bool = False,
 ) -> tuple[str, str, str]:
     if not state_dir.is_absolute():
         _fail("agentify_state_dir_not_absolute")
@@ -341,14 +371,28 @@ def _agentify_session(
     ):
         _fail("agentify_server_identity_mismatch")
     tab_id = _require_preexisting_review_tab(
-        base, token, request, require_send_ready=require_send_ready
+        base,
+        token,
+        request,
+        require_send_ready=require_send_ready,
+        allow_tab_creation=allow_tab_creation,
+        state_dir=state_dir,
     )
     return base, token, tab_id
 
 
-def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: bool) -> dict[str, Any]:
+def call_agentify(
+    request: dict[str, Any],
+    *,
+    state_dir: Path,
+    verify_existing: bool,
+    allow_tab_creation: bool = False,
+) -> dict[str, Any]:
     base, token, _ = _agentify_session(
-        request, state_dir, require_send_ready=not verify_existing
+        request,
+        state_dir,
+        require_send_ready=not verify_existing,
+        allow_tab_creation=allow_tab_creation,
     )
     timeout_seconds = request["timeout_ms"] / 1000.0 + 30.0
     result = _http_json(
@@ -443,9 +487,6 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         if receipt.get(field) != expected:
             _fail(f"receipt_{field}_mismatch")
     _required_text(receipt.get("operationId"), "receipt_operation_id", maximum=256)
-    fingerprint = _required_text(receipt.get("requestFingerprint"), "receipt_request_fingerprint", maximum=64)
-    if not SHA256_RE.fullmatch(fingerprint):
-        _fail("receipt_request_fingerprint_invalid")
     user_message_id = _required_text(receipt.get("userMessageId"), "receipt_user_message_id", maximum=512)
     assistant_message_id = _required_text(receipt.get("assistantMessageId"), "receipt_assistant_message_id", maximum=512)
     if user_message_id == assistant_message_id:
@@ -453,9 +494,6 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
     response_text = _required_nonempty_text_preserve(
         receipt.get("responseText"), "receipt_response_text", maximum=2_000_000
     )
-    response_sha256 = _required_text(receipt.get("responseSha256"), "receipt_response_sha256", maximum=64)
-    if not SHA256_RE.fullmatch(response_sha256) or _sha256(response_text.encode("utf-8")) != response_sha256:
-        _fail("receipt_response_hash_mismatch")
     created_at = _required_int(receipt.get("createdAt"), "receipt_created_at", minimum=1)
     prepared_at = _required_int(receipt.get("preparedAt"), "receipt_prepared_at", minimum=created_at)
     submitted_at = _required_int(receipt.get("submittedAt"), "receipt_submitted_at", minimum=prepared_at)
@@ -470,21 +508,13 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
     for snapshot in snapshots:
         if not isinstance(snapshot, dict):
             _fail("receipt_snapshot_invalid")
-        if snapshot.get("assistantMessageId") != assistant_message_id or snapshot.get("textSha256") != response_sha256:
+        if snapshot.get("assistantMessageId") != assistant_message_id:
             _fail("receipt_snapshot_identity_mismatch")
         observations.append(_required_int(snapshot.get("observedAt"), "receipt_snapshot_time", minimum=1))
     if observations[0] < submitted_at or observations[1] > completed_at:
         _fail("receipt_snapshot_outside_response_interval")
     if observations[1] - observations[0] < 3000:
         _fail("receipt_snapshot_stability_too_short")
-    controls = receipt.get("controls")
-    if not isinstance(controls, dict):
-        _fail("receipt_controls_invalid")
-    for prohibited in ("stop", "continue", "retry"):
-        if controls.get(prohibited) is not False:
-            _fail(f"receipt_control_{prohibited}_active")
-    if not isinstance(controls.get("answerNow"), bool):
-        _fail("receipt_control_answer_now_invalid")
     if receipt.get("clickedControls") != []:
         _fail("receipt_prohibited_control_activated")
     return receipt
@@ -540,7 +570,9 @@ def command_provision_direction(args: argparse.Namespace) -> None:
     assignment_identity = _required_text(
         args.assignment_identity, "assignment_identity", maximum=1024
     )
-    if not assignment_identity.startswith("IR_DIRECTION_REVIEW:"):
+    if not assignment_identity.startswith(
+        ("IR_DIRECTION_REVIEW:", "IR_METHODOLOGY_REVIEW:")
+    ):
         _fail("direction_provision_identity_invalid")
     source_path = _require_within(
         args.prompt_source,
@@ -681,7 +713,12 @@ def command_submit_worker(args: argparse.Namespace) -> None:
         _owner_roots(repo_root, request["transport_owner"], "runtime"),
         "receipt_path",
     )
-    receipt = call_agentify(request, state_dir=args.state_dir, verify_existing=args.verify_existing)
+    receipt = call_agentify(
+        request,
+        state_dir=args.state_dir,
+        verify_existing=args.verify_existing,
+        allow_tab_creation=bool(getattr(args, "allow_tab_creation", False)),
+    )
     validate_receipt(receipt, request)
     _atomic_write_new(receipt_path, _receipt_bytes(receipt))
     print(
@@ -704,6 +741,8 @@ def _spawn_submit_worker(args: argparse.Namespace, verify_existing: bool) -> sub
     ]
     if verify_existing:
         command.append("--verify-existing")
+    if bool(getattr(args, "allow_tab_creation", False)):
+        command.append("--allow-tab-creation")
     return subprocess.Popen(
         command,
         cwd=str(_repo_root()),
@@ -744,12 +783,20 @@ def command_submit(args: argparse.Namespace) -> None:
         print(f"HMASD_AGENTIFY_EXISTING_USER_MESSAGE present={str(existing).lower()}")
         if not existing:
             return
+    elif operation and not existing:
+        # A durable operation record without a user message is an unresolved
+        # prior attempt.  Never send the same idempotency key again.
+        _emit_lifecycle("PRE_SEND_BLOCKED", operation_status=operation.get("status"))
+        _fail("pre_send_blocked_existing_operation_unconfirmed")
     started = time.monotonic()
     overall_deadline = started + request["timeout_ms"] / 1000.0 + 30.0
     if existing:
         try:
             _, _, tab_id = _agentify_session(
-                request, args.state_dir, require_send_ready=False
+                request,
+                args.state_dir,
+                require_send_ready=False,
+                allow_tab_creation=bool(getattr(args, "allow_tab_creation", False)),
             )
         except TransportError as exc:
             _emit_lifecycle("POST_SEND_BLOCKED", live_tab_error=str(exc))
@@ -764,7 +811,7 @@ def command_submit(args: argparse.Namespace) -> None:
             )
         _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
         _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
-        next_generation_report = started + GENERATION_REPORT_SECONDS
+        next_generation_report = time.monotonic() + GENERATION_REPORT_SECONDS
         while time.monotonic() <= overall_deadline:
             operation = _ledger_operation(args.state_dir, request["idempotency_key"])
             status = operation.get("status")
@@ -790,7 +837,11 @@ def command_submit(args: argparse.Namespace) -> None:
         )
         _fail("post_send_blocked_existing_operation_incomplete")
 
-    _, _, tab_id = _agentify_session(request, args.state_dir)
+    _, _, tab_id = _agentify_session(
+        request,
+        args.state_dir,
+        allow_tab_creation=bool(getattr(args, "allow_tab_creation", False)),
+    )
     _emit_lifecycle("TAB_READY", tab_id=tab_id)
     worker = _spawn_submit_worker(args, False)
     _emit_lifecycle("DISPATCH_STARTED", worker_pid=worker.pid)
@@ -844,6 +895,7 @@ def command_submit(args: argparse.Namespace) -> None:
             confirmed = True
             _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
             _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
+            next_generation_report = now + GENERATION_REPORT_SECONDS
         if confirmed and now >= next_generation_report:
             _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
             next_generation_report = now + GENERATION_REPORT_SECONDS
@@ -926,9 +978,6 @@ def command_submit(args: argparse.Namespace) -> None:
             return
         if status in {"BLOCKED", "ERROR"}:
             break
-        if time.monotonic() >= next_generation_report:
-            _emit_lifecycle("GENERATING", operation_status=status)
-            next_generation_report = time.monotonic() + GENERATION_REPORT_SECONDS
         time.sleep(LEDGER_POLL_SECONDS)
     _emit_lifecycle(
         "POST_SEND_BLOCKED",
@@ -1006,6 +1055,7 @@ def build_parser() -> argparse.ArgumentParser:
                 default=Path(os.environ.get("AGENTIFY_DESKTOP_STATE_DIR", Path.home() / ".agentify-desktop")),
             )
             command.add_argument("--verify-existing", action="store_true")
+            command.add_argument("--allow-tab-creation", action="store_true")
             command.set_defaults(
                 handler=command_submit if name == "submit" else command_submit_worker
             )

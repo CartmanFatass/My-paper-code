@@ -3,23 +3,25 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $codePmPath = Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md'
-$projectOperationsPath = Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md'
 $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
+$retiredProjectOperationsProfilePath = Join-Path $repo '.codex/agents/hmasd-project-operations-operator.toml'
+$retiredIndependentReviewRolePath = Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md'
+$retiredIndependentReviewProfilePath = Join-Path $repo '.codex/agents/hmasd-independent-research-review-operator.toml'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
-$projectOperations = Get-Content -Raw -LiteralPath $projectOperationsPath
 $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
-$cpmTransportContractPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md'
+$cpmTransportContractPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md'
+$cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
 $currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
 $cpmTransportContract = Get-Content -Raw -LiteralPath $cpmTransportContractPath
+$cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
 $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
 $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
-$projectOperationsNormalized = $projectOperations -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
@@ -103,7 +105,10 @@ foreach ($required in @(
     }
 }
 
-if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath)) {
+if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or
+    (Test-Path $retiredProjectOperationsProfilePath) -or
+    (Test-Path $retiredIndependentReviewRolePath) -or
+    (Test-Path $retiredIndependentReviewProfilePath)) {
     throw 'Retired manager role path remains live'
 }
 
@@ -119,7 +124,8 @@ $routerRequired = @(
     'code_project_manager_mechanical_result_acceptance=exclusive',
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md'
+    'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
+    'independent_research_review_transport_execution=persistent_explorer_session_direct'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -130,22 +136,29 @@ $codeRequired = @(
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
+    'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_transport_authority=exclusive',
     'formal_review_stable_key_formal_toy_research=hmasd-formal-pro',
     'formal_review_stable_key_uav_validation=hmasd-uav-formal-pro',
     'explorer_validation_stable_key=hmasd-explorer-validation-pro',
     'scientific_authority=none',
-    'shared_workflow_design_authority=none',
-    'role_local_workflow_design_authority=exclusive_for_owned_surfaces',
-    'role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces',
+    'workflow_design_authority=none',
+    'workflow_modification_authority=none',
+    'workflow_acceptance_authority=none',
+    'workflow_git_authority=none',
+    'workflow_change_request_route=workflow_design_manager',
     'session_owner_role=code_project_manager',
     'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
-    'pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md',
+    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
+    'failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
+    'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
-    'operations_child=hmasd-project-operations-operator',
+    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
+    'prepare -> submit -> verify -> archive -> local_FIFO_intake',
+    'does not spawn a transport or monitor child',
+    'No hash, digest, fingerprint or byte count is a workflow predicate',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
@@ -173,61 +186,31 @@ $codeRequired = @(
     '`evaluate_entry`',
     '`analyze_entry`',
     'prepares the exact spec and dispatches the registered `hmasd-verifier`',
-    'verifier returns mechanical evidence only',
+    'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
     'there is no Research Operations Manager',
     'Workflow Design Manager',
-    '`$hmasd-collaborative-workflow-design`',
-    '`$hmasd-workflow-change-audit`',
+    'workflow_change_request_route=workflow_design_manager',
+    'does not edit, accept, stage, commit or push',
     'does not run a parallel submit process, ledger poller or page observer'
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
 }
 
-$operationsRequired = @(
-    'role=project_operations_operator',
-    'parent=code_project_manager|independent_research_explorer',
-    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE|INDEPENDENT_DIRECTION_REVIEW',
-    'CPM branch:',
-    'parent=code_project_manager',
-    'terminal=PROJECT_OPERATIONS_TERMINAL',
-    'current_work_authority=none',
-    'scientific_authority=none',
-    'code_acceptance_authority=none',
-    'git_authority=none',
-    'cross_task_send=forbidden_native_final_only',
-    'transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE',
-    'transport_terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED',
-    'submit process is never send evidence',
-    'PROJECT_OPERATIONS_TERMINAL'
-)
-foreach ($required in $operationsRequired) {
-    if (-not $projectOperationsNormalized.Contains($required)) { throw "Project Operations Operator contract missing: $required" }
-}
-
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
     throw 'Code Project Manager retains the obsolete CURRENT_WORK read prohibition'
 }
 
-$forbiddenOperations = @(
-    'code_authority=exclusive',
-    'technical_acceptance_authority=exclusive',
-    'current_work_authority=exclusive'
-)
-foreach ($forbidden in $forbiddenOperations) {
-    if ($projectOperations.Contains($forbidden)) { throw "Project Operations Operator claims parent authority: $forbidden" }
-}
-
-if (-not $workflow.Contains('workflow_design_authority=exclusive_for_shared_control_plane_surfaces') -or
-    -not $workflow.Contains('Each other persistent session separately owns its role-local')) {
-    throw 'Workflow Design Manager shared-only ownership boundary is missing'
+if (-not $workflow.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or
+    -not $workflow.Contains('other persistent sessions report a precise requirement or defect')) {
+    throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
 if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -or
     -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
     throw 'Agile Skill does not preserve CPM ownership'
 }
 if ($agile.Contains('External Review Operator') -or
-    -not $agileNormalized.Contains('Project Operations Operator')) {
+    $agile.Contains('Project Operations Operator')) {
     throw 'Agile Skill retains a stale or ambiguous review route'
 }
 foreach ($surface in @($codePm, $agile)) {
@@ -259,15 +242,20 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'document_kind=code_project_manager_role_local_assignment_contract',
-    'operator=hmasd-project-operations-operator',
-    'mode=PRO_REVIEW_TRANSPORT',
+    'document_kind=code_project_manager_role_local_direct_pro_transport_contract',
+    'transport_owner=code_project_manager',
+    'execution_session=persistent_code_project_manager_session',
+    'transport_child=none',
+    'monitor_child=none',
+    'heartbeat=forbidden',
     'lifecycle_source=.agents/skills/hmasd-agentify-pro-transport/SKILL.md',
+    'failure_containment_source=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
+    'blocked_state_scope=operation',
     'backend-selection path ending in `TRANSPORT_BACKEND.json`',
     'write allow-list for backend selection, request, receipt, raw',
     'response and intake',
-    'The child owns one lifecycle',
-    'a bare "waiting" report is invalid',
+    'The CPM session is the sole transport owner',
+    'no child owns, observes or relays a Pro transport',
     'CPM does not start a second submit process',
     'Once `userMessageId` exists',
     '`PRE_SEND_BLOCKED` must prove no durable user message',
@@ -276,14 +264,47 @@ foreach ($required in @(
         throw "Code PM Pro transport assignment contract missing: $required"
     }
 }
+foreach ($required in @(
+    'document_kind=code_project_manager_role_local_failure_containment_contract',
+    'mechanical_operation_state_owner=originating_tool_or_script',
+    'typed_terminal_evidence=registered_receipt_or_exit_evidence',
+    'model_authored_operation_state_machine=forbidden',
+    'child_terminal_effect=evidence_only',
+    'local_failure_task_terminal=false',
+    'continuation_default=select_next_legal_action',
+    'session_blocked_evidence=global_integrity_witness_or_complete_no_legal_action_receipts')) {
+    if (-not $cpmFailureContainment.Contains($required)) {
+        throw "Code PM failure-containment contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'mechanical_operation_state_owner=originating_tool_or_script',
+    'model_authored_operation_state_machine=forbidden',
+    'cpm_decision_surface=semantic_next_action_only',
+    'local_failure_default=continue_next_legal_action')) {
+    if (-not $agile.Contains($required)) {
+        throw "Agile Skill missing mechanical-state ownership rule: $required"
+    }
+}
+foreach ($forbidden in @(
+    'failure_scope=operation|workstream|session',
+    'runnable_queue_scan=',
+    'Required routing witnesses:',
+    'scan the authorized runnable queue',
+    'classify every runtime terminal event', 'terminal-event routing')) {
+    if ($cpmFailureContainment.Contains($forbidden) -or $codePmNormalized.Contains($forbidden) -or
+        $agileNormalized.Contains($forbidden)) {
+        throw "Code PM still requires a model-authored workflow state machine: $forbidden"
+    }
+}
 
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
 Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
-    'document_kind', 'schema_version', 'state_owner', 'state_updated',
+    'document_kind', 'schema_version', 'index_owner', 'state_updated',
     'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
 if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
     $currentWorkIndexMap.schema_version -cne '2' -or
-    $currentWorkIndexMap.state_owner -cne 'code_project_manager' -or
+    $currentWorkIndexMap.index_owner -cne 'workflow_design_manager' -or
     $currentWorkIndexMap.state_updated -notmatch '^\d{4}-\d{2}-\d{2}$') {
     throw 'CURRENT_WORK index identity/schema is invalid'
 }
@@ -324,7 +345,9 @@ $indexedRecordIds = @($currentWorkIndexMap.common_record_ids -split '\|')
 if (($cpmRecordIds | Sort-Object -Unique).Count -ne $cpmRecordIds.Count -or
     ($publicSessionIds | Sort-Object -Unique).Count -ne $publicSessionIds.Count -or
     ($indexedRecordIds | Sort-Object -Unique).Count -ne $indexedRecordIds.Count -or
-    $publicSessionIds -cnotcontains 'code_project_manager') {
+    $publicSessionIds -cnotcontains 'code_project_manager' -or
+    $publicSessionIds -cnotcontains 'workflow_design_manager' -or
+    $indexedRecordIds -cnotcontains 'workflow_control_plane') {
     throw 'Current-work session/index inventories contain duplicates or omit Code PM'
 }
 foreach ($recordId in $cpmRecordIds) {

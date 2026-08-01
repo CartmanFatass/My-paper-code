@@ -16,34 +16,44 @@ Use exactly one route:
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
 | Code Project Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then only the active workstream's named science, code, tests, review, runtime and evidence paths | unrelated workstreams, independent-research corpus and workflow-design history |
-| dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation and only named control-plane files | `CURRENT_WORK.md`, runtime reviews/runs, science and implementation |
+| dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, the public `CURRENT_WORK.md` index plus only WDM's linked session/common records, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation | other current-work records, runtime reviews/runs, science and implementation |
 | Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
-| Independent Research Pro Review Operator task | its exact user-authorized methodology assignment, `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`, then the shared transport mechanics named by that Skill | direction reviews, `CURRENT_WORK.md`, formal review rounds, runtime/science/code state and the registered formal Pro conversation |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
 A child never reconstructs task history. A missing identity, path, authority or completion condition fails closed instead of triggering a project-state search.
 
-Every persistent session uses the shared Workflow Design Skills for its own surfaces; its role charter and `docs/project/SESSION_WORKSPACE_CONTRACT.md` define ownership, and the Skills grant none.
+Every persistent session routes workflow requirements and defects to Workflow Design Manager; only WDM uses the shared Workflow Design Skills to modify or accept control-plane surfaces.
 
 ## Universal authority boundary
 
 ```text
 workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217
 code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
-workflow_design_manager_workflow_design_authority=exclusive_for_shared_control_plane_surfaces
-workflow_design_manager_workflow_acceptance_authority=exclusive_for_shared_control_plane_surfaces
+workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces
+workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces
+workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces
 workflow_design_manager_workflow_runtime_authority=none
-workflow_design_manager_current_work_authority=none
+workflow_design_manager_current_work_authority=public_index_and_own_workflow_control_plane_records_only
 workflow_design_manager_scientific_authority=none
 workflow_design_manager_code_acceptance_authority=none
-workflow_design_manager_git_authority=direct_for_workflow_design_surfaces
+workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces
 workflow_design_manager_remote_repository_authority=permanent_user_grant
 workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 workflow_design_manager_external_review_runtime_authority=none
 workflow_design_manager_experiment_runtime_authority=none
-shared_workflow_design_owner=workflow_design_manager|persistent_session_role_local_workflow_design_authority=exclusive_for_owned_surfaces|persistent_session_role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces
-persistent_session_workflow_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace|persistent_session_workflow_collaboration_skill=hmasd-collaborative-workflow-design|persistent_session_workflow_audit_skill=hmasd-workflow-change-audit
-workflow_child_parent=assigning_persistent_session|workflow_child_acceptance_authority=none|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+workflow_design_owner=workflow_design_manager
+persistent_session_workflow_design_authority=none
+persistent_session_workflow_acceptance_authority=none
+persistent_session_workflow_git_authority=none
+workflow_change_request_route=workflow_design_manager
+workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report
+workflow_user_change_lane=plan_confirmation_then_continuous_implementation_verification_git_reload
+workflow_defect_lane=archive_then_fifo_autonomous_stable_contract_repair
+workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
+workflow_defect_report_authority=advisory_only
+workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
+workflow_router_consistency_check=required_for_every_workflow_change
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
@@ -56,16 +66,12 @@ code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-independent_research_explorer_session=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
-independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b
+independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945
 independent_research_canonical_scientific_authority=none
-independent_research_explorer_write_scope=local_research_except_pro_reviews_plus_registered_direction_prompt_provision
-independent_research_explorer_pro_reviews_write_exception=registered_provision_direction_only
-independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review
-independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper
-independent_research_review_operator_formal_workflow_authority=none
-independent_research_review_operator_scientific_authority=none
-independent_research_direction_review_operator=hmasd-project-operations-operator|independent_research_direction_review_operator_mode=INDEPENDENT_DIRECTION_REVIEW|independent_research_direction_review_operator_parent=independent_research_explorer|independent_research_direction_review_transport_owner_namespace=independent_research_review_operator|independent_research_direction_review_persistent_methodology_authority_effect=none|independent_research_direction_review_operator_authority=one_exact_direction_review_assignment|independent_research_direction_review_operator_write_scope=exact_assigned_local_research/pro_reviews_item_root
+independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
+independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews
+independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro
+independent_research_review_transport_execution=persistent_explorer_session_direct
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -78,8 +84,8 @@ cross_task_routing=locked_role_session_model_thinking
 cross_task_routing_skill=hmasd-cross-task-routing
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 ```
-The user permanently authorizes every registered persistent session to fetch and push accepted nonoverlapping paths in `SESSION_WORKSPACE_CONTRACT.md`; independent-research egress remains limited to role-local workflow and workspace.
-There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. WDM owns shared workflow; each session owns its local workflow; CPM owns project execution; External Pro owns science. Only shared-surface conflicts route to WDM.
+The user permanently authorizes WDM to fetch and push accepted workflow-control-plane paths. Other persistent sessions may fetch and push only their non-workflow operational, scientific, code and workspace content defined in `SESSION_WORKSPACE_CONTRACT.md`; independent-research egress remains limited to its research and workspace boundary.
+There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. WDM owns the complete workflow control plane; CPM owns project execution; Explorer owns independent research; External Pro owns science within each review boundary.
 ## Universal project constraints
 
 ```text
@@ -95,9 +101,18 @@ evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 codebase_policy=small_active_line_only
 workflow_hash_validation=disabled
 per_file_hash_handoff=forbidden
+workflow_hash_admission=forbidden
+wdm_core_control_plane_line_budget=1000
+workflow_single_mechanism_line_budget=100
+workflow_single_mechanism_terminal_state_budget=3
+workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch
+workflow_legacy_mechanism_policy=no_expansion_reduce_when_touched
+workflow_permanent_rule_minimum_independent_recurrences=2
+workflow_new_mechanism_requires_named_deletion=true
 concurrency_policy=file_ownership_only
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
+workflow_parallel_implementation=file_family_adaptive
 isolated_worktree_identity=workspace_ticket_only
 hmasd_worktree_root=C:/worktrees/HMASD
 project_write_scope=current_checkout_plus_verified_ticket_worktree
@@ -111,6 +126,9 @@ internal_role_handoff_within_active_grant=no_user_authority_required
 operational_recovery_owner=code_project_manager
 operational_recovery_scientific_iteration_cost=zero
 ```
+Workflow hash rules prohibit payload/content digests, byte counts and
+fingerprints as admission evidence. Git revision identifiers remain source
+locators only and never replace direct contract checks.
 Generic Superpowers Skills are not executed. Use project-native Skills, keep active code small, and use Git as archive. Tests create no approval owner.
 The current HMASD checkout and one valid assignment-ticket worktree are the only agent-writable project directories; every other directory is read-only to project agents, while project-external reads remain allowed.
 Agents do not create, edit, copy, move, delete or redirect files outside that scope and do not create drive mappings, junctions or path aliases. Isolated worktrees are provisioned only by `scripts/hmasd_workspace_ticket.py` beneath `C:/worktrees/HMASD`; raw external `git worktree` is not an authority path.
@@ -120,9 +138,9 @@ A future project-external write requires a new explicit user instruction for its
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
-- Workflow-design changes: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
+- Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and direct Pro transport: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Exact mechanical Pro transport and result intake: `.agents/roles/PROJECT_OPERATIONS_OPERATOR.md`.
+- Exact mechanical Pro transport and result intake: each owning persistent session through `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
@@ -130,9 +148,13 @@ A future project-external write requires a new explicit user instruction for its
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
+- Mechanical workflow harness: `.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py`.
+- WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
+- WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
+- WDM defect FIFO: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`.
 - Pro transport: `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
-- Independent methodology review: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md` and `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`. Independent single-direction review transport uses the shared `.agents/roles/PROJECT_OPERATIONS_OPERATOR.md` child in `INDEPENDENT_DIRECTION_REVIEW` mode; it has no separate global page registry.
+- Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use its direct Agentify transport.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 
@@ -140,10 +162,10 @@ No role reads every routed document. The active assignment or role charter names
 ## Repository surfaces
 - Git-tracked code and tests are Code Project Manager implementation truth.
 - `logs/<run-id>/` is Code Project Manager-owned runtime evidence written only by an exact assigned native operator or CPM.
-- `docs/project/CURRENT_WORK.md` is Code Project Manager operational state.
+- `docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index. CPM owns project-operation records; WDM owns its workflow-control-plane session/common records.
 - `docs/project/` holds stable project principles and executable plans.
 - `docs/research/cdc/` holds Pro-adjudicated scientific state mechanically recorded by Code Project Manager without reinterpretation.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
-- `local_research/` is ignored advisory output. The Explorer owns it except for `local_research/pro_reviews/`; its only write there is the registered `provision-direction` copy of one frozen prompt before child spawn. The persistent methodology operator owns methodology items, while the shared project-operations child owns only its exact Explorer-assigned direction-review item root, never a global page registry or another owner's subtree, and never concurrently on the same Agentify binding.
+- `local_research/` is ignored advisory output. Explorer owns its direction and methodology review items under `local_research/pro_reviews/`, with one operation per assigned item root and stable binding.

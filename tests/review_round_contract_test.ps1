@@ -5,10 +5,8 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $cpm = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
-$projectOperations = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md')
-$independentOperator = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
+$explorer = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $independentSkill = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $agentifySkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
@@ -24,9 +22,10 @@ $agentifyScript = Get-Content -Raw -LiteralPath $agentifyScriptPath
 $agentifyContract = Get-Content -Raw -LiteralPath $agentifyContractPath
 $agentifySkillNormalized = $agentifySkill -replace '\s+', ' '
 $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
+$explorerNormalized = $explorer -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($cpm, 'operations_child=hmasd-project-operations-operator'), @($projectOperations, 'PRO_REVIEW_TRANSPORT'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'initial operation plus one fresh resend'), @($agentifySkillNormalized, 'existing request records'), @($agentifySkillNormalized, 'without a hash or new ledger'), @($agentifySkillNormalized, 'Ordinary recovery never launches a synthetic smoke'), @($agentifySkillNormalized, 'duplicate submission of the same operation'), @($agentifySkillNormalized, 'no global page registry'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($cpm, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'), @($cpm, 'transport_owner=code_project_manager'), @($explorer, 'persistent_explorer_session_direct'), @($explorer, 'hmasd-independent-research-explorer-pro'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'present=false'), @($agentifySkillNormalized, 'caller supplies no content digest'), @($agentifySkillNormalized, 'same exact tab unless this is the first binding'), @($agentifySkillNormalized, 'archive to the same Explorer-owned item root'), @($agentifyContractNormalized, 'transport_tab_mutation=forbidden_except_first_binding_or_post_restart_allow_tab_creation'), @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
@@ -38,10 +37,10 @@ foreach ($staleGate in @('resend requires a new user instruction', 'only no reco
     }
 }
 foreach ($entry in @(
-    @(($cpm -replace '\s+', ' '), 'already-live exact stable-key tab'),
-    @(($projectOperations -replace '\s+', ' '), "assignment's already-live exact Agentify tab"),
-    @($agentifySkillNormalized, 'The transport is existing-tab-only'),
-    @($agentifySkillNormalized, 'fails before `/review-query`'),
+    @(($cpm -replace '\s+', ' '), 'does not spawn a transport or monitor child'),
+    @(($explorer -replace '\s+', ' '), 'never spawns a review/monitor child or heartbeat'),
+    @($agentifySkillNormalized, 'The transport normally uses an existing tab'),
+    @($agentifySkillNormalized, 'fail before `/review-query`'),
     @($agentifyContractNormalized, 'transport_tab_mutation=forbidden'),
     @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
     @($agentifyContractNormalized, 'prompt_visible_required_before_send=true'),
@@ -64,39 +63,34 @@ $reviewQueryCall = $agentifyScript.IndexOf('f"{base}/review-query"')
 if ($tabPreflightCall -lt 0 -or $reviewQueryCall -lt 0 -or $tabPreflightCall -ge $reviewQueryCall) {
     throw 'Existing-tab proof does not precede Agentify review-query'
 }
-foreach ($forbiddenEndpoint in @('/tabs/create', '/tabs/close', '/tabs/show', '/tabs/activate', '/navigate', '/refresh', '/replace', '/rebind')) {
+foreach ($forbiddenEndpoint in @('/tabs/close', '/tabs/show', '/tabs/activate', '/navigate', '/refresh', '/replace', '/rebind')) {
     if ($agentifyScript.Contains($forbiddenEndpoint)) {
         throw "HMASD Agentify wrapper mutates page state: $forbiddenEndpoint"
     }
 }
 foreach ($required in @(
-    'review_scope=explicit_user_authorized_methodology_audit_only',
-    'Direction review is forbidden in this persistent task')) {
-    if (-not $independentOperator.Contains($required)) {
-        throw "Persistent independent operator is not methodology-only: $required"
+    'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
+    'independent_pro_review_transport_execution=persistent_explorer_session_direct',
+    'independent_pro_review_terminal_intake=exact_archived_response_fifo',
+    'never spawns a review/monitor child or heartbeat',
+    'submit --verify-existing` returns `present=false`',
+    'archives the exact response under its assigned')) {
+    if (-not $explorerNormalized.Contains($required)) {
+        throw "Direct Explorer transport boundary missing: $required"
     }
 }
-foreach ($required in @(
-    'parent=code_project_manager|independent_research_explorer',
-    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE|INDEPENDENT_DIRECTION_REVIEW',
-    'owner=independent_research_review_operator',
-    'stable_key=hmasd-independent-research-pro',
-    'pre_spawn_item_provision=explorer_registered_provision_direction',
-    'client_send_limit=1',
-    'pro_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'terminal=INDEPENDENT_RESEARCH_REVIEW_TERMINAL',
-    'transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE',
-    'send_confirmation_timeout_seconds=60',
-    'process_existence_is_send_evidence=false',
-    'userMessageId` is the irreversible post-send boundary',
-    'stable-key namespace, not',
-    'no global page')) {
-    if (-not $projectOperations.Contains($required)) {
-        throw "Shared direction-review transport boundary missing: $required"
+foreach ($required in @('/tabs/create', 'allow_tab_creation', 'agentify_tab_creation_requires_first_binding_or_restart_recovery')) {
+    if (-not $agentifyScript.Contains($required)) {
+        throw "Restricted tab-creation recovery missing: $required"
     }
 }
 if ($agentifyScript.Contains('"prompt_sha256"')) {
     throw 'Agentify wrapper must not use prompt_sha256 as a request or recovery gate'
+}
+foreach ($forbiddenWorkflowHashField in @('hashlib', 'SHA256_RE', 'requestFingerprint', 'responseSha256', 'textSha256', '_sha256')) {
+    if ($agentifyScript.Contains($forbiddenWorkflowHashField)) {
+        throw "Agentify wrapper retains forbidden workflow hash field/helper: $forbiddenWorkflowHashField"
+    }
 }
 
 $renderer = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/render_review_fence.ps1'

@@ -14,8 +14,10 @@ $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 $experimentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
-$projectOperationsOperator = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.codex/agents/hmasd-project-operations-operator.toml')
+$cpm = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
+$explorer = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
@@ -49,26 +51,11 @@ foreach ($required in @(
         throw "Experiment Operator profile missing: $required"
     }
 }
-foreach ($required in @(
-    'name = "hmasd-project-operations-operator"',
-    'model = "gpt-5.6-luna"',
-    'model_reasoning_effort = "medium"',
-    'PRO_REVIEW_TRANSPORT, RESULT_INTAKE or',
-    'INDEPENDENT_DIRECTION_REVIEW',
-    'parent=independent_research_explorer',
-    'owner=independent_research_review_operator',
-    'stable_key=hmasd-independent-research-pro',
-    'INDEPENDENT_RESEARCH_REVIEW_TERMINAL',
-    'Never interpret science',
-    'choose recovery',
-    'edit CURRENT_WORK')) {
-    if (-not $projectOperationsOperator.Contains($required)) {
-        throw "Project Operations Operator profile missing: $required"
-    }
-}
 foreach ($retired in @(
     '[agents."HMASDIndependentResearchReviewOperator"]',
-    'hmasd-independent-research-review-operator.toml')) {
+    'hmasd-independent-research-review-operator.toml',
+    'hmasd-project-operations-operator.toml',
+    'HMASDProjectOperationsOperator')) {
     if ($config.Contains($retired)) {
         throw "Retired duplicate direction-review profile remains registered: $retired"
     }
@@ -171,15 +158,28 @@ foreach ($required in @(
     '[agents."HMASDReviewer"]',
     'config_file = "./agents/hmasd-reviewer.toml"',
     '[agents."HMASDExperimentOperator"]',
-    'config_file = "./agents/hmasd-experiment-operator.toml"',
-    '[agents."HMASDProjectOperationsOperator"]',
-    'config_file = "./agents/hmasd-project-operations-operator.toml"')) {
+    'config_file = "./agents/hmasd-experiment-operator.toml"')) {
     if (-not $config.Contains($required)) {
         throw "Selected normal profile is not registered: $required"
     }
 }
-if (-not $config.Contains('Thin mechanical operator for one CPM transport/result intake or Explorer direction-review assignment.')) {
-    throw 'Project Operations registration remains CPM-only'
+foreach ($required in @(
+    'formal_external_review_transport_authority=exclusive',
+    'transport_owner=code_project_manager',
+    'prepare -> submit -> verify -> archive -> local_FIFO_intake')) {
+    if (-not $cpm.Contains($required)) {
+        throw "CPM direct transport contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
+    'independent_pro_review_transport_execution=persistent_explorer_session_direct',
+    'transport_owner=independent_research_explorer',
+    'hmasd-independent-research-explorer-pro',
+    'prepare -> submit -> verify -> archive')) {
+    if (-not $explorer.Contains($required)) {
+        throw "Explorer direct transport contract missing: $required"
+    }
 }
 
 $temporaryProfiles = @(

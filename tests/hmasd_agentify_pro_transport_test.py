@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-import hashlib
 import importlib.util
 import io
 import json
@@ -18,10 +17,6 @@ SPEC = importlib.util.spec_from_file_location("hmasd_agentify_pro_transport", SC
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
 SPEC.loader.exec_module(MODULE)
-
-
-def sha256(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 class FakeSubmitWorker:
@@ -98,17 +93,14 @@ class AgentifyTransportTest(unittest.TestCase):
         }
         self.validated = MODULE.validate_request(self.request, repo_root=self.root)
         response = "STRICT_OK"
-        response_hash = sha256(response)
         self.receipt = {
             "operationId": "operation-1",
             "idempotencyKey": self.request["idempotency_key"],
-            "requestFingerprint": "a" * 64,
             "stableKey": self.request["stable_key"],
             "provider": "chatgpt",
             "model": "Pro",
             "conversationUrl": self.request["conversation_url"],
             "conversationId": self.request["conversation_id"],
-            "promptSha256": sha256(self.prompt),
             "timeoutMs": 300000,
             "deadlineAt": 301000,
             "status": "COMPLETE",
@@ -122,10 +114,9 @@ class AgentifyTransportTest(unittest.TestCase):
             "submittedAt": 1200,
             "assistantMessageId": "assistant-1",
             "responseText": response,
-            "responseSha256": response_hash,
             "snapshots": [
-                {"observedAt": 2000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
-                {"observedAt": 5000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
+                {"observedAt": 2000, "assistantMessageId": "assistant-1"},
+                {"observedAt": 5000, "assistantMessageId": "assistant-1"},
             ],
             "controls": {"stop": False, "continue": False, "retry": False, "answerNow": True},
             "clickedControls": [],
@@ -181,7 +172,7 @@ class AgentifyTransportTest(unittest.TestCase):
 
     def test_owner_key_prompt_and_conversation_are_bound(self) -> None:
         cases = [
-            ("stable_key", "hmasd-independent-research-pro", "stable_key_owner_mismatch"),
+            ("stable_key", "hmasd-independent-research-explorer-pro", "stable_key_owner_mismatch"),
             ("conversation_id", "other", "conversation_identity_mismatch"),
             ("assignment_identity", "ROUND-MISSING", "backend_selection_mismatch"),
         ]
@@ -211,6 +202,36 @@ class AgentifyTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.TransportError, "request_field_set_mismatch"):
             MODULE.validate_request({**self.request, "extra": "forbidden"}, repo_root=self.root)
 
+    def test_explorer_direct_owner_uses_explorer_stable_key_and_item_root(self) -> None:
+        item = self.root / "local_research/pro_reviews/direction-1"
+        item.mkdir(parents=True)
+        prompt = item / "20_PRO_OPEN_QUESTION.md"
+        prompt.write_text("IR_DIRECTION_REVIEW:direction-1\nReview exactly.\n", encoding="utf-8")
+        selection = item / "TRANSPORT_BACKEND.json"
+        selection.write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "assignment_identity": "IR_DIRECTION_REVIEW:direction-1",
+                    "transport_backend": "agentify",
+                    "operation_key": "direction-1-operation",
+                }
+            ),
+            encoding="utf-8",
+        )
+        request = {
+            **self.request,
+            "transport_owner": "independent_research_explorer",
+            "stable_key": "hmasd-independent-research-explorer-pro",
+            "assignment_identity": "IR_DIRECTION_REVIEW:direction-1",
+            "idempotency_key": "direction-1-operation",
+            "backend_selection_path": str(selection),
+            "prompt_path": str(prompt),
+        }
+        validated = MODULE.validate_request(request, repo_root=self.root)
+        self.assertEqual(validated["transport_owner"], "independent_research_explorer")
+        self.assertEqual(validated["stable_key"], "hmasd-independent-research-explorer-pro")
+
     def test_uav_formal_key_is_cpm_owned(self) -> None:
         uav_request = dict(self.request)
         uav_request["stable_key"] = "hmasd-uav-formal-pro"
@@ -218,7 +239,7 @@ class AgentifyTransportTest(unittest.TestCase):
         self.assertEqual(validated["stable_key"], "hmasd-uav-formal-pro")
 
         wrong_owner = dict(uav_request)
-        wrong_owner["transport_owner"] = "independent_research_review_operator"
+        wrong_owner["transport_owner"] = "independent_research_explorer"
         with self.assertRaisesRegex(MODULE.TransportError, "stable_key_owner_mismatch"):
             MODULE.validate_request(wrong_owner, repo_root=self.root)
 
@@ -229,7 +250,7 @@ class AgentifyTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.TransportError, "backend_selection_mismatch"):
             MODULE.validate_request(self.request, repo_root=self.root)
 
-    def test_prepare_command_computes_hash_and_writes_exact_restart_stable_pair(self) -> None:
+    def test_prepare_command_writes_exact_restart_stable_pair_without_hash_gate(self) -> None:
         selection = self.root / "logs/agentify/frozen/TRANSPORT_BACKEND.json"
         request_path = self.root / "logs/agentify/frozen/REQUEST.json"
         prompt = self.root / "docs/external-review/round/frozen_question.md"
@@ -254,7 +275,6 @@ class AgentifyTransportTest(unittest.TestCase):
             args.model = "Thinking"
             with self.assertRaisesRegex(MODULE.TransportError, "output_exists_with_different_bytes"):
                 MODULE.command_prepare(args)
-        expected_hash = hashlib.sha256(prompt.read_bytes()).hexdigest()
         self.assertEqual(
             json.loads(selection.read_text(encoding="utf-8")),
             {
@@ -306,6 +326,28 @@ class AgentifyTransportTest(unittest.TestCase):
                 MODULE.command_provision_direction(args)
         self.assertFalse(invalid_prompt.exists())
 
+    def test_methodology_provision_accepts_only_methodology_review_prefix(self) -> None:
+        source = self.root / "local_research/frozen_methodology_prompt.md"
+        source.parent.mkdir(parents=True)
+        source.write_text(
+            "IR_METHODOLOGY_REVIEW:methodology-1\nReview the frozen method.\n",
+            encoding="utf-8",
+        )
+        prompt = self.root / "local_research/pro_reviews/methodology-1/20_PRO_OPEN_QUESTION.md"
+        args = SimpleNamespace(
+            assignment_identity="IR_METHODOLOGY_REVIEW:methodology-1",
+            prompt_path=prompt,
+            prompt_source=source,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            MODULE.command_provision_direction(args)
+        self.assertEqual(prompt.read_text(encoding="utf-8"), source.read_text(encoding="utf-8"))
+
+        args.assignment_identity = "IR_METHODOLOGY_REVIEWISH:methodology-1"
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            with self.assertRaisesRegex(MODULE.TransportError, "direction_provision_identity_invalid"):
+                MODULE.command_provision_direction(args)
+
     def test_prepare_parser_does_not_accept_operator_supplied_prompt_hash(self) -> None:
         help_text = MODULE.build_parser().format_help()
         self.assertIn("prepare", help_text)
@@ -314,11 +356,10 @@ class AgentifyTransportTest(unittest.TestCase):
         self.assertNotIn("--prompt-sha256", prepare.format_help())
         self.assertNotIn("--prompt-source", prepare.format_help())
 
-    def test_receipt_rejects_wrong_send_identity_completion_and_hash(self) -> None:
+    def test_receipt_rejects_wrong_send_identity_completion_and_control_state(self) -> None:
         mutations = [
             ("sendCount", 2, "receipt_sendCount_mismatch"),
             ("assistantMessageId", "user-1", "receipt_message_identity_collision"),
-            ("responseSha256", "0" * 64, "receipt_response_hash_mismatch"),
             ("clickedControls", ["Answer now"], "receipt_prohibited_control_activated"),
         ]
         for field, value, error in mutations:
@@ -345,10 +386,16 @@ class AgentifyTransportTest(unittest.TestCase):
     def test_response_text_preserves_leading_and_trailing_whitespace(self) -> None:
         receipt = json.loads(json.dumps(self.receipt))
         receipt["responseText"] = "\n  STRICT_OK  \n"
-        receipt["responseSha256"] = sha256(receipt["responseText"])
-        for snapshot in receipt["snapshots"]:
-            snapshot["textSha256"] = receipt["responseSha256"]
         self.assertEqual(MODULE.validate_receipt(receipt, self.validated)["responseText"], receipt["responseText"])
+
+    def test_transport_records_have_no_workflow_hash_admission_fields(self) -> None:
+        for record in (self.request, self.receipt):
+            forbidden = [
+                key
+                for key in record
+                if any(token in key.lower() for token in ("hash", "digest", "fingerprint", "byte"))
+            ]
+            self.assertEqual(forbidden, [])
 
     def test_agentify_source_identity_mismatch_fails_before_http(self) -> None:
         state_dir = self.root / "agentify-state"
@@ -447,10 +494,173 @@ class AgentifyTransportTest(unittest.TestCase):
             with self.subTest(error=error), mock.patch.object(
                 MODULE, "_http_json", return_value={"ok": True, "tabs": tabs}
             ) as http_json, self.assertRaisesRegex(MODULE.TransportError, error):
-                MODULE._require_preexisting_review_tab("http://127.0.0.1:43111", "token", self.validated)
+                MODULE._require_preexisting_review_tab(
+                    "http://127.0.0.1:43111",
+                    "token",
+                    self.validated,
+                    state_dir=self.root / "agentify-state",
+                )
             http_json.assert_called_once_with(
                 "http://127.0.0.1:43111/tabs", token="token", timeout_seconds=10.0
             )
+
+    def test_tab_creation_is_limited_to_first_binding_or_post_restart_recovery(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+
+        def run_creation(*, restart_binding: bool) -> list[tuple[str, dict[str, object] | None]]:
+            if restart_binding:
+                (state_dir / "review-transport.json").write_text(
+                    json.dumps(
+                        {
+                            "bindings": {self.request["stable_key"]: {"conversationId": self.request["conversation_id"]}},
+                            "operations": {self.request["idempotency_key"]: {"status": "BLOCKED"}},
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+            calls: list[tuple[str, dict[str, object] | None]] = []
+
+            def fake_http(
+                url: str,
+                *,
+                token: str | None = None,
+                body: dict[str, object] | None = None,
+                timeout_seconds: float = 10.0,
+            ) -> dict[str, object]:
+                del token, timeout_seconds
+                calls.append((url, body))
+                if url.endswith("/tabs") and body is None:
+                    return {"ok": True, "tabs": [] if len(calls) == 1 else [self._live_tab()]}
+                if url.endswith("/tabs/create"):
+                    return {"ok": True, "tab": self._live_tab()}
+                if "/status?" in url:
+                    return self._idle_status()
+                self.fail(f"unexpected Agentify endpoint: {url}")
+
+            with mock.patch.object(MODULE, "_http_json", side_effect=fake_http):
+                MODULE._require_preexisting_review_tab(
+                    "http://127.0.0.1:43111",
+                    "token",
+                    self.validated,
+                    allow_tab_creation=True,
+                    state_dir=state_dir,
+                )
+            self.assertEqual(sum(url.endswith("/tabs/create") for url, _ in calls), 1)
+            return calls
+
+        run_creation(restart_binding=False)
+        run_creation(restart_binding=True)
+
+        with mock.patch.object(
+            MODULE,
+            "_http_json",
+            return_value={"ok": True, "tabs": []},
+        ) as http_json, self.assertRaisesRegex(MODULE.TransportError, "agentify_preexisting_tab_missing"):
+            MODULE._require_preexisting_review_tab(
+                "http://127.0.0.1:43111",
+                "token",
+                self.validated,
+                state_dir=state_dir,
+            )
+        http_json.assert_called_once()
+
+    def test_command_submit_reaches_first_binding_tab_creation_exception(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-first-binding.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-first-binding.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        receipt_path.write_text(json.dumps(self.receipt), encoding="utf-8")
+        worker = FakeSubmitWorker([0])
+        args = SimpleNamespace(
+            request=request_path,
+            receipt=receipt_path,
+            state_dir=state_dir,
+            verify_existing=False,
+            allow_tab_creation=True,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(
+                 MODULE,
+                 "_ledger_operation",
+                 side_effect=[{}, self._confirmed_operation()],
+             ), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")) as session, \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker) as spawn:
+            MODULE.command_submit(args)
+        session.assert_called_once_with(
+            self.validated,
+            state_dir,
+            allow_tab_creation=True,
+        )
+        spawn.assert_called_once_with(args, False)
+
+    def test_command_submit_reaches_post_restart_tab_creation_with_existing_identity(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        (state_dir / "review-transport.json").write_text(
+            json.dumps(
+                {
+                    "bindings": {self.request["stable_key"]: {"conversationId": self.request["conversation_id"]}},
+                    "operations": {self.request["idempotency_key"]: {"status": "COMPLETE", "userMessageId": "user-1"}},
+                }
+            ),
+            encoding="utf-8",
+        )
+        request_path = self.root / "logs/agentify/round/request-post-restart.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-post-restart.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        operation = self._confirmed_operation(status="COMPLETE")
+        args = SimpleNamespace(
+            request=request_path,
+            receipt=receipt_path,
+            state_dir=state_dir,
+            verify_existing=False,
+            allow_tab_creation=True,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_ledger_operation", return_value=operation), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")) as session, \
+             mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete:
+            MODULE.command_submit(args)
+        session.assert_called_once_with(
+            self.validated,
+            state_dir,
+            require_send_ready=False,
+            allow_tab_creation=True,
+        )
+        complete.assert_called_once_with(self.validated, state_dir, receipt_path)
+
+    def test_command_submit_denies_ordinary_missing_tab_without_exception_flag(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-missing-tab.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-missing-tab.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        args = SimpleNamespace(
+            request=request_path,
+            receipt=receipt_path,
+            state_dir=state_dir,
+            verify_existing=False,
+            allow_tab_creation=False,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_ledger_operation", return_value={}), \
+             mock.patch.object(
+                 MODULE,
+                 "_agentify_session",
+                 side_effect=MODULE.TransportError("agentify_preexisting_tab_missing"),
+             ) as session, \
+             mock.patch.object(MODULE, "_spawn_submit_worker") as spawn, \
+             self.assertRaisesRegex(MODULE.TransportError, "agentify_preexisting_tab_missing"):
+            MODULE.command_submit(args)
+        session.assert_called_once_with(
+            self.validated,
+            state_dir,
+            allow_tab_creation=False,
+        )
+        spawn.assert_not_called()
 
     def test_preexisting_tab_status_change_or_busy_state_fails_closed(self) -> None:
         stale = self._idle_status(tabs=[self._live_tab(url="https://chatgpt.com/c/other")])
@@ -470,7 +680,12 @@ class AgentifyTransportTest(unittest.TestCase):
                 "_http_json",
                 side_effect=[{"ok": True, "tabs": [self._live_tab()]}, status],
             ) as http_json, self.assertRaisesRegex(MODULE.TransportError, error):
-                MODULE._require_preexisting_review_tab("http://127.0.0.1:43111", "token", self.validated)
+                MODULE._require_preexisting_review_tab(
+                    "http://127.0.0.1:43111",
+                    "token",
+                    self.validated,
+                    state_dir=self.root / "agentify-state",
+                )
             self.assertEqual(http_json.call_count, 2)
 
     def test_call_agentify_blocked_tab_fails_before_review_query(self) -> None:
@@ -521,9 +736,31 @@ class AgentifyTransportTest(unittest.TestCase):
             MODULE.TransportError, "agentify_preexisting_tab_prompt_unavailable"
         ):
             MODULE._require_preexisting_review_tab(
-                "http://127.0.0.1:43111", "token", self.validated
+                "http://127.0.0.1:43111",
+                "token",
+                self.validated,
+                state_dir=self.root / "agentify-state",
             )
         self.assertEqual(http_json.call_count, 2)
+
+    def test_verify_existing_present_false_is_observe_only_before_fresh_key(self) -> None:
+        request_path = self.root / "logs/agentify/round/request-verify-existing.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-verify-existing.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_spawn_submit_worker") as spawn, \
+             contextlib.redirect_stdout(output):
+            MODULE.command_submit(
+                SimpleNamespace(
+                    request=request_path,
+                    receipt=receipt_path,
+                    state_dir=self.root / "missing-agentify-state",
+                    verify_existing=True,
+                )
+            )
+        self.assertIn("HMASD_AGENTIFY_EXISTING_USER_MESSAGE present=false", output.getvalue())
+        spawn.assert_not_called()
 
     def _confirmed_operation(self, **updates: object) -> dict[str, object]:
         operation: dict[str, object] = {
@@ -556,9 +793,9 @@ class AgentifyTransportTest(unittest.TestCase):
              mock.patch.object(MODULE.time, "monotonic", side_effect=lambda: next(clock)), \
              mock.patch.object(MODULE.time, "sleep"), \
              contextlib.redirect_stdout(output), \
-             self.assertRaisesRegex(MODULE.TransportError, "pre_send_blocked_unconfirmed_user_message"):
+             self.assertRaisesRegex(MODULE.TransportError, "pre_send_blocked_existing_operation_unconfirmed"):
             MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=False))
-        self.assertTrue(worker.terminated)
+        self.assertFalse(worker.terminated)
         self.assertFalse(worker.killed)
         self.assertIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
         self.assertFalse(receipt_path.exists())

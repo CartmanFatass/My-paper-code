@@ -12,165 +12,77 @@ $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 
 $profiles = @(
-    @{
-        Path = '.codex/agents/hmasd-workflow-auditor.toml'
-        Role = '.agents/roles/WORKFLOW_AUDITOR.md'
-        Name = 'hmasd-workflow-auditor'
-        Registry = '[agents."HMASDWorkflowAuditor"]'
-        Model = 'model = "gpt-5.6-luna"'
-        Effort = 'model_reasoning_effort = "high"'
-        Sandbox = 'sandbox_mode = "read-only"'
-        Packet = 'WORKFLOW_IMPACT_PACKET'
-    },
-    @{
-        Path = '.codex/agents/hmasd-workflow-implementer.toml'
-        Role = '.agents/roles/WORKFLOW_IMPLEMENTER.md'
-        Name = 'hmasd-workflow-implementer'
-        Registry = '[agents."HMASDWorkflowImplementer"]'
-        Model = 'model = "gpt-5.6-luna"'
-        Effort = 'model_reasoning_effort = "high"'
-        Sandbox = 'sandbox_mode = "workspace-write"'
-        Packet = 'WORKFLOW_CHANGE_PACKET'
-    },
-    @{
-        Path = '.codex/agents/hmasd-workflow-reviewer.toml'
-        Role = '.agents/roles/WORKFLOW_REVIEWER.md'
-        Name = 'hmasd-workflow-reviewer'
-        Registry = '[agents."HMASDWorkflowReviewer"]'
-        Model = 'model = "gpt-5.6-sol"'
-        Effort = 'model_reasoning_effort = "xhigh"'
-        Sandbox = 'sandbox_mode = "read-only"'
-        Packet = 'WORKFLOW_REVIEW_PACKET'
-    },
-    @{
-        Path = '.codex/agents/hmasd-workflow-cost-reviewer.toml'
-        Role = '.agents/roles/WORKFLOW_COST_REVIEWER.md'
-        Name = 'hmasd-workflow-cost-reviewer'
-        Registry = '[agents."HMASDWorkflowCostReviewer"]'
-        Model = 'model = "gpt-5.6-sol"'
-        Effort = 'model_reasoning_effort = "xhigh"'
-        Sandbox = 'sandbox_mode = "read-only"'
-        Packet = 'COST_AUDIT_ACCEPT'
-    })
+    @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
+    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'high', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
+    @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'WORKFLOW_REVIEW_PACKET'),
+    @('.agents/roles/WORKFLOW_COST_REVIEWER.md', '.codex/agents/hmasd-workflow-cost-reviewer.toml', 'hmasd-workflow-cost-reviewer', '[agents."HMASDWorkflowCostReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'COST_AUDIT_ACCEPT'))
 
 foreach ($entry in $profiles) {
-    $profile = Read-RepoFile $entry.Path
-    $role = Read-RepoFile $entry.Role
+    $role = Read-RepoFile $entry[0]
+    $profile = Read-RepoFile $entry[1]
     foreach ($required in @(
-        "name = `"$($entry.Name)`"",
-        $entry.Model,
-        $entry.Effort,
-        $entry.Sandbox,
-        $entry.Role,
-        $entry.Packet)) {
-        if (-not $profile.Contains($required)) {
-            throw "$($entry.Name) profile missing: $required"
-        }
+        "name = `"$($entry[2])`"", "model = `"$($entry[4])`"",
+        "model_reasoning_effort = `"$($entry[5])`"", "sandbox_mode = `"$($entry[6])`"",
+        $entry[0], $entry[7])) {
+        if (-not $profile.Contains($required)) { throw "$($entry[2]) profile missing: $required" }
     }
     foreach ($required in @(
-        "callable_agent_type=$($entry.Name)",
-        'parent=assigning_persistent_session',
-        'assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace',
-        'acceptance_authority=none',
-        'child_authority=none',
-        'current_work_read=forbidden',
-        $entry.Packet)) {
-        if (-not $role.Contains($required)) {
-            throw "$($entry.Name) role missing: $required"
-        }
+        "callable_agent_type=$($entry[2])", 'parent=workflow_design_manager',
+        'parent_session_id=019fb73d-5635-7b63-b165-6c5129bc0217',
+        'assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
+        'acceptance_authority=none', 'child_authority=none', 'current_work_read=forbidden')) {
+        if (-not $role.Contains($required)) { throw "$($entry[2]) role missing: $required" }
     }
-    if (-not $config.Contains($entry.Registry) -or
-        -not $config.Contains("config_file = `"./agents/$($entry.Name).toml`"")) {
-        throw "$($entry.Name) is not registered exactly by path"
+    if (-not $config.Contains($entry[3]) -or
+        -not $config.Contains("config_file = `"./agents/$($entry[2]).toml`"")) {
+        throw "$($entry[2]) registration missing"
     }
-}
-
-$auditorRole = Read-RepoFile '.agents/roles/WORKFLOW_AUDITOR.md'
-foreach ($required in @(
-    'assignment_modes=impact_map|postchange_verify',
-    'workflow_design_authority=none',
-    'write_authority=none',
-    'git_authority=none',
-    'Do not choose authority',
-    'Do not repair a failure')) {
-    if (-not $auditorRole.Contains($required)) {
-        throw "Workflow Auditor boundary missing: $required"
-    }
-}
-
-$implementerRole = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
-foreach ($required in @(
-    'authority=one_exact_confirmed_workflow_plan_slice',
-    'write_authority=assignment_exact_nonoverlapping_paths_only',
-    'git_authority=none',
-    'Do not choose or change',
-    'missing decision',
-    'returns `BLOCKED`')) {
-    if (-not $implementerRole.Contains($required)) {
-        throw "Workflow Implementer boundary missing: $required"
-    }
-}
-
-$reviewerRole = Read-RepoFile '.agents/roles/WORKFLOW_REVIEWER.md'
-foreach ($required in @(
-    'authority=one_exact_read_only_integrated_workflow_review',
-    'write_authority=none',
-    'git_authority=none',
-    'Review only when the assigning persistent session names a risk trigger',
-    'ACCEPTABLE',
-    'REVISION_REQUIRED',
-    'are advisory dispositions')) {
-    if (-not $reviewerRole.Contains($required)) {
-        throw "Workflow Reviewer boundary missing: $required"
-    }
-}
-
-if (($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-auditor.toml"' -AllMatches).Matches.Count -ne 1 -or
-    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-implementer.toml"' -AllMatches).Matches.Count -ne 1 -or
-    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-reviewer.toml"' -AllMatches).Matches.Count -ne 1 -or
-    ($config | Select-String -Pattern 'config_file = "./agents/hmasd-workflow-cost-reviewer.toml"' -AllMatches).Matches.Count -ne 1) {
-    throw 'A workflow child profile is not registered exactly once'
 }
 
 foreach ($required in @(
-    'workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
-    'workflow_design_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
-    'session_owner_role=workflow_design_manager',
-    'Shared workflow procedure',
-    'single source',
-    'shared-surface ownership and prohibitions',
-    'exact registered persistent session that',
-    'A direct user request returns in this task')) {
-    if (-not $manager.Contains($required)) {
-        throw "Workflow Design Manager delegation contract missing: $required"
-    }
-}
-if ($manager.Contains('fixed Code Project Manager session')) {
-    throw 'Workflow Design Manager retains a CPM-only return route'
+    'workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_git_authority=exclusive_for_workflow_control_plane_surfaces',
+    'current_work_authority=public_index_and_own_workflow_control_plane_records_only',
+    'Automatic continuous execution', 'Minimal-control discipline',
+    'workflow_hash_validation=forbidden',
+    'workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report',
+    'workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED',
+    'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
+    'exact resolved ticket', 'git rev-parse --show-toplevel')) {
+    if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
 }
 
 foreach ($required in @(
-    'two or three registered `hmasd-workflow-auditor`',
-    'one or two registered',
-    '`hmasd-workflow-implementer`',
-    'exact nonoverlapping path slices',
-    '`WORKFLOW_CHANGE_PACKET`',
-    '`WORKFLOW_VERIFY_PACKET`',
-    '`hmasd-workflow-reviewer` only when',
-    'Ordinary low-risk documentation edits need no reviewer',
-    'assigning session still reads the final diff',
-    'workflow_child_parent=assigning_persistent_session',
-    'workflow_child_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'workflow_child_parent=workflow_design_manager',
+    'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'workflow_child_acceptance_authority=none',
-    'Six paths is a useful dispatch heuristic',
-    'exact nonoverlapping path slices',
-    'Do not delegate user collaboration',
-    'authority or ownership decisions',
-    'ambiguous cross-surface semantics, conflict',
-    'resolution, final acceptance, Git integration or cross-task routing',
-    'is no review of the review')) {
-    if (-not $skill.Contains($required)) {
-        throw "Workflow change audit delegation contract missing: $required"
+    'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
+    'For six or more paths', 'one implementer per exact nonoverlapping file family',
+    'do not impose a fixed', 'two-implementer ceiling',
+    'Classify `AGENTS.md` as `modify` or `unchanged-valid`',
+    'risk trigger', 'Never review the review',
+    'workflow_single_mechanism_line_budget=100',
+    'workflow_single_mechanism_terminal_state_budget=3',
+    'workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch',
+    'workflow_legacy_mechanism_policy=no_expansion_reduce_when_touched',
+    'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
+    'workflow_hash_validation=forbidden',
+    'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md',
+    '`BLOCKED` is not a queue state', 'resolved ticket worktree path',
+    '`git rev-parse --show-toplevel` equality check before edit',
+    'After a confirmed plan, these steps continue automatically')) {
+    if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+}
+
+foreach ($forbidden in @(
+    'parent=assigning_persistent_session',
+    'assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'workflow_child_parent=assigning_persistent_session',
+    'exclusive_for_shared_control_plane_surfaces')) {
+    if ($manager.Contains($forbidden) -or $skill.Contains($forbidden)) {
+        throw "Retired distributed workflow authority remains: $forbidden"
     }
 }
 
@@ -178,13 +90,8 @@ $legacyVerifier = Read-RepoFile '.agents/roles/VERIFIER.md'
 $legacyReviewer = Read-RepoFile '.agents/roles/REVIEWER.md'
 if (-not $legacyVerifier.Contains('parent=code_project_manager') -or
     -not $legacyReviewer.Contains('parent=code_project_manager')) {
-    throw 'Existing code-side verifier or reviewer ownership drifted'
+    throw 'Code-side verifier/reviewer ownership drifted'
 }
-if ($manager.Contains('hmasd-verifier') -or $manager.Contains('`hmasd-reviewer`')) {
-    throw 'Workflow Design Manager reuses a code-side child for workflow work'
-}
-if (-not $config.Contains('max_depth = 1')) {
-    throw 'Workflow children are not prevented from spawning descendants'
-}
+if (-not $config.Contains('max_depth = 1')) { throw 'Workflow children may spawn descendants' }
 
 Write-Output 'HMASD_WORKFLOW_DESIGN_DELEGATION_CONTRACT_OK'

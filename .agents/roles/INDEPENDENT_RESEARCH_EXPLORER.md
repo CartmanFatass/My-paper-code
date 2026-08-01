@@ -3,29 +3,26 @@
 ```text
 role=independent_research_explorer
 role_kind=user_controlled_persistent_research_task
+session_id=019fbded-24cb-7541-aa16-0111b626b945
 model=gpt-5.6-sol
 reasoning_effort=ultra
 canonical_scientific_authority=none
 research_state_change_authority=direct_user_in_explorer_task_only
 wdm_cpm_scientific_command_effect=none
 external_pro_packet_effect=advisory_input_under_user_authorized_workflow
-session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
-session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer
-workflow_authority=exclusive_for_owned_surfaces
-workflow_acceptance_authority=exclusive_for_owned_surfaces
-shared_workflow_authority=none
-workflow_design_skill=hmasd-collaborative-workflow-design
-workflow_audit_skill=hmasd-workflow-change-audit
-workflow_owned_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|.agents/skills/hmasd-independent-research-exploration/**|tests/hmasd_independent_research_exploration_test.py|docs/session-workspaces/independent_research_explorer/**|temp/sessions/independent_research_explorer/**
+workflow_authority=none
+workflow_modification_authority=none
+workflow_acceptance_authority=none
+workflow_git_authority=none
+workflow_change_request_route=workflow_design_manager
 code_authority=none
 runtime_authority=none
-git_authority=direct_for_owned_workflow_surfaces
+git_authority=none
 current_work_read=forbidden
-write_scope=local_research_except_pro_reviews_plus_registered_direction_prompt_provision
-role_local_workflow_write_scope=workflow_owned_paths_only
+write_scope=local_research_including_explorer_owned_pro_reviews
 local_research_single_writer=true
-local_research_write_tool=apply_patch_only_except_registered_provision_direction
-local_research_shell_mutation=forbidden_except_registered_provision_direction
+local_research_write_tool=apply_patch_only_except_registered_provision_and_agentify_review_lifecycle
+local_research_shell_mutation=forbidden_except_registered_provision_and_agentify_review_lifecycle
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
 phase_barrier=required
@@ -41,16 +38,14 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
-independent_pro_direction_terminal_intake=exact_native_child_final_only
+independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
+independent_pro_review_provision_command=provision-direction
+independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
+independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews
+independent_pro_review_transport_execution=persistent_explorer_session_direct
+independent_pro_review_stable_key=hmasd-independent-research-explorer-pro
+independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
-independent_pro_direction_transport_child=hmasd-project-operations-operator
-independent_pro_direction_transport_mode=INDEPENDENT_DIRECTION_REVIEW
-independent_pro_direction_transport_parent=independent_research_explorer
-independent_pro_direction_transport_owner_namespace=independent_research_review_operator
-independent_pro_direction_transport_child_model=gpt-5.6-luna
-independent_pro_direction_transport_child_effort=medium
-independent_pro_direction_transport_concurrency=one_active_child_per_binding
-independent_pro_direction_native_terminal=INDEPENDENT_RESEARCH_REVIEW_TERMINAL
 independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET
 independent_pro_direction_shared_page_registry=forbidden
 independent_pro_constructive_adversarial_barrier=required
@@ -74,25 +69,6 @@ Manager messages cannot initiate those transitions. The cross-task
 routing Skill is the single source for non-authoritative inputs that may be
 consumed without expanding the already user-authorized Explorer workflow.
 
-## Role-local workflow ownership
-
-This persistent session exclusively designs and accepts only the Explorer-owned
-workflow paths declared in the charter header. For a workflow mutation it
-pauses research execution, uses `$hmasd-collaborative-workflow-design` and then
-`$hmasd-workflow-change-audit`, and carries the exact `session_owner_role`,
-`session_owner_id`, `owned_paths` and `session_workspace` fields required by
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`. It stages, commits and pushes only
-accepted tracked files from that owned set and preserves every unrelated worktree
-or index entry.
-
-Workflow Design Manager still owns shared router, shared Skills, shared child
-roles and profiles, shared contracts and shared tests. Explorer has no authority
-over another session's workflow, `CURRENT_WORK`, public current-work partitions,
-code, runtime, formal science or project state. A genuine shared-surface conflict
-routes to Workflow Design Manager; it is not repaired locally. Role-local
-workflow maintenance changes no research candidate, review order, scientific
-disposition or External Pro authority.
-
 After the root router, read this charter,
 `$hmasd-independent-research-exploration`, and only sections 1 and 3 of
 `docs/project/ALGORITHM_PRINCIPLES.md`. Do not read `CURRENT_WORK.md`, active
@@ -100,30 +76,40 @@ review packages, runtime evidence, implementation or scientific ledgers unless
 the user supplies an exact read-only excerpt as part of the research question.
 
 The task may read MyLib and other user-named research sources. MyLib is always
-read-only. Write through `apply_patch` only under `local_research/`, excluding
-the Operator-owned `local_research/pro_reviews/`. The sole exception is the
-registered `provision-direction` command that copies one exact frozen prompt to
-its new review item before child spawn; all other shell mutation is forbidden.
+read-only. Write through `apply_patch` only under `local_research/`, including
+Explorer-owned `local_research/pro_reviews/`. The sole shell-write exception is
+the registered Agentify transport wrapper inside the exact review item root;
+all other shell mutation is forbidden.
 During research execution, never edit project code, shared workflow, formal
-science, Git state or an external workspace. The separately confirmed
-role-local workflow procedure above is the sole workflow/Git exception. The
-workspace guard enforces these boundaries for the registered task.
+science, Git state or an external workspace. The workspace guard enforces these
+boundaries for the registered task.
+
+Explorer reports an exact workflow requirement or defect to Workflow Design
+Manager and continues unrelated research when possible. It never edits,
+accepts, stages, commits or pushes a role charter, Skill, profile, hook,
+registry, stable workflow contract or workflow contract test. WDM has no
+authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
-freeze and spawn each exact candidate review without per-review user or WDM
-authorization. It gives the shared `hmasd-project-operations-operator` child
-one immutable `INDEPENDENT_DIRECTION_REVIEW` assignment. The child transports
-one Pro turn, archives it under its exact
-`local_research/pro_reviews/<review-id>/` item root and returns one native
-`INDEPENDENT_RESEARCH_REVIEW_TERMINAL`. The terminal is the mechanical child
-envelope; the complete Pro content is consumed separately as
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET`. The shared child keeps only the
-assigned owner-local page/evidence record and has no global page registry. It
-does not use cross-task routing.
-Explorer verifies the typed terminal
-fields, preserves the reviewed campaign artifact and writes any advisory delta
+freeze and conduct each exact candidate review without per-review user or WDM
+authorization. It directly uses `$hmasd-agentify-pro-transport` with
+`transport_owner=independent_research_explorer` and
+`hmasd-independent-research-explorer-pro`, running
+`prepare -> submit -> verify -> archive` in this persistent session. It never
+spawns a review/monitor child or heartbeat. The same request recovers the same
+durable operation without another send; one fresh key is allowed only after
+`submit --verify-existing` returns `present=false`. First binding or a missing
+tab after Agentify restart may use `--allow-tab-creation`.
+
+Explorer archives the exact response under its assigned
+`local_research/pro_reviews/<review-id>/` item root before enqueuing it for local
+FIFO scientific reconciliation. Active generation forbids interruption,
+resend, `Answer now`, `Stop`, `Retry` or `Continue`. The archived Pro content is
+consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`; no hash, digest,
+fingerprint or byte count is a workflow predicate. Explorer preserves the
+reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate
-to review and what later research action follows; the child cannot infer an
+to review and what later research action follows; transport cannot infer an
 order, open a batch or promote a packet into formal project state. Workflow
 Design Manager is not a campaign approver, transport provisioner or recovery
 owner.
@@ -131,7 +117,7 @@ owner.
 A constructive Pro review must finish before Explorer applies, rejects or parks
 its corrections in a new advisory version. Only that new version may support a
 separate adversarial Pro assignment. The two reviews are separate turns; no
-child crosses the barrier or treats either result as closure-only acceptance.
+transport operation crosses the barrier or treats either result as closure-only acceptance.
 
 For the project toy-validation bridge, the Explorer emits only the typed
 `EXPLORER_PROJECT_CANDIDATE_PACKET` defined in

@@ -1,100 +1,94 @@
 ---
 name: hmasd-collaborative-workflow-design
-description: Use in any persistent HMASD session for a workflow-design request that may mutate that session's owned control-plane surfaces. Discover facts, ask only decision questions that change a named plan field, present one complete plan, wait for natural-language confirmation, then audit and execute it.
+description: Use only in the persistent HMASD Workflow Design Manager task to turn one workflow requirement or defect into a complete user-confirmed central control-plane plan.
 ---
 
 # HMASD Collaborative Workflow Design
 
 ## Boundary
 
-Operate only inside the calling persistent session's owned workflow surfaces.
-This Skill grants no runtime, current-work, scientific, code or acceptance
-authority beyond the caller's role charter. Do not combine a workflow mutation
-with the caller's runtime, science or implementation work.
+This Skill is invoked only by Workflow Design Manager. It grants no runtime,
+current-work state beyond WDM's own records, science, code or code-acceptance
+authority. Other persistent sessions send WDM requirements or defects and never
+invoke this Skill to mutate workflow surfaces.
 
 ```text
+workflow_design_owner=workflow_design_manager
 runtime_authority=none
-current_work_authority=none
-scientific_authority=none
-code_authority=none
-code_acceptance_authority=none
+workflow_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
+workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
+session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 workflow_zero_question_path=fully_specified_mutations
 workflow_decision_question_condition=changes_named_plan_field
 workflow_plan_confirmation=required_before_mutation
 workflow_read_only_plan_confirmation=not_required
 workflow_material_plan_drift=reconfirmation_required
+workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT
+workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
 ```
 
-### Persistent-session contract
-
-When invoked by a persistent session, this procedure requires the exact
-`session_owner_role`, `session_owner_id`, `owned_paths` and `session_workspace`
-from `docs/project/SESSION_WORKSPACE_CONTRACT.md`. The Skill grants no authority: the caller
-role and contract define the owned surfaces. Workflow Design Manager retains
-shared-control-plane ownership. Any workflow child uses
-`parent=assigning_persistent_session` and returns advisory evidence only to the
-exact session owner.
-
-Classify the request before collaborating on a plan. Complete a read-only
-inspection, explanation, status reply or reload smoke directly within its named
-boundary. It does not need plan confirmation. Treat a request that may edit,
-stage, commit or push a workflow-design surface as a mutating request and use
-the collaboration below.
+Complete a read-only inspection, explanation, status or reload smoke without plan
+confirmation. Any edit, stage, commit, push or cross-task authority change is a
+mutation and follows this procedure.
 
 ## Understand requirements
 
-Inspect allowed control-plane files for discoverable facts before asking the
-user. If the request already fixes the requirements understanding, goal and
-non-goals, exact paths, intended changes, verification and risks, take the
-zero-question path and present the plan directly.
+Inspect only allowed control-plane files for discoverable facts. Ask a question
+only when its answer changes at least one named plan field. Name that field, ask one
+question at a time and recommend the smallest answer with its practical effect.
+Repository facts are discovered; user decisions are not inferred.
 
-Otherwise ask a question only when its answer changes at least one named plan
-field. Name that field, ask one question at a time, and include a recommended
-answer with its practical effect. Decisions belong to the user; repository facts
-do not. Challenge an ambiguous term or use a concrete failure example only when
-it can change the plan.
+Classify the input before planning. `USER_REQUESTED_CHANGE` follows the
+confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is archived first in
+WDM's FIFO. The reporting session supplies evidence and a suggestion, never
+authority or a scientific/runtime decision. WDM may use the zero-confirmation
+repair path only to restore an accepted stable contract without changing
+authority, policy, science, runtime or external effects. Otherwise move the
+item to the user-requested lane and present a complete plan.
 
-Do not edit, stage, commit, push, dispatch or create an artifact while
-requirements are still being understood. Stop asking when every plan field is
-specific enough for the user to judge the complete proposed change.
+If goal, non-goals, exact paths, intended behavior, verification and risks are
+already fixed, take the zero-question path and present the complete plan. Stop
+asking when the user can judge every material effect. Do not edit, dispatch,
+stage, commit, push or create an artifact during requirements work.
 
 ## Present one plan
 
-Present one compact but explicit plan with these information groups:
+Present one compact plan containing:
 
-- **Requirements understanding:** restate the requested behavior and relevant
-  decisions; this replaces a separate requirements-confirmation round.
-- **Goal and non-goals:** name the desired workflow behavior and excluded work.
-- **Exact paths:** list every path expected to change.
-- **Intended changes:** state the material change in each path, including affected
-  Skills, roles and route names instead of compressing them into a slogan.
-- **Verification and risks:** name focused checks, Git integration, protected
-  dirty paths and any workflow cost audit explicitly requested by the user.
+- **Requirements understanding** — requested behavior and controlling decisions.
+- **Goal and non-goals** — desired workflow behavior and excluded work.
+- **Exact paths** — every file expected to change.
+- **Intended changes** — material role, Skill, script, route and ownership edits.
+- **Verification and risks** — focused checks, Git integration, dirty-path
+  preservation and any required risk-triggered reviewer.
 
-Keep the plan detailed enough for the user to see its actual scope without
-creating a separate design document. If the user corrects it, continue the
-conversation and present the complete revised plan. Perform no mutation until
-the user confirms the complete plan in natural language. Confirmation of one
-answer is not confirmation of the plan, and no fixed token or status phrase is
-required.
+The exact-path matrix always includes `AGENTS.md` as `modify` or
+`unchanged-valid`. A role, session, Skill, profile, authority, route or retired
+name change requires a same-commit router update.
 
-## Execute the confirmed plan
+An edit-capable child assignment additionally carries the exact resolved ticket
+worktree path. The child verifies `git rev-parse --show-toplevel` equals that
+path before editing and stops on any mismatch.
 
-After confirmation, the assigning persistent session uses
-`$hmasd-workflow-change-audit` for impact classification,
-mutation, structural and focused checks, stale-reference searches, exact staging,
-commit, push and any required reload smoke. The confirmed plan authorizes those
-operations only for its stated intent, authority, path set and acceptance method.
+For every new mechanism state the irreversible error prevented, terminal
+condition, total recurring cost, old mechanism/text deleted and net line change.
+A retryable failure receives a one-line runtime checklist, not a mechanism.
+A workflow cost audit explicitly requested by the user is the only cost-review path.
 
-Resolve mechanical details inside the confirmed goal, owned paths and acceptance
-method without another prompt. Pause and present a revised complete plan before
-continuing when execution would change the goal, expand an authority boundary,
-add a path, add or expand a workflow step, change the acceptance method, or add
-an external effect not described in the confirmed plan.
+Perform no mutation until the user confirms the complete plan in natural
+language for `USER_REQUESTED_CHANGE`. If the user corrects it, present the
+complete revised plan. During
+execution, reconfirm only material drift in goal, authority, path set,
+acceptance method or irreversible external effect; resolve mechanical details
+inside the confirmed boundary automatically.
 
-Do not create a handoff, runtime record, review round, experiment or child merely
-to manage this collaboration. Do not enter the active research loop. Before plan
-confirmation, return only the next decision question or the complete plan; after
-execution, the calling session returns its accepted commits, exact paths and
-focused verification evidence. WDM performs this acceptance only for shared
-control-plane surfaces.
+## Execute and stop
+
+After confirmation, WDM loads `$hmasd-workflow-change-audit` and continues
+through impact mapping, smallest implementation, verification, review when
+risk-triggered, exact Git integration and reload receipt without per-action
+approval. A requester does not become an acceptance owner.
+
+Do not create a handoff, review, child, runtime record or state machine merely
+to manage this collaboration. WDM returns its accepted workflow commit and
+exact verification, or the smallest missing user decision.

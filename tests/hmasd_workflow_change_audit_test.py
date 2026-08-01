@@ -53,6 +53,26 @@ def _fixture_repo(root: Path) -> Path:
     return root
 
 
+def _write_control_plane_budget_files(root: Path, first_file_lines: int) -> None:
+    for index, relative in enumerate(CHECKER.CONTROL_PLANE_BUDGET_PATHS):
+        line_count = first_file_lines if index == 0 else 1
+        _write(root / relative, "x\n" * line_count)
+
+
+def test_control_plane_line_budget_accepts_exact_limit(tmp_path: Path) -> None:
+    repo = _fixture_repo(tmp_path)
+    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 5)
+    errors = CHECKER.audit_repo(repo)
+    assert not any("control-plane line budget exceeded" in error for error in errors), errors
+
+
+def test_control_plane_line_budget_rejects_one_line_over(tmp_path: Path) -> None:
+    repo = _fixture_repo(tmp_path)
+    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 4)
+    errors = CHECKER.audit_repo(repo)
+    assert any("control-plane line budget exceeded: 1001>1000" in error for error in errors), errors
+
+
 def _add_benchmark_group(root: Path, *, drift: bool) -> None:
     with (root / ".codex/config.toml").open("a", encoding="utf-8") as handle:
         for variant in ("a", "b", "c"):
@@ -91,6 +111,21 @@ def test_live_repository_harness_is_closed() -> None:
 def test_default_scan_stays_inside_workflow_design_surfaces() -> None:
     assert "docs/project/CURRENT_WORK.md" not in CHECKER.DEFAULT_ACTIVE_PATHS
     assert "docs/project/AGENT_CONTEXT.md" not in CHECKER.DEFAULT_ACTIVE_PATHS
+
+
+def test_workflow_review_is_one_pass_normal_path_advice() -> None:
+    reviewer = (REPO / ".agents/roles/WORKFLOW_REVIEWER.md").read_text(encoding="utf-8")
+    skill = (
+        REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
+    ).read_text(encoding="utf-8")
+    assert "actionable_finding_requires=supported_normal_path_reproduction" in reviewer
+    assert "hypothetical_or_hostile_input_finding=residual_risk_only" in reviewer
+    assert "review_passes_per_change=1" in reviewer
+    assert "request at most one advisory" in skill
+    assert "never starts a re-review loop" in skill
+    assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
+    assert "simple_operation_control=one_line_runtime_checklist_only" in skill
+    assert "theoretical_safety_hardening=reject_by_default" in skill
 
 
 @pytest.mark.parametrize("breakage, expected", [

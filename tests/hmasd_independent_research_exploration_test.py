@@ -469,6 +469,9 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
     skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
     ).read_text(encoding="utf-8")
+    pro_review_skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "SKILL.md"
+    ).read_text(encoding="utf-8")
     reference = (
         REPO
         / ".agents"
@@ -496,58 +499,124 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
         assert required in reference
 
 
-def test_explorer_phase_two_workflow_adoption_is_role_local() -> None:
+def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() -> None:
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
     skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
     ).read_text(encoding="utf-8")
+    pro_review_skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    pro_review_transport = (
+        REPO
+        / "docs"
+        / "session-workspaces"
+        / "independent_research_explorer"
+        / "PRO_REVIEW_TRANSPORT.md"
+    ).read_text(encoding="utf-8")
     workspace = (
         REPO / "docs" / "session-workspaces" / "independent_research_explorer" / "README.md"
     ).read_text(encoding="utf-8")
+    wdm_role = (REPO / ".agents" / "roles" / "WORKFLOW_DESIGN_MANAGER.md").read_text(
+        encoding="utf-8"
+    )
     role_lines = set(role.splitlines())
     skill_normalized = " ".join(skill.split())
     exact_owned_paths = (
-        "workflow_owned_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|"
-        ".agents/skills/hmasd-independent-research-exploration/**|"
+        "centralized_explorer_workflow_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|"
+        ".agents/skills/hmasd-independent-research-exploration/SKILL.md|"
+        ".agents/skills/hmasd-explorer-project-validation/SKILL.md|"
+        ".agents/skills/hmasd-independent-research-pro-review/SKILL.md|"
         "tests/hmasd_independent_research_exploration_test.py|"
-        "docs/session-workspaces/independent_research_explorer/**|"
-        "temp/sessions/independent_research_explorer/**"
+        "tests/hmasd_explorer_project_validation_packet_test.py|"
+        "tests/hmasd_research_workflow_contract_test.ps1|"
+        "docs/session-workspaces/independent_research_explorer/README.md|"
+        "docs/session-workspaces/independent_research_explorer/PRO_REVIEW_TRANSPORT.md"
     )
 
     for required in (
-        "session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e",
-        "session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer",
-        "workflow_authority=exclusive_for_owned_surfaces",
-        "workflow_acceptance_authority=exclusive_for_owned_surfaces",
-        "shared_workflow_authority=none",
-        "git_authority=direct_for_owned_workflow_surfaces",
-        "workflow_design_skill=hmasd-collaborative-workflow-design",
-        "workflow_audit_skill=hmasd-workflow-change-audit",
+        "session_id=019fbded-24cb-7541-aa16-0111b626b945",
+        "workflow_authority=none",
+        "workflow_modification_authority=none",
+        "workflow_acceptance_authority=none",
+        "workflow_git_authority=none",
+        "workflow_change_request_route=workflow_design_manager",
+        "git_authority=none",
         "current_work_read=forbidden",
+        "local_research_write_tool=apply_patch_only_except_registered_provision_and_agentify_review_lifecycle",
+        "local_research_shell_mutation=forbidden_except_registered_provision_and_agentify_review_lifecycle",
+        "independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:",
+        "independent_pro_review_provision_command=provision-direction",
+        "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
+        "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
+        "independent_pro_review_transport_execution=persistent_explorer_session_direct",
+        "independent_pro_review_stable_key=hmasd-independent-research-explorer-pro",
+        "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
         assert required in role
-    assert exact_owned_paths in role_lines
-    assert "workflow_authority=none" not in role_lines
-    assert "git_authority=none" not in role_lines
+    prefix_line = next(
+        line for line in role_lines if line.startswith("independent_pro_review_assignment_prefixes=")
+    )
+    supported_prefixes = tuple(prefix_line.split("=", 1)[1].split("|"))
+    assert supported_prefixes == ("IR_DIRECTION_REVIEW:", "IR_METHODOLOGY_REVIEW:")
+    for assignment in ("IR_DIRECTION_REVIEW:direction-1", "IR_METHODOLOGY_REVIEW:method-1"):
+        assert assignment.startswith(supported_prefixes)
+    for unsupported in (
+        "IR_UNSUPPORTED_REVIEW:item-1",
+        "IR_DIRECTION_REVIEW",
+        "IR_METHODOLOGY_REVIEW",
+        "PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW:item-1",
+    ):
+        assert not unsupported.startswith(supported_prefixes)
+    assert exact_owned_paths in set(wdm_role.splitlines())
+    assert "workflow_authority=exclusive_for_owned_surfaces" not in role_lines
+    assert "git_authority=direct_for_owned_workflow_surfaces" not in role_lines
 
     for required in (
-        "$hmasd-collaborative-workflow-design",
-        "$hmasd-workflow-change-audit",
-        "docs/project/SESSION_WORKSPACE_CONTRACT.md",
-        "session_owner_role=independent_research_explorer",
-        "`owned_paths` as the literal exact nonoverlapping paths",
-        "Symbolic aliases, directory-family shortcuts and implicit path expansion are forbidden.",
-        "never runs concurrently with research mutation",
+        "Workflow design is not an Explorer mode.",
+        "Report one exact requirement or defect to Workflow Design Manager",
+        "never load the collaborative/audit Workflow Skills",
+        "persistent Explorer session directly performs each exact External Pro direction turn",
+        "prepare -> submit -> verify -> archive",
+        "No review/monitor child",
+        "No hash, digest, fingerprint or byte count is a workflow predicate.",
     ):
         assert required in skill_normalized
-    assert "owned_paths=exact_workflow_owned_paths_from_role_charter" not in skill
-    assert "Do not use Git or create project changes." not in skill
+    assert "$hmasd-collaborative-workflow-design" not in skill
+    assert "$hmasd-workflow-change-audit" not in skill
+
+    for required in (
+        "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
+        "there is no separate persistent review-operator session",
+        "stable_key=hmasd-independent-research-explorer-pro",
+        "execution=persistent_explorer_session_direct",
+        "archive",
+        "local FIFO",
+        "No hash, digest, fingerprint or byte count is a workflow predicate.",
+    ):
+        assert required in pro_review_skill
+    assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
+        "hmasd-independent-research-pro-review", ""
+    )
+
+    for contract in (pro_review_skill, pro_review_transport):
+        assert "IR_DIRECTION_REVIEW:" in contract
+        assert "IR_METHODOLOGY_REVIEW:" in contract
+        assert "provision-direction" in contract
+        assert "local_research/pro_reviews/<review-id>/" in contract
+        assert "IR_UNSUPPORTED_REVIEW:" not in contract
+    assert "independent_pro_direction_transport_authority=" not in role
+    assert "independent_pro_direction_transport_execution=" not in role
+    assert "independent_pro_direction_stable_key=" not in role
+    assert "independent_pro_direction_terminal_intake=" not in role
+    assert "registered_provision_direction" not in role
+    assert "registered_provision_review" not in role
 
     for required in (
         "session_owner_role=independent_research_explorer",
-        "session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e",
+        "session_owner_id=019fbded-24cb-7541-aa16-0111b626b945",
         "durable_workspace=docs/session-workspaces/independent_research_explorer/",
         "temporary_workspace=temp/sessions/independent_research_explorer/",
         "shared_surface_owner=false",

@@ -54,6 +54,11 @@ PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
 )
 DIRECTION_ASSIGNMENT_PREFIX = "IR_DIRECTION_REVIEW:"
+METHODOLOGY_ASSIGNMENT_PREFIX = "IR_METHODOLOGY_REVIEW:"
+REVIEW_ASSIGNMENT_PREFIXES = (
+    DIRECTION_ASSIGNMENT_PREFIX,
+    METHODOLOGY_ASSIGNMENT_PREFIX,
+)
 
 
 class GuardError(RuntimeError):
@@ -139,7 +144,6 @@ def _registered_research_sessions(repo: Path) -> dict[str, str]:
     text = router.read_text(encoding="utf-8")
     fields = {
         "explorer": "independent_research_explorer_session",
-        "review_operator": "independent_research_review_operator_session",
     }
     sessions: dict[str, str] = {}
     for role, field in fields.items():
@@ -162,6 +166,22 @@ def _registered_python(repo: Path) -> str | None:
         router.read_text(encoding="utf-8"),
     )
     return matches[0] if len(matches) == 1 else None
+
+
+def _registered_direct_transport_sessions(repo: Path) -> set[str]:
+    router = repo / "AGENTS.md"
+    if not router.is_file():
+        return set()
+    text = router.read_text(encoding="utf-8")
+    sessions: set[str] = set()
+    for field in (
+        "code_project_manager_session",
+        "independent_research_explorer_session",
+    ):
+        matches = re.findall(rf"(?m)^{field}=([^\r\n]+?)\s*$", text)
+        if len(matches) == 1:
+            sessions.add(matches[0])
+    return sessions
 
 
 def _flag_path(command: str, flag: str) -> Path | None:
@@ -190,6 +210,10 @@ def _flag_value(command: str, flag: str) -> str | None:
     return next(value for value in match.groups() if value is not None)
 
 
+def _valid_review_assignment(value: object) -> bool:
+    return isinstance(value, str) and value.startswith(REVIEW_ASSIGNMENT_PREFIXES)
+
+
 def _review_item_root(path: Path, review_root: Path) -> Path | None:
     if not _inside(path, review_root):
         return None
@@ -199,19 +223,23 @@ def _review_item_root(path: Path, review_root: Path) -> Path | None:
     return _canonical(review_root / relative.parts[0])
 
 
-def _request_has_direction_assignment(path: Path) -> bool:
+def _request_has_review_assignment(path: Path) -> bool:
     try:
         request = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return False
     return (
         isinstance(request, dict)
-        and isinstance(request.get("assignment_identity"), str)
-        and request["assignment_identity"].startswith(DIRECTION_ASSIGNMENT_PREFIX)
-        and request.get("transport_owner") == "independent_research_review_operator"
-        and request.get("stable_key") == "hmasd-independent-research-pro"
+        and _valid_review_assignment(request.get("assignment_identity"))
+        and request.get("transport_owner") == "independent_research_explorer"
+        and request.get("stable_key") == "hmasd-independent-research-explorer-pro"
         and request.get("model") == "Pro"
     )
+
+
+def _request_has_direction_assignment(path: Path) -> bool:
+    """Compatibility alias for older focused tests."""
+    return _request_has_review_assignment(path)
 
 
 def _registered_script_prefix(command: str, interpreter: str, script: Path) -> bool:
@@ -224,19 +252,6 @@ def _registered_script_prefix(command: str, interpreter: str, script: Path) -> b
         re.IGNORECASE,
     )
     return bool(prefix.match(normalized))
-
-
-def _registered_powershell_file(command: str, script: Path) -> bool:
-    normalized = command.strip().replace("\\", "/")
-    registered = str(script).replace("\\", "/")
-    return bool(
-        re.match(r'^(?:powershell|pwsh)(?:\.exe)?\b', normalized, re.IGNORECASE)
-        and re.search(
-            rf'(?:^|\s)-File\s+"?{re.escape(registered)}"?(?:\s|$)',
-            normalized,
-            re.IGNORECASE,
-        )
-    )
 
 
 def _trusted_agentify_review_command(
@@ -261,12 +276,13 @@ def _trusted_agentify_review_command(
     mode = re.search(r"\s(prepare|submit|verify|archive)(?:\s|$)", command, re.IGNORECASE)
     if mode is None:
         return False
+    mode_name = mode.group(1).lower()
     flags = {
         "prepare": ("--selection", "--request", "--prompt-path"),
         "submit": ("--request", "--receipt"),
         "verify": ("--request", "--receipt"),
         "archive": ("--request", "--receipt", "--raw-output"),
-    }[mode.group(1).lower()]
+    }[mode_name]
     paths = [_flag_path(command, flag) for flag in flags]
     if any(path is None for path in paths):
         return False
@@ -287,25 +303,20 @@ def _trusted_agentify_review_command(
     item_root = _canonical(Path(next(iter(item_roots))))
     if required_item_root is not None and not _same(item_root, required_item_root):
         return False
-    if mode.group(1).lower() == "prepare":
-        if _flag_value(command, "--owner") != "independent_research_review_operator":
+    if mode_name == "prepare":
+        if _flag_value(command, "--owner") != "independent_research_explorer":
             return False
-        if _flag_value(command, "--stable-key") != "hmasd-independent-research-pro":
+        if _flag_value(command, "--stable-key") != "hmasd-independent-research-explorer-pro":
             return False
         if _flag_value(command, "--model") != "Pro":
             return False
-    if required_item_root is not None:
-        if mode.group(1).lower() == "prepare":
-            assignment_identity = _flag_value(command, "--assignment-identity")
-            if not (
-                isinstance(assignment_identity, str)
-                and assignment_identity.startswith(DIRECTION_ASSIGNMENT_PREFIX)
-            ):
-                return False
-        else:
-            request_path = _flag_path(command, "--request")
-            if request_path is None or not _request_has_direction_assignment(request_path):
-                return False
+        assignment_identity = _flag_value(command, "--assignment-identity")
+        if not _valid_review_assignment(assignment_identity):
+            return False
+    else:
+        request_path = _flag_path(command, "--request")
+        if request_path is None or not _request_has_review_assignment(request_path):
+            return False
     return True
 
 
@@ -331,8 +342,7 @@ def _trusted_direction_provision_command(command: str, repo: Path) -> bool:
     prompt_source = _flag_path(command, "--prompt-source")
     prompt_path = _flag_path(command, "--prompt-path")
     if not (
-        isinstance(assignment_identity, str)
-        and assignment_identity.startswith(DIRECTION_ASSIGNMENT_PREFIX)
+        _valid_review_assignment(assignment_identity)
         and prompt_source is not None
         and prompt_path is not None
     ):
@@ -353,7 +363,6 @@ def _trusted_research_script(
     command: str,
     repo: Path,
     role: str,
-    direction_item_root: Path | None = None,
 ) -> bool:
     if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
         return False
@@ -362,6 +371,8 @@ def _trusted_research_script(
         return False
     if role == "explorer":
         if _trusted_direction_provision_command(command, repo):
+            return True
+        if _trusted_agentify_review_command(command, repo):
             return True
         forbidden = str(repo / "local_research" / "pro_reviews").replace("\\", "/")
         normalized = command.replace("\\", "/")
@@ -383,45 +394,6 @@ def _trusted_research_script(
                 return True
         return False
 
-    if role == "direction_child":
-        return direction_item_root is not None and _trusted_agentify_review_command(
-            command, repo, direction_item_root
-        )
-
-    if role != "review_operator":
-        return False
-    review_root = _canonical(repo / "local_research" / "pro_reviews")
-    handoff = (
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-cross-task-routing"
-        / "scripts"
-        / "hmasd_cross_task_payload.py"
-    )
-    if _registered_script_prefix(command, interpreter, handoff):
-        repo_arg = _flag_path(command, "--repo")
-        source = _flag_path(command, "--source")
-        return (
-            repo_arg is not None
-            and _same(repo_arg, repo)
-            and source is not None
-            and _inside(source, review_root)
-            and re.search(r"\swrite(?:\s|$)", command, re.IGNORECASE) is not None
-        )
-    if _trusted_agentify_review_command(command, repo):
-        return True
-    for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
-        script = (
-            repo
-            / ".agents"
-            / "skills"
-            / "hmasd-agentify-pro-transport"
-            / "scripts"
-            / basename
-        )
-        if _registered_powershell_file(command, script):
-            return True
     return False
 
 
@@ -479,6 +451,23 @@ def _guard_patch(
             raise GuardError(f"apply_patch target is outside the writable scope: {resolved}")
 
 
+def _command_invokes_agentify_wrapper(command: str, repo: Path) -> bool:
+    normalized = command.replace("\\", "/").casefold()
+    wrapper = str(
+        repo
+        / ".agents"
+        / "skills"
+        / "hmasd-agentify-pro-transport"
+        / "scripts"
+        / "hmasd_agentify_pro_transport.py"
+    ).replace("\\", "/").casefold()
+    relative = (
+        ".agents/skills/hmasd-agentify-pro-transport/scripts/"
+        "hmasd_agentify_pro_transport.py"
+    )
+    return wrapper in normalized or relative in normalized
+
+
 def _guard_shell(
     repo: Path,
     cwd: Path,
@@ -486,24 +475,20 @@ def _guard_shell(
     linked: bool,
     tool_input: Any,
     research_role: str | None = None,
-    direction_item_root: Path | None = None,
 ) -> None:
     if not isinstance(tool_input, dict) or not isinstance(tool_input.get("command"), str):
         raise GuardError("shell payload has no command")
     command = tool_input["command"]
     if research_role is not None:
-        if GIT_MUTATION.search(command) or (
-            research_role == "review_operator"
-            and re.search(r"(?i)(?:^|\s)git(?:\.exe)?(?:\s|$)", command)
+        if GIT_MUTATION.search(command) or re.search(
+            r"(?i)(?:^|\s)git(?:\.exe)?(?:\s|$)", command
         ):
             raise GuardError("Git mutation is forbidden for the independent research session")
         if RESEARCH_UNSAFE_EXPRESSION.search(command):
             raise GuardError("nested or executable shell expression is forbidden")
         if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
             raise GuardError("compound shell commands are forbidden for the research session")
-        if _trusted_research_script(
-            command, repo, research_role, direction_item_root
-        ):
+        if _trusted_research_script(command, repo, research_role):
             return
         if RESEARCH_UNSAFE_READ_OPTION.search(command):
             raise GuardError("shell option can execute or write and is forbidden")
@@ -569,32 +554,32 @@ def main() -> int:
             ),
             None,
         )
-        direction_item_root: Path | None = None
+        review_root = _canonical(repo / "local_research" / "pro_reviews")
         if research_role is None:
-            review_root = _canonical(repo / "local_research" / "pro_reviews")
             if _inside(cwd, review_root):
-                relative = cwd.relative_to(review_root)
-                if len(relative.parts) == 1:
-                    research_role = "direction_child"
-                    direction_item_root = cwd
+                raise GuardError(
+                    "local_research/pro_reviews requires the registered persistent session"
+                )
+            if tool_name in SHELL_TOOLS:
+                shell_input = payload.get("tool_input")
+                if isinstance(shell_input, dict) and isinstance(
+                    shell_input.get("command"), str
+                ):
+                    direct_transport_sessions = _registered_direct_transport_sessions(repo)
+                    if (
+                        _command_invokes_agentify_wrapper(shell_input["command"], repo)
+                        and session_id not in direct_transport_sessions
+                    ):
+                        raise GuardError(
+                            "Agentify review transport requires a registered direct-transport session"
+                        )
         forbidden_roots: tuple[Path, ...] = ()
         if research_role is not None:
             if linked:
                 raise GuardError("independent research is confined to the main checkout")
-            if research_role == "explorer":
-                allowed_roots = [_canonical(repo / "local_research")]
-                forbidden_roots = (_canonical(repo / "local_research" / "pro_reviews"),)
-            else:
-                allowed_roots = [
-                    direction_item_root
-                    if direction_item_root is not None
-                    else _canonical(repo / "local_research" / "pro_reviews")
-                ]
+            allowed_roots = [_canonical(repo / "local_research")]
+            forbidden_roots = (_canonical(repo / "local_research" / "pro_reviews"),)
         if tool_name in PATCH_TOOLS:
-            if research_role == "direction_child":
-                raise GuardError(
-                    "native direction review child writes only through registered Agentify transport"
-                )
             _guard_patch(
                 cwd,
                 allowed_roots,
@@ -609,7 +594,6 @@ def main() -> int:
                 linked,
                 payload.get("tool_input"),
                 research_role,
-                direction_item_root,
             )
     except (GuardError, OSError, ticketing.TicketError) as exc:
         return _emit_deny(str(exc))

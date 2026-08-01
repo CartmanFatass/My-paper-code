@@ -6,8 +6,8 @@ description: Sole receipt-bearing Agentify transport for one HMASD External Pro 
 # HMASD Agentify Pro Transport
 
 This Skill is a mechanical wrapper contract. It grants no review, scientific,
-runtime, code, Git or project-state authority. The registered transport owner
-uses this Skill for every External Pro transport turn.
+runtime, code, Git or project-state authority. The owning persistent CPM or
+Explorer session uses this Skill for every External Pro transport turn.
 
 ## Runtime binding
 
@@ -25,16 +25,21 @@ Read the runtime contract before use. The wrapper requires the live Agentify
 `sourceDirty=false`; missing or conflicting source identity blocks before a
 send.
 
-The transport is existing-tab-only. Before every `submit`, the wrapper reads
-Agentify's authenticated `/tabs` and scoped `/status` snapshots and requires
-exactly one already-live tab whose stable key, provider and conversation URL
+The transport normally uses an existing tab. Before every `submit`, the wrapper
+reads Agentify's authenticated `/tabs` and scoped `/status` snapshots and
+requires exactly one live tab whose stable key, provider and conversation URL
 match the immutable request, whose query state is idle, and whose
-`promptVisible` value is exactly `true`. The wrapper never
-creates, closes, shows, activates, navigates, refreshes, replaces or rebinds a
-tab. A missing, duplicate, blocked, busy or identity-mismatched tab fails before
-`/review-query`; no recovery path may open a page. The owning workflow must
-therefore keep its registered tab already live and idle outside the transport
-operation; this does not authorize page activation or upkeep.
+`promptVisible` value is exactly `true`. The wrapper never closes, shows,
+activates, navigates, refreshes, replaces or rebinds a tab. The explicit
+`--allow-tab-creation` flag may create one missing tab only for the first
+binding or post-restart recovery; all other missing, duplicate, blocked, busy
+or identity-mismatched tabs fail before `/review-query`. This exception does
+not authorize page upkeep.
+
+CPM and Explorer invoke this wrapper directly from their persistent owner
+session. The transport creates no child, monitor, heartbeat or fallback page;
+the only page-creation exception is the explicitly authorized first binding or
+post-restart `--allow-tab-creation` case above.
 
 The request must provide a fixed role-owned `stable_key`:
 
@@ -42,7 +47,7 @@ The request must provide a fixed role-owned `stable_key`:
 code_project_manager -> hmasd-formal-pro
 code_project_manager -> hmasd-uav-formal-pro
 code_project_manager -> hmasd-explorer-validation-pro
-independent_research_review_operator -> hmasd-independent-research-pro
+independent_research_explorer -> hmasd-independent-research-explorer-pro
 ```
 
 For Code Project Manager, `hmasd-formal-pro` is reserved for
@@ -57,19 +62,16 @@ history. The wrapper rejects a stable-key binding whose provider, conversation
 or model is missing or conflicts with the current round.
 
 Keep runtime request and receipt files in the owner boundary: CPM uses the
-applicable `logs/` review root and IRRO uses
+applicable `logs/` review root and Explorer uses
 `local_research/pro_reviews/`. Prompt and raw-output files remain in CPM's
-`docs/external-review/` or IRRO's `local_research/pro_reviews/` root. Do not
+`docs/external-review/` or Explorer's `local_research/pro_reviews/` root. Do not
 place credentials, Agentify state or live conversation registrations in Git.
 
-For an Explorer direction review, the shared
-`hmasd-project-operations-operator` is invoked in
-`INDEPENDENT_DIRECTION_REVIEW` mode with parent
-`independent_research_explorer`; transport ownership remains
-`independent_research_review_operator` and stable key
-`hmasd-independent-research-pro`. The exact item root and owner-local page or
-evidence record are assignment-scoped. The shared child maintains no global
-page registry and cannot reuse a CPM workstream record.
+Explorer performs its direction and methodology reviews directly in the
+persistent session. The exact item root and owner-local page or evidence
+record are assignment-scoped; Explorer never reuses a CPM workstream record.
+For Explorer reviews, archive to the same Explorer-owned item root before local
+FIFO intake.
 
 ## Request and one-send contract
 
@@ -103,43 +105,41 @@ exactly `schema_version=1`, the same `assignment_identity`, and
 operation record and is never overwritten. `assignment_identity` must occur in
 the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000
 inclusive. Agentify owns its durable ledger and send idempotency; the HMASD
-wrapper validates the request, proves the exact pre-existing tab is send-ready,
-starts one owned submit worker, and observes the durable operation while that
-worker runs. It writes a new role-owned receipt only after stable completion.
-The wrapper does not click UI controls or mutate tab state. No automatic
-Continue, Retry, ResponseRetry, Answer now, duplicate submission of the same operation,
-cross-conversation fallback or response synthesis is allowed. A conflicting existing
+wrapper validates the request, proves an exact send-ready tab (or the bounded
+creation exception above), and runs one blocking submit operation in the owner
+session while observing that durable operation. It writes a new role-owned
+receipt only after stable completion.
+The wrapper does not click UI controls or mutate tab state. No duplicate
+submission of the same operation, cross-conversation fallback or response
+synthesis is allowed. A conflicting existing
 idempotency record or unavailable conversation terminates as a
 transport blocker.
 
 ## Minimal recovery
 
 Active generation or a readable complete response always suppresses another
-send; a durable `userMessageId` does too. Observe the same operation, then
-verify and archive that response. When the conversation is
-idle and both generation and submitted user content are absent, the owning
-parent may assign one fresh unchanged-question child operation without a new
-user instruction. The owning parent is CPM for project reviews and Explorer for
-independent direction reviews.
-Each child operation submits at most once; the review assignment permits the
-initial operation plus one fresh resend. The parent counts those operations
-from the existing request records without a hash or new ledger. Ordinary
-recovery never launches a synthetic smoke, creates a page or substitutes
-another tab. A fresh operation still requires the same pre-existing exact tab;
-if it is absent or wrong, recovery stops as a transport blocker.
+send; a durable `userMessageId` does too. First invoke `submit --verify-existing`
+against the same request. If it reports `present=true`, observe that operation,
+then run `verify` and `archive`. Only when it reports `present=false` may the
+owning session prepare one fresh unchanged-question request with a new
+operation key and perform one fresh send. Recovery never repeats an operation
+key, creates a page opportunistically or substitutes another tab. A fresh
+request still requires the same exact tab unless this is the first binding or a
+post-restart missing-tab recovery explicitly authorized with
+`--allow-tab-creation`; all other missing tabs are transport blockers.
 
 After the fresh resend fails, return one terminal technical transport defect to
 the owning parent. WDM is not a recovery approver; it is involved only if the
 parent later reports a concrete reusable control-plane design defect. Do not
-reinterpret science or continue sending. The adapter
-never clicks Stop, Continue, Retry or Answer now, and every transport failure
-consumes zero scientific iterations.
+reinterpret science or resume sending. Every transport failure consumes zero
+scientific iterations.
 
 ## Mechanical commands
 
 All paths are absolute at invocation. Agentify owns the durable ledger; the
 wrapper owns request preparation, validation and the new role-owned receipt.
-The caller supplies no prompt hash, assembled monitor command or opaque token.
+The caller supplies no content digest, fingerprint, monitor or heartbeat
+command, or opaque token.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -164,10 +164,10 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` first proves the pre-existing exact tab identity, unblocked/idle state
-and `promptVisible=true`, then starts exactly one owned submit worker. The
-supervisor polls Agentify's durable ledger about once per second while the
-synchronous worker runs. Its observable phases are:
+`submit` first proves the exact tab identity, unblocked/idle state and
+`promptVisible=true`, then starts exactly one owned submit worker. The submit
+operation observes Agentify's durable ledger while the synchronous worker runs.
+Its observable phases are:
 
 ```text
 PREPARED -> TAB_READY -> DISPATCH_STARTED -> MESSAGE_CONFIRMED -> GENERATING
@@ -182,16 +182,16 @@ confirmation is absent for 60 seconds, the supervisor terminates only its own
 submit worker, rereads the ledger, returns `PRE_SEND_BLOCKED`, and never
 resends. Once `userMessageId` exists, it never terminates or retries; it
 observes that same operation until natural completion or
-`POST_SEND_BLOCKED`. Phase changes may be reported immediately; long
-`GENERATING` reports are limited to one per five minutes.
+`POST_SEND_BLOCKED`. Phase changes may be reported immediately.
 `userMessageId` is the irreversible post-send boundary even if another
 identity predicate is incomplete or mismatched; that state is
 `POST_SEND_BLOCKED`, never `PRE_SEND_BLOCKED`. An early submit-worker exit does
 not shorten the 60-second durable-ledger confirmation window.
 
 `--verify-existing` observes the same operation and never sends. Neither mode
-may create, close, show, activate, navigate, refresh, replace or rebind a page.
-No second HMASD monitor or transport ledger is created.
+may create, close, show, activate, navigate, refresh, replace or rebind a page
+except the explicit first-binding or post-restart `--allow-tab-creation` case.
+No second transport ledger is created.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -202,9 +202,9 @@ No second HMASD monitor or transport ledger is created.
 `verify` is local receipt validation only and never sends. Natural completion
 requires the same assistant
 message identity and complete text in two stable snapshots at least three
-seconds apart and no active generation or continuation control. A visible
-Answer now control is never activated and is not completion
-evidence. Long Pro reasoning remains inside the original absolute operation
+seconds apart and no active generation or continuation control. UI control
+activation is never completion evidence. Long Pro reasoning remains inside the
+original absolute operation
 deadline; the wrapper does not create a short-watch terminal state.
 
 After `verify` returns a complete receipt, archive the exact response bytes
@@ -218,7 +218,7 @@ without rewriting and bind the archive to the receipt:
 ```
 
 `archive` is permitted only for a complete receipt and reread byte equality.
-For CPM, the raw-output path is under `docs/external-review`; for IRRO it is
+For CPM, the raw-output path is under `docs/external-review`; for Explorer it is
 under `local_research/pro_reviews`. Mechanical intake remains the applicable
 owner's normal next step. No response interpretation is performed here.
 
@@ -239,15 +239,17 @@ sendActionCount=1
 userMessageId
 submittedAt
 assistantMessageId
-snapshots=2_same_identity_and_hash_with_gap_ms>=3000
-responseSha256
+snapshots=2_same_assistant_identity_with_gap_ms>=3000
 clickedControls=[]
 terminalState=NATURAL_COMPLETION_VERIFIED
 ```
 
 The two snapshots must be tied to the same assistant identity. Missing or
 conflicting fields, `sendCount != 1`, a conversation mismatch or incomplete
-generation yields `AGENTIFY_TRANSPORT_BLOCKED`; recovery follows `Minimal recovery`.
+generation yields `AGENTIFY_TRANSPORT_BLOCKED`; response text is retained as
+received and checked only through the exact archive reread. No request,
+response, snapshot digest, byte count or fingerprint is a workflow admission
+field; recovery follows `Minimal recovery`.
 
 On success, the wrapper output returns the receipt path or raw path plus the
 validated stable `operationId` to

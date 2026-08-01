@@ -12,9 +12,9 @@ def test_collaborative_skill_is_the_only_design_collaboration_skill() -> None:
     assert not (
         REPO / ".agents/skills/hmasd-deliberate-workflow-design/SKILL.md"
     ).exists()
-    assert "name: hmasd-collaborative-workflow-design" in SKILL_PATH.read_text()
+    assert "name: hmasd-collaborative-workflow-design" in SKILL_PATH.read_text(encoding="utf-8")
 
-    skill = SKILL_PATH.read_text().lower()
+    skill = SKILL_PATH.read_text(encoding="utf-8").lower()
     for retired_mechanism in (
         "decision map",
         "fog",
@@ -25,16 +25,16 @@ def test_collaborative_skill_is_the_only_design_collaboration_skill() -> None:
 
 
 def test_read_only_and_fully_specified_requests_take_short_paths() -> None:
-    skill = " ".join(SKILL_PATH.read_text().split())
-    assert "It does not need plan confirmation" in skill
+    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
+    assert "without plan confirmation" in skill
     assert "zero-question path" in skill
     assert "changes at least one named plan field" in skill
     assert "one question at a time" in skill
-    assert "recommended answer" in skill
+    assert "recommend the smallest answer" in skill
 
 
 def test_mutation_requires_one_visible_confirmed_plan() -> None:
-    skill = " ".join(SKILL_PATH.read_text().split())
+    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
     for field in (
         "Requirements understanding",
         "Goal and non-goals",
@@ -45,12 +45,12 @@ def test_mutation_requires_one_visible_confirmed_plan() -> None:
         assert field in skill
     assert "Perform no mutation until" in skill
     assert "confirms the complete plan in natural language" in skill
-    assert "present a revised complete plan" in skill
+    assert "present the complete revised plan" in skill
 
 
 def test_role_routes_mutations_through_collaboration_before_audit() -> None:
-    role = ROLE_PATH.read_text()
-    skill = SKILL_PATH.read_text()
+    role = ROLE_PATH.read_text(encoding="utf-8")
+    skill = SKILL_PATH.read_text(encoding="utf-8")
     assert "workflow_collaboration_skill=hmasd-collaborative-workflow-design" in role
     assert "workflow_zero_question_path=fully_specified_mutations" in skill
     assert "workflow_decision_question_condition=changes_named_plan_field" in skill
@@ -62,5 +62,79 @@ def test_role_routes_mutations_through_collaboration_before_audit() -> None:
     )
 
 
+def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> None:
+    role = ROLE_PATH.read_text(encoding="utf-8")
+    skill = SKILL_PATH.read_text(encoding="utf-8")
+    normalized_skill = " ".join(skill.split())
+    for token in (
+        "workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces",
+        "workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces",
+        "workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces",
+        "workflow_git_authority=exclusive_for_workflow_control_plane_surfaces",
+        "Automatic continuous execution",
+    ):
+        assert token in role
+    assert "invoked only by Workflow Design Manager" in skill
+    assert "without per-action approval" in normalized_skill
+    assert "workflow_hash_validation=forbidden" in role
+    assert "workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch" in role
+    assert "Git revision identifiers remain source locators only" in role
+    assert "workflow_router_consistency_check=required_for_every_workflow_change" in role
+    assert "workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)" in role
+    assert "workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match" in role
+    assert "`AGENTS.md` as `modify` or `unchanged-valid`" in normalized_skill
+
+
+def test_user_changes_and_advisory_defects_use_distinct_lanes() -> None:
+    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split())
+    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
+    assert "workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT" in skill
+    assert "workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED" in role
+    assert "archived before action and processed in receipt order" in role
+    assert "without user confirmation only when" in role
+    assert "Otherwise move the item to the user-requested lane" in skill
+
+
+def test_edit_children_pin_ticket_worktree_before_mutation() -> None:
+    role = ROLE_PATH.read_text(encoding="utf-8")
+    skill = SKILL_PATH.read_text(encoding="utf-8")
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    for text in (role, skill, audit):
+        text = " ".join(text.split())
+        assert "resolved ticket worktree path" in text
+        assert "git rev-parse --show-toplevel" in text
+        assert "stops" in text
+
+
 def test_skill_cannot_be_invoked_implicitly() -> None:
-    assert "allow_implicit_invocation: false" in UI_PATH.read_text()
+    assert "allow_implicit_invocation: false" in UI_PATH.read_text(encoding="utf-8")
+
+
+def test_wdm_explorer_scope_lists_contracts_without_claiming_workspace_globs() -> None:
+    role = ROLE_PATH.read_text(encoding="utf-8")
+    scope = next(
+        line
+        for line in role.splitlines()
+        if line.startswith("centralized_explorer_workflow_paths=")
+    )
+    for required in (
+        ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
+        ".agents/skills/hmasd-independent-research-exploration/SKILL.md",
+        ".agents/skills/hmasd-explorer-project-validation/SKILL.md",
+        ".agents/skills/hmasd-independent-research-pro-review/SKILL.md",
+        "tests/hmasd_independent_research_exploration_test.py",
+        "tests/hmasd_explorer_project_validation_packet_test.py",
+        "tests/hmasd_research_workflow_contract_test.ps1",
+        "docs/session-workspaces/independent_research_explorer/README.md",
+        "docs/session-workspaces/independent_research_explorer/PRO_REVIEW_TRANSPORT.md",
+    ):
+        assert required in scope
+    assert "docs/session-workspaces/independent_research_explorer/**" not in scope
+    assert "temp/sessions/independent_research_explorer/**" not in scope
+    assert (
+        "centralized_explorer_workflow_acceptance_owner=workflow_design_manager_for_listed_artifacts_only"
+        in role
+    )
+    assert "centralized_explorer_workspace_cleanup_write_authority=none" in role

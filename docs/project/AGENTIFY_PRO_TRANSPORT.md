@@ -11,7 +11,7 @@ agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
 browser_backend=chrome-cdp
 browser_window_policy=one_agentify_process_one_chrome_window
 stable_key_tab_policy=one_live_tab_per_stable_key
-transport_tab_mutation=forbidden
+transport_tab_mutation=forbidden_except_first_binding_or_post_restart_allow_tab_creation
 missing_or_mismatched_tab=fail_before_review_query
 prompt_visible_required_before_send=true
 send_confirmation_timeout_seconds=60
@@ -31,63 +31,66 @@ Browser transport is retired; Agentify is the sole External Pro transport.
 | `hmasd-formal-pro` | Code Project Manager | `formal_toy_research` Pro conversation |
 | `hmasd-uav-formal-pro` | Code Project Manager | `uav_validation` Pro conversation |
 | `hmasd-explorer-validation-pro` | Code Project Manager | Explorer validation Pro conversation |
-| `hmasd-independent-research-pro` | Independent Research Pro Review Operator | independent-research Pro conversation |
+| `hmasd-independent-research-explorer-pro` | Independent Research Explorer | independent-research Pro conversation |
 
 Stable keys identify a runtime binding, not a repository conversation record.
 The three Code Project Manager keys are workstream-specific and cannot
 substitute for one another.
 After Agentify first persists a stable-key binding, later operations must match
 it; tab navigation cannot rebind or overwrite that durable binding.
-Every transport operation requires exactly one pre-existing live tab for its
-stable key and reuses that exact tab. The wrapper verifies the tab's key,
-provider, conversation URL, idle status and `promptVisible=true` through authenticated read-only
-Agentify endpoints before `/review-query`. It never creates, closes, shows,
-activates, navigates, refreshes, replaces or rebinds a page. A missing,
-duplicate, blocked, busy or mismatched tab is terminal for that operation; the
-transport does not recreate it after Agentify or Chrome restart and does not
-fall back to another tab or window.
+Every transport operation normally requires one live tab for its stable key and
+reuses that exact tab. The wrapper verifies the tab's key, provider,
+conversation URL, idle status and `promptVisible=true` through authenticated
+read-only Agentify endpoints before `/review-query`. It never closes, shows,
+activates, navigates, refreshes, replaces or rebinds a page. The explicit
+`--allow-tab-creation` flag may create one missing tab only for the first
+binding or post-restart recovery. A missing, duplicate, blocked, busy or
+mismatched tab is otherwise terminal for that operation; the transport does
+not fall back to another tab or window.
 Conversation IDs, URLs, model evidence, credentials, authentication material
 and live registrations are runtime-only and must never be committed or placed
 in role/Skill text. The binding is loaded from the local Agentify state at the
 time of the operation and must match the selected owner and requested Pro
 model before sending.
 
-Independent direction reviews use the shared
-`hmasd-project-operations-operator` in `INDEPENDENT_DIRECTION_REVIEW` mode,
-parented by the Explorer. The transport owner and stable key remain
-`independent_research_review_operator` and `hmasd-independent-research-pro`;
-the assignment owns one exact `local_research/pro_reviews/<review-id>/` root
-and its owner-local page/evidence record. The shared operator has no global
-page registry and cannot use a CPM workstream record.
+Independent direction and methodology reviews run directly in the persistent
+Explorer session. The transport owner and stable key are
+`independent_research_explorer` and
+`hmasd-independent-research-explorer-pro`; each assignment owns one exact
+`local_research/pro_reviews/<review-id>/` root and its owner-local page/evidence
+record. Explorer never reuses a CPM workstream record.
 
 ## One-round protocol
 
-1. The owning role verifies an active user grant or one explicit review
-   assignment. For Agentify, the
-   registered wrapper reads the UTF-8 prompt and writes one new role-owned
+1. The owning persistent CPM or Explorer session verifies an active user grant
+   or one explicit review assignment. For Agentify, the registered wrapper
+   reads the UTF-8 prompt and writes one new role-owned
    `TRANSPORT_BACKEND.json` plus its matching request.
 2. The immutable selection is reloaded before every send or recovery.
 3. For Agentify, the owner resolves its stable key to one already-live runtime
    conversation tab and uses the wrapper's `prepare` command to persist the
-   immutable request identity before sending.
+   immutable request identity before sending. If the tab is missing, the
+   wrapper may create one only for the first binding or for post-restart
+   recovery when the owner explicitly supplies `--allow-tab-creation`.
 4. Immediately before submission, the wrapper reads `/tabs` and scoped
    `/status`; only one exact, unblocked, idle and prompt-visible tab permits a
-   new `/review-query` send.
-   These checks perform no page mutation and a failure permits no create,
-   navigation or fallback action.
+   new `/review-query` send. These checks perform no page mutation; a failure
+   permits no create, navigation or fallback action except the bounded
+   first-binding or post-restart `--allow-tab-creation` case in step 3.
+   CPM and Explorer run this transport directly in their persistent owner
+   sessions; no transport child, monitor or heartbeat is created.
 5. The wrapper starts one owned synchronous submit worker and separately polls
    Agentify's durable operation ledger. `MESSAGE_CONFIRMED` requires exactly
    one send/action, non-null user-message identity and submission time, and
    exact tab/conversation identity. Process existence is never send evidence.
 6. If no message is confirmed within 60 seconds, terminate only that worker,
-   reread the ledger, return `PRE_SEND_BLOCKED`, and do not resend. Once a
-   user-message identity exists, never terminate or retry; observe only that
-   operation until natural completion or `POST_SEND_BLOCKED`.
-   `userMessageId` is the irreversible post-send boundary even when another
-   identity predicate is missing; early worker exit never shortens the
+   reread the ledger and return `PRE_SEND_BLOCKED`. Once a user-message
+   identity exists, observe only that operation until natural completion or
+   `POST_SEND_BLOCKED`; it is the irreversible post-send boundary even when
+   another identity predicate is missing. Early worker exit never shortens the
    60-second ledger-confirmation window.
-7. Agentify submits at most one exact prompt for that operation. It does not
-   click `Answer now`, `Continue`, `Retry` or `ResponseRetry`.
+7. Agentify submits at most one exact prompt for that operation. The wrapper
+   never activates UI controls or performs a second send under the same key.
 8. The transport validator
    `.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py`
    checks the stable key, conversation, selected model, completion snapshots
@@ -97,12 +100,14 @@ page registry and cannot use a CPM workstream record.
    long `GENERATING` phase reports at most every five minutes. The receipt is evidence of transport only;
    it cannot interpret science or authorize code, compute or project state.
 
-An unavailable conversation or incomplete response stops that operation. The
-Minimal recovery rule permits bounded fresh operations inside the same active
-review authority; it never permits a send while generation or a readable
-complete response exists and never permits a new or replacement page. Every
-fresh operation must reuse the same pre-existing exact idle tab. A transport
-failure consumes zero scientific iterations.
+An unavailable conversation or incomplete response stops that operation. For
+recovery, the owning session first invokes `submit --verify-existing` against
+the same request. `present=true` observes and completes that operation;
+`present=false` is required before preparing one fresh unchanged-question
+request with a new operation key. A fresh operation must reuse the same exact
+idle tab, except first binding or post-restart missing-tab recovery explicitly
+using `--allow-tab-creation`. A transport failure consumes zero scientific
+iterations.
 
 ## Minimal recovery
 

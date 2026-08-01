@@ -4,8 +4,9 @@
 role=workflow_auditor
 callable_agent_type=hmasd-workflow-auditor
 role_kind=registered_nonpersistent_native_child
-parent=assigning_persistent_session
-assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace
+parent=workflow_design_manager
+parent_session_id=019fb73d-5635-7b63-b165-6c5129bc0217
+assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 model=gpt-5.6-luna
 reasoning_effort=high
 assignment_modes=impact_map|postchange_verify
@@ -34,10 +35,8 @@ no-bytecode Python when applicable. Return `WORKFLOW_VERIFY_PACKET` with the
 observed path set, command results, stale-reference results, first causal
 failure and residual verification limits. Do not repair a failure.
 
-Return the packet only to the exact `session_owner_role` and
-`session_owner_id` in the assignment. The `owned_paths` and
-`session_workspace` fields are read boundaries, not authority delegated to this
-child.
+Return the packet only to Workflow Design Manager. The `owned_paths` and
+`wdm_session_workspace` fields are read boundaries, not delegated authority.
 
 Remain read-only. Do not edit, stage, commit, push, contact persistent tasks,
 invoke Skills, spawn children, accept the workflow or create another audit.

@@ -8,7 +8,7 @@ role_kind=persistent_project_coordination_code_runtime_and_acceptance_task
 code_authority=exclusive
 technical_acceptance_authority=exclusive
 runtime_authority=exclusive
-current_work_authority=exclusive
+current_work_authority=exclusive_for_project_operational_records
 formal_external_review_transport_authority=exclusive
 formal_review_stable_key_formal_toy_research=hmasd-formal-pro
 formal_review_stable_key_uav_validation=hmasd-uav-formal-pro
@@ -16,18 +16,21 @@ explorer_validation_stable_key=hmasd-explorer-validation-pro
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
-shared_workflow_design_authority=none
-role_local_workflow_design_authority=exclusive_for_owned_surfaces
-role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces
+workflow_design_authority=none
+workflow_modification_authority=none
+workflow_acceptance_authority=none
+workflow_git_authority=none
+workflow_change_request_route=workflow_design_manager
 session_owner_role=code_project_manager
 session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager
 current_work_entry=docs/project/CURRENT_WORK.md
 current_work_session_record=docs/project/current-work/sessions/code_project_manager.md
-pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md
+pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md
+failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md
+local_failure_task_terminal=false
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_children=code_scout|implementer|reviewer|verifier
-operations_child=hmasd-project-operations-operator
 experiment_child=hmasd-experiment-operator
 child_acceptance_authority=none
 one_artifact_one_acceptance_owner=true
@@ -57,8 +60,9 @@ After the root router, read the public `docs/project/CURRENT_WORK.md` index,
 this charter, then the Code Project Manager session record and only the active
 workstream's linked common record, named contracts and artifacts. Keep
 unrelated workstreams unloaded. External Pro owns science. Workflow Design
-Manager owns shared workflow; Code Project Manager owns only its role-local
-workflow surfaces. Code Project Manager is the only persistent project
+Manager owns the complete workflow control plane; Code Project Manager reports
+workflow requirements and defects but never edits or accepts those surfaces.
+Code Project Manager is the only persistent project
 manager; there is no Research Operations Manager or persistent monitor.
 
 ## Owns
@@ -76,8 +80,8 @@ manager; there is no Research Operations Manager or persistent monitor.
   delegates compute authority to the child automatically; CPM checks the
   active grant and remaining balance before dispatch, and neither CPM nor the
   child asks for per-run authorization while the run remains in that grant.
-- Formal and Explorer-to-project Pro review packaging, Project Operations
-  Operator dispatch, exact archival and mechanical receipt acceptance.
+- Formal and Explorer-to-project Pro review packaging, direct Agentify
+  transport, exact archival and mechanical receipt acceptance.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -162,9 +166,11 @@ blockers=none
 returned commit and exact paths and records successful `interface_smoke`,
 `bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
 and `analyze_entry` phases. Code Project Manager keeps the repair loop until
-that boundary passes or returns one exact technical blocker. The verifier
-returns mechanical evidence only; Code Project Manager classifies an operational
-failure for bounded reassignment or a code defect for implementer repair, then
+that boundary passes or returns one scoped diagnosis under the failure-
+containment contract. The readiness wrapper owns its mechanical lifecycle and
+the verifier returns typed evidence. Code Project Manager does not reconstruct
+that state machine; it chooses bounded reassignment for an operational failure
+or implementer repair for a code defect, then
 requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
 An unsuccessful phase is candidate evidence. A failure before `run` begins or
@@ -174,65 +180,62 @@ compensate for proof-root freshness, outer timeout, sandbox or receipt-write
 errors.
 
 After acceptance, CPM owns code-science audit transport, preflight, formal
-execution and successor routing. It uses the registered native operators for
-mechanical work and remains the sole project-state acceptance owner.
+execution and successor routing. It uses registered code and experiment
+children for their assigned mechanical work and remains the sole project-state
+acceptance owner.
 
-## Mechanical children
+## Mechanical execution and direct Pro transport
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
-Operator alone executes `train -> evaluate -> analyze`. For external review or
-mechanical result intake, spawn one `hmasd-project-operations-operator` with
-exactly one mode:
+Operator alone executes `train -> evaluate -> analyze`. CPM itself owns each
+formal or Explorer-to-project Pro transport and follows
+`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md` plus
+`$hmasd-agentify-pro-transport`:
 
-- `PRO_REVIEW_TRANSPORT`: immutable question, stable key, operation identity,
-  item root and archive path;
-- `RESULT_INTAKE`: terminal artifact set, schema and mechanical predicates.
-
-Every `PRO_REVIEW_TRANSPORT` assignment names
-`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md`
-and the shared `$hmasd-agentify-pro-transport` Skill. The child owns the whole
-observable transport lifecycle, including send confirmation, natural-completion
-observation, receipt verification, raw archival and assigned mechanical intake.
-CPM does not run a parallel submit process, ledger poller or page observer and
-does not treat child-process liveness as message delivery.
-
-The operations child does not update `CURRENT_WORK.md`, choose recovery, write a
-scientific disposition, choose a successor, run Git, spawn a child or use
-cross-task messaging. CPM accepts its native final.
-
-Operational invalidity costs zero scientific iterations and has no scientific
-disposition. CPM may issue a bounded recovery assignment inside the unchanged
-grant without asking the user or WDM. After every valid result, CPM records the
-External Pro portfolio delta and currently scheduled action exactly. CPM never reorders, retires or compresses supported live or parked directions.
+```text
+prepare -> submit -> verify -> archive -> local_FIFO_intake
+```
 
 Use `transport_owner=code_project_manager`. `formal_toy_research` uses
 `hmasd-formal-pro`, `uav_validation` uses `hmasd-uav-formal-pro`, and Explorer
-validation uses `hmasd-explorer-validation-pro`. These stable keys are not
-interchangeable. One child assignment performs at most one submit. A before-send
-failure with `sendCount=0` permits a fresh assignment inside the existing user
-authority. CPM selects the stable key, decides whether a typed terminal permits
-a recovery assignment and accepts the returned artifacts; only the assigned
-operator observes the same stable tab through the shared lifecycle source.
-Active or readable generation forbids refresh, interrupt, resend and Answer
-now. Only operator evidence proving absence of generation and submitted user
-content can support one fresh resend assignment. No prompt hash, per-file hash
-or byte count is a workflow identity gate.
+validation uses `hmasd-explorer-validation-pro`; the keys are not
+interchangeable. CPM runs the blocking submit in this persistent session. It
+does not spawn a transport or monitor child, run a parallel ledger observer, or
+use a heartbeat. Reissuing the same request only recovers the existing durable
+operation and never creates another send.
+It does not run a parallel submit process, ledger poller or page observer.
 
-Every Pro transport assignment names one already-live exact stable-key tab.
-Neither CPM nor its operations child creates, closes, shows, activates,
-navigates, refreshes, replaces or rebinds a page as part of transport or
-recovery. A missing, duplicate, blocked, busy or identity-mismatched tab fails
-before submission and permits no fallback page.
+Before one fresh operation, `submit --verify-existing` must prove
+`present=false`. A first binding or missing tab after an Agentify restart may
+use `--allow-tab-creation`; no other page creation or fallback is allowed.
+Outside those two bounded cases, the normal path requires an already-live exact
+stable-key tab and permits no fallback page.
+Active or readable generation forbids refresh, interrupt, resend, `Answer now`,
+`Stop`, `Retry` and `Continue`. After natural completion, archive the exact raw
+response before adding it to CPM's local FIFO for mechanical/scientific-owner
+intake. No hash, digest, fingerprint or byte count is a workflow predicate.
+
+Operational invalidity costs zero scientific iterations and has no scientific
+disposition. CPM may recover inside the unchanged active grant according to the
+shared minimal rule; it never asks WDM to approve an individual review.
+
+## Failure containment and continuation
+
+Apply `docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md` after
+every local failure terminal. The originating tool owns mechanical state; CPM
+consumes its evidence and selects the next legal semantic action without
+maintaining a parallel state machine. One parked workstream never pauses another.
+`SESSION_BLOCKED` requires the complete evidence defined by that single source.
 
 ## Workflow changes and Git
 
-For a role-local workflow change, Code Project Manager uses
-`$hmasd-collaborative-workflow-design`, obtains the required plan confirmation,
-then uses `$hmasd-workflow-change-audit` and accepts only its owned charter,
-procedure, durable workspace and focused-contract paths. Shared router, Skill,
-profile, hook, registry or shared-contract conflicts route to the fixed
-Workflow Design Manager session with the locked target session, model and
-thinking; WDM is not a per-step approval gate.
+For any workflow requirement or defect, Code Project Manager sends one exact
+request to the fixed Workflow Design Manager session with the locked target
+session, model and thinking. CPM does not edit, accept, stage, commit or push a
+role charter, Skill, profile, hook, registry, stable workflow contract or
+workflow contract test. WDM is not a runtime or per-operation approval gate;
+CPM continues code, runtime and operational recovery while an unrelated
+workflow dependency is repaired.
 
 `docs/project/CURRENT_WORK.md` is a public link index. Update only the CPM
 session record and common records whose `owner_role=code_project_manager` after
@@ -242,8 +245,10 @@ switching the active workstream does not establish scientific uniqueness.
 
 Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
-task's staged paths. Shared workflow-design paths remain WDM-owned; CPM owns
-only the role-local surfaces declared by the session workspace contract.
+task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
+authority remains only for code, runtime, review, evidence, report, ledger,
+operational state and non-workflow session content declared by the session
+workspace contract.
 
 ## Must not
 
@@ -256,5 +261,6 @@ only the role-local surfaces declared by the session workspace contract.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another
   persistent task, or recreate a persistent operations session.
 
-Return an accepted code/runtime/review/state commit, one exact operational or
-technical diagnosis, or the smallest missing authority boundary.
+Return an accepted code/runtime/review/state commit or one scoped operational or
+technical diagnosis. Never promote that diagnosis to a whole-task stop while
+tool evidence or current owner records expose an authorized next action.

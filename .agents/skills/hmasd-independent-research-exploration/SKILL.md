@@ -15,10 +15,8 @@ The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-adversarial checks. The shared Luna-medium Project Operations Operator handles
-one exact External Pro direction turn in `INDEPENDENT_DIRECTION_REVIEW` mode.
-Explorer writes durable research outputs outside the transport-owned
-`pro_reviews` subtree.
+  adversarial checks. The persistent Explorer session directly performs each
+  exact External Pro direction turn through Agentify and owns its review item.
 
 ## Start safely
 
@@ -40,32 +38,16 @@ Explorer writes durable research outputs outside the transport-owned
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers. During research execution, do not use Git or create project
 changes.
-Write advisory files only with `apply_patch` under `local_research`, excluding
-`local_research/pro_reviews`. The sole shell-write exception is the registered
-`provision-direction` copy of one frozen prompt before child spawn.
+Write advisory files only with `apply_patch` under `local_research`. The sole
+shell-write exception is the registered transport wrapper inside the exact
+Explorer-owned `local_research/pro_reviews/<review-id>/` item root.
 
-A separately confirmed Explorer-owned workflow mutation is outside the active
-research loop. Pause research execution and use
-`$hmasd-collaborative-workflow-design`, followed by
-`$hmasd-workflow-change-audit`, under the Explorer role charter and
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Every workflow child assignment
-must carry the three locked identity/workspace values below and spell out
-`owned_paths` as the literal exact nonoverlapping paths assigned for that child:
-
-```text
-session_owner_role=independent_research_explorer
-session_owner_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
-session_workspace=docs/session-workspaces/independent_research_explorer|temp/sessions/independent_research_explorer
-```
-
-The literal `owned_paths` list must be a subset of the exact
-`workflow_owned_paths=` boundary in the Explorer role charter. Symbolic aliases,
-directory-family shortcuts and implicit path expansion are forbidden.
-
-That procedure may change only the charter-declared role-local workflow paths.
-It grants no `CURRENT_WORK`, public-partition, shared-control-plane, code,
-runtime, scientific or `local_research` Git authority and never runs
-concurrently with research mutation.
+Workflow design is not an Explorer mode. Report one exact requirement or defect
+to Workflow Design Manager through `$hmasd-cross-task-routing`; never load the
+collaborative/audit Workflow Skills, edit or accept control-plane files, or
+dispatch a workflow implementer. Continue unrelated research when the defect is
+dependency-local. A WDM reload receipt has `research_state_effect=none` and
+cannot select, pause, resume or terminate research.
 
 ## Choose exactly one research mode
 
@@ -89,32 +71,26 @@ dispatch. Keep all useful parent and child directions. Stop only at recorded
 convergence, a resource boundary, an external-source expansion or work that
 requires code, compute or formal adoption.
 
-A direction review inside the active user-authorized Explorer grant is external
-advisory input and needs no per-review user or WDM confirmation. Explorer
-freezes one candidate and one review mode, then spawns
-the shared `hmasd-project-operations-operator` in
-`INDEPENDENT_DIRECTION_REVIEW` mode with the exact prompt source, Agentify
-binding, operation identity, item root and one-send limit. The child returns
-one native `INDEPENDENT_RESEARCH_REVIEW_TERMINAL`; the complete Pro content is
-distinct and is consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`. No
-persistent methodology-operator handoff, global page registry or batch
-manifest participates. Each owner/workstream retains its own stable-key/page
-record and exact evidence root. Explorer, not the child or completion order,
-chooses any later candidate or review.
+A direction review or bounded methodology audit inside the active
+user-authorized Explorer grant is external advisory input and needs no
+per-review user or WDM confirmation. Load
+`hmasd-independent-research-pro-review`, then Explorer freezes one exact
+assignment and review mode and directly runs
+`prepare -> submit -> verify -> archive` with
+`transport_owner=independent_research_explorer`, stable key
+`hmasd-independent-research-explorer-pro`, the exact prompt, operation identity
+and item root. No review/monitor child, heartbeat, methodology-operator handoff,
+global page registry or batch transport state participates.
 
-Before spawn, Explorer invokes only the registered `provision-direction`
-command to copy the frozen prompt into its exact new item root. This is the sole
-Explorer write exception under `pro_reviews`; prepare, submit, verify and
-archive remain child-only. WDM never provisions or authorizes a campaign step.
-The exact invocation is:
-
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py' provision-direction --assignment-identity 'IR_DIRECTION_REVIEW:<exact identity>' --prompt-source '<absolute Explorer-owned frozen prompt>' --prompt-path '<absolute local_research/pro_reviews/<review-id>/20_PRO_OPEN_QUESTION.md>'
-```
-
-Operational failure returns to Explorer, which may
-issue a later exact recovery assignment within the same grant without changing
-the scientific question or creating a duplicate send.
+The same request recovers the existing durable operation without another send.
+Before one fresh operation, `submit --verify-existing` must report
+`present=false`; first binding or a missing tab after Agentify restart may use
+`--allow-tab-creation`. Active generation forbids interruption, resend,
+`Answer now`, `Stop`, `Retry` or `Continue`. Archive the exact visible response
+before placing it in the Explorer's local FIFO for scientific reconciliation.
+No hash, digest, fingerprint or byte count is a workflow predicate. Explorer,
+not transport completion order, chooses any later candidate or review. WDM
+never provisions or authorizes a campaign step.
 
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
@@ -124,11 +100,10 @@ confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
 check. Never compare candidates or turn either review into project adoption.
 
-At most one review child may be active on `hmasd-independent-research-pro`.
-Any incomplete assignment, active operation, transport ambiguity or child
-failure returns `BLOCKED`; Explorer does not ask the child to resubmit or choose
-a recovery. A later exact recovery assignment may observe or verify the same
-operation identity.
+At most one operation may be active on
+`hmasd-independent-research-explorer-pro`. An incomplete request or transport
+ambiguity affects that operation only; Explorer continues unrelated research
+and applies the shared minimal recovery rule without creating a duplicate send.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
@@ -259,8 +234,9 @@ The final advisory report includes the campaign direction, corpus coverage,
 source-result matrix, absorption brief, several retained or parked directions,
 mechanism/transfer/combination/split graph, principle analyses, adversarial
 findings, validation-ready candidates, residual gaps, resource disposition and
-convergence basis. The Explorer cannot contact External Pro directly, change CDC state,
-authorize compute, dispatch implementation or advance the formal workflow.
+convergence basis. The Explorer contacts External Pro only through the registered
+direct Agentify procedure above; it cannot change CDC state, authorize compute,
+dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)
 
@@ -268,8 +244,7 @@ When a mature candidate is ready for a toy-project identity intake, emit one
 `EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
 `hmasd-explorer-project-validation` Skill. The packet is routed through the
 CPM-centered lane to a dedicated CPM-owned stable-key Pro conversation, separate
-from both formal Pro transport and the Independent Research Review Operator
-(IRRO). It is not a dispatcher or a transition engine: `candidate_count=1`,
+from formal Pro transport. It is not a dispatcher or a transition engine: `candidate_count=1`,
 `cross_direction_competition=false`, and `combined_toy=false` prevent selecting
 multiple directions in one Pro package.
 

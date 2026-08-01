@@ -5,9 +5,8 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
-formal_transport_owner=code_project_manager_via_project_operations_operator
-independent_methodology_transport_owner=independent_research_review_operator_separate_conversation
-independent_direction_transport_executor=hmasd-project-operations-operator
+formal_transport_owner=code_project_manager
+independent_methodology_transport_owner=independent_research_explorer
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -112,7 +111,7 @@ paths when scientific judgment depends on what the code actually implements.
   inspect named remote evidence directly, identify missing scientific choices
   or counterexamples, and return the question-scoped disposition. Only Code
   Project Manager may package formal reviews; only the Independent Research
-  Pro Review Operator may package the independent methodology audit.
+  Explorer may package the independent methodology audit.
 
 ## Must not
 
@@ -149,7 +148,7 @@ paths when scientific judgment depends on what the code actually implements.
 ## Inputs
 
 - The exact Code-Project-Manager-authored question and allow-list submitted
-  without rewriting by its Project Operations Operator. A code-science
+  without rewriting by Code Project Manager. A code-science
   audit includes Code Project Manager's exact commit-bound critical-point index
   and source identity.
 - For a valid formal result, its exact archived evidence, active grant boundary,
@@ -159,9 +158,9 @@ paths when scientific judgment depends on what the code actually implements.
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, the exact Workflow-Design-
   Manager-committed question and repository allow-list submitted by the
-  registered Independent Research Pro Review Operator from its separate
-  conversation. `CURRENT_WORK.md`, active portfolios, runs and formal review
-  artifacts are not inputs.
+  registered Independent Research Explorer from its persistent conversation.
+  `CURRENT_WORK.md`, active portfolios, runs and formal review artifacts are
+  not inputs.
 - For an independent direction review, one Explorer-frozen prompt and one exact
   candidate artifact. An adversarial prompt also names the newer advisory
   version containing the constructive-correction dispositions. Other candidate
@@ -172,8 +171,8 @@ paths when scientific judgment depends on what the code actually implements.
   named candidate evidence, or one mechanically valid isolated result package.
   The identity envelope and all evidence are bound to one candidate and the
   dedicated CPM-owned conversation. The active formal-research Pro and
-  Independent Research Pro Review Operator conversations are separate and are
-  not interchangeable.
+  Independent Research Explorer conversations are separate and are not
+  interchangeable.
 
 ## Outputs and stop
 
@@ -194,9 +193,8 @@ paths when scientific judgment depends on what the code actually implements.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, return one format-complete
   `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` containing every question-declared
   field. It is advisory to the independent-research Skill and has no
-  project-state, code, compute, CDC or formal-review effect. The independent
-  operator archives it exactly; Workflow Design Manager may encode it without
-  reinterpretation.
+  project-state, code, compute, CDC or formal-review effect. Explorer archives
+  it exactly; Workflow Design Manager may encode it without reinterpretation.
 - For either independent direction-review mode, return one format-complete
   `INDEPENDENT_RESEARCH_DIRECTION_PACKET` containing every question-declared
   field for the sole candidate. It is advisory, has no project-state effect and
@@ -208,6 +206,6 @@ paths when scientific judgment depends on what the code actually implements.
   never authorize compute or accept code. For
   `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, return the scoped scientific
   interpretation plus exactly `CONTINUE_CANDIDATE`, `PARK_CANDIDATE` or
-  `COMPLETE_CANDIDATE`. The Project Operations Operator archives the answer
-  exactly and CPM routes it without
+  `COMPLETE_CANDIDATE`. Explorer archives the answer exactly and routes it
+  without
   converting it into a cross-direction ranking.

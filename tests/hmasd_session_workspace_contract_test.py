@@ -10,74 +10,106 @@ def _text(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
-def test_shared_workflow_design_is_session_scoped() -> None:
-    router = _text("AGENTS.md")
+def test_wdm_is_the_single_workflow_owner() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
-    for required in (
-        "persistent_session_role_local_workflow_design_authority=exclusive_for_owned_surfaces",
-        "persistent_session_role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces",
-        "persistent_session_workflow_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace",
-        "workflow_child_parent=assigning_persistent_session",
-        "workflow_child_acceptance_authority=none",
-        "session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md",
-    ):
-        assert required in router
+    router = _text("AGENTS.md")
     for required in (
         "shared_workflow_surface_owner=workflow_design_manager",
-        "role_local_workflow_surface_owner=exact_persistent_session",
-        "session_owner_role=<locked persistent role>",
-        "session_owner_id=<locked session id>",
-        "owned_paths=<exact nonoverlapping paths>",
-        "WDM is not an approval gate",
+        "shared_workflow_design_authority=exclusive",
+        "shared_workflow_acceptance_authority=exclusive",
+        "shared_workflow_git_authority=exclusive",
+        "workflow_child_parent=workflow_design_manager",
+        "workflow_child_acceptance_authority=none",
+        "workflow_router_consistency_check=required_for_every_workflow_change",
+        "workflow_implementer_parallelism=file_family_adaptive",
+        "Workflow Design Manager is the sole owner",
     ):
         assert required in contract
+    assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
+    assert "persistent_session_workflow_design_authority=none" in router
 
 
-def test_session_workspaces_are_owned_and_partitioned() -> None:
+def test_public_current_work_is_partitioned_and_owned() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    index = _text("docs/project/CURRENT_WORK.md")
+    wdm_session = _text("docs/project/current-work/sessions/workflow_design_manager.md")
+    wdm_common = _text("docs/project/current-work/common/workflow_control_plane.md")
     normalized = " ".join(contract.split())
+    for required in (
+        "public_current_work_partition_status=active_index_and_partitions",
+        "docs/project/current-work/common/",
+        "docs/project/current-work/sessions/",
+        "A session may edit only its own session record",
+        "workflow_control_plane",
+    ):
+        assert required in normalized
+    for required in (
+        "session_record_ids=code_project_manager|workflow_design_manager",
+        "index_owner=workflow_design_manager",
+        "workflow_control_plane",
+        "current-work/sessions/workflow_design_manager.md",
+    ):
+        assert required in index
+    assert "workflow_index_owner=" not in index
+    assert "session_owner_id=019fb73d-5635-7b63-b165-6c5129bc0217" in wdm_session
+    assert "owner_role=workflow_design_manager" in wdm_common
+
+
+def test_durable_and_temporary_workspaces_remain_separate() -> None:
+    contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     readme = _text("docs/session-workspaces/workflow_design_manager/README.md")
-    ignore = _text(".gitignore")
     for required in (
         "docs/session-workspaces/<role_id>/",
         "temp/sessions/<role_id>/",
-        "docs/project/current-work/common/<record-id>.md",
-        "docs/project/current-work/sessions/<role_id>.md",
         "same_file_concurrent_writes=forbidden",
-        "public_current_work_partition_status=phase_two_role_adoption_required",
-        "public_current_work_partition_authority=none_in_phase_one",
-        "grants no public-entry or partition read/write authority",
-        "only that role's access",
-        "may edit only its own session file",
+        "No hash, byte count or digest is required",
+    ):
+        assert required in contract
+    assert "workflow_surface_owner=true" in readme
+
+
+def test_wdm_defect_reports_are_archived_and_processed_fifo() -> None:
+    contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    normalized = " ".join(contract.split())
+    queue = _text("docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md")
+    for required in (
+        "workflow_defect_queue=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md",
+        "workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED",
+        "receipt order",
+        "advisory inputs",
     ):
         assert required in normalized
-    assert "After activation, all registered persistent sessions may read" not in normalized
-    assert "session_owner_role=workflow_design_manager" in readme
-    assert "!docs/session-workspaces/**/*.md" in ignore
-    assert "!/temp/README.md" in ignore
-
-
-def test_shared_children_are_owner_neutral_and_advisory() -> None:
-    for name in (
-        "WORKFLOW_AUDITOR.md",
-        "WORKFLOW_IMPLEMENTER.md",
-        "WORKFLOW_REVIEWER.md",
-        "WORKFLOW_COST_REVIEWER.md",
+    for required in (
+        "ordering=receipt_order_fifo",
+        "states=QUEUED|ACTIVE|CLOSED",
+        "active_limit=1",
+        "report_authority=advisory_only",
+        "hash_identity=forbidden",
     ):
-        role = _text(f".agents/roles/{name}")
-        assert "parent=assigning_persistent_session" in role
-        assert "session_owner_role" in role
-        assert "session_owner_id" in role
-        assert "owned_paths" in role
-        assert "session_workspace" in role
-        assert "acceptance_authority=none" in role or "workflow_acceptance_authority=none" in role
+        assert required in queue
 
 
-def test_role_local_git_grants_do_not_expand_research_artifact_authority() -> None:
+def test_non_workflow_role_ownership_is_preserved() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    normalized = " ".join(contract.split())
+    assert "Code Project Manager keeps exclusive authority for code" in normalized
+    assert "Independent Research Explorer keeps exclusive authority for advisory research" in normalized
+    assert "Those role-local authorities do not include workflow" in normalized
+    assert "may fetch and push only their non-workflow code" in normalized
+
+
+def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
+    role = _text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md")
+    for required in (
+        "Explorer remains the sole owner of its research plans, continuity notes",
+        "all temporary/session research artifacts under its durable and temporary workspace",
+        "WDM is the single acceptance owner for the explicitly listed Explorer workflow artifacts",
+        "acceptance does not grant workspace cleanup or write authority",
+    ):
+        assert required in contract
     assert (
-        "independent_research_role_local_workflow_git_authority=direct_for_owned_surfaces"
-        in contract
+        "centralized_explorer_workflow_acceptance_owner=workflow_design_manager_for_listed_artifacts_only"
+        in role
     )
-    assert "does not extend to `local_research/`" in contract
-    assert "another session's files" in " ".join(contract.split())
+    assert "centralized_explorer_workspace_cleanup_write_authority=none" in role

@@ -84,8 +84,8 @@ repository paths. Ask Pro to seek counterexamples and missing decisions, not to
 confirm the plan. Pro freezes the scientific distinction and required
 properties; Code Project Manager owns the cheapest bounded controller, witness, diagnostic and
 other implementation realization inside
-`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Operations Operator
-archives the exact raw; Code Project Manager implements the frozen
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Code Project Manager directly
+archives the exact raw before local FIFO intake and implements the frozen
 disposition and may report one
 focused code-side ambiguity or infeasibility in a Pro question, but neither
 role may select among scientifically different answers.
@@ -145,8 +145,8 @@ reopen design. An unchanged reviewed commit is never resubmitted; there is no re
 ## Result intake
 
 Before scientific interpretation, the Experiment Operator gives Code Project
-Manager the exact artifact paths. Code Project Manager may assign mechanical
-intake to Project Operations Operator, then accepts checks in this order:
+Manager the exact artifact paths. Code Project Manager performs mechanical
+intake directly, then accepts checks in this order:
 
 1. artifact/source/runtime closure and operational validity;
 2. access and identifiability branches before behavioral branches;
@@ -182,9 +182,10 @@ must target bounded-neighborhood `O(N*k_neighbor)` or hierarchical
 `O(N*logN)`. Sparsifying or approximating the physical model changes science and
 therefore returns to Stage A instead of being hidden as a performance repair.
 
-An experiment-operator or project-operations-operator terminal return wakes Code
-Project Manager. With an active grant, no live owned operation and no real
-authority blocker, Code Project Manager executes the exact Pro-selected action,
-opens its code component as the next exact assignment, or asks
-External Pro for the smallest missing scientific decision; neither native role fills that
-decision locally or leaves an idle gap.
+An Experiment Operator terminal return goes directly to Code Project Manager,
+which owns the experiment terminal and formal Pro-transport semantics. With an
+active grant, no live owned operation and no real authority blocker, Code
+Project Manager executes the exact Pro-selected action, opens its code
+component as the next exact assignment, or asks External Pro for the smallest
+missing scientific decision; neither native role fills that decision locally or
+leaves an idle gap.

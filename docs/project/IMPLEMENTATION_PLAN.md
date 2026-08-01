@@ -607,8 +607,11 @@ feasibility checks before implementation.
 
 The code-worker benchmark selects Terra-high implementer and Luna-max reviewer.
 The registered profiles are loaded after restart. Machine-resolved workspace
-tickets protect isolated worktrees. Research Operations Manager owns Agentify
-Pro transport and exact raw archival. Every cross-task send explicitly
-passes the assignment-current target model and effort. These operational
-changes consume no conclusion-bearing iteration. Continue the G33 design audit
-under the remaining 13-iteration grant.
+tickets protect isolated worktrees. Code Project Manager directly owns Agentify
+Pro transport and exact raw archival for formal and Explorer-to-project review;
+the Independent Research Explorer directly owns its independent direction
+reviews, while Workflow Design Manager owns only stable workflow contract
+design. Every cross-task send explicitly passes the assignment-current target
+model and effort. These operational changes consume no conclusion-bearing
+iteration. Continue the G33 design audit under the remaining 13-iteration
+grant.

@@ -9,8 +9,8 @@ This Skill is the mechanical boundary for the Explorer-to-project toy lane and
 its CPM-centered lane and routing.
 It creates no project state and grants no compute, code, scientific, or current-
 work authority. The dedicated CPM-owned stable-key Pro conversation is separate
-from both the formal Pro transport and the Independent Research Review Operator
-(IRRO) conversation.
+from both formal Pro transport and the Explorer-owned independent-research Pro
+conversation.
 
 The packet is an `EXPLORER_PROJECT_CANDIDATE_PACKET` with
 `document_kind=explorer_project_candidate_packet_v1`. It is advisory input only:

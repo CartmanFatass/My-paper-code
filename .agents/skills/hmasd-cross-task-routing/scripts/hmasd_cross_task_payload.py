@@ -1,9 +1,8 @@
-"""Create and verify local UTF-8 payloads for HMASD cross-task handoffs."""
+"""Create and verify owner-scoped UTF-8 files for HMASD task handoffs."""
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import re
@@ -14,11 +13,10 @@ from pathlib import Path
 
 LABEL_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,79}\Z")
 ROLE_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]{0,79}\Z")
-SHA256_RE = re.compile(r"[0-9a-f]{64}\Z")
 
 
 class HandoffError(RuntimeError):
-    """A fail-closed handoff identity or filesystem error."""
+    """A fail-closed owner, path or UTF-8 error."""
 
 
 def _repo_root(value: str) -> Path:
@@ -38,54 +36,43 @@ def _validate_owner_role(owner_role: str) -> str:
 
 def _handoff_root(repo: Path, owner_role: str) -> Path:
     _validate_owner_role(owner_role)
-    repo_root = repo.resolve()
-    handoff_root = (repo_root / "temp" / "sessions" / owner_role / "handoffs").resolve()
+    root = (repo / "temp" / "sessions" / owner_role / "handoffs").resolve()
     try:
-        handoff_root.relative_to(repo_root)
+        root.relative_to(repo.resolve())
     except ValueError as exc:
         raise HandoffError("owner role path escapes the repository") from exc
-    return handoff_root
+    return root
 
 
-def _valid_utf8(payload: bytes) -> None:
+def _decode_utf8(payload: bytes) -> None:
     try:
         payload.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise HandoffError("payload is not valid UTF-8") from exc
 
 
-def _metadata(
-    repo: Path,
-    path: Path,
-    payload: bytes,
-    status: str,
-    owner_role: str,
-) -> dict[str, object]:
-    _validate_owner_role(owner_role)
+def _metadata(repo: Path, path: Path, status: str, owner_role: str) -> dict[str, str]:
     return {
         "status": status,
         "handoff_path": path.relative_to(repo).as_posix(),
-        "handoff_owner_role": owner_role,
-        "handoff_bytes": len(payload),
-        "handoff_sha256": hashlib.sha256(payload).hexdigest(),
+        "handoff_owner_role": _validate_owner_role(owner_role),
         "handoff_encoding": "utf-8",
     }
 
 
 def write_payload(
     repo: Path, label: str, source: str | None, owner_role: str
-) -> dict[str, object]:
+) -> dict[str, str]:
     _validate_owner_role(owner_role)
     if not LABEL_RE.fullmatch(label):
         raise HandoffError("label must match [A-Za-z0-9][A-Za-z0-9._-]{0,79}")
     payload = Path(source).read_bytes() if source is not None else sys.stdin.buffer.read()
-    _valid_utf8(payload)
-    digest = hashlib.sha256(payload).hexdigest()
-    handoff_root = _handoff_root(repo, owner_role)
-    handoff_root.mkdir(parents=True, exist_ok=True)
+    _decode_utf8(payload)
+    root = _handoff_root(repo, owner_role)
+    root.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-    target = handoff_root / f"{timestamp}_{label}_{digest[:12]}.txt"
-    temporary = handoff_root / f".{target.name}.{os.getpid()}.tmp"
+    target = root / f"{timestamp}_{label}.txt"
+    temporary = root / f".{target.name}.{os.getpid()}.tmp"
     if target.exists() or temporary.exists():
         raise HandoffError("generated handoff path already exists")
     try:
@@ -97,16 +84,18 @@ def write_payload(
     finally:
         if temporary.exists():
             temporary.unlink()
-    return _metadata(repo, target, payload, "LONG_TEXT_HANDOFF_WRITTEN", owner_role)
+    return _metadata(repo, target, "LONG_TEXT_HANDOFF_WRITTEN", owner_role)
 
 
 def _resolve_handoff(repo: Path, value: str, owner_role: str) -> Path:
-    _validate_owner_role(owner_role)
     candidate = Path(value)
-    path = candidate.resolve() if candidate.is_absolute() else (repo / candidate).resolve()
-    handoff_root = _handoff_root(repo, owner_role)
+    lexical = candidate if candidate.is_absolute() else repo / candidate
+    if lexical.is_symlink():
+        raise HandoffError("handoff path must not be a symlink")
+    path = lexical.resolve()
+    root = _handoff_root(repo, owner_role)
     try:
-        relative = path.relative_to(handoff_root)
+        relative = path.relative_to(root)
     except ValueError as exc:
         raise HandoffError(
             "handoff path is outside the owner's temp/sessions/<role>/handoffs"
@@ -116,27 +105,10 @@ def _resolve_handoff(repo: Path, value: str, owner_role: str) -> Path:
     return path
 
 
-def verify_payload(
-    repo: Path,
-    path_value: str,
-    expected_bytes: int,
-    expected_sha256: str,
-    owner_role: str,
-) -> dict[str, object]:
-    _validate_owner_role(owner_role)
-    if expected_bytes < 0:
-        raise HandoffError("expected byte count must be nonnegative")
-    if not SHA256_RE.fullmatch(expected_sha256):
-        raise HandoffError("expected SHA-256 must be 64 lowercase hex characters")
+def verify_payload(repo: Path, path_value: str, owner_role: str) -> dict[str, str]:
     path = _resolve_handoff(repo, path_value, owner_role)
-    payload = path.read_bytes()
-    _valid_utf8(payload)
-    actual = _metadata(repo, path, payload, "LONG_TEXT_HANDOFF_VERIFIED", owner_role)
-    if actual["handoff_bytes"] != expected_bytes:
-        raise HandoffError("handoff byte count mismatch")
-    if actual["handoff_sha256"] != expected_sha256:
-        raise HandoffError("handoff SHA-256 mismatch")
-    return actual
+    _decode_utf8(path.read_bytes())
+    return _metadata(repo, path, "LONG_TEXT_HANDOFF_VERIFIED", owner_role)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -150,8 +122,6 @@ def _parser() -> argparse.ArgumentParser:
     verify = subparsers.add_parser("verify")
     verify.add_argument("--owner-role", required=True)
     verify.add_argument("--path", required=True)
-    verify.add_argument("--bytes", type=int, required=True)
-    verify.add_argument("--sha256", required=True)
     return parser
 
 
@@ -159,12 +129,11 @@ def main() -> int:
     args = _parser().parse_args()
     try:
         repo = _repo_root(args.repo)
-        if args.command == "write":
-            result = write_payload(repo, args.label, args.source, args.owner_role)
-        else:
-            result = verify_payload(
-                repo, args.path, args.bytes, args.sha256, args.owner_role
-            )
+        result = (
+            write_payload(repo, args.label, args.source, args.owner_role)
+            if args.command == "write"
+            else verify_payload(repo, args.path, args.owner_role)
+        )
     except (HandoffError, OSError) as exc:
         print(json.dumps({"status": "LONG_TEXT_HANDOFF_INVALID", "error": str(exc)}))
         return 2

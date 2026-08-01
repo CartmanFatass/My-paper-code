@@ -217,7 +217,6 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
     repo, _ = repository(tmp_path)
     (repo / "AGENTS.md").write_text(
         "independent_research_explorer_session=research-session\n"
-        "independent_research_review_operator_session=review-session\n"
         "hmasd_python_interpreter=C:/Python/python.exe\n",
         encoding="utf-8",
     )
@@ -464,7 +463,7 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
             {"command": "git diff --output=AGENTS.md"},
             session_id="research-session",
         ),
-        "option can execute or write",
+        "Git mutation is forbidden",
     )
     for option in ("--ext-diff", "--textconv"):
         assert_denied(
@@ -474,207 +473,118 @@ def test_registered_research_session_writes_only_local_research(tmp_path: Path) 
                 {"command": f"git diff {option}"},
                 session_id="research-session",
             ),
-            "option can execute or write",
+            "Git mutation is forbidden",
         )
-    assert (
+    assert_denied(
         invoke(
             repo,
             "shell_command",
             {"command": "git status --short"},
             session_id="research-session",
-        )
-        is None
-    )
-
-
-def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_helpers(
-    tmp_path: Path,
-) -> None:
-    repo, _ = repository(tmp_path)
-    (repo / "AGENTS.md").write_text(
-        "independent_research_explorer_session=research-session\n"
-        "independent_research_review_operator_session=review-session\n"
-        "hmasd_python_interpreter=C:/Python/python.exe\n",
-        encoding="utf-8",
-    )
-    pro_reviews = repo / "local_research" / "pro_reviews"
-    pro_reviews.mkdir(parents=True)
-    review = pro_reviews / "audit-1"
-    review.mkdir()
-    packet = review / "60_METHODOLOGY_PACKET.md"
-    packet.write_text("packet\n", encoding="utf-8")
-
-    assert (
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/pro_reviews/audit-1/raw.md\n*** End Patch",
-            session_id="review-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/explorer-note.md\n*** End Patch",
-            session_id="review-session",
-        ),
-        "outside the writable scope",
-    )
-    handoff_command = (
-        f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-cross-task-routing/scripts/'
-        f'hmasd_cross_task_payload.py" --repo "{repo}" write --label methodology '
-        f'--source "{packet}"'
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": handoff_command},
-            session_id="review-session",
-        )
-        is None
-    )
-    wrapper = f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py" submit'
-    assert invoke(repo, "shell_command", {"command": f'{wrapper} --request "{review / "request.json"}" --receipt "{review / "receipt.json"}"'}, session_id="review-session") is None
-    assert_denied(invoke(repo, "shell_command", {"command": f'{wrapper} --request "{review / "request.json"}" --receipt "{repo / "outside.json"}"'}, session_id="review-session"), "use a registered research script or apply_patch")
-    for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
-        command = (
-            'powershell -ExecutionPolicy Bypass -File '
-            f'"{repo}/.agents/skills/hmasd-agentify-pro-transport/scripts/{basename}"'
-        )
-        assert (
-            invoke(
-                repo,
-                "shell_command",
-                {"command": command},
-                session_id="review-session",
-            )
-            is None
-        )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git status --short"},
-            session_id="review-session",
         ),
         "Git mutation is forbidden",
     )
 
 
-def test_explorer_native_review_child_uses_only_registered_agentify_item_paths(
+def test_explorer_direct_review_is_confined_to_local_research_and_item_roots(
     tmp_path: Path,
 ) -> None:
     repo, _ = repository(tmp_path)
     (repo / "AGENTS.md").write_text(
         "independent_research_explorer_session=research-session\n"
-        "independent_research_review_operator_session=review-session\n"
         "hmasd_python_interpreter=C:/Python/python.exe\n",
         encoding="utf-8",
     )
-    item = repo / "local_research" / "pro_reviews" / "direction-1"
-    sibling = repo / "local_research" / "pro_reviews" / "direction-2"
-    item.mkdir(parents=True)
-    sibling.mkdir(parents=True)
-    wrapper = (
-        f'C:/Python/python.exe "{repo}/.agents/skills/'
-        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
-    )
-    allowed = (
-        f'{wrapper} prepare --owner independent_research_review_operator '
-        '--stable-key hmasd-independent-research-pro --model Pro '
+    pro_reviews = repo / "local_research" / "pro_reviews"
+    pro_reviews.mkdir(parents=True)
+    review = pro_reviews / "direction-1"
+    review.mkdir()
+    prompt = review / "20_PRO_OPEN_QUESTION.md"
+    prompt.write_text("IR_DIRECTION_REVIEW:assignment-1\nReview exactly.\n", encoding="utf-8")
+    wrapper = f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    prepare = (
+        f'{wrapper} prepare --owner independent_research_explorer '
+        '--stable-key hmasd-independent-research-explorer-pro --model Pro '
         '--conversation-url https://chatgpt.com/c/test --conversation-id test '
         '--assignment-identity IR_DIRECTION_REVIEW:assignment-1 --operation-key operation-1 '
-        f'--prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}" '
-        f'--selection "{item / "selection.json"}" '
-        f'--request "{item / "request.json"}"'
+        f'--prompt-path "{prompt}" --selection "{review / "TRANSPORT_BACKEND.json"}" '
+        f'--request "{review / "REQUEST.json"}"'
     )
-    assert_denied(
+
+    assert (
         invoke(
             repo,
             "shell_command",
-            {"command": allowed},
+            {"command": prepare},
             session_id="research-session",
-        ),
-        "registered research script",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": allowed},
-            session_id="native-child-session",
-            cwd=item,
+            cwd=review,
         )
         is None
-    )
-    wrong_identity = allowed.replace(
-        "IR_DIRECTION_REVIEW:assignment-1", "ordinary-assignment-1"
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": wrong_identity},
-            session_id="unknown-session",
-            cwd=item,
-        ),
-        "registered research script",
-    )
-    (item / "request.json").write_text(
-        json.dumps(
-            {
-                "assignment_identity": "IR_DIRECTION_REVIEW:assignment-1",
-                "transport_owner": "independent_research_review_operator",
-                "stable_key": "hmasd-independent-research-pro",
-                "model": "Pro",
-            }
-        ),
-        encoding="utf-8",
-    )
-    allowed_verify = (
-        f'{wrapper} verify --request "{item / "request.json"}" '
-        f'--receipt "{item / "receipt.json"}"'
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": allowed_verify},
-            session_id="native-child-session",
-            cwd=item,
-        )
-        is None
-    )
-    sibling_write = (
-        f'{wrapper} verify --request "{item / "request.json"}" '
-        f'--receipt "{sibling / "receipt.json"}"'
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": sibling_write},
-            session_id="native-child-session",
-            cwd=item,
-        ),
-        "registered research script",
     )
     assert_denied(
         invoke(
             repo,
             "apply_patch",
-            f"*** Begin Patch\n*** Add File: {item / 'manual.md'}\n*** End Patch",
-            session_id="native-child-session",
-            cwd=item,
+            "*** Begin Patch\n*** Add File: local_research/pro_reviews/direction-1/raw.md\n*** End Patch",
+            session_id="research-session",
         ),
-        "writes only through registered Agentify transport",
+        "reserved for another role",
+    )
+    assert (
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/explorer-note.md\n*** End Patch",
+            session_id="research-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "git status --short"},
+            session_id="research-session",
+        ),
+        "Git mutation is forbidden",
     )
 
 
-def test_explorer_can_provision_one_direction_prompt_but_not_run_transport(
+def test_explorer_direct_review_does_not_spawn_external_review_child_or_monitor(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    item = repo / "local_research" / "pro_reviews" / "direction-1"
+    item.mkdir(parents=True)
+    (item / "20_PRO_OPEN_QUESTION.md").write_text(
+        "IR_DIRECTION_REVIEW:assignment-1\nReview exactly.\n", encoding="utf-8"
+    )
+    wrapper = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/'
+        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    )
+    prepare = (
+        f'{wrapper} prepare --owner independent_research_explorer '
+        '--stable-key hmasd-independent-research-explorer-pro --model Pro '
+        '--conversation-url https://chatgpt.com/c/test --conversation-id test '
+        '--assignment-identity IR_DIRECTION_REVIEW:assignment-1 --operation-key operation-1 '
+        f'--prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}" '
+        f'--selection "{item / "TRANSPORT_BACKEND.json"}" '
+        f'--request "{item / "REQUEST.json"}"'
+    )
+    assert invoke(repo, "shell_command", {"command": prepare}, session_id="research-session", cwd=item) is None
+    assert_denied(
+        invoke(repo, "shell_command", {"command": prepare}, session_id="native-child-session", cwd=item),
+        "registered persistent session",
+    )
+
+
+def test_explorer_can_provision_and_run_one_direction_review_directly(
     tmp_path: Path,
 ) -> None:
     repo, _ = repository(tmp_path)
@@ -708,8 +618,8 @@ def test_explorer_can_provision_one_direction_prompt_but_not_run_transport(
         is None
     )
     prepare = (
-        f'{wrapper} prepare --owner independent_research_review_operator '
-        '--stable-key hmasd-independent-research-pro --model Pro '
+        f'{wrapper} prepare --owner independent_research_explorer '
+        '--stable-key hmasd-independent-research-explorer-pro --model Pro '
         '--conversation-url https://chatgpt.com/c/test --conversation-id test '
         '--assignment-identity IR_DIRECTION_REVIEW:direction-new '
         '--operation-key direction-new-operation '
@@ -717,15 +627,108 @@ def test_explorer_can_provision_one_direction_prompt_but_not_run_transport(
         f'--selection "{item / "TRANSPORT_BACKEND.json"}" '
         f'--request "{item / "REQUEST.json"}"'
     )
-    assert_denied(
-        invoke(repo, "shell_command", {"command": prepare}, session_id="research-session", cwd=repo),
-        "registered research script",
-    )
+    assert invoke(repo, "shell_command", {"command": prepare}, session_id="research-session", cwd=repo) is None
     wrong_destination = provision.replace(
         "20_PRO_OPEN_QUESTION.md", "NONCANONICAL.md"
     )
     assert_denied(
         invoke(repo, "shell_command", {"command": wrong_destination}, session_id="research-session", cwd=repo),
+        "registered research script",
+    )
+
+
+def test_unknown_session_cannot_invoke_agentify_review_wrapper_from_repository_root(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    item = repo / "local_research/pro_reviews/review-1"
+    item.mkdir(parents=True)
+    prompt = item / "20_PRO_OPEN_QUESTION.md"
+    prompt.write_text("IR_DIRECTION_REVIEW:review-1\n", encoding="utf-8")
+    request = item / "REQUEST.json"
+    request.write_text(
+        json.dumps(
+            {
+                "assignment_identity": "IR_DIRECTION_REVIEW:review-1",
+                "transport_owner": "independent_research_explorer",
+                "stable_key": "hmasd-independent-research-explorer-pro",
+                "model": "Pro",
+            }
+        ),
+        encoding="utf-8",
+    )
+    wrapper = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/'
+        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    )
+    commands = (
+        f'{wrapper} provision-direction --assignment-identity IR_DIRECTION_REVIEW:review-1 '
+        f'--prompt-source "{repo / "local_research/source.md"}" --prompt-path "{prompt}"',
+        f'{wrapper} prepare --owner independent_research_explorer '
+        '--stable-key hmasd-independent-research-explorer-pro --model Pro '
+        '--conversation-url https://chatgpt.com/c/test --conversation-id test '
+        '--assignment-identity IR_DIRECTION_REVIEW:review-1 --operation-key review-1 '
+        f'--prompt-path "{prompt}" --selection "{item / "TRANSPORT_BACKEND.json"}" '
+        f'--request "{request}"',
+        f'{wrapper} submit --request "{request}" --receipt "{item / "RECEIPT.json"}"',
+        f'{wrapper} verify --request "{request}" --receipt "{item / "RECEIPT.json"}"',
+        f'{wrapper} archive --request "{request}" --receipt "{item / "RECEIPT.json"}" '
+        f'--raw-output "{item / "21_PRO_OPEN_RAW.md"}"',
+    )
+    for command in commands:
+        assert_denied(
+            invoke(
+                repo,
+                "shell_command",
+                {"command": command},
+                session_id="unknown-session",
+                cwd=repo,
+            ),
+            "registered direct-transport session",
+        )
+
+
+def test_explorer_methodology_provision_and_assignment_kind_are_exact(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    source = repo / "local_research/methodology.md"
+    source.parent.mkdir(parents=True)
+    source.write_text("IR_METHODOLOGY_REVIEW:method-1\n", encoding="utf-8")
+    item = repo / "local_research/pro_reviews/method-1"
+    wrapper = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/'
+        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    )
+    provision = (
+        f'{wrapper} provision-direction --assignment-identity IR_METHODOLOGY_REVIEW:method-1 '
+        f'--prompt-source "{source}" --prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}"'
+    )
+    assert invoke(
+        repo,
+        "shell_command",
+        {"command": provision},
+        session_id="research-session",
+        cwd=repo,
+    ) is None
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": provision.replace("IR_METHODOLOGY_REVIEW:", "IR_UNKNOWN_REVIEW:")},
+            session_id="research-session",
+            cwd=repo,
+        ),
         "registered research script",
     )
 
