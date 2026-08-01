@@ -89,14 +89,9 @@ review_transport_agentify_conversation_identity=runtime_only
 review_transport_agentify_credentials=runtime_only
 review_transport_agentify_sentinel=forbidden
 review_transport_agentify_monitor=forbidden
-review_transport_maintenance_lease_scope=one_exact_assignment
-review_transport_maintenance_pre_send_evidence=sendActionCount_0_plus_no_user_message_plus_before_send_click
-review_transport_maintenance_repair_commit_limit=2
-review_transport_maintenance_smoke_operation_limit=2
-review_transport_maintenance_repin_limit=1
-review_transport_maintenance_real_replacement_limit=2
-review_transport_maintenance_smoke_conversation=one_persistent_binding
-review_transport_maintenance_post_click_or_uncertain_replacement=forbidden
+review_transport_generation_active_send=forbidden
+review_transport_recovery_resend_limit=1
+review_transport_recovery_reauthorization=not_required
 formal_compute_authority=user_only
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
@@ -143,18 +138,12 @@ in-app browser path remains available as an alternative, but it is never used
 in parallel for the same round. A transport receipt does not authorize science,
 compute, code acceptance or project-state mutation.
 
-For an exact assignment covered by a user-confirmed Agentify transport-
-maintenance lease, Operations may route adapter repair to Workflow Design
-Manager without requesting authorization again for every pre-send repair. The
-lease is eligible only when the durable Agentify operation proves
-`sendActionCount=0`, no `userMessageId`, `failureStage=before_send_click`, no
-server-visible user message and no assistant response. `sendCount=0` alone is
-never eligibility evidence. Each repaired real-review attempt uses a fresh
-operation identity; an old operation is never reused for sending. Any click,
-message identity or uncertain send for the frozen real-review assignment closes
-replacement authority immediately. An authorized synthetic-smoke send consumes one smoke operation but does not itself close the assignment lease.
-Synthetic compatibility checks reuse the single persistent smoke conversation
-and create only fresh operation identities, not new smoke conversations.
+Before any Agentify send, Operations lets the adapter check the registered
+conversation. If generation is active, it waits and sends nothing. If the page
+is idle, it may send. A failed operation remains closed, but Operations may
+create one fresh recovery operation for the same unchanged question without a
+new user authorization. Prompt hashes, rendered text, attachment bytes and
+composer identity do not decide recovery. No synthetic smoke is required.
 
 Read `docs/project/CURRENT_WORK.md`, this charter and only the paths named by the
 current operational boundary. This is the sole persistent owner of the active

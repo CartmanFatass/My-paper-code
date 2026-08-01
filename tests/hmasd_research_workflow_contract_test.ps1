@@ -224,25 +224,21 @@ foreach ($entry in @(
     @($operationsRole, 'review_transport_agentify_formal_stable_key=hmasd-formal-pro'),
     @($operationsRole, 'review_transport_agentify_explorer_validation_stable_key=hmasd-explorer-validation-pro'),
     @($operationsRole, 'review_transport_agentify_monitor=forbidden'),
-    @($operationsRole, 'review_transport_maintenance_lease_scope=one_exact_assignment'),
-    @($operationsRole, 'An authorized synthetic-smoke send consumes one smoke operation but does not itself close the assignment lease'),
-    @($operationsRole, 'review_transport_maintenance_smoke_operation_limit=2'),
-    @($operationsRole, 'review_transport_maintenance_smoke_conversation=one_persistent_binding'),
-    @($operationsRole, 'review_transport_maintenance_post_click_or_uncertain_replacement=forbidden'),
-    @($workflowDesignManagerRole, 'agentify_transport_maintenance_lease=assignment_scoped_only'),
-    @($workflowDesignManagerRole, 'agentify_transport_maintenance_real_review_send=forbidden'),
+    @($operationsRole, 'review_transport_generation_active_send=forbidden'),
+    @($operationsRole, 'review_transport_recovery_resend_limit=1'),
+    @($operationsRole, 'review_transport_recovery_reauthorization=not_required'),
+    @($workflowDesignManagerRole, 'agentify_transport_recovery_design=minimal_generation_guard'),
+    @($workflowDesignManagerRole, 'agentify_transport_real_review_send=forbidden'),
     @($independentReviewRole, 'review_transport_agentify_stable_key=hmasd-independent-research-pro'),
     @($independentReviewRole, 'review_transport_agentify_monitor=forbidden'),
     @($independentReviewSkill, '$hmasd-agentify-pro-transport'),
     @($agentifyTransportSkill, 'transport_backend'),
     @($agentifyTransportSkill, 'transport_owner'),
     @($agentifyTransportSkill, 'assignment_identity'),
-    @($agentifyTransportSkill, 'prompt_sha256'),
     @($agentifyTransportSkill, 'timeout_ms'),
-    @($agentifyTransportSkill, 'sendActionCount=0'),
-    @($agentifyTransportSkill, 'LEASE_CLOSED_BUDGET_EXHAUSTED'),
-    @($agentifyTransportSkill, 'hmasd-agentify-transport-smoke'),
-    @($agentifyTransportContractNormalized, 'agentify_required_commit=001c1a57e82a232137706412ad0fd8a09b9a4465'),
+    @($agentifyTransportSkill, 'Active generation means wait without sending'),
+    @($agentifyTransportSkill, 'resend requires a new user instruction'),
+    @($agentifyTransportContractNormalized, 'agentify_required_commit=3a69613a4363091014733123e3f0cea82c5b76e5'),
     @($agentifyTransportContractNormalized, 'runtime-only'),
     @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
     @($agentifyTransportContractNormalized, 'sourceDirty'),
@@ -251,13 +247,14 @@ foreach ($entry in @(
     @($agentifyTransportScript, 'backend_selection_path'),
     @($agentifyTransportScript, 'AGENTIFY_REQUIRED_COMMIT'),
     @($agentifyTransportScript, 'sendCount'),
-    @($agentifyTransportScript, 'sendActionCount'),
-    @($agentifyTransportScript, 'newUserMessageCount'),
     @($agentifyTransportScript, 'snapshot_stability_too_short')
 )) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify route/contract coupling missing: $($entry[1])"
     }
+}
+if ($agentifyTransportScript.Contains('"prompt_sha256"')) {
+    throw 'Agentify wrapper must not use prompt_sha256 as a request or recovery gate'
 }
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',

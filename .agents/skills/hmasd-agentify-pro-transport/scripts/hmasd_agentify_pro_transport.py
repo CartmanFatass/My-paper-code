@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = 1
 MAX_TIMEOUT_MS = 45 * 60 * 1000
-AGENTIFY_REQUIRED_COMMIT = "001c1a57e82a232137706412ad0fd8a09b9a4465"
+AGENTIFY_REQUIRED_COMMIT = "3a69613a4363091014733123e3f0cea82c5b76e5"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
@@ -44,7 +44,6 @@ REQUEST_FIELDS = {
     "assignment_identity",
     "backend_selection_path",
     "prompt_path",
-    "prompt_sha256",
     "timeout_ms",
 }
 BACKEND_SELECTION_FIELDS = {
@@ -52,7 +51,6 @@ BACKEND_SELECTION_FIELDS = {
     "assignment_identity",
     "transport_backend",
     "operation_key",
-    "prompt_sha256",
 }
 
 
@@ -150,9 +148,6 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
     if not KEY_RE.fullmatch(idempotency_key):
         _fail("invalid_idempotency_key")
     assignment_identity = _required_text(raw.get("assignment_identity"), "assignment_identity", maximum=1024)
-    prompt_sha256 = _required_text(raw.get("prompt_sha256"), "prompt_sha256", maximum=64)
-    if not SHA256_RE.fullmatch(prompt_sha256):
-        _fail("invalid_prompt_sha256")
     backend_selection_path = _require_within(
         Path(_required_text(raw.get("backend_selection_path"), "backend_selection_path", maximum=32768)),
         _owner_roots(repo_root, owner, "runtime"),
@@ -168,7 +163,6 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
         or backend_selection.get("assignment_identity") != assignment_identity
         or backend_selection.get("transport_backend") != "agentify"
         or backend_selection.get("operation_key") != idempotency_key
-        or backend_selection.get("prompt_sha256") != prompt_sha256
     ):
         _fail("backend_selection_mismatch")
     timeout_ms = _required_int(raw.get("timeout_ms"), "timeout_ms", minimum=3000, maximum=MAX_TIMEOUT_MS)
@@ -184,8 +178,8 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
         prompt = prompt_bytes.decode("utf-8")
     except (OSError, UnicodeError) as exc:
         raise TransportError("prompt_not_exact_utf8") from exc
-    if not prompt or _sha256(prompt_bytes) != prompt_sha256:
-        _fail("prompt_hash_mismatch")
+    if not prompt:
+        _fail("prompt_empty")
     if assignment_identity not in prompt:
         _fail("assignment_identity_not_in_prompt")
     return {
@@ -201,7 +195,6 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
         "assignment_identity": assignment_identity,
         "backend_selection_path": str(backend_selection_path),
         "prompt_path": str(prompt_path),
-        "prompt_sha256": prompt_sha256,
         "timeout_ms": timeout_ms,
         "prompt": prompt,
     }
@@ -216,7 +209,6 @@ def agentify_body(request: dict[str, Any], *, verify_existing: bool) -> dict[str
         "conversationId": request["conversation_id"],
         "idempotencyKey": request["idempotency_key"],
         "prompt": request["prompt"],
-        "promptSha256": request["prompt_sha256"],
         "timeoutMs": request["timeout_ms"],
         "verifyExisting": bool(verify_existing),
     }
@@ -287,17 +279,13 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         "stableKey": request["stable_key"],
         "provider": request["provider"],
         "model": request["model"],
-        "modelEvidence": request["model"],
         "conversationUrl": request["conversation_url"],
         "conversationId": request["conversation_id"],
         "idempotencyKey": request["idempotency_key"],
-        "promptSha256": request["prompt_sha256"],
         "timeoutMs": request["timeout_ms"],
         "status": "COMPLETE",
         "terminalState": "NATURAL_COMPLETION_VERIFIED",
         "sendCount": 1,
-        "sendActionCount": 1,
-        "newUserMessageCount": 1,
     }
     for field, expected in exact.items():
         if receipt.get(field) != expected:
@@ -440,7 +428,6 @@ def command_prepare(args: argparse.Namespace) -> None:
         _fail("prompt_empty")
     if assignment_identity not in prompt:
         _fail("assignment_identity_not_in_prompt")
-    prompt_sha256 = _sha256(prompt_bytes)
     selection_path = _require_within(
         args.selection,
         _owner_roots(repo_root, owner, "runtime"),
@@ -453,7 +440,6 @@ def command_prepare(args: argparse.Namespace) -> None:
         "assignment_identity": assignment_identity,
         "transport_backend": "agentify",
         "operation_key": operation_key,
-        "prompt_sha256": prompt_sha256,
     }
     request_path = _require_within(
         args.request,
@@ -473,7 +459,6 @@ def command_prepare(args: argparse.Namespace) -> None:
         "assignment_identity": assignment_identity,
         "backend_selection_path": str(selection_path),
         "prompt_path": str(prompt_path),
-        "prompt_sha256": prompt_sha256,
         "timeout_ms": timeout_ms,
     }
     selection_bytes = (
@@ -488,7 +473,7 @@ def command_prepare(args: argparse.Namespace) -> None:
     print(
         "HMASD_AGENTIFY_REQUEST_PREPARED "
         f"assignment_identity={assignment_identity} operation_key={operation_key} "
-        f"prompt_sha256={prompt_sha256} selection={selection_path} request={request_path}"
+        f"selection={selection_path} request={request_path}"
     )
 
 

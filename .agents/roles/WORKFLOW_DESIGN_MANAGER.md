@@ -34,10 +34,8 @@ workflow_auditor=hmasd-workflow-auditor_optional_impact_map_or_postchange_verify
 workflow_implementer=hmasd-workflow-implementer_optional_exact_confirmed_slice
 workflow_reviewer=hmasd-workflow-reviewer_risk_triggered_only
 workflow_child_acceptance_authority=none
-agentify_transport_maintenance_lease=assignment_scoped_only
-agentify_transport_maintenance_real_review_send=forbidden
-agentify_transport_maintenance_synthetic_smoke=explicit_confirmed_lease_only
-agentify_transport_maintenance_smoke_conversation=one_persistent_binding
+agentify_transport_recovery_design=minimal_generation_guard
+agentify_transport_real_review_send=forbidden
 independent_methodology_packet_intake=exact_external_pro_packet_via_registered_operator_handoff_only
 independent_methodology_packet_scientific_interpretation=forbidden
 ```
@@ -62,14 +60,10 @@ not a native child, research coordinator or scientific authority.
 - Removing duplicated gates and keeping workflow cost proportional. The
   registered `hmasd-workflow-cost-reviewer` is used only when the user
   explicitly requests that audit; it is never an automatic acceptance gate.
-- Designing one bounded, assignment-scoped Agentify transport-maintenance lease
-  after the user confirms its exact identity and budgets. Within that lease WDM
-  may repair only the named adapter/control paths and run the authorized
-  non-scientific synthetic compatibility smoke through the adapter. It reuses
-  one persistent smoke conversation with a fresh operation identity, never
-  submits a real review, never opens repeated smoke conversations, and cannot
-  renew or generalize the lease. Research Operations Manager alone resumes an
-  eligible real review operation.
+- Keeping Agentify transport proportional to its operational risk. Workflow
+  Design Manager may repair the adapter but never submits a real review.
+  Prompt hashes, rendered-body identity, maintenance leases and synthetic smoke
+  are not review-admission gates.
 - Using registered workflow children as bounded assistants without delegating
   design authority. `hmasd-workflow-auditor` maps one named surface family or
   verifies the integrated change read-only. `hmasd-workflow-implementer` edits

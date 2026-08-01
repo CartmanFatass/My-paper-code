@@ -194,41 +194,39 @@ foreach ($entry in @(
     @($independentOperator, 'review_transport_agentify_sentinel=forbidden'),
     @($independentOperator, 'review_transport_agentify_monitor=forbidden'),
     @($agentifySkillNormalized, 'Agentify owns its durable ledger and send idempotency'),
-    @($agentifySkillNormalized, 'sendActionCount=0'),
-    @($agentifySkillNormalized, '`sendCount=0` alone is insufficient'),
-    @($agentifySkillNormalized, 'hmasd-agentify-transport-smoke'),
-    @($agentifySkillNormalized, 'the lease never creates repeated smoke conversations'),
-    @($agentifySkillNormalized, 'An authorized synthetic-smoke send consumes one smoke operation without closing the assignment lease'),
-    @($agentifySkillNormalized, 'LEASE_CLOSED_SEND_OCCURRED_OR_UNCERTAIN'),
+    @($agentifySkillNormalized, 'Active generation means wait without sending or clicking any control'),
+    @($agentifySkillNormalized, 'the transport owner may create one fresh recovery operation'),
+    @($agentifySkillNormalized, 'Prompt hashes, rendered text, attachment bytes, composer identity, server fences, maintenance leases and synthetic smoke are not recovery requirements'),
+    @($agentifySkillNormalized, 'A second recovery resend requires a new user instruction'),
     @($agentifySkillNormalized, 'submit --request <absolute-request.json> --receipt <new-absolute-receipt.json>'),
-    @($agentifySkillNormalized, 'submit --verify-existing'),
+    @($agentifySkillNormalized, '[--verify-existing]'),
     @($agentifySkillNormalized, 'verify --request <absolute-request.json> --receipt <absolute-receipt.json>'),
     @($agentifySkillNormalized, 'archive --request <absolute-request.json> --receipt <absolute-receipt.json>'),
     @($agentifySkillNormalized, 'the wrapper does not create a short-watch terminal state'),
-    @($agentifyContractNormalized, 'agentify_required_commit=001c1a57e82a232137706412ad0fd8a09b9a4465'),
+    @($agentifyContractNormalized, 'agentify_required_commit=3a69613a4363091014733123e3f0cea82c5b76e5'),
     @($agentifyContractNormalized, 'hmasd-formal-pro'),
     @($agentifyContractNormalized, 'hmasd-explorer-validation-pro'),
     @($agentifyContractNormalized, 'hmasd-independent-research-pro'),
     @($agentifyContractNormalized, 'The Independent Research Pro Review Operator remains a persistent ownership task'),
     @($agentifyContractNormalized, 'An Agentify-backed turn never creates a sentinel or monitor child'),
     @($agentifyContractNormalized, 'Retiring the browser monitor or its sentinel is a separate workflow change'),
-    @($agentifyContractNormalized, 'Eligibility requires the durable operation to prove all of'),
-    @($agentifyContractNormalized, '`sendCount=0` by itself proves nothing'),
-    @($agentifyContractNormalized, 'two synthetic smoke operations'),
-    @($agentifyContractNormalized, 'does not create a new smoke conversation for each attempt'),
-    @($agentifyContractNormalized, 'An authorized synthetic-smoke send consumes one smoke operation without closing the assignment lease'),
+    @($agentifyContractNormalized, 'While generation is active it waits and performs no send or control click'),
+    @($agentifyContractNormalized, 'may create one fresh recovery operation'),
+    @($agentifyContractNormalized, 'Only one recovery resend is automatic'),
     @($agentifyScript, 'MAX_TIMEOUT_MS = 45 * 60 * 1000'),
-    @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "001c1a57e82a232137706412ad0fd8a09b9a4465"'),
+    @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "3a69613a4363091014733123e3f0cea82c5b76e5"'),
     @($agentifyScript, 'BACKEND_SELECTION_FIELDS ='),
     @($agentifyScript, 'command_prepare'),
     @($agentifyScript, 'OWNER_KEYS ='),
     @($agentifyScript, 'REQUEST_FIELDS ='),
-    @($agentifyScript, '"sendActionCount": 1'),
-    @($agentifyScript, '"newUserMessageCount": 1')
+    @($agentifyScript, '"prompt_empty"')
 )) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
     }
+}
+if ($agentifyScript.Contains('"prompt_sha256"')) {
+    throw 'Agentify wrapper must not use prompt_sha256 as a request or recovery gate'
 }
 foreach ($required in @(
     'review_mode=INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',

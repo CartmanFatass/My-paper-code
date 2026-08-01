@@ -7,7 +7,7 @@ formal_compute=false
 scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
-agentify_required_commit=001c1a57e82a232137706412ad0fd8a09b9a4465
+agentify_required_commit=3a69613a4363091014733123e3f0cea82c5b76e5
 ```
 
 Agentify is an optional receipt-bearing transport for an already-authorized
@@ -34,9 +34,8 @@ model before sending.
 ## One-round protocol
 
 1. The owning role verifies the user-authorized turn. For Agentify, the
-   registered wrapper reads the exact prompt bytes, computes SHA-256 internally,
-   and writes one new role-owned `TRANSPORT_BACKEND.json` plus its matching
-   request. Operators do not calculate, transcribe or edit hashes.
+   registered wrapper reads the UTF-8 prompt and writes one new role-owned
+   `TRANSPORT_BACKEND.json` plus its matching request.
 2. The immutable selection is reloaded before every send or recovery. It cannot
    be changed after creation; the other backend must refuse the assignment.
 3. For Agentify, the owner resolves its stable key to one runtime conversation
@@ -46,61 +45,32 @@ model before sending.
    click `Answer now`, `Continue`, `Retry` or `ResponseRetry`.
 5. The transport validator
    `.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py`
-   checks the receipt against the exact prompt hash, stable key, conversation
-   identity, selected model, user/assistant message identities, completion
-   snapshots and response hash.
+   checks the stable key, conversation, selected model, completion snapshots
+   and archived response integrity.
 6. Only a complete validated request/receipt pair permits the owning role's
    normal raw archival and mechanical intake. The receipt is evidence of transport only;
    it cannot interpret science or authorize code, compute or project state.
 
-An unreadable, ambiguous, mismatched or incomplete receipt fails closed without
-another submission. A transport failure consumes zero scientific iterations.
+An unavailable conversation or incomplete response stops that operation. One
+fresh recovery operation is allowed by the Minimal recovery rule. A transport
+failure consumes zero scientific iterations.
 The existing in-app browser workflow remains available as a nonparallel
 alternative and keeps its own exact-fence, sentinel, monitor and archival
 rules.
 
-## Assignment-scoped maintenance lease
+## Minimal recovery
 
-A user-confirmed maintenance lease may cover one exact Agentify assignment,
-package, prompt SHA-256, stable key, conversation, model and backend. It exists
-only to repair a transport adapter failure without asking for permission after
-every proven pre-send rejection. It is not a standing project grant, global
-lease, browser fallback or scientific authority.
+Agentify checks whether the registered conversation is generating before a
+send. While generation is active it waits and performs no send or control click.
+When the page is idle it may send. If an operation fails, it remains closed and
+Research Operations Manager may create one fresh recovery operation for the
+same unchanged question without another user authorization. The recovery
+operation repeats the generation check before sending.
 
-Eligibility requires the durable operation to prove all of
-`sendActionCount=0`, absent `userMessageId`,
-`failureStage=before_send_click`, no server-visible user message, no assistant
-response and unchanged frozen identity. `sendCount=0` by itself proves nothing
-about whether the send control was clicked. `SEND_INTENT` without a proven
-pre-click failure, a recorded click, a message identity or any uncertainty
-closes replacement authority.
-
-The bounded budget is two adapter repair commits, two synthetic smoke
-operations, one HMASD repin and two fresh real-review replacement operations.
-Synthetic smoke reuses one persistent `hmasd-agentify-transport-smoke`
-conversation binding and changes only operation identity; it does not create a
-new smoke conversation for each attempt. A successful first smoke ends the
-smoke budget. Old operations are observe-only and are never reused to send.
-Research Operations Manager alone starts an eligible fresh real-review
-operation after the repaired commit is pinned.
-
-The lease terminates as one of:
-
-```text
-LEASE_ELIGIBLE_PRE_SEND_FAILURE
-LEASE_REPAIR_TESTED
-LEASE_SMOKE_PASSED_REPINNED
-LEASE_REAL_REVIEW_RESUME_ALLOWED
-LEASE_CLOSED_SEND_OCCURRED_OR_UNCERTAIN
-LEASE_CLOSED_BUDGET_EXHAUSTED
-LEASE_CLOSED_IDENTITY_CHANGED
-LEASE_CLOSED_TECHNICAL_BLOCKER
-```
-
-Fresh user authorization is required after budget exhaustion, any frozen-
-identity change, any possible real-review send, browser fallback, or expansion
-into science or compute. An authorized synthetic-smoke send consumes one smoke
-operation without closing the assignment lease.
+Prompt hashes, rendered text, attachment bytes, composer identity, server
+fences, maintenance leases and synthetic smoke are not admission or recovery
+requirements. Stop, Continue, Retry and Answer now are never clicked. Only one
+recovery resend is automatic; another resend requires a new user instruction.
 
 The Independent Research Pro Review Operator remains a persistent ownership
 task for ordered review work, exact raw archival, mechanical intake and return
@@ -132,10 +102,9 @@ state.
 ## Acceptance evidence
 
 The owning role returns one validated request/receipt pair. The request contains
-the selected backend and immutable selection path; the receipt contains the
-stable key, conversation identity, model evidence, exact prompt hash, message
-identities, `sendActionCount=1`, `newUserMessageCount=1`, completion snapshots,
-control state, timing and response hash. A
+the selected backend and selection path; the receipt contains the stable key,
+conversation identity, message identities, completion snapshots, control state,
+timing and response integrity. A
 duplicate idempotency key with the same request returns the existing operation;
 a conflicting payload is rejected. Restart recovery observes the same operation
 and conversation without sending again.

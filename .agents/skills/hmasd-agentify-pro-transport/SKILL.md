@@ -21,7 +21,7 @@ Use the locally installed Agentify endpoint and the HMASD conda interpreter:
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
 runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=001c1a57e82a232137706412ad0fd8a09b9a4465
+required_agentify_source_commit=3a69613a4363091014733123e3f0cea82c5b76e5
 ```
 
 Read the runtime contract before use. The wrapper requires the live Agentify
@@ -51,9 +51,8 @@ place credentials, Agentify state or live conversation registrations in Git.
 
 ## Request and one-send contract
 
-Run `prepare` once from the exact prompt file. The wrapper computes the prompt
-SHA-256 itself and creates the immutable backend selection plus UTF-8 request;
-the operator never calculates, copies or edits the hash. The generated request
+Run `prepare` once from the prompt file. The wrapper creates the backend
+selection plus UTF-8 request. The generated request
 contains exactly these fields (the wrapper rejects unknown or missing identity
 fields):
 
@@ -70,8 +69,7 @@ fields):
   "idempotency_key": "<round-unique-key>",
   "assignment_identity": "<exact-round-or-assignment-identity>",
   "backend_selection_path": "<absolute-immutable-TRANSPORT_BACKEND.json>",
-  "prompt_path": "<absolute-immutable-prompt>",
-  "prompt_sha256": "<sha256-of-exact-utf8-prompt>",
+  "prompt_path": "<absolute-prompt>",
   "timeout_ms": 2700000
 }
 ```
@@ -79,72 +77,30 @@ fields):
 `backend_selection_path` must be a new role-owned runtime file containing
 exactly `schema_version=1`, the same `assignment_identity`, and
 `transport_backend=agentify`; its `operation_key` must equal the request's
-`idempotency_key`, and its `prompt_sha256` must equal the request prompt hash.
-It is the restart-stable cross-backend and same-assignment operation freeze and
-is never overwritten. `assignment_identity` must occur in the exact prompt
-bytes at `prompt_path`. `timeout_ms` is between 3000 and 2700000 inclusive. Agentify
+`idempotency_key`. It is the restart-stable cross-backend and same-assignment
+operation record and is never overwritten. `assignment_identity` must occur in
+the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000 inclusive. Agentify
 owns its durable ledger and send idempotency; the HMASD wrapper validates the
 request, calls Agentify, and writes a new role-owned receipt. The wrapper does
-not click UI controls. Agentify durably records the pre-click send intent and
-the irreversible `sendActionCount` immediately after the click. No automatic
+not click UI controls. No automatic
 Continue, Retry, ResponseRetry, Answer now, duplicate submission,
 cross-conversation fallback or response synthesis is allowed. A conflicting existing
-idempotency record, identity mismatch or unreadable content terminates as a
+idempotency record or unavailable conversation terminates as a
 transport blocker.
 
-## Assignment-scoped transport-maintenance lease
+## Minimal recovery
 
-A direct user confirmation may authorize one bounded maintenance lease for one
-exact assignment identity, package identity, prompt SHA-256, stable key,
-conversation, model and `transport_backend=agentify`. The lease is runtime
-state owned by the registered transport owner; it is not a global permission,
-is never inferred from a standing research goal and cannot be renewed
-automatically.
+The adapter checks only whether the registered conversation is currently
+generating. Active generation means wait without sending or clicking any
+control. An idle page permits the normal send. A failed operation is not reused;
+the transport owner may create one fresh recovery operation for the unchanged
+question without another user authorization. The fresh operation performs the
+same generation check before it can send.
 
-Automatic maintenance is eligible only when the durable Agentify operation
-proves every predicate below:
-
-```text
-sendActionCount=0
-userMessageId=absent
-failureStage=before_send_click
-server_visible_user_message=absent
-assistant_response=absent
-assignment_identity=unchanged
-```
-
-`sendCount=0` alone is insufficient. `SEND_INTENT` without a proven pre-click
-failure, `sendActionCount=1`, any user-message identity or uncertainty about a
-click closes replacement authority. Closed operations are never reused for
-sending. Each eligible replacement is a fresh operation with the same frozen
-identity.
-
-One lease permits at most two adapter repair commits, two non-scientific
-synthetic smoke operations, one HMASD repin and two fresh real-review
-replacement operations. Both smoke operations, if needed, reuse the one
-persistent `hmasd-agentify-transport-smoke` conversation binding with fresh
-operation identities; the lease never creates repeated smoke conversations.
-The first exact smoke pass ends smoke work. A real review send remains owned by
-the registered transport owner, not Workflow Design Manager.
-
-Terminal lease states are:
-
-```text
-LEASE_ELIGIBLE_PRE_SEND_FAILURE
-LEASE_REPAIR_TESTED
-LEASE_SMOKE_PASSED_REPINNED
-LEASE_REAL_REVIEW_RESUME_ALLOWED
-LEASE_CLOSED_SEND_OCCURRED_OR_UNCERTAIN
-LEASE_CLOSED_BUDGET_EXHAUSTED
-LEASE_CLOSED_IDENTITY_CHANGED
-LEASE_CLOSED_TECHNICAL_BLOCKER
-```
-
-Fresh user authorization is required after budget exhaustion, any frozen-
-identity change, any possible real-review send, browser fallback, or expansion
-into science or compute. An authorized synthetic-smoke send consumes one smoke
-operation without closing the assignment lease. None of these states authorizes
-retrying an old operation.
+Prompt hashes, rendered text, attachment bytes, composer identity, server
+fences, maintenance leases and synthetic smoke are not recovery requirements.
+The adapter never clicks Stop, Continue, Retry or Answer now. A second recovery
+resend requires a new user instruction.
 
 ## Mechanical commands
 
@@ -164,8 +120,8 @@ The caller supplies no prompt hash, assembled monitor command or opaque token.
 ```
 
 `prepare` is idempotent only for byte-identical outputs. It verifies that the
-prompt is exact UTF-8 and contains the assignment identity, computes its hash,
-and validates the generated pair before returning. A changed prompt, model,
+prompt is UTF-8 and contains the assignment identity, then validates the
+generated pair before returning. A changed prompt, model,
 conversation or operation identity cannot overwrite the pair.
 
 ```powershell
@@ -175,10 +131,11 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` returns one terminal operation identity. Do not submit a second time
-after an exception; use `--verify-existing` only for the same idempotency key
-when an existing Agentify operation must be observed. To inspect the same
-operation after restart:
+`submit` returns one terminal operation identity. The same failed operation is
+never submitted again. The owner may create one fresh recovery operation for
+the unchanged question under the Minimal recovery rule. Use
+`--verify-existing` only to observe an operation that already has a recorded
+user message. To inspect that operation after restart:
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -186,10 +143,8 @@ operation after restart:
   verify --request <absolute-request.json> --receipt <absolute-receipt.json>
 ```
 
-`verify` is local receipt validation only and never sends. If `submit` cannot
-return a terminal receipt, do not infer failure or submit again. A later
-`submit --verify-existing` may observe only the same Agentify ledger operation
-and idempotency key. Natural completion requires the exact same assistant
+`verify` is local receipt validation only and never sends. Natural completion
+requires the same assistant
 message identity and complete text in two stable snapshots at least three
 seconds apart and no active generation or continuation control. A visible
 Answer now control is never activated and is not completion
@@ -221,12 +176,8 @@ provider
 conversationId
 conversationUrl
 model
-modelEvidence
 idempotencyKey
-promptSha256
 sendCount=1
-sendActionCount=1
-newUserMessageCount=1
 userMessageId
 assistantMessageId
 snapshots=2_same_identity_and_hash_with_gap_ms>=3000
@@ -235,11 +186,9 @@ clickedControls=[]
 terminalState=NATURAL_COMPLETION_VERIFIED
 ```
 
-The two snapshots must be tied to the same exact assistant identity and the
-same round. Missing or conflicting fields, `sendCount != 1`, a duplicate
-message, `sendActionCount != 1`, `newUserMessageCount != 1`, a
-model/conversation mismatch, incomplete generation or unreadable
-identity yields `AGENTIFY_TRANSPORT_BLOCKED`. It never authorizes a browser
+The two snapshots must be tied to the same assistant identity. Missing or
+conflicting fields, `sendCount != 1`, a conversation mismatch or incomplete
+generation yields `AGENTIFY_TRANSPORT_BLOCKED`. It never authorizes a browser
 fallback, a second Agentify send or a scientific iteration. Restart recovery
 is observe-only for the same request, Agentify operation and receipt.
 
