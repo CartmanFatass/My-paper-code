@@ -181,6 +181,138 @@ run concurrently ≈ ~5 min wall — inside the 20-minute nonformal cap.
 Formal successor run: unchanged R4 shape (8 topologies × 16 episodes, 2/2),
 ~4.2 h at `--workers 4` on this box; no wall-clock cap applies to step 7.
 
+## Frozen amendments from the conformance ruling (round 20260801_d7_s_b3l_design_conformance — FREEZE AFTER MODIFICATION)
+
+The convergence decision requires these modifications entered before
+implementation; with them entered, implementation proceeds under ordinary PM
+authority and any newly discovered protected decision returns to Pro.
+
+**A-D1 (postcondition made explicit).** `finalize_preaction_state(env)`
+records: observations and `env.state` materialized by that exact barrier
+invocation, the pre-action fingerprint, and an RNG-state token computed
+afterward. The formal path must not rematerialize observations or state
+between finalization and the first action.
+
+**A-D2 (localization rule).** A gate mismatch is localized by per-attribute
+complete-state digests; the repair target is the earliest stale derived
+surface. Any barrier extension lands inside `_post_pin_initialization_steps`,
+never a B3-L-only wrapper.
+
+**A-D3 (launch-time enforcement, attestation, source_code_id).**
+(1) The launcher supplies, in the child environment before Python starts:
+`PYTHONHASHSEED=<registered integer: 20260801>`, `OMP_NUM_THREADS=1`,
+`MKL_NUM_THREADS=1`, `OPENBLAS_NUM_THREADS=1`, `NUMEXPR_NUM_THREADS=1`;
+each parent and every pool worker independently verifies them after import.
+(2) The class record carries `formal_parent_class_id`,
+`formal_worker_class_id`, `worker_count=4`, `process_start_method=spawn`;
+every worker reports its own runtime record;
+`ProcessPoolExecutor(mp_context=multiprocessing.get_context("spawn"))` is
+passed explicitly. (3) Currency is decided by `source_code_id` — SHA-256
+over canonical sorted `(path, git blob hash)` records of the frozen path
+set below — plus configuration digest, class IDs and provenance versions;
+the git commit and clean-tree flag are recorded metadata only.
+
+```text
+FROZEN_SOURCE_PATH_SET (source_code_id closure; O1):
+  scripts/audit_d7_s_event_aligned.py
+  scripts/pool_d7_s_event_aligned_shards.py
+  scripts/d7_s_local_replay_gate.py            (new)
+  scripts/d7_s_successor_input_inventory.py    (new)
+  envs/pettingzoo/scenario_base.py
+  envs/pettingzoo/scenario7_energy_aware.py
+  envs/pettingzoo/__init__.py
+  docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
+  docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE.md
+  docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE_R2.md
+  docs/research/designs/D7_S_B3L_DECISION_LEDGER.md
+excluded: the PASS certificate, the successor inventory, logs, results.
+```
+
+The resolved audit configuration lives inside
+`scripts/audit_d7_s_event_aligned.py` (in the set); dependency drift is
+bound by the execution class's Python/NumPy/SciPy/BLAS fields rather than a
+lock file — there is no lock file in this repository [PM binding,
+disclosed]. `configuration_digest` covers the actual resolved environment
+and audit configuration including Scenario-7 profile overrides (O10).
+
+**A-D4 (gate route and coverage).** Each gate execution enters the same
+parent-plus-spawn-pool path as Step O: a four-worker spawn pool is actually
+created; every worker attests its class ID; at least one task runs in every
+worker (a worker-liveness handshake is used where the dev episode supplies
+fewer tasks); result folding follows the deterministic index order. The gate
+covers TWO development keys: one `PART_A_CONTROL` key (paired
+constructive_mixed and full_sync_SET continuations) and one `FOCAL_AUDIT`
+key (both limbs, complete 2/2 set). Development-key selection is frozen:
+ascending audit indices over the registered range 0..15; select the first
+satisfying (qualifying joint event exists ∧ complete stable/flex fork set);
+record every rejected index and reason; liveness may use a second
+deterministically selected key; no-key-found is
+`LOCAL_EPISODE_KEY_REPLAY_UNTESTED:NO_DEVELOPMENT_EVENT_KEY`. Gate records
+persist three RNG witnesses: `rng_after_world_generation`,
+`rng_after_energy_and_finalization`, `rng_at_t_e`. The gate compares
+deterministic pre-bootstrap units only — it never emits or interprets R4
+confidence bounds or a source branch.
+
+**A-D5 (canonical trajectory digest).** Per-step digest =
+SHA-256 over: `trajectory_digest_version`, step index, then for every
+component in `WORLD_COMPONENT_ORDER`: name, dtype, shape, contiguous bytes
+(delimited, never bare concatenation). Fail closed unless digest sequences
+are present at exact registered lengths for: the entire event-search
+prefix, Part-A constructive_mixed, Part-A full_sync_SET, stable KEEP, every
+stable SET selection/evaluation continuation, flex KEEP, every flex SET
+selection/evaluation continuation. Missing sequences are UNTESTED, never
+equal-by-absence. Changing this encoding bumps
+`PROVENANCE_CONTRACT_VERSION`.
+
+**A-D6 (liveness deltas).** Three counters:
+`user_intra_waypoint_regenerations`, `user_inter_waypoint_regenerations`,
+`cluster_target_regenerations`; the gate records each at pre-action and at
+end, requires `postinitialization_regen_delta > 0` combined and equal on
+both executions, and compares all three when present. The fingerprint
+exclusion is valid only with a paired negative proving the gate still reads
+the counters, and the causal justification is recorded alongside
+`FINGERPRINT_EXCLUDED_ATTRS`.
+
+**A-D7 (complete dtype map).** Every initial and formal record carries the
+complete nine-component dtype map; the gate compares the full map exactly.
+
+**A-D9 (pooling).** A strict subset may be a declared successor member
+shard; only the exact inventory union, every topology and episode key
+accounted for exactly once, becomes the conclusion-bearing pooled result.
+
+**A-D10 (inventory additions).** The inventory additionally binds:
+topology-procedure version, `source_code_id`, gate-certificate hash,
+trajectory-digest/provenance version, certified parent and worker class
+IDs, and the multiprocessing/thread-launch policy. A coordinate-generation
+failure aborts Step N; it never advances to the next candidate seed.
+
+**A-D11 (formal paired construction, frozen protocol).** Per formal
+episode key, in the same certified worker: construct A; construct B
+independently; compare all initial world arrays/dtypes/shapes/digests and
+RNG state after world generation; install the same energy profile and
+finalization in both; compare complete pre-action fingerprints and RNG
+state; **discard B; always continue from A** (O5). Mismatch reasons:
+`INITIAL_WORLD_REPLAY_MISMATCH` / `PREACTION_STATE_REPLAY_MISMATCH`.
+`FULL_HORIZON_REPLAY_MISMATCH` and `DYNAMIC_PATH_NOT_EXERCISED` are
+gate-only. `LOCAL_PROVENANCE_NOT_CERTIFIED` is an early operational
+refusal, never an R4 precedence entry; the pooler refuses to assemble a
+scientific branch when any shard carries it.
+
+**A-D12 (self-contained certificate).** Currency test:
+verdict==PASS ∧ `source_code_id` ∧ `configuration_digest` ∧ parent class ID
+∧ worker class ID ∧ fingerprint/provenance versions ∧ gate algorithm and
+required equality field set all match. `gate_execution_commit` and
+`certificate_commit` are history metadata, never currency keys. The
+committed certificate is self-contained: both process identities, parent
+and all worker class IDs, exact commands and registered env-var values,
+selected Part-A/focal/liveness keys, every rejected index and reason, both
+workers' initial-world component digests + dtypes + RNG tokens, both
+pre-action fingerprints + RNG tokens, prefix/event/focal/candidate/snapshot
+digests, trajectory-sequence roots and lengths per required continuation,
+component-sequence and evaluation-unit digests, liveness baselines/finals/
+deltas, a field-by-field equality matrix, and hashes of both complete
+worker-record files.
+
 ## Deliberately not done
 
 - No manifest code resurrected; `D7_S_WORLD_MANIFEST_REPLAY.md` stays a
