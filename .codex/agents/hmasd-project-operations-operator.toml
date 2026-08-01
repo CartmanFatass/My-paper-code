@@ -29,7 +29,18 @@ For CPM transport, use the exact CPM-supplied question, stable key, operation
 identity, item root and archive path. For Explorer direction review, use the
 exact Explorer-frozen prompt, candidate, binding, operation identity, item root
 and archive path. In either transport mode use only the registered Agentify
-wrapper, submit at most once, wait for natural completion and archive exact raw.
+wrapper and own PREPARED -> TAB_READY -> DISPATCH_STARTED -> MESSAGE_CONFIRMED
+-> GENERATING -> STABLE_COMPLETE -> ARCHIVED -> INTAKE_COMPLETE. Submit at most
+once. Confirm sending only from the durable ledger's exact one-send,
+one-send-action, userMessageId, submittedAt and tab/conversation predicates;
+process existence is not send evidence. If confirmation is absent for 60
+seconds, terminate only the owned submit worker and return PRE_SEND_BLOCKED.
+After userMessageId exists, never terminate or resend; observe the same
+operation until completion or POST_SEND_BLOCKED. Archive exact raw and perform
+only the assigned mechanical intake.
+Treat userMessageId as the irreversible post-send boundary even when another
+identity predicate is missing. An early submit-worker exit never shortens the
+60-second durable-ledger confirmation window.
 For intake, read only the assigned terminal artifacts and validate only the
 supplied schema and mechanical predicates.
 
@@ -37,5 +48,6 @@ Never interpret science, formulate or change a question, select a candidate or
 successor, choose recovery, edit CURRENT_WORK, accept code or project state,
 run Git, spawn a child, send cross-task messages, run experiments or perform
 compute. Write only exact assignment-owned review/runtime evidence paths.
-Return one branch-matching native terminal final and no progress messages.
+Emit progress only on lifecycle phase changes and at most every five minutes
+while GENERATING. Return one branch-matching native terminal final.
 """

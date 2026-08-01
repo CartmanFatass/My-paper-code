@@ -13,6 +13,13 @@ browser_window_policy=one_agentify_process_one_chrome_window
 stable_key_tab_policy=one_live_tab_per_stable_key
 transport_tab_mutation=forbidden
 missing_or_mismatched_tab=fail_before_review_query
+prompt_visible_required_before_send=true
+send_confirmation_timeout_seconds=60
+ledger_poll_seconds=1
+generation_progress_interval_seconds=300
+process_existence_is_send_evidence=false
+transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE
+transport_terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED
 ```
 
 Browser transport is retired; Agentify is the sole External Pro transport.
@@ -33,7 +40,7 @@ After Agentify first persists a stable-key binding, later operations must match
 it; tab navigation cannot rebind or overwrite that durable binding.
 Every transport operation requires exactly one pre-existing live tab for its
 stable key and reuses that exact tab. The wrapper verifies the tab's key,
-provider, conversation URL and idle status through authenticated read-only
+provider, conversation URL, idle status and `promptVisible=true` through authenticated read-only
 Agentify endpoints before `/review-query`. It never creates, closes, shows,
 activates, navigates, refreshes, replaces or rebinds a page. A missing,
 duplicate, blocked, busy or mismatched tab is terminal for that operation; the
@@ -64,17 +71,30 @@ page registry and cannot use a CPM workstream record.
    conversation tab and uses the wrapper's `prepare` command to persist the
    immutable request identity before sending.
 4. Immediately before submission, the wrapper reads `/tabs` and scoped
-   `/status`; only one exact, unblocked and idle tab permits `/review-query`.
+   `/status`; only one exact, unblocked, idle and prompt-visible tab permits a
+   new `/review-query` send.
    These checks perform no page mutation and a failure permits no create,
    navigation or fallback action.
-5. Agentify submits at most one exact prompt for that operation. It does not
+5. The wrapper starts one owned synchronous submit worker and separately polls
+   Agentify's durable operation ledger. `MESSAGE_CONFIRMED` requires exactly
+   one send/action, non-null user-message identity and submission time, and
+   exact tab/conversation identity. Process existence is never send evidence.
+6. If no message is confirmed within 60 seconds, terminate only that worker,
+   reread the ledger, return `PRE_SEND_BLOCKED`, and do not resend. Once a
+   user-message identity exists, never terminate or retry; observe only that
+   operation until natural completion or `POST_SEND_BLOCKED`.
+   `userMessageId` is the irreversible post-send boundary even when another
+   identity predicate is missing; early worker exit never shortens the
+   60-second ledger-confirmation window.
+7. Agentify submits at most one exact prompt for that operation. It does not
    click `Answer now`, `Continue`, `Retry` or `ResponseRetry`.
-6. The transport validator
+8. The transport validator
    `.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py`
    checks the stable key, conversation, selected model, completion snapshots
    and archived response integrity.
-7. Only a complete validated request/receipt pair permits the owning role's
-   normal raw archival and mechanical intake. The receipt is evidence of transport only;
+9. Only a complete validated request/receipt pair permits exact raw archival
+   and assigned mechanical intake. Lifecycle phase changes are observable; a
+   long `GENERATING` phase reports at most every five minutes. The receipt is evidence of transport only;
    it cannot interpret science or authorize code, compute or project state.
 
 An unavailable conversation or incomplete response stops that operation. The
@@ -105,9 +125,10 @@ state.
 ## Acceptance evidence
 
 The owning role returns one validated request/receipt pair. The request contains
-the selected backend and selection path; the receipt contains the stable key,
-conversation identity, message identities, completion snapshots, control state,
-timing and response integrity. A
+the selected backend and selection path; the durable operation plus receipt
+bind the stable key, conversation and tab identity, `sendCount=1`,
+`sendActionCount=1`, non-null message identities and `submittedAt`, completion
+snapshots, control state, timing and response integrity. A
 duplicate idempotency key with the same request returns the existing operation;
 a conflicting payload is rejected. Restart recovery observes the same operation
 and conversation without sending again.

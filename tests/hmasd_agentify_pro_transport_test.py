@@ -24,6 +24,42 @@ def sha256(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+class FakeSubmitWorker:
+    def __init__(self, polls: list[int | None], *, stderr: str = "") -> None:
+        self.pid = 4242
+        self._polls = list(polls)
+        self._last: int | None = None
+        self.returncode: int | None = None
+        self.stderr = stderr
+        self.terminated = False
+        self.killed = False
+
+    def poll(self) -> int | None:
+        if self._polls:
+            self._last = self._polls.pop(0)
+        if self._last is not None:
+            self.returncode = self._last
+        return self._last
+
+    def communicate(self) -> tuple[str, str]:
+        return "", self.stderr
+
+    def terminate(self) -> None:
+        self.terminated = True
+        self.returncode = -15
+        self._last = -15
+
+    def wait(self, timeout: float | None = None) -> int:
+        del timeout
+        assert self.returncode is not None
+        return self.returncode
+
+    def kill(self) -> None:
+        self.killed = True
+        self.returncode = -9
+        self._last = -9
+
+
 class AgentifyTransportTest(unittest.TestCase):
     def setUp(self) -> None:
         self.temp = tempfile.TemporaryDirectory()
@@ -78,6 +114,7 @@ class AgentifyTransportTest(unittest.TestCase):
             "status": "COMPLETE",
             "terminalState": "NATURAL_COMPLETION_VERIFIED",
             "sendCount": 1,
+            "sendActionCount": 1,
             "createdAt": 1000,
             "preparedAt": 1100,
             "modelEvidence": "Pro",
@@ -130,6 +167,7 @@ class AgentifyTransportTest(unittest.TestCase):
             "ok": True,
             "tabId": "tab-1",
             "blocked": False,
+            "promptVisible": True,
             "tabs": [self._live_tab()],
             "activeQuery": None,
             "runtime": {"activeQueries": []},
@@ -471,13 +509,279 @@ class AgentifyTransportTest(unittest.TestCase):
         self.assertEqual(len(calls), 3)
         self.assertFalse(any(url.endswith("/review-query") for url in calls))
 
+    def test_prompt_invisible_fails_before_review_query(self) -> None:
+        with mock.patch.object(
+            MODULE,
+            "_http_json",
+            side_effect=[
+                {"ok": True, "tabs": [self._live_tab()]},
+                self._idle_status(promptVisible=False),
+            ],
+        ) as http_json, self.assertRaisesRegex(
+            MODULE.TransportError, "agentify_preexisting_tab_prompt_unavailable"
+        ):
+            MODULE._require_preexisting_review_tab(
+                "http://127.0.0.1:43111", "token", self.validated
+            )
+        self.assertEqual(http_json.call_count, 2)
+
+    def _confirmed_operation(self, **updates: object) -> dict[str, object]:
+        operation: dict[str, object] = {
+            "status": "RUNNING",
+            "sendCount": 1,
+            "sendActionCount": 1,
+            "userMessageId": "user-1",
+            "submittedAt": 1200,
+            "stableKey": self.request["stable_key"],
+            "provider": self.request["provider"],
+            "conversationUrl": self.request["conversation_url"],
+            "conversationId": self.request["conversation_id"],
+            "tabId": "tab-1",
+        }
+        operation.update(updates)
+        return operation
+
+    def test_submit_stall_without_confirmed_message_terminates_owned_worker(self) -> None:
+        state_dir = self.root / "agentify-state"; state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-stall.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-stall.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        worker = FakeSubmitWorker([None, None, None])
+        clock = iter([0.0, 1.0, 62.0])
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker), \
+             mock.patch.object(MODULE, "_ledger_operation", return_value={"status": "SEND_INTENT", "sendCount": 0}), \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=lambda: next(clock)), \
+             mock.patch.object(MODULE.time, "sleep"), \
+             contextlib.redirect_stdout(output), \
+             self.assertRaisesRegex(MODULE.TransportError, "pre_send_blocked_unconfirmed_user_message"):
+            MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=False))
+        self.assertTrue(worker.terminated)
+        self.assertFalse(worker.killed)
+        self.assertIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
+        self.assertFalse(receipt_path.exists())
+
+    def test_unreadable_existing_ledger_blocks_before_worker_spawn(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        (state_dir / "review-transport.json").write_text("{not-json", encoding="utf-8")
+        request_path = self.root / "logs/agentify/round/request-unreadable.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-unreadable.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_spawn_submit_worker") as spawn, \
+             self.assertRaisesRegex(MODULE.TransportError, "unreadable_json"):
+            MODULE.command_submit(
+                SimpleNamespace(
+                    request=request_path,
+                    receipt=receipt_path,
+                    state_dir=state_dir,
+                    verify_existing=False,
+                )
+            )
+        spawn.assert_not_called()
+
+    def test_deadline_termination_rereads_late_confirmation_without_resend(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-race.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-race.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        worker = FakeSubmitWorker([None])
+        operations = iter(
+            [
+                {},
+                {"status": "SEND_INTENT", "sendCount": 0},
+                {"status": "SEND_INTENT", "sendCount": 0},
+                self._confirmed_operation(),
+                self._confirmed_operation(),
+                self._confirmed_operation(status="COMPLETE"),
+            ]
+        )
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker) as spawn, \
+             mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
+             mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete, \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 62.0, 63.0]), \
+             mock.patch.object(MODULE.time, "sleep"), \
+             contextlib.redirect_stdout(output):
+            MODULE.command_submit(
+                SimpleNamespace(
+                    request=request_path,
+                    receipt=receipt_path,
+                    state_dir=state_dir,
+                    verify_existing=False,
+                )
+            )
+        spawn.assert_called_once()
+        complete.assert_called_once_with(self.validated, state_dir, receipt_path)
+        self.assertTrue(worker.terminated)
+        self.assertNotIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
+        self.assertIn('"phase": "MESSAGE_CONFIRMED"', output.getvalue())
+
+    def test_partial_user_message_is_post_send_and_worker_is_not_terminated(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-partial.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-partial.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        worker = FakeSubmitWorker([None])
+        partial = self._confirmed_operation(conversationId="wrong-conversation")
+        operations = iter([{}, partial])
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker), \
+             mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 2.0]), \
+             contextlib.redirect_stdout(output), \
+             self.assertRaisesRegex(MODULE.TransportError, "post_send_blocked_partial_message_identity"):
+            MODULE.command_submit(
+                SimpleNamespace(
+                    request=request_path,
+                    receipt=receipt_path,
+                    state_dir=state_dir,
+                    verify_existing=False,
+                )
+            )
+        self.assertFalse(worker.terminated)
+        self.assertIn('"phase": "POST_SEND_BLOCKED"', output.getvalue())
+        self.assertNotIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
+
+    def test_early_worker_exit_waits_for_delayed_message_confirmation(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-delayed.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-delayed.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        worker = FakeSubmitWorker([1], stderr="client exited")
+        operations = iter(
+            [
+                {},
+                {},
+                self._confirmed_operation(),
+                self._confirmed_operation(status="COMPLETE"),
+            ]
+        )
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker) as spawn, \
+             mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
+             mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete, \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 2.0, 3.0]), \
+             mock.patch.object(MODULE.time, "sleep"), \
+             contextlib.redirect_stdout(output):
+            MODULE.command_submit(
+                SimpleNamespace(
+                    request=request_path,
+                    receipt=receipt_path,
+                    state_dir=state_dir,
+                    verify_existing=False,
+                )
+            )
+        spawn.assert_called_once()
+        complete.assert_called_once_with(self.validated, state_dir, receipt_path)
+        self.assertFalse(worker.terminated)
+        self.assertIn('"phase": "MESSAGE_CONFIRMED"', output.getvalue())
+        self.assertNotIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
+
+    def test_existing_message_uses_independent_live_tab_identity(self) -> None:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-tab-mismatch.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-tab-mismatch.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        for ledger_tab in (None, "stale-tab"):
+            with self.subTest(ledger_tab=ledger_tab):
+                operation = self._confirmed_operation(tabId=ledger_tab)
+                with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+                     mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "live-tab")), \
+                     mock.patch.object(MODULE, "_ledger_operation", return_value=operation), \
+                     mock.patch.object(MODULE, "_spawn_submit_worker") as spawn, \
+                     self.assertRaisesRegex(MODULE.TransportError, "post_send_blocked_ledger_identity_unconfirmed"):
+                    MODULE.command_submit(
+                        SimpleNamespace(
+                            request=request_path,
+                            receipt=receipt_path,
+                            state_dir=state_dir,
+                            verify_existing=True,
+                        )
+                    )
+                spawn.assert_not_called()
+
+    def test_submit_reports_early_confirmation_then_long_generation(self) -> None:
+        state_dir = self.root / "agentify-state"; state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-success.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-success.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        receipt_path.write_text(json.dumps(self.receipt), encoding="utf-8")
+        worker = FakeSubmitWorker([None, None, 0])
+        clock = iter([0.0, 1.0, 2.0, 303.0])
+        output = io.StringIO()
+        operations = iter([
+            {},
+            self._confirmed_operation(),
+            self._confirmed_operation(),
+            self._confirmed_operation(),
+        ])
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker), \
+             mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=lambda: next(clock)), \
+             mock.patch.object(MODULE.time, "sleep"), \
+             contextlib.redirect_stdout(output):
+            MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=False))
+        phases = output.getvalue()
+        self.assertIn('"phase": "MESSAGE_CONFIRMED"', phases)
+        self.assertGreaterEqual(phases.count('"phase": "GENERATING"'), 2)
+        self.assertIn('"phase": "STABLE_COMPLETE"', phases)
+        self.assertFalse(worker.terminated)
+
+    def test_worker_failure_after_message_confirmation_observes_same_operation(self) -> None:
+        state_dir = self.root / "agentify-state"; state_dir.mkdir()
+        request_path = self.root / "logs/agentify/round/request-interrupted.json"
+        receipt_path = self.root / "logs/agentify/round/receipt-interrupted.json"
+        request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        worker = FakeSubmitWorker([None, 1], stderr="client interrupted")
+        operations = iter([
+            {},
+            self._confirmed_operation(),
+            self._confirmed_operation(),
+            self._confirmed_operation(status="COMPLETE"),
+        ])
+        output = io.StringIO()
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker) as spawn, \
+             mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
+             mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete, \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 2.0, 3.0]), \
+             mock.patch.object(MODULE.time, "sleep"), \
+             contextlib.redirect_stdout(output):
+            MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=False))
+        spawn.assert_called_once()
+        complete.assert_called_once_with(self.validated, state_dir, receipt_path)
+        self.assertFalse(worker.terminated)
+        self.assertIn('"phase": "STABLE_COMPLETE"', output.getvalue())
+
     def test_recovery_refuses_resend_when_failed_operation_has_user_message(self) -> None:
         state_dir = self.root / "agentify-state"; state_dir.mkdir()
         (state_dir / "review-transport.json").write_text(json.dumps({"operations": {self.request["idempotency_key"]: {"status": "BLOCKED", "userMessageId": "user-1"}}}), encoding="utf-8")
         request_path = self.root / "logs/agentify/round/request-recovery.json"; receipt_path = self.root / "logs/agentify/round/receipt-recovery.json"; request_path.write_text(json.dumps(self.request), encoding="utf-8")
-        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), mock.patch.object(MODULE, "call_agentify", return_value=self.receipt) as call_agentify:
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), \
+             mock.patch.object(MODULE, "_agentify_session", return_value=("base", "token", "tab-1")), \
+             mock.patch.object(MODULE, "_spawn_submit_worker") as spawn, \
+             mock.patch.object(MODULE, "_ledger_operation", return_value=self._confirmed_operation(status="COMPLETE")), \
+             mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete:
             MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=True))
-        self.assertTrue(call_agentify.call_args.kwargs["verify_existing"]); self.assertTrue(receipt_path.exists())
+        spawn.assert_not_called()
+        complete.assert_called_once_with(self.validated, state_dir, receipt_path)
 
     def test_archive_is_exact_and_never_overwrites_different_bytes(self) -> None:
         output = self.root / "docs/external-review/round/21_PRO_OPEN_RAW.md"

@@ -16,6 +16,11 @@ code_acceptance_authority=none
 git_authority=none
 children=forbidden
 cross_task_send=forbidden_native_final_only
+transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE
+transport_terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED
+send_confirmation_timeout_seconds=60
+generation_progress_interval_seconds=300
+process_existence_is_send_evidence=false
 ```
 
 Read the root router, this charter, the exact parent assignment and only its
@@ -57,16 +62,35 @@ across tasks.
 ## `PRO_REVIEW_TRANSPORT`
 
 The assignment names one immutable question, review kind, Agentify stable key,
-operation identity, exact item root and archive path. Use only the registered
-`$hmasd-agentify-pro-transport` wrapper. Submit at most once, wait for natural
-completion and archive the exact response. Do not formulate, summarize,
-interpret or repair the scientific question or answer.
+operation identity, exact item root, raw archive path and mechanical-intake
+contract. Use only the registered `$hmasd-agentify-pro-transport` wrapper.
+Own the full lifecycle from `PREPARED` through `INTAKE_COMPLETE`: prepare, start
+one submit worker, confirm the persisted user message from the durable ledger,
+observe natural completion, verify, archive exact raw and perform the assigned
+mechanical intake. Do not formulate, summarize, interpret or repair the
+scientific question or answer.
 
 Use only the assignment's already-live exact Agentify tab. Never create, close,
 show, activate, navigate, refresh, replace or rebind a page. If the registered
-stable-key tab is missing, duplicated, blocked, busy or does not exactly match
-the provider and conversation URL, return the pre-send blocker once; do not
-attempt page recovery or another tab.
+stable-key tab is missing, duplicated, blocked, busy, lacks a visible prompt,
+or does not exactly match the provider and conversation URL, return
+`PRE_SEND_BLOCKED` once; do not attempt page recovery or another tab.
+
+`MESSAGE_CONFIRMED` requires the durable operation to report exactly one send
+and one send action, non-null `userMessageId` and `submittedAt`, and the exact
+stable key, provider, conversation and tab identities. The existence of the
+submit process is never send evidence. If those predicates remain false for
+60 seconds, terminate only the owned submit worker and return
+`PRE_SEND_BLOCKED`; never resend. After `userMessageId` exists, never terminate
+or retry: observe only that operation until `STABLE_COMPLETE` or return
+`POST_SEND_BLOCKED` with the exact ledger predicates.
+`userMessageId` is the irreversible post-send boundary even when another
+identity predicate is missing; that case is `POST_SEND_BLOCKED`. An early
+submit-worker exit never shortens the 60-second ledger-confirmation window.
+
+Emit a concise native progress message on lifecycle phase changes. During long
+`GENERATING`, emit at most once per five minutes. These messages stay with the
+parent task and are not cross-task routing.
 
 If a readable response or active generation exists, wait; never refresh,
 interrupt, resend or use Answer now. On ambiguity or error, return the observed
@@ -84,10 +108,10 @@ artifact, launch a command or choose the next action.
 The Explorer assignment names one frozen candidate prompt and the exact
 ChatGPT External Pro binding. Require every Explorer-branch field above plus
 the exact candidate, review mode, operation identity, prompt path and raw
-archive path below the assigned item root. Use the registered Agentify wrapper
-for prepare, one submit, natural completion verification and exact archival.
+archive path and mechanical-intake contract below the assigned item root. Use
+the same observable lifecycle and terminal rules as `PRO_REVIEW_TRANSPORT`.
 Return exactly one `INDEPENDENT_RESEARCH_REVIEW_TERMINAL` native final. A
-missing or mismatched field is `BLOCKED` with no follow-up send.
+missing or mismatched field is `PRE_SEND_BLOCKED` with no follow-up send.
 
 The assigned root and provisioned prompt must exist before intake. Set every
 tool working directory to that root; requests, receipts and raw output stay
@@ -99,11 +123,12 @@ Return exactly one branch-matching native final. CPM assignments use:
 
 ```text
 PROJECT_OPERATIONS_TERMINAL
-terminal=<COMPLETE|ERROR>
+terminal=<COMPLETE|PRE_SEND_BLOCKED|POST_SEND_BLOCKED|ERROR>
 mode=<PRO_REVIEW_TRANSPORT|RESULT_INTAKE>
 assignment=<exact identity>
 artifacts=<exact paths and presence>
 observed_facts=<mechanical facts only>
+last_lifecycle_phase=<exact phase>
 blocker=<none or exact direct error>
 ```
 
@@ -111,7 +136,7 @@ Explorer direction-review assignments use:
 
 ```text
 INDEPENDENT_RESEARCH_REVIEW_TERMINAL
-terminal_status=<COMPLETE|BLOCKED>
+terminal_status=<COMPLETE|PRE_SEND_BLOCKED|POST_SEND_BLOCKED|ERROR>
 provider=chatgpt
 review_mode=<PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW|PRO_ADVERSARIAL_SCIENTIFIC_REVIEW>
 review_id=<exact review identity>

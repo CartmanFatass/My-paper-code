@@ -44,20 +44,27 @@ foreach ($entry in @(
     @($agentifySkillNormalized, 'fails before `/review-query`'),
     @($agentifyContractNormalized, 'transport_tab_mutation=forbidden'),
     @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
-    @($agentifyScript, '_require_preexisting_review_tab(base, token, request)'),
+    @($agentifyContractNormalized, 'prompt_visible_required_before_send=true'),
+    @($agentifyScript, 'require_send_ready=require_send_ready'),
     @($agentifyScript, 'agentify_preexisting_tab_missing'),
-    @($agentifyScript, 'agentify_preexisting_tab_busy'))
-) {
+    @($agentifyScript, 'agentify_preexisting_tab_busy'),
+    @($agentifyScript, 'agentify_preexisting_tab_prompt_unavailable'),
+    @($agentifyScript, 'MESSAGE_CONFIRMED'),
+    @($agentifyScript, 'PRE_SEND_BLOCKED'),
+    @($agentifyScript, 'POST_SEND_BLOCKED'),
+    @($agentifyScript, 'sendActionCount'),
+    @($agentifyScript, '_terminate_owned_worker')
+)) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Existing-tab-only Agentify contract missing: $($entry[1])"
     }
 }
-$tabPreflightCall = $agentifyScript.IndexOf('_require_preexisting_review_tab(base, token, request)')
+$tabPreflightCall = $agentifyScript.IndexOf('tab_id = _require_preexisting_review_tab(')
 $reviewQueryCall = $agentifyScript.IndexOf('f"{base}/review-query"')
 if ($tabPreflightCall -lt 0 -or $reviewQueryCall -lt 0 -or $tabPreflightCall -ge $reviewQueryCall) {
     throw 'Existing-tab proof does not precede Agentify review-query'
 }
-foreach ($forbiddenEndpoint in @('/tabs/create', '/tabs/close', '/navigate')) {
+foreach ($forbiddenEndpoint in @('/tabs/create', '/tabs/close', '/tabs/show', '/tabs/activate', '/navigate', '/refresh', '/replace', '/rebind')) {
     if ($agentifyScript.Contains($forbiddenEndpoint)) {
         throw "HMASD Agentify wrapper mutates page state: $forbiddenEndpoint"
     }
@@ -78,6 +85,10 @@ foreach ($required in @(
     'client_send_limit=1',
     'pro_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'terminal=INDEPENDENT_RESEARCH_REVIEW_TERMINAL',
+    'transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE',
+    'send_confirmation_timeout_seconds=60',
+    'process_existence_is_send_evidence=false',
+    'userMessageId` is the irreversible post-send boundary',
     'stable-key namespace, not',
     'no global page')) {
     if (-not $projectOperations.Contains($required)) {

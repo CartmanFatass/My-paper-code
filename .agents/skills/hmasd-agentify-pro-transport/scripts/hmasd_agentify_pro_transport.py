@@ -9,8 +9,10 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 import tempfile
+import time
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlparse
@@ -19,6 +21,9 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = 1
 MAX_TIMEOUT_MS = 45 * 60 * 1000
+SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
+LEDGER_POLL_SECONDS = 1.0
+GENERATION_REPORT_SECONDS = 5 * 60.0
 AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
@@ -240,8 +245,14 @@ def _http_json(url: str, *, token: str | None = None, body: dict[str, Any] | Non
     return value
 
 
-def _require_preexisting_review_tab(base: str, token: str, request: dict[str, Any]) -> str:
-    """Prove that submit can reuse one exact idle tab without mutating tab state."""
+def _require_preexisting_review_tab(
+    base: str,
+    token: str,
+    request: dict[str, Any],
+    *,
+    require_send_ready: bool = True,
+) -> str:
+    """Prove exact tab identity; new sends additionally require a ready prompt."""
     inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
     tabs = inventory.get("tabs")
     if inventory.get("ok") is not True or not isinstance(tabs, list):
@@ -269,7 +280,7 @@ def _require_preexisting_review_tab(base: str, token: str, request: dict[str, An
     if (
         status.get("ok") is not True
         or status.get("tabId") != tab_id
-        or status.get("blocked") is not False
+        or (require_send_ready and status.get("blocked") is not False)
         or not isinstance(status_tabs, list)
     ):
         _fail("agentify_preexisting_tab_status_invalid")
@@ -285,21 +296,28 @@ def _require_preexisting_review_tab(base: str, token: str, request: dict[str, An
         or status_matches[0].get("url") != request["conversation_url"]
     ):
         _fail("agentify_preexisting_tab_status_identity_mismatch")
+    if require_send_ready and status.get("promptVisible") is not True:
+        _fail("agentify_preexisting_tab_prompt_unavailable")
     runtime = status.get("runtime")
     active_queries = runtime.get("activeQueries") if isinstance(runtime, dict) else None
     if not isinstance(active_queries, list):
         _fail("agentify_preexisting_tab_runtime_invalid")
-    if status.get("activeQuery") is not None or any(
-        not isinstance(active, dict)
-        or active.get("tabId") == tab_id
-        or active.get("scope") == f"key:{request['stable_key']}"
-        for active in active_queries
+    if require_send_ready and (
+        status.get("activeQuery") is not None
+        or any(
+            not isinstance(active, dict)
+            or active.get("tabId") == tab_id
+            or active.get("scope") == f"key:{request['stable_key']}"
+            for active in active_queries
+        )
     ):
         _fail("agentify_preexisting_tab_busy")
     return tab_id
 
 
-def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: bool) -> dict[str, Any]:
+def _agentify_session(
+    request: dict[str, Any], state_dir: Path, *, require_send_ready: bool = True
+) -> tuple[str, str, str]:
     if not state_dir.is_absolute():
         _fail("agentify_state_dir_not_absolute")
     state_dir = state_dir.resolve(strict=False)
@@ -322,7 +340,16 @@ def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: 
         or health.get("sourceDirty") is not False
     ):
         _fail("agentify_server_identity_mismatch")
-    _require_preexisting_review_tab(base, token, request)
+    tab_id = _require_preexisting_review_tab(
+        base, token, request, require_send_ready=require_send_ready
+    )
+    return base, token, tab_id
+
+
+def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: bool) -> dict[str, Any]:
+    base, token, _ = _agentify_session(
+        request, state_dir, require_send_ready=not verify_existing
+    )
     timeout_seconds = request["timeout_ms"] / 1000.0 + 30.0
     result = _http_json(
         f"{base}/review-query",
@@ -334,12 +361,69 @@ def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: 
         _fail("agentify_receipt_missing")
     return result["receipt"]
 
-def existing_user_message_present(state_dir: Path, operation_key: str) -> bool:
-    if not state_dir.is_absolute(): _fail("agentify_state_dir_not_absolute")
-    ledger = _load_json(state_dir.resolve(strict=False) / "review-transport.json")
-    try: user_message_id = ledger["operations"][operation_key].get("userMessageId")
-    except (KeyError, TypeError, AttributeError): _fail("agentify_existing_operation_missing")
-    return user_message_id is not None and bool(_required_text(user_message_id, "existing_user_message", maximum=512))
+def _ledger_operation(state_dir: Path, operation_key: str) -> dict[str, Any]:
+    if not state_dir.is_absolute():
+        _fail("agentify_state_dir_not_absolute")
+    ledger_path = state_dir.resolve(strict=False) / "review-transport.json"
+    if not ledger_path.exists():
+        return {}
+    ledger = _load_json(ledger_path)
+    operations = ledger.get("operations")
+    operation = operations.get(operation_key) if isinstance(operations, dict) else None
+    return operation if isinstance(operation, dict) else {}
+
+
+def _send_confirmation_predicates(
+    operation: dict[str, Any], request: dict[str, Any], tab_id: str
+) -> dict[str, bool]:
+    submitted_at = operation.get("submittedAt")
+    return {
+        "sendCount": operation.get("sendCount") == 1,
+        "sendActionCount": operation.get("sendActionCount") == 1,
+        "userMessageId": isinstance(operation.get("userMessageId"), str)
+        and bool(operation.get("userMessageId")),
+        "submittedAt": isinstance(submitted_at, int)
+        and not isinstance(submitted_at, bool)
+        and submitted_at > 0,
+        "stableKey": operation.get("stableKey") == request["stable_key"],
+        "provider": operation.get("provider") == request["provider"],
+        "conversationUrl": operation.get("conversationUrl")
+        == request["conversation_url"],
+        "conversationId": operation.get("conversationId")
+        == request["conversation_id"],
+        "tabId": operation.get("tabId") == tab_id,
+    }
+
+
+def _user_message_present(operation: dict[str, Any]) -> bool:
+    user_message_id = operation.get("userMessageId")
+    return isinstance(user_message_id, str) and bool(user_message_id)
+
+
+def _fail_post_send(
+    code: str,
+    *,
+    operation: dict[str, Any],
+    request: dict[str, Any],
+    tab_id: str,
+    **facts: Any,
+) -> None:
+    _emit_lifecycle(
+        "POST_SEND_BLOCKED",
+        predicates=_send_confirmation_predicates(operation, request, tab_id),
+        operation_status=operation.get("status"),
+        **facts,
+    )
+    _fail(code)
+
+
+def _emit_lifecycle(phase: str, **facts: Any) -> None:
+    print(
+        "HMASD_AGENTIFY_LIFECYCLE "
+        + json.dumps({"phase": phase, **facts}, ensure_ascii=True, sort_keys=True),
+        flush=True,
+    )
+
 
 def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
     exact = {
@@ -353,6 +437,7 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         "status": "COMPLETE",
         "terminalState": "NATURAL_COMPLETION_VERIFIED",
         "sendCount": 1,
+        "sendActionCount": 1,
     }
     for field, expected in exact.items():
         if receipt.get(field) != expected:
@@ -586,6 +671,64 @@ def command_prepare(args: argparse.Namespace) -> None:
         f"assignment_identity={assignment_identity} operation_key={operation_key} "
         f"selection={selection_path} request={request_path}"
     )
+    _emit_lifecycle("PREPARED", operation_key=operation_key)
+
+
+def command_submit_worker(args: argparse.Namespace) -> None:
+    request, _, repo_root = _validated_inputs(args.request)
+    receipt_path = _require_within(
+        args.receipt,
+        _owner_roots(repo_root, request["transport_owner"], "runtime"),
+        "receipt_path",
+    )
+    receipt = call_agentify(request, state_dir=args.state_dir, verify_existing=args.verify_existing)
+    validate_receipt(receipt, request)
+    _atomic_write_new(receipt_path, _receipt_bytes(receipt))
+    print(
+        "HMASD_AGENTIFY_TRANSPORT_COMPLETE "
+        f"operation_id={receipt['operationId']} receipt={receipt_path}"
+    )
+
+
+def _spawn_submit_worker(args: argparse.Namespace, verify_existing: bool) -> subprocess.Popen[str]:
+    command = [
+        sys.executable,
+        str(Path(__file__).resolve()),
+        "_submit-worker",
+        "--request",
+        str(args.request),
+        "--receipt",
+        str(args.receipt),
+        "--state-dir",
+        str(args.state_dir),
+    ]
+    if verify_existing:
+        command.append("--verify-existing")
+    return subprocess.Popen(
+        command,
+        cwd=str(_repo_root()),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+
+def _terminate_owned_worker(worker: subprocess.Popen[str]) -> None:
+    worker.terminate()
+    try:
+        worker.wait(timeout=5.0)
+    except subprocess.TimeoutExpired:
+        worker.kill()
+        worker.wait(timeout=5.0)
+
+
+def _complete_from_existing(
+    request: dict[str, Any], state_dir: Path, receipt_path: Path
+) -> dict[str, Any]:
+    receipt = call_agentify(request, state_dir=state_dir, verify_existing=True)
+    validate_receipt(receipt, request)
+    _atomic_write_new(receipt_path, _receipt_bytes(receipt))
+    return receipt
 
 
 def command_submit(args: argparse.Namespace) -> None:
@@ -595,18 +738,206 @@ def command_submit(args: argparse.Namespace) -> None:
         _owner_roots(repo_root, request["transport_owner"], "runtime"),
         "receipt_path",
     )
+    operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+    existing = _user_message_present(operation)
     if args.verify_existing:
-        present = existing_user_message_present(args.state_dir, request["idempotency_key"])
-        print(f"HMASD_AGENTIFY_EXISTING_USER_MESSAGE present={str(present).lower()}")
-        if not present:
+        print(f"HMASD_AGENTIFY_EXISTING_USER_MESSAGE present={str(existing).lower()}")
+        if not existing:
             return
-    receipt = call_agentify(request, state_dir=args.state_dir, verify_existing=args.verify_existing)
-    validate_receipt(receipt, request)
-    _atomic_write_new(receipt_path, _receipt_bytes(receipt))
-    print(
-        "HMASD_AGENTIFY_TRANSPORT_COMPLETE "
-        f"operation_id={receipt['operationId']} receipt={receipt_path}"
+    started = time.monotonic()
+    overall_deadline = started + request["timeout_ms"] / 1000.0 + 30.0
+    if existing:
+        try:
+            _, _, tab_id = _agentify_session(
+                request, args.state_dir, require_send_ready=False
+            )
+        except TransportError as exc:
+            _emit_lifecycle("POST_SEND_BLOCKED", live_tab_error=str(exc))
+            raise TransportError("post_send_blocked_live_tab_identity") from exc
+        predicates = _send_confirmation_predicates(operation, request, tab_id)
+        if not all(predicates.values()):
+            _fail_post_send(
+                "post_send_blocked_ledger_identity_unconfirmed",
+                operation=operation,
+                request=request,
+                tab_id=tab_id,
+            )
+        _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
+        _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
+        next_generation_report = started + GENERATION_REPORT_SECONDS
+        while time.monotonic() <= overall_deadline:
+            operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+            status = operation.get("status")
+            if status == "COMPLETE":
+                receipt = _complete_from_existing(request, args.state_dir, receipt_path)
+                _emit_lifecycle("STABLE_COMPLETE", operation_id=receipt["operationId"])
+                print(
+                    "HMASD_AGENTIFY_TRANSPORT_COMPLETE "
+                    f"operation_id={receipt['operationId']} receipt={receipt_path}"
+                )
+                return
+            if status in {"BLOCKED", "ERROR"}:
+                break
+            now = time.monotonic()
+            if now >= next_generation_report:
+                _emit_lifecycle("GENERATING", operation_status=status)
+                next_generation_report = now + GENERATION_REPORT_SECONDS
+            time.sleep(LEDGER_POLL_SECONDS)
+        _emit_lifecycle(
+            "POST_SEND_BLOCKED",
+            predicates=_send_confirmation_predicates(operation, request, tab_id),
+            operation_status=operation.get("status"),
+        )
+        _fail("post_send_blocked_existing_operation_incomplete")
+
+    _, _, tab_id = _agentify_session(request, args.state_dir)
+    _emit_lifecycle("TAB_READY", tab_id=tab_id)
+    worker = _spawn_submit_worker(args, False)
+    _emit_lifecycle("DISPATCH_STARTED", worker_pid=worker.pid)
+    dispatch_started = time.monotonic()
+    confirmation_deadline = dispatch_started + SEND_CONFIRM_TIMEOUT_SECONDS
+    confirmed = False
+    next_generation_report = dispatch_started + GENERATION_REPORT_SECONDS
+
+    while worker.poll() is None:
+        operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+        predicates = _send_confirmation_predicates(operation, request, tab_id)
+        now = time.monotonic()
+        if _user_message_present(operation) and not all(predicates.values()):
+            _fail_post_send(
+                "post_send_blocked_partial_message_identity",
+                operation=operation,
+                request=request,
+                tab_id=tab_id,
+            )
+        if all(predicates.values()) and not confirmed:
+            confirmed = True
+            _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
+            _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
+            next_generation_report = now + GENERATION_REPORT_SECONDS
+        if not confirmed and now >= confirmation_deadline:
+            operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+            predicates = _send_confirmation_predicates(operation, request, tab_id)
+            if _user_message_present(operation) and not all(predicates.values()):
+                _fail_post_send(
+                    "post_send_blocked_partial_message_identity",
+                    operation=operation,
+                    request=request,
+                    tab_id=tab_id,
+                )
+            if not all(predicates.values()):
+                _terminate_owned_worker(worker)
+                operation = _ledger_operation(
+                    args.state_dir, request["idempotency_key"]
+                )
+                predicates = _send_confirmation_predicates(operation, request, tab_id)
+                if _user_message_present(operation) and not all(predicates.values()):
+                    _fail_post_send(
+                        "post_send_blocked_partial_message_identity",
+                        operation=operation,
+                        request=request,
+                        tab_id=tab_id,
+                    )
+                if not all(predicates.values()):
+                    _emit_lifecycle("PRE_SEND_BLOCKED", predicates=predicates)
+                    _fail("pre_send_blocked_unconfirmed_user_message")
+            confirmed = True
+            _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
+            _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
+        if confirmed and now >= next_generation_report:
+            _emit_lifecycle("GENERATING", operation_status=operation.get("status"))
+            next_generation_report = now + GENERATION_REPORT_SECONDS
+        time.sleep(LEDGER_POLL_SECONDS)
+
+    _, worker_stderr = worker.communicate()
+    operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+    predicates = _send_confirmation_predicates(operation, request, tab_id)
+    if _user_message_present(operation) and not all(predicates.values()):
+        _fail_post_send(
+            "post_send_blocked_partial_message_identity",
+            operation=operation,
+            request=request,
+            tab_id=tab_id,
+            worker_returncode=worker.returncode,
+        )
+    if all(predicates.values()) and not confirmed:
+        confirmed = True
+        _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
+
+    receipt = None
+    if worker.returncode == 0:
+        receipt = _load_json(receipt_path)
+        validate_receipt(receipt, request)
+    while not confirmed and time.monotonic() < confirmation_deadline:
+        operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+        predicates = _send_confirmation_predicates(operation, request, tab_id)
+        if _user_message_present(operation) and not all(predicates.values()):
+            _fail_post_send(
+                "post_send_blocked_partial_message_identity",
+                operation=operation,
+                request=request,
+                tab_id=tab_id,
+                worker_returncode=worker.returncode,
+            )
+        if all(predicates.values()):
+            confirmed = True
+            _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
+            break
+        time.sleep(LEDGER_POLL_SECONDS)
+
+    if not confirmed:
+        operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+        predicates = _send_confirmation_predicates(operation, request, tab_id)
+        if _user_message_present(operation) or receipt is not None:
+            _fail_post_send(
+                "post_send_blocked_ledger_identity_unconfirmed",
+                operation=operation,
+                request=request,
+                tab_id=tab_id,
+                worker_returncode=worker.returncode,
+                receipt_send_evidence=receipt is not None,
+            )
+        _emit_lifecycle(
+            "PRE_SEND_BLOCKED",
+            predicates=predicates,
+            worker_returncode=worker.returncode,
+        )
+        _fail("pre_send_blocked_submit_worker_failed")
+
+    if worker.returncode == 0:
+        assert receipt is not None
+        _emit_lifecycle("STABLE_COMPLETE", operation_id=receipt["operationId"])
+        print(
+            "HMASD_AGENTIFY_TRANSPORT_COMPLETE "
+            f"operation_id={receipt['operationId']} receipt={receipt_path}"
+        )
+        return
+
+    while time.monotonic() <= overall_deadline:
+        operation = _ledger_operation(args.state_dir, request["idempotency_key"])
+        status = operation.get("status")
+        if status == "COMPLETE":
+            receipt = _complete_from_existing(request, args.state_dir, receipt_path)
+            _emit_lifecycle("STABLE_COMPLETE", operation_id=receipt["operationId"])
+            print(
+                "HMASD_AGENTIFY_TRANSPORT_COMPLETE "
+                f"operation_id={receipt['operationId']} receipt={receipt_path}"
+            )
+            return
+        if status in {"BLOCKED", "ERROR"}:
+            break
+        if time.monotonic() >= next_generation_report:
+            _emit_lifecycle("GENERATING", operation_status=status)
+            next_generation_report = time.monotonic() + GENERATION_REPORT_SECONDS
+        time.sleep(LEDGER_POLL_SECONDS)
+    _emit_lifecycle(
+        "POST_SEND_BLOCKED",
+        predicates=_send_confirmation_predicates(operation, request, tab_id),
+        operation_status=operation.get("status"),
+        worker_returncode=worker.returncode,
+        worker_error=worker_stderr.strip()[:512],
     )
+    _fail("post_send_blocked_submit_worker_failed")
 
 
 def command_verify(args: argparse.Namespace) -> None:
@@ -640,6 +971,7 @@ def command_archive(args: argparse.Namespace) -> None:
         "HMASD_AGENTIFY_RAW_ARCHIVED "
         f"operation_id={receipt['operationId']} path={raw_output}"
     )
+    _emit_lifecycle("ARCHIVED", operation_id=receipt["operationId"])
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -663,18 +995,20 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--selection", type=Path, required=True)
     prepare.add_argument("--request", type=Path, required=True)
     prepare.set_defaults(handler=command_prepare)
-    for name in ("submit", "verify", "archive"):
+    for name in ("submit", "_submit-worker", "verify", "archive"):
         command = subparsers.add_parser(name)
         command.add_argument("--request", type=Path, required=True)
         command.add_argument("--receipt", type=Path, required=True)
-        if name == "submit":
+        if name in {"submit", "_submit-worker"}:
             command.add_argument(
                 "--state-dir",
                 type=Path,
                 default=Path(os.environ.get("AGENTIFY_DESKTOP_STATE_DIR", Path.home() / ".agentify-desktop")),
             )
             command.add_argument("--verify-existing", action="store_true")
-            command.set_defaults(handler=command_submit)
+            command.set_defaults(
+                handler=command_submit if name == "submit" else command_submit_worker
+            )
         elif name == "verify":
             command.set_defaults(handler=command_verify)
         else:

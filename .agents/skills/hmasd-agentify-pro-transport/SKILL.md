@@ -28,7 +28,8 @@ send.
 The transport is existing-tab-only. Before every `submit`, the wrapper reads
 Agentify's authenticated `/tabs` and scoped `/status` snapshots and requires
 exactly one already-live tab whose stable key, provider and conversation URL
-match the immutable request and whose query state is idle. The wrapper never
+match the immutable request, whose query state is idle, and whose
+`promptVisible` value is exactly `true`. The wrapper never
 creates, closes, shows, activates, navigates, refreshes, replaces or rebinds a
 tab. A missing, duplicate, blocked, busy or identity-mismatched tab fails before
 `/review-query`; no recovery path may open a page. The owning workflow must
@@ -100,11 +101,12 @@ exactly `schema_version=1`, the same `assignment_identity`, and
 `transport_backend=agentify`; its `operation_key` must equal the request's
 `idempotency_key`. It is the restart-stable cross-backend and same-assignment
 operation record and is never overwritten. `assignment_identity` must occur in
-the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000 inclusive. Agentify
-owns its durable ledger and send idempotency; the HMASD wrapper validates the
-request, proves the exact pre-existing tab is idle, calls Agentify, and writes
-a new role-owned receipt. The wrapper does not click UI controls or mutate tab
-state. No automatic
+the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000
+inclusive. Agentify owns its durable ledger and send idempotency; the HMASD
+wrapper validates the request, proves the exact pre-existing tab is send-ready,
+starts one owned submit worker, and observes the durable operation while that
+worker runs. It writes a new role-owned receipt only after stable completion.
+The wrapper does not click UI controls or mutate tab state. No automatic
 Continue, Retry, ResponseRetry, Answer now, duplicate submission of the same operation,
 cross-conversation fallback or response synthesis is allowed. A conflicting existing
 idempotency record or unavailable conversation terminates as a
@@ -113,7 +115,8 @@ transport blocker.
 ## Minimal recovery
 
 Active generation or a readable complete response always suppresses another
-send: wait, then verify and archive that response. When the conversation is
+send; a durable `userMessageId` does too. Observe the same operation, then
+verify and archive that response. When the conversation is
 idle and both generation and submitted user content are absent, the owning
 parent may assign one fresh unchanged-question child operation without a new
 user instruction. The owning parent is CPM for project reviews and Explorer for
@@ -161,10 +164,34 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` first proves the pre-existing exact tab identity and idle state, then
-returns one terminal operation identity. `--verify-existing` probes the same
-failed operation for a recorded user message and never sends. Neither mode may
-create, close, show, activate, navigate, refresh or replace a page.
+`submit` first proves the pre-existing exact tab identity, unblocked/idle state
+and `promptVisible=true`, then starts exactly one owned submit worker. The
+supervisor polls Agentify's durable ledger about once per second while the
+synchronous worker runs. Its observable phases are:
+
+```text
+PREPARED -> TAB_READY -> DISPATCH_STARTED -> MESSAGE_CONFIRMED -> GENERATING
+-> STABLE_COMPLETE -> ARCHIVED -> INTAKE_COMPLETE
+terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED
+```
+
+`MESSAGE_CONFIRMED` requires `sendCount=1`, `sendActionCount=1`, non-null
+`userMessageId` and `submittedAt`, plus exact stable-key, provider,
+conversation URL/ID and tab ID. A live process is never evidence of a send. If
+confirmation is absent for 60 seconds, the supervisor terminates only its own
+submit worker, rereads the ledger, returns `PRE_SEND_BLOCKED`, and never
+resends. Once `userMessageId` exists, it never terminates or retries; it
+observes that same operation until natural completion or
+`POST_SEND_BLOCKED`. Phase changes may be reported immediately; long
+`GENERATING` reports are limited to one per five minutes.
+`userMessageId` is the irreversible post-send boundary even if another
+identity predicate is incomplete or mismatched; that state is
+`POST_SEND_BLOCKED`, never `PRE_SEND_BLOCKED`. An early submit-worker exit does
+not shorten the 60-second durable-ledger confirmation window.
+
+`--verify-existing` observes the same operation and never sends. Neither mode
+may create, close, show, activate, navigate, refresh, replace or rebind a page.
+No second HMASD monitor or transport ledger is created.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -208,7 +235,9 @@ conversationUrl
 model
 idempotencyKey
 sendCount=1
+sendActionCount=1
 userMessageId
+submittedAt
 assistantMessageId
 snapshots=2_same_identity_and_hash_with_gap_ms>=3000
 responseSha256
