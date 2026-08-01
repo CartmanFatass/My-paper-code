@@ -1,0 +1,2 @@
+ADVISORY_REFINEMENT_REQUIRED_WITH_ONE_EXACT_GAP
+exact_gap=The pre-code Stage-A gate is not frozen: its 23 trace-family labels and separate M01–M16 attribution cases are not reconciled into one exact finite trace matrix specifying per row the initial FSM, ledger and epoch state, observation and event order, expected gate/residual/handoff actions and counts, terminal state, and fixed H and K required for an implementable O(H*K) audit.
