@@ -94,8 +94,8 @@ project interface.
   delegate to Pro — it is Pro's from the start, and this bullet read
   "or scientific interpretation to a child or External Pro" until 2026-07-30,
   which forbade the one hand-off the ruling requires.
-- Permit same-file concurrent writers, preserve obsolete compatibility paths, add
-  workflow hash handshakes, or create a Controller/dispatcher callback.
+- Permit same-file concurrent writers, preserve obsolete compatibility paths, or
+  create a Controller/dispatcher callback.
 - Substitute an unnamed/default worker after an unknown custom agent response.
 
 ## Scientific restraint
@@ -344,8 +344,6 @@ subagent, and a child reading tier tables it cannot act on is noise at best.
 - State the acceptance bar. For a repair, that means: apply the mutation that
   used to leave the guard green, watch the new test go **red**, revert, watch it
   go green, and report both. A repair nobody watched fail is not a repair.
-- Repeat the in-band waiting rule in the brief. Children stall on this
-  specifically and repeatedly.
 - **A worktree does not arrive on your branch** (measured: one arrived on an
   unrelated line). Tell every worktree child to report the commit it actually
   ran at, and treat a report without one as unverified.
@@ -804,8 +802,8 @@ Every mutating task owns an exact path set. Disjoint writers may proceed in
 parallel; overlapping paths are serialized. Children never run Git. Project
 Manager stages only accepted paths, checks the staged path set and
 `git diff --cached --check`, commits, and pushes **the working branch** under the user's
-standing authorization. Per-file hash handshakes and callback receipts are
-forbidden; the resulting Git commit is the source identity.
+standing authorization. The resulting Git commit is the source identity (the
+two hash keys above are the single statement of the hash prohibition).
 
 If a cross-task send is ever explicitly requested, resolve that target's live
 model and effort immediately before sending and copy them unchanged. Never keep

@@ -73,15 +73,9 @@ and show the count.
 Do not infer a contradiction from two documents using different words for the
 same thing. Establish that they would actually produce different behaviour.
 
-## Do not report a success you did not verify
-
-Your caller cannot re-derive your reasoning cheaply; your report is the evidence.
-Verify the proposition that matters, not one adjacent to it. A check that errored
-is a check that failed. Never assert a property you did not measure. "I could not
-establish it" is always an acceptable report.
-
 Finding nothing in a category is a real result — say so plainly rather than
-manufacturing a finding to look thorough.
+manufacturing a finding to look thorough. (Honest-reporting rules: the
+**Reporting honestly** section of `AGENT_CONTEXT.md`, already binding above.)
 
 ## Hard boundary
 
