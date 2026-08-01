@@ -210,6 +210,29 @@ if (-not ($rejected.failures -match 'no "## Evidence to read" allow-list')) {
     throw "Round preflight rejected the fixture, but not for the missing evidence allow-list -- this probe was masked by a sibling guard. Failures: $($rejected.failures -join ' | ')"
 }
 
+# --- the theme-drift gate: every question must answer the standing check ----
+#
+# Added 2026-08-01 by user ruling after the second drift incident (the credit-
+# identification spiral, then the provenance-apparatus spiral): a round that
+# cannot say what it lets us say about variable k does not get a Pro access.
+# Its own fixture violates exactly this one guard (valid allow-list, no
+# '## Variable-k relevance' section).
+$relevanceFixture = 'docs/external-review/rounds/00000000_relevance_reject_fixture'
+if (-not (Test-Path (Join-Path $repo "$relevanceFixture/20_PRO_OPEN_QUESTION.md"))) {
+    throw "Relevance rejection fixture is missing: $relevanceFixture. Restore it rather than deleting the check."
+}
+$relevanceRejected = & $preflight `
+    -Commit $probeCommit.Trim() `
+    -RoundPath $relevanceFixture `
+    -Branch $branch `
+    -RepoRoot $repo 2>$null | ConvertFrom-Json
+if ($relevanceRejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
+    throw 'Round preflight accepted a question with no "## Variable-k relevance" section'
+}
+if (-not ($relevanceRejected.failures -match 'Variable-k relevance')) {
+    throw "Round preflight rejected the relevance fixture, but not for the missing variable-k relevance section. Failures: $($relevanceRejected.failures -join ' | ')"
+}
+
 # --- the transport-fault channel must actually carry something --------------
 #
 # Added 2026-07-30 after an audit found that `## Transport faults` was a TODO

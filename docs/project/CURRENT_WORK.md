@@ -25,8 +25,8 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=Workflow 4 touchpoint 1 RECONCILED (round 20260801_d7_s_local_only_successor_reruling): route B3-L LOCAL_CERTIFIED_SEED_REPLAY selected; amendments frozen in docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE_R2.md. NOW: step 2 code design of the B3-L stack (local replay gate, CERTIFIED_LOCAL_EXECUTION_CLASS, assertion-6 relocation to first-action boundary, int32 dtype pin + component_dtype provenance, input-inventory generator, LOCAL_PROVENANCE_NOT_CERTIFIED refusal), decision ledger, then touchpoint 2 conformance. Zero experiments before touchpoint 2 closes. Steps N (input inventory, not manifests) and O unlock only after LOCAL_EPISODE_KEY_REPLAY_PASS.
-workflow_position=workflow 4 OPEN at touchpoint 1; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
+next_boundary=USER COURSE RULING 2026-08-01: algorithm-first -- the ten-iteration grant is spent on variable-k MARL algorithm exploration (toy surface; fixed-k vs unrestricted R30 vs learned low-cardinality constraint), per RESEARCH_GOAL.md's standing check, now enforced mechanically (every round question needs a '## Variable-k relevance' section; preflight refuses otherwise). The ENTIRE D7.S/B3-L provenance line is HELD: design frozen (D7_S_B3L_DECISION_LEDGER.md incl. conformance amendments), partial implementation archived in-tree, gate UNRUN, steps N and O not to be executed. NOW: open workflow 5 touchpoint 1 -- disclose the course ruling and the hold, ask Pro for the first conclusion-bearing variable-k algorithm decision.
+workflow_position=workflow 4 CANCELLED_BY_USER_COURSE_RULING mid-implementation (touchpoints 1-2 consumed, no experiment, no conclusion -- consumes no iteration); workflow 5 opens on the algorithm mainline
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that

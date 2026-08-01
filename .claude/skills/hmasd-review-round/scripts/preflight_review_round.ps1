@@ -77,6 +77,23 @@ foreach ($path in ($paths | Sort-Object -Unique)) {
     if ($LASTEXITCODE -ne 0) { $failures.Add("Allow-listed path is absent at commit: $path") }
 }
 
+# --- 3b. the theme-drift gate (user ruling 2026-08-01) -----------------------
+# Every Pro access must first answer the standing check of
+# docs/project/RESEARCH_GOAL.md: what does this round let us say about
+# variable k? Two drift spirals (credit identification, provenance apparatus)
+# each consumed multiple rounds without once varying k; this gate puts the
+# check at the only entry point Pro spending has.
+$relevanceIdx = [array]::IndexOf($lines, '## Variable-k relevance')
+if ($relevanceIdx -lt 0) {
+    $failures.Add('Question has no "## Variable-k relevance" section. Answer the standing check of docs/project/RESEARCH_GOAL.md -- what does this round let us say about variable k -- before spending a Pro access (user ruling 2026-08-01).')
+} else {
+    $end = [Math]::Min($lines.Count - 1, $relevanceIdx + 6)
+    $body = @($lines[($relevanceIdx + 1)..$end] | Where-Object { $_ -notmatch '^##\s' -and $_.Trim() }) -join ' '
+    if (-not $body -or $body -match 'TODO') {
+        $failures.Add('The "## Variable-k relevance" section is empty or TODO. A round that cannot answer the standing check does not get a Pro access (user ruling 2026-08-01).')
+    }
+}
+
 # --- 4. the standing scientific contracts must be allow-listed, not merely
 #        mentioned somewhere in prose -----------------------------------------
 foreach ($required in @(

@@ -96,6 +96,13 @@ Write the question so the framing is attackable as a hypothesis rather than
 presented for confirmation. If a round returns only agreement, suspect the
 question before the reviewer.
 
+**Every question carries a `## Variable-k relevance` section** (user ruling
+2026-08-01): one or two sentences answering the standing check of
+`docs/project/RESEARCH_GOAL.md` — what does this round let us say about
+variable k? Preflight refuses an absent, empty or TODO section. If the honest
+answer needs more than a sentence, the round is probably off the path — stop
+and reconsider before spending the access.
+
 **Declare the read boundary before launching anything speculative alongside a
 round.** State which fields may be read from an in-flight run before the ruling
 lands — wall clock, conformance, provenance — and which may not. Declaring it in
