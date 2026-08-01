@@ -1,5 +1,7 @@
 # Iteration 34: G44 channel-scale normalization attribution formal result
 
+本轮记录正式运行与外部审阅的机械事实，不扩展科学结论。
+
 ## Execution boundary
 
 - assignment: `CONTINUOUS_ROSTER_NATIVE_SIX_G31_CHANNEL_SCALE_NORMALIZATION_ATTRIBUTION_G44_FORMAL_ITERATION_34`
