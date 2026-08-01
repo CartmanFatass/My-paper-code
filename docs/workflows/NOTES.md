@@ -16,9 +16,10 @@ repository and confirmed in session, not assumed. Canonical terms are marked
 - Git remote is GitHub `CartmanFatass/My-paper-code`. Branches in play:
   `aggressive` (previous exploration direction), `untied-k` (current — the
   skill-period-k unbinding direction), `new-test`, `Claude`.
-- External review runs through a **Pro conversation** in the browser, reached
-  with the `claude-in-chrome` plugin. The registered conversation is currently
-  `unregistered` — a new independent one is being stood up.
+- External review runs through registered **Pro conversations** via the
+  Agentify Desktop local HTTP API (`/review-query`, receipt-verified; browser
+  transport retired 2026-08-01). Both `untied-k` reviewers are registered in
+  `docs/external-review/REVIEWER_CONVERSATIONS.json`.
 
 ## Roles
 

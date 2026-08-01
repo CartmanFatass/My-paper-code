@@ -27,7 +27,7 @@ $expectedAgents = @(
     'hmasd-exp-recorder.md', 'hmasd-experiment-operator.md',
     'hmasd-guard-sweeper.md',
     'hmasd-implementer.md', 'hmasd-monitor.md',
-    'hmasd-patcher.md', 'hmasd-review-monitor.md', 'hmasd-reviewer.md',
+    'hmasd-patcher.md', 'hmasd-reviewer.md',
     'hmasd-scout.md', 'hmasd-verifier.md') | Sort-Object
 if (Compare-Object $expectedAgents $agentDefs) {
     throw "Unexpected subagent roster: $($agentDefs -join ',')"

@@ -1,6 +1,6 @@
 ---
 name: hmasd-review-round
-description: Use for direct Project Manager transport to HMASD external GPT-5.6 Pro, including registered-conversation recovery, freshness-fence handling, stable completion detection, evidence-access recovery, heartbeat cleanup, and exact raw archival.
+description: Use for direct Project Manager transport to HMASD external GPT-5.6 Pro over the Agentify Desktop receipt transport, including operation preparation, single-send submission, receipt verification, evidence-access recovery, and exact raw archival.
 ---
 
 # HMASD External Pro Review Transport
@@ -126,190 +126,35 @@ This Skill grants no authority. It is an operational transport procedure only.
 It must not decide the need for review or scientific completeness, how to use a
 response, or what work follows it.
 
-Activate `$hmasd-review-round` in the active Project Manager. Browser work uses
-the `claude-in-chrome` skill and its `mcp__claude-in-chrome__*` tools; load that
-skill before the first browser call.
-
 **Transport is `project_manager_direct`.** The active Project Manager authors the
 question, freezes and pushes the boundary, owns registration, submits the fence,
-and **owns the archive decision**.
+and **owns the archive decision**. The browser-click transport was retired
+2026-08-01; every send now goes through the Agentify wrapper below, and no
+browser tool is part of this procedure.
 
-This replaced a delegated transport child on 2026-07-25; waiting and capturing
-are separated by who does them.
+### The digest bond
 
-### Capture may be delegated, but only against a digest bond
+The receipt returned by a completed operation carries the response bytes and
+their SHA-256 (`responseSha256`). The wrapper archives those bytes write-once,
+and the Project Manager independently recomputes SHA-256 over the archived file
+via `archive_pro_response.ps1`. **A mismatch is a refusal, never a repair** — do
+not reconcile by editing the file. This is the charter's one sanctioned SHA-256
+site (`sha256_whitelist=review_round_archive_integrity_only`).
 
-Amended 2026-07-30. The old rule said flatly that there is no transport delegate,
-and its reason was sound when written: a relay could archive rendered DOM, the
-wrong round's message, or a failed capture dressed as a success. **All three are
-now mechanically excludable**, so the blanket prohibition costs more than it buys.
+There is no capture step and nothing to delegate: choosing which message is the
+ruling is proven by the receipt's message identity, and the archive decision
+stays with the Project Manager. Create no standing relay, dispatcher or Monitor.
 
-A bounded child may perform the capture when **all four** hold. Any one missing and
-the Project Manager captures it directly.
+### Transport faults are carried, and the Project Manager carries them
 
-1. **The Project Manager supplies the expected `message_id`**, taken from the
-   conversation API, and the child refuses if the latest assistant message is not
-   that one. The child never decides which message is the ruling.
-2. **The child returns a page-computed digest**: `crypto.subtle.digest('SHA-256')`
-   over the emitted markdown, plus its character length and the message id. It
-   returns no bulk text through the tool channel.
-3. **The child writes nothing into the round directory.** It hands the bytes over
-   the OS clipboard; `archive_pro_response.ps1` is run by the Project Manager.
-4. **The Project Manager independently recomputes SHA-256** over the LF-normalized
-   archived file and it must equal the child's page-computed digest. **A mismatch
-   is a refusal, never a repair** — do not reconcile by editing the file.
-
-**The digest bond binds the Project Manager's own captures too, and that is what
-earns the loosening.** Until 2026-07-30 the direct path was verified by a length
-match, which a substitution can satisfy; a digest match cannot. Compute it on both
-sides of the boundary, every round, delegated or not.
-
-What is still not delegable: choosing which message is the ruling, and deciding
-that a failed capture is archivable anyway. Those are judgements, and they stay
-with the Project Manager whatever mechanism moved the bytes.
-
-**`hmasd-review-monitor` (haiku) performs one bounded inspection per dispatch,
-and nothing else.** It holds no wait affordance and no clock: the Project Manager
-owns the pacing and dispatches it again when another look is due, starting the
-moment the fence lands. It holds no click, type or write tools, so it
-structurally cannot submit, capture or curtail — it reports one observation and
-the Project Manager acts on it. Never brief it with a waiting duty; it has no
-wait affordance, and an imposed one gets satisfied by invention.
-
-Create no standing relay, dispatcher or Monitor. A bounded, single-purpose child
-dispatched for one capture under the digest bond above is not a relay: it holds no
-state between rounds, decides nothing, and its output is verified by a number the
-Project Manager computes itself.
-
-### The monitor reports procedure defects, and the Project Manager must carry them
-
-`hmasd-review-monitor` is required to return a `PROCEDURE_DEFECTS` item: every
-expectation **its brief stated** that the page did not meet. Two duties follow, and
-they are the Project Manager's:
-
-- **State the expectations in the brief.** A brief that names no control, selector
-  or marker cannot detect a stale procedure, and the monitor will correctly report
-  `none stated`. That reply is a finding about the brief, not about the page.
-- **Carry every reported defect into the round's `## Transport faults`**, and in
-  the same round either repair this Skill or record why not. The monitor holds no
-  write tool and never runs Git; its reply is the only channel, so a defect the
-  Project Manager does not transcribe is a defect that did not happen.
-
-`tests/review_round_contract_test.ps1` refuses a round whose `## Transport faults`
-section is empty or still `TODO`. That check exists because this section was a TODO
-nobody read for thirty rounds: the duty had somewhere to be written and no reason
-to be, which is how a prescribed mechanism went on being prescribed after it
-stopped working.
-
-### Browser tool mapping
-
-| Transport operation | Tool |
-|---|---|
-| enumerate existing tabs before opening anything | `tabs_context_mcp` |
-| open the registered conversation | `tabs_create_mcp`, then `navigate` |
-| snapshot message-role containers and generation controls | `read_page`, `get_page_text` |
-| locate a specific control or conversation link | `find` |
-| compose the fence or a continuation | clipboard paste via `computer` — **not** `form_input`, which fails on this composer (see below) |
-| run an ordered multi-step page sequence | `browser_batch` |
-| submit, scroll, or operate a control | `computer` |
-| attach the evidence archive during transport recovery | `file_upload` |
-
-Never reuse a tab id from an earlier session; call `tabs_context_mcp` first and
-re-resolve. **Re-resolving means reusing the tab already on the registered
-conversation, not opening another one.** If `tabs_context_mcp` returns a tab
-whose URL contains the registered `conversation_id`, that is your tab — do not
-call `tabs_create_mcp` or `navigate` to a fresh one. Opening a new tab per
-attempt churns tab ids, discards page state, and makes the send-verification
-count below unreliable because the turn history has to be re-read each time.
-Create a tab only when no existing tab holds that conversation. Do not trigger a JavaScript dialog — a modal blocks every subsequent
-browser call and requires the user to clear it by hand.
-
-#### When the tab is wedged — replace it, never add to it
-
-Wedged means: **every** script-injecting operation times out, the page never
-reaches `document_idle`, and a reload does not fix it (distinct from the empty
-content pane the discovery ladder handles). Bounded recovery: reload-and-wait
-twice; then close the wedged tab, create one, navigate to the registered URL;
-finish with **exactly one tab** holding the conversation (verify with
-`tabs_context_mcp`). A replacement tab grants nothing — re-verify fence
-presence before any submission, exactly as on a first visit. Two tabs on one
-conversation is forbidden however you got there.
-
-### Composing multi-line text — a newline is a send
-
-**In this composer, Enter submits.** `computer` `type` delivers every `\n` as
-an Enter keypress, so typing a multi-line fence submits it one fragment at a
-time (this once cost a round). `form_input` fails on this composer — it is a
-contenteditable `DIV`, not a form control.
-
-#### Primary mechanism — paste from a committed artifact
-
-Never compose a multi-line message keystroke by keystroke. Write it to a file in
-the round directory first, then paste it in one operation:
-
-1. author the exact message as a round artifact — `10_FENCE.txt` for the fence,
-   `11_CONTINUATION_<n>.txt` for a convergence or transport-repair turn;
-2. load it onto the clipboard verbatim:
-
-   ```powershell
-   $src = Get-Content -Raw -Encoding UTF8 <artifact-path>
-   Set-Clipboard -Value $src
-   Start-Sleep -Milliseconds 300      # let the write land before reading it back
-   ($src -ceq (Get-Clipboard -Raw))   # must print True before continuing
-   ```
-
-   **The settle is load-bearing** — without it the read can race the write and
-   report `exact=False` on correct bytes (measured). On a mismatch, retry once
-   with the settle before believing it.
-
-3. click the composer and press `ctrl+v` — a paste inserts the whole text at
-   once and generates no Enter keypress;
-4. screenshot and read the composer back, confirming the whole message is
-   present exactly once and not doubled;
-5. submit **once**, then confirm it landed by the mechanical test below.
-
-**Deciding whether you sent — do not reason about this, measure it.** Before
-pasting, count the user turns in the conversation. After clicking send, wait,
-then apply the one send test: **how many user turns carry this fence's
-`stage_commit`?** Zero means it did not send; exactly one means sent; more than
-one is the duplicate this Skill exists to prevent. Composer emptiness is
-corroborating evidence only — measured on this page, the composer can keep the
-full text after a send that **did** land (see *The composer keeps its text after
-a successful send* below), so a still-full composer must never by itself trigger
-a second send. **Never a second `Return` on a composer holding an
-already-counted fence; clear the residue instead.**
-
-"I am not sure whether it sent" is not a terminal state. The no-duplicate rule
-scopes to **re-sending**: never send content that already appears as a user
-turn — but if the composer holds your text and no matching user turn exists,
-the send has not happened and finishing it is required, not optional.
-
-**Artifacts are ASCII-only.** Write fence and continuation files in plain ASCII —
-use `--` rather than an em dash. The clipboard path silently corrupts non-ASCII
-when a reader drops `-Encoding UTF8` (PowerShell 5.1 defaults to ANSI), and the
-damage appears as mojibake like `â€"` inside an archive that is supposed to be
-byte-exact. Always pass `-Encoding UTF8`, and keep the artifact ASCII so the flag
-being dropped cannot corrupt anything.
-
-This is more stable than typing and it makes the sent text an auditable
-byte-exact artifact rather than a reconstruction, which is what "submit
-verbatim" actually requires. The artifact is committed with the round, so what
-was sent is recoverable from Git instead of from a browser transcript.
-
-Note that `Set-Clipboard` overwrites the user's clipboard.
-
-#### Fallback — soft line breaks
-
-If the clipboard is unavailable, `type` one line at a time with **no `\n`
-anywhere in the text**, pressing `shift+Return` between lines — a soft line break
-that does not submit — then verify and submit as above. Drive the sequence
-through `browser_batch` so ordering is deterministic; concurrent single calls can
-interleave and scramble the text.
-
-If a submission appears not to have landed, snapshot before retyping. The text is
-usually already there and the UI simply has not repainted — retyping on an
-unconfirmed snapshot is what produces duplicates. Uncertainty resolves toward not
-sending, exactly as it does for a second fence.
+Every transport anomaly observed during a round goes into that round's
+`## Transport faults` section: each `HMASD_AGENTIFY_TRANSPORT_ERROR` code, any
+terminal state other than `NATURAL_COMPLETION_VERIFIED`, an HTTP 409
+(idempotency or binding conflict), a tab-precondition failure, or a receipt that
+failed local validation. In the same round either repair this Skill or record
+why not. `tests/review_round_contract_test.ps1` refuses a round whose
+`## Transport faults` section is empty or still `TODO` — that check exists
+because this section was once a TODO nobody read for thirty rounds.
 
 ## Required inputs
 
@@ -326,7 +171,7 @@ no implementation-detail checking, no auditing of what the execution side can
 verify itself. The two bounded exceptions are the Stage A design audit and
 the Stage B code-science alignment diff defined in `$hmasd-acceptance-gate`.
 
-Before browser submission:
+Before submission:
 
 1. Confirm the supplied paths and Git source identity match the
    assignment and are Git-visible at `stage_commit`.
@@ -359,27 +204,54 @@ editing, paraphrasing, or validating the package.
 
 ## Project-Manager-direct transport
 
-### Deterministic browser state machine
+```text
+transport_backend=agentify
+transport_wrapper=.claude/skills/hmasd-review-round/scripts/agentify_pro_transport.py
+agentify_required_commit_source=AGENTIFY_REQUIRED_COMMIT_in_wrapper
+prompt_artifact=fence_or_continuation_file_verbatim
+one_send_per_operation_key=true
+fence_operations_per_round=1
+resend_policy=verify_existing_then_at_most_one_fresh_key
+transport_tab_mutation=forbidden
+non_strict_query_endpoint=forbidden
+evidence_recovery=inline_continuation_paste_only
+completion_proof=receipt_NATURAL_COMPLETION_VERIFIED
+waiting=in_band_blocking_submit
+```
 
-Execute these states in order. Do not skip a state because an older response is
-visible or the page title looks familiar.
+The wrapper is the only send path. It refuses unless the running Agentify
+instance reports the pinned source commit with a clean tree (`/health`), exactly
+one idle tab exists bound to the reviewer's `stable_key` at the exact registered
+conversation URL, and no query is active. It performs one `POST /review-query`:
+Agentify inserts the prompt in a single operation, sends once, structurally
+never clicks Continue/Retry/Answer-now, proves completion with two snapshots at
+least three seconds apart carrying the same assistant message id and text
+SHA-256 and no active stop control, and returns a receipt whose terminal state
+must be `NATURAL_COMPLETION_VERIFIED` with `sendCount=1`. The wrapper validates
+all of that locally before writing anything.
+
+Run every command with the project Python:
+
+```powershell
+& 'C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe' `
+  .claude/skills/hmasd-review-round/scripts/agentify_pro_transport.py <command> ...
+```
+
+### Deterministic transport state machine
+
+Execute these states in order. Do not skip a state because an older receipt is
+on disk or the ledger looks familiar.
 
 | State | Required observation | Mechanical action | Exit condition |
 |---|---|---|---|
-| `RESOLVE_REGISTERED_CONVERSATION` | Registry supplies one `conversation_id` and URL | Reuse a controlled matching tab; otherwise open the URL once. On a signed-in home-page redirect, find and open the visible link with that exact ID. If the matching page has a composer but no message-role containers, wait once and reload once. | URL contains the registered ID and visible conversation messages are readable. |
-| `VERIFY_FRESHNESS_FENCE` | Visible user turns can be inspected by message role | Match `repository`, `branch`, `round`, `stage_commit` and `question`. Resume an exact match. Submit once only after readable history proves it absent. | One visible exact fence exists. |
-| `WAIT_FOR_RESPONSE` | Latest assistant turn after the fence or latest transport-repair message is identifiable | While text changes or `Stop generating`/`Stop answering` is active, remain pending. Otherwise compare two snapshots at least three seconds apart. Ignore a stale `Thinking` label by itself. | Same message ID/text, no active stop, retry, error or continue control. |
-| `RECOVER_EVIDENCE_ACCESS` | Assistant explicitly reports missing question-listed evidence or unavailable repository access | Treat it as a transport diagnostic. Build the exact `stage_commit` allow-list archive, attach it in the same session and send one mechanical continuation. Never send a second fence. | A later assistant candidate is attributable to the repair message. |
-| `ARCHIVE_AND_INTAKE` | Candidate passes stable completion checks | Write exact visible text to raw, reread for exact equality, write provenance intake, and confirm heartbeat absence. | Project Manager holds exact raw and proceeds to its separate scientific reconciliation. |
+| `PREPARE_OPERATION` | Preflight printed `ROUND_PREFLIGHT_READY`; registry supplies `stable_key`, conversation and model | `prepare --kind fence` (or `--kind continuation`) with a fresh operation key; runtime files go under `logs/review_transport/<round>/` | `HMASD_AGENTIFY_REQUEST_PREPARED`; `TRANSPORT_BACKEND.json` and `request.json` written |
+| `SUBMIT_AND_WAIT` | Wrapper preconditions hold (pinned commit, one idle bound tab) | `submit` in background execution — it blocks inside Agentify up to 45 minutes. Ending the turn to wait is a stall; the wait is in-band. On client death, re-run `submit` with the **same request file**: the same operation key resumes or returns the stored receipt, never a second send | `HMASD_AGENTIFY_TRANSPORT_COMPLETE`; `receipt.json` written |
+| `VERIFY_RECEIPT` | `receipt.json` exists | `verify` — full local receipt re-validation | `HMASD_AGENTIFY_RECEIPT_OK` |
+| `ARCHIVE_AND_INTAKE` | Raw path absent (write-once) | `archive --raw-output <round>/21_PRO_OPEN_RAW.md`, then `archive_pro_response.ps1` for the independent digest bond; write the provenance intake | Exact raw archived, digest equal, intake recorded; Project Manager proceeds to its separate scientific reconciliation |
 
-`Response actions` such as `Copy response` plus stable text are supporting
-completion evidence, not a substitute for message identity and inactive
-generation controls. A CAPTCHA, login or application-approval boundary requires
-user action; a generic ChatGPT home page does not.
+### The freshness fence
 
-Always inspect the registered conversation before submission.
-
-Search visible user turns for this exact fence identity:
+The prompt of a fence operation is the round's `10_FENCE.txt`, byte-verbatim:
 
 ```text
 CURRENT_REVIEW_ASSIGNMENT
@@ -400,211 +272,33 @@ The reviewer reads the repository itself through the web GitHub connector at
 `stage_commit`; the question carries exact paths, not file contents. Anything
 unpushed is invisible to it — verify the push before submitting.
 
-- If a matching fence is visible, adopt its browser state and continue.
-  An accepted matching fence is never resubmitted.
-- If a stable response follows that fence, archive it without submission.
-- If the readable conversation proves the matching fence absent, submit the
-  fence once and require the visible user turn to match all identity fields.
-- If presence or absence cannot be established, recover the same conversation;
-  uncertainty never authorizes submission.
+**An accepted matching fence is never resubmitted**, and the ledger is what
+proves the state. One fence operation key exists per round, minted at
+`PREPARE_OPERATION` and recorded in `TRANSPORT_BACKEND.json` and the intake
+record. Re-running `submit` with the same request file is always safe: Agentify
+returns the stored receipt or resumes the wait, and a payload change under the
+same key is refused with a 409. Before any resend under a **fresh** key, run
+`submit --verify-existing` and require `present=false` — an operation that was
+aborted before its send (`review_operation_closed_create_fresh`) is the only
+state that authorizes one fresh key, recorded as a `RECOVERY_ATTEMPT` line.
+After that one fresh key, the round is `REVIEW_TRANSPORT_BLOCKED`.
 
-Keep one registered page and at most one Project-Manager-owned five-minute heartbeat
-while pending. A heartbeat performs one bounded inspection and never submits.
-Do not create a Monitor or another transport task.
+### Standing tab precondition
 
-### Conversation discovery ladder
+After a key's first send, each registered `stable_key` has one live tab in the
+Agentify-managed browser whose record carries the exact conversation URL, with
+the composer showing the registry's `expected_model_ui`; every later operation
+requires that tab idle and unique, and a missing, mismatched, duplicated or
+busy tab is terminal — report it, never repair it.
 
-A redirect to the ChatGPT home page is not a blocker. Keep the valid browser
-binding, discard only a stale tab binding, and perform this conversation
-discovery ladder before reporting transport unavailable:
+**The first send of a fresh `stable_key` is the one exception** (measured
+2026-08-01): a tab record's URL is fixed at creation, so a pre-created tab
+mismatches forever, and only `/review-query` itself can create the tab bound
+to the conversation URL. For that first operation only, and after confirming
+no tab with the key exists, run `submit --allow-tab-creation`. The flag is
+never used again for that key.
 
-1. Inspect controlled and user-visible tabs for a visible conversation link
-   whose `href` contains the registered `conversation_id`. Reuse it when found.
-2. Open the registered URL once. If it redirects to the signed-in home page,
-   inspect visible conversation links and the sidebar/history for that same
-   `conversation_id`.
-   If the matching URL has a composer but no visible message-role containers
-   after one bounded wait, reload the same tab once and take a fresh snapshot.
-   An empty content pane is a recoverable render state, not proof that the
-   conversation or assignment is absent.
-3. Use the signed-in conversation search with unique current-round evidence:
-   the exact `round`, `stage_commit`, and question basename. A candidate is
-   accepted only when the candidate URL contains the registered
-   `conversation_id` and its visible user turn matches the full fence identity.
-4. If the page is a real authentication or application-approval boundary,
-   request that user action. A generic home page is not authentication proof.
-
-Never select a conversation from title similarity, page-tail text or an older
-round response. Reacquiring or opening a tab does not invalidate the existing
-browser binding and does not authorize a new fence.
-
-### Response completion detection
-
-Locate the exact user message containing the matching fence, then inspect the
-assistant message after that fence using message-role containers such as
-`data-message-author-role="assistant"`. Do not use the page tail, a single
-spinner, elapsed time or a global status label as the response identity.
-
-Treat the response as naturally complete only when all transport evidence
-agrees:
-
-Require two stable snapshots from distinct inspections separated by at least three seconds.
-
-- the same assistant message identity and complete visible text appear in two
-  stable snapshots from distinct inspections;
-- the second snapshot adds no text and exposes no active `Stop generating` or
-  `Stop answering` or cancel-generation control for that turn;
-- no response error, `Retry`, or continue-generation control exists for the
-  current turn; partial assistant text plus such a control is not complete; and
-- the response belongs to the exact matching fence rather than an earlier
-  assistant turn.
-
-A visible `Thinking` label alone does not prove generation is active; changing
-text or an active stop control does. **Never click `Answer now` or any control
-that curtails extended thinking** — waiting is the whole job, and a forced
-early answer cannot be undone. An active `Stop answering`/`Stop generating`
-control **anywhere for the current turn** ends the question: extended reasoning
-emits a progress trace that sits still for many seconds, so two stable
-snapshots are necessary, never sufficient — a 794-byte trace was once archived
-as raw on exactly that mistake.
-
-### Step zero — provisional capture the moment generation stops
-
-Before any click, dump the answer text with `javascript_tool` to
-`22_PROVISIONAL_CAPTURE.txt` — one call, works hidden, survives the browser
-dying (a completed 20745-character ruling was once lost mid-capture for want of
-this). It is `innerText`: never the archive, no reconciliation may be written
-from it, deleted once `21_PRO_OPEN_RAW.md` exists and noted in intake.
-
-### Hidden-tab diagnosis — check `document.visibilityState` first
-
-`hidden` is the steady state of this tab, not a symptom, and it explains at
-once: `screenshot`/`find` timing out under render throttling, `javascript_tool`
-still answering, and `navigator.clipboard.writeText` refusing. Remedy: activate
-the tab — never replace it. What works while hidden:
-
-| Works on a hidden tab | Fails on a hidden tab |
-|---|---|
-| `javascript_tool` DOM reads | `screenshot`, `find` (render-throttled, time out) |
-| OS-level `computer` `key` — `ctrl+v`, `Return`, `ctrl+a`, `Delete` | `navigator.clipboard.writeText` (refuses) |
-| OS-level `computer` `left_click` (lands correctly) | heavy `await fetch` (may time out) |
-
-A fence can be sent end to end on a hidden tab: focus the composer with
-`javascript_tool`, paste with `ctrl+v`, read the composer back, submit with
-`Return`. Activate only for the clipboard write during capture. When a click is
-suspect, a capturing click listener (`addEventListener('click', ...)` pushing
-`{x, y, aria-label}`) settles where it landed in one call; and never pass a JS
-rect straight to `computer` — convert by `screenshot_width / window.innerWidth`.
-
-**The composer keeps its text after a successful send** (measured twice), so
-composer emptiness is corroborating evidence, not the send test — the send test
-is the `stage_commit` user-turn count, always. Clear residue with `ctrl+a` then
-`Delete`; **never a second `Return`**.
-
-Browser liveness is part of transport: check `list_connected_browsers` before
-spending a reload; never `tabs_close_mcp` the last tab (create first, then
-close); poll every 2–3 minutes while generating; and the browser is Edge —
-`${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe` — restartable
-from here, with the extension reconnecting on its own. A failed search is not
-evidence of absence until the search itself is proven against something known
-to exist.
-
-#### Never use `find` to prove a fence absent
-
-`find` is a semantic matcher: it does not report nothing, it reports a
-*plausible* something — it once matched the previous round's fence for a
-40-hex commit it did not contain. Prove presence or absence from the
-conversation API, which is exact and deterministic:
-
-```javascript
-const s = await fetch('/api/auth/session').then(r=>r.json());
-const conv = await fetch('/backend-api/conversation/'+cid,
-  {headers:{Authorization:'Bearer '+s.accessToken}}).then(r=>r.json());
-const users = Object.values(conv.mapping)
-  .filter(n=>n.message && n.message.author && n.message.author.role==='user');
-let hits = 0;
-for (const n of users) {
-  const t = (n.message.content.parts||[]).map(p=>typeof p==='string'?p:'').join('');
-  if (t.indexOf(stageCommit) !== -1) hits++;
-}
-'user_turns=' + users.length + ' exact_fence_hits=' + hits;
-```
-
-`exact_fence_hits=0` authorizes submission; anything else does not. Return the
-**counts**, never the message bodies — bulk text through this channel is blocked
-by design, and encoding around that block is defeating a safety control rather
-than satisfying it.
-
-The same rule governs verifying a *capture*: the fence itself contains the
-`stage_commit`, so `clipboard.Contains(stage_commit)` cannot distinguish the
-archived ruling from the fence you just sent. Assert a length and a body-only
-heading as well.
-
-### The primary capture path — read the conversation API, not the clipboard
-
-**Prefer this over `Copy response`.** From page context, with the user's own
-session:
-
-```javascript
-const s = await fetch('/api/auth/session').then(r => r.json());
-const c = await fetch('/backend-api/conversation/<conversation_id>',
-  {headers: {Authorization: 'Bearer ' + s.accessToken}}).then(r => r.json());
-const asst = Object.values(c.mapping || {})
-  .filter(m => m.message && m.message.author.role === 'assistant'
-            && m.message.content && m.message.content.content_type === 'text');
-asst.sort((x, y) => (x.message.create_time || 0) - (y.message.create_time || 0));
-const txt = asst[asst.length - 1].message.content.parts.join('');
-```
-
-It returns the model's own emitted markdown (no rendering layer to lose a
-marker), works on a background tab, and yields an independent source length to
-check the archive against. Three practical notes:
-
-1. `javascript_tool` may refuse to return the text after a call that touched an
-   auth token — stash it on `window`, copy via a real user gesture, read with
-   `Get-Clipboard -Raw`;
-2. `navigator.clipboard.writeText` needs a real user gesture — a full-viewport
-   transparent overlay carrying the copy handler, clicked once by `computer`,
-   then removed;
-3. a heavy `await fetch` timing out under background throttling is throttling,
-   not death — check liveness, activate the tab, retry.
-
-Normalize CRLF to LF before writing, so the archive matches the emitted source
-rather than the clipboard's transport encoding.
-
-### Fallback — the `Copy response` control
-
-If the API path fails, use the page's `Copy response` control (in `Response
-actions` on the assistant turn). A failed capture costs a retry, so this is a
-checklist, not a mechanism:
-
-1. set the clipboard to a sentinel first — a silent no-op click otherwise reads
-   as a capture of the previous content;
-2. scroll to the true end of the answer — several turns carry their own control;
-3. click by **coordinate** from a screenshot (a `ref` click can report success
-   without a clipboard write); expect more than one click — read the button
-   state, not the tool result;
-4. verify the clipboard changed from the sentinel;
-5. archive only with `scripts/archive_pro_response.ps1 -RoundPath <round>
-   -StageCommit <commit> -Sentinel <sentinel>` — it enforces BOM-free UTF-8,
-   reread equality, this round's `stage_commit` present, plausible size and a
-   heading; its JSON is the mechanical intake record. Raw is write-once.
-
-Prohibited capture methods (each once produced a corrupt archive): retyping via
-a file-write tool; `get_page_text`/`read_page` output as the archive;
-`ConvertFrom-Json` round-trips without explicit UTF-8. `Copy response` absent
-from the accessibility tree is a transport fault — report, never transcribe.
-A capture missing this round's `stage_commit`, or that is a progress trace, is
-the wrong capture: re-enter the wait, never archive it. Length and non-emptiness
-prove nothing — a 397-byte fence and an 18322-character previous-round ruling
-both passed every other check.
-
-If an explicit response error has no completed assistant message, a same-turn
-`Retry` may be used once as a recorded recovery after confirming it cannot
-submit another freshness fence. Do not assess whether requested scientific
-sections are present; that belongs to Project Manager after exact archival.
-
-### Evidence-access transport recovery
+### Evidence-access recovery
 
 An assistant message reporting it could not read question-listed evidence, or
 unavailable repository/connector access, is a transport diagnostic — never the
@@ -613,15 +307,17 @@ same accepted fence:
 
 1. take the evidence paths from the question only, never from the diagnostic;
 2. materialize them from `stage_commit`, not from the current working tree,
-   with `scripts/build_review_evidence_archive.ps1 -Commit <stage_commit>
-   -QuestionPath <question> -OutputPath <zip>`; continue only on
-   `REVIEW_EVIDENCE_ARCHIVE_READY` with the expected commit and file count;
-3. attach the archive and send one mechanical continuation naming its commit
-   and allow-list identity — never a second fence;
-4. the candidate raw is the stable assistant response after the repair message,
-   under the same completion checks;
-5. if ingestion fails, one materially distinct delivery of the same allow-listed
-   files; never worktree content, scratch artifacts or authored explanation.
+   with `git show <stage_commit>:<path>` — the strict endpoint has no
+   attachment support, so the allow-listed files are pasted inline into one
+   continuation artifact, each inside a fenced code block naming its path;
+3. send that artifact as one `--kind continuation` operation — never a second
+   fence. The whole prompt must stay under Agentify's 200,000-character limit;
+   if the allow-list cannot fit, report `REVIEW_TRANSPORT_BLOCKED` instead;
+4. the candidate raw is the receipt of that continuation operation, under the
+   same receipt validation;
+5. `build_review_evidence_archive.ps1` remains the preflight allow-list
+   integrity gate; its zip is no longer uploaded anywhere. The non-strict
+   `/query` endpoint and its attachments are forbidden in this workflow.
 
 Record diagnostic and recovery as transport facts in the mechanical intake.
 They never change the question contents or the single-fence state.
@@ -638,16 +334,19 @@ A convergence turn is not a fence. Keep them strictly apart:
 
 | | Freshness fence | Convergence turn |
 |---|---|---|
-| carries | the round identity block | prose, no identity block |
+| carries | the round identity block | prose citing the `stage_commit` once, no identity block |
 | how many | exactly one per round, never resubmitted | bounded by the conformance check that owns them — never an open-ended series |
 | authored by | Project Manager | Project Manager |
-| may be sent by transport on its own | no | no |
+| sent as | the round's single fence operation | one `--kind continuation` operation each, fresh operation key |
 
-Every convergence turn is authored by the Project Manager and carried verbatim,
-exactly like the question. Transport never composes one, never paraphrases one,
-and never sends one it was not given.
+Every convergence turn is authored by the Project Manager as a
+`11_CONTINUATION_<n>.txt` artifact and carried verbatim, exactly like the
+question. The wrapper refuses a continuation artifact containing the fence
+opening line, and requires the `stage_commit` cited once — the mechanical
+binding between a continuation and its round. Transport never composes one,
+never paraphrases one, and never sends one it was not given.
 
-Apply the same stable-completion checks to each answer that the first answer
+Each answer arrives under the same receipt validation the first answer
 received. Archive the full exchange in order to
 `22_PRO_CONVERGENCE.md` — every Project Manager turn and every reviewer turn
 after the first archived raw, verbatim, none omitted. The turns that changed the
@@ -670,36 +369,34 @@ closes waits for the next workflow's conformance check.
 
 ## Exact archival, cleanup, and intake
 
-After stable completion:
+After a verified receipt:
 
-1. Copy the complete visible response text to the assigned raw path without
-   rewriting, normalization, filtering, or summary.
-2. Reread it and require exact text equality; record its source commit, paths,
-   completion evidence, and any transport recovery in the mechanical
-   intake. Record no scientific quality classification.
-3. Delete the Project-Manager-owned heartbeat and confirm it is absent.
-4. Keep transport facts separate from the subsequent Project Manager scientific
+1. `archive` writes the receipt's response bytes to the assigned raw path
+   without rewriting, normalization, filtering, or summary, and rereads for
+   byte equality. Raw is write-once.
+2. Run `archive_pro_response.ps1 -RoundPath <round> -StageCommit <commit>
+   -ReceiptPath <receipt.json>` — the independent digest bond plus protocol
+   checks (this round's `stage_commit` present, opening heading, plausible
+   size). Its JSON is the mechanical intake's `## Capture` record, including
+   `response_sha256` and the operation key.
+3. Keep transport facts separate from the subsequent Project Manager scientific
    reconciliation; no callback or routing step exists.
-
-The digest bond above is the charter's one sanctioned SHA-256 site
-(`sha256_whitelist=review_round_archive_integrity_only`); no other hash is
-computed or required anywhere in this workflow.
 
 The required order is:
 
 ```text
-exact raw -> provenance intake -> heartbeat deletion -> Project Manager reconciliation
+exact raw -> provenance intake -> Project Manager reconciliation
 ```
 
 ## Recovery and retirement
 
-A browser, runtime, navigation, archive or heartbeat failure keeps the round
-active while a safe in-scope recovery remains. Try materially distinct
-recoveries; never repeat an identical failed action without changed state, and
+A wrapper, runtime, Agentify or archive failure keeps the round active while a
+safe in-scope recovery remains. Try materially distinct recoveries; never repeat
+an identical failed action without changed state, and
 record each attempt as one `RECOVERY_ATTEMPT attempt=/boundary=/action=/outcome=`
-line. Before any submission retry, prove the matching fence absent. Report
+line. Before any submission under a fresh operation key, prove via
+`submit --verify-existing` that the prior operation never sent. Report
 `REVIEW_TRANSPORT_BLOCKED` only when safe recovery is exhausted, with the direct
 cause, attempt summary, duplicate-submission risk and exact resume condition.
-At terminal success or block, delete the Project-Manager-owned heartbeat and
-confirm absence. A stale response from another round has no authority and never
+A stale response from another round has no authority and never
 replaces the current-round raw or launches a successor.

@@ -4,17 +4,32 @@ $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
 $registry = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/external-review/REVIEWER_CONVERSATIONS.json') | ConvertFrom-Json
-if ($registry.schema_version -ne 31 -or
+if ($registry.schema_version -ne 32 -or
     $registry.direct_transport_contract.conversation_binding -ne 'one_dedicated_conversation_per_branch_per_reviewer_role' -or
     $registry.round_operator.kind -ne 'project_manager_direct_transport' -or
     $registry.round_operator.decision_intake -ne 'project_manager_direct' -or
     $registry.round_operator.git_boundary_owner -ne 'project_manager' -or
     $registry.direct_transport_contract.transport_owner -ne 'active_project_manager' -or
-    $registry.direct_transport_contract.heartbeat_owner -ne 'active_project_manager' -or
-    $registry.direct_transport_contract.browser_skill -ne 'claude-in-chrome' -or
+    $registry.direct_transport_contract.transport_backend -ne 'agentify' -or
+    $registry.direct_transport_contract.terminal_order -ne 'archive_exact_raw_then_provenance_intake_then_pm_reconciliation' -or
     $registry.direct_transport_contract.transport_agent -ne 'project_manager_direct' -or
-    $registry.reviewers.open_divergent.transport -ne 'claude_in_chrome') {
+    $registry.reviewers.open_divergent.transport -ne 'agentify') {
     throw 'Project-Manager-direct review registry mismatch'
+}
+# The wrapper is the single send path and the single source of the Agentify
+# commit pin. It must exist, pin a full 40-hex commit, and speak only the
+# strict endpoint.
+$wrapperPath = Join-Path $repo ($registry.direct_transport_contract.wrapper)
+if (-not (Test-Path -LiteralPath $wrapperPath)) { throw 'Registry wrapper path does not resolve' }
+$wrapper = Get-Content -Raw -LiteralPath $wrapperPath
+if ($wrapper -notmatch 'AGENTIFY_REQUIRED_COMMIT\s*=\s*"[0-9a-f]{40}"') {
+    throw 'Transport wrapper does not pin a full Agentify source commit'
+}
+if (-not $wrapper.Contains('/review-query')) {
+    throw 'Transport wrapper does not call the strict /review-query endpoint'
+}
+if (-not $wrapper.Contains('NATURAL_COMPLETION_VERIFIED')) {
+    throw 'Transport wrapper does not require the natural-completion terminal state'
 }
 # A reviewer must fail closed until the Project Manager registers its exact
 # conversation. A retired registration is never a fallback. This loops over every
@@ -34,6 +49,9 @@ foreach ($name in $reviewerNames) {
         if ($reviewer.url -notlike "*$($reviewer.conversation_id)*") {
             throw "Reviewer '$name' has a url that does not contain its conversation_id"
         }
+        if ([string]::IsNullOrWhiteSpace($reviewer.stable_key)) {
+            throw "Registered reviewer '$name' must carry an Agentify stable_key"
+        }
         $conversationIds += $reviewer.conversation_id
     } elseif ($null -ne $reviewer.conversation_id -or $null -ne $reviewer.url) {
         throw "Unregistered reviewer '$name' must not carry a conversation_id or url"
@@ -47,6 +65,13 @@ foreach ($name in $reviewerNames) {
 $duplicateConversations = @($conversationIds | Group-Object | Where-Object { $_.Count -gt 1 })
 if ($duplicateConversations.Count -gt 0) {
     throw "Two reviewers share conversation_id $($duplicateConversations[0].Name); roles must not share a conversation"
+}
+# A stableKey durably binds one conversation in Agentify; two reviewers sharing
+# one would silently merge their contexts on the first send.
+$stableKeys = @($reviewerNames | ForEach-Object { $registry.reviewers.$_.stable_key } | Where-Object { $_ })
+$duplicateKeys = @($stableKeys | Group-Object | Where-Object { $_.Count -gt 1 })
+if ($duplicateKeys.Count -gt 0) {
+    throw "Two reviewers share Agentify stable_key $($duplicateKeys[0].Name)"
 }
 # Any reviewer that declares blinding must say what it may never receive, or the
 # blinding is an assertion with nothing behind it.
@@ -83,20 +108,32 @@ $skill = Get-Content -Raw -LiteralPath $skillPath
 foreach ($required in @(
     'Project-Manager-direct transport',
     'active Project Manager',
-    'claude-in-chrome',
-    'mcp__claude-in-chrome__',
-    'file_upload',
+    'transport_backend=agentify',
+    'agentify_pro_transport.py',
+    'one_send_per_operation_key=true',
+    'fence_operations_per_round=1',
+    'evidence_recovery=inline_continuation_paste_only',
+    'non_strict_query_endpoint=forbidden',
+    'NATURAL_COMPLETION_VERIFIED',
+    'SUBMIT_AND_WAIT',
     'project_manager_direct',
     'registration_status',
-    'VERIFY_FRESHNESS_FENCE',
     'An accepted matching fence is never resubmitted',
     'materialize them from `stage_commit`',
     'not from the current working tree',
-    'exact raw -> provenance intake -> heartbeat deletion -> Project Manager reconciliation')) {
+    'exact raw -> provenance intake -> Project Manager reconciliation')) {
     if (-not $skill.Contains($required)) { throw "Review Skill missing: $required" }
 }
 if ($skill -match '(?i)\bcontroller\b|hmasd-dispatch-task|hmasd-experiment-monitor') {
     throw 'Review Skill retains a retired relay or monitor surface'
+}
+# The browser transport was retired 2026-08-01. Its tool namespace, its page
+# monitor, its heartbeat mechanism and its clipboard/upload capture paths must
+# not come back into this Skill. The bare word heartbeat is forbidden HERE
+# (too broad for the repo-wide list; the experiment operator legitimately
+# uses it for a different thing).
+if ($skill -match '(?i)claude-in-chrome|mcp__claude-in-chrome__|hmasd-review-monitor|render_review_heartbeat|heartbeat|file_upload|Get-Clipboard|Set-Clipboard') {
+    throw 'Review Skill retains a retired browser-transport surface'
 }
 if ($skill -match 'browser:control-in-app-browser') {
     throw 'Review Skill retains the retired Codex browser surface'
@@ -109,32 +146,11 @@ if ($skill -match '(?m)^branch=(?!<)') {
     throw 'Review Skill hard-codes a branch in the freshness fence'
 }
 
-$heartbeatPath = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/render_review_heartbeat.ps1'
-$roundRoot = Join-Path $repo 'docs/external-review/rounds/20260722_ehc_g1_focused_source_fields_pm_owned'
-$prompt = & $heartbeatPath `
-    -RoundPath $roundRoot `
-    -Stage 'OPEN_DIVERGENT' `
-    -StageCommit '50f95da37496b092128c2136d50503ac3e18a5c1' `
-    -QuestionPath '20_PRO_OPEN_QUESTION.md' `
-    -RawPath '21_PRO_OPEN_RAW.md' `
-    -HeartbeatId 'contract-test-heartbeat'
-foreach ($required in @(
-    'PROJECT-MANAGER-DIRECT',
-    'active Project Manager',
-    'Never submit or resubmit',
-    'contract-test-heartbeat',
-    'delete',
-    'heartbeat and confirm absence')) {
-    if (-not $prompt.Contains($required)) { throw "Rendered heartbeat missing: $required" }
-}
-if ($prompt -match '(?i)\bcontroller\b|hmasd-dispatch-task') {
-    throw 'Rendered heartbeat retains a retired Controller route'
-}
-# The exchanger was retired 2026-07-25, yet its dispatch instruction survived in
-# this rendered prompt until 2026-07-31 -- unseen because nothing scanned the
-# runtime output of a .ps1 (check G covers only .md). Assert on the OUTPUT.
-if ($prompt -match '(?i)exchanger') {
-    throw 'Rendered heartbeat retains the retired exchanger role'
+# The heartbeat renderer was deleted with the browser transport (2026-08-01):
+# the wait is synchronous inside the wrapper's submit, so there is no page to
+# inspect and nothing for a heartbeat to do. It must not come back.
+if (Test-Path (Join-Path $repo '.claude/skills/hmasd-review-round/scripts/render_review_heartbeat.ps1')) {
+    throw 'Retired render_review_heartbeat.ps1 is present; the Agentify receipt transport has no heartbeat'
 }
 
 $preflight = Join-Path $repo '.claude/skills/hmasd-review-round/scripts/preflight_review_round.ps1'

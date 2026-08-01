@@ -272,36 +272,22 @@ question all live in that Skill, next to the transport that carries it.
 ## Review transport
 
 The registry `docs/external-review/REVIEWER_CONVERSATIONS.json` binds one
-dedicated conversation per branch. Transport is `project_manager_direct` (the
-delegated transport child was retired 2026-07-25): author the question, freeze and push
-the boundary, submit the fence, capture and archive the reply per
-`$hmasd-review-round`. Dispatch `hmasd-review-monitor` for bounded inspection
-only — it holds no tool that can wait, so **you own the pacing**. On an
-unregistered branch, perform the one-time registration.
+dedicated conversation per branch per reviewer role, each with its Agentify
+`stable_key`. Transport is `project_manager_direct`: author the question,
+freeze and push the boundary, then run one receipt-bearing Agentify operation
+per turn through the wrapper per `$hmasd-review-round`. The `submit` call
+blocks in-band (background execution; on client death the same request file
+resumes via the durable ledger — never a second send). On an unregistered
+branch, perform the one-time registration.
 
-**Capture may be delegated; the archive decision may not.** Amended 2026-07-30.
-The four conditions are in the Skill, and the load-bearing one is a digest bond:
-the child returns a page-computed SHA-256 over the emitted markdown and you
-recompute it over the archived file, with a mismatch being a refusal rather than a
-repair. That bond binds your own captures too — a length match can be satisfied by
-a substitution, a digest match cannot.
+**The digest bond survives the transport change.** The receipt carries the
+response bytes and their SHA-256; you recompute it over the archived file, and
+a mismatch is a refusal rather than a repair.
 
-**Two duties you owe the monitor, and they are the point of dispatching it.**
-
-1. **State your expectations in its brief** — the control, selector, heading or
-   marker you believe is there. A brief naming none cannot detect a stale
-   procedure, and the monitor will correctly answer `PROCEDURE_DEFECTS: none
-   stated`, which is a finding about your brief.
-2. **Carry every reported defect into the round's `## Transport faults`**, and in
-   the same round either repair the Skill or record why not. It holds no write
-   tool and never runs Git, so its reply is the only channel: a defect you do not
-   transcribe is a defect that did not happen.
-
-This exists because a mechanism the Skill prescribed — the overlay clicked by
-`computer` to supply a user gesture — worked in one round and failed in the next,
-and nothing in this project had both the eyes to see it and a duty to say so. The
-Skill kept prescribing the broken step. `tests/review_round_contract_test.ps1` now
-refuses a round whose `## Transport faults` section is empty or still `TODO`.
+**Carry every transport fault.** Each wrapper error code or receipt anomaly
+goes into the round's `## Transport faults`, and in the same round the Skill is
+repaired or the reason recorded — `tests/review_round_contract_test.ps1`
+refuses a round whose section is empty or still `TODO`.
 
 ---
 
@@ -373,7 +359,6 @@ name sounds.
 | Ask whether a named test surface's guards can go red at all — paired-negative mutation sweep | `hmasd-guard-sweeper` | expect repairs; it diagnoses. Dispatch with `isolation: worktree` |
 | Execute one already-authorized train → evaluate → analyze run | `hmasd-experiment-operator` | let anything else run an experiment |
 | Inspect a running experiment once and refresh its `PROGRESS.md` | `hmasd-monitor` | expect it to watch until the run ends — **you** dispatch it again |
-| Inspect the external-review page once and describe it | `hmasd-review-monitor` | expect it to wait, pace itself, or report elapsed time — **you** own the pacing |
 | Transcribe a decided launch or result into `ExpRecord.md` | `hmasd-exp-recorder` | let it classify status |
 | Audit the project's own instructions, roles and skills | `hmasd-doc-auditor` | point it at algorithm code |
 | Anything with no registered owner | `general-purpose`, `opus`, high effort | let it inherit a default model |

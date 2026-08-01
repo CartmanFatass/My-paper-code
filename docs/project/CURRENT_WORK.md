@@ -205,7 +205,7 @@ byte-identical at run `30270540138`. Cloud rates retired with the vehicle.
 ## Standing constraints
 
 ```text
-active_pm_session=1cd0ea97-b040-45f9-bcea-f162e5bfb70d (claimed 2026-08-01 in the dtype-confirmation commit; the prior claim's boundary 89010b0e was behind HEAD 97c62107, a stale claim is not a lock)
+active_pm_session=4c20178a-f062-40b8-a625-f385d2c65136 (claimed 2026-08-01 in the agentify-transport commit; the prior claim's boundary 97c62107 was behind HEAD 43086567, a stale claim is not a lock)
 branch_scope=untied-k only, never touch another branch (user ruling 2026-07-27)
 aggressive_branch=another line's, never push
 formal_compute=user authority only

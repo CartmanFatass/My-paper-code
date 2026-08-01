@@ -137,7 +137,9 @@ conversation  = TODO
 stage_commit  = $StageCommit
 question      = 20_PRO_OPEN_QUESTION.md
 raw           = 21_PRO_OPEN_RAW.md
-transport     = project_manager_direct, claude_in_chrome
+transport     = project_manager_direct, agentify
+operation_key = TODO
+receipt_sha256 = TODO
 touchpoint    = TODO of 3
 ``````
 
@@ -147,8 +149,8 @@ TODO — paste the preflight JSON.
 
 ## Capture
 
-TODO — paste the archive_pro_response.ps1 JSON: chars, exact_equal, first_line,
-last_line. Do not summarise it.
+TODO — paste the archive_pro_response.ps1 JSON: chars, response_sha256,
+operation_key, first_line, last_line. Do not summarise it.
 
 ## Transport faults
 

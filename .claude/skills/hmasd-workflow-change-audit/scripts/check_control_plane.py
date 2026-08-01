@@ -53,6 +53,13 @@ DEFAULT_FORBIDDEN = (
     # The cloud vehicle and every cross-device comparison design, retired by
     # user ruling 2026-08-01. One stem covers the routing doc and its rule.
     "COMPUTE_ROUTING",
+    # The browser review transport, retired 2026-08-01 for the Agentify receipt
+    # transport. One stem each for the tool namespace, the page monitor, the
+    # heartbeat renderer and the browser bring-up script.
+    "claude-in-chrome",
+    "hmasd-review-monitor",
+    "render_review_heartbeat",
+    "ensure_review_browser",
 )
 # Referenced paths that are legitimately patterns or external, not files on disk.
 REF_EXEMPT_SUFFIXES = ("/", "*")

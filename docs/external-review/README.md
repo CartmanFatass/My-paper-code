@@ -3,18 +3,23 @@
 Canonical authority is in `AGENTS.md`. This file describes
 the compact artifact and transport sequence only.
 
+Browser (claude-in-chrome) transport retired 2026-08-01; the Agentify receipt
+transport is the sole backend — see `$hmasd-review-round`; history in Git.
+
 ## Direct Project Manager sequence
 
 1. Project Manager decides whether a question-scoped External Pro judgment is
    useful and authors the reviewer-visible brief, allow-list, and question.
 2. Project Manager commits and pushes that exact boundary.
-3. `$hmasd-review-round` drives the transport, with browser work through the
-   `claude-in-chrome` skill. It runs in the Project Manager directly or in the
-   registered `hmasd-review-exchanger` subagent. Either way it reuses the
-   registered Pro conversation and submits one freshness-fenced question.
-4. The exact natural response is archived, reread for equality, and accompanied
-   by a provenance-only intake record. No semantic relay or second reviewer is
-   created.
+3. `$hmasd-review-round` drives the transport through the Agentify Desktop
+   local HTTP API: `prepare` freezes one operation, `submit` performs one
+   `POST /review-query` against the registered Pro conversation (single send,
+   never clicks Continue/Retry/Answer-now) and blocks until the receipt proves
+   natural completion with two stable snapshots, `verify` re-validates the
+   receipt locally, `archive` writes the response bytes once.
+4. The exact natural response is archived, digest-bonded against the receipt's
+   SHA-256, and accompanied by a provenance-only intake record. No semantic
+   relay or second reviewer is created.
 5. Project Manager reconciles the raw, updates the smallest implicated research
    unit, and selects the next action inside user authority.
 
@@ -25,9 +30,11 @@ code or compute.
 
 ## Transport identity
 
-The registered conversation lives in `REVIEWER_CONVERSATIONS.json`. A reviewer
-whose `registration_status` is not `registered` blocks transport; a
-`retired_registrations` entry is never a fallback. Every new submission carries:
+The registered conversation lives in `REVIEWER_CONVERSATIONS.json`, bound to
+its Agentify `stable_key`. A reviewer whose `registration_status` is not
+`registered` blocks transport; a `retired_registrations` entry is never a
+fallback. Every new round's fence operation carries the round's `10_FENCE.txt`
+verbatim as the prompt:
 
 ```text
 CURRENT_REVIEW_ASSIGNMENT
@@ -39,31 +46,36 @@ question=docs/external-review/rounds/<round-id>/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
 ```
 
-Project Manager first inspects visible user turns. An exact existing fence is
-resumed and never resubmitted. Natural completion requires two stable snapshots
-at least three seconds apart, no active generation/stop control, and no current
-retry/error/continue control. A stale `Thinking` label is not sufficient to keep
-the round pending.
+One fence operation key exists per round; the Agentify ledger proves whether it
+sent, and an accepted fence is never resubmitted. Natural completion is proven
+by the receipt: two snapshots at least three seconds apart with the same
+assistant message id and text SHA-256, no active stop/retry/continue control,
+`sendCount=1`, terminal state `NATURAL_COMPLETION_VERIFIED`.
 
 If Pro explicitly reports that question-listed repository evidence was
-unavailable, that response is a transport diagnostic, not scientific raw.
+unavailable, that response is a transport diagnostic, not scientific raw. The
 Project Manager materializes only the question allow-list from `stage_commit`
-with the deterministic archive builder, attaches it under the same fence, and
-archives the subsequent stable answer. No current-worktree or extra evidence is
-added.
+(`git show <stage_commit>:<path>`), pastes it inline into one continuation
+artifact under the same fence, and archives the subsequent receipt-verified
+answer. No current-worktree or extra evidence is added; the strict endpoint has
+no attachments.
 
 ## Round files
 
 ```text
 rounds/YYYYMMDD_topic/
-  00_REVIEW_BRIEF.md
-  01_SHARED_SOURCE_MANIFEST.md
+  10_FENCE.txt
+  11_CONTINUATION_<n>.txt          (convergence / recovery turns, if any)
   20_PRO_OPEN_QUESTION.md
   21_PRO_OPEN_RAW.md
-  30_PM_CODE_SIDE_RECONCILIATION.md
+  22_PRO_CONVERGENCE.md            (if the round converged over turns)
+  30_PM_SCIENTIFIC_RECONCILIATION.md
+  40_ADJUDICATION_QUESTION.md / 41_ADJUDICATION_RAW.md   (adjudicator only)
   50_MECHANICAL_INTAKE_RECORD.md
 ```
 
-Historical files retain their original authorship markers. New rounds use
-Project Manager direct transport. There is no Controller, Exchange task,
-dispatcher, cross-task callback, or persistent review session owned by HMASD.
+Runtime transport files (`TRANSPORT_BACKEND.json`, `request.json`,
+`receipt.json`) live under `logs/review_transport/<round>/` and are never
+committed. Historical files retain their original authorship markers. There is
+no Controller, Exchange task, dispatcher, cross-task callback, or persistent
+review session owned by HMASD.
