@@ -165,9 +165,10 @@ returned commit and exact paths and records successful `interface_smoke`,
 `bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
 and `analyze_entry` phases. Code Project Manager keeps the repair loop until
 that boundary passes or returns one scoped diagnosis under the failure-
-containment contract while continuing every independent runnable action. The verifier
-returns mechanical evidence only; Code Project Manager classifies an operational
-failure for bounded reassignment or a code defect for implementer repair, then
+containment contract. The readiness wrapper owns its mechanical lifecycle and
+the verifier returns typed evidence. Code Project Manager does not reconstruct
+that state machine; it chooses bounded reassignment for an operational failure
+or implementer repair for a code defect, then
 requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
 An unsuccessful phase is candidate evidence. A failure before `run` begins or
@@ -230,10 +231,10 @@ before submission and permits no fallback page.
 ## Failure containment and continuation
 
 Apply `docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md` after
-every local failure terminal: preserve evidence, run bounded recovery and scan the
-authorized runnable queue. A nonempty queue continues without permission; one
-parked workstream never pauses another. `SESSION_BLOCKED` requires the complete
-global proof and scoped diagnosis defined by that single-source contract.
+every local failure terminal. The originating tool owns mechanical state; CPM
+consumes its evidence and selects the next legal semantic action without
+maintaining a parallel state machine. One parked workstream never pauses another.
+`SESSION_BLOCKED` requires the complete evidence defined by that single source.
 
 ## Workflow changes and Git
 
@@ -269,4 +270,4 @@ only the role-local surfaces declared by the session workspace contract.
 
 Return an accepted code/runtime/review/state commit or one scoped operational or
 technical diagnosis. Never promote that diagnosis to a whole-task stop while
-the failure-containment scan finds an authorized runnable action.
+tool evidence or current owner records expose an authorized next action.

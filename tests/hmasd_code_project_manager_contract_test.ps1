@@ -177,7 +177,7 @@ $codeRequired = @(
     '`evaluate_entry`',
     '`analyze_entry`',
     'prepares the exact spec and dispatches the registered `hmasd-verifier`',
-    'verifier returns mechanical evidence only',
+    'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
     'there is no Research Operations Manager',
     'Workflow Design Manager',
     '`$hmasd-collaborative-workflow-design`',
@@ -284,23 +284,36 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'document_kind=code_project_manager_role_local_failure_containment_contract',
-    'failure_scope=operation|workstream|session',
-    'child_terminal_effect=parent_evidence_only',
+    'mechanical_operation_state_owner=originating_tool_or_script',
+    'typed_terminal_evidence=registered_receipt_or_exit_evidence',
+    'model_authored_operation_state_machine=forbidden',
+    'child_terminal_effect=evidence_only',
     'local_failure_task_terminal=false',
-    'runnable_queue_scan=required_after_every_local_failure_terminal',
-    'session_continues_when=runnable_queue_nonempty',
-    'session_blocked_condition=global_integrity_prevents_every_CPM_action_or_all_authorized_workstreams_have_no_legal_next_action',
-    'session_blocked_proof_requirement=global_integrity_witness_or_complete_authorized_workstream_scan_when_scope_session',
-    'PRE_SEND_BLOCKED=operation|recover_or_park_transport|continue_runnable_queue',
-    'POST_SEND_BLOCKED=operation|preserve_and_observe_same_operation|continue_runnable_queue',
-    'WORKSTREAM_NO_LEGAL_ACTION=workstream|park_workstream|continue_other_workstreams',
-    'ALL_WORKSTREAMS_NO_LEGAL_ACTION=session|SESSION_BLOCKED_allowed_with_complete_proof')) {
+    'continuation_default=select_next_legal_action',
+    'session_blocked_evidence=global_integrity_witness_or_complete_no_legal_action_receipts')) {
     if (-not $cpmFailureContainment.Contains($required)) {
         throw "Code PM failure-containment contract missing: $required"
     }
 }
-if ($codePmNormalized.Contains('returns one exact technical blocker')) {
-    throw 'Code PM still promotes a local technical blocker to a task terminal'
+foreach ($required in @(
+    'mechanical_operation_state_owner=originating_tool_or_script',
+    'model_authored_operation_state_machine=forbidden',
+    'cpm_decision_surface=semantic_next_action_only',
+    'local_failure_default=continue_next_legal_action')) {
+    if (-not $agile.Contains($required)) {
+        throw "Agile Skill missing mechanical-state ownership rule: $required"
+    }
+}
+foreach ($forbidden in @(
+    'failure_scope=operation|workstream|session',
+    'runnable_queue_scan=',
+    'Required routing witnesses:',
+    'scan the authorized runnable queue',
+    'classify every runtime terminal event', 'terminal-event routing')) {
+    if ($cpmFailureContainment.Contains($forbidden) -or $codePmNormalized.Contains($forbidden) -or
+        $agileNormalized.Contains($forbidden)) {
+        throw "Code PM still requires a model-authored workflow state machine: $forbidden"
+    }
 }
 
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'

@@ -37,6 +37,10 @@ cpm_performance_scoring_from_tests=forbidden
 formal_result_snapshot_oracle=forbidden
 direction_local_test_lifetime=active_implementation_only
 shared_defect_regression_promotion=plausible_recurrence_only
+mechanical_operation_state_owner=originating_tool_or_script
+model_authored_operation_state_machine=forbidden
+cpm_decision_surface=semantic_next_action_only
+local_failure_default=continue_next_legal_action
 ```
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
@@ -196,18 +200,18 @@ and blocked returns are no-ops.
 
 An execution-readiness operational failure before `CODE_ACCEPTED` remains in
 the Code Project Manager verification loop and is never treated as a partial
-runtime handoff. After code acceptance, classify
-every runtime terminal event before continuing. A purely operational failure
-returns control to Code Project Manager for automatic `retry`, `resume` or `restart` inside the
-unchanged authorized scientific boundary, without per-attempt reauthorization
-or a fixed attempt count. Preserve the estimator, source, seed law, budgets,
-thresholds, backend constraints and branch semantics; never weaken checks or
-use recovery to select among scientific outcomes. Operational recovery uses
-zero scientific iterations and creates no scientific disposition. A valid
-scientific result is archived and routed to External Pro. An external hard
-technical impossibility is terminal only after applicable automatic recovery
-cannot make progress. Add a regression only for plausible recurrence of a code
-defect.
+runtime handoff. Each runner, ticket, transport or readiness tool owns its
+mechanical lifecycle, counters and terminal state. Code Project Manager consumes
+the typed receipt or exit evidence and never reconstructs a parallel state
+machine from prose or memory. It chooses only the semantic next action: direct
+repair, a fresh authorized attempt, parking the affected workstream, or another
+legal task. Preserve the estimator, source, seed law, budgets, thresholds,
+backend constraints and branch semantics; never weaken checks or use recovery
+to select among scientific outcomes. Operational recovery uses zero scientific
+iterations and creates no scientific disposition. A valid scientific result is
+archived and routed to External Pro. An external hard technical impossibility is
+terminal only after applicable automatic recovery cannot make progress. Add a
+regression only for plausible recurrence of a code defect.
 
 ## Complexity gate
 
@@ -290,7 +294,7 @@ operational_recovery_scientific_iteration_cost=zero
 early_termination_boundary=unrecoverable_external_technical_impossibility_only
 ```
 
-Code Project Manager applies the terminal-event routing below. Inside
+Code Project Manager consumes tool-owned terminal evidence. Inside
 the active authorized nine-valid-iteration grant, do not stop for user
 input, a permission prompt, a scientific result or protected-science ambiguity.
 Archive every valid success, failure, mixed or
