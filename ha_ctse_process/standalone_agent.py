@@ -3998,6 +3998,7 @@ class StandaloneProcessAgent:
         effect_view,
         collect_r31: bool,
         forced_tokens: dict[int, tuple[int, int]] | None = None,
+        agent_order=None,
     ) -> None:
         if self.high_check_buffer is None or not isinstance(
             self.high, FixedClockAREditPolicy
@@ -4081,7 +4082,20 @@ class StandaloneProcessAgent:
             prev_skills = self.active_skills[env_id].copy()
             prev_active = self.has_active_skill[env_id].copy()
             prev_ages = self.skill_age[env_id].copy()
-            order = torch.arange(self.n_agents, dtype=torch.long, device=self.device)
+            if agent_order is None:
+                order = torch.arange(
+                    self.n_agents, dtype=torch.long, device=self.device
+                )
+            else:
+                order_list = [int(a) for a in agent_order]
+                if sorted(order_list) != list(range(self.n_agents)):
+                    raise ValueError(
+                        "agent_order must be a permutation of "
+                        f"range({self.n_agents}) with no duplicates; got {order_list}"
+                    )
+                order = torch.as_tensor(
+                    order_list, dtype=torch.long, device=self.device
+                )
             omega = weights if self.high_condition_on_omega else None
             relevance = agent_relevance if self.use_agent_prototype_relevance else None
             sample = self.high.act_sequence(
@@ -4188,11 +4202,20 @@ class StandaloneProcessAgent:
         effect_view=None,
         collect_r31: bool = True,
         forced_tokens: dict[int, tuple[int, int]] | None = None,
+        agent_order=None,
     ):
         """``forced_tokens`` is the D7 evaluation-only interventional hook; see
         ``FixedClockAREditPolicy.act_sequence``. It is accepted only under the R30
         carrier, because it forces a renewal decision and no other controller has
-        one to force."""
+        one to force.
+
+        ``agent_order`` is the V-K0 evaluation-only reversed-roster hook (VK-D5):
+        an explicit autoregressive sampling order for ``_r30_maybe_assign_skills``.
+        ``None`` (the default, and the only value any training path passes)
+        reproduces today's hardcoded ascending order byte-identically; an explicit
+        order is validated as an exact permutation before sampling
+        (A-VK-D5) and held for that one call only -- holding it across an
+        episode's checks is the caller's duty."""
         env_id = int(env_id)
         if forced_tokens and not self.r30_enabled:
             raise ValueError("forced tokens require the R30 fixed-clock carrier")
@@ -4215,6 +4238,7 @@ class StandaloneProcessAgent:
                 effect_view=effect_view,
                 collect_r31=bool(collect_r31),
                 forced_tokens=forced_tokens,
+                agent_order=agent_order,
             )
         joint_obs = self._joint_obs_array(obs)
         state_arr = self._state_array(state, joint_obs)
