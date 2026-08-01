@@ -13,7 +13,7 @@ session, model and thinking. The root `AGENTS.md` mirrors session identities so
 role bootstrap and non-routing consumers keep their existing address contract.
 
 This protocol does not route native children or replace Research Operations
-Manager's External Pro browser binding. A session is an address, not authority.
+Manager's Agentify External Pro transport ownership. A session is an address, not authority.
 Do not discover live settings, read `state_5.sqlite`, cache a route, copy the
 sender's settings or infer a replacement row.
 

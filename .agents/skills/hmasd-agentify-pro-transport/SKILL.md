@@ -156,7 +156,6 @@ owner's normal next step. No response interpretation is performed here.
 ## Required receipt and failure semantics
 
 Every prompt carries its full 40-hex `stage_commit`; a prefix is rejected, and this Skill's allow-list scripts archive only that committed source.
-
 The receipt must contain, at minimum:
 
 ```text
