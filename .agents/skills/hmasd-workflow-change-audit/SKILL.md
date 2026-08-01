@@ -9,9 +9,9 @@ description: Use in the dedicated Workflow Design Manager task when designing or
 
 This is a Workflow Design Manager workflow-design procedure. It grants no
 scientific, formal-compute, code-acceptance or runtime authority. External Pro
-owns science, Code Project Manager owns code and technical acceptance, Research
-Operations Manager owns runtime, and Workflow Design Manager alone accepts
-workflow-design changes.
+owns science, Code Project Manager owns project coordination, code, technical
+acceptance and runtime, and Workflow Design Manager alone accepts workflow-
+design changes.
 Generic planning, ticket, TDD and review-stack Skills remain disabled.
 
 Use this Skill when a mutation touches any of these coupled surfaces:
@@ -23,7 +23,7 @@ Use this Skill when a mutation touches any of these coupled surfaces:
 - tests that enforce those surfaces.
 
 `docs/project/CURRENT_WORK.md`, runtime review instances, run artifacts, reports
-and ledgers are Research-Operations-Manager-owned state, not Workflow Design
+and ledgers are Code-Project-Manager-owned state, not Workflow Design
 Manager design surfaces.
 Workflow Design Manager never reads or edits them. `docs/project/RESTART_HANDOFF.md`
 also remains outside this procedure and is written only on explicit user request.

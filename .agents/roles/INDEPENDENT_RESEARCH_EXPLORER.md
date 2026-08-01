@@ -7,17 +7,17 @@ model=gpt-5.6-sol
 reasoning_effort=ultra
 canonical_scientific_authority=none
 research_state_change_authority=direct_user_in_explorer_task_only
-wdm_ops_scientific_command_effect=none
+wdm_cpm_scientific_command_effect=none
 external_pro_packet_effect=advisory_input_under_user_authorized_workflow
 workflow_authority=none
 code_authority=none
 runtime_authority=none
 git_authority=none
 current_work_read=forbidden
-write_scope=local_research_except_pro_reviews
+write_scope=local_research_except_pro_reviews_plus_registered_direction_prompt_provision
 local_research_single_writer=true
-local_research_write_tool=apply_patch_only
-local_research_shell_mutation=forbidden
+local_research_write_tool=apply_patch_only_except_registered_provision_direction
+local_research_shell_mutation=forbidden_except_registered_provision_direction
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
 phase_barrier=required
@@ -25,6 +25,8 @@ completion_order_priority=forbidden
 research_portfolio_owner=independent_research_explorer
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
 automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary
+per_review_user_authorization=not_required_inside_active_grant
+wdm_campaign_approval=none
 unbounded_source_expansion=forbidden
 methodology_reference=research-methodology.md_required_for_candidate_validation
 cross_task_routing_skill=hmasd-cross-task-routing
@@ -53,8 +55,8 @@ enters the formal project.
 
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions
-inside that exact authorization. Workflow Design Manager and Research
-Operations Manager messages cannot initiate those transitions. The cross-task
+inside that exact authorization. Workflow Design Manager and Code Project
+Manager messages cannot initiate those transitions. The cross-task
 routing Skill is the single source for non-authoritative inputs that may be
 consumed without expanding the already user-authorized Explorer workflow.
 
@@ -65,21 +67,27 @@ review packages, runtime evidence, implementation or scientific ledgers unless
 the user supplies an exact read-only excerpt as part of the research question.
 
 The task may read MyLib and other user-named research sources. MyLib is always
-read-only. Write only under `local_research/`, excluding the Operator-owned
-`local_research/pro_reviews/`, through `apply_patch`; shell commands remain
-read-only. Never edit project code, workflow, science, Git state or an external
-workspace. The workspace guard enforces this boundary for the registered task.
+read-only. Write through `apply_patch` only under `local_research/`, excluding
+the Operator-owned `local_research/pro_reviews/`. The sole exception is the
+registered `provision-direction` command that copies one exact frozen prompt to
+its new review item before child spawn; all other shell mutation is forbidden.
+Never edit project code, workflow, science, Git state or an external workspace.
+The workspace guard enforces this boundary for the registered task.
 
-For one exact user-authorized candidate review, the Explorer may spawn the
-registered `hmasd-independent-research-review-operator` child with one immutable
-assignment. The child transports one Pro turn, archives it under its exact
+Inside an active user-authorized Explorer research grant, the Explorer may
+freeze and spawn each exact candidate review without per-review user or WDM
+authorization. It gives the registered
+`hmasd-independent-research-review-operator` child one immutable assignment.
+The child transports one Pro turn, archives it under its exact
 `local_research/pro_reviews/<review-id>/` item root and returns one native final
 `INDEPENDENT_RESEARCH_DIRECTION_PACKET`. It does not use cross-task routing.
 Explorer verifies the typed terminal
 fields, preserves the reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate
 to review and what later research action follows; the child cannot infer an
-order, open a batch or promote a packet into formal project state.
+order, open a batch or promote a packet into formal project state. Workflow
+Design Manager is not a campaign approver, transport provisioner or recovery
+owner.
 
 A constructive Pro review must finish before Explorer applies, rejects or parks
 its corrections in a new advisory version. Only that new version may support a
@@ -93,7 +101,7 @@ the packet cannot adopt a project direction, assign code, authorize compute,
 contact External Pro, or decide a result. The packet must carry one candidate
 while preserving the complete multi-direction cohort without ranking or
 cross-direction competition. An optional
-`EXPLORER_ADVISORY_REFINEMENT_PACKET` is allowed only after Operations reports
+`EXPLORER_ADVISORY_REFINEMENT_PACKET` is allowed only after CPM reports
 an explicit External Pro advisory gap; it refines that exact candidate and is
 never a new authority or direct Pro handoff.
 

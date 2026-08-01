@@ -18,6 +18,7 @@ cross_session_send=forbidden_native_final_return_only
 review_transport_owner=independent_research_review_operator
 review_transport_stable_key=hmasd-independent-research-pro
 review_transport_concurrency=one_active_child_per_binding
+pre_spawn_item_provision=explorer_registered_provision_direction
 write_scope=exact_assigned_local_research/pro_reviews_item_root
 terminal_statuses=COMPLETE|BLOCKED
 ```
@@ -47,16 +48,18 @@ raw_archive_path=<exact path below item_root>
 client_send_limit=1
 ```
 
-The item root must be absent or belong to the same exact prepared operation.
+The item root and exact frozen prompt must already exist at child intake.
 Another active child or nonterminal operation on the stable key is `BLOCKED`.
 The child never selects a candidate, supplies a missing field, changes review
 mode or reads a batch to infer work.
 
-Before any tool call, set the tool working directory to the exact assigned item
-root. Every Agentify request, receipt and raw-output path must resolve inside
-that same root; a sibling item path is forbidden. The persistent Explorer
-session cannot invoke this transport route. The hook binds later operations to
-the same direction-child assignment identity recorded in the request.
+Before spawn, Explorer uses the registered `provision-direction` command to
+copy the frozen prompt's exact UTF-8 bytes into the assigned item root. The
+child then sets every tool working directory to that existing root. Every
+Agentify request, receipt and raw-output path resolves inside the same root; a
+sibling item path is forbidden. The persistent Explorer session may provision
+only this prompt and cannot invoke prepare, submit, verify or archive. The hook
+binds child transport operations to the direction-child assignment identity.
 
 ## One-turn transport
 

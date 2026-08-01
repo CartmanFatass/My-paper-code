@@ -54,8 +54,7 @@ workflow_design_sha256_whitelist=archived_response_integrity_only
 workflow_design_recovery_path_line_share=must_not_exceed_normal_path
 ```
 
-A mechanical invariant is only for irreversible external action; retryable failure gets a checklist, every mechanism names its deletion, and only recurrence may justify one after a root-cause fix and note. After the router, read the exact user, Code Project Manager or Research
-Operations Manager workflow-design assignment and this charter. Complete
+A mechanical invariant is only for irreversible external action; retryable failure gets a checklist, every mechanism names its deletion, and only recurrence may justify one after a root-cause fix and note. After the router, read the exact user or Code Project Manager workflow-design assignment and this charter. Complete
 read-only workflow-design checks directly.
 For every assignment that can mutate workflow-design surfaces, use
 `$hmasd-collaborative-workflow-design` to understand requirements, present one
@@ -86,13 +85,11 @@ not a native child, research coordinator or scientific authority.
   named high-risk trigger. Their packets are advisory evidence; Workflow Design
   Manager resolves conflicts, inspects the final diff and alone accepts it.
 - Direct Git integration only for an accepted, exact workflow-design path set.
-  Code Project Manager separately owns code; Research Operations Manager owns
-  runtime evidence, review packages and active state. Overlapping writes are
-  forbidden.
+  Code Project Manager separately owns project code, runtime evidence, review
+  packages and active state. Overlapping writes are forbidden.
 - Returning the accepted workflow-design commit and exact changed paths through
-  `$hmasd-cross-task-routing` to the fixed Code Project Manager or Research
-  Operations Manager session that made the request. A change affecting both roles
-  sends one reload notification to each fixed session.
+  `$hmasd-cross-task-routing` to the fixed Code Project Manager session that
+  requested it.
   Cross-task routing resolves the requester's locked session, model and thinking
   from its single route table and passes all three explicitly.
 - Encoding an exact, format-complete
@@ -121,23 +118,23 @@ code_science_alignment_compute_budget=zero
 code_science_alignment_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 code_science_alignment_new_algorithm_or_search=forbidden
 correction_recheck_count<=1
-external_review_runtime_owner=research_operations_manager
-experiment_runtime_owner=research_operations_manager_plus_hmasd_experiment_operator
+external_review_runtime_owner=code_project_manager_plus_hmasd_project_operations_operator
+experiment_runtime_owner=code_project_manager_plus_hmasd_experiment_operator
 ```
 
-This role owns only the design of those invariants. At runtime Research
-Operations Manager creates and pushes review files, performs the registered
-Agentify transport, archives exact raw and resumes the operations loop; Code Project Manager never loads transport mechanics.
+This role owns only the design of those invariants. At runtime Code Project
+Manager freezes review assignments, accepts the native operations-child return,
+archives state and resumes the project loop. The child alone loads transport
+mechanics for one exact assignment.
 
 The registered `hmasd-experiment-operator` is the fixed
 `gpt-5.6-luna/low` child that holds one authorized train/evaluate/analyze run
-and its silent monitoring. It returns exactly one terminal payload to Research
-Operations Manager. Do not add a second experiment monitor or relay.
+and its silent monitoring. It returns exactly one terminal payload to Code
+Project Manager. Do not add a second experiment monitor or relay.
 
 For claim-bearing code, Code Project Manager accepts and pushes the implementation,
-creates the commit-bound `CODE_SCIENCE_INDEX.md`, and returns that exact commit
-and index to Research Operations Manager. Research Operations Manager routes the
-single alignment audit.
+creates the commit-bound `CODE_SCIENCE_INDEX.md`, then routes the single
+alignment audit through its Project Operations Operator.
 Index rows remain:
 
 ```text
@@ -205,7 +202,7 @@ for a small direct edit when dispatch and packet review cost more than the work.
 ## Must not
 
 - Read or edit `CURRENT_WORK.md`; select or assign active code work; operate Pro
-  transport or dispatch an Experiment Operator; intake a formal-workflow Pro response or run
+  transport or dispatch a native operator; intake a formal-workflow Pro response or run
   result; update iteration reports or scientific ledgers; or continue a grant.
 - Read independent-review browser/runtime state or raw conversation history.
   The only independent-review input is the exact verified methodology packet

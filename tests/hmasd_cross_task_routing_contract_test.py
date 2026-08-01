@@ -19,14 +19,12 @@ HOOKS = ROOT / ".codex/hooks.json"
 WDM_SESSION = "019fb73d-5635-7b63-b165-6c5129bc0217"
 RETIRED_WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
 CPM_SESSION = "019f9e4f-f4d0-7fe0-b214-c47fd034e84d"
-ROM_SESSION = "019f9c6a-9401-7ae0-ace5-dd827dccba2b"
 RESEARCH_REVIEW_SESSION = "019fb311-6137-7781-9708-3df24da34a4b"
 RESEARCH_EXPLORER_SESSION = "019fb398-0a76-7bd0-9400-c5ea4eefa5de"
 RETIRED_RESEARCH_EXPLORER_SESSION = "019fb2e1-d153-7043-b2e9-58690f9bd48d"
 LOCKED_ROUTES = {
     "workflow_design_manager": (WDM_SESSION, "gpt-5.6-sol", "high"),
     "code_project_manager": (CPM_SESSION, "gpt-5.6-sol", "max"),
-    "research_operations_manager": (ROM_SESSION, "gpt-5.6-luna", "high"),
     "independent_research_explorer": (
         RESEARCH_EXPLORER_SESSION,
         "gpt-5.6-sol",
@@ -41,7 +39,6 @@ LOCKED_ROUTES = {
 PERSISTENT_ROLES = (
     ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
     ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-    ROOT / ".agents/roles/RESEARCH_OPERATIONS_MANAGER.md",
     ROOT / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
     ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md",
 )
@@ -204,7 +201,6 @@ def test_router_and_skill_lock_exact_role_routes() -> None:
         "cross_task_routing_skill=hmasd-cross-task-routing",
         f"workflow_design_manager_session={WDM_SESSION}",
         f"code_project_manager_session={CPM_SESSION}",
-        f"research_operations_manager_session={ROM_SESSION}",
         f"independent_research_explorer_session={RESEARCH_EXPLORER_SESSION}",
         f"independent_research_review_operator_session={RESEARCH_REVIEW_SESSION}",
     )
@@ -221,6 +217,7 @@ def test_router_and_skill_lock_exact_role_routes() -> None:
         "workflow_design_manager_route=",
         "code_project_manager_route=",
         "research_operations_manager_route=",
+        "research_operations_manager_session=",
         "cross_task_model_thinking_preservation=",
         "cross_task_route_guard=",
         "live_settings_canonicalization",

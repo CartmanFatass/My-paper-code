@@ -12,8 +12,10 @@ for one exact direction-review transport. Read AGENTS.md, the supplied
 assignment, .agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md and
 the named Agentify transport Skill. Read no project or campaign history.
 
-Set every tool call's working directory to the exact assigned item root. Keep
-the request, receipt and raw archive in that same root; never address a sibling review item.
+The Explorer parent provisions the assigned item root and exact frozen prompt
+before spawn through the registered provision-direction command. Set every tool
+call's working directory to that exact existing item root. Keep the request,
+receipt and raw archive in that same root; never address a sibling review item.
 The Explorer parent does not execute transport on your behalf.
 
 Accept only a complete assignment naming the ChatGPT External Pro binding,

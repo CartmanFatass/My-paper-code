@@ -587,7 +587,7 @@ def test_explorer_native_review_child_uses_only_registered_agentify_item_paths(
         '--stable-key hmasd-independent-research-pro --model Pro '
         '--conversation-url https://chatgpt.com/c/test --conversation-id test '
         '--assignment-identity IR_DIRECTION_REVIEW:assignment-1 --operation-key operation-1 '
-        f'--prompt-path "{repo / "local_research" / "prompt.md"}" '
+        f'--prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}" '
         f'--selection "{item / "selection.json"}" '
         f'--request "{item / "request.json"}"'
     )
@@ -671,6 +671,62 @@ def test_explorer_native_review_child_uses_only_registered_agentify_item_paths(
             cwd=item,
         ),
         "writes only through registered Agentify transport",
+    )
+
+
+def test_explorer_can_provision_one_direction_prompt_but_not_run_transport(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    source = repo / "local_research/frozen_prompt.md"
+    source.parent.mkdir(parents=True)
+    source.write_text("IR_DIRECTION_REVIEW:direction-new\n", encoding="utf-8")
+    item = repo / "local_research/pro_reviews/direction-new"
+    wrapper = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/'
+        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    )
+    provision = (
+        f'{wrapper} provision-direction '
+        '--assignment-identity IR_DIRECTION_REVIEW:direction-new '
+        f'--prompt-source "{source}" '
+        f'--prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}"'
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": provision},
+            session_id="research-session",
+            cwd=repo,
+        )
+        is None
+    )
+    prepare = (
+        f'{wrapper} prepare --owner independent_research_review_operator '
+        '--stable-key hmasd-independent-research-pro --model Pro '
+        '--conversation-url https://chatgpt.com/c/test --conversation-id test '
+        '--assignment-identity IR_DIRECTION_REVIEW:direction-new '
+        '--operation-key direction-new-operation '
+        f'--prompt-path "{item / "20_PRO_OPEN_QUESTION.md"}" '
+        f'--selection "{item / "TRANSPORT_BACKEND.json"}" '
+        f'--request "{item / "REQUEST.json"}"'
+    )
+    assert_denied(
+        invoke(repo, "shell_command", {"command": prepare}, session_id="research-session", cwd=repo),
+        "registered research script",
+    )
+    wrong_destination = provision.replace(
+        "20_PRO_OPEN_QUESTION.md", "NONCANONICAL.md"
+    )
+    assert_denied(
+        invoke(repo, "shell_command", {"command": wrong_destination}, session_id="research-session", cwd=repo),
+        "registered research script",
     )
 
 

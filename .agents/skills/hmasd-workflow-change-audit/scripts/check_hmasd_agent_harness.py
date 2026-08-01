@@ -254,10 +254,7 @@ def audit_repo(
         path.parent.name: path.resolve() for path in skill_root.glob("*/SKILL.md")
     }
     route_texts = [agents_text]
-    manager_roles = (
-        role_root / "CODE_PROJECT_MANAGER.md",
-        role_root / "RESEARCH_OPERATIONS_MANAGER.md",
-    )
+    manager_roles = (role_root / "CODE_PROJECT_MANAGER.md",)
     route_texts.extend(_read(path) for path in manager_roles if path.is_file())
     route_texts.extend(_read(path) for path in skill_docs.values())
     route_blob = "\n".join(route_texts)

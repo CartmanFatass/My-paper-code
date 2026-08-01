@@ -9,9 +9,9 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 Read the root router, the role contract, and brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
-scientific decisions; Code Project Manager alone accepts code, directs
-engineering repair and owns code-side Git integration. Research Operations
-Manager owns runtime and transport. A bounded child requires an exact
+scientific decisions. Code Project Manager alone accepts code, coordinates the
+project, directs engineering repair, and owns runtime, transport and Git
+integration. A bounded child requires an exact
 assignment and never scopes, accepts, or commits its work.
 
 ```text
@@ -48,8 +48,8 @@ A user-named one may be inspected only as reference.
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
    disposition and its design-audit status. Before implementation Code Project Manager performs
    only a local feasibility read. It returns a concrete ambiguity,
-   impossibility or counterexample to Research Operations Manager for one
-   focused Pro clarification; there is no routine pre-implementation review.
+   impossibility or counterexample for one focused Pro clarification; there is
+   no routine pre-implementation review.
    Pure operational work records why the audit is not triggered.
 2. **Bound.** Use the brief and
    `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Code Project Manager defines code
@@ -72,9 +72,9 @@ A user-named one may be inspected only as reference.
    serialization, transfers, synchronization, packing, persistence, and serial
    evaluation. Report commands, results, limits, and files. For new or materially
    changed claim-bearing code, Code Project Manager writes the commit-bound
-   critical-point index, pushes the accepted implementation and returns its
-   exact commit and index to Research Operations Manager. Research Operations
-   Manager routes the one comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` before
+   critical-point index, pushes the accepted implementation and routes the one
+   comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` through the registered Project
+   Operations Operator before
    a formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
@@ -195,10 +195,10 @@ untriggered return must state its bounded reason. Other roles, ordinary turns
 and blocked returns are no-ops.
 
 An execution-readiness operational failure before `CODE_ACCEPTED` remains in
-the Code Project Manager verification loop and never routes to Research
-Operations Manager as a partial code handoff. After code acceptance, classify
+the Code Project Manager verification loop and is never treated as a partial
+runtime handoff. After code acceptance, classify
 every runtime terminal event before continuing. A purely operational failure
-returns control to Research Operations Manager for automatic `retry`, `resume` or `restart` inside the
+returns control to Code Project Manager for automatic `retry`, `resume` or `restart` inside the
 unchanged authorized scientific boundary, without per-attempt reauthorization
 or a fixed attempt count. Preserve the estimator, source, seed law, budgets,
 thresholds, backend constraints and branch semantics; never weaken checks or
@@ -290,7 +290,7 @@ operational_recovery_scientific_iteration_cost=zero
 early_termination_boundary=unrecoverable_external_technical_impossibility_only
 ```
 
-Research Operations Manager applies the terminal-event routing below. Inside
+Code Project Manager applies the terminal-event routing below. Inside
 the active authorized nine-valid-iteration grant, do not stop for user
 input, a permission prompt, a scientific result or protected-science ambiguity.
 Archive every valid success, failure, mixed or
@@ -300,7 +300,7 @@ or parked directions when evidence supports them. Pro returns
 otherwise it returns `CLOSE_NO_EXECUTABLE_CANDIDATE` only when the full preserved
 portfolio has no executable in-scope candidate, or `CONTINUE` with one current
 resource-consuming action. That scheduling boundary provides attribution and
-does not establish scientific uniqueness. Research Operations Manager executes
+does not establish scientific uniqueness. Code Project Manager executes
 only the designated `CONTINUE` action and never reorders or compresses the
 portfolio. While balance
 remains, an absent or ambiguous action with a possible in-scope candidate causes

@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with every output confined to local_research outside pro_reviews.
+description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with outputs confined to local_research and only registered direction-prompt provisioning under pro_reviews.
 ---
 
 # HMASD Independent Research Exploration
@@ -39,7 +39,8 @@ the transport-owned `pro_reviews` subtree.
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers. Do not use Git or create project changes.
 Write advisory files only with `apply_patch` under `local_research`, excluding
-`local_research/pro_reviews`; the research session's shell is read-only.
+`local_research/pro_reviews`. The sole shell-write exception is the registered
+`provision-direction` copy of one frozen prompt before child spawn.
 
 ## Choose exactly one research mode
 
@@ -63,13 +64,22 @@ dispatch. Keep all useful parent and child directions. Stop only at recorded
 convergence, a resource boundary, an external-source expansion or work that
 requires code, compute or formal adoption.
 
-A user-authorized independent Pro direction review is external advisory input,
-not an automatic campaign phase. Explorer freezes one candidate and one review
-mode, then spawns `hmasd-independent-research-review-operator` with the exact
-prompt, Agentify binding, operation identity, item root and one-send limit. The
+A direction review inside the active user-authorized Explorer grant is external
+advisory input and needs no per-review user or WDM confirmation. Explorer
+freezes one candidate and one review mode, then spawns
+`hmasd-independent-research-review-operator` with the exact prompt source,
+Agentify binding, operation identity, item root and one-send limit. The
 child returns one native `INDEPENDENT_RESEARCH_DIRECTION_PACKET`; no persistent Operator handoff
 or batch manifest participates. Explorer, not the child or completion order,
 chooses any later candidate or review.
+
+Before spawn, Explorer invokes only the registered `provision-direction`
+command to copy the frozen prompt into its exact new item root. This is the sole
+Explorer write exception under `pro_reviews`; prepare, submit, verify and
+archive remain child-only. WDM never provisions or authorizes a campaign step.
+Operational failure returns to Explorer, which may
+issue a later exact recovery assignment within the same grant without changing
+the scientific question or creating a duplicate send.
 
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
@@ -222,7 +232,7 @@ authorize compute, dispatch implementation or advance the formal workflow.
 When a mature candidate is ready for a toy-project identity intake, emit one
 `EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
 `hmasd-explorer-project-validation` Skill. The packet is routed through the
-Ops-centered lane to a dedicated Operations-owned Pro conversation, separate
+CPM-centered lane to a dedicated CPM-owned stable-key Pro conversation, separate
 from both formal Pro transport and the Independent Research Review Operator
 (IRRO). It is not a dispatcher or a transition engine: `candidate_count=1`,
 `cross_direction_competition=false`, and `combined_toy=false` prevent selecting
@@ -231,8 +241,8 @@ multiple directions in one Pro package.
 The request label is `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`; after a separately
 authorized nonformal toy run, the scientific disposition label is
 `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`. The packet records
-`evidence_tier=nonformal_toy` and `completion=OPS_IDENTITY_INTAKE_ONLY`. If
-Operations lacks an explicit toy-compute grant, its workflow state—not the
+`evidence_tier=nonformal_toy` and `completion=OPS_IDENTITY_INTAKE_ONLY`. If CPM
+lacks an explicit toy-compute grant, its workflow state—not the
 packet—stops at `AWAITING_TOY_COMPUTE_GRANT`. All authority fields remain
 `none`, and the Explorer retains no Code Project Manager, compute, scientific,
 or project-state authority.

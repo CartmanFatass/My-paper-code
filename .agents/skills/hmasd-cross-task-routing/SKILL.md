@@ -12,8 +12,8 @@ locked route table below is the single complete source for target role,
 session, model and thinking. The root `AGENTS.md` mirrors session identities so
 role bootstrap and non-routing consumers keep their existing address contract.
 
-This protocol does not route native children or replace Research Operations
-Manager's Agentify External Pro transport ownership. A session is an address, not authority.
+This protocol does not route native children or replace Code Project Manager's
+Agentify External Pro transport ownership. A session is an address, not authority.
 Do not discover live settings, read `state_5.sqlite`, cache a route, copy the
 sender's settings or infer a replacement row.
 
@@ -23,7 +23,6 @@ sender's settings or infer a replacement row.
 |---|---|---|---|
 | `workflow_design_manager` | `019fb73d-5635-7b63-b165-6c5129bc0217` | `gpt-5.6-sol` | `high` |
 | `code_project_manager` | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` | `gpt-5.6-sol` | `max` |
-| `research_operations_manager` | `019f9c6a-9401-7ae0-ace5-dd827dccba2b` | `gpt-5.6-luna` | `high` |
 | `independent_research_explorer` | `019fb398-0a76-7bd0-9400-c5ea4eefa5de` | `gpt-5.6-sol` | `ultra` |
 | `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `medium` |
 
@@ -31,7 +30,7 @@ Each role appears exactly once. Router session fields must mirror this table.
 The persistent independent review operator may route only an exact terminal
 methodology packet or blocker to Workflow Design Manager. Direction review is a
 native-child final to Explorer and never enters this cross-task route. Neither
-path routes through Research Operations Manager or changes the formal loop.
+path changes the formal loop.
 
 ## Independent-research authority preservation
 
@@ -42,10 +41,10 @@ convergence decision, scientific review scope or continuation.
 
 Workflow Design Manager may send Explorer only a control-plane reload notice or
 mechanical receipt, each explicitly marked `research_state_effect=none`.
-Research Operations Manager may return only an exact mechanical nonconformance
-or a verbatim External Pro advisory gap from its registered toy-validation
-lane. The native direction-review child returns only to its Explorer parent and
-does not use this Skill. None of these routes grants its
+Code Project Manager may return only an exact mechanical nonconformance or a
+verbatim External Pro advisory gap from its registered toy-validation lane. The
+native direction-review child returns only to its Explorer parent and does not
+use this Skill. None of these routes grants its
 sender authority to select, sequence, pause, resume, revise, re-audit or
 terminate a direction, interpret campaign completion, formulate a Pro
 scientific question, or relay such a command on the user's behalf. Explorer

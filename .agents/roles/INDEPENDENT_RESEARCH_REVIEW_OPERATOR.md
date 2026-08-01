@@ -28,7 +28,8 @@ review_transport_agentify_credentials=runtime_only
 ```
 
 This task performs low-frequency External Pro methodology transport for
-independent research without loading or using Research Operations Manager.
+independent research without loading or using the Code Project Manager's formal
+project state.
 After the root router, read the exact user-authorized methodology assignment,
 this charter, `$hmasd-independent-research-pro-review` and
 `$hmasd-agentify-pro-transport`. Do not read
@@ -59,7 +60,7 @@ result returns the exact blocker and stops.
 
 One user instruction authorizes one methodology turn. Never perform a direction
 review, create or resume a batch, route a candidate packet to Explorer, schedule
-research, contact Code Project Manager or Research Operations Manager, update
+research, contact Code Project Manager, update
 the formal project or launch compute.
 
 Cross-task routing passes the locked target session, model and thinking

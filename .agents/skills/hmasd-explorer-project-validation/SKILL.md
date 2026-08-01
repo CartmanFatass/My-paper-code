@@ -1,14 +1,14 @@
 ---
 name: hmasd-explorer-project-validation
-description: Use for the Explorer-to-Ops project toy-validation bridge: build or check one advisory candidate packet, then keep Ops-centered Pro, CPM and compute routing inside the frozen grant.
+description: Use for the Explorer-to-project toy-validation bridge: build or check one advisory candidate packet, then keep CPM-owned Pro and compute routing inside the frozen grant.
 ---
 
 # Explorer project validation
 
-This Skill is the mechanical boundary for the Explorer-to-Operations toy lane
-and its Ops-centered lane routing.
+This Skill is the mechanical boundary for the Explorer-to-project toy lane and
+its CPM-centered lane and routing.
 It creates no project state and grants no compute, code, scientific, or current-
-work authority. The dedicated Operations-owned Pro conversation is separate
+work authority. The dedicated CPM-owned stable-key Pro conversation is separate
 from both the formal Pro transport and the Independent Research Review Operator
 (IRRO) conversation.
 
@@ -18,7 +18,7 @@ one candidate is selected for each Pro package, and a package never selects
 multiple directions. The design request is
 `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`; after an authorized toy run, the
 scientific disposition label is `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`.
-The intake completion marker is `OPS_IDENTITY_INTAKE_ONLY`. If Operations lacks
+The intake completion marker remains `OPS_IDENTITY_INTAKE_ONLY`. If CPM lacks
 a separate toy-compute grant, its workflow state stops at
 `AWAITING_TOY_COMPUTE_GRANT`; that state is not stored in the Explorer packet.
 
@@ -46,26 +46,26 @@ symlink/reparse escape. SHA-256 and byte counts are re-read on every check.
 only when Pro explicitly requests a gap; v1's mechanical script does not
 broaden into a refinement dispatcher or transition engine.
 
-## Operations coordination
+## CPM coordination
 
-Operations checks one candidate packet, independently verifies its live user
+CPM checks one candidate packet, independently verifies its live user
 authorization reference, and packages only that candidate for the dedicated
 Explorer-validation Pro conversation. The same conversation is reused
 sequentially with one candidate per turn; candidate turns are neither combined
 nor concurrent. The packet is an identity envelope, so
-the Pro package also includes the Operations-authored question, allow-list and
+the Pro package also includes the CPM-authored question, allow-list and
 named candidate evidence. `TOY_CONTRACT_FROZEN` permits one complete CPM code
 assignment; `ADVISORY_REFINEMENT_REQUIRED` permits one exact Explorer
 refinement request; `PARK_CANDIDATE` advances the scheduling-only queue.
 
-After `CODE_ACCEPTED` and code-science alignment, Operations stops at
+After `CODE_ACCEPTED` and code-science alignment, CPM stops at
 `AWAITING_TOY_COMPUTE_GRANT` unless the user has frozen a toy-compute grant.
-Inside that grant, Operations owns runtime dispatch and recovery. It routes a
+Inside that grant, CPM owns runtime dispatch and recovery. It routes a
 mechanically valid isolated result to
 `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`: `CONTINUE_CANDIDATE` retains the
 current candidate, while `PARK_CANDIDATE` or `COMPLETE_CANDIDATE` advances the
 queue. Explorer packet or candidate-artifact nonconformance returns to Explorer
-through Operations. Accepted implementation or frozen runtime-interface defects
+through CPM. Accepted implementation or frozen runtime-interface defects
 go to CPM, scientific questions go to the dedicated Pro conversation, and
 contract, packet-validator or routing defects go to Workflow Design Manager. Shared
 harness code may be reused; candidate roots, artifacts and result evidence may

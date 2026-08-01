@@ -12,6 +12,10 @@ $implementer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
+$experimentOperator = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
+$projectOperationsOperator = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.codex/agents/hmasd-project-operations-operator.toml')
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
@@ -33,6 +37,28 @@ foreach ($required in @(
     'Use only the assignment-named runtime')) {
     if (-not $implementer.Contains($required)) {
         throw "Selected implementer profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-experiment-operator"',
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "low"',
+    'as delegated compute authority',
+    'Do not request or require a separate per-run user authorization reference')) {
+    if (-not $experimentOperator.Contains($required)) {
+        throw "Experiment Operator profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-project-operations-operator"',
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "medium"',
+    'PRO_REVIEW_TRANSPORT or RESULT_INTAKE',
+    'Never interpret science',
+    'choose recovery',
+    'edit CURRENT_WORK')) {
+    if (-not $projectOperationsOperator.Contains($required)) {
+        throw "Project Operations Operator profile missing: $required"
     }
 }
 foreach ($required in @(
@@ -131,7 +157,11 @@ foreach ($required in @(
     '[agents."HMASDImplementer"]',
     'config_file = "./agents/hmasd-implementer.toml"',
     '[agents."HMASDReviewer"]',
-    'config_file = "./agents/hmasd-reviewer.toml"')) {
+    'config_file = "./agents/hmasd-reviewer.toml"',
+    '[agents."HMASDExperimentOperator"]',
+    'config_file = "./agents/hmasd-experiment-operator.toml"',
+    '[agents."HMASDProjectOperationsOperator"]',
+    'config_file = "./agents/hmasd-project-operations-operator.toml"')) {
     if (-not $config.Contains($required)) {
         throw "Selected normal profile is not registered: $required"
     }

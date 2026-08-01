@@ -48,7 +48,7 @@ class AgentifyTransportTest(unittest.TestCase):
         self.request = {
             "schema_version": 1,
             "transport_backend": "agentify",
-            "transport_owner": "research_operations_manager",
+            "transport_owner": "code_project_manager",
             "stable_key": "hmasd-formal-pro",
             "provider": "chatgpt",
             "model": "Pro",
@@ -147,7 +147,7 @@ class AgentifyTransportTest(unittest.TestCase):
         prompt = self.root / "docs/external-review/round/frozen_question.md"
         prompt.write_text("Assignment: ROUND-FROZEN\nReply exactly.", encoding="utf-8")
         args = SimpleNamespace(
-            owner="research_operations_manager",
+            owner="code_project_manager",
             stable_key="hmasd-formal-pro",
             model="Pro",
             conversation_url="https://chatgpt.com/c/conversation-1",
@@ -155,6 +155,7 @@ class AgentifyTransportTest(unittest.TestCase):
             assignment_identity="ROUND-FROZEN",
             operation_key="round-frozen-operation",
             prompt_path=prompt,
+            prompt_source=None,
             timeout_ms=300000,
             selection=selection,
             request=request_path,
@@ -183,11 +184,47 @@ class AgentifyTransportTest(unittest.TestCase):
             prompt.read_bytes().decode("utf-8"),
         )
 
+    def test_direction_provision_copies_exact_explorer_prompt_once(self) -> None:
+        source = self.root / "local_research/frozen_direction_prompt.md"
+        source.parent.mkdir(parents=True)
+        identity = "IR_DIRECTION_REVIEW:direction-1"
+        source_bytes = f"{identity}\nReview the frozen candidate.\n".encode("utf-8")
+        source.write_bytes(source_bytes)
+        item = self.root / "local_research/pro_reviews/direction-1"
+        prompt = item / "20_PRO_OPEN_QUESTION.md"
+        args = SimpleNamespace(
+            assignment_identity=identity,
+            prompt_path=prompt,
+            prompt_source=source,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            MODULE.command_provision_direction(args)
+            MODULE.command_provision_direction(args)
+        self.assertEqual(prompt.read_bytes(), source_bytes)
+
+        bad_source = self.root / "local_research/pro_reviews/source.md"
+        bad_source.write_text(identity, encoding="utf-8")
+        args.prompt_source = bad_source
+        args.prompt_path = self.root / "local_research/pro_reviews/direction-2/20_PRO_OPEN_QUESTION.md"
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            with self.assertRaisesRegex(MODULE.TransportError, "prompt_source_inside_review_archive"):
+                MODULE.command_provision_direction(args)
+
+        invalid_prompt = self.root / "local_research/pro_reviews/direction-3/NONCANONICAL.md"
+        args.prompt_source = source
+        args.prompt_path = invalid_prompt
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            with self.assertRaisesRegex(MODULE.TransportError, "direction_prompt_item_depth_invalid"):
+                MODULE.command_provision_direction(args)
+        self.assertFalse(invalid_prompt.exists())
+
     def test_prepare_parser_does_not_accept_operator_supplied_prompt_hash(self) -> None:
         help_text = MODULE.build_parser().format_help()
         self.assertIn("prepare", help_text)
+        self.assertIn("provision-direction", help_text)
         prepare = MODULE.build_parser()._subparsers._group_actions[0].choices["prepare"]
         self.assertNotIn("--prompt-sha256", prepare.format_help())
+        self.assertNotIn("--prompt-source", prepare.format_help())
 
     def test_receipt_rejects_wrong_send_identity_completion_and_hash(self) -> None:
         mutations = [

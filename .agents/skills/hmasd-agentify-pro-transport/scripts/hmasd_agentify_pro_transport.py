@@ -23,7 +23,7 @@ AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
-    "research_operations_manager": {
+    "code_project_manager": {
         "hmasd-formal-pro",
         "hmasd-explorer-validation-pro",
     },
@@ -114,7 +114,7 @@ def _require_within(path: Path, roots: list[Path], field: str) -> Path:
 
 
 def _owner_roots(repo_root: Path, owner: str, kind: str) -> list[Path]:
-    if owner == "research_operations_manager":
+    if owner == "code_project_manager":
         return [repo_root / ("logs" if kind == "runtime" else "docs/external-review")]
     if owner == "independent_research_review_operator":
         return [repo_root / "local_research/pro_reviews"]
@@ -389,6 +389,50 @@ def _receipt_bytes(receipt: dict[str, Any]) -> bytes:
     return (json.dumps(receipt, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
 
 
+def command_provision_direction(args: argparse.Namespace) -> None:
+    repo_root = _repo_root()
+    assignment_identity = _required_text(
+        args.assignment_identity, "assignment_identity", maximum=1024
+    )
+    if not assignment_identity.startswith("IR_DIRECTION_REVIEW:"):
+        _fail("direction_provision_identity_invalid")
+    source_path = _require_within(
+        args.prompt_source,
+        [repo_root / "local_research"],
+        "prompt_source",
+    )
+    review_root = (repo_root / "local_research" / "pro_reviews").resolve(strict=False)
+    if _is_within(source_path, review_root):
+        _fail("prompt_source_inside_review_archive")
+    if not source_path.is_file():
+        _fail("prompt_source_missing")
+    prompt_path = _require_within(
+        args.prompt_path,
+        [review_root],
+        "prompt_path",
+    )
+    try:
+        relative_prompt = prompt_path.relative_to(review_root)
+    except ValueError:
+        _fail("direction_prompt_outside_review_archive")
+    if len(relative_prompt.parts) != 2 or prompt_path.name != "20_PRO_OPEN_QUESTION.md":
+        _fail("direction_prompt_item_depth_invalid")
+    try:
+        prompt_bytes = source_path.read_bytes()
+        prompt = prompt_bytes.decode("utf-8")
+    except OSError as exc:
+        raise TransportError("prompt_source_unreadable") from exc
+    except UnicodeError as exc:
+        raise TransportError("prompt_source_not_exact_utf8") from exc
+    if not prompt or assignment_identity not in prompt:
+        _fail("prompt_source_identity_mismatch")
+    _atomic_write_new(prompt_path, prompt_bytes)
+    print(
+        "HMASD_DIRECTION_REVIEW_ITEM_PROVISIONED "
+        f"assignment_identity={assignment_identity} prompt={prompt_path}"
+    )
+
+
 def command_prepare(args: argparse.Namespace) -> None:
     repo_root = _repo_root()
     owner = _required_text(args.owner, "transport_owner", maximum=128)
@@ -540,6 +584,11 @@ def command_archive(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
+    provision = subparsers.add_parser("provision-direction")
+    provision.add_argument("--assignment-identity", required=True)
+    provision.add_argument("--prompt-source", type=Path, required=True)
+    provision.add_argument("--prompt-path", type=Path, required=True)
+    provision.set_defaults(handler=command_provision_direction)
     prepare = subparsers.add_parser("prepare")
     prepare.add_argument("--owner", required=True)
     prepare.add_argument("--stable-key", required=True)

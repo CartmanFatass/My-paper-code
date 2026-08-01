@@ -28,9 +28,9 @@ send.
 The request must provide a fixed role-owned `stable_key`:
 
 ```text
-hmasd-formal-pro
-hmasd-independent-research-pro
-hmasd-explorer-validation-pro
+code_project_manager -> hmasd-formal-pro
+code_project_manager -> hmasd-explorer-validation-pro
+independent_research_review_operator -> hmasd-independent-research-pro
 ```
 
 Conversation ID, exact URL, endpoint token and the selected Pro model are
@@ -39,9 +39,9 @@ be invented, committed, copied into a question, or obtained from repository
 history. The wrapper rejects a stable-key binding whose provider, conversation
 or model is missing or conflicts with the current round.
 
-Keep runtime request and receipt files in the owner boundary: ROM uses the
+Keep runtime request and receipt files in the owner boundary: CPM uses the
 applicable `logs/` review root and IRRO uses
-`local_research/pro_reviews/`. Prompt and raw-output files remain in ROM's
+`local_research/pro_reviews/`. Prompt and raw-output files remain in CPM's
 `docs/external-review/` or IRRO's `local_research/pro_reviews/` root. Do not
 place credentials, Agentify state or live conversation registrations in Git.
 
@@ -88,17 +88,21 @@ transport blocker.
 
 Active generation or a readable complete response always suppresses another
 send: wait, then verify and archive that response. When the conversation is
-idle and no complete response exists, the same authorized assignment may use a
-fresh unchanged-question operation without per-resend user instruction. Each
-operation still submits at most once, and the client submission limit is three
-per assignment. The owning role counts fresh operations from its existing
-immutable request records; this limit adds no hash, ledger or validator gate.
-Ordinary recovery never launches a synthetic smoke.
+idle and both generation and submitted user content are absent, the owning
+parent may assign one fresh unchanged-question child operation without a new
+user instruction. The owning parent is CPM for project reviews and Explorer for
+independent direction reviews.
+Each child operation submits at most once; the review assignment permits the
+initial operation plus one fresh resend. The parent counts those operations
+from the existing request records without a hash or new ledger. Ordinary recovery never
+launches a synthetic smoke.
 
-After the third unsuccessful submission, return one technical transport defect
-to Workflow Design Manager. Do not ask the user for another resend, reinterpret
-science or continue sending. The adapter never clicks Stop, Continue, Retry or
-Answer now, and every transport failure consumes zero scientific iterations.
+After the fresh resend fails, return one terminal technical transport defect to
+the owning parent. WDM is not a recovery approver; it is involved only if the
+parent later reports a concrete reusable control-plane design defect. Do not
+reinterpret science or continue sending. The adapter
+never clicks Stop, Continue, Retry or Answer now, and every transport failure
+consumes zero scientific iterations.
 
 ## Mechanical commands
 
@@ -157,7 +161,7 @@ without rewriting and bind the archive to the receipt:
 ```
 
 `archive` is permitted only for a complete receipt and reread byte equality.
-For ROM, the raw-output path is under `docs/external-review`; for IRRO it is
+For CPM, the raw-output path is under `docs/external-review`; for IRRO it is
 under `local_research/pro_reviews`. Mechanical intake remains the applicable
 owner's normal next step. No response interpretation is performed here.
 

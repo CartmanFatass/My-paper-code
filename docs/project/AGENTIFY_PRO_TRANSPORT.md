@@ -19,8 +19,8 @@ Browser transport is retired; Agentify is the sole External Pro transport.
 
 | Stable key | Owner | Use |
 |---|---|---|
-| `hmasd-formal-pro` | Research Operations Manager | formal-review Pro conversation |
-| `hmasd-explorer-validation-pro` | Research Operations Manager | Explorer validation Pro conversation |
+| `hmasd-formal-pro` | Code Project Manager | formal-review Pro conversation |
+| `hmasd-explorer-validation-pro` | Code Project Manager | Explorer validation Pro conversation |
 | `hmasd-independent-research-pro` | Independent Research Pro Review Operator | independent-research Pro conversation |
 
 Stable keys identify a runtime binding, not a repository conversation record.

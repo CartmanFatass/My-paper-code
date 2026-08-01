@@ -262,7 +262,7 @@ def _trusted_agentify_review_command(
     if mode is None:
         return False
     flags = {
-        "prepare": ("--selection", "--request"),
+        "prepare": ("--selection", "--request", "--prompt-path"),
         "submit": ("--request", "--receipt"),
         "verify": ("--request", "--receipt"),
         "archive": ("--request", "--receipt", "--raw-output"),
@@ -309,6 +309,46 @@ def _trusted_agentify_review_command(
     return True
 
 
+def _trusted_direction_provision_command(command: str, repo: Path) -> bool:
+    if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
+        return False
+    interpreter = _registered_python(repo)
+    if interpreter is None:
+        return False
+    agentify = (
+        repo
+        / ".agents"
+        / "skills"
+        / "hmasd-agentify-pro-transport"
+        / "scripts"
+        / "hmasd_agentify_pro_transport.py"
+    )
+    if not _registered_script_prefix(command, interpreter, agentify):
+        return False
+    if re.search(r"\sprovision-direction(?:\s|$)", command, re.IGNORECASE) is None:
+        return False
+    assignment_identity = _flag_value(command, "--assignment-identity")
+    prompt_source = _flag_path(command, "--prompt-source")
+    prompt_path = _flag_path(command, "--prompt-path")
+    if not (
+        isinstance(assignment_identity, str)
+        and assignment_identity.startswith(DIRECTION_ASSIGNMENT_PREFIX)
+        and prompt_source is not None
+        and prompt_path is not None
+    ):
+        return False
+    research_root = _canonical(repo / "local_research")
+    review_root = _canonical(research_root / "pro_reviews")
+    if not _inside(prompt_source, research_root) or _inside(prompt_source, review_root):
+        return False
+    item_root = _review_item_root(prompt_path, review_root)
+    return (
+        item_root is not None
+        and _same(prompt_path.parent, item_root)
+        and prompt_path.name == "20_PRO_OPEN_QUESTION.md"
+    )
+
+
 def _trusted_research_script(
     command: str,
     repo: Path,
@@ -321,6 +361,8 @@ def _trusted_research_script(
     if interpreter is None:
         return False
     if role == "explorer":
+        if _trusted_direction_provision_command(command, repo):
+            return True
         forbidden = str(repo / "local_research" / "pro_reviews").replace("\\", "/")
         normalized = command.replace("\\", "/")
         if (

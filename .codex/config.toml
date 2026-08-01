@@ -57,6 +57,11 @@ description = "Silent mechanical operator for one authorized HMASD train-evaluat
 config_file = "./agents/hmasd-experiment-operator.toml"
 nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 
+[agents."HMASDProjectOperationsOperator"]
+description = "Thin mechanical operator for one CPM-frozen Pro transport or result-intake assignment."
+config_file = "./agents/hmasd-project-operations-operator.toml"
+nickname_candidates = ["Project Operations Operator", "Review Transport Operator", "Result Intake Operator"]
+
 [agents."HMASDResearchScout"]
 description = "Read-only Sol-high scout for one bounded independent research axis."
 config_file = "./agents/hmasd-research-scout.toml"

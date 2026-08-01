@@ -4,7 +4,7 @@
 purpose=prevent_wrong_scientific_assertions
 scientific_acceptance_owner=external_pro
 code_acceptance_owner=code_project_manager
-runtime_owner=research_operations_manager
+runtime_owner=code_project_manager
 workflow_design_owner=workflow_design_manager
 external_scientific_authority=exclusive_within_user_goal_and_review_boundary
 audit_model=two_stage_triggered
@@ -28,7 +28,7 @@ implementation correctness and operability.
 Each stage must pass the registered workflow value test: name the false
 scientific assertion it can prevent and confirm that complete packaging,
 waiting, repair and compute cost is smaller than the waste it avoids. Workflow
-Manager owns changes to this test; Research Operations Manager enforces it in each runtime instance. A
+Manager owns changes to this test; Code Project Manager enforces it in each runtime instance. A
 cheaper proof-sized diagnostic is preferred when it preserves scientific safety.
 
 ## When it triggers
@@ -51,7 +51,7 @@ that stage.
 
 ## Stage A: design assertion audit
 
-Research Operations Manager packages the exact user goal, prior binding evidence and code
+Code Project Manager packages the exact user goal, prior binding evidence and code
 constraints without choosing science. The design question requires External Pro
 to close these points without training:
 
@@ -78,14 +78,14 @@ to close these points without training:
    per controller episode. A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`,
    not a scientific result.
 
-Then Research Operations Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
+Then Code Project Manager packages one `DESIGN_ASSERTION_AUDIT` question. Pro receives
 the draft design, current scientific principles, relevant evidence and exact
 repository paths. Ask Pro to seek counterexamples and missing decisions, not to
 confirm the plan. Pro freezes the scientific distinction and required
 properties; Code Project Manager owns the cheapest bounded controller, witness, diagnostic and
 other implementation realization inside
-`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Research Operations Manager
-archives and routes the exact raw; Code Project Manager implements the frozen
+`docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Project Operations Operator
+archives the exact raw; Code Project Manager implements the frozen
 disposition and may report one
 focused code-side ambiguity or infeasibility in a Pro question, but neither
 role may select among scientifically different answers.
@@ -96,8 +96,8 @@ Before implementation starts, Code Project Manager performs only a local feasibi
 the code side; this is not an external review.
 If the Pro disposition is ambiguous in code, structurally unreachable,
 internally inconsistent with the named implementation surface, or contradicted
-by a concrete code-level counterexample, Code Project Manager sends one exact
-objection to Research Operations Manager. Research Operations Manager may route an
+by a concrete code-level counterexample, Code Project Manager freezes one exact
+objection and routes an
 `IMPLEMENTATION_ALIGNMENT_CLARIFICATION` in the same review lineage. State the
 exact objection and the one scientific invariant that needs clarification; do
 not ask Pro to design a solver or evidence search and do not select a scientific
@@ -109,7 +109,7 @@ require a separate internal reviewer, approval file or checklist artifact.
 
 ## Stage B: code-science alignment audit
 
-After Code Project Manager implementation acceptance, Research Operations Manager routes the one existing
+After implementation acceptance, Code Project Manager routes the one existing
 code-science audit:
 
 1. Run the proof-sized focused checks and one bounded exercise when a
@@ -118,7 +118,7 @@ code-science audit:
    `CODE_SCIENCE_INDEX.md`.
 3. Require each index row to be
    `claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded`.
-4. Research Operations Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
+4. Code Project Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
    that exact commit and index. The index is navigation, not a substitute for
    reading the named code.
 5. Ask only whether the code instantiates the scientific contract, whether a
@@ -136,16 +136,17 @@ contract.
 Do not ask for style, architecture taste, broad refactoring, coverage,
 compatibility or generic bug hunting. Code Project Manager remains the code
 acceptance owner; Pro owns only whether that accepted code is scientifically
-aligned. For an in-scope mismatch, Research Operations Manager sends one exact
-correction assignment to Code Project Manager. After `CODE_ACCEPTED`, Research
-Operations Manager routes the smallest affected evidence and at most one
+aligned. For an in-scope mismatch, Code Project Manager opens one exact
+correction assignment. After `CODE_ACCEPTED`, Code Project Manager routes the
+smallest affected evidence and at most one
 correction-only recheck of the repaired claim-bearing diff. The recheck cannot
 reopen design. An unchanged reviewed commit is never resubmitted; there is no review of the review.
 
 ## Result intake
 
-Before scientific interpretation, the Experiment Operator gives Research
-Operations Manager the exact artifact paths. Research Operations Manager mechanically checks in this order:
+Before scientific interpretation, the Experiment Operator gives Code Project
+Manager the exact artifact paths. Code Project Manager may assign mechanical
+intake to Project Operations Operator, then accepts checks in this order:
 
 1. artifact/source/runtime closure and operational validity;
 2. access and identifiability branches before behavioral branches;
@@ -154,7 +155,7 @@ Operations Manager the exact artifact paths. Research Operations Manager mechani
 4. exact budget/code/branch scope of any historical evidence invoked;
 5. exact registered first-match branch reproduction.
 
-Research Operations Manager completes the exact mechanical validation and submits a
+Code Project Manager accepts the exact mechanical validation and submits a
 `FORMAL_RESULT_SCIENTIFIC_DISPOSITION` boundary to Pro. Pro
 owns the smallest unit retired, retained mechanisms/lemmas, CDC/portfolio
 change, excluded interpretations and next scientific action. The frozen
@@ -181,9 +182,9 @@ must target bounded-neighborhood `O(N*k_neighbor)` or hierarchical
 `O(N*logN)`. Sparsifying or approximating the physical model changes science and
 therefore returns to Stage A instead of being hidden as a performance repair.
 
-An experiment-operator terminal return or naturally completed Pro response
-wakes Research Operations Manager. With an active grant, no live owned operation
-and no real authority blocker, Research Operations Manager executes the exact
-Pro-selected action, sends its code component to Code Project Manager, or asks
+An experiment-operator or project-operations-operator terminal return wakes Code
+Project Manager. With an active grant, no live owned operation and no real
+authority blocker, Code Project Manager executes the exact Pro-selected action,
+opens its code component as the next exact assignment, or asks
 External Pro for the smallest missing scientific decision; neither native role fills that
 decision locally or leaves an idle gap.

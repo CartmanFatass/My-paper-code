@@ -119,7 +119,7 @@ requires a new explicit workflow contract.
 
 The runtime workflow may resume only after Code Project Manager returns a
 pushed `CODE_ACCEPTED` candidate with its exact changed path subset, focused
-verification and matching full six-phase execution-readiness receipt. Research
-Operations Manager then applies the existing same-source preflight and formal
+verification and matching full six-phase execution-readiness receipt. Code
+Project Manager then applies the existing same-source preflight and formal
 admission rules. This contract authorizes no preflight, nonformal scientific
 execution or formal execution.

@@ -3,15 +3,15 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $codePmPath = Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md'
-$operationsPath = Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md'
+$projectOperationsPath = Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md'
 $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
-$operations = Get-Content -Raw -LiteralPath $operationsPath
+$projectOperations = Get-Content -Raw -LiteralPath $projectOperationsPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
-$operationsNormalized = $operations -replace '\s+', ' '
+$projectOperationsNormalized = $projectOperations -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
@@ -21,7 +21,6 @@ $explorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-p
 $agileNormalized = $agile -replace '\s+', ' '
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
-$handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
 $readinessScriptPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py'
 $hooksPath = Join-Path $repo '.codex/hooks.json'
 $g0ReadinessContractPath = Join-Path $repo 'docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md'
@@ -44,7 +43,7 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'explorer_toy_assignment_intake=ops_complete_pro_frozen_only',
+    'explorer_toy_assignment_intake=pro_frozen_only',
     'explorer_toy_local_research_read=forbidden',
     'Explorer packet is not a code assignment',
     'Read `local_research/`')) {
@@ -60,21 +59,15 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath)) {
 $routerRequired = @(
     'cross_task_routing=locked_role_session_model_thinking',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
-    'research_operations_manager_session=019f9c6a-9401-7ae0-ace5-dd827dccba2b',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
-    'code_project_manager_runtime_authority=none',
-    'code_project_manager_current_work_read=bounded_read_only_on_demand',
-    'code_project_manager_current_work_write_authority=none',
-    'research_operations_manager_runtime_authority=exclusive',
-    'research_operations_manager_current_work_authority=exclusive',
-    'research_operations_manager_formal_external_review_transport_authority=exclusive',
-    'research_operations_manager_mechanical_result_acceptance=exclusive',
-    'research_operations_manager_code_authority=none',
-    'research_operations_manager_code_acceptance_authority=none',
-    'operational_recovery_owner=research_operations_manager',
+    'code_project_manager_runtime_authority=exclusive',
+    'code_project_manager_current_work_authority=exclusive',
+    'code_project_manager_formal_external_review_transport_authority=exclusive',
+    'code_project_manager_mechanical_result_acceptance=exclusive',
+    'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md'
+    '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -84,15 +77,14 @@ $codeRequired = @(
     'role=code_project_manager',
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
-    'runtime_authority=none',
-    'current_work_read=bounded_read_only_on_demand',
-    'current_work_write_authority=none',
+    'runtime_authority=exclusive',
+    'current_work_authority=exclusive',
+    'formal_external_review_transport_authority=exclusive',
     'scientific_authority=none',
-    'git_execution=direct_for_code_tests_and_code_science_index',
+    'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
-    'may read `docs/project/CURRENT_WORK.md` only to check the current',
-    'not replace a complete incoming assignment',
-    'Never edit, stage, commit or advance',
+    'operations_child=hmasd-project-operations-operator',
+    'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
@@ -118,7 +110,7 @@ $codeRequired = @(
     '`analyze_entry`',
     'prepares the exact spec and dispatches the registered `hmasd-verifier`',
     'verifier returns mechanical evidence only',
-    'Research Operations Manager',
+    'there is no Research Operations Manager',
     'Workflow Design Manager'
 )
 foreach ($required in $codeRequired) {
@@ -126,49 +118,20 @@ foreach ($required in $codeRequired) {
 }
 
 $operationsRequired = @(
-    'role=research_operations_manager',
-    'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
-    'external_review_transport_authority=exclusive',
-    'experiment_dispatch_and_result_routing=exclusive',
-    'mechanical_result_acceptance=exclusive',
-    'code_authority=none',
-    'code_acceptance_authority=none',
+    'role=project_operations_operator',
+    'parent=code_project_manager',
+    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE',
+    'current_work_authority=none',
     'scientific_authority=none',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
-    'cross_task_route_cache=forbidden',
-    'passes the locked target session, model and thinking',
-    'MECHANICALLY_VALID_RESULT',
-    'OPERATIONAL_FAILURE',
-    'CODE_DIAGNOSIS_REQUIRED',
-    'EXTERNAL_TECHNICAL_BLOCKER',
-    'changed_source_commit_execution_mode=fresh',
-    'changed_source_commit_run_root=new_independent',
-    '`mode=fresh`',
-    'new independent run root',
-    'Runtime preflight is not an incremental code debugger',
-    'one complete code-diagnosis package containing all available failure evidence',
-    'Code Project Manager owns the complete repair and execution-readiness loop',
-    'new pushed `CODE_ACCEPTED` commit and matching receipt',
-    'does not shuttle partial fixes between preflights',
-    'Code Project Manager',
-    'Workflow Design Manager'
+    'code_acceptance_authority=none',
+    'git_authority=none',
+    'cross_task_send=forbidden_native_final_only',
+    'PROJECT_OPERATIONS_TERMINAL'
 )
 foreach ($required in $operationsRequired) {
-    if (-not $operationsNormalized.Contains($required)) { throw "Research Operations Manager contract missing: $required" }
+    if (-not $projectOperationsNormalized.Contains($required)) { throw "Project Operations Operator contract missing: $required" }
 }
 
-$forbiddenCodePm = @(
-    'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
-    'external_review_transport_authority=exclusive',
-    'experiment_dispatch_and_result_routing=exclusive'
-)
-foreach ($forbidden in $forbiddenCodePm) {
-    if ($codePm.Contains($forbidden)) { throw "Code Project Manager claims operations authority: $forbidden" }
-}
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
     throw 'Code Project Manager retains the obsolete CURRENT_WORK read prohibition'
 }
@@ -176,23 +139,21 @@ if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
 $forbiddenOperations = @(
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
-    'git_execution=direct_for_code_tests_and_code_science_index'
+    'current_work_authority=exclusive'
 )
 foreach ($forbidden in $forbiddenOperations) {
-    if ($operations.Contains($forbidden)) { throw "Research Operations Manager claims code authority: $forbidden" }
+    if ($projectOperations.Contains($forbidden)) { throw "Project Operations Operator claims parent authority: $forbidden" }
 }
 
-if (-not $workflow.Contains('fixed Code Project Manager or Research') -or
-    -not $workflow.Contains('Operations Manager session that made the request')) {
-    throw 'Workflow Design Manager does not return to either exact requester'
+if (-not $workflow.Contains('fixed Code Project Manager session')) {
+    throw 'Workflow Design Manager does not return to the exact CPM requester'
 }
 if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -or
-    -not $agileNormalized.Contains('Research Operations Manager owns runtime and transport')) {
-    throw 'Agile Skill does not preserve code/runtime split'
+    -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
+    throw 'Agile Skill does not preserve CPM ownership'
 }
 if ($agile.Contains('External Review Operator') -or
-    -not $agileNormalized.Contains('returns its exact commit and index to Research Operations Manager') -or
-    -not $agileNormalized.Contains('Research Operations Manager routes the one comparison-only')) {
+    -not $agileNormalized.Contains('Project Operations Operator')) {
     throw 'Agile Skill retains a stale or ambiguous review route'
 }
 foreach ($surface in @($codePm, $agile)) {
@@ -205,19 +166,10 @@ foreach ($surface in @($codePm, $agile)) {
         }
     }
 }
-if ($assertionNormalized.Contains('Research Operations Manager executes the smallest repair') -or
-    -not $assertionNormalized.Contains('sends one exact correction assignment to Code Project Manager') -or
+if ($assertionNormalized.Contains('Research Operations Manager') -or
+    -not $assertionNormalized.Contains('opens one exact correction assignment') -or
     -not $assertionNormalized.Contains('After `CODE_ACCEPTED`')) {
     throw 'Alignment mismatch repair ownership is ambiguous'
-}
-if (-not $handoff.Contains('Code Project Manager inspects only the G35 diff') -or
-    -not $handoff.Contains('and updates the code-science index') -or
-    -not $handoff.Contains('docs/research/designs/CONTINUOUS_ROSTER_REACTIVE_REDUCTION_G35_CODE_SCIENCE_INDEX.md') -or
-    -not $handoff.Contains('stages exactly the three G35 code/index paths') -or
-    -not $handoff.Contains('returns `CODE_ACCEPTED`') -or
-    -not $handoff.Contains('Research Operations Manager dispatches exactly one fresh') -or
-    $handoff.Contains('Research Operations Manager updates the G35 prelaunch note, code-science index')) {
-    throw 'Restart handoff assigns code work to the wrong role'
 }
 if ($workflow.Contains('Project-Manager workflow-design assignment')) {
     throw 'Workflow Design Manager retains the retired requester identity'
@@ -293,7 +245,7 @@ foreach ($required in @(
     'READINESS_FINALIZATION_FAILURE',
     'transient environment, launcher, path or operating-system failure',
     'requires a new clean pushed candidate before another attempt',
-    'Research Operations Manager then applies the existing same-source preflight and formal')) {
+    'Code Project Manager then applies the existing same-source preflight and formal')) {
     if (-not $g0ReadinessContractNormalized.Contains($required)) {
         throw "G0 readiness performance contract missing: $required"
     }
@@ -815,7 +767,7 @@ $parentContracts = @{
     '.agents/roles/IMPLEMENTER.md' = 'parent=code_project_manager'
     '.agents/roles/REVIEWER.md' = 'parent=code_project_manager'
     '.agents/roles/VERIFIER.md' = 'parent=code_project_manager'
-    '.agents/roles/EXPERIMENT_OPERATOR.md' = 'parent=research_operations_manager'
+    '.agents/roles/EXPERIMENT_OPERATOR.md' = 'parent=code_project_manager'
 }
 foreach ($entry in $parentContracts.GetEnumerator()) {
     $text = Get-Content -Raw -LiteralPath (Join-Path $repo $entry.Key)

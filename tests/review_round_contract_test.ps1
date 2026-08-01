@@ -3,8 +3,10 @@ param([switch]$RoutingOnly)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
-$operations = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
+$cpm = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
+$projectOperations = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md')
 $independentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
 $independentDirectionOperator = Get-Content -Raw -LiteralPath (
@@ -26,7 +28,7 @@ $agentifySkillNormalized = $agentifySkill -replace '\s+', ' '
 $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($operations, 'review_transport_recovery_rule=.agents/skills/hmasd-agentify-pro-transport/SKILL.md#minimal-recovery'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'client submission limit is three per assignment'), @($agentifySkillNormalized, 'existing immutable request records'), @($agentifySkillNormalized, 'adds no hash, ledger or validator gate'), @($agentifySkillNormalized, 'Ordinary recovery never launches a synthetic smoke'), @($agentifySkillNormalized, 'duplicate submission of the same operation'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($cpm, 'operations_child=hmasd-project-operations-operator'), @($projectOperations, 'PRO_REVIEW_TRANSPORT'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'initial operation plus one fresh resend'), @($agentifySkillNormalized, 'existing request records'), @($agentifySkillNormalized, 'without a hash or new ledger'), @($agentifySkillNormalized, 'Ordinary recovery never launches a synthetic smoke'), @($agentifySkillNormalized, 'duplicate submission of the same operation'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"

@@ -13,7 +13,7 @@ methodology audit. Read its role, exact assignment,
 The native direction-review child does not load this Skill; its exact charter,
 profile, prompt and Agentify transport Skill contain its complete procedure.
 
-Do not load Research Operations Manager, `CURRENT_WORK.md`, formal review
+Do not load Code Project Manager formal state, `CURRENT_WORK.md`, formal review
 rounds, runtime evidence, code, CDC state or active portfolios. This Skill
 grants no science, workflow, code, compute, Git or formal-runtime authority.
 

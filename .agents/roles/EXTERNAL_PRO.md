@@ -5,7 +5,7 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
-formal_transport_owner=research_operations_manager_restricted_transport_mode
+formal_transport_owner=code_project_manager_via_project_operations_operator
 independent_methodology_transport_owner=independent_research_review_operator_separate_conversation
 independent_direction_transport_executor=hmasd-independent-research-review-operator_native_child
 workflow_authority=none
@@ -69,7 +69,7 @@ paths when scientific judgment depends on what the code actually implements.
   conclusion-bearing balance is exhausted. Neither terminal branch designates
   another scheduled action. Balance exhaustion takes precedence when both
   terminal conditions hold.
-- Resolve one Operations-Manager-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
+- Resolve one CPM-routed `IMPLEMENTATION_ALIGNMENT_CLARIFICATION`
   when Code Project Manager reports a concrete scientific ambiguity, executable impossibility or
   code counterexample. This exceptional clarification is not a routine review
   of a pre-implementation code plan.
@@ -94,7 +94,7 @@ paths when scientific judgment depends on what the code actually implements.
   confounds, leakage, capacity, recurrence, partner co-adaptation, alternative
   explanations, controls and residual uncertainty. It is a separate Pro turn,
   not a closure check or automatic continuation of the constructive review.
-- `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: assess exactly one Operations-packaged
+- `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: assess exactly one CPM-packaged
   Explorer candidate, freeze its estimand, mechanism, controls and minimum toy
   validation contract, and return exactly one of `TOY_CONTRACT_FROZEN`,
   `ADVISORY_REFINEMENT_REQUIRED` with one exact gap, or `PARK_CANDIDATE`.
@@ -108,10 +108,10 @@ paths when scientific judgment depends on what the code actually implements.
 
 ## May
 
-- Analyze the exact authorized transport-owner-packaged question and allow-list,
+- Analyze the exact CPM-packaged question and allow-list,
   inspect named remote evidence directly, identify missing scientific choices
-  or counterexamples, and return the question-scoped disposition. Only Research
-  Operations Manager may package formal reviews; only the Independent Research
+  or counterexamples, and return the question-scoped disposition. Only Code
+  Project Manager may package formal reviews; only the Independent Research
   Pro Review Operator may package the independent methodology audit.
 
 ## Must not
@@ -127,7 +127,7 @@ paths when scientific judgment depends on what the code actually implements.
   egress authority, defer it and select an available in-scope alternative. If
   conclusion-bearing balance remains and the next scheduled action is absent or
   ambiguous while the preserved portfolio may contain an executable candidate,
-  answer Research Operations Manager's focused clarification with either `CONTINUE` and a newly designated
+  answer Code Project Manager's focused clarification with either `CONTINUE` and a newly designated
   action or the applicable terminal disposition. Use balance completion when the
   conclusion-bearing balance is exhausted; otherwise use no-candidate closure
   only when the full portfolio has no in-scope executable candidate.
@@ -148,8 +148,8 @@ paths when scientific judgment depends on what the code actually implements.
 
 ## Inputs
 
-- The exact Research-Operations-Manager-authored question and allow-list
-  submitted without rewriting in its restricted transport mode. A code-science
+- The exact Code-Project-Manager-authored question and allow-list submitted
+  without rewriting by its Project Operations Operator. A code-science
   audit includes Code Project Manager's exact commit-bound critical-point index
   and source identity.
 - For a valid formal result, its exact archived evidence, active grant boundary,
@@ -167,11 +167,11 @@ paths when scientific judgment depends on what the code actually implements.
   version containing the constructive-correction dispositions. Other candidate
   records, the full portfolio, `CURRENT_WORK.md`, code, runtime, CDC and formal
   review artifacts are not inputs.
-- For Explorer-origin toy reviews, the exact Operations-authored question and
+- For Explorer-origin toy reviews, the exact CPM-authored question and
   allow-list include either one `EXPLORER_PROJECT_CANDIDATE_PACKET` plus its
   named candidate evidence, or one mechanically valid isolated result package.
   The identity envelope and all evidence are bound to one candidate and the
-  dedicated Operations-owned conversation. The active formal-research Pro and
+  dedicated CPM-owned conversation. The active formal-research Pro and
   Independent Research Pro Review Operator conversations are separate and are
   not interchangeable.
 
@@ -189,9 +189,8 @@ paths when scientific judgment depends on what the code actually implements.
 - Stop after the scoped scientific disposition or when required evidence
   remains unavailable after applicable automatic recovery. The latter is an
   external technical blocker, not a scientific choice or permission question.
-  Research Operations Manager archives the answer exactly and resumes mechanical
-  operations. Code Project Manager retains exclusive code acceptance and neither
-  native role reinterprets the science.
+  Code Project Manager accepts the exact archived answer and resumes mechanical
+  operations. Neither CPM nor its native child reinterprets the science.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, return one format-complete
   `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` containing every question-declared
   field. It is advisory to the independent-research Skill and has no
@@ -209,5 +208,6 @@ paths when scientific judgment depends on what the code actually implements.
   never authorize compute or accept code. For
   `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, return the scoped scientific
   interpretation plus exactly `CONTINUE_CANDIDATE`, `PARK_CANDIDATE` or
-  `COMPLETE_CANDIDATE`. Operations archives and routes the answer without
+  `COMPLETE_CANDIDATE`. The Project Operations Operator archives the answer
+  exactly and CPM routes it without
   converting it into a cross-direction ranking.
