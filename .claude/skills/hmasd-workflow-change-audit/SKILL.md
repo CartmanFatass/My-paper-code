@@ -73,12 +73,21 @@ second live rule.
 powershell -NoProfile -ExecutionPolicy Bypass -File tests/hmasd_research_workflow_contract_test.ps1
 ```
 
-Then the targeted stale-name searches from your matrix, and `git status --short`
-to confirm the actual staged path set equals the declared one.
+Then the targeted stale-name searches from your matrix, `git status --short`
+to confirm the actual staged path set equals the declared one, and one line of
+accounting against the charter: total control-plane lines (`CLAUDE.md`,
+`AGENTS.md`, `.claude/agents/`, `.claude/skills/`, `.claude/hooks/`,
+`tests/*contract*`, `.githooks/`) at or under
+`control_plane_total_line_ceiling`, and the commit's net line change consistent
+with `net_line_growth_default` or carrying a named deletion.
 
-Retiring a name? Add it to the checker's `DEFAULT_FORBIDDEN` in the same commit
-that retires it, so the next document to resurrect it fails. `--allow-forbidden`
-exists for the single commit that performs the retirement, nothing else.
+Retiring a name that any control-plane document ever referenced? Add it to the
+checker's `DEFAULT_FORBIDDEN` in the same commit that retires it, so the next
+document to resurrect it fails. `--allow-forbidden` exists for the single
+commit that performs the retirement, nothing else. A retired name **no
+document ever referenced gets no tombstone** — per `tombstone_policy`, the
+forbidden list guards against resurrection-by-reference, and a name with no
+references has nothing to resurrect it.
 
 **The checker is structural.** It proves referents exist. It cannot tell you a
 rule is *wrong*, only that it is *unbacked*.
@@ -87,6 +96,45 @@ rule is *wrong*, only that it is *unbacked*.
 start. If you added, renamed or deleted one, a fresh session is required before
 anything can dispatch it — say so explicitly rather than assuming this session
 can use what it just wrote.
+
+## Design charter
+
+Standing law for every control-plane change, adopted 2026-08-01 from the
+anti-over-engineering ruling. A mechanical invariant is justified only for an
+action that is irreversible and expensive outside the repository (the send
+click of a review, a push, a formal launch); any failure whose full cost is
+"try again" gets one runtime checklist line, never a mechanism. A proposal
+that adds a mechanism must name what it deletes, and the approval currency is
+net line change. A single incident buys a root-cause fix and a one-line note;
+only a second recurrence may propose a permanent mechanism, under the same
+budgets. `rule_single_source` is per audience: a subagent loads only its own
+definition, so a rule binding it lives there — compressed to at most two
+lines — and that is its single source, not a duplicate.
+
+```text
+mechanical_guarantee_scope=irreversible_high_cost_only
+retry_recoverable_failure_mechanism=forbidden
+single_mechanism_line_budget=100
+terminal_state_budget=3
+control_plane_total_line_ceiling=5600
+legacy_budget_exemptions=pretooluse_guard.ps1,check_control_plane.py
+new_mechanism_requires_named_deletion=true
+net_line_growth_default=negative
+incident_promotion_threshold=2
+single_incident_response=root_cause_fix_plus_one_line_note
+rule_single_source=one_defining_file_per_audience
+rule_duplication_in_role_files=max_two_line_pointer
+sha256_whitelist=review_round_archive_integrity_only
+recovery_path_line_share=le_normal_path
+human_gate_scope=irreversible_actions_only
+contract_test_assertion_target=key_value_fences_only
+tombstone_policy=pattern_based_no_per_file_growth
+```
+
+The ceiling is enforced at closure by the checklist line in step 5, not by a
+tool: exceeding it is recoverable, so per the first key it does not earn a
+mechanism. `legacy_budget_exemptions` names the two mechanisms grandfathered
+above `single_mechanism_line_budget` — they may shrink, never grow.
 
 ## A guard is not done until it has been watched failing
 

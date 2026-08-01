@@ -121,7 +121,15 @@ $skillFiles = @{
                                 'never what this conversation prefers')
     'hmasd-workflow-change-audit' = @('the failure class this procedure exists to catch',
                                 'A guard that has never gone red is indistinguishable from a comment',
-                                'it produces an invention')
+                                'it produces an invention',
+                                # Design charter (2026-08-01): four load-bearing
+                                # keys assert the fence exists; the rest of the
+                                # charter is prose-free key=value and lives only
+                                # in the SKILL.
+                                'single_mechanism_line_budget=100',
+                                'incident_promotion_threshold=2',
+                                'sha256_whitelist=review_round_archive_integrity_only',
+                                'contract_test_assertion_target=key_value_fences_only')
     'hmasd-review-round'    = @('Is a round warranted',
                                 'Route to code, not to prose',
                                 'Do not defend the framing',

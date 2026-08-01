@@ -13,6 +13,7 @@ moment arrives, so it costs nothing on the turns it does not apply to:
 | at a gate — accepting a diff, freezing a contract, reading a result | `$hmasd-acceptance-gate` |
 | opening or carrying an external review round | `$hmasd-review-round` |
 | about to change `CLAUDE.md`, `AGENTS.md`, an agent definition, a Skill or a contract test | `$hmasd-workflow-change-audit` |
+| proposing any new workflow mechanism, gate or guard | the **Design charter** fence in `$hmasd-workflow-change-audit` — budgets and prohibitions bind before design starts |
 
 This file was 1059 lines on 2026-07-27 because everything got folded in on the
 reasoning that a shared document does not get loaded. That is true of a document
