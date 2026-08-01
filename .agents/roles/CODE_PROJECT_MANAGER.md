@@ -25,6 +25,8 @@ session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/cod
 current_work_entry=docs/project/CURRENT_WORK.md
 current_work_session_record=docs/project/current-work/sessions/code_project_manager.md
 pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md
+failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md
+local_failure_task_terminal=false
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_children=code_scout|implementer|reviewer|verifier
 operations_child=hmasd-project-operations-operator
@@ -162,7 +164,8 @@ blockers=none
 returned commit and exact paths and records successful `interface_smoke`,
 `bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
 and `analyze_entry` phases. Code Project Manager keeps the repair loop until
-that boundary passes or returns one exact technical blocker. The verifier
+that boundary passes or returns one scoped diagnosis under the failure-
+containment contract while continuing every independent runnable action. The verifier
 returns mechanical evidence only; Code Project Manager classifies an operational
 failure for bounded reassignment or a code defect for implementer repair, then
 requires full verification on the new commit. It does not use runtime
@@ -224,6 +227,14 @@ navigates, refreshes, replaces or rebinds a page as part of transport or
 recovery. A missing, duplicate, blocked, busy or identity-mismatched tab fails
 before submission and permits no fallback page.
 
+## Failure containment and continuation
+
+Apply `docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md` after
+every local failure terminal: preserve evidence, run bounded recovery and scan the
+authorized runnable queue. A nonempty queue continues without permission; one
+parked workstream never pauses another. `SESSION_BLOCKED` requires the complete
+global proof and scoped diagnosis defined by that single-source contract.
+
 ## Workflow changes and Git
 
 For a role-local workflow change, Code Project Manager uses
@@ -256,5 +267,6 @@ only the role-local surfaces declared by the session workspace contract.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another
   persistent task, or recreate a persistent operations session.
 
-Return an accepted code/runtime/review/state commit, one exact operational or
-technical diagnosis, or the smallest missing authority boundary.
+Return an accepted code/runtime/review/state commit or one scoped operational or
+technical diagnosis. Never promote that diagnosis to a whole-task stop while
+the failure-containment scan finds an authorized runnable action.

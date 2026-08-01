@@ -10,6 +10,8 @@ lifecycle_source=.agents/skills/hmasd-agentify-pro-transport/SKILL.md
 shared_operator_source=.agents/roles/PROJECT_OPERATIONS_OPERATOR.md
 page_mutation=forbidden
 scientific_interpretation=forbidden
+failure_containment_source=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md
+blocked_state_scope=operation
 ```
 
 ## Complete assignment

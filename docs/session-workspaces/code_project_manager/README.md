@@ -15,3 +15,6 @@ state, runtime evidence, code acceptance result or another session's context.
 Authority and path ownership come from
 `docs/project/SESSION_WORKSPACE_CONTRACT.md`; this README does not duplicate or
 expand them.
+
+Role-local contracts are `FAILURE_CONTAINMENT.md` for autonomous continuation
+and `PRO_REVIEW_TRANSPORT_OPERATOR.md` for one observable Pro lifecycle.

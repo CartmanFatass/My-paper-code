@@ -10,10 +10,12 @@ $codePm = Get-Content -Raw -LiteralPath $codePmPath
 $projectOperations = Get-Content -Raw -LiteralPath $projectOperationsPath
 $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
 $cpmTransportContractPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md'
+$cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
 $currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
 $cpmTransportContract = Get-Content -Raw -LiteralPath $cpmTransportContractPath
+$cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
 $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
 $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
@@ -143,6 +145,8 @@ $codeRequired = @(
     'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
     'pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md',
+    'failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
+    'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
     'operations_child=hmasd-project-operations-operator',
@@ -263,6 +267,8 @@ foreach ($required in @(
     'operator=hmasd-project-operations-operator',
     'mode=PRO_REVIEW_TRANSPORT',
     'lifecycle_source=.agents/skills/hmasd-agentify-pro-transport/SKILL.md',
+    'failure_containment_source=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
+    'blocked_state_scope=operation',
     'backend-selection path ending in `TRANSPORT_BACKEND.json`',
     'write allow-list for backend selection, request, receipt, raw',
     'response and intake',
@@ -275,6 +281,26 @@ foreach ($required in @(
     if (-not $cpmTransportContract.Contains($required)) {
         throw "Code PM Pro transport assignment contract missing: $required"
     }
+}
+foreach ($required in @(
+    'document_kind=code_project_manager_role_local_failure_containment_contract',
+    'failure_scope=operation|workstream|session',
+    'child_terminal_effect=parent_evidence_only',
+    'local_failure_task_terminal=false',
+    'runnable_queue_scan=required_after_every_local_failure_terminal',
+    'session_continues_when=runnable_queue_nonempty',
+    'session_blocked_condition=global_integrity_prevents_every_CPM_action_or_all_authorized_workstreams_have_no_legal_next_action',
+    'session_blocked_proof_requirement=global_integrity_witness_or_complete_authorized_workstream_scan_when_scope_session',
+    'PRE_SEND_BLOCKED=operation|recover_or_park_transport|continue_runnable_queue',
+    'POST_SEND_BLOCKED=operation|preserve_and_observe_same_operation|continue_runnable_queue',
+    'WORKSTREAM_NO_LEGAL_ACTION=workstream|park_workstream|continue_other_workstreams',
+    'ALL_WORKSTREAMS_NO_LEGAL_ACTION=session|SESSION_BLOCKED_allowed_with_complete_proof')) {
+    if (-not $cpmFailureContainment.Contains($required)) {
+        throw "Code PM failure-containment contract missing: $required"
+    }
+}
+if ($codePmNormalized.Contains('returns one exact technical blocker')) {
+    throw 'Code PM still promotes a local technical blocker to a task terminal'
 }
 
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
