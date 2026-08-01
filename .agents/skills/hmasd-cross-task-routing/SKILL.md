@@ -43,8 +43,9 @@ Workflow Design Manager may send Explorer only a control-plane reload notice or
 mechanical receipt, each explicitly marked `research_state_effect=none`.
 Code Project Manager may return only an exact mechanical nonconformance or a
 verbatim External Pro advisory gap from its registered toy-validation lane. The
-native direction-review child returns only to its Explorer parent and does not
-use this Skill. None of these routes grants its
+shared Project Operations Operator's `INDEPENDENT_DIRECTION_REVIEW` child
+returns only to its Explorer parent and does not use this Skill. None of these
+routes grants its
 sender authority to select, sequence, pause, resume, revise, re-audit or
 terminate a direction, interpret campaign completion, formulate a Pro
 scientific question, or relay such a command on the user's behalf. Explorer

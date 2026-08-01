@@ -9,8 +9,6 @@ $projectOperations = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md')
 $independentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
-$independentDirectionOperator = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md')
 $independentSkill = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $agentifySkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
@@ -28,7 +26,7 @@ $agentifySkillNormalized = $agentifySkill -replace '\s+', ' '
 $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($cpm, 'operations_child=hmasd-project-operations-operator'), @($projectOperations, 'PRO_REVIEW_TRANSPORT'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'initial operation plus one fresh resend'), @($agentifySkillNormalized, 'existing request records'), @($agentifySkillNormalized, 'without a hash or new ledger'), @($agentifySkillNormalized, 'Ordinary recovery never launches a synthetic smoke'), @($agentifySkillNormalized, 'duplicate submission of the same operation'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($cpm, 'operations_child=hmasd-project-operations-operator'), @($projectOperations, 'PRO_REVIEW_TRANSPORT'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'initial operation plus one fresh resend'), @($agentifySkillNormalized, 'existing request records'), @($agentifySkillNormalized, 'without a hash or new ledger'), @($agentifySkillNormalized, 'Ordinary recovery never launches a synthetic smoke'), @($agentifySkillNormalized, 'duplicate submission of the same operation'), @($agentifySkillNormalized, 'no global page registry'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
@@ -47,15 +45,18 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'role_kind=registered_nonpersistent_native_child',
-    'review_transport_stable_key=hmasd-independent-research-pro',
-    'review_transport_concurrency=one_active_child_per_binding',
+    'parent=code_project_manager|independent_research_explorer',
+    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE|INDEPENDENT_DIRECTION_REVIEW',
+    'owner=independent_research_review_operator',
+    'stable_key=hmasd-independent-research-pro',
+    'pre_spawn_item_provision=explorer_registered_provision_direction',
     'client_send_limit=1',
-    'submit once',
-    'second submit',
-    'cross-task messaging tool')) {
-    if (-not $independentDirectionOperator.Contains($required)) {
-        throw "Independent direction child transport boundary missing: $required"
+    'pro_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET',
+    'terminal=INDEPENDENT_RESEARCH_REVIEW_TERMINAL',
+    'stable-key namespace, not',
+    'no global page')) {
+    if (-not $projectOperations.Contains($required)) {
+        throw "Shared direction-review transport boundary missing: $required"
     }
 }
 if ($agentifyScript.Contains('"prompt_sha256"')) {

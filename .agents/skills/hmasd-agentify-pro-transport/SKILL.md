@@ -51,6 +51,15 @@ applicable `logs/` review root and IRRO uses
 `docs/external-review/` or IRRO's `local_research/pro_reviews/` root. Do not
 place credentials, Agentify state or live conversation registrations in Git.
 
+For an Explorer direction review, the shared
+`hmasd-project-operations-operator` is invoked in
+`INDEPENDENT_DIRECTION_REVIEW` mode with parent
+`independent_research_explorer`; transport ownership remains
+`independent_research_review_operator` and stable key
+`hmasd-independent-research-pro`. The exact item root and owner-local page or
+evidence record are assignment-scoped. The shared child maintains no global
+page registry and cannot reuse a CPM workstream record.
+
 ## Request and one-send contract
 
 Run `prepare` once from the prompt file. The wrapper creates the backend
@@ -62,8 +71,8 @@ fields):
 {
   "schema_version": 1,
   "transport_backend": "agentify",
-  "transport_owner": "independent_research_review_operator",
-  "stable_key": "hmasd-independent-research-pro",
+  "transport_owner": "<registered-transport-owner>",
+  "stable_key": "<owner-scoped-stable-key>",
   "provider": "chatgpt",
   "model": "<live-pro-model>",
   "conversation_url": "<live-runtime-url>",

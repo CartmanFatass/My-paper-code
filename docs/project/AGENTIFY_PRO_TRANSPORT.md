@@ -39,6 +39,14 @@ in role/Skill text. The binding is loaded from the local Agentify state at the
 time of the operation and must match the selected owner and requested Pro
 model before sending.
 
+Independent direction reviews use the shared
+`hmasd-project-operations-operator` in `INDEPENDENT_DIRECTION_REVIEW` mode,
+parented by the Explorer. The transport owner and stable key remain
+`independent_research_review_operator` and `hmasd-independent-research-pro`;
+the assignment owns one exact `local_research/pro_reviews/<review-id>/` root
+and its owner-local page/evidence record. The shared operator has no global
+page registry and cannot use a CPM workstream record.
+
 ## One-round protocol
 
 1. The owning role verifies an active user grant or one explicit review

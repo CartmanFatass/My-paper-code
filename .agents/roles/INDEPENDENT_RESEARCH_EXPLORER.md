@@ -33,12 +33,18 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
-independent_pro_direction_packet_intake=exact_native_child_final_only
+independent_pro_direction_terminal_intake=exact_native_child_final_only
 independent_pro_direction_packet_effect=advisory_revision_only
-independent_pro_direction_transport_child=hmasd-independent-research-review-operator
+independent_pro_direction_transport_child=hmasd-project-operations-operator
+independent_pro_direction_transport_mode=INDEPENDENT_DIRECTION_REVIEW
+independent_pro_direction_transport_parent=independent_research_explorer
+independent_pro_direction_transport_owner_namespace=independent_research_review_operator
 independent_pro_direction_transport_child_model=gpt-5.6-luna
 independent_pro_direction_transport_child_effort=medium
 independent_pro_direction_transport_concurrency=one_active_child_per_binding
+independent_pro_direction_native_terminal=INDEPENDENT_RESEARCH_REVIEW_TERMINAL
+independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET
+independent_pro_direction_shared_page_registry=forbidden
 independent_pro_constructive_adversarial_barrier=required
 explorer_project_candidate_packet=EXPLORER_PROJECT_CANDIDATE_PACKET_v1
 explorer_advisory_refinement_packet=EXPLORER_ADVISORY_REFINEMENT_PACKET_optional
@@ -76,11 +82,15 @@ The workspace guard enforces this boundary for the registered task.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and spawn each exact candidate review without per-review user or WDM
-authorization. It gives the registered
-`hmasd-independent-research-review-operator` child one immutable assignment.
-The child transports one Pro turn, archives it under its exact
-`local_research/pro_reviews/<review-id>/` item root and returns one native final
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET`. It does not use cross-task routing.
+authorization. It gives the shared `hmasd-project-operations-operator` child
+one immutable `INDEPENDENT_DIRECTION_REVIEW` assignment. The child transports
+one Pro turn, archives it under its exact
+`local_research/pro_reviews/<review-id>/` item root and returns one native
+`INDEPENDENT_RESEARCH_REVIEW_TERMINAL`. The terminal is the mechanical child
+envelope; the complete Pro content is consumed separately as
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET`. The shared child keeps only the
+assigned owner-local page/evidence record and has no global page registry. It
+does not use cross-task routing.
 Explorer verifies the typed terminal
 fields, preserves the reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate

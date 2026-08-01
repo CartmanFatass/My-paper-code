@@ -123,8 +123,11 @@ foreach ($required in $codeRequired) {
 
 $operationsRequired = @(
     'role=project_operations_operator',
+    'parent=code_project_manager|independent_research_explorer',
+    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE|INDEPENDENT_DIRECTION_REVIEW',
+    'CPM branch:',
     'parent=code_project_manager',
-    'assignment_modes=PRO_REVIEW_TRANSPORT|RESULT_INTAKE',
+    'terminal=PROJECT_OPERATIONS_TERMINAL',
     'current_work_authority=none',
     'scientific_authority=none',
     'code_acceptance_authority=none',

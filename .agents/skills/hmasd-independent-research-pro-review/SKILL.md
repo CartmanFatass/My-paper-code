@@ -10,8 +10,10 @@ description: Use only for one isolated independent-research Pro methodology audi
 Use only the persistent `INDEPENDENT_RESEARCH_REVIEW_OPERATOR` for one exact
 methodology audit. Read its role, exact assignment,
 `references/20_PRO_OPEN_QUESTION.md` and `$hmasd-agentify-pro-transport` only.
-The native direction-review child does not load this Skill; its exact charter,
-profile, prompt and Agentify transport Skill contain its complete procedure.
+The shared Project Operations Operator's `INDEPENDENT_DIRECTION_REVIEW` mode
+does not load this Skill; its exact parent assignment and Agentify transport
+Skill contain its complete procedure. This persistent methodology lane remains
+separate from direction-review transport and has no global page registry.
 
 Do not load Code Project Manager formal state, `CURRENT_WORK.md`, formal review
 rounds, runtime evidence, code, CDC state or active portfolios. This Skill
@@ -67,6 +69,9 @@ After natural completion:
    cross-task helper.
 
 Never invent a missing principle or continue into Explorer workflow mutation.
+The methodology packet is distinct from a direction-review native
+`INDEPENDENT_RESEARCH_REVIEW_TERMINAL` and from the Pro-content
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
 
 Stop after one terminal methodology return or one `BLOCKED`. Never enter a direction review,
 compare the portfolio, select another item or choose recovery.

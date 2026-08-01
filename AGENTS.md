@@ -59,7 +59,7 @@ independent_research_review_operator_transport_authority=exclusive_for_user_auth
 independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper
 independent_research_review_operator_formal_workflow_authority=none
 independent_research_review_operator_scientific_authority=none
-independent_research_direction_review_operator=hmasd-independent-research-review-operator|independent_research_direction_review_operator_parent=independent_research_explorer|independent_research_direction_review_operator_authority=one_exact_direction_review_assignment|independent_research_direction_review_operator_write_scope=exact_assigned_local_research/pro_reviews_item_root
+independent_research_direction_review_operator=hmasd-project-operations-operator|independent_research_direction_review_operator_mode=INDEPENDENT_DIRECTION_REVIEW|independent_research_direction_review_operator_parent=independent_research_explorer|independent_research_direction_review_transport_owner_namespace=independent_research_review_operator|independent_research_direction_review_persistent_methodology_authority_effect=none|independent_research_direction_review_operator_authority=one_exact_direction_review_assignment|independent_research_direction_review_operator_write_scope=exact_assigned_local_research/pro_reviews_item_root
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -127,7 +127,7 @@ A future project-external write requires a new explicit user instruction for its
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Pro transport: `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
-- Independent methodology review: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md` and `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`. Independent single-direction review transport is the registered native child `.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md`.
+- Independent methodology review: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md` and `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`. Independent single-direction review transport uses the shared `.agents/roles/PROJECT_OPERATIONS_OPERATOR.md` child in `INDEPENDENT_DIRECTION_REVIEW` mode; it has no separate global page registry.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 
@@ -142,4 +142,4 @@ names the smallest necessary subset.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
 - `.agents/roles/` holds authority; `.agents/skills/` mechanics; `.codex/agents/` fixed child profiles.
-- `local_research/` is ignored advisory output. The Explorer owns it except for `local_research/pro_reviews/`; its only write there is the registered `provision-direction` copy of one frozen prompt before child spawn. The persistent methodology operator or one exact Explorer-owned direction-review child then owns its assigned subtree, never concurrently on the same Agentify binding.
+- `local_research/` is ignored advisory output. The Explorer owns it except for `local_research/pro_reviews/`; its only write there is the registered `provision-direction` copy of one frozen prompt before child spawn. The persistent methodology operator owns methodology items, while the shared project-operations child owns only its exact Explorer-assigned direction-review item root, never a global page registry or another owner's subtree, and never concurrently on the same Agentify binding.

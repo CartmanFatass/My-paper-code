@@ -53,12 +53,24 @@ foreach ($required in @(
     'name = "hmasd-project-operations-operator"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "medium"',
-    'PRO_REVIEW_TRANSPORT or RESULT_INTAKE',
+    'PRO_REVIEW_TRANSPORT, RESULT_INTAKE or',
+    'INDEPENDENT_DIRECTION_REVIEW',
+    'parent=independent_research_explorer',
+    'owner=independent_research_review_operator',
+    'stable_key=hmasd-independent-research-pro',
+    'INDEPENDENT_RESEARCH_REVIEW_TERMINAL',
     'Never interpret science',
     'choose recovery',
     'edit CURRENT_WORK')) {
     if (-not $projectOperationsOperator.Contains($required)) {
         throw "Project Operations Operator profile missing: $required"
+    }
+}
+foreach ($retired in @(
+    '[agents."HMASDIndependentResearchReviewOperator"]',
+    'hmasd-independent-research-review-operator.toml')) {
+    if ($config.Contains($retired)) {
+        throw "Retired duplicate direction-review profile remains registered: $retired"
     }
 }
 foreach ($required in @(
@@ -165,6 +177,9 @@ foreach ($required in @(
     if (-not $config.Contains($required)) {
         throw "Selected normal profile is not registered: $required"
     }
+}
+if (-not $config.Contains('Thin mechanical operator for one CPM transport/result intake or Explorer direction-review assignment.')) {
+    throw 'Project Operations registration remains CPM-only'
 }
 
 $temporaryProfiles = @(

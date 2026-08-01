@@ -15,9 +15,10 @@ The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-adversarial checks. A registered Luna-medium review child handles one exact
-External Pro direction turn. Explorer writes durable research outputs outside
-the transport-owned `pro_reviews` subtree.
+adversarial checks. The shared Luna-medium Project Operations Operator handles
+one exact External Pro direction turn in `INDEPENDENT_DIRECTION_REVIEW` mode.
+Explorer writes durable research outputs outside the transport-owned
+`pro_reviews` subtree.
 
 ## Start safely
 
@@ -67,16 +68,26 @@ requires code, compute or formal adoption.
 A direction review inside the active user-authorized Explorer grant is external
 advisory input and needs no per-review user or WDM confirmation. Explorer
 freezes one candidate and one review mode, then spawns
-`hmasd-independent-research-review-operator` with the exact prompt source,
-Agentify binding, operation identity, item root and one-send limit. The
-child returns one native `INDEPENDENT_RESEARCH_DIRECTION_PACKET`; no persistent Operator handoff
-or batch manifest participates. Explorer, not the child or completion order,
+the shared `hmasd-project-operations-operator` in
+`INDEPENDENT_DIRECTION_REVIEW` mode with the exact prompt source, Agentify
+binding, operation identity, item root and one-send limit. The child returns
+one native `INDEPENDENT_RESEARCH_REVIEW_TERMINAL`; the complete Pro content is
+distinct and is consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`. No
+persistent methodology-operator handoff, global page registry or batch
+manifest participates. Each owner/workstream retains its own stable-key/page
+record and exact evidence root. Explorer, not the child or completion order,
 chooses any later candidate or review.
 
 Before spawn, Explorer invokes only the registered `provision-direction`
 command to copy the frozen prompt into its exact new item root. This is the sole
 Explorer write exception under `pro_reviews`; prepare, submit, verify and
 archive remain child-only. WDM never provisions or authorizes a campaign step.
+The exact invocation is:
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py' provision-direction --assignment-identity 'IR_DIRECTION_REVIEW:<exact identity>' --prompt-source '<absolute Explorer-owned frozen prompt>' --prompt-path '<absolute local_research/pro_reviews/<review-id>/20_PRO_OPEN_QUESTION.md>'
+```
+
 Operational failure returns to Explorer, which may
 issue a later exact recovery assignment within the same grant without changing
 the scientific question or creating a duplicate send.
