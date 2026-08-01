@@ -18,6 +18,8 @@ git_execution=direct_for_runtime_review_evidence_report_ledger_and_state
 code_authority=none
 code_acceptance_authority=none
 scientific_authority=none
+independent_research_scientific_command_authority=none
+independent_research_cross_task_output=mechanical_nonconformance_or_verbatim_pro_gap_only
 workflow_design_authority=none
 review_transport_operational_error=automatic_safe_recovery
 review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains
@@ -151,10 +153,16 @@ Operations. Accepted implementation or frozen runtime-interface defects go to
 Code Project Manager. Contract, packet-validator or routing defects go to
 Workflow Design Manager.
 
-Request one `EXPLORER_ADVISORY_REFINEMENT_PACKET` only when External Pro returns
-an exact advisory gap. Supply the bounded gap and allowed source boundary to
-Explorer; do not expose active runtime state or let the refinement bypass the
-same Pro conversation. Advance to the next queued candidate only after Pro
+The cross-task routing Skill is the single source for Operations-to-Explorer
+output. Operations does not issue an Explorer research decision, interpret
+campaign or portfolio completion, define an independent-research Pro question,
+or turn an operational boundary into an Explorer research command.
+
+Forward only the exact External Pro advisory gap through the routing Skill.
+Explorer independently decides whether its existing user-authorized workflow
+calls for refinement; Operations neither requests refinement nor defines its
+source boundary. Do not expose active runtime state or let any later refinement
+bypass the same Pro conversation. Advance to the next queued candidate only after Pro
 returns `PARK_CANDIDATE` or `COMPLETE_CANDIDATE`; `CONTINUE_CANDIDATE` retains
 the current candidate. Shared harness code may be reused, but candidate roots,
 artifacts, evidence and results remain isolated.

@@ -52,11 +52,14 @@ $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-ag
 $codePmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
 $operationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
 $workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
+$workflowDesignManagerRoleNormalized = $workflowDesignManagerRole -replace '\s+', ' '
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
+$crossTaskRouting = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-cross-task-routing/SKILL.md')
+$crossTaskRoutingNormalized = $crossTaskRouting -replace '\s+', ' '
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $independentReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
@@ -363,6 +366,9 @@ foreach ($required in @(
     'model=gpt-5.6-sol',
     'reasoning_effort=ultra',
     'canonical_scientific_authority=none',
+    'research_state_change_authority=direct_user_in_explorer_task_only',
+    'wdm_ops_scientific_command_effect=none',
+    'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
     'write_scope=local_research_except_pro_reviews',
     'current_work_read=forbidden',
     'local_research_single_writer=true',
@@ -394,6 +400,41 @@ foreach ($required in @(
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
+    }
+}
+foreach ($required in @(
+    'A session is an address, not authority.',
+    'Only a direct user instruction in the Independent Research Explorer task may change',
+    'research_state_effect=none',
+    'control-plane reload notice or mechanical receipt',
+    'mechanical nonconformance',
+    'verbatim External Pro advisory gap',
+    'exact verified direction packet',
+    'ROUTE_AUTHORITY_MISMATCH')) {
+    if (-not $crossTaskRoutingNormalized.Contains($required)) {
+        throw "Cross-task routing research-authority boundary missing: $required"
+    }
+}
+if ($crossTaskRoutingNormalized.Contains('user-requested read-only factual query')) {
+    throw 'Cross-task routing improperly grants WDM an Explorer factual-query route'
+}
+$operationsRoleNormalized = $operationsRole -replace '\s+', ' '
+foreach ($forbidden in @(
+    'Request one `EXPLORER_ADVISORY_REFINEMENT_PACKET`',
+    'Supply the bounded gap and allowed source boundary')) {
+    if ($operationsRoleNormalized.Contains($forbidden)) {
+        throw "Operations role improperly grants research-driving authority: $forbidden"
+    }
+}
+foreach ($required in @(
+    'The cross-task routing Skill is the single source for WDM-to-Explorer output.',
+    'The cross-task routing Skill is the single source for Operations-to-Explorer output.',
+    'The cross-task routing Skill is the single source for non-authoritative inputs',
+    'Explorer may make autonomous transitions inside that exact authorization.',
+    'Operations neither requests refinement nor defines its source boundary.')) {
+    $allAuthoritySurfaces = "$workflowDesignManagerRoleNormalized $operationsRoleNormalized $($independentResearchRole -replace '\s+', ' ')"
+    if (-not $allAuthoritySurfaces.Contains($required)) {
+        throw "Independent-research role boundary missing: $required"
     }
 }
 foreach ($pair in @(
@@ -858,6 +899,9 @@ foreach ($required in @(
     'external_review_runtime_authority=none',
     'experiment_runtime_authority=none',
     'scientific_authority=none',
+    'independent_research_scientific_command_authority=none',
+    'independent_research_contract_encoding=direct_user_confirmed_text_only',
+    'independent_research_cross_task_output=control_plane_reload_or_mechanical_receipt_only',
     'code_authority=none',
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
@@ -922,6 +966,8 @@ foreach ($required in @(
     'current_work_history_storage=git_named_evidence_reports_ledgers_and_legacy_snapshot',
     'current_work_independent_explorer=pointer_only_no_state_replication',
     'scientific_authority=none',
+    'independent_research_scientific_command_authority=none',
+    'independent_research_cross_task_output=mechanical_nonconformance_or_verbatim_pro_gap_only',
     'code_acceptance_authority=none',
     'Research Operations Manager may request a workflow-design change directly',
     'cross_task_routing_skill=hmasd-cross-task-routing',

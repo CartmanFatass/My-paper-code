@@ -13,6 +13,9 @@ current_work_authority=none
 external_review_runtime_authority=none
 experiment_runtime_authority=none
 scientific_authority=none
+independent_research_scientific_command_authority=none
+independent_research_contract_encoding=direct_user_confirmed_text_only
+independent_research_cross_task_output=control_plane_reload_or_mechanical_receipt_only
 code_authority=none
 code_acceptance_authority=none
 git_execution=direct_for_workflow_design_surfaces
@@ -101,6 +104,12 @@ not a native child, research coordinator or scientific authority.
   science. A missing or mechanically incomplete packet, or an explicit
   `AUDIT_DISPOSITION=UNRESOLVED`, stops the change instead of being repaired
   locally.
+- Independent research remains user-controlled. The cross-task routing Skill is
+  the single source for WDM-to-Explorer output. Workflow Design Manager may
+  encode scientific text only after the user has confirmed that exact text, but
+  it never issues an Explorer research decision or relays one on the user's
+  behalf. The user gives research-state-changing instructions directly in the
+  Explorer task.
 
 ## Registered review and experiment design
 
@@ -207,6 +216,8 @@ for a small direct edit when dispatch and packet review cost more than the work.
   source, tests and artifacts.
 - Control the browser, launch compute, create runtime review packages, or turn
   the critical-point index into a hash handoff or separate acceptance owner.
+- Send Independent Research Explorer or its Review Operator a scientific
+  command, candidate decision, lifecycle transition or Pro-question scope.
 - Discover, cache or override persistent-role routes outside the user-approved
   locked route table, or create a relay, dispatcher, callback chain, global
   lease or review of the review.
