@@ -8,9 +8,7 @@ the compact artifact and transport sequence only.
 1. Research Operations Manager follows the active grant or exact clarification
    request and authors the reviewer-visible brief, allow-list and question.
 2. Research Operations Manager commits and pushes that exact boundary.
-3. In the same task, `$hmasd-review-round` and
-   `$browser:control-in-app-browser` reuse the registered Pro conversation and
-   submit one freshness-fenced question.
+3. In the same task, `$hmasd-agentify-pro-transport` submits the question once.
 4. The exact natural response is archived, reread for equality, and accompanied
    by a provenance-only intake record. No semantic relay or second reviewer is
    created.
@@ -24,31 +22,7 @@ not itself authorize code or compute.
 
 ## Transport identity
 
-The registered conversation lives in `REVIEWER_CONVERSATIONS.json`. Every new
-submission carries:
-
-```text
-CURRENT_REVIEW_ASSIGNMENT
-repository=CartmanFatass/My-paper-code
-branch=aggressive
-round=<round-id>
-stage_commit=<40-character pushed SHA>
-question=docs/external-review/rounds/<round-id>/20_PRO_OPEN_QUESTION.md
-instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
-```
-
-Research Operations Manager first inspects visible user turns. An exact existing fence is
-resumed and never resubmitted. Natural completion requires two stable snapshots
-at least three seconds apart, no active generation/stop control, and no current
-retry/error/continue control. A stale `Thinking` label is not sufficient to keep
-the round pending.
-
-If Pro explicitly reports that question-listed repository evidence was
-unavailable, that response is a transport diagnostic, not scientific raw.
-Research Operations Manager materializes only the question allow-list from `stage_commit`
-with the deterministic archive builder, attaches it under the same fence, and
-archives the subsequent stable answer. No current-worktree or extra evidence is
-added.
+The defining rules are in `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`.
 
 ## Round files
 

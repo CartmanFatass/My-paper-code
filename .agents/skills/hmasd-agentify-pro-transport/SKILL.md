@@ -1,17 +1,13 @@
 ---
 name: hmasd-agentify-pro-transport
-description: Optional receipt-bearing Agentify transport for one HMASD External Pro review turn, selected before submission and isolated from the browser sentinel path.
+description: Sole receipt-bearing Agentify transport for one HMASD External Pro review turn.
 ---
 
 # HMASD Agentify Pro Transport
 
 This Skill is a mechanical wrapper contract. It grants no review, scientific,
 runtime, code, Git or project-state authority. The registered transport owner
-must first freeze `transport_backend=agentify` for the current round under
-`$hmasd-review-round`; otherwise this Skill is not active. Existing browser
-transport remains an alternative that may be chosen only before the immutable
-backend-selection record exists. It is never a post-send fallback and is never
-run in parallel for the same round.
+uses this Skill for every External Pro transport turn.
 
 ## Runtime binding
 
@@ -21,7 +17,7 @@ Use the locally installed Agentify endpoint and the HMASD conda interpreter:
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
 runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=3a69613a4363091014733123e3f0cea82c5b76e5
+required_agentify_source_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
 ```
 
 Read the runtime contract before use. The wrapper requires the live Agentify
@@ -90,15 +86,9 @@ transport blocker.
 
 ## Minimal recovery
 
-The adapter checks only whether the registered conversation is currently
-generating. Active generation means wait without sending or clicking any
-control. An idle page permits the normal send. A failed operation is not reused;
-the transport owner may create one fresh recovery operation for the unchanged
-question without another user authorization. The fresh operation performs the
-same generation check before it can send.
+The adapter waits without sending while the conversation generates. Before recovery, run `submit --verify-existing` on the failed operation.
+Only no recorded user message permits one fresh unchanged-question operation; otherwise observe and verify/archive the original, never resend it.
 
-Prompt hashes, rendered text, attachment bytes, composer identity, server
-fences, maintenance leases and synthetic smoke are not recovery requirements.
 The adapter never clicks Stop, Continue, Retry or Answer now. A second recovery
 resend requires a new user instruction.
 
@@ -131,11 +121,8 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` returns one terminal operation identity. The same failed operation is
-never submitted again. The owner may create one fresh recovery operation for
-the unchanged question under the Minimal recovery rule. Use
-`--verify-existing` only to observe an operation that already has a recorded
-user message. To inspect that operation after restart:
+`submit` returns one terminal operation identity. `--verify-existing` probes the
+same failed operation for a recorded user message and never sends.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -168,6 +155,8 @@ owner's normal next step. No response interpretation is performed here.
 
 ## Required receipt and failure semantics
 
+Every prompt carries its full 40-hex `stage_commit`; a prefix is rejected, and this Skill's allow-list scripts archive only that committed source.
+
 The receipt must contain, at minimum:
 
 ```text
@@ -188,9 +177,7 @@ terminalState=NATURAL_COMPLETION_VERIFIED
 
 The two snapshots must be tied to the same assistant identity. Missing or
 conflicting fields, `sendCount != 1`, a conversation mismatch or incomplete
-generation yields `AGENTIFY_TRANSPORT_BLOCKED`. It never authorizes a browser
-fallback, a second Agentify send or a scientific iteration. Restart recovery
-is observe-only for the same request, Agentify operation and receipt.
+generation yields `AGENTIFY_TRANSPORT_BLOCKED`; recovery follows `Minimal recovery`.
 
 On success, the wrapper output returns the receipt path or raw path plus the
 validated stable `operationId` to

@@ -1,20 +1,16 @@
-# Optional Agentify Pro transport
+# Agentify Pro transport
 
 ```text
 document_kind=workflow_control_contract
-status=optional_backend
+status=sole_backend
 formal_compute=false
 scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
-agentify_required_commit=3a69613a4363091014733123e3f0cea82c5b76e5
+agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
 ```
 
-Agentify is an optional receipt-bearing transport for an already-authorized
-External Pro turn. It does not replace the registered Pro conversations or
-change role authority. The transport backend is selected exactly once before
-submission; one round never uses Agentify and the in-app browser path in
-parallel.
+Browser transport is retired; Agentify is the sole External Pro transport.
 
 ## Stable-key ownership
 
@@ -36,8 +32,7 @@ model before sending.
 1. The owning role verifies the user-authorized turn. For Agentify, the
    registered wrapper reads the UTF-8 prompt and writes one new role-owned
    `TRANSPORT_BACKEND.json` plus its matching request.
-2. The immutable selection is reloaded before every send or recovery. It cannot
-   be changed after creation; the other backend must refuse the assignment.
+2. The immutable selection is reloaded before every send or recovery.
 3. For Agentify, the owner resolves its stable key to one runtime conversation
    binding and uses the wrapper's `prepare` command to persist the immutable
    request identity before sending.
@@ -54,40 +49,14 @@ model before sending.
 An unavailable conversation or incomplete response stops that operation. One
 fresh recovery operation is allowed by the Minimal recovery rule. A transport
 failure consumes zero scientific iterations.
-The existing in-app browser workflow remains available as a nonparallel
-alternative and keeps its own exact-fence, sentinel, monitor and archival
-rules.
 
 ## Minimal recovery
 
-Agentify checks whether the registered conversation is generating before a
-send. While generation is active it waits and performs no send or control click.
-When the page is idle it may send. If an operation fails, it remains closed and
-Research Operations Manager may create one fresh recovery operation for the
-same unchanged question without another user authorization. The recovery
-operation repeats the generation check before sending.
-
-Prompt hashes, rendered text, attachment bytes, composer identity, server
-fences, maintenance leases and synthetic smoke are not admission or recovery
-requirements. Stop, Continue, Retry and Answer now are never clicked. Only one
-recovery resend is automatic; another resend requires a new user instruction.
-
-The Independent Research Pro Review Operator remains a persistent ownership
-task for ordered review work, exact raw archival, mechanical intake and return
-to the Explorer; it is not replaced by Agentify. An Agentify-backed turn never
-creates a sentinel or monitor child. The monitor profile remains available
-only to a browser-backed turn during migration. Retiring the browser monitor
-or its sentinel is a separate workflow change, allowed only after both the
-formal Operations route and the independent-review route have completed
-stable Agentify production turns and the user explicitly accepts removal.
+The defining rule is `.agents/skills/hmasd-agentify-pro-transport/SKILL.md#minimal-recovery`.
 
 ## Runtime and installation boundary
 
-Agentify must run with the Electron browser backend from the exact required
-commit above with no tracked source
-changes; a later fork revision requires a new bounded compatibility smoke
-before use. Its public `/health` response supplies `sourceCommit` and
-`sourceDirty`, and the HMASD wrapper must match both before any send. Its MCP
+Its public `/health` supplies `sourceCommit` and `sourceDirty`; the wrapper must match both before any send. Its MCP
 registration is
 `node C:/Projects/agentify-desktop/bin/agentify-desktop.mjs mcp`.
 Agentify installation and its local state are outside HMASD Git. Credentials and

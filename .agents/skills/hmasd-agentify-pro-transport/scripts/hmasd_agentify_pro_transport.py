@@ -273,6 +273,12 @@ def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: 
         _fail("agentify_receipt_missing")
     return result["receipt"]
 
+def existing_user_message_present(state_dir: Path, operation_key: str) -> bool:
+    if not state_dir.is_absolute(): _fail("agentify_state_dir_not_absolute")
+    ledger = _load_json(state_dir.resolve(strict=False) / "review-transport.json")
+    try: user_message_id = ledger["operations"][operation_key].get("userMessageId")
+    except (KeyError, TypeError, AttributeError): _fail("agentify_existing_operation_missing")
+    return user_message_id is not None and bool(_required_text(user_message_id, "existing_user_message", maximum=512))
 
 def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
     exact = {
@@ -484,6 +490,11 @@ def command_submit(args: argparse.Namespace) -> None:
         _owner_roots(repo_root, request["transport_owner"], "runtime"),
         "receipt_path",
     )
+    if args.verify_existing:
+        present = existing_user_message_present(args.state_dir, request["idempotency_key"])
+        print(f"HMASD_AGENTIFY_EXISTING_USER_MESSAGE present={str(present).lower()}")
+        if not present:
+            return
     receipt = call_agentify(request, state_dir=args.state_dir, verify_existing=args.verify_existing)
     validate_receipt(receipt, request)
     _atomic_write_new(receipt_path, _receipt_bytes(receipt))

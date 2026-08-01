@@ -34,13 +34,24 @@ workflow_auditor=hmasd-workflow-auditor_optional_impact_map_or_postchange_verify
 workflow_implementer=hmasd-workflow-implementer_optional_exact_confirmed_slice
 workflow_reviewer=hmasd-workflow-reviewer_risk_triggered_only
 workflow_child_acceptance_authority=none
-agentify_transport_recovery_design=minimal_generation_guard
 agentify_transport_real_review_send=forbidden
 independent_methodology_packet_intake=exact_external_pro_packet_via_registered_operator_handoff_only
 independent_methodology_packet_scientific_interpretation=forbidden
+workflow_design_mechanical_guarantee_scope=irreversible_external_actions_only
+workflow_design_retry_recoverable_failure_mechanism=forbidden
+workflow_design_single_mechanism_line_budget=100
+workflow_design_single_mechanism_terminal_state_budget=3
+workflow_design_new_mechanism_requires_named_deletion=true
+workflow_design_net_line_growth_default=negative_or_zero
+workflow_design_incident_to_mechanism_promotion_threshold=2_recurrences
+workflow_design_single_incident_response=root_cause_fix_plus_note_only
+workflow_design_rule_single_source=one_defining_file_others_point
+workflow_design_role_file_rule_duplication=forbidden
+workflow_design_sha256_whitelist=archived_response_integrity_only
+workflow_design_recovery_path_line_share=must_not_exceed_normal_path
 ```
 
-After the router, read the exact user, Code Project Manager or Research
+A mechanical invariant is only for irreversible external action; retryable failure gets a checklist, every mechanism names its deletion, and only recurrence may justify one after a root-cause fix and note. After the router, read the exact user, Code Project Manager or Research
 Operations Manager workflow-design assignment and this charter. Complete
 read-only workflow-design checks directly.
 For every assignment that can mutate workflow-design surfaces, use
@@ -107,8 +118,7 @@ experiment_runtime_owner=research_operations_manager_plus_hmasd_experiment_opera
 
 This role owns only the design of those invariants. At runtime Research
 Operations Manager creates and pushes review files, performs the registered
-browser transport as a restricted mode, archives exact raw and resumes the
-operations loop. Code Project Manager never loads browser mechanics.
+Agentify transport, archives exact raw and resumes the operations loop; Code Project Manager never loads transport mechanics.
 
 The registered `hmasd-experiment-operator` is the fixed
 `gpt-5.6-luna/low` child that holds one authorized train/evaluate/analyze run

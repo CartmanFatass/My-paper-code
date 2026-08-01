@@ -41,7 +41,6 @@ class AgentifyTransportTest(unittest.TestCase):
                     "assignment_identity": "ROUND-ABC",
                     "transport_backend": "agentify",
                     "operation_key": "round-abc-stage-1",
-                    "prompt_sha256": sha256(self.prompt),
                 }
             ),
             encoding="utf-8",
@@ -59,7 +58,6 @@ class AgentifyTransportTest(unittest.TestCase):
             "assignment_identity": "ROUND-ABC",
             "backend_selection_path": str(self.backend_selection_path),
             "prompt_path": str(self.prompt_path),
-            "prompt_sha256": sha256(self.prompt),
             "timeout_ms": 300000,
         }
         self.validated = MODULE.validate_request(self.request, repo_root=self.root)
@@ -74,7 +72,7 @@ class AgentifyTransportTest(unittest.TestCase):
             "model": "Pro",
             "conversationUrl": self.request["conversation_url"],
             "conversationId": self.request["conversation_id"],
-            "promptSha256": self.request["prompt_sha256"],
+            "promptSha256": sha256(self.prompt),
             "timeoutMs": 300000,
             "deadlineAt": 301000,
             "status": "COMPLETE",
@@ -108,7 +106,6 @@ class AgentifyTransportTest(unittest.TestCase):
         cases = [
             ("stable_key", "hmasd-independent-research-pro", "stable_key_owner_mismatch"),
             ("conversation_id", "other", "conversation_identity_mismatch"),
-            ("prompt_sha256", "0" * 64, "backend_selection_mismatch"),
             ("assignment_identity", "ROUND-MISSING", "backend_selection_mismatch"),
         ]
         for field, value, error in cases:
@@ -123,7 +120,6 @@ class AgentifyTransportTest(unittest.TestCase):
                     "assignment_identity": "ROUND-MISSING",
                     "transport_backend": "agentify",
                     "operation_key": "round-abc-stage-1",
-                    "prompt_sha256": sha256(self.prompt),
                 }
             ),
             encoding="utf-8",
@@ -134,12 +130,7 @@ class AgentifyTransportTest(unittest.TestCase):
             MODULE.validate_request(missing, repo_root=self.root)
         selection = json.loads(self.backend_selection_path.read_text(encoding="utf-8"))
         selection["assignment_identity"] = "ROUND-ABC"
-        selection["prompt_sha256"] = "0" * 64
         self.backend_selection_path.write_text(json.dumps(selection), encoding="utf-8")
-        wrong_hash = dict(self.request)
-        wrong_hash["prompt_sha256"] = "0" * 64
-        with self.assertRaisesRegex(MODULE.TransportError, "prompt_hash_mismatch"):
-            MODULE.validate_request(wrong_hash, repo_root=self.root)
         with self.assertRaisesRegex(MODULE.TransportError, "request_field_set_mismatch"):
             MODULE.validate_request({**self.request, "extra": "forbidden"}, repo_root=self.root)
 
@@ -182,11 +173,9 @@ class AgentifyTransportTest(unittest.TestCase):
                 "assignment_identity": "ROUND-FROZEN",
                 "transport_backend": "agentify",
                 "operation_key": "round-frozen-operation",
-                "prompt_sha256": expected_hash,
             },
         )
         prepared_request = json.loads(request_path.read_text(encoding="utf-8"))
-        self.assertEqual(prepared_request["prompt_sha256"], expected_hash)
         self.assertEqual(prepared_request["prompt_path"], str(prompt.resolve()))
         self.assertEqual(prepared_request["backend_selection_path"], str(selection.resolve()))
         self.assertEqual(
@@ -280,6 +269,14 @@ class AgentifyTransportTest(unittest.TestCase):
 
         with self.assertRaisesRegex(MODULE.TransportError, "agentify_state_dir_not_absolute"):
             MODULE.call_agentify(self.validated, state_dir=Path("relative-state"), verify_existing=True)
+
+    def test_recovery_refuses_resend_when_failed_operation_has_user_message(self) -> None:
+        state_dir = self.root / "agentify-state"; state_dir.mkdir()
+        (state_dir / "review-transport.json").write_text(json.dumps({"operations": {self.request["idempotency_key"]: {"status": "BLOCKED", "userMessageId": "user-1"}}}), encoding="utf-8")
+        request_path = self.root / "logs/agentify/round/request-recovery.json"; receipt_path = self.root / "logs/agentify/round/receipt-recovery.json"; request_path.write_text(json.dumps(self.request), encoding="utf-8")
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root), mock.patch.object(MODULE, "call_agentify", return_value=self.receipt) as call_agentify:
+            MODULE.command_submit(SimpleNamespace(request=request_path, receipt=receipt_path, state_dir=state_dir, verify_existing=True))
+        self.assertTrue(call_agentify.call_args.kwargs["verify_existing"]); self.assertTrue(receipt_path.exists())
 
     def test_archive_is_exact_and_never_overwrites_different_bytes(self) -> None:
         output = self.root / "docs/external-review/round/21_PRO_OPEN_RAW.md"

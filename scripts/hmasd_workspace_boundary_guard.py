@@ -232,15 +232,7 @@ def _trusted_research_script(command: str, repo: Path, role: str) -> bool:
     if role != "review_operator":
         return False
     review_root = _canonical(repo / "local_research" / "pro_reviews")
-    sentinel = repo / "scripts" / "hmasd_pro_response_sentinel.py"
-    attachment = (
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-review-round"
-        / "scripts"
-        / "verify_assignment_attachment_identity.py"
-    )
+    agentify = repo / ".agents" / "skills" / "hmasd-agentify-pro-transport" / "scripts" / "hmasd_agentify_pro_transport.py"
     handoff = (
         repo
         / ".agents"
@@ -249,20 +241,6 @@ def _trusted_research_script(command: str, repo: Path, role: str) -> bool:
         / "scripts"
         / "hmasd_cross_task_payload.py"
     )
-    if _registered_script_prefix(command, interpreter, sentinel):
-        paths = [
-            path
-            for flag in ("--state", "--receipt", "--assignment-receipt")
-            if (path := _flag_path(command, flag)) is not None
-        ]
-        return bool(paths) and all(_inside(path, review_root) for path in paths)
-    if _registered_script_prefix(command, interpreter, attachment):
-        paths = [
-            path
-            for flag in ("--expected-payload", "--observed-attachment", "--provider-metadata")
-            if (path := _flag_path(command, flag)) is not None
-        ]
-        return bool(paths) and all(_inside(path, review_root) for path in paths)
     if _registered_script_prefix(command, interpreter, handoff):
         repo_arg = _flag_path(command, "--repo")
         source = _flag_path(command, "--source")
@@ -273,12 +251,16 @@ def _trusted_research_script(command: str, repo: Path, role: str) -> bool:
             and _inside(source, review_root)
             and re.search(r"\swrite(?:\s|$)", command, re.IGNORECASE) is not None
         )
+    if _registered_script_prefix(command, interpreter, agentify):
+        if (mode := re.search(r"\s(prepare|submit|verify|archive)(?:\s|$)", command, re.IGNORECASE)) is None: return False
+        flags = {"prepare": ("--selection", "--request"), "submit": ("--receipt",), "verify": (), "archive": ("--raw-output",)}[mode.group(1).lower()]
+        return all((path := _flag_path(command, flag)) is not None and _inside(path, review_root) for flag in flags)
     for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
         script = (
             repo
             / ".agents"
             / "skills"
-            / "hmasd-review-round"
+            / "hmasd-agentify-pro-transport"
             / "scripts"
             / basename
         )

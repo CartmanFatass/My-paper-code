@@ -153,8 +153,8 @@ reactivated without a new direct user instruction.
    implementation status and `CURRENT_WORK.md`, then stages a correction-only
    alignment recheck package bound to the corrected implementation and accepted
    target commit.
-7. Research Operations Manager submits that exact pushed package directly in
-   its registered browser transport mode. One correction-only submission is
+7. Research Operations Manager submits that exact pushed package through
+   Agentify. One correction-only submission is
    allowed; do not reopen the design or request a full audit.
 8. Start no formal compute unless the correction-only result is exactly
    `ALIGNED`. Then use the corrected nonformal preflight root and frozen formal

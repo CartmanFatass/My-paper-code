@@ -10,9 +10,7 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 - Project Manager solely maintains this code-attention pointer and owns code
   decisions, technical acceptance, review/run dispatch, runtime intake and
   PM-owned Git. Workflow Design Manager changes workflow design only and
-  neither reads this file nor manages runtime. The dedicated External Review
-  Operator owns only Pro browser transport, natural completion, exact raw
-  archival and file-path notification to PM.
+  neither reads this file nor manages runtime.
   External Pro owns scientific design, interpretation, CDC and successor
   selection inside the user-authorized review boundary.
 - Persistent-role messages use `hmasd-cross-task-routing`: a probe-confirmed
@@ -22,9 +20,6 @@ This file records active state only. Durable authority is in `AGENTS.md` and
 - Formal and bounded runs use only the registered nonpersistent
   `hmasd-experiment-operator`, fixed to `gpt-5.6-luna` with `low` reasoning. It
   remains silent and returns exactly one `COMPLETE` or `ERROR` terminal payload.
-- Long Pro responses use one registered nonpersistent
-  `hmasd-pro-response-monitor`, fixed to `gpt-5.6-luna` with `low` reasoning.
-  It only returns terminal `COMPLETE`/`ERROR` and never activates `Answer now`.
 - No Controller, persistent project Monitor, dispatcher, callback route, global
   write lease, workflow hash handoff or compatibility line is active.
 
@@ -1056,13 +1051,6 @@ workflow_replan_code_acceptance_owner=project_manager
 workflow_replan_workflow_acceptance_owner=workflow_manager_design_changes_only
 workflow_replan_no_review_stack=true
 workflow_replan_pm_alignment_objection=exception_only_routed_by_pm_through_external_review_operator
-pro_response_monitor_agent_type=hmasd-pro-response-monitor
-pro_response_monitor_model=gpt-5.6-luna
-pro_response_monitor_effort=low
-pro_response_monitor_status=external_review_operator_brokered_sentinel_harness_ready
-pro_response_monitor_observation=external_review_operator_brokered_jsonl_sentinel
-pro_response_monitor_browser_authority=none
-pro_response_monitor_sentinel_tool=scripts/hmasd_pro_response_sentinel.py
 agent_profile_benchmark=sol_high_vs_terra_high_vs_luna_max_same_instruction_same_task
 agent_profile_benchmark_status=complete_implementer_terra_high_reviewer_luna_max
 agent_profile_benchmark_instruction_equivalence=implementer_3_to_1_unique_body_reviewer_3_to_1_unique_body
@@ -4762,6 +4750,7 @@ g51_formal_result_review_third_submission=forbidden_not_performed
 g51_formal_result_review_next_boundary=NEW_EXPLICIT_REVIEW_TRANSPORT_AUTHORITY_REQUIRED
 active_assignment_id=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
 next_boundary=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
+agentify_transport_consolidation=agentify_only_browser_retired
 
 ## G51 same-source nonformal preflight (mechanically recorded)
 

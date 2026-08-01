@@ -1,0 +1,830 @@
+{
+  "document_kind": "independent_research_direction_audit_advisory_delta_v4",
+  "created_at_local": "2026-07-31",
+  "formal": false,
+  "scientific_iteration_cost": 0,
+  "formal_project_effect": "none",
+  "authority": {
+    "role": "independent_research_explorer",
+    "session_id": "019fb398-0a76-7bd0-9400-c5ea4eefa5de",
+    "model": "gpt-5.6-sol",
+    "thinking": "ultra",
+    "write_scope": "local_research_except_pro_reviews",
+    "effect": "advisory_revision_only"
+  },
+  "reviewed_artifact": {
+    "path": "local_research/2026-07-30_variable_skill_period_inspiration_campaign_v3.json",
+    "bytes_observed_before_delta": 123797,
+    "sha256_observed_before_delta": "47c48f7562d2f7bf6b20a9ed30cd85edfb70d812046115b02994ac8c11c753a5",
+    "last_write_observed_before_delta_local": "2026-07-30 15:38:17",
+    "campaign_id": "VSP-MYLIB-2026-07-30-C1",
+    "workflow_commit": "5179398",
+    "candidate_id": "CAND-VSP-05",
+    "candidate_name": "Locally Identifiable Semantic Completion with Separate Safe Handoff",
+    "historical_candidate_status": "validation_ready",
+    "historical_target_problem": "Identify local semantic completion without duration leakage and execute termination only under a separate safe-handoff contract.",
+    "historical_mechanism": "Unique locally identifiable events pass immutable semantic gates and an age-free reject-only residual; semantic completion, safe waiting and handoff are separate idempotent states.",
+    "historical_learning_driver": "Cause-specific supervision on supported gate-positive events; reward, duration and future success never label completion.",
+    "preservation_rule": "The reviewed v3 campaign artifact remains unchanged. Its historical packets and validation_ready status are not corrected in place; this candidate-scoped advisory delta records the later external REVISION_REQUIRED disposition."
+  },
+  "review_packet": {
+    "source_role": "independent_research_review_operator",
+    "source_session_id": "019fb311-6137-7781-9708-3df24da34a4b",
+    "review_mode": "INDEPENDENT_RESEARCH_DIRECTION_AUDIT",
+    "packet_path": "local_research/pro_reviews/VSP-MYLIB-2026-07-30-C1-DIRECTION-AUDIT-V1/item_004/60_DIRECTION_PACKET.md",
+    "handoff_path": "temp/handoffs/20260731T132000951300Z_vsp_c1_item004_ae2532506ddc.txt",
+    "packet_bytes": 39434,
+    "packet_sha256": "ae2532506ddcf71940ab3e44116f45f01e9bcc6144032264e22cd6bfc7529015",
+    "handoff_bytes": 39434,
+    "handoff_sha256": "ae2532506ddcf71940ab3e44116f45f01e9bcc6144032264e22cd6bfc7529015",
+    "packet_handoff_byte_identity": true,
+    "question_contract_commit": null,
+    "question_contract_commit_status": "not_supplied_in_route_or_packet_and_not_inferred",
+    "campaign_workflow_commit": "5179398",
+    "mechanical_verification": "LONG_TEXT_HANDOFF_VERIFIED",
+    "direction_disposition": "REVISION_REQUIRED",
+    "required_revision_count": 6,
+    "validation_status_at_intake": "blocked_pending_exact_completion_ontology_event_fsm_age_firewall_supervision_and_matched_identification_contract"
+  },
+  "disposition_control": {
+    "operator_disposition_preserved_exactly": "REVISION_REQUIRED",
+    "explorer_reinterpretation": "forbidden_and_not_performed",
+    "revision_work_status": "six_named_revisions_materialized_as_advisory_delta",
+    "reaudit_status": "not_requested_not_performed",
+    "validation_authorization": false,
+    "implementation_authorization": false,
+    "compute_authorization": false,
+    "portfolio_ranking_effect": "none",
+    "next_audit_item_selection": "not_performed",
+    "new_direction_added": false
+  },
+  "scope_correction": {
+    "retained_narrow_claim": "A provenance-valid current event that already passes an immutable class-specific hard gate can be vetoed by an age-free learned residual when contemporaneous local evidence indicates an alias. The residual may reduce premature semantic latches at the cost of measurable delay or misses.",
+    "withdrawn_broad_claims": [
+      "The learned residual can discover completion outside the deterministic hard-gate support.",
+      "The learned residual can make semantic completion earlier than the exact deterministic conjunction.",
+      "A self, joint or partner event class proves retrospective causal responsibility for the completed effect.",
+      "Semantic completion by itself authorizes a successor action or a safe physical handoff.",
+      "Later task success, reward, eventual handoff, elapsed duration or timeout proximity can label semantic completion."
+    ],
+    "monotonicity": "For every immutable event stream, target semantic latch order is weakly later than or equal to deterministic-conjunction latch order. A failed hard gate is absorbing for that event and cannot be rescued by learning.",
+    "named_fallback": "Exact immutable deterministic semantic conjunction with the same event ledger, competing-cause rules, safe-wait controller and separate safe-handoff gate. If the environment lacks a registered locally observable completion ontology, use its registered external timeout or interruption contract rather than inventing a learned completion class."
+  },
+  "candidate_boundary": {
+    "scientific_question": "Among pre-registered locally observable self-triggered, joint-triggered and partner-triggered hard-positive completion events, does an age-free reject-only residual improve bounded physical-time behavior over the identical deterministic conjunction, a capacity-and-exposure-matched sham learner and cause-stratum-rate-matched random rejection without increasing true-completion misses, unique-event-rank delay, unsafe handoff or held-out-partner failure?",
+    "mechanism_claim": "An immutable event ledger first enforces provenance, ownership, skill-instance, class, target and sequence contracts. Exact class-specific hard predicates define the only admissible semantic-completion candidates. For each hard-positive event, one frozen nonrecurrent residual returns REJECT or ABSTAIN_FROM_VETO from current-event and current-local-state features. A semantic latch occurs iff the hard gate passes and the residual abstains from veto. The semantic latch moves RUNNING to SEMANTIC_WAITING exactly once; a separate deterministic handoff gate may later move SEMANTIC_WAITING to HANDED_OFF exactly once.",
+    "learning_driver": "Weighted supervised alias rejection on contemporaneously adjudicated hard-positive events only. True semantic-completion receipts are label 0, current-time alias or noncompletion receipts are label 1, and missing, discordant or censored receipts are excluded. Task reward, duration, future success and handoff never label or backpropagate into the residual.",
+    "claim_decomposition": {
+      "event_conformance": "Every processed event has one immutable key, an execution-visible registered source, one owner epoch, one skill instance, one semantic class and deterministic duplicate, conflict and ordering behavior.",
+      "semantic_completion": "Hard-gate admissibility plus absence of learned veto is a locally executable decision about the current event; it is neither a timeout nor a safe-handoff decision.",
+      "residual_selection": "The learned component selects only a subset of the exact deterministic hard-positive set and cannot add an event, advance a latch or reinterpret a hard-negative event.",
+      "execution_separation": "A semantic latch enters an explicit safe-wait state; only an independent current safety and successor-readiness certificate can authorize handoff.",
+      "behavioral_value": "The target earns a place only through fewer premature latches or handoffs after accounting for true-completion misses, unique-event-rank and physical-time delay, waiting cost and held-out-partner transport.",
+      "cause_language": "Self-triggered, joint-triggered and partner-triggered are observable receipt classes. They do not assert counterfactual causal ownership unless the registered receipt explicitly contains that stronger semantics."
+    },
+    "explicit_exclusions": [
+      "completion outside registered hard-gate support",
+      "learned rescue of hard-negative events",
+      "recurrent, clocked or duration-conditioned residual state",
+      "reward-shaped semantic labels",
+      "future event, future task outcome, future handoff or terminal-cause labels",
+      "handoff or waiting gradients entering the residual or its upstream encoder",
+      "retrospective causal responsibility inferred from an observable event class",
+      "unsafe environments without a registered safe-hold primitive",
+      "formal adoption, implementation, compute, portfolio rank or next-candidate selection"
+    ]
+  },
+  "semantic_ontology": {
+    "ontology_version": "VSP-CAND-05-ONTOLOGY-1",
+    "registration_rule": "Before any training trace is opened, freeze the allowed event classes, registered sources, source public keys, field schema, effect vocabulary, target resolver, class-specific hard predicates, current-time adjudication receipt schema and alias catalogue. Evaluation cannot add a class or relax a predicate.",
+    "common_event_fields": [
+      "event_uuid",
+      "agent_uuid",
+      "owner_epoch",
+      "skill_instance_id",
+      "skill_semantic_id",
+      "source_uuid",
+      "source_epoch",
+      "source_sequence",
+      "event_class",
+      "subject_uuid",
+      "effect_token",
+      "target_token",
+      "logical_progress_code",
+      "local_effect_receipt_hash",
+      "roster_version",
+      "signature"
+    ],
+    "event_classes": [
+      {
+        "class_id": "SELF_TRIGGERED_EFFECT_ACK",
+        "observable_meaning": "A registered own-controller or own-sensor source reports that the current skill's declared effect target reached its final logical-progress code and the same effect is present in the agent's current local observation receipt.",
+        "allowed_sources": "The skill instance's registered own controller and own effect sensor only.",
+        "required_subject": "subject_uuid equals agent_uuid.",
+        "hard_semantic_fields": "skill_semantic_id, effect_token and target_token equal the immutable skill-instance declaration; logical_progress_code equals FINAL; the current local effect receipt is signed and refers to the same event UUID.",
+        "canonical_aliases": [
+          "progress code FINAL but effect token belongs to a previous owner epoch",
+          "own actuation acknowledged but target effect absent from the current local receipt",
+          "same effect token produced by another concurrent skill instance",
+          "stale or replayed FINAL receipt"
+        ],
+        "causal_language_limit": "The class means self-source-triggered observation, not proof that the agent alone caused the effect."
+      },
+      {
+        "class_id": "JOINT_TRIGGERED_EFFECT_QUORUM",
+        "observable_meaning": "A registered authenticated joint-effect aggregator emits one execution-visible receipt addressed to the current participant set, with a roster-matched joint effect token and final joint logical-progress code; the local agent observes the same joint target state.",
+        "allowed_sources": "Only the pre-registered joint-effect aggregator for the environment and roster version.",
+        "required_subject": "The signed participant set contains the agent UUID and matches the immutable skill-instance joint-target declaration.",
+        "hard_semantic_fields": "roster version and participant hash match; effect and target tokens match; joint logical_progress_code equals FINAL; the current local corroboration bit and receipt hash agree.",
+        "canonical_aliases": [
+          "quorum receipt from a stale roster",
+          "partial participant completion reported as joint FINAL",
+          "joint effect token matches but local target corroboration is absent",
+          "aggregator retry with a conflicting participant hash"
+        ],
+        "causal_language_limit": "The class means joint-receipt-triggered observation, not an allocation of responsibility among participants."
+      },
+      {
+        "class_id": "PARTNER_TRIGGERED_EFFECT_ACK",
+        "observable_meaning": "A registered partner source reports a target effect relevant to the current skill, and the local agent contemporaneously observes a corroborating target-state predicate without receiving hidden partner policy identity.",
+        "allowed_sources": "Authenticated active-roster partner owner epochs listed by the skill-instance contract.",
+        "required_subject": "subject_uuid is the declared partner or shared target object, and source_uuid is an authenticated current-roster partner.",
+        "hard_semantic_fields": "owner and roster epochs match; effect and target tokens match the current skill; logical_progress_code equals FINAL; an execution-visible local corroboration receipt exists.",
+        "canonical_aliases": [
+          "partner reports its own completion but the local skill target is different",
+          "correlated partner motion without local target-state corroboration",
+          "receipt from a departed or replaced partner epoch",
+          "partner identity or convention encoded in an unregistered payload field"
+        ],
+        "causal_language_limit": "The class means partner-source-triggered observation, not proof that the partner caused the effect."
+      }
+    ],
+    "unsupported_event_rule": "An event with any other class, source, field schema or semantic vocabulary is HARD_NEGATIVE_UNSUPPORTED, is never sent to the residual, cannot latch completion and is recorded for coverage only.",
+    "ontology_change_rule": "Any class, field, predicate, source or alias-catalogue change creates a new ontology version and a new candidate evaluation; it cannot be patched into an open run."
+  },
+  "event_identity_and_ledger": {
+    "immutable_event_key": [
+      "agent_uuid",
+      "owner_epoch",
+      "skill_instance_id",
+      "source_uuid",
+      "source_epoch",
+      "event_class",
+      "subject_uuid",
+      "source_sequence",
+      "event_uuid"
+    ],
+    "signature_scope": "The signature covers the complete immutable key, all semantic fields, roster version and local-effect-receipt hash.",
+    "unique_acceptance": "The first byte-identical valid event for one immutable key is ledgered. A byte-identical duplicate is a no-op and cannot rerun a hard gate, residual, semantic latch or handoff gate.",
+    "conflicting_duplicate": "A second payload for an existing immutable key with any byte difference invalidates that source epoch for the current skill instance; both records become AMBIGUOUS_CONFLICT and neither can latch completion.",
+    "sequence_rule": "Per source epoch and skill instance, process only the next registered source_sequence. Up to four later unique records may be held in a cardinality-bounded reorder buffer. A fifth later record, a terminal event or an owner-epoch change with a missing predecessor quarantines the buffered family as AMBIGUOUS_MISSING_PREDECESSOR. Sequence number and buffer occupancy never enter the residual.",
+    "replay_rule": "Any event whose owner epoch, source epoch, skill instance or roster version is older than the current execution-visible tuple is STALE_REPLAY and cannot enter the residual.",
+    "replacement_rule": "Owner replacement atomically closes the old skill instance and ledger namespace. No key, residual decision, semantic latch or handoff receipt migrates to the replacement.",
+    "audit_counts": [
+      "unique_received",
+      "duplicate_noop",
+      "conflicting_duplicate",
+      "reordered_then_processed",
+      "missing_predecessor_quarantine",
+      "stale_replay",
+      "unsupported_class",
+      "hard_negative",
+      "hard_positive",
+      "residual_reject",
+      "residual_abstain_from_veto"
+    ]
+  },
+  "hard_semantic_gate": {
+    "gate_id": "G_SEM_V1",
+    "evaluation_order": [
+      "signature_and_schema_valid",
+      "current_agent_and_owner_epoch_match",
+      "current_skill_instance_and_semantic_id_match",
+      "registered_source_uuid_and_source_epoch_match",
+      "event_class_registered",
+      "roster_and_subject_contract_match",
+      "effect_and_target_tokens_match_skill_declaration",
+      "logical_progress_code_is_final",
+      "current_execution_visible_local_receipt_present_and_hash_matches",
+      "event_key_is_unique_and_source_sequence_is_processable",
+      "no_external_terminal_cause_has_won"
+    ],
+    "total_rule": "G_SEM equals 1 iff every ordered predicate is true. The first false predicate supplies one immutable rejection reason. There is no learned score, reward, timeout, duration threshold or future evidence in G_SEM.",
+    "hard_negative_behavior": "Do not call the residual; remain RUNNING unless an exclusive external terminal cause applies; log the rejection reason.",
+    "hard_positive_behavior": "Freeze the current event feature snapshot, call the residual exactly once and apply the one-sided semantic rule.",
+    "semantic_acceptance_equation": "SEMANTIC_ACCEPT(E,H) = G_SEM(E,H) AND [V_theta(E,H) = ABSTAIN_FROM_VETO].",
+    "one_sided_guarantees": [
+      "If G_SEM=0 then SEMANTIC_ACCEPT=0 for every theta.",
+      "The target accepted set is a subset of the deterministic conjunction accepted set.",
+      "The target cannot latch earlier in unique-event order than the deterministic conjunction on the same ledger.",
+      "A residual rejection is final for that event key and cannot be reversed by later task success."
+    ]
+  },
+  "age_free_residual": {
+    "residual_id": "VSP-CAND-05-REJECT-ONLY-MLP-1",
+    "call_domain": "Exactly one call per unique G_SEM-positive event while state is RUNNING.",
+    "architecture": "A frozen feed-forward MLP with input width 64, two hidden layers of widths 64 and 32, GELU activations, layer normalization without running temporal statistics, one sigmoid output p_alias and no recurrence, attention, event history, cache or hidden state.",
+    "input_builder": "A frozen deterministic encoder concatenates current signed event semantic fields, a current local target-effect snapshot, source-class one-hot fields and skill-semantic target fields. It pads to 64 dimensions with fixed zeros. It is invoked only at the unique event and has no access to prior or future records.",
+    "output_semantics": "p_alias estimates whether this hard-positive current event is a semantic alias or noncompletion under the contemporaneous label contract.",
+    "decision_rule": "Return REJECT when p_alias is at least 0.80, any required residual input is missing or nonfinite, or the frozen support detector marks the record out of support. Return ABSTAIN_FROM_VETO otherwise. ABSTAIN_FROM_VETO means no learned veto; it is not a positive learned completion claim.",
+    "threshold_rule": "The 0.80 threshold is fixed before evaluation. No evaluation prevalence, rejection rate, return, timeout, partner result or handoff result may tune it.",
+    "support_detector": "A frozen training-only categorical support table over event_class, source_type, skill_semantic_family and declared target_type plus per-feature finite bounds. It contains no age, count or partner identity. Unsupported records are REJECT and reported separately, never silently merged with learned alias rejections.",
+    "deterministic_arm": "The exact deterministic conjunction replaces V_theta with ABSTAIN_FROM_VETO for every G_SEM-positive record; every other component is byte-identical.",
+    "gradient_boundary": "Residual gradients stop at the frozen event encoder. The hard gate, event ledger, semantic FSM, safe-wait controller, handoff gate, timeout, interruption rules, primitive policy and partner policy receive no residual gradient. Conversely, their rewards, losses and later outcomes receive no path into the residual."
+  },
+  "supervision_contract": {
+    "unit": "One unique G_SEM-positive event key from a training skill instance.",
+    "label_source": "A pre-registered current-time effect adjudicator emits one signed receipt bound to the same immutable event key and the physical state snapshot that produced the local event. The adjudicator may be training-only instrumentation but may not inspect any later state, reward, handoff, timeout or trajectory outcome.",
+    "labels": [
+      {
+        "label": "TRUE_SEMANTIC_COMPLETION",
+        "training_target_y_alias": 0,
+        "availability": "The current-time receipt confirms the registered effect and final logical-progress predicate for the exact skill target and event class."
+      },
+      {
+        "label": "HARD_POSITIVE_ALIAS_OR_NONCOMPLETION",
+        "training_target_y_alias": 1,
+        "availability": "The current-time receipt positively disconfirms at least one semantic effect predicate while the execution hard gate was positive because its local evidence was aliased or insufficiently discriminative."
+      },
+      {
+        "label": "ADJUDICATION_UNRESOLVED_CURRENT_EVENT",
+        "training_target_y_alias": null,
+        "availability": "The execution-visible event is G_SEM-positive, but the separate current-time training adjudicator receipt is missing, mutually inconsistent or below its registered confidence. Exclude from loss and report as unresolved support; the unavailable training receipt never changes the online decision."
+      },
+      {
+        "label": "CENSORED_BY_EXTERNAL_CAUSE",
+        "training_target_y_alias": null,
+        "availability": "A higher-priority external terminal cause wins before a valid current-time adjudication receipt is committed. Exclude from loss; never relabel as negative."
+      }
+    ],
+    "loss": "Weighted binary cross entropy over y_alias in {0,1}; within each training run use inverse-frequency weights computed only from that run's labeled training partition and capped to [0.5,4.0]. Ambiguous and censored records have zero inclusion, not a zero label.",
+    "optimizer_exposure": "Each principal learned arm receives the same ordered G_SEM-positive training records, minibatch count, optimizer steps, parameter count and feature width. Only the registered supervision transformation differs.",
+    "forbidden_labels": [
+      "task or intrinsic reward",
+      "accumulated return",
+      "eventual task success or failure",
+      "eventual safe handoff or successor quality",
+      "elapsed skill duration or primitive frame count",
+      "remaining timeout or which terminal cause later wins",
+      "future event content or future local state",
+      "retrospective partner identity or policy family",
+      "audit acceptance or candidate disposition"
+    ],
+    "local_ambiguity_rule": "Missing or discordant execution-visible local semantic fields fail G_SEM before the residual. Adjudicator-only ambiguity can occur after a locally complete G_SEM-positive record; it excludes the record from supervision and truth-conditioned primary analysis but cannot be exposed to or alter the online target decision.",
+    "class_imbalance_reporting": "Report labeled and excluded counts, effective weights, prevalence and accept/reject support separately for every event class, source type, skill family, familiar or held-out partner family and true/alias stratum. A stratum without both true and alias labeled support is unresolved."
+  },
+  "complete_age_feature_gradient_firewall": {
+    "scope": "The firewall covers the residual input builder, frozen encoder, normalization, support detector, loss, sampler, threshold, recurrent caches, upstream representation and every gradient or tuning path. Excluding age only from the final MLP vector is insufficient.",
+    "forbidden_direct_features": [
+      "elapsed physical skill age",
+      "primitive frames since initiation",
+      "event count since initiation",
+      "source sequence value",
+      "reorder buffer occupancy",
+      "remaining timeout",
+      "nominal boundary or expected completion time",
+      "time since prior event",
+      "no-change frame count",
+      "accumulated reward or return",
+      "current episode fraction",
+      "future success, event, handoff, interruption or terminal cause",
+      "evaluation truth label or review disposition",
+      "unavailable partner identity or partner-policy family"
+    ],
+    "forbidden_proxies": [
+      "recurrent hidden state updated on primitive frames",
+      "attention position or positional embedding",
+      "event-history pooling whose cardinality grows with age",
+      "running normalizer statistics updated during a skill instance",
+      "timeout-conditioned action mask or scheduler state",
+      "learned embedding trained to predict duration, remaining time or terminal cause",
+      "frame stack containing repeated no-change observations",
+      "source reliability estimate updated within the current skill instance"
+    ],
+    "allowed_current_inputs": [
+      "registered categorical event class and source type",
+      "current skill-semantic and target-type declarations",
+      "current signed event effect and logical-progress fields",
+      "current execution-visible local target-effect snapshot",
+      "current roster compatibility fields already required by the ontology",
+      "training-frozen source-class reliability constant that is not partner-identity-specific and is not updated within a run"
+    ],
+    "static_checks": [
+      "Feature schema allow-list is frozen and every residual tensor column maps to exactly one allowed field.",
+      "No residual module has recurrent parameters, temporal convolution, attention cache, position embedding or state update method.",
+      "Automatic differentiation graph terminates at the frozen current-event encoder and has no edge from task value, safe wait, handoff, timeout or terminal loss.",
+      "Normalization constants are fit once on the labeled training partition and frozen before validation and evaluation.",
+      "Sequence and ledger metadata are available only to deterministic sanitation code and are absent from the residual feature object."
+    ],
+    "invariance_contracts": [
+      {
+        "intervention": "DUPLICATED_NO_CHANGE_FRAMES",
+        "construction": "Replace every primitive no-change interval before one unique event by 1, 4 or 16 observation-identical subframes while preserving the physical event snapshot, immutable event stream and all event payload bytes.",
+        "required_result": "Hard-gate result, residual input bytes, p_alias, residual decision, semantic latch event key and handoff result are identical. Any mismatch is a firewall failure."
+      },
+      {
+        "intervention": "EVENT_ISOMORPHIC_SPEED_WARP",
+        "construction": "Execute the same unique event keys and current event-state snapshots under registered fast and slow primitive schedules that change elapsed frames and wall-clock time but not event order, payload or physical effect state at each event.",
+        "required_result": "Residual input and decision are identical at matched events. Physical-time returns and timeout incidence remain separately reported rather than normalized away."
+      },
+      {
+        "intervention": "FUTURE_SUFFIX_SWAP",
+        "construction": "Hold the complete prefix through the current event fixed and attach two different future success, handoff and terminal-cause suffixes.",
+        "required_result": "The current hard-gate, residual input, residual decision and semantic transition are byte-identical."
+      }
+    ]
+  },
+  "total_event_and_state_transducer": {
+    "states": [
+      "RUNNING",
+      "SEMANTIC_WAITING",
+      "HANDED_OFF",
+      "TERMINAL_TIMEOUT",
+      "TERMINAL_SAFETY_INTERRUPT",
+      "TERMINAL_OWNER_LEFT",
+      "TERMINAL_OWNER_REPLACED",
+      "TERMINAL_EPISODE_END",
+      "TERMINAL_INVALID_PROTOCOL"
+    ],
+    "exclusive_cause_priority": [
+      "EPISODE_END",
+      "OWNER_REPLACED",
+      "OWNER_LEFT",
+      "SAFETY_INTERRUPT",
+      "EXTERNAL_TIMEOUT",
+      "PROTOCOL_INVALIDATION",
+      "SEMANTIC_ACCEPT",
+      "HANDOFF_SAFE"
+    ],
+    "protocol_invalidation_trigger": "PROTOCOL_INVALIDATION is present for a conflicting payload under one current immutable key, a fifth later unique source record while a predecessor is missing, a forged signature attributed to a registered current source, or contradictory current owner/skill-instance state. Unsupported classes, valid old-epoch replays and byte-identical duplicates are logged hard negatives or no-ops rather than protocol invalidations.",
+    "priority_semantics": "At one atomic input boundary, the first present cause in the ordered list wins. An external terminal cause therefore preempts a simultaneous semantic event. If no external cause is present and SEMANTIC_ACCEPT and HANDOFF_SAFE arrive together, commit the semantic latch first and the handoff second in one transaction, yielding one count for each.",
+    "transitions": [
+      {
+        "from": "RUNNING",
+        "input": "unique hard-negative, residual REJECT, duplicate no-op or unresolved reorder buffer",
+        "to": "RUNNING",
+        "effects": "No semantic or handoff count; continue the incumbent primitive controller."
+      },
+      {
+        "from": "RUNNING",
+        "input": "SEMANTIC_ACCEPT without simultaneous HANDOFF_SAFE",
+        "to": "SEMANTIC_WAITING",
+        "effects": "Set semantic_latched=true, store the immutable semantic event key and cause class, increment N_sem once, enter the registered safe-hold controller and stop calling the residual."
+      },
+      {
+        "from": "RUNNING",
+        "input": "SEMANTIC_ACCEPT and HANDOFF_SAFE in the same atomic boundary",
+        "to": "HANDED_OFF",
+        "effects": "Commit semantic latch then successor receipt exactly once; increment N_sem and N_handoff once each."
+      },
+      {
+        "from": "RUNNING",
+        "input": "HANDOFF_SAFE without SEMANTIC_ACCEPT",
+        "to": "RUNNING",
+        "effects": "Do not hand off. Safe successor availability alone is not semantic completion."
+      },
+      {
+        "from": "SEMANTIC_WAITING",
+        "input": "HANDOFF_SAFE",
+        "to": "HANDED_OFF",
+        "effects": "Commit one successor receipt, increment N_handoff once and close the skill instance."
+      },
+      {
+        "from": "SEMANTIC_WAITING",
+        "input": "HANDOFF_UNSAFE_OR_UNAVAILABLE",
+        "to": "SEMANTIC_WAITING",
+        "effects": "Execute one safe-hold action, update ordinary execution-visible world state for safety only and accumulate physical waiting cost; do not rerun or train the residual."
+      },
+      {
+        "from": "RUNNING or SEMANTIC_WAITING",
+        "input": "highest-priority external terminal cause",
+        "to": "matching exclusive TERMINAL state",
+        "effects": "Close once with that cause. If already SEMANTIC_WAITING, preserve N_sem=1 and N_handoff=0; never relabel the semantic event from the later cause."
+      },
+      {
+        "from": "HANDED_OFF or any TERMINAL state",
+        "input": "any later event, duplicate, timeout, safety or handoff signal",
+        "to": "same absorbing state",
+        "effects": "No-op apart from duplicate or late-event audit counters."
+      }
+    ],
+    "count_invariants": [
+      "N_sem is in {0,1} per skill instance.",
+      "N_handoff is in {0,1} per skill instance.",
+      "N_handoff is less than or equal to N_sem.",
+      "Exactly one closing cause exists per closed skill instance.",
+      "Semantic latch event key and cause class are immutable after commit.",
+      "A duplicate or reordered replay cannot change state or counts."
+    ]
+  },
+  "safe_wait_and_handoff_contract": {
+    "safe_wait_scope_gate": "The candidate is evaluable only when the environment registers a deterministic SAFE_HOLD primitive or certified action set before training. If no such action exists for a state, semantic completion triggers TERMINAL_SAFETY_INTERRUPT rather than an improvised wait policy.",
+    "safe_wait_action": "While SEMANTIC_WAITING, select the lexicographically first action in the current registered SAFE_HOLD action set. The controller is deterministic, shared byte-for-byte by all arms, receives no learned input and has no optimizer.",
+    "safe_wait_state_updates": "Execution-visible world and safety state may update so the handoff gate can be reevaluated. Skill-progress, residual, semantic label, residual normalization and residual support state are frozen. No waiting observation is appended to a residual history.",
+    "safe_wait_cost": "Report physical waiting seconds, safe-hold action count and environment return. The evaluation-only transparent utility subtracts 0.02 per physical waiting second; this coefficient never enters training or semantic labels and is repeated at 0.01 and 0.04 in sensitivity reporting.",
+    "handoff_gate_id": "G_HANDOFF_V1",
+    "handoff_ready_safe_definition": "HANDOFF_READY_SAFE is the conjunction of every handoff predicate below except semantic_latched. This is the handoff-safe axis in the registered two-by-two semantic-truth by handoff-safety matrix.",
+    "handoff_predicates": [
+      "semantic_latched is true",
+      "current agent owner epoch and roster version still match",
+      "a declared successor skill or registered terminal continuation is available",
+      "successor initiation fields and current action mask are valid",
+      "the current environment safety certificate admits the successor's first primitive action",
+      "no higher-priority external terminal cause is present",
+      "an atomic exactly-once successor receipt can be committed"
+    ],
+    "handoff_rule": "G_HANDOFF = semantic_latched AND HANDOFF_READY_SAFE. It is deterministic, receives no residual score, reward or learned partner identity and cannot authorize execution before semantic_latched=true.",
+    "same_boundary_rule": "A valid semantic event and a valid handoff certificate at the same atomic boundary latch semantic completion first and then commit one handoff. A timeout or safety interruption at that boundary wins instead under the exclusive-cause priority.",
+    "gradient_firewall": "Safe-wait cost, handoff availability, successor quality, post-handoff reward and terminal cause cannot train, tune, select or normalize the residual. A future candidate that allows such feedback is a different mechanism."
+  },
+  "identification_contract": {
+    "treatment_unit": "One complete skill instance or trajectory assigned prospectively to one principal arm before its first event.",
+    "top_level_unit": "One independent training run, including its own initialization, data partition, residual or sham fit and frozen evaluation deployment.",
+    "nested_units": [
+      "skill instances nested within trajectories",
+      "unique events and duplicate families nested within skill instances",
+      "trajectories nested within environment and partner realizations",
+      "partner realizations nested within familiar or held-out partner-policy families",
+      "all units nested within independent training run"
+    ],
+    "principal_arms": [
+      {
+        "arm_id": "DET_EXACT_CONJUNCTION",
+        "mechanism": "Identical event ledger, hard gate, FSM, safe wait and handoff; every G_SEM-positive event sets V=ABSTAIN_FROM_VETO.",
+        "purpose": "Simple deterministic alternative and lower-bound latch-order reference."
+      },
+      {
+        "arm_id": "TARGET_REJECT_ONLY_RESIDUAL",
+        "mechanism": "The registered supervised age-free residual and fixed 0.80 rejection threshold.",
+        "purpose": "Candidate treatment."
+      },
+      {
+        "arm_id": "SHAM_MATCHED_LEARNER",
+        "mechanism": "Same architecture, frozen encoder, features, support table, parameter count, optimizer steps and ordered examples; within each training run permute y_alias within event_class by source_type by skill_family by partner-visibility strata using a pre-registered counter RNG. On training-validation records only, freeze one sham threshold per event class at the deterministic score order statistic that most closely matches the target arm's class-specific rejection count, breaking ties toward the higher threshold; report any discrete count mismatch. Test outcomes never retune it.",
+        "purpose": "Capacity, exposure and generic learned-filter control without semantic supervision."
+      },
+      {
+        "arm_id": "RANDOM_RATE_MATCHED_REJECTION",
+        "mechanism": "No learned event-content dependence. On each G_SEM-positive evaluation event, draw one counter-based Bernoulli rejection using a probability frozen from target training-validation rejection rates within the execution-known pre-outcome stratum event_class by source_type by skill_semantic_family by registered speed block by partner-familiarity block. Semantic truth, adjudication label, handoff safety, later cause and return are absent from both the probability key and draw. The probability table is frozen before test labels open.",
+        "purpose": "Passive persistence and rejection-rate control."
+      }
+    ],
+    "optional_diagnostics_not_substitutes": [
+      {
+        "arm_id": "AGE_FREE_EVENT_MLP_WITHOUT_SEMANTIC_LABELS",
+        "purpose": "Same-capacity next-event self-supervised head with no semantic labels; tests whether representation capacity alone changes behavior."
+      },
+      {
+        "arm_id": "RECURRENT_STOPPING_HEAD_DIAGNOSTIC",
+        "purpose": "Parameter-matched recurrent local-history stopping head, explicitly allowed to use ordinary observation history but not privileged labels; diagnoses recurrence or clock capacity and is never evidence for the age-free claim."
+      },
+      {
+        "arm_id": "TIMEOUT_ONLY",
+        "purpose": "Registered external timeout/interruption fallback when no supported semantic class exists."
+      }
+    ],
+    "shared_surfaces": "All four principal arms share byte-identical primitive and partner policies, event production and sanitation, current evidence, physical interaction, message wrapper, hard gates, safe-wait controller, handoff gate, timeout, competing causes, optimizer budget and evaluation schedule.",
+    "randomization": "Randomize complete skill instances within each independent run, environment, skill family, cause class, partner family and speed block. Duplicate members never cross arms.",
+    "no_post_treatment_selection": "Include every prospectively assigned supported skill instance in all-instance estimands. Do not condition primary effects on a target-arm residual rejection, successful handoff, eventual success or realized terminal cause.",
+    "partner_transport": "Freeze three familiar partner-policy families for training and three held-out families for evaluation: eager acknowledgment, cautious delayed acknowledgment and noisy-but-provenance-valid acknowledgment. Identity tokens are never residual inputs. Report familiar and held-out effects separately."
+  },
+  "estimands_and_observables": {
+    "fixed_horizon": "Sixteen physical seconds from skill initiation or earlier absorbing episode end; no arm-specific horizon extension.",
+    "primary_utility": "U = clipped_external_return[-1,1] - 0.02*safe_wait_seconds - 0.25*false_semantic_latch - 0.25*missed_true_completion - 1.00*unsafe_handoff. This is an evaluation-only transparent ledger, not a training reward. Report every component and coefficient sensitivity separately.",
+    "primary_estimands": [
+      {
+        "estimand_id": "E1_TARGET_MINUS_DETERMINISTIC_ALL_INSTANCES",
+        "definition": "Mean U under TARGET_REJECT_ONLY_RESIDUAL minus DET_EXACT_CONJUNCTION over all prospectively assigned supported skill instances.",
+        "interpretation": "Net behavioral value of semantic alias rejection beyond the exact deterministic conjunction."
+      },
+      {
+        "estimand_id": "E2_TARGET_MINUS_RANDOM_ALL_INSTANCES",
+        "definition": "Mean U under target minus cause-stratum-rate-matched random rejection.",
+        "interpretation": "Event-content-specific value beyond passive persistence at the same rejection rate."
+      },
+      {
+        "estimand_id": "E3_TARGET_MINUS_SHAM_ALL_INSTANCES",
+        "definition": "Mean U under target minus the capacity-and-exposure-matched sham learner.",
+        "interpretation": "Semantic-supervision value beyond generic learned filtering and capacity."
+      },
+      {
+        "estimand_id": "E4_CAUSE_SPECIFIC_TARGET_MINUS_DETERMINISTIC",
+        "definition": "Repeat E1 separately for self-triggered, joint-triggered and partner-triggered observable classes with simultaneous uncertainty control.",
+        "interpretation": "Retained-class support, not retrospective causal responsibility."
+      },
+      {
+        "estimand_id": "E5_HELDOUT_PARTNER_TRANSPORT",
+        "definition": "E1 and E3 on held-out partner-policy families minus their familiar-family counterparts, without partner identity input.",
+        "interpretation": "Convention and source-reliability transport."
+      }
+    ],
+    "mandatory_component_observables": [
+      "true and false semantic-latch rates",
+      "true-completion miss rate",
+      "unique-event-rank delay relative to the first true hard-positive event",
+      "physical-seconds latch delay",
+      "safe-wait seconds and action count",
+      "unsafe and premature handoff rates",
+      "N_sem and N_handoff invariant violations",
+      "exclusive closing-cause frequencies",
+      "residual rejection and out-of-support rates",
+      "ambiguous and censored label counts",
+      "duplicate, replay, reorder and missing-predecessor counts",
+      "external return and every evaluation-utility component",
+      "familiar and held-out partner-family results"
+    ],
+    "semantic_handoff_cross": [
+      {
+        "semantic_truth": true,
+        "handoff_safe": false,
+        "required_behavior": "Latch once, enter SEMANTIC_WAITING, execute SAFE_HOLD and never hand off until safety becomes true or an external cause wins."
+      },
+      {
+        "semantic_truth": false,
+        "handoff_safe": true,
+        "required_behavior": "Remain RUNNING with N_sem=0 and N_handoff=0; successor readiness cannot create semantic completion."
+      },
+      {
+        "semantic_truth": true,
+        "handoff_safe": true,
+        "required_behavior": "Latch semantic completion once and hand off once, atomically if both certificates share the same boundary."
+      },
+      {
+        "semantic_truth": false,
+        "handoff_safe": false,
+        "required_behavior": "Remain RUNNING unless an external terminal cause wins."
+      }
+    ]
+  },
+  "bounded_validation_stages": {
+    "stage_a_mechanical_micro_suite": {
+      "purpose": "Proof-sized deterministic transducer, ledger and firewall validation before behavioral fitting.",
+      "execution_status": "specified_not_run",
+      "trace_families": [
+        "hard-negative unsupported class",
+        "true self-triggered hard-positive",
+        "true joint-triggered hard-positive",
+        "true partner-triggered hard-positive",
+        "self-triggered hard-positive alias",
+        "joint-triggered hard-positive alias",
+        "partner-triggered hard-positive alias",
+        "ambiguous current event",
+        "byte-identical duplicate replay",
+        "conflicting duplicate payload",
+        "out-of-order event recovered within four-record buffer",
+        "missing predecessor causing quarantine",
+        "semantic accept and safe handoff at the same boundary",
+        "semantic accept and timeout at the same boundary",
+        "semantic true with handoff unsafe",
+        "handoff safe with semantic false",
+        "timeout before any semantic event",
+        "safety interruption after semantic latch before handoff",
+        "owner leave after semantic latch",
+        "owner replacement with stale old-epoch replay",
+        "1 versus 4 versus 16 duplicated no-change frames",
+        "event-isomorphic fast versus slow schedules",
+        "fixed-prefix future-success suffix swap"
+      ],
+      "pass_rule": "All count, absorbing-state, priority, duplicate, byte-invariance and gradient-firewall assertions pass exactly. Any mismatch blocks Stage B and is attributed to protocol or implementation, not scientific candidate failure."
+    },
+    "stage_b_bounded_behavioral_discriminator": {
+      "purpose": "Compare the four principal arms on supported familiar classes under exact matched exposure.",
+      "execution_status": "specified_not_run",
+      "independent_training_runs": 24,
+      "team_sizes": [3, 5],
+      "speed_regimes": ["event_isomorphic_fast", "event_isomorphic_slow"],
+      "partner_families": ["familiar_eager", "familiar_cautious", "familiar_noisy_provenance_valid"],
+      "per_run_per_arm_support": "At least 24 complete skill instances in every event_class by adjudicated current label {true, alias, ambiguous} by handoff_safe {true,false} by speed regime cell when that cell is physically reachable. Ambiguous cells are reporting support and never enter supervised loss.",
+      "minimum_labeled_support": "At least 48 labeled hard-positive accept examples and 48 labeled hard-positive alias examples per event class per independent training run after the train-validation split. Otherwise that run-class estimate is unresolved.",
+      "controls": "All four principal arms plus optional diagnostics, with identical hard gates, safe wait, handoff, primitive policies, partner policies, physical horizons and logged costs.",
+      "pass_rule": "Proceed to Stage C only if protocol invariants hold, target false-latch reduction versus deterministic is at least 0.05, the 95 percent simultaneous lower bound for E1 is above 0, true-completion acceptance is noninferior within 0.02, median unique-event-rank delay is at most 1, unsafe handoff is zero, and target exceeds both random and sham on their registered primary comparisons."
+    },
+    "stage_c_prospective_heldout_transport": {
+      "purpose": "Freeze all heads, thresholds, normalizers, source tables, ontology and policies before evaluating unseen paths and partner-policy families.",
+      "execution_status": "specified_not_run",
+      "partition_firewalls": [
+        "No skill instance or duplicate family appears in more than one partition.",
+        "No event source realization appears in both train and evaluation.",
+        "No partner realization appears in both familiar training and held-out evaluation.",
+        "At least one registered path template per retained event class is held out prospectively.",
+        "No evaluation label, rejection rate, timeout rate, return or partner result tunes the target, sham or random threshold."
+      ],
+      "heldout_partner_families": ["heldout_eager_latency_shift", "heldout_cautious_missing_ack", "heldout_noisy_alias_shift"],
+      "retention_rule": "Retain only event classes with both true and alias support, exact protocol conformance, positive E1 and E3, noninferior true-completion acceptance, bounded delay and no unsafe handoff in both familiar and held-out evaluation. Park every unsupported class separately; do not average it into a retained class."
+    }
+  },
+  "uncertainty_and_decision_rules": {
+    "analysis_unit": "Independent training run is the top-level resampling unit. Skill instances, event families and partner realizations stay clustered inside their original run.",
+    "interval_method": "Pre-register a 10000-resample run-cluster bootstrap with a max-t 95 percent simultaneous interval over E1, E2, E3, the three E4 cause-class contrasts, held-out E5 and the true-acceptance noninferiority contrast.",
+    "binary_rate_method": "Report run-cluster bootstrap intervals and exact numerator and denominator for false latch, miss, unsafe handoff, duplicate invariance and out-of-support rates.",
+    "equivalence_margin": "For true-completion acceptance and matched-event decision invariance use absolute margin 0.02; Stage A requires exact zero mismatch regardless of the statistical margin.",
+    "delay_gate": "Median target unique-event-rank delay relative to deterministic is at most 1 and the 95th percentile is at most 2 within every retained class; physical-time delay is reported without speed normalization.",
+    "multiplicity": "The max-t family is fixed before evaluation. Exploratory per-skill or per-partner slices are labelled exploratory and cannot rescue a failed registered class.",
+    "support_failure": "If a retained class lacks both target accept and target reject observations or lacks both true and alias labels, its discriminator is UNRESOLVED_SUPPORT rather than zero effect.",
+    "decision_outcomes": [
+      "RETAIN_BOUNDED_CLASS",
+      "FALL_BACK_TO_DETERMINISTIC_CONJUNCTION",
+      "PARK_UNRESOLVED_SUPPORT",
+      "REJECT_AGE_OR_FUTURE_LEAKAGE",
+      "REJECT_HANDOFF_CONFUSION",
+      "REJECT_NO_VALUE_BEYOND_PASSIVE_OR_CAPACITY_CONTROL"
+    ]
+  },
+  "result_and_failure_matrix": [
+    {
+      "case_id": "M01_TRUE_SELF_UNSAFE",
+      "condition": "true self-triggered hard-positive, handoff unsafe",
+      "required_target_behavior": "Accept unless vetoed incorrectly, latch once, wait safely, no handoff.",
+      "failure_attribution": "Miss or delay if rejected; handoff-gate failure if handed off."
+    },
+    {
+      "case_id": "M02_TRUE_SELF_SAFE",
+      "condition": "true self-triggered hard-positive, handoff safe",
+      "required_target_behavior": "One semantic latch and one handoff.",
+      "failure_attribution": "Residual miss, event/FSM duplication or handoff failure."
+    },
+    {
+      "case_id": "M03_TRUE_JOINT_UNSAFE",
+      "condition": "true joint-triggered hard-positive, handoff unsafe",
+      "required_target_behavior": "One latch, safe wait, no causal-responsibility claim.",
+      "failure_attribution": "Joint-class support or handoff separation failure."
+    },
+    {
+      "case_id": "M04_TRUE_JOINT_SAFE",
+      "condition": "true joint-triggered hard-positive, handoff safe",
+      "required_target_behavior": "One latch and one handoff under roster-matched receipt.",
+      "failure_attribution": "Ontology, residual or handoff failure."
+    },
+    {
+      "case_id": "M05_TRUE_PARTNER_UNSAFE",
+      "condition": "true partner-triggered hard-positive, handoff unsafe",
+      "required_target_behavior": "One latch, safe wait, no partner-causality claim.",
+      "failure_attribution": "Partner support, identity leakage or handoff separation failure."
+    },
+    {
+      "case_id": "M06_TRUE_PARTNER_SAFE",
+      "condition": "true partner-triggered hard-positive, handoff safe",
+      "required_target_behavior": "One latch and one handoff using only execution-visible provenance.",
+      "failure_attribution": "Partner transport, residual or handoff failure."
+    },
+    {
+      "case_id": "M07_ALIAS_SELF_SAFE",
+      "condition": "self-triggered G_SEM-positive alias, successor safe",
+      "required_target_behavior": "Residual REJECT; remain RUNNING; no handoff.",
+      "failure_attribution": "Residual false acceptance if deterministic and target differ; handoff confusion if handoff occurs."
+    },
+    {
+      "case_id": "M08_ALIAS_JOINT_SAFE",
+      "condition": "joint-triggered G_SEM-positive alias, successor safe",
+      "required_target_behavior": "Residual REJECT; remain RUNNING.",
+      "failure_attribution": "Residual semantic discrimination or joint-ontology alias failure."
+    },
+    {
+      "case_id": "M09_ALIAS_PARTNER_SAFE",
+      "condition": "partner-triggered G_SEM-positive alias, successor safe",
+      "required_target_behavior": "Residual REJECT without partner identity input.",
+      "failure_attribution": "Partner co-adaptation, identity leakage or semantic discrimination failure."
+    },
+    {
+      "case_id": "M10_FALSE_SEMANTIC_UNSAFE",
+      "condition": "hard-negative or rejected alias, handoff unsafe",
+      "required_target_behavior": "Remain RUNNING until an external cause.",
+      "failure_attribution": "Hard-gate or FSM failure."
+    },
+      {
+        "case_id": "M11_AMBIGUOUS_OR_OOS",
+        "condition": "execution-visible local evidence is missing, discordant or out of support, or a separate training adjudicator receipt is unresolved",
+        "required_target_behavior": "Local evidence ambiguity fails G_SEM or produces fail-closed REJECT. Adjudicator-only ambiguity is excluded from supervised loss and truth-conditioned claims, reported separately, and never exposed to the online decision.",
+        "failure_attribution": "Gate, supervision or support-reporting failure if local ambiguity is accepted, adjudicator ambiguity is treated as a negative label, or either is silently omitted."
+    },
+    {
+      "case_id": "M12_DUPLICATE_REORDER_REPLAY",
+      "condition": "duplicate, within-buffer reorder, conflict, missing predecessor or stale replay",
+      "required_target_behavior": "At most one residual call and no count change; conflict or missing predecessor quarantines.",
+      "failure_attribution": "Event-ledger conformance failure."
+    },
+    {
+      "case_id": "M13_SEMANTIC_AND_HANDOFF_SAME_BOUNDARY",
+      "condition": "valid semantic and safe-handoff certificates atomically co-occur",
+      "required_target_behavior": "Latch then hand off once, N_sem=1 and N_handoff=1.",
+      "failure_attribution": "Transaction ordering or idempotence failure."
+    },
+    {
+      "case_id": "M14_SEMANTIC_AND_TIMEOUT_SAME_BOUNDARY",
+      "condition": "valid semantic event and external timeout co-occur",
+      "required_target_behavior": "Timeout wins; N_sem=0 and N_handoff=0.",
+      "failure_attribution": "Competing-cause priority failure."
+    },
+    {
+      "case_id": "M15_POST_LATCH_INTERRUPT_OR_REPLACEMENT",
+      "condition": "safety interrupt, leave or replacement after semantic latch before handoff",
+      "required_target_behavior": "Preserve N_sem=1, close with exact external cause, N_handoff=0, reject old-epoch replay.",
+      "failure_attribution": "Cause, ownership or state-continuity failure."
+    },
+    {
+      "case_id": "M16_AGE_FUTURE_INVARIANCE",
+      "condition": "no-change-frame duplication, event-isomorphic speed warp or future-suffix swap",
+      "required_target_behavior": "Matched current-event residual inputs and decisions are byte-identical.",
+      "failure_attribution": "Age, recurrence, normalizer, future-label or hidden-gradient leakage."
+    }
+  ],
+  "required_revisions": [
+    {
+      "revision_id": "R1_SEMANTIC_ONTOLOGY_AND_CAUSE_CONTRACTS",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["semantic_ontology", "candidate_boundary.claim_decomposition", "scope_correction"],
+      "closure": "Three observable triggered classes now have registered sources, exact fields, hard semantics, canonical aliases, causal-language limits and an unsupported-class rule."
+    },
+    {
+      "revision_id": "R2_TOTAL_EVENT_AND_STATE_TRANSDUCER",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["event_identity_and_ledger", "total_event_and_state_transducer", "safe_wait_and_handoff_contract"],
+      "closure": "Immutable keys, dedupe, conflict, reorder, missing predecessor, replacement, state transitions, exclusive causes, same-boundary ordering and exactly-once counts are total."
+    },
+    {
+      "revision_id": "R3_COMPLETE_AGE_FEATURE_AND_GRADIENT_FIREWALL",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["complete_age_feature_gradient_firewall", "age_free_residual.gradient_boundary", "safe_wait_and_handoff_contract.gradient_firewall"],
+      "closure": "Direct age fields, temporal proxies, upstream recurrence, normalization, sampling, threshold and downstream gradient paths are prohibited and challenged by exact invariance interventions."
+    },
+    {
+      "revision_id": "R4_LEARNED_RESIDUAL_AND_SUPERVISION_CONTRACT",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["hard_semantic_gate", "age_free_residual", "supervision_contract"],
+      "closure": "The learned component is an exact reject-only MLP over hard positives; labels are current-time provenance receipts, ambiguity is censored and reward, duration, future success and handoff are excluded."
+    },
+    {
+      "revision_id": "R5_ESTIMANDS_HIERARCHY_CONTROLS_AND_UNCERTAINTY",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["identification_contract", "estimands_and_observables", "uncertainty_and_decision_rules"],
+      "closure": "Complete-instance treatment, run-level inference, nested clusters, four matched principal arms, all-instance and cause-specific estimands, support rules and simultaneous uncertainty are explicit."
+    },
+    {
+      "revision_id": "R6_BOUNDED_MICRO_SUITE_AND_RESULT_MATRIX",
+      "status": "materialized_in_this_advisory_delta",
+      "materialized_sections": ["bounded_validation_stages", "result_and_failure_matrix"],
+      "closure": "A proof-sized Stage A, 24-run bounded Stage B, frozen held-out Stage C and sixteen-case attribution matrix cover required events, competing causes, speed, duplicates, partner transport and semantic-handoff crossings."
+    }
+  ],
+  "source_to_mechanism_boundary": {
+    "campaign_source_result_packet_ids": [
+      "SRP-VSP-02",
+      "SRP-VSP-03",
+      "SRP-VSP-04"
+    ],
+    "direct_candidate_packet_ids": [
+      "AIP-VSP-05",
+      "RLPA-VSP-05",
+      "CAP-VSP-05",
+      "AIP-VSP-C2-05",
+      "RLPA-VSP-C2-05",
+      "CAP-VSP-C2-05"
+    ],
+    "source_grounded_elements": [
+      "SRP-VSP-02 separates skill identity from externally selected period and warns that interval return confounds identity with duration.",
+      "SRP-VSP-03 distinguishes logical event progress from elapsed time and requires physical-time-aware value accounting.",
+      "SRP-VSP-04 supplies asynchronous variable termination, initiation, timeout, interruption and safety-boundary precedent while limiting what role or tactic labels imply.",
+      "AIP-VSP-05 introduces effect and logical-progress completion with duplicate-frame invariance and the exact deterministic conjunction alternative.",
+      "RLPA-VSP-05 and CAP-VSP-05 require event keys, provenance, competing risks, semantic versus handoff separation, reject-only learning and age-leakage controls.",
+      "AIP-VSP-C2-05 narrows learning to locally identifiable hard-positive events with separate semantic and handoff latches.",
+      "RLPA-VSP-C2-05 and CAP-VSP-C2-05 retain only a bounded deterministic-target-sham-random discriminator across cause, speed, duplicate delivery and partner substitution."
+    ],
+    "advisory_instantiations_not_claimed_as_source_results": [
+      "The exact three event schemas and field names",
+      "The four-record reorder buffer",
+      "The 64-64-32 MLP and 0.80 threshold",
+      "The exact safe-hold tie break and utility coefficients",
+      "The 24-run support design and numerical retention margins"
+    ],
+    "new_external_sources_added": false,
+    "source_boundary_status": "closed_to_campaign_packets_and_authorized_algorithm_principles_only"
+  },
+  "residual_uncertainties": [
+    "Whether every target environment exposes a locally observable current-time semantic receipt rather than only a retrospective success signal.",
+    "Whether training-only contemporaneous adjudication receipts are sufficiently available and balanced for each self, joint and partner class.",
+    "Whether the exact deterministic conjunction already removes nearly all aliases, leaving no value for a residual.",
+    "Whether fail-closed out-of-support rejection causes unacceptable completion misses or waiting cost under held-out partner shifts.",
+    "Whether a certified SAFE_HOLD action exists for every evaluated semantic-waiting state.",
+    "Whether event-isomorphic speed interventions can preserve physical event snapshots without changing the underlying task dynamics.",
+    "Whether partner-triggered semantic classes remain locally identifiable without leaking partner identity or convention.",
+    "Whether behavioral gains survive all-instance accounting rather than appearing only after conditioning on rejected events or successful handoffs."
+  ],
+  "completion_state": {
+    "advisory_revision_materialized": true,
+    "required_revision_count_expected": 6,
+    "required_revision_count_materialized": 6,
+    "direction_disposition_after_materialization": "REVISION_REQUIRED",
+    "campaign_artifact_modified": false,
+    "pro_review_artifact_modified": false,
+    "formal_state_modified": false,
+    "code_modified": false,
+    "compute_run": false,
+    "git_used": false,
+    "external_pro_contacted": false,
+    "reaudit_requested": false,
+    "reaudit_completed": false,
+    "implementation_ready_claim": false,
+    "validation_ready_claim": false,
+    "next_authorized_action": "None. Await explicit routing or user instruction; a future re-audit owner may assess whether this advisory delta closes the six required revisions."
+  }
+}

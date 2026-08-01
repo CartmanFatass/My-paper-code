@@ -57,11 +57,6 @@ description = "Silent mechanical operator for one authorized HMASD train-evaluat
 config_file = "./agents/hmasd-experiment-operator.toml"
 nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 
-[agents."HMASDProResponseMonitor"]
-description = "Silent Luna-low observer for one already-submitted External Pro response."
-config_file = "./agents/hmasd-pro-response-monitor.toml"
-nickname_candidates = ["HMASD Pro Monitor", "Pro Response Monitor"]
-
 [agents."HMASDResearchScout"]
 description = "Read-only Sol-high scout for one bounded independent research axis."
 config_file = "./agents/hmasd-research-scout.toml"

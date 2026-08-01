@@ -161,7 +161,7 @@ Code Project Manager is invoked only when:
 - External Pro returns a concrete code counterexample, implementation
   impossibility or alignment mismatch.
 
-File locks, temporary service failures, browser transport errors, unchanged-run
+File locks, temporary service failures, review transport errors, unchanged-run
 recovery and evidence archival remain with Research Operations Manager. After a
 diagnosis or accepted repair, Code Project Manager returns the technical result
 and stops; it never takes over operations.

@@ -74,10 +74,11 @@ native_child_authority=exact_assignment_only
 one_artifact_one_acceptance_owner=true
 cross_task_routing=locked_role_session_model_thinking
 cross_task_routing_skill=hmasd-cross-task-routing
+workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 ```
 The user permanently authorizes Workflow Design Manager, Code Project Manager and Research Operations Manager to fetch and push their accepted nonoverlapping path sets there; no other egress is covered. Independent research tasks have no Git or repository-egress authority.
 There is no Controller, persistent Monitor, dispatcher, semantic relay, role registry or global lease. Workflow Design Manager owns workflow design, Code Project Manager owns code and technical acceptance, Research Operations Manager owns formal runtime and formal Pro transport, and External Pro owns science. The Independent Research Pro Review Operator owns only its separate registered conversation and local independent-review archive.
-`hmasd-pro-response-monitor` sees only metadata and may observe one exact turn for either registered transport owner. Both persistent project managers may request workflow design directly; Workflow Design Manager returns to the exact requester.
+Both persistent project managers may request workflow design directly; Workflow Design Manager returns to the exact requester.
 
 ## Universal project constraints
 
@@ -121,19 +122,17 @@ A future project-external write requires a new explicit user instruction for its
 - Code and technical acceptance: `.agents/roles/CODE_PROJECT_MANAGER.md`.
 - Research operations and direct Pro transport: `.agents/roles/RESEARCH_OPERATIONS_MANAGER.md`.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
-- Silent long-Pro-turn observation: `.agents/roles/PRO_RESPONSE_MONITOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
-- Pro transport: browser mechanics in `.agents/skills/hmasd-review-round/SKILL.md`; optional receipt-bearing Agentify in `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key and backend-selection mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
+- Pro transport: `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 - Independent methodology and ordered single-direction Pro review batches: `.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
-- Pro-response metadata broker: `scripts/hmasd_pro_response_sentinel.py`.
 
 No role reads every routed document. The active assignment or role charter
 names the smallest necessary subset.

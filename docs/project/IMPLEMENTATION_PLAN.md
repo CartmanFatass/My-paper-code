@@ -607,10 +607,8 @@ feasibility checks before implementation.
 
 The code-worker benchmark selects Terra-high implementer and Luna-max reviewer.
 The registered profiles are loaded after restart. Machine-resolved workspace
-tickets protect isolated worktrees. A dedicated Luna-high External Review
-Operator owns Pro browser transport and brokers the metadata sentinel for the
-Luna-low monitor; PM only dispatches the pushed question and receives the
-operator's exact-raw terminal notification. Every cross-task send explicitly
+tickets protect isolated worktrees. Research Operations Manager owns Agentify
+Pro transport and exact raw archival. Every cross-task send explicitly
 passes the assignment-current target model and effort. These operational
 changes consume no conclusion-bearing iteration. Continue the G33 design audit
 under the remaining 13-iteration grant.

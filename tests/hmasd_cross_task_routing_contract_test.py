@@ -45,10 +45,7 @@ PERSISTENT_ROLES = (
     ROOT / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
     ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md",
 )
-PAYLOAD_SURFACES = PERSISTENT_ROLES + (
-    ROOT / ".agents/skills/hmasd-review-round/SKILL.md",
-    ROOT / ".agents/skills/hmasd-review-round/agents/openai.yaml",
-)
+PAYLOAD_SURFACES = PERSISTENT_ROLES
 
 
 def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
@@ -244,25 +241,6 @@ def test_persistent_roles_require_locked_target_settings() -> None:
         assert "does not inspect, select, preserve or restore" not in text
         assert "cross_task_model_thinking_preservation=" not in text
         assert "cross_task_route_guard=" not in text
-
-
-def test_review_registry_is_local_to_operations_manager_transport() -> None:
-    registry = json.loads(
-        (ROOT / "docs/external-review/REVIEWER_CONVERSATIONS.json").read_text(
-            encoding="utf-8"
-        )
-    )
-    contract = registry["transport_contract"]
-    assert registry["schema_version"] == 38
-    assert contract["transport_owner"] == "research_operations_manager"
-    assert "intertask_transport_contract" not in registry
-    for retired in (
-        "cross_task_routing_skill",
-        "target_identity",
-        "live_settings_probe",
-        "payload_route_settings",
-    ):
-        assert retired not in contract
 
 
 def test_independent_review_operator_routes_only_terminal_methodology_to_wdm() -> None:

@@ -16,7 +16,6 @@ $requiredSkills = @(
     'hmasd-explorer-project-validation',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review',
-    'hmasd-review-round',
     'hmasd-workflow-change-audit') | Sort-Object
 foreach ($required in $requiredSkills) {
     if ($required -notin $skills) { throw "Missing routed workflow Skill: $required" }
@@ -31,7 +30,6 @@ $expectedRoles = @(
     'IMPLEMENTER.md',
     'CODE_PROJECT_MANAGER.md',
     'RESEARCH_OPERATIONS_MANAGER.md',
-    'PRO_RESPONSE_MONITOR.md',
     'INDEPENDENT_RESEARCH_EXPLORER.md',
     'INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
     'RESEARCH_CRITIC.md',
@@ -188,7 +186,6 @@ foreach ($required in @(
     'research_operations_manager_formal_external_review_transport_authority=exclusive',
     'research_operations_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
-    'hmasd-pro-response-monitor',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
     'superpowers_execution=disabled',
@@ -206,7 +203,6 @@ foreach ($required in @(
     'handoff_document_write_trigger=explicit_user_request_only',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_workspace_boundary_guard.py',
-    'scripts/hmasd_pro_response_sentinel.py',
     'cross_task_routing=locked_role_session_model_thinking',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217',
@@ -219,30 +215,24 @@ foreach ($required in @(
 }
 foreach ($entry in @(
     @($agents, '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'),
-    @($operationsRole, 'review_transport_backend_selection=exactly_one_backend_before_submission'),
-    @($operationsRole, 'review_browser_contract_scope=transport_backend_browser_only'),
     @($operationsRole, 'review_transport_agentify_formal_stable_key=hmasd-formal-pro'),
     @($operationsRole, 'review_transport_agentify_explorer_validation_stable_key=hmasd-explorer-validation-pro'),
-    @($operationsRole, 'review_transport_agentify_monitor=forbidden'),
     @($operationsRole, 'review_transport_generation_active_send=forbidden'),
-    @($operationsRole, 'review_transport_recovery_resend_limit=1'),
-    @($operationsRole, 'review_transport_recovery_reauthorization=not_required'),
-    @($workflowDesignManagerRole, 'agentify_transport_recovery_design=minimal_generation_guard'),
+    @($operationsRole, 'review_transport_recovery_rule=.agents/skills/hmasd-agentify-pro-transport/SKILL.md#minimal-recovery'),
     @($workflowDesignManagerRole, 'agentify_transport_real_review_send=forbidden'),
     @($independentReviewRole, 'review_transport_agentify_stable_key=hmasd-independent-research-pro'),
-    @($independentReviewRole, 'review_transport_agentify_monitor=forbidden'),
     @($independentReviewSkill, '$hmasd-agentify-pro-transport'),
     @($agentifyTransportSkill, 'transport_backend'),
     @($agentifyTransportSkill, 'transport_owner'),
     @($agentifyTransportSkill, 'assignment_identity'),
     @($agentifyTransportSkill, 'timeout_ms'),
-    @($agentifyTransportSkill, 'Active generation means wait without sending'),
+    @($agentifyTransportSkill, 'submit --verify-existing'),
+    @($agentifyTransportSkill, 'no recorded user message'),
     @($agentifyTransportSkill, 'resend requires a new user instruction'),
-    @($agentifyTransportContractNormalized, 'agentify_required_commit=3a69613a4363091014733123e3f0cea82c5b76e5'),
+    @($agentifyTransportContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'),
     @($agentifyTransportContractNormalized, 'runtime-only'),
     @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
     @($agentifyTransportContractNormalized, 'sourceDirty'),
-    @($agentifyTransportContractNormalized, 'Retiring the browser monitor or its sentinel is a separate workflow change'),
     @($agentifyTransportScript, 'transport_owner'),
     @($agentifyTransportScript, 'backend_selection_path'),
     @($agentifyTransportScript, 'AGENTIFY_REQUIRED_COMMIT'),
@@ -277,7 +267,6 @@ foreach ($required in @(
     'formal_workflow_authority=none',
     'scientific_authority=none',
     'git_authority=none',
-    'browser_authority=one_separate_registered_external_pro_conversation',
     'write_scope=local_research/pro_reviews_only',
     'formal_review_conversation_access=forbidden',
     'cross_task_routing_skill=hmasd-cross-task-routing',
@@ -301,7 +290,6 @@ foreach ($required in @(
     'local_research/pro_reviews/',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
     'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
-    'one browser-only `hmasd-pro-response-monitor`',
     'complete response verbatim',
     '60_METHODOLOGY_PACKET.md',
     '60_DIRECTION_PACKET.md',
@@ -310,7 +298,7 @@ foreach ($required in @(
     'build_direction_review_input.py batch-next',
     '--batch-manifest',
     'instruction authorizes that immutable list',
-    'At most one batch item',
+    'one item is active',
     '90_TERMINAL_BLOCKER.json',
     'it never treats local research paths as a',
     'Independent Research Explorer',
@@ -663,60 +651,6 @@ foreach ($required in @(
     'operational_recovery_authority=within_existing_user_authorized_scientific_boundary',
     'operational_recovery_reauthorization=not_required_per_attempt',
     'operational_recovery_scientific_iteration_cost=zero',
-    'review_fence_stage_commit=full_40_hex_only',
-    'review_fence_prefix_correction=once_same_conversation_before_assistant_response',
-    'review_fence_correction_question_resubmission=forbidden',
-    'review_fence_monitor_concurrency=one_live',
-    'review_assignment_acceptance=server_visible_main_body_or_verified_attachment_identity',
-    'review_assignment_identity_sources=main_body_exact_fence|verified_attachment_payload',
-    'review_assignment_attachment_validator=.agents/skills/hmasd-review-round/scripts/verify_assignment_attachment_identity.py',
-    'review_assignment_attachment_filename_authority=none',
-    'review_assignment_attachment_unreadable=IDENTITY_UNREADABLE',
-    'review_assignment_observation_fields=client_send_consumed|main_body_fence_visible|attachment_identity_verified|assistant_generation_started|natural_completion_verified',
-    'review_client_send_effect=uncommitted_until_assignment_identity_verified',
-    'review_unpersisted_assignment_recovery=once_same_conversation_exact_assignment_replay',
-    'review_unpersisted_assignment_recovery_eligible=reload_then_exact_url_reopen_both_show_zero_matching_fence',
-    'review_unpersisted_assignment_recovery_prior_server_visible_count=zero',
-    'review_unpersisted_assignment_recovery_client_send_limit=2_assignment_sends_total',
-    'review_unpersisted_assignment_recovery_scientific_iteration_cost=zero',
-    'review_post_error_persistence_recheck=once_observe_only_after_unpersisted_assignment_terminal',
-    'review_post_error_persistence_recheck_send_authority=none',
-    'review_post_error_persistence_recheck_observations=exact_url_history_plus_registered_conversation_search',
-    'review_post_error_persistence_recheck_success=exactly_one_full_fence',
-    'review_post_error_persistence_recheck_zero=REVIEW_TRANSPORT_CLOSED_UNPERSISTED_ASSIGNMENT',
-    'review_post_error_persistence_recheck_uncertain=REVIEW_TRANSPORT_BLOCKED',
-    'review_post_error_persistence_recheck_monitor_before_fence=forbidden',
-    'review_post_error_persistence_recheck_scientific_iteration_cost=zero',
-    'review_user_authorized_assignment_send=once_after_closed_unpersisted_assignment',
-    'review_user_authorized_assignment_send_authority=direct_user_only',
-    'review_user_authorized_assignment_send_package=reuse_exact_existing_package',
-    'review_user_authorized_assignment_send_presend=exact_url_plus_registered_search_both_zero',
-    'review_user_authorized_assignment_send_count=one',
-    'review_user_authorized_assignment_send_postsend=one_snapshot_no_reload',
-    'review_user_authorized_assignment_send_automatic_recovery=forbidden',
-    'review_user_authorized_assignment_send_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_SEND_UNPERSISTED',
-    'review_user_authorized_assignment_send_uncertain=REVIEW_TRANSPORT_BLOCKED',
-    'review_user_authorized_assignment_send_monitor_before_fence=forbidden',
-    'review_user_authorized_assignment_send_scientific_iteration_cost=zero',
-    'review_user_authorized_assignment_resend=once_after_closed_user_authorized_send',
-    'review_user_authorized_assignment_resend_authority=direct_user_only',
-    'review_user_authorized_assignment_resend_package=reuse_exact_existing_package',
-    'review_user_authorized_assignment_resend_presend=exact_url_plus_registered_search_both_zero',
-    'review_user_authorized_assignment_resend_count=one',
-    'review_user_authorized_assignment_resend_postsend=one_snapshot_no_reload',
-    'review_user_authorized_assignment_resend_automatic_recovery=forbidden',
-    'review_user_authorized_assignment_resend_zero=REVIEW_TRANSPORT_CLOSED_USER_AUTHORIZED_RESEND_UNPERSISTED',
-    'review_user_authorized_assignment_resend_uncertain=REVIEW_TRANSPORT_BLOCKED',
-    'review_user_authorized_assignment_resend_monitor_before_fence=forbidden',
-    'review_user_authorized_assignment_resend_terminal_callback=one_local_ops_return',
-    'review_user_authorized_assignment_resend_pending_callback=forbidden',
-    'review_user_authorized_assignment_resend_scientific_iteration_cost=zero',
-    'review_response_retry=once_same_conversation_after_terminal_attempt',
-    'review_response_retry_eligible=format_nonconforming_or_no_response_after_exhausted_recovery',
-    'review_response_retry_requires_server_visible_original_fence=true',
-    'review_response_retry_unproven_persistence=forbidden',
-    'review_response_retry_submission_limit=2_total',
-    'review_response_retry_scientific_iteration_cost=zero',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only')) {
     if (-not $operationsRole.Contains($required)) { throw "Research Operations Manager role missing: $required" }
 }
@@ -796,7 +730,6 @@ $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
 $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
 $operationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
-$monitorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
 foreach ($required in @(
@@ -908,6 +841,7 @@ foreach ($required in @(
     'workflow_read_only_plan_confirmation=not_required',
     'workflow_material_plan_drift=reconfirmation_required',
     'workflow_collaboration_runtime_authority=none',
+    'workflow_design_mechanical_guarantee_scope=irreversible_external_actions_only', 'workflow_design_retry_recoverable_failure_mechanism=forbidden', 'workflow_design_single_mechanism_line_budget=100', 'workflow_design_single_mechanism_terminal_state_budget=3', 'workflow_design_new_mechanism_requires_named_deletion=true', 'workflow_design_net_line_growth_default=negative_or_zero', 'workflow_design_incident_to_mechanism_promotion_threshold=2_recurrences', 'workflow_design_single_incident_response=root_cause_fix_plus_note_only', 'workflow_design_rule_single_source=one_defining_file_others_point', 'workflow_design_role_file_rule_duplication=forbidden', 'workflow_design_sha256_whitelist=archived_response_integrity_only', 'workflow_design_recovery_path_line_share=must_not_exceed_normal_path',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
@@ -957,10 +891,6 @@ foreach ($required in @(
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'passes the locked target session, model and thinking',
-    'review_monitor_assignment=one_mechanical_receipt_per_sentinel',
-    'review_monitor_watch_call_limit_seconds=45',
-    'review_monitor_total_response_deadline=none',
-    'review_monitor_watch_expiry=PENDING',
     'review_transport_operational_error=automatic_safe_recovery',
     'review_transport_blocked=only_after_safe_recovery_exhausted_and_irreversible_risk_remains',
     'review_transport_misclassification_correction=append_only')) {
@@ -1082,17 +1012,6 @@ foreach ($required in @(
     'override_authority=user_only_for_one_named_boundary')) {
     if (-not $complexity.Contains($required)) { throw "Complexity policy missing: $required" }
 }
-foreach ($required in @(
-    'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=registered_transport_owner_brokered_jsonl_sentinel',
-    'browser_authority=none',
-    'progress_notifications=forbidden',
-    '--assignment-receipt <absolute-receipt-json>',
-    'not the Pro response deadline',
-    'answer_now_activated=false')) {
-    if (-not $monitorRole.Contains($required)) { throw "Monitor role missing: $required" }
-}
-
 if (Test-Path -LiteralPath (Join-Path $repo 'docs/project/EXTERNAL_REVIEW_PIPELINE.md')) {
     throw 'Stale multi-review pipeline remains on the active line'
 }

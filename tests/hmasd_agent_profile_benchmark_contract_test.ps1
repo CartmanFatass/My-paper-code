@@ -186,37 +186,6 @@ foreach ($required in @(
     }
 }
 
-$monitorProfile = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.codex/agents/hmasd-pro-response-monitor.toml')
-$monitorRole = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/PRO_RESPONSE_MONITOR.md')
-foreach ($required in @(
-    'name = "hmasd-pro-response-monitor"',
-    'model = "gpt-5.6-luna"',
-    'model_reasoning_effort = "low"',
-    'metadata-only JSONL sentinel',
-    'no browser authority',
-    'Never activate Answer now',
-    'Return exactly one final')) {
-    if (-not $monitorProfile.Contains($required)) {
-        throw "Pro monitor profile missing: $required"
-    }
-}
-foreach ($required in @(
-    'callable_agent_type=hmasd-pro-response-monitor',
-    'observation_mode=registered_transport_owner_brokered_jsonl_sentinel',
-    'terminal_notification_count=exactly_one',
-    'answer_now_activated=false')) {
-    if (-not $monitorRole.Contains($required)) {
-        throw "Pro monitor role missing: $required"
-    }
-}
-if (-not $config.Contains('[agents."HMASDProResponseMonitor"]') -or
-    -not $config.Contains(
-        'config_file = "./agents/hmasd-pro-response-monitor.toml"')) {
-    throw 'Pro response monitor is not registered'
-}
-
 $catalogMatch = [regex]::Match(
     $config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
 if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }

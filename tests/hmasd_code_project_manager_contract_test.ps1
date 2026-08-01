@@ -153,7 +153,6 @@ $operationsRequired = @(
     'Code Project Manager owns the complete repair and execution-readiness loop',
     'new pushed `CODE_ACCEPTED` commit and matching receipt',
     'does not shuttle partial fixes between preflights',
-    'Use `$hmasd-review-round` directly in this task',
     'Code Project Manager',
     'Workflow Design Manager'
 )
@@ -806,7 +805,6 @@ $parentContracts = @{
     '.agents/roles/REVIEWER.md' = 'parent=code_project_manager'
     '.agents/roles/VERIFIER.md' = 'parent=code_project_manager'
     '.agents/roles/EXPERIMENT_OPERATOR.md' = 'parent=research_operations_manager'
-    '.agents/roles/PRO_RESPONSE_MONITOR.md' = 'parent=registered_pro_transport_owner'
 }
 foreach ($entry in $parentContracts.GetEnumerator()) {
     $text = Get-Content -Raw -LiteralPath (Join-Path $repo $entry.Key)

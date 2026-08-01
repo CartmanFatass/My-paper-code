@@ -195,11 +195,3 @@ machine-resolved by `scripts/hmasd_workspace_ticket.py`:
 
 The focused harness tests cover correct resolution without child Git,
 cross-UUID substitution, path traversal, base mismatch and out-of-scope writes.
-The workspace-ticket and Pro-sentinel focused package passes 7 tests; the
-ticket-only subset passes 3 tests.
-
-The Pro monitor's separate in-app-browser binding defect is repaired at the
-workflow boundary rather than retried. PM now brokers metadata-only bounded
-observations through `scripts/hmasd_pro_response_sentinel.py`; Luna-low watches
-the append-only sentinel and reports only `COMPLETE` or `ERROR`. This preserves
-natural-completion checks and makes `Answer now` unreachable to the child.

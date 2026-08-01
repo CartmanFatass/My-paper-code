@@ -500,7 +500,6 @@ def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_h
     pro_reviews.mkdir(parents=True)
     review = pro_reviews / "audit-1"
     review.mkdir()
-    sentinel = review / "sentinel.jsonl"
     packet = review / "60_METHODOLOGY_PACKET.md"
     packet.write_text("packet\n", encoding="utf-8")
 
@@ -522,33 +521,6 @@ def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_h
         ),
         "outside the writable scope",
     )
-    sentinel_command = (
-        f'C:/Python/python.exe "{repo}/scripts/hmasd_pro_response_sentinel.py" init '
-        f'--state "{sentinel}" --conversation-id c1 --fence-identity f1'
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": sentinel_command},
-            session_id="review-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/scripts/hmasd_pro_response_sentinel.py" init '
-                    f'--state "{repo / "outside.jsonl"}" --conversation-id c1 --fence-identity f1'
-                )
-            },
-            session_id="review-session",
-        ),
-        "use a registered research script or apply_patch",
-    )
     handoff_command = (
         f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-cross-task-routing/scripts/'
         f'hmasd_cross_task_payload.py" --repo "{repo}" write --label methodology '
@@ -563,10 +535,13 @@ def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_h
         )
         is None
     )
+    wrapper = f'C:/Python/python.exe "{repo}/.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py" submit'
+    assert invoke(repo, "shell_command", {"command": f'{wrapper} --request "{review / "request.json"}" --receipt "{review / "receipt.json"}"'}, session_id="review-session") is None
+    assert_denied(invoke(repo, "shell_command", {"command": f'{wrapper} --request "{review / "request.json"}" --receipt "{repo / "outside.json"}"'}, session_id="review-session"), "use a registered research script or apply_patch")
     for basename in ("verify_pro_review_boundary.ps1", "render_review_fence.ps1"):
         command = (
             'powershell -ExecutionPolicy Bypass -File '
-            f'"{repo}/.agents/skills/hmasd-review-round/scripts/{basename}"'
+            f'"{repo}/.agents/skills/hmasd-agentify-pro-transport/scripts/{basename}"'
         )
         assert (
             invoke(
