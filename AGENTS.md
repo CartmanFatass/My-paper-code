@@ -215,14 +215,9 @@ other direction and does not protect you.
 design document, a review question, `CURRENT_WORK.md` — spot-verify it against
 the repository yourself.** Cite what you checked.
 
-Adopted 2026-07-27 after a sweep returned six findings and one incidental claim.
-Three citations were verified and held; the unverified one was wrong — a
-documented modelling choice reported as a defect. Filing it would have sent an
-implementer to "fix" a deliberate semantic. Over-accepting a plausible finding is
-the same failure as under-checking a test.
-
-Verify the load-bearing ones, not every line. A finding that changes what someone
-does next is load-bearing.
+Adopted after the one unverified citation in a sweep turned out to be a
+documented modelling choice reported as a defect. Verify the load-bearing ones,
+not every line: a finding that changes what someone does next is load-bearing.
 
 ## Measure a rate before claiming a cause
 
@@ -237,17 +232,10 @@ A search that returns nothing is evidence about the search until you have shown
 the search works. **Test the method against something you know is present, then
 report the negative.**
 
-Measured twice in one day, 2026-07-29. A transport pass concluded "Chrome was
-removed from this machine mid-session" after `chrome.exe` was absent from every
-standard location — Chrome had never been installed, the browser was Edge, and
-the search followed a `chrome://` URL scheme to the wrong executable name. Hours
-later the corrected check reported Edge missing too, because
-`"$env:ProgramFiles(x86)\..."` is not how PowerShell expands that variable; it
-needs `${env:ProgramFiles(x86)}`.
-
-The first absence became a written conclusion that the runtime could not be
-restarted, which was false and blocked the round longer than the actual fault
-did. **A negative result inherits every defect of the query that produced it.**
+Measured twice in one day: a wrong executable name and a wrong env-var
+expansion each produced a confident false absence, one of which became a
+written conclusion that blocked a round longer than the actual fault did. **A
+negative result inherits every defect of the query that produced it.**
 
 ## Keep a review-bound commit minimal
 
@@ -267,17 +255,13 @@ contracts do not hold. **Repair the cause, not the assertion.** Its
 `--no-verify` escape is for a user-directed override, not for unblocking
 yourself; a bypassed guard reads as covered forever after.
 
-Two mechanical facts that cost a retry each on 2026-07-29:
-
-- **The drift guard checks that `HEAD` is reachable from the remote**, so a
-  guarded commit needs its *parent* pushed first. Push, then commit the next
-  change. A first attempt that fails this way is not a broken gate.
-- **Never pass a multi-line commit message through a PowerShell here-string.**
-  Any `"` or `<` inside it is reparsed by the shell and the commit dies with
-  `pathspec ... did not match any file`. Write the message to a scratchpad file
-  and use `git commit -F <file>`, or pass several `-m` flags. This is the same
-  quoting hazard the Bash/PowerShell split creates everywhere in this
-  repository.
+One mechanical fact that costs a retry: **never pass a multi-line commit
+message through a PowerShell here-string** — embedded `"` or `<` is reparsed
+by the shell and the commit dies with `pathspec ... did not match any file`.
+Write the message to a scratchpad file and use `git commit -F <file>`.
+(The old parent-pushed-first requirement is gone: since 2026-08-01 the review
+contract probes preflight with `origin/<branch>`, so only an actual round
+submission requires the push.)
 
 ## External Pro — see `$hmasd-review-round`
 
@@ -362,13 +346,9 @@ subagent, and a child reading tier tables it cannot act on is noise at best.
   go green, and report both. A repair nobody watched fail is not a repair.
 - Repeat the in-band waiting rule in the brief. Children stall on this
   specifically and repeatedly.
-- **A worktree does not arrive on your branch.** `isolation: "worktree"` checked
-  out `4866eb4e` — an unrelated line — for a sweep of `untied-k` on 2026-07-27.
-  The child noticed, reset to the branch under test and said so, which is the
-  only reason its findings mean anything. Tell every worktree child to report the
-  commit it actually ran at, and treat a report without one as unverified: a
-  mutation sweep on the wrong tree returns confident findings about code nobody
-  is running.
+- **A worktree does not arrive on your branch** (measured: one arrived on an
+  unrelated line). Tell every worktree child to report the commit it actually
+  ran at, and treat a report without one as unverified.
 
 ## Sizing a task and writing a brief — see `$hmasd-task-design`
 
@@ -414,38 +394,20 @@ waste it avoids.
 Before assigning a duty, check that the definition's tools can perform it. A duty
 without an affordance does not produce a refusal — **it produces an invention.**
 
-On 2026-07-27 `hmasd-review-monitor` was told to watch until generation stopped
-and to report elapsed time, holding four read-only browser tools: no `computer`,
-so no `wait`; no Bash, so no `sleep`. It returned after 112 seconds of runtime
-reporting "18 minutes elapsed over 12 checks." The page observation was real; the
-duration was fabricated to satisfy a report format that demanded a number.
-
-The repair is never to widen the grant until the duty fits — granting `computer`
-would have bought a wait at the cost of click and type, which is exactly what
-makes that role unable to submit or curtail. **Split the duty instead:** you keep
-the part your tools can do (pacing, deciding, waiting), the child keeps the part
-its tools can do (looking once, describing).
-
-The same shape applies to any long watch. A child with no clock cannot report
-duration; a child with no sleep cannot span hours. Ask it for observations and
-counts, never for elapsed time.
+A monitor with no clock and no sleep, told to watch until done and report
+elapsed time, fabricated the duration to satisfy the report format. The repair
+is never to widen the grant until the duty fits — **split the duty instead**:
+you keep what your tools can do (pacing, deciding, waiting), the child keeps
+what its tools can do (looking once, describing). Ask any watch-shaped child
+for observations and counts, never for elapsed time.
 
 ### And a specification must be satisfiable by the library that implements it
 
-The sibling failure, measured 2026-07-29. An R5 implementation binding registered
-a tie-break — "lexicographic by `(duty_id, uav_id)` among optimal solutions" —
-and named `scipy.optimize.linear_sum_assignment` as the solver. **The solver does
-not provide that property.** On a symmetric ring at `n = 4`, where every
-single-rotation derangement costs the same to the last digit, it returns an
-optimal assignment that is not the lexicographically smallest one.
-
-Nothing was wrong with the intent and nothing was wrong with the solver. The
-binding simply asserted a guarantee its own tool never made, and would have
-produced an artifact that disagreed with its own reproducibility claim.
-
-**Before registering a binding, name the component that enforces it and check
-that it does.** "The solver is deterministic" is not the same claim as "the
-solver returns the solution I registered."
+The sibling failure: a registered tie-break named a solver that does not
+provide the registered property, so the binding asserted a guarantee its own
+tool never made. **Before registering a binding, name the component that
+enforces it and check that it does.** "The solver is deterministic" is not the
+same claim as "the solver returns the solution I registered."
 
 ## Construct the degenerate case; do not wait to sample it
 
@@ -622,18 +584,12 @@ completed code design** which returns the convergence decision, and the result
 submission that becomes the next workflow's first touchpoint. "As many follow-ups
 as convergence needs" scopes to *that* check, not to the workflow at large.
 
-Touchpoint 2 was described as a *review of the code plan* until 2026-07-30, which
-invited the plan to carry scientific argument for Pro to weigh. It does not. It
-asks one question — does this design conform to the decision you already issued —
-and the answer closes it. See **The question after a code design is a conformance
-question**.
-
-When new material appears after a round has closed — a sweep finding, a
-measurement, a defect — it does **not** justify a follow-up turn. Carry it into
-the next workflow's conformance check, where it is context. On 2026-07-27
-a closed result round was about to receive an extra turn carrying mutation-sweep
-findings; that would have been a fourth access nobody budgeted, and endless
-ping-pong is the specific failure this rule prevents.
+Touchpoint 2 asks one question — does this design conform to the decision you
+already issued — and the answer closes it. See **The question after a code
+design is a conformance question**. New material appearing after a round closes
+— a sweep finding, a measurement, a defect — never justifies a follow-up turn;
+it is context for the next workflow's conformance check. An unbudgeted fourth
+access is the ping-pong this rule exists to prevent.
 
 **Pro converges; the two sides are not equals here** (user ruling 2026-07-27).
 After Pro checks the Project Manager's completed code design for conformance it
@@ -674,12 +630,8 @@ round, which stays narrow: that round takes claim-defining decisions only, and
 endless implementation detail stays out of it. Scoping one round is not narrowing
 Pro's authority.
 
-On 2026-07-25 D7.2B stalled behind exactly this. Pro's ruling permitted a supplied
-primitive executor for the positive control; three stale validation guards made
-that configuration unreachable; and the blocker was recorded as *"carries as one
-question in the next round"*. Nothing scientific was at stake in any of the three
-— they were keyed to a package flag and to a backend pin, not to what they
-protected.
+D7.2B once stalled behind exactly this: three stale validation guards, nothing
+scientific at stake, recorded as a question for the next round.
 
 **A blocker this conversation wrote is not authority over this conversation.** A
 document records decisions; it does not create permission gates. When a note says
@@ -797,12 +749,10 @@ reports `COMPUTE_BUSY` for our own in-flight work too. Read the reported
 `cpu_avg_pct` well under `cpu_ceiling` with `heavy_python = 1` is the signature of
 the second case.
 
-**No script can detach a run here — only the harness can.** Measured 2026-07-28:
-`Start-Process` from the PowerShell tool and `nohup` issued from the PowerShell
-tool both leave a child that is dead within seconds; `nohup … &` issued through
-the **Bash tool with background enabled** survives. That asymmetry is the cause of
-both orphaned runs on 2026-07-27, where an empty output directory was reported as
-"build complete".
+**No script can detach a run here — only the harness can.** Measured:
+`Start-Process` and `nohup` from the PowerShell tool both leave a child dead
+within seconds; only `nohup … &` through the **Bash tool with background
+enabled** survives. That asymmetry produced both orphaned runs of 2026-07-27.
 
 ```powershell
 scripts/launch_and_watch_run.ps1 -Mode Preflight -ScriptArgs '--smoke' -Tag <tag>
@@ -908,18 +858,10 @@ precedence change only at an explicitly accepted scientific boundary.
 ## Document ownership and update triggers
 
 A document with no live owner drifts, and an owner with no triggering event
-drifts almost as fast. `IMPLEMENTATION_PLAN.md` proved this twice and was deleted
-2026-07-27. It sat twelve hours stale on 2026-07-24 — naming a superseded design
-and an iteration budget of 8 against a real 20 — was repaired, then went stale
-again for three days across two contract freezes and a MISMATCH ruling, the whole
-time pointed at by `AGENT_CONTEXT.md` as the frozen executable contract.
-
-The lesson is not that it needed a better owner or another trigger. **It was a
-third copy of a boundary that `CURRENT_WORK.md` and the frozen design already
-carried**, and a third copy drifts no matter who owns it. The repair was deletion.
-
-**An owner must be a live role.** Its recorded owner was "Fable", an actor in no
-roster and no charter; naming a retired actor is the same as naming nobody.
+drifts almost as fast. `IMPLEMENTATION_PLAN.md` proved it twice and was deleted:
+it was a third copy of a boundary two other documents already carried, and a
+third copy drifts no matter who owns it — the repair was deletion. **An owner
+must be a live role**; naming a retired actor is the same as naming nobody.
 
 | Document | Updated by | Must move when |
 |---|---|---|

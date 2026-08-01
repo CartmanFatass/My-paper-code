@@ -1,24 +1,12 @@
 """Run one paired negative: perturb a guard, prove it goes red, restore.
 
-A guard test that has never been watched failing is indistinguishable from a
-comment. This repository requires every new assertion to be seen red under a
-change that breaks exactly the property it names -- and doing that by hand is
-the most-repeated mechanical sequence in the workflow: read the line, write the
-mutation, read it back off disk, run the suite, interpret the result, restore.
+By-hand versions of this sequence produced two false results (a mutation that
+never reached disk read as green; a collection error recorded as red), so this
+tool reads the mutated region back off disk before pytest starts and reports a
+collection error as INCONCLUSIVE, never as a result.
 
-It has failed by hand twice, both times producing a false result:
-
-  * a heredoc invoked bare `python`, which on this machine is a WindowsApps stub.
-    The mutation never reached disk and the suite reported 183 passed -- read as
-    "the guard is fine" when nothing had been perturbed at all.
-  * a multi-line replacement rewrote only the first line, so the suite died
-    during COLLECTION. An error is not a red test, and it was recorded as one.
-
-Both are eliminated here by construction: the mutated region is read back off
-disk and printed before pytest starts, and a run that errors during collection
-is reported as INCONCLUSIVE, never as a passing paired negative.
-
-Usage, either address the region by line or by exact text:
+Usage, by line or by exact text (--old must match exactly once or nothing is
+written; it is the safer form for anything spanning lines):
 
     paired_negative.py --file scripts/x.py --line 310 \\
         --new "    if False:  # MUTATION" --test tests/x_test.py -k sentinel
@@ -26,12 +14,8 @@ Usage, either address the region by line or by exact text:
     paired_negative.py --file scripts/x.py \\
         --old "if not complete:" --new "if False:" --test tests/x_test.py
 
-`--old` is the safer form for anything spanning lines: the replacement must
-match exactly once, or nothing is written.
-
-Exit 0 means the guard reddened -- the paired negative PASSED. Exit 1 means it
-stayed green, which is a defect in the guard, not in this script. Exit 2 means
-the run was inconclusive and proved nothing either way.
+Exit 0: guard reddened (paired negative PASSED). Exit 1: stayed green (a
+defect in the guard). Exit 2: inconclusive, proved nothing either way.
 """
 
 from __future__ import annotations
@@ -47,19 +31,10 @@ from pathlib import Path
 
 INTERPRETER = r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
 
-# Terminal colour became a CORRECTNESS concern here. pytest honours FORCE_COLOR
-# even when its output is captured, and this environment sets FORCE_COLOR=3, so
-# its summary lines arrive as "<ESC>[31mFAILED tests/..." and a
-# `startswith("FAILED")` test never matches.
-#
-# MEASURED 2026-07-30: a mutation that genuinely reddened a guard was reported as
-# "the suite stayed GREEN under this mutation" -- this tool told the operator that
-# a working guard was broken. That is the worst direction for THIS tool to fail
-# in: it invites repairing correct code, and it teaches distrust of the one
-# checker that makes the discipline real.
-#
-# Belt and braces deliberately: the subprocess is told not to colour, AND its
-# output is stripped before parsing. Either alone would have prevented this.
+# This environment sets FORCE_COLOR=3, which pytest honours even when captured,
+# so "FAILED" arrives ANSI-wrapped and a startswith test never matches (once
+# reported a genuinely red guard as green). The subprocess is told not to
+# colour AND its output is stripped before parsing.
 _ANSI = re.compile(chr(27) + r"\[[0-9;]*[A-Za-z]")
 
 
