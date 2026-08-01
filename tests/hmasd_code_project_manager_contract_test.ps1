@@ -105,6 +105,8 @@ $codeRequired = @(
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
     'passes the locked target session, model and thinking',
+    'already-live exact stable-key tab',
+    'permits no fallback page',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',

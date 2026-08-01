@@ -98,6 +98,45 @@ class AgentifyTransportTest(unittest.TestCase):
     def tearDown(self) -> None:
         self.temp.cleanup()
 
+    def _write_live_agentify_state(self) -> Path:
+        state_dir = self.root / "agentify-state"
+        state_dir.mkdir(exist_ok=True)
+        (state_dir / "state.json").write_text(
+            json.dumps(
+                {
+                    "port": 43111,
+                    "serverId": "server-1",
+                    "sourceCommit": MODULE.AGENTIFY_REQUIRED_COMMIT,
+                    "sourceDirty": False,
+                }
+            ),
+            encoding="utf-8",
+        )
+        (state_dir / "token.txt").write_text("token", encoding="utf-8")
+        return state_dir
+
+    def _live_tab(self, **updates: object) -> dict[str, object]:
+        tab: dict[str, object] = {
+            "id": "tab-1",
+            "key": self.request["stable_key"],
+            "vendorId": self.request["provider"],
+            "url": self.request["conversation_url"],
+        }
+        tab.update(updates)
+        return tab
+
+    def _idle_status(self, **updates: object) -> dict[str, object]:
+        status: dict[str, object] = {
+            "ok": True,
+            "tabId": "tab-1",
+            "blocked": False,
+            "tabs": [self._live_tab()],
+            "activeQuery": None,
+            "runtime": {"activeQueries": []},
+        }
+        status.update(updates)
+        return status
+
     def test_complete_receipt_and_visible_answer_now_without_activation_pass(self) -> None:
         result = MODULE.validate_receipt(self.receipt, self.validated)
         self.assertEqual(result["assistantMessageId"], "assistant-1")
@@ -317,6 +356,120 @@ class AgentifyTransportTest(unittest.TestCase):
 
         with self.assertRaisesRegex(MODULE.TransportError, "agentify_state_dir_not_absolute"):
             MODULE.call_agentify(self.validated, state_dir=Path("relative-state"), verify_existing=True)
+
+    def test_call_agentify_reuses_exact_preexisting_idle_tab_without_page_mutation(self) -> None:
+        state_dir = self._write_live_agentify_state()
+        health = {
+            "ok": True,
+            "serverId": "server-1",
+            "sourceCommit": MODULE.AGENTIFY_REQUIRED_COMMIT,
+            "sourceDirty": False,
+        }
+        calls: list[tuple[str, dict[str, object] | None]] = []
+
+        def fake_http(
+            url: str,
+            *,
+            token: str | None = None,
+            body: dict[str, object] | None = None,
+            timeout_seconds: float = 10.0,
+        ) -> dict[str, object]:
+            del timeout_seconds
+            calls.append((url, body))
+            if url.endswith("/health"):
+                self.assertIsNone(token)
+                return health
+            self.assertEqual(token, "token")
+            if url.endswith("/tabs"):
+                return {"ok": True, "tabs": [self._live_tab()]}
+            if "/status?" in url:
+                self.assertIn("tabId=tab-1", url)
+                return self._idle_status()
+            if url.endswith("/review-query"):
+                self.assertEqual(body["stableKey"], self.request["stable_key"])
+                return {"ok": True, "receipt": self.receipt}
+            self.fail(f"unexpected Agentify endpoint: {url}")
+
+        with mock.patch.object(MODULE, "_http_json", side_effect=fake_http):
+            result = MODULE.call_agentify(self.validated, state_dir=state_dir, verify_existing=False)
+        self.assertEqual(result, self.receipt)
+        urls = [url for url, _ in calls]
+        self.assertEqual(len(urls), 4)
+        self.assertFalse(any("/tabs/create" in url or "/tabs/close" in url or "/navigate" in url for url in urls))
+        self.assertTrue(urls[-1].endswith("/review-query"))
+
+    def test_preexisting_tab_inventory_failures_never_reach_review_query(self) -> None:
+        cases = [
+            ([], "agentify_preexisting_tab_missing"),
+            ([self._live_tab(), self._live_tab(id="tab-2")], "agentify_preexisting_tab_ambiguous"),
+            ([self._live_tab(url="https://chatgpt.com/c/other")], "agentify_preexisting_tab_identity_mismatch"),
+            ([self._live_tab(vendorId="gemini")], "agentify_preexisting_tab_identity_mismatch"),
+        ]
+        for tabs, error in cases:
+            with self.subTest(error=error), mock.patch.object(
+                MODULE, "_http_json", return_value={"ok": True, "tabs": tabs}
+            ) as http_json, self.assertRaisesRegex(MODULE.TransportError, error):
+                MODULE._require_preexisting_review_tab("http://127.0.0.1:43111", "token", self.validated)
+            http_json.assert_called_once_with(
+                "http://127.0.0.1:43111/tabs", token="token", timeout_seconds=10.0
+            )
+
+    def test_preexisting_tab_status_change_or_busy_state_fails_closed(self) -> None:
+        stale = self._idle_status(tabs=[self._live_tab(url="https://chatgpt.com/c/other")])
+        blocked = self._idle_status(blocked=True)
+        busy_direct = self._idle_status(activeQuery={"tabId": "tab-1"})
+        busy_runtime = self._idle_status(
+            runtime={"activeQueries": [{"tabId": "other", "scope": f"key:{self.request['stable_key']}"}]}
+        )
+        for status, error in [
+            (stale, "agentify_preexisting_tab_status_identity_mismatch"),
+            (blocked, "agentify_preexisting_tab_status_invalid"),
+            (busy_direct, "agentify_preexisting_tab_busy"),
+            (busy_runtime, "agentify_preexisting_tab_busy"),
+        ]:
+            with self.subTest(error=error), mock.patch.object(
+                MODULE,
+                "_http_json",
+                side_effect=[{"ok": True, "tabs": [self._live_tab()]}, status],
+            ) as http_json, self.assertRaisesRegex(MODULE.TransportError, error):
+                MODULE._require_preexisting_review_tab("http://127.0.0.1:43111", "token", self.validated)
+            self.assertEqual(http_json.call_count, 2)
+
+    def test_call_agentify_blocked_tab_fails_before_review_query(self) -> None:
+        state_dir = self._write_live_agentify_state()
+        health = {
+            "ok": True,
+            "serverId": "server-1",
+            "sourceCommit": MODULE.AGENTIFY_REQUIRED_COMMIT,
+            "sourceDirty": False,
+        }
+        calls: list[str] = []
+
+        def fake_http(
+            url: str,
+            *,
+            token: str | None = None,
+            body: dict[str, object] | None = None,
+            timeout_seconds: float = 10.0,
+        ) -> dict[str, object]:
+            del body, timeout_seconds
+            calls.append(url)
+            if url.endswith("/health"):
+                self.assertIsNone(token)
+                return health
+            self.assertEqual(token, "token")
+            if url.endswith("/tabs"):
+                return {"ok": True, "tabs": [self._live_tab()]}
+            if "/status?" in url:
+                return self._idle_status(blocked=True)
+            self.fail(f"blocked tab reached forbidden endpoint: {url}")
+
+        with mock.patch.object(MODULE, "_http_json", side_effect=fake_http), self.assertRaisesRegex(
+            MODULE.TransportError, "agentify_preexisting_tab_status_invalid"
+        ):
+            MODULE.call_agentify(self.validated, state_dir=state_dir, verify_existing=False)
+        self.assertEqual(len(calls), 3)
+        self.assertFalse(any(url.endswith("/review-query") for url in calls))
 
     def test_recovery_refuses_resend_when_failed_operation_has_user_message(self) -> None:
         state_dir = self.root / "agentify-state"; state_dir.mkdir()

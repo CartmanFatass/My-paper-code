@@ -25,6 +25,16 @@ Read the runtime contract before use. The wrapper requires the live Agentify
 `sourceDirty=false`; missing or conflicting source identity blocks before a
 send.
 
+The transport is existing-tab-only. Before every `submit`, the wrapper reads
+Agentify's authenticated `/tabs` and scoped `/status` snapshots and requires
+exactly one already-live tab whose stable key, provider and conversation URL
+match the immutable request and whose query state is idle. The wrapper never
+creates, closes, shows, activates, navigates, refreshes, replaces or rebinds a
+tab. A missing, duplicate, blocked, busy or identity-mismatched tab fails before
+`/review-query`; no recovery path may open a page. The owning workflow must
+therefore keep its registered tab already live and idle outside the transport
+operation; this does not authorize page activation or upkeep.
+
 The request must provide a fixed role-owned `stable_key`:
 
 ```text
@@ -92,8 +102,9 @@ exactly `schema_version=1`, the same `assignment_identity`, and
 operation record and is never overwritten. `assignment_identity` must occur in
 the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000 inclusive. Agentify
 owns its durable ledger and send idempotency; the HMASD wrapper validates the
-request, calls Agentify, and writes a new role-owned receipt. The wrapper does
-not click UI controls. No automatic
+request, proves the exact pre-existing tab is idle, calls Agentify, and writes
+a new role-owned receipt. The wrapper does not click UI controls or mutate tab
+state. No automatic
 Continue, Retry, ResponseRetry, Answer now, duplicate submission of the same operation,
 cross-conversation fallback or response synthesis is allowed. A conflicting existing
 idempotency record or unavailable conversation terminates as a
@@ -109,8 +120,10 @@ user instruction. The owning parent is CPM for project reviews and Explorer for
 independent direction reviews.
 Each child operation submits at most once; the review assignment permits the
 initial operation plus one fresh resend. The parent counts those operations
-from the existing request records without a hash or new ledger. Ordinary recovery never
-launches a synthetic smoke.
+from the existing request records without a hash or new ledger. Ordinary
+recovery never launches a synthetic smoke, creates a page or substitutes
+another tab. A fresh operation still requires the same pre-existing exact tab;
+if it is absent or wrong, recovery stops as a transport blocker.
 
 After the fresh resend fails, return one terminal technical transport defect to
 the owning parent. WDM is not a recovery approver; it is involved only if the
@@ -148,8 +161,10 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` returns one terminal operation identity. `--verify-existing` probes the
-same failed operation for a recorded user message and never sends.
+`submit` first proves the pre-existing exact tab identity and idle state, then
+returns one terminal operation identity. `--verify-existing` probes the same
+failed operation for a recorded user message and never sends. Neither mode may
+create, close, show, activate, navigate, refresh or replace a page.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `

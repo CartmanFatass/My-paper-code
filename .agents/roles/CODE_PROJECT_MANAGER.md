@@ -196,6 +196,12 @@ interrupt, resend or use Answer now. Only clear absence of generation and
 submitted user content permits one fresh resend assignment. No prompt hash,
 per-file hash or byte count is a workflow identity gate.
 
+Every Pro transport assignment names one already-live exact stable-key tab.
+Neither CPM nor its operations child creates, closes, shows, activates,
+navigates, refreshes, replaces or rebinds a page as part of transport or
+recovery. A missing, duplicate, blocked, busy or identity-mismatched tab fails
+before submission and permits no fallback page.
+
 ## Workflow changes and Git
 
 Code Project Manager may request a workflow-design change directly from the

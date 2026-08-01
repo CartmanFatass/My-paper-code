@@ -62,6 +62,12 @@ operation identity, exact item root and archive path. Use only the registered
 completion and archive the exact response. Do not formulate, summarize,
 interpret or repair the scientific question or answer.
 
+Use only the assignment's already-live exact Agentify tab. Never create, close,
+show, activate, navigate, refresh, replace or rebind a page. If the registered
+stable-key tab is missing, duplicated, blocked, busy or does not exactly match
+the provider and conversation URL, return the pre-send blocker once; do not
+attempt page recovery or another tab.
+
 If a readable response or active generation exists, wait; never refresh,
 interrupt, resend or use Answer now. On ambiguity or error, return the observed
 facts once. A later recovery is a new CPM assignment and is not chosen here.

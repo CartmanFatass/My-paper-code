@@ -37,6 +37,31 @@ foreach ($staleGate in @('resend requires a new user instruction', 'only no reco
         throw "Agentify transport retains a per-resend user gate: $staleGate"
     }
 }
+foreach ($entry in @(
+    @(($cpm -replace '\s+', ' '), 'already-live exact stable-key tab'),
+    @(($projectOperations -replace '\s+', ' '), "assignment's already-live exact Agentify tab"),
+    @($agentifySkillNormalized, 'The transport is existing-tab-only'),
+    @($agentifySkillNormalized, 'fails before `/review-query`'),
+    @($agentifyContractNormalized, 'transport_tab_mutation=forbidden'),
+    @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
+    @($agentifyScript, '_require_preexisting_review_tab(base, token, request)'),
+    @($agentifyScript, 'agentify_preexisting_tab_missing'),
+    @($agentifyScript, 'agentify_preexisting_tab_busy'))
+) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Existing-tab-only Agentify contract missing: $($entry[1])"
+    }
+}
+$tabPreflightCall = $agentifyScript.IndexOf('_require_preexisting_review_tab(base, token, request)')
+$reviewQueryCall = $agentifyScript.IndexOf('f"{base}/review-query"')
+if ($tabPreflightCall -lt 0 -or $reviewQueryCall -lt 0 -or $tabPreflightCall -ge $reviewQueryCall) {
+    throw 'Existing-tab proof does not precede Agentify review-query'
+}
+foreach ($forbiddenEndpoint in @('/tabs/create', '/tabs/close', '/navigate')) {
+    if ($agentifyScript.Contains($forbiddenEndpoint)) {
+        throw "HMASD Agentify wrapper mutates page state: $forbiddenEndpoint"
+    }
+}
 foreach ($required in @(
     'review_scope=explicit_user_authorized_methodology_audit_only',
     'Direction review is forbidden in this persistent task')) {

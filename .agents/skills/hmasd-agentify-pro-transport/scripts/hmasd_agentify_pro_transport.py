@@ -13,7 +13,7 @@ import sys
 import tempfile
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlparse
+from urllib.parse import urlencode, urlparse
 from urllib.request import Request, urlopen
 
 
@@ -240,6 +240,65 @@ def _http_json(url: str, *, token: str | None = None, body: dict[str, Any] | Non
     return value
 
 
+def _require_preexisting_review_tab(base: str, token: str, request: dict[str, Any]) -> str:
+    """Prove that submit can reuse one exact idle tab without mutating tab state."""
+    inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
+    tabs = inventory.get("tabs")
+    if inventory.get("ok") is not True or not isinstance(tabs, list):
+        _fail("agentify_preexisting_tab_inventory_invalid")
+    matches = [
+        tab
+        for tab in tabs
+        if isinstance(tab, dict) and tab.get("key") == request["stable_key"]
+    ]
+    if not matches:
+        _fail("agentify_preexisting_tab_missing")
+    if len(matches) != 1:
+        _fail("agentify_preexisting_tab_ambiguous")
+    tab = matches[0]
+    tab_id = _required_text(tab.get("id"), "agentify_preexisting_tab_id", maximum=512)
+    if tab.get("vendorId") != request["provider"] or tab.get("url") != request["conversation_url"]:
+        _fail("agentify_preexisting_tab_identity_mismatch")
+
+    status = _http_json(
+        f"{base}/status?{urlencode({'tabId': tab_id})}",
+        token=token,
+        timeout_seconds=10.0,
+    )
+    status_tabs = status.get("tabs")
+    if (
+        status.get("ok") is not True
+        or status.get("tabId") != tab_id
+        or status.get("blocked") is not False
+        or not isinstance(status_tabs, list)
+    ):
+        _fail("agentify_preexisting_tab_status_invalid")
+    status_matches = [
+        row
+        for row in status_tabs
+        if isinstance(row, dict) and row.get("key") == request["stable_key"]
+    ]
+    if (
+        len(status_matches) != 1
+        or status_matches[0].get("id") != tab_id
+        or status_matches[0].get("vendorId") != request["provider"]
+        or status_matches[0].get("url") != request["conversation_url"]
+    ):
+        _fail("agentify_preexisting_tab_status_identity_mismatch")
+    runtime = status.get("runtime")
+    active_queries = runtime.get("activeQueries") if isinstance(runtime, dict) else None
+    if not isinstance(active_queries, list):
+        _fail("agentify_preexisting_tab_runtime_invalid")
+    if status.get("activeQuery") is not None or any(
+        not isinstance(active, dict)
+        or active.get("tabId") == tab_id
+        or active.get("scope") == f"key:{request['stable_key']}"
+        for active in active_queries
+    ):
+        _fail("agentify_preexisting_tab_busy")
+    return tab_id
+
+
 def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: bool) -> dict[str, Any]:
     if not state_dir.is_absolute():
         _fail("agentify_state_dir_not_absolute")
@@ -263,6 +322,7 @@ def call_agentify(request: dict[str, Any], *, state_dir: Path, verify_existing: 
         or health.get("sourceDirty") is not False
     ):
         _fail("agentify_server_identity_mismatch")
+    _require_preexisting_review_tab(base, token, request)
     timeout_seconds = request["timeout_ms"] / 1000.0 + 30.0
     result = _http_json(
         f"{base}/review-query",

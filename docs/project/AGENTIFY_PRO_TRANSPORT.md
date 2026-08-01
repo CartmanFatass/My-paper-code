@@ -11,6 +11,8 @@ agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
 browser_backend=chrome-cdp
 browser_window_policy=one_agentify_process_one_chrome_window
 stable_key_tab_policy=one_live_tab_per_stable_key
+transport_tab_mutation=forbidden
+missing_or_mismatched_tab=fail_before_review_query
 ```
 
 Browser transport is retired; Agentify is the sole External Pro transport.
@@ -29,10 +31,14 @@ The three Code Project Manager keys are workstream-specific and cannot
 substitute for one another.
 After Agentify first persists a stable-key binding, later operations must match
 it; tab navigation cannot rebind or overwrite that durable binding.
-Within one live Agentify process, every operation for the same stable key reuses
-its existing tab. Different stable keys use separate tabs in the same Chrome
-window; an operation never creates a new window merely because it is a new
-review turn. One tab may be recreated after an Agentify or Chrome restart.
+Every transport operation requires exactly one pre-existing live tab for its
+stable key and reuses that exact tab. The wrapper verifies the tab's key,
+provider, conversation URL and idle status through authenticated read-only
+Agentify endpoints before `/review-query`. It never creates, closes, shows,
+activates, navigates, refreshes, replaces or rebinds a page. A missing,
+duplicate, blocked, busy or mismatched tab is terminal for that operation; the
+transport does not recreate it after Agentify or Chrome restart and does not
+fall back to another tab or window.
 Conversation IDs, URLs, model evidence, credentials, authentication material
 and live registrations are runtime-only and must never be committed or placed
 in role/Skill text. The binding is loaded from the local Agentify state at the
@@ -54,24 +60,29 @@ page registry and cannot use a CPM workstream record.
    registered wrapper reads the UTF-8 prompt and writes one new role-owned
    `TRANSPORT_BACKEND.json` plus its matching request.
 2. The immutable selection is reloaded before every send or recovery.
-3. For Agentify, the owner resolves its stable key to one runtime conversation
-   binding and uses the wrapper's `prepare` command to persist the immutable
-   request identity before sending.
-4. Agentify submits at most one exact prompt for that operation. It does not
+3. For Agentify, the owner resolves its stable key to one already-live runtime
+   conversation tab and uses the wrapper's `prepare` command to persist the
+   immutable request identity before sending.
+4. Immediately before submission, the wrapper reads `/tabs` and scoped
+   `/status`; only one exact, unblocked and idle tab permits `/review-query`.
+   These checks perform no page mutation and a failure permits no create,
+   navigation or fallback action.
+5. Agentify submits at most one exact prompt for that operation. It does not
    click `Answer now`, `Continue`, `Retry` or `ResponseRetry`.
-5. The transport validator
+6. The transport validator
    `.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py`
    checks the stable key, conversation, selected model, completion snapshots
    and archived response integrity.
-6. Only a complete validated request/receipt pair permits the owning role's
+7. Only a complete validated request/receipt pair permits the owning role's
    normal raw archival and mechanical intake. The receipt is evidence of transport only;
    it cannot interpret science or authorize code, compute or project state.
 
 An unavailable conversation or incomplete response stops that operation. The
 Minimal recovery rule permits bounded fresh operations inside the same active
 review authority; it never permits a send while generation or a readable
-complete response exists. A transport failure consumes zero scientific
-iterations.
+complete response exists and never permits a new or replacement page. Every
+fresh operation must reuse the same pre-existing exact idle tab. A transport
+failure consumes zero scientific iterations.
 
 ## Minimal recovery
 
