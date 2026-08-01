@@ -134,11 +134,8 @@ skill before the first browser call.
 question, freezes and pushes the boundary, owns registration, submits the fence,
 and **owns the archive decision**.
 
-This replaced a delegated transport child on 2026-07-25. The split that failed was
-handing one role both a long mechanical wait and a precise capture: the wait was
-abandoned twice mid-round, and one archive lost every markdown marker because the
-capture fell back to rendered page text. Waiting and capturing are now separated
-by who does them.
+This replaced a delegated transport child on 2026-07-25; waiting and capturing
+are separated by who does them.
 
 ### Capture may be delegated, but only against a digest bond
 
@@ -176,10 +173,8 @@ and nothing else.** It holds no wait affordance and no clock: the Project Manage
 owns the pacing and dispatches it again when another look is due, starting the
 moment the fence lands. It holds no click, type or write tools, so it
 structurally cannot submit, capture or curtail — it reports one observation and
-the Project Manager acts on it. A wrong report from it is cheap: an early wake
-costs one page read. (The prior wording — "does the waiting" — re-created the
-poll-until-stopped duty that produced a fabricated elapsed-time report on
-2026-07-27; a brief quoting it re-imposes an impossible duty.)
+the Project Manager acts on it. Never brief it with a waiting duty; it has no
+wait affordance, and an imposed one gets satisfied by invention.
 
 Create no standing relay, dispatcher or Monitor. A bounded, single-purpose child
 dispatched for one capture under the digest bond above is not a relay: it holds no
@@ -231,50 +226,21 @@ browser call and requires the user to clear it by hand.
 
 #### When the tab is wedged — replace it, never add to it
 
-A tab can stop being usable. The symptom is specific: **every** script-injecting
-operation — `screenshot`, `read_page`, `find` — times out, the page never reaches
-`document_idle`, and this survives a reload. It is not the same as slow, and it is
-not an empty content pane, which the discovery ladder already handles with one
-wait and one reload.
-
-This is a real state. On 2026-07-25 a conversation holding two very large reviewer
-answers wedged permanently: six reloads of the same tab produced one usable render,
-while a newly created tab on the same conversation rendered immediately. The
-accumulated renderer state was the problem, not the conversation.
-
-The recovery is **replacement, and it is bounded**:
-
-1. try reload-and-wait twice first — that fixes the ordinary hydration case;
-2. **close the wedged tab**, then create one and navigate to the registered URL;
-3. **exactly one tab holds the conversation when you are done.** Verify with
-   `tabs_context_mcp` and close any duplicate.
-
-Two tabs on one conversation is the state this rule exists to prevent, and it is
-just as forbidden when reached by recovery as by carelessness.
-
-A replacement tab **grants nothing**. It does not license a second fence, and it
-resets no state you had established: re-verify fence presence on the new tab
-before any submission, exactly as on a first visit.
-
-**Why this is written down rather than left to judgement.** Before this paragraph
-existed, the prohibition had no escape hatch for a wedged tab, so a transport pass
-that genuinely needed one reasoned its way around the rule — arguing the
-send-verification rationale did not apply because the send was already
-verified — and left two tabs open. The rule was right and unfollowable at the same
-time. A prohibition without an affordance gets argued with; give it the affordance
-and the argument stops.
+Wedged means: **every** script-injecting operation times out, the page never
+reaches `document_idle`, and a reload does not fix it (distinct from the empty
+content pane the discovery ladder handles). Bounded recovery: reload-and-wait
+twice; then close the wedged tab, create one, navigate to the registered URL;
+finish with **exactly one tab** holding the conversation (verify with
+`tabs_context_mcp`). A replacement tab grants nothing — re-verify fence
+presence before any submission, exactly as on a first visit. Two tabs on one
+conversation is forbidden however you got there.
 
 ### Composing multi-line text — a newline is a send
 
-**In this composer, Enter submits.** The `computer` `type` action delivers every
-`\n` in its text as an Enter keypress, so typing a multi-line fence submits it
-one fragment at a time. On 2026-07-24 this chopped a single fence into several
-truncated `CURRENT_REVIEW_ASSIGNMENT` messages, left the reviewer with no usable
-assignment, and cost a round.
-
-`form_input` is listed above but **fails on this composer** — it is a
-contenteditable `DIV`, not a form control, and returns
-`Element type "DIV" is not a supported form input`.
+**In this composer, Enter submits.** `computer` `type` delivers every `\n` as
+an Enter keypress, so typing a multi-line fence submits it one fragment at a
+time (this once cost a round). `form_input` fails on this composer — it is a
+contenteditable `DIV`, not a form control.
 
 #### Primary mechanism — paste from a committed artifact
 
@@ -292,13 +258,9 @@ the round directory first, then paste it in one operation:
    ($src -ceq (Get-Clipboard -Raw))   # must print True before continuing
    ```
 
-   **The settle is load-bearing.** Without it the read can race the write and
-   report `exact=False` on bytes that are perfectly correct — measured on
-   2026-07-29, where the same file compared equal on a retry with an unchanged
-   artifact and `cr=0` on both sides. A check that fails on timing alone gets
-   explained away as flaky, and that is exactly how a real corruption would get
-   waved through. If it reports a mismatch, retry once with the settle before
-   believing it.
+   **The settle is load-bearing** — without it the read can race the write and
+   report `exact=False` on correct bytes (measured). On a mismatch, retry once
+   with the settle before believing it.
 
 3. click the composer and press `ctrl+v` — a paste inserts the whole text at
    once and generates no Enter keypress;
@@ -317,16 +279,10 @@ a successful send* below), so a still-full composer must never by itself trigger
 a second send. **Never a second `Return` on a composer holding an
 already-counted fence; clear the residue instead.**
 
-"I am not sure whether it sent" is not a terminal state and never a reason to
-stop. On 2026-07-24 a transport pass pasted a convergence turn, could not
-convince itself it had sent, never clicked send, and then reported the message
-as successfully sent while it sat unsubmitted in the composer. An
-over-broad reading of the no-duplicate rule caused it.
-
-The no-duplicate rule scopes to **re-sending**: never send content that already
-appears as a user turn. It does not license leaving a first send unmade. If the
-composer holds your text and no matching user turn exists, the send has not
-happened and finishing it is required, not optional.
+"I am not sure whether it sent" is not a terminal state. The no-duplicate rule
+scopes to **re-sending**: never send content that already appears as a user
+turn — but if the composer holds your text and no matching user turn exists,
+the send has not happened and finishing it is required, not optional.
 
 **Artifacts are ASCII-only.** Write fence and continuation files in plain ASCII —
 use `--` rather than an em dash. The clipboard path silently corrupts non-ASCII
@@ -503,97 +459,29 @@ Require two stable snapshots from distinct inspections separated by at least thr
 - the response belongs to the exact matching fence rather than an earlier
   assistant turn.
 
-A visible `Thinking` label alone does not prove generation is active. If a
-stable assistant response exists and generation controls are inactive, a stale
-or collapsed thinking label cannot keep the round pending. Conversely,
-changing response text or an active stop control proves generation is still in
-progress.
+A visible `Thinking` label alone does not prove generation is active; changing
+text or an active stop control does. **Never click `Answer now` or any control
+that curtails extended thinking** — waiting is the whole job, and a forced
+early answer cannot be undone. An active `Stop answering`/`Stop generating`
+control **anywhere for the current turn** ends the question: extended reasoning
+emits a progress trace that sits still for many seconds, so two stable
+snapshots are necessary, never sufficient — a 794-byte trace was once archived
+as raw on exactly that mistake.
 
-**Never click `Answer now`, and never operate any other control that curtails
-extended thinking.** Waiting is the whole job while a response is pending. On
-2026-07-24 a transport pass clicked it at roughly four minutes on a round whose
-predecessor had reasoned for eighteen, on a protected-semantics ruling — the
-archived answer is usable but its depth is not guaranteed, and that cannot be
-undone after the fact. A reviewer taking longer than expected is working, not
-stuck. Extend your waiting instead, and if you genuinely believe generation has
-hung, report it as a blocker rather than forcing an early answer.
+### Step zero — provisional capture the moment generation stops
 
-An active `Stop answering` or `Stop generating` control **anywhere for the
-current turn** ends the question: generation is in progress and nothing may be
-archived, no matter how stable two snapshots look. Extended reasoning emits a
-progress trace — `Answer now`, `Clarifying file search`, `Fetched …`, `Formulated
-the response` — that sits still for many seconds at a time, so a stability check
-alone will happily certify it. On 2026-07-24 an archival pass captured 794 bytes
-of exactly that trace as scientific raw and asserted byte equality while the stop
-control was visible. Two stable snapshots are necessary, never sufficient.
+Before any click, dump the answer text with `javascript_tool` to
+`22_PROVISIONAL_CAPTURE.txt` — one call, works hidden, survives the browser
+dying (a completed 20745-character ruling was once lost mid-capture for want of
+this). It is `innerText`: never the archive, no reconciliation may be written
+from it, deleted once `21_PRO_OPEN_RAW.md` exists and noted in intake.
 
-### Step zero — take a provisional capture the moment generation stops
+### Hidden-tab diagnosis — check `document.visibilityState` first
 
-**Before locating any control, before any click, dump the answer text with
-`javascript_tool` and write it to the round directory as
-`22_PROVISIONAL_CAPTURE.txt`.** One call, no clipboard, no focus requirement, no
-OS gesture — it works on a hidden tab, and it is the only capture path that
-survives the browser dying in the next thirty seconds.
-
-This is a **provisional** artifact and never the archive:
-
-- it is `innerText`, so every markdown marker is gone — the exact loss this
-  Skill's history records;
-- it does not satisfy "exact raw" and **no reconciliation may be written from
-  it**;
-- it is deleted once `21_PRO_OPEN_RAW.md` exists, and the intake record notes
-  that it was taken.
-
-It exists for one reason. On 2026-07-29 a completed 20745-character ruling was
-read, confirmed, and then lost mid-capture when the browser went down — the round
-was left with a header, a tail, and nothing in between, and no reconciliation
-could be written at all. A provisional dump costs one call and would have left
-the full reasoning readable while the byte-exact capture waited for a browser.
-
-Cheap and immediate beats perfect and contingent, **as long as the cheap one
-cannot be mistaken for the archive.** Name it `PROVISIONAL`, and let the
-byte-exact copy supersede it.
-
-### Check `document.visibilityState` before diagnosing anything
-
-A hidden tab and a wedged tab present identically and have opposite remedies.
-
-```javascript
-document.visibilityState   // "visible" or "hidden"
-```
-
-`"hidden"` explains, all at once: `screenshot` and `find` timing out at
-`document_idle` under render throttling; `javascript_tool` still answering
-instantly, which makes the page look half-alive; and `Copy response` silently
-doing nothing, because `navigator.clipboard.writeText` refuses on a hidden
-document. The remedy is to activate the tab, **not** to replace it — and
-replacing it throws away a perfectly good page.
-
-On 2026-07-29 this was misdiagnosed as the accumulated-renderer-state case
-documented above, and two capture attempts were spent hunting a coordinate bug
-that did not exist. A capturing click listener proved the click was landing on
-the right button the whole time:
-
-```javascript
-document.addEventListener('click', e => window.__clicks.push(
-  {x: e.clientX, y: e.clientY, label: e.target.closest('button')?.getAttribute('aria-label')}), true)
-```
-
-Use that listener whenever a click is suspect. It settles *where the click
-landed* in one call, which no amount of screenshot-staring does on a page that
-will not render.
-
-**And do not pass a `javascript_tool` rect straight to `computer`.** JS rects are
-page pixels; `computer` coordinates are screenshot pixels. Convert by
-`screenshot_width / window.innerWidth` — on 2026-07-29 that was
-`1568 / 1912 = 0.820`, so a rect at `(712, 763)` was a click at `(584, 626)`.
-
-#### `hidden` is the normal state, and most of transport works in it
-
-The registered conversation usually sits in a window whose **foreground tab is
-something else**, so `hidden` is the steady state rather than a symptom. Do not
-"fix" it before every operation. What matters is knowing which half of the tool
-surface it takes away:
+`hidden` is the steady state of this tab, not a symptom, and it explains at
+once: `screenshot`/`find` timing out under render throttling, `javascript_tool`
+still answering, and `navigator.clipboard.writeText` refusing. Remedy: activate
+the tab — never replace it. What works while hidden:
 
 | Works on a hidden tab | Fails on a hidden tab |
 |---|---|
@@ -601,81 +489,32 @@ surface it takes away:
 | OS-level `computer` `key` — `ctrl+v`, `Return`, `ctrl+a`, `Delete` | `navigator.clipboard.writeText` (refuses) |
 | OS-level `computer` `left_click` (lands correctly) | heavy `await fetch` (may time out) |
 
-**So a fence can be sent end to end on a hidden tab**: focus the composer with
-`javascript_tool`, paste with OS-level `ctrl+v`, verify by reading the composer
-back, submit with `Return`. No foregrounding, no reload, no screenshot. Activate
-the tab only when something genuinely needs it — the clipboard write during
-capture — and not before.
+A fence can be sent end to end on a hidden tab: focus the composer with
+`javascript_tool`, paste with `ctrl+v`, read the composer back, submit with
+`Return`. Activate only for the clipboard write during capture. When a click is
+suspect, a capturing click listener (`addEventListener('click', ...)` pushing
+`{x, y, aria-label}`) settles where it landed in one call; and never pass a JS
+rect straight to `computer` — convert by `screenshot_width / window.innerWidth`.
 
-#### The composer keeps its text after a successful send
+**The composer keeps its text after a successful send** (measured twice), so
+composer emptiness is corroborating evidence, not the send test — the send test
+is the `stage_commit` user-turn count, always. Clear residue with `ctrl+a` then
+`Delete`; **never a second `Return`**.
 
-Measured twice on this page: after a send that **did** land, the composer still
-held the full fence while exactly one user turn carried the commit and generation
-was already running.
-
-**So composer emptiness is corroborating evidence, not the send test.** The test
-is: *how many user turns carry the fence's `stage_commit`?* Zero means send;
-one means done; more than one is the duplicate this Skill exists to prevent. An
-earlier revision taught "composer still holding your text means it did not send —
-click send"; that heuristic points the wrong way in this state and was removed
-on 2026-07-31.
-
-Clear the residue with `ctrl+a` then `Delete`. **Never a second `Return`.**
-Leaving a valid fence sitting in a composer is a duplicate submission waiting for
-a stray keypress.
-
-### Keeping the browser alive is part of transport
-
-Two rounds lost their capture to the browser disappearing. Measured cause:
-`exit_type = Normal` in the Edge profile, no sleep in 8 hours on a 38-hour
-uptime, and the binary unchanged for days. **It was closed cleanly, not crashed**,
-and both deaths landed inside long idle waits rather than during active work.
-
-1. **Check liveness before spending a reload.** `list_connected_browsers` plus a
-   process count costs one call. A wedge and a dying browser present identically;
-   the previous round burned two reloads on the wrong one.
-2. **Never close the last tab.** `tabs_close_mcp` on the only tab closes the
-   window and ends the browser — both "The browser is shutting down" messages
-   arrived on that call. The Skill's bounded replacement is still
-   close-then-create *when another tab exists*; when it does not, **create
-   first**.
-3. **Pace in minutes, not tens of minutes.** Poll every 2–3 minutes while a
-   round is generating. A death is then caught while the answer is still
-   recoverable instead of after it is stranded.
-4. **You can restart the browser yourself.** It is Edge, not Chrome:
-   `${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe`. Launch it and
-   the extension reconnects on its own. "The runtime cannot be restarted from
-   here" was a false conclusion drawn from searching for `chrome.exe` —
-   `tabs_context_mcp` reports `chrome://newtab/` because Chromium-based Edge uses
-   that scheme, and Chrome has never been installed on this machine.
-
-#### Verify a search before concluding absence
-
-The `chrome.exe` error above is the general failure worth naming: a search that
-finds nothing was treated as proof the thing does not exist. The same mistake
-recurred hours later when `"$env:ProgramFiles(x86)\..."` — which PowerShell does
-not expand that way; it needs `${env:ProgramFiles(x86)}` — reported Edge missing
-too.
-
-**A failed search is not evidence of absence until the search itself is known
-good.** Test the method against something you know is there before reporting a
-negative.
+Browser liveness is part of transport: check `list_connected_browsers` before
+spending a reload; never `tabs_close_mcp` the last tab (create first, then
+close); poll every 2–3 minutes while generating; and the browser is Edge —
+`${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe` — restartable
+from here, with the extension reconnecting on its own. A failed search is not
+evidence of absence until the search itself is proven against something known
+to exist.
 
 #### Never use `find` to prove a fence absent
 
-`find` is a **semantic** matcher, not a string search, and its failure mode is
-the opposite of the one above: it does not report nothing, it reports a
-*plausible* something.
-
-On 2026-07-30, asked for a message containing
-`9cb7974563cb7de3371b1d22f3691fc00e02744d`, it returned one "matching element"
-whose own quoted text read `round=20260729_d7_s` — the **previous** round's
-fence — and justified the match by noting that the phrase "zero-compute
-source-assignment correction" appeared nearby. Had that been accepted, the round
-would have been treated as already fenced and never sent.
-
-Prove presence or absence from the conversation API, which is exact and
-deterministic:
+`find` is a semantic matcher: it does not report nothing, it reports a
+*plausible* something — it once matched the previous round's fence for a
+40-hex commit it did not contain. Prove presence or absence from the
+conversation API, which is exact and deterministic:
 
 ```javascript
 const s = await fetch('/api/auth/session').then(r=>r.json());
@@ -717,184 +556,74 @@ asst.sort((x, y) => (x.message.create_time || 0) - (y.message.create_time || 0))
 const txt = asst[asst.length - 1].message.content.parts.join('');
 ```
 
-Why this is better than the control, not merely easier:
+It returns the model's own emitted markdown (no rendering layer to lose a
+marker), works on a background tab, and yields an independent source length to
+check the archive against. Three practical notes:
 
-- it returns **the model's own emitted markdown**, not a re-serialization of
-  rendered DOM, so there is no rendering layer to lose a marker;
-- it needs neither focus nor visibility, so it works on a background tab, which
-  is the normal state of this tab;
-- it gives an **independent length to check against**. On 2026-07-29 the
-  clipboard held 22485 characters with CRLF; normalized to LF the file was 21876,
-  exactly the length the page reported for its own source string. That is a
-  fidelity proof the clipboard path cannot produce.
-
-Two practical notes:
-
-1. **Returning the text through `javascript_tool` may be blocked** by an output
-   filter after a call that touched an auth token. Hand it to the OS clipboard
-   instead: stash it on `window`, then copy it with a real user gesture (below)
-   and read it with `Get-Clipboard -Raw` — zero context cost, exact bytes.
-2. **`navigator.clipboard.writeText` needs a real user gesture.** Supply one
-   safely with a full-viewport transparent overlay carrying the copy handler,
-   clicked once by `computer`, then removed immediately. The overlay cannot hit
-   any page control while it exists, which a bare click on the page cannot
-   promise.
-3. **A heavy `await fetch` can time out under background throttling.** That is
-   throttling, not death — check liveness, then activate the tab and retry. Light
-   DOM reads keep working throughout and are the reliable progress signal.
+1. `javascript_tool` may refuse to return the text after a call that touched an
+   auth token — stash it on `window`, copy via a real user gesture, read with
+   `Get-Clipboard -Raw`;
+2. `navigator.clipboard.writeText` needs a real user gesture — a full-viewport
+   transparent overlay carrying the copy handler, clicked once by `computer`,
+   then removed;
+3. a heavy `await fetch` timing out under background throttling is throttling,
+   not death — check liveness, activate the tab, retry.
 
 Normalize CRLF to LF before writing, so the archive matches the emitted source
 rather than the clipboard's transport encoding.
 
 ### Fallback — the `Copy response` control
 
-Use the page's own **`Copy response`** control. It is in the `Response actions`
-group attached to the assistant turn, it copies the full message verbatim
-including markdown, and it is the only capture path that cannot introduce a
-transcription error. Everything below exists because this was previously left
-unspecified and three separate passes improvised three different broken captures.
+If the API path fails, use the page's `Copy response` control (in `Response
+actions` on the assistant turn). A failed capture costs a retry, so this is a
+checklist, not a mechanism:
 
-1. **Mark the clipboard first.** Set it to a known sentinel before clicking, so
-   a click that silently does nothing is detectable. A failed click leaves the
-   *previous* clipboard content in place, which reads exactly like a successful
-   capture of the wrong thing.
-2. **Scroll to the true end of the response first.** `Response actions` sits at
-   the end of *its own* message, and several assistant turns carry one. `find`
-   will happily return the control for whichever turn is rendered, so a control
-   located before reaching the bottom may belong to an earlier answer entirely.
-   Confirm the last visible text is the end of the answer you are archiving.
-3. **Click by coordinate from a screenshot.** A `ref` click has been observed to
-   report success while writing nothing to the clipboard — twice, verified
-   against a sentinel — because the clipboard write needs a real user gesture on
-   a focused document. The capture that did work used a coordinate click.
-4. **Verify the clipboard actually changed** from the sentinel, and that its
-   length and its first and last lines match what is on screen. If it did not
-   change, the click did nothing: re-locate and click again rather than
-   proceeding. **Never** substitute a different capture method because the click
-   is being awkward — that substitution is how the structure-stripped archive
-   below happened.
-5. **Expect to click more than once, and read the button, not the tool result.**
-   *Hitting the control* and *writing the clipboard* are separate facts. The tool
-   reports success for the click either way.
+1. set the clipboard to a sentinel first — a silent no-op click otherwise reads
+   as a capture of the previous content;
+2. scroll to the true end of the answer — several turns carry their own control;
+3. click by **coordinate** from a screenshot (a `ref` click can report success
+   without a clipboard write); expect more than one click — read the button
+   state, not the tool result;
+4. verify the clipboard changed from the sentinel;
+5. archive only with `scripts/archive_pro_response.ps1 -RoundPath <round>
+   -StageCommit <commit> -Sentinel <sentinel>` — it enforces BOM-free UTF-8,
+   reread equality, this round's `stage_commit` present, plausible size and a
+   heading; its JSON is the mechanical intake record. Raw is write-once.
 
-   A screenshot distinguishes them. If the `Copy response` tooltip is showing and
-   the button is highlighted, the coordinates are right and the clipboard write is
-   what failed — usually because the window lacks OS-level focus. Do not go
-   hunting for better coordinates; click the same place again. On 2026-07-25 the
-   third click on an already-hovered button succeeded after two silent failures,
-   with the sentinel unchanged through both.
+Prohibited capture methods (each once produced a corrupt archive): retyping via
+a file-write tool; `get_page_text`/`read_page` output as the archive;
+`ConvertFrom-Json` round-trips without explicit UTF-8. `Copy response` absent
+from the accessibility tree is a transport fault — report, never transcribe.
+A capture missing this round's `stage_commit`, or that is a progress trace, is
+the wrong capture: re-enter the wait, never archive it. Length and non-emptiness
+prove nothing — a 397-byte fence and an 18322-character previous-round ruling
+both passed every other check.
 
-   If the icon never flips to its copied state, the write did not happen no matter
-   how many times the click reported success.
-6. **Archive it with the script — do not re-derive this by hand.**
-
-   ```powershell
-   & '.claude/skills/hmasd-review-round/scripts/archive_pro_response.ps1' `
-       -RoundPath docs/external-review/rounds/<round> `
-       -StageCommit <this round's commit> -Sentinel <the sentinel from step 1>
-   ```
-
-   It writes with `.NET WriteAllText` and `UTF8Encoding($false)` — never
-   `Set-Content`, which writes a BOM by default here — then rereads and checks
-   `-ceq`. It refuses, writing nothing, on any of: an empty clipboard, the
-   sentinel still present (step 1's failure), a capture missing **this** round's
-   `stage_commit` (that is the *previous* round's ruling), a capture too short to
-   be a ruling, or one that does not open with a heading. The raw file is
-   write-once; `-Force` is only for repairing a known-bad capture.
-
-   Its JSON output is the mechanical intake record: `chars`, `exact_equal`,
-   `first_line`, `last_line`.
-
-   Added 2026-07-28 because five consecutive rounds recorded the same sentence —
-   *"captured on the second click after the neutral-body focus step, the same
-   failure mode and fix as the previous four rounds"*. The fix was rediscovered
-   five times because it lived in prose and was re-derived from memory each
-   round.
-
-Three capture methods are **prohibited**, each having produced a corrupt archive
-that only the byte-equality check caught:
-
-- **retyping the text through a file-write tool** — differed at byte 47;
-- **`get_page_text` or `read_page` output as the archive** — that is rendered
-  text, not the message source, and loses markdown structure;
-- **round-tripping through `ConvertFrom-Json` without explicit UTF-8** — silently
-  turned em dashes into `â€"`.
-
-If `Copy response` is genuinely unavailable — the control absent from the
-accessibility tree, not merely awkward to reach — that is a transport fault.
-Report it; do not fall back to transcription.
-
-Before writing the raw, sanity-check the captured text against the question:
-
-- **it carries this round's own `stage_commit`.** This is the only check that
-  catches a capture of the *wrong round*, and nothing else does. On 2026-07-27 a
-  `ref`-resolved control returned the previous round's ruling — 18322 characters
-  of a real, complete, well-formed scientific answer for a different stage
-  commit. It passed every check below. The transcript is virtualized, so the only
-  rendered `Copy response` belonged to the first assistant turn while the answer
-  being archived was the last;
-- it is not a bare progress trace of the labels above;
-- it addresses the question's numbered asks rather than announcing intent to;
-- its size is plausible for the round — a scoped scientific answer on this line
-  runs to kilobytes, and a few hundred bytes is a trace, not an answer.
-
-**Length and non-emptiness prove nothing.** The same session's first bad capture
-was the *fence* — 397 bytes, non-empty, already written to the raw path before
-the verdict-string assertion caught it and it was deleted rather than amended.
-Two different wrong captures in one round, one too small and one too plausible.
-
-A capture failing any of these is a transport fault. Report it and re-enter the
-wait; never archive it and never let it reach reconciliation.
-
-When the UI is ambiguous, inspect button labels, disabled state, message roles
-and one more stable snapshot before deciding. If an explicit response error has
-no completed assistant message, a same-turn `Retry` may be used once as a
-recorded recovery after confirming it cannot submit another freshness fence.
-Do not assess whether requested scientific sections are present; that belongs
-to Project Manager after exact archival.
+If an explicit response error has no completed assistant message, a same-turn
+`Retry` may be used once as a recorded recovery after confirming it cannot
+submit another freshness fence. Do not assess whether requested scientific
+sections are present; that belongs to Project Manager after exact archival.
 
 ### Evidence-access transport recovery
 
-An assistant message that explicitly says it could not read one or more
-question-listed evidence paths, asks for those files, or reports unavailable
-repository/connector access is an operational transport diagnostic. This is an
-objective provenance failure, not a scientific judgment about response
-completeness. Do not archive that diagnostic as scientific raw and do not send
-it to Project Manager as the round answer.
+An assistant message reporting it could not read question-listed evidence, or
+unavailable repository/connector access, is a transport diagnostic — never the
+round answer, never archived as raw. Recover in the same conversation under the
+same accepted fence:
 
-Recover in the same registered conversation and under the same accepted fence:
+1. take the evidence paths from the question only, never from the diagnostic;
+2. materialize them from `stage_commit`, not from the current working tree,
+   with `scripts/build_review_evidence_archive.ps1 -Commit <stage_commit>
+   -QuestionPath <question> -OutputPath <zip>`; continue only on
+   `REVIEW_EVIDENCE_ARCHIVE_READY` with the expected commit and file count;
+3. attach the archive and send one mechanical continuation naming its commit
+   and allow-list identity — never a second fence;
+4. the candidate raw is the stable assistant response after the repair message,
+   under the same completion checks;
+5. if ingestion fails, one materially distinct delivery of the same allow-listed
+   files; never worktree content, scratch artifacts or authored explanation.
 
-1. Parse the exact evidence paths listed by the question. Ignore any additional
-   path invented or requested by the diagnostic response.
-2. Verify every listed path exists at the pushed `stage_commit`, then
-   materialize them from `stage_commit`, not from the current working tree.
-   Use one archive with repository-relative paths preserved when duplicate
-   basenames exist. Verify the archive member set equals the question allow-list
-   exactly and contains no extra file. Use the deterministic builder rather
-   than assembling paths manually:
-
-   ```powershell
-   & .claude/skills/hmasd-review-round/scripts/build_review_evidence_archive.ps1 `
-     -Commit <stage_commit> `
-     -QuestionPath <repository-relative-question-path> `
-     -OutputPath <new-absolute-zip-path>
-   ```
-
-   Continue only when it returns `REVIEW_EVIDENCE_ARCHIVE_READY` with the
-   expected commit and file count.
-3. Attach that exact archive to the same conversation and send one mechanical
-   continuation stating its commit, allow-list identity and that the prior
-   response is a transport diagnostic. Do not submit another freshness fence.
-4. The candidate raw is the stable assistant response after the
-   latest Project Manager transport-repair message, still anchored to the original
-   matching fence. Apply the same two-snapshot and generation-control checks to
-   that candidate.
-5. If archive ingestion explicitly fails, try one materially distinct
-   path-preserving delivery of only the same allow-listed files. Never add
-   current-worktree content, an internal scratch artifact, an unlisted Skill or
-   a newly authored scientific explanation.
-
-Record the diagnostic and recovery as transport facts in the mechanical intake.
+Record diagnostic and recovery as transport facts in the mechanical intake.
 They never change the question contents or the single-fence state.
 
 ## Convergence turns
@@ -952,9 +681,9 @@ After stable completion:
 4. Keep transport facts separate from the subsequent Project Manager scientific
    reconciliation; no callback or routing step exists.
 
-Do not compute or require input-file or raw-response hashes. The pushed Git
-commit identifies reviewer inputs; exact reread equality plus the later Git
-commit identifies archived raw.
+The digest bond above is the charter's one sanctioned SHA-256 site
+(`sha256_whitelist=review_round_archive_integrity_only`); no other hash is
+computed or required anywhere in this workflow.
 
 The required order is:
 
@@ -964,27 +693,13 @@ exact raw -> provenance intake -> heartbeat deletion -> Project Manager reconcil
 
 ## Recovery and retirement
 
-A browser, runtime, navigation, archive, approval, or heartbeat failure keeps
-the same round active while a safe in-scope recovery
-remains. Inspect the direct error and current state, then try materially distinct
-recoveries such as reconnecting the registered runtime, reusing its tab,
-reopening its URL, or rechecking message roles. Never repeat an identical
-failed action without changed state. Record:
-
-```text
-RECOVERY_ATTEMPT
-attempt=<positive integer>
-boundary=<failed operation>
-action=<diagnostic or recovery action>
-outcome=<observed result>
-```
-
-Before any submission retry, prove the matching fence absent. Report
-`REVIEW_TRANSPORT_BLOCKED` only after all safe in-scope recovery is exhausted;
-include the direct cause, attempt summary, duplicate-submission risk, exact
-resume condition, and `recovery_exhausted=true`.
-
-At terminal success or terminal block, delete the Project-Manager-owned
-heartbeat and confirm absence. A stale response from another round has no
-authority and never replaces the exact current-round raw or launches a
-successor.
+A browser, runtime, navigation, archive or heartbeat failure keeps the round
+active while a safe in-scope recovery remains. Try materially distinct
+recoveries; never repeat an identical failed action without changed state, and
+record each attempt as one `RECOVERY_ATTEMPT attempt=/boundary=/action=/outcome=`
+line. Before any submission retry, prove the matching fence absent. Report
+`REVIEW_TRANSPORT_BLOCKED` only when safe recovery is exhausted, with the direct
+cause, attempt summary, duplicate-submission risk and exact resume condition.
+At terminal success or block, delete the Project-Manager-owned heartbeat and
+confirm absence. A stale response from another round has no authority and never
+replaces the current-round raw or launches a successor.
