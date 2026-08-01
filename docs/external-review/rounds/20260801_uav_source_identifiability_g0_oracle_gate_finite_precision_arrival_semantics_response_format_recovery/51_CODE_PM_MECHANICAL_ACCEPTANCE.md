@@ -1,0 +1,21 @@
+# Code Project Manager Mechanical Acceptance
+
+```text
+round=20260801_uav_source_identifiability_g0_oracle_gate_finite_precision_arrival_semantics_response_format_recovery
+raw_response=ARRIVAL_SEMANTICS=DEAD_ZONE
+raw_response_format=NONCONFORMING
+direct_user_format_waiver=不需要格式化回复
+allowed_outputs=ARRIVAL_SEMANTICS=DEAD_ZONE_BOUND|ARRIVAL_SEMANTICS=REACHABLE_GATE_REPRESENTATION|ARRIVAL_SEMANTICS=UNREACHABLE_INVALID_REALIZATION
+unique_prefix_match=ARRIVAL_SEMANTICS=DEAD_ZONE_BOUND
+accepted_semantic_option=DEAD_ZONE_BOUND
+scientific_interpretation_by_code_project_manager=none
+scientific_iteration_cost=zero
+additional_transport_required=false
+next_boundary=UAV_G0_ORACLE_GATE_FINITE_PRECISION_DEAD_ZONE_BOUND_CODE_IMPLEMENTATION
+```
+
+The raw response and its nonconforming-format classification remain unchanged.
+The user's direct format waiver permits mechanical intake of the only registered
+output whose exact line begins with the complete returned line. This record
+does not supply a new scientific choice or modify any G0 geometry, controller,
+dynamics, metric, estimator or first-match field.

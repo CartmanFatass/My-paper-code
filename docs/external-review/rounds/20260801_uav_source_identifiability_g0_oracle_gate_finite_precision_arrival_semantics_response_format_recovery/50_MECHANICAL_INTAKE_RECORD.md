@@ -1,0 +1,19 @@
+# Mechanical Intake Record
+
+assignment_identity=ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS_RESPONSE_FORMAT_RECOVERY
+operation_key=uav-g0-gate-arrival-format-fe3aa70-r1
+operation_id=c80997ce-675a-4e10-a479-196851a49ef9
+transport_backend=agentify
+transport_owner=code_project_manager
+stable_key=hmasd-uav-formal-pro
+provider=chatgpt
+model=Pro
+conversation_id=6a6cef0a-cf1c-83e8-92c3-161bffb01adc
+send_count=1
+terminal_state=NATURAL_COMPLETION_VERIFIED
+clicked_controls=[]
+response_text=ARRIVAL_SEMANTICS=DEAD_ZONE
+response_format=NONCONFORMING
+allowed_exact_response_lines=ARRIVAL_SEMANTICS=DEAD_ZONE_BOUND|ARRIVAL_SEMANTICS=REACHABLE_GATE_REPRESENTATION|ARRIVAL_SEMANTICS=UNREACHABLE_INVALID_REALIZATION
+raw_output_path=C:\Users\fires\OneDrive\文档\HMASD-new\docs\external-review\rounds\20260801_uav_source_identifiability_g0_oracle_gate_finite_precision_arrival_semantics_response_format_recovery\21_PRO_OPEN_RAW.md
+receipt_path=C:\Users\fires\OneDrive\文档\HMASD-new\logs\review_20260801_uav_source_identifiability_g0_oracle_gate_finite_precision_arrival_semantics_response_format_recovery_agentify_r1\agentify_receipt.json
