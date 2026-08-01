@@ -140,8 +140,7 @@ aligned. For an in-scope mismatch, Research Operations Manager sends one exact
 correction assignment to Code Project Manager. After `CODE_ACCEPTED`, Research
 Operations Manager routes the smallest affected evidence and at most one
 correction-only recheck of the repaired claim-bearing diff. The recheck cannot
-reopen design. An unchanged reviewed commit is never resubmitted and there is no
-review of the review.
+reopen design. An unchanged reviewed commit is never resubmitted; there is no review of the review.
 
 ## Result intake
 
