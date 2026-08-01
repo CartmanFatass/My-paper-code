@@ -36,7 +36,8 @@ model before sending.
 
 ## One-round protocol
 
-1. The owning role verifies the user-authorized turn. For Agentify, the
+1. The owning role verifies an active user grant or one explicit review
+   assignment. For Agentify, the
    registered wrapper reads the UTF-8 prompt and writes one new role-owned
    `TRANSPORT_BACKEND.json` plus its matching request.
 2. The immutable selection is reloaded before every send or recovery.
@@ -53,9 +54,11 @@ model before sending.
    normal raw archival and mechanical intake. The receipt is evidence of transport only;
    it cannot interpret science or authorize code, compute or project state.
 
-An unavailable conversation or incomplete response stops that operation. One
-fresh recovery operation is allowed by the Minimal recovery rule. A transport
-failure consumes zero scientific iterations.
+An unavailable conversation or incomplete response stops that operation. The
+Minimal recovery rule permits bounded fresh operations inside the same active
+review authority; it never permits a send while generation or a readable
+complete response exists. A transport failure consumes zero scientific
+iterations.
 
 ## Minimal recovery
 

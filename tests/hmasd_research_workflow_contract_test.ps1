@@ -79,6 +79,7 @@ $agentifyTransportSkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro
 $agentifyTransportScriptPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py'
 $agentifyTransportContractPath = Join-Path $repo 'docs/project/AGENTIFY_PRO_TRANSPORT.md'
 $agentifyTransportSkill = Get-Content -Raw -LiteralPath $agentifyTransportSkillPath
+$agentifyTransportSkillNormalized = $agentifyTransportSkill -replace '\s+', ' '
 $agentifyTransportScript = Get-Content -Raw -LiteralPath $agentifyTransportScriptPath
 $agentifyTransportContract = Get-Content -Raw -LiteralPath $agentifyTransportContractPath
 $agentifyTransportContractNormalized = $agentifyTransportContract -replace '\s+', ' '
@@ -200,7 +201,10 @@ foreach ($required in @(
     'external_workspace_access=read_only',
     'raw_external_worktree_creation=forbidden',
     'drive_or_path_alias_creation=forbidden',
-    'handoff_document_write_trigger=explicit_user_request_only',
+    'workflow_gate_form=budget_grant_or_scope_decision_only',
+    'per_action_confirmation_inside_active_grant=forbidden',
+    'reversible_internal_action_user_gate=forbidden',
+    'internal_role_handoff_within_active_grant=no_user_authority_required',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_workspace_boundary_guard.py',
     'cross_task_routing=locked_role_session_model_thinking',
@@ -226,9 +230,12 @@ foreach ($entry in @(
     @($agentifyTransportSkill, 'transport_owner'),
     @($agentifyTransportSkill, 'assignment_identity'),
     @($agentifyTransportSkill, 'timeout_ms'),
-    @($agentifyTransportSkill, 'submit --verify-existing'),
-    @($agentifyTransportSkill, 'no recorded user message'),
-    @($agentifyTransportSkill, 'resend requires a new user instruction'),
+    @($agentifyTransportSkillNormalized, 'Active generation or a readable complete response always suppresses another'),
+    @($agentifyTransportSkillNormalized, 'client submission limit is three per assignment'),
+    @($agentifyTransportSkillNormalized, 'existing immutable request records'),
+    @($agentifyTransportSkillNormalized, 'adds no hash, ledger or validator gate'),
+    @($agentifyTransportSkillNormalized, 'Ordinary recovery never launches a synthetic smoke'),
+    @($agentifyTransportSkillNormalized, 'duplicate submission of the same operation'),
     @($agentifyTransportContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'),
     @($agentifyTransportContractNormalized, 'runtime-only'),
     @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
@@ -241,6 +248,11 @@ foreach ($entry in @(
 )) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify route/contract coupling missing: $($entry[1])"
+    }
+}
+foreach ($staleGate in @('resend requires a new user instruction', 'Only no recorded user message permits')) {
+    if ($agentifyTransportSkill.Contains($staleGate)) {
+        throw "Agentify transport retains a per-resend user gate: $staleGate"
     }
 }
 if ($agentifyTransportScript.Contains('"prompt_sha256"')) {
@@ -635,7 +647,7 @@ if ((Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md')).Count -gt 150) {
 
 foreach ($required in @(
     'active_unattended_grant_valid_iteration_limit=9',
-    'active_unattended_grant_permission_prompts=forbidden',
+    'workflow_gate_law=AGENTS.md#universal-project-constraints',
     'valid_result_external_pro_adjudication=result_plus_portfolio_delta_required',
     'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
     'portfolio_adjudication_authority=external_pro',
@@ -925,6 +937,9 @@ foreach ($required in @(
 }
 if (-not $operationsRole.Contains('handoff_document_write_trigger=explicit_user_request_only')) {
     throw 'Research Operations Manager role permits automatic handoff writing'
+}
+if (-not $operationsRole.Contains('handoff_document_absence_blocks_progress=false')) {
+    throw 'Optional handoff document is incorrectly treated as a progress gate'
 }
 foreach ($required in @(
     'write_trigger=explicit_user_request_only',

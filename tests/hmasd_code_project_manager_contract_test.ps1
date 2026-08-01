@@ -243,14 +243,15 @@ foreach ($required in @(
     'readiness phase timeout is candidate evidence',
     'semantics-preserving technical optimization under the unchanged phase timeout',
     'evidence-backed timeout revision',
-    'Any code change produces a new clean pushed candidate',
-    'timeout-only workflow revision may retain an unchanged clean candidate',
+    'bounded operational retry budget for one unchanged clean candidate',
+    'Any code or validator defect produces a new clean pushed candidate',
+    'only a transient environment, launcher, path or operating-system failure',
     'one exact spec',
     'fresh absent root',
     'one wrapper run',
     'full commit-bound receipt',
     'consumes zero scientific iterations',
-    'automatic retry, timeout increase or switch')) {
+    'Nothing automatically increases a timeout')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing timeout-response rule: $required"
     }
@@ -270,9 +271,9 @@ foreach ($required in @(
     'outer_run_timeout_seconds=2520',
     'finalize_timeout_seconds=120',
     'failed_root_reuse=forbidden',
-    'candidate_spec_root_attempt_count=1',
+    'candidate_attempt_limit=3',
     'candidate_commit_rule=new_commit_required_for_any_code_change',
-    'unchanged_clean_candidate_rule=one_attempt_permitted_only_by_this_timeout_revision',
+    'unchanged_clean_candidate_rule=operational_retry_budget_under_unchanged_v2_contract',
     'fresh_absent_root_required=true',
     'full_six_phase_commit_bound_receipt=required',
     'current_oracle_reproduction=continues_under_code_project_manager',
@@ -283,16 +284,26 @@ foreach ($required in @(
     'current_work_mutation=forbidden',
     'evidence_weakening=forbidden',
     'automatic_timeout_increase=forbidden',
-    'automatic_retry=forbidden',
+    'automatic_retry=operational_only_within_unchanged_candidate_and_contract',
     'geometry, `R=273`, `O(H*K_search)`, RNG and seed identities, pairing',
     'controls, oracle, metrics, estimator, first-match order and independent replay',
     'READINESS_PHASE_TIMEOUT',
     'READINESS_TECHNICAL_FAILURE',
     'READINESS_PERFORMANCE_BLOCKED',
     'READINESS_FINALIZATION_FAILURE',
+    'transient environment, launcher, path or operating-system failure',
+    'requires a new clean pushed candidate before another attempt',
     'Research Operations Manager then applies the existing same-source preflight and formal')) {
     if (-not $g0ReadinessContractNormalized.Contains($required)) {
         throw "G0 readiness performance contract missing: $required"
+    }
+}
+foreach ($staleGate in @(
+    'Another attempt or timeout change requires a new explicit workflow contract',
+    'unchanged_clean_candidate_rule=one_attempt_permitted_only_by_this_timeout_revision',
+    'automatic_retry=forbidden')) {
+    if ($g0ReadinessContractNormalized.Contains($staleGate)) {
+        throw "G0 readiness contract retains a per-attempt user gate: $staleGate"
     }
 }
 

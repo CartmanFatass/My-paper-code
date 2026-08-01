@@ -176,17 +176,17 @@ For a deterministic post-acceptance defect with plausible recurrence, add one
 proof-sized regression before rerunning the procedure.
 
 A readiness phase timeout is candidate evidence, not authority to replay the
-same proof root or relax its timeout. Before another attempt, an explicit
-workflow contract chooses exactly one response: a semantics-preserving
-technical optimization under the unchanged phase timeout, or an
-evidence-backed timeout revision. Any code change produces a new clean pushed
-candidate. A timeout-only workflow revision may retain an unchanged clean
-candidate only when its explicit contract permits that case. Both responses
-require one exact spec, one fresh absent root, one wrapper run, the same ordered
-six phases and a full commit-bound receipt. A timeout, technical failure or
-finalization failure consumes zero scientific iterations, produces no
-scientific disposition and leaves its root terminal. It never triggers an
-automatic retry, timeout increase or switch between the two responses.
+same proof root or relax its timeout. A new or revised workflow contract chooses
+a semantics-preserving technical optimization under the unchanged phase timeout
+or an evidence-backed timeout revision. That contract may also define a bounded
+operational retry budget for one unchanged clean candidate. Every attempt still
+requires one exact spec, one fresh absent root, one wrapper run, the same ordered
+six phases and a full commit-bound receipt. Any code or validator defect produces
+a new clean pushed candidate; only a transient environment, launcher, path or
+operating-system failure may consume an explicitly defined retry budget. A
+timeout, technical failure or finalization failure consumes zero scientific
+iterations, produces no scientific disposition and leaves its root terminal.
+Nothing automatically increases a timeout or switches the selected response.
 
 The project `Stop` hook is a last-message guard only. It runs no validation
 command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with

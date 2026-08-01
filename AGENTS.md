@@ -104,7 +104,10 @@ project_write_scope=current_checkout_plus_verified_ticket_worktree
 external_workspace_access=read_only
 raw_external_worktree_creation=forbidden
 drive_or_path_alias_creation=forbidden
-handoff_document_write_trigger=explicit_user_request_only
+workflow_gate_form=budget_grant_or_scope_decision_only
+per_action_confirmation_inside_active_grant=forbidden
+reversible_internal_action_user_gate=forbidden
+internal_role_handoff_within_active_grant=no_user_authority_required
 operational_recovery_owner=research_operations_manager
 operational_recovery_scientific_iteration_cost=zero
 ```
@@ -114,7 +117,6 @@ Agents do not create, edit, copy, move, delete or redirect files outside that sc
 A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary.
 
 ## Routed project mechanisms
-
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
@@ -137,7 +139,6 @@ A future project-external write requires a new explicit user instruction for its
 No role reads every routed document. The active assignment or role charter
 names the smallest necessary subset.
 ## Repository surfaces
-
 - Git-tracked code and tests are Code Project Manager implementation truth.
 - `logs/<run-id>/` is Research Operations Manager runtime evidence.
 - `docs/project/CURRENT_WORK.md` is Research Operations Manager operational state; Code Project Manager may read it on demand only to check the current code boundary and cannot edit, stage, commit or advance it.

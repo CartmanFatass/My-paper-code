@@ -18,10 +18,10 @@ outer_run_timeout_seconds=2520
 finalize_timeout_seconds=120
 failed_root=logs/execution_readiness_uav_source_identifiability_g0_379726e_r2
 failed_root_reuse=forbidden
-candidate_spec_root_attempt_count=1
+candidate_attempt_limit=3
 fresh_absent_root_required=true
 candidate_commit_rule=new_commit_required_for_any_code_change
-unchanged_clean_candidate_rule=one_attempt_permitted_only_by_this_timeout_revision
+unchanged_clean_candidate_rule=operational_retry_budget_under_unchanged_v2_contract
 full_six_phase_commit_bound_receipt=required
 current_oracle_reproduction=continues_under_code_project_manager
 formal_compute=forbidden
@@ -31,7 +31,7 @@ duplicate_pro_review=forbidden
 current_work_mutation=forbidden
 evidence_weakening=forbidden
 automatic_timeout_increase=forbidden
-automatic_retry=forbidden
+automatic_retry=operational_only_within_unchanged_candidate_and_contract
 ```
 
 ## Frozen boundary
@@ -48,9 +48,9 @@ disposition.
 The Code Project Manager's current Oracle `EVENT`/`NO_EVENT` reproduction and
 repair continues independently. This contract neither cancels, preempts,
 accepts nor changes that work. If it changes code, the readiness candidate must
-be its new clean pushed commit. If no code changes result, this explicit timeout
-revision permits one readiness attempt on the unchanged clean candidate. Both
-cases require a new exact spec and a fresh absent root.
+be its new clean pushed commit. An unchanged clean candidate may use only the
+bounded operational retry budget defined below. Every attempt requires a new
+exact spec and a fresh absent root.
 
 Code Project Manager retains the same five-path implementation boundary:
 
@@ -94,9 +94,10 @@ six successful phase records and the matching finalized receipt.
 ## Fresh-root and failure semantics
 
 The r2 failed root is terminal and cannot be used as acceptance evidence,
-reused, resumed or repaired in place. Each admitted candidate/spec pair receives
-one new root that must be absent before the wrapper starts, and the wrapper may
-run once. A failed root remains terminal regardless of failure class.
+reused, resumed or repaired in place. One unchanged clean candidate may make at most
+three attempts under this unchanged v2 contract. Every attempt has one exact
+spec, one new root that must be absent before the wrapper starts and one wrapper
+run. A failed root remains terminal regardless of failure class.
 
 - A phase timeout is `READINESS_PHASE_TIMEOUT`: technical readiness evidence,
   zero scientific iterations, no scientific disposition and no receipt.
@@ -108,10 +109,13 @@ run once. A failed root remains terminal regardless of failure class.
 - Finalizer failure is `READINESS_FINALIZATION_FAILURE`; it reruns no phase and
   produces no successful receipt.
 
-None of these outcomes authorizes a retry, a higher timeout, evidence weakening
-or scientific abandonment. Another attempt or timeout change requires a new
-explicit workflow contract; any code change first requires a new clean pushed
-candidate commit.
+Only a transient environment, launcher, path or operating-system failure may
+use the remaining operational retry budget automatically. A code defect,
+validator rejection or reproducible artifact mismatch returns to Code Project
+Manager and requires a new clean pushed candidate before another attempt. No
+outcome authorizes a higher timeout, evidence weakening or scientific
+abandonment. Changing a timeout, the frozen boundary or the evidence contract
+requires a new explicit workflow contract.
 
 The runtime workflow may resume only after Code Project Manager returns a
 pushed `CODE_ACCEPTED` candidate with its exact changed path subset, focused

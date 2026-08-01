@@ -79,18 +79,26 @@ the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000 incl
 owns its durable ledger and send idempotency; the HMASD wrapper validates the
 request, calls Agentify, and writes a new role-owned receipt. The wrapper does
 not click UI controls. No automatic
-Continue, Retry, ResponseRetry, Answer now, duplicate submission,
+Continue, Retry, ResponseRetry, Answer now, duplicate submission of the same operation,
 cross-conversation fallback or response synthesis is allowed. A conflicting existing
 idempotency record or unavailable conversation terminates as a
 transport blocker.
 
 ## Minimal recovery
 
-The adapter waits without sending while the conversation generates. Before recovery, run `submit --verify-existing` on the failed operation.
-Only no recorded user message permits one fresh unchanged-question operation; otherwise observe and verify/archive the original, never resend it.
+Active generation or a readable complete response always suppresses another
+send: wait, then verify and archive that response. When the conversation is
+idle and no complete response exists, the same authorized assignment may use a
+fresh unchanged-question operation without per-resend user instruction. Each
+operation still submits at most once, and the client submission limit is three
+per assignment. The owning role counts fresh operations from its existing
+immutable request records; this limit adds no hash, ledger or validator gate.
+Ordinary recovery never launches a synthetic smoke.
 
-The adapter never clicks Stop, Continue, Retry or Answer now. A second recovery
-resend requires a new user instruction.
+After the third unsuccessful submission, return one technical transport defect
+to Workflow Design Manager. Do not ask the user for another resend, reinterpret
+science or continue sending. The adapter never clicks Stop, Continue, Retry or
+Answer now, and every transport failure consumes zero scientific iterations.
 
 ## Mechanical commands
 
