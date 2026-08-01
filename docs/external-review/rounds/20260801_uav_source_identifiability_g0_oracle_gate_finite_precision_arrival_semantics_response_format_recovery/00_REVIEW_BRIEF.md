@@ -1,0 +1,19 @@
+# UAV G0 oracle-gate arrival response-format recovery
+
+```text
+review_type=RESPONSE_FORMAT_RECOVERY
+assignment_identity=ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS_RESPONSE_FORMAT_RECOVERY
+source_round=20260731_uav_source_identifiability_g0_oracle_gate_finite_precision_arrival_semantics_clarification
+source_archive_commit=9778760bfd641ad068964810adaf8629427084bf
+source_operation_id=ce8f31e2-e86f-4884-8f49-a01775485c73
+source_assistant_message_id=7e9e7dcf-ab37-4f48-a397-a60259d0d0ca
+source_response_sha256=9ac73af2c3d3da2471ed0f49f5cf0372c1d7e00e00619cd3cb802360c260661b
+source_response=ARRIVAL_SEMANTICS=DE
+source_response_format=NONCONFORMING
+compute_budget=zero
+scientific_iteration_cost=zero
+```
+
+This round introduces no evidence and asks no new scientific question. It asks
+External Pro only to restate its intended choice from the source round as one
+complete member of the already frozen three-token response domain.
