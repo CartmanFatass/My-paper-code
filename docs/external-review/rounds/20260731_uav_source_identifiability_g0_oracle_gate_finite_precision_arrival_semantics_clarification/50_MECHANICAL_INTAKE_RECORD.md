@@ -1,0 +1,18 @@
+# Mechanical Intake Record
+
+assignment_identity=ORACLE_GATE_FINITE_PRECISION_ARRIVAL_SEMANTICS
+operation_id=ce8f31e2-e86f-4884-8f49-a01775485c73
+stable_key=hmasd-uav-formal-pro
+provider=chatgpt
+model=Pro
+conversation_id=6a6cef0a-cf1c-83e8-92c3-161bffb01adc
+idempotency_key=uav-g0-gate-arrival-1ff9505-r5
+send_count=1
+terminal_state=NATURAL_COMPLETION_VERIFIED
+clicked_controls=[]
+snapshots=2_same_assistant_identity_and_hash
+raw_output_path=21_PRO_OPEN_RAW.md
+raw_response_bytes=ARRIVAL_SEMANTICS=DE
+response_format=NONCONFORMING
+allowed_exact_response_lines=ARRIVAL_SEMANTICS=DEAD_ZONE_BOUND|REACHABLE_GATE_REPRESENTATION|UNREACHABLE_INVALID_REALIZATION
+mechanical_note=Archived response is a single line but does not exactly match any allowed response line.
