@@ -8,6 +8,9 @@ scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
 agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
+browser_backend=chrome-cdp
+browser_window_policy=one_agentify_process_one_chrome_window
+stable_key_tab_policy=one_live_tab_per_stable_key
 ```
 
 Browser transport is retired; Agentify is the sole External Pro transport.
@@ -21,6 +24,10 @@ Browser transport is retired; Agentify is the sole External Pro transport.
 | `hmasd-independent-research-pro` | Independent Research Pro Review Operator | independent-research Pro conversation |
 
 Stable keys identify a runtime binding, not a repository conversation record.
+Within one live Agentify process, every operation for the same stable key reuses
+its existing tab. Different stable keys use separate tabs in the same Chrome
+window; an operation never creates a new window merely because it is a new
+review turn. One tab may be recreated after an Agentify or Chrome restart.
 Conversation IDs, URLs, model evidence, credentials, authentication material
 and live registrations are runtime-only and must never be committed or placed
 in role/Skill text. The binding is loaded from the local Agentify state at the

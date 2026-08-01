@@ -24,7 +24,7 @@ $agentifySkillNormalized = $agentifySkill -replace '\s+', ' '
 $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($operations, 'review_transport_recovery_rule=.agents/skills/hmasd-agentify-pro-transport/SKILL.md#minimal-recovery'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'submit --verify-existing'), @($agentifySkillNormalized, 'no recorded user message'), @($agentifySkillNormalized, 'never resend it'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT ='), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($operations, 'review_transport_recovery_rule=.agents/skills/hmasd-agentify-pro-transport/SKILL.md#minimal-recovery'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'submit --verify-existing'), @($agentifySkillNormalized, 'no recorded user message'), @($agentifySkillNormalized, 'never resend it'), @($agentifyContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'), @($agentifyContractNormalized, 'browser_backend=chrome-cdp'), @($agentifyContractNormalized, 'browser_window_policy=one_agentify_process_one_chrome_window'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "d82e0ad377cd5ba8bdc484b7531a8b68cc92a8d7"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
