@@ -1,0 +1,33 @@
+# Mechanical intake: VSP-02 v4 transport terminal
+
+```text
+record_type=EXPLORER_TOY_DESIGN_ASSERTION_AUDIT_TRANSPORT_INTAKE
+workflow_id=EXPLORER-TOY-VALIDATION-2026-07-31-P1
+candidate_id=CAND-VSP-02
+round=20260801_explorer_toy_validation_p1_vsp_02_design_assertion_audit_v4
+transport_backend=agentify
+agentify_source_commit=917c5328695b4546e8c7e548878b00a07f45af91
+package_commit=e9d129ced10708a095af62521e9fffd9b01b01e1
+stable_key=hmasd-explorer-validation-pro
+conversation_id=6a6cd2d9-321c-83e8-a046-7062de12c4b7
+operation_id=9d96f1fa-d8c0-4e7d-99a7-0f337b97a2bc
+idempotency_key=explorer_toy_validation_p1_vsp_02_design_assertion_audit_v4_e9d129c
+prompt_digest=74098de1a6c12b73421a50ded87259099d30bb1a23fc1c042fcdf4dac18fc81c
+transport_status=AGENTIFY_TRANSPORT_BLOCKED
+terminal_state=IDENTITY_UNREADABLE
+error=agentify_http_500:review_submission_identity_receipt_invalid
+send_count=0
+assistant_response_visible=false
+natural_completion_verified=false
+raw_archive=not_created
+scientific_disposition=none
+compute=false
+scientific_iteration_cost=zero
+retry_or_fallback=forbidden
+explorer_route=forbidden_transport_diagnosis
+next_boundary=WDM_AGENTIFY_LONG_PROMPT_MESSAGE_IDENTITY_REPAIR_AND_NEW_SMOKE_AUTHORIZATION
+```
+
+The operation is closed and immutable. This record reports transport facts
+only; it does not interpret the candidate or authorize code, compute, or a
+replacement review operation.
