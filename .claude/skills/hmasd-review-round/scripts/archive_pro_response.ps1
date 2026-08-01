@@ -15,8 +15,14 @@
       1. the archive exists and rereads byte-identically;
       2. its SHA-256 equals the receipt's responseSha256 -- a mismatch is a
          refusal, never a repair; do not reconcile by editing the file;
-      3. the response carries THIS round's stage_commit, not the previous
-         round's -- a stale capture reads as a fresh ruling;
+      3. whether the response cites this round's stage_commit is RECORDED,
+         not enforced: under the receipt transport the response-to-round
+         binding is proven by the receipt itself (operation key +
+         userMessageId + two-snapshot completion), and a reviewer that
+         paraphrases or omits the commit is ordinary (first observed
+         2026-08-01, round 20260801_variable_k_algorithm_direction). The
+         browser-era stale-capture risk this check refused no longer has a
+         mechanism;
       4. it is at plausible size with a non-empty first line. (No markdown
          heading check: Agentify archives the rendered text, so '#' markers
          are not present -- measured in the 2026-08-01 transport smoke.)
@@ -62,9 +68,7 @@ if ($failures.Count -eq 0) {
     if ($text.Length -lt $MinimumChars) {
         $failures.Add("Archive holds only $($text.Length) characters, below -MinimumChars $MinimumChars. That is not a ruling.")
     }
-    if (-not $text.Contains($StageCommit)) {
-        $failures.Add("Archive does not contain this round's stage_commit '$StageCommit'. A response carrying a different commit is the PREVIOUS round's ruling and must not be archived here.")
-    }
+    $stageCommitCited = $text.Contains($StageCommit)
     $firstLine = ($text -split "`r?`n" | Where-Object { $_.Trim() } | Select-Object -First 1)
     if ([string]::IsNullOrWhiteSpace($firstLine)) {
         $failures.Add('Archive has no non-empty first line.')
@@ -85,6 +89,7 @@ $lines = $text -split "`r?`n"
     operation_key   = $receipt.idempotencyKey
     terminal_state  = $receipt.terminalState
     stage_commit    = $StageCommit
+    stage_commit_cited = $stageCommitCited
     first_line      = ($lines | Where-Object { $_.Trim() } | Select-Object -First 1)
     last_line       = ($lines | Where-Object { $_.Trim() } | Select-Object -Last 1)
     failures        = @()

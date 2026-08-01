@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260801_variable_k_algorithm_direction
-stage_commit=f2fdc3af0000000000000000000000000000dead
+stage_commit=4e190f29975f25f308b36d5784c47d3f28197839
 question=docs/external-review/rounds/20260801_variable_k_algorithm_direction/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.
