@@ -19,11 +19,16 @@ Browser transport is retired; Agentify is the sole External Pro transport.
 
 | Stable key | Owner | Use |
 |---|---|---|
-| `hmasd-formal-pro` | Code Project Manager | formal-review Pro conversation |
+| `hmasd-formal-pro` | Code Project Manager | `formal_toy_research` Pro conversation |
+| `hmasd-uav-formal-pro` | Code Project Manager | `uav_validation` Pro conversation |
 | `hmasd-explorer-validation-pro` | Code Project Manager | Explorer validation Pro conversation |
 | `hmasd-independent-research-pro` | Independent Research Pro Review Operator | independent-research Pro conversation |
 
 Stable keys identify a runtime binding, not a repository conversation record.
+The three Code Project Manager keys are workstream-specific and cannot
+substitute for one another.
+After Agentify first persists a stable-key binding, later operations must match
+it; tab navigation cannot rebind or overwrite that durable binding.
 Within one live Agentify process, every operation for the same stable key reuses
 its existing tab. Different stable keys use separate tabs in the same Chrome
 window; an operation never creates a new window merely because it is a new

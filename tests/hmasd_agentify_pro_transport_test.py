@@ -134,6 +134,17 @@ class AgentifyTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.TransportError, "request_field_set_mismatch"):
             MODULE.validate_request({**self.request, "extra": "forbidden"}, repo_root=self.root)
 
+    def test_uav_formal_key_is_cpm_owned(self) -> None:
+        uav_request = dict(self.request)
+        uav_request["stable_key"] = "hmasd-uav-formal-pro"
+        validated = MODULE.validate_request(uav_request, repo_root=self.root)
+        self.assertEqual(validated["stable_key"], "hmasd-uav-formal-pro")
+
+        wrong_owner = dict(uav_request)
+        wrong_owner["transport_owner"] = "independent_research_review_operator"
+        with self.assertRaisesRegex(MODULE.TransportError, "stable_key_owner_mismatch"):
+            MODULE.validate_request(wrong_owner, repo_root=self.root)
+
     def test_backend_selection_is_restart_stable_and_agentify_only(self) -> None:
         selection = json.loads(self.backend_selection_path.read_text(encoding="utf-8"))
         selection["transport_backend"] = "browser"

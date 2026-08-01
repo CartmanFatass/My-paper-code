@@ -29,9 +29,15 @@ The request must provide a fixed role-owned `stable_key`:
 
 ```text
 code_project_manager -> hmasd-formal-pro
+code_project_manager -> hmasd-uav-formal-pro
 code_project_manager -> hmasd-explorer-validation-pro
 independent_research_review_operator -> hmasd-independent-research-pro
 ```
+
+For Code Project Manager, `hmasd-formal-pro` is reserved for
+`formal_toy_research`, `hmasd-uav-formal-pro` is reserved for
+`uav_validation`, and `hmasd-explorer-validation-pro` is reserved for Explorer
+validation. A stable key cannot substitute for another workstream's key.
 
 Conversation ID, exact URL, endpoint token and the selected Pro model are
 runtime values. They must be read from the live Agentify binding and must not

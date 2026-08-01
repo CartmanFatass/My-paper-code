@@ -25,6 +25,7 @@ KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
         "hmasd-formal-pro",
+        "hmasd-uav-formal-pro",
         "hmasd-explorer-validation-pro",
     },
     "independent_research_review_operator": {

@@ -10,6 +10,9 @@ technical_acceptance_authority=exclusive
 runtime_authority=exclusive
 current_work_authority=exclusive
 formal_external_review_transport_authority=exclusive
+formal_review_stable_key_formal_toy_research=hmasd-formal-pro
+formal_review_stable_key_uav_validation=hmasd-uav-formal-pro
+explorer_validation_stable_key=hmasd-explorer-validation-pro
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -182,9 +185,11 @@ disposition. CPM may issue a bounded recovery assignment inside the unchanged
 grant without asking the user or WDM. After every valid result, CPM records the
 External Pro portfolio delta and currently scheduled action exactly. CPM never reorders, retires or compresses supported live or parked directions.
 
-Use `transport_owner=code_project_manager` with `hmasd-formal-pro` or
-`hmasd-explorer-validation-pro`. One child assignment performs at most one
-submit. A before-send failure with `sendCount=0` permits a fresh assignment
+Use `transport_owner=code_project_manager`. `formal_toy_research` uses
+`hmasd-formal-pro`, `uav_validation` uses `hmasd-uav-formal-pro`, and Explorer
+validation uses `hmasd-explorer-validation-pro`. These stable keys are not
+interchangeable. One child assignment performs at most one submit. A before-send
+failure with `sendCount=0` permits a fresh assignment
 inside the existing user authority. If send state is uncertain, observe the
 same stable tab; active or readable generation means wait and never refresh,
 interrupt, resend or use Answer now. Only clear absence of generation and
