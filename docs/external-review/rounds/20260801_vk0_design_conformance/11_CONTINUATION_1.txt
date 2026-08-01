@@ -1,0 +1,105 @@
+Convergence turn 1 of the V-K0 design conformance check (stage_commit=5d471457d1de2bb4974124cef0f1d3dea244f206).
+
+All six closure items of your CHANGES_REQUIRED ruling are entered into
+VK0_REALIZATION_DECISION_LEDGER.md as frozen amendments. The amendment
+section is pasted verbatim below (it now lives in the repository; the text
+here is the byte content for your review). No experiment has run; no
+implementation has begun. The one question: do these amendments close the
+conformance check?
+
+--- BEGIN AMENDMENT SECTION (verbatim from the ledger) ---
+
+## Frozen amendments from the conformance ruling (round 20260801_vk0_design_conformance, CHANGES_REQUIRED)
+
+**A-VK-D2 (permutation-equivariant two-track incumbents).** The raw
+lexicographic tie-break is withdrawn (it does not commute with a slot
+permutation and can collapse the two panels onto one identity-preferred
+path). The panel maintains two explicit permutation tracks:
+`assignment_permutation=0` — slot 0 carries the slow duty, slot 1 the fast
+duty; `assignment_permutation=1` — mirrored. At the initial check the
+corresponding optimal pair is instantiated; at each later check the oracle
+chooses the joint-return-maximizing legal edit that preserves that
+permutation (tie-breaks expressed in permutation-canonical coordinates,
+never raw agent IDs). 4 signs × 2 tracks × 7 noninitial checks × 2 focals
+= 112 rows, unchanged. Exhaustive incumbent enumeration is not performed.
+
+**A-VK-D3 (complete boundary fingerprint, fail-closed).** Every natural and
+counterfactual branch computes and compares one canonical pre-decision
+boundary fingerprint containing at least: environment state and observation
+bytes; environment step; environment-owned RNG state; active skills; skill
+ages; active mask; steps_to_check; episode_steps; agent order; low actor
+and critic hidden arrays (even when identically zero); NumPy global RNG
+state; PyTorch CPU RNG state; PyTorch CUDA RNG state if applicable;
+checkpoint SHA-256; resolved-config hash; contract and trace-schema
+versions — plus any other mutable runtime field read before or during the
+focal decision. Any focal-boundary replay mismatch emits
+INVALID_VARIABLE_K_URGENCY_AUDIT; nothing is dropped-and-counted (drop
+semantics are withdrawn — selective dropping could alter the retained
+sample's composition).
+
+**A-VK-D4 (serial-branch conditions).** No per-branch generator refactor,
+provided all of: every branch seed derives solely from its immutable unit
+identity; every relevant RNG state is reset or reconstructed before the
+branch; branch enumeration order cannot change a derived seed; the complete
+pre-decision fingerprint passes; any future reachable RNG source reopens
+this item.
+
+**A-VK-D5 (order guard).** Before sampling:
+sorted(agent_order) == [0, 1], length 2, no duplicates. The selected
+order is held for every check in an episode and for all natural, KEEP,
+named-SET, sampled-SET and replay branches of that episode; default None
+stays byte-identical ascending.
+
+**A-VK-D6 (durable identity and recomputation keys).** Both JSONL schemas
+additionally carry: contract_id, trace_schema_version, training_seed,
+evaluation_seed, episode_id, agent_order_code, check_index, focal_agent,
+check_unit_id, checkpoint_hash, resolved_config_hash; each counterfactual
+row also branch_unit_id,
+estimand_family ∈ {KEEP_REFERENCE, OPP_NAMED_SET, SET_SAMPLED, NATURAL},
+parent_check_unit_id. The rows persist the five-step natural
+external-reward vector, five-step slow-match vector and five-step
+fast-match vector (competence evidence is row-durable; the old precedent's
+NaN CheckRow columns are not copied). Rule: all ruled semantic fields plus
+the identity/provenance/recomputation keys the registered analysis needs.
+
+**A-VK-D8 (resolved-runtime preflight and identities).** Before the first
+environment step each training process writes and validates resolved:
+scenario, controller, k0, n_agents, n_skills, action-table hash,
+direct-state context mode, num_envs, rollout_length, total_timesteps, high
+PPO epochs, high learning rate, low-optimizer absence, all
+intrinsic/shaping paths disabled, device/backend (pinned CPU explicitly),
+training seed, output root. Scientific identity binds to final-checkpoint
+path + checkpoint SHA-256 + training seed + resolved-config hash + recorded
+final exposure — never the literal filename. The timing microbenchmark uses
+a non-scientific seed, discards its checkpoint, reads no reward or
+capability metric, and may affect scheduling only.
+
+**A-VK-D9 (executable branch predicates).** For each required opportunity
+stratum (pooled, canonical, reversed):
+opp_pass ⟺ LCB(U_opp|URGENT) > 0.5 ∧ UCB(U_opp|STABLE) < 0.5 ∧
+LCB(U_opp|URGENT − U_opp|STABLE) > 0.5. A stratum decisively fails iff at
+least one of: UCB(U_opp|URGENT) ≤ 0.5; LCB(U_opp|STABLE) ≥ 0.5;
+UCB(U_opp|URGENT − U_opp|STABLE) ≤ 0.5. Any required stratum decisively
+failing → row 5; otherwise any non-pass → row 7. After opportunity passes,
+natural alignment is decisively wrong iff any of:
+UCB(U_nat|URGENT) ≤ 0.5; LCB(U_nat|STABLE) ≥ 0.5;
+UCB(U_nat|STABLE) ≤ −0.5; UCB(Δλ) ≤ 0. The realized SET-rate contrast
+stays a positive-point-estimate pass requirement; it triggers
+wrong-direction independently only when its upper bound is at or below
+zero, else a nonpositive point estimate is unresolved.
+
+**A-VK-D10 (artifact binding and actual-incumbent oracle).** The V-K0A
+authorization artifact binds: contract ID, stage commit, environment blob
+SHA, fixed action-table hash, oracle-script hash, panel-schema version, the
+112-row count, all validity predicates, the verdict, and the artifact's
+SHA-256; V-K0B verifies the whole tuple before loading any checkpoint (a
+stale or differently constituted artifact is an invalid audit). Every
+V-K0B natural check computes U_src by invoking the same exhaustive
+oracle on that check's ACTUAL pre-decision incumbent pair — never from
+physical phase, skill axis, fast/stable labels, or the V-K0A
+oracle-optimal track. The final branch selector consumes the
+exposure/provenance manifest as well as the row files and oracle panel;
+manifest, replay, checkpoint, or prohibited-exposure violations feed the
+precedence-1 invalid branch.
+
+--- END AMENDMENT SECTION ---
