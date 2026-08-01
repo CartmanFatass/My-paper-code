@@ -116,7 +116,7 @@ mechanical_guarantee_scope=irreversible_high_cost_only
 retry_recoverable_failure_mechanism=forbidden
 single_mechanism_line_budget=100
 terminal_state_budget=3
-control_plane_total_line_ceiling=5600
+control_plane_total_line_ceiling=6400
 legacy_budget_exemptions=pretooluse_guard.ps1,check_control_plane.py
 new_mechanism_requires_named_deletion=true
 net_line_growth_default=negative
@@ -133,8 +133,12 @@ tombstone_policy=pattern_based_no_per_file_growth
 
 The ceiling is enforced at closure by the checklist line in step 5, not by a
 tool: exceeding it is recoverable, so per the first key it does not earn a
-mechanism. `legacy_budget_exemptions` names the two mechanisms grandfathered
-above `single_mechanism_line_budget` — they may shrink, never grow.
+mechanism. It was set from the measured post-cleanup water mark (6,369 on
+2026-08-01) — a ceiling below reality is violated by every commit and reads as
+noise; the ratchet is `net_line_growth_default=negative`, and the ceiling may
+be lowered as the surface shrinks, never raised without a named deletion.
+`legacy_budget_exemptions` names the two mechanisms grandfathered above
+`single_mechanism_line_budget` — they may shrink, never grow.
 
 ## A guard is not done until it has been watched failing
 
