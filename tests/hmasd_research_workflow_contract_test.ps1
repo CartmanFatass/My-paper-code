@@ -58,6 +58,7 @@ $workflowDesignManagerRoleNormalized = $workflowDesignManagerRole -replace '\s+'
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
 $proRoleNormalized = $proRole -replace '\s+', ' '
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
+$workflowAuditNormalized = $workflowAudit -replace '\s+', ' '
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
@@ -172,18 +173,21 @@ foreach ($required in @(
     'Code Project Manager task',
     'Independent Research Pro Review Operator task',
     'registered native child',
-    'docs/project/CURRENT_WORK.md` is Code Project Manager operational state',
-    'workflow_design_manager_workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
-    'workflow_design_manager_workflow_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
-    'persistent_session_role_local_workflow_design_authority=exclusive_for_owned_surfaces',
-    'persistent_session_role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces',
-    'persistent_session_workflow_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
-    'workflow_child_parent=assigning_persistent_session',
+    'docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index',
+    'workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces',
+    'persistent_session_workflow_design_authority=none',
+    'persistent_session_workflow_acceptance_authority=none',
+    'persistent_session_workflow_git_authority=none',
+    'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
+    'workflow_child_parent=workflow_design_manager',
     'workflow_child_acceptance_authority=none',
     'session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md',
     'workflow_design_manager_workflow_runtime_authority=none',
-    'workflow_design_manager_current_work_authority=none',
-    'workflow_design_manager_git_authority=direct_for_workflow_design_surfaces',
+    'workflow_design_manager_current_work_authority=public_index_and_own_workflow_control_plane_records_only',
+    'workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces',
     'workflow_design_manager_external_review_runtime_authority=none',
     'workflow_design_manager_experiment_runtime_authority=none',
     'code_project_manager_code_authority=exclusive',
@@ -218,7 +222,7 @@ foreach ($required in @(
     'workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
-    'independent_research_explorer_session=019fbd62-3440-7dd1-8d41-c72c15cb8d4e',
+    'independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945',
     'independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
@@ -507,13 +511,12 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'A session is an address, not authority.',
-    'Only a direct user instruction in the Independent Research Explorer task may change',
+    'An address grants no authority.',
+    'Only direct user instruction in the Explorer task changes',
     'research_state_effect=none',
-    'control-plane reload notice or mechanical receipt',
-    'mechanical nonconformance',
-    'verbatim External Pro advisory gap',
-    'Direction review is a native-child final to Explorer',
+    'WORKFLOW_RELOAD_RECEIPT',
+    'exact mechanical project-validation facts',
+    'direction-review child returns natively to its Explorer parent',
     'ROUTE_AUTHORITY_MISMATCH')) {
     if (-not $crossTaskRoutingNormalized.Contains($required)) {
         throw "Cross-task routing research-authority boundary missing: $required"
@@ -531,9 +534,9 @@ foreach ($forbidden in @(
     }
 }
 foreach ($required in @(
-    'The cross-task routing Skill is the single source for WDM-to-Explorer output.',
     'The cross-task routing Skill is the single source for non-authoritative inputs',
-    'Explorer may make autonomous transitions inside that exact authorization.')) {
+    'Explorer may make autonomous transitions inside that exact authorization.',
+    'WDM may send Explorer only workflow reload or mechanical receipts with `research_state_effect=none`')) {
     $allAuthoritySurfaces = "$workflowDesignManagerRoleNormalized $codePmRoleNormalized $($independentResearchRole -replace '\s+', ' ')"
     if (-not $allAuthoritySurfaces.Contains($required)) {
         throw "Independent-research role boundary missing: $required"
@@ -811,8 +814,18 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $projec
     }
 }
 
-if ((Get-Content -LiteralPath (Join-Path $repo 'AGENTS.md')).Count -gt 150) {
-    throw 'AGENTS role router has accumulated role-specific context'
+$wdmCorePaths = @(
+    'AGENTS.md',
+    '.agents/roles/WORKFLOW_DESIGN_MANAGER.md',
+    '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md',
+    '.agents/skills/hmasd-workflow-change-audit/SKILL.md',
+    '.agents/skills/hmasd-cross-task-routing/SKILL.md',
+    'docs/project/SESSION_WORKSPACE_CONTRACT.md')
+$wdmCoreLineCount = ($wdmCorePaths |
+    ForEach-Object { (Get-Content -LiteralPath (Join-Path $repo $_)).Count } |
+    Measure-Object -Sum).Sum
+if ($wdmCoreLineCount -gt 1000) {
+    throw 'WDM core control plane exceeds 1000 physical lines'
 }
 
 foreach ($required in @(
@@ -820,7 +833,7 @@ foreach ($required in @(
     'formal_compute_authority=user_only',
     'Operational invalidity costs zero scientific iterations',
     'never reorders, retires or compresses')) {
-    if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing: $required" }
+    if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
     'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
@@ -884,9 +897,12 @@ $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/role
 $projectOperationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/PROJECT_OPERATIONS_OPERATOR.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
-function ConvertTo-UniqueKeyMap([string]$Body, [string]$Scope) {
+function Read-FencedRecord([string]$RelativePath, [string]$Scope) {
+    $body = Get-Content -Raw -LiteralPath (Join-Path $repo $RelativePath)
+    $match = [regex]::Match($body, '(?ms)```text\r?\n(?<body>.*?)^```\r?$')
+    if (-not $match.Success) { throw "$Scope fenced record is missing" }
     $map = @{}
-    foreach ($line in ($Body -split "`r?`n")) {
+    foreach ($line in ($match.Groups['body'].Value -split "`r?`n")) {
         if ($line -eq '') { continue }
         if ($line -notmatch '^([A-Za-z][A-Za-z0-9_]*)=(.*)$') { throw "$Scope has a non-key line: $line" }
         if ($map.ContainsKey($Matches[1])) { throw "$Scope repeats key: $($Matches[1])" }
@@ -894,65 +910,42 @@ function ConvertTo-UniqueKeyMap([string]$Body, [string]$Scope) {
     }
     return $map
 }
-$lineCount = @($current -split "`r?`n").Count
-if ($lineCount -gt 500) { throw "CURRENT_WORK exceeds 500 lines: $lineCount" }
-$headerMatch = [regex]::Match($current, '(?ms)\A# HMASD Current Work Portfolio\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
-if (-not $headerMatch.Success) { throw 'CURRENT_WORK portfolio header fence is missing' }
-$header = ConvertTo-UniqueKeyMap $headerMatch.Groups['body'].Value 'CURRENT_WORK header'
-$parsedKeyCount = $header.Count
-foreach ($key in @('document_kind', 'state_owner', 'state_updated', 'workstream_ids', 'independent_research_pointer_ids', 'legacy_snapshot')) {
-    if (-not $header.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($header[$key])) { throw "CURRENT_WORK header missing: $key" }
+
+$header = Read-FencedRecord 'docs/project/CURRENT_WORK.md' 'CURRENT_WORK index'
+foreach ($key in @('document_kind', 'schema_version', 'index_owner', 'session_record_ids', 'common_record_ids', 'legacy_snapshot')) {
+    if (-not $header.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($header[$key])) { throw "CURRENT_WORK index missing: $key" }
 }
-if ($header['document_kind'] -ne 'current_work_portfolio' -or $header['state_owner'] -ne 'code_project_manager') {
-    throw 'CURRENT_WORK header identity is invalid'
+if ($header['document_kind'] -ne 'current_work_index' -or
+    $header['index_owner'] -ne 'workflow_design_manager') {
+    throw 'CURRENT_WORK index identity is invalid'
 }
-$legacyPath = Join-Path $repo $header['legacy_snapshot']
-if (-not (Test-Path -LiteralPath $legacyPath -PathType Leaf)) { throw 'CURRENT_WORK legacy snapshot is missing' }
-$workstreamIds = @($header['workstream_ids'].Split('|') | Where-Object { $_ })
-$workstreamMatches = [regex]::Matches($current, '(?ms)^## Workstream: (?<name>[a-z0-9_]+)\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
-if ($workstreamMatches.Count -ne $workstreamIds.Count) { throw 'CURRENT_WORK roster and workstream block counts differ' }
-$workstreams = @{}
-foreach ($match in $workstreamMatches) {
-    $name = $match.Groups['name'].Value
-    if ($workstreams.ContainsKey($name)) { throw "CURRENT_WORK repeats workstream: $name" }
-    $record = ConvertTo-UniqueKeyMap $match.Groups['body'].Value "CURRENT_WORK workstream $name"
-    foreach ($key in @('workstream_id', 'owner_role', 'status', 'active_assignment_id', 'next_boundary', 'environment', 'grant_or_authority_reference', 'current_evidence_pointer')) {
-        if (-not $record.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($record[$key])) { throw "CURRENT_WORK workstream $name missing: $key" }
+if (-not (Test-Path -LiteralPath (Join-Path $repo $header['legacy_snapshot']) -PathType Leaf)) {
+    throw 'CURRENT_WORK legacy snapshot is missing'
+}
+foreach ($id in @($header['session_record_ids'].Split('|') | Where-Object { $_ })) {
+    $record = Read-FencedRecord "docs/project/current-work/sessions/$id.md" "CURRENT_WORK session $id"
+    if ($record['document_kind'] -ne 'current_work_session' -or $record['session_owner_role'] -ne $id) {
+        throw "CURRENT_WORK session identity mismatch: $id"
     }
-    if ($record['workstream_id'] -ne $name -or $record['owner_role'] -ne 'code_project_manager') { throw "CURRENT_WORK workstream identity mismatch: $name" }
-    $workstreams[$name] = $record
-    $parsedKeyCount += $record.Count
 }
-foreach ($name in $workstreamIds) {
-    if (-not $workstreams.ContainsKey($name)) { throw "CURRENT_WORK roster has no block: $name" }
+$common = @{}
+foreach ($id in @($header['common_record_ids'].Split('|') | Where-Object { $_ })) {
+    $record = Read-FencedRecord "docs/project/current-work/common/$id.md" "CURRENT_WORK common $id"
+    if ($record['document_kind'] -ne 'current_work_common_record' -or $record['record_id'] -ne $id) {
+        throw "CURRENT_WORK common identity mismatch: $id"
+    }
+    $common[$id] = $record
 }
-if ([regex]::Matches($current, '(?m)^active_assignment_id=').Count -ne $workstreamIds.Count -or
-    [regex]::Matches($current, '(?m)^next_boundary=').Count -ne $workstreamIds.Count) {
-    throw 'CURRENT_WORK current assignment keys are not unique within the roster'
+if ($common['workflow_control_plane']['owner_role'] -ne 'workflow_design_manager' -or
+    $common['formal_toy_research']['owner_role'] -ne 'code_project_manager') {
+    throw 'CURRENT_WORK partition ownership is invalid'
 }
-$formal = $workstreams['formal_toy_research']
+$formal = $common['formal_toy_research']
 foreach ($key in @('grant_iterations_authorized', 'grant_iterations_remaining', 'conclusion_bearing_iterations_consumed_total')) {
     if (-not $formal.ContainsKey($key) -or $formal[$key] -notmatch '^\d+$') { throw "CURRENT_WORK formal grant is invalid: $key" }
 }
 if ([int]$formal['grant_iterations_remaining'] -gt [int]$formal['grant_iterations_authorized']) {
     throw 'CURRENT_WORK formal grant remaining exceeds authorization'
-}
-$pointerMatches = [regex]::Matches($current, '(?ms)^## Independent research pointer: (?<name>[a-z0-9_]+)\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
-$pointerIds = @($header['independent_research_pointer_ids'].Split('|') | Where-Object { $_ })
-if ($pointerMatches.Count -ne $pointerIds.Count) { throw 'CURRENT_WORK pointer roster and block counts differ' }
-foreach ($match in $pointerMatches) {
-    $record = ConvertTo-UniqueKeyMap $match.Groups['body'].Value "CURRENT_WORK pointer $($match.Groups['name'].Value)"
-    if ($record['pointer_id'] -ne $match.Groups['name'].Value -or $record['project_state_replication'] -ne 'forbidden') {
-        throw 'CURRENT_WORK independent research pointer duplicates owned state'
-    }
-    $parsedKeyCount += $record.Count
-}
-$allKeyLineCount = [regex]::Matches($current, '(?m)^[A-Za-z][A-Za-z0-9_]*=.*$').Count
-if ($allKeyLineCount -ne $parsedKeyCount) {
-    throw 'CURRENT_WORK contains key-bearing state outside a registered current record'
-}
-if ($current -match '(?im)^## .*mechanically recorded|authoritative .*override') {
-    throw 'CURRENT_WORK contains appended historical state'
 }
 
 foreach ($required in @(
@@ -975,7 +968,7 @@ foreach ($required in @(
     'role_kind=persistent_project_coordination_code_runtime_and_acceptance_task',
     'code_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
+    'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_transport_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
@@ -987,21 +980,22 @@ foreach ($required in @(
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
-    'passes the locked target session, model and thinking',
+    'with the locked target session, model and thinking',
     'CODE_SCIENCE_INDEX.md',
     'CODE_ACCEPTED')) {
-    if (-not $codePmRole.Contains($required)) { throw "Code Project Manager role missing: $required" }
+    if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
     'role=workflow_design_manager',
-    'role_kind=dedicated_persistent_shared_workflow_design_authority_task',
-    'workflow_design_authority=exclusive_for_shared_control_plane_surfaces',
-    'workflow_design_acceptance_authority=exclusive_for_shared_control_plane_surfaces',
-    'role_local_workflow_design_authority=exclusive',
-    'session_owner_role=workflow_design_manager',
+    'role_kind=dedicated_persistent_central_workflow_design_authority_task',
+    'workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
+    'workflow_git_authority=exclusive_for_workflow_control_plane_surfaces',
+    'public_workflow_session_record=docs/project/current-work/sessions/workflow_design_manager.md',
     'session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessions/workflow_design_manager',
     'workflow_runtime_authority=none',
-    'current_work_authority=none',
+    'current_work_authority=public_index_and_own_workflow_control_plane_records_only',
     'external_review_runtime_authority=none',
     'experiment_runtime_authority=none',
     'scientific_authority=none',
@@ -1011,20 +1005,19 @@ foreach ($required in @(
     'code_authority=none',
     'code_acceptance_authority=none',
     'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=exact_fixed_requester_role_session',
+    'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
-    'resolves the requester''s locked session, model and thinking',
-    'never an automatic acceptance gate',
+    'not make WDM a code, runtime, scientific or per-operation approval gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
-    'workflow_collaboration_scope=shared_control_plane_mutations',
+    'workflow_collaboration_scope=all_workflow_control_plane_mutations',
     'workflow_collaboration_runtime_authority=none',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
     'CODE_SCIENCE_INDEX.md',
     'hmasd-workflow-cost-reviewer')) {
-    if (-not $workflowDesignManagerRole.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
+    if (-not $workflowDesignManagerRoleNormalized.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
 if ($workflowDesignManagerRole.Contains('current_work_owner=exclusive') -or
     $workflowDesignManagerRole.Contains('external_review_dispatch_and_result_routing=exclusive') -or
@@ -1047,8 +1040,8 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-workflow-cost-reviewer',
-    'parent=assigning_persistent_session',
-    'assignment_identity=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'parent=workflow_design_manager',
+    'assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'model=gpt-5.6-sol',
     'reasoning_effort=xhigh',
     'fork_turns=none_required',
@@ -1098,35 +1091,35 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
-    'shared persistent-session workflow-design procedure',
-    'calling session accepts only its exact owned workflow artifact',
-    'workflow-design procedure never loads them merely to reconstruct history',
-    'parent=assigning_persistent_session',
-    'workflow_child_parent=assigning_persistent_session',
-    'workflow_child_assignment_fields=session_owner_role|session_owner_id|owned_paths|session_workspace',
+    'Workflow Design Manager is the sole workflow design, modification, acceptance',
+    'WDM retains authority, semantic junctions, conflict resolution, final diff inspection, acceptance, Git and routing',
+    'Historical science/review evidence is not a repair target',
+    'workflow_child_parent=workflow_design_manager',
+    'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'workflow_child_acceptance_authority=none',
-    'workflow_design_mechanical_guarantee_scope=irreversible_external_actions_only',
-    'workflow_design_retry_recoverable_failure_mechanism=forbidden',
-    'workflow_design_new_mechanism_requires_named_deletion=true',
-    'workflow_design_net_line_growth_default=negative_or_zero',
-    'workflow_design_incident_to_mechanism_promotion_threshold=2_recurrences',
-    'workflow_design_rule_single_source=one_defining_file_others_point',
-    'session_owner_role',
-    'session_owner_id',
+    'workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only',
+    'workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist',
+    'workflow_new_mechanism_requires_named_deletion=true',
+    'workflow_net_line_growth_default=negative_or_zero',
+    'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
+    'workflow_rule_single_source=one_defining_file_others_point',
+    'workflow_assignment_id',
     'owned_paths',
-    'session_workspace',
-    'never create a review of the review',
-    'task-local impact matrix',
+    'wdm_session_workspace',
+    'Never review the review',
+    'local matrix',
     'exactly one existing role charter',
     'Every profile is registered',
     'Only when the user explicitly requests a workflow cost audit',
     'fresh-task profile smoke',
     'check_hmasd_agent_harness.py')) {
-    if (-not $workflowAudit.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+    if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
     'shared_workflow_surface_owner=workflow_design_manager',
-    'role_local_workflow_surface_owner=exact_persistent_session',
+    'shared_workflow_design_authority=exclusive',
+    'shared_workflow_acceptance_authority=exclusive',
+    'shared_workflow_git_authority=exclusive',
     'docs/session-workspaces/<role_id>/',
     'temp/sessions/<role_id>/',
     'docs/project/current-work/common/<record-id>.md',
@@ -1150,7 +1143,7 @@ foreach ($required in @(
     'confirms the complete plan in natural language',
     'Complete a read-only inspection',
     'workflow cost audit explicitly requested by the user',
-    'present a revised complete plan')) {
+    'present the complete revised plan')) {
     if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing: $required" }
 }
 if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import hashlib
 import subprocess
 import sys
 from pathlib import Path
@@ -20,7 +19,7 @@ WDM_SESSION = "019fb73d-5635-7b63-b165-6c5129bc0217"
 RETIRED_WDM_SESSION = "019f9d2f-e0ea-7411-9fd7-386f45f76909"
 CPM_SESSION = "019f9e4f-f4d0-7fe0-b214-c47fd034e84d"
 RESEARCH_REVIEW_SESSION = "019fb311-6137-7781-9708-3df24da34a4b"
-RESEARCH_EXPLORER_SESSION = "019fbd62-3440-7dd1-8d41-c72c15cb8d4e"
+RESEARCH_EXPLORER_SESSION = "019fbded-24cb-7541-aa16-0111b626b945"
 RETIRED_RESEARCH_EXPLORER_SESSION = "019fb2e1-d153-7043-b2e9-58690f9bd48d"
 LOCKED_ROUTES = {
     "workflow_design_manager": (WDM_SESSION, "gpt-5.6-sol", "high"),
@@ -48,33 +47,33 @@ PAYLOAD_SURFACES = PERSISTENT_ROLES
 def test_cross_task_routing_protocol_is_bounded_and_fail_closed() -> None:
     text = " ".join(SKILL.read_text(encoding="utf-8").split())
     required = (
-        "Locked route table",
+        "sole persistent-task address source",
         "role_id",
         "session_id",
         "model",
         "thinking",
         "Native send",
         "codex_app__send_message_to_thread",
-        "runtime capability",
-        "Passing both `model` and `thinking` is mandatory",
-        "substituting the sender's settings",
+        "native tool is unavailable",
+        "Passing model and thinking is mandatory",
+        "sender-setting substitution",
         "ROUTE_SENT",
         "ROUTE_CONFIGURATION_MISMATCH",
         "ROUTE_IDENTITY_MISMATCH",
         "ROUTE_HANDOFF_INVALID",
         "ROUTE_UNAVAILABLE",
-        "codex_delegation.source_thread_id",
-        "explicit user-directed workflow-design commit",
+        "source_thread_id",
+        "workflow commit",
         "Do not retry automatically",
         "Long-text file handoff",
         "larger than 8 KiB",
         "temp/sessions/<role>/handoffs/",
         "handoff_owner_role",
-        "locked source role",
+        "locked-source-role",
         "LONG_TEXT_HANDOFF_VERIFIED",
         "LONG_TEXT_HANDOFF_INVALID",
         "HANDOFF_CONSUMED",
-        "Neither role deletes a payload automatically",
+        "Only the source owner may later perform an explicit cleanup",
     )
     for token in required:
         assert token in text, token
@@ -134,8 +133,6 @@ def test_long_text_handoff_preserves_exact_utf8_and_identity(tmp_path: Path) -> 
     assert written.returncode == 0, written.stderr.decode()
     metadata = json.loads(written.stdout)
     assert metadata["status"] == "LONG_TEXT_HANDOFF_WRITTEN"
-    assert metadata["handoff_bytes"] == len(payload)
-    assert metadata["handoff_sha256"] == hashlib.sha256(payload).hexdigest()
     assert metadata["handoff_encoding"] == "utf-8"
     assert metadata["handoff_owner_role"] == "workflow_design_manager"
     assert metadata["handoff_path"].startswith(
@@ -151,16 +148,12 @@ def test_long_text_handoff_preserves_exact_utf8_and_identity(tmp_path: Path) -> 
         "workflow_design_manager",
         "--path",
         metadata["handoff_path"],
-        "--bytes",
-        str(metadata["handoff_bytes"]),
-        "--sha256",
-        metadata["handoff_sha256"],
     )
     assert verified.returncode == 0, verified.stderr.decode()
     assert json.loads(verified.stdout)["status"] == "LONG_TEXT_HANDOFF_VERIFIED"
 
 
-def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
+def test_long_text_handoff_rejects_invalid_utf8_and_path_escape(
     tmp_path: Path,
 ) -> None:
     repo = _handoff_repo(tmp_path)
@@ -175,7 +168,7 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
     )
     metadata = json.loads(written.stdout)
     target = repo / metadata["handoff_path"]
-    target.write_bytes(target.read_bytes()[:-1])
+    target.write_bytes(b"\xff")
 
     for args in (
         (
@@ -184,10 +177,6 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
             "code_project_manager",
             "--path",
             metadata["handoff_path"],
-            "--bytes",
-            str(metadata["handoff_bytes"]),
-            "--sha256",
-            metadata["handoff_sha256"],
         ),
         (
             "verify",
@@ -195,10 +184,6 @@ def test_long_text_handoff_rejects_tamper_truncation_and_path_escape(
             "code_project_manager",
             "--path",
             "AGENTS.md",
-            "--bytes",
-            "26",
-            "--sha256",
-            hashlib.sha256(b"document_kind=role_router\n").hexdigest(),
         ),
     ):
         rejected = _payload_command(repo, *args)
@@ -237,10 +222,6 @@ def test_long_text_handoff_rejects_owner_role_escape_and_cross_role_path(
             owner_role,
             "--path",
             metadata["handoff_path"],
-            "--bytes",
-            str(metadata["handoff_bytes"]),
-            "--sha256",
-            metadata["handoff_sha256"],
         )
         assert rejected.returncode != 0
         assert json.loads(rejected.stdout)["status"] == "LONG_TEXT_HANDOFF_INVALID"
@@ -252,10 +233,6 @@ def test_long_text_handoff_rejects_owner_role_escape_and_cross_role_path(
         "code_project_manager",
         "--path",
         metadata["handoff_path"],
-        "--bytes",
-        str(metadata["handoff_bytes"]),
-        "--sha256",
-        metadata["handoff_sha256"],
     )
     assert cross_role.returncode != 0
     assert json.loads(cross_role.stdout)["status"] == "LONG_TEXT_HANDOFF_INVALID"
@@ -268,20 +245,19 @@ def test_cross_task_routing_skill_is_explicit_only() -> None:
     assert "locked session, model, and thinking" in interface["interface"]["default_prompt"]
 
 
-def test_workflow_skills_bind_persistent_session_contract_without_granting_authority() -> None:
+def test_workflow_skills_bind_wdm_contract_without_granting_children_authority() -> None:
     for relative in (
         ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
         ".agents/skills/hmasd-workflow-change-audit/SKILL.md",
     ):
         text = (ROOT / relative).read_text(encoding="utf-8")
         for token in (
-            "session_owner_role",
-            "session_owner_id",
+            "workflow_assignment_id",
             "owned_paths",
-            "session_workspace",
+            "wdm_session_workspace",
             "SESSION_WORKSPACE_CONTRACT",
-            "grants no authority",
-            "shared-control-plane ownership",
+            "grants no",
+            "Workflow Design Manager",
         ):
             assert token in text, (relative, token)
 
@@ -348,9 +324,9 @@ def test_independent_review_operator_routes_only_terminal_methodology_to_wdm() -
         "Workflow Design Manager",
     ):
         assert token in role, token
-    assert "may route only an exact terminal methodology" in skill
-    assert "Direction review is a native-child final to Explorer" in skill
-    assert "does not use this Skill" in skill
+    assert "may return only its exact terminal methodology packet or blocker to WDM" in skill
+    assert "direction-review child returns natively" in skill
+    assert "never uses this route" in skill
     assert "direction packet directly to the locked Independent Research Explorer" not in role
 
 

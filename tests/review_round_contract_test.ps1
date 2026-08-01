@@ -98,6 +98,11 @@ foreach ($required in @(
 if ($agentifyScript.Contains('"prompt_sha256"')) {
     throw 'Agentify wrapper must not use prompt_sha256 as a request or recovery gate'
 }
+foreach ($forbiddenWorkflowHashField in @('hashlib', 'SHA256_RE', 'requestFingerprint', 'responseSha256', 'textSha256', '_sha256')) {
+    if ($agentifyScript.Contains($forbiddenWorkflowHashField)) {
+        throw "Agentify wrapper retains forbidden workflow hash field/helper: $forbiddenWorkflowHashField"
+    }
+}
 
 $renderer = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/render_review_fence.ps1'
 if (-not (Test-Path -LiteralPath $renderer -PathType Leaf)) {

@@ -53,6 +53,26 @@ def _fixture_repo(root: Path) -> Path:
     return root
 
 
+def _write_control_plane_budget_files(root: Path, first_file_lines: int) -> None:
+    for index, relative in enumerate(CHECKER.CONTROL_PLANE_BUDGET_PATHS):
+        line_count = first_file_lines if index == 0 else 1
+        _write(root / relative, "x\n" * line_count)
+
+
+def test_control_plane_line_budget_accepts_exact_limit(tmp_path: Path) -> None:
+    repo = _fixture_repo(tmp_path)
+    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 5)
+    errors = CHECKER.audit_repo(repo)
+    assert not any("control-plane line budget exceeded" in error for error in errors), errors
+
+
+def test_control_plane_line_budget_rejects_one_line_over(tmp_path: Path) -> None:
+    repo = _fixture_repo(tmp_path)
+    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 4)
+    errors = CHECKER.audit_repo(repo)
+    assert any("control-plane line budget exceeded: 1001>1000" in error for error in errors), errors
+
+
 def _add_benchmark_group(root: Path, *, drift: bool) -> None:
     with (root / ".codex/config.toml").open("a", encoding="utf-8") as handle:
         for variant in ("a", "b", "c"):

@@ -8,7 +8,7 @@ role_kind=persistent_project_coordination_code_runtime_and_acceptance_task
 code_authority=exclusive
 technical_acceptance_authority=exclusive
 runtime_authority=exclusive
-current_work_authority=exclusive
+current_work_authority=exclusive_for_project_operational_records
 formal_external_review_transport_authority=exclusive
 formal_review_stable_key_formal_toy_research=hmasd-formal-pro
 formal_review_stable_key_uav_validation=hmasd-uav-formal-pro
@@ -16,9 +16,11 @@ explorer_validation_stable_key=hmasd-explorer-validation-pro
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
-shared_workflow_design_authority=none
-role_local_workflow_design_authority=exclusive_for_owned_surfaces
-role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces
+workflow_design_authority=none
+workflow_modification_authority=none
+workflow_acceptance_authority=none
+workflow_git_authority=none
+workflow_change_request_route=workflow_design_manager
 session_owner_role=code_project_manager
 session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager
@@ -59,8 +61,9 @@ After the root router, read the public `docs/project/CURRENT_WORK.md` index,
 this charter, then the Code Project Manager session record and only the active
 workstream's linked common record, named contracts and artifacts. Keep
 unrelated workstreams unloaded. External Pro owns science. Workflow Design
-Manager owns shared workflow; Code Project Manager owns only its role-local
-workflow surfaces. Code Project Manager is the only persistent project
+Manager owns the complete workflow control plane; Code Project Manager reports
+workflow requirements and defects but never edits or accepts those surfaces.
+Code Project Manager is the only persistent project
 manager; there is no Research Operations Manager or persistent monitor.
 
 ## Owns
@@ -238,13 +241,13 @@ maintaining a parallel state machine. One parked workstream never pauses another
 
 ## Workflow changes and Git
 
-For a role-local workflow change, Code Project Manager uses
-`$hmasd-collaborative-workflow-design`, obtains the required plan confirmation,
-then uses `$hmasd-workflow-change-audit` and accepts only its owned charter,
-procedure, durable workspace and focused-contract paths. Shared router, Skill,
-profile, hook, registry or shared-contract conflicts route to the fixed
-Workflow Design Manager session with the locked target session, model and
-thinking; WDM is not a per-step approval gate.
+For any workflow requirement or defect, Code Project Manager sends one exact
+request to the fixed Workflow Design Manager session with the locked target
+session, model and thinking. CPM does not edit, accept, stage, commit or push a
+role charter, Skill, profile, hook, registry, stable workflow contract or
+workflow contract test. WDM is not a runtime or per-operation approval gate;
+CPM continues code, runtime and operational recovery while an unrelated
+workflow dependency is repaired.
 
 `docs/project/CURRENT_WORK.md` is a public link index. Update only the CPM
 session record and common records whose `owner_role=code_project_manager` after
@@ -254,8 +257,10 @@ switching the active workstream does not establish scientific uniqueness.
 
 Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
-task's staged paths. Shared workflow-design paths remain WDM-owned; CPM owns
-only the role-local surfaces declared by the session workspace contract.
+task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
+authority remains only for code, runtime, review, evidence, report, ledger,
+operational state and non-workflow session content declared by the session
+workspace contract.
 
 ## Must not
 

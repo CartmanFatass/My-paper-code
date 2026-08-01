@@ -3,19 +3,20 @@
 ```text
 document_kind=current_work_index
 schema_version=2
-state_owner=code_project_manager
+index_owner=workflow_design_manager
 state_updated=2026-08-01
-session_record_ids=code_project_manager
-common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer
+session_record_ids=code_project_manager|workflow_design_manager
+common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer|workflow_control_plane
 legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
 ```
 
-This entry contains links only. Active state is partitioned so unrelated
-workstreams and sessions do not share a write surface.
+This file is a link index. Active state is partitioned so unrelated workstreams
+and sessions do not share a write surface.
 
-## Session record
+## Session records
 
 - [Code Project Manager](current-work/sessions/code_project_manager.md)
+- [Workflow Design Manager](current-work/sessions/workflow_design_manager.md)
 
 ## Common records
 
@@ -23,6 +24,7 @@ workstreams and sessions do not share a write surface.
 - [UAV validation](current-work/common/uav_validation.md)
 - [Explorer project validation](current-work/common/explorer_project_validation.md)
 - [Independent Research Explorer pointer](current-work/common/independent_research_explorer_pointer.md)
+- [Workflow control plane](current-work/common/workflow_control_plane.md)
 
 ## Stable project pointers
 

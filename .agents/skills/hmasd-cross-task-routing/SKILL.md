@@ -1,144 +1,105 @@
 ---
 name: hmasd-cross-task-routing
-description: Use for every cross-task message between persistent HMASD Codex roles. Resolve the target's locked role, session, model and thinking, pass that exact tuple in one native send, and validate the declared source session.
+description: Use for every cross-task message between persistent HMASD roles. Send once to the locked role/session/model/thinking tuple and use owner-scoped UTF-8 files for long payloads without hash validation.
 ---
 
 # HMASD Cross-Task Routing
 
-## Purpose and boundary
+## Boundary and routes
 
-Use this Skill before every message between persistent HMASD Codex roles. The
-locked route table below is the single complete source for target role,
-session, model and thinking. The root `AGENTS.md` mirrors session identities so
-role bootstrap and non-routing consumers keep their existing address contract.
-
-This protocol does not route native children or replace Code Project Manager's
-Agentify External Pro transport ownership. A session is an address, not authority.
-Do not discover live settings, read `state_5.sqlite`, cache a route, copy the
-sender's settings or infer a replacement row.
-
-## Locked route table
+This table is the sole persistent-task address source. An address grants no
+authority. Do not discover settings, read task databases, cache a route, copy
+the sender's model, infer a replacement, retry through another task or use this
+protocol for native children or External Pro.
+Public current-work records may link role state but never supply or override a
+session address; stale pointer metadata is non-authoritative for routing.
 
 | role_id | session_id | model | thinking |
 |---|---|---|---|
 | `workflow_design_manager` | `019fb73d-5635-7b63-b165-6c5129bc0217` | `gpt-5.6-sol` | `high` |
 | `code_project_manager` | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` | `gpt-5.6-sol` | `max` |
-| `independent_research_explorer` | `019fbd62-3440-7dd1-8d41-c72c15cb8d4e` | `gpt-5.6-sol` | `ultra` |
+| `independent_research_explorer` | `019fbded-24cb-7541-aa16-0111b626b945` | `gpt-5.6-sol` | `ultra` |
 | `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `medium` |
 
-Each role appears exactly once. Router session fields must mirror this table.
-The persistent independent review operator may route only an exact terminal
-methodology packet or blocker to Workflow Design Manager. Direction review is a
-native-child final to Explorer and never enters this cross-task route. Neither
-path changes the formal loop.
-
-## Independent-research authority preservation
-
-Cross-task delivery never grants scientific command authority. Only a direct
-user instruction in the Independent Research Explorer task may change an
-Explorer research goal, candidate status or order, campaign lifecycle,
-convergence decision, scientific review scope or continuation.
-
-Workflow Design Manager may send Explorer only a control-plane reload notice or
-mechanical receipt, each explicitly marked `research_state_effect=none`.
-Code Project Manager may return only an exact mechanical nonconformance or a
-verbatim External Pro advisory gap from its registered toy-validation lane. The
-shared Project Operations Operator's `INDEPENDENT_DIRECTION_REVIEW` child
-returns only to its Explorer parent and does not use this Skill. None of these
-routes grants its
-sender authority to select, sequence, pause, resume, revise, re-audit or
-terminate a direction, interpret campaign completion, formulate a Pro
-scientific question, or relay such a command on the user's behalf. Explorer
-rejects any such message as `ROUTE_AUTHORITY_MISMATCH` without changing research
-state.
+Router session fields mirror this table exactly. Every workflow requirement,
+defect or plan request targets WDM. CPM and Explorer have no workflow design,
+modification, acceptance or workflow Git authority. WDM returns only an exact
+workflow reload/mechanical receipt; it does not become a runtime or scientific
+authority.
 
 ## Native send
 
-Resolve exactly one target row by `role_id`. Call
-`codex_app__send_message_to_thread` once with the row's `session_id` as
-`threadId`, the row's `model`, the row's `thinking`, and the intended message as
-`prompt`. Passing both `model` and `thinking` is mandatory. Omitting either,
-using a caller-supplied override or substituting the sender's settings is
+Resolve exactly one row and call `codex_app__send_message_to_thread` once with
+that `threadId`, `model`, `thinking` and the intended prompt. Passing model and
+thinking is mandatory. Omission, override or sender-setting substitution is
 `ROUTE_CONFIGURATION_MISMATCH` and permits no send.
 
-Do not add a live-settings probe, route cache, restoration step, automatic
-retry or substitute relay. The locked row is user-owned configuration; a
-callable tool is a runtime capability, not something this Skill can create.
+If the native tool is unavailable or errors, return `ROUTE_UNAVAILABLE`. Do not
+retry automatically, discover another task, use a relay or claim delivery. A
+successful call returns `ROUTE_SENT`; it proves only that one call succeeded.
 
-If the cross-task tool is unavailable or returns an error, finish with
-`ROUTE_UNAVAILABLE`. Do not retry automatically, discover another task, switch
-transport or report delivery. A successful tool return permits `ROUTE_SENT`
-and reports the exact locked tuple used; it does not prove any later host-side
-setting change outside that call.
+## Independent-research separation
+
+Only direct user instruction in the Explorer task changes research goal,
+candidate status/order, campaign lifecycle, review scope or continuation. WDM
+may send Explorer only `WORKFLOW_RELOAD_RECEIPT` or a mechanical workflow fact,
+each with `research_state_effect=none`. CPM may return only exact mechanical
+project-validation facts. Explorer rejects a scientific command from either as
+`ROUTE_AUTHORITY_MISMATCH` without changing state.
+
+The Project Operations Operator direction-review child returns natively to its
+Explorer parent and never uses this route. The persistent methodology operator
+may return only its exact terminal methodology packet or blocker to WDM.
 
 ## Long-text file handoff
 
-Do not embed a UTF-8 payload larger than 8 KiB in a cross-task message. Also use
-this path for a smaller payload when exact bytes must survive message rendering,
-attachment conversion, task summaries or output truncation. Short ordinary
-messages remain direct and incur no file-handling step.
-
-The sender writes the complete payload beneath its sender-owned
-`temp/sessions/<role>/handoffs/` with the mechanical helper. The source role is
-the locked role that owns the route; a receiver cannot select or substitute a
-different owner. Verification must use the locked source role:
+Use a direct message for ordinary text. For payloads larger than 8 KiB or whose
+exact UTF-8 content must avoid message truncation, the sender writes one
+non-overwriting file beneath its own
+`temp/sessions/<role>/handoffs/` with the registered helper:
 
 ```powershell
 & '<hmasd_python_interpreter>' `
   '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' write `
-  --owner-role <source-role> `
-  --label <purpose> --source <source-file>
+  --owner-role <source-role> --label <purpose> --source <source-file>
 ```
 
-Omit `--source` only when piping the exact payload bytes on standard input. The
-helper accepts valid UTF-8, creates a non-overwriting timestamped file, and
-returns `handoff_path`, `handoff_owner_role`, `handoff_bytes`, `handoff_sha256` and
-`handoff_encoding=utf-8`. Actual payloads are local-only and Git-ignored.
-
-The cross-task message contains no payload body. It carries exactly the returned
-identity plus `handoff_purpose`. That relative path becomes an assignment-named
-read within the receiver's existing authority; it grants no search of `temp/`
-or any other project state. Before reading, the receiver verifies the identity:
+The helper returns only `handoff_path`, `handoff_owner_role` and
+`handoff_encoding=utf-8`. The cross-task message carries those fields plus
+`handoff_purpose`, not the payload body. Before reading, the receiver runs:
 
 ```powershell
 & '<hmasd_python_interpreter>' `
   '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' verify `
-  --owner-role <locked-source-role> `
-  --path <handoff_path> --bytes <handoff_bytes> --sha256 <handoff_sha256>
+  --owner-role <locked-source-role> --path <handoff_path>
 ```
 
-Only `LONG_TEXT_HANDOFF_VERIFIED` permits consumption. A missing, truncated,
-non-UTF-8, out-of-root or digest-mismatched file fails closed as
-`LONG_TEXT_HANDOFF_INVALID`; it does not authorize reconstructing the payload
-from task history or resending an embedded copy. After use, the receiver returns
-`HANDOFF_CONSUMED path=<handoff_path> sha256=<handoff_sha256>`. Neither role
-deletes a payload automatically; after acknowledgement, only the source owner
-may perform the separate explicit cleanup action.
+Verification checks the locked owner, exact owner-root containment, regular
+non-symlink file identity and valid UTF-8. It uses no hash, digest, fingerprint
+or byte-count admission field. `LONG_TEXT_HANDOFF_VERIFIED` permits consumption;
+failure returns `LONG_TEXT_HANDOFF_INVALID` without reconstruction or alternate
+transport. The receiver returns `HANDOFF_CONSUMED path=<handoff_path>`. Only the
+source owner may later perform an explicit cleanup.
 
-## Session replacement
+## Route replacement and source validation
 
-No role replaces or discovers a route automatically. When the user archives or
-replaces a persistent task or changes its model or thinking, all sends to that
-role stop. The user supplies the replacement `role_id`, `session_id`, `model`
-and `thinking`; Workflow Design Manager updates this table, the router's mirrored
-session and focused contracts in one explicit user-directed workflow-design
-commit. Until that commit is loaded, the route is `ROUTE_UNAVAILABLE`.
+No role replaces a route automatically. When the user supplies a replacement
+role/session/model/thinking tuple, WDM updates this table, router mirror and
+focused contracts in one workflow commit. Until that commit is loaded, the
+route is `ROUTE_UNAVAILABLE`.
 
-## Source validation and send result
+For an incoming delegation, `source_thread_id` must equal the locked session of
+its claimed role. A mismatch is `ROUTE_IDENTITY_MISMATCH`. A handoff that fails
+owner/path/UTF-8 verification is `ROUTE_HANDOFF_INVALID`.
 
-For an incoming message, `codex_delegation.source_thread_id` must equal the
-locked `session_id` for its claimed `role_id`. A mismatch is
-`ROUTE_IDENTITY_MISMATCH` and has no authority. A long-text handoff that fails
-the mechanical payload verifier ends as `ROUTE_HANDOFF_INVALID`.
+End with exactly one result:
 
-End with exactly one routing result:
-
-- `ROUTE_SENT role=<role_id> session_id=<session_id> model=<model> thinking=<thinking>`
-- `ROUTE_CONFIGURATION_MISMATCH role=<role_id>`
-- `ROUTE_AUTHORITY_MISMATCH role=<role_id>`
+- `ROUTE_SENT role=<role> session_id=<session> model=<model> thinking=<thinking>`
+- `ROUTE_CONFIGURATION_MISMATCH role=<role>`
+- `ROUTE_AUTHORITY_MISMATCH role=<role>`
 - `ROUTE_IDENTITY_MISMATCH role=<role>`
 - `ROUTE_HANDOFF_INVALID role=<role>`
 - `ROUTE_UNAVAILABLE role=<role>`
 
-This protocol performs no experiment, scientific evaluation, review-runtime
-operation, or project computation.
+This protocol performs no experiment, scientific evaluation, review transport
+or project computation.

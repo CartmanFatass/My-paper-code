@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-import hashlib
 import importlib.util
 import io
 import json
@@ -18,10 +17,6 @@ SPEC = importlib.util.spec_from_file_location("hmasd_agentify_pro_transport", SC
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC and SPEC.loader
 SPEC.loader.exec_module(MODULE)
-
-
-def sha256(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 class FakeSubmitWorker:
@@ -98,17 +93,14 @@ class AgentifyTransportTest(unittest.TestCase):
         }
         self.validated = MODULE.validate_request(self.request, repo_root=self.root)
         response = "STRICT_OK"
-        response_hash = sha256(response)
         self.receipt = {
             "operationId": "operation-1",
             "idempotencyKey": self.request["idempotency_key"],
-            "requestFingerprint": "a" * 64,
             "stableKey": self.request["stable_key"],
             "provider": "chatgpt",
             "model": "Pro",
             "conversationUrl": self.request["conversation_url"],
             "conversationId": self.request["conversation_id"],
-            "promptSha256": sha256(self.prompt),
             "timeoutMs": 300000,
             "deadlineAt": 301000,
             "status": "COMPLETE",
@@ -122,10 +114,9 @@ class AgentifyTransportTest(unittest.TestCase):
             "submittedAt": 1200,
             "assistantMessageId": "assistant-1",
             "responseText": response,
-            "responseSha256": response_hash,
             "snapshots": [
-                {"observedAt": 2000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
-                {"observedAt": 5000, "assistantMessageId": "assistant-1", "textSha256": response_hash},
+                {"observedAt": 2000, "assistantMessageId": "assistant-1"},
+                {"observedAt": 5000, "assistantMessageId": "assistant-1"},
             ],
             "controls": {"stop": False, "continue": False, "retry": False, "answerNow": True},
             "clickedControls": [],
@@ -229,7 +220,7 @@ class AgentifyTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.TransportError, "backend_selection_mismatch"):
             MODULE.validate_request(self.request, repo_root=self.root)
 
-    def test_prepare_command_computes_hash_and_writes_exact_restart_stable_pair(self) -> None:
+    def test_prepare_command_writes_exact_restart_stable_pair_without_hash_gate(self) -> None:
         selection = self.root / "logs/agentify/frozen/TRANSPORT_BACKEND.json"
         request_path = self.root / "logs/agentify/frozen/REQUEST.json"
         prompt = self.root / "docs/external-review/round/frozen_question.md"
@@ -254,7 +245,6 @@ class AgentifyTransportTest(unittest.TestCase):
             args.model = "Thinking"
             with self.assertRaisesRegex(MODULE.TransportError, "output_exists_with_different_bytes"):
                 MODULE.command_prepare(args)
-        expected_hash = hashlib.sha256(prompt.read_bytes()).hexdigest()
         self.assertEqual(
             json.loads(selection.read_text(encoding="utf-8")),
             {
@@ -314,11 +304,10 @@ class AgentifyTransportTest(unittest.TestCase):
         self.assertNotIn("--prompt-sha256", prepare.format_help())
         self.assertNotIn("--prompt-source", prepare.format_help())
 
-    def test_receipt_rejects_wrong_send_identity_completion_and_hash(self) -> None:
+    def test_receipt_rejects_wrong_send_identity_completion_and_control_state(self) -> None:
         mutations = [
             ("sendCount", 2, "receipt_sendCount_mismatch"),
             ("assistantMessageId", "user-1", "receipt_message_identity_collision"),
-            ("responseSha256", "0" * 64, "receipt_response_hash_mismatch"),
             ("clickedControls", ["Answer now"], "receipt_prohibited_control_activated"),
         ]
         for field, value, error in mutations:
@@ -345,10 +334,15 @@ class AgentifyTransportTest(unittest.TestCase):
     def test_response_text_preserves_leading_and_trailing_whitespace(self) -> None:
         receipt = json.loads(json.dumps(self.receipt))
         receipt["responseText"] = "\n  STRICT_OK  \n"
-        receipt["responseSha256"] = sha256(receipt["responseText"])
-        for snapshot in receipt["snapshots"]:
-            snapshot["textSha256"] = receipt["responseSha256"]
         self.assertEqual(MODULE.validate_receipt(receipt, self.validated)["responseText"], receipt["responseText"])
+
+    def test_receipt_hash_metadata_is_ignored_and_not_required(self) -> None:
+        receipt = json.loads(json.dumps(self.receipt))
+        receipt["requestFingerprint"] = "not-a-digest"
+        receipt["responseSha256"] = "not-a-digest"
+        receipt["snapshots"][0]["textSha256"] = "not-a-digest"
+        receipt["snapshots"][1]["textSha256"] = "different"
+        self.assertEqual(MODULE.validate_receipt(receipt, self.validated)["responseText"], "STRICT_OK")
 
     def test_agentify_source_identity_mismatch_fails_before_http(self) -> None:
         state_dir = self.root / "agentify-state"

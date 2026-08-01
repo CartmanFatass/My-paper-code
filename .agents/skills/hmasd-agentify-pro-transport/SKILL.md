@@ -239,15 +239,17 @@ sendActionCount=1
 userMessageId
 submittedAt
 assistantMessageId
-snapshots=2_same_identity_and_hash_with_gap_ms>=3000
-responseSha256
+snapshots=2_same_assistant_identity_with_gap_ms>=3000
 clickedControls=[]
 terminalState=NATURAL_COMPLETION_VERIFIED
 ```
 
 The two snapshots must be tied to the same assistant identity. Missing or
 conflicting fields, `sendCount != 1`, a conversation mismatch or incomplete
-generation yields `AGENTIFY_TRANSPORT_BLOCKED`; recovery follows `Minimal recovery`.
+generation yields `AGENTIFY_TRANSPORT_BLOCKED`; response text is retained as
+received and checked only through the exact archive reread. No request,
+response, or snapshot text hash is a workflow admission field; recovery follows
+`Minimal recovery`.
 
 On success, the wrapper output returns the receipt path or raw path plus the
 validated stable `operationId` to

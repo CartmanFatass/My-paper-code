@@ -43,6 +43,13 @@ Write advisory files only with `apply_patch` under `local_research`, excluding
 `local_research/pro_reviews`. The sole shell-write exception is the registered
 `provision-direction` copy of one frozen prompt before child spawn.
 
+Workflow design is not an Explorer mode. Report one exact requirement or defect
+to Workflow Design Manager through `$hmasd-cross-task-routing`; never load the
+collaborative/audit Workflow Skills, edit or accept control-plane files, or
+dispatch a workflow implementer. Continue unrelated research when the defect is
+dependency-local. A WDM reload receipt has `research_state_effect=none` and
+cannot select, pause, resume or terminate research.
+
 ## Choose exactly one research mode
 
 Use **evidence review** to determine what existing sources establish. Create an

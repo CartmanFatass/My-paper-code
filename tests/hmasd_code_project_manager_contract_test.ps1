@@ -132,15 +132,17 @@ $codeRequired = @(
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
+    'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_transport_authority=exclusive',
     'formal_review_stable_key_formal_toy_research=hmasd-formal-pro',
     'formal_review_stable_key_uav_validation=hmasd-uav-formal-pro',
     'explorer_validation_stable_key=hmasd-explorer-validation-pro',
     'scientific_authority=none',
-    'shared_workflow_design_authority=none',
-    'role_local_workflow_design_authority=exclusive_for_owned_surfaces',
-    'role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces',
+    'workflow_design_authority=none',
+    'workflow_modification_authority=none',
+    'workflow_acceptance_authority=none',
+    'workflow_git_authority=none',
+    'workflow_change_request_route=workflow_design_manager',
     'session_owner_role=code_project_manager',
     'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
@@ -180,8 +182,8 @@ $codeRequired = @(
     'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
     'there is no Research Operations Manager',
     'Workflow Design Manager',
-    '`$hmasd-collaborative-workflow-design`',
-    '`$hmasd-workflow-change-audit`',
+    'workflow_change_request_route=workflow_design_manager',
+    'does not edit, accept, stage, commit or push',
     'does not run a parallel submit process, ledger poller or page observer'
 )
 foreach ($required in $codeRequired) {
@@ -222,9 +224,9 @@ foreach ($forbidden in $forbiddenOperations) {
     if ($projectOperations.Contains($forbidden)) { throw "Project Operations Operator claims parent authority: $forbidden" }
 }
 
-if (-not $workflow.Contains('workflow_design_authority=exclusive_for_shared_control_plane_surfaces') -or
-    -not $workflow.Contains('Each other persistent session separately owns its role-local')) {
-    throw 'Workflow Design Manager shared-only ownership boundary is missing'
+if (-not $workflow.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or
+    -not $workflow.Contains('other persistent sessions report a precise requirement or defect')) {
+    throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
 if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -or
     -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
@@ -318,11 +320,11 @@ foreach ($forbidden in @(
 
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
 Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
-    'document_kind', 'schema_version', 'state_owner', 'state_updated',
+    'document_kind', 'schema_version', 'index_owner', 'state_updated',
     'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
 if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
     $currentWorkIndexMap.schema_version -cne '2' -or
-    $currentWorkIndexMap.state_owner -cne 'code_project_manager' -or
+    $currentWorkIndexMap.index_owner -cne 'workflow_design_manager' -or
     $currentWorkIndexMap.state_updated -notmatch '^\d{4}-\d{2}-\d{2}$') {
     throw 'CURRENT_WORK index identity/schema is invalid'
 }
@@ -363,7 +365,9 @@ $indexedRecordIds = @($currentWorkIndexMap.common_record_ids -split '\|')
 if (($cpmRecordIds | Sort-Object -Unique).Count -ne $cpmRecordIds.Count -or
     ($publicSessionIds | Sort-Object -Unique).Count -ne $publicSessionIds.Count -or
     ($indexedRecordIds | Sort-Object -Unique).Count -ne $indexedRecordIds.Count -or
-    $publicSessionIds -cnotcontains 'code_project_manager') {
+    $publicSessionIds -cnotcontains 'code_project_manager' -or
+    $publicSessionIds -cnotcontains 'workflow_design_manager' -or
+    $indexedRecordIds -cnotcontains 'workflow_control_plane') {
     throw 'Current-work session/index inventories contain duplicates or omit Code PM'
 }
 foreach ($recordId in $cpmRecordIds) {

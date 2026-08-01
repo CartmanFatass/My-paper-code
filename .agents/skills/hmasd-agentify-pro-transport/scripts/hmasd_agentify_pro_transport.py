@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -25,7 +24,6 @@ SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
 AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
-SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
@@ -66,10 +64,6 @@ class TransportError(RuntimeError):
 
 def _fail(code: str) -> None:
     raise TransportError(code)
-
-
-def _sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
 
 
 def _required_text(value: Any, field: str, *, maximum: int = 4096) -> str:
@@ -443,9 +437,6 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         if receipt.get(field) != expected:
             _fail(f"receipt_{field}_mismatch")
     _required_text(receipt.get("operationId"), "receipt_operation_id", maximum=256)
-    fingerprint = _required_text(receipt.get("requestFingerprint"), "receipt_request_fingerprint", maximum=64)
-    if not SHA256_RE.fullmatch(fingerprint):
-        _fail("receipt_request_fingerprint_invalid")
     user_message_id = _required_text(receipt.get("userMessageId"), "receipt_user_message_id", maximum=512)
     assistant_message_id = _required_text(receipt.get("assistantMessageId"), "receipt_assistant_message_id", maximum=512)
     if user_message_id == assistant_message_id:
@@ -453,9 +444,6 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
     response_text = _required_nonempty_text_preserve(
         receipt.get("responseText"), "receipt_response_text", maximum=2_000_000
     )
-    response_sha256 = _required_text(receipt.get("responseSha256"), "receipt_response_sha256", maximum=64)
-    if not SHA256_RE.fullmatch(response_sha256) or _sha256(response_text.encode("utf-8")) != response_sha256:
-        _fail("receipt_response_hash_mismatch")
     created_at = _required_int(receipt.get("createdAt"), "receipt_created_at", minimum=1)
     prepared_at = _required_int(receipt.get("preparedAt"), "receipt_prepared_at", minimum=created_at)
     submitted_at = _required_int(receipt.get("submittedAt"), "receipt_submitted_at", minimum=prepared_at)
@@ -470,7 +458,7 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
     for snapshot in snapshots:
         if not isinstance(snapshot, dict):
             _fail("receipt_snapshot_invalid")
-        if snapshot.get("assistantMessageId") != assistant_message_id or snapshot.get("textSha256") != response_sha256:
+        if snapshot.get("assistantMessageId") != assistant_message_id:
             _fail("receipt_snapshot_identity_mismatch")
         observations.append(_required_int(snapshot.get("observedAt"), "receipt_snapshot_time", minimum=1))
     if observations[0] < submitted_at or observations[1] > completed_at:
