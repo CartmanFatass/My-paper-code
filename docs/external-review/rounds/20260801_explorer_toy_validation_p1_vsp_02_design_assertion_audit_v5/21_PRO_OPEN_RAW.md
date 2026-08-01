@@ -1,0 +1,2 @@
+ADVISORY_REFINEMENT_REQUIRED_WITH_ONE_EXACT_GAP
+exact_gap=The Stage-A trace roster contains only sixteen scenario labels; it does not freeze, for each trace, the initial escrow state and immutable record, exact physical event and arrival times and UUIDs, ordered receipts, expected state transitions and reward ownership, release_count, and terminal status required for an implementable pre-code conformance matrix.
