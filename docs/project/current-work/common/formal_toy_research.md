@@ -1,0 +1,19 @@
+# Workstream: formal_toy_research
+
+```text
+document_kind=current_work_common_record
+schema_version=1
+record_id=formal_toy_research
+record_kind=workstream
+workstream_id=formal_toy_research
+owner_role=code_project_manager
+status=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
+active_assignment_id=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
+next_boundary=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
+environment=toy
+grant_or_authority_reference=ACTIVE_TEN_ITERATION_CONTINUATION_AFTER_G48
+grant_iterations_authorized=10
+grant_iterations_remaining=8
+conclusion_bearing_iterations_consumed_total=39
+current_evidence_pointer=docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review
+```

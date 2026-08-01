@@ -1,73 +1,28 @@
-# HMASD Current Work Portfolio
+# HMASD Current Work Index
 
 ```text
-document_kind=current_work_portfolio
+document_kind=current_work_index
+schema_version=2
 state_owner=code_project_manager
 state_updated=2026-08-01
-workstream_ids=formal_toy_research|uav_validation|explorer_project_validation
-independent_research_pointer_ids=independent_research_explorer
+session_record_ids=code_project_manager
+common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer
 legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
 ```
 
-This file contains current project-facing state only. Each workstream owns one
-current record; history remains in Git, named evidence, reports, ledgers and the
-legacy snapshot above.
+This entry contains links only. Active state is partitioned so unrelated
+workstreams and sessions do not share a write surface.
 
-## Workstream: formal_toy_research
+## Session record
 
-```text
-workstream_id=formal_toy_research
-owner_role=code_project_manager
-status=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
-active_assignment_id=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
-next_boundary=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
-environment=toy
-grant_or_authority_reference=ACTIVE_TEN_ITERATION_CONTINUATION_AFTER_G48
-grant_iterations_authorized=10
-grant_iterations_remaining=8
-conclusion_bearing_iterations_consumed_total=39
-current_evidence_pointer=docs/external-review/rounds/20260729_g31_phase_a_shadow_baseline_module_reduction_g51_formal_result_review
-```
+- [Code Project Manager](current-work/sessions/code_project_manager.md)
 
-## Workstream: uav_validation
+## Common records
 
-```text
-workstream_id=uav_validation
-owner_role=code_project_manager
-status=G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_CLARIFICATION_STAGED
-active_assignment_id=UAV_G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_AND_N_GATE_CLARIFICATION
-next_boundary=UAV_G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_PRO_TRANSPORT
-environment=uav
-grant_or_authority_reference=DIRECT_USER_UAV_VALIDATION_CONTINUATION_AND_CPM_AUTONOMY_20260801
-scientific_iteration_cost_current_boundary=0
-current_evidence_pointer=docs/external-review/rounds/20260801_uav_source_identifiability_g0_dead_zone_bound_scalar_gate_identity_clarification
-```
-
-## Workstream: explorer_project_validation
-
-```text
-workstream_id=explorer_project_validation
-owner_role=code_project_manager
-status=COMPLETE_QUEUE_EXHAUSTED
-active_assignment_id=NONE
-next_boundary=NONE
-environment=toy_validation
-grant_or_authority_reference=NO_CODE_OR_COMPUTE_AUTHORITY
-completed_candidate_ids=CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05
-next_candidate_id=NONE
-current_evidence_pointer=docs/external-review/rounds/20260801_explorer_toy_validation_p1_vsp_05_design_assertion_recheck_v2
-```
-
-## Independent research pointer: independent_research_explorer
-
-```text
-pointer_id=independent_research_explorer
-owner_role=independent_research_explorer
-session_id=019fbd62-3440-7dd1-8d41-c72c15cb8d4e
-state_source=external_owner_local_research
-latest_artifact_pointer=local_research/2026-07-30_variable_skill_period_inspiration_campaign_v3.json
-project_state_replication=forbidden
-```
+- [Formal toy research](current-work/common/formal_toy_research.md)
+- [UAV validation](current-work/common/uav_validation.md)
+- [Explorer project validation](current-work/common/explorer_project_validation.md)
+- [Independent Research Explorer pointer](current-work/common/independent_research_explorer_pointer.md)
 
 ## Stable project pointers
 

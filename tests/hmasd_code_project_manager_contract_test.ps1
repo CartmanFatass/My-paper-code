@@ -8,6 +8,14 @@ $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
 $projectOperations = Get-Content -Raw -LiteralPath $projectOperationsPath
+$cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
+$cpmTransportContractPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md'
+$currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
+$currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
+$cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
+$cpmTransportContract = Get-Content -Raw -LiteralPath $cpmTransportContractPath
+$currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
+$currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
@@ -26,6 +34,49 @@ $hooksPath = Join-Path $repo '.codex/hooks.json'
 $g0ReadinessContractPath = Join-Path $repo 'docs/project/UAV_G0_READINESS_PERFORMANCE_CONTRACT.md'
 $g0ReadinessContract = Get-Content -Raw -LiteralPath $g0ReadinessContractPath
 $g0ReadinessContractNormalized = $g0ReadinessContract -replace '\s+', ' '
+
+function ConvertTo-HmasdRecordMap {
+    param(
+        [Parameter(Mandatory = $true)][string]$Text,
+        [Parameter(Mandatory = $true)][string]$Label
+    )
+    $record = @{}
+    foreach ($match in [regex]::Matches($Text, '(?m)^([A-Za-z0-9_]+)=(.*)$')) {
+        $key = [string]$match.Groups[1].Value
+        $value = ([string]$match.Groups[2].Value).TrimEnd("`r")
+        if ($record.ContainsKey($key)) {
+            throw "$Label duplicates key: $key"
+        }
+        $record[$key] = $value
+    }
+    return $record
+}
+
+function Assert-ExactHmasdKeyInventory {
+    param(
+        [Parameter(Mandatory = $true)][hashtable]$Actual,
+        [Parameter(Mandatory = $true)][string[]]$ExpectedKeys,
+        [Parameter(Mandatory = $true)][string]$Label
+    )
+    $actualKeys = @($Actual.Keys | Sort-Object)
+    $sortedExpectedKeys = @($ExpectedKeys | Sort-Object)
+    if (($actualKeys -join '|') -cne ($sortedExpectedKeys -join '|')) {
+        throw "$Label key inventory mismatch: actual=$($actualKeys -join '|') expected=$($sortedExpectedKeys -join '|')"
+    }
+}
+
+function Assert-HmasdRequiredKeys {
+    param(
+        [Parameter(Mandatory = $true)][hashtable]$Actual,
+        [Parameter(Mandatory = $true)][string[]]$RequiredKeys,
+        [Parameter(Mandatory = $true)][string]$Label
+    )
+    foreach ($key in $RequiredKeys) {
+        if (-not $Actual.ContainsKey($key)) {
+            throw "$Label missing required key: $key"
+        }
+    }
+}
 
 if (-not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf)) {
     throw 'Explorer project-validation packet script is missing'
@@ -85,6 +136,13 @@ $codeRequired = @(
     'formal_review_stable_key_uav_validation=hmasd-uav-formal-pro',
     'explorer_validation_stable_key=hmasd-explorer-validation-pro',
     'scientific_authority=none',
+    'shared_workflow_design_authority=none',
+    'role_local_workflow_design_authority=exclusive_for_owned_surfaces',
+    'role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces',
+    'session_owner_role=code_project_manager',
+    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
+    'pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
     'operations_child=hmasd-project-operations-operator',
@@ -104,7 +162,7 @@ $codeRequired = @(
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
-    'passes the locked target session, model and thinking',
+    'locked target session, model and thinking',
     'already-live exact stable-key tab',
     'permits no fallback page',
     'Focused tests alone are insufficient',
@@ -117,7 +175,10 @@ $codeRequired = @(
     'prepares the exact spec and dispatches the registered `hmasd-verifier`',
     'verifier returns mechanical evidence only',
     'there is no Research Operations Manager',
-    'Workflow Design Manager'
+    'Workflow Design Manager',
+    '`$hmasd-collaborative-workflow-design`',
+    '`$hmasd-workflow-change-audit`',
+    'does not run a parallel submit process, ledger poller or page observer'
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
@@ -135,6 +196,9 @@ $operationsRequired = @(
     'code_acceptance_authority=none',
     'git_authority=none',
     'cross_task_send=forbidden_native_final_only',
+    'transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE',
+    'transport_terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED',
+    'submit process is never send evidence',
     'PROJECT_OPERATIONS_TERMINAL'
 )
 foreach ($required in $operationsRequired) {
@@ -154,8 +218,9 @@ foreach ($forbidden in $forbiddenOperations) {
     if ($projectOperations.Contains($forbidden)) { throw "Project Operations Operator claims parent authority: $forbidden" }
 }
 
-if (-not $workflow.Contains('fixed Code Project Manager session')) {
-    throw 'Workflow Design Manager does not return to the exact CPM requester'
+if (-not $workflow.Contains('workflow_design_authority=exclusive_for_shared_control_plane_surfaces') -or
+    -not $workflow.Contains('Each other persistent session separately owns its role-local')) {
+    throw 'Workflow Design Manager shared-only ownership boundary is missing'
 }
 if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -or
     -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
@@ -182,6 +247,124 @@ if ($assertionNormalized.Contains('Research Operations Manager') -or
 }
 if ($workflow.Contains('Project-Manager workflow-design assignment')) {
     throw 'Workflow Design Manager retains the retired requester identity'
+}
+
+foreach ($required in @(
+    'session_owner_role=code_project_manager',
+    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'durable_workspace=docs/session-workspaces/code_project_manager/',
+    'temporary_workspace=temp/sessions/code_project_manager/')) {
+    if (-not $cpmWorkspace.Contains($required)) {
+        throw "Code PM session workspace missing: $required"
+    }
+}
+foreach ($required in @(
+    'document_kind=code_project_manager_role_local_assignment_contract',
+    'operator=hmasd-project-operations-operator',
+    'mode=PRO_REVIEW_TRANSPORT',
+    'lifecycle_source=.agents/skills/hmasd-agentify-pro-transport/SKILL.md',
+    'backend-selection path ending in `TRANSPORT_BACKEND.json`',
+    'write allow-list for backend selection, request, receipt, raw',
+    'response and intake',
+    'The child owns one lifecycle',
+    'a bare "waiting" report is invalid',
+    'CPM does not start a second submit process',
+    'Once `userMessageId` exists',
+    '`PRE_SEND_BLOCKED` must prove no durable user message',
+    '`POST_SEND_BLOCKED` preserves the existing operation')) {
+    if (-not $cpmTransportContract.Contains($required)) {
+        throw "Code PM Pro transport assignment contract missing: $required"
+    }
+}
+
+$currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
+Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
+    'document_kind', 'schema_version', 'state_owner', 'state_updated',
+    'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
+if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
+    $currentWorkIndexMap.schema_version -cne '2' -or
+    $currentWorkIndexMap.state_owner -cne 'code_project_manager' -or
+    $currentWorkIndexMap.state_updated -notmatch '^\d{4}-\d{2}-\d{2}$') {
+    throw 'CURRENT_WORK index identity/schema is invalid'
+}
+
+$currentWorkSessionMap = ConvertTo-HmasdRecordMap -Text $currentWorkSession -Label 'Code PM current-work session'
+Assert-ExactHmasdKeyInventory -Actual $currentWorkSessionMap -ExpectedKeys @(
+    'document_kind', 'schema_version', 'session_owner_role', 'session_owner_id',
+    'workstream_ids', 'external_pointer_ids') -Label 'Code PM current-work session'
+if ($currentWorkSessionMap.document_kind -cne 'current_work_session' -or
+    $currentWorkSessionMap.schema_version -cne '1' -or
+    $currentWorkSessionMap.session_owner_role -cne 'code_project_manager' -or
+    $currentWorkSessionMap.session_owner_id -cne '019f9e4f-f4d0-7fe0-b214-c47fd034e84d') {
+    throw 'Code PM current-work session identity/schema is invalid'
+}
+
+$stateBearingKeys = @(
+    'status', 'active_assignment_id', 'next_boundary', 'environment',
+    'grant_or_authority_reference', 'grant_iterations_authorized',
+    'grant_iterations_remaining', 'conclusion_bearing_iterations_consumed_total',
+    'scientific_iteration_cost_current_boundary', 'completed_candidate_ids',
+    'next_candidate_id', 'current_evidence_pointer', 'state_source',
+    'latest_artifact_pointer', 'project_state_replication')
+foreach ($container in @(
+    @{ Label = 'CURRENT_WORK index'; Record = $currentWorkIndexMap },
+    @{ Label = 'Code PM current-work session'; Record = $currentWorkSessionMap })) {
+    foreach ($key in $stateBearingKeys) {
+        if ($container.Record.ContainsKey($key)) {
+            throw "$($container.Label) duplicates state-bearing key: $key"
+        }
+    }
+}
+
+$sessionWorkstreamIds = @($currentWorkSessionMap.workstream_ids -split '\|')
+$sessionPointerIds = @($currentWorkSessionMap.external_pointer_ids -split '\|')
+$cpmRecordIds = @($sessionWorkstreamIds + $sessionPointerIds)
+$publicSessionIds = @($currentWorkIndexMap.session_record_ids -split '\|')
+$indexedRecordIds = @($currentWorkIndexMap.common_record_ids -split '\|')
+if (($cpmRecordIds | Sort-Object -Unique).Count -ne $cpmRecordIds.Count -or
+    ($publicSessionIds | Sort-Object -Unique).Count -ne $publicSessionIds.Count -or
+    ($indexedRecordIds | Sort-Object -Unique).Count -ne $indexedRecordIds.Count -or
+    $publicSessionIds -cnotcontains 'code_project_manager') {
+    throw 'Current-work session/index inventories contain duplicates or omit Code PM'
+}
+foreach ($recordId in $cpmRecordIds) {
+    if ($indexedRecordIds -cnotcontains $recordId) {
+        throw "Code PM session record is absent from the public index: $recordId"
+    }
+}
+
+$commonDirectory = Join-Path $repo 'docs/project/current-work/common'
+foreach ($recordId in $cpmRecordIds) {
+    $recordPath = Join-Path $commonDirectory "$recordId.md"
+    $record = ConvertTo-HmasdRecordMap -Text (Get-Content -Raw -LiteralPath $recordPath) -Label $recordId
+    Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+        'document_kind', 'schema_version', 'record_id', 'record_kind', 'owner_role') -Label $recordId
+    if ($record.document_kind -cne 'current_work_common_record' -or
+        $record.schema_version -cne '1' -or $record.record_id -cne $recordId -or
+        $record.owner_role -cne 'code_project_manager') {
+        throw "Current-work common record identity/schema mismatch: $recordId"
+    }
+    if (-not $currentWorkIndex.Contains("current-work/common/$recordId.md")) {
+        throw "CURRENT_WORK index omits the link for: $recordId"
+    }
+    if ($sessionWorkstreamIds -ccontains $recordId) {
+        Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+            'workstream_id', 'status', 'active_assignment_id', 'next_boundary',
+            'environment', 'grant_or_authority_reference', 'current_evidence_pointer') -Label $recordId
+        if ($record.record_kind -cne 'workstream' -or $record.workstream_id -cne $recordId) {
+            throw "Current-work workstream identity mismatch: $recordId"
+        }
+    } elseif ($sessionPointerIds -ccontains $recordId) {
+        Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+            'pointer_id', 'subject_owner_role', 'session_id', 'state_source',
+            'latest_artifact_pointer', 'project_state_replication') -Label $recordId
+        if ($record.record_kind -cne 'external_owner_pointer' -or
+            $record.project_state_replication -cne 'forbidden') {
+            throw "Current-work external pointer identity mismatch: $recordId"
+        }
+    } else {
+        throw "Common record is not owned by the Code PM session roster: $recordId"
+    }
 }
 
 foreach ($required in @(

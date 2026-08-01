@@ -16,7 +16,15 @@ explorer_validation_stable_key=hmasd-explorer-validation-pro
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
-workflow_design_authority=none
+shared_workflow_design_authority=none
+role_local_workflow_design_authority=exclusive_for_owned_surfaces
+role_local_workflow_acceptance_authority=exclusive_for_owned_surfaces
+session_owner_role=code_project_manager
+session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
+session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager
+current_work_entry=docs/project/CURRENT_WORK.md
+current_work_session_record=docs/project/current-work/sessions/code_project_manager.md
+pro_review_transport_assignment_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_children=code_scout|implementer|reviewer|verifier
 operations_child=hmasd-project-operations-operator
@@ -45,16 +53,20 @@ explorer_toy_local_research_read=forbidden
 explorer_toy_code_acceptance=exclusive_after_pro_science_freeze
 ```
 
-After the root router, read `docs/project/CURRENT_WORK.md`, this charter, and
-only the active workstream's named contracts and artifacts. Keep unrelated
-workstreams unloaded. External Pro owns science. Workflow Design Manager owns
-workflow design. Code Project Manager is the only persistent project manager;
-there is no Research Operations Manager or persistent monitor.
+After the root router, read the public `docs/project/CURRENT_WORK.md` index,
+this charter, then the Code Project Manager session record and only the active
+workstream's linked common record, named contracts and artifacts. Keep
+unrelated workstreams unloaded. External Pro owns science. Workflow Design
+Manager owns shared workflow; Code Project Manager owns only its role-local
+workflow surfaces. Code Project Manager is the only persistent project
+manager; there is no Research Operations Manager or persistent monitor.
 
 ## Owns
 
-- The active multi-workstream portfolio in `CURRENT_WORK.md`, including exact
-  operational state, grant balance, current assignment and next boundary.
+- The public `CURRENT_WORK.md` link index, the Code Project Manager session
+  roster and owner-scoped common records. Exact operational state, grant
+  balance, current assignment and next boundary live only in the applicable
+  common record.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
 - For an Explorer-origin toy candidate, accept work only after External Pro
   freezes the science. The Explorer packet is not a code assignment, and
@@ -176,6 +188,14 @@ exactly one mode:
   item root and archive path;
 - `RESULT_INTAKE`: terminal artifact set, schema and mechanical predicates.
 
+Every `PRO_REVIEW_TRANSPORT` assignment names
+`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT_OPERATOR.md`
+and the shared `$hmasd-agentify-pro-transport` Skill. The child owns the whole
+observable transport lifecycle, including send confirmation, natural-completion
+observation, receipt verification, raw archival and assigned mechanical intake.
+CPM does not run a parallel submit process, ledger poller or page observer and
+does not treat child-process liveness as message delivery.
+
 The operations child does not update `CURRENT_WORK.md`, choose recovery, write a
 scientific disposition, choose a successor, run Git, spawn a child or use
 cross-task messaging. CPM accepts its native final.
@@ -189,12 +209,14 @@ Use `transport_owner=code_project_manager`. `formal_toy_research` uses
 `hmasd-formal-pro`, `uav_validation` uses `hmasd-uav-formal-pro`, and Explorer
 validation uses `hmasd-explorer-validation-pro`. These stable keys are not
 interchangeable. One child assignment performs at most one submit. A before-send
-failure with `sendCount=0` permits a fresh assignment
-inside the existing user authority. If send state is uncertain, observe the
-same stable tab; active or readable generation means wait and never refresh,
-interrupt, resend or use Answer now. Only clear absence of generation and
-submitted user content permits one fresh resend assignment. No prompt hash,
-per-file hash or byte count is a workflow identity gate.
+failure with `sendCount=0` permits a fresh assignment inside the existing user
+authority. CPM selects the stable key, decides whether a typed terminal permits
+a recovery assignment and accepts the returned artifacts; only the assigned
+operator observes the same stable tab through the shared lifecycle source.
+Active or readable generation forbids refresh, interrupt, resend and Answer
+now. Only operator evidence proving absence of generation and submitted user
+content can support one fresh resend assignment. No prompt hash, per-file hash
+or byte count is a workflow identity gate.
 
 Every Pro transport assignment names one already-live exact stable-key tab.
 Neither CPM nor its operations child creates, closes, shows, activates,
@@ -204,21 +226,24 @@ before submission and permits no fallback page.
 
 ## Workflow changes and Git
 
-Code Project Manager may request a workflow-design change directly from the
-fixed Workflow Design Manager session. Workflow Design Manager returns the
-accepted commit to the requesting Code Project Manager.
-Cross-task routing passes the locked target session, model and thinking
-explicitly. Code Project Manager never edits router, role, Skill, profile,
-registry or workflow-contract surfaces.
+For a role-local workflow change, Code Project Manager uses
+`$hmasd-collaborative-workflow-design`, obtains the required plan confirmation,
+then uses `$hmasd-workflow-change-audit` and accepts only its owned charter,
+procedure, durable workspace and focused-contract paths. Shared router, Skill,
+profile, hook, registry or shared-contract conflicts route to the fixed
+Workflow Design Manager session with the locked target session, model and
+thinking; WDM is not a per-step approval gate.
 
-Update `CURRENT_WORK.md` only after mechanically accepting the corresponding
-code, review or runtime evidence. Preserve independent workstreams and their
-exact authority references; switching the active workstream does not establish
-scientific uniqueness.
+`docs/project/CURRENT_WORK.md` is a public link index. Update only the CPM
+session record and common records whose `owner_role=code_project_manager` after
+mechanically accepting the corresponding code, review or runtime evidence.
+Preserve independent workstreams and their exact authority references;
+switching the active workstream does not establish scientific uniqueness.
 
 Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
-task's staged paths. Workflow-design paths remain WDM-owned.
+task's staged paths. Shared workflow-design paths remain WDM-owned; CPM owns
+only the role-local surfaces declared by the session workspace contract.
 
 ## Must not
 
