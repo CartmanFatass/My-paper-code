@@ -55,6 +55,7 @@ $projectOperationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents
 $workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $workflowDesignManagerRoleNormalized = $workflowDesignManagerRole -replace '\s+', ' '
 $proRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/EXTERNAL_PRO.md')
+$proRoleNormalized = $proRole -replace '\s+', ' '
 $workflowAudit = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-workflow-change-audit/SKILL.md')
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
@@ -771,7 +772,7 @@ foreach ($required in @(
     'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
     'scheduled_action_presence=CONTINUE_only',
     'valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remaining_balance|current_portfolio|algorithm_principles_section_3')) {
-    if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
+    if (-not $proRoleNormalized.Contains($required)) { throw "External Pro role missing: $required" }
 }
 if ($codePmRole.Contains('portfolio_adjudication_authority=code_project_manager')) {
     throw 'Code Project Manager claims scientific portfolio adjudication'
@@ -908,14 +909,18 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'role=code_project_manager',
-    'role_kind=persistent_code_and_technical_acceptance_task',
+    'role_kind=persistent_project_coordination_code_runtime_and_acceptance_task',
     'code_authority=exclusive',
-    'runtime_authority=none',
+    'runtime_authority=exclusive',
+    'current_work_authority=exclusive',
+    'formal_external_review_transport_authority=exclusive',
+    'experiment_dispatch_and_result_routing=exclusive',
+    'mechanical_result_acceptance=exclusive',
     'workflow_design_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'current_work_read=bounded_read_only_on_demand',
-    'current_work_write_authority=none',
+    'operations_child=hmasd-project-operations-operator',
+    'experiment_child=hmasd-experiment-operator',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
@@ -1077,7 +1082,7 @@ foreach ($required in @(
     'code_science_audit_mode=contract_diff_only',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
-    if (-not $proRole.Contains($required)) { throw "External Pro role missing: $required" }
+    if (-not $proRoleNormalized.Contains($required)) { throw "External Pro role missing: $required" }
 }
 foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
