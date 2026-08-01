@@ -210,10 +210,18 @@ def evaluate_window(
     action_table: np.ndarray,
     expected_table_hash: str,
     tracker: ValidityTracker | None,
+    ref_fp: tuple,
 ) -> tuple[float, list[float]]:
     """Deep-copy `source_env`, step WINDOW times with the constant post-edit
     skills, return (total_reward, per-step rewards). Every named validity
     predicate that this call can evidence is checked in place.
+
+    `ref_fp` is the ONE fingerprint the caller captured before its branch
+    loop started (see `compute_incumbent_edit_results`) -- every branch's
+    deepcopy-time fingerprint is compared against that single shared
+    reference, never recomputed from `source_env` inside this same call
+    (a same-call recomputation can never disagree with its own deepcopy and
+    so could never evidence cross-branch corruption).
 
     `tracker=None` is for external callers (A-VK-D10: the V-K0B natural-check
     oracle invocation) that do not need V-K0A's bookkeeping -- the same
@@ -226,14 +234,13 @@ def evaluate_window(
             "action table hash drifted between branches",
         )
 
-    ref_fp = fingerprint(source_env)
     branch_env = copy.deepcopy(source_env)
     branch_fp = fingerprint(branch_env)
     if tracker is not None:
         tracker.mark(
             "identical_initial_state_across_branches",
             branch_fp == ref_fp,
-            f"deepcopy fingerprint {branch_fp} != source {ref_fp}",
+            f"deepcopy fingerprint {branch_fp} != reference {ref_fp}",
         )
 
     start_step = int(branch_env.steps)
@@ -257,10 +264,25 @@ def evaluate_window(
         rewards.append(float(step_rewards["agent_0"]))
     end_step = int(branch_env.steps)
     if tracker is not None:
+        # Read the env's own clocks -- never assert against the module
+        # constants alone -- and check that [start_step, end_step) never
+        # crosses a fast_block or slow_block boundary, mirroring `_targets`'
+        # own arithmetic exactly rather than re-deriving it from K0/WINDOW.
+        branch_k0 = int(branch_env.k0)
+        branch_slow_period_blocks = int(branch_env.slow_period_blocks)
+        last_step_in_window = end_step - 1
+        slow_period = branch_k0 * branch_slow_period_blocks
+        no_crossed = (
+            branch_k0 == K0
+            and (end_step - start_step == WINDOW)
+            and (start_step // branch_k0) == (last_step_in_window // branch_k0)
+            and (start_step // slow_period) == (last_step_in_window // slow_period)
+        )
         tracker.mark(
             "no_check_crossed_within_window",
-            (start_step % K0 == 0) and (end_step - start_step == WINDOW) and (WINDOW == K0),
-            f"window [{start_step},{end_step}) is not exactly one k0={K0} interval",
+            no_crossed,
+            f"window [{start_step},{end_step}) crosses a fast_block or slow_block "
+            f"boundary (env k0={branch_k0}, slow_period_blocks={branch_slow_period_blocks})",
         )
     return float(sum(rewards)), rewards
 
@@ -322,16 +344,36 @@ def compute_incumbent_edit_results(
             f"enum_ok={enum_ok} label_ok={label_ok} cross_ok={cross_ok}"
         )
 
+    # B1: ONE reference fingerprint, captured before any of the 16 branches
+    # runs. Every branch's deepcopy-time fingerprint is compared against
+    # this same reference inside `evaluate_window`, and `env` itself is
+    # re-compared against it again below once every branch has finished --
+    # never a same-call recomputation, which could never disagree with its
+    # own deepcopy.
+    ref_fp = fingerprint(env)
+
     results_by_pair: dict[tuple[int, int], dict] = {}
     for (o0, o1) in edits:
         pair = (o0[1], o1[1])
-        total, five = evaluate_window(env, pair[0], pair[1], action_table, table_hash, tracker)
+        total, five = evaluate_window(
+            env, pair[0], pair[1], action_table, table_hash, tracker, ref_fp
+        )
         results_by_pair[pair] = {
             "total_return": total,
             "five_step_rewards": five,
             "kind0": o0[0],
             "kind1": o1[0],
         }
+
+    if tracker is not None:
+        post_loop_fp = fingerprint(env)
+        tracker.mark(
+            "identical_initial_state_across_branches",
+            post_loop_fp == ref_fp,
+            f"source_env fingerprint diverged after the 16-edit loop at check "
+            f"{check_index}: {post_loop_fp} != reference {ref_fp}",
+        )
+
     exhausted_ok = len(results_by_pair) == 16
     if tracker is not None:
         tracker.mark(
@@ -448,9 +490,20 @@ def run_track(
                 for s1 in duty_allowed_skills(1, track)
             ]
             results = []
+            ref_fp = fingerprint(env)  # B1: one reference before the branch loop
             for (s0, s1) in candidates:
-                total, _ = evaluate_window(env, s0, s1, action_table, table_hash, tracker)
+                total, _ = evaluate_window(
+                    env, s0, s1, action_table, table_hash, tracker, ref_fp
+                )
                 results.append({"pair": (s0, s1), "total_return": total})
+            if tracker is not None:
+                post_loop_fp = fingerprint(env)
+                tracker.mark(
+                    "identical_initial_state_across_branches",
+                    post_loop_fp == ref_fp,
+                    f"source_env fingerprint diverged after the initial-check "
+                    f"branch loop: {post_loop_fp} != reference {ref_fp}",
+                )
             max_total = max(r["total_return"] for r in results)
             tied = [r["pair"] for r in results if r["total_return"] == max_total]
             chosen = min(tied, key=lambda p: canonical_tuple(track, p[0], p[1]))
@@ -478,6 +531,25 @@ def run_track(
                 env, incumbent, action_table, table_hash, tracker, check_index
             )
 
+            # Incumbent-advancement tie: computed here (before the rows for
+            # this check are built) so the row payload can carry it, exactly
+            # like the initial check's own "tie" flag already does. This is
+            # a distinct tie from tie_K/tie_S (those are per-focal KEEP/SET
+            # argmax ties inside `compute_focal_u_src`); this one is about
+            # which duty-axis-restricted pair the trajectory itself advances
+            # to next.
+            allowed0 = duty_allowed_skills(0, track)
+            allowed1 = duty_allowed_skills(1, track)
+            restricted = {
+                p: v["total_return"]
+                for p, v in results_by_pair.items()
+                if p[0] in allowed0 and p[1] in allowed1
+            }
+            max_r = max(restricted.values())
+            tied_r = [p for p, v in restricted.items() if v == max_r]
+            tie_incumbent_advance = len(tied_r) > 1
+            chosen = min(tied_r, key=lambda p: canonical_tuple(track, p[0], p[1]))
+
             for focal in (0, 1):
                 focal_result = compute_focal_u_src(results_by_pair, focal, tracker, check_index)
                 rows.append(
@@ -497,19 +569,10 @@ def run_track(
                         "argmax_S": [pair_dict(p) for p in focal_result["argmax_S"]],
                         "tie_K": focal_result["tie_K"],
                         "tie_S": focal_result["tie_S"],
+                        "tie_incumbent_advance": tie_incumbent_advance,
                     }
                 )
 
-            allowed0 = duty_allowed_skills(0, track)
-            allowed1 = duty_allowed_skills(1, track)
-            restricted = {
-                p: v["total_return"]
-                for p, v in results_by_pair.items()
-                if p[0] in allowed0 and p[1] in allowed1
-            }
-            max_r = max(restricted.values())
-            tied_r = [p for p, v in restricted.items() if v == max_r]
-            chosen = min(tied_r, key=lambda p: canonical_tuple(track, p[0], p[1]))
             incumbent = chosen
 
         action0 = action_table[int(incumbent[0])]
@@ -523,7 +586,7 @@ def run_track(
 
 # --- acceptance --------------------------------------------------------------
 
-def evaluate_acceptance(rows: list[dict], tracker: ValidityTracker) -> tuple[bool, dict]:
+def evaluate_acceptance(rows: list[dict]) -> tuple[bool, dict]:
     by_group: dict[tuple, list[dict]] = {}
     for row in rows:
         key = (row["sign_combo"]["slow"], row["sign_combo"]["fast"], row["assignment_permutation"], row["check_index"])
@@ -579,11 +642,14 @@ def evaluate_acceptance(rows: list[dict], tracker: ValidityTracker) -> tuple[boo
 def check_cross_track_relabel(
     all_check_fps: dict[tuple, list[tuple]], tracker: ValidityTracker
 ) -> None:
-    """A-VK-D2 / validity (7): permutation must only relabel, never alter, the
-    underlying source state. For every sign combo the two tracks' actual
-    trajectory env fingerprints (target signs and current step, at every
-    check boundary) must be identical -- track choice only decides which
-    physical agent does which duty, never the environment's own dynamics."""
+    """Cross-track source-state comparison. Not the named A-VK-D2 / validity
+    (7) check (see `check_cross_track_incumbent_urgency_mirror` below for
+    that) but kept as an additional signal into the same predicate -- it has
+    caught real corruption before. For every sign combo the two tracks'
+    actual trajectory env fingerprints (target signs and current step, at
+    every check boundary) must be identical -- track choice only decides
+    which physical agent does which duty, never the environment's own
+    dynamics."""
     combos = {key[:2] for key in all_check_fps}
     for combo in combos:
         fp0 = all_check_fps.get((*combo, 0))
@@ -596,10 +662,146 @@ def check_cross_track_relabel(
         )
 
 
+def check_cross_track_incumbent_urgency_mirror(
+    rows: list[dict], tracker: ValidityTracker
+) -> None:
+    """A-VK-D2 / validity (7), the anonymity check the ruling names:
+    permutation must only relabel which physical agent holds which duty, it
+    must never alter what the source contains. For every (sign combo,
+    noninitial check): (a) track 1's incumbent pair must be the exact
+    slot-swap of track 0's incumbent pair (agent_0<->agent_1), and (b) the
+    urgency_class experienced by each *canonical duty* -- the slow-duty
+    agent and the fast-duty agent, not each raw agent_slot -- must coincide
+    across the two tracks. Either failing means the two tracks disagree
+    about something a relabelling can never change."""
+    by_key: dict[tuple, dict[int, dict[int, dict]]] = {}
+    for row in rows:
+        combo = (row["sign_combo"]["slow"], row["sign_combo"]["fast"])
+        key = (*combo, row["check_index"])
+        by_key.setdefault(key, {}).setdefault(row["assignment_permutation"], {})[
+            row["focal_slot"]
+        ] = row
+
+    for key, per_track in by_key.items():
+        if (
+            0 not in per_track
+            or 1 not in per_track
+            or not {0, 1}.issubset(per_track[0])
+            or not {0, 1}.issubset(per_track[1])
+        ):
+            tracker.mark(
+                "permutation_relabels_only",
+                False,
+                f"{key}: missing track/focal-slot rows for the incumbent/urgency "
+                "mirror check",
+            )
+            continue
+
+        rows0, rows1 = per_track[0], per_track[1]
+        incumbent0 = rows0[0]["incumbent_pair"]
+        incumbent1 = rows1[0]["incumbent_pair"]
+        swap_ok = (
+            rows0[1]["incumbent_pair"] == incumbent0
+            and rows1[1]["incumbent_pair"] == incumbent1
+            and incumbent1
+            == {"agent_0": incumbent0["agent_1"], "agent_1": incumbent0["agent_0"]}
+        )
+        tracker.mark(
+            "permutation_relabels_only",
+            swap_ok,
+            f"{key}: track1 incumbent {incumbent1} is not the slot-swap of "
+            f"track0 incumbent {incumbent0}",
+        )
+
+        urgency_ok = (
+            rows0[0]["urgency_class"] == rows1[1]["urgency_class"]
+            and rows0[1]["urgency_class"] == rows1[0]["urgency_class"]
+        )
+        tracker.mark(
+            "permutation_relabels_only",
+            urgency_ok,
+            f"{key}: canonical-duty urgency classes diverge across tracks "
+            f"(track0 slots=[{rows0[0]['urgency_class']},{rows0[1]['urgency_class']}], "
+            f"track1 slots=[{rows1[0]['urgency_class']},{rows1[1]['urgency_class']}])",
+        )
+
+
+# --- artifact binding (B4) -------------------------------------------------
+
+FROZEN_ENV_PREMISES = {
+    "k0": K0,
+    "total_checks": TOTAL_CHECKS,
+    "window": WINDOW,
+    "joint_check_index": JOINT_CHECK_INDEX,
+    "max_steps": 40,
+    "slow_period_blocks": 6,
+}
+
+
+def resolve_and_assert_env_premises(config, config_module_name: str) -> dict:
+    """Bind the panel to the config that actually produced it, and fail hard
+    -- before any window is evaluated -- if that config's own clocks do not
+    match the frozen premises this oracle's whole 112-row panel construction
+    and acceptance logic assume: K0=5, 8 total checks, a one-k0-wide window,
+    the joint check at index 6, horizon 40, slow_period_blocks=6. This last
+    one is not cosmetic: slow_period_blocks is the clock that determines
+    where JOINT_CHECK_INDEX=6 (step 30) actually falls -- with
+    slow_period_blocks=3 the true joint fast+slow transitions land at checks
+    3 AND 6, not just 6, so a drifted slow_period_blocks silently passes a
+    stale JOINT_CHECK_INDEX and produces a scientifically wrong
+    NOT_IDENTIFIED verdict instead of aborting. This is a construction-time
+    contract check, not a validity predicate: a mismatch means the run
+    cannot mean what the oracle claims it means, so it must never produce an
+    artifact at all (raise `SourceAuditInvalid` uncaught here, not the
+    caught-and-reported INVALID_VERDICT path used once the panel is under
+    way)."""
+    probe_env = TwoTimescaleRoleFreeActionsEnv(config=config)
+    resolved = {
+        "config_module": config_module_name,
+        "k0": int(probe_env.k0),
+        "slow_period_blocks": int(probe_env.slow_period_blocks),
+        "max_steps": int(probe_env.max_steps),
+    }
+    mismatches = []
+    if resolved["k0"] != FROZEN_ENV_PREMISES["k0"]:
+        mismatches.append(f"k0={resolved['k0']} != frozen {FROZEN_ENV_PREMISES['k0']}")
+    if resolved["slow_period_blocks"] != FROZEN_ENV_PREMISES["slow_period_blocks"]:
+        mismatches.append(
+            f"slow_period_blocks={resolved['slow_period_blocks']} != frozen "
+            f"{FROZEN_ENV_PREMISES['slow_period_blocks']}"
+        )
+    if resolved["max_steps"] != FROZEN_ENV_PREMISES["max_steps"]:
+        mismatches.append(
+            f"max_steps={resolved['max_steps']} != frozen {FROZEN_ENV_PREMISES['max_steps']}"
+        )
+    if TOTAL_CHECKS != FROZEN_ENV_PREMISES["total_checks"]:
+        mismatches.append(
+            f"TOTAL_CHECKS={TOTAL_CHECKS} != frozen {FROZEN_ENV_PREMISES['total_checks']}"
+        )
+    if WINDOW != FROZEN_ENV_PREMISES["window"]:
+        mismatches.append(f"WINDOW={WINDOW} != frozen {FROZEN_ENV_PREMISES['window']}")
+    if JOINT_CHECK_INDEX != FROZEN_ENV_PREMISES["joint_check_index"]:
+        mismatches.append(
+            f"JOINT_CHECK_INDEX={JOINT_CHECK_INDEX} != frozen "
+            f"{FROZEN_ENV_PREMISES['joint_check_index']}"
+        )
+    if mismatches:
+        raise SourceAuditInvalid(
+            "config/module premises do not match the oracle's frozen assumptions: "
+            + "; ".join(mismatches)
+        )
+    return resolved
+
+
 # --- artifact ------------------------------------------------------------
 
 def build_panel(config) -> dict:
     torch.set_num_threads(1)
+
+    # B4: hard error, before any window is evaluated, if this config's own
+    # clocks do not match the premises the whole panel construction assumes.
+    config_module_name = type(config).__module__
+    env_premises = resolve_and_assert_env_premises(config, config_module_name)
 
     policy = FixedSkillPrimitivePolicy(4, 2, "continuous")
     action_table = policy.action_table.detach().cpu().numpy().astype(np.float64)
@@ -625,13 +827,14 @@ def build_panel(config) -> dict:
                 initial_rows.append(initial_meta)
                 all_check_fps[(combo[0], combo[1], track)] = check_fps
         check_cross_track_relabel(all_check_fps, tracker)
+        check_cross_track_incumbent_urgency_mirror(all_rows, tracker)
     except SourceAuditInvalid as exc:
         aborted_reason = str(exc)
         tracker.violations.append(f"aborted: {aborted_reason}")
 
     validity_passed = tracker.all_passed() and aborted_reason is None
     if validity_passed:
-        acceptance_passed, acceptance_detail = evaluate_acceptance(all_rows, tracker)
+        acceptance_passed, acceptance_detail = evaluate_acceptance(all_rows)
         verdict = VALID_VERDICT if acceptance_passed else NOT_IDENTIFIED_VERDICT
     else:
         acceptance_detail = {}
@@ -642,6 +845,7 @@ def build_panel(config) -> dict:
         "panel_schema_version": PANEL_SCHEMA_VERSION,
         "stage_commit": stage_commit(),
         "environment_blob_sha": blob_sha(ENV_FILE),
+        "env_premises": env_premises,
         "action_table_hash": table_hash,
         "oracle_script_hash": blob_sha(ORACLE_FILE),
         "seed_to_sign_map": [
