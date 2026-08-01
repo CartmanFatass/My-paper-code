@@ -211,7 +211,7 @@ agentify_required_commit_source=AGENTIFY_REQUIRED_COMMIT_in_wrapper
 prompt_artifact=fence_or_continuation_file_verbatim
 one_send_per_operation_key=true
 fence_operations_per_round=1
-resend_policy=verify_existing_then_at_most_one_fresh_key
+resend_policy=verify_existing_then_fresh_key_only_on_proven_presend_failure
 transport_tab_mutation=forbidden
 non_strict_query_endpoint=forbidden
 evidence_recovery=inline_continuation_paste_only
@@ -280,8 +280,13 @@ returns the stored receipt or resumes the wait, and a payload change under the
 same key is refused with a 409. Before any resend under a **fresh** key, run
 `submit --verify-existing` and require `present=false` — an operation that was
 aborted before its send (`review_operation_closed_create_fresh`) is the only
-state that authorizes one fresh key, recorded as a `RECOVERY_ATTEMPT` line.
-After that one fresh key, the round is `REVIEW_TRANSPORT_BLOCKED`.
+state that authorizes a fresh key, recorded as a `RECOVERY_ATTEMPT` line.
+A further fresh key is permitted only when the failed attempt carries server
+proof of no-send (`noClickProven=true` plus `present=false` — the
+duplicate-submission risk the cap guards is then structurally absent) AND a
+materially changed state before the retry; absent either, the round is
+`REVIEW_TRANSPORT_BLOCKED` (amended 2026-08-01 after two proven pre-send
+409s in one round).
 
 ### Standing tab precondition
 
@@ -296,7 +301,10 @@ busy tab is terminal — report it, never repair it.
 mismatches forever, and only `/review-query` itself can create the tab bound
 to the conversation URL. For that first operation only, and after confirming
 no tab with the key exists, run `submit --allow-tab-creation`. The flag is
-never used again for that key.
+used once per key per server lifetime: Agentify's tab-key registry is
+in-memory (measured 2026-08-01), so an Agentify restart clears every
+binding, and the key's next send re-creates its tab with the same flag under
+the same no-tab-exists precondition.
 
 ### Evidence-access recovery
 

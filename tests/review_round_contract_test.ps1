@@ -113,6 +113,8 @@ foreach ($required in @(
     'one_send_per_operation_key=true',
     'fence_operations_per_round=1',
     'evidence_recovery=inline_continuation_paste_only',
+    'resend_policy=verify_existing_then_fresh_key_only_on_proven_presend_failure',
+    'once per key per server lifetime',
     'non_strict_query_endpoint=forbidden',
     'NATURAL_COMPLETION_VERIFIED',
     'SUBMIT_AND_WAIT',
