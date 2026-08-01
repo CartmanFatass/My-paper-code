@@ -7,7 +7,7 @@ formal_compute=false
 scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
-agentify_required_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f
+agentify_required_commit=917c5328695b4546e8c7e548878b00a07f45af91
 ```
 
 Agentify is an optional receipt-bearing transport for an already-authorized

@@ -21,7 +21,7 @@ Use the locally installed Agentify endpoint and the HMASD conda interpreter:
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
 runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=2a06420f0beabea1b45061ffc2f98be8d4a4b63f
+required_agentify_source_commit=917c5328695b4546e8c7e548878b00a07f45af91
 ```
 
 Read the runtime contract before use. The wrapper requires the live Agentify
