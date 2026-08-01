@@ -25,7 +25,7 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=Workflow 4 touchpoint 1 IN FLIGHT: round docs/external-review/rounds/20260801_d7_s_local_only_successor_reruling asks Pro to re-rule the successor-population route under local-only execution (A1 cross-machine precondition unsatisfiable by design), decide the dtype/digest binding, and receives the disclosure list. Steps N and O stay HELD until its ruling is reconciled. Until then, development is rapid local validation of research ideas only -- no new apparatus.
+next_boundary=Workflow 4 touchpoint 1 RECONCILED (round 20260801_d7_s_local_only_successor_reruling): route B3-L LOCAL_CERTIFIED_SEED_REPLAY selected; amendments frozen in docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE_R2.md. NOW: step 2 code design of the B3-L stack (local replay gate, CERTIFIED_LOCAL_EXECUTION_CLASS, assertion-6 relocation to first-action boundary, int32 dtype pin + component_dtype provenance, input-inventory generator, LOCAL_PROVENANCE_NOT_CERTIFIED refusal), decision ledger, then touchpoint 2 conformance. Zero experiments before touchpoint 2 closes. Steps N (input inventory, not manifests) and O unlock only after LOCAL_EPISODE_KEY_REPLAY_PASS.
 workflow_position=workflow 4 OPEN at touchpoint 1; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
