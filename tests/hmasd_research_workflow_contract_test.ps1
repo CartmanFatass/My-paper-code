@@ -732,54 +732,75 @@ $costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/role
 $operationsRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
-foreach ($required in @(
-    'active_assignment_id=',
-    'next_boundary=',
-    'autonomous_research_grant=',
-    'iterations_remaining=',
-    'conclusion_bearing_iterations_consumed=',
-    'git_integration_status=',
-    'experiment_operator_fallback=forbidden',
-    'iteration_report_requirement=required_before_successor',
-    'workflow_design_manager_task=',
-    'code_science_alignment_position=after_code_project_manager_implementation_acceptance',
-    'code_science_alignment_index=commit_bound_CODE_SCIENCE_INDEX_required',
-    'routine_preimplementation_code_science_review=forbidden',
-    'active_assignment_id=NO_ACTIVE_CODE_ASSIGNMENT_G33_ABANDONED',
-    'g33_status=ABANDONED_BY_USER_AFTER_DISCUSSION',
-    'g33_active_code_authority=none',
-    'uav_user_scope=transient_demand_coverage_plus_charging_roster_change_plus_temporary_detach_failure_robustness',
-    'uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster',
-    'workflow_hash_validation=disabled')) {
-    if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
+function ConvertTo-UniqueKeyMap([string]$Body, [string]$Scope) {
+    $map = @{}
+    foreach ($line in ($Body -split "`r?`n")) {
+        if ($line -eq '') { continue }
+        if ($line -notmatch '^([A-Za-z][A-Za-z0-9_]*)=(.*)$') { throw "$Scope has a non-key line: $line" }
+        if ($map.ContainsKey($Matches[1])) { throw "$Scope repeats key: $($Matches[1])" }
+        $map.Add($Matches[1], $Matches[2])
+    }
+    return $map
 }
-
-foreach ($required in @(
-    'search_complexity_ceiling=O(H*K_search)',
-    'candidate_trajectory_count_ceiling=16',
-    'future_simulated_transitions_per_controller_episode<=16*H',
-    'nested_rollout_replanning=forbidden',
-    'nonformal_wall_clock_cap_minutes=20',
-    'formal_iteration_wall_clock_cap_hours=8',
-    'scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)',
-    'fixed_small_exact_simulator_O(N^2)=allowed_as_reference_only')) {
-    if (-not $current.Contains($required)) { throw "CURRENT_WORK missing complexity boundary: $required" }
+$lineCount = @($current -split "`r?`n").Count
+if ($lineCount -gt 500) { throw "CURRENT_WORK exceeds 500 lines: $lineCount" }
+$headerMatch = [regex]::Match($current, '(?ms)\A# HMASD Current Work Portfolio\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
+if (-not $headerMatch.Success) { throw 'CURRENT_WORK portfolio header fence is missing' }
+$header = ConvertTo-UniqueKeyMap $headerMatch.Groups['body'].Value 'CURRENT_WORK header'
+$parsedKeyCount = $header.Count
+foreach ($key in @('document_kind', 'state_owner', 'state_updated', 'workstream_ids', 'independent_research_pointer_ids', 'legacy_snapshot')) {
+    if (-not $header.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($header[$key])) { throw "CURRENT_WORK header missing: $key" }
 }
-
-foreach ($required in @(
-    'handoff_document_write_policy=user_explicit_only',
-    'automatic_handoff_document_write=forbidden')) {
-    if (-not $current.Contains($required)) { throw "CURRENT_WORK missing: $required" }
+if ($header['document_kind'] -ne 'current_work_portfolio' -or $header['state_owner'] -ne 'research_operations_manager') {
+    throw 'CURRENT_WORK header identity is invalid'
 }
-
-$remainingMatch = [regex]::Match($current, '(?m)^iterations_remaining=(\d+)\s*$')
-$consumedMatch = [regex]::Match($current, '(?m)^conclusion_bearing_iterations_consumed=(\d+)\s*$')
-if (-not $remainingMatch.Success -or -not $consumedMatch.Success) {
-    throw 'CURRENT_WORK iteration accounting is not a nonnegative integer contract'
+$legacyPath = Join-Path $repo $header['legacy_snapshot']
+if (-not (Test-Path -LiteralPath $legacyPath -PathType Leaf)) { throw 'CURRENT_WORK legacy snapshot is missing' }
+$workstreamIds = @($header['workstream_ids'].Split('|') | Where-Object { $_ })
+$workstreamMatches = [regex]::Matches($current, '(?ms)^## Workstream: (?<name>[a-z0-9_]+)\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
+if ($workstreamMatches.Count -ne $workstreamIds.Count) { throw 'CURRENT_WORK roster and workstream block counts differ' }
+$workstreams = @{}
+foreach ($match in $workstreamMatches) {
+    $name = $match.Groups['name'].Value
+    if ($workstreams.ContainsKey($name)) { throw "CURRENT_WORK repeats workstream: $name" }
+    $record = ConvertTo-UniqueKeyMap $match.Groups['body'].Value "CURRENT_WORK workstream $name"
+    foreach ($key in @('workstream_id', 'owner_role', 'status', 'active_assignment_id', 'next_boundary', 'environment', 'grant_or_authority_reference', 'current_evidence_pointer')) {
+        if (-not $record.ContainsKey($key) -or [string]::IsNullOrWhiteSpace($record[$key])) { throw "CURRENT_WORK workstream $name missing: $key" }
+    }
+    if ($record['workstream_id'] -ne $name -or $record['owner_role'] -ne 'research_operations_manager') { throw "CURRENT_WORK workstream identity mismatch: $name" }
+    $workstreams[$name] = $record
+    $parsedKeyCount += $record.Count
 }
-if ($current.Contains('autonomous_research_grant=ACTIVE_') -and
-    [int]$remainingMatch.Groups[1].Value -le 0) {
-    throw 'An active autonomous grant has no remaining conclusion-bearing iterations'
+foreach ($name in $workstreamIds) {
+    if (-not $workstreams.ContainsKey($name)) { throw "CURRENT_WORK roster has no block: $name" }
+}
+if ([regex]::Matches($current, '(?m)^active_assignment_id=').Count -ne $workstreamIds.Count -or
+    [regex]::Matches($current, '(?m)^next_boundary=').Count -ne $workstreamIds.Count) {
+    throw 'CURRENT_WORK current assignment keys are not unique within the roster'
+}
+$formal = $workstreams['formal_toy_research']
+foreach ($key in @('grant_iterations_authorized', 'grant_iterations_remaining', 'conclusion_bearing_iterations_consumed_total')) {
+    if (-not $formal.ContainsKey($key) -or $formal[$key] -notmatch '^\d+$') { throw "CURRENT_WORK formal grant is invalid: $key" }
+}
+if ([int]$formal['grant_iterations_remaining'] -gt [int]$formal['grant_iterations_authorized']) {
+    throw 'CURRENT_WORK formal grant remaining exceeds authorization'
+}
+$pointerMatches = [regex]::Matches($current, '(?ms)^## Independent research pointer: (?<name>[a-z0-9_]+)\r?\n\r?\n```text\r?\n(?<body>.*?)^```\r?$')
+$pointerIds = @($header['independent_research_pointer_ids'].Split('|') | Where-Object { $_ })
+if ($pointerMatches.Count -ne $pointerIds.Count) { throw 'CURRENT_WORK pointer roster and block counts differ' }
+foreach ($match in $pointerMatches) {
+    $record = ConvertTo-UniqueKeyMap $match.Groups['body'].Value "CURRENT_WORK pointer $($match.Groups['name'].Value)"
+    if ($record['pointer_id'] -ne $match.Groups['name'].Value -or $record['project_state_replication'] -ne 'forbidden') {
+        throw 'CURRENT_WORK independent research pointer duplicates owned state'
+    }
+    $parsedKeyCount += $record.Count
+}
+$allKeyLineCount = [regex]::Matches($current, '(?m)^[A-Za-z][A-Za-z0-9_]*=.*$').Count
+if ($allKeyLineCount -ne $parsedKeyCount) {
+    throw 'CURRENT_WORK contains key-bearing state outside a registered current record'
+}
+if ($current -match '(?im)^## .*mechanically recorded|authoritative .*override') {
+    throw 'CURRENT_WORK contains appended historical state'
 }
 
 foreach ($required in @(
@@ -884,6 +905,10 @@ foreach ($required in @(
     'external_review_transport_authority=exclusive',
     'runtime_authority=exclusive',
     'current_work_authority=exclusive',
+    'current_work_structure=dynamic_workstream_portfolio',
+    'current_work_key_uniqueness=within_each_workstream',
+    'current_work_history_storage=git_named_evidence_reports_ledgers_and_legacy_snapshot',
+    'current_work_independent_explorer=pointer_only_no_state_replication',
     'scientific_authority=none',
     'code_acceptance_authority=none',
     'Research Operations Manager may request a workflow-design change directly',
@@ -1037,7 +1062,7 @@ foreach ($required in @(
     if (-not $readme.Contains($required)) { throw "Iteration-report contract missing: $required" }
 }
 
-$consumed = [int]$consumedMatch.Groups[1].Value
+$consumed = [int]$formal['conclusion_bearing_iterations_consumed_total']
 for ($iteration = 1; $iteration -le $consumed; $iteration++) {
     $path = Join-Path $repo "docs/report/ITERATION_$iteration.md"
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {

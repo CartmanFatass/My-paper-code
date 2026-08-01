@@ -7,6 +7,10 @@ role=research_operations_manager
 role_kind=persistent_research_operations_and_pro_transport_task
 runtime_authority=exclusive
 current_work_authority=exclusive
+current_work_structure=dynamic_workstream_portfolio
+current_work_key_uniqueness=within_each_workstream
+current_work_history_storage=git_named_evidence_reports_ledgers_and_legacy_snapshot
+current_work_independent_explorer=pointer_only_no_state_replication
 external_review_transport_authority=exclusive
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
@@ -74,6 +78,9 @@ Read `docs/project/CURRENT_WORK.md`, this charter and only the paths named by th
 current operational boundary. This is the sole persistent owner of the active
 research loop. External Pro owns science, Code Project Manager owns code and
 technical acceptance, and Workflow Design Manager owns workflow design.
+Maintain one current record per registered workstream and edit it in place;
+never append event history. Add, pause or retire workstreams by updating the
+roster, while independently owned research remains a pointer only.
 The Explorer-origin toy-validation boundary is specified by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; use
 `$hmasd-explorer-project-validation` only when that boundary is active.
