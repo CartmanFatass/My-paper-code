@@ -116,6 +116,45 @@ definition feeds the registered fingerprint, and a unilateral change would
 re-key committed evidence. Recorded here as a disclosure item alongside the
 existing list in `CURRENT_WORK.md`.
 
+## RESULT, 2026-07-31, same day: the prediction is CONFIRMED, 6 of 6
+
+The round-2 cloud artifacts were still downloadable (`gh run download`,
+runs `30516912923` / `30518707693`, both `d7s-workers-proof`). The PM ran
+`scripts/d7_s_world_digest_probe.py` locally over the same six episode keys
+(contract `D7_S_EVENT_ALIGNED_SOURCE_AUDIT`, topology `20260725`), reproduced
+the round-2 tally exactly with `scripts/d7_s_world_component_digest_diff.py`
+(5 x `user_velocities`, 1 x `user_cluster_assignments`, the latter on
+**audit ep0** — the key the round-2 comparison never archived), then rebuilt
+each world and compared the cloud digest against the local values cast to both
+widths:
+
+```text
+key              seeds_match   local_int32==cloud   local_int64==cloud
+audit ep0        True          False                True
+audit ep1        True          False                True
+calibration ep0  True          False                True
+calibration ep1  True          False                True
+calibration ep2  True          False                True
+calibration ep3  True          False                True
+```
+
+**6/6 int64 matches.** The inferred link is now measured: `ubuntu-latest`
+serializes this array at 8 bytes per element, the values are bit-identical
+across the platform boundary on every key, and the array was only *reported*
+first-differing on the one key (audit ep0) where the trig-borne
+`user_velocities` happened to agree — exactly the ordering artifact the
+prediction named. The `user_cluster_assignments` divergence is **closed as a
+value question**: no value ever differed.
+
+**Cloud-versus-cloud, same download, new bound.** All four artifacts across the
+two runs (`w1`/`w4` arms of both) share one SHA-256
+(`4153fb150798b7f6...`), at head SHAs `add28991` and `08a3453c`. Two
+independently provisioned `ubuntu-latest` runners agreed byte-for-byte on the
+dev vehicle — so the unresolved 3-of-8 R4 cloud-cloud fingerprint divergence
+did **not** reproduce here, and whatever causes it did not fire on this
+topology/commit pair. That divergence remains open; this narrows where it can
+live.
+
 ## Reproduction recipe (self-contained)
 
 ```python
