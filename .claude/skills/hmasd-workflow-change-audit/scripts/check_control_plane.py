@@ -50,6 +50,9 @@ DEFAULT_FORBIDDEN = (
     # name out of the md surface. Historical records say "delegated transport
     # child" instead of the name.
     "exchanger",
+    # The cloud vehicle and every cross-device comparison design, retired by
+    # user ruling 2026-08-01. One stem covers the routing doc and its rule.
+    "COMPUTE_ROUTING",
 )
 # Referenced paths that are legitimately patterns or external, not files on disk.
 REF_EXEMPT_SUFFIXES = ("/", "*")
@@ -70,7 +73,6 @@ SECTION_REF = re.compile(
 ROUTED_PROJECT_DOCS = (
     "docs/project/ALGORITHM_PRINCIPLES.md",
     "docs/project/EVIDENCE_COMPLEXITY_POLICY.md",
-    "docs/project/COMPUTE_ROUTING.md",
     "docs/project/AGENT_CONTEXT.md",
     "docs/project/RESEARCH_GOAL.md",
 )

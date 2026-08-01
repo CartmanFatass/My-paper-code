@@ -20,7 +20,7 @@ The map-level assertion is fail-closed inside production, so a failed repair
 surfaces here as SourceAssignmentInvariantError rather than as a bad number.
 That is caught and reported rather than allowed to look like a crash.
 
-Development feedback, local by routing (docs/project/COMPUTE_ROUTING.md).
+Development feedback, runs locally.
 Conclusion-bearing nothing: no registered quantity is read.
 """
 import argparse

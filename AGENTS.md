@@ -72,8 +72,9 @@ project interface.
   round."
 - Selection of the default toy discovery surface and the one-way promotion of a
   toy-supported candidate to a heavy UAV transport/robustness validation.
-- Routing every unit of compute to a machine, per
-  `docs/project/COMPUTE_ROUTING.md`.
+- Scheduling compute on the local workstation — the only machine; the cloud
+  vehicle is retired (user ruling 2026-08-01). Check for the other line's
+  processes before long runs.
 - The Chinese user-facing report after each valid conclusion-bearing iteration,
   stored as `docs/report/ITERATION_<n>.md` before successor work, ending with the
   round's time-distribution table and one line naming what the next round cuts.
@@ -189,9 +190,8 @@ in an empty gap without one is the stall this section exists to prevent.
    and it is yours, **take it now**. A turn ending is not the loop ending: check
    before the last tool call that either work is in flight or a driver is
    attached.
-2. **Compute is a routing decision, not a question.** See
-   `docs/project/COMPUTE_ROUTING.md`. Never return to the user to ask where to
-   run something.
+2. **Compute is local, and scheduling it is a decision, not a question.** Never
+   return to the user to ask where or whether to run development work.
 3. **Waiting is done in-band.** No blocking sleep exists, so ending a turn to
    wait is a stall. Poll inside the turn, or hand back.
 

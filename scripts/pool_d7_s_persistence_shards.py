@@ -5,7 +5,7 @@ values tile one contiguous block reproduce exactly the episode set of a single
 `--episodes N` run. Pooling is therefore loss-free: concatenate `per_episode`,
 recompute the means, `B_H`, both margins and the bootstrap from the concatenation
 — never average the normalized margins across shards, since a ratio of means is
-not the mean of ratios (`docs/project/REMOTE_COMPUTE_HANDOFF.md`, *Sharding*).
+not the mean of ratios.
 
 Every scientific field is recomputed with the audit module's own functions and
 frozen constants, with `ci_seed = seed_0 + 7717` — the value the monolithic run

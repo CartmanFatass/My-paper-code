@@ -116,8 +116,7 @@ def runtime_identity() -> dict:
 
     Written into every artifact so that two runs which AGREE can be told apart
     from two runs that shared a machine. Without it, agreement is uninterpretable
-    and `d7_s_world_conformance_gate.py` can only return UNTESTED -- which is
-    exactly what happened to runs 30516912923 and 30518707693.
+    -- which is exactly what happened to runs 30516912923 and 30518707693.
 
     The BLAS configuration string matters as much as the numpy version. The pinned
     wheel reports `DYNAMIC_ARCH=1`: one wheel carries many CPU-specific kernels and
@@ -5291,12 +5290,11 @@ def main() -> None:
         "smoke": bool(args.smoke),
         "note": note,
         # WHICH RUNTIME PRODUCED THIS. Added 2026-07-30 because its absence made a
-        # cross-machine comparison unanswerable rather than merely incomplete: two
-        # artifacts that AGREE are indistinguishable from two artifacts that ran on
-        # the same hardware, so `d7_s_world_conformance_gate.py` can only return
-        # UNTESTED without it. Measured: runs 30516912923 and 30518707693 agreed on
-        # all nine world arrays for all six shared keys, and that agreement could
-        # not be interpreted.
+        # comparison of two artifacts unanswerable rather than merely incomplete:
+        # two artifacts that AGREE are indistinguishable from two artifacts that
+        # ran on the same hardware. Measured: runs 30516912923 and 30518707693
+        # agreed on all nine world arrays for all six shared keys, and that
+        # agreement could not be interpreted.
         #
         # It records the BLAS configuration and CPU dispatch list, not just the
         # numpy version, because the pinned wheel is built `DYNAMIC_ARCH=1` -- one

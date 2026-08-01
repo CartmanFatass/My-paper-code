@@ -13,7 +13,6 @@ Before adding a line, ask where it belongs:
 | A finding, a measurement, a mechanism | an evidence note under `docs/research/cdc/EVIDENCE_NOTES/` |
 | A rule for how work is done | `AGENTS.md` if it binds the orchestrator, the subagent's own definition if it binds a worker |
 | A ruling and its reconciliation | the round directory under `docs/external-review/rounds/` |
-| Which machine runs what | `docs/project/COMPUTE_ROUTING.md` |
 | What is live *right now* | here |
 
 It has twice grown into a contradicting journal and been cut back; a second
@@ -26,7 +25,7 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=PICK UP HERE. Round 4 in progress; actions 1-7 done, action 8 (two independent cloud jobs) ESCALATED, BLOCKED ON USER -- YAML in docs/project/PROPOSED_WORKFLOW_JOB_MANIFEST_REPLAY.md, full action list in rounds/20260730_d7_s_manifest_replay_gate_result/30_PM_SCIENTIFIC_RECONCILIATION.md. The user_cluster_assignments dtype question is CLOSED 6/6 (note 20260731_USER_CLUSTER_ASSIGNMENTS_DIVERGENCE_IS_DTYPE_WIDTH_NOT_VALUES.md; adds one disclosure item -- digest treats width as world-distinguishing). The cloud-cloud 3-of-8 divergence remains UNRESOLVED and did not reproduce on the re-downloaded round-2 artifacts.
+next_boundary=PICK UP HERE. The cloud/cross-device comparison line is CANCELLED (user ruling 2026-08-01) -- action 8's escalation is withdrawn, the vehicle and apparatus are deleted; record: docs/research/cdc/EVIDENCE_NOTES/20260801_CLOUD_CROSS_DEVICE_COMPARISON_LINE_RETIRED_BY_USER.md. MAINLINE: open the next Pro touchpoint -- disclose the cancellation, local-only execution, the dtype-width digest item (note 20260731, CLOSED 6/6), and the implementation-binding list below; ask Pro to re-rule the successor-population route, since the A1 precondition (cross-machine MANIFEST_REPLAY_PASS) is unsatisfiable with one machine. Until that ruling, development is rapid local validation of research ideas only -- no new apparatus.
 workflow_position=workflow 3 CLOSED; complete R4 contract frozen at docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md
 ```
 
@@ -89,8 +88,9 @@ L  full-horizon replay exercise (dev)     RAN -- MANIFEST_REPLAY_FAIL on
                                           20260730_MANIFEST_REPLAY_GATE_FIRST_RESULT.md
 M  freeze fresh-population selection RULE DONE  fd3087ac --
                                           D7_S_SUCCESSOR_POPULATION_SELECTION_RULE.md
-N  generate immutable fresh inventory     HELD until K/L pass
-O  formal successor run                   HELD, separate compute authority
+N  generate immutable fresh inventory     ROUTE CANCELLED 2026-08-01 -- awaits
+                                          Pro's re-ruling under local-only
+O  formal successor run                   HELD, awaits the same re-ruling
 ```
 
 **RULED 2026-07-30 (round 2): ROUTE A, AMENDED. Do not wire the manifest in.**
@@ -126,7 +126,10 @@ round directory and its evidence notes, not here.
 three different world fingerprints; the two cloud runs disagree on 3 of 8
 topologies. Ruled a population-provenance failure: a registered episode key
 must identify one reproducible world or one validated probability law, and it
-currently identifies neither.
+currently identifies neither. The cross-machine localization of this was
+cancelled with the cloud line (user ruling 2026-08-01, evidence note
+`20260801_CLOUD_CROSS_DEVICE_COMPARISON_LINE_RETIRED_BY_USER.md`); the
+one-machine provenance requirement itself still stands.
 
 **Implementation bindings decided in D'/D''/D''', owed to Pro as disclosure at
 the next touchpoint** (none reopens a frozen decision): the length gate
@@ -195,14 +198,9 @@ its four named reactivation conditions in the round record.
 
 ### Cost
 
-```text
-0.0864 / 0.0923 / 0.0784 s/step across three hosted samples, +-9% around 0.0857
-```
-
-The apparent fingerprint-rewrite cost was runner variance. `|Z|=8` projects to
-5.3–6.3 h against a 5.92 h self-stop. `--workers 4` is wired into the audit
-shard (4 real cores; the `nproc=1` in logs is `OMP_NUM_THREADS=1`, not the core
-count); determinism proved byte-identical at run `30270540138`.
+Local measured rate 0.0615 s/step (2026-07-27); `|Z|=8` projects to ~4.2 h on
+this box. `--workers 4` is wired into the audit shard; determinism proved
+byte-identical at run `30270540138`. Cloud rates retired with the vehicle.
 
 ## Standing constraints
 
@@ -247,9 +245,10 @@ No Controller, persistent Monitor, dispatcher, callback route, global write
 lease or compatibility line is active. Subagent dispatch was blocked by the
 session prompt, not this repository, and was lifted 2026-07-27.
 
-The workstation is shared with another research line. Check for foreign
-processes before any local run and never touch them. Routing rules:
-`docs/project/COMPUTE_ROUTING.md`.
+The workstation is shared with another research line, and it is the only
+machine: the cloud vehicle is retired (user ruling 2026-08-01). Check for
+foreign processes before any local run (`scripts/check_compute_free.ps1`) and
+never touch them.
 
 ### Guard state — a PM-owned premise, not an adjudicated fact
 
@@ -274,7 +273,7 @@ archive_pro_response.ps1  the round capture rediscovered by hand five times.
 new_review_round.ps1      round scaffold; refuses if the resolved root has no AGENTS.md.
 launch_and_watch_run.ps1  preflight + status. Hands back the launch command; only
                           a backgrounded Bash call survives detachment.
-pretooluse_guard.ps1      --no-verify, push-before-tag, branch scope.
+pretooluse_guard.ps1      --no-verify and core.hooksPath, branch scope.
 ```
 
 The design charter governing all of this — budgets, single-source, incident
@@ -341,7 +340,6 @@ the fence in `AGENTS.md` is the single source.
 |---|---|
 | Project Manager instructions — authority, the loop, Stage A/B, acceptance, task sizing, dispatch, review | `AGENTS.md` |
 | Standing context every subagent reads | `docs/project/AGENT_CONTEXT.md` |
-| Which machine runs what | `docs/project/COMPUTE_ROUTING.md` |
 | Scientific method contract | `docs/project/ALGORITHM_PRINCIPLES.md` |
 | Cost ceilings and violation semantics | `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` |
 | What the paper is about, and the standing check | `docs/project/RESEARCH_GOAL.md` |

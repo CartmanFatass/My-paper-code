@@ -56,7 +56,8 @@ Before a conclusion-bearing run, the Project Manager still records a cost
 projection: episode count, expected qualifying events, forks per event (all arms
 x limbs x select/eval replicates), steps per fork (prefix replay + continuation
 horizon + guard), and the projected wall clock at the intended sharding width.
-`scripts/d7_s_prelaunch_cost_bound.py` is the D7.S instance of this.
+A few lines of arithmetic in the launch record suffice; the retired D7.S cost
+script died with the cloud vehicle's 6-hour ceiling (2026-08-01).
 
 It exists so the run's cost is **known and scheduled**, not so it can be
 refused. It is no longer a launch gate. When constants are unknown, one

@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    PreToolUse guard. Turns three standing constraints that were enforced only by
+    PreToolUse guard. Turns standing constraints that were enforced only by
     a sentence into things the shell cannot do.
 
 .DESCRIPTION
@@ -20,13 +20,8 @@
         matches `git commit --no-verify`). Highest leverage rule here: bypass it
         and every other mechanical guard in the repository is off.
 
-    RULE 2 -- push before tag
-        COMPUTE_ROUTING.md: "Unpushed work is invisible. The runner checks out
-        the tagged commit. Push before tagging, always." A tag pushed ahead of
-        its commits produces a cloud run at the wrong tree -- hours of compute,
-        or worse, a result computed from code that is not the code being claimed.
-        The review-round preflight already makes this assertion; the cloud path
-        never got it.
+    RULE 2 (push before tag) was retired with the cloud vehicle on 2026-08-01:
+    no runner checks out tags any more, so the rule guarded nothing.
 
     RULE 3 -- branch scope
         CURRENT_WORK.md: `branch_scope=untied-k only, never touch another branch`
@@ -74,7 +69,7 @@ $repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 
 # --- A flag inside a quoted message is prose, not a flag ---------------------
 # The first commit this guard ever judged was BLOCKED by its own commit message,
-# which described the bypass it forbids. Rules 1 and 2 match FLAGS and
+# which described the bypass it forbids. Rules 1 and 1b match FLAGS and
 # SUBCOMMANDS, so a heredoc body or a quoted -m argument is noise to them.
 # Blocking that teaches the next reader to route around the guard, which costs
 # more than the bypass it covers.
@@ -118,33 +113,6 @@ If you meant to READ the current value, inspect .git/config with a file tool
 instead. If the user has directed a hooks-path change, say so and ask them to
 run it.
 "@
-}
-
-# --- RULE 2: push before tag -------------------------------------------------
-$isTagCreate = $scan -match 'git\b[^|;&]*\btag\b(?!\s+-[dl])'
-$isTagPush = $scan -match 'git\b[^|;&]*\bpush\b[^|;&]*(--tags|refs/tags|\btag\b)'
-if ($isTagCreate -or $isTagPush) {
-    $branch = (& git -C $repo rev-parse --abbrev-ref HEAD 2>$null)
-    if ($branch) {
-        $branch = $branch.Trim()
-        & git -C $repo merge-base --is-ancestor HEAD "origin/$branch" 2>$null | Out-Null
-        if ($LASTEXITCODE -ne 0) {
-            $unpushed = (& git -C $repo log --oneline "origin/$branch..HEAD" 2>$null) -join "`n"
-            Deny @"
-HEAD is not an ancestor of origin/$branch -- there are unpushed commits, and the
-cloud runner checks out the TAGGED COMMIT, not your working tree.
-
-Tagging now produces a run at a tree that does not contain this work, which is
-either hours of wasted compute or, worse, a result computed from code that is
-not the code being claimed.
-
-Unpushed:
-$unpushed
-
-Push first, then tag.
-"@
-        }
-    }
 }
 
 # --- RULE 3: branch scope ----------------------------------------------------

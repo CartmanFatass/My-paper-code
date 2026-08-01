@@ -33,10 +33,10 @@ load, and because each of them cost something real on 2026-07-27 while the rule
 existed somewhere you had not read yet. They are the minimum that must hold even
 if you read nothing else.
 
-1. **Route compute before running it.** Conclusion-bearing and apparatus work go
-   to the cloud vehicle; only development feedback and interactive diagnosis run
-   locally. The local gate answers *when*, never *where* —
-   `docs/project/COMPUTE_ROUTING.md`.
+1. **All compute runs locally.** The cloud vehicle and every cross-device
+   comparison design were retired by user ruling 2026-08-01. Before any run
+   longer than a few minutes, check the shared workstation for the other line's
+   processes (`scripts/check_compute_free.ps1`) and never touch them.
 2. **Measure a rate before claiming a cause.** Two samples cannot separate a
    cause from a coin. Ten isolated runs cost ninety seconds.
 3. **Verify a child's claim before it becomes a record.** Children are bound to
@@ -63,7 +63,6 @@ refusal — it produces an invention.
 | Running an external review round | `$hmasd-review-round` |
 | Judging whether work is on path | `docs/project/RESEARCH_GOAL.md` |
 | Designing evidence, freezing a contract | `docs/project/ALGORITHM_PRINCIPLES.md`, then `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` |
-| Deciding which machine runs something | `docs/project/COMPUTE_ROUTING.md` |
 
 Nothing else. Read the charter, definition or document your task actually names.
 

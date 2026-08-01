@@ -202,28 +202,17 @@ def test_no_docstring_still_claims_cross_machine_reproduction() -> None:
 
 
 def test_the_component_order_has_exactly_one_definition() -> None:
-    """The order is a hash input, so two copies of it is a drift risk.
+    """The order is a hash input, so a stale inline literal is a drift risk.
 
-    It was an inline literal inside `episode_world_fingerprint` and had to be
-    repeated in `scripts/d7_s_world_component_digest_diff.py`. Extracted to
-    `WORLD_COMPONENT_ORDER` on 2026-07-30. The localizer keeps a light local copy
-    rather than importing the audit module (which pulls in the environments), so
-    this test is what stops the two from drifting.
+    It was an inline literal inside `episode_world_fingerprint`; extracted to
+    `WORLD_COMPONENT_ORDER` on 2026-07-30. The cross-machine localizer that once
+    kept a second copy was retired with the cloud comparison line (2026-08-01).
     """
-
-    import importlib.util
 
     assert len(audit.WORLD_COMPONENT_ORDER) == 9
     assert audit.WORLD_COMPONENT_ORDER[0] == "user_positions"
 
-    spec = importlib.util.spec_from_file_location(
-        "_diff_for_order", ROOT / "scripts" / "d7_s_world_component_digest_diff.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    assert tuple(module.COMPONENT_ORDER) == tuple(audit.WORLD_COMPONENT_ORDER), (
-        "the localizer's component order has drifted from the fingerprint's")
-
-    # and the fingerprint must actually consume the constant, not a stale literal
+    # the fingerprint must actually consume the constant, not a stale literal
     source = (ROOT / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
     start = source.index("def episode_world_fingerprint")
     block = source[start:start + 4000]
@@ -236,9 +225,8 @@ def test_the_audit_artifact_records_its_runtime_identity() -> None:
 
     MEASURED COST OF ITS ABSENCE: runs 30516912923 and 30518707693 agreed on all
     nine world arrays for all six shared episode keys, and that agreement was
-    UNINTERPRETABLE -- `d7_s_world_conformance_gate.py` could only return UNTESTED.
-    The ruling requires a cross-machine check, and a cross-machine check needs to
-    know the machines differed.
+    UNINTERPRETABLE -- the then-active conformance gate could only return
+    UNTESTED, because nothing recorded whether the machines differed.
     """
 
     identity = audit.runtime_identity()
@@ -257,23 +245,5 @@ def test_the_audit_artifact_records_its_runtime_identity() -> None:
     # and it must actually reach the artifact, not merely be computable
     source = (ROOT / "scripts" / "audit_d7_s_event_aligned.py").read_text(encoding="utf-8")
     assert '"runtime_identity": runtime_identity(),' in source, (
-        "the audit result no longer carries runtime_identity; cross-machine "
-        "comparisons of its artifacts become uninterpretable again")
-
-
-def test_the_probe_and_the_audit_share_one_identity_definition() -> None:
-    """A duplicated identity function is slow-motion drift: two artifacts could
-    record 'the same' runtime under two different definitions of same."""
-
-    import importlib.util
-
-    spec = importlib.util.spec_from_file_location(
-        "_probe_identity", ROOT / "scripts" / "d7_s_world_digest_probe.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    assert module.runtime_identity() == audit.runtime_identity()
-
-    probe_source = (ROOT / "scripts" / "d7_s_world_digest_probe.py").read_text(
-        encoding="utf-8")
-    assert "return audit.runtime_identity()" in probe_source, (
-        "the probe has its own identity implementation again")
+        "the audit result no longer carries runtime_identity; comparisons of "
+        "its artifacts become uninterpretable again")

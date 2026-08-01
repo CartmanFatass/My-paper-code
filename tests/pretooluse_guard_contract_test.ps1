@@ -119,10 +119,6 @@ $cases = @(
     @{ Deny = $false; Why = 'rule 1 paired negative: core.hooksPath NAMED inside a quoted message';
        Cmd = 'git commit -m "never set core.hooksPath to dodge the drift guard"' },
 
-    # rule 2 -- tagging, and the word "tag" as message text
-    @{ Deny = $false; Why = 'rule 2 paired negative: "tag" appearing in a commit message';
-       Cmd = 'git commit -m "always tag the stage commit"' },
-
     # A commit message is prose. None of these verbs may summon a rule; every
     # one of them appears in this repository's real commit messages, and the
     # first draft of the sanitization denied all three.
@@ -172,25 +168,6 @@ foreach ($case in $cases) {
         $expected = if ($case.Deny) { 'DENY (2)' } else { 'ALLOW (0)' }
         $oneline = ($case.Cmd -replace '\r?\n', ' | ')
         $failures += "$($case.Why): expected $expected, got exit $code -- $oneline"
-    }
-}
-
-# --- The rule-2 push-before-tag branch, exercised against real repo state -----
-# State-dependent by nature, so assert the DIRECTION rather than a fixed verdict:
-# with unpushed commits present, creating a tag must be denied; the assertion is
-# skipped, loudly, when the working branch is already pushed.
-$branch = (& git -C $repo rev-parse --abbrev-ref HEAD 2>$null)
-if ($branch) {
-    $branch = $branch.Trim()
-    & git -C $repo merge-base --is-ancestor HEAD "origin/$branch" 2>$null | Out-Null
-    if ($LASTEXITCODE -ne 0) {
-        $code = Invoke-Guard 'git tag d7s-probe'
-        if ($code -ne 2) {
-            $failures += "rule 2: HEAD is ahead of origin/$branch, so tag creation must be denied, got exit $code"
-        }
-    }
-    else {
-        Write-Output "SKIP     rule 2 live branch: HEAD is already an ancestor of origin/$branch, nothing unpushed to catch"
     }
 }
 

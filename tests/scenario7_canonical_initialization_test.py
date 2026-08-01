@@ -7,9 +7,9 @@ reward component or continuation fingerprint is recomputed from those final
 inputs -- and the six observed stale fields must NOT be repaired individually.
 
 Every test here builds real `UAVEnergyAwareRelayEnv` instances through the audit
-script's own `build_topology_template` / `build_pinned_env`, the same call
-pattern `scripts/d7_s_manifest_replay_probe.py` uses. No doubles: the defect is a
-property of that construction order, so a stand-in would test nothing.
+script's own `build_topology_template` / `build_pinned_env`. No doubles: the
+defect is a property of that construction order, so a stand-in would test
+nothing.
 
 The topology template is built once per module, but the env PAIR is rebuilt per
 test on purpose: the barrier mutates the envs, and a shared pair would let one
@@ -33,9 +33,8 @@ from envs.pettingzoo.scenario7_energy_aware import (  # noqa: E402
     UAVEnergyAwareRelayEnv,
 )
 
-# Development topology only. `d7_s_manifest_replay_probe.refuse_confirmatory_topology`
-# forbids touching an R4 seed, and constructing one here would inspect a
-# confirmatory world exactly as the ruling forbids.
+# Development topology only. The ruling forbids touching an R4 seed, and
+# constructing one here would inspect a confirmatory world.
 TOPOLOGY_SEED = audit.TOPOLOGY_SEED_DEV
 EPISODE_SEED = 1001
 ENERGY_SEED = 2002
@@ -57,8 +56,7 @@ def topology():
 def pinned_pair(topology):
     """Two independently constructed pinned envs with IDENTICAL registered seeds.
 
-    This is the exact construction `d7_s_manifest_replay_probe.replay_one_episode`
-    performs, minus the manifest: `build_topology_template` once, then
+    The canonical construction: `build_topology_template` once, then
     `build_pinned_env` twice against the same recorded coordinates.
     """
     config, coords, coord_hash = topology
