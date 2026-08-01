@@ -7,6 +7,7 @@ role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
 formal_transport_owner=research_operations_manager_restricted_transport_mode
 independent_methodology_transport_owner=independent_research_review_operator_separate_conversation
+independent_direction_transport_executor=hmasd-independent-research-review-operator_native_child
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -29,6 +30,8 @@ valid_result_required_inputs=archived_evidence|grant_boundary|result_class|remai
 active_grant_user_permission_request=forbidden
 independent_research_methodology_audit=user_authorized_advisory_only
 independent_research_methodology_audit_project_state_effect=none
+independent_research_direction_review_modes=PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW|PRO_ADVERSARIAL_SCIENTIFIC_REVIEW
+independent_research_constructive_adversarial_barrier=explorer_new_advisory_version_required
 explorer_toy_design_review=EXPLORER_TOY_DESIGN_ASSERTION_AUDIT
 explorer_toy_result_review=EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION
 explorer_toy_candidate_per_package=one
@@ -81,13 +84,16 @@ paths when scientific judgment depends on what the code actually implements.
   module-admission conditions and required campaign fields. Do not select an
   active project direction, alter the formal portfolio or grant, authorize
   compute, or promote an advisory result.
-- `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`: assess exactly one named advisory
-  candidate from one mechanically bounded campaign packet. Judge its problem
-  formulation, mechanism path, RL/MARL driver, alternative explanations,
-  identification controls, source-to-mechanism boundary, required interfaces
-  and minimum validation contract. Do not request or compare other candidates,
-  rank the portfolio, choose a global winner, authorize code or compute, or
-  decide formal project adoption.
+- `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`: assess exactly one named advisory
+  candidate's formal object, assumptions, derivation, estimand, identification,
+  strongest simple null or equivalence, counterexamples, complexity and minimum
+  identifying toy. Return constructive corrections and source-bound
+  inspiration without project adoption.
+- `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`: only for a later Explorer-frozen advisory
+  version that records the disposition of every constructive correction. Attack
+  confounds, leakage, capacity, recurrence, partner co-adaptation, alternative
+  explanations, controls and residual uncertainty. It is a separate Pro turn,
+  not a closure check or automatic continuation of the constructive review.
 - `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: assess exactly one Operations-packaged
   Explorer candidate, freeze its estimand, mechanism, controls and minimum toy
   validation contract, and return exactly one of `TOY_CONTRACT_FROZEN`,
@@ -156,10 +162,11 @@ paths when scientific judgment depends on what the code actually implements.
   registered Independent Research Pro Review Operator from its separate
   conversation. `CURRENT_WORK.md`, active portfolios, runs and formal review
   artifacts are not inputs.
-- For `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`, the committed single-direction
-  question plus one mechanically generated packet bound to one campaign and
-  one candidate. Other candidate records, the full portfolio, `CURRENT_WORK.md`,
-  code, runtime, CDC and formal review artifacts are not inputs.
+- For an independent direction review, one Explorer-frozen prompt and one exact
+  candidate artifact. An adversarial prompt also names the newer advisory
+  version containing the constructive-correction dispositions. Other candidate
+  records, the full portfolio, `CURRENT_WORK.md`, code, runtime, CDC and formal
+  review artifacts are not inputs.
 - For Explorer-origin toy reviews, the exact Operations-authored question and
   allow-list include either one `EXPLORER_PROJECT_CANDIDATE_PACKET` plus its
   named candidate evidence, or one mechanically valid isolated result package.
@@ -191,11 +198,11 @@ paths when scientific judgment depends on what the code actually implements.
   project-state, code, compute, CDC or formal-review effect. The independent
   operator archives it exactly; Workflow Design Manager may encode it without
   reinterpretation.
-- For `INDEPENDENT_RESEARCH_DIRECTION_AUDIT`, return one format-complete
+- For either independent direction-review mode, return one format-complete
   `INDEPENDENT_RESEARCH_DIRECTION_PACKET` containing every question-declared
   field for the sole candidate. It is advisory, has no project-state effect and
-  is archived exactly by the independent operator before verbatim routing to
-  the Independent Research Explorer.
+  is archived exactly by the native review child before its native final to the
+  Explorer.
 - For `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`, return exactly
   `TOY_CONTRACT_FROZEN` with the sole candidate's complete scientific contract,
   `ADVISORY_REFINEMENT_REQUIRED` with one bounded gap, or `PARK_CANDIDATE`;

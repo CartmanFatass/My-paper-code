@@ -258,8 +258,10 @@ def test_independent_review_operator_routes_only_terminal_methodology_to_wdm() -
         "Workflow Design Manager",
     ):
         assert token in role, token
-    assert "may route only its exact terminal methodology" in skill
-    assert "never routes through Research Operations Manager" in skill
+    assert "may route only an exact terminal methodology" in skill
+    assert "Direction review is a native-child final to Explorer" in skill
+    assert "does not use this Skill" in skill
+    assert "direction packet directly to the locked Independent Research Explorer" not in role
 
 
 def test_project_hooks_preserve_workspace_boundary_and_readiness_stop() -> None:

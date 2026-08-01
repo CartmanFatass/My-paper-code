@@ -31,6 +31,7 @@ $expectedRoles = @(
     'CODE_PROJECT_MANAGER.md',
     'RESEARCH_OPERATIONS_MANAGER.md',
     'INDEPENDENT_RESEARCH_EXPLORER.md',
+    'INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md',
     'INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
@@ -62,6 +63,8 @@ $crossTaskRouting = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skil
 $crossTaskRoutingNormalized = $crossTaskRouting -replace '\s+', ' '
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $independentReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
+$independentDirectionReviewRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md')
+$independentDirectionReviewProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-independent-research-review-operator.toml')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
 $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
@@ -87,8 +90,8 @@ $agentifyTransportScript = Get-Content -Raw -LiteralPath $agentifyTransportScrip
 $agentifyTransportContract = Get-Content -Raw -LiteralPath $agentifyTransportContractPath
 $agentifyTransportContractNormalized = $agentifyTransportContract -replace '\s+', ' '
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
-$independentDirectionQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_SCIENTIFIC_AUDIT.md')
-$directionReviewBuilder = Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/scripts/build_direction_review_input.py'
+$independentConstructiveQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_CONSTRUCTIVE_REVIEW.md')
+$independentAdversarialQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_ADVERSARIAL_REVIEW.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
@@ -264,10 +267,15 @@ if ($agentifyTransportScript.Contains('"prompt_sha256"')) {
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_except_pro_reviews',
-    'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_research_review',
+    'independent_research_review_operator_transport_authority=exclusive_for_user_authorized_independent_methodology_review',
     'independent_research_review_operator_write_scope=local_research/pro_reviews_plus_registered_cross_task_handoff_helper',
     'independent_research_review_operator_formal_workflow_authority=none',
+    'independent_research_direction_review_operator=hmasd-independent-research-review-operator',
+    'independent_research_direction_review_operator_parent=independent_research_explorer',
+    'independent_research_direction_review_operator_authority=one_exact_direction_review_assignment',
+    'independent_research_direction_review_operator_write_scope=exact_assigned_local_research/pro_reviews_item_root',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
+    '.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md',
     '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review')) {
@@ -278,7 +286,7 @@ foreach ($required in @(
     'role_kind=user_owned_persistent_independent_pro_transport_task',
     'model=gpt-5.6-luna',
     'reasoning_effort=medium',
-    'review_scope=explicit_user_authorized_methodology_or_ordered_independent_research_direction_batch',
+    'review_scope=explicit_user_authorized_methodology_audit_only',
     'formal_workflow_authority=none',
     'scientific_authority=none',
     'git_authority=none',
@@ -293,33 +301,66 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'registered direction-input builder',
-    '22_DIRECTION_INPUT.md',
-    'copy one completed exact packet to `temp/handoffs/`')) {
+    'exact methodology item root',
+    'Direction review is forbidden in this persistent task',
+    'One user instruction authorizes one methodology turn')) {
     if (-not $independentReviewRole.Contains($required)) {
         throw "Independent Research Review Operator write boundary missing: $required"
     }
 }
 foreach ($required in @(
-    'registered Independent Research Pro Review Operator',
-    'local_research/pro_reviews/',
-    'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
-    'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
+    'role=independent_research_direction_review_operator',
+    'callable_agent_type=hmasd-independent-research-review-operator',
+    'role_kind=registered_nonpersistent_native_child',
+    'parent=independent_research_explorer',
+    'model=gpt-5.6-luna',
+    'reasoning_effort=medium',
+    'authority=one_exact_direction_review_assignment',
+    'review_transport_stable_key=hmasd-independent-research-pro',
+    'review_transport_concurrency=one_active_child_per_binding',
+    'client_send_limit=1',
+    'assignment_identity=IR_DIRECTION_REVIEW:<exact identity>',
+    'cross_session_send=forbidden_native_final_return_only',
+    'terminal_statuses=COMPLETE|BLOCKED',
+    'tool working directory to the exact assigned item',
+    'sibling item path is forbidden',
+    'THIRD_PARTY_GEMINI_ADVISORY')) {
+    if (-not $independentDirectionReviewRole.Contains($required)) {
+        throw "Independent direction-review child role missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-independent-research-review-operator"',
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "medium"',
+    '.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md',
+    'assignment identity must start with IR_DIRECTION_REVIEW:',
+    'working directory to the exact assigned item root',
+    'never address a sibling review item',
+    'Never call a cross-task messaging tool')) {
+    if (-not $independentDirectionReviewProfile.Contains($required)) {
+        throw "Independent direction-review child profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'Use only the persistent',
+    'methodology audit',
+    'native direction-review child does not load this Skill',
     'complete response verbatim',
     '60_METHODOLOGY_PACKET.md',
-    '60_DIRECTION_PACKET.md',
-    'build_direction_review_input.py build',
-    'build_direction_review_input.py batch-plan',
-    'build_direction_review_input.py batch-next',
-    '--batch-manifest',
-    'instruction authorizes that immutable list',
-    'one item is active',
-    '90_TERMINAL_BLOCKER.json',
-    'it never treats local research paths as a',
-    'Independent Research Explorer',
+    'Submit exactly once',
+    'Never enter a direction review',
     'Workflow Design Manager')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
+    'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
+    '60_DIRECTION_PACKET.md')) {
+    if ($independentReviewSkill.Contains($forbidden)) {
+        throw "Persistent methodology Skill contains direction-child procedure: $forbidden"
     }
 }
 foreach ($required in @(
@@ -335,31 +376,38 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'review_mode=INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
+    'review_mode=PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'review_scope=one_exact_advisory_candidate_only',
     'portfolio_ranking=forbidden',
-    'global_winner_selection=forbidden',
-    'DIRECTION_DISPOSITION',
-    'MECHANISM_CAUSAL_PATH',
-    'RL_MARL_DRIVER',
-    'IDENTIFICATION_AND_CONTROLS',
-    'SOURCE_TO_MECHANISM_BOUNDARY',
-    'INTERFACE_DEPENDENCIES',
-    'VALIDATION_CONTRACT',
+    'FORMAL_OBJECT_AND_ASSUMPTIONS',
+    'ESTIMAND_AND_IDENTIFICATION',
+    'SIMPLE_NULL_OR_EQUIVALENCE',
+    'IDENTIFYING_TOY',
+    'CONSTRUCTIVE_CORRECTIONS_AND_INSPIRATION',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
-    if (-not $independentDirectionQuestion.Contains($required)) {
-        throw "Independent research direction question missing: $required"
+    if (-not $independentConstructiveQuestion.Contains($required)) {
+        throw "Independent constructive review question missing: $required"
     }
 }
-if (-not (Test-Path -LiteralPath $directionReviewBuilder -PathType Leaf)) {
-    throw 'Independent research direction packet builder is missing'
+foreach ($required in @(
+    'review_mode=PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
+    'constructive_correction_disposition_required=true',
+    'not a closure-only check',
+    'CONFOUNDS_AND_LEAKAGE',
+    'CAPACITY_AND_OPTIMIZER_EXPOSURE',
+    'PARTNER_COADAPTATION_AND_GAME_EFFECTS',
+    'DIRECTION_DISPOSITION',
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
+    if (-not $independentAdversarialQuestion.Contains($required)) {
+        throw "Independent adversarial review question missing: $required"
+    }
 }
-$directionBuilderResult = & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' $directionReviewBuilder self-test
-if ($LASTEXITCODE -ne 0 -or $directionBuilderResult -notcontains 'HMASD_DIRECTION_REVIEW_PACKAGER_SELF_TEST_OK') {
-    throw "Independent direction packet builder self-test failed: $directionBuilderResult"
-}
-if ($directionBuilderResult -notcontains 'HMASD_DIRECTION_REVIEW_BATCH_SELF_TEST_OK') {
-    throw "Independent direction batch self-test failed: $directionBuilderResult"
+foreach ($retired in @(
+    '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_SCIENTIFIC_AUDIT.md',
+    '.agents/skills/hmasd-independent-research-pro-review/scripts/build_direction_review_input.py')) {
+    if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
+        throw "Retired persistent direction-review surface remains: $retired"
+    }
 }
 foreach ($required in @(
     'role=independent_research_explorer',
@@ -386,11 +434,14 @@ foreach ($required in @(
     'cross_task_target_identity=fixed_router_role_session',
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
-    'independent_pro_direction_packet_intake=exact_verified_handoff_only',
+    'independent_pro_direction_packet_intake=exact_native_child_final_only',
     'independent_pro_direction_packet_effect=advisory_revision_only',
+    'independent_pro_direction_transport_child=hmasd-independent-research-review-operator',
+    'independent_pro_direction_transport_concurrency=one_active_child_per_binding',
+    'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'one user-authorized ordered batch',
-    'select or reorder the',
+    'returns one native final',
+    'Only that new version may support a',
     'research architect, portfolio integrator and only',
     'SOURCE_ABSORPTION_BRIEF',
     'RL_PRINCIPLE_ANALYSIS_PACKET',
@@ -409,7 +460,7 @@ foreach ($required in @(
     'control-plane reload notice or mechanical receipt',
     'mechanical nonconformance',
     'verbatim External Pro advisory gap',
-    'exact verified direction packet',
+    'Direction review is a native-child final to Explorer',
     'ROUTE_AUTHORITY_MISMATCH')) {
     if (-not $crossTaskRoutingNormalized.Contains($required)) {
         throw "Cross-task routing research-authority boundary missing: $required"
@@ -523,9 +574,9 @@ foreach ($required in @(
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'not an automatic campaign phase',
-    'immutable manifest controls audit order',
-    'select the next audit',
-    'Never infer a',
+    'hmasd-independent-research-review-operator',
+    'no persistent Operator handoff',
+    'Explorer, not the child or completion order',
     'local_research')) {
     if (-not $independentResearchSkill.Contains($required)) {
         throw "Independent research Skill missing: $required"
@@ -1048,7 +1099,9 @@ foreach ($required in @(
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'FORMAL_RESULT_SCIENTIFIC_DISPOSITION',
     'INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT',
-    'INDEPENDENT_RESEARCH_DIRECTION_AUDIT',
+    'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
+    'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
+    'independent_research_constructive_adversarial_barrier=explorer_new_advisory_version_required',
     'Other candidate records, the full portfolio',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'code_science_audit_mode=contract_diff_only',

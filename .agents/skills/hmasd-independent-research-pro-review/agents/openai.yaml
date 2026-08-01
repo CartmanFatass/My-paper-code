@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD Independent Pro Review"
-  short_description: "Isolated External Pro methodology audit transport"
-  default_prompt: "Use $hmasd-independent-research-pro-review only in the registered independent review task; keep formal HMASD operations untouched and return one exact methodology packet."
+  short_description: "Isolated independent-research methodology Pro transport"
+  default_prompt: "Use $hmasd-independent-research-pro-review only in the exact persistent methodology assignment; keep formal HMASD operations untouched and return one exact methodology packet."
 policy:
   allow_implicit_invocation: false

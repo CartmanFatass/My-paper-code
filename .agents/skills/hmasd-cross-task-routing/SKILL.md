@@ -28,10 +28,10 @@ sender's settings or infer a replacement row.
 | `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `medium` |
 
 Each role appears exactly once. Router session fields must mirror this table.
-The independent review operator may route an exact terminal methodology packet
-or blocker to Workflow Design Manager, and an exact verified direction packet
-or blocker to Independent Research Explorer. It never routes through Research
-Operations Manager or changes the formal operations loop.
+The persistent independent review operator may route only an exact terminal
+methodology packet or blocker to Workflow Design Manager. Direction review is a
+native-child final to Explorer and never enters this cross-task route. Neither
+path routes through Research Operations Manager or changes the formal loop.
 
 ## Independent-research authority preservation
 
@@ -44,8 +44,8 @@ Workflow Design Manager may send Explorer only a control-plane reload notice or
 mechanical receipt, each explicitly marked `research_state_effect=none`.
 Research Operations Manager may return only an exact mechanical nonconformance
 or a verbatim External Pro advisory gap from its registered toy-validation
-lane. Independent Research Review Operator may return only an exact verified
-direction packet or its mechanical blocker. None of these routes grants its
+lane. The native direction-review child returns only to its Explorer parent and
+does not use this Skill. None of these routes grants its
 sender authority to select, sequence, pause, resume, revise, re-audit or
 terminate a direction, interpret campaign completion, formulate a Pro
 scientific question, or relay such a command on the user's behalf. Explorer

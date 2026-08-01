@@ -7,6 +7,8 @@ $operations = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/RESEARCH_OPERATIONS_MANAGER.md')
 $independentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md')
+$independentDirectionOperator = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_DIRECTION_REVIEW_OPERATOR.md')
 $independentSkill = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
 $agentifySkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
@@ -33,6 +35,25 @@ foreach ($entry in @(
 foreach ($staleGate in @('resend requires a new user instruction', 'only no recorded user message permits')) {
     if ($agentifySkillNormalized.Contains($staleGate)) {
         throw "Agentify transport retains a per-resend user gate: $staleGate"
+    }
+}
+foreach ($required in @(
+    'review_scope=explicit_user_authorized_methodology_audit_only',
+    'Direction review is forbidden in this persistent task')) {
+    if (-not $independentOperator.Contains($required)) {
+        throw "Persistent independent operator is not methodology-only: $required"
+    }
+}
+foreach ($required in @(
+    'role_kind=registered_nonpersistent_native_child',
+    'review_transport_stable_key=hmasd-independent-research-pro',
+    'review_transport_concurrency=one_active_child_per_binding',
+    'client_send_limit=1',
+    'submit once',
+    'second submit',
+    'cross-task messaging tool')) {
+    if (-not $independentDirectionOperator.Contains($required)) {
+        throw "Independent direction child transport boundary missing: $required"
     }
 }
 if ($agentifyScript.Contains('"prompt_sha256"')) {

@@ -76,3 +76,8 @@ nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]
 description = "Read-only Sol-max analyst for one constructive RL-principles assessment."
 config_file = "./agents/hmasd-research-principles-analyst.toml"
 nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "Learning Dynamics Analyst"]
+
+[agents."HMASDIndependentResearchReviewOperator"]
+description = "Thin Luna-medium Agentify relay for one Explorer-frozen External Pro direction review."
+config_file = "./agents/hmasd-independent-research-review-operator.toml"
+nickname_candidates = ["Independent Review Relay", "Direction Review Operator"]

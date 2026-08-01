@@ -31,8 +31,13 @@ cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
-independent_pro_direction_packet_intake=exact_verified_handoff_only
+independent_pro_direction_packet_intake=exact_native_child_final_only
 independent_pro_direction_packet_effect=advisory_revision_only
+independent_pro_direction_transport_child=hmasd-independent-research-review-operator
+independent_pro_direction_transport_child_model=gpt-5.6-luna
+independent_pro_direction_transport_child_effort=medium
+independent_pro_direction_transport_concurrency=one_active_child_per_binding
+independent_pro_constructive_adversarial_barrier=required
 explorer_project_candidate_packet=EXPLORER_PROJECT_CANDIDATE_PACKET_v1
 explorer_advisory_refinement_packet=EXPLORER_ADVISORY_REFINEMENT_PACKET_optional
 project_toy_validation_authority=none
@@ -65,14 +70,21 @@ read-only. Write only under `local_research/`, excluding the Operator-owned
 read-only. Never edit project code, workflow, science, Git state or an external
 workspace. The workspace guard enforces this boundary for the registered task.
 
-The Explorer may receive individually exact
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET`s from one user-authorized ordered batch
-through separate registered Operator handoffs. It verifies each packet identity
-and hash, preserves the reviewed campaign artifact unchanged, and writes any
-resulting advisory delta as a new version outside `pro_reviews`. It must not
-repair missing fields, reinterpret the Pro disposition, select or reorder the
-next audit item, open another batch or promote a packet into formal project
-state.
+For one exact user-authorized candidate review, the Explorer may spawn the
+registered `hmasd-independent-research-review-operator` child with one immutable
+assignment. The child transports one Pro turn, archives it under its exact
+`local_research/pro_reviews/<review-id>/` item root and returns one native final
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET`. It does not use cross-task routing.
+Explorer verifies the typed terminal
+fields, preserves the reviewed campaign artifact and writes any advisory delta
+as a new version outside `pro_reviews`. Explorer alone chooses which candidate
+to review and what later research action follows; the child cannot infer an
+order, open a batch or promote a packet into formal project state.
+
+A constructive Pro review must finish before Explorer applies, rejects or parks
+its corrections in a new advisory version. Only that new version may support a
+separate adversarial Pro assignment. The two reviews are separate turns; no
+child crosses the barrier or treats either result as closure-only acceptance.
 
 For the project toy-validation bridge, the Explorer emits only the typed
 `EXPLORER_PROJECT_CANDIDATE_PACKET` defined in

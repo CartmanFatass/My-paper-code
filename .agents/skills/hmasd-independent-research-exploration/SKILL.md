@@ -15,8 +15,9 @@ The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-adversarial checks. All durable outputs remain
-under `local_research` except the independently owned `pro_reviews` subtree.
+adversarial checks. A registered Luna-medium review child handles one exact
+External Pro direction turn. Explorer writes durable research outputs outside
+the transport-owned `pro_reviews` subtree.
 
 ## Start safely
 
@@ -62,15 +63,27 @@ dispatch. Keep all useful parent and child directions. Stop only at recorded
 convergence, a resource boundary, an external-source expansion or work that
 requires code, compute or formal adoption.
 
-A user-authorized independent Pro direction-audit batch is external advisory
-input, not an automatic campaign phase. Accept each exact verified
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET` through its separate registered
-Operator handoff. Preserve the reviewed artifact, record each packet identity
-and disposition, and create a new advisory version only when that packet names
-exact revisions. The Operator's immutable manifest controls audit order.
-Never infer a portfolio ranking, choose a unique winner, select the next audit
-item,
-open another batch or contact Pro from the Explorer task.
+A user-authorized independent Pro direction review is external advisory input,
+not an automatic campaign phase. Explorer freezes one candidate and one review
+mode, then spawns `hmasd-independent-research-review-operator` with the exact
+prompt, Agentify binding, operation identity, item root and one-send limit. The
+child returns one native `INDEPENDENT_RESEARCH_DIRECTION_PACKET`; no persistent Operator handoff
+or batch manifest participates. Explorer, not the child or completion order,
+chooses any later candidate or review.
+
+Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
+explicitly apply, reject or park every correction in a new advisory version.
+Only that version may support a separate
+`PRO_ADVERSARIAL_SCIENTIFIC_REVIEW` assignment. The adversarial turn challenges
+confounds, leakage, capacity, recurrence, co-adaptation, alternative
+explanations, controls and residual uncertainty; it is not a closure-only
+check. Never compare candidates or turn either review into project adoption.
+
+At most one review child may be active on `hmasd-independent-research-pro`.
+Any incomplete assignment, active operation, transport ambiguity or child
+failure returns `BLOCKED`; Explorer does not ask the child to resubmit or choose
+a recovery. A later exact recovery assignment may observe or verify the same
+operation identity.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
@@ -201,7 +214,7 @@ The final advisory report includes the campaign direction, corpus coverage,
 source-result matrix, absorption brief, several retained or parked directions,
 mechanism/transfer/combination/split graph, principle analyses, adversarial
 findings, validation-ready candidates, residual gaps, resource disposition and
-convergence basis. The Explorer cannot contact External Pro, change CDC state,
+convergence basis. The Explorer cannot contact External Pro directly, change CDC state,
 authorize compute, dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)

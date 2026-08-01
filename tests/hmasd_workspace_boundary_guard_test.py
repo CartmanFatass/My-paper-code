@@ -45,10 +45,11 @@ def invoke(
     tool_input: object,
     *,
     session_id: str = "guard-test",
+    cwd: Path | None = None,
 ) -> dict[str, object] | None:
     payload = {
         "session_id": session_id,
-        "cwd": str(repo),
+        "cwd": str(cwd or repo),
         "hook_event_name": "PreToolUse",
         "tool_name": tool,
         "tool_input": tool_input,
@@ -560,6 +561,116 @@ def test_registered_independent_review_operator_is_confined_to_pro_reviews_and_h
             session_id="review-session",
         ),
         "Git mutation is forbidden",
+    )
+
+
+def test_explorer_native_review_child_uses_only_registered_agentify_item_paths(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    (repo / "AGENTS.md").write_text(
+        "independent_research_explorer_session=research-session\n"
+        "independent_research_review_operator_session=review-session\n"
+        "hmasd_python_interpreter=C:/Python/python.exe\n",
+        encoding="utf-8",
+    )
+    item = repo / "local_research" / "pro_reviews" / "direction-1"
+    sibling = repo / "local_research" / "pro_reviews" / "direction-2"
+    item.mkdir(parents=True)
+    sibling.mkdir(parents=True)
+    wrapper = (
+        f'C:/Python/python.exe "{repo}/.agents/skills/'
+        'hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py"'
+    )
+    allowed = (
+        f'{wrapper} prepare --owner independent_research_review_operator '
+        '--stable-key hmasd-independent-research-pro --model Pro '
+        '--conversation-url https://chatgpt.com/c/test --conversation-id test '
+        '--assignment-identity IR_DIRECTION_REVIEW:assignment-1 --operation-key operation-1 '
+        f'--prompt-path "{repo / "local_research" / "prompt.md"}" '
+        f'--selection "{item / "selection.json"}" '
+        f'--request "{item / "request.json"}"'
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": allowed},
+            session_id="research-session",
+        ),
+        "registered research script",
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": allowed},
+            session_id="native-child-session",
+            cwd=item,
+        )
+        is None
+    )
+    wrong_identity = allowed.replace(
+        "IR_DIRECTION_REVIEW:assignment-1", "ordinary-assignment-1"
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": wrong_identity},
+            session_id="unknown-session",
+            cwd=item,
+        ),
+        "registered research script",
+    )
+    (item / "request.json").write_text(
+        json.dumps(
+            {
+                "assignment_identity": "IR_DIRECTION_REVIEW:assignment-1",
+                "transport_owner": "independent_research_review_operator",
+                "stable_key": "hmasd-independent-research-pro",
+                "model": "Pro",
+            }
+        ),
+        encoding="utf-8",
+    )
+    allowed_verify = (
+        f'{wrapper} verify --request "{item / "request.json"}" '
+        f'--receipt "{item / "receipt.json"}"'
+    )
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": allowed_verify},
+            session_id="native-child-session",
+            cwd=item,
+        )
+        is None
+    )
+    sibling_write = (
+        f'{wrapper} verify --request "{item / "request.json"}" '
+        f'--receipt "{sibling / "receipt.json"}"'
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": sibling_write},
+            session_id="native-child-session",
+            cwd=item,
+        ),
+        "registered research script",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            f"*** Begin Patch\n*** Add File: {item / 'manual.md'}\n*** End Patch",
+            session_id="native-child-session",
+            cwd=item,
+        ),
+        "writes only through registered Agentify transport",
     )
 
 
