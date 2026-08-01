@@ -7,7 +7,7 @@ formal_compute=false
 scientific_iteration_cost=zero
 agentify_source=https://github.com/CartmanFatass/desktop.git
 agentify_branch=codex/hmasd-strict-review-transport
-agentify_required_commit=917c5328695b4546e8c7e548878b00a07f45af91
+agentify_required_commit=001c1a57e82a232137706412ad0fd8a09b9a4465
 ```
 
 Agentify is an optional receipt-bearing transport for an already-authorized
@@ -59,6 +59,49 @@ The existing in-app browser workflow remains available as a nonparallel
 alternative and keeps its own exact-fence, sentinel, monitor and archival
 rules.
 
+## Assignment-scoped maintenance lease
+
+A user-confirmed maintenance lease may cover one exact Agentify assignment,
+package, prompt SHA-256, stable key, conversation, model and backend. It exists
+only to repair a transport adapter failure without asking for permission after
+every proven pre-send rejection. It is not a standing project grant, global
+lease, browser fallback or scientific authority.
+
+Eligibility requires the durable operation to prove all of
+`sendActionCount=0`, absent `userMessageId`,
+`failureStage=before_send_click`, no server-visible user message, no assistant
+response and unchanged frozen identity. `sendCount=0` by itself proves nothing
+about whether the send control was clicked. `SEND_INTENT` without a proven
+pre-click failure, a recorded click, a message identity or any uncertainty
+closes replacement authority.
+
+The bounded budget is two adapter repair commits, two synthetic smoke
+operations, one HMASD repin and two fresh real-review replacement operations.
+Synthetic smoke reuses one persistent `hmasd-agentify-transport-smoke`
+conversation binding and changes only operation identity; it does not create a
+new smoke conversation for each attempt. A successful first smoke ends the
+smoke budget. Old operations are observe-only and are never reused to send.
+Research Operations Manager alone starts an eligible fresh real-review
+operation after the repaired commit is pinned.
+
+The lease terminates as one of:
+
+```text
+LEASE_ELIGIBLE_PRE_SEND_FAILURE
+LEASE_REPAIR_TESTED
+LEASE_SMOKE_PASSED_REPINNED
+LEASE_REAL_REVIEW_RESUME_ALLOWED
+LEASE_CLOSED_SEND_OCCURRED_OR_UNCERTAIN
+LEASE_CLOSED_BUDGET_EXHAUSTED
+LEASE_CLOSED_IDENTITY_CHANGED
+LEASE_CLOSED_TECHNICAL_BLOCKER
+```
+
+Fresh user authorization is required after budget exhaustion, any frozen-
+identity change, any possible real-review send, browser fallback, or expansion
+into science or compute. An authorized synthetic-smoke send consumes one smoke
+operation without closing the assignment lease.
+
 The Independent Research Pro Review Operator remains a persistent ownership
 task for ordered review work, exact raw archival, mechanical intake and return
 to the Explorer; it is not replaced by Agentify. An Agentify-backed turn never
@@ -91,7 +134,8 @@ state.
 The owning role returns one validated request/receipt pair. The request contains
 the selected backend and immutable selection path; the receipt contains the
 stable key, conversation identity, model evidence, exact prompt hash, message
-identities, completion snapshots, control state, timing and response hash. A
+identities, `sendActionCount=1`, `newUserMessageCount=1`, completion snapshots,
+control state, timing and response hash. A
 duplicate idempotency key with the same request returns the existing operation;
 a conflicting payload is rejected. Restart recovery observes the same operation
 and conversation without sending again.

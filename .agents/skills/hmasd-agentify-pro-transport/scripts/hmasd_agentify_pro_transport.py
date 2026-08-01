@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = 1
 MAX_TIMEOUT_MS = 45 * 60 * 1000
-AGENTIFY_REQUIRED_COMMIT = "917c5328695b4546e8c7e548878b00a07f45af91"
+AGENTIFY_REQUIRED_COMMIT = "001c1a57e82a232137706412ad0fd8a09b9a4465"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
@@ -296,6 +296,8 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         "status": "COMPLETE",
         "terminalState": "NATURAL_COMPLETION_VERIFIED",
         "sendCount": 1,
+        "sendActionCount": 1,
+        "newUserMessageCount": 1,
     }
     for field, expected in exact.items():
         if receipt.get(field) != expected:

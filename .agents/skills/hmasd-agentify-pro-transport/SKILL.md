@@ -21,7 +21,7 @@ Use the locally installed Agentify endpoint and the HMASD conda interpreter:
 python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
 wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
 runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=917c5328695b4546e8c7e548878b00a07f45af91
+required_agentify_source_commit=001c1a57e82a232137706412ad0fd8a09b9a4465
 ```
 
 Read the runtime contract before use. The wrapper requires the live Agentify
@@ -85,11 +85,66 @@ is never overwritten. `assignment_identity` must occur in the exact prompt
 bytes at `prompt_path`. `timeout_ms` is between 3000 and 2700000 inclusive. Agentify
 owns its durable ledger and send idempotency; the HMASD wrapper validates the
 request, calls Agentify, and writes a new role-owned receipt. The wrapper does
-not persist send intent or claim to click UI controls. No automatic Continue,
-Retry, ResponseRetry, Answer now, duplicate submission, cross-conversation
-fallback or response synthesis is allowed. A conflicting existing
+not click UI controls. Agentify durably records the pre-click send intent and
+the irreversible `sendActionCount` immediately after the click. No automatic
+Continue, Retry, ResponseRetry, Answer now, duplicate submission,
+cross-conversation fallback or response synthesis is allowed. A conflicting existing
 idempotency record, identity mismatch or unreadable content terminates as a
 transport blocker.
+
+## Assignment-scoped transport-maintenance lease
+
+A direct user confirmation may authorize one bounded maintenance lease for one
+exact assignment identity, package identity, prompt SHA-256, stable key,
+conversation, model and `transport_backend=agentify`. The lease is runtime
+state owned by the registered transport owner; it is not a global permission,
+is never inferred from a standing research goal and cannot be renewed
+automatically.
+
+Automatic maintenance is eligible only when the durable Agentify operation
+proves every predicate below:
+
+```text
+sendActionCount=0
+userMessageId=absent
+failureStage=before_send_click
+server_visible_user_message=absent
+assistant_response=absent
+assignment_identity=unchanged
+```
+
+`sendCount=0` alone is insufficient. `SEND_INTENT` without a proven pre-click
+failure, `sendActionCount=1`, any user-message identity or uncertainty about a
+click closes replacement authority. Closed operations are never reused for
+sending. Each eligible replacement is a fresh operation with the same frozen
+identity.
+
+One lease permits at most two adapter repair commits, two non-scientific
+synthetic smoke operations, one HMASD repin and two fresh real-review
+replacement operations. Both smoke operations, if needed, reuse the one
+persistent `hmasd-agentify-transport-smoke` conversation binding with fresh
+operation identities; the lease never creates repeated smoke conversations.
+The first exact smoke pass ends smoke work. A real review send remains owned by
+the registered transport owner, not Workflow Design Manager.
+
+Terminal lease states are:
+
+```text
+LEASE_ELIGIBLE_PRE_SEND_FAILURE
+LEASE_REPAIR_TESTED
+LEASE_SMOKE_PASSED_REPINNED
+LEASE_REAL_REVIEW_RESUME_ALLOWED
+LEASE_CLOSED_SEND_OCCURRED_OR_UNCERTAIN
+LEASE_CLOSED_BUDGET_EXHAUSTED
+LEASE_CLOSED_IDENTITY_CHANGED
+LEASE_CLOSED_TECHNICAL_BLOCKER
+```
+
+Fresh user authorization is required after budget exhaustion, any frozen-
+identity change, any possible real-review send, browser fallback, or expansion
+into science or compute. An authorized synthetic-smoke send consumes one smoke
+operation without closing the assignment lease. None of these states authorizes
+retrying an old operation.
 
 ## Mechanical commands
 
@@ -170,6 +225,8 @@ modelEvidence
 idempotencyKey
 promptSha256
 sendCount=1
+sendActionCount=1
+newUserMessageCount=1
 userMessageId
 assistantMessageId
 snapshots=2_same_identity_and_hash_with_gap_ms>=3000
@@ -180,7 +237,8 @@ terminalState=NATURAL_COMPLETION_VERIFIED
 
 The two snapshots must be tied to the same exact assistant identity and the
 same round. Missing or conflicting fields, `sendCount != 1`, a duplicate
-message, a model/conversation mismatch, incomplete generation or unreadable
+message, `sendActionCount != 1`, `newUserMessageCount != 1`, a
+model/conversation mismatch, incomplete generation or unreadable
 identity yields `AGENTIFY_TRANSPORT_BLOCKED`. It never authorizes a browser
 fallback, a second Agentify send or a scientific iteration. Restart recovery
 is observe-only for the same request, Agentify operation and receipt.
