@@ -366,7 +366,11 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # RPGM 移动模型状态变量 (仅在 user_movement_model="rpgm" 时使用)
         self.user_waypoints = np.zeros((self.n_users, 2))  # 用户路径点 (2D)
-        self.user_cluster_assignments = np.zeros(self.n_users, dtype=int)  # 用户簇分配
+        self.user_cluster_assignments = np.zeros(self.n_users, dtype=np.int32)  # 用户簇分配
+        # D7 liveness diagnostics (write-only; never read by transition/obs/reward/controller logic).
+        self.user_intra_waypoint_regenerations = 0
+        self.user_inter_waypoint_regenerations = 0
+        self.cluster_target_regenerations = 0
         self.cluster_centers_history = np.zeros((self.n_clusters, 2))  # 簇中心历史位置
         self.cluster_velocities = np.zeros((self.n_clusters, 2))  # 簇中心移动速度
         self.cluster_waypoints = np.zeros((self.n_clusters, 2))  # 簇中心目标点
@@ -2447,8 +2451,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 确保目标在地图边界内，并避免过于接近边界
         target_x = np.clip(target_x, self.area_size * 0.1, self.area_size * 0.9)
         target_y = np.clip(target_y, self.area_size * 0.1, self.area_size * 0.9)
-        
+
         self.cluster_waypoints[cluster_idx] = [target_x, target_y]
+        self.cluster_target_regenerations += 1
 
     def _generate_intra_cluster_waypoint(self, user_idx, cluster_idx):
         """
@@ -2472,9 +2477,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 确保路径点在地图边界内
         waypoint[0] = np.clip(waypoint[0], 10, self.area_size - 10)
         waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
-        
+
         self.user_waypoints[user_idx] = waypoint
-    
+        self.user_intra_waypoint_regenerations += 1
+
     def _generate_inter_cluster_waypoint(self, user_idx):
         """
         为用户生成跨簇路径点
@@ -2502,9 +2508,10 @@ class UAVForcedRelayEnv(ParallelEnv):
             waypoint[1] = np.clip(waypoint[1], 10, self.area_size - 10)
             
             self.user_waypoints[user_idx] = waypoint
-            
+
             # 更新用户的簇分配（模拟用户迁移到新的热点区域）
             self.user_cluster_assignments[user_idx] = target_cluster
+            self.user_inter_waypoint_regenerations += 1
         else:
             # 如果只有一个簇，则在本簇内生成路径点
             self._generate_intra_cluster_waypoint(user_idx, current_cluster)

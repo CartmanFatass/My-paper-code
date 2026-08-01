@@ -2628,6 +2628,9 @@ class _CloneableFakeEnv:
                  for a in self.agents}
         return None, None, None, None, infos
 
+    def canonicalize_post_pin_initialization(self):
+        return None
+
 
 class _RngConsumingFakeEnv(_CloneableFakeEnv):
     """`_CloneableFakeEnv.step()` draws no randomness at all, so it cannot

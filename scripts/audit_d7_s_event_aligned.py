@@ -67,7 +67,9 @@ import copy
 import hashlib
 import json
 import math
+import multiprocessing
 import os
+import subprocess
 import sys
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
@@ -108,6 +110,42 @@ WORLD_COMPONENT_ORDER = (
     "user_pause_times", "user_cluster_assignments",
     "cluster_centers_history", "cluster_velocities",
     "cluster_waypoints", "cluster_pause_times",
+)
+
+
+# --- B3-L provenance constants (D8: single minting site) --------------------
+# `runtime_identity()` below stays descriptive and untouched (C7 of the B3-L
+# ruling's spirit -- no renaming); these are new, separate surfaces.
+FINGERPRINT_ALGORITHM_VERSION = "fpalg-1"  # names the unchanged complete-state/
+# world fingerprint byte encoding (episode_world_fingerprint, full_state_fingerprint).
+PROVENANCE_CONTRACT_VERSION = "prov-2"  # names the B3-L provenance contract: dtype
+# metadata, the execution class, the replay certificate and the D5 trajectory-
+# digest encoding below (TrajectoryDigestCollector). Changing the D5 encoding
+# bumps THIS constant, never FINGERPRINT_ALGORITHM_VERSION.
+SUCCESSOR_POPULATION_NAMESPACE = "D7_S_SUCCESSOR_FRESH_POPULATION"
+REGISTERED_PYTHONHASHSEED = 20260801
+REGISTERED_THREAD_VARS = {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+}
+# A-D3(3)/O1: the exact, exhaustive closure `source_code_id` hashes over.
+# Excludes the generated PASS certificate, the generated successor inventory,
+# logs and result artifacts -- those are what the closure exists to certify
+# the CODE for, not inputs to that certification.
+FROZEN_SOURCE_PATH_SET = (
+    "scripts/audit_d7_s_event_aligned.py",
+    "scripts/pool_d7_s_event_aligned_shards.py",
+    "scripts/d7_s_local_replay_gate.py",
+    "scripts/d7_s_successor_input_inventory.py",
+    "envs/pettingzoo/scenario_base.py",
+    "envs/pettingzoo/scenario7_energy_aware.py",
+    "envs/pettingzoo/__init__.py",
+    "docs/research/designs/D7_S_R4_ABSOLUTE_FOCAL_MARGIN_COMPLETE.md",
+    "docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE.md",
+    "docs/research/designs/D7_S_SUCCESSOR_POPULATION_SELECTION_RULE_R2.md",
+    "docs/research/designs/D7_S_B3L_DECISION_LEDGER.md",
 )
 
 
@@ -184,6 +222,167 @@ def runtime_identity() -> dict:
         }
     except Exception:  # pragma: no cover - identity must not break a run
         return {}
+
+
+def source_code_id(repo_root: Path, *, path_set: Optional[tuple] = None) -> str:
+    """A-D3(3)/D3.3: stable content identity for a frozen file closure, used
+    as certificate/execution-class currency INSTEAD of a Git commit.
+
+    A commit-based currency field is self-invalidating once a certificate
+    that names it is committed (the commit creating the certificate becomes a
+    NEW commit the certificate cannot have named). `source_code_id` hashes
+    file CONTENT via `git hash-object`, which does not require the content to
+    be staged or committed -- so committing the certificate itself, or the
+    generated successor inventory, never changes this value, while an actual
+    edit to any frozen path does.
+
+    SHA-256 hex over the canonical JSON of the sorted `(path, git blob hash)`
+    records for every path in `path_set` (default `FROZEN_SOURCE_PATH_SET`).
+    A missing path is a hard error naming the path -- silently skipping it
+    would let a deleted or renamed file retain a currency-carrying identity
+    it no longer earns.
+    """
+    paths = FROZEN_SOURCE_PATH_SET if path_set is None else tuple(path_set)
+    records = []
+    for rel in paths:
+        candidate = Path(rel)
+        full = candidate if candidate.is_absolute() else (repo_root / rel)
+        if not full.exists():
+            raise FileNotFoundError(
+                f"source_code_id: frozen source path missing: {rel} "
+                f"(resolved to {full})")
+        proc = subprocess.run(
+            ["git", "hash-object", str(full)],
+            cwd=str(repo_root), check=True, capture_output=True, text=True)
+        records.append([str(rel), proc.stdout.strip()])
+    canonical = json.dumps(sorted(records), sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def verify_registered_launch_env() -> dict:
+    """A-D3(1)/D3.1: the parent and every pool worker independently verify,
+    AFTER import, that the launcher actually supplied the registered
+    interpreter-level env vars BEFORE Python started. A function placed here
+    cannot itself set them early enough to constrain BLAS already initialized
+    at module import -- that is the launcher's job, not this module's; this
+    is only the verification half.
+
+    Raises `RuntimeError` naming every variable that is missing or differs
+    from its registered value. Returns the verified values on success.
+    """
+    problems: list[str] = []
+    verified: dict = {}
+
+    seen_hashseed = os.environ.get("PYTHONHASHSEED")
+    if seen_hashseed is None or str(seen_hashseed) != str(REGISTERED_PYTHONHASHSEED):
+        problems.append(
+            f"PYTHONHASHSEED (expected {REGISTERED_PYTHONHASHSEED!r}, got {seen_hashseed!r})")
+    else:
+        verified["PYTHONHASHSEED"] = seen_hashseed
+
+    for key, expected in REGISTERED_THREAD_VARS.items():
+        seen = os.environ.get(key)
+        if seen != expected:
+            problems.append(f"{key} (expected {expected!r}, got {seen!r})")
+        else:
+            verified[key] = seen
+
+    if problems:
+        raise RuntimeError(
+            "verify_registered_launch_env: launch environment does not match "
+            "the registered values -- " + "; ".join(problems))
+    return verified
+
+
+def certified_local_execution_class(*, worker_count: int, start_method: str, role: str,
+                                      config: Optional[dict] = None,
+                                      path_set: Optional[tuple] = None) -> dict:
+    """D3/A-D3: CERTIFIED_LOCAL_EXECUTION_CLASS. Unlike `runtime_identity`,
+    every lookup here is STRICT -- a failure raises rather than degrading to
+    an empty/partial record, because this record is what a replay gate or a
+    formal run's currency check trusts, and a silently incomplete class would
+    make a stale run look currently certified.
+
+    `role` is `"parent"` or `"worker"` -- the caller's own declaration of
+    which topology position produced this record (A-D3(2): the class record
+    must carry `formal_parent_class_id` and `formal_worker_class_id`
+    separately; a parent's assumption that its children "inherited" its
+    class is not proof).
+
+    `config`/`path_set` are injection points for testing; the conclusion-
+    bearing path leaves both at their defaults (the resolved audit config,
+    and `FROZEN_SOURCE_PATH_SET`)."""
+    import platform
+    import scipy
+
+    launch_env = verify_registered_launch_env()
+
+    np_config = np.__config__.CONFIG
+    blas_entry = (np_config.get("Build Dependencies") or {}).get("blas") or {}
+    blas = {
+        "name": blas_entry.get("name"),
+        "version": blas_entry.get("version"),
+        "openblas_configuration": blas_entry.get("openblas configuration"),
+    }
+    module = np.core._multiarray_umath
+    detected = dict(module.__cpu_features__ or {})
+    cpu_features = {
+        "baseline": module.__cpu_baseline__,
+        "dispatch": module.__cpu_dispatch__,
+        "detected_enabled": sorted(k for k, v in detected.items() if v),
+    }
+
+    resolved_config = {} if config is None else config
+    configuration_digest = hashlib.sha256(
+        json.dumps(resolved_config, sort_keys=True, default=_json_default).encode("utf-8")
+    ).hexdigest()
+
+    record = {
+        "node": platform.node(),
+        "os_platform": platform.platform(),
+        "machine": platform.machine(),
+        "python_version": platform.python_version(),
+        "numpy_version": np.__version__,
+        "scipy_version": scipy.__version__,
+        "numpy_blas": blas,
+        "cpu_features": cpu_features,
+        "worker_count": int(worker_count),
+        "process_start_method": str(start_method),
+        "pythonhashseed": launch_env["PYTHONHASHSEED"],
+        "thread_vars": {k: launch_env[k] for k in REGISTERED_THREAD_VARS},
+        "role": str(role),
+        "source_code_id": source_code_id(PROJECT_ROOT, path_set=path_set),
+        "configuration_digest": configuration_digest,
+        "fingerprint_algorithm_version": FINGERPRINT_ALGORITHM_VERSION,
+        "provenance_contract_version": PROVENANCE_CONTRACT_VERSION,
+    }
+    class_id = hashlib.sha256(
+        json.dumps(record, sort_keys=True, default=_json_default).encode("utf-8")
+    ).hexdigest()
+    return {**record, "class_id": class_id}
+
+
+def finalize_preaction_state(env) -> dict:
+    """D1/A-D1: assertion-6 relocation, as caller-side wiring rather than a
+    barrier change. Re-invokes the existing, unmodified
+    `env.canonicalize_post_pin_initialization()` -- idempotent and
+    randomness-free by its own asserted contract -- now that topology, user
+    world and the energy profile are all final, then records the exact
+    postcondition A-D1 requires: observations and `env.state` are
+    materialized by THIS invocation (the barrier itself does that; there is
+    no separate materialization step here or afterward), the pre-action
+    complete-state fingerprint, and an RNG-state token computed afterward.
+
+    The formal path must not rematerialize observations or state between
+    this call and the first action -- that discipline lives in the caller,
+    not here."""
+    env.canonicalize_post_pin_initialization()
+    return {
+        "preaction_fingerprint": full_state_fingerprint(env),
+        "rng_token": _rng_state_token(env),
+        "observations_materialized": True,
+    }
+
 
 # --- sections 1/2/3: estimand, event window, horizons -----------------------
 DELTA = 10
@@ -1652,6 +1851,13 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
     # `component_digests` is derived from exactly the bytes that feed
     # `fingerprint`, so it cannot drift from it.
     component_digests: dict[str, str] = {}
+    # D7/A-D7: the complete nine-component dtype map, recorded ALONGSIDE the
+    # digest bytes rather than folded into them -- the digest stays
+    # width-sensitive (an int32 and an int64 array of equal values still
+    # digest differently, which is the point after the dtype-width finding),
+    # and dtype provenance travels as its own explicit field instead of being
+    # something a reader could only infer from a hash matching or not.
+    component_dtypes: dict[str, str] = {}
     for name in WORLD_COMPONENT_ORDER:
         value = getattr(env, name, None)
         if value is None:
@@ -1661,6 +1867,7 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
                  np.ascontiguousarray(arr).tobytes())
         parts.extend(chunk)
         component_digests[name] = hashlib.sha256(b"".join(chunk)).hexdigest()
+        component_dtypes[name] = arr.dtype.str
     # Witnessed rather than declared, and it takes BOTH halves. A seed alone
     # regenerates nothing: the user world is a function of the BS quadrant as
     # well as the stream, so without a pinned topology the same seed produces a
@@ -1705,7 +1912,54 @@ def episode_world_fingerprint(env, *, seed_value: Optional[int] = None) -> dict:
         # See docs/research/cdc/EVIDENCE_NOTES/
         #     20260729_R4_RERUN_CLOSES_THE_INJECTIVITY_CHARGE.md
         "seed_controls_generation": bool(controls),
+        "component_dtypes": component_dtypes,
     }
+
+
+class TrajectoryDigestCollector:
+    """D5/A-D5: per-step exogenous trajectory identity. Gate-mode
+    instrumentation ONLY -- never wired into a conclusion-bearing path
+    (`fork_continuation` and `roll_prefix_and_find_event` both default the
+    collector to `None`, and the formal run never passes one). Never mutates
+    the environment it observes.
+
+    The per-step digest is FROZEN by the ruling as SHA-256 over, in order:
+    `trajectory_digest_version`, the step index, then for every component in
+    `WORLD_COMPONENT_ORDER`: component name, dtype, shape, contiguous bytes.
+    Every piece is individually length-prefixed so the byte stream is
+    unambiguous -- a bare concatenation of raw arrays plus a step number
+    cannot distinguish a shifted array boundary from a real divergence, and
+    the version string is itself part of the hashed bytes so an old and a
+    new encoding can never collide into the same digest.
+
+    Changing this encoding is a change to `PROVENANCE_CONTRACT_VERSION`, not
+    a silent revision -- it is never `FINGERPRINT_ALGORITHM_VERSION`, which
+    names only the unrelated complete-state/world fingerprint byte encoding.
+    """
+
+    def __init__(self, version: str = PROVENANCE_CONTRACT_VERSION):
+        self.version = str(version)
+        self.digests: list[str] = []
+
+    @staticmethod
+    def _length_delimited(data: bytes) -> bytes:
+        return len(data).to_bytes(8, "big") + data
+
+    def record(self, env, step_index: int) -> str:
+        parts = [
+            self._length_delimited(self.version.encode("utf-8")),
+            self._length_delimited(str(int(step_index)).encode("utf-8")),
+        ]
+        for name in WORLD_COMPONENT_ORDER:
+            arr = np.asarray(getattr(env, name))
+            contiguous = np.ascontiguousarray(arr)
+            parts.append(self._length_delimited(name.encode("utf-8")))
+            parts.append(self._length_delimited(arr.dtype.str.encode("utf-8")))
+            parts.append(self._length_delimited(str(arr.shape).encode("utf-8")))
+            parts.append(self._length_delimited(contiguous.tobytes()))
+        digest = hashlib.sha256(b"".join(parts)).hexdigest()
+        self.digests.append(digest)
+        return digest
 
 
 SELECTION_DIAGNOSTIC_SEED_TAG = "selection_diagnostic"
@@ -2960,7 +3214,8 @@ def _flex_survivors_at(env, *, duty_map: dict, vacated_target, exclude_uav: int)
     return survivors
 
 
-def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
+def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX,
+                                trajectory_collector: Optional["TrajectoryDigestCollector"] = None) -> dict:
     """Item 2's episode driver: rolls `constructive_mixed` from the env's
     CURRENT (already-reset/pinned) state, recording every action for later
     prefix replay, until the first joint-qualifying LEAVE (section 2/Q-E4)
@@ -3010,6 +3265,8 @@ def roll_prefix_and_find_event(env, *, max_step: int = T_E_MAX) -> dict:
 
         step = step_once(env, duty_map=duty_map, service_centroids=service_centroids,
                           schedule="constructive_mixed")
+        if trajectory_collector is not None:
+            trajectory_collector.record(env, t)
         recorded_actions.append(step["actions"])
         duty_map = step["duty_map"]
         service_centroids = step["service_centroids"]
@@ -3742,7 +3999,8 @@ def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
                        service_centroids_at_te, schedule: str, horizon: int,
                        continuation_seed: int, focal_uav: Optional[int] = None,
                        focal_target=None, delta_steps: int = DELTA,
-                       locked_duties: frozenset = frozenset()) -> dict:
+                       locked_duties: frozenset = frozenset(),
+                       trajectory_collector: Optional["TrajectoryDigestCollector"] = None) -> dict:
     """Forks ONE continuation from an env already replayed to `t_e`:
     reseeds `env.np_random` to the stream_seed-derived continuation RNG
     (never the stream that generated the prefix), then rolls `horizon`
@@ -3779,6 +4037,8 @@ def fork_continuation(env, *, duty_map_at_te: dict, duty_positions_at_te: dict,
         step = step_once(env, duty_map=duty_map, service_centroids=service_centroids,
                           schedule=schedule, target_override=override,
                           locked_duties=locked_duties, step_index=t)
+        if trajectory_collector is not None:
+            trajectory_collector.record(env, t)
         duty_map = step["duty_map"]
         service_centroids = step["service_centroids"]
         step_metrics.append(step["metrics"])
@@ -4047,9 +4307,17 @@ def run_calibration_episode(config, *, topology_seed: int, episode_seed: int, en
     env = build_pinned_env(config, episode_seed=episode_seed, coords=coords,
                             coord_hash=coord_hash, energy_stage=energy_stage,
                             user_world_seed=uw_seed)
+    # A-D3(2)/D4.4: witnessed immediately after world generation, before the
+    # energy profile touches the env, so a later mismatch can be localized to
+    # world generation vs. the barrier rather than only to "somewhere before t_e".
+    rng_after_world_generation = _rng_state_token(env)
     world = episode_world_fingerprint(env, seed_value=uw_seed)
     energies = draw_energy_permutation(energy_seed=energy_seed)
     apply_energy_profile(env, energies)
+    # D1/A-D1: assertion-6 relocation -- the barrier runs here, after topology,
+    # user world and energy are all final, and before any prefix stepping.
+    world["preaction"] = finalize_preaction_state(env)
+    world["rng_after_world_generation"] = rng_after_world_generation
     prefix = roll_prefix_and_find_event(env)
     episode_leave_report = {
         "leave_diagnostics": prefix.get("leave_diagnostics", []),
@@ -4355,9 +4623,15 @@ def _run_indexed_in_pool(worker_fn, indices, workers: int, **common_kwargs) -> d
     progress line's cumulative-qualifying count. Exposed as its own function
     so a test can substitute a fake that still calls the real (possibly
     monkeypatched) `worker_fn` but resolves out of ascending order, proving
-    the caller re-sequences rather than merely trusting it does."""
+    the caller re-sequences rather than merely trusting it does.
+
+    D3.2/A-D3(2): `mp_context` is passed explicitly rather than left to the
+    platform default, so `process_start_method="spawn"` in a certified
+    execution class is a fact about what this call actually does, not merely
+    a recorded label."""
     results: dict = {}
-    with ProcessPoolExecutor(max_workers=workers) as executor:
+    with ProcessPoolExecutor(
+            max_workers=workers, mp_context=multiprocessing.get_context("spawn")) as executor:
         futures = {executor.submit(worker_fn, idx=idx, **common_kwargs): idx for idx in indices}
         for future in as_completed(futures):
             idx = futures[future]
@@ -4406,6 +4680,9 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
                                contract_id=contract_id)
     env = build_pinned_env(config, episode_seed=ep_seed, coords=coords, coord_hash=coord_hash,
                             energy_stage=energy_stage, user_world_seed=uw_seed)
+    # A-D3(2)/D4.4: same placement as `run_calibration_episode` -- witnessed
+    # immediately after world generation, before energy touches the env.
+    rng_after_world_generation = _rng_state_token(env)
     raw = {
         "ep_seed": ep_seed,
         "world_entry": {"block": "audit", "episode_index": idx, "episode_seed": ep_seed,
@@ -4413,6 +4690,11 @@ def _compute_audit_episode(config, *, idx: int, topology_seed: int, coords: dict
     }
     energies = draw_energy_permutation(energy_seed=en_seed)
     apply_energy_profile(env, energies)
+    # D1/A-D1: assertion-6 relocation, the audit-episode driver's copy of the
+    # same wiring `run_calibration_episode` carries -- after energy is final,
+    # before any prefix stepping.
+    raw["world_entry"]["preaction"] = finalize_preaction_state(env)
+    raw["world_entry"]["rng_after_world_generation"] = rng_after_world_generation
     prefix = roll_prefix_and_find_event(env)
     raw["leave_diagnostics"] = prefix.get("leave_diagnostics", [])
     raw["rejected_counts"] = prefix.get("rejected_counts", {})
@@ -5301,6 +5583,12 @@ def main() -> None:
         # wheel carrying many CPU-specific kernels, selected at runtime. Pinning the
         # version pins the code and nothing about which kernel executes.
         "runtime_identity": runtime_identity(),
+        # D8: the two B3-L provenance versions, minted once at the top of this
+        # module and carried unchanged into every artifact that reads them
+        # (gate worker records, the PASS certificate, the Step-N inventory,
+        # every formal shard) -- this is the run-artifact copy.
+        "fingerprint_algorithm_version": FINGERPRINT_ALGORITHM_VERSION,
+        "provenance_contract_version": PROVENANCE_CONTRACT_VERSION,
         **r4_identity,
         "topology_records": [r["topology_record"] for r in topology_results],
         "calibration_reports": [r["calibration_report"] for r in topology_results],
