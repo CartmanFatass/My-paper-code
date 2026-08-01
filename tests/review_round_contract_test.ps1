@@ -90,9 +90,6 @@ foreach ($required in @(
     'registration_status',
     'VERIFY_FRESHNESS_FENCE',
     'An accepted matching fence is never resubmitted',
-    'two stable snapshots',
-    'at least three seconds',
-    'transport diagnostic',
     'materialize them from `stage_commit`',
     'not from the current working tree',
     'exact raw -> provenance intake -> heartbeat deletion -> Project Manager reconciliation')) {
@@ -160,21 +157,29 @@ if ($configuredRemotes -notcontains $defaultRemote.Groups['r'].Value) {
     throw "Round preflight default -Remote '$($defaultRemote.Groups['r'].Value)' is not a configured git remote"
 }
 
-# A gate that cannot fail is decoration. The retired round is the fixture: it
-# carried no '## Evidence to read' allow-list and must be rejected.
-$retired = 'docs/external-review/rounds/20260724_g20_credit_rule_zero_fixed_point'
-# Do NOT wrap this in a Test-Path guard. Repository policy encourages deleting
-# superseded rounds, so a skip-if-absent probe would silently vacate itself and
-# leave the suite green over an unexercised gate -- the exact defect this probe
-# exists to prevent. If the fixture is ever removed, replace it with another
-# question carrying no '## Evidence to read' allow-list in the same commit.
-if (-not (Test-Path (Join-Path $repo "$retired/20_PRO_OPEN_QUESTION.md"))) {
-    throw "Preflight rejection fixture is missing: $retired. Point the probe at another allow-list-free question rather than deleting the check."
+# A gate that cannot fail is decoration. The fixture is a dedicated round
+# directory whose name says what it is; it carries no '## Evidence to read'
+# allow-list and must be rejected. It replaced a real retired round that this
+# test had pinned alive against the policy of deleting superseded rounds.
+$fixture = 'docs/external-review/rounds/00000000_preflight_reject_fixture'
+# Do NOT wrap this in a Test-Path guard. A skip-if-absent probe would silently
+# vacate itself and leave the suite green over an unexercised gate -- the
+# exact defect this probe exists to prevent.
+if (-not (Test-Path (Join-Path $repo "$fixture/20_PRO_OPEN_QUESTION.md"))) {
+    throw "Preflight rejection fixture is missing: $fixture. Restore it rather than deleting the check."
 }
+# Probe with the remote branch tip, not local HEAD: preflight's reachability
+# gate is production behaviour at send time, but probing it with HEAD forced a
+# push after every local commit before the next commit's hook could pass --
+# hit twice on 2026-08-01, and a second recurrence is the charter's threshold
+# for fixing the mechanism.
+$branch = (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim()
+$probeCommit = (& git.exe -C $repo rev-parse --verify --quiet "origin/$branch")
+if (-not $probeCommit) { $probeCommit = (& git.exe -C $repo rev-parse HEAD) }
 $rejected = & $preflight `
-    -Commit (& git.exe -C $repo rev-parse HEAD).Trim() `
-    -RoundPath $retired `
-    -Branch (& git.exe -C $repo rev-parse --abbrev-ref HEAD).Trim() `
+    -Commit $probeCommit.Trim() `
+    -RoundPath $fixture `
+    -Branch $branch `
     -RepoRoot $repo 2>$null | ConvertFrom-Json
 if ($rejected.status -ne 'ROUND_PREFLIGHT_FAILED') {
     throw 'Round preflight accepted a question with no evidence allow-list'

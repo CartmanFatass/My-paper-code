@@ -4,6 +4,17 @@
 needs to execute a task correctly: the environment, how to behave while
 unattended, how to report, and what never to touch silently.
 
+```text
+subagent_git=forbidden
+unattended_waiting=in_band_only
+unmeasured_claims=forbidden
+shared_workstation=foreign_processes_expected
+workflow_content=none
+```
+
+These five keys are the load-bearing rules of this file, anchored here for the
+contract test; the sections below say what each one means in practice.
+
 It carries **no workflow**. You do not need to know the research loop, the review
 gates, how many rounds remain, or what the Project Manager does next. Your brief
 contains your task; if the brief is incomplete, say so and hand back. Do not go

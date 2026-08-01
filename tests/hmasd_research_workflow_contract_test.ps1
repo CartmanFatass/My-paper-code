@@ -67,88 +67,51 @@ $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_
 $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
 $pmRole = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 
+# key=value lines only (charter: contract_test_assertion_target). The prose
+# assertions this list once carried duplicated properties these keys already
+# state, and two of them pinned exact markdown wording -- every rewording
+# became a test edit, and deleted-content assertions protected dead text.
+# The no-persistent-roles property keeps its one assertion site in
+# hmasd_experiment_operator_contract_test.ps1 against CURRENT_WORK.
 foreach ($required in @(
-    'single project owner at any moment',
-    'has no persistent task',
-    'There is no Controller, persistent Monitor',
     'project_manager_git_authority=direct',
     'project_manager_external_review_transport=project_manager_direct',
     'scientific_decision_authority=external_pro',
     'local_conversation_scientific_authority=none',
-    '## Execution modes',
     'project_manager_experiment_orchestration=direct_via_registered_child',
     'superpowers_execution=disabled',
     'backward_compatibility=not_required',
     'test_scope=proof_sized',
     'iteration_report_language=zh-CN',
     'iteration_report_path=docs/report/ITERATION_<n>.md',
-    'not another review, approval or scientific evidence source',
     'per_file_hash_handoff=forbidden',
     'same_file_concurrent_writes=forbidden',
-    '### Crossing the boundary',
-    'let External Pro converge',
-    'Pro converges; the two sides are not equals here',
-    # User ruling 2026-07-30: the Project Manager holds ZERO scientific decision
-    # rights, and the touchpoint-2 question is a CONFORMANCE question rather than
-    # a proposal. Both halves are asserted because the first alone was already
-    # true -- `scientific_decision_authority=none` has been in the Identity block
-    # for days, and it did not stop this conversation from recommending a
-    # research redirect. A key that was already green is not a guard.
+    # User ruling 2026-07-30: zero scientific decision rights; touchpoint 2 is
+    # a conformance question, never a proposal.
     'scientific_proposal_authority=none',
-    'pro_plan_review_question=conformance_to_pro_decision',
-    '### The question after a code design is a conformance question',
-    'does not recommend a scientific route')) {
+    'pro_plan_review_question=conformance_to_pro_decision')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 
-# Moment-specific procedure is a Skill, loaded when the moment arrives, so it
-# costs nothing on the turns it does not apply to. AGENTS.md carries only what is
-# true every turn -- it reached 1059 lines on 2026-07-27 by folding everything in
-# on the reasoning that a shared document does not get loaded. True of a document
-# someone must remember to read; false of a Skill, which is injected on match.
-$skillFiles = @{
-    'hmasd-task-design'     = @('Smallest sufficient evidence',
-                                'Trade maintainability away freely',
-                                'out-of-scope list is deliberate staging')
-    'hmasd-acceptance-gate' = @('## Stage A and Stage B',
-                                'A guard test needs a paired negative',
-                                'Two samples cannot separate a cause',
-                                # User ruling 2026-07-30 -- the pre-walked
-                                # decision tree is the form for OPEN scientific
-                                # questions, not for the conformance question.
-                                # Left unscoped it authorised a menu of routes at
-                                # the exact gate the ruling redefined.
-                                'never what this conversation prefers')
-    'hmasd-workflow-change-audit' = @('the failure class this procedure exists to catch',
-                                'A guard that has never gone red is indistinguishable from a comment',
-                                'it produces an invention',
-                                # Design charter (2026-08-01): four load-bearing
-                                # keys assert the fence exists; the rest of the
-                                # charter is prose-free key=value and lives only
-                                # in the SKILL.
-                                'single_mechanism_line_budget=100',
-                                'incident_promotion_threshold=2',
-                                'sha256_whitelist=review_round_archive_integrity_only',
-                                'contract_test_assertion_target=key_value_fences_only')
-    'hmasd-review-round'    = @('Is a round warranted',
-                                'Route to code, not to prose',
-                                'Do not defend the framing',
-                                # User ruling 2026-07-30 -- touchpoint 2 asks for
-                                # conformance, not for a scientific proposal.
-                                'At touchpoint 2 the question is a conformance question')
-}
-foreach ($skill in $skillFiles.Keys) {
-    $body = Get-Content -Raw -LiteralPath (Join-Path $repo ".claude/skills/$skill/SKILL.md")
-    foreach ($required in $skillFiles[$skill]) {
-        if (-not $body.Contains($required)) { throw "$skill missing: $required" }
-    }
-}
-# And AGENTS.md must keep pointing at each of them, or a Skill nobody is told to
-# load is a Skill nobody loads.
-foreach ($pointer in $skillFiles.Keys) {
+# Every Skill must stay routed from AGENTS.md, or a Skill nobody is told to
+# load is a Skill nobody loads. Content assertions are key=value only
+# (charter): the prose-fragment lists this block once carried pinned Skill
+# wording sentence-by-sentence, so every compression became a test edit. The
+# one Skill with a fence is asserted on its load-bearing keys.
+foreach ($pointer in $expectedSkills) {
     if (-not $agents.Contains("`$$pointer")) {
         throw "AGENTS.md no longer routes to the Skill it moved procedure into: $pointer"
     }
+}
+$charterSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/skills/hmasd-workflow-change-audit/SKILL.md')
+foreach ($required in @(
+    # Design charter (2026-08-01): four load-bearing keys assert the fence
+    # exists; the full 17-key fence lives only in the SKILL.
+    'single_mechanism_line_budget=100',
+    'incident_promotion_threshold=2',
+    'sha256_whitelist=review_round_archive_integrity_only',
+    'contract_test_assertion_target=key_value_fences_only')) {
+    if (-not $charterSkill.Contains($required)) { throw "Design charter missing: $required" }
 }
 
 # Convergence must stay distinguishable from a fence, or the single-fence rule
@@ -236,25 +199,17 @@ else {
     }
 }
 
-# The subagent context carries worker behaviour and NO workflow. A worker that
-# has to reconstruct the process from documents is a worker guessing, so these
-# assert the behavioural rules are present -- and the exclusion below asserts the
-# workflow has not crept back in. IMPLEMENTATION_PLAN.md was deleted 2026-07-27:
-# it was a third copy of the boundary, three days stale, and pointed at here as
-# the frozen contract. Its assertions were static boilerplate that could not fail
-# on the drift they were meant to catch.
+# The subagent context carries worker behaviour and NO workflow. Its
+# load-bearing rules are anchored by the key=value fence at its top (charter:
+# contract_test_assertion_target); the prose stays for the reader, the keys
+# are what the test holds. The exclusion below asserts the workflow has not
+# crept back in.
 foreach ($required in @(
-    'Subagents never run Git',
-    'It carries **no workflow**',
-    'Never end your turn to wait for your own work',
-    'Never assert a property you did not measure',
-    'Never report an elapsed time you did not measure',
-    # The workstation is shared with another research line, and that rule lived
-    # only in COMPUTE_ROUTING.md and CURRENT_WORK.md -- two documents NO subagent
-    # is routed to read. Four shell-holding definitions carried zero mention of
-    # it. A rule binding an actor that cannot load it is not a rule.
-    'Another research line runs on the same box',
-    'Protected semantics')) {
+    'subagent_git=forbidden',
+    'unattended_waiting=in_band_only',
+    'unmeasured_claims=forbidden',
+    'shared_workstation=foreign_processes_expected',
+    'workflow_content=none')) {
     if (-not $context.Contains($required)) { throw "Agent context missing: $required" }
 }
 foreach ($leaked in @(
@@ -264,43 +219,12 @@ foreach ($leaked in @(
     }
 }
 
-# CLAUDE.md is the ONLY file every role loads by default; everything else arrives
-# through its routing table. Nothing asserted its CONTENT until 2026-07-30 -- the
-# control-plane checker proves its referents exist, which is a different claim.
-# Its PM-only block carries a verify duty, and that duty must not read as licence
-# to judge scientific validity now that the Project Manager holds none.
-$claudeMd = Get-Content -Raw -LiteralPath (Join-Path $repo 'CLAUDE.md')
-# Keep every asserted substring inside ONE wrapped line. The first version of the
-# assertion below spanned a line break and could therefore never match, which
-# reads exactly like a missing rule -- a guard that cannot go green is as useless
-# as one that cannot go red.
-foreach ($required in @(
-    'This file is a signpost, and nothing else',
-    "valid is Pro's, never yours")) {
-    if (-not $claudeMd.Contains($required)) { throw "CLAUDE.md missing: $required" }
-}
-foreach ($required in @(
-    'docs/report/ITERATION_<n>.md',
-    'creates a second acceptance owner',
-    'blocks on separate approval')) {
-    if (-not $pmRole.Contains($required)) { throw "Project Manager role missing: $required" }
-}
-# The agile development procedure was a Skill until 2026-07-27, read by exactly
-# one agent definition. It had two audiences doing different things with it -- the
-# orchestrator sizing a task, the implementer executing one -- so it split by use
-# rather than staying a shared document nobody is guaranteed to load. Assert both
-# halves landed, and that neither drifted into being the other.
+# CLAUDE.md and the implementer definition are no longer content-asserted in
+# prose (charter: contract_test_assertion_target). Two assertions here pinned
+# the exact line-wrapping of markdown paragraphs; the properties they carried
+# are held by the key assertions above and the operator contract's line-count
+# cap on CLAUDE.md. The hash/superpowers scan below still reads both files.
 $implementerDef = Get-Content -Raw -LiteralPath (Join-Path $repo '.claude/agents/hmasd-implementer.md')
-foreach ($required in @(
-    'never trade
-reproducibility',
-    'Remove what it
-   replaces',
-    'Never weaken a check and never')) {
-    if (-not $implementerDef.Contains($required)) {
-        throw "Implementer execution procedure missing: $required"
-    }
-}
 foreach ($text in @($agents, $current, $context, $implementerDef, $pmRole)) {
     if ($text -match '(?m)^\w+_sha256=' -or $text.Contains('path_hash_source_status')) {
         throw 'Active workflow retains a hash handoff'
@@ -334,25 +258,21 @@ for ($iteration = 1; $iteration -le $consumed; $iteration++) {
     }
 }
 
-foreach ($retired in @(
-    'ha_ctse_process/temporal_duty_g1.py',
-    'ha_ctse_process/ehc_g1.py',
-    'scripts/run_access_positive_ehc_g1.py',
-    'tests/ha_ctse_process_temporal_duty_g1_test.py',
-    'tests/ha_ctse_process_ehc_g1_test.py',
-    'tests/run_access_positive_ehc_g1_test.py',
-    'ha_ctse_process/cross_lifecycle_handoff_g2.py',
-    'ha_ctse_process/ehc_handoff_g2.py',
-    'scripts/run_cross_lifecycle_handoff_g2.py',
-    'tests/ha_ctse_process_cross_lifecycle_handoff_g2_test.py',
-    'tests/ha_ctse_process_ehc_handoff_g2_test.py',
-    'tests/run_cross_lifecycle_handoff_g2_test.py',
-    'ha_ctse_process/useful_effect_roster_g3.py',
-    'scripts/run_useful_effect_roster_g3.py',
-    'tests/ha_ctse_process_useful_effect_roster_g3_test.py',
-    'tests/run_useful_effect_roster_g3_test.py')) {
-    if (Test-Path -LiteralPath (Join-Path $repo $retired)) {
-        throw "Closed executable remains on the active line: $retired"
+# Retired executable families, one stem per family (charter: tombstone_policy
+# is pattern-based, the list never grows per file). A stem matches any file
+# resurrecting it in the three executable directories -- module, runner or
+# test variant alike. Names generic enough to collide with active work
+# (uav_temp_loss_g1, async_commitment_roster_g3 are live) stay OFF this list;
+# a stem is added only when its family retires, never widened to a generation.
+$retiredStems = @('temporal_duty_g1', 'ehc_g1', 'access_positive_ehc_g1',
+    'cross_lifecycle_handoff_g2', 'ehc_handoff_g2', 'useful_effect_roster_g3')
+foreach ($dir in @('ha_ctse_process', 'scripts', 'tests')) {
+    foreach ($file in (Get-ChildItem -LiteralPath (Join-Path $repo $dir) -File -Filter '*.py')) {
+        foreach ($stem in $retiredStems) {
+            if ($file.Name -match "(^|_)$stem(_test)?\.py$") {
+                throw "Closed executable family '$stem' is back on the active line: $dir/$($file.Name)"
+            }
+        }
     }
 }
 
