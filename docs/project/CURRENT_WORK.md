@@ -25,8 +25,8 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=USER COURSE RULING 2026-08-01: algorithm-first -- the ten-iteration grant is spent on variable-k MARL algorithm exploration (toy surface; fixed-k vs unrestricted R30 vs learned low-cardinality constraint), per RESEARCH_GOAL.md's standing check, now enforced mechanically (every round question needs a '## Variable-k relevance' section; preflight refuses otherwise). The ENTIRE D7.S/B3-L provenance line is HELD: design frozen (D7_S_B3L_DECISION_LEDGER.md incl. conformance amendments), partial implementation archived in-tree, gate UNRUN, steps N and O not to be executed. NOW: open workflow 5 touchpoint 1 -- disclose the course ruling and the hold, ask Pro for the first conclusion-bearing variable-k algorithm decision.
-workflow_position=workflow 4 CANCELLED_BY_USER_COURSE_RULING mid-implementation (touchpoints 1-2 consumed, no experiment, no conclusion -- consumes no iteration); workflow 5 opens on the algorithm mainline
+next_boundary=Workflow 5 step 7 IN FLIGHT. Touchpoint 1 ruled the V-K0 package (round 20260801_variable_k_algorithm_direction); touchpoint 2 closed CONFORMS after amendments (round 20260801_vk0_design_conformance; VK0_REALIZATION_DECISION_LEDGER.md is the frozen contract). Implementation committed (ded38c10 + reviewer-driven repair b7604cc3; oracle semantics adversarially APPROVED, all four realization defects repaired and watched red). FORMAL V-K0A RESULT at b7604cc3: TOY_HETEROGENEOUS_RENEWAL_URGENCY_IDENTIFIED, 112 rows, all validity predicates true, panel logs/vk0a_formal/ (sidecar 178b457b...). V-K0B trainings launched (six ruled seeds, waves of two; owner THIS pm session, tag vk0b). NEXT: as trainings complete run the V-K0B evaluation driver per seed, analyzer, then touchpoint 3 with the result and ITERATION_35 report. D7.S/B3-L stays HELD.
+workflow_position=workflow 4 CANCELLED_BY_USER_COURSE_RULING (consumes no iteration); workflow 5 at step 7 (experiment)
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
