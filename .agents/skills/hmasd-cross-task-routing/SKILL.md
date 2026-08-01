@@ -23,7 +23,7 @@ sender's settings or infer a replacement row.
 |---|---|---|---|
 | `workflow_design_manager` | `019fb73d-5635-7b63-b165-6c5129bc0217` | `gpt-5.6-sol` | `high` |
 | `code_project_manager` | `019f9e4f-f4d0-7fe0-b214-c47fd034e84d` | `gpt-5.6-sol` | `max` |
-| `independent_research_explorer` | `019fb398-0a76-7bd0-9400-c5ea4eefa5de` | `gpt-5.6-sol` | `ultra` |
+| `independent_research_explorer` | `019fbd62-3440-7dd1-8d41-c72c15cb8d4e` | `gpt-5.6-sol` | `ultra` |
 | `independent_research_review_operator` | `019fb311-6137-7781-9708-3df24da34a4b` | `gpt-5.6-luna` | `medium` |
 
 Each role appears exactly once. Router session fields must mirror this table.

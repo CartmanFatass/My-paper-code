@@ -210,7 +210,7 @@ foreach ($required in @(
     'workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217',
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
-    'independent_research_explorer_session=019fb398-0a76-7bd0-9400-c5ea4eefa5de',
+    'independent_research_explorer_session=019fbd62-3440-7dd1-8d41-c72c15cb8d4e',
     'independent_research_review_operator_session=019fb311-6137-7781-9708-3df24da34a4b',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
