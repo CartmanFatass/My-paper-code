@@ -1,0 +1,849 @@
+{
+  "document_kind": "explorer_advisory_refinement_packet_v1",
+  "workflow_id": "EXPLORER-TOY-VALIDATION-2026-07-31-P1",
+  "evidence_tier": "nonformal_toy",
+  "candidate_id": "CAND-VSP-02",
+  "candidate_packet": {
+    "path": "local_research/2026-07-31_explorer_project_candidate_packet_vsp_02_p1_v1.json",
+    "bytes": 1239,
+    "sha256": "74de9bfb91d32dd6835dc0b04bceacd3e56a888422edda7fe7d236148584cf32"
+  },
+  "candidate_artifact": {
+    "path": "local_research/2026-07-31_variable_skill_period_async_duration_escrow_advisory_delta_v4.json",
+    "bytes": 62595,
+    "sha256": "961d46abbe64f7076a76274613a7cdd1163968d1985e6b934985a874419fe6cc"
+  },
+  "origin_campaign": {
+    "campaign_id": "VSP-MYLIB-2026-07-30-C1",
+    "campaign_workflow_commit": "5179398",
+    "path": "local_research/2026-07-30_variable_skill_period_inspiration_campaign_v3.json",
+    "bytes": 123797,
+    "sha256": "47c48f7562d2f7bf6b20a9ed30cd85edfb70d812046115b02994ac8c11c753a5"
+  },
+  "refinement_request": {
+    "review_round": "20260801_explorer_toy_validation_p1_vsp_02_design_assertion_audit_v5",
+    "disposition": "ADVISORY_REFINEMENT_REQUIRED_WITH_ONE_EXACT_GAP",
+    "raw_archive": "docs/external-review/rounds/20260801_explorer_toy_validation_p1_vsp_02_design_assertion_audit_v5/21_PRO_OPEN_RAW.md",
+    "raw_archive_bytes": 415,
+    "raw_archive_sha256": "ea7856b44e01a7a94db832e3cad702ac72c9621301a97406769d4a8c3f27548a",
+    "mechanical_intake": "docs/external-review/rounds/20260801_explorer_toy_validation_p1_vsp_02_design_assertion_audit_v5/50_MECHANICAL_INTAKE_RECORD.md",
+    "exact_gap": "The Stage-A trace roster contains only sixteen scenario labels; it does not freeze, for each trace, the initial escrow state and immutable record, exact physical event and arrival times and UUIDs, ordered receipts, expected state transitions and reward ownership, release_count, and terminal status required for an implementable pre-code conformance matrix.",
+    "refinement_kind": "freeze_exact_existing_sixteen_row_stage_a_trace_matrix_only"
+  },
+  "authority": {
+    "scientific_authority": "none",
+    "code_authority": "none",
+    "compute_authority": "none",
+    "cpm_dispatch_authority": "none",
+    "project_state_effect": "none"
+  },
+  "queue_lock": {
+    "ordered_candidate_ids": [
+      "CAND-VAP-FOLR-CORE",
+      "CAND-VSP-02",
+      "CAND-VSP-05"
+    ],
+    "current_index": 1,
+    "current_candidate": "CAND-VSP-02",
+    "VSP_05_status": "QUEUED_NOT_ADVANCED",
+    "combined_toy": false,
+    "cross_direction_competition": false
+  },
+  "scope_lock": {
+    "retained_without_change": [
+      "Asynchronous Nominal-Duration Escrow candidate direction",
+      "nominal duration set {1.0,4.0} physical seconds",
+      "duration-blind frozen primitive actor",
+      "immutable versioned decision record",
+      "earliest-physical-time and same-time cause precedence",
+      "half-open reward ownership interval and 0.25-second watermark",
+      "strict on-policy version cohorts",
+      "sole compare-and-set learning-release edge",
+      "all Stage-A labels and their original order"
+    ],
+    "forbidden_changes": [
+      "new mechanism or learned object",
+      "candidate or direction change",
+      "cross-candidate or cross-direction combination",
+      "transport or runtime repair detail",
+      "Stage-B or Stage-C result claim",
+      "code or engineering realization",
+      "compute authorization",
+      "CPM dispatch",
+      "VSP-05 advancement",
+      "formal-project scientific effect"
+    ]
+  },
+  "source_fixture_boundary": {
+    "candidate_artifact_defined_contract": [
+      "decision ID tuple and complete immutable header",
+      "append-only escrow fields and terminal states",
+      "earliest physical event time, same-time cause precedence, then lexical event_uuid",
+      "reward ownership in [tau,T), plus only an explicitly owned terminal impulse at T",
+      "arrival deadline T+0.25 physical seconds",
+      "strict behavior-policy version match",
+      "duplicate, replay, conflict and no-op rules",
+      "WAITING_REWARD_WATERMARK-to-CONSUMED compare-and-set as the sole release edge",
+      "release_count one only for a valid learning-eligible record and zero for diagnostic, rejected, cancelled or invalid records",
+      "candidate-artifact four-way physical-frame invariance construction"
+    ],
+    "deliberately_frozen_test_fixture_not_source_evidence": [
+      "all concrete agent, decision, event, delivery and release UUIDs",
+      "all concrete physical event and receipt arrival times",
+      "all concrete reward amounts and zero-valued bootstrap fixtures",
+      "the selected context, skill, roster and partner snapshot values",
+      "the exact duplicate and replay delivery schedule",
+      "the exact original/refined integration segmentation"
+    ],
+    "literature_provenance_limit": "The four-way frame clone and its invariance gate are campaign/Explorer constructions already frozen in the candidate artifact, not direct paper evidence. This packet only instantiates their exact test fixture.",
+    "claim_boundary": "These fixture constants make the already-defined Stage-A contract executable before code. They are not literature-derived findings, do not change the candidate mechanism, and cannot support an empirical or formal-project claim."
+  },
+  "frozen_trace_language": {
+    "trace_isolation": "Each T01-T16 row runs in an independent empty registry namespace. The frame branches inside T16 are isolated counterfactual representations of one logical record and are never co-registered.",
+    "time_unit": "physical_seconds",
+    "nominal_duration_seconds": [
+      1.0,
+      4.0
+    ],
+    "behavior_probability_vector": {
+      "1.0": 0.5,
+      "4.0": 0.5
+    },
+    "behavior_log_probability_of_selected_duration": -0.6931471805599453,
+    "behavior_duration_policy_version": "VSP02-MU-V1",
+    "duration_critic_version": "VSP02-MU-V1",
+    "record_schema_version": "VSP02-ESCROW-V1",
+    "physical_discount_rate_per_second": 0.1,
+    "reward_latency_bound_seconds": 0.25,
+    "immutable_header_fields": [
+      "decision_id",
+      "agent_uuid",
+      "owner_epoch",
+      "own_renewal_index",
+      "initiation_physical_time_tau",
+      "nominal_duration_D",
+      "behavior_duration_policy_version",
+      "behavior_probability_vector_over_all_durations",
+      "behavior_log_probability_of_D",
+      "learning_eligible_boolean",
+      "initiation_information_receipt",
+      "current_high_level_skill_id",
+      "active_roster_version",
+      "partner_policy_family_and_snapshot",
+      "physical_discount_rate",
+      "reward_latency_bound",
+      "record_schema_version"
+    ],
+    "states": [
+      "PENDING",
+      "WAITING_REWARD_WATERMARK",
+      "CONSUMED",
+      "CONSUMED_DIAGNOSTIC_NO_SCORE",
+      "REJECTED_VERSION_MISMATCH",
+      "REJECTED_REWARD_LATENCY",
+      "CANCELLED_PREEXECUTION_OWNER_INVALID",
+      "INVALID_CONFLICT"
+    ],
+    "cause_precedence_at_equal_physical_time": [
+      "EPISODE_TERMINAL",
+      "FOCAL_REPLACEMENT",
+      "FOCAL_LEAVE",
+      "FORCED_INTERRUPT",
+      "SKILL_COMPLETION",
+      "NOMINAL_EXPIRY"
+    ],
+    "final_event_tie_break": "lexical event_uuid",
+    "initial_state_snapshot_rule": "Each row's initial_escrow_state is the snapshot immediately after its order-1 DECISION_REGISTERED receipt has created the immutable record and before any primitive execution; order 1 remains in ordered_receipts so the complete ledger is frozen.",
+    "receipt_order_rule": "ordered_receipts is the exact ingestion-and-emission ledger order. Physical cause selection uses physical_event_time, cause precedence and event_uuid, never arrival order.",
+    "unchanged_state_rule": "An input receipt whose order is not separately named in expected_state_transitions leaves the state class unchanged and performs only its declared append-only effect. A declared output receipt is emitted atomically by the preceding compare-and-set and causes no additional state transition.",
+    "reward_ownership_rule": "A unique external team-reward event is owned once by this decision only when its physical event time lies in [tau,T), or it is explicitly declared as this decision's terminal impulse at T. Shared team reward does not assert focal-agent retrospective responsibility.",
+    "release_rule": "Only the watermark compare-and-set may emit a learning release. release_count is the count for the logical decision_id, not a delivery or frame count.",
+    "symbolic_target_rule": "Stage-A fixtures record exact symbolic target expressions with frozen bootstrap scalar 0.0. They do not numerically evaluate returns and do not enter Stage B."
+    ,"continuous_reward_time_schema": "A continuous reward measure has no invented scalar occurrence time: physical_support is its exact causal-time interval; the corresponding ordered receipt separately freezes the completion physical time and arrival time."
+  },
+  "trace_partition": {
+    "trace_count": 16,
+    "ordered_source_roster_labels": [
+      "ordinary nominal expiry",
+      "early skill completion",
+      "focal leave",
+      "focal replacement with new owner epoch",
+      "episode terminal",
+      "forced interrupt",
+      "simultaneous competing causes",
+      "duplicate terminal notification",
+      "reordered notification",
+      "replayed record",
+      "other-agent sham union events",
+      "genuine teammate physical action",
+      "on-time delayed reward",
+      "reward after the 0.25-second watermark",
+      "behavior-version mismatch",
+      "four-way physical frame refinement"
+    ],
+    "row_replacement_allowed": false,
+    "row_reordering_allowed": false
+  },
+  "trace_matrix": [
+    {
+      "trace_id": "T01",
+      "source_roster_label": "ordinary nominal expiry",
+      "initial_escrow_state": {
+        "state": "PENDING",
+        "release_count": 0,
+        "deduplicated_reward_event_uuids": [],
+        "deduplicated_physical_event_uuids": [],
+        "candidate_terminal": null
+      },
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000001,1,1,VSP02-MU-V1)",
+        "agent_uuid": "00000000-0000-4000-8000-000000000001",
+        "owner_epoch": 1,
+        "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0,
+        "nominal_duration_D": 1.0,
+        "behavior_duration_policy_version": "VSP02-MU-V1",
+        "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5},
+        "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true,
+        "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8001-000000000001", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0",
+        "active_roster_version": 7,
+        "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1",
+        "physical_discount_rate": 0.1,
+        "reward_latency_bound": 0.25,
+        "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8001-000000000001", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8001-000000000001", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8001-000000000001", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8001-000000000001", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8001-000000000001", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8001-000000000001", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8001-000000000001", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8001-000000000001", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "PENDING", "effect": "append reward UUID once"},
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=11.0, cause=NOMINAL_EXPIRY, Delta=1.0"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS writes target, baseline, advantage and one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8001-000000000001"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "One nominal-expiry cause, one owned reward and one release; nominal D and realized Delta both equal 1.0 but remain separate fields."
+    },
+    {
+      "trace_id": "T02",
+      "source_roster_label": "early skill completion",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000002,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000002", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8002-000000000002", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8002-000000000002", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8002-000000000002", "kind": "SKILL_COMPLETION", "physical_event_time": 10.75}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8002-000000000002", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8002-000000000002", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8002-000000000002", "kind": "SKILL_COMPLETION", "physical_event_time": 10.75, "arrival_time": 10.76},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8002-000000000002", "kind": "BOOTSTRAP_COMPLETION_STATE", "physical_event_time": 10.75, "arrival_time": 10.77, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8002-000000000002", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8002-000000000002", "kind": "LEARNING_RELEASE", "physical_event_time": 11.0, "arrival_time": 11.0}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "PENDING", "effect": "append reward UUID once"},
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=10.75, cause=SKILL_COMPLETION, Delta=0.75"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8002-000000000002"], "ownership_interval": "[10.0,10.75)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*0.75)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Completion closes before the 4.0-second nominal expiry, uses the completion-state bootstrap, and emits one release."
+    },
+    {
+      "trace_id": "T03",
+      "source_roster_label": "focal leave",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000003,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000003", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8003-000000000003", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8003-000000000003", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8003-000000000003", "kind": "FOCAL_LEAVE", "physical_event_time": 10.8, "post_event_roster_version": 8}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8003-000000000003", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8003-000000000003", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8003-000000000003", "kind": "FOCAL_LEAVE", "physical_event_time": 10.8, "arrival_time": 10.81, "post_event_roster_version": 8},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8003-000000000003", "kind": "BOOTSTRAP_POST_LEAVE_TEAM_STATE", "physical_event_time": 10.8, "arrival_time": 10.82, "value": 0.0, "version": "VSP02-MU-V1", "old_owner_state_read": false},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8003-000000000003", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.05, "arrival_time": 11.05},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8003-000000000003", "kind": "LEARNING_RELEASE", "physical_event_time": 11.05, "arrival_time": 11.05}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=10.8, cause=FOCAL_LEAVE, Delta=0.8; old owner becomes inactive"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS uses post-leave team bootstrap and emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8003-000000000003"], "ownership_interval": "[10.0,10.8)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*0.8)*0.0", "old_owner_continuation_reuse": false},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Leave closes the old owner's record, the team bootstrap reads only the post-leave roster, and release occurs once."
+    },
+    {
+      "trace_id": "T04",
+      "source_roster_label": "focal replacement with new owner epoch",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000004,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000004", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8004-000000000004", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8004-000000000004", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8004-000000000004", "kind": "FOCAL_REPLACEMENT", "physical_event_time": 10.8, "old_owner_epoch": 1, "new_owner_epoch": 2, "post_event_roster_version": 8}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8004-000000000004", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8004-000000000004", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8004-000000000004", "kind": "FOCAL_REPLACEMENT", "physical_event_time": 10.8, "arrival_time": 10.81, "old_owner_epoch": 1, "new_owner_epoch": 2},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8004-000000000004", "kind": "BOOTSTRAP_POST_REPLACEMENT_TEAM_STATE", "physical_event_time": 10.8, "arrival_time": 10.82, "value": 0.0, "version": "VSP02-MU-V1", "replacement_inherited_old_record": false},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8004-000000000004", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.05, "arrival_time": 11.05},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8004-000000000004", "kind": "LEARNING_RELEASE", "physical_event_time": 11.05, "arrival_time": 11.05}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=10.8, cause=FOCAL_REPLACEMENT, Delta=0.8; close epoch 1; initialize epoch 2 outside this record"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS uses post-replacement team bootstrap and emits one release for epoch 1 only"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8004-000000000004"], "ownership_interval": "[10.0,10.8)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*0.8)*0.0", "new_owner_inherits_record": false},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Replacement wins the old record, creates a strictly new owner epoch outside it, never transfers the escrow, and releases the old record once."
+    },
+    {
+      "trace_id": "T05",
+      "source_roster_label": "episode terminal",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000005,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000005", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8005-000000000005", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8005-000000000005", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8005-000000000005", "kind": "EPISODE_TERMINAL", "physical_event_time": 10.9}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8005-000000000005", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8005-000000000005", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8005-000000000005", "kind": "EPISODE_TERMINAL", "physical_event_time": 10.9, "arrival_time": 10.91},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8005-000000000005", "kind": "BOOTSTRAP_EPISODE_ZERO", "physical_event_time": 10.9, "arrival_time": 10.91, "value": 0.0},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8005-000000000005", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.15, "arrival_time": 11.15},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8005-000000000005", "kind": "LEARNING_RELEASE", "physical_event_time": 11.15, "arrival_time": 11.15}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=10.9, cause=EPISODE_TERMINAL, Delta=0.9 and bootstrap zero"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release after complete reward closure"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8005-000000000005"], "ownership_interval": "[10.0,10.9)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Episode terminal forces zero bootstrap, preserves the preterminal team reward once, and releases once only after the watermark."
+    },
+    {
+      "trace_id": "T06",
+      "source_roster_label": "forced interrupt",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000006,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000006", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8006-000000000006", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_STABLE"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8006-000000000006", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 12.75, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8006-000000000006", "kind": "FORCED_INTERRUPT", "physical_event_time": 13.25, "episode_continues": true, "simultaneous_episode_terminal": false}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8006-000000000006", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8006-000000000006", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 12.75, "arrival_time": 12.76, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8006-000000000006", "kind": "FORCED_INTERRUPT", "physical_event_time": 13.25, "arrival_time": 13.26, "episode_continues": true},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8006-000000000006", "kind": "BOOTSTRAP_POST_INTERRUPT_STATE", "physical_event_time": 13.25, "arrival_time": 13.27, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8006-000000000006", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 13.5, "arrival_time": 13.5},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8006-000000000006", "kind": "LEARNING_RELEASE", "physical_event_time": 13.5, "arrival_time": 13.5}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=13.25, cause=FORCED_INTERRUPT, Delta=3.25; no EPISODE_TERMINAL receipt"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release using post-interrupt continuation bootstrap"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8006-000000000006"], "ownership_interval": "[10.0,13.25)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(12.75-10.0))*1.0 + exp(-0.1*3.25)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "The registered 3.25-second interruption is the sole terminal cause, does not invent an episode terminal, and releases once."
+    },
+    {
+      "trace_id": "T07",
+      "source_roster_label": "simultaneous competing causes",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000007,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000007", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 4.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8007-000000000007", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8007-000000000007", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "31000000-0000-4000-8007-000000000007", "kind": "EPISODE_TERMINAL", "physical_event_time": 14.0},
+        {"event_uuid": "32000000-0000-4000-8007-000000000007", "kind": "FOCAL_REPLACEMENT", "physical_event_time": 14.0},
+        {"event_uuid": "33000000-0000-4000-8007-000000000007", "kind": "FOCAL_LEAVE", "physical_event_time": 14.0},
+        {"event_uuid": "34000000-0000-4000-8007-000000000007", "kind": "FORCED_INTERRUPT", "physical_event_time": 14.0},
+        {"event_uuid": "35000000-0000-4000-8007-000000000007", "kind": "SKILL_COMPLETION", "physical_event_time": 14.0},
+        {"event_uuid": "36000000-0000-4000-8007-000000000007", "kind": "NOMINAL_EXPIRY", "physical_event_time": 14.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8007-000000000007", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8007-000000000007", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "31000000-0000-4000-8007-000000000007", "kind": "EPISODE_TERMINAL", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 1},
+        {"order": 4, "direction": "input", "receipt_uuid": "32000000-0000-4000-8007-000000000007", "kind": "FOCAL_REPLACEMENT", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 2},
+        {"order": 5, "direction": "input", "receipt_uuid": "33000000-0000-4000-8007-000000000007", "kind": "FOCAL_LEAVE", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 3},
+        {"order": 6, "direction": "input", "receipt_uuid": "34000000-0000-4000-8007-000000000007", "kind": "FORCED_INTERRUPT", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 4},
+        {"order": 7, "direction": "input", "receipt_uuid": "35000000-0000-4000-8007-000000000007", "kind": "SKILL_COMPLETION", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 5},
+        {"order": 8, "direction": "input", "receipt_uuid": "36000000-0000-4000-8007-000000000007", "kind": "NOMINAL_EXPIRY", "physical_event_time": 14.0, "arrival_time": 14.01, "equal_time_precedence_rank": 6},
+        {"order": 9, "direction": "input", "receipt_uuid": "40000000-0000-4000-8007-000000000007", "kind": "BOOTSTRAP_EPISODE_ZERO", "physical_event_time": 14.0, "arrival_time": 14.02, "value": 0.0},
+        {"order": 10, "direction": "input", "receipt_uuid": "50000000-0000-4000-8007-000000000007", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 14.25, "arrival_time": 14.25},
+        {"order": 11, "direction": "output", "receipt_uuid": "60000000-0000-4000-8007-000000000007", "kind": "LEARNING_RELEASE", "physical_event_time": 14.25, "arrival_time": 14.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "the source-defined equal-time precedence presents EPISODE_TERMINAL first and freezes T=14.0, cause=EPISODE_TERMINAL, Delta=4.0"},
+        {"on_order": 4, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "rank-2 FOCAL_REPLACEMENT cannot replace the frozen cause"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "rank-3 FOCAL_LEAVE cannot replace the frozen cause"},
+        {"on_order": 6, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "rank-4 FORCED_INTERRUPT cannot replace the frozen cause"},
+        {"on_order": 7, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "rank-5 SKILL_COMPLETION cannot replace the frozen cause"},
+        {"on_order": 8, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "rank-6 NOMINAL_EXPIRY cannot replace the frozen cause"},
+        {"on_order": 10, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8007-000000000007"], "ownership_interval": "[10.0,14.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Equal-time cause precedence deterministically selects EPISODE_TERMINAL and exactly one terminalization and release occur."
+    },
+    {
+      "trace_id": "T08",
+      "source_roster_label": "duplicate terminal notification",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000008,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000008", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8008-000000000008", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8008-000000000008", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8008-000000000008", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8008-000000000008", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8008-000000000008", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "delivery_uuid": "71000000-0000-4000-8008-000000000001", "receipt_uuid": "30000000-0000-4000-8008-000000000008", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.01},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8008-000000000008", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.02, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8008-000000000008", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8008-000000000008", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 7, "direction": "input", "delivery_uuid": "71000000-0000-4000-8008-000000000002", "receipt_uuid": "30000000-0000-4000-8008-000000000008", "kind": "NOMINAL_EXPIRY_DUPLICATE", "physical_event_time": 11.0, "arrival_time": 11.3, "payload_identity": "byte-identical-to-order-3"}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze nominal-expiry cause"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"},
+        {"on_order": 7, "from": "CONSUMED", "to": "CONSUMED", "effect": "duplicate event_uuid is a no-op; diagnostic duplicate counter increments only"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8008-000000000008"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "The second delivery of the identical terminal event cannot mutate the terminal record or create a second release."
+    },
+    {
+      "trace_id": "T09",
+      "source_roster_label": "reordered notification",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000009,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000009", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8009-000000000009", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "71000000-0000-4000-8009-000000000001", "kind": "NONTERMINAL_PHYSICAL_EVENT_A", "physical_event_time": 10.2},
+        {"event_uuid": "20000000-0000-4000-8009-000000000009", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "71000000-0000-4000-8009-000000000002", "kind": "NONTERMINAL_PHYSICAL_EVENT_B", "physical_event_time": 10.4},
+        {"event_uuid": "30000000-0000-4000-8009-000000000009", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8009-000000000009", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8009-000000000009", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "71000000-0000-4000-8009-000000000002", "kind": "NONTERMINAL_PHYSICAL_EVENT_B", "physical_event_time": 10.4, "arrival_time": 10.45},
+        {"order": 4, "direction": "input", "receipt_uuid": "71000000-0000-4000-8009-000000000001", "kind": "NONTERMINAL_PHYSICAL_EVENT_A", "physical_event_time": 10.2, "arrival_time": 10.5},
+        {"order": 5, "direction": "input", "receipt_uuid": "30000000-0000-4000-8009-000000000009", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 6, "direction": "input", "receipt_uuid": "40000000-0000-4000-8009-000000000009", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 7, "direction": "input", "receipt_uuid": "50000000-0000-4000-8009-000000000009", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 8, "direction": "output", "receipt_uuid": "60000000-0000-4000-8009-000000000009", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "PENDING", "effect": "append B once"},
+        {"on_order": 4, "from": "PENDING", "to": "PENDING", "effect": "append A once but canonical deduplicated event order is A then B by physical time"},
+        {"on_order": 5, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=11.0 and NOMINAL_EXPIRY; arrival order did not define physical order"},
+        {"on_order": 7, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8009-000000000009"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Reverse receipt arrival of A and B preserves canonical physical-time order, one terminal cause and one release."
+    },
+    {
+      "trace_id": "T10",
+      "source_roster_label": "replayed record",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000010,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000010", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8010-000000000010", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8010-000000000010", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8010-000000000010", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8010-000000000010", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8010-000000000010", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8010-000000000010", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8010-000000000010", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8010-000000000010", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8010-000000000010", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 7, "direction": "input", "delivery_uuid": "71000000-0000-4000-8010-000000000001", "receipt_uuid": "10000000-0000-4000-8010-000000000010", "kind": "FULL_RECORD_REPLAY", "physical_event_time": 10.0, "arrival_time": 11.5, "decision_id": "(00000000-0000-4000-8000-000000000010,1,1,VSP02-MU-V1)", "header_identity": "byte-identical-to-immutable_record"}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze nominal-expiry cause"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"},
+        {"on_order": 7, "from": "CONSUMED", "to": "CONSUMED", "effect": "identical decision_id and header replay is a no-op; no second record, target, optimizer admission or release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8010-000000000010"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Replaying the complete byte-identical record after consumption creates no new logical record and release_count remains one."
+    },
+    {
+      "trace_id": "T11",
+      "source_roster_label": "other-agent sham union events",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000011,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000011", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8011-000000000011", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "71000000-0000-4000-8011-000000000001", "kind": "OTHER_AGENT_SHAM_UNION_NOTIFICATION", "physical_event_time": 10.2, "physical_effect": "none"},
+        {"event_uuid": "20000000-0000-4000-8011-000000000011", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "71000000-0000-4000-8011-000000000002", "kind": "OTHER_AGENT_SHAM_UNION_NOTIFICATION", "physical_event_time": 10.4, "physical_effect": "none"},
+        {"event_uuid": "30000000-0000-4000-8011-000000000011", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8011-000000000011", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "71000000-0000-4000-8011-000000000001", "kind": "OTHER_AGENT_SHAM_UNION_NOTIFICATION", "physical_event_time": 10.2, "arrival_time": 10.21},
+        {"order": 3, "direction": "input", "receipt_uuid": "20000000-0000-4000-8011-000000000011", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 4, "direction": "input", "receipt_uuid": "71000000-0000-4000-8011-000000000002", "kind": "OTHER_AGENT_SHAM_UNION_NOTIFICATION", "physical_event_time": 10.4, "arrival_time": 10.41},
+        {"order": 5, "direction": "input", "receipt_uuid": "30000000-0000-4000-8011-000000000011", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 6, "direction": "input", "receipt_uuid": "40000000-0000-4000-8011-000000000011", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 7, "direction": "input", "receipt_uuid": "50000000-0000-4000-8011-000000000011", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 8, "direction": "output", "receipt_uuid": "60000000-0000-4000-8011-000000000011", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "PENDING", "effect": "append sham notification once; no focal state, roster, boundary, watermark or RNG change"},
+        {"on_order": 4, "from": "PENDING", "to": "PENDING", "effect": "append second sham notification once with the same no-effect contract"},
+        {"on_order": 5, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "ordinary focal nominal expiry remains T=11.0"},
+        {"on_order": 7, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8011-000000000011"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.25-10.0))*1.0 + exp(-0.1*1.0)*0.0", "no_sham_counterfactual_difference": 0},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Adding two unique noncausal other-agent notifications changes only their diagnostic receipt count; focal cause, reward ownership, target expression, RNG and release are unchanged."
+    },
+    {
+      "trace_id": "T12",
+      "source_roster_label": "genuine teammate physical action",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000012,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000012", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8012-000000000012", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "71000000-0000-4000-8012-000000000001", "kind": "GENUINE_TEAMMATE_PHYSICAL_ACTION", "physical_event_time": 10.2, "actor": "TEAMMATE-B", "changes_focal_observation": true, "direct_focal_terminal": false},
+        {"event_uuid": "20000000-0000-4000-8012-000000000012", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.3, "amount": 2.0, "causal_parent_event_uuid": "71000000-0000-4000-8012-000000000001"},
+        {"event_uuid": "30000000-0000-4000-8012-000000000012", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8012-000000000012", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "71000000-0000-4000-8012-000000000001", "kind": "GENUINE_TEAMMATE_PHYSICAL_ACTION", "physical_event_time": 10.2, "arrival_time": 10.21},
+        {"order": 3, "direction": "input", "receipt_uuid": "20000000-0000-4000-8012-000000000012", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.3, "arrival_time": 10.31, "amount": 2.0},
+        {"order": 4, "direction": "input", "receipt_uuid": "30000000-0000-4000-8012-000000000012", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 5, "direction": "input", "receipt_uuid": "40000000-0000-4000-8012-000000000012", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 6, "direction": "input", "receipt_uuid": "50000000-0000-4000-8012-000000000012", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 7, "direction": "output", "receipt_uuid": "60000000-0000-4000-8012-000000000012", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "PENDING", "effect": "append genuine physical action; observation/return may change but no direct focal terminalization or release"},
+        {"on_order": 4, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "registered focal nominal expiry closes the record"},
+        {"on_order": 6, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8012-000000000012"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "team_reward_can_also_belong_once_to_a_distinct_teammate_record": true, "focal_agent_specific_responsibility_claim": false, "target_Qhat": "exp(-0.1*(10.3-10.0))*2.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "A genuine teammate action may change the team reward but cannot directly terminalize or release the focal record; its unique shared reward is owned once by this interval."
+    },
+    {
+      "trace_id": "T13",
+      "source_roster_label": "on-time delayed reward",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000013,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000013", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8013-000000000013", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8013-000000000013", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.5, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8013-000000000013", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8013-000000000013", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8013-000000000013", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.01},
+        {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8013-000000000013", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.02, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 4, "direction": "input", "receipt_uuid": "20000000-0000-4000-8013-000000000013", "kind": "EXTERNAL_TEAM_REWARD_DELAYED_ON_TIME", "physical_event_time": 10.5, "arrival_time": 11.2, "amount": 1.0},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8013-000000000013", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+        {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8013-000000000013", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=11.0 and NOMINAL_EXPIRY"},
+        {"on_order": 4, "from": "WAITING_REWARD_WATERMARK", "to": "WAITING_REWARD_WATERMARK", "effect": "append unique causal reward because 10.5 is in [10.0,11.0) and 11.2 is not later than 11.25"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "CONSUMED", "effect": "complete watermark CAS emits one release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8013-000000000013"], "ownership_interval": "[10.0,11.0)", "arrival_deadline": 11.25, "actual_arrival": 11.2, "terminal_impulse": "none", "target_Qhat": "exp(-0.1*(10.5-10.0))*1.0 + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "A reward with causal time before T remains owned when it arrives after T but on or before T+0.25; release waits for the watermark."
+    },
+    {
+      "trace_id": "T14",
+      "source_roster_label": "reward after the 0.25-second watermark",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000014,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000014", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8014-000000000014", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8014-000000000014", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.5, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8014-000000000014", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8014-000000000014", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+        {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8014-000000000014", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.01},
+        {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8014-000000000014", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.02, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 4, "direction": "input", "receipt_uuid": "50000000-0000-4000-8014-000000000014", "kind": "REWARD_WATERMARK_MISSING_OR_LATE", "physical_event_time": 11.25, "arrival_time": 11.25, "missing_event_uuid": "20000000-0000-4000-8014-000000000014"},
+        {"order": 5, "direction": "input", "receipt_uuid": "20000000-0000-4000-8014-000000000014", "kind": "EXTERNAL_TEAM_REWARD_LATE", "physical_event_time": 10.5, "arrival_time": 11.26, "amount": 1.0}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 2, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=11.0 and NOMINAL_EXPIRY"},
+        {"on_order": 4, "from": "WAITING_REWARD_WATERMARK", "to": "REJECTED_REWARD_LATENCY", "effect": "declare missing causal reward at T+0.25; materialize no target and emit no score or release"},
+        {"on_order": 5, "from": "REJECTED_REWARD_LATENCY", "to": "REJECTED_REWARD_LATENCY", "effect": "late reward is diagnostic only and cannot reopen or release the record"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": [], "causally_eligible_but_not_admitted_event_uuid": "20000000-0000-4000-8014-000000000014", "ownership_interval": "[10.0,11.0)", "arrival_deadline": 11.25, "actual_arrival": 11.26, "target_Qhat": "not_materialized_due_to_reward_latency_rejection"},
+      "release_count": 0,
+      "terminal_status": "REJECTED_REWARD_LATENCY",
+      "pass_condition": "A one-hundredth-second post-watermark arrival rejects the record; the late receipt cannot repair, score or release it."
+    },
+    {
+      "trace_id": "T15",
+      "source_roster_label": "behavior-version mismatch",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000015,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000015", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8015-000000000015", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8015-000000000015", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8015-000000000015", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "ordered_receipts": [
+        {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8015-000000000015", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0, "behavior_version": "VSP02-MU-V1"},
+        {"order": 2, "direction": "input", "receipt_uuid": "20000000-0000-4000-8015-000000000015", "kind": "EXTERNAL_TEAM_REWARD", "physical_event_time": 10.25, "arrival_time": 10.26, "amount": 1.0},
+        {"order": 3, "direction": "input", "receipt_uuid": "30000000-0000-4000-8015-000000000015", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+        {"order": 4, "direction": "input", "receipt_uuid": "40000000-0000-4000-8015-000000000015", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+        {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8015-000000000015", "kind": "REWARD_WATERMARK_COMPLETE_WITH_VERSION_CHECK", "physical_event_time": 11.25, "arrival_time": 11.25, "record_behavior_version": "VSP02-MU-V1", "collection_duration_policy_version": "VSP02-MU-V2", "collection_duration_critic_version": "VSP02-MU-V2"}
+      ],
+      "expected_state_transitions": [
+        {"on_order": 3, "from": "PENDING", "to": "WAITING_REWARD_WATERMARK", "effect": "freeze T=11.0 and NOMINAL_EXPIRY"},
+        {"on_order": 5, "from": "WAITING_REWARD_WATERMARK", "to": "REJECTED_VERSION_MISMATCH", "effect": "complete rewards do not override strict version mismatch; no importance correction, relabeling, score or release"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": [], "deduplicated_stored_event_uuids": ["20000000-0000-4000-8015-000000000015"], "ownership_interval": "[10.0,11.0)", "terminal_impulse": "none", "target_Qhat": "not_materialized_due_to_version_rejection", "reason_not_owned_into_target": "strict behavior-version mismatch"},
+      "release_count": 0,
+      "terminal_status": "REJECTED_VERSION_MISMATCH",
+      "pass_condition": "The immutable V1 behavior record cannot be consumed by a V2 collection cohort; rejection is stratified and release_count remains zero."
+    },
+    {
+      "trace_id": "T16",
+      "source_roster_label": "four-way physical frame refinement",
+      "initial_escrow_state": {"state": "PENDING", "release_count": 0, "deduplicated_reward_event_uuids": [], "deduplicated_physical_event_uuids": [], "candidate_terminal": null, "branch_isolation": "ORIGINAL and REFINED_X4 are mutually exclusive representations of one logical record"},
+      "immutable_record": {
+        "decision_id": "(00000000-0000-4000-8000-000000000016,1,1,VSP02-MU-V1)", "agent_uuid": "00000000-0000-4000-8000-000000000016", "owner_epoch": 1, "own_renewal_index": 1,
+        "initiation_physical_time_tau": 10.0, "nominal_duration_D": 1.0, "behavior_duration_policy_version": "VSP02-MU-V1", "behavior_probability_vector_over_all_durations": {"1.0": 0.5, "4.0": 0.5}, "behavior_log_probability_of_D": -0.6931471805599453,
+        "learning_eligible_boolean": true, "initiation_information_receipt": {"event_uuid": "10000000-0000-4000-8016-000000000016", "physical_event_time": 10.0, "arrival_time": 10.0, "context_id": "C_FAST"},
+        "current_high_level_skill_id": "SKILL-HOLD-0", "active_roster_version": 7, "partner_policy_family_and_snapshot": "FAMILIAR-1@SNAPSHOT-1", "physical_discount_rate": 0.1, "reward_latency_bound": 0.25, "record_schema_version": "VSP02-ESCROW-V1"
+      },
+      "physical_event_schedule": [
+        {"event_uuid": "20000000-0000-4000-8016-000000000016", "kind": "CONTINUOUS_EXTERNAL_TEAM_REWARD_MEASURE", "physical_event_time": null, "physical_event_time_semantics": "not_applicable_to_continuous_measure; use exact physical_support", "physical_support": "[10.0,11.0)", "rate": 1.0, "integrated_amount": 1.0},
+        {"event_uuid": "30000000-0000-4000-8016-000000000016", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0}
+      ],
+      "frame_branches": {
+        "ORIGINAL": {
+          "integration_segments": [
+            {"segment_index": 1, "physical_interval": "[10.0,11.0)", "integrated_reward": 1.0}
+          ],
+          "ordered_receipts": [
+            {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8016-000000000016", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+            {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8016-000000000016", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+            {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8016-000000000016", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+            {"order": 4, "direction": "input", "receipt_uuid": "20000000-0000-4000-8016-000000000016", "kind": "CONTINUOUS_REWARD_MEASURE_COMPLETE", "physical_event_time": 11.0, "causal_support": "[10.0,11.0)", "arrival_time": 11.1, "integrated_amount": 1.0},
+            {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8016-000000000016", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+            {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8016-000000000016", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+          ],
+          "expected_state_transitions": ["PENDING->WAITING_REWARD_WATERMARK at T=11.0 NOMINAL_EXPIRY", "WAITING_REWARD_WATERMARK->CONSUMED at watermark 11.25"],
+          "release_count": 1,
+          "terminal_status": "CONSUMED"
+        },
+        "REFINED_X4": {
+          "integration_segments": [
+            {"segment_index": 1, "physical_interval": "[10.0,10.25)", "integrated_reward": 0.25},
+            {"segment_index": 2, "physical_interval": "[10.25,10.5)", "integrated_reward": 0.25},
+            {"segment_index": 3, "physical_interval": "[10.5,10.75)", "integrated_reward": 0.25},
+            {"segment_index": 4, "physical_interval": "[10.75,11.0)", "integrated_reward": 0.25}
+          ],
+          "ordered_receipts": [
+            {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8016-000000000016", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+            {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8016-000000000016", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+            {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8016-000000000016", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+            {"order": 4, "direction": "input", "receipt_uuid": "20000000-0000-4000-8016-000000000016", "kind": "CONTINUOUS_REWARD_MEASURE_COMPLETE", "physical_event_time": 11.0, "causal_support": "[10.0,11.0)", "arrival_time": 11.1, "integrated_amount": 1.0, "subinterval_count": 4},
+            {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8016-000000000016", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+            {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8016-000000000016", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+          ],
+          "expected_state_transitions": ["PENDING->WAITING_REWARD_WATERMARK at T=11.0 NOMINAL_EXPIRY", "WAITING_REWARD_WATERMARK->CONSUMED at watermark 11.25"],
+          "release_count": 1,
+          "terminal_status": "CONSUMED"
+        }
+      },
+      "ordered_receipts": [
+        {
+          "branch": "ORIGINAL",
+          "ledger": [
+            {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8016-000000000016", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+            {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8016-000000000016", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+            {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8016-000000000016", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+            {"order": 4, "direction": "input", "receipt_uuid": "20000000-0000-4000-8016-000000000016", "kind": "CONTINUOUS_REWARD_MEASURE_COMPLETE", "physical_event_time": 11.0, "causal_support": "[10.0,11.0)", "arrival_time": 11.1, "integrated_amount": 1.0},
+            {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8016-000000000016", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+            {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8016-000000000016", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+          ]
+        },
+        {
+          "branch": "REFINED_X4",
+          "ledger": [
+            {"order": 1, "direction": "input", "receipt_uuid": "10000000-0000-4000-8016-000000000016", "kind": "DECISION_REGISTERED", "physical_event_time": 10.0, "arrival_time": 10.0},
+            {"order": 2, "direction": "input", "receipt_uuid": "30000000-0000-4000-8016-000000000016", "kind": "NOMINAL_EXPIRY", "physical_event_time": 11.0, "arrival_time": 11.0},
+            {"order": 3, "direction": "input", "receipt_uuid": "40000000-0000-4000-8016-000000000016", "kind": "BOOTSTRAP", "physical_event_time": 11.0, "arrival_time": 11.01, "value": 0.0, "version": "VSP02-MU-V1"},
+            {"order": 4, "direction": "input", "receipt_uuid": "20000000-0000-4000-8016-000000000016", "kind": "CONTINUOUS_REWARD_MEASURE_COMPLETE", "physical_event_time": 11.0, "causal_support": "[10.0,11.0)", "arrival_time": 11.1, "integrated_amount": 1.0, "subinterval_count": 4},
+            {"order": 5, "direction": "input", "receipt_uuid": "50000000-0000-4000-8016-000000000016", "kind": "REWARD_WATERMARK_COMPLETE", "physical_event_time": 11.25, "arrival_time": 11.25},
+            {"order": 6, "direction": "output", "receipt_uuid": "60000000-0000-4000-8016-000000000016", "kind": "LEARNING_RELEASE", "physical_event_time": 11.25, "arrival_time": 11.25}
+          ]
+        }
+      ],
+      "expected_state_transitions": [
+        {"branch": "ORIGINAL", "from": "PENDING", "via": "NOMINAL_EXPIRY then complete watermark", "to": "CONSUMED"},
+        {"branch": "REFINED_X4", "from": "PENDING", "via": "the same NOMINAL_EXPIRY then complete watermark", "to": "CONSUMED"}
+      ],
+      "expected_reward_ownership": {"owned_once_event_uuids": ["20000000-0000-4000-8016-000000000016"], "ownership_count_semantics": "one per isolated branch and one per logical decision realization; branches are never co-registered", "ownership_interval": "[10.0,11.0)", "original_integrated_reward": 1.0, "refined_x4_integrated_reward": 1.0, "target_Qhat_both": "integral_[10.0,11.0) exp(-0.1*(t-10.0))*1.0 dt + exp(-0.1*1.0)*0.0"},
+      "release_count": 1,
+      "terminal_status": "CONSUMED",
+      "pass_condition": "Original and x4 representations have identical decision identity, event UUIDs, physical boundary, integrated reward measure, bootstrap, symbolic target, terminal status and one logical release; segment count alone differs."
+    }
+  ],
+  "coverage_reconciliation": [
+    {"source_order": 1, "source_roster_label": "ordinary nominal expiry", "trace_id": "T01", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 2, "source_roster_label": "early skill completion", "trace_id": "T02", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 3, "source_roster_label": "focal leave", "trace_id": "T03", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 4, "source_roster_label": "focal replacement with new owner epoch", "trace_id": "T04", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 5, "source_roster_label": "episode terminal", "trace_id": "T05", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 6, "source_roster_label": "forced interrupt", "trace_id": "T06", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 7, "source_roster_label": "simultaneous competing causes", "trace_id": "T07", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 8, "source_roster_label": "duplicate terminal notification", "trace_id": "T08", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 9, "source_roster_label": "reordered notification", "trace_id": "T09", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 10, "source_roster_label": "replayed record", "trace_id": "T10", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 11, "source_roster_label": "other-agent sham union events", "trace_id": "T11", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 12, "source_roster_label": "genuine teammate physical action", "trace_id": "T12", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 13, "source_roster_label": "on-time delayed reward", "trace_id": "T13", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 14, "source_roster_label": "reward after the 0.25-second watermark", "trace_id": "T14", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 15, "source_roster_label": "behavior-version mismatch", "trace_id": "T15", "status": "FROZEN_EXACTLY_ONCE"},
+    {"source_order": 16, "source_roster_label": "four-way physical frame refinement", "trace_id": "T16", "status": "FROZEN_EXACTLY_ONCE"}
+  ],
+  "matrix_gate": {
+    "row_field_requirements": [
+      "initial_escrow_state",
+      "complete immutable_record",
+      "physical_event_schedule with exact times and UUIDs",
+      "ordered_receipts with exact arrival times and UUIDs",
+      "expected_state_transitions",
+      "expected_reward_ownership",
+      "release_count",
+      "terminal_status",
+      "pass_condition"
+    ],
+    "pass_rule": "All sixteen rows execute once in T01-T16 order in isolated registries. T01-T13 and both isolated representations of T16 must end CONSUMED with logical release_count=1. T14 must end REJECTED_REWARD_LATENCY and T15 REJECTED_VERSION_MISMATCH, each with release_count=0. Any missing, extra, reordered or replaced row; mutable header; UUID conflict; arrival-order cause selection; invalid reward ownership; post-terminal mutation; duplicate release; version relabel; frame-dependent logical outcome; or undeclared exception is INVALID_ESCROW_ESTIMATOR and blocks every Stage-B or Stage-C interpretation.",
+    "exact_release_vector_T01_to_T16": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1],
+    "exact_terminal_vector_T01_to_T16": ["CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "CONSUMED", "REJECTED_REWARD_LATENCY", "REJECTED_VERSION_MISMATCH", "CONSUMED"],
+    "no_optional_stopping": true,
+    "no_row_replacement": true,
+    "no_stage_b_authorization": true,
+    "no_stage_c_authorization": true,
+    "no_code_authorization": true,
+    "no_compute_authorization": true,
+    "no_cpm_dispatch_authorization": true
+  },
+  "completion": {
+    "status": "ADVISORY_REFINEMENT_MATERIALIZED",
+    "exact_gap_addressed": "The existing sixteen Stage-A roster labels now each bind an initial escrow state, complete immutable record, exact physical and arrival schedule with UUIDs, ordered receipt ledger, expected state transitions, reward ownership, release_count and terminal status.",
+    "candidate_artifact_modified": false,
+    "source_campaign_modified": false,
+    "pro_archive_modified": false,
+    "project_state_modified": false,
+    "code_modified": false,
+    "compute_run": false,
+    "git_used": false,
+    "cpm_dispatched": false,
+    "VSP_05_advanced": false,
+    "g0_g51_pause_preserved": true,
+    "next_boundary": "Ops identity intake and one candidate-scoped design-assertion recheck of this exact Stage-A refinement gap only"
+  }
+}
