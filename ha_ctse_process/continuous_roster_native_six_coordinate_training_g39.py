@@ -15,6 +15,13 @@ from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from ha_ctse_process.continuous_roster_input_schema import (
+    CONSTANT_COORDINATES,
+    FULL_OBSERVATION_DIM,
+    REMOVABLE_COLUMNS,
+    REMOVED_ACTOR_WEIGHTS,
+    RETAINED_OBSERVATION_DIM,
+)
 from ha_ctse_process.continuous_roster_seed import (
     bootstrap_seed_from_base,
     seed_block_from_bases,
@@ -29,11 +36,6 @@ ARMS = (CONST10_ARM, NATIVE6_ARM)
 CONST10_INPUT = "CONST10"
 NATIVE6_INPUT = "NATIVE6"
 FOLDED_CONST6_INPUT = "FOLDED_CONST6"
-FULL_OBSERVATION_DIM = 10
-RETAINED_OBSERVATION_DIM = 6
-CONSTANT_COORDINATES = (0.5, 0.5, 0.5, 24.0 / 47.0)
-REMOVABLE_COLUMNS = (6, 7, 8, 9)
-REMOVED_ACTOR_WEIGHTS = 136
 HIDDEN_DIM = 32
 INITIAL_LOG_STD = -1.0
 INITIAL_ACTION_TOLERANCE = 1e-7

@@ -14,6 +14,13 @@ from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from ha_ctse_process.continuous_roster_input_schema import (
+    CONSTANT_COORDINATES,
+    FULL_OBSERVATION_DIM,
+    REMOVABLE_COLUMNS,
+    REMOVED_ACTOR_WEIGHTS,
+    RETAINED_OBSERVATION_DIM,
+)
 from ha_ctse_process.continuous_roster_seed import (
     bootstrap_seed_from_base,
     seed_block_from_bases,
@@ -29,11 +36,6 @@ FULL10_INPUT = "FULL10"
 FOLD6_INPUT = "FOLD6"
 FOLDED6_INPUT = "FOLDED6"
 INPUT_MODES = (FULL10_INPUT, FOLD6_INPUT, FOLDED6_INPUT)
-FULL_OBSERVATION_DIM = 10
-RETAINED_OBSERVATION_DIM = 6
-CONSTANT_COORDINATES = (0.5, 0.5, 0.5, 24.0 / 47.0)
-REMOVABLE_COLUMNS = (6, 7, 8, 9)
-REMOVED_ACTOR_WEIGHTS = 136
 HIDDEN_DIM = 32
 INITIAL_LOG_STD = -1.0
 GRADIENT_LIVE_TOLERANCE = 1e-12
