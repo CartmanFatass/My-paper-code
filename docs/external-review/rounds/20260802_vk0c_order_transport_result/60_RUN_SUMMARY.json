@@ -1,0 +1,464 @@
+{
+  "analyzer_git_blob_sha1": "d22017dbaf1b9c85a41c9e2f89177b20e82189ff",
+  "bootstrap": {
+    "iterations": 10000,
+    "seed": 9095648416924653438,
+    "seed_derivation": "int.from_bytes(sha256('VK0_TOY_RENEWAL_URGENCY|bootstrap')[:8], 'big')"
+  },
+  "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+  "factor_a": {
+    "fresh_D_R_equivalent_within_materiality": true,
+    "fresh_D_R_pooled": {
+      "lower_95": 2.7322908972244763e-05,
+      "n": 2688,
+      "point": 0.0003832385254432351,
+      "upper_95": 0.0007408897506234487
+    },
+    "present": true,
+    "promoted": false
+  },
+  "factor_b": {
+    "fresh_D_R_equivalent_within_materiality": true,
+    "identified": true,
+    "propagation_split_reproduced": true,
+    "trained_D_R_lcb95_above_materiality": true
+  },
+  "factor_c": {
+    "a_r_pooled": {
+      "lower_95": 1.2131954303210581,
+      "n": 2688,
+      "point": 1.2493115850952763,
+      "upper_95": 1.284052040447796
+    },
+    "a_r_pooled_lcb95_above_materiality": true,
+    "identified": true,
+    "requires_factor_a_present": true
+  },
+  "factor_d": {
+    "canonical_stratum_equivalent": false,
+    "identified": false,
+    "pooled_equivalent": false,
+    "propagation_split_reproduced": true,
+    "reversed_stratum_equivalent": false,
+    "stratum_direct_effects_diverge": false
+  },
+  "matched_state_quantities": {
+    "A_R": {
+      "CANONICAL_OCCUPANCY": {
+        "lower_95": 1.2522160895821188,
+        "n": 1344,
+        "point": 1.3119848949536301,
+        "upper_95": 1.3758118588667088
+      },
+      "REVERSED_OCCUPANCY": {
+        "lower_95": 1.1480780591532362,
+        "n": 1344,
+        "point": 1.1866382752369227,
+        "upper_95": 1.2251797976833494
+      },
+      "pooled": {
+        "lower_95": 1.2131954303210581,
+        "n": 2688,
+        "point": 1.2493115850952763,
+        "upper_95": 1.284052040447796
+      }
+    },
+    "D_R_fresh": {
+      "CANONICAL_OCCUPANCY": {
+        "lower_95": 3.864228456731499e-05,
+        "n": 1344,
+        "point": 0.00048453527653478354,
+        "upper_95": 0.0009526437290196094
+      },
+      "REVERSED_OCCUPANCY": {
+        "lower_95": -7.04393170001631e-05,
+        "n": 1344,
+        "point": 0.00028194177435168663,
+        "upper_95": 0.000642071271001497
+      },
+      "pooled": {
+        "lower_95": 2.7322908972244763e-05,
+        "n": 2688,
+        "point": 0.0003832385254432351,
+        "upper_95": 0.0007408897506234487
+      }
+    },
+    "D_R_trained": {
+      "CANONICAL_OCCUPANCY": {
+        "lower_95": 1.2525296124405918,
+        "n": 1344,
+        "point": 1.312469430230165,
+        "upper_95": 1.37665277735986
+      },
+      "REVERSED_OCCUPANCY": {
+        "lower_95": 1.148252991039915,
+        "n": 1344,
+        "point": 1.1869202170112745,
+        "upper_95": 1.2255319317120315
+      },
+      "pooled": {
+        "lower_95": 1.2135442713898072,
+        "n": 2688,
+        "point": 1.2496948236207197,
+        "upper_95": 1.2845556944384324
+      }
+    },
+    "TV_fresh": {
+      "CANONICAL_OCCUPANCY": {
+        "lower_95": 0.0019156427592133458,
+        "n": 1344,
+        "point": 0.002227626537251199,
+        "upper_95": 0.0025612306773873075
+      },
+      "REVERSED_OCCUPANCY": {
+        "lower_95": 0.001969875555095025,
+        "n": 1344,
+        "point": 0.0022701829153893116,
+        "upper_95": 0.002569297278650876
+      },
+      "pooled": {
+        "lower_95": 0.001947962890011796,
+        "n": 2688,
+        "point": 0.002248904726320255,
+        "upper_95": 0.0025550482599487907
+      }
+    },
+    "TV_trained": {
+      "CANONICAL_OCCUPANCY": {
+        "lower_95": 0.546679428902035,
+        "n": 1344,
+        "point": 0.5686454143469015,
+        "upper_95": 0.5878651006850428
+      },
+      "REVERSED_OCCUPANCY": {
+        "lower_95": 0.6353488427697279,
+        "n": 1344,
+        "point": 0.6683205365427964,
+        "upper_95": 0.7013796680351373
+      },
+      "pooled": {
+        "lower_95": 0.6023305303869427,
+        "n": 2688,
+        "point": 0.618482975444849,
+        "upper_95": 0.6342217398650686
+      }
+    },
+    "fast_coverage_failure_mass": {
+      "fresh": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.7381462031098982,
+            "n": 1344,
+            "point": 0.7415082083239621,
+            "upper_95": 0.7448541423170545
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.6952485441248829,
+            "n": 1344,
+            "point": 0.7131801252202248,
+            "upper_95": 0.7290904605786862
+          },
+          "pooled": {
+            "lower_95": 0.718037985581413,
+            "n": 2688,
+            "point": 0.7273441667720936,
+            "upper_95": 0.7354004763354646
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.7383154917574658,
+            "n": 1344,
+            "point": 0.7417537610261987,
+            "upper_95": 0.7452153749405585
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.6954435107040589,
+            "n": 1344,
+            "point": 0.7133297720202458,
+            "upper_95": 0.7292843903850734
+          },
+          "pooled": {
+            "lower_95": 0.7182562348772621,
+            "n": 2688,
+            "point": 0.7275417665232223,
+            "upper_95": 0.7356181566720322
+          }
+        }
+      },
+      "trained": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.00017075127781952847,
+            "n": 1344,
+            "point": 0.0017578569603514526,
+            "upper_95": 0.004361596877939041
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.00887066763884999,
+            "n": 1344,
+            "point": 0.014197244198572004,
+            "upper_95": 0.019620054328132734
+          },
+          "pooled": {
+            "lower_95": 0.004786989896527553,
+            "n": 2688,
+            "point": 0.007977550579461727,
+            "upper_95": 0.01122097542832678
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.07021293344050494,
+            "n": 1344,
+            "point": 0.08465254463973375,
+            "upper_95": 0.09857210532173431
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.3637882909661586,
+            "n": 1344,
+            "point": 0.38464290916295163,
+            "upper_95": 0.4060975580727675
+          },
+          "pooled": {
+            "lower_95": 0.21630420026260871,
+            "n": 2688,
+            "point": 0.23464772690134272,
+            "upper_95": 0.25321615534231806
+          }
+        }
+      }
+    },
+    "optimal_assignment_mass": {
+      "fresh": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.09128684597971819,
+            "n": 1344,
+            "point": 0.09267537911682794,
+            "upper_95": 0.09409544180696697
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.10390633502081961,
+            "n": 1344,
+            "point": 0.10600651452068387,
+            "upper_95": 0.10860435805540408
+          },
+          "pooled": {
+            "lower_95": 0.09785256812702896,
+            "n": 2688,
+            "point": 0.0993409468187559,
+            "upper_95": 0.10100231253728623
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.09111633315406255,
+            "n": 1344,
+            "point": 0.09258712438047557,
+            "upper_95": 0.09407224449909397
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.10383933064224118,
+            "n": 1344,
+            "point": 0.10591047651687882,
+            "upper_95": 0.10844549764910558
+          },
+          "pooled": {
+            "lower_95": 0.09772583038163139,
+            "n": 2688,
+            "point": 0.09924880044867722,
+            "upper_95": 0.10091489282224288
+          }
+        }
+      },
+      "trained": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.9926487808934075,
+            "n": 1344,
+            "point": 0.9971724951635171,
+            "upper_95": 0.9997635540560146
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.5215798150148433,
+            "n": 1344,
+            "point": 0.5402691174354034,
+            "upper_95": 0.558249869304398
+          },
+          "pooled": {
+            "lower_95": 0.7474463815014788,
+            "n": 2688,
+            "point": 0.7687208062994602,
+            "upper_95": 0.789614415430699
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.4472761982968855,
+            "n": 1344,
+            "point": 0.4721856713345228,
+            "upper_95": 0.4955798767165424
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.04380802344904941,
+            "n": 1344,
+            "point": 0.0654795220417923,
+            "upper_95": 0.08615095076330609
+          },
+          "pooled": {
+            "lower_95": 0.24418530069422217,
+            "n": 2688,
+            "point": 0.26883259668815757,
+            "upper_95": 0.2934609239370739
+          }
+        }
+      }
+    },
+    "slow_coverage_failure_mass": {
+      "fresh": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.40402879416091697,
+            "n": 1344,
+            "point": 0.4062277738493695,
+            "upper_95": 0.40850329505162253
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.43819704487492206,
+            "n": 1344,
+            "point": 0.44442237373982796,
+            "upper_95": 0.45101420487079447
+          },
+          "pooled": {
+            "lower_95": 0.4219840603727043,
+            "n": 2688,
+            "point": 0.4253250737945987,
+            "upper_95": 0.42884174528665325
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.40391060685725527,
+            "n": 1344,
+            "point": 0.40617603525774676,
+            "upper_95": 0.40853866788500715
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.43813232329281654,
+            "n": 1344,
+            "point": 0.44438550364954743,
+            "upper_95": 0.45100098458977206
+          },
+          "pooled": {
+            "lower_95": 0.421926025299862,
+            "n": 2688,
+            "point": 0.42528076945364707,
+            "upper_95": 0.4288343900141117
+          }
+        }
+      },
+      "trained": {
+        "canonical": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 3.4834013227774906e-05,
+            "n": 1344,
+            "point": 0.0010805927767008154,
+            "upper_95": 0.0034049705030662998
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.42612284446735293,
+            "n": 1344,
+            "point": 0.44558986019328484,
+            "upper_95": 0.4653642474083303
+          },
+          "pooled": {
+            "lower_95": 0.20266572190225307,
+            "n": 2688,
+            "point": 0.2233352264849928,
+            "upper_95": 0.24437843818007848
+          }
+        },
+        "reversed": {
+          "CANONICAL_OCCUPANCY": {
+            "lower_95": 0.43125871318548603,
+            "n": 1344,
+            "point": 0.44317367718938444,
+            "upper_95": 0.45678895154192944
+          },
+          "REVERSED_OCCUPANCY": {
+            "lower_95": 0.537642067027316,
+            "n": 1344,
+            "point": 0.5499122820334149,
+            "upper_95": 0.5608998006778444
+          },
+          "pooled": {
+            "lower_95": 0.48543906217330024,
+            "n": 2688,
+            "point": 0.49654297961139965,
+            "upper_95": 0.507612562593007
+          }
+        }
+      }
+    }
+  },
+  "propagation_competence": {
+    "canonical": {
+      "fast_match": {
+        "lower_95": 0.9953929102531434,
+        "n": 15360,
+        "point": 0.9981171811682307,
+        "upper_95": 0.99973684729656
+      },
+      "slow_match": {
+        "lower_95": 0.9980743792860981,
+        "n": 15360,
+        "point": 0.9990775884185427,
+        "upper_95": 0.9998032566688391
+      }
+    },
+    "canonical_competence_above_floor": true,
+    "reversed": {
+      "fast_match": {
+        "lower_95": 0.5805771452671001,
+        "n": 15360,
+        "point": 0.5984898535682127,
+        "upper_95": 0.6190276902408199
+      },
+      "slow_match": {
+        "lower_95": 0.5007558839851907,
+        "n": 15360,
+        "point": 0.5057250467428871,
+        "upper_95": 0.5148366557784884
+      }
+    },
+    "reversed_competence_below_floor": true,
+    "split_reproduced": true
+  },
+  "residual": {
+    "code": null,
+    "reasoning": "a causal factor was identified decisively; no residual branch applies"
+  },
+  "result": {
+    "code": "VK0C_FACTORIZED_RECORD",
+    "labels": [
+      "STRUCTURAL_AR_ORDER_SENSITIVITY_PRESENT",
+      "LEARNED_CANONICAL_ORDER_SPECIALIZATION_IDENTIFIED",
+      "STRUCTURAL_ORDER_SENSITIVITY_TRAINING_AMPLIFIED"
+    ]
+  },
+  "row_counts": {
+    "control_rows": 43014,
+    "matched_state_rows": 172032,
+    "propagation_rows": 12288
+  },
+  "training_seeds": [
+    2026080101,
+    2026080102,
+    2026080103,
+    2026080104,
+    2026080105,
+    2026080106
+  ],
+  "vk0c_schema_version": "vk0c-1"
+}
