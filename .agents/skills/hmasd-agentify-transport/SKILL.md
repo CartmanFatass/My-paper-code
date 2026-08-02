@@ -31,11 +31,17 @@ requester; a future barrier-dependent follow-up belongs in a later batch.
 
 ## Runtime preflight
 
-Before interpreting any tab/key state or attempting an item, run:
+Before interpreting any tab/key state or attempting an item, run the following
+through the shell with `sandbox_permissions=require_escalated` because Agentify
+Desktop writes its existing user profile and launches Chrome:
 
 ```powershell
 & .agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
 ```
+
+Do not move the state/profile to `C:\tmp`, create another profile or substitute
+a bare Chrome launch. If escalation is denied, report that exact internal
+runtime error to WDM and keep the batch pending.
 
 Require its `AGENTIFY_RUNTIME_READY` receipt, then call one scoped
 `agentify_status`. A missing Agentify service or browser process is an Operator runtime defect, not an item result.

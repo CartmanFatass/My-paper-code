@@ -23,6 +23,7 @@ foreach ($entry in @(
     @($researchSkill, 'AGENTIFY_REVIEW_BATCH_REQUEST'),
     @($operator, 'agentify_transport_runtime_authority=exclusive'),
     @($operator, 'runtime_preflight_owner=agentify_transport_operator'),
+    @($operator, 'runtime_preflight_execution=escalated_gui_process'),
     @($operator, 'runtime_setup_failure_route=workflow_design_manager_not_requester'),
     @($operator, 'batch_terminal_status=COMPLETE|ERROR'),
     @($operator, 'request_fields=batch_id|manifest_path|return_task_id'),
@@ -41,6 +42,8 @@ foreach ($entry in @(
     @($transportSkill, 'selects the exact target and'),
     @($transportSkill, 'A ChatGPT Pro item uses `GPT-5.6 Pro`'),
     @($transportSkill, 'ensure_agentify_runtime.ps1'),
+    @($transportSkill, '`sandbox_permissions=require_escalated`'),
+    @($transportSkill, 'Do not move the state/profile to `C:\tmp`'),
     @($transportSkill, 'A missing Agentify service or browser process is an Operator runtime defect, not an item result'),
     @($transportSkill, 'do not send a batch `ERROR` to the requester'),
     @($transportSkill, 'Never claim an action that no tool result proves')

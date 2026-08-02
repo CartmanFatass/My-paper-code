@@ -5,6 +5,7 @@ role=agentify_transport_operator
 agentify_transport_runtime_authority=exclusive
 runtime_preflight_owner=agentify_transport_operator
 runtime_preflight_script=.agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
+runtime_preflight_execution=escalated_gui_process
 runtime_setup_failure_route=workflow_design_manager_not_requester
 runtime_success_claim_evidence=preflight_script_receipt_plus_scoped_agentify_status
 other_authority=none
@@ -37,6 +38,8 @@ Only its service/browser process receipt plus a successful scoped Agentify statu
 runtime-ready claim. Missing Agentify Desktop service or Chrome is the operator's setup
 defect: repair it locally or report it to WDM while keeping the batch pending;
 never convert it into an item or batch error returned to the requester.
+Because the service writes its existing user profile and launches a GUI browser,
+the preflight is executed with the shell's explicit elevated permission path.
 
 Before each send the operator passes `expected_model` to the query. Agentify
 keeps the current model when it already matches or selects the exact visible
