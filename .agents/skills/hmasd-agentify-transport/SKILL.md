@@ -29,9 +29,26 @@ named standalone question; do not prepend metadata, select science or load
 requester history. A manifest may contain only questions already frozen by the
 requester; a future barrier-dependent follow-up belongs in a later batch.
 
+## Runtime preflight
+
+Before interpreting any tab/key state or attempting an item, run:
+
+```powershell
+& .agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
+```
+
+Require its `AGENTIFY_RUNTIME_READY` receipt, then call one scoped
+`agentify_status`. A missing Agentify service or browser process is an Operator runtime defect, not an item result.
+Repair the runtime and repeat only this preflight. If it still
+fails, report the exact script/tool error to WDM and keep the batch pending; do not send a batch `ERROR` to the requester.
+Residual `tabId`, `activeQuery` or
+`waiting_for_ready` data never proves that Chrome is running. Never claim
+runtime readiness without both actual tool results.
+
 ## Normal path
 
-1. Read and validate the manifest. If it cannot be read or processing cannot
+1. Complete the runtime preflight, then read and validate the manifest. If the
+   manifest cannot be read or processing cannot
    begin, send one `AGENTIFY_REVIEW_BATCH_RESULT` with `status=ERROR`; do not
    attempt any item.
 2. For every item in manifest order, read the question once and call
@@ -63,13 +80,14 @@ messages supply the inter-batch queue; do not add a registry or scheduler.
 ## One simple fallback
 
 Never call `agentify_query` twice for one item. After an error, call
-`agentify_status` once for the same key. If the same page is already generating,
-call `agentify_wait_response` once with the same key, provider and timeout.
+`agentify_status` once for the same key. If the same page still has an active
+query, call `agentify_wait_response` once with the same key, provider and timeout.
 That blocking call sends nothing and returns only after natural completion. Write
-and return its response exactly like the normal path. If status shows another
-active phase such as `waiting_for_ready`, or if the wait also errors, mark that
-key unavailable for the remainder of the batch and do not attempt its later
-items. An idle key keeps the ordinary continue-on-error behavior.
+and return its response exactly like the normal path. If the wait also errors
+while the query remains active, report the exact runtime defect to WDM and keep
+the affected item pending; do not relabel it as a scientific/reviewer failure or
+return it to the requester. An idle key keeps the ordinary continue-on-error
+behavior.
 Do not navigate,
 switch keys, use `agentify_review_query`, recover an old response, create a
 monitor or invent another recovery path.
