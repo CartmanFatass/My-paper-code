@@ -9,7 +9,7 @@ from envs.pettingzoo.continuous_alice_bob import ContinuousAliceBobEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from hmasd.agent import HMASDAgent
 from config_continuous_alice_bob import Config
-from logger import init_multiproc_logging, main_logger
+from hmasd.logging import init_multiproc_logging, main_logger
 
 def plot_trajectories_with_skills(log_dir, episode, trajectories, button_pos, diamond_pos, 
                                  button_colors, diamond_colors, team_skills, agent_skills_history, k, 

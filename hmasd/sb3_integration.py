@@ -10,7 +10,7 @@ from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import VecMonitor, VecEnvWrapper
 from stable_baselines3.common.utils import safe_mean
-from logger import main_logger
+from hmasd.logging import main_logger
 import time
 from typing import Dict, Any, Optional, List
 

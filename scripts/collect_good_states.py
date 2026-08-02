@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
-from logger import main_logger, init_multiproc_logging
+from hmasd.logging import main_logger, init_multiproc_logging
 from config_1 import Config
 from hmasd.agent import HMASDAgent
 

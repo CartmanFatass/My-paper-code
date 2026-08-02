@@ -4,7 +4,7 @@ from typing import Tuple
 import numpy as np
 import torch
 
-from logger import main_logger
+from hmasd.logging import main_logger
 from hmasd.agent import HMASDAgent
 
 

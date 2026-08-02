@@ -21,7 +21,7 @@ except ImportError:
     KMeans = None
     cdist = None
 
-from logger import main_logger
+from hmasd.logging import main_logger
 from gnn_hmasd.networks import GNNRoleAssigner, TaskExecutor
 from hmasd.utils import ReplayBuffer, compute_gae
 

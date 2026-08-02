@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from logger import main_logger
+from hmasd.logging import main_logger
 
 class VAEEncoder(nn.Module):
     """

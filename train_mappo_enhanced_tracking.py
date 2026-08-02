@@ -13,7 +13,7 @@ import traceback
 import sys
 import gc
 import psutil
-from logger import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
+from hmasd.logging import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
 
 # 导入 PyTorch 相关库
 import torch.nn as nn

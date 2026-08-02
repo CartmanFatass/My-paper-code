@@ -5,7 +5,7 @@
 
 import torch
 import numpy as np
-from logger import main_logger
+from hmasd.logging import main_logger
 from typing import Tuple, Optional, Union, List
 import threading
 import time

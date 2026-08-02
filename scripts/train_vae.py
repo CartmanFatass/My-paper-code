@@ -19,7 +19,7 @@ import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from manifold_hmasd.vae import StateManifoldVAE, vae_loss_function, ManifoldQualityMetrics
-from logger import main_logger
+from hmasd.logging import main_logger
 
 class StateDataset(Dataset):
     """

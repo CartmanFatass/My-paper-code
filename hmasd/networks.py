@@ -6,7 +6,7 @@ import operator
 import time
 from torch.distributions import Normal, Categorical
 import logging
-from logger import main_logger
+from hmasd.logging import main_logger
 from hmasd.r_mappo_utils import CNNBase, MLPBase, RNNLayer, ACTLayer, PopArt, check, get_shape_from_obs_space, init
 
 def sparsemax(logits, dim=-1):

@@ -10,7 +10,7 @@ import numpy as np
 import gym
 from gym import spaces
 from typing import Dict, Any, Tuple, List
-from logger import main_logger
+from hmasd.logging import main_logger
 
 
 class ProbeEnvironment:

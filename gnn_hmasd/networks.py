@@ -15,7 +15,7 @@ except ImportError:
     Data = None
     print("警告: PyTorch Geometric 未安装。GNN相关功能将不可用。请运行 'pip install torch_geometric' 进行安装。")
 
-from logger import main_logger
+from hmasd.logging import main_logger
 
 def initialize_weights(module, gain=1.0, last_layer_gain=None):
     """

@@ -18,7 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config_1 import Config
 from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
 from manifold_hmasd.agent import ManifoldHMASDAgent
-from logger import main_logger
+from hmasd.logging import main_logger
 
 class PolicyRolloutCollector:
     """

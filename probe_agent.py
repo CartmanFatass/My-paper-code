@@ -11,7 +11,7 @@
 import torch
 import numpy as np
 from typing import Dict, Any, Optional, List, Tuple
-from logger import main_logger
+from hmasd.logging import main_logger
 from hmasd.agent import HMASDAgent
 from config_1 import Config
 

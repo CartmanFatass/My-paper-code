@@ -25,7 +25,7 @@ sys.path.insert(0, project_root)
 # 导入训练函数和配置
 from train_multiproc_config_1 import train, get_device, make_env, parse_args as parse_train_args
 from config_1 import Config
-from logger import init_multiproc_logging, get_logger, LOG_LEVELS
+from hmasd.logging import init_multiproc_logging, get_logger, LOG_LEVELS
 
 
 def objective(trial):

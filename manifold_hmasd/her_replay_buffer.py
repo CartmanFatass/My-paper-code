@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from collections import deque
 import random
-from logger import main_logger
+from hmasd.logging import main_logger
 
 class GoalConditionedExperience:
     """

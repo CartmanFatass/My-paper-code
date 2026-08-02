@@ -18,7 +18,7 @@ import matplotlib
 if matplotlib.get_backend() != 'Agg':
     matplotlib.use('Agg')
 
-from logger import main_logger
+from hmasd.logging import main_logger
 from manifold_hmasd.vae import StateManifoldVAE
 from manifold_hmasd.her_replay_buffer import HERReplayBuffer, create_manifold_her_buffer
 from hmasd.utils import compute_gae

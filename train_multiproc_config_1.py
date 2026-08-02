@@ -19,7 +19,7 @@ import multiprocessing as mp
 import pandas as pd
 from collections import defaultdict, deque
 # from functools import partial # No longer needed for make_env directly
-from logger import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
+from hmasd.logging import init_multiproc_logging, get_logger, shutdown_logging, LOG_LEVELS, set_log_level
 
 # 初始化主日志器（如果尚未初始化）
 main_logger = get_logger("HMASD-Main")

@@ -3,7 +3,7 @@ import numpy as np
 import time
 from collections import deque
 import random
-from logger import main_logger
+from hmasd.logging import main_logger
 from hmasd.process_exploration import SkillProcessOutcomeExtractor
 
 class ReplayBuffer:

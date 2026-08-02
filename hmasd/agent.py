@@ -47,7 +47,7 @@ except ModuleNotFoundError:
             self.var = m_2 / total_count
             self.count = total_count
 
-from logger import main_logger
+from hmasd.logging import main_logger
 from hmasd.networks import SkillCoordinator, SkillDiscoverer, TeamDiscriminator, IndividualDiscriminator
 from hmasd.ha_ctse import (
     CompactIndividualDiscriminator,
