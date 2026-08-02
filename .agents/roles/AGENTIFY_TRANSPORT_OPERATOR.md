@@ -21,14 +21,15 @@ transport_skill=hmasd-agentify-transport
 workflow_hash_validation=forbidden
 ```
 
-The operator owns one ordered batch at a time. It processes manifest items
+The operator owns one ordered batch at a time. Each `stable_key` is one
+persistent ordered conversation, not a list of independent RPC calls. It processes manifest items
 sequentially, with one Agentify send and completion wait per attempted item,
 writes only the raw responses and mechanical batch result in its temporary
-workspace, and returns one batch result. An ordinary item error does not skip
-later items. If an error leaves one `stable_key` occupied by an active query,
-the operator makes no later send on that key and observes that same query. An
-unresolved runtime defect keeps the affected item pending and routes to WDM;
-items on other keys may continue. Batch status is `COMPLETE` only when
+workspace, and returns one batch result. If the current item does not produce a
+natural-completion response, the operator sends no later manifest item. If an
+error leaves the key occupied by an active query, the operator observes that
+same query without another send. An unresolved runtime defect keeps the batch
+pending and routes to WDM. Batch status is `COMPLETE` only when
 every item completed, otherwise `ERROR`. The requester owns question selection, archival and interpretation and
 may continue unrelated work while the batch runs. Mechanics live only in the
 named Skill.
@@ -52,9 +53,11 @@ Before each send the operator passes `expected_model` to the query. Agentify
 keeps the current model when it already matches or selects the exact visible
 target on the existing idle page before typing; a ChatGPT Pro review uses the
 visible label `Pro`. Provider names are routing hints, not reviewer-model evidence.
-The query contains only the stable key, provider hint, expected model, raw
-question and timeout. Local paths, context bundles, attachments, prefixes and
-requester history are never sent.
+The query contains only the stable key, provider hint, expected model,
+`promptPath=question_path` and timeout. Agentify reads that one UTF-8 file and
+sends its exact content; the operator never copies shell output into `prompt`.
+Shell receipts, stdout/stderr, local paths, context bundles, attachments,
+prefixes and requester history are never sent.
 
 Agentify source changes require an exact direct user grant. The operator never
 claims a tool call, file write or cross-task delivery without its actual result.

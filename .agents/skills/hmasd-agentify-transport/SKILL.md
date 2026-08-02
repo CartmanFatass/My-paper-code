@@ -24,8 +24,10 @@ Every item has exactly:
 request_id|review_channel|provider|expected_model|stable_key|question_path
 ```
 
-`provider` is `chatgpt` or `gemini`. Preserve manifest order. Read only each
-named standalone question; do not prepend metadata, select science or load
+`provider` is `chatgpt` or `gemini`. Preserve manifest order. Each `stable_key`
+is one persistent ordered conversation, not an independent RPC queue. Do not
+read or copy a question through shell output. Pass its literal path to Agentify;
+do not prepend metadata, select science or load
 requester history. A manifest may contain only questions already frozen by the
 requester; a future barrier-dependent follow-up belongs in a later batch.
 
@@ -73,21 +75,25 @@ fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
    manifest cannot be read or processing cannot
    begin, send one `AGENTIFY_REVIEW_BATCH_RESULT` with `status=ERROR`; do not
    attempt any item.
-2. For every item in manifest order, read the question once and call
+2. For every item in manifest order, call
    `agentify_query` once with exactly `key=stable_key`, `model=provider`,
-   `expectedModel=expected_model`, the question as `prompt`, and
+   `expectedModel=expected_model`, `promptPath=question_path`, and
    `timeoutMs=2700000`. A ChatGPT Pro item uses the exact visible label `Pro`. On the existing
    idle page, Agentify keeps a matching model or selects the exact target and
    confirms it before typing. If that target is unavailable, record item
-   `ERROR` before send. Omit every optional content field, including
-   `contextPaths`, `attachments`, `bundleName` and `promptPrefix`. The tool owns
+   `ERROR` before send. Omit `prompt`. Omit every optional content field, including
+   `contextPaths`, `attachments`, `bundleName` and `promptPrefix`. Agentify reads
+   the exact UTF-8 question file itself; shell stdout/stderr, receipts, warnings,
+   paths and diagnostics never enter the prompt. The tool owns
    whole-payload insertion, one send and the natural-completion wait.
 3. On success, write the actual returned assistant text to
    `temp/sessions/agentify_transport_operator/<batch_id>/<request_id>/response.md`
    and record item `status=COMPLETE`. On error, perform the single read-only
    key check and the matching fallback below before assigning a terminal item
-   status. Record `ERROR` only after the one applicable recovery is exhausted;
-   items on other keys may continue.
+   status. `Pro thinking`, a timeout, an incomplete fragment or uncertain page
+   state is not a response and never advances the manifest. Record `ERROR` only
+   after the one applicable recovery is exhausted, then stop the batch without
+   sending any later item.
 4. After every item is terminal, write the ordered item results to
    `temp/sessions/agentify_transport_operator/<batch_id>/results.json` and send
    one `AGENTIFY_REVIEW_BATCH_RESULT` to `return_task_id` with
@@ -113,7 +119,7 @@ and return its response exactly like the normal path. If the wait also errors
 while the query remains active, report the exact runtime defect to WDM and keep
 the affected item pending; do not relabel it as a scientific/reviewer failure or
 return it to the requester. If the one page-recovery query also fails, record the
-real item error and continue normally.
+real item error and stop the batch.
 Do not navigate,
 switch keys, use `agentify_review_query`, recover an old response, create a
 monitor or invent another recovery path.
