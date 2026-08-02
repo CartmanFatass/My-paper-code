@@ -25,7 +25,10 @@ request_id|review_channel|provider|expected_model|stable_key|question_path
 ```
 
 `provider` is `chatgpt` or `gemini`. Preserve manifest order. Each `stable_key`
-is one persistent ordered conversation, not an independent RPC queue. Do not
+must name the already-existing pinned Agentify tab for that provider
+(`protectedTab=true` in `agentify_tabs`); it is one persistent ordered
+conversation, not an independent RPC queue. Never invent a smoke key or create
+a second page. Do not
 read or copy a question through shell output. Pass its literal path to Agentify;
 do not prepend metadata, select science or load
 requester history. A manifest may contain only questions already frozen by the
@@ -46,8 +49,11 @@ with profile directory `Default`. Do not move it to `C:\tmp`, create another pro
 a bare Chrome launch. If escalation is denied, report that exact internal
 runtime error to WDM and keep the batch pending.
 
-Require its `AGENTIFY_RUNTIME_READY` receipt, then call one scoped
-`agentify_status`. A missing Agentify service or browser process is an Operator runtime defect, not an item result.
+Require its `AGENTIFY_RUNTIME_READY` receipt, then call `agentify_tabs` once and
+one scoped `agentify_status`. Before a send, require exactly one tab whose key
+equals the item's `stable_key`, whose provider matches, and whose
+`protectedTab=true`. A missing Agentify service, browser process or pinned tab
+is an Operator runtime defect, not an item result.
 Repair the runtime and repeat only this preflight. If it still
 fails, report the exact script/tool error to WDM and keep the batch pending; do not send a batch `ERROR` to the requester.
 Residual `tabId`, `activeQuery` or
@@ -79,8 +85,9 @@ fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
    `agentify_query` once with exactly `key=stable_key`, `model=provider`,
    `expectedModel=expected_model`, `promptPath=question_path`, and
    `timeoutMs=2700000`. A ChatGPT Pro item uses the exact visible label `Pro`. On the existing
-   idle page, Agentify keeps a matching model or selects the exact target and
-   confirms it before typing. If that target is unavailable, record item
+   pinned idle page, `agentify_query` internally uses Agentify's model selector:
+   it keeps a matching model or selects the exact target and confirms it before
+   typing. The Operator does not call or emulate a separate selector. If that target is unavailable, record item
    `ERROR` before send. Omit `prompt`. Omit every optional content field, including
    `contextPaths`, `attachments`, `bundleName` and `promptPrefix`. Agentify reads
    the exact UTF-8 question file itself; shell stdout/stderr, receipts, warnings,
@@ -107,11 +114,13 @@ messages supply the inter-batch queue; do not add a registry or scheduler.
 ## One simple fallback
 
 After an error, call `agentify_status` once for the same key. If it returns
-`tab_not_found`, the query returned `model_switcher_unavailable`, or status
-proves the page/tab/controller was closed, call
-`agentify_query` one more time with the exact same key, provider, expected
-model, question and timeout. Agentify reopens the same-key page; this is the only retry,
-and it is never delegated back to the requester. If the same page
+`tab_not_found` or status proves the page/tab/controller was closed, rerun the
+runtime preflight once and require the same pinned key to reappear; never create
+another key or page. If it reappears idle, call `agentify_query` one more time
+with the exact same key, provider, expected model, question and timeout. This is
+the only retry and it is never delegated back to the requester. A
+`model_switcher_unavailable` error does not authorize a new page: re-check the
+same pinned page once and retry there only. If the same page
 still has an active query, call `agentify_wait_response` once with the same key,
 provider and timeout and never resend.
 That blocking call sends nothing and returns only after natural completion. Write

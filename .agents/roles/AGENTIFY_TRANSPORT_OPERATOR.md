@@ -44,15 +44,18 @@ the preflight is executed with the shell's explicit elevated permission path.
 
 The operator follows one mechanical lifecycle: `BOOT -> PAGE -> SEND -> WAIT
 -> ARCHIVE`, ending only in `COMPLETE` or `ERROR`. A closed page, tab or
-controller is recoverable once by reopening the same stable key and repeating
-the exact query. An active query always routes to the no-send wait path. The
+controller is recoverable once by rerunning preflight and requiring the same
+already-pinned protected stable key before repeating the exact query. It never
+invents a key or creates a second page. An active query always routes to the no-send wait path. The
 operator reports the reason and performs this recovery itself; it never stops
 silently or delegates transport repair to the requester.
 
-Before each send the operator passes `expected_model` to the query. Agentify
-keeps the current model when it already matches or selects the exact visible
-target on the existing idle page before typing; a ChatGPT Pro review uses the
-visible label `Pro`. Provider names are routing hints, not reviewer-model evidence.
+Before each send the operator verifies one exact matching `protectedTab=true`
+entry from `agentify_tabs`, then passes `expected_model` to the query. Agentify's
+query implementation owns the model selector: it keeps the current model when
+it already matches or selects the exact visible target on that pinned idle page
+before typing; a ChatGPT Pro review uses the visible label `Pro`. The operator
+does not implement another selector. Provider names are routing hints, not reviewer-model evidence.
 The query contains only the stable key, provider hint, expected model,
 `promptPath=question_path` and timeout. Agentify reads that one UTF-8 file and
 sends its exact content; the operator never copies shell output into `prompt`.

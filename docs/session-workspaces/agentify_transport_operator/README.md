@@ -10,14 +10,17 @@ own item selection, archival and interpretation and continue unrelated work
 while the batch runs. The task loads `hmasd-agentify-transport`; no science or
 project state is stored here.
 
-Each manifest item names `expected_model`; `agentify_query` keeps or selects that
-exact visible model before typing (`Pro` for ChatGPT Pro). The operator never
-supplies `contextPaths`, attachments, bundles or a prefix.
+Each manifest item names an already-existing pinned `stable_key` and
+`expected_model`. The operator verifies the exact `protectedTab=true` entry;
+`agentify_query` then owns its internal selector and keeps or selects that exact
+visible model before typing (`Pro` for ChatGPT Pro). The operator never creates
+a second page, invents a smoke key, or supplies `contextPaths`, attachments,
+bundles or a prefix.
 
-Every batch begins with the Skill-owned `ensure_agentify_runtime.ps1` service/browser receipt
-and one scoped Agentify status. Missing runtime is repaired by the operator or
+Every batch begins with the Skill-owned `ensure_agentify_runtime.ps1` service/browser receipt,
+one tab inventory and one scoped Agentify status. Missing runtime is repaired by the operator or
 routed to WDM while the batch remains pending; it is never returned to Explorer
-or CPM as an item/batch failure. A runtime-ready claim without both tool results
+or CPM as an item/batch failure. A runtime-ready claim without all three results
 is invalid.
 Run the preflight through the shell's elevated permission path so the registered
 Agentify profile at `C:\Users\fires\.agentify-desktop\chrome-user-data` remains
@@ -27,6 +30,6 @@ One post-error `agentify_status` check distinguishes an idle key from a key
 still occupied by an active query. The latter receives one no-send
 `agentify_wait_response`; an unresolved runtime defect stays internal to
 Operator/WDM instead of being returned to the requester. Genuine terminal item
-errors still make the batch result `ERROR`. A closed page/tab/controller is
-reopened once on the same stable key and the exact query is retried once; no
-monitor, alternate key or additional retry is added.
+errors still make the batch result `ERROR`. A closed page/tab/controller reruns
+preflight once; the exact query is retried only after the same pinned protected
+key reappears. No new page, monitor, alternate key or additional retry is added.
