@@ -1440,7 +1440,7 @@ from envs.pettingzoo.two_timescale_role_free_actions import (
 )
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from torch.utils.tensorboard import SummaryWriter
-from visualization import VisualizationManager
+from hmasd.visualization import VisualizationManager
 
 class TensorBoardManager:
     """统一的TensorBoard管理器 - 处理从agent.py移除的所有TensorBoard写入逻辑"""
