@@ -50,6 +50,10 @@ class Config(StandaloneConfig):
 
     # The carrier: R30 with the learned-keep branch live.
     high_controller = "r30_fixed_clock_ar_edit"
+    # V-K0D arm identity (A-VD-3): this module is the REFERENCE arm -- current
+    # absolute-ID roster encoding, canonical serialization. Stated explicitly
+    # so the field is present in all three resolved arm configs.
+    r30_training_order_policy = "canonical"
     r39_native_categorical_edit = False
     r30_force_refresh_every_check = False
     r30_keep_init = 0.6

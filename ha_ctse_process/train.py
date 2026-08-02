@@ -42,9 +42,11 @@ from ha_ctse_process.plotting import (
     save_update_plots,
 )
 from ha_ctse_process.standalone_agent import (
+    VK0D_ORDER_POLICIES,
     Rollout,
     SegmentManager,
     StandaloneProcessAgent,
+    vk0d_order_assignment,
 )
 from ha_ctse_process.r28_g1_reward import (
     ARMS as R28_G1_ARMS,
@@ -59,6 +61,18 @@ from ha_ctse_process.r29_action_information_reward import (
 from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_artifacts
 
+
+# A-VD-3/VD-6: the R30 fixed-clock module stack has two controller strings --
+# the existing absolute-ID roster encoder and the V-K0D PRIMARY arm's
+# anonymous-OTHER encoder. They share the module layout, the parameter count,
+# the AR loop and the KEEP/SET support; only the roster context differs. Every
+# gate below that used to compare against the single literal now tests
+# membership in this set, so the conjugate arm reaches the same code paths and
+# the existing string's behaviour is unchanged.
+R30_FIXED_CLOCK_CONTROLLERS = (
+    "r30_fixed_clock_ar_edit",
+    "r30_fixed_clock_ar_edit_conjugate",
+)
 
 ALGORITHM_MANIFEST_FIELDS = (
     "algorithm",
@@ -728,7 +742,96 @@ def _build_actual_exposure_block(
         "high_epoch_pass_skip_reasons": list(exposure.high_epoch_pass_skip_reasons),
         "high_epoch_pass_abort_reasons": list(exposure.high_epoch_pass_abort_reasons),
         "low_level_optimizer_steps": {"value": int(low_steps), "source": low_source},
+        **_build_order_exposure_entries(agent),
     }
+
+
+# ---------------------------------------------------------------------------
+# V-K0D training-order plumbing (A-VD-3, A-VD-4)
+# ---------------------------------------------------------------------------
+
+
+def _build_order_exposure_entries(agent: StandaloneProcessAgent) -> dict[str, Any]:
+    """A-VD-4 durable order exposure, appended additively to the frozen
+    `vk0b-exposure-1` block. Every entry follows that block's own
+    conventions: plain values for the string identities, `{"value",
+    "source"}` entries with an admissible source label for the counters.
+    A canonical arm reports `order_stream_version="none"` and
+    `completed_reversed_sequences=0` -- a measured statement that no order
+    draw entered the run, not an assumption (A-VD-7 clause 4)."""
+    order = getattr(agent, "vk0d_order_exposure", None)
+    if order is None:
+        raise RuntimeError("agent carries no V-K0D order exposure record")
+
+    def _counter(value: int) -> dict[str, Any]:
+        return {"value": int(value), "source": "training_accumulator"}
+
+    return {
+        "order_stream_version": str(order.order_stream_version),
+        "r30_training_order_policy": str(
+            getattr(agent, "r30_training_order_policy", "canonical")
+        ),
+        "completed_canonical_sequences": _counter(order.completed_canonical_sequences),
+        "completed_reversed_sequences": _counter(order.completed_reversed_sequences),
+        "agent0_first_count": _counter(order.agent0_first_count),
+        "agent1_first_count": _counter(order.agent1_first_count),
+        "completed_sequence_total": _counter(order.completed_sequence_total),
+        "schedule_digest": order.schedule_digest(),
+    }
+
+
+def vk0d_order_randomized(config) -> bool:
+    """True iff the resolved config asks for the A-VD-3 CONTROL arm's
+    per-check uniform serialization. Every other admissible policy is
+    `canonical`, which must not construct or consume an order stream at
+    all."""
+    policy = str(getattr(config, "r30_training_order_policy", "canonical"))
+    if policy not in VK0D_ORDER_POLICIES:
+        raise ValueError(
+            f"unsupported r30_training_order_policy={policy!r}; "
+            f"admissible: {sorted(VK0D_ORDER_POLICIES)}"
+        )
+    return policy == "uniform_per_check"
+
+
+def vk0d_pre_call_check_index(agent: StandaloneProcessAgent, env_id: int) -> int:
+    """The `sequence_index` the high-check row this call is about to commit
+    will carry -- read off the buffer's own per-environment counter BEFORE
+    the call, which is exactly the value `HighCheckBuffer._new_row` stamps
+    onto the row. Returns -1 when the agent runs no R30 high buffer."""
+    buffer = getattr(agent, "high_check_buffer", None)
+    if buffer is None:
+        return -1
+    return int(buffer.sequence_indices[int(env_id)])
+
+
+def vk0d_record_committed_order(
+    agent: StandaloneProcessAgent, env_id: int, check_index: int
+) -> None:
+    """Record the order for a sequence that this call actually committed.
+
+    Reads the identity and the assigned order back off the committed row
+    rather than trusting the value the caller passed, and refuses to count
+    anything else: a non-due call returns with either no pending row change
+    or an older pending row (`sequence_index` behind `check_index`), a
+    continuation row carries `decision_mask=False`, and an aborted call
+    commits no row at all. That is the A-VD-4 exclusion list, enforced by
+    what the buffer holds rather than by re-deriving the trainer's own
+    due-check condition."""
+    buffer = getattr(agent, "high_check_buffer", None)
+    if buffer is None or int(check_index) < 0:
+        return
+    row = buffer.pending[int(env_id)]
+    if row is None or not bool(row.decision_mask):
+        return
+    if int(row.sequence_index) != int(check_index):
+        return
+    agent.vk0d_order_exposure.record_committed_sequence(
+        env_id=int(row.env_id),
+        episode_id=int(row.episode_id),
+        check_index=int(row.sequence_index),
+        assigned_order=row.agent_order,
+    )
 
 
 def emit(args: argparse.Namespace, message: str) -> None:
@@ -765,7 +868,7 @@ def parse_args() -> argparse.Namespace:
         "--high_controller",
         choices=(
             "legacy_duration",
-            "r30_fixed_clock_ar_edit",
+            *R30_FIXED_CLOCK_CONTROLLERS,
             "variable_roster_event",
         ),
         default="",
@@ -1953,7 +2056,7 @@ def load_checkpoint(
     source_controller = str(checkpoint.get("high_controller") or "legacy_duration")
     agent.checkpoint_source_controller = source_controller
     if bool(getattr(agent, "r30_enabled", False)):
-        if source_controller == "r30_fixed_clock_ar_edit":
+        if source_controller in R30_FIXED_CLOCK_CONTROLLERS:
             agent.high.load_state_dict(checkpoint["high"], strict=True)
             if checkpoint.get("r30_high_value") is None or agent.high_value is None:
                 raise ValueError("R30 checkpoint is missing its high critic")
@@ -2405,7 +2508,7 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         config.high_controller = source_controller
     elif requested_controller != source_controller:
         if not (
-            requested_controller == "r30_fixed_clock_ar_edit"
+            requested_controller in R30_FIXED_CLOCK_CONTROLLERS
             and source_controller == "legacy_duration"
         ):
             raise ValueError(
@@ -2799,7 +2902,7 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     mode = str(getattr(config, "high_controller", "legacy_duration"))
     if mode == "legacy_duration":
         return
-    if mode != "r30_fixed_clock_ar_edit":
+    if mode not in R30_FIXED_CLOCK_CONTROLLERS:
         raise ValueError(f"unsupported high_controller={mode!r}")
 
     if str(getattr(args, "r28_g1_arm", "off")) != "off":
@@ -2953,7 +3056,7 @@ def enforce_r31_contract(
         )
     if normalize_scenario(str(getattr(args, "scenario", ""))) != "alice_bob_asymmetric_cycles":
         raise ValueError("R31 is restricted to the sparse Alice--Bob environment")
-    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+    if str(getattr(config, "high_controller", "")) not in R30_FIXED_CLOCK_CONTROLLERS:
         raise ValueError("R31 requires the adaptive R30 fixed-clock controller")
     if bool(getattr(args, "r30_pair_gate", False)):
         raise ValueError("R31 is not part of the legacy/shared-k R30 pair gate")
@@ -2999,7 +3102,7 @@ def enforce_aem_contract(
         raise ValueError("R36 AEM is restricted to the sparse Alice--Bob environment")
     if not bool(getattr(config, "constant_skill_no_high", False)):
         raise ValueError("R36 AEM requires the constant-code no-high MAPPO path")
-    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+    if str(getattr(config, "high_controller", "")) not in R30_FIXED_CLOCK_CONTROLLERS:
         raise ValueError("R36 AEM requires the architecture-matched R30 module layout")
     if int(getattr(config, "n_agents", 0)) != 2:
         raise ValueError("R36 AEM requires exactly two agents")
@@ -3085,7 +3188,7 @@ def enforce_r37_identity_contract(
         raise ValueError("R37 is restricted to the sparse Alice--Bob environment")
     if not bool(getattr(config, "constant_skill_no_high", False)):
         raise ValueError("R37 requires the constant-code no-high MAPPO path")
-    if str(getattr(config, "high_controller", "")) != "r30_fixed_clock_ar_edit":
+    if str(getattr(config, "high_controller", "")) not in R30_FIXED_CLOCK_CONTROLLERS:
         raise ValueError("R37 requires the architecture-matched R30 module layout")
 
     exact_config = {
@@ -3189,7 +3292,7 @@ def enforce_r30_pair_gate(
     if not bool(getattr(args, "r30_pair_gate", False)):
         return
     controller = str(getattr(config, "high_controller", "legacy_duration"))
-    if controller not in {"legacy_duration", "r30_fixed_clock_ar_edit"}:
+    if controller not in {"legacy_duration", *R30_FIXED_CLOCK_CONTROLLERS}:
         raise ValueError(f"R30 pair does not admit high_controller={controller!r}")
     if metadata is None or not str(getattr(args, "resume_from", "")):
         raise ValueError("R30 pair requires the registered pre-R30 checkpoint")
@@ -7413,6 +7516,14 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
         combined_intrinsic_ratio_over05_count = 0
         combined_intrinsic_ratio_consecutive_over05_count = 0
         combined_intrinsic_ratio_kill_triggered_count = 0
+        # A-VD-3/A-VD-4: resolved once, outside the rollout loop. The training
+        # rollout below is the ONLY site in this module that emits committed
+        # high-check sequences -- `evaluate()` installs a throwaway
+        # HighCheckBuffer for its own rollout and restores the training buffer
+        # afterwards, so its decision rows are never popped into PPO and carry
+        # no order assignment.
+        vk0d_randomize_order = vk0d_order_randomized(config)
+        vk0d_training_seed = int(args.seed)
         while total_steps < int(args.total_timesteps):
             rollout = Rollout()
             episode_rewards = []
@@ -7439,6 +7550,13 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                             r37_update_metrics[field], identity_audit[field]
                         )
                     rollout_idx = pre_rollout_indices[env_id]
+                    # A-VD-4: the identity is fixed BEFORE the call from the
+                    # run's own counters -- env_id, `agent.episode_ids[env_id]`
+                    # and the high buffer's per-environment `sequence_indices`,
+                    # which is the `sequence_index` the committed row carries.
+                    # Under `canonical` no order stream is constructed and the
+                    # call takes the same `agent_order=None` path as before.
+                    vk0d_check_index = vk0d_pre_call_check_index(agent, env_id)
                     agent.maybe_assign_skills(
                         obs,
                         state=states[env_id],
@@ -7447,7 +7565,18 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         env_id=env_id,
                         policy_update=int(update_idx + 1),
                         effect_view=effect_views[env_id],
+                        agent_order=(
+                            vk0d_order_assignment(
+                                training_seed=vk0d_training_seed,
+                                env_id=env_id,
+                                episode_id=int(agent.episode_ids[env_id]),
+                                check_index=vk0d_check_index,
+                            )
+                            if vk0d_randomize_order
+                            else None
+                        ),
                     )
+                    vk0d_record_committed_order(agent, env_id, vk0d_check_index)
 
                 (
                     pre_actions_batch,

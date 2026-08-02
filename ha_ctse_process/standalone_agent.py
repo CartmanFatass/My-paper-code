@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import hashlib
 import random
 import numpy as np
 import torch
@@ -1814,6 +1815,150 @@ class Vk0bExposureAccumulator:
         )
 
 
+# ---------------------------------------------------------------------------
+# V-K0D order-resolution surface (A-VD-3, A-VD-4)
+# ---------------------------------------------------------------------------
+
+# A-VD-4 stream version tag. It is part of the counter key, so bumping this
+# string is what re-randomizes an otherwise identical run; it is also the
+# durable `order_stream_version` an order-randomized arm reports.
+VK0D_ORDER_STREAM_VERSION = "vk0d-order-1"
+
+# The label a canonical-serialization arm reports: no order stream is ever
+# constructed or consumed on that path (A-VD-7 clause 4).
+VK0D_ORDER_STREAM_NONE = "none"
+
+VK0D_ORDER_POLICIES = frozenset({"canonical", "uniform_per_check"})
+
+VK0D_ORDER_CANONICAL: tuple[int, int] = (0, 1)
+VK0D_ORDER_REVERSED: tuple[int, int] = (1, 0)
+
+
+def vk0d_order_assignment(
+    training_seed: int, env_id: int, episode_id: int, check_index: int
+) -> tuple[int, int]:
+    """A-VD-4 counter-based order assignment for one committed high-check
+    autoregressive sequence.
+
+    PURE. The chosen construction is *keyed* Philox rather than counter-mode
+    Philox: the immutable decision identity (training seed, environment id,
+    episode id, check index) plus the stream-version tag is serialized to an
+    ASCII string, SHA-256'd, and the low 128 bits of that digest become the
+    Philox key of a freshly constructed ``numpy.random.Generator``. One
+    ``integers(0, 2)`` draw off that generator selects the order. ``hashlib``
+    is used deliberately -- Python's builtin ``hash()`` is salted per process
+    and would not reproduce across processes.
+
+    Consequences that make this the auditable mechanism A-VD-4 requires:
+
+    * No global RNG state is read or advanced -- not ``numpy.random``'s
+      legacy global, not ``torch``'s, not ``random``'s. Every arm therefore
+      keeps every model-init / ``Categorical.sample`` / ``rand_like`` draw at
+      its exact stream position (VD-3).
+    * The assignment depends only on the decision identity, so batching,
+      call ordering, resumption, or replaying the identities offline all
+      regenerate the same schedule exactly.
+    """
+    key_material = "|".join(
+        (
+            VK0D_ORDER_STREAM_VERSION,
+            str(int(training_seed)),
+            str(int(env_id)),
+            str(int(episode_id)),
+            str(int(check_index)),
+        )
+    ).encode("utf-8")
+    key = int.from_bytes(hashlib.sha256(key_material).digest()[:16], "little")
+    generator = np.random.Generator(np.random.Philox(key=key))
+    if int(generator.integers(0, 2)) == 0:
+        return VK0D_ORDER_CANONICAL
+    return VK0D_ORDER_REVERSED
+
+
+@dataclass
+class Vk0dOrderExposure:
+    """A-VD-4 durable per-run order exposure.
+
+    Counters and one incremental SHA-256 only; nothing here consumes RNG or
+    influences any training decision. `record_committed_sequence` is called
+    once per sequence that the trainer has *observed* landing as a committed
+    decision row -- never once per `maybe_assign_skills` call, so non-due
+    calls, continuation-value rows and aborted sequences are excluded by
+    construction (A-VD-4).
+
+    A canonical arm still keeps a record: `order_stream_version` stays
+    `"none"`, every committed sequence lands in the canonical tally, and
+    `completed_reversed_sequences` stays 0. That is what makes "the canonical
+    path consumed no order-stream draw" a measured statement rather than an
+    assumption.
+    """
+
+    order_stream_version: str = VK0D_ORDER_STREAM_NONE
+    completed_canonical_sequences: int = 0
+    completed_reversed_sequences: int = 0
+    agent0_first_count: int = 0
+    agent1_first_count: int = 0
+    completed_sequence_total: int = 0
+    _schedule_hasher: Any = field(default=None, repr=False)
+
+    def __post_init__(self) -> None:
+        if self._schedule_hasher is None:
+            self._schedule_hasher = hashlib.sha256()
+
+    def record_committed_sequence(
+        self,
+        *,
+        env_id: int,
+        episode_id: int,
+        check_index: int,
+        assigned_order,
+    ) -> None:
+        order = tuple(int(a) for a in np.asarray(assigned_order).reshape(-1))
+        self._schedule_hasher.update(
+            f"{int(env_id)}|{int(episode_id)}|{int(check_index)}|"
+            f"{','.join(str(a) for a in order)}\n".encode("utf-8")
+        )
+        self.completed_sequence_total += 1
+        if order == VK0D_ORDER_CANONICAL:
+            self.completed_canonical_sequences += 1
+        elif order == VK0D_ORDER_REVERSED:
+            self.completed_reversed_sequences += 1
+        else:
+            raise ValueError(
+                "V-K0D order exposure admits only the two two-agent orders "
+                f"{VK0D_ORDER_CANONICAL} and {VK0D_ORDER_REVERSED}; got {order}"
+            )
+        if order[0] == 0:
+            self.agent0_first_count += 1
+        else:
+            self.agent1_first_count += 1
+
+    def schedule_digest(self) -> str:
+        """SHA-256 over the ordered list of committed
+        (env_id, episode_id, check_index, assigned_order) records."""
+        return self._schedule_hasher.copy().hexdigest()
+
+    def identities_ok(self) -> bool:
+        """A-VD-4 identities: N01 + N10 == N_sequences, the first-position
+        tally partitions the same total, and a canonical arm carries no
+        reversed sequence and no stream identity. Exposed as a helper so a
+        test can plant a tampered counter and confirm this is what catches
+        it; never asserted at runtime by the trainer itself."""
+        if (
+            self.completed_canonical_sequences + self.completed_reversed_sequences
+            != self.completed_sequence_total
+        ):
+            return False
+        if (
+            self.agent0_first_count + self.agent1_first_count
+            != self.completed_sequence_total
+        ):
+            return False
+        if self.order_stream_version == VK0D_ORDER_STREAM_NONE:
+            return self.completed_reversed_sequences == 0
+        return self.order_stream_version == VK0D_ORDER_STREAM_VERSION
+
+
 def vk0b_high_optimizer_parameter_coverage(
     actor_parameters,
     value_parameters,
@@ -1977,9 +2122,15 @@ class StandaloneProcessAgent:
         if self.high_controller not in {
             "legacy_duration",
             "r30_fixed_clock_ar_edit",
+            # V-K0D PRIMARY arm (A-VD-3): the same R30 module stack with the
+            # A-VD-1 anonymous-OTHER roster encoding.
+            "r30_fixed_clock_ar_edit_conjugate",
         }:
             raise ValueError(f"unsupported high_controller={self.high_controller!r}")
-        self.r30_enabled = self.high_controller == "r30_fixed_clock_ar_edit"
+        self.r30_enabled = self.high_controller in {
+            "r30_fixed_clock_ar_edit",
+            "r30_fixed_clock_ar_edit_conjugate",
+        }
         self.constant_skill_no_high = bool(
             getattr(config, "constant_skill_no_high", False)
         )
@@ -2507,6 +2658,9 @@ class StandaloneProcessAgent:
                 age_reference_steps=self.intrinsic_phase_reference_steps,
                 force_refresh_every_check=self.r30_force_refresh_every_check,
                 native_categorical_edit=self.r39_native_categorical_edit,
+                conjugate_context=(
+                    self.high_controller == "r30_fixed_clock_ar_edit_conjugate"
+                ),
             ).to(self.device)
             self.high_value = HighCheckValue(
                 state_dim=self.state_dim,
@@ -2955,6 +3109,25 @@ class StandaloneProcessAgent:
         # instrumentation on vs. off.
         self.exposure_instrumentation_enabled = True
         self.exposure = Vk0bExposureAccumulator()
+        # V-K0D order exposure (A-VD-4). The policy the run resolves decides
+        # the stream identity; `canonical` keeps the default `"none"` and the
+        # order stream is never constructed on that path.
+        self.r30_training_order_policy = str(
+            getattr(config, "r30_training_order_policy", "canonical")
+        )
+        if self.r30_training_order_policy not in VK0D_ORDER_POLICIES:
+            raise ValueError(
+                "unsupported r30_training_order_policy="
+                f"{self.r30_training_order_policy!r}; admissible: "
+                f"{sorted(VK0D_ORDER_POLICIES)}"
+            )
+        self.vk0d_order_exposure = Vk0dOrderExposure(
+            order_stream_version=(
+                VK0D_ORDER_STREAM_VERSION
+                if self.r30_training_order_policy == "uniform_per_check"
+                else VK0D_ORDER_STREAM_NONE
+            )
+        )
         self._exposure_call_baseline = 0
         self._exposure_call_expected = 0
         self.r31_effect_windows = (

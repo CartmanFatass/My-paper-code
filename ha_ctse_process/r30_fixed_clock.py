@@ -71,6 +71,7 @@ class FixedClockAREditPolicy(nn.Module):
         age_reference_steps: int = 500,
         force_refresh_every_check: bool = False,
         native_categorical_edit: bool = False,
+        conjugate_context: bool = False,
     ) -> None:
         super().__init__()
         self.obs_dim = int(obs_dim)
@@ -80,6 +81,21 @@ class FixedClockAREditPolicy(nn.Module):
         self.agent_relevance_dim = int(max(agent_relevance_dim, 0))
         self.force_refresh_every_check = bool(force_refresh_every_check)
         self.native_categorical_edit = bool(native_categorical_edit)
+        # A-VD-1 anonymous-OTHER roster encoding. This flag selects *which*
+        # slots of the existing prefix carry the other agent's data; it adds,
+        # removes, resizes and reorders nothing, so A-VD-6's same-seed
+        # byte-identical initial state_dict across arms holds by construction
+        # (no module is touched below this line by the flag).
+        self.conjugate_context = bool(conjugate_context)
+        if self.conjugate_context and self.n_agents != 2:
+            # The relative encoding names exactly one OTHER slot; with more
+            # than one other agent every other agent would collide in slot 0.
+            # Variable-N aggregation is a successor design question (VD-1
+            # scope note), so fail closed rather than encode a collision.
+            raise ValueError(
+                "conjugate_context is defined only for n_agents=2; got "
+                f"n_agents={self.n_agents}"
+            )
         self.ar_prefix_dim = self.n_skills * (1 + 2 * self.n_agents)
         self.age_reference_steps = int(max(age_reference_steps, 1))
         input_dim = (
@@ -116,7 +132,31 @@ class FixedClockAREditPolicy(nn.Module):
         active: torch.Tensor,
         focal_agent: int,
     ) -> torch.Tensor:
-        """Encode integer working state; this output is never stored as replay truth."""
+        """Encode integer working state; this output is never stored as replay truth.
+
+        Two encodings share one tensor layout, selected by
+        `self.conjugate_context`:
+
+        * absolute (default, unchanged): each other active agent's skill and
+          age are written at its own physical index --
+          `identity_offset + agent_id*n_skills + skill`. The focal policy can
+          therefore read which physical agent each roster fact belongs to.
+        * relative/anonymous OTHER (A-VD-1): the sole other agent's skill and
+          age are written at relative slot 0 regardless of its physical index,
+          so no absolute physical-ID information reaches the context. The
+          remaining (self) slots stay exactly zero -- the focal agent's own
+          skill and age already enter `_hidden` separately, and writing them
+          here as well would be a second, unmatched intervention. The
+          permutation-invariant skill-count block is identical in both modes.
+
+        The relative encoding is **not** information-lossless: it deliberately
+        deletes the absolute agent-label shortcut while preserving the
+        anonymous task and roster information. That deletion is the treatment.
+        It yields permutation conjugacy P01(a0,a1|x) = P10(a1,a0|swap(x)); it
+        does **not** yield same-state serialization invariance
+        P01(a0,a1|x) = P10(a0,a1|x), which need not hold while the second
+        mover conditions on the first mover's realized edit.
+        """
 
         skills = skills.long().reshape(-1)
         ages = ages.float().reshape(-1)
@@ -132,10 +172,11 @@ class FixedClockAREditPolicy(nn.Module):
             skill = int(skills[agent_id].item())
             if not 0 <= skill < self.n_skills:
                 continue
+            slot = 0 if self.conjugate_context else agent_id
             out[skill] += count_scale
-            out[identity_offset + agent_id * self.n_skills + skill] = count_scale
+            out[identity_offset + slot * self.n_skills + skill] = count_scale
             age_value = math.log1p(max(float(ages[agent_id].item()), 0.0)) / age_denom
-            out[age_offset + agent_id * self.n_skills + skill] = count_scale * age_value
+            out[age_offset + slot * self.n_skills + skill] = count_scale * age_value
         return out.unsqueeze(0)
 
     def _hidden(
