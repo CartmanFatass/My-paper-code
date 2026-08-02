@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, replace
 import base64
 import hashlib
 import json
@@ -22,7 +22,6 @@ from torch import nn
 import torch.nn.functional as F
 
 from ha_ctse_process.dynamic_roster_direct import (
-    DirectPrimitiveARPolicy,
     ENTROPY_COEFFICIENT,
     GAE_LAMBDA,
     GAMMA,
@@ -36,6 +35,33 @@ from ha_ctse_process.dynamic_roster_direct import (
     nested_state_maximum_difference,
 )
 from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT, HORIZON, MAX_LIFECYCLES, OBSERVATION_DIM
+from ha_ctse_process.event_commitment_rng import (
+    OPPORTUNITY_SUPPORT,
+    RNG_NAMES,
+    _canonical_json_digest,
+    _float32_payload,
+    _raw_event_trace_digest,
+    _seed,
+    authoritative_seed_map,
+    collection_rng_schedules,
+    make_rng_binding,
+    make_training_state,
+    owned_rng_states,
+    replay_rng_schedule_arrays,
+    replay_rng_schedule_end_state,
+    validate_rng_binding,
+)
+from ha_ctse_process.event_commitment_types import (
+    ArmName,
+    CollectionCursor,
+    CommitmentArm,
+    EVENT_INPUT_DIM,
+    EventTrajectory,
+    LifecycleState,
+    MARK_DIM,
+    SegmentRecord,
+    TrainingState,
+)
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ADDED_PARAMETER_COUNT,
     CHECKPOINT_KIND,
@@ -86,205 +112,13 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     TrackingOutcome,
 )
 
-ArmName = Literal["OR", "DUM", "EHC"]
-EVENT_INPUT_DIM = OBSERVATION_DIM + 32 + 32 + 8
-MARK_DIM = 8
-OPPORTUNITY_SUPPORT = np.asarray((4, 8, 12), dtype=np.int64)
 CREATE, KEEP, RENEW = 1, 2, 3
 EVENT_ENTROPY_COEFFICIENT = 0.01
-RNG_NAMES = ("ledger", "order", "primitive", "opportunity", "event", "mark")
 AUDIT_BRANCHES = (
     "KEEP_HELD_MARK",
     "RENEW_DERANGED_MARK",
     "RENEW_CANDIDATE_MARK",
 )
-
-
-@dataclass
-class SegmentRecord:
-    episode_id: int
-    key: int
-    membership_epoch: int
-    segment_id: int
-    start_active_step: int
-    end_active_step: int
-    censored: bool
-    close_reason: str
-    opportunity_count: int
-
-    @property
-    def active_lifetime(self) -> int:
-        return self.end_active_step - self.start_active_step
-
-
-@dataclass
-class LifecycleState:
-    membership_epoch: int
-    z: torch.Tensor
-    q: int
-    segment_id: int
-    segment_start_active_step: int
-    active_steps: int = 0
-    non_create_opportunities: int = 0
-    spell_opportunity_count: int = 0
-    """Running `K` (KEEP/RENEW opportunities so far) for the currently open
-    spell only; reset to 0 only when a RENEW closes that spell and opens the
-    next one. At CREATE (`LifecycleState` construction) it is
-    zero-initialized, not reset -- there is no prior spell to reset from.
-    Distinct from `non_create_opportunities`, which accumulates across all
-    spells of this lifecycle and is never reset."""
-
-
-@dataclass
-class CollectionCursor:
-    episode_ids: tuple[int, ...]
-    ledgers: tuple[NoncalendarLedger, ...]
-    environments: list[NoncalendarTrackingEnv]
-    hidden: torch.Tensor
-    lifecycles: list[dict[int, LifecycleState]]
-    segments: list[list[SegmentRecord]]
-
-
-@dataclass
-class EventTrajectory:
-    observations: torch.Tensor
-    active_mask: torch.Tensor
-    orders: torch.Tensor
-    actions: torch.Tensor
-    old_log_probs: torch.Tensor
-    old_values: torch.Tensor
-    rewards: torch.Tensor
-    terminal: torch.Tensor
-    hidden_before: torch.Tensor
-    hidden_after: torch.Tensor
-    prefix_counts: torch.Tensor
-    primitive_z: torch.Tensor
-    event_kind: torch.Tensor
-    event_inputs: torch.Tensor
-    event_categorical_actions: torch.Tensor
-    event_u: torch.Tensor
-    event_z_pre: torch.Tensor
-    event_new_z: torch.Tensor
-    candidate_u: torch.Tensor
-    candidate_z: torch.Tensor
-    event_cat_mask: torch.Tensor
-    event_mark_mask: torch.Tensor
-    event_old_cat_logp: torch.Tensor
-    event_old_mark_component_logp: torch.Tensor
-    event_old_joint_logp: torch.Tensor
-    membership_epoch: torch.Tensor
-    segment_id: torch.Tensor
-    q_before: torch.Tensor
-    raw_event_trace: tuple[dict[str, Any], ...]
-    outcomes: tuple[TrackingOutcome, ...]
-    segments: tuple[tuple[SegmentRecord, ...], ...]
-    ledger_ids: tuple[int, ...]
-    cutoff: bool
-    bootstrap_values: torch.Tensor
-    rng_audit: dict[str, Any]
-    cursor: CollectionCursor | None
-
-    @property
-    def time_steps(self) -> int:
-        return int(self.rewards.shape[0])
-
-
-class CommitmentArm(nn.Module):
-    """Ordinary source base plus the exact DUM/EHC additions."""
-
-    def __init__(self, arm: ArmName) -> None:
-        super().__init__()
-        if arm not in ("OR", "DUM", "EHC"):
-            raise ValueError("invalid commitment arm")
-        self.arm: ArmName = arm
-        self.base = DirectPrimitiveARPolicy()
-        if arm != "OR":
-            self.W_z = nn.Linear(MARK_DIM, ACTION_COUNT, bias=False)
-            self.event_head = nn.Linear(EVENT_INPUT_DIM, 2)
-            self.mark_head = nn.Linear(EVENT_INPUT_DIM, 2 * MARK_DIM)
-        else:
-            self.W_z = None
-            self.event_head = None
-            self.mark_head = None
-
-    @property
-    def treatment(self) -> int:
-        return int(self.arm == "EHC")
-
-    @property
-    def base_parameter_count(self) -> int:
-        return sum(p.numel() for p in self.base.parameters())
-
-    @property
-    def added_parameter_count(self) -> int:
-        return sum(p.numel() for n, p in self.named_parameters() if not n.startswith("base."))
-
-    def primitive_bias(self, z: torch.Tensor) -> torch.Tensor | None:
-        if self.W_z is None:
-            return None
-        return self.W_z(float(self.treatment) * z.detach())
-
-    def event_parameters(self) -> list[nn.Parameter]:
-        if self.arm == "OR":
-            return []
-        assert self.event_head is not None and self.mark_head is not None
-        return [*self.event_head.parameters(), *self.mark_head.parameters()]
-
-    def base_optimizer_parameters(self) -> list[nn.Parameter]:
-        values = list(self.base.parameters())
-        if self.W_z is not None:
-            values.extend(self.W_z.parameters())
-        return values
-
-
-@dataclass
-class TrainingState:
-    arm: ArmName
-    replicate: int
-    profile: Literal["train", "iid", "held_out"] = "train"
-    seed_map: dict[str, int] = field(default_factory=dict)
-    completed_update: int = 0
-    next_episode_id: int = 0
-    base_optimizer_steps: int = 0
-    event_optimizer_steps: int = 0
-    pending_cursor: CollectionCursor | None = None
-    rngs: dict[str, np.random.Generator] = field(default_factory=dict)
-
-
-def _seed(base: int, replicate: int) -> int:
-    return int(base + 1000 * replicate)
-
-
-def authoritative_seed_map(
-    profile: Literal["train", "iid", "held_out"], replicate: int
-) -> dict[str, int]:
-    ledger_base = TRAIN_TASK_SEED if profile == "train" else (
-        IID_EVAL_TASK_SEED if profile == "iid" else HELD_OUT_EVAL_TASK_SEED
-    )
-    return {
-        "ledger": _seed(ledger_base, replicate),
-        "order": _seed(TRAIN_ORDER_SEED, replicate),
-        "primitive": _seed(TRAIN_ACTION_SEED, replicate),
-        "opportunity": _seed(OPPORTUNITY_SEED, replicate),
-        "event": _seed(EVENT_SEED, replicate),
-        "mark": _seed(MARK_SEED, replicate),
-    }
-
-
-def make_training_state(
-    arm: ArmName,
-    replicate: int,
-    *,
-    profile: Literal["train", "iid", "held_out"] = "train",
-) -> TrainingState:
-    seed_map = authoritative_seed_map(profile, replicate)
-    return TrainingState(
-        arm=arm,
-        replicate=int(replicate),
-        profile=profile,
-        seed_map=seed_map,
-        rngs={name: np.random.default_rng(seed_map[name]) for name in RNG_NAMES},
-    )
 
 
 def initialize_arms(
@@ -404,235 +238,6 @@ def _ledger_audit_evidence(ledger: NoncalendarLedger) -> dict[str, Any]:
         "direct_frontier_priorities": ledger.direct_frontier_priorities.tolist(),
     }
     return payload | {"ledger_digest": _canonical_json_digest(payload)}
-
-
-_RNG_BINDING_KEYS = frozenset({
-    "schema_version", "context", "stream", "seed", "start_state",
-    "draw_schedule", "draw_bytes_digest", "end_state", "binding_digest",
-})
-_RNG_SCHEDULE_KEYS = frozenset({
-    "stream", "operation", "dtype", "shape", "coordinates"
-})
-
-
-def _canonical_json_digest(value: Any) -> str:
-    encoded = json.dumps(
-        value, sort_keys=True, separators=(",", ":"), ensure_ascii=True
-    ).encode("utf-8")
-    return hashlib.sha256(encoded).hexdigest()
-
-
-def _float32_payload(value: np.ndarray) -> dict[str, Any]:
-    """Canonical exact binary32 payload without any outcome information."""
-
-    array = np.ascontiguousarray(value, dtype=np.float32)
-    encoded = array.tobytes(order="C")
-    return {
-        "dtype": "float32",
-        "shape": [int(size) for size in array.shape],
-        "values": array.tolist(),
-        "bytes_b64": base64.b64encode(encoded).decode("ascii"),
-        "sha256": hashlib.sha256(encoded).hexdigest(),
-    }
-
-
-def _raw_event_trace_digest(row_without_digest: Mapping[str, Any]) -> str:
-    encoded = json.dumps(
-        row_without_digest, sort_keys=True, separators=(",", ":"),
-        ensure_ascii=True,
-    ).encode("utf-8")
-    return hashlib.sha256(b"HMASD_RAW_EVENT_TRACE_V1\0" + encoded).hexdigest()
-
-
-def owned_rng_states(state: TrainingState) -> dict[str, Any]:
-    """Return canonical, independently cloneable owned-generator states."""
-
-    return {
-        name: deepcopy(state.rngs[name].bit_generator.state)
-        for name in RNG_NAMES
-    }
-
-
-def collection_rng_schedules(
-    trajectory: EventTrajectory, *, deterministic: bool
-) -> dict[str, list[dict[str, Any]]]:
-    """Reconstruct the collector's exact per-stream draw calls.
-
-    Values are deliberately absent.  A validator replays these calls from the
-    canonical start state and regenerates the bytes and end state itself.
-    """
-
-    schedules = deepcopy(trajectory.rng_audit["streams"])
-    if set(schedules) != set(RNG_NAMES):
-        raise RuntimeError("collector RNG audit stream set mismatch")
-    return schedules
-
-
-def _replay_rng_schedule(
-    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
-    *, seed: int | None = None,
-) -> tuple[str, dict[str, Any], list[np.ndarray]]:
-    generator = np.random.default_rng()
-    generator.bit_generator.state = deepcopy(dict(start_state))
-    digest = hashlib.sha256()
-    arrays: list[np.ndarray] = []
-    seeded_generators: dict[tuple[Any, ...], np.random.Generator] = {}
-    for entry in schedule:
-        if not isinstance(entry, dict) or set(entry) != _RNG_SCHEDULE_KEYS:
-            raise ValueError("RNG draw schedule schema mismatch")
-        shape = tuple(int(value) for value in entry["shape"])
-        if any(value < 0 for value in shape):
-            raise ValueError("RNG draw schedule has a negative shape")
-        dtype = np.dtype(str(entry["dtype"]))
-        operation = str(entry["operation"])
-        if operation.startswith("seeded_"):
-            if seed is None:
-                raise ValueError("seeded RNG audit operation lacks authoritative seed")
-            coordinates = entry["coordinates"]
-            identity = (
-                int(coordinates["episode_id"]), int(coordinates["attempt"]),
-                *tuple(int(value) for value in coordinates["generator_coordinates"]),
-            )
-            local = seeded_generators.get(identity)
-            if local is None:
-                local = make_rng(
-                    int(seed), *tuple(
-                        int(value) for value in coordinates["generator_coordinates"]
-                    )
-                )
-                seeded_generators[identity] = local
-            argument = coordinates.get("argument")
-            if operation == "seeded_permutation":
-                drawn = local.permutation(
-                    int(argument) if isinstance(argument, int)
-                    else np.asarray(argument, dtype=dtype)
-                )
-            elif operation == "seeded_permutation_blocks":
-                expected_shape = (
-                    len(coordinates["key_order"]),
-                    len(coordinates["offset_order"]),
-                    len(argument),
-                )
-                if shape != expected_shape:
-                    raise ValueError("duration permutation block shape mismatch")
-                drawn = np.empty(shape, dtype=dtype)
-                values = np.asarray(argument, dtype=dtype)
-                for key_index, _key in enumerate(coordinates["key_order"]):
-                    for offset_index, _offset in enumerate(
-                        coordinates["offset_order"]
-                    ):
-                        drawn[key_index, offset_index] = local.permutation(values)
-            elif operation == "seeded_choice":
-                drawn = local.choice(
-                    np.asarray(argument, dtype=dtype),
-                    size=shape if shape else None,
-                    replace=bool(coordinates["replace"]),
-                )
-            elif operation == "seeded_random":
-                drawn = local.random(shape, dtype=dtype)
-            else:
-                raise ValueError("unknown seeded RNG audit operation")
-        elif operation == "random":
-            drawn = generator.random(shape, dtype=dtype)
-        elif operation == "standard_normal" and dtype == np.dtype(np.float64):
-            drawn = generator.standard_normal(shape)
-        elif operation == "choice_opportunity" and dtype == np.dtype(np.int64):
-            drawn = generator.choice(OPPORTUNITY_SUPPORT, size=shape)
-        else:
-            raise ValueError("RNG draw schedule operation/dtype mismatch")
-        array = np.asarray(drawn, dtype=dtype).reshape(shape)
-        digest.update(array.tobytes(order="C"))
-        arrays.append(array.copy())
-    return digest.hexdigest(), deepcopy(generator.bit_generator.state), arrays
-
-
-def replay_rng_schedule_end_state(
-    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
-    *, seed: int | None = None,
-) -> dict[str, Any]:
-    """Public state-only replay used to validate a Stage-2 fork coordinate."""
-
-    return _replay_rng_schedule(start_state, schedule, seed=seed)[1]
-
-
-def replay_rng_schedule_arrays(
-    start_state: Mapping[str, Any], schedule: list[dict[str, Any]],
-    *, seed: int | None = None,
-) -> tuple[list[np.ndarray], dict[str, Any]]:
-    """Replay and expose generated arrays for strict Stage-2 consumption audit."""
-
-    _digest, end_state, arrays = _replay_rng_schedule(
-        start_state, schedule, seed=seed
-    )
-    return arrays, end_state
-
-
-def make_rng_binding(
-    *, context: Mapping[str, Any], stream: str, seed: int,
-    start_state: Mapping[str, Any], draw_schedule: list[dict[str, Any]],
-    expected_end_state: Mapping[str, Any],
-) -> dict[str, Any]:
-    """Create a context-bound record only after independent schedule replay."""
-
-    if stream not in RNG_NAMES:
-        raise ValueError("unknown owned RNG stream")
-    if any(entry.get("stream") != stream for entry in draw_schedule):
-        raise ValueError("RNG draw schedule stream label mismatch")
-    draw_digest, end_state, _arrays = _replay_rng_schedule(
-        start_state, draw_schedule, seed=seed
-    )
-    if end_state != dict(expected_end_state):
-        raise RuntimeError(f"RNG schedule does not reach supplied {stream} end state")
-    record: dict[str, Any] = {
-        "schema_version": RNG_BINDING_SCHEMA_VERSION,
-        "context": deepcopy(dict(context)),
-        "stream": stream,
-        "seed": int(seed),
-        "start_state": deepcopy(dict(start_state)),
-        "draw_schedule": deepcopy(draw_schedule),
-        "draw_bytes_digest": draw_digest,
-        "end_state": end_state,
-    }
-    record["binding_digest"] = _canonical_json_digest(record)
-    return record
-
-
-def validate_rng_binding(
-    record: Any, *, expected_context: Mapping[str, Any], expected_stream: str,
-    expected_seed: int, expected_start_state: Mapping[str, Any],
-) -> tuple[bool, dict[str, Any] | None]:
-    """Regenerate draws and state; supplied digests are never trusted."""
-
-    try:
-        if not isinstance(record, dict) or set(record) != _RNG_BINDING_KEYS:
-            return False, None
-        if not (
-            int(record["schema_version"]) == RNG_BINDING_SCHEMA_VERSION
-            and record["context"] == dict(expected_context)
-            and record["stream"] == expected_stream
-            and int(record["seed"]) == int(expected_seed)
-            and record["start_state"] == dict(expected_start_state)
-            and all(
-                entry.get("stream") == expected_stream
-                for entry in record["draw_schedule"]
-            )
-        ):
-            return False, None
-        draw_digest, end_state, _arrays = _replay_rng_schedule(
-            record["start_state"], record["draw_schedule"],
-            seed=int(expected_seed),
-        )
-        payload = {key: deepcopy(value) for key, value in record.items()
-                   if key != "binding_digest"}
-        if not (
-            draw_digest == record["draw_bytes_digest"]
-            and end_state == record["end_state"]
-            and _canonical_json_digest(payload) == record["binding_digest"]
-        ):
-            return False, None
-        return True, end_state
-    except (KeyError, TypeError, ValueError, OverflowError):
-        return False, None
 
 
 @dataclass

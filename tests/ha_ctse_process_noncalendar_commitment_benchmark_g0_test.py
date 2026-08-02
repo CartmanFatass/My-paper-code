@@ -20,6 +20,14 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process import event_held_commitment_link
+from ha_ctse_process.event_commitment_rng import (
+    RNG_NAMES,
+    authoritative_seed_map,
+    make_rng_binding,
+    make_training_state,
+    owned_rng_states,
+    replay_rng_schedule_end_state,
+)
 from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
 from ha_ctse_process.event_held_commitment_link import (
     CREATE,
@@ -30,12 +38,10 @@ from ha_ctse_process.event_held_commitment_link import (
     MARK_DIM,
     OPPORTUNITY_SUPPORT,
     RENEW,
-    RNG_NAMES,
     _nested_equal,
     _normal_parameters,
     _rng_states,
     action_distribution_tv,
-    authoritative_seed_map,
     batched_natural_and_permuted_action_tv,
     collect_trajectory,
     compare_continuations,
@@ -44,7 +50,6 @@ from ha_ctse_process.event_held_commitment_link import (
     audit_single_opportunity,
     initialize_arms,
     load_checkpoint,
-    make_training_state,
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
@@ -990,7 +995,7 @@ def _build_causal_audit_oracle_bundle(device: torch.device) -> dict[str, Any]:
             episode_ids=tuple(range(batch_index * 16, (batch_index + 1) * 16)),
             deterministic=False, profile="held_out",
         ))
-        end_states.append(event_held_commitment_link.owned_rng_states(state))
+        end_states.append(owned_rng_states(state))
     inventory: dict[tuple[int, ...], dict[str, Any]] = {}
     cells: dict[tuple[int, int], list[tuple[int, ...]]] = defaultdict(list)
     for batch_index, trajectory in enumerate(trajectories):
@@ -1826,14 +1831,14 @@ def _synthetic_operational_records(
         starts: dict[str, Any], schedules: dict[str, list[dict[str, Any]]],
     ) -> tuple[dict[str, Any], dict[str, Any], dict[str, str]]:
         ends = {
-            name: event_held_commitment_link.replay_rng_schedule_end_state(
+            name: replay_rng_schedule_end_state(
                 starts[name], schedules[name], seed=seed_map[name]
             )
             for name in RNG_NAMES
         }
         bindings = {}
         for name in RNG_NAMES:
-            binding = event_held_commitment_link.make_rng_binding(
+            binding = make_rng_binding(
                 context=context, stream=name, seed=seed_map[name],
                 start_state=starts[name], draw_schedule=schedules[name],
                 expected_end_state=ends[name],
@@ -3297,7 +3302,7 @@ def causal_audit_artifact_bundle(
                     "batch": batch_index,
                 },
                 seed_map=origin.seed_map,
-                start_states=event_held_commitment_link.owned_rng_states(origin),
+                start_states=owned_rng_states(origin),
                 end_states=end_state,
                 trajectory=trajectory,
                 deterministic=False,
