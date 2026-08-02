@@ -585,10 +585,10 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-        "one minimal request to the dedicated Agentify task",
-        "AGENTIFY_REVIEW_REQUEST",
-        "AGENTIFY_REVIEW_RESULT",
-        "exact provider `stable_key`",
+        "one ordered batch manifest to the dedicated Agentify task",
+        "AGENTIFY_REVIEW_BATCH_REQUEST",
+        "AGENTIFY_REVIEW_BATCH_RESULT",
+        "currently eligible frozen questions",
         "no archived task ID or route registry",
         "one bounded owned-path scan",
     ):
@@ -599,9 +599,10 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     for required in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "Send one `AGENTIFY_REVIEW_REQUEST`",
-        "exact `stable_key`",
-        "Copy the named raw response",
+        "Send one",
+        "`AGENTIFY_REVIEW_BATCH_REQUEST`",
+        "Copy each named successful raw response",
+        "expected_model=Pro",
         "dedicated transport task",
     ):
         assert required in pro_review_skill

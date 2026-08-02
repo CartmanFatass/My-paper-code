@@ -4,20 +4,32 @@
 role=agentify_transport_operator
 agentify_transport_runtime_authority=exclusive
 other_authority=none
-request_contract=AGENTIFY_REVIEW_REQUEST
-request_fields=request_id|review_channel|provider|stable_key|question_path|return_task_id
-result_contract=AGENTIFY_REVIEW_RESULT
-result_fields=request_id|status|response_path|error
-terminal_status=COMPLETE|ERROR
+request_contract=AGENTIFY_REVIEW_BATCH_REQUEST
+request_fields=batch_id|manifest_path|return_task_id
+manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path
+result_contract=AGENTIFY_REVIEW_BATCH_RESULT
+result_fields=batch_id|status|results_path|error
+batch_terminal_status=COMPLETE|ERROR
+item_terminal_status=COMPLETE|ERROR
 write_scope=temp/sessions/agentify_transport_operator
 transport_skill=hmasd-agentify-transport
 workflow_hash_validation=forbidden
 ```
 
-The operator owns one Agentify send and its wait for the exact request.
-It reads the standalone question, writes only the returned raw response in its
-temporary workspace and returns one result. The requester owns archival and
-interpretation. Mechanics live only in the named Skill.
+The operator owns one ordered batch at a time. It attempts every manifest item
+sequentially, with one Agentify send and completion wait per item, writes only
+the raw responses and mechanical batch result in its temporary workspace, and
+returns one batch result. One item error is recorded and does not skip later
+items. The requester owns question selection, archival and interpretation and
+may continue unrelated work while the batch runs. Mechanics live only in the
+named Skill.
+
+Before each send the operator checks the existing tab's visible model against
+`expected_model`; a ChatGPT Pro review requires the visible label `Pro`.
+Provider names are routing hints, not reviewer-model evidence. The query call
+contains only the stable key, provider hint, raw question and timeout. Local
+paths, context bundles, attachments, prefixes and requester history are never
+sent.
 
 Agentify source changes require an exact direct user grant. The operator never
 claims a tool call, file write or cross-task delivery without its actual result.

@@ -127,9 +127,10 @@ $routerRequired = @(
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'external_review_transport_execution=dedicated_agentify_transport_task',
-    'agentify_transport_request=AGENTIFY_REVIEW_REQUEST',
+    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
+    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path',
     'agentify_transport_skill=hmasd-agentify-transport',
-    'agentify_transport_result=AGENTIFY_REVIEW_RESULT'
+    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -161,9 +162,10 @@ $codeRequired = @(
     'code_children=code_scout|implementer|reviewer|verifier',
     'routine_implementation_child=hmasd-implementer-terra',
     'protected_implementation_child=hmasd-implementer',
-    'AGENTIFY_REVIEW_REQUEST',
-    'AGENTIFY_REVIEW_RESULT',
-    'exact provider and `stable_key`',
+    'AGENTIFY_REVIEW_BATCH_REQUEST',
+    'AGENTIFY_REVIEW_BATCH_RESULT',
+    'one ordered manifest',
+    'every item names its expected reviewer model',
     'CPM does not operate or debug Agentify',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',

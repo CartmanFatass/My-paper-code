@@ -95,14 +95,22 @@ registry, stable workflow contract or workflow contract test. WDM has no
 authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
-freeze and conduct each exact candidate review without per-review user or WDM
-authorization. It sends one `AGENTIFY_REVIEW_REQUEST` containing the standalone
-natural-language question path and exact provider `stable_key` to the current
-user-designated Agentify task,
-accepts one `AGENTIFY_REVIEW_RESULT`, archives the named raw response in the
-review item, and then performs scientific intake. Pro-canonical and
-Gemini-advisory labels remain local and never enter the question. Page,
-provider-adapter and recovery details remain inside the Agentify task.
+freeze and conduct exact candidate reviews without per-review user or WDM
+authorization. It writes one ordered manifest containing only currently frozen
+standalone question paths, expected reviewer models and provider `stable_key`
+values, sends one
+`AGENTIFY_REVIEW_BATCH_REQUEST` to the current user-designated Agentify task,
+and continues unrelated research without synchronously waiting. On one
+`AGENTIFY_REVIEW_BATCH_RESULT`, it archives each named successful raw response
+in its review item and performs scientific intake; an item error affects only
+that review. Pro-canonical and Gemini-advisory labels remain local and never
+enter the question. Page, provider-adapter and recovery details remain inside
+the Agentify task.
+
+Before manifest freeze, Explorer uses one model-authored checklist: the raw
+question contains no local filesystem locator, task history or unrelated
+corpus; any reviewer-accessible source locator is the public remote GitHub URL.
+This is a question-quality check, not a new mechanical gate.
 
 Explorer archives the raw response under its assigned
 `local_research/pro_reviews/<review-id>/` item root before enqueuing it for local
@@ -111,8 +119,8 @@ FIFO scientific reconciliation. The archived Pro content is consumed as
 Explorer preserves the
 reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate
-to review and what later research action follows; transport cannot infer an
-order, open a batch or promote a packet into formal project state. Workflow
+to review and what later research action follows; transport cannot infer or
+change the manifest order or promote a packet into formal project state. Workflow
 Design Manager is not a campaign approver, transport provisioner or recovery
 owner.
 

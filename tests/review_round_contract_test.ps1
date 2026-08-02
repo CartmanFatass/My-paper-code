@@ -11,21 +11,27 @@ $explorationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skil
 
 foreach ($entry in @(
     @($router, 'external_review_transport_execution=dedicated_agentify_transport_task'),
+    @($router, 'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST'),
+    @($router, 'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path'),
     @($router, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($router, 'agentify_transport_skill=hmasd-agentify-transport'),
     @($cpm, 'formal_review_transport=agentify_task_request_result'),
-    @($cpm, 'AGENTIFY_REVIEW_REQUEST'),
+    @($cpm, 'AGENTIFY_REVIEW_BATCH_REQUEST'),
     @($explorer, 'independent_review_provider_contract=agentify_task_request_result'),
-    @($explorer, 'AGENTIFY_REVIEW_RESULT'),
-    @($researchSkill, 'Send one `AGENTIFY_REVIEW_REQUEST`'),
+    @($explorer, 'AGENTIFY_REVIEW_BATCH_RESULT'),
+    @($researchSkill, 'AGENTIFY_REVIEW_BATCH_REQUEST'),
     @($operator, 'agentify_transport_runtime_authority=exclusive'),
-    @($operator, 'terminal_status=COMPLETE|ERROR'),
-    @($operator, 'request_fields=request_id|review_channel|provider|stable_key|question_path|return_task_id'),
-    @($transportSkill, 'Call `agentify_query` once'),
+    @($operator, 'batch_terminal_status=COMPLETE|ERROR'),
+    @($operator, 'request_fields=batch_id|manifest_path|return_task_id'),
+    @($operator, 'manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path'),
+    @($transportSkill, 'call `agentify_query` once'),
     @($transportSkill, 'timeoutMs=2700000'),
-    @($transportSkill, 'Never call `agentify_query` twice for one request'),
+    @($transportSkill, 'Never call `agentify_query` twice for one item'),
     @($transportSkill, 'call `agentify_wait_response` once with the same key'),
     @($transportSkill, 'That blocking call sends nothing'),
+    @($transportSkill, 'Batch `COMPLETE` means every registered item was attempted and recorded'),
+    @($transportSkill, 'Omit every optional content field'),
+    @($transportSkill, 'a ChatGPT Pro item requires exactly `Pro`'),
     @($transportSkill, 'Never claim an action that no tool result proves')
 )) {
     if (-not $entry[0].Contains($entry[1])) {
@@ -66,6 +72,12 @@ foreach ($retiredTerm in @(
 foreach ($forbidden in @('SHA-256', 'idempotency')) {
     if ($transportSkill.Contains($forbidden)) {
         throw "Agentify transport Skill retains a strict transport mechanism: $forbidden"
+    }
+}
+
+foreach ($retiredSingleItemContract in @('AGENTIFY_REVIEW_REQUEST', 'AGENTIFY_REVIEW_RESULT')) {
+    if ($active.Contains($retiredSingleItemContract)) {
+        throw "Retired single-item transport contract remains active: $retiredSingleItemContract"
     }
 }
 

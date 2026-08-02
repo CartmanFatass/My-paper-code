@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction or methodology review sent through the dedicated Agentify transport task.
+description: Use from the persistent Independent Research Explorer to batch exact Pro or Gemini direction or methodology reviews through the dedicated Agentify transport task.
 ---
 
 # HMASD Independent Research External Review
@@ -26,18 +26,27 @@ root before sending.
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. Send one `AGENTIFY_REVIEW_REQUEST` naming that question path, provider,
-   exact `stable_key`, review channel and the current Explorer task as the
-   return target.
-3. Accept one `AGENTIFY_REVIEW_RESULT`. Agentify page, adapter, waiting and
-   recovery mechanics remain inside the dedicated transport task.
-4. Copy the named raw response into `local_research/pro_reviews/<review-id>/`,
-   then reconcile it scientifically. An `ERROR` affects only that review.
+2. Add each currently eligible frozen question to one ordered JSON manifest as
+   `request_id|review_channel|provider|expected_model|stable_key|question_path`.
+   A ChatGPT Pro review names `expected_model=Pro`. Confirm once that the raw
+   question contains no local filesystem path, task history or unrelated
+   corpus; use a public remote GitHub URL for a reviewer-facing source locator.
+   Send one
+   `AGENTIFY_REVIEW_BATCH_REQUEST` naming the manifest and current Explorer task
+   as the return target. Do not pre-list a review whose scientific barrier has
+   not yet completed.
+3. Continue unrelated research and later accept one
+   `AGENTIFY_REVIEW_BATCH_RESULT`. Agentify page, adapter, waiting and recovery
+   mechanics remain inside the dedicated transport task.
+4. Copy each named successful raw response into
+   `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
+   An item `ERROR` affects only that review.
 
 When one paired protocol includes a common follow-up, freeze that follow-up as
-a second standalone natural-language question. Send it in each provider's
-existing conversation through the same transport task. Sequential observation is allowed for attribution; it does
-not create a second workflow or permit provider-specific prompt metadata.
+a second standalone natural-language question only after its prerequisite
+review is reconciled, then place it in a later batch for each provider's
+existing conversation. This does not create a second workflow or permit
+provider-specific prompt metadata.
 
 An incomplete call affects only that review and is not scientific evidence.
 

@@ -91,7 +91,7 @@ foreach ($required in @(
     'EXPLORER_PROJECT_CANDIDATE_PACKET',
     'EXPLORER_ADVISORY_REFINEMENT_PACKET',
     'CPM-centered lane',
-    'CPM sends one minimal request to the dedicated Agentify task',
+    'CPM submits one ordered manifest of currently frozen questions',
     'one candidate is selected for each Pro package',
     'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
     'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
@@ -179,6 +179,9 @@ foreach ($required in @(
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
+    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
+    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
+    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
     'superpowers_execution=disabled',
@@ -229,7 +232,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'owns both independent-research direction reviews and methodology',
-    'Copy the named raw response',
+    'Copy each named successful raw response',
     'Workflow Design Manager',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
     if (-not $independentReviewSkill.Contains($required)) {
@@ -243,7 +246,7 @@ foreach ($required in @(
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'Copy the named raw response')) {
+    'Copy each named successful raw response')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
@@ -872,6 +875,8 @@ foreach ($required in @(
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=agentify_task_request_result',
+    'AGENTIFY_REVIEW_BATCH_REQUEST',
+    'AGENTIFY_REVIEW_BATCH_RESULT',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_target=current_thread_id_from_user_or_native_task_context',
