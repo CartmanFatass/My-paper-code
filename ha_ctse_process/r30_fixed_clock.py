@@ -18,6 +18,29 @@ INVALID_SKILL = -1
 HIGH_BUFFER_VERSION = 2
 
 
+def advance_working_state(
+    working_skills: torch.Tensor,
+    working_ages: torch.Tensor,
+    working_active: torch.Tensor,
+    agent_id: int,
+    kind: int,
+    skill: int,
+) -> None:
+    """Apply one realized token to the explicit working state, in place.
+
+    `kind` is `KEEP_TOKEN` or `SET_TOKEN`. A KEEP token is a no-op (the
+    incumbent skill/age/active flag are already correct); a SET token
+    writes `skill`, resets age to zero and marks the agent active. This is
+    exactly the mutation `act_sequence` performed inline before the VC-D1
+    refactor -- `act_sequence`'s sampling path and any pure enumeration
+    caller now share this one function, so they cannot diverge.
+    """
+    if int(kind) == SET_TOKEN:
+        working_skills[int(agent_id)] = int(skill)
+        working_ages[int(agent_id)] = 0
+        working_active[int(agent_id)] = True
+
+
 @dataclass(frozen=True)
 class EditSequenceSample:
     token_kind: torch.Tensor
@@ -165,6 +188,88 @@ class FixedClockAREditPolicy(nn.Module):
             logits = logits.clone()
             logits[:, int(current_skill)] = torch.finfo(logits.dtype).min
         return logits
+
+    def _split_token_mass(
+        self,
+        keep_logit: torch.Tensor,
+        skill_logits: torch.Tensor,
+        active: bool,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Shared logits-to-mass split (A-VC-2): the sole place a keep/set
+        probability is derived from raw logits. `token_mass` and
+        `act_sequence`'s learned-keep sampling branch both call this on the
+        same `(keep_logit, skill_logits)` pair from one `_token_context`
+        call, so no second, independently-computed probability can drift
+        from it. Pure: no sampling, no RNG consumption.
+
+        Active learned-KEEP agent: `m_K = sigma(keep_logit)`,
+        `m_SET(z) = (1 - m_K) * softmax(skill_logits)_z` -- the incumbent's
+        `softmax` entry is exactly zero because `_masked_skill_logits`
+        already wrote `finfo.min` there, so its `m_SET` entry is exactly
+        zero without any extra masking here. No incumbent: `m_K = 0`,
+        `m_SET(z) = softmax(skill_logits)_z` unmasked (`skill_logits` itself
+        is unmasked in that case, per `_masked_skill_logits`).
+        """
+        skill_mass = F.softmax(skill_logits, dim=-1)
+        if active:
+            keep_mass = torch.sigmoid(keep_logit)
+            set_mass = (1.0 - keep_mass).unsqueeze(-1) * skill_mass
+        else:
+            keep_mass = torch.zeros_like(keep_logit)
+            set_mass = skill_mass
+        return keep_mass, set_mass
+
+    def token_mass(
+        self,
+        joint_obs: torch.Tensor,
+        compact: torch.Tensor,
+        team_vector: torch.Tensor,
+        working_skills: torch.Tensor,
+        working_ages: torch.Tensor,
+        working_active: torch.Tensor,
+        agent_id: int,
+        omega: torch.Tensor | None,
+        agent_relevance: torch.Tensor | None,
+    ) -> dict[str, torch.Tensor]:
+        """Pure per-agent token-mass API (VC-D1, A-VC-1).
+
+        Returns ``{keep_mass, set_mass[n_skills], raw_keep_logit,
+        raw_skill_logits}`` in the policy's probability dtype (no float64
+        promotion here; downstream accumulation is the caller's job). Pure:
+        no sampling, no RNG consumption, no buffer or working-state writes.
+
+        Fails closed with ``RuntimeError`` under a native-categorical edit
+        head or forced full refresh (A-VC-1): those modes bypass the
+        KEEP/SET factorization this API assumes, and are unsupported by
+        `token_mass` in V-K0C regardless of the requested agent's active
+        status.
+        """
+        if self.native_categorical_edit or self.force_refresh_every_check:
+            raise RuntimeError(
+                "VK0C_UNSUPPORTED_POLICY_MODE: token_mass is defined only on "
+                "the learned KEEP/SET factorization; native-categorical edit "
+                "and forced full refresh bypass it and are unsupported by "
+                "token_mass in V-K0C"
+            )
+        _hidden, keep_logit, skill_logits, _entropy_logits = self._token_context(
+            joint_obs,
+            compact,
+            team_vector,
+            working_skills,
+            working_ages,
+            working_active,
+            agent_id,
+            omega,
+            agent_relevance,
+        )
+        active = bool(working_active[int(agent_id)].item())
+        keep_mass, set_mass = self._split_token_mass(keep_logit, skill_logits, active)
+        return {
+            "keep_mass": keep_mass,
+            "set_mass": set_mass,
+            "raw_keep_logit": keep_logit,
+            "raw_skill_logits": skill_logits,
+        }
 
     def _token_context(
         self,
@@ -396,6 +501,15 @@ class FixedClockAREditPolicy(nn.Module):
                 logp = skill_dist.log_prob(skill)
                 entropy_weight = torch.ones_like(logp)
             else:
+                # `active` is guaranteed True here (the `elif not active`
+                # branch above already handled the no-incumbent case), so
+                # this is exactly the learned-KEEP branch `token_mass`
+                # models. Reuse the same `_split_token_mass` call token_mass
+                # wraps (A-VC-2) rather than re-deriving sigmoid(keep_logit)
+                # a second, independent way.
+                keep_mass, _set_mass = self._split_token_mass(
+                    keep_logit, skill_logits, True
+                )
                 skill_log_probs = F.log_softmax(skill_logits, dim=-1)
                 log_keep = F.logsigmoid(keep_logit)
                 log_switch = F.logsigmoid(-keep_logit)
@@ -406,7 +520,7 @@ class FixedClockAREditPolicy(nn.Module):
                     ).squeeze(-1)
                     choose_keep = log_keep >= best_set_logp
                 else:
-                    choose_keep = torch.rand_like(keep_logit) < torch.sigmoid(keep_logit)
+                    choose_keep = torch.rand_like(keep_logit) < keep_mass
                     best_skill = skill_dist.sample()
                 skill = best_skill
                 kind = torch.where(
@@ -416,7 +530,7 @@ class FixedClockAREditPolicy(nn.Module):
                 )
                 set_logp = log_switch + skill_dist.log_prob(skill)
                 logp = torch.where(choose_keep, log_keep, set_logp)
-                entropy_weight = (1.0 - torch.sigmoid(keep_logit)).detach()
+                entropy_weight = (1.0 - keep_mass).detach()
             entropy = Categorical(logits=entropy_logits).entropy() * entropy_weight
             if forced_tokens is not None and agent_id in forced_tokens:
                 kind, skill, logp = self._force_token(
@@ -429,10 +543,16 @@ class FixedClockAREditPolicy(nn.Module):
                     sampled_skill=skill,
                     like=kind,
                 )
-            if int(kind.item()) == SET_TOKEN:
-                working_skills[agent_id] = int(skill.item())
-                working_ages[agent_id] = 0
-                working_active[agent_id] = True
+            kind_value = int(kind.item())
+            advance_working_state(
+                working_skills,
+                working_ages,
+                working_active,
+                agent_id,
+                kind_value,
+                int(skill.item()),
+            )
+            if kind_value == SET_TOKEN:
                 set_value = skill
             else:
                 set_value = torch.full_like(skill, INVALID_SKILL)
