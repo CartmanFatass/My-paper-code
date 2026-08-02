@@ -8,8 +8,8 @@ import sys
 import numpy as np
 import pytest
 
-import ha_ctse_process.uav_cpp_backend as backend
-from ha_ctse_process.uav_cpp_backend import step_geometry_batch
+import envs.pettingzoo.uav_cpp_backend as backend
+from envs.pettingzoo.uav_cpp_backend import step_geometry_batch
 
 
 def _a2g(
@@ -305,7 +305,7 @@ def test_explicit_build_cache_is_reused_by_a_second_process():
         if part
     )
     script = (
-        "from ha_ctse_process.uav_cpp_backend import load_uav_cpp_backend; "
+        "from envs.pettingzoo.uav_cpp_backend import load_uav_cpp_backend; "
         "print(load_uav_cpp_backend().__file__)"
     )
     completed = subprocess.run(
