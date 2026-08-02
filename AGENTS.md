@@ -66,6 +66,8 @@ code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
+independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
+independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
 external_review_transport_execution=dedicated_agentify_transport_task
 agentify_transport_request=AGENTIFY_REVIEW_REQUEST
@@ -175,6 +177,7 @@ authority rules decide whether user input is required.
 - Agentify transport workspace: `docs/session-workspaces/agentify_transport_operator/`, `temp/sessions/agentify_transport_operator/`.
 - WDM chronological incident log: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`; it is not a scheduler or global blocker.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
+- Explorer restart continuity is the Explorer-owned `local_research/RESEARCH_CONTINUITY.md`; WDM never creates or edits research state.
 - Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use the dedicated Agentify transport task.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.

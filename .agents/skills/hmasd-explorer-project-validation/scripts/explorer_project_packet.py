@@ -7,9 +7,7 @@ Canonical contract: document_kind=explorer_project_candidate_packet_v1.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
-import re
 import sys
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -25,7 +23,6 @@ ORDERED_CANDIDATE_IDS = (
     "CAND-VSP-02",
     "CAND-VSP-05",
 )
-SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 AUTHORITY_FIELDS = (
     "scientific_authority",
     "code_authority",
@@ -119,26 +116,16 @@ def _safe_file(repo: Path, raw: Any, field: str, *, packet_path: bool = False) -
     return "/".join(pure.parts), resolved
 
 
-def _artifact(repo: Path, raw: Any, field: str) -> dict[str, Any]:
-    item = _mapping(raw, field)
-    _exact_keys(item, {"path", "bytes", "sha256"}, field)
-    relative, path = _safe_file(repo, item.get("path"), f"{field}.path")
-    expected_bytes = _integer(item.get("bytes"), f"{field}.bytes")
-    _require(expected_bytes >= 0, f"{field}.bytes must be >= 0")
-    expected_sha = _text(item.get("sha256"), f"{field}.sha256")
-    _require(SHA256_RE.fullmatch(expected_sha) is not None, f"{field}.sha256 must be lowercase SHA-256")
-    data = path.read_bytes()
-    actual_bytes = len(data)
-    actual_sha = hashlib.sha256(data).hexdigest()
-    _require(actual_bytes == expected_bytes, f"{field} byte count mismatch")
-    _require(actual_sha == expected_sha, f"{field} SHA-256 mismatch")
-    return {"path": relative, "bytes": expected_bytes, "sha256": expected_sha}
+def _artifact(repo: Path, raw: Any, field: str) -> str:
+    relative, path = _safe_file(repo, raw, field)
+    path.read_bytes()
+    return relative
 
 
-def _artifact_from_path(repo: Path, raw: Any, field: str) -> dict[str, Any]:
-    relative, path = _safe_file(repo, raw, f"{field}.path")
-    data = path.read_bytes()
-    return {"path": relative, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+def _artifact_from_path(repo: Path, raw: Any, field: str) -> str:
+    relative, path = _safe_file(repo, raw, field)
+    path.read_bytes()
+    return relative
 
 
 def _validate(packet: Any, repo: Path, *, packet_path: Path | None = None) -> dict[str, Any]:

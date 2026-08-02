@@ -136,6 +136,11 @@ foreach ($required in @(
     }
 }
 
+$explorerValidationScript = Get-Content -Raw -LiteralPath $explorerValidationScriptPath
+if ($explorerValidationScript.Contains('"sha256"') -or $explorerValidationScript.Contains('"bytes"')) {
+    throw 'Explorer project packet retains content-hash or byte-count identity fields'
+}
+
 if (-not $WorkflowDesignOnly) {
     $current = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/CURRENT_WORK.md')
     $context = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/AGENT_CONTEXT.md')
@@ -211,6 +216,8 @@ foreach ($retired in @(
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews',
+    'independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md',
+    'independent_research_continuity_owner=independent_research_explorer',
     'independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews',
     'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
     'independent_research_wdm_campaign_approval=none',
@@ -341,15 +348,21 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'research architect, portfolio integrator and only',
+    'research architect, portfolio integrator and only')) {
+    if (-not $independentResearchRole.Contains($required)) {
+        throw "Independent Research Explorer role missing: $required"
+    }
+}
+$independentResearchProcedure = "$independentResearchSkill $parallelResearch"
+foreach ($required in @(
     'SOURCE_ABSORPTION_BRIEF',
     'RL_PRINCIPLE_ANALYSIS_PACKET',
     'new_mechanism',
     'subdirection_split',
     'cross_direction_inspiration',
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND')) {
-    if (-not $independentResearchRole.Contains($required)) {
-        throw "Independent Research Explorer role missing: $required"
+    if (-not $independentResearchProcedure.Contains($required)) {
+        throw "Independent Research Explorer procedure missing: $required"
     }
 }
 $codePmRoleNormalized = $codePmRole -replace '\s+', ' '

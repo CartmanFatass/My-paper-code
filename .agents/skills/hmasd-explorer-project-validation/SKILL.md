@@ -25,7 +25,7 @@ The packet's canonical v1 fields are `workflow_id`,
 `user_authorization_reference`, `evidence_tier=nonformal_toy`, `origin_campaign`,
 `cohort`, `candidate`, `review_request`, `authority`, and `completion`.
 `origin_campaign` binds `campaign_id`, `campaign_workflow_commit`, and one
-artifact descriptor. `cohort.ordered_candidate_ids` is unique and
+repository-relative artifact path. `cohort.ordered_candidate_ids` is unique and
 `cohort.current_index` identifies the one `candidate.id` under review.
 For `EXPLORER-TOY-VALIDATION-2026-07-31-P1`, the script accepts only the frozen
 ordered queue `CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05`.
@@ -39,7 +39,8 @@ Use the adjacent `scripts/explorer_project_packet.py` only with its `build` and
 never writes files, messages, Git state, browser state, runtime state, or
 project state. All referenced files are repository-relative regular files under
 `local_research`, outside `local_research/pro_reviews`, with no traversal or
-symlink/reparse escape. SHA-256 and byte counts are re-read on every check.
+symlink/reparse escape. Build and check directly re-read each referenced regular
+file. Artifact identity is its safe path, not content metadata.
 
 `EXPLORER_ADVISORY_REFINEMENT_PACKET` is an optional Skill-level packet used
 only when Pro explicitly requests a gap; v1's mechanical script does not

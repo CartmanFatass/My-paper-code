@@ -509,6 +509,14 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     pro_review_skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "SKILL.md"
     ).read_text(encoding="utf-8")
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
     workspace = (
         REPO / "docs" / "session-workspaces" / "independent_research_explorer" / "README.md"
     ).read_text(encoding="utf-8")
@@ -517,6 +525,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     )
     role_lines = set(role.splitlines())
     skill_normalized = " ".join(skill.split())
+    parallel_normalized = " ".join(parallel.split())
     exact_owned_paths = (
         "centralized_explorer_workflow_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|"
         ".agents/skills/hmasd-independent-research-exploration/SKILL.md|"
@@ -529,7 +538,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     )
 
     for required in (
-        "session_id=019fbded-24cb-7541-aa16-0111b626b945",
+        "startup_identity=role|model|current_task",
         "workflow_authority=none",
         "workflow_modification_authority=none",
         "workflow_acceptance_authority=none",
@@ -539,6 +548,8 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "current_work_read=forbidden",
         "local_research_write_tool=apply_patch_only",
         "local_research_shell_mutation=forbidden",
+        "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
+        "continuity_owner=independent_research_explorer",
         "cross_task_transport=codex_native_send_message_to_thread",
         "cross_task_target=current_thread_id_from_user_or_native_task_context",
         "cross_task_model_and_thinking_overrides=omit",
@@ -568,6 +579,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     assert exact_owned_paths in set(wdm_role.splitlines())
     assert "workflow_authority=exclusive_for_owned_surfaces" not in role_lines
     assert "git_authority=direct_for_owned_workflow_surfaces" not in role_lines
+    assert not any(line.startswith("session_id=") for line in role_lines)
 
     for required in (
         "Workflow design is not an Explorer mode.",
@@ -576,6 +588,8 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "one minimal request to the dedicated Agentify task",
         "AGENTIFY_REVIEW_REQUEST",
         "AGENTIFY_REVIEW_RESULT",
+        "no archived task ID or route registry",
+        "one bounded owned-path scan",
     ):
         assert required in skill_normalized
     assert "$hmasd-collaborative-workflow-design" not in skill
@@ -605,8 +619,21 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     assert "registered_provision_review" not in role
 
     for required in (
+        "restart_identity=role|model|current_task",
+        "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
+        "last completed phase barrier",
+        "unfinished assignment or review",
+        "next scientific action",
+        "current authorized source boundary",
+        "Update it only at phase barriers, parked state or task end.",
+        "one bounded scan",
+    ):
+        assert required in parallel_normalized
+
+    for required in (
         "session_owner_role=independent_research_explorer",
-        "session_owner_id=019fbded-24cb-7541-aa16-0111b626b945",
+        "startup_identity=role|model|current_task",
+        "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
         "durable_workspace=docs/session-workspaces/independent_research_explorer/",
         "temporary_workspace=temp/sessions/independent_research_explorer/",
         "shared_surface_owner=false",

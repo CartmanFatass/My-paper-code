@@ -11,16 +11,23 @@ Explore HMASD-relevant ideas without entering the formal project workflow.
 Preserve the initial mission and several-live-directions discipline, but do not
 make a canonical scientific decision.
 
-The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
+The active Explorer is the `gpt-5.6-sol/ultra` research role in the current
+direct user task and the only writer; no archived task ID or route registry is
+required. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
   adversarial checks. The persistent Explorer owns each review item and sends
   one minimal request to the dedicated Agentify task.
 
+Restart continuity is owned by the Explorer and specified once in
+`references/parallel-research-workflow.md`; this Skill keeps the mode loop and
+scientific packet requirements.
+
 ## Start safely
 
-1. Confirm the active task session matches the registered Explorer session.
+1. Confirm the active task has the Explorer role, registered model and current
+   direct user assignment.
 2. Read the Explorer role and only
    `docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3`.
 3. Freeze exactly one mode, one campaign direction or evidence question, mission
@@ -30,7 +37,9 @@ Analysts for constructive RL analysis, and Sol-max Critics for later targeted
    registered probe. Never write to MyLib.
 5. Read [references/parallel-research-workflow.md](references/parallel-research-workflow.md)
    before dispatching children.
-6. For algorithm inspiration, read
+6. Load its Explorer-owned continuity entry. If it is absent, perform the one
+   bounded owned-path scan and create it exactly as that reference specifies.
+7. For algorithm inspiration, read
    [references/open-algorithm-inspiration.md](references/open-algorithm-inspiration.md).
    For candidate validation only, also read
    [references/research-methodology.md](references/research-methodology.md).

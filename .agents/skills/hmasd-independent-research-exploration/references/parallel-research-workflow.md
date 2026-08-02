@@ -12,6 +12,9 @@ automatic_campaign_progression=allowed_until_convergence
 unbounded_source_expansion=forbidden
 first_innovation_roster_independence_shielding=required
 later_cycle_collaboration_brief=required
+restart_identity=role|model|current_task
+continuity_entry=local_research/RESEARCH_CONTINUITY.md
+continuity_owner=independent_research_explorer
 ```
 
 ## Shared intake and barrier
@@ -29,6 +32,20 @@ or exact operational-failure record. Reject missing identity, locator,
 provenance, unauthorized source expansion or authority claims. Never use
 completion order as evidence priority. An operational failure records its
 stable signature and `scientific_output=false`; it cannot be cited as evidence.
+
+## Restart continuity
+
+The Explorer owns one lightweight entry at
+`local_research/RESEARCH_CONTINUITY.md`. It records only active campaign or
+artifact paths, the last completed phase barrier, unfinished assignment or
+review, the next scientific action and the current authorized source boundary.
+Update it only at phase barriers, parked state or task end. If absent, the new
+Explorer performs one bounded scan of its owned `local_research` paths and
+creates the entry with `apply_patch`. Continuity does not alter scientific
+ordering, source authority, read-only children or the Explorer single-writer
+rule.
+Do not add writer scripts, hashes, state machines, budgets or user gates to
+continuity.
 
 ## Evidence-review mode
 

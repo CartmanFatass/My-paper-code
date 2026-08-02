@@ -28,7 +28,7 @@ def _run(*args: str, expect: int = 0) -> subprocess.CompletedProcess[str]:
     return result
 
 
-def _fixture() -> tuple[tempfile.TemporaryDirectory[str], Path, Path, dict]:
+def _fixture() -> tuple[tempfile.TemporaryDirectory[str], Path, dict]:
     temporary = tempfile.TemporaryDirectory()
     repo = Path(temporary.name)
     local = repo / "local_research" / "campaign-1"
@@ -65,7 +65,7 @@ def _fixture() -> tuple[tempfile.TemporaryDirectory[str], Path, Path, dict]:
         "CAND-VSP-05",
     )
     packet = json.loads(built.stdout)
-    return temporary, repo, candidate, packet
+    return temporary, repo, packet
 
 
 def _check(repo: Path, packet: dict, *, expected: int = 0) -> subprocess.CompletedProcess[str]:
@@ -81,10 +81,12 @@ def _check_text(repo: Path, packet_text: str, *, name: str = "packet.json", expe
 
 
 def test_build_and_check_happy_path() -> None:
-    temporary, repo, _, packet = _fixture()
+    temporary, repo, packet = _fixture()
     try:
         assert packet["document_kind"] == "explorer_project_candidate_packet_v1"
         assert packet["evidence_tier"] == "nonformal_toy"
+        assert packet["origin_campaign"]["artifact"] == "local_research/campaign-1/campaign.json"
+        assert packet["candidate"]["artifact"] == "local_research/campaign-1/candidate.json"
         checked = _check(repo, packet)
         assert checked.stderr == ""
         assert json.loads(checked.stdout)["status"] == "EXPLORER_PROJECT_PACKET_OK"
@@ -93,7 +95,7 @@ def test_build_and_check_happy_path() -> None:
 
 
 def test_rejects_authority_path_and_package_negatives() -> None:
-    temporary, repo, _, packet = _fixture()
+    temporary, repo, packet = _fixture()
     try:
         for field in ("scientific_authority", "code_authority", "compute_authority", "project_state_effect"):
             broken = copy.deepcopy(packet)
@@ -148,34 +150,22 @@ def test_rejects_authority_path_and_package_negatives() -> None:
         temporary.cleanup()
 
 
-def test_rejects_traversal_pro_reviews_missing_and_tampered_artifacts() -> None:
-    temporary, repo, candidate, packet = _fixture()
+def test_rejects_traversal_pro_reviews_and_missing_artifacts() -> None:
+    temporary, repo, packet = _fixture()
     try:
         broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["path"] = "local_research/../outside.json"
+        broken["candidate"]["artifact"] = "local_research/../outside.json"
         _check(repo, broken, expected=2)
 
         pro = repo / "local_research" / "pro_reviews"
         pro.mkdir()
         (pro / "forbidden.json").write_text("{}", encoding="utf-8")
         broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["path"] = "local_research/pro_reviews/forbidden.json"
+        broken["candidate"]["artifact"] = "local_research/pro_reviews/forbidden.json"
         _check(repo, broken, expected=2)
 
         broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["path"] = "local_research/campaign-1/missing.json"
-        _check(repo, broken, expected=2)
-
-        broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["bytes"] += 1
-        _check(repo, broken, expected=2)
-
-        broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["sha256"] = broken["candidate"]["artifact"]["sha256"].upper()
-        _check(repo, broken, expected=2)
-
-        broken = copy.deepcopy(packet)
-        broken["candidate"]["artifact"]["sha256"] = "not-a-sha256"
+        broken["candidate"]["artifact"] = "local_research/campaign-1/missing.json"
         _check(repo, broken, expected=2)
 
         duplicate = json.dumps(packet).replace(
@@ -185,14 +175,12 @@ def test_rejects_traversal_pro_reviews_missing_and_tampered_artifacts() -> None:
         )
         _check_text(repo, duplicate, expected=2)
 
-        candidate.write_text('{"candidate":2}\n', encoding="utf-8")
-        _check(repo, packet, expected=2)
     finally:
         temporary.cleanup()
 
 
 def test_rejects_packet_path_link_or_reparse(monkeypatch: pytest.MonkeyPatch) -> None:
-    temporary, repo, _, packet = _fixture()
+    temporary, repo, packet = _fixture()
     try:
         packet_path = repo / "local_research" / "packet.json"
         packet_path.write_text(json.dumps(packet), encoding="utf-8")
