@@ -25,8 +25,8 @@ present, move it or delete it.**
 working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
-next_boundary=Workflow 7 touchpoint 2 CONVERGED CONFORMS (round 20260801_vk0c_design_conformance, 22_PRO_CONVERGENCE_3.md; A-VC-1..11 closed; five Gate-B clarifications in the ledger header). NEXT: implement the V-K0C stack per the amended VK0C_REALIZATION_DECISION_LEDGER.md — W-A token_mass+advance_working_state (r30_fixed_clock.py), W-B driver audit_vk0c_order_transport.py, W-C analyzer analyze_vk0c_result.py — with the Gate-B witnesses as focused tests and a bounded smoke as the proof-sized artifact; then PM launches the formal 2,688-anchor run (zero training, grant covers compute, check_compute_free.ps1 first); then touchpoint 3 result round and ITERATION_37. Transport note: two convergence captures truncated by an Agentify completion-detection defect, repaired same round (streaming-animation stopButton override + pin advance to e9f63674 user-approved); certified decision is turn 3. V-K1 and constrained mechanism blocked; D7.S/B3-L HELD.
-workflow_position=workflow 6 CLOSED (valid negative; exposure chain auditable 6/6; ITERATION_36 written); workflow 7 at step 5 (implement against the converged design)
+next_boundary=Workflow 8 OPEN: V-K0D order-robust carrier design per the ruling of round 20260802_vk0c_order_transport_result. Arms frozen by Pro: (i) permutation-equivariant/order-symmetrized high controller (PRIMARY; exact order-conjugacy assertion gate before any conclusion-bearing training), (ii) order-randomized current R30 (mandatory simpler control), (iii) canonical-only R30 reference. Arms match on information, KEEP/SET support, model/optimizer exposure, env interactions, seeds, evaluation bank, both serialization tests; interpretation grid in the raw. After order robustness: rerun the COMPLETE V-K0B access screen before any V-K1 comparison. V-K0C authoritative result: VK0C_FACTORIZED_RECORD VALID (structural sensitivity present, fresh nonmaterial 0.000383; trained specialization 1.2497 material both strata; amplification 1.2493; pure occupancy mediation rejected; propagation reproduces the competence split). V-K1, renewal classes, variable-N/UAV blocked; D7.S/B3-L HELD.
+workflow_position=workflow 7 CLOSED (VALID V-K0C factorized record; ITERATION_37 written); workflow 8 open at step 1 (V-K0D design)
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
@@ -211,8 +211,8 @@ aggressive_branch=another line's, never push
 formal_compute=user authority only
 review_transport=project_manager_direct
 autonomous_research_grant=ACTIVE_TEN_ITERATION_WORKFLOW_ROUND_GRANT_20260801 (user /goal 2026-08-01, "10轮完整的工作流自动迭代"; one iteration = one workflow round, per iteration_definition below)
-iterations_remaining=8
-conclusion_bearing_iterations_consumed=36
+iterations_remaining=7
+conclusion_bearing_iterations_consumed=37
 grant_history=TWENTY_ITERATION_OVERNIGHT_20260726 and FULL_PERMISSION_TEN_ITERATIONS_20260727 both consumed and closed; TEN_ITERATION_WORKFLOW_ROUND_GRANT_20260727B superseded 2026-08-01 with 7 remaining by the new ten-round grant; details in git history of this file
 iteration_definition=one complete Pro-to-Pro loop (user ruling 2026-07-27): receive Pro's ruling, make the code decisions, implement, run the experiment, submit the result back to Pro. Nothing smaller is an iteration.
 d7s_compute_authorization=GRANTED_20260727 (formal compute for the ten rounds is covered by the active grant)
@@ -228,8 +228,8 @@ uav_physical_fleet_boundary=fixed_slots_distinct_from_dynamic_service_roster
 ```
 
 Accounting: the active grant (2026-08-01) is ten workflow rounds; workflow 4
-was cancelled by user course ruling (consumes none), workflows 5 and 6 closed
-as iterations 1 and 2 (reports 35, 36), so `iterations_remaining=8`.
+was cancelled by user course ruling (consumes none), workflows 5, 6 and 7
+closed as iterations 1-3 (reports 35, 36, 37), so `iterations_remaining=7`.
 Workflows 1–3 closed under the superseded 20260727B grant. `conclusion_bearing_iterations_consumed` is the
 **lifetime count of iteration reports** — the machine-checkable anchor for
 `docs/report/ITERATION_<n>.md` (1–34 exist; 24–29 were supporting work) — not
@@ -347,7 +347,7 @@ the fence in `AGENTS.md` is the single source.
 | Findings and measurements | `docs/research/cdc/EVIDENCE_NOTES/` |
 | Review rounds, questions, rulings, reconciliations | `docs/external-review/rounds/` |
 | Closed generations G2–G16 | `docs/research/cdc/CLOSED_GENERATION_BOUNDARY_ARCHIVE_G2_G16.md` |
-| Latest Chinese iteration report | `docs/report/ITERATION_36.md` |
+| Latest Chinese iteration report | `docs/report/ITERATION_37.md` |
 
 Closed generations G17–G20R, UAV G1/G2, the contract-grill mechanism and the D7
 part-B margin-instrument era are retired; their evidence notes and round
