@@ -33,6 +33,15 @@ def test_read_only_and_fully_specified_requests_take_short_paths() -> None:
     assert "recommend the smallest answer" in skill
 
 
+def test_nontrivial_execution_reuses_one_plan_without_a_new_gate() -> None:
+    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
+    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
+    assert "nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan" in router
+    assert "plan_first_user_confirmation_effect=none_inside_active_grant" in router
+    assert "do not add a second plan artifact or confirmation" in skill
+    assert "stop only that branch" in skill
+
+
 def test_mutation_requires_one_visible_confirmed_plan() -> None:
     skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
     for field in (

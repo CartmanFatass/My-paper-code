@@ -1052,6 +1052,13 @@ foreach ($required in @(
     if (-not $sessionWorkspaceContract.Contains($required)) { throw "Session workspace contract missing: $required" }
 }
 foreach ($required in @(
+    'nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan',
+    'formal_plan_threshold=more_than_few_steps_or_material_uncertainty',
+    'plan_invalidated_action=stop_affected_branch|update_from_evidence|resume',
+    'plan_first_user_confirmation_effect=none_inside_active_grant')) {
+    if (-not $agents.Contains($required)) { throw "AGENTS missing plan-first execution rule: $required" }
+}
+foreach ($required in @(
     'runtime_authority=none',
     'workflow_zero_question_path=fully_specified_mutations',
     'workflow_decision_question_condition=changes_named_plan_field',

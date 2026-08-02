@@ -89,6 +89,16 @@ through impact mapping, smallest implementation, verification, review when
 risk-triggered, exact Git integration and reload receipt without per-action
 approval. A requester does not become an acceptance owner.
 
+For any non-few-step execution, the confirmed plan plus bounded live
+reconnaissance is the frozen execution plan required by `AGENTS.md`; do not add
+a second plan artifact or confirmation. If implementation evidence invalidates
+a tool, interface, path set or recovery assumption, stop only that branch,
+update the plan from the evidence and resume automatically unless the change
+expands authority, outcome, irreversible external effect or another named
+material plan field.
+This replaces ad-hoc reactive tool or strategy switching and adds no workflow
+state, terminal or recurring approval.
+
 Do not create a handoff, review, child, runtime record or state machine merely
 to manage this collaboration. WDM returns its accepted workflow commit and
 exact verification, or the smallest missing user decision.

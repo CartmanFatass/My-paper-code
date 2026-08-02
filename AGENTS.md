@@ -124,6 +124,11 @@ workflow_gate_form=budget_grant_or_scope_decision_only
 per_action_confirmation_inside_active_grant=forbidden
 reversible_internal_action_user_gate=forbidden
 internal_role_handoff_within_active_grant=no_user_authority_required
+nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan
+formal_plan_threshold=more_than_few_steps_or_material_uncertainty
+execution_plan_fields=objective|scope_and_non_goals|inputs_and_outputs|ordered_steps|validation|recovery|completion
+plan_invalidated_action=stop_affected_branch|update_from_evidence|resume
+plan_first_user_confirmation_effect=none_inside_active_grant
 operational_recovery_owner=code_project_manager
 operational_recovery_scientific_iteration_cost=zero
 ```
@@ -134,6 +139,15 @@ Generic Superpowers Skills are not executed. Use project-native Skills, keep act
 The current HMASD checkout and one valid assignment-ticket worktree are the only agent-writable project directories; every other directory is read-only to project agents, while project-external reads remain allowed.
 Agents do not create, edit, copy, move, delete or redirect files outside that scope and do not create drive mappings, junctions or path aliases. Isolated worktrees are provisioned only by `scripts/hmasd_workspace_ticket.py` beneath `C:/worktrees/HMASD`; raw external `git worktree` is not an authority path.
 A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary.
+
+Before a non-single-step or non-few-step task, perform bounded reconnaissance of
+the live contract/state, actual interfaces, dependencies, ownership/concurrency,
+likely failures and available recovery, then freeze a concise execution plan
+with the fields above. Single-step and genuinely few-step low-uncertainty work
+needs no formal plan. Do not silently switch tools, interfaces or strategy; new
+evidence that invalidates the plan stops only the affected branch while the plan
+is updated. This is an execution discipline, not a new approval gate: existing
+authority rules decide whether user input is required.
 
 ## Routed project mechanisms
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
