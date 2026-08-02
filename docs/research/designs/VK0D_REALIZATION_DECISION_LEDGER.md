@@ -1,6 +1,14 @@
 # V-K0D realization — Project Manager decision ledger
 
-Status: **complete code design for touchpoint 2 conformance** (workflow 8).
+Status: **CONVERGED — CONFORMS** (round `20260802_vk0d_design_conformance`,
+`22_PRO_CONVERGENCE_2.md`): every protected decision frozen (three-arm
+table, anonymous-OTHER PRIMARY on canonical serialization, counter-based
+order schedule, complete conjugacy gate with negative witness and
+per-checkpoint rechecks, matched exposure, exact reference digest
+reproduction, arm-status vocabulary, comparison precedence, invalidity
+locality). Next permitted boundary: the proof-sized implementation
+skeleton + Gate-B realization-conformance package (nine witnesses in the
+convergence raw); conclusion-bearing training not yet authorized.
 The scientific comparison is FROZEN by the ruling of round
 `20260802_vk0c_order_transport_result` (§SUCCESSOR_DIRECTION): three arms —
 permutation-equivariant/order-symmetrized carrier (PRIMARY),

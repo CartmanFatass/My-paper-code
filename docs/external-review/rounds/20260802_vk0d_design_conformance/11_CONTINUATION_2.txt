@@ -1,0 +1,49 @@
+Convergence turn 2 of the V-K0D design conformance check (stage_commit=85e5f1e9491097af01dbc477d068bb83f85386bd).
+
+The remaining A-VD-7 blocker is closed exactly as required (pushed as
+commit b01f6312): the undefined "or a pre-frozen equivalence rule"
+alternative is removed, and REFERENCE_CONFORMS is frozen as exact
+canonical digest equality to the valid V-K0B bundles. The amended A-VD-7
+is reproduced verbatim below, together with the invalidity-locality
+stamping entered from your realization clarification. Please state whether
+the design now conforms and issue your convergence decision for this
+touchpoint.
+
+--- BEGIN AMENDED A-VD-7 ---
+**A-VD-7 (reference no-op reproduction gate — exact digest equality;
+amended per convergence turn 1, which removed the undefined equivalence
+alternative).** REFERENCE_CONFORMS iff, for every scientific seed:
+
+1. canonical SHA-256 of the final high-actor state_dict equals the
+   corresponding valid V-K0B digest;
+2. canonical SHA-256 of the final high-value state_dict equals the
+   corresponding valid V-K0B digest;
+3. canonical SHA-256 of the shared high-optimizer state equals the
+   corresponding valid V-K0B digest;
+4. resolved training semantics and actual exposure match (and the
+   canonical path consumes no order-stream draw);
+5. the frozen evaluation reproduces canonical competence above 0.75 and
+   reversed competence decisively below 0.75.
+
+State digests bind canonically over parameter/buffer name, shape, dtype
+and exact bytes; the optimizer digest binds its parameter-name mapping,
+parameter-group hyperparameters and per-parameter optimizer state, never
+transient Python object identities. Only explicitly identified non-model
+provenance fields (run path, added V-K0D manifest metadata) may differ —
+excluded from the digests by construction. There is NO numerical
+tolerance, NO behavioral-only equivalence, NO later-selected equivalence
+rule, NO competence-similarity fallback; literal whole-checkpoint-file
+equality remains unnecessary. A mismatch produces exactly
+`INVALID_VK0D_CARRIER_COMPARISON / CANONICAL_REFERENCE_NOT_REPRODUCED` —
+not evidence for or against either correction.
+
+--- AND THE LOCALITY STAMP ADDED TO A-VD-8 ---
+
+Convergence clarification: the analyzer stamps every
+invalid reason as `SHARED_COMPARISON_INVALIDITY` (environment, bank,
+bootstrap, action table, common launcher, exposure measurement, shared
+analyzer — activates precedence 1) or `ARM_LOCAL_INVALIDITY` (e.g., a
+PRIMARY-only encoder or checkpoint failure, which leaves a validly
+qualified CONTROL standing).
+
+--- END AMENDED SECTIONS ---
