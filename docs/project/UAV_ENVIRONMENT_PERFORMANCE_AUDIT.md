@@ -122,7 +122,7 @@ position 的试探计算。试探位置只能走原标量 fallback，不能污�
   observations 与 `next_state`，只执行匿名 owner repack；onset/rejoin 强制完整重建。
 - controller worker 直接读取当前 active mask 与物理位置来生成动作，不再在动作前构造一个未使用的
   actor/critic view；step 后仍返回原有完整 view，因此不改变进程协议或估计量。
-- `scenario_base.py` 为每次权威 `_update_channel_state()` 建立精确状态快照，复用 UAV-user
+- `envs.pettingzoo.relay.routed_core` 为每次权威 `_update_channel_state()` 建立精确状态快照，复用 UAV-user
   路损、定向 link SINR 与 capacity；干扰半径和噪声线性值按其参数签名复用。
 - 快照逐项校验 UAV/user/ground-BS 坐标、不可用 mask 和通信配置。位置试探、配置变化、
   服务退出或恢复均走原标量路径；试探结果不写入快照，恢复原状态后仍可命中原快照。

@@ -10,7 +10,7 @@ pytest.importorskip("gymnasium")
 
 from config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
-from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from train_multiproc_config_1 import validate_scenario7_configuration
 
 

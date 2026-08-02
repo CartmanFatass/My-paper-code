@@ -14,10 +14,10 @@ from envs.pettingzoo.cooperative_two_timescale_sparse import (
     CooperativeTwoTimescaleSparseEnv,
 )
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
-from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
-from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
-from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
+from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
+from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from envs.pettingzoo.two_timescale_role_free_actions import (
     TwoTimescaleRoleFreeActionsEnv,
 )

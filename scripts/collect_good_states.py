@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from hmasd.logging import main_logger, init_multiproc_logging
 from config_1 import Config
 from hmasd.agent import HMASDAgent

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-使用训练时的实际参数测试scenario4.py
+使用训练时的实际参数测试relay.forced_relay
 验证在真实训练参数下的SINR和覆盖率表现
 """
 
@@ -9,12 +9,12 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 
 def test_training_parameters():
     """使用训练时的实际参数进行测试"""
     print("=" * 60)
-    print("使用训练参数测试scenario4.py")
+    print("使用训练参数测试relay.forced_relay")
     print("=" * 60)
     
     # 使用训练时的实际参数

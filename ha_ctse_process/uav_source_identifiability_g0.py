@@ -26,7 +26,7 @@ import numpy as np
 from scipy.stats import beta
 
 from config_1 import Config
-from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 
 
 ALGORITHM_ID = "UAV_SOURCE_IDENTIFIABILITY_G0"

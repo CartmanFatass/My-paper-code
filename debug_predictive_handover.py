@@ -10,7 +10,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 
 def debug_connectivity_issue():
     """调试连接问题"""

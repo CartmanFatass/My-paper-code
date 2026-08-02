@@ -1,30 +1,18 @@
 import numpy as np
 import heapq
+import copy
 import matplotlib
 matplotlib.use('Agg')
 from pettingzoo import ParallelEnv
-from gymnasium.spaces import Box, Dict, Discrete
+from gymnasium.spaces import Box, Dict
 from scipy.spatial.distance import cdist
-
-_STEP_CACHE_UNSET = object()
-
-# 尝试导入路由协议
 try:
-    from envs.pettingzoo.routing_protocols import (
-        BaseRoutingProtocol, HGGRProtocol, AODVProtocol, 
-        DSDVProtocol, GPSRProtocol, WidestPathProtocol
-    )
-    ROUTING_PROTOCOLS_AVAILABLE = True
-except ImportError as e:
-    print(f"路由协议导入失败: {e}")
-    ROUTING_PROTOCOLS_AVAILABLE = False
-
-try:
-    from stable_baselines3.common.running_mean_std import RunningMeanStd
-    SB3_RUNNING_MEAN_STD_AVAILABLE = True
-except ImportError as e:
-    print(f"stable_baselines3.common.running_mean_std 导入失败: {e}")
-    SB3_RUNNING_MEAN_STD_AVAILABLE = False
+    from filterpy.kalman import KalmanFilter
+except ImportError as exc:
+    raise ImportError(
+        "envs.pettingzoo.relay.forced_relay requires the 'filterpy' package. "
+        "Install it with `pip install filterpy` or use envs.pettingzoo.relay.routed_core if Kalman filtering is not needed."
+    ) from exc
 
 
 class UAVForcedRelayEnv(ParallelEnv):
@@ -41,9 +29,6 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def __init__(self, config=None, **kwargs):
         super().__init__()
-        
-        n_uavs_for_hop_map = kwargs.get('n_uavs', 12) if config is None else getattr(config, 'n_agents', 12)
-        self.hop_map = {i: float('inf') for i in range(n_uavs_for_hop_map)}
 
         # 如果没有传入config对象，则使用默认值或kwargs中的值
         if config is None:
@@ -54,7 +39,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.area_size = kwargs.get('area_size', 2500)
             self.height_range = kwargs.get('height_range', (50, 200))
             self.max_speed = kwargs.get('max_speed', 30)
-            self.discrete_speeds = kwargs.get('discrete_speeds', [kwargs.get('discrete_speed', 15.0)]) # 支持多级速度
             self.time_step = kwargs.get('time_step', 1.0)
             self.max_steps = kwargs.get('max_steps', 5000)
             self.user_distribution = kwargs.get('user_distribution', "forced_relay_cluster")
@@ -69,8 +53,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 场景特定参数
             self.n_clusters = kwargs.get('n_clusters', 4)
             self.cluster_std = kwargs.get('cluster_std', 80)
-            self.n_remote_clusters = kwargs.get('n_remote_clusters', 0) # 新增：远程用户群数量
-            self.remote_cluster_std = kwargs.get('remote_cluster_std', 120) # 新增：远程用户群标准差
             self.central_area_ratio = kwargs.get('central_area_ratio', 0.6)
             self.base_station_distance_factor = kwargs.get('base_station_distance_factor', 0.8)
             self.observation_radius = kwargs.get('observation_radius', 600)
@@ -87,38 +69,16 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.randomize_uav_start = kwargs.get('randomize_uav_start', True)
             self.test_reward_mode = kwargs.get('test_reward_mode', False)
             
-            # 奖励类型和权重 - 简化版：仅保留必要的权重参数
-            self.reward_type = kwargs.get('reward_type', "naive")  # 默认为naive模式
-            self.w_load_balance = kwargs.get('w_load_balance', 0.35)  # load_balance模式需要
-            self.w_freshness_penalty = kwargs.get('w_freshness_penalty', 0.5)  # awareness模式需要
-            self.w_first_contact = kwargs.get('w_first_contact', 0.1)  # load_balance模式的催化剂奖励
-            self.w_repulsion = kwargs.get('w_repulsion', 0.0)  # 斥力场惩罚权重
-            self.w_backhaul_outage = kwargs.get('w_backhaul_outage', 0.8)  # load_balance模式：回传断联惩罚
-            self.w_full_disconnect = kwargs.get('w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
-            self.w_coverage_drop = kwargs.get('w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
-            self.w_outage_memory = kwargs.get('w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
-            self.w_relay_break = kwargs.get('w_relay_break', 1.2)  # load_balance模式：承载用户的回程路径断裂惩罚
-            self.w_backhaul_margin = kwargs.get('w_backhaul_margin', 0.6)  # load_balance模式：回程瓶颈容量余量惩罚
-            self.backhaul_margin_target_mbps = kwargs.get('backhaul_margin_target_mbps', 10.0)
-            self.outage_memory_decay = kwargs.get('outage_memory_decay', 0.90)
-            self.enable_backhaul_action_guard = kwargs.get('enable_backhaul_action_guard', True)
-            self.backhaul_guard_min_capacity_mbps = kwargs.get('backhaul_guard_min_capacity_mbps', 5.0)
-            self.backhaul_guard_reject_speed_scale = kwargs.get('backhaul_guard_reject_speed_scale', 0.0)
-            
-            # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
-            # 基于大疆(DJI)等典型四旋翼参数估算
-            # 假设 max_speed = 30 m/s
-            # 最大水平能耗因子: 1.0
-            # 最大垂直能耗因子: 2.5 (垂直机动代价远高于水平)
-            self.energy_weight_xy = kwargs.get('energy_weight_xy', 1.0)
-            self.energy_weight_z = kwargs.get('energy_weight_z', 2.5)
-            
-            # 计算理论最大单步能耗代价 (用于归一化)
-            # Max cost = (weight_xy * max_speed) + (weight_z * max_speed)
-            # 注意：实际上无人机很难同时在水平和垂直方向都达到最大速度，但作为归一化分母足够安全
-            self.max_step_energy_cost = (self.energy_weight_xy * self.max_speed + 
-                                         self.energy_weight_z * self.max_speed) * self.time_step
-
+            # 奖励类型和权重
+            self.reward_type = kwargs.get('reward_type', "health")
+            self.w_connectivity = kwargs.get('w_connectivity', 0.5)
+            self.w_diversity = kwargs.get('w_diversity', 1.0)
+            self.w_coverage = kwargs.get('w_coverage', 1.0)
+            self.w_dispersion = kwargs.get('w_dispersion', 0.05)
+            self.w_throughput = kwargs.get('w_throughput', 1.0)
+            self.w_handover = kwargs.get('w_handover', 0.1)
+            self.w_pingpong = kwargs.get('w_pingpong', 1.0)
+            self.w_outage = kwargs.get('w_outage', 1.0)
             self.outage_sinr_threshold_db = kwargs.get('outage_sinr_threshold_db', -5)
             self.predictive_handover = kwargs.get('predictive_handover', False)
 
@@ -132,8 +92,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.enable_predictive_state = kwargs.get('enable_predictive_state', False)
             self.prediction_horizon = kwargs.get('prediction_horizon', 3)
             
-            # 卡尔曼滤波控制参数 (已停用)
-            self.enable_cluster_kalman_filter = False
+            # 卡尔曼滤波控制参数
+            self.enable_cluster_kalman_filter = kwargs.get('enable_cluster_kalman_filter', False)
             
             # 通信参数
             self.carrier_frequency = kwargs.get('carrier_frequency', 2e9)
@@ -148,9 +108,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.max_observed_uavs = kwargs.get('max_observed_uavs', 15)
             self.max_observed_users = kwargs.get('max_observed_users', 25)
             self.max_observed_bs = kwargs.get('max_observed_bs', 4)
-            self.max_observed_overloaded_uavs = kwargs.get('max_observed_overloaded_uavs', 3) # 新增：观测过载无人机的数量
-            self.routing_protocol = kwargs.get('routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
-            self.action_space_type = kwargs.get('action_space_type', 'discrete')
         else:
             # 使用config对象通过getattr获取参数
             # 基本环境参数
@@ -159,7 +116,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.area_size = getattr(config, 'area_size', 2500)
             self.height_range = getattr(config, 'height_range', (50, 200))
             self.max_speed = getattr(config, 'max_speed', 30)
-            self.discrete_speeds = getattr(config, 'discrete_speeds', [getattr(config, 'discrete_speed', 15.0)]) # 支持多级速度
             self.time_step = getattr(config, 'time_step', 1.0)
             self.max_steps = getattr(config, 'max_steps', 5000)
             self.user_distribution = getattr(config, 'user_distribution', "forced_relay_cluster")
@@ -174,8 +130,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 场景特定参数
             self.n_clusters = getattr(config, 'n_clusters', 4)
             self.cluster_std = getattr(config, 'cluster_std', 80)
-            self.n_remote_clusters = getattr(config, 'n_remote_clusters', 0) # 新增：远程用户群数量
-            self.remote_cluster_std = getattr(config, 'remote_cluster_std', 120) # 新增：远程用户群标准差
             self.central_area_ratio = getattr(config, 'central_area_ratio', 0.6)
             self.base_station_distance_factor = getattr(config, 'base_station_distance_factor', 0.8)
             self.observation_radius = getattr(config, 'observation_radius', 600)
@@ -192,33 +146,16 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.randomize_uav_start = getattr(config, 'randomize_uav_start', True)
             self.test_reward_mode = getattr(config, 'test_reward_mode', False)
             
-            # 奖励类型和权重 - 简化版：仅保留必要的权重参数
-            self.reward_type = getattr(config, 'reward_type', "naive")  # 默认为naive模式
-            self.w_load_balance = getattr(config, 'w_load_balance', 0.35)  # load_balance模式需要
-            self.w_freshness_penalty = getattr(config, 'w_freshness_penalty', 0.5)  # awareness模式需要
-            self.w_first_contact = getattr(config, 'w_first_contact', 0.1)  # load_balance模式的催化剂奖励
-            self.w_repulsion = getattr(config, 'w_repulsion', 0.0)  # 斥力场惩罚权重
-            self.w_backhaul_outage = getattr(config, 'w_backhaul_outage', 0.8)  # load_balance模式：回传断联惩罚
-            self.w_full_disconnect = getattr(config, 'w_full_disconnect', 1.0)  # load_balance模式：整网断联惩罚
-            self.w_coverage_drop = getattr(config, 'w_coverage_drop', 0.5)  # load_balance模式：覆盖率骤降惩罚
-            self.w_outage_memory = getattr(config, 'w_outage_memory', 0.25)  # load_balance模式：短期断联记忆惩罚
-            self.w_relay_break = getattr(config, 'w_relay_break', 1.2)  # load_balance模式：承载用户的回程路径断裂惩罚
-            self.w_backhaul_margin = getattr(config, 'w_backhaul_margin', 0.6)  # load_balance模式：回程瓶颈容量余量惩罚
-            self.backhaul_margin_target_mbps = getattr(config, 'backhaul_margin_target_mbps', 10.0)
-            self.outage_memory_decay = getattr(config, 'outage_memory_decay', 0.90)
-            self.enable_backhaul_action_guard = getattr(config, 'enable_backhaul_action_guard', True)
-            self.backhaul_guard_min_capacity_mbps = getattr(config, 'backhaul_guard_min_capacity_mbps', 5.0)
-            self.backhaul_guard_reject_speed_scale = getattr(config, 'backhaul_guard_reject_speed_scale', 0.0)
-            
-            # === test_reward 模式参数：基于物理动力学的审慎奖励设计 ===
-            # 基于大疆(DJI)等典型四旋翼参数估算
-            self.energy_weight_xy = getattr(config, 'energy_weight_xy', 1.0)
-            self.energy_weight_z = getattr(config, 'energy_weight_z', 2.5)
-            
-            # 计算理论最大单步能耗代价 (用于归一化)
-            self.max_step_energy_cost = (self.energy_weight_xy * self.max_speed + 
-                                         self.energy_weight_z * self.max_speed) * self.time_step
-            
+            # 奖励类型和权重
+            self.reward_type = getattr(config, 'reward_type', "health")
+            self.w_connectivity = getattr(config, 'w_connectivity', 0.5)
+            self.w_diversity = getattr(config, 'w_diversity', 1.0)
+            self.w_coverage = getattr(config, 'w_coverage', 1.0)
+            self.w_dispersion = getattr(config, 'w_dispersion', 0.05)
+            self.w_throughput = getattr(config, 'w_throughput', 1.0)
+            self.w_handover = getattr(config, 'w_handover', 0.1)
+            self.w_pingpong = getattr(config, 'w_pingpong', 1.0)
+            self.w_outage = getattr(config, 'w_outage', 1.0)
             self.outage_sinr_threshold_db = getattr(config, 'outage_sinr_threshold_db', -5)
             self.predictive_handover = getattr(config, 'predictive_handover', False)
 
@@ -232,8 +169,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.enable_predictive_state = getattr(config, 'enable_predictive_state', False)
             self.prediction_horizon = getattr(config, 'prediction_horizon', 3)
             
-            # 卡尔曼滤波控制参数 (已停用)
-            self.enable_cluster_kalman_filter = False
+            # 卡尔曼滤波控制参数
+            self.enable_cluster_kalman_filter = getattr(config, 'enable_cluster_kalman_filter', False)
             
             # 通信参数
             self.carrier_frequency = getattr(config, 'carrier_frequency', 2e9)
@@ -248,104 +185,23 @@ class UAVForcedRelayEnv(ParallelEnv):
             self.max_observed_uavs = getattr(config, 'max_observed_uavs', 15)
             self.max_observed_users = getattr(config, 'max_observed_users', 25)
             self.max_observed_bs = getattr(config, 'max_observed_bs', 4)
-            self.max_observed_overloaded_uavs = getattr(config, 'max_observed_overloaded_uavs', 3) # 新增：观测过载无人机的数量
-            self.routing_protocol = getattr(config, 'routing_protocol', 'widest_path') # 'hggr', 'widest_path', 'geographic'
-            self.action_space_type = getattr(config, 'action_space_type', 'discrete')
-
-        # === 无人机动力学参数 (基于 IEEE TWC 论文: Zeng et al. 2019) ===
-        # 参考型号: 类似 DJI Phantom 4 的小型旋翼机
-        self.P0 = 79.86  # 悬停叶片轮廓功率 (W)
-        self.Pi = 88.63  # 悬停诱导功率 (W)
-        self.U_tip = 120 # 叶尖速度 (m/s)
-        self.v0 = 4.03   # 平均诱导速度 (m/s)
-        self.d0 = 0.6    # 机身阻力系数
-        self.rho = 1.225 # 空气密度 (kg/m^3)
-        self.s = 0.05    # 旋翼实度
-        self.A = 0.503   # 桨盘面积 (m^2)
-        
-        # 预计算常数项，减少step中的计算量
-        self.k1 = 3 / (self.U_tip ** 2)
-        self.k2 = 1 / (2 * self.v0 ** 2) # 用于 1/(2v0^2)
-        self.k3 = 0.5 * self.d0 * self.rho * self.s * self.A
-        
-        # 垂直飞行能耗权重 (近似处理: 爬升功率 = mg * Vz)
-        # 假设无人机质量 m=1.5kg, g=9.8 => mg ≈ 15N
-        # 垂直功率 P_z ≈ 15 * Vz (Watts)
-        self.P_z_coeff = 15.0 
-        
-        # 归一化基准：计算最大速度下的功率，用于将惩罚缩放到 [0,1]
-        # 假设最大水平速度和垂直速度
-        # 这里的 max_speed 来自 config
-        self.max_power_consumption = self._calculate_power_consumption(self.max_speed, self.max_speed) if hasattr(self, 'max_speed') else 300.0 # 默认给个值
-        
-        # 惩罚系数：决定能耗在总奖励中的占比
-        # 如果设为 0.05，意味着满功率飞行的惩罚相当于损失了 5% 的覆盖率
-        self.w_energy = 0.05
-            
-        # HGGR 分层路由参数
-        self.hggr_update_interval = getattr(config, 'k', 10) if config else 10 # 默认为10
-
-        # In __init__ method
-        grid_resolution = 50  # 保持50x50网格
-        self.grid_map_size = (grid_resolution, grid_resolution)
-        self.last_visit_time_map = np.zeros(self.grid_map_size, dtype=np.int32)
-        self.grid_cell_size = self.area_size / grid_resolution
-
-        # 新增: Reward Shaping 相关变量
-        self.previous_bottleneck_capacities = np.zeros(self.n_uavs)
-
-        # 新增: stability_aware 奖励所需的状态追踪变量
-        self.previous_coverage_ratio = 0.0
-        self.previous_serving_uavs = set()
-        self.prev_effective_user_service_status = np.zeros(self.n_users, dtype=bool)
-        self.prev_load_balance_coverage_ratio = 0.0
-        self.backhaul_outage_ema = 0.0
-        self.full_disconnect_streak = 0
-        self.previous_routing_paths_snapshot = {}
-        self.previous_connections_snapshot = np.zeros((self.n_uavs, self.n_users), dtype=bool)
-
-        # 新增: 层次强化学习中的全局基站信息缓存机制
-        self.global_bs_cache = {}  # 存储全局同步的基站信息 {bs_idx: (normalized_pos, visibility_flag)}
-        self.last_global_sync_step = -1  # 记录上次全局同步的步数
-
-        # 新增: 基于3GPP标准的AMC (自适应调制与编码) 查找表
-        # (SINR dB, Spectral Efficiency in bits/s/Hz)
-        self.mcs_table = [
-            (-5.0, 0.0),   # 传输失败
-            (-2.5, 0.4),   # QPSK, ~1/5
-            (0.0, 0.6),    # QPSK, ~1/3
-            (2.5, 1.0),    # QPSK, ~1/2
-            (5.0, 2.0),    # 16-QAM, ~1/2
-            (7.5, 2.6),    # 16-QAM, ~2/3
-            (10.0, 3.0),   # 16-QAM, ~3/4
-            (12.5, 4.0),   # 64-QAM, ~2/3
-            (15.0, 4.5),   # 64-QAM, ~3/4
-            (17.5, 5.0),   # 64-QAM, ~5/6
-            (float('inf'), 6.6) # 256-QAM, ~5/6
-        ]
 
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(self.seed_val)
-        
-        # 【关键修复】初始化状态变量，防止在reset()之前调用render()时出错
-        self.current_step = 0
-        self.uav_positions = np.zeros((self.n_uavs, 3))
-        self.user_positions = np.zeros((self.n_users, 3))
-        self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
-        self.routing_paths = {}
-
-        # 新增: 探索发现相关的状态变量
-        self.discovered_users_this_episode = set()
-        self.discovered_bs_this_episode = set()
 
         # Track user service status to provide sparse rewards correctly
         self.user_serviced_status = np.zeros(self.n_users, dtype=bool)
-        self.prev_user_serviced_status = np.zeros(self.n_users, dtype=bool)
         
         # 切换和预测相关
-        # 卡尔曼滤波器已被移除
-        self.kalman_filters = None
-        self.cluster_kalman_filters = None
+        # 根据配置决定是使用用户级别还是簇级别的卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # RPGM模式下，为每个簇维持一个卡尔曼滤波器
+            self.cluster_kalman_filters = [self._create_kalman_filter(self.time_step) for _ in range(self.n_clusters)]
+            self.kalman_filters = None  # 不使用用户级别的滤波器
+        else:
+            # 传统模式，为每个用户维持一个卡尔曼滤波器
+            self.kalman_filters = [self._create_kalman_filter(self.time_step) for _ in range(self.n_users)]
+            self.cluster_kalman_filters = None
             
         self.user_velocities = np.zeros((self.n_users, 3))
         self.user_serving_uav = -np.ones(self.n_users, dtype=int) # 硬切换模式下使用
@@ -371,69 +227,35 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 计算ACLR线性值
         self.aclr_linear = 10 ** (-self.aclr_db / 10)  # 转换为线性值以便计算
 
-        # 创建从离散动作ID到速度向量 [vx, vy, vz] 的映射
-        self.action_to_velocity = {0: np.array([0, 0, 0])}  # 0: 悬停 (Hover)
-        action_id = 1
-        
-        # 定义基本方向向量
-        base_directions = [
-            np.array([1, 0, 0]),       # E
-            np.array([-1, 0, 0]),      # W
-            np.array([0, 1, 0]),       # N
-            np.array([0, -1, 0]),      # S
-            np.array([1, 1, 0]) / np.sqrt(2),   # NE
-            np.array([1, -1, 0]) / np.sqrt(2),  # SE
-            np.array([-1, 1, 0]) / np.sqrt(2),  # NW
-            np.array([-1, -1, 0]) / np.sqrt(2), # SW
-            np.array([0, 0, 1]),       # Up
-            np.array([0, 0, -1]),     # Down
-        ]
-
-        # 为每个速度等级生成方向动作
-        for speed in self.discrete_speeds:
-            for direction_vector in base_directions:
-                self.action_to_velocity[action_id] = direction_vector * speed
-                action_id += 1
-
-        self.n_discrete_actions = len(self.action_to_velocity)
-
         # 智能体列表
         self.possible_agents = [f"uav_{i}" for i in range(self.n_uavs)]
         self.agents = self.possible_agents.copy()
 
         # 观测和动作空间
-        self_state_dim = 5
-        overloaded_uav_obs_dim = self.max_observed_overloaded_uavs * 3  # 每个过载UAV观察3个维度 (x,y,load)
-
-        base_obs_dim = 3 + 3 + self_state_dim + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + overloaded_uav_obs_dim + 1
-
         if self.predictive_handover:
-            self.obs_dim = base_obs_dim + self.max_observed_users * 7 # 6 -> 7
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*6(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 6 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
+            # If predictive handover is enabled, force the reward type to 'handover'
             if self.reward_type != "handover":
                 print("Warning: predictive_handover is True, forcing reward_type to 'handover'.")
                 self.reward_type = "handover"
         elif self.enable_soft_handover:
-            self.obs_dim = base_obs_dim + self.max_observed_users * 6 # 5 -> 6
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*5(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 5 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
         else:
-            self.obs_dim = base_obs_dim + self.max_observed_users * 5 # 4 -> 5
+            # obs_dim: 3(自身位置) + 3(最近邻) + 4(自身状态) + N_user*4(用户) + N_uav*4(无人机) + N_bs*4(基站) + 1(步数)
+            self.obs_dim = 3 + 3 + 4 + self.max_observed_users * 4 + self.max_observed_uavs * 4 + self.max_observed_bs * 4 + 1
         
-        action_mask_dim = self.n_discrete_actions if self.action_space_type == 'discrete' else 3
         self.observation_spaces = {
             agent: Dict({
                 "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
-                "action_mask": Box(low=0, high=1, shape=(action_mask_dim,))
+                "action_mask": Box(low=0, high=1, shape=(3,))
             }) for agent in self.possible_agents
         }
-        if self.action_space_type == 'discrete':
-            self.action_spaces = {
-                agent: Discrete(self.n_discrete_actions)
-                for agent in self.possible_agents
-            }
-        elif self.action_space_type == 'continuous':
-            self.action_spaces = {
-                agent: Box(low=-1, high=1, shape=(3,))
-                for agent in self.possible_agents
-            }
+        self.action_spaces = {
+            agent: Box(low=-1, high=1, shape=(3,))
+            for agent in self.possible_agents
+        }
 
         # 初始化地面基站
         self._init_ground_bs()
@@ -443,7 +265,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.fig = None
         self.ax = None
         
-        # 重新计算并设置场景4的状态维度（简化版：仅包含物理实体状态）
+        # 重新计算并设置场景4的状态维度（详细版：包含每个用户的完整信息）
         # 1. 无人机位置: n_uavs * 3
         uav_pos_dim = self.n_uavs * 3
         
@@ -452,81 +274,33 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 3. 地面基站位置: n_ground_bs * 3
         bs_pos_dim = self.n_ground_bs * 3
-
-        # 4. 无人机负载: n_uavs * 1 (新增)
-        uav_load_dim = self.n_uavs
-
-        # 5. 当前步数: 1
+        
+        # 4. 无人机连接状态: n_uavs
+        uav_connected_dim = self.n_uavs
+        
+        # 5. 系统通信质量指标: 4 (平均SINR, 连接质量, 平均跳数, 系统吞吐量)
+        comm_quality_dim = 4
+        
+        # 6. 当前步数: 1
         step_dim = 1
         
-        # 重新设置state_dim 
-        self.state_dim = uav_pos_dim + user_info_dim + bs_pos_dim + uav_load_dim + step_dim
+        # 重新设置state_dim
+        self.state_dim = uav_pos_dim + user_info_dim + bs_pos_dim + uav_connected_dim + comm_quality_dim + step_dim
 
-        # 添加数据包级别仿真相关的变量
-        self.metrics = {
-            "packets_sent": 0,
-            "packets_arrived": 0,
-            "total_end_to_end_delay": 0.0,
-            "total_hop_count": 0,
-            "route_disconnections": 0,  # 数据包由于路由中断而丢失的数量
-            "total_energy_consumed_mj": 0.0,  # 总能耗（毫焦耳）
-        }
-        
-        # 当前网络中传输的活跃数据包列表
-        self.active_packets = []
-        self.packet_id_counter = 0
-        
-        # 简化的能耗模型（示例值）
-        self.ENERGY_TX_MJ = 0.06  # 传输一个数据包的能耗（毫焦耳）
-        self.ENERGY_RX_MJ = 0.02  # 接收一个数据包的能耗（毫焦耳）
-        
-        # 初始化路由协议实例（策略模式）
-        self.router = None
-        if ROUTING_PROTOCOLS_AVAILABLE:
-            try:
-                if self.routing_protocol == 'hggr':
-                    self.router = HGGRProtocol(self)
-                elif self.routing_protocol == 'aodv':
-                    self.router = AODVProtocol(self)
-                elif self.routing_protocol == 'dsdv':
-                    self.router = DSDVProtocol(self)
-                elif self.routing_protocol == 'geographic':
-                    self.router = GPSRProtocol(self)
-                elif self.routing_protocol == 'widest_path':
-                    self.router = WidestPathProtocol(self)
-                else:
-                    # 默认使用widest_path协议
-                    self.router = WidestPathProtocol(self)
-            except Exception as e:
-                print(f"路由协议初始化失败: {e}")
-                self.router = None
-
-    def _calculate_power_consumption(self, v_xy, v_z):
-        """
-        基于物理模型的功率计算 (Zeng et al. 2019)
-        返回单位: Watts
-        """
-        # 1. 叶片轮廓功率 (Profile Power)
-        # P_profile = P0 * (1 + 3 * V_xy^2 / U_tip^2)
-        p_profile = self.P0 * (1 + self.k1 * (v_xy ** 2))
-        
-        # 2. 诱导功率 (Induced Power)
-        # P_induced = Pi * sqrt( sqrt(1 + V_xy^4 / (4*v0^4)) - V_xy^2 / (2*v0^2) )
-        # 注意数值稳定性
-        term1 = 1 + (v_xy ** 4) / (4 * self.v0 ** 4)
-        term2 = (v_xy ** 2) * self.k2
-        # 【关键修复】增加 np.maximum(0, ...) 以防止浮点误差导致负数
-        p_induced = self.Pi * np.sqrt(np.maximum(0, np.sqrt(term1) - term2))
-        
-        # 3. 寄生功率 (Parasitic Power) - 仅在高速时显著
-        # P_parasitic = 0.5 * d0 * rho * s * A * V_xy^3
-        p_parasitic = self.k3 * (v_xy ** 3)
-        
-        # 4. 垂直功率 (Vertical Power)
-        # 简化模型：主要惩罚爬升，对下降也给予一定惩罚以防震荡
-        p_vertical = self.P_z_coeff * abs(v_z)
-        
-        return p_profile + p_induced + p_parasitic + p_vertical
+    def _create_kalman_filter(self, dt, process_noise=1.0, measurement_noise=10.0):
+        """创建一个配置好的filterpy卡尔曼滤波器实例"""
+        kf = KalmanFilter(dim_x=4, dim_z=2)
+        kf.x = np.zeros(4)  # 状态向量 [px, py, vx, vy]
+        kf.F = np.array([[1, 0, dt, 0],
+                           [0, 1, 0, dt],
+                           [0, 0, 1, 0],
+                           [0, 0, 0, 1]])  # 状态转移矩阵
+        kf.H = np.array([[1, 0, 0, 0],
+                           [0, 1, 0, 0]])  # 观测矩阵
+        kf.P *= 100  # 初始协方差
+        kf.R = np.eye(2) * measurement_noise  # 测量噪声
+        kf.Q = np.eye(4) * process_noise  # 过程噪声
+        return kf
 
     def get_state_dim(self):
         """返回全局状态维度"""
@@ -535,23 +309,6 @@ class UAVForcedRelayEnv(ParallelEnv):
     def get_obs_dim(self):
         """返回观测维度"""
         return self.obs_dim
-
-    def get_global_info(self):
-        """返回计算跳数地图所需的全局信息 (用于HGGR算法)"""
-        return {
-            "n_uavs": self.n_uavs,
-            "n_ground_bs": self.n_ground_bs,
-            "uav_positions": self.uav_positions,
-            "ground_bs_positions": self.ground_bs_positions,
-            "get_link_capacity_func": self._get_link_capacity
-        }
-
-    def set_hop_map(self, hop_map):
-        """从外部设置计算好的跳数地图 (用于HGGR算法)"""
-        if isinstance(hop_map, dict):
-            self.hop_map = hop_map
-        else:
-            self.hop_map = {i: hop_map[i] for i in range(len(hop_map))}
 
     def _compute_path_loss(self, uav_pos, user_pos):
         """
@@ -691,107 +448,142 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _generate_forced_relay_cluster_positions(self):
         """
-        生成强制中继优化的用户簇分布 - 支持中心区域和远离基站的远程区域混合部署。
-
+        生成针对强制中继优化的用户簇分布 - 支持固定或随机的簇中心
+        
         特点：
-        - 可以在中心区域生成用户群，便于覆盖。
-        - 可以在远离基站的角落生成远程用户群，强制多跳中继。
-        - 通过 n_remote_clusters 参数控制远程用户群的数量。
+        - 用户集中在中心区域，便于覆盖
+        - 形成紧密的簇，减少覆盖难度
+        - 距离地面基站较远，强制多跳
         
         返回:
             user_positions: 用户位置 [n_users, 3] (包含高度1.5米)
         """
         user_positions = np.zeros((self.n_users, 3))
         
-        # --- 1. 确定远程用户群和中心用户群的数量 ---
-        n_remote = min(self.n_remote_clusters, self.n_clusters)
-        n_central = self.n_clusters - n_remote
+        # 定义中心区域的边界（用户集中在这里）
+        central_size = self.area_size * self.central_area_ratio
+        central_margin = (self.area_size - central_size) / 2
         
-        all_cluster_centers = []
-        all_cluster_stds = []
-
-        # --- 2. 生成远程用户群 (如果 n_remote > 0) ---
-        if n_remote > 0:
-            # 计算所有基站的平均位置
-            if self.n_ground_bs > 0:
-                bs_center = np.mean(self.ground_bs_positions[:, :2], axis=0)
+        # 生成簇中心位置
+        cluster_centers = np.zeros((self.n_clusters, 2))
+        
+        # --- 随机化簇中心 ---
+        if self.randomize_users:
+            # 随机在中心区域内生成簇中心
+            for i in range(self.n_clusters):
+                # 确保簇中心之间有足够的距离，避免重叠
+                max_attempts = 50
+                for attempt in range(max_attempts):
+                    x = self.np_random.uniform(central_margin, central_margin + central_size)
+                    y = self.np_random.uniform(central_margin, central_margin + central_size)
+                    new_center = np.array([x, y])
+                    
+                    # 检查与已有簇中心的距离
+                    min_distance = self.cluster_std * 3  # 簇中心之间的最小距离
+                    valid = True
+                    for j in range(i):
+                        distance = np.linalg.norm(new_center - cluster_centers[j])
+                        if distance < min_distance:
+                            valid = False
+                            break
+                    
+                    if valid:
+                        cluster_centers[i] = new_center
+                        break
+                else:
+                    # 如果找不到合适的位置，使用网格布局作为备选
+                    grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+                    grid_i = i // grid_size
+                    grid_j = i % grid_size
+                    x = central_margin + central_size * (grid_i + 0.5) / grid_size
+                    y = central_margin + central_size * (grid_j + 0.5) / grid_size
+                    cluster_centers[i] = [x, y]
+        else:
+            # --- 保留原有的固定簇中心逻辑 ---
+            if self.n_clusters == 4:
+                # 4个簇形成2x2网格
+                cluster_centers[0] = [central_margin + central_size * 0.3, central_margin + central_size * 0.3]
+                cluster_centers[1] = [central_margin + central_size * 0.7, central_margin + central_size * 0.3]
+                cluster_centers[2] = [central_margin + central_size * 0.3, central_margin + central_size * 0.7]
+                cluster_centers[3] = [central_margin + central_size * 0.7, central_margin + central_size * 0.7]
+            elif self.n_clusters == 3:
+                # 3个簇形成三角形
+                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.2]
+                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
+                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
+            elif self.n_clusters == 5:
+                # 5个簇：中心1个 + 四周4个
+                cluster_centers[0] = [central_margin + central_size * 0.5, central_margin + central_size * 0.5]
+                cluster_centers[1] = [central_margin + central_size * 0.2, central_margin + central_size * 0.2]
+                cluster_centers[2] = [central_margin + central_size * 0.8, central_margin + central_size * 0.2]
+                cluster_centers[3] = [central_margin + central_size * 0.2, central_margin + central_size * 0.8]
+                cluster_centers[4] = [central_margin + central_size * 0.8, central_margin + central_size * 0.8]
             else:
-                bs_center = np.array([self.area_size * 0.05, self.area_size * 0.05])
-
-            # 确定与基站群相对的、最远的角落
-            area_center = self.area_size / 2
-            if bs_center[0] < area_center and bs_center[1] < area_center: # 左下 -> 右上
-                remote_corner = (self.area_size * 0.95, self.area_size * 0.95)
-            elif bs_center[0] > area_center and bs_center[1] < area_center: # 右下 -> 左上
-                remote_corner = (self.area_size * 0.05, self.area_size * 0.95)
-            elif bs_center[0] < area_center and bs_center[1] > area_center: # 左上 -> 右下
-                remote_corner = (self.area_size * 0.95, self.area_size * 0.05)
-            else: # 右上 -> 左下
-                remote_corner = (self.area_size * 0.05, self.area_size * 0.05)
-
-            # 在最远的角落附近生成远程用户群
-            for i in range(n_remote):
-                offset = self.np_random.uniform(-self.area_size * 0.1, self.area_size * 0.1, 2)
-                center_x = np.clip(remote_corner[0] + offset[0], self.area_size * 0.05, self.area_size * 0.95)
-                center_y = np.clip(remote_corner[1] + offset[1], self.area_size * 0.05, self.area_size * 0.95)
-                all_cluster_centers.append([center_x, center_y])
-                all_cluster_stds.append(self.remote_cluster_std)
-
-        # --- 3. 生成中心用户群 (如果 n_central > 0) ---
-        if n_central > 0:
-            central_size = self.area_size * self.central_area_ratio
-            central_margin = (self.area_size - central_size) / 2
-            
-            # 在中心区域生成簇
-            for i in range(n_central):
-                x = self.np_random.uniform(central_margin, central_margin + central_size)
-                y = self.np_random.uniform(central_margin, central_margin + central_size)
-                all_cluster_centers.append([x, y])
-                all_cluster_stds.append(self.cluster_std)
-
-        # --- 4. 将用户均匀分配到所有簇中 ---
-        cluster_centers = np.array(all_cluster_centers)
+                # 其他情况使用网格布局
+                grid_size = int(np.ceil(np.sqrt(self.n_clusters)))
+                cluster_idx = 0
+                
+                for i in range(grid_size):
+                    for j in range(grid_size):
+                        if cluster_idx >= self.n_clusters:
+                            break
+                        
+                        # 网格位置
+                        grid_x = central_margin + central_size * (i + 0.5) / grid_size
+                        grid_y = central_margin + central_size * (j + 0.5) / grid_size
+                        
+                        cluster_centers[cluster_idx] = [grid_x, grid_y]
+                        cluster_idx += 1
+                    
+                    if cluster_idx >= self.n_clusters:
+                        break
         
-        if self.n_clusters == 0:
-             return user_positions
-
+        # 计算每个簇的用户数量 - 确保总数正确
         base_users_per_cluster = self.n_users // self.n_clusters
         remaining_users = self.n_users % self.n_clusters
         
         cluster_user_counts = [base_users_per_cluster] * self.n_clusters
+        # 将剩余用户分配给前几个簇
         for i in range(remaining_users):
             cluster_user_counts[i] += 1
-            
-        # --- 5. 为每个簇生成用户 ---
+        
+        # 为每个簇生成用户
         user_idx = 0
+        
         for cluster_idx in range(self.n_clusters):
             cluster_center = cluster_centers[cluster_idx]
-            cluster_std = all_cluster_stds[cluster_idx]
             n_users_in_cluster = cluster_user_counts[cluster_idx]
             
+            # 在簇中心周围生成用户（二维高斯分布）
             for _ in range(n_users_in_cluster):
+                # 生成二维高斯分布的偏移
                 offset = self.np_random.multivariate_normal(
                     mean=[0, 0],
-                    cov=[[cluster_std**2, 0], [0, cluster_std**2]]
+                    cov=[[self.cluster_std**2, 0], [0, self.cluster_std**2]]
                 )
-                user_pos_2d = cluster_center + offset
                 
-                # 确保用户在地图边界内
-                user_pos_2d[0] = np.clip(user_pos_2d[0], 10, self.area_size - 10)
-                user_pos_2d[1] = np.clip(user_pos_2d[1], 10, self.area_size - 10)
-
-                user_positions[user_idx] = np.array([user_pos_2d[0], user_pos_2d[1], 1.5])
+                user_position_2d = cluster_center + offset
                 
+                # 确保用户位置在有效区域内
+                user_position_2d[0] = np.clip(user_position_2d[0], 10, self.area_size - 10)
+                user_position_2d[1] = np.clip(user_position_2d[1], 10, self.area_size - 10)
+                
+                # 创建三维用户位置（包含1.5米高度）
+                user_position_3d = np.array([user_position_2d[0], user_position_2d[1], 1.5])
+                
+                user_positions[user_idx] = user_position_3d
+                
+                # 【RPGM关键】：记录用户的簇分配，用于RPGM移动模型
                 if hasattr(self, 'user_cluster_assignments'):
                     self.user_cluster_assignments[user_idx] = cluster_idx
                 
                 user_idx += 1
         
-        # 初始化簇中心历史位置 (用于RPGM移动模型)
+        # 【RPGM关键】：初始化簇中心历史位置，用于RPGM移动模型
         if hasattr(self, 'cluster_centers_history'):
-             if cluster_centers.shape[0] == self.cluster_centers_history.shape[0]:
-                self.cluster_centers_history = cluster_centers.copy()
-
+            for cluster_idx in range(self.n_clusters):
+                self.cluster_centers_history[cluster_idx] = cluster_centers[cluster_idx]
+        
         return user_positions
     
     def _generate_coverage_hole_positions(self):
@@ -963,62 +755,101 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return user_positions
     
+    def _calculate_link_quality_reward(self):
+        """
+        计算统一的"链路质量"奖励，取代之前分散的连通性、效率、中继等奖励。
+        
+        核心思想:
+        - 直接奖励高质量的完整通信链路。
+        - 链路质量由其"瓶颈容量"和"跳数"共同决定。
+        - 容量高、跳数少的链路获得更高奖励。
+        - 【重要修正】：只有实际服务了用户的无人机才能获得链路质量奖励。
+        
+        返回:
+            link_quality_reward: 归一化的链路质量总奖励 [0, 1]
+        """
+        if not hasattr(self, 'routing_paths') or not self.routing_paths:
+            return 0.0
+
+        total_quality_score = 0
+        
+        # 设定一个理论上的最大容量用于归一化，例如基于30dB SINR计算
+        # C = B * log2(1 + SINR_linear)
+        # SINR = 30dB -> SINR_linear = 1000
+        # C_max = 20e6 * log2(1001) ≈ 20e6 * 9.96 ≈ 200 Mbps
+        max_theoretical_capacity = 200e6  # 200 Mbps
+
+        for uav_idx, (path, bottleneck_capacity) in self.routing_paths.items():
+            # 【核心修正】：检查这架拥有回程路径的无人机是否连接了任何用户
+            # 如果没有连接用户，那么它的高质量链路是无用的，不应给予奖励
+            if np.sum(self.connections[uav_idx]) == 0:
+                continue  # 跳过这个无人机，不给予链路质量奖励
+            
+            if not path or bottleneck_capacity <= 0:
+                continue
+
+            # 1. 容量得分 (Capacity Score)
+            # 将瓶颈容量归一化
+            capacity_score = np.clip(bottleneck_capacity / max_theoretical_capacity, 0, 1)
+
+            # 2. 效率得分 (Efficiency Score)
+            # 跳数越少，效率得分越高
+            hops = len(path) - 1
+            efficiency_score = max(0, 1 - (hops - 1) / (self.max_hops * 1.5)) # 放宽分母，使惩罚更平滑
+
+            # 3. 综合路径质量分
+            # 将容量和效率结合，容量的权重更高
+            path_quality_score = capacity_score * (0.7 + 0.3 * efficiency_score)
+            total_quality_score += path_quality_score
+
+        # 归一化：用总得分除以无人机数量，得到平均链路质量
+        # 这样，目标就是为每个无人机都建立一条高质量链路
+        if self.n_uavs > 0:
+            normalized_reward = total_quality_score / self.n_uavs
+        else:
+            normalized_reward = 0.0
+            
+        return np.clip(normalized_reward, 0, 1)
     
     def _calculate_individual_distance_overlap_penalties(self):
         """
-        计算每个智能体的个体距离重叠惩罚（智能版）。
-        惩罚力度与无人机的网络贡献角色相关。
+        计算每个智能体的个体距离重叠惩罚（增强版）。
+        这个函数提供了一个去中心化且更直接的学习信号。
 
         返回:
-            individual_penalties (np.ndarray): 每个智能体的惩罚值数组。
+            individual_penalties (np.ndarray): 形状为 (n_uavs,) 的数组，
+                                               包含每个智能体的惩罚值。
         """
         individual_penalties = np.zeros(self.n_uavs)
+        # 增加惩罚乘数，使其在奖励信号中更显著
+        penalty_multiplier = getattr(self, 'proximity_penalty_multiplier', 5.0)
         
-        # 定义不同角色的惩罚乘数
-        idle_penalty_multiplier = 10.0  # 对空闲无人机施加高额惩罚
-        active_penalty_multiplier = 0.5   # 对有贡献的无人机施加非常低的惩罚
-        
-        # 定义安全距离
+        # 定义一个安全距离，小于此距离将受到惩罚
+        # 使用观测半径的1/3作为基础安全距离，例如 600/3 = 200m
         safety_radius = self.observation_radius / 3.0
 
-        # --- 识别有贡献的无人机 ---
-        contributing_uavs = set()
-        # 1. 服务用户的无人机是有贡献的
-        for uav_idx in range(self.n_uavs):
-            if np.sum(self.connections[uav_idx]) > 0:
-                contributing_uavs.add(uav_idx)
-        
-        # 2. 作为中继节点的无人机也是有贡献的
-        for path, _ in self.routing_paths.values():
-            # 路径上的所有无人机（除了终点基站）都是有贡献的中继节点
-            for node_type, node_idx in path:
-                if node_type == 'uav':
-                    contributing_uavs.add(node_idx)
-
-        # --- 计算每个无人机的惩罚 ---
         for i in range(self.n_uavs):
             min_dist_to_neighbor = float('inf')
             
+            # 找到智能体i的最近邻居
             for j in range(self.n_uavs):
                 if i == j:
                     continue
+                # 使用2D距离进行计算，因为主要关注水平分散
                 dist = np.linalg.norm(self.uav_positions[i, :2] - self.uav_positions[j, :2])
                 if dist < min_dist_to_neighbor:
                     min_dist_to_neighbor = dist
 
+            # 如果最近邻居距离过近，则施加惩罚
             if min_dist_to_neighbor < safety_radius:
+                # 使用更平滑且在接近零时梯度更大的惩罚函数
+                # 当距离为0时，惩罚为1；当距离为safety_radius时，惩罚为0
+                # (1 - x)^2 在 x 接近1时梯度较小，(1 - x^0.5) 在 x 接近1时梯度更大
                 normalized_dist = min_dist_to_neighbor / safety_radius
-                penalty_base = (1 - np.sqrt(normalized_dist))
+                penalty = (1 - np.sqrt(normalized_dist))
                 
-                # 根据角色应用不同的惩罚力度
-                if i in contributing_uavs:
-                    # 对于有贡献的无人机，施加较低惩罚
-                    penalty = penalty_base * active_penalty_multiplier
-                else:
-                    # 对于空闲无人机，施加较高惩罚
-                    penalty = penalty_base * idle_penalty_multiplier
-                
-                individual_penalties[i] = penalty
+                # 应用惩罚乘数
+                individual_penalties[i] = penalty * penalty_multiplier
                 
         return individual_penalties
         
@@ -1253,552 +1084,223 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return coverage_ratio
 
-    def _calculate_backhaul_outage_metrics(self):
+    def _calculate_sinr_distribution_and_qos(self):
         """
-        统计由回传/路由断联导致的服务中断。
-
-        access_connected 表示用户至少被某个UAV接入；effective_service 表示该接入UAV
-        至少有一条有效回传路径。两者的差值用于区分“接入覆盖不足”和“网络断联”。
+        计算有效连接用户的SINR分布，并计算一个综合的服务质量(QoS)得分。
+        
+        返回:
+            sinr_stats (dict): 包含SINR分布统计的字典。
+            qos_score (float): 基于SINR的服务质量得分 [0, 1]。
         """
-        access_connected_status = np.any(self.connections, axis=0) if self.n_users > 0 else np.array([], dtype=bool)
-        effective_service_status = np.zeros(self.n_users, dtype=bool)
+        best_sinr_by_user = {}
+        # 遍历所有有效连接的用户，并按用户去重。软切换时同一用户可能由多个UAV服务。
+        for uav_idx in range(self.n_uavs):
+            if uav_idx in self.routing_paths:
+                for user_idx in range(self.n_users):
+                    if self.connections[uav_idx, user_idx]:
+                        sinr_db = self.sinr_matrix[uav_idx, user_idx]
+                        best_sinr_by_user[user_idx] = max(
+                            best_sinr_by_user.get(user_idx, -np.inf),
+                            sinr_db
+                        )
 
-        for user_idx in range(self.n_users):
-            connected_uavs = np.where(self.connections[:, user_idx])[0]
-            for uav_idx in connected_uavs:
-                if uav_idx in self.routing_paths and self.routing_paths[uav_idx][0]:
-                    effective_service_status[user_idx] = True
-                    break
+        if not best_sinr_by_user:
+            stats = {
+                "sinr_dist_below_3dB": 1.0, "sinr_dist_3_to_10dB": 0.0,
+                "sinr_dist_10_to_20dB": 0.0, "sinr_dist_above_20dB": 0.0,
+                "sinr_avg_db": 0.0, "sinr_min_db": 0.0, "sinr_max_db": 0.0,
+                "qos_score": 0.0
+            }
+            return stats, 0.0
 
-        access_connected_users = int(np.sum(access_connected_status))
-        access_no_backhaul_status = access_connected_status & ~effective_service_status
-        access_no_backhaul_users = int(np.sum(access_no_backhaul_status))
-        access_no_backhaul_ratio = access_no_backhaul_users / self.n_users if self.n_users > 0 else 0.0
-
-        prev_effective_status = getattr(
-            self,
-            'prev_effective_user_service_status',
-            np.zeros(self.n_users, dtype=bool)
-        )
-        dropped_service_status = prev_effective_status & ~effective_service_status
-        backhaul_drop_status = dropped_service_status & access_connected_status
-        dropped_service_users = int(np.sum(dropped_service_status))
-        backhaul_drop_users = int(np.sum(backhaul_drop_status))
-        prev_effective_users = int(np.sum(prev_effective_status))
-        service_drop_ratio = dropped_service_users / prev_effective_users if prev_effective_users > 0 else 0.0
-        backhaul_drop_ratio = backhaul_drop_users / prev_effective_users if prev_effective_users > 0 else 0.0
-
-        serving_uav_status = np.any(self.connections, axis=1) if self.n_uavs > 0 else np.array([], dtype=bool)
-        serving_uavs = int(np.sum(serving_uav_status))
-        isolated_serving_uavs = int(sum(
-            1 for uav_idx, has_users in enumerate(serving_uav_status)
-            if has_users and uav_idx not in self.routing_paths
-        ))
-        isolated_serving_uav_ratio = isolated_serving_uavs / serving_uavs if serving_uavs > 0 else 0.0
-
-        coverage_ratio = self.reward_info.get("coverage_ratio", 0.0)
-        prev_coverage = getattr(self, 'prev_load_balance_coverage_ratio', 0.0)
-        coverage_drop_ratio = max(0.0, prev_coverage - coverage_ratio)
-
-        has_any_backhaul = len(self.routing_paths) > 0
-        full_network_disconnect = bool(access_connected_users > 0 and not has_any_backhaul)
-        coverage_collapse = bool(prev_coverage > 0.0 and coverage_ratio <= 1e-6)
-
-        instant_outage_intensity = max(
-            access_no_backhaul_ratio,
-            backhaul_drop_ratio,
-            coverage_drop_ratio
-        )
-        if full_network_disconnect or coverage_collapse:
-            instant_outage_intensity = 1.0
-
-        decay = float(np.clip(getattr(self, 'outage_memory_decay', 0.85), 0.0, 0.99))
-        self.backhaul_outage_ema = max(
-            instant_outage_intensity,
-            decay * getattr(self, 'backhaul_outage_ema', 0.0) + (1.0 - decay) * instant_outage_intensity
-        )
-
-        if full_network_disconnect:
-            self.full_disconnect_streak = getattr(self, 'full_disconnect_streak', 0) + 1
-        else:
-            self.full_disconnect_streak = 0
-
-        metrics = {
-            "access_connected_users": access_connected_users,
-            "backhaul_outage_users": access_no_backhaul_users,
-            "backhaul_outage_ratio": access_no_backhaul_ratio,
-            "service_drop_users": dropped_service_users,
-            "service_drop_ratio": service_drop_ratio,
-            "backhaul_drop_users": backhaul_drop_users,
-            "backhaul_drop_ratio": backhaul_drop_ratio,
-            "isolated_serving_uavs": isolated_serving_uavs,
-            "isolated_serving_uav_ratio": isolated_serving_uav_ratio,
-            "full_network_disconnect": int(full_network_disconnect),
-            "full_disconnect_streak": self.full_disconnect_streak,
-            "coverage_drop_ratio": coverage_drop_ratio,
-            "backhaul_outage_ema": self.backhaul_outage_ema,
-            "instant_outage_intensity": instant_outage_intensity,
+        sinr_array = np.array(list(best_sinr_by_user.values()))
+        
+        # 统计SINR分布
+        total_effective_users = len(sinr_array)
+        stats = {
+            "sinr_dist_below_3dB": np.sum(sinr_array < 3) / total_effective_users,
+            "sinr_dist_3_to_10dB": np.sum((sinr_array >= 3) & (sinr_array < 10)) / total_effective_users,
+            "sinr_dist_10_to_20dB": np.sum((sinr_array >= 10) & (sinr_array < 20)) / total_effective_users,
+            "sinr_dist_above_20dB": np.sum(sinr_array >= 20) / total_effective_users,
+            "sinr_avg_db": np.mean(sinr_array),
+            "sinr_min_db": np.min(sinr_array),
+            "sinr_max_db": np.max(sinr_array)
         }
 
-        self.reward_info.update(metrics)
-        self.user_serviced_status = effective_service_status.copy()
-        self.prev_effective_user_service_status = effective_service_status.copy()
-        self.prev_load_balance_coverage_ratio = coverage_ratio
+        # 计算QoS得分 (基于平均SINR)
+        # 1. 计算所有有效连接用户的平均SINR (dB)
+        avg_sinr_db = np.mean(sinr_array)
+        
+        # 2. 将平均SINR归一化到 [0, 1] 范围
+        # 假设一个合理的SINR范围是 [min_sinr, 30dB]
+        # 低于 min_sinr 的连接通常被认为质量不佳
+        sinr_upper_bound = 30.0
+        normalized_avg_sinr = (avg_sinr_db - self.min_sinr) / (sinr_upper_bound - self.min_sinr)
+        normalized_avg_sinr = np.clip(normalized_avg_sinr, 0, 1) # 确保在[0,1]范围内
+        
+        # 3. QoS得分是归一化的平均SINR乘以覆盖率
+        # 这样既考虑了连接质量 (平均SINR)，也考虑了连接数量 (覆盖率)
+        coverage_ratio = total_effective_users / self.n_users if self.n_users > 0 else 0
+        qos_score = normalized_avg_sinr * coverage_ratio
+        
+        stats["qos_score"] = qos_score
+        
+        return stats, qos_score
 
-        return metrics
-
-    def _calculate_relay_backhaul_metrics(self):
+    def calculate_coverage_balance_reward(self):
         """
-        统计中继骨干断裂和回程容量余量。
+        计算覆盖率 * 负载均衡奖励，用于单独实验高覆盖率下的服务负载分摊。
 
-        重点不是覆盖率结果，而是上一时刻正在承载用户的源UAV是否丢失回程路径，
-        以及当前仍在服务用户的回程路径瓶颈容量是否低于安全余量。
+        负载均衡使用 Jain fairness index，并只统计有回程路径的 UAV。拥有回程路径但
+        当前未服务用户的 UAV 负载为 0，会降低均衡分，从而鼓励把用户服务压力分摊到
+        多个可用接入 UAV 上。
+
+        返回:
+            coverage_balance_reward (float): 覆盖率与负载均衡的乘积。
+            reward_components (dict): 用于日志记录的奖励组成部分。
         """
-        prev_routing_paths = getattr(self, 'previous_routing_paths_snapshot', {})
-        prev_connections = getattr(
-            self,
-            'previous_connections_snapshot',
-            np.zeros((self.n_uavs, self.n_users), dtype=bool)
-        )
+        coverage_ratio = self.reward_info.get("coverage_ratio", 0)
 
-        relay_route_lost_uavs = 0
-        relay_route_lost_users = 0
-        prev_backhaul_served_users = 0
+        if not hasattr(self, 'routing_paths') or not self.routing_paths:
+            reward_components = {
+                "coverage_balance_reward": 0.0,
+                "load_balance_score": 0.0,
+                "load_balance_num_uavs": 0,
+                "load_balance_total_load": 0.0,
+                "load_balance_mean_load": 0.0,
+                "load_balance_std_load": 0.0,
+                "load_balance_max_load": 0.0,
+                "load_balance_min_load": 0.0,
+            }
+            return 0.0, reward_components
 
-        for uav_idx, (prev_path, _) in prev_routing_paths.items():
-            prev_user_count = int(np.sum(prev_connections[uav_idx])) if uav_idx < prev_connections.shape[0] else 0
-            if prev_user_count <= 0:
-                continue
+        loads = np.array([
+            np.sum(self.connections[uav_idx])
+            for uav_idx in self.routing_paths.keys()
+        ], dtype=float)
 
-            prev_backhaul_served_users += prev_user_count
-            if uav_idx not in self.routing_paths:
-                relay_route_lost_uavs += 1
-                relay_route_lost_users += prev_user_count
-
-        relay_route_loss_ratio = relay_route_lost_users / self.n_users if self.n_users > 0 else 0.0
-        relay_route_loss_prev_served_ratio = (
-            relay_route_lost_users / prev_backhaul_served_users
-            if prev_backhaul_served_users > 0 else 0.0
-        )
-
-        target_mbps = max(1e-6, float(getattr(self, 'backhaul_margin_target_mbps', 10.0)))
-        serving_bottlenecks_mbps = []
-        weighted_margin_deficit = 0.0
-        current_backhaul_served_users = 0
-
-        for uav_idx, (path, bottleneck_capacity_bps) in self.routing_paths.items():
-            current_user_count = int(np.sum(self.connections[uav_idx]))
-            if current_user_count <= 0:
-                continue
-
-            bottleneck_mbps = bottleneck_capacity_bps / 1e6
-            serving_bottlenecks_mbps.append(bottleneck_mbps)
-            current_backhaul_served_users += current_user_count
-
-            margin_deficit = max(0.0, 1.0 - bottleneck_mbps / target_mbps)
-            weighted_margin_deficit += current_user_count * margin_deficit
-
-        backhaul_margin_penalty_raw = (
-            weighted_margin_deficit / current_backhaul_served_users
-            if current_backhaul_served_users > 0 else 0.0
-        )
-
-        if serving_bottlenecks_mbps:
-            min_serving_backhaul_bottleneck_mbps = float(np.min(serving_bottlenecks_mbps))
-            avg_serving_backhaul_bottleneck_mbps = float(np.mean(serving_bottlenecks_mbps))
+        total_load = np.sum(loads)
+        if len(loads) <= 1 or total_load <= 0:
+            balance_score = 0.0
         else:
-            min_serving_backhaul_bottleneck_mbps = 0.0
-            avg_serving_backhaul_bottleneck_mbps = 0.0
+            balance_score = (total_load ** 2) / (len(loads) * np.sum(loads ** 2) + 1e-8)
+            balance_score = np.clip(balance_score, 0, 1)
 
-        metrics = {
-            "relay_route_lost_uavs": relay_route_lost_uavs,
-            "relay_route_lost_users": relay_route_lost_users,
-            "relay_route_loss_ratio": relay_route_loss_ratio,
-            "relay_route_loss_prev_served_ratio": relay_route_loss_prev_served_ratio,
-            "prev_backhaul_served_users": prev_backhaul_served_users,
-            "current_backhaul_served_users": current_backhaul_served_users,
-            "backhaul_margin_penalty_raw": backhaul_margin_penalty_raw,
-            "min_serving_backhaul_bottleneck_mbps": min_serving_backhaul_bottleneck_mbps,
-            "avg_serving_backhaul_bottleneck_mbps": avg_serving_backhaul_bottleneck_mbps,
+        coverage_balance_reward = coverage_ratio * balance_score
+
+        reward_components = {
+            "coverage_balance_reward": coverage_balance_reward,
+            "load_balance_score": balance_score,
+            "load_balance_num_uavs": len(loads),
+            "load_balance_total_load": total_load,
+            "load_balance_mean_load": np.mean(loads) if len(loads) > 0 else 0.0,
+            "load_balance_std_load": np.std(loads) if len(loads) > 0 else 0.0,
+            "load_balance_max_load": np.max(loads) if len(loads) > 0 else 0.0,
+            "load_balance_min_load": np.min(loads) if len(loads) > 0 else 0.0,
         }
 
-        self.reward_info.update(metrics)
-        return metrics
+        return coverage_balance_reward, reward_components
 
-    def _get_spectral_efficiency_from_sinr(self, sinr_db):
-        """根据SINR值从MCS查找表中获取频谱效率"""
-        for sinr_threshold, se in self.mcs_table:
-            if sinr_db < sinr_threshold:
-                return se
-        return self.mcs_table[-1][1]
-
-
-    def _calculate_repulsion_penalty(self):
+    def calculate_network_health_reward(self):
         """
-        计算斥力场惩罚（方案二：物理层面的"社交距离"）
+        计算一个综合性的、单一的、共享的团队奖励 r_t，称为“网络健康度”。
+        该奖励旨在引导算法学会构建一个包含服务和中继角色的、高效的无人机网络。
         
-        核心思想：
-        - 计算所有无人机对之间的距离
-        - 对于距离小于安全距离（200m）的无人机对，施加累积惩罚
-        - 惩罚强度与距离成反比，距离越近惩罚越大
-        - 设置总惩罚上限，防止训练崩溃
-        
-        返回:
-            repulsion_penalty (float): 斥力场惩罚值 [0, 1]
-        """
-        if self.n_uavs <= 1:
-            return 0.0
-        
-        safe_margin = 200.0  # 安全距离 200米
-        max_penalty_per_pair = 1.0  # 单对的最大惩罚
-        total_penalty_limit = 2.0  # 总惩罚上限
-        
-        total_penalty = 0.0
-        violation_count = 0
-        
-        # 计算所有无人机对之间的距离和惩罚
-        for i in range(self.n_uavs):
-            for j in range(i + 1, self.n_uavs):
-                # 计算无人机i和j之间的2D距离
-                pos_i = self.uav_positions[i, :2]
-                pos_j = self.uav_positions[j, :2]
-                distance = np.linalg.norm(pos_i - pos_j)
-                
-                # 如果距离小于安全距离，计算惩罚
-                if distance < safe_margin:
-                    # 距离越近，惩罚越大 (使用平方反比关系)
-                    normalized_distance = distance / safe_margin
-                    pair_penalty = max_penalty_per_pair * (1 - normalized_distance)
-                    total_penalty += pair_penalty
-                    violation_count += 1
-        
-        # 应用总惩罚上限，防止极端情况下训练崩溃
-        clamped_penalty = min(total_penalty, total_penalty_limit)
-        
-        # 归一化到[0,1]范围
-        normalized_penalty = clamped_penalty / total_penalty_limit
-        
-        return np.clip(normalized_penalty, 0.0, 1.0)
-
-    def _calculate_load_balancing_penalty(self):
-        """
-        计算负载均衡惩罚函数（方案B，修正版）
-        
-        核心思想：
-        - 考虑**所有**无人机，无论其是否有回程路径。
-        - 计算所有无人机负载（连接的用户数）的方差。
-        - 方差越大，说明负载越不均衡，惩罚值越高。
-        - 使用理论最大方差进行归一化，确保惩罚值在[0,1]范围内，避免惩罚爆炸。
-        
-        返回:
-            load_balance_penalty (float): 归一化的负载均衡惩罚值 [0, 1]
-        """
-        if self.n_uavs <= 1:
-            return 0.0
-        
-        # 收集所有无人机的负载
-        all_uav_loads = []
-        for uav_idx in range(self.n_uavs):
-            num_connected_users = np.sum(self.connections[uav_idx])
-            all_uav_loads.append(num_connected_users)
-        
-        # 计算负载方差
-        loads_array = np.array(all_uav_loads)
-        load_variance = np.var(loads_array)
-        
-        # 计算理论最大方差用于归一化
-        # 最不均衡的情况：一个无人机连接所有已服务的用户，其他无人机连接0个
-        # 注意：这里我们应该计算所有被覆盖用户的总数
-        total_served_users = self.reward_info.get("effective_connected_users", 0)
-
-        if self.n_uavs > 0 and total_served_users > 0:
-            # 构造最不均衡的负载分布：一个UAV承担所有负载，其余为0
-            max_uneven_loads = [total_served_users] + [0] * (self.n_uavs - 1)
-            max_variance = np.var(max_uneven_loads)
-        else:
-            max_variance = 0.0 # 如果没有服务用户，则没有不均衡
-
-        # 归一化惩罚值到[0,1]
-        if max_variance > 0:
-            # 使用平方根来调整惩罚曲线，使得初始阶段的惩罚更敏感
-            normalized_penalty = np.sqrt(load_variance / max_variance)
-        else:
-            normalized_penalty = 0.0
-        
-        return np.clip(normalized_penalty, 0, 1)
-
-    def _calculate_potential_service_reward(self):
-        """
-        计算“潜在服务价值”或“区域探索”奖励。
-        新逻辑：奖励无人机飞向未被服务的用户所在区域，以此激励探索和扩大覆盖范围。
-        此奖励适用于所有无人机，形成一个全局的“引力场”。
+        经实验验证，此奖励塑造函数能有效提升覆盖率性能（从约0.5提升至0.7以上）。
+        核心在于通过“服务贡献加权”的角色多样性奖励，激励无人机不仅要成为服务节点，
+        还要尽可能服务更多的用户，从而打破局部最优。
 
         返回:
-            potential_service_reward (float): 归一化的潜在服务价值奖励 [0, 1]
+            shared_team_reward (float): 最终的 r_t 值。
+            reward_components (dict): 用于日志记录的奖励组成部分。
         """
-        # --- 1. 识别所有未被有效服务的用户 ---
-        unserved_user_indices = []
-        for user_idx in range(self.n_users):
-            # 使用 self.user_serviced_status 来判断，该状态在 step 函数中被更新
-            if not self.user_serviced_status[user_idx]:
-                unserved_user_indices.append(user_idx)
+        if not hasattr(self, 'routing_paths'):
+            return 0.0, {}
 
-        # 如果所有用户都已被服务，则没有探索的必要，奖励为0
-        if not unserved_user_indices:
-            return 0.0
-
-        unserved_user_positions = self.user_positions[unserved_user_indices, :2]
-
-        # --- 2. 为每个无人机计算飞向最近未服务用户的奖励 ---
-        total_potential_reward = 0
-        for uav_idx in range(self.n_uavs):
-            uav_pos = self.uav_positions[uav_idx, :2]
-            
-            # 计算到所有未服务用户的距离，并找到最小值
-            distances = np.linalg.norm(uav_pos - unserved_user_positions, axis=1)
-            min_dist_to_unserved = np.min(distances)
-            
-            # 奖励函数：与到最近未服务用户的距离成反比
-            # 使用平方反比关系来强化近距离的奖励，同时避免距离为0时除零
-            # 将距离归一化，使其与区域大小无关
-            normalized_dist = min_dist_to_unserved / self.area_size
-            
-            # 设计一个更平滑的奖励函数，避免在远距离时梯度过小
-            # 使用 1 / (1 + k*d) 的形式
-            reward = 1.0 / (1.0 + normalized_dist * 10) # 乘以10使距离衰减更敏感
-            
-            total_potential_reward += reward
-        
-        # --- 3. 归一化 ---
-        # 用无人机总数进行归一化，得到一个平均的团队探索奖励
-        if self.n_uavs > 0:
-            return total_potential_reward / self.n_uavs
-        else:
-            return 0.0
-
-    def _calculate_map_freshness_penalty(self):
-        """
-        计算地图新鲜度惩罚。
-        惩罚的是整个团队对环境态势感知的衰退。
-        
-        返回:
-            penalty (float): [0, 1] 范围内的惩罚值。
-        """
-        # 1. 计算地图上所有格子的平均年龄
-        # 这里的“年龄”就是自上次访问以来的时间步数
-        average_age = np.mean(self.last_visit_time_map)
-        
-        # 2. 归一化惩罚
-        # 一个合理的归一化上限是当一半时间过去后，地图还完全没被探索
-        # 当然，也可以使用 max_steps 作为理论最大年龄
-        normalization_factor = self.max_steps / 2 
-        
-        penalty = average_age / normalization_factor
-        
-        return np.clip(penalty, 0.0, 1.0)
-
-    def _get_grid_coords(self, position_2d):
-        """将物理2D坐标转换为访问地图的网格坐标"""
-        x, y = position_2d
-        gx = int(np.clip(x / self.grid_cell_size, 0, self.grid_map_size[0] - 1))
-        gy = int(np.clip(y / self.grid_cell_size, 0, self.grid_map_size[1] - 1))
-        return gx, gy
-
-    def _update_visit_map(self):
-        """在每个时间步更新所有无人机的访问地图"""
-        # 首先，将整个地图的访问时间增加1
-        self.last_visit_time_map += 1
-        
-        # 然后，将当前所有无人机所在的网格的访问时间重置为0
-        for uav_pos in self.uav_positions:
-            gx, gy = self._get_grid_coords(uav_pos[:2])
-            self.last_visit_time_map[gx, gy] = 0
-
-    def _calculate_area_exploration_reward(self):
-        """
-        计算基于区域新颖度的探索奖励。
-        奖励智能体访问那些“长时间未被访问过”的区域。
-        """
-        total_novelty_score = 0
-        
-        for uav_pos in self.uav_positions:
-            gx, gy = self._get_grid_coords(uav_pos[:2])
-            time_since_last_visit = self.last_visit_time_map[gx, gy]
-            
-            # 使用log函数来平滑奖励，避免时间过长导致奖励爆炸
-            # time_since_last_visit为0意味着当前正在访问，新颖度为0
-            novelty = np.log1p(time_since_last_visit)
-            total_novelty_score += novelty
-            
-        # 归一化：除以无人机数量和最大可能log(T)
-        # 假设最大探索价值在 T=500 步左右达到
-        max_novelty = np.log1p(500) * self.n_uavs 
-        if max_novelty > 0:
-            return np.clip(total_novelty_score / max_novelty, 0, 1)
-        return 0.0
-
-    def _calculate_enhanced_qos_reward(self):
-        """
-        计算增强的QoS奖励 (enhanced_qos)，旨在实现鲁棒的高覆盖率。
-        
-        结合了:
-        1. 骨干网健康度 (Backbone Health): 基于链路质量和角色多样性。
-        2. 服务稳定性 (Service Stability): 惩罚中断和服务切换。
-        3. 区域新颖度探索 (Area Novelty Exploration): 鼓励探索以避免作弊和局部最优。
-        """
-        # --- 权重 (可从config中获取，这里使用默认值) ---
-        w_backbone_health = 1.0
-        w_stability = 0.5
-        w_exploration = 0.1
+        # --- 奖励权重 (从配置中获取) ---
         W_CONNECTIVITY = self.w_connectivity
         W_DIVERSITY = self.w_diversity
         W_COVERAGE = self.w_coverage
         W_DISPERSION = self.w_dispersion
-        
-        # --- 1. 计算骨干网健康度 ---
-        # 复用 network_health_reward 的核心逻辑
-        _, health_components = self.calculate_network_health_reward()
-        connectivity_score = health_components.get("connectivity_score", 0)
-        role_diversity_bonus = health_components.get("role_diversity_bonus", 0)
-        effective_coverage_score = health_components.get("effective_coverage_score", 0)
-        dispersion_penalty = health_components.get("dispersion_penalty", 0)
-        
-        backbone_health_reward = (W_CONNECTIVITY * connectivity_score +
-                                  W_DIVERSITY * role_diversity_bonus +
-                                  W_COVERAGE * effective_coverage_score -
-                                  W_DISPERSION * dispersion_penalty)
 
-        # --- 2. 计算服务稳定性惩罚 ---
-        qos_metrics = self._calculate_handover_metrics()
-        handover_penalty = qos_metrics.get('handover_penalty', 0)
-        ping_pong_penalty = qos_metrics.get('ping_pong_penalty', 0)
-        outage_penalty = qos_metrics.get('outage_penalty', 0)
-        
-        stability_penalty = handover_penalty + ping_pong_penalty + outage_penalty
-        
-        # --- 3. 计算区域探索奖励 ---
-        exploration_reward = self._calculate_area_exploration_reward()
-        
-        # --- 4. 组合最终奖励 ---
-        combined_reward = (w_backbone_health * backbone_health_reward -
-                           w_stability * stability_penalty +
-                           w_exploration * exploration_reward)
+        # --- 1. 连接性得分 (Connectivity Score) ---
+        # 衡量有多少比例的无人机成功接入了回程网络（无论是直连还是中继）。
+        # 这是构建任何有效覆盖的基础。
+        uavs_with_route = len(self.routing_paths)
+        connectivity_score = uavs_with_route / self.n_uavs if self.n_uavs > 0 else 0
 
-        # --- 5. 准备日志 ---
-        reward_components = {
-            "enhanced_qos_reward": combined_reward,
-            "backbone_health_reward": backbone_health_reward,
-            "stability_penalty": stability_penalty,
-            "exploration_reward": exploration_reward,
-            "handover_penalty_applied": handover_penalty,
-            "ping_pong_penalty_applied": ping_pong_penalty,
-            "outage_penalty_applied": outage_penalty,
-        }
-        
-        return combined_reward, reward_components
+        # --- 2. 服务贡献加权的角色多样性奖励 (Service-Weighted Role Diversity) ---
+        # 改进版奖励：不再简单计数服务无人机，而是计算其“服务贡献”。
+        # 贡献度与其服务的用户数正相关 (log(1+x))，以激励更广的覆盖。
+        weighted_serving_score = 0
+        pure_relay_uavs_count = 0
+        serving_uavs_count = 0 # 仍然计数用于日志
 
-    def _calculate_qos_test_reward(self):
-        """
-        计算QoS测试奖励（qos_test），其特点是区分了部分覆盖和完全覆盖。
-        - 完全覆盖：用户通过UAV成功连接到地面基站，获得全额奖励。
-        - 部分覆盖：用户仅连接到UAV（UAV无回程），获得较低奖励。
-        - 惩罚项：对由于回程链路丢失导致的服务中断进行惩罚。
-        """
-        full_coverage_score = 0
-        partial_coverage_score = 0
-        
-        for user_idx in range(self.n_users):
-            is_partially_covered = False
-            is_fully_covered = False
-            
-            # 检查连接到该用户的所有UAV
-            connected_uavs = np.where(self.connections[:, user_idx])[0]
-            if len(connected_uavs) > 0:
-                is_partially_covered = True # 只要连上UAV就算部分覆盖
+        for uav_idx in self.routing_paths: # 只考虑已连接的无人机
+            num_connected_users = np.sum(self.connections[uav_idx])
+            if num_connected_users > 0:
+                serving_uavs_count += 1
+                # 使用 log(1+x) 作为贡献值，奖励边际效用递减
+                # 这强烈激励了“从无到有”的转变，并鼓励更均衡的覆盖
+                weighted_serving_score += np.log1p(num_connected_users)
+            else:
+                # 如果一个无人机有回程路径，但没有连接任何用户，它就是一个纯粹的中继节点。
+                pure_relay_uavs_count += 1
                 
-                # 检查这些UAV中是否至少有一个具有回程路径
-                for uav_idx in connected_uavs:
-                    if uav_idx in self.routing_paths and self.routing_paths[uav_idx][0]:
-                        is_fully_covered = True
-                        break # 找到一个即可
-            
-            if is_fully_covered:
-                full_coverage_score += 1
-            elif is_partially_covered:
-                partial_coverage_score += 1
-        
-        # 归一化得分
-        normalized_full_coverage = full_coverage_score / self.n_users if self.n_users > 0 else 0
-        normalized_partial_coverage = partial_coverage_score / self.n_users if self.n_users > 0 else 0
-        
-        # 获取中断惩罚
-        metrics = self._calculate_handover_metrics()
-        outage_penalty = metrics['outage_ratio'] * self.w_qos_test_outage
-        
-        # 组合最终奖励
-        qos_test_reward = (self.w_qos_test_coverage_full * normalized_full_coverage +
-                           self.w_qos_test_coverage_partial * normalized_partial_coverage -
-                           outage_penalty)
+        # 奖励来自于两种角色的“平衡”。我们使用几何平均数来激励两种角色都存在。
+        # 如果任何一种角色数量为0，则奖励为0。
+        # (self.n_uavs / 2) 是一个归一化因子，假设最优情况是角色各占一半。
+        # 使用加权服务分代替简单的计数
+        role_diversity_bonus = np.sqrt(weighted_serving_score * pure_relay_uavs_count) / (self.n_uavs / 2.0 + 1e-8)
 
-        # 记录到日志
-        self.reward_info['qos_test_reward'] = qos_test_reward
-        self.reward_info['qos_test_full_coverage'] = normalized_full_coverage
-        self.reward_info['qos_test_partial_coverage'] = normalized_partial_coverage
-        self.reward_info['qos_test_outage_penalty'] = outage_penalty
-        
-        return qos_test_reward
+        # --- 3. 服务质量得分 (Quality of Service Score) ---
+        # 这个分数取代了简单的覆盖率，它同时考虑了连接质量(SINR)和数量。
+        # qos_score 已经在 self.reward_info 中被计算和存储
+        effective_coverage_score = self.reward_info.get("qos_score", 0)
 
-    def _calculate_stability_aware_reward(self):
-        """
-        计算稳定性感知奖励 (stability_aware)。
-        该奖励函数基于势能奖励塑造 (PBRS) 和运行归一化，以提供稠密且稳定的奖励信号。
-        """
-        current_coverage = self.reward_info.get('coverage_ratio', 0)
-        
-        # --- 1. 核心覆盖奖励 (稠密, 基于PBRS) ---
-        # r_cov(t) = γ * CoverageRatio(t) - CoverageRatio(t-1)
-        dense_coverage_reward_raw = self.gamma * current_coverage - self.previous_coverage_ratio
-        
-        # --- 2. 关键链路断开惩罚 (事件驱动) ---
-        current_serving_uavs = {uav_idx for uav_idx in self.routing_paths if np.sum(self.connections[uav_idx]) > 0}
-        lost_service_uavs = self.previous_serving_uavs - current_serving_uavs
-        link_loss_penalty_raw = -float(len(lost_service_uavs)) # 原始惩罚值为负数
+        # --- 4. 分散惩罚 (Dispersion Penalty) ---
+        # 一个可选但推荐的项，用于防止无人机挤作一团。
+        distance_penalties = self._calculate_individual_distance_overlap_penalties()
+        dispersion_penalty = np.mean(distance_penalties) if len(distance_penalties) > 0 else 0
 
-        # --- 3. 归一化处理 (如果可用) ---
-        if self.reward_normalizers:
-            # 更新并归一化覆盖奖励
-            self.reward_normalizers['coverage'].update(np.array([dense_coverage_reward_raw]))
-            mean_cov = self.reward_normalizers['coverage'].mean
-            std_cov = np.sqrt(self.reward_normalizers['coverage'].var + 1e-8)
-            dense_coverage_reward_norm = (dense_coverage_reward_raw - mean_cov) / std_cov
-            
-            # 更新并归一化链路丢失惩罚
-            self.reward_normalizers['link_loss'].update(np.array([link_loss_penalty_raw]))
-            mean_link = self.reward_normalizers['link_loss'].mean
-            std_link = np.sqrt(self.reward_normalizers['link_loss'].var + 1e-8)
-            link_loss_penalty_norm = (link_loss_penalty_raw - mean_link) / std_link
-        else:
-            # 如果归一化工具不可用，则使用原始值
-            dense_coverage_reward_norm = dense_coverage_reward_raw
-            link_loss_penalty_norm = link_loss_penalty_raw
+        # --- 5. 服务簇成本惩罚 (Serving Set Cost Penalty) ---
+        serving_set_cost = 0
+        if self.enable_soft_handover:
+            total_serving_uavs = sum(len(s) for s in self.user_serving_sets)
+            # 归一化成本：(总服务数 - 理想总服务数) / (最大可能总服务数 - 理想总服务数)
+            ideal_total_serving_uavs = self.n_users 
+            max_total_serving_uavs = self.n_users * self.serving_set_size
+            if max_total_serving_uavs > ideal_total_serving_uavs:
+                cost_ratio = (total_serving_uavs - ideal_total_serving_uavs) / (max_total_serving_uavs - ideal_total_serving_uavs)
+                serving_set_cost = self.w_serving_set_cost * np.clip(cost_ratio, 0, 1)
 
-        # --- 4. 组合最终奖励 ---
-        # R_final(t) = w_cov * r_cov_norm + w_link * p_link_norm
-        final_reward = (self.w_dense_coverage * dense_coverage_reward_norm +
-                        self.w_link_loss * link_loss_penalty_norm)
+        # --- 组合成最终的 r_t ---
+        # 这是一个加权和，反映了网络的整体健康状况。
+        shared_team_reward = (W_CONNECTIVITY * connectivity_score +
+                             W_DIVERSITY * role_diversity_bonus +
+                             W_COVERAGE * effective_coverage_score -
+                             W_DISPERSION * dispersion_penalty -
+                             serving_set_cost)
         
-        # 更新状态以供下一时间步使用
-        self.previous_coverage_ratio = current_coverage
-        self.previous_serving_uavs = current_serving_uavs
-        
-        # 记录到日志
-        self.reward_info['stability_aware_reward'] = final_reward
-        self.reward_info['stability_dense_coverage_norm'] = dense_coverage_reward_norm
-        self.reward_info['stability_link_loss_norm'] = link_loss_penalty_norm
-        self.reward_info['stability_lost_service_uavs'] = len(lost_service_uavs)
-        
-        return final_reward
+        # 归一化，使其保持在一个合理的范围内，有利于稳定学习。
+        total_positive_weight = W_CONNECTIVITY + W_DIVERSITY + W_COVERAGE
+        final_rt = shared_team_reward / total_positive_weight if total_positive_weight > 0 else 0
 
+        # 准备一个字典用于日志记录，这对于调试至关重要！
+        reward_components = {
+            "rt_final_health_score": final_rt,
+            "connectivity_score": connectivity_score,
+            "role_diversity_bonus": role_diversity_bonus,
+            "effective_coverage_score": effective_coverage_score,
+            "dispersion_penalty": dispersion_penalty,
+            "serving_set_cost": serving_set_cost,
+            "serving_uavs_count": serving_uavs_count, # 日志中仍保留原始计数
+            "pure_relay_uavs_count": pure_relay_uavs_count,
+            "weighted_serving_score": weighted_serving_score # 添加新的加权分数
+        }
+
+        return final_rt, reward_components
+    
     def render(self):
         """
         渲染环境
@@ -1813,8 +1315,8 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def _render_frame(self):
         """
-        渲染单帧 - 3D 视图 (优化版)
-        【多进程修复版v2】: 在每次渲染前确保matplotlib后端正确配置
+        渲染单帧 - 增强版2D视图
+        【多进程修复版】: 移除环境内的后端检测，依赖训练脚本进行设置
         """
         import os
         import threading
@@ -1827,156 +1329,130 @@ class UAVForcedRelayEnv(ParallelEnv):
         with self._render_lock:
             try:
                 import matplotlib
+                import matplotlib.pyplot as plt
+                from matplotlib.patches import Circle, Arrow
+                
+                # 【诊断日志】在每次渲染时打印当前后端，以便在子进程中进行调试
                 pid = os.getpid()
                 current_backend = matplotlib.get_backend()
-                
-                # 【关键修复】在子进程中，每次渲染前都确保使用Agg后端
-                if current_backend.lower() != 'agg':
-                    # print(f"[PID: {pid}] 检测到非Agg后端 ({current_backend})，正在切换...")
-                    matplotlib.use('Agg', force=True)
-                    # print(f"[PID: {pid}] 已切换到Agg后端")
-                    import importlib
-                    import matplotlib.pyplot
-                    importlib.reload(matplotlib.pyplot)
-                
-                import matplotlib.pyplot as plt
-                from matplotlib.patches import Circle
-                from mpl_toolkits.mplot3d import Axes3D
-                import mpl_toolkits.mplot3d.art3d as art3d
-                
+                print(f"[PID: {pid}] 开始渲染 - Matplotlib后端: {current_backend}")
+
             except ImportError as e:
                 print(f"[PID: {os.getpid()}] 渲染需要matplotlib库: {e}")
+                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
                 return self._fallback_render_strategy()
             except Exception as e:
                 print(f"[PID: {os.getpid()}] 导入matplotlib时出错: {e}")
+                print(f"[PID: {os.getpid()}] 错误堆栈: {traceback.format_exc()}")
+                print(f"[PID: {os.getpid()}] 启用备用渲染策略：纯数据记录模式")
                 return self._fallback_render_strategy()
         
         if self.fig is None:
-            self.fig = plt.figure(figsize=(14, 10)) # 稍微加宽一点
-            self.ax = self.fig.add_subplot(111, projection='3d')
+            self.fig = plt.figure(figsize=(12, 10))
+            self.ax = self.fig.add_subplot(111)
         else:
             self.ax.clear()
 
-        # 设置坐标轴 (3D)
+        # 设置坐标轴 (2D)
         self.ax.set_xlim(0, self.area_size)
         self.ax.set_ylim(0, self.area_size)
-        self.ax.set_zlim(0, 300) # Z轴限制：假设最大高度300米
-        
         self.ax.set_xlabel('X (m)')
         self.ax.set_ylabel('Y (m)')
-        self.ax.set_zlabel('Height (m)')
-        
-        # 标题只显示当前步数
-        self.ax.set_title(f'UAV Relay Network (3D) - Step: {self.current_step}')
-        
-        # 调整视角 (仰角 30 度，方位角 45 度)
-        self.ax.view_init(elev=30, azim=45)
+        self.ax.set_title(f'UAV Relay Network with User Mobility - Step: {self.current_step}/{self.max_steps}')
+        self.ax.set_aspect('equal', adjustable='box')
 
-        # 绘制用户簇范围 (投射在 z=0 平面)
+        # 绘制用户簇范围
         if self.user_movement_model == "rpgm" and hasattr(self, 'cluster_centers_history'):
-            try:
-                import matplotlib as mpl
-                cluster_colors = mpl.colormaps['tab10'].resampled(self.n_clusters)
-            except AttributeError:
-                cluster_colors = plt.cm.get_cmap('tab10', self.n_clusters)
-            
+            cluster_colors = plt.cm.get_cmap('tab10', self.n_clusters)
             for i in range(self.n_clusters):
                 center = self.cluster_centers_history[i]
+                # 使用 cluster_std 的两倍作为可视化半径
                 radius = self.cluster_std * 2
-                circle = Circle(center, radius, color=cluster_colors(i), alpha=0.1)
+                circle = Circle(center, radius, color=cluster_colors(i), alpha=0.15, zorder=1)
                 self.ax.add_patch(circle)
-                art3d.pathpatch_2d_to_3d(circle, z=0, zdir="z")
+                
+                # 绘制簇中心移动速度箭头
+                if hasattr(self, 'cluster_velocities'):
+                    velocity = self.cluster_velocities[i]
+                    if np.linalg.norm(velocity) > 0.1:
+                        self.ax.arrow(center[0], center[1], velocity[0] * 5, velocity[1] * 5, 
+                                      head_width=30, head_length=40, fc=cluster_colors(i), ec=cluster_colors(i), zorder=10)
 
-        # 绘制用户 (位于地面 z=0)
+        # 绘制用户
         if self.user_positions is not None:
             user_x = self.user_positions[:, 0]
             user_y = self.user_positions[:, 1]
-            user_z = np.zeros_like(user_x)
             
+            # 根据簇分配为用户着色
             if self.user_movement_model == "rpgm" and hasattr(self, 'user_cluster_assignments'):
                 colors = [cluster_colors(c) for c in self.user_cluster_assignments]
-                self.ax.scatter(user_x, user_y, user_z, c=colors, marker='.', label='Users', alpha=0.6)
+                self.ax.scatter(user_x, user_y, c=colors, marker='.', label='Users', zorder=5)
             else:
-                self.ax.scatter(user_x, user_y, user_z, c='blue', marker='.', label='Users', alpha=0.6)
+                self.ax.scatter(user_x, user_y, c='blue', marker='.', label='Users', zorder=5)
+            
+            # 绘制用户移动速度箭头
+            if hasattr(self, 'user_velocities'):
+                for i in range(self.n_users):
+                    pos = self.user_positions[i, :2]
+                    vel = self.user_velocities[i, :2]
+                    if np.linalg.norm(vel) > 0.1:
+                        self.ax.arrow(pos[0], pos[1], vel[0] * 5, vel[1] * 5, 
+                                      head_width=15, head_length=20, fc='gray', ec='gray', alpha=0.6, zorder=4)
 
-        # 绘制无人机和连接 (3D)
+        # 绘制无人机和连接
         if self.uav_positions is not None:
-            # 绘制无人机主体
-            uav_xs = self.uav_positions[:, 0]
-            uav_ys = self.uav_positions[:, 1]
-            uav_zs = self.uav_positions[:, 2]
-            
-            self.ax.scatter(uav_xs, uav_ys, uav_zs, c='red', marker='^', s=100, label='UAVs')
-            
-            # 为每个无人机绘制投影线和连接
             for i in range(self.n_uavs):
                 uav_pos = self.uav_positions[i]
+                self.ax.scatter(uav_pos[0], uav_pos[1], c='red', marker='^', s=120, label=f'UAV {i}' if i == 0 else "", zorder=8)
+                self.ax.text(uav_pos[0] + 20, uav_pos[1] + 20, f"{int(uav_pos[2])}m", fontsize=8, color='black', zorder=9)
                 
-                # 投影线 (Ground Projection)
-                self.ax.plot([uav_pos[0], uav_pos[0]], [uav_pos[1], uav_pos[1]], [0, uav_pos[2]], 
-                             'k--', alpha=0.1, linewidth=0.5)
-                
-                # 绘制连接线 (UAV -> User)
+                # 绘制到用户的连接
                 if self.connections is not None:
-                    # 找出连接的用户
-                    connected_users = np.where(self.connections[i])[0]
-                    if len(connected_users) > 0:
-                        # 批量绘制线段以提高性能
-                        for user_idx in connected_users:
-                            user_pos = self.user_positions[user_idx]
-                            # 线段: UAV(x,y,z) -> User(x,y,0)
-                            self.ax.plot([uav_pos[0], user_pos[0]], 
-                                         [uav_pos[1], user_pos[1]], 
-                                         [uav_pos[2], 0], 
-                                         'g-', alpha=0.15, linewidth=0.5)
-
-        # 绘制地面基站 (3D)
+                    for j in range(self.n_users):
+                        if self.connections[i, j]:
+                            user_pos = self.user_positions[j]
+                            self.ax.plot([uav_pos[0], user_pos[0]], [uav_pos[1], user_pos[1]], 'g-', alpha=0.4, zorder=3)
+        
+        # 绘制地面基站
         if self.ground_bs_positions is not None:
             bs_x = self.ground_bs_positions[:, 0]
             bs_y = self.ground_bs_positions[:, 1]
-            bs_z = self.ground_bs_positions[:, 2]
-            self.ax.scatter(bs_x, bs_y, bs_z, c='black', marker='s', s=150, label='Ground BS')
+            self.ax.scatter(bs_x, bs_y, c='black', marker='s', s=150, label='Ground BS', zorder=7)
 
-        # 绘制路由路径 (回程链路, 3D)
+        # 绘制路由路径
         if hasattr(self, 'routing_paths'):
             for uav_idx, (path, capacity) in self.routing_paths.items():
                 for i in range(len(path) - 1):
                     pos1 = self._get_node_pos(path[i])
                     pos2 = self._get_node_pos(path[i+1])
-                    
-                    if pos1 is not None and pos2 is not None:
-                        # 确保 z 坐标存在 (如果是用户位置可能需要处理，但路由节点通常是 UAV 或 BS)
-                        z1 = pos1[2] if len(pos1) > 2 else 0
-                        z2 = pos2[2] if len(pos2) > 2 else 0
-                        
-                        self.ax.plot([pos1[0], pos2[0]], 
-                                     [pos1[1], pos2[1]], 
-                                     [z1, z2], 
-                                     'y--', alpha=0.8, linewidth=2.0)
+                    self.ax.plot([pos1[0], pos2[0]], [pos1[1], pos2[1]], 'y--', alpha=0.8, linewidth=2.0, zorder=2)
         
-        # 添加图例 (去重)
+        # 添加图例
         handles, labels = self.ax.get_legend_handles_labels()
         by_label = dict(zip(labels, handles))
-        self.ax.legend(by_label.values(), by_label.keys(), loc='upper right', fontsize='small')
+        self.ax.legend(by_label.values(), by_label.keys(), loc='upper right')
         
-        # 添加统计信息 (在 2D 坐标系中显示)
+        # 添加增强的统计信息
         if hasattr(self, 'reward_info'):
             reward_info = self.reward_info
             
+            # 构建信息文本
             info_text = (
                 f'Coverage: {reward_info.get("coverage_ratio", 0):.2%}\n'
-                f'Eff. Users: {reward_info.get("effective_connected_users", 0)} / {self.n_users}\n'
-                f'Conn. UAVs: {reward_info.get("connected_uavs", 0)} / {self.n_uavs}\n'
+                f'Effective Users: {reward_info.get("effective_connected_users", 0)} / {self.n_users}\n'
+                f'Connected UAVs: {reward_info.get("connected_uavs", 0)} / {self.n_uavs}\n'
                 f'Avg Hops: {reward_info.get("avg_hops", 0):.2f}\n'
-                f'Sys T-put: {reward_info.get("system_throughput_mbps", 0):.2f} Mbps'
+                f'Sys Throughput: {reward_info.get("system_throughput_mbps", 0):.2f} Mbps\n'
+                f'Health Score: {reward_info.get("rt_final_health_score", 0):.3f}'
             )
             
-            # 使用 text2D 在固定的 2D 屏幕坐标上绘制
-            self.ax.text2D(0.02, 0.02, info_text, transform=self.ax.transAxes, fontsize=9,
-                           verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.3', fc='white', alpha=0.7))
+            # 在图表左下角添加一个带背景框的文本块
+            self.ax.text(0.02, 0.02, info_text, transform=self.ax.transAxes, fontsize=10,
+                         verticalalignment='bottom', bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.8))
             
+            # 目标达成状态
             if reward_info.get("target_coverage_achieved", False):
-                self.ax.text2D(0.5, 0.95, '✓ Target Coverage Achieved!', transform=self.ax.transAxes, 
+                self.ax.text(0.5, 1.02, '✓ Target Coverage Achieved!', transform=self.ax.transAxes, 
                              color='green', weight='bold', ha='center')
         
         try:
@@ -1990,20 +1466,29 @@ class UAVForcedRelayEnv(ParallelEnv):
                 plt.pause(0.01)
                 return None
             except Exception as e:
-                # print(f"人类模式渲染时出错: {e}")
+                print(f"人类模式渲染时出错: {e}")
                 return None
         elif self.render_mode == "rgb_array":
+            # 【关键修复】确保在 rgb_array 模式下返回有效的图像数组
             try:
                 from matplotlib.backends.backend_agg import FigureCanvasAgg
                 canvas = FigureCanvasAgg(self.fig)
                 canvas.draw()
+                # 获取 RGBA 缓冲区并转换为 RGB
                 image_rgba = np.array(canvas.renderer.buffer_rgba())
+                # 转换为 RGB (移除 alpha 通道)
                 image_rgb = image_rgba[:, :, :3]
+                print(f"成功生成 {image_rgb.shape} 的渲染帧")
                 return image_rgb
             except Exception as e:
                 print(f"渲染 rgb_array 时出错: {e}")
+                print(f"错误类型: {type(e).__name__}")
+                import traceback
+                print(f"错误堆栈: {traceback.format_exc()}")
+                # 返回一个默认的黑色图像而不是 None
                 return np.zeros((600, 800, 3), dtype=np.uint8)
         else:
+            # 其他模式或未指定模式，返回 None
             return None
     
     def _fallback_render_strategy(self):
@@ -2123,15 +1608,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         self.current_step = 0
         self.agents = self.possible_agents.copy()
-
-        # Init visit map for exploration reward
-        self.last_visit_time_map.fill(0)
         
         # Reset belief map and user serviced status
         self.user_serviced_status.fill(False)
-        self.prev_user_serviced_status.fill(False)
-        self.discovered_users_this_episode.clear()
-        self.discovered_bs_this_episode.clear()
         
         # 2. 使用本类的方法初始化UAV和用户位置
         self.uav_positions = self._init_uav_positions()
@@ -2142,7 +1621,21 @@ class UAVForcedRelayEnv(ParallelEnv):
         if self.user_movement_model == "rpgm":
             self._initialize_user_waypoints_rpgm()
         
-        # 卡尔曼滤波器已被移除，无需初始化
+        # 初始化卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # 初始化簇级别的卡尔曼滤波器
+            for cluster_idx in range(self.n_clusters):
+                kf = self.cluster_kalman_filters[cluster_idx]
+                cluster_center = self.cluster_centers_history[cluster_idx]
+                cluster_velocity = self.cluster_velocities[cluster_idx]
+                kf.x = np.array([cluster_center[0], cluster_center[1], cluster_velocity[0], cluster_velocity[1]])
+        else:
+            # 初始化用户级别的卡尔曼滤波器
+            for i in range(self.n_users):
+                kf = self.kalman_filters[i]
+                pos = self.user_positions[i, :2]
+                vel = self.user_velocities[i, :2]
+                kf.x = np.array([pos[0], pos[1], vel[0], vel[1]])
 
         # 3. 初始化连接和路由信息
         self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
@@ -2152,6 +1645,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.routing_paths = {}
         self.handover_count = 0
         self.ping_pong_count = 0
+        self.prev_handover_count = 0
+        self.prev_ping_pong_count = 0
         self.user_serving_uav.fill(-1)
         self.user_serving_sets = [[] for _ in range(self.n_users)]
         self.serving_set_changes = 0
@@ -2159,58 +1654,33 @@ class UAVForcedRelayEnv(ParallelEnv):
         self.uav_leaves_count = 0
         self.user_handover_history = [[] for _ in range(self.n_users)]
         
-        # 重置数据包仿真指标
-        self.metrics = {k: 0 if k != "total_end_to_end_delay" and k != "total_energy_consumed_mj" else 0.0 for k in self.metrics}
-        self.active_packets = []
-        self.packet_id_counter = 0
-
-        # 重置稳定性奖励的状态变量
-        self.previous_coverage_ratio = 0.0
-        self.previous_serving_uavs = set()
-        self.prev_effective_user_service_status = np.zeros(self.n_users, dtype=bool)
-        self.prev_load_balance_coverage_ratio = 0.0
-        self.backhaul_outage_ema = 0.0
-        self.full_disconnect_streak = 0
-
-        # 重置路由协议状态
-        if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router') and self.router is not None:
-            self.router.reset()
-        
         # 4. 更新信道状态、连接和路由
         self._update_channel_state()
         self._update_uav_connections()
         self._compute_routing_paths()  # 使用本类的路由计算
         
         # 4.5 初始化新增的 Reward Shaping 相关变量
-        self.previous_bottleneck_capacities.fill(0)
+        self.previous_bottleneck_capacities = np.zeros(self.n_uavs)
         
         # 5. 获取观测值
         observations = {}
         infos = {}
-        defer_base_views = bool(
-            getattr(self, "_defer_base_view_materialization", False)
-        )
         for agent in self.agents:
             # 注意：这里需要调用父类的_get_observation和_update_observations_dict
             # 为了简化，我们先获取基础观测，再在循环外统一更新
-            if not defer_base_views:
-                observations[agent] = self._get_observation(agent)
+            observations[agent] = self._get_observation(agent)
             infos[agent] = {}
-
+            
         # 6. 更新包含连接和跳数信息的观测
-        if not defer_base_views:
-            observations = self._update_observations_dict(observations)
-            current_state = self._get_state()
-            self.state = current_state
+        observations = self._update_observations_dict(observations)
+        
+        # 7. Calculate initial potential and set state
+        current_state = self._get_state()
+        self.state = current_state
         
         # 为每个智能体的info添加正确的state
         for agent in self.agents:
-            if not defer_base_views:
-                infos[agent]['state'] = current_state.copy()
-            else:
-                # The wrapping environment replaces this value before return;
-                # retain the public insertion order of the info mapping.
-                infos[agent]['state'] = None
+            infos[agent]['state'] = current_state.copy()
             infos[agent]['handover_count'] = self.handover_count
             infos[agent]['ping_pong_count'] = self.ping_pong_count
             
@@ -2227,9 +1697,7 @@ class UAVForcedRelayEnv(ParallelEnv):
 
     def _move_users(self):
         """根据选择的移动模型更新用户位置"""
-        if self.user_movement_model == "stationary":
-            pass  # 用户静止
-        elif self.user_movement_model == "rpgm":
+        if self.user_movement_model == "rpgm":
             self._update_user_positions_rpgm()
         else:
             # 默认使用随机游走模型
@@ -2507,19 +1975,17 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         重写父类方法，使用场景4的精确信道模型计算SINR
         """
+        uav_pos = self.uav_positions[uav_idx]
+        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
+        
         # 使用精确的A2G路径损耗模型
-        step_cache = self._current_step_communication_cache()
-        path_loss = self._cached_user_path_loss(
-            uav_idx, user_idx, step_cache=step_cache
-        )
+        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
         
         # 计算接收功率
         rx_power = self.tx_power - path_loss
         
         # 使用精确的UAV-User SINR计算
-        sinr_db = self._compute_uav_to_user_sinr(
-            uav_idx, user_idx, rx_power, step_cache=step_cache
-        )
+        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
         
         return sinr_db
 
@@ -2531,16 +1997,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             metrics (dict): 包含所有切换指标的字典。
         """
-        # 在计算新指标前，首先确定当前时间步的真实服务状态
-        current_serviced_status = np.zeros(self.n_users, dtype=bool)
-        for user_idx in range(self.n_users):
-            user_has_service = False
-            for uav_idx in range(self.n_uavs):
-                if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
-                    if self.sinr_matrix[uav_idx, user_idx] >= self.outage_sinr_threshold_db:
-                        user_has_service = True
-                        break
-            current_serviced_status[user_idx] = user_has_service
         # 1. 计算切换成本
         if not hasattr(self, 'prev_handover_count'):
             self.prev_handover_count = 0
@@ -2553,17 +2009,19 @@ class UAVForcedRelayEnv(ParallelEnv):
         ping_pong_increment = self.ping_pong_count - self.prev_ping_pong_count
         self.prev_ping_pong_count = self.ping_pong_count
         
-        # 3. 计算服务中断 (新定义)
-        # 中断 = 之前被服务，但现在未被服务的用户
-        outage_users = np.sum(self.prev_user_serviced_status & ~current_serviced_status)
+        # 3. 计算服务中断
+        outage_users = 0
+        for user_idx in range(self.n_users):
+            user_has_service = False
+            for uav_idx in range(self.n_uavs):
+                if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                    if self.sinr_matrix[uav_idx, user_idx] >= self.outage_sinr_threshold_db:
+                        user_has_service = True
+                        break
+            if not user_has_service:
+                outage_users += 1
         
-        # 分母 = 上一时刻被服务的用户总数
-        num_previously_served = np.sum(self.prev_user_serviced_status)
-        
-        outage_ratio = outage_users / num_previously_served if num_previously_served > 0 else 0
-        
-        # 更新上一时刻的状态
-        self.prev_user_serviced_status = current_serviced_status.copy()
+        outage_ratio = outage_users / self.n_users if self.n_users > 0 else 0
         
         # 计算惩罚值
         handover_penalty = handover_increment * self.w_handover
@@ -2603,167 +2061,6 @@ class UAVForcedRelayEnv(ParallelEnv):
                           outage_penalty)
         return handover_reward
     
-    def _communication_config_signature(self):
-        """Return the exact configuration fields used by cached radio calculations."""
-        return (
-            float(self.tx_power),
-            float(self.ground_bs_tx_power),
-            float(self.noise_power),
-            float(self.carrier_frequency),
-            bool(self.use_fdma),
-            float(self.bandwidth),
-            float(self.aclr_linear),
-            float(self.min_sinr),
-            int(self.n_uavs),
-            int(self.n_users),
-            int(self.n_ground_bs),
-            str(getattr(self, "environment_type", "urban")),
-            tuple(
-                (float(threshold), float(efficiency))
-                for threshold, efficiency in self.mcs_table
-            ),
-        )
-
-    def _communication_unavailable_mask(self):
-        unavailable = getattr(self, "_is_uav_unavailable", None)
-        if unavailable is None:
-            return np.zeros(self.n_uavs, dtype=bool)
-        return np.asarray(
-            [unavailable(index) for index in range(self.n_uavs)], dtype=bool
-        )
-
-    def _refresh_step_communication_cache(self):
-        """Start an exact-state cache for deterministic communication calculations."""
-        if bool(getattr(self, "_disable_step_communication_cache", False)):
-            self._step_communication_cache = None
-            return None
-        cache = {
-            "uav_positions": np.asarray(self.uav_positions).copy(),
-            "user_positions": np.asarray(self.user_positions).copy(),
-            "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
-            "unavailable": self._communication_unavailable_mask(),
-            "config": self._communication_config_signature(),
-            "user_path_loss": {},
-            "link_path_loss": {},
-            "link_sinr": {},
-            "link_capacity": {},
-        }
-        self._step_communication_cache = cache
-        return cache
-
-    def _current_step_communication_cache(self):
-        """Return the cache only when every result-bearing input is unchanged."""
-        if bool(getattr(self, "_disable_step_communication_cache", False)):
-            return None
-        cache = getattr(self, "_step_communication_cache", None)
-        if cache is None:
-            return None
-        if bool(getattr(self, "_channel_update_cache_active", False)):
-            return cache
-        if cache["config"] != self._communication_config_signature():
-            return None
-        if not np.array_equal(cache["uav_positions"], self.uav_positions):
-            return None
-        if not np.array_equal(cache["user_positions"], self.user_positions):
-            return None
-        if not np.array_equal(cache["ground_bs_positions"], self.ground_bs_positions):
-            return None
-        if not np.array_equal(cache["unavailable"], self._communication_unavailable_mask()):
-            return None
-        return cache
-
-    def _cached_user_path_loss(
-        self, uav_idx, user_idx, step_cache=_STEP_CACHE_UNSET
-    ):
-        cache = (
-            self._current_step_communication_cache()
-            if step_cache is _STEP_CACHE_UNSET
-            else step_cache
-        )
-        key = (int(uav_idx), int(user_idx))
-        if cache is not None and key in cache["user_path_loss"]:
-            return cache["user_path_loss"][key]
-        path_loss = self._compute_air_to_ground_path_loss(
-            self.uav_positions[uav_idx], self.user_positions[user_idx]
-        )
-        if cache is not None:
-            cache["user_path_loss"][key] = path_loss
-        return path_loss
-
-    def _cached_directional_path_loss(
-        self,
-        tx_type,
-        tx_idx,
-        rx_type,
-        rx_idx,
-        step_cache=_STEP_CACHE_UNSET,
-    ):
-        cache = (
-            self._current_step_communication_cache()
-            if step_cache is _STEP_CACHE_UNSET
-            else step_cache
-        )
-        if bool(getattr(self, "_disable_directional_path_loss_cache", False)):
-            cache = None
-        key = (str(tx_type), int(tx_idx), str(rx_type), int(rx_idx))
-        if cache is not None and key in cache["link_path_loss"]:
-            return cache["link_path_loss"][key]
-        if tx_type == "uav":
-            tx_position = self.uav_positions[tx_idx]
-        elif tx_type == "ground_bs":
-            tx_position = self.ground_bs_positions[tx_idx]
-        else:
-            raise ValueError(f"unsupported path-loss transmitter: {tx_type}")
-        if rx_type == "uav":
-            rx_position = self.uav_positions[rx_idx]
-        elif rx_type == "ground_bs":
-            rx_position = self.ground_bs_positions[rx_idx]
-        else:
-            raise ValueError(f"unsupported path-loss receiver: {rx_type}")
-        if tx_type == "uav" and rx_type == "uav":
-            path_loss = self._compute_air_to_air_path_loss(
-                tx_position, rx_position
-            )
-        elif tx_type == "uav" and rx_type == "ground_bs":
-            path_loss = self._compute_air_to_ground_path_loss(
-                tx_position, rx_position
-            )
-        elif tx_type == "ground_bs" and rx_type == "uav":
-            path_loss = self._compute_ground_to_air_path_loss(
-                tx_position, rx_position
-            )
-        else:
-            raise ValueError(
-                f"unsupported path-loss direction: {tx_type}->{rx_type}"
-            )
-        if cache is not None:
-            cache["link_path_loss"][key] = path_loss
-        return path_loss
-
-    def _cached_link_sinr(self, tx_type, tx_idx, rx_type, rx_idx, rx_power):
-        cache = self._current_step_communication_cache()
-        key = (
-            str(tx_type),
-            int(tx_idx),
-            str(rx_type),
-            int(rx_idx),
-            float(rx_power),
-        )
-        if cache is not None and key in cache["link_sinr"]:
-            return cache["link_sinr"][key]
-        sinr = self._compute_link_sinr(tx_type, tx_idx, rx_type, rx_idx, rx_power)
-        if cache is not None:
-            cache["link_sinr"][key] = sinr
-        return sinr
-
-    def _noise_power_linear_mw(self):
-        signature = float(self.noise_power)
-        cached = getattr(self, "_noise_power_linear_cache", None)
-        if cached is None or cached[0] != signature:
-            cached = (signature, 10 ** (self.noise_power / 10))
-            self._noise_power_linear_cache = cached
-        return cached[1]
-
     def _compute_interference_radius(self):
         """
         基于信道条件动态计算干扰半径（移除上限，增强干扰）
@@ -2778,15 +2075,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         # 定义最小有意义干扰功率阈值（相对于噪声功率）
         # 例如：干扰功率至少要比噪声功率高3dB才被认为是"有意义的"
-        signature = (
-            float(self.tx_power),
-            float(self.noise_power),
-            float(self.carrier_frequency),
-        )
-        cached = getattr(self, "_interference_radius_cache", None)
-        if cached is not None and cached[0] == signature:
-            return cached[1]
-
         min_interference_margin_db = 3.0
         min_interference_power_dbm = self.noise_power + min_interference_margin_db
         
@@ -2809,7 +2097,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         interference_radius = max(max_interference_distance, min_radius)
         
-        self._interference_radius_cache = (signature, interference_radius)
         return interference_radius
 
     def _update_channel_state(self):
@@ -2818,14 +2105,9 @@ class UAVForcedRelayEnv(ParallelEnv):
         同时在此函数中计算发现奖励，确保使用最新的信道状态
         """
         # 计算所有UAV-用户对的SINR
-        self._refresh_step_communication_cache()
-        self._channel_update_cache_active = True
-        try:
-            for i in range(self.n_uavs):
-                for j in range(self.n_users):
-                    self.sinr_matrix[i, j] = self._compute_sinr(i, j)
-        finally:
-            self._channel_update_cache_active = False
+        for i in range(self.n_uavs):
+            for j in range(self.n_users):
+                self.sinr_matrix[i, j] = self._compute_sinr(i, j)
 
         # 记录旧的连接状态，用于切换统计
         old_connections = self.connections.copy()
@@ -2841,47 +2123,23 @@ class UAVForcedRelayEnv(ParallelEnv):
             self._update_hard_handover_stats(old_serving_uav)
 
     def _update_hard_connections(self):
-        """
-        两阶段硬连接分配逻辑：优先保护中继骨干网，再进行用户接入
-        
-        阶段一：识别潜在的关键中继节点
-        阶段二：带保护机制的用户接入分配
-        """
+        """传统的硬连接分配逻辑"""
         self.connections.fill(False)
+        uav_user_pairs = []
+        for i in range(self.n_uavs):
+            for j in range(self.n_users):
+                if self.sinr_matrix[i, j] >= self.min_sinr:
+                    uav_user_pairs.append((i, j, self.sinr_matrix[i, j]))
         
-        # 阶段一：识别潜在的关键中继节点
-        critical_relay_nodes = self._identify_critical_relay_nodes()
+        uav_user_pairs.sort(key=lambda x: x[2], reverse=True)
         
-        # 阶段二：以用户为中心的连接分配，带中继节点保护机制
         uav_connections = np.zeros(self.n_uavs, dtype=int)
         user_connected = np.zeros(self.n_users, dtype=bool)
         
-        # 为每个用户寻找最佳的服务无人机
-        for user_idx in range(self.n_users):
-            if user_connected[user_idx]:
-                continue
-                
-            # 找出所有能为该用户提供服务的无人机候选
-            candidates = []
-            for uav_idx in range(self.n_uavs):
-                if (self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr and 
-                    uav_connections[uav_idx] < self.max_connections):
-                    candidates.append((uav_idx, self.sinr_matrix[uav_idx, user_idx]))
-            
-            if not candidates:
-                continue  # 该用户无法被任何无人机服务
-            
-            # 按信号质量排序
-            candidates.sort(key=lambda x: x[1], reverse=True)
-            
-            # 应用中继节点保护机制
-            selected_uav = self._select_uav_with_relay_protection(
-                user_idx, candidates, critical_relay_nodes
-            )
-            
-            if selected_uav is not None:
-                self.connections[selected_uav, user_idx] = True
-                uav_connections[selected_uav] += 1
+        for uav_idx, user_idx, sinr in uav_user_pairs:
+            if uav_connections[uav_idx] < self.max_connections and not user_connected[user_idx]:
+                self.connections[uav_idx, user_idx] = True
+                uav_connections[uav_idx] += 1
                 user_connected[user_idx] = True
 
     def _update_serving_sets(self):
@@ -3074,22 +2332,17 @@ class UAVForcedRelayEnv(ParallelEnv):
         """
         使用场景4的精确信道模型计算UAV到UAV的SINR
         """
-        step_cache = self._current_step_communication_cache()
-        path_loss = self._cached_directional_path_loss(
-            "uav",
-            sender_idx,
-            "uav",
-            receiver_idx,
-            step_cache=step_cache,
-        )
+        sender_pos = self.uav_positions[sender_idx]
+        receiver_pos = self.uav_positions[receiver_idx]
+        
+        # 使用精确的A2A路径损耗模型
+        path_loss = self._compute_air_to_air_path_loss(sender_pos, receiver_pos)
         
         # 计算接收功率
         rx_power = self.tx_power - path_loss
         
         # 使用精确的链路SINR计算（考虑干扰）
-        sinr_db = self._cached_link_sinr(
-            "uav", sender_idx, "uav", receiver_idx, rx_power
-        )
+        sinr_db = self._compute_link_sinr("uav", sender_idx, "uav", receiver_idx, rx_power)
         
         return sinr_db
 
@@ -3126,83 +2379,6 @@ class UAVForcedRelayEnv(ParallelEnv):
                     self.uav_bs_connections[i, j] = True
                 else:
                     self.uav_bs_connections[i, j] = False
-
-    def _apply_backhaul_action_guard(self, uav_idx, velocity):
-        """
-        对关键回程/服务节点应用动作安全层，避免单步动作直接切断已有回程路径。
-
-        该保护只在 load_balance 模式默认启用。它不改变奖励函数，而是在关键 UAV 的
-        候选移动会让当前依赖它的回程路径任一链路低于阈值时，将速度缩放到悬停或近悬停。
-        """
-        if not getattr(self, 'enable_backhaul_action_guard', False):
-            return velocity
-        if self.reward_type != "load_balance":
-            return velocity
-        if not hasattr(self, 'routing_paths') or not self.routing_paths:
-            return velocity
-        if not self._is_backhaul_guarded_uav(uav_idx):
-            return velocity
-
-        self.backhaul_guard_checked_actions += 1
-
-        current_position = self.uav_positions[uav_idx].copy()
-        proposed_position = current_position + velocity * self.time_step
-        proposed_position[0] = np.clip(proposed_position[0], 0, self.area_size)
-        proposed_position[1] = np.clip(proposed_position[1], 0, self.area_size)
-        proposed_position[2] = np.clip(proposed_position[2], *self.height_range)
-
-        if self._would_preserve_dependent_backhaul_paths(uav_idx, proposed_position):
-            return velocity
-
-        self.backhaul_guard_blocked_actions += 1
-        reject_scale = float(np.clip(getattr(self, 'backhaul_guard_reject_speed_scale', 0.0), 0.0, 1.0))
-        return velocity * reject_scale
-
-    def _is_backhaul_guarded_uav(self, uav_idx):
-        """判断该 UAV 是否正在服务用户或作为其他 UAV 的中继骨干。"""
-        if uav_idx not in self.routing_paths:
-            return False
-        if np.sum(self.connections[uav_idx]) > 0:
-            return True
-
-        node = ("uav", uav_idx)
-        for source_uav, (path, _) in self.routing_paths.items():
-            if source_uav == uav_idx:
-                continue
-            if node in path[1:-1]:
-                return True
-        return False
-
-    def _would_preserve_dependent_backhaul_paths(self, uav_idx, proposed_position):
-        """检查移动后所有依赖该 UAV 的已有回程路径是否仍有链路容量余量。"""
-        node = ("uav", uav_idx)
-        dependent_paths = [
-            path for path, _ in self.routing_paths.values()
-            if node in path
-        ]
-        if not dependent_paths:
-            return True
-
-        min_capacity_bps = max(0.0, getattr(self, 'backhaul_guard_min_capacity_mbps', 1.0)) * 1e6
-        original_position = self.uav_positions[uav_idx].copy()
-
-        try:
-            self.uav_positions[uav_idx] = proposed_position
-            for path in dependent_paths:
-                for edge_idx in range(len(path) - 1):
-                    src_type, src_idx = path[edge_idx]
-                    dst_type, dst_idx = path[edge_idx + 1]
-                    if (src_type, src_idx) != node and (dst_type, dst_idx) != node:
-                        continue
-
-                    forward_capacity = self._get_link_capacity(src_type, src_idx, dst_type, dst_idx)
-                    reverse_capacity = self._get_link_capacity(dst_type, dst_idx, src_type, src_idx)
-
-                    if forward_capacity < min_capacity_bps or reverse_capacity < min_capacity_bps:
-                        return False
-            return True
-        finally:
-            self.uav_positions[uav_idx] = original_position
     
     def step(self, actions):
         """
@@ -3219,36 +2395,31 @@ class UAVForcedRelayEnv(ParallelEnv):
             infos: 所有智能体的信息字典
         """
         # 1. Move users and update their state predictions
-        # Routing builders replace the outer dict and path records; they do not
-        # mutate records retained from the previous authoritative topology.
-        self.previous_routing_paths_snapshot = dict(self.routing_paths)
-        self.previous_connections_snapshot = self.connections.copy()
         self._move_users()
         
-        # 卡尔曼滤波器已被移除，无需更新
-        self.backhaul_guard_checked_actions = 0
-        self.backhaul_guard_blocked_actions = 0
+        # 更新卡尔曼滤波器
+        if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+            # 更新簇级别的卡尔曼滤波器
+            for cluster_idx in range(self.n_clusters):
+                kf = self.cluster_kalman_filters[cluster_idx]
+                kf.predict()
+                kf.update(self.cluster_centers_history[cluster_idx])
+        else:
+            # 更新用户级别的卡尔曼滤波器
+            for i in range(self.n_users):
+                kf = self.kalman_filters[i]
+                kf.predict()
+                kf.update(self.user_positions[i, :2])
 
         # 2. Update agent positions based on actions
         for agent_idx, agent in enumerate(self.agents):
             if agent in actions:
-                if self.action_space_type == 'discrete':
-                    # 【离散动作处理】接收离散的整数动作并使用映射查找对应的速度向量
-                    discrete_action = actions[agent]
-                    
-                    # 检查动作是否有效，以防万一
-                    if discrete_action not in self.action_to_velocity:
-                        print(f"警告：接收到无效的离散动作 {discrete_action}，将执行悬停。")
-                        discrete_action = 0  # 默认为悬停
-                        
-                    # 从映射中查找对应的速度向量
-                    velocity = self.action_to_velocity[discrete_action]
+                # 【关键修复】正确处理动作向量以控制速度和方向
+                # The action vector from the policy is in the range [-1, 1] for each dimension.
+                # We directly scale this to the maximum velocity.
+                action_vec = actions[agent]
+                velocity = action_vec * self.max_speed
                 
-                elif self.action_space_type == 'continuous':
-                    action_vec = np.asarray(actions[agent], dtype=np.float32)
-                    velocity = action_vec * self.max_speed
-
-                velocity = self._apply_backhaul_action_guard(agent_idx, velocity)
                 new_position = self.uav_positions[agent_idx] + velocity * self.time_step
                 
                 # Boundary checks
@@ -3257,48 +2428,41 @@ class UAVForcedRelayEnv(ParallelEnv):
                 new_position[2] = np.clip(new_position[2], *self.height_range)
                 self.uav_positions[agent_idx] = new_position
         
-        # 3.5. 更新无人机访问地图 (用于探索奖励)
-        self._update_visit_map()
-
         # 3. Update system state based on new positions
         self._update_channel_state()
         self._update_uav_connections()
-        
-        # 【核心修改】实现分层的路由计算
-        # 高层决策：周期性更新全局 hop_map
-        if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
-            self.hop_map = self._calculate_hop_map()
-            
-        # 【新增】分层可见性：在K step同步时更新全局基站缓存
-        if self.current_step % self.hggr_update_interval == 0:
-            self._update_global_bs_cache()
-        
-        # 低层决策：每一步都基于当前（可能过时的）信息计算路径
         self._compute_routing_paths()
 
-        # >>> 插入数据包仿真调用 <<<
-        self._simulate_packet_flow()
-        
-        # 计算路由开销（简化版本 - 基于协议类型）
-        if ROUTING_PROTOCOLS_AVAILABLE and hasattr(self, 'router'):
-            routing_overhead_this_step = self.router.get_and_reset_overhead()
-        else:
-            # 使用默认的简化开销模型
-            if self.routing_protocol == 'hggr' and self.current_step % self.hggr_update_interval == 0:
-                routing_overhead_this_step = self.n_uavs  # HGGR的全局更新开销
-            elif self.routing_protocol == 'geographic':
-                routing_overhead_this_step = self.n_uavs  # 地理路由的hello消息开销
-            else:
-                routing_overhead_this_step = 0  # 其他协议的默认开销
 
+        # 4. Check for newly serviced users and update belief map
+        for user_idx in range(self.n_users):
+            # Check if user is not yet serviced but is now connected by a UAV with a valid route
+            is_effectively_connected = False
+            if not self.user_serviced_status[user_idx]:
+                for uav_idx in range(self.n_uavs):
+                    if self.connections[uav_idx, user_idx] and uav_idx in self.routing_paths:
+                        is_effectively_connected = True
+                        break
+            
+            if is_effectively_connected:
+                self.user_serviced_status[user_idx] = True
+        
         # 7. CALCULATE REWARDS
         # 首先，计算核心覆盖指标并更新 self.reward_info，供塑形奖励函数使用
         self._calculate_coverage_metrics()
-        backhaul_outage_metrics = self._calculate_backhaul_outage_metrics()
-        relay_backhaul_metrics = self._calculate_relay_backhaul_metrics()
-        reward_components = {}
+
+        # 计算SINR分布和服务质量得分
+        sinr_stats, qos_score = self._calculate_sinr_distribution_and_qos()
+        self.reward_info.update(sinr_stats)
+
+        # 然后，计算新的、综合性的“网络健康度”作为共享团队奖励 r_t
+        shaped_team_reward, reward_components = self.calculate_network_health_reward()
+
+        # 计算覆盖率 * 负载均衡奖励，作为独立 reward_type 的候选项
+        coverage_balance_reward, coverage_balance_components = self.calculate_coverage_balance_reward()
+
         # 始终计算切换指标以用于日志记录
-        #handover_metrics = self._calculate_handover_metrics()
+        handover_metrics = self._calculate_handover_metrics()
 
         # 8. 计算系统吞吐量 (在计算完路由和奖励之后)
         system_throughput_mbps, avg_throughput_per_user_mbps = self._calculate_system_throughput()
@@ -3322,239 +2486,45 @@ class UAVForcedRelayEnv(ParallelEnv):
         truncations = {}
         infos = {}
         
-        # 根据模式计算奖励 - 简化版：只保留三种模式
-        # 根据reward_type参数选择奖励类型
-        if self.reward_type == "naive":
-            # naive模式：直接使用覆盖率作为奖励
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            shared_reward = coverage_ratio
-        elif self.reward_type == "load_balance":
-            # load_balance 模式: 使用门控奖励机制 + 斥力场惩罚
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            load_balance_penalty = self._calculate_load_balancing_penalty()
-            repulsion_penalty = self._calculate_repulsion_penalty()
-            backhaul_outage_ratio = backhaul_outage_metrics.get("backhaul_outage_ratio", 0.0)
-            backhaul_drop_ratio = backhaul_outage_metrics.get("backhaul_drop_ratio", 0.0)
-            coverage_drop_ratio = backhaul_outage_metrics.get("coverage_drop_ratio", 0.0)
-            outage_memory_penalty = backhaul_outage_metrics.get("backhaul_outage_ema", 0.0)
-            full_disconnect_penalty = float(backhaul_outage_metrics.get("full_network_disconnect", 0))
-            relay_route_loss_ratio = relay_backhaul_metrics.get("relay_route_loss_ratio", 0.0)
-            relay_margin_penalty = relay_backhaul_metrics.get("backhaul_margin_penalty_raw", 0.0)
-            
-            # 组合惩罚项：负载均衡 + 斥力场
-            # 使用权重参数来平衡两种惩罚的影响
-            w_repulsion = getattr(self, 'w_repulsion', 0.3)  # 默认斥力场权重为0.3
-            combined_penalty = self.w_load_balance * load_balance_penalty + w_repulsion * repulsion_penalty
-            
-            shared_reward = coverage_ratio * (1 - combined_penalty)
-
-            # 回传断联惩罚不乘覆盖率。即使瞬时覆盖率已经掉到0，也保留负梯度，
-            # 避免策略把短时断联当作普通低覆盖状态处理。
-            robustness_penalty = (
-                self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio) +
-                self.w_full_disconnect * full_disconnect_penalty +
-                self.w_coverage_drop * coverage_drop_ratio +
-                self.w_outage_memory * outage_memory_penalty +
-                self.w_relay_break * relay_route_loss_ratio +
-                self.w_backhaul_margin * relay_margin_penalty
-            )
-            shared_reward -= robustness_penalty
-
-            # === 灯塔导航奖励 (Lighthouse/Navigation Reward) ===
-            # 替代原有的 catalyst_reward，解决极端位置导致的稀疏性问题
-            
-            # 1. 检查整个团队是否有任何连接
-            team_connected = np.any(self.uav_bs_connections)
-            
-            nav_reward = 0.0
-            
-            if not team_connected:
-                # === 阶段 A: 求生模式 (Survival Mode) ===
-                # 全员未连接，给予基于距离的负奖励（引导向基站移动）
-                
-                # 计算每个UAV到最近基站的距离
-                dists = []
-                for uav_pos in self.uav_positions:
-                    d = np.linalg.norm(self.ground_bs_positions - uav_pos, axis=1)
-                    dists.append(np.min(d))  # 找到离该UAV最近的基站距离
-                
-                avg_min_dist = np.mean(dists)
-                
-                # 归一化距离 (使用地图对角线长度)
-                map_scale = self.area_size * np.sqrt(2)
-                normalized_dist = avg_min_dist / map_scale
-                
-                # 复用 w_first_contact 作为导航权重
-                w_nav = self.w_first_contact
-                
-                # 给予负奖励：距离越远，惩罚越大
-                # 这样梯度下降的方向就是让距离变小
-                nav_reward = -1.0 * w_nav * normalized_dist
-            else:
-                # === 阶段 B: 覆盖模式 (Coverage Mode) ===
-                # 已经连接，关闭导航奖励，专注于覆盖
-                nav_reward = 0.0
-                
-            shared_reward += nav_reward
-
-            reward_components.update({
-                "gated_reward": shared_reward,
-                "load_balance_reward": shared_reward,
-                "rt_final_health_score": shared_reward,
-                "load_balance_penalty": load_balance_penalty,
-                "repulsion_penalty": repulsion_penalty,
-                "combined_penalty": combined_penalty,
-                "robustness_penalty": robustness_penalty,
-                "backhaul_outage_penalty": self.w_backhaul_outage * max(backhaul_outage_ratio, backhaul_drop_ratio),
-                "full_disconnect_penalty": self.w_full_disconnect * full_disconnect_penalty,
-                "coverage_drop_penalty": self.w_coverage_drop * coverage_drop_ratio,
-                "outage_memory_penalty": self.w_outage_memory * outage_memory_penalty,
-                "relay_break_penalty": self.w_relay_break * relay_route_loss_ratio,
-                "backhaul_margin_penalty": self.w_backhaul_margin * relay_margin_penalty,
-                "backhaul_guard_checked_actions": getattr(self, 'backhaul_guard_checked_actions', 0),
-                "backhaul_guard_blocked_actions": getattr(self, 'backhaul_guard_blocked_actions', 0),
-                "nav_reward": nav_reward  # 记录导航奖励以便观察
-            })
-        elif self.reward_type == "awareness":
-            # awareness模式：覆盖率 + 地图新鲜度 + 负载均衡的综合惩罚
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            
-            # 计算两种惩罚
-            freshness_penalty = self._calculate_map_freshness_penalty()
-            balance_penalty = self._calculate_load_balancing_penalty()
-            
-            # 组合成综合惩罚项
-            comprehensive_penalty = (self.w_freshness_penalty * freshness_penalty +
-                                     self.w_load_balance * balance_penalty)
-            
-            # 应用乘法结构
-            shared_reward = coverage_ratio * (1 - np.clip(comprehensive_penalty, 0, 1))
-            
-            # 更新日志
-            reward_components["freshness_penalty"] = freshness_penalty
-            reward_components["awareness_reward"] = shared_reward
-        elif self.reward_type == "test_reward":
-            # ===== test_reward Ver2.0: 基于真实物理能耗模型 =====
-            
-            # --- Part 1: 基于 IEEE TWC (Zeng et al. 2019) 的物理能耗惩罚 ---
-            total_power_watts = 0.0
-            
-            for i, agent in enumerate(self.agents):
-                if agent in actions:
-                    # 获取速度 (增加安全检查)
-                    if self.action_space_type == 'discrete':
-                        action = actions[agent]
-                        if action in self.action_to_velocity:
-                            vel = self.action_to_velocity[action]
-                        else:
-                            # 默认悬停
-                            vel = self.action_to_velocity[0]
-                    else:
-                        vel = actions[agent] * self.max_speed
-                    
-                    v_xy = np.linalg.norm(vel[:2])
-                    v_z = vel[2] # 保留符号，虽然我们在计算功率时用了abs
-                    
-                    # 计算该无人机的瞬时功率 (W)
-                    power = self._calculate_power_consumption(v_xy, v_z)
-                    
-                    # 我们主要惩罚 "额外的运动能耗"，而不是悬停能耗
-                    # 因此减去悬停功率 (v=0时的功率)
-                    # P_hover = P0 + Pi ≈ 168W
-                    # 这样静止时的惩罚为 0
-                    p_hover = self.P0 + self.Pi
-                    extra_power = max(0, power - p_hover)
-                    
-                    total_power_watts += extra_power
-
-            # 归一化处理
-            # 这里的 max_power_consumption 也是减去悬停功率后的值
-            max_extra_power = self.max_power_consumption - (self.P0 + self.Pi)
-            # 防止除以零或过小
-            if max_extra_power <= 1e-3:
-                max_extra_power = 1.0
-            
-            normalized_energy_penalty = total_power_watts / (self.n_uavs * max_extra_power)
-            
-            # 【安全保护】防止惩罚值爆炸
-            if normalized_energy_penalty > 2.0:
-                # print(f"Warning: Energy penalty exploded ({normalized_energy_penalty:.2f}). Total Watts: {total_power_watts:.2f}, Max Extra/UAV: {max_extra_power:.2f}")
-                normalized_energy_penalty = 2.0 # 软截断
-            
-            # --- Part 2: 稳定性迟滞惩罚 (Hysteresis) ---
-            # 比较当前连接状态与上一步连接状态
-            current_connected = set()
-            prev_connected = getattr(self, '_prev_connected_ues', set())
-            
-            for user_idx in range(self.n_users):
-                for uav_idx in range(self.n_uavs):
-                    if self.sinr_matrix[uav_idx, user_idx] >= self.min_sinr:
-                        current_connected.add(user_idx)
-                        break
-            
-            # 计算新上线和掉线的用户数量
-            new_connected = current_connected - prev_connected  # 新上线
-            disconnected = prev_connected - current_connected   # 掉线
-            
-            # 迟滞系数：掉线惩罚是上线收益的2.5倍
-            hysteresis_ratio = 2.5
-            connection_gain = len(new_connected) * 1.0
-            disconnection_loss = len(disconnected) * hysteresis_ratio
-            
-            # 归一化迟滞惩罚到 [-1, 1]
-            # 正值表示净收益，负值表示净损失
-            if self.n_users > 0:
-                hysteresis_score = (connection_gain - disconnection_loss) / self.n_users
-            else:
-                hysteresis_score = 0.0
-            hysteresis_score = np.clip(hysteresis_score, -1.0, 1.0)
-            
-            # 保存当前状态用于下一步
-            self._prev_connected_ues = current_connected.copy()
-            
-            # --- Part 3: 组合最终奖励 ---
-            # 基础覆盖率奖励 (使用已计算的覆盖率)
-            coverage_reward = self.reward_info.get("coverage_ratio", 0)
-            
-            # 组合公式：
-            # R = w_cov * coverage - w_energy * energy_penalty + w_hysteresis * hysteresis_score
-            w_coverage = 0.5
-            # w_energy 建议 0.05 ~ 0.1, 使用初始化时设定的值
-            w_energy = self.w_energy 
-            w_hysteresis = 0.3
-            
-            shared_reward = (w_coverage * coverage_reward - 
-                            w_energy * normalized_energy_penalty + 
-                            w_hysteresis * hysteresis_score)
-            
-            # 更新日志
-            reward_components["test_reward"] = shared_reward
-            reward_components["energy_penalty"] = normalized_energy_penalty
-            reward_components["hysteresis_score"] = hysteresis_score
-            reward_components["coverage_component"] = coverage_reward
-            reward_components["total_power_watts"] = total_power_watts # 记录总功率以便调试
+        # 根据模式计算奖励
+        if self.test_reward_mode:
+            penalties = self._calculate_individual_distance_overlap_penalties()
+            # 【修复】计算平均惩罚，并将其作为共享奖励信号
+            mean_penalty = np.mean(penalties)
+            shared_reward = -mean_penalty
+            for agent in self.agents:
+                rewards[agent] = shared_reward
         else:
-            # 默认使用naive模式
-            coverage_ratio = self.reward_info.get("coverage_ratio", 0)
-            shared_reward = coverage_ratio
-        
-        # 所有智能体接收完全相同的共享团队奖励
-        for agent in self.agents:
-            rewards[agent] = shared_reward
-
-        # Visualization consumes these snapshots from every agent's reward_info.
-        # Build them once per step and share the same read-only-by-contract values
-        # instead of copying the full topology once for every agent.
-        connections_snapshot = self.connections.copy()
-        routing_paths_snapshot = dict(self.routing_paths)
-        defer_base_views = bool(
-            getattr(self, "_defer_base_view_materialization", False)
-        )
+            # 根据reward_type参数选择奖励类型
+            if self.reward_type == "naive":
+                # naive模式：直接使用覆盖率作为奖励
+                coverage_ratio = self.reward_info.get("coverage_ratio", 0)
+                shared_reward = coverage_ratio
+            elif self.reward_type == "health":
+                # health模式：使用网络健康度参数
+                shared_reward = shaped_team_reward
+            elif self.reward_type == "qos":
+                # qos模式：直接使用服务质量得分作为奖励
+                shared_reward = self.reward_info.get("qos_score", 0)
+            elif self.reward_type == "coverage_balance":
+                # coverage_balance模式：覆盖率 * 有回程UAV间的Jain负载均衡指数
+                shared_reward = coverage_balance_reward
+            elif self.reward_type == "handover":
+                # handover模式：精细化奖励函数，考虑切换成本、乒乓效应和服务中断
+                shared_reward = self._get_handover_reward_from_metrics(handover_metrics)
+                # 将计算出的奖励值也添加到指标中，以便记录
+                handover_metrics['handover_reward'] = shared_reward
+            else:
+                # 默认使用health模式
+                shared_reward = shaped_team_reward
+            
+            # 所有智能体接收完全相同的共享团队奖励
+            for agent in self.agents:
+                rewards[agent] = shared_reward
 
         # 13. 获取新的观测并填充返回值
         for agent_idx, agent in enumerate(self.agents):
-            if not defer_base_views:
-                observations[agent] = self._get_observation(agent)
+            observations[agent] = self._get_observation(agent)
 
             # 【核心修正】正确设置 termination 和 truncation
             terminations[agent] = is_terminated
@@ -3564,6 +2534,8 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 合并基础覆盖指标和网络健康度组件
             unified_reward_info = self.reward_info.copy()  # 包含基础覆盖指标
             unified_reward_info.update(reward_components)  # 添加网络健康度组件
+            unified_reward_info.update(coverage_balance_components)  # 添加覆盖率*负载均衡组件
+            unified_reward_info.update(handover_metrics) # 添加切换指标
             
             # 添加额外的性能指标
             unified_reward_info.update({
@@ -3572,8 +2544,6 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "uavs_with_backhaul": len(self.routing_paths),
                 "system_throughput_mbps": system_throughput_mbps,
                 "avg_throughput_per_user_mbps": avg_throughput_per_user_mbps,
-                "connections": connections_snapshot,
-                "routing_paths": routing_paths_snapshot,
             })
             
             # 将统一的奖励信息放入 info 字典，用于监控、调试和可视化
@@ -3581,22 +2551,27 @@ class UAVForcedRelayEnv(ParallelEnv):
                 "reward_info": unified_reward_info,
                 "coverage_ratio": unified_reward_info.get("coverage_ratio", 0),
                 "connectivity_ratio": unified_reward_info.get("connectivity_ratio", 0),
-            # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
-            "uav_positions": self.uav_positions.copy(),
-            # 添加路由开销信息
-                "routing_overhead": routing_overhead_this_step,
-                "routing_protocol": self.routing_protocol,
+                # 【关键修复】：添加当前UAV位置到info中，避免环境重置后位置丢失
+                "uav_positions": self.uav_positions.copy(),
+                # 添加切换统计信息
+                "handover_count": self.handover_count,
+                "ping_pong_count": self.ping_pong_count,
+                "serving_set_changes": self.serving_set_changes,
+                "uav_joins": self.uav_joins_count,
+                "uav_leaves": self.uav_leaves_count,
+                # 【新增】暴露连接数据用于可视化
+                "connections": self.connections.copy(),
+                "routing_paths": copy.deepcopy(self.routing_paths),
             }
         
         # 7. 更新观测值（在循环外一次性完成）
-        if not defer_base_views:
-            observations = self._update_observations_dict(observations)
+        observations = self._update_observations_dict(observations)
 
-            # 8. 计算并添加 next_state 到 infos
-            next_state = self._get_state()
-            self.state = next_state
-            for agent in self.agents:
-                infos[agent]['next_state'] = next_state.copy()
+        # 8. 计算并添加 next_state 到 infos
+        next_state = self._get_state()
+        self.state = next_state
+        for agent in self.agents:
+            infos[agent]['next_state'] = next_state.copy()
             
         return observations, rewards, terminations, truncations, infos
 
@@ -3612,49 +2587,6 @@ class UAVForcedRelayEnv(ParallelEnv):
             plt.close(self.fig)
             self.fig = None
             self.ax = None
-
-    def _calculate_entity_discovery_reward(self, current_observations):
-        """
-        Calculates a one-time bonus for discovering new users or base stations.
-        This is based on the collective observations of all UAVs.
-        """
-        newly_discovered_users = 0
-        newly_discovered_bs = 0
-        
-        # This approach is slightly inefficient as it re-calculates local entities,
-        # but it ensures that the discovery is based purely on what agents can *see*.
-        
-        # Check for newly discovered users
-        currently_visible_users = set()
-        for agent_idx in range(self.n_uavs):
-            local_users = self._get_local_users(agent_idx)
-            for user_idx, _ in local_users:
-                currently_visible_users.add(user_idx)
-        
-        new_users = currently_visible_users - self.discovered_users_this_episode
-        if new_users:
-            newly_discovered_users = len(new_users)
-            self.discovered_users_this_episode.update(new_users)
-
-        # Check for newly discovered base stations
-        currently_visible_bs = set()
-        for agent_idx in range(self.n_uavs):
-            local_bs = self._get_local_bs(agent_idx)
-            for bs_idx, _ in local_bs:
-                currently_visible_bs.add(bs_idx)
-
-        new_bs = currently_visible_bs - self.discovered_bs_this_episode
-        if new_bs:
-            newly_discovered_bs = len(new_bs)
-            self.discovered_bs_this_episode.update(new_bs)
-            
-        # The reward is normalized by the total number of entities to be discovered
-        user_discovery_reward = newly_discovered_users / self.n_users if self.n_users > 0 else 0
-        bs_discovery_reward = newly_discovered_bs / self.n_ground_bs if self.n_ground_bs > 0 else 0
-        
-        total_discovery_reward = user_discovery_reward + bs_discovery_reward
-
-        return total_discovery_reward
 
     def _get_node_pos(self, node):
         node_type, node_idx = node
@@ -3826,8 +2758,8 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         obs_components.append(nearest_uav_obs)
         
-        # 2. 自身状态信息 (5维) - 连接状态、路由状态、连接用户数、跳数、到最近基站的相对位置
-        self_state = np.zeros(5)
+        # 2. 自身状态信息 (4维) - 连接状态、路由状态、连接用户数、跳数
+        self_state = np.zeros(4)
         
         # 连接用户数量（归一化）
         connected_users = np.sum(self.connections[agent_idx])
@@ -3846,22 +2778,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             normalized_hops = 1.0  # 无路径时设为最大值
         self_state[2] = normalized_hops
         
-        # 到最近基站的归一化相对位置向量 (包含距离和方向信息)
-        min_bs_dist_sq = float('inf')
-        relative_pos_to_bs = np.zeros(2)
-
+        # 到最近基站的距离（归一化）
+        min_bs_dist = float('inf')
         for bs_idx in range(self.n_ground_bs):
             bs_pos = self.ground_bs_positions[bs_idx]
-            # 使用平方距离避免开根号，以提高效率
-            dist_sq = np.sum(np.square(own_position[:2] - bs_pos[:2]))
-            if dist_sq < min_bs_dist_sq:
-                min_bs_dist_sq = dist_sq
-                # 计算归一化的相对位置向量
-                relative_pos = (bs_pos[:2] - own_position[:2]) / self.area_size
-                relative_pos_to_bs = relative_pos
-        
-        self_state[3] = relative_pos_to_bs[0]  # Rel Pos X
-        self_state[4] = relative_pos_to_bs[1]  # Rel Pos Y
+            dist = np.linalg.norm(own_position - bs_pos)
+            min_bs_dist = min(min_bs_dist, dist)
+        self_state[3] = min_bs_dist / self.area_size if min_bs_dist != float('inf') else 1.0
         
         obs_components.append(self_state)
         
@@ -3869,14 +2792,14 @@ class UAVForcedRelayEnv(ParallelEnv):
         local_users = self._get_local_users(agent_idx)
         
         if self.predictive_handover:
-            user_obs = np.zeros(self.max_observed_users * 7)
-            obs_dim_per_user = 7
-        elif self.enable_soft_handover:
             user_obs = np.zeros(self.max_observed_users * 6)
             obs_dim_per_user = 6
-        else:
+        elif self.enable_soft_handover:
             user_obs = np.zeros(self.max_observed_users * 5)
             obs_dim_per_user = 5
+        else:
+            user_obs = np.zeros(self.max_observed_users * 4)
+            obs_dim_per_user = 4
 
         for i, (user_idx, sinr_db) in enumerate(local_users):
             if i >= self.max_observed_users:
@@ -3885,12 +2808,11 @@ class UAVForcedRelayEnv(ParallelEnv):
             user_pos = self.user_positions[user_idx]
             relative_pos = (user_pos[:2] - own_position[:2]) / self.area_size
             normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)
-            is_connected_to_self = 1.0 if self.connections[agent_idx, user_idx] else 0.0
-            is_serviced_by_any = 1.0 if self.user_serviced_status[user_idx] else 0.0 # 新增状态
+            is_connected = 1.0 if self.connections[agent_idx, user_idx] else 0.0
             
             start_idx = i * obs_dim_per_user
             
-            base_obs = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected_to_self, is_serviced_by_any]
+            base_obs = [relative_pos[0], relative_pos[1], normalized_sinr, is_connected]
             
             if self.enable_soft_handover:
                 # 添加服务簇大小作为观测维度
@@ -3901,10 +2823,49 @@ class UAVForcedRelayEnv(ParallelEnv):
             user_obs[start_idx : start_idx + len(base_obs)] = base_obs
 
             if self.predictive_handover:
-                # 卡尔曼滤波器已移除，使用零值填充预测状态
-                # 以保持观测空间维度不变
-                normalized_predicted_sinr_self = 0.0
-                normalized_predicted_sinr_neighbor = 0.0
+                # Get predicted position from Kalman filter
+                if self.enable_cluster_kalman_filter and self.user_movement_model == "rpgm":
+                    # Infer user's future position based on cluster's predicted movement
+                    user_cluster_idx = self.user_cluster_assignments[user_idx]
+                    cluster_predicted_state = self.cluster_kalman_filters[user_cluster_idx].x
+                    
+                    # Predict future cluster center position
+                    cluster_future_pos = cluster_predicted_state[:2] + cluster_predicted_state[2:] * self.prediction_horizon * self.time_step
+                    
+                    # Get user's current offset from its cluster center
+                    current_cluster_center = self.cluster_centers_history[user_cluster_idx]
+                    user_offset = self.user_positions[user_idx, :2] - current_cluster_center
+                    
+                    # User's predicted position is the future cluster position + current offset
+                    predicted_pos_2d = cluster_future_pos + user_offset
+                else:
+                    # Use the standard user-level Kalman filter
+                    predicted_state = self.kalman_filters[user_idx].x
+                    predicted_pos_2d = predicted_state[:2]
+                
+                predicted_pos_3d = np.array([predicted_pos_2d[0], predicted_pos_2d[1], 1.5])
+
+                # Calculate predicted SINR from self to user's future position
+                predicted_sinr_self = self._compute_sinr_at_pos(agent_idx, predicted_pos_3d)
+                normalized_predicted_sinr_self = np.clip((predicted_sinr_self + 10) / 50, 0, 1)
+                
+                # Find best neighbor and calculate its predicted SINR
+                best_neighbor_sinr = -np.inf
+                local_uavs = self._get_local_uavs(agent_idx)
+                if local_uavs:
+                    best_neighbor_idx = -1
+                    max_current_sinr_from_neighbor = -np.inf
+                    for uav_idx, _ in local_uavs:
+                        current_sinr_neighbor = self.sinr_matrix[uav_idx, user_idx]
+                        if current_sinr_neighbor > max_current_sinr_from_neighbor:
+                            max_current_sinr_from_neighbor = current_sinr_neighbor
+                            best_neighbor_idx = uav_idx
+                    
+                    if best_neighbor_idx != -1:
+                        best_neighbor_sinr = self._compute_sinr_at_pos(best_neighbor_idx, predicted_pos_3d)
+
+                normalized_predicted_sinr_neighbor = np.clip((best_neighbor_sinr + 10) / 50, 0, 1)
+
                 user_obs[start_idx+4:start_idx+6] = [normalized_predicted_sinr_self, normalized_predicted_sinr_neighbor]
 
         obs_components.append(user_obs)
@@ -3930,75 +2891,29 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         obs_components.append(uav_obs)
         
-        # 4. 分层基站观测 (max_observed_bs * 4维) - 结合局部观测和全局缓存
-        bs_obs = np.zeros(self.max_observed_bs * 4)
-        filled_slots = 0
-        
-        # 4.1 首先填充当前直接观测到的基站
+        # 4. 局部基站观测 (max_observed_bs * 4维)
         local_bs = self._get_local_bs(agent_idx)
-        for bs_idx, dist in local_bs:
-            if filled_slots >= self.max_observed_bs:
+        bs_obs = np.zeros(self.max_observed_bs * 4)
+        
+        for i, (bs_idx, dist) in enumerate(local_bs):
+            if i >= self.max_observed_bs:
                 break
-                
+            
             bs_pos = self.ground_bs_positions[bs_idx]
             # 相对位置 (x, y, z) - 归一化
             relative_pos = bs_pos - own_position
             relative_pos[:2] /= self.area_size
             relative_pos[2] /= self.height_range[1] # 与全局状态归一化保持一致
             
-            # 【语义修复】对于直接观测到的基站，第4维始终为1.0（可见性标志位）
-            # 这确保了与可见性标志位定义的一致性：1.0表示位置信息有效，0.0表示无效填充
-            visibility_flag = 1.0  # 直接观测到的基站始终标记为可见
+            # 连接状态
+            connection_status = 1.0 if self.uav_bs_connections[agent_idx, bs_idx] else 0.0
             
-            start_idx = filled_slots * 4
-            bs_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], relative_pos[2], visibility_flag]
-            filled_slots += 1
-        
-        # 4.2 如果还有剩余观测位，从全局缓存中补充
-        if filled_slots < self.max_observed_bs and len(self.global_bs_cache) > 0:
-            # 获取当前已观测到的基站集合
-            observed_bs_set = {bs_idx for bs_idx, _ in local_bs}
-            
-            # 从全局缓存中添加未直接观测到的基站
-            for bs_idx, (normalized_pos, visibility_flag) in self.global_bs_cache.items():
-                if filled_slots >= self.max_observed_bs:
-                    break
-                if bs_idx in observed_bs_set:
-                    continue  # 跳过已经直接观测到的基站
-                
-                # 从缓存中获取归一化位置（相对于地图中心）
-                # 需要转换为相对于当前UAV的位置
-                map_center_pos = np.array([0.5, 0.5, 0])  # 地图中心的归一化坐标
-                own_normalized_pos = np.array([
-                    own_position[0] / self.area_size,
-                    own_position[1] / self.area_size, 
-                    own_position[2] / self.height_range[1]
-                ])
-                
-                # 计算相对位置：缓存位置 - 当前UAV位置
-                relative_pos_cached = normalized_pos - own_normalized_pos + map_center_pos
-                
-                # 连接状态：从全局缓存获取的基站标记为不可连接（距离太远）
-                connection_status = 0.0
-                
-                # 可见性标志：使用缓存中的可见性标志
-                # 注意：第4维现在存储的是可见性标志而不是连接状态
-                start_idx = filled_slots * 4
-                bs_obs[start_idx:start_idx+4] = [
-                    relative_pos_cached[0], 
-                    relative_pos_cached[1], 
-                    relative_pos_cached[2], 
-                    visibility_flag  # 全局同步的可见性标志
-                ]
-                filled_slots += 1
+            start_idx = i * 4
+            bs_obs[start_idx:start_idx+4] = [relative_pos[0], relative_pos[1], relative_pos[2], connection_status]
         
         obs_components.append(bs_obs)
 
-        # 5. 局部过载无人机观测
-        overloaded_obs = self._get_local_overloaded_uavs(agent_idx)
-        obs_components.append(overloaded_obs)
-
-        # 6. 当前步数 (1维)
+        # 5. 当前步数 (1维)
         step_normalized = np.array([self.current_step / self.max_steps])
         obs_components.append(step_normalized)
         
@@ -4006,8 +2921,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         obs = np.concatenate(obs_components)
         
         # 动作掩码（这里我们不限制动作，所以全为1）
-        action_mask_dim = self.n_discrete_actions if self.action_space_type == 'discrete' else 3
-        action_mask = np.ones(action_mask_dim)
+        action_mask = np.ones(3)
         
         return {"obs": obs, "action_mask": action_mask}
 
@@ -4102,52 +3016,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         # 只返回 (基站索引, 距离)
         return local_bs_within_radius
 
-    def _get_local_overloaded_uavs(self, agent_idx):
-        """
-        获取指定无人机侦测范围内的过载无人机列表。
-        """
-        overloaded_uavs = []
-        own_pos = self.uav_positions[agent_idx]
-        
-        # 定义过载阈值
-        ideal_avg_load = self.n_users / self.n_uavs
-        overload_threshold = ideal_avg_load * 1.5
-
-        for other_idx in range(self.n_uavs):
-            if other_idx == agent_idx:
-                continue
-
-            # 检查是否过载
-            load = np.sum(self.connections[other_idx])
-            if load > overload_threshold:
-                # 检查是否在观测范围内
-                other_pos = self.uav_positions[other_idx]
-                dist = np.linalg.norm(own_pos - other_pos)
-                if dist <= self.observation_radius:
-                    overloaded_uavs.append({
-                        'idx': other_idx,
-                        'pos': other_pos,
-                        'load': load,
-                        'dist': dist
-                    })
-        
-        # 按距离排序
-        overloaded_uavs.sort(key=lambda x: x['dist'])
-
-        # 填充观测向量
-        obs = np.zeros(self.max_observed_overloaded_uavs * 3)
-        for i, uav_info in enumerate(overloaded_uavs):
-            if i >= self.max_observed_overloaded_uavs:
-                break
-            
-            relative_pos = (uav_info['pos'][:2] - own_pos[:2]) / self.area_size
-            normalized_load = uav_info['load'] / self.max_connections
-
-            start_idx = i * 3
-            obs[start_idx : start_idx + 3] = [relative_pos[0], relative_pos[1], normalized_load]
-            
-        return obs
-
     def get_scenario_info(self):
         """
         获取场景特定信息
@@ -4190,89 +3058,6 @@ class UAVForcedRelayEnv(ParallelEnv):
                 min_distance = min(min_distance, distance)
         
         return min_distance if min_distance != float('inf') else 0
-
-    def _simulate_packet_flow(self):
-        """
-        模拟数据包的生成、转发、到达和丢失，用于一个时间步。
-        这个方法负责填充self.metrics字典中的性能指标。
-        """
-        # --- 1. 生成新数据包 ---
-        # 假设每个服务用户且有有效回程路径的UAV在每个时间步生成一个数据包
-        for uav_idx in range(self.n_uavs):
-            # UAV是数据源当且仅当它有路由路径且连接了至少一个用户
-            is_serving_users = np.sum(self.connections[uav_idx]) > 0
-            if uav_idx in self.routing_paths and is_serving_users:
-                path, _ = self.routing_paths[uav_idx]
-                
-                new_packet = {
-                    'id': self.packet_id_counter,
-                    'source_uav': uav_idx,
-                    'path': path,  # 路由在创建时就固定
-                    'path_idx': 0,  # 在路径列表中的当前位置
-                    'creation_time': self.current_step,
-                    'hop_count': 0
-                }
-                
-                self.active_packets.append(new_packet)
-                self.metrics["packets_sent"] += 1
-                self.packet_id_counter += 1
-                
-                # 源UAV发送新数据包的能耗成本
-                self.metrics["total_energy_consumed_mj"] += self.ENERGY_TX_MJ
-
-        # --- 2. 推进、交付或丢弃现有数据包 ---
-        packets_to_remove = []
-        for packet in self.active_packets:
-            current_node_type, current_node_idx = packet['path'][packet['path_idx']]
-            next_path_idx = packet['path_idx'] + 1
-
-            # 防护：如果路径已经到达末尾
-            if next_path_idx >= len(packet['path']):
-                packets_to_remove.append(packet)
-                continue
-            
-            next_hop_type, next_hop_idx = packet['path'][next_path_idx]
-
-            # === 关键检查：路由断开 (修正版：基于动态单向链路容量) ===
-            # 验证数据包在当前时刻，从当前节点到下一跳的链路是否仍然有效
-            # 这应该使用与路由算法相同的标准，即检查单向链路容量
-            link_capacity = self._get_link_capacity(current_node_type, current_node_idx, next_hop_type, next_hop_idx)
-
-            if link_capacity <= 0:
-                # 路径断开！数据包被丢弃
-                self.metrics["route_disconnections"] += 1
-                packets_to_remove.append(packet)
-                continue  # 移动到下一个数据包
-
-            # 如果链路存在，数据包成功转发
-            # 能耗成本：当前节点接收 + 向下一跳发送
-            self.metrics["total_energy_consumed_mj"] += self.ENERGY_RX_MJ + self.ENERGY_TX_MJ
-            
-            # === 检查到达 ===
-            if next_hop_type == 'ground_bs':
-                # 数据包已成功到达目的地！
-                self.metrics["packets_arrived"] += 1
-                
-                # 基于这次成功传输更新指标
-                delay = (self.current_step + 1) - packet['creation_time']
-                self.metrics["total_end_to_end_delay"] += delay
-                self.metrics["total_hop_count"] += packet['hop_count'] + 1  # +1为最后一跳
-                
-                # 标记为从活跃列表中移除
-                packets_to_remove.append(packet)
-                
-                # 最终能耗成本：只在BS接收（无需再发送）
-                self.metrics["total_energy_consumed_mj"] -= self.ENERGY_TX_MJ  # 修正无需再发送的情况
-            else:
-                # === 数据包被中继 ===
-                # 数据包还没到达BS，所以我们只是推进它
-                packet['path_idx'] = next_path_idx
-                packet['hop_count'] += 1
-
-        # --- 3. 清理 ---
-        # 从活跃列表中移除已交付或丢弃的数据包
-        if packets_to_remove:
-            self.active_packets = [p for p in self.active_packets if p not in packets_to_remove]
     
     def _get_link_capacity(self, node1_type, node1_idx, node2_type, node2_idx):
         """
@@ -4287,14 +3072,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         返回:
             capacity: 链路容量 (bps)，如果无法建立连接则返回0
         """
-        cache_key = (node1_type, int(node1_idx), node2_type, int(node2_idx))
-        step_cache = self._current_step_communication_cache()
-        if step_cache is not None and cache_key in step_cache["link_capacity"]:
-            return step_cache["link_capacity"][cache_key]
-        cache = getattr(self, "_routing_link_capacity_cache", None)
-        if cache is not None and cache_key in cache:
-            return cache[cache_key]
-
         # 获取节点位置
         if node1_type == "uav":
             pos1 = self.uav_positions[node1_idx]
@@ -4310,42 +3087,35 @@ class UAVForcedRelayEnv(ParallelEnv):
         else:
             return 0
         
+        # 计算距离
+        distance = self._compute_distance(pos1, pos2)
+        safe_distance = max(distance, 1e-6)
+        
         # 根据链路类型选择正确的路径损耗计算和发射功率
         if node1_type == "uav" and node2_type == "uav":
             # 空对空通信：UAV到UAV - 使用精确的A2A自由空间模型
+            path_loss = self._compute_air_to_air_path_loss(pos1, pos2)
             tx_power = self.tx_power  # 使用UAV发射功率
         elif node1_type == "uav" and node2_type == "ground_bs":
             # 上行链路：UAV到地面基站 - 使用A2G模型
+            path_loss = self._compute_air_to_ground_path_loss(pos1, pos2)
             tx_power = self.tx_power  # 使用UAV发射功率
         elif node1_type == "ground_bs" and node2_type == "uav":
             # 下行链路：地面基站到UAV - 使用G2A模型
+            path_loss = self._compute_ground_to_air_path_loss(pos1, pos2)
             tx_power = self.ground_bs_tx_power  # 使用基站发射功率
         else:
             return 0  # 不支持的连接类型
-        path_loss = self._cached_directional_path_loss(
-            node1_type,
-            node1_idx,
-            node2_type,
-            node2_idx,
-            step_cache=step_cache,
-        )
         
         # 计算接收功率 (dBm)
         rx_power = tx_power - path_loss
         
         # 计算SINR (dB) - 考虑实际干扰情况
-        sinr_db = self._cached_link_sinr(
-            node1_type, node1_idx, node2_type, node2_idx, rx_power
-        )
+        sinr_db = self._compute_link_sinr(node1_type, node1_idx, node2_type, node2_idx, rx_power)
         
         # 检查SINR是否满足最小阈值
         if sinr_db < self.min_sinr:
-            capacity = 0
-            if step_cache is not None:
-                step_cache["link_capacity"][cache_key] = capacity
-            if cache is not None:
-                cache[cache_key] = capacity
-            return capacity
+            return 0
         
         # 确定用于计算容量的带宽
         if self.use_fdma:
@@ -4356,14 +3126,10 @@ class UAVForcedRelayEnv(ParallelEnv):
             # 这里使用全部带宽，干扰影响已经在SINR计算中体现
             link_bandwidth = self.bandwidth
             
-        # 使用AMC模型计算容量
-        spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
-        capacity = link_bandwidth * spectral_efficiency
-
-        if step_cache is not None:
-            step_cache["link_capacity"][cache_key] = capacity
-        if cache is not None:
-            cache[cache_key] = capacity
+        # 转换为线性单位并计算容量
+        sinr_linear = 10 ** (sinr_db / 10)
+        capacity = link_bandwidth * np.log2(1 + sinr_linear)
+        
         return capacity
     
     def _compute_air_to_ground_path_loss(self, uav_pos, ground_pos):
@@ -4509,12 +3275,10 @@ class UAVForcedRelayEnv(ParallelEnv):
             rx_pos = None
         
         if rx_pos is not None:
-            step_cache = self._current_step_communication_cache()
             # 计算来自其他UAV的干扰
             for i in range(self.n_uavs):
-                # 排除发送方和接收方自身
-                if (tx_type == "uav" and i == tx_idx) or \
-                   (rx_type == "uav" and i == rx_idx):
+                # 排除发送方自身
+                if tx_type == "uav" and i == tx_idx:
                     continue
                 
                 interferer_pos = self.uav_positions[i]
@@ -4526,17 +3290,9 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 # 原则3：为干扰链路计算正确的路径损耗
                 if rx_type == "uav":
-                    interferer_path_loss = self._cached_directional_path_loss(
-                        "uav", i, "uav", rx_idx, step_cache=step_cache
-                    )
+                    interferer_path_loss = self._compute_air_to_air_path_loss(interferer_pos, rx_pos)
                 elif rx_type == "ground_bs":
-                    interferer_path_loss = self._cached_directional_path_loss(
-                        "uav",
-                        i,
-                        "ground_bs",
-                        rx_idx,
-                        step_cache=step_cache,
-                    )
+                    interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, rx_pos)
                 else:
                     continue
                 
@@ -4556,7 +3312,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)
-        noise_power_linear = self._noise_power_linear_mw()
+        noise_power_linear = 10 ** (self.noise_power / 10)  # dBm to mW
         interference_plus_noise_linear = noise_power_linear + total_interference_linear
         interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
         
@@ -4566,204 +3322,24 @@ class UAVForcedRelayEnv(ParallelEnv):
     
     def _compute_routing_paths(self):
         """
-        根据指定的路由协议计算路由路径。
-        这是一个调度器方法，会调用具体的路由算法实现。
-        """
-        if self.routing_protocol == 'hggr':
-            self._compute_routing_paths_hggr()
-        elif self.routing_protocol == 'geographic':
-            self._compute_routing_paths_geo()
-        else:  # 默认使用 'widest_path'
-            self._compute_routing_paths_widest()
-
-    def _compute_routing_paths_hggr(self):
-        """
-        【优化版】使用 HGGR 算法计算路由路径，并重建完整路径。
+        修复后的路由路径计算方法 (V2)
+        
+        改进策略：
+        1. 将所有UAV和基站视为一个图中的节点。
+        2. 为每一个UAV，独立地计算其到任何一个地面基站的最宽路径。
+        3. 这样可以自然地形成中继链路，因为一个UAV到基站的路径可能会经过另一个UAV。
         """
         self.routing_paths = {}
+        
+        # 为每一个UAV都尝试寻找一条到基站的最宽路径
         for uav_idx in range(self.n_uavs):
-            # 对于每个无人机，尝试重建其到基站的完整路径
-            path, bottleneck_capacity = self._reconstruct_hggr_path(uav_idx)
-            if path and bottleneck_capacity > 0:
-                self.routing_paths[uav_idx] = (path, bottleneck_capacity)
-
-    def _reconstruct_hggr_path(self, start_uav_idx):
-        """
-        从指定的无人机开始，沿着跳数梯度重建到基站的完整路径。
-        """
-        path = [("uav", start_uav_idx)]
-        bottleneck_capacity = float('inf')
-        
-        current_node_idx = start_uav_idx
-        
-        # 循环构建路径，直到到达基站或无法继续
-        for _ in range(self.max_hops + 1):
-            current_hop = self.hop_map.get(current_node_idx, float('inf'))
-            if current_hop == float('inf'):
-                return None, 0 # 当前节点不可达
-
-            # --- 寻找最优的下一跳 ---
-            best_next_hop_node = None
-            max_link_capacity = 0.0
-
-            # 候选1：其他无人机
-            for neighbor_idx in range(self.n_uavs):
-                if current_node_idx == neighbor_idx:
-                    continue
-                
-                neighbor_hop = self.hop_map.get(neighbor_idx, float('inf'))
-                if neighbor_hop < current_hop:
-                    capacity = self._get_link_capacity("uav", current_node_idx, "uav", neighbor_idx)
-                    if capacity > max_link_capacity:
-                        max_link_capacity = capacity
-                        best_next_hop_node = ("uav", neighbor_idx)
+            # 使用最宽路径算法寻找多跳路径
+            # 这个算法会考虑通过其他UAV进行中继
+            path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
             
-            # 候选2：地面基站 (跳数为0)
-            for bs_idx in range(self.n_ground_bs):
-                if self.uav_bs_connections[current_node_idx, bs_idx]:
-                    if 0 < current_hop:
-                        capacity = self._get_link_capacity("uav", current_node_idx, "ground_bs", bs_idx)
-                        if capacity > max_link_capacity:
-                            max_link_capacity = capacity
-                            best_next_hop_node = ("ground_bs", bs_idx)
-
-            # --- 更新路径和瓶颈 ---
-            if best_next_hop_node:
-                path.append(best_next_hop_node)
-                bottleneck_capacity = min(bottleneck_capacity, max_link_capacity)
-                
-                # 如果下一跳是基站，路径构建完成
-                if best_next_hop_node[0] == "ground_bs":
-                    return path, bottleneck_capacity
-                
-                # 更新当前节点以继续构建路径
-                current_node_idx = best_next_hop_node[1]
-            else:
-                # 找不到下一跳，路径中断
-                return None, 0
-        
-        # 如果超出最大跳数仍未到达基站，则路径无效
-        return None, 0
-
-    def _calculate_hop_map(self):
-        """
-        为 HGGR 协议动态计算跳数地图（全局BFS）。
-        在分层模型中，这个函数相当于高层策略的一部分。
-        """
-        import collections
-        q = collections.deque()
-        hop_map = {i: float('inf') for i in range(self.n_uavs)}
-
-        # 1. 将所有直连到基站的无人机作为第一层（跳数为1）
-        for uav_idx in range(self.n_uavs):
-            for bs_idx in range(self.n_ground_bs):
-                if self.uav_bs_connections[uav_idx, bs_idx]:
-                    if hop_map[uav_idx] == float('inf'):
-                        hop_map[uav_idx] = 1
-                        q.append(uav_idx)
-                    break
-
-        # 2. 从第一层开始，通过BFS计算其他无人机的跳数 (修正版：基于单向链路)
-        while q:
-            current_uav = q.popleft()
-            current_hop = hop_map[current_uav]
-            
-            # 遍历所有无人机，寻找可以通过 current_uav 进行中继的节点
-            for upstream_neighbor_idx in range(self.n_uavs):
-                # 只关心尚未分配跳数的节点
-                if hop_map[upstream_neighbor_idx] == float('inf'):
-                    # 检查是否存在一个有效的单向链路从 "上游" 邻居到当前节点
-                    # 这是数据回程的方向: upstream_neighbor -> current_uav
-                    capacity = self._get_link_capacity("uav", upstream_neighbor_idx, "uav", current_uav)
-                    
-                    if capacity > 0:
-                        # 如果存在有效链路，说明 upstream_neighbor 可以通过 current_uav 中继
-                        # 因此它的跳数是 current_uav 的跳数 + 1
-                        hop_map[upstream_neighbor_idx] = current_hop + 1
-                        q.append(upstream_neighbor_idx)
-        
-        return hop_map
-                
-    def _compute_routing_paths_geo(self):
-        """
-        【优化版】使用简化的地理路由算法计算路由路径，并重建完整路径。
-        无人机总是选择物理距离上最接近任何一个基站的邻居作为下一跳。
-        """
-        self.routing_paths = {}
-
-        # 预先计算所有无人机到最近基站的物理距离
-        uav_dist_to_bs = {i: min(np.linalg.norm(self.uav_positions[i] - bs_pos) for bs_pos in self.ground_bs_positions) for i in range(self.n_uavs)}
-
-        for uav_idx in range(self.n_uavs):
-            path = [("uav", uav_idx)]
-            bottleneck_capacity = float('inf')
-            current_node_idx = uav_idx
-            
-            # 迭代构建路径
-            for _ in range(self.max_hops + 1):
-                own_dist = uav_dist_to_bs.get(current_node_idx, float('inf'))
-                if own_dist == float('inf'): # Should not happen if start is a uav
-                    break
-
-                best_next_hop_node = None
-                max_link_capacity = 0.0
-
-                # 候选1：寻找距离基站更近的无人机邻居
-                for neighbor_idx in range(self.n_uavs):
-                    if current_node_idx == neighbor_idx or not self.uav_connections[current_node_idx, neighbor_idx]:
-                        continue
-                    
-                    neighbor_dist = uav_dist_to_bs.get(neighbor_idx, float('inf'))
-                    if neighbor_dist < own_dist:
-                        capacity = self._get_link_capacity("uav", current_node_idx, "uav", neighbor_idx)
-                        if capacity > max_link_capacity:
-                            max_link_capacity = capacity
-                            best_next_hop_node = ("uav", neighbor_idx)
-
-                # 候选2：检查到基站的直连
-                for bs_idx in range(self.n_ground_bs):
-                    if self.uav_bs_connections[current_node_idx, bs_idx]:
-                        capacity = self._get_link_capacity("uav", current_node_idx, "ground_bs", bs_idx)
-                        if capacity > max_link_capacity:
-                            max_link_capacity = capacity
-                            best_next_hop_node = ("ground_bs", bs_idx)
-
-                # 更新路径
-                if best_next_hop_node:
-                    path.append(best_next_hop_node)
-                    bottleneck_capacity = min(bottleneck_capacity, max_link_capacity)
-                    
-                    if best_next_hop_node[0] == "ground_bs":
-                        # 成功到达基站
-                        self.routing_paths[uav_idx] = (path, bottleneck_capacity)
-                        break
-                    
-                    current_node_idx = best_next_hop_node[1]
-                else:
-                    # 路径中断
-                    break
-            # 如果循环结束仍未设置路径，则说明失败
-
-    def _compute_routing_paths_widest(self):
-        """
-        原始的最宽路径路由算法。
-        为每一个UAV独立计算其到任何一个基站的最宽路径。
-        """
-        self.routing_paths = {}
-        use_cache = not bool(
-            getattr(self, "_disable_routing_link_capacity_cache", False)
-        )
-        if use_cache:
-            self._routing_link_capacity_cache = {}
-        try:
-            for uav_idx in range(self.n_uavs):
-                path, capacity = self._find_widest_path_to_ground_bs(uav_idx)
-                if path and capacity > 0 and len(path) - 1 <= self.max_hops:
-                    self.routing_paths[uav_idx] = (path, capacity)
-        finally:
-            if use_cache:
-                del self._routing_link_capacity_cache
-
+            # 如果找到了有效的路径，并且满足最大跳数限制
+            if path and capacity > 0 and len(path) - 1 <= self.max_hops:
+                self.routing_paths[uav_idx] = (path, capacity)
     def _kmeans_clustering(self, data, n_clusters, max_iters=100, tol=1e-4):
         """
         纯NumPy实现的K-means聚类算法。
@@ -4852,10 +3428,12 @@ class UAVForcedRelayEnv(ParallelEnv):
         1. 无人机位置 (n_uavs * 3)
         2. 用户详细信息 (n_users * 6) - 位置(x,y), 速度(x,y), 连接状态, 最佳SINR
         3. 地面基站位置 (n_ground_bs * 3)
-        4. 当前步数 (1)
+        4. 无人机连接状态 (n_uavs)
+        5. 系统通信质量指标 (4)
+        6. 当前步数 (1)
         
         返回:
-            state: 简化的全局状态向量
+            state: 详细的全局状态向量
         """
         state_components = []
         
@@ -4865,10 +3443,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         normalized_uav_positions[:, 2] = (normalized_uav_positions[:, 2] - self.height_range[0]) / (self.height_range[1] - self.height_range[0])
         state_components.append(normalized_uav_positions.flatten())
         
-        # 1.5. 无人机负载 (归一化)
-        uav_loads = np.sum(self.connections, axis=1) / self.max_connections
-        state_components.append(uav_loads.flatten())
-
         # 2. 用户详细信息 (每个用户6维信息)
         user_info = np.zeros((self.n_users, 6))
         
@@ -4914,7 +3488,30 @@ class UAVForcedRelayEnv(ParallelEnv):
         normalized_bs_positions[:, 2] /= self.height_range[1]
         state_components.append(normalized_bs_positions.flatten())
         
-        # 4. 当前步数 (归一化)
+        # 4. 无人机连接状态 (0或1)
+        uav_connected = np.zeros(self.n_uavs)
+        if hasattr(self, 'routing_paths'):
+            for i in range(self.n_uavs):
+                if i in self.routing_paths and self.routing_paths[i][0]:
+                    uav_connected[i] = 1.0
+        state_components.append(uav_connected)
+        
+        # 5. 系统通信质量指标 (4维)
+        comm_quality = np.zeros(4)
+        if hasattr(self, 'reward_info') and self.reward_info:
+            # 5.1 整体覆盖率 (已在reward_info中计算)
+            comm_quality[0] = self.reward_info.get('coverage_ratio', 0)
+            # 5.2 连接质量 (有回程路径的UAV比例)
+            comm_quality[1] = self.reward_info.get('connected_uavs', 0) / self.n_uavs if self.n_uavs > 0 else 0
+            # 5.3 平均跳数 (归一化)
+            avg_hops = self.reward_info.get('avg_hops', 0)
+            comm_quality[2] = np.clip(avg_hops / self.max_hops, 0, 1)
+            # 5.4 系统吞吐量 (归一化, 假设最大1Gbps)
+            throughput_mbps = self.reward_info.get('system_throughput_mbps', 0)
+            comm_quality[3] = np.clip(throughput_mbps / 1000, 0, 1)
+        state_components.append(comm_quality)
+        
+        # 6. 当前步数 (归一化)
         step_normalized = np.array([self.current_step / self.max_steps])
         state_components.append(step_normalized)
         
@@ -5076,7 +3673,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 使用我们自定义的精确SINR计算，而不是依赖父类的sinr_matrix
         user_capacities = []
-        user_spectral_efficiencies = []
         
         for user_idx in connected_users:
             # 计算UAV到用户的精确SINR
@@ -5094,15 +3690,13 @@ class UAVForcedRelayEnv(ParallelEnv):
             
             # 检查SINR是否满足最小阈值
             if sinr_db >= self.min_sinr:
-                # 使用AMC模型计算单用户容量
-                spectral_efficiency = self._get_spectral_efficiency_from_sinr(sinr_db)
-                user_capacity = self.bandwidth * spectral_efficiency
+                # 转换为线性单位并计算单用户容量
+                sinr_linear = 10 ** (sinr_db / 10)
+                user_capacity = self.bandwidth * np.log2(1 + sinr_linear)
                 user_capacities.append(user_capacity)
-                user_spectral_efficiencies.append(spectral_efficiency)
             else:
                 # SINR不满足阈值，该用户无法获得服务
                 user_capacities.append(0)
-                user_spectral_efficiencies.append(0)
         
         # 在FDMA模式下，每个用户分配独立的频率资源
         if self.use_fdma:
@@ -5116,11 +3710,16 @@ class UAVForcedRelayEnv(ParallelEnv):
                 
                 # 重新计算基于分配带宽的容量
                 adjusted_capacities = []
-                for i, _user_idx in enumerate(connected_users):
+                for i, user_idx in enumerate(connected_users):
                     if user_capacities[i] > 0:
-                        adjusted_capacity = (
-                            bandwidth_per_user * user_spectral_efficiencies[i]
-                        )
+                        # 使用分配的带宽重新计算容量
+                        uav_pos = self.uav_positions[uav_idx]
+                        user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
+                        path_loss = self._compute_air_to_ground_path_loss(uav_pos, user_pos_3d)
+                        rx_power = self.tx_power - path_loss
+                        sinr_db = self._compute_uav_to_user_sinr(uav_idx, user_idx, rx_power)
+                        sinr_linear = 10 ** (sinr_db / 10)
+                        adjusted_capacity = bandwidth_per_user * np.log2(1 + sinr_linear)
                         adjusted_capacities.append(adjusted_capacity)
                     else:
                         adjusted_capacities.append(0)
@@ -5143,9 +3742,7 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         return frontend_capacity
     
-    def _compute_uav_to_user_sinr(
-        self, uav_idx, user_idx, rx_power, step_cache=_STEP_CACHE_UNSET
-    ):
+    def _compute_uav_to_user_sinr(self, uav_idx, user_idx, rx_power):
         """
         计算UAV到用户通信的精确SINR，使用确定性的干扰模型（移除随机性，增强干扰）
         
@@ -5171,8 +3768,6 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         interference_powers_linear = []
         user_pos_3d = self.user_positions[user_idx]  # 用户位置已经是三维的
-        if step_cache is _STEP_CACHE_UNSET:
-            step_cache = self._current_step_communication_cache()
         
         # 计算来自其他UAV的干扰
         for i in range(self.n_uavs):
@@ -5185,9 +3780,7 @@ class UAVForcedRelayEnv(ParallelEnv):
                     continue  # 干扰源太远，忽略
                 
                 # 原则3：使用精确的A2G路径损耗模型计算干扰
-                interferer_path_loss = self._cached_user_path_loss(
-                    i, user_idx, step_cache=step_cache
-                )
+                interferer_path_loss = self._compute_air_to_ground_path_loss(interferer_pos, user_pos_3d)
                 interferer_rx_power_dbm = self.tx_power - interferer_path_loss
                 interferer_rx_power_linear = 10**(interferer_rx_power_dbm / 10)
                 
@@ -5203,214 +3796,10 @@ class UAVForcedRelayEnv(ParallelEnv):
         
         # 计算总干扰加噪声功率
         total_interference_linear = np.sum(interference_powers_linear)
-        noise_power_linear = self._noise_power_linear_mw()
+        noise_power_linear = 10 ** (self.noise_power / 10)  # dBm to mW
         interference_plus_noise_linear = noise_power_linear + total_interference_linear
         interference_plus_noise_dbm = 10 * np.log10(interference_plus_noise_linear)
         
         sinr_db = rx_power - interference_plus_noise_dbm
         
         return sinr_db
-
-    def _identify_critical_relay_nodes(self):
-        """
-        阶段一：识别潜在的关键中继节点
-        
-        通过在"干净"环境下（忽略用户）计算无人机间的连接质量，
-        识别出那些在网络拓扑中处于关键"桥梁"位置的无人机。
-        
-        返回:
-            critical_relay_nodes: 关键中继节点的集合
-        """
-        critical_relay_nodes = set()
-        
-        # 临时保存当前的连接状态
-        temp_connections = self.connections.copy()
-        
-        # 创建一个"干净"的环境：暂时清空用户连接，只考虑UAV间连接
-        self.connections.fill(False)
-        
-        # 计算所有UAV之间的潜在连接质量
-        uav_link_qualities = {}
-        for i in range(self.n_uavs):
-            for j in range(i + 1, self.n_uavs):
-                # 计算UAV间的链路容量
-                capacity_ij = self._get_link_capacity("uav", i, "uav", j)
-                capacity_ji = self._get_link_capacity("uav", j, "uav", i)
-                
-                # 双向链路的容量取较小值
-                bidirectional_capacity = min(capacity_ij, capacity_ji)
-                
-                if bidirectional_capacity > 0:
-                    uav_link_qualities[(i, j)] = bidirectional_capacity
-        
-        # 计算每个UAV到地面基站的直连质量
-        uav_bs_qualities = {}
-        for i in range(self.n_uavs):
-            max_bs_capacity = 0
-            for bs_idx in range(self.n_ground_bs):
-                # 计算UAV到基站的链路容量
-                capacity_to_bs = self._get_link_capacity("uav", i, "ground_bs", bs_idx)
-                capacity_from_bs = self._get_link_capacity("ground_bs", bs_idx, "uav", i)
-                
-                # 双向链路的容量取较小值
-                bidirectional_capacity = min(capacity_to_bs, capacity_from_bs)
-                max_bs_capacity = max(max_bs_capacity, bidirectional_capacity)
-            
-            uav_bs_qualities[i] = max_bs_capacity
-        
-        # 使用简化的中心性分析识别关键节点
-        # 计算每个UAV的"桥梁重要性"
-        for uav_idx in range(self.n_uavs):
-            importance_score = 0
-            
-            # 1. 连接度重要性：连接到多少其他UAV
-            connected_uavs = 0
-            for i, j in uav_link_qualities.keys():
-                if i == uav_idx or j == uav_idx:
-                    connected_uavs += 1
-            
-            # 2. 位置重要性：是否处于网络的"中间"位置
-            # 通过计算到其他所有UAV的平均距离来衡量
-            total_distance = 0
-            for other_idx in range(self.n_uavs):
-                if other_idx != uav_idx:
-                    dist = self._compute_distance(
-                        self.uav_positions[uav_idx], 
-                        self.uav_positions[other_idx]
-                    )
-                    total_distance += dist
-            
-            avg_distance = total_distance / (self.n_uavs - 1) if self.n_uavs > 1 else 0
-            
-            # 3. 基站连接质量：到基站的直连能力
-            bs_connection_quality = uav_bs_qualities.get(uav_idx, 0)
-            
-            # 综合评分：连接度高、位置居中、但基站连接不是最强的UAV
-            # 更可能是好的中继节点
-            if connected_uavs > 0:
-                # 归一化各项指标
-                normalized_connectivity = connected_uavs / self.n_uavs
-                normalized_centrality = 1.0 / (1.0 + avg_distance / self.area_size)  # 距离越小，中心性越高
-                
-                # 基站连接质量归一化（这里我们希望中继节点的基站连接不要太强）
-                max_bs_quality = max(uav_bs_qualities.values()) if uav_bs_qualities.values() else 1
-                normalized_bs_quality = bs_connection_quality / max_bs_quality if max_bs_quality > 0 else 0
-                
-                # 综合评分：连接度和中心性高，但基站连接适中的节点
-                importance_score = (
-                    0.4 * normalized_connectivity +
-                    0.4 * normalized_centrality +
-                    0.2 * (1.0 - normalized_bs_quality)  # 基站连接不要太强
-                )
-                
-                # 如果重要性评分超过阈值，标记为关键中继节点
-                if importance_score > 0.5:  # 可调整的阈值
-                    critical_relay_nodes.add(uav_idx)
-        
-        # 恢复原始的连接状态
-        self.connections = temp_connections
-        
-        return critical_relay_nodes
-
-    def _select_uav_with_relay_protection(self, user_idx, candidates, critical_relay_nodes):
-        """
-        阶段二：带保护机制的无人机选择
-        
-        为指定用户从候选无人机中选择最佳的服务无人机，
-        同时保护关键中继节点不被轻易占用。
-        
-        参数:
-            user_idx: 用户索引
-            candidates: 候选无人机列表 [(uav_idx, sinr), ...] (已按SINR降序排序)
-            critical_relay_nodes: 关键中继节点集合
-            
-        返回:
-            selected_uav: 选中的无人机索引，如果没有合适的则返回None
-        """
-        if not candidates:
-            return None
-        
-        # 保护阈值：关键中继节点需要比非关键节点强多少dB才会被选中
-        protection_threshold_db = 10.0  # 可调整的保护阈值
-        
-        # 首先尝试从非关键节点中选择
-        non_critical_candidates = [
-            (uav_idx, sinr) for uav_idx, sinr in candidates 
-            if uav_idx not in critical_relay_nodes
-        ]
-        
-        if non_critical_candidates:
-            # 如果有非关键节点可用，直接选择信号最好的
-            return non_critical_candidates[0][0]
-        
-        # 如果只有关键节点可用，应用保护机制
-        critical_candidates = [
-            (uav_idx, sinr) for uav_idx, sinr in candidates 
-            if uav_idx in critical_relay_nodes
-        ]
-        
-        if not critical_candidates:
-            return None
-        
-        # 选择信号最强的关键节点，但需要满足保护条件
-        best_critical_uav, best_critical_sinr = critical_candidates[0]
-        
-        # 检查是否有其他用户已经"预订"了更好的非关键节点
-        # 这里简化处理：如果关键节点的信号足够强（超过最小阈值+保护阈值），
-        # 则允许使用
-        if best_critical_sinr >= self.min_sinr + protection_threshold_db:
-            return best_critical_uav
-        
-        # 否则，不分配任何无人机给这个用户（保护中继节点）
-        return None
-
-    def _update_global_bs_cache(self):
-        """
-        在K step同步时更新全局基站信息缓存
-        
-        此方法在每K个时间步执行一次，收集所有UAV观测到的基站信息，
-        并更新全局缓存，供那些没有直接观测到基站的UAV使用。
-        """
-        # 记录本次同步的步数
-        self.last_global_sync_step = self.current_step
-        
-        # 临时存储本次同步收集到的基站信息
-        sync_bs_info = {}
-        
-        # 遍历所有UAV，收集它们观测到的基站信息
-        for uav_idx in range(self.n_uavs):
-            local_bs = self._get_local_bs(uav_idx)  # 获取该UAV观测到的基站列表
-            own_position = self.uav_positions[uav_idx]
-            
-            for bs_idx, dist in local_bs:
-                if bs_idx not in sync_bs_info:
-                    # 首次发现这个基站，记录其归一化位置信息
-                    bs_pos = self.ground_bs_positions[bs_idx]
-                    # 计算归一化的相对位置（相对于某个参考点，这里使用地图中心）
-                    map_center = np.array([self.area_size / 2, self.area_size / 2, 0])
-                    relative_pos = bs_pos - map_center
-                    
-                    # 归一化位置信息
-                    normalized_pos = np.array([
-                        relative_pos[0] / self.area_size,  # x
-                        relative_pos[1] / self.area_size,  # y  
-                        relative_pos[2] / self.height_range[1]  # z
-                    ])
-                    
-                    sync_bs_info[bs_idx] = {
-                        'normalized_pos': normalized_pos,
-                        'visibility_flag': 1.0,  # 在全局同步中发现的基站标记为可见
-                        'observers': [uav_idx]  # 记录观测到该基站的UAV
-                    }
-                else:
-                    # 已有其他UAV观测到此基站，添加到观测者列表
-                    sync_bs_info[bs_idx]['observers'].append(uav_idx)
-        
-        # 更新全局缓存
-        self.global_bs_cache = {}
-        for bs_idx, info in sync_bs_info.items():
-            self.global_bs_cache[bs_idx] = (info['normalized_pos'], info['visibility_flag'])
-        
-        # 可选：打印调试信息
-        #if len(self.global_bs_cache) > 0:
-        #    print(f"[Step {self.current_step}] 全局基站缓存更新: 发现 {len(self.global_bs_cache)} 个基站")

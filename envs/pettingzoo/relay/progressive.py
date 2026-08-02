@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 
-from envs.pettingzoo.scenario_base import UAVForcedRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv
 
 
 class _ProgressiveConfigProxy:

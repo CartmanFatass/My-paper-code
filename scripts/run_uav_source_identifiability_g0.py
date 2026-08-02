@@ -139,7 +139,7 @@ FIRST_MATCH_EVALUATION_RULE = (
     "strict_lazy_stop_at_first_match_lower_priority_statuses_null"
 )
 ENVIRONMENT_BACKEND = (
-    "envs.pettingzoo.scenario7_energy_aware.UAVEnergyAwareRelayEnv|S7-S1"
+    "envs.pettingzoo.relay.energy_aware.UAVEnergyAwareRelayEnv|S7-S1"
 )
 
 SOURCE_MANIFEST = "source_manifest.json"

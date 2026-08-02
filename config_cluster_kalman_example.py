@@ -85,7 +85,7 @@ random_walk_config = {
 
 def demo_cluster_kalman_filter():
     """演示簇级别卡尔曼滤波器的使用"""
-    from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+    from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
     
     print("=" * 60)
     print("簇级别卡尔曼滤波器使用演示")

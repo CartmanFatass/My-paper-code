@@ -1431,10 +1431,10 @@ from hmasd.sb3_integration import (
     HMASDVecEnvWrapper
 )
 from hmasd.sharded_vec_env import ShardedSubprocVecEnv
-from envs.pettingzoo.scenario_base import UAVForcedRelayEnv
-from envs.pettingzoo.scenario5 import UAVBeliefMapEnv
-from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
-from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv
+from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
+from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from envs.pettingzoo.two_timescale_role_free_actions import (
     TwoTimescaleRoleFreeActionsEnv,
 )
@@ -4165,7 +4165,7 @@ def parse_args():
     # 运行模式和环境参数
     parser.add_argument('--mode', type=str, default='train', help='运行模式: train或eval')
     parser.add_argument('--scenario', type=str, default='base',
-                        help='场景: base=基础强制中继(scenario_base), progress=递进强制中继, belief_map=信念地图, energy=能量感知强制中继；兼容旧值4/6/5/7')
+                        help='场景: base=基础强制中继(relay.routed_core), progress=递进强制中继, belief_map=信念地图, energy=能量感知强制中继；兼容旧值4/6/5/7')
     parser.add_argument('--n_agents', type=int, default=0,
                         help='覆盖环境无人机/智能体数量；0=使用preset默认值')
     parser.add_argument('--model_path', type=str, default='models/hmasd_multiproc_paper_config.pt', help='模型保存/加载路径')

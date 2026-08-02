@@ -2,7 +2,7 @@
 """
 预测性切换功能使用示例
 
-展示如何正确配置和使用scenario4.py中的预测性切换功能
+展示如何正确配置和使用relay.forced_relay中的预测性切换功能
 """
 
 import numpy as np
@@ -10,7 +10,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 
 def basic_usage_example():
     """基本使用示例"""
@@ -244,7 +244,7 @@ def main():
         print("总结")
         print("=" * 80)
         print("预测性切换功能已成功实现并通过全面测试。")
-        print("scenario4.py环境现在完全支持预测性切换算法研究。")
+        print("relay.forced_relay环境现在完全支持预测性切换算法研究。")
         print()
         print("主要功能:")
         print("• 卡尔曼滤波器用户位置预测")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-调试scenario4.py中的SINR计算
+调试relay.forced_relay中的SINR计算
 验证覆盖率为0的问题是否由SINR计算错误引起
 """
 
@@ -9,12 +9,12 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 
 def debug_sinr_calculation():
     """调试SINR计算的各个环节"""
     print("=" * 60)
-    print("调试scenario4.py中的SINR计算")
+    print("调试relay.forced_relay中的SINR计算")
     print("=" * 60)
     
     # 创建环境实例

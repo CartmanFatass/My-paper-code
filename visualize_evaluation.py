@@ -15,8 +15,8 @@ from hmasd.agent import HMASDAgent
 from envs.pettingzoo.scenario1 import UAVBaseStationEnv
 from envs.pettingzoo.scenario2 import UAVCooperativeNetworkEnv
 from envs.pettingzoo.scenario3 import UAVMultiHopEnv
-from envs.pettingzoo.scenario4 import UAVForcedRelayEnv
-from envs.pettingzoo.scenario6_progressive import UAVProgressiveRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
+from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 
 class RandomAgent:

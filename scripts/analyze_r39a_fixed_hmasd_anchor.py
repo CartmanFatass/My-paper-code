@@ -21,7 +21,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from config_1 import Config
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
-from envs.pettingzoo.scenario7_energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from hmasd.baselines import apply_algorithm_config, create_agent
 
 
