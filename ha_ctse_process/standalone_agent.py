@@ -1745,6 +1745,150 @@ class SegmentManager:
 
 
 @dataclass
+class Vk0bExposureAccumulator:
+    """V-K0B rerun training-side exposure counters (W6-D1, A-W6-2, A-W6-3).
+
+    Counters only. Nothing in this dataclass or in the methods that mutate it
+    consumes RNG or alters any control-flow decision made by the trainer; a
+    skipped or aborted update is recorded exactly as it happened, never
+    repaired or retried. See
+    docs/research/designs/VK0B_RERUN_EXPOSURE_DECISION_LEDGER.md (W6-D1) and
+    the frozen amendments A-W6-2/A-W6-3 for the exact semantics each field
+    must carry.
+    """
+
+    high_check_sequences_completed: int = 0
+    high_check_sequences_failed_or_skipped: int = 0
+    agent_tokens_keep: int = 0
+    agent_tokens_set: int = 0
+    high_epoch_passes_attempted: int = 0
+    high_epoch_passes_stepped: int = 0
+    high_epoch_passes_skipped: int = 0
+    high_epoch_passes_aborted: int = 0
+    high_epoch_pass_skip_reasons: list[str] = field(default_factory=list)
+    high_epoch_pass_abort_reasons: list[str] = field(default_factory=list)
+
+    def record_sequence_completed(self, token_kind) -> None:
+        """A-W6-3: act_sequence completed, full token vector produced, the
+        decision row was committed to the high buffer. Call only after that
+        commit has actually happened."""
+        self.high_check_sequences_completed += 1
+        kinds = np.asarray(token_kind).reshape(-1)
+        self.agent_tokens_keep += int(np.count_nonzero(kinds == KEEP_TOKEN))
+        self.agent_tokens_set += int(np.count_nonzero(kinds == SET_TOKEN))
+
+    def record_sequence_failed_or_skipped(self) -> None:
+        self.high_check_sequences_failed_or_skipped += 1
+
+    def record_high_epoch_pass_stepped(self) -> None:
+        self.high_epoch_passes_stepped += 1
+
+    def record_high_epoch_pass_skipped(self, count: int, reason: str) -> None:
+        count = int(count)
+        self.high_epoch_passes_skipped += count
+        self.high_epoch_pass_skip_reasons.extend([str(reason)] * count)
+
+    def record_high_epoch_pass_aborted(self, count: int, reason: str) -> None:
+        count = int(count)
+        self.high_epoch_passes_aborted += count
+        self.high_epoch_pass_abort_reasons.extend([str(reason)] * count)
+
+    def token_identity_ok(self) -> bool:
+        """A-W6-3 structural identity: N_KEEP + N_SET == 2 * N_completed for
+        this fixed two-agent config. Exposed as a helper so a test can plant
+        a tampered counter and confirm this is what catches it; never
+        asserted at runtime by the trainer itself."""
+        return (
+            self.agent_tokens_keep + self.agent_tokens_set
+            == 2 * self.high_check_sequences_completed
+        )
+
+    def epoch_pass_partition_ok(self) -> bool:
+        """A-W6-2 exhaustive partition: N_attempted == N_stepped + N_skipped
+        + N_aborted. True by construction of the recording call sites; kept
+        as a helper for tests, not asserted at runtime."""
+        return self.high_epoch_passes_attempted == (
+            self.high_epoch_passes_stepped
+            + self.high_epoch_passes_skipped
+            + self.high_epoch_passes_aborted
+        )
+
+
+def vk0b_high_optimizer_parameter_coverage(
+    actor_parameters,
+    value_parameters,
+    optimizer: "torch.optim.Optimizer",
+) -> dict[str, Any]:
+    """A-W6-1 shared-optimizer parameter-coverage certificate.
+
+    Takes explicit parameter iterables and an optimizer rather than an
+    ``agent`` so the negative witnesses (a missing parameter, a missing
+    optimizer-state step entry) can be exercised against a test double
+    without touching live training state. Membership is checked by object
+    identity against the exact ``torch.nn.Parameter`` objects registered in
+    ``optimizer.param_groups`` — uniformity over whatever state entries
+    happen to exist is explicitly NOT what this computes; a parameter that
+    never received a gradient and therefore never acquired optimizer state
+    is a coverage failure, not a silent skip.
+    """
+
+    actor_params = list(actor_parameters)
+    value_params = list(value_parameters)
+    opt_param_ids: set[int] = set()
+    for group in optimizer.param_groups:
+        for param in group["params"]:
+            opt_param_ids.add(id(param))
+
+    def _step_of(param) -> int | None:
+        state = optimizer.state.get(param)
+        if not state or "step" not in state:
+            return None
+        step_val = state["step"]
+        return int(step_val.item()) if torch.is_tensor(step_val) else int(step_val)
+
+    def _coverage(params: list) -> tuple[int, int, bool, list[int]]:
+        expected = len(params)
+        with_step = 0
+        steps: list[int] = []
+        all_in_opt = True
+        for param in params:
+            if id(param) not in opt_param_ids:
+                all_in_opt = False
+                continue
+            step = _step_of(param)
+            if step is not None:
+                with_step += 1
+                steps.append(step)
+        return expected, with_step, all_in_opt, steps
+
+    actor_expected, actor_with_step, actor_all_in_opt, actor_steps = _coverage(actor_params)
+    value_expected, value_with_step, value_all_in_opt, value_steps = _coverage(value_params)
+    all_steps = actor_steps + value_steps
+    step_min = min(all_steps) if all_steps else 0
+    step_max = max(all_steps) if all_steps else 0
+    coverage_ok = bool(
+        actor_expected > 0
+        and value_expected > 0
+        and actor_all_in_opt
+        and value_all_in_opt
+        and actor_with_step == actor_expected
+        and value_with_step == value_expected
+        and bool(all_steps)
+        and step_min == step_max
+    )
+    return {
+        "high_optimizer_steps_shared": int(step_max),
+        "high_actor_parameter_count_expected": int(actor_expected),
+        "high_actor_parameter_count_with_step_state": int(actor_with_step),
+        "high_value_parameter_count_expected": int(value_expected),
+        "high_value_parameter_count_with_step_state": int(value_with_step),
+        "high_optimizer_step_min": int(step_min),
+        "high_optimizer_step_max": int(step_max),
+        "high_optimizer_parameter_coverage_ok": coverage_ok,
+    }
+
+
+@dataclass
 class Rollout:
     env_ids: list[int] = field(default_factory=list)
     obs: list[np.ndarray] = field(default_factory=list)
@@ -2805,6 +2949,14 @@ class StandaloneProcessAgent:
             if self.r30_enabled
             else None
         )
+        # V-K0B rerun exposure instrumentation (W6-D1). Default enabled; the
+        # switch exists solely for the A-W6-6 noninterference witness, which
+        # runs the same tiny training twice and compares trajectories with
+        # instrumentation on vs. off.
+        self.exposure_instrumentation_enabled = True
+        self.exposure = Vk0bExposureAccumulator()
+        self._exposure_call_baseline = 0
+        self._exposure_call_expected = 0
         self.r31_effect_windows = (
             EffectWindowBuffer(
                 self.num_envs,
@@ -3313,6 +3465,102 @@ class StandaloneProcessAgent:
             )
         )
         return counts
+
+    def high_optimizer_coverage_certificate(self) -> dict[str, Any]:
+        """A-W6-1: coverage certificate for the shared high actor/value
+        optimizer, computed from the live modules and optimizer. For
+        config_d7_2b_toy_learned_keep (``r39_toy_direct_state_context=True``,
+        ``use_compact_return_head=False``) ``high_opt`` is built from exactly
+        ``self.high.parameters()`` (the R30 high actor) plus
+        ``self.high_value.parameters()`` (the high value module); compact,
+        bridge and the return head are excluded by that same construction
+        (see ``high_opt`` assembly in ``__init__``), so those two modules are
+        the complete actor/value trainable sets this certificate must cover.
+        """
+
+        actor_parameters = list(self.high.parameters())
+        value_parameters = (
+            list(self.high_value.parameters()) if self.high_value is not None else []
+        )
+        return vk0b_high_optimizer_parameter_coverage(
+            actor_parameters, value_parameters, self.high_opt
+        )
+
+    def low_level_optimizer_exposure(self) -> tuple[int, str]:
+        """Actual low-level optimizer exposure and its admissible source
+        label. config_d7_2b_toy_learned_keep sets
+        ``r39_toy_fixed_skill_primitives=True``, under which ``__init__``
+        leaves ``low_opt``/``low_actor_opt``/``low_critic_opt`` all ``None``
+        — there is no low optimizer to step, so the zero is read off that
+        checkpoint-time absence rather than assumed from configuration. If a
+        low optimizer is present (a different config path), its real
+        optimizer-state step count is returned instead, sourced from that
+        optimizer's own state.
+        """
+
+        low_optimizers = [
+            opt
+            for opt in (self.low_opt, self.low_actor_opt, self.low_critic_opt)
+            if opt is not None
+        ]
+        if not low_optimizers:
+            return 0, "checkpoint_optimizer_absence"
+        steps: list[int] = []
+        for opt in low_optimizers:
+            for group in opt.param_groups:
+                for param in group["params"]:
+                    state = opt.state.get(param)
+                    if state and "step" in state:
+                        step_val = state["step"]
+                        steps.append(
+                            int(step_val.item()) if torch.is_tensor(step_val) else int(step_val)
+                        )
+        return (max(steps) if steps else 0), "optimizer_state"
+
+    def begin_high_epoch_pass_accounting(self) -> int:
+        """A-W6-2: record the expected high-pass optimizer opportunities for
+        one outer update, counted here at the call site — before
+        ``update_high_from_checks`` runs any of its own guards — so the
+        exhaustive partition survives even a guard the callee's author did
+        not anticipate. Returns the expected count for the caller's own
+        bookkeeping if needed."""
+
+        expected = int(self.high_ppo_epochs)
+        self._exposure_call_expected = expected
+        if self.exposure_instrumentation_enabled:
+            self._exposure_call_baseline = (
+                self.exposure.high_epoch_passes_stepped
+                + self.exposure.high_epoch_passes_skipped
+                + self.exposure.high_epoch_passes_aborted
+            )
+            self.exposure.high_epoch_passes_attempted += expected
+        return expected
+
+    def finalize_high_epoch_pass_accounting(self, exc: BaseException | None) -> None:
+        """Close out the accounting opened by begin_high_epoch_pass_accounting
+        for the call that just returned (exc=None) or raised (exc=the
+        exception). Any expected opportunity that update_high_from_checks did
+        not itself resolve to STEPPED or SKIPPED_NORMAL is recorded ABORTED
+        here so N_attempted == N_stepped + N_skipped + N_aborted holds even
+        across an exception this instrumentation did not anticipate. Never
+        suppresses or alters the exception — the caller re-raises."""
+
+        if not self.exposure_instrumentation_enabled:
+            return
+        resolved_now = (
+            self.exposure.high_epoch_passes_stepped
+            + self.exposure.high_epoch_passes_skipped
+            + self.exposure.high_epoch_passes_aborted
+            - self._exposure_call_baseline
+        )
+        remaining = self._exposure_call_expected - resolved_now
+        if remaining > 0:
+            reason = (
+                f"exception:{type(exc).__name__}"
+                if exc is not None
+                else "unaccounted_high_epoch_pass"
+            )
+            self.exposure.record_high_epoch_pass_aborted(remaining, reason=reason)
 
     def low_bootstrap_values(self, observations, states) -> dict[int, np.ndarray]:
         if len(observations) != self.num_envs or len(states) != self.num_envs:
@@ -4082,58 +4330,80 @@ class StandaloneProcessAgent:
             prev_skills = self.active_skills[env_id].copy()
             prev_active = self.has_active_skill[env_id].copy()
             prev_ages = self.skill_age[env_id].copy()
-            if agent_order is None:
-                order = torch.arange(
-                    self.n_agents, dtype=torch.long, device=self.device
-                )
-            else:
-                order_list = [int(a) for a in agent_order]
-                if sorted(order_list) != list(range(self.n_agents)):
-                    raise ValueError(
-                        "agent_order must be a permutation of "
-                        f"range({self.n_agents}) with no duplicates; got {order_list}"
+            # A-W6-3: a high-check sequence counts as completed only once
+            # act_sequence has produced the full token vector AND the
+            # decision row has been committed to the high buffer via
+            # start_decision below. try/finally records which of the two
+            # outcomes happened without altering whether an exception (if
+            # any) propagates — the counters observe, they never gate.
+            sequence_committed = False
+            committed_token_kind = None
+            try:
+                if agent_order is None:
+                    order = torch.arange(
+                        self.n_agents, dtype=torch.long, device=self.device
                     )
-                order = torch.as_tensor(
-                    order_list, dtype=torch.long, device=self.device
+                else:
+                    order_list = [int(a) for a in agent_order]
+                    if sorted(order_list) != list(range(self.n_agents)):
+                        raise ValueError(
+                            "agent_order must be a permutation of "
+                            f"range({self.n_agents}) with no duplicates; got {order_list}"
+                        )
+                    order = torch.as_tensor(
+                        order_list, dtype=torch.long, device=self.device
+                    )
+                omega = weights if self.high_condition_on_omega else None
+                relevance = agent_relevance if self.use_agent_prototype_relevance else None
+                sample = self.high.act_sequence(
+                    joint_obs=joint_t.squeeze(0),
+                    compact=compact,
+                    team_vector=team_vector,
+                    prev_skills=torch.as_tensor(
+                        prev_skills, dtype=torch.long, device=self.device
+                    ),
+                    prev_ages=torch.as_tensor(
+                        prev_ages, dtype=torch.long, device=self.device
+                    ),
+                    prev_active=torch.as_tensor(
+                        prev_active, dtype=torch.bool, device=self.device
+                    ),
+                    agent_order=order,
+                    omega=omega,
+                    agent_relevance=relevance,
+                    deterministic=deterministic,
+                    forced_tokens=forced_tokens,
                 )
-            omega = weights if self.high_condition_on_omega else None
-            relevance = agent_relevance if self.use_agent_prototype_relevance else None
-            sample = self.high.act_sequence(
-                joint_obs=joint_t.squeeze(0),
-                compact=compact,
-                team_vector=team_vector,
-                prev_skills=torch.as_tensor(
-                    prev_skills, dtype=torch.long, device=self.device
-                ),
-                prev_ages=torch.as_tensor(
-                    prev_ages, dtype=torch.long, device=self.device
-                ),
-                prev_active=torch.as_tensor(
-                    prev_active, dtype=torch.bool, device=self.device
-                ),
-                agent_order=order,
-                omega=omega,
-                agent_relevance=relevance,
-                deterministic=deterministic,
-                forced_tokens=forced_tokens,
-            )
-            self.high_check_buffer.start_decision(
-                env_id=env_id,
-                episode_id=int(self.episode_ids[env_id]),
-                state=state_arr,
-                joint_obs=joint_obs,
-                prev_skills=np.where(prev_active, prev_skills, INVALID_SKILL),
-                prev_active=prev_active,
-                prev_ages=prev_ages,
-                steps_to_check=0,
-                old_value=float(old_value.item()),
-                agent_order=order.detach().cpu().numpy(),
-                token_kind=sample.token_kind.detach().cpu().numpy(),
-                set_skill=sample.set_skill.detach().cpu().numpy(),
-                token_valid=sample.token_valid.detach().cpu().numpy(),
-                old_token_logp=sample.token_logp.detach().cpu().numpy(),
-                keep_prob=sample.keep_prob.detach().cpu().numpy(),
-            )
+                # Materialize token_kind once: the buffer copies it internally
+                # (HighCheckBuffer._new_row), and the exposure accumulator
+                # only reads it, so one CPU transfer serves both consumers
+                # instead of transferring the same tensor twice per sequence.
+                token_kind_np = sample.token_kind.detach().cpu().numpy()
+                self.high_check_buffer.start_decision(
+                    env_id=env_id,
+                    episode_id=int(self.episode_ids[env_id]),
+                    state=state_arr,
+                    joint_obs=joint_obs,
+                    prev_skills=np.where(prev_active, prev_skills, INVALID_SKILL),
+                    prev_active=prev_active,
+                    prev_ages=prev_ages,
+                    steps_to_check=0,
+                    old_value=float(old_value.item()),
+                    agent_order=order.detach().cpu().numpy(),
+                    token_kind=token_kind_np,
+                    set_skill=sample.set_skill.detach().cpu().numpy(),
+                    token_valid=sample.token_valid.detach().cpu().numpy(),
+                    old_token_logp=sample.token_logp.detach().cpu().numpy(),
+                    keep_prob=sample.keep_prob.detach().cpu().numpy(),
+                )
+                sequence_committed = True
+                committed_token_kind = token_kind_np
+            finally:
+                if self.exposure_instrumentation_enabled:
+                    if sequence_committed:
+                        self.exposure.record_sequence_completed(committed_token_kind)
+                    else:
+                        self.exposure.record_sequence_failed_or_skipped()
 
             self.active_skills[env_id] = sample.final_skills.detach().cpu().numpy()
             self.skill_age[env_id] = sample.final_ages.detach().cpu().numpy()
@@ -4155,7 +4425,9 @@ class StandaloneProcessAgent:
                     decision_mask=True,
                 )
 
-            token_kind_np = sample.token_kind.detach().cpu().numpy()
+            # token_kind_np was already materialized above (for start_decision
+            # and the exposure accumulator); reused here rather than
+            # transferred a third time for the same tensor.
             set_skill_np = sample.set_skill.detach().cpu().numpy()
             token_logp_np = sample.token_logp.detach().cpu().numpy()
             token_entropy_np = sample.skill_entropy.detach().cpu().numpy()
@@ -7905,6 +8177,16 @@ class StandaloneProcessAgent:
             raise RuntimeError("R30 actor/critic is not initialized")
         rows = self.high_check_buffer.pop_completed()
         if not rows:
+            # A-W6-2: this is the early-return guard the exhaustive partition
+            # must survive. Every one of this call's expected high_ppo_epochs
+            # opportunities (already recorded as "attempted" by the caller,
+            # begin_high_epoch_pass_accounting, before this function was
+            # entered) resolves to SKIPPED_NORMAL here — no PPO epoch is
+            # entered and self.high_opt.step() is never called.
+            if self.exposure_instrumentation_enabled:
+                self.exposure.record_high_epoch_pass_skipped(
+                    self.high_ppo_epochs, reason="empty_high_check_rows"
+                )
             return {
                 "high_loss": 0.0,
                 "high_policy_loss": 0.0,
@@ -8388,6 +8670,8 @@ class StandaloneProcessAgent:
                     )
             self.high_opt.step()
             high_optimizer_steps += 1
+            if self.exposure_instrumentation_enabled:
+                self.exposure.record_high_epoch_pass_stepped()
             epoch_loss_values.append(float(loss.detach().cpu().item()))
             epoch_policy_loss_values.append(
                 float(policy_loss.detach().cpu().item())

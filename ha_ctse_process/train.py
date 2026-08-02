@@ -652,8 +652,83 @@ def export_run_manifest(
             ),
             "parameter_counts": jsonable(agent.parameter_counts()),
         }
+        if mode == "train":
+            manifest["actual_exposure"] = _build_actual_exposure_block(
+                agent, total_steps=total_steps, update_idx=update_idx
+            )
     with (metadata_dir / "run_manifest.json").open("w", encoding="utf-8") as handle:
         json.dump(manifest, handle, ensure_ascii=False, indent=2)
+
+
+def _build_actual_exposure_block(
+    agent: StandaloneProcessAgent, total_steps: int, update_idx: int
+) -> dict[str, Any]:
+    """V-K0B rerun actual-exposure evidence (W6-D1, frozen amendments
+    A-W6-1/A-W6-2/A-W6-3/A-W6-5). Read live off the agent at manifest-write
+    time — including at final checkpoint save, where export_run_manifest is
+    called again so these values land as the terminal record. Every leaf
+    value is source-labelled from the frozen admissible set
+    {runtime_counter, training_accumulator, optimizer_state,
+    checkpoint_optimizer_absence}; config/nominal/expected/derived_from_budget
+    are never used here.
+    """
+
+    coverage = agent.high_optimizer_coverage_certificate()
+    shared_steps = int(coverage["high_optimizer_steps_shared"])
+    low_steps, low_source = agent.low_level_optimizer_exposure()
+    exposure = agent.exposure
+
+    def _counter(value: int) -> dict[str, Any]:
+        return {"value": int(value), "source": "training_accumulator"}
+
+    def _optimizer_state(value: Any) -> dict[str, Any]:
+        return {"value": value, "source": "optimizer_state"}
+
+    return {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "environment_interactions": {
+            "value": int(total_steps),
+            "source": "runtime_counter",
+        },
+        "completed_outer_updates": {
+            "value": int(update_idx),
+            "source": "runtime_counter",
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_steps_shared": _optimizer_state(shared_steps),
+        "high_actor_optimizer_steps": _optimizer_state(shared_steps),
+        "high_value_optimizer_steps": _optimizer_state(shared_steps),
+        "high_actor_parameter_count_expected": _optimizer_state(
+            int(coverage["high_actor_parameter_count_expected"])
+        ),
+        "high_actor_parameter_count_with_step_state": _optimizer_state(
+            int(coverage["high_actor_parameter_count_with_step_state"])
+        ),
+        "high_value_parameter_count_expected": _optimizer_state(
+            int(coverage["high_value_parameter_count_expected"])
+        ),
+        "high_value_parameter_count_with_step_state": _optimizer_state(
+            int(coverage["high_value_parameter_count_with_step_state"])
+        ),
+        "high_optimizer_step_min": _optimizer_state(int(coverage["high_optimizer_step_min"])),
+        "high_optimizer_step_max": _optimizer_state(int(coverage["high_optimizer_step_max"])),
+        "high_optimizer_parameter_coverage_ok": _optimizer_state(
+            bool(coverage["high_optimizer_parameter_coverage_ok"])
+        ),
+        "high_check_sequences_completed": _counter(exposure.high_check_sequences_completed),
+        "high_check_sequences_failed_or_skipped": _counter(
+            exposure.high_check_sequences_failed_or_skipped
+        ),
+        "agent_tokens_keep": _counter(exposure.agent_tokens_keep),
+        "agent_tokens_set": _counter(exposure.agent_tokens_set),
+        "high_epoch_passes_attempted": _counter(exposure.high_epoch_passes_attempted),
+        "high_epoch_passes_stepped": _counter(exposure.high_epoch_passes_stepped),
+        "high_epoch_passes_skipped": _counter(exposure.high_epoch_passes_skipped),
+        "high_epoch_passes_aborted": _counter(exposure.high_epoch_passes_aborted),
+        "high_epoch_pass_skip_reasons": list(exposure.high_epoch_pass_skip_reasons),
+        "high_epoch_pass_abort_reasons": list(exposure.high_epoch_pass_abort_reasons),
+        "low_level_optimizer_steps": {"value": int(low_steps), "source": low_source},
+    }
 
 
 def emit(args: argparse.Namespace, message: str) -> None:
@@ -7525,9 +7600,24 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             if bool(getattr(agent, "r30_enabled", False)) and not bool(
                 getattr(agent, "constant_skill_no_high", False)
             ):
-                process_metrics.update(
-                    agent.update_high_from_checks(total_steps=total_steps)
-                )
+                # A-W6-2: record the expected high-pass exposure for this
+                # outer update before update_high_from_checks runs, then
+                # reconcile after — on success or on an exception the
+                # instrumentation did not otherwise account for — so the
+                # exhaustive N_attempted = N_stepped + N_skipped + N_aborted
+                # partition holds even if the callee raises. This wrapping
+                # never changes what update_high_from_checks does or which
+                # exception (if any) propagates.
+                agent.begin_high_epoch_pass_accounting()
+                try:
+                    high_update_metrics = agent.update_high_from_checks(
+                        total_steps=total_steps
+                    )
+                except Exception as exc:
+                    agent.finalize_high_epoch_pass_accounting(exc)
+                    raise
+                agent.finalize_high_epoch_pass_accounting(None)
+                process_metrics.update(high_update_metrics)
             update_idx += 1
             if bool(getattr(agent, "r30_enabled", False)) and not bool(
                 getattr(agent, "constant_skill_no_high", False)

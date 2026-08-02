@@ -19,6 +19,7 @@ file never relies on the `tmp_path` fixture. Invoke with an explicit
 from __future__ import annotations
 
 import importlib.util
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -261,3 +262,174 @@ def test_oracle_u_src_matches_independent_recomputation_from_row_identity():
     assert recomputed[1]["U_src"] == pytest.approx(row1["oracle_u_src"], abs=1e-9)
     assert recomputed[0]["urgency_class"] == row0["oracle_urgency_class"]
     assert recomputed[1]["urgency_class"] == row1["oracle_urgency_class"]
+
+
+# =============================================================================
+# (5) W6-D4 target vectors: independent recomputation from a FRESH env replay
+#     (never the driver's own live capture), spot-asserting one fast flip and
+#     the joint check; plus both A-W6-4 ending fields present with legal
+#     values on every row, and the vk0-trace-2 schema bump.
+# =============================================================================
+
+
+def _independent_targets(config, episode_id: int, check_index: int) -> dict:
+    """Fresh env, independent of the driver's own bookkeeping (same technique
+    as test 4's oracle recomputation): step a NEW raw env forward to this
+    check's own primitive step and read `_targets()` directly off it."""
+    wrapper = driver.make_env(config, int(episode_id))
+    wrapper.reset(seed=int(episode_id))
+    raw_env = wrapper.env
+    zero_action = {"agent_0": np.zeros(2, dtype=np.float32), "agent_1": np.zeros(2, dtype=np.float32)}
+    for _ in range(check_index * driver.K0):
+        raw_env.step(zero_action)
+    slow, fast = raw_env._targets()
+    wrapper.close()
+    return {"slow": [float(x) for x in slow], "fast": [float(x) for x in fast]}
+
+
+def test_target_vectors_match_independent_recomputation_and_ending_fields_are_legal():
+    config = _config()
+    result = driver.evaluate_checkpoint(
+        entry=_fake_entry(), config=config, episodes=1, n_select=1, n_eval=1, load_checkpoint=False,
+    )
+    assert driver.TRACE_SCHEMA_VERSION == "vk0-trace-2"
+
+    for row in result.check_rows:
+        assert row["trace_schema_version"] == "vk0-trace-2"
+        assert set(row["current_targets"]) == {"slow", "fast"}
+        assert row["incumbent_end_authority_at_check"] in driver.INCUMBENT_END_AUTHORITIES
+        assert row["post_window_end_authority"] in driver.POST_WINDOW_END_AUTHORITIES
+        assert row["segment_origin"] in driver.SEGMENT_ORIGINS
+
+    rows_by_check = {row["check_index"]: row for row in result.check_rows if row["focal_agent"] == 0}
+
+    # (i) one fast flip: fast_block = step // k0 = check_index on this clock,
+    # so fast flips between EVERY consecutive pair of checks -- check 1 vs
+    # its previous (check 0, whose own row is excluded from output but whose
+    # targets still exist and are what `previous_targets` must carry).
+    row1 = rows_by_check[1]
+    expected_current_1 = _independent_targets(config, row1["episode_id"], 1)
+    expected_previous_1 = _independent_targets(config, row1["episode_id"], 0)
+    assert row1["current_targets"] == expected_current_1
+    assert row1["previous_targets"] == expected_previous_1
+    assert expected_current_1["fast"][1] == pytest.approx(-expected_previous_1["fast"][1])
+    assert expected_current_1["slow"][0] == pytest.approx(expected_previous_1["slow"][0])
+
+    # (ii) the joint check (oracle.JOINT_CHECK_INDEX=6, step 30): slow AND
+    # fast both flip -- the only point in this 8-check clock where the slow
+    # block itself increments.
+    joint_index = oracle.JOINT_CHECK_INDEX
+    row_joint = rows_by_check[joint_index]
+    expected_current_joint = _independent_targets(config, row_joint["episode_id"], joint_index)
+    expected_previous_joint = _independent_targets(config, row_joint["episode_id"], joint_index - 1)
+    assert row_joint["current_targets"] == expected_current_joint
+    assert row_joint["previous_targets"] == expected_previous_joint
+    assert expected_current_joint["slow"][0] == pytest.approx(-expected_previous_joint["slow"][0])
+    assert expected_current_joint["fast"][1] == pytest.approx(-expected_previous_joint["fast"][1])
+
+
+# =============================================================================
+# (6) Pro-named witness (`21_PRO_OPEN_RAW.md` section 5): a final-check
+#     voluntary SET row carries BOTH `incumbent_end_authority_at_check=
+#     voluntary_set` and `post_window_end_authority=episode_termination` --
+#     the exact case one scalar field could not represent. Driven via the
+#     natural-pass forced-token test hook rather than left to an untrained
+#     policy's stochastic output.
+# =============================================================================
+
+
+def test_final_check_voluntary_set_carries_both_ending_authorities():
+    config = _config()
+    forced = {driver.NONINITIAL_CHECKS: {0: (driver.SET_TOKEN, driver.INVALID_SKILL)}}
+    result = driver.evaluate_checkpoint(
+        entry=_fake_entry(), config=config, episodes=1, n_select=1, n_eval=1,
+        load_checkpoint=False, forced_tokens_by_check=forced,
+    )
+    final_rows = [
+        row for row in result.check_rows
+        if row["check_index"] == driver.NONINITIAL_CHECKS and row["focal_agent"] == 0
+    ]
+    assert len(final_rows) == 1, final_rows
+    row = final_rows[0]
+    assert row["natural_token_kind"] == driver.NATURAL_TOKEN_SET
+    assert row["incumbent_end_authority_at_check"] == "voluntary_set"
+    assert row["post_window_end_authority"] == "episode_termination"
+
+
+# =============================================================================
+# (7) A-W6-5 exposure-block propagation: verbatim copy plus the driver's own
+#     recomputed source-manifest hash; tampered hash or missing block refuses
+#     the seed before evaluation. Paired negative/positive, watched red.
+# =============================================================================
+
+
+def _write_json(path: Path, payload: dict) -> None:
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+
+def test_exposure_block_propagation_refuses_tampered_or_missing_and_passes_when_valid():
+    scratch = _fresh_scratch_dir("exposure")
+
+    checkpoint_path = scratch / "checkpoint.pt"
+    checkpoint_path.write_bytes(b"fake-checkpoint-bytes-for-this-test-only")
+    checkpoint_sha256 = driver.hash_bytes(checkpoint_path.read_bytes())
+
+    run_manifest_path = scratch / "run_manifest.json"
+    actual_exposure = {
+        "actual_exposure_schema": driver.ACTUAL_EXPOSURE_SCHEMA,
+        "environment_interactions": {"value": 640000, "source": "runtime_counter"},
+        "completed_outer_updates": {"value": 1000, "source": "runtime_counter"},
+        "high_optimizer_steps_shared": {"value": 3000, "source": "optimizer_state"},
+    }
+    _write_json(run_manifest_path, {"actual_exposure": actual_exposure})
+    run_manifest_sha256 = driver.hash_bytes(run_manifest_path.read_bytes())
+
+    preflight_manifest_path = scratch / "vk0b_preflight_manifest.json"
+
+    def _write_preflight(*, run_manifest_sha256_value: str) -> None:
+        _write_json(
+            preflight_manifest_path,
+            {
+                "nonscientific": False,
+                "resolved": {
+                    "training_seed": 2026080101,
+                    "low_optimizer_absence": {
+                        "use_recurrent_low_level": False,
+                        "r39_toy_fixed_skill_primitives": True,
+                    },
+                },
+                "resolved_config_hash": "c" * 64,
+                "training": {
+                    "final_checkpoint_path": str(checkpoint_path),
+                    "checkpoint_sha256": checkpoint_sha256,
+                    "run_manifest_path": str(run_manifest_path),
+                    "run_manifest_sha256": run_manifest_sha256_value,
+                },
+            },
+        )
+
+    # (i) tampered/mismatched source_run_manifest_sha256 -> refused.
+    _write_preflight(run_manifest_sha256_value="0" * 64)
+    with pytest.raises(driver.Vk0bRefusalError, match="RUN_MANIFEST_HASH_MISMATCH"):
+        driver.resolve_checkpoint_entry(str(preflight_manifest_path))
+
+    # Restore the correct hash -> green, and the block/hash are propagated
+    # into the resolved entry verbatim.
+    _write_preflight(run_manifest_sha256_value=run_manifest_sha256)
+    entry = driver.resolve_checkpoint_entry(str(preflight_manifest_path))
+    assert entry["source_run_manifest_sha256"] == run_manifest_sha256
+    assert entry["actual_exposure"] == actual_exposure
+
+    # (ii) missing actual_exposure block -> refused, even with a correctly
+    # matching hash (the hash check alone cannot catch a well-formed but
+    # incomplete run_manifest.json).
+    _write_json(run_manifest_path, {})
+    _write_preflight(run_manifest_sha256_value=driver.hash_bytes(run_manifest_path.read_bytes()))
+    with pytest.raises(driver.Vk0bRefusalError, match="ACTUAL_EXPOSURE_BLOCK_MISSING_OR_WRONG_SCHEMA"):
+        driver.resolve_checkpoint_entry(str(preflight_manifest_path))
+
+    # Restore the real run_manifest.json -> green again.
+    _write_json(run_manifest_path, {"actual_exposure": actual_exposure})
+    _write_preflight(run_manifest_sha256_value=driver.hash_bytes(run_manifest_path.read_bytes()))
+    entry2 = driver.resolve_checkpoint_entry(str(preflight_manifest_path))
+    assert entry2["actual_exposure"]["actual_exposure_schema"] == driver.ACTUAL_EXPOSURE_SCHEMA

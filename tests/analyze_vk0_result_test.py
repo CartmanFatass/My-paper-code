@@ -66,14 +66,30 @@ def _identity(training_seed, episode_id, agent_order, check_index, focal_agent, 
     }
 
 
+def default_target_vector_pair(check_index=0):
+    """A well-formed {'slow','fast'} target-vector pair (A-W6-4 / W6-D4) --
+    shape mirrors the env's own `_targets()`: two 2-element (sign/zero)
+    vectors. Values are dummy but well-typed; the current V-K0B statistics
+    ignore these fields beyond validation."""
+    return {"slow": [1.0, 0.0], "fast": [0.0, 1.0 if check_index % 2 == 0 else -1.0]}
+
+
 def make_check_row(*, training_seed, episode_id, agent_order, check_index, focal_agent,
                     check_unit_id, u_src, natural_token_kind, keep_prob,
                     slow_match=1, fast_match=1, checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
-                    resolved_config_hash=DEFAULT_CONFIG_HASH, oracle_urgency_class=None):
+                    resolved_config_hash=DEFAULT_CONFIG_HASH, oracle_urgency_class=None,
+                    incumbent_end_authority_at_check=None, post_window_end_authority=None,
+                    current_targets=None, previous_targets=None):
     row = _identity(training_seed, episode_id, agent_order, check_index, focal_agent,
                      check_unit_id, checkpoint_hash, resolved_config_hash)
     if oracle_urgency_class is None:
         oracle_urgency_class = "URGENT" if u_src > 0.5 else ("STABLE" if u_src < 0.5 else "BOUNDARY")
+    if incumbent_end_authority_at_check is None:
+        # A-W6-4: a voluntary SET ends the incumbent segment at the check
+        # boundary; a KEEP row ordinarily carries none_open.
+        incumbent_end_authority_at_check = "voluntary_set" if natural_token_kind == "SET" else "none_open"
+    if post_window_end_authority is None:
+        post_window_end_authority = "none_open"
     row.update(
         {
             "oracle_u_src": u_src,
@@ -81,7 +97,10 @@ def make_check_row(*, training_seed, episode_id, agent_order, check_index, focal
             "natural_token_kind": natural_token_kind,
             "natural_set_skill": "z1" if natural_token_kind == "SET" else None,
             "keep_prob": keep_prob,
-            "segment_ending_authority": "voluntary_set" if natural_token_kind == "SET" else "team_intent_boundary",
+            "incumbent_end_authority_at_check": incumbent_end_authority_at_check,
+            "post_window_end_authority": post_window_end_authority,
+            "current_targets": current_targets or default_target_vector_pair(check_index),
+            "previous_targets": previous_targets or default_target_vector_pair(check_index - 1),
             "natural_external_reward_vector": [0.5, 0.5, 0.5, 0.5, 0.5],
             "slow_match_vector": [slow_match] * 5,
             "fast_match_vector": [fast_match] * 5,
@@ -210,9 +229,62 @@ def build_dataset(
     return check_rows, unit_rows
 
 
+def valid_actual_exposure_block():
+    """A-W6-1/A-W6-2/A-W6-5: a fully conforming per-seed `actual_exposure`
+    block at the exact identical-contract identities -- 640,000 interactions,
+    1,000 outer updates, 3,000/3,000/0/0 high-pass attempted/stepped/skipped/
+    aborted, exact shared/actor/value optimizer steps, complete parameter
+    coverage, and the N_KEEP+N_SET=2*N_sequences token identity
+    (1400+1600=2*1500). Fresh dict per call -- callers mutate their own copy
+    via `_patched_exposure_block`, never a shared one."""
+
+    def w(value, source="runtime_counter"):
+        return {"value": value, "source": source}
+
+    return {
+        "actual_exposure_schema": M.ACTUAL_EXPOSURE_SCHEMA,
+        "high_optimizer_semantics": M.HIGH_OPTIMIZER_SEMANTICS_SHARED,
+        "environment_interactions": w(640_000),
+        "completed_outer_updates": w(1_000),
+        "high_optimizer_steps_shared": w(3_000, "optimizer_state"),
+        "high_actor_optimizer_steps": w(3_000, "optimizer_state"),
+        "high_value_optimizer_steps": w(3_000, "optimizer_state"),
+        "high_actor_parameter_count_expected": w(42, "training_accumulator"),
+        "high_actor_parameter_count_with_step_state": w(42, "optimizer_state"),
+        "high_value_parameter_count_expected": w(17, "training_accumulator"),
+        "high_value_parameter_count_with_step_state": w(17, "optimizer_state"),
+        "high_optimizer_step_min": w(3_000, "optimizer_state"),
+        "high_optimizer_step_max": w(3_000, "optimizer_state"),
+        "high_optimizer_parameter_coverage_ok": w(True, "optimizer_state"),
+        "high_check_sequences_completed": w(1_500, "training_accumulator"),
+        "high_check_sequences_failed_or_skipped": w(0, "training_accumulator"),
+        "agent_tokens_keep": w(1_400, "training_accumulator"),
+        "agent_tokens_set": w(1_600, "training_accumulator"),
+        "high_epoch_passes_attempted": w(3_000, "runtime_counter"),
+        "high_epoch_passes_stepped": w(3_000, "runtime_counter"),
+        "high_epoch_passes_skipped": w(0, "runtime_counter"),
+        "high_epoch_passes_aborted": w(0, "runtime_counter"),
+        "high_epoch_pass_skip_reasons": w([], "runtime_counter"),
+        "high_epoch_pass_abort_reasons": w([], "runtime_counter"),
+        "low_level_optimizer_steps": w(0, "checkpoint_optimizer_absence"),
+    }
+
+
+def _patched_exposure_block(overrides):
+    """Applies a shallow {field_name: replacement_entry} patch onto a fresh
+    valid block -- e.g. {"high_epoch_passes_skipped": {"value": 1, "source":
+    "runtime_counter"}} for a negative-witness fixture."""
+    block = valid_actual_exposure_block()
+    if overrides:
+        block.update(overrides)
+    return block
+
+
 def manifest_for(seeds, checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
                   resolved_config_hash=DEFAULT_CONFIG_HASH, low_optimizer_steps=0,
-                  authorization=None):
+                  authorization=None, exposure_overrides=None,
+                  source_run_manifest_sha256="e" * 64):
+    exposure_overrides = exposure_overrides or {}
     manifest = {
         "contract_id": CONTRACT_ID,
         "trace_schema_version": SCHEMA_VERSION,
@@ -221,6 +293,8 @@ def manifest_for(seeds, checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
                 "checkpoint_hash": checkpoint_hash,
                 "resolved_config_hash": resolved_config_hash,
                 "low_optimizer_steps": low_optimizer_steps,
+                "actual_exposure": _patched_exposure_block(exposure_overrides.get(seed)),
+                "source_run_manifest_sha256": source_run_manifest_sha256,
             }
             for seed in seeds
         },
@@ -309,16 +383,20 @@ def standard_manifest_and_panel(
     row_count=M.VK0A_PANEL_ROW_COUNT,
     omit_authorization=False,
     tamper_hash=False,
+    exposure_overrides=None,
 ):
     """The common case: a manifest/panel pair whose authorization is
     correctly matched (unless deliberately broken via omit_authorization or
-    tamper_hash) -- returned as (manifest, panel) for
+    tamper_hash), and whose per-seed actual_exposure block is fully valid
+    (unless overridden per-seed via exposure_overrides) -- returned as
+    (manifest, panel) for
     `write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel(...))`."""
     panel = oracle_panel_for(verdict=verdict, row_count=row_count)
     authorization = None if omit_authorization else authorization_for(panel, tamper_hash=tamper_hash)
     manifest = manifest_for(
         seeds, checkpoint_hash=checkpoint_hash, resolved_config_hash=resolved_config_hash,
         low_optimizer_steps=low_optimizer_steps, authorization=authorization,
+        exposure_overrides=exposure_overrides,
     )
     return manifest, panel
 
@@ -644,6 +722,154 @@ def test_row8_heterogeneous_urgency_and_natural_access_identified(tmp_path):
 
 
 # =============================================================================
+# Actual-exposure block (W6-D3 / A-W6-1 / A-W6-2 / A-W6-5, round
+# 20260801_vk0b_rerun_exposure_conformance) -- the missing frozen row-1
+# predicate: exact per-seed training-optimizer exposure.
+# =============================================================================
+
+SIX_SEEDS = [2026080101, 2026080102, 2026080103, 2026080104, 2026080105, 2026080106]
+
+
+def test_row1_not_triggered_by_valid_exposure_block_at_all_six_seeds(tmp_path):
+    # (a) A valid actual_exposure block at exact identical-contract
+    # identities, at all six frozen scientific seeds, must not itself
+    # trigger row 1 -- this reuses the cheap row-3 (support-insufficient)
+    # scenario purely to prove the exposure gate is clean; the point under
+    # test is "proceeds past row 1", not the row-3 code itself.
+    check_rows, unit_rows = [], []
+    for seed in SIX_SEEDS:
+        c, u = build_dataset(seed, rows_per_class_order=8)
+        check_rows.extend(c)
+        unit_rows.extend(u)
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel(SIX_SEEDS))
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] != 1
+    assert result["result"]["row"] == 3
+    assert result["result"]["code"] == "R30_URGENCY_TRACE_SUPPORT_INSUFFICIENT"
+
+
+def test_row1_invalid_on_honestly_recorded_skip(tmp_path):
+    # (b) A-W6-2: 2,999 stepped + 1 honestly recorded skip (attempted still
+    # = stepped+skipped+aborted = 3000, so the partition identity itself
+    # holds) is nonetheless a violation -- "recording a deviation does not
+    # make that deviation admissible". Without the corruption this exact
+    # full-scale dataset resolves to row 8 (test_row8_...); the corruption
+    # alone must flip it to row 1, proving the predicate is load-bearing.
+    check_rows, unit_rows = build_dataset(SEED)
+    overrides = {
+        SEED: {
+            "high_epoch_passes_stepped": {"value": 2_999, "source": "runtime_counter"},
+            "high_epoch_passes_skipped": {"value": 1, "source": "runtime_counter"},
+            "high_optimizer_steps_shared": {"value": 2_999, "source": "optimizer_state"},
+            "high_actor_optimizer_steps": {"value": 2_999, "source": "optimizer_state"},
+            "high_value_optimizer_steps": {"value": 2_999, "source": "optimizer_state"},
+            "high_optimizer_step_min": {"value": 2_999, "source": "optimizer_state"},
+            "high_optimizer_step_max": {"value": 2_999, "source": "optimizer_state"},
+        }
+    }
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], exposure_overrides=overrides),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert result["result"]["code"] == "INVALID_VARIABLE_K_URGENCY_AUDIT"
+    assert any("TRAINING_OPTIMIZER_EXPOSURE_MISMATCH" in r for r in result["result"]["reasons"])
+
+
+def test_row1_invalid_on_inadmissible_exposure_source_label(tmp_path):
+    # (c) "config" is explicitly named inadmissible (A-W6-5) -- even though
+    # the recorded value itself is the frozen-correct 640,000.
+    check_rows, unit_rows = build_dataset(SEED)
+    overrides = {SEED: {"environment_interactions": {"value": 640_000, "source": "config"}}}
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], exposure_overrides=overrides),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert any("TRAINING_OPTIMIZER_EXPOSURE_MISMATCH" in r for r in result["result"]["reasons"])
+
+
+def test_row1_invalid_on_token_identity_violation(tmp_path):
+    # (d) A-W6-3: N_KEEP + N_SET must equal 2 * N_high_sequences exactly.
+    # 1400 + 1601 != 2*1500.
+    check_rows, unit_rows = build_dataset(SEED)
+    overrides = {SEED: {"agent_tokens_set": {"value": 1_601, "source": "training_accumulator"}}}
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], exposure_overrides=overrides),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert any("TRAINING_OPTIMIZER_EXPOSURE_MISMATCH" in r for r in result["result"]["reasons"])
+
+
+def test_row1_invalid_on_coverage_not_ok(tmp_path):
+    # (e) A-W6-1: uniformity over existing optimizer-state entries is not a
+    # coverage certificate -- an explicit coverage_ok=false must invalidate
+    # even though every other field in the block is at its frozen value.
+    check_rows, unit_rows = build_dataset(SEED)
+    overrides = {SEED: {"high_optimizer_parameter_coverage_ok": {"value": False, "source": "optimizer_state"}}}
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], exposure_overrides=overrides),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert any("TRAINING_OPTIMIZER_EXPOSURE_MISMATCH" in r for r in result["result"]["reasons"])
+
+
+def test_row1_invalid_on_parameter_coverage_short_of_expected(tmp_path):
+    # (e), second half: a trainable parameter that never received a
+    # gradient has no optimizer-state entry and is invisible to a naive
+    # uniformity check -- with_step_state < expected must be caught even
+    # though coverage_ok itself was (incorrectly) left true.
+    check_rows, unit_rows = build_dataset(SEED)
+    overrides = {
+        SEED: {"high_actor_parameter_count_with_step_state": {"value": 41, "source": "optimizer_state"}}
+    }
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], exposure_overrides=overrides),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert any("TRAINING_OPTIMIZER_EXPOSURE_MISMATCH" in r for r in result["result"]["reasons"])
+
+
+# =============================================================================
+# vk0-trace-2 segment-ending fields (A-W6-4)
+# =============================================================================
+
+
+def test_row_schema_refuses_trace2_row_carrying_retired_segment_ending_authority(tmp_path):
+    # (f) The vk0-trace-1 scalar is retired under vk0-trace-2: a row that
+    # still carries it must be refused, not silently accepted or ignored.
+    # Every other test in this suite proves the negative (a row WITHOUT this
+    # key validates fine), so adding the key back is what flips this fixture.
+    check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
+    check_rows[0]["segment_ending_authority"] = "voluntary_set"
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
+    with pytest.raises(M.SchemaValidationError):
+        M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+
+
+def test_final_check_dual_ending_row_validates_under_trace2(tmp_path):
+    # (g) A final-check voluntary SET whose newly started segment is then
+    # ended by episode termination must carry BOTH non-none_open values --
+    # the exact case the single old scalar could not represent.
+    check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
+    check_rows[0]["incumbent_end_authority_at_check"] = "voluntary_set"
+    check_rows[0]["post_window_end_authority"] = "episode_termination"
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    # Reaches the ordinary pipeline (schema accepted it, row 1 did not fire
+    # on it) -- at this cheap rows_per_class_order=8 scale that means row 3.
+    assert result["result"]["row"] == 3
+
+
+# =============================================================================
 # First-match precedence ordering
 # =============================================================================
 
@@ -781,7 +1007,7 @@ def test_paired_negative_flipping_decisive_fail_inequality_changes_the_result(tm
 
 def test_cli_refuses_and_writes_nothing_on_schema_violation(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
-    del check_rows[0]["segment_ending_authority"]
+    del check_rows[0]["current_targets"]
     paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     out_path = tmp_path / "summary.json"
     completed = subprocess.run(

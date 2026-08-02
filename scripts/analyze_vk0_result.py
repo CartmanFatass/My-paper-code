@@ -9,6 +9,9 @@ first-match result branch solely from those files, per:
   VK-D7, and amendments A-VK-D6, A-VK-D9, A-VK-D10)
   docs/external-review/rounds/20260801_variable_k_algorithm_direction/21_PRO_OPEN_RAW.md
   docs/external-review/rounds/20260801_vk0_design_conformance/21_PRO_OPEN_RAW.md
+  docs/research/designs/VK0B_RERUN_EXPOSURE_DECISION_LEDGER.md (W6-D3,
+  A-W6-1, A-W6-2, A-W6-4, A-W6-5)
+  docs/external-review/rounds/20260801_vk0b_rerun_exposure_conformance/21_PRO_OPEN_RAW.md
 
 The V-K0B driver that emits real rows does not exist yet. This module is
 developed and tested against the frozen row schema alone, using synthetic
@@ -36,7 +39,12 @@ import numpy as np
 # =============================================================================
 
 VK0_CONTRACT_ID = "VK0_TOY_RENEWAL_URGENCY"
-VK0_TRACE_SCHEMA_VERSION = "vk0-trace-1"
+# W6-D4 / A-W6-4 (round 20260801_vk0b_rerun_exposure_conformance): schema
+# bump to vk0-trace-2 -- the single `segment_ending_authority` scalar is
+# retired (it cannot represent a final-check voluntary SET concurrently
+# ended by episode termination) in favor of two explicit fields, plus the
+# per-check `current_targets`/`previous_targets` vectors.
+VK0_TRACE_SCHEMA_VERSION = "vk0-trace-2"
 
 URGENT = "URGENT"
 STABLE = "STABLE"
@@ -47,14 +55,29 @@ AGENT_ORDER_CANONICAL = "canonical"
 AGENT_ORDER_REVERSED = "reversed"
 AGENT_ORDER_CODES = {AGENT_ORDER_CANONICAL, AGENT_ORDER_REVERSED}
 
-SEGMENT_ENDING_AUTHORITIES = {
-    "voluntary_set",
-    "initial_assignment",
+# A-W6-4: the retired single-scalar vocabulary (`segment_ending_authority`)
+# is replaced by two explicit fields under vk0-trace-2. `initial_assignment`
+# is a segment-ORIGIN fact, never an ending authority, and does not re-enter
+# either vocabulary below.
+INCUMBENT_END_AUTHORITY_VOLUNTARY_SET = "voluntary_set"
+INCUMBENT_END_AUTHORITY_NONE_OPEN = "none_open"
+INCUMBENT_END_AUTHORITIES = {
+    INCUMBENT_END_AUTHORITY_VOLUNTARY_SET,
+    INCUMBENT_END_AUTHORITY_NONE_OPEN,
+}
+
+POST_WINDOW_END_AUTHORITY_NONE_OPEN = "none_open"
+POST_WINDOW_END_AUTHORITIES = {
     "episode_termination",
     "active_mask_change",
     "team_intent_boundary",
     "forced_renewal",
+    POST_WINDOW_END_AUTHORITY_NONE_OPEN,
 }
+
+# The retired vk0-trace-1 field name: a row that still carries this key
+# under vk0-trace-2 is refused rather than silently accepted or truncated.
+RETIRED_SEGMENT_ENDING_AUTHORITY_FIELD = "segment_ending_authority"
 
 NATURAL_TOKEN_KEEP = "KEEP"
 NATURAL_TOKEN_SET = "SET"
@@ -227,6 +250,19 @@ def _is_five_binary_vector(value: Any) -> bool:
     return isinstance(value, list) and len(value) == 5 and all(_is_binary(x) for x in value)
 
 
+def _is_target_vector_pair(value: Any) -> bool:
+    """A-W6-4 / W6-D4: `current_targets`/`previous_targets` are the full slow
+    and fast target vectors the env's own `_targets()` returns at an offered
+    check -- two 2-element numeric vectors (slow sign/zero, fast zero/sign),
+    keyed by name so the pair cannot be silently transposed."""
+    if not isinstance(value, dict) or set(value.keys()) != {"slow", "fast"}:
+        return False
+    return all(
+        isinstance(value[axis], list) and len(value[axis]) == 2 and all(_is_number(x) for x in value[axis])
+        for axis in ("slow", "fast")
+    )
+
+
 # =============================================================================
 # Row schema validation (A-VK-D6 identity keys + the ruled semantic fields)
 # =============================================================================
@@ -284,8 +320,19 @@ def validate_check_row(row: dict[str, Any], index: int) -> list[str]:
     if not _is_probability_or_ineligible(row.get("keep_prob")):
         fail("keep_prob must be a probability in [0,1], null, or NaN")
 
-    if row.get("segment_ending_authority") not in SEGMENT_ENDING_AUTHORITIES:
-        fail("segment_ending_authority must be one of the enumerated segment-ending authorities")
+    if RETIRED_SEGMENT_ENDING_AUTHORITY_FIELD in row:
+        fail(
+            "segment_ending_authority is retired under vk0-trace-2 -- use "
+            "incumbent_end_authority_at_check / post_window_end_authority"
+        )
+    if row.get("incumbent_end_authority_at_check") not in INCUMBENT_END_AUTHORITIES:
+        fail("incumbent_end_authority_at_check must be voluntary_set or none_open")
+    if row.get("post_window_end_authority") not in POST_WINDOW_END_AUTHORITIES:
+        fail("post_window_end_authority must be one of the enumerated post-window end authorities")
+    if not _is_target_vector_pair(row.get("current_targets")):
+        fail("current_targets must be a {'slow': [x, y], 'fast': [x, y]} target vector pair")
+    if not _is_target_vector_pair(row.get("previous_targets")):
+        fail("previous_targets must be a {'slow': [x, y], 'fast': [x, y]} target vector pair")
 
     if not _is_five_vector(row.get("natural_external_reward_vector")):
         fail("natural_external_reward_vector must be a five-element numeric vector")
@@ -478,6 +525,237 @@ def _git_blob_sha1(path: Path) -> str:
 
 
 # =============================================================================
+# Actual-exposure evidence block (W6-D3 / A-W6-1 / A-W6-2 / A-W6-5,
+# round 20260801_vk0b_rerun_exposure_conformance)
+# =============================================================================
+
+# A-W6-5: the versioned block identity. `config`/`nominal`/`expected`/
+# `derived_from_budget` are explicitly NOT admissible evidence sources for an
+# actual-exposure field -- they are simply absent from this set.
+ACTUAL_EXPOSURE_SCHEMA = "vk0b-exposure-1"
+ADMISSIBLE_EXPOSURE_SOURCES = {
+    "runtime_counter",
+    "training_accumulator",
+    "optimizer_state",
+    "checkpoint_optimizer_absence",
+}
+
+# A-W6-1: one shared high optimizer maps its single measured step count onto
+# both the actor and value exposure fields -- this is the only admissible
+# realization string, carried as a plain value (not a {"value","source"}
+# entry, since it names an architectural fact rather than a measured count).
+HIGH_OPTIMIZER_SEMANTICS_SHARED = "SHARED_ACTOR_VALUE_OPTIMIZER"
+
+# The frozen identical-contract exposure identities (A-W6-2 / W6-D5).
+FROZEN_ENVIRONMENT_INTERACTIONS = 640_000
+FROZEN_COMPLETED_OUTER_UPDATES = 1_000
+FROZEN_HIGH_EPOCH_PASSES = 3_000
+
+# Mandatory {"value": <int>, "source": <label>} fields.
+_EXPOSURE_INT_FIELDS = (
+    "environment_interactions",
+    "completed_outer_updates",
+    "high_optimizer_steps_shared",
+    "high_actor_optimizer_steps",
+    "high_value_optimizer_steps",
+    "high_actor_parameter_count_expected",
+    "high_actor_parameter_count_with_step_state",
+    "high_value_parameter_count_expected",
+    "high_value_parameter_count_with_step_state",
+    "high_optimizer_step_min",
+    "high_optimizer_step_max",
+    "high_check_sequences_completed",
+    "high_check_sequences_failed_or_skipped",
+    "agent_tokens_keep",
+    "agent_tokens_set",
+    "high_epoch_passes_attempted",
+    "high_epoch_passes_stepped",
+    "high_epoch_passes_skipped",
+    "high_epoch_passes_aborted",
+    "low_level_optimizer_steps",
+)
+# Mandatory {"value": <bool>, "source": <label>} field.
+_EXPOSURE_BOOL_FIELDS = ("high_optimizer_parameter_coverage_ok",)
+# Mandatory {"value": <list[str]>, "source": <label>} fields (A-W6-2's
+# per-opportunity SKIPPED_NORMAL(reason)/ABORTED(reason) labels).
+_EXPOSURE_LIST_FIELDS = ("high_epoch_pass_skip_reasons", "high_epoch_pass_abort_reasons")
+# `high_optimizer_semantics` is mandatory but carried as a plain string, not
+# a wrapped {"value","source"} entry -- see HIGH_OPTIMIZER_SEMANTICS_SHARED.
+_EXPOSURE_MANDATORY_KEYS = (
+    _EXPOSURE_INT_FIELDS + _EXPOSURE_BOOL_FIELDS + _EXPOSURE_LIST_FIELDS + ("high_optimizer_semantics",)
+)
+
+
+def _validate_exposure_entry(block: Any, field: str, kind: str) -> tuple[Any, list[str]]:
+    """Validates one mandatory {"value", "source"} entry. Returns
+    (value_or_None, errors) -- value is None whenever the entry's own shape
+    is invalid, so numeric-identity comparisons downstream skip it rather
+    than compare against a value the block never actually established."""
+    errors: list[str] = []
+    if not isinstance(block, dict) or "value" not in block or "source" not in block:
+        errors.append(f"actual_exposure.{field} must be a {{'value', 'source'}} entry")
+        return None, errors
+    value = block["value"]
+    source = block["source"]
+    if source not in ADMISSIBLE_EXPOSURE_SOURCES:
+        errors.append(f"actual_exposure.{field}.source {source!r} is not an admissible evidence-source label")
+    if kind == "bool":
+        if not isinstance(value, bool):
+            errors.append(f"actual_exposure.{field}.value must be a bool")
+            value = None
+    elif kind == "int":
+        if not _is_int(value):
+            errors.append(f"actual_exposure.{field}.value must be an int")
+            value = None
+    elif kind == "list":
+        if not isinstance(value, list) or not all(isinstance(x, str) for x in value):
+            errors.append(f"actual_exposure.{field}.value must be a list of str reasons")
+            value = None
+    return value, errors
+
+
+def compute_actual_exposure_violations(manifest: dict[str, Any]) -> list[str]:
+    """W6-D3 / A-W6-1 / A-W6-2 / A-W6-5: the missing frozen row-1 predicate.
+    Per training seed, validates the complete source-labelled actual_exposure
+    block the driver is required to copy from the training run manifest, and
+    the exact (not merely "consistent unless a skip was recorded")
+    identical-contract exposure identities. Every violation is tagged
+    TRAINING_OPTIMIZER_EXPOSURE_MISMATCH, per the frozen ledger reason."""
+    reasons: list[str] = []
+    seeds_map = manifest.get("seeds")
+    if not isinstance(seeds_map, dict):
+        return reasons
+    for seed_key, entry in seeds_map.items():
+        if not isinstance(entry, dict):
+            continue
+        tag = f"seed {seed_key}: TRAINING_OPTIMIZER_EXPOSURE_MISMATCH"
+
+        source_hash = entry.get("source_run_manifest_sha256")
+        if not isinstance(source_hash, str) or not source_hash:
+            reasons.append(f"{tag} -- source_run_manifest_sha256 missing or not a non-empty str")
+
+        block = entry.get("actual_exposure")
+        if not isinstance(block, dict):
+            reasons.append(f"{tag} -- actual_exposure block missing or not a dict")
+            continue
+        if block.get("actual_exposure_schema") != ACTUAL_EXPOSURE_SCHEMA:
+            reasons.append(f"{tag} -- actual_exposure_schema must equal {ACTUAL_EXPOSURE_SCHEMA!r}")
+        missing_keys = [k for k in _EXPOSURE_MANDATORY_KEYS if k not in block]
+        if missing_keys:
+            reasons.append(f"{tag} -- actual_exposure missing mandatory key(s): {missing_keys}")
+        if block.get("high_optimizer_semantics") != HIGH_OPTIMIZER_SEMANTICS_SHARED:
+            reasons.append(
+                f"{tag} -- high_optimizer_semantics must equal {HIGH_OPTIMIZER_SEMANTICS_SHARED!r}"
+            )
+
+        values: dict[str, Any] = {}
+        for field in _EXPOSURE_INT_FIELDS:
+            value, errors = _validate_exposure_entry(block.get(field), field, "int")
+            values[field] = value
+            reasons.extend(f"{tag} -- {e}" for e in errors)
+        for field in _EXPOSURE_BOOL_FIELDS:
+            value, errors = _validate_exposure_entry(block.get(field), field, "bool")
+            values[field] = value
+            reasons.extend(f"{tag} -- {e}" for e in errors)
+        for field in _EXPOSURE_LIST_FIELDS:
+            value, errors = _validate_exposure_entry(block.get(field), field, "list")
+            values[field] = value
+            reasons.extend(f"{tag} -- {e}" for e in errors)
+
+        def have(*names: str) -> bool:
+            return all(values.get(n) is not None for n in names)
+
+        if have("environment_interactions") and values["environment_interactions"] != FROZEN_ENVIRONMENT_INTERACTIONS:
+            reasons.append(
+                f"{tag} -- environment_interactions {values['environment_interactions']} != "
+                f"{FROZEN_ENVIRONMENT_INTERACTIONS}"
+            )
+        if have("completed_outer_updates") and values["completed_outer_updates"] != FROZEN_COMPLETED_OUTER_UPDATES:
+            reasons.append(
+                f"{tag} -- completed_outer_updates {values['completed_outer_updates']} != "
+                f"{FROZEN_COMPLETED_OUTER_UPDATES}"
+            )
+        if have(
+            "high_epoch_passes_attempted",
+            "high_epoch_passes_stepped",
+            "high_epoch_passes_skipped",
+            "high_epoch_passes_aborted",
+        ):
+            attempted = values["high_epoch_passes_attempted"]
+            stepped = values["high_epoch_passes_stepped"]
+            skipped = values["high_epoch_passes_skipped"]
+            aborted = values["high_epoch_passes_aborted"]
+            # A-W6-2: exact exposure -- ANY nonzero skip/abort is a
+            # violation even when honestly and consistently recorded.
+            if (
+                attempted != FROZEN_HIGH_EPOCH_PASSES
+                or stepped != FROZEN_HIGH_EPOCH_PASSES
+                or skipped != 0
+                or aborted != 0
+            ):
+                reasons.append(
+                    f"{tag} -- high epoch pass exposure not exact: attempted={attempted} stepped={stepped} "
+                    f"skipped={skipped} aborted={aborted} (frozen contract requires "
+                    f"{FROZEN_HIGH_EPOCH_PASSES}/{FROZEN_HIGH_EPOCH_PASSES}/0/0)"
+                )
+            if attempted != stepped + skipped + aborted:
+                reasons.append(
+                    f"{tag} -- high epoch pass partition not exhaustive: attempted={attempted} != "
+                    f"stepped+skipped+aborted={stepped + skipped + aborted}"
+                )
+        if have("high_optimizer_steps_shared") and values["high_optimizer_steps_shared"] != FROZEN_HIGH_EPOCH_PASSES:
+            reasons.append(
+                f"{tag} -- high_optimizer_steps_shared {values['high_optimizer_steps_shared']} != "
+                f"{FROZEN_HIGH_EPOCH_PASSES}"
+            )
+        if have("high_actor_optimizer_steps", "high_value_optimizer_steps", "high_optimizer_steps_shared"):
+            shared = values["high_optimizer_steps_shared"]
+            if values["high_actor_optimizer_steps"] != shared or values["high_value_optimizer_steps"] != shared:
+                reasons.append(
+                    f"{tag} -- actor/value optimizer steps do not equal the shared count "
+                    f"(actor={values['high_actor_optimizer_steps']} value={values['high_value_optimizer_steps']} "
+                    f"shared={shared})"
+                )
+        if values.get("high_optimizer_parameter_coverage_ok") is not True:
+            reasons.append(f"{tag} -- high_optimizer_parameter_coverage_ok is not true")
+        if have("high_actor_parameter_count_expected", "high_actor_parameter_count_with_step_state"):
+            if values["high_actor_parameter_count_with_step_state"] != values["high_actor_parameter_count_expected"]:
+                reasons.append(
+                    f"{tag} -- high actor parameter coverage incomplete: with_step_state="
+                    f"{values['high_actor_parameter_count_with_step_state']} != expected="
+                    f"{values['high_actor_parameter_count_expected']}"
+                )
+        if have("high_value_parameter_count_expected", "high_value_parameter_count_with_step_state"):
+            if values["high_value_parameter_count_with_step_state"] != values["high_value_parameter_count_expected"]:
+                reasons.append(
+                    f"{tag} -- high value parameter coverage incomplete: with_step_state="
+                    f"{values['high_value_parameter_count_with_step_state']} != expected="
+                    f"{values['high_value_parameter_count_expected']}"
+                )
+        if have("high_optimizer_step_min", "high_optimizer_step_max"):
+            step_min = values["high_optimizer_step_min"]
+            step_max = values["high_optimizer_step_max"]
+            if step_min != step_max or step_min != FROZEN_HIGH_EPOCH_PASSES:
+                reasons.append(
+                    f"{tag} -- optimizer step min/max not both exactly {FROZEN_HIGH_EPOCH_PASSES} "
+                    f"(min={step_min} max={step_max})"
+                )
+        if have("agent_tokens_keep", "agent_tokens_set", "high_check_sequences_completed"):
+            keep = values["agent_tokens_keep"]
+            set_ = values["agent_tokens_set"]
+            sequences = values["high_check_sequences_completed"]
+            # A-W6-3 structural identity: N_KEEP + N_SET = 2 * N_high_sequences.
+            if keep + set_ != 2 * sequences:
+                reasons.append(
+                    f"{tag} -- agent token identity violated: keep({keep}) + set({set_}) != "
+                    f"2 * high_check_sequences_completed({sequences})"
+                )
+        if have("low_level_optimizer_steps") and values["low_level_optimizer_steps"] != 0:
+            reasons.append(f"{tag} -- low_level_optimizer_steps {values['low_level_optimizer_steps']} != 0")
+    return reasons
+
+
+# =============================================================================
 # Precedence-1: INVALID_VARIABLE_K_URGENCY_AUDIT
 # =============================================================================
 
@@ -561,6 +839,10 @@ def compute_invalid_reasons(
     )
     if prohibited:
         reasons.append(f"prohibited low-level optimizer exposure nonzero for seed(s) {prohibited}")
+
+    # W6-D3 / A-W6-1 / A-W6-2 / A-W6-5: the missing frozen row-1 predicate --
+    # exact per-seed training-optimizer exposure, independently validated.
+    reasons.extend(compute_actual_exposure_violations(manifest))
 
     # VK-D10 / A-VK-D10: V-K0B must verify the whole authorization tuple
     # before loading any checkpoint. The raw panel carries no artifact hash
