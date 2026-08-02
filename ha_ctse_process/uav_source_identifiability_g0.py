@@ -5514,6 +5514,47 @@ class MechanicallyQualifiedOracleController:
         }
 
 
+EPISODE_RUN_ARRAY_SPECS = {
+    "user_demand_input_mbps": (
+        (PHYSICAL_HORIZON, GROUND_USERS),
+        np.dtype(np.float64),
+    ),
+    "user_delivered_input_mbps": (
+        (PHYSICAL_HORIZON, GROUND_USERS),
+        np.dtype(np.float64),
+    ),
+    "channel_association_input": (
+        (PHYSICAL_HORIZON, PHYSICAL_UAVS, GROUND_USERS),
+        np.dtype(np.bool_),
+    ),
+    "delivered_user_rates_mbps": (
+        (PHYSICAL_HORIZON, GROUND_USERS),
+        np.dtype(np.float64),
+    ),
+    "target_trace": (
+        (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3),
+        np.dtype(np.float64),
+    ),
+    "raw_action_trace": (
+        (PHYSICAL_HORIZON, PHYSICAL_UAVS, ACTION_DIM),
+        np.dtype(np.float32),
+    ),
+    "executed_velocity_trace": (
+        (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3),
+        np.dtype(np.float64),
+    ),
+    "position_trace": (
+        (PHYSICAL_HORIZON + 1, PHYSICAL_UAVS, 3),
+        np.dtype(np.float64),
+    ),
+    "active_mask_trace": (
+        (PHYSICAL_HORIZON, PHYSICAL_UAVS),
+        np.dtype(np.bool_),
+    ),
+    "weakest_service": ((PHYSICAL_HORIZON,), np.dtype(np.float64)),
+}
+
+
 @dataclass(frozen=True)
 class EpisodeRunEvidence:
     episode_id: int
@@ -5548,27 +5589,10 @@ class EpisodeRunEvidence:
     def __post_init__(self) -> None:
         object.__setattr__(self, "control", Control(self.control))
         object.__setattr__(self, "cell", Cell(self.cell))
-        weakest = np.asarray(self.weakest_service, dtype=np.float64)
-        if weakest.shape != (PHYSICAL_HORIZON,) or not np.isfinite(weakest).all():
-            raise G0RealizationError("episode run weakest-service evidence is incomplete")
-        object.__setattr__(
-            self, "weakest_service", _readonly_array(weakest, dtype=np.float64)
-        )
-        arrays = (
-            ("user_demand_input_mbps", self.user_demand_input_mbps, (PHYSICAL_HORIZON, GROUND_USERS), np.float64),
-            ("user_delivered_input_mbps", self.user_delivered_input_mbps, (PHYSICAL_HORIZON, GROUND_USERS), np.float64),
-            ("channel_association_input", self.channel_association_input, (PHYSICAL_HORIZON, PHYSICAL_UAVS, GROUND_USERS), np.bool_),
-            ("delivered_user_rates_mbps", self.delivered_user_rates_mbps, (PHYSICAL_HORIZON, GROUND_USERS), np.float64),
-            ("target_trace", self.target_trace, (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3), np.float64),
-            ("raw_action_trace", self.raw_action_trace, (PHYSICAL_HORIZON, PHYSICAL_UAVS, ACTION_DIM), np.float32),
-            ("executed_velocity_trace", self.executed_velocity_trace, (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3), np.float64),
-            ("position_trace", self.position_trace, (PHYSICAL_HORIZON + 1, PHYSICAL_UAVS, 3), np.float64),
-            ("active_mask_trace", self.active_mask_trace, (PHYSICAL_HORIZON, PHYSICAL_UAVS), np.bool_),
-        )
-        for name, value, shape, dtype in arrays:
-            array = np.asarray(value, dtype=dtype)
+        for name, (shape, dtype) in EPISODE_RUN_ARRAY_SPECS.items():
+            array = np.asarray(getattr(self, name), dtype=dtype)
             if array.shape != shape or (
-                dtype is not np.bool_ and not np.isfinite(array).all()
+                dtype != np.dtype(np.bool_) and not np.isfinite(array).all()
             ):
                 raise G0RealizationError(f"episode run {name} evidence is malformed")
             object.__setattr__(self, name, _readonly_array(array, dtype=dtype))

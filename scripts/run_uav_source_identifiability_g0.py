@@ -47,6 +47,7 @@ torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 
 from ha_ctse_process import uav_source_identifiability_g0 as source
+from ha_ctse_process import uav_episode_serialization as episode_serialization
 
 
 SCHEMA_VERSION = source.SCHEMA_VERSION
@@ -1127,22 +1128,6 @@ _RUN_IDENTITIES = (
     (source.Control.NO_REALLOCATION, source.Cell.EVENT),
     (source.Control.NO_REALLOCATION, source.Cell.NO_EVENT),
 )
-_NATIVE_ARRAY_KEYS = frozenset({"dtype", "shape", "data_hex"})
-_EPISODE_RUN_KEYS = frozenset(
-    {
-        "episode_id", "control", "cell", "metrics", "source_sha256",
-        "user_demand_input_mbps", "user_delivered_input_mbps",
-        "channel_association_input", "delivered_user_rates_mbps",
-        "target_trace", "raw_action_trace", "executed_velocity_trace",
-        "position_trace", "active_mask_trace", "controller_evidence",
-        "target_trace_sha256", "raw_action_trace_sha256",
-        "executed_velocity_trace_sha256", "executed_position_trace_sha256",
-        "service_trace_sha256", "controller_state_sha256", "lifecycle_events",
-        "tracker_failures", "action_support_violations", "ownership_violations",
-        "backhaul_guard_blocked_actions", "oracle_qualification_failures",
-        "weakest_service",
-    }
-)
 _BUNDLE_KEYS = frozenset(
     {
         "schema_id", "schema_version", "formal", "contract_sha256",
@@ -1327,33 +1312,6 @@ def _validate_content_digest(value: Mapping[str, Any], field: str) -> None:
     stored = candidate.pop(field, None)
     if stored != hashlib.sha256(_canonical_bytes(candidate)).hexdigest():
         raise ValueError(f"G0 {field} content digest mismatch")
-
-
-def _native_array(value: Any) -> dict[str, Any]:
-    array = np.ascontiguousarray(np.asarray(value))
-    if array.dtype.hasobject or not array.dtype.isnative:
-        raise ValueError("G0 native array must have a non-object native dtype")
-    return {
-        "dtype": array.dtype.name,
-        "shape": [int(item) for item in array.shape],
-        "data_hex": array.tobytes(order="C").hex(),
-    }
-
-
-def _array_from_native(value: Any, *, label: str) -> np.ndarray:
-    _require_exact_keys(value, _NATIVE_ARRAY_KEYS, label=label)
-    try:
-        dtype = np.dtype(value["dtype"])
-        shape = tuple(int(item) for item in value["shape"])
-        raw = bytes.fromhex(value["data_hex"])
-    except (TypeError, ValueError) as error:
-        raise ValueError(f"G0 {label} native array schema mismatch") from error
-    if dtype.hasobject or not dtype.isnative or any(item < 0 for item in shape):
-        raise ValueError(f"G0 {label} native array dtype/shape is invalid")
-    expected = int(np.prod(shape, dtype=np.int64)) * dtype.itemsize
-    if len(raw) != expected or value["data_hex"] != raw.hex():
-        raise ValueError(f"G0 {label} native array byte count mismatch")
-    return np.frombuffer(raw, dtype=dtype).reshape(shape).copy()
 
 
 def _load_frozen_records() -> dict[str, str]:
@@ -1583,100 +1541,10 @@ def _validate_binding(binding: FormalRuntimeBinding, *, stage: str) -> dict[str,
     return environment
 
 
-def _episode_run_to_primitive(run: source.EpisodeRunEvidence) -> dict[str, Any]:
-    value = {
-        "episode_id": run.episode_id,
-        "control": run.control.value,
-        "cell": run.cell.value,
-        "metrics": run.metrics.to_primitive(),
-        "source_sha256": run.source_sha256,
-        "user_demand_input_mbps": _native_array(run.user_demand_input_mbps),
-        "user_delivered_input_mbps": _native_array(run.user_delivered_input_mbps),
-        "channel_association_input": _native_array(run.channel_association_input),
-        "delivered_user_rates_mbps": _native_array(run.delivered_user_rates_mbps),
-        "target_trace": _native_array(run.target_trace),
-        "raw_action_trace": _native_array(run.raw_action_trace),
-        "executed_velocity_trace": _native_array(run.executed_velocity_trace),
-        "position_trace": _native_array(run.position_trace),
-        "active_mask_trace": _native_array(run.active_mask_trace),
-        "controller_evidence": dict(run.controller_evidence),
-        "target_trace_sha256": run.target_trace_sha256,
-        "raw_action_trace_sha256": run.raw_action_trace_sha256,
-        "executed_velocity_trace_sha256": run.executed_velocity_trace_sha256,
-        "executed_position_trace_sha256": run.executed_position_trace_sha256,
-        "service_trace_sha256": run.service_trace_sha256,
-        "controller_state_sha256": run.controller_state_sha256,
-        "lifecycle_events": [item.to_primitive() for item in run.lifecycle_events],
-        "tracker_failures": run.tracker_failures,
-        "action_support_violations": run.action_support_violations,
-        "ownership_violations": run.ownership_violations,
-        "backhaul_guard_blocked_actions": run.backhaul_guard_blocked_actions,
-        "oracle_qualification_failures": run.oracle_qualification_failures,
-        "weakest_service": _native_array(run.weakest_service),
-    }
-    _require_exact_keys(value, _EPISODE_RUN_KEYS, label="formal episode run")
-    return value
-
-
-def _metrics_from_primitive(value: Any) -> source.EpisodeMetrics:
-    keys = frozenset(
-        {"episode_id", "control", "cell", "onset", "duration", "J_event",
-         "Q_ordinary", "M_event", "A_control", "B_access", "C_cat"}
-    )
-    _require_exact_keys(value, keys, label="episode metrics")
-    return source.EpisodeMetrics(
-        episode_id=int(value["episode_id"]), control=value["control"], cell=value["cell"],
-        onset=int(value["onset"]), duration=int(value["duration"]),
-        j_event=float(value["J_event"]), q_ordinary=float(value["Q_ordinary"]),
-        m_event=float(value["M_event"]), a_control=float(value["A_control"]),
-        b_access=int(value["B_access"]), c_cat=int(value["C_cat"]),
-    )
-
-
-def _episode_run_from_primitive(value: Any) -> source.EpisodeRunEvidence:
-    _require_exact_keys(value, _EPISODE_RUN_KEYS, label="formal episode run")
-    lifecycle = tuple(source.LifecycleBoundaryEvent(**item) for item in value["lifecycle_events"])
-    array_specs = {
-        "user_demand_input_mbps": (np.dtype(np.float64), (500, 30)),
-        "user_delivered_input_mbps": (np.dtype(np.float64), (500, 30)),
-        "channel_association_input": (np.dtype(np.bool_), (500, 8, 30)),
-        "delivered_user_rates_mbps": (np.dtype(np.float64), (500, 30)),
-        "target_trace": (np.dtype(np.float64), (500, 8, 3)),
-        "raw_action_trace": (np.dtype(np.float32), (500, 8, 4)),
-        "executed_velocity_trace": (np.dtype(np.float64), (500, 8, 3)),
-        "position_trace": (np.dtype(np.float64), (501, 8, 3)),
-        "active_mask_trace": (np.dtype(np.bool_), (500, 8)),
-        "weakest_service": (np.dtype(np.float64), (500,)),
-    }
-    arrays = {}
-    for name, (expected_dtype, expected_shape) in array_specs.items():
-        array = _array_from_native(value[name], label=name)
-        if array.dtype != expected_dtype or array.shape != expected_shape:
-            raise ValueError(f"G0 {name} registered dtype/shape mismatch")
-        arrays[name] = array
-    return source.EpisodeRunEvidence(
-        episode_id=int(value["episode_id"]), control=value["control"], cell=value["cell"],
-        metrics=_metrics_from_primitive(value["metrics"]), source_sha256=value["source_sha256"],
-        controller_evidence=value["controller_evidence"], lifecycle_events=lifecycle,
-        target_trace_sha256=value["target_trace_sha256"],
-        raw_action_trace_sha256=value["raw_action_trace_sha256"],
-        executed_velocity_trace_sha256=value["executed_velocity_trace_sha256"],
-        executed_position_trace_sha256=value["executed_position_trace_sha256"],
-        service_trace_sha256=value["service_trace_sha256"],
-        controller_state_sha256=value["controller_state_sha256"],
-        tracker_failures=int(value["tracker_failures"]),
-        action_support_violations=int(value["action_support_violations"]),
-        ownership_violations=int(value["ownership_violations"]),
-        backhaul_guard_blocked_actions=int(value["backhaul_guard_blocked_actions"]),
-        oracle_qualification_failures=int(value["oracle_qualification_failures"]),
-        **arrays,
-    )
-
-
 def _run_episode_worker(episode_id: int) -> dict[str, Any]:
     episode = source.make_episode_source(int(episode_id))
     runs = {
-        key: _episode_run_to_primitive(
+        key: episode_serialization.episode_run_to_primitive(
             source.run_g0_episode(episode, control=control, cell=cell)
         )
         for key, (control, cell) in zip(_RUN_KEYS, _RUN_IDENTITIES)
@@ -1744,7 +1612,9 @@ def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> t
     ):
         raise ValueError("G0 episode source reconstruction mismatch")
     runs = {
-        identity: _episode_run_from_primitive(value["runs"][key])
+        identity: episode_serialization.episode_run_from_primitive(
+            value["runs"][key]
+        )
         for key, identity in zip(_RUN_KEYS, _RUN_IDENTITIES)
     }
     if any(run.episode_id != episode_id for run in runs.values()):

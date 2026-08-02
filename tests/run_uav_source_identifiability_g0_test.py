@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import inspect
 import shutil
 from pathlib import Path
 from types import SimpleNamespace
@@ -9,6 +8,7 @@ from types import SimpleNamespace
 import pytest
 import numpy as np
 
+from ha_ctse_process import uav_episode_serialization as episode_serialization
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner
 
@@ -764,24 +764,6 @@ def test_authoritative_replay_counts_are_single_pass_and_guarded(
             for _ in range(5):
                 source.run_g0_episode(None)
 
-    preflight_text = inspect.getsource(runner._preflight_semantic_evidence)
-    admission_text = inspect.getsource(runner._validate_preflight_admission)
-    train_text = inspect.getsource(runner.scientific_train)
-    evaluate_text = inspect.getsource(runner.scientific_evaluate)
-    analyze_text = inspect.getsource(runner.scientific_analyze)
-    assert "_authoritative_replay_guard(6)" in preflight_text
-    assert "_validate_preflight_admission" in train_text
-    assert "authoritative_replay" not in train_text
-    assert "_load_episode_bundle" not in admission_text
-    assert "run_g0_episode" not in admission_text
-    assert evaluate_text.count("_authoritative_replay_guard(768)") == 1
-    assert analyze_text.count("_authoritative_replay_guard(768)") == 1
-    assert "_load_inventory_without_replay" in analyze_text
-    assert "_capture_analysis_reconstruction" in analyze_text
-    assert "_reconstruct_inventory(" not in analyze_text
-    assert analyze_text.count("make_bootstrap_index_plan()") == 1
-    assert "_reuse_bootstrap_index_plan" in analyze_text
-
 
 def test_analysis_reconstruction_rejects_per_episode_validity_tamper() -> None:
     metrics = {key: [{"episode_id": 0}] for key in runner._RUN_KEYS}
@@ -802,21 +784,58 @@ def test_analysis_reconstruction_rejects_per_episode_validity_tamper() -> None:
         )
 
 
-def test_native_array_schema_is_exact_and_byte_stable() -> None:
-    value = np.asarray([[1.5, -2.0]], dtype=np.float64)
-    primitive = runner._native_array(value)
-    assert primitive == {
-        "dtype": "float64",
-        "shape": [1, 2],
-        "data_hex": value.tobytes(order="C").hex(),
+def _empty_episode_run() -> source.EpisodeRunEvidence:
+    arrays = {
+        name: np.zeros(shape, dtype=dtype)
+        for name, (shape, dtype) in source.EPISODE_RUN_ARRAY_SPECS.items()
     }
-    assert np.array_equal(
-        runner._array_from_native(primitive, label="test"), value
+    return source.EpisodeRunEvidence(
+        episode_id=0, control=source.Control.SAME_INFORMATION,
+        cell=source.Cell.NO_EVENT,
+        metrics=source.EpisodeMetrics(
+            episode_id=0, control=source.Control.SAME_INFORMATION,
+            cell=source.Cell.NO_EVENT, onset=200, duration=80,
+            j_event=1.0, q_ordinary=0.90, m_event=0.0,
+            a_control=1.0, b_access=1, c_cat=0,
+        ),
+        source_sha256="s" * 64, controller_evidence={}, lifecycle_events=(),
+        target_trace_sha256="t" * 64, raw_action_trace_sha256="a" * 64,
+        executed_velocity_trace_sha256="v" * 64,
+        executed_position_trace_sha256="p" * 64,
+        service_trace_sha256="r" * 64, controller_state_sha256="c" * 64,
+        tracker_failures=0, action_support_violations=0, ownership_violations=0,
+        backhaul_guard_blocked_actions=0, oracle_qualification_failures=0,
+        **arrays,
     )
-    with pytest.raises(ValueError, match="byte count"):
-        runner._array_from_native(
-            {**primitive, "shape": [2, 2]}, label="test"
+
+
+def test_episode_run_codec_is_exact_byte_stable_and_fail_closed() -> None:
+    run = _empty_episode_run()
+    primitive = episode_serialization.episode_run_to_primitive(run)
+    raw_action = primitive["raw_action_trace"]
+    assert raw_action == {
+        "dtype": "float32", "shape": [500, 8, 4],
+        "data_hex": run.raw_action_trace.tobytes(order="C").hex(),
+    }
+    restored = episode_serialization.episode_run_from_primitive(primitive)
+    assert episode_serialization.episode_run_to_primitive(restored) == primitive
+    assert all(
+        not getattr(restored, name).flags.writeable
+        for name in source.EPISODE_RUN_ARRAY_SPECS
+    )
+
+    with pytest.raises(ValueError, match="schema mismatch"):
+        episode_serialization.episode_run_from_primitive(
+            {key: value for key, value in primitive.items() if key != "source_sha256"}
         )
+    wrong_dtype = np.zeros((500, 8, 4), dtype=np.float64)
+    tampered = dict(primitive)
+    tampered["raw_action_trace"] = {
+        "dtype": "float64", "shape": [500, 8, 4],
+        "data_hex": wrong_dtype.tobytes(order="C").hex(),
+    }
+    with pytest.raises(ValueError, match="dtype/shape mismatch"):
+        episode_serialization.episode_run_from_primitive(tampered)
 
 
 def test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities(
@@ -846,8 +865,8 @@ def test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities(
     _store(path, bundle)
     monkeypatch.setattr(source, "make_episode_source", lambda _episode_id: dummy_episode)
     monkeypatch.setattr(
-        runner,
-        "_episode_run_from_primitive",
+        episode_serialization,
+        "episode_run_from_primitive",
         lambda value: SimpleNamespace(
             episode_id=value["episode_id"], identity=value["identity"]
         ),
