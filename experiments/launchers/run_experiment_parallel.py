@@ -1,6 +1,12 @@
+"""Launch the scenario-4 experiment matrix from any working directory.
+
+Run as ``python -m experiments.launchers.run_experiment_parallel``.
+"""
+
 import subprocess
 import time
 import os
+from pathlib import Path
 
 # --- 实验配置 ---
 EXP_NAME = "scenario4_final_results"
@@ -20,6 +26,19 @@ EXPERIMENTS = {
     # ]
 }
 
+TRAIN_ENTRYPOINT = Path(__file__).resolve().parents[2] / "train_multiproc_config_1.py"
+
+
+def build_command(alg_name, alg_args, seed):
+    return [
+        'python',
+        str(TRAIN_ENTRYPOINT),
+        '--scenario', str(SCENARIO),
+        '--log_dir', LOG_DIR,
+        '--exp_name', f"{EXP_NAME}/{alg_name}",
+        '--seed', str(seed)
+    ] + alg_args
+
 def run_parallel_experiments():
     processes = []
     for alg_name, alg_args in EXPERIMENTS.items():
@@ -30,14 +49,7 @@ def run_parallel_experiments():
                 processes = [p for p in processes if p.poll() is None]
                 time.sleep(5)
 
-            command = [
-                'python',
-                'train_multiproc_config_1.py',
-                '--scenario', str(SCENARIO),
-                '--log_dir', LOG_DIR,
-                '--exp_name', f"{EXP_NAME}/{alg_name}",
-                '--seed', str(seed)
-            ] + alg_args
+            command = build_command(alg_name, alg_args, seed)
             
             print(f"\n>>> Starting: {alg_name.upper()} with Seed {seed}")
             print(f"    Command: {' '.join(command)}")

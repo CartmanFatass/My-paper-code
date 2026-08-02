@@ -1,3 +1,8 @@
+"""Evaluate the Continuous Alice/Bob litmus test.
+
+Run as ``python -m experiments.continuous_alice_bob.evaluate_continuous_alice_bob``.
+"""
+
 import torch
 import numpy as np
 import time
@@ -8,7 +13,7 @@ import matplotlib.pyplot as plt
 from envs.pettingzoo.continuous_alice_bob import ContinuousAliceBobEnv
 from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
 from hmasd.agent import HMASDAgent
-from config_continuous_alice_bob import Config
+from experiments.continuous_alice_bob.config_continuous_alice_bob import Config
 from hmasd.logging import init_multiproc_logging, main_logger
 
 def save_trajectory_data(log_dir, episode, trajectories, team_skills, agent_skills_history, 

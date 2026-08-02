@@ -1,3 +1,5 @@
+"""Configuration for the Continuous Alice/Bob litmus test."""
+
 # HMASD config for the Continuous Alice and Bob litmus test
 # Based on hyperparameters from the HMASD paper, Tables 1, 2, and 3.
 
