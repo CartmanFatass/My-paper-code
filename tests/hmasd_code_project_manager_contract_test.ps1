@@ -128,10 +128,10 @@ $routerRequired = @(
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'external_review_transport_execution=dedicated_agentify_transport_task',
-    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
-    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path',
+    'agentify_transport_request=AGENTIFY_REVIEW_REQUEST',
+    'agentify_transport_request_fields=provider|question_path|return_task_id',
     'agentify_transport_skill=hmasd-agentify-transport',
-    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'
+    'agentify_transport_result=AGENTIFY_REVIEW_RESULT'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -147,7 +147,7 @@ $codeRequired = @(
     'runtime_authority=exclusive',
     'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_request_and_intake_authority=exclusive',
-    'formal_review_transport=agentify_task_request_result',
+    'formal_review_transport=agentify_single_request_result',
     'scientific_authority=none',
     'workflow_design_authority=none',
     'workflow_modification_authority=none',
@@ -163,12 +163,10 @@ $codeRequired = @(
     'code_children=code_scout|implementer|reviewer|verifier',
     'routine_implementation_child=hmasd-implementer-terra',
     'protected_implementation_child=hmasd-implementer',
-    'AGENTIFY_REVIEW_BATCH_REQUEST',
-    'AGENTIFY_REVIEW_BATCH_RESULT',
-    'one ordered manifest',
-    'every item names its expected reviewer model',
-    '`GPT-5.6 Pro` for ChatGPT Pro',
-    'CPM does not operate or debug Agentify',
+    'AGENTIFY_REVIEW_REQUEST',
+    'AGENTIFY_REVIEW_RESULT',
+    'retry reuses the same question path',
+    'Page and recovery details remain inside the Agentify task',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',

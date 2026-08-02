@@ -91,7 +91,7 @@ foreach ($required in @(
     'EXPLORER_PROJECT_CANDIDATE_PACKET',
     'EXPLORER_ADVISORY_REFINEMENT_PACKET',
     'CPM-centered lane',
-    'CPM submits one ordered manifest of currently frozen questions',
+    'CPM sends each currently frozen question path',
     'one candidate is selected for each Pro package',
     'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
     'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
@@ -179,9 +179,9 @@ foreach ($required in @(
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
-    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
-    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path',
+    'agentify_transport_request=AGENTIFY_REVIEW_REQUEST',
+    'agentify_transport_result=AGENTIFY_REVIEW_RESULT',
+    'agentify_transport_request_fields=provider|question_path|return_task_id',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
     'superpowers_execution=disabled',
@@ -653,7 +653,7 @@ if ($wdmCoreLineCount -gt 1000) {
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'CPM does not operate or debug Agentify')) {
+    'Page and recovery details remain inside the Agentify task')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -874,9 +874,9 @@ foreach ($required in @(
     'current_work_authority=exclusive',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'formal_review_transport=agentify_task_request_result',
-    'AGENTIFY_REVIEW_BATCH_REQUEST',
-    'AGENTIFY_REVIEW_BATCH_RESULT',
+    'formal_review_transport=agentify_single_request_result',
+    'AGENTIFY_REVIEW_REQUEST',
+    'AGENTIFY_REVIEW_RESULT',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_target=current_thread_id_from_user_or_native_task_context',

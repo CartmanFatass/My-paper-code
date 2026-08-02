@@ -18,7 +18,7 @@ uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
   adversarial checks. The persistent Explorer owns each review item and sends
-  one ordered batch manifest to the dedicated Agentify task.
+  its frozen question path to the dedicated Agentify task.
 
 Restart continuity is owned by the Explorer and specified once in
 `references/parallel-research-workflow.md`; this Skill keeps the mode loop and
@@ -83,18 +83,16 @@ A direction review or bounded methodology audit inside the active
 user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes each exact
-assignment, review mode and standalone `RAW_QUESTION`. Place only currently
-eligible frozen questions in one ordered manifest and send one
-`AGENTIFY_REVIEW_BATCH_REQUEST` to the dedicated Agentify task. Continue
-unrelated research while it runs. On one `AGENTIFY_REVIEW_BATCH_RESULT`, archive
-each named successful raw response under its review item and reconcile it; an
-item error affects only that review. Pro/Gemini labels and all local metadata
+assignment, review mode and standalone `RAW_QUESTION`. Send each currently
+eligible frozen question as one `AGENTIFY_REVIEW_REQUEST` to the dedicated
+Agentify task. Continue unrelated research while it runs. On
+`AGENTIFY_REVIEW_RESULT`, archive the raw response under its review item and
+reconcile it; an error affects only that review. Pro/Gemini labels and all local metadata
 stay outside the transmitted question. Page, adapter and recovery details
 remain inside the Agentify task.
 
-Before freezing the manifest, check once that every item names its expected
-reviewer model and that the raw question contains no local filesystem path,
-task history or unrelated corpus. Use a public remote GitHub URL when the
+Before sending, check once that the raw question contains no local filesystem
+path, task history or unrelated corpus. Use a public remote GitHub URL when the
 reviewer needs a source locator. Do not turn this checklist into a script,
 fingerprint or approval gate.
 
@@ -106,8 +104,8 @@ confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
 check. Never compare candidates or turn either review into project adoption.
 
-An item `ERROR` affects only that review; Explorer continues unrelated research
-and may include a new frozen question in a later batch.
+An `ERROR` affects only that review; Explorer continues unrelated research and
+may resend the unchanged question path without modifying research files.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating

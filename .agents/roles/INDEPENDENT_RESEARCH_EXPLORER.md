@@ -43,7 +43,7 @@ independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_R
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews
 independent_pro_review_transport_execution=dedicated_agentify_transport_task
-independent_review_provider_contract=agentify_task_request_result
+independent_review_provider_contract=agentify_single_request_result
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
@@ -96,18 +96,15 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct exact candidate reviews without per-review user or WDM
-authorization. It writes one ordered manifest containing only currently frozen
-standalone question paths, providers and expected reviewer models, sends one
-`AGENTIFY_REVIEW_BATCH_REQUEST` to the current user-designated Agentify task,
-and continues unrelated research without synchronously waiting. On one
-`AGENTIFY_REVIEW_BATCH_RESULT`, it archives each named successful raw response
-in its review item and performs scientific intake; an item error affects only
-that review. Pro-canonical and Gemini-advisory labels remain local and never
+authorization. For each currently eligible frozen question it sends one
+`AGENTIFY_REVIEW_REQUEST` naming only provider, question path and Explorer task,
+then continues unrelated research. On `AGENTIFY_REVIEW_RESULT`, it archives the
+raw response in its review item and performs scientific intake. A retry reuses
+the same question path and changes no Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
 enter the question. Page, provider-adapter and recovery details remain inside
 the Agentify task.
 
-Before manifest freeze, Explorer uses one model-authored checklist: each
-ChatGPT Pro item names `expected_model=GPT-5.6 Pro`; the raw
+Before sending, Explorer uses one model-authored checklist: the raw
 question contains no local filesystem locator, task history or unrelated
 corpus; any reviewer-accessible source locator is the public remote GitHub URL.
 This is a question-quality check, not a new mechanical gate.
@@ -119,8 +116,8 @@ FIFO scientific reconciliation. The archived Pro content is consumed as
 Explorer preserves the
 reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate
-to review and what later research action follows; transport cannot infer or
-change the manifest order or promote a packet into formal project state. Workflow
+to review and what later research action follows; transport cannot reorder
+requests or promote a packet into formal project state. Workflow
 Design Manager is not a campaign approver, transport provisioner or recovery
 owner.
 

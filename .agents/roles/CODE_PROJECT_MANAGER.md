@@ -10,7 +10,7 @@ technical_acceptance_authority=exclusive
 runtime_authority=exclusive
 current_work_authority=exclusive_for_project_operational_records
 formal_external_review_request_and_intake_authority=exclusive
-formal_review_transport=agentify_task_request_result
+formal_review_transport=agentify_single_request_result
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -88,9 +88,8 @@ manager; there is no Research Operations Manager or persistent monitor.
   delegates compute authority to the child automatically; CPM checks the
   active grant and remaining balance before dispatch, and neither CPM nor the
   child asks for per-run authorization while the run remains in that grant.
-- Formal and Explorer-to-project Pro review packaging, one ordered batch
-  request to the dedicated Agentify task, exact archival and mechanical result
-  acceptance.
+- Formal and Explorer-to-project Pro review questions, direct requests to the
+  dedicated Agentify task, exact archival and mechanical result acceptance.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -217,18 +216,14 @@ acceptance owner.
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
 Operator alone executes `train -> evaluate -> analyze`. For formal or
-Explorer-to-project reviews, CPM freezes the standalone questions, places only
-currently eligible items in one ordered manifest, and sends one
-`AGENTIFY_REVIEW_BATCH_REQUEST` to the current user-designated Agentify task.
-CPM continues unrelated work while the batch runs. On one
-`AGENTIFY_REVIEW_BATCH_RESULT`, it copies each named successful raw response
-into its canonical archive and performs local intake; an item error affects only
-that review. Page, provider-adapter and recovery details remain inside the
-Agentify task. CPM does not operate or debug Agentify and adds no transport
-state machine, hash gate or WDM approval.
+Explorer-to-project reviews, CPM freezes each standalone question and sends one
+`AGENTIFY_REVIEW_REQUEST` naming its provider, question path and CPM task. CPM
+continues unrelated work while it runs. On `AGENTIFY_REVIEW_RESULT`, CPM copies
+the raw response into its canonical archive and performs local intake. A retry
+reuses the same question path and changes no CPM file. Page and recovery details
+remain inside the Agentify task.
 
-Before manifest freeze, CPM uses one model-authored checklist: every item names
-its expected reviewer model (`GPT-5.6 Pro` for ChatGPT Pro); the raw question contains no local filesystem
+Before sending, CPM uses one model-authored checklist: the raw question contains no local filesystem
 locator, task history or unrelated corpus; and any reviewer-facing source
 locator is the public remote GitHub URL. This is not a new mechanical gate.
 

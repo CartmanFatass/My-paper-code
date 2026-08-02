@@ -38,6 +38,9 @@ workflow_design_manager_code_acceptance_authority=none
 workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces
 workflow_design_manager_remote_repository_authority=permanent_user_grant
 workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
+workflow_design_manager_agentify_source_authority=permanent_user_grant_for_hmasd_transport_only
+workflow_design_manager_agentify_workspace=C:/Projects/agentify-desktop
+workflow_design_manager_agentify_git_authority=direct_modify_commit_and_push
 workflow_design_manager_external_review_runtime_authority=none
 workflow_design_manager_experiment_runtime_authority=none
 workflow_design_owner=workflow_design_manager
@@ -72,15 +75,12 @@ independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
 independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
 external_review_transport_execution=dedicated_agentify_transport_task
-agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST
-agentify_transport_request_fields=batch_id|manifest_path|return_task_id
-agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path
+agentify_transport_request=AGENTIFY_REVIEW_REQUEST
+agentify_transport_request_fields=provider|question_path|return_task_id
 agentify_transport_prompt_source=agentify_direct_question_path_read
-agentify_transport_queue_semantics=ordered_persistent_conversation_stop_on_noncompletion
-agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
-agentify_transport_result_fields=batch_id|status|results_path|error
+agentify_transport_result=AGENTIFY_REVIEW_RESULT
+agentify_transport_result_fields=status|response_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
-agentify_transport_item_terminal_status=COMPLETE|ERROR
 agentify_transport_workspace=temp/sessions/agentify_transport_operator
 agentify_transport_skill=hmasd-agentify-transport
 formal_compute_authority=user_only
@@ -154,7 +154,7 @@ locators only and never replace direct contract checks.
 Generic Superpowers Skills are not executed. Use project-native Skills, keep active code small, and use Git as archive. Tests create no approval owner.
 The current HMASD checkout and one valid assignment-ticket worktree are the only agent-writable project directories; every other directory is read-only to project agents, while project-external reads remain allowed.
 Agents do not create, edit, copy, move, delete or redirect files outside that scope and do not create drive mappings, junctions or path aliases. Isolated worktrees are provisioned only by `scripts/hmasd_workspace_ticket.py` beneath `C:/worktrees/HMASD`; raw external `git worktree` is not an authority path.
-A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary.
+A future project-external write requires a new explicit user instruction for its exact target and does not broaden this standing boundary. The standing exception is WDM's permanent grant for HMASD-related transport changes, focused tests, commits and pushes in `C:/Projects/agentify-desktop`; it does not cover unrelated Agentify features.
 
 Before a non-single-step or non-few-step task, perform bounded reconnaissance of
 the live contract/state, actual interfaces, dependencies, ownership/concurrency,
@@ -171,7 +171,7 @@ authority rules decide whether user input is required.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and external-review intake: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. CPM and Explorer submit one ordered batch manifest, continue unrelated work, and later accept one batch result before performing their own archive and intake.
+- Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. CPM and Explorer submit one frozen question path per request, continue unrelated work, and later accept its response before performing their own archive and intake. A retry reuses the same question file and requires no requester-side file change.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.

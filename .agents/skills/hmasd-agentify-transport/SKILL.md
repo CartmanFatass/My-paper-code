@@ -1,137 +1,50 @@
 ---
 name: hmasd-agentify-transport
-description: Use only in the dedicated Agentify Transport Operator task to process one ordered review batch and return its raw responses.
+description: Use only in the dedicated Agentify Transport Operator task to send one frozen review question and return its raw response.
 ---
 
 # HMASD Agentify Transport
 
 ## Boundary
 
-This Skill grants only the runtime authority in
-`.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`. It performs no science,
-archival intake, workflow design, code, Git or project-state work.
-
-The batch request fields are:
+The request is exactly:
 
 ```text
-batch_id|manifest_path|return_task_id
+AGENTIFY_REVIEW_REQUEST
+provider=<chatgpt|gemini>
+question_path=<absolute frozen UTF-8 question file>
+return_task_id=<requester task>
 ```
 
-The manifest is JSON with the same `batch_id` and one ordered `items` array.
-Every item has exactly:
-
-```text
-request_id|review_channel|provider|expected_model|question_path
-```
-
-`provider` is `chatgpt` or `gemini`. Preserve manifest order. Runtime page
-identity is not a requester field. For each provider, the unique existing
-`protectedTab=true` entry from `agentify_tabs` is its persistent ordered
-conversation. Never create a second page. Do not
-read or copy a question through shell output. Pass its literal path to Agentify;
-do not prepend metadata, select science or load
-requester history. A manifest may contain only questions already frozen by the
-requester; a future barrier-dependent follow-up belongs in a later batch.
-
-## Runtime preflight
-
-Before interpreting any tab/key state or attempting an item, run the following
-through the shell with `sandbox_permissions=require_escalated` because Agentify
-Desktop writes its registered isolated profile and launches Chrome:
-
-```powershell
-& .agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
-```
-
-The required profile is `C:\Users\fires\.agentify-desktop\chrome-user-data`
-with profile directory `Default`. Do not move it to `C:\tmp`, create another profile or substitute
-a bare Chrome launch. If escalation is denied, report that exact internal
-runtime error to WDM and keep the batch pending.
-
-Require its `AGENTIFY_RUNTIME_READY` receipt, then call `agentify_tabs` once and
-one scoped `agentify_status`. Before a send, require exactly one provider-matching
-tab whose `protectedTab=true`; use its tool-returned key directly. A missing
-Agentify service, browser process or unique pinned tab
-is an Operator runtime defect, not an item result.
-Repair the runtime and repeat only this preflight. If it still
-fails, report the exact script/tool error to WDM and keep the batch pending; do not send a batch `ERROR` to the requester.
-Residual `tabId`, `activeQuery` or
-`waiting_for_ready` data never proves that Chrome is running. Never claim
-runtime readiness without both actual tool results.
-
-## Mechanical lifecycle
-
-Use only this lifecycle; do not improvise another procedure:
-
-```text
-BOOT -> PAGE -> SEND -> WAIT -> ARCHIVE -> COMPLETE
-              \-> page/tab/controller closed or controls not ready -> same key -> retry once
-SEND or WAIT error with activeQuery -> WAIT the same query without another send
-recovery exhausted -> ERROR
-```
-
-`COMPLETE` and `ERROR` are the only terminal states. A closed page is a
-recoverable event, not a terminal state. This lifecycle replaces scattered
-fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
+The Operator performs no science, intake, workflow design, code, Git or project
+state work. It sends only the exact question file. Shell output, metadata,
+attachments, context bundles and requester history never enter the prompt.
 
 ## Normal path
 
-1. Complete the runtime preflight, then read and validate the manifest. If the
-   manifest cannot be read or processing cannot
-   begin, send one `AGENTIFY_REVIEW_BATCH_RESULT` with `status=ERROR`; do not
-   attempt any item.
-2. For every item in manifest order, call
-   `agentify_query` once with exactly `key=<pinned tab tool-returned key>`, `model=provider`,
-   `expectedModel=expected_model`, `promptPath=question_path`, and
-   `timeoutMs=2700000`. A ChatGPT Pro item uses the exact visible label `Pro`. On the existing
-   pinned idle page, `agentify_query` internally uses Agentify's model selector:
-   it keeps a matching model or selects the exact target and confirms it before
-   typing. The Operator does not call or emulate a separate selector. If that target is unavailable, record item
-   `ERROR` before send. Omit `prompt`. Omit every optional content field, including
-   `contextPaths`, `attachments`, `bundleName` and `promptPrefix`. Agentify reads
-   the exact UTF-8 question file itself; shell stdout/stderr, receipts, warnings,
-   paths and diagnostics never enter the prompt. The tool owns
-   whole-payload insertion, one send and the natural-completion wait.
-3. On success, write the actual returned assistant text to
-   `temp/sessions/agentify_transport_operator/<batch_id>/<request_id>/response.md`
-   and record item `status=COMPLETE`. On error, perform the single read-only
-   key check and the matching fallback below before assigning a terminal item
-   status. `Pro thinking`, a timeout, an incomplete fragment or uncertain page
-   state is not a response and never advances the manifest. Record `ERROR` only
-   after the one applicable recovery is exhausted, then stop the batch without
-   sending any later item.
-4. After every item is terminal, write the ordered item results to
-   `temp/sessions/agentify_transport_operator/<batch_id>/results.json` and send
-   one `AGENTIFY_REVIEW_BATCH_RESULT` to `return_task_id` with
-   `status=COMPLETE` only when every item completed, otherwise `status=ERROR`,
-   the results path and the real batch error, using
-   Codex-native `send_message_to_thread` without model or thinking overrides.
+1. At task start, run `scripts/ensure_agentify_runtime.ps1` once. Require its
+   ready receipt and one provider-matching `protectedTab=true` page.
+2. Call `agentify_query` with the page's tool-returned key, `provider`,
+   `promptPath=question_path` and `timeoutMs=2700000`. For ChatGPT pass
+   `expectedModel=Pro`; Agentify owns model selection, whole-file insertion, one
+   send and the natural-completion wait.
+3. Write the returned new assistant text under
+   `temp/sessions/agentify_transport_operator/` and send:
 
-Batch `COMPLETE` means every registered item succeeded. Process one batch at a time. Native task
-messages supply the inter-batch queue; do not add a registry or scheduler.
+```text
+AGENTIFY_REVIEW_RESULT
+status=COMPLETE|ERROR
+response_path=<path or empty>
+error=<empty or actual error>
+```
 
-## One simple fallback
+## One fallback
 
-After an error, call `agentify_status` once for the same pinned page key. If it returns
-`tab_not_found` or status proves the page/tab/controller was closed, rerun the
-runtime preflight once and require the same provider's unique pinned page to
-reappear; never create another page. If it reappears idle, call
-`agentify_query` one more time with its returned key and the exact same provider,
-expected model, question and timeout. This is
-the only retry and it is never delegated back to the requester. A
-`model_switcher_unavailable` error does not authorize a new page: re-check the
-same pinned page once and retry there only. If the same page
-still has an active query, call `agentify_wait_response` once with the same key,
-provider and timeout and never resend.
-That blocking call sends nothing and returns only after natural completion. Write
-and return its response exactly like the normal path. If the wait also errors
-while the query remains active, report the exact runtime defect to WDM and keep
-the affected item pending; do not relabel it as a scientific/reviewer failure or
-return it to the requester. If the one page-recovery query also fails, record the
-real item error and stop the batch.
-Do not navigate, switch pages, use `agentify_review_query`, recover an old response, create a
-monitor or invent another recovery path.
+After an error, read the same page status once. If a query is active, wait for
+that query without sending. If the page is idle and no response was produced,
+repeat the same `agentify_query` once with the unchanged `question_path`.
+Otherwise return the actual error. Never ask the requester to rewrite a question,
+manifest, batch, identifier or archive merely to retry transport.
 
-Item `COMPLETE` requires the actual query response and file-write results. Batch
-`COMPLETE` requires the results-file and message-delivery results.
-Never claim an action that no tool result proves.
+Do not create another page, switch conversations, send a placeholder, use
+Answer now, or claim completion without the actual returned assistant response.
