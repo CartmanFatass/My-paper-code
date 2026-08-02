@@ -17,10 +17,13 @@ import optuna
 import argparse
 import logging
 from datetime import datetime
+from pathlib import Path
 
 # 添加项目根目录到 Python 路径
-project_root = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, project_root)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+LOG_DIR = PROJECT_ROOT.parent / "tf-logs"
+DEFAULT_STORAGE = f"sqlite:///{Path(__file__).with_name('hmasd_optuna.db').as_posix()}"
+sys.path.insert(0, str(PROJECT_ROOT))
 
 # 导入训练函数和配置
 from train_multiproc_config_1 import train, get_device, make_env, parse_args as parse_train_args
@@ -111,7 +114,7 @@ def objective(trial):
     train_args.config = 'config_1'  # 使用基础配置
     train_args.scenario = 4  # 强制中继模式
     train_args.model_path = f'models/optuna_trial_{trial.number}.pt'
-    train_args.log_dir = '../tf-logs'
+    train_args.log_dir = str(LOG_DIR)
     train_args.log_level = 'warning'
     train_args.console_log_level = 'error'
 
@@ -227,7 +230,7 @@ def main():
                        help='优化试验的数量')
     parser.add_argument('--study_name', type=str, default='hmasd_hyperopt',
                        help='Optuna study 名称')
-    parser.add_argument('--storage', type=str, default='sqlite:///hmasd_optuna.db',
+    parser.add_argument('--storage', type=str, default=DEFAULT_STORAGE,
                        help='Optuna 存储路径')
     parser.add_argument('--direction', type=str, default='maximize',
                        choices=['maximize', 'minimize'],
@@ -242,12 +245,12 @@ def main():
     args = parser.parse_args()
 
     # 初始化日志系统
-    os.makedirs('../tf-logs', exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     log_file = f"optuna_optimization_{timestamp}.log"
 
     init_multiproc_logging(
-        log_dir='../tf-logs',
+        log_dir=str(LOG_DIR),
         log_file=log_file,
         file_level=logging.INFO,
         console_level=logging.WARNING
