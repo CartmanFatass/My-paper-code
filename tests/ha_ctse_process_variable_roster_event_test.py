@@ -11,6 +11,9 @@ from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.r30_fixed_clock import FixedClockAREditPolicy
+from ha_ctse_process.standalone_contracts import (
+    enforce_variable_roster_event_contract,
+)
 from ha_ctse_process.variable_roster_event import (
     ACTIVE,
     EVENT_ARCHITECTURE_SCHEMA_VERSION,
@@ -677,7 +680,7 @@ def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(m
         r31_effect_mode="off",
         num_envs=1,
     )
-    process_train.enforce_variable_roster_event_contract(config, args, None)
+    enforce_variable_roster_event_contract(config, args, None)
 
     def forbidden_collector(*_args, **_kwargs):
         raise AssertionError("collector construction must not occur")

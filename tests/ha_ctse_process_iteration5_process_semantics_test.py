@@ -42,6 +42,8 @@ from ha_ctse_process.train import (
     _evaluate_iteration5_spatial_model,
     _make_event_model_owner,
     _make_event_runtime,
+)
+from ha_ctse_process.standalone_contracts import (
     enforce_iteration5_process_semantics_contract,
     is_iteration5_process_semantics,
 )

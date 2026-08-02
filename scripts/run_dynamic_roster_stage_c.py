@@ -552,7 +552,9 @@ def _preflight_validate(commands: Mapping[str, Sequence[str]]) -> dict[str, Any]
     """Validate the frozen package without constructing an environment or trainer."""
 
     from ha_ctse_process.config import Config
-    from ha_ctse_process.train import enforce_variable_roster_event_contract
+    from ha_ctse_process.standalone_contracts import (
+        enforce_variable_roster_event_contract,
+    )
     from ha_ctse_process.variable_roster_event import (
         CHECKPOINT_SCHEMA_VERSION,
         EVENT_ARCHITECTURE_SCHEMA_VERSION,
