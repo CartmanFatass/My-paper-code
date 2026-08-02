@@ -20,6 +20,7 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process import event_held_commitment_link
+from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
 from ha_ctse_process import event_commitment_replay
 from ha_ctse_process.event_commitment_collector import (
@@ -45,20 +46,22 @@ from ha_ctse_process.event_commitment_rng import (
     replay_rng_schedule_end_state,
 )
 from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
-from ha_ctse_process.event_held_commitment_link import (
-    EVENT_INPUT_DIM,
+from ha_ctse_process.event_commitment_audit import (
     AUDIT_BRANCHES,
     AUDIT_STREAM_NAMES,
-    MARK_DIM,
-    OPPORTUNITY_SUPPORT,
     _nested_equal,
     _rng_states,
+    audit_opportunities_batched,
+    audit_single_opportunity,
+)
+from ha_ctse_process.event_held_commitment_link import (
+    EVENT_INPUT_DIM,
+    MARK_DIM,
+    OPPORTUNITY_SUPPORT,
     action_distribution_tv,
     batched_natural_and_permuted_action_tv,
     compare_continuations,
     factor_counts,
-    audit_opportunities_batched,
-    audit_single_opportunity,
     initialize_arms,
     load_checkpoint,
     nested_state_maximum_difference,
@@ -1084,7 +1087,7 @@ def test_cpu_stage2_natural_continuation_diagnostic(
 ) -> None:
     """Expose the exact pre-repair CPU drift without admitting it."""
 
-    original = event_held_commitment_link._audit_row_errors
+    original = event_commitment_audit._audit_row_errors
 
     def diagnostic_errors(
         branch: Any, branch_index: int, collected: Any, original_env: int,
@@ -1094,7 +1097,7 @@ def test_cpu_stage2_natural_continuation_diagnostic(
             branch, branch_index, collected, original_env, start=start
         )
         worst: dict[str, Any] | None = None
-        for field in event_held_commitment_link._AUDIT_CONTINUOUS_FIELDS:
+        for field in event_commitment_audit._AUDIT_CONTINUOUS_FIELDS:
             replayed = getattr(branch, field)[:, branch_index].detach().cpu()
             stored = getattr(collected, field)[start:, original_env].detach().cpu()
             difference = torch.abs(replayed - stored)
@@ -1268,7 +1271,8 @@ def test_raw_pre_outcome_trace_is_minimal_and_origin_bound(
 
 def test_no_active_legacy_or_scalar_audit_cuda_path() -> None:
     legacy_prefix, legacy_schema = "fork" + "_", "natural" + "_fork"
-    production = [Path(event_held_commitment_link.__file__), Path(benchmark_runner.__file__),
+    production = [Path(event_commitment_audit.__file__),
+                  Path(event_held_commitment_link.__file__), Path(benchmark_runner.__file__),
                   Path(__file__).parents[1] / "ha_ctse_process" / "noncalendar_commitment_testbed.py"]
     for path in production:
         source = path.read_text(encoding="utf-8")
@@ -1279,7 +1283,7 @@ def test_no_active_legacy_or_scalar_audit_cuda_path() -> None:
         assert legacy_schema not in swept, path
     assert "audit_single_opportunity(" not in Path(benchmark_runner.__file__).read_text(encoding="utf-8")
     import ast
-    tree = ast.parse(Path(event_held_commitment_link.__file__).read_text(encoding="utf-8"))
+    tree = ast.parse(Path(event_commitment_audit.__file__).read_text(encoding="utf-8"))
     function = next(node for node in tree.body if isinstance(node, ast.FunctionDef)
                     and node.name == "audit_opportunities_batched")
     for loop in (node for node in ast.walk(function) if isinstance(node, (ast.For, ast.While))):
@@ -3467,7 +3471,7 @@ def test_canonical_stage2_runtime_continuous_tolerance_boundary(
     device: torch.device, causal_audit_oracle_bundle: dict[str, Any],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    original = event_held_commitment_link._audit_row_errors
+    original = event_commitment_audit._audit_row_errors
     forced_error = CAUSAL_AUDIT_CONTINUOUS_ATOL
 
     def boundary_error(*args: Any, **kwargs: Any) -> dict[str, Any]:
@@ -3476,7 +3480,7 @@ def test_canonical_stage2_runtime_continuous_tolerance_boundary(
         return errors
 
     monkeypatch.setattr(
-        event_held_commitment_link, "_audit_row_errors", boundary_error
+        event_commitment_audit, "_audit_row_errors", boundary_error
     )
     accepted = audit_opportunities_batched(
         causal_audit_oracle_bundle["arm"],

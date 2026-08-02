@@ -37,7 +37,6 @@ from ha_ctse_process.event_held_commitment_link import (
     collection_rng_schedules,
     compare_continuations,
     factor_counts,
-    audit_opportunities_batched,
     initialize_arms,
     load_checkpoint,
     make_training_state,
@@ -54,6 +53,7 @@ from ha_ctse_process.event_held_commitment_link import (
     save_checkpoint,
     validate_rng_binding,
 )
+from ha_ctse_process.event_commitment_audit import audit_opportunities_batched
 from ha_ctse_process.event_commitment_collector import collect_trajectory
 from ha_ctse_process.event_commitment_replay import (
     replay_errors,
