@@ -25,7 +25,7 @@ $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 $explorerNormalized = $explorer -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($cpm, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'), @($cpm, 'transport_owner=code_project_manager'), @($explorer, 'persistent_explorer_session_direct'), @($explorer, 'hmasd-independent-research-explorer-pro'), @($explorer, 'hmasd-independent-research-explorer-gemini'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'provider=chatgpt|gemini'), @($agentifySkillNormalized, 'standalone `RAW_QUESTION`'), @($agentifySkillNormalized, '`present=false`'), @($agentifySkillNormalized, 'first ChatGPT binding'), @($agentifyContractNormalized, 'transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen'), @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "e9f636740bf94d7db260c8817554904cdcb68870"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($cpm, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'), @($cpm, 'transport_owner=code_project_manager'), @($explorer, 'persistent_explorer_session_direct'), @($explorer, 'hmasd-independent-research-explorer-pro'), @($explorer, 'hmasd-independent-research-explorer-gemini'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'provider=chatgpt|gemini'), @($agentifySkillNormalized, 'standalone `RAW_QUESTION`'), @($agentifySkillNormalized, '`present=false`'), @($agentifySkillNormalized, 'first ChatGPT binding'), @($agentifyContractNormalized, 'transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen_or_exact_default_tab_adoption'), @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query_unless_explicit_exact_default_tab_adoption'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "2e5e0ecbe70a13a34f947daa0c57a53b450e5d59"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
@@ -58,7 +58,7 @@ foreach ($entry in @(
         throw "Existing-tab-only Agentify contract missing: $($entry[1])"
     }
 }
-$tabPreflightCall = $agentifyScript.IndexOf('tab_id = _require_preexisting_review_tab(')
+$tabPreflightCall = $agentifyScript.IndexOf('tab_id, adopting = _require_preexisting_review_tab(')
 $reviewQueryCall = $agentifyScript.IndexOf('f"{base}/review-query"')
 if ($tabPreflightCall -lt 0 -or $reviewQueryCall -lt 0 -or $tabPreflightCall -ge $reviewQueryCall) {
     throw 'Existing-tab proof does not precede Agentify review-query'

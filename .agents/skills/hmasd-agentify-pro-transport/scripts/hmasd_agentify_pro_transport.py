@@ -23,7 +23,7 @@ MAX_TIMEOUT_MS = 45 * 60 * 1000
 SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
-AGENTIFY_REQUIRED_COMMIT = "e9f636740bf94d7db260c8817554904cdcb68870"
+AGENTIFY_REQUIRED_COMMIT = "2e5e0ecbe70a13a34f947daa0c57a53b450e5d59"
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
@@ -273,8 +273,9 @@ def _require_preexisting_review_tab(
     *,
     require_send_ready: bool = True,
     allow_tab_creation: bool = False,
+    adopt_existing_tab: bool = False,
     state_dir: Path,
-) -> str:
+) -> tuple[str, bool]:
     """Prove exact tab identity; new sends additionally require a ready prompt."""
     expected_url = request["conversation_url"]
     transport_path = state_dir.resolve(strict=False) / "review-transport.json"
@@ -297,6 +298,17 @@ def _require_preexisting_review_tab(
         for tab in tabs
         if isinstance(tab, dict) and tab.get("key") == request["stable_key"]
     ]
+    adopting = False
+    if not matches and adopt_existing_tab:
+        matches = [
+            tab
+            for tab in tabs
+            if isinstance(tab, dict)
+            and tab.get("key") in (None, "default")
+            and tab.get("vendorId") == request["provider"]
+            and tab.get("url") == expected_url
+        ]
+        adopting = bool(matches)
     if not matches and allow_tab_creation:
         if transport_path.exists():
             transport = _load_json(transport_path)
@@ -348,10 +360,11 @@ def _require_preexisting_review_tab(
         or not isinstance(status_tabs, list)
     ):
         _fail("agentify_preexisting_tab_status_invalid")
+    expected_key = tab.get("key") if adopting else request["stable_key"]
     status_matches = [
         row
         for row in status_tabs
-        if isinstance(row, dict) and row.get("key") == request["stable_key"]
+        if isinstance(row, dict) and row.get("key") == expected_key
     ]
     if (
         len(status_matches) != 1
@@ -376,7 +389,7 @@ def _require_preexisting_review_tab(
         )
     ):
         _fail("agentify_preexisting_tab_busy")
-    return tab_id
+    return tab_id, adopting
 
 
 def _agentify_session(
@@ -385,7 +398,9 @@ def _agentify_session(
     *,
     require_send_ready: bool = True,
     allow_tab_creation: bool = False,
-) -> tuple[str, str, str]:
+    adopt_existing_tab: bool = False,
+    return_adoption: bool = False,
+) -> tuple[str, str, str] | tuple[str, str, str, bool]:
     if not state_dir.is_absolute():
         _fail("agentify_state_dir_not_absolute")
     state_dir = state_dir.resolve(strict=False)
@@ -408,14 +423,17 @@ def _agentify_session(
         or health.get("sourceDirty") is not False
     ):
         _fail("agentify_server_identity_mismatch")
-    tab_id = _require_preexisting_review_tab(
+    tab_id, adopting = _require_preexisting_review_tab(
         base,
         token,
         request,
         require_send_ready=require_send_ready,
         allow_tab_creation=allow_tab_creation,
+        adopt_existing_tab=adopt_existing_tab,
         state_dir=state_dir,
     )
+    if return_adoption:
+        return base, token, tab_id, adopting
     return base, token, tab_id
 
 
@@ -425,18 +443,24 @@ def call_agentify(
     state_dir: Path,
     verify_existing: bool,
     allow_tab_creation: bool = False,
+    adopt_existing_tab: bool = False,
 ) -> dict[str, Any]:
-    base, token, _ = _agentify_session(
+    base, token, tab_id, adopting = _agentify_session(
         request,
         state_dir,
         require_send_ready=not verify_existing,
         allow_tab_creation=allow_tab_creation,
+        adopt_existing_tab=adopt_existing_tab,
+        return_adoption=True,
     )
     timeout_seconds = request["timeout_ms"] / 1000.0 + 30.0
+    body = agentify_body(request, verify_existing=verify_existing)
+    if adopting:
+        body["existingTabId"] = tab_id
     result = _http_json(
         f"{base}/review-query",
         token=token,
-        body=agentify_body(request, verify_existing=verify_existing),
+        body=body,
         timeout_seconds=timeout_seconds,
     )
     if result.get("ok") is not True or not isinstance(result.get("receipt"), dict):
@@ -763,6 +787,10 @@ def command_prepare(args: argparse.Namespace) -> None:
 
 
 def command_submit_worker(args: argparse.Namespace) -> None:
+    if bool(getattr(args, "allow_tab_creation", False)) and bool(
+        getattr(args, "adopt_existing_tab", False)
+    ):
+        _fail("agentify_tab_mode_conflict")
     request, _, repo_root = _validated_inputs(args.request)
     receipt_path = _require_within(
         args.receipt,
@@ -774,6 +802,7 @@ def command_submit_worker(args: argparse.Namespace) -> None:
         state_dir=args.state_dir,
         verify_existing=args.verify_existing,
         allow_tab_creation=bool(getattr(args, "allow_tab_creation", False)),
+        adopt_existing_tab=bool(getattr(args, "adopt_existing_tab", False)),
     )
     validate_receipt(receipt, request)
     _atomic_write_new(receipt_path, _receipt_bytes(receipt))
@@ -799,6 +828,8 @@ def _spawn_submit_worker(args: argparse.Namespace, verify_existing: bool) -> sub
         command.append("--verify-existing")
     if bool(getattr(args, "allow_tab_creation", False)):
         command.append("--allow-tab-creation")
+    if bool(getattr(args, "adopt_existing_tab", False)):
+        command.append("--adopt-existing-tab")
     return subprocess.Popen(
         command,
         cwd=str(_repo_root()),
@@ -827,6 +858,10 @@ def _complete_from_existing(
 
 
 def command_submit(args: argparse.Namespace) -> None:
+    if bool(getattr(args, "allow_tab_creation", False)) and bool(
+        getattr(args, "adopt_existing_tab", False)
+    ):
+        _fail("agentify_tab_mode_conflict")
     request, _, repo_root = _validated_inputs(args.request)
     receipt_path = _require_within(
         args.receipt,
@@ -893,11 +928,12 @@ def command_submit(args: argparse.Namespace) -> None:
         )
         _fail("post_send_blocked_existing_operation_incomplete")
 
-    _, _, tab_id = _agentify_session(
-        request,
-        args.state_dir,
-        allow_tab_creation=bool(getattr(args, "allow_tab_creation", False)),
-    )
+    session_options: dict[str, bool] = {
+        "allow_tab_creation": bool(getattr(args, "allow_tab_creation", False))
+    }
+    if bool(getattr(args, "adopt_existing_tab", False)):
+        session_options["adopt_existing_tab"] = True
+    _, _, tab_id = _agentify_session(request, args.state_dir, **session_options)
     _emit_lifecycle("TAB_READY", tab_id=tab_id)
     worker = _spawn_submit_worker(args, False)
     _emit_lifecycle("DISPATCH_STARTED", worker_pid=worker.pid)
@@ -1114,6 +1150,7 @@ def build_parser() -> argparse.ArgumentParser:
             )
             command.add_argument("--verify-existing", action="store_true")
             command.add_argument("--allow-tab-creation", action="store_true")
+            command.add_argument("--adopt-existing-tab", action="store_true")
             command.set_defaults(
                 handler=command_submit if name == "submit" else command_submit_worker
             )

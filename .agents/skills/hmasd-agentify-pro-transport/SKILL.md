@@ -36,7 +36,11 @@ Conversation URL, ID, model and credentials are live runtime values. A stable
 key is immutable after its first persisted binding and later turns reuse the
 same page. `/health` must report the wrapper's pinned Agentify commit with
 `sourceDirty=false`. Before a normal send, authenticated `/tabs` and scoped
-`/status` must show one exact, idle, unblocked and prompt-visible page.
+`/status` must show one exact, idle, unblocked and prompt-visible page. When
+that exact already-live page is still registered only as Agentify's `default`
+tab, one explicit `submit --adopt-existing-tab` may assign the durable stable
+key in place. Adoption requires one exact URL/provider match and performs no
+create, show, navigation, refresh or binding change.
 
 ## Plan first and RAW_QUESTION only
 
@@ -116,13 +120,17 @@ it never requires local assignment metadata to appear in the question.
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
   .agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py `
   submit --request <absolute-request.json> --receipt <new-absolute-receipt.json> `
-  [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
+  [--state-dir <absolute-agentify-state-dir>] [--verify-existing] `
+  [--adopt-existing-tab]
 ```
 
 `submit` proves the exact ready page, calls strict `/review-query` once and
 observes the durable operation. Process existence is never send evidence.
 `--verify-existing` only observes. Neither mode clicks response controls or
 uses an alternate transport.
+`--adopt-existing-tab` is limited to one unique exact existing-binding page
+whose current Agentify key is `default` or empty; it changes only that in-memory
+key before the same strict send path.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `

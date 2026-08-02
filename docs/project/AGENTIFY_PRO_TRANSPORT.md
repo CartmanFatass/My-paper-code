@@ -14,8 +14,8 @@ stable_key_tab_policy=one_live_tab_per_stable_key
 providers=chatgpt|gemini
 provider_workflow=one_parameterized_strict_review_interface
 reviewer_payload=standalone_RAW_QUESTION_only
-transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen
-missing_or_mismatched_tab=fail_before_review_query
+transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen_or_exact_default_tab_adoption
+missing_or_mismatched_tab=fail_before_review_query_unless_explicit_exact_default_tab_adoption
 prompt_visible_required_before_send=true
 process_existence_is_send_evidence=false
 transport_lifecycle=prepare|submit_once|verify_natural_completion|archive_exact_response
@@ -48,6 +48,10 @@ activates, navigates, refreshes, replaces or rebinds a page. The explicit
 binding or post-restart recovery. A missing, duplicate, blocked, busy or
 mismatched tab is otherwise terminal for that operation; the transport does
 not fall back to another tab or window.
+For an existing durable binding, `--adopt-existing-tab` may instead rename one
+unique already-live exact URL/provider tab whose current key is only `default`
+or empty. This creates no page, performs no navigation and leaves the durable
+conversation binding unchanged.
 Conversation IDs, URLs, model evidence, credentials, authentication material
 and live registrations are runtime-only and must never be committed or placed
 in role/Skill text. The binding is loaded from the local Agentify state at the

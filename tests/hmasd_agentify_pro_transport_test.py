@@ -574,6 +574,64 @@ class AgentifyTransportTest(unittest.TestCase):
         self.assertFalse(any("/tabs/create" in url or "/tabs/close" in url or "/navigate" in url for url in urls))
         self.assertTrue(urls[-1].endswith("/review-query"))
 
+    def test_call_agentify_adopts_one_exact_default_tab_without_page_creation(self) -> None:
+        state_dir = self._write_live_agentify_state()
+        calls: list[tuple[str, dict[str, object] | None]] = []
+        default_tab = self._live_tab(key="default")
+        default_status = self._idle_status(tabs=[default_tab])
+
+        def fake_http(
+            url: str,
+            *,
+            token: str | None = None,
+            body: dict[str, object] | None = None,
+            timeout_seconds: float = 10.0,
+        ) -> dict[str, object]:
+            del timeout_seconds
+            calls.append((url, body))
+            if url.endswith("/health"):
+                self.assertIsNone(token)
+                return {
+                    "ok": True,
+                    "serverId": "server-1",
+                    "sourceCommit": MODULE.AGENTIFY_REQUIRED_COMMIT,
+                    "sourceDirty": False,
+                }
+            self.assertEqual(token, "token")
+            if url.endswith("/tabs"):
+                return {"ok": True, "tabs": [default_tab]}
+            if "/status?" in url:
+                return default_status
+            if url.endswith("/review-query"):
+                self.assertEqual(body["existingTabId"], "tab-1")
+                return {"ok": True, "receipt": self.receipt}
+            self.fail(f"unexpected Agentify endpoint: {url}")
+
+        with mock.patch.object(MODULE, "_http_json", side_effect=fake_http):
+            result = MODULE.call_agentify(
+                self.validated,
+                state_dir=state_dir,
+                verify_existing=False,
+                adopt_existing_tab=True,
+            )
+        self.assertEqual(result, self.receipt)
+        urls = [url for url, _ in calls]
+        self.assertFalse(any("/tabs/create" in url or "/navigate" in url for url in urls))
+
+    def test_adoption_and_creation_flags_fail_before_agentify_call(self) -> None:
+        args = SimpleNamespace(
+            request=self.root / "unused-request.json",
+            receipt=self.root / "unused-receipt.json",
+            state_dir=self.root / "agentify-state",
+            verify_existing=False,
+            allow_tab_creation=True,
+            adopt_existing_tab=True,
+        )
+        with mock.patch.object(MODULE, "_http_json") as http_json:
+            with self.assertRaisesRegex(MODULE.TransportError, "agentify_tab_mode_conflict"):
+                MODULE.command_submit(args)
+        http_json.assert_not_called()
+
     def test_preexisting_tab_inventory_failures_never_reach_review_query(self) -> None:
         cases = [
             ([], "agentify_preexisting_tab_missing"),
