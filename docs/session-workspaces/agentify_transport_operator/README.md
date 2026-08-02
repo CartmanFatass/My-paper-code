@@ -13,3 +13,8 @@ project state is stored here.
 Each manifest item names `expected_model`; `agentify_query` keeps or selects that
 exact model before typing (`GPT-5.6 Pro` for ChatGPT Pro). The operator never
 supplies `contextPaths`, attachments, bundles or a prefix.
+
+One post-error `agentify_status` check distinguishes an idle key from a key
+still occupied by an active query. The latter stops all later sends on that key
+while unrelated keys may continue. Any item error makes the batch result
+`ERROR`; no retry, monitor or recovery workflow is added.

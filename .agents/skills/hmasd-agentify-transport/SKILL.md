@@ -46,24 +46,30 @@ requester; a future barrier-dependent follow-up belongs in a later batch.
 3. On success, write the actual returned assistant text to
    `temp/sessions/agentify_transport_operator/<batch_id>/<request_id>/response.md`
    and record item `status=COMPLETE`. On error, record item `status=ERROR` and
-   continue to the next item.
+   perform the single read-only key check below. If the key is idle, continue
+   normally. If the key still has an active query, make no later send on that
+   key and record its remaining items as `ERROR`; items on other keys may
+   continue.
 4. After every item is terminal, write the ordered item results to
    `temp/sessions/agentify_transport_operator/<batch_id>/results.json` and send
    one `AGENTIFY_REVIEW_BATCH_RESULT` to `return_task_id` with
-   `status=COMPLETE`, the results path and an empty batch error, using
+   `status=COMPLETE` only when every item completed, otherwise `status=ERROR`,
+   the results path and the real batch error, using
    Codex-native `send_message_to_thread` without model or thinking overrides.
 
-Batch `COMPLETE` means every registered item was attempted and recorded; it
-does not imply every item succeeded. Process one batch at a time. Native task
+Batch `COMPLETE` means every registered item succeeded. Process one batch at a time. Native task
 messages supply the inter-batch queue; do not add a registry or scheduler.
 
 ## One simple fallback
 
-Never call `agentify_query` twice for one item. If it errors while the same
-page is already generating, call `agentify_wait_response` once with the same key,
-provider and timeout. That blocking call sends nothing and returns only after
-natural completion. Write and return its response exactly like the normal path.
-If it also errors, record item `status=ERROR` with the real error and continue.
+Never call `agentify_query` twice for one item. After an error, call
+`agentify_status` once for the same key. If the same page is already generating,
+call `agentify_wait_response` once with the same key, provider and timeout.
+That blocking call sends nothing and returns only after natural completion. Write
+and return its response exactly like the normal path. If status shows another
+active phase such as `waiting_for_ready`, or if the wait also errors, mark that
+key unavailable for the remainder of the batch and do not attempt its later
+items. An idle key keeps the ordinary continue-on-error behavior.
 Do not navigate,
 switch keys, use `agentify_review_query`, recover an old response, create a
 monitor or invent another recovery path.
