@@ -11,7 +11,7 @@ while the batch runs. The task loads `hmasd-agentify-transport`; no science or
 project state is stored here.
 
 Each manifest item names `expected_model`; `agentify_query` keeps or selects that
-exact model before typing (`GPT-5.6 Pro` for ChatGPT Pro). The operator never
+exact visible model before typing (`Pro` for ChatGPT Pro). The operator never
 supplies `contextPaths`, attachments, bundles or a prefix.
 
 Every batch begins with the Skill-owned `ensure_agentify_runtime.ps1` service/browser receipt

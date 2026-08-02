@@ -50,8 +50,8 @@ silently or delegates transport repair to the requester.
 
 Before each send the operator passes `expected_model` to the query. Agentify
 keeps the current model when it already matches or selects the exact visible
-target on the existing idle page before typing; a ChatGPT Pro review uses
-`GPT-5.6 Pro`. Provider names are routing hints, not reviewer-model evidence.
+target on the existing idle page before typing; a ChatGPT Pro review uses the
+visible label `Pro`. Provider names are routing hints, not reviewer-model evidence.
 The query contains only the stable key, provider hint, expected model, raw
 question and timeout. Local paths, context bundles, attachments, prefixes and
 requester history are never sent.

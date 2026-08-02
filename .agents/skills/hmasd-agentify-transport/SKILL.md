@@ -76,7 +76,7 @@ fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
 2. For every item in manifest order, read the question once and call
    `agentify_query` once with exactly `key=stable_key`, `model=provider`,
    `expectedModel=expected_model`, the question as `prompt`, and
-   `timeoutMs=2700000`. A ChatGPT Pro item uses `GPT-5.6 Pro`. On the existing
+   `timeoutMs=2700000`. A ChatGPT Pro item uses the exact visible label `Pro`. On the existing
    idle page, Agentify keeps a matching model or selects the exact target and
    confirms it before typing. If that target is unavailable, record item
    `ERROR` before send. Omit every optional content field, including

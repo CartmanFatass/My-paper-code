@@ -44,7 +44,7 @@ foreach ($entry in @(
     @($transportSkill, 'Omit every optional content field'),
     @($transportSkill, '`expectedModel=expected_model`'),
     @($transportSkill, 'selects the exact target and'),
-    @($transportSkill, 'A ChatGPT Pro item uses `GPT-5.6 Pro`'),
+    @($transportSkill, 'A ChatGPT Pro item uses the exact visible label `Pro`'),
     @($transportSkill, 'ensure_agentify_runtime.ps1'),
     @($transportSkill, '`sandbox_permissions=require_escalated`'),
     @($transportSkill, 'Do not move it to `C:\tmp`'),
