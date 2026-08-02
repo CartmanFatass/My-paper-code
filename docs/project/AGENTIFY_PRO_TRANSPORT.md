@@ -45,7 +45,8 @@ conversation URL, idle status and `promptVisible=true` through authenticated
 read-only Agentify endpoints before `/review-query`. It never closes, shows,
 activates, navigates, refreshes, replaces or rebinds a page. The explicit
 `--allow-tab-creation` flag may create one missing tab only for the first
-binding or post-restart recovery. A missing, duplicate, blocked, busy or
+binding or post-restart recovery, then applies one bounded `ensure-ready` to
+that returned exact tab. A missing, duplicate, blocked, busy or
 mismatched tab is otherwise terminal for that operation; the transport does
 not fall back to another tab or window.
 For an existing durable binding, `--adopt-existing-tab` may instead rename one

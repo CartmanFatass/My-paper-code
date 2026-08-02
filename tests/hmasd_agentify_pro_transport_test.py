@@ -682,7 +682,10 @@ class AgentifyTransportTest(unittest.TestCase):
                 if url.endswith("/tabs") and body is None:
                     return {"ok": True, "tabs": [] if len(calls) == 1 else [self._live_tab()]}
                 if url.endswith("/tabs/create"):
-                    return {"ok": True, "tab": self._live_tab()}
+                    return {"ok": True, "tabId": "tab-1"}
+                if url.endswith("/ensure-ready"):
+                    self.assertEqual(body, {"tabId": "tab-1", "timeoutMs": MODULE.TAB_READY_TIMEOUT_MS})
+                    return {"ok": True, "tabId": "tab-1", "state": {"promptVisible": True}}
                 if "/status?" in url:
                     return self._idle_status()
                 self.fail(f"unexpected Agentify endpoint: {url}")
@@ -696,6 +699,7 @@ class AgentifyTransportTest(unittest.TestCase):
                     state_dir=state_dir,
                 )
             self.assertEqual(sum(url.endswith("/tabs/create") for url, _ in calls), 1)
+            self.assertEqual(sum(url.endswith("/ensure-ready") for url, _ in calls), 1)
             return calls
 
         run_creation(restart_binding=False)

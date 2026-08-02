@@ -23,6 +23,7 @@ MAX_TIMEOUT_MS = 45 * 60 * 1000
 SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
+TAB_READY_TIMEOUT_MS = 30_000
 AGENTIFY_REQUIRED_COMMIT = "2e5e0ecbe70a13a34f947daa0c57a53b450e5d59"
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
@@ -318,7 +319,7 @@ def _require_preexisting_review_tab(
             operation_exists = isinstance(operations, dict) and request["idempotency_key"] in operations
             if binding_exists and not operation_exists:
                 _fail("agentify_tab_creation_requires_first_binding_or_restart_recovery")
-        _http_json(
+        created = _http_json(
             f"{base}/tabs/create",
             token=token,
             body={
@@ -329,6 +330,17 @@ def _require_preexisting_review_tab(
             },
             timeout_seconds=10.0,
         )
+        created_tab_id = _required_text(
+            created.get("tabId"), "agentify_created_tab_id", maximum=512
+        )
+        ready = _http_json(
+            f"{base}/ensure-ready",
+            token=token,
+            body={"tabId": created_tab_id, "timeoutMs": TAB_READY_TIMEOUT_MS},
+            timeout_seconds=TAB_READY_TIMEOUT_MS / 1000.0 + 5.0,
+        )
+        if ready.get("ok") is not True or ready.get("tabId") != created_tab_id:
+            _fail("agentify_created_tab_not_ready")
         inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
         tabs = inventory.get("tabs")
         if inventory.get("ok") is not True or not isinstance(tabs, list):

@@ -77,7 +77,9 @@ uses the identical lifecycle.
 
 `--allow-tab-creation` is limited to first ChatGPT binding or reopening the
 same durable page after Agentify restart. It never substitutes or reassigns a
-conversation. A persisted user-message identity is the irreversible boundary:
+conversation. After that one creation, the wrapper calls Agentify's bounded
+`ensure-ready` on the returned exact tab before applying the normal status
+proof. A persisted user-message identity is the irreversible boundary:
 once present, never terminate, resend or switch pages; observe that operation
 through natural completion.
 
