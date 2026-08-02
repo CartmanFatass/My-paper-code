@@ -86,6 +86,77 @@ checkpoints remain diagnostic references; no pooling in either direction.
 The V-K0A panel and its authorization tuple are unchanged (the oracle is
 untouched by this workflow).
 
+## Frozen amendments from the conformance ruling (round 20260801_vk0b_rerun_exposure_conformance, CHANGES_REQUIRED)
+
+**A-W6-1 (shared-optimizer parameter-coverage proof).** Frozen:
+`high_optimizer_semantics = SHARED_ACTOR_VALUE_OPTIMIZER`;
+`high_actor_optimizer_steps = high_value_optimizer_steps =
+high_optimizer_steps_shared` — valid only with the coverage certificate:
+every trainable parameter of the R30 high actor AND of the high value
+module is present in `high_opt.param_groups`, every such parameter has an
+optimizer-state step entry, all those steps are equal, and the shared
+count is exactly 3,000. The manifest durably carries:
+`high_optimizer_steps_shared`, `high_actor_parameter_count_expected`,
+`high_actor_parameter_count_with_step_state`,
+`high_value_parameter_count_expected`,
+`high_value_parameter_count_with_step_state`, `high_optimizer_step_min`,
+`high_optimizer_step_max`, `high_optimizer_parameter_coverage_ok`.
+Uniformity over whatever entries happen to exist is NOT a certificate.
+
+**A-W6-2 (exhaustive high-pass partition; exact-exposure gate).** Expected
+high optimizer opportunities are counted BEFORE any early-return guard;
+every opportunity receives exactly one terminal status —
+`STEPPED | SKIPPED_NORMAL(reason) | ABORTED(reason)` — with
+`N_attempted = N_stepped + N_skipped + N_aborted`. For the identical
+contract the identities are: completed outer updates = 1,000; high epoch
+passes attempted = stepped = 3,000; skipped = aborted = 0;
+`high_optimizer_steps_shared` = 3,000. The analyzer gate is amended from
+"consistent unless a skip was recorded" to: **any nonzero skipped or
+aborted high pass — however honestly recorded — is
+`INVALID_VARIABLE_K_URGENCY_AUDIT`, reason
+`TRAINING_OPTIMIZER_EXPOSURE_MISMATCH`**; likewise interactions ≠ 640,000,
+outer updates ≠ 1,000, nonzero low-level exposure, incomplete
+actor/value coverage, or a sequence/token-count mismatch.
+
+**A-W6-3 (completed-sequence definition).**
+`high_check_sequences_completed` counts successful R30 edit-sequence
+emissions where `act_sequence` completed, the complete token vector was
+produced, and the decision row was committed to the high buffer.
+Initial-assignment sequences COUNT. A due call that exits before
+committing appears only under an explicit failure/skipped counter, never
+in the completed count. Structural identity enforced:
+`N_KEEP + N_SET = 2 × high_check_sequences_completed`. No per-agent
+sequence object exists.
+
+**A-W6-4 (non-lossy segment-ending representation).** Two explicit fields
+replace the single scalar:
+`incumbent_end_authority_at_check ∈ {voluntary_set, none_open}` and
+`post_window_end_authority ∈ {episode_termination, active_mask_change,
+team_intent_boundary, forced_renewal, none_open}` (the middle three
+structurally unreachable here but legal schema values). A final-check SET
+carries both non-`none_open` values; `initial_assignment` is a
+segment-origin value and never enters the ending vocabulary. The analyzer
+may ignore both fields for current statistics; `vk0-trace-2` validates
+them.
+
+**A-W6-5 (immutable propagation of the exposure block).**
+`actual_exposure_schema = "vk0b-exposure-1"`. Chain: training
+`run_manifest.json` carries the source-labelled `actual_exposure` block
+(allowed labels frozen: `runtime_counter`, `training_accumulator`,
+`optimizer_state`, `checkpoint_optimizer_absence`; `config`/`nominal`/
+`expected`/`derived_from_budget` inadmissible) → the launcher manifest
+records the run-manifest SHA-256, checkpoint SHA-256 and
+`exposure_audit = PASSED|FAILED` → `audit_vk0b_r30_access.py` copies the
+exact block and its source-manifest hash into the per-seed evaluation
+manifest → `analyze_vk0_result.py` independently validates the complete
+block before row 2.
+
+**A-W6-6 (Gate-B noninterference witness).** One proof-sized
+non-scientific witness: with identical initial state and seed, enabling
+the counters preserves token, action, reward, optimizer and parameter
+trajectories byte-for-byte apart from the new counter/manifest fields.
+Implementation conformance, not an experiment.
+
 ## W6-D6 — what is deliberately NOT done
 
 No V-K0C work (gated on the rerun's analysis); no training-architecture or
