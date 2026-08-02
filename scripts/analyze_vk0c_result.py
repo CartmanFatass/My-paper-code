@@ -890,7 +890,8 @@ def build_anchor_table(matched_rows: list[dict[str, Any]]) -> list[dict[str, Any
 
         coords = set(p_by_order[ORDER_CANONICAL]) | set(p_by_order[ORDER_REVERSED])
         tv = 0.5 * sum(
-            abs(p_by_order[ORDER_CANONICAL].get(z, 0.0) - p_by_order[ORDER_REVERSED].get(z, 0.0)) for z in coords
+            abs(p_by_order[ORDER_CANONICAL].get(z, 0.0) - p_by_order[ORDER_REVERSED].get(z, 0.0))
+            for z in sorted(coords)
         )
         entry["TV"] = tv
         entry["D_R"] = entry[f"R_{ORDER_CANONICAL}"] - entry[f"R_{ORDER_REVERSED}"]

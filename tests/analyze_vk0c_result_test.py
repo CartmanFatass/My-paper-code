@@ -650,6 +650,125 @@ def test_bootstrap_determinism_two_runs_identical_summary(tmp_path):
     assert json.dumps(result_a, sort_keys=True, default=str) == json.dumps(result_b, sort_keys=True, default=str)
 
 
+def _find_order_and_magnitude_sensitive_tv_probe() -> tuple[list[tuple[str, str]], dict[tuple[str, str], float]]:
+    """Searches a growing prefix of a large candidate coordinate/value pool
+    for the smallest (keys, values) combination satisfying BOTH:
+
+      1. this process's raw `set(keys)` iteration order is not the same
+         permutation as `sorted(keys)` -- i.e. the PYTHONHASHSEED-dependent
+         order actually differs from the deterministic order the fix must
+         use; and
+      2. summing the associated magnitude-diverse values with Python's
+         left-to-right `sum()` in set-iteration order produces a BITWISE
+         different float than summing in sorted order.
+
+    Both are verified here by direct computation (not assumed), and the
+    caller re-verifies them again before trusting the result -- this is the
+    only way to guarantee the regression test cannot pass vacuously, since
+    whether condition 1 holds for a fixed key list depends on the
+    interpreter's hash seed for this run, not on anything the test author
+    can pin in the source.
+    """
+    coord_pool = [(f"skill_{i:03d}_a", f"skill_{i:03d}_b") for i in range(64)]
+    # Magnitudes spanning ~1e-16 to 1e20 so left-to-right float summation is
+    # order-sensitive: adding a tiny term before vs. after a huge term
+    # rounds differently.
+    magnitude_pool = [1e16, 1.0, 1e-16, 3.0, 1e8, 7.0, 1e-8, 2.0, 5.0, 9.0,
+                       1e12, 4.0, 1e-12, 6.0, 1e4, 8.0, 1e-4, 1.5, 1e20, 2.5]
+    value_pool = [magnitude_pool[i % len(magnitude_pool)] * (1 + 0.01 * i) for i in range(len(coord_pool))]
+    values_by_key = dict(zip(coord_pool, value_pool))
+
+    for n in range(4, len(coord_pool) + 1):
+        keys = coord_pool[:n]
+        set_order = list(set(keys))
+        if set_order == sorted(keys):
+            continue
+        set_order_sum = sum(values_by_key[z] for z in set_order)
+        sorted_order_sum = sum(values_by_key[z] for z in sorted(keys))
+        if set_order_sum != sorted_order_sum:
+            return keys, values_by_key
+    raise AssertionError(
+        "could not construct an order- and magnitude-sensitive TV probe within the candidate pool -- "
+        "the pool must be widened, this is not a passing condition"
+    )
+
+
+def _matched_row_for_tv_probe(agent_0: str, agent_1: str, order_code: str, probability: float) -> dict:
+    return {
+        "training_seed": 1,
+        "episode_id": 0,
+        "check_index": 1,
+        "policy_state": M.POLICY_STATE_TRAINED,
+        "order_code": order_code,
+        "occupancy_stratum": M.STRATUM_CANONICAL_OCCUPANCY,
+        "final_skill": {"agent_0": agent_0, "agent_1": agent_1},
+        "canonical_joint_probability": probability,
+        "five_step_reward": 0.0,
+        "task_optimal": False,
+        "slow_coverage_failure": False,
+        "fast_coverage_failure": False,
+    }
+
+
+def test_tv_accumulation_is_sorted_order_not_raw_set_hash_order():
+    """Calibration for the TV determinism fix in build_anchor_table: TV must
+    sum abs(p_can - p_rev) over the shared coordinates in `sorted()` order,
+    not raw `set()` iteration order, because `set` iteration order for
+    string/tuple keys is PYTHONHASHSEED-dependent (Python randomizes str
+    hashing per process by default) while float summation is not
+    order-independent. A cross-process run with a different hash seed would
+    otherwise recompute a different TV from byte-identical input rows,
+    which directly happened on the formal V-K0C rows (2-ulp divergence in
+    matched_state_quantities.TV_trained.REVERSED_OCCUPANCY.point between two
+    analyzer invocations of the same files).
+
+    Both preconditions below are established by direct computation in THIS
+    process, not assumed, so the test cannot pass vacuously if this
+    process's hash seed happens to make raw set order coincide with sorted
+    order (which is exactly the failure mode: a test that only exercises a
+    code path when the ambient hash seed is unlucky enough to disagree with
+    sorted order is not a real regression guard)."""
+    keys, values_by_key = _find_order_and_magnitude_sensitive_tv_probe()
+
+    # Precondition 1, re-verified independently of the search helper: this
+    # process's raw set iteration order over `keys` really does differ from
+    # sorted order. If this fails, the probe search above is broken, not
+    # just unlucky -- it is required to already have satisfied this.
+    raw_set_order = list(set(keys))
+    assert raw_set_order != sorted(keys), (
+        "probe precondition violated: raw set order coincidentally equals sorted order in this "
+        "process -- the regression test would pass vacuously"
+    )
+
+    # Precondition 2, re-verified independently: summing the chosen values
+    # in raw set order vs. sorted order gives bitwise-different float
+    # totals, so a test that only checked the two totals were "close" could
+    # not distinguish the two production code paths.
+    set_order_total = sum(values_by_key[z] for z in raw_set_order)
+    sorted_order_total = sum(values_by_key[z] for z in sorted(keys))
+    assert set_order_total != sorted_order_total, (
+        "probe precondition violated: set-order and sorted-order summation coincide bitwise for "
+        "the chosen magnitudes -- the regression test could not distinguish the two orderings"
+    )
+
+    # p_rev(z) == 0.0 for every z (no REVERSED rows carry these coordinates
+    # at all), so abs(p_can(z) - p_rev(z)) == values_by_key[z] exactly, and
+    # the only question left is what order build_anchor_table's TV sum
+    # visits those per-coordinate magnitudes in.
+    matched_rows = [_matched_row_for_tv_probe(a0, a1, M.ORDER_CANONICAL, values_by_key[(a0, a1)]) for a0, a1 in keys]
+    matched_rows.append(_matched_row_for_tv_probe("reversed_only_a", "reversed_only_b", M.ORDER_REVERSED, 0.0))
+
+    table = M.build_anchor_table(matched_rows)
+    assert len(table) == 1
+    entry = table[0]
+
+    expected_tv = 0.5 * sorted_order_total
+    assert entry["TV"] == expected_tv, (
+        f"TV={entry['TV']!r} does not equal the sorted-order total 0.5*{sorted_order_total!r}={expected_tv!r} -- "
+        "build_anchor_table's TV sum is not iterating coordinates in sorted order"
+    )
+
+
 def test_summary_recomputable_delete_and_rerun_byte_identical(tmp_path):
     rows = build_population([1, 2], 2, fresh_d_r=0.1, trained_d_r=0.6)
     propagation = build_propagation_population([1, 2], 2, canonical_slow=0.9, canonical_fast=0.9, reversed_slow=0.9, reversed_fast=0.9)
