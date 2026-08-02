@@ -264,8 +264,8 @@ def valid_actual_exposure_block():
         "high_epoch_passes_stepped": w(3_000, "runtime_counter"),
         "high_epoch_passes_skipped": w(0, "runtime_counter"),
         "high_epoch_passes_aborted": w(0, "runtime_counter"),
-        "high_epoch_pass_skip_reasons": w([], "runtime_counter"),
-        "high_epoch_pass_abort_reasons": w([], "runtime_counter"),
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_pass_abort_reasons": [],
         "low_level_optimizer_steps": w(0, "checkpoint_optimizer_absence"),
     }
 

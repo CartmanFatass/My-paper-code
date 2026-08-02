@@ -607,11 +607,17 @@ def _validate_exposure_entry(block: Any, field: str, kind: str) -> tuple[Any, li
         if not _is_int(value):
             errors.append(f"actual_exposure.{field}.value must be an int")
             value = None
-    elif kind == "list":
-        if not isinstance(value, list) or not all(isinstance(x, str) for x in value):
-            errors.append(f"actual_exposure.{field}.value must be a list of str reasons")
-            value = None
     return value, errors
+
+
+def _validate_exposure_plain_list(block: Any, field: str) -> tuple[Any, list[str]]:
+    """Validates a mandatory plain list[str] field (no {"value", "source"} wrapper,
+    no source label). Returns (value_or_None, errors)."""
+    errors: list[str] = []
+    if not isinstance(block, list) or not all(isinstance(x, str) for x in block):
+        errors.append(f"actual_exposure.{field} must be a list of str")
+        return None, errors
+    return block, errors
 
 
 def compute_actual_exposure_violations(manifest: dict[str, Any]) -> list[str]:
@@ -658,7 +664,7 @@ def compute_actual_exposure_violations(manifest: dict[str, Any]) -> list[str]:
             values[field] = value
             reasons.extend(f"{tag} -- {e}" for e in errors)
         for field in _EXPOSURE_LIST_FIELDS:
-            value, errors = _validate_exposure_entry(block.get(field), field, "list")
+            value, errors = _validate_exposure_plain_list(block.get(field), field)
             values[field] = value
             reasons.extend(f"{tag} -- {e}" for e in errors)
 
