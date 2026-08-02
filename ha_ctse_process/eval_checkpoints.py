@@ -16,15 +16,17 @@ from typing import Any
 import numpy as np
 
 from ha_ctse_process.env_factory import normalize_scenario
+from ha_ctse_process.checkpoint_io import (
+    apply_checkpoint_structure,
+    load_checkpoint,
+    load_checkpoint_metadata,
+)
 from ha_ctse_process.plotting import append_csv, write_csv
 from ha_ctse_process.train import (
-    apply_checkpoint_structure,
     apply_standalone_overrides,
     create_agent,
     create_env,
     evaluate,
-    load_checkpoint,
-    load_checkpoint_metadata,
     load_config,
 )
 

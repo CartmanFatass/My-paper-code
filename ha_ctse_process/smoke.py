@@ -11,6 +11,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process.config import Config
+from ha_ctse_process import checkpoint_io
 from ha_ctse_process import train as process_train
 from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
 
@@ -133,11 +134,11 @@ def run_smoke(log_dir: Path) -> dict:
 
     expected = next(agent.high.parameters()).detach().clone()
     ckpt_path = log_dir / "standalone_smoke.pt"
-    process_train.save_checkpoint(ckpt_path, agent, args, cfg, total_steps=12, update_idx=3)
+    checkpoint_io.save_checkpoint(ckpt_path, agent, args, cfg, total_steps=12, update_idx=3)
     restored = make_agent(cfg)
     with torch.no_grad():
         next(restored.high.parameters()).add_(1.0)
-    total_steps, update_idx = process_train.load_checkpoint(ckpt_path, restored)
+    total_steps, update_idx = checkpoint_io.load_checkpoint(ckpt_path, restored)
     checkpoint_ok = (
         total_steps == 12
         and update_idx == 3

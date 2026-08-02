@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 import torch  # noqa: E402
 
 from ha_ctse_process import train as train_mod  # noqa: E402
+from ha_ctse_process import checkpoint_io  # noqa: E402
 from ha_ctse_process.config_alice_bob_asymmetric import Config  # noqa: E402
 from r47_nsopm import (  # noqa: E402
     BRANCH_SEED,
@@ -94,8 +95,7 @@ def set_all_seeds(seed: int, device: torch.device) -> None:
 
 
 def checkpoint_manifest(path: Path) -> dict[str, Any]:
-    loader = getattr(train_mod, "_load_adjacent_run_manifest", None)
-    return loader(path) if callable(loader) else {}
+    return checkpoint_io._load_adjacent_run_manifest(path)
 
 
 def validate_source(
@@ -194,8 +194,8 @@ def make_source(checkpoint: Path, device_name: str):
     config.scenario = "alice_bob_asymmetric_cycles"
     config.skill_interval = K0
     config.r31_effect_mode = "off"
-    metadata = train_mod.load_checkpoint_metadata(checkpoint)
-    train_mod.apply_checkpoint_structure(
+    metadata = checkpoint_io.load_checkpoint_metadata(checkpoint)
+    checkpoint_io.apply_checkpoint_structure(
         config,
         argparse.Namespace(high_controller="", n_agents=0),
         metadata,
@@ -222,7 +222,7 @@ def make_source(checkpoint: Path, device_name: str):
         num_envs=1,
         state_dim=int(environment.state_dim),
     )
-    total_steps, update_index = train_mod.load_checkpoint(
+    total_steps, update_index = checkpoint_io.load_checkpoint(
         checkpoint, agent, load_optimizers=False
     )
     manifest = checkpoint_manifest(checkpoint)

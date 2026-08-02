@@ -4,6 +4,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process import train as process_train
+from ha_ctse_process import checkpoint_io
 from ha_ctse_process.standalone_agent import Rollout, Segment, StandaloneProcessAgent
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
@@ -319,12 +320,12 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
         )
 
     ckpt_path = tmp_path / "standalone.pt"
-    process_train.save_checkpoint(ckpt_path, agent, args, cfg, total_steps=12, update_idx=3)
+    checkpoint_io.save_checkpoint(ckpt_path, agent, args, cfg, total_steps=12, update_idx=3)
 
     restored = make_agent(cfg)
     with torch.no_grad():
         next(restored.high.parameters()).add_(1.0)
-    total_steps, update_idx = process_train.load_checkpoint(
+    total_steps, update_idx = checkpoint_io.load_checkpoint(
         ckpt_path, restored, load_optimizers=False
     )
 

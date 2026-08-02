@@ -8,6 +8,7 @@ import pytest
 import torch
 
 from ha_ctse_process import train as process_train
+from ha_ctse_process import checkpoint_io
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.r30_fixed_clock import FixedClockAREditPolicy
 from ha_ctse_process.variable_roster_event import (
@@ -605,12 +606,12 @@ def test_schema3_checkpoint_roundtrip_restores_runtime_collector_and_rngs(tmp_pa
     )
     checkpoint_path = tmp_path / "event_schema3.pt"
     torch.save(payload, checkpoint_path)
-    metadata = process_train.load_checkpoint_metadata(checkpoint_path)
+    metadata = checkpoint_io.load_checkpoint_metadata(checkpoint_path)
     assert metadata["checkpoint_schema_version"] == 3
     assert metadata["high_controller"] == EVENT_CONTROLLER
     assert metadata["event_architecture_mode"] == "f1"
     restored_config = SimpleNamespace()
-    process_train.apply_checkpoint_structure(
+    checkpoint_io.apply_checkpoint_structure(
         restored_config,
         SimpleNamespace(high_controller="", event_architecture_mode=""),
         metadata,

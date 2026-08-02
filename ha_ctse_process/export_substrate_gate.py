@@ -200,13 +200,15 @@ TRAINING_OVERRIDE_DEFAULTS = {
 
 
 def _train_helpers():
-    from ha_ctse_process.train import (
+    from ha_ctse_process.checkpoint_io import (
         apply_checkpoint_structure,
+        load_checkpoint,
+        load_checkpoint_metadata,
+    )
+    from ha_ctse_process.train import (
         apply_standalone_overrides,
         create_agent,
         create_env,
-        load_checkpoint,
-        load_checkpoint_metadata,
         load_config,
     )
 
