@@ -12,6 +12,8 @@ import numpy as np
 
 from ha_ctse_process import uav_episode_serialization as episode_serialization
 from ha_ctse_process import uav_episode_schema as episode_schema
+from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner
 
@@ -371,7 +373,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
     ledger["candidates"][0]["service_score"] = 1.0
     ledger_without_digest = dict(ledger)
     ledger_without_digest.pop("content_sha256")
-    ledger["content_sha256"] = source.sha256_json(ledger_without_digest)
+    ledger["content_sha256"] = geometry.sha256_json(ledger_without_digest)
     _store(ledger_path, ledger)
     manifest = _load(manifest_path)
     manifest["oracle_safety_ledger_proof"]["sha256"] = runner._digest(ledger_path)
@@ -402,7 +404,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
         replay[name]["steps"][273]["pre_action_context"].pop(
             "channel_tape_cursor"
         )
-        replay[name]["trace_sha256"] = source.sha256_json(
+        replay[name]["trace_sha256"] = geometry.sha256_json(
             {
                 key: value
                 for key, value in replay[name].items()
@@ -425,7 +427,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
         replay[name]["steps"][191]["pre_action_context"].pop(
             "service_active_mask"
         )
-        replay[name]["trace_sha256"] = source.sha256_json(
+        replay[name]["trace_sha256"] = geometry.sha256_json(
             {
                 key: value
                 for key, value in replay[name].items()
@@ -448,7 +450,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
     evaluation["production_episode_validity_witness"] = {
         "operational_valid": True,
         "errors": [],
-        "result_branch": source.IDENTIFIED_BRANCH,
+        "result_branch": statistics.IDENTIFIED_BRANCH,
     }
     _store(evaluation_path, evaluation)
     with pytest.raises(ValueError, match="evaluation artifact invariant"):
@@ -620,7 +622,7 @@ def test_mocked_preflight_writes_exact_four_file_terminal_contract(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     binding = _binding(tmp_path)
-    episode = source.make_episode_source(0)
+    episode = geometry.make_episode_source(0)
     fake_runs = {
         identity: SimpleNamespace(
             control=identity[0],
@@ -633,7 +635,7 @@ def test_mocked_preflight_writes_exact_four_file_terminal_contract(
         )
         for identity in runner._RUN_IDENTITIES
     }
-    validity = source.EpisodeValidityRecord(
+    validity = statistics.EpisodeValidityRecord(
         episode_id=0,
         source_event_digest="s", source_no_event_digest="s",
         sameinfo_no_event_digest="n", no_reallocation_no_event_digest="n",
@@ -896,7 +898,7 @@ def test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities(
     )
     path = tmp_path / "episode_000.json"
     _store(path, bundle)
-    monkeypatch.setattr(source, "make_episode_source", lambda _episode_id: dummy_episode)
+    monkeypatch.setattr(geometry, "make_episode_source", lambda _episode_id: dummy_episode)
     monkeypatch.setattr(
         episode_serialization,
         "episode_run_from_primitive",
@@ -960,24 +962,24 @@ def test_failed_root_preserves_prior_terminal_but_replaces_current_invalid_termi
 
 
 def test_bootstrap_plan_is_generated_once_and_reused_for_source_validation() -> None:
-    original = source.make_bootstrap_index_plan
+    original = statistics.make_bootstrap_index_plan
     plan = np.arange(12, dtype=np.int64).reshape(3, 4)
     with runner._reuse_bootstrap_index_plan(plan):
-        assert source.make_bootstrap_index_plan() is plan
-    assert source.make_bootstrap_index_plan is original
+        assert statistics.make_bootstrap_index_plan() is plan
+    assert statistics.make_bootstrap_index_plan is original
 
 
 def test_branch_witnesses_cover_exact_first_match_inventory() -> None:
     witnesses = runner._branch_witnesses()
     assert {item["result_branch"] for item in witnesses.values()} == set(
-        source.FIRST_MATCH_ORDER
+        statistics.FIRST_MATCH_ORDER
     )
     assert witnesses["invalid"] == {
         "valid": False,
         "ORACLE_STATUS": None,
         "SAMEINFO_STATUS": None,
         "CAUSAL_STATUS": None,
-        "result_branch": source.INVALID_BRANCH,
+        "result_branch": statistics.INVALID_BRANCH,
     }
     assert witnesses["infeasible"]["SAMEINFO_STATUS"] is None
     assert witnesses["infeasible"]["CAUSAL_STATUS"] is None
@@ -985,6 +987,6 @@ def test_branch_witnesses_cover_exact_first_match_inventory() -> None:
     assert witnesses["underpowered_oracle"]["SAMEINFO_STATUS"] is None
     assert witnesses["underpowered_oracle"]["CAUSAL_STATUS"] is None
     assert witnesses["underpowered_sameinfo"]["CAUSAL_STATUS"] is None
-    assert witnesses["identified"]["result_branch"] == source.IDENTIFIED_BRANCH
+    assert witnesses["identified"]["result_branch"] == statistics.IDENTIFIED_BRANCH
     assert runner.SCHEMA_VERSION == source.SCHEMA_VERSION
     assert runner.FORMAL_EXECUTION_AUTHORIZED is False

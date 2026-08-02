@@ -8,6 +8,8 @@ import numpy as np
 import pytest
 
 from ha_ctse_process import uav_episode_schema as episode_schema
+from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as g0
 
 
@@ -159,26 +161,26 @@ def test_callable_source_digests_are_cached_by_callable_identity(
     first = g0.common_tracker_source_digest()
     second = g0.common_tracker_source_digest()
     assert first == second == g0.ACCEPTED_G1_TRACKER_SOURCE_SHA256
-    assert calls == [g0.actions_toward_targets]
+    assert calls == [geometry.actions_toward_targets]
 
     def replacement_tracker(**_kwargs: object) -> np.ndarray:
         return np.zeros((g0.PHYSICAL_UAVS, g0.ACTION_DIM), dtype=np.float32)
 
-    monkeypatch.setattr(g0, "actions_toward_targets", replacement_tracker)
+    monkeypatch.setattr(geometry, "actions_toward_targets", replacement_tracker)
     replacement = g0.common_tracker_source_digest()
     assert replacement != first
-    assert calls == [g0.g1_common_target_actions, replacement_tracker]
+    assert calls == [geometry.g1_common_target_actions, replacement_tracker]
 
 
 def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    source = g0.make_episode_source(0)
+    source = geometry.make_episode_source(0)
     candidates = tuple(
         g0.OracleCandidateSafetyTrace(
             candidate_id=label.key,
-            target_schedule_sha256=g0.sha256_json([]),
-            common_prestate_sha256=g0.sha256_json({}),
+            target_schedule_sha256=geometry.sha256_json([]),
+            common_prestate_sha256=geometry.sha256_json({}),
             steps=(),
             hard_violation_count=0,
             gate_arrival_time=g0.PHYSICAL_HORIZON + 1,
@@ -188,16 +190,16 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
             stage_coordinates=tuple(
                 float(item) for item in source.geometry.coordinate(label)
             ),
-            trace_sha256=g0.sha256_json([]),
+            trace_sha256=geometry.sha256_json([]),
         )
-        for label in g0.TARGET_LABELS
-        if label.kind is g0.TargetKind.STAGE
+        for label in geometry.TARGET_LABELS
+        if label.kind is geometry.TargetKind.STAGE
     )
     provisional = g0.OracleSafetyLedger(
         source_sha256=source.to_primitive()["sha256"],
         common_prestate={},
-        common_prestate_sha256=g0.sha256_json({}),
-        candidate_prestate_sha256=(g0.sha256_json({}),) * 2,
+        common_prestate_sha256=geometry.sha256_json({}),
+        candidate_prestate_sha256=(geometry.sha256_json({}),) * 2,
         channel_draw_schema=(),
         shared_channel_draw_blocks=(),
         candidates=(candidates[0], candidates[1]),
@@ -208,7 +210,7 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
     )
     ledger = replace(
         provisional,
-        content_sha256=g0.sha256_json(
+        content_sha256=geometry.sha256_json(
             provisional.to_primitive(include_digest=False)
         ),
     )
@@ -231,7 +233,7 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
         g0._require_validated_oracle_safety_context(forged)
 
     def validated(
-        supplied_source: g0.G0EpisodeSource,
+        supplied_source: geometry.G0EpisodeSource,
         supplied_ledger: g0.OracleSafetyLedger,
     ) -> g0.OracleSafetyCertificate:
         assert supplied_source is source
@@ -251,7 +253,7 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
     object.__setattr__(
         cross_source_context,
         "source",
-        g0.make_episode_source(1),
+        geometry.make_episode_source(1),
     )
     with pytest.raises(g0.G0RealizationError, match="context drifted"):
         g0._require_validated_oracle_safety_context(cross_source_context)
@@ -262,11 +264,11 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
 
 @pytest.fixture(scope="module")
 def oracle_safety_bundle() -> tuple[
-    g0.G0EpisodeSource,
+    geometry.G0EpisodeSource,
     g0.OracleSafetyLedger,
     g0.OracleQualificationCertificate,
 ]:
-    source = g0.make_episode_source(0)
+    source = geometry.make_episode_source(0)
     ledger = g0.build_oracle_safety_ledger(source)
     qualification = g0.oracle_qualification_from_safety_ledger(source, ledger)
     return source, ledger, qualification
@@ -275,12 +277,12 @@ def oracle_safety_bundle() -> tuple[
 @pytest.fixture(scope="module")
 def oracle_behavior_bundle(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
 ) -> tuple[
-    g0.G0EpisodeSource,
+    geometry.G0EpisodeSource,
     g0.OracleSafetyLedger,
     g0.OracleCandidateSafetyTrace,
     g0.OracleBehavioralExecution,
@@ -297,14 +299,14 @@ def oracle_behavior_bundle(
 
 def _reseal_behavioral_primitive(value: dict) -> dict:
     result = copy.deepcopy(value)
-    result["trace_sha256"] = g0.sha256_json(
+    result["trace_sha256"] = geometry.sha256_json(
         {key: item for key, item in result.items() if key != "trace_sha256"}
     )
     return result
 
 
 def _rows(
-    source: g0.G0EpisodeSource,
+    source: geometry.G0EpisodeSource,
     *,
     active_owner: bool,
     replacement: str | None = None,
@@ -323,7 +325,7 @@ def _rows(
         rows.append(
             g0.AnonymousLifecycleRow(
                 handle=handle,
-                position=np.asarray([xy[0], xy[1], g0.FIXED_ALTITUDE_M]),
+                position=np.asarray([xy[0], xy[1], geometry.FIXED_ALTITUDE_M]),
                 velocity=np.zeros(3),
                 active=active,
                 service_available=active,
@@ -333,7 +335,7 @@ def _rows(
 
 
 def _information(
-    source: g0.G0EpisodeSource,
+    source: geometry.G0EpisodeSource,
     rows: tuple[g0.AnonymousLifecycleRow, ...],
     *,
     weakest_service: float = 0.0,
@@ -357,28 +359,28 @@ def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
     assert g0.DESIGN_DISPOSITION == (
         "G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT"
     )
-    source = g0.make_episode_source(17)
-    duplicate = g0.make_episode_source(17)
+    source = geometry.make_episode_source(17)
+    duplicate = geometry.make_episode_source(17)
     assert source.to_primitive() == duplicate.to_primitive()
-    geometry = source.geometry
-    assert np.array_equal(geometry.base_xy, [4000.0, 4000.0])
-    assert geometry.target_labels == g0.TARGET_LABELS
+    episode_geometry = source.geometry
+    assert np.array_equal(episode_geometry.base_xy, [4000.0, 4000.0])
+    assert episode_geometry.target_labels == geometry.TARGET_LABELS
     assert tuple(source.assignment.primary_count_by_hotspot) == (2, 2, 2)
     assert source.assignment.staging_count == 2
-    assert sorted(geometry.slot_to_target.tolist()) == list(range(8))
+    assert sorted(episode_geometry.slot_to_target.tolist()) == list(range(8))
     assert np.array_equal(
-        geometry.physical_xy,
-        geometry.target_owned_initial_xy[geometry.slot_to_target],
+        episode_geometry.physical_xy,
+        episode_geometry.target_owned_initial_xy[episode_geometry.slot_to_target],
     )
-    assert source.event.owner_target.kind is g0.TargetKind.PRIMARY
+    assert source.event.owner_target.kind is geometry.TargetKind.PRIMARY
     assert 180 <= source.event.onset <= 220
     assert 80 <= source.event.duration <= 100
-    assert len({g0.channel_seed_word(17, step) for step in range(4)}) == 4
-    support = geometry.to_primitive()["geometry_support_certificate"]
-    assert support == g0.geometry_support_certificate(
-        map_width=geometry.map_width,
-        map_height=geometry.map_height,
-        base_xy=geometry.base_xy,
+    assert len({geometry.channel_seed_word(17, step) for step in range(4)}) == 4
+    support = episode_geometry.to_primitive()["geometry_support_certificate"]
+    assert support == geometry.geometry_support_certificate(
+        map_width=episode_geometry.map_width,
+        map_height=episode_geometry.map_height,
+        base_xy=episode_geometry.base_xy,
     )
     assert support["certificate_kind"] == (
         "analytic_radial_complete_support_every_phi_v2"
@@ -395,14 +397,14 @@ def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
         "gates",
     }
     for width, height in ((1.0, 1.0), (1.0, 100.0), (100.0, 1.0)):
-        universal = g0.geometry_support_certificate(
+        universal = geometry.geometry_support_certificate(
             map_width=width,
             map_height=height,
             base_xy=np.asarray((width / 2.0, height / 2.0)),
         )
         assert universal["passed"] is True
         assert universal["violation_count"] == 0
-    failed = g0.geometry_support_certificate(
+    failed = geometry.geometry_support_certificate(
         map_width=1.0,
         map_height=1.0,
         base_xy=np.asarray((0.01, 0.5)),
@@ -410,7 +412,10 @@ def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
     assert failed["violation_count"] == len(failed["violations"]) > 0
 
     with pytest.raises(g0.G0RealizationError, match="registered episode RNG"):
-        replace(geometry, phi=np.nextafter(geometry.phi, math.inf))
+        replace(
+            episode_geometry,
+            phi=np.nextafter(episode_geometry.phi, math.inf),
+        )
     with pytest.raises(g0.G0RealizationError, match="event ledger"):
         replace(source.event, onset=180 if source.event.onset != 180 else 181)
     forged = replace(
@@ -421,20 +426,20 @@ def test_source_geometry_rng_assignment_and_support_are_exact() -> None:
     with pytest.raises(g0.G0RealizationError, match="does not reconstruct"):
         replace(source, assignment=forged)
     with pytest.raises(g0.G0RealizationError, match="frozen S7-S1"):
-        g0.make_episode_source(17, map_width=7999.0)
+        geometry.make_episode_source(17, map_width=7999.0)
     with pytest.raises(g0.G0RealizationError, match="rectangular-map center"):
-        g0.make_episode_source(17, base_xy=(3999.0, 4000.0))
+        geometry.make_episode_source(17, base_xy=(3999.0, 4000.0))
 
 
 def test_anonymous_assignment_tie_law_and_duplicate_rows_fail_closed() -> None:
-    source = g0.make_episode_source(3)
+    source = geometry.make_episode_source(3)
     rows = np.concatenate((source.geometry.physical_xy, np.zeros((8, 2))), axis=1)
-    certificate = g0.minimum_cost_target_assignment(
+    certificate = geometry.minimum_cost_target_assignment(
         physical_rows=rows,
         target_xy=source.geometry.target_xy,
     )
     order = np.asarray((3, 0, 7, 2, 6, 1, 5, 4))
-    permuted = g0.minimum_cost_target_assignment(
+    permuted = geometry.minimum_cost_target_assignment(
         physical_rows=rows[order],
         target_xy=source.geometry.target_xy,
     )
@@ -448,24 +453,24 @@ def test_anonymous_assignment_tie_law_and_duplicate_rows_fail_closed() -> None:
     duplicate = rows.copy()
     duplicate[1] = duplicate[0]
     with pytest.raises(g0.G0RealizationError, match="bitwise-identical"):
-        g0.minimum_cost_target_assignment(
+        geometry.minimum_cost_target_assignment(
             physical_rows=duplicate,
             target_xy=source.geometry.target_xy,
         )
 
 
 def test_accepted_g1_tracker_and_shared_correction_are_qualified() -> None:
-    source = g0.make_episode_source(0)
+    source = geometry.make_episode_source(0)
     physical = np.concatenate(
-        (source.geometry.physical_xy, np.full((8, 1), g0.FIXED_ALTITUDE_M)),
+        (source.geometry.physical_xy, np.full((8, 1), geometry.FIXED_ALTITUDE_M)),
         axis=1,
     )
     targets = np.stack(
         [
             np.concatenate(
                 (
-                    source.geometry.coordinate(g0.TargetLabel.parse(label)),
-                    [g0.FIXED_ALTITUDE_M],
+                    source.geometry.coordinate(geometry.TargetLabel.parse(label)),
+                    [geometry.FIXED_ALTITUDE_M],
                 )
             )
             for label in source.assignment.row_to_target
@@ -492,7 +497,7 @@ def test_accepted_g1_tracker_and_shared_correction_are_qualified() -> None:
 
 
 def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
-    source = g0.make_episode_source(4)
+    source = geometry.make_episode_source(4)
     handles = g0.initial_lifecycle_handles(source)
     owner_row = source.assignment.row_to_target.index(source.event.owner_target.key)
     controller = g0.SameInformationController(source, handles)
@@ -527,14 +532,14 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
         _information(source, rejoin_rows, weakest_service=1.0),
         physical_step=source.event.rejoin + 1,
     )
-    stage = g0.TargetLabel.parse(
+    stage = geometry.TargetLabel.parse(
         next(
             label
             for handle, label in controller.original_ownership.items()
             if handle == selected
         ).key
     )
-    assert stage.kind is g0.TargetKind.STAGE
+    assert stage.kind is geometry.TargetKind.STAGE
     assert np.array_equal(returned[selected][:2], source.geometry.coordinate(stage))
     owner = next(row for row in rejoin_rows if row.handle == replacement)
     assert not np.array_equal(
@@ -543,17 +548,17 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
 
 
 def test_same_information_reserve_tie_ignores_vertical_fields() -> None:
-    source = g0.make_episode_source(4)
+    source = geometry.make_episode_source(4)
     handles = g0.initial_lifecycle_handles(source)
     ownership = {
-        handle: g0.TargetLabel.parse(target)
+        handle: geometry.TargetLabel.parse(target)
         for handle, target in zip(handles, source.assignment.row_to_target)
     }
     owner_handle = next(
         handle for handle, label in ownership.items() if label == source.event.owner_target
     )
     reserve_handles = [
-        handle for handle, label in ownership.items() if label.kind is g0.TargetKind.STAGE
+        handle for handle, label in ownership.items() if label.kind is geometry.TargetKind.STAGE
     ]
     expected = min(
         reserve_handles,
@@ -582,7 +587,7 @@ def test_same_information_reserve_tie_ignores_vertical_fields() -> None:
 
 
 def test_no_reallocation_freezes_targets_and_no_event_maps_match() -> None:
-    source = g0.make_episode_source(6)
+    source = geometry.make_episode_source(6)
     handles = g0.initial_lifecycle_handles(source)
     rows = _rows(source, active_owner=True)
     same = g0.SameInformationController(source, handles)
@@ -609,7 +614,7 @@ def test_no_reallocation_freezes_targets_and_no_event_maps_match() -> None:
 
 def test_oracle_two_candidate_schedule_certificate_is_exact(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
@@ -635,7 +640,7 @@ def test_oracle_two_candidate_schedule_certificate_is_exact(
     assert all(row.hard_violation_count == 0 for row in certificate.candidates)
     primary = source.geometry.coordinate(source.event.owner_target)
     gate = np.concatenate(
-        (source.geometry.gate(source.event.owner_target), [g0.FIXED_ALTITUDE_M])
+        (source.geometry.gate(source.event.owner_target), [geometry.FIXED_ALTITUDE_M])
     )
     for row, trace in zip(certificate.candidates, ledger.candidates):
         reserve_internal = g0._target_internal_row(row.reserve_target)
@@ -685,7 +690,7 @@ def test_oracle_two_candidate_schedule_certificate_is_exact(
 
 
 def test_oracle_gate_arrival_is_bitwise_and_onset_bounded() -> None:
-    gate = np.asarray((1.0, 2.0, g0.FIXED_ALTITUDE_M), dtype=np.float64)
+    gate = np.asarray((1.0, 2.0, geometry.FIXED_ALTITUDE_M), dtype=np.float64)
     near = gate.copy()
     near[0] = np.nextafter(near[0], math.inf)
     assert not g0._is_exact_gate_arrival(
@@ -714,18 +719,18 @@ def test_oracle_gate_arrival_is_bitwise_and_onset_bounded() -> None:
 def test_negative_latest_departure_fails_builder_and_validator(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    source = g0.make_episode_source(0)
+    source = geometry.make_episode_source(0)
     environment = g0.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
     try:
         environment.reset()
         prestate = g0._complete_oracle_prestate(environment)
     finally:
         environment.close()
-    prestate_sha256 = g0.sha256_json(prestate)
+    prestate_sha256 = geometry.sha256_json(prestate)
     candidates = tuple(
         g0.OracleCandidateSafetyTrace(
             candidate_id=label.key,
-            target_schedule_sha256=g0.sha256_json([]),
+            target_schedule_sha256=geometry.sha256_json([]),
             common_prestate_sha256=prestate_sha256,
             steps=(),
             hard_violation_count=0,
@@ -736,10 +741,10 @@ def test_negative_latest_departure_fails_builder_and_validator(
             stage_coordinates=tuple(
                 float(item) for item in source.geometry.coordinate(label)
             ),
-            trace_sha256=g0.sha256_json([]),
+            trace_sha256=geometry.sha256_json([]),
         )
-        for label in g0.TARGET_LABELS
-        if label.kind is g0.TargetKind.STAGE
+        for label in geometry.TARGET_LABELS
+        if label.kind is geometry.TargetKind.STAGE
     )
     provisional = g0.OracleSafetyLedger(
         source_sha256=source.to_primitive()["sha256"],
@@ -756,7 +761,7 @@ def test_negative_latest_departure_fails_builder_and_validator(
     )
     ledger = replace(
         provisional,
-        content_sha256=g0.sha256_json(
+        content_sha256=geometry.sha256_json(
             provisional.to_primitive(include_digest=False)
         ),
     )
@@ -766,7 +771,7 @@ def test_negative_latest_departure_fails_builder_and_validator(
         lambda *args, **kwargs: source.event.onset + 1,
     )
     reserve = next(
-        label for label in g0.TARGET_LABELS if label.kind is g0.TargetKind.STAGE
+        label for label in geometry.TARGET_LABELS if label.kind is geometry.TargetKind.STAGE
     )
     with pytest.raises(g0.G0RealizationError, match="latest departure is negative"):
         g0._oracle_candidate_trace(source, reserve)
@@ -776,7 +781,7 @@ def test_negative_latest_departure_fails_builder_and_validator(
 
 def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
@@ -818,7 +823,7 @@ def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
 @pytest.mark.parametrize("tamper_kind", ("connection", "routing"))
 def test_resealed_oracle_network_inputs_require_native_provenance(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
@@ -839,8 +844,8 @@ def test_resealed_oracle_network_inputs_require_native_provenance(
     else:
         assert len(step["routing_paths"]) > 1
         step["routing_paths"] = list(reversed(step["routing_paths"]))
-    candidate["trace_sha256"] = g0.sha256_json(candidate["steps"])
-    tampered["content_sha256"] = g0.sha256_json(
+    candidate["trace_sha256"] = geometry.sha256_json(candidate["steps"])
+    tampered["content_sha256"] = geometry.sha256_json(
         {
             key: value
             for key, value in tampered.items()
@@ -856,7 +861,7 @@ def test_resealed_oracle_network_inputs_require_native_provenance(
 
 def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
@@ -867,12 +872,12 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     tampered["candidates"][0]["path_length"] = float(
         tampered["candidates"][0]["path_length"]
     ) + 1.0
-    tampered["content_sha256"] = g0.sha256_json(
+    tampered["content_sha256"] = geometry.sha256_json(
         {key: value for key, value in tampered.items() if key != "content_sha256"}
     )
     proof = g0.analyze_proof_fixture(source, tampered)
     assert proof["operational_valid"] is False
-    assert proof["result_branch"] == g0.INVALID_BRANCH
+    assert proof["result_branch"] == statistics.INVALID_BRANCH
 
     guard_tampered = copy.deepcopy(primitive)
     candidate = guard_tampered["candidates"][0]
@@ -911,7 +916,7 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
         int(guard_output["checked_actions"]),
         int(guard_output["blocked_actions"]),
     )
-    candidate["trace_sha256"] = g0.sha256_json(candidate["steps"])
+    candidate["trace_sha256"] = geometry.sha256_json(candidate["steps"])
 
     def candidate_rank(value: dict) -> tuple[float, ...]:
         return (
@@ -928,7 +933,7 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     )
     guard_tampered["selected_candidate_id"] = forged_winner["candidate_id"]
     guard_tampered["selected_rank"] = list(candidate_rank(forged_winner))
-    guard_tampered["content_sha256"] = g0.sha256_json(
+    guard_tampered["content_sha256"] = geometry.sha256_json(
         {
             key: value
             for key, value in guard_tampered.items()
@@ -968,7 +973,7 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
 
 def test_branch_aware_replay_R_NONE_requires_full_identity(
     oracle_safety_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleQualificationCertificate,
     ],
@@ -999,7 +1004,7 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         steps=selected.steps,
         target_schedule=target_evidence,
         pre_action_weakest_service=service_evidence,
-        trace_sha256=g0.sha256_json(body),
+        trace_sha256=geometry.sha256_json(body),
     )
     certificate = g0.validate_oracle_branch_aware_replay(
         source, ledger, selected, execution, execution
@@ -1019,7 +1024,7 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
     forged = replace(
         execution,
         target_schedule=forged_target_evidence,
-        trace_sha256=g0.sha256_json(forged_body),
+        trace_sha256=geometry.sha256_json(forged_body),
     )
     with pytest.raises(
         g0.G0RealizationError,
@@ -1032,7 +1037,7 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
 
 def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
     oracle_behavior_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleCandidateSafetyTrace,
         g0.OracleBehavioralExecution,
@@ -1082,10 +1087,10 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
 
 @pytest.fixture(scope="module")
 def episode_zero_all_control_cell_runs() -> tuple[
-    g0.G0EpisodeSource,
+    geometry.G0EpisodeSource,
     dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
 ]:
-    source = g0.make_episode_source(0)
+    source = geometry.make_episode_source(0)
     runs = {
         (control, cell): g0.run_g0_episode(source, control=control, cell=cell)
         for control in g0.Control
@@ -1097,11 +1102,11 @@ def episode_zero_all_control_cell_runs() -> tuple[
 @pytest.fixture(scope="module")
 def oracle_episode_zero_runs(
     episode_zero_all_control_cell_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
     ],
 ) -> tuple[
-    g0.G0EpisodeSource,
+    geometry.G0EpisodeSource,
     dict[g0.Cell, g0.EpisodeRunEvidence],
 ]:
     source, runs = episode_zero_all_control_cell_runs
@@ -1112,7 +1117,7 @@ def oracle_episode_zero_runs(
 
 def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
     episode_zero_all_control_cell_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[tuple[g0.Control, g0.Cell], g0.EpisodeRunEvidence],
     ],
 ) -> None:
@@ -1126,7 +1131,7 @@ def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
             source.geometry.physical_xy,
             np.full(
                 (g0.PHYSICAL_UAVS, 1),
-                g0.FIXED_ALTITUDE_M,
+                geometry.FIXED_ALTITUDE_M,
                 dtype=np.float64,
             ),
         ),
@@ -1139,7 +1144,7 @@ def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
     ):
         run = runs[identity]
         assert np.array_equal(run.position_trace[0], expected_initial_positions)
-        expected_action = g0.actions_toward_targets(
+        expected_action = geometry.actions_toward_targets(
             physical_positions=run.position_trace[0],
             target_positions=run.target_trace[0],
             active_mask=run.active_mask_trace[0],
@@ -1149,7 +1154,7 @@ def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
         )
         assert np.array_equal(run.raw_action_trace[0], expected_action)
 
-        permuted_action = g0.actions_toward_targets(
+        permuted_action = geometry.actions_toward_targets(
             physical_positions=run.position_trace[0, permutation],
             target_positions=run.target_trace[0, permutation],
             active_mask=run.active_mask_trace[0, permutation],
@@ -1164,7 +1169,7 @@ def test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation(
 
 def test_production_oracle_event_and_no_event_bind_branch_evidence(
     oracle_episode_zero_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[g0.Cell, g0.EpisodeRunEvidence],
     ],
 ) -> None:
@@ -1199,7 +1204,7 @@ def test_production_oracle_event_and_no_event_bind_branch_evidence(
 
 def test_valid_oracle_certificate_is_separate_from_base_controller_evidence(
     oracle_episode_zero_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[g0.Cell, g0.EpisodeRunEvidence],
     ],
     monkeypatch: pytest.MonkeyPatch,
@@ -1216,7 +1221,7 @@ def test_valid_oracle_certificate_is_separate_from_base_controller_evidence(
 @pytest.mark.parametrize("mutation", ("missing", "tampered"))
 def test_oracle_behavioral_replay_certificate_fails_closed_separately(
     oracle_episode_zero_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[g0.Cell, g0.EpisodeRunEvidence],
     ],
     mutation: str,
@@ -1239,7 +1244,7 @@ def test_oracle_behavioral_replay_certificate_fails_closed_separately(
 
 def test_non_oracle_injected_replay_certificate_is_not_discarded(
     oracle_episode_zero_runs: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         dict[g0.Cell, g0.EpisodeRunEvidence],
     ],
     monkeypatch: pytest.MonkeyPatch,
@@ -1273,7 +1278,7 @@ def test_non_oracle_injected_replay_certificate_is_not_discarded(
 )
 def test_branchpoint_primitives_are_required_and_independently_reconstructed(
     oracle_behavior_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleCandidateSafetyTrace,
         g0.OracleBehavioralExecution,
@@ -1304,7 +1309,7 @@ def test_branchpoint_primitives_are_required_and_independently_reconstructed(
 
 def test_target_schedule_requires_recomputed_common_transducer_binding(
     oracle_behavior_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleCandidateSafetyTrace,
         g0.OracleBehavioralExecution,
@@ -1326,7 +1331,7 @@ def test_target_schedule_requires_recomputed_common_transducer_binding(
 @pytest.mark.parametrize("field", ("physical_positions", "raw_action"))
 def test_tampered_common_transducer_input_or_output_fails_closed(
     oracle_behavior_bundle: tuple[
-        g0.G0EpisodeSource,
+        geometry.G0EpisodeSource,
         g0.OracleSafetyLedger,
         g0.OracleCandidateSafetyTrace,
         g0.OracleBehavioralExecution,
@@ -1350,7 +1355,7 @@ def test_tampered_common_transducer_input_or_output_fails_closed(
 
 
 def test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries() -> None:
-    source = g0.make_episode_source(2)
+    source = geometry.make_episode_source(2)
     env = g0.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
     try:
         env.reset()
@@ -1379,7 +1384,7 @@ def test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries() -> None:
 
 def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
     service = np.full(g0.PHYSICAL_HORIZON, 0.90)
-    event = g0.compute_episode_metrics(
+    event = statistics.compute_episode_metrics(
         service,
         episode_id=0,
         control=g0.Control.SAME_INFORMATION,
@@ -1387,7 +1392,7 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
         onset=180,
         duration=80,
     )
-    no_event = g0.compute_episode_metrics(
+    no_event = statistics.compute_episode_metrics(
         service,
         episode_id=0,
         control=g0.Control.SAME_INFORMATION,
@@ -1401,7 +1406,7 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
     nine[180:189] = np.nextafter(0.60, 0.0)
     ten = service.copy()
     ten[180:190] = np.nextafter(0.60, 0.0)
-    assert g0.compute_episode_metrics(
+    assert statistics.compute_episode_metrics(
         nine,
         episode_id=0,
         control=g0.Control.SAME_INFORMATION,
@@ -1409,7 +1414,7 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
         onset=180,
         duration=80,
     ).c_cat == 0
-    assert g0.compute_episode_metrics(
+    assert statistics.compute_episode_metrics(
         ten,
         episode_id=0,
         control=g0.Control.SAME_INFORMATION,
@@ -1417,21 +1422,21 @@ def test_metrics_bootstrap_cp_and_first_match_boundaries() -> None:
         onset=180,
         duration=80,
     ).c_cat == 1
-    plan = g0.make_bootstrap_index_plan()
+    plan = statistics.make_bootstrap_index_plan()
     assert plan.shape == (10_000, 128)
-    assert g0.bootstrap_bounds(np.ones(128), plan) == (1.0, 1.0, 1.0)
-    assert g0.clopper_pearson_one_sided(0)[0] == 0.0
-    assert g0.clopper_pearson_one_sided(128)[1] == 1.0
+    assert statistics.bootstrap_bounds(np.ones(128), plan) == (1.0, 1.0, 1.0)
+    assert statistics.clopper_pearson_one_sided(0)[0] == 0.0
+    assert statistics.clopper_pearson_one_sided(128)[1] == 1.0
     cases = {
-        g0.INVALID_BRANCH: (False, None, object(), object()),
-        g0.INFEASIBLE_BRANCH: (True, "FAIL", object(), object()),
-        g0.ORACLE_ONLY_BRANCH: (True, "PASS", "FAIL", object()),
-        g0.NON_CAUSAL_BRANCH: (True, "PASS", "PASS", "FAIL"),
-        g0.UNDERPOWERED_BRANCH: (True, "OPEN", object(), object()),
-        g0.IDENTIFIED_BRANCH: (True, "PASS", "PASS", "PASS"),
+        statistics.INVALID_BRANCH: (False, None, object(), object()),
+        statistics.INFEASIBLE_BRANCH: (True, "FAIL", object(), object()),
+        statistics.ORACLE_ONLY_BRANCH: (True, "PASS", "FAIL", object()),
+        statistics.NON_CAUSAL_BRANCH: (True, "PASS", "PASS", "FAIL"),
+        statistics.UNDERPOWERED_BRANCH: (True, "OPEN", object(), object()),
+        statistics.IDENTIFIED_BRANCH: (True, "PASS", "PASS", "PASS"),
     }
     for expected, arguments in cases.items():
-        assert g0.select_result_branch(
+        assert statistics.select_result_branch(
             valid=arguments[0],
             oracle_status=arguments[1],
             sameinfo_status=arguments[2],
@@ -1444,7 +1449,7 @@ def test_analysis_serializes_unread_lower_statuses_as_null() -> None:
     for control in g0.Control:
         for cell in g0.Cell:
             rows[(control, cell)] = tuple(
-                g0.compute_episode_metrics(
+                statistics.compute_episode_metrics(
                     np.full(g0.PHYSICAL_HORIZON, 0.90),
                     episode_id=episode_id,
                     control=control,
@@ -1452,11 +1457,11 @@ def test_analysis_serializes_unread_lower_statuses_as_null() -> None:
                     onset=180,
                     duration=80,
                 )
-                for episode_id in g0.EPISODE_IDS
+                for episode_id in statistics.EPISODE_IDS
             )
 
-    def validity(episode_id: int, *, geometry_errors: int) -> g0.EpisodeValidityRecord:
-        return g0.EpisodeValidityRecord(
+    def validity(episode_id: int, *, geometry_errors: int) -> statistics.EpisodeValidityRecord:
+        return statistics.EpisodeValidityRecord(
             episode_id=episode_id,
             source_event_digest="source",
             source_no_event_digest="source",
@@ -1478,11 +1483,11 @@ def test_analysis_serializes_unread_lower_statuses_as_null() -> None:
             nonfinite_rows=0,
         )
 
-    invalid = g0._build_analysis_from_reconstructed_rows(
+    invalid = statistics._build_analysis_from_reconstructed_rows(
         rows,
-        tuple(validity(episode_id, geometry_errors=1) for episode_id in g0.EPISODE_IDS),
+        tuple(validity(episode_id, geometry_errors=1) for episode_id in statistics.EPISODE_IDS),
     )
-    assert invalid["result_branch"] == g0.INVALID_BRANCH
+    assert invalid["result_branch"] == statistics.INVALID_BRANCH
     assert invalid["ORACLE_STATUS"] is None
     assert invalid["SAMEINFO_STATUS"] is None
     assert invalid["CAUSAL_STATUS"] is None

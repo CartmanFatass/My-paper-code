@@ -53,7 +53,9 @@ not record a scientific result and does not authorize the registered
 
 | Role | Path |
 |---|---|
-| Source/control/statistics | `ha_ctse_process/uav_source_identifiability_g0.py` |
+| Environment/controller/replay orchestration | `ha_ctse_process/uav_source_identifiability_g0.py` |
+| Frozen geometry/source construction and common target action | `ha_ctse_process/uav_g0_geometry.py` |
+| Episode metrics, confidence calculations and first-match aggregation | `ha_ctse_process/uav_g0_statistics.py` |
 | Shared episode evidence schema | `ha_ctse_process/uav_episode_schema.py` |
 | Canonical episode wire codec | `ha_ctse_process/uav_episode_serialization.py` |
 | Proof-only runner and closed scientific entries | `scripts/run_uav_source_identifiability_g0.py` |
@@ -65,6 +67,10 @@ All G31–G51 code, runtime, review, workflow and `CURRENT_WORK` surfaces remain
 outside this implementation boundary.
 
 ## Source geometry and paired authority
+
+All geometry/source-construction symbols in this section are owned by
+`ha_ctse_process/uav_g0_geometry.py`; environment, controller and replay
+symbols remain in `ha_ctse_process/uav_source_identifiability_g0.py`.
 
 | Frozen clause | Implementing symbols | Reconstructed evidence | Focused guard |
 |---|---|---|---|
@@ -210,12 +216,17 @@ does not accept caller-authored metric or validity summaries.
 
 ## Metrics and confidence
 
+Metric, confidence and first-match aggregation symbols in this section are
+owned by `ha_ctse_process/uav_g0_statistics.py`.  The source module retains
+only run reconstruction and the `build_analysis_evidence` orchestration that
+feeds reconstructed rows into that owner.
+
 | Clause | Implementation |
 |---|---|
 | `rho_z=(1/10) sum 1[rate>=1 Mbps]`; `S=min_z rho_z` | `weakest_hotspot_service_row`, `weakest_hotspot_service` |
 | EVENT `W={O..O+D+59}`, normalized deficit, `J`, outside-window `Q`, minimum `M`, `A=min(J/.90,Q/.90)`, access and 10-step catastrophe | `compute_episode_metrics`, `_has_catastrophic_streak` |
 | NO_EVENT `J=1`, whole-row `Q/M`, `A=Q/.90`, access, no catastrophe | `compute_episode_metrics`, `ha_ctse_process/uav_episode_schema.py::EpisodeMetrics.__post_init__` reconstruction |
-| paired deltas same-information minus no-reallocation | `build_analysis_evidence` |
+| paired deltas same-information minus no-reallocation | `uav_g0_statistics.py::_build_analysis_from_reconstructed_rows` |
 | exactly one `numpy Generator(PCG64(2026072901))` and one `10000×128` integer index matrix generated once and reused for every continuous metric and paired delta | `make_bootstrap_index_plan` |
 | sorted no-interpolation `x_(500)`, `x_(9500)` | `bootstrap_bounds` uses zero-indexed `[499]`, `[9499]` |
 | one-sided 95% Clopper–Pearson | `clopper_pearson_one_sided` |
@@ -373,7 +384,7 @@ Technical acceptance requires:
 - `py_compile` for both new Python paths;
 - all focused source and runner tests;
 - protected Scenario-7/S1 regressions selected proportionately;
-- exact five-path diff and `git diff --check`;
+- exact seven-path diff and `git diff --check`;
 - pushed candidate identity with local/remote equality;
 - six-phase candidate-bound execution-readiness receipt.
 
@@ -386,14 +397,14 @@ execution or supports a UAV paper conclusion.
 | claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded |
 |---|---|---|---|---|---|
 | G0-ORACLE-LEDGER | G0 oracle-safety clarification, registered ledger | `ha_ctse_process/uav_source_identifiability_g0.py::build_oracle_safety_ledger` | exactly two sealed H=500 traces, immutable rank and real-guard evidence | `test_oracle_safety_ledger_is_real_complete_and_reconstructed` | synthetic ranking flags, service-aware candidate generation, adaptive search |
-| G0-V2-GEOMETRY | executable-contract addendum v2 section 1.6 | `ha_ctse_process/uav_source_identifiability_g0.py::geometry_support_certificate` | complete analytic support under every `phi`, with zero clipping/rejection/redraw authority | universal-support and geometry-certificate tamper tests | sampled-angle-only bounds and result-dependent repair |
+| G0-V2-GEOMETRY | executable-contract addendum v2 section 1.6 | `ha_ctse_process/uav_g0_geometry.py::geometry_support_certificate` | complete analytic support under every `phi`, with zero clipping/rejection/redraw authority | universal-support and geometry-certificate tamper tests | sampled-angle-only bounds and result-dependent repair |
 | G0-V2-RANK | executable-contract addendum v2 sections 2.10 and 2.14 | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_safety_ledger` | bitwise pre-`O` gate arrival, exact event-window squared error, full-H path length and real-guard deviations reconstruct the lexicographic rank | oracle rank arithmetic boundary/tamper tests | tolerance arrival, post-`O` arrival, extended-window error and stored favorable ranks |
 | G0-REPLAY | G0 behavioral-replay clarification, branch-aware certificate | `ha_ctse_process/uav_source_identifiability_g0.py::validate_oracle_branch_aware_replay` | pre-R identity, independently reconstructed lifecycle/RNG/channel branchpoint, branch-local self-replay and shared ledger | `test_branch_aware_replay_R_NONE_requires_full_identity`, `test_branchpoint_primitives_are_required_and_independently_reconstructed` | full-episode cross-branch identity, missing primitive evidence and caller-authored replay pass flags |
 | G0-TRANSDUCER | G0 branchpoint/transducer evidence repair | `ha_ctse_process/uav_source_identifiability_g0.py::_validate_record_branchpoint_and_transducer` | every target row is an input to a freshly recomputed accepted-G1 action; record output and executed mask match exactly | `test_target_schedule_requires_recomputed_common_transducer_binding`, `test_tampered_common_transducer_input_or_output_fails_closed` | detached target schedules, stale action rows and forged transducer summaries |
 | G0-R273 | executable-contract addendum v2 section 2.6 | `ha_ctse_process/uav_source_identifiability_g0.py::_derive_return_ready_step` | episode-0 owner internal row and complete service mask reconstruct causal R=273 without a position test | `test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273` | storage-row indexing, positional coincidence, seven-step delay, future service, first-differing-byte selection |
 | G0-PRODUCTION-ORACLE | G0 code-science alignment audit plus reconstruction-carrier clarification | `ha_ctse_process/uav_source_identifiability_g0.py::run_g0_episode`, `_reconstruct_controller_trace`, `_authoritative_replay_errors` | every Oracle E/Z step supplies exact ownership, pre-action context and freshly recomputed common-transducer evidence; base controller evidence and the registered replay certificate are independently exact, with episode-0 E at R=273 and Z at R=NONE | `test_production_oracle_event_and_no_event_bind_branch_evidence`, `test_valid_oracle_certificate_is_separate_from_base_controller_evidence`, `test_oracle_behavioral_replay_certificate_fails_closed_separately` | readiness-only helper coverage, silently discarded certificates, detached target schedules, EVENT lifecycle assumptions in NO_EVENT and certificate residue on non-Oracle rows |
 | G0-STEP0-STORAGE-EVIDENCE | G0 gate-05 preflight position-evidence-order repair | `ha_ctse_process/uav_source_identifiability_g0.py::run_g0_episode` | `position_trace[0]` is the actual initial world state in frozen storage/physical-slot order, so every one of the six control/cell rows reconstructs the accepted tracker action and permutation relation exactly | `test_all_six_production_runs_bind_step_zero_tracker_and_storage_permutation` | internal target-owned order serialized beside storage-ordered targets/actions, favorable runtime counters masking independent tracker and permutation failures |
-| G0-FIRST-MATCH | executable-contract addendum v2 section 5.1 | `ha_ctse_process/uav_source_identifiability_g0.py::_build_analysis_from_reconstructed_rows` | lower scientific statuses are unread and serialized null after INVALID, ORACLE FAIL/OPEN or SAMEINFO FAIL/OPEN | lazy first-match source tests; `test_branch_witnesses_cover_exact_first_match_inventory` | eager lower-gate computation hidden by final branch precedence |
+| G0-FIRST-MATCH | executable-contract addendum v2 section 5.1 | `ha_ctse_process/uav_g0_statistics.py::_build_analysis_from_reconstructed_rows` | lower scientific statuses are unread and serialized null after INVALID, ORACLE FAIL/OPEN or SAMEINFO FAIL/OPEN | lazy first-match source tests; `test_branch_witnesses_cover_exact_first_match_inventory` | eager lower-gate computation hidden by final branch precedence |
 | G0-RUNNER | executable-contract addendum v2 identity and artifact binding | `scripts/run_uav_source_identifiability_g0.py::validate_source_artifacts` | strict manifest binds v2 stage/archive/disposition plus certificate semantics and replay artifact reconstructs R=273 | `test_six_readiness_entries_and_terminal_artifacts`, `test_reference_paths_cp_and_tracker_are_independently_reconstructed` | stale contract identity, altered universal-support certificate and favorable stored certificate |
 | G0-FORMAL-CARRIER | formal-interface V2 plus reconstruction-carrier clarification and c88f43d correction-only alignment audit | `scripts/run_uav_source_identifiability_g0.py::FormalRuntimeBinding`, `_validate_binding`, `_validate_preflight`, `_validate_preflight_admission` | explicit user-grant reference, prebound formal root and failed-root identity/schema are frozen before mutation; exact outer/carrier schemas reject extra authority-looking fields; the exact c88f43d/b0baab9/499fcaa ALIGNED tuple is bound while token-only admission, removed alignment and rebinding either active identity to the historical accepted commit/blob fail closed; formal admission checks the exact four-file hash chain and operational fields without importing or replaying episode rows | `test_result_bearing_alignment_binding_is_exact_and_removal_fails_pre_root`, `test_bound_alignment_tuple_matches_git_objects`, `test_result_bearing_alignment_rejects_historical_identity_rebinding`, `test_result_cli_requires_explicit_wrapper_carriers`, `test_mocked_preflight_writes_exact_four_file_terminal_contract`, `test_failed_root_preserves_prior_terminal_but_replaces_current_invalid_terminal` | repository token treated as user authority, inferred or extra carrier fields, absent/stale alignment, stale historical identity reuse, stale/broken-chain preflight and a failed current self-check left apparently COMPLETE |
 | G0-FORMAL-RECONSTRUCTION | formal-interface V2 gates 8-11 | `scripts/run_uav_source_identifiability_g0.py::_authoritative_replay_guard`, `_capture_analysis_reconstruction`, `_reuse_bootstrap_index_plan`, `scientific_evaluate`, `scientific_analyze` | preflight accounts for 6+6 runs and formal train remains exactly 768; evaluate and analyze each use one exact 768-replay pass; analysis compares all reconstructed metric rows, 128 validity records, episode digests and one generated/reused PCG64 plan; terminal inventory uses the exact registered 133 paths | `test_authoritative_replay_counts_are_single_pass_and_guarded`, `test_analysis_reconstruction_rejects_per_episode_validity_tamper`, `test_canonical_sorted_episode_bundle_round_trip_preserves_run_identities`, `test_bootstrap_plan_is_generated_once_and_reused_for_source_validation` | 774-run formal train, doubled analysis replay, per-episode validity substitution, caller-authored bootstrap digest, same-count artifact swaps and favorable stored result branches |

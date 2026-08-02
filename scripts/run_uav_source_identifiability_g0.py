@@ -46,13 +46,15 @@ import torch
 torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 
+from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from ha_ctse_process import uav_episode_serialization as episode_serialization
 
 
 SCHEMA_VERSION = source.SCHEMA_VERSION
-ALGORITHM_ID = source.ALGORITHM_ID
-SOURCE_ID = source.SOURCE_ID
+ALGORITHM_ID = geometry.ALGORITHM_ID
+SOURCE_ID = geometry.SOURCE_ID
 FORMAL_EXECUTION_AUTHORIZED = source.FORMAL_EXECUTION_AUTHORIZED
 DESIGN_DISPOSITION = source.DESIGN_DISPOSITION
 ORACLE_SAFETY_DISPOSITION = source.ORACLE_SAFETY_DISPOSITION
@@ -155,7 +157,7 @@ ORACLE_BEHAVIORAL_REPLAY_PROOF = "proof/oracle_behavioral_replay.json"
 @dataclass(frozen=True)
 class _ValidatedSourceArtifacts:
     manifest: Mapping[str, Any]
-    episode: source.G0EpisodeSource
+    episode: geometry.G0EpisodeSource
     ledger: source.OracleSafetyLedger
     ledger_context: source._ValidatedOracleSafetyContext
     replay_primitive: Mapping[str, Any]
@@ -367,7 +369,7 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
         raise RuntimeError("G0 readiness requires formal execution to remain closed")
     if any((source.LEARNING_ENABLED, source.OPTIMIZER_ENABLED, source.CHECKPOINT_ENABLED)):
         raise RuntimeError("G0 readiness found a prohibited learning artifact class")
-    episode = source.make_episode_source(0)
+    episode = geometry.make_episode_source(0)
     source_primitive = episode.to_primitive()
     geometry_primitive = source_primitive.get("geometry")
     geometry_support_certificate = (
@@ -424,7 +426,7 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
         "replay_disposition": REPLAY_DISPOSITION,
         "return_ready_step_disposition": RETURN_READY_STEP_DISPOSITION,
         "bootstrap_generator": BOOTSTRAP_GENERATOR,
-        "bootstrap_seed": source.BOOTSTRAP_SEED,
+        "bootstrap_seed": statistics.BOOTSTRAP_SEED,
         "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
         "geometry_support_certificate": geometry_support_certificate,
         "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
@@ -438,11 +440,11 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
     }
 
 
-def _build_tracker_proof(episode: source.G0EpisodeSource) -> dict[str, Any]:
+def _build_tracker_proof(episode: geometry.G0EpisodeSource) -> dict[str, Any]:
     physical = np.concatenate(
         (
             episode.geometry.physical_xy,
-            np.full((source.PHYSICAL_UAVS, 1), source.FIXED_ALTITUDE_M),
+            np.full((source.PHYSICAL_UAVS, 1), geometry.FIXED_ALTITUDE_M),
         ),
         axis=1,
     )
@@ -450,8 +452,8 @@ def _build_tracker_proof(episode: source.G0EpisodeSource) -> dict[str, Any]:
         [
             np.concatenate(
                 (
-                    episode.geometry.coordinate(source.TargetLabel.parse(label)),
-                    [source.FIXED_ALTITUDE_M],
+                    episode.geometry.coordinate(geometry.TargetLabel.parse(label)),
+                    [geometry.FIXED_ALTITUDE_M],
                 )
             )
             for label in episode.assignment.row_to_target
@@ -473,7 +475,7 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     commit = _validate_source_commit(source_commit)
     root = _require_fresh_root(run_root)
     root.mkdir(parents=True, exist_ok=True)
-    episode = source.make_episode_source(0)
+    episode = geometry.make_episode_source(0)
     source_value = episode.to_primitive()
     geometry_primitive = source_value.get("geometry")
     geometry_support_certificate = (
@@ -554,12 +556,12 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "physical_horizon_steps": source.PHYSICAL_HORIZON,
         "physical_fleet_size": source.PHYSICAL_UAVS,
         "ground_users": source.GROUND_USERS,
-        "ground_base_stations": source.GROUND_BASE_STATIONS,
-        "paired_episode_ids": len(source.EPISODE_IDS),
-        "episode_id_inventory": list(source.EPISODE_IDS),
-        "bootstrap_resamples": source.BOOTSTRAP_RESAMPLES,
+        "ground_base_stations": geometry.GROUND_BASE_STATIONS,
+        "paired_episode_ids": len(statistics.EPISODE_IDS),
+        "episode_id_inventory": list(statistics.EPISODE_IDS),
+        "bootstrap_resamples": statistics.BOOTSTRAP_RESAMPLES,
         "bootstrap_generator": BOOTSTRAP_GENERATOR,
-        "bootstrap_seed": source.BOOTSTRAP_SEED,
+        "bootstrap_seed": statistics.BOOTSTRAP_SEED,
         "K_search": source.K_SEARCH,
         "K_search_ceiling": source.K_SEARCH_CEILING,
         "nested_rollout": False,
@@ -627,7 +629,7 @@ def _validate_source_artifacts_bundle(
     value = _read_json(root / SOURCE_MANIFEST)
     _require_exact_keys(value, _SOURCE_MANIFEST_KEYS, label="source manifest")
     commit = _validate_source_commit(value.get("source_commit", ""))
-    episode = source.make_episode_source(0)
+    episode = geometry.make_episode_source(0)
     episode_primitive = episode.to_primitive()
     expected_scalars = {
         "status": "COMPLETE",
@@ -665,12 +667,12 @@ def _validate_source_artifacts_bundle(
         "physical_horizon_steps": source.PHYSICAL_HORIZON,
         "physical_fleet_size": source.PHYSICAL_UAVS,
         "ground_users": source.GROUND_USERS,
-        "ground_base_stations": source.GROUND_BASE_STATIONS,
-        "paired_episode_ids": len(source.EPISODE_IDS),
-        "episode_id_inventory": list(source.EPISODE_IDS),
-        "bootstrap_resamples": source.BOOTSTRAP_RESAMPLES,
+        "ground_base_stations": geometry.GROUND_BASE_STATIONS,
+        "paired_episode_ids": len(statistics.EPISODE_IDS),
+        "episode_id_inventory": list(statistics.EPISODE_IDS),
+        "bootstrap_resamples": statistics.BOOTSTRAP_RESAMPLES,
         "bootstrap_generator": BOOTSTRAP_GENERATOR,
-        "bootstrap_seed": source.BOOTSTRAP_SEED,
+        "bootstrap_seed": statistics.BOOTSTRAP_SEED,
         "K_search": source.K_SEARCH,
         "K_search_ceiling": source.K_SEARCH_CEILING,
         "nested_rollout": False,
@@ -823,7 +825,7 @@ def readiness_reload(*, run_root: Path) -> dict[str, Any]:
 
 def _metric_witness() -> dict[str, Any]:
     service = np.full(source.PHYSICAL_HORIZON, 0.90, dtype=np.float64)
-    event = source.compute_episode_metrics(
+    event = statistics.compute_episode_metrics(
         service,
         episode_id=0,
         control=source.Control.SAME_INFORMATION,
@@ -831,7 +833,7 @@ def _metric_witness() -> dict[str, Any]:
         onset=180,
         duration=80,
     )
-    no_event = source.compute_episode_metrics(
+    no_event = statistics.compute_episode_metrics(
         service,
         episode_id=0,
         control=source.Control.SAME_INFORMATION,
@@ -841,7 +843,7 @@ def _metric_witness() -> dict[str, Any]:
     )
     catastrophe = service.copy()
     catastrophe[180:190] = np.nextafter(0.60, 0.0)
-    catastrophe_row = source.compute_episode_metrics(
+    catastrophe_row = statistics.compute_episode_metrics(
         catastrophe,
         episode_id=0,
         control=source.Control.SAME_INFORMATION,
@@ -857,8 +859,8 @@ def _metric_witness() -> dict[str, Any]:
 
 
 def _clopper_pearson_witness() -> dict[str, Any]:
-    lower_zero, upper_zero = source.clopper_pearson_one_sided(0)
-    lower_all, upper_all = source.clopper_pearson_one_sided(len(source.EPISODE_IDS))
+    lower_zero, upper_zero = statistics.clopper_pearson_one_sided(0)
+    lower_all, upper_all = statistics.clopper_pearson_one_sided(len(statistics.EPISODE_IDS))
     return {
         "k0": [lower_zero, upper_zero],
         "k128": [lower_all, upper_all],
@@ -886,7 +888,7 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
         or production_witness.get("result_branch") is not None
     ):
         raise RuntimeError("G0 production proof episode validity failed")
-    plan = source.make_bootstrap_index_plan()
+    plan = statistics.make_bootstrap_index_plan()
     value = {
         "status": "COMPLETE",
         "schema_version": SCHEMA_VERSION,
@@ -900,7 +902,7 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
         "metric_witness": _metric_witness(),
         "bootstrap_plan": {
             "shape": list(plan.shape),
-            "seed": source.BOOTSTRAP_SEED,
+            "seed": statistics.BOOTSTRAP_SEED,
             "sha256": hashlib.sha256(plan.tobytes(order="C")).hexdigest(),
             "lower_order_statistic": 500,
             "upper_order_statistic": 9500,
@@ -925,10 +927,10 @@ def _validate_evaluation_artifacts_from_bundle(
     training = bundle.manifest
     value = _read_json(root / EVALUATION_MANIFEST)
     _require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
-    plan = source.make_bootstrap_index_plan()
+    plan = statistics.make_bootstrap_index_plan()
     expected_plan = {
         "shape": list(plan.shape),
-        "seed": source.BOOTSTRAP_SEED,
+        "seed": statistics.BOOTSTRAP_SEED,
         "sha256": hashlib.sha256(plan.tobytes(order="C")).hexdigest(),
         "lower_order_statistic": 500,
         "upper_order_statistic": 9500,
@@ -979,13 +981,13 @@ def validate_evaluation_artifacts(run_root: Path) -> dict[str, Any]:
 def _branch_witnesses() -> dict[str, dict[str, Any]]:
     cases = {
         "invalid": (False, None, None, None),
-        "infeasible": (True, source.GateStatus.FAIL, None, None),
-        "oracle_only": (True, source.GateStatus.PASS, source.GateStatus.FAIL, None),
-        "non_causal": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.FAIL),
-        "underpowered_oracle": (True, source.GateStatus.OPEN, None, None),
-        "underpowered_sameinfo": (True, source.GateStatus.PASS, source.GateStatus.OPEN, None),
-        "underpowered_causal": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.OPEN),
-        "identified": (True, source.GateStatus.PASS, source.GateStatus.PASS, source.GateStatus.PASS),
+        "infeasible": (True, statistics.GateStatus.FAIL, None, None),
+        "oracle_only": (True, statistics.GateStatus.PASS, statistics.GateStatus.FAIL, None),
+        "non_causal": (True, statistics.GateStatus.PASS, statistics.GateStatus.PASS, statistics.GateStatus.FAIL),
+        "underpowered_oracle": (True, statistics.GateStatus.OPEN, None, None),
+        "underpowered_sameinfo": (True, statistics.GateStatus.PASS, statistics.GateStatus.OPEN, None),
+        "underpowered_causal": (True, statistics.GateStatus.PASS, statistics.GateStatus.PASS, statistics.GateStatus.OPEN),
+        "identified": (True, statistics.GateStatus.PASS, statistics.GateStatus.PASS, statistics.GateStatus.PASS),
     }
     return {
         name: {
@@ -993,7 +995,7 @@ def _branch_witnesses() -> dict[str, dict[str, Any]]:
             "ORACLE_STATUS": oracle.value if oracle is not None else None,
             "SAMEINFO_STATUS": sameinfo.value if sameinfo is not None else None,
             "CAUSAL_STATUS": causal.value if causal is not None else None,
-            "result_branch": source.select_result_branch(
+            "result_branch": statistics.select_result_branch(
                 valid=valid,
                 oracle_status=oracle,
                 sameinfo_status=sameinfo,
@@ -1039,7 +1041,7 @@ def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
         "scientific_iteration_cost": 0,
         "source_manifest_sha256": _digest(root / SOURCE_MANIFEST),
         "evaluation_manifest_sha256": _digest(root / EVALUATION_MANIFEST),
-        "first_match_order": list(source.FIRST_MATCH_ORDER),
+        "first_match_order": list(statistics.FIRST_MATCH_ORDER),
         "branch_witnesses": _branch_witnesses(),
         "primitive_analysis_witness": primitive_witness,
         "operational_valid": False,
@@ -1076,7 +1078,7 @@ def _validate_analysis_artifacts_from_bundle(
         or value.get("scientific_iteration_cost") != 0
         or value.get("source_manifest_sha256") != _digest(root / SOURCE_MANIFEST)
         or value.get("evaluation_manifest_sha256") != _digest(root / EVALUATION_MANIFEST)
-        or value.get("first_match_order") != list(source.FIRST_MATCH_ORDER)
+        or value.get("first_match_order") != list(statistics.FIRST_MATCH_ORDER)
         or value.get("branch_witnesses") != _branch_witnesses()
         or value.get("primitive_analysis_witness")
         != _primitive_analysis_witness(bundle)
@@ -1542,7 +1544,7 @@ def _validate_binding(binding: FormalRuntimeBinding, *, stage: str) -> dict[str,
 
 
 def _run_episode_worker(episode_id: int) -> dict[str, Any]:
-    episode = source.make_episode_source(int(episode_id))
+    episode = geometry.make_episode_source(int(episode_id))
     runs = {
         key: episode_serialization.episode_run_to_primitive(
             source.run_g0_episode(episode, control=control, cell=cell)
@@ -1591,7 +1593,7 @@ def _episode_bundle(payload: Mapping[str, Any], *, formal: bool, contract_sha256
     return _content_digest(value, "bundle_sha256")
 
 
-def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> tuple[source.G0EpisodeSource, dict[tuple[source.Control, source.Cell], source.EpisodeRunEvidence], dict[str, Any]]:
+def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> tuple[geometry.G0EpisodeSource, dict[tuple[source.Control, source.Cell], source.EpisodeRunEvidence], dict[str, Any]]:
     value = _read_json(path)
     _require_exact_keys(value, _BUNDLE_KEYS, label="episode bundle")
     _validate_content_digest(value, "bundle_sha256")
@@ -1606,7 +1608,7 @@ def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> t
         or set(value["runs"]) != set(_RUN_KEYS)
     ):
         raise ValueError("G0 episode bundle identity mismatch")
-    episode = source.make_episode_source(episode_id)
+    episode = geometry.make_episode_source(episode_id)
     if episode.to_primitive() != value["source_primitive"] or (
         value["source_sha256"] != value["source_primitive"].get("sha256")
     ):
@@ -1622,12 +1624,12 @@ def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> t
     return episode, runs, value
 
 
-def _validity_to_primitive(record: source.EpisodeValidityRecord) -> dict[str, Any]:
+def _validity_to_primitive(record: statistics.EpisodeValidityRecord) -> dict[str, Any]:
     return {item.name: getattr(record, item.name) for item in fields(record)}
 
 
-def _reconstruct_inventory(root: Path, *, contract_sha256: str, episode_ids: Sequence[int]) -> tuple[list[source.G0EpisodeSource], dict[tuple[source.Control, source.Cell], list[source.EpisodeRunEvidence]], dict[str, list[dict[str, Any]]], list[dict[str, Any]], dict[str, str]]:
-    sources: list[source.G0EpisodeSource] = []
+def _reconstruct_inventory(root: Path, *, contract_sha256: str, episode_ids: Sequence[int]) -> tuple[list[geometry.G0EpisodeSource], dict[tuple[source.Control, source.Cell], list[source.EpisodeRunEvidence]], dict[str, list[dict[str, Any]]], list[dict[str, Any]], dict[str, str]]:
+    sources: list[geometry.G0EpisodeSource] = []
     rows = {identity: [] for identity in _RUN_IDENTITIES}
     metrics = {key: [] for key in _RUN_KEYS}
     validity: list[dict[str, Any]] = []
@@ -1649,8 +1651,8 @@ def _reconstruct_inventory(root: Path, *, contract_sha256: str, episode_ids: Seq
     return sources, rows, metrics, validity, bundle_digests
 
 
-def _load_inventory_without_replay(root: Path, *, contract_sha256: str, episode_ids: Sequence[int]) -> tuple[list[source.G0EpisodeSource], dict[tuple[source.Control, source.Cell], list[source.EpisodeRunEvidence]], dict[str, list[dict[str, Any]]], dict[str, str]]:
-    sources: list[source.G0EpisodeSource] = []
+def _load_inventory_without_replay(root: Path, *, contract_sha256: str, episode_ids: Sequence[int]) -> tuple[list[geometry.G0EpisodeSource], dict[tuple[source.Control, source.Cell], list[source.EpisodeRunEvidence]], dict[str, list[dict[str, Any]]], dict[str, str]]:
+    sources: list[geometry.G0EpisodeSource] = []
     rows = {identity: [] for identity in _RUN_IDENTITIES}
     stored_metrics = {key: [] for key in _RUN_KEYS}
     bundle_digests: dict[str, str] = {}
@@ -1697,7 +1699,7 @@ def _capture_authoritative_replay_errors():
     captured: list[tuple[str, str, tuple[str, ...]]] = []
 
     def checked(
-        episode: source.G0EpisodeSource,
+        episode: geometry.G0EpisodeSource,
         run: source.EpisodeRunEvidence,
     ) -> tuple[str, ...]:
         errors = tuple(original(episode, run))
@@ -1712,7 +1714,7 @@ def _capture_authoritative_replay_errors():
 
 
 def _preflight_semantic_evidence(
-    episode: source.G0EpisodeSource,
+    episode: geometry.G0EpisodeSource,
     runs: Mapping[tuple[source.Control, source.Cell], source.EpisodeRunEvidence],
     *,
     source_matches_bundle: bool,
@@ -1791,7 +1793,7 @@ def _capture_analysis_reconstruction():
 def _reuse_bootstrap_index_plan(index_plan: np.ndarray):
     """Make source-side plan validation reuse the one coordinator matrix."""
 
-    original = source.make_bootstrap_index_plan
+    original = statistics.make_bootstrap_index_plan
     plan = np.asarray(index_plan, dtype=np.int64)
     calls = 0
 
@@ -1800,13 +1802,13 @@ def _reuse_bootstrap_index_plan(index_plan: np.ndarray):
         calls += 1
         return plan
 
-    source.make_bootstrap_index_plan = reused
+    statistics.make_bootstrap_index_plan = reused
     completed = False
     try:
         yield
         completed = True
     finally:
-        source.make_bootstrap_index_plan = original
+        statistics.make_bootstrap_index_plan = original
     if completed and calls != 1:
         raise RuntimeError(
             f"G0 source bootstrap-plan validation count mismatch: expected 1, got {calls}"
@@ -2375,7 +2377,7 @@ def scientific_evaluate(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             errors for _control, _cell, errors in replay_rows
         ):
             raise ValueError("G0 gate_09 authoritative replay mismatch")
-        plan = source.make_bootstrap_index_plan()
+        plan = statistics.make_bootstrap_index_plan()
         value = _content_digest(
             {
                 "schema_id": "UAV_G0_FORMAL_EVALUATION_MANIFEST",
@@ -2385,8 +2387,8 @@ def scientific_evaluate(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                 "episode_bundle_sha256_by_id": bundle_digests,
                 "metric_rows": metric_rows, "validity_records": validity,
                 "bootstrap_generator": BOOTSTRAP_GENERATOR,
-                "bootstrap_seed": source.BOOTSTRAP_SEED,
-                "bootstrap_shape": [source.BOOTSTRAP_RESAMPLES, len(source.EPISODE_IDS)],
+                "bootstrap_seed": statistics.BOOTSTRAP_SEED,
+                "bootstrap_shape": [statistics.BOOTSTRAP_RESAMPLES, len(statistics.EPISODE_IDS)],
                 "bootstrap_index_sha256": hashlib.sha256(
                     np.asarray(plan, dtype=np.int64).tobytes(order="C")
                 ).hexdigest(),
@@ -2427,8 +2429,8 @@ def _load_formal_evaluation(
         or value["result_branch"] is not None or value["optimizer_steps"] != 0
         or value["real_simulator_steps"] != 384000
         or value["bootstrap_generator"] != BOOTSTRAP_GENERATOR
-        or value["bootstrap_seed"] != source.BOOTSTRAP_SEED
-        or value["bootstrap_shape"] != [source.BOOTSTRAP_RESAMPLES, 128]
+        or value["bootstrap_seed"] != statistics.BOOTSTRAP_SEED
+        or value["bootstrap_shape"] != [statistics.BOOTSTRAP_RESAMPLES, 128]
         or value["bootstrap_index_sha256"] != expected_bootstrap_sha
     ):
         raise ValueError("G0 formal evaluation manifest identity mismatch")
@@ -2444,7 +2446,7 @@ def scientific_analyze(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
     terminal_written = False
     try:
         contract, manifest = _load_formal_train(root, binding, environment)
-        analysis_plan = source.make_bootstrap_index_plan()
+        analysis_plan = statistics.make_bootstrap_index_plan()
         evaluation = _load_formal_evaluation(
             root,
             contract,
