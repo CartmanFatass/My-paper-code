@@ -10,6 +10,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
 from ha_ctse_process.anchored_residual_g19 import (
@@ -144,10 +145,10 @@ def make_model(
 ) -> G35MatchedStateCarryPolicy:
     torch.manual_seed(int(initialization_seed))
     model = G35MatchedStateCarryPolicy(
-        g32.OBSERVATION_DIM,
-        g32.CRITIC_STATE_DIM,
+        roster_env.OBSERVATION_DIM,
+        roster_env.CRITIC_STATE_DIM,
         member_capacity=int(member_capacity),
-        action_dim=g32.ACTION_DIM,
+        action_dim=roster_env.ACTION_DIM,
         carry_mode=carry_mode,
         hidden_dim=HIDDEN_DIM,
     )
@@ -290,14 +291,14 @@ def _time_assignments(
 
 def _profile_assignments(
     *, replicate: int, capacity: int, process_seed: int
-) -> tuple[g32.RosterProfile, ...]:
+) -> tuple[roster_env.RosterProfile, ...]:
     if capacity == 6:
-        return (g32.SMALL_CAPACITY_6,) * EPISODE_SUPPORT
+        return (roster_env.SMALL_CAPACITY_6,) * EPISODE_SUPPORT
     if capacity == 12:
-        return (g32.LARGE_CAPACITY_12,) * EPISODE_SUPPORT
+        return (roster_env.LARGE_CAPACITY_12,) * EPISODE_SUPPORT
     if capacity == 8:
         return _balanced_assignments(
-            g32.TRAIN_PROFILES,
+            roster_env.TRAIN_PROFILES,
             replicate=replicate,
             capacity=capacity,
             process_seed=process_seed,
@@ -329,7 +330,7 @@ def make_process_ledgers(
     )
     rows: list[g34.RandomProcessLedger] = []
     for local_episode in range(int(episode_count)):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=seeds["evaluation_base_ledger"],
             profile=profiles[local_episode],
@@ -479,10 +480,10 @@ def current_state_witness_utility(load: float, target_mix: float) -> float:
 def source_controls() -> dict[str, object]:
     return {
         "source_id": SOURCE_ID,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
-        "fixed_event_times": list(g32.EVENT_TIMES),
+        "fixed_event_times": list(roster_env.EVENT_TIMES),
         "fixed_event_process": ["L", "R+J", "T"],
         "random_event_orders": [list(row) for row in g34.EVENT_ORDERS],
         "random_time_minimum": 5,

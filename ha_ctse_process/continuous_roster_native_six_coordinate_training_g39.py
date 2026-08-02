@@ -9,10 +9,11 @@ import numpy as np
 import torch
 from torch import nn
 
+from envs.continuous_roster import cpp_backend as toy_cpp
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
-from ha_ctse_process import continuous_roster_toy_cpp_backend as toy_cpp
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
 
 
@@ -79,9 +80,9 @@ class G39NativeSixPolicy(g38.G38FoldableMatchedCSPolicy):
     def __init__(self, *, member_capacity: int) -> None:
         super().__init__(
             RETAINED_OBSERVATION_DIM,
-            g32.CRITIC_STATE_DIM,
+            roster_env.CRITIC_STATE_DIM,
             member_capacity=int(member_capacity),
-            action_dim=g32.ACTION_DIM,
+            action_dim=roster_env.ACTION_DIM,
             input_mode=g38.FOLDED6_INPUT,
             hidden_dim=HIDDEN_DIM,
         )
@@ -240,7 +241,7 @@ def collect_g39_trajectory(
     ledger_seed: int,
     action_seed: int,
     device: torch.device,
-    profiles: Sequence[g32.RosterProfile] = g32.TRAIN_PROFILES,
+    profiles: Sequence[roster_env.RosterProfile] = roster_env.TRAIN_PROFILES,
 ) -> g32.ContinuousRosterTrajectory:
     """Collect one six-wide trajectory for either independent arm."""
 
@@ -252,31 +253,31 @@ def collect_g39_trajectory(
     if any(row.member_capacity != capacity for row in profile_rows) or model.member_capacity != capacity:
         raise ValueError("G39 collection capacity mismatch")
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=int(ledger_seed),
             profile=profile_rows[episode % len(profile_rows)],
         )
         for episode in ids
     )
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     env_batch = toy_cpp.ContinuousRosterToyBatch(envs)
     batch = len(ids)
-    noise = g32.make_action_noise(ids, action_seed=int(action_seed), member_capacity=capacity)
+    noise = roster_env.make_action_noise(ids, action_seed=int(action_seed), member_capacity=capacity)
     hidden = torch.zeros((batch, capacity, model.hidden_dim), device=device)
     shapes = {
-        "observations": (g32.HORIZON, batch, capacity, RETAINED_OBSERVATION_DIM),
-        "active_mask": (g32.HORIZON, batch, capacity),
-        "critic_states": (g32.HORIZON, batch, g32.CRITIC_STATE_DIM),
-        "actions": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "pre_tanh_actions": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "old_log_probs": (g32.HORIZON, batch, capacity),
-        "old_values": (g32.HORIZON, batch),
-        "rewards": (g32.HORIZON, batch),
-        "hidden_before": (g32.HORIZON, batch, capacity, model.hidden_dim),
-        "hidden_after": (g32.HORIZON, batch, capacity, model.hidden_dim),
-        "prefix_action_sums": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "terminal_hidden_reset_mask": (g32.HORIZON, batch, capacity),
+        "observations": (roster_env.HORIZON, batch, capacity, RETAINED_OBSERVATION_DIM),
+        "active_mask": (roster_env.HORIZON, batch, capacity),
+        "critic_states": (roster_env.HORIZON, batch, roster_env.CRITIC_STATE_DIM),
+        "actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "pre_tanh_actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "old_log_probs": (roster_env.HORIZON, batch, capacity),
+        "old_values": (roster_env.HORIZON, batch),
+        "rewards": (roster_env.HORIZON, batch),
+        "hidden_before": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "hidden_after": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "prefix_action_sums": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "terminal_hidden_reset_mask": (roster_env.HORIZON, batch, capacity),
     }
     rows = {
         name: torch.empty(
@@ -287,7 +288,7 @@ def collect_g39_trajectory(
     }
     model.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = env_batch.observe_six()
             terminal_reset = torch.zeros((batch, capacity), dtype=torch.bool, device=device)
             for batch_index, view in enumerate(views):
@@ -664,11 +665,11 @@ def evaluate_g39_model(
     envs = tuple(
         g34.RandomProcessRosterEnv(row)
         if process_kind == "random"
-        else g32.RuntimeCapacityRosterEnv(row.base)
+        else roster_env.RuntimeCapacityRosterEnv(row.base)
         for row in rows
     )
     env_batch = toy_cpp.ContinuousRosterToyBatch(envs)
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         (row.episode_id for row in rows),
         action_seed=int(action_seed),
         member_capacity=model.member_capacity,
@@ -680,7 +681,7 @@ def evaluate_g39_model(
     lifecycle_valid = True
     model.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = env_batch.observe_six()
             for index, view in enumerate(views):
                 for key in view.membership_change.temporarily_left:
@@ -761,12 +762,12 @@ def make_process_ledgers(
         stream=1,
     )
     if capacity == 6:
-        profiles = (g32.SMALL_CAPACITY_6,) * 64
+        profiles = (roster_env.SMALL_CAPACITY_6,) * 64
     elif capacity == 12:
-        profiles = (g32.LARGE_CAPACITY_12,) * 64
+        profiles = (roster_env.LARGE_CAPACITY_12,) * 64
     else:
         profiles = _balanced_64_assignments(
-            g32.TRAIN_PROFILES,
+            roster_env.TRAIN_PROFILES,
             replicate=replicate,
             capacity=capacity,
             process_seed=seeds["evaluation_process"],
@@ -774,7 +775,7 @@ def make_process_ledgers(
         )
     rows: list[g34.RandomProcessLedger] = []
     for local_episode in range(int(episode_count)):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=seeds["evaluation_base_ledger"],
             profile=profiles[local_episode],
@@ -838,8 +839,8 @@ def source_controls() -> dict[str, object]:
         "source_id": SOURCE_ID,
         "training_source": "G32 capacity-8 fixed",
         "evaluation_source": "G34 fixed/random capacities 6|8|12",
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "seed_bases": dict(SEED_BASES),
         "bootstrap_seed": BOOTSTRAP_SEED,

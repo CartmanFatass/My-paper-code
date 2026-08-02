@@ -23,7 +23,7 @@ from typing import Final, Sequence
 
 import numpy as np
 
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 _SOURCE: Final[Path] = (
@@ -291,7 +291,7 @@ def _checked_observation_payload(
         raise RuntimeError("native toy observation returned an invalid payload")
     expected = (
         ((batch, capacity, 6), np.dtype(np.float32)),
-        ((batch, g32.CRITIC_STATE_DIM), np.dtype(np.float32)),
+        ((batch, roster_env.CRITIC_STATE_DIM), np.dtype(np.float32)),
     )
     checked: list[np.ndarray] = []
     for index, (value, (shape, dtype)) in enumerate(zip(raw, expected)):
@@ -335,7 +335,7 @@ def reward_batch(
     batch, capacity, _ = capability_rows.shape
     if (
         active_rows.shape != (batch, capacity)
-        or action_rows.shape != (batch, capacity, g32.ACTION_DIM)
+        or action_rows.shape != (batch, capacity, roster_env.ACTION_DIM)
         or load_rows.shape != (batch,)
         or mix_rows.shape != (batch,)
     ):
@@ -367,13 +367,13 @@ def _checked_reward_payload(raw: object, *, batch: int) -> np.ndarray:
 class ContinuousRosterToyBatch:
     """Python-owned synchronous environment batch with two native arithmetic slices."""
 
-    def __init__(self, envs: Sequence[g32.RuntimeCapacityRosterEnv]):
+    def __init__(self, envs: Sequence[roster_env.RuntimeCapacityRosterEnv]):
         rows = tuple(envs)
         if not rows:
             raise ValueError("toy batch requires at least one environment")
         capacity = rows[0].ledger.member_capacity
         if any(
-            not isinstance(env, g32.RuntimeCapacityRosterEnv)
+            not isinstance(env, roster_env.RuntimeCapacityRosterEnv)
             or env.ledger.member_capacity != capacity
             or env.time != rows[0].time
             or env._terminated
@@ -438,7 +438,7 @@ class ContinuousRosterToyBatch:
             env.age = self._age_rows[index]
             env.previous_actions = self._previous_rows[index]
         self._module = load_continuous_roster_toy_cpp_backend()
-        self._last_views: tuple[g32.CapacityRosterView, ...] | None = None
+        self._last_views: tuple[roster_env.CapacityRosterView, ...] | None = None
 
     def _validate_state_binding(self) -> None:
         for index, env in enumerate(self.envs):
@@ -449,7 +449,7 @@ class ContinuousRosterToyBatch:
             ):
                 raise RuntimeError("toy batch environment state binding changed")
 
-    def observe_six(self) -> tuple[g32.CapacityRosterView, ...]:
+    def observe_six(self) -> tuple[roster_env.CapacityRosterView, ...]:
         """Prepare Python lifecycle state, then construct one native observation batch."""
 
         self._validate_state_binding()
@@ -472,7 +472,7 @@ class ContinuousRosterToyBatch:
             target_mixes,
             self._active,
             log_counts,
-            np.float32(time / (g32.HORIZON - 1)),
+            np.float32(time / (roster_env.HORIZON - 1)),
         )
         observations, critic_states = _checked_observation_payload(
             raw,
@@ -481,7 +481,7 @@ class ContinuousRosterToyBatch:
             active_mask=self._active,
         )
         views = tuple(
-            g32.CapacityRosterView(
+            roster_env.CapacityRosterView(
                 time,
                 observations[index],
                 self._active_rows[index].copy(),
@@ -497,7 +497,7 @@ class ContinuousRosterToyBatch:
 
     def advance(
         self,
-        views: tuple[g32.CapacityRosterView, ...],
+        views: tuple[roster_env.CapacityRosterView, ...],
         actions: np.ndarray,
     ) -> np.ndarray:
         """Compute rewards natively and apply all state transitions in Python."""
@@ -520,7 +520,7 @@ class ContinuousRosterToyBatch:
         if values.shape != (
             self.batch_size,
             self.member_capacity,
-            g32.ACTION_DIM,
+            roster_env.ACTION_DIM,
         ):
             raise ValueError("toy batch action shape mismatch")
         if np.any(np.abs(values) > 1.0):
@@ -544,7 +544,7 @@ class ContinuousRosterToyBatch:
             env.roster_sizes.append(int(counts[index]))
             env.time += 1
             env._prepared_time = None
-            env._change = g32.MembershipChange()
-            env._terminated = env.time == g32.HORIZON
+            env._change = roster_env.MembershipChange()
+            env._terminated = env.time == roster_env.HORIZON
         self._last_views = None
         return rewards

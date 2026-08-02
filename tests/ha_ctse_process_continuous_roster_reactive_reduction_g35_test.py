@@ -6,6 +6,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import attach_credit_baselines
 
 
@@ -39,16 +40,16 @@ def test_matched_arms_have_identical_parameters_and_only_carry_differs() -> None
 def test_forced_initial_state_is_equal_and_cs_storage_remains_zero() -> None:
     models = _paired()
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=10_357_000,
-            profile=g32.TRAIN_PROFILES[episode % len(g32.TRAIN_PROFILES)],
+            profile=roster_env.TRAIN_PROFILES[episode % len(roster_env.TRAIN_PROFILES)],
         )
         for episode in range(2)
     )
-    views = tuple(g32.RuntimeCapacityRosterEnv(row).observe() for row in ledgers)
+    views = tuple(roster_env.RuntimeCapacityRosterEnv(row).observe() for row in ledgers)
     noise = torch.as_tensor(
-        g32.make_action_noise(range(2), action_seed=10_357_000, member_capacity=8)[0]
+        roster_env.make_action_noise(range(2), action_seed=10_357_000, member_capacity=8)[0]
     )
     errors = g35.forced_initial_equality(
         models[g35.REC_ARM],

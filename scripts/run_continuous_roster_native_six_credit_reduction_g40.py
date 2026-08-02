@@ -20,7 +20,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_native_six_credit_reduction_g40 as source
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_native_six_coordinate_training_g39 as g39_runner
 from scripts import run_continuous_roster_reactive_reduction_g35 as g35_runner
 from scripts import run_continuous_roster_six_coordinate_cs_g38 as g38_runner
@@ -138,12 +138,12 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    anchor_transitions = replicates * anchor * envs * g32.HORIZON
+    anchor_transitions = replicates * anchor * envs * roster_env.HORIZON
     branch_transitions = (
-        replicates * len(source.ARMS) * branch * envs * g32.HORIZON
+        replicates * len(source.ARMS) * branch * envs * roster_env.HORIZON
     )
     evaluation_transitions = (
-        replicates * cells_per_replicate * episodes * g32.HORIZON
+        replicates * cells_per_replicate * episodes * roster_env.HORIZON
     )
     optimizer_steps = replicates * (
         anchor * passes + len(source.ARMS) * branch * passes * 2
@@ -153,10 +153,10 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         "arms": list(source.ARMS),
         "common_anchor": "COMMON_NATIVE6_FAST_ANCHOR",
         "stored_training_observation_dim": 6,
-        "critic_state_dim": g32.CRITIC_STATE_DIM,
-        "action_dim": g32.ACTION_DIM,
+        "critic_state_dim": roster_env.CRITIC_STATE_DIM,
+        "action_dim": roster_env.ACTION_DIM,
         "actor_width": source.g39.HIDDEN_DIM,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "gamma": source.GAMMA,
         "gae_lambda": source.GAE_LAMBDA,
@@ -353,7 +353,7 @@ def _train_replicate(
     seeds = source.seed_block(replicate, formal=formal)
     configure_runtime(seeds["anchor_model"])
     zero = source.make_model(
-        g32.TRAIN_CAPACITY, initialization_seed=seeds["anchor_model"]
+        roster_env.TRAIN_CAPACITY, initialization_seed=seeds["anchor_model"]
     )
     zero_digest = _state_digest(zero)
     anchor = zero
@@ -467,10 +467,10 @@ def _train_replicate(
             left, right = (trajectories[arm] for arm in source.ARMS)
             first_trajectory = source.branch_trajectory_match(left, right)
             noise = torch.as_tensor(
-                g32.make_action_noise(
+                roster_env.make_action_noise(
                     ids,
                     action_seed=action_seed,
-                    member_capacity=g32.TRAIN_CAPACITY,
+                    member_capacity=roster_env.TRAIN_CAPACITY,
                 )[0]
             )
             first_forward = source.branch_forward_match(
@@ -929,7 +929,7 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
                 kind="anchor",
                 configuration=configuration,
                 seeds=row["seeds"],
-                member_capacity=g32.TRAIN_CAPACITY,
+                member_capacity=roster_env.TRAIN_CAPACITY,
             )
             if _state_digest(loaded_anchor) != anchor["state_digest"]:
                 raise ValueError("G40 common-anchor checkpoint digest mismatch")
@@ -954,7 +954,7 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
                     kind=arm,
                     configuration=configuration,
                     seeds=row["seeds"],
-                    member_capacity=g32.TRAIN_CAPACITY,
+                    member_capacity=roster_env.TRAIN_CAPACITY,
                 )
                 if _state_digest(loaded) != arm_row["final_state_digest"]:
                     raise ValueError("G40 branch checkpoint digest mismatch")

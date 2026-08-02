@@ -18,6 +18,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as source
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     maximum_state_difference,
@@ -77,10 +78,10 @@ SEED_BASES = {
 }
 
 PROFILES = {
-    "train_capacity_8": source.TRAIN_PROFILES,
-    "padding_capacity_8": (source.PADDING_CAPACITY_8,),
-    "small_capacity_6": (source.SMALL_CAPACITY_6,),
-    "large_capacity_12": (source.LARGE_CAPACITY_12,),
+    "train_capacity_8": roster_env.TRAIN_PROFILES,
+    "padding_capacity_8": (roster_env.PADDING_CAPACITY_8,),
+    "small_capacity_6": (roster_env.SMALL_CAPACITY_6,),
+    "large_capacity_12": (roster_env.LARGE_CAPACITY_12,),
 }
 PADDING_MISMATCH_FIELDS = (
     "observation", "value", "action", "reward", "hidden"
@@ -133,8 +134,8 @@ def _configuration(*, formal: bool) -> dict[str, Any]:
     return {
         **_counts(formal=formal), "gamma": GAMMA, "hidden_dim": HIDDEN_DIM,
         "learning_rate": LEARNING_RATE, "initial_log_std": INITIAL_LOG_STD,
-        "train_capacity": source.TRAIN_CAPACITY,
-        "evaluation_capacities": list(source.EVALUATION_CAPACITIES),
+        "train_capacity": roster_env.TRAIN_CAPACITY,
+        "evaluation_capacities": list(roster_env.EVALUATION_CAPACITIES),
         "base_critic_input": "context_input_plus_fixed_width_critic_state",
         "slow_critic_input": "fixed_width_critic_state_plus_log1p_active_count",
         "member_capacity": "runtime_only_nonserialized",
@@ -153,8 +154,8 @@ def _seeds(replicate: int, *, formal: bool) -> dict[str, int]:
 
 def make_model(member_capacity: int) -> ReturnToGoDirectionBalancedFullActorPolicy:
     model = ReturnToGoDirectionBalancedFullActorPolicy(
-        source.OBSERVATION_DIM, source.CRITIC_STATE_DIM,
-        member_capacity=int(member_capacity), action_dim=source.ACTION_DIM,
+        roster_env.OBSERVATION_DIM, roster_env.CRITIC_STATE_DIM,
+        member_capacity=int(member_capacity), action_dim=roster_env.ACTION_DIM,
         hidden_dim=HIDDEN_DIM,
     )
     with torch.no_grad():
@@ -247,7 +248,7 @@ def _collect(model: ReturnToGoDirectionBalancedFullActorPolicy, *, episode_ids: 
     raw = source.collect_trajectory(
         model, episode_ids=episode_ids, ledger_seed=seeds["ledger"],
         action_seed=seeds["action"], device=torch.device("cpu"),
-        profiles=source.TRAIN_PROFILES,
+        profiles=roster_env.TRAIN_PROFILES,
     )
     return attach_credit_baselines(model, raw, device=torch.device("cpu"))
 
@@ -257,7 +258,7 @@ def _train_replicate(
     configuration: dict[str, Any], seeds: dict[str, int],
 ) -> dict[str, Any]:
     configure_runtime(seeds["model"])
-    model = make_model(source.TRAIN_CAPACITY)
+    model = make_model(roster_env.TRAIN_CAPACITY)
     zero_state = _copy_state(model)
     for kind in ("zero",):
         _save_checkpoint(
@@ -376,7 +377,7 @@ def _profile_cell(model: ReturnToGoDirectionBalancedFullActorPolicy, *, name: st
         tuple(
             count
             for count in profiles[index % len(profiles)].segment_counts
-            for _ in range(source.HORIZON // 4)
+            for _ in range(roster_env.HORIZON // 4)
         )
         for index in range(eval_episodes)
     ]
@@ -398,17 +399,17 @@ def _mapping_diagnostic(
 ) -> dict[str, float]:
     state_before = _state_digest(_copy_state(model))
     ledgers = tuple(
-        source.make_ledger(
+        roster_env.make_ledger(
             episode, master_seed=seeds["evaluation_ledger"],
-            profile=source.TRAIN_PROFILES[episode % len(source.TRAIN_PROFILES)],
+            profile=roster_env.TRAIN_PROFILES[episode % len(roster_env.TRAIN_PROFILES)],
         )
         for episode in range(eval_episodes)
     )
-    envs = tuple(source.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     hidden = torch.zeros((eval_episodes, 8, HIDDEN_DIM))
     targets, predictions = [[], []], [[], []]
     with torch.no_grad():
-        for _time in range(source.HORIZON):
+        for _time in range(roster_env.HORIZON):
             views = tuple(env.observe() for env in envs)
             source._delete_terminal_hidden(hidden, views)
             output = model.forward_step(
@@ -454,11 +455,11 @@ def _padding_diagnostic(
         model.load_state_dict(model_state, strict=True)
         models[capacity] = model
         state_before[capacity] = _state_digest(_copy_state(model))
-    profiles = {8: source.PADDING_CAPACITY_8, 12: source.PADDING_CAPACITY_12}
+    profiles = {8: roster_env.PADDING_CAPACITY_8, 12: roster_env.PADDING_CAPACITY_12}
     envs = {
         capacity: tuple(
-            source.RuntimeCapacityRosterEnv(
-                source.make_ledger(
+            roster_env.RuntimeCapacityRosterEnv(
+                roster_env.make_ledger(
                     episode, master_seed=seeds["evaluation_ledger"], profile=profile
                 )
             )
@@ -474,7 +475,7 @@ def _padding_diagnostic(
     lifecycle_equal = True
     inactive_zero = True
     with torch.no_grad():
-        for _time in range(source.HORIZON):
+        for _time in range(roster_env.HORIZON):
             outputs = {}
             views = {}
             for capacity in (8, 12):

@@ -38,7 +38,7 @@ from ha_ctse_process import (
     continuous_roster_native_six_g31_slow_critic_reduction_g41 as g41,
 )
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_six_coordinate_cs_g38 as g38_runner
 
 
@@ -417,8 +417,8 @@ def _configuration(
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    training = replicates * len(source.ARMS) * updates * envs * g32.HORIZON
-    evaluation = replicates * cells_per_replicate * episodes * g32.HORIZON
+    training = replicates * len(source.ARMS) * updates * envs * roster_env.HORIZON
+    evaluation = replicates * cells_per_replicate * episodes * roster_env.HORIZON
     return {
         **counts,
         "cpu_budget": cpu["cpu_budget"],
@@ -447,9 +447,9 @@ def _configuration(
         "accepted_g43_aligned_source_commit": source.ACCEPTED_G43_ALIGNED_SOURCE_COMMIT,
         "accepted_g43_alignment_stage_commit": source.ACCEPTED_G43_ALIGNMENT_STAGE_COMMIT,
         "aligned_g44_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "stored_training_observation_dim": 6,
         "actor_width": g40.g39.HIDDEN_DIM,
         "learning_rate": g40.LEARNING_RATE,
@@ -505,8 +505,8 @@ def source_controls() -> dict[str, object]:
         "evaluation_source": "G34 fixed/random capacities 6|8|12",
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_backend_python_fallback": False,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "arms": list(source.ARMS),
         "seed_bases": dict(SEED_BASES),
@@ -878,9 +878,9 @@ def _readiness_proof_inventory() -> dict[str, object]:
         "accepted_anchor_replicates": [0],
         "branch_updates_per_arm": 1,
         "num_envs": 8,
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "ppo_passes": source.PPO_PASSES,
-        "training_transitions": len(source.ARMS) * 8 * g32.HORIZON,
+        "training_transitions": len(source.ARMS) * 8 * roster_env.HORIZON,
         "optimizer_steps": len(source.ARMS) * source.PPO_PASSES,
         "evaluation_capacity": 8,
         "evaluation_cell": FINAL_RANDOM_DET,
@@ -902,7 +902,7 @@ def _readiness_training_configuration() -> dict[str, object]:
     configuration.update(
         {
             "branch_updates_per_arm": 1,
-            "training_transitions": len(source.ARMS) * 8 * g32.HORIZON,
+            "training_transitions": len(source.ARMS) * 8 * roster_env.HORIZON,
             "optimizer_steps": len(source.ARMS) * source.PPO_PASSES,
             "execution_readiness_proof_only": True,
             "conclusion_bearing": False,

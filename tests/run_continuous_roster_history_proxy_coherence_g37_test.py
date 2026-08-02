@@ -5,7 +5,7 @@ import hashlib
 import numpy as np
 
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_history_proxy_coherence_g37 as runner
 
 
@@ -96,7 +96,7 @@ def test_nonformal_action_noise_pairing_uses_exact_episode_subset() -> None:
     processes = g35.make_process_ledgers(
         replicate=0, capacity=6, episode_count=8, formal=True
     )
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         (row.episode_id for row in processes),
         action_seed=g35.seed_block(0, formal=True)["evaluation_action"],
         member_capacity=6,

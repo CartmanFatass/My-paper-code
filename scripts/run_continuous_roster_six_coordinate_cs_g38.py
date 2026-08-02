@@ -20,7 +20,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as source
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     optimize_fast_anchor_update,
@@ -166,20 +166,20 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    training_transitions = len(source.ARMS) * replicates * (fast + rtg) * envs * g32.HORIZON
-    evaluation_transitions = replicates * cells_per_replicate * episodes * g32.HORIZON
+    training_transitions = len(source.ARMS) * replicates * (fast + rtg) * envs * roster_env.HORIZON
+    evaluation_transitions = replicates * cells_per_replicate * episodes * roster_env.HORIZON
     optimizer_steps = len(source.ARMS) * replicates * (fast * passes + 2 * rtg * passes)
     return {
         **counts,
         "arms": list(source.ARMS),
         "common_training_observation_dim": source.FULL_OBSERVATION_DIM,
         "folded_deployment_observation_dim": source.RETAINED_OBSERVATION_DIM,
-        "critic_state_dim": g32.CRITIC_STATE_DIM,
-        "action_dim": g32.ACTION_DIM,
+        "critic_state_dim": roster_env.CRITIC_STATE_DIM,
+        "action_dim": roster_env.ACTION_DIM,
         "actor_width": source.HIDDEN_DIM,
         "raw_input_affines": ["member_input:Linear(10,32)", "current_readout:Linear(10,2)"],
         "removed_actor_weights": source.REMOVED_ACTOR_WEIGHTS,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "gamma": GAMMA,
         "learning_rate": LEARNING_RATE,
@@ -335,7 +335,7 @@ def _collect(
         ledger_seed=int(ledger_seed),
         action_seed=int(action_seed),
         device=torch.device("cpu"),
-        profiles=g32.TRAIN_PROFILES,
+        profiles=roster_env.TRAIN_PROFILES,
     )
     return attach_credit_baselines(model, raw, device=torch.device("cpu"))
 
@@ -411,7 +411,7 @@ def _train_replicate(
 ) -> dict[str, Any]:
     seeds = source.seed_block(replicate, formal=formal)
     configure_runtime(seeds["model"])
-    models = source.make_paired_models(g32.TRAIN_CAPACITY, initialization_seed=seeds["model"])
+    models = source.make_paired_models(roster_env.TRAIN_CAPACITY, initialization_seed=seeds["model"])
     zero_digests = {arm: _state_digest(model) for arm, model in models.items()}
     if len(set(zero_digests.values())) != 1:
         raise RuntimeError("G38 initial arm states diverged")
@@ -460,7 +460,7 @@ def _train_replicate(
         if update == 0:
             row = trajectories[source.FOLD6_ARM]
             noise = torch.as_tensor(
-                g32.make_action_noise(ids, action_seed=action_seed, member_capacity=g32.TRAIN_CAPACITY)[0]
+                roster_env.make_action_noise(ids, action_seed=action_seed, member_capacity=roster_env.TRAIN_CAPACITY)[0]
             )
             initial_equality = source.forced_initial_equality(
                 models[source.FULL10_ARM], models[source.FOLD6_ARM],
@@ -880,7 +880,7 @@ def _training_identity_errors(run_root: Path, training: Mapping[str, Any]) -> li
                         kind=kind,
                         configuration=configuration,
                         seeds=seeds,
-                        member_capacity=g32.TRAIN_CAPACITY,
+                        member_capacity=roster_env.TRAIN_CAPACITY,
                     )
                     loaded[(arm, kind)] = model
                     if _state_digest(model) != row["arms"][arm][f"{kind}_state_digest"]:
@@ -902,7 +902,7 @@ def _training_identity_errors(run_root: Path, training: Mapping[str, Any]) -> li
                     run_root / folded_row["checkpoint"],
                     source_commit=str(training["source_commit"]), formal=formal,
                     replicate=replicate, arm=source.FOLD6_ARM, kind=kind,
-                    configuration=configuration, seeds=seeds, member_capacity=g32.TRAIN_CAPACITY,
+                    configuration=configuration, seeds=seeds, member_capacity=roster_env.TRAIN_CAPACITY,
                     folded=True,
                 )
                 if (
@@ -1094,10 +1094,10 @@ def _evaluation_errors(
                     or not all(value is True for value in exact.values())
                     or fold.get("reward_comparisons")
                     != int(configuration["evaluation_episodes_per_cell"])
-                    * g32.HORIZON
+                    * roster_env.HORIZON
                     or fold.get("membership_edit_checks")
                     != int(configuration["evaluation_episodes_per_cell"])
-                    * g32.HORIZON
+                    * roster_env.HORIZON
                     or fold.get("summary_comparisons")
                     != int(configuration["evaluation_episodes_per_cell"]) * 10
                     or any(not np.isfinite(float(value)) or float(value) < 0 for value in maximum.values())

@@ -1,4 +1,4 @@
-"""Capacity-independent continuous-service roster source for G32."""
+"""Training orchestration for the capacity-independent continuous-roster source."""
 
 from __future__ import annotations
 
@@ -8,190 +8,8 @@ from typing import Iterable, Sequence
 import numpy as np
 import torch
 
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
-
-
-ACTION_DIM = 2
-OBSERVATION_DIM = 10
-CRITIC_STATE_DIM = 6
-HORIZON = 48
-EVENT_TIMES = (12, 24, 36)
-TRAIN_CAPACITY = 8
-EVALUATION_CAPACITIES = (6, 8, 12)
-
-
-@dataclass(frozen=True)
-class RosterProfile:
-    name: str
-    member_capacity: int
-    initial_count: int
-    temporary_leave_count: int
-    fresh_join_count: int
-    terminal_leave_count: int
-
-    def validate(self) -> None:
-        counts = (
-            self.member_capacity,
-            self.initial_count,
-            self.temporary_leave_count,
-            self.fresh_join_count,
-            self.terminal_leave_count,
-        )
-        if min(counts) <= 0:
-            raise ValueError("G32 profile values must be positive")
-        if self.temporary_leave_count >= self.initial_count:
-            raise ValueError("G32 temporary leave would empty the roster")
-        if self.initial_count + self.fresh_join_count > self.member_capacity:
-            raise ValueError("G32 profile exceeds runtime member capacity")
-        if self.terminal_leave_count >= self.initial_count + self.fresh_join_count:
-            raise ValueError("G32 terminal leave would empty the roster")
-
-    @property
-    def segment_counts(self) -> tuple[int, int, int, int]:
-        return (
-            self.initial_count,
-            self.initial_count - self.temporary_leave_count,
-            self.initial_count + self.fresh_join_count,
-            self.initial_count + self.fresh_join_count - self.terminal_leave_count,
-        )
-
-
-TRAIN_PROFILES = (
-    RosterProfile("train_4_3_6_5", 8, 4, 1, 2, 1),
-    RosterProfile("train_5_3_7_6", 8, 5, 2, 2, 1),
-    RosterProfile("train_6_4_8_6", 8, 6, 2, 2, 2),
-)
-PADDING_CAPACITY_8 = RosterProfile("padding_4_3_6_5_cap8", 8, 4, 1, 2, 1)
-PADDING_CAPACITY_12 = RosterProfile("padding_4_3_6_5_cap12", 12, 4, 1, 2, 1)
-SMALL_CAPACITY_6 = RosterProfile("small_4_2_6_3", 6, 4, 2, 2, 3)
-LARGE_CAPACITY_12 = RosterProfile("large_6_3_10_7", 12, 6, 3, 4, 3)
-
-
-def _rng(master_seed: int, episode_id: int, stream: int) -> np.random.Generator:
-    return np.random.default_rng(
-        np.random.SeedSequence([int(master_seed), int(episode_id), int(stream)])
-    )
-
-
-@dataclass(frozen=True)
-class CapacityRosterLedger:
-    episode_id: int
-    profile: RosterProfile
-    initial_keys: tuple[int, ...]
-    temporarily_absent: tuple[int, ...]
-    fresh_join: tuple[int, ...]
-    terminal_leave: tuple[int, ...]
-    capabilities: np.ndarray
-    load: np.ndarray
-    target_mix: np.ndarray
-    presentation_priority: np.ndarray
-    expected_roster_sizes: tuple[int, ...]
-
-    @property
-    def member_capacity(self) -> int:
-        return self.profile.member_capacity
-
-    def validate(self) -> None:
-        self.profile.validate()
-        capacity = self.member_capacity
-        if self.initial_keys != tuple(range(self.profile.initial_count)):
-            raise ValueError("G32 initial lifecycle inventory mismatch")
-        if self.fresh_join != tuple(
-            range(
-                self.profile.initial_count,
-                self.profile.initial_count + self.profile.fresh_join_count,
-            )
-        ):
-            raise ValueError("G32 fresh lifecycle inventory mismatch")
-        if len(set(self.temporarily_absent)) != self.profile.temporary_leave_count:
-            raise ValueError("G32 temporary lifecycle inventory mismatch")
-        if not set(self.temporarily_absent).issubset(self.initial_keys):
-            raise ValueError("G32 temporary leave references an unknown member")
-        known = set(self.initial_keys) | set(self.fresh_join)
-        if len(set(self.terminal_leave)) != self.profile.terminal_leave_count:
-            raise ValueError("G32 terminal lifecycle inventory mismatch")
-        if not set(self.terminal_leave).issubset(known):
-            raise ValueError("G32 terminal leave references an unknown member")
-        if self.capabilities.shape != (capacity, ACTION_DIM):
-            raise ValueError("G32 capability shape mismatch")
-        if self.load.shape != (HORIZON,) or self.target_mix.shape != (HORIZON,):
-            raise ValueError("G32 demand shape mismatch")
-        if self.presentation_priority.shape != (HORIZON, capacity):
-            raise ValueError("G32 priority shape mismatch")
-        arrays = (self.capabilities, self.load, self.target_mix, self.presentation_priority)
-        if not all(np.isfinite(row).all() for row in arrays):
-            raise ValueError("G32 source contains non-finite values")
-        expected = tuple(
-            count for count in self.profile.segment_counts for _ in range(HORIZON // 4)
-        )
-        if self.expected_roster_sizes != expected:
-            raise ValueError("G32 roster schedule mismatch")
-
-
-def make_ledger(
-    episode_id: int, *, master_seed: int, profile: RosterProfile
-) -> CapacityRosterLedger:
-    profile.validate()
-    initial = tuple(range(profile.initial_count))
-    fresh = tuple(range(profile.initial_count, profile.initial_count + profile.fresh_join_count))
-    temporary = tuple(sorted(int(value) for value in _rng(master_seed, episode_id, 0).choice(
-        initial, size=profile.temporary_leave_count, replace=False
-    )))
-    terminal = tuple(sorted(int(value) for value in _rng(master_seed, episode_id, 1).choice(
-        np.asarray(initial + fresh), size=profile.terminal_leave_count, replace=False
-    )))
-    # Every member owns its own streams. Extending runtime padding cannot shift
-    # an active member's source values or any later stream.
-    capabilities = np.stack([
-        _rng(master_seed, episode_id, 100 + key).uniform(0.75, 1.25, ACTION_DIM)
-        for key in range(profile.member_capacity)
-    ]).astype(np.float32)
-    priority = np.stack([
-        _rng(master_seed, episode_id, 200 + key).random(HORIZON, dtype=np.float32)
-        for key in range(profile.member_capacity)
-    ], axis=1)
-    blocks = HORIZON // 4
-    load = np.repeat(_rng(master_seed, episode_id, 3).uniform(0.30, 0.70, blocks), 4).astype(np.float32)
-    target_mix = np.repeat(_rng(master_seed, episode_id, 4).uniform(0.25, 0.75, blocks), 4).astype(np.float32)
-    ledger = CapacityRosterLedger(
-        episode_id=int(episode_id), profile=profile, initial_keys=initial,
-        temporarily_absent=temporary, fresh_join=fresh, terminal_leave=terminal,
-        capabilities=capabilities, load=load, target_mix=target_mix,
-        presentation_priority=priority,
-        expected_roster_sizes=tuple(
-            count for count in profile.segment_counts for _ in range(HORIZON // 4)
-        ),
-    )
-    ledger.validate()
-    return ledger
-
-
-@dataclass(frozen=True)
-class MembershipChange:
-    joined: tuple[int, ...] = ()
-    temporarily_left: tuple[int, ...] = ()
-    rejoined: tuple[int, ...] = ()
-    terminally_left: tuple[int, ...] = ()
-
-
-@dataclass(frozen=True)
-class CapacityRosterView:
-    time: int
-    observations: np.ndarray
-    active_mask: np.ndarray
-    critic_state: np.ndarray
-    membership_change: MembershipChange
-    load: float
-    target_mix: float
-
-
-@dataclass(frozen=True)
-class CapacityRosterOutcome:
-    utility: float
-    minimum_step_utility: float
-    segment_utilities: tuple[float, ...]
-    roster_sizes: tuple[int, ...]
-    reward_trace: tuple[float, ...]
 
 
 @dataclass
@@ -207,8 +25,8 @@ class ContinuousRosterTrajectory:
     hidden_before: torch.Tensor
     hidden_after: torch.Tensor
     prefix_action_sums: torch.Tensor
-    outcomes: tuple[CapacityRosterOutcome, ...]
-    ledgers: tuple[CapacityRosterLedger, ...]
+    outcomes: tuple[roster_env.CapacityRosterOutcome, ...]
+    ledgers: tuple[roster_env.CapacityRosterLedger, ...]
     terminal_hidden_reset_mask: torch.Tensor
 
     @property
@@ -216,140 +34,9 @@ class ContinuousRosterTrajectory:
         return int(self.active_mask.sum().item())
 
 
-class RuntimeCapacityRosterEnv:
-    def __init__(self, ledger: CapacityRosterLedger):
-        ledger.validate()
-        self.ledger = ledger
-        capacity = ledger.member_capacity
-        self.time = 0
-        self.active = np.zeros(capacity, dtype=np.bool_)
-        self.active[np.asarray(ledger.initial_keys)] = True
-        self.age = np.zeros(capacity, dtype=np.int64)
-        self.previous_actions = np.zeros((capacity, ACTION_DIM), dtype=np.float32)
-        self.reward_trace: list[float] = []
-        self.roster_sizes: list[int] = []
-        self._prepared_time: int | None = None
-        self._change = MembershipChange(joined=ledger.initial_keys)
-        self._terminated = False
-
-    def _prepare_membership(self) -> None:
-        if self._prepared_time == self.time:
-            return
-        change = MembershipChange()
-        if self.time == EVENT_TIMES[0]:
-            keys = self.ledger.temporarily_absent
-            self.active[np.asarray(keys)] = False
-            change = MembershipChange(temporarily_left=keys)
-        elif self.time == EVENT_TIMES[1]:
-            rejoined, joined = self.ledger.temporarily_absent, self.ledger.fresh_join
-            self.active[np.asarray(rejoined + joined)] = True
-            self.previous_actions[np.asarray(joined)] = 0.0
-            self.age[np.asarray(joined)] = 0
-            change = MembershipChange(joined=joined, rejoined=rejoined)
-        elif self.time == EVENT_TIMES[2]:
-            keys = self.ledger.terminal_leave
-            self.active[np.asarray(keys)] = False
-            change = MembershipChange(terminally_left=keys)
-        self._change = change
-        self._prepared_time = self.time
-
-    def observe(self) -> CapacityRosterView:
-        if self._terminated:
-            raise RuntimeError("G32 cannot observe a terminal environment")
-        self._prepare_membership()
-        count = int(self.active.sum())
-        if count <= 0:
-            raise RuntimeError("G32 source produced an empty roster")
-        capacity = self.ledger.member_capacity
-        observations = np.zeros((capacity, OBSERVATION_DIM), dtype=np.float32)
-        keys = np.flatnonzero(self.active)
-        load, mix = float(self.ledger.load[self.time]), float(self.ledger.target_mix[self.time])
-        observations[keys, :2] = self.ledger.capabilities[keys]
-        observations[keys, 2] = self.ledger.presentation_priority[self.time, keys]
-        observations[keys, 3] = load
-        observations[keys, 4] = mix
-        observations[keys, 5] = np.float32(np.log1p(count))
-        observations[keys, 6] = self.age[keys] / HORIZON
-        observations[keys, 7:9] = (self.previous_actions[keys] + 1.0) / 2.0
-        observations[keys, 9] = self.time / (HORIZON - 1)
-        aggregate = self.ledger.capabilities[keys].sum(axis=0)
-        critic_state = np.asarray((
-            load, mix, aggregate[0], aggregate[1], np.log1p(count),
-            self.time / (HORIZON - 1),
-        ), dtype=np.float32)
-        return CapacityRosterView(
-            self.time, observations, self.active.copy(), critic_state,
-            self._change, load, mix,
-        )
-
-    def step(self, actions: np.ndarray) -> tuple[float, bool, dict[str, float]]:
-        view = self.observe()
-        values = np.asarray(actions, dtype=np.float32)
-        expected = (self.ledger.member_capacity, ACTION_DIM)
-        if values.shape != expected or not np.isfinite(values).all():
-            raise ValueError("G32 action shape/finite mismatch")
-        if np.any(np.abs(values) > 1.0) or np.count_nonzero(values[~view.active_mask]):
-            raise ValueError("G32 action support or inactive action mismatch")
-        keys = np.flatnonzero(view.active_mask)
-        effort = (values[keys, 0] + 1.0) / 2.0
-        mix = (values[keys, 1] + 1.0) / 2.0
-        capabilities = self.ledger.capabilities[keys]
-        served = np.asarray((
-            np.sum(effort * mix * capabilities[:, 0], dtype=np.float64),
-            np.sum(effort * (1.0 - mix) * capabilities[:, 1], dtype=np.float64),
-        ))
-        aggregate = capabilities.sum(axis=0, dtype=np.float64)
-        target = np.asarray((
-            view.load * view.target_mix * aggregate[0],
-            view.load * (1.0 - view.target_mix) * aggregate[1],
-        ))
-        relative_error = np.abs(served - target) / np.maximum(target, 1e-8)
-        reward = float(np.clip(1.0 - relative_error.mean(), 0.0, 1.0))
-        self.previous_actions[keys] = values[keys]
-        self.age[keys] += 1
-        self.reward_trace.append(reward)
-        self.roster_sizes.append(len(keys))
-        self.time += 1
-        self._prepared_time = None
-        self._change = MembershipChange()
-        self._terminated = self.time == HORIZON
-        return reward, self._terminated, {"service_utility": reward}
-
-    def outcome(self) -> CapacityRosterOutcome:
-        if not self._terminated or len(self.reward_trace) != HORIZON:
-            raise RuntimeError("G32 outcome requires a complete episode")
-        rewards = np.asarray(self.reward_trace, dtype=np.float64)
-        return CapacityRosterOutcome(
-            float(rewards.mean()), float(rewards.min()),
-            tuple(float(rewards[start:start + HORIZON // 4].mean()) for start in range(0, HORIZON, HORIZON // 4)),
-            tuple(self.roster_sizes), tuple(self.reward_trace),
-        )
-
-
-def constructive_actions(view: CapacityRosterView) -> np.ndarray:
-    actions = np.zeros((len(view.active_mask), ACTION_DIM), dtype=np.float32)
-    actions[view.active_mask, 0] = np.float32(2.0 * view.load - 1.0)
-    actions[view.active_mask, 1] = np.float32(2.0 * view.target_mix - 1.0)
-    return actions
-
-
-def make_action_noise(
-    episode_ids: Iterable[int], *, action_seed: int, member_capacity: int
-) -> np.ndarray:
-    ids = tuple(int(value) for value in episode_ids)
-    if not ids:
-        raise ValueError("G32 action noise requires an episode")
-    # Member-owned action streams preserve CRN for common active identities.
-    return np.stack([
-        np.stack([
-            _rng(action_seed, episode_id, 500 + key).standard_normal((HORIZON, ACTION_DIM)).astype(np.float32)
-            for key in range(member_capacity)
-        ], axis=1)
-        for episode_id in ids
-    ], axis=1)
-
-
-def _delete_terminal_hidden(hidden: torch.Tensor, views: Sequence[CapacityRosterView]) -> None:
+def _delete_terminal_hidden(
+    hidden: torch.Tensor, views: Sequence[roster_env.CapacityRosterView]
+) -> None:
     for batch_index, view in enumerate(views):
         keys = view.membership_change.terminally_left
         if keys:
@@ -359,7 +46,7 @@ def _delete_terminal_hidden(hidden: torch.Tensor, views: Sequence[CapacityRoster
 def collect_trajectory(
     model: ContinuousRosterPolicy, *, episode_ids: Iterable[int], ledger_seed: int,
     action_seed: int, device: torch.device,
-    profiles: Sequence[RosterProfile] = TRAIN_PROFILES,
+    profiles: Sequence[roster_env.RosterProfile] = roster_env.TRAIN_PROFILES,
 ) -> ContinuousRosterTrajectory:
     ids = tuple(int(value) for value in episode_ids)
     profile_rows = tuple(profiles)
@@ -368,62 +55,102 @@ def collect_trajectory(
     capacity = profile_rows[0].member_capacity
     if any(row.member_capacity != capacity for row in profile_rows) or model.member_capacity != capacity:
         raise ValueError("G32 collection capacity mismatch")
-    ledgers = tuple(make_ledger(episode, master_seed=ledger_seed, profile=profile_rows[episode % len(profile_rows)]) for episode in ids)
-    envs = tuple(RuntimeCapacityRosterEnv(row) for row in ledgers)
+    ledgers = tuple(roster_env.make_ledger(
+        episode, master_seed=ledger_seed,
+        profile=profile_rows[episode % len(profile_rows)],
+    ) for episode in ids)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     batch = len(ids)
-    noise = make_action_noise(ids, action_seed=action_seed, member_capacity=capacity)
+    noise = roster_env.make_action_noise(
+        ids, action_seed=action_seed, member_capacity=capacity
+    )
     hidden = torch.zeros((batch, capacity, model.hidden_dim), device=device)
     shapes = {
-        "observations": (HORIZON, batch, capacity, OBSERVATION_DIM),
-        "active_mask": (HORIZON, batch, capacity),
-        "critic_states": (HORIZON, batch, CRITIC_STATE_DIM),
-        "actions": (HORIZON, batch, capacity, ACTION_DIM),
-        "pre_tanh_actions": (HORIZON, batch, capacity, ACTION_DIM),
-        "old_log_probs": (HORIZON, batch, capacity), "old_values": (HORIZON, batch),
-        "rewards": (HORIZON, batch),
-        "hidden_before": (HORIZON, batch, capacity, model.hidden_dim),
-        "hidden_after": (HORIZON, batch, capacity, model.hidden_dim),
-        "prefix_action_sums": (HORIZON, batch, capacity, ACTION_DIM),
-        "terminal_hidden_reset_mask": (HORIZON, batch, capacity),
+        "observations": (roster_env.HORIZON, batch, capacity, roster_env.OBSERVATION_DIM),
+        "active_mask": (roster_env.HORIZON, batch, capacity),
+        "critic_states": (roster_env.HORIZON, batch, roster_env.CRITIC_STATE_DIM),
+        "actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "pre_tanh_actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "old_log_probs": (roster_env.HORIZON, batch, capacity),
+        "old_values": (roster_env.HORIZON, batch),
+        "rewards": (roster_env.HORIZON, batch),
+        "hidden_before": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "hidden_after": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "prefix_action_sums": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "terminal_hidden_reset_mask": (roster_env.HORIZON, batch, capacity),
     }
-    rows = {name: torch.empty(shape, dtype=torch.bool if name in ("active_mask", "terminal_hidden_reset_mask") else torch.float32) for name, shape in shapes.items()}
+    rows = {
+        name: torch.empty(
+            shape,
+            dtype=torch.bool
+            if name in ("active_mask", "terminal_hidden_reset_mask")
+            else torch.float32,
+        )
+        for name, shape in shapes.items()
+    }
     model.eval()
     with torch.no_grad():
-        for time in range(HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(env.observe() for env in envs)
-            terminal_reset = torch.zeros((batch, capacity), dtype=torch.bool, device=device)
+            terminal_reset = torch.zeros(
+                (batch, capacity), dtype=torch.bool, device=device
+            )
             for batch_index, view in enumerate(views):
                 if view.membership_change.terminally_left:
-                    terminal_reset[batch_index, list(view.membership_change.terminally_left)] = True
+                    terminal_reset[
+                        batch_index, list(view.membership_change.terminally_left)
+                    ] = True
             _delete_terminal_hidden(hidden, views)
-            observations = torch.as_tensor(np.stack([row.observations for row in views]), device=device)
-            active = torch.as_tensor(np.stack([row.active_mask for row in views]), device=device)
-            critic = torch.as_tensor(np.stack([row.critic_state for row in views]), device=device)
+            observations = torch.as_tensor(
+                np.stack([row.observations for row in views]), device=device
+            )
+            active = torch.as_tensor(
+                np.stack([row.active_mask for row in views]), device=device
+            )
+            critic = torch.as_tensor(
+                np.stack([row.critic_state for row in views]), device=device
+            )
             before = hidden.clone()
             output = model.forward_step(
-                observations=observations, active_mask=active, critic_state=critic,
-                hidden=hidden, sampling_noise=torch.as_tensor(noise[time], device=device),
+                observations=observations,
+                active_mask=active,
+                critic_state=critic,
+                hidden=hidden,
+                sampling_noise=torch.as_tensor(noise[time], device=device),
             )
-            rewards = np.asarray([env.step(output.actions[index].detach().cpu().numpy())[0] for index, env in enumerate(envs)], dtype=np.float32)
+            rewards = np.asarray([
+                env.step(output.actions[index].detach().cpu().numpy())[0]
+                for index, env in enumerate(envs)
+            ], dtype=np.float32)
             values = {
-                "observations": observations, "active_mask": active, "critic_states": critic,
-                "actions": output.actions, "pre_tanh_actions": output.pre_tanh_actions,
-                "old_log_probs": output.token_log_probs, "old_values": output.value,
-                "rewards": torch.as_tensor(rewards, device=device), "hidden_before": before,
-                "hidden_after": output.next_hidden, "prefix_action_sums": output.prefix_action_sums,
+                "observations": observations,
+                "active_mask": active,
+                "critic_states": critic,
+                "actions": output.actions,
+                "pre_tanh_actions": output.pre_tanh_actions,
+                "old_log_probs": output.token_log_probs,
+                "old_values": output.value,
+                "rewards": torch.as_tensor(rewards, device=device),
+                "hidden_before": before,
+                "hidden_after": output.next_hidden,
+                "prefix_action_sums": output.prefix_action_sums,
                 "terminal_hidden_reset_mask": terminal_reset,
             }
             for name, value in values.items():
                 rows[name][time].copy_(value.detach().cpu())
             hidden = output.next_hidden
-    return ContinuousRosterTrajectory(**rows, outcomes=tuple(env.outcome() for env in envs), ledgers=ledgers)
+    return ContinuousRosterTrajectory(
+        **rows,
+        outcomes=tuple(env.outcome() for env in envs),
+        ledgers=ledgers,
+    )
 
 
 def evaluate_policy(
     model: ContinuousRosterPolicy, *, episode_ids: Iterable[int], ledger_seed: int,
-    action_seed: int, device: torch.device, profiles: Sequence[RosterProfile],
-    deterministic: bool,
-) -> tuple[CapacityRosterOutcome, ...]:
+    action_seed: int, device: torch.device,
+    profiles: Sequence[roster_env.RosterProfile], deterministic: bool,
+) -> tuple[roster_env.CapacityRosterOutcome, ...]:
     ids = tuple(int(value) for value in episode_ids)
     profile_rows = tuple(profiles)
     if (
@@ -433,30 +160,44 @@ def evaluate_policy(
     ):
         raise ValueError("G32 evaluation episode/capacity mismatch")
     envs = tuple(
-        RuntimeCapacityRosterEnv(
-            make_ledger(
-                episode, master_seed=ledger_seed,
+        roster_env.RuntimeCapacityRosterEnv(
+            roster_env.make_ledger(
+                episode,
+                master_seed=ledger_seed,
                 profile=profile_rows[episode % len(profile_rows)],
             )
         )
         for episode in ids
     )
     capacity = model.member_capacity
-    noise = make_action_noise(ids, action_seed=action_seed, member_capacity=capacity)
+    noise = roster_env.make_action_noise(
+        ids, action_seed=action_seed, member_capacity=capacity
+    )
     hidden = torch.zeros((len(ids), capacity, model.hidden_dim), device=device)
     model.eval()
     with torch.no_grad():
-        for time in range(HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(env.observe() for env in envs)
             _delete_terminal_hidden(hidden, views)
             arguments = {
-                "observations": torch.as_tensor(np.stack([row.observations for row in views]), device=device),
-                "active_mask": torch.as_tensor(np.stack([row.active_mask for row in views]), device=device),
-                "critic_state": torch.as_tensor(np.stack([row.critic_state for row in views]), device=device),
+                "observations": torch.as_tensor(
+                    np.stack([row.observations for row in views]), device=device
+                ),
+                "active_mask": torch.as_tensor(
+                    np.stack([row.active_mask for row in views]), device=device
+                ),
+                "critic_state": torch.as_tensor(
+                    np.stack([row.critic_state for row in views]), device=device
+                ),
                 "hidden": hidden,
             }
-            output = model.forward_step(**arguments, deterministic=True) if deterministic else model.forward_step(
-                **arguments, sampling_noise=torch.as_tensor(noise[time], device=device)
+            output = (
+                model.forward_step(**arguments, deterministic=True)
+                if deterministic
+                else model.forward_step(
+                    **arguments,
+                    sampling_noise=torch.as_tensor(noise[time], device=device),
+                )
             )
             for index, env in enumerate(envs):
                 env.step(output.actions[index].detach().cpu().numpy())
@@ -466,16 +207,20 @@ def evaluate_policy(
 
 def source_controls() -> dict[str, object]:
     profiles = (
-        PADDING_CAPACITY_8, PADDING_CAPACITY_12,
-        SMALL_CAPACITY_6, LARGE_CAPACITY_12,
+        roster_env.PADDING_CAPACITY_8,
+        roster_env.PADDING_CAPACITY_12,
+        roster_env.SMALL_CAPACITY_6,
+        roster_env.LARGE_CAPACITY_12,
     )
     rows = []
     for profile in profiles:
-        ledger = make_ledger(0, master_seed=10_326_099, profile=profile)
-        environment = RuntimeCapacityRosterEnv(ledger)
-        for _ in range(HORIZON):
+        ledger = roster_env.make_ledger(
+            0, master_seed=10_326_099, profile=profile
+        )
+        environment = roster_env.RuntimeCapacityRosterEnv(ledger)
+        for _ in range(roster_env.HORIZON):
             view = environment.observe()
-            environment.step(constructive_actions(view))
+            environment.step(roster_env.constructive_actions(view))
         outcome = environment.outcome()
         rows.append({
             "profile": profile.name,
@@ -485,13 +230,17 @@ def source_controls() -> dict[str, object]:
             "expected_roster_sizes": list(ledger.expected_roster_sizes),
         })
     return {
-        "horizon": HORIZON, "event_times": list(EVENT_TIMES),
-        "action_dim": ACTION_DIM, "observation_dim": OBSERVATION_DIM,
-        "critic_state_dim": CRITIC_STATE_DIM,
-        "train_profiles": [row.name for row in TRAIN_PROFILES],
+        "horizon": roster_env.HORIZON,
+        "event_times": list(roster_env.EVENT_TIMES),
+        "action_dim": roster_env.ACTION_DIM,
+        "observation_dim": roster_env.OBSERVATION_DIM,
+        "critic_state_dim": roster_env.CRITIC_STATE_DIM,
+        "train_profiles": [row.name for row in roster_env.TRAIN_PROFILES],
         "evaluation_profiles": [
-            PADDING_CAPACITY_8.name, PADDING_CAPACITY_12.name,
-            SMALL_CAPACITY_6.name, LARGE_CAPACITY_12.name,
+            roster_env.PADDING_CAPACITY_8.name,
+            roster_env.PADDING_CAPACITY_12.name,
+            roster_env.SMALL_CAPACITY_6.name,
+            roster_env.LARGE_CAPACITY_12.name,
         ],
         "capacity_normalization": "none",
         "member_rng": "episode_member_owned_streams",

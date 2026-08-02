@@ -21,7 +21,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_native_six_coordinate_training_g39 as source
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     optimize_fast_anchor_update,
@@ -165,8 +165,8 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    training = len(source.ARMS) * replicates * (fast + rtg) * envs * g32.HORIZON
-    evaluation = replicates * cells_per_replicate * episodes * g32.HORIZON
+    training = len(source.ARMS) * replicates * (fast + rtg) * envs * roster_env.HORIZON
+    evaluation = replicates * cells_per_replicate * episodes * roster_env.HORIZON
     optimizer_steps = len(source.ARMS) * replicates * (fast * passes + 2 * rtg * passes)
     return {
         **counts,
@@ -175,10 +175,10 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         "const_raw_input_affines": ["member_input:Linear(10,32)", "current_readout:Linear(10,2)"],
         "native_raw_input_affines": ["member_input:Linear(6,32)", "current_readout:Linear(6,2)"],
         "removed_actor_weights": 136,
-        "critic_state_dim": g32.CRITIC_STATE_DIM,
-        "action_dim": g32.ACTION_DIM,
+        "critic_state_dim": roster_env.CRITIC_STATE_DIM,
+        "action_dim": roster_env.ACTION_DIM,
         "actor_width": source.HIDDEN_DIM,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "gamma": GAMMA,
         "learning_rate": LEARNING_RATE,
@@ -355,7 +355,7 @@ def _train_replicate(
 ) -> dict[str, Any]:
     seeds = source.seed_block(replicate, formal=formal)
     configure_runtime(seeds["model"])
-    models = source.make_paired_models(g32.TRAIN_CAPACITY, initialization_seed=seeds["model"])
+    models = source.make_paired_models(roster_env.TRAIN_CAPACITY, initialization_seed=seeds["model"])
     source.assert_no_shared_state(models[source.CONST10_ARM], models[source.NATIVE6_ARM])
     zero_const_folded = source.fold_const_checkpoint(models[source.CONST10_ARM])
     zero_digests = {arm: _state_digest(model) for arm, model in models.items()}
@@ -400,7 +400,7 @@ def _train_replicate(
             native_row = trajectories[source.NATIVE6_ARM]
             initial_trajectory = source.initial_trajectory_match(const_row, native_row)
             noise = torch.as_tensor(
-                g32.make_action_noise(ids, action_seed=action_seed, member_capacity=g32.TRAIN_CAPACITY)[0]
+                roster_env.make_action_noise(ids, action_seed=action_seed, member_capacity=roster_env.TRAIN_CAPACITY)[0]
             )
             initial_forward = source.initial_forward_match(
                 models[source.CONST10_ARM],
@@ -867,7 +867,7 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
                     arm=arm,
                     configuration=configuration,
                     seeds=row["seeds"],
-                    member_capacity=g32.TRAIN_CAPACITY,
+                    member_capacity=roster_env.TRAIN_CAPACITY,
                 )
                 if _state_digest(loaded) != arm_row["final_state_digest"]:
                     raise ValueError("G39 final checkpoint digest mismatch")
@@ -880,7 +880,7 @@ def _training_errors(run_root: Path, training: Mapping[str, Any]) -> list[str]:
                 arm=source.CONST10_ARM,
                 configuration=configuration,
                 seeds=row["seeds"],
-                member_capacity=g32.TRAIN_CAPACITY,
+                member_capacity=roster_env.TRAIN_CAPACITY,
                 folded=True,
             )
             if (

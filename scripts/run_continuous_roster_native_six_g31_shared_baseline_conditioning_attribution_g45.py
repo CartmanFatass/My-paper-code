@@ -34,7 +34,7 @@ from ha_ctse_process import (
     as source,
 )
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 def _load_isolated_g44_orchestration() -> Any:
@@ -183,8 +183,8 @@ def _configuration(
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    training = replicates * len(source.ARMS) * updates * envs * g32.HORIZON
-    evaluation = replicates * cells_per_replicate * episodes * g32.HORIZON
+    training = replicates * len(source.ARMS) * updates * envs * roster_env.HORIZON
+    evaluation = replicates * cells_per_replicate * episodes * roster_env.HORIZON
     return {
         **counts,
         "cpu_budget": cpu["cpu_budget"],
@@ -208,9 +208,9 @@ def _configuration(
         "accepted_g44_aligned_source_commit": source.ACCEPTED_G44_ALIGNED_SOURCE_COMMIT,
         "accepted_g44_alignment_stage_commit": source.ACCEPTED_G44_ALIGNMENT_STAGE_COMMIT,
         "aligned_g45_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "stored_training_observation_dim": 6,
         "optimizer": "Adam(beta1=0.9,beta2=0.999,eps=1e-8,weight_decay=0)",
         "learning_rate": 1e-3,
@@ -264,8 +264,8 @@ def source_controls() -> dict[str, object]:
         "evaluation_source": "G34 fixed/random capacities 6|8|12",
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_backend_python_fallback": False,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "arms": list(source.ARMS),
         "seed_bases": dict(SEED_BASES),

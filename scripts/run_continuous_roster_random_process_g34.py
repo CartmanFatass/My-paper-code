@@ -18,6 +18,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_random_process_g34 as source
 from scripts import run_runtime_capacity_continuous_roster_g32 as g32_runner
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 SCHEMA_VERSION = 2
@@ -92,9 +93,9 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         "configured_capacities": list(source.CAPACITIES),
         "cells_per_replicate": cells_per_replicate,
         "total_cells": replicates * cells_per_replicate,
-        "real_transitions_per_episode": g32_runner.source.HORIZON,
+        "real_transitions_per_episode": roster_env.HORIZON,
         "total_real_episode_transitions": (
-            replicates * cells_per_replicate * episodes * g32_runner.source.HORIZON
+            replicates * cells_per_replicate * episodes * roster_env.HORIZON
         ),
         "checkpoint_selection": "exact_G32_zero_and_final_only",
         "checkpoint_training_change": "forbidden",
@@ -384,7 +385,7 @@ def _expected_cell_names(capacity: int) -> set[str]:
 def _trace_evidence(episode: Mapping[str, Any]) -> dict[str, object]:
     rewards = np.asarray(episode["reward_trace"], dtype=np.float64)
     if (
-        rewards.shape != (g32_runner.source.HORIZON,)
+        rewards.shape != (roster_env.HORIZON,)
         or not np.isfinite(rewards).all()
         or np.any((rewards < 0.0) | (rewards > 1.0))
     ):
@@ -397,7 +398,7 @@ def _trace_evidence(episode: Mapping[str, Any]) -> dict[str, object]:
         edit: float(rewards[time : time + 4].mean())
         for time, edit in zip(event_times, event_order)
     }
-    boundaries = (0, *event_times, g32_runner.source.HORIZON)
+    boundaries = (0, *event_times, roster_env.HORIZON)
     segments = tuple(
         float(rewards[left:right].mean())
         for left, right in zip(boundaries, boundaries[1:])
@@ -405,7 +406,7 @@ def _trace_evidence(episode: Mapping[str, Any]) -> dict[str, object]:
     roster_values = episode["roster_size_trace"]
     if (
         not isinstance(roster_values, list)
-        or len(roster_values) != g32_runner.source.HORIZON
+        or len(roster_values) != roster_env.HORIZON
         or any(
             not isinstance(value, int) or isinstance(value, bool)
             for value in roster_values

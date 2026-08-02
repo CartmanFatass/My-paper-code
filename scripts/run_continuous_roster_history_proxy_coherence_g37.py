@@ -23,7 +23,7 @@ from ha_ctse_process import continuous_roster_history_proxy_coherence_g37 as sou
 from ha_ctse_process import continuous_roster_history_proxy_free_cs_g36 as g36
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_history_proxy_free_cs_g36 as g36_runner
 from scripts import run_continuous_roster_random_process_g34 as g34_runner
 from scripts import run_continuous_roster_reactive_reduction_g35 as g35_runner
@@ -230,7 +230,7 @@ def _expected_action_noise_digest(
         episode_count=episode_count,
         formal=True,
     )
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         (row.episode_id for row in processes),
         action_seed=g35.seed_block(replicate, formal=True)["evaluation_action"],
         member_capacity=capacity,

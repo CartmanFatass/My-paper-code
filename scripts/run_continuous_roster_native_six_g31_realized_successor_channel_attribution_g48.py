@@ -43,6 +43,7 @@ from ha_ctse_process import (
 )
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_six_coordinate_cs_g38 as g38_runner
 
 
@@ -207,14 +208,14 @@ def _configuration(
     envs = counts["num_envs"]
     passes = counts["ppo_passes"]
     episodes = counts["evaluation_episodes_per_cell"]
-    training = replicates * len(source.ARMS) * updates * envs * g32.HORIZON
+    training = replicates * len(source.ARMS) * updates * envs * roster_env.HORIZON
     evaluation = (
         replicates
         * len(source.ARMS)
         * len(g34.CAPACITIES)
         * len(MODEL_CELLS)
         * episodes
-        * g32.HORIZON
+        * roster_env.HORIZON
     )
     return {
         **counts,
@@ -239,9 +240,9 @@ def _configuration(
         "accepted_g47_alignment_stage_commit": source.ACCEPTED_G47_ALIGNMENT_STAGE_COMMIT,
         "accepted_g47_formal_branch": source.ACCEPTED_G47_FORMAL_BRANCH,
         "aligned_g48_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "actor_width": g40.g39.HIDDEN_DIM,
         "learning_rate": 1e-3,
         "optimizer": "Adam(beta1=0.9,beta2=0.999,eps=1e-8,weight_decay=0,amsgrad=false)",
@@ -293,8 +294,8 @@ def source_controls() -> dict[str, object]:
         "evaluation_source": "G34_P0_fixed_and_random_capacities_6|8|12",
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_backend_python_fallback": False,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "arms": list(source.ARMS),
         "seed_bases": dict(SEED_BASES),
@@ -319,36 +320,36 @@ def _collect_trajectory(
     """Collect through the C++ batch without a critic/baseline actor consumer."""
 
     ids = tuple(int(value) for value in episode_ids)
-    profiles = tuple(g32.TRAIN_PROFILES)
-    if len(ids) != 8 or model.member_capacity != g32.TRAIN_CAPACITY:
+    profiles = tuple(roster_env.TRAIN_PROFILES)
+    if len(ids) != 8 or model.member_capacity != roster_env.TRAIN_CAPACITY:
         raise ValueError("G48 branch collection requires exactly 8 capacity-8 episodes")
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=int(ledger_seed),
             profile=profiles[episode % len(profiles)],
         )
         for episode in ids
     )
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     env_batch = g40.toy_cpp.ContinuousRosterToyBatch(envs)
-    noise = g32.make_action_noise(
-        ids, action_seed=int(action_seed), member_capacity=g32.TRAIN_CAPACITY
+    noise = roster_env.make_action_noise(
+        ids, action_seed=int(action_seed), member_capacity=roster_env.TRAIN_CAPACITY
     )
-    hidden = torch.zeros((len(ids), g32.TRAIN_CAPACITY, model.hidden_dim))
+    hidden = torch.zeros((len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim))
     shapes = {
-        "observations": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, 6),
-        "active_mask": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
-        "critic_states": (g32.HORIZON, len(ids), g32.CRITIC_STATE_DIM),
-        "actions": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "pre_tanh_actions": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "old_log_probs": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
-        "old_values": (g32.HORIZON, len(ids)),
-        "rewards": (g32.HORIZON, len(ids)),
-        "hidden_before": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, model.hidden_dim),
-        "hidden_after": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, model.hidden_dim),
-        "prefix_action_sums": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "terminal_hidden_reset_mask": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
+        "observations": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, 6),
+        "active_mask": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
+        "critic_states": (roster_env.HORIZON, len(ids), roster_env.CRITIC_STATE_DIM),
+        "actions": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "pre_tanh_actions": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "old_log_probs": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
+        "old_values": (roster_env.HORIZON, len(ids)),
+        "rewards": (roster_env.HORIZON, len(ids)),
+        "hidden_before": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim),
+        "hidden_after": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim),
+        "prefix_action_sums": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "terminal_hidden_reset_mask": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
     }
     rows = {
         name: torch.empty(
@@ -363,10 +364,10 @@ def _collect_trajectory(
     }
     model.eval()
     with torch.no_grad():
-        for step in range(g32.HORIZON):
+        for step in range(roster_env.HORIZON):
             views = env_batch.observe_six()
             terminal_reset = torch.zeros(
-                (len(ids), g32.TRAIN_CAPACITY), dtype=torch.bool
+                (len(ids), roster_env.TRAIN_CAPACITY), dtype=torch.bool
             )
             for batch_index, view in enumerate(views):
                 if view.membership_change.terminally_left:
@@ -1284,9 +1285,9 @@ def _readiness_proof_inventory() -> dict[str, object]:
         "accepted_anchor_replicates": [0],
         "branch_updates_per_arm": 1,
         "num_envs": 8,
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "ppo_passes": source.PPO_PASSES,
-        "training_transitions": len(source.ARMS) * 8 * g32.HORIZON,
+        "training_transitions": len(source.ARMS) * 8 * roster_env.HORIZON,
         "optimizer_steps": len(source.ARMS) * source.PPO_PASSES,
         "evaluation_capacity": 8,
         "evaluation_cell": FINAL_RANDOM_DET,
@@ -1308,7 +1309,7 @@ def _readiness_training_configuration() -> dict[str, object]:
     configuration.update(
         {
             "branch_updates_per_arm": 1,
-            "training_transitions": len(source.ARMS) * 8 * g32.HORIZON,
+            "training_transitions": len(source.ARMS) * 8 * roster_env.HORIZON,
             "optimizer_steps": len(source.ARMS) * source.PPO_PASSES,
             "execution_readiness_proof_only": True,
             "conclusion_bearing": False,

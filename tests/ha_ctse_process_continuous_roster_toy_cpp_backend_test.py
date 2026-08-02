@@ -7,8 +7,8 @@ import pytest
 
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
-from ha_ctse_process import continuous_roster_toy_cpp_backend as cpp
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import cpp_backend as cpp
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import benchmark_continuous_roster_toy_cpp_backend as benchmark
 
 
@@ -23,23 +23,23 @@ def test_native_batch_is_bitwise_equal_across_lifecycle_processes(
     reference = tuple(
         g34.RandomProcessRosterEnv(row)
         if process_kind == "random"
-        else g32.RuntimeCapacityRosterEnv(row.base)
+        else roster_env.RuntimeCapacityRosterEnv(row.base)
         for row in processes
     )
     accelerated = tuple(
         g34.RandomProcessRosterEnv(row)
         if process_kind == "random"
-        else g32.RuntimeCapacityRosterEnv(row.base)
+        else roster_env.RuntimeCapacityRosterEnv(row.base)
         for row in processes
     )
     batch = cpp.ContinuousRosterToyBatch(accelerated)
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         (row.episode_id for row in processes),
         action_seed=10_996_000,
         member_capacity=capacity,
     )
 
-    for time in range(g32.HORIZON):
+    for time in range(roster_env.HORIZON):
         expected_views = tuple(
             g38.observe_g38_actor_source(env, input_mode=g38.FOLD6_INPUT)
             for env in reference

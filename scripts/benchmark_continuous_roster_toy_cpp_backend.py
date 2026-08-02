@@ -16,25 +16,25 @@ if str(PROJECT_ROOT) not in sys.path:
 import numpy as np
 
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
-from ha_ctse_process import continuous_roster_toy_cpp_backend as cpp
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import cpp_backend as cpp
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
-def _profiles(capacity: int, batch_size: int) -> tuple[g32.RosterProfile, ...]:
+def _profiles(capacity: int, batch_size: int) -> tuple[roster_env.RosterProfile, ...]:
     if capacity == 6:
-        return (g32.SMALL_CAPACITY_6,) * batch_size
+        return (roster_env.SMALL_CAPACITY_6,) * batch_size
     if capacity == 12:
-        return (g32.LARGE_CAPACITY_12,) * batch_size
+        return (roster_env.LARGE_CAPACITY_12,) * batch_size
     if capacity == 8:
-        return tuple(g32.TRAIN_PROFILES[index % 3] for index in range(batch_size))
+        return tuple(roster_env.TRAIN_PROFILES[index % 3] for index in range(batch_size))
     raise ValueError("benchmark capacity must be 6, 8, or 12")
 
 
 def _python_episode(
-    ledgers: tuple[g32.CapacityRosterLedger, ...], actions: np.ndarray
-) -> tuple[g32.CapacityRosterOutcome, ...]:
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
-    for _time in range(g32.HORIZON):
+    ledgers: tuple[roster_env.CapacityRosterLedger, ...], actions: np.ndarray
+) -> tuple[roster_env.CapacityRosterOutcome, ...]:
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    for _time in range(roster_env.HORIZON):
         views = tuple(
             g38.observe_g38_actor_source(env, input_mode=g38.FOLD6_INPUT)
             for env in envs
@@ -45,11 +45,11 @@ def _python_episode(
 
 
 def _native_episode(
-    ledgers: tuple[g32.CapacityRosterLedger, ...], actions: np.ndarray
-) -> tuple[g32.CapacityRosterOutcome, ...]:
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    ledgers: tuple[roster_env.CapacityRosterLedger, ...], actions: np.ndarray
+) -> tuple[roster_env.CapacityRosterOutcome, ...]:
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     batch = cpp.ContinuousRosterToyBatch(envs)
-    for _time in range(g32.HORIZON):
+    for _time in range(roster_env.HORIZON):
         views = batch.observe_six()
         batch.advance(views, actions)
     return tuple(env.outcome() for env in envs)
@@ -59,14 +59,14 @@ def run_benchmark(*, batch_size: int, capacity: int, repeats: int) -> dict[str, 
     if batch_size <= 0 or repeats <= 0:
         raise ValueError("batch_size and repeats must be positive")
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             index,
             master_seed=10_992_000,
             profile=profile,
         )
         for index, profile in enumerate(_profiles(capacity, batch_size))
     )
-    actions = np.zeros((batch_size, capacity, g32.ACTION_DIM), dtype=np.float32)
+    actions = np.zeros((batch_size, capacity, roster_env.ACTION_DIM), dtype=np.float32)
     reference = _python_episode(ledgers, actions)
     accelerated = _native_episode(ledgers, actions)
     if accelerated != reference:
@@ -89,7 +89,7 @@ def run_benchmark(*, batch_size: int, capacity: int, repeats: int) -> dict[str, 
         "bitwise_outcome_oracle": True,
         "batch_size": batch_size,
         "capacity": capacity,
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "repeats": repeats,
         "python_seconds": python_seconds,
         "native_seconds": native_seconds,

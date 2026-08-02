@@ -6,6 +6,7 @@ import pytest
 import torch
 
 from ha_ctse_process import continuous_roster_native_six_credit_reduction_g40 as g40
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 def _model() -> g40.G40NativeSixPolicy:
@@ -168,7 +169,7 @@ def test_first_paired_8x48_branch_batch_closes_all_learning_signal_gates() -> No
     match = g40.branch_trajectory_match(left, right)
     assert match["passed"] is True, match
     noise = torch.as_tensor(
-        g40.g32.make_action_noise(
+        roster_env.make_action_noise(
             range(8), action_seed=10_406_000, member_capacity=8
         )[0]
     )

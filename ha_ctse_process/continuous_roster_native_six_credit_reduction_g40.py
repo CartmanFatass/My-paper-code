@@ -12,10 +12,11 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from envs.continuous_roster import cpp_backend as toy_cpp
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_native_six_coordinate_training_g39 as g39
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
-from ha_ctse_process import continuous_roster_toy_cpp_backend as toy_cpp
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
 from ha_ctse_process.anchored_residual_g19 import (
     ENTROPY_COEFFICIENT,
@@ -733,8 +734,8 @@ def source_preflight_audit() -> dict[str, object]:
     passed = bool(
         source_match
         and
-        g32.HORIZON == 48
-        and g32.TRAIN_CAPACITY == 8
+        roster_env.HORIZON == 48
+        and roster_env.TRAIN_CAPACITY == 8
         and tuple(g34.CAPACITIES) == (6, 8, 12)
         and witness >= g35.CURRENT_STATE_WITNESS_FLOOR
     )
@@ -1158,12 +1159,12 @@ def make_process_ledgers(
         stream=1,
     )
     if capacity == 6:
-        profiles = (g32.SMALL_CAPACITY_6,) * 64
+        profiles = (roster_env.SMALL_CAPACITY_6,) * 64
     elif capacity == 12:
-        profiles = (g32.LARGE_CAPACITY_12,) * 64
+        profiles = (roster_env.LARGE_CAPACITY_12,) * 64
     else:
         profiles = g39._balanced_64_assignments(
-            g32.TRAIN_PROFILES,
+            roster_env.TRAIN_PROFILES,
             replicate=replicate,
             capacity=capacity,
             process_seed=seeds["evaluation_process"],
@@ -1171,7 +1172,7 @@ def make_process_ledgers(
         )
     result: list[g34.RandomProcessLedger] = []
     for local_episode in range(int(episode_count)):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=seeds["evaluation_base_ledger"],
             profile=profiles[local_episode],
@@ -1220,8 +1221,8 @@ def source_controls() -> dict[str, object]:
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_backend_python_fallback": False,
         "environment_backend_build_interface": toy_cpp._BUILD_INTERFACE_VERSION,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "arms": list(ARMS),
         "credit_treatment_only": True,

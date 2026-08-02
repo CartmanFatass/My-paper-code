@@ -9,6 +9,7 @@ from typing import Iterable, Sequence
 import numpy as np
 import torch
 
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
 from ha_ctse_process.continuous_roster_policy import ContinuousRosterPolicy
 
@@ -85,21 +86,21 @@ def _time_assignments(*, replicate: int, capacity: int) -> tuple[tuple[int, ...]
 
 def _profile_assignments(
     *, replicate: int, capacity: int
-) -> tuple[g32.RosterProfile, ...]:
+) -> tuple[roster_env.RosterProfile, ...]:
     if capacity == 6:
-        return (g32.SMALL_CAPACITY_6,) * EPISODES_PER_CELL
+        return (roster_env.SMALL_CAPACITY_6,) * EPISODES_PER_CELL
     if capacity == 12:
-        return (g32.LARGE_CAPACITY_12,) * EPISODES_PER_CELL
+        return (roster_env.LARGE_CAPACITY_12,) * EPISODES_PER_CELL
     if capacity == 8:
         return _balanced_assignments(
-            g32.TRAIN_PROFILES, replicate=replicate, capacity=capacity, stream=2
+            roster_env.TRAIN_PROFILES, replicate=replicate, capacity=capacity, stream=2
         )  # type: ignore[return-value]
     raise ValueError("G34 capacity outside registered support")
 
 
 @dataclass(frozen=True)
 class RandomProcessLedger:
-    base: g32.CapacityRosterLedger
+    base: roster_env.CapacityRosterLedger
     local_episode_id: int
     event_times: tuple[int, int, int, int]
     event_order: tuple[str, str, str, str]
@@ -115,7 +116,7 @@ class RandomProcessLedger:
         return self.base.member_capacity
 
     @property
-    def profile(self) -> g32.RosterProfile:
+    def profile(self) -> roster_env.RosterProfile:
         return self.base.profile
 
     @property
@@ -140,7 +141,7 @@ class RandomProcessLedger:
             raise ValueError("G34 active-count schedule mismatch")
 
 
-def _apply_edit(active: set[int], base: g32.CapacityRosterLedger, edit: str) -> None:
+def _apply_edit(active: set[int], base: roster_env.CapacityRosterLedger, edit: str) -> None:
     if edit == "L":
         cohort = set(base.temporarily_absent)
         if not cohort.issubset(active):
@@ -168,7 +169,7 @@ def _apply_edit(active: set[int], base: g32.CapacityRosterLedger, edit: str) -> 
 
 
 def _expected_roster_schedule(
-    base: g32.CapacityRosterLedger,
+    base: roster_env.CapacityRosterLedger,
     event_times: tuple[int, int, int, int],
     event_order: tuple[str, str, str, str],
 ) -> tuple[tuple[int, ...], tuple[int, ...]]:
@@ -176,7 +177,7 @@ def _expected_roster_schedule(
     counts = [len(active)]
     schedule: list[int] = []
     edits = dict(zip(event_times, event_order))
-    for time in range(g32.HORIZON):
+    for time in range(roster_env.HORIZON):
         if time in edits:
             _apply_edit(active, base, edits[time])
             counts.append(len(active))
@@ -198,7 +199,7 @@ def make_process_ledgers(
     profiles = _profile_assignments(replicate=replicate, capacity=capacity)
     rows: list[RandomProcessLedger] = []
     for local_episode in range(int(episode_count)):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             episode_address(capacity, local_episode),
             master_seed=BASE_LEDGER_SEED_BASE + int(replicate),
             profile=profiles[local_episode],
@@ -221,7 +222,7 @@ def make_process_ledgers(
     return tuple(rows)
 
 
-class RandomProcessRosterEnv(g32.RuntimeCapacityRosterEnv):
+class RandomProcessRosterEnv(roster_env.RuntimeCapacityRosterEnv):
     def __init__(self, process: RandomProcessLedger):
         process.validate()
         super().__init__(process.base)
@@ -230,34 +231,34 @@ class RandomProcessRosterEnv(g32.RuntimeCapacityRosterEnv):
     def _prepare_membership(self) -> None:
         if self._prepared_time == self.time:
             return
-        change = g32.MembershipChange()
+        change = roster_env.MembershipChange()
         by_time = dict(zip(self.process.event_times, self.process.event_order))
         edit = by_time.get(self.time)
         if edit == "L":
             keys = self.ledger.temporarily_absent
             self.active[np.asarray(keys)] = False
-            change = g32.MembershipChange(temporarily_left=keys)
+            change = roster_env.MembershipChange(temporarily_left=keys)
         elif edit == "R":
             keys = self.ledger.temporarily_absent
             self.active[np.asarray(keys)] = True
-            change = g32.MembershipChange(rejoined=keys)
+            change = roster_env.MembershipChange(rejoined=keys)
         elif edit == "J":
             keys = self.ledger.fresh_join
             self.active[np.asarray(keys)] = True
             self.previous_actions[np.asarray(keys)] = 0.0
             self.age[np.asarray(keys)] = 0
-            change = g32.MembershipChange(joined=keys)
+            change = roster_env.MembershipChange(joined=keys)
         elif edit == "T":
             keys = self.ledger.terminal_leave
             self.active[np.asarray(keys)] = False
-            change = g32.MembershipChange(terminally_left=keys)
+            change = roster_env.MembershipChange(terminally_left=keys)
         self._change = change
         self._prepared_time = self.time
 
 
 def _episode_metrics(
     process: RandomProcessLedger,
-    outcome: g32.CapacityRosterOutcome,
+    outcome: roster_env.CapacityRosterOutcome,
     *,
     expected_roster_sizes: tuple[int, ...] | None = None,
 ) -> dict[str, object]:
@@ -266,7 +267,7 @@ def _episode_metrics(
         edit: float(rewards[time : time + 4].mean())
         for time, edit in zip(process.event_times, process.event_order)
     }
-    boundaries = (0, *process.event_times, g32.HORIZON)
+    boundaries = (0, *process.event_times, roster_env.HORIZON)
     segments = tuple(
         float(rewards[left:right].mean())
         for left, right in zip(boundaries, boundaries[1:])
@@ -298,9 +299,9 @@ def evaluate_constructive(
     rows: list[dict[str, object]] = []
     for process in processes:
         env = RandomProcessRosterEnv(process)
-        while env.time < g32.HORIZON:
+        while env.time < roster_env.HORIZON:
             view = env.observe()
-            env.step(g32.constructive_actions(view))
+            env.step(roster_env.constructive_actions(view))
         rows.append(_episode_metrics(process, env.outcome()))
     return tuple(rows)
 
@@ -327,11 +328,11 @@ def evaluate_model(
     envs = tuple(
         RandomProcessRosterEnv(row)
         if process_kind == "random"
-        else g32.RuntimeCapacityRosterEnv(row.base)
+        else roster_env.RuntimeCapacityRosterEnv(row.base)
         for row in rows
     )
     ids = tuple(row.episode_id for row in rows)
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         ids, action_seed=int(action_seed), member_capacity=model.member_capacity
     )
     hidden = torch.zeros((len(rows), model.member_capacity, model.hidden_dim), device=device)
@@ -341,7 +342,7 @@ def evaluate_model(
     lifecycle_valid = True
     model.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(env.observe() for env in envs)
             if intervention == "reactive":
                 hidden.zero_()
@@ -387,7 +388,7 @@ def evaluate_model(
             observations = np.stack([view.observations for view in views])
             critic = np.stack([view.critic_state for view in views])
             if intervention == "time_rotated":
-                rotated = np.float32(((time + TIME_ROTATION) % g32.HORIZON) / (g32.HORIZON - 1))
+                rotated = np.float32(((time + TIME_ROTATION) % roster_env.HORIZON) / (roster_env.HORIZON - 1))
                 observations = observations.copy()
                 critic = critic.copy()
                 observations[:, :, 9] = np.where(
@@ -444,11 +445,11 @@ def evaluate_model(
 def source_controls() -> dict[str, object]:
     return {
         "source_id": SOURCE_ID,
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "capacities": list(CAPACITIES),
         "event_count": 4,
         "event_orders": [list(row) for row in EVENT_ORDERS],
-        "fixed_event_times": list(g32.EVENT_TIMES),
+        "fixed_event_times": list(roster_env.EVENT_TIMES),
         "fixed_event_process": ["L", "R+J", "T"],
         "time_tuple_count": len(TIME_TUPLES),
         "time_minimum": 5,

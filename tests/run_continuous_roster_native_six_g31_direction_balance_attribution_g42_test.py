@@ -17,6 +17,7 @@ from ha_ctse_process import (
 from scripts import (
     run_continuous_roster_native_six_g31_direction_balance_attribution_g42 as runner,
 )
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 ANCHOR_FIXTURE = (
@@ -361,7 +362,7 @@ def test_retained_projection_evaluation_has_exact_forward_interface(
         assert row["lifecycle_valid"] is True
         assert len(row["episodes"]) == 1
         assert row["state_before"] == row["state_after"]
-        assert retained_calls == [deployed] * runner.g32.HORIZON
+        assert retained_calls == [deployed] * roster_env.HORIZON
     finally:
         torch.set_num_threads(prior_threads)
 

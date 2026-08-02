@@ -10,6 +10,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
@@ -178,8 +179,8 @@ def build_g38_folded_actor_input(
 
 
 def observe_g38_actor_source(
-    env: g32.RuntimeCapacityRosterEnv, *, input_mode: str
-) -> g32.CapacityRosterView:
+    env: roster_env.RuntimeCapacityRosterEnv, *, input_mode: str
+) -> roster_env.CapacityRosterView:
     """Construct only the coordinates owned by the selected actor input mode."""
 
     if input_mode not in (FULL10_INPUT, FOLD6_INPUT, FOLDED6_INPUT):
@@ -202,9 +203,9 @@ def observe_g38_actor_source(
     observations[keys, 4] = mix
     observations[keys, 5] = np.float32(np.log1p(count))
     if input_mode == FULL10_INPUT:
-        observations[keys, 6] = env.age[keys] / g32.HORIZON
+        observations[keys, 6] = env.age[keys] / roster_env.HORIZON
         observations[keys, 7:9] = (env.previous_actions[keys] + 1.0) / 2.0
-        observations[keys, 9] = env.time / (g32.HORIZON - 1)
+        observations[keys, 9] = env.time / (roster_env.HORIZON - 1)
     aggregate = env.ledger.capabilities[keys].sum(axis=0)
     critic_state = np.asarray(
         (
@@ -213,11 +214,11 @@ def observe_g38_actor_source(
             aggregate[0],
             aggregate[1],
             np.log1p(count),
-            env.time / (g32.HORIZON - 1),
+            env.time / (roster_env.HORIZON - 1),
         ),
         dtype=np.float32,
     )
-    return g32.CapacityRosterView(
+    return roster_env.CapacityRosterView(
         env.time,
         observations,
         env.active.copy(),
@@ -229,14 +230,14 @@ def observe_g38_actor_source(
 
 
 def g38_immediate_reward(
-    env: g32.RuntimeCapacityRosterEnv,
-    view: g32.CapacityRosterView,
+    env: roster_env.RuntimeCapacityRosterEnv,
+    view: roster_env.CapacityRosterView,
     actions: np.ndarray,
 ) -> float:
     """Evaluate reward from one pre-step state without mutating the environment."""
 
     values = np.asarray(actions, dtype=np.float32)
-    expected = (env.ledger.member_capacity, g32.ACTION_DIM)
+    expected = (env.ledger.member_capacity, roster_env.ACTION_DIM)
     if values.shape != expected or not np.isfinite(values).all():
         raise ValueError("G38 action shape/finite mismatch")
     if np.any(np.abs(values) > 1.0) or np.count_nonzero(values[~view.active_mask]):
@@ -266,8 +267,8 @@ def g38_immediate_reward(
 
 
 def advance_g38_environment(
-    env: g32.RuntimeCapacityRosterEnv,
-    view: g32.CapacityRosterView,
+    env: roster_env.RuntimeCapacityRosterEnv,
+    view: roster_env.CapacityRosterView,
     actions: np.ndarray,
 ) -> float:
     """Advance exactly once using an already constructed reduced/full view."""
@@ -283,8 +284,8 @@ def advance_g38_environment(
     env.roster_sizes.append(len(keys))
     env.time += 1
     env._prepared_time = None
-    env._change = g32.MembershipChange()
-    env._terminated = env.time == g32.HORIZON
+    env._change = roster_env.MembershipChange()
+    env._terminated = env.time == roster_env.HORIZON
     return reward
 
 
@@ -295,7 +296,7 @@ def collect_g38_trajectory(
     ledger_seed: int,
     action_seed: int,
     device: torch.device,
-    profiles: Sequence[g32.RosterProfile] = g32.TRAIN_PROFILES,
+    profiles: Sequence[roster_env.RosterProfile] = roster_env.TRAIN_PROFILES,
 ) -> g32.ContinuousRosterTrajectory:
     """Collect FULL10 or genuinely six-wide FOLD6 trajectories."""
 
@@ -312,16 +313,16 @@ def collect_g38_trajectory(
     ):
         raise ValueError("G38 collection capacity mismatch")
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=ledger_seed,
             profile=profile_rows[episode % len(profile_rows)],
         )
         for episode in ids
     )
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     batch = len(ids)
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         ids, action_seed=action_seed, member_capacity=capacity
     )
     hidden = torch.zeros((batch, capacity, model.hidden_dim), device=device)
@@ -331,18 +332,18 @@ def collect_g38_trajectory(
         else RETAINED_OBSERVATION_DIM
     )
     shapes = {
-        "observations": (g32.HORIZON, batch, capacity, observation_width),
-        "active_mask": (g32.HORIZON, batch, capacity),
-        "critic_states": (g32.HORIZON, batch, g32.CRITIC_STATE_DIM),
-        "actions": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "pre_tanh_actions": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "old_log_probs": (g32.HORIZON, batch, capacity),
-        "old_values": (g32.HORIZON, batch),
-        "rewards": (g32.HORIZON, batch),
-        "hidden_before": (g32.HORIZON, batch, capacity, model.hidden_dim),
-        "hidden_after": (g32.HORIZON, batch, capacity, model.hidden_dim),
-        "prefix_action_sums": (g32.HORIZON, batch, capacity, g32.ACTION_DIM),
-        "terminal_hidden_reset_mask": (g32.HORIZON, batch, capacity),
+        "observations": (roster_env.HORIZON, batch, capacity, observation_width),
+        "active_mask": (roster_env.HORIZON, batch, capacity),
+        "critic_states": (roster_env.HORIZON, batch, roster_env.CRITIC_STATE_DIM),
+        "actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "pre_tanh_actions": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "old_log_probs": (roster_env.HORIZON, batch, capacity),
+        "old_values": (roster_env.HORIZON, batch),
+        "rewards": (roster_env.HORIZON, batch),
+        "hidden_before": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "hidden_after": (roster_env.HORIZON, batch, capacity, model.hidden_dim),
+        "prefix_action_sums": (roster_env.HORIZON, batch, capacity, roster_env.ACTION_DIM),
+        "terminal_hidden_reset_mask": (roster_env.HORIZON, batch, capacity),
     }
     rows = {
         name: torch.empty(
@@ -357,7 +358,7 @@ def collect_g38_trajectory(
     }
     model.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(
                 observe_g38_actor_source(env, input_mode=model.input_mode)
                 for env in envs
@@ -569,9 +570,9 @@ def make_model(
     )
     model = G38FoldableMatchedCSPolicy(
         observation_dim,
-        g32.CRITIC_STATE_DIM,
+        roster_env.CRITIC_STATE_DIM,
         member_capacity=int(member_capacity),
-        action_dim=g32.ACTION_DIM,
+        action_dim=roster_env.ACTION_DIM,
         input_mode=input_mode,
         hidden_dim=HIDDEN_DIM,
     )
@@ -891,49 +892,49 @@ def fold_forward_equivalence(
 
 def _expected_membership_change(
     process: g34.RandomProcessLedger, *, process_kind: str, time: int
-) -> g32.MembershipChange:
+) -> roster_env.MembershipChange:
     if process_kind == "fixed":
-        if time == g32.EVENT_TIMES[0]:
-            return g32.MembershipChange(
+        if time == roster_env.EVENT_TIMES[0]:
+            return roster_env.MembershipChange(
                 temporarily_left=process.base.temporarily_absent
             )
-        if time == g32.EVENT_TIMES[1]:
-            return g32.MembershipChange(
+        if time == roster_env.EVENT_TIMES[1]:
+            return roster_env.MembershipChange(
                 joined=process.base.fresh_join,
                 rejoined=process.base.temporarily_absent,
             )
-        if time == g32.EVENT_TIMES[2]:
-            return g32.MembershipChange(
+        if time == roster_env.EVENT_TIMES[2]:
+            return roster_env.MembershipChange(
                 terminally_left=process.base.terminal_leave
             )
-        return g32.MembershipChange()
+        return roster_env.MembershipChange()
     edit = dict(zip(process.event_times, process.event_order)).get(time)
     if edit == "L":
-        return g32.MembershipChange(
+        return roster_env.MembershipChange(
             temporarily_left=process.base.temporarily_absent
         )
     if edit == "R":
-        return g32.MembershipChange(rejoined=process.base.temporarily_absent)
+        return roster_env.MembershipChange(rejoined=process.base.temporarily_absent)
     if edit == "J":
-        return g32.MembershipChange(joined=process.base.fresh_join)
+        return roster_env.MembershipChange(joined=process.base.fresh_join)
     if edit == "T":
-        return g32.MembershipChange(
+        return roster_env.MembershipChange(
             terminally_left=process.base.terminal_leave
         )
-    return g32.MembershipChange()
+    return roster_env.MembershipChange()
 
 
 def _fold_reward_summaries(
     rewards: Sequence[float], process: g34.RandomProcessLedger
 ) -> np.ndarray:
     values = np.asarray(rewards, dtype=np.float64)
-    if values.shape != (g32.HORIZON,) or not np.isfinite(values).all():
+    if values.shape != (roster_env.HORIZON,) or not np.isfinite(values).all():
         raise ValueError("G38 fold reward trace mismatch")
     windows = tuple(
         float(values[event_time : event_time + 4].mean())
         for event_time in process.event_times
     )
-    boundaries = (0, *process.event_times, g32.HORIZON)
+    boundaries = (0, *process.event_times, roster_env.HORIZON)
     segments = tuple(
         float(values[left:right].mean())
         for left, right in zip(boundaries, boundaries[1:])
@@ -968,11 +969,11 @@ def verify_g38_fold_equivalence(
     envs = tuple(
         g34.RandomProcessRosterEnv(row)
         if process_kind == "random"
-        else g32.RuntimeCapacityRosterEnv(row.base)
+        else roster_env.RuntimeCapacityRosterEnv(row.base)
         for row in rows
     )
     ids = tuple(row.episode_id for row in rows)
-    noise = g32.make_action_noise(
+    noise = roster_env.make_action_noise(
         ids, action_seed=int(action_seed), member_capacity=folded.member_capacity
     )
     hidden_pre = torch.zeros(
@@ -1012,7 +1013,7 @@ def verify_g38_fold_equivalence(
     pre_fold.eval()
     folded.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(
                 observe_g38_actor_source(env, input_mode=FOLDED6_INPUT)
                 for env in envs
@@ -1183,7 +1184,7 @@ def make_process_ledgers(
     )
     rows: list[g34.RandomProcessLedger] = []
     for local_episode in range(int(episode_count)):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=seeds["evaluation_base_ledger"],
             profile=profiles[local_episode],
@@ -1211,8 +1212,8 @@ def source_controls() -> dict[str, object]:
         "source_id": SOURCE_ID,
         "training_source": "G32 capacity-8 fixed",
         "evaluation_source": "G34-P0 fixed/random capacities 6|8|12",
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "seed_bases": dict(SEED_BASES),
         "bootstrap_seed": BOOTSTRAP_SEED,

@@ -25,6 +25,7 @@ from ha_ctse_process import (
 )
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from scripts import run_continuous_roster_native_six_coordinate_training_g39 as g39_runner
 from scripts import run_continuous_roster_native_six_credit_reduction_g40 as g40_runner
 from scripts import run_continuous_roster_reactive_reduction_g35 as g35_runner
@@ -168,8 +169,8 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     passes = int(counts["ppo_passes"])
     episodes = int(counts["evaluation_episodes_per_cell"])
     cells_per_replicate = len(source.ARMS) * len(g34.CAPACITIES) * len(MODEL_CELLS)
-    training = replicates * len(source.ARMS) * updates * envs * g32.HORIZON
-    evaluation = replicates * cells_per_replicate * episodes * g32.HORIZON
+    training = replicates * len(source.ARMS) * updates * envs * roster_env.HORIZON
+    evaluation = replicates * cells_per_replicate * episodes * roster_env.HORIZON
     return {
         **counts,
         "arms": list(source.ARMS),
@@ -182,9 +183,9 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         "accepted_g40_source_commit": g41.ACCEPTED_G40_SOURCE_COMMIT,
         "accepted_g41_source_commit": source.ACCEPTED_G41_SOURCE_COMMIT,
         "aligned_g42_implementation_commit": ALIGNED_IMPLEMENTATION_COMMIT,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
-        "horizon": g32.HORIZON,
+        "horizon": roster_env.HORIZON,
         "stored_training_observation_dim": 6,
         "actor_width": g40.g39.HIDDEN_DIM,
         "learning_rate": g40.LEARNING_RATE,
@@ -231,8 +232,8 @@ def source_controls() -> dict[str, object]:
         "evaluation_source": "G34 fixed/random capacities 6|8|12",
         "environment_backend": "ContinuousRosterToyBatch_CPU_CPP_required",
         "environment_backend_python_fallback": False,
-        "horizon": g32.HORIZON,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "horizon": roster_env.HORIZON,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "arms": list(source.ARMS),
         "seed_bases": dict(SEED_BASES),
@@ -354,12 +355,12 @@ def _source_inventory(
         count=episode_count,
     )
     if capacity == 6:
-        profiles: Sequence[object] = (g32.SMALL_CAPACITY_6,) * episode_count
+        profiles: Sequence[object] = (roster_env.SMALL_CAPACITY_6,) * episode_count
     elif capacity == 12:
-        profiles = (g32.LARGE_CAPACITY_12,) * episode_count
+        profiles = (roster_env.LARGE_CAPACITY_12,) * episode_count
     else:
         profiles = _balanced_assignments(
-            g32.TRAIN_PROFILES,
+            roster_env.TRAIN_PROFILES,
             replicate=replicate,
             capacity=capacity,
             process_seed=seeds["evaluation_process"],
@@ -368,7 +369,7 @@ def _source_inventory(
         )
     processes: list[g34.RandomProcessLedger] = []
     for local_episode in range(episode_count):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=seeds["evaluation_base_ledger"],
             profile=profiles[local_episode],  # type: ignore[arg-type]
@@ -399,7 +400,7 @@ def _source_inventory(
         },
         "profile_counts": {
             profile.name: sum(row.profile.name == profile.name for row in processes)
-            for profile in g32.TRAIN_PROFILES
+            for profile in roster_env.TRAIN_PROFILES
         } if capacity == 8 else None,
         "processes": [
             {
@@ -524,7 +525,7 @@ def _paired_source_audit(
     if tuple(trajectories) != source.ARMS:
         return {"passed": False, "inventory_valid": False}
     left, right = (trajectories[arm] for arm in source.ARMS)
-    def ledger_key(ledger: g32.CapacityRosterLedger) -> tuple[object, ...]:
+    def ledger_key(ledger: roster_env.CapacityRosterLedger) -> tuple[object, ...]:
         return (
             ledger.episode_id,
             ledger.profile,
@@ -582,36 +583,36 @@ def _collect_trajectory(
     """Collect the accepted no-slow policy through the required C++ toy batch."""
 
     ids = tuple(int(value) for value in episode_ids)
-    profiles = tuple(g32.TRAIN_PROFILES)
-    if len(ids) != 8 or model.member_capacity != g32.TRAIN_CAPACITY:
+    profiles = tuple(roster_env.TRAIN_PROFILES)
+    if len(ids) != 8 or model.member_capacity != roster_env.TRAIN_CAPACITY:
         raise ValueError("G42 branch collection requires exactly 8 capacity-8 episodes")
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=int(ledger_seed),
             profile=profiles[episode % len(profiles)],
         )
         for episode in ids
     )
-    envs = tuple(g32.RuntimeCapacityRosterEnv(row) for row in ledgers)
+    envs = tuple(roster_env.RuntimeCapacityRosterEnv(row) for row in ledgers)
     env_batch = g40.toy_cpp.ContinuousRosterToyBatch(envs)
-    noise = g32.make_action_noise(
-        ids, action_seed=int(action_seed), member_capacity=g32.TRAIN_CAPACITY
+    noise = roster_env.make_action_noise(
+        ids, action_seed=int(action_seed), member_capacity=roster_env.TRAIN_CAPACITY
     )
-    hidden = torch.zeros((len(ids), g32.TRAIN_CAPACITY, model.hidden_dim))
+    hidden = torch.zeros((len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim))
     shapes = {
-        "observations": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, 6),
-        "active_mask": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
-        "critic_states": (g32.HORIZON, len(ids), g32.CRITIC_STATE_DIM),
-        "actions": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "pre_tanh_actions": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "old_log_probs": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
-        "old_values": (g32.HORIZON, len(ids)),
-        "rewards": (g32.HORIZON, len(ids)),
-        "hidden_before": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, model.hidden_dim),
-        "hidden_after": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, model.hidden_dim),
-        "prefix_action_sums": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY, g32.ACTION_DIM),
-        "terminal_hidden_reset_mask": (g32.HORIZON, len(ids), g32.TRAIN_CAPACITY),
+        "observations": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, 6),
+        "active_mask": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
+        "critic_states": (roster_env.HORIZON, len(ids), roster_env.CRITIC_STATE_DIM),
+        "actions": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "pre_tanh_actions": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "old_log_probs": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
+        "old_values": (roster_env.HORIZON, len(ids)),
+        "rewards": (roster_env.HORIZON, len(ids)),
+        "hidden_before": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim),
+        "hidden_after": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, model.hidden_dim),
+        "prefix_action_sums": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY, roster_env.ACTION_DIM),
+        "terminal_hidden_reset_mask": (roster_env.HORIZON, len(ids), roster_env.TRAIN_CAPACITY),
     }
     rows = {
         name: torch.empty(
@@ -626,10 +627,10 @@ def _collect_trajectory(
     }
     model.eval()
     with torch.no_grad():
-        for step in range(g32.HORIZON):
+        for step in range(roster_env.HORIZON):
             views = env_batch.observe_six()
             terminal_reset = torch.zeros(
-                (len(ids), g32.TRAIN_CAPACITY), dtype=torch.bool
+                (len(ids), roster_env.TRAIN_CAPACITY), dtype=torch.bool
             )
             for batch_index, view in enumerate(views):
                 if view.membership_change.terminally_left:
@@ -1355,7 +1356,7 @@ def _load_final_model(
     )
     anchor_root = _bind_anchor_root(Path(str(training["accepted_anchor_root"])))
     anchor = _load_accepted_anchor(anchor_root, replicate)
-    if capacity != g32.TRAIN_CAPACITY:
+    if capacity != roster_env.TRAIN_CAPACITY:
         authority = g41.accepted_g40_anchor_authority(replicate)
         resized = g40.make_model(
             capacity, initialization_seed=authority.anchor_model_seed

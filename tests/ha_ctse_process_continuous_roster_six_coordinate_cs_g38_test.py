@@ -7,6 +7,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import attach_credit_baselines
 
 
@@ -93,19 +94,19 @@ def test_common_graph_state_initialization_and_zero_carry_are_exact() -> None:
     assert tuple(full.state_dict()) == tuple(fold.state_dict())
 
     ledgers = tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             episode,
             master_seed=10_387_000,
-            profile=g32.TRAIN_PROFILES[episode % len(g32.TRAIN_PROFILES)],
+            profile=roster_env.TRAIN_PROFILES[episode % len(roster_env.TRAIN_PROFILES)],
         )
         for episode in range(2)
     )
-    views = tuple(g32.RuntimeCapacityRosterEnv(row).observe() for row in ledgers)
+    views = tuple(roster_env.RuntimeCapacityRosterEnv(row).observe() for row in ledgers)
     retained = torch.as_tensor(np.stack([row.observations[:, :6] for row in views]))
     active = torch.as_tensor(np.stack([row.active_mask for row in views]))
     critic = torch.as_tensor(np.stack([row.critic_state for row in views]))
     noise = torch.as_tensor(
-        g32.make_action_noise(range(2), action_seed=10_387_000, member_capacity=8)[0]
+        roster_env.make_action_noise(range(2), action_seed=10_387_000, member_capacity=8)[0]
     )
     clamped = g38.build_g38_constant_actor_input(retained, active)
     for full_affine, fold_affine in (
@@ -158,7 +159,7 @@ def test_fold6_model_rejects_ten_and_collection_replay_stays_six_wide(
 
     monkeypatch.setattr(model, "forward_step", record_width)
     g38.g35.replay_trajectory(model, anchored, device=torch.device("cpu"))
-    assert widths == [6] * g38.g32.HORIZON
+    assert widths == [6] * roster_env.HORIZON
 
 
 def test_g38_collector_preserves_the_exact_full10_g32_trajectory() -> None:
@@ -324,7 +325,7 @@ def test_fold6_and_folded_share_six_wide_effective_bias_kernel_under_stress() ->
     assert lifecycle is True
     assert audit["passed"] is True
     assert audit["environment_trajectories_per_episode"] == 1
-    assert audit["membership_edit_checks"] == 8 * g38.g32.HORIZON
+    assert audit["membership_edit_checks"] == 8 * roster_env.HORIZON
     assert all(error == 0.0 for error in audit["maximum_errors"].values())
 
 
@@ -372,8 +373,8 @@ def test_folded_actor_is_lockstep_equivalent_on_one_environment_trajectory(
         assert lifecycle is True
         assert audit["passed"] is True
         assert audit["environment_trajectories_per_episode"] == 1
-        assert audit["reward_comparisons"] == 2 * g38.g32.HORIZON
-        assert audit["membership_edit_checks"] == 2 * g38.g32.HORIZON
+        assert audit["reward_comparisons"] == 2 * roster_env.HORIZON
+        assert audit["membership_edit_checks"] == 2 * roster_env.HORIZON
         assert audit["summary_comparisons"] == 20
         assert audit["maximum_errors"]["pre_tanh_mean"] <= 1e-6
         assert audit["maximum_errors"]["actions"] <= 1e-6
@@ -385,9 +386,9 @@ def test_folded_actor_is_lockstep_equivalent_on_one_environment_trajectory(
 
     def wrong_membership(
         process: object, *, process_kind: str, time: int
-    ) -> g38.g32.MembershipChange:
+    ) -> roster_env.MembershipChange:
         del process, process_kind, time
-        return g38.g32.MembershipChange(joined=(999,))
+        return roster_env.MembershipChange(joined=(999,))
 
     monkeypatch.setattr(g38, "_expected_membership_change", wrong_membership)
     _, _, failed = g38.verify_g38_fold_equivalence(
@@ -398,7 +399,7 @@ def test_folded_actor_is_lockstep_equivalent_on_one_environment_trajectory(
         process_kind="random",
         deterministic=True,
     )
-    assert failed["membership_edit_checks"] == g38.g32.HORIZON
+    assert failed["membership_edit_checks"] == roster_env.HORIZON
     assert failed["exact"]["membership_edits"] is False
     assert failed["passed"] is False
     monkeypatch.setattr(g38, "_expected_membership_change", original)

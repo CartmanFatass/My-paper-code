@@ -36,7 +36,7 @@ from ha_ctse_process import (
     continuous_roster_native_six_g31_common_fast_anchor_attribution_g50 as source,
 )
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
-from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 def _load_isolated_g48_orchestration() -> Any:
@@ -212,7 +212,7 @@ def _configuration(
         "evaluation_parallel_unit": "replicate_capacity_cell",
         "deterministic_merge": "preassigned_index_not_completion_order",
         "worker_thread_controls": dict(WORKER_THREAD_ENV),
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "cells_per_arm_capacity": len(MODEL_CELLS),
         "evaluation_optimizer_steps": 0,
         "phase_A_optimizer_steps": (3 if formal else 1) * 2 * updates * 2,
@@ -410,7 +410,7 @@ def _train_replicate(
     seeds = source.seed_block(replicate, formal=formal)
     _backend.configure_runtime(seeds["phase_A_gradient_probe"])
     phase_A_models = source.make_phase_A_models(
-        member_capacity=g32.TRAIN_CAPACITY,
+        member_capacity=roster_env.TRAIN_CAPACITY,
         initialization_seed=seeds["initialization"],
     )
     phase_A_optimizers = source.make_phase_A_optimizers(phase_A_models)
@@ -1215,7 +1215,7 @@ def readiness_interface_smoke(
     ).resolve():
         raise ValueError("G50 readiness accepted-anchor authority mismatch")
     phase_B_actor_interface = source.phase_B_actor_interface_evidence(
-        member_capacity=g32.TRAIN_CAPACITY,
+        member_capacity=roster_env.TRAIN_CAPACITY,
         initialization_seed=source.SEED_BASES["initialization"],
     )
     return {

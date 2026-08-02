@@ -12,6 +12,7 @@ from typing import Any
 import numpy as np
 import torch
 
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
@@ -31,7 +32,7 @@ NONFORMAL_SEED_OFFSET = 900_000
 BUNDLE_WIDTH = 4
 
 
-def _profiles(*, namespace: int, capacity: int, process_seed: int) -> tuple[g32.RosterProfile, ...]:
+def _profiles(*, namespace: int, capacity: int, process_seed: int) -> tuple[roster_env.RosterProfile, ...]:
     return g35._profile_assignments(  # type: ignore[attr-defined]
         replicate=namespace, capacity=capacity, process_seed=process_seed
     )
@@ -47,7 +48,7 @@ def _random_ledgers(*, namespace: int, capacity: int) -> tuple[g34.RandomProcess
     profiles = _profiles(namespace=namespace, capacity=capacity, process_seed=process_seed)
     rows: list[g34.RandomProcessLedger] = []
     for local_episode in range(DONOR_EPISODES_PER_CAPACITY_PROCESS_NAMESPACE):
-        base = g32.make_ledger(
+        base = roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=DONOR_BASE_LEDGER_SEED_BASE + namespace,
             profile=profiles[local_episode],
@@ -65,13 +66,13 @@ def _random_ledgers(*, namespace: int, capacity: int) -> tuple[g34.RandomProcess
     return tuple(rows)
 
 
-def _fixed_ledgers(*, namespace: int, capacity: int) -> tuple[g32.CapacityRosterLedger, ...]:
+def _fixed_ledgers(*, namespace: int, capacity: int) -> tuple[roster_env.CapacityRosterLedger, ...]:
     profiles = _profiles(
         namespace=namespace, capacity=capacity,
         process_seed=DONOR_PROCESS_SEED_BASE + namespace,
     )
     return tuple(
-        g32.make_ledger(
+        roster_env.make_ledger(
             g34.episode_address(capacity, local_episode),
             master_seed=DONOR_BASE_LEDGER_SEED_BASE + namespace,
             profile=profiles[local_episode],
@@ -80,15 +81,15 @@ def _fixed_ledgers(*, namespace: int, capacity: int) -> tuple[g32.CapacityRoster
     )
 
 
-def _event_map(ledger: g32.CapacityRosterLedger | g34.RandomProcessLedger) -> dict[int, str]:
+def _event_map(ledger: roster_env.CapacityRosterLedger | g34.RandomProcessLedger) -> dict[int, str]:
     if isinstance(ledger, g34.RandomProcessLedger):
         return dict(zip(ledger.event_times, ledger.event_order))
-    return dict(zip(g32.EVENT_TIMES, ("L", "RJ", "T")))
+    return dict(zip(roster_env.EVENT_TIMES, ("L", "RJ", "T")))
 
 
 def _apply_donor_edit(
     active: np.ndarray, age: np.ndarray, previous_actions: np.ndarray,
-    base: g32.CapacityRosterLedger, edit: str,
+    base: roster_env.CapacityRosterLedger, edit: str,
 ) -> None:
     if edit == "L":
         active[np.asarray(base.temporarily_absent)] = False
@@ -114,23 +115,23 @@ def _apply_donor_edit(
         raise ValueError("G36 donor source produced an empty roster")
 
 
-def _donor_snapshots(ledger: g32.CapacityRosterLedger | g34.RandomProcessLedger) -> tuple[tuple[int, np.ndarray], ...]:
+def _donor_snapshots(ledger: roster_env.CapacityRosterLedger | g34.RandomProcessLedger) -> tuple[tuple[int, np.ndarray], ...]:
     base = ledger.base if isinstance(ledger, g34.RandomProcessLedger) else ledger
     active = np.zeros(base.member_capacity, dtype=bool)
     active[np.asarray(base.initial_keys)] = True
     age = np.zeros(base.member_capacity, dtype=np.int64)
-    previous_actions = np.zeros((base.member_capacity, g32.ACTION_DIM), dtype=np.float32)
+    previous_actions = np.zeros((base.member_capacity, roster_env.ACTION_DIM), dtype=np.float32)
     events = _event_map(ledger)
     rows: list[tuple[int, np.ndarray]] = []
-    for time in range(g32.HORIZON):
+    for time in range(roster_env.HORIZON):
         edit = events.get(time)
         if edit is not None:
             _apply_donor_edit(active, age, previous_actions, base, edit)
         keys = np.flatnonzero(active)
         bundle = np.empty((len(keys), BUNDLE_WIDTH), dtype=np.float32)
-        bundle[:, 0] = age[keys] / float(g32.HORIZON)
+        bundle[:, 0] = age[keys] / float(roster_env.HORIZON)
         bundle[:, 1:3] = (previous_actions[keys] + 1.0) / 2.0
-        bundle[:, 3] = time / float(g32.HORIZON - 1)
+        bundle[:, 3] = time / float(roster_env.HORIZON - 1)
         if not np.isfinite(bundle).all() or np.any(bundle < 0.0) or np.any(bundle > 1.0):
             raise ValueError("G36 donor bundle support mismatch")
         rows.append((len(keys), bundle))
@@ -153,7 +154,7 @@ class G36HistoryProxyDonorBank:
         for namespace in DONOR_NAMESPACES:
             for capacity in DONOR_CAPACITIES:
                 for process in DONOR_PROCESSES:
-                    ledgers: Sequence[g32.CapacityRosterLedger | g34.RandomProcessLedger]
+                    ledgers: Sequence[roster_env.CapacityRosterLedger | g34.RandomProcessLedger]
                     ledgers = (
                         _fixed_ledgers(namespace=namespace, capacity=capacity)
                         if process == "fixed"
@@ -218,7 +219,7 @@ def apply_g36_actor_history_proxy_transform(
     actor = np.asarray(observations, dtype=np.float32)
     mask = np.asarray(active_mask, dtype=bool)
     proxy = np.asarray(bundles, dtype=np.float32)
-    if actor.ndim != 3 or actor.shape[2] != g32.OBSERVATION_DIM or mask.shape != actor.shape[:2] or proxy.shape != (*actor.shape[:2], BUNDLE_WIDTH):
+    if actor.ndim != 3 or actor.shape[2] != roster_env.OBSERVATION_DIM or mask.shape != actor.shape[:2] or proxy.shape != (*actor.shape[:2], BUNDLE_WIDTH):
         raise ValueError("G36 actor transform shape mismatch")
     # The protected active-row coordinates are deliberately neither validated nor
     # copied: even a finite-value check would be an actual target-history read.
@@ -255,7 +256,7 @@ def build_g36_actor_input_without_history(
         or proxy.shape != (*mask.shape, BUNDLE_WIDTH)
     ):
         raise ValueError("G36 actor input public-prefix shape mismatch")
-    actor = np.zeros((*mask.shape, g32.OBSERVATION_DIM), dtype=np.float32)
+    actor = np.zeros((*mask.shape, roster_env.OBSERVATION_DIM), dtype=np.float32)
     actor[:, :, :6] = public
     return apply_g36_actor_history_proxy_transform(actor, mask, proxy)
 
@@ -271,8 +272,8 @@ def evaluate_g36_history_proxy(
     rows = tuple(processes)
     if any(row.member_capacity != model.member_capacity or row.member_capacity != tape.capacity for row in rows):
         raise ValueError("G36 evaluation capacity mismatch")
-    envs = tuple(g34.RandomProcessRosterEnv(row) if process_kind == "random" else g32.RuntimeCapacityRosterEnv(row.base) for row in rows)
-    noise = g32.make_action_noise((row.episode_id for row in rows), action_seed=action_seed, member_capacity=model.member_capacity)
+    envs = tuple(g34.RandomProcessRosterEnv(row) if process_kind == "random" else roster_env.RuntimeCapacityRosterEnv(row.base) for row in rows)
+    noise = roster_env.make_action_noise((row.episode_id for row in rows), action_seed=action_seed, member_capacity=model.member_capacity)
     hidden = torch.zeros((len(rows), model.member_capacity, model.hidden_dim), device=device)
     audit: dict[str, int] | None = None
     lifecycle_valid = True
@@ -282,7 +283,7 @@ def evaluate_g36_history_proxy(
     ).hexdigest()
     model.eval()
     with torch.no_grad():
-        for time in range(g32.HORIZON):
+        for time in range(roster_env.HORIZON):
             views = tuple(env.observe() for env in envs)
             g32._delete_terminal_hidden(hidden, views)
             active_mask = np.stack([view.active_mask for view in views])

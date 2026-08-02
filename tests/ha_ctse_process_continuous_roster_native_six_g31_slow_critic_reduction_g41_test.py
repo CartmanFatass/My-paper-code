@@ -14,6 +14,7 @@ from ha_ctse_process import continuous_roster_native_six_credit_reduction_g40 as
 from ha_ctse_process import (
     continuous_roster_native_six_g31_slow_critic_reduction_g41 as g41,
 )
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 ACCEPTED_ANCHOR_FIXTURE = (
@@ -357,7 +358,7 @@ def test_one_cpp_batch_two_passes_is_bitwise_full_no_slow_and_g40_equivalent(
     _assert_optimizer_state_equal(full_slow, reference_slow)
 
     noise = torch.as_tensor(
-        g40.g32.make_action_noise(
+        roster_env.make_action_noise(
             range(8), action_seed=10_405_000, member_capacity=8
         )[0]
     )

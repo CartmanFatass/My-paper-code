@@ -10,6 +10,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_random_process_g34 as source
 from scripts import run_runtime_capacity_continuous_roster_g32 as g32_runner
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 EXPECTED_COUNTS = {
@@ -212,14 +213,14 @@ def test_random_and_fixed_branches_share_base_and_action_stream(
 ) -> None:
     processes = source.make_process_ledgers(replicate=1, capacity=8, episode_count=2)
     captured_noise: list[np.ndarray] = []
-    original = source.g32.make_action_noise
+    original = roster_env.make_action_noise
 
     def capture_noise(*args: object, **kwargs: object) -> np.ndarray:
         value = original(*args, **kwargs)
         captured_noise.append(value.copy())
         return value
 
-    monkeypatch.setattr(source.g32, "make_action_noise", capture_noise)
+    monkeypatch.setattr(source.roster_env, "make_action_noise", capture_noise)
     random_metrics, _ = source.evaluate_model(
         RecordingPolicy(),
         processes=processes,

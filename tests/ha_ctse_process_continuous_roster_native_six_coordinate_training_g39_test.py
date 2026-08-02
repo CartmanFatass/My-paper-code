@@ -7,6 +7,7 @@ import torch
 
 from ha_ctse_process import continuous_roster_native_six_coordinate_training_g39 as g39
 from ha_ctse_process.anchored_residual_g19 import attach_credit_baselines
+from envs.continuous_roster import runtime_capacity as roster_env
 
 
 def _paired() -> dict[str, g39.G39Policy]:
@@ -63,7 +64,7 @@ def test_first_forward_and_first_paired_8x48_trajectory_match() -> None:
     match = g39.initial_trajectory_match(const, native)
     assert match["passed"] is True, match
     noise = torch.as_tensor(
-        g39.g32.make_action_noise(
+        roster_env.make_action_noise(
             range(8), action_seed=10_397_000, member_capacity=8
         )[0]
     )

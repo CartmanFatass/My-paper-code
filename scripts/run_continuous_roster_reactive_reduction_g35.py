@@ -21,6 +21,7 @@ import torch
 from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as source
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     optimize_fast_anchor_update,
@@ -155,10 +156,10 @@ def _configuration(*, formal: bool) -> dict[str, object]:
         * replicates
         * (fast_updates + rtg_updates)
         * num_envs
-        * g32.HORIZON
+        * roster_env.HORIZON
     )
     evaluation_transitions = (
-        replicates * cells_per_replicate * eval_episodes * g32.HORIZON
+        replicates * cells_per_replicate * eval_episodes * roster_env.HORIZON
     )
     optimizer_steps = (
         len(source.ARMS)
@@ -168,11 +169,11 @@ def _configuration(*, formal: bool) -> dict[str, object]:
     return {
         **counts,
         "arms": list(source.ARMS),
-        "observation_dim": g32.OBSERVATION_DIM,
-        "critic_state_dim": g32.CRITIC_STATE_DIM,
-        "action_dim": g32.ACTION_DIM,
+        "observation_dim": roster_env.OBSERVATION_DIM,
+        "critic_state_dim": roster_env.CRITIC_STATE_DIM,
+        "action_dim": roster_env.ACTION_DIM,
         "actor_width": source.HIDDEN_DIM,
-        "training_capacity": g32.TRAIN_CAPACITY,
+        "training_capacity": roster_env.TRAIN_CAPACITY,
         "evaluation_capacities": list(g34.CAPACITIES),
         "gamma": GAMMA,
         "learning_rate": LEARNING_RATE,
@@ -351,7 +352,7 @@ def _collect(
         ledger_seed=int(ledger_seed),
         action_seed=int(action_seed),
         device=torch.device("cpu"),
-        profiles=g32.TRAIN_PROFILES,
+        profiles=roster_env.TRAIN_PROFILES,
     )
     return attach_credit_baselines(model, raw, device=torch.device("cpu"))
 
@@ -493,7 +494,7 @@ def _train_replicate(
     seeds = source.seed_block(replicate, formal=formal)
     configure_runtime(seeds["model"])
     models = source.make_paired_models(
-        g32.TRAIN_CAPACITY, initialization_seed=seeds["model"]
+        roster_env.TRAIN_CAPACITY, initialization_seed=seeds["model"]
     )
     zero_digests = {arm: _state_digest(model) for arm, model in models.items()}
     if len(set(zero_digests.values())) != 1:
@@ -922,7 +923,7 @@ def _training_errors(
                         kind=kind,
                         configuration=configuration,
                         seeds=seeds,
-                        member_capacity=g32.TRAIN_CAPACITY,
+                        member_capacity=roster_env.TRAIN_CAPACITY,
                     )
                     loaded[(arm, kind)] = model
                     if _state_digest(model) != arm_row[f"{kind}_state_digest"]:

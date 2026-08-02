@@ -5,6 +5,7 @@ import pytest
 import torch
 
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as source
+from envs.continuous_roster import runtime_capacity as roster_env
 from ha_ctse_process.anchored_residual_g19 import (
     attach_credit_baselines,
     replay_errors,
@@ -29,8 +30,8 @@ def test_model_state_shapes_are_capacity_independent_and_strict_loadable() -> No
 
 
 def test_padding_pair_source_and_policy_outputs_are_exact() -> None:
-    ledger8 = source.make_ledger(7, master_seed=32101, profile=source.PADDING_CAPACITY_8)
-    ledger12 = source.make_ledger(7, master_seed=32101, profile=source.PADDING_CAPACITY_12)
+    ledger8 = roster_env.make_ledger(7, master_seed=32101, profile=roster_env.PADDING_CAPACITY_8)
+    ledger12 = roster_env.make_ledger(7, master_seed=32101, profile=roster_env.PADDING_CAPACITY_12)
     np.testing.assert_array_equal(ledger8.capabilities, ledger12.capabilities[:8])
     np.testing.assert_array_equal(ledger8.presentation_priority, ledger12.presentation_priority[:, :8])
     assert ledger8.temporarily_absent == ledger12.temporarily_absent
@@ -56,25 +57,25 @@ def test_padding_pair_source_and_policy_outputs_are_exact() -> None:
 @pytest.mark.parametrize(
     "profile",
     (
-        source.PADDING_CAPACITY_8,
-        source.PADDING_CAPACITY_12,
-        source.SMALL_CAPACITY_6,
-        source.LARGE_CAPACITY_12,
+        roster_env.PADDING_CAPACITY_8,
+        roster_env.PADDING_CAPACITY_12,
+        roster_env.SMALL_CAPACITY_6,
+        roster_env.LARGE_CAPACITY_12,
     ),
 )
 def test_registered_profiles_have_exact_constructive_access(profile) -> None:
-    environment = source.RuntimeCapacityRosterEnv(
-        source.make_ledger(3, master_seed=32401, profile=profile)
+    environment = roster_env.RuntimeCapacityRosterEnv(
+        roster_env.make_ledger(3, master_seed=32401, profile=profile)
     )
-    for _ in range(source.HORIZON):
+    for _ in range(roster_env.HORIZON):
         view = environment.observe()
-        reward, _terminal, _info = environment.step(source.constructive_actions(view))
+        reward, _terminal, _info = environment.step(roster_env.constructive_actions(view))
         assert reward >= 1.0 - 2e-7
     outcome = environment.outcome()
     assert outcome.roster_sizes == tuple(
         count
         for count in profile.segment_counts
-        for _ in range(source.HORIZON // 4)
+        for _ in range(roster_env.HORIZON // 4)
     )
 
 
@@ -97,19 +98,19 @@ def test_replay_and_lifecycle_hidden_ownership_are_exact() -> None:
     for env_index, ledger in enumerate(raw.ledgers):
         for key in ledger.temporarily_absent:
             torch.testing.assert_close(
-                raw.hidden_after[source.EVENT_TIMES[0] - 1, env_index, key],
-                raw.hidden_after[source.EVENT_TIMES[1] - 1, env_index, key],
+                raw.hidden_after[roster_env.EVENT_TIMES[0] - 1, env_index, key],
+                raw.hidden_after[roster_env.EVENT_TIMES[1] - 1, env_index, key],
                 rtol=0,
                 atol=0,
             )
         for key in ledger.fresh_join:
             assert torch.count_nonzero(
-                raw.hidden_before[source.EVENT_TIMES[1], env_index, key]
+                raw.hidden_before[roster_env.EVENT_TIMES[1], env_index, key]
             ) == 0
 
 
 def test_empty_and_capacity_overflow_profiles_fail_closed() -> None:
     with pytest.raises(ValueError, match="positive"):
-        source.RosterProfile("empty", 6, 0, 1, 1, 1).validate()
+        roster_env.RosterProfile("empty", 6, 0, 1, 1, 1).validate()
     with pytest.raises(ValueError, match="exceeds runtime"):
-        source.RosterProfile("overflow", 6, 5, 1, 2, 1).validate()
+        roster_env.RosterProfile("overflow", 6, 5, 1, 2, 1).validate()
