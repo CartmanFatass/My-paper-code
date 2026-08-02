@@ -28,6 +28,8 @@ failure_containment_contract=docs/session-workspaces/code_project_manager/FAILUR
 local_failure_task_terminal=false
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_children=code_scout|implementer|reviewer|verifier
+routine_implementation_child=hmasd-implementer-terra
+protected_implementation_child=hmasd-implementer
 experiment_child=hmasd-experiment-operator
 child_acceptance_authority=none
 one_artifact_one_acceptance_owner=true
@@ -150,6 +152,12 @@ focused Pro clarification; CPM does not fill it with engineering judgment.
 Use `$hmasd-agile-research-development`. Spawn only registered code-child
 profiles with exact assignments and file ownership. Code Project Manager alone
 accepts their work and verifies any isolated-worktree ticket. Code Project
+Manager uses `hmasd-implementer-terra` for a frozen routine package such as
+behavior-preserving modularization, localized repair, test maintenance, script
+cleanup or bounded performance work. A package that changes an estimand,
+RL/MARL mechanism, numerical or training semantics, or another protected
+invariant remains with `hmasd-implementer`. The profile choice adds no authority
+and never substitutes for CPM acceptance.
 Manager provisions an isolated worktree and its ticket together through
 `scripts/hmasd_workspace_ticket.py provision`; the fixed parent is
 `C:/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are

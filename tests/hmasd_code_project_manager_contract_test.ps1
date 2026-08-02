@@ -19,6 +19,7 @@ $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
 $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
+$routineImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer-terra.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
@@ -116,6 +117,8 @@ $routerRequired = @(
     'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
+    'code_project_manager_routine_implementation_agent=hmasd-implementer-terra',
+    'code_project_manager_protected_implementation_agent=hmasd-implementer',
     'code_project_manager_runtime_authority=exclusive',
     'code_project_manager_current_work_authority=exclusive',
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
@@ -155,6 +158,8 @@ $codeRequired = @(
     'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
+    'routine_implementation_child=hmasd-implementer-terra',
+    'protected_implementation_child=hmasd-implementer',
     'AGENTIFY_REVIEW_REQUEST',
     'AGENTIFY_REVIEW_RESULT',
     'CPM does not operate or debug Agentify',
@@ -202,6 +207,18 @@ $codeRequired = @(
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
+}
+
+foreach ($required in @(
+    'name = "hmasd-implementer-terra"',
+    'model = "gpt-5.6-terra"',
+    'model_reasoning_effort = "high"',
+    '.agents/roles/IMPLEMENTER.md',
+    'behavior-preserving modularization',
+    'training semantic')) {
+    if (-not $routineImplementerProfile.Contains($required)) {
+        throw "Routine Terra implementer profile missing: $required"
+    }
 }
 
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {

@@ -22,6 +22,11 @@ description = "HMASD implementation worker for one frozen bounded work package."
 config_file = "./agents/hmasd-implementer.toml"
 nickname_candidates = ["HMASD Implementer", "Algorithm Implementer", "Runtime Implementer"]
 
+[agents."HMASDRoutineImplementer"]
+description = "Terra-high implementation worker for one frozen routine engineering package."
+config_file = "./agents/hmasd-implementer-terra.toml"
+nickname_candidates = ["Routine Implementer", "Maintenance Implementer", "Refactor Implementer"]
+
 [agents."HMASDVerifier"]
 description = "HMASD focused CUDA and runtime verifier for an integrated package."
 config_file = "./agents/hmasd-verifier.toml"
