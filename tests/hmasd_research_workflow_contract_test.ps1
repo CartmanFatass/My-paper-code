@@ -22,6 +22,7 @@ foreach ($required in $requiredSkills) {
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedRoles = @(
+    'AGENTIFY_TRANSPORT_OPERATOR.md',
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
     'EXTERNAL_PRO.md',
@@ -89,7 +90,7 @@ foreach ($required in @(
     'EXPLORER_PROJECT_CANDIDATE_PACKET',
     'EXPLORER_ADVISORY_REFINEMENT_PACKET',
     'CPM-centered lane',
-    'CPM sends the review question directly with Agentify',
+    'CPM sends one minimal request to the dedicated Agentify task',
     'one candidate is selected for each Pro package',
     'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
     'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
@@ -100,15 +101,12 @@ foreach ($required in @(
 }
 foreach ($entry in @(
     @($codePmRole, 'explorer_toy_assignment_intake=pro_frozen_only'),
-    @($codePmRole, 'formal_review_transport=direct_agentify_call'),
-    @($codePmRole, 'invokes Agentify directly'),
     @($independentResearchRole, 'EXPLORER_PROJECT_CANDIDATE_PACKET'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
     @($proRole, 'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT'),
     @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
     @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
     @($explorerValidationContract, 'authority={scientific_authority:none,code_authority:none,compute_authority:none,project_state_effect:none}'),
-    @($explorerValidationContract, 'sends the question directly with Agentify'),
     @($explorerValidationContract, 'current_work_mutation=forbidden'),
     @($explorerValidationContract, 'Exactly one candidate is included in each Pro'),
     @($explorerValidationContract, 'Explorer packet or candidate-artifact nonconformance'),
@@ -172,7 +170,7 @@ foreach ($required in @(
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
     'code_project_manager_current_work_authority=exclusive',
-    'code_project_manager_formal_external_review_transport_authority=exclusive',
+    'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'hmasd-collaborative-workflow-design',
@@ -199,23 +197,8 @@ foreach ($required in @(
     'cross_task_target=current_thread_id_from_user_or_native_task_context',
     'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
-    'independent_research_review_transport_execution=persistent_explorer_session_direct',
-    'external_review_transport=owning_session_direct_agentify_call',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
-}
-foreach ($entry in @(
-    @($agents, 'HMASD adds no transport control plane'),
-    @($codePmRole, 'formal_review_transport=direct_agentify_call'),
-    @($codePmRole, 'invokes Agentify directly'),
-    @($workflowDesignManagerRole, 'agentify_transport_real_review_send=forbidden'),
-    @($independentResearchRole, 'independent_review_provider_contract=direct_agentify_call'),
-    @($independentReviewSkill, 'Invoke Agentify directly'),
-    @($independentReviewSkill, 'Never interrupt an active generation')
-)) {
-    if (-not $entry[0].Contains($entry[1])) {
-        throw "Agentify route/contract coupling missing: $($entry[1])"
-    }
 }
 foreach ($retired in @(
     'cross_task_routing=',
@@ -228,9 +211,7 @@ foreach ($retired in @(
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews',
-    'independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews',
-    'external_review_transport=owning_session_direct_agentify_call',
-    'independent_research_review_transport_execution=persistent_explorer_session_direct',
+    'independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews',
     'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
     'independent_research_wdm_campaign_approval=none',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
@@ -240,8 +221,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'owns both independent-research direction reviews and methodology',
-    'Invoke Agentify directly',
-    'Archive the raw response',
+    'Copy the named raw response',
     'Workflow Design Manager',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
     if (-not $independentReviewSkill.Contains($required)) {
@@ -255,7 +235,7 @@ foreach ($required in @(
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'Archive the raw response')) {
+    'Copy the named raw response')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
@@ -354,9 +334,7 @@ foreach ($required in @(
     'independent_pro_direction_packet_effect=advisory_revision_only',
     'independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:',
     'independent_pro_review_item_root=local_research/pro_reviews/<review-id>/',
-    'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
-    'independent_pro_review_transport_execution=persistent_explorer_session_direct',
-    'independent_review_provider_contract=direct_agentify_call',
+    'independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews',
     'independent_pro_review_terminal_intake=exact_archived_response_fifo',
     'independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'independent_pro_direction_shared_page_registry=forbidden',
@@ -658,7 +636,7 @@ if ($wdmCoreLineCount -gt 1000) {
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'A failed call is an operational error')) {
+    'CPM does not operate or debug Agentify')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -799,14 +777,12 @@ foreach ($required in @(
     'code_authority=exclusive',
     'runtime_authority=exclusive',
     'current_work_authority=exclusive_for_project_operational_records',
-    'formal_external_review_transport_authority=exclusive',
+    'formal_external_review_request_and_intake_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
     'workflow_design_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'formal_review_transport=direct_agentify_call',
-    'invokes Agentify directly',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_target=current_thread_id_from_user_or_native_task_context',
@@ -876,12 +852,12 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 }
 foreach ($required in @(
     'role=code_project_manager',
-    'formal_external_review_transport_authority=exclusive',
+    'formal_external_review_request_and_intake_authority=exclusive',
     'runtime_authority=exclusive',
     'current_work_authority=exclusive',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'formal_review_transport=direct_agentify_call',
+    'formal_review_transport=agentify_task_request_result',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_target=current_thread_id_from_user_or_native_task_context',

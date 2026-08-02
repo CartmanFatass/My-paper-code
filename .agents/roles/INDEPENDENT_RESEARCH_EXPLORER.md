@@ -39,9 +39,9 @@ cross_task_target=current_thread_id_from_user_or_native_task_context
 cross_task_model_and_thinking_overrides=omit
 independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
-independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews
-independent_pro_review_transport_execution=persistent_explorer_session_direct
-independent_review_provider_contract=direct_agentify_call
+independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews
+independent_pro_review_transport_execution=dedicated_agentify_transport_task
+independent_review_provider_contract=agentify_task_request_result
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
@@ -89,18 +89,17 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct each exact candidate review without per-review user or WDM
-authorization. It calls Agentify directly with the standalone natural-language
-question, waits for the returned response, archives that raw response in the
+authorization. It sends one `AGENTIFY_REVIEW_REQUEST` containing the standalone
+natural-language question path to the current user-designated Agentify task,
+accepts one `AGENTIFY_REVIEW_RESULT`, archives the named raw response in the
 review item, and then performs scientific intake. Pro-canonical and
-Gemini-advisory labels remain local and never enter the question. A failed call
-may be retried after Explorer confirms no generation is active; it is not a
-workflow defect. No transport child, monitor, stable-key policy, receipt state
-machine, hash gate or WDM approval participates.
+Gemini-advisory labels remain local and never enter the question. Page,
+provider-adapter and recovery details remain inside the Agentify task.
 
 Explorer archives the raw response under its assigned
 `local_research/pro_reviews/<review-id>/` item root before enqueuing it for local
-FIFO scientific reconciliation. Do not interrupt an active generation. The
-archived Pro content is consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
+FIFO scientific reconciliation. The archived Pro content is consumed as
+`INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
 Explorer preserves the
 reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate

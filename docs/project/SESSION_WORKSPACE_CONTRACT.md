@@ -30,10 +30,11 @@ All workflow-design requests and defects route to WDM; CPM and Explorer do not
 edit or accept workflow surfaces.
 
 Code Project Manager keeps exclusive authority for code, technical acceptance,
-runtime, project operational records and direct Pro transport. Independent
-Research Explorer keeps exclusive authority for advisory research and its
-research artifacts. Those role-local authorities do not include workflow
-design, workflow acceptance or workflow Git.
+runtime and project operational records. Independent Research Explorer keeps
+exclusive authority for advisory research and its research artifacts. Agentify
+Transport Operator keeps exclusive authority for transport mechanics and writes
+only its temporary workspace. Those role-local authorities do not include
+workflow design, workflow acceptance or workflow Git.
 
 The Explorer remains the sole owner of its research plans, continuity notes,
 candidate and scientific research artifacts, and all temporary/session research
@@ -67,6 +68,10 @@ scratch and handoff material owned by that session. Neither replaces canonical
 science, code, runtime evidence or review archives. A receiver reads only an
 assignment-named sender handoff; it does not write or clean another role's
 workspace. No hash, byte count or digest is required for a handoff.
+
+The Agentify operator uses `temp/sessions/agentify_transport_operator/` for raw
+response handoffs. CPM or Explorer reads the named result, copies it into its
+own canonical archive, and performs its own scientific or mechanical intake.
 
 ## Public current work
 

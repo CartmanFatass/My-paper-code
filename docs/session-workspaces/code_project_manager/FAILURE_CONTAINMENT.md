@@ -18,9 +18,9 @@ mechanical lifecycle, counters and terminal state. Code, experiment and
 verifier children return only their assigned typed receipt or exit evidence;
 CPM never reconstructs or remembers a parallel state machine.
 
-External Pro transport is a direct Agentify call. If it fails, CPM confirms no
-generation is active before retrying; the failure does not create workflow
-state, a second observer or a heartbeat.
+An `AGENTIFY_REVIEW_RESULT` with `status=ERROR` affects only that review. CPM
+does not diagnose the page or adapter; it may submit a later request while
+unrelated work continues.
 
 After a local failure, CPM makes only a semantic choice: direct repair, a fresh
 authorized attempt, parking the affected workstream, or another legal action.

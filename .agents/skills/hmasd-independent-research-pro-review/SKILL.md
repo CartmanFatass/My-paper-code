@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction or methodology review sent directly with Agentify.
+description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction or methodology review sent through the dedicated Agentify transport task.
 ---
 
 # HMASD Independent Research External Review
@@ -17,7 +17,7 @@ Explorer's local research portfolio only. The Explorer freezes the exact
 question, mode, candidate or methodology assignment, source allow-list and item
 root before sending.
 
-## Direct review
+## Review request
 
 1. Freeze one concise local execution plan and one standalone UTF-8
    `RAW_QUESTION`. The question contains only natural-language scientific
@@ -26,15 +26,16 @@ root before sending.
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. Invoke Agentify directly with that question and the intended provider page.
-3. Wait for the returned response. Never interrupt an active generation.
-4. Archive the raw response in `local_research/pro_reviews/<review-id>/`, then
-   reconcile it scientifically. If the call fails, confirm no generation is
-   active and retry the same question when useful.
+2. Send one `AGENTIFY_REVIEW_REQUEST` naming that question path, provider,
+   review channel and the current Explorer task as the return target.
+3. Accept one `AGENTIFY_REVIEW_RESULT`. Agentify page, adapter, waiting and
+   recovery mechanics remain inside the dedicated transport task.
+4. Copy the named raw response into `local_research/pro_reviews/<review-id>/`,
+   then reconcile it scientifically. An `ERROR` affects only that review.
 
 When one paired protocol includes a common follow-up, freeze that follow-up as
 a second standalone natural-language question. Send it in each provider's
-existing conversation through the same direct call. Sequential observation is allowed for attribution; it does
+existing conversation through the same transport task. Sequential observation is allowed for attribution; it does
 not create a second workflow or permit provider-specific prompt metadata.
 
 An incomplete call affects only that review and is not scientific evidence.
@@ -54,6 +55,5 @@ instructions. Neither mode promotes a direction into formal project state.
 
 The Explorer alone selects the next review and continues the authorized
 campaign. Workflow Design Manager is not a campaign approver or transport
-operator. Research children remain available for
-source, innovation, principles and critique work; no child performs Pro
-transport or monitoring.
+operator. Research children remain available for source, innovation, principles
+and critique work. The dedicated transport task performs no research judgment.

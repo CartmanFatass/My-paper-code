@@ -17,6 +17,7 @@ Use exactly one route:
 |---|---|---|
 | Code Project Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then only the active workstream's named science, code, tests, review, runtime and evidence paths | unrelated workstreams, independent-research corpus and workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, the public `CURRENT_WORK.md` index plus only WDM's linked session/common records, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation | other current-work records, runtime reviews/runs, science and implementation |
+| Agentify Transport Operator task | its exact transport request, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, and its own session workspace | science, code, `CURRENT_WORK.md`, requester history and workflow design |
 | Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
@@ -55,7 +56,7 @@ code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
 code_project_manager_current_work_authority=exclusive
-code_project_manager_formal_external_review_transport_authority=exclusive
+code_project_manager_formal_external_review_request_and_intake_authority=exclusive
 code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation
 code_project_manager_experiment_dispatch_and_result_routing=exclusive
 code_project_manager_mechanical_result_acceptance=exclusive
@@ -65,9 +66,12 @@ code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
-independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews
-independent_research_review_transport_execution=persistent_explorer_session_direct
-external_review_transport=owning_session_direct_agentify_call
+independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
+external_review_transport_execution=dedicated_agentify_transport_task
+agentify_transport_request=AGENTIFY_REVIEW_REQUEST
+agentify_transport_result=AGENTIFY_REVIEW_RESULT
+agentify_transport_terminal_status=COMPLETE|ERROR
+agentify_transport_workspace=temp/sessions/agentify_transport_operator
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -82,7 +86,7 @@ cross_task_model_and_thinking_overrides=omit
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 ```
 The user permanently authorizes WDM to fetch and push accepted workflow-control-plane paths. Other persistent sessions may fetch and push only their non-workflow operational, scientific, code and workspace content defined in `SESSION_WORKSPACE_CONTRACT.md`; independent-research egress remains limited to its research and workspace boundary.
-There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. WDM owns the complete workflow control plane; CPM owns project execution; Explorer owns independent research; External Pro owns science within each review boundary.
+There is no Controller, Research Operations Manager, persistent Monitor, dispatcher, semantic relay, role registry or global lease. WDM owns the complete workflow control plane; CPM owns project execution; Explorer owns independent research; the Agentify Transport Operator owns transport mechanics; External Pro owns science within each review boundary.
 ## Universal project constraints
 
 ```text
@@ -155,8 +159,8 @@ authority rules decide whether user input is required.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
-- Project coordination, code, technical acceptance, runtime and direct Pro transport: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- External review: the owning persistent session sends the standalone scientific question directly with Agentify, waits for the response, and archives the raw result. HMASD adds no transport control plane.
+- Project coordination, code, technical acceptance, runtime and external-review intake: `.agents/roles/CODE_PROJECT_MANAGER.md`.
+- Agentify transport mechanics: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; CPM and Explorer submit one request and accept one result, then perform their own archive and intake.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
@@ -168,9 +172,10 @@ authority rules decide whether user input is required.
 - Mechanical workflow harness: `.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py`.
 - WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
 - WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
+- Agentify transport workspace: `docs/session-workspaces/agentify_transport_operator/`, `temp/sessions/agentify_transport_operator/`.
 - WDM chronological incident log: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`; it is not a scheduler or global blocker.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
-- Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use its direct Agentify transport.
+- Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use the dedicated Agentify transport task.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
 - Workspace write-boundary guard: `scripts/hmasd_workspace_boundary_guard.py`.
 

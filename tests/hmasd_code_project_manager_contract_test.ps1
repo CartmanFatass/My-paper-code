@@ -118,13 +118,14 @@ $routerRequired = @(
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
     'code_project_manager_current_work_authority=exclusive',
-    'code_project_manager_formal_external_review_transport_authority=exclusive',
+    'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
     'code_project_manager_mechanical_result_acceptance=exclusive',
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    'external_review_transport=owning_session_direct_agentify_call',
-    'independent_research_review_transport_execution=persistent_explorer_session_direct'
+    'external_review_transport_execution=dedicated_agentify_transport_task',
+    'agentify_transport_request=AGENTIFY_REVIEW_REQUEST',
+    'agentify_transport_result=AGENTIFY_REVIEW_RESULT'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -139,8 +140,8 @@ $codeRequired = @(
     'technical_acceptance_authority=exclusive',
     'runtime_authority=exclusive',
     'current_work_authority=exclusive_for_project_operational_records',
-    'formal_external_review_transport_authority=exclusive',
-    'formal_review_transport=direct_agentify_call',
+    'formal_external_review_request_and_intake_authority=exclusive',
+    'formal_review_transport=agentify_task_request_result',
     'scientific_authority=none',
     'workflow_design_authority=none',
     'workflow_modification_authority=none',
@@ -154,8 +155,9 @@ $codeRequired = @(
     'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
-    'invokes Agentify directly',
-    'No transport child, monitor, ledger, stable-key policy, hash gate',
+    'AGENTIFY_REVIEW_REQUEST',
+    'AGENTIFY_REVIEW_RESULT',
+    'CPM does not operate or debug Agentify',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',

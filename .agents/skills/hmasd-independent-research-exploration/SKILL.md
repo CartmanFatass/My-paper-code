@@ -15,8 +15,8 @@ The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-  adversarial checks. The persistent Explorer session directly sends each exact
-  External Pro direction question with Agentify and owns its review item.
+  adversarial checks. The persistent Explorer owns each review item and sends
+  one minimal request to the dedicated Agentify task.
 
 ## Start safely
 
@@ -74,13 +74,12 @@ A direction review or bounded methodology audit inside the active
 user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes one exact
-assignment, review mode and standalone `RAW_QUESTION`, then calls Agentify
-directly for each selected provider. Wait for the response, archive it under the
-review item, and then reconcile it. Do not interrupt an active generation. If
-the call fails, confirm no generation is active and retry the same question when
-useful. Pro/Gemini labels and all local metadata stay outside the transmitted
-question. No review child, monitor, transport state machine, hash gate or WDM
-approval participates.
+assignment, review mode and standalone `RAW_QUESTION`, and sends one
+`AGENTIFY_REVIEW_REQUEST` for each selected provider. Accept one
+`AGENTIFY_REVIEW_RESULT`, archive the named raw response under the review item,
+and then reconcile it. Pro/Gemini labels and all local metadata stay outside the
+transmitted question. Page, adapter and recovery details remain inside the
+Agentify task.
 
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
@@ -90,8 +89,8 @@ confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
 check. Never compare candidates or turn either review into project adoption.
 
-An incomplete call affects only that review; Explorer continues unrelated
-research and retries after confirming the page is not generating.
+An `AGENTIFY_REVIEW_RESULT` with `status=ERROR` affects only that review;
+Explorer continues unrelated research and may submit a later request.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
@@ -222,8 +221,8 @@ The final advisory report includes the campaign direction, corpus coverage,
 source-result matrix, absorption brief, several retained or parked directions,
 mechanism/transfer/combination/split graph, principle analyses, adversarial
 findings, validation-ready candidates, residual gaps, resource disposition and
-convergence basis. The Explorer contacts External Pro only through the registered
-direct Agentify procedure above; it cannot change CDC state, authorize compute,
+convergence basis. The Explorer contacts External Pro only through the dedicated
+Agentify task procedure above; it cannot change CDC state, authorize compute,
 dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)
@@ -231,7 +230,7 @@ dispatch implementation or advance the formal workflow.
 When a mature candidate is ready for a toy-project identity intake, emit one
 `EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
 `hmasd-explorer-project-validation` Skill. The packet is routed through the
-CPM-centered lane to CPM's direct Agentify call. It is not a dispatcher or a
+CPM-centered lane to CPM's Agentify transport request. It is not a dispatcher or a
 transition engine: `candidate_count=1`,
 `cross_direction_competition=false`, and `combined_toy=false` prevent selecting
 multiple directions in one Pro package.

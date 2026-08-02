@@ -14,10 +14,6 @@ $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 $experimentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
-$cpm = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
-$explorer = Get-Content -Raw -LiteralPath (
-    Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
@@ -163,24 +159,6 @@ foreach ($required in @(
         throw "Selected normal profile is not registered: $required"
     }
 }
-foreach ($required in @(
-    'formal_external_review_transport_authority=exclusive',
-    'formal_review_transport=direct_agentify_call',
-    'invokes Agentify directly')) {
-    if (-not $cpm.Contains($required)) {
-        throw "CPM direct transport contract missing: $required"
-    }
-}
-foreach ($required in @(
-    'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
-    'independent_pro_review_transport_execution=persistent_explorer_session_direct',
-    'independent_review_provider_contract=direct_agentify_call',
-    'calls Agentify directly')) {
-    if (-not $explorer.Contains($required)) {
-        throw "Explorer direct transport contract missing: $required"
-    }
-}
-
 $temporaryProfiles = @(
     'hmasd-benchmark-implementer-sol-high.toml',
     'hmasd-benchmark-implementer-terra-high.toml',

@@ -8,8 +8,8 @@ description: Use for the Explorer-to-project toy-validation bridge: build or che
 This Skill is the mechanical boundary for the Explorer-to-project toy lane and
 its CPM-centered lane and routing.
 It creates no project state and grants no compute, code, scientific, or current-
-work authority. CPM sends the review question directly with Agentify;
-transport details are not a project workflow surface.
+work authority. CPM sends one minimal request to the dedicated Agentify task and
+accepts one returned raw response; transport details do not enter CPM context.
 
 The packet is an `EXPLORER_PROJECT_CANDIDATE_PACKET` with
 `document_kind=explorer_project_candidate_packet_v1`. It is advisory input only:

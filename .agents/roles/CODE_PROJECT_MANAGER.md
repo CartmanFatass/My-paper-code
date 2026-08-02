@@ -9,8 +9,8 @@ code_authority=exclusive
 technical_acceptance_authority=exclusive
 runtime_authority=exclusive
 current_work_authority=exclusive_for_project_operational_records
-formal_external_review_transport_authority=exclusive
-formal_review_transport=direct_agentify_call
+formal_external_review_request_and_intake_authority=exclusive
+formal_review_transport=agentify_task_request_result
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -86,8 +86,8 @@ manager; there is no Research Operations Manager or persistent monitor.
   delegates compute authority to the child automatically; CPM checks the
   active grant and remaining balance before dispatch, and neither CPM nor the
   child asks for per-run authorization while the run remains in that grant.
-- Formal and Explorer-to-project Pro review packaging, direct Agentify
-  transport, exact archival and mechanical receipt acceptance.
+- Formal and Explorer-to-project Pro review packaging, one request to the
+  dedicated Agentify task, exact archival and mechanical result acceptance.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -204,17 +204,16 @@ execution and successor routing. It uses registered code and experiment
 children for their assigned mechanical work and remains the sole project-state
 acceptance owner.
 
-## Mechanical execution and direct Pro transport
+## Mechanical execution and external review
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
-Operator alone executes `train -> evaluate -> analyze`. CPM itself owns each
-formal or Explorer-to-project Pro transport. It invokes Agentify directly with
-the standalone scientific question, waits for the returned response, archives
-that raw response, and then performs local intake. Do not interrupt an active
-generation. A failed call is an operational error that may be retried after CPM
-confirms no generation is active; it is not a workflow defect or scientific
-result. No transport child, monitor, ledger, stable-key policy, hash gate,
-receipt state machine or WDM approval participates.
+Operator alone executes `train -> evaluate -> analyze`. For each formal or
+Explorer-to-project review, CPM freezes the standalone question and sends one
+`AGENTIFY_REVIEW_REQUEST` to the current user-designated Agentify task. It
+accepts one `AGENTIFY_REVIEW_RESULT`, copies the named raw response into its own
+canonical archive, and performs local intake. Page, provider-adapter and
+recovery details remain inside the Agentify task. CPM does not operate or debug
+Agentify and adds no transport state machine, hash gate or WDM approval.
 
 ## Failure containment and continuation
 

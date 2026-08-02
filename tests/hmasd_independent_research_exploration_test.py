@@ -499,7 +499,7 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
         assert required in reference
 
 
-def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() -> None:
+def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
@@ -544,9 +544,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "cross_task_model_and_thinking_overrides=omit",
         "independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:",
         "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
-        "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
-        "independent_pro_review_transport_execution=persistent_explorer_session_direct",
-        "independent_review_provider_contract=direct_agentify_call",
+        "independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews",
+        "independent_pro_review_transport_execution=dedicated_agentify_transport_task",
+        "independent_review_provider_contract=agentify_task_request_result",
         "independent_review_transmitted_payload=standalone_RAW_QUESTION_only",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
@@ -573,9 +573,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-        "persistent Explorer session directly sends each exact External Pro direction question",
-        "calls Agentify directly",
-        "No review child, monitor, transport state machine, hash gate or WDM",
+        "one minimal request to the dedicated Agentify task",
+        "AGENTIFY_REVIEW_REQUEST",
+        "AGENTIFY_REVIEW_RESULT",
     ):
         assert required in skill_normalized
     assert "$hmasd-collaborative-workflow-design" not in skill
@@ -584,9 +584,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
     for required in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "Invoke Agentify directly",
-        "Archive the raw response",
-        "Never interrupt an active generation",
+        "Send one `AGENTIFY_REVIEW_REQUEST`",
+        "Copy the named raw response",
+        "dedicated transport task",
     ):
         assert required in pro_review_skill
     assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
