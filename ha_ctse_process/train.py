@@ -31,12 +31,12 @@ except ModuleNotFoundError:
 
 from ha_ctse_process.env_factory import EnvSpec, make_env, normalize_scenario
 from ha_ctse_process.collectors import SubprocEnvCollector, SyncEnvCollector
+from ha_ctse_process.metrics_io import append_csv
 from ha_ctse_process.plotting import (
     AEM_METRIC_FIELDS,
     EVAL_FIELDS,
     R37_IDENTITY_METRIC_FIELDS,
     UPDATE_FIELDS,
-    append_csv,
     extract_uav_metrics,
     save_eval_plots,
     save_update_plots,

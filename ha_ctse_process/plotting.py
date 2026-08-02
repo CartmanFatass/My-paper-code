@@ -19,6 +19,7 @@ from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELD
 from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
 from ha_ctse_process.situation_transition import TEAM_TRANSITION_METRIC_FIELDS
 from ha_ctse_process.team_intent import TEAM_INTENT_METRIC_FIELDS
+from ha_ctse_process.metrics_io import append_csv, read_csv_records, write_csv
 
 try:
     import matplotlib
@@ -890,58 +891,6 @@ def extract_uav_metrics(info: dict[str, Any] | None) -> dict[str, float]:
     if throughput is not None and backhaul_connected:
         metrics["throughput_when_backhaul_connected_mbps"] = float(throughput)
     return metrics
-
-
-def append_csv(path: Path, row: dict[str, Any], fields: tuple[str, ...]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    if path.exists():
-        with path.open("r", newline="", encoding="utf-8") as handle:
-            reader = csv.DictReader(handle)
-            old_fields = tuple(reader.fieldnames or ())
-            rows = list(reader)
-        if old_fields != fields:
-            preserved = tuple(field for field in old_fields if field not in fields)
-            merged_fields = (*fields, *preserved)
-            with path.open("w", newline="", encoding="utf-8") as handle:
-                writer = csv.DictWriter(handle, fieldnames=list(merged_fields), extrasaction="ignore")
-                writer.writeheader()
-                for old_row in rows:
-                    writer.writerow({field: old_row.get(field, "") for field in merged_fields})
-            fields = merged_fields
-    exists = path.exists()
-    with path.open("a", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(fields), extrasaction="ignore")
-        if not exists:
-            writer.writeheader()
-        writer.writerow({field: row.get(field, "") for field in fields})
-
-
-def write_csv(path: Path, rows: list[dict[str, Any]], fields: tuple[str, ...]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(fields), extrasaction="ignore")
-        writer.writeheader()
-        for row in rows:
-            writer.writerow({field: row.get(field, "") for field in fields})
-
-
-def read_csv_records(path: Path) -> list[dict[str, float]]:
-    if not path.exists():
-        return []
-    records: list[dict[str, float]] = []
-    with path.open("r", newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            record = {}
-            for key, value in row.items():
-                if value == "":
-                    continue
-                try:
-                    record[key] = float(value)
-                except ValueError:
-                    continue
-            if record:
-                records.append(record)
-    return records
 
 
 def moving_average(values: np.ndarray, window: int) -> np.ndarray:
