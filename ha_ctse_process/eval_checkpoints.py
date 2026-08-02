@@ -22,13 +22,13 @@ from ha_ctse_process.checkpoint_io import (
     load_checkpoint_metadata,
 )
 from ha_ctse_process.plotting import append_csv, write_csv
-from ha_ctse_process.train import (
+from ha_ctse_process.standalone_cli import (
     apply_standalone_overrides,
     create_agent,
     create_env,
-    evaluate,
     load_config,
 )
+from ha_ctse_process.train import evaluate
 
 
 SUMMARY_FIELDS = (

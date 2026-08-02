@@ -205,7 +205,7 @@ def _train_helpers():
         load_checkpoint,
         load_checkpoint_metadata,
     )
-    from ha_ctse_process.train import (
+    from ha_ctse_process.standalone_cli import (
         apply_standalone_overrides,
         create_agent,
         create_env,
