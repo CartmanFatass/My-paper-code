@@ -52,11 +52,13 @@ be its new clean pushed commit. An unchanged clean candidate may use only the
 bounded operational retry budget defined below. Every attempt requires a new
 exact spec and a fresh absent root.
 
-Code Project Manager retains the exact seven-path implementation boundary:
+Code Project Manager retains the exact nine-path implementation boundary:
 
 ```text
 ha_ctse_process/uav_episode_schema.py
 ha_ctse_process/uav_episode_serialization.py
+ha_ctse_process/uav_g0_geometry.py
+ha_ctse_process/uav_g0_statistics.py
 ha_ctse_process/uav_source_identifiability_g0.py
 scripts/run_uav_source_identifiability_g0.py
 tests/ha_ctse_process_uav_source_identifiability_g0_test.py
