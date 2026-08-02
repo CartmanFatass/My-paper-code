@@ -137,9 +137,128 @@ orders. The full V-K0B access screen (opportunity access, sampled-SET
 competence, alignment quantities) reruns for the surviving arm in a
 LATER workflow before any V-K1 comparison — not part of V-K0D.
 
+## Frozen amendments from the conformance ruling (round 20260802_vk0d_design_conformance, CHANGES_REQUIRED)
+
+**A-VD-1 (anonymous-OTHER encoding; no populated SELF block).** The
+PRIMARY encoder change is identity-removal ONLY. Frozen encoding:
+invariant skill-count block unchanged; a relative OTHER skill block (the
+sole other agent's current skill, existing count scale) and a relative
+OTHER age block (existing age transform); SELF blocks zero — focal skill
+and age already enter `_hidden` separately, and duplicating them would be
+an unmatched second intervention; absolute physical-ID information
+absent; `ar_prefix_dim`, input-layer shape and parameter count unchanged.
+Wording corrected: the encoder is NOT "information-lossless" — it
+deliberately deletes the absolute agent-label shortcut while preserving
+all anonymous task and roster information; that deletion is the
+treatment.
+
+**A-VD-2 (structural identity and its limits).** The PRIMARY retains the
+AR conditional structure. Its gate certifies permutation conjugacy —
+P01(a0,a1|x) = P10(a1,a0|swap(x)) with swap over every physical-agent-
+indexed component — NOT same-state serialization invariance
+P01(a0,a1|x) = P10(a0,a1|x), which need not hold while the second mover
+conditions on the first mover's realized edit. The ledger claims neither
+same-state invariance nor a preordained both-order competence pass.
+
+**A-VD-3 (PRIMARY trains canonical).** The causal decomposition requires:
+PRIMARY = anonymous relative roster + canonical serialization; CONTROL =
+current absolute-ID roster + uniform per check; REFERENCE = current
+roster + canonical. Frozen identities:
+PRIMARY `high_controller=r30_fixed_clock_ar_edit_conjugate`,
+`r30_training_order_policy=canonical`; CONTROL
+`r30_fixed_clock_ar_edit` + `uniform_per_check`; REFERENCE
+`r30_fixed_clock_ar_edit` + `canonical`. The launcher rejects every other
+combination in a scientific V-K0D run.
+
+**A-VD-4 (order-draw contract and durable exposure).** One order
+assignment per COMPLETED high-check autoregressive sequence (including
+the initial assignment sequence; excluding non-due calls,
+continuation-value calls, and aborted calls emitting no decision row);
+the draw occurs only after the due decision is established and before
+token generation; the chosen order is stored in the committed high-check
+row and reused by PPO sequence evaluation. Assignment is counter-based
+from the immutable decision identity (training seed, environment id,
+episode id, check index, stream version `vk0d-order-1`) so batching or
+call-order changes cannot move assignments. Durable per-seed/arm
+exposure: stream identity/version, completed canonical and reversed
+sequence counts, each agent's first-position count, a schedule digest
+over ordered high-check identities and assigned orders, and the
+completed-sequence total; the ordered schedule is independently
+regenerated from the frozen identity and compared exactly with the
+committed rows. Identities: N01+N10 = N_sequences; canonical arms have
+N10=0. Wording corrected: the dedicated stream gives RNG-stream
+isolation only — reversing the order deliberately maps later draws to
+different conditional decisions; no cross-arm trajectory identity is
+claimed.
+
+**A-VD-5 (complete finite conjugacy panel; deliberate negative;
+post-training recheck).** The gate population is the complete finite
+support, not natural fresh-policy states: INITIAL class (check 0, active
+[False,False], no incumbents, ages [0,0], all four sign pairs) plus
+ACTIVE classes (checks 1..7 × all four sign pairs × all 16 physical
+joint-skill pairs × every reachable age pair at that check, active
+[True,True]), both order views. swap(x) is defined explicitly over
+observations, skill array, age array, active mask, and any agent-indexed
+auxiliary context; anonymous global target state unchanged. The PRIMARY
+must satisfy the registered conjugacy equality on the complete panel AND
+pass the executed prescribed-assignment control. Paired negative: a
+deliberate witness restoring the absolute-ID encoder with the identity
+blocks made deterministically consequential — the gate must reject it;
+the canonical reference's observed red is supplementary, never the sole
+sensitivity proof. The same conjugacy gate reruns on EVERY trained
+PRIMARY checkpoint before its competence result is read.
+
+**A-VD-6 (matched model and optimizer opportunity).** Before launch,
+freeze and verify per seed across all three arms: identical high-policy
+state_dict keys and tensor shapes, input dimension, hidden widths,
+parameter count, high-value architecture, fixed low executor, optimizer
+class/hyperparameters, optimizer parameter membership, initial
+actor/value parameter bytes, and initial optimizer state — the PRIMARY
+context flag must create no parameter or initialization-order change, so
+same-seed initial trainable module hashes are identical across arms. The
+only pre-training differences: PRIMARY's anonymous-encoding flag,
+CONTROL's order schedule, REFERENCE neither. All actual exposure records
+(interaction, update, sequence, token, order-exposure, optimizer-step,
+parameter-coverage) pass independently per arm.
+
+**A-VD-7 (reference no-op reproduction gate).** REFERENCE_CONFORMS only
+if, per seed: initialization model+optimizer digests match the valid
+V-K0B reference; the canonical path consumes no order-stream draw; final
+actor/value and optimizer-state digests reproduce the valid V-K0B bundle
+(or a pre-frozen equivalence rule holds — file-level equality not
+required when only non-model provenance fields change); exact training
+exposure matches; and the frozen evaluation reproduces canonical
+competence above 0.75 and reversed decisively below. Otherwise
+`INVALID_VK0D_CARRIER_COMPARISON / CANONICAL_REFERENCE_NOT_REPRODUCED` —
+not evidence for or against either correction.
+
+**A-VD-8 (arm status vocabulary and comparison precedence).** Per arm,
+over each required slow/fast × order quantity: QUALIFIED (every required
+LCB95 > 0.75); DECISIVE_COMPETENCE_FAILURE (any required UCB95 ≤ 0.75,
+equality decisive under the frozen inclusive upper-bound rule);
+COMPETENCE_UNRESOLVED (neither); SUPPORT_INSUFFICIENT (any frozen
+support floor fails); INVALID (provenance, exposure, replay, gate,
+reference, checkpoint, or schema validity fails). Comparison precedence:
+(1) shared invalidity → `INVALID_VK0D_CARRIER_COMPARISON`; (2) reference
+not reproduced → same; (3) any conclusion-bearing arm support
+insufficient → `VK0D_SUPPORT_INSUFFICIENT`; (4) CONTROL QUALIFIED →
+`ORDER_RANDOMIZATION_COMPETENCE_QUALIFIED` (retain the simpler
+correction; PRIMARY still reported); (5) CONTROL DECISIVE_FAILURE and
+PRIMARY QUALIFIED → `STRUCTURAL_REPRESENTATION_CORRECTION_REQUIRED`;
+(6) both DECISIVE_FAILURE → `AUTOREGRESSIVE_CARRIER_REOPENED`; (7) every
+other valid combination → `VK0D_SUCCESSOR_COMPARISON_UNRESOLVED`.
+CONTROL-unresolved + PRIMARY-qualified does NOT establish the structural
+correction; CONTROL-qualified with PRIMARY unresolved/failed retains the
+simpler correction provided the PRIMARY defect does not contaminate the
+shared shell. If both qualify, the portfolio rule selects the simpler
+order-randomized R30 (VD-1 supplies no independently identified
+variable-N benefit).
+
 ## Deliberately not done
 
 No inference-time order-ensemble arm (diagnostic only, per the ruling);
 no variable-N aggregation design; no V-K1 work; no changes to V-K0B/V-K0C
 artifacts or to the frozen evaluation bank; no new seeds; no touch of the
-D7.S/B3-L line (HELD).
+D7.S/B3-L line (HELD). V-K0D uses only the competence and support screen;
+the full V-K0B access screen reruns for the selected candidate in a later
+workflow before V-K1.
