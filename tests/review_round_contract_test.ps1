@@ -24,7 +24,8 @@ foreach ($entry in @(
     @($transportSkill, 'Call `agentify_query` once'),
     @($transportSkill, 'timeoutMs=2700000'),
     @($transportSkill, 'Never call `agentify_query` twice for one request'),
-    @($transportSkill, 'observe that page until natural completion without sending'),
+    @($transportSkill, 'call `agentify_wait_response` once with the same key'),
+    @($transportSkill, 'That blocking call sends nothing'),
     @($transportSkill, 'Never claim an action that no tool result proves')
 )) {
     if (-not $entry[0].Contains($entry[1])) {
