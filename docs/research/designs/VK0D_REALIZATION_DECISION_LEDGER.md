@@ -221,14 +221,30 @@ CONTROL's order schedule, REFERENCE neither. All actual exposure records
 (interaction, update, sequence, token, order-exposure, optimizer-step,
 parameter-coverage) pass independently per arm.
 
-**A-VD-7 (reference no-op reproduction gate).** REFERENCE_CONFORMS only
-if, per seed: initialization model+optimizer digests match the valid
-V-K0B reference; the canonical path consumes no order-stream draw; final
-actor/value and optimizer-state digests reproduce the valid V-K0B bundle
-(or a pre-frozen equivalence rule holds — file-level equality not
-required when only non-model provenance fields change); exact training
-exposure matches; and the frozen evaluation reproduces canonical
-competence above 0.75 and reversed decisively below. Otherwise
+**A-VD-7 (reference no-op reproduction gate — exact digest equality;
+amended per convergence turn 1, which removed the undefined equivalence
+alternative).** REFERENCE_CONFORMS iff, for every scientific seed:
+
+1. canonical SHA-256 of the final high-actor state_dict equals the
+   corresponding valid V-K0B digest;
+2. canonical SHA-256 of the final high-value state_dict equals the
+   corresponding valid V-K0B digest;
+3. canonical SHA-256 of the shared high-optimizer state equals the
+   corresponding valid V-K0B digest;
+4. resolved training semantics and actual exposure match (and the
+   canonical path consumes no order-stream draw);
+5. the frozen evaluation reproduces canonical competence above 0.75 and
+   reversed competence decisively below 0.75.
+
+State digests bind canonically over parameter/buffer name, shape, dtype
+and exact bytes; the optimizer digest binds its parameter-name mapping,
+parameter-group hyperparameters and per-parameter optimizer state, never
+transient Python object identities. Only explicitly identified non-model
+provenance fields (run path, added V-K0D manifest metadata) may differ —
+excluded from the digests by construction. There is NO numerical
+tolerance, NO behavioral-only equivalence, NO later-selected equivalence
+rule, NO competence-similarity fallback; literal whole-checkpoint-file
+equality remains unnecessary. A mismatch produces exactly
 `INVALID_VK0D_CARRIER_COMPARISON / CANONICAL_REFERENCE_NOT_REPRODUCED` —
 not evidence for or against either correction.
 
@@ -252,7 +268,12 @@ correction; CONTROL-qualified with PRIMARY unresolved/failed retains the
 simpler correction provided the PRIMARY defect does not contaminate the
 shared shell. If both qualify, the portfolio rule selects the simpler
 order-randomized R30 (VD-1 supplies no independently identified
-variable-N benefit).
+variable-N benefit). Convergence clarification: the analyzer stamps every
+invalid reason as `SHARED_COMPARISON_INVALIDITY` (environment, bank,
+bootstrap, action table, common launcher, exposure measurement, shared
+analyzer — activates precedence 1) or `ARM_LOCAL_INVALIDITY` (e.g., a
+PRIMARY-only encoder or checkpoint failure, which leaves a validly
+qualified CONTROL standing).
 
 ## Deliberately not done
 
