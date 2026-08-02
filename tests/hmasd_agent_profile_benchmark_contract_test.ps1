@@ -165,8 +165,8 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'formal_external_review_transport_authority=exclusive',
-    'transport_owner=code_project_manager',
-    'prepare -> submit -> verify -> archive -> local_FIFO_intake')) {
+    'formal_review_transport=direct_agentify_call',
+    'invokes Agentify directly')) {
     if (-not $cpm.Contains($required)) {
         throw "CPM direct transport contract missing: $required"
     }
@@ -174,10 +174,8 @@ foreach ($required in @(
 foreach ($required in @(
     'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
     'independent_pro_review_transport_execution=persistent_explorer_session_direct',
-    'transport_owner=independent_research_explorer',
-    'hmasd-independent-research-explorer-pro',
-    'hmasd-independent-research-explorer-gemini',
-    'prepare -> submit -> verify -> archive')) {
+    'independent_review_provider_contract=direct_agentify_call',
+    'calls Agentify directly')) {
     if (-not $explorer.Contains($required)) {
         throw "Explorer direct transport contract missing: $required"
     }

@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with outputs confined to local_research and only registered direction-prompt provisioning under pro_reviews.
+description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with outputs confined to local_research.
 ---
 
 # HMASD Independent Research Exploration
@@ -15,8 +15,8 @@ The Explorer is a persistent `gpt-5.6-sol/ultra` task and the only writer. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-  adversarial checks. The persistent Explorer session directly performs each
-  exact External Pro direction turn through Agentify and owns its review item.
+  adversarial checks. The persistent Explorer session directly sends each exact
+  External Pro direction question with Agentify and owns its review item.
 
 ## Start safely
 
@@ -38,9 +38,7 @@ Analysts for constructive RL analysis, and Sol-max Critics for later targeted
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers. During research execution, do not use Git or create project
 changes.
-Write advisory files only with `apply_patch` under `local_research`. The sole
-shell-write exception is the registered transport wrapper inside the exact
-Explorer-owned `local_research/pro_reviews/<review-id>/` item root.
+Write advisory files only with `apply_patch` under `local_research`.
 
 Workflow design is not an Explorer mode. Report one exact requirement or defect
 to Workflow Design Manager through `$hmasd-cross-task-routing`; never load the
@@ -75,26 +73,13 @@ A direction review or bounded methodology audit inside the active
 user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes one exact
-assignment, review mode and concise local execution plan, then directly runs
-`prepare -> submit -> verify -> archive` with
-`transport_owner=independent_research_explorer`, the provider-matched Pro or
-Gemini stable key, one standalone `RAW_QUESTION`, local operation identity and
-item root. ChatGPT and Gemini use the same provider-parameterized strict
-Agentify interface; the same scientific question is sent once per selected
-provider instance. Pro-canonical/Gemini-advisory labels, authority, assignment,
-path and transport metadata remain local. No review/monitor child, heartbeat,
-methodology-operator handoff, global page registry or batch transport state
-participates.
-
-The same request recovers the existing durable operation without another send.
-Before one fresh operation, `submit --verify-existing` must report
-`present=false`; first binding or a missing tab after Agentify restart may use
-`--allow-tab-creation`. Active generation forbids interruption, resend,
-`Answer now`, `Stop`, `Retry` or `Continue`. Archive the exact visible response
-before placing it in the Explorer's local FIFO for scientific reconciliation.
-No hash, digest, fingerprint or byte count is a workflow predicate. Explorer,
-not transport completion order, chooses any later candidate or review. WDM
-never provisions or authorizes a campaign step.
+assignment, review mode and standalone `RAW_QUESTION`, then calls Agentify
+directly for each selected provider. Wait for the response, archive it under the
+review item, and then reconcile it. Do not interrupt an active generation. If
+the call fails, confirm no generation is active and retry the same question when
+useful. Pro/Gemini labels and all local metadata stay outside the transmitted
+question. No review child, monitor, transport state machine, hash gate or WDM
+approval participates.
 
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
@@ -104,10 +89,8 @@ confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
 check. Never compare candidates or turn either review into project adoption.
 
-At most one operation may be active per registered stable key. An incomplete
-request or transport ambiguity affects that operation only; Explorer continues
-unrelated research and applies the shared minimal recovery rule without a
-duplicate send or a strategy change outside the frozen local plan.
+An incomplete call affects only that review; Explorer continues unrelated
+research and retries after confirming the page is not generating.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
@@ -247,8 +230,8 @@ dispatch implementation or advance the formal workflow.
 When a mature candidate is ready for a toy-project identity intake, emit one
 `EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
 `hmasd-explorer-project-validation` Skill. The packet is routed through the
-CPM-centered lane to a dedicated CPM-owned stable-key Pro conversation, separate
-from formal Pro transport. It is not a dispatcher or a transition engine: `candidate_count=1`,
+CPM-centered lane to CPM's direct Agentify call. It is not a dispatcher or a
+transition engine: `candidate_count=1`,
 `cross_direction_competition=false`, and `combined_toy=false` prevent selecting
 multiple directions in one Pro package.
 

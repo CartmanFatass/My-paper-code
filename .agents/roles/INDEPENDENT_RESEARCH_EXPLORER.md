@@ -21,8 +21,8 @@ git_authority=none
 current_work_read=forbidden
 write_scope=local_research_including_explorer_owned_pro_reviews
 local_research_single_writer=true
-local_research_write_tool=apply_patch_only_except_registered_provision_and_agentify_review_lifecycle
-local_research_shell_mutation=forbidden_except_registered_provision_and_agentify_review_lifecycle
+local_research_write_tool=apply_patch_only
+local_research_shell_mutation=forbidden
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
 phase_barrier=required
@@ -39,13 +39,10 @@ cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
 cross_task_route_cache=forbidden
 independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
-independent_pro_review_provision_command=provision-direction
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews
 independent_pro_review_transport_execution=persistent_explorer_session_direct
-independent_pro_review_stable_key=hmasd-independent-research-explorer-pro
-independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini
-independent_review_provider_contract=one_parameterized_agentify_interface
+independent_review_provider_contract=direct_agentify_call
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
@@ -80,9 +77,7 @@ the user supplies an exact read-only excerpt as part of the research question.
 
 The task may read MyLib and other user-named research sources. MyLib is always
 read-only. Write through `apply_patch` only under `local_research/`, including
-Explorer-owned `local_research/pro_reviews/`. The sole shell-write exception is
-the registered Agentify transport wrapper inside the exact review item root;
-all other shell mutation is forbidden.
+Explorer-owned `local_research/pro_reviews/`. All shell mutation is forbidden.
 During research execution, never edit project code, shared workflow, formal
 science, Git state or an external workspace. The workspace guard enforces these
 boundaries for the registered task.
@@ -95,25 +90,19 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct each exact candidate review without per-review user or WDM
-authorization. It directly uses `$hmasd-agentify-pro-transport` with
-`transport_owner=independent_research_explorer` and
-the provider-matched Pro or Gemini key, running
-`prepare -> submit -> verify -> archive` in this persistent session. ChatGPT
-and Gemini use the same strict receipt-bearing lifecycle and the same standalone
-natural-language question; Pro-canonical and Gemini-advisory labels remain in
-local intake metadata. The local execution plan, assignment identity, authority
-and transport records never enter the reviewer composer. Explorer never spawns
-a review/monitor child or heartbeat. The same request recovers the same durable
-operation without another send; one fresh key is allowed only after
-`submit --verify-existing` returns `present=false`. First ChatGPT binding or a
-missing bound page after Agentify restart may use `--allow-tab-creation`.
+authorization. It calls Agentify directly with the standalone natural-language
+question, waits for the returned response, archives that raw response in the
+review item, and then performs scientific intake. Pro-canonical and
+Gemini-advisory labels remain local and never enter the question. A failed call
+may be retried after Explorer confirms no generation is active; it is not a
+workflow defect. No transport child, monitor, stable-key policy, receipt state
+machine, hash gate or WDM approval participates.
 
-Explorer archives the exact response under its assigned
+Explorer archives the raw response under its assigned
 `local_research/pro_reviews/<review-id>/` item root before enqueuing it for local
-FIFO scientific reconciliation. Active generation forbids interruption,
-resend, `Answer now`, `Stop`, `Retry` or `Continue`. The archived Pro content is
-consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`; no hash, digest,
-fingerprint or byte count is a workflow predicate. Explorer preserves the
+FIFO scientific reconciliation. Do not interrupt an active generation. The
+archived Pro content is consumed as `INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
+Explorer preserves the
 reviewed campaign artifact and writes any advisory delta
 as a new version outside `pro_reviews`. Explorer alone chooses which candidate
 to review and what later research action follows; transport cannot infer an

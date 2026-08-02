@@ -10,9 +10,7 @@ technical_acceptance_authority=exclusive
 runtime_authority=exclusive
 current_work_authority=exclusive_for_project_operational_records
 formal_external_review_transport_authority=exclusive
-formal_review_stable_key_formal_toy_research=hmasd-formal-pro
-formal_review_stable_key_uav_validation=hmasd-uav-formal-pro
-explorer_validation_stable_key=hmasd-explorer-validation-pro
+formal_review_transport=direct_agentify_call
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -26,7 +24,6 @@ session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager
 current_work_entry=docs/project/CURRENT_WORK.md
 current_work_session_record=docs/project/current-work/sessions/code_project_manager.md
-pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md
 failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md
 local_failure_task_terminal=false
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
@@ -188,36 +185,13 @@ acceptance owner.
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
 Operator alone executes `train -> evaluate -> analyze`. CPM itself owns each
-formal or Explorer-to-project Pro transport and follows
-`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md` plus
-`$hmasd-agentify-pro-transport`:
-
-```text
-prepare -> submit -> verify -> archive -> local_FIFO_intake
-```
-
-Use `transport_owner=code_project_manager`. `formal_toy_research` uses
-`hmasd-formal-pro`, `uav_validation` uses `hmasd-uav-formal-pro`, and Explorer
-validation uses `hmasd-explorer-validation-pro`; the keys are not
-interchangeable. CPM runs the blocking submit in this persistent session. It
-does not spawn a transport or monitor child, run a parallel ledger observer, or
-use a heartbeat. Reissuing the same request only recovers the existing durable
-operation and never creates another send.
-It does not run a parallel submit process, ledger poller or page observer.
-
-Before one fresh operation, `submit --verify-existing` must prove
-`present=false`. A first binding or missing tab after an Agentify restart may
-use `--allow-tab-creation`; no other page creation or fallback is allowed.
-Outside those two bounded cases, the normal path requires an already-live exact
-stable-key tab and permits no fallback page.
-Active or readable generation forbids refresh, interrupt, resend, `Answer now`,
-`Stop`, `Retry` and `Continue`. After natural completion, archive the exact raw
-response before adding it to CPM's local FIFO for mechanical/scientific-owner
-intake. No hash, digest, fingerprint or byte count is a workflow predicate.
-
-Operational invalidity costs zero scientific iterations and has no scientific
-disposition. CPM may recover inside the unchanged active grant according to the
-shared minimal rule; it never asks WDM to approve an individual review.
+formal or Explorer-to-project Pro transport. It invokes Agentify directly with
+the standalone scientific question, waits for the returned response, archives
+that raw response, and then performs local intake. Do not interrupt an active
+generation. A failed call is an operational error that may be retried after CPM
+confirms no generation is active; it is not a workflow defect or scientific
+result. No transport child, monitor, ledger, stable-key policy, hash gate,
+receipt state machine or WDM approval participates.
 
 ## Failure containment and continuation
 

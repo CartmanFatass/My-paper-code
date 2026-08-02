@@ -72,11 +72,8 @@ sent directly from Explorer to Pro.
    For `EXPLORER-TOY-VALIDATION-2026-07-31-P1`, the exact order is
    `CAND-VAP-FOLR-CORE`, then `CAND-VSP-02`, then `CAND-VSP-05`. This is
    scheduling only; it does not compare, retire or invalidate directions.
-3. CPM uses one dedicated stable-key Pro conversation, distinct from both
-   the active formal Pro conversation and the Independent Research Pro Review
-   Operator conversation. The live conversation ID is discovered and retained
-   at runtime; it is never hardcoded or copied from another workflow. The same
-   conversation is reused sequentially, with exactly one candidate in each Pro
+3. CPM sends the question directly with Agentify, waits for the response and
+   archives it before intake. Exactly one candidate is included in each Pro
    turn; candidates are never combined and reviews are never concurrent.
 4. External Pro receives `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`, judges the
    candidate's estimand, mechanism, controls and minimum toy validation, and

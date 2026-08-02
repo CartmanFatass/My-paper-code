@@ -14,12 +14,9 @@ does not duplicate scientific state, runtime evidence or another session's
 context. CPM routes workflow defects to WDM and retains code, runtime and
 operational ownership.
 
-The direct External Pro transport contract is
-`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md`.
-CPM executes `prepare -> submit -> verify -> archive -> local_FIFO_intake` in
-the persistent session; no transport or monitor child is registered. Code,
-experiment and verifier children remain available only for their own exact
-assignments.
+CPM sends External Pro questions directly with Agentify in the persistent
+session and archives the returned raw response. No separate transport contract,
+wrapper, monitor or transport child exists.
 
 Authority and path ownership come from
 `docs/project/SESSION_WORKSPACE_CONTRACT.md`.

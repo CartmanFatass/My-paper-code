@@ -10,12 +10,10 @@ $retiredIndependentReviewRolePath = Join-Path $repo '.agents/roles/INDEPENDENT_R
 $retiredIndependentReviewProfilePath = Join-Path $repo '.codex/agents/hmasd-independent-research-review-operator.toml'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
 $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
-$cpmTransportContractPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md'
 $cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
 $currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
-$cpmTransportContract = Get-Content -Raw -LiteralPath $cpmTransportContractPath
 $cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
 $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
 $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
@@ -124,8 +122,7 @@ $routerRequired = @(
     'code_project_manager_mechanical_result_acceptance=exclusive',
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
-    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
+    'external_review_transport=owning_session_direct_agentify_call',
     'independent_research_review_transport_execution=persistent_explorer_session_direct'
 )
 foreach ($required in $routerRequired) {
@@ -139,9 +136,7 @@ $codeRequired = @(
     'runtime_authority=exclusive',
     'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_transport_authority=exclusive',
-    'formal_review_stable_key_formal_toy_research=hmasd-formal-pro',
-    'formal_review_stable_key_uav_validation=hmasd-uav-formal-pro',
-    'explorer_validation_stable_key=hmasd-explorer-validation-pro',
+    'formal_review_transport=direct_agentify_call',
     'scientific_authority=none',
     'workflow_design_authority=none',
     'workflow_modification_authority=none',
@@ -151,15 +146,12 @@ $codeRequired = @(
     'session_owner_role=code_project_manager',
     'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
-    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
     'failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
     'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
     'code_children=code_scout|implementer|reviewer|verifier',
-    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
-    'prepare -> submit -> verify -> archive -> local_FIFO_intake',
-    'does not spawn a transport or monitor child',
-    'No hash, digest, fingerprint or byte count is a workflow predicate',
+    'invokes Agentify directly',
+    'No transport child, monitor, ledger, stable-key policy, hash gate',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
@@ -177,8 +169,6 @@ $codeRequired = @(
     'cross_task_target_settings=locked_role_session_model_thinking',
     'cross_task_route_cache=forbidden',
     'locked target session, model and thinking',
-    'already-live exact stable-key tab',
-    'permits no fallback page',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',
@@ -191,8 +181,7 @@ $codeRequired = @(
     'there is no Research Operations Manager',
     'Workflow Design Manager',
     'workflow_change_request_route=workflow_design_manager',
-    'does not edit, accept, stage, commit or push',
-    'does not run a parallel submit process, ledger poller or page observer'
+    'does not edit, accept, stage, commit or push'
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
@@ -240,29 +229,6 @@ foreach ($required in @(
     'temporary_workspace=temp/sessions/code_project_manager/')) {
     if (-not $cpmWorkspace.Contains($required)) {
         throw "Code PM session workspace missing: $required"
-    }
-}
-foreach ($required in @(
-    'document_kind=code_project_manager_role_local_direct_pro_transport_contract',
-    'transport_owner=code_project_manager',
-    'execution_session=persistent_code_project_manager_session',
-    'transport_child=none',
-    'monitor_child=none',
-    'heartbeat=forbidden',
-    'lifecycle_source=.agents/skills/hmasd-agentify-pro-transport/SKILL.md',
-    'failure_containment_source=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
-    'blocked_state_scope=operation',
-    'backend-selection path ending in `TRANSPORT_BACKEND.json`',
-    'write allow-list for backend selection, request, receipt, raw',
-    'response and intake',
-    'The CPM session is the sole transport owner',
-    'no child owns, observes or relays a Pro transport',
-    'CPM does not start a second submit process',
-    'Once `userMessageId` exists',
-    '`PRE_SEND_BLOCKED` must prove no durable user message',
-    '`POST_SEND_BLOCKED` preserves the existing operation')) {
-    if (-not $cpmTransportContract.Contains($required)) {
-        throw "Code PM Pro transport assignment contract missing: $required"
     }
 }
 foreach ($required in @(

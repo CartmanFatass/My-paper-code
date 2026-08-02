@@ -10,7 +10,6 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
     Select-Object -ExpandProperty Name | Sort-Object)
 $requiredSkills = @(
     'hmasd-agile-research-development',
-    'hmasd-agentify-pro-transport',
     'hmasd-collaborative-workflow-design',
     'hmasd-cross-task-routing',
     'hmasd-explorer-project-validation',
@@ -78,14 +77,6 @@ $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skil
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
-$agentifyTransportSkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'
-$agentifyTransportScriptPath = Join-Path $repo '.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py'
-$agentifyTransportContractPath = Join-Path $repo 'docs/project/AGENTIFY_PRO_TRANSPORT.md'
-$agentifyTransportSkill = Get-Content -Raw -LiteralPath $agentifyTransportSkillPath
-$agentifyTransportSkillNormalized = $agentifyTransportSkill -replace '\s+', ' '
-$agentifyTransportScript = Get-Content -Raw -LiteralPath $agentifyTransportScriptPath
-$agentifyTransportContract = Get-Content -Raw -LiteralPath $agentifyTransportContractPath
-$agentifyTransportContractNormalized = $agentifyTransportContract -replace '\s+', ' '
 $independentReviewQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/20_PRO_OPEN_QUESTION.md')
 $independentConstructiveQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_CONSTRUCTIVE_REVIEW.md')
 $independentAdversarialQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_ADVERSARIAL_REVIEW.md')
@@ -102,8 +93,7 @@ foreach ($required in @(
     'EXPLORER_PROJECT_CANDIDATE_PACKET',
     'EXPLORER_ADVISORY_REFINEMENT_PACKET',
     'CPM-centered lane',
-    'dedicated CPM-owned stable-key Pro conversation',
-    'formal Pro transport',
+    'CPM sends the review question directly with Agentify',
     'one candidate is selected for each Pro package',
     'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
     'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
@@ -113,19 +103,18 @@ foreach ($required in @(
     }
 }
 foreach ($entry in @(
-    @($codePmRole, 'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md'),
     @($codePmRole, 'explorer_toy_assignment_intake=pro_frozen_only'),
-    @($codePmRole, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'),
-    @($codePmRole, 'does not spawn a transport or monitor child'),
+    @($codePmRole, 'formal_review_transport=direct_agentify_call'),
+    @($codePmRole, 'invokes Agentify directly'),
     @($independentResearchRole, 'EXPLORER_PROJECT_CANDIDATE_PACKET'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
     @($proRole, 'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT'),
     @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
     @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
     @($explorerValidationContract, 'authority={scientific_authority:none,code_authority:none,compute_authority:none,project_state_effect:none}'),
-    @($explorerValidationContract, 'dedicated stable-key Pro conversation'),
+    @($explorerValidationContract, 'sends the question directly with Agentify'),
     @($explorerValidationContract, 'current_work_mutation=forbidden'),
-    @($explorerValidationContract, 'exactly one candidate in each Pro'),
+    @($explorerValidationContract, 'Exactly one candidate is included in each Pro'),
     @($explorerValidationContract, 'Explorer packet or candidate-artifact nonconformance'),
     @($explorerValidationContract, 'packet-validator or workflow-routing defect'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
@@ -216,79 +205,29 @@ foreach ($required in @(
     'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
     'independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945',
-    'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
-    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
     'independent_research_review_transport_execution=persistent_explorer_session_direct',
+    'external_review_transport=owning_session_direct_agentify_call',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($entry in @(
-    @($agents, '.agents/skills/hmasd-agentify-pro-transport/SKILL.md'),
-    @($codePmRole, 'Use `transport_owner=code_project_manager`'),
-    @($codePmRole, 'hmasd-formal-pro'),
-    @($codePmRole, 'hmasd-uav-formal-pro'),
-    @($codePmRole, 'hmasd-explorer-validation-pro'),
-    @(($codePmRole -replace '\s+', ' '), 'already-live exact stable-key tab'),
-    @(($codePmRole -replace '\s+', ' '), 'permits no fallback page'),
-    @(($codePmRole -replace '\s+', ' '), 'transport_owner=code_project_manager'),
+    @($agents, 'HMASD adds no transport control plane'),
+    @($codePmRole, 'formal_review_transport=direct_agentify_call'),
+    @($codePmRole, 'invokes Agentify directly'),
     @($workflowDesignManagerRole, 'agentify_transport_real_review_send=forbidden'),
-    @($independentResearchRole, 'independent_pro_review_stable_key=hmasd-independent-research-explorer-pro'),
-    @($independentResearchRole, 'independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini'),
-    @($independentReviewSkill, 'chatgpt_stable_key=hmasd-independent-research-explorer-pro'),
-    @($independentReviewSkill, 'gemini_stable_key=hmasd-independent-research-explorer-gemini'),
-    @($agentifyTransportSkill, 'provider=chatgpt|gemini'),
-    @($agentifyTransportSkill, 'standalone `RAW_QUESTION`'),
-    @($agentifyTransportSkill, 'hmasd-uav-formal-pro'),
-    @($agentifyTransportSkillNormalized, 'Only `present=false`, no persisted user message and an unchanged question allow one fresh operation key'),
-    @($agentifyTransportSkillNormalized, 'Never switch tools, interfaces or transport strategy during recovery'),
-    @($agentifyTransportSkillNormalized, 'No digest, byte count or fingerprint is a workflow admission field'),
-    @($agentifyTransportSkillNormalized, 'first ChatGPT binding'),
-    @($agentifyTransportContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'),
-    @($agentifyTransportContract, '| `hmasd-uav-formal-pro` | Code Project Manager | `uav_validation` Pro conversation |'),
-    @($agentifyTransportContract, '| `hmasd-independent-research-explorer-gemini` | Independent Research Explorer | independent-research Gemini advisory conversation |'),
-    @($agentifyTransportContractNormalized, 'tab navigation cannot rebind or overwrite that durable binding'),
-    @($agentifyTransportContractNormalized, 'transport_tab_mutation=forbidden'),
-    @($agentifyTransportContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
-    @($agentifyTransportContractNormalized, 'transport does not fall back to another tab or window'),
-    @($agentifyTransportContractNormalized, 'runtime-only'),
-    @($agentifyTransportContractNormalized, 'TRANSPORT_BACKEND.json'),
-    @($agentifyTransportContractNormalized, 'sourceDirty'),
-    @($agentifyTransportScript, 'transport_owner'),
-    @($agentifyTransportScript, '"hmasd-uav-formal-pro"'),
-    @($agentifyTransportScript, 'backend_selection_path'),
-    @($agentifyTransportScript, 'AGENTIFY_REQUIRED_COMMIT'),
-    @($agentifyTransportScript, 'require_send_ready=require_send_ready'),
-    @($agentifyTransportScript, 'agentify_preexisting_tab_missing'),
-    @($agentifyTransportScript, 'agentify_preexisting_tab_busy'),
-    @($agentifyTransportScript, 'agentify_preexisting_tab_prompt_unavailable'),
-    @($agentifyTransportScript, 'MESSAGE_CONFIRMED'),
-    @($agentifyTransportScript, 'PRE_SEND_BLOCKED'),
-    @($agentifyTransportScript, 'POST_SEND_BLOCKED'),
-    @($agentifyTransportScript, '_terminate_owned_worker'),
-    @($agentifyTransportContractNormalized, 'prompt_visible_required_before_send=true'),
-    @($agentifyTransportContractNormalized, 'process_existence_is_send_evidence=false'),
-    @($agentifyTransportScript, 'sendCount'),
-    @($agentifyTransportScript, 'sendActionCount'),
-    @($agentifyTransportScript, 'snapshot_stability_too_short')
+    @($independentResearchRole, 'independent_review_provider_contract=direct_agentify_call'),
+    @($independentReviewSkill, 'Invoke Agentify directly'),
+    @($independentReviewSkill, 'Never interrupt an active generation')
 )) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify route/contract coupling missing: $($entry[1])"
     }
 }
-foreach ($staleGate in @('resend requires a new user instruction', 'Only no recorded user message permits')) {
-    if ($agentifyTransportSkill.Contains($staleGate)) {
-        throw "Agentify transport retains a per-resend user gate: $staleGate"
-    }
-}
-if ($agentifyTransportScript.Contains('"prompt_sha256"')) {
-    throw 'Agentify wrapper must not use prompt_sha256 as a request or recovery gate'
-}
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
     'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews',
     'independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews',
-    'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
-    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
+    'external_review_transport=owning_session_direct_agentify_call',
     'independent_research_review_transport_execution=persistent_explorer_session_direct',
     'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
     'independent_research_wdm_campaign_approval=none',
@@ -299,10 +238,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'owns both independent-research direction reviews and methodology',
-    'complete response',
-    'Run `submit` once',
+    'Invoke Agentify directly',
+    'Archive the raw response',
     'Workflow Design Manager',
-    'local FIFO')) {
+    'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
     }
@@ -310,17 +249,11 @@ foreach ($required in @(
 foreach ($required in @(
     'invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`',
     'there is no separate persistent review-operator session',
-    'transport_owner=independent_research_explorer',
-    'chatgpt_stable_key=hmasd-independent-research-explorer-pro',
-    'gemini_stable_key=hmasd-independent-research-explorer-gemini',
-    'execution=persistent_explorer_session_direct',
-    'item_root=local_research/pro_reviews/<review-id>/',
+    'local_research/pro_reviews/<review-id>/',
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'archive',
-    'local FIFO',
-    'No hash, digest, fingerprint or byte count is a workflow predicate.')) {
+    'Archive the raw response')) {
     if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
@@ -401,8 +334,8 @@ foreach ($required in @(
     'write_scope=local_research_including_explorer_owned_pro_reviews',
     'current_work_read=forbidden',
     'local_research_single_writer=true',
-    'local_research_write_tool=apply_patch_only_except_registered_provision_and_agentify_review_lifecycle',
-    'local_research_shell_mutation=forbidden_except_registered_provision_and_agentify_review_lifecycle',
+    'local_research_write_tool=apply_patch_only',
+    'local_research_shell_mutation=forbidden',
     'logical_assignment_count=derived_from_exact_work_roster',
     'runtime_concurrency=available_native_capacity',
     'phase_barrier=required',
@@ -419,11 +352,10 @@ foreach ($required in @(
     'cross_task_route_cache=forbidden',
     'independent_pro_direction_packet_effect=advisory_revision_only',
     'independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:',
-    'independent_pro_review_provision_command=provision-direction',
     'independent_pro_review_item_root=local_research/pro_reviews/<review-id>/',
     'independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews',
     'independent_pro_review_transport_execution=persistent_explorer_session_direct',
-    'independent_pro_review_stable_key=hmasd-independent-research-explorer-pro',
+    'independent_review_provider_contract=direct_agentify_call',
     'independent_pro_review_terminal_intake=exact_archived_response_fifo',
     'independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'independent_pro_direction_shared_page_registry=forbidden',
@@ -562,21 +494,13 @@ foreach ($required in @(
         throw "Independent research Skill missing: $required"
     }
 }
-foreach ($required in @(
-    '--owner <registered-owner> --stable-key <owner-key>',
-    '--provider <chatgpt|gemini>')) {
-    if (-not $agentifyTransportSkill.Contains($required)) {
-        throw "Agentify provider-parameterized request contract missing: $required"
-    }
-}
 foreach ($stale in @(
     'For ROM',
     'Operations-Manager-routed',
     'Operations-packaged',
     'Operations archives and routes',
     'wdm_ops_scientific_command_effect')) {
-    if ($agentifyTransportSkill.Contains($stale) -or
-        $proRole.Contains($stale) -or
+    if ($proRole.Contains($stale) -or
         $independentResearchRole.Contains($stale)) {
         throw "Retired ownership wording remains: $stale"
     }
@@ -749,7 +673,7 @@ if ($wdmCoreLineCount -gt 1000) {
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'Operational invalidity costs zero scientific iterations')) {
+    'A failed call is an operational error')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -897,9 +821,8 @@ foreach ($required in @(
     'workflow_design_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
-    'prepare -> submit -> verify -> archive -> local_FIFO_intake',
-    'does not spawn a transport or monitor child',
+    'formal_review_transport=direct_agentify_call',
+    'invokes Agentify directly',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',
@@ -981,7 +904,7 @@ foreach ($required in @(
     'current_work_authority=exclusive',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
-    'pro_review_transport_contract=docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md',
+    'formal_review_transport=direct_agentify_call',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_routing_skill=hmasd-cross-task-routing',
     'cross_task_target_identity=fixed_router_role_session',

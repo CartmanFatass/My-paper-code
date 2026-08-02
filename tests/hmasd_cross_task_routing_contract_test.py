@@ -329,19 +329,15 @@ def test_explorer_owns_independent_pro_review_without_persistent_operator() -> N
     for token in (
         "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
         "independent_pro_review_transport_execution=persistent_explorer_session_direct",
-        "independent_pro_review_stable_key=hmasd-independent-research-explorer-pro",
-        "independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini",
+        "independent_review_provider_contract=direct_agentify_call",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
         assert token in explorer, token
     for token in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "chatgpt_stable_key=hmasd-independent-research-explorer-pro",
-        "gemini_stable_key=hmasd-independent-research-explorer-gemini",
-        "execution=persistent_explorer_session_direct",
-        "archive",
-        "local FIFO",
+        "Invoke Agentify directly",
+        "Archive the raw response",
     ):
         assert token in skill, token
     assert not (ROOT / ".agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md").exists()

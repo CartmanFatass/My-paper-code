@@ -509,13 +509,6 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
     pro_review_skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "SKILL.md"
     ).read_text(encoding="utf-8")
-    pro_review_transport = (
-        REPO
-        / "docs"
-        / "session-workspaces"
-        / "independent_research_explorer"
-        / "PRO_REVIEW_TRANSPORT.md"
-    ).read_text(encoding="utf-8")
     workspace = (
         REPO / "docs" / "session-workspaces" / "independent_research_explorer" / "README.md"
     ).read_text(encoding="utf-8")
@@ -532,8 +525,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "tests/hmasd_independent_research_exploration_test.py|"
         "tests/hmasd_explorer_project_validation_packet_test.py|"
         "tests/hmasd_research_workflow_contract_test.ps1|"
-        "docs/session-workspaces/independent_research_explorer/README.md|"
-        "docs/session-workspaces/independent_research_explorer/PRO_REVIEW_TRANSPORT.md"
+        "docs/session-workspaces/independent_research_explorer/README.md"
     )
 
     for required in (
@@ -545,16 +537,13 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "workflow_change_request_route=workflow_design_manager",
         "git_authority=none",
         "current_work_read=forbidden",
-        "local_research_write_tool=apply_patch_only_except_registered_provision_and_agentify_review_lifecycle",
-        "local_research_shell_mutation=forbidden_except_registered_provision_and_agentify_review_lifecycle",
+        "local_research_write_tool=apply_patch_only",
+        "local_research_shell_mutation=forbidden",
         "independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:",
-        "independent_pro_review_provision_command=provision-direction",
         "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
         "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
         "independent_pro_review_transport_execution=persistent_explorer_session_direct",
-        "independent_pro_review_stable_key=hmasd-independent-research-explorer-pro",
-        "independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini",
-        "independent_review_provider_contract=one_parameterized_agentify_interface",
+        "independent_review_provider_contract=direct_agentify_call",
         "independent_review_transmitted_payload=standalone_RAW_QUESTION_only",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
@@ -581,10 +570,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to Workflow Design Manager",
         "never load the collaborative/audit Workflow Skills",
-        "persistent Explorer session directly performs each exact External Pro direction turn",
-        "prepare -> submit -> verify -> archive",
-        "No review/monitor child",
-        "No hash, digest, fingerprint or byte count is a workflow predicate.",
+        "persistent Explorer session directly sends each exact External Pro direction question",
+        "calls Agentify directly",
+        "No review child, monitor, transport state machine, hash gate or WDM",
     ):
         assert required in skill_normalized
     assert "$hmasd-collaborative-workflow-design" not in skill
@@ -593,24 +581,19 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
     for required in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "chatgpt_stable_key=hmasd-independent-research-explorer-pro",
-        "gemini_stable_key=hmasd-independent-research-explorer-gemini",
-        "execution=persistent_explorer_session_direct",
-        "archive",
-        "local FIFO",
-        "No hash, digest, fingerprint or byte count is a workflow predicate.",
+        "Invoke Agentify directly",
+        "Archive the raw response",
+        "Never interrupt an active generation",
     ):
         assert required in pro_review_skill
     assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
         "hmasd-independent-research-pro-review", ""
     )
 
-    for contract in (pro_review_skill, pro_review_transport):
-        assert "IR_DIRECTION_REVIEW:" in contract
-        assert "IR_METHODOLOGY_REVIEW:" in contract
-        assert "provision-direction" in contract
-        assert "local_research/pro_reviews/<review-id>/" in contract
-        assert "IR_UNSUPPORTED_REVIEW:" not in contract
+    assert "IR_DIRECTION_REVIEW:" in pro_review_skill
+    assert "IR_METHODOLOGY_REVIEW:" in pro_review_skill
+    assert "local_research/pro_reviews/<review-id>/" in pro_review_skill
+    assert "IR_UNSUPPORTED_REVIEW:" not in pro_review_skill
     assert "independent_pro_direction_transport_authority=" not in role
     assert "independent_pro_direction_transport_execution=" not in role
     assert "independent_pro_direction_stable_key=" not in role

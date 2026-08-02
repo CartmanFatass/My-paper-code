@@ -53,14 +53,6 @@ UNC_PATH = re.compile(r"(?<![\\])((?:\\\\|//)[^\s;|>'\"\)\]]+)")
 PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
 )
-DIRECTION_ASSIGNMENT_PREFIX = "IR_DIRECTION_REVIEW:"
-METHODOLOGY_ASSIGNMENT_PREFIX = "IR_METHODOLOGY_REVIEW:"
-REVIEW_ASSIGNMENT_PREFIXES = (
-    DIRECTION_ASSIGNMENT_PREFIX,
-    METHODOLOGY_ASSIGNMENT_PREFIX,
-)
-
-
 class GuardError(RuntimeError):
     """A fail-closed workspace-boundary decision."""
 
@@ -168,80 +160,6 @@ def _registered_python(repo: Path) -> str | None:
     return matches[0] if len(matches) == 1 else None
 
 
-def _registered_direct_transport_sessions(repo: Path) -> set[str]:
-    router = repo / "AGENTS.md"
-    if not router.is_file():
-        return set()
-    text = router.read_text(encoding="utf-8")
-    sessions: set[str] = set()
-    for field in (
-        "code_project_manager_session",
-        "independent_research_explorer_session",
-    ):
-        matches = re.findall(rf"(?m)^{field}=([^\r\n]+?)\s*$", text)
-        if len(matches) == 1:
-            sessions.add(matches[0])
-    return sessions
-
-
-def _flag_path(command: str, flag: str) -> Path | None:
-    match = re.search(
-        rf"(?:^|\s){re.escape(flag)}(?:=|\s+)"
-        r'(?:"([^"]+)"|\'([^\']+)\'|([^\s]+))',
-        command,
-        re.IGNORECASE,
-    )
-    if not match:
-        return None
-    return _canonical(
-        Path(next(value for value in match.groups() if value is not None))
-    )
-
-
-def _flag_value(command: str, flag: str) -> str | None:
-    match = re.search(
-        rf"(?:^|\s){re.escape(flag)}(?:=|\s+)"
-        r'(?:(?:"([^"]+)")|(?:\'([^\']+)\')|([^\s]+))',
-        command,
-        re.IGNORECASE,
-    )
-    if not match:
-        return None
-    return next(value for value in match.groups() if value is not None)
-
-
-def _valid_review_assignment(value: object) -> bool:
-    return isinstance(value, str) and value.startswith(REVIEW_ASSIGNMENT_PREFIXES)
-
-
-def _review_item_root(path: Path, review_root: Path) -> Path | None:
-    if not _inside(path, review_root):
-        return None
-    relative = path.relative_to(review_root)
-    if len(relative.parts) < 2:
-        return None
-    return _canonical(review_root / relative.parts[0])
-
-
-def _request_has_review_assignment(path: Path) -> bool:
-    try:
-        request = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return False
-    return (
-        isinstance(request, dict)
-        and _valid_review_assignment(request.get("assignment_identity"))
-        and request.get("transport_owner") == "independent_research_explorer"
-        and request.get("stable_key") == "hmasd-independent-research-explorer-pro"
-        and request.get("model") == "Pro"
-    )
-
-
-def _request_has_direction_assignment(path: Path) -> bool:
-    """Compatibility alias for older focused tests."""
-    return _request_has_review_assignment(path)
-
-
 def _registered_script_prefix(command: str, interpreter: str, script: Path) -> bool:
     normalized = command.strip().replace("\\", "/")
     normalized_interpreter = interpreter.replace("\\", "/")
@@ -252,111 +170,6 @@ def _registered_script_prefix(command: str, interpreter: str, script: Path) -> b
         re.IGNORECASE,
     )
     return bool(prefix.match(normalized))
-
-
-def _trusted_agentify_review_command(
-    command: str,
-    repo: Path,
-    required_item_root: Path | None = None,
-) -> bool:
-    interpreter = _registered_python(repo)
-    if interpreter is None:
-        return False
-    review_root = _canonical(repo / "local_research" / "pro_reviews")
-    agentify = (
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-agentify-pro-transport"
-        / "scripts"
-        / "hmasd_agentify_pro_transport.py"
-    )
-    if not _registered_script_prefix(command, interpreter, agentify):
-        return False
-    mode = re.search(r"\s(prepare|submit|verify|archive)(?:\s|$)", command, re.IGNORECASE)
-    if mode is None:
-        return False
-    mode_name = mode.group(1).lower()
-    flags = {
-        "prepare": ("--selection", "--request", "--prompt-path"),
-        "submit": ("--request", "--receipt"),
-        "verify": ("--request", "--receipt"),
-        "archive": ("--request", "--receipt", "--raw-output"),
-    }[mode_name]
-    paths = [_flag_path(command, flag) for flag in flags]
-    if any(path is None for path in paths):
-        return False
-    resolved_item_roots = [
-        _review_item_root(path, review_root)
-        for path in paths
-        if path is not None
-    ]
-    if any(item_root is None for item_root in resolved_item_roots):
-        return False
-    item_roots = {
-        str(item_root)
-        for item_root in resolved_item_roots
-        if item_root is not None
-    }
-    if len(item_roots) != 1:
-        return False
-    item_root = _canonical(Path(next(iter(item_roots))))
-    if required_item_root is not None and not _same(item_root, required_item_root):
-        return False
-    if mode_name == "prepare":
-        if _flag_value(command, "--owner") != "independent_research_explorer":
-            return False
-        if _flag_value(command, "--stable-key") != "hmasd-independent-research-explorer-pro":
-            return False
-        if _flag_value(command, "--model") != "Pro":
-            return False
-        assignment_identity = _flag_value(command, "--assignment-identity")
-        if not _valid_review_assignment(assignment_identity):
-            return False
-    else:
-        request_path = _flag_path(command, "--request")
-        if request_path is None or not _request_has_review_assignment(request_path):
-            return False
-    return True
-
-
-def _trusted_direction_provision_command(command: str, repo: Path) -> bool:
-    if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
-        return False
-    interpreter = _registered_python(repo)
-    if interpreter is None:
-        return False
-    agentify = (
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-agentify-pro-transport"
-        / "scripts"
-        / "hmasd_agentify_pro_transport.py"
-    )
-    if not _registered_script_prefix(command, interpreter, agentify):
-        return False
-    if re.search(r"\sprovision-direction(?:\s|$)", command, re.IGNORECASE) is None:
-        return False
-    assignment_identity = _flag_value(command, "--assignment-identity")
-    prompt_source = _flag_path(command, "--prompt-source")
-    prompt_path = _flag_path(command, "--prompt-path")
-    if not (
-        _valid_review_assignment(assignment_identity)
-        and prompt_source is not None
-        and prompt_path is not None
-    ):
-        return False
-    research_root = _canonical(repo / "local_research")
-    review_root = _canonical(research_root / "pro_reviews")
-    if not _inside(prompt_source, research_root) or _inside(prompt_source, review_root):
-        return False
-    item_root = _review_item_root(prompt_path, review_root)
-    return (
-        item_root is not None
-        and _same(prompt_path.parent, item_root)
-        and prompt_path.name == "20_PRO_OPEN_QUESTION.md"
-    )
 
 
 def _trusted_research_script(
@@ -370,10 +183,6 @@ def _trusted_research_script(
     if interpreter is None:
         return False
     if role == "explorer":
-        if _trusted_direction_provision_command(command, repo):
-            return True
-        if _trusted_agentify_review_command(command, repo):
-            return True
         forbidden = str(repo / "local_research" / "pro_reviews").replace("\\", "/")
         normalized = command.replace("\\", "/")
         if (
@@ -449,23 +258,6 @@ def _guard_patch(
             raise GuardError(f"apply_patch target is reserved for another role: {resolved}")
         if not any(_inside(resolved, root) for root in allowed_roots):
             raise GuardError(f"apply_patch target is outside the writable scope: {resolved}")
-
-
-def _command_invokes_agentify_wrapper(command: str, repo: Path) -> bool:
-    normalized = command.replace("\\", "/").casefold()
-    wrapper = str(
-        repo
-        / ".agents"
-        / "skills"
-        / "hmasd-agentify-pro-transport"
-        / "scripts"
-        / "hmasd_agentify_pro_transport.py"
-    ).replace("\\", "/").casefold()
-    relative = (
-        ".agents/skills/hmasd-agentify-pro-transport/scripts/"
-        "hmasd_agentify_pro_transport.py"
-    )
-    return wrapper in normalized or relative in normalized
 
 
 def _guard_shell(
@@ -560,25 +352,11 @@ def main() -> int:
                 raise GuardError(
                     "local_research/pro_reviews requires the registered persistent session"
                 )
-            if tool_name in SHELL_TOOLS:
-                shell_input = payload.get("tool_input")
-                if isinstance(shell_input, dict) and isinstance(
-                    shell_input.get("command"), str
-                ):
-                    direct_transport_sessions = _registered_direct_transport_sessions(repo)
-                    if (
-                        _command_invokes_agentify_wrapper(shell_input["command"], repo)
-                        and session_id not in direct_transport_sessions
-                    ):
-                        raise GuardError(
-                            "Agentify review transport requires a registered direct-transport session"
-                        )
         forbidden_roots: tuple[Path, ...] = ()
         if research_role is not None:
             if linked:
                 raise GuardError("independent research is confined to the main checkout")
             allowed_roots = [_canonical(repo / "local_research")]
-            forbidden_roots = (_canonical(repo / "local_research" / "pro_reviews"),)
         if tool_name in PATCH_TOOLS:
             _guard_patch(
                 cwd,

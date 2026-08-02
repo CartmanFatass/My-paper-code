@@ -137,7 +137,6 @@ def test_wdm_explorer_scope_lists_contracts_without_claiming_workspace_globs() -
         "tests/hmasd_explorer_project_validation_packet_test.py",
         "tests/hmasd_research_workflow_contract_test.ps1",
         "docs/session-workspaces/independent_research_explorer/README.md",
-        "docs/session-workspaces/independent_research_explorer/PRO_REVIEW_TRANSPORT.md",
     ):
         assert required in scope
     assert "docs/session-workspaces/independent_research_explorer/**" not in scope

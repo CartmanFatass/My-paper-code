@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction/methodology review through the unified Agentify interface.
+description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction or methodology review sent directly with Agentify.
 ---
 
 # HMASD Independent Research External Review
@@ -9,41 +9,15 @@ description: Use from the persistent Independent Research Explorer for one exact
 
 This Skill is invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`.
 The Explorer owns both independent-research direction reviews and methodology
-audits; there is no separate persistent review-operator session. Use only the
-new Explorer-owned stable binding declared below; historical bindings are not
-reassigned.
+audits; there is no separate persistent review-operator session.
 
 This Skill grants no workflow-design, code, runtime, compute, Git, formal
 science or project-state authority. The response is advisory input to the
 Explorer's local research portfolio only. The Explorer freezes the exact
-question, mode, candidate or methodology assignment, source allow-list,
-operation identity and item root before transport begins.
-Load `$hmasd-agentify-pro-transport` only for the exact receipt-bearing
-`prepare -> submit -> verify -> archive` mechanics used below.
+question, mode, candidate or methodology assignment, source allow-list and item
+root before sending.
 
-## Stable transport binding
-
-Use the registered owner and provider-matched key exactly as follows:
-
-```text
-transport_owner=independent_research_explorer
-chatgpt_stable_key=hmasd-independent-research-explorer-pro
-gemini_stable_key=hmasd-independent-research-explorer-gemini
-execution=persistent_explorer_session_direct
-assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
-provision_command=provision-direction
-item_root=local_research/pro_reviews/<review-id>/
-```
-
-At most one nonterminal operation may be active per key. ChatGPT and Gemini use
-the same strict receipt-bearing lifecycle. Pro is canonical and Gemini advisory
-only in local intake metadata; both receive the same standalone natural-language
-question. Do not create or
-consult a shared page registry, methodology operator, review child, monitor,
-heartbeat or batch transport state. Runtime conversation identity, URL, model
-and credentials come only from the live Agentify binding.
-
-## Exact transport sequence
+## Direct review
 
 1. Freeze one concise local execution plan and one standalone UTF-8
    `RAW_QUESTION`. The question contains only natural-language scientific
@@ -52,39 +26,23 @@ and credentials come only from the live Agentify binding.
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. Run `provision-direction` for either prefix; it copies only the frozen
-   question into the item root. Then run `prepare` once with the Explorer owner,
-   provider-matched stable key, live binding, local operation identity and
-   question path. First ChatGPT binding uses the authenticated blank-root path;
-   Gemini uses its existing `/app/<id>` page through the same interface.
-3. Run `submit` once. If the operation is already durable, use
-   `submit --verify-existing`, which never sends. A fresh unchanged-question
-   operation is allowed only after that check reports `present=false`.
-   `--allow-tab-creation` is permitted only for first binding or a tab missing
-   after an Agentify restart.
-4. Run `verify` and require the transport wrapper's natural-completion receipt.
-   Never interrupt generation or activate `Answer now`, `Stop`, `Retry` or
-   `Continue`.
-5. Run `archive` to the same Explorer-owned item root, then enqueue the exact
-   archived response in the Explorer's local FIFO before scientific
-   reconciliation. Transport completion never chooses the next candidate.
+2. Invoke Agentify directly with that question and the intended provider page.
+3. Wait for the returned response. Never interrupt an active generation.
+4. Archive the raw response in `local_research/pro_reviews/<review-id>/`, then
+   reconcile it scientifically. If the call fails, confirm no generation is
+   active and retry the same question when useful.
 
 When one paired protocol includes a common follow-up, freeze that follow-up as
-a second standalone natural-language question and one new operation key per
-provider. Send it once in each provider's existing bound conversation through
-the same sequence. Sequential observation is allowed for attribution; it does
+a second standalone natural-language question. Send it in each provider's
+existing conversation through the same direct call. Sequential observation is allowed for attribution; it does
 not create a second workflow or permit provider-specific prompt metadata.
 
-An incomplete request, missing or conflicting binding, or transport ambiguity
-blocks only that operation. Recover the same durable operation first; do not
-duplicate a send, switch conversations or reinterpret a blocker as science.
-No hash, digest, fingerprint or byte count is a workflow predicate.
+An incomplete call affects only that review and is not scientific evidence.
 
 ## Item records and packet semantics
 
-Each item keeps the frozen prompt, transport selection/request/receipt, exact
-raw response, mechanical intake and the typed advisory packet required by its
-mode. Keep runtime credentials and Agentify state outside the repository.
+Each item keeps the frozen question, raw response and typed advisory packet
+required by its mode. Keep runtime credentials outside the repository.
 
 For a direction review, archive the complete response before producing the
 `INDEPENDENT_RESEARCH_DIRECTION_PACKET`. A constructive review must complete
@@ -95,7 +53,7 @@ to the Explorer's local FIFO without adding sources, claims or project
 instructions. Neither mode promotes a direction into formal project state.
 
 The Explorer alone selects the next review and continues the authorized
-campaign. Workflow Design Manager is neither a campaign approver nor a
-transport provisioner or recovery owner. Research children remain available for
+campaign. Workflow Design Manager is not a campaign approver or transport
+operator. Research children remain available for
 source, innovation, principles and critique work; no child performs Pro
 transport or monitoring.

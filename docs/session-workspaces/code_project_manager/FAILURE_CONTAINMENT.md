@@ -13,18 +13,14 @@ continuation_default=select_next_legal_action
 session_blocked_evidence=global_integrity_witness_or_complete_no_legal_action_receipts
 ```
 
-Each ticket, direct CPM transport, runner and readiness script owns its
+Each ticket, runner and readiness script owns its
 mechanical lifecycle, counters and terminal state. Code, experiment and
 verifier children return only their assigned typed receipt or exit evidence;
-CPM never reconstructs or remembers a parallel state machine, and no transport
-or monitor child observes a CPM Pro operation.
+CPM never reconstructs or remembers a parallel state machine.
 
-For External Pro transport, CPM follows
-`docs/session-workspaces/code_project_manager/PRO_REVIEW_TRANSPORT.md`.
-The same request recovers an existing durable operation without a send. A new
-send is considered only after the originating tool verifies `present=false`.
-The operation remains with CPM through archive and local FIFO intake; a
-transport failure never creates a second observer or heartbeat.
+External Pro transport is a direct Agentify call. If it fails, CPM confirms no
+generation is active before retrying; the failure does not create workflow
+state, a second observer or a heartbeat.
 
 After a local failure, CPM makes only a semantic choice: direct repair, a fresh
 authorized attempt, parking the affected workstream, or another legal action.

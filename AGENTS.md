@@ -70,9 +70,8 @@ independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945
 independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
 independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews
-independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro
-independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini
 independent_research_review_transport_execution=persistent_explorer_session_direct
+external_review_transport=owning_session_direct_agentify_call
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -155,7 +154,7 @@ authority rules decide whether user input is required.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and direct Pro transport: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Exact mechanical external-review transport and result intake: each owning persistent session through the provider-parameterized `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`; only standalone `RAW_QUESTION` content enters the reviewer composer.
+- External review: the owning persistent session sends the standalone scientific question directly with Agentify, waits for the response, and archives the raw result. HMASD adds no transport control plane.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
@@ -167,7 +166,6 @@ authority rules decide whether user input is required.
 - WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
 - WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
 - WDM defect FIFO: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`.
-- Pro transport: `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`, with stable-key mechanics in `docs/project/AGENTIFY_PRO_TRANSPORT.md`.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 - Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use its direct Agentify transport.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
