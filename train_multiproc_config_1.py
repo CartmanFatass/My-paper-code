@@ -1431,7 +1431,7 @@ from hmasd.sb3_integration import (
     HMASDVecEnvWrapper
 )
 from hmasd.sharded_vec_env import ShardedSubprocVecEnv
-from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
 from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
 from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
@@ -4106,7 +4106,7 @@ def make_env(rank, seed, config, scenario, render_mode=None, scale_mode=None):
         
         if scenario == "base":
             # 基础强制中继环境 - 直接传入config对象
-            raw_env = UAVForcedRelayEnv(
+            raw_env = UAVRoutedRelayEnv(
                 config=config,
                 render_mode=render_mode,
                 seed=env_seed

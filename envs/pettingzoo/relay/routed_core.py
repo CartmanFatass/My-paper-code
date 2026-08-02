@@ -28,7 +28,7 @@ except ImportError as e:
     SB3_RUNNING_MEAN_STD_AVAILABLE = False
 
 
-class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
+class UAVRoutedRelayEnv(ParallelEnv, RelayChannelGeometry):
     """
     场景4：强制多跳中继无人机环境
     

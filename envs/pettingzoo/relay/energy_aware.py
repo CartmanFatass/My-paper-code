@@ -1,7 +1,7 @@
 import numpy as np
 from gymnasium.spaces import Box, Dict
 
-from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
 
 
 class _EnergyAwareConfigProxy:
@@ -19,7 +19,7 @@ class _EnergyAwareConfigProxy:
         raise AttributeError(name)
 
 
-class UAVEnergyAwareRelayEnv(UAVForcedRelayEnv):
+class UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv):
     """
     Scenario 7: energy-aware forced-relay benchmark.
 

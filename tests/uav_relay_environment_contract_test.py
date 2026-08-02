@@ -14,7 +14,7 @@ from config_1 import Config
 from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
-from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv as UAVRoutedCoreEnv
+from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
 
 
 def make_config():
@@ -42,7 +42,7 @@ def make_belief_map_environment(seed):
 
 
 def make_routed_core_environment(seed):
-    return UAVRoutedCoreEnv(config=make_config(), seed=seed)
+    return UAVRoutedRelayEnv(config=make_config(), seed=seed)
 
 
 def make_progressive_environment(seed):

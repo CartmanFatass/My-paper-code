@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 
-from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
 
 
 class _ProgressiveConfigProxy:
@@ -19,7 +19,7 @@ class _ProgressiveConfigProxy:
         raise AttributeError(name)
 
 
-class UAVProgressiveRelayEnv(UAVForcedRelayEnv):
+class UAVProgressiveRelayEnv(UAVRoutedRelayEnv):
     """
     Scenario 6: progressive forced-relay benchmark.
 
