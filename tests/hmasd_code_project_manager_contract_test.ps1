@@ -129,7 +129,7 @@ $routerRequired = @(
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'external_review_transport_execution=dedicated_agentify_transport_task',
     'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
-    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path',
+    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path',
     'agentify_transport_skill=hmasd-agentify-transport',
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'
 )

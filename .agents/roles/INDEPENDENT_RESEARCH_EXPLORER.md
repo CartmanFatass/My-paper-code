@@ -97,8 +97,7 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct exact candidate reviews without per-review user or WDM
 authorization. It writes one ordered manifest containing only currently frozen
-standalone question paths, expected reviewer models and provider `stable_key`
-values, sends one
+standalone question paths, providers and expected reviewer models, sends one
 `AGENTIFY_REVIEW_BATCH_REQUEST` to the current user-designated Agentify task,
 and continues unrelated research without synchronously waiting. On one
 `AGENTIFY_REVIEW_BATCH_RESULT`, it archives each named successful raw response

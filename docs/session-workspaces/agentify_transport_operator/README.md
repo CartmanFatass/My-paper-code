@@ -10,11 +10,11 @@ own item selection, archival and interpretation and continue unrelated work
 while the batch runs. The task loads `hmasd-agentify-transport`; no science or
 project state is stored here.
 
-Each manifest item names an already-existing pinned `stable_key` and
-`expected_model`. The operator verifies the exact `protectedTab=true` entry;
-`agentify_query` then owns its internal selector and keeps or selects that exact
+Each manifest item names `provider` and `expected_model`. The operator derives
+the unique provider-matching `protectedTab=true` entry at runtime and passes its
+tool-returned key to `agentify_query`; the query then owns its internal selector and keeps or selects that exact
 visible model before typing (`Pro` for ChatGPT Pro). The operator never creates
-a second page, invents a smoke key, or supplies `contextPaths`, attachments,
+a second page or supplies `contextPaths`, attachments,
 bundles or a prefix.
 
 Every batch begins with the Skill-owned `ensure_agentify_runtime.ps1` service/browser receipt,
@@ -31,5 +31,5 @@ still occupied by an active query. The latter receives one no-send
 `agentify_wait_response`; an unresolved runtime defect stays internal to
 Operator/WDM instead of being returned to the requester. Genuine terminal item
 errors still make the batch result `ERROR`. A closed page/tab/controller reruns
-preflight once; the exact query is retried only after the same pinned protected
-key reappears. No new page, monitor, alternate key or additional retry is added.
+preflight once; the exact query is retried only after the same provider's unique
+pinned protected page reappears. No new page, monitor, alternate page or additional retry is added.

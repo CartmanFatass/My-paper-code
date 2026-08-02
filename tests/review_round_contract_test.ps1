@@ -13,7 +13,7 @@ $explorationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skil
 foreach ($entry in @(
     @($router, 'external_review_transport_execution=dedicated_agentify_transport_task'),
     @($router, 'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST'),
-    @($router, 'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path'),
+    @($router, 'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path'),
     @($router, 'agentify_transport_prompt_source=agentify_direct_question_path_read'),
     @($router, 'agentify_transport_queue_semantics=ordered_persistent_conversation_stop_on_noncompletion'),
     @($router, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
@@ -29,7 +29,7 @@ foreach ($entry in @(
     @($operator, 'runtime_setup_failure_route=workflow_design_manager_not_requester'),
     @($operator, 'batch_terminal_status=COMPLETE|ERROR'),
     @($operator, 'request_fields=batch_id|manifest_path|return_task_id'),
-    @($operator, 'manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path'),
+    @($operator, 'manifest_item_fields=request_id|review_channel|provider|expected_model|question_path'),
     @($transportSkill, 'timeoutMs=2700000'),
     @($transportSkill, 'BOOT -> PAGE -> SEND -> WAIT -> ARCHIVE -> COMPLETE'),
     @($transportSkill, '`COMPLETE` and `ERROR` are the only terminal states'),
@@ -40,10 +40,10 @@ foreach ($entry in @(
     @($transportSkill, 'call `agentify_wait_response` once with the same key'),
     @($transportSkill, 'That blocking call sends nothing'),
     @($operator, 'Batch status is `COMPLETE` only when'),
-    @($operator, 'already-pinned protected stable key'),
+    @($operator, "provider's pinned protected page"),
     @($operator, 'otherwise `ERROR`'),
     @($transportSkill, 'Batch `COMPLETE` means every registered item succeeded'),
-    @($transportSkill, '`agentify_status` once for the same key'),
+    @($transportSkill, '`agentify_status` once for the same pinned page key'),
     @($transportSkill, '`promptPath=question_path`'),
     @($transportSkill, 'Omit `prompt`'),
     @($transportSkill, 'shell stdout/stderr, receipts, warnings'),
@@ -53,7 +53,7 @@ foreach ($entry in @(
     @($transportSkill, 'Omit every optional content field'),
     @($transportSkill, '`expectedModel=expected_model`'),
     @($transportSkill, '`protectedTab=true`'),
-    @($transportSkill, 'Never invent a smoke key or create'),
+    @($transportSkill, 'identity is not a requester field'),
     @($transportSkill, "internally uses Agentify's model selector"),
     @($operator, '`protectedTab=true`'),
     @($operator, 'does not implement another selector'),
@@ -127,6 +127,9 @@ foreach ($retired in @(
 }
 
 $active = $router + $cpm + $explorer + $operator + $transportSkill + $researchSkill + $explorationSkill
+if ($active.Contains('stable_key')) {
+    throw 'Retired cross-session Agentify stable_key identity remains active'
+}
 foreach ($retiredTerm in @(
     'external_review_transport=owning_session_direct_agentify_call',
     'direct_agentify_call',

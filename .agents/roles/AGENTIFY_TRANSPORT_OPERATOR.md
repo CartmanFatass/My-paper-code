@@ -11,7 +11,7 @@ runtime_success_claim_evidence=preflight_script_receipt_plus_scoped_agentify_sta
 other_authority=none
 request_contract=AGENTIFY_REVIEW_BATCH_REQUEST
 request_fields=batch_id|manifest_path|return_task_id
-manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path
+manifest_item_fields=request_id|review_channel|provider|expected_model|question_path
 result_contract=AGENTIFY_REVIEW_BATCH_RESULT
 result_fields=batch_id|status|results_path|error
 batch_terminal_status=COMPLETE|ERROR
@@ -21,13 +21,13 @@ transport_skill=hmasd-agentify-transport
 workflow_hash_validation=forbidden
 ```
 
-The operator owns one ordered batch at a time. Each `stable_key` is one
-persistent ordered conversation, not a list of independent RPC calls. It processes manifest items
+The operator owns one ordered batch at a time. Each provider's unique pinned
+protected tab is one persistent ordered conversation, not a list of independent RPC calls. It processes manifest items
 sequentially, with one Agentify send and completion wait per attempted item,
 writes only the raw responses and mechanical batch result in its temporary
 workspace, and returns one batch result. If the current item does not produce a
 natural-completion response, the operator sends no later manifest item. If an
-error leaves the key occupied by an active query, the operator observes that
+error leaves the pinned page occupied by an active query, the operator observes that
 same query without another send. An unresolved runtime defect keeps the batch
 pending and routes to WDM. Batch status is `COMPLETE` only when
 every item completed, otherwise `ERROR`. The requester owns question selection, archival and interpretation and
@@ -45,18 +45,19 @@ the preflight is executed with the shell's explicit elevated permission path.
 The operator follows one mechanical lifecycle: `BOOT -> PAGE -> SEND -> WAIT
 -> ARCHIVE`, ending only in `COMPLETE` or `ERROR`. A closed page, tab or
 controller is recoverable once by rerunning preflight and requiring the same
-already-pinned protected stable key before repeating the exact query. It never
-invents a key or creates a second page. An active query always routes to the no-send wait path. The
+provider's pinned protected page before repeating the exact query. It never
+creates a second page. An active query always routes to the no-send wait path. The
 operator reports the reason and performs this recovery itself; it never stops
 silently or delegates transport repair to the requester.
 
-Before each send the operator verifies one exact matching `protectedTab=true`
-entry from `agentify_tabs`, then passes `expected_model` to the query. Agentify's
+Before each send the operator selects the unique provider-matching
+`protectedTab=true` entry from `agentify_tabs` and passes that tool-returned key
+plus `expected_model` to the query. Agentify's
 query implementation owns the model selector: it keeps the current model when
 it already matches or selects the exact visible target on that pinned idle page
 before typing; a ChatGPT Pro review uses the visible label `Pro`. The operator
 does not implement another selector. Provider names are routing hints, not reviewer-model evidence.
-The query contains only the stable key, provider hint, expected model,
+The query contains only the pinned tab's tool-returned key, provider hint, expected model,
 `promptPath=question_path` and timeout. Agentify reads that one UTF-8 file and
 sends its exact content; the operator never copies shell output into `prompt`.
 Shell receipts, stdout/stderr, local paths, context bundles, attachments,

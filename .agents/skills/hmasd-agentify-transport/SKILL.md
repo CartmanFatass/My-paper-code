@@ -21,14 +21,13 @@ The manifest is JSON with the same `batch_id` and one ordered `items` array.
 Every item has exactly:
 
 ```text
-request_id|review_channel|provider|expected_model|stable_key|question_path
+request_id|review_channel|provider|expected_model|question_path
 ```
 
-`provider` is `chatgpt` or `gemini`. Preserve manifest order. Each `stable_key`
-must name the already-existing pinned Agentify tab for that provider
-(`protectedTab=true` in `agentify_tabs`); it is one persistent ordered
-conversation, not an independent RPC queue. Never invent a smoke key or create
-a second page. Do not
+`provider` is `chatgpt` or `gemini`. Preserve manifest order. Runtime page
+identity is not a requester field. For each provider, the unique existing
+`protectedTab=true` entry from `agentify_tabs` is its persistent ordered
+conversation. Never create a second page. Do not
 read or copy a question through shell output. Pass its literal path to Agentify;
 do not prepend metadata, select science or load
 requester history. A manifest may contain only questions already frozen by the
@@ -50,9 +49,9 @@ a bare Chrome launch. If escalation is denied, report that exact internal
 runtime error to WDM and keep the batch pending.
 
 Require its `AGENTIFY_RUNTIME_READY` receipt, then call `agentify_tabs` once and
-one scoped `agentify_status`. Before a send, require exactly one tab whose key
-equals the item's `stable_key`, whose provider matches, and whose
-`protectedTab=true`. A missing Agentify service, browser process or pinned tab
+one scoped `agentify_status`. Before a send, require exactly one provider-matching
+tab whose `protectedTab=true`; use its tool-returned key directly. A missing
+Agentify service, browser process or unique pinned tab
 is an Operator runtime defect, not an item result.
 Repair the runtime and repeat only this preflight. If it still
 fails, report the exact script/tool error to WDM and keep the batch pending; do not send a batch `ERROR` to the requester.
@@ -82,7 +81,7 @@ fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
    begin, send one `AGENTIFY_REVIEW_BATCH_RESULT` with `status=ERROR`; do not
    attempt any item.
 2. For every item in manifest order, call
-   `agentify_query` once with exactly `key=stable_key`, `model=provider`,
+   `agentify_query` once with exactly `key=<pinned tab tool-returned key>`, `model=provider`,
    `expectedModel=expected_model`, `promptPath=question_path`, and
    `timeoutMs=2700000`. A ChatGPT Pro item uses the exact visible label `Pro`. On the existing
    pinned idle page, `agentify_query` internally uses Agentify's model selector:
@@ -113,11 +112,12 @@ messages supply the inter-batch queue; do not add a registry or scheduler.
 
 ## One simple fallback
 
-After an error, call `agentify_status` once for the same key. If it returns
+After an error, call `agentify_status` once for the same pinned page key. If it returns
 `tab_not_found` or status proves the page/tab/controller was closed, rerun the
-runtime preflight once and require the same pinned key to reappear; never create
-another key or page. If it reappears idle, call `agentify_query` one more time
-with the exact same key, provider, expected model, question and timeout. This is
+runtime preflight once and require the same provider's unique pinned page to
+reappear; never create another page. If it reappears idle, call
+`agentify_query` one more time with its returned key and the exact same provider,
+expected model, question and timeout. This is
 the only retry and it is never delegated back to the requester. A
 `model_switcher_unavailable` error does not authorize a new page: re-check the
 same pinned page once and retry there only. If the same page
@@ -129,8 +129,7 @@ while the query remains active, report the exact runtime defect to WDM and keep
 the affected item pending; do not relabel it as a scientific/reviewer failure or
 return it to the requester. If the one page-recovery query also fails, record the
 real item error and stop the batch.
-Do not navigate,
-switch keys, use `agentify_review_query`, recover an old response, create a
+Do not navigate, switch pages, use `agentify_review_query`, recover an old response, create a
 monitor or invent another recovery path.
 
 Item `COMPLETE` requires the actual query response and file-write results. Batch

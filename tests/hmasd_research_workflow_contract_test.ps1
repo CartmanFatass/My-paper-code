@@ -181,7 +181,7 @@ foreach ($required in @(
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
     'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path',
+    'agentify_transport_manifest_item_fields=request_id|review_channel|provider|expected_model|question_path',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
     'superpowers_execution=disabled',
