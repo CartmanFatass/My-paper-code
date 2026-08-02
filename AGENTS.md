@@ -27,8 +27,6 @@ Every persistent session routes workflow requirements and defects to Workflow De
 ## Universal authority boundary
 
 ```text
-workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217
-code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces
 workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces
 workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces
@@ -65,7 +63,6 @@ code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945
 independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
 independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews
@@ -79,8 +76,9 @@ experiment_operator_per_run_user_authorization=not_required_inside_active_grant
 independent_research_per_review_authorization=not_required_inside_active_explorer_grant
 independent_research_wdm_campaign_approval=none
 one_artifact_one_acceptance_owner=true
-cross_task_routing=locked_role_session_model_thinking
-cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_transport=codex_native_send_message_to_thread
+cross_task_target=current_thread_id_from_user_or_native_task_context
+cross_task_model_and_thinking_overrides=omit
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 ```
 The user permanently authorizes WDM to fetch and push accepted workflow-control-plane paths. Other persistent sessions may fetch and push only their non-workflow operational, scientific, code and workspace content defined in `SESSION_WORKSPACE_CONTRACT.md`; independent-research egress remains limited to its research and workspace boundary.
@@ -164,7 +162,8 @@ authority rules decide whether user input is required.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
-- Persistent-role cross-task routing: `.agents/skills/hmasd-cross-task-routing/SKILL.md`.
+- Cross-task messages use Codex-native `send_message_to_thread` with the current
+  target task ID and no model or thinking override; the repository stores no route table.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Mechanical workflow harness: `.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py`.
 - WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.

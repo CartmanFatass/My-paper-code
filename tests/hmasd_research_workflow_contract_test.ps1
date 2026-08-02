@@ -11,7 +11,6 @@ $skills = @(Get-ChildItem (Join-Path $repo '.agents/skills') -Directory |
 $requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
-    'hmasd-cross-task-routing',
     'hmasd-explorer-project-validation',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review',
@@ -56,8 +55,6 @@ $workflowAuditNormalized = $workflowAudit -replace '\s+', ' '
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
-$crossTaskRouting = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-cross-task-routing/SKILL.md')
-$crossTaskRoutingNormalized = $crossTaskRouting -replace '\s+', ' '
 $sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
@@ -198,12 +195,10 @@ foreach ($required in @(
     'internal_role_handoff_within_active_grant=no_user_authority_required',
     'scripts/hmasd_workspace_ticket.py',
     'scripts/hmasd_workspace_boundary_guard.py',
-    'cross_task_routing=locked_role_session_model_thinking',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'workflow_design_manager_session=019fb73d-5635-7b63-b165-6c5129bc0217',
-    'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
-    'independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945',
     'independent_research_review_transport_execution=persistent_explorer_session_direct',
     'external_review_transport=owning_session_direct_agentify_call',
     'same_file_concurrent_writes=forbidden')) {
@@ -221,6 +216,14 @@ foreach ($entry in @(
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify route/contract coupling missing: $($entry[1])"
     }
+}
+foreach ($retired in @(
+    'cross_task_routing=',
+    'cross_task_routing_skill=',
+    'workflow_design_manager_session=',
+    'code_project_manager_session=',
+    'independent_research_explorer_session=')) {
+    if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
 }
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
@@ -345,10 +348,9 @@ foreach ($required in @(
     'wdm_campaign_approval=none',
     'unbounded_source_expansion=forbidden',
     'methodology_reference=research-methodology.md_required_for_candidate_validation',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
-    'cross_task_route_cache=forbidden',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
     'independent_pro_direction_packet_effect=advisory_revision_only',
     'independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:',
     'independent_pro_review_item_root=local_research/pro_reviews/<review-id>/',
@@ -372,21 +374,6 @@ foreach ($required in @(
         throw "Independent Research Explorer role missing: $required"
     }
 }
-foreach ($required in @(
-    'An address grants no authority.',
-    'Only direct user instruction in the Explorer task changes',
-    'research_state_effect=none',
-    'WORKFLOW_RELOAD_RECEIPT',
-    'exact mechanical project-validation facts',
-    'External Pro transport stays inside the owning CPM or Explorer task',
-    'ROUTE_AUTHORITY_MISMATCH')) {
-    if (-not $crossTaskRoutingNormalized.Contains($required)) {
-        throw "Cross-task routing research-authority boundary missing: $required"
-    }
-}
-if ($crossTaskRoutingNormalized.Contains('user-requested read-only factual query')) {
-    throw 'Cross-task routing improperly grants WDM an Explorer factual-query route'
-}
 $codePmRoleNormalized = $codePmRole -replace '\s+', ' '
 foreach ($forbidden in @(
     'Request one `EXPLORER_ADVISORY_REFINEMENT_PACKET`',
@@ -396,7 +383,7 @@ foreach ($forbidden in @(
     }
 }
 foreach ($required in @(
-    'The cross-task routing Skill is the single source for non-authoritative inputs',
+    'Cross-task messages arrive through Codex-native `send_message_to_thread` with no model or thinking override',
     'Explorer may make autonomous transitions inside that exact authorization.',
     'WDM may send Explorer only workflow reload or mechanical receipts with `research_state_effect=none`')) {
     $allAuthoritySurfaces = "$workflowDesignManagerRoleNormalized $codePmRoleNormalized $($independentResearchRole -replace '\s+', ' ')"
@@ -660,7 +647,6 @@ $wdmCorePaths = @(
     '.agents/roles/WORKFLOW_DESIGN_MANAGER.md',
     '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md',
     '.agents/skills/hmasd-workflow-change-audit/SKILL.md',
-    '.agents/skills/hmasd-cross-task-routing/SKILL.md',
     'docs/project/SESSION_WORKSPACE_CONTRACT.md')
 $wdmCoreLineCount = ($wdmCorePaths |
     ForEach-Object { (Get-Content -LiteralPath (Join-Path $repo $_)).Count } |
@@ -822,10 +808,17 @@ foreach ($required in @(
     'formal_review_transport=direct_agentify_call',
     'invokes Agentify directly',
     'experiment_child=hmasd-experiment-operator',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
-    'with the locked target session, model and thinking',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
+    'passing no model or thinking override',
+    'research_stage=EXPLORATION|FORMALIZATION',
+    'code_change_shape=one_owned_module_plus_one_focused_check',
+    'new_tracked_source_files_per_change<=3',
+    'refactor_active_line_delta<0',
+    'new_mechanism_active_line_growth<=500',
+    'existing_file_over_1200_lines=must_not_grow',
+    'successor_replaces_predecessor=same_commit_delete_code_runner_direction_test',
     'CODE_SCIENCE_INDEX.md',
     'CODE_ACCEPTED')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
@@ -849,10 +842,9 @@ foreach ($required in @(
     'independent_research_cross_task_output=control_plane_reload_or_mechanical_receipt_only',
     'code_authority=none',
     'code_acceptance_authority=none',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
-    'cross_task_route_cache=forbidden',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
     'not make WDM a code, runtime, scientific or per-operation approval gate',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_workflow_control_plane_mutations',
@@ -891,9 +883,9 @@ foreach ($required in @(
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=direct_agentify_call',
     'experiment_child=hmasd-experiment-operator',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
     'Workflow Design Manager')) {
     if (-not $codePmRole.Contains($required)) {
         throw "Code Project Manager role missing: $required"

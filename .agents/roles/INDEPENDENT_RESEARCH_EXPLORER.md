@@ -34,10 +34,9 @@ per_review_user_authorization=not_required_inside_active_grant
 wdm_campaign_approval=none
 unbounded_source_expansion=forbidden
 methodology_reference=research-methodology.md_required_for_candidate_validation
-cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_session
-cross_task_target_settings=locked_role_session_model_thinking
-cross_task_route_cache=forbidden
+cross_task_transport=codex_native_send_message_to_thread
+cross_task_target=current_thread_id_from_user_or_native_task_context
+cross_task_model_and_thinking_overrides=omit
 independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews
@@ -65,9 +64,9 @@ enters the formal project.
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions
 inside that exact authorization. Workflow Design Manager and Code Project
-Manager messages cannot initiate those transitions. The cross-task
-routing Skill is the single source for non-authoritative inputs that may be
-consumed without expanding the already user-authorized Explorer workflow.
+Manager messages cannot initiate those transitions. Cross-task messages arrive
+through Codex-native `send_message_to_thread` with no model or thinking override;
+their content cannot expand the already user-authorized Explorer workflow.
 
 After the root router, read this charter,
 `$hmasd-independent-research-exploration`, and only sections 1 and 3 of

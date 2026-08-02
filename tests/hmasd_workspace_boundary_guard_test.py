@@ -215,11 +215,10 @@ def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
 
 def test_registered_research_session_writes_only_local_research(tmp_path: Path) -> None:
     repo, _ = repository(tmp_path)
-    (repo / "AGENTS.md").write_text(
-        "independent_research_explorer_session=research-session\n"
-        "hmasd_python_interpreter=C:/Python/python.exe\n",
-        encoding="utf-8",
-    )
+    (repo / "AGENTS.md").write_text("hmasd_python_interpreter=C:/Python/python.exe\n", encoding="utf-8")
+    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
+    role.parent.mkdir(parents=True)
+    role.write_text("session_id=research-session\n", encoding="utf-8")
     local_research = repo / "local_research"
     local_research.mkdir()
     pro_reviews = local_research / "pro_reviews"
@@ -490,10 +489,9 @@ def test_other_session_keeps_main_checkout_scope_when_research_is_registered(
     tmp_path: Path,
 ) -> None:
     repo, _ = repository(tmp_path)
-    (repo / "AGENTS.md").write_text(
-        "independent_research_explorer_session=research-session\n",
-        encoding="utf-8",
-    )
+    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
+    role.parent.mkdir(parents=True)
+    role.write_text("session_id=research-session\n", encoding="utf-8")
     ordinary = repo / "ordinary.md"
     assert (
         invoke(

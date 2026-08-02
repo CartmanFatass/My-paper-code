@@ -539,6 +539,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "current_work_read=forbidden",
         "local_research_write_tool=apply_patch_only",
         "local_research_shell_mutation=forbidden",
+        "cross_task_transport=codex_native_send_message_to_thread",
+        "cross_task_target=current_thread_id_from_user_or_native_task_context",
+        "cross_task_model_and_thinking_overrides=omit",
         "independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:",
         "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
         "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
@@ -568,7 +571,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
 
     for required in (
         "Workflow design is not an Explorer mode.",
-        "Report one exact requirement or defect to Workflow Design Manager",
+        "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
         "persistent Explorer session directly sends each exact External Pro direction question",
         "calls Agentify directly",

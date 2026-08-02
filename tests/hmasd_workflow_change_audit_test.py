@@ -61,14 +61,18 @@ def _write_control_plane_budget_files(root: Path, first_file_lines: int) -> None
 
 def test_control_plane_line_budget_accepts_exact_limit(tmp_path: Path) -> None:
     repo = _fixture_repo(tmp_path)
-    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 5)
+    _write_control_plane_budget_files(
+        repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - len(CHECKER.CONTROL_PLANE_BUDGET_PATHS) + 1
+    )
     errors = CHECKER.audit_repo(repo)
     assert not any("control-plane line budget exceeded" in error for error in errors), errors
 
 
 def test_control_plane_line_budget_rejects_one_line_over(tmp_path: Path) -> None:
     repo = _fixture_repo(tmp_path)
-    _write_control_plane_budget_files(repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - 4)
+    _write_control_plane_budget_files(
+        repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - len(CHECKER.CONTROL_PLANE_BUDGET_PATHS) + 2
+    )
     errors = CHECKER.audit_repo(repo)
     assert any("control-plane line budget exceeded: 1001>1000" in error for error in errors), errors
 

@@ -102,12 +102,14 @@ def _receipt_path(repo: Path, commit: str) -> Path:
 
 def _code_pm_session(repo: Path) -> str:
     try:
-        agents = (repo / "AGENTS.md").read_text(encoding="utf-8")
+        role = (repo / ".agents/roles/CODE_PROJECT_MANAGER.md").read_text(
+            encoding="utf-8"
+        )
     except OSError as exc:
-        raise ReadinessError(f"cannot read role router: {exc}") from exc
-    matches = re.findall(r"(?m)^code_project_manager_session=([^\s]+)$", agents)
+        raise ReadinessError(f"cannot read Code PM role: {exc}") from exc
+    matches = re.findall(r"(?m)^session_owner_id=([^\s]+)$", role)
     if len(matches) != 1:
-        raise ReadinessError("role router must contain exactly one Code PM session")
+        raise ReadinessError("Code PM role must contain exactly one session owner")
     return matches[0]
 
 

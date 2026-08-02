@@ -41,7 +41,8 @@ changes.
 Write advisory files only with `apply_patch` under `local_research`.
 
 Workflow design is not an Explorer mode. Report one exact requirement or defect
-to Workflow Design Manager through `$hmasd-cross-task-routing`; never load the
+to the current Workflow Design Manager task through Codex-native
+`send_message_to_thread`, omitting model and thinking overrides; never load the
 collaborative/audit Workflow Skills, edit or accept control-plane files, or
 dispatch a workflow implementer. Continue unrelated research when the defect is
 dependency-local. A WDM reload receipt has `research_state_effect=none` and

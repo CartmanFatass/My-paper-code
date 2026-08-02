@@ -1,7 +1,0 @@
-interface:
-  display_name: "HMASD Cross-Task Routing"
-  short_description: "Route with locked role session and model settings"
-  default_prompt: "Use $hmasd-cross-task-routing to send one HMASD cross-task message with the target's locked session, model, and thinking."
-
-policy:
-  allow_implicit_invocation: false

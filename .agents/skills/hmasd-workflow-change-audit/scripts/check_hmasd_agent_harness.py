@@ -34,7 +34,6 @@ CONTROL_PLANE_BUDGET_PATHS = (
     ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
     ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
     ".agents/skills/hmasd-workflow-change-audit/SKILL.md",
-    ".agents/skills/hmasd-cross-task-routing/SKILL.md",
     "docs/project/SESSION_WORKSPACE_CONTRACT.md",
 )
 

@@ -1,26 +1,13 @@
-# Temporary cross-task handoffs
+# Temporary session work
 
-`temp/sessions/<role>/handoffs/` holds sender-owned, short-lived payloads shared
-between HMASD Codex tasks in this checkout. Use it when a UTF-8 payload exceeds
-8 KiB or exact bytes must survive task-message rendering and summarization.
+`temp/sessions/<role>/` holds owner-local, short-lived working files. It is not a
+cross-task routing protocol or identity layer.
 
-Create and verify payloads with:
+Cross-task messages use Codex-native `send_message_to_thread` with the current
+target task ID and no model or thinking override. When a long payload genuinely
+needs a file, the sender may place a plain UTF-8 file in its own session folder
+and send only that relative path. Workflow admission never depends on byte
+counts, SHA-256, or a repository route table.
 
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
-  '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' write `
-  --owner-role <source-role> `
-  --label <purpose> --source <source-file>
-
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
-  '.agents/skills/hmasd-cross-task-routing/scripts/hmasd_cross_task_payload.py' verify `
-  --owner-role <locked-source-role> `
-  --path <temp/sessions/<role>/handoffs/path> --bytes <count> --sha256 <digest>
-```
-
-Actual payloads are ignored by Git. A cross-task message carries only the
-relative path, owner role, byte count, SHA-256, UTF-8 encoding and purpose. The
-receiver verifies using the locked source role before reading and acknowledges
-the same path and digest after use. Payloads are never deleted automatically;
-only the source owner may perform a separate cleanup action after
-acknowledgement.
+Actual temporary payloads are ignored by Git and are never deleted
+automatically. Only the owning session removes its temporary files.

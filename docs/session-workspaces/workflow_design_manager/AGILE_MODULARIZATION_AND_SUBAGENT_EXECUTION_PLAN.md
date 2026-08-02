@@ -36,6 +36,8 @@ passive_external_generation_wait=excluded_and_never_interrupted
 
 不组成固定流水线，不因文件数、时长或理论风险自动升级。并行度等于可分离文件族数量，同一文件不得并发写，主任务负责集成和接受。
 
+CPM 以稳定语义模块而非 `Gxx` 副本作为接受单位。重构必须净删减；新机制最多增加 500 活跃行和 3 个 source 文件；已超过 1200 行的文件不得继续增长。successor 在同一提交删除 predecessor 代码、runner 和方向局部测试，Git 保存迭代历史。
+
 ## Reviewer 比例性
 
 finding 必须同时具备正常路径复现或明确保护语义影响、对当前项目的实质影响、以及成本低于风险的最小修复。理论攻击、敌对输入、一次性工具故障和安全可重试失败只记 residual risk。Reviewer 只审一次，不审查审查本身；投入更多推理预算不等于项目价值。
@@ -45,6 +47,8 @@ finding 必须同时具备正常路径复现或明确保护语义影响、对当
 CPM 与 Explorer 各自在自己的会话直接调用 Agentify：复用稳定页面、一次插入完整科学问题、发送、等待自然完成、归档原文。不设置传输子代理、monitor、heartbeat、hash admission、跨会话中转或模型编写的恢复状态机。
 
 WDM 对用户发起的设计变更先给精简计划，确认后连续实施、聚焦验证、提交和推送。其他会话的缺陷按时间写入 incident log；日志不是调度器、审批队列或全局 blocker。每项新机制必须写明删除什么，并满足 `lines<=100`、`terminal_states<=3`、默认净行数不增长。修改权限自动包含相同路径的 Git 权限。
+
+跨 Session 通信直接使用 Codex `send_message_to_thread`，只传当前目标 task ID 和 prompt，不传 model/thinking，不维护仓库路由表。
 
 ## 迁移与完成
 

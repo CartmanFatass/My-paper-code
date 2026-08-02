@@ -41,6 +41,16 @@ mechanical_operation_state_owner=originating_tool_or_script
 model_authored_operation_state_machine=forbidden
 cpm_decision_surface=semantic_next_action_only
 local_failure_default=continue_next_legal_action
+research_stage=EXPLORATION|FORMALIZATION
+default_research_stage=EXPLORATION
+code_change_shape=one_owned_module_plus_one_focused_check
+new_tracked_source_files_per_change<=3
+refactor_active_line_delta<0
+new_mechanism_active_line_growth<=500
+existing_file_over_1200_lines=must_not_grow
+successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
+shared_abstraction_minimum_live_callers=2
+versioned_scientific_filenames=forbidden_git_is_history
 ```
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
@@ -65,7 +75,9 @@ A user-named one may be inspected only as reference.
    regression. For throwaway measurement/configuration, use a diagnostic.
 4. **Implement.** No backward compatibility. Make the smallest active-line
    discriminator; remove replaced interfaces, adapters, migrations, fallbacks,
-   state, and tests. Git history is the archive.
+   state, and tests. Git history is the archive. Use one stable semantic module,
+   not a new generation-number copy. A successor deletes predecessor code,
+   runner and direction-local test in the same change.
 5. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
    For result-bearing runner/analyzer integration, execution-entry, artifact,
    serialization or phase-connection changes, and code defects exposed by
@@ -81,6 +93,21 @@ A user-named one may be inspected only as reference.
    Operations Operator before
    a formal run. The audit may identify a concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
+
+## Active module boundary
+
+The default active architecture is `source -> controller -> episode -> metrics
+-> analysis`. Optional formalization consumes frozen core outputs and never
+feeds back into the core. Runners contain configuration and wiring only. A
+module has one state owner or responsibility; do not mix environment dynamics,
+policy decisions, metrics and artifact I/O. Extract shared code only after two
+live callers require it.
+
+Refactors must reduce active lines. A new scientific mechanism may add at most
+500 active lines and three tracked source files. A file already above 1200 lines
+must stay flat or shrink. These limits prevent another full `Gxx` copy; they do
+not require artificial file splitting when one responsibility is genuinely
+inseparable.
 
 ## Proof-sized test selection
 

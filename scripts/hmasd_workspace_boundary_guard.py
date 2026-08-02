@@ -130,18 +130,16 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
 
 
 def _registered_research_sessions(repo: Path) -> dict[str, str]:
-    router = repo / "AGENTS.md"
-    if not router.is_file():
+    role_path = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
+    if not role_path.is_file():
         return {}
-    text = router.read_text(encoding="utf-8")
-    fields = {
-        "explorer": "independent_research_explorer_session",
-    }
+    text = role_path.read_text(encoding="utf-8")
+    fields = {"explorer": "session_id"}
     sessions: dict[str, str] = {}
     for role, field in fields.items():
         matches = re.findall(rf"(?m)^{field}=([^\s]+)\s*$", text)
         if len(matches) > 1:
-            raise GuardError(f"router has multiple {role} sessions")
+            raise GuardError(f"role charter has multiple {role} sessions")
         if matches:
             sessions[role] = matches[0]
     if len(set(sessions.values())) != len(sessions):

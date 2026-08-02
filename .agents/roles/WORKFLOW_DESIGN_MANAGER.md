@@ -45,10 +45,9 @@ workflow_router_consistency_check=required_for_every_workflow_change
 workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
 workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
 workflow_children=hmasd-workflow-auditor|hmasd-workflow-implementer|hmasd-workflow-reviewer
-cross_task_routing_skill=hmasd-cross-task-routing
-cross_task_target_identity=fixed_router_role_session
-cross_task_target_settings=locked_role_session_model_thinking
-cross_task_route_cache=forbidden
+cross_task_transport=codex_native_send_message_to_thread
+cross_task_target=current_thread_id_from_user_or_native_task_context
+cross_task_model_and_thinking_overrides=omit
 ```
 
 WDM is the sole owner of router, role-charter, Skill, profile, hook, registry,
@@ -173,8 +172,9 @@ acceptance failure.
 
 ## Cross-task boundary
 
-Return accepted workflow commits and reload receipts through
-`$hmasd-cross-task-routing` to the exact locked requester. WDM may send Explorer
+Return accepted workflow commits and reload receipts with Codex-native
+`send_message_to_thread`, using the current requester task ID and omitting model
+and thinking overrides. WDM may send Explorer
 only workflow reload or mechanical receipts with `research_state_effect=none`;
 it never selects, orders, pauses, resumes or interprets research. WDM may encode
 an External Pro methodology packet only when exact user-confirmed text arrives

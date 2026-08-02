@@ -111,8 +111,9 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or
 }
 
 $routerRequired = @(
-    'cross_task_routing=locked_role_session_model_thinking',
-    'code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
@@ -127,6 +128,9 @@ $routerRequired = @(
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
+}
+foreach ($retired in @('cross_task_routing=', 'cross_task_routing_skill=', 'code_project_manager_session=')) {
+    if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
 }
 
 $codeRequired = @(
@@ -164,11 +168,22 @@ $codeRequired = @(
     'only zero-compute `finalize` receives narrow elevation',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
-    'cross_task_routing_skill=hmasd-cross-task-routing',
-    'cross_task_target_identity=fixed_router_role_session',
-    'cross_task_target_settings=locked_role_session_model_thinking',
-    'cross_task_route_cache=forbidden',
-    'locked target session, model and thinking',
+    'cross_task_transport=codex_native_send_message_to_thread',
+    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_model_and_thinking_overrides=omit',
+    'passing no model or thinking override',
+    'research_stage=EXPLORATION|FORMALIZATION',
+    'code_change_shape=one_owned_module_plus_one_focused_check',
+    'new_tracked_source_files_per_change<=3',
+    'refactor_active_line_delta<0',
+    'new_mechanism_active_line_growth<=500',
+    'existing_file_over_1200_lines=must_not_grow',
+    'successor_replaces_predecessor=same_commit_delete_code_runner_direction_test',
+    'shared_abstraction_minimum_live_callers=2',
+    'active_line_delta=<added-minus-deleted>',
+    'superseded_paths_deleted=<paths-or-none-with-reason>',
+    'direction_local_artifacts_deleted=<paths-or-not_applicable>',
+    'module_boundary=<single-owner-module>',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',
@@ -524,8 +539,8 @@ if (-not (Test-Path -LiteralPath $readinessScriptPath -PathType Leaf)) {
 }
 $readinessScript = Get-Content -Raw -LiteralPath $readinessScriptPath
 if ($readinessScript.Contains('019f9e4f-f4d0-7fe0-b214-c47fd034e84d') -or
-    -not $readinessScript.Contains('code_project_manager_session=')) {
-    throw 'Execution-readiness hook duplicates the fixed Code PM session instead of reading the router'
+    -not $readinessScript.Contains('session_owner_id=')) {
+    throw 'Execution-readiness hook duplicates the fixed Code PM session instead of reading the role charter'
 }
 if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) {
     throw 'Code acceptance hook configuration is missing'
@@ -570,8 +585,10 @@ try {
     & git.exe -C $tempRoot config user.email 'workflow-contract@example.invalid'
     & git.exe -C $tempRoot config user.name 'Workflow Contract'
     [IO.File]::WriteAllText((Join-Path $tempRoot 'accepted.py'), "VALUE = 1`n")
-    [IO.File]::WriteAllText((Join-Path $tempRoot 'AGENTS.md'), "code_project_manager_session=019f9e4f-f4d0-7fe0-b214-c47fd034e84d`n")
-    & git.exe -C $tempRoot add accepted.py AGENTS.md
+    $fixtureRole = Join-Path $tempRoot '.agents/roles/CODE_PROJECT_MANAGER.md'
+    New-Item -ItemType Directory -Path (Split-Path -Parent $fixtureRole) -Force | Out-Null
+    [IO.File]::WriteAllText($fixtureRole, "session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d`n")
+    & git.exe -C $tempRoot add accepted.py .agents/roles/CODE_PROJECT_MANAGER.md
     & git.exe -C $tempRoot commit --quiet -m 'fixture'
     $fixtureCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
     $executionSupportPaths = @(

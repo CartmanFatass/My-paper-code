@@ -35,10 +35,19 @@ evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
 search_complexity_ceiling=O(H*K_search)
 candidate_trajectory_count_ceiling=16
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
-cross_task_target_identity=fixed_router_role_session
-cross_task_target_settings=locked_role_session_model_thinking
-cross_task_route_cache=forbidden
-cross_task_routing_skill=hmasd-cross-task-routing
+cross_task_transport=codex_native_send_message_to_thread
+cross_task_target=current_thread_id_from_user_or_native_task_context
+cross_task_model_and_thinking_overrides=omit
+research_stage=EXPLORATION|FORMALIZATION
+default_research_stage=EXPLORATION
+code_change_shape=one_owned_module_plus_one_focused_check
+new_tracked_source_files_per_change<=3
+refactor_active_line_delta<0
+new_mechanism_active_line_growth<=500
+existing_file_over_1200_lines=must_not_grow
+successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
+shared_abstraction_minimum_live_callers=2
+versioned_scientific_filenames=forbidden_git_is_history
 execution_readiness_owner=code_project_manager
 execution_readiness_executor=hmasd-verifier_when_triggered
 execution_readiness_skill=hmasd-agile-research-development
@@ -118,6 +127,16 @@ manager; there is no Research Operations Manager or persistent monitor.
   are not technical-acceptance targets, CPM performance scores or scientific
   proof.
 
+- Stable semantic modules replace generation-number copies. Active code separates
+  source, controller, episode, metrics and analysis; optional formalization reads
+  frozen core outputs in one direction. A runner performs configuration and
+  wiring only. No module mixes environment dynamics, policy decisions, metrics
+  and artifact I/O. Git, not a new `Gxx` filename, preserves iteration history.
+- A refactor is accepted only with a negative active-line delta. A new mechanism
+  may add at most 500 active lines and three tracked source files, and deletes its
+  superseded implementation in the same commit. A file already above 1200 lines
+  does not grow. Extract a shared abstraction only for two live callers.
+
 - Direct Git integration for each exact accepted code, runtime, review,
   evidence, report, ledger or state path set.
 
@@ -156,6 +175,10 @@ execution_readiness=<passed|not_triggered>
 execution_readiness_receipt=<git-private-receipt-path-or-not-triggered>
 execution_readiness_reason=<trigger-or-bounded-not-triggered-reason>
 code_science_index=<path-or-not-triggered>
+active_line_delta=<added-minus-deleted>
+superseded_paths_deleted=<paths-or-none-with-reason>
+direction_local_artifacts_deleted=<paths-or-not_applicable>
+module_boundary=<single-owner-module>
 blockers=none
 ```
 
@@ -204,8 +227,9 @@ maintaining a parallel state machine. One parked workstream never pauses another
 ## Workflow changes and Git
 
 For any workflow requirement or defect, Code Project Manager sends one exact
-request to the fixed Workflow Design Manager session with the locked target
-session, model and thinking. CPM does not edit, accept, stage, commit or push a
+request to the current Workflow Design Manager task with Codex-native
+`send_message_to_thread`, passing no model or thinking override. CPM does not
+edit, accept, stage, commit or push a
 role charter, Skill, profile, hook, registry, stable workflow contract or
 workflow contract test. WDM is not a runtime or per-operation approval gate;
 CPM continues code, runtime and operational recovery while an unrelated
