@@ -52,6 +52,21 @@ Residual `tabId`, `activeQuery` or
 `waiting_for_ready` data never proves that Chrome is running. Never claim
 runtime readiness without both actual tool results.
 
+## Mechanical lifecycle
+
+Use only this lifecycle; do not improvise another procedure:
+
+```text
+BOOT -> PAGE -> SEND -> WAIT -> ARCHIVE -> COMPLETE
+              \-> page/tab/controller closed -> reopen the same key -> retry once
+SEND or WAIT error with activeQuery -> WAIT the same query without another send
+recovery exhausted -> ERROR
+```
+
+`COMPLETE` and `ERROR` are the only terminal states. A closed page is a
+recoverable event, not a terminal state. This lifecycle replaces scattered
+fallback decisions and adds no ledger, monitor, hash, registry or approval gate.
+
 ## Normal path
 
 1. Complete the runtime preflight, then read and validate the manifest. If the
@@ -69,11 +84,10 @@ runtime readiness without both actual tool results.
    whole-payload insertion, one send and the natural-completion wait.
 3. On success, write the actual returned assistant text to
    `temp/sessions/agentify_transport_operator/<batch_id>/<request_id>/response.md`
-   and record item `status=COMPLETE`. On error, record item `status=ERROR` and
-   perform the single read-only key check below. If the key is idle, continue
-   normally. If the key still has an active query, make no later send on that
-   key and record its remaining items as `ERROR`; items on other keys may
-   continue.
+   and record item `status=COMPLETE`. On error, perform the single read-only
+   key check and the matching fallback below before assigning a terminal item
+   status. Record `ERROR` only after the one applicable recovery is exhausted;
+   items on other keys may continue.
 4. After every item is terminal, write the ordered item results to
    `temp/sessions/agentify_transport_operator/<batch_id>/results.json` and send
    one `AGENTIFY_REVIEW_BATCH_RESULT` to `return_task_id` with
@@ -86,15 +100,19 @@ messages supply the inter-batch queue; do not add a registry or scheduler.
 
 ## One simple fallback
 
-Never call `agentify_query` twice for one item. After an error, call
-`agentify_status` once for the same key. If the same page still has an active
-query, call `agentify_wait_response` once with the same key, provider and timeout.
+After an error, call `agentify_status` once for the same key. If it returns
+`tab_not_found` or proves the page/tab/controller was closed, call
+`agentify_query` one more time with the exact same key, provider, expected
+model, question and timeout. Agentify reopens the same-key page; this is the only retry,
+and it is never delegated back to the requester. If the same page
+still has an active query, call `agentify_wait_response` once with the same key,
+provider and timeout and never resend.
 That blocking call sends nothing and returns only after natural completion. Write
 and return its response exactly like the normal path. If the wait also errors
 while the query remains active, report the exact runtime defect to WDM and keep
 the affected item pending; do not relabel it as a scientific/reviewer failure or
-return it to the requester. An idle key keeps the ordinary continue-on-error
-behavior.
+return it to the requester. If the one page-recovery query also fails, record the
+real item error and continue normally.
 Do not navigate,
 switch keys, use `agentify_review_query`, recover an old response, create a
 monitor or invent another recovery path.

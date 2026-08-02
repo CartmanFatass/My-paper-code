@@ -27,4 +27,6 @@ One post-error `agentify_status` check distinguishes an idle key from a key
 still occupied by an active query. The latter receives one no-send
 `agentify_wait_response`; an unresolved runtime defect stays internal to
 Operator/WDM instead of being returned to the requester. Genuine terminal item
-errors still make the batch result `ERROR`; no retry or monitor is added.
+errors still make the batch result `ERROR`. A closed page/tab/controller is
+reopened once on the same stable key and the exact query is retried once; no
+monitor, alternate key or additional retry is added.
