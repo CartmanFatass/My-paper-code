@@ -15,6 +15,10 @@ from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_reactive_reduction_g35 as g35
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
 from ha_ctse_process import runtime_capacity_continuous_roster_g32 as g32
+from ha_ctse_process.continuous_roster_seed import (
+    bootstrap_seed_from_base,
+    seed_block_from_bases,
+)
 
 
 ALGORITHM_ID = "CONTINUOUS_ROSTER_NATIVE_SIX_COORDINATE_TRAINING_G39"
@@ -66,12 +70,20 @@ BOOTSTRAP_SEED = 10_398_039
 def seed_block(replicate: int, *, formal: bool) -> dict[str, int]:
     if not 0 <= int(replicate) < 3:
         raise ValueError("G39 replicate outside registered support")
-    offset = int(replicate) + (0 if formal else NONFORMAL_SEED_OFFSET)
-    return {name: base + offset for name, base in SEED_BASES.items()}
+    return seed_block_from_bases(
+        SEED_BASES,
+        int(replicate),
+        formal=formal,
+        nonformal_offset=NONFORMAL_SEED_OFFSET,
+    )
 
 
 def bootstrap_seed(*, formal: bool) -> int:
-    return BOOTSTRAP_SEED + (0 if formal else NONFORMAL_SEED_OFFSET)
+    return bootstrap_seed_from_base(
+        BOOTSTRAP_SEED,
+        formal=formal,
+        nonformal_offset=NONFORMAL_SEED_OFFSET,
+    )
 
 
 class G39NativeSixPolicy(g38.G38FoldableMatchedCSPolicy):
