@@ -17,13 +17,18 @@ import re
 import shutil
 import subprocess
 import sys
-import tempfile
 from types import ModuleType
 from typing import Final, Sequence
 
 import numpy as np
 
 from envs.continuous_roster import runtime_capacity as roster_env
+from envs.native.cpp_extension_cache import (
+    CppExtensionLoadFailed,
+    CppExtensionUnavailable,
+    load_source_keyed_extension,
+    resolve_build_root,
+)
 
 
 _SOURCE: Final[Path] = (
@@ -32,9 +37,6 @@ _SOURCE: Final[Path] = (
     / "continuous_roster_toy_backend.cpp"
 )
 _BUILD_INTERFACE_VERSION: Final[str] = "continuous_roster_toy_v1"
-_LOADED_MODULES: dict[tuple[str, str], ModuleType] = {}
-
-
 class ContinuousRosterToyCppUnavailable(RuntimeError):
     """Raised when the registered CPU native toolchain cannot load the slice."""
 
@@ -151,13 +153,6 @@ def _build_identity() -> str:
     return hashlib.sha256(material.encode("utf-8")).hexdigest()[:20]
 
 
-def _default_build_root() -> Path:
-    configured = os.environ.get("HMASD_TOY_CPP_BUILD_ROOT")
-    if configured:
-        return Path(configured).expanduser().resolve()
-    return Path(tempfile.gettempdir()).resolve() / "hmasd_toy_cpp_extensions"
-
-
 def load_continuous_roster_toy_cpp_backend(
     *, build_root: str | os.PathLike[str] | None = None, verbose: bool = False
 ) -> ModuleType:
@@ -166,45 +161,31 @@ def load_continuous_roster_toy_cpp_backend(
     if not _SOURCE.is_file():
         raise ContinuousRosterToyCppUnavailable(f"native source is missing: {_SOURCE}")
     identity = _build_identity()
-    root = (
-        Path(build_root).expanduser().resolve()
-        if build_root is not None
-        else _default_build_root()
+    root = resolve_build_root(
+        build_root,
+        environment_variable="HMASD_TOY_CPP_BUILD_ROOT",
+        default_name="hmasd_toy_cpp_extensions",
     )
-    cache_key = identity, str(root)
-    cached = _LOADED_MODULES.get(cache_key)
-    if cached is not None:
-        return cached
     try:
-        from torch.utils.cpp_extension import load
-    except (ImportError, OSError) as error:  # pragma: no cover - deployment path
+        return load_source_keyed_extension(
+            cache_namespace="continuous_roster_toy",
+            identity=identity,
+            root=root,
+            build_directory_name=f"build_{identity}",
+            source=_SOURCE,
+            staged_source_name="continuous_roster_toy_backend.cpp",
+            module_name=f"hmasd_continuous_roster_toy_{identity}",
+            compiler_flags=_compiler_flags(),
+            verbose=verbose,
+        )
+    except CppExtensionUnavailable as error:  # pragma: no cover - deployment path
         raise ContinuousRosterToyCppUnavailable(
             "torch.utils.cpp_extension is unavailable"
         ) from error
-
-    build_directory = root / f"build_{identity}"
-    build_directory.mkdir(parents=True, exist_ok=True)
-    staged_source = build_directory / "continuous_roster_toy_backend.cpp"
-    source_bytes = _SOURCE.read_bytes()
-    if not staged_source.exists() or staged_source.read_bytes() != source_bytes:
-        staged_source.write_bytes(source_bytes)
-    module_name = f"hmasd_continuous_roster_toy_{identity}"
-    try:
-        module = load(
-            name=module_name,
-            sources=[str(staged_source)],
-            extra_cflags=list(_compiler_flags()),
-            build_directory=str(build_directory),
-            with_cuda=False,
-            is_python_module=True,
-            verbose=verbose,
-        )
-    except Exception as error:  # cpp_extension exposes toolchain-specific errors
+    except CppExtensionLoadFailed as error:
         raise ContinuousRosterToyCppUnavailable(
             "failed to build/load the continuous-roster toy C++ backend"
         ) from error
-    _LOADED_MODULES[cache_key] = module
-    return module
 
 
 def _require_array(

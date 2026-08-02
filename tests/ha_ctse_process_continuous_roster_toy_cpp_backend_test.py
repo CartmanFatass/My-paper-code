@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
@@ -9,7 +10,7 @@ from ha_ctse_process import continuous_roster_random_process_g34 as g34
 from ha_ctse_process import continuous_roster_six_coordinate_cs_g38 as g38
 from envs.continuous_roster import cpp_backend as cpp
 from envs.continuous_roster import runtime_capacity as roster_env
-from scripts import benchmark_continuous_roster_toy_cpp_backend as benchmark
+from tools.benchmarks import benchmark_continuous_roster_toy_cpp_backend as benchmark
 
 
 @pytest.mark.parametrize("capacity", g34.CAPACITIES)
@@ -146,6 +147,14 @@ def test_native_loader_reuses_the_source_keyed_cpu_module() -> None:
     second = cpp.load_continuous_roster_toy_cpp_backend()
     assert first is second
     assert first.__name__.startswith("hmasd_continuous_roster_toy_")
+
+
+def test_native_loader_stages_the_exact_continuous_roster_source() -> None:
+    module = cpp.load_continuous_roster_toy_cpp_backend()
+    staged_source = (
+        Path(module.__file__).resolve().parent / "continuous_roster_toy_backend.cpp"
+    )
+    assert staged_source.read_bytes() == cpp._SOURCE.read_bytes()
 
 
 def test_benchmark_schema_is_bounded_and_oracle_gated() -> None:

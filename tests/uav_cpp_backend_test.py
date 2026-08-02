@@ -8,6 +8,7 @@ import sys
 import numpy as np
 import pytest
 
+import envs.native.cpp_extension_cache as extension_cache
 import envs.pettingzoo.uav_cpp_backend as backend
 from envs.pettingzoo.uav_cpp_backend import step_geometry_batch
 
@@ -321,6 +322,48 @@ def test_explicit_build_cache_is_reused_by_a_second_process():
     after = (artifact.stat().st_size, artifact.stat().st_mtime_ns)
     assert reported == artifact
     assert after == before
+
+
+def test_native_loader_stages_the_exact_uav_source() -> None:
+    module = backend.load_uav_cpp_backend()
+    staged_source = Path(module.__file__).resolve().parent / "uav_geometry_backend.cpp"
+    assert staged_source.read_bytes() == backend._SOURCE.read_bytes()
+
+
+def test_shared_extension_loader_stages_once_and_caches_module(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    source = tmp_path / "kernel.cpp"
+    source.write_bytes(b"// deterministic test kernel\n")
+    calls: list[dict[str, object]] = []
+    module = type("FakeModule", (), {})()
+
+    def fake_load(**kwargs: object) -> object:
+        calls.append(kwargs)
+        return module
+
+    monkeypatch.setattr("torch.utils.cpp_extension.load", fake_load)
+    common = dict(
+        cache_namespace="uav_test",
+        identity="source_key",
+        root=tmp_path / "build-root",
+        build_directory_name="build_identity",
+        source=source,
+        staged_source_name="staged_kernel.cpp",
+        module_name="hmasd_test_module",
+        compiler_flags=("-O3",),
+        verbose=False,
+    )
+    first = extension_cache.load_source_keyed_extension(**common)
+    second = extension_cache.load_source_keyed_extension(**common)
+
+    assert first is module
+    assert second is module
+    assert len(calls) == 1
+    assert calls[0]["name"] == "hmasd_test_module"
+    assert calls[0]["extra_cflags"] == ["-O3"]
+    staged_source = tmp_path / "build-root" / "build_identity" / "staged_kernel.cpp"
+    assert staged_source.read_bytes() == source.read_bytes()
 
 
 @pytest.mark.parametrize(
