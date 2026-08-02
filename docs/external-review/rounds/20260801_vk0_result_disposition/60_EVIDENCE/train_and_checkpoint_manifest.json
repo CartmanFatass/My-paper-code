@@ -1,0 +1,77 @@
+{
+  "authorization": {
+    "action_table_hash": "6c9a55e5c3d9cd9288689f215a77b99e3b10902862a644c68e32ef9ebc571dab",
+    "artifact_sha256": "597b2eadd8b5182b24f0bf20dcd38a6ae080660891ef31cc8f89465e2c424991",
+    "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+    "environment_blob_sha": "7031ff4374f5e4649b20202dec71a14f1eb90efb",
+    "oracle_script_hash": "0acbc40d9137fd1f921e51adeadd604951121fb5",
+    "panel_schema_version": "vk0a-1",
+    "row_count": 112,
+    "stage_commit": "b7604cc37be6b27980815a51f6e895c9d3b1ee28",
+    "validity_predicates": {
+      "fixed_primitive_table_consistent": true,
+      "full_action_support_maximization_exhausted": true,
+      "identical_initial_state_across_branches": true,
+      "legal_edit_enumeration_exact": true,
+      "no_check_crossed_within_window": true,
+      "only_external_reward_used": true,
+      "permutation_relabels_only": true,
+      "same_label_set_excluded": true
+    },
+    "verdict": "TOY_HETEROGENEOUS_RENEWAL_URGENCY_IDENTIFIED"
+  },
+  "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+  "replay_mismatch": false,
+  "run_verdict": null,
+  "seeds": {
+    "2026080101": {
+      "checkpoint_hash": "ea99276a9bc3da9c8dd4016b3b66eb5cbdc0d5c11e231f2957910665b3b3a914",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080101\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    },
+    "2026080102": {
+      "checkpoint_hash": "45b4e77d471dafddc4d9ceecb0aa11d829804e4999364c920cfc420cb0bc74fe",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080102\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    },
+    "2026080103": {
+      "checkpoint_hash": "996a14e2578ddd25e83999a9e5a897c5d5b385cc7c6f2a613958fa538ba237b6",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080103\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    },
+    "2026080104": {
+      "checkpoint_hash": "db07e9137a3199c08787e08709e01384a540504d1b8b44e56cd655d3a39b09bc",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080104\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    },
+    "2026080105": {
+      "checkpoint_hash": "3a45944c61025bf6e7322cef9060364e425398a9bb4dc5ddf3b5a3bd90a146cd",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080105\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    },
+    "2026080106": {
+      "checkpoint_hash": "fe8af7d41ae4b17d84bb2df438c20be760629c042e59cb126685ea33858464ab",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b\\2026080106\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c"
+    }
+  },
+  "trace_schema_version": "vk0-trace-1"
+}
