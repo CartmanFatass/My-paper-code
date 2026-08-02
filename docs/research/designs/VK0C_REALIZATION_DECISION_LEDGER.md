@@ -112,6 +112,105 @@ rolls — comparable to the V-K0B evaluation (~30–60 min). Enumeration and
 propagation are pure forward passes over a memoized finite state space —
 minutes. Fresh-init panels double the pure parts only. No training.
 
+## Frozen amendments from the conformance ruling (round 20260801_vk0c_design_conformance, CHANGES_REQUIRED)
+
+**A-VC-1 (unconditional token-mass semantics).** The pure API is
+`token_mass(joint_obs, compact, team_vector, working_skills, working_ages,
+working_active, agent_id, omega, agent_relevance) → {keep_mass,
+set_mass[n_skills], raw_keep_logit, raw_skill_logits}` with branch
+semantics: active learned-KEEP agent — `m_K = σ(ℓ_K)`,
+`m_SET(z) = (1−σ(ℓ_K))·softmax(ℓ_Z)_z`, incumbent SET mass exactly zero;
+NO incumbent — `m_K = 0`, `m_SET(z) = softmax(ℓ_Z)_z` (unmasked). The
+initial check has 16 SET/SET outcomes; noninitial active checks have
+KEEP + 3 SETs per agent. Native-categorical edit or forced full refresh
+fail closed in V-K0C.
+
+**A-VC-2 (shared factorization, not only shared roster advance).** The
+sampling and enumeration paths share BOTH `token_mass(...)` and
+`advance_working_state(...)` — the mass layer sits immediately above the
+common `_token_context`, and `act_sequence` consumes it (or Gate B proves
+exact log-probability and working-state parity for every active/inactive
+legal token case; the shared-helper realization is chosen).
+
+**A-VC-3 (immutable anchor-input manifest and duplicate-row consistency).**
+`vk0c_input_manifest.json` binds by SHA-256: the V-K0B
+`renewal_check_trace.jsonl`, `renewal_counterfactual_units.jsonl`,
+`train_and_checkpoint_manifest.json`, `summary.json`, the V-K0A panel and
+sidecar; plus trace schema vk0-trace-2, check-row count 5,376,
+deduplicated anchor count 2,688, the six seeds, 64 episodes per seed, 7
+noninitial checks, the six checkpoint/exposure authorizations, resolved
+configs, and code/schema identities. Anchor gate: the two focal rows of
+one (seed, episode, check) must agree exactly on every shared field
+(training seed, episode, check index, order code, checkpoint hash,
+config hash, pre-check fingerprint, primitive step, active mask,
+current/previous targets, natural five-step reward and both match
+vectors) and jointly reconstruct one ordered roster (skills, ages,
+focals); any missing row, third duplicate, or disagreement →
+`INVALID_VK0C_ORDER_TRANSPORT_AUDIT / ANCHOR_INVENTORY_INCONSISTENT`,
+never row selection.
+
+**A-VC-4 (explicit initial and inter-check propagation semantics).**
+Propagation begins at `check_index=0, active_mask=[False,False], no
+incumbents, ages=[0,0]` under the no-incumbent semantics. Inter-check
+transition frozen: KEEP → same skill, age+5; SET(z) → skill z, age 0 at
+the edit, 5 at the next check; active True after a legal token; check+1.
+Gate B compares the pure transition against an executed one-window
+agent/env transition over the complete set of canonical transition cases
+(the factual-row reproduction remains the assembled-path check, not the
+sole transition test).
+
+**A-VC-5 (four-sign descriptive panel).** A separate non-inferential
+propagation table over slow×fast signs ∈ {−1,+1}², both orders, fresh and
+trained, all eight checks — never pooled with, substituted for, or used
+to rebalance the 64-episode bank.
+
+**A-VC-6 (complete propagation outputs).** Per order × policy state ×
+seed × episode, row-level evidence sufficient to reconstruct: occupancy of
+every reachable canonical state; expected slow match, fast match and
+external reward at every primitive step; expected episode return;
+expected KEEP/SET rate; expected per-agent renewal rate; expected realized
+lifetime distribution (or sufficient run-length mass). The V-K0A window
+evaluator is the deterministic reward kernel.
+
+**A-VC-7 (dtype-derived mass rule; one canonical distribution).** Raw
+token masses in the policy probability dtype; joint products accumulated
+in float64; `raw_joint_mass` recorded; `mass_tolerance = 32 ×
+eps(policy_probability_dtype)`; validity requires all masses finite,
+nonnegative, same-label SET mass exactly 0, |raw_joint_mass − 1| ≤
+tolerance (failure = invalidity). After passing, exactly one canonical
+normalized vector p̂ drives TV, marginals, task consequences, occupancy
+propagation and every factor calculation; raw masses and the
+normalization correction are both recorded. The 1e-9 rule and
+"renormalized only for reporting" are withdrawn.
+
+**A-VC-8 (pooled plus stratified outputs).** Every matched-state quantity
+(at least TV, D_R fresh, D_R trained, A_R, optimal-assignment mass,
+slow/fast coverage-failure masses) is reported pooled AND per occupancy
+stratum (CANONICAL_OCCUPANCY / REVERSED_OCCUPANCY). Order stays a kernel
+argument, never folded into the physical state.
+
+**A-VC-9 (stratum-safe Factor D).** The pure occupancy-mediation label
+requires trained matched-state equivalence within ±0.5 in the pooled AND
+both stratum views while the exact propagation reproduces the material
+competence split; pooled equivalence produced by opposite material
+stratum-level direct effects records the stratum effects and leaves pure
+occupancy mediation unresolved.
+
+**A-VC-10 (durable analyzer authorization; full distribution rows).**
+`vk0c_matched_state_rows.jsonl` preserves all 16 common-coordinate
+outcomes per (policy, anchor, order) with: physical-agent final skill
+pair, first token, second conditional token, raw token masses, raw joint
+mass, canonical joint probability, KEEP/SET marginals, five-step reward,
+slow/fast match vectors, task-optimal and coverage-failure flags. The
+analyzer consumes the three JSONL row files plus
+`vk0c_input_manifest.json`; missing or mismatched authorization fires
+precedence-1 invalidity.
+
+**A-VC-11 (fresh-init hash scope, from VC-D5's clarification).** The
+construction hash covers the high policy state_dict, every
+decision-context module reachable under the resolved configuration,
+relevant buffers, and the resolved configuration identity.
+
 ## Deliberately not done
 
 No successor-route implementation (order randomization, equivariant
