@@ -136,6 +136,8 @@ from the run directory before your ruling lands.
 
 ## Evidence to read
 
+- `docs/project/ALGORITHM_PRINCIPLES.md`
+- `docs/external-review/OPEN_REVIEW_PRINCIPLES.md`
 - `docs/external-review/rounds/20260802_vk0c_order_transport_result/60_RUN_SUMMARY.json`
 - `docs/external-review/rounds/20260802_vk0c_order_transport_result/61_RUN_INPUT_MANIFEST.json`
 - `docs/research/designs/VK0C_REALIZATION_DECISION_LEDGER.md`
