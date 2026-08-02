@@ -58,7 +58,7 @@ Use only this lifecycle; do not improvise another procedure:
 
 ```text
 BOOT -> PAGE -> SEND -> WAIT -> ARCHIVE -> COMPLETE
-              \-> page/tab/controller closed -> reopen the same key -> retry once
+              \-> page/tab/controller closed or controls not ready -> same key -> retry once
 SEND or WAIT error with activeQuery -> WAIT the same query without another send
 recovery exhausted -> ERROR
 ```
@@ -101,7 +101,8 @@ messages supply the inter-batch queue; do not add a registry or scheduler.
 ## One simple fallback
 
 After an error, call `agentify_status` once for the same key. If it returns
-`tab_not_found` or proves the page/tab/controller was closed, call
+`tab_not_found`, the query returned `model_switcher_unavailable`, or status
+proves the page/tab/controller was closed, call
 `agentify_query` one more time with the exact same key, provider, expected
 model, question and timeout. Agentify reopens the same-key page; this is the only retry,
 and it is never delegated back to the requester. If the same page
