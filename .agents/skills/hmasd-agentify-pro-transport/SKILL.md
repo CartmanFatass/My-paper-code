@@ -1,138 +1,94 @@
 ---
 name: hmasd-agentify-pro-transport
-description: Sole receipt-bearing Agentify transport for one HMASD External Pro review turn.
+description: Receipt-bearing Agentify transport for one HMASD external-review turn through ChatGPT or Gemini.
 ---
 
-# HMASD Agentify Pro Transport
+# HMASD Agentify External Review Transport
 
-This Skill is a mechanical wrapper contract. It grants no review, scientific,
-runtime, code, Git or project-state authority. The owning persistent CPM or
-Explorer session uses this Skill for every External Pro transport turn.
+This Skill is a mechanical transport interface. It grants no scientific,
+workflow, code, compute, Git or project-state authority. The owning persistent
+CPM or Explorer session runs it directly; no transport child, monitor,
+heartbeat or browser fallback participates.
 
-## Runtime binding
+## Unified interface and binding
 
-Use the locally installed Agentify endpoint and the HMASD conda interpreter:
-
-```text
-python=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
-wrapper=.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py
-runtime_contract=docs/project/AGENTIFY_PRO_TRANSPORT.md
-required_agentify_source_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
-```
-
-Read the runtime contract before use. The wrapper requires the live Agentify
-`/health` identity to report this exact source commit with
-`sourceDirty=false`; missing or conflicting source identity blocks before a
-send.
-
-The transport normally uses an existing tab. Before every `submit`, the wrapper
-reads Agentify's authenticated `/tabs` and scoped `/status` snapshots and
-requires exactly one live tab whose stable key, provider and conversation URL
-match the immutable request, whose query state is idle, and whose
-`promptVisible` value is exactly `true`. The wrapper never closes, shows,
-activates, navigates, refreshes, replaces or rebinds a tab. The explicit
-`--allow-tab-creation` flag may create one missing tab only for the first
-binding or post-restart recovery; all other missing, duplicate, blocked, busy
-or identity-mismatched tabs fail before `/review-query`. This exception does
-not authorize page upkeep.
-
-CPM and Explorer invoke this wrapper directly from their persistent owner
-session. The transport creates no child, monitor, heartbeat or fallback page;
-the only page-creation exception is the explicitly authorized first binding or
-post-restart `--allow-tab-creation` case above.
-
-The request must provide a fixed role-owned `stable_key`:
+ChatGPT and Gemini use the same lifecycle:
 
 ```text
-code_project_manager -> hmasd-formal-pro
-code_project_manager -> hmasd-uav-formal-pro
-code_project_manager -> hmasd-explorer-validation-pro
-independent_research_explorer -> hmasd-independent-research-explorer-pro
+prepare -> submit once -> verify natural completion -> archive exact response
+provider=chatgpt|gemini
+terminal=NATURAL_COMPLETION_VERIFIED|AGENTIFY_TRANSPORT_BLOCKED
 ```
 
-For Code Project Manager, `hmasd-formal-pro` is reserved for
-`formal_toy_research`, `hmasd-uav-formal-pro` is reserved for
-`uav_validation`, and `hmasd-explorer-validation-pro` is reserved for Explorer
-validation. A stable key cannot substitute for another workstream's key.
+Provider adapters may differ only in URL parsing, selectors, visible-model
+evidence and message-identity extraction. ChatGPT Pro is canonical and Gemini
+advisory only in local intake metadata; neither label enters the question.
 
-Conversation ID, exact URL, endpoint token and the selected Pro model are
-runtime values. They must be read from the live Agentify binding and must not
-be invented, committed, copied into a question, or obtained from repository
-history. The wrapper rejects a stable-key binding whose provider, conversation
-or model is missing or conflicts with the current round.
-
-Keep runtime request and receipt files in the owner boundary: CPM uses the
-applicable `logs/` review root and Explorer uses
-`local_research/pro_reviews/`. Prompt and raw-output files remain in CPM's
-`docs/external-review/` or Explorer's `local_research/pro_reviews/` root. Do not
-place credentials, Agentify state or live conversation registrations in Git.
-
-Explorer performs its direction and methodology reviews directly in the
-persistent session. The exact item root and owner-local page or evidence
-record are assignment-scoped; Explorer never reuses a CPM workstream record.
-For Explorer reviews, archive to the same Explorer-owned item root before local
-FIFO intake.
-
-## Request and one-send contract
-
-Run `prepare` once from the prompt file. The wrapper creates the backend
-selection plus UTF-8 request. The generated request
-contains exactly these fields (the wrapper rejects unknown or missing identity
-fields):
-
-```json
-{
-  "schema_version": 1,
-  "transport_backend": "agentify",
-  "transport_owner": "<registered-transport-owner>",
-  "stable_key": "<owner-scoped-stable-key>",
-  "provider": "chatgpt",
-  "model": "<live-pro-model>",
-  "conversation_url": "<live-runtime-url>",
-  "conversation_id": "<live-runtime-id>",
-  "idempotency_key": "<round-unique-key>",
-  "assignment_identity": "<exact-round-or-assignment-identity>",
-  "backend_selection_path": "<absolute-immutable-TRANSPORT_BACKEND.json>",
-  "prompt_path": "<absolute-prompt>",
-  "timeout_ms": 2700000
-}
+```text
+code_project_manager/chatgpt -> hmasd-formal-pro
+code_project_manager/chatgpt -> hmasd-uav-formal-pro
+code_project_manager/chatgpt -> hmasd-explorer-validation-pro
+independent_research_explorer/chatgpt -> hmasd-independent-research-explorer-pro
+independent_research_explorer/gemini -> hmasd-independent-research-explorer-gemini
 ```
 
-`backend_selection_path` must be a new role-owned runtime file containing
-exactly `schema_version=1`, the same `assignment_identity`, and
-`transport_backend=agentify`; its `operation_key` must equal the request's
-`idempotency_key`. It is the restart-stable cross-backend and same-assignment
-operation record and is never overwritten. `assignment_identity` must occur in
-the UTF-8 prompt at `prompt_path`. `timeout_ms` is between 3000 and 2700000
-inclusive. Agentify owns its durable ledger and send idempotency; the HMASD
-wrapper validates the request, proves an exact send-ready tab (or the bounded
-creation exception above), and runs one blocking submit operation in the owner
-session while observing that durable operation. It writes a new role-owned
-receipt only after stable completion.
-The wrapper does not click UI controls or mutate tab state. No duplicate
-submission of the same operation, cross-conversation fallback or response
-synthesis is allowed. A conflicting existing
-idempotency record or unavailable conversation terminates as a
-transport blocker.
+Conversation URL, ID, model and credentials are live runtime values. A stable
+key is immutable after its first persisted binding and later turns reuse the
+same page. `/health` must report the wrapper's pinned Agentify commit with
+`sourceDirty=false`. Before a normal send, authenticated `/tabs` and scoped
+`/status` must show one exact, idle, unblocked and prompt-visible page.
+
+## Plan first and RAW_QUESTION only
+
+Before touching Agentify, freeze a concise local execution plan containing the
+question path, provider instances and pages, operation keys and maximum sends,
+preflight/status observations, archives, verify-existing recovery and
+completion criteria. This is not a new user gate inside an active grant.
+
+The reviewer-facing UTF-8 file is a standalone `RAW_QUESTION`: only the
+natural-language scientific question, including intrinsic equations, headings
+and treatment labels. Local authorization, session, role, campaign/candidate/
+review/operation identity, Git locator, filesystem path, provenance state,
+transport/recovery/archive instruction and provider labels remain only in the
+local plan, selection, request and receipt.
+
+The strict `/review-query` path performs one direct `insertText` of the whole
+question, verifies the composer and performs one send action. Generic `/query`,
+per-character human typing, attachments, keyboard/computer-use fallback,
+placeholder messages and UI response controls are forbidden.
+
+## Request and first binding
+
+`prepare` records local owner, provider, binding, operation and archive
+identity. None of those local fields is added to the question. Existing
+bindings supply explicit provider, live model, URL and conversation ID.
+
+For the first ChatGPT binding only, begin from one authenticated blank
+`https://chatgpt.com/` page and use `prepare --first-binding` without caller
+URL/ID. The single persisted question produces the real `/c/<id>` identity,
+which Agentify binds durably before response observation continues. No
+placeholder, discovery send or historical binding reassignment is used.
+Gemini begins from its existing `https://gemini.google.com/app/<id>` page and
+uses the identical lifecycle.
+
+`--allow-tab-creation` is limited to first ChatGPT binding or reopening the
+same durable page after Agentify restart. It never substitutes or reassigns a
+conversation. A persisted user-message identity is the irreversible boundary:
+once present, never terminate, resend or switch pages; observe that operation
+through natural completion.
 
 ## Minimal recovery
 
-Active generation or a readable complete response always suppresses another
-send; a durable `userMessageId` does too. First invoke `submit --verify-existing`
-against the same request. If it reports `present=true`, observe that operation,
-then run `verify` and `archive`. Only when it reports `present=false` may the
-owning session prepare one fresh unchanged-question request with a new
-operation key and perform one fresh send. Recovery never repeats an operation
-key, creates a page opportunistically or substitutes another tab. A fresh
-request still requires the same exact tab unless this is the first binding or a
-post-restart missing-tab recovery explicitly authorized with
-`--allow-tab-creation`; all other missing tabs are transport blockers.
+If evidence invalidates the local plan, stop the affected branch and return to
+read-only status and durable-ledger diagnosis. Run
+`submit --verify-existing` on the same request. `present=true` resumes
+observation without sending. Only `present=false`, no persisted user message
+and an unchanged question allow one fresh operation key and at most one fresh
+send under the active grant.
 
-After the fresh resend fails, return one terminal technical transport defect to
-the owning parent. WDM is not a recovery approver; it is involved only if the
-parent later reports a concrete reusable control-plane design defect. Do not
-reinterpret science or resume sending. Every transport failure consumes zero
-scientific iterations.
+Never switch tools, interfaces or transport strategy during recovery. A second
+failure returns `AGENTIFY_TRANSPORT_BLOCKED` with exact local predicates; it is
+not a scientific result and consumes no scientific iteration.
 
 ## Mechanical commands
 
@@ -145,17 +101,16 @@ command, or opaque token.
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
   .agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py `
   prepare --owner <registered-owner> --stable-key <owner-key> `
-  --model <live-pro-model> --conversation-url <live-exact-url> `
+  --provider <chatgpt|gemini> --model <live-model> --conversation-url <live-exact-url> `
   --conversation-id <live-id> --assignment-identity <exact-assignment> `
-  --operation-key <round-unique-key> --prompt-path <absolute-prompt> `
+  --operation-key <round-unique-key> --prompt-path <absolute-RAW_QUESTION> `
   --timeout-ms 2700000 --selection <new-absolute-TRANSPORT_BACKEND.json> `
   --request <new-absolute-request.json>
 ```
 
-`prepare` is idempotent only for byte-identical outputs. It verifies that the
-prompt is UTF-8 and contains the assignment identity, then validates the
-generated pair before returning. A changed prompt, model,
-conversation or operation identity cannot overwrite the pair.
+For first ChatGPT binding, replace URL and ID with `--first-binding`.
+`prepare` verifies a nonempty UTF-8 question and validates the local request;
+it never requires local assignment metadata to appear in the question.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -164,34 +119,10 @@ conversation or operation identity cannot overwrite the pair.
   [--state-dir <absolute-agentify-state-dir>] [--verify-existing]
 ```
 
-`submit` first proves the exact tab identity, unblocked/idle state and
-`promptVisible=true`, then starts exactly one owned submit worker. The submit
-operation observes Agentify's durable ledger while the synchronous worker runs.
-Its observable phases are:
-
-```text
-PREPARED -> TAB_READY -> DISPATCH_STARTED -> MESSAGE_CONFIRMED -> GENERATING
--> STABLE_COMPLETE -> ARCHIVED -> INTAKE_COMPLETE
-terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED
-```
-
-`MESSAGE_CONFIRMED` requires `sendCount=1`, `sendActionCount=1`, non-null
-`userMessageId` and `submittedAt`, plus exact stable-key, provider,
-conversation URL/ID and tab ID. A live process is never evidence of a send. If
-confirmation is absent for 60 seconds, the supervisor terminates only its own
-submit worker, rereads the ledger, returns `PRE_SEND_BLOCKED`, and never
-resends. Once `userMessageId` exists, it never terminates or retries; it
-observes that same operation until natural completion or
-`POST_SEND_BLOCKED`. Phase changes may be reported immediately.
-`userMessageId` is the irreversible post-send boundary even if another
-identity predicate is incomplete or mismatched; that state is
-`POST_SEND_BLOCKED`, never `PRE_SEND_BLOCKED`. An early submit-worker exit does
-not shorten the 60-second durable-ledger confirmation window.
-
-`--verify-existing` observes the same operation and never sends. Neither mode
-may create, close, show, activate, navigate, refresh, replace or rebind a page
-except the explicit first-binding or post-restart `--allow-tab-creation` case.
-No second transport ledger is created.
+`submit` proves the exact ready page, calls strict `/review-query` once and
+observes the durable operation. Process existence is never send evidence.
+`--verify-existing` only observes. Neither mode clicks response controls or
+uses an alternate transport.
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -199,16 +130,12 @@ No second transport ledger is created.
   verify --request <absolute-request.json> --receipt <absolute-receipt.json>
 ```
 
-`verify` is local receipt validation only and never sends. Natural completion
-requires the same assistant
-message identity and complete text in two stable snapshots at least three
-seconds apart and no active generation or continuation control. UI control
-activation is never completion evidence. Long Pro reasoning remains inside the
-original absolute operation
-deadline; the wrapper does not create a short-watch terminal state.
+`verify` is local receipt validation only. Natural completion requires the same
+assistant message and text in two snapshots at least three seconds apart, with
+no active generation or continuation control. Long reasoning remains inside
+the original operation deadline.
 
-After `verify` returns a complete receipt, archive the exact response bytes
-without rewriting and bind the archive to the receipt:
+After `verify`, archive the exact response without rewriting:
 
 ```powershell
 & C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -217,14 +144,12 @@ without rewriting and bind the archive to the receipt:
   --raw-output <absolute-role-owned-raw-path>
 ```
 
-`archive` is permitted only for a complete receipt and reread byte equality.
-For CPM, the raw-output path is under `docs/external-review`; for Explorer it is
-under `local_research/pro_reviews`. Mechanical intake remains the applicable
-owner's normal next step. No response interpretation is performed here.
+`archive` requires exact local reread equality. CPM writes under
+`docs/external-review`; Explorer writes under `local_research/pro_reviews`.
+Mechanical intake and all scientific interpretation stay with the owner.
 
 ## Required receipt and failure semantics
 
-Every prompt carries its full 40-hex `stage_commit`; a prefix is rejected, and this Skill's allow-list scripts archive only that committed source.
 The receipt must contain, at minimum:
 
 ```text
@@ -244,14 +169,10 @@ clickedControls=[]
 terminalState=NATURAL_COMPLETION_VERIFIED
 ```
 
-The two snapshots must be tied to the same assistant identity. Missing or
-conflicting fields, `sendCount != 1`, a conversation mismatch or incomplete
-generation yields `AGENTIFY_TRANSPORT_BLOCKED`; response text is retained as
-received and checked only through the exact archive reread. No request,
-response, snapshot digest, byte count or fingerprint is a workflow admission
-field; recovery follows `Minimal recovery`.
+The snapshots use the same assistant identity. Missing or conflicting fields,
+`sendCount != 1`, conversation mismatch or incomplete generation yields
+`AGENTIFY_TRANSPORT_BLOCKED`. No digest, byte count or fingerprint is a
+workflow admission field.
 
-On success, the wrapper output returns the receipt path or raw path plus the
-validated stable `operationId` to
-the registered transport owner. Keep secrets,
-credentials, endpoint state and live conversation registration outside Git.
+On success, the wrapper returns the receipt/raw path and stable `operationId`
+to the owner. Keep credentials, endpoint state and live bindings outside Git.

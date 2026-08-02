@@ -23,7 +23,7 @@ MAX_TIMEOUT_MS = 45 * 60 * 1000
 SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
-AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
+AGENTIFY_REQUIRED_COMMIT = "e9f636740bf94d7db260c8817554904cdcb68870"
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
@@ -33,7 +33,15 @@ OWNER_KEYS = {
     },
     "independent_research_explorer": {
         "hmasd-independent-research-explorer-pro",
+        "hmasd-independent-research-explorer-gemini",
     },
+}
+KEY_PROVIDERS = {
+    "hmasd-formal-pro": "chatgpt",
+    "hmasd-uav-formal-pro": "chatgpt",
+    "hmasd-explorer-validation-pro": "chatgpt",
+    "hmasd-independent-research-explorer-pro": "chatgpt",
+    "hmasd-independent-research-explorer-gemini": "gemini",
 }
 REQUEST_FIELDS = {
     "schema_version",
@@ -44,6 +52,7 @@ REQUEST_FIELDS = {
     "model",
     "conversation_url",
     "conversation_id",
+    "first_binding",
     "idempotency_key",
     "assignment_identity",
     "backend_selection_path",
@@ -121,6 +130,22 @@ def _owner_roots(repo_root: Path, owner: str, kind: str) -> list[Path]:
     _fail("invalid_transport_owner")
 
 
+def _conversation_identity(provider: str, url: str, conversation_id: str) -> bool:
+    parsed = urlparse(url)
+    expected = (
+        ("chatgpt.com", f"/c/{conversation_id}")
+        if provider == "chatgpt"
+        else ("gemini.google.com", f"/app/{conversation_id}")
+    )
+    return (
+        parsed.scheme == "https"
+        and parsed.netloc == expected[0]
+        and parsed.path == expected[1]
+        and not parsed.query
+        and not parsed.fragment
+    )
+
+
 def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
     if set(raw) != REQUEST_FIELDS:
         _fail("request_field_set_mismatch")
@@ -134,15 +159,17 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
     stable_key = _required_text(raw.get("stable_key"), "stable_key", maximum=128)
     if not KEY_RE.fullmatch(stable_key) or stable_key not in OWNER_KEYS[owner]:
         _fail("stable_key_owner_mismatch")
-    if raw.get("provider") != "chatgpt":
+    provider = _required_text(raw.get("provider"), "provider", maximum=64)
+    if provider not in {"chatgpt", "gemini"} or KEY_PROVIDERS[stable_key] != provider:
         _fail("invalid_provider")
     model = _required_text(raw.get("model"), "model", maximum=128)
     conversation_url = _required_text(raw.get("conversation_url"), "conversation_url", maximum=2048)
     conversation_id = _required_text(raw.get("conversation_id"), "conversation_id", maximum=256)
-    parsed = urlparse(conversation_url)
-    if parsed.scheme != "https" or parsed.netloc != "chatgpt.com" or parsed.query or parsed.fragment:
-        _fail("invalid_conversation_url")
-    if parsed.path != f"/c/{conversation_id}":
+    first_binding = raw.get("first_binding") is True
+    if first_binding:
+        if provider != "chatgpt" or conversation_url != "https://chatgpt.com/" or conversation_id != "__new__":
+            _fail("invalid_first_binding")
+    elif not _conversation_identity(provider, conversation_url, conversation_id):
         _fail("conversation_identity_mismatch")
     idempotency_key = _required_text(raw.get("idempotency_key"), "idempotency_key", maximum=128)
     if not KEY_RE.fullmatch(idempotency_key):
@@ -180,17 +207,16 @@ def validate_request(raw: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
         raise TransportError("prompt_not_exact_utf8") from exc
     if not prompt:
         _fail("prompt_empty")
-    if assignment_identity not in prompt:
-        _fail("assignment_identity_not_in_prompt")
     return {
         "schema_version": SCHEMA_VERSION,
         "transport_backend": "agentify",
         "transport_owner": owner,
         "stable_key": stable_key,
-        "provider": "chatgpt",
+        "provider": provider,
         "model": model,
         "conversation_url": conversation_url,
         "conversation_id": conversation_id,
+        "first_binding": first_binding,
         "idempotency_key": idempotency_key,
         "assignment_identity": assignment_identity,
         "backend_selection_path": str(backend_selection_path),
@@ -207,6 +233,7 @@ def agentify_body(request: dict[str, Any], *, verify_existing: bool) -> dict[str
         "model": request["model"],
         "conversationUrl": request["conversation_url"],
         "conversationId": request["conversation_id"],
+        "firstBinding": request["first_binding"],
         "idempotencyKey": request["idempotency_key"],
         "prompt": request["prompt"],
         "timeoutMs": request["timeout_ms"],
@@ -249,6 +276,18 @@ def _require_preexisting_review_tab(
     state_dir: Path,
 ) -> str:
     """Prove exact tab identity; new sends additionally require a ready prompt."""
+    expected_url = request["conversation_url"]
+    transport_path = state_dir.resolve(strict=False) / "review-transport.json"
+    if request["first_binding"] and transport_path.exists():
+        transport = _load_json(transport_path)
+        bindings = transport.get("bindings")
+        binding = bindings.get(request["stable_key"]) if isinstance(bindings, dict) else None
+        if isinstance(binding, dict):
+            bound_url = binding.get("conversationUrl")
+            bound_id = binding.get("conversationId")
+            if not isinstance(bound_url, str) or not isinstance(bound_id, str) or not _conversation_identity(request["provider"], bound_url, bound_id):
+                _fail("agentify_bound_conversation_identity_invalid")
+            expected_url = bound_url
     inventory = _http_json(f"{base}/tabs", token=token, timeout_seconds=10.0)
     tabs = inventory.get("tabs")
     if inventory.get("ok") is not True or not isinstance(tabs, list):
@@ -259,7 +298,6 @@ def _require_preexisting_review_tab(
         if isinstance(tab, dict) and tab.get("key") == request["stable_key"]
     ]
     if not matches and allow_tab_creation:
-        transport_path = state_dir.resolve(strict=False) / "review-transport.json"
         if transport_path.exists():
             transport = _load_json(transport_path)
             bindings = transport.get("bindings")
@@ -274,7 +312,7 @@ def _require_preexisting_review_tab(
             body={
                 "key": request["stable_key"],
                 "vendorId": request["provider"],
-                "url": request["conversation_url"],
+                "url": expected_url,
                 "model": request["model"],
             },
             timeout_seconds=10.0,
@@ -294,7 +332,7 @@ def _require_preexisting_review_tab(
         _fail("agentify_preexisting_tab_ambiguous")
     tab = matches[0]
     tab_id = _required_text(tab.get("id"), "agentify_preexisting_tab_id", maximum=512)
-    if tab.get("vendorId") != request["provider"] or tab.get("url") != request["conversation_url"]:
+    if tab.get("vendorId") != request["provider"] or tab.get("url") != expected_url:
         _fail("agentify_preexisting_tab_identity_mismatch")
 
     status = _http_json(
@@ -319,7 +357,7 @@ def _require_preexisting_review_tab(
         len(status_matches) != 1
         or status_matches[0].get("id") != tab_id
         or status_matches[0].get("vendorId") != request["provider"]
-        or status_matches[0].get("url") != request["conversation_url"]
+        or status_matches[0].get("url") != expected_url
     ):
         _fail("agentify_preexisting_tab_status_identity_mismatch")
     if require_send_ready and status.get("promptVisible") is not True:
@@ -431,10 +469,16 @@ def _send_confirmation_predicates(
         and submitted_at > 0,
         "stableKey": operation.get("stableKey") == request["stable_key"],
         "provider": operation.get("provider") == request["provider"],
-        "conversationUrl": operation.get("conversationUrl")
-        == request["conversation_url"],
-        "conversationId": operation.get("conversationId")
-        == request["conversation_id"],
+        "conversation": (
+            _conversation_identity(
+                request["provider"],
+                str(operation.get("conversationUrl") or ""),
+                str(operation.get("conversationId") or ""),
+            )
+            if request["first_binding"]
+            else operation.get("conversationUrl") == request["conversation_url"]
+            and operation.get("conversationId") == request["conversation_id"]
+        ),
         "tabId": operation.get("tabId") == tab_id,
     }
 
@@ -474,8 +518,6 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
         "stableKey": request["stable_key"],
         "provider": request["provider"],
         "model": request["model"],
-        "conversationUrl": request["conversation_url"],
-        "conversationId": request["conversation_id"],
         "idempotencyKey": request["idempotency_key"],
         "timeoutMs": request["timeout_ms"],
         "status": "COMPLETE",
@@ -486,6 +528,18 @@ def validate_receipt(receipt: dict[str, Any], request: dict[str, Any]) -> dict[s
     for field, expected in exact.items():
         if receipt.get(field) != expected:
             _fail(f"receipt_{field}_mismatch")
+    if request["first_binding"]:
+        if not _conversation_identity(
+            request["provider"],
+            str(receipt.get("conversationUrl") or ""),
+            str(receipt.get("conversationId") or ""),
+        ):
+            _fail("receipt_conversation_identity_mismatch")
+    elif (
+        receipt.get("conversationUrl") != request["conversation_url"]
+        or receipt.get("conversationId") != request["conversation_id"]
+    ):
+        _fail("receipt_conversation_identity_mismatch")
     _required_text(receipt.get("operationId"), "receipt_operation_id", maximum=256)
     user_message_id = _required_text(receipt.get("userMessageId"), "receipt_user_message_id", maximum=512)
     assistant_message_id = _required_text(receipt.get("assistantMessageId"), "receipt_assistant_message_id", maximum=512)
@@ -602,8 +656,8 @@ def command_provision_direction(args: argparse.Namespace) -> None:
         raise TransportError("prompt_source_unreadable") from exc
     except UnicodeError as exc:
         raise TransportError("prompt_source_not_exact_utf8") from exc
-    if not prompt or assignment_identity not in prompt:
-        _fail("prompt_source_identity_mismatch")
+    if not prompt:
+        _fail("prompt_source_empty")
     _atomic_write_new(prompt_path, prompt_bytes)
     print(
         "HMASD_DIRECTION_REVIEW_ITEM_PROVISIONED "
@@ -625,17 +679,20 @@ def command_prepare(args: argparse.Namespace) -> None:
     operation_key = _required_text(args.operation_key, "operation_key", maximum=128)
     if not KEY_RE.fullmatch(operation_key):
         _fail("invalid_operation_key")
+    provider = _required_text(args.provider, "provider", maximum=64)
+    if provider not in {"chatgpt", "gemini"} or KEY_PROVIDERS[stable_key] != provider:
+        _fail("invalid_provider")
     model = _required_text(args.model, "model", maximum=128)
-    conversation_url = _required_text(args.conversation_url, "conversation_url", maximum=2048)
-    conversation_id = _required_text(args.conversation_id, "conversation_id", maximum=256)
-    parsed = urlparse(conversation_url)
-    if (
-        parsed.scheme != "https"
-        or parsed.netloc != "chatgpt.com"
-        or parsed.query
-        or parsed.fragment
-        or parsed.path != f"/c/{conversation_id}"
-    ):
+    first_binding = bool(args.first_binding)
+    if first_binding:
+        if provider != "chatgpt" or args.conversation_url is not None or args.conversation_id is not None:
+            _fail("invalid_first_binding")
+        conversation_url = "https://chatgpt.com/"
+        conversation_id = "__new__"
+    else:
+        conversation_url = _required_text(args.conversation_url, "conversation_url", maximum=2048)
+        conversation_id = _required_text(args.conversation_id, "conversation_id", maximum=256)
+    if not first_binding and not _conversation_identity(provider, conversation_url, conversation_id):
         _fail("conversation_identity_mismatch")
     timeout_ms = _required_int(
         args.timeout_ms, "timeout_ms", minimum=3000, maximum=MAX_TIMEOUT_MS
@@ -654,8 +711,6 @@ def command_prepare(args: argparse.Namespace) -> None:
         raise TransportError("prompt_not_exact_utf8") from exc
     if not prompt:
         _fail("prompt_empty")
-    if assignment_identity not in prompt:
-        _fail("assignment_identity_not_in_prompt")
     selection_path = _require_within(
         args.selection,
         _owner_roots(repo_root, owner, "runtime"),
@@ -679,10 +734,11 @@ def command_prepare(args: argparse.Namespace) -> None:
         "transport_backend": "agentify",
         "transport_owner": owner,
         "stable_key": stable_key,
-        "provider": "chatgpt",
+        "provider": provider,
         "model": model,
         "conversation_url": conversation_url,
         "conversation_id": conversation_id,
+        "first_binding": first_binding,
         "idempotency_key": operation_key,
         "assignment_identity": assignment_identity,
         "backend_selection_path": str(selection_path),
@@ -1034,9 +1090,11 @@ def build_parser() -> argparse.ArgumentParser:
     prepare = subparsers.add_parser("prepare")
     prepare.add_argument("--owner", required=True)
     prepare.add_argument("--stable-key", required=True)
+    prepare.add_argument("--provider", choices=("chatgpt", "gemini"), default="chatgpt")
     prepare.add_argument("--model", required=True)
-    prepare.add_argument("--conversation-url", required=True)
-    prepare.add_argument("--conversation-id", required=True)
+    prepare.add_argument("--conversation-url")
+    prepare.add_argument("--conversation-id")
+    prepare.add_argument("--first-binding", action="store_true")
     prepare.add_argument("--assignment-identity", required=True)
     prepare.add_argument("--operation-key", required=True)
     prepare.add_argument("--prompt-path", type=Path, required=True)

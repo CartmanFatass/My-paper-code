@@ -25,7 +25,7 @@ $agentifyContractNormalized = $agentifyContract -replace '\s+', ' '
 $explorerNormalized = $explorer -replace '\s+', ' '
 
 foreach ($entry in @(
-    @($cpm, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'), @($cpm, 'transport_owner=code_project_manager'), @($explorer, 'persistent_explorer_session_direct'), @($explorer, 'hmasd-independent-research-explorer-pro'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'Active generation or a readable complete response always suppresses another send'), @($agentifySkillNormalized, 'present=false'), @($agentifySkillNormalized, 'caller supplies no content digest'), @($agentifySkillNormalized, 'same exact tab unless this is the first binding'), @($agentifySkillNormalized, 'archive to the same Explorer-owned item root'), @($agentifyContractNormalized, 'transport_tab_mutation=forbidden_except_first_binding_or_post_restart_allow_tab_creation'), @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
+    @($cpm, 'prepare -> submit -> verify -> archive -> local_FIFO_intake'), @($cpm, 'transport_owner=code_project_manager'), @($explorer, 'persistent_explorer_session_direct'), @($explorer, 'hmasd-independent-research-explorer-pro'), @($explorer, 'hmasd-independent-research-explorer-gemini'), @($independentSkill, '$hmasd-agentify-pro-transport'), @($agentifySkillNormalized, 'provider=chatgpt|gemini'), @($agentifySkillNormalized, 'standalone `RAW_QUESTION`'), @($agentifySkillNormalized, '`present=false`'), @($agentifySkillNormalized, 'first ChatGPT binding'), @($agentifyContractNormalized, 'transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen'), @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'), @($agentifyContractNormalized, 'stable_key_tab_policy=one_live_tab_per_stable_key'), @($agentifyScript, 'AGENTIFY_REQUIRED_COMMIT = "e9f636740bf94d7db260c8817554904cdcb68870"'), @($agentifyScript, 'HMASD_AGENTIFY_EXISTING_USER_MESSAGE'))
 ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Agentify transport contract missing: $($entry[1])"
@@ -39,8 +39,8 @@ foreach ($staleGate in @('resend requires a new user instruction', 'only no reco
 foreach ($entry in @(
     @(($cpm -replace '\s+', ' '), 'does not spawn a transport or monitor child'),
     @(($explorer -replace '\s+', ' '), 'never spawns a review/monitor child or heartbeat'),
-    @($agentifySkillNormalized, 'The transport normally uses an existing tab'),
-    @($agentifySkillNormalized, 'fail before `/review-query`'),
+    @($agentifySkillNormalized, 'authenticated `/tabs` and scoped `/status` must show one exact, idle, unblocked and prompt-visible page'),
+    @($agentifySkillNormalized, 'strict `/review-query`'),
     @($agentifyContractNormalized, 'transport_tab_mutation=forbidden'),
     @($agentifyContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
     @($agentifyContractNormalized, 'prompt_visible_required_before_send=true'),

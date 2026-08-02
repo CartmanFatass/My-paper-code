@@ -553,6 +553,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
         "independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews",
         "independent_pro_review_transport_execution=persistent_explorer_session_direct",
         "independent_pro_review_stable_key=hmasd-independent-research-explorer-pro",
+        "independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini",
+        "independent_review_provider_contract=one_parameterized_agentify_interface",
+        "independent_review_transmitted_payload=standalone_RAW_QUESTION_only",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
         assert required in role
@@ -590,7 +593,8 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_direct() ->
     for required in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "stable_key=hmasd-independent-research-explorer-pro",
+        "chatgpt_stable_key=hmasd-independent-research-explorer-pro",
+        "gemini_stable_key=hmasd-independent-research-explorer-gemini",
         "execution=persistent_explorer_session_direct",
         "archive",
         "local FIFO",

@@ -44,6 +44,9 @@ independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_transport_authority=exclusive_for_explorer_direction_and_methodology_reviews
 independent_pro_review_transport_execution=persistent_explorer_session_direct
 independent_pro_review_stable_key=hmasd-independent-research-explorer-pro
+independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini
+independent_review_provider_contract=one_parameterized_agentify_interface
+independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
 independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET
@@ -94,12 +97,16 @@ Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct each exact candidate review without per-review user or WDM
 authorization. It directly uses `$hmasd-agentify-pro-transport` with
 `transport_owner=independent_research_explorer` and
-`hmasd-independent-research-explorer-pro`, running
-`prepare -> submit -> verify -> archive` in this persistent session. It never
-spawns a review/monitor child or heartbeat. The same request recovers the same
-durable operation without another send; one fresh key is allowed only after
-`submit --verify-existing` returns `present=false`. First binding or a missing
-tab after Agentify restart may use `--allow-tab-creation`.
+the provider-matched Pro or Gemini key, running
+`prepare -> submit -> verify -> archive` in this persistent session. ChatGPT
+and Gemini use the same strict receipt-bearing lifecycle and the same standalone
+natural-language question; Pro-canonical and Gemini-advisory labels remain in
+local intake metadata. The local execution plan, assignment identity, authority
+and transport records never enter the reviewer composer. Explorer never spawns
+a review/monitor child or heartbeat. The same request recovers the same durable
+operation without another send; one fresh key is allowed only after
+`submit --verify-existing` returns `present=false`. First ChatGPT binding or a
+missing bound page after Agentify restart may use `--allow-tab-creation`.
 
 Explorer archives the exact response under its assigned
 `local_research/pro_reviews/<review-id>/` item root before enqueuing it for local

@@ -217,6 +217,7 @@ foreach ($required in @(
     'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
     'independent_research_explorer_session=019fbded-24cb-7541-aa16-0111b626b945',
     'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
+    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
     'independent_research_review_transport_execution=persistent_explorer_session_direct',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
@@ -232,22 +233,19 @@ foreach ($entry in @(
     @(($codePmRole -replace '\s+', ' '), 'transport_owner=code_project_manager'),
     @($workflowDesignManagerRole, 'agentify_transport_real_review_send=forbidden'),
     @($independentResearchRole, 'independent_pro_review_stable_key=hmasd-independent-research-explorer-pro'),
-    @($independentReviewSkill, 'stable_key=hmasd-independent-research-explorer-pro'),
-    @($agentifyTransportSkill, 'transport_backend'),
-    @($agentifyTransportSkill, 'transport_owner'),
+    @($independentResearchRole, 'independent_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini'),
+    @($independentReviewSkill, 'chatgpt_stable_key=hmasd-independent-research-explorer-pro'),
+    @($independentReviewSkill, 'gemini_stable_key=hmasd-independent-research-explorer-gemini'),
+    @($agentifyTransportSkill, 'provider=chatgpt|gemini'),
+    @($agentifyTransportSkill, 'standalone `RAW_QUESTION`'),
     @($agentifyTransportSkill, 'hmasd-uav-formal-pro'),
-    @($agentifyTransportSkill, 'assignment_identity'),
-    @($agentifyTransportSkill, 'timeout_ms'),
-    @($agentifyTransportSkillNormalized, 'Active generation or a readable complete response always suppresses another'),
-    @($agentifyTransportSkillNormalized, 'one fresh unchanged-question request with a new operation key and perform one fresh send'),
-    @($agentifyTransportSkillNormalized, 'idempotency record'),
-    @($agentifyTransportSkillNormalized, 'No request, response, snapshot digest, byte count or fingerprint is a workflow admission field'),
-    @($agentifyTransportSkillNormalized, 'WDM is not a recovery approver'),
-    @($agentifyTransportSkillNormalized, 'requires exactly one live tab whose stable key, provider and conversation URL match'),
-    @($agentifyTransportSkillNormalized, 'fail before `/review-query`'),
-    @($agentifyTransportSkillNormalized, 'duplicate submission of the same operation'),
+    @($agentifyTransportSkillNormalized, 'Only `present=false`, no persisted user message and an unchanged question allow one fresh operation key'),
+    @($agentifyTransportSkillNormalized, 'Never switch tools, interfaces or transport strategy during recovery'),
+    @($agentifyTransportSkillNormalized, 'No digest, byte count or fingerprint is a workflow admission field'),
+    @($agentifyTransportSkillNormalized, 'first ChatGPT binding'),
     @($agentifyTransportContractNormalized, 'agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper'),
     @($agentifyTransportContract, '| `hmasd-uav-formal-pro` | Code Project Manager | `uav_validation` Pro conversation |'),
+    @($agentifyTransportContract, '| `hmasd-independent-research-explorer-gemini` | Independent Research Explorer | independent-research Gemini advisory conversation |'),
     @($agentifyTransportContractNormalized, 'tab navigation cannot rebind or overwrite that durable binding'),
     @($agentifyTransportContractNormalized, 'transport_tab_mutation=forbidden'),
     @($agentifyTransportContractNormalized, 'missing_or_mismatched_tab=fail_before_review_query'),
@@ -268,7 +266,6 @@ foreach ($entry in @(
     @($agentifyTransportScript, 'POST_SEND_BLOCKED'),
     @($agentifyTransportScript, '_terminate_owned_worker'),
     @($agentifyTransportContractNormalized, 'prompt_visible_required_before_send=true'),
-    @($agentifyTransportContractNormalized, 'send_confirmation_timeout_seconds=60'),
     @($agentifyTransportContractNormalized, 'process_existence_is_send_evidence=false'),
     @($agentifyTransportScript, 'sendCount'),
     @($agentifyTransportScript, 'sendActionCount'),
@@ -291,6 +288,7 @@ foreach ($required in @(
     'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews',
     'independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews',
     'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
+    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
     'independent_research_review_transport_execution=persistent_explorer_session_direct',
     'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
     'independent_research_wdm_campaign_approval=none',
@@ -313,7 +311,8 @@ foreach ($required in @(
     'invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`',
     'there is no separate persistent review-operator session',
     'transport_owner=independent_research_explorer',
-    'stable_key=hmasd-independent-research-explorer-pro',
+    'chatgpt_stable_key=hmasd-independent-research-explorer-pro',
+    'gemini_stable_key=hmasd-independent-research-explorer-gemini',
     'execution=persistent_explorer_session_direct',
     'item_root=local_research/pro_reviews/<review-id>/',
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
@@ -564,10 +563,10 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    '"transport_owner": "<registered-transport-owner>"',
-    '"stable_key": "<owner-scoped-stable-key>"')) {
+    '--owner <registered-owner> --stable-key <owner-key>',
+    '--provider <chatgpt|gemini>')) {
     if (-not $agentifyTransportSkill.Contains($required)) {
-        throw "Agentify generic request schema is owner-specific: $required"
+        throw "Agentify provider-parameterized request contract missing: $required"
     }
 }
 foreach ($stale in @(

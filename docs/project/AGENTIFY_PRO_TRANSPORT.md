@@ -11,15 +11,15 @@ agentify_required_commit=read_AGENTIFY_REQUIRED_COMMIT_from_wrapper
 browser_backend=chrome-cdp
 browser_window_policy=one_agentify_process_one_chrome_window
 stable_key_tab_policy=one_live_tab_per_stable_key
-transport_tab_mutation=forbidden_except_first_binding_or_post_restart_allow_tab_creation
+providers=chatgpt|gemini
+provider_workflow=one_parameterized_strict_review_interface
+reviewer_payload=standalone_RAW_QUESTION_only
+transport_tab_mutation=forbidden_except_first_chatgpt_binding_or_post_restart_reopen
 missing_or_mismatched_tab=fail_before_review_query
 prompt_visible_required_before_send=true
-send_confirmation_timeout_seconds=60
-ledger_poll_seconds=1
-generation_progress_interval_seconds=300
 process_existence_is_send_evidence=false
-transport_lifecycle=PREPARED|TAB_READY|DISPATCH_STARTED|MESSAGE_CONFIRMED|GENERATING|STABLE_COMPLETE|ARCHIVED|INTAKE_COMPLETE
-transport_terminal=PRE_SEND_BLOCKED|POST_SEND_BLOCKED
+transport_lifecycle=prepare|submit_once|verify_natural_completion|archive_exact_response
+transport_terminal=NATURAL_COMPLETION_VERIFIED|AGENTIFY_TRANSPORT_BLOCKED
 ```
 
 Browser transport is retired; Agentify is the sole External Pro transport.
@@ -32,6 +32,7 @@ Browser transport is retired; Agentify is the sole External Pro transport.
 | `hmasd-uav-formal-pro` | Code Project Manager | `uav_validation` Pro conversation |
 | `hmasd-explorer-validation-pro` | Code Project Manager | Explorer validation Pro conversation |
 | `hmasd-independent-research-explorer-pro` | Independent Research Explorer | independent-research Pro conversation |
+| `hmasd-independent-research-explorer-gemini` | Independent Research Explorer | independent-research Gemini advisory conversation |
 
 Stable keys identify a runtime binding, not a repository conversation record.
 The three Code Project Manager keys are workstream-specific and cannot
@@ -53,60 +54,40 @@ in role/Skill text. The binding is loaded from the local Agentify state at the
 time of the operation and must match the selected owner and requested Pro
 model before sending.
 
-Independent direction and methodology reviews run directly in the persistent
-Explorer session. The transport owner and stable key are
-`independent_research_explorer` and
-`hmasd-independent-research-explorer-pro`; each assignment owns one exact
-`local_research/pro_reviews/<review-id>/` root and its owner-local page/evidence
-record. Explorer never reuses a CPM workstream record.
+Independent reviews run directly in the persistent Explorer session. ChatGPT
+and Gemini are two provider instances of this same contract and receive the
+same standalone natural-language question. Pro canonical/Gemini advisory
+labels exist only in local intake metadata. Each operation owns one exact
+`local_research/pro_reviews/<review-id>/` root; Explorer never reuses a CPM
+workstream record.
 
 ## One-round protocol
 
-1. The owning persistent CPM or Explorer session verifies an active user grant
-   or one explicit review assignment. For Agentify, the registered wrapper
-   reads the UTF-8 prompt and writes one new role-owned
-   `TRANSPORT_BACKEND.json` plus its matching request.
-2. The immutable selection is reloaded before every send or recovery.
-3. For Agentify, the owner resolves its stable key to one already-live runtime
-   conversation tab and uses the wrapper's `prepare` command to persist the
-   immutable request identity before sending. If the tab is missing, the
-   wrapper may create one only for the first binding or for post-restart
-   recovery when the owner explicitly supplies `--allow-tab-creation`.
-4. Immediately before submission, the wrapper reads `/tabs` and scoped
-   `/status`; only one exact, unblocked, idle and prompt-visible tab permits a
-   new `/review-query` send. These checks perform no page mutation; a failure
-   permits no create, navigation or fallback action except the bounded
-   first-binding or post-restart `--allow-tab-creation` case in step 3.
-   CPM and Explorer run this transport directly in their persistent owner
-   sessions; no transport child, monitor or heartbeat is created.
-5. The wrapper starts one owned synchronous submit worker and separately polls
-   Agentify's durable operation ledger. `MESSAGE_CONFIRMED` requires exactly
-   one send/action, non-null user-message identity and submission time, and
-   exact tab/conversation identity. Process existence is never send evidence.
-6. If no message is confirmed within 60 seconds, terminate only that worker,
-   reread the ledger and return `PRE_SEND_BLOCKED`. Once a user-message
-   identity exists, observe only that operation until natural completion or
-   `POST_SEND_BLOCKED`; it is the irreversible post-send boundary even when
-   another identity predicate is missing. Early worker exit never shortens the
-   60-second ledger-confirmation window.
-7. Agentify submits at most one exact prompt for that operation. The wrapper
-   never activates UI controls or performs a second send under the same key.
-8. The transport validator
-   `.agents/skills/hmasd-agentify-pro-transport/scripts/hmasd_agentify_pro_transport.py`
-   checks the stable key, conversation, selected model, completion snapshots
-   and archived response integrity.
-9. Only a complete validated request/receipt pair permits exact raw archival
-   and assigned mechanical intake. Lifecycle phase changes are observable; a
-   long `GENERATING` phase reports at most every five minutes. The receipt is evidence of transport only;
-   it cannot interpret science or authorize code, compute or project state.
+1. Freeze a concise local execution plan: standalone `RAW_QUESTION`, provider
+   instances and live pages, operation keys and maximum sends, status checks,
+   archive paths, verify-existing recovery and completion criteria. This plan
+   and all authority/identity fields remain local in the role-owned
+   `TRANSPORT_BACKEND.json`, request and receipt.
+2. `prepare` validates the local request without searching the question for
+   assignment or Git metadata. Existing bindings use live URL/ID/model. First
+   ChatGPT binding starts from one authenticated blank root page; the single
+   persisted question creates and durably binds the real conversation. Gemini
+   uses its existing `/app/<id>` page through the same interface.
+3. Read authenticated `/tabs` and scoped `/status`. Only one exact, idle,
+   unblocked and prompt-visible page permits strict `/review-query`.
+4. Insert the whole question once, verify the composer and send once. Durable
+   user-message identity proves the irreversible boundary; process existence
+   does not. Never use generic query, per-character typing, attachment,
+   computer-use, placeholder or response-control fallback.
+5. Observe the same operation until the same assistant message and text are
+   stable in two snapshots at least three seconds apart and generation is
+   inactive. Then validate and archive the exact response once.
 
-An unavailable conversation or incomplete response stops that operation. For
-recovery, the owning session first invokes `submit --verify-existing` against
-the same request. `present=true` observes and completes that operation;
-`present=false` is required before preparing one fresh unchanged-question
-request with a new operation key. A fresh operation must reuse the same exact
-idle tab, except first binding or post-restart missing-tab recovery explicitly
-using `--allow-tab-creation`. A transport failure consumes zero scientific
+If evidence invalidates the plan, stop that branch and use read-only status plus
+`submit --verify-existing`. `present=true` resumes observation; only
+`present=false`, no persisted user message and an unchanged question permit one
+fresh operation key and at most one fresh send. A second failure is
+`AGENTIFY_TRANSPORT_BLOCKED`, not science, and consumes zero scientific
 iterations.
 
 ## Minimal recovery

@@ -176,6 +176,7 @@ foreach ($required in @(
     'independent_pro_review_transport_execution=persistent_explorer_session_direct',
     'transport_owner=independent_research_explorer',
     'hmasd-independent-research-explorer-pro',
+    'hmasd-independent-research-explorer-gemini',
     'prepare -> submit -> verify -> archive')) {
     if (-not $explorer.Contains($required)) {
         throw "Explorer direct transport contract missing: $required"

@@ -71,6 +71,7 @@ independent_research_canonical_scientific_authority=none
 independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
 independent_research_explorer_external_review_transport_authority=exclusive_for_independent_research_reviews
 independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro
+independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini
 independent_research_review_transport_execution=persistent_explorer_session_direct
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
@@ -140,7 +141,7 @@ A future project-external write requires a new explicit user instruction for its
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and direct Pro transport: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Exact mechanical Pro transport and result intake: each owning persistent session through `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`.
+- Exact mechanical external-review transport and result intake: each owning persistent session through the provider-parameterized `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`; only standalone `RAW_QUESTION` content enters the reviewer composer.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.

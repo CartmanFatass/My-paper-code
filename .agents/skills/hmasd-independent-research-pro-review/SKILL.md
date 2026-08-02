@@ -1,9 +1,9 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer for one exact direction or methodology Pro review, with direct Agentify transport and local FIFO intake.
+description: Use from the persistent Independent Research Explorer for one exact Pro or Gemini direction/methodology review through the unified Agentify interface.
 ---
 
-# HMASD Independent Research Pro Review
+# HMASD Independent Research External Review
 
 ## Boundary
 
@@ -23,32 +23,40 @@ Load `$hmasd-agentify-pro-transport` only for the exact receipt-bearing
 
 ## Stable transport binding
 
-Use the registered owner and key exactly as follows:
+Use the registered owner and provider-matched key exactly as follows:
 
 ```text
 transport_owner=independent_research_explorer
-stable_key=hmasd-independent-research-explorer-pro
+chatgpt_stable_key=hmasd-independent-research-explorer-pro
+gemini_stable_key=hmasd-independent-research-explorer-gemini
 execution=persistent_explorer_session_direct
 assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
 provision_command=provision-direction
 item_root=local_research/pro_reviews/<review-id>/
 ```
 
-At most one nonterminal operation may be active on this key. Do not create or
+At most one nonterminal operation may be active per key. ChatGPT and Gemini use
+the same strict receipt-bearing lifecycle. Pro is canonical and Gemini advisory
+only in local intake metadata; both receive the same standalone natural-language
+question. Do not create or
 consult a shared page registry, methodology operator, review child, monitor,
 heartbeat or batch transport state. Runtime conversation identity, URL, model
 and credentials come only from the live Agentify binding.
 
 ## Exact transport sequence
 
-1. Freeze one exact prompt. Its assignment identity begins with exactly
+1. Freeze one concise local execution plan and one standalone UTF-8
+   `RAW_QUESTION`. The question contains only natural-language scientific
+   content; assignment, authority, session, Git/path, provider and transport
+   fields remain local. The local assignment identity begins with exactly
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. Run the registered `provision-direction` command for either exact prefix;
-   it copies the frozen prompt into that assignment's exact item root. Then run
-   Agentify `prepare` once with the Explorer owner, stable key, live
-   conversation binding, operation identity and prompt path.
+2. Run `provision-direction` for either prefix; it copies only the frozen
+   question into the item root. Then run `prepare` once with the Explorer owner,
+   provider-matched stable key, live binding, local operation identity and
+   question path. First ChatGPT binding uses the authenticated blank-root path;
+   Gemini uses its existing `/app/<id>` page through the same interface.
 3. Run `submit` once. If the operation is already durable, use
    `submit --verify-existing`, which never sends. A fresh unchanged-question
    operation is allowed only after that check reports `present=false`.
@@ -60,6 +68,12 @@ and credentials come only from the live Agentify binding.
 5. Run `archive` to the same Explorer-owned item root, then enqueue the exact
    archived response in the Explorer's local FIFO before scientific
    reconciliation. Transport completion never chooses the next candidate.
+
+When one paired protocol includes a common follow-up, freeze that follow-up as
+a second standalone natural-language question and one new operation key per
+provider. Send it once in each provider's existing bound conversation through
+the same sequence. Sequential observation is allowed for attribution; it does
+not create a second workflow or permit provider-specific prompt metadata.
 
 An incomplete request, missing or conflicting binding, or transport ambiguity
 blocks only that operation. Recover the same durable operation first; do not

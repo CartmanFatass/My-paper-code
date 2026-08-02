@@ -125,6 +125,7 @@ $routerRequired = @(
     'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'independent_research_explorer_external_review_stable_key=hmasd-independent-research-explorer-pro',
+    'independent_research_explorer_gemini_advisory_stable_key=hmasd-independent-research-explorer-gemini',
     'independent_research_review_transport_execution=persistent_explorer_session_direct'
 )
 foreach ($required in $routerRequired) {

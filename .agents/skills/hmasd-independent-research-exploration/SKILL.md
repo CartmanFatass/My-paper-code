@@ -75,12 +75,16 @@ A direction review or bounded methodology audit inside the active
 user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes one exact
-assignment and review mode and directly runs
+assignment, review mode and concise local execution plan, then directly runs
 `prepare -> submit -> verify -> archive` with
-`transport_owner=independent_research_explorer`, stable key
-`hmasd-independent-research-explorer-pro`, the exact prompt, operation identity
-and item root. No review/monitor child, heartbeat, methodology-operator handoff,
-global page registry or batch transport state participates.
+`transport_owner=independent_research_explorer`, the provider-matched Pro or
+Gemini stable key, one standalone `RAW_QUESTION`, local operation identity and
+item root. ChatGPT and Gemini use the same provider-parameterized strict
+Agentify interface; the same scientific question is sent once per selected
+provider instance. Pro-canonical/Gemini-advisory labels, authority, assignment,
+path and transport metadata remain local. No review/monitor child, heartbeat,
+methodology-operator handoff, global page registry or batch transport state
+participates.
 
 The same request recovers the existing durable operation without another send.
 Before one fresh operation, `submit --verify-existing` must report
@@ -100,10 +104,10 @@ confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
 check. Never compare candidates or turn either review into project adoption.
 
-At most one operation may be active on
-`hmasd-independent-research-explorer-pro`. An incomplete request or transport
-ambiguity affects that operation only; Explorer continues unrelated research
-and applies the shared minimal recovery rule without creating a duplicate send.
+At most one operation may be active per registered stable key. An incomplete
+request or transport ambiguity affects that operation only; Explorer continues
+unrelated research and applies the shared minimal recovery rule without a
+duplicate send or a strategy change outside the frozen local plan.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating

@@ -61,7 +61,7 @@ class AgentifyTransportTest(unittest.TestCase):
         self.root = Path(self.temp.name)
         (self.root / "docs/external-review/round").mkdir(parents=True)
         (self.root / "logs/agentify/round").mkdir(parents=True)
-        self.prompt = "Assignment: ROUND-ABC\nReply exactly."
+        self.prompt = "Assess whether the proposed estimator is identifiable."
         self.prompt_path = self.root / "docs/external-review/round/20_PRO_OPEN_QUESTION.md"
         self.prompt_path.write_bytes(self.prompt.encode("utf-8"))
         self.backend_selection_path = self.root / "logs/agentify/round/TRANSPORT_BACKEND.json"
@@ -85,6 +85,7 @@ class AgentifyTransportTest(unittest.TestCase):
             "model": "Pro",
             "conversation_url": "https://chatgpt.com/c/conversation-1",
             "conversation_id": "conversation-1",
+            "first_binding": False,
             "idempotency_key": "round-abc-stage-1",
             "assignment_identity": "ROUND-ABC",
             "backend_selection_path": str(self.backend_selection_path),
@@ -192,10 +193,6 @@ class AgentifyTransportTest(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        missing = dict(self.request)
-        missing["assignment_identity"] = "ROUND-MISSING"
-        with self.assertRaisesRegex(MODULE.TransportError, "assignment_identity_not_in_prompt"):
-            MODULE.validate_request(missing, repo_root=self.root)
         selection = json.loads(self.backend_selection_path.read_text(encoding="utf-8"))
         selection["assignment_identity"] = "ROUND-ABC"
         self.backend_selection_path.write_text(json.dumps(selection), encoding="utf-8")
@@ -206,7 +203,7 @@ class AgentifyTransportTest(unittest.TestCase):
         item = self.root / "local_research/pro_reviews/direction-1"
         item.mkdir(parents=True)
         prompt = item / "20_PRO_OPEN_QUESTION.md"
-        prompt.write_text("IR_DIRECTION_REVIEW:direction-1\nReview exactly.\n", encoding="utf-8")
+        prompt.write_text("Review the scientific mechanism and its strongest alternative explanation.\n", encoding="utf-8")
         selection = item / "TRANSPORT_BACKEND.json"
         selection.write_text(
             json.dumps(
@@ -254,13 +251,15 @@ class AgentifyTransportTest(unittest.TestCase):
         selection = self.root / "logs/agentify/frozen/TRANSPORT_BACKEND.json"
         request_path = self.root / "logs/agentify/frozen/REQUEST.json"
         prompt = self.root / "docs/external-review/round/frozen_question.md"
-        prompt.write_text("Assignment: ROUND-FROZEN\nReply exactly.", encoding="utf-8")
+        prompt.write_text("Evaluate the scientific claim and identify the smallest separating test.", encoding="utf-8")
         args = SimpleNamespace(
             owner="code_project_manager",
             stable_key="hmasd-formal-pro",
+            provider="chatgpt",
             model="Pro",
             conversation_url="https://chatgpt.com/c/conversation-1",
             conversation_id="conversation-1",
+            first_binding=False,
             assignment_identity="ROUND-FROZEN",
             operation_key="round-frozen-operation",
             prompt_path=prompt,
@@ -291,12 +290,16 @@ class AgentifyTransportTest(unittest.TestCase):
             MODULE.validate_request(prepared_request, repo_root=self.root)["prompt"],
             prompt.read_bytes().decode("utf-8"),
         )
+        validated = MODULE.validate_request(prepared_request, repo_root=self.root)
+        body = MODULE.agentify_body(validated, verify_existing=False)
+        self.assertEqual(body["prompt"], prompt.read_text(encoding="utf-8"))
+        self.assertNotIn(prepared_request["assignment_identity"], body["prompt"])
 
     def test_direction_provision_copies_exact_explorer_prompt_once(self) -> None:
         source = self.root / "local_research/frozen_direction_prompt.md"
         source.parent.mkdir(parents=True)
         identity = "IR_DIRECTION_REVIEW:direction-1"
-        source_bytes = f"{identity}\nReview the frozen candidate.\n".encode("utf-8")
+        source_bytes = b"Review the frozen candidate's causal mechanism and alternatives.\n"
         source.write_bytes(source_bytes)
         item = self.root / "local_research/pro_reviews/direction-1"
         prompt = item / "20_PRO_OPEN_QUESTION.md"
@@ -330,7 +333,7 @@ class AgentifyTransportTest(unittest.TestCase):
         source = self.root / "local_research/frozen_methodology_prompt.md"
         source.parent.mkdir(parents=True)
         source.write_text(
-            "IR_METHODOLOGY_REVIEW:methodology-1\nReview the frozen method.\n",
+            "Review the methodology's assumptions, estimand, and strongest counterexample.\n",
             encoding="utf-8",
         )
         prompt = self.root / "local_research/pro_reviews/methodology-1/20_PRO_OPEN_QUESTION.md"
@@ -355,6 +358,64 @@ class AgentifyTransportTest(unittest.TestCase):
         prepare = MODULE.build_parser()._subparsers._group_actions[0].choices["prepare"]
         self.assertNotIn("--prompt-sha256", prepare.format_help())
         self.assertNotIn("--prompt-source", prepare.format_help())
+
+    def test_prepare_first_binding_needs_no_preexisting_conversation_identity(self) -> None:
+        item = self.root / "local_research/pro_reviews/first-binding"
+        item.mkdir(parents=True)
+        prompt = item / "20_PRO_OPEN_QUESTION.md"
+        prompt.write_text("Assess the scientific mechanism.", encoding="utf-8")
+        selection = item / "TRANSPORT_BACKEND.json"
+        request_path = item / "REQUEST.json"
+        args = SimpleNamespace(
+            owner="independent_research_explorer",
+            stable_key="hmasd-independent-research-explorer-pro",
+            provider="chatgpt",
+            model="Pro",
+            conversation_url=None,
+            conversation_id=None,
+            first_binding=True,
+            assignment_identity="IR_DIRECTION_REVIEW:first-binding",
+            operation_key="first-binding-operation",
+            prompt_path=prompt,
+            timeout_ms=300000,
+            selection=selection,
+            request=request_path,
+        )
+        with mock.patch.object(MODULE, "_repo_root", return_value=self.root):
+            MODULE.command_prepare(args)
+        request = json.loads(request_path.read_text(encoding="utf-8"))
+        self.assertEqual(request["conversation_url"], "https://chatgpt.com/")
+        self.assertEqual(request["conversation_id"], "__new__")
+        self.assertTrue(request["first_binding"])
+
+    def test_gemini_uses_same_request_contract_with_its_own_binding(self) -> None:
+        item = self.root / "local_research/pro_reviews/gemini"
+        item.mkdir(parents=True)
+        prompt = item / "20_PRO_OPEN_QUESTION.md"
+        prompt.write_text("Assess the scientific mechanism.", encoding="utf-8")
+        selection = item / "TRANSPORT_BACKEND.json"
+        selection.write_text(json.dumps({
+            "schema_version": 1,
+            "assignment_identity": "IR_DIRECTION_REVIEW:gemini",
+            "transport_backend": "agentify",
+            "operation_key": "gemini-operation",
+        }), encoding="utf-8")
+        request = {
+            **self.request,
+            "transport_owner": "independent_research_explorer",
+            "stable_key": "hmasd-independent-research-explorer-gemini",
+            "provider": "gemini",
+            "model": "Gemini 2.5 Pro",
+            "conversation_url": "https://gemini.google.com/app/gemini-review",
+            "conversation_id": "gemini-review",
+            "idempotency_key": "gemini-operation",
+            "assignment_identity": "IR_DIRECTION_REVIEW:gemini",
+            "backend_selection_path": str(selection),
+            "prompt_path": str(prompt),
+        }
+        validated = MODULE.validate_request(request, repo_root=self.root)
+        self.assertEqual(validated["provider"], "gemini")
+        self.assertFalse(validated["first_binding"])
 
     def test_receipt_rejects_wrong_send_identity_completion_and_control_state(self) -> None:
         mutations = [
