@@ -26,7 +26,7 @@ working_branch=untied-k
 execution_mode=authorized
 active_assignment_id=D7_S_R4_ABSOLUTE_FOCAL_MARGIN
 next_boundary=Workflow 8 OPEN: V-K0D order-robust carrier design per the ruling of round 20260802_vk0c_order_transport_result. Arms frozen by Pro: (i) permutation-equivariant/order-symmetrized high controller (PRIMARY; exact order-conjugacy assertion gate before any conclusion-bearing training), (ii) order-randomized current R30 (mandatory simpler control), (iii) canonical-only R30 reference. Arms match on information, KEEP/SET support, model/optimizer exposure, env interactions, seeds, evaluation bank, both serialization tests; interpretation grid in the raw. After order robustness: rerun the COMPLETE V-K0B access screen before any V-K1 comparison. V-K0C authoritative result: VK0C_FACTORIZED_RECORD VALID (structural sensitivity present, fresh nonmaterial 0.000383; trained specialization 1.2497 material both strata; amplification 1.2493; pure occupancy mediation rejected; propagation reproduces the competence split). V-K1, renewal classes, variable-N/UAV blocked; D7.S/B3-L HELD.
-workflow_position=workflow 7 CLOSED (VALID V-K0C factorized record; ITERATION_37 written); workflow 8 open at step 1 (V-K0D design)
+workflow_position=workflow 7 CLOSED (VALID V-K0C factorized record; ITERATION_37 written); workflow 8 design CONVERGED and stack implemented (dd131d54, 1d91ab20); formal 18-run training was IN FLIGHT at session end 2026-08-02 05:40 — see docs/project/HANDOFF_20260802.md FIRST
 ```
 
 An iteration **is** one whole Pro-to-Pro loop. The three-access rule that
