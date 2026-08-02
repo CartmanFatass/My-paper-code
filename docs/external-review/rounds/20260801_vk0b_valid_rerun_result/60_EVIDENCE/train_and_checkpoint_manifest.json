@@ -1,0 +1,623 @@
+{
+  "authorization": {
+    "action_table_hash": "6c9a55e5c3d9cd9288689f215a77b99e3b10902862a644c68e32ef9ebc571dab",
+    "artifact_sha256": "597b2eadd8b5182b24f0bf20dcd38a6ae080660891ef31cc8f89465e2c424991",
+    "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+    "environment_blob_sha": "7031ff4374f5e4649b20202dec71a14f1eb90efb",
+    "oracle_script_hash": "0acbc40d9137fd1f921e51adeadd604951121fb5",
+    "panel_schema_version": "vk0a-1",
+    "row_count": 112,
+    "stage_commit": "b7604cc37be6b27980815a51f6e895c9d3b1ee28",
+    "validity_predicates": {
+      "fixed_primitive_table_consistent": true,
+      "full_action_support_maximization_exhausted": true,
+      "identical_initial_state_across_branches": true,
+      "legal_edit_enumeration_exact": true,
+      "no_check_crossed_within_window": true,
+      "only_external_reward_used": true,
+      "permutation_relabels_only": true,
+      "same_label_set_excluded": true
+    },
+    "verdict": "TOY_HETEROGENEOUS_RENEWAL_URGENCY_IDENTIFIED"
+  },
+  "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+  "replay_mismatch": false,
+  "run_verdict": null,
+  "seeds": {
+    "2026080101": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 6239
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 249761
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "ea99276a9bc3da9c8dd4016b3b66eb5cbdc0d5c11e231f2957910665b3b3a914",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080101\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "456dff72734673ce028fdb7d687c9e2c1ef307ee098b74c6301ad1ff3e31b139"
+    },
+    "2026080102": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 6369
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 249631
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "45b4e77d471dafddc4d9ceecb0aa11d829804e4999364c920cfc420cb0bc74fe",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080102\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "5a0defc0ab2a4d66af63ff6b7d4cb32ebb0a2ee45e312e003ba8e75b30d088a6"
+    },
+    "2026080103": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 6948
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 249052
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "996a14e2578ddd25e83999a9e5a897c5d5b385cc7c6f2a613958fa538ba237b6",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080103\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "6e4fe6d891ba03da892368cf7b1c81ab4ef5965247879b2182e61f98b5a6dae5"
+    },
+    "2026080104": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 6415
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 249585
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "db07e9137a3199c08787e08709e01384a540504d1b8b44e56cd655d3a39b09bc",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080104\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "0fa57d6392f3f0741a359773e2573b04410b5734af48ec788135d7a3e7f53a8a"
+    },
+    "2026080105": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 4279
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 251721
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "3a45944c61025bf6e7322cef9060364e425398a9bb4dc5ddf3b5a3bd90a146cd",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080105\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "5872d71a7f32fa4840212ac094109ee654fadd419c903c732ae4a0bf2607fd6a"
+    },
+    "2026080106": {
+      "actual_exposure": {
+        "actual_exposure_schema": "vk0b-exposure-1",
+        "agent_tokens_keep": {
+          "source": "training_accumulator",
+          "value": 9033
+        },
+        "agent_tokens_set": {
+          "source": "training_accumulator",
+          "value": 246967
+        },
+        "completed_outer_updates": {
+          "source": "runtime_counter",
+          "value": 1000
+        },
+        "environment_interactions": {
+          "source": "runtime_counter",
+          "value": 640000
+        },
+        "high_actor_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_actor_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_actor_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 10
+        },
+        "high_check_sequences_completed": {
+          "source": "training_accumulator",
+          "value": 128000
+        },
+        "high_check_sequences_failed_or_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_pass_abort_reasons": [],
+        "high_epoch_pass_skip_reasons": [],
+        "high_epoch_passes_aborted": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_attempted": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_epoch_passes_skipped": {
+          "source": "training_accumulator",
+          "value": 0
+        },
+        "high_epoch_passes_stepped": {
+          "source": "training_accumulator",
+          "value": 3000
+        },
+        "high_optimizer_parameter_coverage_ok": {
+          "source": "optimizer_state",
+          "value": true
+        },
+        "high_optimizer_semantics": "SHARED_ACTOR_VALUE_OPTIMIZER",
+        "high_optimizer_step_max": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_step_min": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_optimizer_steps_shared": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_optimizer_steps": {
+          "source": "optimizer_state",
+          "value": 3000
+        },
+        "high_value_parameter_count_expected": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "high_value_parameter_count_with_step_state": {
+          "source": "optimizer_state",
+          "value": 8
+        },
+        "low_level_optimizer_steps": {
+          "source": "checkpoint_optimizer_absence",
+          "value": 0
+        }
+      },
+      "checkpoint_hash": "fe8af7d41ae4b17d84bb2df438c20be760629c042e59cb126685ea33858464ab",
+      "low_optimizer_steps": 0,
+      "mismatched_families": [],
+      "preflight_manifest_path": "logs\\vk0b_r2\\2026080106\\vk0b_preflight_manifest.json",
+      "replay_mismatch": false,
+      "resolved_config_hash": "6e2f1c52393fc5c338ebebd5d246ee6b272f3ac9837fccc0d507d629cc80798c",
+      "source_run_manifest_sha256": "9166d7c7cbd8361a163367cadf424a5bc5a7d8e64ac83a155a8530ff5b255554"
+    }
+  },
+  "trace_schema_version": "vk0-trace-2"
+}

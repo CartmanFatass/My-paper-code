@@ -1,0 +1,125 @@
+{
+  "analyzer_git_blob_sha1": "a0c8f55abadf82519c2e1635e9d2207a589a2a78",
+  "bootstrap": {
+    "iterations": 10000,
+    "seed": 9095648416924653438,
+    "seed_derivation": "int.from_bytes(sha256('VK0_TOY_RENEWAL_URGENCY|bootstrap')[:8], 'big')"
+  },
+  "competence_floor": {
+    "canonical": {
+      "fast_match": {
+        "lower_95": 0.9930875576036866,
+        "n": 13440,
+        "point": 0.9977678571428571,
+        "upper_95": 1.0
+      },
+      "slow_match": {
+        "lower_95": 0.9960753532182104,
+        "n": 13440,
+        "point": 0.9985119047619048,
+        "upper_95": 1.0
+      }
+    },
+    "pass": false,
+    "reversed": {
+      "fast_match": {
+        "lower_95": 0.5954755525514276,
+        "n": 13440,
+        "point": 0.6168154761904762,
+        "upper_95": 0.6376488095238095
+      },
+      "slow_match": {
+        "lower_95": 0.44013585781133263,
+        "n": 13440,
+        "point": 0.4523809523809524,
+        "upper_95": 0.46703296703296704
+      }
+    }
+  },
+  "contract_id": "VK0_TOY_RENEWAL_URGENCY",
+  "result": {
+    "code": "R30_TOY_ACCESS_NOT_ESTABLISHED",
+    "reason_chain": [
+      "row 1 (INVALID_VARIABLE_K_URGENCY_AUDIT): not triggered",
+      "row 2 (TOY_HETEROGENEOUS_RENEWAL_URGENCY_NOT_IDENTIFIED): not triggered -- panel verdict is IDENTIFIED",
+      "row 3 (R30_URGENCY_TRACE_SUPPORT_INSUFFICIENT): not triggered -- support floor met for every seed",
+      "row 4 (R30_TOY_ACCESS_NOT_ESTABLISHED): triggered -- ['competence floor not met; see competence_floor']"
+    ],
+    "reasons": [
+      "competence floor not met; see competence_floor"
+    ],
+    "row": 4
+  },
+  "row_counts": {
+    "check_rows": 5376,
+    "unit_rows": 107520
+  },
+  "support_floor": {
+    "pass": true,
+    "per_seed": {
+      "2026080101": {
+        "pass": true,
+        "stable_canonical": 192,
+        "stable_reversed": 236,
+        "stable_total": 428,
+        "urgent_canonical": 256,
+        "urgent_reversed": 212,
+        "urgent_total": 468
+      },
+      "2026080102": {
+        "pass": true,
+        "stable_canonical": 192,
+        "stable_reversed": 229,
+        "stable_total": 421,
+        "urgent_canonical": 256,
+        "urgent_reversed": 219,
+        "urgent_total": 475
+      },
+      "2026080103": {
+        "pass": true,
+        "stable_canonical": 191,
+        "stable_reversed": 240,
+        "stable_total": 431,
+        "urgent_canonical": 257,
+        "urgent_reversed": 208,
+        "urgent_total": 465
+      },
+      "2026080104": {
+        "pass": true,
+        "stable_canonical": 192,
+        "stable_reversed": 255,
+        "stable_total": 447,
+        "urgent_canonical": 256,
+        "urgent_reversed": 193,
+        "urgent_total": 449
+      },
+      "2026080105": {
+        "pass": true,
+        "stable_canonical": 192,
+        "stable_reversed": 240,
+        "stable_total": 432,
+        "urgent_canonical": 256,
+        "urgent_reversed": 208,
+        "urgent_total": 464
+      },
+      "2026080106": {
+        "pass": true,
+        "stable_canonical": 192,
+        "stable_reversed": 235,
+        "stable_total": 427,
+        "urgent_canonical": 256,
+        "urgent_reversed": 213,
+        "urgent_total": 469
+      }
+    }
+  },
+  "trace_schema_version": "vk0-trace-2",
+  "training_seeds": [
+    2026080101,
+    2026080102,
+    2026080103,
+    2026080104,
+    2026080105,
+    2026080106
+  ]
+}
