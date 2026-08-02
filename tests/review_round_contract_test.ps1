@@ -43,7 +43,7 @@ foreach ($entry in @(
     @($transportSkill, 'A ChatGPT Pro item uses `GPT-5.6 Pro`'),
     @($transportSkill, 'ensure_agentify_runtime.ps1'),
     @($transportSkill, '`sandbox_permissions=require_escalated`'),
-    @($transportSkill, 'Do not move the state/profile to `C:\tmp`'),
+    @($transportSkill, 'Do not move it to `C:\tmp`'),
     @($transportSkill, 'A missing Agentify service or browser process is an Operator runtime defect, not an item result'),
     @($transportSkill, 'do not send a batch `ERROR` to the requester'),
     @($transportSkill, 'Never claim an action that no tool result proves')
@@ -64,6 +64,7 @@ foreach ($requiredRuntimePreflightTerm in @(
     'service_process_ids',
     'browser_process_ids',
     'AGENTIFY_DESKTOP_CHROME_PROFILE_MODE',
+    "AGENTIFY_DESKTOP_CHROME_PROFILE_MODE = 'isolated'",
     'launched'
 )) {
     if (-not $runtimePreflight.Contains($requiredRuntimePreflightTerm)) {

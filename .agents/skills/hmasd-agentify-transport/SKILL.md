@@ -33,13 +33,14 @@ requester; a future barrier-dependent follow-up belongs in a later batch.
 
 Before interpreting any tab/key state or attempting an item, run the following
 through the shell with `sandbox_permissions=require_escalated` because Agentify
-Desktop writes its existing user profile and launches Chrome:
+Desktop writes its registered isolated profile and launches Chrome:
 
 ```powershell
 & .agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
 ```
 
-Do not move the state/profile to `C:\tmp`, create another profile or substitute
+The required profile is `C:\Users\fires\.agentify-desktop\chrome-user-data`
+with profile directory `Default`. Do not move it to `C:\tmp`, create another profile or substitute
 a bare Chrome launch. If escalation is denied, report that exact internal
 runtime error to WDM and keep the batch pending.
 

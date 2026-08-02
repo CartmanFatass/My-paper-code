@@ -19,8 +19,9 @@ and one scoped Agentify status. Missing runtime is repaired by the operator or
 routed to WDM while the batch remains pending; it is never returned to Explorer
 or CPM as an item/batch failure. A runtime-ready claim without both tool results
 is invalid.
-Run the preflight through the shell's elevated permission path so the existing
-Agentify/Chrome profile remains usable; never replace it with a temporary profile.
+Run the preflight through the shell's elevated permission path so the registered
+Agentify profile at `C:\Users\fires\.agentify-desktop\chrome-user-data` remains
+usable; never replace it with a temporary profile.
 
 One post-error `agentify_status` check distinguishes an idle key from a key
 still occupied by an active query. The latter receives one no-send

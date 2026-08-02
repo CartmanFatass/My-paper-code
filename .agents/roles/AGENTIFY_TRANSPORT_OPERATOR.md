@@ -38,7 +38,7 @@ Only its service/browser process receipt plus a successful scoped Agentify statu
 runtime-ready claim. Missing Agentify Desktop service or Chrome is the operator's setup
 defect: repair it locally or report it to WDM while keeping the batch pending;
 never convert it into an item or batch error returned to the requester.
-Because the service writes its existing user profile and launches a GUI browser,
+Because the service writes its registered isolated profile and launches a GUI browser,
 the preflight is executed with the shell's explicit elevated permission path.
 
 Before each send the operator passes `expected_model` to the query. Agentify

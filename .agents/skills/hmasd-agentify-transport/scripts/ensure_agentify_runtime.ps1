@@ -22,13 +22,10 @@ if ($serviceProcesses.Count -eq 0 -or $browserProcesses.Count -eq 0) {
     if ($ProbeOnly) {
         throw "Agentify runtime is not running: service=$ServiceProcessName browser=$BrowserProcessName"
     }
-    if ($serviceProcesses.Count -eq 0 -and $browserProcesses.Count -gt 0) {
-        throw 'Chrome is running without Agentify Desktop; close Chrome before starting the existing-profile service'
-    }
     if (-not (Test-Path -LiteralPath (Join-Path $AgentifySource 'package.json') -PathType Leaf)) {
         throw "Agentify source is missing: $AgentifySource"
     }
-    $env:AGENTIFY_DESKTOP_CHROME_PROFILE_MODE = 'existing'
+    $env:AGENTIFY_DESKTOP_CHROME_PROFILE_MODE = 'isolated'
     $env:AGENTIFY_DESKTOP_SHOW_TABS = 'true'
     Start-Process -FilePath $NpmExecutable -ArgumentList @('run', 'start') `
         -WorkingDirectory $AgentifySource -WindowStyle Hidden
