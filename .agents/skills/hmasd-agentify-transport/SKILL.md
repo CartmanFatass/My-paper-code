@@ -35,11 +35,13 @@ do not prepend metadata or load requester history.
 
 ## One simple fallback
 
-If the query call errors, inspect `agentify_status` once for the same key and
-provider. Never interrupt or resend while generation is active. If it is idle,
-retry the same `agentify_query` once; after another error return `status=ERROR`
-with the real error. Do not navigate, switch keys, use `agentify_review_query`,
-recover an old response, create a monitor or invent another recovery path.
+Never call `agentify_query` twice for one request. If it errors, inspect
+`agentify_status` and `agentify_read_page` for the same key and provider. If the
+same page is generating or already contains the new partial assistant turn,
+observe that page until natural completion without sending or activating a
+response control. Otherwise return `status=ERROR` with the real error. Do not
+navigate, switch keys, use `agentify_review_query`, recover an old response,
+create a monitor or invent another recovery path.
 
 `COMPLETE` requires the actual query response, file write and message-delivery
 results. Never claim an action that no tool result proves.

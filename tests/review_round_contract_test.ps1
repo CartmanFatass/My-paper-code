@@ -23,7 +23,8 @@ foreach ($entry in @(
     @($operator, 'request_fields=request_id|review_channel|provider|stable_key|question_path|return_task_id'),
     @($transportSkill, 'Call `agentify_query` once'),
     @($transportSkill, 'timeoutMs=2700000'),
-    @($transportSkill, 'retry the same `agentify_query` once'),
+    @($transportSkill, 'Never call `agentify_query` twice for one request'),
+    @($transportSkill, 'observe that page until natural completion without sending'),
     @($transportSkill, 'Never claim an action that no tool result proves')
 )) {
     if (-not $entry[0].Contains($entry[1])) {

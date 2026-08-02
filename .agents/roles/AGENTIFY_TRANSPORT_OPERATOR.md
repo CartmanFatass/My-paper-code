@@ -14,7 +14,7 @@ transport_skill=hmasd-agentify-transport
 workflow_hash_validation=forbidden
 ```
 
-The operator owns one Agentify send, wait and direct retry for the exact request.
+The operator owns one Agentify send and its wait for the exact request.
 It reads the standalone question, writes only the returned raw response in its
 temporary workspace and returns one result. The requester owns archival and
 interpretation. Mechanics live only in the named Skill.
