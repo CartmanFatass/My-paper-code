@@ -84,7 +84,8 @@ user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes one exact
 assignment, review mode and standalone `RAW_QUESTION`, and sends one
-`AGENTIFY_REVIEW_REQUEST` for each selected provider. Accept one
+`AGENTIFY_REVIEW_REQUEST` naming the exact provider `stable_key` for each
+selected provider. Accept one
 `AGENTIFY_REVIEW_RESULT`, archive the named raw response under the review item,
 and then reconcile it. Pro/Gemini labels and all local metadata stay outside the
 transmitted question. Page, adapter and recovery details remain inside the

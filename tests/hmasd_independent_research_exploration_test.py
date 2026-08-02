@@ -588,6 +588,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "one minimal request to the dedicated Agentify task",
         "AGENTIFY_REVIEW_REQUEST",
         "AGENTIFY_REVIEW_RESULT",
+        "exact provider `stable_key`",
         "no archived task ID or route registry",
         "one bounded owned-path scan",
     ):
@@ -599,6 +600,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
         "Send one `AGENTIFY_REVIEW_REQUEST`",
+        "exact `stable_key`",
         "Copy the named raw response",
         "dedicated transport task",
     ):

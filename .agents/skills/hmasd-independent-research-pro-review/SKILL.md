@@ -27,7 +27,8 @@ root before sending.
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
 2. Send one `AGENTIFY_REVIEW_REQUEST` naming that question path, provider,
-   review channel and the current Explorer task as the return target.
+   exact `stable_key`, review channel and the current Explorer task as the
+   return target.
 3. Accept one `AGENTIFY_REVIEW_RESULT`. Agentify page, adapter, waiting and
    recovery mechanics remain inside the dedicated transport task.
 4. Copy the named raw response into `local_research/pro_reviews/<review-id>/`,

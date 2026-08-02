@@ -97,7 +97,8 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct each exact candidate review without per-review user or WDM
 authorization. It sends one `AGENTIFY_REVIEW_REQUEST` containing the standalone
-natural-language question path to the current user-designated Agentify task,
+natural-language question path and exact provider `stable_key` to the current
+user-designated Agentify task,
 accepts one `AGENTIFY_REVIEW_RESULT`, archives the named raw response in the
 review item, and then performs scientific intake. Pro-canonical and
 Gemini-advisory labels remain local and never enter the question. Page,

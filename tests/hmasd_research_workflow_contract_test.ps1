@@ -12,6 +12,7 @@ $requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-explorer-project-validation',
+    'hmasd-agentify-transport',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review',
     'hmasd-workflow-change-audit') | Sort-Object

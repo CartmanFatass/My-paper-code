@@ -128,6 +128,7 @@ $routerRequired = @(
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'external_review_transport_execution=dedicated_agentify_transport_task',
     'agentify_transport_request=AGENTIFY_REVIEW_REQUEST',
+    'agentify_transport_skill=hmasd-agentify-transport',
     'agentify_transport_result=AGENTIFY_REVIEW_RESULT'
 )
 foreach ($required in $routerRequired) {
@@ -162,6 +163,7 @@ $codeRequired = @(
     'protected_implementation_child=hmasd-implementer',
     'AGENTIFY_REVIEW_REQUEST',
     'AGENTIFY_REVIEW_RESULT',
+    'exact provider and `stable_key`',
     'CPM does not operate or debug Agentify',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',

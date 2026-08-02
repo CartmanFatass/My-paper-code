@@ -217,7 +217,8 @@ acceptance owner.
 For an experiment, CPM supplies one complete run assignment and the Experiment
 Operator alone executes `train -> evaluate -> analyze`. For each formal or
 Explorer-to-project review, CPM freezes the standalone question and sends one
-`AGENTIFY_REVIEW_REQUEST` to the current user-designated Agentify task. It
+`AGENTIFY_REVIEW_REQUEST` naming the exact provider and `stable_key` to the
+current user-designated Agentify task. It
 accepts one `AGENTIFY_REVIEW_RESULT`, copies the named raw response into its own
 canonical archive, and performs local intake. Page, provider-adapter and
 recovery details remain inside the Agentify task. CPM does not operate or debug

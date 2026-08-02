@@ -17,7 +17,7 @@ Use exactly one route:
 |---|---|---|
 | Code Project Manager task | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then only the active workstream's named science, code, tests, review, runtime and evidence paths | unrelated workstreams, independent-research corpus and workflow-design history |
 | dedicated Workflow Design Manager task | its exact workflow-design assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, the public `CURRENT_WORK.md` index plus only WDM's linked session/common records, `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, then `.agents/skills/hmasd-workflow-change-audit/SKILL.md` only after plan confirmation | other current-work records, runtime reviews/runs, science and implementation |
-| Agentify Transport Operator task | its exact transport request, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, and its own session workspace | science, code, `CURRENT_WORK.md`, requester history and workflow design |
+| Agentify Transport Operator task | its exact transport request, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, `.agents/skills/hmasd-agentify-transport/SKILL.md`, and its own session workspace | science, code, `CURRENT_WORK.md`, requester history and workflow design |
 | Independent Research Explorer task | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, algorithm-principles sections 1 and 3, then user-named read-only research sources | `CURRENT_WORK.md`, formal science/runtime, code and workflow state |
 | registered native child | its exact assignment, its `.codex/agents/*.toml` profile, the named `.agents/roles/*.md` charter, then only assignment-named files | `CURRENT_WORK.md`, persistent-task history, other role charters |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` interface supplied by the question | repository history or files outside the question boundary |
@@ -73,9 +73,11 @@ independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
 external_review_transport_execution=dedicated_agentify_transport_task
 agentify_transport_request=AGENTIFY_REVIEW_REQUEST
+agentify_transport_request_fields=request_id|review_channel|provider|stable_key|question_path|return_task_id
 agentify_transport_result=AGENTIFY_REVIEW_RESULT
 agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_workspace=temp/sessions/agentify_transport_operator
+agentify_transport_skill=hmasd-agentify-transport
 formal_compute_authority=user_only
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 native_child_authority=exact_assignment_only
@@ -164,7 +166,7 @@ authority rules decide whether user input is required.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and external-review intake: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Agentify transport mechanics: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; CPM and Explorer submit one request and accept one result, then perform their own archive and intake.
+- Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. CPM and Explorer submit one request and accept one result, then perform their own archive and intake.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
