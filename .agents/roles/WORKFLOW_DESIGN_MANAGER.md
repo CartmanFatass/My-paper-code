@@ -39,13 +39,12 @@ workflow_collaboration_runtime_authority=none
 workflow_audit_skill=hmasd-workflow-change-audit
 workflow_harness=.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py
 workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report
-workflow_defect_queue=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
-workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
+workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
 workflow_defect_repair_authority=autonomous_within_accepted_stable_contract
 workflow_router_consistency_check=required_for_every_workflow_change
 workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
 workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
-workflow_children=hmasd-workflow-auditor|hmasd-workflow-implementer|hmasd-workflow-reviewer|hmasd-workflow-cost-reviewer
+workflow_children=hmasd-workflow-auditor|hmasd-workflow-implementer|hmasd-workflow-reviewer
 cross_task_routing_skill=hmasd-cross-task-routing
 cross_task_target_identity=fixed_router_role_session
 cross_task_target_settings=locked_role_session_model_thinking
@@ -69,8 +68,7 @@ control-plane files. Never reconstruct science, runtime or implementation state.
 Once the complete plan is confirmed, WDM continues without per-action approval:
 
 ```text
-inventory -> classify -> smallest_edit -> focused_checks -> risk_triggered_review
--> exact_stage -> commit -> push -> reload_receipt
+inspect -> delete_or_edit -> focused_check -> git_and_reload
 ```
 
 Reversible implementation details inside the confirmed goal and path set are
@@ -81,12 +79,13 @@ reporting role.
 
 Two lanes are distinct. A direct user change request receives one complete plan
 and natural-language confirmation, then the continuous loop runs through Git
-without another approval. A typed defect report is archived before action and
-processed in receipt order. It is advisory evidence: WDM independently checks
-the defect and may repair it without user confirmation only when the change
+without another approval. A typed defect report is appended to the chronological
+incident log. The log preserves order but does not serialize unrelated work or
+create an approval state. The report is advisory evidence: WDM independently
+checks the defect and may repair it without user confirmation only when the change
 restores an accepted stable contract without changing authority, policy,
 science, runtime or external effects. Otherwise WDM closes or reclassifies it
-as a user-change plan. A newer report never preempts the active queue item.
+as a user-change plan. A retryable local failure remains with its operating owner.
 
 The collaborative Skill owns plan stability. The audit Skill owns agile impact
 mapping, implementation, verification, Git integration and reload. The harness
@@ -108,13 +107,20 @@ net_active_line_growth_default=negative_or_zero
 permanent_rule_minimum_independent_recurrences=2
 first_incident_response=root_cause_fix_plus_note_only
 workflow_hash_validation=forbidden
+simple_operation_active_engineering_budget_minutes=20
+simple_operation_failed_probe_budget=2
+simple_operation_paths=one_normal_plus_one_simple_fallback
+simple_operation_success=user_visible_requested_result
+passive_external_generation_wait_excluded_from_engineering_budget=true
 ```
 
 If failure means only “try again”, do not create a state machine, lease,
 sentinel, identity ledger or approval gate. Any proposed mechanism names the
 text or mechanism it deletes, and acceptance uses net active-line change.
 One incident may repair its root cause and record a note; only two independent
-recurrences justify a permanent rule.
+recurrences justify a permanent rule. A simple operation stops engineering after
+20 active minutes or two failed probes, whichever comes first. Passive model
+generation time does not consume that budget and must not be interrupted.
 
 The 1000-line core budget covers exactly `AGENTS.md`, this charter, the
 collaborative Skill, audit Skill, routing Skill and
@@ -134,8 +140,8 @@ mechanism; when touched, its relevant branch must stay flat or shrink.
 
 ## Workflow children
 
-WDM may use the registered Workflow Auditor, Implementer, Reviewer and explicit
-user-requested Cost Reviewer. Their fixed parent is WDM. Every assignment names
+WDM may use the registered Workflow Auditor, Implementer and Reviewer. Their
+fixed parent is WDM. Every assignment names
 `workflow_assignment_id`, exact `owned_paths` and `wdm_session_workspace`.
 Children add no authority: WDM resolves semantic junctions, reads the final
 diff, accepts the artifact and performs Git integration and cross-task routing.
@@ -145,10 +151,11 @@ worktree path. Before editing, the child must verify that
 child before any edit.
 
 Use auditors for disjoint impact families, one implementer per confirmed
-nonoverlapping file family at available native capacity, and one reviewer only for authority/file
-ownership, locked routing/model, Pro transport, compute admission, an
-action-performing script/hook or unresolved cross-worker semantics. Never
-create a review of the review.
+nonoverlapping file family at available native capacity. Use one reviewer only
+for authority/file ownership, locked routing/model, compute admission, an
+action-performing script/hook or unresolved cross-worker semantics. A reviewer
+must evaluate normal-path risk, complexity, maintenance and iteration delay;
+finding count is not value. Never create a review of the review.
 
 ## Public and session workspaces
 

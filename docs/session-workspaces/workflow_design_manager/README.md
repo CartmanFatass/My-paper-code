@@ -12,9 +12,9 @@ This tracked directory holds compact WDM workflow plans and reload receipts.
 WDM alone designs, accepts and integrates workflow-control-plane changes. It
 does not contain project science, code, runtime evidence or review results.
 
-`WORKFLOW_DEFECT_QUEUE.md` is the durable receipt-order queue for typed reports.
-Reports are archived before evaluation and remain advisory; only WDM changes
-their `QUEUED|ACTIVE|CLOSED` status.
+`WORKFLOW_DEFECT_QUEUE.md` is the chronological incident log for typed reports.
+Reports remain advisory; the log preserves history but is not a scheduler,
+approval state or global blocker.
 
 Authority and path ownership come from
 `docs/project/SESSION_WORKSPACE_CONTRACT.md` and the WDM role charter.

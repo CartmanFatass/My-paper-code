@@ -41,6 +41,11 @@ simple_operation_new_gate_state_identity_or_recovery=forbidden
 simple_operation_control=one_line_runtime_checklist_only
 theoretical_safety_hardening=reject_by_default
 new_regression_admission=normal_supported_path_or_two_independent_recurrences
+simple_operation_active_engineering_budget_minutes=20
+simple_operation_failed_probe_budget=2
+simple_operation_paths=one_normal_plus_one_simple_fallback
+simple_operation_success=user_visible_requested_result
+passive_external_generation_wait_excluded_from_engineering_budget=true
 ```
 
 If failure means only “try again”, do not build a lease, sentinel, identity
@@ -68,7 +73,6 @@ tool; any touched legacy branch must stay flat or shrink.
 workflow_auditor=hmasd-workflow-auditor_optional_impact_map_or_postchange_verify
 workflow_implementer=hmasd-workflow-implementer_optional_exact_confirmed_slice
 workflow_reviewer=hmasd-workflow-reviewer_risk_triggered_only
-workflow_cost_reviewer=explicit_user_request_only
 workflow_child_parent=workflow_design_manager
 workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_child_acceptance_authority=none
@@ -86,54 +90,29 @@ Each child has exactly one existing role charter. Every profile is registered
 exactly once and receives a fresh-task profile smoke after registry changes.
 
 Use one Workflow Reviewer only for authority/file ownership, locked routing or
-model settings, Pro transport/recovery, compute admission, an action-performing
+model settings, compute admission, an action-performing
 script/hook or unresolved cross-worker semantics. Ordinary documentation needs
-no reviewer. Never review the review.
-Only when the user explicitly requests a workflow cost audit may WDM dispatch
-the cost reviewer.
+no reviewer; request at most one advisory. The reviewer evaluates normal-path risk against complexity,
+maintenance, wall-clock and iteration-delay cost, and never starts a re-review loop.
 
 ## Continuous change loop
 
-Before this loop, archive each typed defect report in
-`docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`.
-Keep exactly one receipt-order item `ACTIVE`; later reports remain `QUEUED`.
-Close an item with an accepted repair, a precise not-a-defect finding, or the
-user-change-plan boundary. `BLOCKED` is not a queue state, and a retryable tool
-failure cannot stop unrelated work.
+Append typed reports to the chronological incident log; the log is evidence, not
+a scheduler, approval state or global blocker.
 
-1. **Inventory.** Search only named control-plane files for changed identities,
-   authority terms, paths and retired names. Historical science/review evidence
-   is not a repair target. Classify `AGENTS.md` as `modify` or `unchanged-valid`
-   for every workflow change.
-2. **Classify.** Keep a local matrix `path | relation | action | evidence`; each
-   row is `modify`, `add`, `delete`, `unchanged-valid` or `historical-exempt`.
-   Declare the exact path set and preserve all unrelated dirty/staged/untracked
-   work.
-3. **Isolate.** When the main checkout is unsafe or a child writes, provision an
-   exact `scripts/hmasd_workspace_ticket.py` worktree. Use only the opaque ticket
-   and registered resolve/verify flow; never raw `git worktree` or path aliases.
-   Put the exact resolved ticket worktree path in every edit-capable child assignment and
-   require an exact `git rev-parse --show-toplevel` equality check before edit;
-   a mismatch stops that child before mutation.
-4. **Probe.** Run the smallest existing contract that exposes the relation. Add
-   one negative regression only when a known missing relation otherwise passes.
-5. **Implement.** Delete superseded active rules instead of adding compatibility
-   layers. Scripts perform deterministic mechanics, not policy decisions.
-6. **Verify.** Run the structural harness, affected focused contracts, stale-term
-   searches, exact diff-path check and `git diff --check`. Count the six core
-   files named in the WDM charter and fail above 1000 lines. A changed role,
-   session, Skill, profile, authority, route or retired name with stale router
-   text fails acceptance.
-7. **Review.** If a named risk trigger applies, request at most one advisory
-   Workflow Reviewer packet. WDM accepts or rejects each finding against the
-   normal-path evidence threshold and minimum-design budgets; reviewer
-   disagreement is not an approval gate and never starts a re-review loop.
-8. **Integrate.** Inspect exact staged paths and `git diff --cached --check`, then
-   commit and push only accepted workflow paths. A Git receipt is not another
-   acceptance owner.
-9. **Reload.** If router, registry or profile changed, require a fresh task before
-   relying on discovery. Route one reload receipt to each affected persistent
-   session with locked model and thinking.
+1. **Inspect.** Read only named control-plane paths, declare the exact path set,
+   preserve unrelated work and identify the smallest normal-path probe.
+2. **Delete or edit.** Remove superseded rules before adding text. Use an isolated
+   resolved ticket worktree path only when the main checkout is unsafe or concurrent writers
+   need separate path families. Before editing there, require its
+   `git rev-parse --show-toplevel` to equal the resolved ticket worktree path;
+   a mismatch stops that isolated edit.
+3. **Focused check.** Run the smallest affected contract, the structural harness,
+   stale-term search and `git diff --check`. Request one reviewer only for a named
+   material risk; its advice cannot create a second pass.
+4. **Git and reload.** Inspect exact staged paths, commit and push the accepted
+   workflow files. Require a fresh task only after router/profile discovery
+   changes; ordinary Skill text is read from disk.
 
 After a confirmed plan, these steps continue automatically. Stop only for
 material plan drift, same-file collision, unavailable required profile, or a

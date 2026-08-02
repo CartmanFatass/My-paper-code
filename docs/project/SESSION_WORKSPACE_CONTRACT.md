@@ -16,8 +16,7 @@ same_file_concurrent_writes=forbidden
 public_current_work_partition_status=active_index_and_partitions
 public_current_work_index=docs/project/CURRENT_WORK.md
 public_current_work_index_owner=workflow_design_manager
-workflow_defect_queue=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
-workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
+workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
 workflow_router_consistency_check=required_for_every_workflow_change
 workflow_implementer_parallelism=file_family_adaptive
 ```
@@ -53,9 +52,10 @@ wdm_session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessi
 Children return to WDM and never accept, stage, commit, push or route results.
 WDM resolves semantic junctions and performs final Git integration.
 
-Workflow reports from other sessions are advisory inputs. WDM archives typed
-defect reports in its durable FIFO and processes one active item in receipt
-order. Autonomous repair is limited to restoring an accepted stable contract;
+Workflow reports from other sessions are advisory inputs. WDM appends typed
+defect reports to its chronological incident log. The log preserves order but
+does not serialize unrelated work, create an active state or block an operating
+owner's local recovery. Autonomous repair is limited to restoring an accepted stable contract;
 a material authority, policy, science, runtime or external-effect change moves
 to the user-confirmed change lane.
 

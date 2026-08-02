@@ -48,8 +48,7 @@ persistent_session_workflow_git_authority=none
 workflow_change_request_route=workflow_design_manager
 workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report
 workflow_user_change_lane=plan_confirmation_then_continuous_implementation_verification_git_reload
-workflow_defect_lane=archive_then_fifo_autonomous_stable_contract_repair
-workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
+workflow_defect_lane=chronological_incident_log_then_scoped_repair
 workflow_defect_report_authority=advisory_only
 workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
@@ -109,6 +108,11 @@ workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch
 workflow_legacy_mechanism_policy=no_expansion_reduce_when_touched
 workflow_permanent_rule_minimum_independent_recurrences=2
 workflow_new_mechanism_requires_named_deletion=true
+simple_operation_active_engineering_budget_minutes=20
+simple_operation_failed_probe_budget=2
+simple_operation_paths=one_normal_plus_one_simple_fallback
+simple_operation_success=user_visible_requested_result
+passive_external_generation_wait_excluded_from_engineering_budget=true
 concurrency_policy=file_ownership_only
 same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
@@ -165,7 +169,7 @@ authority rules decide whether user input is required.
 - Mechanical workflow harness: `.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py`.
 - WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
 - WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
-- WDM defect FIFO: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`.
+- WDM chronological incident log: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`; it is not a scheduler or global blocker.
 - Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 - Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use its direct Agentify transport.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.

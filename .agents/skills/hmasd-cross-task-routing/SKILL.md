@@ -28,8 +28,8 @@ authority.
 
 A workflow defect uses `WORKFLOW_DEFECT_REPORT` with
 `source_role|source_session|observed_contract|exact_error|reproduction_or_evidence|suggested_repair|preserved_boundaries`.
-The suggestion is advisory. WDM archives it in the local FIFO before evaluation;
-delivery neither preempts the active item nor transfers authority.
+The suggestion is advisory. WDM appends it to the chronological incident log;
+delivery neither schedules work nor transfers authority.
 
 ## Native send
 

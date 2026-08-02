@@ -68,21 +68,21 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
     assert "workflow_surface_owner=true" in readme
 
 
-def test_wdm_defect_reports_are_archived_and_processed_fifo() -> None:
+def test_wdm_defect_reports_are_logged_without_becoming_a_scheduler() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     normalized = " ".join(contract.split())
     queue = _text("docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md")
     for required in (
-        "workflow_defect_queue=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md",
-        "workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED",
-        "receipt order",
+        "workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md",
+        "chronological incident log",
+        "does not serialize unrelated work",
         "advisory inputs",
     ):
         assert required in normalized
     for required in (
-        "ordering=receipt_order_fifo",
-        "states=QUEUED|ACTIVE|CLOSED",
-        "active_limit=1",
+        "ordering=chronological",
+        "scheduler=false",
+        "global_blocker=false",
         "report_authority=advisory_only",
         "hash_identity=forbidden",
     ):

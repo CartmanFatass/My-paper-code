@@ -24,7 +24,7 @@ workflow_plan_confirmation=required_before_mutation
 workflow_read_only_plan_confirmation=not_required
 workflow_material_plan_drift=reconfirmation_required
 workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT
-workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED
+workflow_incident_record=chronological_nonblocking_log
 ```
 
 Complete a read-only inspection, explanation, status or reload smoke without plan
@@ -39,8 +39,8 @@ question at a time and recommend the smallest answer with its practical effect.
 Repository facts are discovered; user decisions are not inferred.
 
 Classify the input before planning. `USER_REQUESTED_CHANGE` follows the
-confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is archived first in
-WDM's FIFO. The reporting session supplies evidence and a suggestion, never
+confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is appended to WDM's
+chronological incident log. The reporting session supplies evidence and a suggestion, never
 authority or a scientific/runtime decision. WDM may use the zero-confirmation
 repair path only to restore an accepted stable contract without changing
 authority, policy, science, runtime or external effects. Otherwise move the
@@ -70,6 +70,8 @@ An edit-capable child assignment additionally carries the exact resolved ticket
 worktree path. The child verifies `git rev-parse --show-toplevel` equals that
 path before editing and stops on any mismatch.
 
+For a simple correction, keep the plan to at most five lines: goal, key unknown,
+smallest probe, one normal path plus one simple fallback, and stop condition.
 For every new mechanism state the irreversible error prevented, terminal
 condition, total recurring cost, old mechanism/text deleted and net line change.
 A retryable failure receives a one-line runtime checklist, not a mechanism.

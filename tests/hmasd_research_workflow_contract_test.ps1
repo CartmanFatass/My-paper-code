@@ -37,7 +37,6 @@ $expectedRoles = @(
     'VERIFIER.md',
     'WORKFLOW_AUDITOR.md',
     'WORKFLOW_DESIGN_MANAGER.md',
-    'WORKFLOW_COST_REVIEWER.md',
     'WORKFLOW_IMPLEMENTER.md',
     'WORKFLOW_REVIEWER.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
@@ -740,7 +739,6 @@ if ($WorkflowDesignOnly) {
 
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
-$costReviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_COST_REVIEWER.md')
 $complexity = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EVIDENCE_COMPLEXITY_POLICY.md')
 
 function Read-FencedRecord([string]$RelativePath, [string]$Scope) {
@@ -862,8 +860,7 @@ foreach ($required in @(
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
     'code_science_alignment_compute_budget=zero',
-    'CODE_SCIENCE_INDEX.md',
-    'hmasd-workflow-cost-reviewer')) {
+    'CODE_SCIENCE_INDEX.md')) {
     if (-not $workflowDesignManagerRoleNormalized.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
 if ($workflowDesignManagerRole.Contains('current_work_owner=exclusive') -or
@@ -884,18 +881,6 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
         'NON_EXECUTABLE_EVIDENCE_DESIGN')) {
         if (-not $roleText.Contains($required)) { throw "Native code role missing complexity rule: $required" }
     }
-}
-foreach ($required in @(
-    'callable_agent_type=hmasd-workflow-cost-reviewer',
-    'parent=workflow_design_manager',
-    'assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
-    'model=gpt-5.6-sol',
-    'reasoning_effort=xhigh',
-    'fork_turns=none_required',
-    'workflow_acceptance_authority=none',
-    'COST_AUDIT_ACCEPT',
-    'COST_AUDIT_REJECT')) {
-    if (-not $costReviewerRole.Contains($required)) { throw "Cost Reviewer role missing: $required" }
 }
 foreach ($required in @(
     'role=code_project_manager',
@@ -940,7 +925,6 @@ foreach ($required in @(
 foreach ($required in @(
     'Workflow Design Manager is the sole workflow design, modification, acceptance',
     'WDM retains authority, semantic junctions, conflict resolution, final diff inspection, acceptance, Git and routing',
-    'Historical science/review evidence is not a repair target',
     'workflow_child_parent=workflow_design_manager',
     'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'workflow_child_acceptance_authority=none',
@@ -950,14 +934,16 @@ foreach ($required in @(
     'workflow_net_line_growth_default=negative_or_zero',
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_rule_single_source=one_defining_file_others_point',
-    'workflow_assignment_id',
-    'owned_paths',
-    'wdm_session_workspace',
-    'Never review the review',
-    'local matrix',
+    'simple_operation_active_engineering_budget_minutes=20',
+    'simple_operation_failed_probe_budget=2',
+    'simple_operation_paths=one_normal_plus_one_simple_fallback',
+    'simple_operation_success=user_visible_requested_result',
+    'passive_external_generation_wait_excluded_from_engineering_budget=true',
+    'request at most one advisory',
+    'never starts a re-review loop',
+    'the log is evidence',
     'exactly one existing role charter',
     'Every profile is registered',
-    'Only when the user explicitly requests a workflow cost audit',
     'fresh-task profile smoke',
     'check_hmasd_agent_harness.py')) {
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }

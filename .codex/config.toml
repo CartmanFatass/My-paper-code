@@ -32,11 +32,6 @@ description = "Read-only HMASD reviewer for an integrated implementation package
 config_file = "./agents/hmasd-reviewer.toml"
 nickname_candidates = ["HMASD Reviewer", "Algorithm Reviewer", "Runtime Reviewer"]
 
-[agents."HMASDWorkflowCostReviewer"]
-description = "Independent Sol-xhigh reviewer for low-frequency workflow cost audits."
-config_file = "./agents/hmasd-workflow-cost-reviewer.toml"
-nickname_candidates = ["HMASD Cost Reviewer", "Workflow Cost Reviewer"]
-
 [agents."HMASDWorkflowAuditor"]
 description = "Read-only Luna-high auditor for workflow impact mapping and verification."
 config_file = "./agents/hmasd-workflow-auditor.toml"

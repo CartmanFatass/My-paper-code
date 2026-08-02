@@ -14,8 +14,7 @@ $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
     @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'high', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
-    @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'WORKFLOW_REVIEW_PACKET'),
-    @('.agents/roles/WORKFLOW_COST_REVIEWER.md', '.codex/agents/hmasd-workflow-cost-reviewer.toml', 'hmasd-workflow-cost-reviewer', '[agents."HMASDWorkflowCostReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'COST_AUDIT_ACCEPT'))
+    @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'WORKFLOW_REVIEW_PACKET'))
 
 foreach ($entry in $profiles) {
     $role = Read-RepoFile $entry[0]
@@ -48,7 +47,9 @@ foreach ($required in @(
     'Automatic continuous execution', 'Minimal-control discipline',
     'workflow_hash_validation=forbidden',
     'workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report',
-    'workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED',
+    'workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md',
+    'simple_operation_active_engineering_budget_minutes=20',
+    'simple_operation_failed_probe_budget=2',
     'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
     'exact resolved ticket', 'git rev-parse --show-toplevel')) {
     if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
@@ -61,18 +62,20 @@ foreach ($required in @(
     'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
     'For six or more paths', 'one implementer per exact nonoverlapping file family',
     'do not impose a fixed', 'two-implementer ceiling',
-    'Classify `AGENTS.md` as `modify` or `unchanged-valid`',
-    'risk trigger', 'Never review the review',
+    'simple_operation_active_engineering_budget_minutes=20',
+    'simple_operation_failed_probe_budget=2',
+    'simple_operation_paths=one_normal_plus_one_simple_fallback',
+    'simple_operation_success=user_visible_requested_result',
+    'passive_external_generation_wait_excluded_from_engineering_budget=true',
+    'request at most one advisory', 'never starts a re-review loop',
     'workflow_single_mechanism_line_budget=100',
     'workflow_single_mechanism_terminal_state_budget=3',
     'workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch',
     'workflow_legacy_mechanism_policy=no_expansion_reduce_when_touched',
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_hash_validation=forbidden',
-    'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md',
-    '`BLOCKED` is not a queue state', 'resolved ticket worktree path',
-    '`git rev-parse --show-toplevel` equality check before edit',
-    'After a confirmed plan, these steps continue automatically')) {
+    'the log is evidence', 'resolved ticket worktree path',
+    '`git rev-parse --show-toplevel`')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 

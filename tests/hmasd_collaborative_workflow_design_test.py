@@ -94,12 +94,12 @@ def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> N
     assert "`AGENTS.md` as `modify` or `unchanged-valid`" in normalized_skill
 
 
-def test_user_changes_and_advisory_defects_use_distinct_lanes() -> None:
+def test_user_changes_and_advisory_defects_use_distinct_nonblocking_lanes() -> None:
     role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split())
     skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
     assert "workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT" in skill
-    assert "workflow_defect_queue_states=QUEUED|ACTIVE|CLOSED" in role
-    assert "archived before action and processed in receipt order" in role
+    assert "workflow_incident_log=" in role
+    assert "does not serialize unrelated work" in role
     assert "without user confirmation only when" in role
     assert "Otherwise move the item to the user-requested lane" in skill
 
