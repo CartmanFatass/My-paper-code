@@ -20,6 +20,22 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process import event_held_commitment_link
+from ha_ctse_process import event_commitment_collector
+from ha_ctse_process import event_commitment_replay
+from ha_ctse_process.event_commitment_collector import (
+    CREATE,
+    KEEP,
+    RENEW,
+    _normal_parameters,
+    collect_trajectory,
+    transformed_mark_component_logp,
+)
+from ha_ctse_process.event_commitment_replay import (
+    replay_joint_bounds,
+    replay_report,
+    replay_trajectory,
+    validate_replay,
+)
 from ha_ctse_process.event_commitment_rng import (
     RNG_NAMES,
     authoritative_seed_map,
@@ -30,20 +46,15 @@ from ha_ctse_process.event_commitment_rng import (
 )
 from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
 from ha_ctse_process.event_held_commitment_link import (
-    CREATE,
     EVENT_INPUT_DIM,
     AUDIT_BRANCHES,
     AUDIT_STREAM_NAMES,
-    KEEP,
     MARK_DIM,
     OPPORTUNITY_SUPPORT,
-    RENEW,
     _nested_equal,
-    _normal_parameters,
     _rng_states,
     action_distribution_tv,
     batched_natural_and_permuted_action_tv,
-    collect_trajectory,
     compare_continuations,
     factor_counts,
     audit_opportunities_batched,
@@ -53,14 +64,9 @@ from ha_ctse_process.event_held_commitment_link import (
     nested_state_maximum_difference,
     optimize_update,
     parameter_and_optimizer_counts,
-    replay_joint_bounds,
-    replay_report,
-    replay_trajectory,
     runtime_rng_equal,
     runtime_rng_snapshot,
     save_checkpoint,
-    transformed_mark_component_logp,
-    validate_replay,
 )
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
@@ -232,7 +238,7 @@ def test_shared_event_heads_are_row_stable_and_used_by_collection_and_replay(
     inputs = torch.randn(
         (23, EVENT_INPUT_DIM), generator=generator, dtype=torch.float32,
     ).to(device)
-    helper = event_held_commitment_link._row_stable_event_heads
+    helper = event_commitment_collector._row_stable_event_heads
     together = helper(inputs, arm.event_head, arm.mark_head)
 
     permutation = torch.tensor(
@@ -265,7 +271,10 @@ def test_shared_event_heads_are_row_stable_and_used_by_collection_and_replay(
         return helper(packed, event_head, mark_head)
 
     monkeypatch.setattr(
-        event_held_commitment_link, "_row_stable_event_heads", observed,
+        event_commitment_collector, "_row_stable_event_heads", observed,
+    )
+    monkeypatch.setattr(
+        event_commitment_replay, "_row_stable_event_heads", observed,
     )
     stochastic = collect_trajectory(
         arm, make_training_state("EHC", 0), device=device,
