@@ -83,9 +83,21 @@ VK0A_PANEL_VERDICTS = {VK0A_VERDICT_IDENTIFIED, VK0A_VERDICT_NOT_IDENTIFIED}
 # (4 signs x 2 permutation tracks x 7 noninitial checks x 2 focals).
 VK0A_PANEL_ROW_COUNT = 112
 
-# The V-K0A authorization-artifact tuple (VK-D10 / A-VK-D10). artifact_sha256
-# is the tamper-evidence hash over the rest of this tuple, recomputed here.
-ORACLE_PANEL_TUPLE_FIELDS = (
+# The V-K0A authorization-artifact tuple (VK-D10 / A-VK-D10): contract_id,
+# stage_commit, environment_blob_sha, action_table_hash, oracle_script_hash,
+# panel_schema_version, row_count, validity_predicates, verdict, plus the
+# artifact_sha256 hash over the first nine. The RAW panel file
+# (source_oracle_panel.json, scripts/audit_vk0a_source_urgency_oracle.py)
+# does not carry validity_predicates or artifact_sha256 itself -- it carries
+# a raw `validity` dict, and the driver (scripts/audit_vk0b_r30_access.py,
+# `resolve_oracle_panel`) derives validity_predicates from it and computes
+# artifact_sha256, recording the whole nine-field-plus-hash "authorization"
+# tuple in the run manifest rather than in the panel file (panel identity is
+# instead checked byte-for-byte against a sidecar digest, out of this
+# analyzer's four-input scope). The analyzer therefore reproduces the same
+# derivation from the raw panel and cross-checks it against the manifest's
+# recorded authorization -- never against a field the panel itself lacks.
+ORACLE_PANEL_AUTHORIZATION_TUPLE_FIELDS = (
     "contract_id",
     "stage_commit",
     "environment_blob_sha",
@@ -95,6 +107,24 @@ ORACLE_PANEL_TUPLE_FIELDS = (
     "row_count",
     "validity_predicates",
     "verdict",
+)
+
+# Mirrors scripts/audit_vk0a_source_urgency_oracle.py:ValidityTracker.NAMES
+# exactly -- the eight AND-accumulated V-K0A validity predicates the driver
+# folds into validity_predicates. Mirrored rather than imported: importing
+# that audit script would couple this analyzer's import surface (and its
+# reproducibility) to a large, separately evolving driver module for the
+# sake of one tuple of literals. Drift between the two tuples is guarded by
+# a test against the real panel's actual `validity` key set.
+VK0A_VALIDITY_PREDICATE_NAMES = (
+    "identical_initial_state_across_branches",
+    "no_check_crossed_within_window",
+    "legal_edit_enumeration_exact",
+    "same_label_set_excluded",
+    "fixed_primitive_table_consistent",
+    "only_external_reward_used",
+    "permutation_relabels_only",
+    "full_action_support_maximization_exhausted",
 )
 
 # MEASUREMENT §3: the task-semantic materiality unit and the STABLE
@@ -325,21 +355,61 @@ def validate_manifest(manifest: dict[str, Any]) -> list[str]:
     seeds = manifest.get("seeds")
     if not isinstance(seeds, dict) or not seeds:
         errors.append("manifest.seeds must be a non-empty dict keyed by training seed")
-        return errors
-    for seed_key, entry in seeds.items():
-        if not isinstance(entry, dict):
-            errors.append(f"manifest.seeds[{seed_key}] must be a dict")
-            continue
-        if not isinstance(entry.get("checkpoint_hash"), str) or not entry.get("checkpoint_hash"):
-            errors.append(f"manifest.seeds[{seed_key}].checkpoint_hash must be a non-empty str")
-        if not isinstance(entry.get("resolved_config_hash"), str) or not entry.get("resolved_config_hash"):
-            errors.append(f"manifest.seeds[{seed_key}].resolved_config_hash must be a non-empty str")
-        if not _is_int(entry.get("low_optimizer_steps")) or entry.get("low_optimizer_steps") < 0:
-            errors.append(f"manifest.seeds[{seed_key}].low_optimizer_steps must be a non-negative int")
+    else:
+        for seed_key, entry in seeds.items():
+            if not isinstance(entry, dict):
+                errors.append(f"manifest.seeds[{seed_key}] must be a dict")
+                continue
+            if not isinstance(entry.get("checkpoint_hash"), str) or not entry.get("checkpoint_hash"):
+                errors.append(f"manifest.seeds[{seed_key}].checkpoint_hash must be a non-empty str")
+            if not isinstance(entry.get("resolved_config_hash"), str) or not entry.get("resolved_config_hash"):
+                errors.append(f"manifest.seeds[{seed_key}].resolved_config_hash must be a non-empty str")
+            if not _is_int(entry.get("low_optimizer_steps")) or entry.get("low_optimizer_steps") < 0:
+                errors.append(f"manifest.seeds[{seed_key}].low_optimizer_steps must be a non-negative int")
+
+    # manifest.authorization is OPTIONAL at the schema level: its total
+    # absence is itself a meaningful, valid precedence-1 finding (VK-D10 --
+    # "V-K0B must verify that tuple before loading any checkpoint"; a
+    # manifest that never recorded having done so feeds
+    # INVALID_VARIABLE_K_URGENCY_AUDIT, not a refusal). If the key IS
+    # present, however, it must be a well-formed authorization tuple.
+    if "authorization" in manifest and manifest["authorization"] is not None:
+        authorization = manifest["authorization"]
+        if not isinstance(authorization, dict):
+            errors.append("manifest.authorization must be a dict when present")
+        else:
+            for field in (
+                "contract_id",
+                "stage_commit",
+                "environment_blob_sha",
+                "action_table_hash",
+                "oracle_script_hash",
+                "panel_schema_version",
+                "verdict",
+                "artifact_sha256",
+            ):
+                if not isinstance(authorization.get(field), str) or not authorization.get(field):
+                    errors.append(f"manifest.authorization.{field} must be a non-empty str")
+            if not _is_int(authorization.get("row_count")):
+                errors.append("manifest.authorization.row_count must be an int")
+            validity_predicates = authorization.get("validity_predicates")
+            if (
+                not isinstance(validity_predicates, dict)
+                or not validity_predicates
+                or not all(isinstance(v, bool) for v in validity_predicates.values())
+            ):
+                errors.append("manifest.authorization.validity_predicates must be a non-empty dict of booleans")
     return errors
 
 
 def validate_oracle_panel(panel: dict[str, Any]) -> list[str]:
+    """Validates the RAW V-K0A panel schema (source_oracle_panel.json, as
+    scripts/audit_vk0a_source_urgency_oracle.py actually emits it) -- a
+    `validity` dict of named booleans, not a pre-derived
+    `validity_predicates`/`artifact_sha256` pair. Those are the driver's
+    authorization-view derivation (scripts/audit_vk0b_r30_access.py), which
+    the analyzer reproduces itself in _panel_tuple_payload/
+    _panel_expected_sha256 and cross-checks against the manifest."""
     errors: list[str] = []
     for field in (
         "contract_id",
@@ -349,19 +419,18 @@ def validate_oracle_panel(panel: dict[str, Any]) -> list[str]:
         "oracle_script_hash",
         "panel_schema_version",
         "verdict",
-        "artifact_sha256",
     ):
         if not isinstance(panel.get(field), str) or not panel.get(field):
             errors.append(f"oracle_panel.{field} must be a non-empty str")
     if not _is_int(panel.get("row_count")):
         errors.append("oracle_panel.row_count must be an int")
-    validity_predicates = panel.get("validity_predicates")
-    if (
-        not isinstance(validity_predicates, dict)
-        or not validity_predicates
-        or not all(isinstance(v, bool) for v in validity_predicates.values())
-    ):
-        errors.append("oracle_panel.validity_predicates must be a non-empty dict of booleans")
+    validity = panel.get("validity")
+    if not isinstance(validity, dict):
+        errors.append("oracle_panel.validity must be a dict")
+    else:
+        for name in VK0A_VALIDITY_PREDICATE_NAMES:
+            if not isinstance(validity.get(name), bool):
+                errors.append(f"oracle_panel.validity.{name} must be a bool")
     if panel.get("verdict") not in VK0A_PANEL_VERDICTS:
         errors.append("oracle_panel.verdict must be a recognized V-K0A verdict")
     return errors
@@ -413,11 +482,37 @@ def _git_blob_sha1(path: Path) -> str:
 # =============================================================================
 
 
+def derive_validity_predicates(panel: dict[str, Any]) -> dict[str, bool]:
+    """Exactly scripts/audit_vk0b_r30_access.py's `resolve_oracle_panel`
+    derivation: `{name: bool(validity[name]) for name in ValidityTracker.NAMES}`."""
+    validity = panel["validity"]
+    return {name: bool(validity[name]) for name in VK0A_VALIDITY_PREDICATE_NAMES}
+
+
 def _panel_tuple_payload(panel: dict[str, Any]) -> dict[str, Any]:
-    return {field: panel[field] for field in ORACLE_PANEL_TUPLE_FIELDS}
+    """Reproduces the driver's nine-field authorization tuple from the RAW
+    panel -- validity_predicates is derived (the panel itself carries no
+    such field), row_count is cast to int exactly as the driver does."""
+    return {
+        "contract_id": panel["contract_id"],
+        "stage_commit": panel["stage_commit"],
+        "environment_blob_sha": panel["environment_blob_sha"],
+        "action_table_hash": panel["action_table_hash"],
+        "oracle_script_hash": panel["oracle_script_hash"],
+        "panel_schema_version": panel["panel_schema_version"],
+        "row_count": int(panel["row_count"]),
+        "validity_predicates": derive_validity_predicates(panel),
+        "verdict": panel["verdict"],
+    }
 
 
 def _panel_expected_sha256(panel: dict[str, Any]) -> str:
+    """Exactly the driver's `artifact_sha256 = hash_text(json.dumps(tuple_payload,
+    sort_keys=True, separators=(",", ":")))` -- reproduced independently
+    from the raw panel and compared against the manifest's recorded value in
+    compute_invalid_reasons (the panel is not self-referential: it carries
+    no hash of its own tuple, only a sidecar byte-digest of the whole file,
+    which is out of this analyzer's four-input scope)."""
     canonical = json.dumps(_panel_tuple_payload(panel), sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
@@ -467,12 +562,39 @@ def compute_invalid_reasons(
     if prohibited:
         reasons.append(f"prohibited low-level optimizer exposure nonzero for seed(s) {prohibited}")
 
-    expected_hash = _panel_expected_sha256(oracle_panel)
-    if expected_hash != oracle_panel["artifact_sha256"]:
+    # VK-D10 / A-VK-D10: V-K0B must verify the whole authorization tuple
+    # before loading any checkpoint. The raw panel carries no artifact hash
+    # of its own (VK-D3 sidecar-digest territory, out of this analyzer's
+    # scope) -- the durable record of "this tuple was verified" is the
+    # authorization block the driver writes into the manifest. The analyzer
+    # independently re-derives the same tuple from the raw panel and
+    # cross-checks it (fields and hash) against that recorded authorization.
+    authorization = manifest.get("authorization")
+    if authorization is None:
         reasons.append(
-            "oracle-panel verdict tuple mismatch: artifact_sha256 does not match its own "
-            "recomputed hash (stale or differently constituted artifact)"
+            "manifest carries no oracle-panel authorization record "
+            "(the V-K0A artifact tuple was never verified before this run)"
         )
+    else:
+        recomputed_payload = _panel_tuple_payload(oracle_panel)
+        recomputed_hash = _panel_expected_sha256(oracle_panel)
+        recorded_payload = {
+            field: authorization.get(field) for field in ORACLE_PANEL_AUTHORIZATION_TUPLE_FIELDS
+        }
+        if isinstance(recorded_payload.get("row_count"), int) and not isinstance(
+            recorded_payload.get("row_count"), bool
+        ):
+            recorded_payload["row_count"] = int(recorded_payload["row_count"])
+        if recomputed_payload != recorded_payload:
+            reasons.append(
+                "oracle-panel verdict tuple mismatch: the tuple re-derived from the raw panel "
+                "does not match the authorization tuple recorded in the manifest"
+            )
+        if recomputed_hash != authorization.get("artifact_sha256"):
+            reasons.append(
+                "oracle-panel verdict tuple mismatch: recomputed artifact_sha256 does not match "
+                "manifest.authorization.artifact_sha256 (stale or differently constituted artifact)"
+            )
     if oracle_panel["row_count"] != VK0A_PANEL_ROW_COUNT:
         reasons.append(
             f"oracle-panel verdict tuple mismatch: row_count {oracle_panel['row_count']} "

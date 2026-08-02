@@ -18,7 +18,6 @@ predicate and shows the same fixture then yields a different result.
 
 from __future__ import annotations
 
-import hashlib
 import importlib.util
 import json
 import subprocess
@@ -212,8 +211,9 @@ def build_dataset(
 
 
 def manifest_for(seeds, checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
-                  resolved_config_hash=DEFAULT_CONFIG_HASH, low_optimizer_steps=0):
-    return {
+                  resolved_config_hash=DEFAULT_CONFIG_HASH, low_optimizer_steps=0,
+                  authorization=None):
+    manifest = {
         "contract_id": CONTRACT_ID,
         "trace_schema_version": SCHEMA_VERSION,
         "seeds": {
@@ -225,11 +225,43 @@ def manifest_for(seeds, checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
             for seed in seeds
         },
     }
+    if authorization is not None:
+        manifest["authorization"] = authorization
+    return manifest
 
 
-def oracle_panel_for(verdict=M.VK0A_VERDICT_IDENTIFIED, row_count=M.VK0A_PANEL_ROW_COUNT,
-                      tamper=False):
-    payload = {
+# The exact key set observed on the real V-K0A panel emitted by
+# scripts/audit_vk0a_source_urgency_oracle.py (inspected directly from
+# logs/vk0a_formal/source_oracle_panel.json during this fix): `acceptance`,
+# `action_table_hash`, `contract_id`, `env_premises`, `environment_blob_sha`,
+# `initial_check_metadata`, `oracle_script_hash`, `panel_schema_version`,
+# `row_count`, `rows`, `seed_to_sign_map`, `stage_commit`, `validity`,
+# `verdict`. Notably it carries NO `validity_predicates` and NO
+# `artifact_sha256` -- those are the driver's (audit_vk0b_r30_access.py)
+# authorization-view derivation, recorded only in the run manifest. Fixtures
+# below reproduce this literal key set (not a runtime dependency on the log
+# file itself, which is generated evidence, not implementation source) so a
+# schema of the fixture drifting from the real artifact is caught locally.
+REAL_PANEL_KEY_SET = frozenset(
+    {
+        "acceptance", "action_table_hash", "contract_id", "env_premises",
+        "environment_blob_sha", "initial_check_metadata", "oracle_script_hash",
+        "panel_schema_version", "row_count", "rows", "seed_to_sign_map",
+        "stage_commit", "validity", "verdict",
+    }
+)
+
+
+def oracle_panel_for(verdict=M.VK0A_VERDICT_IDENTIFIED, row_count=M.VK0A_PANEL_ROW_COUNT):
+    """The RAW V-K0A panel schema exactly as
+    scripts/audit_vk0a_source_urgency_oracle.py emits it: a `validity` dict
+    of named booleans (plus `all_passed`/`violations`), never a pre-derived
+    `validity_predicates` or `artifact_sha256` -- see `authorization_for`
+    for the driver's separate authorization-view derivation of those."""
+    validity = {name: True for name in M.VK0A_VALIDITY_PREDICATE_NAMES}
+    validity["all_passed"] = True
+    validity["violations"] = []
+    panel = {
         "contract_id": CONTRACT_ID,
         "stage_commit": "c4b64841798d65af8474ded00bf623a109c7c792",
         "environment_blob_sha": "envsha",
@@ -237,14 +269,58 @@ def oracle_panel_for(verdict=M.VK0A_VERDICT_IDENTIFIED, row_count=M.VK0A_PANEL_R
         "oracle_script_hash": "oraclehash",
         "panel_schema_version": "panel-v1",
         "row_count": row_count,
-        "validity_predicates": {"all_exhausted": True},
+        "validity": validity,
         "verdict": verdict,
+        # Present but unvalidated by the analyzer, kept so this fixture's
+        # key set matches REAL_PANEL_KEY_SET exactly.
+        "rows": [{"seed": 0, "check_index": 0}],
+        "acceptance": {"each_slot_in_both_classes": True},
+        "seed_to_sign_map": {"0": [1, 1]},
+        "initial_check_metadata": {},
+        "env_premises": {},
     }
-    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
-    payload["artifact_sha256"] = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
-    if tamper:
-        payload["artifact_sha256"] = "0" * 64
-    return payload
+    assert set(panel.keys()) == REAL_PANEL_KEY_SET
+    return panel
+
+
+def authorization_for(panel, *, tamper_hash=False):
+    """Exactly the driver's derivation (scripts/audit_vk0b_r30_access.py,
+    `resolve_oracle_panel`): validity_predicates from panel["validity"] over
+    the eight named predicates, then artifact_sha256 = SHA-256 over the
+    canonical nine-field tuple. Computed here via the analyzer's own
+    (mirrored) formula, not duplicated by hand, so a fixture's "correct"
+    authorization is defined identically to what the analyzer will
+    recompute -- the tamper path is the only place this test file
+    deliberately diverges from that formula."""
+    authorization = M._panel_tuple_payload(panel)
+    authorization["artifact_sha256"] = M._panel_expected_sha256(panel)
+    if tamper_hash:
+        authorization["artifact_sha256"] = "0" * 64
+    return authorization
+
+
+def standard_manifest_and_panel(
+    seeds,
+    *,
+    checkpoint_hash=DEFAULT_CHECKPOINT_HASH,
+    resolved_config_hash=DEFAULT_CONFIG_HASH,
+    low_optimizer_steps=0,
+    verdict=M.VK0A_VERDICT_IDENTIFIED,
+    row_count=M.VK0A_PANEL_ROW_COUNT,
+    omit_authorization=False,
+    tamper_hash=False,
+):
+    """The common case: a manifest/panel pair whose authorization is
+    correctly matched (unless deliberately broken via omit_authorization or
+    tamper_hash) -- returned as (manifest, panel) for
+    `write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel(...))`."""
+    panel = oracle_panel_for(verdict=verdict, row_count=row_count)
+    authorization = None if omit_authorization else authorization_for(panel, tamper_hash=tamper_hash)
+    manifest = manifest_for(
+        seeds, checkpoint_hash=checkpoint_hash, resolved_config_hash=resolved_config_hash,
+        low_optimizer_steps=low_optimizer_steps, authorization=authorization,
+    )
+    return manifest, panel
 
 
 def write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -350,7 +426,7 @@ def test_compute_u_set_and_u_nat_are_paired_evaluate_differences():
 def test_analyzer_refuses_on_missing_required_field(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     del check_rows[0]["oracle_u_src"]
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     with pytest.raises(M.SchemaValidationError):
         M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
 
@@ -358,7 +434,7 @@ def test_analyzer_refuses_on_missing_required_field(tmp_path):
 def test_analyzer_refuses_on_bad_enum_field(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     check_rows[0]["agent_order_code"] = "north"
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     with pytest.raises(M.SchemaValidationError):
         M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
 
@@ -366,7 +442,7 @@ def test_analyzer_refuses_on_bad_enum_field(tmp_path):
 def test_analyzer_refuses_on_window_return_inconsistent_with_reward_vector(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     unit_rows[0]["window_return"] = unit_rows[0]["window_return"] + 1000.0
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     with pytest.raises(M.SchemaValidationError):
         M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
 
@@ -380,7 +456,7 @@ def test_urgency_classification_is_recomputed_not_trusted_from_the_stored_label(
     check_rows[0]["oracle_u_src"] = 0.9
     check_rows[0]["oracle_urgency_class"] = "STABLE"
     urgent_before = sum(1 for r in check_rows if M.classify_urgency(float(r["oracle_u_src"])) == "URGENT")
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     seed_counts = result["support_floor"]["per_seed"][str(SEED)]
     assert seed_counts["urgent_total"] == urgent_before
@@ -394,7 +470,7 @@ def test_urgency_classification_is_recomputed_not_trusted_from_the_stored_label(
 def test_row1_invalid_on_replay_conformance_false(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     unit_rows[3]["replay_conformance"] = {"boundary_fingerprint": False}
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 1
     assert result["result"]["code"] == "INVALID_VARIABLE_K_URGENCY_AUDIT"
@@ -404,7 +480,7 @@ def test_row1_invalid_on_manifest_checkpoint_mismatch(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     paths = write_dataset(
         tmp_path, check_rows, unit_rows,
-        manifest_for([SEED], checkpoint_hash="a-different-checkpoint"), oracle_panel_for(),
+        *standard_manifest_and_panel([SEED], checkpoint_hash="a-different-checkpoint"),
     )
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 1
@@ -414,26 +490,50 @@ def test_row1_invalid_on_prohibited_optimizer_exposure(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     paths = write_dataset(
         tmp_path, check_rows, unit_rows,
-        manifest_for([SEED], low_optimizer_steps=3), oracle_panel_for(),
+        *standard_manifest_and_panel([SEED], low_optimizer_steps=3),
     )
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 1
 
 
-def test_row1_invalid_on_oracle_panel_tamper(tmp_path):
+def test_row1_invalid_on_oracle_panel_authorization_hash_tamper(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     paths = write_dataset(
-        tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for(tamper=True),
+        tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED], tamper_hash=True),
     )
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 1
+
+
+def test_row1_invalid_on_manifest_missing_authorization(tmp_path):
+    # A manifest recorded without ever verifying the V-K0A artifact tuple
+    # (VK-D10) is itself the row-1 finding -- not a schema refusal, and not
+    # silently treated as "authorization not required".
+    check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
+    paths = write_dataset(
+        tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED], omit_authorization=True),
+    )
+    result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
+    assert result["result"]["row"] == 1
+    assert any("no oracle-panel authorization record" in reason for reason in result["result"]["reasons"])
+
+
+def test_oracle_panel_fixture_matches_the_real_raw_panel_key_set():
+    panel = oracle_panel_for()
+    assert set(panel.keys()) == REAL_PANEL_KEY_SET
+    assert M.validate_oracle_panel(panel) == []
+    # The driver's derivation must round-trip cleanly against the real
+    # `validity` shape (8 named booleans plus all_passed/violations).
+    predicates = M.derive_validity_predicates(panel)
+    assert set(predicates) == set(M.VK0A_VALIDITY_PREDICATE_NAMES)
+    assert all(predicates.values())
 
 
 def test_row2_source_not_identified(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     paths = write_dataset(
-        tmp_path, check_rows, unit_rows, manifest_for([SEED]),
-        oracle_panel_for(verdict=M.VK0A_VERDICT_NOT_IDENTIFIED),
+        tmp_path, check_rows, unit_rows,
+        *standard_manifest_and_panel([SEED], verdict=M.VK0A_VERDICT_NOT_IDENTIFIED),
     )
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 2
@@ -443,7 +543,7 @@ def test_row2_source_not_identified(tmp_path):
 def test_row3_support_floor_insufficient(tmp_path):
     # Far below the 192-per-class / 64-per-class-per-order floor.
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 3
     assert result["result"]["code"] == "R30_URGENCY_TRACE_SUPPORT_INSUFFICIENT"
@@ -454,7 +554,7 @@ def test_row4_competence_not_established(tmp_path):
     check_rows, unit_rows = build_dataset(
         SEED, urgent_slow_match=0, urgent_fast_match=0, stable_slow_match=0, stable_fast_match=0,
     )
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["support_floor"]["pass"] is True
     assert result["result"]["row"] == 4
@@ -467,7 +567,7 @@ def test_row5_opportunity_decisively_not_accessed(tmp_path):
     check_rows, unit_rows = build_dataset(
         SEED, urgent_opp_fn=lambda ep, n: 0.0, stable_opp_fn=lambda ep, n: 0.0,
     )
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["competence_floor"]["pass"] is True
     assert result["result"]["row"] == 5
@@ -481,7 +581,7 @@ def test_row6_natural_alignment_wrong_direction(tmp_path):
     check_rows, unit_rows = build_dataset(
         SEED, stable_nat_fn=lambda ep, n: -10.0,
     )
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["opportunity"]["all_pass"] is True
     assert result["result"]["row"] == 6
@@ -498,7 +598,7 @@ def test_row7_opportunity_unresolved_straddling_boundary(tmp_path):
         return 1.5 if local_ep < n_episodes // 2 else -0.5
 
     check_rows, unit_rows = build_dataset(SEED, urgent_opp_fn=urgent_opp_fn)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     pooled = result["opportunity"]["pooled"]
     assert pooled["pass"] is False
@@ -524,7 +624,7 @@ def test_row7_natural_unresolved_nonpositive_set_rate_point_estimate(tmp_path):
     check_rows, unit_rows = build_dataset(
         SEED, urgent_natural_token_fn=urgent_token_fn, stable_natural_token_fn=stable_token_fn,
     )
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["opportunity"]["all_pass"] is True
     natural = result["natural"]
@@ -537,7 +637,7 @@ def test_row7_natural_unresolved_nonpositive_set_rate_point_estimate(tmp_path):
 
 def test_row8_heterogeneous_urgency_and_natural_access_identified(tmp_path):
     check_rows, unit_rows = build_dataset(SEED)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["result"]["row"] == 8
     assert result["result"]["code"] == "HETEROGENEOUS_URGENCY_AND_R30_NATURAL_ACCESS_IDENTIFIED"
@@ -561,7 +661,7 @@ def test_first_match_precedence_row3_beats_row5():
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
-        paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+        paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
         result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert result["support_floor"]["pass"] is False
     assert result["result"]["row"] == 3
@@ -575,7 +675,7 @@ def test_first_match_precedence_row3_beats_row5():
 
 def test_determinism_two_runs_are_byte_identical(tmp_path):
     check_rows, unit_rows = build_dataset(SEED)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     out_a = tmp_path / "summary_a.json"
     out_b = tmp_path / "summary_b.json"
     result_a = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
@@ -592,7 +692,7 @@ def test_determinism_two_runs_are_byte_identical(tmp_path):
 
 def test_bootstrap_huge_effect_bounds_exclude_materiality_boundary(tmp_path):
     check_rows, unit_rows = build_dataset(SEED)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     pooled = result["opportunity"]["pooled"]
     assert pooled["urgent"]["lower_95"] > 0.5
@@ -604,7 +704,7 @@ def test_bootstrap_straddling_effect_yields_unresolved_not_decisive(tmp_path):
         return 1.5 if local_ep < n_episodes // 2 else -0.5
 
     check_rows, unit_rows = build_dataset(SEED, urgent_opp_fn=urgent_opp_fn)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     pooled = result["opportunity"]["pooled"]
     assert not (pooled["urgent"]["lower_95"] > 0.5)
@@ -631,7 +731,7 @@ def test_paired_negative_flipping_decisive_fail_inequality_changes_the_result(tm
     check_rows, unit_rows = build_dataset(
         SEED, stable_nat_fn=lambda ep, n: -0.5,
     )
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
 
     production_result = M.run_analysis(paths["trace"], paths["units"], paths["panel"], paths["manifest"])
     assert production_result["opportunity"]["all_pass"] is True
@@ -682,7 +782,7 @@ def test_paired_negative_flipping_decisive_fail_inequality_changes_the_result(tm
 def test_cli_refuses_and_writes_nothing_on_schema_violation(tmp_path):
     check_rows, unit_rows = build_dataset(SEED, rows_per_class_order=8)
     del check_rows[0]["segment_ending_authority"]
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     out_path = tmp_path / "summary.json"
     completed = subprocess.run(
         [
@@ -699,7 +799,7 @@ def test_cli_refuses_and_writes_nothing_on_schema_violation(tmp_path):
 
 def test_cli_writes_deterministic_summary_on_success(tmp_path):
     check_rows, unit_rows = build_dataset(SEED)
-    paths = write_dataset(tmp_path, check_rows, unit_rows, manifest_for([SEED]), oracle_panel_for())
+    paths = write_dataset(tmp_path, check_rows, unit_rows, *standard_manifest_and_panel([SEED]))
     out_a = tmp_path / "summary_a.json"
     out_b = tmp_path / "summary_b.json"
     for out_path in (out_a, out_b):
