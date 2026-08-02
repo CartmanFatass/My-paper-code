@@ -10,7 +10,7 @@ _STEP_CACHE_UNSET = object()
 
 # 尝试导入路由协议
 try:
-    from routing_protocols import (
+    from envs.pettingzoo.routing_protocols import (
         BaseRoutingProtocol, HGGRProtocol, AODVProtocol, 
         DSDVProtocol, GPSRProtocol, WidestPathProtocol
     )
