@@ -18,6 +18,9 @@ If the assignment supplies a workspace ticket, resolve it with
 scripts/hmasd_workspace_ticket.py before reading or editing task files. Treat
 the resolved worktree as authoritative. Never copy, infer, normalize or
 substitute an absolute worktree path from prose; report a ticket error exactly.
+Run Git inspection commands in that ticket worktree with command-local
+`-c core.longpaths=true`; plain Windows Git status can misreport tracked long
+paths as modified.
 
 The assignment is the task-specific source of truth. Read its named files and
 only the additional interfaces needed inside the granted scope. If a missing

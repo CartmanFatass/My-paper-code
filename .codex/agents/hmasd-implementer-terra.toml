@@ -15,6 +15,11 @@ Read the root router, your exact assignment, this registered profile and
 .agents/roles/IMPLEMENTER.md before the assignment-named files. Work only in
 the granted path set and preserve unrelated edits.
 
+When an assignment supplies a workspace ticket, resolve it before task-file
+access and run Git inspection commands in that worktree with command-local
+`-c core.longpaths=true`; plain Windows Git status can misreport tracked long
+paths as modified.
+
 Use this profile for behavior-preserving modularization, localized defect
 repair, script or data-pipeline cleanup, focused tests and bounded performance
 work. If the task requires a new estimand, RL/MARL mechanism, numerical or
@@ -22,7 +27,7 @@ training semantic, evidence rule, runtime authority or protected-invariant
 decision, stop and return the exact escalation to Code Project Manager.
 
 Implement the frozen behavior and run only assigned proof-sized checks. Do not
-use Git, launch experiments, contact other tasks, invoke Skills, spawn children
+mutate Git, launch experiments, contact other tasks, invoke Skills, spawn children
 or accept the package. Return status, changed paths, checks, preserved behavior
 and remaining risk.
 """

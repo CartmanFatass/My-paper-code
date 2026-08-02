@@ -322,6 +322,7 @@ def _status_paths(worktree: Path) -> list[str]:
     completed = subprocess.run(
         [
             "git",
+            *LONG_PATH_GIT_ARGS,
             "-C",
             str(worktree),
             "status",

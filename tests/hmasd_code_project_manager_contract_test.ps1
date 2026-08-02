@@ -20,6 +20,7 @@ $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $routineImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer-terra.toml')
+$protectedImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
@@ -223,6 +224,14 @@ foreach ($required in @(
     'training semantic')) {
     if (-not $routineImplementerProfile.Contains($required)) {
         throw "Routine Terra implementer profile missing: $required"
+    }
+}
+
+foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile)) {
+    foreach ($required in @('workspace ticket', '-c core.longpaths=true')) {
+        if (-not $profile.Contains($required)) {
+            throw "Ticketed implementer profile missing long-path Git inspection rule: $required"
+        }
     }
 }
 

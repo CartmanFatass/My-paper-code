@@ -218,6 +218,10 @@ def test_long_checkout_uses_command_local_longpaths(
         checked_out = Path("\\\\?\\" + str(checked_out))
     assert checked_out.is_file()
     assert git(worktree, "-c", "core.longpaths=true", "status", "--short") == ""
+    verified = ticketing.verify_ticket(
+        argparse.Namespace(ticket=Path(str(created["ticket"])), assignment_id="TASK_LONG_PATH")
+    )
+    assert verified["changed_paths"] == []
     assert git(source, "config", "core.longpaths") == "false"
     assert any(
         args[:4] == ("-c", "core.longpaths=true", "worktree", "add")
