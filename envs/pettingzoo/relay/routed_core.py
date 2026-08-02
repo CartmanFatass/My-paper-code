@@ -34,6 +34,13 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
     
     """
     
+    from envs.pettingzoo.relay.local_view import (
+        _get_local_bs,
+        _get_local_uavs,
+        _get_local_users,
+        _update_observations_dict,
+    )
+
     metadata = {
         "render_modes": ["human", "rgb_array"],
         "name": "uav_forced_relay_env_v0",
@@ -3741,19 +3748,6 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         
         return sinr_db
 
-    def _update_observations_dict(self, observations_dict):
-        """
-        更新观测字典（不再添加额外的跳数信息，因为已经在自身状态中包含）
-        
-        参数:
-            observations_dict: 原始观测字典
-            
-        返回:
-            updated_observations_dict: 更新后的观测字典
-        """
-        # 由于跳数信息已经在 _get_observation 的 self_state[2] 中包含，
-        # 这里直接返回原始观测，不做额外修改
-        return observations_dict
 
     def _get_observation(self, agent):
         """
@@ -3984,96 +3978,8 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         
         return {"obs": obs, "action_mask": action_mask}
 
-    def _get_local_users(self, agent_idx):
-        """
-        获取指定无人机侦测范围内的用户列表（基于固定的物理距离）。
-        
-        参数:
-            agent_idx: 无人机索引
-            
-        返回:
-            local_users: 按距离升序排序的(用户索引, SINR)元组列表
-        """
-        local_users_within_radius = []
-        own_pos = self.uav_positions[agent_idx]
-        
-        # 遍历所有用户，检查是否在侦测范围内
-        for user_idx in range(self.n_users):
-            user_pos = self.user_positions[user_idx]
-            dist = np.linalg.norm(own_pos - user_pos)
-            
-            # [核心逻辑] 只有在侦测范围内才考虑
-            if dist <= self.observation_radius: # 可以为用户使用不同的侦测范围
-                sinr_db = self._compute_sinr(agent_idx, user_idx)
-                local_users_within_radius.append((user_idx, dist, sinr_db))
-                
-        # 按距离升序排序
-        local_users_within_radius.sort(key=lambda x: x[1])
-        
-        # 只返回 (用户索引, SINR)
-        return [(idx, sinr) for idx, dist, sinr in local_users_within_radius]
 
-    def _get_local_uavs(self, agent_idx):
-        """
-        获取指定无人机侦测范围内的其他无人机列表（基于固定的物理距离）。
-        
-        参数:
-            agent_idx: 无人机索引
-            
-        返回:
-            local_uavs: 按距离升序排序的(无人机索引, SINR)元组列表
-        """
-        local_uavs_within_radius = []
-        own_pos = self.uav_positions[agent_idx]
-        
-        # 遍历所有其他无人机，检查是否在侦测范围内
-        for other_idx in range(self.n_uavs):
-            if other_idx == agent_idx:
-                continue
-            
-            other_pos = self.uav_positions[other_idx]
-            # 计算3D距离
-            dist = np.linalg.norm(own_pos - other_pos)
-            
-            # [核心逻辑] 只有在侦测范围内才考虑
-            if dist <= self.observation_radius: # 使用 observation_radius 作为侦测范围
-                # 即使在范围内，我们仍然计算SINR作为观测的一部分，因为它是有用的信息
-                sinr_db = self._compute_uav_to_uav_sinr(agent_idx, other_idx)
-                local_uavs_within_radius.append((other_idx, dist, sinr_db))
-        
-        # 按距离升序排序，优先观测最近的邻居
-        local_uavs_within_radius.sort(key=lambda x: x[1])
-        
-        # 只返回 (无人机索引, SINR)，因为距离信息已经用于排序
-        return [(idx, sinr) for idx, dist, sinr in local_uavs_within_radius]
 
-    def _get_local_bs(self, agent_idx):
-        """
-        获取指定无人机侦测范围内的地面基站列表（基于固定的物理距离）。
-        
-        参数:
-            agent_idx: 无人机索引
-            
-        返回:
-            local_bs: 按距离升序排序的(基站索引, 距离)元组列表
-        """
-        local_bs_within_radius = []
-        own_pos = self.uav_positions[agent_idx]
-        
-        # 遍历所有地面基站，检查是否在侦测范围内
-        for bs_idx in range(self.n_ground_bs):
-            bs_pos = self.ground_bs_positions[bs_idx]
-            dist = np.linalg.norm(own_pos - bs_pos)
-            
-            # [核心逻辑] 只有在侦测范围内才考虑
-            if dist <= self.observation_radius:
-                local_bs_within_radius.append((bs_idx, dist))
-                
-        # 按距离升序排序
-        local_bs_within_radius.sort(key=lambda x: x[1])
-        
-        # 只返回 (基站索引, 距离)
-        return local_bs_within_radius
 
     def _get_local_overloaded_uavs(self, agent_idx):
         """

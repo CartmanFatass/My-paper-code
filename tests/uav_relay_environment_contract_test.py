@@ -14,6 +14,7 @@ from config_1 import Config
 from envs.pettingzoo.relay.belief_map import UAVBeliefMapEnv
 from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from envs.pettingzoo.relay.progressive import UAVProgressiveRelayEnv
+from envs.pettingzoo.relay.routed_core import UAVForcedRelayEnv as UAVRoutedCoreEnv
 
 
 def make_config():
@@ -40,6 +41,10 @@ def make_belief_map_environment(seed):
     )
 
 
+def make_routed_core_environment(seed):
+    return UAVRoutedCoreEnv(config=make_config(), seed=seed)
+
+
 def make_progressive_environment(seed):
     return UAVProgressiveRelayEnv(
         config=make_config(),
@@ -53,6 +58,48 @@ ENVIRONMENT_FACTORIES = (
     pytest.param(make_belief_map_environment, id="belief_map"),
     pytest.param(make_progressive_environment, id="progressive"),
 )
+
+
+LOCAL_VIEW_ENVIRONMENT_FACTORIES = (
+    pytest.param(make_forced_relay_environment, id="forced_relay"),
+    pytest.param(make_belief_map_environment, id="belief_map"),
+    pytest.param(make_routed_core_environment, id="routed_core"),
+)
+
+
+def _assert_distance_order(environment, agent_idx, local_items, positions):
+    own_position = environment.uav_positions[agent_idx]
+    distances = [np.linalg.norm(own_position - positions[item[0]]) for item in local_items]
+    assert distances == sorted(distances)
+
+
+@pytest.mark.parametrize("make_environment", LOCAL_VIEW_ENVIRONMENT_FACTORIES)
+def test_relay_local_view_contract(make_environment):
+    seed = 17
+    environment_a = make_environment(seed)
+    environment_b = make_environment(seed)
+    try:
+        environment_a.reset(seed=seed)
+        environment_b.reset(seed=seed)
+
+        for agent_idx in range(environment_a.n_uavs):
+            users_a = environment_a._get_local_users(agent_idx)
+            uavs_a = environment_a._get_local_uavs(agent_idx)
+            base_stations_a = environment_a._get_local_bs(agent_idx)
+
+            assert users_a == environment_b._get_local_users(agent_idx)
+            assert uavs_a == environment_b._get_local_uavs(agent_idx)
+            assert base_stations_a == environment_b._get_local_bs(agent_idx)
+            assert agent_idx not in [uav_idx for uav_idx, _ in uavs_a]
+            _assert_distance_order(environment_a, agent_idx, users_a, environment_a.user_positions)
+            _assert_distance_order(environment_a, agent_idx, uavs_a, environment_a.uav_positions)
+            _assert_distance_order(environment_a, agent_idx, base_stations_a, environment_a.ground_bs_positions)
+
+        observations_dict = {"uav_0": np.array([1.0], dtype=np.float32)}
+        assert environment_a._update_observations_dict(observations_dict) is observations_dict
+    finally:
+        environment_a.close()
+        environment_b.close()
 
 
 @pytest.mark.parametrize("make_environment", ENVIRONMENT_FACTORIES)
