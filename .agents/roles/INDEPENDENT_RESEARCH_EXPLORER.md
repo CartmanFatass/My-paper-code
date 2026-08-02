@@ -107,7 +107,8 @@ that review. Pro-canonical and Gemini-advisory labels remain local and never
 enter the question. Page, provider-adapter and recovery details remain inside
 the Agentify task.
 
-Before manifest freeze, Explorer uses one model-authored checklist: the raw
+Before manifest freeze, Explorer uses one model-authored checklist: each
+ChatGPT Pro item names `expected_model=GPT-5.6 Pro`; the raw
 question contains no local filesystem locator, task history or unrelated
 corpus; any reviewer-accessible source locator is the public remote GitHub URL.
 This is a question-quality check, not a new mechanical gate.

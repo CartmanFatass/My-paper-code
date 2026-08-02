@@ -228,7 +228,7 @@ Agentify task. CPM does not operate or debug Agentify and adds no transport
 state machine, hash gate or WDM approval.
 
 Before manifest freeze, CPM uses one model-authored checklist: every item names
-its expected reviewer model; the raw question contains no local filesystem
+its expected reviewer model (`GPT-5.6 Pro` for ChatGPT Pro); the raw question contains no local filesystem
 locator, task history or unrelated corpus; and any reviewer-facing source
 locator is the public remote GitHub URL. This is not a new mechanical gate.
 

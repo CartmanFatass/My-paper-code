@@ -602,7 +602,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Send one",
         "`AGENTIFY_REVIEW_BATCH_REQUEST`",
         "Copy each named successful raw response",
-        "expected_model=Pro",
+        "expected_model=GPT-5.6 Pro",
         "dedicated transport task",
     ):
         assert required in pro_review_skill

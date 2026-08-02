@@ -24,14 +24,15 @@ foreach ($entry in @(
     @($operator, 'batch_terminal_status=COMPLETE|ERROR'),
     @($operator, 'request_fields=batch_id|manifest_path|return_task_id'),
     @($operator, 'manifest_item_fields=request_id|review_channel|provider|expected_model|stable_key|question_path'),
-    @($transportSkill, 'call `agentify_query` once'),
     @($transportSkill, 'timeoutMs=2700000'),
     @($transportSkill, 'Never call `agentify_query` twice for one item'),
     @($transportSkill, 'call `agentify_wait_response` once with the same key'),
     @($transportSkill, 'That blocking call sends nothing'),
     @($transportSkill, 'Batch `COMPLETE` means every registered item was attempted and recorded'),
     @($transportSkill, 'Omit every optional content field'),
-    @($transportSkill, 'a ChatGPT Pro item requires exactly `Pro`'),
+    @($transportSkill, '`expectedModel=expected_model`'),
+    @($transportSkill, 'selects the exact target and'),
+    @($transportSkill, 'A ChatGPT Pro item uses `GPT-5.6 Pro`'),
     @($transportSkill, 'Never claim an action that no tool result proves')
 )) {
     if (-not $entry[0].Contains($entry[1])) {

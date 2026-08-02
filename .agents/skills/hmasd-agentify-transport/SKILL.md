@@ -34,20 +34,20 @@ requester; a future barrier-dependent follow-up belongs in a later batch.
 1. Read and validate the manifest. If it cannot be read or processing cannot
    begin, send one `AGENTIFY_REVIEW_BATCH_RESULT` with `status=ERROR`; do not
    attempt any item.
-2. For every item in manifest order, call `agentify_status` on the existing
-   `stable_key` and provider. Require its visible model to equal
-   `expected_model`; a ChatGPT Pro item requires exactly `Pro`. A mismatch is an
-   item `ERROR` before send, not permission to change the model or page.
-3. Read the question once and call `agentify_query` once with exactly
-   `key=stable_key`, `model=provider`, the question as `prompt`, and
-   `timeoutMs=2700000`. Omit every optional content field, including
+2. For every item in manifest order, read the question once and call
+   `agentify_query` once with exactly `key=stable_key`, `model=provider`,
+   `expectedModel=expected_model`, the question as `prompt`, and
+   `timeoutMs=2700000`. A ChatGPT Pro item uses `GPT-5.6 Pro`. On the existing
+   idle page, Agentify keeps a matching model or selects the exact target and
+   confirms it before typing. If that target is unavailable, record item
+   `ERROR` before send. Omit every optional content field, including
    `contextPaths`, `attachments`, `bundleName` and `promptPrefix`. The tool owns
    whole-payload insertion, one send and the natural-completion wait.
-4. On success, write the actual returned assistant text to
+3. On success, write the actual returned assistant text to
    `temp/sessions/agentify_transport_operator/<batch_id>/<request_id>/response.md`
    and record item `status=COMPLETE`. On error, record item `status=ERROR` and
    continue to the next item.
-5. After every item is terminal, write the ordered item results to
+4. After every item is terminal, write the ordered item results to
    `temp/sessions/agentify_transport_operator/<batch_id>/results.json` and send
    one `AGENTIFY_REVIEW_BATCH_RESULT` to `return_task_id` with
    `status=COMPLETE`, the results path and an empty batch error, using

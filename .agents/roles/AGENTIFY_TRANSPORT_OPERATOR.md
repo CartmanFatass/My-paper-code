@@ -24,12 +24,13 @@ items. The requester owns question selection, archival and interpretation and
 may continue unrelated work while the batch runs. Mechanics live only in the
 named Skill.
 
-Before each send the operator checks the existing tab's visible model against
-`expected_model`; a ChatGPT Pro review requires the visible label `Pro`.
-Provider names are routing hints, not reviewer-model evidence. The query call
-contains only the stable key, provider hint, raw question and timeout. Local
-paths, context bundles, attachments, prefixes and requester history are never
-sent.
+Before each send the operator passes `expected_model` to the query. Agentify
+keeps the current model when it already matches or selects the exact visible
+target on the existing idle page before typing; a ChatGPT Pro review uses
+`GPT-5.6 Pro`. Provider names are routing hints, not reviewer-model evidence.
+The query contains only the stable key, provider hint, expected model, raw
+question and timeout. Local paths, context bundles, attachments, prefixes and
+requester history are never sent.
 
 Agentify source changes require an exact direct user grant. The operator never
 claims a tool call, file write or cross-task delivery without its actual result.

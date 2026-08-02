@@ -28,7 +28,7 @@ root before sending.
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
 2. Add each currently eligible frozen question to one ordered JSON manifest as
    `request_id|review_channel|provider|expected_model|stable_key|question_path`.
-   A ChatGPT Pro review names `expected_model=Pro`. Confirm once that the raw
+   A ChatGPT Pro review names `expected_model=GPT-5.6 Pro`. Confirm once that the raw
    question contains no local filesystem path, task history or unrelated
    corpus; use a public remote GitHub URL for a reviewer-facing source locator.
    Send one

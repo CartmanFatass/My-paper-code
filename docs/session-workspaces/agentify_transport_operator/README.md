@@ -10,6 +10,6 @@ own item selection, archival and interpretation and continue unrelated work
 while the batch runs. The task loads `hmasd-agentify-transport`; no science or
 project state is stored here.
 
-Each manifest item names `expected_model`; the operator checks the visible model
-before sending and never supplies `contextPaths`, attachments, bundles or a
-prefix to `agentify_query`.
+Each manifest item names `expected_model`; `agentify_query` keeps or selects that
+exact model before typing (`GPT-5.6 Pro` for ChatGPT Pro). The operator never
+supplies `contextPaths`, attachments, bundles or a prefix.

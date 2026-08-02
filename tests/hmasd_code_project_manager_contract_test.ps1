@@ -166,6 +166,7 @@ $codeRequired = @(
     'AGENTIFY_REVIEW_BATCH_RESULT',
     'one ordered manifest',
     'every item names its expected reviewer model',
+    '`GPT-5.6 Pro` for ChatGPT Pro',
     'CPM does not operate or debug Agentify',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
