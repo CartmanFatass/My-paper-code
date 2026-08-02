@@ -329,6 +329,36 @@ class AgentifyTransportTest(unittest.TestCase):
                 MODULE.command_provision_direction(args)
         self.assertFalse(invalid_prompt.exists())
 
+    def test_main_uses_utf8_stdio_before_unicode_direction_provision(self) -> None:
+        source = self.root / "local_research/中文问题.md"
+        source.parent.mkdir(parents=True)
+        source_bytes = "评审这个科学问题。\n".encode("utf-8")
+        source.write_bytes(source_bytes)
+        prompt = self.root / "local_research/pro_reviews/中文审阅/20_PRO_OPEN_QUESTION.md"
+        output_bytes = io.BytesIO()
+        cp1252_stdout = io.TextIOWrapper(output_bytes, encoding="cp1252")
+
+        with (
+            mock.patch.object(MODULE, "_repo_root", return_value=self.root),
+            mock.patch.object(MODULE.sys, "stdout", cp1252_stdout),
+        ):
+            result = MODULE.main(
+                [
+                    "provision-direction",
+                    "--assignment-identity",
+                    "IR_DIRECTION_REVIEW:unicode-path",
+                    "--prompt-source",
+                    str(source),
+                    "--prompt-path",
+                    str(prompt),
+                ]
+            )
+            cp1252_stdout.flush()
+
+        self.assertEqual(result, 0)
+        self.assertEqual(prompt.read_bytes(), source_bytes)
+        self.assertIn(str(prompt), output_bytes.getvalue().decode("utf-8"))
+
     def test_methodology_provision_accepts_only_methodology_review_prefix(self) -> None:
         source = self.root / "local_research/frozen_methodology_prompt.md"
         source.parent.mkdir(parents=True)
