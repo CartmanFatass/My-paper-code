@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -9,6 +11,7 @@ import pytest
 import numpy as np
 
 from ha_ctse_process import uav_episode_serialization as episode_serialization
+from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner
 
@@ -20,6 +23,24 @@ DESIGN_ARCHIVE_COMMIT = "9c1566e1c6adefcd500facb1bb50d5a7428eae9c"
 DESIGN_DISPOSITION = (
     "G0_EXECUTABLE_CONTRACT_ADDENDUM_V2_DISPOSITION=READY_FOR_CODE_CONTRACT"
 )
+
+
+def test_episode_serialization_import_is_source_independent() -> None:
+    assert episode_serialization.schema is episode_schema
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys; "
+            "from ha_ctse_process import uav_episode_serialization as codec; "
+            "assert codec.schema.__name__ == 'ha_ctse_process.uav_episode_schema'; "
+            "assert 'ha_ctse_process.uav_source_identifiability_g0' not in sys.modules",
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
 
 
 def _load(path: Path) -> dict:
@@ -812,6 +833,18 @@ def _empty_episode_run() -> source.EpisodeRunEvidence:
 def test_episode_run_codec_is_exact_byte_stable_and_fail_closed() -> None:
     run = _empty_episode_run()
     primitive = episode_serialization.episode_run_to_primitive(run)
+    assert list(primitive) == [
+        "episode_id", "control", "cell", "metrics", "source_sha256",
+        "user_demand_input_mbps", "user_delivered_input_mbps",
+        "channel_association_input", "delivered_user_rates_mbps",
+        "target_trace", "raw_action_trace", "executed_velocity_trace",
+        "position_trace", "active_mask_trace", "weakest_service",
+        "controller_evidence", "target_trace_sha256", "raw_action_trace_sha256",
+        "executed_velocity_trace_sha256", "executed_position_trace_sha256",
+        "service_trace_sha256", "controller_state_sha256", "lifecycle_events",
+        "tracker_failures", "action_support_violations", "ownership_violations",
+        "backhaul_guard_blocked_actions", "oracle_qualification_failures",
+    ]
     raw_action = primitive["raw_action_trace"]
     assert raw_action == {
         "dtype": "float32", "shape": [500, 8, 4],

@@ -7,11 +7,11 @@ from typing import Any, Mapping
 
 import numpy as np
 
-from ha_ctse_process import uav_source_identifiability_g0 as source
+from ha_ctse_process import uav_episode_schema as schema
 
 
 _NATIVE_ARRAY_KEYS = frozenset({"dtype", "shape", "data_hex"})
-_EPISODE_RUN_KEYS = frozenset(item.name for item in fields(source.EpisodeRunEvidence))
+_EPISODE_RUN_KEYS = frozenset(item.name for item in fields(schema.EpisodeRunEvidence))
 _METRIC_KEYS = frozenset(
     {
         "episode_id",
@@ -61,7 +61,7 @@ def _array_from_native(value: Any, *, label: str) -> np.ndarray:
     return np.frombuffer(raw, dtype=dtype).reshape(shape).copy()
 
 
-def episode_run_to_primitive(run: source.EpisodeRunEvidence) -> dict[str, Any]:
+def episode_run_to_primitive(run: schema.EpisodeRunEvidence) -> dict[str, Any]:
     value = {
         "episode_id": run.episode_id,
         "control": run.control.value,
@@ -70,7 +70,7 @@ def episode_run_to_primitive(run: source.EpisodeRunEvidence) -> dict[str, Any]:
         "source_sha256": run.source_sha256,
         **{
             name: _native_array(getattr(run, name))
-            for name in source.EPISODE_RUN_ARRAY_SPECS
+            for name in schema.EPISODE_RUN_ARRAY_SPECS
         },
         "controller_evidence": dict(run.controller_evidence),
         "target_trace_sha256": run.target_trace_sha256,
@@ -90,9 +90,9 @@ def episode_run_to_primitive(run: source.EpisodeRunEvidence) -> dict[str, Any]:
     return value
 
 
-def _metrics_from_primitive(value: Any) -> source.EpisodeMetrics:
+def _metrics_from_primitive(value: Any) -> schema.EpisodeMetrics:
     _require_exact_keys(value, _METRIC_KEYS, label="episode metrics")
-    return source.EpisodeMetrics(
+    return schema.EpisodeMetrics(
         episode_id=int(value["episode_id"]),
         control=value["control"],
         cell=value["cell"],
@@ -107,19 +107,19 @@ def _metrics_from_primitive(value: Any) -> source.EpisodeMetrics:
     )
 
 
-def episode_run_from_primitive(value: Any) -> source.EpisodeRunEvidence:
+def episode_run_from_primitive(value: Any) -> schema.EpisodeRunEvidence:
     _require_exact_keys(value, _EPISODE_RUN_KEYS, label="formal episode run")
     arrays = {
         name: _array_from_native(value[name], label=name)
-        for name in source.EPISODE_RUN_ARRAY_SPECS
+        for name in schema.EPISODE_RUN_ARRAY_SPECS
     }
     for name, (
         expected_shape,
         expected_dtype,
-    ) in source.EPISODE_RUN_ARRAY_SPECS.items():
+    ) in schema.EPISODE_RUN_ARRAY_SPECS.items():
         if arrays[name].shape != expected_shape or arrays[name].dtype != expected_dtype:
             raise ValueError(f"G0 {name} registered dtype/shape mismatch")
-    return source.EpisodeRunEvidence(
+    return schema.EpisodeRunEvidence(
         episode_id=int(value["episode_id"]),
         control=value["control"],
         cell=value["cell"],
@@ -127,7 +127,7 @@ def episode_run_from_primitive(value: Any) -> source.EpisodeRunEvidence:
         source_sha256=value["source_sha256"],
         controller_evidence=value["controller_evidence"],
         lifecycle_events=tuple(
-            source.LifecycleBoundaryEvent(**item) for item in value["lifecycle_events"]
+            schema.LifecycleBoundaryEvent(**item) for item in value["lifecycle_events"]
         ),
         target_trace_sha256=value["target_trace_sha256"],
         raw_action_trace_sha256=value["raw_action_trace_sha256"],

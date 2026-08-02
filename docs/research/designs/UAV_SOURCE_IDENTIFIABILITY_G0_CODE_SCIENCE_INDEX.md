@@ -54,6 +54,8 @@ not record a scientific result and does not authorize the registered
 | Role | Path |
 |---|---|
 | Source/control/statistics | `ha_ctse_process/uav_source_identifiability_g0.py` |
+| Shared episode evidence schema | `ha_ctse_process/uav_episode_schema.py` |
+| Canonical episode wire codec | `ha_ctse_process/uav_episode_serialization.py` |
 | Proof-only runner and closed scientific entries | `scripts/run_uav_source_identifiability_g0.py` |
 | Source focused tests | `tests/ha_ctse_process_uav_source_identifiability_g0_test.py` |
 | Runner/artifact focused tests | `tests/run_uav_source_identifiability_g0_test.py` |
@@ -73,7 +75,7 @@ outside this implementation boundary.
 | Uniform storage-only 8! permutation | `make_episode_source`, `G0Geometry`, `minimum_cost_target_assignment` | physical rows equal target-owned rows indexed by the registered permutation | assignment permutation test |
 | Independent phi/users/perturbation/permutation/channel/owner/onset/duration namespaces | `_NAMESPACE_CODES`, `_rng`, `channel_seed_word` | exact namespace inventory and controller-independent, step-addressed channel word | source RNG test |
 | One primary leave, O in 180..220, D in 80..100; paired NO_EVENT only disables leave/rejoin | `G0EventLedger`, `_active_mask_for_step`, `_synchronize_service_mask` | event fields regenerated; one source digest is shared by both cells | environment boundary test; result-time `build_episode_validity_record` |
-| Leave/rejoin before action; absent hold/zero velocity/no action; fresh opaque epoch | `LifecycleBoundaryEvent`, `current_rows`, `step_dense`, `replacement_lifecycle_handle`, `run_g0_episode` | exact event times/count, inactive mask/action/velocity and changed handle | environment boundary test; `_validate_run_primitives` |
+| Leave/rejoin before action; absent hold/zero velocity/no action; fresh opaque epoch | `ha_ctse_process/uav_episode_schema.py::LifecycleBoundaryEvent`; `current_rows`, `step_dense`, `replacement_lifecycle_handle`, `run_g0_episode` | exact event times/count, inactive mask/action/velocity and changed handle | environment boundary test; `_validate_run_primitives` |
 
 `G0Geometry`, `G0EventLedger` and `G0EpisodeSource` do not accept a favorable
 summary flag.  Each independently reconstructs its RNG-owned primitives and
@@ -188,7 +190,7 @@ different action byte, certify the switch.
 
 ## Primitive result reconstruction
 
-`EpisodeRunEvidence` retains the delivered-rate rows, target rows, raw action
+`ha_ctse_process/uav_episode_schema.py::EpisodeRunEvidence` retains the delivered-rate rows, target rows, raw action
 rows, executed velocities, full positions, active masks, lifecycle events and
 controller evidence, in addition to their digests.  `_validate_run_primitives`
 recomputes:
@@ -212,7 +214,7 @@ does not accept caller-authored metric or validity summaries.
 |---|---|
 | `rho_z=(1/10) sum 1[rate>=1 Mbps]`; `S=min_z rho_z` | `weakest_hotspot_service_row`, `weakest_hotspot_service` |
 | EVENT `W={O..O+D+59}`, normalized deficit, `J`, outside-window `Q`, minimum `M`, `A=min(J/.90,Q/.90)`, access and 10-step catastrophe | `compute_episode_metrics`, `_has_catastrophic_streak` |
-| NO_EVENT `J=1`, whole-row `Q/M`, `A=Q/.90`, access, no catastrophe | `compute_episode_metrics`, `EpisodeMetrics.__post_init__` reconstruction |
+| NO_EVENT `J=1`, whole-row `Q/M`, `A=Q/.90`, access, no catastrophe | `compute_episode_metrics`, `ha_ctse_process/uav_episode_schema.py::EpisodeMetrics.__post_init__` reconstruction |
 | paired deltas same-information minus no-reallocation | `build_analysis_evidence` |
 | exactly one `numpy Generator(PCG64(2026072901))` and one `10000×128` integer index matrix generated once and reused for every continuous metric and paired delta | `make_bootstrap_index_plan` |
 | sorted no-interpolation `x_(500)`, `x_(9500)` | `bootstrap_bounds` uses zero-indexed `[499]`, `[9499]` |

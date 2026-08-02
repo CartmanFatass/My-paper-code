@@ -1,13 +1,147 @@
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import fields, replace
 import copy
 import math
 
 import numpy as np
 import pytest
 
+from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_source_identifiability_g0 as g0
+
+
+def test_shared_episode_schema_exports_and_layout_are_exact() -> None:
+    expected_exports = (
+        "PHYSICAL_HORIZON",
+        "PHYSICAL_UAVS",
+        "GROUND_USERS",
+        "ACTION_DIM",
+        "SERVICE_TARGET",
+        "G0RealizationError",
+        "Cell",
+        "Control",
+        "LifecycleBoundaryEvent",
+        "EpisodeMetrics",
+        "EpisodeRunEvidence",
+        "EPISODE_RUN_ARRAY_SPECS",
+        "_readonly_array",
+    )
+    assert all(
+        getattr(g0, name) is getattr(episode_schema, name) for name in expected_exports
+    )
+    assert (
+        g0.PHYSICAL_HORIZON,
+        g0.PHYSICAL_UAVS,
+        g0.GROUND_USERS,
+        g0.ACTION_DIM,
+        g0.SERVICE_TARGET,
+    ) == (500, 8, 30, 4, 0.90) == (
+        episode_schema.PHYSICAL_HORIZON,
+        episode_schema.PHYSICAL_UAVS,
+        episode_schema.GROUND_USERS,
+        episode_schema.ACTION_DIM,
+        episode_schema.SERVICE_TARGET,
+    )
+    assert [item.name for item in fields(episode_schema.LifecycleBoundaryEvent)] == [
+        "kind",
+        "physical_step",
+        "previous_handle",
+        "current_handle",
+        "owner_target",
+    ]
+    assert [item.type for item in fields(episode_schema.LifecycleBoundaryEvent)] == [
+        "str", "int", "str", "str | None", "str"
+    ]
+    assert [item.name for item in fields(episode_schema.EpisodeMetrics)] == [
+        "episode_id",
+        "control",
+        "cell",
+        "onset",
+        "duration",
+        "j_event",
+        "q_ordinary",
+        "m_event",
+        "a_control",
+        "b_access",
+        "c_cat",
+    ]
+    assert [item.name for item in fields(episode_schema.EpisodeRunEvidence)] == [
+        "episode_id",
+        "control",
+        "cell",
+        "metrics",
+        "source_sha256",
+        "user_demand_input_mbps",
+        "user_delivered_input_mbps",
+        "channel_association_input",
+        "delivered_user_rates_mbps",
+        "target_trace",
+        "raw_action_trace",
+        "executed_velocity_trace",
+        "position_trace",
+        "active_mask_trace",
+        "controller_evidence",
+        "target_trace_sha256",
+        "raw_action_trace_sha256",
+        "executed_velocity_trace_sha256",
+        "executed_position_trace_sha256",
+        "service_trace_sha256",
+        "controller_state_sha256",
+        "lifecycle_events",
+        "tracker_failures",
+        "action_support_violations",
+        "ownership_violations",
+        "backhaul_guard_blocked_actions",
+        "oracle_qualification_failures",
+        "weakest_service",
+    ]
+    assert list(episode_schema.EPISODE_RUN_ARRAY_SPECS.items()) == [
+        ("user_demand_input_mbps", ((500, 30), np.dtype(np.float64))),
+        ("user_delivered_input_mbps", ((500, 30), np.dtype(np.float64))),
+        ("channel_association_input", ((500, 8, 30), np.dtype(np.bool_))),
+        ("delivered_user_rates_mbps", ((500, 30), np.dtype(np.float64))),
+        ("target_trace", ((500, 8, 3), np.dtype(np.float64))),
+        ("raw_action_trace", ((500, 8, 4), np.dtype(np.float32))),
+        ("executed_velocity_trace", ((500, 8, 3), np.dtype(np.float64))),
+        ("position_trace", ((501, 8, 3), np.dtype(np.float64))),
+        ("active_mask_trace", ((500, 8), np.dtype(np.bool_))),
+        ("weakest_service", ((500,), np.dtype(np.float64))),
+    ]
+    lifecycle = episode_schema.LifecycleBoundaryEvent("LEAVE", 1, "old", None, "p/0")
+    assert list(lifecycle.to_primitive()) == [
+        "kind",
+        "physical_step",
+        "previous_handle",
+        "current_handle",
+        "owner_target",
+    ]
+    metrics = episode_schema.EpisodeMetrics(
+        0,
+        episode_schema.Control.SAME_INFORMATION,
+        episode_schema.Cell.NO_EVENT,
+        200,
+        80,
+        1.0,
+        0.90,
+        0.0,
+        1.0,
+        1,
+        0,
+    )
+    assert list(metrics.to_primitive()) == [
+        "episode_id",
+        "control",
+        "cell",
+        "onset",
+        "duration",
+        "J_event",
+        "Q_ordinary",
+        "M_event",
+        "A_control",
+        "B_access",
+        "C_cat",
+    ]
 
 
 def test_callable_source_digests_are_cached_by_callable_identity(
