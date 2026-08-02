@@ -158,8 +158,12 @@ Every transport anomaly observed during a round goes into that round's
 `## Transport faults` section: each `HMASD_AGENTIFY_TRANSPORT_ERROR` code, any
 terminal state other than `NATURAL_COMPLETION_VERIFIED`, an HTTP 409
 (idempotency or binding conflict), a tab-precondition failure, or a receipt that
-failed local validation. In the same round either repair this Skill or record
-why not. `tests/review_round_contract_test.ps1` refuses a round whose
+failed local validation. A validated receipt can still certify a mid-stream
+fragment when the page shows no stop control (Pro async thinking, measured
+2026-08-01) — the `streaming-animation` stopButton branch in
+`~/.agentify-desktop/selectors.override.json` is the guard; re-verify it after
+any Agentify restart or upgrade. In the same round either repair this Skill or
+record why not. `tests/review_round_contract_test.ps1` refuses a round whose
 `## Transport faults` section is empty or still `TODO` — that check exists
 because this section was once a TODO nobody read for thirty rounds.
 

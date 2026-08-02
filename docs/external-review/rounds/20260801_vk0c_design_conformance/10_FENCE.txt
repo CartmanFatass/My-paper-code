@@ -2,6 +2,6 @@ CURRENT_REVIEW_ASSIGNMENT
 repository=CartmanFatass/My-paper-code
 branch=untied-k
 round=20260801_vk0c_design_conformance
-stage_commit=b570fafb0000000000000000000000000000dead
+stage_commit=060a86d9181be1f2721d693fd30a84a2f27affcb
 question=docs/external-review/rounds/20260801_vk0c_design_conformance/20_PRO_OPEN_QUESTION.md
 instruction=Ignore earlier rounds and refs. Read only this question and its listed evidence from stage_commit.

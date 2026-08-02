@@ -25,7 +25,7 @@ from urllib.request import Request, urlopen
 
 SCHEMA_VERSION = 1
 MAX_TIMEOUT_MS = 45 * 60 * 1000
-AGENTIFY_REQUIRED_COMMIT = "6ed991f95d954415b0e9b8898b84c000067ebe00"
+AGENTIFY_REQUIRED_COMMIT = "e9f636740bf94d7db260c8817554904cdcb68870"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 STAGE_COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")

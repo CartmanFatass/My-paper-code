@@ -1,6 +1,21 @@
 # V-K0C realization — Project Manager decision ledger
 
-Status: **complete code design for touchpoint 2 conformance** (workflow 7).
+Status: **CONVERGED — CONFORMS** (round `20260801_vk0c_design_conformance`,
+`22_PRO_CONVERGENCE_3.md`): all amendments A-VC-1..11 closed, every
+scientific surface frozen, no further design round. Five Gate-B realization
+clarifications bind the implementation (verbatim in the raw): (C-1)
+`token_mass` is the sole probability authority — a second
+logits-to-probability path reopens A-VC-1/2; (C-2) the propagation state
+(check index, joint skill pair, ages, active mask, target phase/sign) is
+frozen — a hidden variable affecting outcomes enters the state or returns
+the design to review; (C-3) raw masses → validation → ONE canonical
+distribution everywhere downstream; (C-4) the Factor-D label is
+`SERIALIZATION_INDUCED_OCCUPANCY_SHIFT_IDENTIFIED` under pooled + both
+stratum equivalences plus propagation reproducing the split; (C-5) analyzer
+authorization only from the input manifest and stamped rows, never
+directory or file names. The Gate-B witness lists (probability, transition,
+order, artifact, numerical paths) precede full implementation; execution is
+not authorized by the convergence.
 The evidence semantics are FROZEN by the ruling of round
 `20260801_vk0b_valid_rerun_result` (V-K0C sections 1–9); this ledger records
 only the realization bindings. Zero training, zero policy updates, zero

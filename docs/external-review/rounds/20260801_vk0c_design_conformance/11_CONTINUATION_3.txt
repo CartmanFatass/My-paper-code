@@ -1,0 +1,13 @@
+Convergence turn 3 of the V-K0C design conformance check (stage_commit=060a86d9181be1f2721d693fd30a84a2f27affcb).
+
+A transport defect on this side captured both of your previous replies as
+truncated fragments (45 bytes and 22 bytes respectively) — the defect is
+diagnosed and repaired, and this is purely a capture failure on our side;
+your full replies were composed normally. Nothing you wrote beyond those
+fragments is usable as evidence on this side.
+
+Please restate, one final time, the complete convergence decision for the
+amendment section submitted in convergence turn 1 (A-VC-1 through A-VC-11 as
+entered into VK0C_REALIZATION_DECISION_LEDGER.md): CONFORMS or the exact
+remaining deviations, any realization clarifications, and the closing
+CONVERGENCE_DECISION block.
