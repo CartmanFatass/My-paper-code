@@ -24,7 +24,7 @@ SEND_CONFIRM_TIMEOUT_SECONDS = 60.0
 LEDGER_POLL_SECONDS = 1.0
 GENERATION_REPORT_SECONDS = 5 * 60.0
 TAB_READY_TIMEOUT_MS = 30_000
-AGENTIFY_REQUIRED_COMMIT = "2e5e0ecbe70a13a34f947daa0c57a53b450e5d59"
+AGENTIFY_REQUIRED_COMMIT = "79c5b421e4fb5ac817c273311090b74d5d2c1306"
 KEY_RE = re.compile(r"^[A-Za-z0-9._:-]{1,128}$")
 OWNER_KEYS = {
     "code_project_manager": {
@@ -980,6 +980,17 @@ def command_submit(args: argparse.Namespace) -> None:
                     request=request,
                     tab_id=tab_id,
                 )
+            if operation and not all(predicates.values()):
+                if now < overall_deadline:
+                    time.sleep(LEDGER_POLL_SECONDS)
+                    continue
+                _terminate_owned_worker(worker)
+                _emit_lifecycle(
+                    "POST_SEND_BLOCKED",
+                    predicates=predicates,
+                    operation_status=operation.get("status"),
+                )
+                _fail("post_send_blocked_existing_operation_incomplete")
             if not all(predicates.values()):
                 _terminate_owned_worker(worker)
                 operation = _ledger_operation(
@@ -1024,7 +1035,7 @@ def command_submit(args: argparse.Namespace) -> None:
     if worker.returncode == 0:
         receipt = _load_json(receipt_path)
         validate_receipt(receipt, request)
-    while not confirmed and time.monotonic() < confirmation_deadline:
+    while not confirmed and time.monotonic() < overall_deadline:
         operation = _ledger_operation(args.state_dir, request["idempotency_key"])
         predicates = _send_confirmation_predicates(operation, request, tab_id)
         if _user_message_present(operation) and not all(predicates.values()):
@@ -1039,12 +1050,14 @@ def command_submit(args: argparse.Namespace) -> None:
             confirmed = True
             _emit_lifecycle("MESSAGE_CONFIRMED", predicates=predicates)
             break
+        if not operation and time.monotonic() >= confirmation_deadline:
+            break
         time.sleep(LEDGER_POLL_SECONDS)
 
     if not confirmed:
         operation = _ledger_operation(args.state_dir, request["idempotency_key"])
         predicates = _send_confirmation_predicates(operation, request, tab_id)
-        if _user_message_present(operation) or receipt is not None:
+        if operation or receipt is not None:
             _fail_post_send(
                 "post_send_blocked_ledger_identity_unconfirmed",
                 operation=operation,

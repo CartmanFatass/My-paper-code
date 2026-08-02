@@ -973,13 +973,13 @@ class AgentifyTransportTest(unittest.TestCase):
             )
         spawn.assert_not_called()
 
-    def test_deadline_termination_rereads_late_confirmation_without_resend(self) -> None:
+    def test_short_confirmation_deadline_keeps_durable_operation_alive_until_late_confirmation(self) -> None:
         state_dir = self.root / "agentify-state"
         state_dir.mkdir()
         request_path = self.root / "logs/agentify/round/request-race.json"
         receipt_path = self.root / "logs/agentify/round/receipt-race.json"
         request_path.write_text(json.dumps(self.request), encoding="utf-8")
-        worker = FakeSubmitWorker([None])
+        worker = FakeSubmitWorker([None, None, 1], stderr="client interrupted")
         operations = iter(
             [
                 {},
@@ -996,7 +996,7 @@ class AgentifyTransportTest(unittest.TestCase):
              mock.patch.object(MODULE, "_spawn_submit_worker", return_value=worker) as spawn, \
              mock.patch.object(MODULE, "_ledger_operation", side_effect=lambda *_: next(operations)), \
              mock.patch.object(MODULE, "_complete_from_existing", return_value=self.receipt) as complete, \
-             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 62.0, 63.0]), \
+             mock.patch.object(MODULE.time, "monotonic", side_effect=[0.0, 1.0, 2.0, 62.0, 63.0]), \
              mock.patch.object(MODULE.time, "sleep"), \
              contextlib.redirect_stdout(output):
             MODULE.command_submit(
@@ -1009,7 +1009,7 @@ class AgentifyTransportTest(unittest.TestCase):
             )
         spawn.assert_called_once()
         complete.assert_called_once_with(self.validated, state_dir, receipt_path)
-        self.assertTrue(worker.terminated)
+        self.assertFalse(worker.terminated)
         self.assertNotIn('"phase": "PRE_SEND_BLOCKED"', output.getvalue())
         self.assertIn('"phase": "MESSAGE_CONFIRMED"', output.getvalue())
 
