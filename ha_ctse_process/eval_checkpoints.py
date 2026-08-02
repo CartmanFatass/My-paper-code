@@ -28,7 +28,7 @@ from ha_ctse_process.standalone_cli import (
     create_env,
     load_config,
 )
-from ha_ctse_process.train import evaluate
+from ha_ctse_process.standalone_evaluation import evaluate
 
 
 SUMMARY_FIELDS = (

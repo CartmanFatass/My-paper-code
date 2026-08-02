@@ -5,6 +5,7 @@ import torch
 
 from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
+from ha_ctse_process import standalone_evaluation as process_evaluation
 from ha_ctse_process.standalone_agent import Rollout, Segment, StandaloneProcessAgent
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
@@ -497,8 +498,8 @@ def test_standalone_eval_restores_runtime_state(monkeypatch):
     has_active_before = agent.has_active_skill.copy()
     segments_before = agent.segments
 
-    monkeypatch.setattr(process_train, "create_env", lambda *args, **kwargs: DummyEvalEnv())
-    metrics = process_train.evaluate(agent, cfg, args, episodes=1, total_steps=10)
+    monkeypatch.setattr(process_evaluation, "create_env", lambda *args, **kwargs: DummyEvalEnv())
+    metrics = process_evaluation.evaluate(agent, cfg, args, episodes=1, total_steps=10)
 
     assert metrics["reward_mean"] == 2.0
     assert metrics["coverage"] == 0.5

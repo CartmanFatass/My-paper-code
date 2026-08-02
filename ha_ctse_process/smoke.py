@@ -13,6 +13,7 @@ import torch
 from ha_ctse_process.config import Config
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_evaluation as process_evaluation
 from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
 
 
@@ -254,12 +255,12 @@ def run_smoke(log_dir: Path) -> dict:
     duration_before = eval_agent.duration_remaining.copy()
     age_before = eval_agent.skill_age.copy()
     has_before = eval_agent.has_active_skill.copy()
-    old_create_env = process_train.create_env
-    process_train.create_env = lambda *args, **kwargs: DummyEvalEnv()
+    old_create_env = process_evaluation.create_env
+    process_evaluation.create_env = lambda *args, **kwargs: DummyEvalEnv()
     try:
-        eval_metrics = process_train.evaluate(eval_agent, cfg, args, episodes=1, total_steps=10)
+        eval_metrics = process_evaluation.evaluate(eval_agent, cfg, args, episodes=1, total_steps=10)
     finally:
-        process_train.create_env = old_create_env
+        process_evaluation.create_env = old_create_env
     eval_restore_ok = (
         eval_metrics["reward_mean"] == 2.0
         and eval_metrics["coverage"] == 0.5
