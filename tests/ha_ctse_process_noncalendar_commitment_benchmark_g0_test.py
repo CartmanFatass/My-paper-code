@@ -23,6 +23,7 @@ from ha_ctse_process import event_commitment_checkpoint
 from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
 from ha_ctse_process import event_commitment_replay
+from ha_ctse_process import event_commitment_replay_evidence
 from ha_ctse_process.event_commitment_collector import (
     CREATE,
     KEEP,
@@ -36,6 +37,10 @@ from ha_ctse_process.event_commitment_replay import (
     replay_report,
     replay_trajectory,
     validate_replay,
+)
+from ha_ctse_process.event_commitment_replay_evidence import (
+    _replay_record_valid,
+    merge_replay_records,
 )
 from ha_ctse_process.event_commitment_optimizer import optimize_update
 from ha_ctse_process.event_commitment_analysis import (
@@ -145,12 +150,10 @@ from scripts.run_noncalendar_commitment_benchmark_g0 import (
     _digest_json,
     _evaluation_state,
     _json_default,
-    _replay_record_valid,
     _training_update_valid,
     _trajectory_episode_rows,
     _write_json,
     formal_path_exercise,
-    merge_replay_records,
     run_smoke,
 )
 
@@ -4717,7 +4720,7 @@ def test_worst_coordinate_and_ulp_evidence_is_strict() -> None:
     mixed_bound = REPLAY_LOG_COMPONENT_ATOL + REPLAY_LOG_COMPONENT_RTOL * max(
         abs(float(stored)), abs(float(replayed))
     )
-    spacing, distance = benchmark_runner._recompute_ulp(
+    spacing, distance = event_commitment_replay_evidence._recompute_ulp(
         float(stored), float(replayed)
     )
     component_failure["errors"]["mark_component"] = absolute_error
