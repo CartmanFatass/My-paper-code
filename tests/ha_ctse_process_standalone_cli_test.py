@@ -29,17 +29,28 @@ HELPER_NAMES = {
 }
 
 
-def test_standalone_cli_is_the_sole_helper_owner_and_train_keeps_direct_bindings():
+def test_standalone_cli_is_the_sole_helper_owner_and_callers_bind_directly():
     train_tree = ast.parse(Path(train.__file__).read_text(encoding="utf-8"))
     train_definitions = {
         node.name for node in train_tree.body if isinstance(node, ast.FunctionDef)
     }
 
     assert not (HELPER_NAMES & train_definitions)
-    for name in HELPER_NAMES:
+    for name in {
+        "load_config",
+        "parse_args",
+        "apply_standalone_overrides",
+        "create_env",
+    }:
         assert getattr(train, name) is getattr(standalone_cli, name)
+    for name in HELPER_NAMES - {
+        "load_config",
+        "parse_args",
+        "apply_standalone_overrides",
+        "create_env",
+    }:
+        assert not hasattr(train, name)
 
-    # Direct imports intentionally remain train patch points until eval/runners extract.
     assert eval_checkpoints.create_env is standalone_cli.create_env
     helpers = export_substrate_gate._train_helpers()
     assert helpers.create_agent is standalone_cli.create_agent

@@ -5,6 +5,8 @@ from types import SimpleNamespace
 import torch
 
 from ha_ctse_process import checkpoint_io
+from ha_ctse_process import standalone_eval_runner
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import train as process_train
 
 
@@ -71,16 +73,19 @@ def test_schema3_metadata_and_structure_are_preserved(tmp_path):
     assert config.event_opportunity_schedule == "boundary_opportunities_v1"
 
 
-def test_train_uses_checkpoint_owner_functions_without_wrappers():
+def test_checkpoint_callers_use_owner_functions_without_wrappers():
+    for name in ("apply_checkpoint_structure", "load_checkpoint_metadata"):
+        assert getattr(process_train, name) is getattr(checkpoint_io, name)
+    for name in ("load_checkpoint", "prune_periodic_checkpoints", "save_checkpoint"):
+        assert getattr(standalone_train_runner, name) is getattr(checkpoint_io, name)
+    assert standalone_eval_runner.load_checkpoint is checkpoint_io.load_checkpoint
     for name in (
         "_load_adjacent_run_manifest",
-        "apply_checkpoint_structure",
         "load_checkpoint",
-        "load_checkpoint_metadata",
         "prune_periodic_checkpoints",
         "save_checkpoint",
     ):
-        assert getattr(process_train, name) is getattr(checkpoint_io, name)
+        assert not hasattr(process_train, name)
     assert not hasattr(process_train, "checkpoint_payload")
     assert not hasattr(process_train, "migrate_legacy_high_to_r30")
     assert not hasattr(process_train, "load_reward_pure_legacy_high")
