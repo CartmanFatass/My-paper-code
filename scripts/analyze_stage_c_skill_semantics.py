@@ -408,7 +408,7 @@ def _actor_from_checkpoint(checkpoint: Mapping[str, Any]) -> Any:
         raise ValueError("checkpoint low-actor state is missing")
     rng_state = _global_rng_snapshot()
     try:
-        from ha_ctse_process.variable_roster_event import EventLowActor
+        from ha_ctse_process.variable_roster_event_models import EventLowActor
 
         actor = EventLowActor(
             obs_dim=int(header["obs_dim"]),

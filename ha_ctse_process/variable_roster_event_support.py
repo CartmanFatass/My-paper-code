@@ -9,6 +9,18 @@ import torch
 from torch import nn
 
 
+ORDINARY_BOUNDARY = "ordinary_opportunity"
+ROLLOUT_TRUNCATION = "rollout_truncation"
+TEMPORARY_BOUNDARY = "temporary_pre_removal_leave"
+TERMINAL_BOUNDARY = "terminal_boundary"
+BOUNDARY_KINDS = (
+    ORDINARY_BOUNDARY,
+    ROLLOUT_TRUNCATION,
+    TEMPORARY_BOUNDARY,
+    TERMINAL_BOUNDARY,
+)
+
+
 def _state_dict_shapes(module: nn.Module) -> dict[str, tuple[int, ...]]:
     return {name: tuple(tensor.shape) for name, tensor in module.state_dict().items()}
 

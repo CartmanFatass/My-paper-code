@@ -138,7 +138,7 @@ def test_cluster_bootstrap_uses_local_rng_without_mutating_global_rng_or_inputs(
 
 
 def test_load_audit_inputs_reconstructs_final_actor_strictly_without_rng_mutation(tmp_path):
-    from ha_ctse_process.variable_roster_event import EventLowActor
+    from ha_ctse_process.variable_roster_event_models import EventLowActor
 
     actor = EventLowActor(obs_dim=3, n_skills=3, action_dim=3, hidden_dim=4)
     checkpoint_path = tmp_path / "checkpoint.pt"
@@ -186,7 +186,7 @@ def _source_m0():
 
 
 def _make_actor(seed: int, *, zero: bool):
-    from ha_ctse_process.variable_roster_event import EventLowActor
+    from ha_ctse_process.variable_roster_event_models import EventLowActor
 
     before = torch.get_rng_state().clone()
     try:

@@ -9,6 +9,8 @@ import torch
 
 from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import checkpoint_io
+from ha_ctse_process import variable_roster_event
+from ha_ctse_process import variable_roster_event_models
 from ha_ctse_process import variable_roster_event_support
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.r30_fixed_clock import FixedClockAREditPolicy
@@ -22,11 +24,9 @@ from ha_ctse_process.variable_roster_event import (
     JOIN,
     OPPORTUNITY_SCHEDULE_NAME,
     REJOIN,
-    ROLLOUT_TRUNCATION,
     SNAPSHOT_CAPABILITY_NAME,
     SNAPSHOT_CAPABILITY_VERSION,
     TEMPORARILY_ABSENT,
-    TEMPORARY_BOUNDARY,
     TEMPORARY_LEAVE,
     TERMINAL,
     TERMINAL_LEAVE,
@@ -43,6 +43,10 @@ from ha_ctse_process.variable_roster_event_types import (
     MembershipDelta,
     MembershipTransaction,
     PackedActiveBatch,
+)
+from ha_ctse_process.variable_roster_event_support import (
+    ROLLOUT_TRUNCATION,
+    TEMPORARY_BOUNDARY,
 )
 
 
@@ -85,6 +89,26 @@ def test_variable_roster_event_support_owns_stateless_helpers():
         variable_roster_event_support.inverse_cdf_action([-1.0, 2.0], 0.5)
     with pytest.raises(ValueError, match=r"\[0,1\)"):
         variable_roster_event_support.inverse_cdf_action([1.0], 1.0)
+
+
+def test_variable_roster_event_model_and_boundary_owners_are_one_way():
+    owner_names = (
+        "EventCommitmentPolicy",
+        "EventHighCritic",
+        "Discrete",
+        "Box",
+        "EventLowActor",
+        "EventActiveSetLowCritic",
+        "SuppliedExecutorLowSentinel",
+    )
+    assert all(hasattr(variable_roster_event_models, name) for name in owner_names)
+    assert not any(hasattr(variable_roster_event, name) for name in owner_names)
+    assert variable_roster_event_support.BOUNDARY_KINDS == (
+        variable_roster_event_support.ORDINARY_BOUNDARY,
+        variable_roster_event_support.ROLLOUT_TRUNCATION,
+        variable_roster_event_support.TEMPORARY_BOUNDARY,
+        variable_roster_event_support.TERMINAL_BOUNDARY,
+    )
 
 
 def make_core(

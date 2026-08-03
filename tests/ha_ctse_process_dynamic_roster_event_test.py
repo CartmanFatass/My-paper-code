@@ -15,11 +15,13 @@ from ha_ctse_process.dynamic_roster_testbed import (
 )
 from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import standalone_variable_roster_runner
+from ha_ctse_process.variable_roster_event_support import (
+    TEMPORARY_BOUNDARY,
+    TERMINAL_BOUNDARY,
+)
 from ha_ctse_process.variable_roster_event import (
     EVENT_ARCHITECTURE_SCHEMA_VERSION,
     OPPORTUNITY_SCHEDULE_NAME,
-    TEMPORARY_BOUNDARY,
-    TERMINAL_BOUNDARY,
     VariableRosterEventCore,
     event_ppo_losses,
 )

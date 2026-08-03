@@ -853,7 +853,7 @@ def test_reference_pair_selection_uses_only_episodes_zero_through_fifteen():
 def test_synthetic_analysis_derives_finite_metrics_and_fails_closed_on_support(
     monkeypatch,
 ):
-    from ha_ctse_process.variable_roster_event import EventLowActor
+    from ha_ctse_process.variable_roster_event_models import EventLowActor
 
     runner = _runner()
     provenance = _synthetic_provenance()
@@ -1046,7 +1046,7 @@ def test_guarded_evaluation_preserves_global_rng_model_tensors_grads_and_modes()
 
 
 def _small_event_actor(*, seed=17058):
-    from ha_ctse_process.variable_roster_event import EventLowActor
+    from ha_ctse_process.variable_roster_event_models import EventLowActor
 
     torch.manual_seed(seed)
     actor = EventLowActor(
