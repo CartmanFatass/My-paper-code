@@ -13,7 +13,8 @@ def append_csv(path: Path, row: dict[str, Any], fields: tuple[str, ...]) -> None
         with path.open("r", newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             old_fields = tuple(reader.fieldnames or ())
-            rows = list(reader)
+            if old_fields != fields:
+                rows = list(reader)
         if old_fields != fields:
             preserved = tuple(field for field in old_fields if field not in fields)
             merged_fields = (*fields, *preserved)
