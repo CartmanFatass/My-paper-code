@@ -25,6 +25,7 @@ foreach ($entry in @(
     @($skill, 'promptPath=<question path>'),
     @($skill, 'expectedModel=Pro'),
     @($skill, 'agentify_wait_response'),
+    @($skill, '`IN_PROGRESS` repeats that same wait'),
     @($skill, 'Never end the turn, resend or start the'),
     @($skill, 'Never ask the requester to rewrite the batch file'),
     @($researchSkill, 'batch_path|return_task_id'),

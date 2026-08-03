@@ -32,8 +32,9 @@ attachments, context bundles and requester history never enter the prompt.
    `timeoutMs=2700000`. For ChatGPT pass `expectedModel=Pro`; Agentify owns model
    selection, whole-file insertion and one send. If the same page is still
    generating when the call returns, immediately call `agentify_wait_response`
-   on that page with `timeoutMs=2700000`. Never end the turn, resend or start the
-   next item before the completed response returns.
+   on that page with `timeoutMs=2700000`. `IN_PROGRESS` repeats that same wait
+   call; it never sends. Never end the turn, resend or start the next item before
+   the completed response returns.
 3. Write every returned assistant text plus its question path and item status
    into one results file under `temp/sessions/agentify_transport_operator/` and send:
 

@@ -42,7 +42,8 @@ agentify_wait_response -> ARCHIVE`, ending only in `COMPLETE` or `ERROR`. A clos
 controller is recoverable once by rerunning preflight and requiring the same
 provider's pinned protected page before repeating the exact query. It never
 creates a second page. An active query always routes to `agentify_wait_response`
-on that same page with the full review timeout. The
+on that same page. `IN_PROGRESS` means call the same wait tool again; it never
+permits another query. The
 operator reports the reason and performs this recovery itself; it never stops
 silently or delegates transport repair to the requester.
 
