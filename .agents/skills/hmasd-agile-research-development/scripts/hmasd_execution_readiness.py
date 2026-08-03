@@ -131,7 +131,7 @@ def _validate_execution_binding(
         if resolved != commit:
             raise ReadinessError(f"{field} does not identify the exact Git commit")
     if _git(repo, "rev-parse", "HEAD") != execution_commit:
-        raise ReadinessError("execution_commit does not equal current HEAD")
+        raise ReadinessError("execution_commit does not equal the checked-out HEAD")
     if execution_support_paths != list(EXECUTION_SUPPORT_PATHS):
         raise ReadinessError("execution_support_paths do not equal the approved readiness bridge")
     if source_commit == execution_commit:

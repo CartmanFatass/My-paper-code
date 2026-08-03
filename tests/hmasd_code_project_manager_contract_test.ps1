@@ -768,7 +768,7 @@ try {
         $headMismatchOutput = & $registeredPython $readinessScriptPath run --spec $headMismatchSpecPath 2>&1
         $headMismatchExit = $LASTEXITCODE
         $ErrorActionPreference = $savedHeadPreference
-        if ($headMismatchExit -eq 0 -or ($headMismatchOutput -join ' ') -notmatch 'execution_commit does not equal current HEAD') {
+        if ($headMismatchExit -eq 0 -or ($headMismatchOutput -join ' ') -notmatch 'execution_commit does not equal the checked-out HEAD') {
             throw "Execution-readiness wrapper accepted a mismatched execution HEAD: $($headMismatchOutput -join ' ')"
         }
 
