@@ -22,8 +22,10 @@ owners, with no handoff history tree.
 Markdown, JSON and receiver-readable attachments are allowed. A useful brief
 normally makes the target, candidate and version, intended outcome, concrete
 inputs, evidence and uncertainty, allowed and excluded effects, authority
-boundary, completion evidence and return task understandable. These are
-writing cues, not mandatory headings or machine-admission fields.
+boundary, completion evidence and return task understandable. These are writing
+cues, not mandatory headings or machine-admission fields. Explorer-origin
+treatment, requested-engineering-work and semantic-acceptance rules are defined only by
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 
 The receiver uses judgment and bounded safe read-only reconnaissance. It stops
 only for a materially missing authority, scientific choice or concrete input

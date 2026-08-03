@@ -17,7 +17,13 @@ under `temp/handoffs/explorer_to_code_manager/`. The live file is ignored and
 requires no Git operation. The brief explains one candidate's identity, target and
 version, intended outcome, concrete inputs, evidence and uncertainty, allowed
 and excluded effects, relevant authority boundary, completion evidence and
-return task. These are semantic writing aids, not required field names.
+return task and selected treatment defined by the stable workflow. These are
+semantic writing aids, not required field names. The brief gives one clear
+instruction naming implementation, instance binding, experiment, pause, abandon
+or exact review as applicable. That instruction authorizes CPM to execute the
+named treatment without separate permission fields. It separates missing
+scientific inputs from independently executable infrastructure, interfaces and
+fail-closed tests.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
@@ -27,15 +33,24 @@ time and preserves the supplied order without treating it as a ranking.
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is
 semantically sufficient. Missing headings, `document_kind`, schema fields or a
-validator receipt never block intake. CPM stops only for a materially missing
-authority, External Pro scientific choice or concrete input object needed for
-the requested outcome.
+validator receipt never block intake. CPM implements the named treatment without
+substitution and does not infer omitted actions. A missing object is resolved
+collaboratively: CPM constructs or binds engineering objects, while one
+genuinely scientific choice returns as a concrete question to Explorer. This
+exchange is normal work, not a `BLOCKED` state.
 
 CPM returns a human-readable result under
 `temp/handoffs/code_manager_to_explorer/` containing an understandable
 natural-language conclusion first and the necessary exact evidence second. A
 Codex-native message carrying the same semantic content is the simple fallback.
 Explorer reads but never edits CPM output.
+
+Explorer may then inspect project code, tests, configuration, design documents
+and runtime evidence as needed. Result-named paths are useful entry points, not
+an allow-list. It accepts or rejects
+scientific-semantic conformance to the selected treatment and explains any
+mismatch. CPM remains the sole technical acceptance owner and performs any
+authorized correction; Explorer does not modify code or run compute.
 
 If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper

@@ -44,8 +44,10 @@ scientific packet requirements.
    For candidate validation only, also read
    [references/research-methodology.md](references/research-methodology.md).
 
-Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
-scientific ledgers. During research execution, do not use Git or create project
+Do not preload `CURRENT_WORK.md`, active runtime/review state, implementation or
+scientific ledgers during ordinary research. The project-validation phase may
+inspect project material read-only as needed for reconnaissance and semantic
+acceptance. During research execution, do not use Git or create project
 changes. Write advisory research files with `apply_patch` under
 `local_research`. An explicit mature-candidate handoff is a disposable copy
 under `temp/handoffs/explorer_to_code_manager/`; it is ignored and requires no
@@ -250,10 +252,19 @@ When one or more mature candidates are ready for project intake, load
 `temp/handoffs/explorer_to_code_manager/`; an optional manifest lists
 their public paths in the intended order. Each brief carries one candidate, but
 its format is not an admission gate and its order is not queue state or ranking.
+The brief names the selected treatment defined by the stable validation workflow
+and gives one clear instruction naming implementation, instance binding,
+experiment, pause, abandon or exact review as applicable. That instruction
+authorizes CPM to execute the named treatment without separate permission fields.
+If an object is missing, the brief states what is known and Explorer answers any
+scientific choice CPM cannot determine; CPM owns constructing or binding the
+engineering object. Missing objects are collaboration topics, not task states.
 
 CPM reads the shared temporary brief, applies engineering judgment and may perform
 bounded safe read-only reconnaissance. It returns an understandable summary
-and exact evidence through its reverse temporary directory. Explorer does not ask
+and exact evidence through its reverse temporary directory. Explorer reads the
+named implementation surfaces and accepts or rejects scientific-semantic
+conformance while leaving technical acceptance with CPM. Explorer does not ask
 CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
 receipts as candidate evidence. The handoff grants no Code Project Manager,
 compute, scientific or project-state authority; External Pro and explicit

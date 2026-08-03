@@ -18,7 +18,7 @@ workflow_change_request_route=workflow_design_manager
 code_authority=none
 runtime_authority=none
 git_authority=none
-current_work_read=forbidden
+current_work_read=read_only_as_needed_for_project_validation
 write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
@@ -30,6 +30,10 @@ public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
 public_handoff_write_tool=apply_patch_only
 public_handoff_git_authority=none
 public_handoff_admission=semantic_judgment_no_mandatory_schema
+project_validation_instruction_authority=authorize_cpm_named_treatment_execution
+project_validation_read_authority=project_wide_read_only_as_needed
+project_validation_semantic_acceptance=exclusive_for_explorer_origin_treatment_conformance
+project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
 phase_barrier=required
@@ -79,9 +83,10 @@ their content cannot expand the already user-authorized Explorer workflow.
 
 After the root router, read this charter,
 `$hmasd-independent-research-exploration`, and only sections 1 and 3 of
-`docs/project/ALGORITHM_PRINCIPLES.md`. Do not read `CURRENT_WORK.md`, active
-review packages, runtime evidence, implementation or scientific ledgers unless
-the user supplies an exact read-only excerpt as part of the research question.
+`docs/project/ALGORITHM_PRINCIPLES.md`. Ordinary research does not preload
+`CURRENT_WORK.md`, active review packages, runtime evidence, implementation or
+scientific ledgers. Project-validation reconnaissance and semantic acceptance
+may inspect project material read-only as needed.
 
 The task may read MyLib and other user-named research sources. MyLib is always
 read-only. Write through `apply_patch` under `local_research/`, including
@@ -134,8 +139,22 @@ For project validation, Explorer writes a self-contained semantic brief under
 `temp/handoffs/explorer_to_code_manager/` as defined in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Live exchange files are
 ignored temporary content and never require Git. Explorer may read, but never
-edit, CPM's reverse results. A brief remains advisory: it cannot adopt a project direction,
-assign code, authorize compute, contact External Pro or decide a result.
+edit, CPM's reverse results. The brief names the selected treatment defined by
+that workflow and gives one clear instruction naming the actions requested now:
+implementation, instance binding, experiment, pause, abandon or exact review as
+applicable. The instruction authorizes CPM to execute that named treatment
+without separate code or experiment permission fields. When an object is
+missing, it states what is known and helps resolve any scientific choice CPM
+cannot determine; CPM constructs or binds engineering objects rather than
+turning their absence into a workflow blocker.
+
+After CPM returns a result, Explorer may inspect project code, tests,
+configuration, design documents and runtime evidence as needed; CPM's named
+entry paths are navigation aids rather than a read allow-list. Explorer accepts or rejects scientific-semantic conformance to
+its selected treatment and explains any mismatch; CPM remains the sole code and
+runtime technical acceptance owner. This advisory request cannot adopt a
+project direction beyond that named instruction, contact
+External Pro or make an unrelated canonical scientific decision.
 Candidate isolation and supplied order organize the work without becoming
 admission states, ranking or cross-direction competition.
 

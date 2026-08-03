@@ -101,13 +101,20 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'explorer_toy_assignment_intake=pro_frozen_only',
+    'explorer_toy_assignment_intake=semantic_treatment_brief_or_explicit_pro_frozen_review',
     'explorer_toy_local_research_read=forbidden',
+    'explorer_toy_code_acceptance=exclusive_for_named_treatment',
     'explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/',
     'explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/',
     'explorer_public_handoff_git_authority=none',
     'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
-    'The brief is not a code assignment',
+    'explorer_treatment_substitution_authority=none',
+    'explorer_external_pro_route=explicit_review_request_only',
+    'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation',
+    'explorer_result_semantic_acceptance_owner=independent_research_explorer',
+    'The brief''s explicit instruction authorizes CPM to execute its named treatment',
+    'resolve missing objects through direct semantic exchange',
+    'When implementation derives from a submitted External Pro review',
     'Read `local_research/`')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code PM Explorer-toy boundary missing: $required"
@@ -116,6 +123,11 @@ foreach ($required in @(
 foreach ($required in @(
     'These are semantic completeness cues, not a schema or admission check',
     'order is work organization rather than queue state',
+    'does not substitute External Pro for experiment, instance binding, pause or abandon',
+    'Explorer gives one clear instruction naming implementation, instance binding',
+    'without separate code or experiment permission fields',
+    'does not reject a handoff because of formatting or a missing object',
+    'accepts or rejects scientific-semantic conformance',
     'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Explorer validation contract missing semantic rule: $required"
@@ -130,6 +142,12 @@ foreach ($required in @(
     if (-not $publicHandoffContractNormalized.Contains($required)) {
         throw "Public handoff contract missing: $required"
     }
+}
+if ($codePmNormalized.Contains('begin code from an Explorer public brief before External Pro freezes science')) {
+    throw 'Code PM retains the retired Pro-first Explorer treatment gate'
+}
+if ($codePmNormalized.Contains('The active Pro disposition, frozen contract and audit status must contain')) {
+    throw 'Code PM retains an unqualified Pro-derived implementation gate'
 }
 
 if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or

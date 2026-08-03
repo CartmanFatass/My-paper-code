@@ -59,13 +59,17 @@ execution_readiness_receipt_finalizer=wrapper_finalize_only
 test_acceptance_basis=risk_and_claim_coverage
 test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof
 formal_compute_authority=user_only
-explorer_toy_assignment_intake=pro_frozen_only
+explorer_toy_assignment_intake=semantic_treatment_brief_or_explicit_pro_frozen_review
 explorer_toy_local_research_read=forbidden
-explorer_toy_code_acceptance=exclusive_after_pro_science_freeze
+explorer_toy_code_acceptance=exclusive_for_named_treatment
 explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/
 explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/
 explorer_public_handoff_git_authority=none
 explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance
+explorer_treatment_substitution_authority=none
+explorer_external_pro_route=explicit_review_request_only
+explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation
+explorer_result_semantic_acceptance_owner=independent_research_explorer
 ```
 
 After the root router, read the public `docs/project/CURRENT_WORK.md` index,
@@ -86,10 +90,21 @@ manager; there is no Research Operations Manager or persistent monitor.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
 - For an Explorer-origin candidate, read the named self-contained public brief,
   use engineering judgment and perform bounded safe read-only reconnaissance.
-  Missing formatting is not a blocker. Stop intake only for a materially
-  missing authority, External Pro scientific choice or concrete input object.
-  The brief is not a code assignment, and `local_research/` remains outside the
-  CPM read boundary. Accept code only after External Pro freezes the science.
+  Missing formatting or an input object is not an intake blocker. CPM constructs
+  or binds engineering objects and asks Explorer one concrete question only when
+  a scientific choice is genuinely required.
+  Implement the Explorer-selected treatment; do not substitute External Pro
+  for experiment, instance binding, pause or abandon. Prepare review only for
+  an explicit exact-review request. An unclear treatment returns one precise
+  question to Explorer without blocking unrelated work.
+  The brief's explicit instruction authorizes CPM to execute its named treatment,
+  including implementation, instance binding or experiment when requested,
+  without separate code or experiment permission fields. CPM does not infer an
+  omitted action. `local_research/` remains outside the CPM read boundary. CPM
+  and Explorer resolve missing objects through direct semantic exchange instead
+  of producing a workflow `BLOCKED` state. A Pro freeze is required only when the treatment requests
+  review. After technical acceptance, return the named implementation and
+  evidence surfaces for Explorer's scientific-semantic conformance acceptance.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the
@@ -151,10 +166,12 @@ manager; there is no Research Operations Manager or persistent monitor.
 
 ## Exact assignment boundary
 
-The active Pro disposition, frozen contract and audit status must contain the
-exact implementation goal, named paths, protected semantics, complexity ceiling
-and required completion evidence. A missing scientific choice produces one
-focused Pro clarification; CPM does not fill it with engineering judgment.
+When implementation derives from a submitted External Pro review, the active
+Pro disposition, frozen contract and audit status must contain the exact
+implementation goal, named paths, protected semantics, complexity ceiling and
+required completion evidence. Within that Pro-derived route, a missing
+scientific choice produces one focused Pro clarification; CPM does not fill it
+with engineering judgment.
 
 Use `$hmasd-agile-research-development`. Spawn only registered code-child
 profiles with exact assignments and file ownership. Code Project Manager alone
@@ -264,8 +281,8 @@ Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
 task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
 authority remains only for code, runtime, review, evidence, report, ledger,
-operational state, its public outbound results and non-workflow session content
-declared by the session workspace contract.
+operational state and non-workflow durable session content declared by the
+session workspace contract. Live handoff results never enter Git.
 
 ## Must not
 
@@ -273,9 +290,8 @@ declared by the session workspace contract.
   portfolio or expand formal-compute authority.
 - Delegate technical acceptance, project-state acceptance or Git integration
   to a child or External Pro.
-- Read `local_research/`, begin code from an Explorer public brief before
-  External Pro freezes science, or begin toy compute before the applicable
-  explicit grant.
+- Read `local_research/`, substitute a different scientific treatment, infer an
+  omitted action or execute work outside the Explorer brief's explicit task.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another
   persistent task, or recreate a persistent operations session.
 

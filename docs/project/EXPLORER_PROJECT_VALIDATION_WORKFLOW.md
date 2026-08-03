@@ -25,32 +25,51 @@ A handoff is a self-contained Markdown or JSON brief, with attachments only
 when every receiver can read them. It should make the target, candidate and
 version, intended outcome, concrete inputs, evidence, uncertainty, allowed and
 excluded effects, authority boundary, completion evidence and return task easy
-to understand. These are semantic completeness cues, not a schema or admission
-check. No `document_kind`, packet version, validator receipt, hash or byte count
-is required.
+to understand. It also makes Explorer's selected treatment understandable:
+experiment, instance binding, pause, abandon or one exact external-review need.
+Explorer gives one clear instruction naming implementation, instance binding,
+experiment, pause, abandon or exact review as applicable. That instruction
+authorizes CPM to execute the named treatment without separate code or experiment
+permission fields, and CPM does not infer omitted actions. If an object is
+missing, the brief states what is known. CPM constructs or binds engineering
+objects; Explorer answers any genuinely scientific choice CPM cannot determine.
+These are semantic completeness cues, not a schema or admission check. No
+`document_kind`, packet version, validator receipt, hash or byte count is required.
 
 ## Intelligent intake and ordering
 
 The receiving model judges whether the brief is sufficient and may perform
 bounded safe read-only reconnaissance before acting. It does not reject a
-handoff because of formatting. It stops only when an authority, External Pro
-scientific choice or concrete input object is materially missing.
+handoff because of formatting or a missing object. The two roles resolve the
+gap through direct semantic exchange instead of creating a `BLOCKED` state.
 
 One manifest may preserve an ordered group of public brief paths. That order is
 work organization rather than queue state, ranking or scientific comparison.
 CPM processes one isolated candidate at a time; one candidate's problem does
 not block unrelated work or change another candidate's scientific status.
 
-For an Explorer-origin toy candidate, CPM may prepare the exact
-`EXPLORER_TOY_DESIGN_ASSERTION_AUDIT` question after semantic intake. External
-Pro decides the scoped scientific contract. CPM begins implementation only
-after that science is frozen, and compute begins only under an applicable
-explicit user grant. The handoff itself cannot supply either authority.
+For an Explorer-origin candidate, CPM implements the selected treatment as an
+engineering task and does not substitute External Pro for experiment, instance
+binding, pause or abandon. It prepares an exact review only when the brief
+explicitly requests one. An unclear treatment returns one precise question to
+Explorer without blocking unrelated candidates. The instruction is not a
+canonical scientific conclusion, but it is sufficient authority for CPM to
+perform the named project-validation task. CPM resolves engineering gaps and
+Explorer resolves scientific choices; neither treats a missing object as a
+workflow terminal.
 
 After work on one candidate, CPM returns an explanatory brief that begins with
 the natural-language conclusion and then appends the necessary exact evidence.
 A native task message carrying the same content is the single fallback.
 Mechanical field-only callbacks are insufficient.
+
+The result highlights useful implementation and evidence entry points. Explorer
+may inspect project code, tests, configuration, design documents and runtime
+evidence as needed; those entry points are not a read allow-list. Explorer
+accepts or rejects scientific-semantic conformance
+to its selected treatment. CPM remains the sole technical acceptance owner and
+performs any authorized correction. Explorer's semantic acceptance neither
+promotes the candidate to canonical project science nor authorizes compute.
 
 ## Lifecycle and failure ownership
 
