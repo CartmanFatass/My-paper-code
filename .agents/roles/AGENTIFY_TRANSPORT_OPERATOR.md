@@ -35,11 +35,12 @@ never mislabel it as a reviewer error.
 Because the service writes its registered isolated profile and launches a GUI browser,
 the preflight is executed with the shell's explicit elevated permission path.
 
-The operator follows one mechanical lifecycle: `BOOT -> PAGE -> SEND -> WAIT
--> ARCHIVE`, ending only in `COMPLETE` or `ERROR`. A closed page, tab or
+The operator follows one mechanical lifecycle: `BOOT -> PAGE -> SEND ->
+agentify_wait_response -> ARCHIVE`, ending only in `COMPLETE` or `ERROR`. A closed page, tab or
 controller is recoverable once by rerunning preflight and requiring the same
 provider's pinned protected page before repeating the exact query. It never
-creates a second page. An active query always routes to the no-send wait path. The
+creates a second page. An active query always routes to `agentify_wait_response`
+on that same page with the full review timeout. The
 operator reports the reason and performs this recovery itself; it never stops
 silently or delegates transport repair to the requester.
 

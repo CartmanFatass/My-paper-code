@@ -22,8 +22,9 @@ foreach ($entry in @(
     @($operator, 'terminal_status=COMPLETE|ERROR'),
     @($skill, 'promptPath=<question path>'),
     @($skill, 'expectedModel=Pro'),
-    @($skill, 'Never start the next item while generation is active'),
-    @($skill, 'rewrite the batch file merely to retry transport'),
+    @($skill, 'agentify_wait_response'),
+    @($skill, 'Never end the turn, resend or start the'),
+    @($skill, 'Never ask the requester to rewrite the batch file'),
     @($researchSkill, 'batch_path|return_task_id'),
     @($researchSkill, 'requires no Explorer file change')
 )) {
@@ -61,7 +62,8 @@ foreach ($retired in @(
     'SHA-256',
     'idempotency',
     'prepare -> submit -> verify -> archive',
-    'submit --verify-existing'
+    'submit --verify-existing',
+    'heartbeat'
 )) {
     if ($active.Contains($retired)) {
         throw "Retired Agentify mechanism remains active: $retired"

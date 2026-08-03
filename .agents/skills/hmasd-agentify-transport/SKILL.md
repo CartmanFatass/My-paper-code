@@ -28,8 +28,10 @@ attachments, context bundles and requester history never enter the prompt.
 2. For each ordered question path, call `agentify_query` with the page's
    tool-returned key, `provider`, `promptPath=<question path>` and
    `timeoutMs=2700000`. For ChatGPT pass `expectedModel=Pro`; Agentify owns model
-   selection, whole-file insertion, one send and the natural-completion wait.
-   Never start the next item while generation is active.
+   selection, whole-file insertion and one send. If the same page is still
+   generating when the call returns, immediately call `agentify_wait_response`
+   on that page with `timeoutMs=2700000`. Never end the turn, resend or start the
+   next item before the completed response returns.
 3. Write every returned assistant text plus its question path and item status
    into one results file under `temp/sessions/agentify_transport_operator/` and send:
 
@@ -42,11 +44,10 @@ error=<empty or actual error>
 
 ## One fallback
 
-After an item error, read the same page status once. If a query is active, wait
-for that query without sending. If the page is idle and no response was
-produced, repeat that item once with the unchanged question path. Otherwise
-record the actual item error and continue only when the page is idle. Never ask
-the requester to rewrite the batch file merely to retry transport.
+After an item error, read the same page status once. An active query uses the
+standard `agentify_wait_response` path. If the page is idle and no response was
+produced, repeat that item once with the unchanged question path; otherwise
+record the actual error. Never ask the requester to rewrite the batch file.
 
 Do not create another page, switch conversations, send a placeholder, use
 Answer now, or claim completion without the actual returned assistant response.
