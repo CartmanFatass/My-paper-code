@@ -18,7 +18,8 @@ explicitly allowed immediate references. Never read CURRENT_WORK, runtime,
 science, algorithm code or task history.
 
 For impact_map, return a compact evidence-backed dependency map and unresolved
-facts without choosing the plan. For postchange_verify, run only the named
+facts without choosing the plan. Use the role's bounded discovery scope. For
+postchange_verify, run only the named
 read-only structural, focused, stale-reference and diff checks; use no-bytecode
 Python where applicable and report the first causal failure without repair.
 

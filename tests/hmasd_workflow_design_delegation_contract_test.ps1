@@ -51,6 +51,8 @@ foreach ($required in @(
     'simple_operation_active_engineering_budget_minutes=20',
     'simple_operation_failed_probe_budget=2',
     'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
+    'Role and Skill capability standard',
+    'necessary observations', 'permitted actions',
     'exact resolved ticket', 'git rev-parse --show-toplevel')) {
     if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
 }
@@ -75,6 +77,8 @@ foreach ($required in @(
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_hash_validation=forbidden',
     'the log is evidence', 'resolved ticket worktree path',
+    'observation, action, judgment, recovery and completion capabilities',
+    'Prefer positive capability text',
     '`git rev-parse --show-toplevel`')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
@@ -96,5 +100,19 @@ if (-not $legacyVerifier.Contains('parent=code_project_manager') -or
     throw 'Code-side verifier/reviewer ownership drifted'
 }
 if (-not $config.Contains('max_depth = 1')) { throw 'Workflow children may spawn descendants' }
+
+$workflowAuditor = Read-RepoFile '.agents/roles/WORKFLOW_AUDITOR.md'
+if (-not (($workflowAuditor -replace '\s+', ' ').ToLowerInvariant().Contains(
+        'bounded repository-wide text search'))) {
+    throw 'Workflow auditor lacks bounded coupled-path discovery'
+}
+$workflowImplementer = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
+$workflowImplementerProfile = Read-RepoFile '.codex/agents/hmasd-workflow-implementer.toml'
+if (-not $workflowImplementerProfile.Contains('resolved_ticket_worktree_path')) {
+    throw 'Workflow implementer assignment lacks the exact ticket worktree'
+}
+if (-not $workflowImplementer.Contains('reversible')) {
+    throw 'Workflow implementer lacks local reversible judgment'
+}
 
 Write-Output 'HMASD_WORKFLOW_DESIGN_DELEGATION_CONTRACT_OK'

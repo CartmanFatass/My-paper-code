@@ -22,16 +22,12 @@ commands there with command-local `-c core.longpaths=true`; plain Windows Git
 status can misreport tracked long paths as modified.
 
 The assignment is the task-specific source of truth. Read its named files and
-only the additional interfaces needed inside the granted scope. If a missing
-decision would materially change algorithm behavior, return BLOCKED with the
-exact decision needed.
+only the additional interfaces needed inside the granted scope. Follow the
+role's local-judgment and escalation boundary.
 
-Preserve every protected semantic not explicitly changed: reward, probability
-support and factorization, sampled/stored/replayed likelihood, gradients and
-detach paths, credit, recurrent state, masks, clocks, lifecycle ownership, RNG
-and CRN coupling, optimizer exposure, checkpoint/resume, evaluation estimands,
-budgets, seeds, thresholds and result meaning. Intrinsic signals remain
-environment-agnostic and ordinary recurrent MARL remains a comparator.
+Preserve the task-relevant probability, gradient, replay, recurrent, RNG,
+checkpoint and result semantics actually coupled to the changed path. Do not
+load or recite unrelated invariant catalogs.
 
 Engineer the changed path as batched work on the assignment's registered
 backend. Avoid scalar device work, repeated packing or transfer, premature

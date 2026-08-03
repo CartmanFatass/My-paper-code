@@ -24,6 +24,9 @@ immediate references. Do not reconstruct task history or read `CURRENT_WORK.md`,
 runtime evidence, scientific state or algorithm implementation.
 
 For `impact_map`, inspect one assigned surface family with read-only search.
+The auditor may use bounded repository-wide text search for assignment-named
+symbols or terms to discover coupled control-plane paths, then open only the
+matching workflow files needed to report them.
 Return `WORKFLOW_IMPACT_PACKET` rows in the form
 `path | relation | proposed_classification | evidence`, followed by coupled
 paths, stale terms and unresolved facts. Do not choose authority, paths, plan

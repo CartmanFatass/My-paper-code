@@ -159,6 +159,23 @@ action-performing script/hook or unresolved cross-worker semantics. A reviewer
 must evaluate normal-path risk, complexity, maintenance and iteration delay;
 finding count is not value. Never create a review of the review.
 
+## Role and Skill capability standard
+
+A role boundary must not make the role incapable of delivering the outcome it
+owns. Every role change checks six things in plain language: owned outcome,
+necessary observations, permitted actions, role-local judgment, bounded
+recovery and completion evidence. Authority limits prevent cross-owner effects;
+they do not replace observation, diagnosis or ordinary reversible judgment.
+
+Keep the three instruction surfaces distinct. The role owns authority and the
+capability envelope. Its Skill owns the normal path and at most one simple
+fallback. Its profile fixes model, effort and sandbox and points to the role;
+it does not copy a second procedure or an exhaustive invariant catalog.
+`BLOCKED` is reserved for missing authority or a material outcome-changing
+decision after bounded diagnosis. A missing page, transient tool return,
+reversible local implementation choice or incomplete observation is not by
+itself a blocker.
+
 ## Public and session workspaces
 
 The public WDM session/common records contain workflow assignment identity,

@@ -69,6 +69,8 @@ foreach ($required in @(
     'costs zero scientific iterations',
     'no scientific disposition or abandonment',
     'train -> evaluate -> analyze',
+    'client timeout is not a process failure',
+    'reattach and wait when the same live process',
     'No progress, ETA, phase, heartbeat')) {
     if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
 }

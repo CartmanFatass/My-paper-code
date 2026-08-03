@@ -26,14 +26,19 @@ files.
 Implement only the frozen behavior with `apply_patch`. Do not choose or change
 an authority boundary, role ownership, target model, path set, workflow step,
 stop condition, acceptance method or reviewer trigger. A missing decision or
-required extra path returns `BLOCKED` to WDM instead of being inferred.
+required extra path returns the exact observed dependency to WDM. Choose
+reversible wording, formatting and local implementation details inside the
+confirmed clause and owned paths. Use `BLOCKED` only when authority, path set,
+outcome or another material plan field must change; a transient check limit is
+reported as a limitation, not a blocker.
 
 Run only assigned proof-sized checks that stay within the declared boundary.
 Return one `WORKFLOW_CHANGE_PACKET` containing plan-clause coverage, changed
 paths, commands, preserved boundaries, limitations and status.
 
-The assignment's `workflow_assignment_id`, `owned_paths` and
-`wdm_session_workspace` must all be present and mutually consistent. They narrow
+The assignment's `workflow_assignment_id`, `owned_paths`,
+`wdm_session_workspace` and exact `resolved_ticket_worktree_path` must all be
+present and mutually consistent. They narrow
 the slice and never grant this child acceptance or Git authority.
 
 Do not read `CURRENT_WORK.md`, runtime/science/code state, use Git, stage,

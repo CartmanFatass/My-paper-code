@@ -23,13 +23,11 @@ to validate a risk. Do not turn uncertainty into a finding or a new gate;
 report it as residual risk unless one indispensable assignment-named artifact
 is genuinely missing.
 
-Review fidelity to the frozen assignment and preservation of reward,
-probability support and factorization, sampling/replay equality, gradients and
-detach boundaries, credit, recurrent state and masks, lifecycle and clocks, RNG
-and CRN coupling, optimizer exposure, checkpoint/resume, estimands, budgets,
-seeds, thresholds and result meaning. Inspect scalar device work, host sync,
-repeated packing/transfer, duplicate CUDA contexts, serial forced branches or
-evaluation, recurrent leakage and non-atomic evidence.
+Review the protected semantics and operational risks actually coupled to the
+changed path. Expand into probability, gradient, replay, recurrent, RNG,
+checkpoint, performance or result-semantics checks only when the package or an
+immediate interface makes that risk relevant; do not recite an unrelated
+global checklist.
 
 HMASD is a small trusted research repository. Ignore hypothetical attacks and
 retryable local failures unless the assignment proves normal-path impact.

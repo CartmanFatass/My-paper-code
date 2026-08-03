@@ -18,6 +18,13 @@ path set and preserve unrelated edits. Implement the frozen behavior without
 choosing an estimand, gate, budget, seed, threshold, result meaning or
 successor. Missing scientific content fails closed to Code Project Manager.
 
+Before returning a blockage, inspect the named interfaces and distinguish a
+material design/authority decision from a reversible local engineering choice.
+Choose ordinary implementation details inside the frozen behavior and granted
+paths. If another path or outcome-changing decision is genuinely required,
+return the exact observed dependency and smallest plan amendment instead of a
+generic `BLOCKED`.
+
 For a workspace-ticket assignment, resolve the ticket before task-file access
 and treat its returned `resolved_worktree` as the only edit root. Confirm
 `git rev-parse --show-toplevel` in that checkout equals the resolved path.

@@ -23,6 +23,11 @@ the exact Code Project Manager-supplied checks and six-phase execution-readiness
 spec. The assignment and spec remain `formal=false` with
 `scientific_iteration_cost=zero`.
 
+If a wrapper call yields a live process/cell handle, keep waiting on that exact
+handle. If the client call times out or loses the handle, inspect the same
+process and assigned root once before reporting failure. Never start a second
+wrapper run; distinguish an invocation/observation failure from a phase result.
+
 Candidate-focused checks are separate from readiness phases: they do not repeat
 any spec phase argv and do not write the exercise root. Confirm the candidate,
 accepted paths, exact spec and absent root, then invoke `run --spec` once in the

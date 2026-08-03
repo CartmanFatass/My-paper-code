@@ -121,6 +121,15 @@ continued or parked without blocking unrelated work.
 A durable restart handoff is written only on explicit user request; routine
 progress remains in WDM's existing session/common records.
 
+For every role, Skill or profile change, inspect the owned outcome against the
+role's observation, action, judgment, recovery and completion capabilities.
+Reject a design that assigns an outcome while withholding a necessary page,
+process, file, diagnostic or reversible action. Also reject duplicated
+procedures across role, Skill and profile: keep authority/capability in the
+role, the normal path plus one fallback in the Skill, and model/sandbox plus a
+role pointer in the profile. Prefer positive capability text over enumerating
+every forbidden mistake.
+
 ## Harness
 
 Run with the registered interpreter:

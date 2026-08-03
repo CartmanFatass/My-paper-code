@@ -22,8 +22,10 @@ attachments and requester history stay local.
 
 ## Understand the live page
 
-At task start run `scripts/ensure_agentify_runtime.ps1`, then use Agentify's page
-tools directly. Inspect `agentify_tabs`, `agentify_status`, `agentify_read_page`
+At task start run `scripts/ensure_agentify_runtime.ps1`. Its receipt proves only
+that the desktop/browser processes are present; establish runtime readiness
+with scoped Agentify status before sending. Then use Agentify's page tools
+directly. Inspect `agentify_tabs`, `agentify_status`, `agentify_read_page`
 and `agentify_list_conversations` as needed. The provider home page is a valid
 starting point. Use `agentify_tab_create`, `agentify_show`,
 `agentify_new_conversation`, `agentify_open_conversation`, `agentify_navigate`
@@ -50,6 +52,12 @@ For each question path:
 4. Save the response, question path, conversation URL and item status in one
    results file under `temp/sessions/agentify_transport_operator/`.
 
+The results file has one ordered row per question with `question_path`,
+`status`, `response`, `conversation_url` and an actual error when present.
+Preserve completed rows if a later item fails. Batch `COMPLETE` requires every
+row to contain the actual completed response; otherwise return `ERROR` with the
+partial results path.
+
 Then return:
 
 ```text
@@ -64,9 +72,11 @@ error=<empty or actual error>
 Do not follow an error-code decision table. Inspect the actual page, tabs,
 conversation, active query and saved responses, then use the same page controls
 to recover. A missing tab, provider home page, stale conversation, elapsed wait
-interval or one failed tool call is not terminal. Preserve completed responses
-and continue the remaining batch. Never ask the requester to rewrite an
-unchanged batch solely to retry transport.
+interval or one failed tool call is not terminal. After one failed action,
+inspect its postcondition and use at most one suitable page/session recovery
+that cannot duplicate or interrupt a send. Preserve completed responses and
+continue the remaining batch. Never ask the requester to rewrite an unchanged
+batch solely to retry transport.
 
 Never interrupt an active answer, duplicate a possibly submitted question, send
 a placeholder, or activate Continue, Retry, Stop or Answer now. Perform no

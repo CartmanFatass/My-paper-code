@@ -21,6 +21,8 @@ foreach ($entry in @(
     @($operator, 'request_fields=batch_path|return_task_id'),
     @($operator, 'result_fields=status|results_path|error'),
     @($operator, 'terminal_status=COMPLETE|ERROR'),
+    @($operator, 'runtime_process_receipt=AGENTIFY_RUNTIME_PROCESS_READY'),
+    @($operator, 'one row per question'),
     @($operator, 'never scans temporary directories'),
     @($operator, 'Starting at `https://chatgpt.com/`'),
     @($operator, 'create a clean conversation'),
@@ -34,6 +36,9 @@ foreach ($entry in @(
     @($skill, 'agentify_new_conversation'),
     @($skill, 'agentify_open_conversation'),
     @($skill, 'Only structured `COMPLETE` plus the actual response'),
+    @($skill, 'processes are present'),
+    @($skill, 'one ordered row per question'),
+    @($skill, 'at most one suitable page/session recovery'),
     @($skill, 'Never ask the requester to rewrite an'),
     @($researchSkill, 'batch_path|return_task_id'),
     @($researchSkill, 'requires no Explorer file change')
@@ -47,19 +52,24 @@ if (-not (Test-Path -LiteralPath $preflightPath -PathType Leaf)) {
     throw 'Agentify runtime preflight script is missing'
 }
 $preflight = Get-Content -Raw -LiteralPath $preflightPath
-foreach ($term in @('Get-Process', 'Start-Process', 'AGENTIFY_RUNTIME_READY')) {
+foreach ($term in @('Get-Process', 'Start-Process', 'AGENTIFY_RUNTIME_PROCESS_READY',
+        'process_presence_only_use_scoped_agentify_status_for_runtime_readiness')) {
     if (-not $preflight.Contains($term)) {
         throw "Agentify runtime preflight script missing: $term"
     }
 }
 
-$currentProcess = Get-Process -Id $PID
-$probe = & $preflightPath `
-    -ServiceProcessName $currentProcess.ProcessName `
-    -BrowserProcessName $currentProcess.ProcessName `
-    -ProbeOnly
-if (($probe -join '') -notmatch 'AGENTIFY_RUNTIME_READY') {
-    throw 'Agentify runtime preflight probe failed'
+$probeRejected = $false
+try {
+    & $preflightPath `
+        -ServiceProcessName 'hmasd-agentify-nonexistent-service' `
+        -BrowserProcessName 'hmasd-agentify-nonexistent-browser' `
+        -ProbeOnly | Out-Null
+} catch {
+    $probeRejected = $_.Exception.Message -match 'Agentify runtime is not running'
+}
+if (-not $probeRejected) {
+    throw 'Agentify process preflight did not reject absent processes'
 }
 
 $active = $router + $cpm + $explorer + $operator + $skill + $researchSkill

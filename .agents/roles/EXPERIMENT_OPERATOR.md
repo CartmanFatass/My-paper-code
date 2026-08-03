@@ -69,6 +69,12 @@ separate polling task. It does not repeatedly read a live writer's progress
 file; terminal diagnostics may read the assigned paths after exit or handle
 loss.
 
+A tool yield or client timeout is not a process failure. Continue on the exact
+returned process/cell handle. If that handle is lost, inspect the assigned
+process identity and run root once; reattach and wait when the same live process
+is observable, otherwise return the direct mechanical error. Never relaunch a
+phase or change its command during this diagnosis.
+
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
 is returned to Code Project Manager. The only parent notification is the child's
 single final return:

@@ -241,6 +241,13 @@ foreach ($required in @('returned `resolved_worktree` as the only edit root',
         throw "Implementer role missing ticketed apply_patch targeting rule: $required"
     }
 }
+if (-not $implementerRole.Contains('reversible local engineering choice')) {
+    throw 'Implementers lack bounded local engineering judgment'
+}
+if (-not $verifierRoleNormalized.Contains('invocation/observation failure') -or
+    -not $verifierRoleNormalized.Contains('Never start a second wrapper run')) {
+    throw 'Verifier does not distinguish tool observation loss from phase evidence'
+}
 
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
     throw 'Code Project Manager retains the obsolete CURRENT_WORK read prohibition'

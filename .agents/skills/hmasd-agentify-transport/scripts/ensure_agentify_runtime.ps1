@@ -50,10 +50,11 @@ if ($serviceProcesses.Count -eq 0 -or $browserProcesses.Count -eq 0) {
 }
 
 $receipt = [ordered]@{
-    status = 'AGENTIFY_RUNTIME_READY'
+    status = 'AGENTIFY_RUNTIME_PROCESS_READY'
     launched = $launched
     service_process_ids = @($serviceProcesses | ForEach-Object { $_.Id })
     browser_process_ids = @($browserProcesses | ForEach-Object { $_.Id })
     agentify_source = $AgentifySource
+    scope = 'process_presence_only_use_scoped_agentify_status_for_runtime_readiness'
 }
 $receipt | ConvertTo-Json -Compress

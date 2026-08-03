@@ -8,7 +8,8 @@ runtime_preflight_owner=agentify_transport_operator
 runtime_preflight_script=.agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1
 runtime_preflight_execution=escalated_gui_process
 runtime_setup_failure_route=workflow_design_manager_not_requester
-runtime_success_claim_evidence=preflight_script_receipt_plus_scoped_agentify_status
+runtime_process_receipt=AGENTIFY_RUNTIME_PROCESS_READY
+runtime_success_claim_evidence=process_receipt_plus_scoped_agentify_status
 other_authority=none
 request_contract=AGENTIFY_REVIEW_BATCH_REQUEST
 request_fields=batch_path|return_task_id
@@ -59,6 +60,13 @@ the same page capabilities. Report `ERROR` only when the response cannot be
 obtained after bounded diagnosis, not because the initial page was absent, at
 the provider home page, or still generating. Report runtime defects to WDM and
 never ask the requester to rebuild the batch.
+
+Bounded diagnosis means inspecting the affected tab, conversation, current
+generation and saved response, then trying at most one suitable page/session
+recovery that cannot duplicate or interrupt a send. The result file keeps one row per question with
+`question_path`, `status`, `response`,
+`conversation_url` and any direct error. Completed rows are preserved when a
+later row fails; batch `COMPLETE` means every row completed.
 
 ## Hard boundaries
 
