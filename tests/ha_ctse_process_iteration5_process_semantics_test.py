@@ -38,7 +38,7 @@ from ha_ctse_process.variable_roster_event import (
     lifecycle_boundary_hooks,
     low_row_index_hooks,
 )
-from ha_ctse_process.train import (
+from ha_ctse_process.event_process_runner import (
     _evaluate_iteration5_spatial_model,
 )
 from ha_ctse_process.standalone_event_support import (
