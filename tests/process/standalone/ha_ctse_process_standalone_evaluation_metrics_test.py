@@ -109,9 +109,35 @@ def test_metric_writers_preserve_tensorboard_and_update_csv_schema(tmp_path, mon
 
     plot_calls = []
     monkeypatch.setattr(standalone_metrics, "save_update_plots", lambda log_dir: plot_calls.append(log_dir))
-    args = SimpleNamespace(log_dir=str(tmp_path), plot_interval=1)
-    standalone_metrics.export_update_metrics(args, 3, 12, 2.0, process_metrics, low_metrics)
+    disabled_log_dir = tmp_path / "plotting_disabled"
+    disabled_args = SimpleNamespace(log_dir=str(disabled_log_dir), plot_interval=0)
+    standalone_metrics.export_update_metrics(
+        disabled_args, 3, 12, 2.0, process_metrics, low_metrics
+    )
 
-    with (tmp_path / "metrics" / "train_updates.csv").open(newline="", encoding="utf-8") as handle:
-        assert next(csv.reader(handle)) == list(UPDATE_FIELDS)
-    assert plot_calls == [str(tmp_path)]
+    with (disabled_log_dir / "metrics" / "train_updates.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        disabled_rows = list(csv.reader(handle))
+    assert disabled_rows[0] == list(UPDATE_FIELDS)
+    assert plot_calls == []
+
+    enabled_log_dir = tmp_path / "plotting_enabled"
+    enabled_args = SimpleNamespace(log_dir=str(enabled_log_dir), plot_interval=1)
+    standalone_metrics.export_update_metrics(
+        enabled_args, 3, 12, 2.0, process_metrics, low_metrics
+    )
+    with (enabled_log_dir / "metrics" / "train_updates.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        assert list(csv.reader(handle)) == disabled_rows
+    assert plot_calls == [str(enabled_log_dir)]
+
+    plot_calls.clear()
+    cadence_log_dir = tmp_path / "plotting_cadence"
+    cadence_args = SimpleNamespace(log_dir=str(cadence_log_dir), plot_interval=2)
+    for update_idx in (1, 2, 3, 4):
+        standalone_metrics.export_update_metrics(
+            cadence_args, update_idx, 12, 2.0, process_metrics, low_metrics
+        )
+    assert plot_calls == [str(cadence_log_dir), str(cadence_log_dir)]

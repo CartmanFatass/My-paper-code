@@ -100,6 +100,13 @@ def test_parse_args_preserves_defaults_and_options(monkeypatch):
     assert args.rollout_length == 500
     assert args.skill_interval == 10
     assert args.infrastructure_profile_interval == 0
+    assert args.plot_interval == 0
+
+
+def test_plot_interval_accepts_explicit_positive_value(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["standalone", "--plot_interval", "7"])
+
+    assert standalone_cli.parse_args().plot_interval == 7
 
 
 def test_infrastructure_profile_interval_accepts_positive_and_rejects_negative(monkeypatch):

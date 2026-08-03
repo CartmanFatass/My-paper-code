@@ -142,7 +142,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--topology_interval", type=int, default=25)
     parser.add_argument("--topology_episodes", type=int, default=1)
     parser.add_argument("--topology_max_frames", type=int, default=160)
-    parser.add_argument("--plot_interval", type=int, default=1)
+    parser.add_argument("--plot_interval", type=int, default=0)
     parser.add_argument("--skill_lifetime_candidates", default="")
     parser.add_argument(
         "--team_bridge_type",
