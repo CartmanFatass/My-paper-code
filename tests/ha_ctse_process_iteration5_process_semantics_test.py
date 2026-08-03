@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 import torch
 
+from scripts import run_iteration5_process_semantics as iteration5_runner
 from ha_ctse_process.dynamic_roster_spatial_testbed import (
     HORIZON,
     LEFT,
@@ -543,6 +544,53 @@ def test_iteration5_dispatch_is_distinct_and_fails_closed() -> None:
         enforce_iteration5_process_semantics_contract(
             config, args, {"has_event_semantic": True}
         )
+
+
+def test_iteration5_partial_worker_startup_cleans_started_child(monkeypatch, tmp_path) -> None:
+    class FakeProcess:
+        def __init__(self) -> None:
+            self.terminated = False
+            self.wait_timeouts = []
+
+        def poll(self):
+            return None
+
+        def terminate(self) -> None:
+            self.terminated = True
+
+        def wait(self, timeout=None) -> int:
+            self.wait_timeouts.append(timeout)
+            return 0
+
+    started = []
+    calls = []
+
+    def fake_popen(command, *, cwd):
+        arm = command[command.index("--iteration5_process_semantics_arm") + 1]
+        calls.append((arm, cwd))
+        if arm == "c1_semantic_off":
+            raise OSError("second hierarchical worker failed to start")
+        process = FakeProcess()
+        started.append(process)
+        return process
+
+    monkeypatch.setattr(iteration5_runner.torch.cuda, "is_available", lambda: True)
+    monkeypatch.setattr(iteration5_runner, "_git_source_commit", lambda: "0" * 40)
+    monkeypatch.setattr(iteration5_runner.subprocess, "Popen", fake_popen)
+
+    with pytest.raises(OSError, match="second hierarchical worker failed to start"):
+        iteration5_runner.run_iteration5(
+            output_root=tmp_path / "partial_startup",
+            smoke=True,
+            num_envs=2,
+            updates=1,
+            eval_episodes=2,
+        )
+
+    assert [arm for arm, _cwd in calls] == ["c1_semantic_on", "c1_semantic_off"]
+    assert len(started) == 1
+    assert started[0].terminated
+    assert started[0].wait_timeouts == [10]
 
 
 def test_iteration5_reference_selection_and_matched_shuffle_are_frozen() -> None:
