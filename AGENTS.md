@@ -79,6 +79,8 @@ agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST
 agentify_transport_request_fields=batch_path|return_task_id
 agentify_transport_batch_file_fields=provider|question_paths
 agentify_transport_prompt_source=agentify_batch_question_path_read
+agentify_transport_page_authority=read_create_show_close_navigate_list_open_and_switch_conversations
+agentify_transport_session_strategy=operator_judgment_clean_for_independent_reuse_for_true_followup
 agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
@@ -172,7 +174,7 @@ authority rules decide whether user input is required.
 - Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and external-review intake: `.agents/roles/CODE_PROJECT_MANAGER.md`.
-- Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. CPM and Explorer write one minimal ordered batch file, send only its path, continue unrelated work, and later accept one batch result before performing their own archive and intake. A retry reuses the same batch file and requires no requester-side file change.
+- Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. The Operator may read and control Agentify pages and create, select or switch conversations; independent reviews normally use clean conversations and true follow-ups reuse their matching context. CPM and Explorer write one minimal ordered batch file, send only its path, continue unrelated work, and later accept one batch result before performing their own archive and intake. A retry reuses the same batch file and requires no requester-side file change.
 - Mechanical experiment execution: `.agents/roles/EXPERIMENT_OPERATOR.md`.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.

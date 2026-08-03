@@ -1,11 +1,11 @@
 ---
 name: hmasd-agentify-transport
-description: Use only in the dedicated Agentify Transport Operator task to process one ordered file-backed review batch and return its raw responses.
+description: Use only in the dedicated Agentify Transport Operator task to complete one ordered file-backed external-review batch through Agentify pages and return the raw responses.
 ---
 
 # HMASD Agentify Transport
 
-## Boundary
+## Assignment
 
 The request is exactly:
 
@@ -15,28 +15,42 @@ batch_path=<absolute UTF-8 JSON file containing provider and question_paths>
 return_task_id=<requester task>
 ```
 
-The batch JSON contains only `provider` and `question_paths`. Array order is
-the send order. Read the exact assigned `batch_path`; never discover a batch by
-scanning the Operator workspace and never derive paths from item names. The
-Operator performs no science, intake, workflow design, code, Git or project
-state work. It sends only the exact question files named by the batch. Shell output, metadata,
-attachments, context bundles and requester history never enter the prompt.
+Read that exact file once. `question_paths` order is the batch order. Do not scan
+temporary directories or reconstruct paths from item names. The sent payload is
+only the exact UTF-8 question file; local metadata, paths, logs, context bundles,
+attachments and requester history stay local.
 
-## Normal path
+## Understand the live page
 
-1. Read the exact `batch_path` once and preserve `question_paths` order. At task start, run
-   `scripts/ensure_agentify_runtime.ps1` once. Require its
-   ready receipt and one provider-matching `protectedTab=true` page.
-2. For each ordered question path, call `agentify_query` with the page's
-   tool-returned key, `provider`, `promptPath=<question path>` and
-   `timeoutMs=2700000`. For ChatGPT pass `expectedModel=Pro`; Agentify owns model
-   selection, whole-file insertion and one send. If the same page is still
-   generating when the call returns, immediately call `agentify_wait_response`
-   on that page with `timeoutMs=2700000`. `IN_PROGRESS` repeats that same wait
-   call; it never sends. Never end the turn, resend or start the next item before
-   the completed response returns.
-3. Write every returned assistant text plus its question path and item status
-   into one results file under `temp/sessions/agentify_transport_operator/` and send:
+At task start run `scripts/ensure_agentify_runtime.ps1`, then use Agentify's page
+tools directly. Inspect `agentify_tabs`, `agentify_status`, `agentify_read_page`
+and `agentify_list_conversations` as needed. The provider home page is a valid
+starting point. Use `agentify_tab_create`, `agentify_show`,
+`agentify_new_conversation`, `agentify_open_conversation`, `agentify_navigate`
+and `agentify_tab_close` to establish useful pages and conversations.
+
+Choose rather than blindly reuse. Start a clean conversation for an independent
+review; reuse the matching conversation for a true continuation. Read the page
+and question to make that decision. The operator may switch conversations or
+tabs during the batch and keep multiple useful sessions available.
+
+## Complete the batch
+
+For each question path:
+
+1. Select or create the appropriate conversation and confirm that the requested
+   provider/model and composer are usable.
+2. Call `agentify_query` with `promptPath=<question path>`, the selected tab key
+   or id, `timeoutMs=2700000`, and `expectedModel=Pro` for ChatGPT. Agentify owns
+   whole-file insertion, visible model selection and the single send.
+3. If generation continues, call `agentify_wait_response` on that same page.
+   `IN_PROGRESS` means the answer remains pending; continue observing without a
+   new query. Only structured `COMPLETE` plus the actual response permits archive
+   and advancement.
+4. Save the response, question path, conversation URL and item status in one
+   results file under `temp/sessions/agentify_transport_operator/`.
+
+Then return:
 
 ```text
 AGENTIFY_REVIEW_BATCH_RESULT
@@ -45,12 +59,15 @@ results_path=<path or empty>
 error=<empty or actual error>
 ```
 
-## One fallback
+## Judgment and recovery
 
-After an item error, read the same page status once. An active query uses the
-standard `agentify_wait_response` path. If the page is idle and no response was
-produced, repeat that item once with the unchanged question path; otherwise
-record the actual error. Never ask the requester to rewrite the batch file.
+Do not follow an error-code decision table. Inspect the actual page, tabs,
+conversation, active query and saved responses, then use the same page controls
+to recover. A missing tab, provider home page, stale conversation, elapsed wait
+interval or one failed tool call is not terminal. Preserve completed responses
+and continue the remaining batch. Never ask the requester to rewrite an
+unchanged batch solely to retry transport.
 
-Do not create another page, switch conversations, send a placeholder, use
-Answer now, or claim completion without the actual returned assistant response.
+Never interrupt an active answer, duplicate a possibly submitted question, send
+a placeholder, or activate Continue, Retry, Stop or Answer now. Perform no
+scientific interpretation, project mutation, Git or workflow design.

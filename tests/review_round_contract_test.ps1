@@ -13,6 +13,7 @@ foreach ($entry in @(
     @($router, 'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST'),
     @($router, 'agentify_transport_request_fields=batch_path|return_task_id'),
     @($router, 'agentify_transport_batch_file_fields=provider|question_paths'),
+    @($router, 'agentify_transport_page_authority=read_create_show_close_navigate_list_open_and_switch_conversations'),
     @($router, 'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'),
     @($router, 'agentify_transport_result_fields=status|results_path|error'),
     @($cpm, 'formal_review_transport=agentify_file_batch_result'),
@@ -21,13 +22,19 @@ foreach ($entry in @(
     @($operator, 'result_fields=status|results_path|error'),
     @($operator, 'terminal_status=COMPLETE|ERROR'),
     @($operator, 'never scans temporary directories'),
-    @($skill, 'never discover a batch by'),
+    @($operator, 'Starting at `https://chatgpt.com/`'),
+    @($operator, 'create a clean conversation'),
+    @($operator, 'navigate between conversations'),
+    @($skill, 'Do not scan'),
     @($skill, 'promptPath=<question path>'),
     @($skill, 'expectedModel=Pro'),
     @($skill, 'agentify_wait_response'),
-    @($skill, '`IN_PROGRESS` repeats that same wait'),
-    @($skill, 'Never end the turn, resend or start the'),
-    @($skill, 'Never ask the requester to rewrite the batch file'),
+    @($skill, '`IN_PROGRESS` means the answer remains pending'),
+    @($skill, 'agentify_list_conversations'),
+    @($skill, 'agentify_new_conversation'),
+    @($skill, 'agentify_open_conversation'),
+    @($skill, 'Only structured `COMPLETE` plus the actual response'),
+    @($skill, 'Never ask the requester to rewrite an'),
     @($researchSkill, 'batch_path|return_task_id'),
     @($researchSkill, 'requires no Explorer file change')
 )) {
@@ -66,7 +73,11 @@ foreach ($retired in @(
     'idempotency',
     'prepare -> submit -> verify -> archive',
     'submit --verify-existing',
-    'heartbeat'
+    'heartbeat',
+    'BOOT -> PAGE',
+    'protectedTab=true',
+    'Do not create another page',
+    'switch conversations, send a placeholder'
 )) {
     if ($active.Contains($retired)) {
         throw "Retired Agentify mechanism remains active: $retired"
