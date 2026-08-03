@@ -11,18 +11,20 @@ The request is exactly:
 
 ```text
 AGENTIFY_REVIEW_BATCH_REQUEST
-batch_path=<absolute UTF-8 JSON file containing provider and ordered_question_paths>
+batch_path=<absolute UTF-8 JSON file containing provider and question_paths>
 return_task_id=<requester task>
 ```
 
-The batch JSON contains only `provider` and `ordered_question_paths`. The
+The batch JSON contains only `provider` and `question_paths`. Array order is
+the send order. Read the exact assigned `batch_path`; never discover a batch by
+scanning the Operator workspace and never derive paths from item names. The
 Operator performs no science, intake, workflow design, code, Git or project
 state work. It sends only the exact question files named by the batch. Shell output, metadata,
 attachments, context bundles and requester history never enter the prompt.
 
 ## Normal path
 
-1. Read `batch_path` once and preserve its question order. At task start, run
+1. Read the exact `batch_path` once and preserve `question_paths` order. At task start, run
    `scripts/ensure_agentify_runtime.ps1` once. Require its
    ready receipt and one provider-matching `protectedTab=true` page.
 2. For each ordered question path, call `agentify_query` with the page's

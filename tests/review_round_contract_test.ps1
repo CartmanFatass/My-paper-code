@@ -12,7 +12,7 @@ $preflightPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/script
 foreach ($entry in @(
     @($router, 'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST'),
     @($router, 'agentify_transport_request_fields=batch_path|return_task_id'),
-    @($router, 'agentify_transport_batch_file_fields=provider|ordered_question_paths'),
+    @($router, 'agentify_transport_batch_file_fields=provider|question_paths'),
     @($router, 'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'),
     @($router, 'agentify_transport_result_fields=status|results_path|error'),
     @($cpm, 'formal_review_transport=agentify_file_batch_result'),
@@ -20,6 +20,8 @@ foreach ($entry in @(
     @($operator, 'request_fields=batch_path|return_task_id'),
     @($operator, 'result_fields=status|results_path|error'),
     @($operator, 'terminal_status=COMPLETE|ERROR'),
+    @($operator, 'never scans temporary directories'),
+    @($skill, 'never discover a batch by'),
     @($skill, 'promptPath=<question path>'),
     @($skill, 'expectedModel=Pro'),
     @($skill, 'agentify_wait_response'),

@@ -11,7 +11,7 @@ runtime_success_claim_evidence=preflight_script_receipt_plus_scoped_agentify_sta
 other_authority=none
 request_contract=AGENTIFY_REVIEW_BATCH_REQUEST
 request_fields=batch_path|return_task_id
-batch_file_fields=provider|ordered_question_paths
+batch_file_fields=provider|question_paths
 result_contract=AGENTIFY_REVIEW_BATCH_RESULT
 result_fields=status|results_path|error
 terminal_status=COMPLETE|ERROR
@@ -20,8 +20,10 @@ transport_skill=hmasd-agentify-transport
 workflow_hash_validation=forbidden
 ```
 
-The operator owns one ordered batch at a time. It reads the batch file once,
-sends each frozen question in order, waits for the new assistant response before
+The operator owns one ordered batch at a time. It reads the exact assigned
+`batch_path` once and uses the `question_paths` array in file order. It never scans temporary directories
+or constructs a question path from an item name. It sends each frozen question
+in order, waits for the new assistant response before
 the next send, saves every response and returns one results file. The requester
 owns question selection, archival and interpretation and may continue unrelated
 work. A retry reuses the same `batch_path`; the requester changes no research or
