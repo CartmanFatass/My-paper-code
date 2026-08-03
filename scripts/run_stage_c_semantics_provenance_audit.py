@@ -1640,7 +1640,9 @@ def collect_arm(source: Mapping[str, Any], expected_arm: str, device: torch.devi
     """Strictly restore and repeat one registered final stochastic evaluation."""
 
     from ha_ctse_process import standalone_event_support as event_support
-    from ha_ctse_process.variable_roster_event import restore_event_model_only_checkpoint
+    from ha_ctse_process.variable_roster_event_checkpoint import (
+        restore_event_model_only_checkpoint,
+    )
 
     identity = validate_source_identity(source, expected_arm)
     if not identity["valid"]:

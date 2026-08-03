@@ -23,6 +23,8 @@ from ha_ctse_process.variable_roster_event import (
     SNAPSHOT_CAPABILITY_NAME,
     SNAPSHOT_CAPABILITY_VERSION,
     VariableRosterEventCore,
+)
+from ha_ctse_process.variable_roster_event_checkpoint import (
     event_model_only_checkpoint_payload,
     restore_event_model_only_checkpoint,
     restore_vector_event_checkpoint,

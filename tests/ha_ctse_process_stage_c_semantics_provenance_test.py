@@ -1317,7 +1317,7 @@ def test_synthetic_orchestration_joins_collection_validation_analysis_and_output
     monkeypatch,
     tmp_path,
 ):
-    from ha_ctse_process import variable_roster_event
+    from ha_ctse_process import variable_roster_event_checkpoint
 
     runner = _runner()
     actor = _small_event_actor(seed=17059)
@@ -1342,7 +1342,7 @@ def test_synthetic_orchestration_joins_collection_validation_analysis_and_output
 
     monkeypatch.setattr(runner, "_construct_model_owner", lambda *_args: owner)
     monkeypatch.setattr(
-        variable_roster_event,
+        variable_roster_event_checkpoint,
         "restore_event_model_only_checkpoint",
         lambda _checkpoint, *, model_owner: (
             {

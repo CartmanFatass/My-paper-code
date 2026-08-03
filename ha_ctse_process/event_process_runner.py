@@ -81,7 +81,9 @@ def _restore_iteration5_vector_checkpoint(
     ledgers,
 ):
     from ha_ctse_process.process_semantics import restore_event_semantic_bundle
-    from ha_ctse_process.variable_roster_event import restore_vector_event_checkpoint
+    from ha_ctse_process.variable_roster_event_checkpoint import (
+        restore_vector_event_checkpoint,
+    )
 
     value = deepcopy(dict(payload))
     event = value.get("event_architecture")
@@ -299,8 +301,10 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
     )
     from ha_ctse_process.variable_roster_event import (
         apply_event_ppo_update,
-        event_model_only_checkpoint_payload,
         pack_event_ppo_data,
+    )
+    from ha_ctse_process.variable_roster_event_checkpoint import (
+        event_model_only_checkpoint_payload,
         vector_event_checkpoint_payload,
     )
     from ha_ctse_process.variable_roster_event_batching import batched_low_step
