@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 import torch
 
-from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.r30_fixed_clock import FixedClockAREditPolicy
@@ -685,9 +685,11 @@ def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(m
     def forbidden_collector(*_args, **_kwargs):
         raise AssertionError("collector construction must not occur")
 
-    monkeypatch.setattr(process_train, "create_collector", forbidden_collector)
+    monkeypatch.setattr(
+        standalone_train_runner, "create_collector", forbidden_collector
+    )
     with pytest.raises(RuntimeError, match="deterministic transaction trace"):
-        process_train.train_loop(config, args, writer=None)
+        standalone_train_runner.train_loop(config, args, writer=None)
 
     torch.manual_seed(707)
     legacy_before = FixedClockAREditPolicy(

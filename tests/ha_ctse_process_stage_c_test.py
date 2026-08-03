@@ -9,7 +9,7 @@ import pytest
 import torch
 
 from ha_ctse_process.collectors import SyncEnvCollector
-from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process.standalone_event_support import (
     _event_identity_normalizers,
     _event_live_checkpoint_paths,
@@ -439,8 +439,8 @@ def test_runner_dry_validation_and_registered_outcome_priority(
         raise AssertionError("dry preflight crossed a forbidden execution boundary")
 
     monkeypatch.setattr(runner.subprocess, "Popen", forbidden)
-    monkeypatch.setattr(process_train, "create_collector", forbidden)
-    monkeypatch.setattr(process_train, "train_loop", forbidden)
+    monkeypatch.setattr(standalone_train_runner, "create_collector", forbidden)
+    monkeypatch.setattr(standalone_train_runner, "train_loop", forbidden)
     monkeypatch.setattr(torch.optim.Adam, "step", forbidden)
     output_root = tmp_path / "dry"
     result = runner.run_pair(

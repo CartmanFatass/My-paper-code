@@ -13,7 +13,7 @@ from ha_ctse_process.dynamic_roster_testbed import (
     OBSERVATION_DIM,
     DynamicRosterEventEnv,
 )
-from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import standalone_variable_roster_runner
 from ha_ctse_process.variable_roster_event import (
     EVENT_ARCHITECTURE_SCHEMA_VERSION,
@@ -387,10 +387,10 @@ def test_stage_c_generic_short_event_integration_without_optimizer_step(monkeypa
         "run_variable_roster_event_branch",
         lambda config, args, writer: branch_calls.append(args) or sentinel,
     )
-    assert process_train.train_loop(dispatch_config, dispatch_args, None) is sentinel
+    assert standalone_train_runner.train_loop(dispatch_config, dispatch_args, None) is sentinel
     assert len(branch_calls) == 1
     with pytest.raises(ValueError, match="--resume_from fails closed"):
-        process_train.train_loop(
+        standalone_train_runner.train_loop(
             dispatch_config,
             SimpleNamespace(rollout_length=80, resume_from="checkpoint.pt"),
             None,

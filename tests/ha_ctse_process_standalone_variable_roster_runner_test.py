@@ -7,11 +7,13 @@ from types import SimpleNamespace
 import pytest
 
 from ha_ctse_process import standalone_variable_roster_runner
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import train
 
 
 def test_variable_roster_runner_has_one_owner_and_direct_dispatch() -> None:
     runner_source = inspect.getsource(standalone_variable_roster_runner)
+    train_runner_source = inspect.getsource(standalone_train_runner)
     train_source = inspect.getsource(train)
 
     assert "ha_ctse_process.train" not in runner_source
@@ -20,8 +22,9 @@ def test_variable_roster_runner_has_one_owner_and_direct_dispatch() -> None:
     assert "def run_variable_roster_event_branch(" not in train_source
     assert (
         "standalone_variable_roster_runner.run_variable_roster_event_branch("
-        in inspect.getsource(train.train_loop)
+        in inspect.getsource(standalone_train_runner.train_loop)
     )
+    assert "ha_ctse_process.train" not in train_runner_source
 
 
 def test_variable_roster_runner_import_dag_has_no_train_edge() -> None:

@@ -3,6 +3,7 @@ from __future__ import annotations
 import inspect
 
 import ha_ctse_process.event_process_runner as event_process_runner
+import ha_ctse_process.standalone_train_runner as standalone_train_runner
 import ha_ctse_process.train as train
 
 
@@ -26,9 +27,9 @@ def test_iteration5_runner_has_one_true_owner_and_train_dispatches_it() -> None:
         assert f"def {name}(" not in train_source
 
     assert (
-        train._run_iteration5_process_semantics_branch
+        standalone_train_runner._run_iteration5_process_semantics_branch
         is event_process_runner._run_iteration5_process_semantics_branch
     )
     assert "return _run_iteration5_process_semantics_branch(config, args, writer)" in (
-        inspect.getsource(train.train_loop)
+        inspect.getsource(standalone_train_runner.train_loop)
     )
