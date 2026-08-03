@@ -16,24 +16,20 @@ except ModuleNotFoundError:
     SummaryWriter = None
 
 from ha_ctse_process.env_factory import normalize_scenario
-from ha_ctse_process import standalone_manifest
+from ha_ctse_process import standalone_eval_runner
 from ha_ctse_process import standalone_train_runner
-from ha_ctse_process.standalone_evaluation import evaluate
-from ha_ctse_process.standalone_metrics import emit, log_eval_metrics
+from ha_ctse_process.standalone_metrics import emit
 from ha_ctse_process.checkpoint_io import (
     apply_checkpoint_structure,
-    load_checkpoint,
     load_checkpoint_metadata,
 )
 from ha_ctse_process.standalone_cli import (
     apply_standalone_overrides,
-    create_agent,
     create_env,
     load_config,
     parse_args,
 )
 from ha_ctse_process.standalone_contracts import (
-    dispatch_variable_roster_event_boundary,
     enforce_aem_contract,
     enforce_iteration5_process_semantics_contract,
     enforce_r28_g1_contract,
@@ -100,46 +96,6 @@ def run_env_dry_check(config, args: argparse.Namespace) -> None:
 
 
 
-def eval_loop(config, args: argparse.Namespace, writer) -> None:
-    if is_variable_roster_event(config):
-        dispatch_variable_roster_event_boundary(config)
-    if not args.resume_from:
-        raise ValueError("--mode eval requires --resume_from pointing to a standalone checkpoint")
-    env = create_env(config, config.scenario, args.seed, rank=0, scale_mode="eval")
-    try:
-        _obs, info = env.reset(seed=args.seed)
-        state_dim = int(np.asarray(info.get("state"), dtype=np.float32).reshape(-1).size) if info.get("state") is not None else None
-        agent = create_agent(config, args, env, num_envs=1, state_dim=state_dim)
-    finally:
-        env.close()
-    total_steps, update_idx = load_checkpoint(args.resume_from, agent, load_optimizers=False)
-    standalone_manifest.export_run_manifest(
-        args,
-        config,
-        env=env,
-        agent=agent,
-        total_steps=total_steps,
-        update_idx=update_idx,
-        mode="eval",
-    )
-    emit(
-        args,
-        "standalone_eval_start "
-        f"path={args.resume_from} total_steps={total_steps} update_idx={update_idx} "
-        f"action_mode={getattr(args, 'eval_action_mode', 'deterministic')} "
-        f"duration_candidates={tuple(getattr(config, 'skill_lifetime_candidates', ())) }"
-    )
-    args.eval_checkpoint_name = Path(args.resume_from).name
-    metrics = evaluate(
-        agent,
-        config,
-        args,
-        episodes=int(args.eval_episodes),
-        total_steps=total_steps,
-    )
-    log_eval_metrics(writer, total_steps, metrics)
-
-
 def main() -> None:
     args = parse_args()
     random.seed(int(args.seed))
@@ -197,7 +153,7 @@ def main() -> None:
             run_env_dry_check(config, args)
             return
         if args.mode == "eval":
-            eval_loop(config, args, writer)
+            standalone_eval_runner.eval_loop(config, args, writer)
         else:
             standalone_train_runner.train_loop(config, args, writer)
     finally:

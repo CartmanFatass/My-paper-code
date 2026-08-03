@@ -10,6 +10,8 @@ from types import SimpleNamespace
 import numpy as np
 
 from ha_ctse_process import standalone_manifest
+from ha_ctse_process import standalone_eval_runner
+from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import train
 
 
@@ -44,32 +46,48 @@ def _assigned_names(path: Path) -> set[str]:
 
 def test_standalone_manifest_is_true_owner_and_train_uses_module_qualified_calls():
     manifest_path = Path(standalone_manifest.__file__)
+    eval_runner_path = Path(standalone_eval_runner.__file__)
+    train_runner_path = Path(standalone_train_runner.__file__)
     train_path = Path(train.__file__)
     manifest_tree = ast.parse(manifest_path.read_text(encoding="utf-8"))
+    eval_runner_tree = ast.parse(eval_runner_path.read_text(encoding="utf-8"))
+    train_runner_tree = ast.parse(train_runner_path.read_text(encoding="utf-8"))
     train_tree = ast.parse(train_path.read_text(encoding="utf-8"))
 
     assert MANIFEST_CONSTANTS <= _assigned_names(manifest_path)
     assert MANIFEST_CONSTANTS.isdisjoint(_assigned_names(train_path))
     assert MANIFEST_FUNCTIONS <= _top_level_names(manifest_path, ast.FunctionDef)
     assert MANIFEST_FUNCTIONS.isdisjoint(_top_level_names(train_path, ast.FunctionDef))
-    assert {"empty_r30_no_high_metrics", "run_env_dry_check", "train_loop", "eval_loop", "main"} <= _top_level_names(
-        train_path, ast.FunctionDef
+    assert _top_level_names(train_path, ast.FunctionDef) == {"run_env_dry_check", "main"}
+    assert {"empty_r30_no_high_metrics", "train_loop"} <= _top_level_names(
+        train_runner_path, ast.FunctionDef
     )
+    assert {"eval_loop"} == _top_level_names(eval_runner_path, ast.FunctionDef)
 
     assert any(
         isinstance(node, ast.ImportFrom)
         and node.module == "ha_ctse_process"
         and any(alias.name == "standalone_manifest" for alias in node.names)
-        for node in train_tree.body
+        for tree in (eval_runner_tree, train_runner_tree)
+        for node in tree.body
     )
     assert not any(
         isinstance(node, ast.ImportFrom)
         and node.module == "ha_ctse_process.standalone_manifest"
+        for tree in (train_tree, eval_runner_tree, train_runner_tree)
+        for node in tree.body
+    )
+    assert not any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == "ha_ctse_process"
+        and any(alias.name == "standalone_manifest" for alias in node.names)
         for node in train_tree.body
     )
+    owner_trees = (eval_runner_tree, train_runner_tree)
     qualified_calls = [
         node
-        for node in ast.walk(train_tree)
+        for tree in owner_trees
+        for node in ast.walk(tree)
         if isinstance(node, ast.Call)
         and isinstance(node.func, ast.Attribute)
         and isinstance(node.func.value, ast.Name)
@@ -79,8 +97,15 @@ def test_standalone_manifest_is_true_owner_and_train_uses_module_qualified_calls
     assert len(qualified_calls) == 3
     assert not any(
         isinstance(node, ast.Call)
-        and isinstance(node.func, ast.Name)
-        and node.func.id == "export_run_manifest"
+        and (
+            (isinstance(node.func, ast.Name) and node.func.id == "export_run_manifest")
+            or (
+                isinstance(node.func, ast.Attribute)
+                and isinstance(node.func.value, ast.Name)
+                and node.func.value.id == "standalone_manifest"
+                and node.func.attr == "export_run_manifest"
+            )
+        )
         for node in ast.walk(train_tree)
     )
 
