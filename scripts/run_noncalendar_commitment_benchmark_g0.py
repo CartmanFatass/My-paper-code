@@ -35,9 +35,7 @@ from ha_ctse_process.event_held_commitment_link import (
     RNG_NAMES,
     authoritative_seed_map,
     collection_rng_schedules,
-    compare_continuations,
     factor_counts,
-    load_checkpoint,
     make_training_state,
     make_rng_binding,
     batched_natural_and_permuted_action_tv,
@@ -46,9 +44,13 @@ from ha_ctse_process.event_held_commitment_link import (
     parameter_and_optimizer_counts,
     replay_rng_schedule_end_state,
     replay_rng_schedule_arrays,
+    validate_rng_binding,
+)
+from ha_ctse_process.event_commitment_checkpoint import (
+    compare_continuations,
+    load_checkpoint,
     runtime_rng_snapshot,
     save_checkpoint,
-    validate_rng_binding,
 )
 from ha_ctse_process.event_commitment_models import initialize_arms
 from ha_ctse_process.event_commitment_audit import audit_opportunities_batched

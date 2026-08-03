@@ -20,6 +20,7 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process import event_held_commitment_link
+from ha_ctse_process import event_commitment_checkpoint
 from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
 from ha_ctse_process import event_commitment_replay
@@ -39,6 +40,13 @@ from ha_ctse_process.event_commitment_replay import (
 )
 from ha_ctse_process.event_commitment_optimizer import optimize_update
 from ha_ctse_process.event_commitment_models import initialize_arms
+from ha_ctse_process.event_commitment_checkpoint import (
+    compare_continuations,
+    load_checkpoint,
+    runtime_rng_equal,
+    runtime_rng_snapshot,
+    save_checkpoint,
+)
 from ha_ctse_process.event_commitment_rng import (
     RNG_NAMES,
     authoritative_seed_map,
@@ -62,14 +70,9 @@ from ha_ctse_process.event_held_commitment_link import (
     OPPORTUNITY_SUPPORT,
     action_distribution_tv,
     batched_natural_and_permuted_action_tv,
-    compare_continuations,
     factor_counts,
-    load_checkpoint,
     nested_state_maximum_difference,
     parameter_and_optimizer_counts,
-    runtime_rng_equal,
-    runtime_rng_snapshot,
-    save_checkpoint,
 )
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
@@ -2308,9 +2311,9 @@ def test_atomic_publication_and_operational_failure_cleanup(
 
     arms, base_optimizers, event_optimizers = initialize_arms(device)
     checkpoint = tmp_path / "atomic.pt"
-    pristine_checkpoint_replace = event_held_commitment_link.os.replace
+    pristine_checkpoint_replace = event_commitment_checkpoint.os.replace
     monkeypatch.setattr(
-        event_held_commitment_link.os,
+        event_commitment_checkpoint.os,
         "replace",
         lambda _source, _target: (_ for _ in ()).throw(OSError("checkpoint publish")),
     )
@@ -2325,7 +2328,7 @@ def test_atomic_publication_and_operational_failure_cleanup(
     assert not checkpoint.exists()
     assert not list(tmp_path.glob(".atomic.pt.*.tmp"))
     monkeypatch.setattr(
-        event_held_commitment_link.os, "replace", pristine_checkpoint_replace
+        event_commitment_checkpoint.os, "replace", pristine_checkpoint_replace
     )
 
     monkeypatch.setattr(
