@@ -43,7 +43,9 @@ For each question path:
 1. Select or create the appropriate conversation and confirm that the requested
    provider/model and composer are usable.
 2. Call `agentify_query` with `promptPath=<question path>`, the selected tab key
-   or id, `timeoutMs=2700000`, and `expectedModel=Pro` for ChatGPT. Agentify owns
+   or id, `timeoutMs=2700000`, and the exact visible
+   `expectedModel=GPT-5.6 Pro` for ChatGPT. Do not shorten the model label to
+   `Pro`: Agentify matches the visible model name exactly. Agentify owns
    whole-file insertion, visible model selection and the single send.
 3. If generation continues, call `agentify_wait_response` on that same page.
    `IN_PROGRESS` means the answer remains pending; continue observing without a

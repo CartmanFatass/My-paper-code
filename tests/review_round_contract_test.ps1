@@ -29,7 +29,7 @@ foreach ($entry in @(
     @($operator, 'navigate between conversations'),
     @($skill, 'Do not scan'),
     @($skill, 'promptPath=<question path>'),
-    @($skill, 'expectedModel=Pro'),
+    @($skill, 'expectedModel=GPT-5.6 Pro'),
     @($skill, 'agentify_wait_response'),
     @($skill, '`IN_PROGRESS` means the answer remains pending'),
     @($skill, 'agentify_list_conversations'),
