@@ -52,7 +52,7 @@ def test_eval_loop_has_one_true_owner_and_no_reverse_import_edge() -> None:
 
 
 def test_moved_eval_loop_matches_the_ticket_base_ast() -> None:
-    repository = Path(__file__).resolve().parents[1]
+    repository = Path(__file__).resolve().parents[3]
     base_source = subprocess.run(
         [
             "git",

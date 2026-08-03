@@ -57,7 +57,7 @@ def _args(**overrides):
 
 
 def test_contract_symbols_have_one_true_owner() -> None:
-    project_root = Path(__file__).resolve().parents[1]
+    project_root = Path(__file__).resolve().parents[3]
     owner = _top_level_function_names(
         project_root / "ha_ctse_process" / "standalone_contracts.py"
     )

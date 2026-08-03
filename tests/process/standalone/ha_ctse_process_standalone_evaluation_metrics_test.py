@@ -17,7 +17,7 @@ def _top_level_functions(path: Path) -> set[str]:
 
 
 def test_evaluation_and_metric_helpers_have_single_owners():
-    root = Path(__file__).parents[1]
+    root = Path(__file__).parents[3]
     train_functions = _top_level_functions(root / "ha_ctse_process" / "train.py")
     evaluation_functions = _top_level_functions(root / "ha_ctse_process" / "standalone_evaluation.py")
     metrics_functions = _top_level_functions(root / "ha_ctse_process" / "standalone_metrics.py")

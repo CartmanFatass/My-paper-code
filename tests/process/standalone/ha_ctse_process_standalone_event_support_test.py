@@ -47,7 +47,7 @@ def _top_level_definitions(path: Path) -> set[str]:
 
 
 def test_event_support_cluster_has_one_concrete_owner() -> None:
-    root = Path(__file__).parents[1]
+    root = Path(__file__).parents[3]
     support_path = root / "ha_ctse_process" / "standalone_event_support.py"
     train_path = root / "ha_ctse_process" / "train.py"
 

@@ -12,8 +12,10 @@ from ha_ctse_process.standalone_novelty import (
 )
 
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-TRAIN_PATH = REPOSITORY_ROOT / "ha_ctse_process" / "train.py"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+STANDALONE_TRAIN_RUNNER_PATH = (
+    REPOSITORY_ROOT / "ha_ctse_process" / "standalone_train_runner.py"
+)
 NOVELTY_PATH = REPOSITORY_ROOT / "ha_ctse_process" / "standalone_novelty.py"
 
 
@@ -26,8 +28,10 @@ def _top_level_definitions(path: Path) -> set[str]:
     }
 
 
-def test_standalone_novelty_is_true_owner_and_train_uses_module_qualified_import():
-    train_module = ast.parse(TRAIN_PATH.read_text(encoding="utf-8"))
+def test_standalone_novelty_is_true_owner_and_runner_uses_module_qualified_import():
+    train_runner_module = ast.parse(
+        STANDALONE_TRAIN_RUNNER_PATH.read_text(encoding="utf-8")
+    )
 
     assert {
         "empty_aem_metrics",
@@ -36,21 +40,21 @@ def test_standalone_novelty_is_true_owner_and_train_uses_module_qualified_import
     assert {
         "empty_aem_metrics",
         "EpisodicJointPositionNovelty",
-    }.isdisjoint(_top_level_definitions(TRAIN_PATH))
+    }.isdisjoint(_top_level_definitions(STANDALONE_TRAIN_RUNNER_PATH))
     assert any(
         isinstance(node, ast.ImportFrom)
         and node.module == "ha_ctse_process"
         and any(alias.name == "standalone_novelty" for alias in node.names)
-        for node in train_module.body
+        for node in train_runner_module.body
     )
     assert not any(
         isinstance(node, ast.ImportFrom)
         and node.module == "ha_ctse_process.standalone_novelty"
-        for node in train_module.body
+        for node in train_runner_module.body
     )
     qualified_calls = {
         node.func.attr
-        for node in ast.walk(train_module)
+        for node in ast.walk(train_runner_module)
         if isinstance(node, ast.Call)
         and isinstance(node.func, ast.Attribute)
         and isinstance(node.func.value, ast.Name)

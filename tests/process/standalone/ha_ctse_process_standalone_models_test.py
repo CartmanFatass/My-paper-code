@@ -10,7 +10,7 @@ import ha_ctse_process.standalone_agent as standalone_agent
 import ha_ctse_process.standalone_models as standalone_models
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 BASE_COMMIT = "bddb4311227741139c00c0a51ac7b1f3e4358caf"
 MOVED_NAMES = (
     "mlp",
