@@ -29,6 +29,7 @@ FORMAL_OPTIMIZER_STEPS = 1_000
 FORMAL_EVAL_EPISODES = 256
 BOOTSTRAP_REPETITIONS = 10_000
 BOOTSTRAP_SEED = 107_057
+PROCESS_CLEANUP_TIMEOUT_SECONDS = 5.0
 
 
 def _git_source_commit() -> str:
@@ -67,6 +68,20 @@ def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
         path,
         json.dumps(dict(payload), ensure_ascii=False, indent=2, allow_nan=False),
     )
+
+
+def _cleanup_direct_arm_processes(processes: Mapping[str, subprocess.Popen[Any]]) -> None:
+    """Reap only direct Stage-C arm processes after an interrupted run."""
+
+    for process in processes.values():
+        if process.poll() is None:
+            process.terminate()
+    for process in processes.values():
+        try:
+            process.wait(timeout=PROCESS_CLEANUP_TIMEOUT_SECONDS)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            process.wait()
 
 
 def _read_arm_status(path: Path) -> dict[str, Any]:
@@ -740,9 +755,6 @@ def run_pair(args: argparse.Namespace) -> dict[str, Any]:
             )
             return_codes = {mode: process.poll() for mode, process in processes.items()}
             if any(code not in (None, 0) for code in return_codes.values()):
-                for mode, process in processes.items():
-                    if process.poll() is None:
-                        process.terminate()
                 raise RuntimeError(f"Stage C arm failure: {return_codes}")
             if all(code == 0 for code in return_codes.values()):
                 break
@@ -846,9 +858,12 @@ def run_pair(args: argparse.Namespace) -> dict[str, Any]:
         )
         raise
     finally:
-        for stdout, stderr in handles.values():
-            stdout.close()
-            stderr.close()
+        try:
+            _cleanup_direct_arm_processes(processes)
+        finally:
+            for stdout, stderr in handles.values():
+                stdout.close()
+                stderr.close()
 
 
 def parse_args() -> argparse.Namespace:

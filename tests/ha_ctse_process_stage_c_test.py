@@ -2,6 +2,7 @@ from copy import deepcopy
 from dataclasses import replace
 import importlib.util
 from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 
 import numpy as np
@@ -52,6 +53,78 @@ def _load_runner():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+class _FakeArmProcess:
+    def __init__(
+        self,
+        name: str,
+        events: list[str],
+        *,
+        interrupt_on_poll: bool = False,
+        timeout_once: bool = False,
+    ):
+        self.name = name
+        self.pid = name
+        self.events = events
+        self.interrupt_on_poll = interrupt_on_poll
+        self.timeout_once = timeout_once
+        self.returncode = None
+
+    def poll(self):
+        if self.interrupt_on_poll:
+            self.interrupt_on_poll = False
+            raise KeyboardInterrupt
+        return self.returncode
+
+    def terminate(self):
+        self.events.append(f"terminate:{self.name}")
+
+    def wait(self, timeout=None):
+        self.events.append(f"wait:{self.name}:{timeout}")
+        if self.timeout_once:
+            self.timeout_once = False
+            raise subprocess.TimeoutExpired(self.name, timeout)
+        if self.returncode is None:
+            self.returncode = -15
+        return self.returncode
+
+    def kill(self):
+        self.events.append(f"kill:{self.name}")
+        self.returncode = -9
+
+
+class _FakeLog:
+    def __init__(self, name: str, events: list[str]):
+        self.name = name
+        self.events = events
+
+    def close(self):
+        self.events.append(f"close:{self.name}")
+
+
+def _runtime_args(output_root: Path):
+    return SimpleNamespace(
+        output_root=output_root,
+        python="python",
+        poll_seconds=0.0,
+        resume_f0=None,
+        resume_f1=None,
+        dry_validate=False,
+    )
+
+
+def _configure_fake_runtime(monkeypatch, runner, events: list[str]):
+    monkeypatch.setattr(runner, "_preflight_validate", lambda _commands: {})
+    monkeypatch.setattr(runner, "_git_source_commit", lambda: "a" * 40)
+    original_open = Path.open
+
+    def fake_open(path, *_args, **_kwargs):
+        if path.name in {"worker_stdout.log", "worker_stderr.log"}:
+            return _FakeLog(path.name, events)
+        return original_open(path, *_args, **_kwargs)
+
+    monkeypatch.setattr(Path, "open", fake_open)
 
 
 class _SnapshotOnlyEnvironment:
@@ -505,6 +578,61 @@ def test_runner_dry_validation_and_registered_outcome_priority(
     assert classify(**timing)[0] == "CONDITIONAL_H3_TIMING_LIMIT"
     assert classify(**{**timing, "conditional_h3_supported": False})[0] == (
         "VALID_MIXED_UNCATEGORIZED"
+    )
+
+
+def test_runner_partial_popen_startup_reaps_started_arm_before_closing_logs(
+    tmp_path, monkeypatch
+):
+    runner = _load_runner()
+    events: list[str] = []
+    f0 = _FakeArmProcess("f0", events)
+    _configure_fake_runtime(monkeypatch, runner, events)
+    calls = 0
+
+    def fake_popen(*_args, **_kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            events.append("popen:f0")
+            return f0
+        raise OSError("f1 launch failed")
+
+    monkeypatch.setattr(runner.subprocess, "Popen", fake_popen)
+    with pytest.raises(OSError, match="f1 launch failed"):
+        runner.run_pair(_runtime_args(tmp_path / "partial-startup"))
+
+    assert events.index("terminate:f0") < events.index("wait:f0:5.0")
+    assert events.index("wait:f0:5.0") < events.index("close:worker_stdout.log")
+    assert events.count("close:worker_stdout.log") == 2
+    assert events.count("close:worker_stderr.log") == 2
+
+
+def test_runner_keyboard_interrupt_reaps_arms_and_kills_timeout_before_log_close(
+    tmp_path, monkeypatch
+):
+    runner = _load_runner()
+    events: list[str] = []
+    f0 = _FakeArmProcess(
+        "f0", events, interrupt_on_poll=True, timeout_once=True
+    )
+    f1 = _FakeArmProcess("f1", events)
+    _configure_fake_runtime(monkeypatch, runner, events)
+    processes = iter((f0, f1))
+    monkeypatch.setattr(runner.subprocess, "Popen", lambda *_args, **_kwargs: next(processes))
+
+    with pytest.raises(KeyboardInterrupt):
+        runner.run_pair(_runtime_args(tmp_path / "keyboard-interrupt"))
+
+    assert "terminate:f0" in events
+    assert "terminate:f1" in events
+    assert events.index("wait:f0:5.0") < events.index("kill:f0")
+    assert events.index("kill:f0") < events.index("wait:f0:None")
+    assert max(
+        events.index("wait:f0:None"), events.index("wait:f1:5.0")
+    ) < min(
+        events.index("close:worker_stdout.log"),
+        events.index("close:worker_stderr.log"),
     )
 
 
