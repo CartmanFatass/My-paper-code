@@ -47,6 +47,7 @@ torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 
 from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from ha_ctse_process import uav_episode_serialization as episode_serialization
@@ -158,10 +159,10 @@ ORACLE_BEHAVIORAL_REPLAY_PROOF = "proof/oracle_behavioral_replay.json"
 class _ValidatedSourceArtifacts:
     manifest: Mapping[str, Any]
     episode: geometry.G0EpisodeSource
-    ledger: source.OracleSafetyLedger
-    ledger_context: source._ValidatedOracleSafetyContext
+    ledger: oracle_evidence.OracleSafetyLedger
+    ledger_context: oracle_evidence._ValidatedOracleSafetyContext
     replay_primitive: Mapping[str, Any]
-    replay_certificate: source.OracleSafetyCertificate
+    replay_certificate: oracle_evidence.OracleSafetyCertificate
 
 _SHA1 = re.compile(r"^[0-9a-f]{40}$")
 
@@ -390,7 +391,7 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
         environment.close()
     required_source_interfaces = (
         source.build_oracle_safety_ledger,
-        source.oracle_safety_ledger_from_primitive,
+        oracle_evidence.oracle_safety_ledger_from_primitive,
         source.validate_oracle_safety_primitive,
         source.build_oracle_branch_aware_replay_evidence,
         source.validate_oracle_branch_aware_replay_primitive,
@@ -562,13 +563,13 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
         "bootstrap_resamples": statistics.BOOTSTRAP_RESAMPLES,
         "bootstrap_generator": BOOTSTRAP_GENERATOR,
         "bootstrap_seed": statistics.BOOTSTRAP_SEED,
-        "K_search": source.K_SEARCH,
-        "K_search_ceiling": source.K_SEARCH_CEILING,
+        "K_search": oracle_evidence.K_SEARCH,
+        "K_search_ceiling": oracle_evidence.K_SEARCH_CEILING,
         "nested_rollout": False,
         "replanning": False,
         "tree_or_beam_or_mcts": False,
         "real_environment_transitions": 0,
-        "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * source.K_SEARCH,
+        "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * oracle_evidence.K_SEARCH,
         "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
         "geometry_support_certificate": geometry_support_certificate,
         "oracle_ranking_arithmetic": ORACLE_RANKING_ARITHMETIC,
@@ -673,13 +674,13 @@ def _validate_source_artifacts_bundle(
         "bootstrap_resamples": statistics.BOOTSTRAP_RESAMPLES,
         "bootstrap_generator": BOOTSTRAP_GENERATOR,
         "bootstrap_seed": statistics.BOOTSTRAP_SEED,
-        "K_search": source.K_SEARCH,
-        "K_search_ceiling": source.K_SEARCH_CEILING,
+        "K_search": oracle_evidence.K_SEARCH,
+        "K_search_ceiling": oracle_evidence.K_SEARCH_CEILING,
         "nested_rollout": False,
         "replanning": False,
         "tree_or_beam_or_mcts": False,
         "real_environment_transitions": 0,
-        "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * source.K_SEARCH,
+        "hypothetical_candidate_transitions": source.PHYSICAL_HORIZON * oracle_evidence.K_SEARCH,
         "geometry_support_rule": GEOMETRY_SUPPORT_RULE,
         "geometry_support_certificate": episode_primitive["geometry"][
             "geometry_support_certificate"
@@ -714,7 +715,7 @@ def _validate_source_artifacts_bundle(
         label="oracle safety ledger proof",
         expected_relative_path=ORACLE_SAFETY_LEDGER_PROOF,
     )
-    ledger = source.oracle_safety_ledger_from_primitive(ledger_value)
+    ledger = oracle_evidence.oracle_safety_ledger_from_primitive(ledger_value)
     ledger_context = source._validated_oracle_safety_context(
         episode, ledger
     )
@@ -1434,9 +1435,9 @@ def _verify_git_identity(commit: str) -> None:
         or blob != ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA
     ):
         raise ValueError("G0 scientific source module Git blob identity mismatch")
-    if source.common_tracker_source_digest() != source.ACCEPTED_G1_TRACKER_SOURCE_SHA256:
+    if oracle_evidence.common_tracker_source_digest() != source.ACCEPTED_G1_TRACKER_SOURCE_SHA256:
         raise ValueError("G0 accepted G1 tracker source digest mismatch")
-    if source.shared_action_method_digests() != source.ACCEPTED_G1_SHARED_ACTION_METHOD_SHA256:
+    if oracle_evidence.shared_action_method_digests() != source.ACCEPTED_G1_SHARED_ACTION_METHOD_SHA256:
         raise ValueError("G0 accepted G1 shared action source digests mismatch")
 
 

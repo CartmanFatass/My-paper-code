@@ -13,6 +13,7 @@ import numpy as np
 from ha_ctse_process import uav_episode_serialization as episode_serialization
 from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from scripts import run_uav_source_identifiability_g0 as runner

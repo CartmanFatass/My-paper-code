@@ -9,6 +9,7 @@ import pytest
 
 from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as g0
 
@@ -149,17 +150,17 @@ def test_shared_episode_schema_exports_and_layout_are_exact() -> None:
 def test_callable_source_digests_are_cached_by_callable_identity(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    original_getsource = g0.inspect.getsource
+    original_getsource = oracle_evidence.inspect.getsource
     calls: list[object] = []
 
     def counted_getsource(value: object) -> str:
         calls.append(value)
         return original_getsource(value)
 
-    g0._callable_source_digest.cache_clear()
-    monkeypatch.setattr(g0.inspect, "getsource", counted_getsource)
-    first = g0.common_tracker_source_digest()
-    second = g0.common_tracker_source_digest()
+    oracle_evidence._callable_source_digest.cache_clear()
+    monkeypatch.setattr(oracle_evidence.inspect, "getsource", counted_getsource)
+    first = oracle_evidence.common_tracker_source_digest()
+    second = oracle_evidence.common_tracker_source_digest()
     assert first == second == g0.ACCEPTED_G1_TRACKER_SOURCE_SHA256
     assert calls == [geometry.actions_toward_targets]
 
@@ -167,7 +168,7 @@ def test_callable_source_digests_are_cached_by_callable_identity(
         return np.zeros((g0.PHYSICAL_UAVS, g0.ACTION_DIM), dtype=np.float32)
 
     monkeypatch.setattr(geometry, "actions_toward_targets", replacement_tracker)
-    replacement = g0.common_tracker_source_digest()
+    replacement = oracle_evidence.common_tracker_source_digest()
     assert replacement != first
     assert calls == [geometry.g1_common_target_actions, replacement_tracker]
 
@@ -177,7 +178,7 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
 ) -> None:
     source = geometry.make_episode_source(0)
     candidates = tuple(
-        g0.OracleCandidateSafetyTrace(
+        oracle_evidence.OracleCandidateSafetyTrace(
             candidate_id=label.key,
             target_schedule_sha256=geometry.sha256_json([]),
             common_prestate_sha256=geometry.sha256_json({}),
@@ -195,7 +196,7 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
         for label in geometry.TARGET_LABELS
         if label.kind is geometry.TargetKind.STAGE
     )
-    provisional = g0.OracleSafetyLedger(
+    provisional = oracle_evidence.OracleSafetyLedger(
         source_sha256=source.to_primitive()["sha256"],
         common_prestate={},
         common_prestate_sha256=geometry.sha256_json({}),
@@ -215,27 +216,27 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
         ),
     )
     candidate_digests = tuple(item.trace_sha256 for item in ledger.candidates)
-    certificate = g0.OracleSafetyCertificate(
+    certificate = oracle_evidence.OracleSafetyCertificate(
         ledger_sha256=ledger.content_sha256,
         selected_candidate_id=ledger.selected_candidate_id,
         candidate_trace_sha256=candidate_digests,
     )
     with pytest.raises(TypeError):
-        g0._ValidatedOracleSafetyContext(
+        oracle_evidence._ValidatedOracleSafetyContext(
             source=source,
             ledger=ledger,
             certificate=certificate,
             content_sha256=ledger.content_sha256,
             candidate_trace_sha256=candidate_digests,
         )
-    forged = object.__new__(g0._ValidatedOracleSafetyContext)
+    forged = object.__new__(oracle_evidence._ValidatedOracleSafetyContext)
     with pytest.raises(g0.G0RealizationError, match="not module-issued"):
         g0._require_validated_oracle_safety_context(forged)
 
     def validated(
         supplied_source: geometry.G0EpisodeSource,
-        supplied_ledger: g0.OracleSafetyLedger,
-    ) -> g0.OracleSafetyCertificate:
+        supplied_ledger: oracle_evidence.OracleSafetyLedger,
+    ) -> oracle_evidence.OracleSafetyCertificate:
         assert supplied_source is source
         assert supplied_ledger is ledger
         return certificate
@@ -265,8 +266,8 @@ def test_validated_context_rejects_forgery_cross_source_and_nested_ledger_drift(
 @pytest.fixture(scope="module")
 def oracle_safety_bundle() -> tuple[
     geometry.G0EpisodeSource,
-    g0.OracleSafetyLedger,
-    g0.OracleQualificationCertificate,
+    oracle_evidence.OracleSafetyLedger,
+    oracle_evidence.OracleQualificationCertificate,
 ]:
     source = geometry.make_episode_source(0)
     ledger = g0.build_oracle_safety_ledger(source)
@@ -278,14 +279,14 @@ def oracle_safety_bundle() -> tuple[
 def oracle_behavior_bundle(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
 ) -> tuple[
     geometry.G0EpisodeSource,
-    g0.OracleSafetyLedger,
-    g0.OracleCandidateSafetyTrace,
-    g0.OracleBehavioralExecution,
+    oracle_evidence.OracleSafetyLedger,
+    oracle_evidence.OracleCandidateSafetyTrace,
+    oracle_evidence.OracleBehavioralExecution,
 ]:
     source, ledger, _qualification = oracle_safety_bundle
     selected = next(
@@ -487,7 +488,7 @@ def test_accepted_g1_tracker_and_shared_correction_are_qualified() -> None:
         time_step=1.0,
         permutation=(3, 1, 7, 0, 6, 2, 5, 4),
     )
-    assert g0.common_tracker_source_digest() == g0.ACCEPTED_G1_TRACKER_SOURCE_SHA256
+    assert oracle_evidence.common_tracker_source_digest() == g0.ACCEPTED_G1_TRACKER_SOURCE_SHA256
     assert certificate["accepted_g1_source_commit"] == g0.ACCEPTED_G1_SOURCE_COMMIT
     assert certificate["shared_action_method_identity"] is True
     assert certificate["permutation_equivariant"] is True
@@ -615,8 +616,8 @@ def test_no_reallocation_freezes_targets_and_no_event_maps_match() -> None:
 def test_oracle_two_candidate_schedule_certificate_is_exact(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
 ) -> None:
     source, ledger, certificate = oracle_safety_bundle
@@ -728,7 +729,7 @@ def test_negative_latest_departure_fails_builder_and_validator(
         environment.close()
     prestate_sha256 = geometry.sha256_json(prestate)
     candidates = tuple(
-        g0.OracleCandidateSafetyTrace(
+        oracle_evidence.OracleCandidateSafetyTrace(
             candidate_id=label.key,
             target_schedule_sha256=geometry.sha256_json([]),
             common_prestate_sha256=prestate_sha256,
@@ -746,7 +747,7 @@ def test_negative_latest_departure_fails_builder_and_validator(
         for label in geometry.TARGET_LABELS
         if label.kind is geometry.TargetKind.STAGE
     )
-    provisional = g0.OracleSafetyLedger(
+    provisional = oracle_evidence.OracleSafetyLedger(
         source_sha256=source.to_primitive()["sha256"],
         common_prestate=prestate,
         common_prestate_sha256=prestate_sha256,
@@ -782,8 +783,8 @@ def test_negative_latest_departure_fails_builder_and_validator(
 def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
 ) -> None:
     source, ledger, _qualification = oracle_safety_bundle
@@ -811,7 +812,7 @@ def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
         "g0_safety_only_transition",
     }
     first = ledger.candidates[0].steps[0]
-    assert set(first.to_primitive()) == g0._ORACLE_SAFETY_ALLOWED_STEP_KEYS
+    assert set(first.to_primitive()) == oracle_evidence._ORACLE_SAFETY_ALLOWED_STEP_KEYS
     assert set(first.connections) == {"user", "uav", "uav_bs"}
     assert first.current_service_mask.array().dtype == np.bool_
     assert not any(
@@ -824,8 +825,8 @@ def test_registered_oracle_safety_ledger_is_exact_and_service_blind(
 def test_resealed_oracle_network_inputs_require_native_provenance(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
     tamper_kind: str,
 ) -> None:
@@ -834,12 +835,12 @@ def test_resealed_oracle_network_inputs_require_native_provenance(
     candidate = tampered["candidates"][0]
     step = candidate["steps"][0]
     if tamper_kind == "connection":
-        connections = g0._native_array_from_primitive(
+        connections = oracle_evidence._native_array_from_primitive(
             step["connections"]["user"]
         ).array()
         connections[0, 0] = ~connections[0, 0]
         step["connections"]["user"] = (
-            g0._NativeArrayEvidence.from_array(connections).to_primitive()
+            oracle_evidence._NativeArrayEvidence.from_array(connections).to_primitive()
         )
     else:
         assert len(step["routing_paths"]) > 1
@@ -862,8 +863,8 @@ def test_resealed_oracle_network_inputs_require_native_provenance(
 def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
 ) -> None:
     source, ledger, _qualification = oracle_safety_bundle
@@ -884,13 +885,13 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     step = candidate["steps"][-1]
     reserve_row = g0._target_internal_row(candidate["candidate_id"])
     tampered_row = next(row for row in range(8) if row != reserve_row)
-    current = g0._native_array_from_primitive(
+    current = oracle_evidence._native_array_from_primitive(
         step["current_uav_positions"]
     ).array()
-    original_next = g0._native_array_from_primitive(
+    original_next = oracle_evidence._native_array_from_primitive(
         step["next_uav_positions"]
     ).array()
-    guarded = g0._native_array_from_primitive(
+    guarded = oracle_evidence._native_array_from_primitive(
         step["guarded_executed_action"]
     ).array()
     forged_next = original_next.copy()
@@ -898,13 +899,13 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
     forged_next[tampered_row] = current[tampered_row]
     forged_next[tampered_row, 0] += inward_x
     guarded[tampered_row] = np.asarray((inward_x, 0.0, 0.0))
-    step["guarded_executed_action"] = g0._NativeArrayEvidence.from_array(
+    step["guarded_executed_action"] = oracle_evidence._NativeArrayEvidence.from_array(
         guarded
     ).to_primitive()
-    step["next_uav_positions"] = g0._NativeArrayEvidence.from_array(
+    step["next_uav_positions"] = oracle_evidence._NativeArrayEvidence.from_array(
         forged_next
     ).to_primitive()
-    step["next_uav_velocities"] = g0._NativeArrayEvidence.from_array(
+    step["next_uav_velocities"] = oracle_evidence._NativeArrayEvidence.from_array(
         forged_next - current
     ).to_primitive()
     guard_output = step["real_guard_intervention_or_violation_output"]
@@ -952,11 +953,11 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
         if candidate.candidate_id == ledger.selected_candidate_id
     )
     registered = tuple(
-        g0.oracle_safety_step_from_primitive(step.to_primitive())
+        oracle_evidence.oracle_safety_step_from_primitive(step.to_primitive())
         for step in selected.steps
     )
     replay = tuple(
-        g0.oracle_safety_step_from_primitive(step.to_primitive())
+        oracle_evidence.oracle_safety_step_from_primitive(step.to_primitive())
         for step in selected.steps
     )
     replay_certificate = g0.validate_oracle_behavioral_replay(
@@ -974,8 +975,8 @@ def test_oracle_safety_tamper_fails_closed_and_replay_is_two_trace_exact(
 def test_branch_aware_replay_R_NONE_requires_full_identity(
     oracle_safety_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleQualificationCertificate,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleQualificationCertificate,
     ],
 ) -> None:
     source, ledger, _qualification = oracle_safety_bundle
@@ -985,10 +986,10 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         if candidate.candidate_id == ledger.selected_candidate_id
     )
     context = g0._validated_oracle_safety_context(source, ledger)
-    target_evidence = g0._NativeArrayEvidence.from_array(
+    target_evidence = oracle_evidence._NativeArrayEvidence.from_array(
         g0._expected_behavioral_target_schedule(context, None)
     )
-    service_evidence = g0._NativeArrayEvidence.from_array(
+    service_evidence = oracle_evidence._NativeArrayEvidence.from_array(
         np.zeros(g0.PHYSICAL_HORIZON, dtype=np.float64)
     )
     body = {
@@ -998,7 +999,7 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         "target_schedule": target_evidence.to_primitive(),
         "pre_action_weakest_service": service_evidence.to_primitive(),
     }
-    execution = g0.OracleBehavioralExecution(
+    execution = oracle_evidence.OracleBehavioralExecution(
         selected_candidate_id=ledger.selected_candidate_id,
         return_ready_step=None,
         steps=selected.steps,
@@ -1016,7 +1017,7 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
         source, ledger.selected_candidate_id
     )
     forged_targets[279, selected_row, 0] += 1.0
-    forged_target_evidence = g0._NativeArrayEvidence.from_array(forged_targets)
+    forged_target_evidence = oracle_evidence._NativeArrayEvidence.from_array(forged_targets)
     forged_body = {
         **body,
         "target_schedule": forged_target_evidence.to_primitive(),
@@ -1038,9 +1039,9 @@ def test_branch_aware_replay_R_NONE_requires_full_identity(
 def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
     oracle_behavior_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleCandidateSafetyTrace,
-        g0.OracleBehavioralExecution,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleCandidateSafetyTrace,
+        oracle_evidence.OracleBehavioralExecution,
     ],
 ) -> None:
     source, ledger, selected, execution = oracle_behavior_bundle
@@ -1053,7 +1054,7 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
     )
     assert owner_internal == 2
     assert owner_storage == 7
-    independent = g0.oracle_behavioral_execution_from_primitive(
+    independent = oracle_evidence.oracle_behavioral_execution_from_primitive(
         execution.to_primitive()
     )
     certificate = g0.validate_oracle_branch_aware_replay(
@@ -1076,7 +1077,7 @@ def test_branch_aware_replay_uses_internal_owner_mapping_and_causal_R_273(
 
     stale_primitive = execution.to_primitive()
     stale_primitive["return_ready_step"] = 280
-    stale = g0.oracle_behavioral_execution_from_primitive(
+    stale = oracle_evidence.oracle_behavioral_execution_from_primitive(
         _reseal_behavioral_primitive(stale_primitive)
     )
     with pytest.raises(g0.G0RealizationError, match="causally reconstructed"):
@@ -1279,9 +1280,9 @@ def test_non_oracle_injected_replay_certificate_is_not_discarded(
 def test_branchpoint_primitives_are_required_and_independently_reconstructed(
     oracle_behavior_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleCandidateSafetyTrace,
-        g0.OracleBehavioralExecution,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleCandidateSafetyTrace,
+        oracle_evidence.OracleBehavioralExecution,
     ],
     mutation: str,
 ) -> None:
@@ -1310,9 +1311,9 @@ def test_branchpoint_primitives_are_required_and_independently_reconstructed(
 def test_target_schedule_requires_recomputed_common_transducer_binding(
     oracle_behavior_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleCandidateSafetyTrace,
-        g0.OracleBehavioralExecution,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleCandidateSafetyTrace,
+        oracle_evidence.OracleBehavioralExecution,
     ],
 ) -> None:
     source, ledger, selected, execution = oracle_behavior_bundle
@@ -1332,18 +1333,18 @@ def test_target_schedule_requires_recomputed_common_transducer_binding(
 def test_tampered_common_transducer_input_or_output_fails_closed(
     oracle_behavior_bundle: tuple[
         geometry.G0EpisodeSource,
-        g0.OracleSafetyLedger,
-        g0.OracleCandidateSafetyTrace,
-        g0.OracleBehavioralExecution,
+        oracle_evidence.OracleSafetyLedger,
+        oracle_evidence.OracleCandidateSafetyTrace,
+        oracle_evidence.OracleBehavioralExecution,
     ],
     field: str,
 ) -> None:
     source, ledger, selected, execution = oracle_behavior_bundle
     primitive = execution.to_primitive()
     evidence = primitive["steps"][273]["common_transducer_evidence"]
-    array = g0._native_array_from_primitive(evidence[field]).array()
+    array = oracle_evidence._native_array_from_primitive(evidence[field]).array()
     array.flat[0] += 1.0 if array.dtype == np.dtype(np.float64) else 0.125
-    evidence[field] = g0._NativeArrayEvidence.from_array(array).to_primitive()
+    evidence[field] = oracle_evidence._NativeArrayEvidence.from_array(array).to_primitive()
     tampered = _reseal_behavioral_primitive(primitive)
     with pytest.raises(
         g0.G0RealizationError,
@@ -1498,5 +1499,5 @@ def test_no_learning_optimizer_checkpoint_or_formal_authority() -> None:
     assert g0.LEARNING_ENABLED is False
     assert g0.OPTIMIZER_ENABLED is False
     assert g0.CHECKPOINT_ENABLED is False
-    assert g0.K_SEARCH == 2
-    assert g0.K_SEARCH_CEILING == 16
+    assert oracle_evidence.K_SEARCH == 2
+    assert oracle_evidence.K_SEARCH_CEILING == 16

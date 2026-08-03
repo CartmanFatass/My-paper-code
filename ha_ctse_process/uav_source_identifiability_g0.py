@@ -13,17 +13,15 @@ content; a slot number is never a decision or tie-breaking feature.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-import functools
 import hashlib
-import inspect
 import math
-from typing import Any, Callable, Iterable, Mapping, Sequence
+from typing import Any, Iterable, Mapping, Sequence
 
 import numpy as np
 
 from config_1 import Config
+from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
-from ha_ctse_process import uav_g0_geometry as _geometry
 from ha_ctse_process.uav_episode_schema import (
     ACTION_DIM,
     EPISODE_RUN_ARRAY_SPECS,
@@ -118,67 +116,11 @@ ACCEPTED_G1_SHARED_ACTION_METHOD_SHA256 = {
     "base_backhaul_guard": "e3edac5d4ad6d1839204d6ea042e2768ce3df90085c8535aa822cc3bb9c14df8",
 }
 
-K_SEARCH = 2
-K_SEARCH_CEILING = 16
-
 FORMAL_EXECUTION_AUTHORIZED = False
 LEARNING_ENABLED = False
 OPTIMIZER_ENABLED = False
 CHECKPOINT_ENABLED = False
 
-_ORACLE_SAFETY_ALLOWED_STEP_KEYS = frozenset(
-    {
-        "physical_step",
-        "candidate_id",
-        "current_uav_positions",
-        "current_uav_velocities",
-        "current_service_mask",
-        "pre_action_context",
-        "executed_service_mask",
-        "common_transducer_evidence",
-        "raw_candidate_action",
-        "shared_channel_draw_coordinate",
-        "shared_channel_draw_block",
-        "connections",
-        "routing_paths",
-        "exact_link_capacity_values_read_by_the_real_guard",
-        "real_guard_intervention_or_violation_output",
-        "guarded_executed_action",
-        "next_uav_positions",
-        "next_uav_velocities",
-    }
-)
-_PRE_ACTION_CONTEXT_KEYS = frozenset(
-    {
-        "physical_step",
-        "lifecycle_owner_to_internal",
-        "service_active_mask",
-        "event_owner_handle",
-        "event_owner_epoch",
-        "selected_reserve_handle",
-        "selected_reserve_original_target",
-        "survivor_ownership",
-        "survivor_controller_rng_owners",
-        "non_controller_rng_states",
-        "channel_tape_cursor",
-    }
-)
-_LIFECYCLE_CONTEXT_ROW_KEYS = frozenset(
-    {"handle", "epoch", "internal_row", "owner_target"}
-)
-_COMMON_TRANSDUCER_EVIDENCE_KEYS = frozenset(
-    {
-        "transducer_source_sha256",
-        "row_order",
-        "physical_positions",
-        "target_positions",
-        "active_mask",
-        "raw_action",
-        "max_speed",
-        "max_vertical_speed",
-        "time_step",
-    }
-)
 _ORACLE_SAFETY_FORBIDDEN_TOKENS = (
     "delivered",
     "reward",
@@ -193,80 +135,28 @@ _ORACLE_SAFETY_FORBIDDEN_TOKENS = (
     "m_event",
 )
 
-def _json_safe(value: Any) -> Any:
-    if isinstance(value, np.ndarray):
-        return value.tolist()
-    if isinstance(value, np.generic):
-        return _json_safe(value.item())
-    if isinstance(value, Mapping):
-        return {str(key): _json_safe(item) for key, item in value.items()}
-    if isinstance(value, (tuple, list)):
-        return [_json_safe(item) for item in value]
-    if isinstance(value, float) and not math.isfinite(value):
-        return {"nonfinite_float": value.hex()}
-    if isinstance(value, (str, int, float, bool)) or value is None:
-        return value
-    raise G0RealizationError(
-        f"value of type {type(value).__name__} is not primitive evidence"
-    )
-
-
-
-
-@functools.cache
-def _callable_source_digest(value: Callable[..., Any]) -> str:
-    """Hash immutable code identity once per callable object in this process."""
-
-    text = inspect.getsource(value).replace("\r\n", "\n")
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def common_tracker_source_digest() -> str:
-    return _callable_source_digest(_geometry.actions_toward_targets)
-
-
-def shared_action_method_digests() -> dict[str, str]:
-    return {
-        "prepare_energy_actions": _callable_source_digest(
-            UAVEnergyAwareRelayEnv._prepare_energy_actions
-        ),
-        "movement_velocity": _callable_source_digest(
-            UAVEnergyAwareRelayEnv._movement_velocity_from_action
-        ),
-        "base_action": _callable_source_digest(
-            UAVEnergyAwareRelayEnv._base_action_from_velocity
-        ),
-        "scenario7_backhaul_guard": _callable_source_digest(
-            UAVEnergyAwareRelayEnv._apply_backhaul_action_guard
-        ),
-        "base_backhaul_guard": _callable_source_digest(
-            UAVEnergyAwareRelayEnv.__mro__[1]._apply_backhaul_action_guard
-        ),
-    }
-
-
 def oracle_safety_method_digests() -> dict[str, str]:
     """Bind every unchanged result-bearing native safety transition method."""
 
-    values = dict(shared_action_method_digests())
+    values = dict(oracle_evidence.shared_action_method_digests())
     values.update(
         {
-            "g0_channel_update": _callable_source_digest(
+            "g0_channel_update": oracle_evidence._callable_source_digest(
                 UAVSourceIdentifiabilityEnv._update_channel_state
             ),
-            "scenario7_connection_update": _callable_source_digest(
+            "scenario7_connection_update": oracle_evidence._callable_source_digest(
                 UAVEnergyAwareRelayEnv._update_uav_connections
             ),
-            "native_routing_update": _callable_source_digest(
+            "native_routing_update": oracle_evidence._callable_source_digest(
                 UAVEnergyAwareRelayEnv.__mro__[1]._compute_routing_paths
             ),
-            "scenario7_link_capacity": _callable_source_digest(
+            "scenario7_link_capacity": oracle_evidence._callable_source_digest(
                 UAVEnergyAwareRelayEnv._get_link_capacity
             ),
-            "g0_guard_capacity_capture": _callable_source_digest(
+            "g0_guard_capacity_capture": oracle_evidence._callable_source_digest(
                 UAVSourceIdentifiabilityEnv._get_link_capacity
             ),
-            "g0_safety_only_transition": _callable_source_digest(
+            "g0_safety_only_transition": oracle_evidence._callable_source_digest(
                 UAVSourceIdentifiabilityEnv.step_oracle_safety
             ),
         }
@@ -312,10 +202,10 @@ def qualify_common_tracker(
         active_mask=mask.copy(),
         **keyword,
     )
-    if common_tracker_source_digest() != ACCEPTED_G1_TRACKER_SOURCE_SHA256:
+    if oracle_evidence.common_tracker_source_digest() != ACCEPTED_G1_TRACKER_SOURCE_SHA256:
         raise G0RealizationError("common tracker source differs from accepted G1")
 
-    method_digests = shared_action_method_digests()
+    method_digests = oracle_evidence.shared_action_method_digests()
     method_identity = method_digests == ACCEPTED_G1_SHARED_ACTION_METHOD_SHA256
 
     environment = UAVSourceIdentifiabilityEnv(episode_source, Cell.NO_EVENT)
@@ -401,7 +291,7 @@ def qualify_common_tracker(
     return {
         "accepted_g1_source_commit": ACCEPTED_G1_SOURCE_COMMIT,
         "tracker_symbol": "actions_toward_targets",
-        "tracker_source_sha256": common_tracker_source_digest(),
+        "tracker_source_sha256": oracle_evidence.common_tracker_source_digest(),
         "accepted_tracker_source_sha256": ACCEPTED_G1_TRACKER_SOURCE_SHA256,
         "shared_action_method_sha256": method_digests,
         "shared_action_method_identity": method_identity,
@@ -852,449 +742,28 @@ def target_map_to_dense(
     return targets, active
 
 
-@dataclass(frozen=True)
-class OracleSafetyDrawCoordinate:
-    physical_step: int
-    channel_update_ordinal: int
-    rng_operation: str
-    shape: tuple[int, ...]
-    dtype: str
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "physical_step": int(self.physical_step),
-            "channel_update_ordinal": int(self.channel_update_ordinal),
-            "rng_operation": str(self.rng_operation),
-            "shape": list(self.shape),
-            "dtype": str(self.dtype),
-        }
 
 
-@dataclass(frozen=True)
-class _NativeArrayEvidence:
-    dtype: str
-    shape: tuple[int, ...]
-    data_hex: str
-
-    @classmethod
-    def from_array(cls, value: Any) -> "_NativeArrayEvidence":
-        array = np.asarray(value)
-        return cls(
-            dtype=array.dtype.str,
-            shape=tuple(int(item) for item in array.shape),
-            data_hex=array.tobytes(order="C").hex(),
-        )
-
-    def array(self) -> np.ndarray:
-        dtype = np.dtype(self.dtype)
-        expected = int(np.prod(self.shape, dtype=np.int64)) * dtype.itemsize
-        raw = bytes.fromhex(self.data_hex)
-        if len(raw) != expected:
-            raise G0RealizationError("native array byte count does not match shape/dtype")
-        return np.frombuffer(raw, dtype=dtype).reshape(self.shape).copy()
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "dtype": self.dtype,
-            "shape": list(self.shape),
-            "data_hex": self.data_hex,
-        }
 
 
-@dataclass(frozen=True)
-class OracleGuardCapacityRead:
-    guarded_uav: int
-    node1_type: str
-    node1_idx: int
-    node2_type: str
-    node2_idx: int
-    capacity_dtype: str
-    capacity_hex: str
-
-    @classmethod
-    def from_value(
-        cls,
-        *,
-        guarded_uav: int,
-        node1_type: str,
-        node1_idx: int,
-        node2_type: str,
-        node2_idx: int,
-        value: Any,
-    ) -> "OracleGuardCapacityRead":
-        scalar = np.asarray(value)
-        if scalar.shape != () or not np.isfinite(scalar).all():
-            raise G0RealizationError("real guard returned a nonfinite link capacity")
-        return cls(
-            guarded_uav=int(guarded_uav),
-            node1_type=str(node1_type),
-            node1_idx=int(node1_idx),
-            node2_type=str(node2_type),
-            node2_idx=int(node2_idx),
-            capacity_dtype=scalar.dtype.str,
-            capacity_hex=scalar.tobytes().hex(),
-        )
-
-    def capacity(self) -> float:
-        dtype = np.dtype(self.capacity_dtype)
-        raw = bytes.fromhex(self.capacity_hex)
-        if len(raw) != dtype.itemsize:
-            raise G0RealizationError("guard capacity byte count drifted")
-        value = np.frombuffer(raw, dtype=dtype)[0]
-        if not np.isfinite(value):
-            raise G0RealizationError("guard capacity is nonfinite")
-        return float(value)
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "guarded_uav": int(self.guarded_uav),
-            "node1_type": self.node1_type,
-            "node1_idx": int(self.node1_idx),
-            "node2_type": self.node2_type,
-            "node2_idx": int(self.node2_idx),
-            "capacity_dtype": self.capacity_dtype,
-            "capacity_hex": self.capacity_hex,
-        }
 
 
-def _routing_paths_primitive(routing_paths: Mapping[Any, Any]) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    for source_index, value in routing_paths.items():
-        path, bottleneck = value
-        rows.append(
-            {
-                "source_uav": int(source_index),
-                "path": [[str(kind), int(index)] for kind, index in path],
-                "bottleneck_capacity_dtype": np.asarray(bottleneck).dtype.str,
-                "bottleneck_capacity_hex": np.asarray(bottleneck).tobytes().hex(),
-            }
-        )
-    return rows
 
 
-@dataclass(frozen=True)
-class OracleSafetyStepRecord:
-    physical_step: int
-    candidate_id: str
-    current_uav_positions: _NativeArrayEvidence
-    current_uav_velocities: _NativeArrayEvidence
-    current_service_mask: _NativeArrayEvidence
-    pre_action_context: Mapping[str, Any]
-    executed_service_mask: _NativeArrayEvidence
-    common_transducer_evidence: Mapping[str, Any]
-    raw_candidate_action: _NativeArrayEvidence
-    shared_channel_draw_coordinate: tuple[OracleSafetyDrawCoordinate, ...]
-    shared_channel_draw_block: tuple[str, ...]
-    connections: Mapping[str, _NativeArrayEvidence]
-    routing_paths: tuple[Mapping[str, Any], ...]
-    exact_link_capacity_values_read_by_the_real_guard: tuple[OracleGuardCapacityRead, ...]
-    real_guard_intervention_or_violation_output: Mapping[str, Any]
-    guarded_executed_action: _NativeArrayEvidence
-    next_uav_positions: _NativeArrayEvidence
-    next_uav_velocities: _NativeArrayEvidence
-
-    def to_primitive(self) -> dict[str, Any]:
-        value = {
-            "physical_step": int(self.physical_step),
-            "candidate_id": self.candidate_id,
-            "current_uav_positions": self.current_uav_positions.to_primitive(),
-            "current_uav_velocities": self.current_uav_velocities.to_primitive(),
-            "current_service_mask": self.current_service_mask.to_primitive(),
-            "pre_action_context": _json_safe(self.pre_action_context),
-            "executed_service_mask": self.executed_service_mask.to_primitive(),
-            "common_transducer_evidence": _json_safe(
-                self.common_transducer_evidence
-            ),
-            "raw_candidate_action": self.raw_candidate_action.to_primitive(),
-            "shared_channel_draw_coordinate": [
-                coordinate.to_primitive()
-                for coordinate in self.shared_channel_draw_coordinate
-            ],
-            "shared_channel_draw_block": list(self.shared_channel_draw_block),
-            "connections": {
-                key: item.to_primitive() for key, item in self.connections.items()
-            },
-            "routing_paths": [dict(item) for item in self.routing_paths],
-            "exact_link_capacity_values_read_by_the_real_guard": [
-                item.to_primitive()
-                for item in self.exact_link_capacity_values_read_by_the_real_guard
-            ],
-            "real_guard_intervention_or_violation_output": dict(
-                self.real_guard_intervention_or_violation_output
-            ),
-            "guarded_executed_action": self.guarded_executed_action.to_primitive(),
-            "next_uav_positions": self.next_uav_positions.to_primitive(),
-            "next_uav_velocities": self.next_uav_velocities.to_primitive(),
-        }
-        if set(value) != _ORACLE_SAFETY_ALLOWED_STEP_KEYS:
-            raise G0RealizationError("oracle safety step schema drifted")
-        return value
 
 
-@dataclass(frozen=True)
-class OracleCandidateSafetyTrace:
-    candidate_id: str
-    target_schedule_sha256: str
-    common_prestate_sha256: str
-    steps: tuple[OracleSafetyStepRecord, ...]
-    hard_violation_count: int
-    gate_arrival_time: int
-    gate_arrival_error: float
-    event_window_tracking_error: float
-    path_length: float
-    stage_coordinates: tuple[float, float]
-    trace_sha256: str
-
-    @property
-    def rank(self) -> tuple[float, ...]:
-        return (
-            float(self.hard_violation_count),
-            float(self.gate_arrival_time),
-            float(self.event_window_tracking_error),
-            float(self.path_length),
-            float(self.stage_coordinates[0]),
-            float(self.stage_coordinates[1]),
-        )
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "candidate_id": self.candidate_id,
-            "target_schedule_sha256": self.target_schedule_sha256,
-            "common_prestate_sha256": self.common_prestate_sha256,
-            "steps": [step.to_primitive() for step in self.steps],
-            "hard_violation_count": int(self.hard_violation_count),
-            "gate_arrival_time": int(self.gate_arrival_time),
-            "gate_arrival_error": float(self.gate_arrival_error),
-            "event_window_tracking_error": float(self.event_window_tracking_error),
-            "path_length": float(self.path_length),
-            "stage_coordinates": list(self.stage_coordinates),
-            "trace_sha256": self.trace_sha256,
-        }
 
 
-@dataclass(frozen=True)
-class OracleSafetyLedger:
-    source_sha256: str
-    common_prestate: Mapping[str, Any]
-    common_prestate_sha256: str
-    candidate_prestate_sha256: tuple[str, str]
-    channel_draw_schema: tuple[OracleSafetyDrawCoordinate, ...]
-    shared_channel_draw_blocks: tuple[str, ...]
-    candidates: tuple[OracleCandidateSafetyTrace, OracleCandidateSafetyTrace]
-    selected_candidate_id: str
-    selected_rank: tuple[float, ...]
-    shared_action_method_sha256: Mapping[str, str]
-    content_sha256: str
-
-    def to_primitive(self, *, include_digest: bool = True) -> dict[str, Any]:
-        value = {
-            "source_sha256": self.source_sha256,
-            "common_prestate": dict(self.common_prestate),
-            "common_prestate_sha256": self.common_prestate_sha256,
-            "candidate_prestate_sha256": list(self.candidate_prestate_sha256),
-            "channel_draw_schema": [item.to_primitive() for item in self.channel_draw_schema],
-            "shared_channel_draw_blocks": list(self.shared_channel_draw_blocks),
-            "candidates": [item.to_primitive() for item in self.candidates],
-            "selected_candidate_id": self.selected_candidate_id,
-            "selected_rank": list(self.selected_rank),
-            "shared_action_method_sha256": dict(self.shared_action_method_sha256),
-            "registration_order": [
-                "freeze_common_prestate",
-                "freeze_channel_draw_schema",
-                "materialize_shared_channel_tape",
-                "advance_each_candidate_once",
-                "seal_both_candidate_traces",
-                "rank_sealed_trace_keys_only",
-                "behavioral_service_after_selection",
-            ],
-            "K_search": K_SEARCH,
-            "physical_horizon": PHYSICAL_HORIZON,
-            "hypothetical_candidate_transitions": sum(
-                len(item.steps) for item in self.candidates
-            ),
-        }
-        if include_digest:
-            value["content_sha256"] = self.content_sha256
-        return value
 
 
-@dataclass(frozen=True)
-class OracleSafetyCertificate:
-    ledger_sha256: str
-    selected_candidate_id: str
-    candidate_trace_sha256: tuple[str, str]
-    behavioral_replay_sha256: str | None = None
-    return_ready_step: int | None = None
-    prefix_identity_ok: bool | None = None
-    branchpoint_identity_ok: bool | None = None
-    shared_ledger_identity_ok: bool | None = None
-    prebehavior_self_replay_ok: bool | None = None
-    behavioral_self_replay_ok: bool | None = None
-    target_switch_ok: bool | None = None
-    safety_guard_ok: bool | None = None
-    replay_ok: bool | None = None
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "ledger_sha256": self.ledger_sha256,
-            "selected_candidate_id": self.selected_candidate_id,
-            "candidate_trace_sha256": list(self.candidate_trace_sha256),
-            "behavioral_replay_sha256": self.behavioral_replay_sha256,
-            "return_ready_step": self.return_ready_step,
-            "prefix_identity_ok": self.prefix_identity_ok,
-            "branchpoint_identity_ok": self.branchpoint_identity_ok,
-            "shared_ledger_identity_ok": self.shared_ledger_identity_ok,
-            "prebehavior_self_replay_ok": self.prebehavior_self_replay_ok,
-            "behavioral_self_replay_ok": self.behavioral_self_replay_ok,
-            "target_switch_ok": self.target_switch_ok,
-            "safety_guard_ok": self.safety_guard_ok,
-            "replay_ok": self.replay_ok,
-        }
 
 
-_VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL = object()
 
 
-@dataclass(frozen=True, eq=False, init=False)
-class _ValidatedOracleSafetyContext:
-    """Call-local proof that one immutable ledger passed native reconstruction."""
-
-    source: G0EpisodeSource
-    ledger: OracleSafetyLedger
-    certificate: OracleSafetyCertificate
-    content_sha256: str
-    candidate_trace_sha256: tuple[str, str]
-    seal: object = field(repr=False, compare=False)
 
 
-@dataclass(frozen=True)
-class OracleBehavioralExecution:
-    """Safety-only projection of one causal selected-candidate execution."""
-
-    selected_candidate_id: str
-    return_ready_step: int | None
-    steps: tuple[OracleSafetyStepRecord, ...]
-    target_schedule: _NativeArrayEvidence
-    pre_action_weakest_service: _NativeArrayEvidence
-    trace_sha256: str
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "selected_candidate_id": self.selected_candidate_id,
-            "return_ready_step": self.return_ready_step,
-            "steps": [step.to_primitive() for step in self.steps],
-            "target_schedule": self.target_schedule.to_primitive(),
-            "pre_action_weakest_service": (
-                self.pre_action_weakest_service.to_primitive()
-            ),
-            "trace_sha256": self.trace_sha256,
-        }
 
 
-@dataclass(frozen=True)
-class OracleCandidateEvidence:
-    reserve_target: str
-    latest_departure: int
-    gate_arrival_time: int
-    gate_arrival_error: float
-    gate_arrival_roundoff_bound: float
-    hard_violation_count: int
-    event_window_tracking_error: float
-    path_length: float
-    stage_coordinates: tuple[float, float]
-    physical_steps_advanced: int
-    target_schedule_exact: bool
-    action_support_valid: bool
-    map_support_valid: bool
-    candidate_complete: bool
-    trace_sha256: str
-
-    @property
-    def rank(self) -> tuple[float, ...]:
-        return (
-            float(self.hard_violation_count),
-            float(self.gate_arrival_time),
-            float(self.event_window_tracking_error),
-            float(self.path_length),
-            float(self.stage_coordinates[0]),
-            float(self.stage_coordinates[1]),
-        )
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "reserve_target": self.reserve_target,
-            "latest_departure": int(self.latest_departure),
-            "gate_arrival_time": int(self.gate_arrival_time),
-            "gate_arrival_error": float(self.gate_arrival_error),
-            "gate_arrival_roundoff_bound": float(self.gate_arrival_roundoff_bound),
-            "hard_violation_count": int(self.hard_violation_count),
-            "event_window_tracking_error": float(self.event_window_tracking_error),
-            "path_length": float(self.path_length),
-            "stage_coordinates": list(self.stage_coordinates),
-            "physical_steps_advanced": int(self.physical_steps_advanced),
-            "target_schedule_exact": bool(self.target_schedule_exact),
-            "action_support_valid": bool(self.action_support_valid),
-            "map_support_valid": bool(self.map_support_valid),
-            "candidate_complete": bool(self.candidate_complete),
-            "trace_sha256": self.trace_sha256,
-        }
-
-
-@dataclass(frozen=True)
-class OracleQualificationCertificate:
-    candidates: tuple[OracleCandidateEvidence, OracleCandidateEvidence]
-    selected_reserve_target: str
-    selected_rank: tuple[float, ...]
-    both_candidates_evaluated: bool
-    exact_lexicographic_winner: bool
-    future_channel_read_count: int
-    future_service_read_count: int
-    unaffected_primary_move_creates_vacancy: bool
-    candidate_owner_is_reserve: bool
-    shared_dynamics_action_safety_identity: bool
-    candidate_count: int
-    complexity: str
-    nested_rollout: bool
-    replanning: bool
-    tree_search: bool
-    beam_search: bool
-    mcts: bool
-    adaptive_candidate_creation: bool
-    passed: bool
-    oracle_safety_ledger_sha256: str = ""
-    safety_certificate: OracleSafetyCertificate | None = None
-
-    def to_primitive(self) -> dict[str, Any]:
-        return {
-            "candidates": [candidate.to_primitive() for candidate in self.candidates],
-            "selected_reserve_target": self.selected_reserve_target,
-            "selected_rank": list(self.selected_rank),
-            "both_candidates_evaluated": self.both_candidates_evaluated,
-            "exact_lexicographic_winner": self.exact_lexicographic_winner,
-            "future_channel_read_count": self.future_channel_read_count,
-            "future_service_read_count": self.future_service_read_count,
-            "unaffected_primary_move_creates_vacancy": self.unaffected_primary_move_creates_vacancy,
-            "candidate_owner_is_reserve": self.candidate_owner_is_reserve,
-            "shared_dynamics_action_safety_identity": self.shared_dynamics_action_safety_identity,
-            "shared_action_method_sha256": shared_action_method_digests(),
-            "candidate_count": self.candidate_count,
-            "K_search": K_SEARCH,
-            "K_search_ceiling": K_SEARCH_CEILING,
-            "complexity": self.complexity,
-            "nested_rollout": self.nested_rollout,
-            "replanning": self.replanning,
-            "tree_search": self.tree_search,
-            "beam_search": self.beam_search,
-            "MCTS": self.mcts,
-            "adaptive_candidate_creation": self.adaptive_candidate_creation,
-            "oracle_safety_ledger_sha256": self.oracle_safety_ledger_sha256,
-            "safety_certificate": (
-                None
-                if self.safety_certificate is None
-                else self.safety_certificate.to_primitive()
-            ),
-            "passed": self.passed,
-        }
 
 
 def _scenario7_nominal_position_step(
@@ -1400,7 +869,7 @@ def certify_oracle_candidates(
     max_speed: float = 30.0,
     max_vertical_speed: float = 5.0,
     time_step: float = 1.0,
-) -> OracleQualificationCertificate:
+) -> oracle_evidence.OracleQualificationCertificate:
     """Evaluate exactly two sealed, shared-ledger, real-guard candidates."""
 
     if not (
@@ -1417,9 +886,9 @@ def certify_oracle_candidates(
 
 def validate_oracle_qualification(
     source: G0EpisodeSource,
-    certificate: OracleQualificationCertificate,
+    certificate: oracle_evidence.OracleQualificationCertificate,
     *,
-    safety_ledger: OracleSafetyLedger | None = None,
+    safety_ledger: oracle_evidence.OracleSafetyLedger | None = None,
     max_speed: float = 30.0,
     max_vertical_speed: float = 5.0,
     time_step: float = 1.0,
@@ -1442,8 +911,8 @@ def validate_oracle_qualification(
 
 
 def _validate_oracle_qualification_from_context(
-    certificate: OracleQualificationCertificate,
-    context: _ValidatedOracleSafetyContext,
+    certificate: oracle_evidence.OracleQualificationCertificate,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
 ) -> None:
     expected = _oracle_qualification_from_validated_context(context)
     if (
@@ -1456,7 +925,7 @@ def _validate_oracle_qualification_from_context(
 def _oracle_candidate_trace(
     source: G0EpisodeSource,
     reserve: TargetLabel,
-) -> tuple[OracleCandidateSafetyTrace, dict[str, Any]]:
+) -> tuple[oracle_evidence.OracleCandidateSafetyTrace, dict[str, Any]]:
     labels = TARGET_LABELS
     reserve_row = labels.index(reserve)
     owner_row = labels.index(source.event.owner_target)
@@ -1487,7 +956,7 @@ def _oracle_candidate_trace(
         prestate = _complete_oracle_prestate(env)
         prestate_sha256 = sha256_json(prestate)
         schedule_rows: list[list[list[float]]] = []
-        records: list[OracleSafetyStepRecord] = []
+        records: list[oracle_evidence.OracleSafetyStepRecord] = []
         path_length = 0.0
         tracking_error = 0.0
         arrival: int | None = None
@@ -1618,7 +1087,7 @@ def _oracle_candidate_trace(
         primitive_steps = [record.to_primitive() for record in records]
         trace_sha256 = sha256_json(primitive_steps)
         return (
-            OracleCandidateSafetyTrace(
+            oracle_evidence.OracleCandidateSafetyTrace(
                 candidate_id=reserve.key,
                 target_schedule_sha256=sha256_json(schedule_rows),
                 common_prestate_sha256=prestate_sha256,
@@ -1639,13 +1108,13 @@ def _oracle_candidate_trace(
 
 def _build_oracle_safety_ledger_with_context(
     source: G0EpisodeSource,
-) -> tuple[OracleSafetyLedger, _ValidatedOracleSafetyContext]:
+) -> tuple[oracle_evidence.OracleSafetyLedger, oracle_evidence._ValidatedOracleSafetyContext]:
     """Build and fully validate one immutable real-guard ledger."""
 
     reserves = tuple(
         label for label in TARGET_LABELS if label.kind is TargetKind.STAGE
     )
-    if len(reserves) != K_SEARCH:
+    if len(reserves) != oracle_evidence.K_SEARCH:
         raise G0RealizationError("oracle candidate inventory is not exactly two")
     first, first_prestate = _oracle_candidate_trace(source, reserves[0])
     second, second_prestate = _oracle_candidate_trace(source, reserves[1])
@@ -1657,7 +1126,7 @@ def _build_oracle_safety_ledger_with_context(
     ):
         raise G0RealizationError("oracle candidates did not start from a common prestate")
     selected = min((first, second), key=lambda candidate: candidate.rank)
-    provisional = OracleSafetyLedger(
+    provisional = oracle_evidence.OracleSafetyLedger(
         source_sha256=source.to_primitive()["sha256"],
         common_prestate=first_prestate,
         common_prestate_sha256=first_prestate_sha256,
@@ -1673,7 +1142,7 @@ def _build_oracle_safety_ledger_with_context(
         shared_action_method_sha256=oracle_safety_method_digests(),
         content_sha256="",
     )
-    ledger = OracleSafetyLedger(
+    ledger = oracle_evidence.OracleSafetyLedger(
         **{
             **provisional.__dict__,
             "content_sha256": sha256_json(
@@ -1684,7 +1153,7 @@ def _build_oracle_safety_ledger_with_context(
     return ledger, _validated_oracle_safety_context(source, ledger)
 
 
-def build_oracle_safety_ledger(source: G0EpisodeSource) -> OracleSafetyLedger:
+def build_oracle_safety_ledger(source: G0EpisodeSource) -> oracle_evidence.OracleSafetyLedger:
     """Build the immutable two-candidate, service-blind real-guard ledger."""
 
     ledger, _context = _build_oracle_safety_ledger_with_context(source)
@@ -1711,14 +1180,14 @@ def _forbidden_oracle_safety_key(value: Any, path: str = "") -> str | None:
 def _validate_record_branchpoint_and_transducer(
     source: G0EpisodeSource,
     common_prestate: Mapping[str, Any],
-    record: OracleSafetyStepRecord,
+    record: oracle_evidence.OracleSafetyStepRecord,
     *,
     selected_candidate_id: str,
     expected_target_positions: np.ndarray,
     expected_rng_state_bindings: Mapping[str, Any] | None = None,
     cell: Cell | str = Cell.EVENT,
 ) -> None:
-    context = _validate_pre_action_context_primitive(
+    context = oracle_evidence._validate_pre_action_context_primitive(
         record.pre_action_context
     )
     expected_context = _expected_pre_action_context(
@@ -1743,28 +1212,28 @@ def _validate_record_branchpoint_and_transducer(
         or not np.array_equal(context_mask, current_mask)
     ):
         raise G0RealizationError("executed service-mask evidence drifted")
-    transducer = _validate_common_transducer_evidence_primitive(
+    transducer = oracle_evidence._validate_common_transducer_evidence_primitive(
         record.common_transducer_evidence
     )
     if (
         not np.array_equal(
-            _native_array_from_primitive(
+            oracle_evidence._native_array_from_primitive(
                 transducer["physical_positions"]
             ).array(),
             record.current_uav_positions.array(),
         )
         or not np.array_equal(
-            _native_array_from_primitive(
+            oracle_evidence._native_array_from_primitive(
                 transducer["target_positions"]
             ).array(),
             np.asarray(expected_target_positions, dtype=np.float64),
         )
         or not np.array_equal(
-            _native_array_from_primitive(transducer["active_mask"]).array(),
+            oracle_evidence._native_array_from_primitive(transducer["active_mask"]).array(),
             executed_mask,
         )
         or not np.array_equal(
-            _native_array_from_primitive(transducer["raw_action"]).array(),
+            oracle_evidence._native_array_from_primitive(transducer["raw_action"]).array(),
             record.raw_candidate_action.array(),
         )
     ):
@@ -1775,7 +1244,7 @@ def _validate_record_branchpoint_and_transducer(
 
 def _validate_oracle_guard_transition_bindings(
     source: G0EpisodeSource,
-    candidates: Sequence[OracleCandidateSafetyTrace],
+    candidates: Sequence[oracle_evidence.OracleCandidateSafetyTrace],
     common_prestate: Mapping[str, Any],
 ) -> None:
     """Reconstruct the native guard/network chain without advancing an env step."""
@@ -1826,7 +1295,7 @@ def _validate_oracle_guard_transition_bindings(
                     raise G0RealizationError(
                         "oracle connection input is not bound to reconstructed native state"
                     )
-                if _routing_paths_primitive(environment.routing_paths) != sealed_routing:
+                if oracle_evidence._routing_paths_primitive(environment.routing_paths) != sealed_routing:
                     raise G0RealizationError(
                         "oracle routing input is not bound to reconstructed native state"
                     )
@@ -1983,8 +1452,8 @@ def _validate_oracle_guard_transition_bindings(
 
 def validate_oracle_safety_ledger(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
-) -> OracleSafetyCertificate:
+    ledger: oracle_evidence.OracleSafetyLedger,
+) -> oracle_evidence.OracleSafetyCertificate:
     """Reconstruct all admission facts from immutable primitive evidence."""
 
     if ledger.source_sha256 != source.to_primitive()["sha256"]:
@@ -2021,7 +1490,7 @@ def validate_oracle_safety_ledger(
     if not isinstance(common_rng_states, Mapping):
         raise G0RealizationError("oracle common prestate omitted RNG states")
     expected_rng_state_bindings = _rng_state_bindings(common_rng_states)
-    previous_candidates: list[OracleCandidateSafetyTrace] = []
+    previous_candidates: list[oracle_evidence.OracleCandidateSafetyTrace] = []
     for candidate in ledger.candidates:
         reserve = TargetLabel.parse(candidate.candidate_id)
         if reserve.kind is not TargetKind.STAGE:
@@ -2301,7 +1770,7 @@ def validate_oracle_safety_ledger(
         raise G0RealizationError("sealed candidate ranking was forged")
     if sum(len(candidate.steps) for candidate in ledger.candidates) > 2 * PHYSICAL_HORIZON:
         raise G0RealizationError("oracle candidate transition ceiling exceeded")
-    return OracleSafetyCertificate(
+    return oracle_evidence.OracleSafetyCertificate(
         ledger_sha256=ledger.content_sha256,
         selected_candidate_id=ledger.selected_candidate_id,
         candidate_trace_sha256=tuple(
@@ -2312,10 +1781,10 @@ def validate_oracle_safety_ledger(
 
 def _validated_oracle_safety_context(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
-) -> _ValidatedOracleSafetyContext:
+    ledger: oracle_evidence.OracleSafetyLedger,
+) -> oracle_evidence._ValidatedOracleSafetyContext:
     certificate = validate_oracle_safety_ledger(source, ledger)
-    context = object.__new__(_ValidatedOracleSafetyContext)
+    context = object.__new__(oracle_evidence._ValidatedOracleSafetyContext)
     values = {
         "source": source,
         "ledger": ledger,
@@ -2324,7 +1793,7 @@ def _validated_oracle_safety_context(
         "candidate_trace_sha256": tuple(
             candidate.trace_sha256 for candidate in ledger.candidates
         ),
-        "seal": _VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL,
+        "seal": oracle_evidence._VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL,
     }
     for name, value in values.items():
         object.__setattr__(context, name, value)
@@ -2332,11 +1801,11 @@ def _validated_oracle_safety_context(
 
 
 def _require_validated_oracle_safety_context(
-    context: _ValidatedOracleSafetyContext,
-) -> tuple[G0EpisodeSource, OracleSafetyLedger, OracleSafetyCertificate]:
+    context: oracle_evidence._ValidatedOracleSafetyContext,
+) -> tuple[G0EpisodeSource, oracle_evidence.OracleSafetyLedger, oracle_evidence.OracleSafetyCertificate]:
     if (
-        not isinstance(context, _ValidatedOracleSafetyContext)
-        or getattr(context, "seal", None) is not _VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL
+        not isinstance(context, oracle_evidence._ValidatedOracleSafetyContext)
+        or getattr(context, "seal", None) is not oracle_evidence._VALIDATED_ORACLE_SAFETY_CONTEXT_SEAL
     ):
         raise G0RealizationError("oracle safety context is not module-issued")
     source, ledger, certificate = (
@@ -2354,7 +1823,7 @@ def _require_validated_oracle_safety_context(
         != sha256_json(ledger.to_primitive(include_digest=False))
         or candidate_digests != context.candidate_trace_sha256
         or certificate
-        != OracleSafetyCertificate(
+        != oracle_evidence.OracleSafetyCertificate(
             ledger_sha256=ledger.content_sha256,
             selected_candidate_id=ledger.selected_candidate_id,
             candidate_trace_sha256=candidate_digests,
@@ -2365,15 +1834,15 @@ def _require_validated_oracle_safety_context(
 
 
 def _oracle_qualification_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
-) -> OracleQualificationCertificate:
+    context: oracle_evidence._ValidatedOracleSafetyContext,
+) -> oracle_evidence.OracleQualificationCertificate:
     source, ledger, safety_certificate = (
         _require_validated_oracle_safety_context(context)
     )
-    rows: list[OracleCandidateEvidence] = []
+    rows: list[oracle_evidence.OracleCandidateEvidence] = []
     for candidate in ledger.candidates:
         rows.append(
-            OracleCandidateEvidence(
+            oracle_evidence.OracleCandidateEvidence(
                 reserve_target=candidate.candidate_id,
                 latest_departure=int(source.event.onset)
                 - _minimum_tracker_travel_steps(
@@ -2410,12 +1879,12 @@ def _oracle_qualification_from_validated_context(
         )
     selected = min(rows, key=lambda item: item.rank)
     passed = bool(
-        len(rows) == K_SEARCH
+        len(rows) == oracle_evidence.K_SEARCH
         and all(row.candidate_complete for row in rows)
         and all(row.hard_violation_count == 0 for row in rows)
         and ledger.selected_candidate_id == selected.reserve_target
     )
-    return OracleQualificationCertificate(
+    return oracle_evidence.OracleQualificationCertificate(
         candidates=(rows[0], rows[1]),
         selected_reserve_target=selected.reserve_target,
         selected_rank=selected.rank,
@@ -2428,7 +1897,7 @@ def _oracle_qualification_from_validated_context(
         shared_dynamics_action_safety_identity=(
             dict(ledger.shared_action_method_sha256) == oracle_safety_method_digests()
         ),
-        candidate_count=K_SEARCH,
+        candidate_count=oracle_evidence.K_SEARCH,
         complexity="O(H*K_search)",
         nested_rollout=False,
         replanning=False,
@@ -2444,318 +1913,53 @@ def _oracle_qualification_from_validated_context(
 
 def oracle_qualification_from_safety_ledger(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
-) -> OracleQualificationCertificate:
+    ledger: oracle_evidence.OracleSafetyLedger,
+) -> oracle_evidence.OracleQualificationCertificate:
     return _oracle_qualification_from_validated_context(
         _validated_oracle_safety_context(source, ledger)
     )
 
 
-def _native_array_from_primitive(value: Any) -> _NativeArrayEvidence:
-    if not isinstance(value, Mapping) or set(value) != {"dtype", "shape", "data_hex"}:
-        raise G0RealizationError("native array primitive schema drifted")
-    evidence = _NativeArrayEvidence(
-        dtype=str(value["dtype"]),
-        shape=tuple(int(item) for item in value["shape"]),
-        data_hex=str(value["data_hex"]),
-    )
-    evidence.array()
-    return evidence
 
 
-def _draw_coordinate_from_primitive(value: Any) -> OracleSafetyDrawCoordinate:
-    expected = {
-        "physical_step",
-        "channel_update_ordinal",
-        "rng_operation",
-        "shape",
-        "dtype",
-    }
-    if not isinstance(value, Mapping) or set(value) != expected:
-        raise G0RealizationError("channel draw coordinate schema drifted")
-    return OracleSafetyDrawCoordinate(
-        physical_step=int(value["physical_step"]),
-        channel_update_ordinal=int(value["channel_update_ordinal"]),
-        rng_operation=str(value["rng_operation"]),
-        shape=tuple(int(item) for item in value["shape"]),
-        dtype=str(value["dtype"]),
-    )
 
 
-def _guard_read_from_primitive(value: Any) -> OracleGuardCapacityRead:
-    expected = {
-        "guarded_uav",
-        "node1_type",
-        "node1_idx",
-        "node2_type",
-        "node2_idx",
-        "capacity_dtype",
-        "capacity_hex",
-    }
-    if not isinstance(value, Mapping) or set(value) != expected:
-        raise G0RealizationError("guard capacity-read schema drifted")
-    result = OracleGuardCapacityRead(
-        guarded_uav=int(value["guarded_uav"]),
-        node1_type=str(value["node1_type"]),
-        node1_idx=int(value["node1_idx"]),
-        node2_type=str(value["node2_type"]),
-        node2_idx=int(value["node2_idx"]),
-        capacity_dtype=str(value["capacity_dtype"]),
-        capacity_hex=str(value["capacity_hex"]),
-    )
-    result.capacity()
-    return result
 
 
-def oracle_safety_step_from_primitive(value: Any) -> OracleSafetyStepRecord:
-    if not isinstance(value, Mapping) or set(value) != _ORACLE_SAFETY_ALLOWED_STEP_KEYS:
-        raise G0RealizationError("oracle safety step primitive schema drifted")
-    connections = value["connections"]
-    if not isinstance(connections, Mapping) or set(connections) != {
-        "user",
-        "uav",
-        "uav_bs",
-    }:
-        raise G0RealizationError("oracle native connections primitive drifted")
-    routing = value["routing_paths"]
-    if not isinstance(routing, list):
-        raise G0RealizationError("oracle routing primitive is not ordered")
-    return OracleSafetyStepRecord(
-        physical_step=int(value["physical_step"]),
-        candidate_id=str(value["candidate_id"]),
-        current_uav_positions=_native_array_from_primitive(
-            value["current_uav_positions"]
-        ),
-        current_uav_velocities=_native_array_from_primitive(
-            value["current_uav_velocities"]
-        ),
-        current_service_mask=_native_array_from_primitive(
-            value["current_service_mask"]
-        ),
-        pre_action_context=_validate_pre_action_context_primitive(
-            value["pre_action_context"]
-        ),
-        executed_service_mask=_native_array_from_primitive(
-            value["executed_service_mask"]
-        ),
-        common_transducer_evidence=_validate_common_transducer_evidence_primitive(
-            value["common_transducer_evidence"],
-            recompute=False,
-        ),
-        raw_candidate_action=_native_array_from_primitive(
-            value["raw_candidate_action"]
-        ),
-        shared_channel_draw_coordinate=tuple(
-            _draw_coordinate_from_primitive(item)
-            for item in value["shared_channel_draw_coordinate"]
-        ),
-        shared_channel_draw_block=tuple(
-            str(item) for item in value["shared_channel_draw_block"]
-        ),
-        connections={
-            str(key): _native_array_from_primitive(item)
-            for key, item in connections.items()
-        },
-        routing_paths=tuple(_json_safe(item) for item in routing),
-        exact_link_capacity_values_read_by_the_real_guard=tuple(
-            _guard_read_from_primitive(item)
-            for item in value[
-                "exact_link_capacity_values_read_by_the_real_guard"
-            ]
-        ),
-        real_guard_intervention_or_violation_output=_json_safe(
-            value["real_guard_intervention_or_violation_output"]
-        ),
-        guarded_executed_action=_native_array_from_primitive(
-            value["guarded_executed_action"]
-        ),
-        next_uav_positions=_native_array_from_primitive(
-            value["next_uav_positions"]
-        ),
-        next_uav_velocities=_native_array_from_primitive(
-            value["next_uav_velocities"]
-        ),
-    )
 
 
-def oracle_safety_trace_from_primitive(value: Any) -> OracleCandidateSafetyTrace:
-    expected = {
-        "candidate_id",
-        "target_schedule_sha256",
-        "common_prestate_sha256",
-        "steps",
-        "hard_violation_count",
-        "gate_arrival_time",
-        "gate_arrival_error",
-        "event_window_tracking_error",
-        "path_length",
-        "stage_coordinates",
-        "trace_sha256",
-    }
-    if not isinstance(value, Mapping) or set(value) != expected:
-        raise G0RealizationError("oracle candidate trace schema drifted")
-    return OracleCandidateSafetyTrace(
-        candidate_id=str(value["candidate_id"]),
-        target_schedule_sha256=str(value["target_schedule_sha256"]),
-        common_prestate_sha256=str(value["common_prestate_sha256"]),
-        steps=tuple(
-            oracle_safety_step_from_primitive(item) for item in value["steps"]
-        ),
-        hard_violation_count=int(value["hard_violation_count"]),
-        gate_arrival_time=int(value["gate_arrival_time"]),
-        gate_arrival_error=float(value["gate_arrival_error"]),
-        event_window_tracking_error=float(value["event_window_tracking_error"]),
-        path_length=float(value["path_length"]),
-        stage_coordinates=tuple(float(item) for item in value["stage_coordinates"]),
-        trace_sha256=str(value["trace_sha256"]),
-    )
 
 
-def oracle_behavioral_execution_from_primitive(
-    value: Any,
-) -> OracleBehavioralExecution:
-    expected = {
-        "selected_candidate_id",
-        "return_ready_step",
-        "steps",
-        "target_schedule",
-        "pre_action_weakest_service",
-        "trace_sha256",
-    }
-    if not isinstance(value, Mapping) or set(value) != expected:
-        raise G0RealizationError("oracle behavioral execution schema drifted")
-    return_ready = value["return_ready_step"]
-    if return_ready is not None:
-        return_ready = int(return_ready)
-        if not 0 <= return_ready < PHYSICAL_HORIZON:
-            raise G0RealizationError("RETURN_READY step is outside H")
-    result = OracleBehavioralExecution(
-        selected_candidate_id=str(value["selected_candidate_id"]),
-        return_ready_step=return_ready,
-        steps=tuple(
-            oracle_safety_step_from_primitive(item) for item in value["steps"]
-        ),
-        target_schedule=_native_array_from_primitive(value["target_schedule"]),
-        pre_action_weakest_service=_native_array_from_primitive(
-            value["pre_action_weakest_service"]
-        ),
-        trace_sha256=str(value["trace_sha256"]),
-    )
-    targets = result.target_schedule.array()
-    weakest = result.pre_action_weakest_service.array()
-    if targets.shape != (PHYSICAL_HORIZON, PHYSICAL_UAVS, 3):
-        raise G0RealizationError("behavioral target schedule shape drifted")
-    if weakest.shape != (PHYSICAL_HORIZON,) or not np.isfinite(weakest).all():
-        raise G0RealizationError("behavioral pre-action service evidence drifted")
-    expected_digest = sha256_json(
-        {
-            "selected_candidate_id": result.selected_candidate_id,
-            "return_ready_step": result.return_ready_step,
-            "steps": [step.to_primitive() for step in result.steps],
-            "target_schedule": result.target_schedule.to_primitive(),
-            "pre_action_weakest_service": (
-                result.pre_action_weakest_service.to_primitive()
-            ),
-        }
-    )
-    if result.trace_sha256 != expected_digest:
-        raise G0RealizationError("behavioral execution digest drifted")
-    return result
 
 
-def oracle_safety_ledger_from_primitive(value: Any) -> OracleSafetyLedger:
-    expected = {
-        "source_sha256",
-        "common_prestate",
-        "common_prestate_sha256",
-        "candidate_prestate_sha256",
-        "channel_draw_schema",
-        "shared_channel_draw_blocks",
-        "candidates",
-        "selected_candidate_id",
-        "selected_rank",
-        "shared_action_method_sha256",
-        "registration_order",
-        "K_search",
-        "physical_horizon",
-        "hypothetical_candidate_transitions",
-        "content_sha256",
-    }
-    if not isinstance(value, Mapping) or set(value) != expected:
-        raise G0RealizationError("oracle safety ledger primitive schema drifted")
-    if (
-        int(value["K_search"]) != K_SEARCH
-        or int(value["physical_horizon"]) != PHYSICAL_HORIZON
-        or int(value["hypothetical_candidate_transitions"])
-        > 2 * PHYSICAL_HORIZON
-    ):
-        raise G0RealizationError("oracle safety ledger complexity inventory drifted")
-    if list(value["registration_order"]) != [
-        "freeze_common_prestate",
-        "freeze_channel_draw_schema",
-        "materialize_shared_channel_tape",
-        "advance_each_candidate_once",
-        "seal_both_candidate_traces",
-        "rank_sealed_trace_keys_only",
-        "behavioral_service_after_selection",
-    ]:
-        raise G0RealizationError("oracle safety registration order drifted")
-    candidates = tuple(
-        oracle_safety_trace_from_primitive(item) for item in value["candidates"]
-    )
-    if len(candidates) != 2:
-        raise G0RealizationError("oracle safety ledger requires exactly two candidates")
-    return OracleSafetyLedger(
-        source_sha256=str(value["source_sha256"]),
-        common_prestate=_json_safe(value["common_prestate"]),
-        common_prestate_sha256=str(value["common_prestate_sha256"]),
-        candidate_prestate_sha256=tuple(
-            str(item) for item in value["candidate_prestate_sha256"]
-        ),
-        channel_draw_schema=tuple(
-            _draw_coordinate_from_primitive(item)
-            for item in value["channel_draw_schema"]
-        ),
-        shared_channel_draw_blocks=tuple(
-            str(item) for item in value["shared_channel_draw_blocks"]
-        ),
-        candidates=(candidates[0], candidates[1]),
-        selected_candidate_id=str(value["selected_candidate_id"]),
-        selected_rank=tuple(float(item) for item in value["selected_rank"]),
-        shared_action_method_sha256={
-            str(key): str(item)
-            for key, item in value["shared_action_method_sha256"].items()
-        },
-        content_sha256=str(value["content_sha256"]),
-    )
 
 
 def validate_oracle_safety_primitive(
     source: G0EpisodeSource,
     primitive: Mapping[str, Any],
-) -> OracleSafetyCertificate:
+) -> oracle_evidence.OracleSafetyCertificate:
     return validate_oracle_safety_ledger(
-        source, oracle_safety_ledger_from_primitive(primitive)
+        source, oracle_evidence.oracle_safety_ledger_from_primitive(primitive)
     )
 
 
 def validate_oracle_behavioral_replay(
-    ledger: OracleSafetyLedger,
-    registered_trace: Sequence[OracleSafetyStepRecord | Mapping[str, Any]],
-    replay_trace: Sequence[OracleSafetyStepRecord | Mapping[str, Any]],
-) -> OracleSafetyCertificate:
+    ledger: oracle_evidence.OracleSafetyLedger,
+    registered_trace: Sequence[oracle_evidence.OracleSafetyStepRecord | Mapping[str, Any]],
+    replay_trace: Sequence[oracle_evidence.OracleSafetyStepRecord | Mapping[str, Any]],
+) -> oracle_evidence.OracleSafetyCertificate:
     """Compare two independent selected-behavior safety projections byte-for-byte."""
 
     registered = tuple(
         record
-        if isinstance(record, OracleSafetyStepRecord)
-        else oracle_safety_step_from_primitive(record)
+        if isinstance(record, oracle_evidence.OracleSafetyStepRecord)
+        else oracle_evidence.oracle_safety_step_from_primitive(record)
         for record in registered_trace
     )
     replay = tuple(
         record
-        if isinstance(record, OracleSafetyStepRecord)
-        else oracle_safety_step_from_primitive(record)
+        if isinstance(record, oracle_evidence.OracleSafetyStepRecord)
+        else oracle_evidence.oracle_safety_step_from_primitive(record)
         for record in replay_trace
     )
     if len(registered) != PHYSICAL_HORIZON or len(replay) != PHYSICAL_HORIZON:
@@ -2785,7 +1989,7 @@ def validate_oracle_behavioral_replay(
             capacity.capacity()
         previous_next = next_positions
     digest = sha256_json([record.to_primitive() for record in registered])
-    return OracleSafetyCertificate(
+    return oracle_evidence.OracleSafetyCertificate(
         ledger_sha256=ledger.content_sha256,
         selected_candidate_id=ledger.selected_candidate_id,
         candidate_trace_sha256=tuple(
@@ -2796,8 +2000,8 @@ def validate_oracle_behavioral_replay(
 
 
 def _validate_branch_safety_trace(
-    ledger: OracleSafetyLedger,
-    records: Sequence[OracleSafetyStepRecord],
+    ledger: oracle_evidence.OracleSafetyLedger,
+    records: Sequence[oracle_evidence.OracleSafetyStepRecord],
 ) -> None:
     if len(records) != PHYSICAL_HORIZON:
         raise G0RealizationError("branch replay is not one complete H trajectory")
@@ -2853,7 +2057,7 @@ def _target_internal_row(target: TargetLabel | str) -> int:
 
 
 def _expected_behavioral_target_schedule(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
     return_ready_step: int | None,
 ) -> np.ndarray:
     source, ledger, _certificate = _require_validated_oracle_safety_context(
@@ -2903,8 +2107,8 @@ def _expected_behavioral_target_schedule(
 
 def _validate_behavioral_transducer_binding(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
-    execution: OracleBehavioralExecution,
+    ledger: oracle_evidence.OracleSafetyLedger,
+    execution: oracle_evidence.OracleBehavioralExecution,
     *,
     cell: Cell | str = Cell.EVENT,
 ) -> None:
@@ -2931,7 +2135,7 @@ def _validate_behavioral_transducer_binding(
 
 def _derive_return_ready_step(
     source: G0EpisodeSource,
-    execution: OracleBehavioralExecution,
+    execution: oracle_evidence.OracleBehavioralExecution,
 ) -> int | None:
     owner_storage = source.assignment.row_to_target.index(
         source.event.owner_target.key
@@ -2942,10 +2146,10 @@ def _derive_return_ready_step(
     )
     weakest = execution.pre_action_weakest_service.array()
     for step in range(source.event.rejoin + 1, PHYSICAL_HORIZON):
-        current_context = _validate_pre_action_context_primitive(
+        current_context = oracle_evidence._validate_pre_action_context_primitive(
             execution.steps[step].pre_action_context
         )
-        previous_context = _validate_pre_action_context_primitive(
+        previous_context = oracle_evidence._validate_pre_action_context_primitive(
             execution.steps[step - 1].pre_action_context
         )
         if (
@@ -2985,11 +2189,11 @@ def _derive_return_ready_step(
 
 
 def _validate_oracle_branch_aware_replay_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
-    prebehavior_self_replay: OracleCandidateSafetyTrace | Mapping[str, Any],
-    behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
-    behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
-) -> OracleSafetyCertificate:
+    context: oracle_evidence._ValidatedOracleSafetyContext,
+    prebehavior_self_replay: oracle_evidence.OracleCandidateSafetyTrace | Mapping[str, Any],
+    behavioral_execution: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+    behavioral_self_replay: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+) -> oracle_evidence.OracleSafetyCertificate:
     """Reconstruct the frozen prefix/branchpoint/post-R replay certificate."""
 
     source, ledger, _certificate = _require_validated_oracle_safety_context(
@@ -3002,17 +2206,17 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
     )
     prebehavior = (
         prebehavior_self_replay
-        if isinstance(prebehavior_self_replay, OracleCandidateSafetyTrace)
-        else oracle_safety_trace_from_primitive(prebehavior_self_replay)
+        if isinstance(prebehavior_self_replay, oracle_evidence.OracleCandidateSafetyTrace)
+        else oracle_evidence.oracle_safety_trace_from_primitive(prebehavior_self_replay)
     )
-    behavior = oracle_behavioral_execution_from_primitive(
+    behavior = oracle_evidence.oracle_behavioral_execution_from_primitive(
         behavioral_execution.to_primitive()
-        if isinstance(behavioral_execution, OracleBehavioralExecution)
+        if isinstance(behavioral_execution, oracle_evidence.OracleBehavioralExecution)
         else behavioral_execution
     )
-    behavior_replay = oracle_behavioral_execution_from_primitive(
+    behavior_replay = oracle_evidence.oracle_behavioral_execution_from_primitive(
         behavioral_self_replay.to_primitive()
-        if isinstance(behavioral_self_replay, OracleBehavioralExecution)
+        if isinstance(behavioral_self_replay, oracle_evidence.OracleBehavioralExecution)
         else behavioral_self_replay
     )
     if prebehavior.to_primitive() != selected.to_primitive():
@@ -3076,10 +2280,10 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
                 raise G0RealizationError("step-R pre-action branchpoint identity failed")
         pre_action = pre_record.raw_candidate_action.array()
         behavior_action = behavior_record.raw_candidate_action.array()
-        pre_transducer = _validate_common_transducer_evidence_primitive(
+        pre_transducer = oracle_evidence._validate_common_transducer_evidence_primitive(
             pre_record.common_transducer_evidence
         )
-        behavior_transducer = _validate_common_transducer_evidence_primitive(
+        behavior_transducer = oracle_evidence._validate_common_transducer_evidence_primitive(
             behavior_record.common_transducer_evidence
         )
         for name in (
@@ -3095,10 +2299,10 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
                 raise G0RealizationError(
                     "step-R common transducer pre-action inputs drifted"
                 )
-        pre_targets = _native_array_from_primitive(
+        pre_targets = oracle_evidence._native_array_from_primitive(
             pre_transducer["target_positions"]
         ).array()
-        behavior_targets = _native_array_from_primitive(
+        behavior_targets = oracle_evidence._native_array_from_primitive(
             behavior_transducer["target_positions"]
         ).array()
         unaffected = np.ones(PHYSICAL_UAVS, dtype=np.bool_)
@@ -3133,7 +2337,7 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
             raise G0RealizationError(
                 f"shared exogenous ledger differs at physical step {step}"
             )
-    return OracleSafetyCertificate(
+    return oracle_evidence.OracleSafetyCertificate(
         ledger_sha256=ledger.content_sha256,
         selected_candidate_id=ledger.selected_candidate_id,
         candidate_trace_sha256=tuple(
@@ -3153,23 +2357,23 @@ def _validate_oracle_branch_aware_replay_from_validated_context(
 
 
 def _validate_oracle_no_event_replay_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
-    behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
-    behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
-) -> OracleSafetyCertificate:
+    context: oracle_evidence._ValidatedOracleSafetyContext,
+    behavioral_execution: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+    behavioral_self_replay: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+) -> oracle_evidence.OracleSafetyCertificate:
     """Reconstruct the frozen Oracle Z row, for which causal R is absent."""
 
     source, ledger, _certificate = _require_validated_oracle_safety_context(
         context
     )
-    behavior = oracle_behavioral_execution_from_primitive(
+    behavior = oracle_evidence.oracle_behavioral_execution_from_primitive(
         behavioral_execution.to_primitive()
-        if isinstance(behavioral_execution, OracleBehavioralExecution)
+        if isinstance(behavioral_execution, oracle_evidence.OracleBehavioralExecution)
         else behavioral_execution
     )
-    behavior_replay = oracle_behavioral_execution_from_primitive(
+    behavior_replay = oracle_evidence.oracle_behavioral_execution_from_primitive(
         behavioral_self_replay.to_primitive()
-        if isinstance(behavioral_self_replay, OracleBehavioralExecution)
+        if isinstance(behavioral_self_replay, oracle_evidence.OracleBehavioralExecution)
         else behavioral_self_replay
     )
     if behavior.to_primitive() != behavior_replay.to_primitive():
@@ -3194,7 +2398,7 @@ def _validate_oracle_no_event_replay_from_validated_context(
     expected_targets = _expected_behavioral_target_schedule(context, None)
     if not np.array_equal(behavior.target_schedule.array(), expected_targets):
         raise G0RealizationError("oracle NO_EVENT fallback target schedule drifted")
-    return OracleSafetyCertificate(
+    return oracle_evidence.OracleSafetyCertificate(
         ledger_sha256=ledger.content_sha256,
         selected_candidate_id=ledger.selected_candidate_id,
         candidate_trace_sha256=tuple(
@@ -3215,11 +2419,11 @@ def _validate_oracle_no_event_replay_from_validated_context(
 
 def validate_oracle_branch_aware_replay(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
-    prebehavior_self_replay: OracleCandidateSafetyTrace | Mapping[str, Any],
-    behavioral_execution: OracleBehavioralExecution | Mapping[str, Any],
-    behavioral_self_replay: OracleBehavioralExecution | Mapping[str, Any],
-) -> OracleSafetyCertificate:
+    ledger: oracle_evidence.OracleSafetyLedger,
+    prebehavior_self_replay: oracle_evidence.OracleCandidateSafetyTrace | Mapping[str, Any],
+    behavioral_execution: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+    behavioral_self_replay: oracle_evidence.OracleBehavioralExecution | Mapping[str, Any],
+) -> oracle_evidence.OracleSafetyCertificate:
     return _validate_oracle_branch_aware_replay_from_validated_context(
         _validated_oracle_safety_context(source, ledger),
         prebehavior_self_replay,
@@ -3229,9 +2433,9 @@ def validate_oracle_branch_aware_replay(
 
 
 def _validate_oracle_branch_aware_replay_primitive_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
     primitive: Mapping[str, Any],
-) -> OracleSafetyCertificate:
+) -> oracle_evidence.OracleSafetyCertificate:
     _source, ledger, _safety_certificate = (
         _require_validated_oracle_safety_context(context)
     )
@@ -3265,9 +2469,9 @@ def _validate_oracle_branch_aware_replay_primitive_from_validated_context(
 
 def validate_oracle_branch_aware_replay_primitive(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+    ledger: oracle_evidence.OracleSafetyLedger,
     primitive: Mapping[str, Any],
-) -> OracleSafetyCertificate:
+) -> oracle_evidence.OracleSafetyCertificate:
     return _validate_oracle_branch_aware_replay_primitive_from_validated_context(
         _validated_oracle_safety_context(source, ledger), primitive
     )
@@ -3281,7 +2485,7 @@ def build_proof_episode_validity(
     """Proof-only public entry; derives validity rather than accepting a flag."""
 
     try:
-        ledger = oracle_safety_ledger_from_primitive(safety_primitive)
+        ledger = oracle_evidence.oracle_safety_ledger_from_primitive(safety_primitive)
         context = _validated_oracle_safety_context(source, ledger)
         replay_certificate = None
         if replay_primitive is not None:
@@ -3304,10 +2508,10 @@ def build_proof_episode_validity(
 
 
 def _build_proof_episode_validity_from_validated_evidence(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
     *,
     replay_primitive: Mapping[str, Any] | None,
-    replay_certificate: OracleSafetyCertificate | None,
+    replay_certificate: oracle_evidence.OracleSafetyCertificate | None,
 ) -> dict[str, Any]:
     _source, _ledger, certificate = (
         _require_validated_oracle_safety_context(context)
@@ -3352,10 +2556,10 @@ def analyze_proof_fixture(
 
 
 def _analyze_proof_fixture_from_validated_evidence(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
     *,
     replay_primitive: Mapping[str, Any],
-    replay_certificate: OracleSafetyCertificate,
+    replay_certificate: oracle_evidence.OracleSafetyCertificate,
 ) -> dict[str, Any]:
     reconstructed = _build_proof_episode_validity_from_validated_evidence(
         context,
@@ -3411,7 +2615,7 @@ def _random_state_primitive(random_state: np.random.RandomState) -> dict[str, An
     algorithm, keys, position, has_gauss, cached_gaussian = random_state.get_state()
     return {
         "algorithm": str(algorithm),
-        "keys": _NativeArrayEvidence.from_array(keys).to_primitive(),
+        "keys": oracle_evidence._NativeArrayEvidence.from_array(keys).to_primitive(),
         "position": int(position),
         "has_gauss": int(has_gauss),
         "cached_gaussian": float(cached_gaussian),
@@ -3422,7 +2626,7 @@ def _validate_random_state_primitive(value: Any) -> dict[str, Any]:
     expected = {"algorithm", "keys", "position", "has_gauss", "cached_gaussian"}
     if not isinstance(value, Mapping) or set(value) != expected:
         raise G0RealizationError("branchpoint RNG-state schema drifted")
-    keys = _native_array_from_primitive(value["keys"])
+    keys = oracle_evidence._native_array_from_primitive(value["keys"])
     key_array = keys.array()
     if (
         str(value["algorithm"]) != "MT19937"
@@ -3442,201 +2646,8 @@ def _validate_random_state_primitive(value: Any) -> dict[str, Any]:
     }
 
 
-def _validate_pre_action_context_primitive(value: Any) -> dict[str, Any]:
-    if not isinstance(value, Mapping) or set(value) != _PRE_ACTION_CONTEXT_KEYS:
-        raise G0RealizationError("branchpoint pre-action context schema drifted")
-    physical_step = int(value["physical_step"])
-    if not 0 <= physical_step < PHYSICAL_HORIZON:
-        raise G0RealizationError("branchpoint physical step is outside H")
-
-    lifecycle_value = value["lifecycle_owner_to_internal"]
-    if not isinstance(lifecycle_value, list) or len(lifecycle_value) != PHYSICAL_UAVS:
-        raise G0RealizationError("branchpoint lifecycle inventory is incomplete")
-    lifecycle: list[dict[str, Any]] = []
-    for item in lifecycle_value:
-        if not isinstance(item, Mapping) or set(item) != _LIFECYCLE_CONTEXT_ROW_KEYS:
-            raise G0RealizationError("branchpoint lifecycle row schema drifted")
-        label = TargetLabel.parse(str(item["owner_target"]))
-        row = {
-            "handle": str(item["handle"]),
-            "epoch": int(item["epoch"]),
-            "internal_row": int(item["internal_row"]),
-            "owner_target": label.key,
-        }
-        if not row["handle"] or row["epoch"] not in (0, 1):
-            raise G0RealizationError("branchpoint lifecycle identity is invalid")
-        lifecycle.append(row)
-    if (
-        [row["internal_row"] for row in lifecycle] != list(range(PHYSICAL_UAVS))
-        or len({row["handle"] for row in lifecycle}) != PHYSICAL_UAVS
-        or len({row["owner_target"] for row in lifecycle}) != PHYSICAL_UAVS
-    ):
-        raise G0RealizationError("branchpoint lifecycle ordering is ambiguous")
-
-    service_active_value = value["service_active_mask"]
-    if (
-        not isinstance(service_active_value, list)
-        or len(service_active_value) != PHYSICAL_UAVS
-        or any(type(item) is not bool for item in service_active_value)
-    ):
-        raise G0RealizationError("branchpoint service-active mask is incomplete")
-    service_active_mask = [bool(item) for item in service_active_value]
-
-    event_owner_handle = str(value["event_owner_handle"])
-    event_owner_epoch = int(value["event_owner_epoch"])
-    selected_reserve_handle = str(value["selected_reserve_handle"])
-    selected_target = TargetLabel.parse(
-        str(value["selected_reserve_original_target"])
-    )
-    if selected_target.kind is not TargetKind.STAGE:
-        raise G0RealizationError("branchpoint selected owner is not a reserve")
-    by_handle = {row["handle"]: row for row in lifecycle}
-    if (
-        event_owner_handle not in by_handle
-        or by_handle[event_owner_handle]["epoch"] != event_owner_epoch
-        or selected_reserve_handle not in by_handle
-        or by_handle[selected_reserve_handle]["owner_target"] != selected_target.key
-        or selected_reserve_handle == event_owner_handle
-    ):
-        raise G0RealizationError("branchpoint owner/epoch identity is inconsistent")
-
-    survivor_value = value["survivor_ownership"]
-    if not isinstance(survivor_value, list) or len(survivor_value) != 6:
-        raise G0RealizationError("branchpoint survivor-controller state is incomplete")
-    survivor: list[dict[str, Any]] = []
-    for item in survivor_value:
-        if not isinstance(item, Mapping) or set(item) != _LIFECYCLE_CONTEXT_ROW_KEYS:
-            raise G0RealizationError("branchpoint survivor row schema drifted")
-        canonical = {
-            "handle": str(item["handle"]),
-            "epoch": int(item["epoch"]),
-            "internal_row": int(item["internal_row"]),
-            "owner_target": TargetLabel.parse(str(item["owner_target"])).key,
-        }
-        if canonical not in lifecycle:
-            raise G0RealizationError("branchpoint survivor is not lifecycle-owned")
-        survivor.append(canonical)
-    expected_survivors = [
-        row
-        for row in lifecycle
-        if row["handle"] not in {event_owner_handle, selected_reserve_handle}
-    ]
-    if survivor != expected_survivors:
-        raise G0RealizationError("branchpoint survivor-controller ordering drifted")
-    if value["survivor_controller_rng_owners"] != []:
-        raise G0RealizationError("branchpoint controller unexpectedly owns RNG")
-
-    rng_value = value["non_controller_rng_states"]
-    if (
-        not isinstance(rng_value, Mapping)
-        or not rng_value
-        or list(rng_value) != sorted(str(key) for key in rng_value)
-    ):
-        raise G0RealizationError("branchpoint non-controller RNG inventory drifted")
-    rng_states: dict[str, dict[str, str]] = {}
-    for name, item in rng_value.items():
-        expected_binding_keys = {"state_source", "state_sha256"}
-        if not isinstance(item, Mapping) or set(item) != expected_binding_keys:
-            raise G0RealizationError("branchpoint RNG binding schema drifted")
-        state_source = str(item["state_source"])
-        state_sha256 = str(item["state_sha256"])
-        if (
-            state_source != f"common_prestate.rng_states/{name}"
-            or len(state_sha256) != 64
-            or any(character not in "0123456789abcdef" for character in state_sha256)
-        ):
-            raise G0RealizationError("branchpoint RNG binding is invalid")
-        rng_states[str(name)] = {
-            "state_source": state_source,
-            "state_sha256": state_sha256,
-        }
-    if "_channel_rng" not in rng_states:
-        raise G0RealizationError("branchpoint omitted the registered channel RNG")
-
-    cursor = value["channel_tape_cursor"]
-    if (
-        not isinstance(cursor, Mapping)
-        or set(cursor) != {"draw_ordinal", "coordinate_count", "block_count"}
-        or any(int(cursor[key]) != 0 for key in cursor)
-    ):
-        raise G0RealizationError("branchpoint channel-tape cursor is not empty")
-    return {
-        "physical_step": physical_step,
-        "lifecycle_owner_to_internal": lifecycle,
-        "service_active_mask": service_active_mask,
-        "event_owner_handle": event_owner_handle,
-        "event_owner_epoch": event_owner_epoch,
-        "selected_reserve_handle": selected_reserve_handle,
-        "selected_reserve_original_target": selected_target.key,
-        "survivor_ownership": survivor,
-        "survivor_controller_rng_owners": [],
-        "non_controller_rng_states": rng_states,
-        "channel_tape_cursor": {
-            "draw_ordinal": 0,
-            "coordinate_count": 0,
-            "block_count": 0,
-        },
-    }
 
 
-def _validate_common_transducer_evidence_primitive(
-    value: Any,
-    *,
-    recompute: bool = True,
-) -> dict[str, Any]:
-    if not isinstance(value, Mapping) or set(value) != _COMMON_TRANSDUCER_EVIDENCE_KEYS:
-        raise G0RealizationError("common transducer evidence schema drifted")
-    positions = _native_array_from_primitive(value["physical_positions"])
-    targets = _native_array_from_primitive(value["target_positions"])
-    active = _native_array_from_primitive(value["active_mask"])
-    raw = _native_array_from_primitive(value["raw_action"])
-    position_array = positions.array()
-    target_array = targets.array()
-    active_array = active.array()
-    raw_array = raw.array()
-    if (
-        str(value["transducer_source_sha256"]) != common_tracker_source_digest()
-        or str(value["row_order"]) != "target_owned_internal"
-        or position_array.shape != (PHYSICAL_UAVS, 3)
-        or position_array.dtype != np.dtype(np.float64)
-        or target_array.shape != (PHYSICAL_UAVS, 3)
-        or target_array.dtype != np.dtype(np.float64)
-        or active_array.shape != (PHYSICAL_UAVS,)
-        or active_array.dtype != np.dtype(np.bool_)
-        or raw_array.shape != (PHYSICAL_UAVS, ACTION_DIM)
-        or raw_array.dtype != np.dtype(np.float32)
-        or not np.isfinite(position_array).all()
-        or not np.isfinite(target_array).all()
-        or not np.isfinite(raw_array).all()
-        or float(value["max_speed"]) != 30.0
-        or float(value["max_vertical_speed"]) != 5.0
-        or float(value["time_step"]) != 1.0
-    ):
-        raise G0RealizationError("common transducer primitive is not frozen G1")
-    if recompute:
-        expected_raw = g1_common_target_actions(
-            physical_positions=position_array,
-            target_positions=target_array,
-            active_mask=active_array,
-            max_speed=30.0,
-            max_vertical_speed=5.0,
-            time_step=1.0,
-        )
-        if not np.array_equal(raw_array, expected_raw):
-            raise G0RealizationError(
-                "common transducer output is not independently recomputed"
-            )
-    return {
-        "transducer_source_sha256": common_tracker_source_digest(),
-        "row_order": "target_owned_internal",
-        "physical_positions": positions.to_primitive(),
-        "target_positions": targets.to_primitive(),
-        "active_mask": active.to_primitive(),
-        "raw_action": raw.to_primitive(),
-        "max_speed": 30.0,
-        "max_vertical_speed": 5.0,
-        "time_step": 1.0,
-    }
 
 
 def _common_transducer_evidence(
@@ -3646,20 +2657,20 @@ def _common_transducer_evidence(
     active_mask: np.ndarray,
     raw_action: np.ndarray,
 ) -> dict[str, Any]:
-    return _validate_common_transducer_evidence_primitive(
+    return oracle_evidence._validate_common_transducer_evidence_primitive(
         {
-            "transducer_source_sha256": common_tracker_source_digest(),
+            "transducer_source_sha256": oracle_evidence.common_tracker_source_digest(),
             "row_order": "target_owned_internal",
-            "physical_positions": _NativeArrayEvidence.from_array(
+            "physical_positions": oracle_evidence._NativeArrayEvidence.from_array(
                 np.asarray(physical_positions, dtype=np.float64)
             ).to_primitive(),
-            "target_positions": _NativeArrayEvidence.from_array(
+            "target_positions": oracle_evidence._NativeArrayEvidence.from_array(
                 np.asarray(target_positions, dtype=np.float64)
             ).to_primitive(),
-            "active_mask": _NativeArrayEvidence.from_array(
+            "active_mask": oracle_evidence._NativeArrayEvidence.from_array(
                 np.asarray(active_mask, dtype=np.bool_)
             ).to_primitive(),
-            "raw_action": _NativeArrayEvidence.from_array(
+            "raw_action": oracle_evidence._NativeArrayEvidence.from_array(
                 np.asarray(raw_action, dtype=np.float32)
             ).to_primitive(),
             "max_speed": 30.0,
@@ -3752,7 +2763,7 @@ def _make_pre_action_context(
             "block_count": 0,
         },
     }
-    return _validate_pre_action_context_primitive(context)
+    return oracle_evidence._validate_pre_action_context_primitive(context)
 
 
 def _pre_action_context(
@@ -3873,11 +2884,11 @@ def _expected_pre_action_context(
 
 def _candidate_state_value(value: Any, *, path: str) -> Any:
     if isinstance(value, np.ndarray):
-        return {"native_array": _NativeArrayEvidence.from_array(value).to_primitive()}
+        return {"native_array": oracle_evidence._NativeArrayEvidence.from_array(value).to_primitive()}
     if isinstance(value, np.random.RandomState):
         return {"random_state": _random_state_primitive(value)}
     if isinstance(value, np.random.Generator):
-        return {"generator_state": _json_safe(value.bit_generator.state)}
+        return {"generator_state": oracle_evidence._json_safe(value.bit_generator.state)}
     if isinstance(value, np.generic):
         return _candidate_state_value(value.item(), path=path)
     if isinstance(value, float) and not math.isfinite(value):
@@ -3958,31 +2969,31 @@ def _complete_oracle_prestate(env: "UAVSourceIdentifiabilityEnv") -> dict[str, A
         "cell": env.g0_cell.value,
         "current_step": int(env.current_step),
         "geometry": {
-            "uav_positions": _NativeArrayEvidence.from_array(env.uav_positions).to_primitive(),
-            "user_positions": _NativeArrayEvidence.from_array(env.user_positions).to_primitive(),
-            "ground_bs_positions": _NativeArrayEvidence.from_array(
+            "uav_positions": oracle_evidence._NativeArrayEvidence.from_array(env.uav_positions).to_primitive(),
+            "user_positions": oracle_evidence._NativeArrayEvidence.from_array(env.user_positions).to_primitive(),
+            "ground_bs_positions": oracle_evidence._NativeArrayEvidence.from_array(
                 env.ground_bs_positions
             ).to_primitive(),
         },
         "event": env.g0_source.event.to_primitive(),
-        "slot_permutation": _NativeArrayEvidence.from_array(
+        "slot_permutation": oracle_evidence._NativeArrayEvidence.from_array(
             env.g0_source.geometry.slot_to_target
         ).to_primitive(),
-        "service_mask": _NativeArrayEvidence.from_array(
+        "service_mask": oracle_evidence._NativeArrayEvidence.from_array(
             env._service_active_mask
         ).to_primitive(),
         "connections": {
-            "user": _NativeArrayEvidence.from_array(env.connections).to_primitive(),
-            "uav": _NativeArrayEvidence.from_array(env.uav_connections).to_primitive(),
-            "uav_bs": _NativeArrayEvidence.from_array(
+            "user": oracle_evidence._NativeArrayEvidence.from_array(env.connections).to_primitive(),
+            "uav": oracle_evidence._NativeArrayEvidence.from_array(env.uav_connections).to_primitive(),
+            "uav_bs": oracle_evidence._NativeArrayEvidence.from_array(
                 env.uav_bs_connections
             ).to_primitive(),
         },
-        "routing_paths": _routing_paths_primitive(env.routing_paths),
+        "routing_paths": oracle_evidence._routing_paths_primitive(env.routing_paths),
         "lifecycle_handles": list(env._handles),
-        "lifecycle_epochs": _NativeArrayEvidence.from_array(env._epochs).to_primitive(),
+        "lifecycle_epochs": oracle_evidence._NativeArrayEvidence.from_array(env._epochs).to_primitive(),
         "rng_states": rng_states,
-        "communication_config": _json_safe(env._communication_config_signature()),
+        "communication_config": oracle_evidence._json_safe(env._communication_config_signature()),
         "candidate_guard_transition_state_inventory": candidate_state_inventory,
         "candidate_guard_transition_state_names": sorted(
             candidate_state_inventory
@@ -4263,7 +3274,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         reads = getattr(self, "_oracle_guard_capacity_reads", None)
         if guarded_uav is not None and reads is not None:
             reads.append(
-                OracleGuardCapacityRead.from_value(
+                oracle_evidence.OracleGuardCapacityRead.from_value(
                     guarded_uav=int(guarded_uav),
                     node1_type=node1_type,
                     node1_idx=node1_idx,
@@ -4314,20 +3325,20 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             "positions": np.asarray(self.uav_positions).copy(),
             "velocities": np.asarray(self.last_actual_velocities).copy(),
             "service_mask": np.asarray(self._service_active_mask).copy(),
-            "pre_action_context": _json_safe(pre_action_context),
+            "pre_action_context": oracle_evidence._json_safe(pre_action_context),
             "executed_service_mask": np.asarray(
                 executed_service_mask, dtype=np.bool_
             ).copy(),
-            "common_transducer_evidence": _json_safe(
+            "common_transducer_evidence": oracle_evidence._json_safe(
                 common_transducer_evidence
             ),
             "raw_internal": np.asarray(raw_internal, dtype=np.float32).copy(),
             "connections": {
-                "user": _NativeArrayEvidence.from_array(self.connections),
-                "uav": _NativeArrayEvidence.from_array(self.uav_connections),
-                "uav_bs": _NativeArrayEvidence.from_array(self.uav_bs_connections),
+                "user": oracle_evidence._NativeArrayEvidence.from_array(self.connections),
+                "uav": oracle_evidence._NativeArrayEvidence.from_array(self.uav_connections),
+                "uav_bs": oracle_evidence._NativeArrayEvidence.from_array(self.uav_bs_connections),
             },
-            "routing_paths": tuple(_routing_paths_primitive(self.routing_paths)),
+            "routing_paths": tuple(oracle_evidence._routing_paths_primitive(self.routing_paths)),
             "guard_checked_before": int(
                 getattr(self, "backhaul_guard_checked_actions", 0)
             ),
@@ -4339,7 +3350,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
     def _finish_oracle_safety_capture(
         self,
         capture: Mapping[str, Any],
-    ) -> OracleSafetyStepRecord:
+    ) -> oracle_evidence.OracleSafetyStepRecord:
         reads = tuple(self._oracle_guard_capacity_reads)
         guarded = np.asarray(self._oracle_guarded_velocity_rows).copy()
         interventions = np.asarray(self._oracle_guard_interventions).copy()
@@ -4349,28 +3360,28 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         current = np.asarray(capture["positions"], dtype=np.float64)
         next_positions = np.asarray(self.uav_positions, dtype=np.float64).copy()
         velocities = (next_positions - current) / float(self.time_step)
-        return OracleSafetyStepRecord(
+        return oracle_evidence.OracleSafetyStepRecord(
             physical_step=int(capture["physical_step"]),
             candidate_id=str(capture["candidate_id"]),
-            current_uav_positions=_NativeArrayEvidence.from_array(current),
-            current_uav_velocities=_NativeArrayEvidence.from_array(
+            current_uav_positions=oracle_evidence._NativeArrayEvidence.from_array(current),
+            current_uav_velocities=oracle_evidence._NativeArrayEvidence.from_array(
                 capture["velocities"]
             ),
-            current_service_mask=_NativeArrayEvidence.from_array(
+            current_service_mask=oracle_evidence._NativeArrayEvidence.from_array(
                 capture["service_mask"]
             ),
-            pre_action_context=_validate_pre_action_context_primitive(
+            pre_action_context=oracle_evidence._validate_pre_action_context_primitive(
                 capture["pre_action_context"]
             ),
-            executed_service_mask=_NativeArrayEvidence.from_array(
+            executed_service_mask=oracle_evidence._NativeArrayEvidence.from_array(
                 capture["executed_service_mask"]
             ),
             common_transducer_evidence=(
-                _validate_common_transducer_evidence_primitive(
+                oracle_evidence._validate_common_transducer_evidence_primitive(
                     capture["common_transducer_evidence"]
                 )
             ),
-            raw_candidate_action=_NativeArrayEvidence.from_array(
+            raw_candidate_action=oracle_evidence._NativeArrayEvidence.from_array(
                 capture["raw_internal"]
             ),
             shared_channel_draw_coordinate=(),
@@ -4387,9 +3398,9 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
                 ),
                 "intervention_by_uav": interventions.tolist(),
             },
-            guarded_executed_action=_NativeArrayEvidence.from_array(guarded),
-            next_uav_positions=_NativeArrayEvidence.from_array(next_positions),
-            next_uav_velocities=_NativeArrayEvidence.from_array(velocities),
+            guarded_executed_action=oracle_evidence._NativeArrayEvidence.from_array(guarded),
+            next_uav_positions=oracle_evidence._NativeArrayEvidence.from_array(next_positions),
+            next_uav_velocities=oracle_evidence._NativeArrayEvidence.from_array(velocities),
         )
 
     def step_oracle_safety(
@@ -4400,7 +3411,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         ownership: Mapping[str, TargetLabel],
         pre_action_context: Mapping[str, Any],
         common_transducer_evidence: Mapping[str, Any],
-    ) -> OracleSafetyStepRecord:
+    ) -> oracle_evidence.OracleSafetyStepRecord:
         """Advance only physical/channel/routing safety state, never service/reward."""
 
         self._synchronize_service_mask()
@@ -4414,27 +3425,27 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         expected_context = _pre_action_context(
             self, ownership, str(candidate_id)
         )
-        actual_context = _validate_pre_action_context_primitive(
+        actual_context = oracle_evidence._validate_pre_action_context_primitive(
             pre_action_context
         )
         if actual_context != expected_context:
             raise G0RealizationError("oracle safety branchpoint context is stale")
-        transducer = _validate_common_transducer_evidence_primitive(
+        transducer = oracle_evidence._validate_common_transducer_evidence_primitive(
             common_transducer_evidence
         )
         if (
             not np.array_equal(
-                _native_array_from_primitive(
+                oracle_evidence._native_array_from_primitive(
                     transducer["physical_positions"]
                 ).array(),
                 np.asarray(self.uav_positions, dtype=np.float64),
             )
             or not np.array_equal(
-                _native_array_from_primitive(transducer["active_mask"]).array(),
+                oracle_evidence._native_array_from_primitive(transducer["active_mask"]).array(),
                 self._service_active_mask,
             )
             or not np.array_equal(
-                _native_array_from_primitive(transducer["raw_action"]).array(),
+                oracle_evidence._native_array_from_primitive(transducer["raw_action"]).array(),
                 dense,
             )
         ):
@@ -4532,29 +3543,29 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             expected_context = _pre_action_context(
                 self, oracle_ownership, str(behavioral_candidate)
             )
-            actual_context = _validate_pre_action_context_primitive(
+            actual_context = oracle_evidence._validate_pre_action_context_primitive(
                 oracle_pre_action_context
             )
             if actual_context != expected_context:
                 raise G0RealizationError("behavioral branchpoint context is stale")
-            transducer = _validate_common_transducer_evidence_primitive(
+            transducer = oracle_evidence._validate_common_transducer_evidence_primitive(
                 oracle_common_transducer_evidence
             )
             if (
                 not np.array_equal(
-                    _native_array_from_primitive(
+                    oracle_evidence._native_array_from_primitive(
                         transducer["physical_positions"]
                     ).array(),
                     np.asarray(self.uav_positions, dtype=np.float64),
                 )
                 or not np.array_equal(
-                    _native_array_from_primitive(
+                    oracle_evidence._native_array_from_primitive(
                         transducer["active_mask"]
                     ).array(),
                     executed_internal,
                 )
                 or not np.array_equal(
-                    _native_array_from_primitive(transducer["raw_action"]).array(),
+                    oracle_evidence._native_array_from_primitive(transducer["raw_action"]).array(),
                     dense_internal,
                 )
             ):
@@ -4646,8 +3657,8 @@ class MechanicallyQualifiedOracleController:
         self,
         source: G0EpisodeSource,
         handles: Sequence[str],
-        qualification: OracleQualificationCertificate,
-        safety_ledger: OracleSafetyLedger,
+        qualification: oracle_evidence.OracleQualificationCertificate,
+        safety_ledger: oracle_evidence.OracleSafetyLedger,
     ) -> None:
         validate_oracle_qualification(
             source, qualification, safety_ledger=safety_ledger
@@ -4658,8 +3669,8 @@ class MechanicallyQualifiedOracleController:
     def _from_validated_context(
         cls,
         handles: Sequence[str],
-        qualification: OracleQualificationCertificate,
-        context: _ValidatedOracleSafetyContext,
+        qualification: oracle_evidence.OracleQualificationCertificate,
+        context: oracle_evidence._ValidatedOracleSafetyContext,
     ) -> MechanicallyQualifiedOracleController:
         source, safety_ledger, _certificate = (
             _require_validated_oracle_safety_context(context)
@@ -4674,8 +3685,8 @@ class MechanicallyQualifiedOracleController:
         self,
         source: G0EpisodeSource,
         handles: Sequence[str],
-        qualification: OracleQualificationCertificate,
-        safety_ledger: OracleSafetyLedger,
+        qualification: oracle_evidence.OracleQualificationCertificate,
+        safety_ledger: oracle_evidence.OracleSafetyLedger,
     ) -> None:
         self.source = source
         self.geometry = G0ControllerGeometry.from_source(source)
@@ -4789,7 +3800,7 @@ class MechanicallyQualifiedOracleController:
             "return_ready_step": self._return_ready_step,
             "future_channel_read_count": 0,
             "future_service_selection_read_count": 0,
-            "candidate_count": K_SEARCH,
+            "candidate_count": oracle_evidence.K_SEARCH,
         }
 
 
@@ -4835,10 +3846,10 @@ def _canonical_controller_state(controller: Any) -> dict[str, Any]:
 
 
 def _build_selected_oracle_behavioral_execution_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
     *,
     cell: Cell | str = Cell.EVENT,
-) -> OracleBehavioralExecution:
+) -> oracle_evidence.OracleBehavioralExecution:
     """Execute one causal branch and retain only replay-certificate primitives."""
 
     source, ledger, _certificate = _require_validated_oracle_safety_context(
@@ -4941,10 +3952,10 @@ def _build_selected_oracle_behavioral_execution_from_validated_context(
         if pending_events:
             raise G0RealizationError("behavioral replay left lifecycle events pending")
         steps = tuple(env._oracle_behavioral_trace)
-        target_evidence = _NativeArrayEvidence.from_array(
+        target_evidence = oracle_evidence._NativeArrayEvidence.from_array(
             np.stack(target_rows).astype(np.float64, copy=False)
         )
-        weakest_evidence = _NativeArrayEvidence.from_array(
+        weakest_evidence = oracle_evidence._NativeArrayEvidence.from_array(
             np.asarray(weakest_rows, dtype=np.float64)
         )
         digest = sha256_json(
@@ -4956,7 +3967,7 @@ def _build_selected_oracle_behavioral_execution_from_validated_context(
                 "pre_action_weakest_service": weakest_evidence.to_primitive(),
             }
         )
-        return OracleBehavioralExecution(
+        return oracle_evidence.OracleBehavioralExecution(
             selected_candidate_id=ledger.selected_candidate_id,
             return_ready_step=controller._return_ready_step,
             steps=steps,
@@ -4970,10 +3981,10 @@ def _build_selected_oracle_behavioral_execution_from_validated_context(
 
 def _build_selected_oracle_behavioral_execution(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+    ledger: oracle_evidence.OracleSafetyLedger,
     *,
     cell: Cell | str = Cell.EVENT,
-) -> OracleBehavioralExecution:
+) -> oracle_evidence.OracleBehavioralExecution:
     return _build_selected_oracle_behavioral_execution_from_validated_context(
         _validated_oracle_safety_context(source, ledger), cell=cell
     )
@@ -4981,10 +3992,10 @@ def _build_selected_oracle_behavioral_execution(
 
 def build_selected_oracle_behavioral_replay(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+    ledger: oracle_evidence.OracleSafetyLedger,
     *,
     cell: Cell | str = Cell.EVENT,
-) -> tuple[OracleSafetyStepRecord, ...]:
+) -> tuple[oracle_evidence.OracleSafetyStepRecord, ...]:
     """Return the safety rows for one causal selected behavioral execution."""
 
     return _build_selected_oracle_behavioral_execution(
@@ -4993,7 +4004,7 @@ def build_selected_oracle_behavioral_replay(
 
 
 def _build_oracle_branch_aware_replay_evidence_from_validated_context(
-    context: _ValidatedOracleSafetyContext,
+    context: oracle_evidence._ValidatedOracleSafetyContext,
 ) -> dict[str, Any]:
     """Build the registered P/B self-replay package without reranking."""
 
@@ -5035,7 +4046,7 @@ def _build_oracle_branch_aware_replay_evidence_from_validated_context(
 
 def build_oracle_branch_aware_replay_evidence(
     source: G0EpisodeSource,
-    ledger: OracleSafetyLedger,
+    ledger: oracle_evidence.OracleSafetyLedger,
 ) -> dict[str, Any]:
     return _build_oracle_branch_aware_replay_evidence_from_validated_context(
         _validated_oracle_safety_context(source, ledger)
@@ -5229,16 +4240,16 @@ def run_g0_episode(
             selected_label = TargetLabel.parse(
                 controller.safety_ledger.selected_candidate_id
             )
-            target_evidence = _NativeArrayEvidence.from_array(
+            target_evidence = oracle_evidence._NativeArrayEvidence.from_array(
                 np.asarray(target_trace, dtype=np.float64)
             )
-            pre_action_weakest = _NativeArrayEvidence.from_array(
+            pre_action_weakest = oracle_evidence._NativeArrayEvidence.from_array(
                 weakest_hotspot_service(
                     np.stack(delivered_inputs), source.geometry.user_hotspots
                 )
             )
             actual_steps = tuple(env._oracle_behavioral_trace)
-            actual_execution = OracleBehavioralExecution(
+            actual_execution = oracle_evidence.OracleBehavioralExecution(
                 selected_candidate_id=controller.safety_ledger.selected_candidate_id,
                 return_ready_step=controller._return_ready_step,
                 steps=actual_steps,
@@ -5628,7 +4639,7 @@ def _validate_run_primitives(
         errors.append("registered_runtime_counter")
     if run.control is Control.ORACLE:
         try:
-            ledger = oracle_safety_ledger_from_primitive(
+            ledger = oracle_evidence.oracle_safety_ledger_from_primitive(
                 run.controller_evidence["oracle_safety_ledger"]
             )
             qualification = oracle_qualification_from_safety_ledger(source, ledger)
