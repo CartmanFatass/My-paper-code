@@ -9,10 +9,28 @@ import pytest
 
 from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_g0_controllers as controllers
+from ha_ctse_process import uav_g0_environment as g0_environment
 from ha_ctse_process import uav_g0_geometry as geometry
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as g0
+
+
+def test_environment_symbols_have_one_true_owner() -> None:
+    names = (
+        "G0Transition",
+        "UAVSourceIdentifiabilityEnv",
+        "_namespace_random_state",
+        "_random_state_primitive",
+        "_validate_random_state_primitive",
+        "_make_pre_action_context",
+        "_pre_action_context",
+        "_EmptyChannelDrawRandomState",
+    )
+    for name in names:
+        owned = getattr(g0_environment, name)
+        assert owned.__module__ == "ha_ctse_process.uav_g0_environment"
+        assert not hasattr(g0, name)
 
 
 def test_shared_episode_schema_exports_and_layout_are_exact() -> None:
@@ -722,7 +740,9 @@ def test_negative_latest_departure_fails_builder_and_validator(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     source = geometry.make_episode_source(0)
-    environment = g0.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
+    environment = g0_environment.UAVSourceIdentifiabilityEnv(
+        source, g0.Cell.EVENT
+    )
     try:
         environment.reset()
         prestate = g0._complete_oracle_prestate(environment)
@@ -1358,7 +1378,7 @@ def test_tampered_common_transducer_input_or_output_fails_closed(
 
 def test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries() -> None:
     source = geometry.make_episode_source(2)
-    env = g0.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
+    env = g0_environment.UAVSourceIdentifiabilityEnv(source, g0.Cell.EVENT)
     try:
         env.reset()
         owner = env.event_owner_row

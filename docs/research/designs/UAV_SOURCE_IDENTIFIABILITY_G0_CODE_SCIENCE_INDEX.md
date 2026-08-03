@@ -53,7 +53,8 @@ not record a scientific result and does not authorize the registered
 
 | Role | Path |
 |---|---|
-| Environment/controller/replay orchestration | `ha_ctse_process/uav_source_identifiability_g0.py` |
+| Environment dynamics, lifecycle, transition and channel-RNG state | `ha_ctse_process/uav_g0_environment.py` |
+| Oracle/controller/replay orchestration and result reconstruction | `ha_ctse_process/uav_source_identifiability_g0.py` |
 | Frozen geometry/source construction and common target action | `ha_ctse_process/uav_g0_geometry.py` |
 | Episode metrics, confidence calculations and first-match aggregation | `ha_ctse_process/uav_g0_statistics.py` |
 | Shared episode evidence schema | `ha_ctse_process/uav_episode_schema.py` |
@@ -70,12 +71,13 @@ outside this implementation boundary.
 
 All geometry/source-construction symbols in this section are owned by
 `ha_ctse_process/uav_g0_geometry.py`; current-information controller symbols
-are owned by `ha_ctse_process/uav_g0_controllers.py`; environment, oracle and
-replay symbols remain in `ha_ctse_process/uav_source_identifiability_g0.py`.
+are owned by `ha_ctse_process/uav_g0_controllers.py`; environment symbols are
+owned by `ha_ctse_process/uav_g0_environment.py`, while oracle and replay
+symbols remain in `ha_ctse_process/uav_source_identifiability_g0.py`.
 
 | Frozen clause | Implementing symbols | Reconstructed evidence | Focused guard |
 |---|---|---|---|
-| H=500; 8 UAV; 30 users; one centered BS; S7-S1; fixed altitude; battery/charging/failure/terminal-loss off | `PHYSICAL_HORIZON`, `UAVSourceIdentifiabilityEnv.__init__`, `step_dense` | exact inventory, map, backend flags, zero vertical actions and before/after altitude | `test_source_geometry_rng_assignment_and_support_are_exact`, `test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries` |
+| H=500; 8 UAV; 30 users; one centered BS; S7-S1; fixed altitude; battery/charging/failure/terminal-loss off | `uav_g0_environment.py::UAVSourceIdentifiabilityEnv.__init__`, `step_dense` | exact inventory, map, backend flags, zero vertical actions and before/after altitude | `test_source_geometry_rng_assignment_and_support_are_exact`, `test_environment_leave_and_rejoin_are_pre_action_epoch_boundaries` |
 | Uniform `phi`; three `.300L` hotspot centers; ten radius-uniform `.040L` users per hotspot | `_frozen_geometry_arrays`, `G0Geometry.__post_init__` | every array regenerated from episode ID and compared bitwise | source tamper test |
 | Six tangent primaries, two `.050L` stages, inward `.060L` gates, independent `.002L` perturbations | `_frozen_geometry_arrays`, `make_episode_source` | exact target/gate/initial arrays; no clipping/redraw | source geometry test |
 | Complete support inside `MAP` for every `phi in [0,2*pi)`, including hotspot/user disks, primary perturbation disks, staging perturbation disks and all gates | `geometry_support_certificate`, `G0Geometry.__post_init__`, `build_episode_validity_record` | analytic radial bounds and inward map-axis margins are reconstructed independently; sampled-phi success cannot authorize the source | universal-support and certificate-tamper tests; runner source-proof reconstruction |
@@ -105,10 +107,10 @@ G1 tracker digest drift.
 
 ## Controllers and oracle
 
-`ha_ctse_process/uav_source_identifiability_g0.py` imports the controller owner
-as a module and uses module-qualified references.  The controller owner imports
-only schema, geometry and statistics; there is no reverse source-module edge or
-compatibility re-export.
+`ha_ctse_process/uav_g0_environment.py` imports the controller owner as a module
+and uses module-qualified references. The source and runner import the
+environment owner as a module; the environment has no reverse source-module
+edge and the predecessor exposes no compatibility re-export.
 
 ### Same-information controller
 

@@ -47,6 +47,7 @@ torch.set_num_threads(1)
 torch.set_num_interop_threads(1)
 
 from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_environment as g0_environment
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
@@ -380,7 +381,9 @@ def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
     )
     if not isinstance(geometry_support_certificate, Mapping):
         raise RuntimeError("G0 universal geometry-support certificate is absent")
-    environment = source.UAVSourceIdentifiabilityEnv(episode, source.Cell.EVENT)
+    environment = g0_environment.UAVSourceIdentifiabilityEnv(
+        episode, source.Cell.EVENT
+    )
     try:
         production_shapes = {
             "uav_positions": list(np.asarray(environment.uav_positions).shape),

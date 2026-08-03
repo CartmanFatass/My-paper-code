@@ -13,6 +13,7 @@ import numpy as np
 from ha_ctse_process import uav_episode_serialization as episode_serialization
 from ha_ctse_process import uav_episode_schema as episode_schema
 from ha_ctse_process import uav_g0_geometry as geometry
+from ha_ctse_process import uav_g0_environment as g0_environment
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
@@ -44,6 +45,11 @@ def test_episode_serialization_import_is_source_independent() -> None:
         text=True,
     )
     assert completed.returncode == 0, completed.stderr
+
+
+def test_runner_imports_environment_true_owner() -> None:
+    assert runner.g0_environment is g0_environment
+    assert not hasattr(source, "UAVSourceIdentifiabilityEnv")
 
 
 def _load(path: Path) -> dict:
