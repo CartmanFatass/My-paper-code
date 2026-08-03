@@ -43,8 +43,6 @@ from ha_ctse_process.event_held_commitment_link import (
     make_rng_binding,
     batched_natural_and_permuted_action_tv,
     nested_state_maximum_difference,
-    optimize_update,
-    optimizer_ownership_manifest,
     owned_rng_states,
     parameter_and_optimizer_counts,
     replay_rng_schedule_end_state,
@@ -55,6 +53,11 @@ from ha_ctse_process.event_held_commitment_link import (
 )
 from ha_ctse_process.event_commitment_audit import audit_opportunities_batched
 from ha_ctse_process.event_commitment_collector import collect_trajectory
+from ha_ctse_process.event_commitment_optimizer import (
+    EVENT_ENTROPY_COEFFICIENT,
+    optimize_update,
+    optimizer_ownership_manifest,
+)
 from ha_ctse_process.event_commitment_replay import (
     replay_errors,
     replay_trajectory,
@@ -103,7 +106,6 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     PPO_PASSES,
     VALUE_COEFFICIENT,
     PRIMITIVE_ENTROPY_COEFFICIENT,
-    EVENT_ENTROPY_COEFFICIENT,
     PARAMETER_COUNT,
     make_rng,
     make_noncalendar_ledger,
