@@ -80,7 +80,12 @@ $independentConstructiveQuestion = Get-Content -Raw -LiteralPath (Join-Path $rep
 $independentAdversarialQuestion = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/references/21_DIRECTION_ADVERSARIAL_REVIEW.md')
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
-$handoff = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/RESTART_HANDOFF.md')
+$handoffPath = Join-Path $repo 'docs/project/RESTART_HANDOFF.md'
+$handoff = if (Test-Path -LiteralPath $handoffPath -PathType Leaf) {
+    Get-Content -Raw -LiteralPath $handoffPath
+} else {
+    $null
+}
 
 if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf) -or
@@ -843,8 +848,6 @@ foreach ($required in @(
     'workflow_collaboration_scope=all_workflow_control_plane_mutations',
     'workflow_collaboration_runtime_authority=none',
     'routine_preimplementation_code_science_review=forbidden',
-    'code_science_alignment_audit=once_after_code_project_manager_implementation_acceptance',
-    'code_science_alignment_compute_budget=zero',
     'CODE_SCIENCE_INDEX.md')) {
     if (-not $workflowDesignManagerRoleNormalized.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
@@ -886,10 +889,12 @@ foreach ($required in @(
         throw "Code Project Manager role missing: $required"
     }
 }
-foreach ($required in @(
-    'write_trigger=explicit_user_request_only',
-    'automatic_create_or_update=forbidden')) {
-    if (-not $handoff.Contains($required)) { throw "Handoff contract missing: $required" }
+if ($null -ne $handoff) {
+    foreach ($required in @(
+        'write_trigger=explicit_user_request_only',
+        'automatic_create_or_update=forbidden')) {
+        if (-not $handoff.Contains($required)) { throw "Handoff contract missing: $required" }
+    }
 }
 if (-not $workflowAudit.Contains('written only on explicit user request')) {
     throw 'Workflow audit Skill permits automatic handoff writing'

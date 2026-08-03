@@ -183,6 +183,8 @@ authority rules decide whether user input is required.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
+- Claude-side bounded helpers: `.claude/agents/`; each file is only a thin entry
+  profile for its shared `.agents/roles/` charter and adds no authority or procedure.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.
 - Cross-task messages use Codex-native `send_message_to_thread` with the current
   target task ID and no model or thinking override; the repository stores no route table.

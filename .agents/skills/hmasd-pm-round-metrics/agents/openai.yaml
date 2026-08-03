@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD PM Round Metrics"
-  short_description: "Measure PM workflow quality, cost, and elapsed time"
-  default_prompt: "Use $hmasd-pm-round-metrics to start or close one complete Project Manager workflow measurement."
