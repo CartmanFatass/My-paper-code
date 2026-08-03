@@ -10,6 +10,7 @@ import torch
 from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import variable_roster_event
+from ha_ctse_process import variable_roster_event_batching
 from ha_ctse_process import variable_roster_event_models
 from ha_ctse_process import variable_roster_event_support
 from ha_ctse_process.collectors import SyncEnvCollector
@@ -32,10 +33,10 @@ from ha_ctse_process.variable_roster_event import (
     TERMINAL_LEAVE,
     VariableRosterEventCore,
     apply_event_ppo_update,
-    batched_low_step,
     centered_logits,
     pack_event_ppo_data,
 )
+from ha_ctse_process.variable_roster_event_batching import batched_low_step
 from ha_ctse_process.variable_roster_event_types import (
     ActiveRoutingView,
     BoundaryMember,
@@ -103,6 +104,9 @@ def test_variable_roster_event_model_and_boundary_owners_are_one_way():
     )
     assert all(hasattr(variable_roster_event_models, name) for name in owner_names)
     assert not any(hasattr(variable_roster_event, name) for name in owner_names)
+    assert variable_roster_event_batching.batched_low_step is batched_low_step
+    assert not hasattr(variable_roster_event, "batched_low_step")
+    assert "variable_roster_event_batching" not in variable_roster_event.__dict__
     assert variable_roster_event_support.BOUNDARY_KINDS == (
         variable_roster_event_support.ORDINARY_BOUNDARY,
         variable_roster_event_support.ROLLOUT_TRUNCATION,

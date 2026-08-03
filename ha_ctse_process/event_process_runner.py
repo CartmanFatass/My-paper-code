@@ -201,7 +201,7 @@ def _evaluate_iteration5_spatial_model(
         SpatialDynamicRosterEventEnv,
     )
     from ha_ctse_process.collectors import SyncEnvCollector
-    from ha_ctse_process.variable_roster_event import batched_low_step
+    from ha_ctse_process.variable_roster_event_batching import batched_low_step
 
     persistent: list[float] = []
     short: list[float] = []
@@ -299,11 +299,11 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
     )
     from ha_ctse_process.variable_roster_event import (
         apply_event_ppo_update,
-        batched_low_step,
         event_model_only_checkpoint_payload,
         pack_event_ppo_data,
         vector_event_checkpoint_payload,
     )
+    from ha_ctse_process.variable_roster_event_batching import batched_low_step
     from ha_ctse_process.variable_roster_event_types import (
         event_action_hooks,
         lifecycle_boundary_hooks,

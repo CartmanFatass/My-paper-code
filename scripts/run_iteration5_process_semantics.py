@@ -55,7 +55,8 @@ from ha_ctse_process.standalone_event_support import (
     _make_event_model_owner,
     _make_event_runtime,
 )
-from ha_ctse_process.variable_roster_event import batched_low_step, make_pcg64_rng
+from ha_ctse_process.variable_roster_event import make_pcg64_rng
+from ha_ctse_process.variable_roster_event_batching import batched_low_step
 
 
 FORMAL_NUM_ENVS = 16

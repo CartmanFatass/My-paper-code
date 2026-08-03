@@ -45,13 +45,13 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
     from ha_ctse_process.variable_roster_event import (
         EVENT_ARCHITECTURE_SCHEMA_VERSION,
         apply_event_ppo_update,
-        batched_low_step,
         event_model_only_checkpoint_payload,
         pack_event_ppo_data,
         restore_event_model_only_checkpoint,
         restore_vector_event_checkpoint,
         vector_event_checkpoint_payload,
     )
+    from ha_ctse_process.variable_roster_event_batching import batched_low_step
 
     enforce_variable_roster_event_resume_boundary(config, args)
     if normalize_scenario(str(getattr(config, "scenario", ""))) != (

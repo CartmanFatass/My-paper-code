@@ -35,9 +35,9 @@ from ha_ctse_process.dynamic_roster_supplied_executor import (
 from ha_ctse_process.variable_roster_event import (
     SUPPLIED_EXECUTOR_RUNTIME,
     apply_event_ppo_update,
-    batched_low_step,
     pack_event_ppo_data,
 )
+from ha_ctse_process.variable_roster_event_batching import batched_low_step
 from scripts.run_clean_process_supplied_executor_high_path import (
     run_supplied_executor_qualification,
 )
