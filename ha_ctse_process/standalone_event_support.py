@@ -590,7 +590,7 @@ def _forced_event_snapshot_effects(
         PERSIST,
         SHORT,
     )
-    from ha_ctse_process.variable_roster_event import make_pcg64_rng
+    from ha_ctse_process.variable_roster_event_support import make_pcg64_rng
 
     if int(core.physical_time) <= 0 or int(core.physical_time) > 68:
         raise ValueError("forced audit snapshot must allow exactly 12 future steps")

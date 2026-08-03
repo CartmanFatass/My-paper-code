@@ -65,6 +65,19 @@ def test_event_support_cluster_has_one_concrete_owner() -> None:
         if isinstance(node, ast.ImportFrom)
     }
     assert "ha_ctse_process.train" not in imported_modules
+    forced_snapshot_effects = next(
+        node
+        for node in support_tree.body
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "_forced_event_snapshot_effects"
+    )
+    forced_snapshot_imports = {
+        str(node.module)
+        for node in ast.walk(forced_snapshot_effects)
+        if isinstance(node, ast.ImportFrom)
+    }
+    assert "ha_ctse_process.variable_roster_event" not in forced_snapshot_imports
+    assert "ha_ctse_process.variable_roster_event_support" in forced_snapshot_imports
 
 
 @dataclass(frozen=True)
