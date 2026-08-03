@@ -20,6 +20,7 @@ from torch import nn
 import torch.nn.functional as F
 
 from hmasd.r_mappo_utils import ACTLayer, MLPBase, RNNLayer, check
+from ha_ctse_process import variable_roster_event_support
 from ha_ctse_process.variable_roster_event_types import (
     ActiveRoutingView,
     BatchedLowStepResult,
@@ -111,46 +112,6 @@ BOUNDARY_KINDS = (
 )
 
 
-def _state_dict_shapes(module: nn.Module) -> dict[str, tuple[int, ...]]:
-    return {name: tuple(tensor.shape) for name, tensor in module.state_dict().items()}
-
-
-def parameter_count(module: nn.Module) -> int:
-    return int(sum(parameter.numel() for parameter in module.parameters()))
-
-
-def normalized_log_age(ages: torch.Tensor) -> torch.Tensor:
-    return torch.log1p(torch.clamp(ages.float(), min=0.0)) / math.log1p(
-        float(AGE_REFERENCE_STEPS)
-    )
-
-
-def make_pcg64_rng(master_seed: int, episode_id: int, stream_id: int) -> np.random.Generator:
-    """Construct one frozen ledger stream without folding or secondary seeding."""
-
-    return np.random.Generator(
-        np.random.PCG64(
-            np.random.SeedSequence(
-                [int(master_seed), int(episode_id), int(stream_id)]
-            )
-        )
-    )
-
-
-def inverse_cdf_action(probabilities: np.ndarray, uniform: float) -> int:
-    values = np.asarray(probabilities, dtype=np.float64).reshape(-1)
-    if values.size <= 0 or not np.isfinite(values).all() or np.any(values < 0.0):
-        raise ValueError("categorical probabilities are invalid")
-    total = float(values.sum())
-    if not np.isfinite(total) or total <= 0.0:
-        raise ValueError("categorical probability mass must be positive")
-    normalized = values / total
-    draw = float(uniform)
-    if not 0.0 <= draw < 1.0:
-        raise ValueError("inverse-CDF uniform must lie in [0,1)")
-    return min(int(np.searchsorted(np.cumsum(normalized), draw, side="right")), values.size - 1)
-
-
 class EventCommitmentPolicy(nn.Module):
     """One parameter graph used by both F0 and F1."""
 
@@ -220,7 +181,7 @@ class EventCommitmentPolicy(nn.Module):
             (
                 observations,
                 skill_features,
-                normalized_log_age(ages).unsqueeze(-1),
+                variable_roster_event_support.normalized_log_age(ages).unsqueeze(-1),
                 event_flags.to(dtype=torch.float32),
             ),
             dim=-1,
@@ -336,7 +297,9 @@ class EventHighCritic(nn.Module):
             (
                 critic_member_features.float(),
                 skill_features,
-                normalized_log_age(ages.float().reshape(-1)).unsqueeze(-1),
+                variable_roster_event_support.normalized_log_age(
+                    ages.float().reshape(-1)
+                ).unsqueeze(-1),
                 flags.to(dtype=torch.float32),
             ),
             dim=-1,
@@ -479,7 +442,7 @@ class EventLowActor(nn.Module):
                     raise ValueError("event low sampling-uniform shape mismatch")
                 probability_rows = distribution.probs.detach().cpu().numpy()
                 sampled = [
-                    inverse_cdf_action(probability, uniform)
+                    variable_roster_event_support.inverse_cdf_action(probability, uniform)
                     for probability, uniform in zip(probability_rows, uniforms)
                 ]
                 actions = torch.as_tensor(
@@ -888,17 +851,17 @@ class VariableRosterEventCore:
         self.low_chunk_boundaries: list[dict[str, Any]] = []
         self.current_observation_state_boundary: dict[str, Any] | None = None
         self.pending_membership_transaction: Any = None
-        self.opportunity_rng = make_pcg64_rng(
+        self.opportunity_rng = variable_roster_event_support.make_pcg64_rng(
             self.opportunity_master_seed,
             self.rng_episode_id,
             self.opportunity_stream_id,
         )
-        self.frontier_rng = make_pcg64_rng(
+        self.frontier_rng = variable_roster_event_support.make_pcg64_rng(
             self.frontier_master_seed,
             self.rng_episode_id,
             self.frontier_stream_id,
         )
-        self.action_rng = make_pcg64_rng(
+        self.action_rng = variable_roster_event_support.make_pcg64_rng(
             self.action_master_seed,
             self.rng_episode_id,
             self.action_stream_id,
@@ -906,15 +869,23 @@ class VariableRosterEventCore:
 
     def model_signature(self) -> dict[str, dict[str, tuple[int, ...]]]:
         return {
-            "commitment_model": _state_dict_shapes(self.commitment_model),
-            "event_critic": _state_dict_shapes(self.event_critic),
-            "low_actor": _state_dict_shapes(self.low_actor),
-            "low_critic": _state_dict_shapes(self.low_critic),
+            "commitment_model": variable_roster_event_support._state_dict_shapes(
+                self.commitment_model
+            ),
+            "event_critic": variable_roster_event_support._state_dict_shapes(
+                self.event_critic
+            ),
+            "low_actor": variable_roster_event_support._state_dict_shapes(
+                self.low_actor
+            ),
+            "low_critic": variable_roster_event_support._state_dict_shapes(
+                self.low_critic
+            ),
         }
 
     def model_parameter_count(self) -> int:
         return sum(
-            parameter_count(module)
+            variable_roster_event_support.parameter_count(module)
             for module in (
                 self.commitment_model,
                 self.event_critic,
@@ -1410,7 +1381,7 @@ class VariableRosterEventCore:
                 action = int(torch.argmax(masked_logits).item())
             else:
                 policy_action_uniform = float(self.action_rng.random())
-                action = inverse_cdf_action(
+                action = variable_roster_event_support.inverse_cdf_action(
                     torch.softmax(masked_logits.detach(), dim=-1).cpu().numpy(),
                     policy_action_uniform,
                 )

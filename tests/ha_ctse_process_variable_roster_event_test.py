@@ -9,6 +9,7 @@ import torch
 
 from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import checkpoint_io
+from ha_ctse_process import variable_roster_event_support
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process.r30_fixed_clock import FixedClockAREditPolicy
 from ha_ctse_process.standalone_contracts import (
@@ -58,6 +59,32 @@ FEATURES = {
     "x": (np.array([0.1, 0.2, 0.3]), np.array([0.5, -0.2])),
     "y": (np.array([-0.4, 0.6, 0.2]), np.array([-0.1, 0.7])),
 }
+
+
+def test_variable_roster_event_support_owns_stateless_helpers():
+    module = torch.nn.Sequential(torch.nn.Linear(2, 3), torch.nn.Linear(3, 1))
+    assert list(variable_roster_event_support._state_dict_shapes(module).items()) == [
+        (name, tuple(tensor.shape)) for name, tensor in module.state_dict().items()
+    ]
+    assert variable_roster_event_support.parameter_count(module) == sum(
+        parameter.numel() for parameter in module.parameters()
+    )
+    assert torch.equal(
+        variable_roster_event_support.normalized_log_age(torch.tensor([-4, 0, 499])),
+        torch.log1p(torch.tensor([0.0, 0.0, 499.0])) / math.log1p(500.0),
+    )
+
+    expected_rng = np.random.Generator(
+        np.random.PCG64(np.random.SeedSequence([17, 3, 11]))
+    )
+    actual_rng = variable_roster_event_support.make_pcg64_rng(17, 3, 11)
+    assert np.array_equal(actual_rng.random(5), expected_rng.random(5))
+    assert variable_roster_event_support.inverse_cdf_action([1.0, 3.0], 0.249) == 0
+    assert variable_roster_event_support.inverse_cdf_action([1.0, 3.0], 0.25) == 1
+    with pytest.raises(ValueError, match="probabilities are invalid"):
+        variable_roster_event_support.inverse_cdf_action([-1.0, 2.0], 0.5)
+    with pytest.raises(ValueError, match=r"\[0,1\)"):
+        variable_roster_event_support.inverse_cdf_action([1.0], 1.0)
 
 
 def make_core(
