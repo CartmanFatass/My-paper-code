@@ -136,7 +136,7 @@ def _validate_execution_binding(
         raise ReadinessError("execution_support_paths do not equal the approved readiness bridge")
     if source_commit == execution_commit:
         raise ReadinessError(
-            "source_commit and execution_commit must be distinct and joined by the nonempty approved readiness bridge"
+            "source_commit and execution_commit must be distinct and linked by the nonempty approved readiness bridge"
         )
     if set(exact_paths).intersection(execution_support_paths):
         raise ReadinessError("accepted paths overlap execution_support_paths")
