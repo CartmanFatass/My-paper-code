@@ -32,7 +32,11 @@ public_handoff_git_authority=none
 public_handoff_admission=semantic_judgment_no_mandatory_schema
 project_validation_instruction_authority=authorize_cpm_named_treatment_execution
 project_validation_read_authority=project_wide_read_only_as_needed
-project_validation_semantic_acceptance=exclusive_for_explorer_origin_treatment_conformance
+project_validation_semantic_acceptance_owner=external_pro
+project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin
+project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
+project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_and_remote_locator_return
+project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance
 project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
@@ -148,13 +152,15 @@ missing, it states what is known and helps resolve any scientific choice CPM
 cannot determine; CPM constructs or binds engineering objects rather than
 turning their absence into a workflow blocker.
 
-After CPM returns a result, Explorer may inspect project code, tests,
-configuration, design documents and runtime evidence as needed; CPM's named
-entry paths are navigation aids rather than a read allow-list. Explorer accepts or rejects scientific-semantic conformance to
-its selected treatment and explains any mismatch; CPM remains the sole code and
-runtime technical acceptance owner. This advisory request cannot adopt a
-project direction beyond that named instruction, contact
-External Pro or make an unrelated canonical scientific decision.
+After CPM technically accepts and pushes a result, it returns the exact commit
+and public GitHub repository/path locators. Explorer may inspect project material
+read-only as needed, then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it
+through the dedicated Agentify transport task, and archives and intakes the raw
+answer. External Pro uses the GitHub connection to inspect that exact pushed
+revision and owns final scientific-semantic acceptance; Explorer never
+substitutes its own acceptance. CPM remains the sole code and runtime technical
+acceptance owner. This advisory request cannot adopt a project direction beyond
+that named instruction or make an unrelated canonical scientific decision.
 Candidate isolation and supplied order organize the work without becoming
 admission states, ranking or cross-direction competition.
 

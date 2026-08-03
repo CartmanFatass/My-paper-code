@@ -109,9 +109,11 @@ foreach ($required in @(
     'explorer_public_handoff_git_authority=none',
     'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
     'explorer_treatment_substitution_authority=none',
-    'explorer_external_pro_route=explicit_review_request_only',
+    'explorer_acceptance_review_route=explorer_to_agentify_after_cpm_technical_acceptance',
     'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation',
-    'explorer_result_semantic_acceptance_owner=independent_research_explorer',
+    'explorer_result_semantic_acceptance_owner=external_pro',
+    'explorer_acceptance_review_request_authority=none',
+    'explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators',
     'The brief''s explicit instruction authorizes CPM to execute its named treatment',
     'resolve missing objects through direct semantic exchange',
     'When implementation derives from a submitted External Pro review',
@@ -127,7 +129,9 @@ foreach ($required in @(
     'Explorer gives one clear instruction naming implementation, instance binding',
     'without separate code or experiment permission fields',
     'does not reject a handoff because of formatting or a missing object',
-    'accepts or rejects scientific-semantic conformance',
+    'External Pro uses the GitHub connection to inspect the exact pushed revision',
+    'Explorer never substitutes its own acceptance',
+    'The review starts only after CPM technical acceptance and push',
     'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Explorer validation contract missing semantic rule: $required"

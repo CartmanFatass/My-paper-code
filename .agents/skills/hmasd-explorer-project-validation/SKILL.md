@@ -7,8 +7,9 @@ description: Use for one semantic Explorer-to-project handoff through the shared
 
 This Skill is the lightweight collaboration path from Independent Research
 Explorer to Code Project Manager. It is not a packet validator, dispatcher,
-queue engine or state machine. It grants no code, compute, scientific,
-current-work or project-state authority.
+queue engine or state machine. Explorer's explicit instruction authorizes CPM
+to execute the named project-validation treatment; it does not give Explorer
+direct code/runtime control or promote canonical science.
 
 ## Normal path
 
@@ -45,12 +46,14 @@ natural-language conclusion first and the necessary exact evidence second. A
 Codex-native message carrying the same semantic content is the simple fallback.
 Explorer reads but never edits CPM output.
 
-Explorer may then inspect project code, tests, configuration, design documents
-and runtime evidence as needed. Result-named paths are useful entry points, not
-an allow-list. It accepts or rejects
-scientific-semantic conformance to the selected treatment and explains any
-mismatch. CPM remains the sole technical acceptance owner and performs any
-authorized correction; Explorer does not modify code or run compute.
+After technical acceptance, CPM pushes the result and returns its exact commit
+plus public GitHub repository/path locators. Explorer may inspect project
+material read-only as needed, then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`
+and sends it through the dedicated Agentify transport task. External Pro uses
+the GitHub connection to inspect the exact pushed revision and owns final
+scientific-semantic acceptance. Explorer archives and intakes the raw answer but
+does not substitute its own acceptance. CPM does not initiate this review and
+remains the sole technical acceptance owner.
 
 If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper

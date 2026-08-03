@@ -262,10 +262,13 @@ engineering object. Missing objects are collaboration topics, not task states.
 
 CPM reads the shared temporary brief, applies engineering judgment and may perform
 bounded safe read-only reconnaissance. It returns an understandable summary
-and exact evidence through its reverse temporary directory. Explorer reads the
-named implementation surfaces and accepts or rejects scientific-semantic
-conformance while leaving technical acceptance with CPM. Explorer does not ask
+and exact evidence through its reverse temporary directory. After CPM technical
+acceptance and push, Explorer freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT` using
+the returned exact commit and public GitHub locators, submits it through the
+dedicated Agentify task, and archives and intakes the answer. External Pro owns
+scientific-semantic acceptance; Explorer does not substitute its own judgment.
+Explorer does not ask
 CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
-receipts as candidate evidence. The handoff grants no Code Project Manager,
-compute, scientific or project-state authority; External Pro and explicit
-compute-grant boundaries remain unchanged.
+receipts as candidate evidence. The explicit instruction authorizes CPM to
+execute the named treatment; External Pro remains the final scientific-semantic
+acceptance owner.

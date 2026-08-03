@@ -7,6 +7,7 @@ role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
 formal_transport_owner=code_project_manager
 independent_methodology_transport_owner=independent_research_explorer
+explorer_project_alignment_transport_owner=independent_research_explorer
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -38,11 +39,16 @@ explorer_toy_science_freeze=external_pro
 explorer_toy_cross_direction_competition=forbidden
 explorer_toy_design_outputs=TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE
 explorer_toy_result_outputs=CONTINUE_CANDIDATE|PARK_CANDIDATE|COMPLETE_CANDIDATE
+explorer_project_alignment_review=CODE_SCIENCE_ALIGNMENT_AUDIT
+explorer_project_alignment_reviewer=external_gpt_5_6_pro
+explorer_project_alignment_source=github_connector_exact_pushed_revision
+explorer_project_alignment_acceptance_owner=external_pro
 ```
 
 External Pro is the scientific decision authority inside the user goal and the
-submitted review boundary. It may inspect the named pushed commit and repository
-paths when scientific judgment depends on what the code actually implements.
+submitted review boundary. It may use its GitHub connection to inspect the exact
+named pushed commit and repository paths when scientific judgment depends on
+what the code actually implements.
 
 ## Owns
 
@@ -112,6 +118,12 @@ paths when scientific judgment depends on what the code actually implements.
   or counterexamples, and return the question-scoped disposition. Only Code
   Project Manager may package formal reviews; only the Independent Research
   Explorer may package the independent methodology audit.
+- For an Explorer-origin project-validation acceptance review, inspect the exact
+  pushed revision through the GitHub connection and return the existing
+  `CODE_SCIENCE_ALIGNMENT_AUDIT` disposition. Explorer alone freezes, submits,
+  archives and intakes this review after CPM technical acceptance. `ALIGNED` is
+  the final scientific-semantic acceptance for the named implementation;
+  `MISMATCH` or `SCIENTIFIC_AMBIGUITY` is returned for correction or resolution.
 
 ## Must not
 
@@ -173,6 +185,10 @@ paths when scientific judgment depends on what the code actually implements.
   dedicated CPM-owned conversation. The active formal-research Pro and
   Independent Research Explorer conversations are separate and are not
   interchangeable.
+- For Explorer-origin implementation acceptance, one Explorer-authored
+  `CODE_SCIENCE_ALIGNMENT_AUDIT` naming the public GitHub repository, exact
+  pushed commit and relevant remote paths returned by CPM. Local filesystem
+  locators are not inputs.
 
 ## Outputs and stop
 

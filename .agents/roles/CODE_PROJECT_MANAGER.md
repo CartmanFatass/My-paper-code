@@ -67,9 +67,11 @@ explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/
 explorer_public_handoff_git_authority=none
 explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance
 explorer_treatment_substitution_authority=none
-explorer_external_pro_route=explicit_review_request_only
+explorer_acceptance_review_route=explorer_to_agentify_after_cpm_technical_acceptance
 explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation
-explorer_result_semantic_acceptance_owner=independent_research_explorer
+explorer_result_semantic_acceptance_owner=external_pro
+explorer_acceptance_review_request_authority=none
+explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators
 ```
 
 After the root router, read the public `docs/project/CURRENT_WORK.md` index,
@@ -103,8 +105,11 @@ manager; there is no Research Operations Manager or persistent monitor.
   omitted action. `local_research/` remains outside the CPM read boundary. CPM
   and Explorer resolve missing objects through direct semantic exchange instead
   of producing a workflow `BLOCKED` state. A Pro freeze is required only when the treatment requests
-  review. After technical acceptance, return the named implementation and
-  evidence surfaces for Explorer's scientific-semantic conformance acceptance.
+  review. After technical acceptance, push the result and return its exact
+  commit and public GitHub repository/path locators to Explorer. CPM does not
+  initiate the final acceptance review. Explorer freezes and submits that review;
+  External Pro owns final scientific-semantic acceptance through the GitHub
+  connection.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the

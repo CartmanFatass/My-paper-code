@@ -121,11 +121,16 @@ foreach ($entry in @(
     @($independentResearchRole, 'public_handoff_git_authority=none'),
     @($independentResearchRole, 'project_validation_instruction_authority=authorize_cpm_named_treatment_execution'),
     @($independentResearchRole, 'project_validation_read_authority=project_wide_read_only_as_needed'),
-    @($independentResearchRole, 'project_validation_semantic_acceptance=exclusive_for_explorer_origin_treatment_conformance'),
+    @($independentResearchRole, 'project_validation_semantic_acceptance_owner=external_pro'),
+    @($independentResearchRole, 'project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin'),
+    @($independentResearchRole, 'project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT'),
+    @($independentResearchRole, 'project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance'),
     @($codePmRole, 'explorer_treatment_substitution_authority=none'),
     @($codePmRole, 'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation'),
-    @($codePmRole, 'explorer_result_semantic_acceptance_owner=independent_research_explorer'),
-    @($codePmRole, 'explorer_external_pro_route=explicit_review_request_only'),
+    @($codePmRole, 'explorer_result_semantic_acceptance_owner=external_pro'),
+    @($codePmRole, 'explorer_acceptance_review_request_authority=none'),
+    @($codePmRole, 'explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators'),
+    @($codePmRole, 'explorer_acceptance_review_route=explorer_to_agentify_after_cpm_technical_acceptance'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
     @($proRole, 'semantically sufficient public candidate brief'),
     @($proRoleNormalized, 'Code Project Manager archives the answer exactly and returns a conclusion-first, evidence-second brief through its outbound temporary handoff'),
@@ -139,7 +144,9 @@ foreach ($entry in @(
     @($explorerValidationContractNormalized, 'without separate code or experiment permission fields'),
     @($explorerValidationContractNormalized, 'does not reject a handoff because of formatting or a missing object'),
     @($explorerValidationContractNormalized, 'instead of creating a `BLOCKED` state'),
-    @($explorerValidationContractNormalized, 'accepts or rejects scientific-semantic conformance'),
+    @($explorerValidationContractNormalized, 'External Pro uses the GitHub connection to inspect the exact pushed revision'),
+    @($explorerValidationContractNormalized, 'Explorer never substitutes its own acceptance'),
+    @($explorerValidationContractNormalized, 'The review starts only after CPM technical acceptance and push'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
     @($explorerValidationSkillNormalized, 'does not update the CDC portfolio'),
     @($explorerValidationSkill, 'current_work_mutation=forbidden'),
@@ -241,7 +248,10 @@ foreach ($required in @(
     'explorer_project_handoff_instruction=explicit_named_actions_no_receiver_inference',
     'explorer_project_handoff_instruction_effect=authorizes_code_project_manager_named_treatment_execution',
     'explorer_project_validation_read_authority=project_wide_read_only_as_needed',
-    'explorer_project_validation_semantic_acceptance=required',
+    'explorer_project_validation_semantic_acceptance_owner=external_pro',
+    'explorer_project_validation_acceptance_request_owner=independent_research_explorer',
+    'explorer_project_validation_acceptance_source=public_github_exact_pushed_revision',
+    'code_project_manager_explorer_acceptance_review_request_authority=none',
     'code_project_manager_treatment_substitution_authority=none',
     'independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md',
     'independent_research_continuity_owner=independent_research_explorer',
@@ -1030,6 +1040,15 @@ foreach ($required in @(
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
     if (-not $proRoleNormalized.Contains($required)) { throw "External Pro role missing: $required" }
+}
+foreach ($required in @(
+    'explorer_project_alignment_review=CODE_SCIENCE_ALIGNMENT_AUDIT',
+    'explorer_project_alignment_reviewer=external_gpt_5_6_pro',
+    'explorer_project_alignment_source=github_connector_exact_pushed_revision',
+    'explorer_project_alignment_acceptance_owner=external_pro',
+    'explorer_project_alignment_transport_owner=independent_research_explorer',
+    'use its GitHub connection to inspect the exact named pushed commit')) {
+    if (-not $proRoleNormalized.Contains($required)) { throw "External Pro project-alignment boundary missing: $required" }
 }
 foreach ($required in @(
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',

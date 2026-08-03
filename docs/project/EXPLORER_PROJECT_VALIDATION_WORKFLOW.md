@@ -2,7 +2,8 @@
 
 This contract defines the narrow semantic bridge from advisory Independent
 Research Explorer output to Code Project Manager. It does not promote advisory
-research into canonical science and grants no code or compute authority.
+research into canonical science. Explorer's explicit instruction authorizes CPM
+to execute the named treatment without giving Explorer direct code/runtime control.
 
 ## Authority and public interface
 
@@ -63,13 +64,14 @@ the natural-language conclusion and then appends the necessary exact evidence.
 A native task message carrying the same content is the single fallback.
 Mechanical field-only callbacks are insufficient.
 
-The result highlights useful implementation and evidence entry points. Explorer
-may inspect project code, tests, configuration, design documents and runtime
-evidence as needed; those entry points are not a read allow-list. Explorer
-accepts or rejects scientific-semantic conformance
-to its selected treatment. CPM remains the sole technical acceptance owner and
-performs any authorized correction. Explorer's semantic acceptance neither
-promotes the candidate to canonical project science nor authorizes compute.
+After technical acceptance, CPM pushes the result and returns its exact commit
+and public GitHub repository/path locators. CPM does not initiate the final
+acceptance review. Explorer may inspect project material read-only as needed,
+then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the dedicated
+Agentify transport task, and archives and intakes the raw answer. External Pro
+uses the GitHub connection to inspect the exact pushed revision and owns final
+scientific-semantic acceptance. Explorer never substitutes its own acceptance.
+The review starts only after CPM technical acceptance and push.
 
 ## Lifecycle and failure ownership
 
