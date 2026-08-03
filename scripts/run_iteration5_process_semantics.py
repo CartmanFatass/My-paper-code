@@ -51,7 +51,10 @@ from ha_ctse_process.dynamic_roster_spatial_testbed import (
     make_spatial_environment,
 )
 from ha_ctse_process.collectors import SyncEnvCollector
-from ha_ctse_process.train import _make_event_model_owner, _make_event_runtime
+from ha_ctse_process.standalone_event_support import (
+    _make_event_model_owner,
+    _make_event_runtime,
+)
 from ha_ctse_process.variable_roster_event import batched_low_step, make_pcg64_rng
 
 

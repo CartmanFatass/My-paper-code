@@ -10,12 +10,13 @@ import torch
 
 from ha_ctse_process.collectors import SyncEnvCollector
 from ha_ctse_process import train as process_train
-from ha_ctse_process.train import (
+from ha_ctse_process.standalone_event_support import (
     _event_identity_normalizers,
     _event_live_checkpoint_paths,
     _event_prefix_rows,
     _summarize_event_prefix_rows,
     _summarize_forced_audit,
+    enforce_variable_roster_event_resume_boundary,
 )
 from ha_ctse_process.variable_roster_event import (
     JOIN,
@@ -507,7 +508,7 @@ def test_nonexistent_resume_path_fails_closed_before_runtime(tmp_path):
     config = SimpleNamespace(high_controller="variable_roster_event")
     args = SimpleNamespace(resume_from=str(tmp_path / "missing.pt"))
     with pytest.raises(ValueError, match="--resume_from fails closed"):
-        process_train.enforce_variable_roster_event_resume_boundary(config, args)
+        enforce_variable_roster_event_resume_boundary(config, args)
 
     checkpoint_dir = tmp_path / "checkpoints"
     assert [path.name for path in _event_live_checkpoint_paths(

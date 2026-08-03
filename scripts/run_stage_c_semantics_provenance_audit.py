@@ -1639,7 +1639,7 @@ def _construct_model_owner(
 def collect_arm(source: Mapping[str, Any], expected_arm: str, device: torch.device) -> dict[str, Any]:
     """Strictly restore and repeat one registered final stochastic evaluation."""
 
-    from ha_ctse_process import train as process_train
+    from ha_ctse_process import standalone_event_support as event_support
     from ha_ctse_process.variable_roster_event import restore_event_model_only_checkpoint
 
     identity = validate_source_identity(source, expected_arm)
@@ -1669,7 +1669,7 @@ def collect_arm(source: Mapping[str, Any], expected_arm: str, device: torch.devi
     )
     evaluation, guards = evaluate_with_guards(
         owner,
-        lambda: process_train._evaluate_event_model(
+        lambda: event_support._evaluate_event_model(
             owner,
             deterministic=False,
             capture_prefix=True,

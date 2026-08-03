@@ -13,7 +13,7 @@ import numpy as np
 import pytest
 import torch
 
-from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_event_support as event_support
 from ha_ctse_process.dynamic_roster_testbed import (
     ACTION_COUNT,
     OBSERVATION_DIM,
@@ -74,8 +74,8 @@ PROHIBITED_FIELDS = {
 
 
 def _interfaces_present() -> bool:
-    forced = inspect.signature(process_train._forced_event_snapshot_effects)
-    evaluate = inspect.signature(process_train._evaluate_event_model)
+    forced = inspect.signature(event_support._forced_event_snapshot_effects)
+    evaluate = inspect.signature(event_support._evaluate_event_model)
     return "focal_key" in forced.parameters and (
         "capture_semantic_provenance" in evaluate.parameters
     )
@@ -106,7 +106,7 @@ def _model_owner(mode: str = "f1", *, seed: int = 17057):
 
 def _source_at_time_one(owner):
     environment = DynamicRosterEventEnv(task_master_seed=97_057)
-    core = process_train._make_event_runtime(
+    core = event_support._make_event_runtime(
         owner,
         environment_index=0,
         episode_id=0,
@@ -213,8 +213,8 @@ def _assert_model_state_equal(left, right):
 
 
 def test_frozen_provenance_interfaces_are_present_and_default_off():
-    forced = inspect.signature(process_train._forced_event_snapshot_effects)
-    evaluate = inspect.signature(process_train._evaluate_event_model)
+    forced = inspect.signature(event_support._forced_event_snapshot_effects)
+    evaluate = inspect.signature(event_support._evaluate_event_model)
     assert "focal_key" in forced.parameters
     assert forced.parameters["focal_key"].default is None
     assert "capture_semantic_provenance" in evaluate.parameters
@@ -229,7 +229,7 @@ def test_explicit_focal_key_matches_legacy_audit_index_selection():
     owner = _model_owner()
     core, environment, snapshot = _source_at_time_one(owner)
     focal_key = snapshot.keys[0]
-    legacy = process_train._forced_event_snapshot_effects(
+    legacy = event_support._forced_event_snapshot_effects(
         model_owner=owner,
         core=core,
         environment=environment,
@@ -237,7 +237,7 @@ def test_explicit_focal_key_matches_legacy_audit_index_selection():
         episode_id=0,
         audit_index=0,
     )
-    explicit = process_train._forced_event_snapshot_effects(
+    explicit = event_support._forced_event_snapshot_effects(
         model_owner=owner,
         core=core,
         environment=environment,
@@ -271,7 +271,7 @@ def evaluation_pair():
             if (module_index + parameter_index) % 3 == 0:
                 parameter.grad = torch.full_like(parameter, 0.125)
 
-    original_forced = process_train._forced_event_snapshot_effects
+    original_forced = event_support._forced_event_snapshot_effects
     focal_calls = []
 
     def fast_forced_effects(**kwargs):
@@ -286,10 +286,10 @@ def evaluation_pair():
         return np.full((3, 2, 4), base, dtype=np.float64).tolist()
 
     try:
-        process_train._forced_event_snapshot_effects = fast_forced_effects
+        event_support._forced_event_snapshot_effects = fast_forced_effects
         before_model = _model_state(owner)
         before_rng = _global_rng_state()
-        legacy = process_train._evaluate_event_model(
+        legacy = event_support._evaluate_event_model(
             owner,
             deterministic=False,
             capture_prefix=False,
@@ -297,7 +297,7 @@ def evaluation_pair():
         )
         after_legacy_model = _model_state(owner)
         after_legacy_rng = _global_rng_state()
-        enabled = process_train._evaluate_event_model(
+        enabled = event_support._evaluate_event_model(
             owner,
             deterministic=False,
             capture_prefix=False,
@@ -307,7 +307,7 @@ def evaluation_pair():
         after_enabled_model = _model_state(owner)
         after_enabled_rng = _global_rng_state()
     finally:
-        process_train._forced_event_snapshot_effects = original_forced
+        event_support._forced_event_snapshot_effects = original_forced
 
     return SimpleNamespace(
         owner=owner,
@@ -1354,7 +1354,7 @@ def test_synthetic_orchestration_joins_collection_validation_analysis_and_output
         ),
     )
     monkeypatch.setattr(
-        process_train,
+        event_support,
         "_evaluate_event_model",
         lambda _owner, **_kwargs: deepcopy(evaluation),
     )

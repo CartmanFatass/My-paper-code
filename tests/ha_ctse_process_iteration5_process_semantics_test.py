@@ -40,6 +40,8 @@ from ha_ctse_process.variable_roster_event import (
 )
 from ha_ctse_process.train import (
     _evaluate_iteration5_spatial_model,
+)
+from ha_ctse_process.standalone_event_support import (
     _make_event_model_owner,
     _make_event_runtime,
 )
