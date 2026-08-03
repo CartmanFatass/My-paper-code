@@ -18,6 +18,16 @@ path set and preserve unrelated edits. Implement the frozen behavior without
 choosing an estimand, gate, budget, seed, threshold, result meaning or
 successor. Missing scientific content fails closed to Code Project Manager.
 
+For a workspace-ticket assignment, resolve the ticket before task-file access
+and treat its returned `resolved_worktree` as the only edit root. Confirm
+`git rev-parse --show-toplevel` in that checkout equals the resolved path.
+`apply_patch` does not inherit a shell working directory: every patch target
+must therefore be an absolute path formed from `resolved_worktree` plus one
+assignment-allowed relative path. Never patch a repository-relative task path.
+After the first patch, confirm the intended relative path appears in that
+worktree's diff before making further edits; otherwise stop and report the
+targeting mismatch.
+
 Before result-bearing implementation, verify the assignment declares an
 evidence action inside `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Do not
 implement nested rollout/replanning, horizon-growing search or another action

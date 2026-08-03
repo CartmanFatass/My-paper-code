@@ -21,6 +21,7 @@ $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VE
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $routineImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer-terra.toml')
 $protectedImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer.toml')
+$implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
@@ -226,10 +227,18 @@ foreach ($required in @(
 }
 
 foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile)) {
-    foreach ($required in @('workspace ticket', '-c core.longpaths=true')) {
+    foreach ($required in @('workspace ticket', '.agents/roles/IMPLEMENTER.md',
+            'absolute `apply_patch` targets', '-c core.longpaths=true')) {
         if (-not $profile.Contains($required)) {
-            throw "Ticketed implementer profile missing long-path Git inspection rule: $required"
+            throw "Ticketed implementer profile missing the shared edit-target rule: $required"
         }
+    }
+}
+foreach ($required in @('returned `resolved_worktree` as the only edit root',
+        '`apply_patch` does not inherit a shell working directory',
+        'every patch target', 'absolute path', 'After the first patch')) {
+    if (-not $implementerRole.Contains($required)) {
+        throw "Implementer role missing ticketed apply_patch targeting rule: $required"
     }
 }
 

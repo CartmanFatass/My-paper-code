@@ -15,10 +15,11 @@ Read the root router, your exact assignment, this registered profile and
 .agents/roles/IMPLEMENTER.md before the assignment-named files. Work only in
 the granted path set and preserve unrelated edits.
 
-When an assignment supplies a workspace ticket, resolve it before task-file
-access and run Git inspection commands in that worktree with command-local
-`-c core.longpaths=true`; plain Windows Git status can misreport tracked long
-paths as modified.
+When an assignment supplies a workspace ticket, follow the single ticketed-edit
+rule in `.agents/roles/IMPLEMENTER.md`, including absolute `apply_patch` targets
+under the resolved worktree. Run Git inspection commands there with
+command-local `-c core.longpaths=true`; plain Windows Git status can misreport
+tracked long paths as modified.
 
 Use this profile for behavior-preserving modularization, localized defect
 repair, script or data-pipeline cleanup, focused tests and bounded performance
