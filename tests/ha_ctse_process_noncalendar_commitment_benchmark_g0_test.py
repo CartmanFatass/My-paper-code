@@ -22,6 +22,7 @@ import torch.nn.functional as F
 from ha_ctse_process import event_commitment_checkpoint
 from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
+from ha_ctse_process import event_commitment_causal
 from ha_ctse_process import event_commitment_replay
 from ha_ctse_process import event_commitment_replay_evidence
 from ha_ctse_process import event_commitment_rng_evidence
@@ -1232,8 +1233,12 @@ def test_cyclic_donors_preserve_float32_multisets_and_frozen_additivity(
             name: benchmark_runner._tracking_outcome_record(result["branch_outcomes"][name])
             for name in CAUSAL_AUDIT_BRANCHES
         }
-        contrasts = benchmark_runner._causal_contrasts(row["natural_action"], outcomes)
-        additivity = benchmark_runner._contrast_additivity_evidence(contrasts, outcomes)
+        contrasts = event_commitment_causal._causal_contrasts(
+            row["natural_action"], outcomes
+        )
+        additivity = event_commitment_causal._contrast_additivity_evidence(
+            contrasts, outcomes
+        )
         held, deranged, candidate = (
             outcomes[name]["utility"] for name in CAUSAL_AUDIT_BRANCHES
         )
@@ -1242,7 +1247,7 @@ def test_cyclic_donors_preserve_float32_multisets_and_frozen_additivity(
         else:
             expected = (candidate - held, deranged - held, candidate - deranged)
         assert tuple(contrasts[name] for name in ("total", "timing", "mark")) == expected
-        assert additivity == benchmark_runner._contrast_additivity_evidence(
+        assert additivity == event_commitment_causal._contrast_additivity_evidence(
             contrasts, outcomes
         )
         assert additivity["residual"] <= additivity["bound"]

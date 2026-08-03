@@ -28,6 +28,7 @@ import torch
 from ha_ctse_process import event_commitment_replay_evidence
 from ha_ctse_process import event_commitment_evidence_common
 from ha_ctse_process import event_commitment_rng_evidence
+from ha_ctse_process import event_commitment_causal
 from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
 from ha_ctse_process import event_commitment_optimizer
 from ha_ctse_process.event_commitment_analysis import (
@@ -949,40 +950,6 @@ def _causal_audit_trace_inventory(
     return inventory
 
 
-def _causal_contrasts(
-    natural_action: str, outcomes: Mapping[str, Mapping[str, Any]],
-) -> dict[str, float]:
-    keep = float(outcomes["KEEP_HELD_MARK"]["utility"])
-    deranged = float(outcomes["RENEW_DERANGED_MARK"]["utility"])
-    candidate = float(outcomes["RENEW_CANDIDATE_MARK"]["utility"])
-    if natural_action == "KEEP":
-        return {
-            "total": keep - candidate,
-            "timing": keep - deranged,
-            "mark": deranged - candidate,
-        }
-    return {
-        "total": candidate - keep,
-        "timing": deranged - keep,
-        "mark": candidate - deranged,
-    }
-
-
-def _contrast_additivity_evidence(
-    contrasts: Mapping[str, float], outcomes: Mapping[str, Mapping[str, Any]],
-) -> dict[str, float]:
-    """Account only for deterministic binary64 subtraction/addition rounding."""
-
-    values = [
-        float(contrasts[name]) for name in ("total", "timing", "mark")
-    ] + [
-        float(outcomes[name]["utility"]) for name in CAUSAL_AUDIT_BRANCHES
-    ]
-    residual = abs(values[0] - (values[1] + values[2]))
-    bound = 4.0 * max(math.ulp(value) for value in values)
-    return {"residual": residual, "bound": bound}
-
-
 def _causal_audit_valid(
     record: Any, *, replicate: int, episodes: list[dict[str, Any]],
     cell_batches: list[dict[str, Any]], formal: bool = True,
@@ -1150,8 +1117,10 @@ def _causal_audit_valid(
             else "RENEW_CANDIDATE_MARK"
         )
         expected_natural = episode_outcomes.get(int(row["episode_id"]))
-        expected_contrasts = _causal_contrasts(row["natural_action"], outcomes)
-        expected_additivity = _contrast_additivity_evidence(
+        expected_contrasts = event_commitment_causal._causal_contrasts(
+            row["natural_action"], outcomes
+        )
+        expected_additivity = event_commitment_causal._contrast_additivity_evidence(
             expected_contrasts, outcomes
         )
         additivity = row["contrast_additivity"]
@@ -2945,8 +2914,12 @@ def _collect_causal_audit_evidence(
         )
         if outcomes[natural_branch] != natural_outcome:
             raise RuntimeError("causal audit failed full natural-outcome equality")
-        contrasts = _causal_contrasts(record["natural_action"], outcomes)
-        contrast_additivity = _contrast_additivity_evidence(contrasts, outcomes)
+        contrasts = event_commitment_causal._causal_contrasts(
+            record["natural_action"], outcomes
+        )
+        contrast_additivity = event_commitment_causal._contrast_additivity_evidence(
+            contrasts, outcomes
+        )
         if contrast_additivity["residual"] > contrast_additivity["bound"]:
             raise RuntimeError("causal audit binary64 additivity bound failed")
         branch_bindings: dict[str, dict[str, Any]] = {}
