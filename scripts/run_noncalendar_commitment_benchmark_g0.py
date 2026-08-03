@@ -26,6 +26,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process import event_commitment_replay_evidence
+from ha_ctse_process import event_commitment_evidence_common
 from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
 from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT
 from ha_ctse_process.event_commitment_analysis import (
@@ -181,20 +182,6 @@ _EVENT_PARAMETER_SPECS = (
 )
 
 
-def _json_default(value: Any) -> Any:
-    """Encode one unsupported leaf without recursively copying its container."""
-
-    if isinstance(value, np.ndarray):
-        return value.tolist()
-    if isinstance(value, np.generic):
-        return value.item()
-    if isinstance(value, torch.Tensor):
-        return value.detach().cpu().tolist()
-    if hasattr(value, "__dict__"):
-        return vars(value)
-    raise TypeError(f"object of type {type(value).__name__} is not JSON serializable")
-
-
 def _write_json(path: Path, value: Any) -> None:
     path = path.resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -207,7 +194,7 @@ def _write_json(path: Path, value: Any) -> None:
             temporary_path = Path(handle.name)
             json.dump(
                 value, handle, indent=2, ensure_ascii=False,
-                default=_json_default,
+                default=event_commitment_evidence_common._json_default,
             )
             handle.write("\n")
             handle.flush()
@@ -230,14 +217,6 @@ def _no_op_equal(ordinary: Any, dummy: Any) -> bool:
     )
 
 
-def _digest_json(value: Any) -> str:
-    payload = json.dumps(
-        value, sort_keys=True, separators=(",", ":"), ensure_ascii=True,
-        default=_json_default,
-    ).encode("utf-8")
-    return hashlib.sha256(payload).hexdigest()
-
-
 def _tensor_digest(value: torch.Tensor) -> str:
     tensor = value.detach().cpu().contiguous()
     digest = hashlib.sha256()
@@ -249,7 +228,9 @@ def _tensor_digest(value: torch.Tensor) -> str:
 
 def _owned_stream_digests(state: Any) -> dict[str, str]:
     return {
-        name: _digest_json(state.rngs[name].bit_generator.state)
+        name: event_commitment_evidence_common._digest_json(
+            state.rngs[name].bit_generator.state
+        )
         for name in RNG_NAMES
     }
 
@@ -297,7 +278,7 @@ def _rng_bindings_valid(
         binding = bindings[name]
         context = binding.get("context") if isinstance(binding, dict) else None
         if not isinstance(context, dict) or any(
-            field in context and not _is_exact_int(context[field])
+            field in context and not event_commitment_evidence_common._is_exact_int(context[field])
             for field in integer_context_fields
         ):
             return False, {}
@@ -347,7 +328,7 @@ def _collection_binding_schedules_valid(
                 entry["shape"] == [environment_count, MAX_LIFECYCLES]
                 and entry["operation"] == "random"
                 and entry["dtype"] == "float32"
-                and _is_exact_int(entry["coordinates"]["time"])
+                and event_commitment_evidence_common._is_exact_int(entry["coordinates"]["time"])
                 and entry["coordinates"]["time"] == index
                 for index, entry in enumerate(primitive)
             )
@@ -366,7 +347,7 @@ def _collection_binding_schedules_valid(
                 for entry in schedules[stream]
             ]
             if not (
-                all(_is_exact_int(value) for value in times)
+                all(event_commitment_evidence_common._is_exact_int(value) for value in times)
                 and times == sorted(times)
                 and len(times) == len(set(times))
                 and all(0 <= value < HORIZON for value in times)
@@ -394,7 +375,9 @@ def _ledger_record(ledger: Any) -> dict[str, Any]:
         "initial_targets": ledger.initial_targets.tolist(),
         "direct_frontier_priorities": ledger.direct_frontier_priorities.tolist(),
     }
-    return payload | {"ledger_digest": _digest_json(payload)}
+    return payload | {
+        "ledger_digest": event_commitment_evidence_common._digest_json(payload)
+    }
 
 
 def _rng_audit_evidence_valid(
@@ -446,7 +429,8 @@ def _rng_audit_evidence_valid(
             return False
         for expected_time, row in enumerate(rows):
             if set(row) != {"time", "environments"} or not (
-                _is_exact_int(row["time"]) and row["time"] == expected_time
+                event_commitment_evidence_common._is_exact_int(row["time"])
+                and row["time"] == expected_time
             ):
                 return False
             environments = row["environments"]
@@ -456,8 +440,8 @@ def _rng_audit_evidence_valid(
             frontier_orders: list[list[int]] = []
             for env_index, env in enumerate(environments):
                 if set(env) != {"env_index", "episode_id", "frontier"} or not (
-                    _is_exact_int(env["env_index"])
-                    and _is_exact_int(env["episode_id"])
+                    event_commitment_evidence_common._is_exact_int(env["env_index"])
+                    and event_commitment_evidence_common._is_exact_int(env["episode_id"])
                     and env["env_index"] == env_index
                     and env["episode_id"] == episode_ids[env_index]
                 ):
@@ -465,7 +449,10 @@ def _rng_audit_evidence_valid(
                 frontier = env["frontier"]
                 if any(set(value) != {"key", "priority", "q_before"} for value in frontier):
                     return False
-                if any(not _is_exact_int(value["key"]) for value in frontier):
+                if any(
+                    not event_commitment_evidence_common._is_exact_int(value["key"])
+                    for value in frontier
+                ):
                     return False
                 keys = [value["key"] for value in frontier]
                 if len(keys) != len(set(keys)) or keys != [
@@ -496,7 +483,9 @@ def _rng_audit_evidence_valid(
             frontier_by_time[expected_time] = frontier_orders
         for stream in ("event", "mark", "opportunity"):
             if any(
-                not _is_exact_int(entry["coordinates"]["time"])
+                not event_commitment_evidence_common._is_exact_int(
+                    entry["coordinates"]["time"]
+                )
                 for entry in streams[stream]
             ):
                 return False
@@ -520,7 +509,9 @@ def _rng_audit_evidence_valid(
             for time in range(HORIZON)
         }
         if any(
-            not _is_exact_int(entry["coordinates"]["time"])
+            not event_commitment_evidence_common._is_exact_int(
+                entry["coordinates"]["time"]
+            )
             for entry in streams["primitive"]
         ):
             return False
@@ -589,7 +580,8 @@ def _optimizer_pass_valid(
         and int(record["pass_index"]) == pass_index
         and int(record["step_before"]) == step_before
         and int(record["step_after"]) == step_before + 1
-        and record["record_digest"] == _digest_json(unsigned)
+        and record["record_digest"]
+        == event_commitment_evidence_common._digest_json(unsigned)
         and isinstance(record["parameters"], list)
         and len(record["parameters"]) == len(manifest)
     ):
@@ -728,14 +720,14 @@ def _is_sha256(value: Any) -> bool:
     )
 
 
-def _is_exact_int(value: Any) -> bool:
-    return type(value) is int
-
-
 def _exact_int_fields(value: Any, fields: tuple[str, ...]) -> bool:
     return bool(
         isinstance(value, dict)
-        and all(field in value and _is_exact_int(value[field]) for field in fields)
+        and all(
+            field in value
+            and event_commitment_evidence_common._is_exact_int(value[field])
+            for field in fields
+        )
     )
 
 
@@ -846,7 +838,8 @@ def _tracking_outcome_valid(record: Any) -> bool:
         or not isinstance(record["roster_sizes"], list)
         or len(record["roster_sizes"]) != HORIZON
         or any(
-            not _is_exact_int(value) or not 0 <= value <= MAX_LIFECYCLES
+            not event_commitment_evidence_common._is_exact_int(value)
+            or not 0 <= value <= MAX_LIFECYCLES
             for value in record["roster_sizes"]
         )
         or record["active_rows"] != sum(record["roster_sizes"])
@@ -1044,7 +1037,11 @@ def _training_update_valid(
 ) -> bool:
     if not isinstance(record, dict) or set(record) != {"update", "arms", "paired"}:
         return False
-    if not _is_exact_int(record["update"]) or record["update"] != update or set(record["arms"]) != set(ARMS):
+    if (
+        not event_commitment_evidence_common._is_exact_int(record["update"])
+        or record["update"] != update
+        or set(record["arms"]) != set(ARMS)
+    ):
         return False
     if not _paired_evidence_valid(record["paired"], record["arms"]):
         return False
@@ -1151,7 +1148,7 @@ def _training_update_valid(
             )
             and all(
                 evidence["owned_stream_digests"][name]
-                == _digest_json(rng_ends[name])
+                == event_commitment_evidence_common._digest_json(rng_ends[name])
                 for name in RNG_NAMES
             )
             and set(evidence["lifecycle_counts"]) == LIFECYCLE_COUNT_KEYS
@@ -1324,11 +1321,15 @@ def _causal_audit_donor_material(
         "mapping_position": mapping_position,
         "candidate_u": deepcopy(donor["candidate_u"]),
         "candidate_z": deepcopy(donor["candidate_z"]),
-        "candidate_digest": _digest_json({
+        "candidate_digest": event_commitment_evidence_common._digest_json({
             "candidate_u": donor["candidate_u"],
             "candidate_z": donor["candidate_z"],
         }),
-        "binding": binding_body | {"binding_digest": _digest_json(binding_body)},
+        "binding": binding_body | {
+            "binding_digest": event_commitment_evidence_common._digest_json(
+                binding_body
+            )
+        },
     }
 
 
@@ -1377,7 +1378,9 @@ def _causal_audit_bound_context(
     return dict(base) | {
         "recipient_key": list(key),
         "donor_key": list(donor_key),
-        "executed_branch_evidence_digest": _digest_json(branch_evidence),
+        "executed_branch_evidence_digest": event_commitment_evidence_common._digest_json(
+            branch_evidence
+        ),
     }
 
 
@@ -1397,7 +1400,10 @@ def _causal_audit_trace_inventory(
         if not isinstance(entry, dict) or set(entry) != {"batch_index", "row"}:
             return None
         batch_index, row = entry["batch_index"], entry["row"]
-        if not _is_exact_int(batch_index) or not 0 <= batch_index < len(cell_batches):
+        if (
+            not event_commitment_evidence_common._is_exact_int(batch_index)
+            or not 0 <= batch_index < len(cell_batches)
+        ):
             return None
         if not isinstance(row, dict) or set(row) != {
             "coordinate", "natural_kind", "installed_z", "candidate_u",
@@ -1473,7 +1479,7 @@ def _causal_audit_trace_inventory(
         batch_rows = rows_by_batch[batch_index]
         if not isinstance(binding, dict) or binding != {
             "row_count": len(batch_rows),
-            "trace_sha256": _digest_json(batch_rows),
+            "trace_sha256": event_commitment_evidence_common._digest_json(batch_rows),
         }:
             return None
     for action in CAUSAL_AUDIT_NATURAL_ACTIONS:
@@ -1528,9 +1534,9 @@ def _causal_audit_valid(
         return False
     if not (
         record["schema"] == "event_held_commitment_link_g0.causal_audit.v2"
-        and _is_exact_int(record["replicate"])
+        and event_commitment_evidence_common._is_exact_int(record["replicate"])
         and record["replicate"] == replicate
-        and _is_exact_int(record["quota_per_action"])
+        and event_commitment_evidence_common._is_exact_int(record["quota_per_action"])
         and record["quota_per_action"] == CAUSAL_AUDIT_QUOTA_PER_ACTION
         and set(record["selected_keys"]) == set(CAUSAL_AUDIT_NATURAL_ACTIONS)
         and isinstance(record["audit_rows"], list)
@@ -1584,7 +1590,10 @@ def _causal_audit_valid(
         eligible = [_causal_audit_key(value) for value in eligible_rows]
         if any(
             len(value) != 8 or value[-1] != action
-            or any(not _is_exact_int(coordinate) for coordinate in value[:-1])
+            or any(
+                not event_commitment_evidence_common._is_exact_int(coordinate)
+                for coordinate in value[:-1]
+            )
             for value in selected
         ):
             return False
@@ -1617,7 +1626,8 @@ def _causal_audit_valid(
             selected_records[recipient_key] = recipient
             donor_by_key[recipient_key] = (position, donor)
     if any(
-        not isinstance(row, dict) or not _is_exact_int(row.get("episode_id"))
+        not isinstance(row, dict)
+        or not event_commitment_evidence_common._is_exact_int(row.get("episode_id"))
         for row in episodes
     ):
         return False
@@ -1656,12 +1666,12 @@ def _causal_audit_valid(
         donor_u = _float32_payload_bytes(donor["candidate_u"])
         donor_z = _float32_payload_bytes(donor["candidate_z"])
         if not (
-            _is_exact_int(donor["mapping_position"])
+            event_commitment_evidence_common._is_exact_int(donor["mapping_position"])
             and donor["mapping_position"] == expected_position
             and tuple(donor["donor_key"]) == _causal_audit_key(expected_donor)
             and donor_u == _float32_payload_bytes(expected_donor["candidate_u"])
             and donor_z == _float32_payload_bytes(expected_donor["candidate_z"])
-            and donor["candidate_digest"] == _digest_json({
+            and donor["candidate_digest"] == event_commitment_evidence_common._digest_json({
                 "candidate_u": donor["candidate_u"],
                 "candidate_z": donor["candidate_z"],
             })
@@ -1793,15 +1803,26 @@ def _causal_audit_valid(
                 except (KeyError, TypeError, ValueError, IndexError):
                     rng_binding_valid = False
             rng_binding_valid = rng_binding_valid and (
-                len({_digest_json(value) for value in branch_ends.values()}) == 1
-                and len({_digest_json(value) for value in branch_schedules.values()}) == 1
+                len({
+                    event_commitment_evidence_common._digest_json(value)
+                    for value in branch_ends.values()
+                }) == 1
+                and len({
+                    event_commitment_evidence_common._digest_json(value)
+                    for value in branch_schedules.values()
+                }) == 1
                 and isinstance(row["stream_consumption"], dict)
                 and tuple(row["stream_consumption"]) == CAUSAL_AUDIT_BRANCHES
                 and row["stream_consumption"] == branch_consumption
-                and len({_digest_json(value) for value in branch_consumption.values()}) == 1
+                and len({
+                    event_commitment_evidence_common._digest_json(value)
+                    for value in branch_consumption.values()
+                }) == 1
                 and all(
                     rng_digests.get(name)
-                    == _digest_json(branch_ends[CAUSAL_AUDIT_BRANCHES[0]][name])
+                    == event_commitment_evidence_common._digest_json(
+                        branch_ends[CAUSAL_AUDIT_BRANCHES[0]][name]
+                    )
                     for name in RNG_NAMES
                 )
             )
@@ -1809,7 +1830,9 @@ def _causal_audit_valid(
             row["episode_id"]
             == 2 * row["base_episode_id"] + row["sign_parity"]
             and isinstance(row["audit_id"], str) and bool(row["audit_id"])
-            and row["audit_id"] == _digest_json(list(key))
+            and row["audit_id"] == event_commitment_evidence_common._digest_json(
+                list(key)
+            )
             and set(natural_errors) == {
                 "discrete_mismatch", "continuous_error", "segment_equal",
                 "outcome_equal",
@@ -1912,12 +1935,12 @@ def _evaluation_cell_valid(
     expected_cell_mode = "deterministic" if deterministic else "stochastic"
     if not (
         payload["artifact_schema"] == expected_artifact_schema
-        and _is_exact_int(payload["schema_version"])
+        and event_commitment_evidence_common._is_exact_int(payload["schema_version"])
         and payload["schema_version"] == EVALUATION_CELL_SCHEMA
         and payload["formal"] is formal
         and payload["contract"] == registered_contract()
         and payload["arm"] == arm
-        and _is_exact_int(payload["replicate"])
+        and event_commitment_evidence_common._is_exact_int(payload["replicate"])
         and payload["replicate"] == replicate
         and payload["cell"] == cell
         and payload["profile"] == profile
@@ -1937,7 +1960,7 @@ def _evaluation_cell_valid(
         and isinstance(episodes, list) and len(episodes) == episodes_per_cell
         and all(
             isinstance(row, dict)
-            and _is_exact_int(row.get("episode_id"))
+            and event_commitment_evidence_common._is_exact_int(row.get("episode_id"))
             and _tracking_outcome_valid(row.get("outcome"))
             and type(row.get("utility")) in (int, float)
             and float(row["utility"]) == float(row["outcome"]["utility"])
@@ -1968,13 +1991,18 @@ def _evaluation_cell_valid(
         }:
             return False, (), []
         if not (
-            _is_exact_int(batch["batch_index"])
+            event_commitment_evidence_common._is_exact_int(batch["batch_index"])
             and isinstance(batch["episode_ids"], list)
-            and all(_is_exact_int(value) for value in batch["episode_ids"])
+            and all(
+                event_commitment_evidence_common._is_exact_int(value)
+                for value in batch["episode_ids"]
+            )
             and _is_sha256(batch["episodes_digest"])
             and isinstance(batch["raw_event_trace_binding"], dict)
             and set(batch["raw_event_trace_binding"]) == {"row_count", "trace_sha256"}
-            and _is_exact_int(batch["raw_event_trace_binding"]["row_count"])
+            and event_commitment_evidence_common._is_exact_int(
+                batch["raw_event_trace_binding"]["row_count"]
+            )
             and batch["raw_event_trace_binding"]["row_count"] >= 0
             and _is_sha256(batch["raw_event_trace_binding"]["trace_sha256"])
         ):
@@ -2032,11 +2060,13 @@ def _evaluation_cell_valid(
             )
             and all(
                 batch["owned_stream_digests"].get(name)
-                == _digest_json(rng_ends[name]) for name in RNG_NAMES
+                == event_commitment_evidence_common._digest_json(rng_ends[name])
+                for name in RNG_NAMES
             )
             and batch["reduction_counts"] == recomputed_counts
             and batch["checkpoint_origin"] == checkpoint_origin
-            and batch["episodes_digest"] == _digest_json(rows)
+            and batch["episodes_digest"]
+            == event_commitment_evidence_common._digest_json(rows)
         ):
             return False, (), []
         expected_rng_states = rng_ends
@@ -2087,7 +2117,7 @@ def _validate_streamed_operational_records(
     )
     if not (
         train_root["artifact_schema"] == expected_train_schema
-        and _is_exact_int(train_root["schema_version"])
+        and event_commitment_evidence_common._is_exact_int(train_root["schema_version"])
         and train_root["schema_version"] == TRAIN_MANIFEST_SCHEMA
         and train_root["formal"] is formal
         and train_root["contract"] == registered_contract()
@@ -2147,14 +2177,14 @@ def _validate_streamed_operational_records(
             "operational", "arms",
         } or not (
             index["artifact_schema"] == expected_index_schema
-            and _is_exact_int(index["schema_version"])
+            and event_commitment_evidence_common._is_exact_int(index["schema_version"])
             and index["schema_version"] == TRAIN_INDEX_SCHEMA
             and index["formal"] is formal
             and index["contract"] == registered_contract()
             and index["mode"] == expected_train_mode
-            and _is_exact_int(index["replicate"])
+            and event_commitment_evidence_common._is_exact_int(index["replicate"])
             and index["replicate"] == replicate
-            and _is_exact_int(index["generation"])
+            and event_commitment_evidence_common._is_exact_int(index["generation"])
             and index["generation"] == index_reference["generation"]
             and index["status"] == "COMPLETE"
             and index["branch"] == expected_index_branch
@@ -2207,14 +2237,14 @@ def _validate_streamed_operational_records(
                 "mode", "replicate", "update", "evidence",
             } or not (
                 shard["artifact_schema"] == expected_update_schema
-                and _is_exact_int(shard["schema_version"])
+                and event_commitment_evidence_common._is_exact_int(shard["schema_version"])
                 and shard["schema_version"] == TRAIN_UPDATE_SCHEMA
                 and shard["formal"] is formal
                 and shard["contract"] == registered_contract()
                 and shard["mode"] == expected_train_mode
-                and _is_exact_int(shard["replicate"])
+                and event_commitment_evidence_common._is_exact_int(shard["replicate"])
                 and shard["replicate"] == replicate
-                and _is_exact_int(shard["update"])
+                and event_commitment_evidence_common._is_exact_int(shard["update"])
                 and shard["update"] == update
             ):
                 errors.append(f"training_update_identity:{replicate}:{update}")
@@ -2320,7 +2350,9 @@ def _validate_streamed_operational_records(
         "status", "branch", "progress", "cells",
     } or not (
         evaluation_root["artifact_schema"] == expected_evaluation_root_schema
-        and _is_exact_int(evaluation_root["schema_version"])
+        and event_commitment_evidence_common._is_exact_int(
+            evaluation_root["schema_version"]
+        )
         and evaluation_root["schema_version"] == EVALUATION_MANIFEST_SCHEMA
         and evaluation_root["formal"] is formal
         and evaluation_root["contract"] == registered_contract()
@@ -2342,7 +2374,9 @@ def _validate_streamed_operational_records(
         and len(cell_references) == len(expected_cells)
         and all(
             isinstance(reference, dict)
-            and _is_exact_int(reference.get("replicate"))
+            and event_commitment_evidence_common._is_exact_int(
+                reference.get("replicate")
+            )
             and type(reference.get("arm")) is str
             and type(reference.get("cell")) is str
             for reference in cell_references
@@ -2655,10 +2689,10 @@ def _verified_json_reference(
     if not (
         type(reference["path"]) is str
         and _is_sha256(reference["sha256"])
-        and _is_exact_int(reference["byte_count"])
+        and event_commitment_evidence_common._is_exact_int(reference["byte_count"])
         and reference["byte_count"] >= 0
         and all(
-            (_is_exact_int(reference[key]) if key in integer_identities
+            (event_commitment_evidence_common._is_exact_int(reference[key]) if key in integer_identities
              else type(reference[key]) is str)
             for key in identity_keys
         )
@@ -2761,7 +2795,9 @@ def _operational_failure_manifest_valid(
             references, "replicate", sorted(
                 reference.get("replicate") for reference in references
                 if isinstance(reference, dict)
-                and _is_exact_int(reference.get("replicate"))
+                and event_commitment_evidence_common._is_exact_int(
+                    reference.get("replicate")
+                )
             ),
         ):
             errors.append("terminal_train_reference_order")
@@ -2779,8 +2815,12 @@ def _operational_failure_manifest_valid(
                     ).resolve()
                     if path != expected or not (
                         isinstance(index, dict)
-                        and _is_exact_int(index.get("replicate"))
-                        and _is_exact_int(index.get("generation"))
+                        and event_commitment_evidence_common._is_exact_int(
+                            index.get("replicate")
+                        )
+                        and event_commitment_evidence_common._is_exact_int(
+                            index.get("generation")
+                        )
                         and index["replicate"] == reference["replicate"]
                         and index["generation"] == reference["generation"]
                     ):
@@ -2843,9 +2883,12 @@ def _operational_failure_manifest_valid(
         and completed_paths_valid
         and (
             failure["replicate"] is None
-            or _is_exact_int(failure["replicate"])
+            or event_commitment_evidence_common._is_exact_int(failure["replicate"])
         )
-        and (failure["batch"] is None or _is_exact_int(failure["batch"]))
+        and (
+            failure["batch"] is None
+            or event_commitment_evidence_common._is_exact_int(failure["batch"])
+        )
         and (failure["arm"] is None or type(failure["arm"]) is str)
         and (failure["cell"] is None or type(failure["cell"]) is str)
     ):
@@ -3365,7 +3408,7 @@ def _collect_causal_audit_evidence(
         )
         selected_for_execution.append({
             **record,
-            "audit_id": _digest_json(list(key)),
+            "audit_id": event_commitment_evidence_common._digest_json(list(key)),
             "trajectory": trajectory,
             "origin_state": origin_state,
             "expected_end_rng_states": deepcopy(expected_end_rng_states),
@@ -3483,7 +3526,7 @@ def _collect_causal_audit_evidence(
                 "donor_key": list(_causal_audit_key(donor)),
                 "candidate_u": deepcopy(donor["candidate_u"]),
                 "candidate_z": deepcopy(donor["candidate_z"]),
-                "candidate_digest": _digest_json({
+                "candidate_digest": event_commitment_evidence_common._digest_json({
                     "candidate_u": donor["candidate_u"],
                     "candidate_z": donor["candidate_z"],
                 }),
@@ -3500,7 +3543,9 @@ def _collect_causal_audit_evidence(
                 for branch in CAUSAL_AUDIT_BRANCHES
             },
             "end_rng_digests": {
-                name: _digest_json(result["end_rng_states"][name])
+                name: event_commitment_evidence_common._digest_json(
+                    result["end_rng_states"][name]
+                )
                 for name in RNG_NAMES
             },
         })
@@ -3671,10 +3716,14 @@ def _evaluation_core(
                         "rng_evidence": deepcopy(trajectory.rng_audit),
                         "reduction_counts": reduction_counts,
                         "checkpoint_origin": checkpoint_name,
-                        "episodes_digest": _digest_json(rows),
+                        "episodes_digest": event_commitment_evidence_common._digest_json(
+                            rows
+                        ),
                         "raw_event_trace_binding": {
                             "row_count": len(trajectory.raw_event_trace),
-                            "trace_sha256": _digest_json(list(trajectory.raw_event_trace)),
+                            "trace_sha256": event_commitment_evidence_common._digest_json(
+                                list(trajectory.raw_event_trace)
+                            ),
                         },
                     }
                     if not (
@@ -4156,7 +4205,11 @@ def main() -> int:
             raise PermissionError("formal_path_exercise never accepts a formal authorization token")
         result = formal_path_exercise(args.output_root, device_name=args.device)
     else: result = aggregate_analysis(args.output_root, authorization=args.authorize_formal)
-    print(json.dumps(result, ensure_ascii=False, default=_json_default)); return 0
+    print(json.dumps(
+        result,
+        ensure_ascii=False,
+        default=event_commitment_evidence_common._json_default,
+    )); return 0
 
 
 if __name__ == "__main__":
