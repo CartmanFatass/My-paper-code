@@ -11,9 +11,7 @@ from ha_ctse_process.standalone_ar_selection import StandaloneARSelectionMixin
 from ha_ctse_process.standalone_lifecycle import StandaloneLifecycleMixin
 from ha_ctse_process.standalone_low_inference import StandaloneLowInferenceMixin
 from ha_ctse_process.standalone_low_update import StandaloneLowUpdateMixin
-from ha_ctse_process.standalone_r31_effect import StandaloneR31EffectMixin
 from ha_ctse_process.standalone_segments import Rollout, Segment
-from ha_ctse_process.r31_effect_information import EffectWindowBuffer
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
 
@@ -240,127 +238,6 @@ def test_ar_selection_mixin_owns_roster_prefix_and_kl_helpers():
     assert kl.dtype == torch.float32
     assert kl[0] > 0.0
     torch.testing.assert_close(kl[1], torch.tensor(0.0))
-
-
-def test_r31_effect_mixin_uniquely_owns_score_update_and_clear_behavior():
-    method_names = (
-        "_empty_r31_metrics",
-        "r31_score_complete_windows",
-        "r31_update_effect_posterior",
-    )
-    assert StandaloneProcessAgent.__bases__[-1] is StandaloneR31EffectMixin
-    for name in method_names:
-        assert name not in StandaloneProcessAgent.__dict__
-        assert getattr(StandaloneProcessAgent, name) is getattr(
-            StandaloneR31EffectMixin, name
-        )
-
-    class DeterministicPosterior(torch.nn.Module):
-        def __init__(self):
-            super().__init__()
-            self.scale = torch.nn.Parameter(torch.tensor(1.0))
-
-        def forward(self, effect, context):
-            zeros = torch.zeros_like(effect[:, 0])
-            full_logits = torch.stack((self.scale + zeros, zeros, zeros), dim=-1)
-            context_logits = torch.stack((zeros, zeros, zeros), dim=-1)
-            return full_logits, context_logits
-
-        def full_logits(self, effect, context):
-            return self(effect, context)[0]
-
-        @staticmethod
-        def log_prob_for_labels(logits, labels):
-            return torch.log_softmax(logits, dim=-1).gather(
-                -1, labels.unsqueeze(-1)
-            ).squeeze(-1)
-
-        @staticmethod
-        def losses(full_logits, context_logits, labels):
-            full_loss = torch.nn.functional.cross_entropy(full_logits, labels)
-            context_loss = torch.nn.functional.cross_entropy(context_logits, labels)
-            return {
-                "loss": full_loss + context_loss,
-                "full_loss": full_loss,
-                "context_loss": context_loss,
-            }
-
-    class R31Harness(StandaloneR31EffectMixin):
-        pass
-
-    class DeterministicOptimizer:
-        def __init__(self, parameter):
-            self.parameter = parameter
-
-        def zero_grad(self):
-            self.parameter.grad = None
-
-        def step(self):
-            with torch.no_grad():
-                self.parameter -= 1e-3 * self.parameter.grad
-
-    agent = R31Harness()
-    agent.n_skills = 3
-    agent.device = torch.device("cpu")
-    agent.r31_enabled = True
-    agent.r31_reward_enabled = False
-    agent.r31_effect_window = 2
-    agent.r31_effect_coef = 0.02
-    agent.r31_effect_clip = 0.05
-    agent.r31_effect_windows = EffectWindowBuffer(1, 2, 2)
-    agent._r31_scored_rows = []
-    agent._r31_scored_batch = None
-    agent.r31_effect_posterior = DeterministicPosterior()
-    agent.r31_effect_opt = DeterministicOptimizer(
-        agent.r31_effect_posterior.scale
-    )
-    rollout = Rollout(
-        env_ids=[0, 0],
-        rewards=[np.zeros(2, dtype=np.float32), np.zeros(2, dtype=np.float32)],
-    )
-
-    def complete_windows(policy_update, start_rollout_index, endpoint_rollout_index):
-        start = np.array([[0.0, 0.0], [1.0, 1.0]], dtype=np.float32)
-        agent.r31_effect_windows.open_after_check(
-            env_id=0,
-            episode_id=0,
-            policy_update=policy_update,
-            start_rollout_index=start_rollout_index,
-            effect_view=start,
-            active_skills=np.array([0, 1], dtype=np.int64),
-            decision_mask=True,
-        )
-        agent.r31_effect_windows.append_effect_view(
-            env_id=0,
-            effect_view=np.array([[0.1, 0.0], [1.0, 0.9]], dtype=np.float32),
-            rollout_index=endpoint_rollout_index,
-        )
-        agent.r31_effect_windows.append_effect_view(
-            env_id=0,
-            effect_view=np.array([[0.3, 0.2], [0.8, 0.7]], dtype=np.float32),
-            rollout_index=endpoint_rollout_index,
-        )
-
-    complete_windows(5, 0, 0)
-    probe_metrics = agent.r31_score_complete_windows(rollout)
-    assert probe_metrics["r31_effect_windows"] == 2.0
-    assert probe_metrics["r31_effect_reward_applied_endpoints"] == 0.0
-    np.testing.assert_array_equal(rollout.rewards[0], np.zeros(2, dtype=np.float32))
-    assert len(agent._r31_scored_rows) == 2
-    assert agent._r31_scored_batch is not None
-
-    update_metrics = agent.r31_update_effect_posterior()
-    assert update_metrics["r31_effect_posterior_samples"] == 2.0
-    assert np.isfinite(update_metrics["r31_effect_posterior_loss"])
-    assert agent._r31_scored_rows == []
-    assert agent._r31_scored_batch is None
-
-    agent.r31_reward_enabled = True
-    complete_windows(6, 1, 1)
-    reward_metrics = agent.r31_score_complete_windows(rollout)
-    assert reward_metrics["r31_effect_reward_applied_endpoints"] == 2.0
-    assert np.count_nonzero(rollout.rewards[1]) == 2
-    np.testing.assert_array_equal(rollout.rewards[0], np.zeros(2, dtype=np.float32))
 
 
 def test_batched_low_deterministic_inference_matches_scalar_path():
@@ -661,6 +538,8 @@ def test_standalone_checkpoint_roundtrip_restores_networks(tmp_path):
 
 
 def test_process_update_injects_reward_into_matching_rollout_agent():
+    np.random.seed(2)
+    torch.manual_seed(2)
     cfg = make_process_config(process_reward_coef=1.0)
     agent = make_agent(cfg)
     segment = Segment(

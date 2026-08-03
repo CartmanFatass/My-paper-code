@@ -144,11 +144,7 @@ def test_early_preflight_and_dispatch_do_not_cross_collector_boundary(
     monkeypatch.setattr(
         standalone_train_runner, "_run_iteration5_process_semantics_branch", branch
     )
-    args = SimpleNamespace(
-        r28_g1_arm="off",
-        r29_action_info_mode="off",
-        r31_effect_mode="off",
-    )
+    args = SimpleNamespace()
     bad_config = SimpleNamespace(
         high_controller="variable_roster_event",
         event_architecture_mode="f1",

@@ -13,14 +13,11 @@ from ha_ctse_process.event_process_runner import (
     _run_iteration5_process_semantics_branch,
 )
 from ha_ctse_process import standalone_manifest
-from ha_ctse_process import standalone_novelty
 from ha_ctse_process import standalone_variable_roster_runner
 from ha_ctse_process.infrastructure_profiling import InfrastructureProfiler
 from ha_ctse_process.standalone_evaluation import evaluate
 from ha_ctse_process.standalone_metrics import (
-    audit_r37_identity_observation,
     emit,
-    empty_r37_identity_metrics,
     export_update_metrics,
     log_eval_metrics,
     log_train_metrics,
@@ -91,14 +88,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
 
         prev_state_info = _seed_info(_infos, "state_info")
         prev_reward_info = _seed_info(_infos, "reward_info")
-        effect_views = [
-            (
-                np.asarray(info.get("intrinsic_effect_view"), dtype=np.float32).copy()
-                if isinstance(info, dict) and info.get("intrinsic_effect_view") is not None
-                else None
-            )
-            for info in _infos
-        ]
         env = SimpleNamespace(**collector.spec)
         action_space_type, _, _ = action_space_details(env)
         state_dim = int(collector.spec.get("state_dim") or 0) or (
@@ -121,23 +110,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 profile_interval,
                 cuda_synchronize=synchronize,
             )
-        aem_enabled = bool(getattr(config, "aem_joint_novelty_enabled", False))
-        if (bool(getattr(agent, "r31_enabled", False)) or aem_enabled) and any(
-            view is None for view in effect_views
-        ):
-            raise RuntimeError(
-                "active position-only objective requires intrinsic_effect_view"
-            )
-        aem_novelty = (
-            standalone_novelty.EpisodicJointPositionNovelty(
-                num_envs=num_envs,
-                grid_size=int(getattr(config, "aem_joint_position_grid_size", 5)),
-                episode_horizon=int(getattr(config, "aem_episode_horizon", 80)),
-            )
-            if aem_enabled
-            else None
-        )
-
         total_steps = 0
         update_idx = 0
         if args.resume_from:
@@ -295,7 +267,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
         while total_steps < int(args.total_timesteps):
             rollout = Rollout()
             episode_rewards = []
-            r37_update_metrics = empty_r37_identity_metrics(config)
             for _local_step in range(int(args.rollout_length)):
                 if profiler is not None:
                     profiler.start("inference", torch_phase=True)
@@ -306,19 +277,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 ]
                 for env_id in range(num_envs):
                     obs = observations[env_id]
-                    identity_audit = audit_r37_identity_observation(
-                        config, obs, states[env_id]
-                    )
-                    r37_update_metrics["r37_identity_audit_rows"] += identity_audit[
-                        "r37_identity_audit_rows"
-                    ]
-                    for field in (
-                        "r37_identity_slot_max_abs_error",
-                        "r37_critic_identity_max_abs_error",
-                    ):
-                        r37_update_metrics[field] = max(
-                            r37_update_metrics[field], identity_audit[field]
-                        )
                     rollout_idx = pre_rollout_indices[env_id]
                     agent.maybe_assign_skills(
                         obs,
@@ -327,7 +285,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         k=int(args.skill_interval),
                         env_id=env_id,
                         policy_update=int(update_idx + 1),
-                        effect_view=effect_views[env_id],
                     )
 
                 (
@@ -365,17 +322,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     truncated = result.truncated
                     info = result.info
                     done = bool(terminated or truncated)
-                    next_effect_view = info.get("intrinsic_effect_view")
-                    if bool(getattr(agent, "r31_enabled", False)) or aem_enabled:
-                        if next_effect_view is None:
-                            raise RuntimeError(
-                                "active position-only objective step did not expose "
-                                "intrinsic_effect_view"
-                            )
-                        next_effect_view = np.asarray(
-                            next_effect_view,
-                            dtype=np.float32,
-                        ).copy()
                     reward_components = info.get("reward_components", {})
                     individual_rewards = np.asarray(
                         reward_components.get(
@@ -386,10 +332,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     )
                     if individual_rewards.shape[0] != int(env.n_uavs):
                         individual_rewards = np.full(int(env.n_uavs), float(reward), dtype=np.float32)
-                    low_training_rewards = individual_rewards.copy()
-                    if aem_novelty is not None:
-                        bonus = aem_novelty.observe(env_id, next_effect_view)
-                        low_training_rewards += np.float32(bonus)
 
                     agent.segments.append(
                         env_id,
@@ -424,7 +366,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     rollout.values.append(values.copy())
                     rollout.low_actor_hxs.append(np.asarray(low_context["actor_hxs"], dtype=np.float32))
                     rollout.low_critic_hxs.append(np.asarray(low_context["critic_hxs"], dtype=np.float32))
-                    rollout.rewards.append(low_training_rewards)
+                    rollout.rewards.append(individual_rewards.copy())
                     rollout.dones.append(done)
                     episode_rewards.append(float(np.mean(individual_rewards)))
 
@@ -435,31 +377,16 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         next_obs=next_obs,
                         next_state=info.get("next_state", states[env_id]),
                         done=done,
-                        effect_view=next_effect_view,
-                        rollout_index=rollout_idx,
                     )
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])
-                    effect_views[env_id] = next_effect_view
                     if done:
                         agent.segments.flush(env_id, reason="episode")
                         observations[env_id], info = collector.reset_one(env_id)
-                        if aem_novelty is not None:
-                            aem_novelty.reset_env(env_id)
                         states[env_id] = info.get("state")
                         # Re-seed pre-step info from the reset state for the next segment.
                         prev_state_info[env_id] = info.get("state_info", {}) or {}
                         prev_reward_info[env_id] = info.get("reward_info", {}) or {}
-                        reset_effect_view = info.get("intrinsic_effect_view")
-                        effect_views[env_id] = (
-                            np.asarray(reset_effect_view, dtype=np.float32).copy()
-                            if reset_effect_view is not None
-                            else None
-                        )
-                        if bool(getattr(agent, "r31_enabled", False)) and effect_views[env_id] is None:
-                            raise RuntimeError(
-                                "R31 reset did not expose intrinsic_effect_view"
-                            )
                         agent.reset_env_state(env_id)
                 if profiler is not None:
                     profiler.stop()
@@ -471,7 +398,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             agent.truncate_high_rows_for_update(observations, states)
             agent.segments.flush(reason="update")
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
-            r31_score_metrics = agent.r31_score_complete_windows(rollout)
             if profiler is not None:
                 profiler.stop()
                 profiler.start("update", torch_phase=True)
@@ -480,15 +406,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 total_steps=total_steps,
                 update_idx=update_idx + 1,
             )
-            process_metrics.update(
-                aem_novelty.pop_update_metrics()
-                if aem_novelty is not None
-                else standalone_novelty.empty_aem_metrics(active=False)
-            )
-            process_metrics.update(r37_update_metrics)
-            process_metrics.update(r31_score_metrics)
             low_metrics = agent.update_low(rollout)
-            process_metrics.update(agent.r31_update_effect_posterior())
             if bool(getattr(agent, "constant_skill_no_high", False)):
                 process_metrics.update(empty_r30_no_high_metrics())
             if bool(getattr(agent, "r30_enabled", False)) and not bool(
@@ -635,11 +553,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 "standalone_update "
                 f"update={update_idx} total_steps={total_steps} "
                 f"env_reward_mean={env_reward_mean:.6f} "
-                f"aem_active={process_metrics.get('aem_active', 0.0):.0f} "
-                f"aem_bonus_applied_steps={process_metrics.get('aem_bonus_applied_steps', 0.0):.0f} "
-                f"aem_bonus_sum={process_metrics.get('aem_bonus_sum', 0.0):.6f} "
-                f"aem_bonus_max={process_metrics.get('aem_bonus_max', 0.0):.6f} "
-                f"aem_count_resets={process_metrics.get('aem_count_resets', 0.0):.0f} "
                 f"process_segments={process_metrics['process_segments']:.0f} "
                 f"process_loss={process_metrics['process_loss']:.6f} "
                 f"process_mi={process_metrics.get('process_mi_estimate_mean', 0.0):.6f} "
@@ -654,11 +567,6 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 f"trans_resid_mi={process_metrics.get('transition_skill_residual_mi_mean', 0.0):.6f} "
                 f"trans_reward={process_metrics.get('transition_skill_reward_mean', 0.0):.6f} "
                 f"trans_active={process_metrics.get('transition_skill_reward_active', 0.0):.0f} "
-                f"r31_windows={process_metrics.get('r31_effect_windows', 0.0):.0f} "
-                f"r31_info={process_metrics.get('r31_effect_information_mean', 0.0):.6f} "
-                f"r31_full_acc={process_metrics.get('r31_effect_full_acc', 0.0):.3f} "
-                f"r31_ctx_acc={process_metrics.get('r31_effect_context_acc', 0.0):.3f} "
-                f"r31_reward={process_metrics.get('r31_effect_reward_mean', 0.0):.6f} "
                 f"team_t_samples={process_metrics.get('team_transition_samples', 0.0):.0f} "
                 f"team_t_mi={process_metrics.get('team_transition_mi_mean', 0.0):.6f} "
                 f"team_t_self={process_metrics.get('team_transition_self_frac', 0.0):.3f} "

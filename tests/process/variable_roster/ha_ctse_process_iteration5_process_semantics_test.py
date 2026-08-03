@@ -523,11 +523,7 @@ def test_iteration5_dispatch_is_distinct_and_fails_closed() -> None:
         event_architecture_mode="f0",
         iteration5_process_semantics_arm="c1_semantic_on",
     )
-    args = SimpleNamespace(
-        r28_g1_arm="off",
-        r29_action_info_mode="off",
-        r31_effect_mode="off",
-    )
+    args = SimpleNamespace()
     assert is_iteration5_process_semantics(config)
     enforce_iteration5_process_semantics_contract(config, args)
     with pytest.raises(ValueError, match="semantic bundle"):

@@ -11,6 +11,20 @@ from ha_ctse_process import standalone_metrics
 from ha_ctse_process.plotting import UPDATE_FIELDS
 
 
+RETIRED_METRIC_FUNCTIONS = {
+    "empty_r37_identity_metrics",
+    "audit_r37_identity_observation",
+}
+RETIRED_METRIC_PREFIXES = (
+    "r28_g1_",
+    "r29_action_info_",
+    "r31_effect_",
+    "aem_",
+    "r37_identity_",
+    "r37_critic_identity_",
+)
+
+
 def _top_level_functions(path: Path) -> set[str]:
     tree = ast.parse(path.read_text(encoding="utf-8"))
     return {node.name for node in tree.body if isinstance(node, ast.FunctionDef)}
@@ -31,8 +45,6 @@ def test_evaluation_and_metric_helpers_have_single_owners():
             "export_update_metrics",
             "log_eval_metrics",
             "emit",
-            "empty_r37_identity_metrics",
-            "audit_r37_identity_observation",
         }
     )
     assert {"numeric_metric", "extract_eval_metrics", "evaluate"}.issubset(evaluation_functions)
@@ -41,9 +53,8 @@ def test_evaluation_and_metric_helpers_have_single_owners():
         "export_update_metrics",
         "log_eval_metrics",
         "emit",
-        "empty_r37_identity_metrics",
-        "audit_r37_identity_observation",
     }.issubset(metrics_functions)
+    assert metrics_functions.isdisjoint(RETIRED_METRIC_FUNCTIONS)
 
 
 def test_evaluation_numeric_and_alias_metric_schema_are_preserved():
@@ -105,11 +116,7 @@ def test_metric_writers_preserve_tensorboard_and_update_csv_schema(tmp_path, mon
     standalone_metrics.log_eval_metrics(writer, 12, {"reward_mean": 2.0})
     assert ("Train/EnvRewardMean", 2.0, 12) in writer.scalars
     assert ("Eval/reward_mean", 2.0, 12) in writer.scalars
-    retired_tag_prefix = "Skill" + "Effect/"
-    assert not any(name.startswith(retired_tag_prefix) for name, _value, _step in writer.scalars)
-    assert not any(
-        field.startswith(("effect_", "force_")) for field in UPDATE_FIELDS
-    )
+    assert not any(field.startswith(RETIRED_METRIC_PREFIXES) for field in UPDATE_FIELDS)
     assert writer.flush_count == 2
 
     plot_calls = []

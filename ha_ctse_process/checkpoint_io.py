@@ -10,10 +10,6 @@ from typing import Any
 import numpy as np
 import torch
 
-from ha_ctse_process.r29_action_information_reward import (
-    REWARD_CLIP as R29_ACTION_INFO_REWARD_CLIP,
-    REWARD_COEF as R29_ACTION_INFO_REWARD_COEF,
-)
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
 
 
@@ -47,29 +43,6 @@ def checkpoint_payload(
             if getattr(agent, "transition_discriminator", None) is not None
             else None
         ),
-        "effect_posterior": (
-            agent.r31_effect_posterior.full_head.state_dict()
-            if getattr(agent, "r31_effect_posterior", None) is not None
-            else None
-        ),
-        "effect_context_posterior": (
-            agent.r31_effect_posterior.context_head.state_dict()
-            if getattr(agent, "r31_effect_posterior", None) is not None
-            else None
-        ),
-        "effect_optimizer": (
-            agent.r31_effect_opt.state_dict()
-            if getattr(agent, "r31_effect_opt", None) is not None
-            else None
-        ),
-        "r31_effect_mode": str(getattr(agent, "r31_effect_mode", "off")),
-        "r31_effect_schema_version": int(
-            getattr(agent, "r31_effect_schema_version", 0)
-        ),
-        "effect_gate_status": str(
-            getattr(agent, "r31_effect_gate_status", "UNTESTED")
-        ),
-        "effect_view_name": str(getattr(agent, "r31_effect_view_name", "")),
         "prototype_discriminator": (
             agent.prototype_discriminator.state_dict()
             if getattr(agent, "prototype_discriminator", None) is not None
@@ -103,8 +76,6 @@ def checkpoint_payload(
             if getattr(agent, "enable_team_intent", False)
             else None
         ),
-        "r28_g1": agent.r28_g1_checkpoint_state(),
-        "r29_action_information": agent.r29_action_info_checkpoint_state(),
         "r30_high_value": (
             agent.high_value.state_dict()
             if getattr(agent, "high_value", None) is not None
@@ -167,17 +138,6 @@ def checkpoint_payload(
         "n_skills": agent.n_skills,
         "duration_candidates": agent.duration_candidates,
         "skill_interval": int(args.skill_interval),
-        "r28_g1_arm": str(getattr(agent, "r28_g1_arm", "off")),
-        "r28_g1_scorer_path": str(getattr(agent, "r28_g1_scorer_path", "")),
-        "r29_action_info_mode": str(
-            getattr(agent, "r29_action_info_mode", "off")
-        ),
-        "r29_action_info_coef": float(
-            getattr(agent, "r29_action_info_coef", R29_ACTION_INFO_REWARD_COEF)
-        ),
-        "r29_action_info_clip": float(
-            getattr(agent, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP)
-        ),
         "opt_num_prototypes": int(getattr(agent, "opt_num_prototypes", getattr(config, "opt_num_prototypes", 0))),
         "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
         "low_level_architecture": str(agent.low_level_architecture),
@@ -390,36 +350,6 @@ def load_checkpoint(
         and getattr(agent, "transition_discriminator", None) is not None
     ):
         agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
-    if bool(getattr(agent, "r31_enabled", False)):
-        effect_state = checkpoint.get("effect_posterior")
-        context_state = checkpoint.get("effect_context_posterior")
-        if (effect_state is None) != (context_state is None):
-            raise ValueError("R31 checkpoint contains only one posterior head")
-        if effect_state is not None:
-            if agent.r31_effect_posterior is None:
-                raise RuntimeError("R31 posterior was not initialized")
-            schema = int(checkpoint.get("r31_effect_schema_version", -1))
-            if schema != int(agent.r31_effect_schema_version):
-                raise ValueError(
-                    f"R31 effect schema mismatch: checkpoint={schema}, "
-                    f"requested={agent.r31_effect_schema_version}"
-                )
-            view_name = str(checkpoint.get("effect_view_name", ""))
-            if view_name != str(agent.r31_effect_view_name):
-                raise ValueError("R31 checkpoint effect view does not match")
-            agent.r31_effect_posterior.full_head.load_state_dict(
-                effect_state,
-                strict=True,
-            )
-            agent.r31_effect_posterior.context_head.load_state_dict(
-                context_state,
-                strict=True,
-            )
-            agent.r31_effect_gate_status = str(
-                checkpoint.get("effect_gate_status", "UNTESTED")
-            ).upper()
-        elif bool(getattr(agent, "r31_reward_enabled", False)):
-            raise ValueError("R31 real_reward requires a gate-passed posterior")
     if (
         "prototype_discriminator" in checkpoint
         and checkpoint.get("prototype_discriminator") is not None
@@ -501,18 +431,11 @@ def load_checkpoint(
             and agent.low_critic_opt is not None
         ):
             agent.low_critic_opt.load_state_dict(checkpoint["low_critic_opt"])
-        if "process_opt" in checkpoint and not bool(
-            getattr(agent, "r31_enabled", False)
-        ):
+        if "process_opt" in checkpoint:
             try:
                 agent.process_opt.load_state_dict(checkpoint["process_opt"])
             except ValueError:
                 pass
-        if (
-            checkpoint.get("effect_optimizer") is not None
-            and getattr(agent, "r31_effect_opt", None) is not None
-        ):
-            agent.r31_effect_opt.load_state_dict(checkpoint["effect_optimizer"])
         if (
             "prototype_disc_opt" in checkpoint
             and checkpoint.get("prototype_disc_opt") is not None
@@ -540,21 +463,6 @@ def load_checkpoint(
                 agent.team_disc_opt.load_state_dict(checkpoint["team_disc_opt"])
             except ValueError:
                 pass
-    if getattr(agent, "r28_g1_enabled", False):
-        continuation = checkpoint.get("r28_g1")
-        frozen_actor_base = None
-        if continuation is not None:
-            if not isinstance(continuation, dict):
-                raise ValueError("R28-G1 checkpoint state is malformed")
-            if str(continuation.get("arm")) != str(agent.r28_g1_arm):
-                raise ValueError("R28-G1 checkpoint arm mismatch")
-            frozen_actor_base = continuation.get("frozen_actor_base")
-            if not isinstance(frozen_actor_base, dict):
-                raise ValueError("R28-G1 checkpoint is missing frozen actor-base state")
-        agent.attach_r28_g1_reward(
-            scorer_path=agent.r28_g1_scorer_path,
-            frozen_actor_base_state=frozen_actor_base,
-        )
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
 
 
@@ -625,37 +533,6 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
             "has_event_semantic": "event_semantic" in event,
         }
     manifest = _load_adjacent_run_manifest(path)
-    raw_r28_g1 = checkpoint.get("r28_g1")
-    r28_g1_metadata = None
-    if isinstance(raw_r28_g1, dict):
-        r28_g1_metadata = {
-            name: raw_r28_g1.get(name)
-            for name in (
-                "arm",
-                "scorer_path",
-                "source_total_steps",
-                "source_update_idx",
-                "source_checkpoint_id",
-                "engineering_smoke",
-            )
-        }
-        r28_g1_metadata["has_frozen_actor_base"] = isinstance(
-            raw_r28_g1.get("frozen_actor_base"), dict
-        )
-    raw_r29 = checkpoint.get("r29_action_information")
-    r29_metadata = None
-    if isinstance(raw_r29, dict):
-        r29_metadata = {
-            name: raw_r29.get(name)
-            for name in (
-                "variant",
-                "mode",
-                "coefficient",
-                "clip",
-                "skill_interval",
-                "terminal_window",
-            )
-        }
 
     def meta(name: str) -> Any:
         return checkpoint.get(name) if name in checkpoint else _manifest_lookup(manifest, name)
@@ -715,18 +592,6 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "assignment_actionability_clip": meta("assignment_actionability_clip"),
         "assignment_actionability_warmup_steps": meta("assignment_actionability_warmup_steps"),
         "assignment_actionability_include_soft": meta("assignment_actionability_include_soft"),
-        "r28_g1": r28_g1_metadata,
-        "r29_action_information": r29_metadata,
-        "r31_effect_mode": checkpoint.get("r31_effect_mode"),
-        "r31_effect_schema_version": checkpoint.get(
-            "r31_effect_schema_version"
-        ),
-        "effect_gate_status": checkpoint.get("effect_gate_status"),
-        "effect_view_name": checkpoint.get("effect_view_name"),
-        "has_effect_posterior": (
-            checkpoint.get("effect_posterior") is not None
-            and checkpoint.get("effect_context_posterior") is not None
-        ),
     }
 
 

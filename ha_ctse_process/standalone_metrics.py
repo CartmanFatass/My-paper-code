@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from ha_ctse_process.metrics_io import append_csv
-from ha_ctse_process.plotting import R37_IDENTITY_METRIC_FIELDS, UPDATE_FIELDS, save_update_plots
+from ha_ctse_process.plotting import UPDATE_FIELDS, save_update_plots
 from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
 
 
@@ -715,27 +715,6 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         process_metrics.get("p2_credit_by_partial_recovery_event", 0.0),
         total_steps,
     )
-    for key, value in process_metrics.items():
-        if key.startswith("r28_g1_"):
-            writer.add_scalar(f"R28G1/{key.removeprefix('r28_g1_')}", value, total_steps)
-        elif key.startswith("r29_action_info_"):
-            writer.add_scalar(
-                f"R29ActionInfo/{key.removeprefix('r29_action_info_')}",
-                value,
-                total_steps,
-            )
-        elif key.startswith("r31_effect_"):
-            writer.add_scalar(
-                f"R31Effect/{key.removeprefix('r31_effect_')}",
-                value,
-                total_steps,
-            )
-        elif key.startswith("aem_"):
-            writer.add_scalar(
-                f"AEM/{key.removeprefix('aem_')}",
-                value,
-                total_steps,
-            )
     writer.flush()
 
 def export_update_metrics(
@@ -763,47 +742,6 @@ def log_eval_metrics(writer, total_steps: int, metrics: dict[str, float]) -> Non
     for key, value in metrics.items():
         writer.add_scalar(f"Eval/{key}", value, total_steps)
     writer.flush()
-
-def empty_r37_identity_metrics(config) -> dict[str, float]:
-    enabled = bool(getattr(config, "r37_identity_gate_enabled", False))
-    mode = str(getattr(config, "alice_bob_actor_identity_mode", "hidden")).lower()
-    metrics = {field: 0.0 for field in R37_IDENTITY_METRIC_FIELDS}
-    metrics["r37_identity_audit_active"] = float(enabled)
-    metrics["r37_identity_mode_code"] = (
-        1.0 if mode == "visible" else 0.0 if mode == "masked" else -1.0
-    )
-    return metrics
-
-def audit_r37_identity_observation(config, observations, state) -> dict[str, float]:
-    """Validate the R37 actor slots against the simultaneous critic identity."""
-
-    metrics = empty_r37_identity_metrics(config)
-    if metrics["r37_identity_audit_active"] == 0.0:
-        return metrics
-    obs = np.asarray(observations, dtype=np.float32)
-    critic_state = np.asarray(state, dtype=np.float32).reshape(-1)
-    if obs.shape != (2, 16):
-        raise RuntimeError(f"R37 actor observation shape {obs.shape} != (2, 16)")
-    if critic_state.shape != (19,):
-        raise RuntimeError(f"R37 critic state shape {critic_state.shape} != (19,)")
-    identity = critic_state[4:8]
-    critic_error = max(
-        abs(float(identity[:2].sum()) - 1.0),
-        abs(float(identity[2:].sum()) - 1.0),
-        float(np.max(np.minimum(np.abs(identity), np.abs(identity - 1.0)))),
-    )
-    mode = str(getattr(config, "alice_bob_actor_identity_mode", "")).lower()
-    expected = identity if mode == "visible" else np.zeros(4, dtype=np.float32)
-    slot_error = float(np.max(np.abs(obs[:, 12:16] - expected[None, :])))
-    metrics["r37_identity_audit_rows"] = float(obs.shape[0])
-    metrics["r37_identity_slot_max_abs_error"] = slot_error
-    metrics["r37_critic_identity_max_abs_error"] = critic_error
-    if slot_error > 1e-7 or critic_error > 1e-7:
-        raise RuntimeError(
-            "R37 identity audit failed: "
-            f"slot_error={slot_error:.9g}, critic_error={critic_error:.9g}"
-        )
-    return metrics
 
 def emit(args: argparse.Namespace, message: str) -> None:
     print(message)

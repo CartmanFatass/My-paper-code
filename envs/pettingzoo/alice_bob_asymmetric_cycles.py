@@ -33,13 +33,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         self.contact_radius = float(
             getattr(config, "alice_bob_contact_radius", 0.70)
         )
-        self.actor_identity_mode = str(
-            getattr(config, "alice_bob_actor_identity_mode", "hidden")
-        ).lower()
-        if self.actor_identity_mode not in {"hidden", "masked", "visible"}:
-            raise ValueError(
-                "alice_bob_actor_identity_mode must be hidden, masked, or visible"
-            )
         if self.short_period <= 0 or self.long_periods <= 0:
             raise ValueError("Alice--Bob periods must be positive")
         if self.num_short_periods < 2 * self.long_periods:
@@ -64,10 +57,7 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
             agent: gym.spaces.Box(-1.0, 1.0, shape=(2,), dtype=np.float32)
             for agent in self.possible_agents
         }
-        # The historical environment remains 12-D. R37 uses a capacity-matched
-        # 16-D layout whose last four slots are either zero or the two active
-        # landmark one-hots.
-        self._obs_dim = 12 if self.actor_identity_mode == "hidden" else 16
+        self._obs_dim = 12
         self._observation_spaces = {
             agent: gym.spaces.Box(
                 -1.0, 1.0, shape=(self._obs_dim,), dtype=np.float32
@@ -90,15 +80,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
         # collected flag (1), current contacts (4), and previous-window
         # per-agent button/target occupancy fractions (4).
         return 19
-
-    def intrinsic_effect_view(self) -> np.ndarray:
-        """Return the task-agnostic interaction state used by R31.
-
-        Only normalized agent positions are exposed.  Active tasks, contacts,
-        clocks, collection state, and reward-derived fields remain private to
-        the environment and cannot leak into the effect posterior.
-        """
-        return (self.agent_pos / self.world_size).astype(np.float32, copy=True)
 
     def get_probe_snapshot(self) -> dict[str, object]:
         """Capture the complete mutable simulator state for shadow rollouts."""
@@ -220,16 +201,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
     def _get_obs(self) -> dict[str, np.ndarray]:
         observations = {}
         scale = max(self.world_size, 1.0)
-        identity = None
-        if self.actor_identity_mode == "visible":
-            identity = np.concatenate(
-                [
-                    np.eye(2, dtype=np.float32)[self.active_plate],
-                    np.eye(2, dtype=np.float32)[self.active_target],
-                ]
-            )
-        elif self.actor_identity_mode == "masked":
-            identity = np.zeros(4, dtype=np.float32)
         for agent, idx in self.agent_ids.items():
             own = self.agent_pos[idx]
             other = self.agent_pos[1 - idx]
@@ -239,8 +210,6 @@ class AliceBobAsymmetricCyclesEnv(ParallelEnv):
                 ((self.button_pos - own) / scale).reshape(-1),
                 ((self.target_pos - own) / scale).reshape(-1),
             ]
-            if identity is not None:
-                fields.append(identity)
             vector = np.concatenate(fields)
             observations[agent] = np.clip(vector, -1.0, 1.0).astype(np.float32)
         return observations

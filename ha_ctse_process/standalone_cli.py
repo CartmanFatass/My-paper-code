@@ -12,12 +12,6 @@ import torch
 
 from ha_ctse_process.collectors import SubprocEnvCollector, SyncEnvCollector
 from ha_ctse_process.env_factory import EnvSpec, make_env, normalize_scenario
-from ha_ctse_process.r28_g1_reward import ARMS as R28_G1_ARMS
-from ha_ctse_process.r29_action_information_reward import (
-    MODES as R29_ACTION_INFO_MODES,
-    REWARD_CLIP as R29_ACTION_INFO_REWARD_CLIP,
-    REWARD_COEF as R29_ACTION_INFO_REWARD_COEF,
-)
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
 
 
@@ -89,36 +83,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--infrastructure-profile-interval", type=_nonnegative_int, default=0)
     parser.add_argument("--checkpoint_keep_last", type=int, default=3)
     parser.add_argument("--resume_from", default="")
-    parser.add_argument(
-        "--r28_g1_arm",
-        choices=("off", *R28_G1_ARMS),
-        default="off",
-    )
-    parser.add_argument("--r28_g1_scorer_path", default="")
-    parser.add_argument(
-        "--r28_g1_engineering_smoke",
-        action="store_true",
-        help=(
-            "Permit only the registered local one-environment, one-update "
-            "R28-G1 integration smoke. This never authorizes a scientific run."
-        ),
-    )
-    parser.add_argument(
-        "--r29_action_info_mode",
-        choices=("off", *R29_ACTION_INFO_MODES),
-        default="off",
-    )
-    parser.add_argument(
-        "--r29_action_info_coef", type=float, default=R29_ACTION_INFO_REWARD_COEF
-    )
-    parser.add_argument(
-        "--r29_action_info_clip", type=float, default=R29_ACTION_INFO_REWARD_CLIP
-    )
-    parser.add_argument(
-        "--r31_effect_mode",
-        choices=("", "off", "probe_only", "real_reward"),
-        default="",
-    )
     parser.add_argument("--eval_interval", type=int, default=0)
     parser.add_argument("--eval_episodes", type=int, default=3)
     parser.add_argument("--eval_max_steps", type=int, default=0)
@@ -401,22 +365,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
     if str(getattr(config, "high_controller", "")) == "variable_roster_event":
         config.event_architecture_schema_version = 1
         config.event_opportunity_schedule = "uniform_active_gap_v1"
-    config.r28_g1_arm = str(getattr(args, "r28_g1_arm", "off"))
-    config.r28_g1_scorer_path = str(getattr(args, "r28_g1_scorer_path", "") or "")
-    config.r28_g1_engineering_smoke = bool(
-        getattr(args, "r28_g1_engineering_smoke", False)
-    )
-    config.r29_action_info_mode = str(
-        getattr(args, "r29_action_info_mode", "off")
-    )
-    config.r29_action_info_coef = float(
-        getattr(args, "r29_action_info_coef", R29_ACTION_INFO_REWARD_COEF)
-    )
-    config.r29_action_info_clip = float(
-        getattr(args, "r29_action_info_clip", R29_ACTION_INFO_REWARD_CLIP)
-    )
-    if str(getattr(args, "r31_effect_mode", "")):
-        config.r31_effect_mode = str(args.r31_effect_mode)
     if int(args.n_agents) > 0:
         config.n_agents = int(args.n_agents)
         config.n_uavs = int(args.n_agents)

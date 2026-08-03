@@ -150,8 +150,15 @@ def test_jsonable_and_pick_attrs_preserve_conversion_and_field_order(tmp_path):
     assert picked == {"first": "artifact", "second": 2}
 
 
-def test_retired_p3_fields_are_absent_from_manifest_schema():
-    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+def test_retired_family_fields_are_absent_from_manifest_schema():
+    retired = (
+        "r28_g1_",
+        "r29_action_info_",
+        "r31_effect_",
+        "aem_",
+        "r37_identity_",
+        "r37_critic_identity_",
+    )
     fields = (
         standalone_manifest.ALGORITHM_MANIFEST_FIELDS
         + standalone_manifest.TRAINING_MANIFEST_FIELDS

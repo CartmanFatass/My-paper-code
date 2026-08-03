@@ -58,8 +58,7 @@ class Config(ProcessConfig):
     enable_situation_diagnostics = False
 
     # The environment reward is sparse collection-only.  The legacy one-step
-    # transition posterior remains available as a diagnostic but must not write
-    # online reward in R31.
+    # transition posterior remains available as a diagnostic.
     alice_bob_semantic_reward_enabled = False
     use_transition_skill_discriminator = True
     transition_skill_condition_on_team = False
@@ -67,15 +66,6 @@ class Config(ProcessConfig):
     transition_skill_reward_warmup_steps = 0
     transition_skill_reward_clip = 0.05
     transition_skill_max_samples = 4096
-
-    # R31-CFEI has one fixed-window route and no coefficient sweep.  Reward use
-    # remains fail-closed until the reward-off causal gate passes.
-    r31_effect_mode = "off"  # off, probe_only, real_reward
-    r31_effect_window = 10
-    r31_effect_coef = 0.02
-    r31_effect_clip = 0.05
-    r31_effect_hidden_dim = 64
-    r31_effect_schema_version = 1
 
     process_reward_injection = "none"
     outcome_residual_injection = "none"

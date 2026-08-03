@@ -118,18 +118,21 @@ def test_infrastructure_profile_interval_accepts_positive_and_rejects_negative(m
         standalone_cli.parse_args()
 
 
-def test_retired_p3_options_and_export_defaults_are_absent(monkeypatch):
-    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+def test_retired_family_options_are_absent(monkeypatch):
+    retired = (
+        "r28_g1",
+        "r29_action_info",
+        "r31_effect",
+        "aem_",
+        "r37_identity",
+    )
     cli_source = Path(standalone_cli.__file__).read_text(encoding="utf-8")
     export_source = Path(export_substrate_gate.__file__).read_text(encoding="utf-8")
 
     assert all(token not in cli_source for token in retired)
     assert all(token not in export_source for token in retired)
 
-    for option in (
-        "--enable_skill_" + "effect_probe",
-        "--enable_skill_" + "forcing_reward",
-    ):
+    for option in ("--r28-g1-arm", "--r29-action-info-mode", "--r31-effect-mode"):
         monkeypatch.setattr(sys, "argv", ["standalone", option])
         with pytest.raises(SystemExit):
             standalone_cli.parse_args()

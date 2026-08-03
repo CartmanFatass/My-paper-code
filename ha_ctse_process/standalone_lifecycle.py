@@ -18,12 +18,6 @@ from ha_ctse_process.situation_transition import (
 class StandaloneLifecycleMixin:
     def reset_env_state(self, env_id: int):
         env_id = int(env_id)
-        if self.r31_effect_windows is not None:
-            self.r31_effect_windows.invalidate(
-                env_id,
-                terminal=True,
-                reason="environment_reset_before_endpoint",
-            )
         self.episode_steps[env_id] = 0
         self.episode_ids[env_id] += 1
         self.steps_to_check[env_id] = 0

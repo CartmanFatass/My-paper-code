@@ -16,11 +16,7 @@ from ha_ctse_process.plotting import EVAL_FIELDS, extract_uav_metrics, save_eval
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
 from ha_ctse_process.standalone_segments import SegmentManager
 from ha_ctse_process.standalone_cli import create_env
-from ha_ctse_process.standalone_metrics import (
-    audit_r37_identity_observation,
-    emit,
-    empty_r37_identity_metrics,
-)
+from ha_ctse_process.standalone_metrics import emit
 from ha_ctse_process.topology_viz import capture_topology_frame, save_topology_artifacts
 
 
@@ -149,7 +145,6 @@ def evaluate(
             coverage_eq1_steps: list[float] = []
             coverage_positive_steps: list[float] = []
             joint_position_cells: set[tuple[int, int, int, int]] = set()
-            r37_eval_metrics = empty_r37_identity_metrics(config)
             initial_joint_cell = alice_bob_joint_cell(state) if is_alice_bob else None
             if initial_joint_cell is not None:
                 joint_position_cells.add(initial_joint_cell)
@@ -170,17 +165,6 @@ def evaluate(
                     )
                 )
             while True:
-                identity_audit = audit_r37_identity_observation(config, obs, state)
-                r37_eval_metrics["r37_identity_audit_rows"] += identity_audit[
-                    "r37_identity_audit_rows"
-                ]
-                for field in (
-                    "r37_identity_slot_max_abs_error",
-                    "r37_critic_identity_max_abs_error",
-                ):
-                    r37_eval_metrics[field] = max(
-                        r37_eval_metrics[field], identity_audit[field]
-                    )
                 agent.maybe_assign_skills(
                     obs,
                     state=state,
@@ -188,7 +172,6 @@ def evaluate(
                     k=int(args.skill_interval),
                     env_id=0,
                     deterministic=deterministic_eval,
-                    collect_r31=False,
                 )
                 actions, _, _ = agent.act_low(obs, env_id=0, deterministic=deterministic_eval, state=state)
                 obs, reward, terminated, truncated, last_info = env.step(actions)
@@ -221,7 +204,6 @@ def evaluate(
                     next_obs=obs,
                     next_state=state,
                     done=bool(done or hit_step_cap),
-                    collect_r31=False,
                 )
                 if capture_topology and len(topology_frames) < topology_max_frames:
                     should_capture = (
@@ -286,7 +268,6 @@ def evaluate(
                 "length": episode_length,
                 "terminated_flag": float(bool(terminated)),
                 "truncated_flag": float(bool(truncated)),
-                **r37_eval_metrics,
                 **episode_metrics,
             }
             eval_records.append(eval_record)

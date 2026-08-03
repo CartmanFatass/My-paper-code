@@ -731,12 +731,7 @@ def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(m
         event_architecture_schema_version=EVENT_ARCHITECTURE_SCHEMA_VERSION,
         event_opportunity_schedule=OPPORTUNITY_SCHEDULE_NAME,
     )
-    args = SimpleNamespace(
-        r28_g1_arm="off",
-        r29_action_info_mode="off",
-        r31_effect_mode="off",
-        num_envs=1,
-    )
+    args = SimpleNamespace(num_envs=1)
     enforce_variable_roster_event_contract(config, args, None)
 
     def forbidden_collector(*_args, **_kwargs):

@@ -604,11 +604,7 @@ def _preflight_validate(commands: Mapping[str, Sequence[str]]) -> dict[str, Any]
         config.event_architecture_mode = mode
         config.event_architecture_schema_version = EVENT_ARCHITECTURE_SCHEMA_VERSION
         config.event_opportunity_schedule = OPPORTUNITY_SCHEDULE_NAME
-        validation_args = SimpleNamespace(
-            r28_g1_arm="off",
-            r29_action_info_mode="off",
-            r31_effect_mode="off",
-        )
+        validation_args = SimpleNamespace()
         enforce_variable_roster_event_contract(config, validation_args, None)
         headers[mode] = validate_event_runtime_configuration(config)
     package_paths = [

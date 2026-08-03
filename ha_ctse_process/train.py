@@ -30,14 +30,9 @@ from ha_ctse_process.standalone_cli import (
     parse_args,
 )
 from ha_ctse_process.standalone_contracts import (
-    enforce_aem_contract,
     enforce_iteration5_process_semantics_contract,
-    enforce_r28_g1_contract,
-    enforce_r29_action_info_contract,
     enforce_r30_contract,
     enforce_r30_pair_gate,
-    enforce_r31_contract,
-    enforce_r37_identity_contract,
     enforce_variable_roster_event_contract,
     is_variable_roster_event,
 )
@@ -140,13 +135,8 @@ def main() -> None:
             if writer is not None:
                 writer.close()
         return
-    enforce_r28_g1_contract(config, args, metadata)
-    enforce_r29_action_info_contract(config, args)
     enforce_r30_pair_gate(config, args, metadata)
     enforce_r30_contract(config, args)
-    enforce_r31_contract(config, args, metadata)
-    enforce_aem_contract(config, args, metadata)
-    enforce_r37_identity_contract(config, args, metadata)
 
     try:
         if args.dry_run_env_steps > 0:

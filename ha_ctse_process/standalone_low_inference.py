@@ -83,10 +83,7 @@ class StandaloneLowInferenceMixin:
                 critic_hxs_t = torch.as_tensor(
                     critic_hxs_before, dtype=torch.float32, device=self.device
                 ).reshape(flat_rows, self.low_rnn_hidden_size)
-                capture_deterministic = bool(
-                    getattr(self, "r28_g1_enabled", False)
-                    or capture_deterministic_action
-                )
+                capture_deterministic = bool(capture_deterministic_action)
                 low_kwargs = (
                     {"return_deterministic_action": True}
                     if capture_deterministic
