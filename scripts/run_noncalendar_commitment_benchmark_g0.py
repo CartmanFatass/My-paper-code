@@ -29,7 +29,7 @@ from ha_ctse_process import event_commitment_replay_evidence
 from ha_ctse_process import event_commitment_evidence_common
 from ha_ctse_process import event_commitment_rng_evidence
 from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
-from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT
+from ha_ctse_process import event_commitment_optimizer
 from ha_ctse_process.event_commitment_analysis import (
     batched_natural_and_permuted_action_tv,
     factor_counts,
@@ -59,11 +59,6 @@ from ha_ctse_process.event_commitment_models import (
 )
 from ha_ctse_process.event_commitment_audit import audit_opportunities_batched
 from ha_ctse_process.event_commitment_collector import collect_trajectory
-from ha_ctse_process.event_commitment_optimizer import (
-    EVENT_ENTROPY_COEFFICIENT,
-    optimize_update,
-    optimizer_ownership_manifest,
-)
 from ha_ctse_process.event_commitment_replay import (
     replay_errors,
     replay_trajectory,
@@ -72,7 +67,6 @@ from ha_ctse_process.event_commitment_replay import (
 from ha_ctse_process.noncalendar_commitment_testbed import (
     BOOTSTRAP_REPETITIONS,
     BOOTSTRAP_SEED,
-    ADDED_PARAMETER_COUNT,
     FORMAL_EVAL_EPISODES,
     FORMAL_EXECUTION_BACKEND,
     FORMAL_NUM_ENVS,
@@ -86,19 +80,10 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     CAUSAL_AUDIT_QUOTA_PER_ACTION,
     CAUSAL_AUDIT_REPLICATES,
     CAUSAL_AUDIT_SELECTION_COORDINATE,
-    OPTIMIZER_CLIP_EPSILON,
-    OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
-    OPTIMIZER_NORM_ATOL,
-    OPTIMIZER_NORM_RTOL,
-    OPTIMIZER_LOSS_ATOL,
-    OPTIMIZER_LOSS_RTOL,
     REGISTERED_CONTRACT,
     REGISTERED_EXECUTION_BACKENDS,
     RNG_BINDING_SCHEMA_VERSION,
     PPO_PASSES,
-    VALUE_COEFFICIENT,
-    PRIMITIVE_ENTROPY_COEFFICIENT,
-    PARAMETER_COUNT,
     make_rng,
     make_noncalendar_ledger,
     registered_contract,
@@ -154,35 +139,6 @@ PAIRED_TENSOR_KEYS = frozenset({
     "rewards", "terminal",
 })
 
-_BASE_PARAMETER_SPECS = (
-    ("base.member_encoder.0.weight", (32, 15)),
-    ("base.member_encoder.0.bias", (32,)),
-    ("base.member_encoder.2.weight", (32, 32)),
-    ("base.member_encoder.2.bias", (32,)),
-    ("base.context_encoder.0.weight", (32, 33)),
-    ("base.context_encoder.0.bias", (32,)),
-    ("base.actor_rnn.weight_ih", (96, 67)),
-    ("base.actor_rnn.weight_hh", (96, 32)),
-    ("base.actor_rnn.bias_ih", (96,)),
-    ("base.actor_rnn.bias_hh", (96,)),
-    ("base.action_head.0.weight", (32, 35)),
-    ("base.action_head.0.bias", (32,)),
-    ("base.action_head.2.weight", (3, 32)),
-    ("base.action_head.2.bias", (3,)),
-    ("base.critic.0.weight", (32, 41)),
-    ("base.critic.0.bias", (32,)),
-    ("base.critic.2.weight", (1, 32)),
-    ("base.critic.2.bias", (1,)),
-)
-_COMMITMENT_BASE_SPECS = (("W_z.weight", (3, 8)),)
-_EVENT_PARAMETER_SPECS = (
-    ("event_head.weight", (2, 87)),
-    ("event_head.bias", (2,)),
-    ("mark_head.weight", (16, 87)),
-    ("mark_head.bias", (16,)),
-)
-
-
 def _write_json(path: Path, value: Any) -> None:
     path = path.resolve()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -216,194 +172,6 @@ def _no_op_equal(ordinary: Any, dummy: Any) -> bool:
             "prefix_counts", "rewards", "terminal",
         )
     )
-
-
-def _expected_parameter_counts(arm: str) -> dict[str, int]:
-    commitment_bias = MARK_DIM * ACTION_COUNT if arm != "OR" else 0
-    return {
-        "base_model": PARAMETER_COUNT,
-        "added_model": 0 if arm == "OR" else ADDED_PARAMETER_COUNT,
-        "base_optimizer": PARAMETER_COUNT + commitment_bias,
-        "event_optimizer": (
-            0 if arm == "OR" else ADDED_PARAMETER_COUNT - commitment_bias
-        ),
-    }
-
-
-def _expected_optimizer_manifest(arm: str) -> dict[str, Any]:
-    def records(specs: tuple[tuple[str, tuple[int, ...]], ...]) -> list[dict[str, Any]]:
-        return [
-            {
-                "name": name,
-                "shape": list(shape),
-                "numel": int(math.prod(shape)),
-            }
-            for name, shape in specs
-        ]
-
-    base_specs = _BASE_PARAMETER_SPECS + (
-        _COMMITMENT_BASE_SPECS if arm != "OR" else ()
-    )
-    return {
-        "schema_version": OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
-        "arm": arm,
-        "groups": {
-            "base": records(base_specs),
-            "event": records(_EVENT_PARAMETER_SPECS if arm != "OR" else ()),
-        },
-    }
-
-
-def _optimizer_pass_valid(
-    record: Any, *, group: str, pass_index: int, step_before: int,
-    manifest: list[dict[str, Any]],
-) -> tuple[bool, dict[str, int]]:
-    required = {
-        "schema_version", "group", "pass_index", "step_before", "step_after",
-        "raw_loss", "loss_components", "unclipped_norm", "clip_coefficient",
-        "parameters", "payload_raw_bytes", "payload_encoded_bytes",
-        "record_digest",
-    }
-    if not isinstance(record, dict) or set(record) != required:
-        return False, {}
-    unsigned = {key: deepcopy(value) for key, value in record.items()
-                if key != "record_digest"}
-    if not (
-        record["schema_version"] == OPTIMIZER_EVIDENCE_SCHEMA_VERSION
-        and record["group"] == group
-        and int(record["pass_index"]) == pass_index
-        and int(record["step_before"]) == step_before
-        and int(record["step_after"]) == step_before + 1
-        and record["record_digest"]
-        == event_commitment_evidence_common._digest_json(unsigned)
-        and isinstance(record["parameters"], list)
-        and len(record["parameters"]) == len(manifest)
-    ):
-        return False, {}
-    loss = float(record["raw_loss"])
-    norm = float(record["unclipped_norm"])
-    coefficient = float(record["clip_coefficient"])
-    if not all(math.isfinite(value) for value in (loss, norm, coefficient)):
-        return False, {}
-    components = record["loss_components"]
-    if group == "base":
-        if not isinstance(components, dict) or set(components) != {
-            "policy_loss", "value_loss", "primitive_entropy"
-        }:
-            return False, {}
-        recomputed_loss = (
-            float(components["policy_loss"])
-            + VALUE_COEFFICIENT * float(components["value_loss"])
-            - PRIMITIVE_ENTROPY_COEFFICIENT * float(components["primitive_entropy"])
-        )
-    else:
-        if not isinstance(components, dict) or set(components) != {
-            "event_policy_loss", "categorical_entropy"
-        }:
-            return False, {}
-        recomputed_loss = (
-            float(components["event_policy_loss"])
-            - EVENT_ENTROPY_COEFFICIENT * float(components["categorical_entropy"])
-        )
-    if not (
-        all(math.isfinite(float(value)) for value in components.values())
-        and math.isclose(
-            loss, recomputed_loss,
-            rel_tol=OPTIMIZER_LOSS_RTOL, abs_tol=OPTIMIZER_LOSS_ATOL,
-        )
-    ):
-        return False, {}
-    if norm < 0.0:
-        return False, {}
-    expected_coefficient = min(
-        1.0, 0.5 / (norm + OPTIMIZER_CLIP_EPSILON)
-    )
-    if coefficient != expected_coefficient:
-        return False, {}
-    squared_sum = 0.0
-    non_none = zero_tensors = nonfinite_values = 0
-    parameter_keys = {
-        "name", "shape", "numel", "dtype", "gradient_present",
-        "nonfinite_count", "zero_count", "squared_l2", "maxabs",
-        "preclip_gradient_digest",
-        "gradient_payload",
-    }
-    raw_bytes = encoded_bytes = 0
-    for summary, owner in zip(record["parameters"], manifest, strict=True):
-        if not isinstance(summary, dict) or set(summary) != parameter_keys:
-            return False, {}
-        try:
-            numel = int(summary["numel"])
-            nonfinite = int(summary["nonfinite_count"])
-            zeros = int(summary["zero_count"])
-            squared = float(summary["squared_l2"])
-            maximum = float(summary["maxabs"])
-        except (TypeError, ValueError, OverflowError):
-            return False, {}
-        payload = summary["gradient_payload"]
-        if summary["gradient_present"] is not True or not isinstance(payload, dict) or set(payload) != {
-            "encoding", "dtype", "shape", "uncompressed_nbytes", "data"
-        }:
-            return False, {}
-        try:
-            compressed = base64.b64decode(payload["data"], validate=True)
-            raw = zlib.decompress(compressed)
-            array = np.frombuffer(raw, dtype=np.dtype(payload["dtype"])).reshape(
-                tuple(int(value) for value in payload["shape"])
-            )
-        except (ValueError, TypeError, zlib.error, binascii.Error):
-            return False, {}
-        derived_nonfinite = int((~np.isfinite(array)).sum())
-        derived_zeros = int((array == 0).sum())
-        derived_squared = float(np.square(array.astype(np.float64)).sum())
-        derived_maximum = float(np.abs(array.astype(np.float64)).max()) if array.size else 0.0
-        derived_digest = hashlib.sha256(raw).hexdigest()
-        raw_bytes += len(raw)
-        encoded_bytes += len(payload["data"].encode("ascii"))
-        if not (
-            summary["name"] == owner["name"]
-            and summary["shape"] == owner["shape"]
-            and numel == owner["numel"]
-            and summary["dtype"] == "<f4"
-            and payload["encoding"] == "zlib9_base64"
-            and payload["dtype"] == "<f4"
-            and payload["shape"] == owner["shape"]
-            and int(payload["uncompressed_nbytes"]) == owner["numel"] * 4
-            and len(raw) == owner["numel"] * 4
-            and 0 <= nonfinite <= numel
-            and 0 <= zeros <= numel
-            and nonfinite == 0
-            and math.isfinite(squared) and squared >= 0.0
-            and math.isfinite(maximum) and maximum >= 0.0
-            and _is_sha256(summary["preclip_gradient_digest"])
-            and nonfinite == derived_nonfinite
-            and zeros == derived_zeros
-            and squared == derived_squared
-            and maximum == derived_maximum
-            and summary["preclip_gradient_digest"] == derived_digest
-            and ((zeros == numel) == (squared == 0.0 and maximum == 0.0))
-        ):
-            return False, {}
-        squared_sum += squared
-        non_none += 1
-        zero_tensors += int(zeros == numel)
-        nonfinite_values += nonfinite
-    if not (
-        int(record["payload_raw_bytes"]) == raw_bytes
-        and int(record["payload_encoded_bytes"]) == encoded_bytes
-    ):
-        return False, {}
-    recomputed_norm = math.sqrt(squared_sum)
-    if not math.isclose(
-        norm, recomputed_norm,
-        rel_tol=OPTIMIZER_NORM_RTOL, abs_tol=OPTIMIZER_NORM_ATOL,
-    ):
-        return False, {}
-    return True, {
-        "non_none": non_none,
-        "zero_tensors": zero_tensors,
-        "nonfinite_values": nonfinite_values,
-    }
 
 
 def _is_sha256(value: Any) -> bool:
@@ -791,7 +559,7 @@ def _training_update_valid(
             )
             if expected_starts is not None else (False, {})
         )
-        manifest = _expected_optimizer_manifest(arm)
+        manifest = event_commitment_optimizer._expected_optimizer_manifest(arm)
         base_passes = optimizer.get("base_passes", [])
         event_passes = optimizer.get("event_passes", [])
         storage = optimizer.get("evidence_storage", {})
@@ -804,7 +572,7 @@ def _training_update_valid(
         )
         if pass_records_valid:
             for index, pass_record in enumerate(base_passes):
-                valid, summary = _optimizer_pass_valid(
+                valid, summary = event_commitment_optimizer._optimizer_pass_valid(
                     pass_record, group="base", pass_index=index + 1,
                     step_before=expected_before["base"] + index,
                     manifest=manifest["groups"]["base"],
@@ -812,7 +580,7 @@ def _training_update_valid(
                 pass_records_valid = pass_records_valid and valid
                 base_summaries.append(summary)
             for index, pass_record in enumerate(event_passes):
-                valid, summary = _optimizer_pass_valid(
+                valid, summary = event_commitment_optimizer._optimizer_pass_valid(
                     pass_record, group="event", pass_index=index + 1,
                     step_before=expected_before["event"] + index,
                     manifest=manifest["groups"]["event"],
@@ -942,7 +710,7 @@ def _training_update_valid(
                 )
             )
             and all(int(value) == 0 for name in gradient_keys[8:] for value in optimizer[name])
-            and parameter_counts == _expected_parameter_counts(arm)
+            and parameter_counts == event_commitment_optimizer._expected_parameter_counts(arm)
         ):
             return False
         if validated_rng_ends is not None:
@@ -2012,7 +1780,8 @@ def _validate_streamed_operational_records(
                     "base": expected_updates * PPO_PASSES, "event": expected_event,
                 }
                 and entry["seed_map"] == authoritative_seed_map("train", replicate)
-                and entry["parameter_counts"] == _expected_parameter_counts(arm)
+                and entry["parameter_counts"]
+                == event_commitment_optimizer._expected_parameter_counts(arm)
                 and _restore_metrics_valid(entry["restore_metrics"])
                 and entry["checkpoint_sha256"] == checkpoint_digest
                 and entry["checkpoint_byte_count"] == checkpoint_bytes
@@ -2208,7 +1977,7 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
         )
         trajectories[name] = trajectory
         _replay, replay = validate_replay(arm, trajectory, device=device)
-        update = optimize_update(
+        update = event_commitment_optimizer.optimize_update(
             arm, base_optimizers[name], event_optimizers[name],
             states[name], trajectory, device=device,
         )
@@ -2286,7 +2055,7 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
     left_trajectory = collect_trajectory(
         left_arm, left_state, device=device, episode_ids=(1,)
     )
-    optimize_update(
+    event_commitment_optimizer.optimize_update(
         left_arm, left_base, left_event, left_state,
         left_trajectory, device=device,
     )
@@ -2298,7 +2067,7 @@ def run_smoke(output_root: Path, *, device_name: str) -> dict[str, Any]:
     right_trajectory = collect_trajectory(
         right_arm, right_state, device=device, episode_ids=(1,)
     )
-    optimize_update(
+    event_commitment_optimizer.optimize_update(
         right_arm, right_base, right_event, right_state,
         right_trajectory, device=device,
     )
@@ -2700,7 +2469,7 @@ def _training_core(
                 for arm in ARMS
             }
             update_metrics = {
-                arm: optimize_update(
+                arm: event_commitment_optimizer.optimize_update(
                     arms[arm], base_optimizers[arm], event_optimizers[arm],
                     states[arm], trajectories[arm], device=device,
                     ppo_passes=PPO_PASSES,

@@ -47,7 +47,7 @@ from ha_ctse_process.event_commitment_evidence_common import (
     _digest_json,
     _json_default,
 )
-from ha_ctse_process.event_commitment_optimizer import optimize_update
+from ha_ctse_process import event_commitment_optimizer
 from ha_ctse_process.event_commitment_analysis import (
     action_distribution_tv,
     batched_natural_and_permuted_action_tv,
@@ -903,7 +903,7 @@ def test_candidate_retention_faithful_and_recovers_discarded_keep(
                 candidate_u=torch.full_like(trajectory.candidate_u, float("nan")),
                 candidate_z=torch.full_like(trajectory.candidate_z, float("nan")),
             )
-        update = optimize_update(
+        update = event_commitment_optimizer.optimize_update(
             arm, base_optimizers["EHC"], event_optimizers["EHC"], state,
             trajectory, device=device,
         )
@@ -1472,18 +1472,18 @@ def test_checkpoint_strict_continuation_and_registered_backend_smoke(
     trajectory = collect_trajectory(
         arms["EHC"], state, device=device, episode_ids=(0,)
     )
-    update = optimize_update(
+    update = event_commitment_optimizer.optimize_update(
         arms["EHC"], base_optimizers["EHC"], event_optimizers["EHC"],
         state, trajectory, device=device,
     )
     assert update["primitive_replays"] == 4
     assert update["event_head_replays"] == 4
     assert update["packed_trajectory_count"] == 1
-    expected_manifest = benchmark_runner._expected_optimizer_manifest("EHC")
+    expected_manifest = event_commitment_optimizer._expected_optimizer_manifest("EHC")
     assert update["ownership_manifest"] == expected_manifest
     for group in ("base", "event"):
         for index, record in enumerate(update[f"{group}_passes"]):
-            valid, summary = benchmark_runner._optimizer_pass_valid(
+            valid, summary = event_commitment_optimizer._optimizer_pass_valid(
                 record, group=group, pass_index=index + 1,
                 step_before=index,
                 manifest=expected_manifest["groups"][group],
@@ -1528,7 +1528,7 @@ def test_checkpoint_strict_continuation_and_registered_backend_smoke(
     left_trajectory = collect_trajectory(
         left_arm, left_state, device=device, episode_ids=(1,)
     )
-    optimize_update(
+    event_commitment_optimizer.optimize_update(
         left_arm, left_base, left_event, left_state,
         left_trajectory, device=device,
     )
@@ -1540,7 +1540,7 @@ def test_checkpoint_strict_continuation_and_registered_backend_smoke(
     right_trajectory = collect_trajectory(
         right_arm, right_state, device=device, episode_ids=(1,)
     )
-    optimize_update(
+    event_commitment_optimizer.optimize_update(
         right_arm, right_base, right_event, right_state,
         right_trajectory, device=device,
     )
@@ -1719,7 +1719,7 @@ def _synthetic_operational_records(
             "next_episode_id": 4000,
             "exposure": {"base": 1000, "event": 0 if arm == "OR" else 1000},
             "seed_map": authoritative_seed_map("train", 0),
-            "parameter_counts": benchmark_runner._expected_parameter_counts(arm),
+            "parameter_counts": event_commitment_optimizer._expected_parameter_counts(arm),
             "restore_metrics": _zero_restore_metrics(),
             "checkpoint_sha256": "0" * 64,
         }
@@ -1881,7 +1881,7 @@ def _synthetic_operational_records(
     def optimizer_pass(
         arm: str, group: str, pass_index: int, step_before: int,
     ) -> dict[str, Any]:
-        manifest = benchmark_runner._expected_optimizer_manifest(arm)["groups"][group]
+        manifest = event_commitment_optimizer._expected_optimizer_manifest(arm)["groups"][group]
         cache_key = (arm, group)
         if cache_key not in optimizer_parameters_cache:
             parameters = []
@@ -1920,7 +1920,7 @@ def _synthetic_operational_records(
             {"event_policy_loss": 0.0, "categorical_entropy": 0.0}
         )
         unsigned = {
-            "schema_version": benchmark_runner.OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
+            "schema_version": event_commitment_optimizer.OPTIMIZER_EVIDENCE_SCHEMA_VERSION,
             "group": group, "pass_index": pass_index,
             "step_before": step_before, "step_after": step_before + 1,
             "raw_loss": 0.0, "loss_components": components,
@@ -1969,7 +1969,7 @@ def _synthetic_operational_records(
                 },
                 train_seed_map, train_rng_states[arm], schedules,
             )
-            manifest = benchmark_runner._expected_optimizer_manifest(arm)
+            manifest = event_commitment_optimizer._expected_optimizer_manifest(arm)
             base_passes = [
                 optimizer_pass(arm, "base", index + 1, 4 * (update - 1) + index)
                 for index in range(4)
@@ -2024,7 +2024,7 @@ def _synthetic_operational_records(
                         ) * benchmark_runner.FORMAL_UPDATES,
                     },
                 },
-                "parameter_counts": benchmark_runner._expected_parameter_counts(arm),
+                "parameter_counts": event_commitment_optimizer._expected_parameter_counts(arm),
             }
         updates.append({
             "update": update,

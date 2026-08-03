@@ -11,6 +11,9 @@ MOVED_FUNCTIONS = {
     "_pack_trajectory_once",
     "compute_gae",
     "optimizer_ownership_manifest",
+    "_expected_parameter_counts",
+    "_expected_optimizer_manifest",
+    "_optimizer_pass_valid",
     "_gradient_summaries",
     "_optimizer_pass_record",
     "optimize_update",
@@ -22,15 +25,15 @@ def test_optimizer_has_unique_direct_owner_and_acyclic_dependencies() -> None:
         owner = getattr(event_commitment_optimizer, name)
         assert owner.__module__ == "ha_ctse_process.event_commitment_optimizer"
 
-    assert benchmark_runner.optimize_update is event_commitment_optimizer.optimize_update
-    assert (
-        benchmark_runner.optimizer_ownership_manifest
-        is event_commitment_optimizer.optimizer_ownership_manifest
-    )
-    assert (
-        benchmark_runner.EVENT_ENTROPY_COEFFICIENT
-        == event_commitment_optimizer.EVENT_ENTROPY_COEFFICIENT
-    )
+    for name in (
+        "optimize_update",
+        "optimizer_ownership_manifest",
+        "_expected_parameter_counts",
+        "_expected_optimizer_manifest",
+        "_optimizer_pass_valid",
+        "EVENT_ENTROPY_COEFFICIENT",
+    ):
+        assert not hasattr(benchmark_runner, name)
 
     optimizer_tree = ast.parse(
         Path(event_commitment_optimizer.__file__).read_text(encoding="utf-8")
@@ -44,3 +47,15 @@ def test_optimizer_has_unique_direct_owner_and_acyclic_dependencies() -> None:
     assert "ha_ctse_process.event_commitment_checkpoint" not in imported_modules
     assert "ha_ctse_process.event_commitment_audit" not in imported_modules
     assert all(not module.startswith("scripts") for module in imported_modules)
+
+    runner_tree = ast.parse(
+        Path(benchmark_runner.__file__).read_text(encoding="utf-8")
+    )
+    runner_functions = {
+        node.name for node in runner_tree.body if isinstance(node, ast.FunctionDef)
+    }
+    assert not runner_functions.intersection({
+        "_expected_parameter_counts",
+        "_expected_optimizer_manifest",
+        "_optimizer_pass_valid",
+    })
