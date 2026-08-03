@@ -17,14 +17,19 @@ workflow_git_authority=none
 workflow_change_request_route=workflow_design_manager
 code_authority=none
 runtime_authority=none
-git_authority=none
+git_authority=none_except_public_handoff_outbound
 current_work_read=forbidden
-write_scope=local_research_including_explorer_owned_pro_reviews
+write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
+public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/
+public_handoff_inbound_read=docs/project/handoffs/code_manager_to_explorer/
+public_handoff_write_tool=apply_patch_only
+public_handoff_git_authority=direct_for_own_outbound_files
+public_handoff_admission=semantic_judgment_no_mandatory_schema
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
 phase_barrier=required
@@ -50,11 +55,8 @@ independent_pro_direction_packet_effect=advisory_revision_only
 independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET
 independent_pro_direction_shared_page_registry=forbidden
 independent_pro_constructive_adversarial_barrier=required
-explorer_project_candidate_packet=EXPLORER_PROJECT_CANDIDATE_PACKET_v1
-explorer_advisory_refinement_packet=EXPLORER_ADVISORY_REFINEMENT_PACKET_optional
 project_toy_validation_authority=none
 project_toy_compute_authority=none
-project_toy_queue_authority=none
 project_toy_cross_direction_competition=forbidden
 ```
 
@@ -82,8 +84,9 @@ review packages, runtime evidence, implementation or scientific ledgers unless
 the user supplies an exact read-only excerpt as part of the research question.
 
 The task may read MyLib and other user-named research sources. MyLib is always
-read-only. Write through `apply_patch` only under `local_research/`, including
-Explorer-owned `local_research/pro_reviews/`. All shell mutation is forbidden.
+read-only. Write through `apply_patch` under `local_research/`, including
+Explorer-owned `local_research/pro_reviews/`, and under its exact public
+handoff outbound directory only. All shell mutation is forbidden.
 During research execution, never edit project code, shared workflow, formal
 science, Git state or an external workspace. The workspace guard enforces these
 boundaries for the registered task.
@@ -127,16 +130,14 @@ its corrections in a new advisory version. Only that new version may support a
 separate adversarial Pro assignment. The two reviews are separate turns; no
 transport operation crosses the barrier or treats either result as closure-only acceptance.
 
-For the project toy-validation bridge, the Explorer emits only the typed
-`EXPLORER_PROJECT_CANDIDATE_PACKET` defined in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. It remains advisory:
-the packet cannot adopt a project direction, assign code, authorize compute,
-contact External Pro, or decide a result. The packet must carry one candidate
-while preserving the complete multi-direction cohort without ranking or
-cross-direction competition. An optional
-`EXPLORER_ADVISORY_REFINEMENT_PACKET` is allowed only after CPM reports
-an explicit External Pro advisory gap; it refines that exact candidate and is
-never a new authority or direct Pro handoff.
+For project validation, Explorer writes a self-contained semantic brief under
+`docs/project/handoffs/explorer_to_code_manager/` as defined in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer may commit and
+push only its own outbound handoff files and may read, but never edit, CPM's
+reverse results. A brief remains advisory: it cannot adopt a project direction,
+assign code, authorize compute, contact External Pro or decide a result.
+Candidate isolation and supplied order organize the work without becoming
+admission states, ranking or cross-direction competition.
 
 ## Scientific procedure
 

@@ -62,6 +62,9 @@ formal_compute_authority=user_only
 explorer_toy_assignment_intake=pro_frozen_only
 explorer_toy_local_research_read=forbidden
 explorer_toy_code_acceptance=exclusive_after_pro_science_freeze
+explorer_public_handoff_inbound=docs/project/handoffs/explorer_to_code_manager/
+explorer_public_result_outbound=docs/project/handoffs/code_manager_to_explorer/
+explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance
 ```
 
 After the root router, read the public `docs/project/CURRENT_WORK.md` index,
@@ -80,9 +83,12 @@ manager; there is no Research Operations Manager or persistent monitor.
   balance, current assignment and next boundary live only in the applicable
   common record.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
-- For an Explorer-origin toy candidate, accept work only after External Pro
-  freezes the science. The Explorer packet is not a code assignment, and
-  `local_research/` remains outside the CPM read boundary.
+- For an Explorer-origin candidate, read the named self-contained public brief,
+  use engineering judgment and perform bounded safe read-only reconnaissance.
+  Missing formatting is not a blocker. Stop intake only for a materially
+  missing authority, External Pro scientific choice or concrete input object.
+  The brief is not a code assignment, and `local_research/` remains outside the
+  CPM read boundary. Accept code only after External Pro freezes the science.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the
@@ -257,8 +263,8 @@ Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
 task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
 authority remains only for code, runtime, review, evidence, report, ledger,
-operational state and non-workflow session content declared by the session
-workspace contract.
+operational state, its public outbound results and non-workflow session content
+declared by the session workspace contract.
 
 ## Must not
 
@@ -266,8 +272,9 @@ workspace contract.
   portfolio or expand formal-compute authority.
 - Delegate technical acceptance, project-state acceptance or Git integration
   to a child or External Pro.
-- Read `local_research/`, treat an Explorer packet as a Pro-frozen assignment,
-  or begin toy compute before External Pro supplies the complete frozen contract.
+- Read `local_research/`, begin code from an Explorer public brief before
+  External Pro freezes science, or begin toy compute before the applicable
+  explicit grant.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another
   persistent task, or recreate a persistent operations session.
 

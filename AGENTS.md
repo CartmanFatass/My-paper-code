@@ -67,10 +67,14 @@ code_project_manager_experiment_dispatch_and_result_routing=exclusive
 code_project_manager_mechanical_result_acceptance=exclusive
 code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
+code_project_manager_public_handoff_read=docs/project/handoffs/explorer_to_code_manager/
+code_project_manager_public_handoff_write_and_git=docs/project/handoffs/code_manager_to_explorer/
 code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 independent_research_canonical_scientific_authority=none
-independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews
+independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/
+independent_research_explorer_public_handoff_git_authority=direct_for_own_outbound_files
+independent_research_explorer_public_handoff_read=docs/project/handoffs/code_manager_to_explorer/
 independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
 independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
@@ -94,6 +98,9 @@ experiment_operator_per_run_user_authorization=not_required_inside_active_grant
 independent_research_per_review_authorization=not_required_inside_active_explorer_grant
 independent_research_wdm_campaign_approval=none
 one_artifact_one_acceptance_owner=true
+public_semantic_handoff_contract=docs/project/handoffs/README.md
+public_semantic_handoff_admission=receiver_judgment_after_bounded_read_only_reconnaissance
+public_semantic_handoff_order=work_organization_only
 cross_task_transport=codex_native_send_message_to_thread
 cross_task_target=current_thread_id_from_user_or_native_task_context
 cross_task_model_and_thinking_overrides=omit
@@ -194,7 +201,7 @@ authority rules decide whether user input is required.
 - WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
 - Agentify transport workspace: `docs/session-workspaces/agentify_transport_operator/`, `temp/sessions/agentify_transport_operator/`.
 - WDM chronological incident log: `docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md`; it is not a scheduler or global blocker.
-- Independent advisory research and its project toy-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
+- Independent advisory research and its semantic project-validation bridge: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`, `docs/project/handoffs/README.md`.
 - Explorer restart continuity is the Explorer-owned `local_research/RESEARCH_CONTINUITY.md`; WDM never creates or edits research state.
 - Independent methodology review: the persistent Explorer may invoke `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`; direction and methodology reviews use the dedicated Agentify transport task.
 - Isolated-worktree identity harness: `scripts/hmasd_workspace_ticket.py`.
@@ -206,6 +213,7 @@ No role reads every routed document. The active assignment or role charter names
 - `logs/<run-id>/` is Code Project Manager-owned runtime evidence written only by an exact assigned native operator or CPM.
 - `docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index. CPM owns project-operation records; WDM owns its workflow-control-plane session/common records.
 - `docs/project/` holds stable project principles and executable plans.
+- `docs/project/handoffs/` holds short-lived, sender-owned semantic briefs between Explorer and Code Manager; Git preserves removed history.
 - `docs/research/cdc/` holds Pro-adjudicated scientific state mechanically recorded by Code Project Manager without reinterpretation.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.

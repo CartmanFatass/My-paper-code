@@ -13,8 +13,9 @@ continuity_entry=local_research/RESEARCH_CONTINUITY.md
 This tracked directory holds compact research plans and WDM reload receipts. It
 grants no workflow-design authority and contains no
 candidate content, scientific state, runtime evidence, Pro archive, formal
-project state or another session's context. Temporary material and outgoing
-handoffs belong under the paired ignored temporary workspace.
+project state or another session's context. Temporary research material stays
+under the paired ignored workspace. Mature-candidate handoffs use only the
+tracked sender-owned path defined by `docs/project/handoffs/README.md`.
 
 The active Explorer is identified by its role, model and current user task. The
 Explorer alone owns the lightweight continuity entry at

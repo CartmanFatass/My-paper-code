@@ -1,81 +1,56 @@
 ---
 name: hmasd-explorer-project-validation
-description: Use for the Explorer-to-project toy-validation bridge: build or check one advisory candidate packet, then keep CPM-owned Pro and compute routing inside the frozen grant.
+description: Use for one semantic Explorer-to-project handoff through the shared public handoff surface while preserving advisory, science, code and compute authority boundaries.
 ---
 
 # Explorer project validation
 
-This Skill is the mechanical boundary for the Explorer-to-project toy lane and
-its CPM-centered lane and routing.
-It creates no project state and grants no compute, code, scientific, or current-
-work authority. CPM sends each currently frozen question path to the dedicated
-Agentify task, continues unrelated work, and later accepts its result; transport
-details do not enter CPM context and a retry changes no CPM file.
+This Skill is the lightweight collaboration path from Independent Research
+Explorer to Code Project Manager. It is not a packet validator, dispatcher,
+queue engine or state machine. It grants no code, compute, scientific,
+current-work or project-state authority.
 
-The packet is an `EXPLORER_PROJECT_CANDIDATE_PACKET` with
-`document_kind=explorer_project_candidate_packet_v1`. It is advisory input only:
-one candidate is selected for each Pro package, and a package never selects
-multiple directions. The design request is
-`EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`; after an authorized toy run, the
-scientific disposition label is `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`.
-The intake completion marker remains `OPS_IDENTITY_INTAKE_ONLY`. If CPM lacks
-a separate toy-compute grant, its workflow state stops at
-`AWAITING_TOY_COMPUTE_GRANT`; that state is not stored in the Explorer packet.
+## Normal path
 
-The packet's canonical v1 fields are `workflow_id`,
-`user_authorization_reference`, `evidence_tier=nonformal_toy`, `origin_campaign`,
-`cohort`, `candidate`, `review_request`, `authority`, and `completion`.
-`origin_campaign` binds `campaign_id`, `campaign_workflow_commit`, and one
-repository-relative artifact path. `cohort.ordered_candidate_ids` is unique and
-`cohort.current_index` identifies the one `candidate.id` under review.
-For `EXPLORER-TOY-VALIDATION-2026-07-31-P1`, the script accepts only the frozen
-ordered queue `CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05`.
-`review_request.candidate_count` is `1`, `cross_direction_competition` and
-`combined_toy` are false, and every authority value is the exact string
-`none` (`scientific_authority`, `code_authority`, `compute_authority`, and
-`project_state_effect`).
+Explorer writes one self-contained, human/model-readable Markdown or JSON brief
+under `docs/project/handoffs/explorer_to_code_manager/` and commits only its
+own outbound files. The brief explains one candidate's identity, target and
+version, intended outcome, concrete inputs, evidence and uncertainty, allowed
+and excluded effects, relevant authority boundary, completion evidence and
+return task. These are semantic writing aids, not required field names.
 
-Use the adjacent `scripts/explorer_project_packet.py` only with its `build` and
-`check` commands. It reads packet/artifact files and emits JSON to stdout; it
-never writes files, messages, Git state, browser state, runtime state, or
-project state. All referenced files are repository-relative regular files under
-`local_research`, outside `local_research/pro_reviews`, with no traversal or
-symlink/reparse escape. Build and check directly re-read each referenced regular
-file. Artifact identity is its safe path, not content metadata.
+One optional manifest may list several brief paths in their intended order.
+The manifest is work organization only: it contains no item state, owner lease,
+retry record or admission status. CPM processes one isolated candidate at a
+time and preserves the supplied order without treating it as a ranking.
 
-`EXPLORER_ADVISORY_REFINEMENT_PACKET` is an optional Skill-level packet used
-only when Pro explicitly requests a gap; v1's mechanical script does not
-broaden into a refinement dispatcher or transition engine.
+CPM reads the named public brief, uses engineering judgment and performs
+bounded safe read-only reconnaissance. It proceeds when the task is
+semantically sufficient. Missing headings, `document_kind`, schema fields or a
+validator receipt never block intake. CPM stops only for a materially missing
+authority, External Pro scientific choice or concrete input object needed for
+the requested outcome.
 
-## CPM coordination
+CPM returns a human-readable result under
+`docs/project/handoffs/code_manager_to_explorer/` containing an understandable
+natural-language conclusion first and the necessary exact evidence second. A
+Codex-native message carrying the same semantic content is the simple fallback.
+Explorer reads but never edits CPM output.
 
-CPM checks one candidate packet, independently verifies its live user
-authorization reference, and packages only that candidate for the dedicated
-Explorer-validation Pro conversation. The same conversation is reused
-sequentially with one candidate per turn; candidate turns are neither combined
-nor concurrent. The packet is an identity envelope, so
-the Pro package also includes the CPM-authored question, allow-list and
-named candidate evidence. `TOY_CONTRACT_FROZEN` permits one complete CPM code
-assignment; `ADVISORY_REFINEMENT_REQUIRED` permits one exact Explorer
-refinement request; `PARK_CANDIDATE` advances the scheduling-only queue.
+If a referenced attachment is not readable by CPM, Explorer embeds the minimum
+necessary content in the same public brief; it does not create another wrapper
+or require CPM to read `local_research/`. Neither direction uses hashes, byte
+counts or fingerprints. After receiver intake, the file author removes the
+active handoff; Git remains the archive.
 
-After `CODE_ACCEPTED` and code-science alignment, CPM stops at
-`AWAITING_TOY_COMPUTE_GRANT` unless the user has frozen a toy-compute grant.
-Inside that grant, CPM owns runtime dispatch and recovery. It routes a
-mechanically valid isolated result to
-`EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`: `CONTINUE_CANDIDATE` retains the
-current candidate, while `PARK_CANDIDATE` or `COMPLETE_CANDIDATE` advances the
-queue. Explorer packet or candidate-artifact nonconformance returns to Explorer
-through CPM. Accepted implementation or frozen runtime-interface defects
-go to CPM, scientific questions go to the dedicated Pro conversation, and
-contract, packet-validator or routing defects go to Workflow Design Manager. Shared
-harness code may be reused; candidate roots, artifacts and result evidence may
-not.
+## Preserved authority
 
-All evidence and dispositions in this lane are scoped to the frozen
-`nonformal_toy` estimand. They consume no formal-project iteration and do not update the CDC portfolio.
-They cannot establish a formal project claim or authorize promotion. Promotion,
-if later requested, is a separate explicit project-science boundary.
+Explorer remains advisory. CPM owns project coordination, code, runtime and
+technical acceptance. External Pro owns scoped scientific choices. Compute
+still requires the applicable explicit user grant. Candidate evidence, run
+roots, artifacts and results remain candidate-specific. This lane is
+`formal=false`, consumes no formal iteration and does not update the CDC
+portfolio or `CURRENT_WORK.md` merely by exchanging a brief.
 
 ```text
 formal=false

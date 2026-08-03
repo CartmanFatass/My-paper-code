@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with outputs confined to local_research.
+description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit public handoffs confined to the shared outbound path.
 ---
 
 # HMASD Independent Research Exploration
@@ -46,8 +46,10 @@ scientific packet requirements.
 
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers. During research execution, do not use Git or create project
-changes.
-Write advisory files only with `apply_patch` under `local_research`.
+changes. Write advisory research files with `apply_patch` under
+`local_research`. The sole exception is an explicit mature-candidate handoff:
+write and Git-integrate only Explorer's files under
+`docs/project/handoffs/explorer_to_code_manager/`.
 
 Workflow design is not an Explorer mode. Report one exact requirement or defect
 to the current Workflow Design Manager task through Codex-native
@@ -243,23 +245,16 @@ dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)
 
-When a mature candidate is ready for a toy-project identity intake, emit one
-`EXPLORER_PROJECT_CANDIDATE_PACKET` per candidate package using the dedicated
-`hmasd-explorer-project-validation` Skill. The packet is routed through the
-CPM-centered lane to CPM's Agentify transport request. It is not a dispatcher or a
-transition engine: `candidate_count=1`,
-`cross_direction_competition=false`, and `combined_toy=false` prevent selecting
-multiple directions in one Pro package.
+When one or more mature candidates are ready for project intake, load
+`hmasd-explorer-project-validation`. Write self-contained semantic briefs under
+`docs/project/handoffs/explorer_to_code_manager/`; an optional manifest lists
+their public paths in the intended order. Each brief carries one candidate, but
+its format is not an admission gate and its order is not queue state or ranking.
 
-The request label is `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`; after a separately
-authorized nonformal toy run, the scientific disposition label is
-`EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`. The packet records
-`evidence_tier=nonformal_toy` and `completion=OPS_IDENTITY_INTAKE_ONLY`. If CPM
-lacks an explicit toy-compute grant, its workflow state—not the
-packet—stops at `AWAITING_TOY_COMPUTE_GRANT`. All authority fields remain
-`none`, and the Explorer retains no Code Project Manager, compute, scientific,
-or project-state authority.
-
-`EXPLORER_ADVISORY_REFINEMENT_PACKET` is optional and may be produced only for
-a gap explicitly requested by Pro. It is advisory refinement, not an automatic
-retry, direction selector, or formal-workflow transition.
+CPM reads the public brief, applies engineering judgment and may perform
+bounded safe read-only reconnaissance. It returns an understandable summary
+and exact evidence through its reverse public directory. Explorer does not ask
+CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
+receipts as candidate evidence. The handoff grants no Code Project Manager,
+compute, scientific or project-state authority; External Pro and explicit
+compute-grant boundaries remain unchanged.

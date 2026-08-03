@@ -526,17 +526,6 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     role_lines = set(role.splitlines())
     skill_normalized = " ".join(skill.split())
     parallel_normalized = " ".join(parallel.split())
-    exact_owned_paths = (
-        "centralized_explorer_workflow_paths=.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md|"
-        ".agents/skills/hmasd-independent-research-exploration/SKILL.md|"
-        ".agents/skills/hmasd-explorer-project-validation/SKILL.md|"
-        ".agents/skills/hmasd-independent-research-pro-review/SKILL.md|"
-        "tests/hmasd_independent_research_exploration_test.py|"
-        "tests/hmasd_explorer_project_validation_packet_test.py|"
-        "tests/hmasd_research_workflow_contract_test.ps1|"
-        "docs/session-workspaces/independent_research_explorer/README.md"
-    )
-
     for required in (
         "startup_identity=role|model|current_task",
         "workflow_authority=none",
@@ -544,12 +533,16 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "workflow_acceptance_authority=none",
         "workflow_git_authority=none",
         "workflow_change_request_route=workflow_design_manager",
-        "git_authority=none",
+        "git_authority=none_except_public_handoff_outbound",
         "current_work_read=forbidden",
         "local_research_write_tool=apply_patch_only",
         "local_research_shell_mutation=forbidden",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
         "continuity_owner=independent_research_explorer",
+        "public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/",
+        "public_handoff_inbound_read=docs/project/handoffs/code_manager_to_explorer/",
+        "public_handoff_git_authority=direct_for_own_outbound_files",
+        "public_handoff_admission=semantic_judgment_no_mandatory_schema",
         "cross_task_transport=codex_native_send_message_to_thread",
         "cross_task_target=current_thread_id_from_user_or_native_task_context",
         "cross_task_model_and_thinking_overrides=omit",
@@ -557,7 +550,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
         "independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews",
         "independent_pro_review_transport_execution=dedicated_agentify_transport_task",
-        "independent_review_provider_contract=agentify_task_request_result",
+        "independent_review_provider_contract=agentify_file_batch_result",
         "independent_review_transmitted_payload=standalone_RAW_QUESTION_only",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
     ):
@@ -576,7 +569,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW:item-1",
     ):
         assert not unsupported.startswith(supported_prefixes)
-    assert exact_owned_paths in set(wdm_role.splitlines())
+    assert "centralized_explorer_workflow_paths=" not in wdm_role
     assert "workflow_authority=exclusive_for_owned_surfaces" not in role_lines
     assert "git_authority=direct_for_owned_workflow_surfaces" not in role_lines
     assert not any(line.startswith("session_id=") for line in role_lines)
@@ -585,7 +578,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-        "one ordered batch manifest to the dedicated Agentify task",
+            "one minimal batch file containing provider and the ordered paths",
         "AGENTIFY_REVIEW_BATCH_REQUEST",
         "AGENTIFY_REVIEW_BATCH_RESULT",
         "currently eligible frozen questions",
@@ -602,8 +595,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Send one",
         "`AGENTIFY_REVIEW_BATCH_REQUEST`",
         "Copy each named successful raw response",
-        "expected_model=GPT-5.6 Pro",
-        "dedicated transport task",
+            "dedicated transport task",
     ):
         assert required in pro_review_skill
     assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
@@ -641,5 +633,6 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "temporary_workspace=temp/sessions/independent_research_explorer/",
         "shared_surface_owner=false",
         "public_current_work_partition_authority=none",
+        "docs/project/handoffs/README.md",
     ):
         assert required in workspace

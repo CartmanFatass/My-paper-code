@@ -73,6 +73,21 @@ The Agentify operator uses `temp/sessions/agentify_transport_operator/` for raw
 response handoffs. CPM or Explorer reads the named result, copies it into its
 own canonical archive, and performs its own scientific or mechanical intake.
 
+## Public semantic handoffs
+
+`docs/project/handoffs/` is a neutral tracked exchange surface, not a workflow
+state store. Explorer alone writes and deletes files under
+`explorer_to_code_manager/`; CPM reads them. CPM alone writes and deletes files
+under `code_manager_to_explorer/`; Explorer reads them. WDM owns the stable
+interface text and never writes, interprets or cleans live handoff content.
+
+Handoffs are self-contained human/model-readable briefs. Formats and suggested
+sections aid understanding but never become admission gates. The receiver uses
+judgment and bounded safe read-only reconnaissance, stopping only for a
+materially missing authority, scientific choice or concrete input object. An
+ordered manifest organizes one-candidate-at-a-time work without queue state.
+The sender removes the active file after intake; Git preserves history.
+
 ## Public current work
 
 `docs/project/CURRENT_WORK.md` is a WDM-owned link/schema index only. It names session records
@@ -97,5 +112,5 @@ owner paths and are linked rather than copied.
 
 WDM may fetch and push accepted workflow-control-plane paths. CPM, Explorer and
 other sessions may fetch and push only their non-workflow code, science,
-runtime, review and workspace paths. Every commit uses an exact owned path set,
+runtime, review, workspace and exact sender-owned public handoff paths. Every commit uses an exact owned path set,
 preserves disjoint edits and leaves unrelated index entries untouched.

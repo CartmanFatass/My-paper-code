@@ -28,7 +28,12 @@ $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $explorerValidationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/SKILL.md')
-$explorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
+$explorerValidationSkillNormalized = $explorerValidationSkill -replace '\s+', ' '
+$explorerValidationContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md')
+$explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
+$publicHandoffContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/handoffs/README.md')
+$publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
+$retiredExplorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
 $agileNormalized = $agile -replace '\s+', ' '
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
@@ -81,28 +86,46 @@ function Assert-HmasdRequiredKeys {
     }
 }
 
-if (-not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf)) {
-    throw 'Explorer project-validation packet script is missing'
+if (Test-Path -LiteralPath $retiredExplorerValidationScriptPath) {
+    throw 'Retired Explorer packet admission script remains'
 }
 foreach ($required in @(
-    'EXPLORER_PROJECT_CANDIDATE_PACKET',
-    'document_kind=explorer_project_candidate_packet_v1',
-    'evidence_tier=nonformal_toy',
-    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
-    'AWAITING_TOY_COMPUTE_GRANT',
-    'EXPLORER_PROJECT_PACKET_OK')) {
-    if (-not $explorerValidationSkill.Contains($required) -and
-        -not (Get-Content -Raw -LiteralPath $explorerValidationScriptPath).Contains($required)) {
-        throw "Explorer project-validation coupling missing: $required"
+    'docs/project/handoffs/explorer_to_code_manager/',
+    'docs/project/handoffs/code_manager_to_explorer/',
+    'semantic writing aids, not required field names',
+    'bounded safe read-only reconnaissance',
+    'not a packet validator, dispatcher, queue engine or state machine')) {
+    if (-not $explorerValidationSkillNormalized.Contains($required)) {
+        throw "Explorer semantic handoff Skill missing: $required"
     }
 }
 foreach ($required in @(
     'explorer_toy_assignment_intake=pro_frozen_only',
     'explorer_toy_local_research_read=forbidden',
-    'Explorer packet is not a code assignment',
+    'explorer_public_handoff_inbound=docs/project/handoffs/explorer_to_code_manager/',
+    'explorer_public_result_outbound=docs/project/handoffs/code_manager_to_explorer/',
+    'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
+    'The brief is not a code assignment',
     'Read `local_research/`')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code PM Explorer-toy boundary missing: $required"
+    }
+}
+foreach ($required in @(
+    'These are semantic completeness cues, not a schema or admission check',
+    'order is work organization rather than queue state',
+    'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence')) {
+    if (-not $explorerValidationContractNormalized.Contains($required)) {
+        throw "Explorer validation contract missing semantic rule: $required"
+    }
+}
+foreach ($required in @(
+    'Explorer alone creates, edits, commits and deletes its outbound files',
+    'Code Manager alone creates, edits, commits and deletes its outbound files',
+    'missing schema, `document_kind`, validator receipt, hash, byte count',
+    'begins with its natural-language conclusion and then appends the necessary exact evidence')) {
+    if (-not $publicHandoffContractNormalized.Contains($required)) {
+        throw "Public handoff contract missing: $required"
     }
 }
 

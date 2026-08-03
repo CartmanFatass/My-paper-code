@@ -67,10 +67,15 @@ $researchPrinciplesRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agent
 $independentResearchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/SKILL.md')
 $explorerValidationSkillPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/SKILL.md'
 $explorerValidationSkill = Get-Content -Raw -LiteralPath $explorerValidationSkillPath
-$explorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
+$explorerValidationSkillNormalized = $explorerValidationSkill -replace '\s+', ' '
+$retiredExplorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
+$retiredExplorerValidationTestPath = Join-Path $repo 'tests/hmasd_explorer_project_validation_packet_test.py'
 $explorerValidationContractPath = Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $explorerValidationContract = Get-Content -Raw -LiteralPath $explorerValidationContractPath
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
+$publicHandoffContractPath = Join-Path $repo 'docs/project/handoffs/README.md'
+$publicHandoffContract = Get-Content -Raw -LiteralPath $publicHandoffContractPath
+$publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
@@ -89,63 +94,50 @@ $handoff = if (Test-Path -LiteralPath $handoffPath -PathType Leaf) {
 }
 
 if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
-    -not (Test-Path -LiteralPath $explorerValidationScriptPath -PathType Leaf) -or
-    -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf)) {
-    throw 'Explorer project-validation Skill/script/contract coupling is missing'
+    -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf) -or
+    -not (Test-Path -LiteralPath $publicHandoffContractPath -PathType Leaf)) {
+    throw 'Explorer semantic handoff Skill/contract coupling is missing'
+}
+if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
+    (Test-Path -LiteralPath $retiredExplorerValidationTestPath)) {
+    throw 'Retired Explorer packet admission script/test remains'
 }
 foreach ($required in @(
-    'EXPLORER_PROJECT_CANDIDATE_PACKET',
-    'EXPLORER_ADVISORY_REFINEMENT_PACKET',
-    'CPM-centered lane',
-    'CPM sends each currently frozen question path',
-    'one candidate is selected for each Pro package',
-    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
-    'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION',
-    'AWAITING_TOY_COMPUTE_GRANT')) {
-    if (-not $explorerValidationSkill.Contains($required)) {
-        throw "Explorer project-validation Skill missing: $required"
+    'docs/project/handoffs/explorer_to_code_manager/',
+    'docs/project/handoffs/code_manager_to_explorer/',
+    'semantic writing aids, not required field names',
+    'bounded safe read-only reconnaissance',
+    'not a packet validator, dispatcher, queue engine or state machine',
+    'one isolated candidate at a time')) {
+    if (-not $explorerValidationSkillNormalized.Contains($required)) {
+        throw "Explorer semantic handoff Skill missing: $required"
     }
 }
 foreach ($entry in @(
     @($codePmRole, 'explorer_toy_assignment_intake=pro_frozen_only'),
-    @($independentResearchRole, 'EXPLORER_PROJECT_CANDIDATE_PACKET'),
+    @($codePmRole, 'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance'),
+    @($independentResearchRole, 'public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/'),
+    @($independentResearchRole, 'public_handoff_git_authority=direct_for_own_outbound_files'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
+    @($proRole, 'semantically sufficient public candidate brief'),
+    @($proRoleNormalized, 'Code Project Manager archives the answer exactly and returns a conclusion-first, evidence-second brief through its outbound public handoff'),
     @($proRole, 'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT'),
     @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
     @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
-    @($explorerValidationContract, 'authority={scientific_authority:none,code_authority:none,compute_authority:none,project_state_effect:none}'),
     @($explorerValidationContract, 'current_work_mutation=forbidden'),
-    @($explorerValidationContract, 'Exactly one candidate is included in each Pro'),
-    @($explorerValidationContract, 'Explorer packet or candidate-artifact nonconformance'),
-    @($explorerValidationContract, 'packet-validator or workflow-routing defect'),
+    @($explorerValidationContractNormalized, 'order is work organization rather than queue state'),
+    @($explorerValidationContractNormalized, 'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence'),
+    @($explorerValidationContractNormalized, 'compute begins only under an applicable explicit user grant'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
-    @($explorerValidationSkill, 'do not update the CDC portfolio'),
+    @($explorerValidationSkillNormalized, 'does not update the CDC portfolio'),
     @($explorerValidationSkill, 'current_work_mutation=forbidden'),
-    @($explorerValidationSkill, 'CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05'),
-    @($explorerValidationContract, 'consume no formal iteration'),
-    @($explorerValidationContractNormalized, 'Candidate evidence, run roots, artifacts and results must remain candidate-specific')) ) {
+    @($explorerValidationContract, 'consumes no formal iteration'),
+    @($explorerValidationContractNormalized, 'Candidate evidence, run roots, artifacts and results remain candidate-specific'),
+    @($publicHandoffContractNormalized, 'A missing schema, `document_kind`, validator receipt, hash, byte count or fingerprint is never a blocker'),
+    @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer project-validation role/contract coupling missing: $($entry[1])"
     }
-}
-foreach ($required in @(
-    'document_kind=explorer_project_candidate_packet_v1',
-    'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT',
-    'nonformal_toy',
-    'local_research',
-    'pro_reviews',
-    'symlink/reparse',
-    'EXPLORER_PROJECT_PACKET_OK',
-    'build',
-    'check')) {
-    if (-not (Get-Content -Raw -LiteralPath $explorerValidationScriptPath).Contains($required)) {
-        throw "Explorer project packet script missing: $required"
-    }
-}
-
-$explorerValidationScript = Get-Content -Raw -LiteralPath $explorerValidationScriptPath
-if ($explorerValidationScript.Contains('"sha256"') -or $explorerValidationScript.Contains('"bytes"')) {
-    throw 'Explorer project packet retains content-hash or byte-count identity fields'
 }
 
 if (-not $WorkflowDesignOnly) {
@@ -225,7 +217,13 @@ foreach ($retired in @(
 }
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
-    'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews',
+    'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/',
+    'independent_research_explorer_public_handoff_git_authority=direct_for_own_outbound_files',
+    'independent_research_explorer_public_handoff_read=docs/project/handoffs/code_manager_to_explorer/',
+    'code_project_manager_public_handoff_read=docs/project/handoffs/explorer_to_code_manager/',
+    'code_project_manager_public_handoff_write_and_git=docs/project/handoffs/code_manager_to_explorer/',
+    'public_semantic_handoff_contract=docs/project/handoffs/README.md',
+    'public_semantic_handoff_admission=receiver_judgment_after_bounded_read_only_reconnaissance',
     'independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md',
     'independent_research_continuity_owner=independent_research_explorer',
     'independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews',
@@ -330,7 +328,11 @@ foreach ($required in @(
     'research_state_change_authority=direct_user_in_explorer_task_only',
     'wdm_cpm_scientific_command_effect=none',
     'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
-    'write_scope=local_research_including_explorer_owned_pro_reviews',
+    'write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/',
+    'public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/',
+    'public_handoff_inbound_read=docs/project/handoffs/code_manager_to_explorer/',
+    'public_handoff_git_authority=direct_for_own_outbound_files',
+    'public_handoff_admission=semantic_judgment_no_mandatory_schema',
     'current_work_read=forbidden',
     'local_research_single_writer=true',
     'local_research_write_tool=apply_patch_only',
@@ -954,7 +956,10 @@ foreach ($required in @(
     'temp/sessions/<role_id>/',
     'docs/project/current-work/common/<record-id>.md',
     'docs/project/current-work/sessions/<role_id>.md',
-    'same_file_concurrent_writes=forbidden')) {
+    'same_file_concurrent_writes=forbidden',
+    'docs/project/handoffs/',
+    'Formats and suggested sections aid understanding but never become admission gates',
+    'The sender removes the active file after intake; Git preserves history')) {
     if (-not $sessionWorkspaceContract.Contains($required)) { throw "Session workspace contract missing: $required" }
 }
 foreach ($required in @(

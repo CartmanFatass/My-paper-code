@@ -167,9 +167,9 @@ paths when scientific judgment depends on what the code actually implements.
   records, the full portfolio, `CURRENT_WORK.md`, code, runtime, CDC and formal
   review artifacts are not inputs.
 - For Explorer-origin toy reviews, the exact CPM-authored question and
-  allow-list include either one `EXPLORER_PROJECT_CANDIDATE_PACKET` plus its
-  named candidate evidence, or one mechanically valid isolated result package.
-  The identity envelope and all evidence are bound to one candidate and the
+  allow-list include one semantically sufficient public candidate brief plus
+  its named evidence, or one mechanically valid isolated result package.
+  The brief and all evidence are bound to one candidate and the
   dedicated CPM-owned conversation. The active formal-research Pro and
   Independent Research Explorer conversations are separate and are not
   interchangeable.
@@ -206,6 +206,6 @@ paths when scientific judgment depends on what the code actually implements.
   never authorize compute or accept code. For
   `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, return the scoped scientific
   interpretation plus exactly `CONTINUE_CANDIDATE`, `PARK_CANDIDATE` or
-  `COMPLETE_CANDIDATE`. Explorer archives the answer exactly and routes it
-  without
-  converting it into a cross-direction ranking.
+  `COMPLETE_CANDIDATE`. Code Project Manager archives the answer exactly and
+  returns a conclusion-first, evidence-second brief through its outbound public
+  handoff without scientific reinterpretation or cross-direction ranking.

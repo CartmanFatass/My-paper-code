@@ -121,28 +121,9 @@ def test_skill_cannot_be_invoked_implicitly() -> None:
     assert "allow_implicit_invocation: false" in UI_PATH.read_text(encoding="utf-8")
 
 
-def test_wdm_explorer_scope_lists_contracts_without_claiming_workspace_globs() -> None:
+def test_wdm_owns_workflow_without_a_parallel_explorer_path_registry() -> None:
     role = ROLE_PATH.read_text(encoding="utf-8")
-    scope = next(
-        line
-        for line in role.splitlines()
-        if line.startswith("centralized_explorer_workflow_paths=")
-    )
-    for required in (
-        ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
-        ".agents/skills/hmasd-independent-research-exploration/SKILL.md",
-        ".agents/skills/hmasd-explorer-project-validation/SKILL.md",
-        ".agents/skills/hmasd-independent-research-pro-review/SKILL.md",
-        "tests/hmasd_independent_research_exploration_test.py",
-        "tests/hmasd_explorer_project_validation_packet_test.py",
-        "tests/hmasd_research_workflow_contract_test.ps1",
-        "docs/session-workspaces/independent_research_explorer/README.md",
-    ):
-        assert required in scope
-    assert "docs/session-workspaces/independent_research_explorer/**" not in scope
-    assert "temp/sessions/independent_research_explorer/**" not in scope
-    assert (
-        "centralized_explorer_workflow_acceptance_owner=workflow_design_manager_for_listed_artifacts_only"
-        in role
-    )
+    assert "workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in role
+    assert "centralized_explorer_workflow_paths=" not in role
+    assert "centralized_explorer_workflow_acceptance_owner=" not in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
