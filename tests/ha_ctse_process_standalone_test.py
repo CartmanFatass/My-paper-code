@@ -7,6 +7,7 @@ from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import standalone_evaluation as process_evaluation
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+from ha_ctse_process.standalone_ar_selection import StandaloneARSelectionMixin
 from ha_ctse_process.standalone_lifecycle import StandaloneLifecycleMixin
 from ha_ctse_process.standalone_low_inference import StandaloneLowInferenceMixin
 from ha_ctse_process.standalone_segments import Rollout, Segment
@@ -85,8 +86,9 @@ def test_lifecycle_reset_mixin_owns_methods_and_preserves_reset_state():
         "_team_transition_record_check",
         "_team_transition_clear_rollout_buffers",
     )
-    assert StandaloneProcessAgent.__mro__[:3] == (
+    assert StandaloneProcessAgent.__mro__[:4] == (
         StandaloneProcessAgent,
+        StandaloneARSelectionMixin,
         StandaloneLifecycleMixin,
         StandaloneLowInferenceMixin,
     )
@@ -154,6 +156,81 @@ def test_lifecycle_reset_mixin_owns_methods_and_preserves_reset_state():
         assert str(error) == "R30 policy state cannot be reset at a PPO update boundary"
     else:
         raise AssertionError("R30 reset guard did not raise")
+
+
+def test_ar_selection_mixin_owns_roster_prefix_and_kl_helpers():
+    method_names = (
+        "_ar_prefix_dim",
+        "_empty_ar_prefix",
+        "_updated_ar_prefix",
+        "_roster_age_scale",
+        "_build_roster_ar_prefix",
+        "_build_shuffled_roster_ar_prefix",
+        "_segment_ar_prefix_tensor",
+        "_roster_selection_metrics",
+        "_categorical_kl",
+    )
+    for name in method_names:
+        assert getattr(StandaloneProcessAgent, name) is getattr(
+            StandaloneARSelectionMixin, name
+        )
+
+    agent = make_agent()
+    agent.n_agents = 3
+    agent.high.ar_prefix_dim = 21
+    agent.ar_prefix_mode = "roster"
+    skills = np.array([0, 1, 2], dtype=np.int64)
+    ages = np.array([0.0, 1.0, 4.0], dtype=np.float32)
+    mask = np.array([True, True, True], dtype=np.bool_)
+
+    empty = agent._empty_ar_prefix()
+    assert empty.shape == (1, 21)
+    assert empty.dtype == torch.float32
+    assert empty.device == agent.device
+
+    prefix = agent._build_roster_ar_prefix(0, skills, ages, mask, [1])
+    assert prefix.dtype == torch.float32
+    torch.testing.assert_close(prefix[0, :3], torch.tensor([0.0, 2.0 / 3.0, 1.0 / 3.0]))
+    torch.testing.assert_close(prefix[0, 7], torch.tensor(1.0 / 3.0))
+    torch.testing.assert_close(prefix[0, 11], torch.tensor(1.0 / 3.0))
+    torch.testing.assert_close(prefix[0, 16], torch.tensor(1.0 / 6.0))
+    torch.testing.assert_close(prefix[0, 20], torch.tensor(1.0 / 3.0))
+    updated = agent._updated_ar_prefix(prefix, 0)
+    torch.testing.assert_close(prefix[0, 0], torch.tensor(0.0))
+    torch.testing.assert_close(updated[0, 0], torch.tensor(1.0 / 3.0))
+    assert not torch.equal(prefix, agent._build_shuffled_roster_ar_prefix(0, skills, ages, mask, [1]))
+
+    segment = Segment(
+        env_id=0,
+        agent_id=0,
+        skill=1,
+        duration_idx=0,
+        start_step=0,
+        high_obs=np.zeros(4, dtype=np.float32),
+        high_logp=0.0,
+        high_value=0.0,
+        high_entropy=0.0,
+        roster_active_skills_start=skills,
+        roster_active_ages_start=ages,
+        roster_active_mask_start=mask,
+    )
+    rebuilt = agent._segment_ar_prefix_tensor([segment])
+    torch.testing.assert_close(rebuilt[0], agent._build_roster_ar_prefix(0, skills, ages, mask)[0])
+    metrics = agent._roster_selection_metrics([segment])
+    assert metrics == {
+        "selection_independence_available": 1.0,
+        "selection_same_skill_rate": 1.0,
+        "selection_independence_null_rate": 0.75,
+        "selection_independence_deficit": 0.25,
+    }
+
+    logits_p = torch.tensor([[0.0, 1.0], [2.0, -1.0]], dtype=torch.float64)
+    logits_q = torch.tensor([[1.0, 0.0], [2.0, -1.0]], dtype=torch.float64)
+    kl = agent._categorical_kl(logits_p, logits_q)
+    assert kl.shape == (2,)
+    assert kl.dtype == torch.float32
+    assert kl[0] > 0.0
+    torch.testing.assert_close(kl[1], torch.tensor(0.0))
 
 
 def test_batched_low_deterministic_inference_matches_scalar_path():
