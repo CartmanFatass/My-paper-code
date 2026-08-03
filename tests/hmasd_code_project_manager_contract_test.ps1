@@ -503,14 +503,15 @@ $g0CodePaths = @(
     'ha_ctse_process/uav_g0_statistics.py',
     'ha_ctse_process/uav_g0_oracle_evidence.py',
     'ha_ctse_process/uav_g0_controllers.py',
+    'ha_ctse_process/uav_g0_environment.py',
     'ha_ctse_process/uav_source_identifiability_g0.py',
     'scripts/run_uav_source_identifiability_g0.py',
     'tests/ha_ctse_process_uav_source_identifiability_g0_test.py',
     'tests/run_uav_source_identifiability_g0_test.py',
     'docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md'
 )
-if (-not $g0ReadinessContract.Contains('exact eleven-path implementation boundary')) {
-    throw 'G0 readiness performance contract does not freeze the eleven-path boundary'
+if (-not $g0ReadinessContract.Contains('exact twelve-path implementation boundary')) {
+    throw 'G0 readiness performance contract does not freeze the twelve-path boundary'
 }
 foreach ($required in $g0CodePaths) {
     if (-not $g0ReadinessContract.Contains($required)) {
