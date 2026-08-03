@@ -19,7 +19,6 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process import event_commitment_checkpoint
 from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
@@ -39,7 +38,15 @@ from ha_ctse_process.event_commitment_replay import (
     validate_replay,
 )
 from ha_ctse_process.event_commitment_optimizer import optimize_update
-from ha_ctse_process.event_commitment_models import initialize_arms
+from ha_ctse_process.event_commitment_analysis import (
+    action_distribution_tv,
+    batched_natural_and_permuted_action_tv,
+    factor_counts,
+)
+from ha_ctse_process.event_commitment_models import (
+    initialize_arms,
+    parameter_and_optimizer_counts,
+)
 from ha_ctse_process.event_commitment_checkpoint import (
     compare_continuations,
     load_checkpoint,
@@ -64,16 +71,9 @@ from ha_ctse_process.event_commitment_audit import (
     audit_opportunities_batched,
     audit_single_opportunity,
 )
-from ha_ctse_process.event_held_commitment_link import (
-    EVENT_INPUT_DIM,
-    MARK_DIM,
-    OPPORTUNITY_SUPPORT,
-    action_distribution_tv,
-    batched_natural_and_permuted_action_tv,
-    factor_counts,
-    nested_state_maximum_difference,
-    parameter_and_optimizer_counts,
-)
+from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
+from ha_ctse_process.event_commitment_rng import OPPORTUNITY_SUPPORT
+from ha_ctse_process.event_commitment_types import EVENT_INPUT_DIM, MARK_DIM
 from ha_ctse_process.dynamic_roster_testbed import HORIZON, MAX_LIFECYCLES
 from ha_ctse_process.noncalendar_commitment_testbed import (
     ACCESS_FLOOR,
@@ -1126,7 +1126,7 @@ def test_cpu_stage2_natural_continuation_diagnostic(
         return errors
 
     monkeypatch.setattr(
-        event_held_commitment_link, "_audit_row_errors", diagnostic_errors
+        event_commitment_audit, "_audit_row_errors", diagnostic_errors
     )
     bundle = _build_causal_audit_oracle_bundle(device)
     assert all(
@@ -1275,7 +1275,7 @@ def test_raw_pre_outcome_trace_is_minimal_and_origin_bound(
 def test_no_active_legacy_or_scalar_audit_cuda_path() -> None:
     legacy_prefix, legacy_schema = "fork" + "_", "natural" + "_fork"
     production = [Path(event_commitment_audit.__file__),
-                  Path(event_held_commitment_link.__file__), Path(benchmark_runner.__file__),
+                  Path(benchmark_runner.__file__),
                   Path(__file__).parents[1] / "ha_ctse_process" / "noncalendar_commitment_testbed.py"]
     for path in production:
         source = path.read_text(encoding="utf-8")

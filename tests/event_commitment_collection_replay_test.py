@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import torch
 
-from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.event_commitment_collector import collect_trajectory
 from ha_ctse_process.event_commitment_models import initialize_arms
 from ha_ctse_process.event_commitment_replay import (
@@ -28,8 +27,6 @@ def test_collection_and_replay_have_unique_direct_owners() -> None:
     assert validate_replay.__module__ == (
         "ha_ctse_process.event_commitment_replay"
     )
-    assert event_held_commitment_link.collect_trajectory is collect_trajectory
-    assert event_held_commitment_link.validate_replay is validate_replay
 
 
 def test_minimal_deterministic_collection_replay_parity() -> None:

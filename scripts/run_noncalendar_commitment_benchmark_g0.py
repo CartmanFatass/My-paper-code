@@ -25,34 +25,35 @@ if str(PROJECT_ROOT) not in sys.path:
 import numpy as np
 import torch
 
-from ha_ctse_process.event_held_commitment_link import (
-    ArmName,
-    ACTION_COUNT,
-    CREATE,
-    KEEP,
-    MARK_DIM,
-    RENEW,
+from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
+from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT
+from ha_ctse_process.event_commitment_analysis import (
+    batched_natural_and_permuted_action_tv,
+    factor_counts,
+)
+from ha_ctse_process.event_commitment_collector import CREATE, KEEP, RENEW
+from ha_ctse_process.event_commitment_rng import (
     RNG_NAMES,
     authoritative_seed_map,
     collection_rng_schedules,
-    factor_counts,
     make_training_state,
     make_rng_binding,
-    batched_natural_and_permuted_action_tv,
-    nested_state_maximum_difference,
     owned_rng_states,
-    parameter_and_optimizer_counts,
     replay_rng_schedule_end_state,
     replay_rng_schedule_arrays,
     validate_rng_binding,
 )
+from ha_ctse_process.event_commitment_types import ArmName, MARK_DIM
 from ha_ctse_process.event_commitment_checkpoint import (
     compare_continuations,
     load_checkpoint,
     runtime_rng_snapshot,
     save_checkpoint,
 )
-from ha_ctse_process.event_commitment_models import initialize_arms
+from ha_ctse_process.event_commitment_models import (
+    initialize_arms,
+    parameter_and_optimizer_counts,
+)
 from ha_ctse_process.event_commitment_audit import audit_opportunities_batched
 from ha_ctse_process.event_commitment_collector import collect_trajectory
 from ha_ctse_process.event_commitment_optimizer import (

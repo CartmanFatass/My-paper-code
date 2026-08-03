@@ -10,7 +10,6 @@ import numpy as np
 import torch
 
 from ha_ctse_process import event_commitment_audit
-from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.dynamic_roster_testbed import MAX_LIFECYCLES
 from ha_ctse_process.event_commitment_audit import (
     AUDIT_STREAM_NAMES,
@@ -79,9 +78,10 @@ def _defined_names(module: Any) -> set[str]:
 
 def test_audit_cluster_has_one_concrete_owner_and_no_legacy_cycle() -> None:
     audit_names = _defined_names(event_commitment_audit)
-    legacy_names = _defined_names(event_held_commitment_link)
     assert _MOVED_OWNERS <= audit_names
-    assert not (_MOVED_OWNERS & legacy_names)
+    assert not Path(event_commitment_audit.__file__).with_name(
+        "event_held_commitment_link.py"
+    ).exists()
     audit_source = Path(event_commitment_audit.__file__).read_text(encoding="utf-8")
     assert "event_held_commitment_link" not in audit_source
 

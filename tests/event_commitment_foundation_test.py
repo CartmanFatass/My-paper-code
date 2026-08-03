@@ -9,7 +9,6 @@ import numpy as np
 import torch
 
 from ha_ctse_process import event_commitment_rng, event_commitment_types
-from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.noncalendar_commitment_testbed import (
     EVENT_SEED,
     HELD_OUT_EVAL_TASK_SEED,
@@ -32,8 +31,8 @@ def test_direct_type_owners_preserve_identity_fields_and_arm_state() -> None:
         "TrainingState",
     )
     for name in owned:
-        assert getattr(event_held_commitment_link, name) is getattr(
-            event_commitment_types, name
+        assert getattr(event_commitment_types, name).__module__ == (
+            "ha_ctse_process.event_commitment_types"
         )
 
     assert tuple(field.name for field in fields(event_commitment_types.SegmentRecord)) == (
@@ -153,6 +152,6 @@ def test_direct_rng_owner_preserves_seed_payload_replay_and_binding() -> None:
         "replay_rng_schedule_arrays", "make_rng_binding", "validate_rng_binding",
     )
     for name in rng_functions:
-        assert getattr(event_held_commitment_link, name) is getattr(
-            event_commitment_rng, name
+        assert getattr(event_commitment_rng, name).__module__ == (
+            "ha_ctse_process.event_commitment_rng"
         )

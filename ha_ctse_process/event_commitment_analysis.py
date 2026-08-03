@@ -1,102 +1,18 @@
-"""Frozen OR/DUM/EHC event-held commitment package for noncalendar G0."""
+"""Analysis ownership for noncalendar event-commitment trajectories."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-import json
-import math
-from time import perf_counter
-from typing import Iterable, Literal
-
-import numpy as np
 import torch
 import torch.nn.functional as F
 
-from ha_ctse_process.dynamic_roster_direct import (
-    model_state_copy,
-    nested_state_maximum_difference,
-)
-from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT, HORIZON, MAX_LIFECYCLES, OBSERVATION_DIM
-from ha_ctse_process.event_commitment_rng import (
-    OPPORTUNITY_SUPPORT,
-    RNG_NAMES,
-    _float32_payload,
-    _raw_event_trace_digest,
-    authoritative_seed_map,
-    collection_rng_schedules,
-    make_rng_binding,
-    make_training_state,
-    owned_rng_states,
-    replay_rng_schedule_arrays,
-    replay_rng_schedule_end_state,
-    validate_rng_binding,
-)
+from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT, OBSERVATION_DIM
+from ha_ctse_process.event_commitment_collector import CREATE, KEEP, RENEW
 from ha_ctse_process.event_commitment_types import (
-    ArmName,
-    CollectionCursor,
     CommitmentArm,
-    EVENT_INPUT_DIM,
     EventTrajectory,
-    LifecycleState,
     MARK_DIM,
-    SegmentRecord,
-    TrainingState,
 )
-from ha_ctse_process.event_commitment_collector import (
-    CREATE,
-    KEEP,
-    RENEW,
-    _AuditRowStream,
-    collect_trajectory,
-)
-from ha_ctse_process.event_commitment_replay import (
-    validate_replay,
-)
-from ha_ctse_process.event_commitment_optimizer import (
-    EVENT_ENTROPY_COEFFICIENT,
-    _gradient_summaries,
-    _optimizer_pass_record,
-    _pack_trajectory_once,
-    compute_gae,
-    optimize_update,
-    optimizer_ownership_manifest,
-)
-from ha_ctse_process.noncalendar_commitment_testbed import (
-    CAUSAL_AUDIT_CONTINUOUS_ATOL,
-    EVENT_JOINT_FACTOR_COUNT,
-    FORMAL_EVAL_EPISODES,
-    FORMAL_NUM_ENVS,
-    FORMAL_TRANSITIONS_PER_ARM,
-    HELD_OUT_EVAL_TASK_SEED,
-    IID_EVAL_TASK_SEED,
-    OPPORTUNITY_SEED,
-    REGISTERED_CONTRACT,
-    REPLAY_COMPONENT_FIELDS,
-    REPLAY_EVENT_JOINT_RATIO_FIELDS,
-    REPLAY_EXACT_FIELDS,
-    REPLAY_JOINT_FIELDS,
-    REPLAY_JOINT_RECORD_FIELDS,
-    REPLAY_LOG_COMPONENT_ATOL,
-    REPLAY_LOG_COMPONENT_FIELDS,
-    REPLAY_LOG_COMPONENT_RTOL,
-    REPLAY_LOG_RATIO_DRIFT_CAP,
-    REPLAY_RECORD_SCHEMA_VERSION,
-    REPLAY_STATE_ATOL,
-    REPLAY_STATE_FIELDS,
-    REPLAY_WORST_RECORD_FIELDS,
-    RESUME_TOLERANCE,
-    RNG_BINDING_SCHEMA_VERSION,
-    TRAIN_ORDER_SEED,
-    TRAIN_TASK_SEED,
-    TRAIN_ACTION_SEED,
-    float32_reduction_gamma,
-    frontier_order,
-    make_noncalendar_ledger,
-    make_rng,
-    NoncalendarLedger,
-    NoncalendarTrackingEnv,
-    TrackingOutcome,
-)
+
 
 def action_distribution_tv(
     logits_natural: torch.Tensor, logits_perm: torch.Tensor
@@ -212,8 +128,3 @@ def batched_natural_and_permuted_action_tv(
 
 def factor_counts(trajectory: EventTrajectory) -> dict[str, int]:
     return {"create": int((trajectory.event_kind == CREATE).sum()), "keep": int((trajectory.event_kind == KEEP).sum()), "renew": int((trajectory.event_kind == RENEW).sum()), "categorical": int(trajectory.event_cat_mask.sum()), "mark": int(trajectory.event_mark_mask.sum())}
-
-
-def parameter_and_optimizer_counts(arm: CommitmentArm, base_optimizer: torch.optim.Optimizer, event_optimizer: torch.optim.Optimizer | None) -> dict[str, int]:
-    optimizer_count = lambda opt: 0 if opt is None else sum(p.numel() for group in opt.param_groups for p in group["params"])
-    return {"base_model": arm.base_parameter_count, "added_model": arm.added_parameter_count, "base_optimizer": optimizer_count(base_optimizer), "event_optimizer": optimizer_count(event_optimizer)}

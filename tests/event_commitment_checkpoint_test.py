@@ -4,7 +4,6 @@ import ast
 from pathlib import Path
 
 from ha_ctse_process import event_commitment_checkpoint
-from ha_ctse_process import event_held_commitment_link
 from scripts import run_noncalendar_commitment_benchmark_g0 as benchmark_runner
 
 
@@ -23,15 +22,10 @@ def _module_tree(module: object) -> ast.Module:
 
 def test_checkpoint_owner_import_identity_and_dag() -> None:
     owner_tree = _module_tree(event_commitment_checkpoint)
-    parent_tree = _module_tree(event_held_commitment_link)
     owner_definitions = {
         node.name for node in owner_tree.body if isinstance(node, ast.FunctionDef)
     }
-    parent_definitions = {
-        node.name for node in parent_tree.body if isinstance(node, ast.FunctionDef)
-    }
     assert set(OWNED_NAMES) <= owner_definitions
-    assert set(OWNED_NAMES).isdisjoint(parent_definitions)
 
     owner_imports = {
         (node.module, alias.name)
