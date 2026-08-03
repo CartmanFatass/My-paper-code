@@ -27,6 +27,7 @@ import torch
 
 from ha_ctse_process import event_commitment_replay_evidence
 from ha_ctse_process import event_commitment_evidence_common
+from ha_ctse_process import event_commitment_rng_evidence
 from ha_ctse_process.dynamic_roster_direct import nested_state_maximum_difference
 from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT
 from ha_ctse_process.event_commitment_analysis import (
@@ -215,313 +216,6 @@ def _no_op_equal(ordinary: Any, dummy: Any) -> bool:
             "prefix_counts", "rewards", "terminal",
         )
     )
-
-
-def _tensor_digest(value: torch.Tensor) -> str:
-    tensor = value.detach().cpu().contiguous()
-    digest = hashlib.sha256()
-    digest.update(str(tensor.dtype).encode("ascii"))
-    digest.update(np.asarray(tensor.shape, dtype=np.int64).tobytes())
-    digest.update(tensor.numpy().tobytes())
-    return digest.hexdigest()
-
-
-def _owned_stream_digests(state: Any) -> dict[str, str]:
-    return {
-        name: event_commitment_evidence_common._digest_json(
-            state.rngs[name].bit_generator.state
-        )
-        for name in RNG_NAMES
-    }
-
-
-def _initial_rng_states(seed_map: Mapping[str, int]) -> dict[str, Any]:
-    return {
-        name: deepcopy(np.random.default_rng(int(seed_map[name])).bit_generator.state)
-        for name in RNG_NAMES
-    }
-
-
-def _collection_rng_bindings(
-    *, context: Mapping[str, Any], seed_map: Mapping[str, int],
-    start_states: Mapping[str, Any], end_states: Mapping[str, Any],
-    trajectory: Any, deterministic: bool,
-) -> dict[str, dict[str, Any]]:
-    schedules = collection_rng_schedules(
-        trajectory, deterministic=deterministic
-    )
-    return {
-        name: make_rng_binding(
-            context=context,
-            stream=name,
-            seed=int(seed_map[name]),
-            start_state=start_states[name],
-            draw_schedule=schedules[name],
-            expected_end_state=end_states[name],
-        )
-        for name in RNG_NAMES
-    }
-
-
-def _rng_bindings_valid(
-    bindings: Any, *, expected_context: Mapping[str, Any],
-    seed_map: Mapping[str, int], expected_starts: Mapping[str, Any],
-) -> tuple[bool, dict[str, Any]]:
-    if not isinstance(bindings, dict) or set(bindings) != set(RNG_NAMES):
-        return False, {}
-    end_states: dict[str, Any] = {}
-    integer_context_fields = {
-        "replicate", "update", "batch", "episode_id", "time", "key",
-        "membership_epoch", "segment_id",
-    }
-    for name in RNG_NAMES:
-        binding = bindings[name]
-        context = binding.get("context") if isinstance(binding, dict) else None
-        if not isinstance(context, dict) or any(
-            field in context and not event_commitment_evidence_common._is_exact_int(context[field])
-            for field in integer_context_fields
-        ):
-            return False, {}
-        valid, end_state = validate_rng_binding(
-            binding,
-            expected_context=expected_context,
-            expected_stream=name,
-            expected_seed=int(seed_map[name]),
-            expected_start_state=expected_starts[name],
-        )
-        if not valid or end_state is None:
-            return False, {}
-        end_states[name] = end_state
-    return True, end_states
-
-
-def _collection_binding_schedules_valid(
-    bindings: Mapping[str, Any], *, deterministic: bool,
-    lifecycle_counts: Mapping[str, Any], environment_count: int,
-) -> bool:
-    try:
-        schedules = {
-            name: bindings[name]["draw_schedule"] for name in RNG_NAMES
-        }
-        if not schedules["ledger"] or not schedules["order"]:
-            return False
-        opportunity_total = sum(
-            int(entry["shape"][0]) for entry in schedules["opportunity"]
-        )
-        expected_requests = sum(
-            int(lifecycle_counts[name]) for name in ("create", "keep", "renew")
-        )
-        if opportunity_total != expected_requests:
-            return False
-        if deterministic:
-            return not (
-                schedules["event"] or schedules["mark"]
-                or schedules["primitive"]
-            )
-        event_total = sum(int(entry["shape"][0]) for entry in schedules["event"])
-        mark_total = sum(int(entry["shape"][0]) for entry in schedules["mark"])
-        primitive = schedules["primitive"]
-        if not (
-            event_total == mark_total == opportunity_total
-            and len(primitive) == HORIZON
-            and all(
-                entry["shape"] == [environment_count, MAX_LIFECYCLES]
-                and entry["operation"] == "random"
-                and entry["dtype"] == "float32"
-                and event_commitment_evidence_common._is_exact_int(entry["coordinates"]["time"])
-                and entry["coordinates"]["time"] == index
-                for index, entry in enumerate(primitive)
-            )
-            and [entry["coordinates"] for entry in schedules["event"]]
-            == [entry["coordinates"] for entry in schedules["mark"]]
-            == [entry["coordinates"] for entry in schedules["opportunity"]]
-        ):
-            return False
-        for stream, operation, dtype in (
-            ("event", "random", "float64"),
-            ("mark", "standard_normal", "float64"),
-            ("opportunity", "choice_opportunity", "int64"),
-        ):
-            times = [
-                entry["coordinates"]["time"]
-                for entry in schedules[stream]
-            ]
-            if not (
-                all(event_commitment_evidence_common._is_exact_int(value) for value in times)
-                and times == sorted(times)
-                and len(times) == len(set(times))
-                and all(0 <= value < HORIZON for value in times)
-                and all(
-                    entry["operation"] == operation and entry["dtype"] == dtype
-                    for entry in schedules[stream]
-                )
-            ):
-                return False
-        return True
-    except (KeyError, TypeError, ValueError, IndexError):
-        return False
-
-
-def _ledger_record(ledger: Any) -> dict[str, Any]:
-    payload = {
-        "episode_id": int(ledger.episode_id), "base_id": int(ledger.base_id),
-        "sign_parity": int(ledger.sign_parity), "profile": ledger.profile,
-        "generation_attempt": int(ledger.generation_attempt),
-        "routing_permutation": list(ledger.routing_permutation),
-        "initial_count": int(ledger.initial_count),
-        "temporary_key": int(ledger.temporary_key),
-        "terminal_key": int(ledger.terminal_key),
-        "duration_streams": ledger.duration_streams.tolist(),
-        "initial_targets": ledger.initial_targets.tolist(),
-        "direct_frontier_priorities": ledger.direct_frontier_priorities.tolist(),
-    }
-    return payload | {
-        "ledger_digest": event_commitment_evidence_common._digest_json(payload)
-    }
-
-
-def _rng_audit_evidence_valid(
-    evidence: Any, bindings: Mapping[str, Any], *, arm: str, profile: str,
-    seed_map: Mapping[str, int], deterministic: bool,
-    episode_ids: list[int],
-    ledger_cache: dict[tuple[Any, ...], tuple[dict[str, Any], list[Any]]] | None = None,
-) -> bool:
-    try:
-        if not isinstance(evidence, dict) or set(evidence) != {
-            "streams", "request_evidence", "ledgers"
-        }:
-            return False
-        streams = evidence["streams"]
-        if set(streams) != set(RNG_NAMES) or any(
-            streams[name] != bindings[name]["draw_schedule"] for name in RNG_NAMES
-        ):
-            return False
-        cache_key = (
-            profile, int(seed_map["ledger"]), int(seed_map["order"]),
-            tuple(int(value) for value in episode_ids),
-        )
-        cached = ledger_cache.get(cache_key) if ledger_cache is not None else None
-        if cached is None:
-            regenerated_trace = {name: [] for name in RNG_NAMES}
-            regenerated_ledgers = [
-                make_noncalendar_ledger(
-                    episode_id, profile=profile,
-                    task_seed=int(seed_map["ledger"]),
-                    order_seed=int(seed_map["order"]),
-                    audit_trace=regenerated_trace,
-                )
-                for episode_id in episode_ids
-            ]
-            if ledger_cache is not None:
-                ledger_cache[cache_key] = (regenerated_trace, regenerated_ledgers)
-        else:
-            regenerated_trace, regenerated_ledgers = cached
-        if evidence["ledgers"] != [
-            _ledger_record(ledger) for ledger in regenerated_ledgers
-        ]:
-            return False
-        if streams["ledger"] != regenerated_trace["ledger"] or streams["order"] != regenerated_trace["order"]:
-            return False
-        requests_by_time: dict[int, list[list[int]]] = {}
-        frontier_by_time: dict[int, list[list[int]]] = {}
-        rows = evidence["request_evidence"]
-        if len(rows) != HORIZON:
-            return False
-        for expected_time, row in enumerate(rows):
-            if set(row) != {"time", "environments"} or not (
-                event_commitment_evidence_common._is_exact_int(row["time"])
-                and row["time"] == expected_time
-            ):
-                return False
-            environments = row["environments"]
-            if len(environments) != len(episode_ids):
-                return False
-            expected_requests: list[list[int]] = []
-            frontier_orders: list[list[int]] = []
-            for env_index, env in enumerate(environments):
-                if set(env) != {"env_index", "episode_id", "frontier"} or not (
-                    event_commitment_evidence_common._is_exact_int(env["env_index"])
-                    and event_commitment_evidence_common._is_exact_int(env["episode_id"])
-                    and env["env_index"] == env_index
-                    and env["episode_id"] == episode_ids[env_index]
-                ):
-                    return False
-                frontier = env["frontier"]
-                if any(set(value) != {"key", "priority", "q_before"} for value in frontier):
-                    return False
-                if any(
-                    not event_commitment_evidence_common._is_exact_int(value["key"])
-                    for value in frontier
-                ):
-                    return False
-                keys = [value["key"] for value in frontier]
-                if len(keys) != len(set(keys)) or keys != [
-                    value["key"] for value in sorted(
-                        frontier, key=lambda value: float(value["priority"])
-                    )
-                ]:
-                    return False
-                ledger = regenerated_ledgers[env_index]
-                if any(
-                    float(value["priority"])
-                    != float(ledger.direct_frontier_priorities[expected_time, value["key"]])
-                    for value in frontier
-                ):
-                    return False
-                frontier_orders.append(keys)
-                if arm == "OR":
-                    if any(value["q_before"] is not None for value in frontier):
-                        return False
-                else:
-                    for value in frontier:
-                        q = int(value["q_before"])
-                        if q <= 0:
-                            expected_requests.append([
-                                env_index, int(value["key"]), CREATE if q < 0 else KEEP
-                            ])
-            requests_by_time[expected_time] = expected_requests
-            frontier_by_time[expected_time] = frontier_orders
-        for stream in ("event", "mark", "opportunity"):
-            if any(
-                not event_commitment_evidence_common._is_exact_int(
-                    entry["coordinates"]["time"]
-                )
-                for entry in streams[stream]
-            ):
-                return False
-            actual = {
-                entry["coordinates"]["time"]: entry["coordinates"]["requests"]
-                for entry in streams[stream]
-            }
-            expected = {
-                time: requests for time, requests in requests_by_time.items()
-                if requests
-            }
-            if stream in ("event", "mark") and deterministic:
-                expected = {}
-            if actual != expected:
-                return False
-        primitive_expected = {} if deterministic else {
-            time: {
-                "time": time, "episode_ids": episode_ids,
-                "frontier_orders": frontier_by_time[time],
-            }
-            for time in range(HORIZON)
-        }
-        if any(
-            not event_commitment_evidence_common._is_exact_int(
-                entry["coordinates"]["time"]
-            )
-            for entry in streams["primitive"]
-        ):
-            return False
-        primitive_actual = {
-            entry["coordinates"]["time"]: entry["coordinates"]
-            for entry in streams["primitive"]
-        }
-        return primitive_actual == primitive_expected
-    except (KeyError, TypeError, ValueError, OverflowError):
-        return False
 
 
 def _expected_parameter_counts(arm: str) -> dict[str, int]:
@@ -918,8 +612,8 @@ def _tensor_pair_record(left: torch.Tensor, right: torch.Tensor) -> dict[str, An
         if left_cpu.numel() else 0.0
     )
     return {
-        "left_digest": _tensor_digest(left_cpu),
-        "right_digest": _tensor_digest(right_cpu),
+        "left_digest": event_commitment_rng_evidence._tensor_digest(left_cpu),
+        "right_digest": event_commitment_rng_evidence._tensor_digest(right_cpu),
         "mismatch_count": int(mismatch.sum()),
         "maximum_absolute_error": maximum,
     }
@@ -934,8 +628,8 @@ def _paired_update_evidence(
         "rewards", "terminal",
     )
     def rng_pairs(left: str, right: str, names: tuple[str, ...]) -> dict[str, Any]:
-        left_digests = _owned_stream_digests(states[left])
-        right_digests = _owned_stream_digests(states[right])
+        left_digests = event_commitment_rng_evidence._owned_stream_digests(states[left])
+        right_digests = event_commitment_rng_evidence._owned_stream_digests(states[right])
         return {
             name: {"left": left_digests[name], "right": right_digests[name]}
             for name in names
@@ -1083,7 +777,7 @@ def _training_update_valid(
         )
         expected_starts = (
             dict(rng_starts[arm]) if rng_starts is not None and arm in rng_starts
-            else _initial_rng_states(evidence["seed_map"]) if update == 1
+            else event_commitment_rng_evidence._initial_rng_states(evidence["seed_map"]) if update == 1
             else None
         )
         rng_context = {
@@ -1091,7 +785,7 @@ def _training_update_valid(
             "replicate": int(replicate), "arm": arm, "update": int(update),
         }
         rng_valid, rng_ends = (
-            _rng_bindings_valid(
+            event_commitment_rng_evidence._rng_bindings_valid(
                 evidence["rng_bindings"], expected_context=rng_context,
                 seed_map=evidence["seed_map"], expected_starts=expected_starts,
             )
@@ -1131,12 +825,12 @@ def _training_update_valid(
             == authoritative_seed_map("train", replicate)
             and set(evidence["owned_stream_digests"]) == set(RNG_NAMES)
             and rng_valid
-            and _collection_binding_schedules_valid(
+            and event_commitment_rng_evidence._collection_binding_schedules_valid(
                 evidence["rng_bindings"], deterministic=False,
                 lifecycle_counts=evidence["lifecycle_counts"],
                 environment_count=FORMAL_NUM_ENVS,
             )
-            and _rng_audit_evidence_valid(
+            and event_commitment_rng_evidence._rng_audit_evidence_valid(
                 evidence["rng_evidence"], evidence["rng_bindings"],
                 arm=arm, profile="train", seed_map=evidence["seed_map"],
                 deterministic=False,
@@ -1774,7 +1468,7 @@ def _causal_audit_valid(
                     "branch": branch,
                 }, key=key, donor_key=_causal_audit_key(expected_donor),
                     branch_evidence=expected_branch_evidence)
-                valid, ends = _rng_bindings_valid(
+                valid, ends = event_commitment_rng_evidence._rng_bindings_valid(
                     binding_families[branch], expected_context=context,
                     seed_map=seed_map, expected_starts=expected_starts,
                 )
@@ -1978,7 +1672,7 @@ def _evaluation_cell_valid(
             return False, (), []
     elif payload["causal_audit"] is not None:
         return False, (), []
-    expected_rng_states = _initial_rng_states(
+    expected_rng_states = event_commitment_rng_evidence._initial_rng_states(
         authoritative_seed_map(profile, replicate)
     )
     rng_digests: list[dict[str, str]] = []
@@ -2024,7 +1718,7 @@ def _evaluation_cell_valid(
             ),
             "intervention_values": sum(len(row["intervention"]) for row in rows),
         }
-        rng_valid, rng_ends = _rng_bindings_valid(
+        rng_valid, rng_ends = event_commitment_rng_evidence._rng_bindings_valid(
             batch["rng_bindings"],
             expected_context={
                 "domain": "evaluation", "mode": mode, "formal": formal,
@@ -2047,12 +1741,12 @@ def _evaluation_cell_valid(
             and all(int(value) == 0 for value in batch["finite_checks"].values())
             and batch["seed_map"] == authoritative_seed_map(profile, replicate)
             and rng_valid
-            and _collection_binding_schedules_valid(
+            and event_commitment_rng_evidence._collection_binding_schedules_valid(
                 batch["rng_bindings"], deterministic=deterministic,
                 lifecycle_counts=batch["lifecycle_counts"],
                 environment_count=FORMAL_NUM_ENVS,
             )
-            and _rng_audit_evidence_valid(
+            and event_commitment_rng_evidence._rng_audit_evidence_valid(
                 batch["rng_evidence"], batch["rng_bindings"], arm=arm,
                 profile=profile, seed_map=batch["seed_map"],
                 deterministic=deterministic, episode_ids=expected_ids,
@@ -2208,7 +1902,7 @@ def _validate_streamed_operational_records(
         evidence_directory = index_path.parent.parent / "evidence"
         indexed_paths: set[Path] = set()
         rng_chain = {
-            arm: _initial_rng_states(authoritative_seed_map("train", replicate))
+            arm: event_commitment_rng_evidence._initial_rng_states(authoritative_seed_map("train", replicate))
             for arm in ARMS
         }
         expected_update_schema = (
@@ -3029,7 +2723,7 @@ def _training_core(
                     "formal": bool(formal), "replicate": int(replicate),
                     "arm": arm, "update": update_index + 1,
                 }
-                rng_bindings = _collection_rng_bindings(
+                rng_bindings = event_commitment_rng_evidence._collection_rng_bindings(
                     context=rng_context,
                     seed_map=states[arm].seed_map,
                     start_states=rng_starts[arm],
@@ -3039,7 +2733,7 @@ def _training_core(
                 arms_evidence[arm] = {
                     "arm": arm,
                     "seed_map": dict(states[arm].seed_map),
-                    "owned_stream_digests": _owned_stream_digests(states[arm]),
+                    "owned_stream_digests": event_commitment_rng_evidence._owned_stream_digests(states[arm]),
                     "rng_bindings": rng_bindings,
                     "rng_evidence": deepcopy(trajectories[arm].rng_audit),
                     "replay": metrics["replay"],
@@ -3699,8 +3393,8 @@ def _evaluation_core(
                         "lifecycle_counts": _lifecycle_counts(trajectory),
                         "finite_checks": _finite_checks(trajectory),
                         "seed_map": dict(state.seed_map),
-                        "owned_stream_digests": _owned_stream_digests(state),
-                        "rng_bindings": _collection_rng_bindings(
+                        "owned_stream_digests": event_commitment_rng_evidence._owned_stream_digests(state),
+                        "rng_bindings": event_commitment_rng_evidence._collection_rng_bindings(
                             context={
                                 "domain": "evaluation", "mode": mode,
                                 "formal": bool(formal),

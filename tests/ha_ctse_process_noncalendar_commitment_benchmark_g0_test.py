@@ -24,6 +24,7 @@ from ha_ctse_process import event_commitment_audit
 from ha_ctse_process import event_commitment_collector
 from ha_ctse_process import event_commitment_replay
 from ha_ctse_process import event_commitment_replay_evidence
+from ha_ctse_process import event_commitment_rng_evidence
 from ha_ctse_process.event_commitment_collector import (
     CREATE,
     KEEP,
@@ -1842,7 +1843,7 @@ def _synthetic_operational_records(
         result = schedules, {
             "streams": schedules,
             "request_evidence": request_evidence,
-            "ledgers": [benchmark_runner._ledger_record(ledger) for ledger in ledgers],
+            "ledgers": [event_commitment_rng_evidence._ledger_record(ledger) for ledger in ledgers],
         }
         schedule_evidence_cache[schedule_key] = result
         return result
@@ -1942,7 +1943,7 @@ def _synthetic_operational_records(
     }
     updates = []
     train_rng_states = {
-        arm: benchmark_runner._initial_rng_states(
+        arm: event_commitment_rng_evidence._initial_rng_states(
             authoritative_seed_map("train", 0)
         )
         for arm in ARMS
@@ -2089,7 +2090,7 @@ def _synthetic_operational_records(
     for arm in ARMS:
         for profile, deterministic, cell in EVALUATION_CELLS:
             arm_lifecycle = ({name: 0 for name in lifecycle} if arm == "OR" else dict(lifecycle))
-            eval_rng_states = benchmark_runner._initial_rng_states(
+            eval_rng_states = event_commitment_rng_evidence._initial_rng_states(
                 authoritative_seed_map(profile, 0)
             )
             batch_records = []
@@ -2771,7 +2772,7 @@ def test_four_update_formal_trajectory_replays_and_streams_exactly(
     assert index_path.name == f"index_{index['generation']}.json"
 
     rng_chain = {
-        arm: benchmark_runner._initial_rng_states(
+        arm: event_commitment_rng_evidence._initial_rng_states(
             authoritative_seed_map("train", 0)
         )
         for arm in ARMS
@@ -3312,7 +3313,7 @@ def causal_audit_artifact_bundle(
         cell_batches.append({
             "episode_ids": list(trajectory.ledger_ids),
             "rng_evidence": deepcopy(trajectory.rng_audit),
-            "rng_bindings": benchmark_runner._collection_rng_bindings(
+            "rng_bindings": event_commitment_rng_evidence._collection_rng_bindings(
                 context={
                     "domain": "evaluation",
                     "mode": "formal_path_exercise_evaluate",
