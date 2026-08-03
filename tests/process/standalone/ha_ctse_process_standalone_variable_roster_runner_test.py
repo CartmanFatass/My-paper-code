@@ -74,3 +74,43 @@ def test_variable_roster_runner_contract_preflight_stops_before_runtime(
             config, args, None
         )
     assert not (tmp_path / "arm").exists()
+
+
+def test_variable_roster_runner_profiles_direct_phase_boundaries_only() -> None:
+    source = inspect.getsource(standalone_variable_roster_runner)
+    tree = ast.parse(source)
+    calls = [
+        node for node in ast.walk(tree) if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and isinstance(node.func.value, ast.Name)
+        and node.func.value.id == "profiler"
+    ]
+    names = [node.func.attr for node in calls]
+    assert names.count("start") == 9
+    assert names.count("stop") == 9
+    assert names.count("finish_update") == 2
+    assert source.index("profiler.start(\"inference\"") < source.index("collector.step_event_runtime")
+    assert source.index("collector.step_event_runtime") < source.index("profiler.start(\"transition_ledger_pack\"")
+    assert source.count("collector.step_event_runtime(") == 1
+    assert source.count("pack_event_ppo_data(") == 1
+    assert source.count("apply_event_ppo_update(") == 1
+
+
+def test_variable_writer_metrics_phase_has_one_start_and_one_stop() -> None:
+    source = inspect.getsource(standalone_variable_roster_runner)
+    metrics_start = source.index('profiler.start("metrics")', source.index("checkpoint_path=str(latest_checkpoint_path)"))
+    writer_block = source.index("if writer is not None:", metrics_start)
+    emit_call = source.index("emit(\n", writer_block)
+    metrics_stop = source.index("profiler.stop()", emit_call)
+    finish = source.index("profiler.finish_update", metrics_stop)
+    assert metrics_start < writer_block < emit_call < metrics_stop < finish
+    assert "elif profiler is not None" not in source[metrics_start:finish]
+
+
+def test_variable_runner_constructs_profiler_only_in_the_positive_interval_branch() -> None:
+    source = inspect.getsource(standalone_variable_roster_runner)
+    assert source.count("InfrastructureProfiler(") == 1
+    interval = 'profile_interval = int(getattr(args, "infrastructure_profile_interval", 0))'
+    assert interval in source
+    assert source.index("if profile_interval > 0:") < source.index("InfrastructureProfiler(")
+    assert source.index("InfrastructureProfiler(\n            args.log_dir,") >= 0

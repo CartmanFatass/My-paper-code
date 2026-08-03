@@ -14,6 +14,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process.env_factory import normalize_scenario
+from ha_ctse_process.infrastructure_profiling import InfrastructureProfiler
 from ha_ctse_process.standalone_cli import create_collector
 from ha_ctse_process.standalone_event_support import (
     _evaluate_event_model,
@@ -83,6 +84,14 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
     result_dir = output_root / "result"
     for directory in (checkpoint_dir, evaluation_dir, result_dir):
         directory.mkdir(parents=True, exist_ok=True)
+    profiler = None
+    profile_interval = int(getattr(args, "infrastructure_profile_interval", 0))
+    if profile_interval > 0:
+        profiler = InfrastructureProfiler(
+            args.log_dir,
+            profile_interval,
+            cuda_synchronize=torch.cuda.synchronize,
+        )
 
     with torch.random.fork_rng(devices=[torch.cuda.current_device()]):
         torch.manual_seed(57_057)
@@ -355,8 +364,16 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     cores, snapshots = prepare_episode_batch(episode_ids)
 
                 for primitive_time in range(HORIZON):
+                    if profiler is not None:
+                        profiler.start("inference", torch_phase=True)
                     low_batch = batched_low_step(cores, snapshots)
+                    if profiler is not None:
+                        profiler.stop(torch_phase=True)
+                        profiler.start("collector_env")
                     steps = collector.step_event_runtime(low_batch.routed_actions)
+                    if profiler is not None:
+                        profiler.stop()
+                        profiler.start("transition_ledger_pack")
                     next_snapshots = []
                     for core, step in zip(cores, steps):
                         if bool(step.truncated):
@@ -390,10 +407,17 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                             )
                     snapshots = next_snapshots
                     total_steps += num_envs
+                    if profiler is not None:
+                        profiler.stop()
                 if intrinsic_applied_count != 0:
                     raise RuntimeError("Stage C intrinsic-applied count must be zero")
                 first_pass_replay = None
+                if profiler is not None:
+                    profiler.start("transition_ledger_pack")
                 packed_ppo = pack_event_ppo_data(cores)
+                if profiler is not None:
+                    profiler.stop()
+                    profiler.start("update", torch_phase=True)
                 for ppo_pass in range(4):
                     metrics = apply_event_ppo_update(
                         packed_ppo,
@@ -407,6 +431,8 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                         }
                     high_optimizer_steps += 1
                     low_optimizer_steps += 1
+                if profiler is not None:
+                    profiler.stop(torch_phase=True)
                 assert first_pass_replay is not None
                 for name, value in first_pass_replay.items():
                     maximum_replay_errors[name] = max(
@@ -418,6 +444,8 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     and _event_state_dict_finite(model_owner)
                 )
                 finite_updates = finite_updates and finite_update
+                if profiler is not None:
+                    profiler.start("metrics")
                 update_row = {
                     "update": update_idx,
                     "steps": total_steps,
@@ -430,6 +458,8 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                 }
                 csv_writer.writerow(update_row)
                 handle.flush()
+                if profiler is not None:
+                    profiler.stop()
                 final_cores = cores
                 final_boundaries = [
                     {
@@ -439,6 +469,8 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     }
                     for core in cores
                 ]
+                if profiler is not None:
+                    profiler.start("checkpoint_eval")
                 checkpoint = vector_event_checkpoint_payload(
                     model_owner=model_owner,
                     cores=cores,
@@ -478,6 +510,9 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     optimizer_steps_total=1_000,
                     checkpoint_path=str(latest_checkpoint_path),
                 )
+                if profiler is not None:
+                    profiler.stop()
+                    profiler.start("metrics")
                 if writer is not None:
                     for name, value in last_metrics.items():
                         writer.add_scalar(f"Event/{name}", value, total_steps)
@@ -489,6 +524,10 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
                     f"steps={total_steps} high_optimizer_steps={high_optimizer_steps} "
                     f"low_optimizer_steps={low_optimizer_steps}",
                 )
+                if profiler is not None:
+                    profiler.stop()
+                    if update_idx < 250:
+                        profiler.finish_update(update=update_idx, total_steps=total_steps)
 
         if final_cores is None or final_boundaries is None:
             raise RuntimeError("Stage C produced no final vector boundary")
@@ -501,6 +540,8 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
         ):
             raise RuntimeError("Stage C exposure ledger is not exact")
 
+        if profiler is not None:
+            profiler.start("checkpoint_eval")
         final_eval_checkpoint = checkpoint_dir / "update_250_eval.pt"
         torch.save(
             event_model_only_checkpoint_payload(
@@ -632,6 +673,9 @@ def run_variable_roster_event_branch(config, args: argparse.Namespace, writer):
             restored_counters,
         )
         verification_collector.close()
+        if profiler is not None:
+            profiler.stop()
+            profiler.finish_update(update=update_idx, total_steps=total_steps)
 
         final_state = model_state(model_owner)
         parameter_drift = _nested_state_maximum_difference(initial_state, final_state)

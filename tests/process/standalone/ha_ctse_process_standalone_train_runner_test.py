@@ -3,7 +3,6 @@ from __future__ import annotations
 import ast
 import inspect
 from pathlib import Path
-import subprocess
 from types import SimpleNamespace
 
 import pytest
@@ -12,9 +11,6 @@ from ha_ctse_process import event_process_runner
 from ha_ctse_process import standalone_train_runner
 from ha_ctse_process import standalone_variable_roster_runner
 from ha_ctse_process import train
-
-
-BASE_COMMIT = "d709767b26dec8cf8c987b74e7ea09e807dbb3ba"
 
 
 def _function_node(source: str, name: str) -> ast.FunctionDef:
@@ -54,30 +50,50 @@ def test_train_loop_has_one_true_owner_and_no_reverse_import_edge() -> None:
     assert not hasattr(train, "train_loop")
 
 
-def test_moved_definitions_match_the_ticket_base_ast() -> None:
-    repository = Path(__file__).resolve().parents[3]
-    base_source = subprocess.run(
-        [
-            "git",
-            "-c",
-            "core.longpaths=true",
-            "show",
-            f"{BASE_COMMIT}:ha_ctse_process/train.py",
-        ],
-        cwd=repository,
-        check=True,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    ).stdout
+def test_train_loop_profiles_existing_direct_phase_boundaries_only() -> None:
     runner_source = inspect.getsource(standalone_train_runner)
+    loop = _function_node(runner_source, "train_loop")
+    calls = [
+        node for node in ast.walk(loop) if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and isinstance(node.func.value, ast.Name)
+        and node.func.value.id == "profiler"
+    ]
+    names = [node.func.attr for node in calls]
+    assert names.count("start") == 7
+    assert names.count("stop") == 7
+    assert names.count("finish_update") == 1
+    assert runner_source.index("profiler.start(\"inference\"") < runner_source.index("collector.step(pre_actions)")
+    assert runner_source.index("collector.step(pre_actions)") < runner_source.index("profiler.start(\"transition_ledger_pack\"")
+    assert runner_source.index("profiler.stop(torch_phase=True)") < runner_source.index("profiler.start(\"metrics\"")
+    assert runner_source.index("profiler.start(\"metrics\"") < runner_source.index("env_reward_mean")
+    assert runner_source.count("collector.step(pre_actions)") == 1
+    assert runner_source.count("agent.process_update(") == 1
+    assert runner_source.count("agent.update_low(") == 1
 
-    for name in ("empty_r30_no_high_metrics", "train_loop"):
-        expected = _function_node(base_source, name)
-        actual = _function_node(runner_source, name)
-        assert ast.dump(actual, include_attributes=False) == ast.dump(
-            expected, include_attributes=False
-        )
+
+def test_train_loop_constructs_profiler_only_in_the_positive_interval_branch() -> None:
+    source = inspect.getsource(standalone_train_runner)
+    assert source.count("InfrastructureProfiler(") == 1
+    interval = 'profile_interval = int(getattr(args, "infrastructure_profile_interval", 0))'
+    assert interval in source
+    assert source.index("if profile_interval > 0:") < source.index("InfrastructureProfiler(")
+
+
+def test_standard_profile_cuda_sync_binds_the_configured_agent_device(monkeypatch) -> None:
+    received = []
+    monkeypatch.setattr(
+        standalone_train_runner.torch.cuda,
+        "synchronize",
+        lambda device: received.append(device),
+    )
+
+    callback = standalone_train_runner._cuda_synchronize_callback(
+        SimpleNamespace(device="cuda:1")
+    )
+    callback()
+
+    assert received == [standalone_train_runner.torch.device("cuda:1")]
 
 
 def test_main_uses_only_module_qualified_train_dispatch() -> None:

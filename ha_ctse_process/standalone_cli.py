@@ -19,6 +19,15 @@ from ha_ctse_process.r29_action_information_reward import (
     REWARD_COEF as R29_ACTION_INFO_REWARD_COEF,
 )
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+
+
+def _nonnegative_int(text: str) -> int:
+    value = int(text)
+    if value < 0:
+        raise argparse.ArgumentTypeError("must be non-negative")
+    return value
+
+
 def load_config(config_name: str, preset: str | None):
     module = importlib.import_module(config_name)
     return module.Config(preset=preset) if preset else module.Config()
@@ -77,6 +86,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--collector_start_method", choices=("spawn", "forkserver", "fork"), default="spawn")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--save_interval", type=int, default=10)
+    parser.add_argument("--infrastructure-profile-interval", type=_nonnegative_int, default=0)
     parser.add_argument("--checkpoint_keep_last", type=int, default=3)
     parser.add_argument("--resume_from", default="")
     parser.add_argument(

@@ -8,6 +8,7 @@ import sys
 from types import SimpleNamespace
 
 import numpy as np
+import pytest
 
 from ha_ctse_process import standalone_cli
 from ha_ctse_process import train
@@ -98,6 +99,16 @@ def test_parse_args_preserves_defaults_and_options(monkeypatch):
     assert args.total_timesteps == 320000
     assert args.rollout_length == 500
     assert args.skill_interval == 10
+    assert args.infrastructure_profile_interval == 0
+
+
+def test_infrastructure_profile_interval_accepts_positive_and_rejects_negative(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["standalone", "--infrastructure-profile-interval", "7"])
+    assert standalone_cli.parse_args().infrastructure_profile_interval == 7
+
+    monkeypatch.setattr(sys, "argv", ["standalone", "--infrastructure-profile-interval", "-1"])
+    with pytest.raises(SystemExit):
+        standalone_cli.parse_args()
 
 
 def test_config_override_and_environment_wiring_use_cheap_mocks(monkeypatch):

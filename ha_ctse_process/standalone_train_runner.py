@@ -7,6 +7,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import numpy as np
+import torch
 
 from ha_ctse_process.event_process_runner import (
     _run_iteration5_process_semantics_branch,
@@ -14,6 +15,7 @@ from ha_ctse_process.event_process_runner import (
 from ha_ctse_process import standalone_manifest
 from ha_ctse_process import standalone_novelty
 from ha_ctse_process import standalone_variable_roster_runner
+from ha_ctse_process.infrastructure_profiling import InfrastructureProfiler
 from ha_ctse_process.standalone_evaluation import evaluate
 from ha_ctse_process.standalone_metrics import (
     audit_r37_identity_observation,
@@ -54,6 +56,11 @@ def empty_r30_no_high_metrics() -> dict[str, float]:
         "r30_decision_rows": 0.0,
         "high_optimizer_steps": 0.0,
     }
+
+
+def _cuda_synchronize_callback(agent: StandaloneProcessAgent):
+    device = torch.device(getattr(agent, "device", "cuda"))
+    return lambda: torch.cuda.synchronize(device)
 
 
 def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProcessAgent, int, int]:
@@ -100,6 +107,20 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             else None
         )
         agent = create_agent(config, args, env, num_envs=num_envs, state_dim=state_dim)
+        profiler = None
+        profile_interval = int(getattr(args, "infrastructure_profile_interval", 0))
+        if profile_interval > 0:
+            synchronize = (
+                _cuda_synchronize_callback(agent)
+                if torch.cuda.is_available()
+                and str(getattr(agent, "device", "")).startswith("cuda")
+                else None
+            )
+            profiler = InfrastructureProfiler(
+                args.log_dir,
+                profile_interval,
+                cuda_synchronize=synchronize,
+            )
         aem_enabled = bool(getattr(config, "aem_joint_novelty_enabled", False))
         if (bool(getattr(agent, "r31_enabled", False)) or aem_enabled) and any(
             view is None for view in effect_views
@@ -295,6 +316,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             episode_rewards = []
             r37_update_metrics = empty_r37_identity_metrics(config)
             for _local_step in range(int(args.rollout_length)):
+                if profiler is not None:
+                    profiler.start("inference", torch_phase=True)
                 pre_obs = list(observations)
                 rollout_base = len(rollout.rewards)
                 pre_rollout_indices = [
@@ -341,7 +364,13 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 pre_logp = [pre_logp_batch[env_id] for env_id in range(num_envs)]
                 pre_values = [pre_values_batch[env_id] for env_id in range(num_envs)]
 
+                if profiler is not None:
+                    profiler.stop(torch_phase=True)
+                    profiler.start("collector_env")
                 step_results = collector.step(pre_actions)
+                if profiler is not None:
+                    profiler.stop()
+                    profiler.start("transition_ledger_pack")
                 for env_id, result in enumerate(step_results):
                     obs = pre_obs[env_id]
                     actions = pre_actions[env_id]
@@ -451,13 +480,20 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                                 "R31 reset did not expose intrinsic_effect_view"
                             )
                         agent.reset_env_state(env_id)
+                if profiler is not None:
+                    profiler.stop()
                 if total_steps >= int(args.total_timesteps):
                     break
 
+            if profiler is not None:
+                profiler.start("transition_ledger_pack")
             agent.truncate_high_rows_for_update(observations, states)
             agent.segments.flush(reason="update")
             rollout.bootstrap_values = agent.low_bootstrap_values(observations, states)
             r31_score_metrics = agent.r31_score_complete_windows(rollout)
+            if profiler is not None:
+                profiler.stop()
+                profiler.start("update", torch_phase=True)
             process_metrics = agent.process_update(
                 rollout,
                 total_steps=total_steps,
@@ -489,6 +525,9 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     states,
                     policy_update=update_idx + 1,
                 )
+            if profiler is not None:
+                profiler.stop(torch_phase=True)
+                profiler.start("metrics")
             env_reward_mean = float(np.mean(episode_rewards)) if episode_rewards else 0.0
             proto_ratio = float(process_metrics.get("proto_disc_reward_env_ratio", 0.0))
             proto_reward_steps = float(process_metrics.get("proto_disc_reward_applied_steps", 0.0))
@@ -868,6 +907,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             )
             log_train_metrics(writer, total_steps, episode_rewards, process_metrics, low_metrics)
             export_update_metrics(args, update_idx, total_steps, env_reward_mean, process_metrics, low_metrics)
+            if profiler is not None:
+                profiler.stop()
             if proto_ratio_kill_message:
                 if reward_ratio_guard_mode == "warn":
                     emit(args, f"standalone_runtime_guard_warn mode=warn {proto_ratio_kill_message}")
@@ -889,6 +930,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             if not bool(getattr(agent, "r30_enabled", False)):
                 agent.reset_all_policy_state()
 
+            if profiler is not None:
+                profiler.start("checkpoint_eval")
             if int(args.save_interval) > 0 and update_idx % int(args.save_interval) == 0:
                 save_checkpoint(
                     Path(args.log_dir) / f"standalone_process_core_update_{update_idx}.pt",
@@ -910,6 +953,9 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 )
                 log_eval_metrics(writer, total_steps, eval_metrics)
                 last_eval_step = int(total_steps)
+            if profiler is not None:
+                profiler.stop()
+                profiler.finish_update(update=update_idx, total_steps=total_steps)
 
         save_checkpoint(
             Path(args.log_dir) / "standalone_process_core_final.pt",
