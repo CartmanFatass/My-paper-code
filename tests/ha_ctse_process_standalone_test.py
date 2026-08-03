@@ -7,6 +7,8 @@ from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import standalone_evaluation as process_evaluation
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+from ha_ctse_process.standalone_lifecycle import StandaloneLifecycleMixin
+from ha_ctse_process.standalone_low_inference import StandaloneLowInferenceMixin
 from ha_ctse_process.standalone_segments import Rollout, Segment
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
@@ -72,6 +74,86 @@ def make_agent(config=None, num_envs=1, action_space_type="discrete"):
         action_space_type=action_space_type,
         num_envs=num_envs,
     )
+
+
+def test_lifecycle_reset_mixin_owns_methods_and_preserves_reset_state():
+    agent = make_agent(num_envs=2)
+    method_names = (
+        "reset_env_state",
+        "reset_all_policy_state",
+        "_team_transition_xi",
+        "_team_transition_record_check",
+        "_team_transition_clear_rollout_buffers",
+    )
+    assert StandaloneProcessAgent.__mro__[:3] == (
+        StandaloneProcessAgent,
+        StandaloneLifecycleMixin,
+        StandaloneLowInferenceMixin,
+    )
+    for name in method_names:
+        assert getattr(StandaloneProcessAgent, name) is getattr(StandaloneLifecycleMixin, name)
+
+    env_id = 1
+    agent.episode_steps[env_id] = 9
+    agent.episode_ids[env_id] = 4
+    agent.steps_to_check[env_id] = 3
+    agent.duration_remaining[env_id, :] = 2
+    agent.active_skills[env_id, :] = 1
+    agent.active_duration_indices[env_id, :] = 1
+    agent.skill_age[env_id, :] = 5
+    agent.has_active_skill[env_id, :] = True
+    agent.active_team_codes[env_id] = 1
+    agent.team_intent_remaining[env_id] = 2
+    agent.team_intent_age[env_id] = 3
+    agent.low_actor_hxs[env_id, :, :] = 1.0
+    agent.low_critic_hxs[env_id, :, :] = 1.0
+    agent._last_low_context[env_id] = {"retained": 1}
+    agent._team_transition_open[env_id] = object()
+    agent._team_transition_env_steps[env_id] = 6
+
+    agent.reset_env_state(env_id)
+
+    assert agent.episode_steps[env_id] == 0
+    assert agent.episode_ids[env_id] == 5
+    assert agent.steps_to_check[env_id] == 0
+    for state in (
+        agent.duration_remaining[env_id],
+        agent.active_skills[env_id],
+        agent.active_duration_indices[env_id],
+        agent.skill_age[env_id],
+        agent.low_actor_hxs[env_id],
+        agent.low_critic_hxs[env_id],
+    ):
+        assert np.count_nonzero(state) == 0
+    assert not np.any(agent.has_active_skill[env_id])
+    assert agent.active_team_codes[env_id] == 0
+    assert agent.team_intent_remaining[env_id] == 0
+    assert agent.team_intent_age[env_id] == 0
+    assert agent._last_low_context[env_id] is None
+    assert agent._team_transition_open[env_id] is None
+    assert agent._team_transition_env_steps[env_id] == 0
+
+    segments_before = agent.segments
+    episode_ids_before = agent.episode_ids.copy()
+    agent._team_transition_closed.append(object())
+    agent._team_transition_env_steps[:] = 5
+    agent.reset_all_policy_state()
+
+    assert agent.segments is not segments_before
+    np.testing.assert_array_equal(agent.episode_ids, episode_ids_before)
+    assert agent._team_transition_open == [None, None]
+    assert agent._team_transition_closed == []
+    np.testing.assert_array_equal(
+        agent._team_transition_env_steps, np.zeros(2, dtype=np.int64)
+    )
+
+    agent.r30_enabled = True
+    try:
+        agent.reset_all_policy_state()
+    except RuntimeError as error:
+        assert str(error) == "R30 policy state cannot be reset at a PPO update boundary"
+    else:
+        raise AssertionError("R30 reset guard did not raise")
 
 
 def test_batched_low_deterministic_inference_matches_scalar_path():
