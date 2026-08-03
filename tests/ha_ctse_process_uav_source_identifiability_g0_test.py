@@ -8,6 +8,7 @@ import numpy as np
 import pytest
 
 from ha_ctse_process import uav_episode_schema as episode_schema
+from ha_ctse_process import uav_g0_controllers as controllers
 from ha_ctse_process import uav_g0_geometry as geometry
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
@@ -312,19 +313,19 @@ def _rows(
     active_owner: bool,
     replacement: str | None = None,
     owner_at_primary: bool = False,
-) -> tuple[g0.AnonymousLifecycleRow, ...]:
-    handles = list(g0.initial_lifecycle_handles(source))
+) -> tuple[controllers.AnonymousLifecycleRow, ...]:
+    handles = list(controllers.initial_lifecycle_handles(source))
     owner = source.assignment.row_to_target.index(source.event.owner_target.key)
     if replacement is not None:
         handles[owner] = replacement
-    rows: list[g0.AnonymousLifecycleRow] = []
+    rows: list[controllers.AnonymousLifecycleRow] = []
     for index, handle in enumerate(handles):
         xy = source.geometry.physical_xy[index]
         if index == owner and owner_at_primary:
             xy = source.geometry.coordinate(source.event.owner_target)
         active = active_owner if index == owner else True
         rows.append(
-            g0.AnonymousLifecycleRow(
+            controllers.AnonymousLifecycleRow(
                 handle=handle,
                 position=np.asarray([xy[0], xy[1], geometry.FIXED_ALTITUDE_M]),
                 velocity=np.zeros(3),
@@ -337,12 +338,12 @@ def _rows(
 
 def _information(
     source: geometry.G0EpisodeSource,
-    rows: tuple[g0.AnonymousLifecycleRow, ...],
+    rows: tuple[controllers.AnonymousLifecycleRow, ...],
     *,
     weakest_service: float = 0.0,
-) -> g0.G0CurrentInformation:
+) -> controllers.G0CurrentInformation:
     rates = np.full(g0.GROUND_USERS, float(weakest_service), dtype=np.float64)
-    return g0.make_current_information(
+    return controllers.make_current_information(
         source,
         rows=rows,
         user_demand_mbps=np.ones(g0.GROUND_USERS, dtype=np.float64),
@@ -499,9 +500,9 @@ def test_accepted_g1_tracker_and_shared_correction_are_qualified() -> None:
 
 def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
     source = geometry.make_episode_source(4)
-    handles = g0.initial_lifecycle_handles(source)
+    handles = controllers.initial_lifecycle_handles(source)
     owner_row = source.assignment.row_to_target.index(source.event.owner_target.key)
-    controller = g0.SameInformationController(source, handles)
+    controller = controllers.SameInformationController(source, handles)
     leave_rows = _rows(source, active_owner=False)
     controller.on_leave(handles[owner_row], leave_rows)
     selected = controller.evidence()["selected_reserve"]
@@ -514,7 +515,7 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
         leave_targets[selected][:2], source.geometry.coordinate(source.event.owner_target)
     )
 
-    replacement = g0.replacement_lifecycle_handle(source, handles[owner_row])
+    replacement = controllers.replacement_lifecycle_handle(source, handles[owner_row])
     controller.on_rejoin(handles[owner_row], replacement, source.event.rejoin)
     rejoin_rows = _rows(
         source,
@@ -550,7 +551,7 @@ def test_same_information_rejoin_uses_gate_then_returns_to_stage() -> None:
 
 def test_same_information_reserve_tie_ignores_vertical_fields() -> None:
     source = geometry.make_episode_source(4)
-    handles = g0.initial_lifecycle_handles(source)
+    handles = controllers.initial_lifecycle_handles(source)
     ownership = {
         handle: geometry.TargetLabel.parse(target)
         for handle, target in zip(handles, source.assignment.row_to_target)
@@ -582,17 +583,17 @@ def test_same_information_reserve_tie_ignores_vertical_fields() -> None:
             )
         else:
             rows.append(row)
-    controller = g0.SameInformationController(source, handles)
+    controller = controllers.SameInformationController(source, handles)
     controller.on_leave(owner_handle, tuple(rows))
     assert controller.evidence()["selected_reserve"] == expected
 
 
 def test_no_reallocation_freezes_targets_and_no_event_maps_match() -> None:
     source = geometry.make_episode_source(6)
-    handles = g0.initial_lifecycle_handles(source)
+    handles = controllers.initial_lifecycle_handles(source)
     rows = _rows(source, active_owner=True)
-    same = g0.SameInformationController(source, handles)
-    frozen = g0.NoReallocationController(source, handles)
+    same = controllers.SameInformationController(source, handles)
+    frozen = controllers.NoReallocationController(source, handles)
     information = _information(source, rows)
     same_targets = same.target_map(information, physical_step=0)
     frozen_targets = frozen.target_map(information, physical_step=0)

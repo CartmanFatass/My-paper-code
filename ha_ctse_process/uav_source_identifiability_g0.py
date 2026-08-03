@@ -20,6 +20,7 @@ from typing import Any, Iterable, Mapping, Sequence
 import numpy as np
 
 from config_1 import Config
+from ha_ctse_process import uav_g0_controllers as controllers
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from ha_ctse_process.uav_episode_schema import (
@@ -64,7 +65,6 @@ from ha_ctse_process.uav_g0_statistics import (
     _build_analysis_from_reconstructed_rows,
     compute_episode_metrics,
     weakest_hotspot_service,
-    weakest_hotspot_service_row,
 )
 
 
@@ -310,436 +310,6 @@ def qualify_common_tracker(
     }
 
 
-@dataclass(frozen=True)
-class AnonymousLifecycleRow:
-    """One current roster row; ``handle`` is opaque state ownership only."""
-
-    handle: str
-    position: np.ndarray
-    velocity: np.ndarray
-    active: bool
-    service_available: bool
-
-    def __post_init__(self) -> None:
-        if not str(self.handle):
-            raise G0RealizationError("lifecycle handle must be nonempty")
-        position = _finite_array(self.position, (3,), label="lifecycle position")
-        velocity = _finite_array(self.velocity, (3,), label="lifecycle velocity")
-        if bool(self.active) != bool(self.service_available):
-            raise G0RealizationError("active roster and service availability differ")
-        object.__setattr__(self, "position", _readonly_array(position, dtype=np.float64))
-        object.__setattr__(self, "velocity", _readonly_array(velocity, dtype=np.float64))
-
-    @property
-    def anonymous_tie_key(self) -> tuple[float, ...]:
-        return tuple(float(value) for value in np.concatenate((self.position, self.velocity)))
-
-
-@dataclass(frozen=True)
-class G0CurrentInformation:
-    """Exact current-only observation boundary shared by S and N controls."""
-
-    rows: tuple[AnonymousLifecycleRow, ...]
-    user_demand_mbps: np.ndarray
-    user_delivered_rate_mbps: np.ndarray
-    channel_association: np.ndarray
-    base_xy: np.ndarray
-    primary_xy: np.ndarray
-    gate_xy: np.ndarray
-    stage_xy: np.ndarray
-
-    def __post_init__(self) -> None:
-        rows = tuple(self.rows)
-        _roster_by_handle(rows)
-        arrays = (
-            ("user_demand_mbps", self.user_demand_mbps, (GROUND_USERS,), np.float64),
-            ("user_delivered_rate_mbps", self.user_delivered_rate_mbps, (GROUND_USERS,), np.float64),
-            ("channel_association", self.channel_association, (PHYSICAL_UAVS, GROUND_USERS), np.bool_),
-            ("base_xy", self.base_xy, (2,), np.float64),
-            ("primary_xy", self.primary_xy, (6, 2), np.float64),
-            ("gate_xy", self.gate_xy, (6, 2), np.float64),
-            ("stage_xy", self.stage_xy, (2, 2), np.float64),
-        )
-        for name, value, shape, dtype in arrays:
-            array = np.asarray(value, dtype=dtype)
-            if array.shape != shape or (
-                dtype is not np.bool_ and not np.isfinite(array).all()
-            ):
-                raise G0RealizationError(f"current-information {name} is malformed")
-            if dtype is not np.bool_ and np.any(array < 0.0) and name in {
-                "user_demand_mbps",
-                "user_delivered_rate_mbps",
-            }:
-                raise G0RealizationError(f"current-information {name} is negative")
-            object.__setattr__(self, name, _readonly_array(array, dtype=dtype))
-        object.__setattr__(self, "rows", rows)
-
-    @property
-    def weakest_hotspot_service(self) -> float:
-        return weakest_hotspot_service_row(
-            self.user_delivered_rate_mbps,
-            np.repeat(np.arange(HOTSPOT_COUNT), USERS_PER_HOTSPOT),
-        )
-
-
-@dataclass(frozen=True)
-class G0ControllerGeometry:
-    """Static world geometry with no event, slot, user, or RNG authority."""
-
-    base_xy: np.ndarray
-    primary_xy: np.ndarray
-    gate_xy: np.ndarray
-    stage_xy: np.ndarray
-
-    def __post_init__(self) -> None:
-        for name, value, shape in (
-            ("base_xy", self.base_xy, (2,)),
-            ("primary_xy", self.primary_xy, (6, 2)),
-            ("gate_xy", self.gate_xy, (6, 2)),
-            ("stage_xy", self.stage_xy, (2, 2)),
-        ):
-            array = _finite_array(value, shape, label=f"controller {name}")
-            object.__setattr__(self, name, _readonly_array(array, dtype=np.float64))
-
-    @classmethod
-    def from_source(cls, source: G0EpisodeSource) -> "G0ControllerGeometry":
-        return cls(
-            base_xy=source.geometry.base_xy,
-            primary_xy=source.geometry.target_xy[:6],
-            gate_xy=source.geometry.gate_xy,
-            stage_xy=source.geometry.target_xy[6:],
-        )
-
-    def coordinate(self, label: TargetLabel | str) -> np.ndarray:
-        parsed = label if isinstance(label, TargetLabel) else TargetLabel.parse(label)
-        index = TARGET_LABELS.index(parsed)
-        values = self.primary_xy if index < 6 else self.stage_xy
-        return values[index if index < 6 else index - 6]
-
-    def gate(self, label: TargetLabel | str) -> np.ndarray:
-        parsed = label if isinstance(label, TargetLabel) else TargetLabel.parse(label)
-        if parsed.kind is not TargetKind.PRIMARY:
-            raise G0RealizationError("only primary targets own holding gates")
-        return self.gate_xy[TARGET_LABELS.index(parsed)]
-
-
-def make_current_information(
-    source: G0EpisodeSource,
-    *,
-    rows: Sequence[AnonymousLifecycleRow],
-    user_demand_mbps: Sequence[float],
-    user_delivered_rate_mbps: Sequence[float],
-    channel_association: np.ndarray,
-) -> G0CurrentInformation:
-    return G0CurrentInformation(
-        rows=tuple(rows),
-        user_demand_mbps=np.asarray(user_demand_mbps, dtype=np.float64),
-        user_delivered_rate_mbps=np.asarray(
-            user_delivered_rate_mbps, dtype=np.float64
-        ),
-        channel_association=np.asarray(channel_association, dtype=np.bool_),
-        base_xy=source.geometry.base_xy,
-        primary_xy=source.geometry.target_xy[:6],
-        gate_xy=source.geometry.gate_xy,
-        stage_xy=source.geometry.target_xy[6:],
-    )
-
-
-def _current_roster(
-    geometry: G0ControllerGeometry,
-    information: G0CurrentInformation,
-) -> dict[str, AnonymousLifecycleRow]:
-    """Validate the complete frozen current-information envelope."""
-
-    if not isinstance(information, G0CurrentInformation):
-        raise G0RealizationError("controller requires the frozen current-information envelope")
-    expected = (
-        (information.base_xy, geometry.base_xy),
-        (information.primary_xy, geometry.primary_xy),
-        (information.gate_xy, geometry.gate_xy),
-        (information.stage_xy, geometry.stage_xy),
-    )
-    if any(not np.array_equal(actual, frozen) for actual, frozen in expected):
-        raise G0RealizationError("current-information geometry differs from the episode source")
-    return _roster_by_handle(information.rows)
-
-
-def initial_lifecycle_handles(source: G0EpisodeSource) -> tuple[str, ...]:
-    """Create opaque handles without exposing target or physical-slot identity."""
-
-    return tuple(
-        hashlib.sha256(
-            f"{SOURCE_ID}|{source.geometry.episode_id}|lifecycle|{rank}".encode("utf-8")
-        ).hexdigest()[:24]
-        for rank in range(PHYSICAL_UAVS)
-    )
-
-
-def replacement_lifecycle_handle(source: G0EpisodeSource, previous: str) -> str:
-    return hashlib.sha256(
-        f"{SOURCE_ID}|{source.geometry.episode_id}|rejoin|{previous}".encode("utf-8")
-    ).hexdigest()[:24]
-
-
-def _initial_ownership(
-    source: G0EpisodeSource, handles: Sequence[str]
-) -> dict[str, TargetLabel]:
-    if len(handles) != PHYSICAL_UAVS or len(set(handles)) != PHYSICAL_UAVS:
-        raise G0RealizationError("initial lifecycle handle inventory mismatch")
-    return {
-        str(handle): TargetLabel.parse(target)
-        for handle, target in zip(handles, source.assignment.row_to_target)
-    }
-
-
-def _roster_by_handle(rows: Sequence[AnonymousLifecycleRow]) -> dict[str, AnonymousLifecycleRow]:
-    values = {row.handle: row for row in rows}
-    if len(values) != len(rows):
-        raise G0RealizationError("current roster contains a duplicate opaque handle")
-    if len(rows) != PHYSICAL_UAVS:
-        raise G0RealizationError("physical roster must retain all eight storage rows")
-    return values
-
-
-class SameInformationController:
-    """Frozen current-information reallocation state machine.
-
-    The event ledger is intentionally absent from this interface.  LEAVE and
-    REJOIN arrive as current boundary events; target choice uses only current
-    anonymous physical content and registered geometry.
-    """
-
-    name = Control.SAME_INFORMATION.value
-    uses_future_ledger = False
-    trains = False
-
-    def __init__(self, source: G0EpisodeSource, handles: Sequence[str]) -> None:
-        self.geometry = G0ControllerGeometry.from_source(source)
-        self.ownership = _initial_ownership(source, handles)
-        self.original_ownership = dict(self.ownership)
-        self._selected_reserve: str | None = None
-        self._vacant_primary: TargetLabel | None = None
-        self._selected_stage: TargetLabel | None = None
-        self._absent_handle: str | None = None
-        self._rejoined_handle: str | None = None
-        self._rejoin_step: int | None = None
-        self._complete_primary_steps = 0
-        self._last_primary_step: int | None = None
-        self._reserve_at_gate = False
-        self._returned_to_stage = False
-
-    def on_leave(
-        self,
-        absent_handle: str,
-        rows: Sequence[AnonymousLifecycleRow],
-    ) -> None:
-        roster = _roster_by_handle(rows)
-        if self._selected_reserve is not None:
-            raise G0RealizationError("same-information controller observed a second leave")
-        if absent_handle not in self.ownership or roster[absent_handle].active:
-            raise G0RealizationError("leave boundary did not expose one inactive lifecycle")
-        if sum(row.active for row in rows) != 7:
-            raise G0RealizationError("first leave boundary does not have active count seven")
-        vacant = self.ownership[absent_handle]
-        if vacant.kind is not TargetKind.PRIMARY:
-            raise G0RealizationError("leave did not vacate exactly one primary")
-        reserve_handles = [
-            handle
-            for handle, label in self.ownership.items()
-            if label.kind is TargetKind.STAGE and roster[handle].active
-        ]
-        if len(reserve_handles) != 2:
-            raise G0RealizationError("same-information leave does not expose two reserves")
-        vacancy = self.geometry.coordinate(vacant)
-
-        def rank(handle: str) -> tuple[float, ...]:
-            row = roster[handle]
-            stage = self.ownership[handle]
-            stage_xy = self.geometry.coordinate(stage)
-            distance = float(np.sum((row.position[:2] - vacancy) ** 2))
-            return (
-                distance,
-                float(row.position[0]),
-                float(row.position[1]),
-                float(row.velocity[0]),
-                float(row.velocity[1]),
-                float(stage_xy[0]),
-                float(stage_xy[1]),
-            )
-
-        selected = min(reserve_handles, key=rank)
-        self._selected_reserve = selected
-        self._selected_stage = self.ownership[selected]
-        self._vacant_primary = vacant
-        self._absent_handle = absent_handle
-        self.ownership[selected] = vacant
-
-    def on_rejoin(self, previous_handle: str, new_handle: str, physical_step: int) -> None:
-        if (
-            self._selected_reserve is None
-            or self._vacant_primary is None
-            or previous_handle != self._absent_handle
-            or previous_handle not in self.ownership
-            or new_handle in self.ownership
-        ):
-            raise G0RealizationError("same-information rejoin ownership mismatch")
-        del self.ownership[previous_handle]
-        self.ownership[new_handle] = self._vacant_primary
-        self._rejoined_handle = new_handle
-        self._rejoin_step = int(physical_step)
-        if self._selected_stage is None:
-            raise G0RealizationError("same-information selected stage is missing")
-        self.ownership[self._selected_reserve] = self._selected_stage
-        self._reserve_at_gate = True
-
-    def target_map(
-        self,
-        information: G0CurrentInformation,
-        *,
-        physical_step: int,
-    ) -> dict[str, np.ndarray]:
-        roster = _current_roster(self.geometry, information)
-        weakest_hotspot_service = information.weakest_hotspot_service
-        if not math.isfinite(float(weakest_hotspot_service)):
-            raise G0RealizationError("same-information service input is nonfinite")
-        if self._rejoined_handle is not None:
-            if self._rejoin_step is None or self._vacant_primary is None:
-                raise G0RealizationError("same-information rejoin state is incomplete")
-            row = roster[self._rejoined_handle]
-            owns_vacant_primary = bool(
-                self.ownership.get(self._rejoined_handle) == self._vacant_primary
-            )
-            active_in_completed_previous_step = bool(
-                self._last_primary_step == int(physical_step) - 1
-            )
-            if (
-                int(physical_step) >= self._rejoin_step + 1
-                and row.active
-                and owns_vacant_primary
-                and active_in_completed_previous_step
-            ):
-                self._complete_primary_steps += 1
-            if row.active and owns_vacant_primary:
-                self._last_primary_step = int(physical_step)
-            ready = bool(
-                int(physical_step) >= self._rejoin_step + 1
-                and self._complete_primary_steps >= 1
-                and float(weakest_hotspot_service) >= SERVICE_TARGET
-            )
-            if ready and not self._returned_to_stage:
-                if self._selected_reserve is None or self._selected_stage is None:
-                    raise G0RealizationError("same-information return state is incomplete")
-                self._reserve_at_gate = False
-                self._returned_to_stage = True
-        result: dict[str, np.ndarray] = {}
-        for handle, label in self.ownership.items():
-            if handle not in roster:
-                continue
-            if handle == self._selected_reserve and self._reserve_at_gate:
-                if self._vacant_primary is None:
-                    raise G0RealizationError("same-information gate owner is missing")
-                xy = self.geometry.gate(self._vacant_primary)
-            else:
-                xy = self.geometry.coordinate(label)
-            result[handle] = np.concatenate((xy, np.asarray((FIXED_ALTITUDE_M,))))
-        return result
-
-    def evidence(self) -> dict[str, Any]:
-        return {
-            "controller": self.name,
-            "future_event_field_read_count": 0,
-            "future_channel_read_count": 0,
-            "future_service_read_count": 0,
-            "physical_slot_decision_read_count": 0,
-            "epoch_decision_read_count": 0,
-            "selected_reserve": self._selected_reserve,
-            "vacant_primary": self._vacant_primary.key if self._vacant_primary else None,
-            "reserve_at_gate": self._reserve_at_gate,
-            "returned_to_stage": self._returned_to_stage,
-        }
-
-
-class NoReallocationController:
-    """Same observation boundary with target ownership frozen through LEAVE."""
-
-    name = Control.NO_REALLOCATION.value
-    uses_future_ledger = False
-    trains = False
-
-    def __init__(self, source: G0EpisodeSource, handles: Sequence[str]) -> None:
-        self.geometry = G0ControllerGeometry.from_source(source)
-        self.ownership = _initial_ownership(source, handles)
-        self._absent_handle: str | None = None
-        self._vacant_primary: TargetLabel | None = None
-
-    def on_leave(
-        self, absent_handle: str, rows: Sequence[AnonymousLifecycleRow]
-    ) -> None:
-        roster = _roster_by_handle(rows)
-        if sum(row.active for row in rows) != 7 or roster[absent_handle].active:
-            raise G0RealizationError("no-reallocation leave boundary mismatch")
-        vacant = self.ownership.get(absent_handle)
-        if vacant is None or vacant.kind is not TargetKind.PRIMARY:
-            raise G0RealizationError("no-reallocation did not observe a primary vacancy")
-        self._absent_handle = absent_handle
-        self._vacant_primary = vacant
-
-    def on_rejoin(self, previous_handle: str, new_handle: str, physical_step: int) -> None:
-        del physical_step
-        if previous_handle != self._absent_handle or new_handle in self.ownership:
-            raise G0RealizationError("no-reallocation rejoin ownership mismatch")
-        if self._vacant_primary is None:
-            raise G0RealizationError("no-reallocation vacancy is missing")
-        del self.ownership[previous_handle]
-        self.ownership[new_handle] = self._vacant_primary
-
-    def target_map(
-        self,
-        information: G0CurrentInformation,
-        *,
-        physical_step: int,
-    ) -> dict[str, np.ndarray]:
-        del physical_step
-        roster = _current_roster(self.geometry, information)
-        return {
-            handle: np.concatenate(
-                (self.geometry.coordinate(label), np.asarray((FIXED_ALTITUDE_M,)))
-            )
-            for handle, label in self.ownership.items()
-            if handle in roster
-        }
-
-    def evidence(self) -> dict[str, Any]:
-        return {
-            "controller": self.name,
-            "target_change_due_to_active_count": 0,
-            "target_change_due_to_service_deficit": 0,
-            "reserve_reallocation_count": 0,
-            "survivor_reallocation_count": 0,
-            "physical_slot_decision_read_count": 0,
-            "future_event_field_read_count": 0,
-        }
-
-
-def target_map_to_dense(
-    *,
-    rows: Sequence[AnonymousLifecycleRow],
-    target_map: Mapping[str, np.ndarray],
-) -> tuple[np.ndarray, np.ndarray]:
-    """Storage-only projection from opaque ownership to dense physical rows."""
-
-    if len(rows) != PHYSICAL_UAVS:
-        raise G0RealizationError("dense target projection requires eight rows")
-    targets = np.zeros((PHYSICAL_UAVS, 3), dtype=np.float64)
-    active = np.zeros(PHYSICAL_UAVS, dtype=np.bool_)
-    for storage_row, row in enumerate(rows):
-        if row.handle not in target_map:
-            raise G0RealizationError("controller target map omitted a lifecycle")
-        targets[storage_row] = _finite_array(
-            target_map[row.handle], (3,), label="controller target"
-        )
-        active[storage_row] = bool(row.active)
-    return targets, active
 
 
 
@@ -2140,8 +1710,8 @@ def _derive_return_ready_step(
     owner_storage = source.assignment.row_to_target.index(
         source.event.owner_target.key
     )
-    initial_owner_handle = initial_lifecycle_handles(source)[owner_storage]
-    replacement_handle = replacement_lifecycle_handle(
+    initial_owner_handle = controllers.initial_lifecycle_handles(source)[owner_storage]
+    replacement_handle = controllers.replacement_lifecycle_handle(
         source, initial_owner_handle
     )
     weakest = execution.pre_action_weakest_service.array()
@@ -2844,7 +2414,7 @@ def _expected_pre_action_context(
     cell: Cell | str = Cell.EVENT,
 ) -> dict[str, Any]:
     chosen_cell = Cell(cell)
-    handles = list(initial_lifecycle_handles(source))
+    handles = list(controllers.initial_lifecycle_handles(source))
     epochs = np.zeros(PHYSICAL_UAVS, dtype=np.int64)
     owner_storage = source.assignment.row_to_target.index(
         source.event.owner_target.key
@@ -2853,7 +2423,7 @@ def _expected_pre_action_context(
         chosen_cell is Cell.EVENT
         and int(physical_step) >= source.event.rejoin
     ):
-        handles[owner_storage] = replacement_lifecycle_handle(
+        handles[owner_storage] = controllers.replacement_lifecycle_handle(
             source, handles[owner_storage]
         )
         epochs[owner_storage] = 1
@@ -3021,7 +2591,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         self._internal_to_storage = np.argsort(self._storage_to_internal)
         self._service_active_mask = np.ones(PHYSICAL_UAVS, dtype=np.bool_)
         self._last_mask_step = -1
-        self._handles = initial_lifecycle_handles(source)
+        self._handles = controllers.initial_lifecycle_handles(source)
         self._epochs = np.zeros(PHYSICAL_UAVS, dtype=np.int64)
         self._pending_boundary_events: list[LifecycleBoundaryEvent] = []
         kwargs = dict(env_kwargs or {})
@@ -3184,7 +2754,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
                     owner_target=self.g0_source.event.owner_target.key,
                 )
             elif not old[owner_internal] and new[owner_internal]:
-                current = replacement_lifecycle_handle(self.g0_source, previous)
+                current = controllers.replacement_lifecycle_handle(self.g0_source, previous)
                 handles = list(self._handles)
                 handles[owner_storage] = current
                 self._handles = tuple(handles)
@@ -3216,7 +2786,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             raise G0RealizationError("G0 reset cannot replace the episode-ID source")
         self._service_active_mask[:] = True
         self._last_mask_step = -1
-        self._handles = initial_lifecycle_handles(self.g0_source)
+        self._handles = controllers.initial_lifecycle_handles(self.g0_source)
         self._epochs[:] = 0
         self._pending_boundary_events.clear()
         self._channel_rng = _namespace_random_state(self.environment_seed, 3)
@@ -3237,7 +2807,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
             raise G0RealizationError("reset changed storage-only slot permutation")
         return observations, infos
 
-    def current_rows(self) -> tuple[AnonymousLifecycleRow, ...]:
+    def current_rows(self) -> tuple[controllers.AnonymousLifecycleRow, ...]:
         self._synchronize_service_mask()
         velocities = np.asarray(
             getattr(self, "last_actual_velocities", np.zeros((PHYSICAL_UAVS, 3))),
@@ -3250,7 +2820,7 @@ class UAVSourceIdentifiabilityEnv(UAVEnergyAwareRelayEnv):
         velocities = velocities[self._storage_to_internal]
         active = self._service_active_mask[self._storage_to_internal]
         return tuple(
-            AnonymousLifecycleRow(
+            controllers.AnonymousLifecycleRow(
                 handle=self._handles[row],
                 position=positions[row],
                 velocity=velocities[row],
@@ -3689,10 +3259,10 @@ class MechanicallyQualifiedOracleController:
         safety_ledger: oracle_evidence.OracleSafetyLedger,
     ) -> None:
         self.source = source
-        self.geometry = G0ControllerGeometry.from_source(source)
+        self.geometry = controllers.G0ControllerGeometry.from_source(source)
         self.qualification = qualification
         self.safety_ledger = safety_ledger
-        self.ownership = _initial_ownership(source, handles)
+        self.ownership = controllers._initial_ownership(source, handles)
         self._selected_stage = TargetLabel.parse(qualification.selected_reserve_target)
         if self._selected_stage.kind is not TargetKind.STAGE:
             raise G0RealizationError("oracle selected candidate is not a reserve")
@@ -3716,9 +3286,9 @@ class MechanicallyQualifiedOracleController:
         self._return_ready_step: int | None = None
 
     def on_leave(
-        self, absent_handle: str, rows: Sequence[AnonymousLifecycleRow]
+        self, absent_handle: str, rows: Sequence[controllers.AnonymousLifecycleRow]
     ) -> None:
-        roster = _roster_by_handle(rows)
+        roster = controllers._roster_by_handle(rows)
         if (
             absent_handle != self._absent_handle
             or roster[absent_handle].active
@@ -3736,11 +3306,11 @@ class MechanicallyQualifiedOracleController:
 
     def target_map(
         self,
-        information: G0CurrentInformation,
+        information: controllers.G0CurrentInformation,
         *,
         physical_step: int,
     ) -> dict[str, np.ndarray]:
-        roster = _current_roster(self.geometry, information)
+        roster = controllers._current_roster(self.geometry, information)
         weakest_hotspot_service = information.weakest_hotspot_service
         step = int(physical_step)
         if not math.isfinite(float(weakest_hotspot_service)):
@@ -3814,9 +3384,9 @@ def _controller_for_run(
     time_step: float,
 ) -> Any:
     if control is Control.SAME_INFORMATION:
-        return SameInformationController(source, handles)
+        return controllers.SameInformationController(source, handles)
     if control is Control.NO_REALLOCATION:
-        return NoReallocationController(source, handles)
+        return controllers.NoReallocationController(source, handles)
     if not (
         float(max_speed) == 30.0
         and float(max_vertical_speed) == 5.0
@@ -3880,7 +3450,7 @@ def _build_selected_oracle_behavioral_execution_from_validated_context(
                     )
                 else:
                     raise G0RealizationError("behavioral replay lifecycle event drifted")
-            information = make_current_information(
+            information = controllers.make_current_information(
                 source,
                 rows=rows,
                 user_demand_mbps=np.asarray(
@@ -3901,7 +3471,7 @@ def _build_selected_oracle_behavioral_execution_from_validated_context(
             target_map = controller.target_map(
                 information, physical_step=step
             )
-            targets, active = target_map_to_dense(
+            targets, active = controllers.target_map_to_dense(
                 rows=rows,
                 target_map=target_map,
             )
@@ -4120,7 +3690,7 @@ def run_g0_episode(
             association_input = np.asarray(env.connections, dtype=np.bool_)[
                 env._storage_to_internal
             ]
-            information = make_current_information(
+            information = controllers.make_current_information(
                 source,
                 rows=rows,
                 user_demand_mbps=demand_input,
@@ -4139,7 +3709,7 @@ def run_g0_episode(
                 physical_step=step,
             )
             try:
-                dense_targets, active = target_map_to_dense(rows=rows, target_map=target_map)
+                dense_targets, active = controllers.target_map_to_dense(rows=rows, target_map=target_map)
             except G0RealizationError:
                 ownership_violations += 1
                 raise
@@ -4344,7 +3914,7 @@ def _reconstruct_controller_trace(
     source: G0EpisodeSource,
     run: EpisodeRunEvidence,
 ) -> tuple[np.ndarray, dict[str, Any], str]:
-    handles = list(initial_lifecycle_handles(source))
+    handles = list(controllers.initial_lifecycle_handles(source))
     owner_row = source.assignment.row_to_target.index(source.event.owner_target.key)
     controller = _controller_for_run(
         source,
@@ -4359,10 +3929,10 @@ def _reconstruct_controller_trace(
         active = run.active_mask_trace[step]
         if run.cell is Cell.EVENT and step == source.event.rejoin:
             previous = handles[owner_row]
-            current = replacement_lifecycle_handle(source, previous)
+            current = controllers.replacement_lifecycle_handle(source, previous)
             handles[owner_row] = current
         rows = tuple(
-            AnonymousLifecycleRow(
+            controllers.AnonymousLifecycleRow(
                 handle=handles[row],
                 position=run.position_trace[step, row],
                 velocity=(
@@ -4379,7 +3949,7 @@ def _reconstruct_controller_trace(
             controller.on_leave(handles[owner_row], rows)
         if run.cell is Cell.EVENT and step == source.event.rejoin:
             controller.on_rejoin(previous, handles[owner_row], step)
-        information = make_current_information(
+        information = controllers.make_current_information(
             source,
             rows=rows,
             user_demand_mbps=run.user_demand_input_mbps[step],
@@ -4390,7 +3960,7 @@ def _reconstruct_controller_trace(
             information,
             physical_step=step,
         )
-        dense, reconstructed_active = target_map_to_dense(
+        dense, reconstructed_active = controllers.target_map_to_dense(
             rows=rows,
             target_map=target_map,
         )
@@ -4704,7 +4274,7 @@ def build_episode_validity_record(
     same_event = normalized[(Control.SAME_INFORMATION, Cell.EVENT)]
     none_event = normalized[(Control.NO_REALLOCATION, Cell.EVENT)]
     selected_handle = same_event.controller_evidence.get("selected_reserve")
-    initial_handles = initial_lifecycle_handles(source)
+    initial_handles = controllers.initial_lifecycle_handles(source)
     selected_row = (
         initial_handles.index(str(selected_handle))
         if selected_handle in initial_handles

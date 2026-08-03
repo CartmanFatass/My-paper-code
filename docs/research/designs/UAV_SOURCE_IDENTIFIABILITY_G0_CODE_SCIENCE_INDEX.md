@@ -69,8 +69,9 @@ outside this implementation boundary.
 ## Source geometry and paired authority
 
 All geometry/source-construction symbols in this section are owned by
-`ha_ctse_process/uav_g0_geometry.py`; environment, controller and replay
-symbols remain in `ha_ctse_process/uav_source_identifiability_g0.py`.
+`ha_ctse_process/uav_g0_geometry.py`; current-information controller symbols
+are owned by `ha_ctse_process/uav_g0_controllers.py`; environment, oracle and
+replay symbols remain in `ha_ctse_process/uav_source_identifiability_g0.py`.
 
 | Frozen clause | Implementing symbols | Reconstructed evidence | Focused guard |
 |---|---|---|---|
@@ -103,6 +104,11 @@ actual S7 shared action conversion and rejects any current method or accepted
 G1 tracker digest drift.
 
 ## Controllers and oracle
+
+`ha_ctse_process/uav_source_identifiability_g0.py` imports the controller owner
+as a module and uses module-qualified references.  The controller owner imports
+only schema, geometry and statistics; there is no reverse source-module edge or
+compatibility re-export.
 
 ### Same-information controller
 
