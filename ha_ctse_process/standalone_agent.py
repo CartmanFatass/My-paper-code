@@ -8,7 +8,6 @@ PPO-style high/low updates without legacy discriminator objectives.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -19,6 +18,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 import ha_ctse_process.standalone_models as standalone_models
+import ha_ctse_process.standalone_segments as standalone_segments
 
 from ha_ctse_process.r30_fixed_clock import (
     HIGH_BUFFER_VERSION,
@@ -141,357 +141,6 @@ from ha_ctse_process.r29_action_information_reward import (
     OnPolicyActionInformationReward,
     empty_r29_action_information_metrics,
 )
-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS = 32
-
-
-@dataclass
-class Segment:
-    env_id: int
-    agent_id: int
-    skill: int
-    duration_idx: int
-    start_step: int
-    high_obs: np.ndarray
-    high_logp: float
-    high_value: float
-    high_entropy: float
-    high_state: np.ndarray | None = None
-    high_joint_obs: np.ndarray | None = None
-    prev_skill: int = 0
-    skill_age_prev: int = 0
-    team_code: int = 0
-    team_logp_weight: float = 1.0
-    team_intent_boundary: bool = False
-    team_intent_truncated: bool = False
-    skill_assignment_logp: float = 0.0
-    duration_assignment_logp: float = 0.0
-    ar_parallel_kl_start: float = 0.0
-    ar_prefix_start: np.ndarray | None = None
-    roster_active_skills_start: np.ndarray | None = None
-    roster_active_ages_start: np.ndarray | None = None
-    roster_active_mask_start: np.ndarray | None = None
-    roster_ar_kl_zeroed_start: float = 0.0
-    roster_ar_kl_shuffled_start: float = 0.0
-    selection_independence_deficit_start: float = 0.0
-    initial_assignment: bool = False
-    switched: bool = False
-    duration_target: int = 1
-    renewal_penalty: float = 0.0
-    episode_step_start: int = 0
-    episode_id: int = 0
-    policy_update: int = 0
-    pre_assignment_episode_id: int = -1
-    pre_assignment_policy_update: int = -1
-    completion_reason: str = "active"
-    obs: list[np.ndarray] = field(default_factory=list)
-    actions: list[np.ndarray] = field(default_factory=list)
-    deterministic_actions: list[np.ndarray] = field(default_factory=list)
-    pre_assignment_high_obs: np.ndarray | None = None
-    pre_assignment_obs: list[np.ndarray] = field(default_factory=list)
-    pre_assignment_actions: list[np.ndarray] = field(default_factory=list)
-    pre_assignment_deterministic_actions: list[np.ndarray] = field(default_factory=list)
-    pre_assignment_end_obs: np.ndarray | None = None
-    rewards: list[float] = field(default_factory=list)
-    rollout_indices: list[int] = field(default_factory=list)
-    reward_info_seq: list[dict] = field(default_factory=list)
-    state_info_seq: list[dict[str, Any]] = field(default_factory=list)
-    # True segment-start state (BEFORE the first action), captured separately from
-    # state_info_seq (which only holds post-step states).  Used by P2 recovery
-    # shaping so s0 is the real window start, not the post-first-step state.
-    start_state_info: dict[str, Any] | None = None
-    start_reward_info: dict[str, Any] | None = None
-    end_obs: np.ndarray | None = None
-    end_joint_obs: np.ndarray | None = None
-    end_state: np.ndarray | None = None
-    terminal: bool = False
-    kappa_start: int = -1
-    kappa_end: int = -1
-    raw_kappa_start: int = -1
-    raw_kappa_end: int = -1
-    agent_kappa_start: int = -1
-    raw_agent_kappa_start: int = -1
-    omega_start: np.ndarray | None = None
-    agent_relevance_start: np.ndarray | None = None
-    situation_changed_during_segment: bool = False
-
-    def append(
-        self,
-        obs,
-        action,
-        reward,
-        next_obs,
-        rollout_idx: int,
-        reward_info=None,
-        state_info=None,
-        next_joint_obs=None,
-        next_state=None,
-        done: bool = False,
-        pre_state_info=None,
-        pre_reward_info=None,
-        deterministic_action=None,
-    ):
-        # On the segment's first step, record the pre-step (segment-start) state so
-        # P2 shaping telescopes over the true window, not the post-first-step state.
-        if not self.state_info_seq and self.start_state_info is None and pre_state_info:
-            self.start_state_info = dict(pre_state_info)
-            self.start_reward_info = dict(pre_reward_info or {})
-        self.obs.append(np.asarray(obs, dtype=np.float32))
-        action_arr = np.asarray(action, dtype=np.float32)
-        self.actions.append(action_arr.reshape(-1))
-        if deterministic_action is not None:
-            deterministic_arr = np.asarray(deterministic_action, dtype=np.float32).reshape(-1)
-            self.deterministic_actions.append(deterministic_arr)
-        self.rewards.append(float(reward))
-        self.rollout_indices.append(int(rollout_idx))
-        self.reward_info_seq.append(dict(reward_info or {}))
-        self.state_info_seq.append(dict(state_info or {}))
-        self.end_obs = np.asarray(next_obs, dtype=np.float32)
-        self.end_joint_obs = None if next_joint_obs is None else np.asarray(next_joint_obs, dtype=np.float32)
-        self.end_state = None if next_state is None else np.asarray(next_state, dtype=np.float32)
-        self.terminal = bool(done)
-
-    @property
-    def length(self) -> int:
-        return len(self.rewards)
-
-
-class SegmentManager:
-    def __init__(self, n_envs: int, n_agents: int):
-        self.n_envs = int(n_envs)
-        self.n_agents = int(n_agents)
-        self.active: list[list[Segment | None]] = [
-            [None for _ in range(n_agents)]
-            for _ in range(n_envs)
-        ]
-        self.completed: list[Segment] = []
-
-    def renew(
-        self,
-        env_id: int,
-        agent_id: int,
-        skill: int,
-        duration_idx: int,
-        step: int,
-        high_obs,
-        high_logp: float,
-        high_value: float,
-        high_entropy: float,
-        high_state=None,
-        high_joint_obs=None,
-        prev_skill: int = 0,
-        skill_age_prev: int = 0,
-        team_code: int = 0,
-        team_logp_weight: float = 1.0,
-        team_intent_boundary: bool = False,
-        team_intent_truncated: bool = False,
-        skill_assignment_logp: float = 0.0,
-        duration_assignment_logp: float = 0.0,
-        ar_parallel_kl_start: float = 0.0,
-        ar_prefix_start=None,
-        roster_active_skills_start=None,
-        roster_active_ages_start=None,
-        roster_active_mask_start=None,
-        roster_ar_kl_zeroed_start: float = 0.0,
-        roster_ar_kl_shuffled_start: float = 0.0,
-        selection_independence_deficit_start: float = 0.0,
-        initial_assignment: bool = False,
-        switched: bool = False,
-        duration_target: int = 1,
-        renewal_penalty: float = 0.0,
-        kappa_start: int = -1,
-        raw_kappa_start: int = -1,
-        agent_kappa_start: int = -1,
-        raw_agent_kappa_start: int = -1,
-        omega_start=None,
-        agent_relevance_start=None,
-        episode_step_start: int = 0,
-        episode_id: int = 0,
-        policy_update: int = 0,
-    ):
-        old = self.active[env_id][agent_id]
-        pre_assignment_high_obs = None
-        pre_assignment_obs: list[np.ndarray] = []
-        pre_assignment_actions: list[np.ndarray] = []
-        pre_assignment_deterministic_actions: list[np.ndarray] = []
-        pre_assignment_end_obs = None
-        pre_assignment_episode_id = -1
-        pre_assignment_policy_update = -1
-        if old is not None and old.length > 0:
-            old.completion_reason = "renewal"
-            pre_assignment_high_obs = np.asarray(old.high_obs, dtype=np.float32).copy()
-            pre_assignment_obs = [
-                np.asarray(row, dtype=np.float32).copy()
-                for row in old.obs[-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS:]
-            ]
-            pre_assignment_actions = [
-                np.asarray(row, dtype=np.float32).reshape(-1).copy()
-                for row in old.actions[-R24_PRE_ASSIGNMENT_WINDOW_MAX_STEPS:]
-            ]
-            if (
-                int(old.episode_id) == int(episode_id)
-                and int(old.policy_update) == int(policy_update)
-            ):
-                pre_assignment_deterministic_actions = [
-                    np.asarray(row, dtype=np.float32).reshape(-1).copy()
-                    for row in old.deterministic_actions[-10:]
-                ]
-                pre_assignment_episode_id = int(old.episode_id)
-                pre_assignment_policy_update = int(old.policy_update)
-            pre_assignment_end_obs = (
-                None if old.end_obs is None else np.asarray(old.end_obs, dtype=np.float32).copy()
-            )
-            if int(kappa_start) >= 0:
-                old.kappa_end = int(kappa_start)
-                old.situation_changed_during_segment = bool(
-                    old.situation_changed_during_segment
-                    or (int(old.kappa_start) >= 0 and int(old.kappa_end) != int(old.kappa_start))
-                )
-            if int(raw_kappa_start) >= 0:
-                old.raw_kappa_end = int(raw_kappa_start)
-            self.completed.append(old)
-        self.active[env_id][agent_id] = Segment(
-            env_id=int(env_id),
-            agent_id=int(agent_id),
-            skill=int(skill),
-            duration_idx=int(duration_idx),
-            start_step=int(step),
-            high_obs=np.asarray(high_obs, dtype=np.float32),
-            high_logp=float(high_logp),
-            high_value=float(high_value),
-            high_entropy=float(high_entropy),
-            high_state=None if high_state is None else np.asarray(high_state, dtype=np.float32),
-            high_joint_obs=None if high_joint_obs is None else np.asarray(high_joint_obs, dtype=np.float32),
-            prev_skill=int(prev_skill),
-            skill_age_prev=int(skill_age_prev),
-            team_code=int(team_code),
-            team_logp_weight=float(team_logp_weight),
-            team_intent_boundary=bool(team_intent_boundary),
-            team_intent_truncated=bool(team_intent_truncated),
-            skill_assignment_logp=float(skill_assignment_logp),
-            duration_assignment_logp=float(duration_assignment_logp),
-            ar_parallel_kl_start=float(ar_parallel_kl_start),
-            ar_prefix_start=(
-                None
-                if ar_prefix_start is None
-                else np.asarray(ar_prefix_start, dtype=np.float32).reshape(-1)
-            ),
-            roster_active_skills_start=(
-                None
-                if roster_active_skills_start is None
-                else np.asarray(roster_active_skills_start, dtype=np.int64).reshape(-1)
-            ),
-            roster_active_ages_start=(
-                None
-                if roster_active_ages_start is None
-                else np.asarray(roster_active_ages_start, dtype=np.float32).reshape(-1)
-            ),
-            roster_active_mask_start=(
-                None
-                if roster_active_mask_start is None
-                else np.asarray(roster_active_mask_start, dtype=np.bool_).reshape(-1)
-            ),
-            roster_ar_kl_zeroed_start=float(roster_ar_kl_zeroed_start),
-            roster_ar_kl_shuffled_start=float(roster_ar_kl_shuffled_start),
-            selection_independence_deficit_start=float(selection_independence_deficit_start),
-            initial_assignment=bool(initial_assignment),
-            switched=bool(switched),
-            duration_target=int(duration_target),
-            renewal_penalty=float(renewal_penalty),
-            episode_step_start=int(episode_step_start),
-            episode_id=int(episode_id),
-            policy_update=int(policy_update),
-            pre_assignment_episode_id=int(pre_assignment_episode_id),
-            pre_assignment_policy_update=int(pre_assignment_policy_update),
-            kappa_start=int(kappa_start),
-            kappa_end=int(kappa_start),
-            raw_kappa_start=int(raw_kappa_start),
-            raw_kappa_end=int(raw_kappa_start),
-            agent_kappa_start=int(agent_kappa_start),
-            raw_agent_kappa_start=int(raw_agent_kappa_start),
-            omega_start=None if omega_start is None else np.asarray(omega_start, dtype=np.float32),
-            agent_relevance_start=(
-                None if agent_relevance_start is None else np.asarray(agent_relevance_start, dtype=np.float32)
-            ),
-            pre_assignment_high_obs=pre_assignment_high_obs,
-            pre_assignment_obs=pre_assignment_obs,
-            pre_assignment_actions=pre_assignment_actions,
-            pre_assignment_deterministic_actions=pre_assignment_deterministic_actions,
-            pre_assignment_end_obs=pre_assignment_end_obs,
-        )
-
-    def append(
-        self,
-        env_id: int,
-        obs,
-        actions,
-        rewards,
-        next_obs,
-        rollout_idx: int,
-        reward_info=None,
-        state_info=None,
-        next_state=None,
-        done: bool = False,
-        pre_state_info=None,
-        pre_reward_info=None,
-        deterministic_actions=None,
-    ):
-        for agent_id, segment in enumerate(self.active[env_id]):
-            if segment is None:
-                continue
-            segment.append(
-                obs[agent_id],
-                actions[agent_id],
-                rewards[agent_id],
-                next_obs[agent_id],
-                rollout_idx,
-                reward_info=reward_info,
-                state_info=state_info,
-                next_joint_obs=next_obs,
-                next_state=next_state,
-                done=done,
-                pre_state_info=pre_state_info,
-                pre_reward_info=pre_reward_info,
-                deterministic_action=(
-                    None
-                    if deterministic_actions is None
-                    else deterministic_actions[agent_id]
-                ),
-            )
-
-    def flush(self, env_id: int | None = None, reason: str = "update"):
-        if reason not in {"episode", "update"}:
-            raise ValueError("segment flush reason must be episode or update")
-        env_ids = range(self.n_envs) if env_id is None else [int(env_id)]
-        for current_env in env_ids:
-            for agent_id, segment in enumerate(self.active[current_env]):
-                if segment is not None and segment.length > 0:
-                    segment.completion_reason = reason
-                    self.completed.append(segment)
-                self.active[current_env][agent_id] = None
-
-    def pop_completed(self) -> list[Segment]:
-        segments = self.completed
-        self.completed = []
-        return segments
-
-
-@dataclass
-class Rollout:
-    env_ids: list[int] = field(default_factory=list)
-    obs: list[np.ndarray] = field(default_factory=list)
-    states: list[np.ndarray] = field(default_factory=list)
-    next_states: list[np.ndarray] = field(default_factory=list)
-    skills: list[np.ndarray] = field(default_factory=list)
-    team_codes: list[int] = field(default_factory=list)
-    actions: list[np.ndarray] = field(default_factory=list)
-    deterministic_actions: list[np.ndarray] = field(default_factory=list)
-    logp: list[np.ndarray] = field(default_factory=list)
-    values: list[np.ndarray] = field(default_factory=list)
-    low_actor_hxs: list[np.ndarray] = field(default_factory=list)
-    low_critic_hxs: list[np.ndarray] = field(default_factory=list)
-    rewards: list[np.ndarray] = field(default_factory=list)
-    dones: list[bool] = field(default_factory=list)
-    bootstrap_values: dict[int, np.ndarray] = field(default_factory=dict)
 
 
 class StandaloneProcessAgent:
@@ -1517,7 +1166,7 @@ class StandaloneProcessAgent:
         )
         self.low_critic_hxs = np.zeros_like(self.low_actor_hxs, dtype=np.float32)
         self._last_low_context: list[dict[str, np.ndarray | int] | None] = [None for _ in range(self.num_envs)]
-        self.segments = SegmentManager(self.num_envs, self.n_agents)
+        self.segments = standalone_segments.SegmentManager(self.num_envs, self.n_agents)
         self._team_transition_open: list[TeamTransitionInterval | None] = [None for _ in range(self.num_envs)]
         self._team_transition_closed: list[TeamTransitionInterval] = []
         self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
@@ -1589,7 +1238,7 @@ class StandaloneProcessAgent:
             metrics[f"r31_effect_skill_{skill}_samples"] = 0.0
         return metrics
 
-    def r31_score_complete_windows(self, rollout: Rollout) -> dict[str, float]:
+    def r31_score_complete_windows(self, rollout: standalone_segments.Rollout) -> dict[str, float]:
         """Score complete natural windows with the previous frozen posterior."""
 
         metrics = self._empty_r31_metrics()
@@ -2461,7 +2110,7 @@ class StandaloneProcessAgent:
         self._agent_situation_diag_events = []
         self._situation_hazard_forced_renewals = 0
         self._situation_hazard_events = 0
-        self.segments = SegmentManager(self.num_envs, self.n_agents)
+        self.segments = standalone_segments.SegmentManager(self.num_envs, self.n_agents)
         self._team_transition_open = [None for _ in range(self.num_envs)]
         self._team_transition_closed = []
         self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
@@ -2588,7 +2237,7 @@ class StandaloneProcessAgent:
             processed_new_skills=processed_new_skills,
         )
 
-    def _segment_ar_prefix_tensor(self, segments: list[Segment]) -> torch.Tensor | None:
+    def _segment_ar_prefix_tensor(self, segments: list[standalone_segments.Segment]) -> torch.Tensor | None:
         ar_prefix_dim = self._ar_prefix_dim()
         if ar_prefix_dim <= 0:
             return None
@@ -2616,7 +2265,7 @@ class StandaloneProcessAgent:
                 continue
         return torch.as_tensor(ar_prefix_np, dtype=torch.float32, device=self.device)
 
-    def _roster_selection_metrics(self, segments: list[Segment]) -> dict[str, float]:
+    def _roster_selection_metrics(self, segments: list[standalone_segments.Segment]) -> dict[str, float]:
         selected: list[int] = []
         same_flags: list[float] = []
         active_counts: list[int] = []
@@ -3280,7 +2929,7 @@ class StandaloneProcessAgent:
         self.skill_age[env_id, active] += 1
         self._team_intent_tick(env_id, k)
 
-    def _situation_diagnostics(self, segments: list[Segment]) -> dict[str, float]:
+    def _situation_diagnostics(self, segments: list[standalone_segments.Segment]) -> dict[str, float]:
         mode_code = {
             "diagnostic": 0.0,
             "oracle_change": 1.0,
@@ -3852,7 +3501,7 @@ class StandaloneProcessAgent:
 
     def _g_intervention_kl_metrics(
         self,
-        segments: list[Segment],
+        segments: list[standalone_segments.Segment],
         segment_states: torch.Tensor,
         segment_joint_obs: torch.Tensor,
         start_obs: torch.Tensor,
@@ -3952,7 +3601,7 @@ class StandaloneProcessAgent:
 
     def _z_assignment_intervention_metric(
         self,
-        segments: list[Segment],
+        segments: list[standalone_segments.Segment],
         segment_states: torch.Tensor,
         segment_joint_obs: torch.Tensor,
         start_obs: torch.Tensor,
@@ -4050,7 +3699,7 @@ class StandaloneProcessAgent:
                     dims[f"delta_omega_h{h}"] = int(self.compact.num_prototypes)
         return dims
 
-    def _team_effect_target_audit(self, rollout: Rollout, total_steps: int) -> dict[str, float]:
+    def _team_effect_target_audit(self, rollout: standalone_segments.Rollout, total_steps: int) -> dict[str, float]:
         """Reward-off probe: which q_D target/horizon (if any) recovers Z beyond a
         context-free prior? Builds future-effect targets from the rollout (never xi)
         and trains one online head per (target, horizon). No reward is produced."""
@@ -4164,7 +3813,7 @@ class StandaloneProcessAgent:
             return True
         return float(self._last_forced_z_assignment_kl) >= floor
 
-    def _team_intent_rollout_update(self, rollout: Rollout, total_steps: int) -> dict[str, float]:
+    def _team_intent_rollout_update(self, rollout: standalone_segments.Rollout, total_steps: int) -> dict[str, float]:
         metrics = empty_team_intent_metrics()
         if self.enable_team_intent:
             metrics["team_intent_enabled"] = 1.0
@@ -4331,7 +3980,7 @@ class StandaloneProcessAgent:
         norm = float(min(np.log(x_cardinality), np.log(y_cardinality))) if min(x_cardinality, y_cardinality) > 1 else 0.0
         return mi / norm if norm > 0.0 else 0.0
 
-    def _transition_discriminator_batch(self, valid: list[Segment]) -> dict[str, np.ndarray] | None:
+    def _transition_discriminator_batch(self, valid: list[standalone_segments.Segment]) -> dict[str, np.ndarray] | None:
         if self.transition_discriminator is None:
             return None
         action_dim = 1 if self.action_space_type == "discrete" else self.action_dim
@@ -4398,8 +4047,8 @@ class StandaloneProcessAgent:
 
     def _r30_transition_skill_update(
         self,
-        segments: list[Segment],
-        rollout: Rollout,
+        segments: list[standalone_segments.Segment],
+        rollout: standalone_segments.Rollout,
         *,
         total_steps: int,
     ) -> dict[str, float]:
@@ -4525,7 +4174,7 @@ class StandaloneProcessAgent:
             return torch.cat(pieces, dim=-1)
         return torch.zeros(sample_count, 0, dtype=torch.float32, device=device)
 
-    def _prototype_discriminator_batch(self, valid: list[Segment]) -> dict[str, np.ndarray] | None:
+    def _prototype_discriminator_batch(self, valid: list[standalone_segments.Segment]) -> dict[str, np.ndarray] | None:
         if self.prototype_discriminator is None:
             return None
         next_obs_rows: list[np.ndarray] = []
@@ -4618,7 +4267,7 @@ class StandaloneProcessAgent:
 
     def _team_transition_update(
         self,
-        segments: list[Segment],
+        segments: list[standalone_segments.Segment],
         total_steps: int = 0,
     ) -> tuple[dict[str, float], np.ndarray]:
         metrics = empty_team_transition_metrics()
@@ -4734,7 +4383,7 @@ class StandaloneProcessAgent:
 
     def _r24_qd_segment_tensors(
         self,
-        valid_segments: list[Segment],
+        valid_segments: list[standalone_segments.Segment],
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         actions: list[np.ndarray] = []
         effects: list[np.ndarray] = []
@@ -4817,10 +4466,10 @@ class StandaloneProcessAgent:
         )
         return action_t, effect_t, condition_t, labels_t, pre_action_t, pre_effect_t, pre_valid_t
 
-    def _r24_qd_action_stream(self, segment: Segment) -> np.ndarray:
+    def _r24_qd_action_stream(self, segment: standalone_segments.Segment) -> np.ndarray:
         return self._r24_qd_action_stream_from_actions(segment.actions)
 
-    def _r24_qd_pre_action_stream(self, segment: Segment) -> np.ndarray:
+    def _r24_qd_pre_action_stream(self, segment: standalone_segments.Segment) -> np.ndarray:
         return self._r24_qd_action_stream_from_actions(segment.pre_assignment_actions)
 
     def _r24_qd_action_stream_from_actions(self, actions: list[np.ndarray]) -> np.ndarray:
@@ -4834,14 +4483,14 @@ class StandaloneProcessAgent:
         span = rows.max(axis=0) - rows.min(axis=0)
         return np.concatenate([mean, std, delta, span]).astype(np.float32, copy=False)
 
-    def _r24_qd_effect_stream(self, segment: Segment) -> np.ndarray:
+    def _r24_qd_effect_stream(self, segment: standalone_segments.Segment) -> np.ndarray:
         return self._r24_qd_effect_stream_from_observations(
             segment.high_obs,
             segment.obs,
             segment.end_obs,
         )
 
-    def _r24_qd_pre_effect_stream(self, segment: Segment) -> np.ndarray:
+    def _r24_qd_pre_effect_stream(self, segment: standalone_segments.Segment) -> np.ndarray:
         return self._r24_qd_effect_stream_from_observations(
             segment.pre_assignment_high_obs,
             segment.pre_assignment_obs,
@@ -4869,13 +4518,13 @@ class StandaloneProcessAgent:
         span = matrix.max(axis=0) - matrix.min(axis=0)
         return np.concatenate([delta, mean_delta, std, span]).astype(np.float32, copy=False)
 
-    def _r24_qd_pre_assignment_valid(self, segment: Segment) -> bool:
+    def _r24_qd_pre_assignment_valid(self, segment: standalone_segments.Segment) -> bool:
         return (
             segment.pre_assignment_high_obs is not None
             and (bool(segment.pre_assignment_actions) or bool(segment.pre_assignment_obs))
         )
 
-    def _r24_qd_xi_context(self, segment: Segment) -> np.ndarray:
+    def _r24_qd_xi_context(self, segment: standalone_segments.Segment) -> np.ndarray:
         hist = np.zeros(int(max(getattr(self, "_r24_qd_xi_context_dim", self.n_skills), 1)), dtype=np.float32)
         roster = segment.roster_active_skills_start
         if roster is None:
@@ -4898,7 +4547,7 @@ class StandaloneProcessAgent:
 
     def _export_r24_qd_window_shard(
         self,
-        valid_segments: list[Segment],
+        valid_segments: list[standalone_segments.Segment],
         action_t: torch.Tensor,
         effect_t: torch.Tensor,
         condition_t: torch.Tensor,
@@ -4946,7 +4595,7 @@ class StandaloneProcessAgent:
 
     def _team_conditioned_qd_update(
         self,
-        valid_segments: list[Segment],
+        valid_segments: list[standalone_segments.Segment],
         total_steps: int = 0,
         update_idx: int = 0,
     ) -> dict[str, float]:
@@ -5039,7 +4688,7 @@ class StandaloneProcessAgent:
 
     def process_update(
         self,
-        rollout: Rollout,
+        rollout: standalone_segments.Rollout,
         total_steps: int = 0,
         update_idx: int = 0,
     ) -> dict[str, float]:
@@ -6268,20 +5917,20 @@ class StandaloneProcessAgent:
             **high_metrics,
         }
 
-    def _segment_state(self, segment: Segment) -> np.ndarray:
+    def _segment_state(self, segment: standalone_segments.Segment) -> np.ndarray:
         if segment.high_state is not None:
             return self._fit_vector(segment.high_state, self.state_dim)
         joint = self._segment_joint_obs(segment)
         return self._state_array(None, joint)
 
-    def _segment_joint_obs(self, segment: Segment) -> np.ndarray:
+    def _segment_joint_obs(self, segment: standalone_segments.Segment) -> np.ndarray:
         if segment.high_joint_obs is not None:
             return self._joint_obs_array(segment.high_joint_obs)
         joint = np.zeros((self.n_agents, self.obs_dim), dtype=np.float32)
         joint[segment.agent_id] = self._fit_vector(segment.high_obs, self.obs_dim)
         return joint
 
-    def _segment_end_joint_obs(self, segment: Segment) -> np.ndarray:
+    def _segment_end_joint_obs(self, segment: standalone_segments.Segment) -> np.ndarray:
         if segment.end_joint_obs is not None:
             return self._joint_obs_array(segment.end_joint_obs)
         joint = self._segment_joint_obs(segment)
@@ -6289,7 +5938,7 @@ class StandaloneProcessAgent:
             joint[segment.agent_id] = self._fit_vector(segment.end_obs, self.obs_dim)
         return joint
 
-    def _discounted_segment_return(self, segment: Segment) -> float:
+    def _discounted_segment_return(self, segment: standalone_segments.Segment) -> float:
         rewards = np.asarray(segment.rewards, dtype=np.float32)
         if rewards.size == 0:
             return 0.0
@@ -6298,12 +5947,12 @@ class StandaloneProcessAgent:
         discounts = np.power(float(self.gamma), np.arange(rewards.size, dtype=np.float32))
         return float(np.sum(discounts * rewards))
 
-    def _segment_discount_factor(self, segment: Segment) -> float:
+    def _segment_discount_factor(self, segment: standalone_segments.Segment) -> float:
         if not self.use_smdp_discounted_high_return:
             return 1.0
         return float(float(self.gamma) ** max(int(segment.length), 0))
 
-    def _bootstrap_high_values(self, segments: list[Segment]) -> np.ndarray:
+    def _bootstrap_high_values(self, segments: list[standalone_segments.Segment]) -> np.ndarray:
         values = np.zeros(len(segments), dtype=np.float32)
         if not self.use_smdp_bootstrap or not segments:
             return values
@@ -7264,7 +6913,7 @@ class StandaloneProcessAgent:
 
     def update_high_from_segments(
         self,
-        segments: list[Segment],
+        segments: list[standalone_segments.Segment],
         process_rewards: np.ndarray,
         total_steps: int = 0,
     ) -> dict[str, float]:
@@ -7753,7 +7402,7 @@ class StandaloneProcessAgent:
         return float(np.mean(finite))
 
     @classmethod
-    def _segment_info_series(cls, segment: Segment, aliases: tuple[str, ...]) -> list[float]:
+    def _segment_info_series(cls, segment: standalone_segments.Segment, aliases: tuple[str, ...]) -> list[float]:
         values: list[float] = []
         for info in getattr(segment, "reward_info_seq", []):
             if not isinstance(info, dict):
@@ -7767,7 +7416,7 @@ class StandaloneProcessAgent:
         return values
 
     @classmethod
-    def _segment_full_disconnect_mean(cls, segment: Segment) -> float:
+    def _segment_full_disconnect_mean(cls, segment: standalone_segments.Segment) -> float:
         values = cls._segment_info_series(
             segment,
             (
@@ -7779,7 +7428,7 @@ class StandaloneProcessAgent:
         return float(np.mean(values)) if values else float("nan")
 
     @classmethod
-    def _segment_recovery_flag(cls, segment: Segment) -> float:
+    def _segment_recovery_flag(cls, segment: standalone_segments.Segment) -> float:
         values = cls._segment_info_series(
             segment,
             (
@@ -7793,7 +7442,7 @@ class StandaloneProcessAgent:
         return float(values[0] >= 0.5 and values[-1] < 0.5)
 
     @classmethod
-    def _segment_backhaul_up_frac(cls, segment: Segment) -> float:
+    def _segment_backhaul_up_frac(cls, segment: standalone_segments.Segment) -> float:
         flags: list[float] = []
         for info in getattr(segment, "reward_info_seq", []):
             if not isinstance(info, dict):
@@ -7851,7 +7500,7 @@ class StandaloneProcessAgent:
 
     def _lifetime_diagnostics(
         self,
-        segments: list[Segment],
+        segments: list[standalone_segments.Segment],
         duration_indices: np.ndarray,
         reward_sums: np.ndarray,
     ) -> dict[str, float]:
@@ -7970,7 +7619,7 @@ class StandaloneProcessAgent:
 
     def _low_rollout_diagnostics(
         self,
-        rollout: Rollout,
+        rollout: standalone_segments.Rollout,
         returns: np.ndarray,
         advantages: np.ndarray,
         values: np.ndarray,
@@ -8016,7 +7665,7 @@ class StandaloneProcessAgent:
             "low_team_value_error_abs_std": team_value_error["std"],
         }
 
-    def _low_returns(self, rollout: Rollout) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    def _low_returns(self, rollout: standalone_segments.Rollout) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         rewards = np.asarray(rollout.rewards, dtype=np.float32)
         values = np.asarray(rollout.values, dtype=np.float32)
         dones = np.asarray(rollout.dones, dtype=np.bool_)
@@ -8065,7 +7714,7 @@ class StandaloneProcessAgent:
 
     def _low_sequence_chunks(
         self,
-        rollout: Rollout,
+        rollout: standalone_segments.Rollout,
         returns: np.ndarray,
         advantages: np.ndarray,
         env_ids: np.ndarray,
@@ -8252,7 +7901,7 @@ class StandaloneProcessAgent:
         )
         return batch
 
-    def _update_low_recurrent(self, rollout: Rollout) -> dict[str, float]:
+    def _update_low_recurrent(self, rollout: standalone_segments.Rollout) -> dict[str, float]:
         returns, advantages, old_values_np, env_ids = self._low_returns(rollout)
         rollout_diagnostics = self._low_rollout_diagnostics(rollout, returns, advantages, old_values_np)
         if self.low_value_norm is not None:
@@ -8478,7 +8127,7 @@ class StandaloneProcessAgent:
             **rollout_diagnostics,
         }
 
-    def update_low(self, rollout: Rollout) -> dict[str, float]:
+    def update_low(self, rollout: standalone_segments.Rollout) -> dict[str, float]:
         if not rollout.rewards:
             return self._empty_low_metrics()
         if self.r39_toy_fixed_skill_primitives:

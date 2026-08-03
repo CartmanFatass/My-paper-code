@@ -13,7 +13,8 @@ import torch
 from ha_ctse_process.config import Config
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import standalone_evaluation as process_evaluation
-from ha_ctse_process.standalone_agent import Segment, StandaloneProcessAgent
+from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+from ha_ctse_process.standalone_segments import Segment
 
 
 def make_config():

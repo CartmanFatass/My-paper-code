@@ -6,7 +6,8 @@ import torch
 from ha_ctse_process import train as process_train
 from ha_ctse_process import checkpoint_io
 from ha_ctse_process import standalone_evaluation as process_evaluation
-from ha_ctse_process.standalone_agent import Rollout, Segment, StandaloneProcessAgent
+from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+from ha_ctse_process.standalone_segments import Rollout, Segment
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
 

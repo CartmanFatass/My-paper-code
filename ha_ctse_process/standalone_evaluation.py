@@ -13,7 +13,8 @@ import torch
 from ha_ctse_process.env_factory import normalize_scenario
 from ha_ctse_process.metrics_io import append_csv
 from ha_ctse_process.plotting import EVAL_FIELDS, extract_uav_metrics, save_eval_plots
-from ha_ctse_process.standalone_agent import SegmentManager, StandaloneProcessAgent
+from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+from ha_ctse_process.standalone_segments import SegmentManager
 from ha_ctse_process.standalone_cli import create_env
 from ha_ctse_process.standalone_metrics import (
     audit_r37_identity_observation,

@@ -19,7 +19,7 @@ import numpy as np
 import torch
 
 from ha_ctse_process.plotting import extract_uav_metrics
-from ha_ctse_process.standalone_agent import SegmentManager
+from ha_ctse_process.standalone_segments import SegmentManager
 from ha_ctse_process.topology_role import TOPOLOGY_ROLE_NAMES, TopologyRoleExtractor
 
 

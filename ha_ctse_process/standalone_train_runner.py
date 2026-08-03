@@ -29,9 +29,9 @@ from ha_ctse_process.checkpoint_io import (
     save_checkpoint,
 )
 from ha_ctse_process.standalone_agent import (
-    Rollout,
     StandaloneProcessAgent,
 )
+from ha_ctse_process.standalone_segments import Rollout
 from ha_ctse_process.standalone_cli import (
     action_space_details,
     create_agent,
