@@ -72,9 +72,11 @@ sent directly from Explorer to Pro.
    For `EXPLORER-TOY-VALIDATION-2026-07-31-P1`, the exact order is
    `CAND-VAP-FOLR-CORE`, then `CAND-VSP-02`, then `CAND-VSP-05`. This is
    scheduling only; it does not compare, retire or invalidate directions.
-3. CPM sends one `AGENTIFY_REVIEW_REQUEST`, accepts one returned raw response
-   and archives it before intake. Exactly one candidate is included in each Pro
-   turn; candidates are never combined and reviews are never concurrent.
+3. CPM writes one minimal ordered batch file and sends one
+   `AGENTIFY_REVIEW_BATCH_REQUEST`. Exactly one candidate is included in each Pro
+   turn; the Agentify task waits for completion before the next turn and returns
+   one batch results file. CPM archives each response before intake; candidates
+   are never combined in one reviewer message.
 4. External Pro receives `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`, judges the
    candidate's estimand, mechanism, controls and minimum toy validation, and
    returns exactly `TOY_CONTRACT_FROZEN`, `ADVISORY_REFINEMENT_REQUIRED` with

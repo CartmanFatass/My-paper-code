@@ -18,7 +18,7 @@ uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
   adversarial checks. The persistent Explorer owns each review item and sends
-  its frozen question path to the dedicated Agentify task.
+  one ordered file-backed set of frozen question paths to the dedicated Agentify task.
 
 Restart continuity is owned by the Explorer and specified once in
 `references/parallel-research-workflow.md`; this Skill keeps the mode loop and
@@ -83,11 +83,12 @@ A direction review or bounded methodology audit inside the active
 user-authorized Explorer grant is external advisory input and needs no
 per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes each exact
-assignment, review mode and standalone `RAW_QUESTION`. Send each currently
-eligible frozen question as one `AGENTIFY_REVIEW_REQUEST` to the dedicated
-Agentify task. Continue unrelated research while it runs. On
-`AGENTIFY_REVIEW_RESULT`, archive the raw response under its review item and
-reconcile it; an error affects only that review. Pro/Gemini labels and all local metadata
+assignment, review mode and standalone `RAW_QUESTION`. Write one minimal batch
+file containing provider and the ordered paths of all currently eligible frozen
+questions, then send its path in one `AGENTIFY_REVIEW_BATCH_REQUEST` to the
+dedicated Agentify task. Continue unrelated research while it runs. On
+`AGENTIFY_REVIEW_BATCH_RESULT`, archive each raw response under its review item
+and reconcile it; an item error affects only that review. Pro/Gemini labels and all local metadata
 stay outside the transmitted question. Page, adapter and recovery details
 remain inside the Agentify task.
 

@@ -10,7 +10,7 @@ technical_acceptance_authority=exclusive
 runtime_authority=exclusive
 current_work_authority=exclusive_for_project_operational_records
 formal_external_review_request_and_intake_authority=exclusive
-formal_review_transport=agentify_single_request_result
+formal_review_transport=agentify_file_batch_result
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -216,11 +216,12 @@ acceptance owner.
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
 Operator alone executes `train -> evaluate -> analyze`. For formal or
-Explorer-to-project reviews, CPM freezes each standalone question and sends one
-`AGENTIFY_REVIEW_REQUEST` naming its provider, question path and CPM task. CPM
-continues unrelated work while it runs. On `AGENTIFY_REVIEW_RESULT`, CPM copies
-the raw response into its canonical archive and performs local intake. A retry
-reuses the same question path and changes no CPM file. Page and recovery details
+Explorer-to-project reviews, CPM freezes each standalone question, writes one
+minimal ordered batch file, and sends one `AGENTIFY_REVIEW_BATCH_REQUEST` naming
+that file and the CPM task. CPM continues unrelated work while it runs. On
+`AGENTIFY_REVIEW_BATCH_RESULT`, CPM copies each raw response into its canonical
+archive and performs local intake. A retry reuses the same batch file and
+changes no CPM file. Page and recovery details
 remain inside the Agentify task.
 
 Before sending, CPM uses one model-authored checklist: the raw question contains no local filesystem

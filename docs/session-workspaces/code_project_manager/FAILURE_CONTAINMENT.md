@@ -18,9 +18,9 @@ mechanical lifecycle, counters and terminal state. Code, experiment and
 verifier children return only their assigned typed receipt or exit evidence;
 CPM never reconstructs or remembers a parallel state machine.
 
-An `ERROR` in `AGENTIFY_REVIEW_RESULT` affects only that review. CPM does not
-diagnose the page or adapter; it may resend the same question path while
-unrelated work continues.
+An item `ERROR` in `AGENTIFY_REVIEW_BATCH_RESULT` affects only that review. CPM
+does not diagnose the page or adapter; it may resubmit the same unchanged batch
+file while unrelated work continues.
 
 After a local failure, CPM makes only a semantic choice: direct repair, a fresh
 authorized attempt, parking the affected workstream, or another legal action.

@@ -26,19 +26,20 @@ root before sending.
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. For each currently eligible frozen question, send one
-   `AGENTIFY_REVIEW_REQUEST` containing only `provider|question_path|return_task_id`.
+2. Write one minimal JSON batch containing only `provider` and the ordered paths
+   of all currently eligible frozen questions. Send one
+   `AGENTIFY_REVIEW_BATCH_REQUEST` containing only `batch_path|return_task_id`.
    Confirm once that the raw
    question contains no local filesystem path, task history or unrelated
    corpus; use a public remote GitHub URL for a reviewer-facing source locator.
    Do not send a review whose scientific barrier has not yet completed.
 3. Continue unrelated research and later accept one
-   `AGENTIFY_REVIEW_RESULT`. Agentify page, adapter, waiting and recovery
+   `AGENTIFY_REVIEW_BATCH_RESULT`. Agentify page, adapter, waiting and recovery
    mechanics remain inside the dedicated transport task.
 4. Copy each named successful raw response into
    `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
-   An `ERROR` affects only that review. Retrying transport reuses the same
-   question path and requires no Explorer file change.
+   An item `ERROR` affects only that review. Retrying transport reuses the same
+   batch file and requires no Explorer file change.
 
 When one paired protocol includes a common follow-up, freeze that follow-up as
 a second standalone natural-language question only after its prerequisite

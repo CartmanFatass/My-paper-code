@@ -43,7 +43,7 @@ independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_R
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews
 independent_pro_review_transport_execution=dedicated_agentify_transport_task
-independent_review_provider_contract=agentify_single_request_result
+independent_review_provider_contract=agentify_file_batch_result
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
 independent_pro_direction_packet_effect=advisory_revision_only
@@ -96,11 +96,12 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct exact candidate reviews without per-review user or WDM
-authorization. For each currently eligible frozen question it sends one
-`AGENTIFY_REVIEW_REQUEST` naming only provider, question path and Explorer task,
-then continues unrelated research. On `AGENTIFY_REVIEW_RESULT`, it archives the
-raw response in its review item and performs scientific intake. A retry reuses
-the same question path and changes no Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
+authorization. It writes one minimal batch file containing only provider and
+the ordered paths of all currently eligible frozen questions, sends one
+`AGENTIFY_REVIEW_BATCH_REQUEST` naming that file and the Explorer task, then
+continues unrelated research. On `AGENTIFY_REVIEW_BATCH_RESULT`, it archives
+each raw response in its review item and performs scientific intake. A retry
+reuses the same batch file and changes no Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
 enter the question. Page, provider-adapter and recovery details remain inside
 the Agentify task.
 
