@@ -18,18 +18,17 @@ import torch
 import torch.nn.functional as F
 
 from ha_ctse_process.dynamic_roster_direct import (
-    LEARNING_RATE,
     PPO_PASSES,
     model_state_copy,
     nested_state_maximum_difference,
 )
+from ha_ctse_process import event_commitment_models
 from ha_ctse_process.dynamic_roster_testbed import ACTION_COUNT, HORIZON, MAX_LIFECYCLES, OBSERVATION_DIM
 from ha_ctse_process.event_commitment_rng import (
     OPPORTUNITY_SUPPORT,
     RNG_NAMES,
     _float32_payload,
     _raw_event_trace_digest,
-    _seed,
     authoritative_seed_map,
     collection_rng_schedules,
     make_rng_binding,
@@ -74,12 +73,10 @@ from ha_ctse_process.event_commitment_audit import (
     _rng_states,
 )
 from ha_ctse_process.noncalendar_commitment_testbed import (
-    ADDED_PARAMETER_COUNT,
     CHECKPOINT_KIND,
     CHECKPOINT_SCHEMA_VERSION,
     CAUSAL_AUDIT_CONTINUOUS_ATOL,
     EVENT_JOINT_FACTOR_COUNT,
-    EVENT_SEED,
     FORMAL_EVAL_EPISODES,
     FORMAL_NUM_ENVS,
     FORMAL_TRAIN_EPISODES,
@@ -87,10 +84,7 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     FORMAL_UPDATES,
     HELD_OUT_EVAL_TASK_SEED,
     IID_EVAL_TASK_SEED,
-    MARK_SEED,
-    MODEL_INITIALIZATION_SEED,
     OPPORTUNITY_SEED,
-    PARAMETER_COUNT,
     REGISTERED_CONTRACT,
     REPLAY_COMPONENT_FIELDS,
     REPLAY_EVENT_JOINT_RATIO_FIELDS,
@@ -120,58 +114,6 @@ from ha_ctse_process.noncalendar_commitment_testbed import (
     NoncalendarTrackingEnv,
     TrackingOutcome,
 )
-
-def initialize_arms(
-    device: torch.device,
-    *,
-    replicate: int = 0,
-    event_seed: int = EVENT_SEED,
-    mark_seed: int = MARK_SEED,
-) -> tuple[dict[ArmName, CommitmentArm], dict[ArmName, torch.optim.Optimizer], dict[ArmName, torch.optim.Optimizer | None]]:
-    # Every arm of every replicate is constructed here, so this is the single
-    # place where a device that disagrees with the activated execution backend
-    # can be refused before any parameter exists on it.
-    require_active_backend_device(device)
-    cpu_rng = torch.get_rng_state().clone()
-    cuda_rngs = [value.clone() for value in torch.cuda.get_rng_state_all()] if torch.cuda.is_available() else []
-    try:
-        torch.manual_seed(_seed(MODEL_INITIALIZATION_SEED, replicate))
-        ordinary = CommitmentArm("OR")
-        base_state = deepcopy(ordinary.base.state_dict())
-        dum = CommitmentArm("DUM")
-        dum.base.load_state_dict(base_state, strict=True)
-        assert dum.W_z is not None and dum.event_head is not None and dum.mark_head is not None
-        torch.manual_seed(_seed(event_seed, replicate))
-        dum.W_z.reset_parameters()
-        dum.event_head.reset_parameters()
-        torch.manual_seed(_seed(mark_seed, replicate))
-        dum.mark_head.reset_parameters()
-        ehc = CommitmentArm("EHC")
-        ehc.base.load_state_dict(base_state, strict=True)
-        assert ehc.W_z is not None and ehc.event_head is not None and ehc.mark_head is not None
-        ehc.W_z.load_state_dict(deepcopy(dum.W_z.state_dict()), strict=True)
-        ehc.event_head.load_state_dict(deepcopy(dum.event_head.state_dict()), strict=True)
-        ehc.mark_head.load_state_dict(deepcopy(dum.mark_head.state_dict()), strict=True)
-    finally:
-        torch.set_rng_state(cpu_rng)
-        if torch.cuda.is_available():
-            torch.cuda.set_rng_state_all(cuda_rngs)
-    arms: dict[ArmName, CommitmentArm] = {"OR": ordinary.to(device), "DUM": dum.to(device), "EHC": ehc.to(device)}
-    base_optimizers = {
-        name: torch.optim.Adam(arm.base_optimizer_parameters(), lr=LEARNING_RATE, eps=1e-5, weight_decay=0.0)
-        for name, arm in arms.items()
-    }
-    event_optimizers: dict[ArmName, torch.optim.Optimizer | None] = {
-        "OR": None,
-        "DUM": torch.optim.Adam(arms["DUM"].event_parameters(), lr=LEARNING_RATE, eps=1e-5, weight_decay=0.0),
-        "EHC": torch.optim.Adam(arms["EHC"].event_parameters(), lr=LEARNING_RATE, eps=1e-5, weight_decay=0.0),
-    }
-    if ordinary.base_parameter_count != PARAMETER_COUNT:
-        raise RuntimeError("ordinary source parameter count drift")
-    if dum.added_parameter_count != ADDED_PARAMETER_COUNT or ehc.added_parameter_count != ADDED_PARAMETER_COUNT:
-        raise RuntimeError("commitment addition parameter count drift")
-    return arms, base_optimizers, event_optimizers
-
 
 def action_distribution_tv(
     logits_natural: torch.Tensor, logits_perm: torch.Tensor
@@ -443,7 +385,7 @@ def load_checkpoint(
     ):
         raise ValueError("checkpoint CUDA RNG device-set mismatch")
 
-    arms, base_optimizers, event_optimizers = initialize_arms(
+    arms, base_optimizers, event_optimizers = event_commitment_models.initialize_arms(
         device, replicate=expected_replicate
     )
     arm = arms[expected_arm]

@@ -4,6 +4,7 @@ import torch
 
 from ha_ctse_process import event_held_commitment_link
 from ha_ctse_process.event_commitment_collector import collect_trajectory
+from ha_ctse_process.event_commitment_models import initialize_arms
 from ha_ctse_process.event_commitment_replay import (
     ReplayOutput,
     replay_trajectory,
@@ -34,7 +35,7 @@ def test_collection_and_replay_have_unique_direct_owners() -> None:
 def test_minimal_deterministic_collection_replay_parity() -> None:
     require_registered_backend(FORMAL_EXECUTION_BACKEND)
     device = torch.device(FORMAL_EXECUTION_BACKEND)
-    arms, _, _ = event_held_commitment_link.initialize_arms(device)
+    arms, _, _ = initialize_arms(device)
     arm = arms["EHC"]
 
     first = collect_trajectory(

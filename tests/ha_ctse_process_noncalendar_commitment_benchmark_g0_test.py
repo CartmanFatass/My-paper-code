@@ -38,6 +38,7 @@ from ha_ctse_process.event_commitment_replay import (
     validate_replay,
 )
 from ha_ctse_process.event_commitment_optimizer import optimize_update
+from ha_ctse_process.event_commitment_models import initialize_arms
 from ha_ctse_process.event_commitment_rng import (
     RNG_NAMES,
     authoritative_seed_map,
@@ -63,7 +64,6 @@ from ha_ctse_process.event_held_commitment_link import (
     batched_natural_and_permuted_action_tv,
     compare_continuations,
     factor_counts,
-    initialize_arms,
     load_checkpoint,
     nested_state_maximum_difference,
     parameter_and_optimizer_counts,
