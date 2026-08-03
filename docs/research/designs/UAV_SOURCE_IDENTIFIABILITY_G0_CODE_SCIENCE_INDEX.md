@@ -59,6 +59,7 @@ not record a scientific result and does not authorize the registered
 | Episode metrics, confidence calculations and first-match aggregation | `ha_ctse_process/uav_g0_statistics.py` |
 | Shared episode evidence schema | `ha_ctse_process/uav_episode_schema.py` |
 | Canonical episode wire codec | `ha_ctse_process/uav_episode_serialization.py` |
+| Canonical runner artifact I/O, digests and lifecycle guards | `scripts/uav_g0_artifact_io.py` |
 | Proof-only runner and closed scientific entries | `scripts/run_uav_source_identifiability_g0.py` |
 | Source focused tests | `tests/ha_ctse_process_uav_source_identifiability_g0_test.py` |
 | Runner/artifact focused tests | `tests/run_uav_source_identifiability_g0_test.py` |

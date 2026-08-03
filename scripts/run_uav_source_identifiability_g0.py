@@ -13,7 +13,6 @@ from contextlib import contextmanager
 from dataclasses import dataclass, fields
 import hashlib
 import importlib.metadata
-import json
 import math
 import multiprocessing
 import os
@@ -52,6 +51,7 @@ from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
 from ha_ctse_process import uav_episode_serialization as episode_serialization
+import scripts.uav_g0_artifact_io as artifact_io
 
 
 SCHEMA_VERSION = source.SCHEMA_VERSION
@@ -164,8 +164,6 @@ class _ValidatedSourceArtifacts:
     ledger_context: oracle_evidence._ValidatedOracleSafetyContext
     replay_primitive: Mapping[str, Any]
     replay_certificate: oracle_evidence.OracleSafetyCertificate
-
-_SHA1 = re.compile(r"^[0-9a-f]{40}$")
 
 _SOURCE_MANIFEST_KEYS = frozenset(
     {
@@ -287,86 +285,8 @@ _BEHAVIORAL_REPLAY_KEYS = frozenset(
 )
 
 
-def _canonical_bytes(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        allow_nan=False,
-    ).encode("utf-8")
-
-
-def _write_json(path: Path, value: Mapping[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(path.name + ".tmp")
-    payload = _canonical_bytes(dict(value)) + b"\n"
-    if temporary.exists():
-        raise ValueError(f"G0 stale temporary artifact exists: {temporary.name}")
-    try:
-        with temporary.open("xb") as handle:
-            handle.write(payload)
-            handle.flush()
-            os.fsync(handle.fileno())
-        if temporary.read_bytes() != payload or json.loads(payload) != dict(value):
-            raise ValueError("G0 temporary artifact validation failed")
-        os.replace(temporary, path)
-    except BaseException:
-        if temporary.exists():
-            temporary.unlink()
-        raise
-
-
-def _read_json(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise ValueError(f"G0 artifact {path.name} is not a mapping")
-    return value
-
-
-def _digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def _require_exact_keys(value: Any, keys: frozenset[str], *, label: str) -> None:
-    if not isinstance(value, Mapping) or set(value) != set(keys):
-        raise ValueError(f"G0 {label} exact schema mismatch")
-
-
-def _validate_source_commit(value: str) -> str:
-    candidate = str(value)
-    if _SHA1.fullmatch(candidate) is None:
-        raise ValueError("G0 source commit must be a lowercase 40-character SHA-1")
-    return candidate
-
-
-def _require_fresh_root(path: Path) -> Path:
-    root = Path(path).resolve()
-    if root.exists() and any(root.iterdir()):
-        raise ValueError("G0 run root must be absent or empty")
-    return root
-
-
-def _reference(path: Path, root: Path) -> dict[str, Any]:
-    return {
-        "path": path.relative_to(root).as_posix(),
-        "sha256": _digest(path),
-    }
-
-
-def _assert_exact_files(root: Path, expected: set[str]) -> None:
-    actual = {
-        path.relative_to(root).as_posix()
-        for path in root.rglob("*")
-        if path.is_file()
-    }
-    if actual != expected:
-        raise ValueError(
-            f"G0 terminal proof inventory mismatch: expected {sorted(expected)}, got {sorted(actual)}"
-        )
-
-
 def readiness_interface_smoke(*, source_commit: str) -> dict[str, Any]:
-    commit = _validate_source_commit(source_commit)
+    commit = artifact_io._validate_source_commit(source_commit)
     if source.FORMAL_EXECUTION_AUTHORIZED or FORMAL_EXECUTION_AUTHORIZED:
         raise RuntimeError("G0 readiness requires formal execution to remain closed")
     if any((source.LEARNING_ENABLED, source.OPTIMIZER_ENABLED, source.CHECKPOINT_ENABLED)):
@@ -476,8 +396,8 @@ def _build_tracker_proof(episode: geometry.G0EpisodeSource) -> dict[str, Any]:
 
 
 def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
-    commit = _validate_source_commit(source_commit)
-    root = _require_fresh_root(run_root)
+    commit = artifact_io._validate_source_commit(source_commit)
+    root = artifact_io._require_fresh_root(run_root)
     root.mkdir(parents=True, exist_ok=True)
     episode = geometry.make_episode_source(0)
     source_value = episode.to_primitive()
@@ -490,38 +410,38 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
     if not isinstance(geometry_support_certificate, Mapping):
         raise RuntimeError("G0 universal geometry-support certificate is absent")
     source_path = root / SOURCE_PROOF
-    _write_json(source_path, source_value)
+    artifact_io._write_json(source_path, source_value)
 
     ledger, ledger_context = source._build_oracle_safety_ledger_with_context(
         episode
     )
     ledger_value = ledger.to_primitive()
     ledger_path = root / ORACLE_SAFETY_LEDGER_PROOF
-    _write_json(ledger_path, ledger_value)
+    artifact_io._write_json(ledger_path, ledger_value)
 
     oracle = source._oracle_qualification_from_validated_context(ledger_context)
     oracle_value = oracle.to_primitive()
     if not oracle.passed:
         raise RuntimeError("G0 proof oracle qualification failed")
     oracle_path = root / ORACLE_PROOF
-    _write_json(oracle_path, oracle_value)
+    artifact_io._write_json(oracle_path, oracle_value)
 
     replay_value = (
         source._build_oracle_branch_aware_replay_evidence_from_validated_context(
             ledger_context
         )
     )
-    _require_exact_keys(
+    artifact_io._require_exact_keys(
         replay_value, _BEHAVIORAL_REPLAY_KEYS, label="behavioral replay proof"
     )
     replay_path = root / ORACLE_BEHAVIORAL_REPLAY_PROOF
-    _write_json(replay_path, replay_value)
+    artifact_io._write_json(replay_path, replay_value)
 
     tracker = _build_tracker_proof(episode)
     if not tracker["passed"]:
         raise RuntimeError("G0 proof common tracker qualification failed")
     tracker_path = root / TRACKER_PROOF
-    _write_json(tracker_path, tracker)
+    artifact_io._write_json(tracker_path, tracker)
 
     manifest = {
         "status": "COMPLETE",
@@ -581,11 +501,11 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
             PRE_ACTION_CONTEXT_SERVICE_MASK_RULE
         ),
         "first_match_evaluation_rule": FIRST_MATCH_EVALUATION_RULE,
-        "source_proof": _reference(source_path, root),
-        "oracle_proof": _reference(oracle_path, root),
-        "tracker_proof": _reference(tracker_path, root),
-        "oracle_safety_ledger_proof": _reference(ledger_path, root),
-        "oracle_behavioral_replay_proof": _reference(replay_path, root),
+        "source_proof": artifact_io._reference(source_path, root),
+        "oracle_proof": artifact_io._reference(oracle_path, root),
+        "tracker_proof": artifact_io._reference(tracker_path, root),
+        "oracle_safety_ledger_proof": artifact_io._reference(ledger_path, root),
+        "oracle_behavioral_replay_proof": artifact_io._reference(replay_path, root),
         "artifact_inventory": [
             SOURCE_PROOF,
             ORACLE_PROOF,
@@ -594,8 +514,8 @@ def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, Any]:
             ORACLE_BEHAVIORAL_REPLAY_PROOF,
         ],
     }
-    _require_exact_keys(manifest, _SOURCE_MANIFEST_KEYS, label="source manifest")
-    _write_json(root / SOURCE_MANIFEST, manifest)
+    artifact_io._require_exact_keys(manifest, _SOURCE_MANIFEST_KEYS, label="source manifest")
+    artifact_io._write_json(root / SOURCE_MANIFEST, manifest)
     validate_source_artifacts(root)
     return manifest
 
@@ -621,18 +541,18 @@ def _load_reference(
         path.relative_to(root.resolve())
     except ValueError as error:
         raise ValueError(f"G0 {label} path escapes the run root") from error
-    if not path.is_file() or _digest(path) != reference["sha256"]:
+    if not path.is_file() or artifact_io._digest(path) != reference["sha256"]:
         raise ValueError(f"G0 {label} digest mismatch")
-    return _read_json(path)
+    return artifact_io._read_json(path)
 
 
 def _validate_source_artifacts_bundle(
     run_root: Path,
 ) -> _ValidatedSourceArtifacts:
     root = Path(run_root).resolve()
-    value = _read_json(root / SOURCE_MANIFEST)
-    _require_exact_keys(value, _SOURCE_MANIFEST_KEYS, label="source manifest")
-    commit = _validate_source_commit(value.get("source_commit", ""))
+    value = artifact_io._read_json(root / SOURCE_MANIFEST)
+    artifact_io._require_exact_keys(value, _SOURCE_MANIFEST_KEYS, label="source manifest")
+    commit = artifact_io._validate_source_commit(value.get("source_commit", ""))
     episode = geometry.make_episode_source(0)
     episode_primitive = episode.to_primitive()
     expected_scalars = {
@@ -729,7 +649,7 @@ def _validate_source_artifacts_bundle(
         label="oracle behavioral replay proof",
         expected_relative_path=ORACLE_BEHAVIORAL_REPLAY_PROOF,
     )
-    _require_exact_keys(
+    artifact_io._require_exact_keys(
         replay_value, _BEHAVIORAL_REPLAY_KEYS, label="behavioral replay proof"
     )
     if (
@@ -784,7 +704,7 @@ def _validate_source_artifacts_bundle(
         allowed.add(EVALUATION_MANIFEST)
     if (root / ANALYSIS_RESULT).is_file():
         allowed.add(ANALYSIS_RESULT)
-    _assert_exact_files(root, allowed)
+    artifact_io._assert_exact_files(root, allowed)
     return _ValidatedSourceArtifacts(
         manifest=value,
         episode=episode,
@@ -812,9 +732,9 @@ def readiness_validate(*, run_root: Path) -> dict[str, Any]:
 
 def readiness_reload(*, run_root: Path) -> dict[str, Any]:
     root = Path(run_root).resolve()
-    before = _digest(root / SOURCE_MANIFEST)
+    before = artifact_io._digest(root / SOURCE_MANIFEST)
     value = validate_source_artifacts(root)
-    after = _digest(root / SOURCE_MANIFEST)
+    after = artifact_io._digest(root / SOURCE_MANIFEST)
     if before != after:
         raise RuntimeError("G0 reload mutated source evidence")
     return {
@@ -902,7 +822,7 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
         "formal": False,
         "proof_only": True,
         "scientific_iteration_cost": 0,
-        "source_manifest_sha256": _digest(root / SOURCE_MANIFEST),
+        "source_manifest_sha256": artifact_io._digest(root / SOURCE_MANIFEST),
         "metric_witness": _metric_witness(),
         "bootstrap_plan": {
             "shape": list(plan.shape),
@@ -917,8 +837,8 @@ def readiness_evaluate(*, run_root: Path) -> dict[str, Any]:
         "real_environment_transitions": 0,
         "production_episode_validity_witness": production_witness,
     }
-    _require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
-    _write_json(root / EVALUATION_MANIFEST, value)
+    artifact_io._require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
+    artifact_io._write_json(root / EVALUATION_MANIFEST, value)
     _validate_evaluation_artifacts_from_bundle(root, bundle)
     return value
 
@@ -929,8 +849,8 @@ def _validate_evaluation_artifacts_from_bundle(
 ) -> dict[str, Any]:
     root = Path(run_root).resolve()
     training = bundle.manifest
-    value = _read_json(root / EVALUATION_MANIFEST)
-    _require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
+    value = artifact_io._read_json(root / EVALUATION_MANIFEST)
+    artifact_io._require_exact_keys(value, _EVALUATION_KEYS, label="evaluation manifest")
     plan = statistics.make_bootstrap_index_plan()
     expected_plan = {
         "shape": list(plan.shape),
@@ -950,7 +870,7 @@ def _validate_evaluation_artifacts_from_bundle(
         or value.get("formal") is not False
         or value.get("proof_only") is not True
         or value.get("scientific_iteration_cost") != 0
-        or value.get("source_manifest_sha256") != _digest(root / SOURCE_MANIFEST)
+        or value.get("source_manifest_sha256") != artifact_io._digest(root / SOURCE_MANIFEST)
         or value.get("metric_witness") != _metric_witness()
         or value.get("bootstrap_plan") != expected_plan
         or value.get("clopper_pearson_witness") != _clopper_pearson_witness()
@@ -971,7 +891,7 @@ def _validate_evaluation_artifacts_from_bundle(
     }
     if (root / ANALYSIS_RESULT).is_file():
         allowed.add(ANALYSIS_RESULT)
-    _assert_exact_files(root, allowed)
+    artifact_io._assert_exact_files(root, allowed)
     return value
 
 
@@ -1043,8 +963,8 @@ def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
         "formal": False,
         "proof_only": True,
         "scientific_iteration_cost": 0,
-        "source_manifest_sha256": _digest(root / SOURCE_MANIFEST),
-        "evaluation_manifest_sha256": _digest(root / EVALUATION_MANIFEST),
+        "source_manifest_sha256": artifact_io._digest(root / SOURCE_MANIFEST),
+        "evaluation_manifest_sha256": artifact_io._digest(root / EVALUATION_MANIFEST),
         "first_match_order": list(statistics.FIRST_MATCH_ORDER),
         "branch_witnesses": _branch_witnesses(),
         "primitive_analysis_witness": primitive_witness,
@@ -1056,8 +976,8 @@ def readiness_analyze(*, run_root: Path) -> dict[str, Any]:
         "additional_optimizer_steps": 0,
     }
     del evaluation
-    _require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
-    _write_json(root / ANALYSIS_RESULT, value)
+    artifact_io._require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
+    artifact_io._write_json(root / ANALYSIS_RESULT, value)
     _validate_analysis_artifacts_from_bundle(root, bundle)
     return value
 
@@ -1069,8 +989,8 @@ def _validate_analysis_artifacts_from_bundle(
     root = Path(run_root).resolve()
     training = bundle.manifest
     _validate_evaluation_artifacts_from_bundle(root, bundle)
-    value = _read_json(root / ANALYSIS_RESULT)
-    _require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
+    value = artifact_io._read_json(root / ANALYSIS_RESULT)
+    artifact_io._require_exact_keys(value, _ANALYSIS_KEYS, label="analysis result")
     if (
         value.get("status") != "COMPLETE"
         or value.get("schema_version") != SCHEMA_VERSION
@@ -1080,8 +1000,8 @@ def _validate_analysis_artifacts_from_bundle(
         or value.get("formal") is not False
         or value.get("proof_only") is not True
         or value.get("scientific_iteration_cost") != 0
-        or value.get("source_manifest_sha256") != _digest(root / SOURCE_MANIFEST)
-        or value.get("evaluation_manifest_sha256") != _digest(root / EVALUATION_MANIFEST)
+        or value.get("source_manifest_sha256") != artifact_io._digest(root / SOURCE_MANIFEST)
+        or value.get("evaluation_manifest_sha256") != artifact_io._digest(root / EVALUATION_MANIFEST)
         or value.get("first_match_order") != list(statistics.FIRST_MATCH_ORDER)
         or value.get("branch_witnesses") != _branch_witnesses()
         or value.get("primitive_analysis_witness")
@@ -1094,7 +1014,7 @@ def _validate_analysis_artifacts_from_bundle(
         or value.get("additional_optimizer_steps") != 0
     ):
         raise ValueError("G0 analysis artifact invariant mismatch")
-    _assert_exact_files(
+    artifact_io._assert_exact_files(
         root,
         {
             SOURCE_MANIFEST,
@@ -1288,8 +1208,8 @@ _RUNTIME_CARRIER_KEYS = frozenset(
 
 
 def _require_runtime_binding_schema(value: Any) -> None:
-    _require_exact_keys(value, _RUNTIME_BINDING_KEYS, label="runtime binding")
-    _require_exact_keys(
+    artifact_io._require_exact_keys(value, _RUNTIME_BINDING_KEYS, label="runtime binding")
+    artifact_io._require_exact_keys(
         value["carrier"],
         _RUNTIME_CARRIER_KEYS,
         label="runtime binding carrier",
@@ -1309,14 +1229,14 @@ def _require_preflight_runtime_path_binding(value: Mapping[str, Any], root: Path
 def _content_digest(value: Mapping[str, Any], field: str) -> dict[str, Any]:
     result = dict(value)
     result.pop(field, None)
-    result[field] = hashlib.sha256(_canonical_bytes(result)).hexdigest()
+    result[field] = hashlib.sha256(artifact_io._canonical_bytes(result)).hexdigest()
     return result
 
 
 def _validate_content_digest(value: Mapping[str, Any], field: str) -> None:
     candidate = dict(value)
     stored = candidate.pop(field, None)
-    if stored != hashlib.sha256(_canonical_bytes(candidate)).hexdigest():
+    if stored != hashlib.sha256(artifact_io._canonical_bytes(candidate)).hexdigest():
         raise ValueError(f"G0 {field} content digest mismatch")
 
 
@@ -1598,8 +1518,8 @@ def _episode_bundle(payload: Mapping[str, Any], *, formal: bool, contract_sha256
 
 
 def _load_episode_bundle(path: Path, *, formal: bool, contract_sha256: str) -> tuple[geometry.G0EpisodeSource, dict[tuple[source.Control, source.Cell], source.EpisodeRunEvidence], dict[str, Any]]:
-    value = _read_json(path)
-    _require_exact_keys(value, _BUNDLE_KEYS, label="episode bundle")
+    value = artifact_io._read_json(path)
+    artifact_io._require_exact_keys(value, _BUNDLE_KEYS, label="episode bundle")
     _validate_content_digest(value, "bundle_sha256")
     episode_id = int(value["episode_id"])
     if (
@@ -1886,7 +1806,7 @@ def _write_failed_root(
         "scientific_update": False,
         "runtime_binding": binding.to_primitive(),
     }
-    _write_json(root / "failed_root.json", _content_digest(value, "content_sha256"))
+    artifact_io._write_json(root / "failed_root.json", _content_digest(value, "content_sha256"))
 
 
 def _preflight_identity(binding: FormalRuntimeBinding) -> dict[str, Any]:
@@ -1939,8 +1859,8 @@ def _validate_preflight(
     }
     if _file_inventory(root) != expected:
         raise ValueError("G0 gate_06 preflight terminal inventory mismatch")
-    contract = _read_json(root / "preflight_contract.json")
-    _require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
+    contract = artifact_io._read_json(root / "preflight_contract.json")
+    artifact_io._require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
     _validate_content_digest(contract, "content_sha256")
     if (
         contract["schema_id"] != "UAV_G0_NONFORMAL_PREFLIGHT_CONTRACT"
@@ -1965,8 +1885,8 @@ def _validate_preflight(
     episode, runs, bundle = _load_episode_bundle(
         bundle_path, formal=False, contract_sha256=contract["content_sha256"]
     )
-    result = _read_json(root / "preflight_result.json")
-    _require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
+    result = artifact_io._read_json(root / "preflight_result.json")
+    artifact_io._require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
     _validate_content_digest(result, "content_sha256")
     if (
         result["status"] != "COMPLETE" or result["formal"] is not False
@@ -1991,11 +1911,11 @@ def _validate_preflight(
         or any(int(item) != 0 for item in result["zero_counters"].values())
     ):
         raise ValueError("G0 gate_06 preflight operational result mismatch")
-    terminal = _read_json(root / "terminal_manifest.json")
-    _require_exact_keys(terminal, _PREFLIGHT_TERMINAL_KEYS, label="preflight terminal manifest")
+    terminal = artifact_io._read_json(root / "terminal_manifest.json")
+    artifact_io._require_exact_keys(terminal, _PREFLIGHT_TERMINAL_KEYS, label="preflight terminal manifest")
     _validate_content_digest(terminal, "content_sha256")
     expected_refs = {
-        name: _digest(root / name)
+        name: artifact_io._digest(root / name)
         for name in expected if name != "terminal_manifest.json"
     }
     if (
@@ -2036,8 +1956,8 @@ def _validate_preflight_admission(
     if _file_inventory(root) != expected:
         raise ValueError("G0 gate_06 preflight terminal inventory mismatch")
 
-    contract = _read_json(root / "preflight_contract.json")
-    _require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
+    contract = artifact_io._read_json(root / "preflight_contract.json")
+    artifact_io._require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
     _validate_content_digest(contract, "content_sha256")
     if (
         contract["schema_id"] != "UAV_G0_NONFORMAL_PREFLIGHT_CONTRACT"
@@ -2067,8 +1987,8 @@ def _validate_preflight_admission(
         if actual != expected_value:
             raise ValueError("G0 gate_06 preflight runtime identity mismatch")
 
-    result = _read_json(root / "preflight_result.json")
-    _require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
+    result = artifact_io._read_json(root / "preflight_result.json")
+    artifact_io._require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
     _validate_content_digest(result, "content_sha256")
     if (
         result["schema_id"] != "UAV_G0_NONFORMAL_PREFLIGHT_RESULT"
@@ -2097,15 +2017,15 @@ def _validate_preflight_admission(
     ):
         raise ValueError("G0 gate_06 preflight operational result mismatch")
 
-    terminal = _read_json(root / "terminal_manifest.json")
-    _require_exact_keys(
+    terminal = artifact_io._read_json(root / "terminal_manifest.json")
+    artifact_io._require_exact_keys(
         terminal,
         _PREFLIGHT_TERMINAL_KEYS,
         label="preflight terminal manifest",
     )
     _validate_content_digest(terminal, "content_sha256")
     expected_refs = {
-        name: _digest(root / name)
+        name: artifact_io._digest(root / name)
         for name in expected
         if name != "terminal_manifest.json"
     }
@@ -2143,14 +2063,14 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                 },
                 "content_sha256",
             )
-            _require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
-            _write_json(root / "preflight_contract.json", contract)
+            artifact_io._require_exact_keys(contract, _PREFLIGHT_CONTRACT_KEYS, label="preflight contract")
+            artifact_io._write_json(root / "preflight_contract.json", contract)
             payload = _execute_episode_ids((0,), workers=binding.workers)[0]
             bundle = _episode_bundle(
                 payload, formal=False, contract_sha256=contract["content_sha256"]
             )
             bundle_path = root / "episodes" / "episode_000.json"
-            _write_json(bundle_path, bundle)
+            artifact_io._write_json(bundle_path, bundle)
             episode, runs, _ = _load_episode_bundle(
                 bundle_path, formal=False, contract_sha256=contract["content_sha256"]
             )
@@ -2185,10 +2105,10 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                 },
                 "content_sha256",
             )
-            _require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
-            _write_json(root / "preflight_result.json", result)
+            artifact_io._require_exact_keys(result, _PREFLIGHT_RESULT_KEYS, label="preflight result")
+            artifact_io._write_json(root / "preflight_result.json", result)
             refs = {
-                name: _digest(root / name)
+                name: artifact_io._digest(root / name)
                 for name in (
                     "preflight_contract.json", "episodes/episode_000.json",
                     "preflight_result.json",
@@ -2206,7 +2126,7 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                 },
                 "content_sha256",
             )
-            _write_json(root / "terminal_manifest.json", terminal)
+            artifact_io._write_json(root / "terminal_manifest.json", terminal)
             terminal_written = True
             _validate_preflight(root, binding, environment)
             return terminal
@@ -2236,14 +2156,14 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                 "status": "COMPLETE", "formal": True, "frozen_records": frozen,
                 "runtime_binding": binding.to_primitive(),
                 "environment_manifest": environment,
-                "preflight_terminal_manifest_sha256": _digest(
+                "preflight_terminal_manifest_sha256": artifact_io._digest(
                     binding.nonformal_preflight_root / "terminal_manifest.json"
                 ),
             },
             "content_sha256",
         )
-        _require_exact_keys(contract, _FORMAL_CONTRACT_KEYS, label="formal contract")
-        _write_json(root / "formal_contract.json", contract)
+        artifact_io._require_exact_keys(contract, _FORMAL_CONTRACT_KEYS, label="formal contract")
+        artifact_io._write_json(root / "formal_contract.json", contract)
         payloads = _execute_episode_ids(tuple(range(128)), workers=binding.workers)
         references: dict[str, str] = {}
         for payload in payloads:
@@ -2252,7 +2172,7 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             )
             episode_id = int(bundle["episode_id"])
             path = root / "episodes" / f"episode_{episode_id:03d}.json"
-            _write_json(path, bundle)
+            artifact_io._write_json(path, bundle)
             references[str(episode_id)] = bundle["bundle_sha256"]
         manifest = _content_digest(
             {
@@ -2265,7 +2185,7 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
                     "scientific_source_blob_sha": ALIGNED_SCIENTIFIC_SOURCE_BLOB_SHA,
                 },
                 "execution_identity": _preflight_identity(binding),
-                "environment_identity": hashlib.sha256(_canonical_bytes(environment)).hexdigest(),
+                "environment_identity": hashlib.sha256(artifact_io._canonical_bytes(environment)).hexdigest(),
                 "episode_ids": list(range(128)),
                 "control_order": [item.value for item in (
                     source.Control.ORACLE, source.Control.SAME_INFORMATION,
@@ -2277,8 +2197,8 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             },
             "content_sha256",
         )
-        _require_exact_keys(manifest, _SOURCE_MANIFEST_FORMAL_KEYS, label="formal source manifest")
-        _write_json(root / "source_manifest.json", manifest)
+        artifact_io._require_exact_keys(manifest, _SOURCE_MANIFEST_FORMAL_KEYS, label="formal source manifest")
+        artifact_io._write_json(root / "source_manifest.json", manifest)
         expected = {"formal_contract.json", "source_manifest.json"} | {
             f"episodes/episode_{episode_id:03d}.json" for episode_id in range(128)
         }
@@ -2291,8 +2211,8 @@ def scientific_train(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
 
 
 def _load_formal_train(root: Path, binding: FormalRuntimeBinding, environment: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
-    contract = _read_json(root / "formal_contract.json")
-    _require_exact_keys(contract, _FORMAL_CONTRACT_KEYS, label="formal contract")
+    contract = artifact_io._read_json(root / "formal_contract.json")
+    artifact_io._require_exact_keys(contract, _FORMAL_CONTRACT_KEYS, label="formal contract")
     _validate_content_digest(contract, "content_sha256")
     if (
         contract["schema_id"] != "UAV_G0_FORMAL_CONTRACT"
@@ -2309,12 +2229,12 @@ def _load_formal_train(root: Path, binding: FormalRuntimeBinding, environment: M
         binding,
         environment,
     )
-    if contract["preflight_terminal_manifest_sha256"] != _digest(
+    if contract["preflight_terminal_manifest_sha256"] != artifact_io._digest(
         binding.nonformal_preflight_root / "terminal_manifest.json"
     ):
         raise ValueError("G0 formal/preflight terminal binding mismatch")
-    manifest = _read_json(root / "source_manifest.json")
-    _require_exact_keys(manifest, _SOURCE_MANIFEST_FORMAL_KEYS, label="formal source manifest")
+    manifest = artifact_io._read_json(root / "source_manifest.json")
+    artifact_io._require_exact_keys(manifest, _SOURCE_MANIFEST_FORMAL_KEYS, label="formal source manifest")
     _validate_content_digest(manifest, "content_sha256")
     expected_refs = {str(item): None for item in range(128)}
     expected_source_identities = {
@@ -2334,7 +2254,7 @@ def _load_formal_train(root: Path, binding: FormalRuntimeBinding, environment: M
         or manifest["source_identities"] != expected_source_identities
         or manifest["execution_identity"] != _preflight_identity(binding)
         or manifest["environment_identity"] != hashlib.sha256(
-            _canonical_bytes(environment)
+            artifact_io._canonical_bytes(environment)
         ).hexdigest()
         or manifest["control_order"] != expected_controls
         or manifest["cell_order"] != expected_cells
@@ -2401,8 +2321,8 @@ def scientific_evaluate(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             },
             "evaluation_sha256",
         )
-        _require_exact_keys(value, _EVALUATION_FORMAL_KEYS, label="formal evaluation manifest")
-        _write_json(root / "evaluation_manifest.json", value)
+        artifact_io._require_exact_keys(value, _EVALUATION_FORMAL_KEYS, label="formal evaluation manifest")
+        artifact_io._write_json(root / "evaluation_manifest.json", value)
         if _file_inventory(root) != expected | {"evaluation_manifest.json"}:
             raise ValueError("G0 gate_09 post-evaluate artifact inventory mismatch")
         return value
@@ -2418,8 +2338,8 @@ def _load_formal_evaluation(
     *,
     index_plan: np.ndarray,
 ) -> dict[str, Any]:
-    value = _read_json(root / "evaluation_manifest.json")
-    _require_exact_keys(value, _EVALUATION_FORMAL_KEYS, label="formal evaluation manifest")
+    value = artifact_io._read_json(root / "evaluation_manifest.json")
+    artifact_io._require_exact_keys(value, _EVALUATION_FORMAL_KEYS, label="formal evaluation manifest")
     _validate_content_digest(value, "evaluation_sha256")
     expected_bootstrap_sha = hashlib.sha256(
         np.asarray(index_plan, dtype=np.int64).tobytes(order="C")
@@ -2514,8 +2434,8 @@ def scientific_analyze(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             },
             "analysis_sha256",
         )
-        _require_exact_keys(value, _ANALYSIS_FORMAL_KEYS, label="formal analysis result")
-        _write_json(root / "analysis_result.json", value)
+        artifact_io._require_exact_keys(value, _ANALYSIS_FORMAL_KEYS, label="formal analysis result")
+        artifact_io._write_json(root / "analysis_result.json", value)
         failed_gate = "gate_11"
         expected_terminal_refs = {
             "formal_contract.json",
@@ -2527,7 +2447,7 @@ def scientific_analyze(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             for episode_id in range(128)
         }
         refs = {
-            path.relative_to(root).as_posix(): _digest(path)
+            path.relative_to(root).as_posix(): artifact_io._digest(path)
             for path in root.rglob("*") if path.is_file()
         }
         if set(refs) != expected_terminal_refs:
@@ -2545,8 +2465,8 @@ def scientific_analyze(*, binding: FormalRuntimeBinding) -> dict[str, Any]:
             },
             "content_sha256",
         )
-        _require_exact_keys(terminal, _FORMAL_TERMINAL_KEYS, label="formal terminal manifest")
-        _write_json(root / "terminal_manifest.json", terminal)
+        artifact_io._require_exact_keys(terminal, _FORMAL_TERMINAL_KEYS, label="formal terminal manifest")
+        artifact_io._write_json(root / "terminal_manifest.json", terminal)
         terminal_written = True
         if _file_inventory(root) != expected_terminal_refs | {"terminal_manifest.json"}:
             raise ValueError("G0 gate_11 formal terminal inventory is not exact")

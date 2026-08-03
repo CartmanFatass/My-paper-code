@@ -17,6 +17,7 @@ from ha_ctse_process import uav_g0_environment as g0_environment
 from ha_ctse_process import uav_g0_oracle_evidence as oracle_evidence
 from ha_ctse_process import uav_g0_statistics as statistics
 from ha_ctse_process import uav_source_identifiability_g0 as source
+import scripts.uav_g0_artifact_io as artifact_io
 from scripts import run_uav_source_identifiability_g0 as runner
 
 
@@ -50,6 +51,67 @@ def test_episode_serialization_import_is_source_independent() -> None:
 def test_runner_imports_environment_true_owner() -> None:
     assert runner.g0_environment is g0_environment
     assert not hasattr(source, "UAVSourceIdentifiabilityEnv")
+
+
+def test_artifact_io_is_unique_true_owner_and_preserves_wire_contract(
+    tmp_path: Path,
+) -> None:
+    owned_names = (
+        "_canonical_bytes",
+        "_write_json",
+        "_read_json",
+        "_digest",
+        "_require_exact_keys",
+        "_validate_source_commit",
+        "_require_fresh_root",
+        "_reference",
+        "_assert_exact_files",
+    )
+    assert runner.artifact_io is artifact_io
+    assert all(not hasattr(runner, name) for name in owned_names)
+
+    value = {
+        "numpy": np.asarray([3, 1, 2], dtype=np.int64).tolist(),
+        "native": {"value": 1.25, "ok": True},
+    }
+    canonical = b'{"native":{"ok":true,"value":1.25},"numpy":[3,1,2]}'
+    assert artifact_io._canonical_bytes(value) == canonical
+
+    path = tmp_path / "artifact.json"
+    artifact_io._write_json(path, value)
+    assert path.read_bytes() == canonical + b"\n"
+    assert artifact_io._read_json(path) == value
+    assert artifact_io._digest(path) == (
+        "42b368d78fb55e0308431d7e8e551862f6459154ae412deab989bcd6ce9acdc4"
+    )
+    assert artifact_io._reference(path, tmp_path) == {
+        "path": "artifact.json",
+        "sha256": artifact_io._digest(path),
+    }
+    artifact_io._require_exact_keys(value, frozenset(value), label="artifact")
+    assert artifact_io._validate_source_commit(SOURCE_COMMIT) == SOURCE_COMMIT
+    artifact_io._assert_exact_files(tmp_path, {"artifact.json"})
+
+    with pytest.raises(ValueError, match="G0 artifact exact schema mismatch"):
+        artifact_io._require_exact_keys(value, frozenset({"native"}), label="artifact")
+    with pytest.raises(
+        ValueError,
+        match="G0 source commit must be a lowercase 40-character SHA-1",
+    ):
+        artifact_io._validate_source_commit(SOURCE_COMMIT.upper())
+    with pytest.raises(ValueError, match="G0 run root must be absent or empty"):
+        artifact_io._require_fresh_root(tmp_path)
+    with pytest.raises(ValueError, match="G0 terminal proof inventory mismatch"):
+        artifact_io._assert_exact_files(tmp_path, {"artifact.json", "missing.json"})
+
+    blocked = tmp_path / "blocked.json"
+    blocked.with_name("blocked.json.tmp").write_bytes(b"stale")
+    with pytest.raises(
+        ValueError,
+        match="G0 stale temporary artifact exists: blocked.json.tmp",
+    ):
+        artifact_io._write_json(blocked, value)
+    assert not blocked.exists()
 
 
 def _load(path: Path) -> dict:
@@ -329,7 +391,7 @@ def test_reference_paths_cp_and_tracker_are_independently_reconstructed(
     source_proof["geometry"]["geometry_support_certificate"]["passed"] = False
     _store(source_path, source_proof)
     manifest = _load(manifest_path)
-    manifest["source_proof"]["sha256"] = runner._digest(source_path)
+    manifest["source_proof"]["sha256"] = artifact_io._digest(source_path)
     _store(manifest_path, manifest)
     with pytest.raises(ValueError, match="source proof does not reconstruct"):
         runner.validate_source_artifacts(root)
@@ -342,7 +404,7 @@ def test_reference_paths_cp_and_tracker_are_independently_reconstructed(
     tracker["permutation_equivariant"] = False
     _store(tracker_path, tracker)
     manifest = _load(manifest_path)
-    manifest["tracker_proof"]["sha256"] = runner._digest(tracker_path)
+    manifest["tracker_proof"]["sha256"] = artifact_io._digest(tracker_path)
     _store(manifest_path, manifest)
     with pytest.raises(ValueError, match="tracker proof reconstruction"):
         runner.validate_source_artifacts(root)
@@ -383,7 +445,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
     ledger["content_sha256"] = geometry.sha256_json(ledger_without_digest)
     _store(ledger_path, ledger)
     manifest = _load(manifest_path)
-    manifest["oracle_safety_ledger_proof"]["sha256"] = runner._digest(ledger_path)
+    manifest["oracle_safety_ledger_proof"]["sha256"] = artifact_io._digest(ledger_path)
     _store(manifest_path, manifest)
     with pytest.raises(source.G0RealizationError, match="candidate trace schema"):
         runner.validate_source_artifacts(root)
@@ -394,7 +456,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
     replay["behavioral_execution"]["steps"][0]["candidate_id"] = "stage:forged"
     _store(replay_path, replay)
     manifest = _load(manifest_path)
-    manifest["oracle_behavioral_replay_proof"]["sha256"] = runner._digest(
+    manifest["oracle_behavioral_replay_proof"]["sha256"] = artifact_io._digest(
         replay_path
     )
     _store(manifest_path, manifest)
@@ -420,7 +482,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
         )
     _store(replay_path, replay)
     manifest = _load(manifest_path)
-    manifest["oracle_behavioral_replay_proof"]["sha256"] = runner._digest(
+    manifest["oracle_behavioral_replay_proof"]["sha256"] = artifact_io._digest(
         replay_path
     )
     _store(manifest_path, manifest)
@@ -443,7 +505,7 @@ def test_registered_ledger_and_behavioral_replay_tampering_fail_closed(
         )
     _store(replay_path, replay)
     manifest = _load(manifest_path)
-    manifest["oracle_behavioral_replay_proof"]["sha256"] = runner._digest(
+    manifest["oracle_behavioral_replay_proof"]["sha256"] = artifact_io._digest(
         replay_path
     )
     _store(manifest_path, manifest)
@@ -764,7 +826,7 @@ def test_mocked_preflight_writes_exact_four_file_terminal_contract(
     terminal_path = binding.run_root / "terminal_manifest.json"
     tampered_terminal = _load(terminal_path)
     tampered_terminal["preflight_result_sha256"] = result["content_sha256"]
-    tampered_terminal["exact_file_inventory"]["preflight_result.json"] = runner._digest(result_path)
+    tampered_terminal["exact_file_inventory"]["preflight_result.json"] = artifact_io._digest(result_path)
     tampered_terminal = runner._content_digest(
         {
             key: value
