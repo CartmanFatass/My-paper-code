@@ -10,6 +10,7 @@ from ha_ctse_process.standalone_agent import StandaloneProcessAgent
 from ha_ctse_process.standalone_ar_selection import StandaloneARSelectionMixin
 from ha_ctse_process.standalone_lifecycle import StandaloneLifecycleMixin
 from ha_ctse_process.standalone_low_inference import StandaloneLowInferenceMixin
+from ha_ctse_process.standalone_low_update import StandaloneLowUpdateMixin
 from ha_ctse_process.standalone_segments import Rollout, Segment
 from ha_ctse_process.topology_potential import TopologyPotentialShaper
 
@@ -312,6 +313,38 @@ def test_batched_low_deterministic_inference_matches_scalar_path():
             np.testing.assert_allclose(
                 batch_context[field], scalar_context[field], rtol=0.0, atol=1e-6
             )
+
+
+def test_low_update_mixin_owns_only_low_update_methods():
+    method_names = (
+        "_empty_low_metrics",
+        "_grad_norm",
+        "_low_rollout_diagnostics",
+        "_low_returns",
+        "_low_sequence_chunks",
+        "_low_batch_from_chunk_ids",
+        "_update_low_recurrent",
+        "update_low",
+    )
+    assert StandaloneLowUpdateMixin in StandaloneProcessAgent.__bases__
+    for name in method_names:
+        assert name not in StandaloneProcessAgent.__dict__
+        assert getattr(StandaloneProcessAgent, name) is getattr(
+            StandaloneLowUpdateMixin, name
+        )
+
+    for name in (
+        "_label_entropy_np",
+        "_group_mean_summary",
+        "_info_scalar",
+        "_lifetime_diagnostics",
+        "_joint_mi_norm",
+        "_state_array",
+        "_joint_obs_array",
+        "process_update",
+    ):
+        assert name in StandaloneProcessAgent.__dict__
+        assert name not in StandaloneLowUpdateMixin.__dict__
 
 
 def test_batched_stochastic_actions_replay_with_exact_log_probability():
