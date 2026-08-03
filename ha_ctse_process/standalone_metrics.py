@@ -409,21 +409,6 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
             process_metrics.get(f"topology_role_frac_{role_name}", 0.0),
             total_steps,
         )
-    for key in (
-        "topology_potential_available_frac",
-        "topology_potential_active",
-        "topology_potential_raw_mean",
-        "topology_potential_reward_mean",
-        "topology_potential_high_mean",
-        "topology_potential_low_mean",
-        "topology_potential_phi_start_mean",
-        "topology_potential_phi_end_mean",
-        "topology_potential_backhaul_up_start_mean",
-        "topology_potential_backhaul_up_end_mean",
-        "topology_potential_full_disconnect_start_mean",
-        "topology_potential_full_disconnect_end_mean",
-    ):
-        writer.add_scalar(f"TopologyPotential/{key}", process_metrics.get(key, 0.0), total_steps)
     writer.add_scalar("Process/DurationOnlyAccuracy", process_metrics.get("duration_only_accuracy", 0.0), total_steps)
     writer.add_scalar("Process/LengthOnlyAccuracy", process_metrics.get("length_only_accuracy", 0.0), total_steps)
     writer.add_scalar("Process/RewardSumOnlyAccuracy", process_metrics.get("reward_sum_only_accuracy", 0.0), total_steps)
@@ -590,43 +575,6 @@ def log_train_metrics(writer, total_steps: int, episode_rewards, process_metrics
         process_metrics.get("situation_hazard_guard_recent_force_rate", 0.0),
         total_steps,
     )
-    writer.add_scalar("Credit/ProbeAvailableFrac", process_metrics.get("credit_probe_available_frac", 0.0), total_steps)
-    writer.add_scalar("Credit/FullDisconnectMean", process_metrics.get("credit_full_disconnect_mean", 0.0), total_steps)
-    writer.add_scalar("Credit/RecoveryRate", process_metrics.get("credit_recovery_rate", 0.0), total_steps)
-    writer.add_scalar("Credit/CollapseRate", process_metrics.get("credit_collapse_rate", 0.0), total_steps)
-    writer.add_scalar(
-        "Credit/BackhaulConnectedStepFraction",
-        process_metrics.get("credit_backhaul_connected_step_fraction", 0.0),
-        total_steps,
-    )
-    writer.add_scalar(
-        "Credit/ThroughputWhenBackhaulConnectedMbps",
-        process_metrics.get("credit_throughput_when_backhaul_connected_mbps", 0.0),
-        total_steps,
-    )
-    writer.add_scalar(
-        "Credit/DeltaConnectivityRatio",
-        process_metrics.get("credit_delta_connectivity_ratio_mean", 0.0),
-        total_steps,
-    )
-    writer.add_scalar(
-        "Credit/DeltaBackhaulServedUsers",
-        process_metrics.get("credit_delta_backhaul_served_users_mean", 0.0),
-        total_steps,
-    )
-    writer.add_scalar(
-        "Credit/DeltaBackhaulOutageRatio",
-        process_metrics.get("credit_delta_backhaul_outage_ratio_mean", 0.0),
-        total_steps,
-    )
-    writer.add_scalar(
-        "Credit/DeltaRelayRouteLossRatio",
-        process_metrics.get("credit_delta_relay_route_loss_ratio_mean", 0.0),
-        total_steps,
-    )
-    writer.add_scalar("Credit/RewardConnectivityCorr", process_metrics.get("credit_reward_conn_corr", 0.0), total_steps)
-    writer.add_scalar("Credit/RewardServedCorr", process_metrics.get("credit_reward_served_corr", 0.0), total_steps)
-    writer.add_scalar("Credit/RewardOutageCorr", process_metrics.get("credit_reward_outage_corr", 0.0), total_steps)
     writer.add_scalar("High/Loss", process_metrics["high_loss"], total_steps)
     writer.add_scalar("High/PolicyLoss", process_metrics.get("high_policy_loss", 0.0), total_steps)
     writer.add_scalar("High/ValueLoss", process_metrics.get("high_value_loss", 0.0), total_steps)

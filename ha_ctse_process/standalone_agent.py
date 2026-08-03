@@ -34,10 +34,6 @@ from ha_ctse_process.r30_fixed_clock import (
     HighCheckValue,
 )
 
-from ha_ctse_process.cooperation_credit import (
-    aggregate_cooperation_credit,
-    empty_cooperation_credit_metrics,
-)
 from ha_ctse_process.intrinsic_rewards import (
     IntrinsicRewardComposer,
 )
@@ -57,10 +53,6 @@ from ha_ctse_process.topology_role import (
     TopologyRoleDiscriminator,
     TopologyRoleExtractor,
     empty_topology_role_metrics,
-)
-from ha_ctse_process.topology_potential import (
-    TopologyPotentialShaper,
-    empty_topology_potential_metrics,
 )
 from ha_ctse_process.recovery_potential import (
     RecoveryPotentialComputer,
@@ -557,19 +549,6 @@ class StandaloneProcessAgent(
             if self.use_topology_role_probe
             else None
         )
-        self.topology_potential_injection = str(
-            getattr(config, "topology_potential_injection", "none")
-        ).lower()
-        if self.topology_potential_injection not in valid_injection_modes:
-            raise ValueError(
-                f"Unsupported topology_potential_injection={self.topology_potential_injection!r}; "
-                f"expected one of {sorted(valid_injection_modes)}"
-            )
-        self.topology_potential_shaper = TopologyPotentialShaper(
-            config,
-            n_agents=self.n_agents,
-            gamma=self.gamma,
-        )
         self.intrinsic_rewards = IntrinsicRewardComposer(config)
 
         # P2-lite recovery-window contribution credit (default OFF).
@@ -695,8 +674,6 @@ class StandaloneProcessAgent(
                 violations.append("outcome_residual_injection")
             if self.topology_role_injection != "none":
                 violations.append("topology_role_injection")
-            if self.topology_potential_injection != "none":
-                violations.append("topology_potential_injection")
             if self.edit_penalty_alpha != 0.0 or self.switch_penalty_beta != 0.0:
                 violations.append("edit_or_switch_penalty")
             if self.duration_entropy_floor_enabled:
@@ -3834,9 +3811,7 @@ class StandaloneProcessAgent(
                 "compact_return_active": 0.0,
                 **empty_prototype_disc_metrics(),
                 **self._empty_prototype_selection_metrics(),
-                **empty_cooperation_credit_metrics(),
                 **empty_topology_role_metrics(),
-                **empty_topology_potential_metrics(),
                 **empty_p2_metrics(),
                 **empty_g_info_metrics(),
                 **empty_assignment_actionability_metrics(),
@@ -4368,10 +4343,6 @@ class StandaloneProcessAgent(
                 topology_role_reward_unclipped_mean = float(
                     topology_role_reward_unclipped.detach().mean().cpu().item()
                 )
-            topology_potential_reward_np, topology_potential_metrics = self.topology_potential_shaper.rewards(
-                valid,
-                total_steps=total_steps,
-            )
             transition_log_q_mean = 0.0
             transition_log_p_mean = 0.0
             transition_log_context_mean = 0.0
@@ -4479,22 +4450,6 @@ class StandaloneProcessAgent(
             high_gate=None,
             low_gate_active=self.use_process_reward,
         )
-        high_topology_potential_rewards, low_topology_potential_rewards = self.intrinsic_rewards.split_segment_rewards(
-            topology_potential_reward_np,
-            injection=self.topology_potential_injection,
-            high_gate=None,
-            low_gate_active=bool(topology_potential_metrics.get("topology_potential_active", 0.0) > 0.0),
-        )
-        topology_potential_metrics["topology_potential_high_mean"] = (
-            float(np.mean(high_topology_potential_rewards))
-            if high_topology_potential_rewards.size
-            else 0.0
-        )
-        topology_potential_metrics["topology_potential_low_mean"] = (
-            float(np.mean(low_topology_potential_rewards))
-            if low_topology_potential_rewards.size
-            else 0.0
-        )
         # P2-lite recovery-window contribution credit (compute-on / reward-off by
         # default).  Signed potential shaping; per-agent attribution via phi_i.
         high_p2_rewards = np.zeros(len(valid), dtype=np.float32)
@@ -4559,7 +4514,6 @@ class StandaloneProcessAgent(
             high_process_rewards
             + high_outcome_residual_rewards
             + high_topology_role_rewards
-            + high_topology_potential_rewards
             + high_p2_rewards
             + team_transition_high_rewards
         )
@@ -4567,7 +4521,6 @@ class StandaloneProcessAgent(
             low_process_rewards
             + low_outcome_residual_rewards
             + low_topology_role_rewards
-            + low_topology_potential_rewards
             + low_p2_rewards
         )
 
@@ -4635,7 +4588,6 @@ class StandaloneProcessAgent(
             process_shortcut_max_acc = 0.0
             process_residual_log_shortcut_mean = float(log_p.detach().mean().cpu().item())
             process_residual_log_context_mean = float(log_p.detach().mean().cpu().item())
-        cooperation_credit_metrics = aggregate_cooperation_credit(valid)
         lifetime_metrics = self._lifetime_diagnostics(valid, durations_np, reward_sums)
         outcome_residual_metrics = {
             "outcome_residual_full_loss": 0.0,
@@ -4809,7 +4761,6 @@ class StandaloneProcessAgent(
             "outcome_abs_mean": float(np.mean(np.abs(raw_outcomes[outcome_masks > 0.0]))) if np.any(outcome_masks > 0.0) else 0.0,
             **outcome_residual_metrics,
             **topology_role_metrics,
-            **topology_potential_metrics,
             **p2_metrics,
             **team_transition_metrics,
             **team_conditioned_qd_metrics,
@@ -4850,7 +4801,6 @@ class StandaloneProcessAgent(
             **team_effect_metrics,
             **lifetime_metrics,
             **g_intervention_metrics,
-            **cooperation_credit_metrics,
             **self._situation_diagnostics(valid),
             **high_metrics,
         }

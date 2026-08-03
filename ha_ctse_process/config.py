@@ -267,19 +267,6 @@ class Config(EnvConfig):
     topology_role_reward_coef = 0.0
     topology_role_reward_clip = 0.05
 
-    # Topology-potential cooperative credit shaping.  This is the P1 credit
-    # path: it uses bounded potential changes from reward_info, not learned role
-    # labels.  Default off so reward-pure diagnostics remain clean.
-    use_topology_potential_shaping = False
-    topology_potential_injection = "none"  # none, low_only, high_only, high_and_low
-    topology_potential_coef = 0.0
-    topology_potential_clip = 0.05
-    topology_potential_warmup_steps = 0
-    # "delta" avoids an artificial penalty for maintaining a good relay state
-    # through long UAV-service segments; "smdp" is available for strict PBRS.
-    topology_potential_discount_mode = "delta"  # delta, one_step, smdp
-    topology_potential_positive_only = False
-
     # Intrinsic reward composition.  Segment-level intrinsic is allowed to
     # shape the high-level SMDP policy only after the posterior demonstrably
     # beats trivial duration/length/reward shortcuts.

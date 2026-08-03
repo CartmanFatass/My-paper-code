@@ -201,19 +201,6 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--topology_role_reward_coef", type=float, default=None)
     parser.add_argument("--topology_role_reward_clip", type=float, default=None)
-    parser.add_argument(
-        "--topology_potential_injection",
-        choices=("high_only", "high_and_low", "low_only", "none"),
-        default="",
-    )
-    parser.add_argument("--topology_potential_coef", type=float, default=None)
-    parser.add_argument("--topology_potential_clip", type=float, default=None)
-    parser.add_argument("--topology_potential_warmup_steps", type=int, default=-1)
-    parser.add_argument(
-        "--topology_potential_discount_mode",
-        choices=("delta", "one_step", "smdp"),
-        default="",
-    )
     parser.add_argument("--semantic_shortcut_hard_stop_margin", type=float, default=None)
     parser.add_argument("--semantic_shortcut_hard_stop_min_segments", type=int, default=0)
     parser.add_argument("--g_intervention_kl_max_segments", type=int, default=0)
@@ -330,8 +317,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--disable_recurrent_low_level", action="store_true")
     parser.add_argument("--disable_low_value_norm", action="store_true")
     parser.add_argument("--enable_low_actor_team_code", action="store_true")
-    parser.add_argument("--enable_topology_potential_shaping", action="store_true")
-    parser.add_argument("--topology_potential_positive_only", action="store_true")
     # P2-lite recovery-window contribution credit (default OFF).
     parser.add_argument("--enable_p2_recovery_compute", action="store_true")
     parser.add_argument("--enable_p2_recovery_reward", action="store_true")
@@ -418,8 +403,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "topology_role_min_score",
         "topology_role_reward_coef",
         "topology_role_reward_clip",
-        "topology_potential_coef",
-        "topology_potential_clip",
         "semantic_shortcut_hard_stop_margin",
         "g_info_coef_skill",
         "g_info_coef_duration",
@@ -485,12 +468,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.topology_role_hidden_dim = int(args.topology_role_hidden_dim)
     if args.topology_role_injection:
         config.topology_role_injection = args.topology_role_injection
-    if args.topology_potential_injection:
-        config.topology_potential_injection = args.topology_potential_injection
-    if args.topology_potential_discount_mode:
-        config.topology_potential_discount_mode = args.topology_potential_discount_mode
-    if int(args.topology_potential_warmup_steps) >= 0:
-        config.topology_potential_warmup_steps = int(args.topology_potential_warmup_steps)
     if args.enable_p2_recovery_compute:
         config.p2_recovery_credit_compute_on = True
     if args.enable_p2_recovery_reward:
@@ -695,10 +672,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.prototype_disc_use_learned_prior = True
     if args.enable_compact_return_head:
         config.use_compact_return_head = True
-    if args.enable_topology_potential_shaping:
-        config.use_topology_potential_shaping = True
-    if args.topology_potential_positive_only:
-        config.topology_potential_positive_only = True
     if bool(getattr(config, "enable_team_intent", False)):
         if str(getattr(config, "team_bridge_type", "stochastic")) == "none":
             raise ValueError("--enable_team_intent requires team_bridge_type to be deterministic or stochastic, not none")

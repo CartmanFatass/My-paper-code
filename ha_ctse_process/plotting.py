@@ -11,12 +11,10 @@ from typing import Any
 
 import numpy as np
 
-from ha_ctse_process.cooperation_credit import COOPERATION_CREDIT_FIELDS
 from ha_ctse_process.g_info_objective import G_INFO_METRIC_FIELDS
 from ha_ctse_process.assignment_actionability import ASSIGNMENT_ACTIONABILITY_METRIC_FIELDS
 from ha_ctse_process.team_effect_targets import TEAM_EFFECT_TARGET_METRIC_FIELDS
 from ha_ctse_process.team_conditioned_qd import TEAM_CONDITIONED_QD_METRIC_FIELDS
-from ha_ctse_process.topology_potential import TOPOLOGY_POTENTIAL_FIELDS
 from ha_ctse_process.situation_transition import TEAM_TRANSITION_METRIC_FIELDS
 from ha_ctse_process.team_intent import TEAM_INTENT_METRIC_FIELDS
 from ha_ctse_process.metrics_io import append_csv, read_csv_records, write_csv
@@ -399,7 +397,6 @@ UPDATE_FIELDS = (
     "topology_battery_start_mean",
     "topology_battery_delta_mean",
     "topology_length_log_mean",
-    *TOPOLOGY_POTENTIAL_FIELDS,
     "duration_only_accuracy",
     "length_only_accuracy",
     "reward_sum_only_accuracy",
@@ -455,7 +452,6 @@ UPDATE_FIELDS = (
     *TEAM_EFFECT_TARGET_METRIC_FIELDS,
     *TEAM_CONDITIONED_QD_METRIC_FIELDS,
     *SITUATION_STAGE1_FIELDS,
-    *COOPERATION_CREDIT_FIELDS,
     "high_loss",
     "high_policy_loss",
     "high_value_loss",
@@ -1034,54 +1030,6 @@ def save_update_plots(log_dir: str | Path, window: int = 5) -> None:
     fig.savefig(log_dir / "ha_ctse_topology_role_fields.png", dpi=180)
     plt.close(fig)
 
-    fig, ax = plt.subplots(figsize=(12, 6))
-    for key, label in (
-        ("topology_potential_raw_mean", "Raw potential delta"),
-        ("topology_potential_reward_mean", "Injected reward"),
-        ("topology_potential_phi_start_mean", "Phi start"),
-        ("topology_potential_phi_end_mean", "Phi end"),
-        ("topology_potential_backhaul_up_start_mean", "Backhaul up start"),
-        ("topology_potential_backhaul_up_end_mean", "Backhaul up end"),
-        ("topology_potential_full_disconnect_start_mean", "Disconnect start"),
-        ("topology_potential_full_disconnect_end_mean", "Disconnect end"),
-    ):
-        x, y = _series(records, key)
-        if y.size:
-            ax.plot(x, moving_average(y, window), label=label)
-    ax.set(title="Topology Potential Credit Shaping", xlabel="Env steps")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(log_dir / "ha_ctse_topology_potential.png", dpi=180)
-    plt.close(fig)
-
-    fig, ax = plt.subplots(figsize=(12, 6))
-    for key, label in (
-        ("credit_full_disconnect_mean", "Full disconnect mean"),
-        ("credit_recovery_rate", "Disconnect recovery rate"),
-        ("credit_collapse_rate", "Connectivity collapse rate"),
-        ("credit_backhaul_connected_step_fraction", "Backhaul connected step fraction"),
-        ("credit_throughput_when_backhaul_connected_mbps", "Throughput | backhaul up"),
-        ("credit_delta_connectivity_ratio_mean", "Delta connectivity ratio"),
-        ("credit_delta_backhaul_served_users_mean", "Delta backhaul served users"),
-        ("credit_delta_backhaul_outage_ratio_mean", "Delta backhaul outage ratio"),
-        ("credit_delta_relay_route_loss_ratio_mean", "Delta relay route loss"),
-        ("credit_bottleneck_mbps_mean", "Backhaul bottleneck Mbps"),
-        ("credit_reward_conn_corr", "Reward/cxn corr"),
-        ("credit_reward_served_corr", "Reward/served corr"),
-        ("credit_reward_outage_corr", "Reward/outage corr"),
-    ):
-        x, y = _series(records, key)
-        if y.size:
-            ax.plot(x, moving_average(y, window), label=label)
-    ax.set(title="Cooperation Credit Diagnostics", xlabel="Env steps")
-    ax.grid(True, alpha=0.3)
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig(log_dir / "ha_ctse_cooperation_credit.png", dpi=180)
-    plt.close(fig)
-
-
 def save_eval_plots(log_dir: str | Path, window: int = 5) -> None:
     if plt is None:
         return
@@ -1391,15 +1339,6 @@ LOG_KEY_ALIASES = {
     "low_tret_std": "low_team_return_std",
     "low_tret_rng": "low_team_return_range",
     "low_tverr_std": "low_team_value_error_abs_std",
-    "credit_disc": "credit_full_disconnect_mean",
-    "credit_recover": "credit_recovery_rate",
-    "credit_collapse": "credit_collapse_rate",
-    "credit_bh_frac": "credit_backhaul_connected_step_fraction",
-    "credit_bh_thr": "credit_throughput_when_backhaul_connected_mbps",
-    "credit_d_conn": "credit_delta_connectivity_ratio_mean",
-    "credit_d_served": "credit_delta_backhaul_served_users_mean",
-    "credit_d_outage": "credit_delta_backhaul_outage_ratio_mean",
-    "credit_d_relay_loss": "credit_delta_relay_route_loss_ratio_mean",
 }
 
 

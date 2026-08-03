@@ -117,7 +117,6 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "enable_team_disc_reward",
         "enable_assignment_actionability_reward",
         "p2_recovery_credit_reward_on",
-        "enable_topology_potential_shaping",
     )
     enabled_rewards = [name for name in explicit_reward_args if bool(getattr(args, name, False))]
     transition_reward_coef = float(
@@ -134,7 +133,6 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "process_reward_injection",
         "outcome_residual_injection",
         "topology_role_injection",
-        "topology_potential_injection",
     )
     enabled_injections = [
         name
@@ -181,13 +179,11 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "enable_team_disc_reward",
         "enable_assignment_actionability_reward",
         "p2_recovery_credit_reward_on",
-        "use_topology_potential_shaping",
     ):
         setattr(config, name, False)
     config.process_reward_injection = "none"
     config.outcome_residual_injection = "none"
     config.topology_role_injection = "none"
-    config.topology_potential_injection = "none"
     config.parallel_selection = False
     config.use_autoregressive_selection = True
     config.ar_prefix_mode = "roster"
@@ -268,7 +264,6 @@ def enforce_r30_pair_gate(
         "enable_assignment_actionability_probe",
         "enable_assignment_actionability_reward",
         "enable_g_info_objective",
-        "use_topology_potential_shaping",
         "p2_recovery_credit_reward_on",
         "duration_entropy_floor_enabled",
         "z_entropy_floor_enabled",
@@ -284,7 +279,6 @@ def enforce_r30_pair_gate(
         "transition_skill_reward_coef",
         "outcome_residual_reward_coef",
         "topology_role_reward_coef",
-        "topology_potential_coef",
         "p2_recovery_reward_coef",
         "g_info_coef_skill",
         "g_info_coef_duration",
@@ -303,7 +297,6 @@ def enforce_r30_pair_gate(
     config.process_reward_injection = "none"
     config.outcome_residual_injection = "none"
     config.topology_role_injection = "none"
-    config.topology_potential_injection = "none"
     config.team_bridge_type = "deterministic_expected"
     config.low_actor_condition_on_team_code = False
     config.parallel_selection = False

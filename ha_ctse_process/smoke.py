@@ -184,14 +184,6 @@ def run_smoke(log_dir: Path) -> dict:
         and metrics["process_reward_high_mean"] == 0.0
         and metrics["process_reward_low_mean"] == 0.0
     )
-    credit_diagnostics_ok = (
-        metrics["credit_probe_available_frac"] == 1.0
-        and metrics["credit_recovery_rate"] == 1.0
-        and metrics["credit_collapse_rate"] == 0.0
-        and metrics["credit_delta_connectivity_ratio_mean"] == 1.0
-        and metrics["credit_delta_backhaul_served_users_mean"] == 3.0
-        and metrics["credit_delta_backhaul_outage_ratio_mean"] == -1.0
-    )
     residual_metrics_ok = (
         "process_residual_mi_mean" in metrics
         and "process_shortcut_max_acc" in metrics
@@ -224,7 +216,6 @@ def run_smoke(log_dir: Path) -> dict:
     return {
         "checkpoint_ok": bool(checkpoint_ok),
         "reward_injection_ok": bool(reward_injection_ok),
-        "credit_diagnostics_ok": bool(credit_diagnostics_ok),
         "residual_metrics_ok": bool(residual_metrics_ok),
         "eval_restore_ok": bool(eval_restore_ok),
         "process_metrics": metrics,
@@ -232,7 +223,6 @@ def run_smoke(log_dir: Path) -> dict:
         "all_ok": bool(
             checkpoint_ok
             and reward_injection_ok
-            and credit_diagnostics_ok
             and residual_metrics_ok
             and eval_restore_ok
         ),

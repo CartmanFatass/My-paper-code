@@ -70,4 +70,3 @@ class Config(ProcessConfig):
     process_reward_injection = "none"
     outcome_residual_injection = "none"
     topology_role_injection = "none"
-    topology_potential_injection = "none"

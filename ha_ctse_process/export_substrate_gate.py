@@ -88,8 +88,6 @@ OPTIONAL_SCALAR_DEFAULTS = {
     "topology_role_min_score": None,
     "topology_role_reward_coef": None,
     "topology_role_reward_clip": None,
-    "topology_potential_coef": None,
-    "topology_potential_clip": None,
     "semantic_shortcut_hard_stop_margin": None,
     "g_info_coef_skill": None,
     "g_info_coef_duration": None,
@@ -127,9 +125,6 @@ TRAINING_OVERRIDE_DEFAULTS = {
     "outcome_residual_injection": "",
     "topology_role_hidden_dim": 0,
     "topology_role_injection": "",
-    "topology_potential_injection": "",
-    "topology_potential_discount_mode": "",
-    "topology_potential_warmup_steps": -1,
     "p2_recovery_reward_level": None,
     "semantic_shortcut_hard_stop_min_segments": 0,
     "g_intervention_kl_max_segments": 0,
@@ -166,8 +161,6 @@ TRAINING_OVERRIDE_DEFAULTS = {
     "disable_recurrent_low_level": False,
     "disable_low_value_norm": False,
     "enable_low_actor_team_code": False,
-    "enable_topology_potential_shaping": False,
-    "topology_potential_positive_only": False,
     **OPTIONAL_SCALAR_DEFAULTS,
 }
 
