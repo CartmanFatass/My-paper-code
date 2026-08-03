@@ -27,6 +27,7 @@ from ha_ctse_process.env_factory import normalize_scenario
 from ha_ctse_process.event_process_runner import (
     _run_iteration5_process_semantics_branch,
 )
+from ha_ctse_process import standalone_novelty
 from ha_ctse_process import standalone_variable_roster_runner
 from ha_ctse_process.standalone_evaluation import evaluate
 from ha_ctse_process.standalone_metrics import (
@@ -44,7 +45,6 @@ from ha_ctse_process.checkpoint_io import (
     prune_periodic_checkpoints,
     save_checkpoint,
 )
-from ha_ctse_process.plotting import AEM_METRIC_FIELDS
 from ha_ctse_process.standalone_agent import (
     Rollout,
     StandaloneProcessAgent,
@@ -456,12 +456,6 @@ def pick_attrs(obj: Any, names: tuple[str, ...]) -> dict[str, Any]:
     return result
 
 
-def empty_aem_metrics(active: bool = False) -> dict[str, float]:
-    metrics = {field: 0.0 for field in AEM_METRIC_FIELDS}
-    metrics["aem_active"] = float(bool(active))
-    return metrics
-
-
 def empty_r30_no_high_metrics() -> dict[str, float]:
     return {
         "r30_high_rows": 0.0,
@@ -472,73 +466,6 @@ def empty_r30_no_high_metrics() -> dict[str, float]:
 
 
 
-
-
-class EpisodicJointPositionNovelty:
-    """Per-vector-env direct-table counts for the registered R36 bonus."""
-
-    def __init__(self, num_envs: int, grid_size: int, episode_horizon: int):
-        self.num_envs = int(num_envs)
-        self.grid_size = int(grid_size)
-        self.episode_horizon = int(episode_horizon)
-        self.table_size = int(self.grid_size**4)
-        self.counts = np.zeros((self.num_envs, self.table_size), dtype=np.int32)
-        self._metrics = empty_aem_metrics(active=True)
-        self._bonus_min = float("inf")
-
-    def _cell_index(self, normalized_positions: np.ndarray) -> int:
-        positions = np.asarray(normalized_positions, dtype=np.float32).reshape(-1)
-        if positions.shape != (4,) or not np.all(np.isfinite(positions)):
-            raise ValueError("R36 AEM requires exactly four finite normalized position values")
-        bins = np.floor(np.clip(positions, 0.0, 1.0) * self.grid_size).astype(
-            np.int64
-        )
-        bins = np.minimum(bins, self.grid_size - 1)
-        cell = int(bins[0])
-        for value in bins[1:]:
-            cell = cell * self.grid_size + int(value)
-        if not 0 <= cell < self.table_size:
-            raise RuntimeError("R36 AEM direct joint-position index is out of range")
-        return cell
-
-    def observe(self, env_id: int, normalized_positions: np.ndarray) -> float:
-        env_id = int(env_id)
-        cell = self._cell_index(normalized_positions)
-        count_before = int(self.counts[env_id, cell])
-        expected = 1.0 / (
-            float(self.episode_horizon) * float(np.sqrt(count_before + 1.0))
-        )
-        bonus = float(expected)
-        self.counts[env_id, cell] = count_before + 1
-
-        self._metrics["aem_bonus_applied_steps"] += 1.0
-        self._metrics["aem_bonus_sum"] += bonus
-        self._metrics["aem_bonus_max"] = max(
-            self._metrics["aem_bonus_max"], bonus
-        )
-        self._bonus_min = min(self._bonus_min, bonus)
-        self._metrics["aem_preincrement_count_max"] = max(
-            self._metrics["aem_preincrement_count_max"], float(count_before)
-        )
-        self._metrics["aem_formula_max_abs_error"] = max(
-            self._metrics["aem_formula_max_abs_error"], abs(bonus - expected)
-        )
-        return bonus
-
-    def reset_env(self, env_id: int) -> None:
-        self.counts[int(env_id)].fill(0)
-        self._metrics["aem_count_resets"] += 1.0
-
-    def pop_update_metrics(self) -> dict[str, float]:
-        metrics = dict(self._metrics)
-        steps = metrics["aem_bonus_applied_steps"]
-        metrics["aem_bonus_mean"] = (
-            metrics["aem_bonus_sum"] / steps if steps > 0.0 else 0.0
-        )
-        metrics["aem_bonus_min"] = self._bonus_min if steps > 0.0 else 0.0
-        self._metrics = empty_aem_metrics(active=True)
-        self._bonus_min = float("inf")
-        return metrics
 
 
 def export_run_manifest(
@@ -737,7 +664,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                 "active position-only objective requires intrinsic_effect_view"
             )
         aem_novelty = (
-            EpisodicJointPositionNovelty(
+            standalone_novelty.EpisodicJointPositionNovelty(
                 num_envs=num_envs,
                 grid_size=int(getattr(config, "aem_joint_position_grid_size", 5)),
                 episode_horizon=int(getattr(config, "aem_episode_horizon", 80)),
@@ -1095,7 +1022,7 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
             process_metrics.update(
                 aem_novelty.pop_update_metrics()
                 if aem_novelty is not None
-                else empty_aem_metrics(active=False)
+                else standalone_novelty.empty_aem_metrics(active=False)
             )
             process_metrics.update(r37_update_metrics)
             process_metrics.update(r31_score_metrics)
