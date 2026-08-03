@@ -14,6 +14,7 @@ from ha_ctse_process.dynamic_roster_testbed import (
     DynamicRosterEventEnv,
 )
 from ha_ctse_process import train as process_train
+from ha_ctse_process import standalone_variable_roster_runner
 from ha_ctse_process.variable_roster_event import (
     EVENT_ARCHITECTURE_SCHEMA_VERSION,
     OPPORTUNITY_SCHEDULE_NAME,
@@ -382,8 +383,8 @@ def test_stage_c_generic_short_event_integration_without_optimizer_step(monkeypa
     sentinel = object()
     branch_calls = []
     monkeypatch.setattr(
-        process_train,
-        "_run_variable_roster_event_branch",
+        standalone_variable_roster_runner,
+        "run_variable_roster_event_branch",
         lambda config, args, writer: branch_calls.append(args) or sentinel,
     )
     assert process_train.train_loop(dispatch_config, dispatch_args, None) is sentinel
