@@ -19,8 +19,8 @@ if str(ROOT) not in sys.path:
 
 import torch  # noqa: E402
 
-from ha_ctse_process import train as train_mod  # noqa: E402
 from ha_ctse_process import checkpoint_io  # noqa: E402
+from ha_ctse_process.standalone_cli import create_agent, create_env  # noqa: E402
 from ha_ctse_process.config_alice_bob_asymmetric import Config  # noqa: E402
 from r47_nsopm import (  # noqa: E402
     BRANCH_SEED,
@@ -207,7 +207,7 @@ def make_source(checkpoint: Path, device_name: str):
     config.edit_penalty_alpha = 0.0
     config.switch_penalty_beta = 0.0
     config.duration_entropy_floor_enabled = False
-    environment = train_mod.create_env(
+    environment = create_env(
         config,
         scenario=config.scenario,
         seed=NATURAL_SEED,
@@ -215,7 +215,7 @@ def make_source(checkpoint: Path, device_name: str):
         scale_mode="eval",
     )
     set_all_seeds(NATURAL_SEED, device)
-    agent = train_mod.create_agent(
+    agent = create_agent(
         config,
         argparse.Namespace(device="cuda"),
         environment,
